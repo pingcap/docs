@@ -5,6 +5,10 @@ summary: Learn what is TiDB Cloud branch.
 
 ## TiDB Cloud Branch Overview
 
+> **Note:**
+>
+> Branch is in public beta now, try it without any extra charge.
+
 TiDB Cloud provides branch feature that enables you branch your serverless cluster in the same way that you branch your code.
 
 Branch is the resource under **serverless cluster**, it has the following features:
