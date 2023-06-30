@@ -273,7 +273,7 @@ As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB in
 
 This section describes how to deploy a TiDB cluster using a YAML file of the smallest topology in TiUP.
 
-### Preparation
+### Prepare
 
 Before deploying the TiDB cluster, ensure that the target machine meets the following requirements:
 
@@ -303,7 +303,7 @@ Other requirements for the target machine include:
     - It is recommended to use CentOS 7.3 or later versions on AMD64.
     - It is recommended to use CentOS 7.6 1810 on ARM.
 
-### Deployment
+### Deploy
 
 > **Note:**
 >
