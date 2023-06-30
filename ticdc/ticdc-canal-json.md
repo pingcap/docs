@@ -269,7 +269,7 @@ The following table shows the detailed representation information.
 
 | Character type                | Value range | Character representation |
 | :---------------------------| :-----------| :---------------------|
-| Control characters          | [0, 31]     | UTF-8 escape, e.g. '\u0000' through '\u001F' |
+| Control characters          | [0, 31]     | UTF-8 escape (such as '\u0000' through '\u001F') |
 | Horizontal tab              | [9]         | `\t`                    |
 | Line feed                   | [10]        | `\n`                    |
 | Cariage return              | [13]        | `\r`                    |
