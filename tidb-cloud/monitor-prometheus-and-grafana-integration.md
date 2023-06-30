@@ -35,7 +35,7 @@ To get the scrape_config file for Prometheus, do the following:
     - If you have multiple projects, switch to the target project, and then click **Admin** > **Integrations**.
     - If you only have one project, click **Admin** > **Integrations**.
 
-3. Click **Integration to Prometheus (Beta)**.
+3. Click **Integration to Prometheus (BETA)**.
 4. Click **Add File** to generate and show the scrape_config file for the current project.
 
 5. Make a copy of the scrape_config file content for later use.

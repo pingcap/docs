@@ -31,7 +31,7 @@ TiDB Cloud supports Datadog integration (beta). You can configure TiDB Cloud to 
     - If you have multiple projects, switch to the target project, and then click **Admin** > **Integrations**.
     - If you only have one project, click **Admin** > **Integrations**.
 
-3. Click **Integration to Datadog (Beta)**.
+3. Click **Integration to Datadog (BETA)**.
 4. Enter your API key of Datadog and choose the site of Datadog.
 5. Click **Test Integration**.
 

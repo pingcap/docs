@@ -29,7 +29,7 @@ You cannot use the New Relic integration in [TiDB Serverless clusters](/tidb-clo
     - If you have multiple projects, switch to the target project, and then click **Admin** > **Integrations**.
     - If you only have one project, click **Admin** > **Integrations**.
 
-3. Click **Integration to New Relic (Beta)**.
+3. Click **Integration to New Relic (BETA)**.
 4. Enter your API key of New Relic and choose the site of New Relic.
 5. Click **Test Integration**.
 
