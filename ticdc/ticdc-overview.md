@@ -26,19 +26,18 @@ TiCDC has the following key capabilities:
 - Replicating incremental data from a TiDB cluster to a Kafka cluster. The recommended data format includes [Canal-JSON](/ticdc/ticdc-canal-json.md) and [Avro](/ticdc/ticdc-avro-protocol.md).
 - Replicating tables with the ability to filter databases, tables, DMLs, and DDLs.
 - High availability with no single point of failure, supporting dynamically adding and deleting TiCDC nodes.
-- Cluster management through Open API, including querying task status, dynamically modifying task configuration, and creating or deleting tasks.
+- Cluster management through [Open API](/ticdc/ticdc-open-api.md), including querying task status, dynamically modifying task configuration, and creating or deleting tasks.
 
 ### Replication order
 
-TiCDC ensures that all DDL or DML statements are outputted at least once. In case of a failure, TiCDC may send the same DDL/DML statement repeatedly. For duplicated DDL/DML statements:
-
-- TiCDC outputs all DDL or DML statements **at least once**.
+- For all DDL or DML statements, TiCDC outputs them **at least once**.
 - When the TiKV or TiCDC cluster encounters a failure, TiCDC might send the same DDL/DML statement repeatedly. For duplicated DDL/DML statements:
 
     - The MySQL sink can execute DDL statements repeatedly. For DDL statements that can be executed repeatedly in the downstream, such as `TRUNCATE TABLE`, the statement is executed successfully. For those that cannot be executed repeatedly, such as `CREATE TABLE`, the execution fails, and TiCDC ignores the error and continues with the replication process.
-    - The Kafka sink provides different strategies for data distribution. You can distribute data to different Kafka partitions based on the table, primary key, or timestamp. This ensures that the updated data of a row is sent to the same partition in order.
-    - All these distribution strategies send Resolved TS messages to all topics and partitions periodically. This indicates that all messages earlier than the Resolved TS have already been sent to the topics and partitions. The Kafka consumer can use the Resolved TS to sort the messages received.
-    - Kafka sink sometimes sends duplicated messages, but these duplicated messages do not affect the constraints of `Resolved Ts`. For example, if a changefeed is paused and then resumed, Kafka sink might send `msg1`, `msg2`, `msg3`, `msg2`, and `msg3` in order. You can filter out the duplicated messages from Kafka consumers.
+    - The Kafka sink provides different strategies for data distribution. 
+        - You can distribute data to different Kafka partitions based on the table, primary key, or timestamp. This ensures that the updated data of a row is sent to the same partition in order.
+        - All these distribution strategies send `Resolved TS` messages to all topics and partitions periodically. This indicates that all messages earlier than the `Resolved TS` have already been sent to the topics and partitions. The Kafka consumer can use the `Resolved TS` to sort the messages received.
+        - The Kafka sink sometimes sends duplicated messages, but these duplicated messages do not affect the constraints of `Resolved Ts`. For example, if a changefeed is paused and then resumed, the Kafka sink might send `msg1`, `msg2`, `msg3`, `msg2`, and `msg3` in order. You can filter out the duplicated messages from Kafka consumers.
 
 ### Replication consistency
 
@@ -81,7 +80,7 @@ As shown in the architecture diagram, TiCDC supports replicating data to TiDB, M
     - A unique index (`UNIQUE INDEX`) is valid if every column of the index is explicitly defined as non-nullable (`NOT NULL`) and the index does not have a virtual generated column (`VIRTUAL GENERATED COLUMNS`).
 
 - To use TiCDC in disaster recovery scenarios, you need to configure [redo log](/ticdc/ticdc-sink-to-mysql.md#eventually-consistent-replication-in-disaster-scenarios).
-- When replicating a wide table with a large single row (greater than 1K), it is recommended to configure the [`per-table-memory-quota`](/ticdc/ticdc-server-config.md) so that `per-table-memory-quota` = `ticdcTotalMemory`/(`tableCount` * 2). `ticdcTotalMemory` is the memory of a TiCDC node, and `tableCount` is the number of target tables that a TiCDC node replicates.
+- When you replicate a wide table with a large single row (greater than 1K), it is recommended to configure the [`per-table-memory-quota`](/ticdc/ticdc-server-config.md) so that `per-table-memory-quota` = `ticdcTotalMemory`/(`tableCount` * 2). `ticdcTotalMemory` is the memory of a TiCDC node, and `tableCount` is the number of target tables that a TiCDC node replicates.
 
 > **Note:**
 >
