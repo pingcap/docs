@@ -5,7 +5,7 @@ summary: An overview of the usage of FLUSH PRIVILEGES for the TiDB database.
 
 # FLUSH PRIVILEGES
 
-The statement `FLUSH PRIVILEGES` instructs TiDB to reload the in-memory copy of privileges from the [privilege tables](/privilege-management.md#privilege-table). You must execute this statement after manually editing tables such as `mysql.user`. However, executing this statement is not necessary after using privilege statements like `GRANT` or `REVOKE`. To execute this statement, the `RELOAD` privilege is required.
+The statement `FLUSH PRIVILEGES` instructs TiDB to reload the in-memory copy of privileges from the privilege tables. You must execute this statement after manually editing tables such as `mysql.user`. However, executing this statement is not necessary after using privilege statements like `GRANT` or `REVOKE`. To execute this statement, the `RELOAD` privilege is required.
 
 ## Synopsis
 
