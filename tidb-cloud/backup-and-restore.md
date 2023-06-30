@@ -47,8 +47,8 @@ By the automatic backup, you can back up the TiDB Dedicated cluster data every d
 
         > **Note:**
         >
-        > - The PITR feature is enabled by default and cannot be turned off when you enable weekly backup.
-        > - If you change the backup cycle from weekly to daily, the PITR feature remains enabled. You can manually turn it off if needed.
+        > - The PITR feature is enabled by default and cannot be disabled when you enable weekly backup.
+        > - If you change the backup cycle from weekly to daily, the PITR feature remains enabled. You can manually disable it if needed.
 
         PITR supports restoring data of any point in time to a new cluster. You can use it to:
 
