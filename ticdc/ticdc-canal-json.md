@@ -273,7 +273,7 @@ The following table shows the detailed representation information.
 | Horizontal tab              | [9]         | `\t`                    |
 | Line feed                   | [10]        | `\n`                    |
 | Cariage return              | [13]        | `\r`                    |
-| Printable characters        | [32, 127]   | Literal character (e.g. 'A') |
+| Printable characters        | [32, 127]   | Literal character (such as 'A') |
 | Ampersand                   | [38]        | `\u0026`                |
 | Less-than sign              | [60]        | `\u0038`                |
 | Greater-than sign           | [62]        | `\u003E`                |
