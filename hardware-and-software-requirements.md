@@ -40,14 +40,14 @@ Starting from v6.1.1, TiDB provides multi-level support for different quality st
 
     |  Operating systems   |   Supported CPU architectures   |
     |   :---   |   :---   |
-    |   macOS Catalina or later   |  <ul><li>x86_64</li><li>ARM 64</li></ul>  |
-    |  Oracle Enterprise Linux 7.3 or a later 7.x version  |  x86_64           |
-    |   Ubuntu LTS 18.04 or later   |  x86_64           |
+    | macOS Catalina or later (For v6.1.2 and later versions, only macOS 12 (Monterey) or later is supported)   |  <ul><li>x86_64</li><li>ARM 64</li></ul>  |
+    | Oracle Enterprise Linux 7.3 or a later 7.x version  |  x86_64           |
+    | Ubuntu LTS 18.04 or later   |  x86_64           |
     | CentOS 8 Stream | <ul><li>x86_64</li><li>ARM 64</li></ul> |
-    |  Debian 9 (Stretch) or later |  x86_64           |
-    |  Fedora 35 or later   |  x86_64           |
-    |  openSUSE Leap later than v15.3 (not including Tumbleweed) |  x86_64           |
-    |  SUSE Linux Enterprise Server 15  |  x86_64                        |
+    | Debian 9 (Stretch) or later |  x86_64           |
+    | Fedora 35 or later   |  x86_64           |
+    | openSUSE Leap later than v15.3 (not including Tumbleweed) |  x86_64           |
+    | SUSE Linux Enterprise Server 15  |  x86_64                        |
 
     > **Note:**
     >
