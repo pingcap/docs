@@ -267,7 +267,7 @@ TiCDC encodes [binary types](/data-type-string.md#binary-type) in the Canal-JSON
 
 The following table shows the detailed representation information.
 
-| Description                 | Value range | String representation |
+| Character type                | Value range | Character representation |
 | :---------------------------| :-----------| :---------------------|
 | Control characters          | [0, 31]     | UTF-8 escape, e.g. '\u0000' through '\u001F' |
 | Horizontal tab              | [9]         | `\t`                    |
