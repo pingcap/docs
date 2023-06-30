@@ -27,7 +27,7 @@ The available third-party integrations are displayed.
 
 - Third-party metrics integrations are not available when the cluster status is **CREATING**, **RESTORING**, **PAUSED**, or **RESUMING**.
 
-## Available integrations 
+## Available integrations
 
 ### Datadog integration (Beta)
 
