@@ -14,7 +14,8 @@ TiDB Cloud provides branch feature that enables you branch your serverless clust
 Branch is the resource under **serverless cluster**, it has the following features:
 
 1. Branch is a copy-on-write clone of the original cluster, including the schema and data.
-2. Branch is isolated from the original cluster, changes to your branch will not affect the original cluster.
+2. Branch can be connected with its own connection information.
+3. Branch is isolated from the original cluster, changes to your branch will not affect the original cluster.
 
 ## Scenarios
 

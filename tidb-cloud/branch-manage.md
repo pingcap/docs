@@ -24,6 +24,7 @@ To create a copy-on-write branch, perform the following steps:
 
 > **Note:**
 >
+> Branch can only be created in the same region as the cluster now. 
 > You can create up to 5 free branches in an organization. Contact us if you need more branches.
 
 ## Delete a branch
