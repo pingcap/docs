@@ -145,14 +145,9 @@ For the roadmap of TiDB kernel, refer to [TiDB Roadmap](https://github.com/pingc
     <td>TiDB Cloud supports TiCDC-based data replication to Kafka and MySQL compatible databases.</td>
   </tr>
   <tr>
-    <td>Backup and Restore</td>
-    <td>✅ Support EBS snapshot-based backup and restore.</td>
-    <td>BR service on TiDB Cloud uses EBS snapshot-based backup and restore.</td>
-  </tr>
-  <tr>
     <td>Backup and restore</td>
-    <td>Backup and restore service based on AWS EBS or GCP persistent disk snapshots.</td>
-    <td>Provide backup and restore service on the cloud based on AWS EBS or GCP persistent disk snapshots.</td>
+    <td>Backup and restore performance using optimized file based backup.</td>
+    <td>Improve backup performance with an updated full and incremental file based backup for all cloud providers.</td>
   </tr>
   <tr>
     <td rowspan="2">Online data migration</td>
