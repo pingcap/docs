@@ -282,7 +282,7 @@ The following table shows the detailed representation information.
 
 ### Example of the encoding
 
-To illustrate, the following 16 bytes `[5 7 10 15 36 50 43 99 120 60 38 255 254 45 55 70]` stored in a `VARBINARY` called `c_varbinary` would be encoded in a Canal-JSON `Update` Event as:
+For example, the following 16 bytes `[5 7 10 15 36 50 43 99 120 60 38 255 254 45 55 70]` stored in a `VARBINARY` column called `c_varbinary` is encoded in a Canal-JSON `Update` event as:
 
 ```json
 {
