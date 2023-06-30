@@ -155,8 +155,14 @@ addr = "172.16.31.10:8287"
 #            Note that the target TiKV must be v5.2.0 or later versions; otherwise it falls back to 'none'.
 # The default value is 'none'.
 # duplicate-resolution = 'none'
-# The number of KV pairs sent in one request in the physical import mode.
+# The maximum number of KV pairs in one request when sending data to TiKV in physical import mode.
+# Starting from v7.2.0, this parameter is deprecated and no longer takes effect after it is set.
+# If you want to adjust the amount of data sent to TiKV in one request, use the `send-kv-size` parameter instead.
 # send-kv-pairs = 32768
+# The maximum size of one request when sending data to TiKV in physical import mode.
+# The default value is "16K". It is not recommended to adjust this parameter.
+# This parameter is introduced in v7.2.0.
+# send-kv-size = "16K"
 # Whether to enable compression when sending KV pairs to TiKV in the physical import mode.
 # Currently, only the Gzip compression algorithm is supported.
 # To use this algorithm, you can fill in either "gzip" or "gz" for this parameter.
@@ -250,7 +256,7 @@ data-source-dir = "/data/my_database"
 #             an error is reported
 #  - auto:    (default) automatically detects whether the schema is UTF-8 or
 #             GB-18030. An error is reported if the encoding is neither.
-#  - latin1： the schema files uses MySQL latin1 encoding, also known as Code Page 1252.
+#  - latin1:  the schema files use MySQL latin1 encoding, also known as Code Page 1252.
 #  - binary:  do not try to decode the schema files
 character-set = "auto"
 

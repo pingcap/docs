@@ -55,6 +55,8 @@ This section describes the URI format of the storage services:
     - `sse`: Specifies the server-side encryption algorithm used to encrypt the uploaded objects (value options: ``, `AES256`, or `aws:kms`).
     - `sse-kms-key-id`: Specifies the KMS ID if `sse` is set to `aws:kms`.
     - `acl`: Specifies the canned ACL of the uploaded objects (for example, `private` or `authenticated-read`).
+    - `role-arn`: When you need to access Amazon S3 data from a third party using a specified [IAM role](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html), you can specify the corresponding [Amazon Resource Name (ARN)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of the IAM role with the `role-arn` URL query parameter, such as `arn:aws:iam::888888888888:role/my-role`. For more information about using an IAM role to access Amazon S3 data from a third party, see [AWS documentation](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_common-scenarios_third-party.html).
+    - `external-id`: When you access Amazon S3 data from a third party, you might need to specify a correct [external ID](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user_externalid.html) to assume [the IAM role](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html). In this case, you can use this `external-id` URL query parameter to specify the external ID and make sure that you can assume the IAM role. An external ID is an arbitrary string provided by the third party together with the IAM role ARN to access the Amazon S3 data. Providing an external ID is optional when assuming an IAM role, which means if the third party does not require an external ID for the IAM role, you can assume the IAM role and access the corresponding Amazon S3 data without providing this parameter.
 
 </div>
 <div label="GCS" value="gcs">
@@ -76,7 +78,8 @@ This section describes the URI format of the storage services:
 
     - `account-name`: Specifies the account name of the storage.
     - `account-key`: Specifies the access key.
-    - `access-tier`: Specifies the access tier of the uploaded objects, for example, `Hot`, `Cool`, or `Archive`. The value is `Hot` by default.
+    - `sas-token`: Specifies the shared access signature (SAS) token.
+    - `access-tier`: Specifies the access tier of the uploaded objects, for example, `Hot`, `Cool`, or `Archive`. The default value is the default access tier of the storage account.
 
 </div>
 </SimpleTab>
@@ -185,11 +188,15 @@ You can configure the account used to access GCS by specifying the access key. I
 </div>
 <div label="Azure Blob Storage" value="azure">
 
-- Method 1: Specify the access key
+- Method 1: Specify the shared access signature
 
-    If you specify `account-name` and `account-key` in the URI, the authentication is performed using the specified access key and secret access key. Besides the method of specifying the key in the URI, BR can also read the key from the environment variable `$AZURE_STORAGE_KEY`.
+    If you specify `account-name` and `sas-token` in the URI, the authentication is performed using the specified account name and shared access signature (SAS) token. Note that the SAS token contains the `&` character. You need to encode it as `%26` before appending it to the URI. You can also directly encode the entire `sas-token` using percent-encoding.
 
-- Method 2: Use Azure AD for backup and restore
+- Method 2: Specify the access key
+
+    If you specify `account-name` and `account-key` in the URI, the authentication is performed using the specified account name and account key. Besides the method of specifying the key in the URI, BR can also read the key from the environment variable `$AZURE_STORAGE_KEY`.
+
+- Method 3: Use Azure AD for backup and restore
 
     Configure the environment variables `$AZURE_CLIENT_ID`, `$AZURE_TENANT_ID`, and `$AZURE_CLIENT_SECRET` on the node where BR is running.
 

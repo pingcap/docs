@@ -572,7 +572,7 @@ Configuration items related to the I/O rate limiter.
 
 ### `retry-interval`
 
-+ The interval for retrying to initialize the PD connection
++ The interval for retrying the PD connection.
 + Default value: `"300ms"`
 
 ### `retry-log-every`
@@ -988,10 +988,10 @@ Configuration items related to Raftstore.
 + Default value: `1MB`
 + Minimum value: `0`
 
-### `report-min-resolved-ts-interval`
+### `report-min-resolved-ts-interval` <span class="version-mark">New in v6.0.0</span>
 
-+ Determines the minimum interval at which the resolved timestamp is reported to the PD leader. If this value is set to `0`, it means that the reporting is disabled.
-+ Default value: `"1s"`, which is the smallest positive value
++ Determines the interval at which the minimum resolved timestamp is reported to the PD leader. If this value is set to `0`, it means that the reporting is disabled.
++ Default value: Before v6.3.0, the default value is `"0s"`. Starting from v6.3.0, the default value is `"1s"`, which is the smallest positive value.
 + Minimum value: `0`
 + Unit: second
 
@@ -1348,7 +1348,7 @@ Configuration items related to `rocksdb.defaultcf`, `rocksdb.writecf`, and `rock
 + Default value for `defaultcf`: `true`
 + Default value for `writecf` and `lockcf`: `false`
 
-### `optimize-filters-for-memory` <span class="version-mark">New in v7.1.0</span>
+### `optimize-filters-for-memory` <span class="version-mark">New in v7.2.0</span>
 
 + Determines whether to generate Bloom/Ribbon filters that minimize memory internal fragmentation.
 + Note that this configuration item takes effect only when [`format-version`](#format-version-new-in-v620) >= 5.
@@ -1371,7 +1371,7 @@ Configuration items related to `rocksdb.defaultcf`, `rocksdb.writecf`, and `rock
 + Determines whether each block creates a bloom filter
 + Default value: `false`
 
-### `ribbon-filter-above-level` <span class="version-mark">New in v7.1.0</span>
+### `ribbon-filter-above-level` <span class="version-mark">New in v7.2.0</span>
 
 + Determines whether to use Ribbon filters for levels greater than or equal to this value and use non-block-based bloom filters for levels less than this value. When this configuration item is set, [`block-based-bloom-filter`](#block-based-bloom-filter) will be ignored.
 + Note that this configuration item takes effect only when [`format-version`](#format-version-new-in-v620) >= 5.
@@ -1518,7 +1518,7 @@ Configuration items related to `rocksdb.defaultcf`, `rocksdb.writecf`, and `rock
 ### `compaction-guard-min-output-file-size`
 
 + The minimum SST file size when the compaction guard is enabled. This configuration prevents SST files from being too small when the compaction guard is enabled.
-+ Default value: `"8MB"`
++ Default value: Starting from v7.2.0, the default value is changed from `"8MB"` to `"1MB"`
 + Unit: KB|MB|GB
 
 ### `compaction-guard-max-output-file-size`
@@ -1538,6 +1538,18 @@ Configuration items related to `rocksdb.defaultcf`, `rocksdb.writecf`, and `rock
     - `4`: Can be read by TiKV v3.0 and later versions. Changes the encoding of the values in index blocks.
     - `5`: Can be read by TiKV v6.1 and later versions. Full and partitioned filters use a faster and more accurate Bloom filter implementation with a different schema.
 + Default value: `2`
+
+### `ttl` <span class="version-mark">New in v7.2.0</span>
+
++ SST files with updates older than the TTL will be automatically selected for compaction. These SST files will go through the compaction in a cascading way so that they can be compacted to the bottommost level or file.
++ Default value: `"30d"`
++ Unit: s(second)|h(hour)|d(day)
+
+### `periodic-compaction-seconds` <span class="version-mark">New in v7.2.0</span>
+
++ The time interval for periodic compaction. SST files with updates older than this value will be selected for compaction and rewritten to the same level where these SST files originally reside.
++ Default value: `"30d"`
++ Unit: s(second)|h(hour)|d(day)
 
 ## rocksdb.defaultcf.titan
 
