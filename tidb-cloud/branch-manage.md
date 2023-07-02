@@ -1,11 +1,11 @@
 ---
-title: Manage TiDB Cloud Branch
-summary: Learn How to manage the TiDB Cloud branch.
+title: Manage TiDB Serverless Branch
+summary: Learn How to manage the TiDB Serverless branch.
 ---
 
-# Manage TiDB Cloud Branch
+# Manage TiDB Serverless Branch
 
-This document describes how to manage the TiDB Cloud branch on the console. You can also manage it by [TiDB Cloud CLI](./cli-reference.md).
+This document describes how to manage the TiDB Serverless branch on the console. You can also manage it by [TiDB Cloud CLI](./cli-reference.md).
 
 ## List branches
 
@@ -16,7 +16,7 @@ To list branches for your cluster, perform the following steps:
 
 ## Create a branch
 
-To create a copy-on-write branch, perform the following steps:
+To create a branch, perform the following steps:
 
 1. Navigate to the branch list page of your cluster.
 2. Click the **Create Branch** button.
@@ -24,15 +24,15 @@ To create a copy-on-write branch, perform the following steps:
 
 > **Note:**
 >
-> Branch can only be created in the same region as the cluster now. 
-> You can create up to 5 free branches in an organization. Contact us if you need more branches.
+> Branches can only be created in the same region as the cluster now. 
+> You can create up to 5 free branches in an organization. [Contact TiDB Cloud support](/tidb-cloud/tidb-cloud-support.md) if you need more branches.
 
 ## Delete a branch
 
 To delete a branch, perform the following steps:
 
 1. Navigate to the branch list page of your cluster.
-2. In the row of your target branch to be deleted, click ...
+2. In the row of your target branch to be deleted, click **...**
 3. Click **Delete** in the drop-down menu.
 
 ## Get branch connection information
@@ -40,7 +40,7 @@ To delete a branch, perform the following steps:
 To get branch connection information, perform the following steps:
 
 1. Navigate to the branch list page of your cluster.
-2. In the row of your target branch to be deleted, click ...
+2. In the row of your target branch to be deleted, click **...**
 3. Click the **Connect** in the drop-down menu.
 4. Click the **Create password** or **Reset password** to create or reset the password.
 
@@ -50,4 +50,4 @@ To get branch connection information, perform the following steps:
 
 ## What's next
 
-- [Integrate branching into your CI/CD pipeline](./branch-github-integration.md)
+- [Integrate branches into your CI/CD pipeline](./branch-github-integration.md)

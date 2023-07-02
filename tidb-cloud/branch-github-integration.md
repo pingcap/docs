@@ -1,15 +1,15 @@
 ---
-title: Branch GitHub Integration
-summary: Learn how to use the Branch GitHub integration.
+title: Branching GitHub Integration
+summary: Learn how to use the Branching GitHub integration.
 ---
 
 # Branching GitHub Integration (Beta)
 
 > **Note:**
 >
-> Branching GitHub integration is based on the TiDB Cloud branch. Make sure you have familiar with [TiDB Cloud branch](./branch-overview.md) before you read this tutorial.
+> Branching GitHub integration is based on the TiDB Serverless Branch. Make sure you have are with [TiDB Serverless Branch](./branch-overview.md) before you read this tutorial.
 
-You can integrate branching into your GitHub CI/CD pipeline using the Branching GitHub Integration. It allows you to connect a GitHub repository to your TiDB Cloud serverless cluster. Then a GitHub App that manages TiDB Cloud branches will work in this repository.
+You can integrate branches into your GitHub CI/CD pipeline using the Branching GitHub Integration. It allows you to connect a GitHub repository to your TiDB serverless cluster. Then a GitHub App that manages TiDB Serverless branches will work in this repository.
 
 The following tutorial will show you:
 
