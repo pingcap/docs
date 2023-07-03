@@ -9,7 +9,7 @@ The **?** icon in the lower-right corner of the [TiDB Cloud console](https://tid
 
 ## Request PoC, demo, or free trial credits
 
-To request a Proof of Concept (PoC), demo, or free trial credits, click **?** in the upper-right corner of the [TiDB Cloud console](https://tidbcloud.com/), and click **Request Support**.
+To request a Proof of Concept (PoC), a demo, or free trial credits, click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com/), and click **Request Support**.
 
 > **Tip:**
 >
