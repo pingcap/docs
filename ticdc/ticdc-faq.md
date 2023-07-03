@@ -294,4 +294,3 @@ This is because the default port number of the TiCDC cluster deployed by TiDB Op
   }
 ]
 ```
->>>>>>> 91e4a6f924 (ticdc: add a faq for ticdc (#14039))
