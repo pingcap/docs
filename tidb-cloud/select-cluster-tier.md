@@ -65,7 +65,6 @@ To get the prefix for your cluster, take the following steps:
 
 ### TiDB Serverless special terms and conditions
 
-<!--To be confirmed-->
 Some of TiDB Cloud features are partially supported or not supported on TiDB Serverless. See [TiDB Serverless Limitations](/tidb-cloud/serverless-limitations.md) for details.
 
 ## TiDB Dedicated
