@@ -21,7 +21,7 @@ In TiDB Cloud, you can view both active and closed alerts on the Alerts page.
 
     > **Tip:**
     >
-    > If you have multiple projects, you can view the project list and switch to another project by clicking <MDSvgIcon name="icon-left-projects" /> in the lower-left corner.
+    > If you have multiple projects, you can click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner and switch to another project.
 
 2. Click the name of the target cluster. The cluster overview page is displayed.
 3. Click **Alerts** in the left navigation pane.

@@ -100,7 +100,7 @@ Depending on the location and size of your source data, the importing methods ar
 
         > **Tip:**
         >
-        > If you have multiple projects, you can view the project list and switch to another project by clicking <MDSvgIcon name="icon-left-projects" /> in the lower-left corner.
+        > If you have multiple projects, you can click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner and switch to another project.
 
     3. Click the name of your target cluster to go to its overview page, and then click **Import** in the left navigation pane.
     4. On the **Import** page, click **Import Data** in the upper-right corner, select **From S3**, and then fill in the importing related information.

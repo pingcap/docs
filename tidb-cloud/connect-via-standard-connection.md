@@ -19,7 +19,7 @@ To connect to a TiDB Dedicated cluster via standard connection, take the followi
 
         > **Tip:**
         >
-        > If you have multiple projects, you can view the project list and switch to another project by clicking <MDSvgIcon name="icon-left-projects" /> in the lower-left corner.
+        > If you have multiple projects, you can click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner and switch to another project.
 
     2. Click the name of your target cluster to go to its overview page.
 

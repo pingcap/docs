@@ -34,7 +34,7 @@ For an existing TiDB Serverless cluster, you can increase the usage quota by upd
 
     > **Tip:**
     >
-    > If you have multiple projects, you can view the project list and switch to another project by clicking <MDSvgIcon name="icon-left-projects" /> in the lower-left corner.
+    > If you have multiple projects, you can click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner and switch to another project.
 
 2. In the **Usage This Month** area, click **Get more usage quota**.
 3. Edit the monthly spend limit as needed. If you have not added a payment method, you will need to add a credit card after editing the limit.

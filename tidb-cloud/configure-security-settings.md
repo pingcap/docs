@@ -15,7 +15,7 @@ For TiDB Dedicated clusters, you can configure the root password and allowed IP 
 
     > **Tip:**
     >
-    > If you have multiple projects, you can view the project list and switch to another project by clicking <MDSvgIcon name="icon-left-projects" /> in the lower-left corner.
+    > If you have multiple projects, you can click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner and switch to another project.
 
 2. In the row of your target cluster, click **...** and select **Security Settings**.
 3. In the **Security Settings** dialog, configure the root password and allowed IP addresses.
