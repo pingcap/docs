@@ -184,9 +184,10 @@ def create_release_file(version, dup_notes_levels, dup_notes):
         content = content.replace('x.y', major_minor_version)
         level1 = level2 = level3 = ""
         lines = content.splitlines()
-        newelines = []
+        newlines = []
         note_level = ""
         note_levels = []
+        other_dup_notes = []
         for line in lines:
             if "placeholder" in line:
                 note_level = level1 + level2 + level3
@@ -194,29 +195,34 @@ def create_release_file(version, dup_notes_levels, dup_notes):
                 newline = line.replace("- placeholder", "")
                 for dup_note_level, dup_note in zip(dup_notes_levels, dup_notes): #add the dup release notes to the release note file
                     if dup_note_level == note_level:
-                        newelines.append(newline+dup_note)
+                        newlines.append(newline+dup_note)
                     else:
                         continue
                 if "Other dup notes" in note_level: #add the dup release notes without corresponding categories to the release note file
                     for dup_note_level, dup_note in zip(dup_notes_levels, dup_notes):
                         if dup_note_level not in note_levels:
-                            newelines.append(newline+dup_note)
+                            newlines.append(newline+dup_note)
+                            other_dup_notes.append(dup_note)
+                    if len(other_dup_notes) == 0:
+                        newlines = newlines[:-2] # remove the last two lines if other dup notes do not exist
+                    else:
+                        pass
             elif line.startswith("##"):
                 level1 = "> " + line.replace("##","").strip()
                 level2 = level3 = ""
-                newelines.append(line)
+                newlines.append(line)
             elif (line.startswith ("+") or line.startswith ("-")) and "GitHub ID" not in line:
                 level2 = "> " + line.replace("+","").replace("-","").strip()
                 level3 = ""
-                newelines.append(line)
+                newlines.append(line)
             elif (line.startswith ("    +") or line.startswith ("    -")) and "GitHub ID" not in line:
                 level3 = "> " + line.replace("    +","").replace("    -","").strip()
-                newelines.append(line)
+                newlines.append(line)
             else:
-                newelines.append(line)
+                newlines.append(line)
 
         #print(note_levels)
-        content = "\n".join(newelines)
+        content = "\n".join(newlines)
         file.seek(0)
         file.write(content)
         file.truncate()
