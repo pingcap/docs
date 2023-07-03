@@ -48,7 +48,7 @@ In addition, the rational use of the resource control feature can reduce the num
 
 ## What is Request Unit (RU)
 
-Request Unit (RU) is a unified abstraction unit in TiDB for system resources, which currently includes CPU, IOPS, and IO bandwidth metrics. It is used to indicate the amount of resources consumed by a single request to the database. The number of RU's consumed by a request depends on a variety of factors, such as the type of operation or the amount of data being retrieved or modified. Currently, the RU contains statistics for the following resources:
+Request Unit (RU) is a unified abstraction unit in TiDB for system resources, which currently includes CPU, IOPS, and IO bandwidth metrics. It is used to indicate the amount of resources consumed by a single request to the database. The number of RUs consumed by a request depends on a variety of factors, such as the type of operation, and the amount of data being retrieved or modified. Currently, the RU contains statistics for the resources in the following table:
 
 <table>
     <thead>
@@ -85,7 +85,7 @@ Request Unit (RU) is a unified abstraction unit in TiDB for system resources, wh
 
 > **Note:**
 >
-> - Each write operation is eventually replicated to all replicas (by default TiKV has 3 replicas) and each replication operation is considered a different write operation.
+> - Each write operation is eventually replicated to all replicas (by default TiKV has 3 replicas). Each replication operation is considered a different write operation.
 > - In addition to queries executed by the user, RU can be consumed by background tasks, such as automated statistical information collection.
 > - The preceding table lists only the resources involved in computing RUs for on-premises TiDB clusters, excluding the network and storage components. For TiDB Serverless RUs, see [TiDB Serverless Pricing Details](https://www.pingcap.com/tidb-cloud- serverless-pricing-details/).
 
