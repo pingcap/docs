@@ -10,12 +10,13 @@ The cluster tier determines the throughput and performance of your cluster.
 
 TiDB Cloud provides the following two options of cluster tiers. Before creating a cluster, you need to consider which option suits your need better.
 
-- [TiDB Serverless](#tidb-serverless-beta)
+- [TiDB Serverless](#tidb-serverless)
 - [TiDB Dedicated](#tidb-dedicated)
 
-## TiDB Serverless (Beta)
+## TiDB Serverless
 
-TiDB Serverless (previously called Developer Tier) is a fully managed service of TiDB. It's still in beta and should not be used in production. However, you can use TiDB Serverless clusters for non-production workloads such as prototype applications, hackathons, academic courses, or to provide a temporary data service for your datasets.
+<!--To be confirmed-->
+TiDB Serverless (previously called Developer Tier) is a fully managed service of TiDB. You can use TiDB Serverless clusters for non-production workloads such as prototype applications, hackathons, academic courses, or to provide a temporary data service for your datasets.
 
 ### Usage quota
 
@@ -64,8 +65,8 @@ To get the prefix for your cluster, take the following steps:
 
 ### TiDB Serverless special terms and conditions
 
-- TiDB Serverless is currently in beta and does not have uptime SLA guarantee during beta phase. If you use TiDB Serverless beta to store a commercial or production dataset, any potential risk associated with the use should be taken on your own, and PingCAP shall not be liable for any damage.
-- Some of TiDB Cloud features are partially supported or not supported on TiDB Serverless. See [TiDB Serverless Limitations](/tidb-cloud/serverless-limitations.md) for details.
+<!--To be confirmed-->
+Some of TiDB Cloud features are partially supported or not supported on TiDB Serverless. See [TiDB Serverless Limitations](/tidb-cloud/serverless-limitations.md) for details.
 
 ## TiDB Dedicated
 

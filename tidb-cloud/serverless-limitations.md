@@ -17,7 +17,7 @@ We are constantly filling in the feature gaps between TiDB Serverless and TiDB D
 ### SQL
 
 - [Time to live (TTL)](/time-to-live.md) is not available for TiDB Serverless clusters currently.
-- The [`FLASHBACK CLUSTER TO TIMESTAMP`](/sql-statements/sql-statement-flashback-to-timestamp.md) syntax is not applicable to [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta) clusters.
+- The [`FLASHBACK CLUSTER TO TIMESTAMP`](/sql-statements/sql-statement-flashback-to-timestamp.md) syntax is not applicable to [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) clusters.
 - The [`SLEEP()` function](/functions-and-operators/miscellaneous-functions.md) only supports a maximum sleep time of 300 seconds.
 
 ### System tables
@@ -26,7 +26,7 @@ We are constantly filling in the feature gaps between TiDB Serverless and TiDB D
 
 ### Transaction
 
-- The total size of a single transaction is set to no more than 10 MB on TiDB Serverless during the beta phase.
+- The total size of a single transaction is set to no more than 10 MB on TiDB Serverless during the beta phase. <!--To be confirmed-->
 
 ### Connection
 
