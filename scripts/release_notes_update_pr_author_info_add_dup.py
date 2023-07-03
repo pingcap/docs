@@ -55,8 +55,6 @@ def store_exst_rn(ext_path, version):
                         elif (line.startswith ("+") or line.startswith ("-")) and (not authors):
                             level2 = "> " + line.replace("+","").replace("-","").strip()
                             level3 = ""
-                        # The above code is checking if the line starts with either "    +" or "    -"
-                        # and if the variable "authors" is not defined.
                         elif (line.startswith ("    +") or line.startswith ("    -")) and (not authors):
                             level3 = "> " + line.replace("    +","").replace("    -","").strip()
                         else:
