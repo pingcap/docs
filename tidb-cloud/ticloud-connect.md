@@ -52,7 +52,7 @@ In non-interactive mode, you need to manually enter the required flags. In inter
 | Flag                    | Description                       | Required | Note                                                 |
 |-------------------------|-----------------------------------|----------|------------------------------------------------------|
 | -c, --cluster-id string | Cluster ID                        | Yes      | Only works in non-interactive mode.                  |
-| -c, --branch-id string  | Branch ID                         | No       | Only works in non-interactive mode.                  |
+| -b, --branch-id string  | Branch ID                         | No       | Only works in non-interactive mode.                  |
 | -h, --help              | Help information for this command | No       | Works in both non-interactive and interactive modes. |
 | --password              | The password of the user          | No       | Only works in non-interactive mode.                  |
 | -p, --project-id string | Project ID                        | Yes      | Only works in non-interactive mode.                  |
