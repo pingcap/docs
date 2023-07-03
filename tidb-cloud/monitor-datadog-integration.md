@@ -26,7 +26,7 @@ You can configure TiDB Cloud to send metric data about your TiDB clusters to [Da
 ### Step 1. Integrate with your Datadog API Key
 
 1. Log in to the [TiDB Cloud console](https://tidbcloud.com).
-2. Click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner, switch to the target project if you have multiple projects, and then click **Project Admin**.
+2. Click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner, switch to the target project if you have multiple projects, and then click **Admin**.
 3. On the **Admin** page of your project, click **Integrations**, and click **Integration to Datadog**.
 4. Enter your API key of Datadog and choose the site of Datadog.
 5. Click **Test Integration**.
