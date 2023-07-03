@@ -48,6 +48,7 @@ The TiDB configuration file supports more options than command-line parameters. 
 
 + File system location used by TiDB to store temporary data. If a feature requires local storage in TiDB nodes, TiDB stores the corresponding temporary data in this location.
 + When creating an index, if [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) is enabled, data that needs to be backfilled for a newly created index will be at first stored in the TiDB local temporary directory, and then imported into TiKV in batches, thus accelerating the index creation.
++ When [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md) is used to import data, the sorted data is first stored in the TiDB local temporary directory, and then imported into TiKV in batches.
 + Default value: `"/tmp/tidb"`
 
 ### `oom-use-tmp-storage`
@@ -545,19 +546,11 @@ Configuration items related to performance.
 
 ### `stats-load-concurrency` <span class="version-mark">New in v5.4.0</span>
 
-> **Warning:**
->
-> Currently, synchronously loading statistics is an experimental feature. It is not recommended that you use it in production environments.
-
 + The maximum number of columns that the TiDB synchronously loading statistics feature can process concurrently.
 + Default value: `5`
 + Currently, the valid value range is `[1, 128]`.
 
 ### `stats-load-queue-size` <span class="version-mark">New in v5.4.0</span>
-
-> **Warning:**
->
-> Currently, synchronously loading statistics is an experimental feature. It is not recommended that you use it in production environments.
 
 + The maximum number of column requests that the TiDB synchronously loading statistics feature can cache.
 + Default value: `1000`
@@ -565,20 +558,16 @@ Configuration items related to performance.
 
 ### `lite-init-stats` <span class="version-mark">New in v7.1.0</span>
 
-> **Warning:**
->
-> This variable is an experimental feature. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
-
 + Controls whether to use lightweight statistics initialization during TiDB startup.
-+ Default value: false
++ Default value: `false` for versions earlier than v7.2.0, `true` for v7.2.0 and later versions.
 + When the value of `lite-init-stats` is `true`, statistics initialization does not load any histogram, TopN, or Count-Min Sketch of indexes or columns into memory. When the value of `lite-init-stats` is `false`, statistics initialization loads histograms, TopN, and Count-Min Sketch of indexes and primary keys into memory but does not load any histogram, TopN, or Count-Min Sketch of non-primary key columns into memory. When the optimizer needs the histogram, TopN, and Count-Min Sketch of a specific index or column, the necessary statistics are loaded into memory synchronously or asynchronously (controlled by [`tidb_stats_load_sync_wait`](/system-variables.md#tidb_stats_load_sync_wait-new-in-v540)).
 + Setting `lite-init-stats` to `true` speeds up statistics initialization and reduces TiDB memory usage by avoiding unnecessary statistics loading. For details, see [Load statistics](/statistics.md#load-statistics).
 
 ### `force-init-stats` <span class="version-mark">New in v7.1.0</span>
 
 + Controls whether to wait for statistics initialization to finish before providing services during TiDB startup.
-+ Default value: false
-+ When the value of `force-init-stats` is `true`, TiDB needs to wait until statistics initialization is finished before providing services upon startup. If there are a large number of tables and partitions, setting `force-init-stats` to `true` might prolong the time it takes for TiDB to start providing services.
++ Default value: `false` for versions earlier than v7.2.0, `true` for v7.2.0 and later versions.
++ When the value of `force-init-stats` is `true`, TiDB needs to wait until statistics initialization is finished before providing services upon startup. Note that if there are a large number of tables and partitions and the value of [`lite-init-stats`](/tidb-configuration-file.md#lite-init-stats-new-in-v710) is `false`, setting `force-init-stats` to `true` might prolong the time it takes for TiDB to start providing services.
 + When the value of `force-init-stats` is `false`, TiDB can still provide services before statistics initialization is finished, but the optimizer uses pseudo statistics to make decisions, which might result in suboptimal execution plans.
 
 ## opentracing
@@ -939,6 +928,11 @@ Configuration items related to the PROXY protocol.
 > **Warning:**
 >
 > Use `*` with caution because it might introduce security risks by allowing a client of any IP address to report its IP address. In addition, using `*` might also cause the internal component that directly connects to TiDB (such as TiDB Dashboard) to be unavailable.
+
+### `fallbackable` <span class="version-mark">New in v6.5.1</span>
+
++ Controls whether to enable the PROXY protocol fallback mode. If this configuration item is set to `true`, TiDB can accept clients that belong to `proxy-protocol.networks` to connect to TiDB without using the PROXY protocol specification or without sending the PROXY protocol header. By default, TiDB only accepts client connections that belong to `proxy-protocol.networks` and send a PROXY protocol header.
++ Default value: `false`
 
 ## experimental
 
