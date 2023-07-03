@@ -111,6 +111,14 @@ When you start the TiDB cluster, you can use command-line options or environment
 - Default: `"/tmp/tidb"`
 - You can use `tidb-server --store=unistore --path=""` to enable a pure in-memory TiDB.
 
+<<<<<<< HEAD
+=======
+## `--proxy-protocol-fallbackable`
+
+- Controls whether to enable PROXY protocol fallback mode. When this parameter is set to `true`, TiDB accepts client connections that belong to `--proxy-protocol-networks` without using the PROXY protocol specification or without sending a PROXY protocol header. By default, TiDB only accepts client connections that belong to `--proxy-protocol-networks` and send a PROXY protocol header.
+- Default value: `false`
+
+>>>>>>> 993226aae (Update command-line-flags-for-tidb-configuration.md (#14038))
 ## `--proxy-protocol-networks`
 
 - The list of proxy server's IP addresses allowed to connect to TiDB using the [PROXY protocol](https://www.haproxy.org/download/1.8/doc/proxy-protocol.txt).
