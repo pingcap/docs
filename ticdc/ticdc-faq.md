@@ -264,28 +264,6 @@ Currently, TiCDC is not yet fully compatible with TiDB Lightning and BR. Therefo
 ## After a changefeed resumes from pause, its replication latency gets higher and higher and returns to normal only after a few minutes. Why?
 
 When a changefeed is resumed, TiCDC needs to scan the historical versions of data in TiKV to catch up with the incremental data logs generated during the pause. The replication process proceeds only after the scan is completed. The scan process might take several to tens of minutes.
-<<<<<<< HEAD
-=======
-
-## How should I deploy TiCDC to replicate data between two TiDB cluster located in different regions?
-
-It is recommended that you deploy TiCDC in the downstream TiDB cluster. If the network latency between the upstream and downstream is high, for example, more than 100 ms, the latency produced when TiCDC executes SQL statements to the downstream might increase dramatically due to the MySQL transmission protocol issues. This results in a decrease in system throughput. However, deploying TiCDC in the downstream can greatly ease this problem.
-
-## What is the order of executing DML and DDL statements?
-
-The execution order is: DML -> DDL -> DML. To ensure that the table schema is correct when DML events are executed downstream during data replication, it is necessary to coordinate the execution order of DDL and DML statements. Currently, TiCDC adopts a simple approach: it replicates all DML statements before the DDL ts to downstream first, and then replicates DDL statements.
-
-## How should I check whether the upstream and downstream data is consistent?
-
-If the downstream is a TiDB cluster or MySQL instance, it is recommended that you compare the data using [sync-diff-inspector](/sync-diff-inspector/sync-diff-inspector-overview.md).
-
-## Replication of a single table can only be run on a single TiCDC node. Will it be possible to use multiple TiCDC nodes to replicate data of multiple tables?
-
-This feature is currently not supported, which might be supported in a future release. By then, TiCDC might replicate data change logs by TiKV Region, which means scalable processing capability.
-
-## Does TiCDC replication get stuck if the upstream has long-running uncommitted transactions?
-
-TiDB has a transaction timeout mechanism. When a transaction runs for a period longer than [`max-txn-ttl`](/tidb-configuration-file.md#max-txn-ttl), TiDB forcibly rolls it back. TiCDC waits for the transaction to be committed before proceeding with the replication, which causes replication delay.
 
 ## Why can't I use the `cdc cli` command to operate a TiCDC cluster deployed by TiDB Operator?
 
