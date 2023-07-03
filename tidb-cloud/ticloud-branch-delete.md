@@ -28,7 +28,7 @@ ticloud branch delete
 Delete a branch in non-interactive mode:
 
 ```shell
-ticloud cluster branch --branch-id <branch-id> --cluster-id <cluster-id>
+ticloud branch delete --branch-id <branch-id> --cluster-id <cluster-id>
 ```
 
 ## Flags
