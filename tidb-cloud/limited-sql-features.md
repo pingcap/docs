@@ -38,10 +38,10 @@ TiDB Cloud works with almost all workloads that TiDB supports, but there are fea
 
 | Statement | TiDB Dedicated | TiDB Serverless |
 |:-|:-|:-|
-| BACKUP | Supported | To perform [Backup Restore](tidb-cloud/backup-and-restore-serverless) operations on TiDB Serverless, please use the web console instead. |
-| SHOW BACKUPS | Supported | To perform [Backup Restore](tidb-cloud/backup-and-restore-serverless) operations on TiDB Serverless, please use the web console instead. |
-| RESTORE | Supported | To perform [Backup Restore](tidb-cloud/backup-and-restore-serverless) operations on TiDB Serverless, please use the web console instead. |
-| SHOW RESTORES | Supported | To perform [Backup Restore](tidb-cloud/backup-and-restore-serverless) operations on TiDB Serverless, please use the web console instead. |
+| BACKUP | Supported | To perform [Backup Restore](tidb-cloud/backup-and-restore-serverless.md) operations on TiDB Serverless, please use the web console instead. |
+| SHOW BACKUPS | Supported | To perform [Backup Restore](tidb-cloud/backup-and-restore-serverless.md) operations on TiDB Serverless, please use the web console instead. |
+| RESTORE | Supported | To perform [Backup Restore](tidb-cloud/backup-and-restore-serverless.md) operations on TiDB Serverless, please use the web console instead. |
+| SHOW RESTORES | Supported | To perform [Backup Restore](tidb-cloud/backup-and-restore-serverless.md) operations on TiDB Serverless, please use the web console instead. |
 | ADMIN RESET TELEMETRY_ID | Supported | Telemetry is not supported on TiDB Serverless. |
 | ADMIN SHOW TELEMETRY | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). |
 | ALTER INSTANCE RELOAD TLS | Supported | TiDB Serverless automatically refreshes the TLS certificate. |
@@ -73,7 +73,7 @@ TiDB Cloud works with almost all workloads that TiDB supports, but there are fea
 | information_schema | CLUSTER_INFO | Supported | TiDB Serverless does not support configuring data placement. |
 | information_schema | CLUSTER_LOAD | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). |
 | information_schema | CLUSTER_LOG | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). |
-| information_schema | CLUSTER_SLOW_QUERY | Supported | For tracking slow queries, please use the [Slow Query](tidb-cloud/tune-performance#slow-query) feature available on the web console. |
+| information_schema | CLUSTER_SLOW_QUERY | Supported | For tracking slow queries, please use the [Slow Query](tidb-cloud/tune-performance.md#slow-query) feature available on the web console. |
 | information_schema | CLUSTER_STATEMENTS_SUMMARY | Supported | For comprehensive monitoring of all statements, please use the [Statement Analysis](/tidb-cloud/tune-performance.md#statement-analysis) feature on the web console. |
 | information_schema | CLUSTER_STATEMENTS_SUMMARY_EVICTED | Supported | For comprehensive monitoring of all statements, please use the [Statement Analysis](/tidb-cloud/tune-performance.md#statement-analysis) feature on the web console. |
 | information_schema | CLUSTER_STATEMENTS_SUMMARY_HISTORY | Supported | For comprehensive monitoring of all statements, please use the [Statement Analysis](/tidb-cloud/tune-performance.md#statement-analysis) feature on the web console. |
@@ -86,7 +86,7 @@ TiDB Cloud works with almost all workloads that TiDB supports, but there are fea
 | information_schema | METRICS_TABLES | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). |
 | information_schema | PLACEMENT_POLICIES | Supported | TiDB Serverless does not support configuring data placement. |
 | information_schema | RESOURCE_GROUPS | Supported | TiDB Serverless does not support configuring resource groups. |
-| information_schema | SLOW_QUERY | Supported | For tracking slow queries, please use the [Slow Query](tidb-cloud/tune-performance#slow-query) feature available on the web console. |
+| information_schema | SLOW_QUERY | Supported | For tracking slow queries, please use the [Slow Query](tidb-cloud/tune-performance.md#slow-query) feature available on the web console. |
 | information_schema | STATEMENTS_SUMMARY | Supported | For comprehensive monitoring of all statements, please use the [Statement Analysis](/tidb-cloud/tune-performance.md#statement-analysis) feature on the web console. |
 | information_schema | STATEMENTS_SUMMARY_EVICTED | Supported | For comprehensive monitoring of all statements, please use the [Statement Analysis](/tidb-cloud/tune-performance.md#statement-analysis) feature on the web console. |
 | information_schema | STATEMENTS_SUMMARY_HISTORY | Supported | For comprehensive monitoring of all statements, please use the [Statement Analysis](/tidb-cloud/tune-performance.md#statement-analysis) feature on the web console. |
