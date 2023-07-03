@@ -5,14 +5,14 @@ summary: Learn How to manage the TiDB Serverless branch.
 
 # Manage TiDB Serverless Branch
 
-This document describes how to manage the TiDB Serverless branch on the console. You can also manage it by [TiDB Cloud CLI](./cli-reference.md).
+This document describes how to manage the TiDB Serverless branch on the console. You can also manage it by [TiDB Cloud CLI](/tidb-cloud/cli-reference.md).
 
 ## List branches
 
 To list branches for your cluster, perform the following steps:
 
 1. Navigate to the [cluster](https://tidbcloud.com/console/clusters) page.
-2. Click your cluster name, and then click **Branch** in the left navigation pane.
+2. Click your cluster name, then click **Branch** in the left navigation pane.
 
 ## Create a branch
 
@@ -50,4 +50,4 @@ To get branch connection information, perform the following steps:
 
 ## What's next
 
-- [Integrate branches into your CI/CD pipeline](./branch-github-integration.md)
+- [Integrate branches into your CI/CD pipeline](/tidb-cloud/branch-github-integration.md)

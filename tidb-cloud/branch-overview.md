@@ -41,4 +41,4 @@ If you need more quotas, [contact TiDB Cloud support](/tidb-cloud/tidb-cloud-sup
 
 ## What's next
 
-- [Learn how to manage branches](./branch-manage.md)
+- [Learn how to manage branches](/tidb-cloud/branch-manage.md)
