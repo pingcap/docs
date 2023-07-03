@@ -28,6 +28,7 @@ TiDB 版本：x.y.z
 
     - note [#issue](链接) @[贡献者 GitHub ID](链接)
     - note [#issue](链接) @[贡献者 GitHub ID](链接)
+    - placeholder
 
 + PD
 
