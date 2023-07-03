@@ -31,9 +31,9 @@ Branches are easy and quick to create and provide isolated data environments. It
 
 ## Limitations and Quotas
 
-TiDB Serverless Branch is in Beta version. Currently it is free of charge. 
+TiDB Serverless Branch is in Beta version. Currently, it is free of charge. 
 
-For each organization in TiDB Cloud, you can create a maximum of five TiDB Serverless branches by default across all the clusters. You can not create branches under a throttled cluster.
+For each organization in TiDB Cloud, you can create a maximum of five TiDB Serverless branches by default across all the clusters. Branches will be created at the same region as cluster, and you can not create branches under a throttled cluster.
 
 For each branch, 5 GiB storage is allowed. Once the storage is reached, the read and write operations on this branch will be throttled until you reduce the storage.
 

@@ -22,11 +22,6 @@ To create a branch, perform the following steps:
 2. Click the **Create Branch** button.
 3. Enter the branch name and then click **Create**.
 
-> **Note:**
->
-> Branches can only be created in the same region as the cluster now. 
-> You can create up to 5 free branches in an organization. [Contact TiDB Cloud support](/tidb-cloud/tidb-cloud-support.md) if you need more branches.
-
 ## Delete a branch
 
 To delete a branch, perform the following steps:
