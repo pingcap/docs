@@ -188,16 +188,8 @@ storage = ""
 # Specifies whether to store the redo log in a file.
 # The default value is false.
 use-file-backend = false
-<<<<<<< HEAD
-=======
 
-[integrity]
-# Whether to enable the checksum validation for single-row data. The default value is "none", which means to disable the feature. Value options are "none" and "correctness".
-integrity-check-level = "none"
-# Specifies the log level of the Changefeed when the checksum validation for single-row data fails. The default value is "warn". Value options are "warn" and "error".
-corruption-handle-level = "warn"
-
-# The following configuration items only take effect when the downstream is Kafka.
+# The following configuration items only take effect when the downstream is Kafka. Supported starting from v6.5.3.
 [sink.kafka-config]
 # The mechanism of Kafka SASL authentication. The default value is empty, indicating that SASL authentication is not used.
 sasl-mechanism = "OAUTHBEARER"
@@ -213,5 +205,4 @@ sasl-oauth-scopes = ["producer.kafka", "consumer.kafka"]
 sasl-oauth-grant-type = "client_credentials"
 # The audience in the Kafka SASL OAUTHBEARER authentication. The default value is empty. This parameter is optional when the OAUTHBEARER authentication is used.
 sasl-oauth-audience = "kafka"
->>>>>>> 7c07485efc (ticdc:  add kafka oauth configurations (#13849))
 ```
