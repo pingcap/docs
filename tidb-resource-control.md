@@ -84,7 +84,7 @@ Request Unit (RU) is a unified abstraction unit in TiDB for system resources, wh
 >
 > - Each write operation is eventually replicated to all replicas (by default TiKV has 3 replicas). Each replication operation is considered a different write operation.
 > - In addition to queries executed by the user, RU can be consumed by background tasks, such as automated statistical information collection.
-> - The preceding table lists only the resources involved in computing RUs for on-premises TiDB clusters, excluding the network and storage components. For TiDB Serverless RUs, see [TiDB Serverless Pricing Details](https://www.pingcap.com/tidb-cloud- serverless-pricing-details/).
+> - The preceding table lists only the resources involved in computing RUs for on-premises TiDB clusters, excluding the network and storage components. For TiDB Serverless RUs, see [TiDB Serverless Pricing Details](https://www.pingcap.com/tidb-cloud-serverless-pricing-details/).
 
 ## Parameters for resource control
 
