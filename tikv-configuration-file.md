@@ -760,7 +760,7 @@ Configuration items related to Raftstore.
 ### `region-compact-check-step`
 
 + The number of Regions checked at one time for each round of manual compaction
-+ Default value: `100`. If storage.engine="partitioned-raft-kv", default value is `5`
++ Default value: `100`. For Partitioned Raft KV (storage.engine="partitioned-raft-kv"), the default value is `5`
 + Minimum value: `0`
 
 ### `region-compact-min-tombstones`
