@@ -300,7 +300,7 @@ TiDB has a transaction timeout mechanism. When a transaction runs for a period l
 
 ## Why can't I use the `cdc cli` command to operate a TiCDC cluster deployed by TiDB Operator?
 
-This is because the default port number of the TiCDC cluster deployed by TiDB Operator is 8301, while the default port number of the `cdc cli` command to connect to the TiCDC server is 8300. When using the cdc cli command to operate the TiCDC cluster deployed by TiDB Operator, you need to explicitly specify the `--server` parameter, as follows:
+This is because the default port number of the TiCDC cluster deployed by TiDB Operator is `8301`, while the default port number of the `cdc cli` command to connect to the TiCDC server is `8300`. When using the `cdc cli` command to operate the TiCDC cluster deployed by TiDB Operator, you need to explicitly specify the `--server` parameter, as follows:
 
 ```shell
 ./cdc cli changefeed list --server "127.0.0.1:8301"
