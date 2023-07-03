@@ -75,7 +75,7 @@ The following are descriptions of sink URI parameters and values that can be con
 | `sasl-gssapi-kerberos-config-path` | The gssapi kerberos configuration path (optional). |
 | `sasl-gssapi-service-name` | The gssapi service name (optional). |
 | `sasl-gssapi-user` | The user name of gssapi authentication (optional). |
-| `sasl-gssapi-password` | The password of gssapi authentication (optional). If it contains special characters, you they need to be URL encoded. |
+| `sasl-gssapi-password` | The password of gssapi authentication (optional). If it contains special characters, they need to be URL encoded. |
 | `sasl-gssapi-realm` | The gssapi realm name (optional). |
 | `sasl-gssapi-disable-pafxfast` | Whether to disable the gssapi PA-FX-FAST (optional). |
 | `dial-timeout` | The timeout in establishing a connection with the downstream Kafka. The default value is `10s`. |
