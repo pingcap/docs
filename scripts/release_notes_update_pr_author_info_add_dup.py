@@ -1,7 +1,7 @@
 # This script can automate the following things:
 # 1. Replace the bot author info in the release note table with the actual PR authors.
 # 2. Add the history duplicated release notes based on issue links and author info. The duplicate release notes in the same series will be not added. For example, if you are working on v6.5.4 release notes, the notes from other v6.5.x with the same issue number will not be counted and added as duplicated releases.
-# 3. Write the duplicated release notes to the release note template file.
+# 3. Make a copy of the patch release note template file and write the duplicated release notes to the copy.
 
 # Before running this script, you need to get a GitHub personal access token (https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token) and save it in a text file.
 
