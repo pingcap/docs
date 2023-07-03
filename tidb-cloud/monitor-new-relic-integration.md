@@ -24,12 +24,8 @@ You cannot use the New Relic integration in [TiDB Serverless clusters](/tidb-clo
 ### Step 1. Integrate with your New Relic API Key
 
 1. Log in to the [TiDB Cloud console](https://tidbcloud.com).
-2. In the left navigation pane of the [**Clusters**](https://tidbcloud.com/console/clusters) page, do one of the following:
-
-    - If you have multiple projects, switch to the target project, and then click **Admin** > **Integrations**.
-    - If you only have one project, click **Admin** > **Integrations**.
-
-3. Click **Integration to New Relic**.
+2. Click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner, switch to the target project if you have multiple projects, and then click **Project Admin**.
+3. On the **Admin** page of your project, click **Integrations**, and click **Integration to New Relic**.
 4. Enter your API key of New Relic and choose the site of New Relic.
 5. Click **Test Integration**.
 

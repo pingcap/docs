@@ -21,7 +21,7 @@ To view the events on the Events page, take the following steps:
 
     > **Tip:**
     >
-    > If you have multiple projects, you can switch to the target project from the ☰ hover menu in the upper-left corner.
+    > If you have multiple projects, you can view the project list and switch to another project by clicking <MDSvgIcon name="icon-left-projects" /> in the lower-left corner.
 
 2. Click the name of the target cluster. The cluster overview page is displayed.
 3. Click **Events** in the left navigation pane.

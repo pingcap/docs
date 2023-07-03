@@ -21,7 +21,7 @@ In TiDB Cloud, you can view both active and closed alerts on the Alerts page.
 
     > **Tip:**
     >
-    > If you have multiple projects, you can switch to the target project from the ☰ hover menu in the upper-left corner.
+    > If you have multiple projects, you can view the project list and switch to another project by clicking <MDSvgIcon name="icon-left-projects" /> in the lower-left corner.
 
 2. Click the name of the target cluster. The cluster overview page is displayed.
 3. Click **Alerts** in the left navigation pane.
@@ -54,12 +54,9 @@ To get alert notification emails of clusters in your project, take the following
 Alternatively, you can also add the subscription from the **Alert Subscription** page as follows:
 
 1. Log in to the [TiDB Cloud console](https://tidbcloud.com).
-2. In the left navigation pane of the [**Clusters**](https://tidbcloud.com/console/clusters) page, do one of the following:
-
-    - If you have multiple projects, switch to the target project, and then click **Admin** > **Alert Subscription**.
-    - If you only have one project, click **Admin** > **Alert Subscription**.
-
-3. Click **Add Subscriber**, enter your email address in the displayed dialog, and then click **Add**.
+2. Click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner, switch to the target project if you have multiple projects, and then click **Project Admin**.
+3. On the **Admin** page of your project, click **Alert Subscription**.
+4. Click **Add Subscriber**, enter your email address in the displayed dialog, and then click **Add**.
 
 If an alert condition remains unchanged, the alert sends email notifications every 3 hours.
 
@@ -68,14 +65,10 @@ If an alert condition remains unchanged, the alert sends email notifications eve
 If you no longer want to receive alert notification emails of clusters in your project, take the following steps:
 
 1. Log in to the [TiDB Cloud console](https://tidbcloud.com).
-2. In the left navigation pane of the [**Clusters**](https://tidbcloud.com/console/clusters) page, do one of the following:
-
-    - If you have multiple projects, switch to the target project, and then click **Admin** > **Alert Subscription**.
-    - If you only have one project, click **Admin** > **Alert Subscription**.
-
-3. Locate your email address and click **Unsubscribe**.
-
-4. Click **Delete** to confirm the unsubscription.
+2. Click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner, switch to the target project if you have multiple projects, and then click **Project Admin**.
+3. On the **Admin** page of your project, click **Alert Subscription**.
+4. Locate your email address and click **Unsubscribe**.
+5. Click **Delete** to confirm the unsubscription.
 
 ## TiDB Cloud built-in alert conditions
 

@@ -5,51 +5,43 @@ summary: Learn how to contact the support team of TiDB Cloud.
 
 # TiDB Cloud Support
 
-TiDB Cloud offers a free basic support plan for each user and you can upgrade to a paid plan for extended services.
+The **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com/) consolidates all the help and support information for TiDB Cloud, such as documentation, interactive tutorials, self-paced training, and support entries.
 
-The information of each support plan is available on the support page of the TiDB Cloud console. To access the page, see [Check or upgrade your support plan](#check-or-upgrade-your-support-plan).
+## Request for PoC, demo, or free trial credits
+
+To request for Perform a Proof of Concept (PoC), demo, or free trial credits, click **?** in the upper-right corner of the [TiDB Cloud console](https://tidbcloud.com/), and click **Request Support**.
 
 > **Tip:**
 >
-> If you want to apply for a PoC, see [Perform a Proof of Concept (PoC) with TiDB Cloud](/tidb-cloud/tidb-cloud-poc.md).
+> For more information about PoC, see [Perform a Proof of Concept (PoC) with TiDB Cloud](/tidb-cloud/tidb-cloud-poc.md).
 
-## Get help information
+## Get support
 
-Besides documentation, TiDB Cloud provides interactive tutorials and self-paced training to help you get stated quickly.
-
-To access the help information, click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com/).
-
-## Request support
-
-You can request support for your clusters, projects, and organizations. After receiving your request, the support team will contact you via email.
+You can get support for your clusters, projects, and organizations. After receiving your request, the support team will contact you via email.
 
 > **Tip:**
 >
 > If you want to apply for a beta feature that is available upon request, fill in your application information in the **Description** field of the request. For example, "apply for the xxx feature".
 
-### Request support for a cluster
+### Get support for a cluster
 
-You can request support for a cluster in either of the following ways:
+You can get support for a cluster in either of the following ways:
 
 - On the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project, click **...** in the row of your cluster and select **Get Support**.
 
 - On your cluster overview page, click **...** in the upper-right corner and select **Get Support**.
 
-### Request support for a project or organization
+### Get support for a project or organization
 
-You can request support for a project or organization in either of the following ways:
+To get support for a project or organization, click **?** in the upper-right corner of the [TiDB Cloud console](https://tidbcloud.com/), and then click **Chat with Us** or **Create New Case**.
 
-- In the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com/), click **?** and click **Chat with Us**.
-
-- In the upper-right corner of the [TiDB Cloud console](https://tidbcloud.com/), click <MDSvgIcon name="icon-top-support" /> **Support** > **Create New Case**.
-
-    You need to provide your organization ID in the request. To find the ID, click <MDSvgIcon name="icon-top-organization" /> **Organization** in the upper-right corner and click **Organization Settings**.
+If **Create New Case** is clicked, you also need to provide your organization ID in the request. To find the ID, click <MDSvgIcon name="icon-top-organization" /> in the lower-left corner and click **Organization Settings**.
 
 ## Check your submitted request
 
 After you have submitted a request, to check the status of your request, perform the following steps:
 
-1. On your TiDB Cloud console, click <MDSvgIcon name="icon-top-support" /> **Support** in the upper-right corner of the top navigation bar, and click **View Support Plan**. The support page is displayed.
+1. In the lower-right corner of your [TiDB Cloud console](https://tidbcloud.com/), click **?** and click **View Support Plan**. The support page is displayed.
 2. In the **Request Support** area, click **View Support Portal**. The **My request** page is displayed.
 
     On the **My request** page, you can view the status of your request.
@@ -58,9 +50,11 @@ Alternatively, you can also access the [Customer Support](https://support.pingca
 
 ## Check or upgrade your support plan
 
+TiDB Cloud offers a free basic support plan for each user and you can upgrade to a paid plan for extended services.
+
 To check or upgrade your support plan, perform the following steps:
 
-1. On your TiDB Cloud console, click <MDSvgIcon name="icon-top-support" /> **Support** in the upper-right corner of the top navigation bar, and click **View Support Plan**.
+1. In the lower-right corner of your [TiDB Cloud console](https://tidbcloud.com/), click **?** and click **View Support Plan**.
 
     The support page is displayed. On this page, you can see your **Current Plan**. By default, the **Basic** free plan is selected.
 
@@ -96,5 +90,5 @@ To check or upgrade your support plan, perform the following steps:
 
 To downgrade your support plan to **Basic**, perform the following steps:
 
-1. On your TiDB Cloud console, click <MDSvgIcon name="icon-top-support" /> **Support** in the upper-right corner of the top navigation bar, and click **View Support Plan**.
+1. In the lower-right corner of your [TiDB Cloud console](https://tidbcloud.com/), click **?** and click **View Support Plan**.
 2. At the bottom of the **Support** page, click **Downgrade to basic plan**.

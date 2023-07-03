@@ -216,7 +216,7 @@ To check the credits left for your PoC, go to the [**Clusters**](https://tidbclo
 
 ![TiDB Cloud PoC Credits](/media/tidb-cloud/poc-points.png)
 
-Alternatively, you can also click <MDSvgIcon name="icon-top-account-settings" /> **Account** in the upper-right corner of the TiDB Cloud console, click **Billing**, and click **Credits** to see the credit details page.
+Alternatively, you can also click <MDSvgIcon name="icon-top-organization" /> in the lower-left corner of the TiDB Cloud console, click **Billing**, and click **Credits** to see the credit details page.
 
 To save credits, remove the cluster that you are not using. Currently, you cannot stop a cluster. You need to ensure that your backups are up to date before removing a cluster, so you can restore the cluster later when you want to resume your PoC.
 

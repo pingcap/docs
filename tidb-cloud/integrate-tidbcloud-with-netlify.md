@@ -99,7 +99,7 @@ For a TiDB Dedicated cluster, you can get the connection string only from the Ti
 </div>
 <div label="TiDB Cloud console">
 
-1. In the [TiDB Cloud console](https://tidbcloud.com/), click the ☰ hover menu in the upper-left corner, click the name of your target cluster to go to its overview page, and then click **Connect** in the upper-right corner. In the displayed dialog, you can get the following connection parameters from the connection string.
+1. In the [TiDB Cloud console](https://tidbcloud.com/), go to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project, click the name of your target cluster to go to its overview page, and then click **Connect** in the upper-right corner. In the displayed dialog, you can get the following connection parameters from the connection string.
 
     - `${host}`
     - `${port}`
