@@ -1,6 +1,7 @@
 ---
 title: TiDB Serverless FAQs
 summary: Learn about the most frequently asked questions (FAQs) relating to TiDB Serverless.
+aliases: ['/tidbcloud/serverless-tier-faqs']
 ---
 
 # TiDB Serverless FAQs
@@ -33,7 +34,7 @@ TiDB Serverless is in beta while we continuously add new features and improve ex
 
 For each organization in TiDB Cloud, you can create a maximum of five TiDB Serverless clusters by default. To create more TiDB Serverless clusters, you need to add a credit card and set a [spend limit](/tidb-cloud/tidb-cloud-glossary.md#spend-limit) for the usage.
 
-Some of TiDB Cloud features are partially supported or not supported on TiDB Serverless. See [TiDB Serverless Limitations and Quotas](/tidb-cloud/serverless-tier-limitations.md) for details.
+Some of TiDB Cloud features are partially supported or not supported on TiDB Serverless. See [TiDB Serverless Limitations and Quotas](/tidb-cloud/serverless-limitations.md) for details.
 
 ### What can TiDB Serverless be used for?
 
@@ -51,7 +52,7 @@ The serverless technology is designed for multi-tenancy and the resources used b
 
 ### How does TiDB Serverless ensure security?
 
-- Your connections are encrypted by Transport Layer Security (TLS). For more information about using TLS to connect to TiDB Serverless, see [TLS Connection to TiDB Serverless](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md).
+- Your connections are encrypted by Transport Layer Security (TLS). For more information about using TLS to connect to TiDB Serverless, see [TLS Connection to TiDB Serverless](/tidb-cloud/secure-connections-to-serverless-clusters.md).
 - All persisted data on TiDB Serverless is encrypted-at-rest using the tool of the cloud provider that your cluster is running in.
 
 ## Maintenance FAQ

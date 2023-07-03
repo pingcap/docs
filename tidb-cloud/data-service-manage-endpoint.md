@@ -28,7 +28,7 @@ To create an endpoint, perform the following steps:
 
 3. The newly created endpoint is added to the top of the endpoint list.
 
-You can also create an endpoint from a SQL file in Chat2Query (beta). For more details, see [Generate an endpoint from a SQL file](/tidb-cloud/explore-data-with-chat2query.md#generate-an-endpoint-from-a-sql-file)
+You can also create an endpoint from a SQL file in Chat2Query (beta). For more details, see [Generate an endpoint from a SQL file](/tidb-cloud/explore-data-with-chat2query.md#generate-an-endpoint-from-a-sql-file).
 
 ## Develop an endpoint
 

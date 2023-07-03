@@ -9,7 +9,7 @@ For TiDB Dedicated clusters, you can configure the root password and allowed IP 
 
 > **Note:**
 >
-> For TiDB Serverless clusters, this document is inapplicable and you can refer to [TLS Connection to TiDB Serverless](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md) instead.
+> For TiDB Serverless clusters, this document is inapplicable and you can refer to [TLS Connection to TiDB Serverless](/tidb-cloud/secure-connections-to-serverless-clusters.md) instead.
 
 1. In the TiDB Cloud console, navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
 
