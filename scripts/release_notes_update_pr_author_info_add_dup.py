@@ -16,7 +16,7 @@ import shutil
 version = '6.5.3' # specifies the target TiDB version
 release_note_excel = r'/Users/userid/Downloads/download_tirelease_tmp_patch_6.5.3_release_note_2023-06-06.xlsx' # specifies the path of release note table with PR links and issue links
 ext_path = r'/Users/userid/Documents/GitHub/mygithubid/docs-cn/releases'  # specifies the path of the existing release notes
-template_file = r'/Users/userid/Documents/GitHub/mygithubid/docs/resources/doc-templates/release_note_template_zh.md' # specifies the path of the release note template file
+template_file = r'/Users/userid/Documents/GitHub/mygithubid/docs/resources/doc-templates/patch_release_note_template_zh.md' # specifies the path of the release note template file
 
 with open("/Users/userid/Documents/PingCAP/Python_scripts/GitHub/gh_token2.txt", "r") as f: # Read the GitHub personal access token from the token.txt file
     access_token = f.read().strip()
@@ -173,7 +173,7 @@ def create_release_file(version, dup_notes_levels, dup_notes):
 
     release_file = os.path.join(ext_path, f'release-{version}.md')
     shutil.copyfile(template_file, release_file)
-    # 替换文件内容
+    # Replace the file content
     with open(release_file, 'r+') as file:
         content = file.read()
         content = content.replace('x.y.z', version)
@@ -186,10 +186,10 @@ def create_release_file(version, dup_notes_levels, dup_notes):
         note_level = ""
         note_levels = []
         for line in lines:
-            if "placedholder" in line:
+            if "placeholder" in line:
                 note_level = level1 + level2 + level3
                 note_levels.append(note_level)
-                newline = line.replace("- placedholder", "")
+                newline = line.replace("- placeholder", "")
                 for dup_note_level, dup_note in zip(dup_notes_levels, dup_notes): #add the dup release notes to the release note file
                     if dup_note_level == note_level:
                         newelines.append(newline+dup_note)
@@ -218,7 +218,7 @@ def create_release_file(version, dup_notes_levels, dup_notes):
         file.seek(0)
         file.write(content)
         file.truncate()
-        print(f'The v{version} release note is now created in the following direcotry: \n {release_file}')
+        print(f'The v{version} release note is now created in the following directory: \n {release_file}')
 
 if __name__ == '__main__':
     note_pairs = store_exst_rn(ext_path, version)

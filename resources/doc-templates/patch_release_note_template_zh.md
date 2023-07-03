@@ -14,7 +14,7 @@ TiDB 版本：x.y.z
 ## 兼容性变更
 
 - note [#issue](链接) @[贡献者 GitHub ID](链接)
-- placedholder
+- placeholder
 
 ## 改进提升
 
@@ -22,7 +22,7 @@ TiDB 版本：x.y.z
 
     - note [#issue](链接) @[贡献者 GitHub ID](链接)
     - note [#issue](链接) @[贡献者 GitHub ID](链接)
-    - placedholder
+    - placeholder
 
 + TiKV
 
@@ -33,13 +33,13 @@ TiDB 版本：x.y.z
 
     - note [#issue](链接) @[贡献者 GitHub ID](链接)
     - note [#issue](链接) @[贡献者 GitHub ID](链接)
-    - placedholder
+    - placeholder
 
 + TiFlash
 
     - note [#issue](链接) @[贡献者 GitHub ID](链接)
     - note [#issue](链接) @[贡献者 GitHub ID](链接)
-    - placedholder
+    - placeholder
 
 + Tools
 
@@ -47,37 +47,37 @@ TiDB 版本：x.y.z
 
         - note [#issue](链接) @[贡献者 GitHub ID](链接)
         - note [#issue](链接) @[贡献者 GitHub ID](链接)
-        - placedholder
+        - placeholder
 
     + TiCDC
 
         - note [#issue](链接) @[贡献者 GitHub ID](链接)
         - note [#issue](链接) @[贡献者 GitHub ID](链接)
-        - placedholder
+        - placeholder
 
     + TiDB Data Migration (DM)
 
         - note [#issue](链接) @[贡献者 GitHub ID](链接)
         - note [#issue](链接) @[贡献者 GitHub ID](链接)
-        - placedholder
+        - placeholder
 
     + TiDB Lightning
 
         - note [#issue](链接) @[贡献者 GitHub ID](链接)
         - note [#issue](链接) @[贡献者 GitHub ID](链接)
-        - placedholder
+        - placeholder
 
     + TiUP
 
         - note [#issue](链接) @[贡献者 GitHub ID](链接)
         - note [#issue](链接) @[贡献者 GitHub ID](链接)
-        - placedholder
+        - placeholder
 
     + TiDB Binlog
 
         - note [#issue](链接) @[贡献者 GitHub ID](链接)
         - note [#issue](链接) @[贡献者 GitHub ID](链接)
-        - placedholder
+        - placeholder
 
 ## 错误修复
 
@@ -85,25 +85,25 @@ TiDB 版本：x.y.z
 
     - note [#issue](链接) @[贡献者 GitHub ID](链接)
     - note [#issue](链接) @[贡献者 GitHub ID](链接)
-    - placedholder
+    - placeholder
 
 + TiKV
 
     - note [#issue](链接) @[贡献者 GitHub ID](链接)
     - note [#issue](链接) @[贡献者 GitHub ID](链接)
-    - placedholder
+    - placeholder
 
 + PD
 
     - note [#issue](链接) @[贡献者 GitHub ID](链接)
     - note [#issue](链接) @[贡献者 GitHub ID](链接)
-    - placedholder
+    - placeholder
 
 + TiFlash
 
     - note [#issue](链接) @[贡献者 GitHub ID](链接)
     - note [#issue](链接) @[贡献者 GitHub ID](链接)
-    - placedholder
+    - placeholder
 
 + Tools
 
@@ -111,38 +111,38 @@ TiDB 版本：x.y.z
 
         - note [#issue](链接) @[贡献者 GitHub ID](链接)
         - note [#issue](链接) @[贡献者 GitHub ID](链接)
-        - placedholder
+        - placeholder
 
     + TiCDC
 
         - note [#issue](链接) @[贡献者 GitHub ID](链接)
         - note [#issue](链接) @[贡献者 GitHub ID](链接)
-        - placedholder
+        - placeholder
 
     + TiDB Data Migration (DM)
 
         - note [#issue](链接) @[贡献者 GitHub ID](链接)
         - note [#issue](链接) @[贡献者 GitHub ID](链接)
-        - placedholder
+        - placeholder
 
     + TiDB Lightning
 
         - note [#issue](链接) @[贡献者 GitHub ID](链接)
         - note [#issue](链接) @[贡献者 GitHub ID](链接)
-        - placedholder
+        - placeholder
 
     + TiUP
 
         - note [#issue](链接) @[贡献者 GitHub ID](链接)
         - note [#issue](链接) @[贡献者 GitHub ID](链接)
-        - placedholder
+        - placeholder
 
     + TiDB Binlog
 
         - note [#issue](链接) @[贡献者 GitHub ID](链接)
         - note [#issue](链接) @[贡献者 GitHub ID](链接)
-        - placedholder
+        - placeholder
 
 ## Other dup notes
 
-- placedholder
+- placeholder
