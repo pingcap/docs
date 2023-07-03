@@ -38,24 +38,24 @@ TiDB Cloud works with almost all workloads that TiDB supports, but there are fea
 
 | Statement | TiDB Dedicated | TiDB Serverless |
 |:-|:-|:-|
-| BACKUP | Supported | To perform Backup Restore and Point-in-Time Recovery (PiTR) operations on TiDB Serverless, please use the web console instead. |
-| SHOW BACKUPS | Supported | To perform Backup Restore and Point-in-Time Recovery (PiTR) operations on TiDB Serverless, please use the web console instead. |
-| RESTORE | Supported | To perform Backup Restore and Point-in-Time Recovery (PiTR) operations on TiDB Serverless, please use the web console instead. |
-| SHOW RESTORES | Supported | To perform Backup Restore and Point-in-Time Recovery (PiTR) operations on TiDB Serverless, please use the web console instead. |
+| BACKUP | Supported | To perform [Backup Restore](tidb-cloud/backup-and-restore-serverless) operations on TiDB Serverless, please use the web console instead. |
+| SHOW BACKUPS | Supported | To perform [Backup Restore](tidb-cloud/backup-and-restore-serverless) operations on TiDB Serverless, please use the web console instead. |
+| RESTORE | Supported | To perform [Backup Restore](tidb-cloud/backup-and-restore-serverless) operations on TiDB Serverless, please use the web console instead. |
+| SHOW RESTORES | Supported | To perform [Backup Restore](tidb-cloud/backup-and-restore-serverless) operations on TiDB Serverless, please use the web console instead. |
 | ADMIN RESET TELEMETRY_ID | Supported | Telemetry is not supported on TiDB Serverless. |
-| ADMIN SHOW TELEMETRY | This feature is unavailable in Security Enhanced Mode. | This feature is unavailable in Security Enhanced Mode. |
+| ADMIN SHOW TELEMETRY | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). |
 | ALTER INSTANCE RELOAD TLS | Supported | TiDB Serverless automatically refreshes the TLS certificate. |
 | LOAD DATA INFILE | Only supports LOAD DATA LOCAL INFILE | Only supports LOAD DATA LOCAL INFILE |
 | CHANGE DRAINER | Drainer is not supported on TiDB Cloud | Drainer is not supported on TiDB Cloud. |
 | CHANGE PUMP | Pump is not supported on TiDB Cloud | Pump is not supported on TiDB Cloud. |
 | FLASHBACK CLUSTER TO TIMESTAMP | Supported | Not supported |
 | LOAD STATS | Supported | Not supported |
-| SET CONFIG | This feature is unavailable in Security Enhanced Mode. | This feature is unavailable in Security Enhanced Mode. |
-| SHOW CONFIG | This feature is unavailable in Security Enhanced Mode. | This feature is unavailable in Security Enhanced Mode. |
+| SET CONFIG | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). |
+| SHOW CONFIG | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). |
 | SHOW DRAINER STATUS | Drainer is not supported on TiDB Cloud | Drainer is not supported on TiDB Cloud. |
 | SHOW PLUGINS | Supported | Plugin is not supported on TiDB Serverless. |
 | SHOW PUMP STATUS | Pump is not supported on TiDB Cloud | Pump is not supported on TiDB Cloud. |
-| SHUTDOWN | This feature is unavailable in Security Enhanced Mode. | This feature is unavailable in Security Enhanced Mode. |
+| SHUTDOWN | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). |
 
 ## Functions and Operators
 
@@ -68,29 +68,29 @@ TiDB Cloud works with almost all workloads that TiDB supports, but there are fea
 | Database | Table | TiDB Dedicated | TiDB Serverless |
 |:-|:-|:-|:-|
 | information_schema | ATTRIBUTES | Supported | TiDB Serverless does not support configuring data placement. |
-| information_schema | CLUSTER_CONFIG | This feature is unavailable in Security Enhanced Mode. | This feature is unavailable in Security Enhanced Mode. |
-| information_schema | CLUSTER_HARDWARE | This feature is unavailable in Security Enhanced Mode. | This feature is unavailable in Security Enhanced Mode. |
+| information_schema | CLUSTER_CONFIG | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). |
+| information_schema | CLUSTER_HARDWARE | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). |
 | information_schema | CLUSTER_INFO | Supported | TiDB Serverless does not support configuring data placement. |
-| information_schema | CLUSTER_LOAD | This feature is unavailable in Security Enhanced Mode. | This feature is unavailable in Security Enhanced Mode. |
-| information_schema | CLUSTER_LOG | This feature is unavailable in Security Enhanced Mode. | This feature is unavailable in Security Enhanced Mode. |
-| information_schema | CLUSTER_SLOW_QUERY | Supported | For tracking slow queries, please use the Slow Query feature available on the web console. |
-| information_schema | CLUSTER_STATEMENTS_SUMMARY | Supported | For comprehensive monitoring of all statements, please use the Statement Analysis feature on the web console. |
-| information_schema | CLUSTER_STATEMENTS_SUMMARY_EVICTED | Supported | For comprehensive monitoring of all statements, please use the Statement Analysis feature on the web console. |
-| information_schema | CLUSTER_STATEMENTS_SUMMARY_HISTORY | Supported | For comprehensive monitoring of all statements, please use the Statement Analysis feature on the web console. |
-| information_schema | CLUSTER_SYSTEMINFO | This feature is unavailable in Security Enhanced Mode. | This feature is unavailable in Security Enhanced Mode. |
-| information_schema | INSPECTION_RESULT | This feature is unavailable in Security Enhanced Mode. | This feature is unavailable in Security Enhanced Mode. |
-| information_schema | INSPECTION_RULES | This feature is unavailable in Security Enhanced Mode. | This feature is unavailable in Security Enhanced Mode. |
-| information_schema | INSPECTION_SUMMARY | This feature is unavailable in Security Enhanced Mode. | This feature is unavailable in Security Enhanced Mode. |
-| information_schema | METRICS_SUMMARY | This feature is unavailable in Security Enhanced Mode. | This feature is unavailable in Security Enhanced Mode. |
-| information_schema | METRICS_SUMMARY_BY_LABEL | This feature is unavailable in Security Enhanced Mode. | This feature is unavailable in Security Enhanced Mode. |
-| information_schema | METRICS_TABLES | This feature is unavailable in Security Enhanced Mode. | This feature is unavailable in Security Enhanced Mode. |
+| information_schema | CLUSTER_LOAD | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). |
+| information_schema | CLUSTER_LOG | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). |
+| information_schema | CLUSTER_SLOW_QUERY | Supported | For tracking slow queries, please use the [Slow Query](tidb-cloud/tune-performance#slow-query) feature available on the web console. |
+| information_schema | CLUSTER_STATEMENTS_SUMMARY | Supported | For comprehensive monitoring of all statements, please use the [Statement Analysis](/tidb-cloud/tune-performance.md#statement-analysis) feature on the web console. |
+| information_schema | CLUSTER_STATEMENTS_SUMMARY_EVICTED | Supported | For comprehensive monitoring of all statements, please use the [Statement Analysis](/tidb-cloud/tune-performance.md#statement-analysis) feature on the web console. |
+| information_schema | CLUSTER_STATEMENTS_SUMMARY_HISTORY | Supported | For comprehensive monitoring of all statements, please use the [Statement Analysis](/tidb-cloud/tune-performance.md#statement-analysis) feature on the web console. |
+| information_schema | CLUSTER_SYSTEMINFO | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). |
+| information_schema | INSPECTION_RESULT | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). |
+| information_schema | INSPECTION_RULES | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). |
+| information_schema | INSPECTION_SUMMARY | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). |
+| information_schema | METRICS_SUMMARY | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). |
+| information_schema | METRICS_SUMMARY_BY_LABEL | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). |
+| information_schema | METRICS_TABLES | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). |
 | information_schema | PLACEMENT_POLICIES | Supported | TiDB Serverless does not support configuring data placement. |
 | information_schema | RESOURCE_GROUPS | Supported | TiDB Serverless does not support configuring resource groups. |
-| information_schema | SLOW_QUERY | Supported | For tracking slow queries, please use the Slow Query feature available on the web console. |
-| information_schema | STATEMENTS_SUMMARY | Supported | For comprehensive monitoring of all statements, please use the Statement Analysis feature on the web console. |
-| information_schema | STATEMENTS_SUMMARY_EVICTED | Supported | For comprehensive monitoring of all statements, please use the Statement Analysis feature on the web console. |
-| information_schema | STATEMENTS_SUMMARY_HISTORY | Supported | For comprehensive monitoring of all statements, please use the Statement Analysis feature on the web console. |
-| information_schema | TIDB_HOT_REGIONS | This feature is unavailable in Security Enhanced Mode. | This feature is unavailable in Security Enhanced Mode. |
+| information_schema | SLOW_QUERY | Supported | For tracking slow queries, please use the [Slow Query](tidb-cloud/tune-performance#slow-query) feature available on the web console. |
+| information_schema | STATEMENTS_SUMMARY | Supported | For comprehensive monitoring of all statements, please use the [Statement Analysis](/tidb-cloud/tune-performance.md#statement-analysis) feature on the web console. |
+| information_schema | STATEMENTS_SUMMARY_EVICTED | Supported | For comprehensive monitoring of all statements, please use the [Statement Analysis](/tidb-cloud/tune-performance.md#statement-analysis) feature on the web console. |
+| information_schema | STATEMENTS_SUMMARY_HISTORY | Supported | For comprehensive monitoring of all statements, please use the [Statement Analysis](/tidb-cloud/tune-performance.md#statement-analysis) feature on the web console. |
+| information_schema | TIDB_HOT_REGIONS | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). |
 | information_schema | TIDB_HOT_REGIONS_HISTORY | Supported(Suspecious) | TiDB Serverless does not support configuring data placement. |
 | information_schema | TIDB_SERVERS_INFO | Supported | TiDB Serverless does not support configuring data placement. |
 | information_schema | TIFLASH_SEGMENTS | Supported | TiDB Serverless does not support configuring data placement. |
@@ -98,24 +98,24 @@ TiDB Cloud works with almost all workloads that TiDB supports, but there are fea
 | information_schema | TIKV_REGION_PEERS | Supported | TiDB Serverless does not support configuring data placement. |
 | information_schema | TIKV_REGION_STATUS | Supported | TiDB Serverless does not support configuring data placement. |
 | information_schema | TIKV_STORE_STATUS | Supported | TiDB Serverless does not support configuring data placement. |
-| performance_schema | pd_profile_allocs | This feature is unavailable in Security Enhanced Mode. | This feature is unavailable in Security Enhanced Mode. |
-| performance_schema | pd_profile_block | This feature is unavailable in Security Enhanced Mode. | This feature is unavailable in Security Enhanced Mode. |
-| performance_schema | pd_profile_cpu | This feature is unavailable in Security Enhanced Mode. | This feature is unavailable in Security Enhanced Mode. |
-| performance_schema | pd_profile_goroutines | This feature is unavailable in Security Enhanced Mode. | This feature is unavailable in Security Enhanced Mode. |
-| performance_schema | pd_profile_memory | This feature is unavailable in Security Enhanced Mode. | This feature is unavailable in Security Enhanced Mode. |
-| performance_schema | pd_profile_mutex | This feature is unavailable in Security Enhanced Mode. | This feature is unavailable in Security Enhanced Mode. |
-| performance_schema | tidb_profile_allocs | This feature is unavailable in Security Enhanced Mode. | This feature is unavailable in Security Enhanced Mode. |
-| performance_schema | tidb_profile_block | This feature is unavailable in Security Enhanced Mode. | This feature is unavailable in Security Enhanced Mode. |
-| performance_schema | tidb_profile_cpu | This feature is unavailable in Security Enhanced Mode. | This feature is unavailable in Security Enhanced Mode. |
-| performance_schema | tidb_profile_goroutines | This feature is unavailable in Security Enhanced Mode. | This feature is unavailable in Security Enhanced Mode. |
-| performance_schema | tidb_profile_memory | This feature is unavailable in Security Enhanced Mode. | This feature is unavailable in Security Enhanced Mode. |
-| performance_schema | tidb_profile_mutex | This feature is unavailable in Security Enhanced Mode. | This feature is unavailable in Security Enhanced Mode. |
-| performance_schema | tikv_profile_cpu | This feature is unavailable in Security Enhanced Mode. | This feature is unavailable in Security Enhanced Mode. |
-| mysql | expr_pushdown_blacklist | This feature is unavailable in Security Enhanced Mode. | This feature is unavailable in Security Enhanced Mode. |
-| mysql | gc_delete_range | This feature is unavailable in Security Enhanced Mode. | This feature is unavailable in Security Enhanced Mode. |
-| mysql | gc_delete_range_done | This feature is unavailable in Security Enhanced Mode. | This feature is unavailable in Security Enhanced Mode. |
-| mysql | opt_rule_blacklist | This feature is unavailable in Security Enhanced Mode. | This feature is unavailable in Security Enhanced Mode. |
-| mysql | tidb | This feature is unavailable in Security Enhanced Mode. | This feature is unavailable in Security Enhanced Mode. |
+| performance_schema | pd_profile_allocs | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). |
+| performance_schema | pd_profile_block | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). |
+| performance_schema | pd_profile_cpu | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). |
+| performance_schema | pd_profile_goroutines | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). |
+| performance_schema | pd_profile_memory | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). |
+| performance_schema | pd_profile_mutex | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). |
+| performance_schema | tidb_profile_allocs | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). |
+| performance_schema | tidb_profile_block | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). |
+| performance_schema | tidb_profile_cpu | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). |
+| performance_schema | tidb_profile_goroutines | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). |
+| performance_schema | tidb_profile_memory | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). |
+| performance_schema | tidb_profile_mutex | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). |
+| performance_schema | tikv_profile_cpu | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). |
+| mysql | expr_pushdown_blacklist | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). |
+| mysql | gc_delete_range | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). |
+| mysql | gc_delete_range_done | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). |
+| mysql | opt_rule_blacklist | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). |
+| mysql | tidb | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). |
 | mysql | tidb_ttl_job_history | Supported | Not supported |
 | mysql | tidb_ttl_table_status | Supported | Not supported |
 | mysql | tidb_ttl_task | Supported | Not supported |
@@ -132,8 +132,8 @@ TiDB Cloud works with almost all workloads that TiDB supports, but there are fea
 | skip_name_resolve | No limitation | Readonly on TiDB Serverless. |
 | sql_log_bin | No limitation | Readonly on TiDB Serverless. |
 | tidb_cdc_write_source | No limitation | Readonly on TiDB Serverless. |
-| tidb_check_mb4_value_in_utf8 | This feature is unavailable in Security Enhanced Mode. | This feature is unavailable in Security Enhanced Mode. |
-| tidb_config | This feature is unavailable in Security Enhanced Mode. | This feature is unavailable in Security Enhanced Mode. |
+| tidb_check_mb4_value_in_utf8 | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). |
+| tidb_config | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). |
 | tidb_ddl_disk_quota | No limitation | Readonly on TiDB Serverless. |
 | tidb_ddl_enable_fast_reorg | No limitation | Readonly on TiDB Serverless. |
 | tidb_ddl_error_count_limit | No limitation | Readonly on TiDB Serverless. |
@@ -144,49 +144,49 @@ TiDB Cloud works with almost all workloads that TiDB supports, but there are fea
 | tidb_enable_1pc | No limitation | Readonly on TiDB Serverless. |
 | tidb_enable_async_commit | No limitation | Readonly on TiDB Serverless. |
 | tidb_enable_auto_analyze | No limitation | Readonly on TiDB Serverless. |
-| tidb_enable_collect_execution_info | This feature is unavailable in Security Enhanced Mode. | This feature is unavailable in Security Enhanced Mode. |
+| tidb_enable_collect_execution_info | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). |
 | tidb_enable_ddl | No limitation | Readonly on TiDB Serverless. |
 | tidb_enable_gc_aware_memory_track | No limitation | Readonly on TiDB Serverless. |
 | tidb_enable_gogc_tuner | No limitation | Readonly on TiDB Serverless. |
 | tidb_enable_local_txn | No limitation | Readonly on TiDB Serverless. |
 | tidb_enable_resource_control | No limitation | Readonly on TiDB Serverless. |
-| tidb_enable_slow_log | This feature is unavailable in Security Enhanced Mode. | This feature is unavailable in Security Enhanced Mode. |
+| tidb_enable_slow_log | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). |
 | tidb_enable_stmt_summary | No limitation | Readonly on TiDB Serverless. |
-| tidb_enable_telemetry | This feature is unavailable in Security Enhanced Mode. | This feature is unavailable in Security Enhanced Mode. |
+| tidb_enable_telemetry | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). |
 | tidb_enable_top_sql | No limitation | Readonly on TiDB Serverless. |
 | tidb_enable_tso_follower_proxy | No limitation | Readonly on TiDB Serverless. |
-| tidb_expensive_query_time_threshold | This feature is unavailable in Security Enhanced Mode. | This feature is unavailable in Security Enhanced Mode. |
-| tidb_force_priority | This feature is unavailable in Security Enhanced Mode. | This feature is unavailable in Security Enhanced Mode. |
+| tidb_expensive_query_time_threshold | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). |
+| tidb_force_priority | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). |
 | tidb_gc_concurrency | No limitation | Readonly on TiDB Serverless. |
 | tidb_gc_enable | No limitation | Readonly on TiDB Serverless. |
 | tidb_gc_life_time | No limitation | Readonly on TiDB Serverless. |
 | tidb_gc_max_wait_time | No limitation | Readonly on TiDB Serverless. |
 | tidb_gc_run_interval | No limitation | Readonly on TiDB Serverless. |
 | tidb_gc_scan_lock_mode | No limitation | Readonly on TiDB Serverless. |
-| tidb_general_log | This feature is unavailable in Security Enhanced Mode. | This feature is unavailable in Security Enhanced Mode. |
+| tidb_general_log | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). |
 | tidb_generate_binary_plan | No limitation | Readonly on TiDB Serverless. |
 | tidb_gogc_tuner_threshold | No limitation | Readonly on TiDB Serverless. |
 | tidb_guarantee_linearizability | No limitation | Readonly on TiDB Serverless. |
 | tidb_isolation_read_engines | No limitation | Readonly on TiDB Serverless. |
 | tidb_log_file_max_days | No limitation | Readonly on TiDB Serverless. |
-| tidb_memory_usage_alarm_ratio | This feature is unavailable in Security Enhanced Mode. | This feature is unavailable in Security Enhanced Mode. |
-| tidb_metric_query_range_duration | This feature is unavailable in Security Enhanced Mode. | This feature is unavailable in Security Enhanced Mode. |
-| tidb_metric_query_step | This feature is unavailable in Security Enhanced Mode. | This feature is unavailable in Security Enhanced Mode. |
-| tidb_opt_write_row_id | This feature is unavailable in Security Enhanced Mode. | This feature is unavailable in Security Enhanced Mode. |
+| tidb_memory_usage_alarm_ratio | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). |
+| tidb_metric_query_range_duration | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). |
+| tidb_metric_query_step | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). |
+| tidb_opt_write_row_id | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). |
 | tidb_placement_mode | No limitation | Readonly on TiDB Serverless. |
-| tidb_pprof_sql_cpu | This feature is unavailable in Security Enhanced Mode. | This feature is unavailable in Security Enhanced Mode. |
-| tidb_record_plan_in_slow_log | This feature is unavailable in Security Enhanced Mode. | This feature is unavailable in Security Enhanced Mode. |
-| tidb_redact_log | This feature is unavailable in Security Enhanced Mode. | This feature is unavailable in Security Enhanced Mode. |
-| tidb_restricted_read_only | This feature is unavailable in Security Enhanced Mode. | This feature is unavailable in Security Enhanced Mode. |
-| tidb_row_format_version | This feature is unavailable in Security Enhanced Mode. | This feature is unavailable in Security Enhanced Mode. |
+| tidb_pprof_sql_cpu | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). |
+| tidb_record_plan_in_slow_log | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). |
+| tidb_redact_log | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). |
+| tidb_restricted_read_only | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). |
+| tidb_row_format_version | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). |
 | tidb_scatter_region | No limitation | Readonly on TiDB Serverless. |
 | tidb_server_memory_limit | No limitation | Readonly on TiDB Serverless. |
 | tidb_server_memory_limit_gc_trigger | No limitation | Readonly on TiDB Serverless. |
 | tidb_server_memory_limit_sess_min_size | No limitation | Readonly on TiDB Serverless. |
 | tidb_simplified_metrics | No limitation | Readonly on TiDB Serverless. |
-| tidb_slow_query_file | This feature is unavailable in Security Enhanced Mode. | This feature is unavailable in Security Enhanced Mode. |
-| tidb_slow_log_threshold | This feature is unavailable in Security Enhanced Mode. | This feature is unavailable in Security Enhanced Mode. |
-| tidb_slow_txn_log_threshold | This feature is unavailable in Security Enhanced Mode. | This feature is unavailable in Security Enhanced Mode. |
+| tidb_slow_query_file | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). |
+| tidb_slow_log_threshold | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). |
+| tidb_slow_txn_log_threshold | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). |
 | tidb_stats_load_sync_wait | No limitation | Readonly on TiDB Serverless. |
 | tidb_stmt_summary_enable_persistent | No limitation | Readonly on TiDB Serverless. |
 | tidb_stmt_summary_file_max_backups | No limitation | Readonly on TiDB Serverless. |
@@ -199,8 +199,8 @@ TiDB Cloud works with almost all workloads that TiDB supports, but there are fea
 | tidb_stmt_summary_max_stmt_count | No limitation | Readonly on TiDB Serverless. |
 | tidb_stmt_summary_refresh_interval | No limitation | Readonly on TiDB Serverless. |
 | tidb_sysproc_scan_concurrency | No limitation | Readonly on TiDB Serverless. |
-| tidb_top_sql_max_meta_count | This feature is unavailable in Security Enhanced Mode. | This feature is unavailable in Security Enhanced Mode. |
-| tidb_top_sql_max_time_series_count | This feature is unavailable in Security Enhanced Mode. | This feature is unavailable in Security Enhanced Mode. |
+| tidb_top_sql_max_meta_count | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). |
+| tidb_top_sql_max_time_series_count | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). |
 | tidb_tso_client_batch_max_wait_time | No limitation | Readonly on TiDB Serverless. |
 | tidb_ttl_delete_batch_size | No limitation | Readonly on TiDB Serverless. |
 | tidb_ttl_delete_rate_limit | No limitation | Readonly on TiDB Serverless. |
