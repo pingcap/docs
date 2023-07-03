@@ -26,7 +26,7 @@ We are constantly filling in the feature gaps between TiDB Serverless and TiDB D
 
 ### Transaction
 
-- The total size of a single transaction is set to no more than 10 MB on TiDB Serverless during the beta phase. <!--To be confirmed-->
+- The total size of a single transaction is set to no more than 10 MB on TiDB Serverless during the beta phase.
 
 ### Connection
 
