@@ -33,7 +33,7 @@ You can get support for a cluster in either of the following ways:
 
 ### Get support for a project or organization
 
-To get support for a project or organization, click **?** in the upper-right corner of the [TiDB Cloud console](https://tidbcloud.com/), and then click **Chat with Us** or **Create New Case**.
+To get support for a project or organization, click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com/), and then click **Chat with Us** or **Create New Case**.
 
 If **Create New Case** is clicked, you also need to provide your organization ID in the request. To find the ID, click <MDSvgIcon name="icon-top-organization" /> in the lower-left corner and click **Organization Settings**.
 
