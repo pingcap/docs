@@ -9,7 +9,7 @@ When the data volume to be migrated is small, you can easily [use DM to migrate 
 
 This document describes how to migrate large datasets from MySQL to TiDB. The whole migration has two processes:
 
-1. *Full migration*. Use Dumpling and TiDB Lightning to perform the full migration. TiDB Lightning's **local backend** mode can import data at a speed of up to 500 GiB/h.
+1. *Full migration*. Use Dumpling and TiDB Lightning to perform the full migration. TiDB Lightning's **local backend** mode can import data at a speed of up to 500 GiB/h. Note that this speed is affected by various factors such as hardware configuration, table schema, and the number of indexes.
 2. *Incremental replication*. After the full migration is completed, you can replicate the incremental data using DM.
 
 ## Prerequisites
