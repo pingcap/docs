@@ -139,7 +139,7 @@ You can call the endpoint by sending an HTTPS request. Before calling an endpoin
 ### 1. Create an API key
 
 1. In the left pane of the [**Data Service**](https://tidbcloud.com/console/data-service) page, click the name of your Data App to view its details.
-2. In the **API Key** area, click **Create API Key**.
+2. In the **Authentication** area, click **Create API Key**.
 3. In the **Create API Key** dialog box, enter a description and select a role for your API key.
 
     The role is used to control whether the API key can read or write data to the clusters linked to the Data App. You can select the `ReadOnly` or `ReadAndWrite` role:

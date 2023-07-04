@@ -1,6 +1,7 @@
 ---
 title: TiDB Serverless Limitations and Quotas
 summary: Learn about the limitations of TiDB Serverless.
+aliases: ['/tidbcloud/serverless-tier-limitations']
 ---
 
 # TiDB Serverless Limitations and Quotas
@@ -9,7 +10,7 @@ summary: Learn about the limitations of TiDB Serverless.
 
 This document describes the limitations of TiDB Serverless.
 
-We are constantly filling in the feature gaps between TiDB Serverless and TiDB Dedicated. If you require these features or capabilities in the gap, use [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) or [contact us](https://www.pingcap.com/contact-us/?from=en) for a feature request.
+We are constantly filling in the feature gaps between TiDB Serverless and TiDB Dedicated. If you require these features or capabilities in the gap, use [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) or [contact us](https://www.pingcap.com/contact-us/?from=en) for a feature request.
 
 ## Limitations
 
@@ -29,13 +30,13 @@ We are constantly filling in the feature gaps between TiDB Serverless and TiDB D
 
 ### Connection
 
-- Only [Standard Connection](/tidb-cloud/connect-via-standard-connection-serverless.md) and [Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections-serverless.md) can be used. You cannot use [VPC Peering](/tidb-cloud/set-up-vpc-peering-connections.md) to connect to TiDB Serverless clusters. 
+- Only [Standard Connection](/tidb-cloud/connect-via-standard-connection-serverless.md) and [Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections-serverless.md) can be used. You cannot use [VPC Peering](/tidb-cloud/set-up-vpc-peering-connections.md) to connect to TiDB Serverless clusters.
 - No "IP Access List" support.
 
 ### Monitoring
 
-- [Third-party Monitoring integrations](/tidb-cloud/third-party-monitoring-integrations.md) are currently not available for TiDB Serverless.
-- [Cluster Events](/tidb-cloud/tidb-cloud-events.md) are currently not available for TiDB Serverless.
+- [Third-party Monitoring integrations](/tidb-cloud/third-party-monitoring-integrations.md) are currently not available for TiDB Serverless.
+- [Cluster Events](/tidb-cloud/tidb-cloud-events.md) are currently not available for TiDB Serverless.
 - [Built-in Alerting](/tidb-cloud/monitor-built-in-alerting.md) is currently not available for TiDB Serverless.
 
 ### Diagnosis

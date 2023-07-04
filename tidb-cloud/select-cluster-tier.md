@@ -48,7 +48,7 @@ Whenever you use or set a database user name, you must include the prefix in the
 
     > **Note:**
     >
-    > TiDB Serverless requires TLS connection. To find the CA root path on your system, see [Root certificate default path](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md#root-certificate-default-path).
+    > TiDB Serverless requires TLS connection. To find the CA root path on your system, see [Root certificate default path](/tidb-cloud/secure-connections-to-serverless-clusters.md#root-certificate-default-path).
 
 - To create a database user:
 
@@ -65,7 +65,7 @@ To get the prefix for your cluster, take the following steps:
 ### TiDB Serverless special terms and conditions
 
 - TiDB Serverless is currently in beta and does not have uptime SLA guarantee during beta phase. If you use TiDB Serverless beta to store a commercial or production dataset, any potential risk associated with the use should be taken on your own, and PingCAP shall not be liable for any damage.
-- Some of TiDB Cloud features are partially supported or not supported on TiDB Serverless. See [TiDB Serverless Limitations](/tidb-cloud/serverless-tier-limitations.md) for details.
+- Some of TiDB Cloud features are partially supported or not supported on TiDB Serverless. See [TiDB Serverless Limitations](/tidb-cloud/serverless-limitations.md) for details.
 
 ## TiDB Dedicated
 

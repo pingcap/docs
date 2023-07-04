@@ -233,7 +233,7 @@ If you are not using a local cluster, or have not installed a MySQL client, conn
 
 ### Step 3.2 Modify parameters for TiDB Cloud
 
-If you are using a TiDB Serverless cluster, you need to provide your CA root path and replace `<ca_path>` in the following examples with your CA path. To get the CA root path on your system, refer to [Where is the CA root path on my system?](https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-tier-clusters#where-is-the-ca-root-path-on-my-system).>
+If you are using a TiDB Serverless cluster, you need to provide your CA root path and replace `<ca_path>` in the following examples with your CA path. To get the CA root path on your system, refer to [Root certificate management](https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-clusters#root-certificate-management).
 
 If you are using a TiDB Serverless cluster, change the `get_connection` function in `mysql_connector_python_example.py`:
 
