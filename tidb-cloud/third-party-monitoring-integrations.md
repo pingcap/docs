@@ -15,7 +15,7 @@ To edit third-party integration settings, you must have the `Owner` access to yo
 
 1. Log in to the [TiDB Cloud console](https://tidbcloud.com).
 2. Click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner, switch to the target project if you have multiple projects, and then click **Admin**.
-3. On the **Admin** page of your project, click **Integrations**.
+3. On the **Admin** page of your project, click **Integrations** in the left navigation pane.
 
 The available third-party integrations are displayed.
 
