@@ -315,7 +315,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 - Consolidate the help-related information and actions of TiDB Cloud into a single place.
 
-    Now, you can get all the [TiDB Cloud help information](/tidb-cloud/tidb-cloud-support.md#get-help-information) and contact support by clicking **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com/).
+    Now, you can get all the [TiDB Cloud help information](/tidb-cloud/tidb-cloud-support.md) and contact support by clicking **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com/).
 
 - Introduce the [Getting Started](https://tidbcloud.com/console/getting-started) page to help you learn about TiDB Cloud.
 

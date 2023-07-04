@@ -25,7 +25,7 @@ To enable the Chat2Query API, perform the following steps:
 
     > **Tip:**
     >
-    > If you have multiple projects, you can view the project list and switch to another project from the ☰ hover menu in the upper-left corner.
+    > If you have multiple projects, you can click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner and switch to another project.
 
 2. Click your cluster name, and then click **Chat2Query** in the left navigation pane.
 3. In the upper-right corner of Chat2Query, click **...** and select **Settings**.

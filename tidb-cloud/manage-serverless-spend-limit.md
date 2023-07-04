@@ -30,11 +30,11 @@ If you want to create a TiDB Serverless cluster with an additional quota, you ca
 
 For an existing TiDB Serverless cluster, you can increase the usage quota by updating the spend limit as follows:
 
-1. In the TiDB Cloud console, click the ☰ hover menu in the upper-left corner, and then click the name of your target cluster to go to its overview page.
+1. On the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project, click the name of your target cluster to go to its overview page.
 
     > **Tip:**
     >
-    > If you have multiple projects, you can view the project list and switch to another project in the ☰ hover menu.
+    > If you have multiple projects, you can click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner and switch to another project.
 
 2. In the **Usage This Month** area, click **Get more usage quota**.
 3. Edit the monthly spend limit as needed. If you have not added a payment method, you will need to add a credit card after editing the limit.

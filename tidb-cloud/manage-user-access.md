@@ -29,7 +29,7 @@ Under this structure:
 
 To check which organizations you belong to, take the following steps:
 
-1. Click <MDSvgIcon name="icon-top-organization" /> **Organization** in the upper-right corner of the TiDB Cloud console.
+1. Click <MDSvgIcon name="icon-top-organization" /> in the lower-left corner of the TiDB Cloud console.
 2. Click **Organization Settings**. You can view your organization on the page that is displayed.
 
 ### Switch between organizations
@@ -38,7 +38,7 @@ If you are a member of multiple organizations, you can switch your account betwe
 
 To switch between organizations, take the following steps:
 
-1. Click <MDSvgIcon name="icon-top-organization" /> **Organization** in the upper-right corner of the TiDB Cloud console.
+1. Click <MDSvgIcon name="icon-top-organization" /> in the lower-left corner of the TiDB Cloud console.
 2. Select **Switch Organization** in the drop-down menu, and click the organization you want to switch to.
 
 ### Set the time zone for your organization
@@ -47,7 +47,7 @@ If you are the organization owner, you can modify the system display time accord
 
 To change the local timezone setting, take the following steps:
 
-1. Click <MDSvgIcon name="icon-top-organization" /> **Organization** in the upper-right corner of the TiDB Cloud console.
+1. Click <MDSvgIcon name="icon-top-organization" /> in the lower-left corner of the TiDB Cloud console.
 
 2. Click **Organization Settings**. The organization settings page is displayed.
 
@@ -63,7 +63,7 @@ If you are the owner of an organization, you can invite organization members.
 
 To invite a member to an organization, take the following steps:
 
-1. Click <MDSvgIcon name="icon-top-organization" /> **Organization** in the upper-right corner of the TiDB Cloud console.
+1. Click <MDSvgIcon name="icon-top-organization" /> in the lower-left corner of the TiDB Cloud console.
 
 2. Click **Organization Settings**. The organization settings page is displayed.
 
@@ -97,7 +97,7 @@ To remove a member from an organization, take the following steps:
 >
 > If a member is removed from an organization, the member is removed from the belonged projects either.
 
-1. Click <MDSvgIcon name="icon-top-organization" /> **Organization** in the upper-right corner of the TiDB Cloud console.
+1. Click <MDSvgIcon name="icon-top-organization" /> in the lower-left corner of the TiDB Cloud console.
 
 2. Click **Organization Settings**. The organization settings page is displayed.
 
@@ -111,13 +111,13 @@ To remove a member from an organization, take the following steps:
 
 To check which project you belong to, take the following steps:
 
-1. Click <MDSvgIcon name="icon-top-organization" /> **Organization** in the upper-right corner of the TiDB Cloud console.
+1. Click <MDSvgIcon name="icon-top-organization" /> in the lower-left corner of the TiDB Cloud console.
 
 2. Click **Organization Settings**. The **Projects** tab is displayed by default.
 
 > **Tip:**
 >
-> If you have multiple projects, you can view the project list and switch to another project from the ☰ hover menu in the upper-left corner.
+> If you have multiple projects, you can click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner and switch to another project.
 
 ### Create a project
 
@@ -127,7 +127,7 @@ To check which project you belong to, take the following steps:
 
 To create a new project, take the following steps:
 
-1. Click <MDSvgIcon name="icon-top-organization" /> **Organization** in the upper-right corner of the TiDB Cloud console.
+1. Click <MDSvgIcon name="icon-top-organization" /> in the lower-left corner of the TiDB Cloud console.
 
 2. Click **Organization Settings**. The **Projects** tab is displayed by default.
 
@@ -141,7 +141,7 @@ To create a new project, take the following steps:
 
 To rename a project, take the following steps:
 
-1. Click <MDSvgIcon name="icon-top-organization" /> **Organization** in the upper-right corner of the TiDB Cloud console.
+1. Click <MDSvgIcon name="icon-top-organization" /> in the lower-left corner of the TiDB Cloud console.
 
 2. Click **Organization Settings**. The **Projects** tab is displayed by default.
 
@@ -157,7 +157,7 @@ If you are the owner of an organization, you can invite project members.
 
 To invite a member to a project, take the following steps:
 
-1. Click <MDSvgIcon name="icon-top-organization" /> **Organization** in the upper-right corner of the TiDB Cloud console.
+1. Click <MDSvgIcon name="icon-top-organization" /> in the lower-left corner of the TiDB Cloud console.
 
 2. Click **Organization Settings**. The organization settings page is displayed.
 
@@ -187,7 +187,7 @@ If you are the owner of an organization, you can remove project members.
 
 To remove a member from a project, take the following steps:
 
-1. Click <MDSvgIcon name="icon-top-organization" /> **Organization** in the upper-right corner of the TiDB Cloud console.
+1. Click <MDSvgIcon name="icon-top-organization" /> in the lower-left corner of the TiDB Cloud console.
 
 2. Click **Organization Settings**. The organization settings page is displayed.
 
@@ -199,7 +199,7 @@ To remove a member from a project, take the following steps:
 
 If you are the owner of an organization, you can take the following steps to configure roles for your organization members:
 
-1. Click <MDSvgIcon name="icon-top-organization" /> **Organization** in the upper-right corner of the TiDB Cloud console.
+1. Click <MDSvgIcon name="icon-top-organization" /> in the lower-left corner of the TiDB Cloud console.
 
 2. Click **Organization Settings**. The organization settings page is displayed.
 
@@ -233,7 +233,7 @@ There are four roles in an organization. The permissions of each role are as fol
 
 In TiDB Cloud, you can easily manage your profile, including your first name, last name, and phone number.
 
-1. Click <MDSvgIcon name="icon-top-account-settings" /> **Account** in the upper-right corner of the TiDB Cloud console.
+1. Click <MDSvgIcon name="icon-top-account-settings" /> in the lower-left corner of the TiDB Cloud console.
 
 2. Click **Account Settings**. The **Profile** tab is displayed by default.
 
