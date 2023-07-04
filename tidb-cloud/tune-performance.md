@@ -15,7 +15,7 @@ TiDB Cloud provides [Statement Analysis](#statement-analysis), [Slow Query](#slo
 
 > **Note:**
 >
-> Currently, these three features are unavailable for [Serverless Tier clusters](/tidb-cloud/select-cluster-tier.md#tidb-serverless).
+> Currently, these three features are unavailable for [Serverless Tier clusters](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta).
 
 ## Statement Analysis
 
