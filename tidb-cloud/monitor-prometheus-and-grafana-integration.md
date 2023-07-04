@@ -1,11 +1,11 @@
 ---
-title: Integrate TiDB Cloud with Prometheus and Grafana
+title: Integrate TiDB Cloud with Prometheus and Grafana (Beta)
 summary: Learn how to monitor your TiDB cluster with the Prometheus and Grafana integration.
 ---
 
-# Integrate TiDB Cloud with Prometheus and Grafana
+# Integrate TiDB Cloud with Prometheus and Grafana (Beta)
 
-TiDB Cloud provides a [Prometheus](https://prometheus.io/) API endpoint. If you have a Prometheus service, you can monitor key metrics of TiDB Cloud from the endpoint easily.
+TiDB Cloud provides a [Prometheus](https://prometheus.io/) API endpoint (beta). If you have a Prometheus service, you can monitor key metrics of TiDB Cloud from the endpoint easily.
 
 This document describes how to configure your Prometheus service to read key metrics from the TiDB Cloud endpoint and how to view the metrics using [Grafana](https://grafana.com/).
 
@@ -35,7 +35,7 @@ To get the scrape_config file for Prometheus, do the following:
     - If you have multiple projects, switch to the target project, and then click **Admin** > **Integrations**.
     - If you only have one project, click **Admin** > **Integrations**.
 
-3. Click **Integration to Prometheus**.
+3. Click **Integration to Prometheus (BETA)**.
 4. Click **Add File** to generate and show the scrape_config file for the current project.
 
 5. Make a copy of the scrape_config file content for later use.
