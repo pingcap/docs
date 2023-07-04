@@ -48,7 +48,7 @@ TiDB Cloud works with almost all workloads that TiDB supports, but there are fea
 | LOAD DATA INFILE | Only supports LOAD DATA LOCAL INFILE | Only supports LOAD DATA LOCAL INFILE |
 | CHANGE DRAINER | Not supported [^7] | Not supported [^7] |
 | CHANGE PUMP | Not supported [^7] | Not supported [^7] |
-| FLASHBACK CLUSTER TO TIMESTAMP | Supported | Not supported |
+| FLASHBACK CLUSTER TO TIMESTAMP | Supported | Not supported [^3] |
 | LOAD STATS | Supported | Not supported |
 | SET CONFIG | Not supported [^4] | Not supported [^4] |
 | SHOW CONFIG | Not supported [^4] | Not supported [^4] |
@@ -223,17 +223,17 @@ TiDB Cloud works with almost all workloads that TiDB supports, but there are fea
 | validate_password.special_char_count | No limitation | Can not be smaller than 1 [^10] |
 | wait_timeout | No limitation | Readonly [^11] |
 
-[^1]: TiDB Serverless does not support configuring data placement.
+[^1]: Configuring data placement is not supported on TiDB Serverless.
 
-[^2]: TiDB Serverless does not support configuring resource groups.
+[^2]: Configuring resource groups is not supported on TiDB Serverless.
 
-[^3]: To perform [Backup Restore](/tidb-cloud/backup-and-restore-serverless.md) operations on TiDB Serverless, please use the web console instead. 
+[^3]: To perform [Back up and Restore](/tidb-cloud/backup-and-restore-serverless.md) operations on TiDB Serverless, please use the web console instead. 
 
-[^4]: This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security).
+[^4]: The feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security).
 
-[^5]: For tracking slow queries, please use the [Slow Query](/tidb-cloud/tune-performance.md#slow-query) feature available on the web console.
+[^5]: To track [Slow Query](/tidb-cloud/tune-performance.md#slow-query) on TiDB Serverless, please use the web console instead.
 
-[^6]: For comprehensive monitoring of all statements, please use the [Statement Analysis](/tidb-cloud/tune-performance.md#statement-analysis) feature on the web console.
+[^6]: To perform [Statement Analysis](/tidb-cloud/tune-performance.md#statement-analysis) on TiDB Serverless, please use the web console instead.
 
 [^7]: Drainer and Pump are not supported on TiDB Cloud.
 
@@ -241,6 +241,6 @@ TiDB Cloud works with almost all workloads that TiDB supports, but there are fea
 
 [^9]: [Time to live (TTL)](/time-to-live.md) is currently unavailable on TiDB Serverless.
 
-[^10]: TiDB Serverless enforces strong password policy
+[^10]: TiDB Serverless enforces strong password policy.
 
-[^11]: Readonly on TiDB Serverless.
+[^11]: The variable is readonly on TiDB Serverless.
