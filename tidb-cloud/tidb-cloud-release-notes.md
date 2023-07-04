@@ -28,7 +28,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
     - Consolidate **Admin** <placeholder for the Admin icon> in the left navigation bar into **Projects** <placeholder for the icon> in the left navigation bar, and remove the ☰ hover menu in the upper-left corner. Now you can click <placeholder for the Projects icon> to switch between projects and modify project settings.
     - Consolidate all the help and support information for TiDB Cloud into the menu of the **?** icon in the lower-right corner, such as documentation, interactive tutorials, self-paced training, and support entries.
 
-- TiDB Cloud console now supports Dark Mode, which provides a more comfortable, eye-friendly experience. You can switch between light mode and dark mode from the bottom of the left navbar.
+- TiDB Cloud console now supports Dark Mode, which provides a more comfortable, eye-friendly experience. You can switch between light mode and dark mode from the bottom of the left navigation bar.
 
 ## June 27, 2023
 
