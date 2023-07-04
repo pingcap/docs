@@ -12,7 +12,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **General changes**
 
-- Support point-in-time recovery (PITR) (beta) for [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) clusters.
+- Support point-in-time recovery (PITR) (beta) for [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta) clusters.
 
     You can now restore your TiDB Serverless cluster to any point in time within the last 90 days. This feature enhances the data recovery capability of TiDB Serverless clusters. For example, you can use PITR when data write errors occur and you want to restore the data to an earlier state.
 
@@ -20,7 +20,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **Console changes**
 
-- Enhance the **Usage This Month** panel on the cluster overview page for [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) clusters to provide a clearer view of your current resource usage.
+- Enhance the **Usage This Month** panel on the cluster overview page for [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta) clusters to provide a clearer view of your current resource usage.
 
 - Enhance the overall navigation experience by making the following changes:
 
