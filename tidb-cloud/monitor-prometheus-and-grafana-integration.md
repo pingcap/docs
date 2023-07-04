@@ -17,7 +17,7 @@ This document describes how to configure your Prometheus service to read key met
 
 ## Limitation
 
-You cannot use the Prometheus and Grafana integration in [Serverless Tier](/tidb-cloud/select-cluster-tier.md#tidb-serverless).
+You cannot use the Prometheus and Grafana integration in [Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta).
 
 ## Steps
 
