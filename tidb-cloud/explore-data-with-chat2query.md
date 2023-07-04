@@ -11,7 +11,7 @@ In Chat2Query, you can either simply type `--` followed by your instructions to 
 
 > **Note:**
 >
-> Chat2Query is only available for [Serverless Tier](/tidb-cloud/select-cluster-tier.md#tidb-serverless) clusters.
+> Chat2Query is only available for [Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) clusters.
 
 ## Use cases
 
