@@ -41,7 +41,7 @@ If **Create New Case** is clicked, you also need to provide your organization ID
 
 After you have submitted a request, to check the status of your request, perform the following steps:
 
-1. In the lower-right corner of your [TiDB Cloud console](https://tidbcloud.com/), click **?** and click **View Support Plan**. The support page is displayed.
+1. In the [TiDB Cloud console](https://tidbcloud.com/), click **?** in the lower-right corner, and then click **View Support Plan**. The support page is displayed.
 2. In the **Request Support** area, click **View Support Portal**. The **My request** page is displayed.
 
     On the **My request** page, you can view the status of your request.
@@ -54,7 +54,7 @@ TiDB Cloud offers a free basic support plan for each user and you can upgrade to
 
 To check or upgrade your support plan, perform the following steps:
 
-1. In the lower-right corner of your [TiDB Cloud console](https://tidbcloud.com/), click **?** and click **View Support Plan**.
+1. In the [TiDB Cloud console](https://tidbcloud.com/), click **?** in the lower-right corner, and then click **View Support Plan**.
 
     The support page is displayed. On this page, you can see your **Current Plan**. By default, the **Basic** free plan is selected.
 
@@ -90,5 +90,5 @@ To check or upgrade your support plan, perform the following steps:
 
 To downgrade your support plan to **Basic**, perform the following steps:
 
-1. In the lower-right corner of your [TiDB Cloud console](https://tidbcloud.com/), click **?** and click **View Support Plan**.
+1. In the [TiDB Cloud console](https://tidbcloud.com/), click **?** in the lower-right corner, and then click **View Support Plan**.
 2. At the bottom of the **Support** page, click **Downgrade to basic plan**.
