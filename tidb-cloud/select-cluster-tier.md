@@ -16,7 +16,7 @@ TiDB Cloud provides the following two options of cluster tiers. Before creating 
 ## TiDB Serverless
 
 <!--To be confirmed-->
-TiDB Serverless (previously called Developer Tier) is a fully managed service of TiDB. You can use TiDB Serverless clusters for non-production workloads such as prototype applications, hackathons, academic courses, or to provide a temporary data service for your datasets.
+TiDB Serverless is a fully managed, multi-tenant TiDB offering. It delivers an instant, autoscaling MySQL-compatible database and offers a generous free tier and consumption based billing once free limits are exceeded.
 
 ### Usage quota
 
