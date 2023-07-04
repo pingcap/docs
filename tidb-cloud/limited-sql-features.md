@@ -13,15 +13,15 @@ TiDB Cloud works with almost all workloads that TiDB supports, but there are fea
 
 | Statement | TiDB Dedicated | TiDB Serverless |
 |:-|:-|:-|
-| ALTER PLACEMENT POLICY | Supported | TiDB Serverless does not support configuring data placement. |
-| CREATE PLACEMENT POLICY | Supported | TiDB Serverless does not support configuring data placement. |
-| DROP PLACEMENT POLICY | Supported | TiDB Serverless does not support configuring data placement. |
-| SHOW CREATE PLACEMENT POLICY | Supported | TiDB Serverless does not support configuring data placement. |
-| SHOW PLACEMENT | Supported | TiDB Serverless does not support configuring data placement. |
-| SHOW PLACEMENT FOR | Supported | TiDB Serverless does not support configuring data placement. |
-| SHOW PLACEMENT LABELS | Supported | TiDB Serverless does not support configuring data placement. |
-| SHOW TABLE REGIONS | Supported | TiDB Serverless does not support configuring data placement. |
-| SPLIT REGION | Supported | TiDB Serverless does not support configuring data placement. |
+| ALTER PLACEMENT POLICY | Supported | Not supported [^1] |
+| CREATE PLACEMENT POLICY | Supported | Not supported [^1] |
+| DROP PLACEMENT POLICY | Supported | Not supported [^1] |
+| SHOW CREATE PLACEMENT POLICY | Supported | Not supported [^1] |
+| SHOW PLACEMENT | Supported | Not supported [^1] |
+| SHOW PLACEMENT FOR | Supported | Not supported [^1] |
+| SHOW PLACEMENT LABELS | Supported | Not supported [^1] |
+| SHOW TABLE REGIONS | Supported | Not supported [^1] |
+| SPLIT REGION | Supported | Not supported [^1] |
 
 ### Resource Groups
 
@@ -67,10 +67,10 @@ TiDB Cloud works with almost all workloads that TiDB supports, but there are fea
 
 | Database | Table | TiDB Dedicated | TiDB Serverless |
 |:-|:-|:-|:-|
-| information_schema | ATTRIBUTES | Supported | TiDB Serverless does not support configuring data placement. |
+| information_schema | ATTRIBUTES | Supported | Not supported [^1] |
 | information_schema | CLUSTER_CONFIG | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). |
 | information_schema | CLUSTER_HARDWARE | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). |
-| information_schema | CLUSTER_INFO | Supported | TiDB Serverless does not support configuring data placement. |
+| information_schema | CLUSTER_INFO | Supported | Not supported [^1] |
 | information_schema | CLUSTER_LOAD | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). |
 | information_schema | CLUSTER_LOG | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). |
 | information_schema | CLUSTER_SLOW_QUERY | Supported | For tracking slow queries, please use the [Slow Query](/tidb-cloud/tune-performance.md#slow-query) feature available on the web console. |
@@ -84,20 +84,20 @@ TiDB Cloud works with almost all workloads that TiDB supports, but there are fea
 | information_schema | METRICS_SUMMARY | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). |
 | information_schema | METRICS_SUMMARY_BY_LABEL | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). |
 | information_schema | METRICS_TABLES | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). |
-| information_schema | PLACEMENT_POLICIES | Supported | TiDB Serverless does not support configuring data placement. |
+| information_schema | PLACEMENT_POLICIES | Supported | Not supported [^1] |
 | information_schema | RESOURCE_GROUPS | Supported | TiDB Serverless does not support configuring resource groups. |
 | information_schema | SLOW_QUERY | Supported | For tracking slow queries, please use the [Slow Query](/tidb-cloud/tune-performance.md#slow-query) feature available on the web console. |
 | information_schema | STATEMENTS_SUMMARY | Supported | For comprehensive monitoring of all statements, please use the [Statement Analysis](/tidb-cloud/tune-performance.md#statement-analysis) feature on the web console. |
 | information_schema | STATEMENTS_SUMMARY_EVICTED | Supported | For comprehensive monitoring of all statements, please use the [Statement Analysis](/tidb-cloud/tune-performance.md#statement-analysis) feature on the web console. |
 | information_schema | STATEMENTS_SUMMARY_HISTORY | Supported | For comprehensive monitoring of all statements, please use the [Statement Analysis](/tidb-cloud/tune-performance.md#statement-analysis) feature on the web console. |
 | information_schema | TIDB_HOT_REGIONS | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). |
-| information_schema | TIDB_HOT_REGIONS_HISTORY | Supported(Suspecious) | TiDB Serverless does not support configuring data placement. |
-| information_schema | TIDB_SERVERS_INFO | Supported | TiDB Serverless does not support configuring data placement. |
-| information_schema | TIFLASH_SEGMENTS | Supported | TiDB Serverless does not support configuring data placement. |
-| information_schema | TIFLASH_TABLES | Supported | TiDB Serverless does not support configuring data placement. |
-| information_schema | TIKV_REGION_PEERS | Supported | TiDB Serverless does not support configuring data placement. |
-| information_schema | TIKV_REGION_STATUS | Supported | TiDB Serverless does not support configuring data placement. |
-| information_schema | TIKV_STORE_STATUS | Supported | TiDB Serverless does not support configuring data placement. |
+| information_schema | TIDB_HOT_REGIONS_HISTORY | Supported | Not supported [^1] |
+| information_schema | TIDB_SERVERS_INFO | Supported | Not supported [^1] |
+| information_schema | TIFLASH_SEGMENTS | Supported | Not supported [^1] |
+| information_schema | TIFLASH_TABLES | Supported | Not supported [^1] |
+| information_schema | TIKV_REGION_PEERS | Supported | Not supported [^1] |
+| information_schema | TIKV_REGION_STATUS | Supported | Not supported [^1] |
+| information_schema | TIKV_STORE_STATUS | Supported | Not supported [^1] |
 | performance_schema | pd_profile_allocs | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). |
 | performance_schema | pd_profile_block | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). |
 | performance_schema | pd_profile_cpu | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). | This feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security). |
@@ -124,7 +124,7 @@ TiDB Cloud works with almost all workloads that TiDB supports, but there are fea
 
 | Variable | TiDB Dedicated | TiDB Serverless |
 |:-|:-|:-|
-| datadir | No limitation | TiDB Serverless does not support configuring data placement. |
+| datadir | No limitation | Not supported [^1] |
 | interactive_timeout | No limitation | Readonly on TiDB Serverless. |
 | max_allowed_packet | No limitation | Readonly on TiDB Serverless. |
 | plugin_dir | No limitation | Plugin is not supported on TiDB Serverless. |
@@ -222,3 +222,5 @@ TiDB Cloud works with almost all workloads that TiDB supports, but there are fea
 | validate_password.policy | No limitation | Can only be MEDIUM or STRONG. |
 | validate_password.special_char_count | No limitation | Can not be smaller than 1. |
 | wait_timeout | No limitation | Readonly on TiDB Serverless. |
+
+[^1]: TiDB Serverless does not support configuring data placement.
