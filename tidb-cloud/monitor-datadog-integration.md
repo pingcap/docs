@@ -1,11 +1,11 @@
 ---
-title: Integrate TiDB Cloud with Datadog
+title: Integrate TiDB Cloud with Datadog (Beta)
 summary: Learn how to monitor your TiDB cluster with the Datadog integration.
 ---
 
-# Integrate TiDB Cloud with Datadog
+# Integrate TiDB Cloud with Datadog (Beta)
 
-You can configure TiDB Cloud to send metric data about your TiDB clusters to [Datadog](https://www.datadoghq.com/). After that, you can view these metrics in your Datadog dashboards directly.
+TiDB Cloud supports Datadog integration (beta). You can configure TiDB Cloud to send metric data about your TiDB clusters to [Datadog](https://www.datadoghq.com/). After that, you can view these metrics in your Datadog dashboards directly.
 
 ## Prerequisites
 
@@ -27,7 +27,7 @@ You can configure TiDB Cloud to send metric data about your TiDB clusters to [Da
 
 1. Log in to the [TiDB Cloud console](https://tidbcloud.com).
 2. Click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner, switch to the target project if you have multiple projects, and then click **Admin**.
-3. On the **Admin** page of your project, click **Integrations** in the left navigation pane, and click **Integration to Datadog**.
+3. On the **Admin** page of your project, click **Integrations** in the left navigation pane, and then click **Integration to Datadog (BETA)**.
 4. Enter your API key of Datadog and choose the site of Datadog.
 5. Click **Test Integration**.
 

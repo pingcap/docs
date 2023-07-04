@@ -1,11 +1,11 @@
 ---
-title: Integrate TiDB Cloud with New Relic
+title: Integrate TiDB Cloud with New Relic (Beta)
 summary: Learn how to monitor your TiDB cluster with the New Relic integration.
 ---
 
-# Integrate TiDB Cloud with New Relic
+# Integrate TiDB Cloud with New Relic (Beta)
 
-You can configure TiDB Cloud to send metric data of your TiDB clusters to [New Relic](https://newrelic.com/). After that, you can directly view these metrics in your New Relic dashboards.
+TiDB Cloud supports New Relic integration (beta). You can configure TiDB Cloud to send metric data of your TiDB clusters to [New Relic](https://newrelic.com/). After that, you can directly view these metrics in your New Relic dashboards.
 
 ## Prerequisites
 
@@ -25,7 +25,7 @@ You cannot use the New Relic integration in [TiDB Serverless clusters](/tidb-clo
 
 1. Log in to the [TiDB Cloud console](https://tidbcloud.com).
 2. Click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner, switch to the target project if you have multiple projects, and then click **Admin**.
-3. On the **Admin** page of your project, click **Integrations** in the left navigation pane, and click **Integration to New Relic**.
+3. On the **Admin** page of your project, click **Integrations** in the left navigation pane, and then click **Integration to New Relic (BETA)**.
 4. Enter your API key of New Relic and choose the site of New Relic.
 5. Click **Test Integration**.
 
