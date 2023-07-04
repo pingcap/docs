@@ -92,7 +92,7 @@ Two-factor authentication adds additional security by requiring an Authenticator
 
 1. Click <MDSvgIcon name="icon-top-account-settings" /> in the lower-left corner of the TiDB Cloud console.
 
-2. Click **Account settings**.
+2. Click **Account Settings**.
 
 3. Click the **Two Factor Authentication** tab.
 
@@ -102,7 +102,7 @@ Two-factor authentication adds additional security by requiring an Authenticator
 
 1. Click <MDSvgIcon name="icon-top-account-settings" /> in the lower-left corner of the TiDB Cloud console.
 
-2. Click **Account settings**.
+2. Click **Account Settings**.
 
 3. Click the **Two Factor Authentication** tab.
 
