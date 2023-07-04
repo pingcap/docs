@@ -10,7 +10,7 @@ TiDB Control is a command-line tool of TiDB, usually used to obtain the status i
 
 > **Note:**
 >
-> TiDB Control is specifically designed for debugging purposes and might not be fully compatible with future capabilities introduced in TiDB. It's not recommended to include this tool in applications or utilities development.
+> TiDB Control is specifically designed for debugging purposes and might not be fully compatible with future capabilities introduced in TiDB. It's not recommended to include this tool in applications or utilities development to get information.
 
 ## Get TiDB Control
 
