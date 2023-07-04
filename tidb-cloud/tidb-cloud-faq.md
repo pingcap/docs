@@ -41,7 +41,9 @@ No.
 
 ### What versions of TiDB are supported on TiDB Cloud?
 
-For the currently supported TiDB version, see [TiDB Cloud Release Notes](/tidb-cloud/tidb-cloud-release-notes.md).
+Since June 20th, 2023, the latest default TiDB version for new TiDB Dedicated clusters is v6.5.3. In TiDB Serverless Cluster, it is v6.6.0.
+
+For the more information, see [TiDB Cloud Release Notes](/tidb-cloud/tidb-cloud-release-notes.md).
 
 ### What companies are using TiDB or TiDB Cloud in production?
 
