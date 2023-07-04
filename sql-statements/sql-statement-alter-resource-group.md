@@ -9,7 +9,7 @@ summary: Learn the usage of ALTER RESOURCE GROUP in TiDB.
 
 > **Note:**
 >
-> This feature is not available on [TiDB Serverless clusters](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless-beta).
+> This feature is not available on [TiDB Serverless clusters](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless).
 
 </CustomContent>
 
@@ -47,7 +47,7 @@ TiDB supports the following `DirectResourceGroupOption`, where [Request Unit (RU
 If the `BURSTABLE` attribute is set, TiDB allows the corresponding resource group to use the available system resources when the quota is exceeded.
 
 > **Note:**
-> 
+>
 > The `ALTER RESOURCE GROUP` statement can only be executed when the global variable [`tidb_enable_resource_control`](/system-variables.md#tidb_enable_resource_control-new-in-v660) is set to `ON`.
 
 ## Examples
