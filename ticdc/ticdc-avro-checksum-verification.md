@@ -9,7 +9,7 @@ This document introduces how to consume data sent to Kafka by TiCDC and encoded 
 
 The source code of this example is available in the [`avro-checksum-verification`](https://github.com/pingcap/tiflow/tree/master/examples/golang/avro-checksum-verification) directory.
 
-The example in this document uses [kafka-go](https://github.com/segmentio/kafka-go) to create a simple Kafka consumer program. This program continuously reads data from a specified topic, calculates the checksum, and verifies the its value.
+The example in this document uses [kafka-go](https://github.com/segmentio/kafka-go) to create a simple Kafka consumer program. This program continuously reads data from a specified topic, calculates the checksum, and verifies its value.
 
 ```go
 package main
