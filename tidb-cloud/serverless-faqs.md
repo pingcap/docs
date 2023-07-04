@@ -43,6 +43,7 @@ TiDB Serverless adopts a pay-as-you-go model, which entails that you only pay fo
 ### Is there any free plan available for TiDB Serverless?
 
 For the first five TiDB Serverless clusters in your organization, TiDB Cloud provides a free usage quota for each of them as follows:
+
 - Row storage: 5 GiB
 - [Request Units (RUs)](/tidb-cloud/tidb-cloud-glossary.md#request-unit): 50 million RUs per month
 
