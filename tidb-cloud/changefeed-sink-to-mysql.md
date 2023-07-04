@@ -13,7 +13,7 @@ This document describes how to stream data from TiDB Cloud to MySQL using the **
 >
 > Currently, TiDB Cloud only allows up to 10 changefeeds per cluster.
 >
-> For [Serverless Tier clusters](/tidb-cloud/select-cluster-tier.md#tidb-serverless), the changefeed feature is unavailable.
+> For [Serverless Tier clusters](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta), the changefeed feature is unavailable.
 
 ## Prerequisites
 
