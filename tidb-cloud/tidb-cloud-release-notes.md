@@ -22,6 +22,14 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 - Enhance the **Usage This Month** panel on the cluster overview page for [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta) clusters to provide a clearer view of your current resource usage.
 
+- Enhance the overall navigation experience by making the following changes:
+
+    - Consolidate **Organizations** <placeholder for the icon> and **Accounts** <placeholder for the icon> in the upper-right corner into the left navigation bar.
+    - Consolidate **Admin** <placeholder for the Admin icon> in the left navigation bar into **Projects** <placeholder for the icon> in the left navigation bar, and remove the ☰ hover menu in the upper-left corner. Now you can click <placeholder for the Projects icon> to switch between projects and modify project settings.
+    - Consolidate all the help and support information for TiDB Cloud into the menu of the **?** icon in the lower-right corner, such as documentation, interactive tutorials, self-paced training, and support entries.
+
+- TiDB Cloud console now supports Dark Mode, which provides a more comfortable, eye-friendly experience. You can switch between light mode and dark mode from the bottom of the left navbar.
+
 ## June 27, 2023
 
 **General changes**
