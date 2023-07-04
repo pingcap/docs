@@ -22,13 +22,11 @@ Get started with the 5-minute [TiDB Cloud Quick Start](/tidb-cloud/tidb-cloud-qu
 
 ### Is TiDB Serverless free?
 
-<!--To be confirmed-->
 Each TiDB Serverless cluster has a free [usage quota](/tidb-cloud/serverless-limitations.md#usage-quota). Usage beyond the free quota will be charged. Once the free quota of a cluster is reached, the read and write operations on this cluster will be throttled until you [increase the quota](/tidb-cloud/manage-serverless-spend-limit.md#update-spend-limit) or the usage is reset upon the start of a new month.
 
 For more information, see [TiDB Serverless usage quota](/tidb-cloud/select-cluster-tier.md#usage-quota).
 
 ### What are the limitations of a TiDB Serverless cluster?
-<!--To be confirmed-->
 
 For each organization in TiDB Cloud, you can create a maximum of five TiDB Serverless clusters by default. To create more TiDB Serverless clusters, you need to add a credit card and set a [spend limit](/tidb-cloud/tidb-cloud-glossary.md#spend-limit) for the usage.
 
