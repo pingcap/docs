@@ -100,5 +100,5 @@ For more information about the implementation of data consumption and checksum v
 
 > **Note:**
 >
-> - After enabling the checksum validation feature, DECIMAL and UNSIGNED BIGINT types data will be converted to string types. Therefore, in the downstream consumer code, you need to convert them back to their corresponding numerical types before calculating checksum values.
-> - The checksum verification process does not include delete events. This is because delete events only contain the handle key column, while the checksum is calculated based on all columns.
+> - After enabling the checksum validation feature, DECIMAL and UNSIGNED BIGINT types data will be converted to STRING types. Therefore, in the downstream consumer code, you need to convert them back to their corresponding numerical types before calculating checksum values.
+> - The checksum verification process does not include DELETE events. This is because DELETE events only contain the handle key column, while the checksum is calculated based on all columns.
