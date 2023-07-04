@@ -52,7 +52,7 @@ For more information, see [TiDB Serverless usage quota](/tidb-cloud/select-clust
 
 ### How can I estimate the number of RUs required by my workloads and plan for monthly budget?
 
-To estimate the RU consumption of individual SQL statements, you can use the [EXPLAIN ANALYZE](/tidb-cloud/sql-statement-explain-analyze.md) SQL statement. You can see the RUs and storage your cluster has used in the Usage this month section of the Cluster Overview page. With past resource usage data and real-time resource usage graphs available on the Usage this month page, you can establish a reasonable spend limit for your cluster with the Edit Spend Limit feature. See [Manage Spend Limit for TiDB Serverless clusters](/tidb-cloud/manage-serverless-spend-limit.md) for more information.
+To estimate the RU consumption of individual SQL statements, you can use the [EXPLAIN ANALYZE](/sql-statements/sql-statement-explain-analyze.md) SQL statement. You can see the RUs and storage your cluster has used in the Usage this month section of the Cluster Overview page. With past resource usage data and real-time resource usage graphs available on the Usage this month page, you can establish a reasonable spend limit for your cluster with the Edit Spend Limit feature. See [Manage Spend Limit for TiDB Serverless clusters](/tidb-cloud/manage-serverless-spend-limit.md) for more information.
 
 ### How the storage is being metered for TiDB Serverless
 
@@ -60,7 +60,7 @@ The storage is metered based on the amount of data stored in the TiDB cluster, m
 
 ### Why does the storage used size remain unchanged after dropping a table or database immediately?
 
-TiDB retains dropped tables and databases for a period of time to ensure that transactions that depend on these tables can continue to run smoothly. Moreover, the extended retention time enables TiDB to provide the [FLASHBACK TABLE](/tidb-cloud/sql-statement-flashback-table.md)/[FLASHBACK DATABASE](/tidb-cloud/sql-statement-flashback-database.md) feature, which allows you to recover dropped tables and databases in the event that they were mistakenly deleted.
+TiDB retains dropped tables and databases for a period of time to ensure that transactions that depend on these tables can continue to run smoothly. Moreover, the extended retention time enables TiDB to provide the [FLASHBACK TABLE](/sql-statements/sql-statement-flashback-table.md)/[FLASHBACK DATABASE](/sql-statements/sql-statement-flashback-database.md) feature, which allows you to recover dropped tables and databases in the event that they were mistakenly deleted.
 
 ### Why are there RU consumptions when I'm not actively running any query?
 
