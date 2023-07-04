@@ -29,13 +29,13 @@ Branches are easy and quick to create and provide isolated data environments. It
 
 6. Parallel Development: Database branching allows different teams or developers to work on different projects simultaneously. Each project can have its own branch, allowing independent development and experimentation, while still being able to merge changes back into the main database.
 
-## Limitations and Quotas
+## Limitations and quotas
 
-TiDB Serverless Branch is in Beta version. Currently, it is free of charge. 
+Currently, the TiDB Serverless branch feature is in beta and free of charge. 
 
-You can only create branches under clusters that are created after July 4, 2023.
+You can only create branches for TiDB Serverless clusters that are created after July 4, 2023.
 
-For each organization in TiDB Cloud, you can create a maximum of five TiDB Serverless branches by default across all the clusters. Branches will be created in the same region as the parent cluster, and you can not create branches under a throttled cluster.
+For each organization in TiDB Cloud, you can create a maximum of five TiDB Serverless branches by default across all the clusters. The branches of a cluster will be created in the same region as the cluster, and you cannot create branches for a throttled cluster.
 
 For each branch, 5 GiB storage is allowed. Once the storage is reached, the read and write operations on this branch will be throttled until you reduce the storage.
 
