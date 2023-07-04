@@ -29,15 +29,6 @@ We are constantly filling in the feature gaps between TiDB Serverless and TiDB D
 - Data persisted in your TiDB Serverless cluster undergoes encryption utilizing the encryption tool provided by the cloud provider responsible for managing your cluster. However, TiDB Serverless does not provide additional optional measures for protecting data at-rest on disks beyond infrastructure-level encryption.
 - Using [customer-managed encryption keys (CMEK)](/tidb-cloud/tidb-cloud-encrypt-cmek.md) is currently unavailable.
 
-### Diagnosis
-
-- [Key Visualizer](/tidb-cloud/tune-performance.md#key-visualizer) is unavailable for TiDB Serverless.
-
-### Stream data
-
-* [Changefeed](/tidb-cloud/changefeed-overview.md) is not supported for TiDB Serverless currently.
-* [Data Migration](/tidb-cloud/migrate-from-mysql-using-data-migration.md) is not supported for TiDB Serverless currently.
-
 ### Maintenance window
 
 - [Maintenance window](/tidb-cloud/configure-maintenance-window.md) is currently unavailable.
@@ -54,15 +45,14 @@ We are constantly filling in the feature gaps between TiDB Serverless and TiDB D
 
 ### Stream data
 
-- [Changefeed](/tidb-cloud/changefeed-overview.md) is currently unavailable.
-- [Data Migration](/tidb-cloud/migrate-from-mysql-using-data-migration.md) is currently unavailable.
+* [Changefeed](/tidb-cloud/changefeed-overview.md) is not supported for TiDB Serverless currently.
+* [Data Migration](/tidb-cloud/migrate-from-mysql-using-data-migration.md) is not supported for TiDB Serverless currently.
 
 ### Others
 
 - [Time to live (TTL)](/time-to-live.md) is currently unavailable.
 - Transaction can not last longer than 30m
 - [Limited SQL features](/tidb-cloud/limited-sql-features.md) for more details about SQL limitations.
-- Data branching is only available for clusters created after XXX
 
 ## Usage quota
 
