@@ -26,16 +26,20 @@ The branching GitHub integration is used for connecting a serverless cluster to 
 2. Click **Connect to GitHub** button.
     - If you have not logged in the GitHub, you will be asked to log in the GitHub account in a pop-up.
     - If it is the first time you use the integration, you will be asked to authorize the GitHub app in a pop-up.
+    ![github-authorize.png](../media/tidb-cloud/branch/github-authorize.png)
     
 3. Install accounts (Skip if you have installed the account)
 
-   Click the `GitHub account` drop-down and choose the `install other account`. You will be redirected to the installation page to install accounts.
+   Click the `GitHub account` drop-down and choose the `Install Other Account`. You will be redirected to the installation page to install accounts.
+   ![github-install.png](../media/tidb-cloud/branch/github-install.png)
 
 4. Select an account under the `GitHub Account` drop-down.
 
-5. Select a repository under `GitHub Repository` drop-down. You can search the repository by name.
+5. Select a repository under the `GitHub Repository` drop-down. You can search the repository by name.
 
 6. Click the `Connect` button to connect between the TiDB Serverless cluster and the GitHub repository.
+
+   ![github-connect.png](../media/tidb-cloud/branch/github-connect.png)
 
 ## GitHub App
 
