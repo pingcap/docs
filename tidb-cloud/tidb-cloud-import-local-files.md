@@ -87,7 +87,7 @@ In this case, you can use the MySQL client to connect your TiDB cluster, and the
 CREATE TABLE `import_test` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(64) NOT NULL,
-  `address` varchar(64) NOT NUL,
+  `address` varchar(64) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB;
 LOAD DATA LOCAL INFILE 'load.txt' INTO TABLE import_test FIELDS TERMINATED BY ',' (name, address);
