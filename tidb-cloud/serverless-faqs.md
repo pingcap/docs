@@ -20,7 +20,7 @@ TiDB Serverless offers the TiDB database with full HTAP capabilities for you and
 
 Get started with the 5-minute [TiDB Cloud Quick Start](/tidb-cloud/tidb-cloud-quickstart.md).
 
-### What are the limitations of a TiDB Serverless cluster?
+### How many TiDB Serverless clusters can I create in TiDB Cloud?
 
 For each organization in TiDB Cloud, you can create a maximum of five TiDB Serverless clusters by default. To create more TiDB Serverless clusters, you need to add a credit card and set a [spend limit](/tidb-cloud/tidb-cloud-glossary.md#spend-limit) for the usage.
 
