@@ -30,48 +30,50 @@ Some of TiDB Cloud features are partially supported or not supported on TiDB Ser
 
 ### When will TiDB serverless be available on cloud platforms other than AWS, such as GCP or Azure?
 
-We are constantly working to bring TiDB serverless to other cloud platforms, including GCP and Azure. However, we can't give an exact timeline yet as we are still in the process of filling gaps and ensuring that the service works seamlessly in all environments. Rest assured that we are working hard to make TiDB serverless available on more cloud platforms, and we will keep our community updated once we have more information.
+We are actively working on expanding TiDB Serverless to other cloud platforms, including GCP and Azure. However, we do not have an exact timeline for now as we currently focus on filling gaps and ensuring seamless functionality across all environments. Rest assured, we are working hard to make TiDB Serverless available on more cloud platforms, and we will keep our community updated as we progress.
 
 ### I created a Developer Tier cluster before TiDB Serverless was available. Can I still use my cluster?
 
 Yes, your Developer Tier cluster has been automatically migrated to the TiDB Serverless cluster, providing you with an improved user experience without any disruptions to your prior usage.
 
-## Billing and Metering FAQs
+## Billing and metering FAQs
 
 ### What are Request Units?
 
-TiDB Serverless adopts a pay-as-you-go model, which entails that you only pay for the storage space and usage of your cluster. In this model, all cluster activities such as SQL queries, bulk operations, and background jobs are quantified in [Request Units (RUs)](/tidb-cloud/tidb-cloud-glossary.md#request-unit). RUs offer an abstract measurement of the size and intricacy of requests initiated on your cluster. See [TiDB Serverless Pricing Details](https://www.pingcap.com/tidb-cloud-serverless-pricing-details/) for more information.
+TiDB Serverless adopts a pay-as-you-go model, meaning that you only pay for the storage space and cluster usage. In this model, all cluster activities such as SQL queries, bulk operations, and background jobs are quantified in [Request Units (RUs)](/tidb-cloud/tidb-cloud-glossary.md#request-unit). RU is an abstract measurement for the size and intricacy of requests initiated on your cluster. For more information, see [TiDB Serverless Pricing Details](https://www.pingcap.com/tidb-cloud-serverless-pricing-details/).
 
 ### Is there any free plan available for TiDB Serverless?
 
 For the first five TiDB Serverless clusters in your organization, TiDB Cloud provides a free usage quota for each of them as follows:
 
-- Row storage: 5 GiB
+- Row-based storage: 5 GiB
 - [Request Units (RUs)](/tidb-cloud/tidb-cloud-glossary.md#request-unit): 50 million RUs per month
 
 Usage beyond the free quota will be charged. Once the free quota of a cluster is reached, the read and write operations on this cluster will be throttled until you [increase the quota](/tidb-cloud/manage-serverless-spend-limit.md#update-spend-limit) or the usage is reset upon the start of a new month.
 
 For more information, see [TiDB Serverless usage quota](/tidb-cloud/select-cluster-tier.md#usage-quota).
 
-### How can I estimate the number of RUs required by my workloads and plan for monthly budget?
+### How can I estimate the number of RUs required by my workloads and plan my monthly budget?
 
-To estimate the RU consumption of individual SQL statements, you can use the [EXPLAIN ANALYZE](/sql-statements/sql-statement-explain-analyze.md) SQL statement. You can see the RUs and storage your cluster has used in the Usage this month section of the Cluster Overview page. With past resource usage data and real-time resource usage graphs available on the Usage this month page, you can establish a reasonable spend limit for your cluster with the Edit Spend Limit feature. See [Manage Spend Limit for TiDB Serverless clusters](/tidb-cloud/manage-serverless-spend-limit.md) for more information.
+To get the RU consumption of individual SQL statements, you can use the [EXPLAIN ANALYZE](/sql-statements/sql-statement-explain-analyze.md) SQL statement. 
 
-### How the storage is being metered for TiDB Serverless？
+To get the RUs and storage used by your cluster, view the **Usage this month** pane on your cluster overview page. With your past resource usage data and real-time resource usage in this pane, you can track your cluster's resource consumption and estimate a reasonable spend limit. If the free quota cannot meet your requirement, you can edit the spend limit easily. For more information, see [Manage Spend Limit for TiDB Serverless clusters](/tidb-cloud/manage-serverless-spend-limit.md).
 
-The storage is metered based on the amount of data stored in the TiDB cluster, measured in GB-months. This calculation is based on the sum of the size of all the tables and indexes in the cluster, without including data compression or replicas for high availability, and is multiplied by the number of hours the data is stored in the month.
+### How storage is being metered for TiDB Serverless？
 
-### Why does the storage used size remain unchanged after dropping a table or database immediately?
+The storage is metered based on the amount of data stored in a TiDB Serverless cluster, measured in GiB per month. It is calculated by multiplying the total size of all the tables and indexes (excluding data compression or replicas) with the number of hours the data is stored in that month.
 
-TiDB retains dropped tables and databases for a period of time to ensure that transactions that depend on these tables can continue to run smoothly. Moreover, the extended retention time enables TiDB to provide the [FLASHBACK TABLE](/sql-statements/sql-statement-flashback-table.md)/[FLASHBACK DATABASE](/sql-statements/sql-statement-flashback-database.md) feature, which allows you to recover dropped tables and databases in the event that they were mistakenly deleted.
+### Why does the storage usage size remain unchanged after dropping a table or database immediately?
 
-### Why are there RU consumptions when I'm not actively running any query?
+This is because TiDB retains dropped tables and databases for a certain period of time. This retention period ensures that transactions dependent on these tables can continue execution without disruption. Additionally, the retention period makes the [FLASHBACK TABLE](/sql-statements/sql-statement-flashback-table.md)/[FLASHBACK DATABASE](/sql-statements/sql-statement-flashback-database.md) feature feasible, which allows you to recover dropped tables and databases if they were mistakenly deleted.
+
+### Why are there RU consumptions when I'm not actively running any queries?
 
 RU consumptions can occur in various scenarios. One common scenario is during background queries, such as the synchronization of schema changes between TiDB instances. Another scenario is when certain web console features generate queries, like loading schemas. These processes utilize RUs even without explicit user triggers.
 
 ### Why there is spike in RU usage when my workload is steady?
 
-A spike in RU usage can occur due to necessary background jobs in TiDB. These jobs, such as automatically analyzing tables and rebuilding statistic data, are required for generating optimized query plans.
+A spike in RU usage can occur due to necessary background jobs in TiDB. These jobs, such as automatically analyzing tables and rebuilding statistics, are required for generating optimized query plans.
 
 ## Security FAQs
 
