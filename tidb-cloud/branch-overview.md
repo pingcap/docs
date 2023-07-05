@@ -33,7 +33,7 @@ You can create branches easily and quickly to get isolated data environments. Br
 
 Currently, the TiDB Serverless branch feature is in beta and free of charge. 
 
-You can only create branches for TiDB Serverless clusters that are created after July 4, 2023.
+You can only create branches for TiDB Serverless clusters that are created after July 5, 2023.
 
 For each organization in TiDB Cloud, you can create a maximum of five TiDB Serverless branches by default across all the clusters. The branches of a cluster will be created in the same region as the cluster, and you cannot create branches for a throttled cluster.
 
