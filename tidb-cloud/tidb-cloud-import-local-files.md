@@ -81,15 +81,14 @@ Currently, this method supports importing one CSV file for one task into either 
 
 No. Currently, you can only import all columns of a CSV file into an existing table.
 
-In this case, you can use [LOAD DATA](/sql-statements/sql-statement-load-data.md) to specify the columns to import. For example:
+In this case, you can use the MySQL client to connect your TiDB cluster, and then use [LOAD DATA](/sql-statements/sql-statement-load-data.md) to specify the columns to import. For example:
 
 ```sql
-CREATE TABLE `url` (
+CREATE TABLE `import_test` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `client` smallint(5) unsigned NOT NULL,
-  `address` varchar(5),
-  `employee` smallint(5) unsigned NOT NULL,
+  `name` varchar(64) NOT NULL,
+  `address` varchar(64) NOT NUL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB;
-LOAD DATA LOCAL INFILE 'load.txt' INTO TABLE URL FIELDS TERMINATED BY ',' (client, address, employee);
+LOAD DATA LOCAL INFILE 'load.txt' INTO TABLE import_test FIELDS TERMINATED BY ',' (name, address);
 ```
