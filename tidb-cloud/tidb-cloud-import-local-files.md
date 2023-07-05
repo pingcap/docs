@@ -74,3 +74,22 @@ Currently, this method supports importing one CSV file for one task into either 
 9. After the import task is completed, you can click **Explore your data by Chat2Query** to query your imported data. For more information about how to use Chat2Qury, see [Explore Your Data with AI-Powered Chat2Query](/tidb-cloud/explore-data-with-chat2query.md).
 
 10. On the **Import** page, you can click **View** in the **Action** column to check the import task detail.
+
+## FAQ
+
+### Can I only import some specified columns on TiDB Cloud?
+
+No. Currently, you can only import all columns of a CSV file into an existing table.
+
+In this case, you can use [LOAD DATA](/sql-statements/sql-statement-load-data.md) to specify the columns to import. For example:
+
+```sql
+CREATE TABLE `url` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `client` smallint(5) unsigned NOT NULL,
+  `dest` varchar(5),
+  `employee` smallint(5) unsigned NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB;
+LOAD DATA LOCAL INFILE 'load.txt' INTO TABLE URL FIELDS TERMINATED BY ',' (client, dest, employee);
+```
