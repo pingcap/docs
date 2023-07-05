@@ -115,6 +115,11 @@ Error 1105 (HY000): metrics 'resource_manager_resource_unit' is empty
 
 TiKV does not monitor CPU usage  metrics on macOS. An error indicating the name of the metrics item is shown in the following example.
 
+```sql
+CALIBRATE RESOURCE START_TIME '2023-04-18 08:00:00' DURATION '60m';
+ERROR 1105 (HY000): metrics 'process_cpu_usage' is empty
+```
+
 Specify `WORKLOAD` to view the RU capacity. The default value is `TPCC`.
 
 ```sql
