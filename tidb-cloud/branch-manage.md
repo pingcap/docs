@@ -41,7 +41,7 @@ To get the connection information of a branch, perform the following steps:
 1. Navigate to the *Branches** page of your cluster.
 2. In the row of your target branch to be deleted, click **...** in the **Action** column.
 3. Click **Connect** in the drop-down list. The dialog for the connection information is displayed.
-4. Click the **Create password** or **Reset password** to create or reset the password.
+4. Click the **Create password** or **Reset password** to create or reset the root password.
 
 > **Note:**
 >
