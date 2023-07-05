@@ -13,7 +13,7 @@ summary: Learn how to use the resource control feature to control and schedule a
 
 > **Note:**
 >
-> This feature is not available on [TiDB Serverless clusters](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless-beta).
+> This feature is not available on [TiDB Serverless clusters](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless).
 
 </CustomContent>
 
@@ -37,7 +37,7 @@ The TiDB resource control feature provides two layers of resource management cap
 
 ## Scenarios for resource control
 
-The introduction of the resource control feature is a milestone for TiDB. It can divide a distributed database cluster into multiple logical units. Even if an individual unit overuses resources, it does not crowd out the resources needed by other units. 
+The introduction of the resource control feature is a milestone for TiDB. It can divide a distributed database cluster into multiple logical units. Even if an individual unit overuses resources, it does not crowd out the resources needed by other units.
 
 With this feature, you can:
 
@@ -113,7 +113,7 @@ The results of the combinations of these two parameters are shown in the followi
 
 | `resource-control.enabled`  | `tidb_enable_resource_control`= ON   | `tidb_enable_resource_control`= OFF  |
 |:----------------------------|:-------------------------------------|:-------------------------------------|
-| `resource-control.enabled`= true  |  Flow control and scheduling (recommended) | Invalid combination      |  
+| `resource-control.enabled`= true  |  Flow control and scheduling (recommended) | Invalid combination      |
 | `resource-control.enabled`= false |  Only flow control (not recommended)                 | The feature is disabled. |
 
 For more information about the resource control mechanism and parameters, see [RFC: Global Resource Control in TiDB](https://github.com/pingcap/tidb/blob/master/docs/design/2022-11-25-global-resource-control.md).
@@ -213,7 +213,7 @@ The resource control feature is still in its experimental stage and does not imp
 
 Currently, the resource control feature has the following limitations:
 
-* This feature only supports flow control and scheduling of read and write requests initiated by foreground clients. It does not support flow control and scheduling of background tasks such as DDL operations and auto analyze. 
+* This feature only supports flow control and scheduling of read and write requests initiated by foreground clients. It does not support flow control and scheduling of background tasks such as DDL operations and auto analyze.
 * Resource control incurs additional scheduling overhead. Therefore, there might be a slight performance degradation when this feature is enabled.
 
 ## See also
