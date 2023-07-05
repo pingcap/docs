@@ -55,7 +55,7 @@ For more information, see [TiDB Serverless usage quota](/tidb-cloud/select-clust
 
 To estimate the RU consumption of individual SQL statements, you can use the [EXPLAIN ANALYZE](/sql-statements/sql-statement-explain-analyze.md) SQL statement. You can see the RUs and storage your cluster has used in the Usage this month section of the Cluster Overview page. With past resource usage data and real-time resource usage graphs available on the Usage this month page, you can establish a reasonable spend limit for your cluster with the Edit Spend Limit feature. See [Manage Spend Limit for TiDB Serverless clusters](/tidb-cloud/manage-serverless-spend-limit.md) for more information.
 
-### How the storage is being metered for TiDB Serverless
+### How the storage is being metered for TiDB Serverless？
 
 The storage is metered based on the amount of data stored in the TiDB cluster, measured in GB-months. This calculation is based on the sum of the size of all the tables and indexes in the cluster, without including data compression or replicas for high availability, and is multiplied by the number of hours the data is stored in the month.
 
