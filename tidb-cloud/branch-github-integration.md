@@ -58,32 +58,32 @@ To integrate TiDB Serverless branching with your GitHub repository, take the fol
 
 After you connect your TiDB Serverless cluster to your GitHub repository, for each pull request in this repository, the [TiDB Cloud Branching](https://github.com/apps/tidb-cloud-branching) GitHub app can automatically manage its corresponding TiDB Serverless branch as follows:
 
-| Pull request changes  |  TiDB Cloud Branching App behaviors |
-|---------------------- |------------------------------------ |
-| Create a pull request | When you create a pull request in the repository, the [TiDB Cloud Branching](https://github.com/apps/tidb-cloud-branching) app creates a branch for your TiDB Serverless cluster. The branch name is in the `${github_branch_name}_${pr_id}_${commit_sha}` format. |
-| Push new commits to a pull request | Every time you push a new commit to a pull request in the repository, the [TiDB Cloud Branching](https://github.com/apps/tidb-cloud-branching) app deletes the previous TiDB Serverless branch and creates a new branch for the latest commit. |
-| Close or merge a pull request | When you close or merge a pull request, the [TiDB Cloud Branching](https://github.com/apps/tidb-cloud-branching) app deletes the branch for this pull request. |
-| Reopen a pull request | When you reopen a pull request, the [TiDB Cloud Branching](https://github.com/apps/tidb-cloud-branching) app creates a branch for the lasted commit of the pull request. |
+| Pull request changes               | TiDB Cloud Branching App behaviors                                                                                                                                                                                                                                                                                                                                          |
+|------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Create a pull request              | When you create a pull request in the repository, the [TiDB Cloud Branching](https://github.com/apps/tidb-cloud-branching) app creates a branch for your TiDB Serverless cluster. The branch name is in the `${github_branch_name}_${pr_id}_${commit_sha}` format. Please note the [limit](/tidbcloud/branch-overview.md#limitations-and-quotas) on the number of branches. |
+| Push new commits to a pull request | Every time you push a new commit to a pull request in the repository, the [TiDB Cloud Branching](https://github.com/apps/tidb-cloud-branching) app deletes the previous TiDB Serverless branch and creates a new branch for the latest commit.                                                                                                                              |
+| Close or merge a pull request      | When you close or merge a pull request, the [TiDB Cloud Branching](https://github.com/apps/tidb-cloud-branching) app deletes the branch for this pull request.                                                                                                                                                                                                              |
+| Reopen a pull request              | When you reopen a pull request, the [TiDB Cloud Branching](https://github.com/apps/tidb-cloud-branching) app creates a branch for the lasted commit of the pull request.                                                                                                                                                                                                    |
 
 ## Configuring TiDB Cloud Branching app
 
 To configure the behaviors of [TiDB Cloud Branching](https://github.com/apps/tidb-cloud-branching) app, you can add a `tidbcloud.yml` file to the root directory of your repository, and then add the desired configurations to this file according to the following instructions.
 
-### branch.blackList
+### branch.blockList
 
 **type:** Array of string. **Default:** `[]`.
 
-Specify the GitHub branches that forbid the TiDB Cloud Branching app, even if they are in the whiteList.
+Specify the GitHub branches that forbid the TiDB Cloud Branching app, even if they are in the allowList.
 
 ```
 github:
     branch:
-       blackList:
+       blockList:
            - ".*_doc"
            - ".*_blackList"
 ```
 
-### branch.whiteList
+### branch.allowList
 
 **type:** Array of string. **Default:** `[.*]`.
 
@@ -92,7 +92,7 @@ Specify the GitHub branches that allow the TiDB Cloud Branching app.
 ```
 github:
     branch:
-       whiteList:
+       allowList:
            - ".*_db"
 ```
 
