@@ -75,6 +75,10 @@ RU consumptions can occur in various scenarios. One common scenario is during ba
 
 A spike in RU usage can occur due to necessary background jobs in TiDB. These jobs, such as automatically analyzing tables and rebuilding statistics, are required for generating optimized query plans.
 
+### What are the consequences when my cluster exhausts its free quota or exceeds its spending limit?
+
+Once the free quota or spending limit of a cluster is reached, the cluster will enforce throttling measures on read and write operations. These operations will be limited until either the quota is increased or the usage is reset at the start of a new month. For more information, see [TiDB Serverless Limitations and Quotas](/tidb-cloud/serverless-limitations.md#usage-quota).
+
 ## Security FAQs
 
 ### Is my TiDB Serverless shared or dedicated?
