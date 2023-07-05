@@ -31,7 +31,7 @@ Before the integration, make sure that you have the following:
 
 To integrate TiDB Serverless branching with your GitHub repository, take the following steps:
 
-1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [Clusters](https://tidbcloud.com/console/clusters) page of your project, and then click the name of your target TiDB Serverless cluster. The cluster overview page is displayed.
+1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [Clusters](https://tidbcloud.com/console/clusters) page of your project, and then click the name of your target TiDB Serverless cluster to go to its overview page.
 
 2. Click **Branches** in the left navigation pane.
 
@@ -40,13 +40,19 @@ To integrate TiDB Serverless branching with your GitHub repository, take the fol
     - If you have not logged into GitHub, you will be asked to log into GitHub first.
     - If it is the first time you use the integration, you will be asked to authorize the **TiDB Cloud Branching** app.
 
+    ![github-authorize.png](../media/tidb-cloud/branch/github-authorize.png)
+
 4. In the **Connect to GitHub** dialog, select a GitHub account in the **GitHub Account** drop-down list.
 
     If your account does not exist in the list, click **Install Other Account**, and then follow the on-screen instructions to install the account.
 
+    ![github-install.png](../media/tidb-cloud/branch/github-install.png)
+
 5. Select your target repository in the **GitHub Repository** drop-down list. If the list is long, you can search the repository by typing the name.
 
 6. Click **Connect** to connect between your TiDB Serverless cluster and your GitHub repository.
+
+    ![github-connect.png](../media/tidb-cloud/branch/github-connect.png)
 
 ## TiDB Cloud Branching app behaviors
 
@@ -54,10 +60,10 @@ After you connect your TiDB Serverless cluster to your GitHub repository, for ea
 
 | Pull request changes  |  TiDB Cloud Branching App behaviors |
 |---------------------- |------------------------------------ |
-| Create a pull request | When you create a pull request in the repository, the [TiDB Cloud Branching](https://github.com/apps/tidb-cloud-branching) GitHub app creates a new TiDB Serverless branch. The branch name is in the `${github_branch_name}_${pr_id}_${commit_sha}` format. |
-| Push new commits to a pull request | Every time you push a new commit to a pull request in the repository, the [TiDB Cloud Branching](https://github.com/apps/tidb-cloud-branching) GitHub app deletes the previous TiDB Serverless branch and creates a new branch for the latest commit. |
-| Close or merge a pull request | When you close or merge a pull request, the [TiDB Cloud Branching](https://github.com/apps/tidb-cloud-branching) GitHub app deletes the branch for this pull request. |
-| Reopen a pull request | When you reopen a pull request, the [TiDB Cloud Branching](https://github.com/apps/tidb-cloud-branching) GitHub app creates a branch for the lasted commit of the pull request. |
+| Create a pull request | When you create a pull request in the repository, the [TiDB Cloud Branching](https://github.com/apps/tidb-cloud-branching) app creates a branch for your TiDB Serverless cluster. The branch name is in the `${github_branch_name}_${pr_id}_${commit_sha}` format. |
+| Push new commits to a pull request | Every time you push a new commit to a pull request in the repository, the [TiDB Cloud Branching](https://github.com/apps/tidb-cloud-branching) app deletes the previous TiDB Serverless branch and creates a new branch for the latest commit. |
+| Close or merge a pull request | When you close or merge a pull request, the [TiDB Cloud Branching](https://github.com/apps/tidb-cloud-branching) app deletes the branch for this pull request. |
+| Reopen a pull request | When you reopen a pull request, the [TiDB Cloud Branching](https://github.com/apps/tidb-cloud-branching) app creates a branch for the lasted commit of the pull request. |
 
 ## Configuring TiDB Cloud Branching app
 
@@ -118,13 +124,13 @@ github:
 
 One of the best practices for using branches is to create a branching CI workflow. With the workflow, you can test your code using a TiDB Serverless branch instead of using the production cluster before merging the pull request. You can find a live demo [here](https://github.com/shiyuhang0/tidbcloud-branch-gorm-example).
 
-Here are the main steps to create the workflow
+Here are the main steps to create the workflow:
 
 1. [Integrate TiDB Serverless branching with your GitHub repository](#integrate-tidb-serverless-branching-with-your-github-repository).
 
 2. Get the branch connection information.
 
-   Use the [wait-for-tidbcloud-branch](https://github.com/tidbcloud/wait-for-tidbcloud-branch) action to wait for the readiness of the TiDB Serverless branch and get the connection information of the branch.
+   You can use the [wait-for-tidbcloud-branch](https://github.com/tidbcloud/wait-for-tidbcloud-branch) action to wait for the readiness of the TiDB Serverless branch and get the connection information of the branch.
 
     Example usage:
 
