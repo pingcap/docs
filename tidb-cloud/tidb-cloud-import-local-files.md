@@ -87,7 +87,7 @@ In this case, you can use [LOAD DATA](/sql-statements/sql-statement-load-data.md
 CREATE TABLE `url` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `client` smallint(5) unsigned NOT NULL,
-  `dest` varchar(5),
+  `address` varchar(5),
   `employee` smallint(5) unsigned NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB;
