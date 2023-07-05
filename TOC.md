@@ -4,7 +4,7 @@
 - [Docs Home](https://docs.pingcap.com/)
 - About TiDB
   - [TiDB Introduction](/overview.md)
-  - [TiDB 7.1 Release Notes](/releases/release-7.1.0.md)
+  - [TiDB 7.2 Release Notes](/releases/release-7.2.0.md)
   - [Features](/basic-features.md)
   - [MySQL Compatibility](/mysql-compatibility.md)
   - [TiDB Limitations](/tidb-limitations.md)
@@ -116,6 +116,7 @@
 - Migrate
   - [Overview](/migration-overview.md)
   - [Migration Tools](/migration-tools.md)
+  - [Import Best Practices](/tidb-lightning/data-import-best-practices.md)
   - Migration Scenarios
     - [Migrate from Aurora](/migrate-aurora-to-tidb.md)
     - [Migrate MySQL of Small Datasets](/migrate-small-mysql-to-tidb.md)
@@ -552,7 +553,9 @@
         - [TiCDC CSV Protocol](/ticdc/ticdc-csv.md)
       - [TiCDC Open API v2](/ticdc/ticdc-open-api-v2.md)
       - [TiCDC Open API v1](/ticdc/ticdc-open-api.md)
-      - [Guide for Developing a Storage Sink Consumer](/ticdc/ticdc-storage-consumer-dev-guide.md)
+      - TiCDC Data Consumption
+        - [TiCDC Row Data Checksum Verification Based on Avro](/ticdc/ticdc-avro-checksum-verification.md)
+        - [Guide for Developing a Storage Sink Consumer](/ticdc/ticdc-storage-consumer-dev-guide.md)
       - [Compatibility](/ticdc/ticdc-compatibility.md)
     - [Troubleshoot](/ticdc/troubleshoot-ticdc.md)
     - [FAQs](/ticdc/ticdc-faq.md)
@@ -694,6 +697,7 @@
       - [`BATCH`](/sql-statements/sql-statement-batch.md)
       - [`BEGIN`](/sql-statements/sql-statement-begin.md)
       - [`CALIBRATE RESOURCE`](/sql-statements/sql-statement-calibrate-resource.md)
+      - [`CANCEL IMPORT JOB`](/sql-statements/sql-statement-cancel-import-job.md)
       - [`CHANGE COLUMN`](/sql-statements/sql-statement-change-column.md)
       - [`COMMIT`](/sql-statements/sql-statement-commit.md)
       - [`CHANGE DRAINER`](/sql-statements/sql-statement-change-drainer.md)
@@ -737,6 +741,7 @@
       - [`FLUSH TABLES`](/sql-statements/sql-statement-flush-tables.md)
       - [`GRANT <privileges>`](/sql-statements/sql-statement-grant-privileges.md)
       - [`GRANT <role>`](/sql-statements/sql-statement-grant-role.md)
+      - [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md)
       - [`INSERT`](/sql-statements/sql-statement-insert.md)
       - [`KILL [TIDB]`](/sql-statements/sql-statement-kill.md)
       - [`LOAD DATA`](/sql-statements/sql-statement-load-data.md)
@@ -783,6 +788,7 @@
       - [`SHOW ERRORS`](/sql-statements/sql-statement-show-errors.md)
       - [`SHOW [FULL] FIELDS FROM`](/sql-statements/sql-statement-show-fields-from.md)
       - [`SHOW GRANTS`](/sql-statements/sql-statement-show-grants.md)
+      - [`SHOW IMPORT JOB`](/sql-statements/sql-statement-show-import-job.md)
       - [`SHOW INDEX [FROM|IN]`](/sql-statements/sql-statement-show-index.md)
       - [`SHOW INDEXES [FROM|IN]`](/sql-statements/sql-statement-show-indexes.md)
       - [`SHOW KEYS [FROM|IN]`](/sql-statements/sql-statement-show-keys.md)
@@ -981,6 +987,8 @@
   - [Release Timeline](/releases/release-timeline.md)
   - [TiDB Versioning](/releases/versioning.md)
   - [TiDB Installation Packages](/binary-package.md)
+  - v7.2
+    - [7.2.0-DMR](/releases/release-7.2.0.md)
   - v7.1
     - [7.1.0](/releases/release-7.1.0.md)
   - v7.0

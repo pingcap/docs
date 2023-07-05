@@ -24,6 +24,7 @@ ID: simple-replication-task
 Info: {"sink-uri":"kafka://127.0.0.1:9092/topic-name?protocol=canal-json&kafka-version=2.4.0&partition-num=6&max-message-bytes=67108864&replication-factor=1","opts":{},"create-time":"2020-03-12T22:04:08.103600025+08:00","start-ts":415241823337054209,"target-ts":0,"admin-job-type":0,"sort-engine":"unified","sort-dir":".","config":{"case-sensitive":true,"filter":{"rules":["*.*"],"ignore-txn-start-ts":null,"ddl-allow-list":null},"mounter":{"worker-num":16},"sink":{"dispatchers":null},"scheduler":{"type":"table-number","polling-time":-1}},"state":"normal","history":null,"error":null}
 ```
 
+- `--server`: The address of any TiCDC server in the TiCDC cluster.
 - `--changefeed-id`: The ID of the replication task. The format must match the `^[a-zA-Z0-9]+(\-[a-zA-Z0-9]+)*$` regular expression. If this ID is not specified, TiCDC automatically generates a UUID (the version 4 format) as the ID.
 - `--sink-uri`: The downstream address of the replication task. For details, see [Configure sink URI with `kafka`](#configure-sink-uri-for-kafka).
 - `--start-ts`: Specifies the starting TSO of the changefeed. From this TSO, the TiCDC cluster starts pulling data. The default value is the current time.
@@ -68,14 +69,14 @@ The following are descriptions of sink URI parameters and values that can be con
 | `key` | The path of the certificate key file needed to connect to the downstream Kafka instance (optional). |
 | `insecure-skip-verify` | Whether to skip certificate verification when connecting to the downstream Kafka instance (optional, `false` by default). |
 | `sasl-user` | The identity (authcid) of SASL/PLAIN or SASL/SCRAM authentication needed to connect to the downstream Kafka instance (optional). |
-| `sasl-password` | The password of SASL/PLAIN or SASL/SCRAM authentication needed to connect to the downstream Kafka instance (optional). |
+| `sasl-password` | The password of SASL/PLAIN or SASL/SCRAM authentication needed to connect to the downstream Kafka instance (optional). If it contains special characters, they need to be URL encoded. |
 | `sasl-mechanism` | The name of SASL authentication needed to connect to the downstream Kafka instance. The value can be `plain`, `scram-sha-256`, `scram-sha-512`, or `gssapi`. |
 | `sasl-gssapi-auth-type` | The gssapi authentication type. Values can be `user` or `keytab` (optional). |
 | `sasl-gssapi-keytab-path` | The gssapi keytab path (optional).|
 | `sasl-gssapi-kerberos-config-path` | The gssapi kerberos configuration path (optional). |
 | `sasl-gssapi-service-name` | The gssapi service name (optional). |
 | `sasl-gssapi-user` | The user name of gssapi authentication (optional). |
-| `sasl-gssapi-password` | The password of gssapi authentication (optional).  |
+| `sasl-gssapi-password` | The password of gssapi authentication (optional). If it contains special characters, they need to be URL encoded. |
 | `sasl-gssapi-realm` | The gssapi realm name (optional). |
 | `sasl-gssapi-disable-pafxfast` | Whether to disable the gssapi PA-FX-FAST (optional). |
 | `dial-timeout` | The timeout in establishing a connection with the downstream Kafka. The default value is `10s`. |
