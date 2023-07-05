@@ -776,13 +776,15 @@ Configuration items related to Raftstore.
 + Minimum value: `1`
 + Maximum value: `100`
 
-### `region-compact-min-redundant-rows`
-+ The number of redundant mvcc rows required to trigger RocksDB compaction. This configuration only takes effect for Partitioned Raft KV (storage.engine="partitioned-raft-kv").
+### `region-compact-min-redundant-rows` <span class="version-mark">New in v7.1.0</span>
+
++ The number of redundant MVCC rows required to trigger RocksDB compaction. This configuration only takes effect for Partitioned Raft KV (`storage.engine="partitioned-raft-kv"`).
 + Default value: `50000`
 + Minimum value: `0`
 
-### `region-compact-redundant-rows-percent`
-+ The proportion of redundant mvcc row required to trigger RocksDB compaction. This configuration only takes effect for Partitioned Raft KV (storage.engine="partitioned-raft-kv").
+### `region-compact-redundant-rows-percent` <span class="version-mark">New in v7.1.0</span>
+
++ The percentage of redundant MVCC rows required to trigger RocksDB compaction. This configuration only takes effect for Partitioned Raft KV (`storage.engine="partitioned-raft-kv"`).
 + Default value: `20`
 + Minimum value: `1`
 + Maximum value: `100`
