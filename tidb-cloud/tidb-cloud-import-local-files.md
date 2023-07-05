@@ -91,5 +91,5 @@ CREATE TABLE `url` (
   `employee` smallint(5) unsigned NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB;
-LOAD DATA LOCAL INFILE 'load.txt' INTO TABLE URL FIELDS TERMINATED BY ',' (client, dest, employee);
+LOAD DATA LOCAL INFILE 'load.txt' INTO TABLE URL FIELDS TERMINATED BY ',' (client, address, employee);
 ```
