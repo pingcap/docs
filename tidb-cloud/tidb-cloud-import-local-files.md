@@ -93,4 +93,4 @@ CREATE TABLE `import_test` (
 LOAD DATA LOCAL INFILE 'load.txt' INTO TABLE import_test FIELDS TERMINATED BY ',' (name, address);
 ```
 
-If you use a MySQL client and encounter the following error "ERROR 2068 (HY000): LOAD DATA LOCAL INFILE file request rejected due to restrictions on access.", you can add `--local-infile=true` when connecting.
+If you use `mysql` and encounter the following error "ERROR 2068 (HY000): LOAD DATA LOCAL INFILE file request rejected due to restrictions on access.", you can add `--local-infile=true` when connecting.
