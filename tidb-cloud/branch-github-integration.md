@@ -15,8 +15,8 @@ In the integration process, you will be asked to install the [TiDB Cloud Branchi
 
 This document covers the following topics:
 
-1. How to integrate your TiDB Serverless branches with GitHub
-2. How **TiDB Cloud Branching** works
+1. How to integrate TiDB Serverless branching with GitHub
+2. How does the TiDB Cloud Branching app work
 3. How to build a branching-based CI workflow to test every pull request using a branch rather than using the production cluster
 
 ## Before you begin
