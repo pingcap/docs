@@ -20,17 +20,13 @@ TiDB Serverless offers the TiDB database with full HTAP capabilities for you and
 
 Get started with the 5-minute [TiDB Cloud Quick Start](/tidb-cloud/tidb-cloud-quickstart.md).
 
-### Is TiDB Serverless free during beta?
+### Is TiDB Serverless free?
 
-Until May 31, 2023, TiDB Serverless clusters are still free, with a 100% discount off. After that, usage beyond the free quota will be charged. Once the free quota of a cluster is reached, the read and write operations on this cluster will be throttled until you [increase the quota](/tidb-cloud/manage-serverless-spend-limit.md#update-spend-limit) or the usage is reset upon the start of a new month.
+Each TiDB Serverless cluster has a free [usage quota](/tidb-cloud/serverless-limitations.md#usage-quota). Usage beyond the free quota will be charged. Once the free quota of a cluster is reached, the read and write operations on this cluster will be throttled until you [increase the quota](/tidb-cloud/manage-serverless-spend-limit.md#update-spend-limit) or the usage is reset upon the start of a new month.
 
 For more information, see [TiDB Serverless usage quota](/tidb-cloud/select-cluster-tier.md#usage-quota).
 
-### What does it mean for beta release?
-
-TiDB Serverless is in beta while we continuously add new features and improve existing features before it becomes generally available. We do not provide SLA for beta products. Therefore, TiDB Serverless should **NOT** be used in production currently.
-
-### What are the limitations of a TiDB Serverless cluster in beta?
+### What are the limitations of a TiDB Serverless cluster?
 
 For each organization in TiDB Cloud, you can create a maximum of five TiDB Serverless clusters by default. To create more TiDB Serverless clusters, you need to add a credit card and set a [spend limit](/tidb-cloud/tidb-cloud-glossary.md#spend-limit) for the usage.
 

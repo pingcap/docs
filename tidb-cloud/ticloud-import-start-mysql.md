@@ -5,7 +5,7 @@ summary: The reference of `ticloud import start mysql`.
 
 # ticloud import start mysql
 
-Import a table from a MySQL-compatible database to a [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta) cluster:
+Import a table from a MySQL-compatible database to a [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) cluster:
 
 ```shell
 ticloud import start mysql [flags]
