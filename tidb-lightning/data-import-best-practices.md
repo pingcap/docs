@@ -91,7 +91,7 @@ Note that it is recommended to reserve 20% of storage space, because background 
 ## Change configuration parameters
 
 - `region-concurrency`: The concurrency of TiDB Lightning main logical processing. During parallel importing, it is recommended to set it to 75% of the CPU cores to prevent resource overload and potential OOM issues.
-- `send-kv-pairs`: The number of Key-Value pairs sent by TiDB Lightning to TiKV in a single request. It is recommended to adjust this value based on the formula send-kv-pairs \* row-size < 1 MiB. Starting from v7.2.0, this parameter is replaced by `send-kv-size`, and no additional setting is required.
+- `send-kv-pairs`: The number of Key-Value pairs sent by TiDB Lightning to TiKV in a single request. It is recommended to adjust this value based on the formula send-kv-pairs \* row-size < 1 MiB.
 - `disk-quota`: It is recommended to ensure that the sorting directory space of TiDB Lightning is larger than the size of the data source. If you cannot ensure that, you can set `disk-quota` to 80% of the sorting directory space of TiDB Lightning. In this way, TiDB Lightning will sort and write data in batches according to the specified `disk-quota`, but note that this approach might result in lower import performance compared to a complete sorting process.
 - `GOMEMLIMIT`: TiDB Lightning is implemented in the Go language. Setting `GOMEMLIMIT` to 80% of the instance memory to reduce the probability of OOM caused by the Go GC mechanism.
 
@@ -135,7 +135,7 @@ Prepare TiDB Lightning instances to make each instance process 5 TiB to 10 TiB o
 ### Change configuration parameters
 
 - Set `region-concurrency` to 75% of the number of cores of the TiDB Lightning instance.
-- Set `send-kv-pairs` to `3200`. This method applies to TiDB v7.1.0 and earlier versions. Starting from v7.2.0, this parameter is replaced by `send-kv-size`, and no additional setting is required.
+- Set `send-kv-pairs` to `3200`. This method applies to TiDB v7.1.0 and earlier versions.
 - Adjust `GOMEMLIMIT` to 80% of the memory on the node where the instance is located.
 
 If the PD Scatter Region latency during the import process exceeds 30 minutes, consider the following optimizations:
