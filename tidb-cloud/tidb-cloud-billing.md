@@ -40,11 +40,11 @@ For each monthly invoice:
 
 To view the list of invoices, perform the following steps:
 
-1. Click <MDSvgIcon name="icon-top-account-settings" /> **Account** in the upper-right corner of the TiDB Cloud console.
+1. Click <MDSvgIcon name="icon-top-organization" /> in the lower-left corner of the TiDB Cloud console.
 
     > **Note:**
     >
-    > If you are in multiple organizations, select **Switch Organization** and switch your account to the target organization.
+    > If you are in multiple organizations, switch to your target organization by clicking its name.
 
 2. Click **Billing**. The invoices page is displayed.
 
@@ -60,11 +60,11 @@ After setting the payment method, TiDB Cloud will generate the invoice and billi
 
 To view the billing details, perform the following steps:
 
-1. Click <MDSvgIcon name="icon-top-account-settings" /> **Account** in the upper-right corner of the TiDB Cloud console.
+1. Click <MDSvgIcon name="icon-top-organization" /> in the lower-left corner of the TiDB Cloud console.
 
     > **Note:**
     >
-    > If you are in multiple organizations, select **Switch Organization** and switch your account to the target organization.
+    > If you are in multiple organizations, switch to your target organization by clicking its name.
 
 2. Click **Billing**.
 3. Click **Bills**. The billing details page is displayed.
@@ -90,11 +90,11 @@ The detailed information of your credits is available on the **Credits** page, i
 
 To view this page, perform the following steps:
 
-1. Click <MDSvgIcon name="icon-top-account-settings" /> **Account** in the upper-right corner of the TiDB Cloud console.
+1. Click <MDSvgIcon name="icon-top-organization" /> in the lower-left corner of the TiDB Cloud console.
 
     > **Note:**
     >
-    > If you are in multiple organizations, select **Switch Organization** and switch your account to the target organization.
+    > If you are in multiple organizations, switch to your target organization by clicking its name.
 
 2. Click **Billing**.
 3. Click **Credits**. The credit details page is displayed.
@@ -119,11 +119,11 @@ The discount information includes all discounts that you have received, the stat
 
 To view this page, perform the following steps:
 
-1. Click <MDSvgIcon name="icon-top-account-settings" /> **Account** in the upper-right corner of the TiDB Cloud console.
+1. Click <MDSvgIcon name="icon-top-organization" /> in the lower-left corner of the TiDB Cloud console.
 
     > **Note:**
     >
-    > If you are in multiple organizations, select **Switch Organization** and switch your account to the target organization.
+    > If you are in multiple organizations, switch to your target organization by clicking its name.
 
 2. Click **Billing**.
 3. Click **Discounts**. The discount details page is displayed.
@@ -148,11 +148,11 @@ The fee is deducted from a bound credit card according to your cluster usage. To
 
 - Anytime in the billing console:
 
-    1. Click <MDSvgIcon name="icon-top-account-settings" /> **Account** in the upper-right corner of the TiDB Cloud console.
+    1. Click <MDSvgIcon name="icon-top-organization" /> in the lower-left corner of the TiDB Cloud console.
 
         > **Note:**
         >
-        > If you are in multiple organizations, select **Switch Organization** and switch your account to the target organization.
+        > If you are in multiple organizations, switch to your target organization by clicking its name.
 
     2. Click **Billing**.
     3. Under the **Payment Method** tab, click **Add a New Card**.
@@ -166,11 +166,11 @@ You can bind multiple credit cards, and set one of them as the default credit ca
 
 To set the default credit card, perform the following steps:
 
-1. Click <MDSvgIcon name="icon-top-account-settings" /> **Account** in the upper-right corner of the TiDB Cloud console.
+1. Click <MDSvgIcon name="icon-top-organization" /> in the lower-left corner of the TiDB Cloud console.
 
     > **Note:**
     >
-    > If you are in multiple organizations, select **Switch Organization** and switch your account to the target organization.
+    > If you are in multiple organizations, switch to your target organization by clicking its name.
 
 2. Click **Billing**.
 3. Click the **Payment Method** tab.
@@ -182,11 +182,11 @@ The billing profile information includes the business legal address and tax regi
 
 To edit the billing profile information, perform the following steps:
 
-1. Click <MDSvgIcon name="icon-top-account-settings" /> **Account** in the upper-right corner of the TiDB Cloud console.
+1. Click <MDSvgIcon name="icon-top-organization" /> in the lower-left corner of the TiDB Cloud console.
 
     > **Note:**
     >
-    > If you are in multiple organizations, select **Switch Organization** and switch your account to the target organization.
+    > If you are in multiple organizations, switch to your target organization by clicking its name.
 
 2. Click **Billing**.
 3. Click the **Payment Method** tab.
@@ -198,11 +198,11 @@ If you are the owner or billing administrator of your organization, you can mana
 
 If you have agreed with our sales on a contract and received an email to review and accept the contract online, you can do the following:
 
-1. Click <MDSvgIcon name="icon-top-account-settings" /> **Account** in the upper-right corner of the TiDB Cloud console.
+1. Click <MDSvgIcon name="icon-top-organization" /> in the lower-left corner of the TiDB Cloud console.
 
     > **Note:**
     >
-    > If you are in multiple organizations, select **Switch Organization** and switch your account to the target organization.
+    > If you are in multiple organizations, switch to your target organization by clicking its name.
 
 2. Click **Billing**.
 3. Click **Contract**. The contract list is displayed.

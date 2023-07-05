@@ -75,7 +75,7 @@ Before enabling Cloud Organization SSO, make sure to inform your members about t
 To enable Cloud Organization SSO, take the following steps:
 
 1. Log in to [TiDB Cloud console](https://tidbcloud.com) as a user with the organization owner role.
-2. In the upper-right corner of the TiDB Cloud console, click <MDSvgIcon name="icon-top-organization" /> > **Organization Settings**.
+2. In the lower-left corner of the TiDB Cloud console, click <MDSvgIcon name="icon-top-organization" />, and then click **Organization Settings**.
 3. On the **Organization Settings** page, click the **Authentication** tab, and then click **Enable**.
 4. In the dialog, fill in the custom URL for your organization, which must be unique in TiDB Cloud.
 
