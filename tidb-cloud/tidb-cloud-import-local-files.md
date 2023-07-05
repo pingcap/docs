@@ -81,7 +81,7 @@ Currently, this method supports importing one CSV file for one task into either 
 
 No. Currently, you can only import all columns of a CSV file into an existing table.
 
-In this case, you can use the MySQL client to connect your TiDB cluster, and then use [LOAD DATA](/sql-statements/sql-statement-load-data.md) to specify the columns to import. For example:
+In this case, you can use the MySQL client to connect your TiDB cluster, and then use [LOAD DATA](https://docs.pingcap.com/tidb/stable/sql-statement-load-data) to specify the columns to import. For example:
 
 ```sql
 CREATE TABLE `import_test` (
@@ -91,4 +91,4 @@ CREATE TABLE `import_test` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB;
 LOAD DATA LOCAL INFILE 'load.txt' INTO TABLE import_test FIELDS TERMINATED BY ',' (name, address);
-```
+If you use MySQL client and encounter the following error "ERROR 2068 (HY000): LOAD DATA LOCAL INFILE file request rejected due to restrictions on access.", you can add `--local-infile=true` when connecting.
