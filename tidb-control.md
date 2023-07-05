@@ -5,34 +5,38 @@ summary: Use TiDB Control to obtain TiDB status information for debugging.
 
 # TiDB コントロール ユーザー ガイド {#tidb-control-user-guide}
 
-TiDB Control は TiDB のコマンドライン ツールで、通常はデバッグ用に TiDB のステータス情報を取得するために使用されます。このドキュメントでは、TiDB Control の機能と、これらの機能の使用方法を紹介します。
-
-## TiDB コントロールを取得する {#get-tidb-control}
-
-TiUP を使用してインストールするか、ソース コードからコンパイルすることで、TiDB Control を取得できます。
+TiDB Control は TiDB のコマンドライン ツールで、通常はデバッグのために TiDB のステータス情報を取得するために使用されます。このドキュメントでは、TiDB Control の機能とその使用方法を紹介します。
 
 > **ノート：**
 >
-> 使用するコントロール ツールのバージョンは、クラスターのバージョンと一致していることが推奨されます。
+> TiDB コントロールはデバッグ目的に特化して設計されており、TiDB に導入される将来の機能と完全な互換性がない可能性があります。情報を取得するために、アプリケーションまたはユーティリティの開発にこのツールを含めることはお勧めできません。
 
-### TiUP を使用して TiDB コントロールをインストールする {#install-tidb-control-using-tiup}
+## TiDB コントロールを取得する {#get-tidb-control}
 
-TiUP をインストールすると、コマンド`tiup ctl:<cluster-version> tidb`つで TiDB Control を取得して実行できます。
+TiDB Control を入手するには、 TiUPを使用してインストールするか、ソース コードからコンパイルします。
 
-### ソースコードからコンパイル {#compile-from-source-code}
+> **ノート：**
+>
+> 使用する制御ツールのバージョンがクラスターのバージョンと一致していることをお勧めします。
 
--   コンパイル環境要件： [行け](https://golang.org/)バージョン 1.13 以降
--   コンパイル手順: [TiDB コントロール プロジェクト](https://github.com/pingcap/tidb-ctl)のルート ディレクトリに移動し、 `make`コマンドを使用してコンパイルし、 `tidb-ctl`を生成します。
--   コンパイル ドキュメント: ヘルプ ファイルは`doc`ディレクトリにあります。ヘルプ ファイルが失われた場合、またはそれらを更新したい場合は、 `make doc`コマンドを使用してヘルプ ファイルを生成します。
+### TiUPを使用して TiDB コントロールをインストールする {#install-tidb-control-using-tiup}
 
-## 使い方紹介 {#usage-introduction}
+TiUPをインストールした後、 `tiup ctl:<cluster-version> tidb`コマンドを使用して TiDB コントロールを取得して実行できます。
 
-このセクションでは、 `tidb-ctl`でコマンド、サブコマンド、オプション、およびフラグを使用する方法について説明します。
+### ソースコードからコンパイルする {#compile-from-source-code}
 
--   command: `-`または`--`のない文字
+-   コンパイル環境要件: [<a href="https://golang.org/">行く</a>](https://golang.org/)バージョン 1.13 以降
+-   コンパイル手順: [<a href="https://github.com/pingcap/tidb-ctl">TiDB コントロール プロジェクト</a>](https://github.com/pingcap/tidb-ctl)のルート ディレクトリに移動し、 `make`コマンドを使用してコンパイルし、 `tidb-ctl`を生成します。
+-   コンパイル ドキュメント: ヘルプ ファイルは`doc`ディレクトリにあります。ヘルプ ファイルが失われた場合、またはヘルプ ファイルを更新したい場合は、 `make doc`コマンドを使用してヘルプ ファイルを生成します。
+
+## 使い方の紹介 {#usage-introduction}
+
+このセクションでは、 `tidb-ctl`のコマンド、サブコマンド、オプション、およびフラグの使用方法について説明します。
+
+-   コマンド: `-`または`--`のない文字
 -   サブコマンド: コマンドに続く`-`または`--`のない文字
 -   オプション: `-`または`--`の文字
--   フラグ: コマンド/サブコマンドまたはオプションの直後にある文字で、コマンド/サブコマンドまたはオプションに値を渡します
+-   flag: コマンド/サブコマンドまたはオプションの直後にある文字で、コマンド/サブコマンドまたはオプションに値を渡します。
 
 使用例： `tidb-ctl schema in mysql -n db`
 
@@ -44,41 +48,41 @@ TiUP をインストールすると、コマンド`tiup ctl:<cluster-version> ti
 
 現在、TiDB Control には次のサブコマンドがあります。
 
--   `tidb-ctl base64decode` : `BASE64`デコードに使用
--   `tidb-ctl decoder` : `KEY`デコードに使用
--   `tidb-ctl etcd` : etcdの操作に使用
--   `tidb-ctl log` : 単一行のスタック情報を展開するためにログ ファイルをフォーマットするために使用されます
--   `tidb-ctl mvcc` : MVCC 情報を取得するために使用されます
--   `tidb-ctl region` :リージョン情報の取得に使用
--   `tidb-ctl schema` : スキーマ情報の取得に使用
--   `tidb-ctl table` : テーブル情報の取得に使用
+-   `tidb-ctl base64decode` : `BASE64`のデコードに使用
+-   `tidb-ctl decoder` : `KEY`のデコードに使用
+-   `tidb-ctl etcd` : etcdの操作に使用されます。
+-   `tidb-ctl log` : 単一行のスタック情報を展開するためにログ ファイルをフォーマットするために使用されます。
+-   `tidb-ctl mvcc` : MVCC 情報の取得に使用されます。
+-   `tidb-ctl region` :リージョン情報の取得に使用されます。
+-   `tidb-ctl schema` : スキーマ情報の取得に使用されます
+-   `tidb-ctl table` : テーブル情報の取得に使用されます。
 
 ### 助けを得ます {#get-help}
 
-使用情報を取得するには、 `tidb-ctl -h/--help`を使用します。
+使用状況情報を取得するには`tidb-ctl -h/--help`使用します。
 
-TiDB Control は、複数のコマンド層で構成されています。各コマンド/サブコマンドの後に`-h/--help`を使用して、それぞれの使用情報を取得できます。
+TiDB Control は複数のコマンド層で構成されています。各コマンド/サブコマンドの後に`-h/--help`を使用すると、それぞれの使用法情報を取得できます。
 
 次の例は、スキーマ情報を取得する方法を示しています。
 
-使用状況の詳細を取得するには、 `tidb-ctl schema -h`を使用します。 `schema`コマンド自体には、 `in`と`tid`の 2 つのサブコマンドがあります。
+使用量の詳細を取得するには、 `tidb-ctl schema -h`を使用します。 `schema`コマンド自体には`in`と`tid`という 2 つのサブコマンドがあります。
 
--   `in`は、データベース名からデータベース内のすべてのテーブルのテーブル スキーマを取得するために使用されます。
+-   `in`は、データベース名を通じてデータベース内のすべてのテーブルのテーブル スキーマを取得するために使用されます。
 -   `tid`は、データベース全体で一意の`table_id`を使用してテーブル スキーマを取得するために使用されます。
 
-### グローバル オプション {#global-options}
+### グローバルオプション {#global-options}
 
 `tidb-ctl`には、次の接続関連のグローバル オプションがあります。
 
--   `--host` : TiDB サービスのアドレス (デフォルトは 127.0.0.1)
--   `--port` : TiDB ステータス ポート (デフォルト 10080)
--   `--pdhost` : PD サービスアドレス (デフォルト 127.0.0.1)
--   `--pdport` : PD サービス ポート (デフォルトは 2379)
+-   `--host` : TiDB サービスアドレス (デフォルトは 127.0.0.1)
+-   `--port` : TiDB ステータスポート (デフォルトは 10080)
+-   `--pdhost` : PD サービスアドレス (デフォルトは 127.0.0.1)
+-   `--pdport` : PD サービスポート (デフォルトは 2379)
 -   `--ca` : TLS 接続に使用される CA ファイル パス
--   `--ssl-key` : TLS 接続に使用される鍵ファイルのパス
+-   `--ssl-key` : TLS 接続に使用されるキーファイルのパス
 -   `--ssl-cert` : TLS 接続に使用される証明書ファイルのパス
 
-`--pdhost`と`--pdport`は主に`etcd`サブコマンドで使用されます。たとえば、 `tidb-ctl etcd ddlinfo`です。アドレスとポートを指定しない場合、次のデフォルト値が使用されます。
+`--pdhost`と`--pdport`は主に`etcd`サブコマンドで使用されます。たとえば、 `tidb-ctl etcd ddlinfo` 。アドレスとポートを指定しない場合は、次のデフォルト値が使用されます。
 
 -   TiDB および PD のデフォルトのサービス アドレス: `127.0.0.1` 。サービス アドレスは IP アドレスである必要があります。
 -   TiDB のデフォルトのサービス ポート: `10080` 。
@@ -88,7 +92,7 @@ TiDB Control は、複数のコマンド層で構成されています。各コ�
 
 #### <code>in</code>サブコマンド {#the-code-in-code-subcommand}
 
-`in`は、データベース名からデータベース内のすべてのテーブルのテーブル スキーマを取得するために使用されます。
+`in`は、データベース名を通じてデータベース内のすべてのテーブルのテーブル スキーマを取得するために使用されます。
 
 ```bash
 tidb-ctl schema in <database name>
@@ -112,11 +116,11 @@ tidb-ctl schema in <database name>
 ]
 ```
 
-結果は JSON 形式で表示されます。 (上記の出力は切り捨てられています。)
+結果はJSON形式で表示されます。 (上記の出力は切り詰められています。)
 
--   テーブル名を指定する場合は、 `tidb-ctl schema in <database> -n <table name>`を使用してフィルタリングします。
+-   テーブル名を指定する場合は、 `tidb-ctl schema in <database> -n <table name>`を使用してフィルターします。
 
-    たとえば、 `tidb-ctl schema in mysql -n db`は`mysql`データベースの`db`テーブルのテーブル スキーマを返します。
+    たとえば、 `tidb-ctl schema in mysql -n db`データベース`mysql`のテーブル`db`のテーブル スキーマを返します。
 
     ```json
     {
@@ -130,15 +134,15 @@ tidb-ctl schema in <database name>
     }
     ```
 
-    (上記の出力も切り捨てられます。)
+    (上記の出力も切り詰められています。)
 
-    デフォルトの TiDB サービス アドレスとポートを使用したくない場合は、 `--host`と`--port`のオプションを使用して構成します。たとえば、 `tidb-ctl --host 172.16.55.88 --port 8898 schema in mysql -n db`です。
+    デフォルトの TiDB サービスのアドレスとポートを使用したくない場合は、 `--host`および`--port`オプションを使用して設定します。たとえば、 `tidb-ctl --host 172.16.55.88 --port 8898 schema in mysql -n db` 。
 
 #### <code>tid</code>サブコマンド {#the-code-tid-code-subcommand}
 
 `tid`は、データベース全体で一意の`table_id`を使用してテーブル スキーマを取得するために使用されます。 `in`サブコマンドを使用して特定のスキーマのすべてのテーブル ID を取得し、 `tid`サブコマンドを使用して詳細なテーブル情報を取得できます。
 
-たとえば、テーブル ID `mysql.stat_meta`は`21`です。 `tidb-ctl schema tid -i 21`を使用して`mysql.stat_meta`の詳細を取得できます。
+たとえば、 `mysql.stat_meta`のテーブル ID は`21`です。 `tidb-ctl schema tid -i 21`使用すると、 `mysql.stat_meta`の詳細を取得できます。
 
 ```json
 {
@@ -165,7 +169,7 @@ tidb-ctl base64decode [db_name.table_name] [base64_data]
 tidb-ctl base64decode [table_id] [base64_data]
 ```
 
-1.  次の SQL ステートメントを実行して、環境を準備します。
+1.  次の SQL ステートメントを実行して環境を準備します。
 
     ```sql
     use test;
@@ -204,7 +208,7 @@ tidb-ctl base64decode [table_id] [base64_data]
     }%
     ```
 
-3.  ``handle id (uint64) using `base64decode` ``をデコードします。
+3.  デコード``handle id (uint64) using `base64decode` `` 。
 
     ```shell
     $ tidb-ctl base64decode AAAAAAAAAAE=
@@ -253,17 +257,17 @@ tidb-ctl base64decode [table_id] [base64_data]
 
 ### <code>etcd</code>コマンド {#the-code-etcd-code-command}
 
--   `tidb-ctl etcd ddlinfo`は DDL 情報を取得するために使用されます。
+-   `tidb-ctl etcd ddlinfo`はDDL情報を取得するために使用されます。
 
--   `tidb-ctl etcd putkey KEY VALUE`は KEY VALUE を etcd に追加するために使用されます (すべての KEY は`/tidb/ddl/all_schema_versions/`ディレクトリに追加されます)。
+-   `tidb-ctl etcd putkey KEY VALUE`は、etcd に KEY VALUE を追加するために使用されます (すべての KEY が`/tidb/ddl/all_schema_versions/`ディレクトリに追加されます)。
 
     ```shell
     tidb-ctl etcd putkey "foo" "bar"
     ```
 
-    実際、KEY が`/tidb/ddl/all_schema_versions/foo`で VALUE が`bar`のキーと値のペアが etcd に追加されます。
+    実際、キーと値のペアは、 KEY が`/tidb/ddl/all_schema_versions/foo` 、 VALUE が`bar`である etcd に追加されます。
 
--   `tidb-ctl etcd delkey`は etcd の KEY を削除します。プレフィックスが`/tidb/ddl/fg/owner/`または`/tidb/ddl/all_schema_versions/`の KEY のみを削除できます。
+-   `tidb-ctl etcd delkey` etcd 内の KEY を削除します。 `/tidb/ddl/fg/owner/`または`/tidb/ddl/all_schema_versions/`プレフィックスを持つ KEY のみを削除できます。
 
     ```shell
     tidb-ctl etcd delkey "/tidb/ddl/fg/owner/foo"
@@ -272,11 +276,11 @@ tidb-ctl base64decode [table_id] [base64_data]
 
 ### <code>log</code>コマンド {#the-code-log-code-command}
 
-TiDB エラーログのスタック情報は 1 行形式です。 `tidb-ctl log`を使用して、その形式を複数行に変更できます。
+TiDB エラー ログのスタック情報は 1 行形式です。 `tidb-ctl log`使用すると、形式を複数行に変更できます。
 
 ### <code>keyrange</code>コマンド {#the-code-keyrange-code-command}
 
-`keyrange`サブコマンドは、16 進形式で出力されるグローバルまたはテーブル関連のキー範囲情報を照会するために使用されます。
+`keyrange`サブコマンドは、グローバルまたはテーブル関連のキー範囲情報をクエリするために使用され、16 進形式で出力されます。
 
 -   `tidb-ctl keyrange`コマンドを実行して、グローバル キー範囲情報を確認します。
 
@@ -292,7 +296,7 @@ TiDB エラーログのスタック情報は 1 行形式です。 `tidb-ctl log`
       table: (74, 75)
     ```
 
--   `--encode`オプションを追加して、エンコードされたキーを表示します (TiKV および PD と同じ形式で):
+-   エンコードされたキーを表示する`--encode`オプションを追加します (TiKV および PD と同じ形式)。
 
     {{< copyable "" >}}
 
