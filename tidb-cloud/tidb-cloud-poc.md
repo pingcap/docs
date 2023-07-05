@@ -87,7 +87,7 @@ For a newly created cluster, note the following configurations:
 
 Next, you can load your database schemas to the TiDB cluster, including tables and indexes.
 
-Because the amount of PoC credits is limited, to maximize the value of credits, it is recommended that you create a [TiDB Serverless cluster](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta) for compatibility tests and preliminary analysis on TiDB Cloud.
+Because the amount of PoC credits is limited, to maximize the value of credits, it is recommended that you create a [TiDB Serverless cluster](/tidb-cloud/select-cluster-tier.md#tidb-serverless) for compatibility tests and preliminary analysis on TiDB Cloud.
 
 TiDB Cloud is highly compatible with MySQL 5.7. You can directly import your data into TiDB if it is MySQL-compatible or can be adapted to be compatible with MySQL.
 

@@ -17,7 +17,7 @@ TiDB Cloud supports New Relic integration (beta). You can configure TiDB Cloud t
 
 ## Limitation
 
-You cannot use the New Relic integration in [TiDB Serverless clusters](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta).
+You cannot use the New Relic integration in [TiDB Serverless clusters](/tidb-cloud/select-cluster-tier.md#tidb-serverless).
 
 ## Steps
 
