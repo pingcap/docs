@@ -1153,7 +1153,7 @@ Configuration items related to RocksDB
 ### `max-total-wal-size`
 
 + The maximum RocksDB WAL size in total, which is the size of `*.log` files in the `data-dir`.
-+ Default value: `"4GB"`
++ Default value: `"4GB"` when `storage.engine="raft-kv"`, `1` when `storage.engine="partitioned-raft-kv"`
 
 ### `stats-dump-period`
 
@@ -1537,7 +1537,7 @@ Configuration items related to `rocksdb.defaultcf`, `rocksdb.writecf`, and `rock
     - `3`: Can be read by TiKV v2.1 and later versions. Changes the encoding of the keys in index blocks.
     - `4`: Can be read by TiKV v3.0 and later versions. Changes the encoding of the values in index blocks.
     - `5`: Can be read by TiKV v6.1 and later versions. Full and partitioned filters use a faster and more accurate Bloom filter implementation with a different schema.
-+ Default value: `2`
++ Default value: `2` when `storage.engine="raft-kv"`, `5` when `storage.engine="partitioned-raft-kv"`
 
 ### `ttl` <span class="version-mark">New in v7.2.0</span>
 
