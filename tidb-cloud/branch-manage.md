@@ -5,7 +5,7 @@ summary: Learn How to manage the TiDB Serverless branch.
 
 # Manage TiDB Serverless Branches
 
-This document describes how to manage the TiDB Serverless branches using the TiDB Cloud console (https://tidbcloud.com). You can also manage it using the [TiDB Cloud CLI](/tidb-cloud/cli-reference.md).
+This document describes how to manage the TiDB Serverless branches using the [TiDB Cloud console](https://tidbcloud.com). You can also manage it using the [TiDB Cloud CLI](/tidb-cloud/cli-reference.md).
 
 ## View branches
 

@@ -23,7 +23,7 @@ You can create branches easily and quickly to get isolated data environments. Br
 
 - Experimentation: While developing new features or making changes, developers can create branches to experiment with different approaches or configurations. This allows them to compare various options, gather data, and make informed decisions before merging changes into the main database.
 
-4. Performance optimization: Database changes are sometimes made to enhance performance. With branching, developers can experiment and fine-tune various configurations, indexes, or algorithms in isolated environments to identify the most efficient solution.
+- Performance optimization: Database changes are sometimes made to enhance performance. With branching, developers can experiment and fine-tune various configurations, indexes, or algorithms in isolated environments to identify the most efficient solution.
 
 - Testing and staging: Teams can create branches for testing and staging purposes. It ensures a controlled environment for quality assurance, user acceptance testing, or staging customizations before merging them into the main database.
 
