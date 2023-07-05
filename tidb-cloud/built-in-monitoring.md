@@ -15,15 +15,14 @@ To view the metrics on the Metrics page, take the following steps:
 
     > **Tip:**
     >
-    > If you have multiple projects, you can view the project list and switch to another project from the ☰ hover menu in the upper-left corner.
+    > If you have multiple projects, you can click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner and switch to another project.
 
 2. Click the name of the target cluster. The cluster overview page is displayed.
 3. Click **Metrics** in the left navigation pane.
 
 ## Metrics retention policy
 
-- For TiDB Dedicated clusters, the metrics data is kept for 7 days.
-- For TiDB Serverless clusters, the metrics data is kept for 3 days.
+For TiDB Dedicated clusters and TiDB Serverless clusters, the metrics data is kept for 7 days.
 
 ## Metrics for TiDB Dedicated clusters
 

@@ -11,7 +11,7 @@ This document describes how to manage your endpoints in a Data App in the TiDB C
 
 ## Before you begin
 
-Before you manage an endpoint, make sure that you have created a cluster and a Data App. For more information, see [Create a TiDB cluster](/tidb-cloud/create-tidb-cluster.md) and [Create a Data App](/tidb-cloud/data-service-manage-data-app.md#create-a-data-app).
+Before you manage an endpoint, make sure that you have created a cluster and a Data App. For more information, see [Create a Data App](/tidb-cloud/data-service-manage-data-app.md#create-a-data-app).
 
 Before you call an endpoint, make sure that you have created an API key in the Data App. For more information, see [Create an API key](/tidb-cloud/data-service-api-key.md#create-an-api-key).
 
@@ -28,7 +28,7 @@ To create an endpoint, perform the following steps:
 
 3. The newly created endpoint is added to the top of the endpoint list.
 
-You can also create an endpoint from a SQL file in Chat2Query (beta). For more details, see [Generate an endpoint from a SQL file](/tidb-cloud/explore-data-with-chat2query.md#generate-an-endpoint-from-a-sql-file)
+You can also create an endpoint from a SQL file in Chat2Query (beta). For more details, see [Generate an endpoint from a SQL file](/tidb-cloud/explore-data-with-chat2query.md#generate-an-endpoint-from-a-sql-file).
 
 ## Develop an endpoint
 

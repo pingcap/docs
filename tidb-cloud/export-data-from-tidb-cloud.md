@@ -9,7 +9,7 @@ This page describes how to export data from your cluster in TiDB Cloud.
 
 TiDB does not lock in your data. Sometimes you still want to be able to migrate data from TiDB to other data platforms. Because TiDB is highly compatible with MySQL, any export tool suitable for MySQL can also be used for TiDB.
 
-You can use the tool [Dumpling](/dumpling-overview.md) for data export.
+You can use the tool [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview) for data export.
 
 1. Download and install TiUP:
 
@@ -41,11 +41,11 @@ You can use the tool [Dumpling](/dumpling-overview.md) for data export.
 
 4. Export your data using Dumpling from TiDB.
 
-    You can get the following connection parameters `${tidb_endpoint}`, `${port}`, and `${user}` from the connection string in the [**Connect**](/tidb-cloud/connect-via-standard-connection.md) dialog.
-
     <SimpleTab>
 
     <div label="TiDB Serverless">
+
+    You can get the following connection parameters `${tidb_endpoint}`, `${port}`, and `${user}` from the connection string in the [**Connect**](/tidb-cloud/connect-via-standard-connection-serverless.md) dialog.
 
     ```shell
     tiup dumpling -h ${tidb_endpoint} -P 4000 -u ${user} -p ${password} -F 67108864MiB -t 4 -o ${export_dir} --filetype sql --consistency none
@@ -53,10 +53,12 @@ You can use the tool [Dumpling](/dumpling-overview.md) for data export.
 
    > **Note:**
    >
-   > To export TiDB Serverless cluster data, you must ensure that the Dumpling version is at least v6.5.0. If your Dumpling version is v6.5.0, you also need to set `--ca=${ca_path}` in the command. To find the CA root path on your system, see [TLS Connections to TiDB Serverless](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md#root-certificate-default-path).
+   > To export TiDB Serverless cluster data, you must ensure that the Dumpling version is at least v6.5.0. If your Dumpling version is v6.5.0, you also need to set `--ca=${ca_path}` in the command. To find the CA root path on your system, see [TLS Connections to TiDB Serverless](/tidb-cloud/secure-connections-to-serverless-clusters.md#root-certificate-default-path).
 
     </div>
     <div label="TiDB Dedicated">
+
+    You can get the following connection parameters `${tidb_endpoint}`, `${port}`, and `${user}` from the connection string in the [**Connect**](/tidb-cloud/connect-via-standard-connection.md) dialog.
 
     ```shell
     tiup dumpling:v6.5.2 -h ${tidb_endpoint} -P ${port} -u ${user} -p ${password} -F 67108864MiB -t 4 -o ${export_dir} --filetype sql
@@ -76,7 +78,7 @@ You can use the tool [Dumpling](/dumpling-overview.md) for data export.
     - `--filetype`: The exported file type. The default value is `sql`. You can choose from `sql` and `csv`.
     - `--consistency`: The data consistency. The default value is `auto`. For TiDB Serverless, you must set it to `none`.
 
-    For more information about Dumpling options, see [Dumpling option list](/dumpling-overview.md#option-list-of-dumpling).
+    For more information about Dumpling options, see [Dumpling option list](https://docs.pingcap.com/tidb/stable/dumpling-overview#option-list-of-dumpling).
 
     The minimum permissions required are as follows:
 

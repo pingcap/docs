@@ -9,7 +9,7 @@ This document describes how to determine the size of a TiDB Dedicated cluster.
 
 > **Note:**
 >
-> You cannot change the size of a [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta) cluster.
+> You cannot change the size of a [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) cluster.
 
 ## Size TiDB
 
@@ -168,10 +168,10 @@ The supported node storage of different TiKV node sizes is as follows:
 
 | Node size | Min node storage | Max node storage | Default node storage |
 |:---------:|:----------------:|:----------------:|:--------------------:|
-| 2 vCPU    | 200 GiB          | 500 GiB          | 200 GiB              |
-| 4 vCPU    | 200 GiB          | 2048 GiB         | 500 GiB              |
-| 8 vCPU    | 200 GiB          | 4096 GiB         | 500 GiB              |
-| 16 vCPU   | 200 GiB          | 4096 GiB         | 500 GiB              |
+| 2 vCPU    | 200 GiB          |     500 GiB      | 200 GiB              |
+| 4 vCPU    | 200 GiB          |     2048 GiB     | 500 GiB              |
+| 8 vCPU    | 200 GiB          |     4096 GiB     | 500 GiB              |
+| 16 vCPU   | 200 GiB          |     6144 GiB     | 500 GiB              |
 
 > **Note:**
 >

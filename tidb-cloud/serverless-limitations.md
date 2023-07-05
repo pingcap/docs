@@ -1,6 +1,7 @@
 ---
 title: TiDB Serverless Limitations and Quotas
 summary: Learn about the limitations of TiDB Serverless.
+aliases: ['/tidbcloud/serverless-tier-limitations']
 ---
 
 # TiDB Serverless Limitations and Quotas
@@ -9,14 +10,14 @@ summary: Learn about the limitations of TiDB Serverless.
 
 This document describes the limitations of TiDB Serverless.
 
-We are constantly filling in the feature gaps between TiDB Serverless and TiDB Dedicated. If you require these features or capabilities in the gap, use [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) or [contact us](https://www.pingcap.com/contact-us/?from=en) for a feature request.
+We are constantly filling in the feature gaps between TiDB Serverless and TiDB Dedicated. If you require these features or capabilities in the gap, use [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) or [contact us](https://www.pingcap.com/contact-us/?from=en) for a feature request.
 
 ## Limitations
 
 ### SQL
 
 - [Time to live (TTL)](/time-to-live.md) is not available for TiDB Serverless clusters currently.
-- The [`FLASHBACK CLUSTER TO TIMESTAMP`](/sql-statements/sql-statement-flashback-to-timestamp.md) syntax is not applicable to [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta) clusters.
+- The [`FLASHBACK CLUSTER TO TIMESTAMP`](/sql-statements/sql-statement-flashback-to-timestamp.md) syntax is not applicable to [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) clusters.
 - The [`SLEEP()` function](/functions-and-operators/miscellaneous-functions.md) only supports a maximum sleep time of 300 seconds.
 
 ### System tables
@@ -29,13 +30,13 @@ We are constantly filling in the feature gaps between TiDB Serverless and TiDB D
 
 ### Connection
 
-- Only [Standard Connection](/tidb-cloud/connect-via-standard-connection.md) and [Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections.md) can be used. You cannot use [VPC Peering](/tidb-cloud/set-up-vpc-peering-connections.md) to connect to TiDB Serverless clusters. 
+- Only [Standard Connection](/tidb-cloud/connect-via-standard-connection-serverless.md) and [Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections-serverless.md) can be used. You cannot use [VPC Peering](/tidb-cloud/set-up-vpc-peering-connections.md) to connect to TiDB Serverless clusters.
 - No "IP Access List" support.
 
 ### Monitoring
 
-- [Third-party Monitoring integrations](/tidb-cloud/third-party-monitoring-integrations.md) are currently not available for TiDB Serverless.
-- [Cluster Events](/tidb-cloud/tidb-cloud-events.md) are currently not available for TiDB Serverless.
+- [Third-party Monitoring integrations](/tidb-cloud/third-party-monitoring-integrations.md) are currently not available for TiDB Serverless.
+- [Cluster Events](/tidb-cloud/tidb-cloud-events.md) are currently not available for TiDB Serverless.
 - [Built-in Alerting](/tidb-cloud/monitor-built-in-alerting.md) is currently not available for TiDB Serverless.
 
 ### Diagnosis
@@ -57,7 +58,7 @@ For each organization in TiDB Cloud, you can create a maximum of five TiDB Serve
 
 For the first five TiDB Serverless clusters in your organization, TiDB Cloud provides a free usage quota for each of them as follows:
 
-- Row storage: 5 GiB
+- Row-based storage: 5 GiB
 - [Request Units (RUs)](/tidb-cloud/tidb-cloud-glossary.md#request-unit): 50 million RUs per month
 
 The Request Unit (RU) is a unit of measurement used to track the resource consumption of a query or transaction. It is a metric that allows you to estimate the computational resources required to process a specific request in the database. The request unit is also the billing unit for TiDB Cloud Serverless service.
@@ -66,6 +67,6 @@ Once the free quota of a cluster is reached, the read and write operations on th
 
 To learn more about the RU consumption of different resources (including read, write, SQL CPU, and network egress), the pricing details, and the throttled information, see [TiDB Serverless Pricing Details](https://www.pingcap.com/tidb-cloud-serverless-pricing-details).
 
-If you want to create a TiDB Serverless cluster with an additional quota, you can edit the spend limit on the cluster creation page. For more information, see [Create a TiDB cluster](/tidb-cloud/create-tidb-cluster.md#step-4-create-a-tidb-cluster).
+If you want to create a TiDB Serverless cluster with an additional quota, you can edit the spend limit on the cluster creation page. For more information, see [Create a TiDB Serverless cluster](/tidb-cloud/create-tidb-cluster-serverless.md).
 
 After creating a TiDB Serverless, you can still check and edit the spend limit on your cluster overview page. For more information, see [Manage Spend Limit for TiDB Serverless Clusters](/tidb-cloud/manage-serverless-spend-limit.md).

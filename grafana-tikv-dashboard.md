@@ -147,6 +147,7 @@ This section provides a detailed description of these key metrics on the **TiKV-
 - Admin apply: The number of processed apply commands per second
 - Check split: The number of Raftstore split check commands per second
 - 99.99% Check split duration: The time consumed when running split check commands (P99.99)
+- Peer in Flashback State: The number of peers in flashback state
 
 ![TiKV Dashboard - Raft admin metrics](/media/tikv-dashboard-raft-admin.png)
 

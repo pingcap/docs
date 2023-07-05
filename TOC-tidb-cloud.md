@@ -16,7 +16,7 @@
 - Develop Applications
   - [Overview](/develop/dev-guide-overview.md)
   - Quick Start
-    - [Build a TiDB Cluster in TiDB Cloud (Serverless Tier)](/develop/dev-guide-build-cluster-in-cloud.md)
+    - [Build a TiDB Serverless Cluster in TiDB Cloud](/develop/dev-guide-build-cluster-in-cloud.md)
     - [CRUD SQL in TiDB](/develop/dev-guide-tidb-crud-sql.md)
   - Connect to TiDB Cloud
     - [Choose Driver or ORM](/develop/dev-guide-choose-driver-or-orm.md)
@@ -89,13 +89,26 @@
     - [Select Your Cluster Tier](/tidb-cloud/select-cluster-tier.md)
     - [Determine Your TiDB Size](/tidb-cloud/size-your-cluster.md)
     - [TiDB Cloud Performance Reference](/tidb-cloud/tidb-cloud-performance-reference.md)
-  - [Create a TiDB Cluster](/tidb-cloud/create-tidb-cluster.md)
-  - Connect to Your TiDB Cluster
-    - [Connection Method Overview](/tidb-cloud/connect-to-tidb-cluster.md)
-    - [Connect via Standard Connection](/tidb-cloud/connect-via-standard-connection.md)
-    - [Connect via Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections.md)
-    - [Connect via VPC Peering](/tidb-cloud/set-up-vpc-peering-connections.md)
-    - [Connect via SQL Shell](/tidb-cloud/connect-via-sql-shell.md)
+  - Manage TiDB Serverless Clusters
+    - [Create a TiDB Serverless Cluster](/tidb-cloud/create-tidb-cluster-serverless.md)
+    - Connect to Your TiDB Serverless Cluster
+      - [Connection Method Overview](/tidb-cloud/connect-to-tidb-cluster-serverless.md)
+      - [Connect via Public Endpoint](/tidb-cloud/connect-via-standard-connection-serverless.md)
+      - [Connect via Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)
+    - [Manage Spend Limit](/tidb-cloud/manage-serverless-spend-limit.md)
+    - [Back Up and Restore TiDB Serverless Data](/tidb-cloud/backup-and-restore-serverless.md)
+  - Manage TiDB Dedicated Clusters
+    - [Create a TiDB Dedicated Cluster](/tidb-cloud/create-tidb-cluster.md)
+    - Connect to Your TiDB Dedicated Cluster
+      - [Connection Method Overview](/tidb-cloud/connect-to-tidb-cluster.md)
+      - [Connect via Standard Connection](/tidb-cloud/connect-via-standard-connection.md)
+      - [Connect via Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections.md)
+      - [Connect via VPC Peering](/tidb-cloud/set-up-vpc-peering-connections.md)
+      - [Connect via SQL Shell](/tidb-cloud/connect-via-sql-shell.md)
+    - [Scale a TiDB Dedicated Cluster](/tidb-cloud/scale-tidb-cluster.md)
+    - [Back Up and Restore TiDB Dedicated Data](/tidb-cloud/backup-and-restore.md)
+    - [Pause or Resume a TiDB Dedicated Cluster](/tidb-cloud/pause-or-resume-tidb-cluster.md)
+    - [Configure Maintenance Window](/tidb-cloud/configure-maintenance-window.md)
   - Use an HTAP Cluster with TiFlash
     - [TiFlash Overview](/tiflash/tiflash-overview.md)
     - [Create TiFlash Replicas](/tiflash/create-tiflash-replicas.md)
@@ -104,10 +117,63 @@
     - [Supported Push-down Calculations](/tiflash/tiflash-supported-pushdown-calculations.md)
     - [TiFlash Query Result Materialization](/tiflash/tiflash-results-materialization.md)
     - [Compatibility](/tiflash/tiflash-compatibility.md)
-  - [Manage Spend Limit](/tidb-cloud/manage-serverless-spend-limit.md)
-  - [Scale a TiDB Cluster](/tidb-cloud/scale-tidb-cluster.md)
-  - [Pause or Resume a TiDB Cluster](/tidb-cloud/pause-or-resume-tidb-cluster.md)
-  - [Configure Maintenance Window](/tidb-cloud/configure-maintenance-window.md)
+  - Monitor and Alert
+    - [Overview](/tidb-cloud/monitor-tidb-cluster.md)
+    - [Built-in Metrics](/tidb-cloud/built-in-monitoring.md)
+    - [Built-in Alerting](/tidb-cloud/monitor-built-in-alerting.md)
+    - [Cluster Events](/tidb-cloud/tidb-cloud-events.md)
+    - [Third-Party Metrics Integrations (Beta)](/tidb-cloud/third-party-monitoring-integrations.md)
+  - Tune Performance
+    - [Overview](/tidb-cloud/tidb-cloud-tune-performance-overview.md)
+    - Analyze Performance
+      - [Use the Diagnosis Tab](/tidb-cloud/tune-performance.md)
+      - [Use Index Insight (Beta)](/tidb-cloud/index-insight.md)
+      - [Use Statement Summary Tables](/statement-summary-tables.md)
+    - SQL Tuning
+      - [Overview](/tidb-cloud/tidb-cloud-sql-tuning-overview.md)
+      - Understanding the Query Execution Plan
+        - [Overview](/explain-overview.md)
+        - [`EXPLAIN` Walkthrough](/explain-walkthrough.md)
+        - [Indexes](/explain-indexes.md)
+        - [Joins](/explain-joins.md)
+        - [MPP Queries](/explain-mpp.md)
+        - [Subqueries](/explain-subqueries.md)
+        - [Aggregation](/explain-aggregation.md)
+        - [Views](/explain-views.md)
+        - [Partitions](/explain-partitions.md)
+        - [Index Merge](/explain-index-merge.md)
+      - SQL Optimization Process
+        - [Overview](/sql-optimization-concepts.md)
+        - Logic Optimization
+          - [Overview](/sql-logical-optimization.md)
+          - [Subquery Related Optimizations](/subquery-optimization.md)
+          - [Column Pruning](/column-pruning.md)
+          - [Decorrelation of Correlated Subquery](/correlated-subquery-optimization.md)
+          - [Eliminate Max/Min](/max-min-eliminate.md)
+          - [Predicates Push Down](/predicate-push-down.md)
+          - [Partition Pruning](/partition-pruning.md)
+          - [TopN and Limit Push Down](/topn-limit-push-down.md)
+          - [Join Reorder](/join-reorder.md)
+        - Physical Optimization
+          - [Overview](/sql-physical-optimization.md)
+          - [Index Selection](/choose-index.md)
+          - [Statistics](/statistics.md)
+          - [Extended Statistics](/extended-statistics.md)
+          - [Wrong Index Solution](/wrong-index-solution.md)
+          - [Distinct Optimization](/agg-distinct-optimization.md)
+          - [Cost Model](/cost-model.md)
+        - [Prepare Execution Plan Cache](/sql-prepared-plan-cache.md)
+      - Control Execution Plans
+        - [Overview](/control-execution-plan.md)
+        - [Optimizer Hints](/optimizer-hints.md)
+        - [SQL Plan Management](/sql-plan-management.md)
+        - [The Blocklist of Optimization Rules and Expression Pushdown](/blocklist-control-plan.md)
+    - [TiKV Follower Read](/follower-read.md)
+    - [Coprocessor Cache](/coprocessor-cache.md)
+    - Garbage Collection (GC)
+       - [Overview](/garbage-collection-overview.md)
+       - [Configuration](/garbage-collection-configuration.md)
+    - [Tune TiFlash Performance](/tiflash/tune-tiflash-performance.md)
   - [Upgrade a TiDB Cluster](/tidb-cloud/upgrade-tidb-cluster.md)
   - [Delete a TiDB Cluster](/tidb-cloud/delete-tidb-cluster.md)
 - Migrate or Import Data
@@ -124,7 +190,6 @@
       - [Import Sample Data (SQL File)](/tidb-cloud/import-sample-data.md)
       - [Import CSV Files from Amazon S3 or GCS](/tidb-cloud/import-csv-files.md)
       - [Import Apache Parquet Files from Amazon S3 or GCS](/tidb-cloud/import-parquet-files.md)
-  - [Export Data from TiDB](/tidb-cloud/export-data-from-tidb-cloud.md)
   - Reference
       - [Configure Amazon S3 Access and GCS Access](/tidb-cloud/config-s3-and-gcs-access.md)
       - [Naming Conventions for Data Import](/tidb-cloud/naming-conventions-for-data-import.md)
@@ -148,78 +213,21 @@
   - [To MySQL Sink](/tidb-cloud/changefeed-sink-to-mysql.md)
   - [To Kafka Sink (Beta)](/tidb-cloud/changefeed-sink-to-apache-kafka.md)
   - [To TiDB Cloud Sink](/tidb-cloud/changefeed-sink-to-tidb-cloud.md)
-- Back Up and Restore
-  - [Automatic Backup](/tidb-cloud/backup-and-restore.md)
-  - [Manual Backup](/tidb-cloud/backup-and-restore.md#manual-backup)
-  - [Restore](/tidb-cloud/backup-and-restore.md#restore)
-- Monitor and Alert
-  - [Overview](/tidb-cloud/monitor-tidb-cluster.md)
-  - [Built-in Metrics](/tidb-cloud/built-in-monitoring.md)
-  - [Built-in Alerting](/tidb-cloud/monitor-built-in-alerting.md)
-  - [Cluster Events](/tidb-cloud/tidb-cloud-events.md) 
-  - [Third-Party Metrics Integrations](/tidb-cloud/third-party-monitoring-integrations.md)
-- Tune Performance
-  - [Overview](/tidb-cloud/tidb-cloud-tune-performance-overview.md)
-  - Analyze Performance
-    - [Use the Diagnosis Tab](/tidb-cloud/tune-performance.md)
-    - [Use Index Insight (Beta)](/tidb-cloud/index-insight.md)
-    - [Use Statement Summary Tables](/statement-summary-tables.md)
-  - SQL Tuning
-    - [Overview](/tidb-cloud/tidb-cloud-sql-tuning-overview.md)
-    - Understanding the Query Execution Plan
-      - [Overview](/explain-overview.md)
-      - [`EXPLAIN` Walkthrough](/explain-walkthrough.md)
-      - [Indexes](/explain-indexes.md)
-      - [Joins](/explain-joins.md)
-      - [MPP Queries](/explain-mpp.md)
-      - [Subqueries](/explain-subqueries.md)
-      - [Aggregation](/explain-aggregation.md)
-      - [Views](/explain-views.md)
-      - [Partitions](/explain-partitions.md)
-      - [Index Merge](/explain-index-merge.md)
-    - SQL Optimization Process
-      - [Overview](/sql-optimization-concepts.md)
-      - Logic Optimization
-        - [Overview](/sql-logical-optimization.md)
-        - [Subquery Related Optimizations](/subquery-optimization.md)
-        - [Column Pruning](/column-pruning.md)
-        - [Decorrelation of Correlated Subquery](/correlated-subquery-optimization.md)
-        - [Eliminate Max/Min](/max-min-eliminate.md)
-        - [Predicates Push Down](/predicate-push-down.md)
-        - [Partition Pruning](/partition-pruning.md)
-        - [TopN and Limit Push Down](/topn-limit-push-down.md)
-        - [Join Reorder](/join-reorder.md)
-      - Physical Optimization
-        - [Overview](/sql-physical-optimization.md)
-        - [Index Selection](/choose-index.md)
-        - [Statistics](/statistics.md)
-        - [Extended Statistics](/extended-statistics.md)
-        - [Wrong Index Solution](/wrong-index-solution.md)
-        - [Distinct Optimization](/agg-distinct-optimization.md)
-        - [Cost Model](/cost-model.md)
-      - [Prepare Execution Plan Cache](/sql-prepared-plan-cache.md)
-    - Control Execution Plans
-      - [Overview](/control-execution-plan.md)
-      - [Optimizer Hints](/optimizer-hints.md)
-      - [SQL Plan Management](/sql-plan-management.md)
-      - [The Blocklist of Optimization Rules and Expression Pushdown](/blocklist-control-plan.md)
-  - [TiKV Follower Read](/follower-read.md)
-  - [Coprocessor Cache](/coprocessor-cache.md)
-  - Garbage Collection (GC)
-     - [Overview](/garbage-collection-overview.md)
-     - [Configuration](/garbage-collection-configuration.md)
-  - [Tune TiFlash Performance](/tiflash/tune-tiflash-performance.md)
+  - [To Cloud Storage](/tidb-cloud/changefeed-sink-to-cloud-storage.md)
 - Security
   - Identity Access Control
     - [Password Authentication](/tidb-cloud/tidb-cloud-password-authentication.md)
     - [SSO Authentication](/tidb-cloud/tidb-cloud-sso-authentication.md)
     - [Identity Access Management](/tidb-cloud/manage-user-access.md)
   - Network Access Control
-    - [Configure an IP Access List](/tidb-cloud/configure-ip-access-list.md)
-    - [Connect via Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections.md)
-    - [Connect via VPC Peering](/tidb-cloud/set-up-vpc-peering-connections.md)
-    - [TLS Connections to Serverless Tier](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md)
-    - [TLS Connections to Dedicated Tier](/tidb-cloud/tidb-cloud-tls-connect-to-dedicated-tier.md)
+    - TiDB Serverless
+      - [Connect via Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)
+      - [TLS Connections to TiDB Serverless](/tidb-cloud/secure-connections-to-serverless-clusters.md)
+    - TiDB Dedicated
+      - [Configure an IP Access List](/tidb-cloud/configure-ip-access-list.md)
+      - [Connect via Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections.md)
+      - [Connect via VPC Peering](/tidb-cloud/set-up-vpc-peering-connections.md)
+      - [TLS Connections to TiDB Dedicated](/tidb-cloud/tidb-cloud-tls-connect-to-dedicated.md)
   - Database Access Control
     - [Configure Cluster Security Settings](/tidb-cloud/configure-security-settings.md)
   - Audit Management
@@ -263,8 +271,8 @@
     - [Storage](/tidb-storage.md)
     - [Computing](/tidb-computing.md)
     - [Scheduling](/tidb-scheduling.md)
-  - [Dedicated Tier Limitations and Quotas](/tidb-cloud/limitations-and-quotas.md)
-  - [Serverless Tier Limitations](/tidb-cloud/serverless-tier-limitations.md)
+  - [TiDB Dedicated Limitations and Quotas](/tidb-cloud/limitations-and-quotas.md)
+  - [TiDB Serverless Limitations](/tidb-cloud/serverless-limitations.md)
   - [TiDB Limitations](/tidb-limitations.md)
   - Benchmarks
     - [TPC-C Performance Test Report](/tidb-cloud/v7.1.0-performance-benchmarking-with-tpcc.md)
@@ -538,16 +546,15 @@
     - project
       - [list](/tidb-cloud/ticloud-project-list.md)
     - [update](/tidb-cloud/ticloud-update.md)
-  - [Dumpling](/dumpling-overview.md)
   - [Table Filter](/table-filter.md)
   - [Troubleshoot Inconsistency Between Data and Indexes](/troubleshoot-data-inconsistency-errors.md)
+  - [Support](/tidb-cloud/tidb-cloud-support.md)
+  - [Glossary](/tidb-cloud/tidb-cloud-glossary.md)
 - FAQs
   - [TiDB Cloud FAQs](/tidb-cloud/tidb-cloud-faq.md)
-  - [Serverless Tier FAQs](/tidb-cloud/serverless-tier-faqs.md)
+  - [TiDB Serverless FAQs](/tidb-cloud/serverless-faqs.md)
 - Release Notes
   - [2023](/tidb-cloud/tidb-cloud-release-notes.md)
   - [2022](/tidb-cloud/release-notes-2022.md)
   - [2021](/tidb-cloud/release-notes-2021.md)
   - [2020](/tidb-cloud/release-notes-2020.md)
-- [Support](/tidb-cloud/tidb-cloud-support.md)
-- [Glossary](/tidb-cloud/tidb-cloud-glossary.md)

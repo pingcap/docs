@@ -14,6 +14,11 @@ This document describes how to manage your Data Apps in the TiDB Cloud console. 
 To create a Data App for your project, perform the following steps:
 
 1. On the [**Data Service**](https://tidbcloud.com/console/data-service) page of your project, click <MDSvgIcon name="icon-create-data-app" /> **Create DataApp** in the left pane.
+
+    > **Tip:**
+    >
+    > If this is the first Data App in your project, click **Create Data App** in the middle of the page.
+
 2. Enter a name for the Data App, and select clusters that you want the Data App to access.
 3. (Optional) To automatically deploy endpoints of the Data App to your preferred GitHub repository and branch, enable **Connect to GitHub**, and then do the following:
 
@@ -111,7 +116,7 @@ To delete a Data App, perform the following steps:
 
 1. Navigate to the [**Data Service**](https://tidbcloud.com/console/data-service) page of your project.
 2. In the left pane, locate your target Data App and click the name of your target Data App to view its details.
-3. In the **Delete Data App** area, click **Delete Data App**. A dialog box for confirmation is displayed.
-4. Type the name of target Data App, and then click **I understand, delete**.
+3. In the **Danger Zone** area, click **Delete Data App**. A dialog box for confirmation is displayed.
+4. Type your `<organization name>/<project name>/<data app name>`, and then click **I understand, delete**.
 
     Once a Data App is deleted, the existing endpoints and API keys in the Data App are also deleted. If this Data App is connected to GitHub, deleting the App does not delete the files in the corresponding GitHub repository.

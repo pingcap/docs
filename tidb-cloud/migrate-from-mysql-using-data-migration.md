@@ -104,11 +104,11 @@ To quickly test a migration job, you can use the `root` account of the TiDB Clou
 
 ### Set up network connection
 
-Before creating a migration job, set up the network connection according to your connection methods. See [Connect to Your TiDB Cluster](/tidb-cloud/connect-to-tidb-cluster.md).
+Before creating a migration job, set up the network connection according to your connection methods. See [Connect to Your TiDB Dedicated Cluster](/tidb-cloud/connect-to-tidb-cluster.md).
 
 - If you use public IP (this is, standard connection) for network connection, make sure that the upstream database can be connected through the public network.
 
-- If you use AWS PrivateLink, set it up according to [Set Up Private Endpoint Connections](/tidb-cloud/set-up-private-endpoint-connections.md).
+- If you use AWS PrivateLink, set it up according to [Connect to TiDB Dedicated via Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections.md).
 
 - If you use AWS VPC Peering or GCP VPC Network Peering, see the following instructions to configure the network.
 
@@ -155,7 +155,7 @@ To perform incremental data migration, make sure you have enabled binary logs of
 
     > **Tip:**
     >
-    > If you have multiple projects, you can view the project list and switch to another project from the ☰ hover menu in the upper-left corner.
+    > If you have multiple projects, you can click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner and switch to another project.
 
 2. Click the name of your target cluster to go to its overview page, and then click **Data Migration** in the left navigation pane.
 
