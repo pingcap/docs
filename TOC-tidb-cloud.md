@@ -95,7 +95,7 @@
       - [Connection Method Overview](/tidb-cloud/connect-to-tidb-cluster-serverless.md)
       - [Connect via Public Endpoint](/tidb-cloud/connect-via-standard-connection-serverless.md)
       - [Connect via Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)
-    - [Manage Spend Limit](/tidb-cloud/manage-serverless-spend-limit.md)
+    - [Manage Spending Limit](/tidb-cloud/manage-serverless-spend-limit.md)
     - [Back Up and Restore TiDB Serverless Data](/tidb-cloud/backup-and-restore-serverless.md)
   - Manage TiDB Dedicated Clusters
     - [Create a TiDB Dedicated Cluster](/tidb-cloud/create-tidb-cluster.md)
