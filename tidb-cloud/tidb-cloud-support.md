@@ -7,6 +7,10 @@ summary: Learn how to contact the support team of TiDB Cloud.
 
 The **?** icon in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com/) consolidates all the help and support information for TiDB Cloud, such as documentation, interactive tutorials, self-paced training, and support entries.
 
+> **Note:**
+>
+> Currently, only **Basic support plan** is available for [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) clusters.
+
 ## Request PoC, demo, or free trial credits
 
 To request a Proof of Concept (PoC), a demo, or free trial credits, click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com/), and click **Request Support**.
