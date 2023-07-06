@@ -14,7 +14,7 @@ We are constantly filling in the feature gaps between TiDB Serverless and TiDB D
 
 ## Limitations
 
-### Audit Logs
+### Audit logs
 
 - Database audit logging is currently unavailable.
 
