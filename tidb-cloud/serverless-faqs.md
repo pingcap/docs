@@ -59,7 +59,7 @@ To get the RU consumption of individual SQL statements, you can use the [EXPLAIN
 
 To get the RUs and storage used by your cluster, view the **Usage this month** pane on your cluster overview page. With your past resource usage data and real-time resource usage in this pane, you can track your cluster's resource consumption and estimate a reasonable spending limit. If the free quota cannot meet your requirement, you can edit the spending limit easily. For more information, see [Manage Spending Limit for TiDB Serverless clusters](/tidb-cloud/manage-serverless-spend-limit.md).
 
-### How storage is being metered for TiDB Serverless？
+### How storage is metered for TiDB Serverless？
 
 The storage is metered based on the amount of data stored in a TiDB Serverless cluster, measured in GiB per month. It is calculated by multiplying the total size of all the tables and indexes (excluding data compression or replicas) with the number of hours the data is stored in that month.
 
@@ -71,13 +71,13 @@ This is because TiDB retains dropped tables and databases for a certain period o
 
 RU consumptions can occur in various scenarios. One common scenario is during background queries, such as the synchronization of schema changes between TiDB instances. Another scenario is when certain web console features generate queries, like loading schemas. These processes utilize RUs even without explicit user triggers.
 
-### Why there is spike in RU usage when my workload is steady?
+### Why is there a spike in RU usage when my workload is steady?
 
 A spike in RU usage can occur due to necessary background jobs in TiDB. These jobs, such as automatically analyzing tables and rebuilding statistics, are required for generating optimized query plans.
 
-### What are the consequences when my cluster exhausts its free quota or exceeds its spending limit?
+### What happens when my cluster exhausts its free quota or exceeds its spending limit?
 
-Once the free quota or spending limit of a cluster is reached, the cluster will enforce throttling measures on read and write operations. These operations will be limited until either the quota is increased or the usage is reset at the start of a new month. For more information, see [TiDB Serverless Limitations and Quotas](/tidb-cloud/serverless-limitations.md#usage-quota).
+Once a cluster reaches its free quota or spending limit, the cluster will enforce throttling measures on its read and write operations. These operations will be limited until the quota is increased or the usage is reset at the start of a new month. For more information, see [TiDB Serverless Limitations and Quotas](/tidb-cloud/serverless-limitations.md#usage-quota).
 
 ## Security FAQs
 
