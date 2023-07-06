@@ -5,7 +5,7 @@ summary: Learn about the limited SQL features on TiDB Cloud.
 
 # Limited SQL features on TiDB Cloud
 
-TiDB Cloud works with almost all workloads that TiDB supports, but there are feature differences between TiDB Self-Hosted and TiDB Dedicated/Serverless. This document describes the limitations of SQL features on TiDB Cloud. We are constantly filling in the feature gaps between TiDB Self-Hosted and TiDB Dedicated/Serverless. If you require these features or capabilities in the gap, [contact us](/tidb-cloud/tidb-cloud-support.md) for a feature request.
+TiDB Cloud works with almost all workloads that TiDB supports, but there are some feature differences between TiDB Self-Hosted and TiDB Dedicated/Serverless. This document describes the limitations of SQL features on TiDB Cloud. We are constantly filling in the feature gaps between TiDB Self-Hosted and TiDB Dedicated/Serverless. If you require these features or capabilities in the gap, [contact us](/tidb-cloud/tidb-cloud-support.md) for a feature request.
 
 ## Statements
 
@@ -219,24 +219,24 @@ TiDB Cloud works with almost all workloads that TiDB supports, but there are fea
 | `tidb_wait_split_region_timeout` | No limitation | Read-only [^11] |
 | `txn_scope` | No limitation | Read-only [^11] |
 | `validate_password.enable` | No limitation | Always enabled [^10] |
-| `validate_password.length` | No limitation | Can not be smaller than 8 [^10] |
-| `validate_password.mixed_case_count` | No limitation | Can not be smaller than 1 [^10] |
-| `validate_password.number_count` | No limitation | Can not be smaller than 1 [^10] |
-| `validate_password.policy` | No limitation | Can only be MEDIUM or STRONG [^10] |
-| `validate_password.special_char_count` | No limitation | Can not be smaller than 1 [^10] |
+| `validate_password.length` | No limitation | At least `8` [^10] |
+| `validate_password.mixed_case_count` | No limitation | At least `1` [^10] |
+| `validate_password.number_count` | No limitation | At least `1` [^10] |
+| `validate_password.policy` | No limitation | Can only be `MEDIUM` or `STRONG` [^10] |
+| `validate_password.special_char_count` | No limitation | At least `1` [^10] |
 | `wait_timeout` | No limitation | Read-only [^11] |
 
 [^1]: Configuring data placement is not supported on TiDB Serverless.
 
 [^2]: Configuring resource groups is not supported on TiDB Serverless.
 
-[^3]: To perform [Back up and Restore](/tidb-cloud/backup-and-restore-serverless.md) operations on TiDB Serverless, please use the web console instead. 
+[^3]: To perform [Back up and Restore](/tidb-cloud/backup-and-restore-serverless.md) operations on TiDB Serverless, you can use the TiDB Cloud console instead. 
 
 [^4]: The feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security).
 
-[^5]: To track [Slow Query](/tidb-cloud/tune-performance.md#slow-query) on TiDB Serverless, please use the web console instead.
+[^5]: To track [Slow Query](/tidb-cloud/tune-performance.md#slow-query) on TiDB Serverless, you can use the TiDB Cloud console instead.
 
-[^6]: To perform [Statement Analysis](/tidb-cloud/tune-performance.md#statement-analysis) on TiDB Serverless, please use the web console instead.
+[^6]: To perform [Statement Analysis](/tidb-cloud/tune-performance.md#statement-analysis) on TiDB Serverless, you can use the TiDB Cloud console instead.
 
 [^7]: Drainer and Pump are not supported on TiDB Cloud.
 

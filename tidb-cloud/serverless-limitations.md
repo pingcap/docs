@@ -8,7 +8,7 @@ aliases: ['/tidbcloud/serverless-tier-limitations']
 
 <!-- markdownlint-disable MD026 -->
 
-TiDB Serverless works with almost all workloads that TiDB supports, but there are feature differences between TiDB Self-Hosted or TiDB Dedicated clusters and TiDB Serverless clusters. This document describes the limitations of TiDB Serverless. 
+TiDB Serverless works with almost all workloads that TiDB supports, but there are some feature differences between TiDB Self-Hosted or TiDB Dedicated clusters and TiDB Serverless clusters. This document describes the limitations of TiDB Serverless.
 
 We are constantly filling in the feature gaps between TiDB Serverless and TiDB Dedicated. If you require these features or capabilities in the gap, use [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) or [contact us](https://www.pingcap.com/contact-us/?from=en) for a feature request.
 
@@ -16,12 +16,12 @@ We are constantly filling in the feature gaps between TiDB Serverless and TiDB D
 
 ### Audit logs
 
-- Database audit logging is currently unavailable.
+- [Database audit logging](/tidb-cloud/tidb-cloud-auditing.md) is currently unavailable.
 
 ### Connection
 
 - Only [Public Endpoint](/tidb-cloud/connect-via-standard-connection-serverless.md) and [Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections-serverless.md) can be used. You cannot use [VPC Peering](/tidb-cloud/set-up-vpc-peering-connections.md) to connect to TiDB Serverless clusters. 
-- No "IP Access List" support.
+- No [IP Access list](/tidb-cloud/configure-ip-access-list.md) support.
 
 ### Encryption
 
@@ -42,7 +42,7 @@ We are constantly filling in the feature gaps between TiDB Serverless and TiDB D
 
 ### Self-service upgrades
 
-- TiDB Serverless is a fully managed deployment of TiDB. Major and minor version upgrades of TiDB are handled by TiDB Cloud and therefore cannot be initiated by users.
+- TiDB Serverless is a fully managed deployment of TiDB. Major and minor version upgrades of TiDB Serverless are handled by TiDB Cloud and therefore cannot be initiated by users.
 
 ### Stream data
 
