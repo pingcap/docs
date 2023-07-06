@@ -5,7 +5,7 @@ summary: Learn about the limited SQL features on TiDB Cloud.
 
 # Limited SQL features on TiDB Cloud
 
-TiDB Cloud works with almost all workloads that TiDB supports, but there are feature differences between TiDB Self-Hosted and TiDB Dedicated/Serverless. This document describes the limitations of SQL features on TiDB Cloud. We are constantly filling in the feature gaps between TiDB Self-Hosted and TiDB Dedicated/Serverless. If you require these features or capabilities in the gap, contact us for a feature request.
+TiDB Cloud works with almost all workloads that TiDB supports, but there are feature differences between TiDB Self-Hosted and TiDB Dedicated/Serverless. This document describes the limitations of SQL features on TiDB Cloud. We are constantly filling in the feature gaps between TiDB Self-Hosted and TiDB Dedicated/Serverless. If you require these features or capabilities in the gap, [contact us](/tidb-cloud/tidb-cloud-support.md) for a feature request.
 
 ## Statements
 
