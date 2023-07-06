@@ -54,6 +54,10 @@ We are constantly filling in the feature gaps between TiDB Serverless and TiDB D
 - Transaction can not last longer than 30m
 - [Limited SQL features](/tidb-cloud/limited-sql-features.md) for more details about SQL limitations.
 
+### TiDB Cloud Support
+
+- Only [Basic](/tidb-cloud/tidb-cloud-support.md) support plan is available for TiDB Serverless
+
 ## Usage quota
 
 For each organization in TiDB Cloud, you can create a maximum of five TiDB Serverless clusters by default. To create more TiDB Serverless clusters, you need to add a credit card and set a [spend limit](/tidb-cloud/tidb-cloud-glossary.md#spend-limit) for the usage.
