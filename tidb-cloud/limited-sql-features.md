@@ -44,6 +44,9 @@ TiDB Cloud works with almost all workloads that TiDB supports, but there are fea
 | `SHOW RESTORES` | Supported | Not supported [^3] |
 | `ADMIN RESET TELEMETRY_ID` | Supported | Telemetry is not supported on TiDB Serverless. |
 | `ADMIN SHOW TELEMETRY` | Not supported [^4] | Not supported [^4] |
+| `ADMIN SHOW SLOW` | Supported | Not supported [^5] |
+| `ADMIN PLUGINS ENABLE` | Supported | Not supported [^8] |
+| `ADMIN PLUGINS DISABLE` | Supported | Not supported [^8] |
 | `ALTER INSTANCE RELOAD TLS` | Supported | TiDB Serverless automatically refreshes the TLS certificate. |
 | `LOAD DATA INFILE` | Only supports `LOAD DATA LOCAL INFILE` | Only supports `LOAD DATA LOCAL INFILE` |
 | `CHANGE DRAINER` | Not supported [^7] | Not supported [^7] |
