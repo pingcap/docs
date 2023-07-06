@@ -106,7 +106,7 @@ CALIBRATE RESOURCE START_TIME '2023-04-18 08:00:00' DURATION '60m';
 ERROR 1105 (HY000): The workload in selected time window is too low, with which TiDB is unable to reach a capacity estimation; please select another time window with higher workload, or calibrate resource by hardware instead
 ```
 
-The capacity estimation needs to Prometheus metric data, including `resource_manager_resource_unit`, `process_cpu_usage`, `tikv_cpu_quota`, and `tidb_server_maxprocs`. If the corresponding metrics data is empty, an error is displayed indicating the name of the metrics item as shown in the following example. And `resource_manager_resource_unit` is empty when no workload, so this error will also be reported.
+The capacity estimation function requires monitoring metrics data according to the actual workload, including `resource_manager_resource_unit`, `process_cpu_usage`, `tikv_cpu_quota`, and `tidb_server_maxprocs`. If the corresponding monitor data is empty, an error is reported with the corresponding monitor item name, as shown in the following example. When there is no workload, `resource_manager_resource_unit` is empty, and this error is also reported.
 
 ```sql
 CALIBRATE RESOURCE START_TIME '2023-04-18 08:00:00' DURATION '60m';
