@@ -113,7 +113,7 @@ CALIBRATE RESOURCE START_TIME '2023-04-18 08:00:00' DURATION '60m';
 Error 1105 (HY000): metrics 'resource_manager_resource_unit' is empty
 ```
 
-Because TiKV does not monitor CPU usage on macOS, when you execute `CALIBRATE RESOURCE` on macOS, the folloiwng error occurs:
+Because TiKV does not monitor CPU usage on macOS, when you execute `CALIBRATE RESOURCE` on macOS, the following error occurs:
 
 ```sql
 CALIBRATE RESOURCE START_TIME '2023-04-18 08:00:00' DURATION '60m';
