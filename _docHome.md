@@ -9,7 +9,7 @@ hide_leftNav: true
 
 <DocHomeSection label="TiDB Cloud" anchor="tidb-cloud" id="tidb-cloud">
 
-TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings everything great about TiDB to your cloud, allowing you to focus on your applications instead of the complexities of your database.
+TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings everything great about TiDB to your cloud, letting you focus on your applications instead of the complexities of your database.
 
 <DocHomeCardContainer>
 
@@ -33,9 +33,9 @@ Helps you quickly complete a Proof of Concept (PoC) with TiDB Cloud.
 
 </DocHomeCardContainer>
 
-Experience the power of a cloud-native, distributed SQL database built for real-time analytics in a fully-managed service.
+Get the power of a cloud-native, distributed SQL database built for real-time analytics in a fully-managed service.
 
-<a href="https://tidbcloud.com/free-trial" class="button" target="_blank" referrerpolicy="no-referrer-when-downgrade">Try for Free</a>
+<a href="https://tidbcloud.com/free-trial" class="button" target="_blank" referrerpolicy="no-referrer-when-downgrade">Try Free</a>
 
 </DocHomeSection>
 
@@ -105,7 +105,7 @@ Documentation for TiDB Cloud application developers.
 
 <DocHomeCard href="https://play.tidbcloud.com/?utm_source=docs&utm_medium=home_more_resources" icon="playground" label="TiDB Playground">
 
-Experience the capabilities of TiDB without registration.
+Experience the capabilities of TiDB WITHOUT registration.
 
 </DocHomeCard>
 
