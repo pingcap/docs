@@ -45,7 +45,7 @@ To increase the number of TiDB, TiKV, or TiFlash nodes, take the following steps
 
 3. Click **Modify** in the drop-down menu. The **Modify Cluster** page is displayed.
 4. On the **Modify Cluster** page, increase the number of TiDB, TiKV, or TiFlash nodes.
-5. Click **Confirm**.
+5. Review the cluster size in the right pane, and then click **Confirm**.
 
 You can also increase the number of TiDB, TiKV, or TiFlash nodes using TiDB Cloud API through the [Modify a Dedicated Tier cluster](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/UpdateCluster) endpoint. Currently, TiDB Cloud API is still in beta. For more information, see [TiDB Cloud API Documentation](https://docs.pingcap.com/tidbcloud/api/v1beta).
 
@@ -62,7 +62,7 @@ To decrease the number of TiDB nodes, take the following steps:
 
 3. Click **Modify** in the drop-down menu. The **Modify Cluster** page is displayed.
 4. On the **Modify Cluster** page, decrease the number of TiDB nodes.
-5. Click **Confirm**.
+5. Review the cluster size in the right pane, and then click **Confirm**.
 
 To decrease the number of TiKV or TiFlash nodes, you need to submit a support ticket. The PingCAP support team will contact you and complete the scaling within the agreed time.
 
@@ -99,7 +99,7 @@ To increase the node storage of TiKV or TiFlash, take the following steps:
 
 3. Click **Modify** in the drop-down menu. The **Modify Cluster** page is displayed.
 4. On the **Modify Cluster** page, increase the node storage of TiKV or TiFlash.
-5. Click **Confirm**.
+5. Review the cluster size in the right pane, and then click **Confirm**.
 
 You can also increase the storage of a TiKV or TiFlash node using TiDB Cloud API through the [Modify a Dedicated Tier cluster](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/UpdateCluster) endpoint. Currently, TiDB Cloud API is still in beta. For more information, see [TiDB Cloud API Documentation](https://docs.pingcap.com/tidbcloud/api/v1beta).
 
@@ -121,5 +121,5 @@ To increase the node size, take the following steps:
 1. In the TiDB Cloud console, navigate to the **Clusters** page for your project.
 2. In the row of the cluster that you want to scale, click **...**.
 3. Click **Modify** in the drop-down menu. The **Modify Cluster** page is displayed.
-4. On the **Modify Cluster** page, increase the node size as you need.
-5. Click **Confirm**.
+4. On the **Modify Cluster** page, increase the node size in the**vCPU + RAM** column as you need.
+5. Review the cluster size in the right pane, and then click **Confirm**.
