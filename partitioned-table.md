@@ -175,22 +175,16 @@ CREATE TABLE t (
   name varchar(255) CHARACTER SET ascii,
   notes text
 )
-PARTITION BY RANGE COLUMNS(name,valid_until)
+PARTITION BY RANGE COLUMNS(name, valid_until)
 (PARTITION `p2022-g` VALUES LESS THAN ('G','2023-01-01 00:00:00'),
  PARTITION `p2023-g` VALUES LESS THAN ('G','2024-01-01 00:00:00'),
- PARTITION `p2024-g` VALUES LESS THAN ('G','2025-01-01 00:00:00'),
  PARTITION `p2022-m` VALUES LESS THAN ('M','2023-01-01 00:00:00'),
  PARTITION `p2023-m` VALUES LESS THAN ('M','2024-01-01 00:00:00'),
- PARTITION `p2024-m` VALUES LESS THAN ('M','2025-01-01 00:00:00'),
  PARTITION `p2022-s` VALUES LESS THAN ('S','2023-01-01 00:00:00'),
- PARTITION `p2023-s` VALUES LESS THAN ('S','2024-01-01 00:00:00'),
- PARTITION `p2024-s` VALUES LESS THAN ('S','2025-01-01 00:00:00'),
- PARTITION `p2022-` VALUES LESS THAN (0x7f,'2023-01-01 00:00:00'),
- PARTITION `p2023-` VALUES LESS THAN (0x7f,'2024-01-01 00:00:00'),
- PARTITION `p2024-` VALUES LESS THAN (0x7f,'2025-01-01 00:00:00'))
+ PARTITION `p2023-s` VALUES LESS THAN ('S','2024-01-01 00:00:00'))
 ```
 
-It will partition the data by year and by name in the ranges ['', 'G'), ['G', 'M'), ['M', 'S') and ['S',). It allows you to easily drop invalid data while still benefit from partition pruning on both `name` and `valid_until` columns. In this example, `[,)` indicates a left-closed, right-open range. For example, ['G', 'M') indicates a range containing `G` and from `G` to `M`, but excluding `M`.
+The preceding SQL statement will partition the data by year and by name in the ranges `[ ('', ''), ('G', '2023-01-01 00:00:00') )`, `[ ('G', '2023-01-01 00:00:00'), ('G', '2024-01-01 00:00:00') )`, `[ ('G', '2024-01-01 00:00:00'), ('M', '2023-01-01 00:00:00') )`, `[ ('M', '2023-01-01 00:00:00'), ('M', '2024-01-01 00:00:00') )`, `[ ('M', '2024-01-01 00:00:00'), ('S', '2023-01-01 00:00:00') )`, and `[ ('S', '2023-01-01 00:00:00'), ('S', '2024-01-01 00:00:00') )`. It allows you to easily drop invalid data while still benefit from partition pruning on both `name` and `valid_until` columns. In this example, `[,)` indicates a left-closed, right-open range. For example, `[ ('G', '2023-01-01 00:00:00'), ('G', '2024-01-01 00:00:00') )` indicates a range of data whose name is `'G'`, the year contains `2023-01-01 00:00:00` and is greater than `2023-01-01 00:00:00` but less than `2024-01-01 00:00:00`. It does not include `(G, 2024-01-01 00:00:00)`.
 
 ### Range INTERVAL partitioning
 
@@ -725,7 +719,14 @@ You can see that the inserted record `(NULL, 'mothra')` falls into the same part
 
 For `LIST` and `RANGE` partitioned tables, you can add and drop partitions using the `ALTER TABLE <table name> ADD PARTITION (<partition specification>)` or `ALTER TABLE <table name> DROP PARTITION <list of partitions>` statement.
 
+<<<<<<< HEAD
 For `LIST` and `RANGE` partitioned tables, `REORGANIZE PARTITION` is not yet supported.
+=======
+- Add partitions using the `ALTER TABLE <table name> ADD PARTITION (<partition specification>)` statement.
+- Drop partitions using the `ALTER TABLE <table name> DROP PARTITION <list of partitions>` statement.
+- Remove all data from specified partitions using the `ALTER TABLE <table name> TRUNCATE PARTITION <list of partitions>` statement. The logic of `TRUNCATE PARTITION` is similar to [`TRUNCATE TABLE`](/sql-statements/sql-statement-truncate.md) but it is for partitions.
+- Merge, split, or make other changes to the partitions using the `ALTER TABLE <table name> REORGANIZE PARTITION <list of partitions> INTO (<new partition definitions>)` statement.
+>>>>>>> bad9362ff (fix range columns examples (#14040))
 
 For `HASH` partitioned tables, `COALESCE PARTITION` and `ADD PARTITION` are not yet supported.
 
@@ -1351,7 +1352,7 @@ YEARWEEK()
 
 Currently, TiDB supports Range partitioning, Range COLUMNS partitioning, List partitioning, List COLUMNS partitioning, and Hash partitioning. Other partitioning types that are available in MySQL such as key partitioning are not supported yet in TiDB.
 
-With regard to partition management, any operation that requires moving data in the bottom implementation is not supported currently, including but not limited to: adjust the number of partitions in a Hash partitioned table, modify the Range of a Range partitioned table, merge partitions and exchange partitions.
+With regard to partition management, any operation that requires moving data in the bottom implementation is not supported currently, including but not limited to: adjust the number of partitions in a Hash partitioned table, modify the Range of a Range partitioned table, and merge partitions.
 
 For the unsupported partitioning types, when you create a table in TiDB, the partitioning information is ignored and the table is created in the regular form with a warning reported.
 
