@@ -9,7 +9,7 @@ summary: Learn how to integrate the TiDB Serverless branching feature with GitHu
 >
 > The integration is built upon [TiDB Serverless branches](/tidb-cloud/branch-overview.md). Before reading this document, make sure that you are familiar with [TiDB Serverless branches](/tidb-cloud/branch-overview.md).
 
-If you use GitHub for application development, you can integrate TiDB Serverless branching into your GitHub CI/CD pipeline, which lets you connect your GitHub repository with your TiDB Serverless cluster.
+If you use GitHub for application development, you can integrate TiDB Serverless branching into your GitHub CI/CD pipeline, which lets you automatically test your pull requests with branches without affecting the production database.
 
 In the integration process, you will be asked to install the [TiDB Cloud Branching](https://github.com/apps/tidb-cloud-branching) GitHub app. The app can automatically manage TiDB Serverless branches according to pull requests in your GitHub repository. For example, when you create a pull request, the app will create a corresponding branch for your TiDB Serverless cluster, in which you can work on new features or bug fixes in isolation without affecting the production database.
 
