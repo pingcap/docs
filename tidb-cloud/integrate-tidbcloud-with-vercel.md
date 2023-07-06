@@ -152,7 +152,7 @@ The detailed steps are as follows:
 
 1. Get the connection information of your TiDB cluster.
 
-    You can get the connection information from the connection dialog of your cluster. To open the dialog, click the ☰ hover menu in the upper-left corner of the [TiDB Cloud console](https://tidbcloud.com/), click the name of your target cluster to go to its overview page, and then click **Connect** in the upper-right corner.
+    You can get the connection information from the connection dialog of your cluster. To open the dialog, go to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project, click the name of your target cluster to go to its overview page, and then click **Connect** in the upper-right corner.
 
     > **Note:**
     >
