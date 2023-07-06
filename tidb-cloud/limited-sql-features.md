@@ -1,5 +1,5 @@
 ---
-title: Limited SQL features on TiDB Cloud
+title: Limited SQL Features on TiDB Cloud
 summary: Learn about the limited SQL features on TiDB Cloud.
 ---
 
@@ -9,61 +9,61 @@ TiDB Cloud works with almost all workloads that TiDB supports, but there are fea
 
 ## Statements
 
-### Placement and Range Management
+### Placement and range management
 
 | Statement | TiDB Dedicated | TiDB Serverless |
 |:-|:-|:-|
-| ALTER PLACEMENT POLICY | Supported | Not supported [^1] |
-| CREATE PLACEMENT POLICY | Supported | Not supported [^1] |
-| DROP PLACEMENT POLICY | Supported | Not supported [^1] |
-| SHOW CREATE PLACEMENT POLICY | Supported | Not supported [^1] |
-| SHOW PLACEMENT | Supported | Not supported [^1] |
-| SHOW PLACEMENT FOR | Supported | Not supported [^1] |
-| SHOW PLACEMENT LABELS | Supported | Not supported [^1] |
-| SHOW TABLE REGIONS | Supported | Not supported [^1] |
-| SPLIT REGION | Supported | Not supported [^1] |
+| `ALTER PLACEMENT POLICY` | Supported | Not supported [^1] |
+| `CREATE PLACEMENT POLICY` | Supported | Not supported [^1] |
+| `DROP PLACEMENT POLICY` | Supported | Not supported [^1] |
+| `SHOW CREATE PLACEMENT POLICY` | Supported | Not supported [^1] |
+| `SHOW PLACEMENT` | Supported | Not supported [^1] |
+| `SHOW PLACEMENT FOR` | Supported | Not supported [^1] |
+| `SHOW PLACEMENT LABELS` | Supported | Not supported [^1] |
+| `SHOW TABLE REGIONS` | Supported | Not supported [^1] |
+| `SPLIT REGION` | Supported | Not supported [^1] |
 
-### Resource Groups
+### Resource groups
 
 | Statement | TiDB Dedicated | TiDB Serverless |
 |:-|:-|:-|
-| ALTER RESOURCE GROUP | Supported | Not supported [^2] |
-| CALIBRATE RESOURCE | Supported | Not supported [^2] |
-| CREATE RESOURCE GROUP | Supported | Not supported [^2] |
-| DROP RESOURCE GROUP | Supported | Not supported [^2] |
-| SET RESOURCE GROUP | Supported | Not supported [^2] |
-| SHOW CREATE RESOURCE GROUP | Supported | Not supported [^2] |
+| `ALTER RESOURCE GROUP` | Supported | Not supported [^2] |
+| `CALIBRATE RESOURCE` | Supported | Not supported [^2] |
+| `CREATE RESOURCE GROUP` | Supported | Not supported [^2] |
+| `DROP RESOURCE GROUP` | Supported | Not supported [^2] |
+| `SET RESOURCE GROUP` | Supported | Not supported [^2] |
+| `SHOW CREATE RESOURCE GROUP` | Supported | Not supported [^2] |
 
 ### Others
 
 | Statement | TiDB Dedicated | TiDB Serverless |
 |:-|:-|:-|
-| BACKUP | Supported | Not supported [^3] |
-| SHOW BACKUPS | Supported | Not supported [^3] |
-| RESTORE | Supported | Not supported [^3] |
-| SHOW RESTORES | Supported | Not supported [^3] |
-| ADMIN RESET TELEMETRY_ID | Supported | Telemetry is not supported on TiDB Serverless. |
-| ADMIN SHOW TELEMETRY | Not supported [^4] | Not supported [^4] |
-| ALTER INSTANCE RELOAD TLS | Supported | TiDB Serverless automatically refreshes the TLS certificate. |
-| LOAD DATA INFILE | Only supports LOAD DATA LOCAL INFILE | Only supports LOAD DATA LOCAL INFILE |
-| CHANGE DRAINER | Not supported [^7] | Not supported [^7] |
-| CHANGE PUMP | Not supported [^7] | Not supported [^7] |
-| FLASHBACK CLUSTER TO TIMESTAMP | Supported | Not supported [^3] |
-| LOAD STATS | Supported | Not supported |
-| SET CONFIG | Not supported [^4] | Not supported [^4] |
-| SHOW CONFIG | Not supported [^4] | Not supported [^4] |
-| SHOW DRAINER STATUS | Not supported [^7] | Not supported [^7] |
-| SHOW PLUGINS | Supported | Not supported [^8] |
-| SHOW PUMP STATUS | Not supported [^7] | Not supported [^7] |
-| SHUTDOWN | Not supported [^4] | Not supported [^4] |
+| `BACKUP` | Supported | Not supported [^3] |
+| `SHOW BACKUPS` | Supported | Not supported [^3] |
+| `RESTORE` | Supported | Not supported [^3] |
+| `SHOW RESTORES` | Supported | Not supported [^3] |
+| `ADMIN RESET TELEMETRY_ID` | Supported | Telemetry is not supported on TiDB Serverless. |
+| `ADMIN SHOW TELEMETRY` | Not supported [^4] | Not supported [^4] |
+| `ALTER INSTANCE RELOAD TLS` | Supported | TiDB Serverless automatically refreshes the TLS certificate. |
+| `LOAD DATA INFILE` | Only supports `LOAD DATA LOCAL INFILE` | Only supports `LOAD DATA LOCAL INFILE` |
+| `CHANGE DRAINER` | Not supported [^7] | Not supported [^7] |
+| `CHANGE PUMP` | Not supported [^7] | Not supported [^7] |
+| `FLASHBACK CLUSTER TO TIMESTAMP` | Supported | Not supported [^3] |
+| `LOAD STATS` | Supported | Not supported |
+| `SET CONFIG` | Not supported [^4] | Not supported [^4] |
+| `SHOW CONFIG` | Not supported [^4] | Not supported [^4] |
+| `SHOW DRAINER STATUS` | Not supported [^7] | Not supported [^7] |
+| `SHOW PLUGINS` | Supported | Not supported [^8] |
+| `SHOW PUMP STATUS` | Not supported [^7] | Not supported [^7] |
+| `SHUTDOWN` | Not supported [^4] | Not supported [^4] |
 
-## Functions and Operators
+## Functions and operators
 
 | Function and operator | TiDB Dedicated | TiDB Serverless |
 |:-|:-|:-|
-| SLEEP | No Limitation | The [SLEEP() function](https://docs.pingcap.com/tidbcloud/miscellaneous-functions) has a limitation wherein it can only support a maximum sleep time of 300 seconds.|
+| `SLEEP` | No Limitation | The [`SLEEP()` function](https://docs.pingcap.com/tidbcloud/miscellaneous-functions) has a limitation wherein it can only support a maximum sleep time of 300 seconds.|
 
-## System Tables
+## System tables
 
 | Database | Table | TiDB Dedicated | TiDB Serverless |
 |:-|:-|:-|:-|
@@ -120,12 +120,12 @@ TiDB Cloud works with almost all workloads that TiDB supports, but there are fea
 | mysql | tidb_ttl_table_status | Supported | Not supported [^9] |
 | mysql | tidb_ttl_task | Supported | Not supported [^9] |
 
-## System Variables
+## System variables
 
 | Variable | TiDB Dedicated | TiDB Serverless |
 |:-|:-|:-|
 | datadir | No limitation | Not supported [^1] |
-| interactive_timeout | No limitation | Readonly [^11] |
+| interactive_timeout | No limitation | Read-only [^11] |
 | max_allowed_packet | No limitation | Readonly [^11] |
 | plugin_dir | No limitation | Not supported [^8] |
 | plugin_load | No limitation | Not supported [^8] |
@@ -243,4 +243,4 @@ TiDB Cloud works with almost all workloads that TiDB supports, but there are fea
 
 [^10]: TiDB Serverless enforces strong password policy.
 
-[^11]: The variable is readonly on TiDB Serverless.
+[^11]: The variable is read-only on TiDB Serverless.
