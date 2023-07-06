@@ -54,7 +54,7 @@ We are constantly filling in the feature gaps between TiDB Serverless and TiDB D
 
 ## Usage quota
 
-For each organization in TiDB Cloud, you can create a maximum of five TiDB Serverless clusters by default. To create more TiDB Serverless clusters, you need to add a credit card and set a [spend limit](/tidb-cloud/tidb-cloud-glossary.md#spend-limit) for the usage.
+For each organization in TiDB Cloud, you can create a maximum of five TiDB Serverless clusters by default. To create more TiDB Serverless clusters, you need to add a credit card and set a [spending limit](/tidb-cloud/tidb-cloud-glossary.md#spending-limit) for the usage.
 
 For the first five TiDB Serverless clusters in your organization, TiDB Cloud provides a free usage quota for each of them as follows:
 
@@ -63,10 +63,10 @@ For the first five TiDB Serverless clusters in your organization, TiDB Cloud pro
 
 The Request Unit (RU) is a unit of measurement used to track the resource consumption of a query or transaction. It is a metric that allows you to estimate the computational resources required to process a specific request in the database. The request unit is also the billing unit for TiDB Cloud Serverless service.
 
-Once the free quota of a cluster is reached, the read and write operations on this cluster will be throttled until you [increase the quota](/tidb-cloud/manage-serverless-spend-limit.md#update-spend-limit) or the usage is reset upon the start of a new month. For example, when the storage of a cluster exceeds 5 GiB, the maximum size limit of a single transaction is reduced from 10 MiB to 1 MiB.
+Once the free quota of a cluster is reached, the read and write operations on this cluster will be throttled until you [increase the quota](/tidb-cloud/manage-serverless-spend-limit.md#update-spending-limit) or the usage is reset upon the start of a new month.
 
 To learn more about the RU consumption of different resources (including read, write, SQL CPU, and network egress), the pricing details, and the throttled information, see [TiDB Serverless Pricing Details](https://www.pingcap.com/tidb-cloud-serverless-pricing-details).
 
-If you want to create a TiDB Serverless cluster with an additional quota, you can edit the spend limit on the cluster creation page. For more information, see [Create a TiDB Serverless cluster](/tidb-cloud/create-tidb-cluster-serverless.md).
+If you want to create a TiDB Serverless cluster with an additional quota, you can edit the spending limit on the cluster creation page. For more information, see [Create a TiDB Serverless cluster](/tidb-cloud/create-tidb-cluster-serverless.md).
 
-After creating a TiDB Serverless, you can still check and edit the spend limit on your cluster overview page. For more information, see [Manage Spend Limit for TiDB Serverless Clusters](/tidb-cloud/manage-serverless-spend-limit.md).
+After creating a TiDB Serverless, you can still check and edit the spending limit on your cluster overview page. For more information, see [Manage Spending Limit for TiDB Serverless Clusters](/tidb-cloud/manage-serverless-spend-limit.md).
