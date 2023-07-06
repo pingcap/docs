@@ -103,13 +103,14 @@ To import the CSV files to TiDB Cloud, take the following steps:
 
 3. Provide the following information for the source CSV files:
 
+    - **Location**: select **Amazon S3**.
     - **Data Format**: select **CSV**.
     - **Bucket URI**: select the bucket URI where your CSV files are located.
     - **Bucket Access** (This field is visible only for AWS S3): you can use either an AWS access key or an AWS Role ARN to access your bucket. For more information, see [Configure Amazon S3 access](/tidb-cloud/config-s3-and-gcs-access.md#configure-amazon-s3-access).
-        - **AWS Access Keys**: enter the AWS access key ID, AWS secret access key, and AWS session token.
+        - **AWS Access Keys**: enter the AWS access key ID and AWS secret access key.
         - **AWS Role ARN**: enter the AWS Role ARN value.
 
-4. If you need to edit the CSV configurations, click **Edit CSV configuration** to update the CSV-specific configurations, including separator, delimiter, header, `backslash escape`, and `trim last separator`. For more information, see [CSV Configurations for Importing Data](/tidb-cloud/csv-config-for-import-data.md).
+4. If you need to edit the CSV configurations, click **Edit CSV configuration** to update the CSV-specific configurations. For more information, see [CSV Configurations for Importing Data](/tidb-cloud/csv-config-for-import-data.md).
 
     > **Note:**
     >
@@ -123,7 +124,7 @@ To import the CSV files to TiDB Cloud, take the following steps:
     >
     > When you use this feature, one import task can only import data to a single table at a time. If you want to use this feature to import data into different tables, you need to import several times, each time specifying a different target table.
 
-    To modify the file pattern, specify a custom mapping rule between CSV files and a single target table in the following fields, and then click **Submit**. After that, the data source files will be re-scanned using the provided custom mapping rule.
+    To modify the file pattern, specify a custom mapping rule between CSV files and a single target table in the following fields, and then click **Confirm**. After that, the data source files will be re-scanned using the provided custom mapping rule.
 
     - **Target Database**: enter the name of the target database in TiDB Cloud.
 
@@ -131,15 +132,13 @@ To import the CSV files to TiDB Cloud, take the following steps:
 
     - **Source file URIs and names**: enter the source file URI and name, for example, `s3://sampledate/ingest/TableName.01.csv`.
 
-7. Click **Preview**. If you see a warning message, resolve this by providing the correct source file, renaming the existing one according to [Naming Conventions for Data Import](/tidb-cloud/naming-conventions-for-data-import.md), or using **Advanced Settings** to make changes. After resolving these issues, you need to import the data again.
+7. Click **Submit**. If you see a warning message, resolve this by providing the correct source file, renaming the existing one according to [Naming Conventions for Data Import](/tidb-cloud/naming-conventions-for-data-import.md), or using **Advanced Settings** to make changes. After resolving these issues, you need to import the data again.
 
-8. On the **Preview** page, you can have a preview of the data. Click **Start Import**.
-
-9. When the import progress shows **Finished**, check the imported tables.
+8. When the import progress shows **Finished**, check the imported tables.
 
     If the number is zero, it means no data files matched the value you entered in the **Source file name** field. In this case, ensure that there are no typos in the **Source file name** field and try again.
 
-10. After the import task is completed, you can click **Chat2Qury** in the left navigation pane to query your imported data. For more information about how to use Chat2Qury, see [Explore Your Data with AI-Powered Chat2Query](/tidb-cloud/explore-data-with-chat2query.md).
+9. After the import task is completed, you can click **Chat2Qury** in the left navigation pane to query your imported data. For more information about how to use Chat2Qury, see [Explore Your Data with AI-Powered Chat2Query](/tidb-cloud/explore-data-with-chat2query.md).
 
 When you run an import task, if any unsupported or invalid conversions are detected, TiDB Cloud terminates the import job automatically and reports an importing error.
 

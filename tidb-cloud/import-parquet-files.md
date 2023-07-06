@@ -110,10 +110,11 @@ To import the Parquet files to TiDB Cloud, take the following steps:
 
 3. Provide the following information for the source Parquet files:
 
+    - **Location**: select **Amazon S3**.
     - **Data format**: select **Parquet**.
     - **Bucket URI**: select the bucket URI where your Parquet files are located.
     - **Bucket Access** (This field is visible only for AWS S3): you can use either an AWS access key or a Role ARN to access your bucket. For more information, see [Configure Amazon S3 access](/tidb-cloud/config-s3-and-gcs-access.md#configure-amazon-s3-access).
-        - **AWS Access Keys**: enter the AWS access key ID, AWS secret access key, and AWS session token.
+        - **AWS Access Keys**: enter the AWS access key ID and AWS secret access key.
         - **AWS Role ARN**: enter the Role ARN value.
 
 4. You can choose to **Import into Pre-created Tables**, or **Import Schema and Data from S3**.
@@ -124,7 +125,7 @@ To import the Parquet files to TiDB Cloud, take the following steps:
     >
     > When you use this feature, one import task can only import data to a single table at a time. If you want to use this feature to import data into different tables, you need to import several times, each time specifying a different target table.
 
-    To modify the file pattern, specify a custom mapping rule between Parquet files and a single target table in the following fields, and then click **Submit**. After that, the data source files will be re-scanned using the provided custom mapping rule.
+    To modify the file pattern, specify a custom mapping rule between Parquet files and a single target table in the following fields, and then click **Confirm**. After that, the data source files will be re-scanned using the provided custom mapping rule.
 
     - **Target Database**: enter the name of the target database in TiDB Cloud.
 
@@ -132,7 +133,7 @@ To import the Parquet files to TiDB Cloud, take the following steps:
 
     - **Source file URIs and names**: enter the source file URI and name, for example, `s3://sampledate/ingest/TableName.01.parquet`.
 
-6. Click **Start Import**. If you see a warning message, resolve this by providing the correct source file, renaming the existing one according to [Naming Conventions for Data Import](/tidb-cloud/naming-conventions-for-data-import.md), or using **Advanced Settings** to make changes. After resolving these issues, you need to import the data again.
+6. Click **Submit**. If you see a warning message, resolve this by providing the correct source file, renaming the existing one according to [Naming Conventions for Data Import](/tidb-cloud/naming-conventions-for-data-import.md), or using **Advanced Settings** to make changes. After resolving these issues, you need to import the data again.
 
 7. When the import progress shows **Finished**, check the imported tables.
 

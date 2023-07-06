@@ -11,6 +11,18 @@ The following is the CSV Configuration window when you use the Import Data servi
 
 ![CSV Configurations](/media/tidb-cloud/import-data-csv-config.png)
 
+## Skip First Row
+
+- Definition: whether **all** CSV files contain a header row. If you skip the first row, the first row is used as the column names. Otherwise, the first row is treated as an ordinary data row.
+
+- Default: enabled
+
+## Header
+
+- Definition: whether **all** CSV files contain a header row. If **Header** is `True`, the first row is used as the column names. If **Header** is `False`, the first row is treated as an ordinary data row.
+
+- Default: True
+
 ## Separator
 
 - Definition: defines the field separator. It can be one or multiple characters, but must not be empty.
@@ -21,12 +33,6 @@ The following is the CSV Configuration window when you use the Import Data servi
     * `"\t"` for TSV (tab-separated values).
 
 - Default: `,`
-
-## Header
-
-- Definition: whether *all* CSV files contain a header row. If **Header** is `True`, the first row is used as the column names. If **Header** is `False`, the first row is treated as an ordinary data row.
-
-- Default: `True`
 
 ## Delimiter
 
@@ -41,7 +47,7 @@ The following is the CSV Configuration window when you use the Import Data servi
 
 ## Backslash escape
 
-- Definition: whether to parse backslash inside fields as escape characters. If **Backslash escape** is `True`, the following sequences are recognized and converted:
+- Definition: whether to parse backslash inside fields as escape characters. If **Backslash escape** is enabled, the following sequences are recognized and converted:
 
     | Sequence | Converted to             |
     |----------|--------------------------|
@@ -71,19 +77,4 @@ The following is the CSV Configuration window when you use the Import Data servi
 
     `"{\"key1\": \"val1\", \"key2\":\"val2\" }"`
 
-- Default: `True`
-
-## Trim last separator
-
-- Definition: whether to treat `Separator` as the line terminator and trim all trailing separators.
-
-    For example, in the following CSV file:
-
-    ```csv
-    A,,B,,
-    ```
-
-    - When `Trim last separator = False`, this is interpreted as a row of 5 fields `('A', '', 'B', '', '')`.
-    - When `Trim last separator = True`, this is interpreted as a row of 3 fields `('A', '', 'B')`.
-
-- Default: `False`
+- Default: enabled
