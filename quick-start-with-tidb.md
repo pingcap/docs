@@ -102,7 +102,7 @@ As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB in
         >
         > + Since v5.2.0, TiDB supports running `tiup playground` on the machine that uses the Apple M1 chip.
         > + For the playground operated in this way, after the test deployment is finished, TiUP will clean up the original cluster data. You will get a new cluster after re-running the command.
-        > + If you want the data to be persisted on storage, run `tiup --tag <your-tag> playground ...`. For details, refer to the [TiUP Reference Guide](/tiup/tiup-reference.md#-t---tag).
+        > + If you want the data to be persisted on storage, run `tiup --tag <your-tag> playground ...`. For details, refer to the [TiUP Reference](/tiup/tiup-reference.md#-t---tag) guide.
 
 4. Start a new session to access TiDB:
 
@@ -221,7 +221,7 @@ As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB in
         > **Note:**
         >
         > For the playground operated in this way, after the test deployment is finished, TiUP will clean up the original cluster data. You will get a new cluster after re-running the command.
-        > If you want the data to be persisted on storage, run `tiup --tag <your-tag> playground ...`. For details, refer to the [TiUP Reference Guide](/tiup/tiup-reference.md#-t---tag).
+        > If you want the data to be persisted on storage, run `tiup --tag <your-tag> playground ...`. For details, refer to the [TiUP Reference](/tiup/tiup-reference.md#-t---tag) guide.
 
 4. Start a new session to access TiDB:
 
@@ -501,15 +501,15 @@ Other requirements for the target machine include:
 
 If you have just deployed a TiDB cluster for the local test environment, here are the next steps:
 
-- Learn about basic SQL operations in TiDB by referring to the [Basic SQL operations in TiDB](/basic-sql-operations.md) documentation.
-- You can also migrate data to TiDB by referring to the [Migrate data to TiDB](/migration-overview.md) documentation.
+- Learn about basic SQL operations in TiDB by referring to [Basic SQL operations in TiDB](/basic-sql-operations.md).
+- You can also migrate data to TiDB by referring to [Migrate data to TiDB](/migration-overview.md).
 
 If you are ready to deploy a TiDB cluster for the production environment, here are the next steps:
 
 - [Deploy TiDB using TiUP](/production-deployment-using-tiup.md)
-- Alternatively, you can deploy TiDB on Cloud using TiDB Operator by referring to the [TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/stable) documentation.
+- Alternatively, you can deploy TiDB on Cloud using TiDB Operator by referring to the [TiDB on Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/stable) documentation.
 
-If you're looking for an analytics solution with TiFlash, here are the next steps:
+If you are looking for an analytics solution with TiFlash, here are the next steps:
 
 - [Use TiFlash](/tiflash/tiflash-overview.md#use-tiflash)
 - [TiFlash Overview](/tiflash/tiflash-overview.md)
