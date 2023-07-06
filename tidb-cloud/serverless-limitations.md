@@ -32,7 +32,7 @@ We are constantly filling in the feature gaps between TiDB Serverless and TiDB D
 
 - [Maintenance window](/tidb-cloud/configure-maintenance-window.md) is currently unavailable.
 
-### Monitoring and Diagnosis
+### Monitoring and diagnosis
 
 - [Third-party Monitoring integrations](/tidb-cloud/third-party-monitoring-integrations.md) are currently unavailable.
 - [Built-in Alerting](/tidb-cloud/monitor-built-in-alerting.md) is currently unavailable.
@@ -42,7 +42,7 @@ We are constantly filling in the feature gaps between TiDB Serverless and TiDB D
 
 ### Self-service upgrades
 
-- TiDB Serverless is a fully managed deployment of TiDB. Major and minor version upgrades of TiDB are handled by TiDB Cloud, therefore can not be initiated by users.
+- TiDB Serverless is a fully managed deployment of TiDB. Major and minor version upgrades of TiDB are handled by TiDB Cloud and therefore cannot be initiated by users.
 
 ### Stream data
 
@@ -52,8 +52,8 @@ We are constantly filling in the feature gaps between TiDB Serverless and TiDB D
 ### Others
 
 - [Time to live (TTL)](/time-to-live.md) is currently unavailable.
-- Transaction can not last longer than 30m
-- [Limited SQL features](/tidb-cloud/limited-sql-features.md) for more details about SQL limitations.
+- Transaction can not last longer than 30 minutes.
+- For more details about SQL limitations, refer to [Limited SQL Features](/tidb-cloud/limited-sql-features.md).
 - **Only [Basic](/tidb-cloud/tidb-cloud-support.md) support plan** is available for TiDB Serverless
 
 ## Usage quota
