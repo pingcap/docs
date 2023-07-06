@@ -719,14 +719,7 @@ You can see that the inserted record `(NULL, 'mothra')` falls into the same part
 
 For `LIST` and `RANGE` partitioned tables, you can add and drop partitions using the `ALTER TABLE <table name> ADD PARTITION (<partition specification>)` or `ALTER TABLE <table name> DROP PARTITION <list of partitions>` statement.
 
-<<<<<<< HEAD
 For `LIST` and `RANGE` partitioned tables, `REORGANIZE PARTITION` is not yet supported.
-=======
-- Add partitions using the `ALTER TABLE <table name> ADD PARTITION (<partition specification>)` statement.
-- Drop partitions using the `ALTER TABLE <table name> DROP PARTITION <list of partitions>` statement.
-- Remove all data from specified partitions using the `ALTER TABLE <table name> TRUNCATE PARTITION <list of partitions>` statement. The logic of `TRUNCATE PARTITION` is similar to [`TRUNCATE TABLE`](/sql-statements/sql-statement-truncate.md) but it is for partitions.
-- Merge, split, or make other changes to the partitions using the `ALTER TABLE <table name> REORGANIZE PARTITION <list of partitions> INTO (<new partition definitions>)` statement.
->>>>>>> bad9362ff (fix range columns examples (#14040))
 
 For `HASH` partitioned tables, `COALESCE PARTITION` and `ADD PARTITION` are not yet supported.
 
