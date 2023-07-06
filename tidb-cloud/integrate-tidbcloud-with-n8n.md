@@ -12,7 +12,7 @@ This document introduces how to build an auto-workflow: create a TiDB Serverless
 ## Prerequisites: Get TiDB Cloud API key
 
 1. Access your TiDB Cloud dashboard.
-2. Click <MDSvgIcon name="icon-top-organization" /> **Organization** >  **Organization Settings** in the upper-right corner.
+2. Click <MDSvgIcon name="icon-top-organization" />, and then click **Organization Settings** in the lower-left corner.
 3. Click the **API Keys** tab.
 4. Click the **Create API Key** button to create a new API key.
 5. Save the created API key for later use in n8n.
