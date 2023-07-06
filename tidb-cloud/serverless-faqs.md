@@ -22,7 +22,7 @@ Get started with the 5-minute [TiDB Cloud Quick Start](/tidb-cloud/tidb-cloud-qu
 
 ### How many TiDB Serverless clusters can I create in TiDB Cloud?
 
-For each organization in TiDB Cloud, you can create a maximum of five TiDB Serverless clusters by default. To create more TiDB Serverless clusters, you need to add a credit card and set a [spending limit](/tidb-cloud/tidb-cloud-glossary.md#spending-limit) for the usage.
+For each organization in TiDB Cloud, you can create a maximum of five TiDB Serverless clusters by default. To create more TiDB Serverless clusters, you need to add a credit card and set a [spending limit](/tidb-cloud/tidb-cloud-glossary.md#spending-limit) for usage.
 
 ### Are all TiDB Cloud features fully supported on TiDB Serverless?
 
@@ -55,7 +55,7 @@ For more information, see [TiDB Serverless usage quota](/tidb-cloud/select-clust
 
 ### How can I estimate the number of RUs required by my workloads and plan my monthly budget?
 
-To get the RU consumption of individual SQL statements, you can use the [EXPLAIN ANALYZE](/sql-statements/sql-statement-explain-analyze.md) SQL statement. 
+To get the RU consumption of individual SQL statements, you can use the [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md) SQL statement. 
 
 To get the RUs and storage used by your cluster, view the **Usage this month** pane on your cluster overview page. With your past resource usage data and real-time resource usage in this pane, you can track your cluster's resource consumption and estimate a reasonable spending limit. If the free quota cannot meet your requirement, you can edit the spending limit easily. For more information, see [Manage Spending Limit for TiDB Serverless clusters](/tidb-cloud/manage-serverless-spend-limit.md).
 
@@ -65,11 +65,11 @@ The storage is metered based on the amount of data stored in a TiDB Serverless c
 
 ### Why does the storage usage size remain unchanged after dropping a table or database immediately?
 
-This is because TiDB retains dropped tables and databases for a certain period of time. This retention period ensures that transactions dependent on these tables can continue execution without disruption. Additionally, the retention period makes the [FLASHBACK TABLE](/sql-statements/sql-statement-flashback-table.md)/[FLASHBACK DATABASE](/sql-statements/sql-statement-flashback-database.md) feature feasible, which allows you to recover dropped tables and databases if they were mistakenly deleted.
+This is because TiDB retains dropped tables and databases for a certain period of time. This retention period ensures that transactions dependent on these tables can continue execution without disruption. Additionally, the retention period makes the [`FLASHBACK TABLE`](/sql-statements/sql-statement-flashback-table.md)/[`FLASHBACK DATABASE`](/sql-statements/sql-statement-flashback-database.md) feature feasible, which allows you to recover dropped tables and databases if they were mistakenly deleted.
 
 ### Why are there RU consumptions when I'm not actively running any queries?
 
-RU consumptions can occur in various scenarios. One common scenario is during background queries, such as the synchronization of schema changes between TiDB instances. Another scenario is when certain web console features generate queries, like loading schemas. These processes utilize RUs even without explicit user triggers.
+RU consumptions can occur in various scenarios. One common scenario is during background queries, such as synchronizing schema changes between TiDB instances. Another scenario is when certain web console features generate queries, like loading schemas. These processes use RUs even without explicit user triggers.
 
 ### Why is there a spike in RU usage when my workload is steady?
 
