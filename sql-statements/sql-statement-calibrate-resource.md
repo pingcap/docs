@@ -49,7 +49,7 @@ If your application is already running in a production environment, or you can r
 
 > **Note:**
 >
-> TiKV does not monitor CPU usage  metrics on macOS, it does not support capacity estimation based on actual workload on macOS.
+> TiKV does not monitor CPU usage metrics on macOS. It does not support capacity estimation based on actual workload on macOS.
 
 ### Estimate capacity based on hardware deployment
 
