@@ -9,7 +9,7 @@ This document describes how to stream data from TiDB Cloud to MySQL using the **
 
 > **Note:**
 >
-> - To use the changefeed feature, make sure that your TiDB Dedicated cluster version is v6.4.0 or later and the TiKV node size is at least 8 vCPU and 16 GiB.
+> - To use the changefeed feature, make sure that your TiDB Dedicated cluster version is v6.4.0 or later and the TiKV node is at least 8 vCPU and 16 GiB.
 > - Currently, TiDB Cloud only allows up to 5 changefeeds per cluster.
 > - For [TiDB Serverless clusters](/tidb-cloud/select-cluster-tier.md#tidb-serverless), the changefeed feature is unavailable.
 

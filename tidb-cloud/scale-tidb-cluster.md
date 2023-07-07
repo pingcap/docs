@@ -22,7 +22,7 @@ For information about how to determine the size of your TiDB cluster, see [Deter
 >
 > If the vCPU and RAM of TiDB or TiKV is set as **2 vCPU, 8 GiB (Beta)** or **4 vCPU, 16 GiB**, note the following restrictions. To bypass these restrictions, you can [increase the vCPU and RAM](#change-vcpu-and-ram) first.
 >
-> - The node quantity of TiDB can only be set to 1 or 2, and the node quantity of TiKV is fixed to 3.
+> - The node number of TiDB can only be set to 1 or 2, and the node number of TiKV is fixed to 3.
 > - 2 vCPU TiDB can only be used with 2 vCPU TiKV, and 2 vCPU TiKV can only be used with 2 vCPU TiDB.
 > - 4 vCPU TiDB can only be used with 4 vCPU TiKV, and 4 vCPU TiKV can only be used with 4 vCPU TiDB.
 > - TiFlash is unavailable.
