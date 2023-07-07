@@ -171,7 +171,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
     With this feature, you can upgrade to higher-performance nodes for increased demand or downgrade to lower-performance nodes for cost savings. With this added flexibility, you can adjust your cluster's capacity to align with your workloads and optimize costs.
 
-    For detailed steps, see [Change node size](/tidb-cloud/scale-tidb-cluster.md#change-node-size).
+    For detailed steps, see [Change node size](/tidb-cloud/scale-tidb-cluster.md#change-vcpu-and-ram).
 
 - Support importing compressed files. You can import CSV and SQL files in the following formats: `.gzip`, `.gz`, `.zstd`, `.zst`, and `.snappy`. This feature provides a more efficient and cost-effective way to import data and reduces your data transfer costs.
 
@@ -408,7 +408,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 - Support decreasing the size of TiDB, TiKV, and TiFlash nodes to scale in a [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) cluster that is hosted on AWS and created after December 31, 2022.
 
-    You can decrease the node size [via the TiDB Cloud console](/tidb-cloud/scale-tidb-cluster.md#change-node-size) or [via the TiDB Cloud API (beta)](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/UpdateCluster).
+    You can decrease the node size [via the TiDB Cloud console](/tidb-cloud/scale-tidb-cluster.md#change-vcpu-and-ram) or [via the TiDB Cloud API (beta)](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/UpdateCluster).
 
 - Support a new GCP region for the [Data Migration](/tidb-cloud/migrate-from-mysql-using-data-migration.md) feature of [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) clusters: `Tokyo (asia-northeast1)`.
 
@@ -617,7 +617,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 - Support scaling up TiDB, TiKV, and TiFlash nodes by increasing the **Node Size(vCPU + RAM)** for TiDB Dedicated clusters hosted on AWS and created after December 31, 2022.
 
-    You can increase the node size [using the TiDB Cloud console](/tidb-cloud/scale-tidb-cluster.md#change-node-size) or [using the TiDB Cloud API (beta)](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/UpdateCluster).
+    You can increase the node size [using the TiDB Cloud console](/tidb-cloud/scale-tidb-cluster.md#change-vcpu-and-ram) or [using the TiDB Cloud API (beta)](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/UpdateCluster).
 
 - Extend the metrics retention period on the [**Monitoring**](/tidb-cloud/built-in-monitoring.md) page to two days.
 
