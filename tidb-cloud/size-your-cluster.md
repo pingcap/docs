@@ -190,7 +190,7 @@ The supported vCPU and RAM sizes include the following:
 - 8 vCPU, 64 GiB
 - 16 vCPU, 128 GiB
 
-Note that TiFlash is unavailable when the vCPU size of TiDB or TiKV is set as **2 vCPU, 8 GiB (Beta)** or **4 vCPU, 16 GiB**.
+Note that TiFlash is unavailable when the vCPU and RAM size of TiDB or TiKV is set as **2 vCPU, 8 GiB (Beta)** or **4 vCPU, 16 GiB**.
 
 ### TiFlash node number
 
