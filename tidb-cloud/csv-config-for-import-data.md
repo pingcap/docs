@@ -17,12 +17,6 @@ The following is the CSV Configuration window when you use the Import Data servi
 
 - Default: enabled
 
-## Header
-
-- Definition: whether **all** CSV files contain a header row. If **Header** is `True`, the first row is used as the column names. If **Header** is `False`, the first row is treated as an ordinary data row.
-
-- Default: True
-
 ## Separator
 
 - Definition: defines the field separator. It can be one or multiple characters, but must not be empty.
