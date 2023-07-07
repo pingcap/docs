@@ -15,6 +15,7 @@ ticloud cluster create [flags]
 >
 > Currently, you can only create a [TiDB Serverless](/tidb-cloud/select-cluster-tier.md) cluster using the preceding command.
 
+
 ## Examples
 
 Create a cluster in interactive mode:

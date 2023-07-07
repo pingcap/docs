@@ -17,7 +17,7 @@ To import data, perform the following steps:
 
         > **Tip:**
         >
-        > If you have multiple projects, you can view the project list and switch to another project from the ☰ hover menu in the upper-left corner.
+        > If you have multiple projects, you can click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner and switch to another project.
 
     2. Click the name of your target cluster to go to its overview page, and then click **Import** in the left navigation pane.
 
@@ -55,7 +55,7 @@ To prepare data, you can select one from the following two options:
 
 - [Option 1: Prepare source data files using Dumpling](#option-1-prepare-source-data-files-using-dumpling)
 
-    You need to launch [Dumpling](/dumpling-overview.md) on your EC2, and export the data to Amazon S3. The data you export is the current latest data of your source database. This might affect the online service. Dumpling will lock the table when you export data.
+    You need to launch [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview) on your EC2, and export the data to Amazon S3. The data you export is the current latest data of your source database. This might affect the online service. Dumpling will lock the table when you export data.
 
 - [Option 2: Prepare source data files using Amazon Aurora snapshots](#option-2-prepare-source-data-files-using-amazon-aurora-snapshots)
 

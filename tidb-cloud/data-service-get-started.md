@@ -9,7 +9,7 @@ Data Service (beta) enables you to access TiDB Cloud data via an HTTPS request u
 
 > **Tip:**
 >
-> TiDB Cloud provides a Chat2Query API for TiDB Serverless clusters. After it is enabled, TiDB Cloud will automatically create a system Data App called **Chat2Query** and a Chat2Data endpoint in Data Service. You can call this endpoint to let AI generate and execute SQL statements by providing instructions.
+> TiDB Cloud provides a Chat2Query API for TiDB clusters. After it is enabled, TiDB Cloud will automatically create a system Data App called **Chat2Query** and a Chat2Data endpoint in Data Service. You can call this endpoint to let AI generate and execute SQL statements by providing instructions.
 >
 > For more information, see [Get started with Chat2Query API](/tidb-cloud/use-chat2query-api.md).
 
@@ -17,17 +17,17 @@ This document introduces how to quickly get started with TiDB Cloud Data Service
 
 ## Before you begin
 
-Before creating a Data App, make sure that you have created a [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta) cluster. If you do not have one, follow the steps in [Create a TiDB Serverless cluster](/tidb-cloud/create-tidb-cluster-serverless.md) to create one.
+Before creating a Data App, make sure that you have created a [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) cluster. If you do not have one, follow the steps in [Create a TiDB Serverless cluster](/tidb-cloud/create-tidb-cluster-serverless.md) to create one.
 
 ## Step 1. Create a Data App
 
 A Data App is a group of endpoints that you can use to access data for a specific application. To create a Data App, perform the following steps:
 
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com).
+1. In the [TiDB Cloud console](https://tidbcloud.com), click <MDSvgIcon name="icon-left-data-service" /> **Data Service** in the left navigation pane.
 
-2. In the left navigation pane, click <MDSvgIcon name="icon-left-data-service" /> **Data Service**.
+2. On the **Data Service** page, click **Create Data App**.
 
-3. On the **Get started by creating your first data application** page, enter a name and select clusters that you want the Data App to access.
+3. In the **Create Data App** dialog, enter a name and select clusters that you want the Data App to access.
 
 4. (Optional) To automatically deploy endpoints of the Data App to your preferred GitHub repository and branch, enable **Connect to GitHub**, and then do the following:
 
@@ -139,7 +139,7 @@ You can call the endpoint by sending an HTTPS request. Before calling an endpoin
 ### 1. Create an API key
 
 1. In the left pane of the [**Data Service**](https://tidbcloud.com/console/data-service) page, click the name of your Data App to view its details.
-2. In the **API Key** area, click **Create API Key**.
+2. In the **Authentication** area, click **Create API Key**.
 3. In the **Create API Key** dialog box, enter a description and select a role for your API key.
 
     The role is used to control whether the API key can read or write data to the clusters linked to the Data App. You can select the `ReadOnly` or `ReadAndWrite` role:

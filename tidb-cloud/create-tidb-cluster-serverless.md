@@ -31,11 +31,11 @@ To create a TiDB Serverless cluster, take the following steps:
 
 4. The cloud provider of TiDB Serverless is AWS. You can select an AWS region where you want to host your cluster.
 
-5. (Optional) Change the spend limit if you plan to use more storage and compute resources than the [free quota](/tidb-cloud/select-cluster-tier.md#usage-quota). If you have not added a payment method, you need to add a credit card after editing the limit.
+5. (Optional) Change the spending limit if you plan to use more storage and compute resources than the [free quota](/tidb-cloud/select-cluster-tier.md#usage-quota). If you have not added a payment method, you need to add a credit card after editing the limit.
 
     > **Note:**
     >
-    > For each organization in TiDB Cloud, you can create a maximum of five TiDB Serverless clusters by default. To create more TiDB Serverless clusters, you need to add a credit card and set a [spend limit](/tidb-cloud/tidb-cloud-glossary.md#spend-limit) for the usage.
+    > For each organization in TiDB Cloud, you can create a maximum of five TiDB Serverless clusters by default. To create more TiDB Serverless clusters, you need to add a credit card and set a [spending limit](/tidb-cloud/tidb-cloud-glossary.md#spending-limit) for the usage.
 
 6. Update the default cluster name if necessary, and then click **Create**.
 

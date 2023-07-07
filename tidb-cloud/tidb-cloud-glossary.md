@@ -123,9 +123,9 @@ A Request Unit (RU) is a unit of measure used to represent the amount of resourc
 
 ## S
 
-### Spend limit
+### Spending limit
 
-Spend limit refers to the maximum amount of money that you are willing to spend on a particular workload in a month. It is a cost-control mechanism that allows you to set a budget for your TiDB Serverless clusters. When the spend limit of a cluster is greater than 0, the cluster is considered a paid cluster. Also, the paid cluster can have a free quota if it meets the qualifications. The paid cluster with a free quota will consume the free quota first.
+Spending limit refers to the maximum amount of money that you are willing to spend on a particular workload in a month. It is a cost-control mechanism that allows you to set a budget for your TiDB Serverless clusters. When the spending limit of a cluster is greater than 0, the cluster is considered a paid cluster. Also, the paid cluster can have a free quota if it meets the qualifications. The paid cluster with a free quota will consume the free quota first.
 
 ## T
 

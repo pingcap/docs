@@ -9,7 +9,7 @@ In TiDB Cloud SQL Shell, you can try TiDB SQL, test out TiDB's compatibility wit
 
 > **Note:**
 >
-> You cannot connect to [TiDB Serverless clusters](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta) using SQL Shell. To connect to your TiDB Serverless cluster, see [Connect to TiDB Serverless clusters](/tidb-cloud/connect-to-tidb-cluster-serverless.md).
+> You cannot connect to [TiDB Serverless clusters](/tidb-cloud/select-cluster-tier.md#tidb-serverless) using SQL Shell. To connect to your TiDB Serverless cluster, see [Connect to TiDB Serverless clusters](/tidb-cloud/connect-to-tidb-cluster-serverless.md).
 
 To connect to your TiDB cluster using SQL shell, perform the following steps:
 
@@ -17,7 +17,7 @@ To connect to your TiDB cluster using SQL shell, perform the following steps:
 
     > **Tip:**
     >
-    > If you have multiple projects, you can view the project list and switch to another project from the ☰ hover menu in the upper-left corner.
+    > If you have multiple projects, you can click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner and switch to another project.
 
 2. Click the name of your target cluster to go to its cluster overview page, and then click **Connect** in the upper-right corner. A connection dialog is displayed.
 

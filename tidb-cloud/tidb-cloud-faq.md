@@ -41,7 +41,10 @@ No.
 
 ### What versions of TiDB are supported on TiDB Cloud?
 
-For the currently supported TiDB version, see [TiDB Cloud Release Notes](/tidb-cloud/tidb-cloud-release-notes.md).
+- Starting from June 20, 2023, the default TiDB version for new TiDB Dedicated clusters is v6.5.3. 
+- Starting from March 7, 2023, the default TiDB version for new TiDB Serverless clusters is v6.6.0.
+
+For more information, see [TiDB Cloud Release Notes](/tidb-cloud/tidb-cloud-release-notes.md).
 
 ### What companies are using TiDB or TiDB Cloud in production?
 
@@ -97,7 +100,7 @@ TiDB is highly compatible with MySQL. You can migrate data from any MySQL-compat
 
 ### Does TiDB Cloud support incremental backups?
 
-No. If you need to restore data to any point in time within the cluster's backup retention, you can [use PITR (Point-in-time Recovery)](/tidb-cloud/backup-and-restore.md#automatic-backup).
+No. If you need to restore data to any point in time within the cluster's backup retention, you can use PITR (Point-in-time Recovery). For more information, see [Use PITR in a TiDB Dedicated cluster](/tidb-cloud/backup-and-restore.md#automatic-backup) or [Use PITR in a TiDB Serverless cluster](/tidb-cloud/backup-and-restore-serverless.md#restore).
 
 ## HTAP FAQs
 

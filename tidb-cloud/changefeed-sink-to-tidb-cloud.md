@@ -45,7 +45,7 @@ Before creating a changefeed, you need to export existing data from the source T
 
 2. [Export data](/tidb-cloud/export-data-from-tidb-cloud.md) from your TiDB Dedicated cluster, then use community tools such as [mydumper/myloader](https://centminmod.com/mydumper.html) to load data to the destination TiDB Serverless cluster.
 
-3. From the [exported files of Dumpling](/dumpling-overview.md#format-of-exported-files), get the start position of TiDB Cloud sink from the metadata file:
+3. From the [exported files of Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview#format-of-exported-files), get the start position of TiDB Cloud sink from the metadata file:
 
     The following is a part of an example metadata file. The `Pos` of `SHOW MASTER STATUS` is the TSO of the existing data, which is also the start position of TiDB Cloud sink.
 
