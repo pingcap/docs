@@ -1,0 +1,158 @@
+---
+title: TiDB 6.1.7 Release Notes
+summary: Learn about the compatibility changes, improvements, and bug fixes in TiDB 6.1.7.
+---
+
+# TiDB 6.1.7 Release Notes
+
+Release date: xx xx, 2023
+
+TiDB version: 6.1.7
+
+Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.1/quick-start-with-tidb) | [Production deployment](https://docs.pingcap.com/tidb/v6.1/production-deployment-using-tiup) | [Installation packages](https://www.pingcap.com/download/?version=v6.1.7#version-list)
+
+## Improvements
+
++ TiDB
+
+    - (dup): release-6.4.0.md > Improvements> TiDB- Use pessimistic transactions in internal transaction retry to avoid retry failure and reduce time consumption [#38136](https://github.com/pingcap/tidb/issues/38136) @[jackysp](https://github.com/jackysp)
+
++ TiKV
+
+    - note [#issue](链接) @[贡献者 GitHub ID](链接)
+
++ PD
+
+    - note [#issue](链接) @[贡献者 GitHub ID](链接)
+
++ TiFlash
+
+    - note [#issue](链接) @[贡献者 GitHub ID](链接)
+
++ Tools
+
+    + Backup & Restore (BR)
+
+        - note [#issue](链接) @[贡献者 GitHub ID](链接)
+
+    + TiCDC
+
+        - (dup): release-6.6.0.md > Improvements> Tools> TiCDC- Support batch `UPDATE` DML statements to improve TiCDC replication performance [#8084](https://github.com/pingcap/tiflow/issues/8084) @[amyangfei](https://github.com/amyangfei)
+
+    + TiDB Data Migration (DM)
+
+        - note [#issue](链接) @[贡献者 GitHub ID](链接)
+
+    + TiDB Lightning
+
+        - (dup): release-7.2.0.md > Improvements> Tools> TiDB Lightning- Verify checksum throught SQL after import to improve stability of verification [#41941](https://github.com/pingcap/tidb/issues/41941) @[GMHDBJD](https://github.com/GMHDBJD)
+
+    + TiUP
+
+        - note [#issue](链接) @[贡献者 GitHub ID](链接)
+
+    + TiDB Binlog
+
+        - note [#issue](链接) @[贡献者 GitHub ID](链接)
+
+## Bug fixes
+
++ TiDB
+
+    <!--tw:@ran-huang 4-->
+
+    - 修复 session txn info panic 的问题 [#43829](https://github.com/pingcap/tidb/issues/43829) @[zimulala](https://github.com/zimulala)
+    - 修复 resolve lock 在 pd 时间跳变情况下可能导致 hang 住的问题 [#44822](https://github.com/pingcap/tidb/issues/44822) @[zyguan](https://github.com/zyguan)
+    - 修复包含 CTE 的查询可能导致的磁盘可用空间不足的问题 [#44477](https://github.com/pingcap/tidb/issues/44477) @[guo-shaoge](https://github.com/guo-shaoge)
+    - 修复 CTE 和关联子查询同时使用时可能查询结果出错或者 panic 的问题 [#44649](https://github.com/pingcap/tidb/issues/44649) [#38170](https://github.com/pingcap/tidb/issues/38170) [#44774](https://github.com/pingcap/tidb/issues/44774) @[winoros](https://github.com/winoros) @[guo-shaoge](https://github.com/guo-shaoge)
+    <!--tw:@qiancai 4-->
+    - 修复 select cast(n as char)，当 n 为负数时，查询结果出错的问题 [#44786](https://github.com/pingcap/tidb/issues/44786) @[xhebox](https://github.com/xhebox)
+    - 修复某些情况下 TiDB 查询时 Panic 的问题 [#40857](https://github.com/pingcap/tidb/issues/40857) @[Dousir9](https://github.com/Dousir9)
+    - 修复 SQL compile error 日志未脱敏的问题 [#41831](https://github.com/pingcap/tidb/issues/41831) @[lance6716](https://github.com/lance6716)
+    - 修复在分区表使用 `floor` 语句分区时 `select` 语句返回错误的问题 [#42323](https://github.com/pingcap/tidb/issues/42323) @[jiyfhust](https://github.com/pingcap/tidb/pull/42363)
+    <!--tw:@Oreoxmt 4-->
+    - 修复使用分区表在 Region 分裂时请求可能返回错误的问题 [#43144](https://github.com/pingcap/tidb/issues/43144) @[lcwangchao](https://github.com/lcwangchao)
+    - 修复读取统计信息时不必要的内存占用问题 [#42052](https://github.com/pingcap/tidb/issues/42052) @[xuyifangreeneyes](https://github.com/xuyifangreeneyes)
+    - 修复创建大量空分区表后内存占用过多的问题 [#44308](https://github.com/pingcap/tidb/issues/44308) @[hawkingrei](https://github.com/hawkingrei)
+    - 修复某些情况下聚合下推过 join 时会 panic 的问题 [#44795](https://github.com/pingcap/tidb/issues/44795) @[AilinKid](https://github.com/AilinKid)
+    - (dup): release-6.4.0.md > Bug fixes> TiDB - Fix the issue that the join result of common table expressions might be wrong [#38170](https://github.com/pingcap/tidb/issues/38170) @[wjhuang2016](https://github.com/wjhuang2016)
+    - (dup): release-6.5.3.md > Bug fixes> TiDB- Fix the issue that in some rare cases, residual pessimistic locks of pessimistic transactions might affect data correctness when GC resolves locks [#43243](https://github.com/pingcap/tidb/issues/43243) @[MyonKeminta](https://github.com/MyonKeminta)
+    - (dup): release-6.5.2.md > Bug fixes> TiDB- Fix the issue that after a new column is added in the cache table, the value is `NULL` instead of the default value of the column [#42928](https://github.com/pingcap/tidb/issues/42928) @[lqs](https://github.com/lqs)
+    - (dup): release-7.2.0.md > Bug fixes> TiDB- Fix the issue that TiDB returns an error when the corresponding rows in partitioned tables cannot be found in the probe phase of index join [#43686](https://github.com/pingcap/tidb/issues/43686) @[AilinKid](https://github.com/AilinKid) @[mjonss](https://github.com/mjonss)
+    - (dup): release-7.2.0.md > Bug fixes> TiDB- Fix the issue that dropping a database causes slow GC progress [#33069](https://github.com/pingcap/tidb/issues/33069) @[tiancaiamao](https://github.com/tiancaiamao)
+    - (dup): release-7.2.0.md > Bug fixes> TiDB- Fix the issue that data and indexes are inconsistent when the `ON UPDATE` statement does not correctly update the primary key [#44565](https://github.com/pingcap/tidb/issues/44565) @[zyguan](https://github.com/zyguan)
+    - (dup): release-6.5.3.md > Bug fixes> TiDB- Fix the issue that TiCDC might lose some row changes during table renaming [#43338](https://github.com/pingcap/tidb/issues/43338) @[tangenta](https://github.com/tangenta)
+    - (dup): release-6.5.3.md > Bug fixes> TiDB- Fix the behavior issue of Placement Rules in partitioned tables, so that the Placement Rules in deleted partitions can be correctly set and recycled [#44116](https://github.com/pingcap/tidb/issues/44116) @[lcwangchao](https://github.com/lcwangchao)
+    - (dup): release-7.1.0.md > Bug fixes> TiDB- Fix the issue that when `tidb_scatter_region` is enabled, Region does not automatically split after a partition is truncated [#43174](https://github.com/pingcap/tidb/issues/43174) [#43028](https://github.com/pingcap/tidb/issues/43028)
+    - (dup): release-6.5.2.md > Bug fixes> TiDB- Fix the issue of DDL retry caused by write conflict when executing `TRUNCATE TABLE` for partitioned tables with many partitions and TiFlash replicas [#42940](https://github.com/pingcap/tidb/issues/42940) @[mjonss](https://github.com/mjonss)
+    - (dup): release-6.5.3.md > Bug fixes> TiDB- Fix the issue of incorrect execution plans when pushing down window functions to TiFlash [#43922](https://github.com/pingcap/tidb/issues/43922) @[gengliqi](https://github.com/gengliqi)
+    - (dup): release-7.2.0.md > Bug fixes> TiDB- Fix the issue that incorrect results might be returned when using a common table expression (CTE) in statements with non-correlated subqueries [#44051](https://github.com/pingcap/tidb/issues/44051) @[winoros](https://github.com/winoros)
+    - (dup): release-7.2.0.md > Bug fixes> TiDB- Fix the issue that using `memTracker` with cursor fetch causes memory leaks [#44254](https://github.com/pingcap/tidb/issues/44254) @[YangKeao](https://github.com/YangKeao)
+    - (dup): release-7.1.0.md > Bug fixes> TiDB- Fix the issue that the data length in the `QUERY` column of the `INFORMATION_SCHEMA.DDL_JOBS` table might exceed the column definition [#42440](https://github.com/pingcap/tidb/issues/42440) @[tiancaiamao](https://github.com/tiancaiamao)
+    - (dup): release-7.2.0.md > Bug fixes> TiDB- Fix the issue that the `min, max` query result is incorrect [#43805](https://github.com/pingcap/tidb/issues/43805) @[wshwsh12](https://github.com/wshwsh12)
+    - (dup): release-7.1.0.md > Bug fixes> TiDB- Fix the issue that TiDB reports syntax errors when analyzing tables [#43392](https://github.com/pingcap/tidb/issues/43392) @[guo-shaoge](https://github.com/guo-shaoge)
+    - (dup): release-7.2.0.md > Bug fixes> TiDB- Fix the issue that the `SHOW PROCESSLIST` statement cannot display the TxnStart of the transaction of the statement with a long subquery time [#40851](https://github.com/pingcap/tidb/issues/40851) @[crazycs520](https://github.com/crazycs520)
+    - (dup): release-6.5.2.md > Bug fixes> TiDB- Fix the issue of missing table names in the `ADMIN SHOW DDL JOBS` result when a `DROP TABLE` operation is being executed [#42268](https://github.com/pingcap/tidb/issues/42268) @[tiancaiamao](https://github.com/tiancaiamao)
+    - (dup): release-6.5.3.md > Bug fixes> TiDB- Fix the issue of displaying the incorrect TiDB address in IPv6 environment [#43260](https://github.com/pingcap/tidb/issues/43260) @[nexustar](https://github.com/nexustar)
+    - (dup): release-6.5.3.md > Bug fixes> TiDB- Fix the issue that the SQL statement reports the `runtime error: index out of range` error when using the `AES_DECRYPT` expression [#43063](https://github.com/pingcap/tidb/issues/43063) @[lcwangchao](https://github.com/lcwangchao)
+    - (dup): release-7.2.0.md > Bug fixes> TiDB- Fix the issue that there is no warning when using `SUBPARTITION` to create partitioned tables [#41198](https://github.com/pingcap/tidb/issues/41198) [#41200](https://github.com/pingcap/tidb/issues/41200) @[mjonss](https://github.com/mjonss)
+    - (dup): release-7.2.0.md > Bug fixes> TiDB- Fix the issue that the query with CTE causes TiDB to hang [#43749](https://github.com/pingcap/tidb/issues/43749) [#36896](https://github.com/pingcap/tidb/issues/36896) @[guo-shaoge](https://github.com/guo-shaoge)
+    - (dup): release-6.5.3.md > Bug fixes> TiDB- Fix the issue that truncating a partition of a partitioned table might cause the Placement Rule of the partition to become invalid [#44031](https://github.com/pingcap/tidb/issues/44031) @[lcwangchao](https://github.com/lcwangchao)
+    - (dup): release-6.5.3.md > Bug fixes> TiDB- Fix the issue that CTE results are incorrect when pushing down predicates [#43645](https://github.com/pingcap/tidb/issues/43645) @[winoros](https://github.com/winoros)
+    - (dup): release-6.3.0.md > Bug fixes> TiDB> Fix the issue that querying `INFORMATION_SCHEMA.TIKV_REGION_STATUS` returns an incorrect result @[zimulala](https://github.com/zimulala)- Fix the issue that `auto-commit` change affects transaction commit behaviours [#36581](https://github.com/pingcap/tidb/issues/36581) @[cfzjywxk](https://github.com/cfzjywxk)
+
++ TiKV
+
+    - (dup): release-6.5.3.md > Bug fixes> TiKV - Fix the issue that TiDB Lightning might cause SST file leakage [#14745](https://github.com/tikv/tikv/issues/14745) @[YuJuncen](https://github.com/YuJuncen)
+    - (dup): release-6.5.3.md > Bug fixes> TiKV - Fix the issue that encryption key ID conflict might cause the deletion of the old keys [#14585](https://github.com/tikv/tikv/issues/14585) @[tabokie](https://github.com/tabokie)
+    - (dup): release-6.5.3.md > Bug fixes> TiKV - Fix the issue of file handle leakage in Continuous Profiling [#14224](https://github.com/tikv/tikv/issues/14224) @[tabokie](https://github.com/tabokie)
+
++ PD
+
+    <!--tw:@Oreoxmt 1-->
+
+    - 修复 gRPC 返回错误格式问题 [#5161](https://github.com/tikv/pd/issues/5161) @[HuSharp](https://github.com/HuSharp)
+
++ TiFlash
+
+    - note [#issue](链接) @[贡献者 GitHub ID](链接)
+
++ Tools
+
+    + Backup & Restore (BR)
+
+        - (dup): release-7.2.0.md > Bug fixes> Tools> Backup & Restore (BR) - Fix the issue that `resolved lock timeout` is falsely reported in some cases [#43236](https://github.com/pingcap/tidb/issues/43236) @[YuJuncen](https://github.com/YuJuncen)
+        - (dup): release-7.1.0.md > Bug fixes> Tools> Backup & Restore (BR) - Fix the issue of backup slowdown when a TiKV node crashes in a cluster [#42973](https://github.com/pingcap/tidb/issues/42973) @[YuJuncen](https://github.com/YuJuncen)
+
+    + TiCDC
+
+        - (dup): release-7.2.0.md > Bug fixes> Tools> TiCDC - Fix the issue that TiCDC cannot create a changefeed with a downstream Kafka-on-Pulsar [#8892](https://github.com/pingcap/tiflow/issues/8892) @[hi-rustin](https://github.com/hi-rustin)
+        - (dup): release-7.1.0.md > Bug fixes> Tools> TiCDC - Fix the issue that TiCDC cannot automatically recover when PD address or leader fails [#8812](https://github.com/pingcap/tiflow/issues/8812) [#8877](https://github.com/pingcap/tiflow/issues/8877) @[asddongmen](https://github.com/asddongmen)
+        - (dup): release-6.5.3.md > Bug fixes> Tools> TiCDC - Fix the issue that when the downstream is Kafka, TiCDC queries the downstream metadata too frequently and causes excessive workload in the downstream [#8957](https://github.com/pingcap/tiflow/issues/8957) [#8959](https://github.com/pingcap/tiflow/issues/8959) @[hi-rustin](https://github.com/hi-rustin)
+        - (dup): release-6.5.3.md > Bug fixes> Tools> TiCDC - Fix the issue that TiCDC gets stuck when PD fails such as network isolation or PD Owner node reboot [#8808](https://github.com/pingcap/tiflow/issues/8808) [#8812](https://github.com/pingcap/tiflow/issues/8812) [#8877](https://github.com/pingcap/tiflow/issues/8877) @[asddongmen](https://github.com/asddongmen)
+
+    + TiDB Data Migration (DM)
+
+        - note [#issue](链接) @[贡献者 GitHub ID](链接)
+
+    + TiDB Lightning
+
+        <!--tw:@hfxsd 2-->
+
+        - 修复 Logical Mode 导入期间下游删除表可能会导致 Lightning 元信息未及时更新的问题 [#44614](https://github.com/pingcap/tidb/issues/44614) @[dsdashun](https://github.com/dsdashun)
+        - 修复 Disk Quota 因为竞态条件可能导致磁盘配额不准确的问题 [#44867](https://github.com/pingcap/tidb/issues/44867) @[D3Hunter](https://github.com/D3Hunter)
+        - (dup): release-6.5.3.md > Bug fixes> Tools> TiDB Lightning - Fix the issue of `write to tikv with no leader returned` when importing a large amount of data [#43055](https://github.com/pingcap/tidb/issues/43055) @[lance6716](https://github.com/lance6716)
+        - (dup): release-6.6.0.md > Bug fixes> Tools> TiDB Lightning - Fix a possible OOM problem when there is an unclosed delimiter in the data file [#40400](https://github.com/pingcap/tidb/issues/40400) @[buchuitoudegou](https://github.com/buchuitoudegou)
+        - (dup): release-6.5.3.md > Bug fixes> Tools> TiDB Lightning - Fix the issue that OOM might occur when importing a wide table [#43728](https://github.com/pingcap/tidb/issues/43728) @[D3Hunter](https://github.com/D3Hunter)
+
+    + TiUP
+
+        - note [#issue](链接) @[贡献者 GitHub ID](链接)
+
+    + TiDB Binlog
+
+        <!--tw:@hfxsd 3-->
+
+        - 修复 Etcd Client 初始化时没有自动同步最新节点信息的问题 [#1236](https://github.com/pingcap/tidb-binlog/issues/1236) @[lichunzhu](https://github.com/lichunzhu)
+        - 更新 TiKV Client 版本，解决 Drainer 因为 TiKV Client 版本过老存在 Panic 的问题 [#1170](https://github.com/pingcap/tidb-binlog/issues/1170) @[lichunzhu](https://github.com/lichunzhu)
+        - 修复未过滤失败状态的 DDL 导致任务报错的问题 [#1228](https://github.com/pingcap/tidb-binlog/issues/1228) @[lichunzhu](https://github.com/lichunzhu)
