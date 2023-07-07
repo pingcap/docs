@@ -5,7 +5,7 @@ summary: The reference of `ticloud branch list`.
 
 # ticloud branch list
 
-List all branches in a cluster:
+List all branches for a cluster:
 
 ```shell
 ticloud branch list <cluster-id> [flags]
@@ -19,19 +19,19 @@ ticloud branch ls <cluster-id> [flags]
 
 ## Examples
 
-List all branches in a cluster (interactive mode):
+List all branches for a cluster (interactive mode):
 
 ```shell
 ticloud branch list
 ```
 
-List all branches in a specified cluster (non-interactive mode):
+List all branches for a specified cluster (non-interactive mode):
 
 ```shell
 ticloud branch list <cluster-id>
 ```
 
-List all branches in a specified cluster in the JSON format:
+List all branches for a specified cluster in the JSON format:
 
 ```shell
 ticloud branch list <cluster-id> -o json

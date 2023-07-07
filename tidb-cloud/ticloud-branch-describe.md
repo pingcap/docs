@@ -5,7 +5,7 @@ summary: The reference of `ticloud branch describe`.
 
 # ticloud branch describe
 
-Get information about a branch (such as the endpoints, user_prefix, and usages):
+Get information about a branch (such as the endpoints, [user name prefix](/tidb-cloud/select-cluster-tier.md#user-name-prefix), and usages):
 
 ```shell
 ticloud branch describe [flags]

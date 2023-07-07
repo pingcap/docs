@@ -5,7 +5,7 @@ summary: The reference of `ticloud branch create`.
 
 # ticloud branch create
 
-Create a branch:
+Create a branch for a cluster:
 
 ```shell
 ticloud branch create [flags]
@@ -13,7 +13,7 @@ ticloud branch create [flags]
 
 > **Note:**
 >
-> Currently, you can only create branch under [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta).
+> Currently, you can only create branches for [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta) clusters.
 
 ## Examples
 
@@ -36,7 +36,7 @@ In non-interactive mode, you need to manually enter the required flags. In inter
 | Flag                    | Description                                                | Required | Note                                                |
 |-------------------------|------------------------------------------------------------|----------|-----------------------------------------------------|
 | -c, --cluster-id string | The ID of the cluster, in which the branch will be created | Yes      | Only works in non-interactive mode.                 |
-| --branch-name string    | Name of the branch to be created                           | Yes      | Only works in non-interactive mode.                 |
+| --branch-name string    | The name of the branch to be created                           | Yes      | Only works in non-interactive mode.                 |
 | -h, --help              | Get help information for this command                      | No       | Works in both non-interactive and interactive modes |
 
 ## Inherited flags
