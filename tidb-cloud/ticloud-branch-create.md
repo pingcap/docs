@@ -13,7 +13,7 @@ ticloud branch create [flags]
 
 > **Note:**
 >
-> Currently, you can only create branches for TiDB Serverless cluster.
+> Currently, you can only create branches for [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) cluster.
 
 ## Examples
 

@@ -37,9 +37,9 @@ List all branches for a specified cluster in the JSON format:
 ticloud branch list <cluster-id> -o json
 ```
 
-## Args
+## Arguments
 
-Branch list command has the following arguments:
+The `branch list` command has the following arguments:
 
 | Argument Index | Description                                         | Required | Note                                  |
 |----------------|-----------------------------------------------------|----------|---------------------------------------|
