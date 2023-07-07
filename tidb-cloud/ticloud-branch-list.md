@@ -43,7 +43,7 @@ Branch list command has the following arguments:
 
 | Argument Index | Description                                         | Required | Note                                  |
 |----------------|-----------------------------------------------------|----------|---------------------------------------|
-| <cluster-id> | The cluster ID of the branches which will be listed | Yes      | Only works in non-interactive mode.   |
+| `<cluster-id>` | The cluster ID of the branches which will be listed | Yes      | Only works in non-interactive mode.   |
 
 ## Flags
 
