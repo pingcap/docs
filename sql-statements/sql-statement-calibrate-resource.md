@@ -47,6 +47,10 @@ If your application is already running in a production environment, or you can r
 - The time window ranges from 10 minutes to 24 hours.
 - In the specified time window, if the CPU utilization of TiDB and TiKV is too low, you cannot estimate the capacity.
 
+> **Note:**
+>
+> TiKV does not monitor CPU usage metrics on macOS. It does not support capacity estimation based on actual workload on macOS.
+
 ### Estimate capacity based on hardware deployment
 
 This method mainly estimates capacity based on the current cluster configuration, combined with the empirical values observed for different workloads. Because different types of workloads require different ratios of hardware, the output capacity of the same configuration of hardware might be different. The `WORKLOAD` parameter here accepts the following different workload types. The default value is `TPCC`.
@@ -100,6 +104,20 @@ When the workload within the time window is too low, an error occurs.
 ```sql
 CALIBRATE RESOURCE START_TIME '2023-04-18 08:00:00' DURATION '60m';
 ERROR 1105 (HY000): The workload in selected time window is too low, with which TiDB is unable to reach a capacity estimation; please select another time window with higher workload, or calibrate resource by hardware instead
+```
+
+The capacity estimation function requires monitoring metrics data according to the actual workload, including `resource_manager_resource_unit`, `process_cpu_usage`, `tikv_cpu_quota`, and `tidb_server_maxprocs`. If the corresponding monitor data is empty, an error occurs with the corresponding monitor item name, as shown in the following example. When there is no workload and `resource_manager_resource_unit` is empty, this error also occurs.
+
+```sql
+CALIBRATE RESOURCE START_TIME '2023-04-18 08:00:00' DURATION '60m';
+Error 1105 (HY000): metrics 'resource_manager_resource_unit' is empty
+```
+
+TiKV does not monitor CPU usage on macOS. The following error occurs when you estimate capacity based on actual workload on macOS:
+
+```sql
+CALIBRATE RESOURCE START_TIME '2023-04-18 08:00:00' DURATION '60m';
+ERROR 1105 (HY000): metrics 'process_cpu_usage' is empty
 ```
 
 Specify `WORKLOAD` to view the RU capacity. The default value is `TPCC`.

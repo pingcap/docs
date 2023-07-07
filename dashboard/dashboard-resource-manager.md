@@ -59,6 +59,8 @@ Before resource planning, you need to know the overall capacity of the cluster. 
 
     - When the workload within the time window is too low, the following error is displayed `ERROR 1105 (HY000): The workload in selected time window is too low, with which TiDB is unable to reach a capacity estimation; please select another time window with higher workload, or calibrate resource by hardware instead` is displayed.
 
+    - The capacity estimation function requires monitoring metrics data according to the actual workload, including `resource_manager_resource_unit`, `process_cpu_usage`, `tikv_cpu_quota`, and `tidb_server_maxprocs`. If the corresponding monitor data is empty, an error is reported with the corresponding monitor item name, such as `Error 1105 (HY000): metrics 'resource_manager_resource_unit' is empty`. When there is no workload and `resource_manager_resource_unit` is empty, this error is also reported. In addition, because TiKV does not monitor CPU usage on macOS, it does not support capacity estimation based on actual workload and will report `ERROR 1105 (HY000): metrics 'process_cpu_usage' is empty`.
+
   You can select an appropriate time range using **CPU Usage** in the [Metrics](#metrics) section.
 
 ## Metrics
