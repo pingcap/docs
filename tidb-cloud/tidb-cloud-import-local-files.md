@@ -77,11 +77,11 @@ Currently, this method supports importing one CSV file for one task into either 
 
 ## FAQ
 
-### Can I only import some specified columns on TiDB Cloud?
+### Can I only import some specified columns by the Import feature in TiDB Cloud?
 
-No. Currently, you can only import all columns of a CSV file into an existing table.
+No. Currently, you can only import all columns of a CSV file into an existing table when using the Import feature.
 
-In this case, you can use the MySQL client to connect your TiDB cluster, and then use [LOAD DATA](https://docs.pingcap.com/tidb/stable/sql-statement-load-data) to specify the columns to import. For example:
+To import only some specified columns, you can use the MySQL client to connect your TiDB cluster, and then use [LOAD DATA](https://docs.pingcap.com/tidb/stable/sql-statement-load-data) to specify the columns to import. For example:
 
 ```sql
 CREATE TABLE `import_test` (
