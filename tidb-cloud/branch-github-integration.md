@@ -46,8 +46,6 @@ To integrate TiDB Serverless branching with your GitHub repository, take the fol
 
     If your account does not exist in the list, click **Install Other Account**, and then follow the on-screen instructions to install the account.
 
-    ![github-install.png](/media/tidb-cloud/branch/github-install.png)
-
 5. Select your target repository in the **GitHub Repository** drop-down list. If the list is long, you can search the repository by typing the name.
 
 6. Click **Connect** to connect between your TiDB Serverless cluster and your GitHub repository.
