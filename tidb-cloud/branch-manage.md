@@ -33,6 +33,21 @@ To view branches for your cluster, perform the following steps:
 
     The branch list of the cluster is displayed in the right pane.
 
+## Connect to a branch
+
+To connect to a branch, perform the following steps:
+
+1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project, and then click the name of your target TiDB Serverless cluster to go to its overview page.
+2. Click **Branches** in the left navigation pane.
+3. In the row of your target branch to be connected, click **...** in the **Action** column.
+4. Click **Connect** in the drop-down list. The dialog for the connection information is displayed.
+5. Click **Create password** or **Reset password** to create or reset the root password.
+6. Connect to the branch using the connection information.
+
+> **Note:**
+>
+> Currently, branches do not support [private endpoints](/tidb-cloud/set-up-private-endpoint-connections-serverless.md).
+
 ## Delete a branch
 
 To delete a branch, perform the following steps:
@@ -42,20 +57,6 @@ To delete a branch, perform the following steps:
 3. In the row of your target branch to be deleted, click **...** in the **Action** column.
 4. Click **Delete** in the drop-down list.
 5. Confirm the deletion.
-
-## Get branch connection information
-
-To get the connection information of a branch, perform the following steps:
-
-1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project, and then click the name of your target TiDB Serverless cluster to go to its overview page.
-2. Click **Branches** in the left navigation pane.
-3. In the row of your target branch to be connected, click **...** in the **Action** column.
-4. Click **Connect** in the drop-down list. The dialog for the connection information is displayed.
-5. Click **Create password** or **Reset password** to create or reset the root password.
-
-> **Note:**
->
-> Currently, branches do not support [private endpoints](/tidb-cloud/set-up-private-endpoint-connections-serverless.md).
 
 ## What's next
 
