@@ -40,7 +40,7 @@ If the login is successful, you will be directed to the TiDB Cloud console.
 
 ### Sign out
 
-In the upper-right corner of the TiDB Cloud console, click <MDSvgIcon name="icon-top-account-settings" /> **Account** and select **Logout**.
+In the lower-left corner of the TiDB Cloud console, click <MDSvgIcon name="icon-top-account-settings" /> and select **Logout**.
 
 ## Password policy
 
@@ -72,7 +72,7 @@ If you forget your password, you can reset it by email as follows:
 >
 > If you sign up for TiDB Cloud with email and password, it is recommended that you reset your password every 90 days. Otherwise, you will get a password expiration reminder to change your password when you log in to TiDB Cloud.
 
-1. Click <MDSvgIcon name="icon-top-account-settings" /> **Account** in the upper-right corner of the TiDB Cloud console.
+1. Click <MDSvgIcon name="icon-top-account-settings" /> in the lower-left corner of the TiDB Cloud console.
 
 2. Click **Account Settings**.
 
@@ -90,9 +90,9 @@ Two-factor authentication adds additional security by requiring an Authenticator
 
 ### Enable MFA
 
-1. Click <MDSvgIcon name="icon-top-account-settings" /> **Account** in the upper-right corner of the TiDB Cloud console.
+1. Click <MDSvgIcon name="icon-top-account-settings" /> in the lower-left corner of the TiDB Cloud console.
 
-2. Click **Account settings**.
+2. Click **Account Settings**.
 
 3. Click the **Two Factor Authentication** tab.
 
@@ -100,9 +100,9 @@ Two-factor authentication adds additional security by requiring an Authenticator
 
 ### Disable MFA
 
-1. Click <MDSvgIcon name="icon-top-account-settings" /> **Account** in the upper-right corner of the TiDB Cloud console.
+1. Click <MDSvgIcon name="icon-top-account-settings" /> in the lower-left corner of the TiDB Cloud console.
 
-2. Click **Account settings**.
+2. Click **Account Settings**.
 
 3. Click the **Two Factor Authentication** tab.
 

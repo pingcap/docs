@@ -16,7 +16,7 @@
 - Develop Applications
   - [Overview](/develop/dev-guide-overview.md)
   - Quick Start
-    - [Build a TiDB Cluster in TiDB Cloud (Serverless Tier)](/develop/dev-guide-build-cluster-in-cloud.md)
+    - [Build a TiDB Serverless Cluster in TiDB Cloud](/develop/dev-guide-build-cluster-in-cloud.md)
     - [CRUD SQL in TiDB](/develop/dev-guide-tidb-crud-sql.md)
   - Connect to TiDB Cloud
     - [Choose Driver or ORM](/develop/dev-guide-choose-driver-or-orm.md)
@@ -100,6 +100,7 @@
       - [Manage Branches](/tidb-cloud/branch-manage.md)
       - [GitHub Integration (Beta)](/tidb-cloud/branch-github-integration.md)
     - [Manage Spend Limit](/tidb-cloud/manage-serverless-spend-limit.md)
+    - [Manage Spending Limit](/tidb-cloud/manage-serverless-spend-limit.md)
     - [Back Up and Restore TiDB Serverless Data](/tidb-cloud/backup-and-restore-serverless.md)
   - Manage TiDB Dedicated Clusters
     - [Create a TiDB Dedicated Cluster](/tidb-cloud/create-tidb-cluster.md)
@@ -126,7 +127,7 @@
     - [Built-in Metrics](/tidb-cloud/built-in-monitoring.md)
     - [Built-in Alerting](/tidb-cloud/monitor-built-in-alerting.md)
     - [Cluster Events](/tidb-cloud/tidb-cloud-events.md)
-    - [Third-Party Metrics Integrations](/tidb-cloud/third-party-monitoring-integrations.md)
+    - [Third-Party Metrics Integrations (Beta)](/tidb-cloud/third-party-monitoring-integrations.md)
   - Tune Performance
     - [Overview](/tidb-cloud/tidb-cloud-tune-performance-overview.md)
     - Analyze Performance
@@ -194,7 +195,6 @@
       - [Import Sample Data (SQL File)](/tidb-cloud/import-sample-data.md)
       - [Import CSV Files from Amazon S3 or GCS](/tidb-cloud/import-csv-files.md)
       - [Import Apache Parquet Files from Amazon S3 or GCS](/tidb-cloud/import-parquet-files.md)
-  - [Export Data from TiDB](/tidb-cloud/export-data-from-tidb-cloud.md)
   - Reference
       - [Configure Amazon S3 Access and GCS Access](/tidb-cloud/config-s3-and-gcs-access.md)
       - [Naming Conventions for Data Import](/tidb-cloud/naming-conventions-for-data-import.md)
@@ -227,12 +227,12 @@
   - Network Access Control
     - TiDB Serverless
       - [Connect via Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)
-      - [TLS Connections to TiDB Serverless](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md)
+      - [TLS Connections to TiDB Serverless](/tidb-cloud/secure-connections-to-serverless-clusters.md)
     - TiDB Dedicated
       - [Configure an IP Access List](/tidb-cloud/configure-ip-access-list.md)
       - [Connect via Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections.md)
       - [Connect via VPC Peering](/tidb-cloud/set-up-vpc-peering-connections.md)
-      - [TLS Connections to TiDB Dedicated](/tidb-cloud/tidb-cloud-tls-connect-to-dedicated-tier.md)
+      - [TLS Connections to TiDB Dedicated](/tidb-cloud/tidb-cloud-tls-connect-to-dedicated.md)
   - Database Access Control
     - [Configure Cluster Security Settings](/tidb-cloud/configure-security-settings.md)
   - Audit Management
@@ -276,8 +276,9 @@
     - [Storage](/tidb-storage.md)
     - [Computing](/tidb-computing.md)
     - [Scheduling](/tidb-scheduling.md)
-  - [Dedicated Tier Limitations and Quotas](/tidb-cloud/limitations-and-quotas.md)
-  - [Serverless Tier Limitations](/tidb-cloud/serverless-tier-limitations.md)
+  - [TiDB Dedicated Limitations and Quotas](/tidb-cloud/limitations-and-quotas.md)
+  - [TiDB Serverless Limitations](/tidb-cloud/serverless-limitations.md)
+  - [Limited SQL Features on TiDB Cloud](/tidb-cloud/limited-sql-features.md)
   - [TiDB Limitations](/tidb-limitations.md)
   - Benchmarks
     - [TPC-C Performance Test Report](/tidb-cloud/v7.1.0-performance-benchmarking-with-tpcc.md)
@@ -551,14 +552,13 @@
     - project
       - [list](/tidb-cloud/ticloud-project-list.md)
     - [update](/tidb-cloud/ticloud-update.md)
-  - [Dumpling](/dumpling-overview.md)
   - [Table Filter](/table-filter.md)
   - [Troubleshoot Inconsistency Between Data and Indexes](/troubleshoot-data-inconsistency-errors.md)
   - [Support](/tidb-cloud/tidb-cloud-support.md)
   - [Glossary](/tidb-cloud/tidb-cloud-glossary.md)
 - FAQs
   - [TiDB Cloud FAQs](/tidb-cloud/tidb-cloud-faq.md)
-  - [Serverless Tier FAQs](/tidb-cloud/serverless-tier-faqs.md)
+  - [TiDB Serverless FAQs](/tidb-cloud/serverless-faqs.md)
 - Release Notes
   - [2023](/tidb-cloud/tidb-cloud-release-notes.md)
   - [2022](/tidb-cloud/release-notes-2022.md)

@@ -17,7 +17,7 @@ This document introduces how to quickly get started with TiDB Cloud Data Service
 
 ## Before you begin
 
-Before creating a Data App, make sure that you have created a [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta) cluster. If you do not have one, follow the steps in [Create a TiDB Serverless cluster](/tidb-cloud/create-tidb-cluster-serverless.md) to create one.
+Before creating a Data App, make sure that you have created a [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) cluster. If you do not have one, follow the steps in [Create a TiDB Serverless cluster](/tidb-cloud/create-tidb-cluster-serverless.md) to create one.
 
 ## Step 1. Create a Data App
 
@@ -139,7 +139,7 @@ You can call the endpoint by sending an HTTPS request. Before calling an endpoin
 ### 1. Create an API key
 
 1. In the left pane of the [**Data Service**](https://tidbcloud.com/console/data-service) page, click the name of your Data App to view its details.
-2. In the **API Key** area, click **Create API Key**.
+2. In the **Authentication** area, click **Create API Key**.
 3. In the **Create API Key** dialog box, enter a description and select a role for your API key.
 
     The role is used to control whether the API key can read or write data to the clusters linked to the Data App. You can select the `ReadOnly` or `ReadAndWrite` role:

@@ -31,7 +31,7 @@ To create an API key for a Data App, perform the following steps:
 
 1. Navigate to the [**Data Service**](https://tidbcloud.com/console/data-service) page of your project.
 2. In the left pane, click the name of your target Data App to view its details.
-3. In the **API Key** area, click **Create API Key**.
+3. In the **Authentication** area, click **Create API Key**.
 4. In the **Create API Key** dialog box, enter a description and select a role for your API key.
 
     The role is used to control whether the API key can read or write data to the clusters linked to the Data App. You can select the `ReadOnly` or `ReadAndWrite` role:
