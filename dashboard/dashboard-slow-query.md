@@ -18,9 +18,7 @@ By default, SQL queries with an execution time of more than 300 milliseconds are
 
 You can use one of the following two methods to access the slow query page:
 
-* After logging into TiDB Dashboard, click **Slow Queries** on the left navigation menu:
-
-![Access slow query page](/media/dashboard/dashboard-slow-queries-access-v620.png)
+* After logging in to TiDB Dashboard, click **Slow Queries** in the left navigation menu.
 
 * Visit <http://127.0.0.1:2379/dashboard/#/slow_query> in your browser. Replace `127.0.0.1:2379` with the actual PD address and port.
 
@@ -37,6 +35,12 @@ You can filter slow queries based on the time range, the related database, SQL k
 Click **Columns** on the page and you can choose to see more columns. You can move your mouse to the **(i)** icon at the right side of a column name to view the description of this column:
 
 ![Show more columns](/media/dashboard/dashboard-slow-queries-list2-v620.png)
+
+### Export slow queries locally
+
+Click ☰ (**More**) in the upper-right corner of the page to display the **Export** option. After you click **Export**, TiDB Dashboard exports slow queries in the current list as a CSV file.
+
+![Export slow queries locally](/media/dashboard/dashboard-slow-queries-export-v651.png)
 
 ### Sort by column
 

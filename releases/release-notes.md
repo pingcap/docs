@@ -5,6 +5,14 @@ aliases: ['/docs/dev/releases/release-notes/','/docs/dev/releases/rn/']
 
 # TiDB Release Notes
 
+## 7.2
+
+- [7.2.0-DMR](/releases/release-7.2.0.md): 2023-06-29
+
+## 7.1
+
+- [7.1.0](/releases/release-7.1.0.md): 2023-05-31
+
 ## 7.0
 
 - [7.0.0-DMR](/releases/release-7.0.0.md): 2023-03-30
@@ -15,6 +23,7 @@ aliases: ['/docs/dev/releases/release-notes/','/docs/dev/releases/rn/']
 
 ## 6.5
 
+- [6.5.3](/releases/release-6.5.3.md): 2023-06-14
 - [6.5.2](/releases/release-6.5.2.md): 2023-04-21
 - [6.5.1](/releases/release-6.5.1.md): 2023-03-10
 - [6.5.0](/releases/release-6.5.0.md): 2022-12-29

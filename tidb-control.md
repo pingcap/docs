@@ -8,6 +8,10 @@ aliases: ['/docs/dev/tidb-control/','/docs/dev/reference/tools/tidb-control/']
 
 TiDB Control is a command-line tool of TiDB, usually used to obtain the status information of TiDB for debugging. This document introduces the features of TiDB Control and how to use these features.
 
+> **Note:**
+>
+> TiDB Control is specifically designed for debugging purposes and might not be fully compatible with future capabilities introduced in TiDB. It's not recommended to include this tool in applications or utilities development to get information.
+
 ## Get TiDB Control
 
 You can get TiDB Control by installing it using TiUP or by compiling it from source code.
@@ -22,7 +26,7 @@ After installing TiUP, you can use `tiup ctl:v<CLUSTER_VERSION> tidb` command to
 
 ### Compile from source code
 
-- Compilation environment requirement: [Go](https://golang.org/) Version 1.19 or later
+- Compilation environment requirement: [Go](https://golang.org/) 1.20 or later
 - Compilation procedures: Go to the root directory of the [TiDB Control project](https://github.com/pingcap/tidb-ctl), use the `make` command to compile, and generate `tidb-ctl`.
 - Compilation documentation: you can find the help files in the `doc` directory; if the help files are lost or you want to update them, use the `make doc` command to generate the help files.
 
