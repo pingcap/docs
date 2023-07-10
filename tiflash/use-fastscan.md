@@ -97,7 +97,7 @@ Data in the storage layer of TiFlash is stored in two layers: Delta layer and St
 By default, FastScan is not enabled, and the TableScan operator processes data in the following steps:
 
 1. Read data: create separate data streams in the Delta layer and Stable layer to read the respective data.
-2. Sort Merge: merge the data streams created in step 1. Then return the data after sorting in the (the primary key column, the timestamp column) order.
+2. Sort Merge: merge the data streams created in step 1. Then return the data after sorting in the (primary key column, timestamp column) order.
 3. Range Filter: according to the data range, filter the data generated in step 2, and then return the data.
 4. MVCC + Column Filter: filter the data generated in step 3 through MVCC (that is, filtering the data version according to the primary key column and the timestamp column) and through columns (that is, filtering out unneeded columns), and then return the data.
 
