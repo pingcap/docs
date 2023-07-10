@@ -50,7 +50,7 @@ In the sample trust entity:
 
 ### Check whether the role exists
 
-<!-- To be added -->
+If the role does not exist, create a role following instructions in [Configure Amazon S3 access](/tidb-cloud/config-s3-and-gcs-access.md#configure-amazon-s3-access).
 
 ### Check whether the external ID is set correctly
 
