@@ -11,7 +11,7 @@ With TiDB Serverless branches, developers can work in parallel, iterate rapidly 
 
 ## Implementations
 
-When a branch for a cluster is created, the data in it diverges from the original cluster, meaning that subsequent changes made in either the original cluster or the branch will not be synchronized with each other.
+When a branch for a cluster is created, the data in the branch diverges from the original cluster. This means that subsequent changes made in either the original cluster or the branch will not be synchronized with each other.
 
 To ensure fast and seamless branch creation, TiDB Serverless uses a copy-on-write technique for sharing data between the original cluster and its branches. This process usually completes within a few minutes and remains imperceptible to users, ensuring that it does not affect the performance of your original cluster.
 
@@ -19,9 +19,9 @@ To ensure fast and seamless branch creation, TiDB Serverless uses a copy-on-writ
 
 You can create branches easily and quickly to get isolated data environments. Branches are beneficial in the following scenarios where multiple developers or teams need to work independently, test changes, fix bugs, experiment with new features, or roll out updates without disrupting the production database.
 
-- Feature Development: Developers can work on new features in isolation without affecting the production database. Each feature can have its own branch, allowing quick iteration and experimentation without affecting other ongoing work.
+- Feature development: Developers can work on new features in isolation without affecting the production database. Each feature can have its own branch, allowing quick iteration and experimentation without affecting other ongoing work.
 
-- Bug Fixing: Developers can create a branch dedicated to fixing a specific bug, test the fix, and then merge it back once verified, without introducing new issues to the production database.
+- Bug fixing: Developers can create a branch dedicated to fixing a specific bug, test the fix, and then merge it back once verified, without introducing new issues to the production database.
 
 - Experimentation: While developing new features or making changes, developers can create branches to experiment with different approaches or configurations. This allows them to compare various options, gather data, and make informed decisions before the changes are merged into the production database.
 
@@ -37,7 +37,7 @@ Currently, TiDB Serverless branches are in beta and free of charge.
 
 - You can only create branches for TiDB Serverless clusters that are created after July 5, 2023.
 
-- For each organization in TiDB Cloud, you can create a maximum of five TiDB Serverless branches by default across all the clusters. The branches of a cluster will be created in the same region as the cluster, and you cannot create branches for a throttled cluster.
+- For each organization in TiDB Cloud, you can create a maximum of five TiDB Serverless branches by default across all the clusters. The branches of a cluster will be created in the same region as the cluster, and you cannot create branches for a throttled cluster or a cluster larger than 100 GiB.
 
 - For each branch, 5 GiB storage is allowed. Once the storage is reached, the read and write operations on this branch will be throttled until you reduce the storage.
 
