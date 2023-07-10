@@ -63,7 +63,7 @@ After you connect your TiDB Serverless cluster to your GitHub repository, for ea
 | Close or merge a pull request      | When you close or merge a pull request, the [TiDB Cloud Branching](https://github.com/apps/tidb-cloud-branching) app deletes the branch for this pull request.                                                                                                                                                                                                            |
 | Reopen a pull request              | When you reopen a pull request, the [TiDB Cloud Branching](https://github.com/apps/tidb-cloud-branching) app creates a branch for the lasted commit of the pull request.                                                                                                                                                                                                  |
 
-## Configuring TiDB Cloud Branching app
+## Configure TiDB Cloud Branching app
 
 To configure the behaviors of [TiDB Cloud Branching](https://github.com/apps/tidb-cloud-branching) app, you can add a `tidbcloud.yml` file to the root directory of your repository, and then add the desired configurations to this file according to the following instructions.
 
@@ -73,7 +73,7 @@ To configure the behaviors of [TiDB Cloud Branching](https://github.com/apps/tid
 
 Specify the GitHub branches that forbid the TiDB Cloud Branching app, even if they are in the `allowList`.
 
-```
+```yaml
 github:
     branch:
        blockList:
@@ -100,7 +100,7 @@ github:
 
 If it is set to `true`, the TiDB Cloud Branching app will not delete the TiDB Serverless branch that is created in the previous commit.
 
-```
+```yaml
 github:
     branch:
        autoReserved: false
@@ -112,7 +112,7 @@ github:
 
 If it is set to `false`, the TiDB Cloud Branching app will not delete the TiDB Serverless branch when a pull request is closed or merged.
 
-```
+```yaml
 github:
     branch:
        autoDestroy: true
@@ -155,4 +155,4 @@ Here are the main steps to create the workflow:
 
 ## What's next
 
-You can also build your branching CI/CD workflow without the branching GitHub integration. For example, you can use [tidbcloud-cli](https://github.com/tidbcloud/setup-tidbcloud-cli) and GitHub Actions to customize your CI/CD workflows.
+You can also build your branching CI/CD workflow without the branching GitHub integration. For example, you can use [`setup-tidbcloud-cli`](https://github.com/tidbcloud/setup-tidbcloud-cli) and GitHub Actions to customize your CI/CD workflows.
