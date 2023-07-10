@@ -8,6 +8,34 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2023.
 
+## July 11, 2023
+
+**General changes**
+
+- [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) now is Generally Available.
+
+- Add import error messages to the event center, providing you with more information about import tasks. You can check and resolve import task issues according to the error messages.
+
+- Support weekly backup for TiDB Dedicated clusters. For more information, see [Back up and restore TiDB Dedicated data](/tidb-cloud/backup-and-restore.md#automatic-backup).
+
+- Introduce **TiDB Bot (beta)**, an OpenAI-powered chatbot that offers multi-language support, 24/7 real-time response, and integrated documentation access.
+
+    TiDB Bot provides you with the following benefits:
+
+    - Continuous support: Always available to assist and answer your questions for an enhanced support experience.
+    - Improved efficiency: Automated responses reduce latency, improving overall operations.
+    - Seamless documentation access: Direct access to TiDB Cloud documentation for easy information retrieval and quick issue resolution.
+
+    To use TiDB Bot, click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com), and select **Ask TiDB Bot** to start a chat.
+
+- Support [branches (beta)](/tidb-cloud/branch-overview.md) for [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) clusters.
+
+    A branch for a cluster is a separate instance that contains a diverged copy of data from the original cluster. It provides an isolated environment, allowing you to connect to it and experiment freely without worrying about affecting the original cluster.
+
+    You can create branches for TiDB Serverless clusters created after July 5, 2023 using either [TiDB Cloud console](tidb-cloud/branch-manage.md) or [TiDB Cloud CLI](tidb-cloud/ticloud-branch-create.md).
+
+    If you use GitHub for application development, you can integrate TiDB Serverless branching into your GitHub CI/CD pipeline, which lets you automatically test your pull requests with branches without affecting the production database. For more information, see [Integrate TiDB Serverless Branching (Beta) with GitHub](tidb-cloud/branch-github-integration.md).
+
 ## July 4, 2023
 
 **General changes**
