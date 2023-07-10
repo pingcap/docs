@@ -1,5 +1,5 @@
 ---
-title: TiDB Serverless Branch (Beta) Overview
+title: TiDB Serverless Branching (Beta) Overview
 summary: Learn the concept of TiDB Serverless branches.
 ---
 
