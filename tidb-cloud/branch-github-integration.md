@@ -87,7 +87,7 @@ github:
 
 Specify the GitHub branches that allow the TiDB Cloud Branching app.
 
-```
+```yaml
 github:
     branch:
        allowList:
