@@ -76,9 +76,9 @@ Specify the GitHub branches that forbid the TiDB Cloud Branching app, even if th
 ```yaml
 github:
     branch:
-       blockList:
-           - ".*_doc"
-           - ".*_blackList"
+        blockList:
+            - ".*_doc"
+            - ".*_blackList"
 ```
 
 ### branch.allowList
@@ -90,8 +90,8 @@ Specify the GitHub branches that allow the TiDB Cloud Branching app.
 ```yaml
 github:
     branch:
-       allowList:
-           - ".*_db"
+        allowList:
+            - ".*_db"
 ```
 
 ### branch.autoReserved
@@ -103,7 +103,7 @@ If it is set to `true`, the TiDB Cloud Branching app will not delete the TiDB Se
 ```yaml
 github:
     branch:
-       autoReserved: false
+        autoReserved: false
 ```
 
 ### branch.autoDestroy
@@ -115,7 +115,7 @@ If it is set to `false`, the TiDB Cloud Branching app will not delete the TiDB S
 ```yaml
 github:
     branch:
-       autoDestroy: true
+        autoDestroy: true
 ```
 
 ## Create a branching CI workflow
