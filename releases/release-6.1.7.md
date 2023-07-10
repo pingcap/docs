@@ -139,7 +139,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.1/quick-start-with-
 
         <!--tw:@hfxsd 2-->
 
-        - Fix the issue that in Logical Import Mode, deleting tables downstream during import might cause TiDB Lightning meta information not to be updated in time [#44614](https://github.com/pingcap/tidb/issues/44614) @[dsdashun](https://github.com/dsdashun)
+        - Fix the issue that in Logical Import Mode, deleting tables downstream during import might cause TiDB Lightning metadata not to be updated in time [#44614](https://github.com/pingcap/tidb/issues/44614) @[dsdashun](https://github.com/dsdashun)
         - Fix the issue that disk quota might be inaccurate due to competing conditions [#44867](https://github.com/pingcap/tidb/issues/44867) @[D3Hunter](https://github.com/D3Hunter)
         - (dup): release-6.5.3.md > Bug fixes> Tools> TiDB Lightning - Fix the issue of `write to tikv with no leader returned` when importing a large amount of data [#43055](https://github.com/pingcap/tidb/issues/43055) @[lance6716](https://github.com/lance6716)
         - (dup): release-6.6.0.md > Bug fixes> Tools> TiDB Lightning - Fix a possible OOM problem when there is an unclosed delimiter in the data file [#40400](https://github.com/pingcap/tidb/issues/40400) @[buchuitoudegou](https://github.com/buchuitoudegou)
@@ -154,5 +154,5 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.1/quick-start-with-
         <!--tw:@hfxsd 3-->
 
         - Fix the issue that the etcd client does not automatically synchronize the latest node information during initialization [#1236](https://github.com/pingcap/tidb-binlog/issues/1236) @[lichunzhu](https://github.com/lichunzhu)
-        - Fix the panic issue of Drainer due to old TiKV client version by updating the TiKV client version [#1170](https://github.com/pingcap/tidb-binlog/issues/1170) @[lichunzhu](https://github.com/lichunzhu)
+        - Fix the panic issue of Drainer due to an old TiKV client version by upgrading the TiKV client [#1170](https://github.com/pingcap/tidb-binlog/issues/1170) @[lichunzhu](https://github.com/lichunzhu)
         - Fix the issue that unfiltered failed DDL statements cause task errors [#1228](https://github.com/pingcap/tidb-binlog/issues/1228) @[lichunzhu](https://github.com/lichunzhu)
