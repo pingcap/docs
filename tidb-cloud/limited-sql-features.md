@@ -53,6 +53,7 @@ TiDB Cloud works with almost all workloads that TiDB supports, but there are som
 | `CHANGE PUMP` | Not supported [^7] | Not supported [^7] |
 | `FLASHBACK CLUSTER TO TIMESTAMP` | Supported | Not supported [^3] |
 | `LOAD STATS` | Supported | Not supported |
+| `SELECT ... INTO OUTFILE` | Not supported [^4] | Not supported [^4] |
 | `SET CONFIG` | Not supported [^4] | Not supported [^4] |
 | `SHOW CONFIG` | Not supported [^4] | Not supported [^4] |
 | `SHOW DRAINER STATUS` | Not supported [^7] | Not supported [^7] |
