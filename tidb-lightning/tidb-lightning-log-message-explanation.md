@@ -11,7 +11,7 @@ To fully comprehend this document, you need to be already familiar with TiDB Lig
 
 You can use this document to quickly navigate through TiDB Lightning source code and gain insight into its internal workings and understand the significance behind each log message.
 
-Note that only important logs are included in this document. Trivial logs have been omitted.
+Note that only important logs are included in this document. Less important logs have been omitted.
 
 ## Log message explanation
 
@@ -79,7 +79,7 @@ Note that only important logs are included in this document. Trivial logs have b
 [INFO] [version.go:360] ["detect server version"] [type=TiDB] [version=5.4.0]
 ```
 
-[version.go:360](https://github.com/pingcap/tidb/blob/v5.4.0/br/pkg/version/version.go#L360): Detect and print the current TiDB server version. To import data in local backend mode, TiDB later than v4.0 is required. You also need to check the server version for [detecting data conflicts](https://github.com/pingcap/tidb/blob/v5.4.0/br/pkg/version/version.go#L224).
+[version.go:360](https://github.com/pingcap/tidb/blob/v5.4.0/br/pkg/version/version.go#L360): Detect and print the current TiDB server version. To import data in local backend mode, TiDB later than v4.0 is required. The same version check is also implemented for [detecting data conflicts](https://github.com/pingcap/tidb/blob/v5.4.0/br/pkg/version/version.go#L224).
 
 ```
 [INFO] [check_info.go:995] ["sample file start"] [table=sbtest1]
