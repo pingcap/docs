@@ -12,7 +12,7 @@ summary: Learn how to export snapshots of Grafana Dashboard, and how to visualiz
 
 > **Note:**
 >
-> Currently, MetricsTool can only be used for Grafana v6.x.x.
+> Currently, MetricsTool can only be used with Grafana v6.x.x.
 
 Metrics data is important in troubleshooting. When you request remote assistance, sometimes the support staff need to view the Grafana dashboards to diagnose problems. [MetricsTool](https://metricstool.pingcap.net/) can help export snapshots of Grafana dashboards as local files and visualize these snapshots. You can share these snapshots with outsiders and allow them to accurately read out the graphs, without giving out access to other sensitive information on the Grafana server.
 
