@@ -243,7 +243,7 @@ TiDB Lightning estimates the size of transformed KV pairs by sampling the first 
 [INFO] [split_client.go:113] ["skipping scatter because the replica number isn't less than store count."]
 ```
 
-[split_client.go:460](https://github.com/pingcap/tidb/blob/v5.4.0/br/pkg/restore/split_client.go#L460), [split_client.go:113](https://github.com/pingcap/tidb/blob/v5.4.0/br/pkg/restore/split_client.go#L113): Skips the scatter regions phase because `max-replica` <= the number of TiKV stores. Scattering regions is the process that PD schedulers distribute regions and their replicas to different TiKV stores.
+[split_client.go:460](https://github.com/pingcap/tidb/blob/v5.4.0/br/pkg/restore/split_client.go#L460), [split_client.go:113](https://github.com/pingcap/tidb/blob/v5.4.0/br/pkg/restore/split_client.go#L113): Skips the scatter regions phase because `max-replica` >= the number of TiKV stores. Scattering regions is the process that PD schedulers distribute regions and their replicas to different TiKV stores.
 
 ```
 [INFO] [localhelper.go:240] ["batch split region"] [region_id=2] [keys=23] [firstKey="dIAAAAAAAAA/X3KAAAAAAAAAAQ=="] [end="dIAAAAAAAAA/X3KAAAAAAJiWgQ=="]
