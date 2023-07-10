@@ -337,7 +337,7 @@ See the [Checkpoints control](/tidb-lightning/tidb-lightning-checkpoints.md#chec
 
 **Solution**:
 
-Currently, the limitation of TiDB cannot be bypassed. You can only ignore this table to ensure the successful import of other tables.
+To bypass this limit, modify the TiDB configuration item [`txn-entry-size-limit`](/tidb-configuration-file.md#txn-entry-size-limit-new-in-v50) and the TiKV configuration item [`raft-entry-max-size`](/tikv-configuration-file.md#raft-entry-max-size) to a value larger than the data to be imported and then retry.
 
 ## Encounter `rpc error: code = Unimplemented ...` when TiDB Lightning switches the mode
 
