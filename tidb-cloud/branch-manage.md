@@ -11,7 +11,7 @@ This document describes how to manage TiDB Serverless branches using the [TiDB C
 
 > **Note:**
 >
-> You can only create branches for TiDB Serverless clusters that are created after July 5, 2023. See [limitations-and-quotas](/tidb-cloud/branch-overview.md#limitations-and-quotas) for more limitations.
+> You can only create branches for TiDB Serverless clusters that are created after July 5, 2023. See [Limitations and quotas](/tidb-cloud/branch-overview.md#limitations-and-quotas) for more limitations.
 
 To create a branch, perform the following steps:
 
