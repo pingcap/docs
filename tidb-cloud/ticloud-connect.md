@@ -5,7 +5,7 @@ summary: The reference of `ticloud connect`.
 
 # ticloud connect
 
-Connect to a TiDB Cloud cluster:
+Connect to a TiDB Cloud cluster or branch:
 
 ```shell
 ticloud connect [flags]
@@ -18,28 +18,31 @@ ticloud connect [flags]
 
 ## Examples
 
-Connect to a TiDB Cloud cluster in interactive mode:
+Connect to a TiDB Cloud cluster or branch in interactive mode:
 
 ```shell
 ticloud connect
 ```
 
-Use the default user to connect to a TiDB Cloud cluster in non-interactive mode:
+Use the default user to connect to a TiDB Cloud cluster or branch in non-interactive mode:
 
 ```shell
 ticloud connect -p <project-id> -c <cluster-id>
+ticloud connect -p <project-id> -c <cluster-id> -b <branch-id>
 ```
 
-Use the default user to connect to the TiDB Cloud cluster with password in non-interactive mode:
+Use the default user to connect to the TiDB Cloud cluster or branch with password in non-interactive mode:
 
 ```shell
 ticloud connect -p <project-id> -c <cluster-id> --password <password>
+ticloud connect -p <project-id> -c <cluster-id> -b <branch-id> --password <password>
 ```
 
-Use a specific user to connect to the TiDB Cloud cluster in non-interactive mode:
+Use a specific user to connect to the TiDB Cloud cluster or branch in non-interactive mode:
 
 ```shell
 ticloud connect -p <project-id> -c <cluster-id> -u <user-name>
+ticloud connect -p <project-id> -c <cluster-id> -b <branch-id> -u <user-name>
 ```
 
 ## Flags
@@ -49,6 +52,7 @@ In non-interactive mode, you need to manually enter the required flags. In inter
 | Flag                    | Description                       | Required | Note                                                 |
 |-------------------------|-----------------------------------|----------|------------------------------------------------------|
 | -c, --cluster-id string | Cluster ID                        | Yes      | Only works in non-interactive mode.                  |
+| -b, --branch-id string  | Branch ID                         | No       | Only works in non-interactive mode.                  |
 | -h, --help              | Help information for this command | No       | Works in both non-interactive and interactive modes. |
 | --password              | The password of the user          | No       | Only works in non-interactive mode.                  |
 | -p, --project-id string | Project ID                        | Yes      | Only works in non-interactive mode.                  |
