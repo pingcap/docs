@@ -88,5 +88,5 @@ You can modify the start time to your preferred time or defer maintenance tasks 
     No. TiDB Cloud checks the cluster status before performing a maintenance task on a cluster.
 
     - If the cluster is in the **Creating** or **Paused** status, maintenance tasks are not required.
-    - If the cluster is running a daily or manual backup, the maintenance will be delayed and triggered until the current backup is successfully completed. Note that for clusters with large data volumes, the backup process might take a long time, such as 12 hours. To minimize the impact on the clusters, it is recommended to carefully set the start time for backups and the maintenance window.
+    - If the cluster is running an automatic or manual backup, the maintenance will be delayed and triggered until the current backup is successfully completed. Note that for clusters with large data volumes, the backup process might take a long time, such as 12 hours. To minimize the impact on the clusters, it is recommended to carefully set the start time for backups and the maintenance window.
     - If the cluster is in any other status, the maintenance tasks will start as scheduled.

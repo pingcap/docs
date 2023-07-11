@@ -35,13 +35,20 @@ By the automatic backup, you can back up the TiDB Dedicated cluster data every d
 
     - Toggle the **Auto Backup** switch to **On**.
 
-    - In **Backup Time**, schedule a start time for the daily cluster backup.
+    - In **Backup Cycle**, select either the **Daily** or **Weekly** checkbox. If you select **Weekly**, you need to specify the days of the week for the backup.
+
+    - In **Backup Time**, schedule a start time for the daily or weekly cluster backup.
 
         It is recommended to schedule automatic backup at a low workload period. If you do not specify a preferred backup time, TiDB Cloud assigns a default backup time, which is 2:00 AM in the time zone of the region where the cluster is located.
 
     - In **Backup Retention**, configure the minimum backup data retention period.
 
     - Turn on or off the PITR (**Point-in-time Recovery**) feature.
+
+        > **Note:**
+        >
+        > - The PITR feature is enabled by default and cannot be disabled when you enable weekly backup.
+        > - If you change the backup cycle from weekly to daily, the PITR feature remains enabled. You can manually disable it if needed.
 
         PITR supports restoring data of any point in time to a new cluster. You can use it to:
 
