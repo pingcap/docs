@@ -22,7 +22,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
     - Improved efficiency: Automated responses reduce latency, improving overall operations.
     - Seamless documentation access: Direct access to TiDB Cloud documentation for easy information retrieval and quick issue resolution.
 
-    To use TiDB Bot, click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com), and select **Ask TiDB Bot** to start a chat.
+  To use TiDB Bot, click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com), and select **Ask TiDB Bot** to start a chat.
 
 - Support [the branching feature (beta)](/tidb-cloud/branch-overview.md) for [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) clusters.
 
