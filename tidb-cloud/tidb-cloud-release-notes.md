@@ -18,9 +18,9 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
     TiDB Bot provides you with the following benefits:
 
-    - Continuous support: Always available to assist and answer your questions for an enhanced support experience.
-    - Improved efficiency: Automated responses reduce latency, improving overall operations.
-    - Seamless documentation access: Direct access to TiDB Cloud documentation for easy information retrieval and quick issue resolution.
+    - Continuous support: always available to assist and answer your questions for an enhanced support experience.
+    - Improved efficiency: automated responses reduce latency, improving overall operations.
+    - Seamless documentation access: direct access to TiDB Cloud documentation for easy information retrieval and quick issue resolution.
 
   To use TiDB Bot, click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com), and select **Ask TiDB Bot** to start a chat.
 
