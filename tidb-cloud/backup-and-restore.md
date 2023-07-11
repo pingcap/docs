@@ -49,7 +49,7 @@ By the automatic backup, you can back up the TiDB Dedicated cluster data every d
         - Resolve cases of data write errors by restoring point-in-time that is before the error event.
         - Audit the historical data of the business.
 
-        If you have one of the preceding needs and want to use the PITR feature, make sure that your TiDB Dedicated cluster version is at least v6.4.0 and the TiKV node size is at least 8 vCPU and 16 GiB.
+        If you have one of the preceding needs and want to use the PITR feature, make sure that your TiDB Dedicated cluster version is at least v6.4.0 and the TiKV node is at least 8 vCPU and 16 GiB.
 
     - In **Backup Storage Region**, select the regions where you want to store your backup data.
 
@@ -152,7 +152,7 @@ To restore your TiDB Dedicated cluster data from a backup to a new cluster, take
 
     - Set the cluster name.
     - Update the port number of the cluster.
-    - Increase the node size, node quantity, and node storage for the cluster.
+    - Increase node number, vCPU and RAM, and storage for the cluster.
 
 6. Click **Restore**.
 
@@ -171,7 +171,7 @@ To restore a deleted cluster from recycle bin, take the following steps:
 5. In the **Restore** window, make the following changes if necessary:
 
     - Update the port number of the cluster.
-    - Increase the node size, node quantity, and node storage for the cluster.
+    - Increase the node number, vCPU and RAM, and storage for the cluster.
 
 6. Click **Confirm**.
 

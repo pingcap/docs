@@ -460,7 +460,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 ## July 19, 2022
 
-* Provide a new option for [TiKV node size](/tidb-cloud/size-your-cluster.md#tikv-node-size): `8 vCPU, 32 GiB`. You can choose either `8 vCPU, 32 GiB` or `8 vCPU, 64 GiB` for an 8 vCPU TiKV node.
+* Provide a new option for [TiKV node size](/tidb-cloud/size-your-cluster.md#tikv-vcpu-and-ram): `8 vCPU, 32 GiB`. You can choose either `8 vCPU, 32 GiB` or `8 vCPU, 64 GiB` for an 8 vCPU TiKV node.
 * Support syntax highlighting in sample code provided in the [**Connect to TiDB**](/tidb-cloud/connect-via-standard-connection.md) dialog to improve code readability. You can easily identify the parameters that you need to replace in the sample code.
 * Support automatically validating whether TiDB Cloud can access your source data after you confirm the import task on the [**Data Import Task**](/tidb-cloud/import-sample-data.md) page.
 * Change the theme color of the TiDB Cloud console to make it consistent with that of [PingCAP website](https://en.pingcap.com/).
@@ -479,7 +479,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
     To experience the benefits brought by TiFlash, see [TiDB Cloud HTAP Quick Start Guide](/tidb-cloud/tidb-cloud-htap-quickstart.md).
 
-* Support [increasing the storage size](/tidb-cloud/scale-tidb-cluster.md#change-node-storage) of TiKV and TiFlash for a Dedicated Tier cluster.
+* Support [increasing the storage size](/tidb-cloud/scale-tidb-cluster.md#change-storage) of TiKV and TiFlash for a Dedicated Tier cluster.
 * Support showing the memory information in the node size field.
 
 ## June 28, 2022
