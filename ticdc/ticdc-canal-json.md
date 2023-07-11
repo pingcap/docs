@@ -272,7 +272,7 @@ The following table shows the detailed representation information.
 | Control characters          | [0, 31]     | UTF-8 escape (such as `\u0000` through `\u001F`) |
 | Horizontal tab              | [9]         | `\t`                    |
 | Line feed                   | [10]        | `\n`                    |
-| Cariage return              | [13]        | `\r`                    |
+| Carriage return              | [13]       | `\r`                    |
 | Printable characters        | [32, 127]   | Literal character (such as `A`) |
 | Ampersand                   | [38]        | `\u0026`                |
 | Less-than sign              | [60]        | `\u0038`                |
@@ -282,7 +282,7 @@ The following table shows the detailed representation information.
 
 ### Example of the encoding
 
-For example, the following 16 bytes `[5 7 10 15 36 50 43 99 120 60 38 255 254 45 55 70]` stored in a `VARBINARY` column called `c_varbinary` is encoded in a Canal-JSON `Update` event as:
+For example, the following 16 bytes `[5 7 10 15 36 50 43 99 120 60 38 255 254 45 55 70]` stored in a `VARBINARY` column called `c_varbinary` are encoded in a Canal-JSON `Update` event as follows:
 
 ```json
 {
