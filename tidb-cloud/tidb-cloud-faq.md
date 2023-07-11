@@ -62,7 +62,7 @@ The best way to learn about TiDB Cloud is to follow our step-by-step tutorial. C
 - [Get Started](/tidb-cloud/tidb-cloud-quickstart.md)
 - [Create a TiDB Serverless Cluster](/tidb-cloud/create-tidb-cluster-serverless.md)
 
-### What does `XXX's Org/default project/Cluster0` mean when deleting cluster
+### What does `XXX's Org/default project/Cluster0` refer to when deleting a cluster?
 
 A cluster is identified with uniqueness based on the combination of the organization name, project name, and cluster name. To guarantee that you are deleting the intended cluster, we kindly request you to input the fully qualified name of the cluster you wish to delete.
 
