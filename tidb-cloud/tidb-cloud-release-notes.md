@@ -34,8 +34,6 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 - Support weekly backup for [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) clusters. For more information, see [Back up and restore TiDB Dedicated data](/tidb-cloud/backup-and-restore.md#automatic-backup).
 
-- Add import error messages to the event center, providing you with more information about import tasks. You can check and resolve import task issues according to the error messages.
-
 ## July 4, 2023
 
 **General changes**
