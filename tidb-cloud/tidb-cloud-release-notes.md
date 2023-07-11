@@ -14,10 +14,6 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 - [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) now is Generally Available.
 
-- Add import error messages to the event center, providing you with more information about import tasks. You can check and resolve import task issues according to the error messages.
-
-- Support weekly backup for [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) clusters. For more information, see [Back up and restore TiDB Dedicated data](/tidb-cloud/backup-and-restore.md#automatic-backup).
-
 - Introduce TiDB Bot (beta), an OpenAI-powered chatbot that offers multi-language support, 24/7 real-time response, and integrated documentation access.
 
     TiDB Bot provides you with the following benefits:
@@ -35,6 +31,10 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
     You can create branches for TiDB Serverless clusters created after July 5, 2023 using either [TiDB Cloud console](/tidb-cloud/branch-manage.md) or [TiDB Cloud CLI](/tidb-cloud/ticloud-branch-create.md).
 
     If you use GitHub for application development, you can integrate TiDB Serverless branching into your GitHub CI/CD pipeline, which lets you automatically test your pull requests with branches without affecting the production database. For more information, see [Integrate TiDB Serverless Branching (Beta) with GitHub](/tidb-cloud/branch-github-integration.md).
+
+- Support weekly backup for [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) clusters. For more information, see [Back up and restore TiDB Dedicated data](/tidb-cloud/backup-and-restore.md#automatic-backup).
+
+- Add import error messages to the event center, providing you with more information about import tasks. You can check and resolve import task issues according to the error messages.
 
 ## July 4, 2023
 
