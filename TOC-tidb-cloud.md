@@ -95,7 +95,7 @@
       - [Connection Method Overview](/tidb-cloud/connect-to-tidb-cluster-serverless.md)
       - [Connect via Public Endpoint](/tidb-cloud/connect-via-standard-connection-serverless.md)
       - [Connect via Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)
-    - [Manage Spend Limit](/tidb-cloud/manage-serverless-spend-limit.md)
+    - [Manage Spending Limit](/tidb-cloud/manage-serverless-spend-limit.md)
     - [Back Up and Restore TiDB Serverless Data](/tidb-cloud/backup-and-restore-serverless.md)
   - Manage TiDB Dedicated Clusters
     - [Create a TiDB Dedicated Cluster](/tidb-cloud/create-tidb-cluster.md)
@@ -273,6 +273,7 @@
     - [Scheduling](/tidb-scheduling.md)
   - [TiDB Dedicated Limitations and Quotas](/tidb-cloud/limitations-and-quotas.md)
   - [TiDB Serverless Limitations](/tidb-cloud/serverless-limitations.md)
+  - [Limited SQL Features on TiDB Cloud](/tidb-cloud/limited-sql-features.md)
   - [TiDB Limitations](/tidb-limitations.md)
   - Benchmarks
     - [TPC-C Performance Test Report](/tidb-cloud/v7.1.0-performance-benchmarking-with-tpcc.md)
@@ -526,6 +527,12 @@
       - [describe](/tidb-cloud/ticloud-cluster-describe.md)
       - [list](/tidb-cloud/ticloud-cluster-list.md)
       - [connect-info](/tidb-cloud/ticloud-cluster-connect-info.md)
+    - branch
+      - [create](/tidb-cloud/ticloud-branch-create.md)
+      - [delete](/tidb-cloud/ticloud-branch-delete.md)
+      - [describe](/tidb-cloud/ticloud-branch-describe.md)
+      - [list](/tidb-cloud/ticloud-branch-list.md)
+      - [connect-info](/tidb-cloud/ticloud-branch-connect-info.md)
     - config
       - [create](/tidb-cloud/ticloud-config-create.md)
       - [delete](/tidb-cloud/ticloud-config-delete.md)
