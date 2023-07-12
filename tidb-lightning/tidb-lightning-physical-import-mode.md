@@ -9,7 +9,15 @@ Physical import mode is an efficient and fast import mode that inserts data dire
 
 Before you use the physical import mode, make sure to read [Requirements and restrictions](#requirements-and-restrictions).
 
-The backend for the physical import mode is `local`.
+The backend for the physical import mode is `local`. You can modify in `tidb-lightning.toml`:
+
+ ```toml
+ [tikv-importer]
+ # 导入模式配置，设为 local 即使用物理导入模式
+ backend = "local"
+ ```
+
+
 
 ## Implementation
 
