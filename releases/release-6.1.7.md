@@ -1,6 +1,6 @@
 ---
 title: TiDB 6.1.7 Release Notes
-summary: Learn about the compatibility changes, improvements, and bug fixes in TiDB 6.1.7.
+summary: Learn about the improvements and bug fixes in TiDB 6.1.7.
 ---
 
 # TiDB 6.1.7 Release Notes
