@@ -10,33 +10,35 @@ aliases: ['/tidbcloud/developer-tier-cluster']
 
 TiDB Cloud、次の 2 つのクラスター層のオプションが提供されます。クラスターを作成する前に、どちらのオプションがニーズに適しているかを検討する必要があります。
 
--   [<a href="#tidb-serverless-beta">TiDB Serverless</a>](#tidb-serverless-beta)
--   [<a href="#tidb-dedicated">TiDB Dedicated</a>](#tidb-dedicated)
+-   [TiDB サーバーレス](#tidb-serverless)
+-   [TiDB専用](#tidb-dedicated)
 
-## TiDB Serverless (ベータ版) {#tidb-serverless-beta}
+## TiDB サーバーレス {#tidb-serverless}
 
-TiDB Serverless (以前はDeveloper Tierと呼ばれていました) は、TiDB のフルマネージド サービスです。これはまだベータ版であるため、本番では使用しないでください。ただし、TiDB Serverless クラスタは、プロトタイプ アプリケーション、ハッカソン、学術コースなどの非運用ワークロードに使用したり、データセットに一時的なデータ サービスを提供したりするために使用できます。
+<!--To be confirmed-->
+
+TiDB Serverless は、フルマネージドのマルチテナント TiDB 製品です。即時自動スケーリングの MySQL 互換データベースを提供し、豊富な無料枠と、無料制限を超えた場合の従量制課金を提供します。
 
 ### 使用量割り当て {#usage-quota}
 
-TiDB Cloudの組織ごとに、デフォルトで最大 5 つの TiDB Serverless クラスタを作成できます。さらに TiDB Serverless クラスタを作成するには、クレジット カードを追加し、使用量を[<a href="/tidb-cloud/tidb-cloud-glossary.md#spend-limit">支出制限</a>](/tidb-cloud/tidb-cloud-glossary.md#spend-limit)に設定する必要があります。
+TiDB Cloudの組織ごとに、デフォルトで最大 5 つの TiDB サーバーレス クラスターを作成できます。さらに TiDB サーバーレス クラスターを作成するには、クレジット カードを追加し、使用量を[支出制限](/tidb-cloud/tidb-cloud-glossary.md#spending-limit)に設定する必要があります。
 
-組織内の最初の 5 つの TiDB Serverless クラスタに対して、 TiDB Cloud は各クラスターに次のように無料の使用量クォータを提供します。
+組織内の最初の 5 つの TiDB サーバーレス クラスターに対して、 TiDB Cloud は各クラスターに次のように無料の使用量クォータを提供します。
 
--   行storage: 5 GiB
--   [<a href="/tidb-cloud/tidb-cloud-glossary.md#request-unit">リクエストユニット (RU)</a>](/tidb-cloud/tidb-cloud-glossary.md#request-unit) : 月あたり 5,000 万 RU
+-   行ベースのstorage: 5 GiB
+-   [リクエストユニット (RU)](/tidb-cloud/tidb-cloud-glossary.md#request-unit) : 月あたり 5,000 万 RU
 
 リクエスト ユニット (RU) は、データベースへの 1 回のリクエストによって消費されるリソースの量を表すために使用される測定単位です。要求によって消費される RU の量は、操作の種類や取得または変更されるデータの量などのさまざまな要因によって異なります。
 
-クラスターの無料クォータに達すると、このクラスターでの読み取りおよび書き込み操作は、新しい月の初めに使用量が[<a href="/tidb-cloud/manage-serverless-spend-limit.md#update-spend-limit">割り当てを増やす</a>](/tidb-cloud/manage-serverless-spend-limit.md#update-spend-limit)されるまでスロットルされます。たとえば、クラスターのstorageが 5 GiB を超えると、単一トランザクションの最大サイズ制限が 10 MiB から 1 MiB に減ります。
+クラスターの無料クォータに達すると、このクラスターでの読み取りおよび書き込み操作は、新しい月の初めに使用量が[割り当てを増やす](/tidb-cloud/manage-serverless-spend-limit.md#update-spending-limit)されるまでスロットルされます。たとえば、クラスターのstorageが 5 GiB を超えると、単一トランザクションの最大サイズ制限が 10 MiB から 1 MiB に減ります。
 
-さまざまなリソース (読み取り、書き込み、SQL CPU、ネットワーク下りなど) の RU 消費量、料金の詳細、および調整された情報の詳細については、 [<a href="https://www.pingcap.com/tidb-cloud-serverless-pricing-details">TiDB Serverlessの料金詳細</a>](https://www.pingcap.com/tidb-cloud-serverless-pricing-details)を参照してください。
+さまざまなリソース (読み取り、書き込み、SQL CPU、ネットワーク下りなど) の RU 消費量、料金の詳細、および調整された情報の詳細については、 [TiDB サーバーレスの料金詳細](https://www.pingcap.com/tidb-cloud-serverless-pricing-details)を参照してください。
 
 ### ユーザー名のプレフィックス {#user-name-prefix}
 
 <!--Important: Do not update the section name "User name prefix" because this section is referenced by TiDB backend error messages.-->
 
-TiDB Serverless クラスタごとに、 TiDB Cloudは他のクラスターと区別するための一意のプレフィックスを生成します。
+TiDB サーバーレス クラスターごとに、 TiDB Cloudは他のクラスターと区別するための一意のプレフィックスを生成します。
 
 データベース ユーザー名を使用または設定するときは、ユーザー名に接頭辞を含める必要があります。たとえば、クラスターのプレフィックスが`3pTAoNNegb47Uc8`であると仮定します。
 
@@ -48,7 +50,7 @@ TiDB Serverless クラスタごとに、 TiDB Cloudは他のクラスターと�
 
     > **ノート：**
     >
-    > TiDB Serverlessには TLS 接続が必要です。システム上の CA ルート パスを見つけるには、 [<a href="/tidb-cloud/secure-connections-to-serverless-tier-clusters.md#root-certificate-default-path">ルート証明書のデフォルトのパス</a>](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md#root-certificate-default-path)を参照してください。
+    > TiDB サーバーレスには TLS 接続が必要です。システム上の CA ルート パスを見つけるには、 [ルート証明書のデフォルトのパス](/tidb-cloud/secure-connections-to-serverless-clusters.md#root-certificate-default-path)を参照してください。
 
 -   データベース ユーザーを作成するには:
 
@@ -58,22 +60,21 @@ TiDB Serverless クラスタごとに、 TiDB Cloudは他のクラスターと�
 
 クラスターのプレフィックスを取得するには、次の手順を実行します。
 
-1.  [<a href="https://tidbcloud.com/console/clusters">**クラスター**</a>](https://tidbcloud.com/console/clusters)ページに移動します。
+1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動します。
 2.  ターゲット クラスターの名前をクリックして概要ページに移動し、右上隅の**[接続]**をクリックします。接続ダイアログが表示されます。
 3.  ダイアログで、接続文字列からプレフィックスを取得します。
 
-### TiDB Serverless特別利用規約 {#tidb-serverless-special-terms-and-conditions}
+### TiDB サーバーレス特別利用規約 {#tidb-serverless-special-terms-and-conditions}
 
--   TiDB Serverlessは現在ベータ版であり、ベータ段階中の稼働時間 SLA 保証はありません。 TiDB Serverless ベータ版を使用して商用または本番データセットを保存する場合、その使用に関連する潜在的なリスクはお客様ご自身で負う必要があり、PingCAP は損害に対して責任を負いません。
--   TiDB Cloud機能の一部は、TiDB Serverlessで部分的にサポートされているか、サポートされていません。詳細については[<a href="/tidb-cloud/serverless-tier-limitations.md">TiDB Serverlessの制限事項</a>](/tidb-cloud/serverless-tier-limitations.md)を参照してください。
+TiDB Cloud機能の一部は、TiDB サーバーレスで部分的にサポートされているか、サポートされていません。詳細については[TiDB サーバーレスの制限事項](/tidb-cloud/serverless-limitations.md)を参照してください。
 
-## TiDB Dedicated {#tidb-dedicated}
+## TiDB専用 {#tidb-dedicated}
 
-TiDB D dedicated は、クロスゾーンの高可用性、水平スケーリング、および[<a href="https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing">HTAP</a>](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing)利点を備えた本番環境向けです。
+TiDB D dedicated は、クロスゾーンの高可用性、水平スケーリング、および[HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing)利点を備えた本番環境向けです。
 
-TiDB Dedicatedクラスターの場合、ビジネス ニーズに応じて TiDB、TiKV、およびTiFlashのクラスター サイズを簡単にカスタマイズできます。 TiKV ノードとTiFlashノードごとに、ノード上のデータが複製され、 [<a href="/tidb-cloud/high-availability-with-multi-az.md">高可用性</a>](/tidb-cloud/high-availability-with-multi-az.md)アベイラビリティ ゾーンに分散されます。
+TiDB 専用クラスターの場合、ビジネス ニーズに応じて TiDB、TiKV、およびTiFlashのクラスター サイズを簡単にカスタマイズできます。 TiKV ノードとTiFlashノードごとに、ノード上のデータが複製され、 [高可用性](/tidb-cloud/high-availability-with-multi-az.md)アベイラビリティ ゾーンに分散されます。
 
-TiDB Dedicatedクラスターを作成するには、 [<a href="/tidb-cloud/tidb-cloud-billing.md#payment-method">支払い方法を追加する</a>](/tidb-cloud/tidb-cloud-billing.md#payment-method)または[<a href="/tidb-cloud/tidb-cloud-poc.md">概念実証 (PoC) トライアルに申し込む</a>](/tidb-cloud/tidb-cloud-poc.md)を行う必要があります。
+TiDB 専用クラスターを作成するには、 [支払い方法を追加する](/tidb-cloud/tidb-cloud-billing.md#payment-method)または[概念実証 (PoC) トライアルに申し込む](/tidb-cloud/tidb-cloud-poc.md)を行う必要があります。
 
 > **ノート：**
 >

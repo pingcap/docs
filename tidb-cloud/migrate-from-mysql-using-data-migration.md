@@ -9,11 +9,11 @@ summary: Learn how to migrate data from MySQL-compatible databases hosted in Ama
 
 この機能は、ソース データベースの既存のデータと進行中の変更を (同じリージョン内またはリージョン間で) TiDB Cloudに一度に直接移行するのに役立ちます。
 
-増分データのみを移行する場合は、 [<a href="/tidb-cloud/migrate-incremental-data-from-mysql-using-data-migration.md">データ移行を使用して、MySQL 互換データベースからTiDB Cloudに増分データを移行する</a>](/tidb-cloud/migrate-incremental-data-from-mysql-using-data-migration.md)を参照してください。
+増分データのみを移行する場合は、 [データ移行を使用して、MySQL 互換データベースからTiDB Cloudに増分データを移行する](/tidb-cloud/migrate-incremental-data-from-mysql-using-data-migration.md)を参照してください。
 
 ## 制限事項 {#limitations}
 
--   データ移行機能は、 **TiDB Dedicated**クラスターでのみ使用できます。
+-   データ移行機能は、 **TiDB 専用**クラスターでのみ使用できます。
 
 -   データ移行機能は、2022 年 11 月 9 日以降に次のリージョンで作成されたプロジェクトのクラスターでのみ使用できます。**プロジェクトが**その日より前に作成された場合、またはクラスターが別のリージョンにある場合、この機能はクラスターでは使用できません。また、 **[データ移行]**タブは、 TiDB Cloudコンソールのクラスター概要ページに表示されません。
 
@@ -29,7 +29,7 @@ summary: Learn how to migrate data from MySQL-compatible databases hosted in Ama
 
 -   Amazon Aurora MySQL ライター インスタンスは、既存のデータと増分データ移行の両方をサポートします。 Amazon Aurora MySQL リーダー インスタンスは、既存のデータ移行のみをサポートし、増分データ移行はサポートしません。
 
--   組織ごとに最大 200 個の移行ジョブを作成できます。さらに移行ジョブを作成するには、 [<a href="/tidb-cloud/tidb-cloud-support.md">サポートチケットを提出する</a>](/tidb-cloud/tidb-cloud-support.md)を実行する必要があります。
+-   組織ごとに最大 200 個の移行ジョブを作成できます。さらに移行ジョブを作成するには、 [サポートチケットを提出する](/tidb-cloud/tidb-cloud-support.md)を実行する必要があります。
 
 -   移行するデータベースをすべて選択した場合でも、システム データベースはフィルターで除外され、 TiDB Cloudには移行されません。つまり、 `mysql` 、 `information_schema` 、 `information_schema` 、および`sys`は、この機能を使用して移行されません。
 
@@ -104,11 +104,11 @@ GRANT CREATE,SELECT,INSERT,UPDATE,DELETE,ALTER,TRUNCATE,DROP,INDEX ON *.* TO 'yo
 
 ### ネットワーク接続をセットアップする {#set-up-network-connection}
 
-移行ジョブを作成する前に、接続方法に従ってネットワーク接続を設定します。 [<a href="/tidb-cloud/connect-to-tidb-cluster.md">TiDBクラスタに接続する</a>](/tidb-cloud/connect-to-tidb-cluster.md)を参照してください。
+移行ジョブを作成する前に、接続方法に従ってネットワーク接続を設定します。 [TiDB 専用クラスタに接続する](/tidb-cloud/connect-to-tidb-cluster.md)を参照してください。
 
 -   ネットワーク接続にパブリック IP (標準接続) を使用する場合は、上流のデータベースがパブリック ネットワーク経由で接続できることを確認してください。
 
--   AWS PrivateLink を使用する場合は、 [<a href="/tidb-cloud/set-up-private-endpoint-connections.md">プライベートエンドポイント接続のセットアップ</a>](/tidb-cloud/set-up-private-endpoint-connections.md)に従って設定します。
+-   AWS PrivateLink を使用する場合は、 [プライベートエンドポイント経由で TiDB 専用に接続する](/tidb-cloud/set-up-private-endpoint-connections.md)に従って設定します。
 
 -   AWS VPC ピアリングまたは GCP VPC ネットワーク ピアリングを使用する場合は、次の手順を参照してネットワークを構成してください。
 
@@ -116,15 +116,15 @@ GRANT CREATE,SELECT,INSERT,UPDATE,DELETE,ALTER,TRUNCATE,DROP,INDEX ON *.* TO 'yo
 
 MySQL サービスが AWS VPC 内にある場合は、次の手順を実行します。
 
-1.  MySQL サービスの VPC と TiDB クラスターの間は[<a href="/tidb-cloud/set-up-vpc-peering-connections.md">VPC ピアリング接続をセットアップする</a>](/tidb-cloud/set-up-vpc-peering-connections.md) 。
+1.  MySQL サービスの VPC と TiDB クラスターの間は[VPC ピアリング接続をセットアップする](/tidb-cloud/set-up-vpc-peering-connections.md) 。
 
 2.  MySQL サービスが関連付けられているセキュリティ グループの受信ルールを変更します。
 
-    受信ルールに[<a href="/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-project-cidr">TiDB Cloudクラスターが配置されているリージョンの CIDR</a>](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-project-cidr)を追加する必要があります。これにより、トラフィックが TiDB クラスターから MySQL インスタンスに流れるようになります。
+    受信ルールに[TiDB Cloudクラスターが配置されているリージョンの CIDR](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-project-cidr)を追加する必要があります。これにより、トラフィックが TiDB クラスターから MySQL インスタンスに流れるようになります。
 
 3.  MySQL URL に DNS ホスト名が含まれている場合は、 TiDB Cloud がMySQL サービスのホスト名を解決できるようにする必要があります。
 
-    1.  [<a href="https://docs.aws.amazon.com/vpc/latest/peering/modify-peering-connections.html#vpc-peering-dns">VPC ピアリング接続の DNS 解決を有効にする</a>](https://docs.aws.amazon.com/vpc/latest/peering/modify-peering-connections.html#vpc-peering-dns)の手順に従います。
+    1.  [VPC ピアリング接続の DNS 解決を有効にする](https://docs.aws.amazon.com/vpc/latest/peering/modify-peering-connections.html#vpc-peering-dns)の手順に従います。
     2.  **アクセプター DNS 解決**オプションを有効にします。
 
 </details>
@@ -133,13 +133,13 @@ MySQL サービスが AWS VPC 内にある場合は、次の手順を実行し�
 
 MySQL サービスが GCP VPC 内にある場合は、次の手順を実行します。
 
-1.  セルフホスト型 MySQL の場合は、この手順をスキップして次の手順に進むことができます。 MySQL サービスが Google Cloud SQL の場合は、Google Cloud SQL インスタンスの関連する VPC で MySQL エンドポイントを公開する必要があります。 Google が開発した[<a href="https://cloud.google.com/sql/docs/mysql/sql-proxy">Cloud SQL 認証プロキシ</a>](https://cloud.google.com/sql/docs/mysql/sql-proxy)使用する必要がある場合があります。
+1.  セルフホスト型 MySQL の場合は、この手順をスキップして次の手順に進むことができます。 MySQL サービスが Google Cloud SQL の場合は、Google Cloud SQL インスタンスの関連する VPC で MySQL エンドポイントを公開する必要があります。 Google が開発した[Cloud SQL 認証プロキシ](https://cloud.google.com/sql/docs/mysql/sql-proxy)使用する必要がある場合があります。
 
-2.  MySQL サービスの VPC と TiDB クラスターの間の[<a href="/tidb-cloud/set-up-vpc-peering-connections.md">VPC ピアリング接続をセットアップする</a>](/tidb-cloud/set-up-vpc-peering-connections.md) 。
+2.  MySQL サービスの VPC と TiDB クラスターの間の[VPC ピアリング接続をセットアップする](/tidb-cloud/set-up-vpc-peering-connections.md) 。
 
 3.  MySQL が配置されている VPC のイングレス ファイアウォール ルールを変更します。
 
-    受信ファイアウォール ルールに[<a href="/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-project-cidr">TiDB Cloudクラスターが配置されているリージョンの CIDR</a>](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-project-cidr)を追加する必要があります。これにより、トラフィックが TiDB クラスターから MySQL エンドポイントに流れることが可能になります。
+    受信ファイアウォール ルールに[TiDB Cloudクラスターが配置されているリージョンの CIDR](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-project-cidr)を追加する必要があります。これにより、トラフィックが TiDB クラスターから MySQL エンドポイントに流れることが可能になります。
 
 </details>
 
@@ -149,11 +149,11 @@ MySQL サービスが GCP VPC 内にある場合は、次の手順を実行し�
 
 ## ステップ 1:<strong>データ移行</strong>ページに移動する {#step-1-go-to-the-strong-data-migration-strong-page}
 
-1.  [<a href="https://tidbcloud.com/">TiDB Cloudコンソール</a>](https://tidbcloud.com/)にログインし、プロジェクトの[<a href="https://tidbcloud.com/console/clusters">**クラスター**</a>](https://tidbcloud.com/console/clusters)ページに移動します。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、プロジェクトの[**クラスター**](https://tidbcloud.com/console/clusters)ページに移動します。
 
     > **ヒント：**
     >
-    > 複数のプロジェクトがある場合は、プロジェクト リストを表示し、左上隅にある ☰ ホバー メニューから別のプロジェクトに切り替えることができます。
+    > 複数のプロジェクトがある場合は、<mdsvgicon name="icon-left-projects">左下隅の をクリックして、別のプロジェクトに切り替えます。</mdsvgicon>
 
 2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[データ移行]**をクリックします。
 
@@ -190,7 +190,7 @@ MySQL サービスが GCP VPC 内にある場合は、次の手順を実行し�
 5.  表示されるメッセージに従ってアクションを実行します。
 
     -   パブリック IP または VPC ピアリングを使用する場合は、ソース データベースとファイアウォール (存在する場合) の IP アクセス リストにデータ移行サービスの IP アドレスを追加する必要があります。
-    -   AWS Private Link を使用する場合は、エンドポイント リクエストを受け入れるように求められます。 [<a href="https://us-west-2.console.aws.amazon.com/vpc/home">AWS VPC コンソール</a>](https://us-west-2.console.aws.amazon.com/vpc/home)に移動し、 **「エンドポイント サービス」**をクリックしてエンドポイント要求を受け入れます。
+    -   AWS Private Link を使用する場合は、エンドポイント リクエストを受け入れるように求められます。 [AWS VPC コンソール](https://us-west-2.console.aws.amazon.com/vpc/home)に移動し、 **「エンドポイント サービス」**をクリックしてエンドポイント要求を受け入れます。
 
 ## ステップ 3: 移行ジョブの種類を選択する {#step-3-choose-migration-job-type}
 
@@ -208,7 +208,7 @@ TiDB Cloudにデータを一度に移行するには、 **[既存のデータ移
 
 ソース データベースの増分データのみをTiDB Cloudに移行するには、 **[増分データ移行]**を選択します。この場合、移行ジョブはソース データベースの既存のデータをTiDB Cloudに移行せず、移行ジョブによって明示的に指定されたソース データベースの進行中の変更のみを移行します。
 
-増分データ移行の詳細な手順については、 [<a href="/tidb-cloud/migrate-incremental-data-from-mysql-using-data-migration.md">データ移行を使用して、MySQL 互換データベースからTiDB Cloudに増分データのみを移行する</a>](/tidb-cloud/migrate-incremental-data-from-mysql-using-data-migration.md)を参照してください。
+増分データ移行の詳細な手順については、 [データ移行を使用して、MySQL 互換データベースからTiDB Cloudに増分データのみを移行する](/tidb-cloud/migrate-incremental-data-from-mysql-using-data-migration.md)を参照してください。
 
 ## ステップ 4: 移行するオブジェクトを選択する {#step-4-choose-the-objects-to-be-migrated}
 
@@ -240,15 +240,15 @@ TiDB Cloudにデータを一度に移行するには、 **[既存のデータ移
 
 一部のチェック項目に警告のみがある場合は、リスクを評価し、警告を無視するかどうかを検討できます。すべての警告が無視された場合、移行ジョブは自動的に次のステップに進みます。
 
-エラーと解決策の詳細については、 [<a href="/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshooting.md#precheck-errors-and-solutions">事前チェックエラーと解決策</a>](/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshooting.md#precheck-errors-and-solutions)を参照してください。
+エラーと解決策の詳細については、 [事前チェックエラーと解決策](/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshooting.md#precheck-errors-and-solutions)を参照してください。
 
-事前チェック項目の詳細については、 [<a href="https://docs.pingcap.com/tidb/stable/dm-precheck">移行タスクの事前チェック</a>](https://docs.pingcap.com/tidb/stable/dm-precheck)を参照してください。
+事前チェック項目の詳細については、 [移行タスクの事前チェック](https://docs.pingcap.com/tidb/stable/dm-precheck)を参照してください。
 
 すべてのチェック項目に**「合格」**と表示されている場合は、 **「次へ」**をクリックします。
 
 ## ステップ 6: 仕様を選択して移行を開始する {#step-6-choose-a-spec-and-start-migration}
 
-**「仕様を選択して移行を開始」**ページで、パフォーマンス要件に応じて適切な移行仕様を選択します。仕様の詳細については、 [<a href="/tidb-cloud/tidb-cloud-billing-dm.md#specifications-for-data-migration">データ移行の仕様</a>](/tidb-cloud/tidb-cloud-billing-dm.md#specifications-for-data-migration)を参照してください。
+**「仕様を選択して移行を開始」**ページで、パフォーマンス要件に応じて適切な移行仕様を選択します。仕様の詳細については、 [データ移行の仕様](/tidb-cloud/tidb-cloud-billing-dm.md#specifications-for-data-migration)を参照してください。
 
 仕様を選択した後、 **「ジョブを作成して開始」**をクリックして移行を開始します。
 
@@ -262,7 +262,7 @@ TiDB Cloudにデータを一度に移行するには、 **[既存のデータ移
 
 移行ジョブはどのステータスでも削除できます。
 
-移行中に問題が発生した場合は、 [<a href="/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshooting.md#migration-errors-and-solutions">移行エラーと解決策</a>](/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshooting.md#migration-errors-and-solutions)を参照してください。
+移行中に問題が発生した場合は、 [移行エラーと解決策](/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshooting.md#migration-errors-and-solutions)を参照してください。
 
 ## 移行ジョブの仕様を拡張する {#scale-a-migration-job-specification}
 
@@ -284,7 +284,7 @@ TiDB Cloudは、さまざまなシナリオでのパフォーマンスとコス�
 
 ### スケーリング手順 {#scaling-procedure}
 
-1.  [<a href="https://tidbcloud.com/">TiDB Cloudコンソール</a>](https://tidbcloud.com/)にログインし、プロジェクトの[<a href="https://tidbcloud.com/console/clusters">**クラスター**</a>](https://tidbcloud.com/console/clusters)ページに移動します。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、プロジェクトの[**クラスター**](https://tidbcloud.com/console/clusters)ページに移動します。
 
 2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[データ移行]**をクリックします。
 

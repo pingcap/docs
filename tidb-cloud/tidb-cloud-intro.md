@@ -4,9 +4,9 @@ summary: Learn about TiDB Cloud and its architecture.
 category: intro
 ---
 
-# TiDB Cloudの概要 {#tidb-cloud-introduction}
+# TiDB Cloudの紹介 {#tidb-cloud-introduction}
 
-[<a href="https://www.pingcap.com/tidb-cloud/">TiDB Cloud</a>](https://www.pingcap.com/tidb-cloud/)は、オープンソースのハイブリッド トランザクションおよび分析処理 (HTAP) データベースである[<a href="https://docs.pingcap.com/tidb/stable/overview">TiDB</a>](https://docs.pingcap.com/tidb/stable/overview)クラウドに提供する、フルマネージドの Database-as-a-Service (DBaaS) です。 TiDB Cloudは、データベースの導入と管理を簡単に行う方法を提供し、データベースの複雑さではなく、アプリケーションに集中できるようにします。 TiDB Cloudクラスターを作成して、Google Cloud Platform (GCP) およびアマゾン ウェブ サービス (AWS) 上でミッションクリティカルなアプリケーションを迅速に構築できます。
+[TiDB Cloud](https://www.pingcap.com/tidb-cloud/)は、オープンソースのハイブリッド トランザクションおよび分析処理 (HTAP) データベースである[TiDB](https://docs.pingcap.com/tidb/stable/overview)クラウドに提供する、フルマネージドの Database-as-a-Service (DBaaS) です。 TiDB Cloudは、データベースの導入と管理を簡単に行う方法を提供し、データベースの複雑さではなく、アプリケーションに集中できるようにします。 TiDB Cloudクラスターを作成して、Google Cloud Platform (GCP) およびアマゾン ウェブ サービス (AWS) 上でミッションクリティカルなアプリケーションを迅速に構築できます。
 
 ![TiDB Cloud Overview](/media/tidb-cloud/tidb-cloud-overview.png)
 
@@ -74,4 +74,4 @@ TiDB Cloudを使用すると、次の主要な機能を利用できます。
 
 -   あなたの VPC
 
-    プライベート エンドポイント接続または VPC ピアリング接続を介して TiDB クラスターに接続できます。詳細は[<a href="/tidb-cloud/set-up-private-endpoint-connections.md">プライベートエンドポイント接続のセットアップ</a>](/tidb-cloud/set-up-private-endpoint-connections.md)または[<a href="/tidb-cloud/set-up-vpc-peering-connections.md">VPC ピア接続のセットアップ</a>](/tidb-cloud/set-up-vpc-peering-connections.md)を参照してください。
+    プライベート エンドポイント接続または VPC ピアリング接続を介して TiDB クラスターに接続できます。詳細は[プライベートエンドポイント接続のセットアップ](/tidb-cloud/set-up-private-endpoint-connections.md)または[VPC ピア接続のセットアップ](/tidb-cloud/set-up-vpc-peering-connections.md)を参照してください。

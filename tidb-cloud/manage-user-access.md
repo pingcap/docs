@@ -7,7 +7,7 @@ summary: Learn how to manage identity access in TiDB Cloud.
 
 このドキュメントでは、 TiDB Cloudで組織、プロジェクト、ロール、およびユーザー プロファイルへのアクセスを管理する方法について説明します。
 
-TiDB クラウドにアクセスする前に、 [<a href="https://tidbcloud.com/free-trial">TiDB クラウド アカウントを作成する</a>](https://tidbcloud.com/free-trial) . [<a href="/tidb-cloud/tidb-cloud-password-authentication.md">TiDB Cloudを使用してパスワードを管理する</a>](/tidb-cloud/tidb-cloud-password-authentication.md)できるように電子メールとパスワードでサインアップすることも、 TiDB Cloudへのシングル サインオン (SSO) 用に Google、GitHub、または Microsoft アカウントを選択することもできます。
+TiDB クラウドにアクセスする前に、 [TiDB クラウド アカウントを作成する](https://tidbcloud.com/free-trial) . [TiDB Cloudを使用してパスワードを管理する](/tidb-cloud/tidb-cloud-password-authentication.md)できるように電子メールとパスワードでサインアップすることも、 TiDB Cloudへのシングル サインオン (SSO) 用に Google、GitHub、または Microsoft アカウントを選択することもできます。
 
 ## 組織とプロジェクト {#organizations-and-projects}
 
@@ -29,7 +29,7 @@ TiDB Cloud は、組織とプロジェクトに基づいた階層構造を提供
 
 自分が所属している組織を確認するには、次の手順を実行します。
 
-1.  クリック<mdsvgicon name="icon-top-organization">TiDB Cloudコンソールの右上隅に**ある組織**。</mdsvgicon>
+1.  クリック<mdsvgicon name="icon-top-organization">TiDB Cloudコンソールの左下隅にあります。</mdsvgicon>
 2.  **[組織の設定]**をクリックします。表示されたページで組織を確認できます。
 
 ### 組織間の切り替え {#switch-between-organizations}
@@ -38,7 +38,7 @@ TiDB Cloud は、組織とプロジェクトに基づいた階層構造を提供
 
 組織間を切り替えるには、次の手順を実行します。
 
-1.  クリック<mdsvgicon name="icon-top-organization">TiDB Cloudコンソールの右上隅にある**組織**。</mdsvgicon>
+1.  クリック<mdsvgicon name="icon-top-organization">TiDB Cloudコンソールの左下隅にあります。</mdsvgicon>
 2.  ドロップダウン メニューで**[組織の切り替え]**を選択し、切り替え先の組織をクリックします。
 
 ### 組織のタイムゾーンを設定する {#set-the-time-zone-for-your-organization}
@@ -47,7 +47,7 @@ TiDB Cloud は、組織とプロジェクトに基づいた階層構造を提供
 
 ローカル タイムゾーン設定を変更するには、次の手順を実行します。
 
-1.  クリック<mdsvgicon name="icon-top-organization">TiDB Cloudコンソールの右上隅にある**組織**。</mdsvgicon>
+1.  クリック<mdsvgicon name="icon-top-organization">TiDB Cloudコンソールの左下隅にあります。</mdsvgicon>
 
 2.  **[組織の設定]**をクリックします。組織設定ページが表示されます。
 
@@ -63,7 +63,7 @@ TiDB Cloud は、組織とプロジェクトに基づいた階層構造を提供
 
 メンバーを組織に招待するには、次の手順を実行します。
 
-1.  クリック<mdsvgicon name="icon-top-organization">TiDB Cloudコンソールの右上隅にある**組織**。</mdsvgicon>
+1.  クリック<mdsvgicon name="icon-top-organization">TiDB Cloudコンソールの左下隅にあります。</mdsvgicon>
 
 2.  **[組織の設定]**をクリックします。組織設定ページが表示されます。
 
@@ -97,11 +97,11 @@ TiDB Cloud は、組織とプロジェクトに基づいた階層構造を提供
 >
 > 組織からメンバーが削除されると、所属するプロジェクトからもメンバーが削除されます。
 
-1.  クリック<mdsvgicon name="icon-top-organization">TiDB Cloudコンソールの右上隅に**ある組織**。</mdsvgicon>
+1.  クリック<mdsvgicon name="icon-top-organization">TiDB Cloudコンソールの左下隅にあります。</mdsvgicon>
 
 2.  **[組織の設定]**をクリックします。組織設定ページが表示されます。
 
-3.  **[ユーザー管理]**タブをクリックし、 **[すべてのユーザー] を**選択します。
+3.  **[ユーザー管理]**タブをクリックし、 **[すべてのユーザー]**を選択します。
 
 4.  削除するユーザー行の**「削除」**をクリックします。
 
@@ -111,13 +111,13 @@ TiDB Cloud は、組織とプロジェクトに基づいた階層構造を提供
 
 自分がどのプロジェクトに属しているかを確認するには、次の手順を実行します。
 
-1.  クリック<mdsvgicon name="icon-top-organization">TiDB Cloudコンソールの右上隅に**ある組織**。</mdsvgicon>
+1.  クリック<mdsvgicon name="icon-top-organization">TiDB Cloudコンソールの左下隅にあります。</mdsvgicon>
 
 2.  **[組織の設定]**をクリックします。デフォルトでは、 **「プロジェクト」**タブが表示されます。
 
 > **ヒント：**
 >
-> 複数のプロジェクトがある場合は、プロジェクト リストを表示し、左上隅にある ☰ ホバー メニューから別のプロジェクトに切り替えることができます。
+> 複数のプロジェクトがある場合は、<mdsvgicon name="icon-left-projects">左下隅の をクリックして、別のプロジェクトに切り替えます。</mdsvgicon>
 
 ### プロジェクトを作成する {#create-a-project}
 
@@ -127,7 +127,7 @@ TiDB Cloud は、組織とプロジェクトに基づいた階層構造を提供
 
 新しいプロジェクトを作成するには、次の手順を実行します。
 
-1.  クリック<mdsvgicon name="icon-top-organization">TiDB Cloudコンソールの右上隅に**ある組織**。</mdsvgicon>
+1.  クリック<mdsvgicon name="icon-top-organization">TiDB Cloudコンソールの左下隅にあります。</mdsvgicon>
 
 2.  **[組織の設定]**をクリックします。デフォルトでは、 **「プロジェクト」**タブが表示されます。
 
@@ -141,7 +141,7 @@ TiDB Cloud は、組織とプロジェクトに基づいた階層構造を提供
 
 プロジェクトの名前を変更するには、次の手順を実行します。
 
-1.  クリック<mdsvgicon name="icon-top-organization">TiDB Cloudコンソールの右上隅に**ある組織**。</mdsvgicon>
+1.  クリック<mdsvgicon name="icon-top-organization">TiDB Cloudコンソールの左下隅にあります。</mdsvgicon>
 
 2.  **[組織の設定]**をクリックします。デフォルトでは、 **「プロジェクト」**タブが表示されます。
 
@@ -157,7 +157,7 @@ TiDB Cloud は、組織とプロジェクトに基づいた階層構造を提供
 
 メンバーをプロジェクトに招待するには、次の手順を実行します。
 
-1.  クリック<mdsvgicon name="icon-top-organization">TiDB Cloudコンソールの右上隅にある**組織**。</mdsvgicon>
+1.  クリック<mdsvgicon name="icon-top-organization">TiDB Cloudコンソールの左下隅にあります。</mdsvgicon>
 
 2.  **[組織の設定]**をクリックします。組織設定ページが表示されます。
 
@@ -187,7 +187,7 @@ TiDB Cloud は、組織とプロジェクトに基づいた階層構造を提供
 
 プロジェクトからメンバーを削除するには、次の手順を実行します。
 
-1.  クリック<mdsvgicon name="icon-top-organization">TiDB Cloudコンソールの右上隅に**ある組織**。</mdsvgicon>
+1.  クリック<mdsvgicon name="icon-top-organization">TiDB Cloudコンソールの左下隅にあります。</mdsvgicon>
 
 2.  **[組織の設定]**をクリックします。組織設定ページが表示されます。
 
@@ -199,41 +199,41 @@ TiDB Cloud は、組織とプロジェクトに基づいた階層構造を提供
 
 組織の所有者である場合は、次の手順を実行して、組織メンバーの役割を構成できます。
 
-1.  クリック<mdsvgicon name="icon-top-organization">TiDB Cloudコンソールの右上隅にある**組織**。</mdsvgicon>
+1.  クリック<mdsvgicon name="icon-top-organization">TiDB Cloudコンソールの左下隅にあります。</mdsvgicon>
 
 2.  **[組織の設定]**をクリックします。組織設定ページが表示されます。
 
-3.  **[ユーザー管理]**タブをクリックし、 **[すべてのユーザー] を**選択します。
+3.  **[ユーザー管理]**タブをクリックし、 **[すべてのユーザー]**を選択します。
 
 4.  対象のメンバーのロールをクリックし、ロールを変更します。
 
 組織には4つの役割があります。各ロールの権限は次のとおりです。
 
-| 許可                                                                                                                            | オーナー | メンバー | 請求管理者 | 監査管理者 |
-| ----------------------------------------------------------------------------------------------------------------------------- | ---- | ---- | ----- | ----- |
-| メンバーを組織に招待したり、組織からメンバーを削除したりする                                                                                                | ✅    | ❌    | ❌     | ❌     |
-| 組織メンバーの役割を設定する                                                                                                                | ✅    | ❌    | ❌     | ❌     |
-| プロジェクトの作成と名前変更                                                                                                                | ✅    | ❌    | ❌     | ❌     |
-| プロジェクトにメンバーを招待したり、プロジェクトからメンバーを削除したりする                                                                                        | ✅    | ❌    | ❌     | ❌     |
-| タイムゾーンを編集する                                                                                                                   | ✅    | ❌    | ❌     | ❌     |
-| 請求書のビューと支払い情報の編集                                                                                                              | ✅    | ❌    | ✅     | ❌     |
-| 有効化、表示、または無効化[<a href="/tidb-cloud/tidb-cloud-console-auditing.md">コンソール監査ログ</a>](/tidb-cloud/tidb-cloud-console-auditing.md) | ✅    | ❌    | ❌     | ✅     |
-| ビューと構成[<a href="/tidb-cloud/tidb-cloud-auditing.md">データベース監査ログ</a>](/tidb-cloud/tidb-cloud-auditing.md)                       | ❌    | ❌    | ❌     | ✅     |
-| プロジェクトインスタンス管理権限を取得する                                                                                                         | ✅    | ✅    | ✅     | ✅     |
-| APIキーを管理する                                                                                                                    | ✅    | ❌    | ❌     | ❌     |
+| 許可                                                                   | オーナー | メンバー | 請求管理者 | 監査管理者 |
+| -------------------------------------------------------------------- | ---- | ---- | ----- | ----- |
+| メンバーを組織に招待したり、組織からメンバーを削除したりする                                       | ✅    | ❌    | ❌     | ❌     |
+| 組織メンバーの役割を設定する                                                       | ✅    | ❌    | ❌     | ❌     |
+| プロジェクトの作成と名前変更                                                       | ✅    | ❌    | ❌     | ❌     |
+| プロジェクトにメンバーを招待したり、プロジェクトからメンバーを削除したりする                               | ✅    | ❌    | ❌     | ❌     |
+| タイムゾーンを編集する                                                          | ✅    | ❌    | ❌     | ❌     |
+| 請求書のビューと支払い情報の編集                                                     | ✅    | ❌    | ✅     | ❌     |
+| 有効化、表示、または無効化[コンソール監査ログ](/tidb-cloud/tidb-cloud-console-auditing.md) | ✅    | ❌    | ❌     | ✅     |
+| ビューと構成[データベース監査ログ](/tidb-cloud/tidb-cloud-auditing.md)               | ❌    | ❌    | ❌     | ✅     |
+| プロジェクトインスタンス管理権限を取得する                                                | ✅    | ✅    | ✅     | ✅     |
+| APIキーを管理する                                                           | ✅    | ❌    | ❌     | ❌     |
 
 > **ノート：**
 >
 > 現在、監査管理者の役割はリクエストがあった場合にのみ表示されます。
 >
-> -   [<a href="/tidb-cloud/tidb-cloud-console-auditing.md">コンソール監査ログ</a>](/tidb-cloud/tidb-cloud-console-auditing.md)の場合は、所有者ロールを直接使用することをお勧めします。監査管理者の役割を使用する必要がある場合は、 **「?」**をクリックします。 [<a href="https://tidbcloud.com">TiDB Cloudコンソール</a>](https://tidbcloud.com)の右下隅にある**[チャット] を**クリックします。次に、「**説明」**フィールドに「監査管理者の役割に応募する」と入力し、 **「送信」を**クリックします。
-> -   [<a href="/tidb-cloud/tidb-cloud-auditing.md">データベース監査ログ</a>](/tidb-cloud/tidb-cloud-auditing.md)の場合、監査管理者の役割を取得するには、 **「?」**をクリックします。 [<a href="https://tidbcloud.com">TiDB Cloudコンソール</a>](https://tidbcloud.com)の右下隅にある**[チャット] を**クリックします。次に、「**説明」**フィールドに「データベース監査ログの適用」と入力し、 **「送信」**をクリックします。
+> -   [コンソール監査ログ](/tidb-cloud/tidb-cloud-console-auditing.md)の場合は、所有者ロールを直接使用することをお勧めします。監査管理者の役割を使用する必要がある場合は、 **「?」**をクリックします。 [TiDB Cloudコンソール](https://tidbcloud.com)の右下隅にある**[チャット] を**クリックします。次に、「**説明」**フィールドに「監査管理者の役割に応募する」と入力し、 **「送信」を**クリックします。
+> -   [データベース監査ログ](/tidb-cloud/tidb-cloud-auditing.md)の場合、監査管理者の役割を取得するには、 **「?」**をクリックします。 [TiDB Cloudコンソール](https://tidbcloud.com)の右下隅にある**[チャット] を**クリックします。次に、「**説明**」フィールドに「データベース監査ログの適用」と入力し、 **「送信」**をクリックします。
 
 ## ユーザープロファイルを管理する {#manage-user-profiles}
 
 TiDB Cloudでは、姓、名、電話番号などのプロフィールを簡単に管理できます。
 
-1.  クリック<mdsvgicon name="icon-top-account-settings">TiDB Cloudコンソールの右上隅に**あるアカウント**。</mdsvgicon>
+1.  クリック<mdsvgicon name="icon-top-account-settings">TiDB Cloudコンソールの左下隅にあります。</mdsvgicon>
 
 2.  **[アカウント設定]**をクリックします。 **[プロファイル]**タブはデフォルトで表示されます。
 

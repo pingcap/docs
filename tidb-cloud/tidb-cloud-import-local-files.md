@@ -12,7 +12,7 @@ summary: Learn how to import local files to TiDB Cloud.
 ## 制限事項 {#limitations}
 
 -   現在、 TiDB Cloudは、1 つのタスクに対して 50 MiB 以内の CSV 形式でのローカル ファイルのインポートのみをサポートしています。
--   ローカル ファイルのインポートは、TiDB Serverless クラスタでのみサポートされており、TiDB Dedicatedクラスターではサポートされていません。
+-   ローカル ファイルのインポートは、TiDB サーバーレス クラスターでのみサポートされており、TiDB 専用クラスターではサポートされていません。
 -   複数のインポート タスクを同時に実行することはできません。
 -   CSV ファイルをTiDB Cloudの既存のテーブルにインポートする場合は、CSV ファイルの最初の行に列名が含まれていることを確認し、CSV ファイル内の列の順序がターゲット テーブル内の順序と同じである必要があります。
 
@@ -20,11 +20,11 @@ summary: Learn how to import local files to TiDB Cloud.
 
 1.  ターゲットクラスターの**インポート**ページを開きます。
 
-    1.  [<a href="https://tidbcloud.com/">TiDB Cloudコンソール</a>](https://tidbcloud.com/)にログインし、プロジェクトの[<a href="https://tidbcloud.com/console/clusters">**クラスター**</a>](https://tidbcloud.com/console/clusters)ページに移動します。
+    1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、プロジェクトの[**クラスター**](https://tidbcloud.com/console/clusters)ページに移動します。
 
         > **ヒント：**
         >
-        > 複数のプロジェクトがある場合は、プロジェクト リストを表示し、左上隅にある ☰ ホバー メニューから別のプロジェクトに切り替えることができます。
+        > 複数のプロジェクトがある場合は、<mdsvgicon name="icon-left-projects">左下隅の をクリックして、別のプロジェクトに切り替えます。</mdsvgicon>
 
     2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[インポート]**をクリックします。
 
@@ -65,12 +65,12 @@ summary: Learn how to import local files to TiDB Cloud.
 
 7.  必要に応じて CSV 構成を編集します。
 
-    また、 **[CSV 構成の編集]**をクリックして、バックスラッシュ エスケープ、区切り記号、および区切り記号を構成して、よりきめ細かい制御を行うこともできます。 CSV 構成の詳細については、 [<a href="/tidb-cloud/csv-config-for-import-data.md">データをインポートするための CSV 構成</a>](/tidb-cloud/csv-config-for-import-data.md)を参照してください。
+    また、 **[CSV 構成の編集]**をクリックして、バックスラッシュ エスケープ、区切り記号、および区切り記号を構成して、よりきめ細かい制御を行うこともできます。 CSV 構成の詳細については、 [データをインポートするための CSV 構成](/tidb-cloud/csv-config-for-import-data.md)を参照してください。
 
 8.  **[インポートの開始]**をクリックします。
 
     インポートの進行状況は**、「インポート タスクの詳細」**ページで確認できます。警告や失敗したタスクがある場合は、詳細を確認して解決することができます。
 
-9.  インポート タスクが完了したら、 **[Chat2Query でデータを探索]**をクリックして、インポートされたデータをクエリできます。 Chat2Qury の使用方法の詳細については、 [<a href="/tidb-cloud/explore-data-with-chat2query.md">AI を活用した Chat2Query でデータを探索する</a>](/tidb-cloud/explore-data-with-chat2query.md)を参照してください。
+9.  インポート タスクが完了したら、 **[Chat2Query でデータを探索]**をクリックして、インポートされたデータをクエリできます。 Chat2Qury の使用方法の詳細については、 [AI を活用した Chat2Query でデータを探索する](/tidb-cloud/explore-data-with-chat2query.md)を参照してください。
 
 10. **[インポート]**ページで、 **[アクション]**列の**[ビュー]**をクリックして、インポート タスクの詳細を確認できます。

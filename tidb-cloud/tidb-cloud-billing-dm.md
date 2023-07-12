@@ -28,7 +28,7 @@ TiDB Cloudは、データ移行の容量をレプリケーション キャパシ
 
 ## 価格 {#price}
 
-各データ移行 RCU のサポートされるリージョンとTiDB Cloudの価格については、 [<a href="https://www.pingcap.com/tidb-cloud-pricing-details/#dm-cost">データ移行コスト</a>](https://www.pingcap.com/tidb-cloud-pricing-details/#dm-cost)を参照してください。
+各データ移行 RCU のサポートされるリージョンとTiDB Cloudの価格については、 [データ移行コスト](https://www.pingcap.com/tidb-cloud-pricing-details/#dm-cost)を参照してください。
 
 データ移行ジョブは、ターゲット TiDB クラスターと同じリージョンにあります。
 
@@ -46,8 +46,8 @@ AWS PrivateLink または VPC ピアリング接続を使用しており、ソ�
 
     ![Cross-region and cross-AZ traffic charges](/media/tidb-cloud/dm-billing-cross-region-and-az-fees.png)
 
-クロスリージョンおよびクロス AZ トラフィックの料金は、 TiDB Cloudの料金と同じです。詳細については、 [<a href="https://en.pingcap.com/tidb-cloud-pricing-details/">TiDB Cloudの料金詳細</a>](https://en.pingcap.com/tidb-cloud-pricing-details/)を参照してください。
+クロスリージョンおよびクロス AZ トラフィックの料金は、 TiDB Cloudの料金と同じです。詳細については、 [TiDB Cloudの料金詳細](https://en.pingcap.com/tidb-cloud-pricing-details/)を参照してください。
 
 ## こちらも参照 {#see-also}
 
--   [<a href="/tidb-cloud/migrate-from-mysql-using-data-migration.md">データ移行を使用した MySQL 互換データベースからの移行</a>](/tidb-cloud/migrate-from-mysql-using-data-migration.md)
+-   [データ移行を使用した MySQL 互換データベースからの移行](/tidb-cloud/migrate-from-mysql-using-data-migration.md)

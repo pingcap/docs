@@ -11,17 +11,17 @@ TiDB Cloudでは、アラートの表示、アラート ルールの編集、ア
 
 > **ノート：**
 >
-> 現在、アラート機能は[<a href="/tidb-cloud/select-cluster-tier.md#tidb-dedicated">TiDB Dedicated</a>](/tidb-cloud/select-cluster-tier.md#tidb-dedicated)クラスターでのみ使用できます。
+> 現在、アラート機能は[TiDB専用](/tidb-cloud/select-cluster-tier.md#tidb-dedicated)クラスターでのみ使用できます。
 
 ## アラートをビュー {#view-alerts}
 
 TiDB Cloudでは、[アラート] ページでアクティブなアラートとクローズされたアラートの両方を表示できます。
 
-1.  [<a href="https://tidbcloud.com/">TiDB Cloudコンソール</a>](https://tidbcloud.com/)で、プロジェクトの[<a href="https://tidbcloud.com/console/clusters">**クラスター**</a>](https://tidbcloud.com/console/clusters)ページに移動します。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、プロジェクトの[**クラスター**](https://tidbcloud.com/console/clusters)ページに移動します。
 
     > **ヒント：**
     >
-    > 複数のプロジェクトがある場合は、左上隅にある ☰ ホバー メニューからターゲット プロジェクトに切り替えることができます。
+    > 複数のプロジェクトがある場合は、<mdsvgicon name="icon-left-projects">左下隅の をクリックして、別のプロジェクトに切り替えます。</mdsvgicon>
 
 2.  ターゲットクラスターの名前をクリックします。クラスターの概要ページが表示されます。
 
@@ -41,7 +41,7 @@ TiDB Cloudでは、アラートを無効または有効にしたり、アラー�
 
     > **ヒント：**
     >
-    > 現在、 TiDB Cloudでは、アラート ルール編集の機能が制限されています。一部のアラート ルールは編集をサポートしていません。別のトリガー条件や頻度を構成したい場合、または[<a href="https://www.pagerduty.com/docs/guides/datadog-integration-guide/">ポケベルデューティ</a>](https://www.pagerduty.com/docs/guides/datadog-integration-guide/)のようなダウンストリーム サービスでアラートが自動的にアクションをトリガーするようにしたい場合は、 [<a href="/tidb-cloud/third-party-monitoring-integrations.md">サードパーティの監視とアラートの統合</a>](/tidb-cloud/third-party-monitoring-integrations.md)の使用を検討してください。
+    > 現在、 TiDB Cloudでは、アラート ルール編集の機能が制限されています。一部のアラート ルールは編集をサポートしていません。別のトリガー条件や頻度を構成したい場合、または[ポケベルデューティ](https://www.pagerduty.com/docs/guides/datadog-integration-guide/)のようなダウンストリーム サービスでアラートが自動的にアクションをトリガーするようにしたい場合は、 [サードパーティの監視とアラートの統合](/tidb-cloud/third-party-monitoring-integrations.md)の使用を検討してください。
 
 ## アラート通知メールを購読する {#subscribe-to-alert-notification-emails}
 
@@ -56,14 +56,10 @@ TiDB Cloudでは、アラートを無効または有効にしたり、アラー�
 
 あるいは、次のように**[アラート サブスクリプション]**ページからサブスクリプションを追加することもできます。
 
-1.  [<a href="https://tidbcloud.com">TiDB Cloudコンソール</a>](https://tidbcloud.com)にログインします。
-
-2.  [<a href="https://tidbcloud.com/console/clusters">**クラスター**</a>](https://tidbcloud.com/console/clusters)ページの左側のナビゲーション ウィンドウで、次のいずれかを実行します。
-
-    -   複数のプロジェクトがある場合は、ターゲット プロジェクトに切り替えて、 **[管理]** &gt; **[アラート サブスクリプション]**をクリックします。
-    -   プロジェクトが 1 つだけの場合は、 **[管理]** &gt; **[アラート サブスクリプション]**をクリックします。
-
-3.  **[購読者の追加]**をクリックし、表示されるダイアログに電子メール アドレスを入力して、 **[追加]**をクリックします。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com)にログインします。
+2.  クリック<mdsvgicon name="icon-left-projects">複数のプロジェクトがある場合は、左下隅でターゲット プロジェクトに切り替え、 **[管理]**をクリックします。</mdsvgicon>
+3.  プロジェクトの**[管理者]**ページで、左側のナビゲーション ペインの**[アラート サブスクリプション]**をクリックします。
+4.  **[購読者の追加]**をクリックし、表示されるダイアログに電子メール アドレスを入力して、 **[追加]**をクリックします。
 
 アラート条件が変わらない場合、アラートは 3 時間ごとに電子メール通知を送信します。
 
@@ -71,16 +67,11 @@ TiDB Cloudでは、アラートを無効または有効にしたり、アラー�
 
 プロジェクト内のクラスターのアラート通知電子メールを受信したくない場合は、次の手順を実行します。
 
-1.  [<a href="https://tidbcloud.com">TiDB Cloudコンソール</a>](https://tidbcloud.com)にログインします。
-
-2.  [<a href="https://tidbcloud.com/console/clusters">**クラスター**</a>](https://tidbcloud.com/console/clusters)ページの左側のナビゲーション ウィンドウで、次のいずれかを実行します。
-
-    -   複数のプロジェクトがある場合は、ターゲット プロジェクトに切り替えて、 **[管理]** &gt; **[アラート サブスクリプション]**をクリックします。
-    -   プロジェクトが 1 つだけの場合は、 **[管理]** &gt; **[アラート サブスクリプション]**をクリックします。
-
-3.  電子メール アドレスを見つけて、 **[購読解除]**をクリックします。
-
-4.  **「削除」**をクリックして購読解除を確認します。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com)にログインします。
+2.  クリック<mdsvgicon name="icon-left-projects">複数のプロジェクトがある場合は、左下隅でターゲット プロジェクトに切り替え、 **[管理]**をクリックします。</mdsvgicon>
+3.  プロジェクトの**[管理者]**ページで、左側のナビゲーション ペインの**[アラート サブスクリプション]**をクリックします。
+4.  電子メール アドレスを見つけて、 **[購読解除]**をクリックします。
+5.  **「削除」**をクリックして購読解除を確認します。
 
 ## TiDB Cloudの組み込みアラート条件 {#tidb-cloud-built-in-alert-conditions}
 
@@ -90,21 +81,21 @@ TiDB Cloudでは、アラートを無効または有効にしたり、アラー�
 >
 > これらのアラート状態は必ずしも問題があることを意味するわけではありませんが、多くの場合、新たな問題の早期警告指標となります。したがって、推奨されるアクションを取ることをお勧めします。
 
-| 状態                                            | 推奨される行動                                                                                                                                                                                                                                                                                                                                                        |
-| :-------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| クラスター全体の合計 TiDB ノードメモリ使用率が 10 分間で 70% を超えました  | 現在のワークロードのメモリ使用率を減らすために、TiDB のノード数またはノード サイズを増やすことを検討してください。                                                                                                                                                                                                                                                                                                   |
-| クラスター全体の合計 TiKV ノードメモリ使用率が 10 分間で 70% を超えました  | 現在のワークロードのメモリ使用率を減らすために、TiKV のノード数またはノード サイズを増やすことを検討してください。                                                                                                                                                                                                                                                                                                   |
-| クラスター全体の合計TiFlashノードメモリ使用率が 10 分間で 70% を超えました | 現在のワークロードのメモリ使用率を減らすために、 TiFlashのノード数またはノード サイズを増やすことを検討してください。                                                                                                                                                                                                                                                                                                |
-| TiDB ノードの合計 CPU 使用率が 10 分間で 80% を超えました        | 現在のワークロードの CPU 使用率を減らすために、TiDB のノード数またはノード サイズを増やすことを検討してください。                                                                                                                                                                                                                                                                                                 |
-| TiKV ノードの合計 CPU 使用率が 10 分間で 80% を超えました        | 現在のワークロードの CPU 使用率を減らすために、TiKV のノード数またはノード サイズを増やすことを検討してください。                                                                                                                                                                                                                                                                                                 |
-| TiFlashノードの合計 CPU 使用率が 10 分間で 80% を超えました      | 現在のワークロードの CPU 使用率を減らすために、 TiFlash のノード数またはノード サイズを増やすことを検討してください。                                                                                                                                                                                                                                                                                             |
-| TiKVstorage使用率が 80% を超える                      | storage容量を増やすには、TiKV のノード数またはノードstorageサイズを増やすことを検討してください。                                                                                                                                                                                                                                                                                                     |
-| TiFlashstorage使用率が 80% を超える                   | storage容量を増やすには、 TiFlashのノード数またはノードstorageサイズを増やすことを検討してください。                                                                                                                                                                                                                                                                                                  |
-| データのエクスポート中にデータ移行ジョブでエラーが発生しました               | エラーを確認し、ヘルプについては[<a href="/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshooting.md#migration-errors-and-solutions">データ移行のトラブルシューティング</a>](/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshooting.md#migration-errors-and-solutions)を参照してください。                                                                                                                 |
-| データのインポート中にデータ移行ジョブでエラーが発生しました                | エラーを確認し、ヘルプについては[<a href="/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshooting.md#migration-errors-and-solutions">データ移行のトラブルシューティング</a>](/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshooting.md#migration-errors-and-solutions)を参照してください。                                                                                                                 |
-| データ移行ジョブで増分移行中にエラーが発生しました                     | エラーを確認し、ヘルプについては[<a href="/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshooting.md#migration-errors-and-solutions">データ移行のトラブルシューティング</a>](/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshooting.md#migration-errors-and-solutions)を参照してください。                                                                                                                 |
-| 増分移行中にデータ移行ジョブが 6 時間以上一時停止されました               | データの増分移行中に、データ移行ジョブが 6 時間以上一時停止されました。アップストリーム データベースのbinlogがパージされる可能性があり (データベースのbinlogパージ戦略によって異なります)、増分移行が失敗する可能性があります。ヘルプについては[<a href="/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshooting.md#migration-errors-and-solutions">データ移行のトラブルシューティング</a>](/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshooting.md#migration-errors-and-solutions)参照してください。 |
-| レプリケーションの遅延が 10 分を超え、20 分以上増加し続けています          | ヘルプについては[<a href="/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshooting.md#migration-errors-and-solutions">データ移行のトラブルシューティング</a>](/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshooting.md#migration-errors-and-solutions)参照してください。                                                                                                                          |
+| 状態                                            | 推奨される行動                                                                                                                                                                                                                                                 |
+| :-------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| クラスター全体の合計 TiDB ノードメモリ使用率が 10 分間で 70% を超えました  | 現在のワークロードのメモリ使用率を減らすために、TiDB のノード数またはノード サイズを増やすことを検討してください。                                                                                                                                                                                            |
+| クラスター全体の合計 TiKV ノードメモリ使用率が 10 分間で 70% を超えました  | 現在のワークロードのメモリ使用率を減らすために、TiKV のノード数またはノード サイズを増やすことを検討してください。                                                                                                                                                                                            |
+| クラスター全体の合計TiFlashノードメモリ使用率が 10 分間で 70% を超えました | 現在のワークロードのメモリ使用率を減らすために、 TiFlashのノード数またはノード サイズを増やすことを検討してください。                                                                                                                                                                                         |
+| TiDB ノードの合計 CPU 使用率が 10 分間で 80% を超えました        | 現在のワークロードの CPU 使用率を減らすために、TiDB のノード数またはノード サイズを増やすことを検討してください。                                                                                                                                                                                          |
+| TiKV ノードの合計 CPU 使用率が 10 分間で 80% を超えました        | 現在のワークロードの CPU 使用率を減らすために、TiKV のノード数またはノード サイズを増やすことを検討してください。                                                                                                                                                                                          |
+| TiFlashノードの合計 CPU 使用率が 10 分間で 80% を超えました      | 現在のワークロードの CPU 使用率を減らすために、 TiFlash のノード数またはノード サイズを増やすことを検討してください。                                                                                                                                                                                      |
+| TiKVstorage使用率が 80% を超える                      | storage容量を増やすには、TiKV のノード数またはノードstorageサイズを増やすことを検討してください。                                                                                                                                                                                              |
+| TiFlashstorage使用率が 80% を超える                   | storage容量を増やすには、 TiFlashのノード数またはノードstorageサイズを増やすことを検討してください。                                                                                                                                                                                           |
+| データのエクスポート中にデータ移行ジョブでエラーが発生しました               | エラーを確認し、ヘルプについては[データ移行のトラブルシューティング](/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshooting.md#migration-errors-and-solutions)を参照してください。                                                                                                                 |
+| データのインポート中にデータ移行ジョブでエラーが発生しました                | エラーを確認し、ヘルプについては[データ移行のトラブルシューティング](/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshooting.md#migration-errors-and-solutions)を参照してください。                                                                                                                 |
+| データ移行ジョブで増分移行中にエラーが発生しました                     | エラーを確認し、ヘルプについては[データ移行のトラブルシューティング](/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshooting.md#migration-errors-and-solutions)を参照してください。                                                                                                                 |
+| 増分移行中にデータ移行ジョブが 6 時間以上一時停止されました               | データの増分移行中に、データ移行ジョブが 6 時間以上一時停止されました。アップストリーム データベースのbinlogがパージされる可能性があり (データベースのbinlogパージ戦略によって異なります)、増分移行が失敗する可能性があります。ヘルプについては[データ移行のトラブルシューティング](/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshooting.md#migration-errors-and-solutions)参照してください。 |
+| レプリケーションの遅延が 10 分を超え、20 分以上増加し続けています          | ヘルプについては[データ移行のトラブルシューティング](/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshooting.md#migration-errors-and-solutions)参照してください。                                                                                                                          |
 
 > **ノート：**
 >

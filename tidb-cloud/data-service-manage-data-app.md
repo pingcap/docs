@@ -7,13 +7,17 @@ summary: Learn how to create, view, modify, and delete a Data App in the TiDB Cl
 
 Data Service のデータ アプリ (ベータ版) は、特定のアプリケーションのデータにアクセスするために使用できるエンドポイントのグループです。 API キーを使用して認証設定を構成し、データ アプリのエンドポイントへのアクセスを制限できます。
 
-このドキュメントでは、 TiDB Cloudコンソールでデータ アプリを管理する方法について説明します。 [<a href="https://tidbcloud.com/console/data-service">**データサービス**</a>](https://tidbcloud.com/console/data-service)ページでは、すべてのデータ アプリ、エンドポイント、API キーを管理できます。
+このドキュメントでは、 TiDB Cloudコンソールでデータ アプリを管理する方法について説明します。 [**データサービス**](https://tidbcloud.com/console/data-service)ページでは、すべてのデータ アプリ、エンドポイント、API キーを管理できます。
 
 ## データアプリを作成する {#create-a-data-app}
 
 プロジェクトのデータ アプリを作成するには、次の手順を実行します。
 
-1.  プロジェクトの[<a href="https://tidbcloud.com/console/data-service">**データサービス**</a>](https://tidbcloud.com/console/data-service)ページで、 をクリックします。<mdsvgicon name="icon-create-data-app">左側のペインで**DataApp を作成します**。</mdsvgicon>
+1.  プロジェクトの[**データサービス**](https://tidbcloud.com/console/data-service)ページで、 をクリックします。<mdsvgicon name="icon-create-data-app">左側のペインで**DataApp を作成します**。</mdsvgicon>
+
+    > **ヒント：**
+    >
+    > これがプロジェクト内の最初のデータ アプリの場合は、ページの中央にある**[データ アプリの作成]**をクリックします。
 
 2.  データ アプリの名前を入力し、データ アプリがアクセスするクラスターを選択します。
 
@@ -27,15 +31,15 @@ Data Service のデータ アプリ (ベータ版) は、特定のアプリケ�
         >
         > -   ディレクトリはスラッシュ ( `/` ) で始まる必要があります。たとえば、 `/mydata` 。指定したディレクトリがターゲット リポジトリおよびブランチに存在しない場合は、自動的に作成されます。
         > -   リポジトリ、ブランチ、ディレクトリの組み合わせによって構成ファイルのパスが識別されます。このパスはデータ アプリ間で一意である必要があります。指定したパスがすでに別のデータ アプリで使用されている場合は、代わりに新しいパスを指定する必要があります。そうしないと、現在のデータ アプリのTiDB Cloudコンソールで構成されたエンドポイントによって、指定したパス内のファイルが上書きされます。
-        > -   指定したパスに別のデータ アプリからコピーされた構成ファイルが含まれており、これらのファイルを現在のデータ アプリにインポートする場合は、 [<a href="/tidb-cloud/data-service-manage-github-connection.md#import-configurations-of-an-existing-data-app">既存のデータ アプリの構成をインポートする</a>](/tidb-cloud/data-service-manage-github-connection.md#import-configurations-of-an-existing-data-app)を参照してください。
+        > -   指定したパスに別のデータ アプリからコピーされた構成ファイルが含まれており、これらのファイルを現在のデータ アプリにインポートする場合は、 [既存のデータ アプリの構成をインポートする](/tidb-cloud/data-service-manage-github-connection.md#import-configurations-of-an-existing-data-app)を参照してください。
 
 4.  **[データ アプリの作成]**をクリックします。
 
     新しく作成されたデータ アプリがリストの先頭に追加されます。新しいデータ アプリにはデフォルトの`untitled endpoint`が作成されます。
 
-5.  データ アプリを GitHub に接続するように構成している場合は、指定した GitHub ディレクトリを確認してください。 [<a href="/tidb-cloud/data-service-app-config-files.md">データアプリ構成ファイル</a>](/tidb-cloud/data-service-app-config-files.md) `tidb-cloud-data-service`までにディレクトリにコミットされていることがわかります。これは、データ アプリが GitHub に正常に接続されていることを意味します。
+5.  データ アプリを GitHub に接続するように構成している場合は、指定した GitHub ディレクトリを確認してください。 [データアプリ構成ファイル](/tidb-cloud/data-service-app-config-files.md) `tidb-cloud-data-service`までにディレクトリにコミットされていることがわかります。これは、データ アプリが GitHub に正常に接続されていることを意味します。
 
-    新しいデータ アプリでは、**自動同期とデプロイメント**および**ドラフトのレビュー**がデフォルトで有効になっているため、 TiDB Cloudコンソールと GitHub の間でデータ アプリの変更を簡単に同期し、デプロイメント前に変更をレビューできます。 GitHub 統合の詳細については、 [<a href="/tidb-cloud/data-service-manage-github-connection.md">データ アプリの変更を GitHub で自動的にデプロイ</a>](/tidb-cloud/data-service-manage-github-connection.md)を参照してください。
+    新しいデータ アプリでは、**自動同期とデプロイメント**および**ドラフトのレビュー**がデフォルトで有効になっているため、 TiDB Cloudコンソールと GitHub の間でデータ アプリの変更を簡単に同期し、デプロイメント前に変更をレビューできます。 GitHub 統合の詳細については、 [データ アプリの変更を GitHub で自動的にデプロイ](/tidb-cloud/data-service-manage-github-connection.md)を参照してください。
 
 ## データアプリを変更する {#modify-a-data-app}
 
@@ -45,13 +49,13 @@ Data Service のデータ アプリ (ベータ版) は、特定のアプリケ�
 
 データ アプリの名前を変更するには、次の手順を実行します。
 
-1.  プロジェクトの[<a href="https://tidbcloud.com/console/data-service">**データサービス**</a>](https://tidbcloud.com/console/data-service)ページに移動します。
+1.  プロジェクトの[**データサービス**](https://tidbcloud.com/console/data-service)ページに移動します。
 2.  左側のペインで、ターゲット データ アプリの名前をクリックして詳細を表示します。
 3.  **[データ アプリのプロパティ]**領域で、 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" color="gray.1"><path d="M11 3.99998H6.8C5.11984 3.99998 4.27976 3.99998 3.63803 4.32696C3.07354 4.61458 2.6146 5.07353 2.32698 5.63801C2 6.27975 2 7.11983 2 8.79998V17.2C2 18.8801 2 19.7202 2.32698 20.362C2.6146 20.9264 3.07354 21.3854 3.63803 21.673C4.27976 22 5.11984 22 6.8 22H15.2C16.8802 22 17.7202 22 18.362 21.673C18.9265 21.3854 19.3854 20.9264 19.673 20.362C20 19.7202 20 18.8801 20 17.2V13M7.99997 16H9.67452C10.1637 16 10.4083 16 10.6385 15.9447C10.8425 15.8957 11.0376 15.8149 11.2166 15.7053C11.4184 15.5816 11.5914 15.4086 11.9373 15.0627L21.5 5.49998C22.3284 4.67156 22.3284 3.32841 21.5 2.49998C20.6716 1.67156 19.3284 1.67155 18.5 2.49998L8.93723 12.0627C8.59133 12.4086 8.41838 12.5816 8.29469 12.7834C8.18504 12.9624 8.10423 13.1574 8.05523 13.3615C7.99997 13.5917 7.99997 13.8363 7.99997 14.3255V16Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>をクリックし、 **「アプリ名」**フィールドを変更して、 **「確認」を**クリックします。
 
 ### GitHub接続を管理する {#manage-github-connection}
 
-詳細については、 [<a href="/tidb-cloud/data-service-manage-github-connection.md">GitHub を使用して自動的にデプロイ</a>](/tidb-cloud/data-service-manage-github-connection.md)を参照してください。
+詳細については、 [GitHub を使用して自動的にデプロイ](/tidb-cloud/data-service-manage-github-connection.md)を参照してください。
 
 ### リンクされたデータソースを管理する {#manage-linked-data-sources}
 
@@ -59,33 +63,33 @@ Data Service のデータ アプリ (ベータ版) は、特定のアプリケ�
 
 クラスターをデータ アプリにリンクするには、次の手順を実行します。
 
-1.  プロジェクトの[<a href="https://tidbcloud.com/console/data-service">**データサービス**</a>](https://tidbcloud.com/console/data-service)ページに移動します。
+1.  プロジェクトの[**データサービス**](https://tidbcloud.com/console/data-service)ページに移動します。
 2.  左側のペインでターゲット データ アプリを見つけ、ターゲット データ アプリの名前をクリックして詳細を表示します。
 3.  **[リンクされたデータ ソース]**領域で、 **[クラスタの追加]**をクリックします。
 4.  表示されたダイアログ ボックスで、リストからクラスタを選択し、 **[追加]**をクリックします。
 
 データ アプリからリンクされたクラスターを削除するには、次の手順を実行します。
 
-1.  プロジェクトの[<a href="https://tidbcloud.com/console/data-service">**データサービス**</a>](https://tidbcloud.com/console/data-service)ページに移動します。
+1.  プロジェクトの[**データサービス**](https://tidbcloud.com/console/data-service)ページに移動します。
 2.  左側のペインでターゲット データ アプリを見つけ、ターゲット データ アプリの名前をクリックして詳細を表示します。
-3.  **[リンク データ ソース]**領域で、データ アプリから削除するターゲットのリンク クラスターを見つけて、 **[アクション]**列の**[削除]**をクリックします。
+3.  **[リンク データ ソース]**領域で、データ アプリから削除するターゲット リンク クラスターを見つけて、 **[アクション**] 列の**[削除]**をクリックします。
 4.  表示されたダイアログボックスで、削除を確認します。
 
     リンクされたクラスターを削除した後、クラスターは削除されませんが、データ アプリの既存のエンドポイントはクラスターにアクセスできなくなります。
 
 ### APIキーを管理する {#manage-an-api-key}
 
-詳細については、 [<a href="/tidb-cloud/data-service-api-key.md">APIキーを管理する</a>](/tidb-cloud/data-service-api-key.md)を参照してください。
+詳細については、 [APIキーを管理する](/tidb-cloud/data-service-api-key.md)を参照してください。
 
 ### エンドポイントを管理する {#manage-an-endpoint}
 
-詳細については、 [<a href="/tidb-cloud/data-service-manage-endpoint.md">エンドポイントを管理する</a>](/tidb-cloud/data-service-manage-endpoint.md)を参照してください。
+詳細については、 [エンドポイントを管理する](/tidb-cloud/data-service-manage-endpoint.md)を参照してください。
 
 ### 導入の管理 {#manage-deployments}
 
 デプロイメントを管理するには、次の手順を実行します。
 
-1.  プロジェクトの[<a href="https://tidbcloud.com/console/data-service">**データサービス**</a>](https://tidbcloud.com/console/data-service)ページに移動します。
+1.  プロジェクトの[**データサービス**](https://tidbcloud.com/console/data-service)ページに移動します。
 
 2.  左側のペインでターゲット データ アプリを見つけ、ターゲット データ アプリの名前をクリックして詳細を表示します。
 
@@ -95,7 +99,7 @@ Data Service のデータ アプリ (ベータ版) は、特定のアプリケ�
 
     -   **自動同期と展開**
 
-        -   このオプションは、データ アプリが GitHub に接続されている場合にのみ有効にできます。詳細については、 [<a href="/tidb-cloud/data-service-manage-github-connection.md">GitHub を使用して自動的にデプロイ</a>](/tidb-cloud/data-service-manage-github-connection.md)を参照してください。
+        -   このオプションは、データ アプリが GitHub に接続されている場合にのみ有効にできます。詳細については、 [GitHub を使用して自動的にデプロイ](/tidb-cloud/data-service-manage-github-connection.md)を参照してください。
         -   これを有効にすると、指定した GitHub ディレクトリで行われた変更を自動的にTiDB Cloudにデプロイでき、 TiDB Cloudコンソールで行われた変更も同様に GitHub にプッシュできます。データ アプリのデプロイ履歴で、対応するデプロイとコミットの情報を見つけることができます。
         -   これを無効にすると、指定した GitHub ディレクトリで行われた変更はTiDB Cloudにデプロイされ**ず**、 TiDB Cloudコンソールで行われた変更も GitHub に**プッシュ**されません。
 
@@ -110,13 +114,13 @@ Data Service のデータ アプリ (ベータ版) は、特定のアプリケ�
 
 > **ノート：**
 >
-> データ アプリを削除する前に、すべてのエンドポイントがオンラインになっていないことを確認してください。そうしないと、データ アプリを削除できません。エンドポイントのデプロイを解除するには、 [<a href="/tidb-cloud/data-service-manage-endpoint.md#undeploy-an-endpoint">エンドポイントのデプロイを解除する</a>](/tidb-cloud/data-service-manage-endpoint.md#undeploy-an-endpoint)を参照してください。
+> データ アプリを削除する前に、すべてのエンドポイントがオンラインになっていないことを確認してください。そうしないと、データ アプリを削除できません。エンドポイントのデプロイを解除するには、 [エンドポイントのデプロイを解除する](/tidb-cloud/data-service-manage-endpoint.md#undeploy-an-endpoint)を参照してください。
 
 データ アプリを削除するには、次の手順を実行します。
 
-1.  プロジェクトの[<a href="https://tidbcloud.com/console/data-service">**データサービス**</a>](https://tidbcloud.com/console/data-service)ページに移動します。
+1.  プロジェクトの[**データサービス**](https://tidbcloud.com/console/data-service)ページに移動します。
 2.  左側のペインでターゲット データ アプリを見つけ、ターゲット データ アプリの名前をクリックして詳細を表示します。
-3.  **[データ アプリの削除]**領域で、 **[データ アプリの削除]**をクリックします。確認のダイアログボックスが表示されます。
-4.  ターゲット データ アプリの名前を入力し、 **[理解しました、削除]**をクリックします。
+3.  **[危険ゾーン]**領域で、 **[データ アプリの削除] を**クリックします。確認のダイアログボックスが表示されます。
+4.  `<organization name>/<project name>/<data app name>`を入力し、 **[理解しました、削除]**をクリックします。
 
     データ アプリが削除されると、データ アプリ内の既存のエンドポイントと API キーも削除されます。このデータ アプリが GitHub に接続されている場合、アプリを削除しても、対応する GitHub リポジトリ内のファイルは削除されません。

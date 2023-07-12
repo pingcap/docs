@@ -5,11 +5,11 @@ summary: Learn how to create, edit, and delete an API key for a Data App.
 
 # データサービスの API キー {#api-keys-in-data-service}
 
-TiDB Cloudデータ API は[<a href="https://en.wikipedia.org/wiki/Digest_access_authentication">HTTPダイジェスト認証</a>](https://en.wikipedia.org/wiki/Digest_access_authentication)を使用します。秘密キーがネットワーク経由で送信されるのを防ぎます。 HTTPダイジェスト認証の詳細については、 [<a href="https://datatracker.ietf.org/doc/html/rfc7616">IETF RFC</a>](https://datatracker.ietf.org/doc/html/rfc7616)を参照してください。
+TiDB Cloudデータ API は[HTTPダイジェスト認証](https://en.wikipedia.org/wiki/Digest_access_authentication)を使用します。秘密キーがネットワーク経由で送信されるのを防ぎます。 HTTPダイジェスト認証の詳細については、 [IETF RFC](https://datatracker.ietf.org/doc/html/rfc7616)を参照してください。
 
 > **ノート：**
 >
-> Data Service の Data API キーは、 [<a href="https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication">TiDB CloudAPI</a>](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication)で使用されるキーとは異なります。 Data API キーはTiDB Cloudクラスター内のデータにアクセスするために使用され、 TiDB CloudAPI キーはプロジェクト、クラスター、バックアップ、復元、インポートなどのリソースを管理するために使用されます。
+> Data Service の Data API キーは、 [TiDB CloudAPI](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication)で使用されるキーとは異なります。 Data API キーはTiDB Cloudクラスター内のデータにアクセスするために使用され、 TiDB CloudAPI キーはプロジェクト、クラスター、バックアップ、復元、インポートなどのリソースを管理するために使用されます。
 
 ## APIキーの概要 {#api-key-overview}
 
@@ -19,7 +19,7 @@ TiDB Cloudデータ API は[<a href="https://en.wikipedia.org/wiki/Digest_access
 
 ## レート制限 {#rate-limiting}
 
-各 Chat2Query データ アプリには、1 日あたり 100 リクエストのレート制限があります。他のデータ アプリには、API キーごとに 1 分あたり 100 リクエストのレート制限があります。レート制限を超えると、API は`429`エラーを返します。さらに割り当てが必要な場合は、サポート チームに[<a href="https://support.pingcap.com/hc/en-us/requests/new?ticket_form_id=7800003722519">リクエストを送信する</a>](https://support.pingcap.com/hc/en-us/requests/new?ticket_form_id=7800003722519)お問い合わせください。
+各 Chat2Query データ アプリには、1 日あたり 100 リクエストのレート制限があります。他のデータ アプリには、API キーごとに 1 分あたり 100 リクエストのレート制限があります。レート制限を超えると、API は`429`エラーを返します。さらに割り当てが必要な場合は、サポート チームに[リクエストを送信する](https://support.pingcap.com/hc/en-us/requests/new?ticket_form_id=7800003722519)お問い合わせください。
 
 ## APIキーを管理する {#manage-api-keys}
 
@@ -29,11 +29,11 @@ TiDB Cloudデータ API は[<a href="https://en.wikipedia.org/wiki/Digest_access
 
 データ アプリの API キーを作成するには、次の手順を実行します。
 
-1.  プロジェクトの[<a href="https://tidbcloud.com/console/data-service">**データサービス**</a>](https://tidbcloud.com/console/data-service)ページに移動します。
+1.  プロジェクトの[**データサービス**](https://tidbcloud.com/console/data-service)ページに移動します。
 
 2.  左側のペインで、ターゲット データ アプリの名前をクリックして詳細を表示します。
 
-3.  **「API キー」**領域で、 **「API キーの作成」を**クリックします。
+3.  **「認証」**領域で、 **「API キーの作成」を**クリックします。
 
 4.  **[API キーの作成]**ダイアログ ボックスで、説明を入力し、API キーのロールを選択します。
 
@@ -52,7 +52,7 @@ TiDB Cloudデータ API は[<a href="https://en.wikipedia.org/wiki/Digest_access
 
 API キーの説明を編集するには、次の手順を実行します。
 
-1.  プロジェクトの[<a href="https://tidbcloud.com/console/data-service">**データサービス**</a>](https://tidbcloud.com/console/data-service)ページに移動します。
+1.  プロジェクトの[**データサービス**](https://tidbcloud.com/console/data-service)ページに移動します。
 2.  左側のペインで、ターゲット データ アプリの名前をクリックして詳細を表示します。
 3.  **[API キー]**領域で [**アクション]**列を見つけ、変更する API キー行で**[...]** &gt; **[編集]**をクリックします。
 4.  API キーの説明または役割を更新します。
@@ -66,7 +66,7 @@ API キーの説明を編集するには、次の手順を実行します。
 
 データ アプリの API キーを削除するには、次の手順を実行します。
 
-1.  プロジェクトの[<a href="https://tidbcloud.com/console/data-service">**データサービス**</a>](https://tidbcloud.com/console/data-service)ページに移動します。
+1.  プロジェクトの[**データサービス**](https://tidbcloud.com/console/data-service)ページに移動します。
 2.  左側のペインで、ターゲット データ アプリの名前をクリックして詳細を表示します。
 3.  **[API キー]**領域で、 **[アクション]**列を見つけて、削除する API キー行の**[...]** &gt; **[削除]**をクリックします。
 4.  表示されるダイアログボックスで、削除を確認します。

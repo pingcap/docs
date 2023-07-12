@@ -9,11 +9,11 @@ summary: Learn how to import sample data into TiDB Cloud via UI.
 
 1.  ターゲットクラスターの**インポート**ページを開きます。
 
-    1.  [<a href="https://tidbcloud.com/">TiDB Cloudコンソール</a>](https://tidbcloud.com/)にログインし、プロジェクトの[<a href="https://tidbcloud.com/console/clusters">**クラスター**</a>](https://tidbcloud.com/console/clusters)ページに移動します。
+    1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、プロジェクトの[**クラスター**](https://tidbcloud.com/console/clusters)ページに移動します。
 
         > **ヒント：**
         >
-        > 複数のプロジェクトがある場合は、プロジェクト リストを表示し、左上隅にある ☰ ホバー メニューから別のプロジェクトに切り替えることができます。
+        > 複数のプロジェクトがある場合は、<mdsvgicon name="icon-left-projects">左下隅の をクリックして、別のプロジェクトに切り替えます。</mdsvgicon>
 
     2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[インポート]**をクリックします。
 
@@ -24,8 +24,8 @@ summary: Learn how to import sample data into TiDB Cloud via UI.
 
     **インポート**ページで:
 
-    -   TiDB Dedicatedクラスターの場合は、右上隅にある**「データのインポート」**をクリックします。
-    -   TiDB Serverless クラスタの場合は、アップロード領域の上にある**[S3 からデータをインポート]**リンクをクリックします。
+    -   TiDB 専用クラスターの場合は、右上隅にある**「データのインポート」**をクリックします。
+    -   TiDB サーバーレス クラスターの場合は、アップロード領域の上にある**[S3 からデータをインポート]**リンクをクリックします。
 
     次のパラメータを入力します。
 

@@ -5,18 +5,18 @@ summary: Learn how to manage passwords and enable multi-factor authentication (M
 
 # パスワード認証 {#password-authentication}
 
-このドキュメントでは、TiDB Cloudコンソールでパスワードを管理し、多要素認証 (MFA) を有効にする方法について説明します。このドキュメントは、電子メールとパスワードを使用してTiDB Cloudを[<a href="https://tidbcloud.com/free-trial">サインアップ</a>](https://tidbcloud.com/free-trial)するユーザーにのみ適用されます。
+このドキュメントでは、TiDB Cloudコンソールでパスワードを管理し、多要素認証 (MFA) を有効にする方法について説明します。このドキュメントは、電子メールとパスワードを使用してTiDB Cloudを[サインアップ](https://tidbcloud.com/free-trial)するユーザーにのみ適用されます。
 
 ## サインアップ {#sign-up}
 
-電子メールとパスワードを使用してTiDB Cloudにアクセスするか、 TiDB Cloudへ[<a href="https://tidbcloud.com/free-trial">サインアップ</a>](https://tidbcloud.com/free-trial)シングル サインオン (SSO) に Google、GitHub、または Microsoft アカウントを選択することができます。
+電子メールとパスワードを使用してTiDB Cloudにアクセスするか、 TiDB Cloudへ[サインアップ](https://tidbcloud.com/free-trial)シングル サインオン (SSO) に Google、GitHub、または Microsoft アカウントを選択することができます。
 
 -   電子メールとパスワードを使用してTiDB Cloudにサインアップすると、本書に従ってパスワードを管理できます。
 -   TiDB Cloudへの Google、GitHub、または Microsoft SSO を選択した場合、パスワードは選択したプラットフォームによって管理され、 TiDB Cloudコンソールを使用してパスワードを変更することはできません。
 
 電子メールとパスワードを使用してTiDB Cloudアカウントにサインアップするには、次の手順を実行します。
 
-1.  TiDB Cloud [<a href="https://tidbcloud.com/free-trial">サインアップ</a>](https://tidbcloud.com/free-trial)ページに移動し、登録情報を入力します。
+1.  TiDB Cloud [サインアップ](https://tidbcloud.com/free-trial)ページに移動し、登録情報を入力します。
 
 2.  「プライバシー ポリシーとサービス契約」を読み、 **「プライバシー ポリシーとサービス契約に同意する」**を選択します。
 
@@ -30,7 +30,7 @@ TiDB Cloudの確認メールが届きます。登録プロセス全体を完了�
 
 電子メールとパスワードを使用してTiDB Cloudにログインするには、次の手順を実行します。
 
-1.  TiDB Cloud[<a href="https://tidbcloud.com/">ログイン</a>](https://tidbcloud.com/)ページに移動します。
+1.  TiDB Cloud[ログイン](https://tidbcloud.com/)ページに移動します。
 
 2.  メールアドレスとパスワードを入力します。
 
@@ -40,7 +40,7 @@ TiDB Cloudの確認メールが届きます。登録プロセス全体を完了�
 
 ### サインアウト {#sign-out}
 
-TiDB Cloudコンソールの右上隅にある をクリックします。<mdsvgicon name="icon-top-account-settings">**アカウントを**選択し、 **「ログアウト」**を選択します。</mdsvgicon>
+TiDB Cloudコンソールの左下隅にある をクリックします。<mdsvgicon name="icon-top-account-settings">をクリックし、 **「ログアウト」**を選択します。</mdsvgicon>
 
 ## パスワードポリシー {#password-policy}
 
@@ -62,7 +62,7 @@ TiDB Cloudは、登録ユーザーに対してデフォルトのパスワード 
 
 パスワードを忘れた場合は、次のように電子メールでパスワードをリセットできます。
 
-1.  TiDB Cloud[<a href="https://tidbcloud.com/">ログイン</a>](https://tidbcloud.com/)ページに移動します。
+1.  TiDB Cloud[ログイン](https://tidbcloud.com/)ページに移動します。
 
 2.  **[パスワードを忘れた場合]**をクリックし、電子メールでパスワードをリセットするためのリンクを確認します。
 
@@ -72,7 +72,7 @@ TiDB Cloudは、登録ユーザーに対してデフォルトのパスワード 
 >
 > 電子メールとパスワードを使用してTiDB Cloudにサインアップする場合は、90 日ごとにパスワードをリセットすることをお勧めします。それ以外の場合は、 TiDB Cloudにログインするときにパスワードの有効期限を通知するメッセージが表示され、パスワードを変更する必要があります。
 
-1.  クリック<mdsvgicon name="icon-top-account-settings">TiDB Cloudコンソールの右上隅にある**アカウント**。</mdsvgicon>
+1.  クリック<mdsvgicon name="icon-top-account-settings">TiDB Cloudコンソールの左下隅にあります。</mdsvgicon>
 
 2.  **[アカウント設定]**をクリックします。
 
@@ -82,7 +82,7 @@ TiDB Cloudは、登録ユーザーに対してデフォルトのパスワード 
 
 > **ノート：**
 >
-> このセクションは、電子メールとパスワードを使用し[<a href="https://tidbcloud.com/free-trial">サインアップ</a>](https://tidbcloud.com/free-trial) TiDB Cloudを利用する場合にのみ適用されます。 Google、GitHub、または Microsoft SSO を使用してTiDB Cloudにサインアップすると、選択した ID 管理プラットフォームで MFA を有効にすることができます。
+> このセクションは、電子メールとパスワードを使用し[サインアップ](https://tidbcloud.com/free-trial) TiDB Cloudを利用する場合にのみ適用されます。 Google、GitHub、または Microsoft SSO を使用してTiDB Cloudにサインアップすると、選択した ID 管理プラットフォームで MFA を有効にすることができます。
 
 TiDB Cloudにログインした後、法律や規制に従って MFA を有効にすることができます。
 
@@ -90,7 +90,7 @@ TiDB Cloudにログインした後、法律や規制に従って MFA を有効�
 
 ### MFA を有効にする {#enable-mfa}
 
-1.  クリック<mdsvgicon name="icon-top-account-settings">TiDB Cloudコンソールの右上隅に**あるアカウント**。</mdsvgicon>
+1.  クリック<mdsvgicon name="icon-top-account-settings">TiDB Cloudコンソールの左下隅にあります。</mdsvgicon>
 
 2.  **[アカウント設定]**をクリックします。
 
@@ -100,7 +100,7 @@ TiDB Cloudにログインした後、法律や規制に従って MFA を有効�
 
 ### MFA を無効にする {#disable-mfa}
 
-1.  クリック<mdsvgicon name="icon-top-account-settings">TiDB Cloudコンソールの右上隅にある**アカウント**。</mdsvgicon>
+1.  クリック<mdsvgicon name="icon-top-account-settings">TiDB Cloudコンソールの左下隅にあります。</mdsvgicon>
 
 2.  **[アカウント設定]**をクリックします。
 

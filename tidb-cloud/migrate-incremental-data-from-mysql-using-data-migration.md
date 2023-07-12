@@ -7,13 +7,13 @@ summary: Learn how to migrate incremental data from MySQL-compatible databases h
 
 このドキュメントでは、クラウド プロバイダー (Amazon Aurora MySQL、Amazon Relational Database Service (RDS)、または Google Cloud SQL for MySQL) 上の MySQL 互換データベース、またはセルフホスト型ソース データベースから、データを使用して増分データをTiDB Cloudに移行する方法について説明します。 TiDB Cloudコンソールの移行機能。
 
-既存のデータ、または既存のデータと増分データの両方を移行する方法については、 [<a href="/tidb-cloud/migrate-from-mysql-using-data-migration.md">データ移行を使用して MySQL 互換データベースをTiDB Cloudに移行する</a>](/tidb-cloud/migrate-from-mysql-using-data-migration.md)を参照してください。
+既存のデータ、または既存のデータと増分データの両方を移行する方法については、 [データ移行を使用して MySQL 互換データベースをTiDB Cloudに移行する](/tidb-cloud/migrate-from-mysql-using-data-migration.md)を参照してください。
 
 ## 制限事項 {#limitations}
 
 > **注**:
 >
-> このセクションには、増分データ移行に関する制限のみが含まれています。一般的な制限事項も読むことをお勧めします。 [<a href="/tidb-cloud/migrate-from-mysql-using-data-migration.md#limitations">制限事項</a>](/tidb-cloud/migrate-from-mysql-using-data-migration.md#limitations)を参照してください。
+> このセクションには、増分データ移行に関する制限のみが含まれています。一般的な制限事項も読むことをお勧めします。 [制限事項](/tidb-cloud/migrate-from-mysql-using-data-migration.md#limitations)を参照してください。
 
 -   ターゲット テーブルがターゲット データベースにまだ作成されていない場合、移行ジョブは次のようなエラーを報告し、失敗します。この場合、ターゲットテーブルを手動で作成してから、移行ジョブを再試行する必要があります。
 
@@ -38,7 +38,7 @@ summary: Learn how to migrate incremental data from MySQL-compatible databases h
 
 > **注**:
 >
-> このセクションには、増分データ移行に関する前提条件のみが含まれています。 [<a href="/tidb-cloud/migrate-from-mysql-using-data-migration.md#prerequisites">一般的な前提条件</a>](/tidb-cloud/migrate-from-mysql-using-data-migration.md#prerequisites)も併せて読むことをお勧めします。
+> このセクションには、増分データ移行に関する前提条件のみが含まれています。 [一般的な前提条件](/tidb-cloud/migrate-from-mysql-using-data-migration.md#prerequisites)も併せて読むことをお勧めします。
 
 GTID を使用して開始位置を指定する場合は、ソース データベースで GTID が有効になっていることを確認してください。データベースの種類によって操作が異なります。
 
@@ -57,7 +57,7 @@ SHOW VARIABLES LIKE 'gtid_mode';
 
 結果が`ON`または`ON_PERMISSIVE`の場合、GTID モードは正常に有効になっています。
 
-詳細については、 [<a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/mysql-replication-gtid.html#mysql-replication-gtid.parameters">GTID ベースのレプリケーションのパラメーター</a>](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/mysql-replication-gtid.html#mysql-replication-gtid.parameters)を参照してください。
+詳細については、 [GTID ベースのレプリケーションのパラメーター](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/mysql-replication-gtid.html#mysql-replication-gtid.parameters)を参照してください。
 
 ### Google Cloud SQL for MySQL の場合 {#for-google-cloud-sql-for-mysql}
 
@@ -104,11 +104,11 @@ SHOW VARIABLES LIKE 'gtid_mode';
 
 ## ステップ 1:<strong>データ移行</strong>ページに移動する {#step-1-go-to-the-strong-data-migration-strong-page}
 
-1.  [<a href="https://tidbcloud.com/">TiDB Cloudコンソール</a>](https://tidbcloud.com/)にログインし、プロジェクトの[<a href="https://tidbcloud.com/console/clusters">**クラスター**</a>](https://tidbcloud.com/console/clusters)ページに移動します。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、プロジェクトの[**クラスター**](https://tidbcloud.com/console/clusters)ページに移動します。
 
     > **ヒント：**
     >
-    > 複数のプロジェクトがある場合は、プロジェクト リストを表示し、左上隅にある ☰ ホバー メニューから別のプロジェクトに切り替えることができます。
+    > 複数のプロジェクトがある場合は、<mdsvgicon name="icon-left-projects">左下隅の をクリックして、別のプロジェクトに切り替えます。</mdsvgicon>
 
 2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[データ移行]**をクリックします。
 
@@ -145,7 +145,7 @@ SHOW VARIABLES LIKE 'gtid_mode';
 5.  表示されるメッセージに従ってアクションを実行します。
 
     -   パブリック IP または VPC ピアリングを使用する場合は、ソース データベースとファイアウォール (存在する場合) の IP アクセス リストにデータ移行サービスの IP アドレスを追加する必要があります。
-    -   AWS Private Link を使用する場合は、エンドポイント リクエストを受け入れるように求められます。 [<a href="https://us-west-2.console.aws.amazon.com/vpc/home">AWS VPC コンソール</a>](https://us-west-2.console.aws.amazon.com/vpc/home)に移動し、 **「エンドポイント サービス」**をクリックしてエンドポイント要求を受け入れます。
+    -   AWS Private Link を使用する場合は、エンドポイント リクエストを受け入れるように求められます。 [AWS VPC コンソール](https://us-west-2.console.aws.amazon.com/vpc/home)に移動し、 **「エンドポイント サービス」**をクリックしてエンドポイント要求を受け入れます。
 
 ## ステップ 3: 移行ジョブの種類を選択する {#step-3-choose-migration-job-type}
 
@@ -173,7 +173,7 @@ SHOW VARIABLES LIKE 'gtid_mode';
 SHOW MASTER STATUS;
 ```
 
-GTID を有効にする方法については、 [<a href="#prerequisites">前提条件</a>](#prerequisites)を参照してください。
+GTID を有効にする方法については、 [前提条件](#prerequisites)を参照してください。
 
 ### binlogファイルの名前と位置を指定する {#specify-binlog-file-name-and-position}
 
@@ -199,15 +199,15 @@ SHOW MASTER STATUS;
 
 一部のチェック項目に警告のみがある場合は、リスクを評価し、警告を無視するかどうかを検討できます。すべての警告が無視された場合、移行ジョブは自動的に次のステップに進みます。
 
-エラーと解決策の詳細については、 [<a href="/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshooting.md#precheck-errors-and-solutions">事前チェックエラーと解決策</a>](/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshooting.md#precheck-errors-and-solutions)を参照してください。
+エラーと解決策の詳細については、 [事前チェックエラーと解決策](/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshooting.md#precheck-errors-and-solutions)を参照してください。
 
-事前チェック項目の詳細については、 [<a href="https://docs.pingcap.com/tidb/stable/dm-precheck">移行タスクの事前チェック</a>](https://docs.pingcap.com/tidb/stable/dm-precheck)を参照してください。
+事前チェック項目の詳細については、 [移行タスクの事前チェック](https://docs.pingcap.com/tidb/stable/dm-precheck)を参照してください。
 
 すべてのチェック項目に**「合格」**と表示されている場合は、 **「次へ」**をクリックします。
 
 ## ステップ 6: 仕様を選択して移行を開始する {#step-6-choose-a-spec-and-start-migration}
 
-**[仕様を選択して移行を開始]**ページで、パフォーマンス要件に応じて適切な移行仕様を選択します。仕様の詳細については、 [<a href="/tidb-cloud/tidb-cloud-billing-dm.md#specifications-for-data-migration">データ移行の仕様</a>](/tidb-cloud/tidb-cloud-billing-dm.md#specifications-for-data-migration)を参照してください。
+**[仕様を選択して移行を開始]**ページで、パフォーマンス要件に応じて適切な移行仕様を選択します。仕様の詳細については、 [データ移行の仕様](/tidb-cloud/tidb-cloud-billing-dm.md#specifications-for-data-migration)を参照してください。
 
 仕様を選択した後、 **「ジョブを作成して開始」**をクリックして移行を開始します。
 
@@ -221,4 +221,4 @@ SHOW MASTER STATUS;
 
 移行ジョブはどのステータスでも削除できます。
 
-移行中に問題が発生した場合は、 [<a href="/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshooting.md#migration-errors-and-solutions">移行エラーと解決策</a>](/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshooting.md#migration-errors-and-solutions)を参照してください。
+移行中に問題が発生した場合は、 [移行エラーと解決策](/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshooting.md#migration-errors-and-solutions)を参照してください。

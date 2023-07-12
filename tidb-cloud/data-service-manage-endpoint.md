@@ -11,15 +11,15 @@ Data Service (ベータ) のエンドポイントは、SQL ステートメント
 
 ## あなたが始める前に {#before-you-begin}
 
-エンドポイントを管理する前に、クラスターとデータ アプリを作成していることを確認してください。詳細については、 [<a href="/tidb-cloud/create-tidb-cluster.md">TiDB クラスターを作成する</a>](/tidb-cloud/create-tidb-cluster.md)および[<a href="/tidb-cloud/data-service-manage-data-app.md#create-a-data-app">データアプリを作成する</a>](/tidb-cloud/data-service-manage-data-app.md#create-a-data-app)を参照してください。
+エンドポイントを管理する前に、クラスターとデータ アプリを作成していることを確認してください。詳細については、 [データアプリを作成する](/tidb-cloud/data-service-manage-data-app.md#create-a-data-app)を参照してください。
 
-エンドポイントを呼び出す前に、データ アプリで API キーを作成していることを確認してください。詳細については、 [<a href="/tidb-cloud/data-service-api-key.md#create-an-api-key">APIキーを作成する</a>](/tidb-cloud/data-service-api-key.md#create-an-api-key)を参照してください。
+エンドポイントを呼び出す前に、データ アプリで API キーを作成していることを確認してください。詳細については、 [APIキーを作成する](/tidb-cloud/data-service-api-key.md#create-an-api-key)を参照してください。
 
 ## エンドポイントを作成する {#create-an-endpoint}
 
 エンドポイントを作成するには、次の手順を実行します。
 
-1.  プロジェクトの[<a href="https://tidbcloud.com/console/data-service">**データサービス**</a>](https://tidbcloud.com/console/data-service)ページに移動します。
+1.  プロジェクトの[**データサービス**](https://tidbcloud.com/console/data-service)ページに移動します。
 
 2.  左側のペインで、ターゲットのデータ アプリを見つけて、アプリ名の右側にある**[+****エンドポイントの作成]**をクリックします。必要に応じて、デフォルト名を更新できます。
 
@@ -29,7 +29,7 @@ Data Service (ベータ) のエンドポイントは、SQL ステートメント
 
 3.  新しく作成されたエンドポイントがエンドポイント リストの先頭に追加されます。
 
-Chat2Query (ベータ版) では、SQL ファイルからエンドポイントを作成することもできます。詳細については、 [<a href="/tidb-cloud/explore-data-with-chat2query.md#generate-an-endpoint-from-a-sql-file">SQL ファイルからエンドポイントを生成する</a>](/tidb-cloud/explore-data-with-chat2query.md#generate-an-endpoint-from-a-sql-file)を参照してください。
+Chat2Query (ベータ版) では、SQL ファイルからエンドポイントを作成することもできます。詳細については、 [SQL ファイルからエンドポイントを生成する](/tidb-cloud/explore-data-with-chat2query.md#generate-an-endpoint-from-a-sql-file)を参照してください。
 
 ## エンドポイントを開発する {#develop-an-endpoint}
 
@@ -37,7 +37,7 @@ Chat2Query (ベータ版) では、SQL ファイルからエンドポイント�
 
 > **ノート：**
 >
-> **自動同期とデプロイを**有効にしてデータ アプリを GitHub に接続している場合は、GitHub を使用してエンドポイント構成を更新することもできます。 GitHub で行った変更はすべてTiDB Cloudに自動的にデプロイされます。詳細については、 [<a href="/tidb-cloud/data-service-manage-github-connection.md">GitHub を使用して自動的にデプロイ</a>](/tidb-cloud/data-service-manage-github-connection.md)を参照してください。
+> **自動同期とデプロイを**有効にしてデータ アプリを GitHub に接続している場合は、GitHub を使用してエンドポイント構成を更新することもできます。 GitHub で行った変更はすべてTiDB Cloudに自動的にデプロイされます。詳細については、 [GitHub を使用して自動的にデプロイ](/tidb-cloud/data-service-manage-github-connection.md)を参照してください。
 
 ### プロパティの構成 {#configure-properties}
 
@@ -79,7 +79,7 @@ Chat2Query (ベータ版) では、SQL ファイルからエンドポイント�
 
     > **ノート：**
     >
-    > データ アプリにリンクされているクラスターのみがドロップダウン リストに表示されます。リンクされたクラスターを管理するには、 [<a href="/tidb-cloud/data-service-manage-data-app.md#manage-linked-data-sources">リンクされたクラスターを管理する</a>](/tidb-cloud/data-service-manage-data-app.md#manage-linked-data-sources)を参照してください。
+    > データ アプリにリンクされているクラスターのみがドロップダウン リストに表示されます。リンクされたクラスターを管理するには、 [リンクされたクラスターを管理する](/tidb-cloud/data-service-manage-data-app.md#manage-linked-data-sources)を参照してください。
 
     SQL エディターの上部で、SQL ステートメントを実行するクラスターをドロップダウン リストから選択します。その後、右側のペインの**[スキーマ]**タブで、このクラスターのすべてのデータベースを表示できます。
 
@@ -89,7 +89,7 @@ Chat2Query (ベータ版) では、SQL ファイルからエンドポイント�
 
     SQL エディターでは、テーブル結合クエリ、複雑なクエリ、集計関数のステートメントを作成できます。 `--`に続けて指示を入力するだけで、AI に SQL ステートメントを自動的に生成させることもできます。
 
-    パラメーターを定義するには、SQL ステートメントに`${ID}`のような変数プレースホルダーとして挿入します。たとえば、 `SELECT * FROM table_name WHERE id = ${ID}` 。次に、右側のペインの**「Params」**タブをクリックして、パラメータ定義とテスト値を変更できます。詳細については、 [<a href="#configure-parameters">パラメーター</a>](#configure-parameters)を参照してください。
+    パラメーターを定義するには、SQL ステートメントに`${ID}`のような変数プレースホルダーとして挿入します。たとえば、 `SELECT * FROM table_name WHERE id = ${ID}` 。次に、右側のペインの**「Params」**タブをクリックして、パラメータ定義とテスト値を変更できます。詳細については、 [パラメーター](#configure-parameters)を参照してください。
 
     > **ノート：**
     >
@@ -132,7 +132,7 @@ Chat2Query (ベータ版) では、SQL ファイルからエンドポイント�
 
 エンドポイントの名前を変更するには、次の手順を実行します。
 
-1.  プロジェクトの[<a href="https://tidbcloud.com/console/data-service">**データサービス**</a>](https://tidbcloud.com/console/data-service)ページに移動します。
+1.  プロジェクトの[**データサービス**](https://tidbcloud.com/console/data-service)ページに移動します。
 2.  左側のペインで、ターゲット データ アプリの名前をクリックして、そのエンドポイントを表示します。
 3.  名前を変更するエンドポイントを見つけて、 **[...]** &gt; **[名前の変更**] をクリックし、エンドポイントの新しい名前を入力します。
 
@@ -140,7 +140,7 @@ Chat2Query (ベータ版) では、SQL ファイルからエンドポイント�
 
 エンドポイントをテストするには、次の手順を実行します。
 
-1.  プロジェクトの[<a href="https://tidbcloud.com/console/data-service">**データサービス**</a>](https://tidbcloud.com/console/data-service)ページに移動します。
+1.  プロジェクトの[**データサービス**](https://tidbcloud.com/console/data-service)ページに移動します。
 
 2.  左側のペインで、ターゲット データ アプリの名前をクリックして、そのエンドポイントを表示します。
 
@@ -159,17 +159,17 @@ Chat2Query (ベータ版) では、SQL ファイルからエンドポイント�
     >
     > あるいは、 <kbd>F5 キー</kbd>を押してエンドポイントをテストすることもできます。
 
-エンドポイントをテストした後、ページの下部に応答が JSON として表示されます。 JSON 応答の詳細については、 [<a href="#response">エンドポイントの応答</a>](#response)を参照してください。
+エンドポイントをテストした後、ページの下部に応答が JSON として表示されます。 JSON 応答の詳細については、 [エンドポイントの応答](#response)を参照してください。
 
 ## エンドポイントをデプロイ {#deploy-an-endpoint}
 
 > **ノート：**
 >
-> **自動同期とデプロイメントを**有効にしてデータ アプリを GitHub に接続している場合、GitHub で行ったデータ アプリの変更はすべてTiDB Cloudに自動的にデプロイされます。詳細については、 [<a href="/tidb-cloud/data-service-manage-github-connection.md">GitHub を使用して自動的にデプロイ</a>](/tidb-cloud/data-service-manage-github-connection.md)を参照してください。
+> **自動同期とデプロイメントを**有効にしてデータ アプリを GitHub に接続している場合、GitHub で行ったデータ アプリの変更はすべてTiDB Cloudに自動的にデプロイされます。詳細については、 [GitHub を使用して自動的にデプロイ](/tidb-cloud/data-service-manage-github-connection.md)を参照してください。
 
 エンドポイントをデプロイするには、次の手順を実行します。
 
-1.  プロジェクトの[<a href="https://tidbcloud.com/console/data-service">**データサービス**</a>](https://tidbcloud.com/console/data-service)ページに移動します。
+1.  プロジェクトの[**データサービス**](https://tidbcloud.com/console/data-service)ページに移動します。
 2.  左側のペインで、ターゲット データ アプリの名前をクリックして、そのエンドポイントを表示します。
 3.  デプロイするエンドポイントを見つけ、エンドポイント名をクリックして詳細を表示し、右上隅にある**[デプロイ]**をクリックします。
 4.  データ アプリで**[ドラフトの確認]**が有効になっている場合は、行った変更を確認するためのダイアログが表示されます。レビューに基づいて変更を破棄するかどうかを選択できます。
@@ -183,13 +183,13 @@ Chat2Query (ベータ版) では、SQL ファイルからエンドポイント�
 
 ### 前提条件 {#prerequisites}
 
-エンドポイントを呼び出す前に、API キーを作成する必要があります。詳細については、 [<a href="/tidb-cloud/data-service-api-key.md#create-an-api-key">APIキーを作成する</a>](/tidb-cloud/data-service-api-key.md#create-an-api-key)を参照してください。
+エンドポイントを呼び出す前に、API キーを作成する必要があります。詳細については、 [APIキーを作成する](/tidb-cloud/data-service-api-key.md#create-an-api-key)を参照してください。
 
 ### リクエスト {#request}
 
 TiDB Cloudは、エンドポイントの呼び出しに役立つコード サンプルを生成します。コード例を取得するには、次の手順を実行します。
 
-1.  プロジェクトの[<a href="https://tidbcloud.com/console/data-service">**データサービス**</a>](https://tidbcloud.com/console/data-service)ページに移動します。
+1.  プロジェクトの[**データサービス**](https://tidbcloud.com/console/data-service)ページに移動します。
 
 2.  左側のペインで、ターゲット データ アプリの名前をクリックして、そのエンドポイントを表示します。
 
@@ -243,22 +243,22 @@ TiDB Cloudは、エンドポイントの呼び出しに役立つコード サン
 
 5.  コード例をアプリケーションに貼り付けて実行します。
 
-    -   `<Public Key>`と`<Private Key>`プレースホルダーを API キーに置き換える必要があります。詳細については、 [<a href="/tidb-cloud/data-service-api-key.md">APIキーを管理する</a>](/tidb-cloud/data-service-api-key.md)を参照してください。
+    -   `<Public Key>`と`<Private Key>`プレースホルダーを API キーに置き換える必要があります。詳細については、 [APIキーを管理する](/tidb-cloud/data-service-api-key.md)を参照してください。
     -   エンドポイントにパラメーターが含まれている場合は、エンドポイントを呼び出すときにパラメーター値を指定します。
 
 ### 応答 {#response}
 
-エンドポイントを呼び出した後、JSON 形式で応答を確認できます。詳細については、 [<a href="/tidb-cloud/data-service-response-and-status-code.md">データサービスのレスポンスコードとステータスコード</a>](/tidb-cloud/data-service-response-and-status-code.md)を参照してください。
+エンドポイントを呼び出した後、JSON 形式で応答を確認できます。詳細については、 [データサービスのレスポンスコードとステータスコード](/tidb-cloud/data-service-response-and-status-code.md)を参照してください。
 
 ## エンドポイントのデプロイを解除する {#undeploy-an-endpoint}
 
 > **ノート：**
 >
-> **自動同期とデプロイが**有効になっている[<a href="/tidb-cloud/data-service-manage-github-connection.md">データ アプリを GitHub に接続しました</a>](/tidb-cloud/data-service-manage-github-connection.md)がある場合、このデータ アプリのエンドポイントのデプロイを解除すると、GitHub 上のこのエンドポイントの構成も削除されます。
+> **自動同期とデプロイが**有効になっている[データ アプリを GitHub に接続しました](/tidb-cloud/data-service-manage-github-connection.md)がある場合、このデータ アプリのエンドポイントのデプロイを解除すると、GitHub 上のこのエンドポイントの構成も削除されます。
 
 エンドポイントのデプロイを解除するには、次の手順を実行します。
 
-1.  プロジェクトの[<a href="https://tidbcloud.com/console/data-service">**データサービス**</a>](https://tidbcloud.com/console/data-service)ページに移動します。
+1.  プロジェクトの[**データサービス**](https://tidbcloud.com/console/data-service)ページに移動します。
 2.  左側のペインで、ターゲット データ アプリの名前をクリックして、そのエンドポイントを表示します。
 3.  デプロイを解除するエンドポイントを見つけて、 **[...]** &gt; **[アンデプロイ]**をクリックします。
 4.  **「アンデプロイ」**をクリックしてアンデプロイを確認します。
@@ -267,11 +267,11 @@ TiDB Cloudは、エンドポイントの呼び出しに役立つコード サン
 
 > **ノート：**
 >
-> エンドポイントを削除する前に、エンドポイントがオンラインでないことを確認してください。そうしないと、エンドポイントを削除できません。エンドポイントのデプロイを解除するには、 [<a href="#undeploy-an-endpoint">エンドポイントのデプロイを解除する</a>](#undeploy-an-endpoint)を参照してください。
+> エンドポイントを削除する前に、エンドポイントがオンラインでないことを確認してください。そうしないと、エンドポイントを削除できません。エンドポイントのデプロイを解除するには、 [エンドポイントのデプロイを解除する](#undeploy-an-endpoint)を参照してください。
 
 エンドポイントを削除するには、次の手順を実行します。
 
-1.  プロジェクトの[<a href="https://tidbcloud.com/console/data-service">**データサービス**</a>](https://tidbcloud.com/console/data-service)ページに移動します。
+1.  プロジェクトの[**データサービス**](https://tidbcloud.com/console/data-service)ページに移動します。
 2.  左側のペインで、ターゲット データ アプリの名前をクリックして、そのエンドポイントを表示します。
 3.  削除するエンドポイントの名前をクリックし、右上隅にある**[...]** &gt; **[削除]**をクリックします。
 4.  **「削除」を**クリックして削除を確認します。

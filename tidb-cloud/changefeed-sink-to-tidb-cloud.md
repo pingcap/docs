@@ -5,38 +5,38 @@ Summary: Learn how to create a changefeed to stream data from a TiDB Dedicated c
 
 # TiDB Cloudへのシンク {#sink-to-tidb-cloud}
 
-このドキュメントでは、TiDB Dedicatedクラスターから TiDB Serverless クラスタにデータをストリーミングする方法について説明します。
+このドキュメントでは、TiDB 専用クラスターから TiDB サーバーレス クラスターにデータをストリーミングする方法について説明します。
 
 > **ノート：**
 >
-> Changefeed 機能を使用するには、TiDB クラスターのバージョンが v6.4.0 以降であることを確認してください。
+> Changefeed 機能を使用するには、TiDB 専用クラスターのバージョンが v6.4.0 以降であることを確認してください。
 
 ## 制限 {#restrictions}
 
 -   TiDB Cloudクラスターごとに、最大 5 つの変更フィードを作成できます。
 
--   TiDB Cloud はTiCDC を使用して変更フィードを確立するため、同じ[<a href="https://docs.pingcap.com/tidb/stable/ticdc-overview#unsupported-scenarios">TiCDC としての制限</a>](https://docs.pingcap.com/tidb/stable/ticdc-overview#unsupported-scenarios)を持ちます。
+-   TiDB Cloud はTiCDC を使用して変更フィードを確立するため、同じ[TiCDC としての制限](https://docs.pingcap.com/tidb/stable/ticdc-overview#unsupported-scenarios)を持ちます。
 
 -   レプリケートされるテーブルに主キーまたは NULL 以外の一意のインデックスがない場合、レプリケーション中に一意制約がないため、一部の再試行シナリオでは重複したデータがダウンストリームに挿入される可能性があります。
 
--   **TiDB Cloudへのシンク**機能は、次の AWS リージョンにあり、2022 年 11 月 9 日以降に作成された TiDB Dedicatedクラスターでのみ利用できます。
+-   **TiDB Cloudへのシンク**機能は、次の AWS リージョンにあり、2022 年 11 月 9 日以降に作成された TiDB 専用クラスターでのみ利用できます。
 
     -   AWS オレゴン州 (us-west-2)
     -   AWS フランクフルト (eu-central-1)
     -   AWS シンガポール (ap-southeast-1)
     -   AWS 東京 (ap-northeast-1)
 
--   ソース TiDB Dedicatedクラスターと宛先 TiDB Serverless クラスタは、同じプロジェクトおよび同じリージョン内に存在する必要があります。
+-   ソース TiDB 専用クラスターと宛先 TiDB サーバーレス クラスターは、同じプロジェクトおよび同じリージョン内に存在する必要があります。
 
--   **TiDB Cloudへのシンク**機能は、プライベート エンドポイント経由のネットワーク接続のみをサポートします。 TiDB Dedicatedクラスターから TiDB Serverless クラスタにデータをストリーミングするためのチェンジフィードを作成すると、 TiDB Cloudは2 つのクラスター間のプライベート エンドポイント接続を自動的にセットアップします。
+-   **TiDB Cloudへのシンク**機能は、プライベート エンドポイント経由のネットワーク接続のみをサポートします。 TiDB 専用クラスターから TiDB サーバーレス クラスターにデータをストリーミングするためのチェンジフィードを作成すると、 TiDB Cloudは2 つのクラスター間のプライベート エンドポイント接続を自動的にセットアップします。
 
 ## 前提条件 {#prerequisites}
 
-**Sink to TiDB Cloud**コネクタは、特定の[<a href="https://docs.pingcap.com/tidb/stable/glossary#tso">TSO</a>](https://docs.pingcap.com/tidb/stable/glossary#tso)以降のみ、TiDB Dedicatedクラスターから TiDB Serverless クラスタに増分データをシンクできます。
+**Sink to TiDB Cloud**コネクタは、特定の[TSO](https://docs.pingcap.com/tidb/stable/glossary#tso)以降のみ、TiDB 専用クラスターから TiDB サーバーレス クラスターに増分データをシンクできます。
 
-チェンジフィードを作成する前に、ソース TiDB Dedicatedクラスターから既存のデータをエクスポートし、そのデータを宛先 TiDB Serverless クラスタにロードする必要があります。
+チェンジフィードを作成する前に、ソース TiDB 専用クラスターから既存のデータをエクスポートし、そのデータを宛先 TiDB サーバーレス クラスターにロードする必要があります。
 
-1.  [<a href="https://docs.pingcap.com/tidb/stable/system-variables#tidb_gc_life_time-new-in-v50">tidb_gc_life_time</a>](https://docs.pingcap.com/tidb/stable/system-variables#tidb_gc_life_time-new-in-v50)次の 2 つの操作の合計時間よりも長くして、その間の履歴データが TiDB によってガベージ コレクションされないようにします。
+1.  [tidb_gc_life_time](https://docs.pingcap.com/tidb/stable/system-variables#tidb_gc_life_time-new-in-v50)次の 2 つの操作の合計時間よりも長くして、その間の履歴データが TiDB によってガベージ コレクションされないようにします。
 
     -   既存のデータをエクスポートおよびインポートする時間
     -   **TiDB Cloudへのシンク**を作成する時期が来ました
@@ -47,9 +47,9 @@ Summary: Learn how to create a changefeed to stream data from a TiDB Dedicated c
     SET GLOBAL tidb_gc_life_time = '720h';
     ```
 
-2.  [<a href="/tidb-cloud/export-data-from-tidb-cloud.md">データのエクスポート</a>](/tidb-cloud/export-data-from-tidb-cloud.md)を TiDB Dedicatedクラスターからロードし、 [<a href="https://centminmod.com/mydumper.html">マイダンパー/マイローダー</a>](https://centminmod.com/mydumper.html)などのコミュニティ ツールを使用して宛先 TiDB Serverless クラスタにデータをロードします。
+2.  [データのエクスポート](/tidb-cloud/export-data-from-tidb-cloud.md)を TiDB 専用クラスターからロードし、 [マイダンパー/マイローダー](https://centminmod.com/mydumper.html)などのコミュニティ ツールを使用して宛先 TiDB サーバーレス クラスターにデータをロードします。
 
-3.  [<a href="/dumpling-overview.md#format-of-exported-files">Dumplingのエクスポートされたファイル</a>](/dumpling-overview.md#format-of-exported-files)から、メタデータ ファイルからTiDB Cloudシンクの開始位置を取得します。
+3.  [Dumplingのエクスポートされたファイル](https://docs.pingcap.com/tidb/stable/dumpling-overview#format-of-exported-files)から、メタデータ ファイルからTiDB Cloudシンクの開始位置を取得します。
 
     以下は、メタデータ ファイルの例の一部です。 `SHOW MASTER STATUS`の`Pos`既存データの TSO であり、 TiDB Cloudシンクの開始位置でもあります。
 
@@ -63,23 +63,23 @@ Summary: Learn how to create a changefeed to stream data from a TiDB Dedicated c
 
 ## TiDB Cloudシンクを作成する {#create-a-tidb-cloud-sink}
 
-前提条件を完了したら、データを宛先 TiDB Serverless クラスタにシンクできます。
+前提条件を完了したら、データを宛先 TiDB サーバーレス クラスターにシンクできます。
 
 1.  ターゲット TiDB クラスターのクラスター概要ページに移動し、左側のナビゲーション ペインで**[Changefeed]**をクリックします。
 
 2.  **[Create Changefeed]**をクリックし、宛先として**TiDB Cloud**を選択します。
 
-3.  **[TiDB Cloud接続]**領域で、宛先 TiDB Serverless クラスタを選択し、宛先クラスターのユーザー名とパスワードを入力します。
+3.  **[TiDB Cloud接続]**領域で、宛先 TiDB サーバーレス クラスターを選択し、宛先クラスターのユーザー名とパスワードを入力します。
 
 4.  **「次へ」**をクリックして 2 つの TiDB クラスター間の接続を確立し、変更フィードがそれらを正常に接続できるかどうかをテストします。
 
     -   「はい」の場合、次の構成ステップに進みます。
     -   そうでない場合は、接続エラーが表示されるため、エラーを処理する必要があります。エラーが解決したら、もう一度**「次へ」**をクリックします。
 
-5.  **テーブル フィルターを**カスタマイズして、複製するテーブルをフィルターします。ルールの構文については、 [<a href="/table-filter.md">テーブルフィルタールール</a>](/table-filter.md)を参照してください。
+5.  **テーブル フィルターを**カスタマイズして、複製するテーブルをフィルターします。ルールの構文については、 [テーブルフィルタールール](/table-filter.md)を参照してください。
 
     -   **フィルター ルール**: この列でフィルター ルールを設定できます。デフォルトでは、すべてのテーブルを複製することを表すルール`*. *`があります。新しいルールを追加すると、 TiDB CloudはTiDB 内のすべてのテーブルをクエリし、ルールに一致するテーブルのみを右側のボックスに表示します。
-    -   **複製されるテーブル**: この列には、複製されるテーブルが表示されます。ただし、今後複製される新しいテーブルや完全に複製されるスキーマは表示されません。
+    -   **複製されるテーブル**: この列には、複製されるテーブルが表示されます。ただし、今後複製​​される新しいテーブルや完全に複製されるスキーマは表示されません。
     -   **有効なキーのないテーブル**: この列には、一意キーと主キーのないテーブルが表示されます。これらのテーブルでは、ダウンストリーム システムが重複イベントを処理するために一意の識別子を使用できないため、レプリケーション中にデータが不整合になる可能性があります。このような問題を回避するには、レプリケーションの前にこれらのテーブルに一意キーまたは主キーを追加するか、これらのテーブルをフィルターで除外するフィルター ルールを設定することをお勧めします。たとえば、「!test.tbl1」を使用してテーブル`test.tbl1`を除外できます。
 
 6.  **[レプリケーション開始位置]**領域に、 Dumplingでエクスポートされたメタデータ ファイルから取得した TSO を入力します。
@@ -99,7 +99,7 @@ Summary: Learn how to create a changefeed to stream data from a TiDB Dedicated c
 
     変更フィード名をクリックすると、チェックポイント、レプリケーションレイテンシー、その他のメトリックなど、変更フィードに関する詳細が表示されます。
 
-10. シンクの作成後、 [<a href="https://docs.pingcap.com/tidb/stable/system-variables#tidb_gc_life_time-new-in-v50">tidb_gc_life_time</a>](https://docs.pingcap.com/tidb/stable/system-variables#tidb_gc_life_time-new-in-v50)元の値 (デフォルト値は`10m` ) に戻します。
+10. シンクの作成後、 [tidb_gc_life_time](https://docs.pingcap.com/tidb/stable/system-variables#tidb_gc_life_time-new-in-v50)元の値 (デフォルト値は`10m` ) に戻します。
 
     ```sql
     SET GLOBAL tidb_gc_life_time = '10m';

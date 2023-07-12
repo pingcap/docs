@@ -1,18 +1,17 @@
 ---
 title: Changefeed
+summary: TiDB Cloud changefeed helps you stream data from TiDB Cloud to other data services.
 ---
 
 # チェンジフィード {#changefeed}
 
-TiDB Cloudチェンジフィードは、 TiDB Cloudから他のデータ サービスにデータをストリーミングするのに役立ちます。現在、 TiDB Cloud は、Apache Kafka、MySQL、およびTiDB Cloudへのストリーミング データをサポートしています。
+TiDB Cloudチェンジフィードは、 TiDB Cloudから他のデータ サービスにデータをストリーミングするのに役立ちます。現在、 TiDB Cloud は、Apache Kafka、MySQL、 TiDB Cloud 、およびクラウドstorageへのストリーミング データをサポートしています。
 
 > **ノート：**
 >
-> チェンジフィード機能を使用するには、TiDB クラスターのバージョンが v6.4.0 以降であることを確認してください。
->
-> 現在、 TiDB Cloudクラスターごとに最大 10 個の変更フィードのみが許可されます。
->
-> [<a href="/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta">TiDB Serverlessクラスタ</a>](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta)の場合、チェンジフィード機能は使用できません。
+> -   チェンジフィード機能を使用するには、TiDB 専用クラスターのバージョンが v6.4.0 以降であることを確認してください。
+> -   現在、 TiDB Cloudクラスターごとに最大 5 つの変更フィードのみが許可されます。
+> -   [TiDB サーバーレスクラスター](/tidb-cloud/select-cluster-tier.md#tidb-serverless)の場合、チェンジフィード機能は使用できません。
 
 チェンジフィード機能にアクセスするには、TiDB クラスターのクラスター概要ページに移動し、左側のナビゲーション ペインで**[チェンジフィード]**をクリックします。チェンジフィードページが表示されます。
 
@@ -22,9 +21,10 @@ TiDB Cloudチェンジフィードは、 TiDB Cloudから他のデータ サー�
 
 チェンジフィードを作成するには、次のチュートリアルを参照してください。
 
--   [<a href="/tidb-cloud/changefeed-sink-to-apache-kafka.md">Apache Kafka にシンクする</a>](/tidb-cloud/changefeed-sink-to-apache-kafka.md) (ベータ版)
--   [<a href="/tidb-cloud/changefeed-sink-to-mysql.md">MySQL にシンクする</a>](/tidb-cloud/changefeed-sink-to-mysql.md)
--   [<a href="/tidb-cloud/changefeed-sink-to-tidb-cloud.md">TiDB Cloudへのシンク</a>](/tidb-cloud/changefeed-sink-to-tidb-cloud.md)
+-   [Apache Kafka にシンクする](/tidb-cloud/changefeed-sink-to-apache-kafka.md) (ベータ版)
+-   [MySQL にシンクする](/tidb-cloud/changefeed-sink-to-mysql.md)
+-   [TiDB Cloudへのシンク](/tidb-cloud/changefeed-sink-to-tidb-cloud.md)
+-   [クラウドstorageにシンクする](/tidb-cloud/changefeed-sink-to-cloud-storage.md)
 
 ## 変更フィード RCU のクエリ {#query-changefeed-rcus}
 
@@ -79,7 +79,7 @@ TiDB Cloudチェンジフィードは、 TiDB Cloudから他のデータ サー�
 
 ## 変更フィードの請求 {#changefeed-billing}
 
-TiDB Cloudでの変更フィードの請求については、 [<a href="/tidb-cloud/tidb-cloud-billing-ticdc-rcu.md">変更フィードの請求</a>](/tidb-cloud/tidb-cloud-billing-ticdc-rcu.md)を参照してください。
+TiDB Cloudでの変更フィードの請求については、 [変更フィードの請求](/tidb-cloud/tidb-cloud-billing-ticdc-rcu.md)を参照してください。
 
 ## フィード状態の変更 {#changefeed-states}
 
@@ -95,5 +95,5 @@ TiDB Cloudでの変更フィードの請求については、 [<a href="/tidb-cl
 -   `RESUMING` : レプリケーションタスクが再開されています。
 -   `DELETING` : レプリケーションタスクは削除中です。
 -   `DELETED` : レプリケーションタスクは削除されます。
--   `WARNING` : レプリケーション タスクは警告を返します。回復可能なエラーがいくつかあるため、レプリケーションを続行できません。この状態のチェンジフィードは、状態が`RUNNING`に移行するまで再開を試み続けます。この状態のチェンジフィードは[<a href="https://docs.pingcap.com/tidb/stable/garbage-collection-overview">GC 操作</a>](https://docs.pingcap.com/tidb/stable/garbage-collection-overview)をブロックします。
+-   `WARNING` : レプリケーション タスクは警告を返します。回復可能なエラーがいくつかあるため、レプリケーションを続行できません。この状態のチェンジフィードは、状態が`RUNNING`に移行するまで再開を試み続けます。この状態のチェンジフィードは[GC 操作](https://docs.pingcap.com/tidb/stable/garbage-collection-overview)をブロックします。
 -   `FAILED` : レプリケーションタスクは失敗します。いくつかの回復不可能なエラーが原因で、レプリケーション タスクを再開できず、回復できません。この状態の変更フィードは GC 操作をブロックしません。

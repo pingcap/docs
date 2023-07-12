@@ -9,25 +9,25 @@ summary: Learn how to use TiDB Cloud Data Service to access your data with HTTPS
 
 > **ヒント：**
 >
-> TiDB Cloud は、 TiDB Serverless クラスタ用の Chat2Query API を提供します。有効にすると、 TiDB Cloud は**Chat2Query**と呼ばれるシステム データ アプリと Data Service に Chat2Data エンドポイントを自動的に作成します。このエンドポイントを呼び出して、AI に指示を提供して SQL ステートメントを生成および実行させることができます。
+> TiDB Cloud は、 TiDB クラスター用の Chat2Query API を提供します。有効にすると、 TiDB Cloud は**Chat2Query**と呼ばれるシステム データ アプリと Data Service に Chat2Data エンドポイントを自動的に作成します。このエンドポイントを呼び出して、AI に指示を提供して SQL ステートメントを生成および実行させることができます。
 >
-> 詳細については、 [<a href="/tidb-cloud/use-chat2query-api.md">Chat2Query API を使ってみる</a>](/tidb-cloud/use-chat2query-api.md)を参照してください。
+> 詳細については、 [Chat2Query API を使ってみる](/tidb-cloud/use-chat2query-api.md)を参照してください。
 
 このドキュメントでは、データ アプリの作成、開発、テスト、デプロイ、エンドポイントの呼び出しによって、 TiDB Cloud Data Service (ベータ) をすぐに開始する方法を紹介します。
 
 ## あなたが始める前に {#before-you-begin}
 
-データ アプリを作成する前に、 [<a href="/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta">TiDB Serverless</a>](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta)クラスターを作成していることを確認してください。お持ちでない場合は、 [<a href="/tidb-cloud/create-tidb-cluster.md">クラスターを作成する</a>](/tidb-cloud/create-tidb-cluster.md)の手順に従って作成してください。
+データ アプリを作成する前に、 [TiDB サーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-serverless)クラスターを作成していることを確認してください。お持ちでない場合は、 [TiDB サーバーレスクラスターを作成する](/tidb-cloud/create-tidb-cluster-serverless.md)の手順に従って作成してください。
 
 ## ステップ 1. データ アプリを作成する {#step-1-create-a-data-app}
 
 データ アプリは、特定のアプリケーションのデータにアクセスするために使用できるエンドポイントのグループです。データ アプリを作成するには、次の手順を実行します。
 
-1.  [<a href="https://tidbcloud.com">TiDB Cloudコンソール</a>](https://tidbcloud.com)にログインします。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、 をクリックします。<mdsvgicon name="icon-left-data-service">左側のナビゲーション ペインの**データ サービス**。</mdsvgicon>
 
-2.  左側のナビゲーション ウィンドウで、<mdsvgicon name="icon-left-data-service">**データサービス**。</mdsvgicon>
+2.  **[データ サービス]**ページで、 **[データ アプリの作成]**をクリックします。
 
-3.  **[最初のデータ アプリケーションの作成を開始します]**ページで、名前を入力し、データ アプリがアクセスするクラスターを選択します。
+3.  **[データ アプリの作成]**ダイアログで、名前を入力し、データ アプリがアクセスするクラスターを選択します。
 
 4.  (オプション) データ アプリのエンドポイントを優先する GitHub リポジトリとブランチに自動的にデプロイするには、 **[GitHub に接続]**を有効にして、次の手順を実行します。
 
@@ -42,11 +42,11 @@ summary: Learn how to use TiDB Cloud Data Service to access your data with HTTPS
     > -   ディレクトリはスラッシュ ( `/` ) で始まる必要があります。たとえば、 `/mydata` 。指定したディレクトリがターゲット リポジトリおよびブランチに存在しない場合は、自動的に作成されます。
     > -   リポジトリ、ブランチ、ディレクトリの組み合わせによって構成ファイルのパスが識別されます。このパスはデータ アプリ間で一意である必要があります。指定したパスがすでに別のデータ アプリで使用されている場合は、代わりに新しいパスを指定する必要があります。そうしないと、現在のデータ アプリのTiDB Cloudコンソールで構成されたエンドポイントによって、指定したパス内のファイルが上書きされます。
 
-5.  **[データ アプリの作成]**をクリックします。 [<a href="https://tidbcloud.com/console/data-service">**データサービス**</a>](https://tidbcloud.com/console/data-service)詳細ページが表示されます。
+5.  **[データ アプリの作成]**をクリックします。 [**データサービス**](https://tidbcloud.com/console/data-service)詳細ページが表示されます。
 
-6.  データ アプリを GitHub に接続するように構成している場合は、指定した GitHub ディレクトリを確認してください。 [<a href="/tidb-cloud/data-service-app-config-files.md">データアプリ構成ファイル</a>](/tidb-cloud/data-service-app-config-files.md) `tidb-cloud-data-service`までにディレクトリにコミットされていることがわかります。これは、データ アプリが GitHub に正常に接続されていることを意味します。
+6.  データ アプリを GitHub に接続するように構成している場合は、指定した GitHub ディレクトリを確認してください。 [データアプリ構成ファイル](/tidb-cloud/data-service-app-config-files.md) `tidb-cloud-data-service`までにディレクトリにコミットされていることがわかります。これは、データ アプリが GitHub に正常に接続されていることを意味します。
 
-    新しいデータ アプリでは、**自動同期とデプロイメント**および**ドラフトのレビュー**がデフォルトで有効になっているため、 TiDB Cloudコンソールと GitHub の間でデータ アプリの変更を簡単に同期し、デプロイメント前に変更をレビューできます。 GitHub 統合の詳細については、 [<a href="/tidb-cloud/data-service-manage-github-connection.md">データ アプリの変更を GitHub で自動的にデプロイ</a>](/tidb-cloud/data-service-manage-github-connection.md)を参照してください。
+    新しいデータ アプリでは、**自動同期とデプロイメント**および**ドラフトのレビュー**がデフォルトで有効になっているため、 TiDB Cloudコンソールと GitHub の間でデータ アプリの変更を簡単に同期し、デプロイメント前に変更をレビューできます。 GitHub 統合の詳細については、 [データ アプリの変更を GitHub で自動的にデプロイ](/tidb-cloud/data-service-manage-github-connection.md)を参照してください。
 
 ## ステップ 2. エンドポイントを開発する {#step-2-develop-an-endpoint}
 
@@ -73,9 +73,9 @@ summary: Learn how to use TiDB Cloud Data Service to access your data with HTTPS
     -   `GET` : このメソッドを使用して、 `SELECT`ステートメントなどのデータをクエリします。
     -   `POST` : このメソッドは、 `INSERT`ステートメントなどのデータを挿入するために使用します。
 
--   **Timeout(ms)** : エンドポイントのタイムアウト。範囲は`1` ～ `30000`です。デフォルト値は`5000`ミリ秒です。詳細については、 [<a href="/tidb-cloud/data-service-manage-endpoint.md#configure-properties">プロパティの構成</a>](/tidb-cloud/data-service-manage-endpoint.md#configure-properties)を参照してください。
+-   **Timeout(ms)** : エンドポイントのタイムアウト。範囲は`1` ～ `30000`です。デフォルト値は`5000`ミリ秒です。詳細については、 [プロパティの構成](/tidb-cloud/data-service-manage-endpoint.md#configure-properties)を参照してください。
 
--   **Max Rows** : エンドポイントが返す最大行数。範囲は`1` ～ `2000`です。デフォルト値は`50`行です。詳細については、 [<a href="/tidb-cloud/data-service-manage-endpoint.md#configure-properties">プロパティの構成</a>](/tidb-cloud/data-service-manage-endpoint.md#configure-properties)を参照してください。
+-   **Max Rows** : エンドポイントが返す最大行数。範囲は`1` ～ `2000`です。デフォルト値は`50`行です。詳細については、 [プロパティの構成](/tidb-cloud/data-service-manage-endpoint.md#configure-properties)を参照してください。
 
 ### SQL ステートメントを作成する {#write-sql-statements}
 
@@ -85,7 +85,7 @@ SQL エディター (**データ サービス**ページの中央のペイン) �
 
     > **ノート：**
     >
-    > データ アプリにリンクされているクラスターのみがドロップダウン リストに表示されます。リンクされたクラスターを管理するには、 [<a href="/tidb-cloud/data-service-manage-data-app.md#manage-linked-data-sources">リンクされたクラスターを管理する</a>](/tidb-cloud/data-service-manage-data-app.md#manage-linked-data-sources)を参照してください。
+    > データ アプリにリンクされているクラスターのみがドロップダウン リストに表示されます。リンクされたクラスターを管理するには、 [リンクされたクラスターを管理する](/tidb-cloud/data-service-manage-data-app.md#manage-linked-data-sources)を参照してください。
 
     SQL エディターの上部で、SQL ステートメントを実行するクラスターをドロップダウン リストから選択します。その後、右側のペインの**[スキーマ]**タブで、このクラスターのすべてのデータベースを表示できます。
 
@@ -104,7 +104,7 @@ SQL エディター (**データ サービス**ページの中央のペイン) �
 
     -   **「定義」**セクションでは、クライアントがエンドポイントを呼び出すときにパラメーターが必要かどうか、データ型 ( `STRING` 、 `NUMBER` 、または`BOOLEAN` )、およびパラメーターのデフォルト値を指定できます。 `STRING`型パラメータを使用する場合は、引用符 ( `'`または`"` ) を追加する必要はありません。たとえば、 `foo` `STRING`タイプに対して有効であり、 `"foo"`として処理されますが、 `"foo"`は`"\"foo\""`として処理されます。
     -   **「テスト値」**セクションでは、パラメーターのテスト値を設定できます。テスト値は、SQL ステートメントを実行するとき、またはエンドポイントをテストするときに使用されます。テスト値を設定しない場合は、デフォルト値が使用されます。
-    -   詳細については、 [<a href="/tidb-cloud/data-service-manage-endpoint.md#configure-parameters">パラメータを設定する</a>](/tidb-cloud/data-service-manage-endpoint.md#configure-parameters)を参照してください。
+    -   詳細については、 [パラメータを設定する](/tidb-cloud/data-service-manage-endpoint.md#configure-parameters)を参照してください。
 
 3.  SQL ステートメントを実行します。
 
@@ -122,7 +122,7 @@ SQL エディター (**データ サービス**ページの中央のペイン) �
 
 エンドポイントをテストするには、右上隅の**「テスト」**をクリックするか、 **F5**を押します。
 
-その後、ページの下部にある**[HTTP 応答]**タブで応答を確認できます。応答の詳細については、 [<a href="/tidb-cloud/data-service-manage-endpoint.md#response">エンドポイントの応答</a>](/tidb-cloud/data-service-manage-endpoint.md#response)を参照してください。
+その後、ページの下部にある**[HTTP 応答]**タブで応答を確認できます。応答の詳細については、 [エンドポイントの応答](/tidb-cloud/data-service-manage-endpoint.md#response)を参照してください。
 
 ## ステップ 4. エンドポイントをデプロイ {#step-4-deploy-the-endpoint}
 
@@ -140,9 +140,9 @@ HTTPS リクエストを送信することでエンドポイントを呼び出�
 
 ### 1. APIキーを作成する {#1-create-an-api-key}
 
-1.  [<a href="https://tidbcloud.com/console/data-service">**データサービス**</a>](https://tidbcloud.com/console/data-service)ページの左側のペインで、データ アプリの名前をクリックして詳細を表示します。
+1.  [**データサービス**](https://tidbcloud.com/console/data-service)ページの左側のペインで、データ アプリの名前をクリックして詳細を表示します。
 
-2.  **「API キー」**領域で、 **「API キーの作成」を**クリックします。
+2.  **「認証」**領域で、 **「API キーの作成」を**クリックします。
 
 3.  **[API キーの作成]**ダイアログ ボックスで、説明を入力し、API キーのロールを選択します。
 
@@ -161,7 +161,7 @@ HTTPS リクエストを送信することでエンドポイントを呼び出�
 
 TiDB Cloudは、エンドポイントの呼び出しに役立つコード サンプルを生成します。コード例を取得するには、次の手順を実行します。
 
-1.  [<a href="https://tidbcloud.com/console/data-service">**データサービス**</a>](https://tidbcloud.com/console/data-service)ページの左側のペインで、エンドポイントの名前をクリックし、右上隅にある**[...]** &gt; **[コード例]**をクリックします。 **[コード例]**ダイアログ ボックスが表示されます。
+1.  [**データサービス**](https://tidbcloud.com/console/data-service)ページの左側のペインで、エンドポイントの名前をクリックし、右上隅にある**[...]** &gt; **[コード例]**をクリックします。 **[コード例]**ダイアログ ボックスが表示されます。
 
 2.  ダイアログ ボックスで、エンドポイントの呼び出しに使用するクラスターとデータベースを選択し、コード例をコピーします。
 
@@ -244,11 +244,11 @@ TiDB Cloudは、エンドポイントの呼び出しに役立つコード サン
 }
 ```
 
-応答の詳細については、 [<a href="/tidb-cloud/data-service-manage-endpoint.md#response">エンドポイントの応答</a>](/tidb-cloud/data-service-manage-endpoint.md#response)を参照してください。
+応答の詳細については、 [エンドポイントの応答](/tidb-cloud/data-service-manage-endpoint.md#response)を参照してください。
 
 ## もっと詳しく知る {#learn-more}
 
--   [<a href="/tidb-cloud/data-service-overview.md">データサービスの概要</a>](/tidb-cloud/data-service-overview.md)
--   [<a href="/tidb-cloud/use-chat2query-api.md">Chat2Query API を使ってみる</a>](/tidb-cloud/use-chat2query-api.md)
--   [<a href="/tidb-cloud/data-service-manage-data-app.md">データアプリを管理する</a>](/tidb-cloud/data-service-manage-data-app.md)
--   [<a href="/tidb-cloud/data-service-manage-endpoint.md">エンドポイントの管理</a>](/tidb-cloud/data-service-manage-endpoint.md)
+-   [データサービスの概要](/tidb-cloud/data-service-overview.md)
+-   [Chat2Query API を使ってみる](/tidb-cloud/use-chat2query-api.md)
+-   [データアプリを管理する](/tidb-cloud/data-service-manage-data-app.md)
+-   [エンドポイントの管理](/tidb-cloud/data-service-manage-endpoint.md)

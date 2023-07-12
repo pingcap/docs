@@ -9,7 +9,7 @@ TiDB Cloudの Index Insight (ベータ) 機能は、インデックスを効果�
 
 > **ノート：**
 >
-> Index Insight は現在ベータ版であり、 [<a href="/tidb-cloud/select-cluster-tier.md#tidb-dedicated">TiDB Dedicated</a>](/tidb-cloud/select-cluster-tier.md#tidb-dedicated)クラスターでのみ使用できます。
+> Index Insight は現在ベータ版であり、 [TiDB専用](/tidb-cloud/select-cluster-tier.md#tidb-dedicated)クラスターでのみ使用できます。
 
 ## 序章 {#introduction}
 
@@ -26,11 +26,11 @@ Index Insight 機能には次の利点があります。
 
 ### あなたが始める前に {#before-you-begin}
 
-Index Insight 機能を有効にする前に、TiDB Dedicatedクラスターを作成していることを確認してください。お持ちでない場合は、 [<a href="/tidb-cloud/create-tidb-cluster.md">クラスターを作成する</a>](/tidb-cloud/create-tidb-cluster.md)の手順に従って作成してください。
+Index Insight 機能を有効にする前に、TiDB 専用クラスターを作成していることを確認してください。お持ちでない場合は、 [TiDB 専用クラスターの作成](/tidb-cloud/create-tidb-cluster.md)の手順に従って作成してください。
 
 ### ステップ 1: Index Insight を有効にする {#step-1-enable-index-insight}
 
-1.  [<a href="https://tidbcloud.com">TiDB Cloudコンソール</a>](https://tidbcloud.com)で、TiDB Dedicatedクラスターのクラスター概要ページに移動し、左側のナビゲーション ペインで**[診断]**をクリックします。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、TiDB 専用クラスターのクラスター概要ページに移動し、左側のナビゲーション ペインで**[診断]**をクリックします。
 
 2.  **「Index Insight BETA」**タブをクリックします。 **Index Insight の概要**ページが表示されます。
 
@@ -46,7 +46,7 @@ Index Insight 機能を有効にする前に、TiDB Dedicatedクラスターを�
 
     > **ノート：**
     >
-    > TiDB Dedicatedクラスターに接続するには、 [<a href="/tidb-cloud/connect-to-tidb-cluster.md">TiDB クラスターに接続する</a>](/tidb-cloud/connect-to-tidb-cluster.md)を参照してください。
+    > TiDB 専用クラスターに接続するには、 [TiDB 専用クラスターに接続する](/tidb-cloud/connect-to-tidb-cluster.md)を参照してください。
 
 4.  前の手順で作成した SQL ユーザーのユーザー名とパスワードを入力します。次に、 **「アクティブ化」**をクリックしてアクティブ化プロセスを開始します。
 
@@ -113,7 +113,7 @@ DROP USER 'username';
 
 ### アクティベーションまたはチェックアップ中に<code>invalid user or password</code>メッセージが表示されるのはなぜですか? {#why-does-the-code-invalid-user-or-password-code-message-show-up-during-activation-or-check-up}
 
-`invalid user or password`メッセージは通常、指定した資格情報をシステムが認証できない場合にプロンプトを表示します。この問題は、ユーザー名やパスワードが間違っている、ユーザー アカウントの有効期限が切れているかロックされているなど、さまざまな理由で発生する可能性があります。
+`invalid user or password`メッセージは通常、指定した資格情報をシステムが認証できない場合にプロンプ​​トを表示します。この問題は、ユーザー名やパスワードが間違っている、ユーザー アカウントの有効期限が切れているかロックされているなど、さまざまな理由で発生する可能性があります。
 
 この問題を解決するには、次の手順を実行します。
 
@@ -129,11 +129,11 @@ DROP USER 'username';
     FLUSH PRIVILEGES;
     ```
 
-前述の手順を実行しても問題が解決しない場合は、 [<a href="/tidb-cloud/tidb-cloud-support.md">PingCAP サポート チーム</a>](/tidb-cloud/tidb-cloud-support.md)に連絡することをお勧めします。
+前述の手順を実行しても問題が解決しない場合は、 [PingCAP サポート チーム](/tidb-cloud/tidb-cloud-support.md)に連絡することをお勧めします。
 
 ### アクティベーションまたはチェックアップ中に<code>no sufficient privileges</code>メッセージが表示されるのはなぜですか? {#why-does-the-code-no-sufficient-privileges-code-message-show-up-during-activation-or-check-up}
 
-`no sufficient privileges`メッセージは通常、指定した SQL ユーザーに Index Insight からのインデックス推奨を要求するために必要な権限がない場合にプロンプトを表示します。
+`no sufficient privileges`メッセージは通常、指定した SQL ユーザーに Index Insight からのインデックス推奨を要求するために必要な権限がない場合にプロンプ​​トを表示します。
 
 この問題を解決するには、次の手順を実行します。
 
@@ -149,16 +149,16 @@ DROP USER 'username';
     FLUSH PRIVILEGES;
     ```
 
-前述の手順を実行しても問題が解決しない場合は、 [<a href="/tidb-cloud/tidb-cloud-support.md">PingCAP サポート チーム</a>](/tidb-cloud/tidb-cloud-support.md)に連絡することをお勧めします。
+前述の手順を実行しても問題が解決しない場合は、 [PingCAP サポート チーム](/tidb-cloud/tidb-cloud-support.md)に連絡することをお勧めします。
 
 ### Index Insight の使用中に<code>operations may be too frequent</code>というメッセージが表示されるのはなぜですか? {#why-does-the-code-operations-may-be-too-frequent-code-message-show-up-during-using-index-insight}
 
-`operations may be too frequent`メッセージは通常、Index Insight によって設定されたレートまたは使用制限を超過した場合にプロンプトを表示します。
+`operations may be too frequent`メッセージは通常、Index Insight によって設定されたレートまたは使用制限を超過した場合にプロンプ​​トを表示します。
 
 この問題を解決するには、次の手順を実行します。
 
 1.  操作を遅くしてください: このメッセージが表示された場合は、Index Insight での操作頻度を減らす必要があります。
-2.  サポートに連絡する: 問題が解決しない場合は、 [<a href="/tidb-cloud/tidb-cloud-support.md">PingCAP サポート チーム</a>](/tidb-cloud/tidb-cloud-support.md)に連絡し、エラー メッセージの詳細、アクション、その他の関連情報を提供してください。
+2.  サポートに連絡する: 問題が解決しない場合は、 [PingCAP サポート チーム](/tidb-cloud/tidb-cloud-support.md)に連絡し、エラー メッセージの詳細、アクション、その他の関連情報を提供してください。
 
 ### Index Insight の使用中に<code>internal error</code>メッセージが表示されるのはなぜですか? {#why-does-the-code-internal-error-code-message-show-up-during-using-index-insight}
 
@@ -167,4 +167,4 @@ DROP USER 'username';
 この問題を解決するには、次の手順を実行します。
 
 1.  操作を再試行します: ページを更新するか、操作を再試行してください。エラーは一時的なものである可能性があり、簡単な再試行で解決できます。
-2.  サポートに連絡する: 問題が解決しない場合は、 [<a href="/tidb-cloud/tidb-cloud-support.md">PingCAP サポート チーム</a>](/tidb-cloud/tidb-cloud-support.md)に連絡し、エラー メッセージの詳細、アクション、その他の関連情報を提供してください。
+2.  サポートに連絡する: 問題が解決しない場合は、 [PingCAP サポート チーム](/tidb-cloud/tidb-cloud-support.md)に連絡し、エラー メッセージの詳細、アクション、その他の関連情報を提供してください。

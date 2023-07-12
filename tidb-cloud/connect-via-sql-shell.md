@@ -9,15 +9,15 @@ TiDB Cloud SQL Shell では、 TiDB SQL を試し、TiDB と MySQL の互換性�
 
 > **ノート：**
 >
-> SQL Shell を使用して[<a href="/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta">TiDB Serverlessクラスタ</a>](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta)に接続することはできません。 TiDB Serverless クラスタに接続するには、 [<a href="/tidb-cloud/connect-to-tidb-cluster.md#tidb-serverless">TiDB Serverlessクラスタに接続する</a>](/tidb-cloud/connect-to-tidb-cluster.md#tidb-serverless)を参照してください。
+> SQL Shell を使用して[TiDB サーバーレスクラスター](/tidb-cloud/select-cluster-tier.md#tidb-serverless)に接続することはできません。 TiDB サーバーレス クラスターに接続するには、 [TiDB サーバーレスクラスターに接続する](/tidb-cloud/connect-to-tidb-cluster-serverless.md)を参照してください。
 
 SQL シェルを使用して TiDB クラスターに接続するには、次の手順を実行します。
 
-1.  [<a href="https://tidbcloud.com/">TiDB Cloudコンソール</a>](https://tidbcloud.com/)にログインし、プロジェクトの[<a href="https://tidbcloud.com/console/clusters">**クラスター**</a>](https://tidbcloud.com/console/clusters)ページに移動します。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、プロジェクトの[**クラスター**](https://tidbcloud.com/console/clusters)ページに移動します。
 
     > **ヒント：**
     >
-    > 複数のプロジェクトがある場合は、プロジェクト リストを表示し、左上隅にある ☰ ホバー メニューから別のプロジェクトに切り替えることができます。
+    > 複数のプロジェクトがある場合は、<mdsvgicon name="icon-left-projects">左下隅の をクリックして、別のプロジェクトに切り替えます。</mdsvgicon>
 
 2.  ターゲット クラスターの名前をクリックしてクラスターの概要ページに移動し、右上隅の**[接続]**をクリックします。接続ダイアログが表示されます。
 

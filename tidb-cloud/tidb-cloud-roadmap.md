@@ -19,7 +19,7 @@ TiDB Cloudロードマップには、近い将来に何が提供されるかが�
 
 ## TiDB カーネル {#tidb-kernel}
 
-TiDB カーネルのロードマップについては、 [<a href="https://docs.pingcap.com/tidb/dev/tidb-roadmap">TiDB ロードマップ</a>](https://docs.pingcap.com/tidb/dev/tidb-roadmap)を参照してください。
+TiDB カーネルのロードマップについては、 [TiDB ロードマップ](https://docs.pingcap.com/tidb/dev/tidb-roadmap)を参照してください。
 
 ## 診断とメンテナンス {#diagnosis-and-maintenance}
 

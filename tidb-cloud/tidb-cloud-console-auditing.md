@@ -5,11 +5,11 @@ summary: Learn about the audit logging feature for the TiDB Cloud console.
 
 # コンソール監査ログ {#console-audit-logging}
 
-TiDB Cloudは、コンソール監査ログ機能を提供して、 [<a href="https://tidbcloud.com">TiDB Cloudコンソール</a>](https://tidbcloud.com)上のユーザーのさまざまな動作や操作を追跡するのに役立ちます。たとえば、ユーザーを組織に招待したり、クラスターを作成したりするなどの操作を追跡できます。
+TiDB Cloudは、コンソール監査ログ機能を提供して、 [TiDB Cloudコンソール](https://tidbcloud.com)上のユーザーのさまざまな動作や操作を追跡するのに役立ちます。たとえば、ユーザーを組織に招待したり、クラスターを作成したりするなどの操作を追跡できます。
 
 ## 前提条件 {#prerequisites}
 
--   TiDB Cloudでは、組織の所有者または監査管理者の役割を持っている必要があります。そうしないと、 TiDB Cloudコンソールにコンソール監査ログ関連のオプションが表示されません。 Audit Admin ロールはリクエストがあった場合にのみ表示されるため、Owner ロールを直接使用することをお勧めします。監査管理者の役割を使用する必要がある場合は、 **「?」**をクリックします。 [<a href="https://tidbcloud.com">TiDB Cloudコンソール</a>](https://tidbcloud.com)の右下隅にある**[チャット] を**クリックします。次に、「**説明」**フィールドに「監査管理者の役割に応募する」と入力し、 **「送信」を**クリックします。 TiDB Cloudでの役割の詳細については、 [<a href="/tidb-cloud/manage-user-access.md#manage-role-access">役割のアクセスを管理する</a>](/tidb-cloud/manage-user-access.md#manage-role-access)を参照してください。
+-   TiDB Cloudでは、組織の所有者または監査管理者の役割を持っている必要があります。そうしないと、 TiDB Cloudコンソールにコンソール監査ログ関連のオプションが表示されません。 Audit Admin ロールはリクエストがあった場合にのみ表示されるため、Owner ロールを直接使用することをお勧めします。監査管理者の役割を使用する必要がある場合は、 **「?」**をクリックします。 [TiDB Cloudコンソール](https://tidbcloud.com)の右下隅にある**[チャット] を**クリックします。次に、「**説明」**フィールドに「監査管理者の役割に応募する」と入力し、 **「送信」を**クリックします。 TiDB Cloudでの役割の詳細については、 [役割のアクセスを管理する](/tidb-cloud/manage-user-access.md#manage-role-access)を参照してください。
 -   コンソール監査ログを有効または無効にできるのは、組織に対してのみです。追跡できるのは、組織内のユーザーのアクションのみです。
 -   コンソール監査ログを有効にすると、 TiDB Cloudコンソールのすべてのイベント タイプが監査されるようになり、一部のイベント タイプのみを監査するように指定することはできません。
 
@@ -17,15 +17,15 @@ TiDB Cloudは、コンソール監査ログ機能を提供して、 [<a href="ht
 
 コンソール監査ログ機能はデフォルトでは無効になっています。これを有効にするには、次の手順を実行します。
 
-1.  [<a href="https://tidbcloud.com/">TiDB Cloudコンソール</a>](https://tidbcloud.com/)の右上隅にある をクリックします。<mdsvgicon name="icon-top-organization"> **[組織]** &gt; **[コンソール監査ログ]** 。</mdsvgicon>
-2.  右上隅の**「設定」**をクリックし、コンソール監査ログを有効にします。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/)の左下隅にある をクリックします。<mdsvgicon name="icon-top-organization">をクリックし、 **「コンソール監査ログ」**をクリックします。</mdsvgicon>
+2.  右上隅の**[設定]**をクリックし、コンソール監査ログを有効にします。
 
 ## コンソール監査ログを無効にする {#disable-console-audit-logging}
 
 コンソール監査ログを無効にするには、次の手順を実行します。
 
-1.  [<a href="https://tidbcloud.com/">TiDB Cloudコンソール</a>](https://tidbcloud.com/)の右上隅にある をクリックします。<mdsvgicon name="icon-top-organization"> **[組織]** &gt; **[コンソール監査ログ]** 。</mdsvgicon>
-2.  右上隅の**[設定]**をクリックし、コンソール監査ログを無効にします。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/)の左下隅にある をクリックします。<mdsvgicon name="icon-top-organization">をクリックし、 **「コンソール監査ログ」**をクリックします。</mdsvgicon>
+2.  右上隅にある**[設定]**をクリックし、コンソール監査ログを無効にします。
 
 ## コンソール監査ログをビュー {#view-console-audit-logs}
 
@@ -36,7 +36,7 @@ TiDB Cloudは、コンソール監査ログ機能を提供して、 [<a href="ht
 > -   組織が初めてコンソール監査ログを有効にする場合、コンソール監査ログは空です。監査されたイベントが実行されると、対応するログが表示されます。
 > -   コンソール監査ログが無効になってから 90 日以上経過している場合、ログは表示されません。
 
-1.  [<a href="https://tidbcloud.com/">TiDB Cloudコンソール</a>](https://tidbcloud.com/)の右上隅にある をクリックします。<mdsvgicon name="icon-top-organization"> **[組織]** &gt; **[コンソール監査ログ]** 。</mdsvgicon>
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/)の左下隅にある をクリックします。<mdsvgicon name="icon-top-organization">をクリックし、 **「コンソール監査ログ」**をクリックします。</mdsvgicon>
 2.  監査ログの特定の部分を取得するには、イベント タイプ、操作ステータス、および時間範囲をフィルタリングできます。
 3.  (オプション) さらにフィールドをフィルタするには、 **[詳細フィルタ]**をクリックし、さらにフィルタを追加して、 **[適用]**をクリックします。
 4.  ログの行をクリックすると、右側のペインに詳細情報が表示されます。
@@ -45,7 +45,7 @@ TiDB Cloudは、コンソール監査ログ機能を提供して、 [<a href="ht
 
 組織のコンソール監査ログをエクスポートするには、次の手順を実行します。
 
-1.  [<a href="https://tidbcloud.com/">TiDB Cloudコンソール</a>](https://tidbcloud.com/)の右上隅にある をクリックします。<mdsvgicon name="icon-top-organization"> **[組織]** &gt; **[コンソール監査ログ]** 。</mdsvgicon>
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/)の左下隅にある をクリックします。<mdsvgicon name="icon-top-organization">をクリックし、 **「コンソール監査ログ」**をクリックします。</mdsvgicon>
 2.  (オプション) コンソール監査ログの特定の部分をエクスポートする必要がある場合は、さまざまな条件でフィルタリングできます。それ以外の場合は、この手順をスキップしてください。
 3.  **[エクスポート]**をクリックし、JSON または CSV で目的のエクスポート形式を選択します。
 
@@ -147,7 +147,7 @@ TiDB Cloudは、コンソール監査ログ機能を提供して、 [<a href="ht
 | バインドサポートプラン                  | サポートプランをバインドする                         |
 | キャンセルサポートプラン                 | サポートプランをキャンセルする                        |
 | 組織名を更新する                     | 組織名を更新します                              |
-| 支出制限の設定                      | TiDB Serverlessクラスタの使用制限を編集する             |
+| 支出制限の設定                      | TiDB サーバーレスクラスターの使用量制限を編集する            |
 | メンテナンスウィンドウの更新               | メンテナンスウィンドウの開始時刻を変更する                  |
 | メンテナンスタスクの延期                 | メンテナンスタスクを延期する                         |
 

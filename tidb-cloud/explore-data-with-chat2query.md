@@ -5,15 +5,16 @@ summary: Learn how to use Chat2Query, an AI-powered SQL editor in the TiDB Cloud
 
 # AI を活用した Chat2Query (ベータ版) でデータを探索する {#explore-your-data-with-ai-powered-chat2query-beta}
 
-TiDB CloudはAI を活用しています。 [<a href="https://tidbcloud.com/">TiDB Cloudコンソール</a>](https://tidbcloud.com/)の AI を活用した SQL エディターである Chat2Query (ベータ版) を使用すると、データの価値を最大化できます。
+TiDB CloudはAI を活用しています。 [TiDB Cloudコンソール](https://tidbcloud.com/)の AI を活用した SQL エディターである Chat2Query (ベータ版) を使用すると、データの価値を最大化できます。
 
-Chat2Query では、 `--`入力してから AI に SQL クエリを自動的に生成させる指示を入力するか、SQL クエリを手動で作成して、ターミナルを使用せずにデータベースに対して SQL クエリを実行することができます。クエリ結果をテーブルで直感的に見つけたり、クエリログを簡単に確認したりできます。
-
-TiDB Cloud は、 RESTful インターフェイスである Chat2Query API も提供します。詳細については、 [<a href="/tidb-cloud/use-chat2query-api.md">Chat2Query API を使ってみる</a>](/tidb-cloud/use-chat2query-api.md)を参照してください。
+Chat2Query では、 `--`を入力してから AI に SQL クエリを自動的に生成させる指示を入力するか、SQL クエリを手動で作成して、ターミナルを使用せずにデータベースに対して SQL クエリを実行することができます。クエリ結果をテーブルで直感的に見つけたり、クエリログを簡単に確認したりできます。
 
 > **ノート：**
 >
-> Chat2Query は[<a href="/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta">TiDB Serverless</a>](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta)クラスターでのみ使用できます。
+> Chat2Query は、AWS でホストされている v6.5.0 以降の TiDB クラスターでサポートされています。
+>
+> -   [TiDB サーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-serverless)クラスターの場合、Chat2Query はデフォルトで使用可能です。
+> -   [TiDB専用](/tidb-cloud/select-cluster-tier.md#tidb-dedicated)クラスターの場合、Chat2Query はリクエストに応じてのみ利用可能です。 TiDB 専用クラスターで Chat2Query を使用するには、 [TiDB Cloudのサポート](/tidb-cloud/tidb-cloud-support.md)にお問い合わせください。
 
 ## ユースケース {#use-cases}
 
@@ -25,21 +26,30 @@ Chat2Query の推奨される使用例は次のとおりです。
 
 ## 制限 {#limitation}
 
-AI によって生成された SQL クエリは 100% 正確ではないため、さらに調整が必要な場合があります。
+-   AI によって生成された SQL クエリは 100% 正確ではないため、さらに調整が必要な場合があります。
+-   [Chat2Query API](/tidb-cloud/use-chat2query-api.md) [TiDB サーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-serverless)クラスターで使用できます。 [TiDB専用](/tidb-cloud/select-cluster-tier.md#tidb-dedicated)クラスターで Chat2Query API を使用するには、 [TiDB Cloudのサポート](/tidb-cloud/tidb-cloud-support.md)にお問い合わせください。
 
 ## Chat2Query にアクセスする {#access-chat2query}
 
-1.  プロジェクトの[<a href="https://tidbcloud.com/console/clusters">**クラスター**</a>](https://tidbcloud.com/console/clusters)ページに移動します。
+1.  プロジェクトの[**クラスター**](https://tidbcloud.com/console/clusters)ページに移動します。
 
     > **ヒント：**
     >
-    > 複数のプロジェクトがある場合は、プロジェクト リストを表示し、左上隅にある ☰ ホバー メニューから別のプロジェクトに切り替えることができます。
+    > 複数のプロジェクトがある場合は、<mdsvgicon name="icon-left-projects">左下隅の をクリックして、別のプロジェクトに切り替えます。</mdsvgicon>
 
 2.  クラスター名をクリックし、左側のナビゲーション ウィンドウで**[Chat2Query]**をクリックします。
 
+    > **ノート：**
+    >
+    > 次の場合、 **Chat2Query**エントリは灰色で表示され、クリックできません。
+    >
+    > -   Dedicated Tierクラスターは v6.5.0 より前です。 Chat2Query を使用するには、クラスターをアップグレードするために[TiDB Cloudのサポート](/tidb-cloud/tidb-cloud-support.md)を契約する必要があります。
+    > -   Dedicated Tierクラスターが作成されたばかりで、Chat2Query の実行環境はまだ準備中です。この場合、数分待つと Chat2Query が使用可能になります。
+    > -   Dedicated Tierクラスターは[一時停止した](/tidb-cloud/pause-or-resume-tidb-cluster.md)です。
+
 ## AI による SQL クエリの生成を有効または無効にする {#enable-or-disable-ai-to-generate-sql-queries}
 
-PingCAP は、ユーザーのデータのプライバシーとセキュリティを最優先事項としています。 Chat2Query の AI 機能は、データ自体ではなく、データベース スキーマにアクセスして SQL クエリを生成することのみが必要です。詳細については、 [<a href="https://www.pingcap.com/privacy-policy/privacy-chat2query">Chat2Query のプライバシーに関するFAQ</a>](https://www.pingcap.com/privacy-policy/privacy-chat2query)を参照してください。
+PingCAP は、ユーザーのデータのプライバシーとセキュリティを最優先事項としています。 Chat2Query の AI 機能は、データ自体ではなく、データベース スキーマにアクセスして SQL クエリを生成することのみが必要です。詳細については、 [Chat2Query のプライバシーに関するFAQ](https://www.pingcap.com/privacy-policy/privacy-chat2query)を参照してください。
 
 Chat2Query に初めてアクセスすると、PingCAP と OpenAI がコード スニペットを使用してサービスを調査および改善することを許可するかどうかを尋ねるダイアログが表示されます。
 
@@ -49,11 +59,11 @@ Chat2Query に初めてアクセスすると、PingCAP と OpenAI がコード �
 初回アクセス後も、次のように AI 設定を変更できます。
 
 -   AI を有効にするには、Chat2Query の右上隅にある**[データ探索のための AI パワーを有効にする]**をクリックします。
--   AI を無効にするには、<mdsvgicon name="icon-top-account-settings"> [<a href="https://tidbcloud.com/">TiDB Cloudコンソール</a>](https://tidbcloud.com/)の右上隅にある**[アカウント] を**クリックし、 **[アカウント設定]**をクリックし、 **[プライバシー]**タブをクリックして、 **AI を活用したデータ探索**オプションを無効にします。</mdsvgicon>
+-   AI を無効にするには、<mdsvgicon name="icon-top-account-settings"> [TiDB Cloudコンソール](https://tidbcloud.com/)の左下隅にある**[アカウント設定]**をクリックし、 **[プライバシー]**タブをクリックして、 **AI を利用したデータ探索**オプションを無効にします。</mdsvgicon>
 
 ## SQL クエリを作成して実行する {#write-and-run-sql-queries}
 
-Chat2Query では、事前に構築されたサンプル データセットまたは独自のデータセットを使用して SQL クエリを作成および実行できます。
+Chat2Query では、独自のデータセットを使用して SQL クエリを作成および実行できます。
 
 1.  SQL クエリを作成します。
 
@@ -103,17 +113,21 @@ Chat2Query では、SQL クエリをさまざまな SQL ファイルに保存し
 
 ## SQL ファイルからエンドポイントを生成する {#generate-an-endpoint-from-a-sql-file}
 
-TiDB Cloud は、カスタム API エンドポイントを使用して HTTPS リクエスト経由でTiDB Cloudデータにアクセスできるようにする[<a href="/tidb-cloud/data-service-overview.md">データサービス（ベータ版）</a>](/tidb-cloud/data-service-overview.md)機能を提供します。 Chat2Query では、次の手順を実行して、SQL ファイルから Data Service (ベータ版) のエンドポイントを生成できます。
+TiDB クラスターの場合、 TiDB Cloud は、カスタム API エンドポイントを使用して HTTPS リクエスト経由でTiDB Cloudデータにアクセスできるようにする[データサービス（ベータ版）](/tidb-cloud/data-service-overview.md)機能を提供します。 Chat2Query では、次の手順を実行して SQL ファイルから Data Service (ベータ版) のエンドポイントを生成できます。
 
 1.  ファイル名の上にカーソルを移動し、ファイル名の横にある**[...]**をクリックして、 **[エンドポイントの生成]**を選択します。
 2.  **[エンドポイントの生成]**ダイアログ ボックスで、エンドポイントを生成するデータ アプリを選択し、エンドポイント名を入力します。
 3.  **「生成」**をクリックします。エンドポイントが生成され、その詳細ページが表示されます。
 
-詳細については、 [<a href="/tidb-cloud/data-service-manage-endpoint.md">エンドポイントを管理する</a>](/tidb-cloud/data-service-manage-endpoint.md)を参照してください。
+詳細については、 [エンドポイントを管理する](/tidb-cloud/data-service-manage-endpoint.md)を参照してください。
 
 ## Chat2Query 設定を管理する {#manage-chat2query-settings}
 
-デフォルトでは、Chat2Query はクエリ結果の最大行数を 500 に制限し、システム データベース スキーマを表示せず、 **[スキーマ]**タブの[<a href="/tidb-cloud/use-chat2query-api.md">Chat2Query API</a>](/tidb-cloud/use-chat2query-api.md)を無効にします。
+Chat2Query では、次の設定を変更できます。
+
+-   クエリ結果の最大行数
+-   **[スキーマ]**タブにシステム データベース スキーマを表示するかどうか
+-   有効にするかどうか[Chat2Query API](/tidb-cloud/use-chat2query-api.md)
 
 設定を変更するには、次の手順を実行します。
 

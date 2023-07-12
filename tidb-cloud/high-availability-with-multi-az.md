@@ -15,8 +15,8 @@ TiDB Cloudクラスターは、TiDB ノード、TiKV ノード、 TiFlashノー�
 
 -   **TiKVノード**
 
-    [<a href="https://docs.pingcap.com/tidb/stable/tikv-overview">TiKV</a>](https://docs.pingcap.com/tidb/stable/tikv-overview)は、水平スケーラビリティを備えたTiDB Cloudクラスターの行ベースのstorageレイヤーです。 TiDB Cloudでは、クラスターの TiKV ノードの最小数は 3 です。TiDBTiDB Cloudは、耐久性と高可用性を実現するために、選択したリージョン内のすべての可用性ゾーン (少なくとも 3 つ) に TiKV ノードを均等にデプロイします。一般的な 3 レプリカのセットアップでは、データはすべてのアベイラビリティ ゾーンの TiKV ノード間で均等に分散され、各 TiKV ノードのディスクに永続化されます。
+    [TiKV](https://docs.pingcap.com/tidb/stable/tikv-overview)は、水平スケーラビリティを備えたTiDB Cloudクラスターの行ベースのstorageレイヤーです。 TiDB Cloudでは、クラスターの TiKV ノードの最小数は 3 です。TiDBTiDB Cloudは、耐久性と高可用性を実現するために、選択したリージョン内のすべての可用性ゾーン (少なくとも 3 つ) に TiKV ノードを均等にデプロイします。一般的な 3 レプリカのセットアップでは、データはすべてのアベイラビリティ ゾーンの TiKV ノード間で均等に分散され、各 TiKV ノードのディスクに永続化されます。
 
 -   **TiFlashノード**
 
-    TiKV の列指向storage拡張機能である[<a href="https://docs.pingcap.com/tidb/stable/tiflash-overview">TiFlash</a>](https://docs.pingcap.com/tidb/stable/tiflash-overview)は、TiDB を本質的にハイブリッド トランザクション/分析処理 (HTAP) データベースにする重要なコンポーネントです。 TiFlashでは、柱状レプリカはRaft Learnerコンセンサス アルゴリズムに従って非同期的に複製されます。 TiDB Cloud は、 TiFlashノードをリージョン内のさまざまなアベイラビリティ ゾーンに均等にデプロイします。本番環境での高可用性を実現するために、各TiDB Cloudクラスターに少なくとも 2 つのTiFlashノードを構成し、データの少なくとも 2 つのレプリカを作成することをお勧めします。
+    TiKV の列指向storage拡張機能である[TiFlash](https://docs.pingcap.com/tidb/stable/tiflash-overview)は、TiDB を本質的にハイブリッド トランザクション/分析処理 (HTAP) データベースにする重要なコンポーネントです。 TiFlashでは、柱状レプリカはRaft Learnerコンセンサス アルゴリズムに従って非同期的に複製されます。 TiDB Cloud は、 TiFlashノードをリージョン内のさまざまなアベイラビリティ ゾーンに均等にデプロイします。本番環境での高可用性を実現するために、各TiDB Cloudクラスターに少なくとも 2 つのTiFlashノードを構成し、データの少なくとも 2 つのレプリカを作成することをお勧めします。

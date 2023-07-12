@@ -11,21 +11,21 @@ Chat2Query API には HTTPS 経由でのみアクセスできるため、ネッ�
 
 > **ノート：**
 >
-> Chat2Query API は[<a href="/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta">TiDB Serverless</a>](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta)クラスターでのみ使用できます。
+> Chat2Query APIは[TiDB サーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-serverless)クラスタで利用可能です。 [TiDB専用](/tidb-cloud/select-cluster-tier.md#tidb-dedicated)クラスターで Chat2Query API を使用するには、 [TiDB Cloudのサポート](/tidb-cloud/tidb-cloud-support.md)にお問い合わせください。
 
 ## あなたが始める前に {#before-you-begin}
 
-Chat2Query API を使用する前に、 [<a href="/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta">TiDB Serverless</a>](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta)クラスターを作成し、 [<a href="/tidb-cloud/explore-data-with-chat2query.md">SQLクエリを生成するAI</a>](/tidb-cloud/explore-data-with-chat2query.md)有効にしていることを確認してください。 TiDB Serverless クラスタがない場合は、 [<a href="/tidb-cloud/create-tidb-cluster.md">クラスターを作成する</a>](/tidb-cloud/create-tidb-cluster.md)の手順に従って作成します。
+Chat2Query API を使用する前に、TiDB クラスターを作成し、 [SQLクエリを生成するAI](/tidb-cloud/explore-data-with-chat2query.md)有効にしていることを確認してください。 TiDB クラスターがない場合は、 [TiDB サーバーレスクラスターを作成する](/tidb-cloud/create-tidb-cluster-serverless.md)または[TiDB 専用クラスターの作成](/tidb-cloud/create-tidb-cluster.md)の手順に従って作成します。
 
 ## ステップ 1. Chat2Query API を有効にする {#step-1-enable-the-chat2query-api}
 
 Chat2Query API を有効にするには、次の手順を実行します。
 
-1.  プロジェクトの[<a href="https://tidbcloud.com/console/clusters">**クラスター**</a>](https://tidbcloud.com/console/clusters)ページに移動します。
+1.  プロジェクトの[**クラスター**](https://tidbcloud.com/console/clusters)ページに移動します。
 
     > **ヒント：**
     >
-    > 複数のプロジェクトがある場合は、プロジェクト リストを表示し、左上隅にある ☰ ホバー メニューから別のプロジェクトに切り替えることができます。
+    > 複数のプロジェクトがある場合は、<mdsvgicon name="icon-left-projects">左下隅の をクリックして、別のプロジェクトに切り替えます。</mdsvgicon>
 
 2.  クラスター名をクリックし、左側のナビゲーション ウィンドウで**[Chat2Query]**をクリックします。
 
@@ -35,19 +35,19 @@ Chat2Query API を有効にするには、次の手順を実行します。
 
     > **ノート：**
     >
-    > 1 つの TiDB Serverless クラスタで DataAPI を有効にすると、同じプロジェクト内のすべての TiDB Serverless クラスタで Chat2Query API を使用できるようになります。
+    > 1 つの TiDB クラスターで DataAPI を有効にすると、同じプロジェクト内のすべての TiDB クラスターで Chat2Query API を使用できるようになります。
 
 5.  メッセージ内の**「Data Service」**リンクをクリックして、Chat2Query API にアクセスします。
 
-    **Chat2Query System** [<a href="/tidb-cloud/tidb-cloud-glossary.md#data-app">データアプリ</a>](/tidb-cloud/tidb-cloud-glossary.md#data-app)とその**Chat2Data** [<a href="/tidb-cloud/tidb-cloud-glossary.md#endpoint">終点</a>](/tidb-cloud/tidb-cloud-glossary.md#endpoint)左側のペインに表示されていることがわかります。
+    **Chat2Query System** [データアプリ](/tidb-cloud/tidb-cloud-glossary.md#data-app)とその**Chat2Data** [終点](/tidb-cloud/tidb-cloud-glossary.md#endpoint)左側のペインに表示されていることがわかります。
 
 ## ステップ 2. API キーを作成する {#step-2-create-an-api-key}
 
 エンドポイントを呼び出す前に、API キーを作成する必要があります。 Chat2Query データ アプリの API キーを作成するには、次の手順を実行します。
 
-1.  [<a href="https://tidbcloud.com/console/data-service">**データサービス**</a>](https://tidbcloud.com/console/data-service)の左側のペインで、 **Chat2Query システム**の名前をクリックして詳細を表示します。
+1.  [**データサービス**](https://tidbcloud.com/console/data-service)の左側のペインで、 **Chat2Query システム**の名前をクリックして詳細を表示します。
 
-2.  **「API キー」**領域で、 **「API キーの作成」を**クリックします。
+2.  **「認証」**領域で、 **「API キーの作成」を**クリックします。
 
 3.  **[API キーの作成]**ダイアログ ボックスで、説明を入力し、API キーのロールを選択します。
 
@@ -64,7 +64,7 @@ Chat2Query API を有効にするには、次の手順を実行します。
 
 ## ステップ 3. Chat2Data エンドポイントを呼び出す {#step-3-call-the-chat2data-endpoint}
 
-[<a href="https://tidbcloud.com/console/data-service">**データサービス**</a>](https://tidbcloud.com/console/data-service)ページの左側のペインで、 **[Chat2Query]** &gt; **[/chat2data]**をクリックしてエンドポイントの詳細を表示します。 Chat2Data の**プロパティが**表示されます。
+[**データサービス**](https://tidbcloud.com/console/data-service)ページの左側のペインで、 **[Chat2Query]** &gt; **[/chat2data]**をクリックしてエンドポイントの詳細を表示します。 Chat2Data の**プロパティが**表示されます。
 
 -   **エンドポイント パス**: (読み取り専用) Chat2Data エンドポイントのパス`/chat2data` 。
 
@@ -97,7 +97,7 @@ TiDB Cloudは、エンドポイントの呼び出しに役立つコード サン
 
 > **ノート：**
 >
-> 各 Chat2Query データ アプリには、1 日あたり 100 リクエストのレート制限があります。レート制限を超えると、API は`429`エラーを返します。さらに割り当てが必要な場合は、サポート チームに[<a href="https://support.pingcap.com/hc/en-us/requests/new?ticket_form_id=7800003722519">リクエストを送信する</a>](https://support.pingcap.com/hc/en-us/requests/new?ticket_form_id=7800003722519)お問い合わせください。
+> 各 Chat2Query データ アプリには、1 日あたり 100 リクエストのレート制限があります。レート制限を超えると、API は`429`エラーを返します。さらに割り当てが必要な場合は、サポート チームに[リクエストを送信する](https://support.pingcap.com/hc/en-us/requests/new?ticket_form_id=7800003722519)お問い合わせください。
 
 次のコード例は、 `sample_data.github_events`テーブルから最も人気のある GitHub リポジトリを検索するために使用されます。
 
@@ -183,5 +183,5 @@ API 呼び出しが成功しなかった場合は、 `200`以外のステータ�
 
 ## もっと詳しく知る {#learn-more}
 
--   [<a href="/tidb-cloud/data-service-api-key.md">APIキーを管理する</a>](/tidb-cloud/data-service-api-key.md)
--   [<a href="/tidb-cloud/data-service-response-and-status-code.md">データサービスのレスポンスコードとステータスコード</a>](/tidb-cloud/data-service-response-and-status-code.md)
+-   [APIキーを管理する](/tidb-cloud/data-service-api-key.md)
+-   [データサービスのレスポンスコードとステータスコード](/tidb-cloud/data-service-response-and-status-code.md)

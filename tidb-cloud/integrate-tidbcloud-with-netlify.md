@@ -5,7 +5,7 @@ summary: Learn how to connect your TiDB Cloud clusters to Netlify projects.
 
 # TiDB Cloudと Netlify を統合する {#integrate-tidb-cloud-with-netlify}
 
-[<a href="https://netlify.com/">ネットリファイ</a>](https://netlify.com/)は、最新の Web プロジェクトを自動化するためのオールインワン プラットフォームです。ホスティング インフラストラクチャ、継続的インテグレーション、デプロイ パイプラインを単一のワークフローに置き換え、プロジェクトの成長に合わせてサーバーレス関数、ユーザー認証、フォーム処理などの動的な機能を統合します。
+[ネットリファイ](https://netlify.com/)は、最新の Web プロジェクトを自動化するためのオールインワン プラットフォームです。ホスティング インフラストラクチャ、継続的インテグレーション、デプロイ パイプラインを単一のワークフローに置き換え、プロジェクトの成長に合わせてサーバーレス関数、ユーザー認証、フォーム処理などの動的な機能を統合します。
 
 このドキュメントでは、 TiDB Cloud をデータベース バックエンドとして使用して Netlify にフルスタック アプリをデプロイする方法について説明します。
 
@@ -17,20 +17,23 @@ summary: Learn how to connect your TiDB Cloud clusters to Netlify projects.
 
 Netlify アカウントと CLI が必要です。何も持っていない場合は、次のリンクを参照して作成してください。
 
--   [<a href="https://app.netlify.com/signup">Netlify アカウントにサインアップする</a>](https://app.netlify.com/signup) 。
--   [<a href="https://docs.netlify.com/cli/get-started/">Netlify CLIを入手する</a>](https://docs.netlify.com/cli/get-started/) 。
+-   [Netlify アカウントにサインアップする](https://app.netlify.com/signup) 。
+-   [Netlify CLIを入手する](https://docs.netlify.com/cli/get-started/) 。
 
 ### TiDB Cloudアカウントと TiDB クラスター {#a-tidb-cloud-account-and-a-tidb-cluster}
 
-TiDB Cloudにアカウントとクラスターが必要です。お持ちでない場合は[<a href="/tidb-cloud/create-tidb-cluster.md">TiDB クラスターを作成する</a>](/tidb-cloud/create-tidb-cluster.md)を参照してください。
+TiDB Cloudにアカウントとクラスターが必要です。何も持っていない場合は、以下を参照して作成してください。
+
+-   [TiDB サーバーレスクラスターを作成する](/tidb-cloud/create-tidb-cluster-serverless.md)
+-   [TiDB 専用クラスターの作成](/tidb-cloud/create-tidb-cluster.md)
 
 1 つのTiDB Cloudクラスターは複数の Netlify サイトに接続できます。
 
 ### TiDB Cloudのトラフィック フィルターに許可されるすべての IP アドレス {#all-ip-addresses-allowed-for-traffic-filter-in-tidb-cloud}
 
-TiDB Dedicatedクラスターの場合、クラスターのトラフィック フィルターですべての IP アドレス ( `0.0.0.0/0`に設定) の接続が許可されていることを確認してください。これは、Netlify デプロイメントでは動的 IP アドレスが使用されるためです。
+TiDB 専用クラスターの場合、クラスターのトラフィック フィルターですべての IP アドレス ( `0.0.0.0/0`に設定) の接続が許可されていることを確認してください。これは、Netlify デプロイメントでは動的 IP アドレスが使用されるためです。
 
-TiDB Serverless クラスタでは、デフォルトですべての IP アドレスの接続が許可されるため、トラフィック フィルターを構成する必要はありません。
+TiDB サーバーレス クラスターでは、デフォルトですべての IP アドレスの接続が許可されるため、トラフィック フィルターを構成する必要はありません。
 
 ## ステップ 1. サンプル プロジェクトと接続文字列を取得する {#step-1-get-the-example-project-and-the-connection-string}
 
@@ -38,7 +41,7 @@ TiDB Serverless クラスタでは、デフォルトですべての IP アドレ
 
 ### サンプル プロジェクトをフォークし、自分のスペースにクローン作成します。 {#fork-the-example-project-and-clone-it-to-your-own-space}
 
-1.  [<a href="https://github.com/tidbcloud/nextjs-prisma-example">Next.js と Prisma を使用したフルスタックの例</a>](https://github.com/tidbcloud/nextjs-prisma-example)リポジトリを自分の GitHub リポジトリにフォークします。
+1.  [Next.js と Prisma を使用したフルスタックの例](https://github.com/tidbcloud/nextjs-prisma-example)リポジトリを自分の GitHub リポジトリにフォークします。
 
 2.  フォークされたリポジトリのクローンを自分のスペースに作成します。
 
@@ -49,16 +52,16 @@ TiDB Serverless クラスタでは、デフォルトですべての IP アドレ
 
 ### TiDB Cloud接続文字列を取得する {#get-the-tidb-cloud-connection-string}
 
-TiDB Serverless クラスタの場合、接続文字列は[<a href="/tidb-cloud/cli-reference.md">TiDB CloudCLI</a>](/tidb-cloud/cli-reference.md)または[<a href="https://tidbcloud.com/">TiDB Cloudコンソール</a>](https://tidbcloud.com/)から取得できます。
+TiDB サーバーレス クラスターの場合、接続文字列は[TiDB CloudCLI](/tidb-cloud/cli-reference.md)または[TiDB Cloudコンソール](https://tidbcloud.com/)から取得できます。
 
-TiDB Dedicatedクラスターの場合、接続文字列はTiDB Cloudコンソールからのみ取得できます。
+TiDB 専用クラスターの場合、接続文字列はTiDB Cloudコンソールからのみ取得できます。
 
 <SimpleTab>
 <div label="TiDB Cloud CLI">
 
 > **ヒント：**
 >
-> Cloud CLI をインストールしていない場合は、次の手順を実行する前に、 [<a href="/tidb-cloud/get-started-with-cli.md">TiDB CloudCLI クイック スタート</a>](/tidb-cloud/get-started-with-cli.md)のクイック インストールを参照してください。
+> Cloud CLI をインストールしていない場合は、次の手順を実行する前に、 [TiDB CloudCLI クイック スタート](/tidb-cloud/get-started-with-cli.md)のクイック インストールを参照してください。
 
 1.  対話型モードでクラスターの接続文字列を取得します。
 
@@ -96,7 +99,7 @@ TiDB Dedicatedクラスターの場合、接続文字列はTiDB Cloudコンソ�
 </div>
 <div label="TiDB Cloud console">
 
-1.  [<a href="https://tidbcloud.com/">TiDB Cloudコンソール</a>](https://tidbcloud.com/)に移動し、 [<a href="/tidb-cloud/connect-via-standard-connection.md">**接続**</a>](/tidb-cloud/connect-via-standard-connection.md)ダイアログの接続文字列から次の接続パラメータを取得します。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/)では、プロジェクトの[**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動し、右上隅の**[接続]**をクリックします。表示されたダイアログで、接続文字列から次の接続パラメータを取得できます。
 
     -   `${host}`
     -   `${port}`
@@ -174,7 +177,7 @@ TiDB Dedicatedクラスターの場合、接続文字列はTiDB Cloudコンソ�
     netlify open   Open the Netlify admin URL of your site
     ```
 
-3.  環境変数を設定します。自分のスペースおよび Netlify スペースからTiDB Cloudクラスターに接続するには、 [<a href="#step-1-get-the-example-project-and-the-connection-string">ステップ1</a>](#step-1-get-the-example-project-and-the-connection-string)から取得した接続文字列として`DATABASE_URL`を設定する必要があります。
+3.  環境変数を設定します。自分のスペースおよび Netlify スペースからTiDB Cloudクラスターに接続するには、 [ステップ1](#step-1-get-the-example-project-and-the-connection-string)から取得した接続文字列として`DATABASE_URL`を設定する必要があります。
 
     ```shell
     # set the environment variable for your own space

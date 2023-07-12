@@ -1,42 +1,44 @@
 ---
-title: Manage Spend Limit for TiDB Serverless clusters
-summary: Learn how to manage spend limit for your TiDB Serverless clusters.
+title: Manage Spending Limit for TiDB Serverless clusters
+summary: Learn how to manage spending limit for your TiDB Serverless clusters.
 ---
 
-# TiDB Serverless クラスタの支出制限を管理する {#manage-spend-limit-for-tidb-serverless-clusters}
+# TiDB サーバーレス クラスターの支出制限を管理する {#manage-spending-limit-for-tidb-serverless-clusters}
 
 > **ノート：**
 >
-> 使用制限は、TiDB Serverless クラスタにのみ適用されます。
+> 支出制限は、TiDB サーバーレス クラスターにのみ適用されます。
 
-支出制限とは、1 か月に特定のワークロードに費やすことができる最大金額を指します。これは、TiDB Serverless クラスタの予算を設定できるコスト管理メカニズムです。
+支出制限とは、1 か月に特定のワークロードに費やすことができる最大金額を指します。これは、TiDB サーバーレス クラスターの予算を設定できるコスト管理メカニズムです。
 
-TiDB Cloudの組織ごとに、デフォルトで最大 5 つの TiDB Serverless クラスタを作成できます。さらにTiDB Serverless クラスターを作成するには、クレジット カードを追加し、使用量の制限を設定する必要があります。ただし、さらに作成する前に以前のクラスターの一部を削除した場合でも、クレジット カードがなくても新しいクラスターを作成できます。
+TiDB Cloudの組織ごとに、デフォルトで最大 5 つの TiDB サーバーレス クラスターを作成できます。さらに多くの TiDB サーバーレス クラスターを作成するには、クレジット カードを追加し、使用量の制限を設定する必要があります。ただし、さらに作成する前に以前のクラスターの一部を削除した場合でも、クレジット カードがなくても新しいクラスターを作成できます。
 
 ## 使用量割り当て {#usage-quota}
 
-組織内の最初の 5 つの TiDB Serverless クラスタに対して、 TiDB Cloud は各クラスターに次のように無料の使用量クォータを提供します。
+組織内の最初の 5 つの TiDB サーバーレス クラスターに対して、 TiDB Cloud は各クラスターに次のように無料の使用量割り当てを提供します。
 
--   行storage: 5 GiB
--   [<a href="/tidb-cloud/tidb-cloud-glossary.md#request-unit">リクエストユニット (RU)</a>](/tidb-cloud/tidb-cloud-glossary.md#request-unit) : 月あたり 5,000 万 RU
+-   行ベースのstorage: 5 GiB
+-   [リクエストユニット (RU)](/tidb-cloud/tidb-cloud-glossary.md#request-unit) : 月あたり 5,000 万 RU
 
-クラスターの無料クォータに達すると、このクラスターでの読み取りおよび書き込み操作は、新しい月の初めに使用量が[<a href="#update-spend-limit">割り当てを増やす</a>](#update-spend-limit)されるまでスロットルされます。たとえば、クラスターのstorageが 5 GiB を超えると、単一トランザクションの最大サイズ制限が 10 MiB から 1 MiB に減ります。
+クラスターの無料クォータに達すると、このクラスターでの読み取りおよび書き込み操作は、新しい月の初めに使用量が[割り当てを増やす](#update-spending-limit)されるまでスロットルされます。たとえば、クラスターのstorageが 5 GiB を超えると、単一トランザクションの最大サイズ制限が 10 MiB から 1 MiB に減ります。
 
-さまざまなリソース (読み取り、書き込み、SQL CPU、ネットワーク下りなど) の RU 消費量、料金の詳細、および調整された情報の詳細については、 [<a href="https://www.pingcap.com/tidb-cloud-serverless-pricing-details">TiDB Serverlessの料金詳細</a>](https://www.pingcap.com/tidb-cloud-serverless-pricing-details)を参照してください。
+さまざまなリソース (読み取り、書き込み、SQL CPU、ネットワーク下りなど) の RU 消費量、料金の詳細、および調整された情報の詳細については、 [TiDB サーバーレスの料金詳細](https://www.pingcap.com/tidb-cloud-serverless-pricing-details)を参照してください。
 
-追加のクォータを使用して TiDB Serverless クラスタを作成する場合は、クラスター作成ページで使用制限を編集できます。詳細については、 [<a href="/tidb-cloud/create-tidb-cluster.md#step-4-create-a-tidb-cluster">TiDB クラスターを作成する</a>](/tidb-cloud/create-tidb-cluster.md#step-4-create-a-tidb-cluster)を参照してください。
+追加のクォータを使用して TiDB サーバーレス クラスターを作成する場合は、クラスター作成ページで使用制限を編集できます。詳細については、 [TiDB サーバーレスクラスターを作成する](/tidb-cloud/create-tidb-cluster-serverless.md)を参照してください。
 
-## 支出制限を更新する {#update-spend-limit}
+## 支出制限を更新する {#update-spending-limit}
 
-既存の TiDB Serverless クラスタの場合、次のように使用制限を更新することで、使用量クォータを増やすことができます。
+既存の TiDB サーバーレス クラスターの場合、次のように使用量制限を更新することで、使用量クォータを増やすことができます。
 
-1.  TiDB Cloudコンソールで、左上隅にある ☰ ホバー メニューをクリックし、ターゲット クラスターの名前をクリックして、その概要ページに移動します。
+1.  プロジェクトの[**クラスター**](https://tidbcloud.com/console/clusters)ページで、ターゲット クラスターの名前をクリックして、その概要ページに移動します。
 
     > **ヒント：**
     >
-    > 複数のプロジェクトがある場合は、プロジェクト リストを表示し、☰ ホバー メニューで別のプロジェクトに切り替えることができます。
+    > 複数のプロジェクトがある場合は、<mdsvgicon name="icon-left-projects">左下隅の をクリックして、別のプロジェクトに切り替えます。</mdsvgicon>
 
 2.  **「今月の使用量」**領域で、 **「使用量クォータをさらに取得する」**をクリックします。
+
+    以前にクラスターの使用量制限を更新しており、それをさらに引き上げたい場合は、 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M11 3.99998H6.8C5.11984 3.99998 4.27976 3.99998 3.63803 4.32696C3.07354 4.61458 2.6146 5.07353 2.32698 5.63801C2 6.27975 2 7.11983 2 8.79998V17.2C2 18.8801 2 19.7202 2.32698 20.362C2.6146 20.9264 3.07354 21.3854 3.63803 21.673C4.27976 22 5.11984 22 6.8 22H15.2C16.8802 22 17.7202 22 18.362 21.673C18.9265 21.3854 19.3854 20.9264 19.673 20.362C20 19.7202 20 18.8801 20 17.2V13M7.99997 16H9.67452C10.1637 16 10.4083 16 10.6385 15.9447C10.8425 15.8957 11.0376 15.8149 11.2166 15.7053C11.4184 15.5816 11.5914 15.4086 11.9373 15.0627L21.5 5.49998C22.3284 4.67156 22.3284 3.32841 21.5 2.49998C20.6716 1.67156 19.3284 1.67155 18.5 2.49998L8.93723 12.0627C8.59133 12.4086 8.41838 12.5816 8.29469 12.7834C8.18504 12.9624 8.10423 13.1574 8.05523 13.3615C7.99997 13.5917 7.99997 13.8363 7.99997 14.3255V16Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>**編集します**。
 
 3.  必要に応じて、毎月の支出制限を編集します。支払い方法を追加していない場合は、制限を編集した後にクレジット カードを追加する必要があります。
 

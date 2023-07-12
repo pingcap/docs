@@ -11,17 +11,17 @@ TiDB Cloudは、クラスター レベルで履歴イベントを記録します
 
 > **ノート：**
 >
-> 現在、イベント ページは[<a href="/tidb-cloud/select-cluster-tier.md#tidb-dedicated">TiDB Dedicated</a>](/tidb-cloud/select-cluster-tier.md#tidb-dedicated)クラスターでのみ使用できます。
+> 現在、イベント ページは[TiDB専用](/tidb-cloud/select-cluster-tier.md#tidb-dedicated)クラスターでのみ使用できます。
 
 ## イベントページをビュー {#view-the-events-page}
 
 「イベント」ページでイベントを表示するには、次の手順を実行します。
 
-1.  [<a href="https://tidbcloud.com/">TiDB Cloudコンソール</a>](https://tidbcloud.com/)で、プロジェクトの[<a href="https://tidbcloud.com/console/clusters">**クラスター**</a>](https://tidbcloud.com/console/clusters)ページに移動します。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、プロジェクトの[**クラスター**](https://tidbcloud.com/console/clusters)ページに移動します。
 
     > **ヒント：**
     >
-    > 複数のプロジェクトがある場合は、左上隅にある ☰ ホバー メニューからターゲット プロジェクトに切り替えることができます。
+    > 複数のプロジェクトがある場合は、<mdsvgicon name="icon-left-projects">左下隅の をクリックして、別のプロジェクトに切り替えます。</mdsvgicon>
 
 2.  ターゲットクラスターの名前をクリックします。クラスターの概要ページが表示されます。
 
@@ -62,4 +62,4 @@ TiDB Cloudは、次のタイプのクラスター イベントをログに記録
 
 ## イベント保持ポリシー {#event-retention-policy}
 
-TiDB Dedicatedクラスターの場合、イベント データは 7 日間保存されます。
+TiDB 専用クラスターの場合、イベント データは 7 日間保存されます。

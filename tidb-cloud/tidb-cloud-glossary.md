@@ -13,7 +13,7 @@ aliases: ['/tidbcloud/glossary']
 
 ACID は、トランザクションの 4 つの主要なプロパティ (アトミック性、一貫性、分離性、耐久性) を指します。これらの各プロパティについては以下で説明します。
 
--   **原子性とは、**操作のすべての変更が実行されるか、まったく実行されないかのいずれかを意味します。 TiDB は、主キーを格納する[<a href="#region">TiDBリージョン</a>](#region)のアトミック性を保証し、トランザクションのアトミック性を実現します。
+-   **原子性とは、**操作のすべての変更が実行されるか、まったく実行されないかのいずれかを意味します。 TiDB は、主キーを格納する[TiDBリージョン](#region)のアトミック性を保証し、トランザクションのアトミック性を実現します。
 
 -   **一貫性とは**、トランザクションが常にデータベースをある一貫した状態から別の一貫した状態に移行させることを意味します。 TiDB では、データをメモリに書き込む前にデータの整合性が確保されます。
 
@@ -25,11 +25,11 @@ ACID は、トランザクションの 4 つの主要なプロパティ (アト�
 
 ### チャット2クエリ {#chat2query}
 
-TiDB CloudはAI を活用しています。 [<a href="https://tidbcloud.com/">TiDB Cloudコンソール</a>](https://tidbcloud.com/)の AI を活用した SQL エディターである Chat2Query (ベータ版) を使用すると、データの価値を最大化できます。
+TiDB CloudはAI を活用しています。 [TiDB Cloudコンソール](https://tidbcloud.com/)の AI を活用した SQL エディターである Chat2Query (ベータ版) を使用すると、データの価値を最大化できます。
 
-Chat2Query では、 `--`入力してから AI に SQL クエリを自動的に生成させる指示を入力するか、SQL クエリを手動で作成して、ターミナルを使用せずにデータベースに対して SQL クエリを実行することができます。クエリ結果をテーブルで直感的に見つけたり、クエリログを簡単に確認したりできます。詳細については、 [<a href="/tidb-cloud/explore-data-with-chat2query.md">Chat2Query (ベータ版)</a>](/tidb-cloud/explore-data-with-chat2query.md)を参照してください。
+Chat2Query では、 `--`入力してから AI に SQL クエリを自動的に生成させる指示を入力するか、SQL クエリを手動で作成して、ターミナルを使用せずにデータベースに対して SQL クエリを実行することができます。クエリ結果をテーブルで直感的に見つけたり、クエリログを簡単に確認したりできます。詳細については、 [Chat2Query (ベータ版)](/tidb-cloud/explore-data-with-chat2query.md)を参照してください。
 
-さらに、 TiDB Cloud は、TiDB Serverless クラスタ用の Chat2Query API を提供します。有効にすると、 TiDB Cloud は**Chat2Query**と呼ばれるシステム データ アプリと Data Service に Chat2Data エンドポイントを自動的に作成します。このエンドポイントを呼び出して、AI に指示を提供して SQL ステートメントを生成および実行させることができます。詳細については、 [<a href="/tidb-cloud/use-chat2query-api.md">Chat2Query API を使ってみる</a>](/tidb-cloud/use-chat2query-api.md)を参照してください。
+さらに、 TiDB Cloud は、TiDB サーバーレス クラスター用の Chat2Query API を提供します。有効にすると、 TiDB Cloud は**Chat2Query**と呼ばれるシステム データ アプリと Data Service に Chat2Data エンドポイントを自動的に作成します。このエンドポイントを呼び出して、AI に指示を提供して SQL ステートメントを生成および実行させることができます。詳細については、 [Chat2Query API を使ってみる](/tidb-cloud/use-chat2query-api.md)を参照してください。
 
 ### クレジット {#credit}
 
@@ -39,15 +39,15 @@ TiDB Cloud は、概念実証 (PoC) ユーザーに一定数のクレジット�
 
 ### データアプリ {#data-app}
 
-[<a href="#data-service">データサービス（ベータ版）</a>](#data-service)のデータ アプリは、特定のアプリケーションのデータにアクセスするために使用できるエンドポイントのグループです。 API キーを使用して認証設定を構成し、データ アプリのエンドポイントへのアクセスを制限できます。
+[データサービス（ベータ版）](#data-service)のデータ アプリは、特定のアプリケーションのデータにアクセスするために使用できるエンドポイントのグループです。 API キーを使用して認証設定を構成し、データ アプリのエンドポイントへのアクセスを制限できます。
 
-詳細については、 [<a href="/tidb-cloud/data-service-manage-data-app.md">データアプリを管理する</a>](/tidb-cloud/data-service-manage-data-app.md)を参照してください。
+詳細については、 [データアプリを管理する](/tidb-cloud/data-service-manage-data-app.md)を参照してください。
 
 ### データサービス {#data-service}
 
-データ サービス (ベータ) を使用すると、カスタム API [<a href="#endpoint">終点</a>](#endpoint)を使用した HTTPS リクエスト経由でTiDB Cloudデータにアクセスできます。この機能は、サーバーレスアーキテクチャを使用してコンピューティング リソースと柔軟なスケーリングを処理するため、インフラストラクチャやメンテナンスのコストを心配することなく、エンドポイントのクエリ ロジックに集中できます。
+データ サービス (ベータ) を使用すると、カスタム API [終点](#endpoint)を使用した HTTPS リクエスト経由でTiDB Cloudデータにアクセスできます。この機能は、サーバーレスアーキテクチャを使用してコンピューティング リソースと柔軟なスケーリングを処理するため、インフラストラクチャやメンテナンスのコストを心配することなく、エンドポイントのクエリ ロジックに集中できます。
 
-詳細については、 [<a href="/tidb-cloud/data-service-overview.md">データサービスの概要</a>](/tidb-cloud/data-service-overview.md)を参照してください。
+詳細については、 [データサービスの概要](/tidb-cloud/data-service-overview.md)を参照してください。
 
 ## E {#e}
 
@@ -55,7 +55,7 @@ TiDB Cloud は、概念実証 (PoC) ユーザーに一定数のクレジット�
 
 Data Service のエンドポイントは、SQL ステートメントを実行するようにカスタマイズできる Web API です。 `WHERE`句で使用される値など、SQL ステートメントのパラメータを指定できます。クライアントがエンドポイントを呼び出し、リクエスト URL 内のパラメータの値を指定すると、エンドポイントは指定されたパラメータを使用して対応する SQL ステートメントを実行し、結果を HTTP 応答の一部として返します。
 
-詳細については、 [<a href="/tidb-cloud/data-service-manage-endpoint.md">エンドポイントを管理する</a>](/tidb-cloud/data-service-manage-endpoint.md)を参照してください。
+詳細については、 [エンドポイントを管理する](/tidb-cloud/data-service-manage-endpoint.md)を参照してください。
 
 ## M {#m}
 
@@ -119,19 +119,19 @@ Data Service のエンドポイントは、SQL ステートメントを実行す
 
 ### リクエストユニット {#request-unit}
 
-リクエスト ユニット (RU) は、データベースへの 1 回のリクエストによって消費されるリソースの量を表すために使用される測定単位です。要求によって消費される RU の量は、操作の種類や取得または変更されるデータの量などのさまざまな要因によって異なります。詳細については、 [<a href="https://www.pingcap.com/tidb-cloud-serverless-pricing-details">TiDB Serverlessの料金詳細</a>](https://www.pingcap.com/tidb-cloud-serverless-pricing-details)を参照してください。
+リクエスト ユニット (RU) は、データベースへの 1 回のリクエストによって消費されるリソースの量を表すために使用される測定単位です。要求によって消費される RU の量は、操作の種類や取得または変更されるデータの量などのさまざまな要因によって異なります。詳細については、 [TiDB サーバーレスの料金詳細](https://www.pingcap.com/tidb-cloud-serverless-pricing-details)を参照してください。
 
 ## S {#s}
 
-### 使用制限 {#spend-limit}
+### 支出制限 {#spending-limit}
 
-支出制限とは、1 か月に特定のワークロードに費やすことができる最大金額を指します。これは、TiDB Serverless クラスタの予算を設定できるコスト管理メカニズムです。クラスターの使用制限が 0 より大きい場合、クラスターは有料クラスターとみなされます。また、有料クラスターは、条件を満たしていれば無料クォータを持つことができます。無料クォータを持つ有料クラスターは、最初に無料クォータを消費します。
+支出制限とは、1 か月に特定のワークロードに費やすことができる最大金額を指します。これは、TiDB サーバーレス クラスターの予算を設定できるコスト管理メカニズムです。クラスターの使用制限が 0 より大きい場合、クラスターは有料クラスターとみなされます。また、有料クラスターは、条件を満たしていれば無料クォータを持つことができます。無料クォータを持つ有料クラスターは、最初に無料クォータを消費します。
 
 ## T {#t}
 
 ### TiDB クラスター {#tidb-cluster}
 
-機能的な作業データベースを形成する[<a href="https://docs.pingcap.com/tidb/stable/tidb-computing">TiDB</a>](https://docs.pingcap.com/tidb/stable/tidb-computing) 、 [<a href="https://docs.pingcap.com/tidb/stable/tidb-storage">TiKV</a>](https://docs.pingcap.com/tidb/stable/tidb-storage) 、 [<a href="https://docs.pingcap.com/tidb/stable/tidb-scheduling">配置Driver</a>](https://docs.pingcap.com/tidb/stable/tidb-scheduling) (PD)、および[<a href="https://docs.pingcap.com/tidb/stable/tiflash-overview">TiFlash</a>](https://docs.pingcap.com/tidb/stable/tiflash-overview)ノードのコレクション。
+機能的な作業データベースを形成する[TiDB](https://docs.pingcap.com/tidb/stable/tidb-computing) 、 [TiKV](https://docs.pingcap.com/tidb/stable/tidb-storage) 、 [配置Driver](https://docs.pingcap.com/tidb/stable/tidb-scheduling) (PD)、および[TiFlash](https://docs.pingcap.com/tidb/stable/tiflash-overview)ノードのコレクション。
 
 ### TiDB ノード {#tidb-node}
 
@@ -161,7 +161,7 @@ SQL クライアント経由でTiDB Cloudクラスターにアクセスできる
 
 ### VPC ピアリング {#vpc-peering}
 
-Virtual Private Cloud ( [<a href="#vpc">VPC</a>](#vpc) ) ネットワークに接続して、異なる VPC ネットワーク内のワークロードがプライベートに通信できるようにします。
+Virtual Private Cloud ( [VPC](#vpc) ) ネットワークに接続して、異なる VPC ネットワーク内のワークロードがプライベートに通信できるようにします。
 
 ### VPC ピアリング接続 {#vpc-peering-connection}
 

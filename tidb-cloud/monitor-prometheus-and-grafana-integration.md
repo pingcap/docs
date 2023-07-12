@@ -1,13 +1,13 @@
 ---
-title: Integrate TiDB Cloud with Prometheus and Grafana
+title: Integrate TiDB Cloud with Prometheus and Grafana (Beta)
 summary: Learn how to monitor your TiDB cluster with the Prometheus and Grafana integration.
 ---
 
-# TiDB CloudをPrometheus および Grafana と統合する {#integrate-tidb-cloud-with-prometheus-and-grafana}
+# TiDB Cloudを Prometheus および Grafana と統合 (ベータ版) {#integrate-tidb-cloud-with-prometheus-and-grafana-beta}
 
-TiDB Cloud は[<a href="https://prometheus.io/">プロメテウス</a>](https://prometheus.io/) API エンドポイントを提供します。 Prometheus サービスをお持ちの場合は、 TiDB Cloudの主要なメトリクスをエンドポイントから簡単に監視できます。
+TiDB Cloud は[プロメテウス](https://prometheus.io/) API エンドポイント (ベータ版) を提供します。 Prometheus サービスをお持ちの場合は、 TiDB Cloudの主要なメトリクスをエンドポイントから簡単に監視できます。
 
-このドキュメントでは、 TiDB Cloudエンドポイントから主要なメトリクスを読み取るように Prometheus サービスを構成する方法と、 [<a href="https://grafana.com/">グラファナ</a>](https://grafana.com/)使用してメトリクスを表示する方法について説明します。
+このドキュメントでは、 TiDB Cloudエンドポイントから主要なメトリクスを読み取るように Prometheus サービスを構成する方法と、 [グラファナ](https://grafana.com/)使用してメトリクスを表示する方法について説明します。
 
 ## 前提条件 {#prerequisites}
 
@@ -17,7 +17,7 @@ TiDB Cloud は[<a href="https://prometheus.io/">プロメテウス</a>](https://
 
 ## 制限 {#limitation}
 
--   [<a href="/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta">TiDB Serverless</a>](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta)クラスターでは Prometheus と Grafana の統合を使用できません。
+-   [TiDB サーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-serverless)クラスターでは Prometheus と Grafana の統合を使用できません。
 
 -   Prometheus と Grafana の統合は、クラスターのステータスが**CREATING** 、 **RESTORING** 、 **PAused** 、または**RESUMING**の場合は使用できません。
 
@@ -29,14 +29,11 @@ TiDB Cloudのメトリクスを読み取るように Prometheus サービスを�
 
 Prometheus のscrape_config ファイルを取得するには、次の手順を実行します。
 
-1.  [<a href="https://tidbcloud.com">TiDB Cloudコンソール</a>](https://tidbcloud.com)にログインします。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com)にログインします。
 
-2.  [<a href="https://tidbcloud.com/console/clusters">**クラスター**</a>](https://tidbcloud.com/console/clusters)ページの左側のナビゲーション ウィンドウで、次のいずれかを実行します。
+2.  クリック<mdsvgicon name="icon-left-projects">複数のプロジェクトがある場合は、左下隅でターゲット プロジェクトに切り替え、 **[管理]**をクリックします。</mdsvgicon>
 
-    -   複数のプロジェクトがある場合は、ターゲット プロジェクトに切り替えて、 **[管理]** &gt; **[統合]**をクリックします。
-    -   プロジェクトが 1 つだけの場合は、 **[管理]** &gt; **[統合]**をクリックします。
-
-3.  **「Prometheus への統合」を**クリックします。
+3.  プロジェクトの**[管理]**ページで、左側のナビゲーション ペインの**[統合]**をクリックし、 **[Prometheus への統合 (ベータ)]**をクリックします。
 
 4.  **「ファイルの追加」**をクリックして、現在のプロジェクトのscrape_configファイルを生成して表示します。
 
@@ -60,17 +57,17 @@ Prometheus のscrape_config ファイルを取得するには、次の手順を�
 
 Prometheus サービスがTiDB Cloudからメトリクスを読み取った後、次のように Grafana GUI ダッシュボードを使用してメトリクスを視覚化できます。
 
-1.  TiDB Cloud [<a href="https://github.com/pingcap/docs/blob/master/tidb-cloud/monitor-prometheus-and-grafana-integration-grafana-dashboard-UI.json">ここ</a>](https://github.com/pingcap/docs/blob/master/tidb-cloud/monitor-prometheus-and-grafana-integration-grafana-dashboard-UI.json)の Grafana ダッシュボード JSON をダウンロードします。
-2.  [<a href="https://grafana.com/docs/grafana/v8.5/dashboards/export-import/#import-dashboard">この JSON を独自の Grafana GUI にインポートします</a>](https://grafana.com/docs/grafana/v8.5/dashboards/export-import/#import-dashboard)を指定すると、メトリクスが視覚化されます。
+1.  TiDB Cloud [ここ](https://github.com/pingcap/docs/blob/master/tidb-cloud/monitor-prometheus-and-grafana-integration-grafana-dashboard-UI.json)の Grafana ダッシュボード JSON をダウンロードします。
+2.  [この JSON を独自の Grafana GUI にインポートします](https://grafana.com/docs/grafana/v8.5/dashboards/export-import/#import-dashboard)を指定すると、メトリクスが視覚化されます。
 3.  (オプション) パネルの追加または削除、データ ソースの変更、表示オプションの変更により、必要に応じてダッシュボードをカスタマイズします。
 
-Grafana の使用方法の詳細については、 [<a href="https://grafana.com/docs/grafana/latest/getting-started/getting-started-prometheus/">Grafana のドキュメント</a>](https://grafana.com/docs/grafana/latest/getting-started/getting-started-prometheus/)を参照してください。
+Grafana の使用方法の詳細については、 [Grafana のドキュメント](https://grafana.com/docs/grafana/latest/getting-started/getting-started-prometheus/)を参照してください。
 
 ## Scrape_config をローテーションするベスト プラクティス {#best-practice-of-rotating-scrape-config}
 
 データのセキュリティを向上させるには、scrape_config ファイルのベアラー トークンを定期的にローテーションすることが一般的なベスト プラクティスです。
 
-1.  [<a href="#step-1-get-a-scrape_config-file-for-prometheus">ステップ1</a>](#step-1-get-a-scrape_config-file-for-prometheus)に従って、Prometheus用の新しいscrape_configファイルを作成します。
+1.  [ステップ1](#step-1-get-a-scrape_config-file-for-prometheus)に従って、Prometheus用の新しいscrape_configファイルを作成します。
 2.  新しいファイルの内容を Prometheus 構成ファイルに追加します。
 3.  Prometheus サービスがまだTiDB Cloudから読み取ることができることを確認したら、古いscrape_config ファイルの内容を Prometheus 構成ファイルから削除します。
 4.  プロジェクトの**「統合」**ページで、対応する古いscrape_config ファイルを削除して、他のユーザーがこのファイルを使用してTiDB Cloud Prometheus エンドポイントから読み取ることをブロックします。

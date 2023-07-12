@@ -5,21 +5,21 @@ summary: Learn how to log in to the TiDB Cloud console via your customized organ
 
 # 組織のSSO認証 {#organization-sso-authentication}
 
-シングル サインオン (SSO) は、 TiDB Cloud[<a href="/tidb-cloud/tidb-cloud-glossary.md#organization">組織</a>](/tidb-cloud/tidb-cloud-glossary.md#organization)のメンバーが、電子メール アドレスとパスワードの代わりにアイデンティティ プロバイダー (IdP) からのアイデンティティを使用してTiDB Cloudにログインできるようにする認証スキームです。
+シングル サインオン (SSO) は、 TiDB Cloud[組織](/tidb-cloud/tidb-cloud-glossary.md#organization)のメンバーが、電子メール アドレスとパスワードの代わりにアイデンティティ プロバイダー (IdP) からのアイデンティティを使用してTiDB Cloudにログインできるようにする認証スキームです。
 
 TiDB Cloud は、次の 2 種類の SSO 認証をサポートしています。
 
--   [<a href="/tidb-cloud/tidb-cloud-sso-authentication.md">基本的な SSO</a>](/tidb-cloud/tidb-cloud-sso-authentication.md) : メンバーは、GitHub、Google、または Microsoft の認証方法を使用して[<a href="https://tidbcloud.com/">TiDB Cloudコンソール</a>](https://tidbcloud.com/)にログインできます。基本 SSO は、 TiDB Cloudのすべての組織に対してデフォルトで有効になっています。
+-   [基本的な SSO](/tidb-cloud/tidb-cloud-sso-authentication.md) : メンバーは、GitHub、Google、または Microsoft の認証方法を使用して[TiDB Cloudコンソール](https://tidbcloud.com/)にログインできます。基本 SSO は、 TiDB Cloudのすべての組織に対してデフォルトで有効になっています。
 
 -   クラウド組織 SSO: メンバーは、組織が指定した認証方法を使用して、 TiDB Cloudのカスタム ログイン ページにログインできます。クラウド組織 SSO はデフォルトでは無効になっています。
 
-基本的な SSO と比較して、クラウド組織 SSO は柔軟性とカスタマイズ性が高いため、組織のセキュリティとコンプライアンスの要件をより適切に満たすことができます。たとえば、ログイン ページに表示する認証方法を指定したり、ログインを許可する電子メール アドレス ドメインを制限したり、メンバーが[<a href="https://openid.net/connect/">OpenID Connect (OIDC)</a>](https://openid.net/connect/)アイデンティティ プロトコルを使用するアイデンティティ プロバイダー (IdP) を使用してTiDB Cloudにログインできるようにしたりできます。
+基本的な SSO と比較して、クラウド組織 SSO は柔軟性とカスタマイズ性が高いため、組織のセキュリティとコンプライアンスの要件をより適切に満たすことができます。たとえば、ログイン ページに表示する認証方法を指定したり、ログインを許可する電子メール アドレス ドメインを制限したり、メンバーが[OpenID Connect (OIDC)](https://openid.net/connect/)アイデンティティ プロトコルを使用するアイデンティティ プロバイダー (IdP) を使用してTiDB Cloudにログインできるようにしたりできます。
 
 このドキュメントでは、組織の認証スキームを基本 SSO からクラウド組織 SSO に移行する方法について説明します。
 
 > **ノート：**
 >
-> -   クラウド組織 SSO 機能はベータ版であり、リクエストがあった場合にのみ利用可能です。この機能をリクエストするには、 **「?」**をクリックしてください。 [<a href="https://tidbcloud.com">TiDB Cloudコンソール</a>](https://tidbcloud.com)の右下隅にある**[チャット] を**クリックします。次に、「**説明」**フィールドに「クラウド組織 SSO の申請」と入力し、 **「送信」**をクリックします。
+> -   クラウド組織 SSO 機能はベータ版であり、リクエストがあった場合にのみ利用可能です。この機能をリクエストするには、 **「?」**をクリックしてください。 [TiDB Cloudコンソール](https://tidbcloud.com)の右下隅にある**[チャット] を**クリックします。次に、「**説明」**フィールドに「クラウド組織 SSO の申請」と入力し、 **「送信」**をクリックします。
 > -   現在の TiDB ログイン URL が`https://tidbcloud.com/enterprise/`で始まる場合は、クラウド組織 SSO が組織ですでに有効になっていることを意味します。
 
 ## あなたが始める前に {#before-you-begin}
@@ -29,7 +29,7 @@ TiDB Cloud は、次の 2 種類の SSO 認証をサポートしています。
 > **ノート：**
 >
 > -   クラウド組織 SSO を一度有効にすると、無効にすることはできません。
-> -   クラウド組織 SSO を有効にするには、 TiDB Cloud組織で所有者の役割を持っている必要があります。役割の詳細については、 [<a href="/tidb-cloud/manage-user-access.md#manage-role-access">役割のアクセスを管理する</a>](/tidb-cloud/manage-user-access.md#manage-role-access)を参照してください。
+> -   クラウド組織 SSO を有効にするには、 TiDB Cloud組織で所有者の役割を持っている必要があります。役割の詳細については、 [役割のアクセスを管理する](/tidb-cloud/manage-user-access.md#manage-role-access)を参照してください。
 
 ### 組織のTiDB Cloudログイン ページのカスタム URL を決定します。 {#decide-a-custom-url-for-the-tidb-cloud-login-page-of-your-organization}
 
@@ -59,7 +59,7 @@ TiDB Cloud は、組織 SSO 用に次の認証方法を提供します。
 -   認証方法の自動プロビジョニングが無効になっている場合、組織の所有者によって招待されたユーザーのみがカスタム URL にログインできます。
 -   認証方法で自動プロビジョニングが有効になっている場合、この認証方法を使用するすべてのユーザーがカスタム URL にログインできます。ログイン後、組織内のデフォルトの**メンバー**役割が自動的に割り当てられます。
 
-セキュリティを考慮して、自動プロビジョニングを有効にすることを選択した場合は、 [<a href="#step-2-configure-authentication-methods">認証方法の詳細を構成する</a>](#step-2-configure-authentication-methods)時に許可される電子メール ドメインを制限することをお勧めします。
+セキュリティを考慮して、自動プロビジョニングを有効にすることを選択した場合は、 [認証方法の詳細を構成する](#step-2-configure-authentication-methods)時に許可される電子メール ドメインを制限することをお勧めします。
 
 ### クラウド組織の SSO 移行計画についてメンバーに通知する {#notify-your-members-about-the-cloud-organization-sso-migration-plan}
 
@@ -74,9 +74,9 @@ TiDB Cloud は、組織 SSO 用に次の認証方法を提供します。
 
 クラウド組織 SSO を有効にするには、次の手順を実行します。
 
-1.  組織所有者の役割を持つユーザーとして[<a href="https://tidbcloud.com">TiDB Cloudコンソール</a>](https://tidbcloud.com)にログインします。
+1.  組織所有者の役割を持つユーザーとして[TiDB Cloudコンソール](https://tidbcloud.com)にログインします。
 
-2.  TiDB Cloudコンソールの右上隅にある をクリックします。<mdsvgicon name="icon-top-organization"> &gt;**組織設定**。</mdsvgicon>
+2.  TiDB Cloudコンソールの左下隅にある をクリックします。<mdsvgicon name="icon-top-organization">をクリックし、 **[組織の設定]**をクリックします。</mdsvgicon>
 
 3.  **[組織の設定]**ページで、 **[認証]**タブをクリックし、 **[有効にする]**をクリックします。
 
@@ -84,7 +84,7 @@ TiDB Cloud は、組織 SSO 用に次の認証方法を提供します。
 
     > **ノート：**
     >
-    > クラウド組織 SSO を有効にすると、URL を変更できなくなります。組織内のメンバーは、カスタム URL を使用してのみTiDB Cloudにログインできます。構成された URL を後で変更する必要がある場合は、 [<a href="/tidb-cloud/tidb-cloud-support.md">TiDB Cloudのサポート</a>](/tidb-cloud/tidb-cloud-support.md)にお問い合わせください。
+    > クラウド組織 SSO を有効にすると、URL を変更できなくなります。組織内のメンバーは、カスタム URL を使用してのみTiDB Cloudにログインできます。構成された URL を後で変更する必要がある場合は、 [TiDB Cloudのサポート](/tidb-cloud/tidb-cloud-support.md)にお問い合わせください。
 
 5.  **[理解して確認します**] チェック ボックスをクリックし、 **[有効にする]**をクリックします。
 
@@ -106,7 +106,7 @@ Cloud Organization Cloud を有効にした後、次のように Google、GitHub
 
 3.  メソッドの詳細では、以下を設定できます。
 
-    -   [<a href="#decide-whether-to-enable-auto-provision">**アカウントの自動プロビジョニング**</a>](#decide-whether-to-enable-auto-provision)
+    -   [**アカウントの自動プロビジョニング**](#decide-whether-to-enable-auto-provision)
 
         デフォルトでは無効になっています。必要に応じて有効にすることができます。セキュリティを考慮して、自動プロビジョニングを有効にする場合は、認証に許可される電子メール ドメインを制限することをお勧めします。
 
@@ -146,7 +146,7 @@ TiDB Cloudでは、OIDC 認証方法はデフォルトで無効になってい�
 
         IdP から取得した対応する値を貼り付けます。
 
-    -   [<a href="#decide-whether-to-enable-auto-provision">**アカウントの自動プロビジョニング**</a>](#decide-whether-to-enable-auto-provision)
+    -   [**アカウントの自動プロビジョニング**](#decide-whether-to-enable-auto-provision)
 
         デフォルトでは無効になっています。必要に応じて有効にすることができます。セキュリティを考慮して、自動プロビジョニングを有効にする場合は、認証に許可される電子メール ドメインを制限することをお勧めします。
 

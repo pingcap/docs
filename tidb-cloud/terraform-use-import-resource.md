@@ -9,14 +9,14 @@ summary: Learn how to manage the import task using the import resource.
 
 `tidbcloud_import`リソースの特徴は次のとおりです。
 
--   TiDB Serverless クラスタおよび TiDB Dedicatedクラスターのインポート タスクを作成します。
+-   TiDB サーバーレス クラスターおよび TiDB 専用クラスターのインポート タスクを作成します。
 -   ローカル ディスクまたは Amazon S3 バケットからデータをインポートします。
 -   進行中のインポートタスクをキャンセルします。
 
 ## 前提条件 {#prerequisites}
 
--   [<a href="/tidb-cloud/terraform-get-tidbcloud-provider.md">TiDB Cloud Terraform プロバイダーを入手する</a>](/tidb-cloud/terraform-get-tidbcloud-provider.md) 。
--   [<a href="/tidb-cloud/create-tidb-cluster.md">TiDB Serverless クラスタまたは TiDB Dedicatedクラスターを作成する</a>](/tidb-cloud/create-tidb-cluster.md) 。
+-   [TiDB Cloud Terraform プロバイダーを入手する](/tidb-cloud/terraform-get-tidbcloud-provider.md) 。
+-   [TiDB サーバーレスクラスターを作成する](/tidb-cloud/create-tidb-cluster-serverless.md)または[TiDB 専用クラスターの作成](/tidb-cloud/create-tidb-cluster.md) 。
 
 ## インポートタスクを作成して実行する {#create-and-run-an-import-task}
 
@@ -26,7 +26,7 @@ summary: Learn how to manage the import task using the import resource.
 
 > **ノート：**
 >
-> ローカル ファイルのインポートは、TiDB Serverless クラスタでのみサポートされており、TiDB Dedicatedクラスターではサポートされていません。
+> ローカル ファイルのインポートは、TiDB サーバーレス クラスターでのみサポートされており、TiDB 専用クラスターではサポートされていません。
 
 1.  インポート用のCSVファイルを作成します。例えば：
 
@@ -68,7 +68,7 @@ summary: Learn how to manage the import task using the import resource.
     }
     ```
 
-    ファイル内のリソース値 (プロジェクト ID、クラスター ID、CSV パスなど) を独自の値に置き換えます。そしてその[<a href="https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/import#nested-schema-for-csv_format">設定ページ</a>](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/import#nested-schema-for-csv_format) `csv_format`の詳細。
+    ファイル内のリソース値 (プロジェクト ID、クラスター ID、CSV パスなど) を独自の値に置き換えます。そしてその[設定ページ](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/import#nested-schema-for-csv_format) `csv_format`の詳細。
 
 3.  `terraform apply`コマンドを実行してインポート タスクを作成し、 `yes`を入力して作成を確認し、インポートを開始します。
 
@@ -189,7 +189,7 @@ summary: Learn how to manage the import task using the import resource.
 
 > **ノート：**
 >
-> TiDB Cloud がAmazon S3 バケット内のファイルにアクセスできるようにするには、まず[<a href="/tidb-cloud/config-s3-and-gcs-access.md#configure-amazon-s3-access">Amazon S3 アクセスを設定する</a>](/tidb-cloud/config-s3-and-gcs-access.md#configure-amazon-s3-access)を行う必要があります。
+> TiDB Cloud がAmazon S3 バケット内のファイルにアクセスできるようにするには、まず[Amazon S3 アクセスを設定する](/tidb-cloud/config-s3-and-gcs-access.md#configure-amazon-s3-access)を行う必要があります。
 
 1.  `import`ディレクトリを作成し、その中に`main.tf`を作成します。例えば：
 
@@ -298,4 +298,4 @@ Destroy complete! Resources: 1 destroyed.
 
 ## 構成 {#configurations}
 
-インポート リソースで使用可能なすべての構成を取得するには、 [<a href="https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/import">設定ドキュメント</a>](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/import)を参照してください。
+インポート リソースで使用可能なすべての構成を取得するには、 [設定ドキュメント](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/import)を参照してください。

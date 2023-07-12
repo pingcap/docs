@@ -6,7 +6,7 @@ aliases: ['/tidbcloud/tidb-cloud-billing-tcu']
 
 # 変更フィード請求 {#changefeed-billing}
 
-TiDB Cloudは、 TiCDC レプリケーション キャパシティ ユニット (RCU) で[<a href="/tidb-cloud/changefeed-overview.md">変更フィード</a>](/tidb-cloud/changefeed-overview.md)のキャパシティを測定します。クラスタの[<a href="/tidb-cloud/changefeed-overview.md#create-a-changefeed">変更フィードを作成する</a>](/tidb-cloud/changefeed-overview.md#create-a-changefeed)は、適切な仕様を選択できます。 RCU が高いほど、レプリケーションのパフォーマンスが向上します。これらの TiCDC 変更フィード RCU に対して料金が発生します。
+TiDB Cloudは、 TiCDC レプリケーション キャパシティ ユニット (RCU) で[変更フィード](/tidb-cloud/changefeed-overview.md)のキャパシティを測定します。クラスタの[変更フィードを作成する](/tidb-cloud/changefeed-overview.md#create-a-changefeed)は、適切な仕様を選択できます。 RCU が高いほど、レプリケーションのパフォーマンスが向上します。これらの TiCDC 変更フィード RCU に対して料金が発生します。
 
 ## TiCDC RCU の数 {#number-of-ticdc-rcus}
 
@@ -28,4 +28,4 @@ TiDB Cloudは、 TiCDC レプリケーション キャパシティ ユニット 
 
 ## 価格 {#price}
 
-各 TiCDC RCU のサポートされるリージョンとTiDB Cloudの価格については、 [<a href="https://www.pingcap.com/tidb-cloud-pricing-details/#changefeed-cost">変更フィードのコスト</a>](https://www.pingcap.com/tidb-cloud-pricing-details/#changefeed-cost)を参照してください。
+各 TiCDC RCU のサポートされるリージョンとTiDB Cloudの価格については、 [変更フィードのコスト](https://www.pingcap.com/tidb-cloud-pricing-details/#changefeed-cost)を参照してください。

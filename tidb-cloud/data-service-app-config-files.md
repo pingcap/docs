@@ -5,9 +5,9 @@ summary: This document describes the configuration files of Data App in TiDB Clo
 
 # データアプリコンフィグレーションファイル {#data-app-configuration-files}
 
-このドキュメントでは、 TiDB Cloud[<a href="/tidb-cloud/tidb-cloud-glossary.md#data-app">データアプリ</a>](/tidb-cloud/tidb-cloud-glossary.md#data-app)構成ファイルについて説明します。
+このドキュメントでは、 TiDB Cloud[データアプリ](/tidb-cloud/tidb-cloud-glossary.md#data-app)構成ファイルについて説明します。
 
-[<a href="/tidb-cloud/data-service-manage-github-connection.md">データ アプリを GitHub に接続しました</a>](/tidb-cloud/data-service-manage-github-connection.md)がある場合は、次のように GitHub 上の指定したディレクトリでデータ アプリの構成ファイルを見つけることができます。
+[データ アプリを GitHub に接続しました](/tidb-cloud/data-service-manage-github-connection.md)がある場合は、次のように GitHub 上の指定したディレクトリでデータ アプリの構成ファイルを見つけることができます。
 
 ```
 ├── <Your Data App directory>
@@ -32,7 +32,7 @@ summary: This document describes the configuration files of Data App in TiDB Clo
 │   │   └── cluster.json
 ```
 
-データ アプリごとに、1 つまたは複数の TiDB Serverless クラスタにリンクできます。
+データ アプリごとに、1 つまたは複数の TiDB クラスターにリンクできます。
 
 以下は`cluster.json`の構成例です。この例では、このデータ アプリには 2 つのリンクされたクラスターがあります。
 
@@ -49,9 +49,9 @@ summary: This document describes the configuration files of Data App in TiDB Clo
 
 フィールドの説明は次のとおりです。
 
-| 分野           | タイプ | 説明                                                                                                                                                                    |
-| ------------ | --- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `cluster_id` | 整数  | TiDB Serverless クラスタの ID。クラスターの URL から取得できます。たとえば、クラスター URL が`https://tidbcloud.com/console/clusters/1234567891234567890/overview`の場合、クラスター ID は`1234567891234567890`です。 |
+| 分野           | タイプ | 説明                                                                                                                                                             |
+| ------------ | --- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `cluster_id` | 整数  | TiDB クラスターの ID。クラスターの URL から取得できます。たとえば、クラスター URL が`https://tidbcloud.com/console/clusters/1234567891234567890/overview`の場合、クラスター ID は`1234567891234567890`です。 |
 
 ## データアプリの構成 {#data-app-configuration}
 
@@ -170,7 +170,7 @@ Data App ディレクトリでは、エンドポイント構成が`http_endpoint
 
 エンドポイントの SQL ファイルは、エンドポイントを介してデータをクエリするための SQL ステートメントを指定します。データ アプリのエンドポイント SQL ファイルは`http_endpoints/sql/`ディレクトリにあります。各エンドポイントには、対応する SQL ファイルが必要です。
 
-SQL ファイルの名前は`<method>-<endpoint-path>.sql`形式であり、 `<method>`と`<endpoint-path>`は[<a href="#endpoint-configuration">`http_endpoints/config.json`</a>](#endpoint-configuration)の`method`と`endpoint`構成と一致する必要があります。
+SQL ファイルの名前は`<method>-<endpoint-path>.sql`形式であり、 `<method>`と`<endpoint-path>`は[`http_endpoints/config.json`](#endpoint-configuration)の`method`と`endpoint`構成と一致する必要があります。
 
 SQL ファイルでは、テーブル結合クエリ、複雑なクエリ、集計関数のステートメントを作成できます。以下は SQL ファイルの例です。
 
@@ -202,4 +202,4 @@ SQL ファイルを作成するときは、次の点に注意してください�
     >
     > -   パラメータ名では大文字と小文字が区別されます。
     > -   パラメータにテーブル名や列名を指定することはできません。
-    > -   SQL ファイル内のパラメータ名は、 [<a href="#endpoint-configuration">`http_endpoints/config.json`</a>](#endpoint-configuration)で設定したパラメータ名と一致します。
+    > -   SQL ファイル内のパラメータ名は、 [`http_endpoints/config.json`](#endpoint-configuration)で設定したパラメータ名と一致します。

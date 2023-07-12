@@ -5,7 +5,7 @@ summary: Learn TiDB Cloud performance test results.
 
 # TiDB Cloudパフォーマンス リファレンス {#tidb-cloud-performance-reference}
 
-このドキュメントでは、 [<a href="https://github.com/akopytov/sysbench">システムベンチ</a>](https://github.com/akopytov/sysbench)な TiDB クラスター スケールのパフォーマンス テスト結果を提供します[<a href="/tidb-cloud/size-your-cluster.md">クラスターのサイズを決定する</a>](/tidb-cloud/size-your-cluster.md)を行う際の参考として使用できます。
+このドキュメントでは、 [システムベンチ](https://github.com/akopytov/sysbench)な TiDB クラスター スケールのパフォーマンス テスト結果を提供します[クラスターのサイズを決定する](/tidb-cloud/size-your-cluster.md)を行う際の参考として使用できます。
 
 > **ノート：**
 >

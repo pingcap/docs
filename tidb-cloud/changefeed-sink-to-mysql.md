@@ -9,16 +9,13 @@ Summary: Learn how to create a changefeed to stream data from TiDB Cloud to MySQ
 
 > **ノート：**
 >
-> チェンジフィード機能を使用するには、TiDB クラスターのバージョンが v6.4.0 以降であり、TiKV ノードのサイズが少なくとも 8 vCPU および 16 GiB であることを確認してください。
->
-> 現在、 TiDB Cloudクラスターごとに最大 5 つの変更フィードのみが許可されます。
->
-> [<a href="/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta">TiDB Serverlessクラスタ</a>](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta)の場合、チェンジフィード機能は使用できません。
+> -   チェンジフィード機能を使用するには、TiDB 専用クラスターのバージョンが v6.4.0 以降であることを確認してください。
+> -   [TiDB サーバーレスクラスター](/tidb-cloud/select-cluster-tier.md#tidb-serverless)の場合、チェンジフィード機能は使用できません。
 
 ## 制限 {#restrictions}
 
 -   TiDB Cloudクラスターごとに、最大 5 つの変更フィードを作成できます。
--   TiDB Cloud はTiCDC を使用して変更フィードを確立するため、同じ[<a href="https://docs.pingcap.com/tidb/stable/ticdc-overview#unsupported-scenarios">TiCDC としての制限</a>](https://docs.pingcap.com/tidb/stable/ticdc-overview#unsupported-scenarios)を持ちます。
+-   TiDB Cloud はTiCDC を使用して変更フィードを確立するため、同じ[TiCDC としての制限](https://docs.pingcap.com/tidb/stable/ticdc-overview#unsupported-scenarios)を持ちます。
 -   レプリケートされるテーブルに主キーまたは NULL 以外の一意のインデックスがない場合、レプリケーション中に一意制約がないため、一部の再試行シナリオでは重複したデータがダウンストリームに挿入される可能性があります。
 
 ## 前提条件 {#prerequisites}
@@ -35,24 +32,24 @@ TiDBクラスタが MySQL サービスに接続できることを確認してく
 
 MySQL サービスがパブリック インターネット アクセスのない AWS VPC 内にある場合は、次の手順を実行します。
 
-1.  MySQL サービスの VPC と TiDB クラスターの間は[<a href="/tidb-cloud/set-up-vpc-peering-connections.md">VPC ピアリング接続をセットアップする</a>](/tidb-cloud/set-up-vpc-peering-connections.md) 。
+1.  MySQL サービスの VPC と TiDB クラスターの間は[VPC ピアリング接続をセットアップする](/tidb-cloud/set-up-vpc-peering-connections.md) 。
 
 2.  MySQL サービスが関連付けられているセキュリティ グループの受信ルールを変更します。
 
-    受信ルールに[<a href="/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-project-cidr">TiDB Cloudクラスターが配置されているリージョンの CIDR</a>](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-project-cidr)を追加する必要があります。これにより、トラフィックが TiDBクラスタから MySQL インスタンスに流れるようになります。
+    受信ルールに[TiDB Cloudクラスターが配置されているリージョンの CIDR](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-project-cidr)を追加する必要があります。これにより、トラフィックが TiDBクラスタから MySQL インスタンスに流れるようになります。
 
 3.  MySQL URL にホスト名が含まれている場合は、 TiDB Cloud がMySQL サービスの DNS ホスト名を解決できるようにする必要があります。
 
-    1.  [<a href="https://docs.aws.amazon.com/vpc/latest/peering/modify-peering-connections.html#vpc-peering-dns">VPC ピアリング接続の DNS 解決を有効にする</a>](https://docs.aws.amazon.com/vpc/latest/peering/modify-peering-connections.html#vpc-peering-dns)の手順に従います。
+    1.  [VPC ピアリング接続の DNS 解決を有効にする](https://docs.aws.amazon.com/vpc/latest/peering/modify-peering-connections.html#vpc-peering-dns)の手順に従います。
     2.  **アクセプター DNS 解決**オプションを有効にします。
 
 MySQL サービスがパブリック インターネット アクセスを持たない GCP VPC 内にある場合は、次の手順を実行します。
 
-1.  MySQL サービスが Google Cloud SQL の場合は、Google Cloud SQL インスタンスの関連する VPC で MySQL エンドポイントを公開する必要があります。 Google が開発した[<a href="https://cloud.google.com/sql/docs/mysql/sql-proxy">**Cloud SQL 認証プロキシ**</a>](https://cloud.google.com/sql/docs/mysql/sql-proxy)を使用する必要がある場合があります。
-2.  MySQL サービスの VPC と TiDB クラスターの間は[<a href="/tidb-cloud/set-up-vpc-peering-connections.md">VPC ピアリング接続をセットアップする</a>](/tidb-cloud/set-up-vpc-peering-connections.md) 。
+1.  MySQL サービスが Google Cloud SQL の場合は、Google Cloud SQL インスタンスの関連する VPC で MySQL エンドポイントを公開する必要があります。 Google が開発した[**Cloud SQL 認証プロキシ**](https://cloud.google.com/sql/docs/mysql/sql-proxy)を使用する必要がある場合があります。
+2.  MySQL サービスの VPC と TiDB クラスターの間は[VPC ピアリング接続をセットアップする](/tidb-cloud/set-up-vpc-peering-connections.md) 。
 3.  MySQL が配置されている VPC のイングレス ファイアウォール ルールを変更します。
 
-    受信ファイアウォール ルールに[<a href="/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-project-cidr">TiDB Cloudクラスターが配置されているリージョンの CIDR</a>](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-project-cidr)を追加する必要があります。これにより、トラフィックが TiDBクラスタから MySQL エンドポイントに流れるようになります。
+    受信ファイアウォール ルールに[TiDB Cloudクラスターが配置されているリージョンの CIDR](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-project-cidr)を追加する必要があります。これにより、トラフィックが TiDBクラスタから MySQL エンドポイントに流れるようになります。
 
 ### 既存のデータをロードする (オプション) {#load-existing-data-optional}
 
@@ -60,7 +57,7 @@ MySQL サービスがパブリック インターネット アクセスを持た
 
 既存のデータをロードするには:
 
-1.  [<a href="https://docs.pingcap.com/tidb/stable/system-variables#tidb_gc_life_time-new-in-v50">tidb_gc_life_time</a>](https://docs.pingcap.com/tidb/stable/system-variables#tidb_gc_life_time-new-in-v50)次の 2 つの操作の合計時間よりも長くして、その間の履歴データが TiDB によってガベージ コレクションされないようにします。
+1.  [tidb_gc_life_time](https://docs.pingcap.com/tidb/stable/system-variables#tidb_gc_life_time-new-in-v50)次の 2 つの操作の合計時間よりも長くして、その間の履歴データが TiDB によってガベージ コレクションされないようにします。
 
     -   既存のデータをエクスポートおよびインポートする時間
     -   **Sink to MySQL を**作成する時期が来ました
@@ -73,9 +70,9 @@ MySQL サービスがパブリック インターネット アクセスを持た
     SET GLOBAL tidb_gc_life_time = '720h';
     ```
 
-2.  [<a href="/dumpling-overview.md">Dumpling</a>](/dumpling-overview.md)を使用して TiDB クラスターからデータをエクスポートし、 [<a href="https://centminmod.com/mydumper.html">マイダンパー/マイローダー</a>](https://centminmod.com/mydumper.html)などのコミュニティ ツールを使用してデータを MySQL サービスにロードします。
+2.  [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview)を使用して TiDB クラスターからデータをエクスポートし、 [マイダンパー/マイローダー](https://centminmod.com/mydumper.html)などのコミュニティ ツールを使用してデータを MySQL サービスにロードします。
 
-3.  [<a href="/dumpling-overview.md#format-of-exported-files">Dumplingのエクスポートされたファイル</a>](/dumpling-overview.md#format-of-exported-files)から、メタデータ ファイルから MySQL シンクの開始位置を取得します。
+3.  [Dumplingのエクスポートされたファイル](https://docs.pingcap.com/tidb/stable/dumpling-overview#format-of-exported-files)から、メタデータ ファイルから MySQL シンクの開始位置を取得します。
 
     以下は、メタデータ ファイルの例の一部です。 `SHOW MASTER STATUS`の`Pos`既存データの TSO であり、MySQL シンクの開始位置でもあります。
 
@@ -106,7 +103,7 @@ MySQL サービスがパブリック インターネット アクセスを持た
     -   「はい」の場合、次の構成ステップに進みます。
     -   そうでない場合は、接続エラーが表示されるため、エラーを処理する必要があります。エラーが解決したら、もう一度**「次へ」**をクリックします。
 
-5.  **テーブル フィルターを**カスタマイズして、複製するテーブルをフィルターします。ルールの構文については、 [<a href="/table-filter.md">テーブルフィルタールール</a>](/table-filter.md)を参照してください。
+5.  **テーブル フィルターを**カスタマイズして、複製するテーブルをフィルターします。ルールの構文については、 [テーブルフィルタールール](/table-filter.md)を参照してください。
 
     -   **フィルター ルールの追加**: この列でフィルター ルールを設定できます。デフォルトでは、すべてのテーブルを複製することを表すルール`*. *`があります。新しいルールを追加すると、 TiDB CloudはTiDB 内のすべてのテーブルをクエリし、ルールに一致するテーブルのみを右側のボックスに表示します。
     -   **複製されるテーブル**: この列には、複製されるテーブルが表示されます。ただし、今後複製​​される新しいテーブルや完全に複製されるスキーマは表示されません。
@@ -114,7 +111,7 @@ MySQL サービスがパブリック インターネット アクセスを持た
 
 6.  **[開始位置]**で、MySQL シンクの開始位置を構成します。
 
-    -   [<a href="#load-existing-data-optional">既存のデータをロードしました</a>](#load-existing-data-optional)を使用してDumplingを使用している場合は、 **[特定の TSO からレプリケーションを開始する]**を選択し、 Dumplingのエクスポートされたメタデータ ファイルから取得した TSO を入力します。
+    -   [既存のデータをロードしました](#load-existing-data-optional)を使用してDumplingを使用している場合は、 **[特定の TSO からレプリケーションを開始する]**を選択し、 Dumplingのエクスポートされたメタデータ ファイルから取得した TSO を入力します。
     -   上流の TiDB クラスターにデータがない場合は、 **「今からレプリケーションを開始する」**を選択します。
     -   それ以外の場合は、 **[Start replication from specific time]**を選択して開始時点をカスタマイズできます。
 
@@ -133,7 +130,7 @@ MySQL サービスがパブリック インターネット アクセスを持た
 
     変更フィード名をクリックすると、チェックポイント、レプリケーションレイテンシー、その他のメトリックなど、変更フィードに関する詳細が表示されます。
 
-10. Dumplingを使用して[<a href="#load-existing-data-optional">既存のデータをロードしました</a>](#load-existing-data-optional)ある場合は、シンクの作成後に GC 時間を元の値 (デフォルト値は`10m` ) に戻す必要があります。
+10. Dumplingを使用して[既存のデータをロードしました](#load-existing-data-optional)ある場合は、シンクの作成後に GC 時間を元の値 (デフォルト値は`10m` ) に戻す必要があります。
 
 {{< copyable "" >}}
 
