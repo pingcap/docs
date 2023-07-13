@@ -33,7 +33,6 @@ The following function is only supported by TiDB, and there is no equivalent fun
 |:-----|:------------|
 | `CURRENT_RESOURCE_GROUP()`  | Return the name of the resource group that the current session is bound to |
 
-
 ## Unsupported functions
 
 * `CHARSET()`
