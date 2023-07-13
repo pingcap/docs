@@ -288,7 +288,7 @@ Configuration items related to log.
 
 > **Warning:**
 >
-> Since v5.4.0, the `expensive-threshold` configuration item is deprecated and replaced by the system variable [`tidb_expensive_query_time_threshold`](/system-variables.md#tidb_expensive_query_time_threshold).
+> Starting from v5.4.0, the `expensive-threshold` configuration item is deprecated and replaced by the system variable [`tidb_expensive_query_time_threshold`](/system-variables.md#tidb_expensive_query_time_threshold).
 
 - Outputs the threshold value of the number of rows for the `expensive` operation.
 - Default value: `10000`
