@@ -11,17 +11,210 @@ Before accessing TiDB cloud, [create a TiDB cloud account](https://tidbcloud.com
 
 ## Organizations and projects
 
-TiDB Cloud provides a hierarchical structure based on organizations and projects to facilitate the management of your TiDB cluster. An organization in TiDB Cloud can contain multiple projects and organization members, and a project can contain multiple clusters and project members.
+TiDB Cloud provides a hierarchical structure based on organizations and projects to facilitate the management of TiDB Cloud clusters. If you are an organization owner for TiDB Dedicated, you can create multiple projects in your organization.
 
-To access a cluster in a project under an organization, a user must be a member of both the organization and the project. Organization owners can invite users to join the project to create and manage clusters in the project.
+```
+- Your organization
+    - Project 1
+        - cluster 1
+        - cluster 2
+    - Project 2
+        - cluster 3
+        - cluster 4
+    - Project 3
+        - cluster 5
+        - cluster 6
+```
 
 Under this structure:
 
-- Billing occurs at the organization level, while retaining visibility of usage in each project and cluster.
+- To access an organization, a user must be a member of that organization.
+- To access a project in an organization, a user must at least have the read access to the project in that organization.
+- To manage clusters in a project, a user must be in the project owner role.
 
-- You can view all members in your organization.
+For more information about user roles and permissions, see [TiDB Cloud User Roles]().
 
-- You can also view all members in your project.
+### Organizations
+
+An organization can contain multiple projects.
+
+TiDB Cloud calculates billing at the organization level and provides the billing details for each project respectively.
+
+If you are an organization owner, you can the highest permission in your organization.
+
+For example, you can do the following:
+
+- Create different projects (such as development, staging, and production) for different purposes
+- Assign different users with different roles.
+- Configure organization settings. For example, configure the time zone for your organization.
+
+### Projects
+
+An project can contain multiple clusters.
+
+If you are an project owner, you can manage clusters and project settings for your project.
+
+For example, you can do the following:
+
+- Create multiple clusters according to your business need.
+- Assign different users with different project roles.
+- Configure project settings. For example, configure different alert settings for different projects.
+
+## User Roles
+
+TiDB Cloud user roles define the actions TiDB Cloud users can perform in organizations, projects, or both. Organization owner and project owner can manage TiDB Cloud users and their roles within their respective organizations and projects.
+
+You can apply these permissions only at the organization level or the project level. Please carefully plan the hierarchy of your organizations and projects. To learn more, see Organization and Projects.
+
+### Organization roles
+
+<table border="0" cellspacing="0" cellpadding="0" width="500">
+  <thead>
+    <tr>
+      <td>
+        <p><strong>Organization Roles</strong></p>
+      </td>
+      <td>
+        <p><strong>Description</strong></p>
+      </td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <p>Organization Owner</p>
+      </td>
+      <td>
+        <p>Grants root access to the organization, including:</p>
+        <ul type="disc">
+          <li>Project Owner access to all projects in the organization</li>
+          <li>Privileges to administer organization settings.</li>
+          <li>Privileges to invite/remove/edit TiDB Cloud users within the organization.</li>
+          <li>All the privileges granted by the other organization roles combined.</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p>Organization Billing Admin</p>
+      </td>
+      <td>
+        <p>Grants the following access:</p>
+        <ul type="disc">
+          <li>Privileges to administer billing information for the organization.</li>
+          <li>All the privileges granted by organization member role.</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p>Organization Console Audit Admin</p>
+      </td>
+      <td>
+        <p>Grants the following access:</p>
+        <ul type="disc">
+          <li>Privileges to administer TiDB Cloud console audit logging for the organization.</li>
+          <li>All the privileges granted by organization member role.</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p>Organization Member</p>
+      </td>
+      <td>
+        <p>Provides read-only access to the settings, users in the organization and the projects they belong to.</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+### Project roles
+
+<table>
+  <colgroup>
+    <col width="277"/>
+    <col width="503"/>  
+  </colgroup>
+  <thead>
+    <tr>
+      <th colspan="1" rowspan="1">
+        <div>
+          Project Roles
+        </div>
+      </th>
+      <th colspan="1" rowspan="1">
+        <div>  
+          Description
+        </div>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td colspan="1" rowspan="1">
+        <div>
+          Project Owner
+        </div>
+        <div><br/></div>
+      </td>
+      <td colspan="1" rowspan="1">
+        <div>
+          Grants the privileges to perform the following actions:
+        </div>
+        <ul start="1">
+          <li>Create and delete cluster</li>
+          <li>Manage project settings for network access, 3rd party integration, alert subscription, maintenance and recycle bin</li>
+          <li>Invite/remove/edit TiDB Cloud users in the project</li>
+          <li>Manage cluster database audit logs</li>
+          <li>Manage backup and restore for all clusters in the project</li>
+          <li>Manage tasks for import, data migration and changefeed</li>
+          <li>Manage spend limits for all serverless clusters in the project</li>
+          <li>Access to Chat2Query and Data Service</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="1" rowspan="1">
+        <div>
+          Project Data Access Read-Write  
+        </div>
+        <div><br/></div>
+      </td>
+      <td colspan="1" rowspan="1">
+        <div>
+          Grants the privileges to perform the following actions:
+        </div>
+        <ul start="1">
+          <li>View clusters in the project</li>
+          <li>View cluster backup records</li>
+          <li>Manage tasks for import, data migration and changefeed</li>
+          <li>View, modify and delete database from Chat2Query</li>
+          <li>Manage Data Service</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="1" rowspan="1">
+        <div>
+          Project Data Access Read-Only
+        </div>
+      </td>
+      <td colspan="1" rowspan="1">
+        <div>
+          Grants the privileges to perform the following actions:
+        </div>
+        <ul start="1">
+          <li>View clusters in the project</li>
+          <li>view cluster backup records</li>
+          <li>View database from Chat2Query</li>
+          <li>Manage Data Service with read-only</li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
 
 ## Manage organization access
 
