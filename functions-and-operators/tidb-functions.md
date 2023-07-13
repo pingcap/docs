@@ -21,6 +21,7 @@ The following functions are TiDB extensions, and are not present in MySQL:
 | `VITESS_HASH(str)` | The `VITESS_HASH` function returns the hash of a string that is compatible with Vitess' `HASH` function. This is intended to help the data migration from Vitess. |
 | `TIDB_SHARD()` | The `TIDB_SHARD` function can be used to create a shard index to scatter the index hotspot. A shard index is an expression index with a `TIDB_SHARD` function as the prefix.|
 | `TIDB_ROW_CHECKSUM()` | The `TIDB_ROW_CHECKSUM` function is used to query the checksum value of a row. This function can only be used in `SELECT` statements within the FastPlan process. That is, you can query through statements like `SELECT TIDB_ROW_CHECKSUM() FROM t WHERE id = ?` or `SELECT TIDB_ROW_CHECKSUM() FROM t WHERE id IN (?, ?, ...)`. See also: [Data integrity validation for single-row data](/ticdc/ticdc-integrity-check.md). |
+| `CURRENT_RESOURCE_GROUP()`  | The `CURRENT_RESOURCE_GROUP` function is used to return the resource group name that the current session is bound to. See also: [Use Resource Control to Achieve Resource Isolation](/tidb-resource-control.md) |
 
 </CustomContent>
 
