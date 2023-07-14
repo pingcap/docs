@@ -8,7 +8,7 @@ aliases: ['/docs/dev/functions-and-operators/information-functions/','/docs/dev/
 
 TiDB supports most of the [information functions](https://dev.mysql.com/doc/refman/5.7/en/information-functions.html) available in MySQL 5.7.
 
-## TiDB Supported MySQL functions
+## TiDB supported MySQL functions
 
 | Name | Description |
 |:-----|:------------|
@@ -25,14 +25,13 @@ TiDB supports most of the [information functions](https://dev.mysql.com/doc/refm
 | [`USER()`](https://dev.mysql.com/doc/refman/5.7/en/information-functions.html#function_user) | Return the user name and host name provided by the client    |
 | [`VERSION()`](https://dev.mysql.com/doc/refman/5.7/en/information-functions.html#function_version) | Return a string that indicates the MySQL server version   |
 
-## TiDB Specific functions
+## TiDB specific functions
 
-Following functions are only supported by TiDB, there is no equivalent function in MySQL.
+The following function is only supported by TiDB, and there is no equivalent function in MySQL.
 
 | Name | Description |
 |:-----|:------------|
 | `CURRENT_RESOURCE_GROUP()`  | Return the name of the resource group that the current session is bound to |
-
 
 ## Unsupported functions
 
