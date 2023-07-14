@@ -385,3 +385,5 @@ SELECT CURRENT_RESOURCE_GROUP();
 | rg2                      |
 +--------------------------+
 1 row in set (0.00 sec)
+```
+
