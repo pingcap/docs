@@ -29,7 +29,7 @@ Before migrating to Cloud Organization SSO, check and confirm the items in this 
 > **Note:**
 >
 > - Once Cloud Organization SSO is enabled, it cannot be disabled.
-> - To enable Cloud Organization SSO, you need to have the `Organization Owner` role in your TiDB Cloud organization. For more information about roles, see [User roles](/tidb-cloud/manage-user-access.md#user-roles).
+> - To enable Cloud Organization SSO, you need to be in the `Organization Owner` role of your TiDB Cloud organization. For more information about roles, see [User roles](/tidb-cloud/manage-user-access.md#user-roles).
 
 ### Decide a custom URL for the TiDB Cloud login page of your organization
 
