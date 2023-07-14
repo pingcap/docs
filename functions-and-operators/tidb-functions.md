@@ -356,7 +356,7 @@ CREATE RESOURCE GROUP 'rg1' RU_PER_SEC = 1000;
 ALTER USER 'user1' RESOURCE GROUP `rg1`;
 ```
 
-Use `user1` to login and view the resource group bound to the current user:
+Use `user1` to log in and view the resource group bound to the current user:
 
 ```sql
 SELECT CURRENT_RESOURCE_GROUP();
