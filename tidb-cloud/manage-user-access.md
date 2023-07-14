@@ -62,159 +62,123 @@ For example, you can do the following:
 
 ## User Roles
 
-TiDB Cloud user roles define the actions TiDB Cloud users can perform in organizations, projects, or both. Organization owner and project owner can manage TiDB Cloud users and their roles within their respective organizations and projects.
+TiDB Cloud defines different user roles to mange different permissions of TiDB Cloud users in organizations, projects, or both.
 
-You can apply these permissions only at the organization level or the project level. Please carefully plan the hierarchy of your organizations and projects. To learn more, see Organization and Projects.
+You can apply these permissions only at the organization level or the project level. Make sure to carefully plan the hierarchy of your organizations and projects for security consideration.
 
 ### Organization roles
 
-<table border="0" cellspacing="0" cellpadding="0" width="500">
+At the organization level, there are four types of roles, in which `Organization Owner` can invite members and grant organization roles to members.
+
+<table>
   <thead>
     <tr>
-      <td>
-        <p><strong>Organization Roles</strong></p>
-      </td>
-      <td>
-        <p><strong>Description</strong></p>
-      </td>
+      <td>Organization roles</td>
+      <td>Description</td>
     </tr>
   </thead>
   <tbody>
     <tr>
+      <td><code>Organization Owner</code></td>
       <td>
-        <p>Organization Owner</p>
-      </td>
-      <td>
-        <p>Grants root access to the organization, including:</p>
-        <ul type="disc">
-          <li>Project Owner access to all projects in the organization</li>
-          <li>Privileges to administer organization settings.</li>
-          <li>Privileges to invite/remove/edit TiDB Cloud users within the organization.</li>
-          <li>All the privileges granted by the other organization roles combined.</li>
+        <ul>
+          <li>Manage organization settings, such as projects, API keys, and time zones.</li>
+          <li>Invite users to or remove users from an organization, and edit organization roles of users.</li>
+          <li>All the privileges of other organization roles combined.</li>
+          <li>All the privileges of <code>Project Owner</code> for all projects in the organization.</li>
         </ul>
       </td>
     </tr>
     <tr>
+      <td><code>Organization Billing Admin</code></td>
       <td>
-        <p>Organization Billing Admin</p>
-      </td>
-      <td>
-        <p>Grants the following access:</p>
-        <ul type="disc">
-          <li>Privileges to administer billing information for the organization.</li>
-          <li>All the privileges granted by organization member role.</li>
+        <ul>
+          <li>View bills and edit payment information for the organization.</li>
+          <li>All the privileges of <code>Organization Member</code>.</li>
         </ul>
       </td>
     </tr>
     <tr>
+      <td><code>Organization Console Audit Admin</td>
       <td>
-        <p>Organization Console Audit Admin</p>
-      </td>
-      <td>
-        <p>Grants the following access:</p>
-        <ul type="disc">
-          <li>Privileges to administer TiDB Cloud console audit logging for the organization.</li>
-          <li>All the privileges granted by organization member role.</li>
+        <ul>
+          <li>Manage TiDB Cloud <a href="https://docs.pingcap.com/tidbcloud/tidb-cloud-console-auditing">console audit logging</a> for the organization.</li>
+          <li>All the privileges of <code>Organization Member</code>.</li>
         </ul>
       </td>
     </tr>
     <tr>
+      <td><code>Organization Member</code></td>
       <td>
-        <p>Organization Member</p>
-      </td>
-      <td>
-        <p>Provides read-only access to the settings, users in the organization and the projects they belong to.</p>
+        <ul>
+          <li>View projects in which the members belong to and users in the organization.</li>
       </td>
     </tr>
   </tbody>
 </table>
+
+> **Note:**
+>
+> The `Organization Console Audit Admin` role is only visible upon request. It is recommended that you use the `Organization Owner` role for [console audit logging](/tidb-cloud/tidb-cloud-console-auditing.md). If you need to use the `Organization Console Audit Admin` role, click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com) and click **Chat with Us**. Then, fill in "Apply for the Organization Console Audit Admin role" in the **Description** field and click **Send**.
 
 ### Project roles
 
+At the project level, there are three types of roles, in which `Project Owner` can invite members and grant project roles to members.
+
+> **Tip**:
+>
+> - `Organization Owner` has all the privileges of <code>Project Owner</code> for all projects so it can invite project members and grant project roles to members too.
+> - Each project role has the all the privileges of <code>Organization Member</code> by default.
+
 <table>
   <colgroup>
-    <col width="277"/>
-    <col width="503"/>  
   </colgroup>
   <thead>
     <tr>
-      <th colspan="1" rowspan="1">
-        <div>
-          Project Roles
-        </div>
-      </th>
-      <th colspan="1" rowspan="1">
-        <div>  
-          Description
-        </div>
-      </th>
+      <th>Project roles</th>
+      <th>Description</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td colspan="1" rowspan="1">
-        <div>
-          Project Owner
-        </div>
-        <div><br/></div>
-      </td>
-      <td colspan="1" rowspan="1">
-        <div>
-          Grants the privileges to perform the following actions:
-        </div>
-        <ul start="1">
-          <li>Create and delete cluster</li>
-          <li>Manage project settings for network access, 3rd party integration, alert subscription, maintenance and recycle bin</li>
-          <li>Invite/remove/edit TiDB Cloud users in the project</li>
-          <li>Manage cluster database audit logs</li>
-          <li>Manage backup and restore for all clusters in the project</li>
-          <li>Manage tasks for import, data migration and changefeed</li>
-          <li>Manage spend limits for all serverless clusters in the project</li>
-          <li>Access to Chat2Query and Data Service</li>
+      <td><code>Project Owner</code></td>
+      <td>
+        <ul>
+          <li>Manage project settings, such as network access, third-party integrations, alert subscription, maintenance, and recycle bin.</li>
+          <li>Invite users to or remove users from a project, and edit project roles of users.</li>
+          <li>Manage cluster operations in the project, such as cluster creation, deletion, backup and restore, data import, data migration, and changefeed.</li>
+          <li>Manage <a href="https://docs.pingcap.com/tidbcloud/tidb-cloud-auditing">database audit logging</a> in the project.</li>
+          <li>Manage <a href="https://docs.pingcap.com/tidbcloud/manage-serverless-spend-limit">spend limit</a> for all Serverless clusters in the project.</li>
+          <li>Manage <a href="https://docs.pingcap.com/tidbcloud/data-service-overview">Data Service</a>.</li>
+          <li>View, modify, and delete databases using <a href="https://docs.pingcap.com/tidbcloud/explore-data-with-chat2query">Chat2Query</a>.</li>
         </ul>
       </td>
     </tr>
     <tr>
-      <td colspan="1" rowspan="1">
-        <div>
-          Project Data Access Read-Write  
-        </div>
-        <div><br/></div>
-      </td>
-      <td colspan="1" rowspan="1">
-        <div>
-          Grants the privileges to perform the following actions:
-        </div>
-        <ul start="1">
+      <td><code>Project Data Access Read-Write</code></td>
+      <td>
+        <ul>
           <li>View clusters in the project</li>
           <li>View cluster backup records</li>
-          <li>Manage tasks for import, data migration and changefeed</li>
-          <li>View, modify and delete database from Chat2Query</li>
-          <li>Manage Data Service</li>
+          <li>Manage tasks such as data import, data migration, and changefeed.</li>
+          <li>Manage <a href="https://docs.pingcap.com/tidbcloud/data-service-overview">Data Service</a>.</li>
+          <li>View, modify, and delete databases using <a href="https://docs.pingcap.com/tidbcloud/explore-data-with-chat2query">Chat2Query</a>.</li>
         </ul>
       </td>
     </tr>
     <tr>
-      <td colspan="1" rowspan="1">
-        <div>
-          Project Data Access Read-Only
-        </div>
-      </td>
-      <td colspan="1" rowspan="1">
-        <div>
-          Grants the privileges to perform the following actions:
-        </div>
-        <ul start="1">
+      <td><code>Project Data Access Read-Only</code></td>
+      <td>
+        <ul>
           <li>View clusters in the project</li>
           <li>view cluster backup records</li>
-          <li>View database from Chat2Query</li>
-          <li>Manage Data Service with read-only</li>
+          <li>Manage <a href="https://docs.pingcap.com/tidbcloud/data-service-overview">Data Service</a>. For example, use or create endpoints to read data using Data Service.</li>
+          <li>View databases using <a href="https://docs.pingcap.com/tidbcloud/explore-data-with-chat2query">Chat2Query</a>.</li>
         </ul>
       </td>
     </tr>
   </tbody>
 </table>
-
 
 ## Manage organization access
 
@@ -232,7 +196,7 @@ If you are a member of multiple organizations, you can switch your account betwe
 To switch between organizations, take the following steps:
 
 1. Click <MDSvgIcon name="icon-top-organization" /> in the lower-left corner of the TiDB Cloud console.
-2. Select **Switch Organization** in the drop-down menu, and click the organization you want to switch to.
+2. Click the name of the organization you want to switch to.
 
 ### Set the time zone for your organization
 
@@ -248,11 +212,15 @@ To change the local timezone setting, take the following steps:
 
 4. Click the drop-down list and select your time zone.
 
-5. Click **Confirm**.
+5. Click **Save**.
 
 ### Invite an organization member
 
 If you are the owner of an organization, you can invite organization members.
+
+> **Note:**
+>
+> You can also [invite a user to your project](#invite-a-project-member) directly according to your need, which also makes the user your organization member.
 
 To invite a member to an organization, take the following steps:
 
@@ -260,15 +228,16 @@ To invite a member to an organization, take the following steps:
 
 2. Click **Organization Settings**. The organization settings page is displayed.
 
-3. Click the  **User Management** tab, and then select **By All Users**.
+3. Click the **User Management** tab, and then select **By Organization**.
 
 4. Click **Invite**.
 
-5. Enter the email address of the user to be invited, select a role for the user, and then choose a project for the user.
+5. Enter the email address of the user to be invited, and then select an organization role for the user.
 
     > **Tip:**
     >
-    > If you want to invite multiple members at one time, you can enter multiple email addresses.
+    > - If you want to invite multiple members at one time, you can enter multiple email addresses.
+    > - The invited user does not belong to any projects by default. To invite a user to a project, see [invite project member](#invite-a-project-member).
 
 6. Click **Confirm**. Then the new user is successfully added into the user list. At the same time, an email is sent to the invited email address with a verification link.
 
@@ -279,6 +248,20 @@ To invite a member to an organization, take the following steps:
 > **Note:**
 >
 > The verification link in the email expires in 24 hours. If the user you want to invite does not receive the email, click **Resend**.
+
+### Modify the role of an organization member
+
+If you are the organization owner, you can modify roles of members in your organization.
+
+To modify the role of an organization member, take the following steps:
+
+1. Click <MDSvgIcon name="icon-top-organization" /> in the lower-left corner of the TiDB Cloud console.
+
+2. Click **Organization Settings**. The organization settings page is displayed.
+
+3. Click the **User Management** tab, and then select **By Organization**.
+
+4. Click the role of the target member, and then modify the role.
 
 ### Remove an organization member
 
@@ -318,6 +301,8 @@ To check which project you belong to, take the following steps:
 >
 > For free trial users, you cannot create a new project.
 
+If you are the organization owner, you can create projects in your organization.
+
 To create a new project, take the following steps:
 
 1. Click <MDSvgIcon name="icon-top-organization" /> in the lower-left corner of the TiDB Cloud console.
@@ -331,6 +316,8 @@ To create a new project, take the following steps:
 5. Click **Confirm**.
 
 ### Rename a project
+
+If you are the organization owner, you can rename any projects in your organization. If you are the project owner, you can rename your project.
 
 To rename a project, take the following steps:
 
@@ -346,7 +333,11 @@ To rename a project, take the following steps:
 
 ### Invite a project member
 
-If you are the owner of an organization, you can invite project members.
+If you are the organization owner or project owner, you can invite members to your projects.
+
+> **Note:**
+>
+> When a user who is not currently in your organization is invited to join your project, accepting the invitation will automatically make the user a member of your organization.
 
 To invite a member to a project, take the following steps:
 
@@ -354,11 +345,11 @@ To invite a member to a project, take the following steps:
 
 2. Click **Organization Settings**. The organization settings page is displayed.
 
-3. Click the **User Management** tab, and then select **By Project**.
+3. Click the **User Management** tab, select **By Project**, and then select your project from the drop-down list.
 
 4. Click **Invite**.
 
-5. Enter the email address of the user to be invited, select a role for the user, and then choose a project for the user.
+5. Enter the email address of the user to be invited, and then select a project role for the user.
 
     > **Tip:**
     >
@@ -374,9 +365,23 @@ To invite a member to a project, take the following steps:
 >
 > The verification link in the email will expire in 24 hours. If your user doesn't receive the email, click **Resend**.
 
+### Modify the role of an project member
+
+If you are the organization owner, you can modify roles of members in your organization. If you are the project owner, you can modify roles of members in your project.
+
+To modify the role of an organization member, take the following steps:
+
+1. Click <MDSvgIcon name="icon-top-organization" /> in the lower-left corner of the TiDB Cloud console.
+
+2. Click **Organization Settings**. The organization settings page is displayed.
+
+3. Click the **User Management** tab, select **By Projects**, and then choose your project in the drop-down list.
+
+4. Click the role of the target member, and then modify the role.
+
 ### Remove a project member
 
-If you are the owner of an organization, you can remove project members.
+If you are the organization owner or project owner, you can remove project members.
 
 To remove a member from a project, take the following steps:
 
@@ -387,40 +392,6 @@ To remove a member from a project, take the following steps:
 3. Click the **User Management** tab, and then select the **By Project**.
 
 4. Click **Delete** in the user row that you want to delete.
-
-## Manage role access
-
-If you are the owner of an organization, you can take the following steps to configure roles for your organization members:
-
-1. Click <MDSvgIcon name="icon-top-organization" /> in the lower-left corner of the TiDB Cloud console.
-
-2. Click **Organization Settings**. The organization settings page is displayed.
-
-3. Click the **User Management** tab, and then select **By All Users**.
-
-4. Click the role of the target member, and then modify the role.
-
-There are four roles in an organization. The permissions of each role are as follows:
-
-|  Permission                                                                           | Owner | Member | Billing Admin | Audit Admin |
-|---------------------------------------------------------------------------------------|-------|--------|---------------|-------------|
-| Invite members to or remove members from an organization     | ✅     | ❌      | ❌             | ❌           |
-| Set roles for an organization member                                                  | ✅     | ❌      | ❌             | ❌           |
-| Create and rename projects                                                            | ✅     | ❌      | ❌             | ❌           |
-| Invite members to or remove members from a project          | ✅     | ❌      | ❌             | ❌           |
-| Edit time zone                                                                        | ✅     | ❌      | ❌             | ❌           |
-| View bills and edit payment information                                               | ✅     | ❌      | ✅             | ❌           |
-| Enable, view, or disable [console audit logging](/tidb-cloud/tidb-cloud-console-auditing.md)                                                      | ✅     | ❌      | ❌             | ✅           |
-| View and configure [database audit logging](/tidb-cloud/tidb-cloud-auditing.md)                                                      | ❌     | ❌      | ❌             | ✅           |
-| Obtain project instance management permissions                                             | ✅     | ✅      | ✅             | ✅           |
-| Manage an API key                                                                     | ✅     | ❌      | ❌             | ❌           |
-
-> **Note:**
->
-> Currently, the Audit Admin role is only visible upon request.
->
-> - For [console audit logging](/tidb-cloud/tidb-cloud-console-auditing.md), it is recommended that you use the Owner role directly. If you need to use the Audit Admin role, click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com) and click **Chat with Us**. Then, fill in "Apply for the Audit Admin role" in the **Description** field and click **Send**.
-> - For [database audit logging](/tidb-cloud/tidb-cloud-auditing.md), to get the Audit Admin role, click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com) and click **Chat with Us**. Then, fill in "Apply for database audit logging" in the **Description** field and click **Send**.
 
 ## Manage user profiles
 
