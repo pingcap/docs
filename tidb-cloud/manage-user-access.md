@@ -11,7 +11,7 @@ Before accessing TiDB cloud, [create a TiDB cloud account](https://tidbcloud.com
 
 ## Organizations and projects
 
-TiDB Cloud provides a hierarchical structure based on organizations and projects to facilitate the management of TiDB Cloud clusters. If you are an organization owner for TiDB Dedicated, you can create multiple projects in your organization.
+TiDB Cloud provides a hierarchical structure based on organizations and projects to facilitate the management of TiDB Cloud clusters. If you are an organization owner, you can create multiple projects in your organization.
 
 ```
 - Your organization
@@ -30,9 +30,9 @@ Under this structure:
 
 - To access an organization, a user must be a member of that organization.
 - To access a project in an organization, a user must at least have the read access to the project in that organization.
-- To manage clusters in a project, a user must be in the project owner role.
+- To manage clusters in a project, a user must be in the `Project Owner` role.
 
-For more information about user roles and permissions, see [TiDB Cloud User Roles]().
+For more information about user roles and permissions, see [User Roles](#user-roles).
 
 ### Organizations
 
@@ -200,7 +200,7 @@ To switch between organizations, take the following steps:
 
 ### Set the time zone for your organization
 
-If you are the organization owner, you can modify the system display time according to your time zone.
+If you are in the `Organization Owner` role, you can modify the system display time according to your time zone.
 
 To change the local timezone setting, take the following steps:
 
@@ -216,7 +216,7 @@ To change the local timezone setting, take the following steps:
 
 ### Invite an organization member
 
-If you are the owner of an organization, you can invite organization members.
+If you are in the `Organization Owner` role, you can invite members to your organization.
 
 > **Note:**
 >
@@ -237,7 +237,7 @@ To invite a member to an organization, take the following steps:
     > **Tip:**
     >
     > - If you want to invite multiple members at one time, you can enter multiple email addresses.
-    > - The invited user does not belong to any projects by default. To invite a user to a project, see [invite project member](#invite-a-project-member).
+    > - The invited user does not belong to any projects by default. To invite a user to a project, see [Invite a project member](#invite-a-project-member).
 
 6. Click **Confirm**. Then the new user is successfully added into the user list. At the same time, an email is sent to the invited email address with a verification link.
 
@@ -251,7 +251,7 @@ To invite a member to an organization, take the following steps:
 
 ### Modify the role of an organization member
 
-If you are the organization owner, you can modify roles of members in your organization.
+If you are in the `Organization Owner` role, you can modify roles in your organization.
 
 To modify the role of an organization member, take the following steps:
 
@@ -265,7 +265,7 @@ To modify the role of an organization member, take the following steps:
 
 ### Remove an organization member
 
-If you are the owner of an organization, you can remove organization members.
+If you are in the `Organization Owner` role, you can remove organization members from your organization.
 
 To remove a member from an organization, take the following steps:
 
@@ -277,7 +277,7 @@ To remove a member from an organization, take the following steps:
 
 2. Click **Organization Settings**. The organization settings page is displayed.
 
-3. Click the **User Management** tab, and then select **By All Users**.
+3. Click the **User Management** tab, and then select **By Organization**.
 
 4. Click **Delete** in the user row that you want to delete.
 
@@ -301,7 +301,7 @@ To check which project you belong to, take the following steps:
 >
 > For free trial users, you cannot create a new project.
 
-If you are the organization owner, you can create projects in your organization.
+If you are in the `Organization Owner` role, you can create projects in your organization.
 
 To create a new project, take the following steps:
 
@@ -317,7 +317,7 @@ To create a new project, take the following steps:
 
 ### Rename a project
 
-If you are the organization owner, you can rename any projects in your organization. If you are the project owner, you can rename your project.
+If you are in the `Organization Owner` role, you can rename any projects in your organization. If you are in the `Project Owner` role, you can rename your project.
 
 To rename a project, take the following steps:
 
@@ -333,11 +333,11 @@ To rename a project, take the following steps:
 
 ### Invite a project member
 
-If you are the organization owner or project owner, you can invite members to your projects.
+If you are in the `Organization Owner` or `Project Owner` role, you can invite members to your projects.
 
 > **Note:**
 >
-> When a user who is not currently in your organization is invited to join your project, accepting the invitation will automatically make the user a member of your organization.
+> When a user not in your organization joins your project, the user automatically joins your organization as well.
 
 To invite a member to a project, take the following steps:
 
@@ -367,7 +367,7 @@ To invite a member to a project, take the following steps:
 
 ### Modify the role of an project member
 
-If you are the organization owner, you can modify roles of members in your organization. If you are the project owner, you can modify roles of members in your project.
+If you are in the `Organization Owner` role, you can modify roles of members in your organization. If you are in the `Project Owner` role, you can modify roles of members in your project.
 
 To modify the role of an organization member, take the following steps:
 
@@ -381,7 +381,7 @@ To modify the role of an organization member, take the following steps:
 
 ### Remove a project member
 
-If you are the organization owner or project owner, you can remove project members.
+If you are in the `Organization Owner` or `Project Owner` role, you can remove project members.
 
 To remove a member from a project, take the following steps:
 

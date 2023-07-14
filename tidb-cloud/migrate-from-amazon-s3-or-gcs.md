@@ -98,7 +98,7 @@ If your organization is using TiDB Cloud as a service on Google Cloud Platform (
 Before migrating data from GCS to TiDB Cloud, ensure the following:
 
 - You have administrator access to your corporate-owned GCP account.
-- You have administrator access to the TiDB Cloud Management Portal.
+- You have a TiDB Cloud account with at least the [`Project Data Access Read-Write`](/tidb-cloud/manage-user-access.md#user-roles) access.
 
 ### Step 1. Create a GCS bucket and prepare source data files
 
