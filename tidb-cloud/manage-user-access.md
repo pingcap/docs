@@ -16,14 +16,14 @@ TiDB Cloud provides a hierarchical structure based on organizations and projects
 ```
 - Your organization
     - Project 1
-        - cluster 1
-        - cluster 2
+        - Cluster 1
+        - Cluster 2
     - Project 2
-        - cluster 3
-        - cluster 4
+        - Cluster 3
+        - Cluster 4
     - Project 3
-        - cluster 5
-        - cluster 6
+        - Cluster 5
+        - Cluster 6
 ```
 
 Under this structure:
@@ -128,7 +128,7 @@ At the project level, there are three types of roles, in which `Project Owner` c
 > **Tip**:
 >
 > - `Organization Owner` has all the privileges of <code>Project Owner</code> for all projects so it can invite project members and grant project roles to members too.
-> - Each project role has the all the privileges of <code>Organization Member</code> by default.
+> - Each project role has all the privileges of <code>Organization Member</code> by default.
 
 <table>
   <colgroup>
