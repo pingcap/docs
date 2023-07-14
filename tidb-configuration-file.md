@@ -726,8 +726,6 @@ Configuration items related to read isolation.
 - Default value: ["tikv", "tiflash", "tidb"], indicating that the engine is automatically selected by the optimizer.
 - Value options: Any combinations of "tikv", "tiflash", and "tidb", for example, ["tikv", "tidb"] or ["tiflash", "tidb"]
 
-<<<<<<< HEAD
-=======
 ## instance
 
 ### `tidb_enable_collect_execution_info`
@@ -776,75 +774,6 @@ Configuration items related to read isolation.
 - The default value `NO_PRIORITY` means that the priority for statements is not forced to change. Other options are `LOW_PRIORITY`, `DELAYED`, and `HIGH_PRIORITY` in ascending order.
 - Before v6.1.0, this configuration is set by `force-priority`.
 
-### `max_connections`
-
-- The maximum number of connections permitted for a single TiDB instance. It can be used for resources control.
-- Default value: `0`
-- Range: `[0, 100000]`
-- The default value `0` means no limit. When the value of this variable is larger than `0`, and the number of connections reaches the value, the TiDB server will reject new connections from clients.
-- The value of this configuration will initialize the value of system variable [`max_connections`](/system-variables.md#max_connections)
-- Before v6.2.0, this configuration is set by `max-server-connections`.
-
-### `tidb_enable_ddl`
-
-- This configuration controls whether the corresponding TiDB instance can become a DDL owner or not.
-- Default value: `true`
-- Possible values: `OFF`, `ON`
-- The value of this configuration will initialize the value of the system variable [`tidb_enable_ddl`](/system-variables.md#tidb_enable_ddl-new-in-v630)
-- Before v6.3.0, this configuration is set by `run-ddl`.
-
-### `tidb_stmt_summary_enable_persistent` <span class="version-mark">New in v6.6.0</span>
-
-> **Warning:**
->
-> Statements summary persistence is an experimental feature. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
-
-+ Controls whether to enable statements summary persistence.
-+ Default value: `false`
-+ For more details, see [Persist statements summary](/statement-summary-tables.md#persist-statements-summary).
-
-### `tidb_stmt_summary_filename` <span class="version-mark">New in v6.6.0</span>
-
-> **Warning:**
->
-> Statements summary persistence is an experimental feature. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
-
-+ When statements summary persistence is enabled, this configuration specifies the file to which persistent data is written.
-+ Default value: `tidb-statements.log`
-
-### `tidb_stmt_summary_file_max_days` <span class="version-mark">New in v6.6.0</span>
-
-> **Warning:**
->
-> Statements summary persistence is an experimental feature. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
-
-+ When statements summary persistence is enabled, this configuration specifies the maximum number of days to keep persistent data files.
-+ Default value: `3`
-+ Unit: day
-+ You can adjust the value based on the data retention requirements and disk space usage.
-
-### `tidb_stmt_summary_file_max_size` <span class="version-mark">New in v6.6.0</span>
-
-> **Warning:**
->
-> Statements summary persistence is an experimental feature. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
-
-+ When statements summary persistence is enabled, this configuration specifies the maximum size of a persistent data file.
-+ Default value: `64`
-+ Unit: MiB
-+ You can adjust the value based on the data retention requirements and disk space usage.
-
-### `tidb_stmt_summary_file_max_backups` <span class="version-mark">New in v6.6.0</span>
-
-> **Warning:**
->
-> Statements summary persistence is an experimental feature. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
-
-+ When statements summary persistence is enabled, this configuration specifies the maximum number of data files that can be persisted. `0` means no limit on the number of files.
-+ Default value: `0`
-+ You can adjust the value based on the data retention requirements and disk space usage.
-
->>>>>>> 549c5f9c9 (*: modify some deprecated configuration items (#14219))
 ## proxy-protocol
 
 Configuration items related to the PROXY protocol.
