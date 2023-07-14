@@ -88,6 +88,10 @@ Request Unit (RU) is a unified abstraction unit in TiDB for system resources, wh
 > - In addition to queries executed by users, RU can be consumed by background tasks, such as automatic statistics collection.
 > - The preceding table lists only the resources involved in RU calculation for TiDB Self-Hosted clusters, excluding the network and storage consumption. For TiDB Serverless RUs, see [TiDB Serverless Pricing Details](https://www.pingcap.com/tidb-cloud-serverless-pricing-details/).
 
+### Predict RU consumption of SQL statements
+
+[`explain analyze`](/sql-statements/sql-statement-explain-analyze.md) shows the actual RU produced by one particular execution. Please be aware the amount of RU could vary if the same SQL statement repeats, as the amount of RU is affected by cache layer (for example, [coprocessor cache](/coprocessor-cache.md)). Even though this value doesn't reflect the exact RU consumption of each execution, we can still come with an estimation based on this value. 
+
 ## Parameters for resource control
 
 The resource control feature introduces two new global variables.
