@@ -32,7 +32,7 @@ Under this structure:
 - To access a project in an organization, a user must at least have the read access to the project in that organization.
 - To manage clusters in a project, a user must be in the `Project Owner` role.
 
-For more information about user roles and permissions, see [User Roles](#user-roles).
+For more information about user roles and privileges, see [User Roles](#user-roles).
 
 ### Organizations
 
@@ -40,7 +40,7 @@ An organization can contain multiple projects.
 
 TiDB Cloud calculates billing at the organization level and provides the billing details for each project respectively.
 
-If you are an organization owner, you can the highest permission in your organization.
+If you are an organization owner, you have the highest permission in your organization.
 
 For example, you can do the following:
 
@@ -50,9 +50,9 @@ For example, you can do the following:
 
 ### Projects
 
-An project can contain multiple clusters.
+A project can contain multiple clusters.
 
-If you are an project owner, you can manage clusters and project settings for your project.
+If you are a project owner, you can manage clusters and project settings for your project.
 
 For example, you can do the following:
 
@@ -60,11 +60,11 @@ For example, you can do the following:
 - Assign different users with different project roles.
 - Configure project settings. For example, configure different alert settings for different projects.
 
-## User Roles
+## User roles
 
-TiDB Cloud defines different user roles to mange different permissions of TiDB Cloud users in organizations, projects, or both.
+TiDB Cloud defines different user roles to manage different privileges of TiDB Cloud users in organizations, projects, or both.
 
-You can apply these permissions only at the organization level or the project level. Make sure to carefully plan the hierarchy of your organizations and projects for security consideration.
+You can grant roles to a user at the organization level or the project level. Make sure to carefully plan the hierarchy of your organizations and projects for security considerations.
 
 ### Organization roles
 
@@ -74,7 +74,7 @@ At the organization level, there are four types of roles, in which `Organization
   <thead>
     <tr>
       <td>Organization roles</td>
-      <td>Description</td>
+      <td>Privileges</td>
     </tr>
   </thead>
   <tbody>
@@ -136,7 +136,7 @@ At the project level, there are three types of roles, in which `Project Owner` c
   <thead>
     <tr>
       <th>Project roles</th>
-      <th>Description</th>
+      <th>Privileges</th>
     </tr>
   </thead>
   <tbody>
@@ -144,11 +144,11 @@ At the project level, there are three types of roles, in which `Project Owner` c
       <td><code>Project Owner</code></td>
       <td>
         <ul>
-          <li>Manage project settings, such as network access, third-party integrations, alert subscription, maintenance, and recycle bin.</li>
+          <li>Manage project settings, such as network access, third-party integrations, alert subscription, maintenance windows, and recycle bin.</li>
           <li>Invite users to or remove users from a project, and edit project roles of users.</li>
           <li>Manage cluster operations in the project, such as cluster creation, deletion, backup and restore, data import, data migration, and changefeed.</li>
           <li>Manage <a href="https://docs.pingcap.com/tidbcloud/tidb-cloud-auditing">database audit logging</a> in the project.</li>
-          <li>Manage <a href="https://docs.pingcap.com/tidbcloud/manage-serverless-spend-limit">spend limit</a> for all Serverless clusters in the project.</li>
+          <li>Manage <a href="https://docs.pingcap.com/tidbcloud/manage-serverless-spend-limit">spending limit</a> for all TiDB Serverless clusters in the project.</li>
           <li>Manage <a href="https://docs.pingcap.com/tidbcloud/data-service-overview">Data Service</a>.</li>
           <li>View, modify, and delete databases using <a href="https://docs.pingcap.com/tidbcloud/explore-data-with-chat2query">Chat2Query</a>.</li>
         </ul>
@@ -216,7 +216,7 @@ To change the local timezone setting, take the following steps:
 
 ### Invite an organization member
 
-If you are in the `Organization Owner` role, you can invite members to your organization.
+If you are in the `Organization Owner` role, you can invite users to your organization.
 
 > **Note:**
 >
@@ -249,9 +249,9 @@ To invite a member to an organization, take the following steps:
 >
 > The verification link in the email expires in 24 hours. If the user you want to invite does not receive the email, click **Resend**.
 
-### Modify the role of an organization member
+### Modify the organization role of a member
 
-If you are in the `Organization Owner` role, you can modify roles in your organization.
+If you are in the `Organization Owner` role, you can modify organization roles of all members in your organization.
 
 To modify the role of an organization member, take the following steps:
 
@@ -365,11 +365,11 @@ To invite a member to a project, take the following steps:
 >
 > The verification link in the email will expire in 24 hours. If your user doesn't receive the email, click **Resend**.
 
-### Modify the role of an project member
+### Modify the project role of a member
 
-If you are in the `Organization Owner` role, you can modify roles of members in your organization. If you are in the `Project Owner` role, you can modify roles of members in your project.
+If you are in the `Organization Owner` role, you can modify project roles of all members in your organization. If you are in the `Project Owner` role, you can modify project roles of all members in your project.
 
-To modify the role of an organization member, take the following steps:
+To modify the project role of a member, take the following steps:
 
 1. Click <MDSvgIcon name="icon-top-organization" /> in the lower-left corner of the TiDB Cloud console.
 
