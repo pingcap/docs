@@ -386,4 +386,3 @@ SELECT CURRENT_RESOURCE_GROUP();
 +--------------------------+
 1 row in set (0.00 sec)
 ```
-
