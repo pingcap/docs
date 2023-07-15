@@ -103,6 +103,7 @@ You can deploy and run TiDB on the 64-bit generic hardware server platform in th
 > - If you only want to test and verify the features, follow [Quick Start Guide for TiDB](/quick-start-with-tidb.md) to deploy TiDB on a single machine.
 > - The TiDB server uses the disk to store server logs, so there are no special requirements for the disk type and capacity in the test environment.
 > - Starting from v6.3.0, to deploy TiFlash under the Linux AMD64 architecture, the CPU must support the AVX2 instruction set. Ensure that `cat /proc/cpuinfo | grep avx2` has output. To deploy TiFlash under the Linux ARM64 architecture, the CPU must support the ARMv8 instruction set architecture. Ensure that `cat /proc/cpuinfo | grep 'crc32' | grep 'asimd'` has output. By using the instruction set extensions, TiFlash's vectorization engine can deliver better performance.
+> - Starting from v6.5.0, `Fast Online DDL` (controlled by variable [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630)) is enabled by default to accelerate DDL operations, such as adding indexes. If DDL operations involving large objects exist in the system, it is highly recommended to prepare additional SSD disk space for TiDB (100 GB+ is recommended). For detailed configuration instructions, please refer to [Set temporary space for TiDB instances]()
 
 ### Production environment
 
@@ -170,7 +171,7 @@ As an open-source distributed SQL database, TiDB requires the following network 
 
 | Component | Disk space requirement | Healthy disk usage |
 | :-- | :-- | :-- |
-| TiDB | At least 30 GB for the log disk | Lower than 90% |
+| TiDB | <ul><li>At least 30 GB for the log disk</li> <li> Starting from v6.5.0, `Fast Online DDL` (controlled by variable [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630)) is enabled by default to accelerate DDL operations, such as adding indexes. If DDL operations involving large objects exist in the system, it is highly recommended to prepare additional SSD disk space for TiDB (100 GB or higher). For detailed configuration instructions, please refer to [Set temporary space for TiDB instances]() </li></ul> | Lower than 90% |
 | PD | At least 20 GB for the data disk and for the log disk, respectively | Lower than 90% |
 | TiKV | At least 100 GB for the data disk and for the log disk, respectively | Lower than 80% |
 | TiFlash | At least 100 GB for the data disk and at least 30 GB for the log disk, respectively | Lower than 80% |
