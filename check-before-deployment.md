@@ -128,7 +128,7 @@ sysctl -p
 >
 > - `sysctl -p` is to make the configuration effective without restarting the system.
 
-### Set temporary space for TiDB instances (Recommended)
+## Set temporary space for TiDB instances (Recommended)
 
 Some operations in TiDB require writing temporary files to the server, so it is necessary to ensure that the operating system user running TiDB has sufficient permissions to read and write to the target directory. If the TiDB instance is not started with the `root` privilege, you need to check the directory permissions and set them correctly.
 
