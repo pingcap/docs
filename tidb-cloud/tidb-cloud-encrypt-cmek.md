@@ -137,8 +137,8 @@ To complete the CMEK configuration of the project, take the following steps:
 
 > **Note:**
 >
-> - This feature is in the development stage and the policy requirement could be subject to change as future features might require more permissions. 
-> - For projects that do not have CMEK enabled, you can view the Encryption Access page, but you are not allowed to click Create New Key.
+> - This feature is in the development stage and the policy requirement is subject to change as future features might require more permissions. 
+> - For projects without CMEK enabled, you can access the **Encryption Access** page but are not allowed to create a new key.
 
 ### Step 3. Create a cluster
 
