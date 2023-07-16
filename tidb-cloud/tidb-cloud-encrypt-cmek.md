@@ -75,9 +75,62 @@ To complete the CMEK configuration of the project, take the following steps:
 </div>
 <div label="Use API" value="api">
 
-You can complete this step using TiDB Cloud API through the [Configure AWS CMEK](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/CreateAwsCmek) endpoint.
+1. Configure the key policy on AWS KMS, and add the following information to the key policy:
 
-Currently, TiDB Cloud API is still in beta. For more information, see [TiDB Cloud API Documentation](https://docs.pingcap.com/tidbcloud/api/v1beta).
+    ```json
+    {
+        "Version": "2012-10-17",
+        "Id": "cmek-policy",
+        "Statement": [
+            // EBS-related policy
+            {
+                "Sid": "Allow access through EBS for all principals in the account that are authorized to use EBS",
+                "Effect": "Allow",
+                "Principal": {
+                    "AWS": "*"
+                },
+                "Action": [
+                    "kms:Encrypt",
+                    "kms:Decrypt",
+                    "kms:ReEncrypt*",
+                    "kms:GenerateDataKey*",
+                    "kms:CreateGrant",
+                    "kms:DescribeKey"
+                ],
+                "Resource": "*",
+                "Condition": {
+                    "StringEquals": {
+                        "kms:CallerAccount": "<pingcap-account>",
+                        "kms:ViaService": "ec2.<region>.amazonaws.com"
+                    }
+                }
+            },
+            // S3-related policy
+            {
+                "Sid": "Allow TiDB cloud role to use KMS to store encrypted backup to S3",
+                "Effect": "Allow",
+                "Principal": {
+                    "AWS": "arn:aws:iam::<pingcap-account>:root"
+                },
+                "Action": [
+                    "kms:Decrypt",
+                    "kms:GenerateDataKey"
+                ],
+                "Resource": "*"
+            },
+            ... // user's own admin access to KMS
+        ]
+    }
+    ```
+
+    - `<pingcap-account>` is the account where your clusters run in. If you do not know the account, contact [support](/tidb-cloud/tidb-cloud-support.md).
+    - `<region>` is the region where you want to create your cluster, for example, `us-west-2`. If you do not want to specify a region, replace `<region>` with a wildcard `*`, and put it in a `StringLike` block.
+    - For EBS-related policy in the preceding block, refer to [AWS documentation](https://docs.aws.amazon.com/kms/latest/developerguide/conditions-kms.html#conditions-kms-caller-account).
+    - For S3-related policy in the preceding block, refer to [AWS blog](https://repost.aws/knowledge-center/s3-bucket-access-default-encryption).
+
+2. Call the [Configure AWS CMEK](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/CreateAwsCmek) endpoint of TiDB Cloud API.
+
+    Currently, TiDB Cloud API is still in beta. For more information, see [TiDB Cloud API Documentation](https://docs.pingcap.com/tidbcloud/api/v1beta).
 
 </div>
 </SimpleTab>
