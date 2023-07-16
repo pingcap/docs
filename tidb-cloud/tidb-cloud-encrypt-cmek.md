@@ -63,7 +63,7 @@ You can complete the CMEK configuration of the project either using the console 
 
 To complete the CMEK configuration of the project, take the following steps:
 
-1.  Click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner, switch to the target project if you have multiple projects, and then click **Admin**.
+1. Click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner, switch to the target project if you have multiple projects, and then click **Admin**.
 2. Click **Encryption Access** to enter the encryption management page of the project.
 3. Click **Create Encryption Key** to enter the key creation page.
 4. The key provider only supports AWS KMS. You can choose the region where the encryption key is used.
