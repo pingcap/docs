@@ -58,6 +58,10 @@ Currently, TiDB Cloud API is still in beta. For more information, see [TiDB Clou
 
 You can complete the CMEK configuration of the project either using the console or using API.
 
+> **Note:**
+>
+> You must ensure that the policy of the key meets the requirements, such as: insufficient permissions, account errors, etc. These errors will cause the cluster to be incorrectly created using this key.
+
 <SimpleTab groupId="method">
 <div label="Use Console" value="console">
 
