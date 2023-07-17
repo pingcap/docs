@@ -46,7 +46,7 @@ If you are an organization owner, you have the highest permission in your organi
 
 For example, you can do the following:
 
-- Create different projects (such as development, staging, and production) for different purposes
+- Create different projects (such as development, staging, and production) for different purposes.
 - Assign different users with different organization roles and project roles.
 - Configure organization settings. For example, configure the time zone for your organization.
 
@@ -66,11 +66,11 @@ For example, you can do the following:
 
 TiDB Cloud defines different user roles to manage different permissions of TiDB Cloud users in organizations, projects, or both.
 
-You can grant roles to a user at the organization level or the project level. Make sure to carefully plan the hierarchy of your organizations and projects for security considerations.
+You can grant roles to a user at the organization level or at the project level. Make sure to carefully plan the hierarchy of your organizations and projects for security considerations.
 
 ### Organization roles
 
-At the organization level, there are four types of roles, in which `Organization Owner` can invite members and grant organization roles to members.
+At the organization level, TiDB Cloud defines four roles, in which `Organization Owner` can invite members and grant organization roles to members.
 
 | Permission  | `Organization Owner` | `Organization Billing Admin` | `Organization Console Audit Admin` | `Organization Member` |
 |---|---|---|---|---|
@@ -87,7 +87,7 @@ At the organization level, there are four types of roles, in which `Organization
 
 ### Project roles
 
-At the project level, there are three types of roles, in which `Project Owner` can invite members and grant project roles to members.
+At the project level, TiDB Cloud defines three roles, in which `Project Owner` can invite members and grant project roles to members.
 
 > **Note:**
 >
@@ -179,11 +179,11 @@ To invite a member to an organization, take the following steps:
 >
 > The verification link in the email expires in 24 hours. If the user you want to invite does not receive the email, click **Resend**.
 
-### Modify the organization role of a member
+### Modify organization roles
 
 If you are in the `Organization Owner` role, you can modify organization roles of all members in your organization.
 
-To modify the role of an organization member, take the following steps:
+To modify the organization role of a member, take the following steps:
 
 1. Click <MDSvgIcon name="icon-top-organization" /> in the lower-left corner of the TiDB Cloud console.
 
@@ -295,9 +295,9 @@ To invite a member to a project, take the following steps:
 >
 > The verification link in the email will expire in 24 hours. If your user doesn't receive the email, click **Resend**.
 
-### Modify the project role of a member
+### Modify project roles
 
-If you are in the `Organization Owner` role, you can modify project roles of all members in your organization. If you are in the `Project Owner` role, you can modify project roles of all members in your project.
+If you are in the `Organization Owner` role, you can modify project roles of all project members in your organization. If you are in the `Project Owner` role, you can modify project roles of all members in your project.
 
 To modify the project role of a member, take the following steps:
 
