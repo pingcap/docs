@@ -17,18 +17,38 @@ Before you call an endpoint, make sure that you have created an API key in the D
 
 ## Create an endpoint
 
-To create an endpoint, perform the following steps:
+In Data Service, you can either create an endpoint automatically or manually.
+
+> **Tip:**
+>
+> You can also create an endpoint from a SQL file in Chat2Query (beta). For more details, see [Generate an endpoint from a SQL file](/tidb-cloud/explore-data-with-chat2query.md#generate-an-endpoint-from-a-sql-file).
+
+### Generate an endpoint automatically
+
+To create an endpoint automatically, perform the following steps:
 
 1. Navigate to the [**Data Service**](https://tidbcloud.com/console/data-service) page of your project.
-2. In the left pane, locate your target Data App and click **+** **Create Endpoint** to the right of the App name. You can update the default name if necessary.
+2. In the left pane, locate your target Data App, click **+** to the right of the App name, and then click **Auto-Generate HTTP Endpoint**. The dialog for endpoint creation is displayed.
+3. In the dialog, do the following:
 
-    > **Tip:**
-    >
-    > Alternatively, you can also locate the Data App and click **+** **Create Endpoint** at the top of the left pane.
+    1. Select the target cluster, database, and table for the endpoint.
+    2. Select the operations for the endpoints.
 
+         - To create one endpoint only, choose one operation.
+         - To create multiple endpoints, choose multiple operations. For each operation you selected, TiDB Cloud will create a corresponding endpoint.
+
+    3. (Optional) Configure the timeout and category tag for the endpoint.
+    4. TiDB Cloud will deploy the generated HTTP endpoint by default. You can disable this behavior according to your need.
+
+4. Click **Generate**.
+
+### Create an endpoint manually
+
+To create an endpoint manually, perform the following steps:
+
+1. Navigate to the [**Data Service**](https://tidbcloud.com/console/data-service) page of your project.
+2. In the left pane, locate your target Data App, click **+** to the right of the App name, and then click **Create SQL HTTP Endpoint**. You can update the default name if necessary.
 3. The newly created endpoint is added to the top of the endpoint list.
-
-You can also create an endpoint from a SQL file in Chat2Query (beta). For more details, see [Generate an endpoint from a SQL file](/tidb-cloud/explore-data-with-chat2query.md#generate-an-endpoint-from-a-sql-file).
 
 ## Develop an endpoint
 
