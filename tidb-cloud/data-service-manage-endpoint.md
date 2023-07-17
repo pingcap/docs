@@ -251,7 +251,7 @@ TiDB Cloud generates code examples to help you call an endpoint. To get the code
     > - The online environment is available only after you deploy the endpoint.
     > - Currently, TiDB Cloud only provides the curl code example.
 
-    An example of the curl code example is as follows:
+    An example of the curl code example for the `POST` request is as follows:
 
     <SimpleTab>
     <div label="Test Environment">
@@ -262,6 +262,10 @@ TiDB Cloud generates code examples to help you call an endpoint. To get the code
     curl --digest --user '<Public Key>:<Private Key>' \
       --request GET 'https://<region>.data.tidbcloud.com/api/v1beta/app/<App ID>/endpoint/<Endpoint Path>' \
       --header 'endpoint-type: draft'
+      --data-raw '[{
+        "age": "${age}",
+        "career": "${career}"
+    }]'
     ```
 
     </div>
@@ -274,7 +278,12 @@ TiDB Cloud generates code examples to help you call an endpoint. To get the code
 
     ```bash
     curl --digest --user '<Public Key>:<Private Key>' \
-      --request GET 'https://<region>.data.tidbcloud.com/api/v1beta/app/<App ID>/endpoint/<Endpoint Path>'
+      --request POST 'https://<region>.data.tidbcloud.com/api/v1beta/app/<App ID>/endpoint/<Endpoint Path>'
+      --header 'content-type: application/json'\
+      --data-raw '[{
+        "age": "${age}",
+        "career": "${career}"
+    }]'
     ```
 
     </div>
@@ -285,9 +294,14 @@ TiDB Cloud generates code examples to help you call an endpoint. To get the code
     > - By requesting the regional domain `<region>.data.tidbcloud.com`, you can directly access the endpoint in the region where the TiDB cluster is located.
     > - Alternatively, you can also request the global domain `data.tidbcloud.com` without specifying a region. In this way, TiDB Cloud will internally redirect the request to the target region, but this might result in additional latency. If you choose this way, make sure to add the `--location-trusted` option to your curl command when calling an endpoint.
 
-5. Paste the code example in your application and run it.
+5. Paste the code example in your application, edit the example according to your need, and then run it.
 
     - You need to replace the `<Public Key>` and `<Private Key>` placeholders with your API key. For more information, refer to [Manage an API key](/tidb-cloud/data-service-api-key.md).
+    - If the request method of your endpoint is `POST`, `DELETE`, or `PUT`, fill in the `--data-raw` option according to the rows of data that you want to operate.
+
+        - For endpoints with batch operations enabled, the `--data-raw` option accepts an array of data objects so you can operate multiple rows of data using one endpoint.
+        - For endpoints with batch operations not enabled, the `--data-raw` option only accepts one data object.
+
     - If the endpoint contains parameters, specify the parameter values when calling the endpoint.
 
 ### Response
