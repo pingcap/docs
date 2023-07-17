@@ -11,7 +11,9 @@ Before accessing TiDB Cloud, [create a TiDB cloud account](https://tidbcloud.com
 
 ## Organizations and projects
 
-TiDB Cloud provides a hierarchical structure based on organizations and projects to facilitate the management of TiDB Cloud clusters. If you are an organization owner, you can create multiple projects in your organization.
+TiDB Cloud provides a hierarchical structure based on organizations and projects to facilitate the management of TiDB Cloud users and clusters. If you are an organization owner, you can create multiple projects in your organization.
+
+For example:
 
 ```
 - Your organization
@@ -38,14 +40,14 @@ For more information about user roles and permissions, see [User Roles](#user-ro
 
 An organization can contain multiple projects.
 
-TiDB Cloud calculates billing at the organization level and provides the billing details for each project respectively.
+TiDB Cloud calculates billing at the organization level and provides the billing details for each project.
 
 If you are an organization owner, you have the highest permission in your organization.
 
 For example, you can do the following:
 
 - Create different projects (such as development, staging, and production) for different purposes
-- Assign different users with different roles.
+- Assign different users with different organization roles and project roles.
 - Configure organization settings. For example, configure the time zone for your organization.
 
 ### Projects
@@ -77,7 +79,7 @@ At the organization level, there are four types of roles, in which `Organization
 | All the permissions of `Project Owner` for all projects in the organization. | ✅ | ❌ | ❌ | ❌ |
 | View bills and edit payment information for the organization. | ✅ | ✅ | ❌ | ❌ |
 | Manage TiDB Cloud [console audit logging](/tidb-cloud/tidb-cloud-console-auditing.md) for the organization. | ✅ | ❌ | ✅ | ❌ |
-| View users in the organization and projects in which the members belong to. | ✅ | ✅ | ✅ | ✅ |
+| View users in the organization and projects in which the member belong to. | ✅ | ✅ | ✅ | ✅ |
 
 > **Note:**
 >
@@ -87,10 +89,11 @@ At the organization level, there are four types of roles, in which `Organization
 
 At the project level, there are three types of roles, in which `Project Owner` can invite members and grant project roles to members.
 
-> **Tip**:
+> **Note:**
 >
 > - `Organization Owner` has all the permissions of <code>Project Owner</code> for all projects so `Organization Owner` can invite project members and grant project roles to members too.
 > - Each project role has all the permissions of <code>Organization Member</code> by default.
+> - If a user in your organization does not belong to any projects, the user does not have any project permissions.
 
 | Permission  | `Project Owner` | `Project Data Access Read-Write` | `Project Data Access Read-Only` |
 |---|---|---|---|
