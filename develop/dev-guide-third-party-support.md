@@ -215,7 +215,7 @@ If you encounter problems when connecting to TiDB using the tools listed in this
          <td rowspan="4">JavaScript / TypeScript</td>
          <td><a href="https://www.npmjs.com/package/sequelize" target="_blank" referrerpolicy="no-referrer-when-downgrade">sequelize</a></td>
          <td>v6.20.1</td>
-         <td>Compatible</td>
+         <td>Full</td>
          <td>N/A</td>
          <td>N/A</td>
       </tr>
