@@ -73,7 +73,7 @@ To complete the CMEK configuration of the project, take the following steps:
 4. The key provider only supports AWS KMS. You can choose the region where the encryption key is used.
 5. Copy and save the JSON file as `ROLE-TRUST-POLICY.JSON`. This file describes the trust relationship. 
 6. Add this trust relationship to the key policy of AWS KMS. For more information, refer to [Key policies in AWS KMS](https://docs.aws.amazon.com/zh_cn/kms/latest/developerguide/key-policies.html).
-7. Fill in the Key ARN obtained from AWS KMS.
+7. Fill in the **KMS Key ARN** obtained from AWS KMS.
 8. Click **Create** to create the key.
 
 </div>
