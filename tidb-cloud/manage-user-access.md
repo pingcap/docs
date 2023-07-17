@@ -32,7 +32,7 @@ Under this structure:
 - To access a project in an organization, a user must at least have the read access to the project in that organization.
 - To manage clusters in a project, a user must be in the `Project Owner` role.
 
-For more information about user roles and privileges, see [User Roles](#user-roles).
+For more information about user roles and permissions, see [User Roles](#user-roles).
 
 ### Organizations
 
@@ -62,7 +62,7 @@ For example, you can do the following:
 
 ## User roles
 
-TiDB Cloud defines different user roles to manage different privileges of TiDB Cloud users in organizations, projects, or both.
+TiDB Cloud defines different user roles to manage different permissions of TiDB Cloud users in organizations, projects, or both.
 
 You can grant roles to a user at the organization level or the project level. Make sure to carefully plan the hierarchy of your organizations and projects for security considerations.
 
@@ -70,52 +70,14 @@ You can grant roles to a user at the organization level or the project level. Ma
 
 At the organization level, there are four types of roles, in which `Organization Owner` can invite members and grant organization roles to members.
 
-<table>
-  <thead>
-    <tr>
-      <td>Organization roles</td>
-      <td>Privileges</td>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>Organization Owner</code></td>
-      <td>
-        <ul>
-          <li>Manage organization settings, such as projects, API keys, and time zones.</li>
-          <li>Invite users to or remove users from an organization, and edit organization roles of users.</li>
-          <li>All the privileges of other organization roles combined.</li>
-          <li>All the privileges of <code>Project Owner</code> for all projects in the organization.</li>
-        </ul>
-      </td>
-    </tr>
-    <tr>
-      <td><code>Organization Billing Admin</code></td>
-      <td>
-        <ul>
-          <li>View bills and edit payment information for the organization.</li>
-          <li>All the privileges of <code>Organization Member</code>.</li>
-        </ul>
-      </td>
-    </tr>
-    <tr>
-      <td><code>Organization Console Audit Admin</td>
-      <td>
-        <ul>
-          <li>Manage TiDB Cloud <a href="https://docs.pingcap.com/tidbcloud/tidb-cloud-console-auditing">console audit logging</a> for the organization.</li>
-          <li>All the privileges of <code>Organization Member</code>.</li>
-        </ul>
-      </td>
-    </tr>
-    <tr>
-      <td><code>Organization Member</code></td>
-      <td>
-        <ul>
-          <li>View projects in which the members belong to and users in the organization.</li>
-      </td>
-    </tr>
-  </tbody>
-</table>
+| Permission  | `Organization Owner` | `Organization Billing Admin` | `Organization Console Audit Admin` | `Organization Member` |
+|---|---|---|---|---|
+| Manage organization settings, such as projects, API keys, and time zones. | ✅ | ❌ | ❌ | ❌ |
+| Invite users to or remove users from an organization, and edit organization roles of users. | ✅ | ❌ | ❌ | ❌ |
+| All the permissions of `Project Owner` for all projects in the organization. | ✅ | ❌ | ❌ | ❌ |
+| View bills and edit payment information for the organization. | ✅ | ✅ | ❌ | ❌ |
+| Manage TiDB Cloud [console audit logging](/tidb-cloud/tidb-cloud-console-auditing.md) for the organization. | ✅ | ❌ | ✅ | ❌ |
+| View users in the organization and projects in which the members belong to. | ✅ | ✅ | ✅ | ✅ |
 
 > **Note:**
 >
@@ -127,58 +89,23 @@ At the project level, there are three types of roles, in which `Project Owner` c
 
 > **Tip**:
 >
-> - `Organization Owner` has all the privileges of <code>Project Owner</code> for all projects so it can invite project members and grant project roles to members too.
-> - Each project role has all the privileges of <code>Organization Member</code> by default.
+> - `Organization Owner` has all the permissions of <code>Project Owner</code> for all projects so `Organization Owner` can invite project members and grant project roles to members too.
+> - Each project role has all the permissions of <code>Organization Member</code> by default.
 
-<table>
-  <colgroup>
-  </colgroup>
-  <thead>
-    <tr>
-      <th>Project roles</th>
-      <th>Privileges</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>Project Owner</code></td>
-      <td>
-        <ul>
-          <li>Manage project settings, such as network access, third-party integrations, alert subscription, maintenance windows, and recycle bin.</li>
-          <li>Invite users to or remove users from a project, and edit project roles of users.</li>
-          <li>Manage cluster operations in the project, such as cluster creation, deletion, backup and restore, data import, data migration, and changefeed.</li>
-          <li>Manage <a href="https://docs.pingcap.com/tidbcloud/tidb-cloud-auditing">database audit logging</a> in the project.</li>
-          <li>Manage <a href="https://docs.pingcap.com/tidbcloud/manage-serverless-spend-limit">spending limit</a> for all TiDB Serverless clusters in the project.</li>
-          <li>Manage <a href="https://docs.pingcap.com/tidbcloud/data-service-overview">Data Service</a>.</li>
-          <li>View, modify, and delete databases using <a href="https://docs.pingcap.com/tidbcloud/explore-data-with-chat2query">Chat2Query</a>.</li>
-        </ul>
-      </td>
-    </tr>
-    <tr>
-      <td><code>Project Data Access Read-Write</code></td>
-      <td>
-        <ul>
-          <li>View clusters in the project</li>
-          <li>View cluster backup records</li>
-          <li>Manage tasks such as data import, data migration, and changefeed.</li>
-          <li>Manage <a href="https://docs.pingcap.com/tidbcloud/data-service-overview">Data Service</a>.</li>
-          <li>View, modify, and delete databases using <a href="https://docs.pingcap.com/tidbcloud/explore-data-with-chat2query">Chat2Query</a>.</li>
-        </ul>
-      </td>
-    </tr>
-    <tr>
-      <td><code>Project Data Access Read-Only</code></td>
-      <td>
-        <ul>
-          <li>View clusters in the project</li>
-          <li>view cluster backup records</li>
-          <li>Manage <a href="https://docs.pingcap.com/tidbcloud/data-service-overview">Data Service</a>. For example, use or create endpoints to read data using Data Service.</li>
-          <li>View databases using <a href="https://docs.pingcap.com/tidbcloud/explore-data-with-chat2query">Chat2Query</a>.</li>
-        </ul>
-      </td>
-    </tr>
-  </tbody>
-</table>
+| Permission  | `Project Owner` | `Project Data Access Read-Write` | `Project Data Access Read-Only` |
+|---|---|---|---|
+| Manage project settings | ✅ | ❌ | ❌ |
+| Invite users to or remove users from a project, and edit project roles of users. | ✅ | ❌ | ❌ |
+| Manage [database audit logging](/tidb-cloud/tidb-cloud-auditing.md) of the project. | ✅ | ❌ | ❌ |
+| Manage [spending limit](/tidb-cloud/manage-serverless-spend-limit.md) for all TiDB Serverless clusters in the project. | ✅ | ❌ | ❌ |
+| Manage cluster operations in the project, such as cluster creation, modification, and deletion. | ✅ | ❌ | ❌ |
+| Manage cluster data such as data import, data backup and restore, and data migration. | ✅ | ✅ | ❌ |
+| Manage [Data Service](/tidb-cloud/data-service-overview.md) for data read-only operations such as using or creating endpoints to read data. | ✅ | ✅ | ✅ |
+| Manage [Data Service](/tidb-cloud/data-service-overview.md) for data read and write operations. | ✅ | ✅ | ❌ |
+| View cluster data using [Chat2Query](/tidb-cloud/explore-data-with-chat2query.md). | ✅ | ✅ | ✅ |
+| Modify and delete cluster data using [Chat2Query](/tidb-cloud/explore-data-with-chat2query.md). | ✅ | ✅ | ❌ |
+| View clusters in the project, view cluster backup records, and manage [changefeeds](/tidb-cloud/changefeed-overview.md). | ✅ | ✅ | ✅ |
+
 
 ## Manage organization access
 
