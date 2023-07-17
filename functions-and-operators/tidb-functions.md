@@ -342,9 +342,9 @@ The output is as follows:
 
 ### CURRENT_RESOURCE_GROUP
 
-The `CURRENT_RESOURCE_GROUP` function is used to show the resource group name the current session is bound to. When feature [Use Resource Control to Achieve Resource Isolation](/tidb-resource-control.md) is enabled, the available resources that can be used by SQL statements are restricted by the resource quota of the bound resource group.
+The `CURRENT_RESOURCE_GROUP` function is used to show the resource group name that the current session is bound to. When the [Resource control](/tidb-resource-control.md) feature is enabled, the available resources that can be used by SQL statements are restricted by the resource quota of the bound resource group.
 
-When a session is established, TiDB binds the session to the resource group that the login user is bound to by default. If the user is not bound to any resource groups, the session is bound to the `default` resource group. After the session is established, the bound resource group won't change by default, even if the user bound resource group is changed via [Modify the resource group bound to the user](/sql-statements/sql-statement-alter-user.md#modify-basic-user-information). You can use [`SET RESOURCE GROUP`](/sql-statements/sql-statement-set-resource-group.md) to change current session's bound resource group.
+When a session is established, TiDB binds the session to the resource group that the login user is bound to by default. If the user is not bound to any resource groups, the session is bound to the `default` resource group. Once the session is established, the bound resource group will not change by default, even if the bound resource group of the user is changed via [modifying the resource group bound to the user](/sql-statements/sql-statement-alter-user.md#modify-basic-user-information). To change the bound resource group of the current session, you can use [`SET RESOURCE GROUP`](/sql-statements/sql-statement-set-resource-group.md).
 
 #### Example
 
@@ -371,7 +371,7 @@ SELECT CURRENT_RESOURCE_GROUP();
 1 row in set (0.00 sec)
 ```
 
-Execute `SET RESOURCE GROUP` to set the resource group for the current session to `rg2` and view the resource group bound to the current user:
+Execute `SET RESOURCE GROUP` to set the resource group for the current session to `rg2`, and then view the resource group bound to the current user:
 
 ```sql
 SET RESOURCE GROUP `rg2`;
