@@ -192,9 +192,9 @@ Unsupported features are:
 - The `READ-UNCOMMITTED` and `SERIALIZABLE` [isolation levels](/system-variables.md#transaction_isolation) are not supported.
 - Modification of a column's `AUTO_INCREMENT` attribute is not allowed by default.
 - `FULLTEXT`, `HASH`, and `SPATIAL` indexes are not supported.
-- [Model constructor] `sequelize.queryInterface.showIndex(Model.tableName);` is unsupported.
-- [Model references] `sequelize.options.databaseVersion` is unsupported.
-- [QueryInterface addColumn] Add a foreign key reference by using `queryInterface.addColumn` is unsupported.
+- `sequelize.queryInterface.showIndex(Model.tableName);` is not supported.
+- `sequelize.options.databaseVersion` is not supported.
+- Adding a foreign key reference by using [`queryInterface.addColumn`](https://sequelize.org/api/v6/class/src/dialects/abstract/query-interface.js~queryinterface#instance-method-addColumn) is not supported.
 
 ### Modification of integer primary key is not supported
 
