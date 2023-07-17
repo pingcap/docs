@@ -35,7 +35,7 @@ The following is the CSV Configuration window when you use the Import Data servi
 
 ## With Header
 
-- Definition: whether *all* CSV files contain a header row. If **Header** is `True`, the first row is used as the column names. If **Header** is `False`, the first row is treated as an ordinary data row.
+- Definition: whether *all* CSV files contain a header row. If **With Header** is `True`, the first row is used as the column names. If **With Header** is `False`, the first row is treated as an ordinary data row.
 
 - Default: `True`
 
