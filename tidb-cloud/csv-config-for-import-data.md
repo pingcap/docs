@@ -11,12 +11,6 @@ The following is the CSV Configuration window when you use the Import Data servi
 
 ![CSV Configurations](/media/tidb-cloud/import-data-csv-config.png)
 
-## Skip First Row
-
-- Definition: whether **all** CSV files contain a header row. If you skip the first row, the first row is used as the column names. Otherwise, the first row is treated as an ordinary data row.
-
-- Default: enabled
-
 ## Separator
 
 - Definition: defines the field separator. It can be one or multiple characters, but must not be empty.
@@ -39,7 +33,13 @@ The following is the CSV Configuration window when you use the Import Data servi
 
 - Default: `"`
 
-## Backslash escape
+## With Header
+
+- Definition: whether *all* CSV files contain a header row. If **Header** is `True`, the first row is used as the column names. If **Header** is `False`, the first row is treated as an ordinary data row.
+
+- Default: `True`
+
+## Backslash Escape
 
 - Definition: whether to parse backslash inside fields as escape characters. If **Backslash escape** is enabled, the following sequences are recognized and converted:
 
