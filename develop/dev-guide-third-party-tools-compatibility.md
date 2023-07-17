@@ -194,7 +194,7 @@ Unsupported features are:
 - `FULLTEXT`, `HASH`, and `SPATIAL` indexes are not supported.
 - `sequelize.queryInterface.showIndex(Model.tableName);` is not supported.
 - `sequelize.options.databaseVersion` is not supported.
-- Adding a foreign key reference by using [`queryInterface.addColumn`](https://sequelize.org/api/v6/class/src/dialects/abstract/query-interface.js~queryinterface#instance-method-addColumn) is not supported.
+- Adding a foreign key reference using [`queryInterface.addColumn`](https://sequelize.org/api/v6/class/src/dialects/abstract/query-interface.js~queryinterface#instance-method-addColumn) is not supported.
 
 ### Modification of integer primary key is not supported
 
