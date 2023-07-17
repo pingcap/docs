@@ -37,3 +37,21 @@ SET SESSION tidb_opt_fix_control = '44262:ON,44389:ON';
 - Default value: `OFF`
 - Possible values: `ON`, `OFF`
 - For filters such as `c = 10 and (a = 'xx' or (a = 'kk' and b = 1))`, this variable controls whether to try to build more comprehensive scan ranges for `IndexRangeScan`.
+
+### [`44823`](https://github.com/pingcap/tidb/issues/44823) <span class="version-mark">New in v7.3.0</span>
+
+- TODO
+
+### [`44830`](https://github.com/pingcap/tidb/issues/44830) <span class="version-mark">New in v7.3.0</span>
+
+- Default value: `OFF`
+- Possible values: `ON`、`OFF`
+- TODO
+
+### [`44855`](https://github.com/pingcap/tidb/issues/44855) <span class="version-mark">New in v7.3.0</span>
+
+- Default value: `OFF`
+- Possible values: `ON`、`OFF`
+- In some scenarios, when the `Probe` side of the `IndexJoin` contains `Selection`, TiDB overestimates the row count of the `IndexScan` severely, which makes TiDB choose other execution plans when `IndexJoin` is better.
+- TiDB has introduced code to mitigate this problem. However, it's not enabled by default because of potential risk of regressions in execution plans.
+- This switch controls whether to enable this mitigation logic.
