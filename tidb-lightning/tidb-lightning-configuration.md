@@ -302,7 +302,10 @@ max-allowed-packet = 67_108_864
 # For backward compatibility, bool values "true" and "false" are also allowed for this field.
 # "true" is equivalent to "required" and "false" is equivalent to "off".
 checksum = "required"
-# Specifies whether the ADMIN CHECKSUM TABLE <table> operation is executed via TiDB. The default value is "false", which means that the ADMIN CHECKSUM TABLE <table> command is sent to TiKV for execution via TiDB Lightning. It is recommended that you set this value to "true" to make it easier to locate the problem if checksum fails. Meanwhile, if you want to adjust concurrency when this value is "true", you need to set the `tidb_checksum_table_concurrency` parameter in TiDB.
+# Specifies whether the ADMIN CHECKSUM TABLE <table> operation is executed via TiDB.
+# The default value is "false", which means that the ADMIN CHECKSUM TABLE <table> command is sent to TiKV for execution via TiDB Lightning.
+# It is recommended that you set this value to "true" to make it easier to locate the problem if checksum fails.
+# Meanwhile, if you want to adjust concurrency when this value is "true", you need to set the `tidb_checksum_table_concurrency` parameter in TiDB.
 # checksum-via-sql = false
 # Specifies whether to perform `ANALYZE TABLE <table>` for each table after checksum is done.
 # Options available for this field are the same as `checksum`. However, the default value for this field is "optional".
