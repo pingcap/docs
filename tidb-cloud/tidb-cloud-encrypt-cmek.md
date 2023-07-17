@@ -34,8 +34,8 @@ You can create a CMEK-enabled project either using the console or using API.
 To create a CMEK-enabled project, take the following steps:
 
 1. Click <MDSvgIcon name="icon-top-organization" /> in the lower-left corner of the TiDB Cloud console.
-2. Click **Organization Settings**. You can enter your organization management page.
-3. Click **Create New Project** to enter the project creation page.
+2. Click **Organization Settings**.
+3. On the **Organization Settings** page, click **Create New Project** to open the project creation dialog.
 4. Fill in a project name.
 5. Choose to enable the CMEK capability of the project.
 6. Click **Confirm** to complete the project creation.
@@ -56,7 +56,7 @@ Currently, TiDB Cloud API is still in beta. For more information, see [TiDB Clou
 
 ### Step 2. Complete the CMEK configuration of the project
 
-You can complete the CMEK configuration of the project either using the console or using API.
+You can complete the CMEK configuration of the project using either the TiDB Cloud console or API.
 
 > **Note:**
 >
@@ -67,14 +67,14 @@ You can complete the CMEK configuration of the project either using the console 
 
 To complete the CMEK configuration of the project, take the following steps:
 
-1. Click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner, switch to the target project if you have multiple projects, and then click **Admin**.
+1. Click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner, switch to the target project if you have multiple projects, and then click **Project Settings**.
 2. Click **Encryption Access** to enter the encryption management page of the project.
 3. Click **Create Encryption Key** to enter the key creation page.
 4. The key provider only supports AWS KMS. You can choose the region where the encryption key is used.
 5. Copy and save the JSON file as `ROLE-TRUST-POLICY.JSON`. This file describes the trust relationship. 
 6. Add this trust relationship to the key policy of AWS KMS. For more information, refer to [Key policies in AWS KMS](https://docs.aws.amazon.com/zh_cn/kms/latest/developerguide/key-policies.html).
 7. Fill in the Key ARN obtained from AWS KMS.
-8. Click **Create** to finish creating the key.
+8. Click **Create** to create the key.
 
 </div>
 <div label="Use API" value="api">
@@ -127,7 +127,7 @@ To complete the CMEK configuration of the project, take the following steps:
     }
     ```
 
-    - `<pingcap-account>` is the account where your clusters run in. If you do not know the account, contact [support](/tidb-cloud/tidb-cloud-support.md).
+    - `<pingcap-account>` is the account where your clusters run in. If you do not know the account, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
     - `<region>` is the region where you want to create your cluster, for example, `us-west-2`. If you do not want to specify a region, replace `<region>` with a wildcard `*`, and put it in a `StringLike` block.
     - For EBS-related policy in the preceding block, refer to [AWS documentation](https://docs.aws.amazon.com/kms/latest/developerguide/conditions-kms.html#conditions-kms-caller-account).
     - For S3-related policy in the preceding block, refer to [AWS blog](https://repost.aws/knowledge-center/s3-bucket-access-default-encryption).
@@ -146,7 +146,7 @@ To complete the CMEK configuration of the project, take the following steps:
 
 ### Step 3. Create a cluster
 
-Under the project created in Step 1, create a TiDB Dedicated cluster hosted on AWS. For detailed steps, refer to [this document](https://docs.pingcap.com/tidbcloud/create-tidb-cluster). Ensure that the region where the cluster is located is the same as that in Step 2.
+Under the project created in [Step 1](#step-1-create-a-cmek-enabled-project), create a TiDB Dedicated cluster hosted on AWS. For detailed steps, refer to [this document](/tidb-cloud/create-tidb-cluster.md). Ensure that the region where the cluster is located is the same as that in [Step 2](/tidb-cloud/tidb-cloud-encrypt-cmek.md#step-2-complete-the-cmek-configuration-of-the-project).
 
 > **Note:**
 >
