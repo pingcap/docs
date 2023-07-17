@@ -8,6 +8,27 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2023.
 
+## July 18, 2023
+
+**General changes**
+
+- The Customer-Managed Encryption Key (CMEK) feature is now generally available (GA).
+
+    You can create CMEK based on AWS KMS to encrypt data stored in EBS and S3 directly from the TiDB Cloud console. This ensures that customer data is encrypted with a key managed by the customer, which enhances security.
+
+    Note that this feature still has restrictions and is only available upon request. To apply for this feature, contact xxxx.
+
+- Optimize the Import feature in TiDB Cloud, aimed at enhancing the data import experience. The following improvements have been made:
+
+    - Unified Import Entry: consolidate the entry for importing data, allowing you to seamlessly switch between local and Amazon S3 sources.
+    - Streamlined configuration: remove infrequent features and unnecessary steps to simplify the import process. Importing data from Amazon S3 now only requires a single step, saving time and effort.
+    - Enhanced CSV configuration: the CSV configuration settings are now conveniently located under the file type option, making it easier for you to quickly configure the necessary parameters.
+    - Enhanced target table selection: introduce a checkbox-based selection method, empowering you to choose the desired target table for importing data from pre-created tables. This improvement eliminates the need for complex expressions and reduces configuration complexity.
+    - Refined display information: resolve issues related to inaccurate information displayed during the import process. It includes inaccurate target table schema file counts caused by scanning timeouts. Additionally, the Preview feature has been removed to prevent incomplete data display and avoids misleading information.
+    - Improved source files mapping: you now have the flexibility to define mapping relationships between source files and target tables. It addresses the challenge of modifying source file names to meet specific naming requirements.
+
+- Refine TiDB Cloud user roles and granular access control to enhance security, compliance and user productivity.
+
 ## July 11, 2023
 
 **General changes**
