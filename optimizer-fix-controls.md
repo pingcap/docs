@@ -53,5 +53,5 @@ SET SESSION tidb_opt_fix_control = '44262:ON,44389:ON';
 - Default value: `OFF`
 - Possible values: `ON`、`OFF`
 - In some scenarios, when the `Probe` side of the `IndexJoin` contains `Selection`, TiDB overestimates the row count of the `IndexScan` severely, which makes TiDB choose other execution plans when `IndexJoin` is better.
-- TiDB has introduced code to mitigate this problem. However, it's not enabled by default because of potential risk of regressions in execution plans.
+- TiDB has introduced code to mitigate this problem. However, it's not enabled by default because of the potential risk of regressions in execution plans.
 - This switch controls whether to enable this mitigation logic.
