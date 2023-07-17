@@ -26,7 +26,7 @@ If you want to encrypt your data using the KMS owned by your account, take the f
 
 ### Step 1. Create a CMEK-enabled project
 
-You can create a CMEK-enabled project either using the console or using API.
+If you are in the `Organization Owner` role of your organization, you can create a CMEK-enabled project using either the TiDB Cloud console or API.
 
 <SimpleTab groupId="method">
 <div label="Use Console" value="console">
