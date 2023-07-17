@@ -42,7 +42,7 @@ max-backups = 14
 ### tidb-lightning task configuration
 
 [lightning]
-# Checks whether the cluster satisfies the minimum requirement before starting the task,, and check whether TiKV has more than 10% free space left after startup.
+# Checks whether the cluster satisfies the minimum requirement before starting the task, and check whether TiKV has more than 10% free space left after startup.
 #check-requirements = true
 
 # The maximum number of engines to be opened concurrently.
