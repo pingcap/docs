@@ -9,7 +9,7 @@ You can integrate TiDB Cloud with third-party metrics services to receive TiDB C
 
 ## Required access
 
-To edit third-party integration settings, you must have the `Owner` access to your organization or `Member` access to the target project.
+To edit third-party integration settings, you must be in the `Organization Owner` role of your organization or the `Project Owner` role of the target project.
 
 ## View or modify third-party integrations
 

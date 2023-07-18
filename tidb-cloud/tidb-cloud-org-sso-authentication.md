@@ -29,7 +29,7 @@ Before migrating to Cloud Organization SSO, check and confirm the items in this 
 > **Note:**
 >
 > - Once Cloud Organization SSO is enabled, it cannot be disabled.
-> - To enable Cloud Organization SSO, you need to have the owner role in your TiDB Cloud organization. For more information about roles, see [Manage role access](/tidb-cloud/manage-user-access.md#manage-role-access).
+> - To enable Cloud Organization SSO, you need to be in the `Organization Owner` role of your TiDB Cloud organization. For more information about roles, see [User roles](/tidb-cloud/manage-user-access.md#user-roles).
 
 ### Decide a custom URL for the TiDB Cloud login page of your organization
 
@@ -54,9 +54,9 @@ All the enabled authentication methods will be displayed on your custom TiDB Clo
 
 ### Decide whether to enable auto-provision
 
-Auto-provision is a feature that allows members to automatically join an organization without requiring an invitation from an existing member or organization owner. In TiDB Cloud, it is disabled by default for all the supported authentication methods.
+Auto-provision is a feature that allows members to automatically join an organization without requiring an invitation from the `Organization Owner` or `Project Owner`. In TiDB Cloud, it is disabled by default for all the supported authentication methods.
 
-- When auto-provision is disabled for an authentication method, only users who have been invited by an organization owner can log in to your custom URL.
+- When auto-provision is disabled for an authentication method, only users who have been invited by an `Organization Owner` or `Project Owner` can log in to your custom URL.
 - When auto-provision is enabled for an authentication method, any users using this authentication method can log in to your custom URL. After login, they are automatically assigned the default **Member** role within the organization.
 
 For security considerations, if you choose to enable auto-provision, it is recommended to limit the allowed email domains for authentication when you [configure the authentication method details](#step-2-configure-authentication-methods).
@@ -74,7 +74,7 @@ Before enabling Cloud Organization SSO, make sure to inform your members about t
 
 To enable Cloud Organization SSO, take the following steps:
 
-1. Log in to [TiDB Cloud console](https://tidbcloud.com) as a user with the organization owner role.
+1. Log in to [TiDB Cloud console](https://tidbcloud.com) as a user with the `Organization Owner` role.
 2. In the lower-left corner of the TiDB Cloud console, click <MDSvgIcon name="icon-top-organization" />, and then click **Organization Settings**.
 3. On the **Organization Settings** page, click the **Authentication** tab, and then click **Enable**.
 4. In the dialog, fill in the custom URL for your organization, which must be unique in TiDB Cloud.
