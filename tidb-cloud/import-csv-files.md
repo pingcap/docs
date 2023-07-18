@@ -118,17 +118,27 @@ To import the CSV files to TiDB Cloud, take the following steps:
 
 5. You can choose to **Import into Pre-created Tables**, or **Import Schema and Data from S3**.
 
+    **Import into Pre-created Tables** allows you to create tables in TiDB in advance and select the tables that you want to import data into. In this case, you can choose up to 1000 tables to import. 
+    **Import Schema and Data from S3** allows you to import SQL scripts for creating a table and import corresponding table data stored in S3 into TiDB.
+
 6. If you want to modify the file patterns, click **Advanced Settings** and then click **Mapping Settings**.
 
     > **Note:**
     >
     > When you use this feature, one import task can only import data to a single table at a time. If you want to use this feature to import data into different tables, you need to import several times, each time specifying a different target table.
 
-    To modify the file pattern, specify a custom mapping rule between CSV files and a single target table in the following fields, and then click **Confirm**. After that, the data source files will be re-scanned using the provided custom mapping rule.
+    If the source files do not meet the naming conventions, you can specify a custom mapping rule between a single target table and the CSV file in the following fields, and then click **Confirm**. After that, the data source files will be re-scanned using the provided custom mapping rule.
+    
+    You can also use wildcards to match the source files. For example:
+    
+    - `s3://<bucket-name>/path/my-data?.csv`: all CSV files starting with `my-data` and one character (such as `my-data1.csv` and `my-data2.csv`) in that folder will be imported into the same target table.
+    - `s3://<bucket-name>/path/my-data*.csv`: all CSV files in the folder starting with `my-data` will be imported into the same target table.
+    
+    Note that only `?` and `*` are supported.
 
-    - **Target Database**: enter the name of the target database in TiDB Cloud.
+    - **Target Database**: enter the name of the target database you select.
 
-    - **Target Tables**: enter the name of the target table in TiDB Cloud. Note that this field only accepts one specific table name, so wildcards are not supported.
+    - **Target Tables**: enter the name of the target table you select. Note that this field only accepts one specific table name, so wildcards are not supported.
 
     - **Source file URIs and names**: enter the source file URI and name, for example, `s3://sampledate/ingest/TableName.01.csv`.
 

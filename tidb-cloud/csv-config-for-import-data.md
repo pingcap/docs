@@ -41,7 +41,7 @@ The following is the CSV Configuration window when you use the Import Data servi
 
 ## Backslash Escape
 
-- Definition: whether to parse backslash inside fields as escape characters. If **Backslash escape** is enabled, the following sequences are recognized and converted:
+- Definition: whether to parse backslash inside fields as escape characters. If **Backslash escape** is `True`, the following sequences are recognized and converted:
 
     | Sequence | Converted to             |
     |----------|--------------------------|
@@ -71,4 +71,4 @@ The following is the CSV Configuration window when you use the Import Data servi
 
     `"{\"key1\": \"val1\", \"key2\":\"val2\" }"`
 
-- Default: enabled
+- Default: `True`

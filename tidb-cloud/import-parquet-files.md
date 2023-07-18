@@ -120,7 +120,7 @@ To import the Parquet files to TiDB Cloud, take the following steps:
 
 4. You can choose to **Import into Pre-created Tables**, or **Import Schema and Data from S3**.
 
-5. If you want to modify the file patterns, click **Advanced Settings** and then click **Mapping Settings**.
+5. When you choose **Import into Pre-created Tables**, if you want to import the source files that do not meet the naming conventions, click **Advanced Settings** and then click **Mapping Settings**.
 
     > **Note:**
     >
