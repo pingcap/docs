@@ -40,13 +40,16 @@ SET SESSION tidb_opt_fix_control = '44262:ON,44389:ON';
 
 ### [`44823`](https://github.com/pingcap/tidb/issues/44823) <span class="version-mark">New in v7.3.0</span>
 
-- TODO
+- Default value: `200`
+- Possible values: `[0, 2147483647]`
+- For queries with more than `200` parameters, Plan Cache will not cache their execution plans to save memory.
+- This variable controls this threshold. `0` means no limit.
 
 ### [`44830`](https://github.com/pingcap/tidb/issues/44830) <span class="version-mark">New in v7.3.0</span>
 
 - Default value: `OFF`
 - Possible values: `ON`、`OFF`
-- TODO
+- This variable controls whether Plan Cache is allowed to cache the execution plan with `PointGet` that is generated during physical optimization.
 
 ### [`44855`](https://github.com/pingcap/tidb/issues/44855) <span class="version-mark">New in v7.3.0</span>
 
