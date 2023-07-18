@@ -27,7 +27,7 @@ In Data Service, you can either either generate an endpoint automatically or cre
 
 ### Generate an endpoint automatically
 
-To create an endpoint automatically, perform the following steps:
+In TiDB Cloud, you can generate an endpoint or multiple endpoints automatically at a time as follows:
 
 1. Navigate to the [**Data Service**](https://tidbcloud.com/console/data-service) page of your project.
 2. In the left pane, locate your target Data App, click **+** to the right of the App name, and then click **Auto-Generate HTTP Endpoint**. The dialog for endpoint creation is displayed.
@@ -37,18 +37,15 @@ To create an endpoint automatically, perform the following steps:
 
         > **Note:**
         >
-        > The **Table** drop-down list does not include the following tables:
-        >
-        > - System tables for your cluster
-        > - Empty tables without column definitions
+        > The **Table** drop-down list does not include system tables and empty tables without column definitions.
 
     2. Select the desired operations for the endpoints.
 
         - To create one endpoint only, choose one operation.
         - To create multiple endpoints, choose multiple operations. For each operation you selected, TiDB Cloud will create a corresponding endpoint.
 
-    3. (Optional) Configure the timeout and category tag for the endpoints.
-    4. Choose whether to disable TiDB Cloud to automatically deploy the generated HTTP endpoint.
+    3. (Optional) Configure the timeout and the tag for the endpoints.
+    4. (Optional) Choose whether to enable **Deploy HTTP Endpoint**. Note that enabling this option will skip the draft review process and deploy the generated HTTP endpoints directly.
 
 4. Click **Generate**, and then refresh the webpage of the TiDB Cloud console.
 
@@ -56,10 +53,10 @@ To create an endpoint automatically, perform the following steps:
 
 5. Check the generated endpoint name, SQL statements, properties, and parameters of the new endpoint.
 
-    - Endpoint name: the generated endpoint name is in the `/<selected table name>` format, and the operation type is displayed before the name.
+    - Endpoint name: the generated endpoint name is in the `/<selected table name>` format, and the request method (such as `GET`, `POST`, and `UPDATE`) is displayed before the name.
 
         - If a batch operation is selected, the endpoint name is the plural format of the table name. For example, if the selected table name is `sample-table` and the selected operation is **POST Batch Create**, you can find the generated `POST /sample-tables` endpoint.
-        - If there is already an endpoint with the same operation type and the `/<selected table name>` name, TiDB Cloud will also append `_copy` to the name of the generated endpoint. For example, `/sample-tables_copy`.
+        - If there is already an endpoint with the same request method and the `/<selected table name>` name, TiDB Cloud will also append `_copy` to the name of the generated endpoint. For example, `/sample-tables_copy`.
 
     - SQL statements: TiDB Cloud automatically writes SQL statements for the generated endpoints according to the table columns and your selected endpoint operations. You can click the endpoint name to view the SQL statements in the middle area of the page.
     - Endpoint properties: TiDB Cloud automatically configures the endpoint path, request method, and timeout according to your selection. You can find the properties in the right pane of the page.

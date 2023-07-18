@@ -17,7 +17,7 @@ Data Service returns an HTTP response with a JSON body. The response body contai
 - `data`: _object_. The execution results, which include three parts:
 
     - `columns`: _array_. Schema information for the returned fields.
-    - `rows`: _array_. The returned results in `key:value` format.
+    - `rows`: _array_. The returned results in `key:value` format. If **Batch** is enabled for an endpoint, the returned results of the endpoint also include the `"message"` and `"success"` fields for each row to indicate the response and status of that row.
     - `result`: _object_. The execution-related information of the SQL statement, including success/failure status, execution time, number of rows returned, and user configuration.
 
 An example response is as follows:
@@ -27,37 +27,34 @@ An example response is as follows:
 
 ```json
 {
-  "type": "sql_endpoint",
-  "data": {
-    "columns": [
-      {
-        "col": "id",
-        "data_type": "BIGINT",
-        "nullable": false
-      },
-      {
-        "col": "type",
-        "data_type": "VARCHAR",
-        "nullable": false
-      }
-    ],
-    "rows": [
-      {
-        "id": "20008295419",
-        "type": "CreateEvent"
-      }
-    ],
-    "result": {
-      "code": 200,
-      "message": "Query OK!",
-      "start_ms": 1678965476709,
-      "end_ms": 1678965476839,
-      "latency": "130ms",
-      "row_count": 1,
-      "row_affect": 0,
-      "limit": 50
+    "type": "sql_endpoint",
+    "data": {
+        "columns": [],
+        "rows": [
+            {
+                "auto_increment_id": "270001",
+                "index": "0",
+                "message": "Row insert successfully",
+                "success": "true"
+            },
+            {
+                "auto_increment_id": "270002",
+                "index": "1",
+                "message": "Row insert successfully",
+                "success": "true"
+            }
+        ],
+        "result": {
+            "code": 200,
+            "message": "Query OK, 2 rows affected (8.359 sec)",
+            "start_ms": 1689593360560,
+            "end_ms": 1689593368919,
+            "latency": "8.359s",
+            "row_count": 2,
+            "row_affect": 2,
+            "limit": 500
+        }
     }
-  }
 }
 ```
 
