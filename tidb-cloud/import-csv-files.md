@@ -123,9 +123,6 @@ To import the CSV files to TiDB Cloud, take the following steps:
 
 6. If you want to modify the file patterns, click **Advanced Settings** and then click **Mapping Settings**.
 
-    > **Note:**
-    >
-    > When you use this feature, one import task can only import data to a single table at a time. If you want to use this feature to import data into different tables, you need to import several times, each time specifying a different target table.
 
     If the source files do not meet the naming conventions, you can specify a custom mapping rule between a single target table and the CSV file in the following fields, and then click **Confirm**. After that, the data source files will be re-scanned using the provided custom mapping rule.
     
