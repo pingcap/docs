@@ -11,7 +11,7 @@ This document describes how to manage your endpoints in a Data App in the TiDB C
 
 ## Before you begin
 
-- Before you create an endpoint, make sure that the target table exists in your target database of the target cluster, and that the columns of the target table are already defined.
+- Before you create an endpoint, make sure that the target table for the endpoint exists in your target database of the target cluster, and that the columns of the target table are already defined.
 
 - Before you manage an endpoint, make sure that you have created a cluster and a Data App. For more information, see [Create a Data App](/tidb-cloud/data-service-manage-data-app.md#create-a-data-app).
 
@@ -23,7 +23,7 @@ In Data Service, you can either either generate an endpoint automatically or cre
 
 > **Tip:**
 >
-> You can also create an endpoint from a SQL file in Chat2Query (beta). For more details, see [Generate an endpoint from a SQL file](/tidb-cloud/explore-data-with-chat2query.md#generate-an-endpoint-from-a-sql-file).
+> You can also create an endpoint from a SQL file in Chat2Query (beta). For more information, see [Generate an endpoint from a SQL file](/tidb-cloud/explore-data-with-chat2query.md#generate-an-endpoint-from-a-sql-file).
 
 ### Generate an endpoint automatically
 
@@ -49,18 +49,18 @@ In TiDB Cloud, you can generate an endpoint or multiple endpoints automatically 
 
 4. Click **Generate**, and then refresh the webpage of the TiDB Cloud console.
 
-    The generated endpoints is displayed at the top of the endpoint list.
+    The generated endpoint is displayed at the top of the endpoint list.
 
 5. Check the generated endpoint name, SQL statements, properties, and parameters of the new endpoint.
 
-    - Endpoint name: the generated endpoint name is in the `/<selected table name>` format, and the request method (such as `GET`, `POST`, and `PUT`) is displayed before the name.
+    - Endpoint name: the generated endpoint name is in the `/<selected table name>` format, and the request method (such as `GET`, `POST`, and `PUT`) is displayed before the name. For example, if the selected table name is `sample-table` and the selected operation is **POST Create**, the generated endpoint is displayed as `POST /sample-table`.
 
-        - If a batch operation is selected, the endpoint name is the plural format of the table name. For example, if the selected table name is `sample-table` and the selected operation is **POST Batch Create**, you can find the generated `POST /sample-tables` endpoint.
-        - If there is already an endpoint with the same request method and the `/<selected table name>` name, TiDB Cloud will also append `_copy` to the name of the generated endpoint. For example, `/sample-tables_copy`.
+        - If a batch operation is selected, the endpoint name is in the `/<selected table name>s` format. For example, if the selected table name is `sample-table` and the selected operation is **POST Batch Create**, the generated endpoint is displayed as `POST /sample-tables`.
+        - If there is already an endpoint with the same request method and endpoint name (`/<selected table name>`), TiDB Cloud will also append `_copy` to the name of the generated endpoint. For example, `/sample-table_copy`.
 
-    - SQL statements: TiDB Cloud automatically writes SQL statements for the generated endpoints according to the table columns and your selected endpoint operations. You can click the endpoint name to view the SQL statements in the middle area of the page.
+    - SQL statements: TiDB Cloud automatically writes SQL statements for the generated endpoints according to the table columns and your selected endpoint operations. You can click the endpoint name to view its SQL statements in the middle area of the page.
     - Endpoint properties: TiDB Cloud automatically configures the endpoint path, request method, and timeout according to your selection. You can find the properties in the right pane of the page.
-    - Endpoint parameters: TiDB Cloud automatically configures parameters for the endpoint using `POST`, `PUT`, or `DELETE` request methods.
+    - Endpoint parameters: TiDB Cloud automatically configures parameters for endpoints that use `POST`, `PUT`, or `DELETE` request methods.
 
 6. If you want to modify the generated endpoint name, SQL statements, properties, and parameters of the new endpoint, see instructions in [Develop an endpoint](#deploy-an-endpoint).
 
@@ -91,7 +91,7 @@ On the right pane of the endpoint details page, you can click the **Properties**
     - Only letters, numbers, underscores (`_`), and slashes (`/`) are allowed in the path, which must start with a slash (`/`) and end with a letter, number, or underscore (`_`). For example, `/my_endpoint/get_id`.
     - The length of the path must be less than 64 characters.
 
-- **Batch**: controls whether to enable the batch operations for the endpoint.
+- **Batch**: controls whether to enable the batch operations for an endpoint that uses the `POST`, `PUT`, or `DELETE` request method. When this option is enabled, you can operate multiple rows in one request.
 
 - **Endpoint URL**: (read-only) the URL is automatically generated based on the region where the corresponding cluster is located, the service URL of the Data App, and the path of the endpoint. For example, if the path of the endpoint is `/my_endpoint/get_id`, the endpoint URL is `https://<region>.data.tidbcloud.com/api/v1beta/app/<App ID>/endpoint/my_endpoint/get_id`.
 
@@ -112,7 +112,7 @@ On the right pane of the endpoint details page, you can click the **Properties**
 - **Max Rows**: the maximum number of rows that the endpoint can operate or return.
 
     - Default value: `50`
-    - Maximum value: `2000` for non-batch endpoints  and `100` for batch endpoints
+    - Maximum value: `100` for batch-enabled endpoints and `2000` for other endpoints
     - Minimum value: `1`
 
 - **Description** (Optional): the description of the endpoint.
