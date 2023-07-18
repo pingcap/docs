@@ -12,22 +12,28 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **General changes**
 
-- The Customer-Managed Encryption Key (CMEK) feature is now generally available (GA).
+- Support role-based access control at both the organization level and project level, which lets you grant roles with minimum permissions to users for better security, compliance, and productivity.
 
+    - The organization roles include `Organization Owner`, `Organization Billing Admin`, `Organization Console Audit Admin`, and `Organization Member`.
+    - The project roles include `Project Owner`, `Project Data Access Read-Write`, and `Project Data Access Read-Only`.
+    - To manage clusters in a project (such as cluster creation, modification, and deletion), you need to be in the `Organization Owner` or `Project Owner` role. 
+  
+  For more information about permissions of different roles, see [User roles](/tidb-cloud/manage-user-access.md#user-roles).
+
+- The Customer-Managed Encryption Key (CMEK) feature is now generally available (GA) for TiDB Dedicated clusters hosted on AWS.
+  
     You can create CMEK based on AWS KMS to encrypt data stored in EBS and S3 directly from the TiDB Cloud console. This ensures that customer data is encrypted with a key managed by the customer, which enhances security.
-
-    Note that this feature still has restrictions and is only available upon request. To apply for this feature, contact xxxx.
+  
+    Note that this feature still has restrictions and is only available upon request. To apply for this feature, contact [TiDB Cloud support](/tidb-cloud/tidb-cloud-support.md).
 
 - Optimize the Import feature in TiDB Cloud, aimed at enhancing the data import experience. The following improvements have been made:
 
-    - Unified Import Entry: consolidate the entry for importing data, allowing you to seamlessly switch between local and Amazon S3 sources.
-    - Streamlined configuration: remove infrequent features and unnecessary steps to simplify the import process. Importing data from Amazon S3 now only requires a single step, saving time and effort.
-    - Enhanced CSV configuration: the CSV configuration settings are now conveniently located under the file type option, making it easier for you to quickly configure the necessary parameters.
-    - Enhanced target table selection: introduce a checkbox-based selection method, empowering you to choose the desired target table for importing data from pre-created tables. This improvement eliminates the need for complex expressions and reduces configuration complexity.
-    - Refined display information: resolve issues related to inaccurate information displayed during the import process. It includes inaccurate target table schema file counts caused by scanning timeouts. Additionally, the Preview feature has been removed to prevent incomplete data display and avoids misleading information.
-    - Improved source files mapping: you now have the flexibility to define mapping relationships between source files and target tables. It addresses the challenge of modifying source file names to meet specific naming requirements.
-
-- Refine TiDB Cloud user roles and granular access control to enhance security, compliance and user productivity.
+    - Unified Import entry for TiDB Serverless: consolidate the entries for importing data, allowing you to seamlessly switch between importing local files and importing files from Amazon S3.
+    - Streamlined configuration: importing data from Amazon S3 now only requires a single step, saving time and effort.
+    - Enhanced CSV configuration: the CSV configuration settings are now located under the file type option, making it easier for you to quickly configure the necessary parameters.
+    - Enhanced target table selection: support choosing the desired target tables for data import by clicking checkboxes. This improvement eliminates the need for complex expressions and simplifies the target table selection.
+    - Refined display information: resolve issues related to inaccurate information displayed during the import process. In addition, the Preview feature has been removed to prevent incomplete data display and avoids misleading information.
+    - Improved source files mapping: support defining mapping relationships between source files and target tables. It addresses the challenge of modifying source file names to meet specific naming requirements.
 
 ## July 11, 2023
 
