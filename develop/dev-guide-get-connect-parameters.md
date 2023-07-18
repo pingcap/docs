@@ -53,7 +53,7 @@ If you do not have a TiDB Cloud cluster yet, you can create one using the [Creat
 
     ![Click Connect - Dedicated](/media/develop/tidb-cloud-click-connect-dedicated.jpeg)
 
-3. Click on **Allow Access from Anywhere**, and then click on **Update Filter**. This will open the database to the public network. If you want to set specific IP restrictions, please refer to the [Connect via Standard Connection](/tidb-cloud/connect-via-standard-connection#connect-to-tidb-dedicated-via-standard-connection.md) document.
+3. Click on **Allow Access from Anywhere**, and then click on **Update Filter**. This will open the database to the public network. If you want to set specific IP restrictions, please refer to the [Connect via Standard Connection](/tidb-cloud/connect-via-standard-connection.md#connect-via-standard-connection) document.
 
     ![Allow All Connections](/media/develop/tidb-cloud-connect-allow-all.jpeg)
     ![Update Allow All](/media/develop/tidb-cloud-connect-allow-all-update.jpeg)
