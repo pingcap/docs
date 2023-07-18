@@ -12,7 +12,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **General changes**
 
-- Support role-based access control at both the organization level and project level, which lets you grant roles with minimum permissions to users for better security, compliance, and productivity.
+- Refine role-based access control at both the organization level and project level, which lets you grant roles with minimum permissions to users for better security, compliance, and productivity.
 
     - The organization roles include `Organization Owner`, `Organization Billing Admin`, `Organization Console Audit Admin`, and `Organization Member`.
     - The project roles include `Project Owner`, `Project Data Access Read-Write`, and `Project Data Access Read-Only`.
