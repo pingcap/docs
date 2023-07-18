@@ -160,7 +160,7 @@ For detailed integration guide, see [Quick Start Guide on Integrating TiDB with 
 
 ### Matcher rules
 
-Take the following configuration of dispatchers as an example:
+Take the following configuration of `dispatchers` as an example:
 
 ```toml
 [sink]
