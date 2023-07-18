@@ -118,7 +118,7 @@ To import the CSV files to TiDB Cloud, take the following steps:
 
 5. You can choose to **Import into Pre-created Tables**, or **Import Schema and Data from S3**.
 
-    **Import into Pre-created Tables** allows you to create tables in TiDB in advance and select the tables that you want to import data into. In this case, you can choose up to 1000 tables to import. 
+    **Import into Pre-created Tables** allows you to create tables in TiDB in advance and select the tables that you want to import data into. In this case, you can choose up to 1000 tables to import. You can click **Chat2Qury** in the left navigation pane to create tables. For more information about how to use Chat2Qury, see [Explore Your Data with AI-Powered Chat2Query](/tidb-cloud/explore-data-with-chat2query.md).
     **Import Schema and Data from S3** allows you to import SQL scripts for creating a table and import corresponding table data stored in S3 into TiDB.
 
 6. If you want to modify the file patterns, click **Advanced Settings** and then click **Mapping Settings**.
@@ -137,7 +137,7 @@ To import the CSV files to TiDB Cloud, take the following steps:
 
     - **Target Tables**: enter the name of the target table you select. Note that this field only accepts one specific table name, so wildcards are not supported.
 
-    - **Source file URIs and names**: enter the source file URI and name, for example, `s3://sampledate/ingest/TableName.01.csv`.
+    - **Source file URIs and names**: enter the source file URI and name, for example, `s3://sampledate/ingest/TableName.01.csv`. Note that the folder name of the URI must contain the data source folder. For more information about the URI format, see [URI format](https://docs.pingcap.com/tidb/stable/backup-and-restore-storages#uri-format).
 
 7. Click **Start Import**. If you see a warning message, resolve this by providing the correct source file, renaming the existing one according to [Naming Conventions for Data Import](/tidb-cloud/naming-conventions-for-data-import.md), or using **Advanced Settings** to make changes. After resolving these issues, you need to import the data again.
 
