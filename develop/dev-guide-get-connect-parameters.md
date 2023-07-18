@@ -7,13 +7,19 @@ summary: This document provides instructions on obtaining the connection paramet
 
 # Get TiDB Cloud Connection Parameters
 
+<CustomContent platform="tidb-cloud">
+
 This document outlines the steps to obtain the connection parameters for TiDB Cloud in the TiDB Cloud console.
 
 If you do not have a TiDB Cloud cluster yet, you can create one using the [Create Cluster](https://tidbcloud.com/console/clusters/create-cluster) page.
 
 ![Create TiDB Cloud Cluster](/media/develop/tidb-cloud-create-cluster.jpg)
 
+</CustomContent>
+
 ## TiDB Cloud Serverless Tier Cluster
+
+<CustomContent platform="tidb-cloud">
 
 1. Go to the [Clusters](https://tidbcloud.com/console/clusters) page and click on the name of your TiDB Cloud Serverless Tier cluster.
 
@@ -43,7 +49,11 @@ If you do not have a TiDB Cloud cluster yet, you can create one using the [Creat
 
 6. If you encounter any issues obtaining these parameters, refer to the [Connect to Your TiDB Serverless Tier Cluster](/tidb-cloud/connect-to-tidb-cluster.md#serverless-tier) and [Secure Connections to Serverless Tier Clusters](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md) documents.
 
+</CustomContent>
+
 ## TiDB Cloud Dedicated Tier Cluster
+
+<CustomContent platform="tidb-cloud">
 
 1. Go to the [Clusters](https://tidbcloud.com/console/clusters) page and click on the name of your TiDB Cloud Dedicated Tier cluster.
 
@@ -78,3 +88,5 @@ If you do not have a TiDB Cloud cluster yet, you can create one using the [Creat
     ![Dedicated Security](/media/develop/tidb-cloud-dedicated-security.jpeg)
 
 6. If you encounter any issues obtaining these parameters, refer to the [Connect to Your TiDB Dedicated Tier Cluster](/tidb-cloud/connect-to-tidb-cluster.md#dedicated-tier) document.
+
+</CustomContent>
