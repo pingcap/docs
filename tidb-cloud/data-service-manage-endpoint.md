@@ -112,7 +112,7 @@ On the right pane of the endpoint details page, you can click the **Properties**
 - **Max Rows**: the maximum number of rows that the endpoint can operate or return.
 
     - Default value: `50`
-    - Maximum value: `100` for batch-enabled endpoints and `2000` for other endpoints
+    - Maximum value: `2000` for batch-disabled endpoints and `100` for batch-enabled endpoints
     - Minimum value: `1`
 
 - **Description** (Optional): the description of the endpoint.
