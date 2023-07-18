@@ -115,6 +115,8 @@ The following is an example configuration of `config.json`. In this example, the
       "timeout": <Endpoint timeout>,
       "row_limit": <Maximum rows>
     },
+    "tag": "Default",
+    "batch": false,
     "sql_file": "<SQL file directory1>",
     "type": "sql_endpoint",
     "return_type": "json"
@@ -139,6 +141,8 @@ The following is an example configuration of `config.json`. In this example, the
       "timeout": <Endpoint timeout>,
       "row_limit": <Maximum rows>
     },
+    "tag": "Default",
+    "batch": false,
     "sql_file": "<SQL file directory2>",
     "type": "sql_endpoint",
     "return_type": "json"
@@ -162,6 +166,8 @@ The description of each field is as follows:
 | `params.default` | String | The default value of the parameter. Make sure that the value matches the type of parameter you specified. Otherwise, the endpoint returns an error. |
 | `timeout`     | Integer | The timeout for the endpoint in milliseconds, which is `5000` by default. You can set it to an integer from `1` to `30000`.  |
 | `row_limit`   | Integer  | The maximum number of rows that the endpoint returns, which is `50` by default. You can set it to an integer from `1` to `2000`.          |
+| `tag`    | String | The tag for the endpoint, which is `"Default"` by default. |
+| `batch`    | Boolean | Controls whether to enable batch operations for an endpoint that uses the `POST`, `PUT`, or `DELETE` request method. When this option is enabled, you can operate multiple rows in one request. |
 | `sql_file`    | String | The SQL file directory for the endpoint. For example, `"sql/GET-v1.sql"`. |
 | `type`        | String | The type of the endpoint, which can only be `"sql_endpoint"`.          |
 | `return_type` | String | The response format of the endpoint, which can only be `"json"`.             |
