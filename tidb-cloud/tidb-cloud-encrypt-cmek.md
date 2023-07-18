@@ -141,7 +141,7 @@ To complete the CMEK configuration of the project, take the following steps:
 
 > **Note:**
 >
-> - This function will continue to be enhanced in the future, and future functions may require more permissions. So this policy requirement is subject to change.
+> - This feature will be further enhanced in the future, and upcoming features might require additional permissions. Therefore, this policy requirement is subject to change.
 
 ### Step 3. Create a cluster
 
