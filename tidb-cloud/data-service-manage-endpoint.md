@@ -91,7 +91,7 @@ On the right pane of the endpoint details page, you can click the **Properties**
     - Only letters, numbers, underscores (`_`), and slashes (`/`) are allowed in the path, which must start with a slash (`/`) and end with a letter, number, or underscore (`_`). For example, `/my_endpoint/get_id`.
     - The length of the path must be less than 64 characters.
 
-- **Batch**: controls whether to enable the batch operations for an endpoint that uses the `POST`, `PUT`, or `DELETE` request method. When this option is enabled, you can operate multiple rows in one request.
+- **Batch**: controls whether to enable batch operations for an endpoint that uses the `POST`, `PUT`, or `DELETE` request method. When this option is enabled, you can operate multiple rows in one request.
 
 - **Endpoint URL**: (read-only) the URL is automatically generated based on the region where the corresponding cluster is located, the service URL of the Data App, and the path of the endpoint. For example, if the path of the endpoint is `/my_endpoint/get_id`, the endpoint URL is `https://<region>.data.tidbcloud.com/api/v1beta/app/<App ID>/endpoint/my_endpoint/get_id`.
 
