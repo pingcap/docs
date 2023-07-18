@@ -121,16 +121,13 @@ To import the CSV files to TiDB Cloud, take the following steps:
     **Import into Pre-created Tables** allows you to create tables in TiDB in advance and select the tables that you want to import data into. In this case, you can choose up to 1000 tables to import. You can click **Chat2Qury** in the left navigation pane to create tables. For more information about how to use Chat2Qury, see [Explore Your Data with AI-Powered Chat2Query](/tidb-cloud/explore-data-with-chat2query.md).
     **Import Schema and Data from S3** allows you to import SQL scripts for creating a table and import corresponding table data stored in S3 into TiDB.
 
-6. When you choose **Import into Pre-created Tables**, if you want to modify the mapping, click **Advanced Settings** and then click **Mapping Settings**.
+6. If the source files do not meet the naming conventions, you can specify a custom mapping rule between a single target table and the CSV file. After that, the data source files will be re-scanned using the provided custom mapping rule. To modify the mapping, click **Advanced Settings** and then click **Mapping Settings**. Note that **Mapping Settings** is available only when you choose **Import into Pre-created Tables**.
 
-
-    If the source files do not meet the naming conventions, you can specify a custom mapping rule between a single target table and the CSV file in the following fields, and then click **Confirm**. After that, the data source files will be re-scanned using the provided custom mapping rule.
-    
     You can also use wildcards to match the source files. For example:
-    
+
     - `s3://<bucket-name>/path/my-data?.csv`: all CSV files starting with `my-data` and one character (such as `my-data1.csv` and `my-data2.csv`) in that folder will be imported into the same target table.
     - `s3://<bucket-name>/path/my-data*.csv`: all CSV files in the folder starting with `my-data` will be imported into the same target table.
-    
+
     Note that only `?` and `*` are supported.
 
     - **Target Database**: enter the name of the target database you select.
