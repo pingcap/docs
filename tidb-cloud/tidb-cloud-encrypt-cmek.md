@@ -40,10 +40,6 @@ To create a CMEK-enabled project, take the following steps:
 5. Choose to enable the CMEK capability of the project.
 6. Click **Confirm** to complete the project creation.
 
-> **Note:**
->
-> After creating a CMEK-enabled project, you will be redirected to the Encryption Access page so that you can complete the CMEK configuration.
-
 </div>
 <div label="Use API" value="api">
 
