@@ -56,8 +56,8 @@ If a maintenance window is planned, the default start time of the window is 03:0
 You can modify the start time to your preferred time or defer maintenance tasks until the deadline as follows:
 
 1. Log in to the [TiDB Cloud console](https://tidbcloud.com).
-2. Click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner, switch to the target project if you have multiple projects, and then click **Admin**.
-3. On the **Admin** page of your project, click **Maintenance** in the left navigation pane.
+2. Click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner, switch to the target project if you have multiple projects, and then click **Project Settings**.
+3. On the **Project Settings** page of your project, click **Maintenance** in the left navigation pane.
 
      - If any maintenance tasks are displayed, check the descriptions, scheduled start time, and deadline. The maintenance tasks will start at the designated time.
 

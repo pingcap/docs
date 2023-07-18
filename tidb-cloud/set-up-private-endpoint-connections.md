@@ -51,8 +51,8 @@ If you have multiple clusters, you need to repeat these steps for each cluster t
 ### Prerequisites
 
 1. Log in to the [TiDB Cloud console](https://tidbcloud.com).
-2. Click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner, switch to the target project if you have multiple projects, and then click **Admin**.
-3. On the **Admin** page of your project, click **Network Access** in the left navigation pane, and click the **Private Endpoint** tab.
+2. Click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner, switch to the target project if you have multiple projects, and then click **Project Settings**.
+3. On the **Project Settings** page of your project, click **Network Access** in the left navigation pane, and click the **Private Endpoint** tab.
 4. Click **Add** in the upper-right corner.
 
 ### Step 1. Choose a TiDB cluster

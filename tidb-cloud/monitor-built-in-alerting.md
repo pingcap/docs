@@ -54,8 +54,8 @@ To get alert notification emails of clusters in your project, take the following
 Alternatively, you can also add the subscription from the **Alert Subscription** page as follows:
 
 1. Log in to the [TiDB Cloud console](https://tidbcloud.com).
-2. Click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner, switch to the target project if you have multiple projects, and then click **Admin**.
-3. On the **Admin** page of your project, click **Alert Subscription** in the left navigation pane.
+2. Click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner, switch to the target project if you have multiple projects, and then click **Project Settings**.
+3. On the **Project Settings** page of your project, click **Alert Subscription** in the left navigation pane.
 4. Click **Add Subscriber**, enter your email address in the displayed dialog, and then click **Add**.
 
 If an alert condition remains unchanged, the alert sends email notifications every 3 hours.
@@ -65,8 +65,8 @@ If an alert condition remains unchanged, the alert sends email notifications eve
 If you no longer want to receive alert notification emails of clusters in your project, take the following steps:
 
 1. Log in to the [TiDB Cloud console](https://tidbcloud.com).
-2. Click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner, switch to the target project if you have multiple projects, and then click **Admin**.
-3. On the **Admin** page of your project, click **Alert Subscription** in the left navigation pane.
+2. Click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner, switch to the target project if you have multiple projects, and then click **Project Settings**.
+3. On the **Project Settings** page of your project, click **Alert Subscription** in the left navigation pane.
 4. Locate your email address and click **Unsubscribe**.
 5. Click **Delete** to confirm the unsubscription.
 
