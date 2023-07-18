@@ -152,7 +152,7 @@ The description of each field is as follows:
 |---------------|--------|-------------|
 | `name`        | String | The endpoint name.            |
 | `description` | String | (Optional) The endpoint description.          |
-| `method`      | String | The HTTP method of the endpoint. You can use `GET` to query data or use `POST` to insert data. |
+| `method`      | String | The HTTP method of the endpoint. You can use `GET` to query data, use `POST` to insert data, use `PUT` to update data, and use `DELETE` to drop data. |
 | `endpoint`    | String | The unique path of the endpoint in the Data App. Only letters, numbers, underscores (`_`), and slashes (`/`) are allowed in the path, which must start with a slash (`/`) and end with a letter, number, or underscore (`_`). For example, `/my_endpoint/get_id`. The length of the path must be less than 64 characters.|
 | `cluster_id`  | String | The ID of the TiDB cluster for your endpoint. You can get it from the URL of your TiDB cluster. For example, if your cluster URL is `https://tidbcloud.com/console/clusters/1234567891234567890/overview`, the cluster ID is `1234567891234567890`. |
 | `params` | Array | The parameters used in the endpoint. By defining parameters, you can dynamically replace the parameter value in your queries through the endpoint. In `params`, you can define one or multiple parameters. For each parameter, you need to define its `name`, `type`, `required`, and `default` fields. If your endpoint does not need any parameters. You can leave `params` empty such as `"params": []`. |

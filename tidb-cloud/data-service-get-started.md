@@ -70,6 +70,8 @@ On the right pane, click the **Properties** tab and set properties for the endpo
 
     - `GET`: use this method to query data, such as a `SELECT` statement.
     - `POST`: use this method to insert data, such as an `INSERT` statement.
+    - `PUT`: use this method to update data, such as an `UPDATE` statement.
+    - `DELETE`: use this method to delete data, such as a `DELETE` statement.
 
 - **Timeout(ms)**: the timeout for the endpoint. It ranges from `1` to `30000`. The default value is `5000` milliseconds. For more details, see [Configure properties](/tidb-cloud/data-service-manage-endpoint.md#configure-properties).
 

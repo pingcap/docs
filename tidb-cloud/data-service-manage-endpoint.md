@@ -53,7 +53,7 @@ In TiDB Cloud, you can generate an endpoint or multiple endpoints automatically 
 
 5. Check the generated endpoint name, SQL statements, properties, and parameters of the new endpoint.
 
-    - Endpoint name: the generated endpoint name is in the `/<selected table name>` format, and the request method (such as `GET`, `POST`, and `UPDATE`) is displayed before the name.
+    - Endpoint name: the generated endpoint name is in the `/<selected table name>` format, and the request method (such as `GET`, `POST`, and `PUT`) is displayed before the name.
 
         - If a batch operation is selected, the endpoint name is the plural format of the table name. For example, if the selected table name is `sample-table` and the selected operation is **POST Batch Create**, you can find the generated `POST /sample-tables` endpoint.
         - If there is already an endpoint with the same request method and the `/<selected table name>` name, TiDB Cloud will also append `_copy` to the name of the generated endpoint. For example, `/sample-tables_copy`.
@@ -99,8 +99,8 @@ On the right pane of the endpoint details page, you can click the **Properties**
 
     - `GET`: use this method to query data, such as a `SELECT` statement.
     - `POST`: use this method to insert data, such as an `INSERT` statement.
-    - `PUT`: use this method to insert data, such as an `UPDATE` statement.
-    - `DELETE`: use this method to insert data, such as a `DELETE` statement.
+    - `PUT`: use this method to update data, such as an `UPDATE` statement.
+    - `DELETE`: use this method to delete data, such as a `DELETE` statement.
 
 - **Timeout(ms)**: the timeout for the endpoint.
 
