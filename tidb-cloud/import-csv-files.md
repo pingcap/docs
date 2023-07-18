@@ -127,16 +127,7 @@ To import the CSV files to TiDB Cloud, take the following steps:
 
     - **Target Tables**: enter the name of the target table you select. Note that this field only accepts one specific table name, so wildcards are not supported.
 
-    - **Source file URIs and names**: enter the source file URI and name in the following format `s3://[bucket_name]/[data_source_folder]/[file_name].csv`. For example, `s3://sampledate/ingest/TableName.01.csv`. You can also use wildcards to match the source files. For example:
-
-        - `s3://[bucket_name]/[data_source_folder]/my-data?.csv`: all CSV files starting with `my-data` followed by one character (such as `my-data1.csv` and `my-data2.csv`) in that folder will be imported into the same target table.
-        - `s3://[bucket_name]/[data_source_folder]/my-data*.csv`: all CSV files in the folder starting with `my-data` will be imported into the same target table.
-
-      Note that only `?` and `*` are supported.
-
-        > **Note:**
-        >
-        > The URI must contain the data source folder.
+    - **Source file URIs and names**: enter the source file URI and name in the following format `s3://[bucket_name]/[data_source_folder]/[file_name].csv`. For example, `s3://sampledate/ingest/TableName.01.csv`. You can also use wildcards to match the source files. For more information, see [Mapping Settings](#mapping-settings).
 
 7. Click **Start Import**. If you see a warning message, resolve this by providing the correct source file, renaming the existing one according to [Naming Conventions for Data Import](/tidb-cloud/naming-conventions-for-data-import.md), or using **Advanced Settings** to make changes. After resolving these issues, you need to import the data again.
 
