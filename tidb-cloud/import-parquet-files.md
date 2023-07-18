@@ -136,7 +136,12 @@ To import the Parquet files to TiDB Cloud, take the following steps:
 
     - **Target Tables**: enter the name of the target table you select. Note that this field only accepts one specific table name, so wildcards are not supported.
 
-    - **Source file URIs and names**: enter the source file URI and name, for example, `s3://sampledate/ingest/TableName.01.parquet`. Note that the folder name of the URI must contain the data source folder. For more information about the URI format, see [URI format](https://docs.pingcap.com/tidb/stable/backup-and-restore-storages#uri-format).
+    - **Source file URIs and names**: enter the source file URI and name in the following format `s3://[bucket_name]/[data_source_folder]/[file_name].parquet`. For example, `s3://sampledate/ingest/TableName.01.parquet`. 
+
+    > **Note:**
+    >
+    > The URI must contain the data source folder.
+    
 
 6. Click **Start Import**. If you see a warning message, resolve this by providing the correct source file, renaming the existing one according to [Naming Conventions for Data Import](/tidb-cloud/naming-conventions-for-data-import.md), or using **Advanced Settings** to make changes. After resolving these issues, you need to import the data again.
 
