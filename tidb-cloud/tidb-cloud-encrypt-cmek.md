@@ -60,7 +60,7 @@ You can complete the CMEK configuration of the project using either the TiDB Clo
 
 > **Note:**
 >
-> You must ensure that the policy of the key meets the requirements and is free from errors such as insufficient permissions or account issues. These errors will cause the cluster to be incorrectly created using this key.
+> Make sure that the policy of the key meets the requirements and is free from errors such as insufficient permissions or account issues. These errors can cause clusters to be incorrectly created using this key.
 
 <SimpleTab groupId="method">
 <div label="Use Console" value="console">
@@ -70,10 +70,10 @@ To complete the CMEK configuration of the project, take the following steps:
 1. Click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner, switch to the target project if you have multiple projects, and then click **Project Settings**.
 2. Click **Encryption Access** to enter the encryption management page of the project.
 3. Click **Create Encryption Key** to enter the key creation page.
-4. The key provider only supports AWS KMS. You can choose the region where the encryption key is used.
+4. The key provider only supports AWS KMS. You can choose the region where the encryption key can be used.
 5. Copy and save the JSON file as `ROLE-TRUST-POLICY.JSON`. This file describes the trust relationship. 
-6. Add this trust relationship to the key policy of AWS KMS. For more information, refer to [Key policies in AWS KMS](https://docs.aws.amazon.com/zh_cn/kms/latest/developerguide/key-policies.html).
-7. Fill in the **KMS Key ARN** obtained from AWS KMS.
+6. Add this trust relationship to the key policy of AWS KMS. For more information, refer to [Key policies in AWS KMS](https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html).
+7. In the TiDB Cloud console, scroll to the bottom of the key creation page, and then fill in the **KMS Key ARN** obtained from AWS KMS.
 8. Click **Create** to create the key.
 
 </div>
@@ -141,7 +141,7 @@ To complete the CMEK configuration of the project, take the following steps:
 
 > **Note:**
 >
-> - This feature will be further enhanced in the future, and upcoming features might require additional permissions. Therefore, this policy requirement is subject to change.
+> This feature will be further enhanced in the future, and upcoming features might require additional permissions. Therefore, this policy requirement is subject to change.
 
 ### Step 3. Create a cluster
 
