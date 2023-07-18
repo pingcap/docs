@@ -153,7 +153,7 @@ Under the project created in [Step 1](#step-1-create-a-cmek-enabled-project), cr
 
 ## Rotate CMEK
 
-You can configure [automatic CMEK rotation](http://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html) on AWS KMS. With this rotation enabled, you do not need to update the Encryption at Rest project settings in TiDB Cloud, including the CMEK ID.
+You can configure [automatic CMEK rotation](http://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html) on AWS KMS. With this rotation enabled, you do not need to update **Encryption Access** in project settings in TiDB Cloud, including the CMEK ID.
 
 ## Revoke and restore CMEK
 
