@@ -20,11 +20,11 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
   
   For more information about permissions of different roles, see [User roles](/tidb-cloud/manage-user-access.md#user-roles).
 
-- The Customer-Managed Encryption Key (CMEK) feature is now generally available (GA) for TiDB Dedicated clusters hosted on AWS.
+- Support the Customer-Managed Encryption Key (CMEK) feature (beta) for [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) clusters hosted on AWS.
   
     You can create CMEK based on AWS KMS to encrypt data stored in EBS and S3 directly from the TiDB Cloud console. This ensures that customer data is encrypted with a key managed by the customer, which enhances security.
   
-    Note that this feature still has restrictions and is only available upon request. To apply for this feature, contact [TiDB Cloud support](/tidb-cloud/tidb-cloud-support.md).
+    Note that this feature still has restrictions and is only available upon request. To apply for this feature, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
 
 - Optimize the Import feature in TiDB Cloud, aimed at enhancing the data import experience. The following improvements have been made:
 
