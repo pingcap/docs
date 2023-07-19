@@ -17,7 +17,11 @@ Data Service returns an HTTP response with a JSON body. The response body contai
 - `data`: _object_. The execution results, which include three parts:
 
     - `columns`: _array_. Schema information for the returned fields.
-    - `rows`: _array_. The returned results in `key:value` format. If **Batch Operation** is enabled for an endpoint, the returned results of the endpoint will also include the `"message"` and `"success"` fields for each row to indicate their response and status.
+    - `rows`: _array_. The returned results in `key:value` format.
+
+        - When **Batch Operation** is enabled for an endpoint, the returned results of the endpoint will also include the `"message"` and `"success"` fields for each row to indicate their response and status.
+        - When **Batch Operation** is enabled for an endpoint and the primary key column of the target table is configured as `auto_increment`, the returned results of the endpoint will also include the `"auto_increment_id"` field for each row.
+
     - `result`: _object_. The execution-related information of the SQL statement, including success/failure status, execution time, number of rows returned, and user configuration.
 
 An example response is as follows:
