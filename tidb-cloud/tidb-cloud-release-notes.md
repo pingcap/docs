@@ -16,8 +16,6 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
     Developers can now effortlessly create HTTP endpoints with minimal clicks and configurations. Eliminate repetitive boilerplate code, simplify and accelerate endpoint creation, and reduce potential errors.
 
-    This feature empowers developers, enabling them to build backend solutions without the need to learn any programming language. Seamlessly unlock new possibilities for application development.
-
     For more information on how to use this feature, see [Generate an endpoint automatically](/tidb-cloud/data-service-manage-endpoint.md#generate-an-endpoint-automatically).
 
 ## July 18, 2023
