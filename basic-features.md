@@ -8,6 +8,8 @@ aliases: ['/docs/dev/basic-features/','/tidb/dev/experimental-features-4.0/']
 
 This document lists the features supported in different TiDB versions, including [Long-Term Support (LTS)](/releases/versioning.md#long-term-support-releases) versions and [Development Milestone Release (DMR)](/releases/versioning.md#development-milestone-releases) versions after the latest LTS version.
 
+You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?utm_source=docs&utm_medium=tidb_features).
+
 > **Note:**
 >
 > PingCAP does not provide patch releases for DMR versions. Any bugs will be fixed in future releases. For general purposes, it is recommended to use the [latest LTS version](https://docs.pingcap.com/tidb/stable).
@@ -20,8 +22,8 @@ This document lists the features supported in different TiDB versions, including
 
 ## Data types, functions, and operators
 
-| Data types, functions, and operators | 7.0 | 6.6 | 6.5 | 6.1 | 5.4 | 5.3 | 5.2 | 5.1 | 5.0 | 4.0 |
-|---|---|:---:|:---:|---|:---:|:---:|:---:|:---:|:---:|:---:|
+| Data types, functions, and operators | 7.2 | 7.1 | 6.5 | 6.1 | 5.4 | 5.3 | 5.2 | 5.1 | 5.0 | 4.0 |
+|---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | [Numeric types](/data-type-numeric.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | [Date and time types](/data-type-date-and-time.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | [String types](/data-type-string.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
@@ -44,33 +46,34 @@ This document lists the features supported in different TiDB versions, including
 
 ## Indexing and constraints
 
-| Indexing and constraints | 7.0 | 6.6 | 6.5 | 6.1 | 5.4 | 5.3 | 5.2 | 5.1 | 5.0 | 4.0 |
-|---|:---:|:---:|:---:|---|:---:|:---:|:---:|:---:|:---:|:---:|
+| Indexing and constraints | 7.2 | 7.1 | 6.5 | 6.1 | 5.4 | 5.3 | 5.2 | 5.1 | 5.0 | 4.0 |
+|---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | [Expression indexes](/sql-statements/sql-statement-create-index.md#expression-index) [^2] | Y | Y | Y | E | E | E | E | E | E | E |
 | [Columnar storage (TiFlash)](/tiflash/tiflash-overview.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
-| [Use FastScan to accelerate queries in OLAP scenarios](/tiflash/use-fastscan.md) | Y | E | E | N | N | N | N | N | N | N |
+| [Use FastScan to accelerate queries in OLAP scenarios](/tiflash/use-fastscan.md) | Y | Y | E | N | N | N | N | N | N | N |
 | [RocksDB engine](/storage-engine/rocksdb-overview.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | [Titan plugin](/storage-engine/titan-overview.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | [Titan Level Merge](/storage-engine/titan-configuration.md#level-merge-experimental) | E | E | E | E | E | E | E | E | E | E |
 | [Use buckets to improve scan concurrency](/tune-region-performance.md#use-bucket-to-increase-concurrency) | E | E | E | E | N | N | N | N | N | N |
 | [Invisible indexes](/sql-statements/sql-statement-add-index.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | N |
 | [Composite `PRIMARY KEY`](/constraints.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
+| [`CHECK` constraints](/constraints.md#check) | Y | N | N | N | N | N | N | N | N | N |
 | [Unique indexes](/constraints.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | [Clustered index on integer `PRIMARY KEY`](/constraints.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | [Clustered index on composite or non-integer key](/constraints.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | N |
-| [Multi-valued index](/sql-statements/sql-statement-create-index.md#multi-valued-index) | E | E | N | N | N | N | N | N | N | N |
+| [Multi-valued index](/sql-statements/sql-statement-create-index.md#multi-valued-index) | Y | Y | N | N | N | N | N | N | N | N |
 | [Foreign key](/constraints.md#foreign-key) | Y | Y | N | N | N | N | N | N | N | N |
-| [TiFlash late materialization](/tiflash/tiflash-late-materialization.md) | E | N | N | N | N | N | N | N | N | N |
+| [TiFlash late materialization](/tiflash/tiflash-late-materialization.md) | Y | Y | N | N | N | N | N | N | N | N |
 
 ## SQL statements
 
-| SQL statements [^3] | 7.0 | 6.6 | 6.5 | 6.1 | 5.4 | 5.3 | 5.2 | 5.1 | 5.0 | 4.0 |
-|---|---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| SQL statements [^3] | 7.2 | 7.1 | 6.5 | 6.1 | 5.4 | 5.3 | 5.2 | 5.1 | 5.0 | 4.0 |
+|---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | Basic `SELECT`, `INSERT`, `UPDATE`, `DELETE`, `REPLACE` | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | `INSERT ON DUPLICATE KEY UPDATE` | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | `LOAD DATA INFILE` | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | `SELECT INTO OUTFILE` | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
-| `INNER JOIN`, <code>LEFT\|RIGHT [OUTER] JOIN</code> | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
+| `INNER JOIN`, LEFT\|RIGHT [OUTER] JOIN | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | `UNION`, `UNION ALL` | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | [`EXCEPT` and `INTERSECT` operators](/functions-and-operators/set-operators.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | N |
 | `GROUP BY`, `ORDER BY` | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
@@ -84,14 +87,14 @@ This document lists the features supported in different TiDB versions, including
 | [`BATCH [ON COLUMN] LIMIT INTEGER INSERT/UPDATE/REPLACE`](/sql-statements/sql-statement-batch.md) | Y | Y | Y | N | N | N | N | N | N | N |
 | [`ALTER TABLE ... COMPACT`](/sql-statements/sql-statement-alter-table-compact.md) | Y | Y | Y | E | N | N | N | N | N | N |
 | [Table Lock](/sql-statements/sql-statement-lock-tables-and-unlock-tables.md) | E | E | E | E | E | E | E | E | E | E |
-| [TiFlash Query Result Materialization](/tiflash/tiflash-results-materialization.md) | E | E | E | N | N | N | N | N | N | N |
+| [TiFlash Query Result Materialization](/tiflash/tiflash-results-materialization.md) | Y | Y | E | N | N | N | N | N | N | N |
 
 ## Advanced SQL features
 
-| Advanced SQL features | 7.0 | 6.6 | 6.5 | 6.1 | 5.4 | 5.3 | 5.2 | 5.1 | 5.0 | 4.0 |
-|---|---|:---:|:---:|---|:---:|:---:|:---:|:---:|:---:|:---:|
+| Advanced SQL features | 7.2 | 7.1 | 6.5 | 6.1 | 5.4 | 5.3 | 5.2 | 5.1 | 5.0 | 4.0 |
+|---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | [Prepared statement cache](/sql-prepared-plan-cache.md) | Y | Y | Y | Y | Y | Y | E | E | E | E |
-| [Non-prepared statement cache](/sql-non-prepared-plan-cache.md) | E | N | N | N | N | N | N | N | N | N |
+| [Non-prepared statement cache](/sql-non-prepared-plan-cache.md) | E | E | N | N | N | N | N | N | N | N |
 | [SQL plan management (SPM)](/sql-plan-management.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | [Create bindings according to historical execution plans](/sql-plan-management.md#create-a-binding-according-to-a-historical-execution-plan) | Y | Y | E | N | N | N | N | N | N | N |
 | [Coprocessor cache](/coprocessor-cache.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | E |
@@ -101,21 +104,22 @@ This document lists the features supported in different TiDB versions, including
 | [Optimizer hints](/optimizer-hints.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | [MPP execution engine](/explain-mpp.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | N |
 | [MPP execution engine - compression exchange](/explain-mpp.md#mpp-version-and-exchange-data-compression) | Y | Y | N | N | N | N | N | N | N | N |
+| [TiFlash Pipeline Model](/tiflash/tiflash-pipeline-model.md) | E | N | N | N | N | N | N | N | N | N |
 | [Index Merge](/explain-index-merge.md) | Y | Y | Y | Y | Y | E | E | E | E | E |
 | [Placement Rules in SQL](/placement-rules-in-sql.md) | Y | Y | Y | Y | E | E | N | N | N | N |
 | [Cascades Planner](/system-variables.md#tidb_enable_cascades_planner) | E | E | E | E | E | E | E | E | E | E |
 
 ## Data definition language (DDL)
 
-| Data definition language (DDL) | 7.0 | 6.6 | 6.5 | 6.1 | 5.4 | 5.3 | 5.2 | 5.1 | 5.0 | 4.0 |
-|---|---|:---:|:---:|---|:---:|:---:|:---:|:---:|:---:|:---:|
+| Data definition language (DDL) | 7.2 | 7.1 | 6.5 | 6.1 | 5.4 | 5.3 | 5.2 | 5.1 | 5.0 | 4.0 |
+|---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | Basic `CREATE`, `DROP`, `ALTER`, `RENAME`, `TRUNCATE` | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
-| [Generated columns](/generated-columns.md) | E | E | E | E | E | E | E | E | E | E |
+| [Generated columns](/generated-columns.md) | Y | Y | E | E | E | E | E | E | E | E |
 | [Views](/views.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | [Sequences](/sql-statements/sql-statement-create-sequence.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
-| [Auto increment](/auto-increment.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
+| [Auto increment](/auto-increment.md) | Y | Y | Y[^4] | Y | Y | Y | Y | Y | Y | Y |
 | [Auto random](/auto-random.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
-| [TTL (Time to Live)](/time-to-live.md) | Y | E | E | N | N | N | N | N | N | N |
+| [TTL (Time to Live)](/time-to-live.md) | Y | Y | E | N | N | N | N | N | N | N |
 | [DDL algorithm assertions](/sql-statements/sql-statement-alter-table.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | Multi-schema change: add columns | Y | Y | Y | E | E | E | E | E | E | E |
 | [Change column type](/sql-statements/sql-statement-modify-column.md) | Y | Y | Y | Y | Y | Y | Y | Y | N | N |
@@ -124,11 +128,12 @@ This document lists the features supported in different TiDB versions, including
 | [Acceleration of `ADD INDEX` and `CREATE INDEX`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) | Y | Y | Y | N | N | N | N | N | N | N |
 | [Metadata lock](/metadata-lock.md) | Y | Y | Y | N | N | N | N | N | N | N |
 | [`FLASHBACK CLUSTER TO TIMESTAMP`](/sql-statements/sql-statement-flashback-to-timestamp.md) | Y | Y | Y | N | N | N | N | N | N | N |
+| [Pause](/sql-statements/sql-statement-admin-pause-ddl.md)/[Resume](/sql-statements/sql-statement-admin-resume-ddl.md) DDL | E | N | N | N | N | N | N | N | N | N |
 
 ## Transactions
 
-| Transactions | 7.0 | 6.6 | 6.5 | 6.1 | 5.4 | 5.3 | 5.2 | 5.1 | 5.0 | 4.0 |
-|---|---|:---:|:---:|---|:---:|:---:|:---:|:---:|:---:|:---:|
+| Transactions | 7.2 | 7.1 | 6.5 | 6.1 | 5.4 | 5.3 | 5.2 | 5.1 | 5.0 | 4.0 |
+|---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | [Async commit](/system-variables.md#tidb_enable_async_commit-new-in-v50) | Y | Y | Y | Y | Y | Y | Y | Y | Y | N |
 | [1PC](/system-variables.md#tidb_enable_1pc-new-in-v50) | Y | Y | Y | Y | Y | Y | Y | Y | Y | N |
 | [Large transactions (10GB)](/transaction-overview.md#transaction-size-limit) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
@@ -139,39 +144,41 @@ This document lists the features supported in different TiDB versions, including
 
 ## Partitioning
 
-| Partitioning | 7.0 | 6.6 | 6.5 | 6.1 | 5.4 | 5.3 | 5.2 | 5.1 | 5.0 | 4.0 |
-|---|---|:---:|:---:|---|:---:|:---:|:---:|:---:|:---:|:---:|
+| Partitioning | 7.2 | 7.1 | 6.5 | 6.1 | 5.4 | 5.3 | 5.2 | 5.1 | 5.0 | 4.0 |
+|---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | [Range partitioning](/partitioned-table.md#range-partitioning) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | [Hash partitioning](/partitioned-table.md#hash-partitioning) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
-| [Key partitioning](/partitioned-table.md#key-partitioning) | Y | N | N | N | N | N | N | N | N | N |
+| [Key partitioning](/partitioned-table.md#key-partitioning) | Y | Y | N | N | N | N | N | N | N | N |
 | [List partitioning](/partitioned-table.md#list-partitioning) | Y | Y | Y | Y | E | E | E | E | E | N |
 | [List COLUMNS partitioning](/partitioned-table.md) | Y | Y | Y | Y | E | E | E | E | E | N |
 | [`EXCHANGE PARTITION`](/partitioned-table.md) | Y | Y | Y | E | E | E | E | E | E | N |
-| [`REORGANIZE PARTITION`](/partitioned-table.md#reorganize-partitions) | Y | N | N | N | N | N | N | N | N | N |
+| [`REORGANIZE PARTITION`](/partitioned-table.md#reorganize-partitions) | Y | Y | N | N | N | N | N | N | N | N |
+| [`COALESCE PARTITION`](/partitioned-table.md#decrease-the-number-of-partitions) | Y | Y | N | N | N | N | N | N | N | N |
 | [Dynamic pruning](/partitioned-table.md#dynamic-pruning-mode) | Y | Y | Y | Y | E | E | E | E | N | N |
 | [Range COLUMNS partitioning](/partitioned-table.md#range-columns-partitioning) | Y | Y | Y | N | N | N | N | N | N | N |
-| [Range INTERVAL partitioning](/partitioned-table.md#range-interval-partitioning) | E | E | E | N | N | N | N | N | N | N |
+| [Range INTERVAL partitioning](/partitioned-table.md#range-interval-partitioning) | Y | Y | E | N | N | N | N | N | N | N |
 
 ## Statistics
 
-| Statistics | 7.0 | 6.6 | 6.5 | 6.1 | 6.0 | 5.4 | 5.3 | 5.2 | 5.1 | 5.0 | 4.0 |
-|---|---|:---:|:---:|:---:|---|:---:|:---:|:---:|:---:|:---:|:---:|
-| [CMSketch](/statistics.md) | Disabled by default | Disabled by default | Disabled by default | Disabled by default | Disabled by default | Disabled by default | Disabled by default | Y | Y | Y | Y |
-| [Histograms](/statistics.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
-| [Extended statistics](/extended-statistics.md) | E | E | E | E | E | E | E | E | E | E | N |
-| Statistics feedback | N | N | N | Deprecated | Deprecated | Deprecated | E | E | E | E | E |
-| [Automatically update statistics](/statistics.md#automatic-update) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
-| [Fast Analyze](/system-variables.md#tidb_enable_fast_analyze) | E | E | E | E | E | E | E | E | E | E | E |
-| [Dynamic pruning](/partitioned-table.md#dynamic-pruning-mode) | Y | Y | Y | Y | E | E | E | E | E | N | N |
-| [Collect statistics for `PREDICATE COLUMNS`](/statistics.md#collect-statistics-on-some-columns) | E | E | E | E | E | E | N | N | N | N | N |
-| [Control the memory quota for collecting statistics](/statistics.md#the-memory-quota-for-collecting-statistics) | E | E | E | E | N | N | N | N | N | N | N |
-| [Randomly sample about 10000 rows of data to quickly build statistics](/system-variables.md#tidb_enable_fast_analyze) | E | E | E | E | E | E | E | E | E | E | E |
-| [Lock statistics](/statistics.md#lock-statistics) | E | E | E | N | N | N | N | N | N | N | N |
+| Statistics | 7.2 | 7.1 | 6.5 | 6.1 | 6.0 | 5.4 | 5.3 | 5.2 | 5.1 | 5.0 |
+|---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| [CMSketch](/statistics.md) | Disabled by default | Disabled by default | Disabled by default | Disabled by default | Disabled by default | Disabled by default | Disabled by default | Y | Y | Y |
+| [Histograms](/statistics.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
+| [Extended statistics](/extended-statistics.md) | E | E | E | E | E | E | E | E | E | E |
+| Statistics feedback | N | N | N | Deprecated | Deprecated | Deprecated | E | E | E | E |
+| [Automatically update statistics](/statistics.md#automatic-update) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
+| [Fast Analyze](/system-variables.md#tidb_enable_fast_analyze) | E | E | E | E | E | E | E | E | E | E |
+| [Dynamic pruning](/partitioned-table.md#dynamic-pruning-mode) | Y | Y | Y | Y | E | E | E | E | E | N |
+| [Collect statistics for `PREDICATE COLUMNS`](/statistics.md#collect-statistics-on-some-columns) | E | E | E | E | E | E | N | N | N | N |
+| [Control the memory quota for collecting statistics](/statistics.md#the-memory-quota-for-collecting-statistics) | E | E | E | E | N | N | N | N | N | N |
+| [Randomly sample about 10000 rows of data to quickly build statistics](/system-variables.md#tidb_enable_fast_analyze) | E | E | E | E | E | E | E | E | E | E |
+| [Lock statistics](/statistics.md#lock-statistics) | E | E | E | N | N | N | N | N | N | N |
+| [Lightweight statistics initialization](/statistics.md#load-statistics) | Y | E | N | N | N | N | N | N | N | N |
 
 ## Security
 
-| Security | 7.0 | 6.6 | 6.5 | 6.1 | 5.4 | 5.3 | 5.2 | 5.1 | 5.0 | 4.0 |
-|---|---|:---:|:---:|---|:---:|:---:|:---:|:---:|:---:|:---:|
+| Security | 7.2 | 7.1 | 6.5 | 6.1 | 5.4 | 5.3 | 5.2 | 5.1 | 5.0 | 4.0 |
+|---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | [Transparent layer security (TLS)](/enable-tls-between-clients-and-servers.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | [Encryption at rest (TDE)](/encryption-at-rest.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | [Role-based authentication (RBAC)](/role-based-access-control.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
@@ -179,6 +186,8 @@ This document lists the features supported in different TiDB versions, including
 | [`caching_sha2_password` authentication](/system-variables.md#default_authentication_plugin) | Y | Y | Y | Y | Y | Y | Y | N | N | N |
 | [`tidb_sm3_password` authentication](/system-variables.md#default_authentication_plugin) | Y | Y | Y | N | N | N | N | N | N | N |
 | [`tidb_auth_token` authentication](/system-variables.md#default_authentication_plugin) | Y | Y | Y | N | N | N | N | N | N | N |
+| [`authentication_ldap_sasl` authentication](/system-variables.md#default_authentication_plugin) | Y | Y | N | N | N | N | N | N | N | N |
+| [`authentication_ldap_simple` authentication](/system-variables.md#default_authentication_plugin) | Y | Y | N | N | N | N | N | N | N | N |
 | [Password management](/password-management.md) | Y | Y | Y | N | N | N | N | N | N | N |
 | [MySQL compatible `GRANT` system](/privilege-management.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | [Dynamic Privileges](/privilege-management.md#dynamic-privileges) | Y | Y | Y | Y | Y | Y | Y | Y | N | N |
@@ -187,23 +196,24 @@ This document lists the features supported in different TiDB versions, including
 
 ## Data import and export
 
-| Data import and export | 7.0 | 6.6 | 6.5 | 6.1 | 5.4 | 5.3 | 5.2 | 5.1 | 5.0 | 4.0 |
-|---|---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-| [Fast Importer (TiDB Lightning)](/tidb-lightning/tidb-lightning-overview.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
+| Data import and export | 7.2 | 7.1 | 6.5 | 6.1 | 5.4 | 5.3 | 5.2 | 5.1 | 5.0 | 4.0 |
+|---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| [Fast import using TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
+| [Fast import using the `IMPORT INTO` statement](/sql-statements/sql-statement-import-into.md) | E | N | N | N | N | N | N | N | N | N |
 | mydumper logical dumper | Deprecated | Deprecated | Deprecated | Deprecated | Deprecated | Deprecated | Deprecated | Deprecated | Deprecated | Deprecated |
 | [Dumpling logical dumper](/dumpling-overview.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
-| [Transactional `LOAD DATA`](/sql-statements/sql-statement-load-data.md) | E [^5] | Y | Y | Y | Y | Y | Y | Y | Y | N [^6] |
+| [Transactional `LOAD DATA`](/sql-statements/sql-statement-load-data.md) [^5] | Y | Y | Y | Y | Y | Y | Y | Y | Y | N [^6] |
 | [Database migration toolkit (DM)](/migration-overview.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | [TiDB Binlog](/tidb-binlog/tidb-binlog-overview.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | [Change data capture (CDC)](/ticdc/ticdc-overview.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
-| [Stream data to Amazon S3, Azure Blob Storage, NFS, and GCP through TiCDC](/ticdc/ticdc-sink-to-cloud-storage.md) | Y | E | E | N | N | N | N | N | N | N |
+| [Stream data to Amazon S3, GCS, Azure Blob Storage, and NFS through TiCDC](/ticdc/ticdc-sink-to-cloud-storage.md) | Y | Y | E | N | N | N | N | N | N | N |
 | [TiCDC supports bidirectional replication between two TiDB clusters](/ticdc/ticdc-bidirectional-replication.md) | Y | Y | Y | N | N | N | N | N | N | N |
-| [TiCDC OpenAPI v2](/ticdc/ticdc-open-api-v2.md) | Y | N | N | N | N | N | N | N | N | N |
+| [TiCDC OpenAPI v2](/ticdc/ticdc-open-api-v2.md) | Y | Y | N | N | N | N | N | N | N | N |
 
 ## Management, observability, and tools
 
-| Management, observability, and tools | 7.0 | 6.6 | 6.5 | 6.1 | 5.4 | 5.3 | 5.2 | 5.1 | 5.0 | 4.0 |
-|---|---|:---:|:---:|---|:---:|:---:|:---:|:---:|:---:|:---:|
+| Management, observability, and tools | 7.2 | 7.1 | 6.5 | 6.1 | 5.4 | 5.3 | 5.2 | 5.1 | 5.0 | 4.0 |
+|---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | [TiDB Dashboard UI](/dashboard/dashboard-intro.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | [TiDB Dashboard Continuous Profiling](/dashboard/continuous-profiling.md) | Y | Y | Y | Y | E | E | N | N | N | N |
 | [TiDB Dashboard Top SQL](/dashboard/top-sql.md) | Y | Y | Y | Y | E | N | N | N | N | N |
@@ -230,8 +240,9 @@ This document lists the features supported in different TiDB versions, including
 | [Global memory control](/configure-memory-usage.md#configure-the-memory-usage-threshold-of-a-tidb-server-instance) | Y | Y | Y | N | N | N | N | N | N | N |
 | [Cross-cluster RawKV replication](/tikv-configuration-file.md#api-version-new-in-v610) | E | E | E | N | N | N | N | N | N | N |
 | [Green GC](/system-variables.md#tidb_gc_scan_lock_mode-new-in-v50) | E | E | E | E | E | E | E | E | E | N |
-| [Resource control](/tidb-resource-control.md) | E | E | N | N | N | N | N | N | N | N |
-| [TiFlash Disaggregated Storage and Compute Architecture and S3 Support](/tiflash/tiflash-disaggregated-and-s3.md) | E | N | N | N | N | N | N | N | N | N |
+| [Resource control](/tidb-resource-control.md) | Y | Y | N | N | N | N | N | N | N | N |
+| [Runaway Queries Management](/tidb-resource-control.md#manage-queries-that-consume-more-resources-than-expected-runaway-queries) | E | N | N | N | N | N | N | N | N | N |
+| [TiFlash Disaggregated Storage and Compute Architecture and S3 Support](/tiflash/tiflash-disaggregated-and-s3.md) | E | E | N | N | N | N | N | N | N | N |
 
 [^1]: TiDB incorrectly treats latin1 as a subset of utf8. See [TiDB #18955](https://github.com/pingcap/tidb/issues/18955) for more details.
 
@@ -241,6 +252,6 @@ This document lists the features supported in different TiDB versions, including
 
 [^4]: Starting from [v6.4.0](/releases/release-6.4.0.md), TiDB supports [high-performance and globally monotonic `AUTO_INCREMENT` columns](/auto-increment.md#mysql-compatibility-mode)
 
-[^5]: For [TiDB v7.0.0](/releases/release-7.0.0.md), the new clauses `FORMAT`, `FIELDS DEFINED NULL BY`, `With batch_size=<number>,detached`, and support for importing data from S3 and GCS, are experimental features.
+[^5]: Starting from [TiDB v7.0.0](/releases/release-7.0.0.md), the new parameter `FIELDS DEFINED NULL BY` and support for importing data from S3 and GCS are experimental features.
 
 [^6]: For TiDB v4.0, the `LOAD DATA` transaction does not guarantee atomicity.

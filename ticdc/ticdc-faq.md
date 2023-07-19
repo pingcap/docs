@@ -207,6 +207,19 @@ If you still encounter an error above, it is recommended to use BR to restore th
 4. Create a new changefeed and start the replication task from `BackupTS`.
 5. Delete the old changefeed.
 
+## Does TiCDC replicate data changes caused by lossy DDL operations to the downstream?
+
+Lossy DDL refers to DDL that might cause data changes when executed in TiDB. Some common lossy DDL operations include:
+
+- Modifying the type of a column, for example, INT -> VARCHAR
+- Modifying the length of a column, for example, VARCHAR(20) -> VARCHAR(10)
+- Modifying the precision of a column, for example, DECIMAL(10, 3) -> DECIMAL(10, 2)
+- Modifying the UNSIGNED or SIGNED attribute of a column, for example, INT UNSIGNED -> INT SIGNED
+
+Before TiDB v7.1.0, TiCDC replicates DML events with identical old and new data to the downstream. When the downstream is MySQL, these DML events do not cause any data changes until the downstream receives and executes the DDL statement. However, when the downstream is Kafka or a cloud storage service, TiCDC writes a row of redundant data to the downstream.
+
+Starting from TiDB v7.1.0, TiCDC eliminates these redundant DML events and no longer replicates them to downstream.
+
 ## The default value of the time type field is inconsistent when replicating a DDL statement to the downstream MySQL 5.7. What can I do?
 
 Suppose that the `create table test (id int primary key, ts timestamp)` statement is executed in the upstream TiDB. When TiCDC replicates this statement to the downstream MySQL 5.7, MySQL uses the default configuration. The table schema after the replication is as follows. The default value of the `timestamp` field becomes `CURRENT_TIMESTAMP`:
@@ -231,7 +244,7 @@ From the result, you can see that the table schema before and after the replicat
 
 Since v5.0.1 or v4.0.13, for each replication to MySQL, TiCDC automatically sets `explicit_defaults_for_timestamp = ON` to ensure that the time type is consistent between the upstream and downstream. For versions earlier than v5.0.1 or v4.0.13, pay attention to the compatibility issue caused by the inconsistent `explicit_defaults_for_timestamp` value when using TiCDC to replicate the time type data.
 
-## Why do `INSERT`/`UPDATE` statements from the upstream become `REPLACE INTO` after being replicated to the downstream if I set `enable-old-value` to `true` when I create a TiCDC replication task?
+## Why do `INSERT`/`UPDATE` statements from the upstream become `REPLACE INTO` after being replicated to the downstream if I set `safe-mode` to `true` when I create a TiCDC replication task?
 
 TiCDC guarantees that all data is replicated at least once. When there is duplicate data in the downstream, write conflicts occur. To avoid this problem, TiCDC converts `INSERT` and `UPDATE` statements into `REPLACE INTO` statements. This behavior is controlled by the `safe-mode` parameter.
 
@@ -284,3 +297,33 @@ This feature is currently not supported, which might be supported in a future re
 ## Does TiCDC replication get stuck if the upstream has long-running uncommitted transactions?
 
 TiDB has a transaction timeout mechanism. When a transaction runs for a period longer than [`max-txn-ttl`](/tidb-configuration-file.md#max-txn-ttl), TiDB forcibly rolls it back. TiCDC waits for the transaction to be committed before proceeding with the replication, which causes replication delay.
+
+## Why can't I use the `cdc cli` command to operate a TiCDC cluster deployed by TiDB Operator?
+
+This is because the default port number of the TiCDC cluster deployed by TiDB Operator is `8301`, while the default port number of the `cdc cli` command to connect to the TiCDC server is `8300`. When using the `cdc cli` command to operate the TiCDC cluster deployed by TiDB Operator, you need to explicitly specify the `--server` parameter, as follows:
+
+```shell
+./cdc cli changefeed list --server "127.0.0.1:8301"
+[
+  {
+    "id": "4k-table",
+    "namespace": "default",
+    "summary": {
+      "state": "stopped",
+      "tso": 441832628003799353,
+      "checkpoint": "2023-05-30 22:41:57.910",
+      "error": null
+    }
+  },
+  {
+    "id": "big-table",
+    "namespace": "default",
+    "summary": {
+      "state": "normal",
+      "tso": 441872834546892882,
+      "checkpoint": "2023-06-01 17:18:13.700",
+      "error": null
+    }
+  }
+]
+```

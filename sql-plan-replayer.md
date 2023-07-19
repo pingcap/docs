@@ -31,6 +31,7 @@ Based on `sql-statement`, TiDB sorts out and exports the following on-site infor
 - The table schema in `sql-statement`
 - The statistics of the table in `sql-statement`
 - The result of `EXPLAIN [ANALYZE] sql-statement`
+- Some internal procudures of query optimization
 
 > **Note:**
 >
@@ -49,7 +50,7 @@ analyze table t;
 plan replayer dump explain select * from t;
 ```
 
-`PLAN REPLAYER DUMP` packages the table information above into a `ZIP` file and returns the file identifier as the execution result. This file is a one-time file. After the file is downloaded, TiDB will delete it.
+`PLAN REPLAYER DUMP` packages the table information above into a `ZIP` file and returns the file identifier as the execution result.
 
 > **Note:**
 >
@@ -246,7 +247,7 @@ The method of downloading the file of `PLAN REPLAYER CAPTURE` is the same as tha
 
 > **Note:**
 >
-> The result file of `PLAN REPLAYER CAPTURE` is kept in the TiDB cluster for up to one hour. After one hour, TiDB deletes the file.
+> The result file of `PLAN REPLAYER CAPTURE` is kept in the TiDB cluster for up to one week. After one week, TiDB deletes the file.
 
 ## Use `PLAN REPLAYER CONTINUOUS CAPTURE`
 

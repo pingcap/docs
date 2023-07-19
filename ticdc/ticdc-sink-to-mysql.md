@@ -24,6 +24,7 @@ ID: simple-replication-task
 Info: {"sink-uri":"mysql://root:123456@127.0.0.1:3306/","opts":{},"create-time":"2020-03-12T22:04:08.103600025+08:00","start-ts":415241823337054209,"target-ts":0,"admin-job-type":0,"sort-engine":"unified","sort-dir":".","config":{"case-sensitive":true,"filter":{"rules":["*.*"],"ignore-txn-start-ts":null,"ddl-allow-list":null},"mounter":{"worker-num":16},"sink":{"dispatchers":null},"scheduler":{"type":"table-number","polling-time":-1}},"state":"normal","history":null,"error":null}
 ```
 
+- `--server`: The address of any TiCDC server in the TiCDC cluster.
 - `--changefeed-id`: The ID of the replication task. The format must match the `^[a-zA-Z0-9]+(\-[a-zA-Z0-9]+)*$` regular expression. If this ID is not specified, TiCDC automatically generates a UUID (the version 4 format) as the ID.
 - `--sink-uri`: The downstream address of the replication task. For details, see [Configure sink URI with `mysql`/`tidb`](#configure-sink-uri-for-mysql-or-tidb).
 - `--start-ts`: Specifies the starting TSO of the changefeed. From this TSO, the TiCDC cluster starts pulling data. The default value is the current time.
@@ -57,11 +58,12 @@ The following are descriptions of sink URI parameters and parameter values that 
 | `127.0.0.1`    | The IP address of the downstream database.                               |
 | `3306`         | The port for the downstream data.                                 |
 | `worker-count` | The number of SQL statements that can be concurrently executed to the downstream (optional, `16` by default).       |
+| `cache-prep-stmts` | Controls whether to use prepared statements when executing SQL in the downstream and enable prepared statement cache on the client side (optional, `true` by default). |
 | `max-txn-row`  | The size of a transaction batch that can be executed to the downstream (optional, `256` by default). |
 | `ssl-ca` | The path of the CA certificate file needed to connect to the downstream MySQL instance (optional).  |
 | `ssl-cert` | The path of the certificate file needed to connect to the downstream MySQL instance (optional). |
 | `ssl-key` | The path of the certificate key file needed to connect to the downstream MySQL instance (optional). |
-| `time-zone` | The time zone used when connecting to the downstream MySQL instance, which is effective since v4.0.8. This is an optional parameter. If this parameter is not specified, the time zone of TiCDC service processes is used. If this parameter is set to an empty value, no time zone is specified when TiCDC connects to the downstream MySQL instance and the default time zone of the downstream is used. |
+| `time-zone` | The time zone used when connecting to the downstream MySQL instance, which is effective since v4.0.8. This is an optional parameter. If this parameter is not specified, the time zone of TiCDC service processes is used. If this parameter is set to an empty value, such as `time-zone=""`, no time zone is specified when TiCDC connects to the downstream MySQL instance and the default time zone of the downstream is used. |
 | `transaction-atomicity`  |  The atomicity level of a transaction. This is an optional parameter, with the default value of `none`. When the value is `table`, TiCDC ensures the atomicity of a single-table transaction. When the value is `none`, TiCDC splits the single-table transaction.  |
 
 To encode the database password in the sink URI using Base64, use the following command:
