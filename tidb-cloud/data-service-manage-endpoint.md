@@ -294,11 +294,12 @@ TiDB Cloud Data Service generates code examples to help you call an endpoint. To
 5. Paste the code example in your application, edit the example according to your need, and then run it.
 
     - You need to replace the `<Public Key>` and `<Private Key>` placeholders with your API key. For more information, refer to [Manage an API key](/tidb-cloud/data-service-api-key.md).
-    - If the request method of your endpoint is `POST`, `DELETE`, or `PUT`, fill in the `--data-raw` option according to the rows of data that you want to operate.
+    - If the request method of your endpoint is `POST` or `PUT`, fill in the `--data-raw` option according to the rows of data that you want to operate.
 
         - For endpoints with batch operations enabled, the `--data-raw` option accepts an array of data objects so you can operate multiple rows of data using one endpoint.
         - For endpoints with batch operations not enabled, the `--data-raw` option only accepts one data object.
 
+    - If the request method of your endpoint is `DELETE` and the batch operation is enabled for the endpoint, you need to use `%2C` instead of comma (`,`) to separate the rows to be deleted, such as `/endpoint/<Endpoint Path>?id=${id}%2C${id}`. This is because comma (`,`) is a reserved character in URLs and cannot be used directly.
     - If the endpoint contains parameters, specify the parameter values when calling the endpoint.
 
 ### Response
