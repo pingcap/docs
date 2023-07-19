@@ -1680,6 +1680,18 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Default value: `OFF`
 - This variable controls whether to enable TiDB to collect `PREDICATE COLUMNS`. After enabling the collection, if you disable it, the information of previously collected `PREDICATE COLUMNS` is cleared. For details, see [Collect statistics on some columns](/statistics.md#collect-statistics-on-some-columns).
 
+### tidb_enable_default_list_partition <span class="version-mark">New in v7.3</span>
+
+> **Note:**
+>
+> Default LIST Partition is an TiDB extension and is not compatible with MySQL.
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Type: Boolean
+- Default value: `OFF`
+- This variable is used to set whether to enable the `Default LIST Partition` feature. For details see [List partitioning](/partitioned-table.md#list-partitioning)
+
 ### tidb_enable_enhanced_security
 
 - Scope: NONE
