@@ -394,7 +394,7 @@ test> select * from t;
 3 rows in set (0.01 sec)
 ```
 
-Starting from v7.2.0, you can add a default list partition to a List partitioned table. The default list partition acts as a catch-all partition, where rows that do not match the defined value sets can be placed.
+Starting from v7.3.0, you can add a default list partition to a List partitioned table. The default list partition acts as a catch-all partition, where rows that do not match the defined value sets can be placed.
 
 Before using the default list partition feature, you need to set the `tidb_enable_default_list_partition` system variable to `ON`, which is `OFF` by default because it is not supported in MySQL.
 
