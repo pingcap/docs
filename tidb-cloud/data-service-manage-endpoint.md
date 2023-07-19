@@ -27,10 +27,10 @@ In Data Service, you can either either generate an endpoint automatically or cre
 
 ### Generate an endpoint automatically
 
-In TiDB Cloud Data Services, you can generate one or multiple endpoints automatically in one go as follows:
+In TiDB Cloud Data Service, you can generate one or multiple endpoints automatically in one go as follows:
 
 1. Navigate to the [**Data Service**](https://tidbcloud.com/console/data-service) page of your project.
-2. In the left pane, locate your target Data App, click **+** to the right of the App name, and then click **Auto-Generate HTTP Endpoint**. The dialog for endpoint creation is displayed.
+2. In the left pane, locate your target Data App, click **+** to the right of the App name, and then click **Generate Endpoint**. The dialog for endpoint generation is displayed.
 3. In the dialog, do the following:
 
     1. Select the target cluster, database, and table for the endpoint to be generated.
@@ -47,13 +47,13 @@ In TiDB Cloud Data Services, you can generate one or multiple endpoints automati
     3. (Optional) Configure a timeout and tag for the operations. All generated HTTP endpoints will automatically inherit the configured properties, which can be modified later as needed.
     4. (Optional) The **Deploy HTTP Endpoint** option (disabled by default) allows you to choose whether to enable the direct deployment of the automatically generated HTTP endpoints. When it is enabled, the draft review process will be skipped, and the endpoints will be deployed immediately without further manual review or approval.
 
-4. Click **Generate**, and then refresh the webpage of the TiDB Cloud console.
+4. Click **Generate**.
 
     The generated endpoint is displayed at the top of the endpoint list.
 
 5. Check the generated endpoint name, SQL statements, properties, and parameters of the new endpoint.
 
-    - Endpoint name: the generated endpoint name is in the `/<selected table name>` format, and the request method (such as `GET`, `POST`, and `PUT`) is displayed before the name. For example, if the selected table name is `sample-table` and the selected operation is **POST Create**, the generated endpoint is displayed as `POST /sample-table`.
+    - Endpoint name: the generated endpoint name is in the `-<selected table name>` format, and the request method (such as `GET`, `POST`, and `PUT`) is displayed before the name. For example, if the selected table name is `sample-table` and the selected operation is **POST Create**, the generated endpoint is displayed as `POST -sample-table`.
 
         - If a batch operation is selected, the endpoint name is in the `-<selected table name>s` format. For example, if the selected table name is `sample-table` and the selected operation is **POST Batch Create**, the generated endpoint is displayed as `POST -sample-tables`.
         - If there is already an endpoint with the same request method and endpoint name (`-<selected table name>`), TiDB Cloud will also append `_copy` to the name of the generated endpoint. For example, `-sample-table_copy`.
@@ -91,7 +91,7 @@ On the right pane of the endpoint details page, you can click the **Properties**
     - Only letters, numbers, underscores (`_`), and slashes (`/`) are allowed in a path. A path must start with a slash (`/`) and end with a letter, number, or underscore (`_`). For example, `/my_endpoint/get_id`.
     - The length of the path must be less than 64 characters.
 
-- **Batch Operation**: Controls whether to enable endpoints with `POST`, `PUT`, or `DELETE` request methods to operate in a batch mode. The batch mode allows you to operate on multiple rows in a single request.
+- **Batch Operation**: Controls whether to enable an endpoint with the `POST`, `PUT`, or `DELETE` request method to operate in a batch mode. The batch mode allows you to operate on multiple rows in a single request.
 
 - **Endpoint URL**: (read-only) the URL is automatically generated based on the region where the corresponding cluster is located, the service URL of the Data App, and the path of the endpoint. For example, if the path of the endpoint is `/my_endpoint/get_id`, the endpoint URL is `https://<region>.data.tidbcloud.com/api/v1beta/app/<App ID>/endpoint/my_endpoint/get_id`.
 

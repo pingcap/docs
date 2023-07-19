@@ -116,7 +116,7 @@ The following is an example configuration of `config.json`. In this example, the
       "row_limit": <Maximum rows>
     },
     "tag": "Default",
-    "batch": false,
+    "batch_operation": false,
     "sql_file": "<SQL file directory1>",
     "type": "sql_endpoint",
     "return_type": "json"
@@ -156,7 +156,7 @@ The description of each field is as follows:
 |---------------|--------|-------------|
 | `name`        | String | The endpoint name.            |
 | `description` | String | (Optional) The endpoint description.          |
-| `method`      | String | The HTTP method of the endpoint. You can use `GET` to retrieve data, use `POST` to create or insert new data, use `PUT` to update or modify data, and use `DELETE` to delete data. |
+| `method`      | String | The HTTP method of the endpoint. You can use `GET` to retrieve data, use `POST` to create or insert data, use `PUT` to update or modify data, and use `DELETE` to delete data. |
 | `endpoint`    | String | The unique path of the endpoint in the Data App. Only letters, numbers, underscores (`_`), and slashes (`/`) are allowed in the path, which must start with a slash (`/`) and end with a letter, number, or underscore (`_`). For example, `/my_endpoint/get_id`. The length of the path must be less than 64 characters.|
 | `cluster_id`  | String | The ID of the TiDB cluster for your endpoint. You can get it from the URL of your TiDB cluster. For example, if your cluster URL is `https://tidbcloud.com/console/clusters/1234567891234567890/overview`, the cluster ID is `1234567891234567890`. |
 | `params` | Array | The parameters used in the endpoint. By defining parameters, you can dynamically replace the parameter value in your queries through the endpoint. In `params`, you can define one or multiple parameters. For each parameter, you need to define its `name`, `type`, `required`, and `default` fields. If your endpoint does not need any parameters. You can leave `params` empty such as `"params": []`. |
@@ -167,7 +167,7 @@ The description of each field is as follows:
 | `timeout`     | Integer | The timeout for the endpoint in milliseconds, which is `5000` by default. You can set it to an integer from `1` to `30000`.  |
 | `row_limit`   | Integer  | The maximum number of rows that the endpoint returns, which is `50` by default. You can set it to an integer from `1` to `2000`.          |
 | `tag`    | String | The tag for the endpoint. The default value is `"Default"`. |
-| `batch_operation`    | Boolean | Controls whether to enable endpoints with `POST`, `PUT`, or `DELETE` request methods to operate in a batch mode. The batch mode allows you to operate on multiple rows in a single request. |
+| `batch_operation`    | Boolean | Controls whether to enable an endpoint with the `POST`, `PUT`, or `DELETE` request method to operate in a batch mode. The batch mode allows you to operate on multiple rows in a single request. |
 | `sql_file`    | String | The SQL file directory for the endpoint. For example, `"sql/GET-v1.sql"`. |
 | `type`        | String | The type of the endpoint, which can only be `"sql_endpoint"`.          |
 | `return_type` | String | The response format of the endpoint, which can only be `"json"`.             |
