@@ -13,7 +13,7 @@ This document describes how to manage your endpoints in a Data App in the TiDB C
 
 - Before you create an endpoint, make sure that the target table for the endpoint exists in your target database of the target cluster, and that the columns of the target table are already defined.
 
-- Before you manage an endpoint, make sure that you have created a cluster and a Data App. For more information, see [Create a Data App](/tidb-cloud/data-service-manage-data-app.md#create-a-data-app).
+- Before you create an endpoint, make sure that you have created a cluster and a Data App. For more information, see [Create a Data App](/tidb-cloud/data-service-manage-data-app.md#create-a-data-app).
 
 - Before you call an endpoint, make sure that you have created an API key in the Data App. For more information, see [Create an API key](/tidb-cloud/data-service-api-key.md#create-an-api-key).
 
@@ -27,25 +27,25 @@ In Data Service, you can either either generate an endpoint automatically or cre
 
 ### Generate an endpoint automatically
 
-In TiDB Cloud, you can generate an endpoint or multiple endpoints automatically at a time as follows:
+In TiDB Cloud Data Services, you can generate one or multiple endpoints automatically in one go as follows:
 
 1. Navigate to the [**Data Service**](https://tidbcloud.com/console/data-service) page of your project.
 2. In the left pane, locate your target Data App, click **+** to the right of the App name, and then click **Auto-Generate HTTP Endpoint**. The dialog for endpoint creation is displayed.
 3. In the dialog, do the following:
 
-    1. Select the target cluster, database, and table for the endpoint.
+    1. Select the target cluster, database, and table for the endpoint to be generated.
 
         > **Note:**
         >
-        > The **Table** drop-down list does not include system tables and empty tables without column definitions.
+        > The **Table** drop-down list includes only user-defined tables with at least one column, excluding system tables and any tables without a column definition.
 
     2. Select the desired operations for the endpoints.
 
         - To create one endpoint only, choose one operation.
         - To create multiple endpoints, choose multiple operations. For each operation you selected, TiDB Cloud will create a corresponding endpoint.
 
-    3. (Optional) Configure the timeout and the tag for the endpoints.
-    4. (Optional) Choose whether to enable **Deploy HTTP Endpoint**. Note that enabling this option will skip the draft review process and deploy the generated HTTP endpoints directly.
+    3. (Optional) Configure a timeout and tag for the operations. All generated HTTP endpoints will automatically inherit the configured properties, which can be modified later as needed.
+    4. (Optional) The **Deploy HTTP Endpoint** option (disabled by default) allows you to choose whether to enable the direct deployment of the automatically generated HTTP endpoints. When it is enabled, the draft review process will be skipped, and the endpoints will be deployed immediately without further manual review or approval.
 
 4. Click **Generate**, and then refresh the webpage of the TiDB Cloud console.
 
@@ -55,21 +55,21 @@ In TiDB Cloud, you can generate an endpoint or multiple endpoints automatically 
 
     - Endpoint name: the generated endpoint name is in the `/<selected table name>` format, and the request method (such as `GET`, `POST`, and `PUT`) is displayed before the name. For example, if the selected table name is `sample-table` and the selected operation is **POST Create**, the generated endpoint is displayed as `POST /sample-table`.
 
-        - If a batch operation is selected, the endpoint name is in the `/<selected table name>s` format. For example, if the selected table name is `sample-table` and the selected operation is **POST Batch Create**, the generated endpoint is displayed as `POST /sample-tables`.
-        - If there is already an endpoint with the same request method and endpoint name (`/<selected table name>`), TiDB Cloud will also append `_copy` to the name of the generated endpoint. For example, `/sample-table_copy`.
+        - If a batch operation is selected, the endpoint name is in the `-<selected table name>s` format. For example, if the selected table name is `sample-table` and the selected operation is **POST Batch Create**, the generated endpoint is displayed as `POST -sample-tables`.
+        - If there is already an endpoint with the same request method and endpoint name (`-<selected table name>`), TiDB Cloud will also append `_copy` to the name of the generated endpoint. For example, `-sample-table_copy`.
 
-    - SQL statements: TiDB Cloud automatically writes SQL statements for the generated endpoints according to the table columns and your selected endpoint operations. You can click the endpoint name to view its SQL statements in the middle area of the page.
-    - Endpoint properties: TiDB Cloud automatically configures the endpoint path, request method, and timeout according to your selection. You can find the properties in the right pane of the page.
+    - SQL statements: TiDB Cloud automatically writes SQL statements for the generated endpoints according to the table column specifications and the selected endpoint operations. You can click the endpoint name to view its SQL statements in the middle section of the page.
+    - Endpoint properties: TiDB Cloud automatically configures the endpoint path, request method, timeout, and tag according to your selection. You can find the properties in the right pane of the page.
     - Endpoint parameters: TiDB Cloud automatically configures parameters for endpoints that use `POST`, `PUT`, or `DELETE` request methods.
 
-6. If you want to modify the generated endpoint name, SQL statements, properties, and parameters of the new endpoint, see instructions in [Develop an endpoint](#deploy-an-endpoint).
+6. If you wish to modify the details of the generated endpoint, such as its name, SQL statements, properties, or parameters, refer to the instructions provided in [Develop an endpoint](#deploy-an-endpoint).
 
 ### Create an endpoint manually
 
 To create an endpoint manually, perform the following steps:
 
 1. Navigate to the [**Data Service**](https://tidbcloud.com/console/data-service) page of your project.
-2. In the left pane, locate your target Data App, click **+** to the right of the App name, and then click **Create SQL HTTP Endpoint**.
+2. In the left pane, locate your target Data App, click **+** to the right of the App name, and then click **Create Endpoint**.
 3. Update the default name if necessary. The newly created endpoint is added to the top of the endpoint list.
 4. Configure the new endpoint according to the instructions in [Develop an endpoint](#develop-an-endpoint).
 
@@ -85,21 +85,21 @@ For each endpoint, you can write SQL statements to execute on a TiDB cluster, de
 
 On the right pane of the endpoint details page, you can click the **Properties** tab to view and manage the following properties of the endpoint:
 
-- **Path**: the path of the endpoint that users use to access the endpoint.
+- **Path**: the path that users use to access the endpoint.
 
     - The combination of the request method and the path must be unique within a Data App.
-    - Only letters, numbers, underscores (`_`), and slashes (`/`) are allowed in the path, which must start with a slash (`/`) and end with a letter, number, or underscore (`_`). For example, `/my_endpoint/get_id`.
+    - Only letters, numbers, underscores (`_`), and slashes (`/`) are allowed in a path. A path must start with a slash (`/`) and end with a letter, number, or underscore (`_`). For example, `/my_endpoint/get_id`.
     - The length of the path must be less than 64 characters.
 
-- **Batch**: controls whether to enable batch operations for an endpoint that uses the `POST`, `PUT`, or `DELETE` request method. When this option is enabled, you can operate multiple rows in one request.
+- **Batch Operation**: Controls whether to enable endpoints with `POST`, `PUT`, or `DELETE` request methods to operate in a batch mode. The batch mode allows you to operate on multiple rows in a single request.
 
 - **Endpoint URL**: (read-only) the URL is automatically generated based on the region where the corresponding cluster is located, the service URL of the Data App, and the path of the endpoint. For example, if the path of the endpoint is `/my_endpoint/get_id`, the endpoint URL is `https://<region>.data.tidbcloud.com/api/v1beta/app/<App ID>/endpoint/my_endpoint/get_id`.
 
 - **Request Method**: the HTTP method of the endpoint. The following methods are supported:
 
-    - `GET`: use this method to query data, such as a `SELECT` statement.
-    - `POST`: use this method to insert data, such as an `INSERT` statement.
-    - `PUT`: use this method to update data, such as an `UPDATE` statement.
+    - `GET`: use this method to query or retrieve data, such as a `SELECT` statement.
+    - `POST`: use this method to insert or create data, such as an `INSERT` statement.
+    - `PUT`: use this method to update or modify data, such as an `UPDATE` statement.
     - `DELETE`: use this method to delete data, such as a `DELETE` statement.
 
 - **Timeout(ms)**: the timeout for the endpoint.
@@ -112,7 +112,7 @@ On the right pane of the endpoint details page, you can click the **Properties**
 - **Max Rows**: the maximum number of rows that the endpoint can operate or return.
 
     - Default value: `50`
-    - Maximum value: `2000` for batch-disabled endpoints and `100` for batch-enabled endpoints
+    - Maximum value: `2000` when batch operations are disabled and `100` when batch operations are enabled for an endpoint
     - Minimum value: `1`
 
 - **Description** (Optional): the description of the endpoint.
@@ -248,7 +248,7 @@ TiDB Cloud generates code examples to help you call an endpoint. To get the code
     > - The online environment is available only after you deploy the endpoint.
     > - Currently, TiDB Cloud only provides the curl code example.
 
-    An example of the curl code example for the `POST` request is as follows:
+    Here is an example of a curl code snippet for a `POST` request:
 
     <SimpleTab>
     <div label="Test Environment">
@@ -257,7 +257,7 @@ TiDB Cloud generates code examples to help you call an endpoint. To get the code
 
     ```bash
     curl --digest --user '<Public Key>:<Private Key>' \
-      --request GET 'https://<region>.data.tidbcloud.com/api/v1beta/app/<App ID>/endpoint/<Endpoint Path>' \
+      --request POST 'https://<region>.data.tidbcloud.com/api/v1beta/app/<App ID>/endpoint/<Endpoint Path>' \
       --header 'endpoint-type: draft'
       --data-raw '[{
         "age": "${age}",
