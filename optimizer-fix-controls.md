@@ -42,7 +42,7 @@ SET SESSION tidb_opt_fix_control = '44262:ON,44389:ON';
 
 - Default value: `200`
 - Possible values: `[0, 2147483647]`
-- For queries with more than `200` parameters, Plan Cache will not cache their execution plans to save memory.
+- To save memory, Plan Cache will not cache queries with parameters exceeding the specified number.
 - This variable controls this threshold. `0` means no limit.
 
 ### [`44830`](https://github.com/pingcap/tidb/issues/44830) <span class="version-mark">New in v7.3.0</span>
@@ -56,5 +56,5 @@ SET SESSION tidb_opt_fix_control = '44262:ON,44389:ON';
 - Default value: `OFF`
 - Possible values: `ON`、`OFF`
 - In some scenarios, when the `Probe` side of the `IndexJoin` contains `Selection`, TiDB overestimates the row count of the `IndexScan` severely, which makes TiDB choose other execution plans when `IndexJoin` is better.
-- TiDB has introduced code to mitigate this problem. However, it's not enabled by default because of the potential risk of regressions in execution plans.
+- TiDB has introduced logic to mitigate this problem. However, the logic is not enabled by default due to the potential risk of regressions in execution plans.
 - This switch controls whether to enable this mitigation logic.
