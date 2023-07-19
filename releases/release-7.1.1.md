@@ -72,16 +72,16 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.1/quick-start-with-
 
 + TiDB
     <!--10 tw:@ran-huang-->
-    - 修复创建新会话时 Stats Collector 可能会造成死锁的问题 [#44502](https://github.com/pingcap/tidb/issues/44502) @[xuyifangreeneyes](https://github.com/xuyifangreeneyes)
-    - 修复 memory tracker 潜在的泄露问题 [#44612](https://github.com/pingcap/tidb/issues/44612) @[wshwsh12](https://github.com/wshwsh12)
-    - 修复 batch coprocessor 重试时可能会生成错误 region 信息导致 query 失败的问题 [#44622](https://github.com/pingcap/tidb/issues/44622) @[windtalker](https://github.com/windtalker)
-    - 修复 index scan 中可能的数据竞争问题 [#45126](https://github.com/pingcap/tidb/issues/45126) @[wshwsh12](https://github.com/wshwsh12)
-    - 修复并行 apply + MPP 模式下面，query 结果出错的问题 [#45299](https://github.com/pingcap/tidb/issues/45299) @[windtalker](https://github.com/windtalker)
-    - 修复带 `indexMerge` 的 query 如果被 kill 了可能会 hang 住的问题 [#45279](https://github.com/pingcap/tidb/issues/45279) @[xzhangxian1008](https://github.com/xzhangxian1008)
-    - 修复极端情况下，统计 sql execution detail 的信息会占用太多内存导致 TiDB OOM 的问题 [#44047](https://github.com/pingcap/tidb/issues/44047) @[wshwsh12](https://github.com/wshwsh12)
-    - 修复对于非常长的 sql 输入，`FormatSQL()` 方法无法正常截断的问题 [#44542](https://github.com/pingcap/tidb/issues/44542) @[hawkingrei](https://github.com/hawkingrei)
-    - 修复集群升级过程中，DDL 卡住导致升级失败相关的问题 [#44158](https://github.com/pingcap/tidb/issues/44158) @[zimulala](https://github.com/zimulala)
-    - 修复 TTL 任务失败多次后，不会由其它 tidb 接管的故障处理问题 [#45022](https://github.com/pingcap/tidb/issues/45022) @[lcwangchao](https://github.com/lcwangchao)
+    - Fix the issue that Stats Collector might cause deadlock when creating a new session [#44502](https://github.com/pingcap/tidb/issues/44502) @[xuyifangreeneyes](https://github.com/xuyifangreeneyes)
+    - Fix the potential memory leak issue in memory tracker [#44612](https://github.com/pingcap/tidb/issues/44612) @[wshwsh12](https://github.com/wshwsh12)
+    - Fix the issue that batch coprocessor retry might generate incorrect Region information that causes query failure [#44622](https://github.com/pingcap/tidb/issues/44622) @[windtalker](https://github.com/windtalker)
+    - Fix the data race issue in index scan [#45126](https://github.com/pingcap/tidb/issues/45126) @[wshwsh12](https://github.com/wshwsh12)
+    - Fix the issue that query results are incorrect in parallel apply + MPP mode [#45299](https://github.com/pingcap/tidb/issues/45299) @[windtalker](https://github.com/windtalker)
+    - Fix the hang-up issue when queries with `indexMerge` are killed [#45279](https://github.com/pingcap/tidb/issues/45279) @[xzhangxian1008](https://github.com/xzhangxian1008)
+    - Fix the issue that excessive memory consumption of SQL execution details in statistics causes TiDB OOM in extreme cases [#44047](https://github.com/pingcap/tidb/issues/44047) @[wshwsh12](https://github.com/wshwsh12)
+    - Fix the issue that `FormatSQL()` method cannot properly truncate extremely long SQL statements in input [#44542](https://github.com/pingcap/tidb/issues/44542) @[hawkingrei](https://github.com/hawkingrei)
+    - Fix the issue that DDL operations get stuck during cluster upgrade, which causes upgrade failure [#44158](https://github.com/pingcap/tidb/issues/44158) @[zimulala](https://github.com/zimulala)
+    - Fix the fault handling issue that TTL tasks fail multiple times without being taken over by other TiDB instances [#45022](https://github.com/pingcap/tidb/issues/45022) @[lcwangchao](https://github.com/lcwangchao)
     <!--11 tw:@qiancai-->
     - 使用 mysql 的 cursor fetch 协议时，若结果集内存大小超过 `tidb_mem_quota_query` 则自动落盘 [#43233](https://github.com/pingcap/tidb/issues/43233) @[YangKeao](https://github.com/YangKeao)
     - 修复即使用户没有权限，也能查看 `INFORMATION_SCHEMA.TIFLASH_REPLICA` 表信息的问题 [#45320](https://github.com/pingcap/tidb/issues/45320) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
