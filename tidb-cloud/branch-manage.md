@@ -7,6 +7,13 @@ summary: Learn How to manage TiDB Serverless branches.
 
 This document describes how to manage TiDB Serverless branches using the [TiDB Cloud console](https://tidbcloud.com). To manage it using the TiDB Cloud CLI, see [`ticloud branch`](/tidb-cloud/ticloud-branch-create.md).
 
+## Required access
+
+- To [create a branch](#create-a-branch) or [connect to a branch](#connect-to-a-branch), you must be in the `Organization Owner` role of your organization or the `Project Owner` role of the target project.
+- To [view branches](#create-a-branch) for clusters in a project, you must belong to that project.
+
+For more information about permissions, see [User roles](/tidb-cloud/manage-user-access.md#user-roles).
+
 ## Create a branch
 
 > **Note:**

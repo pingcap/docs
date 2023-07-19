@@ -77,7 +77,7 @@ An entity that you create to manage your TiDB Cloud accounts, including a manage
 
 ### organization members
 
-Organization members are users who are invited by the organization owner to join an organization. Organization members can view members of the organization and can be invited to projects within the organization.
+Organization members are users who are invited by the organization owner or project owner to join an organization. Organization members can view members of the organization and can be invited to projects within the organization.
 
 ## P
 
