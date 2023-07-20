@@ -12,7 +12,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **General changes**
 
-- Data Service (beta) supports pagination for `GET` endpoints.
+- Data Service (beta) supports pagination for `GET` requests.
 
     This feature improves the efficiency of handling large datasets and enhances the development experience.
 
@@ -22,6 +22,8 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
     curl --digest --user '<Public Key>:<Private Key>' \
       --request GET 'https://<region>.data.tidbcloud.com/api/v1beta/app/<App ID>/endpoint/<Endpoint Path>?api_page=2&api_page_size=10'
     ```
+
+    Note that this feature is available only for `GET` requests where the last query is a `SELECT` statement.
 
     For more information, see [Call an endpoint](/tidb-cloud/data-service-manage-endpoint.md#call-an-endpoint).
 
