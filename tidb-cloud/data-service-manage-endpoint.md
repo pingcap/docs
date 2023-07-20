@@ -20,7 +20,7 @@ This document describes how to manage your endpoints in a Data App in the TiDB C
 
 ## Create an endpoint
 
-In Data Service, you can either either generate an endpoint automatically or create an endpoint manually.
+In Data Service, you can either generate an endpoint automatically or create an endpoint manually.
 
 > **Tip:**
 >
@@ -31,7 +31,7 @@ In Data Service, you can either either generate an endpoint automatically or cre
 In TiDB Cloud Data Service, you can generate one or multiple endpoints automatically in one go as follows:
 
 1. Navigate to the [**Data Service**](https://tidbcloud.com/console/data-service) page of your project.
-2. In the left pane, locate your target Data App, click **+** to the right of the App name, and then click **Generate Endpoint**. The dialog for endpoint generation is displayed.
+2. In the left pane, locate your target Data App, click **+** to the right of the App name, and then click **Autogenerate Endpoint**. The dialog for endpoint generation is displayed.
 3. In the dialog, do the following:
 
     1. Select the target cluster, database, and table for the endpoint to be generated.
