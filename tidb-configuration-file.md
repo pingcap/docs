@@ -51,7 +51,7 @@ The TiDB configuration file supports more options than command-line parameters. 
 
 > **Note:**
 >
-> If the directory does not exist, TiDB will automatically create it upon startup. If the directory creation fails or TiDB does not have read and write permissions on that directory, [`Fast Online DDL`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) may experience unpredictable issues.
+> If the directory does not exist, TiDB will automatically create it upon startup. If the directory creation fails or TiDB does not have the read and write permissions on that directory, [`Fast Online DDL`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) might experience unpredictable issues.
 
 ### `oom-use-tmp-storage`
 
