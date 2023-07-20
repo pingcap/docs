@@ -128,17 +128,17 @@ sysctl -p
 >
 > - `sysctl -p` is to make the configuration effective without restarting the system.
 
-## Set temporary space for TiDB instances (Recommended)
+## Set temporary spaces for TiDB instances (Recommended)
 
-Some operations in TiDB require writing temporary files to the server, so it is necessary to ensure that the operating system user running TiDB has sufficient permissions to read and write to the target directory. If the TiDB instance is not started with the `root` privilege, you need to check the directory permissions and set them correctly.
+Some operations in TiDB require writing temporary files to the server, so it is necessary to ensure that the operating system user that runs TiDB has sufficient permissions to read and write to the target directory. If you do not start the TiDB instance with the `root` privilege, you need to check the directory permissions and set them correctly.
 
 - TiDB work area
 
-    Operations that consume a significant amount of memory, such as hash table construction and sorting, may write temporary data to disk to reduce memory consumption and improve stability. The disk location for writing is defined by the configuration item [`tmp-storage-path`](/tidb-configuration-file.md#tmp-storage-path). With default configuration, make sure that the user running TiDB has read and write permissions to the operating system's temporary folder (normally `/tmp`).
+    Operations that consume a significant amount of memory, such as hash table construction and sorting, might write temporary data to disk to reduce memory consumption and improve stability. The disk location for writing is defined by the configuration item [`tmp-storage-path`](/tidb-configuration-file.md#tmp-storage-path). With the default configuration, make sure that the user that runs TiDB has read and write permissions to the temporary folder (normally `/tmp`) of the operating system.
 
 - `Fast Online DDL` work area
 
-    When the variable [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) is set to `ON` (default in v6.5.0 and above), `Fast Online DDL` is activated, and some DDL operations need to read and write temporary files in filesystems. The location is defined by the configuration item [`temp-dir`](/tidb-configuration-file.md#temp-dir-new-in-v630), and you need to ensure that the operating system user running TiDB has read and write permissions on that directory. Taking the default directory `/tmp/tidb` as an example:
+    When the variable [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) is set to `ON` (the default value in v6.5.0 and later versions), `Fast Online DDL` is activated, and some DDL operations need to read and write temporary files in filesystems. The location is defined by the configuration item [`temp-dir`](/tidb-configuration-file.md#temp-dir-new-in-v630). You need to ensure that the operating system user that runs TiDB has read and write permissions for that directory. Taking the default directory `/tmp/tidb` as an example:
 
     > **Note:**
     > 
@@ -148,7 +148,7 @@ Some operations in TiDB require writing temporary files to the server, so it is 
     sudo mkdir /tmp/tidb
     ```
 
-    If the directory `/tmp/tidb` already exists, make sure write permission are granted.
+    If the directory `/tmp/tidb` already exists, make sure the write permission are granted.
 
     ```shell
     sudo chmod -R 777 /tmp/tidb
@@ -156,7 +156,7 @@ Some operations in TiDB require writing temporary files to the server, so it is 
 
     > **Note:**
     >
-    > If the directory does not exist, TiDB will automatically create it upon startup. If the directory creation fails or TiDB does not have read and write permissions on that directory, [`Fast Online DDL`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) may experience unpredictable issues during runtime.
+    > If the directory does not exist, TiDB will automatically create it upon startup. If the directory creation fails or TiDB does not have the read and write permissions for that directory, [`Fast Online DDL`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) might experience unpredictable issues during runtime.
 
 ## Check and stop the firewall service of target machines
 
