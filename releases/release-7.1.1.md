@@ -137,10 +137,10 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.1/quick-start-with-
 
     + TiCDC
         <!--4 tw:@hfxsd-->
-        - 修复 PD 异常时可能导致同步任务卡住的问题 [#8808](https://github.com/pingcap/tiflow/issues/8808) [#9054](https://github.com/pingcap/tiflow/issues/9054)
-        - 修复同步到对象存储时内存消耗过大的问题 [#8894](https://github.com/pingcap/tiflow/issues/8894)
-        - 修复在打开 redo log 且下游出现异常时可能会导致同步任务卡住的问题 [#9172](https://github.com/pingcap/tiflow/issues/9172)
-        - 修复在下游出现故障时cdc 持续重试导致重试时间过长的问题 [#9272](https://github.com/pingcap/tiflow/issues/9272)
+        - Fix the issue that a PD exception might cause the replication task to get stuck [#8808](https://github.com/pingcap/tiflow/issues/8808) [#9054](https://github.com/pingcap/tiflow/issues/9054) @[asddongmen](https://github.com/asddongmen) @[fubinzh](https://github.com/fubinzh)
+        - Fix the issue of excessive memory consumption when replicating to an object storage service [#8894](https://github.com/pingcap/tiflow/issues/8894) @[CharlesCheung96](https://github.com/CharlesCheung96)
+        - Fix the issue that the replication task might get stuck when the redo log is enabled and there is an exception downstream [#9172](https://github.com/pingcap/tiflow/issues/9172) @[CharlesCheung96](https://github.com/CharlesCheung96)
+        - Fix the issue that TiCDC keeps retrying when there is a downstream failure which causes the retry time to be too long [#9272](https://github.com/pingcap/tiflow/issues/9272) @[asddongmen](https://github.com/asddongmen)
         (dup: release-7.2.0.md > Bug fixes> Tools> TiCDC)- Fix the issue of excessive downstream pressure caused by reading downstream metadata too frequently when replicating data to Kafka [#8959](https://github.com/pingcap/tiflow/issues/8959) @[hi-rustin](https://github.com/hi-rustin) @[hi-rustin](https://github.com/hi-rustin)
         (dup: release-6.5.3.md > Bug fixes> Tools> TiCDC)- Fix the issue that when the downstream is Kafka, TiCDC queries the downstream metadata too frequently and causes excessive workload in the downstream [#8957](https://github.com/pingcap/tiflow/issues/8957) [#8959](https://github.com/pingcap/tiflow/issues/8959) @[hi-rustin](https://github.com/hi-rustin) @[hi-rustin](https://github.com/hi-rustin)
         (dup: release-6.5.3.md > Bug fixes> Tools> TiCDC)- Fix the OOM issue caused by excessive memory usage of the sorter component in some special scenarios [#8974](https://github.com/pingcap/tiflow/issues/8974) @[hicqu](https://github.com/hicqu) @[hicqu](https://github.com/hicqu)
@@ -152,12 +152,14 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.1/quick-start-with-
 
     + TiDB Data Migration (DM)
         <!--1 tw:@hfxsd-->
-        - 修复 dm-master 在迁移表结构中存在唯一索引包含空列的情况下异常退出的问题 [#9247](https://github.com/pingcap/tiflow/issues/9247) @[lance6716](https://github.com/lance6716)
+        - Fix the issue that DM-master exits abnormally when a unique index contains empty columns in the migrated table structure [#9247](https://github.com/pingcap/tiflow/issues/9247) @[lance6716](https://github.com/lance6716)
 
     + TiDB Lightning
         <!--2 tw:@hfxsd-->
-        - 修复 TiDB Lightning 连接 pd 失败无法重试的问题，增加导入成功率 [#43400](https://github.com/pingcap/tidb/issues/43400) @[lichunzhu](https://github.com/lichunzhu)
-        - 修复 TiDB Lightning 写 TiKV 返回空间不足时无法正确显示错误信息的问题 [#44733](https://github.com/pingcap/tidb/issues/44733) @[lance6716](https://github.com/lance6716)
+        - Fix the issue that TiDB Lightning connection to PD fails and cannot be retried, thus increasing the import success rate [#43400](https://github.com/pingcap/tidb/issues/43400) @[lichunzhu](https://github.com/lichunzhu)
+        - Fix the issue that TiDB Lightning does not display the error message correctly when writing data to TiKV and returning an out of space error [#44733](https://github.com/pingcap/tidb/issues/44733) @[lance6716](https://github.com/lance6716)
+        - Fix the "region is unavailable" error during checksum operation
+[#45462](https://github.com/pingcap/tidb/issues/45462) @[D3Hunter](https://github.com/D3Hunter)
         (dup: release-7.2.0.md > Bug fixes> Tools> TiDB Lightning)- Fix the TiDB Lightning panic issue when `experimental.allow-expression-index` is enabled and the default value is UUID [#44497](https://github.com/pingcap/tidb/issues/44497) @[lichunzhu](https://github.com/lichunzhu) @[lichunzhu](https://github.com/lichunzhu)
         (dup: release-6.1.7.md > Bug fixes> Tools> TiDB Lightning)- Fix the issue that disk quota might be inaccurate due to competing conditions [#44867](https://github.com/pingcap/tidb/issues/44867) @[D3Hunter](https://github.com/D3Hunter) @[D3Hunter](https://github.com/D3Hunter)
         (dup: release-6.1.7.md > Bug fixes> Tools> TiDB Lightning)- Fix the issue that in Logical Import Mode, deleting tables downstream during import might cause TiDB Lightning metadata not to be updated in time [#44614](https://github.com/pingcap/tidb/issues/44614) @[dsdashun](https://github.com/dsdashun) @[dsdashun](https://github.com/dsdashun)
@@ -168,10 +170,10 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.1/quick-start-with-
 
     + Dumpling
         <!--1 tw:@hfxsd-->
-        - 修复 dumpling 在 --sql 查询结果集为空时异常退出的问题 [#45200](https://github.com/pingcap/tidb/issues/45200) @[D3Hunter](https://github.com/D3Hunter)
+        - Fix the issue that Dumpling exits abnormally when the `-sql` query result set is empty [#45200](https://github.com/pingcap/tidb/issues/45200) @[D3Hunter](https://github.com/D3Hunter)
 
     + TiDB Binlog
         <!--2 tw:@hfxsd-->
-        - 修复 TiDB 在 pd 地址完全变更后无法通过 show pump/drainer status 正确查询 binlog 节点状态的问题 [#42643](https://github.com/pingcap/tidb/issues/42643) @[lichunzhu](https://github.com/lichunzhu)
-        - 修复 TiDB 在 pd 地址完全变更后无法写 binlog 的问题 [#42643](https://github.com/pingcap/tidb/issues/42643) @[lance6716](https://github.com/lance6716)
+        - Fix the issue that TiDB cannot correctly query binlog node status via `SHOW PUMP STATUS` or `SHOW DRAINER STATUS` after a complete change of the PD address [#42643](https://github.com/pingcap/tidb/issues/42643) @[lichunzhu](https://github.com/lichunzhu)
+        - Fix the issue that TiDB cannot write binlogs after a complete change of the PD address [#42643](https://github.com/pingcap/tidb/issues/42643) @[lance6716](https://github.com/lance6716)
         - (dup): release-6.1.7.md > 错误修复> Tools> TiDB Binlog - 修复 etcd client 初始化时没有自动同步最新节点信息的问题 [#1236](https://github.com/pingcap/tidb-binlog/issues/1236) @[lichunzhu](https://github.com/lichunzhu)
