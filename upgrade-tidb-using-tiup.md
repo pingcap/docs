@@ -46,7 +46,7 @@ This section introduces the preparation works needed before upgrading your TiDB 
 
 Review compatibility changes in TiDB release notes. If any changes affect your upgrade, take actions accordingly.
 
-This following provides compatibility changes you need to know when you upgrade from v7.0.0 to the current version (v7.1.1). If you are upgrading from v6.6.0 or earlier versions to the current version, you might also need to check the compatibility changes introduced in intermediate versions in the corresponding [release notes](/releases/release-notes.md).
+The following provides compatibility changes you need to know when you upgrade from v7.0.0 to the current version (v7.1.1). If you are upgrading from v6.6.0 or earlier versions to the current version, you might also need to check the compatibility changes introduced in intermediate versions in the corresponding [release notes](/releases/release-notes.md).
 
 - TiDB v7.1.0 [compatibility changes](/releases/release-7.1.0.md#compatibility-changes)
 - TiDB v7.1.1 [compatibility changes](/releases/release-7.1.1.md#compatibility-changes)
