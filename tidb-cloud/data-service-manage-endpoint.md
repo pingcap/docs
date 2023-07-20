@@ -91,7 +91,7 @@ On the right pane of the endpoint details page, you can click the **Properties**
     - Only letters, numbers, underscores (`_`), and slashes (`/`) are allowed in a path. A path must start with a slash (`/`) and end with a letter, number, or underscore (`_`). For example, `/my_endpoint/get_id`.
     - The length of the path must be less than 64 characters.
 
-- **Batch Operation**: Controls whether to enable an endpoint with the `POST`, `PUT`, or `DELETE` request method to operate in a batch mode. The batch mode allows you to operate on multiple rows in a single request.
+- **Batch Operation**: Controls whether to enable the endpoint to operate in batch mode. When it is enabled, you can operate on multiple rows in a single request. To enable this option, make sure that the request method is `POST`, `PUT`, or `DELETE`, and that the last SQL statement for the endpoint is an `INSERT`, `UPDATE`, or `DELETE` operation.
 
 - **Endpoint URL**: (read-only) the URL is automatically generated based on the region where the corresponding cluster is located, the service URL of the Data App, and the path of the endpoint. For example, if the path of the endpoint is `/my_endpoint/get_id`, the endpoint URL is `https://<region>.data.tidbcloud.com/api/v1beta/app/<App ID>/endpoint/my_endpoint/get_id`.
 
@@ -112,7 +112,7 @@ On the right pane of the endpoint details page, you can click the **Properties**
 - **Max Rows**: the maximum number of rows that the endpoint can operate or return.
 
     - Default value: `50`
-    - Maximum value: `2000` when batch operations are disabled and `100` when batch operations are enabled for an endpoint
+    - Maximum value: `2000` when **Batch Operation** is disabled and `100` when **Batch Operation** is enabled for an endpoint
     - Minimum value: `1`
 
 - **Description** (Optional): the description of the endpoint.
@@ -248,7 +248,7 @@ TiDB Cloud Data Service generates code examples to help you call an endpoint. To
     > - The online environment is available only after you deploy the endpoint.
     > - Currently, TiDB Cloud Data Service only provides the curl code example.
 
-    Here is an example of a curl code snippet for a `POST` request:
+    Here is an example of a curl code snippet for a `POST` request with **Batch Operation** enabled:
 
     <SimpleTab>
     <div label="Test Environment">
@@ -258,6 +258,7 @@ TiDB Cloud Data Service generates code examples to help you call an endpoint. To
     ```bash
     curl --digest --user '<Public Key>:<Private Key>' \
       --request POST 'https://<region>.data.tidbcloud.com/api/v1beta/app/<App ID>/endpoint/<Endpoint Path>' \
+      --header 'content-type: application/json'\
       --header 'endpoint-type: draft'
       --data-raw '[{
         "age": "${age}",
@@ -299,7 +300,7 @@ TiDB Cloud Data Service generates code examples to help you call an endpoint. To
         - For endpoints with **Batch Operation** enabled, the `--data-raw` option accepts an array of data objects so you can operate multiple rows of data using one endpoint.
         - For endpoints with **Batch Operation** not enabled, the `--data-raw` option only accepts one data object.
 
-    - If the request method of your endpoint is `DELETE` and **Batch Operation** is enabled for the endpoint, you need to use `%2C` instead of comma (`,`) to separate the rows to be deleted, such as `/endpoint/<Endpoint Path>?id=${id}%2C${id}`. This is because comma (`,`) is a reserved character in URLs and cannot be used directly.
+    - If the request method of your endpoint is `DELETE` and **Batch Operation** is enabled for the endpoint, you need to use `%2C` instead of comma (`,`) to separate the rows to be deleted in curl code, such as `/endpoint/<Endpoint Path>?id=${id}%2C${id}`. This is because comma (`,`) is a reserved character in URLs and cannot be used directly.
     - If the endpoint contains parameters, specify the parameter values when calling the endpoint.
 
 ### Response

@@ -165,9 +165,9 @@ The description of each field is as follows:
 | `params.required` | Integer | Specifies whether the parameter is required in the request. Supported values are `0` (not required) and `1` (required).  The default value is `0`.  |
 | `params.default` | String | The default value of the parameter. Make sure that the value matches the type of parameter you specified. Otherwise, the endpoint returns an error. |
 | `timeout`     | Integer | The timeout for the endpoint in milliseconds, which is `5000` by default. You can set it to an integer from `1` to `30000`.  |
-| `row_limit`   | Integer  | The maximum number of rows that the endpoint returns, which is `50` by default. You can set it to an integer from `1` to `2000`.          |
+| `row_limit`   | Integer  | The maximum number of rows that the endpoint can operate or return, which is `50` by default. When `batch_operation` is `false`, you can set it to an integer from `1` to `2000`. When `batch_operation` is 'true`, you can set it to an integer from `1` to `100`.  |
 | `tag`    | String | The tag for the endpoint. The default value is `"Default"`. |
-| `batch_operation`    | Boolean | Controls whether to enable an endpoint with the `POST`, `PUT`, or `DELETE` request method to operate in a batch mode. The batch mode allows you to operate on multiple rows in a single request. |
+| `batch_operation`    | Boolean | Controls whether to enable the endpoint to operate in batch mode. When it is enabled, you can operate on multiple rows in a single request. To enable this option, make sure that the request method is `POST`, `PUT`, or `DELETE`, and that the last SQL statement for the endpoint is an `INSERT`, `UPDATE`, or `DELETE` operation. |
 | `sql_file`    | String | The SQL file directory for the endpoint. For example, `"sql/GET-v1.sql"`. |
 | `type`        | String | The type of the endpoint, which can only be `"sql_endpoint"`.          |
 | `return_type` | String | The response format of the endpoint, which can only be `"json"`.             |
