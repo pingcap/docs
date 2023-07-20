@@ -22,12 +22,11 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.1/quick-start-with-
     <!--2 tw:@Oreoxmt-->
     - Plan Cache supports queries with more than 200 parameters [#44823](https://github.com/pingcap/tidb/issues/44823) @[qw4990](https://github.com/qw4990)
     - Optimize the performance of reading chunks related to disk [#45125](https://github.com/pingcap/tidb/issues/45125) @[YangKeao](https://github.com/YangKeao)
-    (dup: release-7.2.0.md > Improvements> TiDB)- Optimize the logic of constructing index scan range so that it supports converting complex conditions into index scan range [#41572](https://github.com/pingcap/tidb/issues/41572) [#44389](https://github.com/pingcap/tidb/issues/44389) @[xuyifangreeneyes](https://github.com/xuyifangreeneyes) @[xuyifangreeneyes](https://github.com/xuyifangreeneyes)
-    (dup: release-7.2.0.md > Improvements> TiDB)- When the retry leader of stale read encounters a lock, TiDB forcibly retries with the leader after resolving the lock, which avoids unnecessary overhead [#43659](https://github.com/pingcap/tidb/issues/43659) @[you06](https://github.com/you06) @[you06](https://github.com/you06)
+    (dup: release-7.2.0.md > Improvements> TiDB)- Optimize the logic of constructing index scan range so that it supports converting complex conditions into index scan range [#41572](https://github.com/pingcap/tidb/issues/41572) [#44389](https://github.com/pingcap/tidb/issues/44389) @[xuyifangreeneyes](https://github.com/xuyifangreeneyes)
+    (dup: release-7.2.0.md > Improvements> TiDB)- When the retry leader of stale read encounters a lock, TiDB forcibly retries with the leader after resolving the lock, which avoids unnecessary overhead [#43659](https://github.com/pingcap/tidb/issues/43659) @[you06](https://github.com/you06)
 
 + TiKV
 
-    (dup: release-6.6.0.md > Improvements> TiKV)- Optimize the default values of some parameters in partitioned-raft-kv mode: the default value of the TiKV configuration item `storage.block-cache.capacity` is adjusted from 45% to 30%, and the default value of `region-split-size` is adjusted from `96MiB` adjusted to `10GiB`. When using raft-kv mode and `enable-region-bucket` is `true`, `region-split-size` is adjusted to 1 GiB by default. [#12842](https://github.com/tikv/tikv/issues/12842) @[tonyxuqqi](https://github.com/tonyxuqqi) @[tonyxuqqi](https://github.com/tonyxuqqi)
 
 + PD
     <!--1 tw:@Oreoxmt-->
@@ -46,7 +45,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.1/quick-start-with-
     + TiCDC
         <!--1 tw:@Oreoxmt-->
         - Optimize the encoding format of binary fields when TiCDC replicates data to object storage services [#9373](https://github.com/pingcap/tiflow/issues/9373) @[CharlesCheung96](https://github.com/CharlesCheung96)
-        (dup: release-7.2.0.md > Improvements> Tools> TiCDC)- Support the OAUTHBEARER authentication in the scenario of replication to Kafka [#8865](https://github.com/pingcap/tiflow/issues/8865) @[hi-rustin](https://github.com/hi-rustin) @[hi-rustin](https://github.com/hi-rustin)
+        (dup: release-7.2.0.md > Improvements> Tools> TiCDC)- Support the OAUTHBEARER authentication in the scenario of replication to Kafka [#8865](https://github.com/pingcap/tiflow/issues/8865) @[hi-rustin](https://github.com/hi-rustin)
 
     + TiDB Data Migration (DM)
 
@@ -55,7 +54,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.1/quick-start-with-
     + TiDB Lightning
         <!--1 tw:@Oreoxmt-->
         - Improve the retry logic of TiDB Lightning for the PD `ClientTSOStreamClosed` error during the checksum phase [#45301](https://github.com/pingcap/tidb/issues/45301) @[lance6716](https://github.com/lance6716)
-        (dup: release-7.2.0.md > Improvements> Tools> TiDB Lightning)- Verify checksum through SQL after the import to improve stability of verification [#41941](https://github.com/pingcap/tidb/issues/41941) @[GMHDBJD](https://github.com/GMHDBJD) @[GMHDBJD](https://github.com/GMHDBJD)
+        (dup: release-7.2.0.md > Improvements> Tools> TiDB Lightning)- Verify checksum through SQL after the import to improve stability of verification [#41941](https://github.com/pingcap/tidb/issues/41941) @[GMHDBJD](https://github.com/GMHDBJD)
 
     + TiUP
 
@@ -95,25 +94,25 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.1/quick-start-with-
     - Fix the `duplicate entry` error that occurs when restoring a table with `AUTO_ID_CACHE=1` using BR [#44716](https://github.com/pingcap/tidb/issues/44716) @[tiancaiamao](https://github.com/tiancaiamao)
     - Fix the data index inconsistency issue triggered by multiple switches of DDL owner [#44619](https://github.com/pingcap/tidb/issues/44619) @[tangenta](https://github.com/tangenta)
     - Fix the issue that canceling an `ADD INDEX` DDL task in the `none` status might cause memory leak because this task is not removed from the backend task queue [#44205](https://github.com/pingcap/tidb/issues/44205) @[tangenta](https://github.com/tangenta)
-    (dup: release-7.1.0.md > Bug fixes> TiDB)- Fix the issue that the proxy protocol reports the `Header read timeout` error when processing certain erroneous data [#43205](https://github.com/pingcap/tidb/issues/43205) @[blacktear23](https://github.com/blacktear23) @[blacktear23](https://github.com/blacktear23)
-    - (dup): release-6.5.3.md > 错误修复> TiDB -修复 PD 隔离可能会导致运行的 DDL 阻塞的问题 [#44267](https://github.com/pingcap/tidb/issues/44267) @[wjhuang2016](https://github.com/wjhuang2016)
-    (dup: release-6.1.7.md > Bug fixes> TiDB)- Fix the issue that the query result of the `SELECT CAST(n AS CHAR)` statement is incorrect when `n` in the statement is a negative number [#44786](https://github.com/pingcap/tidb/issues/44786) @[xhebox](https://github.com/xhebox) @[xhebox](https://github.com/xhebox)
-    (dup: release-6.1.7.md > Bug fixes> TiDB)- Fix the issue of excessive memory usage after creating a large number of empty partitioned tables [#44308](https://github.com/pingcap/tidb/issues/44308) @[hawkingrei](https://github.com/hawkingrei) @[hawkingrei](https://github.com/hawkingrei)
-    (dup: release-7.2.0.md > Bug fixes> TiDB)- Fix the issue that Join Reorder might cause incorrect outer join results [#44314](https://github.com/pingcap/tidb/issues/44314) @[AilinKid](https://github.com/AilinKid) @[AilinKid](https://github.com/AilinKid)
-    (dup: release-6.1.7.md > Bug fixes> TiDB)- Fix the issue that queries containing Common Table Expressions (CTEs) might cause insufficient disk space [#44477](https://github.com/pingcap/tidb/issues/44477) @[guo-shaoge](https://github.com/guo-shaoge) @[guo-shaoge](https://github.com/guo-shaoge)
-    (dup: release-7.2.0.md > Bug fixes> TiDB)- Fix the issue that dropping a database causes slow GC progress [#33069](https://github.com/pingcap/tidb/issues/33069) @[tiancaiamao](https://github.com/tiancaiamao) @[tiancaiamao](https://github.com/tiancaiamao)
-    (dup: release-7.2.0.md > Bug fixes> TiDB)- Fix the issue that adding an index fails in the ingest mode [#44137](https://github.com/pingcap/tidb/issues/44137) @[tangenta](https://github.com/tangenta) @[tangenta](https://github.com/tangenta)
-    (dup: release-6.1.7.md > Bug fixes> TiDB)- Fix the issue that the `SELECT` statement returns an error for a partitioned table if the table partition definition uses the `FLOOR()` function to round a partitioned column [#42323](https://github.com/pingcap/tidb/issues/42323) @[jiyfhust](https://github.com/jiyfhust) @[jiyfhust](https://github.com/jiyfhust)
-    (dup: release-7.2.0.md > Bug fixes> TiDB)- Fix the issue that follower read does not handle flashback errors before retrying, which causes query errors [#43673](https://github.com/pingcap/tidb/issues/43673) @[you06](https://github.com/you06) @[you06](https://github.com/you06)
-    (dup: release-7.2.0.md > Bug fixes> TiDB)- Fix the issue that using `memTracker` with cursor fetch causes memory leaks [#44254](https://github.com/pingcap/tidb/issues/44254) @[YangKeao](https://github.com/YangKeao) @[YangKeao](https://github.com/YangKeao)
-    (dup: release-7.2.0.md > Bug fixes> TiDB)- Fix the issue that the `SHOW PROCESSLIST` statement cannot display the TxnStart of the transaction of the statement with a long subquery time [#40851](https://github.com/pingcap/tidb/issues/40851) @[crazycs520](https://github.com/crazycs520) @[crazycs520](https://github.com/crazycs520)
-    (dup: release-7.2.0.md > Bug fixes> TiDB)- Fix the issue that the `LEADING` hint does not support querying block aliases [#44645](https://github.com/pingcap/tidb/issues/44645) @[qw4990](https://github.com/qw4990) @[qw4990](https://github.com/qw4990)
-    (dup: release-7.2.0.md > Bug fixes> TiDB)- Fix the issue that `PREPARE stmt FROM "ANALYZE TABLE xxx"` might be killed by `tidb_mem_quota_query` [#44320](https://github.com/pingcap/tidb/issues/44320) @[chrysan](https://github.com/chrysan) @[chrysan](https://github.com/chrysan)
-    (dup: release-6.1.7.md > Bug fixes> TiDB)- Fix the panic issue caused by empty `processInfo` [#43829](https://github.com/pingcap/tidb/issues/43829) @[zimulala](https://github.com/zimulala) @[zimulala](https://github.com/zimulala)
-    (dup: release-7.2.0.md > Bug fixes> TiDB)- Fix the issue that data and indexes are inconsistent when the `ON UPDATE` statement does not correctly update the primary key [#44565](https://github.com/pingcap/tidb/issues/44565) @[zyguan](https://github.com/zyguan) @[zyguan](https://github.com/zyguan)
-    (dup: release-6.1.7.md > Bug fixes> TiDB)- Fix the issue that queries might return incorrect results when `tidb_opt_agg_push_down` is enabled [#44795](https://github.com/pingcap/tidb/issues/44795) @[AilinKid](https://github.com/AilinKid) @[AilinKid](https://github.com/AilinKid)
-    (dup: release-6.1.7.md > Bug fixes> TiDB)- Fix the issue that using CTEs and correlated subqueries simultaneously might result in incorrect query results or panic [#44649](https://github.com/pingcap/tidb/issues/44649) [#38170](https://github.com/pingcap/tidb/issues/38170) [#44774](https://github.com/pingcap/tidb/issues/44774) @[winoros](https://github.com/winoros) @[guo-shaoge](https://github.com/guo-shaoge) @[winoros](https://github.com/winoros) @[guo-shaoge](https://github.com/guo-shaoge)
-    (dup: release-7.2.0.md > Bug fixes> TiDB)- Fix the issue that canceling a DDL task in the rollback state causes errors in related metadata [#44143](https://github.com/pingcap/tidb/issues/44143) @[wjhuang2016](https://github.com/wjhuang2016) @[wjhuang2016](https://github.com/wjhuang2016)
+    (dup: release-7.1.0.md > Bug fixes> TiDB)- Fix the issue that the proxy protocol reports the `Header read timeout` error when processing certain erroneous data [#43205](https://github.com/pingcap/tidb/issues/43205) @[blacktear23](https://github.com/blacktear23)
+    (dup): release-6.5.3.md > 错误修复> TiDB -Fix the issue that PD isolation might block the running DDL [#44267](https://github.com/pingcap/tidb/issues/44267) @[wjhuang2016](https://github.com/wjhuang2016)
+    (dup: release-6.1.7.md > Bug fixes> TiDB)- Fix the issue that the query result of the `SELECT CAST(n AS CHAR)` statement is incorrect when `n` in the statement is a negative number [#44786](https://github.com/pingcap/tidb/issues/44786) @[xhebox](https://github.com/xhebox)
+    (dup: release-6.1.7.md > Bug fixes> TiDB)- Fix the issue of excessive memory usage after creating a large number of empty partitioned tables [#44308](https://github.com/pingcap/tidb/issues/44308) @[hawkingrei](https://github.com/hawkingrei)
+    (dup: release-7.2.0.md > Bug fixes> TiDB)- Fix the issue that Join Reorder might cause incorrect outer join results [#44314](https://github.com/pingcap/tidb/issues/44314) @[AilinKid](https://github.com/AilinKid)
+    (dup: release-6.1.7.md > Bug fixes> TiDB)- Fix the issue that queries containing Common Table Expressions (CTEs) might cause insufficient disk space [#44477](https://github.com/pingcap/tidb/issues/44477) @[guo-shaoge](https://github.com/guo-shaoge)
+    (dup: release-7.2.0.md > Bug fixes> TiDB)- Fix the issue that dropping a database causes slow GC progress [#33069](https://github.com/pingcap/tidb/issues/33069) @[tiancaiamao](https://github.com/tiancaiamao)
+    (dup: release-7.2.0.md > Bug fixes> TiDB)- Fix the issue that adding an index fails in the ingest mode [#44137](https://github.com/pingcap/tidb/issues/44137) @[tangenta](https://github.com/tangenta)
+    (dup: release-6.1.7.md > Bug fixes> TiDB)- Fix the issue that the `SELECT` statement returns an error for a partitioned table if the table partition definition uses the `FLOOR()` function to round a partitioned column [#42323](https://github.com/pingcap/tidb/issues/42323) @[jiyfhust](https://github.com/jiyfhust)
+    (dup: release-7.2.0.md > Bug fixes> TiDB)- Fix the issue that follower read does not handle flashback errors before retrying, which causes query errors [#43673](https://github.com/pingcap/tidb/issues/43673) @[you06](https://github.com/you06)
+    (dup: release-7.2.0.md > Bug fixes> TiDB)- Fix the issue that using `memTracker` with cursor fetch causes memory leaks [#44254](https://github.com/pingcap/tidb/issues/44254) @[YangKeao](https://github.com/YangKeao)
+    (dup: release-7.2.0.md > Bug fixes> TiDB)- Fix the issue that the `SHOW PROCESSLIST` statement cannot display the TxnStart of the transaction of the statement with a long subquery time [#40851](https://github.com/pingcap/tidb/issues/40851) @[crazycs520](https://github.com/crazycs520)
+    (dup: release-7.2.0.md > Bug fixes> TiDB)- Fix the issue that the `LEADING` hint does not support querying block aliases [#44645](https://github.com/pingcap/tidb/issues/44645) @[qw4990](https://github.com/qw4990)
+    (dup: release-7.2.0.md > Bug fixes> TiDB)- Fix the issue that `PREPARE stmt FROM "ANALYZE TABLE xxx"` might be killed by `tidb_mem_quota_query` [#44320](https://github.com/pingcap/tidb/issues/44320) @[chrysan](https://github.com/chrysan)
+    (dup: release-6.1.7.md > Bug fixes> TiDB)- Fix the panic issue caused by empty `processInfo` [#43829](https://github.com/pingcap/tidb/issues/43829) @[zimulala](https://github.com/zimulala)
+    (dup: release-7.2.0.md > Bug fixes> TiDB)- Fix the issue that data and indexes are inconsistent when the `ON UPDATE` statement does not correctly update the primary key [#44565](https://github.com/pingcap/tidb/issues/44565) @[zyguan](https://github.com/zyguan)
+    (dup: release-6.1.7.md > Bug fixes> TiDB)- Fix the issue that queries might return incorrect results when `tidb_opt_agg_push_down` is enabled [#44795](https://github.com/pingcap/tidb/issues/44795) @[AilinKid](https://github.com/AilinKid)
+    (dup: release-6.1.7.md > Bug fixes> TiDB)- Fix the issue that using CTEs and correlated subqueries simultaneously might result in incorrect query results or panic [#44649](https://github.com/pingcap/tidb/issues/44649) [#38170](https://github.com/pingcap/tidb/issues/38170) [#44774](https://github.com/pingcap/tidb/issues/44774) @[winoros](https://github.com/winoros) @[guo-shaoge](https://github.com/guo-shaoge)
+    (dup: release-7.2.0.md > Bug fixes> TiDB)- Fix the issue that canceling a DDL task in the rollback state causes errors in related metadata [#44143](https://github.com/pingcap/tidb/issues/44143) @[wjhuang2016](https://github.com/wjhuang2016)
 
 + TiKV
 
@@ -123,7 +122,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.1/quick-start-with-
     <!--2 tw:@Oreoxmt-->
     - Fix the issue that Resource Manager repeatedly initializes the default resource group [#6787](https://github.com/tikv/pd/issues/6787) @[glorv](https://github.com/glorv)
     - Fix the issue that in some cases, the `location-labels` set in the Placement Rules in SQL does not schedule as expected [#6662](https://github.com/tikv/pd/issues/6662) @[rleungx](https://github.com/rleungx)
-    (dup: release-7.2.0.md > Bug fixes> PD)- Fix the issue that redundant replicas cannot be automatically repaired in some corner cases [#6573](https://github.com/tikv/pd/issues/6573) @[nolouch](https://github.com/nolouch) @[nolouch](https://github.com/nolouch)
+    (dup: release-7.2.0.md > Bug fixes> PD)- Fix the issue that redundant replicas cannot be automatically repaired in some corner cases [#6573](https://github.com/tikv/pd/issues/6573) @[nolouch](https://github.com/nolouch)
 
 + TiFlash
     <!--2 tw:@Oreoxmt-->
@@ -134,7 +133,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.1/quick-start-with-
 
     + Backup & Restore (BR)
 
-        (dup: release-7.2.0.md > Bug fixes> Tools> Backup & Restore (BR))- Fix the issue that `checksum mismatch` is falsely reported in some cases [#44472](https://github.com/pingcap/tidb/issues/44472) @[Leavrth](https://github.com/Leavrth) @[Leavrth](https://github.com/Leavrth)
+        (dup: release-7.2.0.md > Bug fixes> Tools> Backup & Restore (BR))- Fix the issue that `checksum mismatch` is falsely reported in some cases [#44472](https://github.com/pingcap/tidb/issues/44472) @[Leavrth](https://github.com/Leavrth)
 
     + TiCDC
         <!--4 tw:@hfxsd-->
@@ -142,14 +141,14 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.1/quick-start-with-
         - Fix the issue of excessive memory consumption when replicating to an object storage service [#8894](https://github.com/pingcap/tiflow/issues/8894) @[CharlesCheung96](https://github.com/CharlesCheung96)
         - Fix the issue that the replication task might get stuck when the redo log is enabled and there is an exception downstream [#9172](https://github.com/pingcap/tiflow/issues/9172) @[CharlesCheung96](https://github.com/CharlesCheung96)
         - Fix the issue that TiCDC keeps retrying when there is a downstream failure which causes the retry time to be too long [#9272](https://github.com/pingcap/tiflow/issues/9272) @[asddongmen](https://github.com/asddongmen)
-        (dup: release-7.2.0.md > Bug fixes> Tools> TiCDC)- Fix the issue of excessive downstream pressure caused by reading downstream metadata too frequently when replicating data to Kafka [#8959](https://github.com/pingcap/tiflow/issues/8959) @[hi-rustin](https://github.com/hi-rustin) @[hi-rustin](https://github.com/hi-rustin)
-        (dup: release-6.5.3.md > Bug fixes> Tools> TiCDC)- Fix the issue that when the downstream is Kafka, TiCDC queries the downstream metadata too frequently and causes excessive workload in the downstream [#8957](https://github.com/pingcap/tiflow/issues/8957) [#8959](https://github.com/pingcap/tiflow/issues/8959) @[hi-rustin](https://github.com/hi-rustin) @[hi-rustin](https://github.com/hi-rustin)
-        (dup: release-6.5.3.md > Bug fixes> Tools> TiCDC)- Fix the OOM issue caused by excessive memory usage of the sorter component in some special scenarios [#8974](https://github.com/pingcap/tiflow/issues/8974) @[hicqu](https://github.com/hicqu) @[hicqu](https://github.com/hicqu)
-        (dup: release-7.2.0.md > Bug fixes> Tools> TiCDC)- Fix the issue that the `UPDATE` operation cannot output old values when the Avro or CSV protocol is used [#9086](https://github.com/pingcap/tiflow/issues/9086) @[3AceShowHand](https://github.com/3AceShowHand) @[3AceShowHand](https://github.com/3AceShowHand)
-        (dup: release-6.5.3.md > Bug fixes> Tools> TiCDC)- Fix the issue that when replicating data to storage services, the JSON file corresponding to downstream DDL statements does not record the default values of table fields [#9066](https://github.com/pingcap/tiflow/issues/9066) @[CharlesCheung96](https://github.com/CharlesCheung96) @[CharlesCheung96](https://github.com/CharlesCheung96)
-        (dup: release-7.2.0.md > Bug fixes> Tools> TiCDC)- Fix the issue of too many downstream logs caused by frequently setting the downstream bidirectional replication-related variables when replicating data to TiDB or MySQL [#9180](https://github.com/pingcap/tiflow/issues/9180) @[asddongmen](https://github.com/asddongmen) @[asddongmen](https://github.com/asddongmen)
-        (dup: release-6.5.3.md > Bug fixes> Tools> TiCDC)- Fix the issue that when a replication error occurs due to an oversized Kafka message, the message body is recorded in the log [#9031](https://github.com/pingcap/tiflow/issues/9031) @[darraes](https://github.com/darraes) @[darraes](https://github.com/darraes)
-        (dup: release-6.5.3.md > Bug fixes> Tools> TiCDC)- Fix the issue that TiCDC gets stuck when PD fails such as network isolation or PD Owner node reboot [#8808](https://github.com/pingcap/tiflow/issues/8808) [#8812](https://github.com/pingcap/tiflow/issues/8812) [#8877](https://github.com/pingcap/tiflow/issues/8877) @[asddongmen](https://github.com/asddongmen) @[asddongmen](https://github.com/asddongmen)
+        (dup: release-7.2.0.md > Bug fixes> Tools> TiCDC)- Fix the issue of excessive downstream pressure caused by reading downstream metadata too frequently when replicating data to Kafka [#8959](https://github.com/pingcap/tiflow/issues/8959) @[hi-rustin](https://github.com/hi-rustin)
+        (dup: release-6.5.3.md > Bug fixes> Tools> TiCDC)- Fix the issue that when the downstream is Kafka, TiCDC queries the downstream metadata too frequently and causes excessive workload in the downstream [#8957](https://github.com/pingcap/tiflow/issues/8957) [#8959](https://github.com/pingcap/tiflow/issues/8959) @[hi-rustin](https://github.com/hi-rustin)
+        (dup: release-6.5.3.md > Bug fixes> Tools> TiCDC)- Fix the OOM issue caused by excessive memory usage of the sorter component in some special scenarios [#8974](https://github.com/pingcap/tiflow/issues/8974) @[hicqu](https://github.com/hicqu)
+        (dup: release-7.2.0.md > Bug fixes> Tools> TiCDC)- Fix the issue that the `UPDATE` operation cannot output old values when the Avro or CSV protocol is used [#9086](https://github.com/pingcap/tiflow/issues/9086) @[3AceShowHand](https://github.com/3AceShowHand)
+        (dup: release-6.5.3.md > Bug fixes> Tools> TiCDC)- Fix the issue that when replicating data to storage services, the JSON file corresponding to downstream DDL statements does not record the default values of table fields [#9066](https://github.com/pingcap/tiflow/issues/9066) @[CharlesCheung96](https://github.com/CharlesCheung96)
+        (dup: release-7.2.0.md > Bug fixes> Tools> TiCDC)- Fix the issue of too many downstream logs caused by frequently setting the downstream bidirectional replication-related variables when replicating data to TiDB or MySQL [#9180](https://github.com/pingcap/tiflow/issues/9180) @[asddongmen](https://github.com/asddongmen)
+        (dup: release-6.5.3.md > Bug fixes> Tools> TiCDC)- Fix the issue that when a replication error occurs due to an oversized Kafka message, the message body is recorded in the log [#9031](https://github.com/pingcap/tiflow/issues/9031) @[darraes](https://github.com/darraes)
+        (dup: release-6.5.3.md > Bug fixes> Tools> TiCDC)- Fix the issue that TiCDC gets stuck when PD fails such as network isolation or PD Owner node reboot [#8808](https://github.com/pingcap/tiflow/issues/8808) [#8812](https://github.com/pingcap/tiflow/issues/8812) [#8877](https://github.com/pingcap/tiflow/issues/8877) @[asddongmen](https://github.com/asddongmen)
 
     + TiDB Data Migration (DM)
         <!--1 tw:@hfxsd-->
@@ -161,9 +160,9 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.1/quick-start-with-
         - Fix the issue that TiDB Lightning does not display the error message correctly when writing data to TiKV and returning an out of space error [#44733](https://github.com/pingcap/tidb/issues/44733) @[lance6716](https://github.com/lance6716)
         - Fix the "region is unavailable" error during checksum operation
 [#45462](https://github.com/pingcap/tidb/issues/45462) @[D3Hunter](https://github.com/D3Hunter)
-        (dup: release-7.2.0.md > Bug fixes> Tools> TiDB Lightning)- Fix the TiDB Lightning panic issue when `experimental.allow-expression-index` is enabled and the default value is UUID [#44497](https://github.com/pingcap/tidb/issues/44497) @[lichunzhu](https://github.com/lichunzhu) @[lichunzhu](https://github.com/lichunzhu)
-        (dup: release-6.1.7.md > Bug fixes> Tools> TiDB Lightning)- Fix the issue that disk quota might be inaccurate due to competing conditions [#44867](https://github.com/pingcap/tidb/issues/44867) @[D3Hunter](https://github.com/D3Hunter) @[D3Hunter](https://github.com/D3Hunter)
-        (dup: release-6.1.7.md > Bug fixes> Tools> TiDB Lightning)- Fix the issue that in Logical Import Mode, deleting tables downstream during import might cause TiDB Lightning metadata not to be updated in time [#44614](https://github.com/pingcap/tidb/issues/44614) @[dsdashun](https://github.com/dsdashun) @[dsdashun](https://github.com/dsdashun)
+        (dup: release-7.2.0.md > Bug fixes> Tools> TiDB Lightning)- Fix the TiDB Lightning panic issue when `experimental.allow-expression-index` is enabled and the default value is UUID [#44497](https://github.com/pingcap/tidb/issues/44497) @[lichunzhu](https://github.com/lichunzhu)
+        (dup: release-6.1.7.md > Bug fixes> Tools> TiDB Lightning)- Fix the issue that disk quota might be inaccurate due to competing conditions [#44867](https://github.com/pingcap/tidb/issues/44867) @[D3Hunter](https://github.com/D3Hunter)
+        (dup: release-6.1.7.md > Bug fixes> Tools> TiDB Lightning)- Fix the issue that in Logical Import Mode, deleting tables downstream during import might cause TiDB Lightning metadata not to be updated in time [#44614](https://github.com/pingcap/tidb/issues/44614) @[dsdashun](https://github.com/dsdashun)
 
     + TiUP
 
