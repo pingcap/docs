@@ -64,7 +64,7 @@ The best way to learn about TiDB Cloud is to follow our step-by-step tutorial. C
 
 ### What does `XXX's Org/default project/Cluster0` refer to when deleting a cluster?
 
-A cluster is identified with uniqueness based on the combination of the organization name, project name, and cluster name. To guarantee that you are deleting the intended cluster, we kindly request you to input the fully qualified name of the cluster you wish to delete.
+In TiDB Cloud, a cluster is uniquely identified by the combination of the organization name, project name, and cluster name. To ensure that you are deleting the intended cluster, you need to provide the fully qualified name of that cluster, such as `XXX's Org/default project/Cluster0`.
 
 ## Architecture FAQs
 
