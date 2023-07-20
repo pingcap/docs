@@ -128,6 +128,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.1/quick-start-with-
 + TiFlash
     <!--2 tw:@Oreoxmt-->
     - Fix the issue that in the disaggregated storage and compute architecture mode, the TiFlash compute node fetches inaccurate CPU core information [#7436](https://github.com/pingcap/tiflash/issues/7436) @[guo-shaoge](https://github.com/guo-shaoge)
+    - Fix the issue that TiFlash takes too long to restart after using Online Unsafe Recovery [#7671](https://github.com/pingcap/tiflash/issues/7671) @[hongyunyan](https://github.com/hongyunyan)
 
 + Tools
 
