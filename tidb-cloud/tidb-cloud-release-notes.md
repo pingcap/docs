@@ -12,7 +12,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **General changes**
 
-- Data Service (beta) supports pagination for `GET` requests.
+- [Data Service (beta)](https://tidbcloud.com/console/data-service) supports pagination for `GET` requests.
 
     This feature improves the efficiency of handling large datasets and enhances the development experience.
 
