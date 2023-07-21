@@ -9,7 +9,7 @@ The **?** icon in the lower-right corner of the [TiDB Cloud console](https://tid
 
 ## Request PoC, demo, or free trial credits
 
-To request a Proof of Concept (PoC), a demo, or free trial credits, click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com/), and click **Request Support**.
+To request a Proof of Concept (PoC), a demo, or free trial credits, click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com/), and click **Contact Sales**.
 
 > **Tip:**
 >
@@ -41,7 +41,7 @@ If **Request Support** is clicked, you also need to provide your organization ID
 
 After you have submitted a request, to check the status of your request, perform the following steps:
 
-1. In the [TiDB Cloud console](https://tidbcloud.com/), click **?** in the lower-right corner, and then click **View Supportlan**. The support page is displayed.
+1. In the [TiDB Cloud console](https://tidbcloud.com/), click **?** in the lower-right corner, and then click **View Support**. The support page is displayed.
 2. In the **Request Support** area, click **View Support Portal**. The **My request** page is displayed.
 
     On the **My request** page, you can view the status of your request.
