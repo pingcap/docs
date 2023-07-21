@@ -48,13 +48,13 @@ In the sample trust entity:
 - `380838443567` is the TiDB Cloud Account ID. Make sure that this field in your trust entity matches your TiDB Cloud Account ID.
 - `696e6672612d617069a79c22fa5740944bf8bb32e4a0c4e3fe` is the TiDB Cloud External ID. Make sure that this field in your trusted entity matches your TiDB Cloud External ID.
 
-### Check whether the role exists
+### Check whether the IAM role exists
 
-If the role does not exist, create a role following instructions in [Configure Amazon S3 access](/tidb-cloud/config-s3-and-gcs-access.md#configure-amazon-s3-access).
+If the IAM role does not exist, create a role following instructions in [Configure Amazon S3 access](/tidb-cloud/config-s3-and-gcs-access.md#configure-amazon-s3-access).
 
 ### Check whether the external ID is set correctly
 
-Cannot assume the provided role '{role_arn}'. Check the trust relationships settings on the role. For example, check whether the trust entity has been set to the 'TiDB Cloud account ID' and whether the 'TiDB Cloud External ID' is correctly set in the trust condition. See [Check the trust entity](#check-the-trust-entity).
+Cannot assume the provided role `{role_arn}`. Check the trust relationships settings on the role. For example, check whether the trust entity has been set to the `TiDB Cloud account ID` and whether the `TiDB Cloud External ID` is correctly set in the trust condition. See [Check the trust entity](#check-the-trust-entity).
 
 ## Access denied
 

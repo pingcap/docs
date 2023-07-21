@@ -124,7 +124,7 @@ You can import data in various formats to TiDB Cloud:
 
 > **Note:**
 >
-> Data import on the **Data Import** page does not generate additional billing fees.
+> Data import on the **Import** page does not generate additional billing fees.
 
 ## Step 6. Run your workload and evaluate results
 
