@@ -125,12 +125,12 @@ In this example, the column IDs of the upstream tables `sale_01` and `sale_02` a
 
 ```sql
 mysql> CREATE TABLE `sales` (
-   ->   `id` bigint(20) NOT NULL ,
-   ->   `uid` varchar(40) NOT NULL,
-   ->   `sale_num` bigint DEFAULT NULL,
-   ->   INDEX (`id`),
-   ->   UNIQUE KEY `ind_uid` (`uid`)
-   -> );
+         `id` bigint(20) NOT NULL ,
+         `uid` varchar(40) NOT NULL,
+         `sale_num` bigint DEFAULT NULL,
+         INDEX (`id`),
+         UNIQUE KEY `ind_uid` (`uid`)
+        );
 Query OK, 0 rows affected (0.17 sec)
 ```
 
