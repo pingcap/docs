@@ -19,7 +19,12 @@ The TiDB Cloud Data API uses [HTTP Digest Authentication](https://en.wikipedia.o
 
 ## Rate limiting
 
-Each Chat2Query Data App has a rate limit of 100 requests per day. Other Data Apps have a rate limit of 100 requests per minute per API key. If you exceed the rate limit, the API returns a `429` error. For more quota, you can [submit a request](https://support.pingcap.com/hc/en-us/requests/new?ticket_form_id=7800003722519) to our support team.
+Data Apps have the following rate limits:
+
+- 100 requests per minute per API key
+- 100 requests per day for each Chat2Query Data App
+
+If you exceed the rate limit, the API returns a `429` error. For more quota, you can [submit a request](https://support.pingcap.com/hc/en-us/requests/new?ticket_form_id=7800003722519) to our support team.
 
 ## Manage API keys
 
