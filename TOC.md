@@ -982,6 +982,7 @@
   - [TiDB Versioning](/releases/versioning.md)
   - [TiDB Installation Packages](/binary-package.md)
   - v7.1
+    - [7.1.1](/releases/release-7.1.1.md)
     - [7.1.0](/releases/release-7.1.0.md)
   - v7.0
     - [7.0.0-DMR](/releases/release-7.0.0.md)
