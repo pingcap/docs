@@ -79,7 +79,7 @@ Starting component `dmctl`: /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl /roo
 
 Create a `dm-task1.yaml` file for the migration. Configure the incremental migration mode and the starting point of the data source in the file.
 
-You can find the starting point in the metadata file exported by [Dumpling](/dumpling-overview.md). For example:
+You can find the starting point in the metadata file exported by [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview). For example:
 
 ```toml
 # Get the contents of the metadata in the file exported by Dumpling
