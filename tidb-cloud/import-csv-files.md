@@ -164,7 +164,7 @@ Note that only `?` and `*` are supported.
 
 ### Resolve warnings during data import
 
-After clicking **Start Import**, if you see a warning message, resolve this by providing the correct source file, renaming the existing one according to [Naming Conventions for Data Import](/tidb-cloud/naming-conventions-for-data-import.md), or using **Advanced Settings** to make changes.
+After clicking **Start Import**, if you see a warning message such as "can't find the corresponding source files", resolve this by providing the correct source file, renaming the existing one according to [Naming Conventions for Data Import](/tidb-cloud/naming-conventions-for-data-import.md), or using **Advanced Settings** to make changes.
 
 After resolving these issues, you need to import the data again.
 
