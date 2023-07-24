@@ -329,7 +329,7 @@ Query OK, 1 row affected (0.00 sec)
 
 ### Use a multi-valued index
 
-See [Index Selection - Use multi-valued indexes](/choose-index.md#use-a-multi-valued-index) for more details.
+See [Index Selection - Use multi-valued indexes](/choose-index.md#use-multi-valued-indexes) for more details.
 
 ### Limitations
 

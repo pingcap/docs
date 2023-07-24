@@ -188,7 +188,7 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
 
     Introducing multi-valued indexes further enhances TiDB's support for the JSON data type and also improves TiDB's compatibility with MySQL 8.0.
 
-    For more information, see [documentation](/sql-statements/sql-statement-create-index.md#multi-valued-index).
+    For more information, see [documentation](/sql-statements/sql-statement-create-index.md#multi-valued-indexes).
 
 ### DB operations
 
@@ -343,7 +343,7 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
 
 * Support the MySQL-compatible multi-valued index (experimental) [#39592](https://github.com/pingcap/tidb/issues/39592) @[xiongjiwei](https://github.com/xiongjiwei) @[qw4990](https://github.com/qw4990)
 
-    For more information, see the [SQL](#sql) section in this document and [documentation](/sql-statements/sql-statement-create-index.md#multi-valued-index).
+    For more information, see the [SQL](#sql) section in this document and [documentation](/sql-statements/sql-statement-create-index.md#multi-valued-indexes).
 
 ### System variables
 
