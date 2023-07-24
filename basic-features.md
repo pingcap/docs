@@ -22,7 +22,7 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 
 ## Data types, functions, and operators
 
-| Data types, functions, and operators | 7.2 | 7.1 | 6.5 | 6.1 | 5.4 | 5.3 | 5.2 | 5.1 | 5.0 | 4.0 |
+| Data types, functions, and operators | 7.3 | 7.1 | 6.5 | 6.1 | 5.4 | 5.3 | 5.2 | 5.1 | 5.0 | 4.0 |
 |---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | [Numeric types](/data-type-numeric.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | [Date and time types](/data-type-date-and-time.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
@@ -46,7 +46,7 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 
 ## Indexing and constraints
 
-| Indexing and constraints | 7.2 | 7.1 | 6.5 | 6.1 | 5.4 | 5.3 | 5.2 | 5.1 | 5.0 | 4.0 |
+| Indexing and constraints | 7.3 | 7.1 | 6.5 | 6.1 | 5.4 | 5.3 | 5.2 | 5.1 | 5.0 | 4.0 |
 |---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | [Expression indexes](/sql-statements/sql-statement-create-index.md#expression-index) [^2] | Y | Y | Y | E | E | E | E | E | E | E |
 | [Columnar storage (TiFlash)](/tiflash/tiflash-overview.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
@@ -67,7 +67,7 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 
 ## SQL statements
 
-| SQL statements [^3] | 7.2 | 7.1 | 6.5 | 6.1 | 5.4 | 5.3 | 5.2 | 5.1 | 5.0 | 4.0 |
+| SQL statements [^3] | 7.3 | 7.1 | 6.5 | 6.1 | 5.4 | 5.3 | 5.2 | 5.1 | 5.0 | 4.0 |
 |---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | Basic `SELECT`, `INSERT`, `UPDATE`, `DELETE`, `REPLACE` | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | `INSERT ON DUPLICATE KEY UPDATE` | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
@@ -111,7 +111,7 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 
 ## Data definition language (DDL)
 
-| Data definition language (DDL) | 7.2 | 7.1 | 6.5 | 6.1 | 5.4 | 5.3 | 5.2 | 5.1 | 5.0 | 4.0 |
+| Data definition language (DDL) | 7.3 | 7.1 | 6.5 | 6.1 | 5.4 | 5.3 | 5.2 | 5.1 | 5.0 | 4.0 |
 |---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | Basic `CREATE`, `DROP`, `ALTER`, `RENAME`, `TRUNCATE` | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | [Generated columns](/generated-columns.md) | Y | Y | E | E | E | E | E | E | E | E |
@@ -132,7 +132,7 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 
 ## Transactions
 
-| Transactions | 7.2 | 7.1 | 6.5 | 6.1 | 5.4 | 5.3 | 5.2 | 5.1 | 5.0 | 4.0 |
+| Transactions | 7.3 | 7.1 | 6.5 | 6.1 | 5.4 | 5.3 | 5.2 | 5.1 | 5.0 | 4.0 |
 |---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | [Async commit](/system-variables.md#tidb_enable_async_commit-new-in-v50) | Y | Y | Y | Y | Y | Y | Y | Y | Y | N |
 | [1PC](/system-variables.md#tidb_enable_1pc-new-in-v50) | Y | Y | Y | Y | Y | Y | Y | Y | Y | N |
@@ -144,7 +144,7 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 
 ## Partitioning
 
-| Partitioning | 7.2 | 7.1 | 6.5 | 6.1 | 5.4 | 5.3 | 5.2 | 5.1 | 5.0 | 4.0 |
+| Partitioning | 7.3 | 7.1 | 6.5 | 6.1 | 5.4 | 5.3 | 5.2 | 5.1 | 5.0 | 4.0 |
 |---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | [Range partitioning](/partitioned-table.md#range-partitioning) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | [Hash partitioning](/partitioned-table.md#hash-partitioning) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
@@ -160,7 +160,7 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 
 ## Statistics
 
-| Statistics | 7.2 | 7.1 | 6.5 | 6.1 | 6.0 | 5.4 | 5.3 | 5.2 | 5.1 | 5.0 |
+| Statistics | 7.3 | 7.1 | 6.5 | 6.1 | 6.0 | 5.4 | 5.3 | 5.2 | 5.1 | 5.0 |
 |---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | [CMSketch](/statistics.md) | Disabled by default | Disabled by default | Disabled by default | Disabled by default | Disabled by default | Disabled by default | Disabled by default | Y | Y | Y |
 | [Histograms](/statistics.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
@@ -177,7 +177,7 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 
 ## Security
 
-| Security | 7.2 | 7.1 | 6.5 | 6.1 | 5.4 | 5.3 | 5.2 | 5.1 | 5.0 | 4.0 |
+| Security | 7.3 | 7.1 | 6.5 | 6.1 | 5.4 | 5.3 | 5.2 | 5.1 | 5.0 | 4.0 |
 |---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | [Transparent layer security (TLS)](/enable-tls-between-clients-and-servers.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | [Encryption at rest (TDE)](/encryption-at-rest.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
@@ -212,7 +212,7 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 
 ## Management, observability, and tools
 
-| Management, observability, and tools | 7.2 | 7.1 | 6.5 | 6.1 | 5.4 | 5.3 | 5.2 | 5.1 | 5.0 | 4.0 |
+| Management, observability, and tools | 7.3 | 7.1 | 6.5 | 6.1 | 5.4 | 5.3 | 5.2 | 5.1 | 5.0 | 4.0 |
 |---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | [TiDB Dashboard UI](/dashboard/dashboard-intro.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | [TiDB Dashboard Continuous Profiling](/dashboard/continuous-profiling.md) | Y | Y | Y | Y | E | E | N | N | N | N |
