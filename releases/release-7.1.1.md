@@ -1,6 +1,6 @@
 ---
 title: TiDB 7.1.1 Release Notes
-summary: Learn about the new features, compatibility changes, improvements, and bug fixes in TiDB 7.1.1.
+summary: Learn about the compatibility changes, improvements, and bug fixes in TiDB 7.1.1.
 ---
 
 # TiDB 7.1.1 Release Notes
