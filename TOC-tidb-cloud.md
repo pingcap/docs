@@ -159,6 +159,7 @@
           - [Partition Pruning](/partition-pruning.md)
           - [TopN and Limit Push Down](/topn-limit-push-down.md)
           - [Join Reorder](/join-reorder.md)
+          - [Derive TopN or Limit from Window Functions](/derive-topn-from-window.md)
         - Physical Optimization
           - [Overview](/sql-physical-optimization.md)
           - [Index Selection](/choose-index.md)
@@ -167,7 +168,8 @@
           - [Wrong Index Solution](/wrong-index-solution.md)
           - [Distinct Optimization](/agg-distinct-optimization.md)
           - [Cost Model](/cost-model.md)
-        - [Prepare Execution Plan Cache](/sql-prepared-plan-cache.md)
+        - [Prepared Execution Plan Cache](/sql-prepared-plan-cache.md)
+        - [Non-Prepared Execution Plan Cache](/sql-non-prepared-plan-cache.md)
       - Control Execution Plans
         - [Overview](/control-execution-plan.md)
         - [Optimizer Hints](/optimizer-hints.md)
