@@ -37,11 +37,16 @@ To get support for a project or organization, click **?** in the lower-right cor
 
 If **Request Support** is clicked, you also need to provide your organization ID in the request. To find the ID, click <MDSvgIcon name="icon-top-organization" /> in the lower-left corner and click **Organization Settings**.
 
+Alternatively, you can click <MDSvgIcon name="icon-top-organization" /> in the lower-left corner, and then click **Support** to go to the support page.
+
 ## Check your submitted request
 
 After you have submitted a request, to check the status of your request, perform the following steps:
 
 1. In the [TiDB Cloud console](https://tidbcloud.com/), click **?** in the lower-right corner, and then click **View Support**. The support page is displayed.
+
+    Alternatively, you can click <MDSvgIcon name="icon-top-organization" /> in the lower-left corner, and then click **Support** to go to the support page.
+
 2. In the **Request Support** area, click **View Support Portal**. The **My request** page is displayed.
 
     On the **My request** page, you can view the status of your request.
