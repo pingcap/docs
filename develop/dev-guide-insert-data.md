@@ -234,7 +234,7 @@ If you need to quickly import a large amount of data into a TiDB cluster, it is 
 
 The following are the recommended tools for bulk-insert:
 
-- Data export: [Dumpling](/dumpling-overview.md). You can export MySQL or TiDB data to local or Amazon S3.
+- Data export: [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview). You can export MySQL or TiDB data to local or Amazon S3.
 
 <CustomContent platform="tidb">
 
