@@ -516,7 +516,7 @@ Configuration items related to the sharing of block cache among multiple RocksDB
 ### `capacity`
 
 + The size of the shared block cache.
-+ Default value: 45% of the size of total system memory
++ Default value: 45% of the size of total system memory when `storage.engine="raft-kv"`, 30% of the size of total system memory when `storage.engine="partitioned-raft-kv"`
 + Unit: KB|MB|GB
 
 ## storage.flow-control
@@ -1158,7 +1158,7 @@ Configuration items related to RocksDB
 ### `stats-dump-period`
 
 + The interval at which statistics are output to the log.
-+ Default value: `10m`
++ Default value: `"10m"` when `storage.engine="raft-kv"`, `"120m"` when `storage.engine="partitioned-raft-kv"`
 
 ### `compaction-readahead-size`
 
@@ -1268,8 +1268,8 @@ Configuration items related to RocksDB
 >
 > This feature is experimental. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
 
-+ Specifies the total memory limit of `memtable` for all RocksDB instances in a single TiKV. The default value is 25% of the memory of the machine. It is recommended to configure a memory of at least 5 GiB. This configuration only takes effect for Partitioned Raft KV (`storage.engine`=`"partitioned-raft-kv"`).
-+ Default value: 25%
++ Specifies the total memory limit of `memtable` for all RocksDB instances in a single TiKV. Zero stands for no limit.
++ Default value: Zero when `storage.engine="raft-kv"`, 20% of the size of total system memory when `storage.engine="partitioned-raft-kv"`
 + Unit: KiB|MiB|GiB
 
 ## rocksdb.titan
