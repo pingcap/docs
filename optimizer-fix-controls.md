@@ -37,3 +37,18 @@ SET SESSION tidb_opt_fix_control = '44262:ON,44389:ON';
 - Default value: `OFF`
 - Possible values: `ON`, `OFF`
 - For filters such as `c = 10 and (a = 'xx' or (a = 'kk' and b = 1))`, this variable controls whether to try to build more comprehensive scan ranges for `IndexRangeScan`.
+
+### [`44823`](https://github.com/pingcap/tidb/issues/44823) <span class="version-mark">New in v7.1.1</span>
+
+- Default value: `200`
+- Possible values: `[0, 2147483647]`
+- To conserve memory, Plan Cache does not cache queries that exceed a specified number of parameters.
+- This variable controls the threshold for the maximum number of parameters. `0` means no limit.
+
+### [`44855`](https://github.com/pingcap/tidb/issues/44855) <span class="version-mark">New in v7.1.1</span>
+
+- Default value: `OFF`
+- Possible values: `ON`、`OFF`
+- In some scenarios, when the `Probe` side of an `IndexJoin` operator contains a `Selection` operator, TiDB severely overestimates the row count of `IndexScan`. This might cause suboptimal query plans to be selected instead of `IndexJoin`.
+- To mitigate this issue, TiDB has introduced an improvement. However, due to potential query plan fallback risks, this improvement is disabled by default.
+- This variable controls whether to enable the preceding improvement.
