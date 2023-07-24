@@ -21,6 +21,8 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
     - Add an entrance for **Support** in the <MDSvgIcon name="icon-top-organization" /> in the lower-left corner.
     - Revamp the menus of the **?** Icon in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com/) to make them more intuitive.
 
+  For more information, see [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
+
 ## July 18, 2023
 
 **General changes**
