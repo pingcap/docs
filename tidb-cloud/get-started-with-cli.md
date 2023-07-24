@@ -152,7 +152,7 @@ ticloud cluster create
 After the cluster is created, you can connect to the cluster:
 
 ```shell
-ticloud cluster connect
+ticloud connect
 ```
 
 When you are prompted about whether to use the default user, choose `Y` and enter the password that you set when creating the cluster.
