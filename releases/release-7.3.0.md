@@ -11,9 +11,26 @@ TiDB version: 7.3.0
 
 Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.3/quick-start-with-tidb) | [Installation packages](https://www.pingcap.com/download/?version=v7.3.0#version-list)
 
-7.3.0 introduces the following key features and improvements:
+7.3.0 introduces the following major as generally available. The rest of the release (detailed in the Details section) was a series of enhancements to query stability in TiDB server and TiFlash. These are more miscellaneous in nature and not user-facing so they are not included in this section dedicated to release highlights:
 
-<!-- key feature placeholder-->
+<table>
+<thead>
+  <tr>
+    <th>Category</th>
+    <th>Feature</th>
+    <th>Description</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td rowspan="2">Scalability and Performance</td>
+    <td>Partitioned Raft KV GA.<a href=https://docs.pingcap.com/tidb/stable/partitioned-raft-kv#partitioned-raft-kv"> Learn more</a>. </td>
+    <td>Every key region will store its key-value data in its own isolated LSM tree (RocksDB).
+This drastically improves write performance, reduces I/O amplication, speeds up scale-in/-out operations, and is a huge step toward TiDB handling beyond PB-scale workloads per cluster.
+    </td>
+  </tr>
+</tbody>
+</table>
 
 ## Feature details
 
