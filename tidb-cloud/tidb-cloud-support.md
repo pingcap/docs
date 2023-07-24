@@ -35,7 +35,6 @@ You can get support for a cluster in either of the following ways:
 
 To get support for a project or organization, click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com/), and then click **Request Support**.
 
-
 Alternatively, you can click <MDSvgIcon name="icon-top-organization" /> in the lower-left corner, and then click **Support** to go to the support page.
 
 ## Check your submitted request
