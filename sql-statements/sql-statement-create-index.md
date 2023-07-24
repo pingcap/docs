@@ -231,9 +231,9 @@ Therefore, when the query performance outweighs the insert and update performanc
 
 Expression indexes have the same syntax and limitations as in MySQL. They are implemented by creating indexes on generated virtual columns that are invisible, so the supported expressions inherit all [limitations of virtual generated columns](/generated-columns.md#limitations).
 
-## Multi-valued index
+## Multi-valued indexes
 
-Multi-valued index is a kind of secondary index defined on an array column. In a normal index, one index record corresponds to one data record (1:1). In a multi-valued index, multiple index records correspond to one data record (N:1). Multi-valued indexes are used to index JSON arrays. For example, a multi-valued index defined on the `zipcode` field will generate one index record for each element in the `zipcode` array.
+Multi-valued indexes are a kind of secondary index defined on an array column. In a normal index, one index record corresponds to one data record (1:1). In a multi-valued index, multiple index records correspond to one data record (N:1). Multi-valued indexes are used to index JSON arrays. For example, a multi-valued index defined on the `zipcode` field will generate one index record for each element in the `zipcode` array.
 
 ```json
 {
@@ -334,7 +334,7 @@ See [Index Selection - Use multi-valued indexes](/choose-index.md#use-a-multi-va
 
 - For an empty JSON array, no corresponding index record is generated.
 - The target type in `CAST(... AS ... ARRAY)` cannot be any of `BINARY`, `JSON`, `YEAR`, `FLOAT`, and `DECIMAL`. The source type must be JSON.
-- You cannot use a multi-valued index for sorting.
+- You cannot use multi-valued indexes for sorting.
 - You can only create a multi-valued index on a JSON array.
 - A multi-valued index cannot be a primary key or a foreign key.
 - The extra storage space used by a multi-valued index = the average number of array elements per row * the space used by a normal secondary index.
@@ -364,7 +364,7 @@ The system variables associated with the `CREATE INDEX` statement are `tidb_ddl_
 * Adding the primary key of the `CLUSTERED` type to a table is not supported. For more details about the primary key of the `CLUSTERED` type, refer to [clustered index](/clustered-indexes.md).
 * Expression indexes are incompatible with views. When a query is executed using a view, the expression index cannot be used at the same time.
 * Expression indexes have compatibility issues with bindings. When the expression of an expression index has a constant, the binding created for the corresponding query expands its scope. For example, suppose that the expression in the expression index is `a+1`, and the corresponding query condition is `a+1 > 2`. In this case, the created binding is `a+? > ?`, which means that the query with the condition such as `a+2 > 2` is also forced to use the expression index and results in a poor execution plan. In addition, this also affects the baseline capturing and baseline evolution in SQL Plan Management (SPM).
-* The data written with the multi-valued index must exactly match the defined data type. Otherwise, data writes fail. For details, see [Creat a multi-valued index](/sql-statements/sql-statement-create-index.md#create-a-multi-valued-index).
+* The data written with multi-valued indexes must exactly match the defined data type. Otherwise, data writes fail. For details, see [Creat a multi-valued index](/sql-statements/sql-statement-create-index.md#create-a-multi-valued-index).
 
 ## See also
 
