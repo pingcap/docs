@@ -1158,7 +1158,7 @@ Configuration items related to RocksDB
 ### `stats-dump-period`
 
 + The interval at which statistics are output to the log.
-+ Default value: `"10m"` when `storage.engine="raft-kv"`, `"120m"` when `storage.engine="partitioned-raft-kv"`
++ Default value: `"10m"` when `storage.engine="raft-kv"`, `"0"` when `storage.engine="partitioned-raft-kv"`
 
 ### `compaction-readahead-size`
 
