@@ -289,7 +289,7 @@ commit_txn: {prewrite:48.564544ms, wait_prewrite_binlog:47.821579, get_commit_ts
 RU:273.842670
 ```
 
-> **Notice :**
+> **Note :**
 >
 > This value shows the actual RU produced by this call. The RU consumption might vary if the same SQL statement repeats, as the amount of RU is affected by cache layer (for example, [coprocessor cache](/coprocessor-cache.md)).
 
