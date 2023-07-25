@@ -60,7 +60,7 @@ In TiDB Cloud Data Service, you can generate one or multiple endpoints automatic
 
     - SQL statements: TiDB Cloud Data Service automatically writes SQL statements for the generated endpoints according to the table column specifications and the selected endpoint operations. You can click the endpoint name to view its SQL statements in the middle section of the page.
     - Endpoint properties: TiDB Cloud Data Service automatically configures the endpoint path, request method, timeout, and tag according to your selection. You can find the properties in the right pane of the page.
-    - Endpoint parameters: TiDB Cloud Data Service automatically configures parameters for endpoints that use `POST`, `PUT`, or `DELETE` request methods.
+    - Endpoint parameters: TiDB Cloud Data Service automatically configures parameters for the generated endpoints. You can find the parameters in the right pane of the page.
 
 6. If you wish to modify the details of the generated endpoint, such as its name, SQL statements, properties, or parameters, refer to the instructions provided in [Develop an endpoint](#deploy-an-endpoint).
 
