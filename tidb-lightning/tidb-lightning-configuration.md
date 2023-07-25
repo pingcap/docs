@@ -122,6 +122,18 @@ driver = "file"
 # will leak metadata about the data source.
 # keep-after-success = false
 
+[conflict]
+# The strategy to handle conflicting data
+# - "": No actions, lightning may exit by error in following steps.
+# - "error": Conflicting data will fail the import task.
+# - "replace": Try to keep latest data when meet conflicting data.
+# - "ignore": Try to keep oldest data when meet conflicting data.
+strategy = ""
+# When `strategy` is "replace" or "ignore", controls the maximum tolerable conflict count. Only can be set when `strategy` is "replace" or "ignore". The default value is 9223372036854775807
+# threshold = 9223372036854775807
+# Controls the maximum record count in conflict_record table. The default value is 100
+# max-record-rows = 100
+
 [tikv-importer]
 # "local": Physical import mode, used by default. It applies to large dataset import,
 # for example, greater than 1 TiB. However, during the import, downstream TiDB is not available to provide services.
@@ -134,15 +146,6 @@ driver = "file"
 # but the premise is that no data exists in the target table, that is, all data can only be imported by TiDB Lightning.
 # Note that this parameter **is not for incremental data import** and is only used in scenarios where the target table is empty.
 # incremental-import = false
-
-# The listening address of tikv-importer when backend is "importer". Change it to the actual address.
-addr = "172.16.31.10:8287"
-# Action to do when trying to insert a conflicting record in the logical import mode.
-# For more information on the conflict detection, see the document: https://docs.pingcap.com/tidb/dev/tidb-lightning-logical-import-mode-usage#conflict-detection
-#  - replace: use new entry to replace the existing entry
-#  - ignore: keep the existing entry, and ignore the new entry
-#  - error: report error and quit the program
-# on-duplicate = "replace"
 
 # Whether to detect and resolve duplicate records (unique key conflict) in the physical import mode.
 # The following resolution algorithms are supported:
