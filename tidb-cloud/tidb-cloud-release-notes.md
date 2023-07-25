@@ -8,6 +8,21 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2023.
 
+## July 25, 2023
+
+**General changes**
+
+- Upgrade the default TiDB version of new [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) clusters from [v6.5.3](https://docs.pingcap.com/tidb/v6.5/release-6.5.3) to [v7.1.1](https://docs.pingcap.com/tidb/v7.1/release-7.1.1).
+
+**Console changes**
+
+- Simplify access to PingCAP Support for TiDB Cloud users by optimizing support entries. Improvements include:
+
+    - Add an entrance for **Support** in the <MDSvgIcon name="icon-top-organization" /> in the lower-left corner.
+    - Revamp the menus of the **?** icon in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com/) to make them more intuitive.
+
+  For more information, see [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
+
 ## July 18, 2023
 
 **General changes**
