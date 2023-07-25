@@ -134,21 +134,21 @@ Some operations in TiDB require writing temporary files to the server, so it is 
 
 - TiDB work area
 
-    Operations that consume a significant amount of memory, such as hash table construction and sorting, might write temporary data to disk to reduce memory consumption and improve stability. The disk location for writing is defined by the configuration item [`tmp-storage-path`](/tidb-configuration-file.md#tmp-storage-path). With the default configuration, make sure that the user that runs TiDB has read and write permissions to the temporary folder (normally `/tmp`) of the operating system.
+    Operations that consume a significant amount of memory, such as hash table construction and sorting, might write temporary data to disk to reduce memory consumption and improve stability. The disk location for writing is defined by the configuration item [`tmp-storage-path`](/tidb-configuration-file.md#tmp-storage-path). With the default configuration, make sure that the user that runs TiDB has read and write permissions to the temporary folder (usually `/tmp`) of the operating system.
 
 - `Fast Online DDL` work area
 
-    When the variable [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) is set to `ON` (the default value in v6.5.0 and later versions), `Fast Online DDL` is activated, and some DDL operations need to read and write temporary files in filesystems. The location is defined by the configuration item [`temp-dir`](/tidb-configuration-file.md#temp-dir-new-in-v630). You need to ensure that the operating system user that runs TiDB has read and write permissions for that directory. Taking the default directory `/tmp/tidb` as an example:
+    When the variable [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) is set to `ON` (the default value in v6.5.0 and later versions), `Fast Online DDL` is enabled, and some DDL operations need to read and write temporary files in filesystems. The location is defined by the configuration item [`temp-dir`](/tidb-configuration-file.md#temp-dir-new-in-v630). You need to ensure that the user that runs TiDB has read and write permissions for that directory of the operating system. Taking the default directory `/tmp/tidb` as an example:
 
     > **Note:**
     > 
-    > If DDL operations on large objects exist in the system, it is highly recommended to configure an independent large file system for [`temp-dir`](/tidb-configuration-file.md#temp-dir-new-in-v630).
+    > If DDL operations on large objects exist in your application, it is highly recommended to configure an independent large file system for [`temp-dir`](/tidb-configuration-file.md#temp-dir-new-in-v630).
 
     ```shell
     sudo mkdir /tmp/tidb
     ```
 
-    If the directory `/tmp/tidb` already exists, make sure the write permission are granted.
+    If the `/tmp/tidb` directory already exists, make sure the write permission is granted.
 
     ```shell
     sudo chmod -R 777 /tmp/tidb
