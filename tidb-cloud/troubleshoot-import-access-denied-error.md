@@ -11,9 +11,9 @@ After you click **Next** on the **Data Import** page of the TiDB Cloud console a
 
 To troubleshoot the access denied errors, perform the following checks in the AWS Management Console.
 
-## Cannot assume an IAM role
+## Cannot assume the provided role 
 
-This section describes how to troubleshoot the issue that AWS cannot assume an IAM role.
+This section describes how to troubleshoot the issue that TiDB Cloud cannot assume the provided role to access the specified bucket. 
 
 ### Check the trust entity
 
