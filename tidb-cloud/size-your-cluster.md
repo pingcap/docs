@@ -15,13 +15,13 @@ This document describes how to determine the size of a TiDB Dedicated cluster.
 
 TiDB is for computing only and does not store data. It is horizontally scalable.
 
-You can configure both node size and node quantity for TiDB.
+You can configure node number, vCPU, and RAM for TiDB.
 
 To learn performance test results of different cluster scales, see [TiDB Cloud Performance Reference](/tidb-cloud/tidb-cloud-performance-reference.md).
 
-### TiDB node size
+### TiDB vCPU and RAM
 
-The supported node sizes include the following:
+The supported vCPU and RAM sizes include the following:
 
 - 2 vCPU, 8 GiB (Beta)
 - 4 vCPU, 16 GiB
@@ -30,13 +30,13 @@ The supported node sizes include the following:
 
 > **Note:**
 >
-> If the node size of TiDB is set as **2 vCPU, 8 GiB (Beta)** or **4 vCPU, 16 GiB**, note the following restrictions:
+> If the vCPU and RAM size of TiDB is set as **2 vCPU, 8 GiB (Beta)** or **4 vCPU, 16 GiB**, note the following restrictions:
 >
-> - The node quantity of TiDB can only be set to 1 or 2, and the node quantity of TiKV is fixed to 3.
+> - The node number of TiDB can only be set to 1 or 2, and the node number of TiKV is fixed to 3.
 > - 2 vCPU TiDB can only be used with 2 vCPU TiKV. 4 vCPU TiDB can only be used with 4 vCPU TiKV.
 > - TiFlash is unavailable.
 
-### TiDB node quantity
+### TiDB node number
 
 For high availability, it is recommended that you configure at least two TiDB nodes for each TiDB Cloud cluster.
 
@@ -77,13 +77,13 @@ Therefore, 8 TiDB nodes (8 vCPU, 16 GiB) are recommended for you.
 
 TiKV is responsible for storing data. It is horizontally scalable.
 
-You can configure node size, node quantity, and node storage for TiKV.
+You can configure node number, vCPU and RAM, and storage for TiKV.
 
 To learn performance test results of different cluster scales, see [TiDB Cloud Performance Reference](/tidb-cloud/tidb-cloud-performance-reference.md).
 
-### TiKV node size
+### TiKV vCPU and RAM
 
-The supported node sizes include the following:
+The supported vCPU and RAM sizes include the following:
 
 - 2 vCPU, 8 GiB (Beta)
 - 4 vCPU, 16 GiB
@@ -93,13 +93,13 @@ The supported node sizes include the following:
 
 > **Note:**
 >
-> If the node size of TiKV is set as **2 vCPU, 8 GiB (Beta)** or **4 vCPU, 16 GiB**, note the following restrictions:
+> If the vCPU and RAM size of TiKV is set as **2 vCPU, 8 GiB (Beta)** or **4 vCPU, 16 GiB**, note the following restrictions:
 >
-> - The node quantity of TiDB can only be set to 1 or 2, and the node quantity of TiKV is fixed to 3.
+> - The node number of TiDB can only be set to 1 or 2, and the node number of TiKV is fixed to 3.
 > - 2 vCPU TiKV can only be used with 2 vCPU TiDB. 4 vCPU TiKV can only be used with 4 vCPU TiDB.
 > - TiFlash is unavailable.
 
-### TiKV node quantity
+### TiKV node number
 
 The number of TiKV nodes should be **at least 1 set (3 nodes in 3 different Available Zones)**.
 
@@ -109,9 +109,9 @@ TiDB Cloud deploys TiKV nodes evenly to all availability zones (at least 3) in t
 >
 > When you scale your TiDB cluster, nodes in the 3 availability zones are increased or decreased at the same time. For how to scale in or scale out a TiDB cluster based on your needs, see [Scale Your TiDB Cluster](/tidb-cloud/scale-tidb-cluster.md).
 
-Although TiKV is mainly used for data storage, the performance of the TiKV node also varies depending on different workloads. Therefore, when planning the number of TiKV nodes, you need to estimate it according to both your [**data volume**](#estimate-tikv-node-quantity-according-to-data-volume) and [expected performance](#estimate-tikv-node-quantity-according-to-expected-performance), and then take the larger of the two estimates as the recommended node number.
+Although TiKV is mainly used for data storage, the performance of the TiKV node also varies depending on different workloads. Therefore, when planning the number of TiKV nodes, you need to estimate it according to both your [**data volume**](#estimate-tikv-node-number-according-to-data-volume) and [expected performance](#estimate-tikv-node-number-according-to-expected-performance), and then take the larger of the two estimates as the recommended node number.
 
-#### Estimate TiKV node quantity according to data volume
+#### Estimate TiKV node number according to data volume
 
 You can calculate a recommended number of TiKV nodes according to your data volume as follows:
 
@@ -125,7 +125,7 @@ Suppose that the size of your MySQL dump files is 20 TB and the TiKV compression
 
 `node num = ceil(20 TB * 40% * 3 ÷ 0.8 ÷ 4096 GiB ÷ 3) * 3 = 9`
 
-#### Estimate TiKV node quantity according to expected performance
+#### Estimate TiKV node number according to expected performance
 
 Similarly as TiDB performance, TiKV performance increases linearly with the number of TiKV nodes. However, when the number of TiKV nodes exceeds 8, the performance increment becomes slightly less than linearly proportional. For each additional 8 nodes, the performance deviation coefficient is about 5%.
 
@@ -164,9 +164,9 @@ Next, you can compare the TiKV node number calculated according to data volume w
 
 ### TiKV node storage
 
-The supported node storage of different TiKV node sizes is as follows:
+The supported node storage of different TiKV vCPUs is as follows:
 
-| Node size | Min node storage | Max node storage | Default node storage |
+| TiKV vCPU | Min node storage | Max node storage | Default node storage |
 |:---------:|:----------------:|:----------------:|:--------------------:|
 | 2 vCPU    | 200 GiB          |     500 GiB      | 200 GiB              |
 | 4 vCPU    | 200 GiB          |     2048 GiB     | 500 GiB              |
@@ -181,18 +181,18 @@ The supported node storage of different TiKV node sizes is as follows:
 
 TiFlash synchronizes data from TiKV in real time and supports real-time analytics workloads right out of the box. It is horizontally scalable.
 
-You can configure node size, node quantity, and node storage for TiFlash.
+You can configure node number, vCPU and RAM, and storage for TiFlash.
 
-### TiFlash node size
+### TiFlash vCPU and RAM
 
-The supported node sizes include the following:
+The supported vCPU and RAM sizes include the following:
 
 - 8 vCPU, 64 GiB
 - 16 vCPU, 128 GiB
 
-Note that TiFlash is unavailable when the vCPU size of TiDB or TiKV is set as **2 vCPU, 8 GiB (Beta)** or **4 vCPU, 16 GiB**.
+Note that TiFlash is unavailable when the vCPU and RAM size of TiDB or TiKV is set as **2 vCPU, 8 GiB (Beta)** or **4 vCPU, 16 GiB**.
 
-### TiFlash node quantity
+### TiFlash node number
 
 TiDB Cloud deploys TiFlash nodes evenly to different availability zones in a region. It is recommended that you configure at least two TiFlash nodes in each TiDB Cloud cluster and create at least two replicas of the data for high availability in your production environment.
 
@@ -206,9 +206,9 @@ Minimum number of TiFlash nodes: `min((800 GiB * 2 + 100 GiB * 1) / 1024 GiB, ma
 
 ### TiFlash node storage
 
-The supported node storage of different TiFlash node sizes is as follows:
+The supported node storage of different TiFlash vCPUs is as follows:
 
-| Node size | Min node storage | Max node storage | Default node storage |
+| TiFlash vCPU | Min node storage | Max node storage | Default node storage |
 |:---------:|:----------------:|:----------------:|:--------------------:|
 | 8 vCPU    | 200 GiB          | 2048 GiB         | 500 GiB              |
 | 16 vCPU   | 200 GiB          | 2048 GiB         | 500 GiB              |

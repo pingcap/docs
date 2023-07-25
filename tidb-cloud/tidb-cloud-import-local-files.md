@@ -30,7 +30,7 @@ Currently, this method supports importing one CSV file for one task into either 
 
 2. On the **Import** page, you can directly drag and drop your local file to the upload area, or click the upload area to select and upload the target local file. Note that you can upload only one CSV file of less than 50 MiB for one task.
 
-3. In the **Target** area, select the target database and the target table, or enter a name directly to create a new database or a new table. The name must start with letters (a-z and A-Z) or numbers (0-9), and can contain letters (a-z and A-Z), numbers (0-9), and the underscore (_) character. Click **Next**.
+3. In the **Target** area, select the target database and the target table, or enter a name directly to create a new database or a new table. The name must start with letters (a-z and A-Z) or numbers (0-9), and can contain letters (a-z and A-Z), numbers (0-9), and the underscore (_) character. Click **Preview**.
 
 4. Check the table.
 
@@ -42,11 +42,11 @@ Currently, this method supports importing one CSV file for one task into either 
 
 5. Configure the column names and data types.
 
-    If the first row in the CSV file records the column names, make sure that **Use the first row as column name** is selected, which is selected by default.
+    If the first row in the CSV file records the column names, make sure that **Use first row as column name** is selected, which is selected by default.
 
-    If the CSV file does not have a row for the column names, do not select **Use the first row as column name**. In this case:
+    If the CSV file does not have a row for the column names, do not select **Use first row as column name**. In this case:
 
-    - If the target table already exists, the columns in the CSV file will be imported into the target table in order. Extra columns will be truncated and missing columns will be filled with default values. You can also select the **Ignore the first row** option to ignore the first row and start importing from the second row.
+    - If the target table already exists, the columns in the CSV file will be imported into the target table in order. Extra columns will be truncated and missing columns will be filled with default values.
 
     - If you need TiDB Cloud to create the target table, input the name for each column. The column name must meet the following requirements:
 
@@ -67,7 +67,7 @@ Currently, this method supports importing one CSV file for one task into either 
 
    You can also click **Edit CSV configuration** to configure Backslash Escape, Separator, and Delimiter for more fine-grained control. For more information about the CSV configuration, see [CSV Configurations for Importing Data](/tidb-cloud/csv-config-for-import-data.md).
 
-8. Click **Start Import**.
+8. On the **Preview** page, you can have a preview of the data. Click **Start Import**.
 
     You can view the import progress on the **Import Task Detail** page. If there are warnings or failed tasks, you can check to view the details and solve them.
 

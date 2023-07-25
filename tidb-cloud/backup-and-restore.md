@@ -35,7 +35,9 @@ By the automatic backup, you can back up the TiDB Dedicated cluster data every d
 
     - Toggle the **Auto Backup** switch to **On**.
 
-    - In **Backup Time**, schedule a start time for the daily cluster backup.
+    - In **Backup Cycle**, select either the **Daily** or **Weekly** checkbox. If you select **Weekly**, you need to specify the days of the week for the backup.
+
+    - In **Backup Time**, schedule a start time for the daily or weekly cluster backup.
 
         It is recommended to schedule automatic backup at a low workload period. If you do not specify a preferred backup time, TiDB Cloud assigns a default backup time, which is 2:00 AM in the time zone of the region where the cluster is located.
 
@@ -43,13 +45,18 @@ By the automatic backup, you can back up the TiDB Dedicated cluster data every d
 
     - Turn on or off the PITR (**Point-in-time Recovery**) feature.
 
+        > **Note:**
+        >
+        > - The PITR feature is enabled by default and cannot be disabled when you enable weekly backup.
+        > - If you change the backup cycle from weekly to daily, the PITR feature remains enabled. You can manually disable it if needed.
+
         PITR supports restoring data of any point in time to a new cluster. You can use it to:
 
         - Reduce RPO in disaster recovery.
         - Resolve cases of data write errors by restoring point-in-time that is before the error event.
         - Audit the historical data of the business.
 
-        If you have one of the preceding needs and want to use the PITR feature, make sure that your TiDB Dedicated cluster version is at least v6.4.0 and the TiKV node size is at least 8 vCPU and 16 GiB.
+        If you have one of the preceding needs and want to use the PITR feature, make sure that your TiDB Dedicated cluster version is at least v6.4.0 and the TiKV node is at least 8 vCPU and 16 GiB.
 
     - In **Backup Storage Region**, select the regions where you want to store your backup data.
 
@@ -152,7 +159,7 @@ To restore your TiDB Dedicated cluster data from a backup to a new cluster, take
 
     - Set the cluster name.
     - Update the port number of the cluster.
-    - Increase the node size, node quantity, and node storage for the cluster.
+    - Increase node number, vCPU and RAM, and storage for the cluster.
 
 6. Click **Restore**.
 
@@ -165,13 +172,13 @@ To restore your TiDB Dedicated cluster data from a backup to a new cluster, take
 To restore a deleted cluster from recycle bin, take the following steps:
 
 1. Log in to the [TiDB Cloud console](https://tidbcloud.com).
-2. Click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner, switch to the target project if you have multiple projects, and then click **Admin**.
-3. On the **Admin** page of your project, click **Recycle Bin** in the left navigation pane, locate the cluster you want to restore, and then click **Backups** in the **Action** column.
+2. Click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner, switch to the target project if you have multiple projects, and then click **Project Settings**.
+3. On the **Project Settings** page of your project, click **Recycle Bin** in the left navigation pane, locate the cluster you want to restore, and then click **Backups** in the **Action** column.
 4. Locate your desired backup time, and then click **Restore** in the **Action** column.
 5. In the **Restore** window, make the following changes if necessary:
 
     - Update the port number of the cluster.
-    - Increase the node size, node quantity, and node storage for the cluster.
+    - Increase the node number, vCPU and RAM, and storage for the cluster.
 
 6. Click **Confirm**.
 

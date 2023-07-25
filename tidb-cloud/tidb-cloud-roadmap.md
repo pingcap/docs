@@ -48,7 +48,7 @@ The TiDB Cloud roadmap brings you what's coming in the near future, so you can s
     <td>Allow a user to join multiple organizations by accepting the invitations.</td>
   </tr>
   <tr>
-    <td>Support hierarchical user roles and permissions.</td>
+    <td>✅ Support hierarchical user roles and permissions.</td>
     <td>Support role-based access control (RBAC) for the TiDB Cloud console. You can manage user permissions in a fine-grained manner, such as by cluster, billing, and member.</td>
   </tr>
   <tr>

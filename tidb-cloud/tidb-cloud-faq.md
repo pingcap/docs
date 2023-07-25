@@ -41,7 +41,10 @@ No.
 
 ### What versions of TiDB are supported on TiDB Cloud?
 
-For the currently supported TiDB version, see [TiDB Cloud Release Notes](/tidb-cloud/tidb-cloud-release-notes.md).
+- Starting from June 20, 2023, the default TiDB version for new TiDB Dedicated clusters is v6.5.3. 
+- Starting from March 7, 2023, the default TiDB version for new TiDB Serverless clusters is v6.6.0.
+
+For more information, see [TiDB Cloud Release Notes](/tidb-cloud/tidb-cloud-release-notes.md).
 
 ### What companies are using TiDB or TiDB Cloud in production?
 
@@ -58,6 +61,10 @@ The best way to learn about TiDB Cloud is to follow our step-by-step tutorial. C
 - [TiDB Cloud Introduction](/tidb-cloud/tidb-cloud-intro.md)
 - [Get Started](/tidb-cloud/tidb-cloud-quickstart.md)
 - [Create a TiDB Serverless Cluster](/tidb-cloud/create-tidb-cluster-serverless.md)
+
+### What does `XXX's Org/default project/Cluster0` refer to when deleting a cluster?
+
+In TiDB Cloud, a cluster is uniquely identified by the combination of the organization name, project name, and cluster name. To ensure that you are deleting the intended cluster, you need to provide the fully qualified name of that cluster, such as `XXX's Org/default project/Cluster0`.
 
 ## Architecture FAQs
 

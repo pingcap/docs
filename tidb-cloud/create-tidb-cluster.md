@@ -40,7 +40,7 @@ If you are an organization owner, you can rename the default project or create a
 
 ## Step 2. Create a TiDB Dedicated cluster
 
-To create a TiDB Dedicated cluster, take the following steps:
+If you are in the `Organization Owner` or the `Project Owner` role, you can create a TiDB Dedicated cluster as follows:
 
 1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
 
