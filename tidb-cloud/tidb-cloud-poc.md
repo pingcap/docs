@@ -116,15 +116,15 @@ You can import a small dataset to quickly test feasibility, or a large dataset t
 
 You can import data in various formats to TiDB Cloud:
 
+- [Migrate MySQL-Compatible Databases to TiDB Cloud Using Data Migration](/tidb-cloud/migrate-from-mysql-using-data-migration.md)
+- [Import Local Files to TiDB Cloud](/tidb-cloud/tidb-cloud-import-local-files.md)
 - [Import sample data in the SQL file format](/tidb-cloud/import-sample-data.md)
-- [Migrate from Amazon Aurora MySQL](/tidb-cloud/migrate-from-aurora-bulk-import.md)
 - [Import CSV Files from Amazon S3 or GCS](/tidb-cloud/import-csv-files.md)
 - [Import Apache Parquet Files](/tidb-cloud/import-parquet-files.md)
 
 > **Note:**
 >
-> - For information about character collations supported by TiDB Cloud, see [Migrate from MySQL-Compatible Databases](/tidb-cloud/migrate-data-into-tidb.md). Understanding how your data is stored originally will be very helpful.
-> - Data import on the **Data Import** page does not generate additional billing fees.
+> Data import on the **Import** page does not generate additional billing fees.
 
 ## Step 6. Run your workload and evaluate results
 
@@ -175,7 +175,7 @@ Now the workload testing is finished, you can explore more features, for example
 
 - Backup
 
-    To avoid vendor lock-in, you can use daily full backup to migrate data to a new cluster and use [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview) to export data. For more information, see [Export Data from TiDB](/tidb-cloud/export-data-from-tidb-cloud.md).
+    To avoid vendor lock-in, you can use daily full backup to migrate data to a new cluster and use [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview) to export data. For more information, see [Back Up and Restore TiDB Dedicated Data](/tidb-cloud/backup-and-restore.md#backup) and [Back Up and Restore TiDB Dedicated Data](/tidb-cloud/backup-and-restore-serverless.md#backup).
 
 ## Step 8. Clean up the environment and finish the PoC
 
