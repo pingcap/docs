@@ -62,6 +62,10 @@ The best way to learn about TiDB Cloud is to follow our step-by-step tutorial. C
 - [Get Started](/tidb-cloud/tidb-cloud-quickstart.md)
 - [Create a TiDB Serverless Cluster](/tidb-cloud/create-tidb-cluster-serverless.md)
 
+### What does `XXX's Org/default project/Cluster0` refer to when deleting a cluster?
+
+In TiDB Cloud, a cluster is uniquely identified by the combination of the organization name, project name, and cluster name. To ensure that you are deleting the intended cluster, you need to provide the fully qualified name of that cluster, such as `XXX's Org/default project/Cluster0`.
+
 ## Architecture FAQs
 
 ### There are different components in my TiDB cluster. What are TiDB, TiKV, and TiFlash nodes?
@@ -94,7 +98,7 @@ As a Software as a Service (SaaS) provider, we take data security seriously. We 
 
 ### Is there an easy migration path from another RDBMS to TiDB Cloud?
 
-TiDB is highly compatible with MySQL. You can migrate data from any MySQL-compatible databases to TiDB smoothly, whether the data is from a self-hosted MySQL instance or RDS service provided by the public cloud. For more information, see [Migrate Data from MySQL-Compatible Databases](/tidb-cloud/migrate-data-into-tidb.md).
+TiDB is highly compatible with MySQL. You can migrate data from any MySQL-compatible databases to TiDB smoothly, whether the data is from a self-hosted MySQL instance or RDS service provided by the public cloud. For more information, see [Migrate MySQL-Compatible Databases to TiDB Cloud Using Data Migration](/tidb-cloud/migrate-from-mysql-using-data-migration.md).
 
 ## Backup and restore FAQ
 
