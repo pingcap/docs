@@ -18,15 +18,11 @@ server_configs:
     log.level: "error"
 ```
 
-<<<<<<< HEAD
-It is also recommended to make sure [`tidb_enable_prepared_plan_cache`](/system-variables.md#tidb_enable_prepared_plan_cache-new-in-v610) is enabled and that you allow sysbench to use prepared statements by _not_ using `--db-ps-mode=disabled`. See the [SQL Prepared Execution Plan Cache](/sql-prepared-plan-cache.md) for documentation about what the SQL plan cache does and how to monitor it.
-=======
-It is also recommended to make sure [`tidb_enable_prepared_plan_cache`](/system-variables.md#tidb_enable_prepared_plan_cache-new-in-v610) is enabled and that you allow sysbench to use prepared statements by using `--db-ps-mode=auto`. See the [SQL Prepared Execution Plan Cache](/sql-prepared-plan-cache.md) for documetnation about what the SQL plan cache does and how to monitor it.
+It is also recommended to make sure [`tidb_enable_prepared_plan_cache`](/system-variables.md#tidb_enable_prepared_plan_cache-new-in-v610) is enabled and that you allow sysbench to use prepared statements by using `--db-ps-mode=auto`. See the [SQL Prepared Execution Plan Cache](/sql-prepared-plan-cache.md) for documentation about what the SQL plan cache does and how to monitor it.
 
 > **Note:**
 >
 > In different versions of Sysbench, the default value of `db-ps-mode` might be different. It is recommended to explicitly specify it in the command.
->>>>>>> e4e5de704 (Update benchmark-tidb-using-sysbench.md (#14314))
 
 ### TiKV configuration
 
