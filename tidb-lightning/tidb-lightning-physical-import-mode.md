@@ -17,7 +17,6 @@ The backend for the physical import mode is `local`. You can modify it in `tidb-
  backend = "local"
  ```
 
-
 ## Implementation
 
 1. Before importing data, TiDB Lightning automatically switches the TiKV nodes to "import mode", which improves write performance and stops auto-compaction. TiDB Lightning determines whether to pause global scheduling according to the TiDB Lightning version.
