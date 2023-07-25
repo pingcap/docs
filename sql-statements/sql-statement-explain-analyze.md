@@ -283,7 +283,7 @@ commit_txn: {prewrite:48.564544ms, wait_prewrite_binlog:47.821579, get_commit_ts
 
 ### RU (Request Unit) Consumption
 
-[Request Unit (RU)](/tidb-resource-control.md#what-is-request-unit-ru) a unified abstraction unit of system resources which is defined in TiDB resource control. The `execution info` of top level operator shows the overall RU consumption of this particular SQL statement.
+[Request Unit (RU)](/tidb-resource-control.md#what-is-request-unit-ru) is a unified abstraction unit of system resources which is defined in TiDB resource control. The `execution info` of top level operator shows the overall RU consumption of this particular SQL statement.
 
 ```
 RU:273.842670
@@ -291,7 +291,7 @@ RU:273.842670
 
 > **Notice :**
 >
-> This value shows the actual RU produced by this call. The RU consumption could vary if the same SQL statement repeats, as the amount of RU is affected by cache layer (for example, [coprocessor cache](/coprocessor-cache.md)).
+> This value shows the actual RU produced by this call. The RU consumption might vary if the same SQL statement repeats, as the amount of RU is affected by cache layer (for example, [coprocessor cache](/coprocessor-cache.md)).
 
 ### Other common execution information
 
