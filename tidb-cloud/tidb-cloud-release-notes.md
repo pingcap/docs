@@ -18,7 +18,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
     For more information on how to use this feature, see [Generate an endpoint automatically](/tidb-cloud/data-service-manage-endpoint.md#generate-an-endpoint-automatically).
 
-- Support `PUT` and `DELETE` request methods for endpoints in TiDB Cloud [Data Service](https://tidbcloud.com/console/data-service)
+- Support `PUT` and `DELETE` request methods for endpoints in TiDB Cloud [Data Service](https://tidbcloud.com/console/data-service).
 
     - You can use the `PUT` method to update or modify data, such as an `UPDATE` statement.
     - You can use the `DELETE` method to delete data, such as a `DELETE` statement.
