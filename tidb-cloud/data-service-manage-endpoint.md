@@ -83,15 +83,15 @@ For each endpoint, you can write SQL statements to execute on a TiDB cluster, de
 
 ### Configure properties
 
-On the right pane of the endpoint details page, you can click the **Properties** tab to view and manage the following properties of the endpoint:
+On the right pane of the endpoint details page, you can click the **Properties** tab to view and configure properties of the endpoint.
+
+#### Basic properties
 
 - **Path**: the path that users use to access the endpoint.
 
     - The combination of the request method and the path must be unique within a Data App.
     - Only letters, numbers, underscores (`_`), and slashes (`/`) are allowed in a path. A path must start with a slash (`/`) and end with a letter, number, or underscore (`_`). For example, `/my_endpoint/get_id`.
     - The length of the path must be less than 64 characters.
-
-- **Batch Operation**: Controls whether to enable the endpoint to operate in batch mode. When it is enabled, you can operate on multiple rows in a single request. To enable this option, make sure that the request method is `POST`, `PUT`, or `DELETE`.
 
 - **Endpoint URL**: (read-only) the URL is automatically generated based on the region where the corresponding cluster is located, the service URL of the Data App, and the path of the endpoint. For example, if the path of the endpoint is `/my_endpoint/get_id`, the endpoint URL is `https://<region>.data.tidbcloud.com/api/v1beta/app/<App ID>/endpoint/my_endpoint/get_id`.
 
@@ -116,6 +116,15 @@ On the right pane of the endpoint details page, you can click the **Properties**
     - Minimum value: `1`
 
 - **Description** (Optional): the description of the endpoint.
+
+#### Advanced properties
+
+- **Tag**: the tag used for identifying a group of endpoints.
+- **Batch Operation**: this property is visible only when the request method is `POST`, `PUT`, or `DELETE`. When **Batch Operation** is enabled, you can operate on multiple rows in a single request. For example, you can insert multiple rows of data in a single `POST` request by adding an array of data objects in the `--data-raw` option of your curl command when calling the endpoint.
+
+    > **Note:**
+    >
+    > If the request method of your endpoint is `DELETE` and **Batch Operation** is enabled, you need to use `%2C` instead of comma (`,`) to separate the rows to be deleted in curl code, such as `/endpoint/<Endpoint Path>?id=${id}%2C${id}`. This is because comma (`,`) is a reserved character in URLs and cannot be used directly.
 
 ### Write SQL statements
 
