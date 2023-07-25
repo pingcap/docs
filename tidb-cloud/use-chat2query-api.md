@@ -71,7 +71,7 @@ In the left pane of the [**Data Service**](https://tidbcloud.com/console/data-se
 - **Timeout(ms)**: the timeout for the Chat2Data endpoint.
 
     - Default value: `30000`
-    - Maximum value: `60000`
+    - Maximum value: `120000`
     - Minimum value: `1`
     - Unit: millisecond
 
