@@ -14,7 +14,7 @@ This document describes how to manage your endpoints in a Data App in the TiDB C
 - Before you create an endpoint, make sure the following:
 
     - You have created a cluster and a Data App. For more information, see [Create a Data App](/tidb-cloud/data-service-manage-data-app.md#create-a-data-app).
-    - The target table for the endpoint exists in your target database of the target cluster, and the columns of the target table are already defined.
+    - The databases, tables, and columns that the endpoint will operate on already exist in the target cluster.
 
 - Before you call an endpoint, make sure that you have created an API key in the Data App. For more information, see [Create an API key](/tidb-cloud/data-service-api-key.md#create-an-api-key).
 
@@ -91,7 +91,7 @@ On the right pane of the endpoint details page, you can click the **Properties**
     - Only letters, numbers, underscores (`_`), and slashes (`/`) are allowed in a path. A path must start with a slash (`/`) and end with a letter, number, or underscore (`_`). For example, `/my_endpoint/get_id`.
     - The length of the path must be less than 64 characters.
 
-- **Batch Operation**: Controls whether to enable the endpoint to operate in batch mode. When it is enabled, you can operate on multiple rows in a single request. To enable this option, make sure that the request method is `POST`, `PUT`, or `DELETE`, and that the last SQL statement for the endpoint is an `INSERT`, `UPDATE`, or `DELETE` operation.
+- **Batch Operation**: Controls whether to enable the endpoint to operate in batch mode. When it is enabled, you can operate on multiple rows in a single request. To enable this option, make sure that the request method is `POST`, `PUT`, or `DELETE`.
 
 - **Endpoint URL**: (read-only) the URL is automatically generated based on the region where the corresponding cluster is located, the service URL of the Data App, and the path of the endpoint. For example, if the path of the endpoint is `/my_endpoint/get_id`, the endpoint URL is `https://<region>.data.tidbcloud.com/api/v1beta/app/<App ID>/endpoint/my_endpoint/get_id`.
 

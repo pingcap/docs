@@ -68,7 +68,7 @@ On the right pane, click the **Properties** tab and set properties for the endpo
 
 - **Max Rows**: the maximum number of rows that the endpoint can operate or return.
 
-- **Batch Operation**: Controls whether to enable the endpoint to operate in batch mode. When it is enabled, you can operate on multiple rows in a single request. To enable this option, make sure that the request method is `POST`, `PUT`, or `DELETE`, and that the last SQL statement for the endpoint is an `INSERT`, `UPDATE`, or `DELETE` operation.
+- **Batch Operation**: Controls whether to enable the endpoint to operate in batch mode. When it is enabled, you can operate on multiple rows in a single request. To enable this option, make sure that the request method is `POST`, `PUT`, or `DELETE`.
 
 For more information about endpoint properties, see [Configure properties](/tidb-cloud/data-service-manage-endpoint.md#configure-properties).
 
