@@ -243,9 +243,9 @@ Multi-valued indexes are a kind of secondary index defined on an array column. I
 }
 ```
 
-### Create a multi-valued index
+### Create multi-valued indexes
 
-You can create a multi-valued index by using the `CAST(... AS ... ARRAY)` expression in the index definition, as creating an expression index.
+You can create multi-valued indexes by using the `CAST(... AS ... ARRAY)` expression in the index definition, as creating an expression index.
 
 ```sql
 mysql> CREATE TABLE customers (
@@ -335,7 +335,7 @@ See [Index Selection - Use multi-valued indexes](/choose-index.md#use-multi-valu
 - For an empty JSON array, no corresponding index record is generated.
 - The target type in `CAST(... AS ... ARRAY)` cannot be any of `BINARY`, `JSON`, `YEAR`, `FLOAT`, and `DECIMAL`. The source type must be JSON.
 - You cannot use multi-valued indexes for sorting.
-- You can only create a multi-valued index on a JSON array.
+- You can only create multi-valued indexes on a JSON array.
 - A multi-valued index cannot be a primary key or a foreign key.
 - The extra storage space used by a multi-valued index = the average number of array elements per row * the space used by a normal secondary index.
 - Compared with normal indexes, DML operations will modify more index records for multi-valued indexes, so multi-valued indexes will have a greater performance impact than normal indexes.
@@ -364,7 +364,7 @@ The system variables associated with the `CREATE INDEX` statement are `tidb_ddl_
 * Adding the primary key of the `CLUSTERED` type to a table is not supported. For more details about the primary key of the `CLUSTERED` type, refer to [clustered index](/clustered-indexes.md).
 * Expression indexes are incompatible with views. When a query is executed using a view, the expression index cannot be used at the same time.
 * Expression indexes have compatibility issues with bindings. When the expression of an expression index has a constant, the binding created for the corresponding query expands its scope. For example, suppose that the expression in the expression index is `a+1`, and the corresponding query condition is `a+1 > 2`. In this case, the created binding is `a+? > ?`, which means that the query with the condition such as `a+2 > 2` is also forced to use the expression index and results in a poor execution plan. In addition, this also affects the baseline capturing and baseline evolution in SQL Plan Management (SPM).
-* The data written with multi-valued indexes must exactly match the defined data type. Otherwise, data writes fail. For details, see [Creat a multi-valued index](/sql-statements/sql-statement-create-index.md#create-a-multi-valued-index).
+* The data written with multi-valued indexes must exactly match the defined data type. Otherwise, data writes fail. For details, see [create multi-valued indexes](/sql-statements/sql-statement-create-index.md#create-multi-valued-indexes).
 
 ## See also
 
