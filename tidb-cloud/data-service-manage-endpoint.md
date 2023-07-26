@@ -309,7 +309,7 @@ TiDB Cloud Data Service generates code examples to help you call an endpoint. To
         - For endpoints with **Batch Operation** enabled, the `--data-raw` option accepts an array of data objects so you can operate multiple rows of data using one endpoint.
         - For endpoints with **Batch Operation** not enabled, the `--data-raw` option only accepts one data object.
 
-    - If the request method of your endpoint is `DELETE` and **Batch Operation** is enabled for the endpoint, you need to use `%2C` instead of comma (`,`) to separate the rows to be deleted in curl code, such as `/endpoint/<Endpoint Path>?id=${id}%2C${id}`. This is because comma (`,`) is a reserved character in URLs and cannot be used directly.
+    - If the request method of your endpoint is `DELETE` and **Batch Operation** is enabled for the endpoint, you need to use `%2C` instead of comma (`,`) to separate the rows to be deleted in your curl command, such as `/endpoint/<Endpoint Path>?id=${id}%2C${id}`. This is because comma (`,`) is a reserved character in URLs and cannot be used directly.
     - If the endpoint contains parameters, specify the parameter values when calling the endpoint.
 
 ### Response
