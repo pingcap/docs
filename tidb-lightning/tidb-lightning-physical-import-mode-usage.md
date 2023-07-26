@@ -27,6 +27,18 @@ check-requirements = true
 # The local data source directory or the URI of the external storage. For more information about the URI of the external storage, see https://docs.pingcap.com/tidb/v6.6/backup-and-restore-storages#uri-format.
 data-source-dir = "/data/my_database"
 
+[conflict]
+# The strategy to handle conflicting data
+# - "": No actions, lightning may exit by error in following steps.
+# - "error": Conflicting data will fail the import task.
+# - "replace": Try to keep latest data when meet conflicting data.
+# - "ignore": Try to keep oldest data when meet conflicting data.
+strategy = ""
+# When `strategy` is "replace" or "ignore", controls the maximum tolerable conflict count. Only can be set when `strategy` is "replace" or "ignore". The default value is 9223372036854775807
+# threshold = 9223372036854775807
+# Controls the maximum record count in conflict_record table. The default value is 100
+# max-record-rows = 100
+
 [tikv-importer]
 # Import mode. "local" means using the physical import mode.
 backend = "local"
@@ -83,11 +95,41 @@ For the complete configuration file, refer to [the configuration file and comman
 
 ## Conflict detection
 
-Conflicting data refers to two or more records with the same PK/UK column data. When the data source contains conflicting data, the actual number of rows in the table is different from the total number of rows returned by the query using unique index.
+Conflicting data refers to two or more records with the same PK/UK column data. When the data source contains conflicting data and conflict detection feature is not turned on, the actual number of rows in the table is different from the total number of rows returned by the query using unique index.
 
-TiDB Lightning offers three strategies for detecting conflicting data:
+Conflict detection has two modes, detection before importing (controlled by `conflict` configuration) and detection after importing (the old behaviour, controlled by `tikv-importer.duplicate-resolution` configuration). Currently the two modes cannot be used at the same time.
 
-- `record`: only records conflicting records to the `lightning_task_info.conflict_error_v1` table on the target TiDB. Note that the required version of the target TiKV is v5.2.0 or later versions; otherwise, it falls back to 'none'.
+### Detection before importing
+
+Detection before importing will be enabled when configuration `conflict.strategy` is set. The meaning of configuration values are:
+
+| Strategy | Default behavior of conflicting data | The corresponding SQL statement |
+| :-- | :-- | :-- |
+| `replace` | Replacing existing data with new data. | `REPLACE INTO ...` |
+| `ignore` | Keeping existing data and ignoring new data. | `INSERT IGNORE INTO ...` |
+| `error` | Pausing the import and reporting an error. | `INSERT INTO ...` |
+
+Please note that due to the internal implementation and limitation of TiDB Lightning the result of conflict detection may be different with the result of SQL-based import.
+
+When the strategy is `error`, conflicting data will fail the import task. When the strategy is `replace` or `ignore`, conflicting data will be treated as [conflict error](/tidb-lightning/tidb-lightning-error-resolution.md#conflict-error), with `conflict.threshold` configurated the import task can tolerate the specified number of conflict error. The default value is 9223372036854775807. For futher details please see [error resolution](/tidb-lightning/tidb-lightning-error-resolution.md).
+
+Detection before importing has the following limitations:
+
+- Before importing, it reads all data and encodes it to detect potentially conflicting data. Temporary files are stored using `tikv-importer.sorted-kv-dir` during the detection process. The results are retained for import phase after the detection is complete. Therefore, there is additional overhead in terms of time consumption, disk space usage, and API requests to read the data.
+- It can only be done on a single node and cannot be applied to parallel import scenarios.
+
+Compared with detection after importing, it has the following advantages:
+
+- If the original data has a large amount of conflicting data, the total import time is less when use detection before importing.
+
+We recommend using detection before importing in non-parallel import tasks when the data is known to contain conflicting data and the local disk space is sufficient.
+
+### Detection after importing (the old behaviour)
+
+Detection after importing will be enabled when configuration `tikv-importer.duplicate-resolution` is set. This is the only method of conflict detection in the version prior to v7.2.0.
+
+TiDB Lightning offers two strategies for detecting conflicting data:
+
 - `remove` (recommended): records all conflicting records, like the `record` strategy. But it removes all conflicting records from the target table to ensure a consistent state in the target TiDB.
 - `none`: does not detect duplicate records. `none` has the best performance in the three strategies, but might lead to inconsistent data in the target TiDB.
 
