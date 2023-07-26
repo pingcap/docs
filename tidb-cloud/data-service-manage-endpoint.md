@@ -124,7 +124,7 @@ On the right pane of the endpoint details page, you can click the **Properties**
 
     > **Note:**
     >
-    > If the request method of your endpoint is `DELETE` and **Batch Operation** is enabled, you need to use `%2C` instead of comma (`,`) to separate the rows to be deleted in curl code, such as `/endpoint/<Endpoint Path>?id=${id}%2C${id}`. This is because comma (`,`) is a reserved character in URLs and cannot be used directly.
+    > If the request method of your endpoint is `DELETE` and **Batch Operation** is enabled, you need to use `%2C` instead of comma (`,`) to separate the rows to be deleted in your curl command, such as `/endpoint/<Endpoint Path>?id=${id}%2C${id}`. This is because comma (`,`) is a reserved character in URLs and cannot be used directly.
 
 ### Write SQL statements
 
