@@ -49,6 +49,10 @@ The TiDB configuration file supports more options than command-line parameters. 
 + When creating an index, if [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) is enabled, data that needs to be backfilled for a newly created index will be at first stored in the TiDB local temporary directory, and then imported into TiKV in batches, thus accelerating the index creation.
 + Default value: `"/tmp/tidb"`
 
+> **Note:**
+>
+> If the directory does not exist, TiDB will automatically create it upon startup. If the directory creation fails or TiDB does not have the read and write permissions on that directory, [`Fast Online DDL`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) might experience unpredictable issues.
+
 ### `oom-use-tmp-storage`
 
 > **Warning:**
