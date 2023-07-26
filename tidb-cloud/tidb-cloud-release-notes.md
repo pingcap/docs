@@ -12,7 +12,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **General changes**
 
-- Introduce a powerful feature in TiDB Cloud [Data Service](https://tidbcloud.com/console/data-service) - Automatic Endpoint Generation.
+- Introduce a powerful feature in TiDB Cloud [Data Service](https://tidbcloud.com/console/data-service): Automatic endpoint generation.
 
     Developers can now effortlessly create HTTP endpoints with minimal clicks and configurations. Eliminate repetitive boilerplate code, simplify and accelerate endpoint creation, and reduce potential errors.
 
