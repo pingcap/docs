@@ -299,15 +299,10 @@ ALTER TABLE table_name LAST PARTITION LESS THAN (<expression>)
 
 ### List partitioning
 
-Before creating a List partitioned table, make sure that the session variable `tidb_enable_list_partition` is set to its default value `ON`.
+Before creating a List partitioned table, make sure the following:
 
-{{< copyable "sql" >}}
-
-```sql
-set @@session.tidb_enable_list_partition = ON
-```
-
-Also, make sure that `tidb_enable_table_partition` is set to `ON`, which is the default setting.
+- The [`tidb_enable_list_partition`](/system-variables#tidb_enable_list_partition-new-in-v50) system variable is set to its default value `ON`.
+- The [`tidb_enable_table_partition`](/system-variables#tidb_enable_table_partition) system variable is set to to its default value `ON`.
 
 List partitioning is similar to Range partitioning. Unlike Range partitioning, in List partitioning, the partitioning expression values for all rows in each partition are in a given value set. This value set defined for each partition can have any number of values but cannot have duplicate values. You can use the `PARTITION ... VALUES IN (...)` clause to define a value set.
 
@@ -356,7 +351,15 @@ After creating the partitions as above, you can easily add or delete records rel
 
 You can also execute `ALTER TABLE employees DROP PARTITION pEast` to delete all related rows, but this statement also deletes the `pEast` partition from the table definition. In this situation, you must execute the `ALTER TABLE ... ADD PARTITION` statement to recover the original partitioning scheme of the table.
 
-If the new feature Default List Partition, controlled by `tidb_enable_default_list_partition` variable is not used, then unlike Range partitioning, List partitioning does not have a similar `MAXVALUE` partition to store all values that do not belong to other partitions. Instead, all expected values of the partition expression must be included in the `PARTITION ... VALUES IN (...)` clause. If the value to be inserted in an `INSERT` statement does not match the column value set of any partition, the statement fails to execute and an error is reported. See the following example:
+#### Default List partition
+
+Starting from v7.3.0, TiDB Cloud supports the default List partition feature, which lets you add a default List partition to a List partitioned table. The default List partition acts as a catch-all partition, where rows that do not match any other defined value sets can be placed.
+
+The default List partition feature is controlled by the [`tidb_enable_default_list_partition`](/system-variables.md#tidb_enable_default_list_partition-new-in-v730) variable, which is disabled by default because it is a TiDB extension and is not compatible with MySQL.
+
+When [`tidb_enable_default_list_partition`](/system-variables.md#tidb_enable_default_list_partition-new-in-v730) is set to `ON`, you can add a default partition to an existing List partition table.
+
+Take the following List partition table as an example:
 
 ```sql
 CREATE TABLE t (
@@ -368,37 +371,9 @@ PARTITION BY LIST (a) (
   PARTITION p1 VALUES IN (4, 5, 6)
 );
 Query OK, 0 rows affected (0.11 sec)
-
-INSERT INTO t VALUES (7, 7);
-ERROR 1525 (HY000): Table has no partition for value 7
 ```
 
-To ignore the error type above, you can use the `IGNORE` keyword. After using this keyword, if a row contains values that do not match the column value set of any partition, this row will not be inserted. Instead, any row with matched values is inserted, and no error is reported:
-
-```sql
-test> TRUNCATE t;
-Query OK, 1 row affected (0.00 sec)
-
-test> INSERT IGNORE INTO t VALUES (1, 1), (7, 7), (8, 8), (3, 3), (5, 5);
-Query OK, 3 rows affected, 2 warnings (0.01 sec)
-Records: 5  Duplicates: 2  Warnings: 2
-
-test> select * from t;
-+------+------+
-| a    | b    |
-+------+------+
-|    5 |    5 |
-|    1 |    1 |
-|    3 |    3 |
-+------+------+
-3 rows in set (0.01 sec)
-```
-
-Starting from v7.3.0, you can add a default list partition to a List partitioned table. The default list partition acts as a catch-all partition, where rows that do not match the defined value sets can be placed.
-
-Before using the default list partition feature, you need to set the `tidb_enable_default_list_partition` system variable to `ON`, which is `OFF` by default because it is not supported in MySQL.
-
-Then, you can add a default partition to an existing table. For example:
+You can add a default list partition named `pDef`to the table as follows:
 
 ```sql
 ALTER TABLE t ADD PARTITION (PARTITION pDef DEFAULT);
@@ -412,7 +387,7 @@ ALTER TABLE t ADD PARTITION (PARTITION pDef VALUES IN (DEFAULT));
 
 In this way, any newly inserted values that do not match the value sets by any partitions automatically go into the default partition.
 
-```
+```sql
 INSERT INTO t VALUES (7, 7);
 Query OK, 1 row affected (0.01 sec)
 ```
@@ -432,6 +407,44 @@ PARTITION BY LIST (store_id) (
     PARTITION pCentral VALUES IN (16, 17, 18, 19, 20),
     PARTITION pDefault DEFAULT
 );
+```
+
+When [`tidb_enable_default_list_partition`](/system-variables.md#tidb_enable_default_list_partition-new-in-v730) is `OFF`, List partitioning does not have a default partition to store all values that do not belong to other partitions. Therefore, all expected values of a partition expression must be included in the `PARTITION ... VALUES IN (...)` clause. If the value to be inserted in an `INSERT` statement does not match the column value set of any partition, the statement fails to execute and an error is reported. See the following example:
+
+```sql
+CREATE TABLE t (
+  a INT,
+  b INT
+)
+PARTITION BY LIST (a) (
+  PARTITION p0 VALUES IN (1, 2, 3),
+  PARTITION p1 VALUES IN (4, 5, 6)
+);
+Query OK, 0 rows affected (0.11 sec)
+
+INSERT INTO t VALUES (7, 7);
+ERROR 1525 (HY000): Table has no partition for value 7
+```
+
+To ignore the error type above, you can use the `IGNORE` keyword. After using this keyword, if a row contains values that do not match the column value set of any partition, this row will not be inserted. Instead, only rows with matched values are inserted, and no error is reported:
+
+```sql
+test> TRUNCATE t;
+Query OK, 1 row affected (0.00 sec)
+
+test> INSERT IGNORE INTO t VALUES (1, 1), (7, 7), (8, 8), (3, 3), (5, 5);
+Query OK, 3 rows affected, 2 warnings (0.01 sec)
+Records: 5  Duplicates: 2  Warnings: 2
+
+test> select * from t;
++------+------+
+| a    | b    |
++------+------+
+|    5 |    5 |
+|    1 |    1 |
+|    3 |    3 |
++------+------+
+3 rows in set (0.01 sec)
 ```
 
 ### List COLUMNS partitioning
