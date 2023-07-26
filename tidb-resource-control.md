@@ -90,7 +90,7 @@ Request Unit (RU) is a unified abstraction unit in TiDB for system resources, wh
 
 ## Estimate RU consumption of SQL statements
 
-[`explain analyze`](/sql-statements/sql-statement-explain-analyze.md#ru-request-unit-consumption) shows the actual RU produced by one particular SQL statement. Note that the RU consumption might vary if the same SQL statement repeats, as the amount of RU is affected by the cache layer (for example, [coprocessor cache](/coprocessor-cache.md)). Even though this value does not reflect the exact RU produced by each execution, you can still come with an estimate the RU consumption based on this value. 
+You can execute [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md#ru-request-unit-consumption) to get the amount of RU consumed during SQL execution. Note that the amount of RU is affected by the cache ( for example, [coprocessor cache](/coprocessor-cache.md)). When executing the same SQL multiple times, the amount of RUs consumed by each execution might be different. The RU value does not represent the exact value for each execution, but can be used as a reference for estimation.
 
 ## Parameters for resource control
 
