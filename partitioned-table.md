@@ -373,7 +373,7 @@ PARTITION BY LIST (a) (
 Query OK, 0 rows affected (0.11 sec)
 ```
 
-You can add a default list partition named `pDef`to the table as follows:
+You can add a default list partition named `pDef` to the table as follows:
 
 ```sql
 ALTER TABLE t ADD PARTITION (PARTITION pDef DEFAULT);
@@ -409,7 +409,7 @@ PARTITION BY LIST (store_id) (
 );
 ```
 
-When [`tidb_enable_default_list_partition`](/system-variables.md#tidb_enable_default_list_partition-new-in-v730) is `OFF`, List partitioning does not have a default partition to store all values that do not belong to other partitions. Therefore, all expected values of a partition expression must be included in the `PARTITION ... VALUES IN (...)` clause. If the value to be inserted in an `INSERT` statement does not match the column value set of any partition, the statement fails to execute and an error is reported. See the following example:
+When [`tidb_enable_default_list_partition`](/system-variables.md#tidb_enable_default_list_partition-new-in-v730) is `OFF`, List partition table does not support a default partition to store all values that do not belong to other partitions. Therefore, all expected values of a partition expression must be included in the `PARTITION ... VALUES IN (...)` clause. If the value to be inserted in an `INSERT` statement does not match the column value set of any partition, the statement fails to execute and an error is reported. See the following example:
 
 ```sql
 CREATE TABLE t (
