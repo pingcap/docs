@@ -192,11 +192,6 @@ TiDB Cloud works with almost all workloads that TiDB supports, but there are som
 | `tidb_slow_log_threshold` | Not supported [^4] | Not supported [^4] |
 | `tidb_slow_txn_log_threshold` | Not supported [^4] | Not supported [^4] |
 | `tidb_stats_load_sync_wait` | No limitation | Read-only [^11] |
-| `tidb_stmt_summary_enable_persistent` | No limitation | Read-only [^11] |
-| `tidb_stmt_summary_file_max_backups` | No limitation | Read-only [^11] |
-| `tidb_stmt_summary_file_max_days` | No limitation | Read-only [^11] |
-| `tidb_stmt_summary_file_max_size` | No limitation | Read-only [^11] |
-| `tidb_stmt_summary_filename` | No limitation | Read-only [^11] |
 | `tidb_stmt_summary_history_size` | No limitation | Read-only [^11] |
 | `tidb_stmt_summary_internal_query` | No limitation | Read-only [^11] |
 | `tidb_stmt_summary_max_sql_length` | No limitation | Read-only [^11] |
