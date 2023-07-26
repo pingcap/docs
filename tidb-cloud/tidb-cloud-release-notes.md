@@ -23,7 +23,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
     - Use the `PUT` method to update or modify data, similar to an `UPDATE` statement.
     - Use the `DELETE` method to delete data, similar to a `DELETE` statement.
 
-    For more information, see [Configure properties](/tidb-cloud/data-service-manage-endpoint.md#configure-properties).
+  For more information, see [Configure properties](/tidb-cloud/data-service-manage-endpoint.md#configure-properties).
 
 - Support **Batch Operation** for `POST`, `PUT`, and `DELETE` request methods in TiDB Cloud [Data Service](https://tidbcloud.com/console/data-service).
 
