@@ -358,11 +358,11 @@ UPDATE t SET a="3" WHERE a="2";
 
 ### When change events on an invalid index column and change events on a valid index column both contain new and old values, the Avro format of Kafka Sink cannot correctly output the old value
 
-In the Avro implementation, Kafka message values only contain current column values. Therefore, old values cannot be output correctly when an event contains both new and old values. To output the old value, you can disable the Old Value feature to get the split delete and insert events.
+In the Avro implementation, Kafka message values only contain the current column values. Therefore, old values cannot be output correctly when an event contains both new and old values. To output the old value, you can disable the Old Value feature to get the split delete and insert events.
 
 ### When change events on an invalid index column and change events on a valid index column both contain new and old values, the CSV format of Cloud Storage Sink cannot correctly output the old value
 
-Because the number of columns in a CSV file is fixed, old values cannot be output correctly when an event contains both new and old values. To output the old value, you can use the Canal-JSON format.
+Because a CSV file has a fixed number of columns, old values cannot be output correctly when an event contains both new and old values. To output the old value, you can use the Canal-JSON format.
 
 ## Why can't I use the `cdc cli` command to operate a TiCDC cluster deployed by TiDB Operator?
 
