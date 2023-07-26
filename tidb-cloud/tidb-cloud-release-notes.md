@@ -8,6 +8,29 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2023.
 
+## July 26, 2023
+
+**General changes**
+
+- Introduce a powerful feature in TiDB Cloud [Data Service](https://tidbcloud.com/console/data-service): Automatic endpoint generation.
+
+    Developers can now effortlessly create HTTP endpoints with minimal clicks and configurations. Eliminate repetitive boilerplate code, simplify and accelerate endpoint creation, and reduce potential errors.
+
+    For more information on how to use this feature, see [Generate an endpoint automatically](/tidb-cloud/data-service-manage-endpoint.md#generate-an-endpoint-automatically).
+
+- Support `PUT` and `DELETE` request methods for endpoints in TiDB Cloud [Data Service](https://tidbcloud.com/console/data-service).
+
+    - Use the `PUT` method to update or modify data, similar to an `UPDATE` statement.
+    - Use the `DELETE` method to delete data, similar to a `DELETE` statement.
+
+  For more information, see [Configure properties](/tidb-cloud/data-service-manage-endpoint.md#configure-properties).
+
+- Support **Batch Operation** for `POST`, `PUT`, and `DELETE` request methods in TiDB Cloud [Data Service](https://tidbcloud.com/console/data-service).
+
+    When **Batch Operation** is enabled for an endpoint, you gain the ability to perform operations on multiple rows in a single request. For instance, you can insert multiple rows of data using a single `POST` request.
+
+    For more information, see [Advanced properties](/tidb-cloud/data-service-manage-endpoint.md#advanced-properties).
+
 ## July 25, 2023
 
 **General changes**
