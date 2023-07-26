@@ -42,7 +42,7 @@ In TiDB Cloud Data Service, you can generate one or multiple endpoints automatic
 
     2. Select at least one HTTP operation (such as `GET Retrieve`, `POST Create`, and `PUT Update`) for the endpoint to be generated.
 
-        For each operation you selected, TiDB Cloud Data Service will generate a corresponding endpoint. If you have selected a batch operation (such as `POST Batch Create`), the generated endpoint allows you to operate on multiple rows in a single request.
+        For each operation you selected, TiDB Cloud Data Service will generate a corresponding endpoint. If you have selected a batch operation (such as `POST Batch Create`), the generated endpoint lets you operate on multiple rows in a single request.
 
     3. (Optional) Configure a timeout and tag for the operations. All the generated endpoints will automatically inherit the configured properties, which can be modified later as needed.
     4. (Optional) The **Auto-Deploy Endpoint** option (disabled by default) controls whether to enable the direct deployment of the generated endpoints. When it is enabled, the draft review process is skipped, and the generated endpoints are deployed immediately without further manual review or approval.
