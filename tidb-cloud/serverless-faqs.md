@@ -63,6 +63,10 @@ To get the RU consumption of individual SQL statements, you can use the [`EXPLAI
 
 To get the RUs and storage used by your cluster, view the **Usage this month** pane on your cluster overview page. With your past resource usage data and real-time resource usage in this pane, you can track your cluster's resource consumption and estimate a reasonable spending limit. If the free quota cannot meet your requirement, you can edit the spending limit easily. For more information, see [Manage Spending Limit for TiDB Serverless clusters](/tidb-cloud/manage-serverless-spend-limit.md).
 
+### How can I optimize my workload to minimize the number of RUs consumed?
+
+Ensure that your queries have been carefully optimized for optimal performance by following the [Optimizing SQL Performance](/develop/dev-guide-optimize-sql-overview.md) guidelines. In addition, minimizing the amount of egress traffic is also crucial for reducing RUs consumption. To achieve this, it is recommended to return only the required columns and rows in your query, which in turn helps reduce network egress traffic. This can be achieved by carefully selecting and filtering the columns and rows to be returned, thereby optimizing network utilization.
+
 ### How storage is metered for TiDB Serverless？
 
 The storage is metered based on the amount of data stored in a TiDB Serverless cluster, measured in GiB per month. It is calculated by multiplying the total size of all the tables and indexes (excluding data compression or replicas) with the number of hours the data is stored in that month.
