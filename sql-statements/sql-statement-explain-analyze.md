@@ -292,7 +292,7 @@ RU:273.842670
 
 > **Note:**
 >
-> This value shows the actual RU produced by this call. The RU consumption might vary if the same SQL statement repeats, as the amount of RU is affected by cache layer (for example, [coprocessor cache](/coprocessor-cache.md)).
+> This value shows the actual RU consumed by this execution. The same SQL might consume different amounts of RUs each time it is executed due to the effects of caching (for example, [coprocessor cache](/coprocessor-cache.md)).
 
 ### Other common execution information
 
