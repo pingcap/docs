@@ -97,7 +97,12 @@ For the complete configuration file, refer to [the configuration file and comman
 
 Conflicting data refers to two or more records with the same PK/UK column data. When the data source contains conflicting data and conflict detection feature is not turned on, the actual number of rows in the table is different from the total number of rows returned by the query using unique index.
 
-Conflict detection has two modes, detection before importing (controlled by `conflict` configuration) and detection after importing (the old behaviour, controlled by `tikv-importer.duplicate-resolution` configuration). Currently the two modes cannot be used at the same time.
+There are two methods for conflict detection:
+
+- Detection before importing, controlled by `conflict` configuration
+- Detection after importing, the old behaviour, controlled by `tikv-importer.duplicate-resolution` configuration
+
+ Currently the two modes cannot be used at the same time.
 
 ### Detection before importing
 
@@ -109,20 +114,16 @@ Detection before importing will be enabled when configuration `conflict.strategy
 | `ignore` | Keeping existing data and ignoring new data. | `INSERT IGNORE INTO ...` |
 | `error` | Pausing the import and reporting an error. | `INSERT INTO ...` |
 
-Please note that due to the internal implementation and limitation of TiDB Lightning the result of conflict detection may be different with the result of SQL-based import.
+Note that due to the internal implementation and limitation of TiDB Lightning, the result of conflict detection might be different from the result of SQL-based import.
 
 When the strategy is `error`, conflicting data will fail the import task. When the strategy is `replace` or `ignore`, conflicting data will be treated as [conflict error](/tidb-lightning/tidb-lightning-error-resolution.md#conflict-error), with `conflict.threshold` configurated the import task can tolerate the specified number of conflict error. The default value is 9223372036854775807. For futher details please see [error resolution](/tidb-lightning/tidb-lightning-error-resolution.md).
 
 Detection before importing has the following limitations:
 
-- Before importing, it reads all data and encodes it to detect potentially conflicting data. Temporary files are stored using `tikv-importer.sorted-kv-dir` during the detection process. The results are retained for import phase after the detection is complete. Therefore, there is additional overhead in terms of time consumption, disk space usage, and API requests to read the data.
-- It can only be done on a single node and cannot be applied to parallel import scenarios.
+- Before importing, it reads all data and encodes it to detect potentially conflicting data. Temporary files are stored using `tikv-importer.sorted-kv-dir` during the detection process. The results are retained for import phase after the detection is complete. Therefore, there is additional overhead for time consumption, disk space usage, and API requests to read the data.
+- It only applies to a single node and cannot be applied to parallel import scenarios.
 
-Compared with detection after importing, it has the following advantages:
-
-- If the original data has a large amount of conflicting data, the total import time is less when use detection before importing.
-
-We recommend using detection before importing in non-parallel import tasks when the data is known to contain conflicting data and the local disk space is sufficient.
+Compared with detection after importing, if the original data has a large amount of conflicting data, using detection before importing can take less import time. It is recommended that you use detection before importing in non-parallel import tasks when the data contains conflicting data and there is sufficient local disk space.
 
 ### Detection after importing (the old behaviour)
 
