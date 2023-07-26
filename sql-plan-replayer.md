@@ -33,9 +33,9 @@ Based on `sql-statement`, TiDB sorts out and exports the following on-site infor
 - The result of `EXPLAIN [ANALYZE] sql-statement`
 - Some internal procudures of query optimization
 
-If historical statistics are [enabled](/system-variables.md#tidb_enable_historical_stats), you can specify a time in the `PLAN REPLAYER` statement to get the historical statistics at the corresponding time. You can directly specify the time and date, or specify a timestamp here. When the time is specified, TiDB will look for the historical statistics before the specified time, and export the latest one among them.
+If historical statistics are [enabled](/system-variables.md#tidb_enable_historical_stats), you can specify a time in the `PLAN REPLAYER` statement to get the historical statistics for the corresponding time. You can directly specify a time and date or specify a timestamp. TiDB looks for the historical statistics before the specified time and exports the latest one among them.
 
-If there are no historical statistics that satisfy the specified time, TiDB will export the latest statistics, as if the time is not specified, and also print error messages in the `errors.txt` of the output `ZIP` file.
+If there are no historical statistics that satisfy the specified time, TiDB exports the latest statistics, which is consistent with the behavior when no time is specified. In addition, TiDB prints the error messages in the `errors.txt` file within the exported `ZIP` file.
 
 > **Note:**
 >
