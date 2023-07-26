@@ -15,7 +15,7 @@ Data Service returns an HTTP response with a JSON body.
 
 > **Note:**
 >
-> When you call an endpoint with multiple SQL statements, Data Service can execute the statements one by one, but it only returns the HTTP response of the last statement.
+> When you call an endpoint with multiple SQL statements, Data Service executes the statements one by one, but it only returns the execution result of the last statement in the HTTP response.
 
 The response body contains the following fields:
 
