@@ -36,7 +36,7 @@ max-days = 28
 max-backups = 14
 
 # Whether to enable the diagnose log. The default value is false, that is, only the logs related to the import will be output, and the logs of other dependent components will not be output.
-# When you set it to true to enable it, both the logs related to the import and the logs of other components that TiDB Lightning depends on will be output, and GRPC debug will be enabled, which can be used for diagnosis.
+# When you set it to true to enable it, both the logs related to the import and the logs of other dependent components will be output, and GRPC debug will be enabled, which can be used for diagnosis.
 # This parameter is introduced in v7.3.0.
 enable-diagnose-logs = false
 ```
