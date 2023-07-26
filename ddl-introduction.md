@@ -180,4 +180,4 @@ When TiDB is adding an index, the phase of backfilling data will cause read and 
 
 ## Common questions
 
-For common questions about DDL execution, see [SQL FAQ - DDL execution](/faq/sql-faq.md#ddl-execution).
+For common questions about DDL execution, see [SQL FAQ - DDL execution](https://docs.pingcap.com/tidb/stable/sql-faq).
