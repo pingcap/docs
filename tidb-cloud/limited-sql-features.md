@@ -28,7 +28,7 @@ TiDB Cloud works with almost all workloads that TiDB supports, but there are som
 | Statement | TiDB Dedicated | TiDB Serverless |
 |:-|:-|:-|
 | `ALTER RESOURCE GROUP` | Supported | Not supported [^2] |
-| `CALIBRATE RESOURCE` | Supported | Not supported [^2] |
+| `CALIBRATE RESOURCE` | Not supported | Not supported [^2] |
 | `CREATE RESOURCE GROUP` | Supported | Not supported [^2] |
 | `DROP RESOURCE GROUP` | Supported | Not supported [^2] |
 | `SET RESOURCE GROUP` | Supported | Not supported [^2] |
