@@ -57,7 +57,7 @@ Compared with the previous LTS 6.5.0, 7.1.0 not only includes new features, impr
   </tr>
   <tr>
     <td rowspan="3">SQL</td>
-    <td><a href="https://docs.pingcap.com/tidb/v7.1/sql-statement-create-index#multi-valued-index" target="_blank">Multi-valued indexes</a> (GA)</td>
+    <td><a href="https://docs.pingcap.com/tidb/v7.1/sql-statement-create-index#multi-valued-indexes" target="_blank">Multi-valued indexes</a> (GA)</td>
     <td>Support MySQL-compatible multi-valued indexes and enhance the JSON type to improve compatibility with MySQL 8.0. This feature improves the efficiency of membership checks on multi-valued columns.</td>
   </tr>
   <tr>

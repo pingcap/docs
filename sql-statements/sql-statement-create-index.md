@@ -327,7 +327,7 @@ mysql> INSERT INTO customers VALUES (1, 'pingcap', '{"zipcode": [1]}');
 Query OK, 1 row affected (0.00 sec)
 ```
 
-### Use a multi-valued index
+### Use multi-valued indexes
 
 See [Index Selection - Use multi-valued indexes](/choose-index.md#use-multi-valued-indexes) for more details.
 
