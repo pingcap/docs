@@ -53,7 +53,7 @@ For the complete configuration file, refer to [TiDB Lightning Configuration](/ti
 
 ## Conflict detection
 
-Conflicting data refers to two or more records with the same data in the PK or UK column. In the logical import mode, you can configure the strategy for resolving conflicting data by setting the `conflict.strategy` configuration item. Based on the strategy, TiDB Lightning imports data with different SQL statements.
+Conflicting data refers to two or more records with the same data in the PK or UK column. In the logical import mode, you can configure the strategy for resolving conflicting data by setting the [`conflict.strategy`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task) configuration item. Based on the strategy, TiDB Lightning imports data with different SQL statements.
 
 | Strategy | Default behavior of conflicting data | The corresponding SQL statement |
 | :-- | :-- | :-- |

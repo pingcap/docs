@@ -7,12 +7,14 @@ summary: Learn how to resolve type conversion and duplication errors during data
 
 Starting from v5.4.0, you can configure TiDB Lightning to skip errors like invalid type conversion and unique key conflicts, and to continue the data processing as if those wrong row data does not exist. A report will be generated for you to read and manually fix errors afterward. This is ideal for importing from a slightly dirty data source, where locating the errors manually is difficult and restarting TiDB Lightning on every encounter is costly.
 
-This document introduces related error kinds and how to query the found errors of error resolution feature. At the end of this document, an example is provided. Below configuration items are referred in this page.
+This document introduces error types and how to query the errors. At the end of this document, an example is provided. The following configuration items are involved:
 
 - The threshold or type error `lightning.max-error`
 - Configurations that related to conflicting data `conflict.strategy`、`conflict.threshold`、`conflict.max-record-rows`
 - A duplication resolution algorithm that can only be used in physical import `tikv-importer.duplicate-resolution`
 - The location of recording tables `lightning.task-info-schema-name`
+
+For more information, see [TiDB Lightning (Task)](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task).
 
 ## Type error
 
@@ -38,14 +40,14 @@ The above configuration covers the following errors:
 * Column count mismatch. The number of values in the row does not match the number of columns of the table.
 * Any other SQL errors.
 
-The following errors are always fatal, and cannot be skipped by changing `max-error`:
+The following errors are always fatal, and cannot be skipped by changing `lightning.max-error`:
 
 * Syntax error (such as unclosed quotation marks) in the original CSV, SQL or Parquet file.
 * I/O, network or system permission errors.
 
-## Conflict error
+## Conflict errors
 
-You can use the `conflict.threshold` configuration to increase the tolerance of errors related to data conflict. If this configuration is set to *N*, TiDB Lightning allows and skips up to *N* conflict errors from the data source before it exists. The default value `9223372036854775807` means that almost all error is tolerated.
+You can use the [`conflict.threshold`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task) configuration to increase the tolerance of errors related to data conflict. If this configuration is set to *N*, TiDB Lightning allows and skips up to *N* conflict errors from the data source before it exists. The default value `9223372036854775807` means that almost all errors are tolerated.
 
 These errors are recorded in a table. After the import is completed, you can view the errors in the database and process them manually. For more information, see [Error Report](#error-report)
 
@@ -109,17 +111,17 @@ CREATE TABLE conflict_records (
     path        varchar(2048) NOT NULL,
     offset      bigint NOT NULL,
     error           text NOT NULL,
-    row_id        bigint NOT NULL COMMENT 'the row id of the conflicted row',
-    row_data    text NOT NULL COMMENT 'the row data of the conflicted row',
+    row_id        bigint NOT NULL COMMENT 'the row id of the conflicting row',
+    row_data    text NOT NULL COMMENT 'the row data of the conflicting row',
     KEY (task_id, table_name)
 );
 ```
 
-**type_error_v1** records all [type errors](#type-error) managed by the `lightning.max-error` configuration. There is one row per error.
+`type_error_v1` records all [type errors](#type-error) managed by the `lightning.max-error` configuration. There is one row for each error.
 
-**conflict_error_v1** records all unique/primary key conflict managed by `tikv-importer.duplicate-resolution` in the Local-backend. There are 2 rows per pair of conflicts.
+`conflict_error_v1` records all unique and primary key conflicts managed by `tikv-importer.duplicate-resolution` in the physical import mode. There are two rows for each pair of conflicts.
 
-**conflict_records** records all unique/primary key conflict managed by `conflict` configuration group in TiDB-backend and Local-backend. There is one row per error.
+`conflict_records` records all unique and primary key conflicts managed by the `conflict` configuration group in logical import mode and physical import mode. There is one row for each error.
 
 | Column       | Syntax | Type | Conflict | Description                                                                                                                         |
 | ------------ | ------ | ---- | -------- | ----------------------------------------------------------------------------------------------------------------------------------- |

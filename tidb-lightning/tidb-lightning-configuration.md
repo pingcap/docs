@@ -124,14 +124,14 @@ driver = "file"
 
 [conflict]
 # The strategy to handle conflicting data
-# - "": No actions, lightning may exit by error in following steps.
-# - "error": Conflicting data will fail the import task.
-# - "replace": Try to keep latest data when meet conflicting data.
-# - "ignore": Try to keep oldest data when meet conflicting data.
+# - "": no actions. TiDB Lightning might exit due to an error.
+# - "error": the import task fails if there is conflicting data.
+# - "replace": keep the new data when detecting conflicting data.
+# - "ignore": keep the old data when detecting conflicting data.
 strategy = ""
-# When `strategy` is "replace" or "ignore", controls the maximum tolerable conflict count. Only can be set when `strategy` is "replace" or "ignore". The default value is 9223372036854775807
+# When `strategy` is "replace" or "ignore", this parameter controls the upper limit of the conflicting data. You can set it only when `strategy` is "replace" or "ignore". The default value is 9223372036854775807, which means that almost all errors are tolerated.
 # threshold = 9223372036854775807
-# Controls the maximum record count in conflict_record table. The default value is 100
+# Controls the maximum number of rows in the `conflict_record` table. The default value is 100.
 # max-record-rows = 100
 
 [tikv-importer]
