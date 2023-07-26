@@ -24,7 +24,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.3/quick-start-with-
 <tbody>
   <tr>
     <td>Scalability and Performance</td>
-    <td><a href="https://docs.pingcap.com/tidb/stable/partitioned-raft-kv#partitioned-raft-kv">Partitioned Raft KV GA.</a></td>
+    <td><a href="https://docs.pingcap.com/tidb/stable/partitioned-raft-kv#partitioned-raft-kv">Partitioned Raft KV GA</a></td>
     <td>Every key region will store its key-value data in its own isolated LSM tree (RocksDB).
 This drastically improves write performance, reduces I/O amplication, speeds up scale-in/-out operations, and is a huge step toward TiDB handling beyond PB-scale workloads per cluster.
     </td>
