@@ -24,7 +24,7 @@ Request quotas are rate-limited as follows:
 - 100 requests per minute (rpm) per API key
 - 100 requests per day for each Chat2Query Data App
 
-If you exceed the rate limit, the API returns a `429` error. For an increase in quota, you can [submit a request](https://support.pingcap.com/hc/en-us/requests/new?ticket_form_id=7800003722519) to our support team.
+If you exceed the rate limit, the API returns a `429` error. To increase your quota, you can [submit a request](https://support.pingcap.com/hc/en-us/requests/new?ticket_form_id=7800003722519) to our support team.
 
 ## Manage API keys
 
