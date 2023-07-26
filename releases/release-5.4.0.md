@@ -46,31 +46,31 @@ In v5.4, the key new features or improvements are as follows:
 
 ### Configuration file parameters
 
-|  Configuration file    |  Configuration |  Change type  | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
-| :---------- | :----------- | :----------- |:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| TiDB | [`stats-load-concurrency`](/tidb-configuration-file.md#stats-load-concurrency-new-in-v540) | Newly added | Controls the maximum number of columns that the TiDB synchronously loading statistics feature can process concurrently. The default value is `5`.                                                                                                                                                                                                                                                                                                                                                                         |
-| TiDB | [`stats-load-queue-size`](/tidb-configuration-file.md#stats-load-queue-size-new-in-v540)   | Newly added | Controls the maximum number of column requests that the TiDB synchronously loading statistics feature can cache. The default value is`1000`.                                                                                                                                                                                                                                                                                                                                                                              |
-| TiKV | [`snap-generator-pool-size`](/tikv-configuration-file.md#snap-generator-pool-size-new-in-v540) | Newly added | The size of the `snap-generator` thread pool. The default value is `2`.                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-| TiKV | `log.file.max-size`, `log.file.max-days`, `log.file.max-backups` | Newly added  | For details, see [TiKV Configuration File - `log.file`](/tikv-configuration-file.md#logfile-new-in-v540).                                                                                                                                                                                                                                                                                                                                                                                                                 |
-| TiKV | `raft-engine` | Newly added | Includes `enable`, `dir`, `batch-compression-threshold`, `bytes-per-sync`, `target-file-size`, `purge-threshold`, `recovery-mode`, `recovery-read-block-size`, `recovery-read-block-size`, and `recovery-threads`. For details, see [TiKV Configuration File - `raft-engine`](/tikv-configuration-file.md#raft-engine).                                                                                                                                                                                                   |
-| TiKV | [`backup.enable-auto-tune`](/tikv-configuration-file.md#enable-auto-tune-new-in-v540) | Newly added | In v5.3.0, the default value is `false`. Since v5.4.0, the default value is changed to `true`. This parameter controls whether to limit the resources used by backup tasks to reduce the impact on the cluster when the cluster resource utilization is high. In the default configuration, the speed of backup tasks might slow down.                                                                                                                                                                                    |
+|  Configuration file    |  Configuration |  Change type  | Description    |
+| :---------- | :----------- | :----------- | :----------- |
+| TiDB | [`stats-load-concurrency`](/tidb-configuration-file.md#stats-load-concurrency-new-in-v540) | Newly added |  Controls the maximum number of columns that the TiDB synchronously loading statistics feature can process concurrently. The default value is `5`.  |
+| TiDB | [`stats-load-queue-size`](/tidb-configuration-file.md#stats-load-queue-size-new-in-v540)   | Newly added |  Controls the maximum number of column requests that the TiDB synchronously loading statistics feature can cache. The default value is`1000`.  |
+| TiKV | [`snap-generator-pool-size`](/tikv-configuration-file.md#snap-generator-pool-size-new-in-v540) | Newly added | The size of the `snap-generator` thread pool. The default value is `2`. |
+| TiKV | `log.file.max-size`, `log.file.max-days`, `log.file.max-backups` | Newly added  | For details, see [TiKV Configuration File - `log.file`](/tikv-configuration-file.md#logfile-new-in-v540). |
+| TiKV | `raft-engine` | Newly added | Includes `enable`, `dir`, `batch-compression-threshold`, `bytes-per-sync`, `target-file-size`, `purge-threshold`, `recovery-mode`, `recovery-read-block-size`, `recovery-read-block-size`, and `recovery-threads`. For details, see [TiKV Configuration File - `raft-engine`](/tikv-configuration-file.md#raft-engine).|
+| TiKV | [`backup.enable-auto-tune`](/tikv-configuration-file.md#enable-auto-tune-new-in-v540) | Newly added | In v5.3.0, the default value is `false`. Since v5.4.0, the default value is changed to `true`. This parameter controls whether to limit the resources used by backup tasks to reduce the impact on the cluster when the cluster resource utilization is high. In the default configuration, the speed of backup tasks might slow down. |
 | TiKV | `log-level`, `log-format`, `log-file`, `log-rotation-size` | Modified | The names of TiKV log parameters are replaced with the names that are consistent with TiDB log parameters, which are `log.level`, `log.format`, `log.file.filename`, and `log.enable-timestamp`. If you only set the old parameters, and their values are set to non-default values, the old parameters remain compatible with the new parameters. If both old and new parameters are set, the new parameters take effect. For details, see [TiKV Configuration File - log](/tikv-configuration-file.md#log-new-in-v540). |
-| TiKV  |  `log-rotation-timespan`  | Deleted | The timespan between log rotations. After this timespan passes, a log file is rotated, which means a timestamp is appended to the file name of the current log file, and a new log file is created.                                                                                                                                                                                                                                                                                                                       |
-| TiKV | `allow-remove-leader` | Deleted  | Determines whether to allow deleting the main switch.                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| TiKV | `raft-msg-flush-interval` | Deleted | Determines the interval at which Raft messages are sent in batches. The Raft messages are sent in batches at every interval specified by this configuration item.                                                                                                                                                                                                                                                                                                                                                         |
-| PD | [`log.level`](/pd-configuration-file.md#level) | Modified | The default value is changed from "INFO" to "info", guaranteed to be case-insensitive.                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| TiFlash | [`profile.default.enable_elastic_threadpool`](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file) | Newly added  | Determines whether to enable or disable the elastic thread pool function. Enabling this configuration item can significantly improve TiFlash CPU utilization in high concurrency scenarios. The default value is `false`.                                                                                                                                                                                                                                                                                                 |
-| TiFlash | [`storage.format_version`](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file) | Newly added | Specifies the version of DTFile. The default value is `2`, under which hashes are embedded in the data file. You can also set the value to `3`. When it is `3`, the data file contains metadata and token data checksum, and supports multiple hash algorithms.                                                                                                                                                                                                                                                           |
-| TiFlash | [`logger.count`](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file) | Modified | The default value is changed to `10`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| TiFlash | [`status.metrics_port`](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file) | Modified | The default value is changed to `8234`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-| TiFlash | [`raftstore.apply-pool-size`](/tiflash/tiflash-configuration.md#configure-the-tiflash-learnertoml-file) | Newly added | The allowable number of threads in the pool that flushes Raft data to storage. The default value is `4`.                                                                                                                                                                                                                                                                                                                                                                                                                  |
-| TiFlash | [`raftstore.store-pool-size`](/tiflash/tiflash-configuration.md#configure-the-tiflash-learnertoml-file) | Newly added | The allowable number of threads that process Raft, which is the size of the Raftstore thread pool. The default value is `4`.                                                                                                                                                                                                                                                                                                                                                                                              |
-| TiDB Data Migration (DM)  | [`collation_compatible`](/dm/task-configuration-file-full.md#task-configuration-file-template-advanced) | Newly added | The mode to sync the default collation in `CREATE` SQL statements. The value options are "loose" (by default) and "strict".                                                                                                                                                                                                                                                                                                                                                                                               |
-| TiCDC | `max-message-bytes` | Modified| Change the default value of `max-message-bytes` in Kafka sink to `104857601` (10MB)                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| TiCDC | `partition-num`     | Modified | Change the default value of `partition-num` in Kafka Sink from `4` to `3`. It makes TiCDC send messages to Kafaka partitions more evenly.                                                                                                                                                                                                                                                                                                                                                                                 |
-| TiDB Lightning | `meta-schema-name` | Modified | Specifies the schema name for the metadata in the target TiDB. From v5.4.0, this schema is created only if you have enabled [parallel import](/tidb-lightning/tidb-lightning-distributed-import.md) (the corresponding parameter is `tikv-importer.incremental-import = true`).                                                                                                                                                                                                                                           |
-| TiDB Lightning | `task-info-schema-name` |  Newly added  | Specifies the name of the database where duplicated data is stored when TiDB Lightning detects conflicts. By default, the value is "lightning_task_info". Specify this parameter only if you have enabled the "duplicate-resolution" feature.                                                                                                                                                                                                                                                                             |
-| TiDB Lightning | `incremental-import` | Newly added | Determines whether to allow importing data to tables where data already exists. The default value is `false`.                                                                                                                                                                                                                                                                                                                                                                                                             |
+| TiKV  |  `log-rotation-timespan`  | Deleted |  The timespan between log rotations. After this timespan passes, a log file is rotated, which means a timestamp is appended to the file name of the current log file, and a new log file is created. |
+| TiKV | `allow-remove-leader` | Deleted  | Determines whether to allow deleting the main switch. |
+| TiKV | `raft-msg-flush-interval` | Deleted | Determines the interval at which Raft messages are sent in batches. The Raft messages are sent in batches at every interval specified by this configuration item. |
+| PD | [`log.level`](/pd-configuration-file.md#level) | Modified | The default value is changed from "INFO" to "info", guaranteed to be case-insensitive. |
+| TiFlash | [`profile.default.enable_elastic_threadpool`](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file) | Newly added  |  Determines whether to enable or disable the elastic thread pool function. Enabling this configuration item can significantly improve TiFlash CPU utilization in high concurrency scenarios. The default value is `false`. |
+| TiFlash | [`storage.format_version`](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file) | Newly added | Specifies the version of DTFile. The default value is `2`, under which hashes are embedded in the data file. You can also set the value to `3`. When it is `3`, the data file contains metadata and token data checksum, and supports multiple hash algorithms. |
+| TiFlash | [`logger.count`](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file) | Modified | The default value is changed to `10`. |
+| TiFlash | [`status.metrics_port`](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file) | Modified | The default value is changed to `8234`. |
+| TiFlash | [`raftstore.apply-pool-size`](/tiflash/tiflash-configuration.md#configure-the-tiflash-learnertoml-file) | Newly added | The allowable number of threads in the pool that flushes Raft data to storage. The default value is `4`. |
+| TiFlash | [`raftstore.store-pool-size`](/tiflash/tiflash-configuration.md#configure-the-tiflash-learnertoml-file) | Newly added | The allowable number of threads that process Raft, which is the size of the Raftstore thread pool. The default value is `4`. |
+| TiDB Data Migration (DM)  | [`collation_compatible`](/dm/task-configuration-file-full.md#task-configuration-file-template-advanced) | Newly added | The mode to sync the default collation in `CREATE` SQL statements. The value options are "loose" (by default) and "strict".  |
+| TiCDC | `max-message-bytes` | Modified| Change the default value of `max-message-bytes` in Kafka sink to `104857601` (10MB)  |
+| TiCDC | `partition-num`     | Modified | Change the default value of `partition-num` in Kafka Sink from `4` to `3`. It makes TiCDC send messages to Kafaka partitions more evenly. |
+| TiDB Lightning | `meta-schema-name` | Modified | Specifies the schema name for the metadata in the target TiDB. From v5.4.0, this schema is created only if you have enabled [parallel import](/tidb-lightning/tidb-lightning-distributed-import.md) (the corresponding parameter is `tikv-importer.incremental-import = true`). |
+| TiDB Lightning | `task-info-schema-name` |  Newly added  | Specifies the name of the database where duplicated data is stored when TiDB Lightning detects conflicts. By default, the value is "lightning_task_info". Specify this parameter only if you have enabled the "duplicate-resolution" feature. |
+| TiDB Lightning | `incremental-import` | Newly added | Determines whether to allow importing data to tables where data already exists. The default value is `false`. |
 
 ### Others
 
@@ -92,27 +92,27 @@ In v5.4, the key new features or improvements are as follows:
 
 - **TiDB supports the GBK character set since v5.4.0**
 
-    Before v5.4.0, TiDB supports `ascii`, `binary`, `latin1`, `utf8`, and `utf8mb4` character sets.
+  Before v5.4.0, TiDB supports `ascii`, `binary`, `latin1`, `utf8`, and `utf8mb4` character sets.
 
-    To better support Chinese users, TiDB supports the GBK character set since v5.4.0. After enabling the [`new_collations_enabled_on_first_bootstrap`](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap) option in the TiDB configuration file when initializing a TiDB cluster for the first time, the TiDB GBK character set supports both `gbk_bin` and `gbk_chinese_ci` collations.
+  To better support Chinese users, TiDB supports the GBK character set since v5.4.0. After enabling the [`new_collations_enabled_on_first_bootstrap`](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap) option in the TiDB configuration file when initializing a TiDB cluster for the first time, the TiDB GBK character set supports both `gbk_bin` and `gbk_chinese_ci` collations.
 
-    When using the GBK character set, you need to pay attention to the compatibility restrictions. For details, see [Character Set and Collation - GBK](/character-set-gbk.md).
+  When using the GBK character set, you need to pay attention to the compatibility restrictions. For details, see [Character Set and Collation - GBK](/character-set-gbk.md).
 
 ### Security
 
 - **TiSpark supports user authentication and authorization**
 
-    Since TiSpark 2.5.0, TiSpark supports both database user authentication and read/write authorization at a database or table level. After enabling this feature, you can prevent the business from running unauthorized batch tasks such as draws to obtain data, which improves the stability and data security of online clusters.
+  Since TiSpark 2.5.0, TiSpark supports both database user authentication and read/write authorization at a database or table level. After enabling this feature, you can prevent the business from running unauthorized batch tasks such as draws to obtain data, which improves the stability and data security of online clusters.
 
-    This feature is disabled by default. When it is enabled, if a user operating through TiSpark does not have the needed permissions, the user gets an exception from TiSpark.
+  This feature is disabled by default. When it is enabled, if a user operating through TiSpark does not have the needed permissions, the user gets an exception from TiSpark.
 
-    [User document](/tispark-overview.md#security)
+  [User document](/tispark-overview.md#security)
 
 - **TiUP supports generating an initial password for the root user**
 
-    An `--init` parameter is introduced to the command for starting a cluster. With this parameter, in a TiDB cluster deployed using TiUP, TiUP generates an initial strong password for the database root user. This avoids security risks in using a root user with an empty password and ensures the security of databases.
+  An `--init` parameter is introduced to the command for starting a cluster. With this parameter, in a TiDB cluster deployed using TiUP, TiUP generates an initial strong password for the database root user. This avoids security risks in using a root user with an empty password and ensures the security of databases.
 
-    [User document](/production-deployment-using-tiup.md#step-7-start-a-tidb-cluster)
+  [User document](/production-deployment-using-tiup.md#step-7-start-a-tidb-cluster)
 
 ### Performance
 
@@ -127,114 +127,114 @@ In v5.4, the key new features or improvements are as follows:
     - Improve the efficiency of converting data from row-based storage format to column-based storage format when replicating data from TiKV, which brings 50% improvement in the overall performance of data replication
     - Improve TiFlash performance and stability by tuning the default values of some configuration items. In an HTAP hybrid load, the performance of simple queries on a single table improves up to 20%.
 
-    User documents: [Supported push-down calculations](/tiflash/tiflash-supported-pushdown-calculations.md), [Configure the tiflash.toml file](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file)
+  User documents: [Supported push-down calculations](/tiflash/tiflash-supported-pushdown-calculations.md), [Configure the tiflash.toml file](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file)
 
 - **Read historical data within a specified time range through a session variable**
 
-    TiDB is a multi-replica distributed database based on the Raft consensus algorithm. In face of high-concurrency and high-throughput application scenarios, TiDB can scale out its read performance through follower replicas, separating read and write requests.
+  TiDB is a multi-replica distributed database based on the Raft consensus algorithm. In face of high-concurrency and high-throughput application scenarios, TiDB can scale out its read performance through follower replicas, separating read and write requests.
 
-    For different application scenarios, TiDB provides two modes of follower read: strongly consistent read and weakly consistent history read. The strongly consistent read mode is suitable for application scenarios that require real-time data. However, in this mode, because of the data replication latency between leaders and followers and the reduced throughput, the read request might have high latency, especially for geo-distributed deployments.
+  For different application scenarios, TiDB provides two modes of follower read: strongly consistent read and weakly consistent history read. The strongly consistent read mode is suitable for application scenarios that require real-time data. However, in this mode, because of the data replication latency between leaders and followers and the reduced throughput, the read request might have high latency, especially for geo-distributed deployments.
 
-    For the application scenarios that have less strict requirements on real-time data, the history read mode is recommended. This mode can reduce latency and improve throughput. TiDB currently supports reading historical data by the following methods: Use SQL statements to read data from a time point in the past, or start a read-only transaction based on a time point in the past. Both methods support reading the historical data of a specific point in time or within a specified time range. For details, refer to [Read Historical Data Using the `AS OF TIMESTAMP` Clause](/as-of-timestamp.md).
+  For the application scenarios that have less strict requirements on real-time data, the history read mode is recommended. This mode can reduce latency and improve throughput. TiDB currently supports reading historical data by the following methods: Use SQL statements to read data from a time point in the past, or start a read-only transaction based on a time point in the past. Both methods support reading the historical data of a specific point in time or within a specified time range. For details, refer to [Read Historical Data Using the `AS OF TIMESTAMP` Clause](/as-of-timestamp.md).
 
-    Since v5.4.0, TiDB improves the usability of the history read mode by supporting reading historical data within a specified time range through a session variable. This mode serves low-latency, high-throughput read requests in quasi-real-time scenarios. You can set the variable as follows:
+  Since v5.4.0, TiDB improves the usability of the history read mode by supporting reading historical data within a specified time range through a session variable. This mode serves low-latency, high-throughput read requests in quasi-real-time scenarios. You can set the variable as follows:
 
     ```sql
     set @@tidb_replica_read=leader_and_follower
     set @@tidb_read_staleness="-5"
     ```
 
-    By this setting, TiDB can select the nearest leader or follower node and read the latest historical data within 5 seconds.
+  By this setting, TiDB can select the nearest leader or follower node and read the latest historical data within 5 seconds.
 
-    [User document](/tidb-read-staleness.md)
+  [User document](/tidb-read-staleness.md)
 
 - **GA for Index Merge**
 
-    Index Merge is introduced in TiDB v4.0 as an experimental feature for SQL optimization. This method greatly accelerates condition filtering when a query requires scanning of multiple columns of data. Take the following query as an example. In the `WHERE` statement, if the filtering conditions connected by `OR` have their respective indexes on columns _key1_ and _key2_, the Index Merge feature filters the respective indexes at the same time, merges the query results, and returns the merged result.
+  Index Merge is introduced in TiDB v4.0 as an experimental feature for SQL optimization. This method greatly accelerates condition filtering when a query requires scanning of multiple columns of data. Take the following query as an example. In the `WHERE` statement, if the filtering conditions connected by `OR` have their respective indexes on columns _key1_ and _key2_, the Index Merge feature filters the respective indexes at the same time, merges the query results, and returns the merged result.
 
     ```sql
     SELECT * FROM table WHERE key1 <= 100 OR key2 = 200;
     ```
 
-    Before TiDB v4.0, a query on a table supports using only one index for filtering at one time. If you want to query multiple columns of data, you can enable Index Merge to get the exact query result in a short time by using the indexes in individual columns. Index Merge avoids unnecessary full table scans and does not require establishing a large number of composite indexes.
+  Before TiDB v4.0, a query on a table supports using only one index for filtering at one time. If you want to query multiple columns of data, you can enable Index Merge to get the exact query result in a short time by using the indexes in individual columns. Index Merge avoids unnecessary full table scans and does not require establishing a large number of composite indexes.
 
-    In v5.4.0, Index Merge becomes GA. However, you still need to pay attention to the following restrictions:
+  In v5.4.0, Index Merge becomes GA. However, you still need to pay attention to the following restrictions:
 
     - Index Merge supports only disjunctive normal form (X<sub>1</sub> ⋁ X<sub>2</sub> ⋁ …X<sub>n</sub>). That is, this feature only works when filtering conditions in a `WHERE` clause are connected by `OR`.
 
     - For newly deployed TiDB clusters of v5.4.0 or later, this feature is enabled by default. For v5.4.0 or later TiDB clusters upgraded from earlier versions, this feature inherits the setting before the upgrade and you can change the setting as required (for TiDB clusters earlier than v4.0, this feature does not exist and is disabled by default).
 
-    [User document](/explain-index-merge.md)
+  [User document](/explain-index-merge.md)
 
 - **Support Raft Engine (experimental)**
 
-    Support using [Raft Engine](https://github.com/tikv/raft-engine) as the log storage engine in TiKV. Compared with RocksDB, Raft Engine can reduce TiKV I/O write traffic by up to 40% and CPU usage by 10%, while improving foreground throughput by about 5% and reducing tail latency by 20% under certain loads. In addition, Raft Engine improves the efficiency of log recycling and fixes the issue of log accumulation in extreme conditions.
+  Support using [Raft Engine](https://github.com/tikv/raft-engine) as the log storage engine in TiKV. Compared with RocksDB, Raft Engine can reduce TiKV I/O write traffic by up to 40% and CPU usage by 10%, while improving foreground throughput by about 5% and reducing tail latency by 20% under certain loads. In addition, Raft Engine improves the efficiency of log recycling and fixes the issue of log accumulation in extreme conditions.
 
-    Raft Engine is still an experimental feature and is disabled by default. Note that the data format of Raft Engine in v5.4.0 is not compatible with previous versions. Before upgrading the cluster, you need to make sure that Raft Engine on all TiKV nodes is disabled. It is recommended to use Raft Engine only in v5.4.0 or a later version.
+  Raft Engine is still an experimental feature and is disabled by default. Note that the data format of Raft Engine in v5.4.0 is not compatible with previous versions. Before upgrading the cluster, you need to make sure that Raft Engine on all TiKV nodes is disabled. It is recommended to use Raft Engine only in v5.4.0 or a later version.
 
-    [User document](/tikv-configuration-file.md#raft-engine)
+  [User document](/tikv-configuration-file.md#raft-engine)
 
 - **Support collecting statistics on `PREDICATE COLUMNS` (experimental)**
 
-    In most cases, when executing SQL statements, the optimizer only uses statistics of some columns (such as columns in the `WHERE`, `JOIN`, `ORDER BY`, and `GROUP BY` statements). These used columns are called `PREDICATE COLUMNS`.
+  In most cases, when executing SQL statements, the optimizer only uses statistics of some columns (such as columns in the `WHERE`, `JOIN`, `ORDER BY`, and `GROUP BY` statements). These used columns are called `PREDICATE COLUMNS`.
 
-    Since v5.4.0, you can set the value of the [`tidb_enable_column_tracking`](/system-variables.md#tidb_enable_column_tracking-new-in-v540) system variable to `ON` to enable TiDB to collect `PREDICATE COLUMNS`.
+  Since v5.4.0, you can set the value of the [`tidb_enable_column_tracking`](/system-variables.md#tidb_enable_column_tracking-new-in-v540) system variable to `ON` to enable TiDB to collect `PREDICATE COLUMNS`.
 
-    After the setting, TiDB writes the `PREDICATE COLUMNS` information to the `mysql.column_stats_usage` system table every 100 * [`stats-lease`](/tidb-configuration-file.md#stats-lease). When the query pattern of your business is stable, you can use the `ANALYZE TABLE TableName PREDICATE COLUMNS` syntax to collect statistics on the `PREDICATE COLUMNS` columns only, which can greatly reduce the overhead of collecting statistics.
+  After the setting, TiDB writes the `PREDICATE COLUMNS` information to the `mysql.column_stats_usage` system table every 100 * [`stats-lease`](/tidb-configuration-file.md#stats-lease). When the query pattern of your business is stable, you can use the `ANALYZE TABLE TableName PREDICATE COLUMNS` syntax to collect statistics on the `PREDICATE COLUMNS` columns only, which can greatly reduce the overhead of collecting statistics.
 
-    [User document](/statistics.md#collect-statistics-on-some-columns)
+  [User document](/statistics.md#collect-statistics-on-some-columns)
 
 - **Support synchronously loading statistics (experimental)**
 
-    Since v5.4.0, TiDB introduces the synchronously loading statistics feature. This feature is disabled by default. After enabling the feature, TiDB can synchronously load large-sized statistics (such as histograms, TopN, and Count-Min Sketch statistics) into memory when you execute SQL statements, which improves the completeness of statistics for SQL optimization.
+  Since v5.4.0, TiDB introduces the synchronously loading statistics feature. This feature is disabled by default. After enabling the feature, TiDB can synchronously load large-sized statistics (such as histograms, TopN, and Count-Min Sketch statistics) into memory when you execute SQL statements, which improves the completeness of statistics for SQL optimization.
 
-    [User document](/statistics.md#load-statistics)
+  [User document](/statistics.md#load-statistics)
 
 ### Stability
 
 - **Support persisting ANALYZE configurations**
 
-    Statistics are one type of the basic information that the optimizer refers to when generating execution plans. The accuracy of the statistics directly affects whether the generated execution plans are reasonable. To ensure the accuracy of the statistics, sometimes it is necessary to set different collection configurations for different tables, partitions, and indexes.
+  Statistics are one type of the basic information that the optimizer refers to when generating execution plans. The accuracy of the statistics directly affects whether the generated execution plans are reasonable. To ensure the accuracy of the statistics, sometimes it is necessary to set different collection configurations for different tables, partitions, and indexes.
 
-    Since v5.4.0, TiDB supports persisting some `ANALYZE` configurations. With this feature, the existing configurations can be easily reused for future statistics collection.
+  Since v5.4.0, TiDB supports persisting some `ANALYZE` configurations. With this feature, the existing configurations can be easily reused for future statistics collection.
 
-    The `ANALYZE` configuration persistence feature is enabled by default (the system variable `tidb_analyze_version` is `2` and [`tidb_persist_analyze_options`](/system-variables.md#tidb_persist_analyze_options-new-in-v540) is `ON` by default). You can use this feature to record the persistence configurations specified in the `ANALYZE` statement when executing the statement manually. Once recorded, the next time TiDB automatically updates statistics or you manually collect statistics without specifying these configurations, TiDB will collect statistics according to the recorded configurations.
+  The `ANALYZE` configuration persistence feature is enabled by default (the system variable `tidb_analyze_version` is `2` and [`tidb_persist_analyze_options`](/system-variables.md#tidb_persist_analyze_options-new-in-v540) is `ON` by default). You can use this feature to record the persistence configurations specified in the `ANALYZE` statement when executing the statement manually. Once recorded, the next time TiDB automatically updates statistics or you manually collect statistics without specifying these configurations, TiDB will collect statistics according to the recorded configurations.
 
-    [User document](/statistics.md#persist-analyze-configurations)
+  [User document](/statistics.md#persist-analyze-configurations)
 
 ### High availability and disaster recovery
 
 - **Reduce the impact of backup tasks on the cluster**
 
-    Backup & Restore (BR) introduces the auto-tune feature (enabled by default). This feature can reduce the impact of backup tasks on the cluster by monitoring the cluster resource usage and adjusting the number of threads used by the backup tasks. In some cases, if you increase the cluster hardware resource for backup and enable the auto-tune feature, it can limit the impact of backup tasks on the cluster to 10% or less.
+  Backup & Restore (BR) introduces the auto-tune feature (enabled by default). This feature can reduce the impact of backup tasks on the cluster by monitoring the cluster resource usage and adjusting the number of threads used by the backup tasks. In some cases, if you increase the cluster hardware resource for backup and enable the auto-tune feature, it can limit the impact of backup tasks on the cluster to 10% or less.
 
-   [User document](/br/br-auto-tune.md)
+  [User document](/br/br-auto-tune.md)
 
 - **Support Azure Blob Storage as a target storage for backup**
 
-   Backup & Restore (BR) supports Azure Blob Storage as a remote backup storage. If you deploy TiDB in Azure Cloud, now you can back up the cluster data to the Azure Blob Storage service.
+  Backup & Restore (BR) supports Azure Blob Storage as a remote backup storage. If you deploy TiDB in Azure Cloud, now you can back up the cluster data to the Azure Blob Storage service.
 
-    [User document](/br/backup-and-restore-storages.md)
+  [User document](/br/backup-and-restore-storages.md)
 
 ### Data migration
 
 - **TiDB Lightning introduces a new feature to determine whether to allow importing data to tables with data**
 
-    TiDB Lightning introduces a configuration item`incremental-import`. It determines whether to allow importing data to tables with data. The default value is `false`. When using the parallel import mode, you must set the configuration to `true`.
+  TiDB Lightning introduces a configuration item`incremental-import`. It determines whether to allow importing data to tables with data. The default value is `false`. When using the parallel import mode, you must set the configuration to `true`.
 
-    [User document](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task)
+  [User document](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task)
 
 - **TiDB Lightning introduces the schema name that stores the meta information for parallel import**
 
-    TiDB Lightning introduces the `meta-schema-name` configuration item. In parallel import mode, this parameter specifies the schema name that stores the meta information for each TiDB Lightning instance in the target cluster. By default, the value is "lightning_metadata". The value set for this parameter must be the same for each TiDB Lightning instance that participates in the same parallel import; otherwise, the correctness of the imported data cannot be ensured.
+  TiDB Lightning introduces the `meta-schema-name` configuration item. In parallel import mode, this parameter specifies the schema name that stores the meta information for each TiDB Lightning instance in the target cluster. By default, the value is "lightning_metadata". The value set for this parameter must be the same for each TiDB Lightning instance that participates in the same parallel import; otherwise, the correctness of the imported data cannot be ensured.
 
   [User document](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task)
 
 - **TiDB Lightning introduces duplicate resolution**
 
-    In Local-backend mode, TiDB Lightning outputs duplicated data before the data import is completed, and then removes that duplicated data from the database. You can resolve the duplicated data after the import is completed and select suitable data to insert according to application rules. It is recommended to clean upstream data sources based on duplicated data to avoid data inconsistency caused by duplicated data encountered in the subsequent incremental data migration phase.
+  In Local-backend mode, TiDB Lightning outputs duplicated data before the data import is completed, and then removes that duplicated data from the database. You can resolve the duplicated data after the import is completed and select suitable data to insert according to application rules. It is recommended to clean upstream data sources based on duplicated data to avoid data inconsistency caused by duplicated data encountered in the subsequent incremental data migration phase.
 
-    [User document](/tidb-lightning/tidb-lightning-error-resolution.md)
+  [User document](/tidb-lightning/tidb-lightning-error-resolution.md)
 
 - **Optimize the usage of relay log in TiDB Data Migration (DM)**
 
@@ -246,40 +246,40 @@ In v5.4, the key new features or improvements are as follows:
 
     - Move the storage path of relay log to the DM-worker configuration file.
 
-    [User document](/dm/relay-log.md)
+  [User document](/dm/relay-log.md)
 
 - **Optimize the processing of [collation](/character-set-and-collation.md) in DM**
 
-    Add the `collation_compatible` configuration item. The value options are `loose` (default) and `strict`:
+  Add the `collation_compatible` configuration item. The value options are `loose` (default) and `strict`:
 
     - If your application does not have strict requirements on collation, and the collation of query results can be different between the upstream and downstream, you can use the default `loose` mode to avoid reporting errors.
     - If your application has strict requirements on collation, and the collation must be consistent between the upstream and downstream, you can use the `strict` mode. However, if the downstream does not support the upstream's default collation, the data replication might report errors.
 
-   [User document](/dm/task-configuration-file-full.md#task-configuration-file-template-advanced)
+  [User document](/dm/task-configuration-file-full.md#task-configuration-file-template-advanced)
 
 - **Optimize `transfer source` in DM to support running replication tasks smoothly**
 
-    When the DM-worker nodes have an unbalanced load, the `transfer source` command can be used to manually transfer the configuration of a `source` to another load. After the optimization, the `transfer source` command simplifies the manual operation. You can smoothly transfer the source instead of pausing all related tasks, because DM completes other operations internally.
+  When the DM-worker nodes have an unbalanced load, the `transfer source` command can be used to manually transfer the configuration of a `source` to another load. After the optimization, the `transfer source` command simplifies the manual operation. You can smoothly transfer the source instead of pausing all related tasks, because DM completes other operations internally.
 
 - **DM OpenAPI becomes generally available (GA)**
 
-    DM supports daily management via API, including adding data sources and managing tasks. In v5.4.0, DM OpenAPI becomes GA.
+  DM supports daily management via API, including adding data sources and managing tasks. In v5.4.0, DM OpenAPI becomes GA.
 
-    [User document](/dm/dm-open-api.md)
+  [User document](/dm/dm-open-api.md)
 
 ### Diagnostic efficiency
 
 - **Top SQL (experimental feature)**
 
-    A new experimental feature, Top SQL (disabled by default), is introduced to help you easily find source-consuming queries.
+  A new experimental feature, Top SQL (disabled by default), is introduced to help you easily find source-consuming queries.
 
-    [User document](/dashboard/top-sql.md)
+  [User document](/dashboard/top-sql.md)
 
 ### TiDB data share subscription
 
 - **Optimize the impact of TiCDC on clusters**
 
-    Significantly reduces the impact on the performance of TiDB clusters when you use TiCDC. In the test environment, the performance impact of TiCDC on TiDB can be reduced to less than 5%.
+  Significantly reduces the impact on the performance of TiDB clusters when you use TiCDC. In the test environment, the performance impact of TiCDC on TiDB can be reduced to less than 5%.
 
 ### Deployment and maintenance
 
@@ -290,11 +290,11 @@ In v5.4, the key new features or improvements are as follows:
 
     - More deployment environments supported: Continuous Profiling can also be used for clusters deployed using TiDB Operator.
 
-   Continuous Profiling is disabled by default and can be enabled on TiDB Dashboard.
+  Continuous Profiling is disabled by default and can be enabled on TiDB Dashboard.
 
-    Continuous Profiling is applicable to clusters deployed or upgraded using TiUP of v1.9.0 or later or TiDB Operator of v1.3.0 or later.
+  Continuous Profiling is applicable to clusters deployed or upgraded using TiUP of v1.9.0 or later or TiDB Operator of v1.3.0 or later.
 
-    [User document](/dashboard/continuous-profiling.md)
+  [User document](/dashboard/continuous-profiling.md)
 
 ## Improvements
 
