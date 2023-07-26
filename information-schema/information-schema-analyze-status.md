@@ -33,9 +33,9 @@ DESC analyze_status;
 | FAIL_REASON          | longtext            | YES  |      | NULL    |       |
 | INSTANCE             | varchar(512)        | YES  |      | NULL    |       |
 | PROCESS_ID           | bigint(64) unsigned | YES  |      | NULL    |       |
-| Remaining_seconds    | bigint(64) unsigned | YES  |      | NULL    |       |
-| Progress             | varchar(20)         | YES  |      | NULL    |       |
-| Estimated_total_rows | bigint(64) unsigned | YES  |      | NULL    |       |
+| REMAINING_SECONDS    | bigint(64) unsigned | YES  |      | NULL    |       |
+| PROGRESS             | varchar(20)         | YES  |      | NULL    |       |
+| ESTIMATED_TOTAL_ROWS | bigint(64) unsigned | YES  |      | NULL    |       |
 +----------------------+---------------------+------+------+---------+-------+
 14 rows in set (0.00 sec)
 ```

@@ -12,7 +12,7 @@ Starting from TiDB v6.1.0, the `SHOW ANALYZE STATUS` statement supports showing 
 
 Starting from TiDB v6.1.0, you can view the history tasks within the last 7 days through the system table `mysql.analyze_jobs`.
 
-Starting from TiDB v7.2.0, you can view the progress of the current `ANALYZE` task through the system table `mysql.analyze_jobs` or `SHOW ANALYZE STATUS`.
+Starting from TiDB v7.3.0, you can view the progress of the current `ANALYZE` task through the system table `mysql.analyze_jobs` or `SHOW ANALYZE STATUS`.
 
 ## Synopsis
 
@@ -42,6 +42,7 @@ mysql> show analyze status;
 | test         | t          | p0             | analyze index idx |              0 | 2022-05-27 11:29:46 | 2022-05-27 11:29:46 | finished | NULL        | 127.0.0.1:4000 | NULL       | NULL             | NULL     | NULL                |
 | test         | t          | p1             | analyze columns   |              0 | 2022-05-27 11:29:46 | 2022-05-27 11:29:46 | finished | NULL        | 127.0.0.1:4000 | NULL       | NULL             | NULL     | NULL                |
 | test         | t          | p0             | analyze columns   |              0 | 2022-05-27 11:29:46 | 2022-05-27 11:29:46 | finished | NULL        | 127.0.0.1:4000 | NULL       | NULL             | NULL     | NULL                |
+| test         | t1         | p0             | analyze columns   |       28523259 | 2022-05-27 11:29:46 | 2022-05-27 11:29:46 | running  | NULL        | 127.0.0.1:4000 | 690208308  | 0s               | 0.9843   | 28978290            |
 +--------------+------------+----------------+-------------------+----------------+---------------------+---------------------+----------+-------------+----------------+------------+------------------+----------+---------------------+
 4 rows in set (0.01 sec)
 
