@@ -55,7 +55,7 @@ In TiDB Cloud Data Service, you can generate one or multiple endpoints automatic
 
     - Endpoint name: the generated endpoint name is the name of the selected table, and the request method (such as `GET`, `POST`, and `PUT`) is displayed before the name. For example, if the selected table name is `sample-table` and the selected operation is **POST Create**, the generated endpoint is displayed as `POST sample-table`.
 
-        - If a batch operation is selected, TiDB Cloud Data Service appends `s` to the name of the generated endpoint. For example, if the selected table name is `sample-table` and the selected operation is **POST Batch Create**, the generated endpoint is displayed as `POST sample-tables`.
+        - If a batch operation is selected, TiDB Cloud Data Service appends `_batch` to the name of the generated endpoint. For example, if the selected table name is `sample-table` and the selected operation is **POST Batch Create**, the generated endpoint is displayed as `POST sample-table_batch`.
         - If there has been already an endpoint with the same request method and endpoint name, TiDB Cloud Data Service appends `_copy` to the name of the generated endpoint. For example, `sample-table_copy`.
 
     - SQL statements: TiDB Cloud Data Service automatically writes SQL statements for the generated endpoints according to the table column specifications and the selected endpoint operations. You can click the endpoint name to view its SQL statements in the middle section of the page.
