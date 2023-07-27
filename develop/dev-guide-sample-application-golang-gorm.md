@@ -292,7 +292,7 @@ Suppose that the password you set is `123456`, and the connection parameters you
 - Port: `4000`
 - User: `2aEp24QWEDLqRFs.root`
 
-In this case, you can modify the `mysql.RegisterTLSConfig` and `dsn` as follows:
+In this case, you can modify the `dsn` as follows:
 
 ```go
 dsn := "2aEp24QWEDLqRFs.root:123456@tcp(xxx.tidbcloud.com:4000)/test?charset=utf8mb4&tls=true"
