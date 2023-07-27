@@ -331,7 +331,7 @@ To specify an encryption scope for the backup data, you can use one of the follo
     ./br backup full --pd <pd-address> --storage "azure://<bucket>/<prefix>?encryption-scope=scope1"
     ```
 
-For more information, see the Azure documentation for the usage of [Upload a blob with an encryption scope](https://learn.microsoft.com/en-us/azure/storage/blobs/encryption-scope-manage?tabs=powershell#upload-a-blob-with-an-encryption-scope).
+For more information, see the Azure documentation: [Upload a blob with an encryption scope](https://learn.microsoft.com/en-us/azure/storage/blobs/encryption-scope-manage?tabs=powershell#upload-a-blob-with-an-encryption-scope).
 
 When restoring the backup, you do not need to specify the encryption scope. Azure Blob Storage automatically decrypts the data. For example:
 
@@ -362,7 +362,7 @@ To specify an encryption key for the backup data, you can use one of the followi
     ./br backup full --pd <pd-address> --storage "azure://<bucket>/<prefix>"
     ```
 
-For more information, see the Azure documentation for the usage of [Provide an encryption key on a request to Blob storage](https://learn.microsoft.com/en-us/azure/storage/blobs/encryption-customer-provided-keys).
+For more information, see the Azure documentation: [Provide an encryption key on a request to Blob storage](https://learn.microsoft.com/en-us/azure/storage/blobs/encryption-customer-provided-keys).
 
 When restoring the backup, you need to specify the encryption key. For example:
 
