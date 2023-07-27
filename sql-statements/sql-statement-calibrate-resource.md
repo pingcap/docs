@@ -49,7 +49,7 @@ If your application is already running in a production environment, or you can r
 
 > **Note:**
 >
-> Because TiKV does not monitor CPU utilization on macOS, estimating capacity based on actual workload is not supported on macOS.
+> TiKV does not monitor CPU usage metrics on macOS. It does not support capacity estimation based on actual workload on macOS.
 
 ### Estimate capacity based on hardware deployment
 
@@ -99,7 +99,7 @@ CALIBRATE RESOURCE START_TIME '2023-04-18 08:00:00' DURATION '9m';
 ERROR 1105 (HY000): the duration of calibration is too short, which could lead to inaccurate output. Please make the duration between 10m0s and 24h0m0s
 ```
 
-The capacity estimation function based on the actual workload needs to monitor metrics data, including `tikv_cpu_quota`, `tidb_server_maxprocs`, `resource_manager_resource_unit`, and `process_cpu_usage`. If the CPU quota monitoring data is empty, there will be an error with the corresponding monitoring item name, as shown in the following example:
+The capacity estimation function based on the actual workload requires monitoring metrics data, including `tikv_cpu_quota`, `tidb_server_maxprocs`, `resource_manager_resource_unit`, and `process_cpu_usage`. If the CPU quota monitoring data is empty, there will be an error with the corresponding monitoring item name, as shown in the following example:
 
 ```sql
 CALIBRATE RESOURCE START_TIME '2023-04-18 08:00:00' DURATION '60m';
