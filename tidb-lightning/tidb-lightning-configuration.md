@@ -131,7 +131,7 @@ driver = "file"
 strategy = ""
 # When `strategy` is "replace" or "ignore", this parameter controls the upper limit of the conflicting data. You can set it only when `strategy` is "replace" or "ignore". The default value is 9223372036854775807, which means that almost all errors are tolerated.
 # threshold = 9223372036854775807
-# Controls the maximum number of rows in the `conflict_record` table. The default value is 100.
+# Controls the maximum number of rows in the `conflict_records` table. The default value is 100.
 # max-record-rows = 100
 
 [tikv-importer]
