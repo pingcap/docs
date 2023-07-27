@@ -73,6 +73,6 @@ Fields in the `ANALYZE_STATUS` table are described as follows:
 * `FAIL_REASON`: The reason why the task fails. If the execution is successful, the value is `NULL`.
 * `INSTANCE`: The TiDB instance that executes the task.
 * `PROCESS_ID`: The process ID that executes the task.
-* `REMAINING_SECONDS`: The estimated time remaining for the task to complete.
+* `REMAINING_SECONDS`: The estimated time (in seconds) remaining for the task to complete.
 * `PROGRESS`: The progress of the task.
 * `ESTIMATED_TOTAL_ROWS`: The total rows that need to be analyzed by the task.
