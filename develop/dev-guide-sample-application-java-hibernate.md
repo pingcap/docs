@@ -409,14 +409,14 @@ To run the code, you can run `make build` and `make run` respectively:
 
 ```shell
 make build # this command executes `mvn clean package`
-make run # this command executes `java -jar target/plain-java-jdbc-0.0.1-jar-with-dependencies.jar`
+make run # this command executes `java -jar target/plain-java-hibernate-0.0.1-jar-with-dependencies.jar`
 ```
 
 Or you can use the native commands:
 
 ```shell
 mvn clean package
-java -jar target/plain-java-jdbc-0.0.1-jar-with-dependencies.jar
+java -jar target/plain-java-hibernate-0.0.1-jar-with-dependencies.jar
 ```
 
 Or run the `make` command directly, which is a combination of `make build` and `make run`.
