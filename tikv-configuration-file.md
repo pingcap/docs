@@ -1418,7 +1418,11 @@ Configuration items related to `rocksdb.defaultcf`, `rocksdb.writecf`, and `rock
 
 + Memtable size
 + Default value for `defaultcf` and `writecf`: `"128MB"`
-+ Default value for `lockcf`: `"32MB"`
++ Default value for `lockcf`:
+
+    + When `storage.engine="raft-kv"`, the default value is `"32MB"`.
+    + When `storage.engine="partitioned-raft-kv"`, the default value is `"4MB"`.
+
 + Minimum value: `0`
 + Unit: KB|MB|GB
 
@@ -1553,7 +1557,10 @@ Configuration items related to `rocksdb.defaultcf`, `rocksdb.writecf`, and `rock
     - `3`: Can be read by TiKV v2.1 and later versions. Changes the encoding of the keys in index blocks.
     - `4`: Can be read by TiKV v3.0 and later versions. Changes the encoding of the values in index blocks.
     - `5`: Can be read by TiKV v6.1 and later versions. Full and partitioned filters use a faster and more accurate Bloom filter implementation with a different schema.
-+ Default value: `2`
++ Default value:
+
+    + When `storage.engine="raft-kv"`, the default value is `2`.
+    + When `storage.engine="partitioned-raft-kv"`, the default value is `5`.
 
 ### `ttl` <span class="version-mark">New in v7.2.0</span>
 
