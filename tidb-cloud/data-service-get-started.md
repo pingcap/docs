@@ -58,22 +58,17 @@ If you want to create a new endpoint, locate the newly created Data App and clic
 
 On the right pane, click the **Properties** tab and set properties for the endpoint, such as:
 
-- **Endpoint Path**: the unique path of the endpoint that users use to access it.
-
-    - The path must be unique within a Data App.
-    - Only letters, numbers, underscores (`_`), and slashes (`/`) are allowed in the path, which must start with a slash (`/`) and end with a letter, number, or underscore (`_`). For example, `/my_endpoint/get_id`.
-    - The length of the path must be less than 64 characters.
+- **Path**: the path that users use to access the endpoint. The combination of the request method and the path must be unique within a Data App.
 
 - **Endpoint URL**: (read-only) the URL is automatically generated based on the region where the corresponding cluster is located, the service URL of the Data App, and the path of the endpoint. For example, if the path of the endpoint is `/my_endpoint/get_id`, the endpoint URL is `https://<region>.data.tidbcloud.com/api/v1beta/app/<App ID>/endpoint/my_endpoint/get_id`.
 
-- **Request Method**: the HTTP method of the endpoint. The following methods are supported:
+- **Request Method**: the HTTP method of the endpoint. You can use `GET` to retrieve data, use `POST` to create or insert data, use `PUT` to update or modify data, and use `DELETE` to delete data.
 
-    - `GET`: use this method to query data, such as a `SELECT` statement.
-    - `POST`: use this method to insert data, such as an `INSERT` statement.
+- **Timeout(ms)**: the timeout for the endpoint.
 
-- **Timeout(ms)**: the timeout for the endpoint. It ranges from `1` to `30000`. The default value is `5000` milliseconds. For more details, see [Configure properties](/tidb-cloud/data-service-manage-endpoint.md#configure-properties).
+- **Max Rows**: the maximum number of rows that the endpoint can operate or return.
 
-- **Max Rows**: the maximum number of rows that the endpoint returns. It ranges from `1` to `2000`. The default value is `50` rows. For more details, see [Configure properties](/tidb-cloud/data-service-manage-endpoint.md#configure-properties).
+For more information about endpoint properties, see [Configure properties](/tidb-cloud/data-service-manage-endpoint.md#configure-properties).
 
 ### Write SQL statements
 
