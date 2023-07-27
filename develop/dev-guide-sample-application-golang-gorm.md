@@ -54,49 +54,26 @@ To adapt TiDB transactions, write a toolkit [util](https://github.com/pingcap-in
 package util
 
 import (
-    "context"
-    "database/sql"
+    "gorm.io/gorm"
 )
 
-type TiDBSqlTx struct {
-    *sql.Tx
-    conn        *sql.Conn
-    pessimistic bool
-}
-
-func TiDBSqlBegin(db *sql.DB, pessimistic bool) (*TiDBSqlTx, error) {
-    ctx := context.Background()
-    conn, err := db.Conn(ctx)
-    if err != nil {
-        return nil, err
+// TiDBGormBegin start a TiDB and Gorm transaction as a block. If no error is returned, the transaction will be committed. Otherwise, the transaction will be rolled back.
+func TiDBGormBegin(db *gorm.DB, pessimistic bool, fc func(tx *gorm.DB) error) (err error) {
+    session := db.Session(&gorm.Session{})
+    if session.Error != nil {
+        return session.Error
     }
+
     if pessimistic {
-        _, err = conn.ExecContext(ctx, "set @@tidb_txn_mode=?", "pessimistic")
+        session = session.Exec("set @@tidb_txn_mode=pessimistic")
     } else {
-        _, err = conn.ExecContext(ctx, "set @@tidb_txn_mode=?", "optimistic")
+        session = session.Exec("set @@tidb_txn_mode=optimistic")
     }
-    if err != nil {
-        return nil, err
-    }
-    tx, err := conn.BeginTx(ctx, nil)
-    if err != nil {
-        return nil, err
-    }
-    return &TiDBSqlTx{
-        conn:        conn,
-        Tx:          tx,
-        pessimistic: pessimistic,
-    }, nil
-}
 
-func (tx *TiDBSqlTx) Commit() error {
-    defer tx.conn.Close()
-    return tx.Tx.Commit()
-}
-
-func (tx *TiDBSqlTx) Rollback() error {
-    defer tx.conn.Close()
-    return tx.Tx.Rollback()
+    if session.Error != nil {
+        return session.Error
+    }
+    return session.Transaction(fc)
 }
 ```
 
