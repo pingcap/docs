@@ -40,7 +40,7 @@ To integrate TiDB Serverless branching with your GitHub repository, take the fol
     - If you have not logged into GitHub, you will be asked to log into GitHub first.
     - If it is the first time you use the integration, you will be asked to authorize the **TiDB Cloud Branching** app.
 
-    ![github-authorize.png](/media/tidb-cloud/branch/github-authorize.png)
+   <img src="https://download.pingcap.com/images/docs/tidb-cloud/branch/github-authorize.png" width="80%" />
 
 4. In the **Connect to GitHub** dialog, select a GitHub account in the **GitHub Account** drop-down list.
 
@@ -50,7 +50,7 @@ To integrate TiDB Serverless branching with your GitHub repository, take the fol
 
 6. Click **Connect** to connect between your TiDB Serverless cluster and your GitHub repository.
 
-    ![github-connect.png](/media/tidb-cloud/branch/github-connect.png)
+   <img src="https://download.pingcap.com/images/docs/tidb-cloud/branch/github-connect.png" width="40%" />
 
 ## TiDB Cloud Branching app behaviors
 
