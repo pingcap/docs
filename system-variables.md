@@ -2068,6 +2068,10 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 
 ### tidb_enable_resource_control <span class="version-mark">New in v6.6.0</span>
 
+> **Note:**
+>
+> This variable is read-only for [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless).
+
 - Scope: GLOBAL
 - Persists to cluster: Yes
 - Default value: `ON`
@@ -4777,6 +4781,10 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - This variable is used to control the end time of the scheduling window of TTL jobs in the background. When you modify the value of this variable, be cautious that a small window might cause the cleanup of expired data to fail. For more information, refer to [Time to Live](/time-to-live.md).
 
 ### tidb_ttl_running_tasks <span class="version-mark">New in v7.0.0</span>
+
+> **Note:**
+>
+> This variable is read-only for [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless).
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
