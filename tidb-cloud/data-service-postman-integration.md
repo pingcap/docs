@@ -82,6 +82,6 @@ After a Data App is imported to Postman, TiDB Cloud Data Service will not synchr
 - The renaming or deletion of existing endpoints
 - The parameter modification of existing endpoints
 
-If you want to have these changes in Postman, you need to import the latest Data App to Postman again. Because the connection name is unique in a Postman workspace, you can either use the latest Data App to replace the previously imported one or import the latest Data App as a new connection.
+If you want to have these changes in Postman, you need to [import the latest Data App](/tidb-cloud/data-service-postman-integration.md#step-1-connect-your-data-app-to-postman) to Postman again. Because the connection name is unique in a Postman workspace, you can either use the latest Data App to replace the previously imported one or import the latest Data App as a new connection.
 
 After the import, you need to configure the API key for the newly imported App in Postman again.
