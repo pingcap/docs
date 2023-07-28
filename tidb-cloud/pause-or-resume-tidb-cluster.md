@@ -9,7 +9,7 @@ You can easily pause and resume a TiDB Dedicated cluster that is not in operatio
 
 The pause does not affect your data stored in the cluster but only stops the collection of monitoring information and the consumption of computing resources. After the pause, you can resume your cluster at any time.
 
-Comparing with backup and restore, pausing and resuming a cluster takes less time and keeps your cluster state information (including cluster version, cluster configurations, and TiDB user accounts).
+Comparing with backup and restore, pausing and resuming a cluster takes less time and keeps your cluster information (including cluster version, cluster configurations, and TiDB user accounts).
 
 > **Note:**
 >
@@ -72,8 +72,8 @@ To resume a paused cluster, take the following steps:
     >
     > You cannot resume a cluster in the **Pausing** status.
 
-3. In the dialog, click **Resume** to confirm your choice. The cluster status becomes **RESUMING**.
+3. In the dialog, click **Resume** to confirm your choice. The cluster status becomes **Resuming**.
 
-Depending on your cluster size, it can take several minutes to resume the cluster. After the cluster is resumed, the cluster state changes from **RESUMING** to **AVAILABLE**.
+Depending on your cluster size, it can take several minutes to resume the cluster. After the cluster is resumed, the cluster status changes from **Resuming** to **Available**.
 
 You can also resume a cluster using TiDB Cloud API. Currently, TiDB Cloud API is still in beta. For more information, see [TiDB Cloud API Documentation](https://docs.pingcap.com/tidbcloud/api/v1beta).
