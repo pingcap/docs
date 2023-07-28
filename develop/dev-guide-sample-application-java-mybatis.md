@@ -63,7 +63,7 @@ The structure of this directory is as follows:
         ├── java
         │   └── com
         │       └── pingcap
-        │           ├── MyBatisExample.java
+        │           ├── MybatisExample.java
         │           ├── dao
         │           │   └── PlayerDAO.java
         │           └── model
@@ -535,7 +535,7 @@ public class PlayerDAO {
 }
 ```
 
-`MyBatisExample` is the main class of the `plain-java-mybatis` sample application. It defines the entry functions:
+`MybatisExample` is the main class of the `plain-java-mybatis` sample application. It defines the entry functions:
 
 ```java
 package com.pingcap;
@@ -551,7 +551,7 @@ import java.io.InputStream;
 import java.util.Arrays;
 import java.util.Collections;
 
-public class MyBatisExample {
+public class MybatisExample {
     public static void main( String[] args ) throws IOException {
         // 1. Create a SqlSessionFactory based on our mybatis-config.xml configuration
         // file, which defines how to connect to the database.
