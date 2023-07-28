@@ -134,7 +134,7 @@ TiDB Lightning offers two strategies for detecting conflicting data:
 - `remove` (recommended): records all conflicting records, like the `record` strategy. But it removes all conflicting records from the target table to ensure a consistent state in the target TiDB.
 - `none`: does not detect duplicate records. `none` has the best performance in the two strategies, but might lead to inconsistent data in the target TiDB.
 
-Before v5.3, Lightning does not support conflict detection. If there is conflicting data, the import process fails at the checksum step. When conflict detection is enabled, regardless of the `record` or `remove` strategy, if there is conflicting data, Lightning skips the checksum step (because it always fails).
+Before v5.3, Lightning does not support conflict detection. If there is conflicting data, the import process fails at the checksum step. When conflict detection is enabled, if there is conflicting data, Lightning skips the checksum step (because it always fails).
 
 Suppose an `order_line` table has the following schema:
 
