@@ -44,8 +44,6 @@ See [Create a TiDB Serverless cluster](/develop/dev-guide-build-cluster-in-cloud
 git clone https://github.com/pingcap-inc/tidb-example-golang.git
 ```
 
-Compared with GORM, the go-sql-driver/mysql implementation might be not a best practice, because you need to write error handling logic, close `*sql.Rows` manually and cannot reuse code easily, which makes your code slightly redundant.
-
 The following instructions take `v1.23.5` as an example.
 
 To adapt TiDB transactions, write a toolkit [util](https://github.com/pingcap-inc/tidb-example-golang/tree/main/util) according to the following code:
