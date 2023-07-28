@@ -9,10 +9,10 @@ Starting from v5.4.0, you can configure TiDB Lightning to skip errors like inval
 
 This document introduces error types and how to query the errors. At the end of this document, an example is provided. The following configuration items are involved:
 
-- The threshold or type error `lightning.max-error`
-- Configurations that related to conflicting data `conflict.strategy`、`conflict.threshold`、`conflict.max-record-rows`
-- A duplication resolution algorithm that can only be used in physical import `tikv-importer.duplicate-resolution`
-- The location of recording tables `lightning.task-info-schema-name`
+- `lightning.max-error`: the threshold or type error 
+- `conflict.strategy`, `conflict.threshold`, and `conflict.max-record-rows`: configurations related to conflicting data 
+- `tikv-importer.duplicate-resolution`: a duplication resolution algorithm that can only be used in physical import mode
+- `lightning.task-info-schema-name`: a location that records error tables 
 
 For more information, see [TiDB Lightning (Task)](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task).
 

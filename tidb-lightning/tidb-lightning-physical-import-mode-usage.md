@@ -28,15 +28,15 @@ check-requirements = true
 data-source-dir = "/data/my_database"
 
 [conflict]
-# The strategy to handle conflicting data
-# - "": No actions, lightning may exit by error in following steps.
-# - "error": Conflicting data will fail the import task.
-# - "replace": Try to keep latest data when meet conflicting data.
-# - "ignore": Try to keep oldest data when meet conflicting data.
+# The strategy to handle conflicting data. The default value is "".
+# - "": no actions. TiDB Lightning might exit due to an error.
+# - "error": the import task fails if there is conflicting data.
+# - "replace": keep the new data when detecting conflicting data.
+# - "ignore": keep the old data when detecting conflicting data.
 strategy = ""
-# When `strategy` is "replace" or "ignore", controls the maximum tolerable conflict count. Only can be set when `strategy` is "replace" or "ignore". The default value is 9223372036854775807
+# When `strategy` is "replace" or "ignore", this parameter controls the upper limit of the conflicting data. You can set it only when `strategy` is "replace" or "ignore". The default value is 9223372036854775807, which means that almost all errors are tolerated.
 # threshold = 9223372036854775807
-# Controls the maximum record count in conflict_record table. The default value is 100
+# Controls the maximum number of rows in the `conflict_records` table. The default value is 100.
 # max-record-rows = 100
 
 [tikv-importer]
@@ -113,10 +113,11 @@ Detection before importing will be enabled when configuration `conflict.strategy
 | `replace` | Replacing existing data with new data. | `REPLACE INTO ...` |
 | `ignore` | Keeping existing data and ignoring new data. | `INSERT IGNORE INTO ...` |
 | `error` | Pausing the import and reporting an error. | `INSERT INTO ...` |
+| "" | no actions. TiDB Lightning might exit due to an error. |  None   |
 
 Note that due to the internal implementation and limitation of TiDB Lightning, the result of conflict detection might be different from the result of SQL-based import.
 
-When the strategy is `error`, conflicting data will fail the import task. When the strategy is `replace` or `ignore`, conflicting data will be treated as [conflict error](/tidb-lightning/tidb-lightning-error-resolution.md#conflict-error), with `conflict.threshold` configurated the import task can tolerate the specified number of conflict error. The default value is 9223372036854775807. For futher details please see [error resolution](/tidb-lightning/tidb-lightning-error-resolution.md).
+When the strategy is `error`, the import task fails due to conflicting data. When the strategy is `replace` or `ignore`, conflicting data will be treated as [conflict error](/tidb-lightning/tidb-lightning-error-resolution.md#conflict-error), with `conflict.threshold` configurated, the import task can tolerate the specified number of conflict errors. The default value is `9223372036854775807`, which means that almost all errors are tolerated. For more information, see [error resolution](/tidb-lightning/tidb-lightning-error-resolution.md).
 
 Detection before importing has the following limitations:
 
@@ -127,14 +128,14 @@ Compared with detection after importing, if the original data has a large amount
 
 ### Detection after importing (the old behaviour)
 
-Detection after importing will be enabled when configuration `tikv-importer.duplicate-resolution` is set. This is the only method of conflict detection in the version prior to v7.2.0.
+Detection after importing will be enabled when you set `tikv-importer.duplicate-resolution`. This is the only method of conflict detection in v7.2.0 and earlier versions.
 
 TiDB Lightning offers two strategies for detecting conflicting data:
 
 - `remove` (recommended): records all conflicting records, like the `record` strategy. But it removes all conflicting records from the target table to ensure a consistent state in the target TiDB.
 - `none`: does not detect duplicate records. `none` has the best performance in the two strategies, but might lead to inconsistent data in the target TiDB.
 
-Before v5.3, Lightning does not support conflict detection. If there is conflicting data, the import process fails at the checksum step. When conflict detection is enabled, if there is conflicting data, Lightning skips the checksum step (because it always fails).
+Before v5.3, TiDB Lightning does not support conflict detection. If there is conflicting data, the import process fails at the checksum step. When conflict detection is enabled, if there is conflicting data, TiDB Lightning skips the checksum step (because it always fails).
 
 Suppose an `order_line` table has the following schema:
 
