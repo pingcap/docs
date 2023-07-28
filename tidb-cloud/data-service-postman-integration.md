@@ -35,7 +35,7 @@ To import your Data App to Postman, take the following steps:
 
     > **Note:**
     >
-    > - If a Data App does not have any endpoint with the target cluster, path, request method, SQL statements configured, **Run in Postman** in unclickable for the Data App.
+    > - If a Data App does not have any endpoint with the target cluster, path, request method, and SQL statements configured, **Run in Postman** is unclickable for the Data App.
     > - For `Chat2Query` Data App, **Run in Postman** is unavailable.
 
 4. Follow the steps provided in the dialog for the Data App import:
