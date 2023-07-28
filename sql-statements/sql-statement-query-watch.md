@@ -32,15 +32,17 @@ QueryWatchTextOption ::=
     "SQL" "DIGEST" SimpleExpr
 |   "PLAN" "DIGEST" SimpleExpr
 |   "SQL" "TEXT" ResourceGroupRunawayWatchOption "TO" SimpleExpr
-
 ResourceGroupRunawayWatchOption ::=
     "EXACT"
 |   "SIMILAR"
 |   "PLAN"
-
 DropQueryWatchStmt ::=
     "QUERY" "WATCH" "REMOVE" NUM
 ```
+
+## Parameters
+
+See [`QUERY WATCH` parameters](/tidb-resource-control.md#query-watch-parameters).
 
 ## MySQL compatibility
 

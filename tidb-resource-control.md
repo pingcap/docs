@@ -250,6 +250,8 @@ There are three methods for `WATCH` to match for rapid identification:
 - `SIMILAR` indicates all SQL statements with the same pattern are matched by Plan Digest, and the literal values are ignored.
 - `PLAN` indicates all SQL statements with the same pattern are matched by Plan Digest.
 
+The `DURATION` option in `WATCH` indicates the duration of this identification item, which is infinite by default.
+
 The parameters of `QUERY_LIMIT` are as follows:
 
 | Parameter          | Description            | Note                                  |
@@ -280,10 +282,14 @@ The parameters of `QUERY_LIMIT` are as follows:
 
 #### `QUERY WATCH` parameters
 
-- `ACTION` and `WATCH` in the `QUERY WATCH` statement are the same as `QUERY_LIMIT`, as described in [`QUERY WATCH`](/sql-statements/sql-statement-query-watch.md).
-- `SQL DIGEST` in `QueryWatchTextOption` are the same as that of `SIMILAR`, and the parameters immediately following it can be strings, user-defined variables, and other expressions with string computation results, provided that the required string length is 64, which is the same as the definition of Digest in TiDB.
-- `PLAN DIGEST` has the same meaning as `PLAN`.
-- `SQL TEXT` can be used as a pattern match on the input SQL as a raw string (`EXACT`), or parsed and compiled into `SQL DIGEST` (`SIMILAR`) or `PLAN DIGEST` (`PLAN`), depending on the parameters immediately following.
+For more information about `QUERY WATCH` parameters, see [`QUERY WATCH`](/sql-statements/sql-statement-query-watch.md).
+
+- The `RESOURCE GROUP` is used to specify a resource group. The identification of the runaway queries added by this statement will be applied to this resource group. This parameter can be omitted, and when it is omitted, it applies to the `default` resource group.
+- The meaning of `ACTION` is the same as `QUERY LIMIT`. This parameter can be omitted. When it is omitted, it means that the corresponding action after identification adopts the `ACTION` configured by `QUERY LIMIT` in the resource group. If there is no `ACTION` configured in the resource group, an error will be reported.
+- The `QueryWatchTextOption` parameter has three options: `SQL DIGEST`, `PLAN DIGEST`, and `SQL TEXT`.
+    - `SQL DIGEST` is the same as that of `SIMILAR`, and the parameters immediately following it can be strings, user-defined variables, and other expressions with string computation results, provided that the required string length is 64, which is the same as the definition of Digest in TiDB.
+    - The meaning of `PLAN DIGEST` is the same as `PLAN`. The input parameter is the Digest string.
+    - `SQL TEXT` can be used as a pattern match on the input SQL as a raw string (`EXACT`), or parsed and compiled into `SQL DIGEST` (`SIMILAR`) or `PLAN DIGEST` (`PLAN`), depending on the parameters immediately following.
 
 1. When no resource group is specified, the runaway queries identification list is managed by the default resource group. You can add identification items to the runaway query identification list for the default resource group. You need to set `QUERY LIMIT` for the default resource group in advance.
 
@@ -291,15 +297,21 @@ The parameters of `QUERY_LIMIT` are as follows:
     QUERY WATCH ADD ACTION KILL SQL TEXT EXACT TO 'select * from test.t2';
     ```
 
-2. Add an identification item to the runaway queries identification list for the `rg1` resource group via SQL Digest. When `ACTION` is not specified, the `ACTION` option already configured for the `rg1` resource group is used.
+2. Add an identification item to the runaway query identification list for the `rg1` resource group via SQL DIGEST. When `ACTION` is not specified, the `ACTION` option already configured for the `rg1` resource group is used.
 
     ```sql
     QUERY WATCH ADD RESOURCE GROUP rg1 SQL TEXT SIMILAR TO 'select * from test.t2';
     ```
 
+3. Add an identification item to the runaway query identification list for the `rg1` resource group via PLAN DIGEST.
+
+    ```sql
+    QUERY WATCH ADD RESOURCE GROUP rg1 ACTION KILL PLAN DIGEST 'd08bc323a934c39dc41948b0a073725be3398479b6fa4f6dd1db2a9b115f7f57';
+    ```
+
 #### Observability
 
-You can get more information about runaway queries from the following system tables:
+You can get more information about runaway queries from the following system tables and `INFORMATION_SCHEMA`:
 
 + The `mysql.tidb_runaway_queries` table contains the history records of all runaway queries identified in the past 7 days. Take one of the rows as an example:
 
@@ -320,32 +332,7 @@ You can get more information about runaway queries from the following system tab
     - `identify` means that it matches the condition of the runaway query.
     - `watch` means that it matches the quick identification rule in the watch list.
 
-+ The `mysql.tidb_runaway_watch` table contains the quick identification rule records for runaway queries. Take two of these rows as examples:
-
-    ```sql
-    MySQL [(none)]> SELECT * FROM mysql.tidb_runaway_watch LIMIT 2\G;
-    *************************** 1. row ***************************
-    resource_group_name: rg1
-             start_time: 2023-06-16 17:40:22
-               end_time: 2023-06-16 18:10:22
-                  watch: similar
-             watch_text: 5b7d445c5756a16f910192ad449c02348656a5e9d2aa61615e6049afbc4a82e
-            tidb_server: 127.0.0.1:4000
-    *************************** 2. row ***************************
-    resource_group_name: rg1
-             start_time: 2023-06-16 17:42:35
-               end_time: 2023-06-16 18:12:35
-                  watch: exact
-             watch_text: select * from sbtest.sbtest1
-            tidb_server: 127.0.0.1:4000
-    ```
-
-    In the preceding output:
-
-    - `start_time` and `end_time` indicate the time range during which the watch list is valid.
-    - `watch` means that the query matches the quick identification rule in the watch list. The value can be one of the following:
-        - `similar` indicates that it is matched by Plan Digest. At this time, the `watch_text` column displays the Plan Digest.
-        - `exact` indicates that it is matched by SQL text. At this time, the `watch_text` column displays the SQL text.
++ The `information_schema.runaway_watches` table contains records of rapid identification rules for runaway queries. See [`RUNAWAY_WATCHES`](/information-schema/information-schema-runaway-watches.md) for details.
 
 ## Disable resource control
 
