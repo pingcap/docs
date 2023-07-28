@@ -8,6 +8,8 @@ summary: Learn how to build a simple CRUD application with TiDB and MyBatis.
 
 # Build a Simple CRUD App with TiDB and MyBatis
 
+[MyBatis](https://mybatis.org/mybatis-3/index.html) is a popular open-source Java class persistence framework.
+
 This document describes how to use TiDB and MyBatis to build a simple CRUD application.
 
 > **Note:**
@@ -44,7 +46,7 @@ git clone https://github.com/pingcap-inc/tidb-example-java.git
 
 Compared with [MyBatis](https://mybatis.org/mybatis-3/index.html), the JDBC implementation might be not a best practice, because you need to write error handling logic manually and cannot reuse code easily, which makes your code slightly redundant.
 
-MyBatis is a popular open-source Java class persistence framework. The following uses [MyBatis Generator](https://mybatis.org/generator/quickstart.html) as a Maven plugin to generate the persistence layer code.
+The following uses [MyBatis Generator](https://mybatis.org/generator/quickstart.html) as a Maven plugin to generate the persistence layer code.
 
 Change to the `plain-java-mybatis` directory:
 
