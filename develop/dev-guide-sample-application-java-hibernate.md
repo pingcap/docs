@@ -8,7 +8,7 @@ summary: Learn how to build a simple CRUD application with TiDB and Hibernate.
 
 # Build a Simple CRUD App with TiDB and Hibernate
 
-[Hibernate](https://hibernate.org/) is a popular open-source Java ORM, and, it supports TiDB dialect starting from `v6.0.0.Beta2`, which fits TiDB features well.
+[Hibernate](https://hibernate.org/) is a popular open-source Java ORM, and it supports TiDB dialect starting from `v6.0.0.Beta2`, which fits TiDB features well.
 
 This document describes how to use TiDB and Hibernate to build a simple CRUD application.
 
