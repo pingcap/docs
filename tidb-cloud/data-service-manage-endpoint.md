@@ -193,6 +193,10 @@ To rename an endpoint, perform the following steps:
 
 ## Test an endpoint
 
+> **Note:**
+>
+> If you have connected your Data App to Postman, you can also test endpoints of the Data App in Postman. For more information, see [Run Data App in Postman](/tidb-cloud/data-service-postman-integration.md).
+
 To test an endpoint, perform the following steps:
 
 1. Navigate to the [**Data Service**](https://tidbcloud.com/console/data-service) page of your project.
@@ -215,11 +219,11 @@ After testing the endpoint, you can see the response as JSON at the bottom of th
 
 ## Deploy an endpoint
 
-> **Note:**
+To deploy an endpoint, perform the following steps:
+
+> **Tip:**
 >
 > If you have connected your Data App to GitHub with **Auto Sync & Deployment** enabled, any Data App changes you made in GitHub will be deployed in TiDB Cloud Data Service automatically. For more information, see [Deploy automatically with GitHub](/tidb-cloud/data-service-manage-github-connection.md).
-
-To deploy an endpoint, perform the following steps:
 
 1. Navigate to the [**Data Service**](https://tidbcloud.com/console/data-service) page of your project.
 2. In the left pane, click the name of your target Data App to view its endpoints.
@@ -232,6 +236,10 @@ To deploy an endpoint, perform the following steps:
 ## Call an endpoint
 
 To call an endpoint, you can send an HTTPS request to either an undeployed draft version or a deployed online version of the endpoint.
+
+> **Tip:**
+>
+> If you have connected your Data App to Postman, you can also call endpoints of the Data App in Postman. For more information, see [Run Data App in Postman](/tidb-cloud/data-service-postman-integration.md).
 
 ### Prerequisites
 

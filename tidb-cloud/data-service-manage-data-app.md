@@ -120,3 +120,7 @@ To delete a Data App, perform the following steps:
 4. Type your `<organization name>/<project name>/<data app name>`, and then click **I understand, delete**.
 
     Once a Data App is deleted, the existing endpoints and API keys in the Data App are also deleted. If this Data App is connected to GitHub, deleting the App does not delete the files in the corresponding GitHub repository.
+
+## Learn more
+
+- [Run Data App in Postman](/tidb-cloud/data-service-postman-integration.md)
