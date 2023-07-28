@@ -195,7 +195,7 @@ To rename an endpoint, perform the following steps:
 
 > **Tip:**
 >
-> If you have connected your Data App to Postman, you can also test endpoints of the Data App in Postman. For more information, see [Run Data App in Postman](/tidb-cloud/data-service-postman-integration.md).
+> If you have imported your Data App to Postman, you can also test endpoints of the Data App in Postman. For more information, see [Run Data App in Postman](/tidb-cloud/data-service-postman-integration.md).
 
 To test an endpoint, perform the following steps:
 
@@ -239,7 +239,7 @@ To call an endpoint, you can send an HTTPS request to either an undeployed draft
 
 > **Tip:**
 >
-> If you have connected your Data App to Postman, you can also call endpoints of the Data App in Postman. For more information, see [Run Data App in Postman](/tidb-cloud/data-service-postman-integration.md).
+> If you have imported your Data App to Postman, you can also call endpoints of the Data App in Postman. For more information, see [Run Data App in Postman](/tidb-cloud/data-service-postman-integration.md).
 
 ### Prerequisites
 
