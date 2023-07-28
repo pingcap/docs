@@ -193,7 +193,7 @@ To rename an endpoint, perform the following steps:
 
 ## Test an endpoint
 
-> **Note:**
+> **Tip:**
 >
 > If you have connected your Data App to Postman, you can also test endpoints of the Data App in Postman. For more information, see [Run Data App in Postman](/tidb-cloud/data-service-postman-integration.md).
 
