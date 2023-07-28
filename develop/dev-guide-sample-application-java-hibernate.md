@@ -335,11 +335,7 @@ public class HibernateExample
 
 The following content introduces how to run the code step by step.
 
-### Step 3.1 Table initialization
-
-No need to initialize tables manually.
-
-### Step 3.2 Modify parameters for TiDB Cloud
+### Step 3.1 Modify parameters for TiDB Cloud
 
 If you are using a TiDB Serverless cluster, modify the `hibernate.connection.url`, `hibernate.connection.username`, `hibernate.connection.password` in `hibernate.cfg.xml`.
 
@@ -403,7 +399,7 @@ In this case, you can modify the parameters as follows:
 </hibernate-configuration>
 ```
 
-### Step 3.3 Run
+### Step 3.2 Run
 
 To run the code, you can run `make build` and `make run` respectively:
 
