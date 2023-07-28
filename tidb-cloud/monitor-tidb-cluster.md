@@ -21,6 +21,7 @@ You can see the current status of each running cluster on the cluster page.
 | **Maintaining** | The cluster is in maintenance. |
 | **Modifying** | The cluster is being modified. |
 | **Unavailable** | The cluster has failed and TiDB cannot recover it. |
+| **Pausing** | The cluster is being paused. |
 | **Paused** | The cluster is paused. |
 | **Resuming** | The cluster is being resumed from a pause. |
 | **Restoring** | The cluster is currently being restored from a backup. |

@@ -17,7 +17,7 @@ Comparing with backup and restore, pausing and resuming a cluster takes less tim
 
 ## Limitations
 
-- You can pause your cluster only when it is in the **AVAILABLE** state. If your cluster is in other states such as **MODIFYING**, you must wait for the current operation to be completed before pausing the cluster.
+- You can pause your cluster only when it is in the **Available** status. If your cluster is in other status such as **Modifying**, you must wait for the current operation to be completed before pausing the cluster.
 - You cannot pause your cluster when a data import task is going on. You can either wait for the import task to be completed or cancel the import task.
 - You cannot pause your cluster when a backup job is going on. You can either wait for the current backup job to be completed or [delete the running backup job](/tidb-cloud/backup-and-restore.md#delete-a-running-backup-job).
 - You cannot pause your cluster if it has any [changefeeds](/tidb-cloud/changefeed-overview.md). You need to [delete the existing changefeeds](/tidb-cloud/changefeed-overview.md#delete-a-changefeed) before pausing the cluster.
@@ -51,6 +51,8 @@ To pause a cluster, take the following steps:
 
 4. In the dialog, click **Pause** to confirm your choice.
 
+    After you click **Pause**, the cluster will be in the **Pausing** status first. Once the pause operation is done, the cluster will be in the **Paused** status.
+
 You can also pause a cluster using TiDB Cloud API. Currently, TiDB Cloud API is still in beta. For more information, see [TiDB Cloud API Documentation](https://docs.pingcap.com/tidbcloud/api/v1beta).
 
 ## Resume a TiDB cluster
@@ -64,9 +66,11 @@ After a paused cluster is resumed, note the following:
 To resume a paused cluster, take the following steps:
 
 1. In the TiDB Cloud console, navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
-2. For the cluster that you want to resume, click **Resume**.
+2. For the cluster that you want to resume, click **Resume**. The **Resume your cluster** dialog is displayed.
 
-    The **Resume your cluster** dialog is displayed.
+    > **Note:**
+    >
+    > You cannot resume a cluster in the **Pausing** status.
 
 3. In the dialog, click **Resume** to confirm your choice. The cluster status becomes **RESUMING**.
 
