@@ -353,7 +353,7 @@ You can also execute `ALTER TABLE employees DROP PARTITION pEast` to delete all 
 
 #### Default List partition
 
-Starting from v7.3.0, TiDB Cloud supports the default List partition feature, which lets you add a default List partition to a List partitioned table. The default List partition acts as a catch-all partition, where rows that do not match any other defined value sets can be placed.
+Starting from v7.3.0, List partitioning supports the default partition feature, which lets you add a default List partition to a List partitioned table. The default List partition acts as a catch-all partition, where rows that do not match any other defined value sets can be placed.
 
 The default List partition feature is controlled by the [`tidb_enable_default_list_partition`](/system-variables.md#tidb_enable_default_list_partition-new-in-v730) variable, which is disabled by default because it is a TiDB extension and is not compatible with MySQL.
 
