@@ -124,6 +124,7 @@ The new version of conflict detection has the following limitations:
 - The new version of conflict detection can only be done on a single node, and does not apply to parallel imports and scenarios where the "disk-quota" parameter is enabled.
 - The new version of conflict detection is enabled when the configuration [`conflict.strategy`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task) is set. 
 - Currently the two modes cannot be used at the same time.
+
 Compared with the old version of conflict detection, if the original data has a large amount of conflicting data, using the new version of conflict detection can take less import time. It is recommended that you use the new version of conflict detection in non-parallel import tasks when the data contains conflicting data and there is sufficient local disk space.
 
 ### The old version of conflict detection
