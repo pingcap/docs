@@ -29,7 +29,7 @@ data-source-dir = "/data/my_database"
 
 [conflict]
 # The new version of strategy to handle conflicting data. The default value is "".
-# - "": TiDB Lightning does not detect and process conflicting dat. But if there are conflicting primary or unique key records in the source file, an error is reported in the subsequent step (Checksum).
+# - "": TiDB Lightning does not detect and process conflicting data. But if there are conflicting primary or unique key records in the source file, an error is reported in the subsequent step (Checksum).
 # - "error": terminate the import and report an error if a primary or unique key conflict is detected in the imported data.
 # - "replace": when encountering data with conflicting primary or unique keys, the new data is retained and the old data is overwritten.
 # - "ignore": when encountering data with conflicting primary or unique keys, the old data is retained and the new data is ignored.
@@ -103,8 +103,6 @@ There are two methods for conflict detection:
 - The new version of conflict detection, controlled by `conflict` configuration
 - The old version of conflict detection, controlled by `tikv-importer.duplicate-resolution` configuration
 
- Currently the two modes cannot be used at the same time.
-
 ### The new version of conflict detection
 
 The meaning of configuration values are as follows:
@@ -125,7 +123,7 @@ The new version of conflict detection has the following limitations:
 - Before importing, it reads all data and encodes it to detect potentially conflicting data. Temporary files are stored using `tikv-importer.sorted-kv-dir` during the detection process. The results are retained for import phase after the detection is complete. Therefore, there is additional overhead for time consumption, disk space usage, and API requests to read the data.
 - The new version of conflict detection can only be done on a single node, and does not apply to parallel imports and scenarios where the "disk-quota" parameter is enabled.
 - The new version of conflict detection is enabled when the configuration [`conflict.strategy`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task) is set. 
-
+- Currently the two modes cannot be used at the same time.
 Compared with the old version of conflict detection, if the original data has a large amount of conflicting data, using the new version of conflict detection can take less import time. It is recommended that you use the new version of conflict detection in non-parallel import tasks when the data contains conflicting data and there is sufficient local disk space.
 
 ### The old version of conflict detection

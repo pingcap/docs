@@ -124,7 +124,7 @@ driver = "file"
 
 [conflict]
 # The new version strategy to handle conflicting data. The default value is "".
-# - "": TiDB Lightning does not detect and process conflicting dat. But if there are conflicting primary or unique key records in the source file, an error is reported in the subsequent step (Checksum).
+# - "": TiDB Lightning does not detect and process conflicting data. But if there are conflicting primary or unique key records in the source file, an error is reported in the subsequent step (Checksum).
 # - "error": terminate the import and report an error if data with conflicting primary or unique keys is detected in the imported data.
 # - "replace": when encountering data with conflicting primary or unique keys, the new data is retained and the old data is overwritten.
 # - "ignore": when encountering data with conflicting primary or unique keys, the old data is retained and the new data is ignored.
