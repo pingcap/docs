@@ -51,7 +51,7 @@ To pause a cluster, take the following steps:
 
 4. In the dialog, click **Pause** to confirm your choice.
 
-    After you click **Pause**, the cluster will be in the **Pausing** status first. Once the pause operation is done, the cluster will be in the **Paused** status.
+    After you click **Pause**, the cluster will enter the **Pausing** status first. Once the pause operation is done, the cluster will transition to the **Paused** status.
 
 You can also pause a cluster using TiDB Cloud API. Currently, TiDB Cloud API is still in beta. For more information, see [TiDB Cloud API Documentation](https://docs.pingcap.com/tidbcloud/api/v1beta).
 
