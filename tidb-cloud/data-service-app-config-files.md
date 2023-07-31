@@ -63,8 +63,7 @@ The properties of a Data App contain the App ID, name, and type. You can find th
 ```
 
 The following is an example configuration of `dataapp_config.json`.
-<!--TODO: Add App Version-->
-<!--TODO: Add Description-->
+
 ```json
 {
   "app_id": "<Data App ID>",
@@ -167,10 +166,10 @@ The description of each field is as follows:
 | `cluster_id`  | String | The ID of the TiDB cluster for your endpoint. You can get it from the URL of your TiDB cluster. For example, if your cluster URL is `https://tidbcloud.com/console/clusters/1234567891234567890/overview`, the cluster ID is `1234567891234567890`. |
 | `params` | Array | The parameters used in the endpoint. By defining parameters, you can dynamically replace the parameter value in your queries through the endpoint. In `params`, you can define one or multiple parameters. For each parameter, you need to define its `name`, `type`, `required`, and `default` fields. If your endpoint does not need any parameters. You can leave `params` empty such as `"params": []`. |
 | `params.name` | String | The name of the parameter. The name can only include letters, digits, and underscores (`_`) and must start with a letter or an underscore (`_`).          |
-| `params.type` | String | The data type of the parameter. Supported values are `string`, `number`, `integer`, and `boolean`. When using a `string` type parameter, you do not need to add quotation marks (`'` or `"`). For example, `foo` is valid for the `string` type and is processed as `"foo"`, whereas `"foo"` is processed as `"\"foo\""`. <!--TODO: add INTEGER-->|
+| `params.type` | String | The data type of the parameter. Supported values are `string`, `number`, `integer`, and `boolean`. When using a `string` type parameter, you do not need to add quotation marks (`'` or `"`). For example, `foo` is valid for the `string` type and is processed as `"foo"`, whereas `"foo"` is processed as `"\"foo\""`. |
 | `params.required` | Integer | Specifies whether the parameter is required in the request. Supported values are `0` (not required) and `1` (required). The default value is `0`.  |
 | `params.default` | String | The default value of the parameter. Make sure that the value matches the type of parameter you specified. Otherwise, the endpoint returns an error. |
-| `params.description` | String | The description of the parameter. <!--TODO: add params.description-->|
+| `params.description` | String | The description of the parameter. |
 | `settings.timeout`     | Integer | The timeout for the endpoint in milliseconds, which is `5000` by default. You can set it to an integer from `1` to `30000`.  |
 | `settings.row_limit`   | Integer  | The maximum number of rows that the endpoint can operate or return, which is `50` by default. When `batch_operation` is set to `0`, you can set it to an integer from `1` to `2000`. When `batch_operation` is set to `1`, you can set it to an integer from `1` to `100`.  |
 | `tag`    | String | The tag for the endpoint. The default value is `"Default"`. |

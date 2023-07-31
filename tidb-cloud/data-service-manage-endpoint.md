@@ -169,7 +169,7 @@ In the **Definition** section, you can view and manage the following properties 
 
 - The parameter name: the name can only include letters, digits, and underscores (`_`) and must start with a letter or an underscore (`_`).
 - **Required**: specifies whether the parameter is required in the request. The default configuration is set to not required.
-- **Type**: specifies the data type of the parameter. Supported values are `STRING`, `NUMBER`, `INTEGER`, and `BOOLEAN`. When using a `STRING` type parameter, you do not need to add quotation marks (`'` or `"`). For example, `foo` is valid for the `STRING` type and is processed as `"foo"`, whereas `"foo"` is processed as `"\"foo\""`.<!--TODO: add INTEGER-->
+- **Type**: specifies the data type of the parameter. Supported values are `STRING`, `NUMBER`, `INTEGER`, and `BOOLEAN`. When using a `STRING` type parameter, you do not need to add quotation marks (`'` or `"`). For example, `foo` is valid for the `STRING` type and is processed as `"foo"`, whereas `"foo"` is processed as `"\"foo\""`.
 - **Default Value**: specifies the default value of the parameter.
 
     - Make sure that the value can be converted to the type of parameter. Otherwise, the endpoint returns an error.

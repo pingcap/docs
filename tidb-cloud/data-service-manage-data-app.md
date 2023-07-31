@@ -19,7 +19,7 @@ To create a Data App for your project, perform the following steps:
     >
     > If this is the first Data App in your project, click **Create Data App** in the middle of the page.
 
-2. Enter a name, a description, and select clusters that you want the Data App to access.<!--TODO: Add Description-->
+2. Enter a name, a description, and select clusters that you want the Data App to access.
 
 3. (Optional) To automatically deploy endpoints of the Data App to your preferred GitHub repository and branch, enable **Connect to GitHub**, and then do the following:
 
@@ -44,7 +44,7 @@ To create a Data App for your project, perform the following steps:
 ## Configure a Data App
 
 You can edit the name, version, or description of a Data App, and manage its GitHub connection, linked data sources, API keys, endpoints, and deployments.
-<!--TODO: Add Description-->
+
 ### Edit Data App properties
 
 You can edit the name, version, and description of a Data App. To edit Data App properties, perform the following steps:
@@ -106,8 +106,6 @@ To manage deployments, perform the following steps:
         - When it is disabled, the Data App changes you made in the TiDB Cloud console are deployed directly.
 
 5. In the **Action** column, you can edit or re-deploy your changes according to your needs.
-
-<!--TODO: add OAS-->
 
 ## Use the OpenAPI Specification
 
