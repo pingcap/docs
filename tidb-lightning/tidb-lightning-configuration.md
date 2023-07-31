@@ -123,11 +123,12 @@ driver = "file"
 # keep-after-success = false
 
 [conflict]
-# The strategy to handle conflicting data. The default value is "".
-# - "": no actions. TiDB Lightning might exit due to an error.
-# - "error": the import task fails if there is conflicting data.
-# - "replace": keep the new data when detecting conflicting data.
-# - "ignore": keep the old data when detecting conflicting data.
+# The new version strategy to handle conflicting data. The default value is "".
+# - "": TiDB Lightning does not detect and process conflicting dat. But if there are conflicting primary or unique key records in the source file, an error is reported in the subsequent step (Checksum).
+# - "error": terminate the import and report an error if a primary or unique key conflict is detected in the imported data.
+# - "replace": when encountering data with conflicting primary or unique keys, the new data is retained and the old data is overwritten.
+# - "ignore": when encountering data with conflicting primary or unique keys, the old data is retained and the new data is ignored.
+# It cannot be used together with `tikv-importer.duplicate-resolution` (the old version of conflict detection).
 strategy = ""
 # When `strategy` is "replace" or "ignore", this parameter controls the upper limit of the conflicting data. You can set it only when `strategy` is "replace" or "ignore". The default value is 9223372036854775807, which means that almost all errors are tolerated.
 # threshold = 9223372036854775807
