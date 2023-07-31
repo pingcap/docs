@@ -90,7 +90,6 @@ ALTER TABLE catalog_sales SET tiflash REPLICA 1;
 ALTER TABLE date_dim SET tiflash REPLICA 1;
 ```
 
-等待一段时间，并检查两个表的 TiFlash 副本已准备就绪，即副本的 `AVAILABLE` 字段和 `PROGRESS` 字段均为 `1`。
 Wait until the TiFlash replicas of the two tables are ready, that is, the `AVAILABLE` and `PROGRESS` fields of the replicas are both `1`.
 
 ```sql
