@@ -358,7 +358,7 @@ See [Index Selection - Use multi-valued indexes](/choose-index.md#use-multi-valu
 
 ### Compatibility with TiDB tools
 
-Multi-valued index is an experimental feature. It has some known compatibility issues with TiDB tools or features:
+Multi-valued indexes are an experimental feature. It has some known compatibility issues with TiDB tools or features:
 
 <CustomContent platform="tidb">
 
