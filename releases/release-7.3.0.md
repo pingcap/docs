@@ -36,21 +36,58 @@ This drastically improves write performance, reduces I/O amplication, speeds up 
 
 ### Performance
 
-- note 1
 
-- note 2
+* TiFlash 支持副本选择策略 [#44106](https://github.com/pingcap/tidb/issues/44106) @[XuHuaiyu](https://github.com/XuHuaiyu) **tw@qiancai** <!--1394-->
+
+    在 v7.3.0 之前，当 TiFlash 进行数据扫描和 MPP 计算时，会尽可能使用其所有节点的副本，以提供最强大的性能。从 v7.3.0 起，TiFlash 引入副本选择策略，该策略由系统变量 [`tiflash_replica_read`](/system-variables.md#tiflash_replica_read-从-v730-版本开始引入) 控制，可以根据节点的[区域属性](/schedule-replicas-by-topology-labels.md#设置-tidb-的-labels可选)选择特定的副本，调度部分节点进行数据扫描及 MPP 计算。
+
+    当集群部署在多个机房且每个机房都拥有完整的 TiFlash 数据副本时，你可以设置该策略只选择使用当前机房的 TiFlash 副本，即在当前机房的 TiFlash 节点中进行数据扫描和 MPP 计算，从而避免大量跨机房的网络数据传输。
+
+    更多信息，请参考[用户文档](/system-variables.md/system-variables.md#tiflash_replica_read-从-v730-版本开始引入)。
+
+* TiFlash 支持节点内的 Runtime Filter [#40220](https://github.com/pingcap/tidb/issues/40220) @[elsa0520](https://github.com/elsa0520) **tw@ran-huang** <!--1130-->
+
+    Runtime Filter 是一种在查询规划时生成的动态取值的谓词。在表连接的过程中，这些动态谓词能够进一步过滤掉不满足条件的行，减少扫描时间和网络开销，提升表连接的效率。自 v7.3.0 起，TiFlash 支持节点内的 Runtime Filter，提升了数据分析类查询的整体性能，在部分 TPC-DS 查询中可达到 10% ~ 50% 的性能提升。
+
+    该特性在 v7.3.0 默认关闭。要启用此功能，需将变量 [`tidb_runtime_filter_mode`](#tidb_runtime_filter_mode-从-v720-版本开始引入) 设置为 `LOCAL`。
+
+    更多信息，请参考[用户文档](/runtime-filter.md)。
+
+* TiFlash 支持执行公共表表达式 (CTE)（实验特性）[#43333](https://github.com/pingcap/tidb/issues/43333) @[winoros](https://github.com/winoros) **tw@ran-huang** <!--1244-->
+
+    在 v7.3.0 版本之前，TiFlash 的 MPP 引擎默认无法执行包含 CTE 的查询，你需要通过系统变量 [`tidb_opt_force_inline_cte`](/system-variables.md#tidb_opt_force_inline_cte-从-v630-版本开始引入) 将 CTE inline 展开，达到让查询尽可能在 MPP 框架下执行的效果。在 v7.3.0 中，TiFlash MPP 引擎支持执行包含 CTE 的查询，无需将 CTE inline 展开也可以尽可能地在 MPP 框架中执行查询。在 TPC-DS 基准测试中，与 inline 的执行方式相比，该功能可以将包含 CTE 的查询的总执行速度提升 20%。
+
+    该功能为实验特性，默认关闭，由变量 [`tidb_opt_enable_mpp_shared_cte_execution`](/system-variables.md#tidb_opt_enable_mpp_shared_cte_execution-从-v720-版本开始引入) 控制。
 
 ### Reliability
 
-- note 1
+* 新增部分优化器提示 [#45520](https://github.com/pingcap/tidb/issues/45520) @[qw4990](https://github.com/qw4990) **tw@ran-huang** <!--1457-->
 
-- note 2
+    TiDB 在 v7.3.0 新增了几个优化器提示，用来控制表之间的连接方式，包括：
+
+    - [`INDEX_JOIN()`](链接) 选择 Index Nested Loop Join，利用索引过滤并将结果集作为内表连接。
+    - [`NO_HASH_JOIN()`](链接) 选择哈希连接以外的连接方式。
+    - [`NO_INDEX_HASH_JOIN()`](链接) 选择除 [Index Nested Loop Hash Join](/optimizer-hints#inl_hash_join) 以外的连接方式。
+
+    更多信息，请参考[用户文档](/optimizer-hints)。
+
+* 手工标记资源使用超出预期的查询 (实验特性) [#43691](https://github.com/pingcap/tidb/issues/43691) @[Connor1996](https://github.com/Connor1996) @[CabinfeverB](https://github.com/CabinfeverB) **tw@hfxsd** <!--1446-->
+
+    在 v7.2.0 中，TiDB 对资源使用超出预期的查询 (Runaway Queries) 实施自动管理，运行时间超过预期的查询能够被自动降级或取消。在实际运行时，只依靠规则无法筛覆盖所有情况。 因此，在 v7.3.0 中，TiDB 补充了手工标记查询的能力。 利用新增的命令 [`QUERY WATCH`]()，用户可以根据 SQL 的文本、SQL Digest、或者执行计划对查询进行标记，命中的查询可以被降级或取消。
+
+    手工标记 Runaway Queries 的能力，为数据库中突发的性能问题提供了有效的干预手段。针对由查询引发的性能问题，在找到问题根本原因之前，能够快速缓解其对整体性能的影响，提升系统服务质量。
+
+    更多信息，请参考[用户文档](/tidb-resource-control#管理资源消耗超出预期的查询-runaway-queries)。
 
 ### SQL
 
-- note 1
+* List 和 List COLUMNS 分区表支持默认分区 [#20679](https://github.com/pingcap/tidb/issues/20679) @[mjonss](https://github.com/mjonss) @[bb7133](https://github.com/bb7133) **tw@qiancai** <!--1342-->
 
-- note 2
+    当使用 `INSERT` 语句向 List 或 List COLUMNS 分区表插入数据时，这些数据需要满足分区表指定的分区条件。如果要插入的数据不匹配任何分区条件，该语句将执行失败或不符合分区条件的数据被忽略。
+
+    在 v7.3.0 中，List 和 List COLUMNS 分区表支持默认分区功能。在创建默认分区后，如果要插入的数据不匹配任何分区条件，则数据将被写入默认分区。默认分区功能可以提升 List 分区和 List COLUMNS 分区的使用便捷性，避免不符合分区条件的数据导致 `INSERT` 语句执行失败或者数据被忽略。该功能默认关闭，可通过 [`tidb_enable_default_list_partition`](/system-variables.md#tidb_enable_default_list_partition-new-in-v730) 变量开启。
+
+    更多信息，请参考[用户文档](/partitioned-table.md#list-分区)。
 
 ### DB operations
 
@@ -60,15 +97,39 @@ This drastically improves write performance, reduces I/O amplication, speeds up 
 
 ### Observability
 
-- note 1
+* 显示统计信息收集的进度 [#issue号](链接) @[hawkingrei](https://github.com/hawkingrei) **tw@Oreoxmt** <!--1380-->
 
-- note 2
+    对大表的统计信息收集经常会持续比较长的时间。在过去的版本里，用户无从得知统计信息收集的进度，进而没法预测完成时间。在 v7.3.0 中，TiDB 加入了对统计信息收集进度的信息展示，能够显示各个子任务的总体工作量、当前进度、以及对完成时间的预测。在大规模数据导入、SQL 性能优化等场景下，用户能够了解整体任务进展，提升用户体验。
+
+    更多信息，请参考[用户文档](链接)。
+
+* Plan Replayer 支持导出历史统计信息 [#45038](https://github.com/pingcap/tidb/issues/45038) @[time-and-fate](https://github.com/time-and-fate) **tw@ran-huang** <!--1445-->
+
+    自 v7.3.0 起，通过新增的 [`dump with stats as of timestamp`](/sql-plan-replayer.md) 子句，Plan Replayer 能够导出指定 SQL 相关对象在指定时间点的统计信息。在执行计划问题的诊断过程中，通过对历史统计信息的准确抓取，能够更精确地分析出执行计划在问题发生的时间点是如何生成的，从而找到问题的根本原因，大大提升执行计划问题的诊断效率。
+
+    更多信息，请参考[用户文档](/sql-plan-replayer.md)。
 
 ### Data migration
 
-- note 1
+* Lightning 引入新版冲突数据检测与处理的能力 [#41629](https://github.com/pingcap/tidb/issues/41629) @[lance6716](https://github.com/lance6716) **tw@hfxsd** <!--1296-->
 
-- note 2
+    之前的版本 Lightning 逻辑导入和物理导入模式都有各自的冲突检测和处理的方式，配置较为复杂且不利于用户理解。同时使用物理导入模式，冲突的数据无法通过 replace 和 ignore 策略来处理。新版的冲突检测和处理方式，逻辑导入和物理导入都是用同一套冲突检测和处理方式即遇到冲突数据报错，或者 replace 以及 ignore 掉冲突数据。同时还支持用户设置冲突记录的上限，如处理多少冲突记录后任务中断退出，用户也可以让程序记录哪些数据发生了冲突，方便用户排查。
+
+    在明确所需导入数据有较多的冲突数据时，推荐使用新版的冲突检测和处理策略，会有更好的性能。注意新、旧版冲突策略互斥使用，会在未来废弃掉旧版冲突检测和处理策略。
+
+    更多信息，请参考[用户文档](链接)。
+
+* Lightning 支持 Partitioned Raft KV（实验特性） [#15069](https://github.com/tikv/tikv/pull/15069) @[GMHDBJD](https://github.com/GMHDBJD) **tw@hfxsd** <!--1507-->
+
+    该版本 Lightning 支持了 Partitioned Raft KV ，当用户使用了 Partitioned Raft KV 特性后，能提升 Lightning 导入数据的性能。
+
+    更多信息，请参考[用户文档](链接)。
+
+* Lightning 引入新的参数"enable-diagnose-log" 用于打印更多的诊断日志，方便定位问题 [#45497](https://github.com/pingcap/tidb/issues/45497) @[D3Hunter](https://github.com/D3Hunter) **tw@hfxsd** <!--1517-->
+
+    默认情况下，此功能未启用，只会打印包含 "lightning/main" 的日志。当启用时，将打印所有包（包括 "client-go" 和 "tidb"）的日志，以帮助诊断与 "client-go" 和 "tidb" 相关的问题。
+
+    更多信息，请参考[用户文档](链接)。
 
 ## Compatibility changes
 
@@ -80,7 +141,10 @@ This drastically improves write performance, reduces I/O amplication, speeds up 
 
 <!-- 此小节包含 MySQL 兼容性变更-->
 
-* 兼容性 1
+* TiDB Lightning **tw@hfxsd**
+
+    - 逻辑导入模式插入冲突数据时执行的操作，默认配置从 on-duplicate = "replace" 改为 on-duplicate = "error" 即遇到冲突数据即报错。
+    - TiDB Lightning 停止迁移任务之前能容忍的最大非严重 (non-fatal errors) 错误数的参数 "max-error" 不再包含导入数据冲突的上限。而是由新的参数 "conflict.threshold" 来控制可容忍的最大冲突的记录数。
 
 * 兼容性 2
 
@@ -111,8 +175,9 @@ This drastically improves write performance, reduces I/O amplication, speeds up 
 
 + TiDB
 
-    - 优化构造索引扫描范围的逻辑，支持将一些复杂条件转化为索引扫描范围 [#41572](https://github.com/pingcap/tidb/issues/41572) [#44389](https://github.com/pingcap/tidb/issues/44389) @xuyifangreeneyes
-    - 支持分区表下推 TopN 算子，减少该情况下 indexLookUp 和 IndexMerge 算子回表次数，提升相关 SQL 执行性能 [#26166](https://github.com/pingcap/tidb/issues/26166) [#41028](https://github.com/pingcap/tidb/issues/41028)
+    - 游标 (Cursor) 结果过大时，写入 TiDB 临时磁盘空间从而避免OOM [#43233](https://github.com/pingcap/tidb/issues/43233) @[YangKeao](https://github.com/YangKeao) <!--1430-->
+    - EXPLAIN 新增开关用以展示在优化期间被执行的子查询 [#22076](https://github.com/pingcap/tidb/issues/22076) @[winoros](https://github.com/winoros] **tw@Oreoxmt** <!--983-->
+    - 在启用 [`Global Kill`](/tidb-configuration-file#enable-global-kill-从-v610-版本开始引入) 的情况下，可以通过 Ctrl+C 终止当前会话。 [#8854](https://github.com/pingcap/tidb/issues/8854) @[pingyu](https://github.com/pingyu)
     - note [#issue](链接) @[贡献者 GitHub ID](链接)
 
 + TiKV
@@ -127,6 +192,7 @@ This drastically improves write performance, reduces I/O amplication, speeds up 
 
 + TiFlash
 
+    - 支持新的 DTFile 格式版本，减少物理文件数量（实验特性） [#7595](https://github.com/pingcap/tiflash/issues/7595) @[hongyunyan](https://github.com/hongyunyan) **tw@qiancai** <!--？-->
     - note [#issue](链接) @[贡献者 GitHub ID](链接)
     - note [#issue](链接) @[贡献者 GitHub ID](链接)
 
@@ -134,12 +200,12 @@ This drastically improves write performance, reduces I/O amplication, speeds up 
 
     + Backup & Restore (BR)
 
-        - note [#issue](链接) @[贡献者 GitHub ID](链接)
+        - 为外部存储 Azure Blob Storage 提供加密范围和加密密钥的支持 [#45025](https://github.com/pingcap/tidb/issues/45025) @[Leavrth](https://github.com/Leavrth) **tw@Oreoxmt** <!--1385-->
         - note [#issue](链接) @[贡献者 GitHub ID](链接)
 
     + TiCDC
 
-        - note [#issue](链接) @[贡献者 GitHub ID](链接)
+        - Kafka Sink 支持在消息过大时只发送 Handle Key 数据，减少数据大小 [#9382](https://github.com/pingcap/tiflow/issues/9382) @[3AceShowHand](https://github.com/3AceShowHand) **tw@ran-huang** <!--1406-->
         - note [#issue](链接) @[贡献者 GitHub ID](链接)
 
     + TiDB Data Migration (DM)
@@ -149,7 +215,7 @@ This drastically improves write performance, reduces I/O amplication, speeds up 
 
     + TiDB Lightning
 
-        - note [#issue](链接) @[贡献者 GitHub ID](链接)
+        - 更新 TiDB Lightning 并行导入的参数名称从 "tikv-importer.incremental-import" 变更为 “tikv-importer.parallel-import” ，避免用户误认为是增量导入而误用该参数。 [#45501](https://github.com/pingcap/tidb/issues/45501) @[lyzx2001](https://github.com/lyzx2001) **tw@hfxsd**
         - note [#issue](链接) @[贡献者 GitHub ID](链接)
 
     + TiUP
