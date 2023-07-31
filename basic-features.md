@@ -57,7 +57,11 @@ This document lists the features supported in different TiDB versions, including
 | [Unique indexes](/constraints.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | [Clustered index on integer `PRIMARY KEY`](/constraints.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | [Clustered index on composite or non-integer key](/constraints.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | N |
+<<<<<<< HEAD
 | [Multi-valued index](/sql-statements/sql-statement-create-index.md#multi-valued-index) | E | E | N | N | N | N | N | N | N | N |
+=======
+| [Multi-valued indexes](/sql-statements/sql-statement-create-index.md#multi-valued-indexes) | Y | Y | N | N | N | N | N | N | N | N |
+>>>>>>> 3495efed4 (update wording in multi-valued indexes (#14321))
 | [Foreign key](/constraints.md#foreign-key) | Y | Y | N | N | N | N | N | N | N | N |
 | [TiFlash late materialization](/tiflash/tiflash-late-materialization.md) | E | N | N | N | N | N | N | N | N | N |
 

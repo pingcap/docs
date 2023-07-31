@@ -1516,6 +1516,22 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - This variable is used to set whether to enable the statistics `Fast Analyze` feature.
 - If the statistics `Fast Analyze` feature is enabled, TiDB randomly samples about 10,000 rows of data as statistics. When the data is distributed unevenly or the data size is small, the statistics accuracy is low. This might lead to a non-optimal execution plan, for example, selecting a wrong index. If the execution time of the regular `Analyze` statement is acceptable, it is recommended to disable the `Fast Analyze` feature.
 
+<<<<<<< HEAD
+=======
+### tidb_enable_fast_table_check <span class="version-mark">New in v7.2.0</span>
+
+> **Note:**
+>
+> This variable does not work for [multi-valued indexes](/sql-statements/sql-statement-create-index.md#multi-valued-indexes) and prefix indexes.
+
+- Scope: SESSION | GLOBAL
+- Persists to the cluster: Yes
+- Type: Boolean
+- Default value: `ON`
+- This variable is used to control whether to use a checksum-based approach to quickly check the integrity of data and indexes in a table. The default value `ON` means this feature is enabled by default.
+- When this variable is enabled, TiDB can execute the [`ADMIN CHECK [TABLE|INDEX]`](/sql-statements/sql-statement-admin-check-table-index.md) statement in a faster way.
+
+>>>>>>> 3495efed4 (update wording in multi-valued indexes (#14321))
 ### tidb_enable_foreign_key <span class="version-mark">New in v6.3.0</span>
 
 - Scope: GLOBAL
