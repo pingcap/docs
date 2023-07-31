@@ -36,7 +36,6 @@ This drastically improves write performance, reduces I/O amplication, speeds up 
 
 ### Performance
 
-
 * TiFlash 支持副本选择策略 [#44106](https://github.com/pingcap/tidb/issues/44106) @[XuHuaiyu](https://github.com/XuHuaiyu) **tw@qiancai** <!--1394-->
 
     在 v7.3.0 之前，当 TiFlash 进行数据扫描和 MPP 计算时，会尽可能使用其所有节点的副本，以提供最强大的性能。从 v7.3.0 起，TiFlash 引入副本选择策略，该策略由系统变量 [`tiflash_replica_read`](/system-variables.md#tiflash_replica_read-从-v730-版本开始引入) 控制，可以根据节点的[区域属性](/schedule-replicas-by-topology-labels.md#设置-tidb-的-labels可选)选择特定的副本，调度部分节点进行数据扫描及 MPP 计算。
@@ -45,31 +44,33 @@ This drastically improves write performance, reduces I/O amplication, speeds up 
 
     更多信息，请参考[用户文档](/system-variables.md/system-variables.md#tiflash_replica_read-从-v730-版本开始引入)。
 
-* TiFlash 支持节点内的 Runtime Filter [#40220](https://github.com/pingcap/tidb/issues/40220) @[elsa0520](https://github.com/elsa0520) **tw@ran-huang** <!--1130-->
+* TiFlash supports Runtime Filter within nodes [#40220](https://github.com/pingcap/tidb/issues/40220) @[elsa0520](https://github.com/elsa0520) **tw@ran-huang** <!--1130-->
 
-    Runtime Filter 是一种在查询规划时生成的动态取值的谓词。在表连接的过程中，这些动态谓词能够进一步过滤掉不满足条件的行，减少扫描时间和网络开销，提升表连接的效率。自 v7.3.0 起，TiFlash 支持节点内的 Runtime Filter，提升了数据分析类查询的整体性能，在部分 TPC-DS 查询中可达到 10% ~ 50% 的性能提升。
+    Runtime Filter is a predicate that generates dynamic values during query planning. During the process of table joining, these dynamic predicates can further filter out rows that do not meet the conditions, reducing scan time and network overhead, and improving the efficiency of table joining. Starting from v7.3.0, TiFlash supports Runtime Filter within nodes, improving the overall performance of analytical queries with performance improvements ranging from 10% to 50% in some TPC-DS workloads.
 
-    该特性在 v7.3.0 默认关闭。要启用此功能，需将变量 [`tidb_runtime_filter_mode`](#tidb_runtime_filter_mode-从-v720-版本开始引入) 设置为 `LOCAL`。
+    This feature is disabled by default in v7.3.0. To enable this feature, set the system variable [`tidb_runtime_filter_mode`](/system-variables.md#tidb_runtime_filter_mode-new-in-v720) to `LOCAL`.
 
-    更多信息，请参考[用户文档](/runtime-filter.md)。
+    For more information, refer to [user documentation](/runtime-filter.md).
 
-* TiFlash 支持执行公共表表达式 (CTE)（实验特性）[#43333](https://github.com/pingcap/tidb/issues/43333) @[winoros](https://github.com/winoros) **tw@ran-huang** <!--1244-->
+* TiFlash supports executing common table expressions (CTEs) (experimental) [#43333](https://github.com/pingcap/tidb/issues/43333) @[winoros](https://github.com/winoros) **tw@ran-huang** <!--1244-->
 
-    在 v7.3.0 版本之前，TiFlash 的 MPP 引擎默认无法执行包含 CTE 的查询，你需要通过系统变量 [`tidb_opt_force_inline_cte`](/system-variables.md#tidb_opt_force_inline_cte-从-v630-版本开始引入) 将 CTE inline 展开，达到让查询尽可能在 MPP 框架下执行的效果。在 v7.3.0 中，TiFlash MPP 引擎支持执行包含 CTE 的查询，无需将 CTE inline 展开也可以尽可能地在 MPP 框架中执行查询。在 TPC-DS 基准测试中，与 inline 的执行方式相比，该功能可以将包含 CTE 的查询的总执行速度提升 20%。
+    Before v7.3.0, the MPP engine of TiFlash cannot execute queries that contain CTEs by default. To achieve the best execution performance within the MPP framework, you need to use the system variable [`tidb_opt_force_inline_cte`](/system-variables.md#tidb_opt_force_inline_cte-introduced-since-v630) to inline expand CTE.
 
-    该功能为实验特性，默认关闭，由变量 [`tidb_opt_enable_mpp_shared_cte_execution`](/system-variables.md#tidb_opt_enable_mpp_shared_cte_execution-从-v720-版本开始引入) 控制。
+    Starting from v7.3.0, TiFlash's MPP engine supports executing queries with CTEs without inline expanding them, allowing for optimal query execution within the MPP framework. In TPC-DS benchmark tests, compared to using inline expansion, this feature has shown a 20% improvement in overall query execution speed for queries containing CTE.
+
+    This feature is an experimental feature and is disabled by default. It is controlled by the system variable [`tidb_opt_enable_mpp_shared_cte_execution`](/system-variables.md#tidb_opt_enable_mpp_shared_cte_execution-new-in-v720).
 
 ### Reliability
 
-* 新增部分优化器提示 [#45520](https://github.com/pingcap/tidb/issues/45520) @[qw4990](https://github.com/qw4990) **tw@ran-huang** <!--1457-->
+* Add new optimizer hints [#45520](https://github.com/pingcap/tidb/issues/45520) @[qw4990](https://github.com/qw4990) **tw@ran-huang** <!--1457-->
 
-    TiDB 在 v7.3.0 新增了几个优化器提示，用来控制表之间的连接方式，包括：
+    In v7.3.0, TiDB introduces several new optimizer hints to control the join methods between tables, including:
 
-    - [`INDEX_JOIN()`](链接) 选择 Index Nested Loop Join，利用索引过滤并将结果集作为内表连接。
-    - [`NO_HASH_JOIN()`](链接) 选择哈希连接以外的连接方式。
-    - [`NO_INDEX_HASH_JOIN()`](链接) 选择除 [Index Nested Loop Hash Join](/optimizer-hints#inl_hash_join) 以外的连接方式。
+    - [`INDEX_JOIN()`](link) selects index nested loop join, which uses indexes to filter and use the result set as the inner table to join.
+    - [`NO_HASH_JOIN()`](link) selects join methods other than hash join.
+    - [`NO_INDEX_HASH_JOIN()`](link) selects join methods other than [index nested loop join](/optimizer-hints.md#inl_hash_join).
 
-    更多信息，请参考[用户文档](/optimizer-hints)。
+    For more information, refer to [user documentation](/optimizer-hints).
 
 * 手工标记资源使用超出预期的查询 (实验特性) [#43691](https://github.com/pingcap/tidb/issues/43691) @[Connor1996](https://github.com/Connor1996) @[CabinfeverB](https://github.com/CabinfeverB) **tw@hfxsd** <!--1446-->
 
@@ -103,11 +104,11 @@ This drastically improves write performance, reduces I/O amplication, speeds up 
 
     更多信息，请参考[用户文档](链接)。
 
-* Plan Replayer 支持导出历史统计信息 [#45038](https://github.com/pingcap/tidb/issues/45038) @[time-and-fate](https://github.com/time-and-fate) **tw@ran-huang** <!--1445-->
+* Plan Replayer supports exporting historical statistics [#45038](https://github.com/pingcap/tidb/issues/45038) @[time-and-fate](https://github.com/time-and-fate) **tw@ran-huang** <!--1445-->
 
-    自 v7.3.0 起，通过新增的 [`dump with stats as of timestamp`](/sql-plan-replayer.md) 子句，Plan Replayer 能够导出指定 SQL 相关对象在指定时间点的统计信息。在执行计划问题的诊断过程中，通过对历史统计信息的准确抓取，能够更精确地分析出执行计划在问题发生的时间点是如何生成的，从而找到问题的根本原因，大大提升执行计划问题的诊断效率。
+    Starting from v7.3.0, with the newly added [`dump with stats as of timestamp`](/sql-plan-replayer.md) clause, Plan Replayer can export the statistics of specified SQL-related objects at a specific point in time. During the diagnosis of execution plan issues, accurately capturing historical statistics can help analyze more precisely how the execution plan was generated at the time when the issue occurred. This helps identify the root cause of the problem and greatly improves efficiency in diagnosing execution plan issues.
 
-    更多信息，请参考[用户文档](/sql-plan-replayer.md)。
+    For more information, refer to [user documentation](/sql-plan-replayer.md).
 
 ### Data migration
 
@@ -205,7 +206,7 @@ This drastically improves write performance, reduces I/O amplication, speeds up 
 
     + TiCDC
 
-        - Kafka Sink 支持在消息过大时只发送 Handle Key 数据，减少数据大小 [#9382](https://github.com/pingcap/tiflow/issues/9382) @[3AceShowHand](https://github.com/3AceShowHand) **tw@ran-huang** <!--1406-->
+        - Kafka Sink supports sending only handle key data when the message is too large, reducing the size of the message [#9382](https://github.com/pingcap/tiflow/issues/9382) @[3AceShowHand](https://github.com/3AceShowHand) **tw@ran-huang** <!--1406-->
         - note [#issue](链接) @[贡献者 GitHub ID](链接)
 
     + TiDB Data Migration (DM)
