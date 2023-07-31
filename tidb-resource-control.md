@@ -284,7 +284,7 @@ The parameters of `QUERY_LIMIT` are as follows:
 
 For more information about `QUERY WATCH` parameters, see [`QUERY WATCH`](/sql-statements/sql-statement-query-watch.md).
 
-- The `RESOURCE GROUP` is used to specify a resource group. The identification of the runaway queries added by this statement will be applied to the sessions of this particular resource group. This parameter can be omitted, and when it is omitted, it applies to the `default` resource group.
+- The `RESOURCE GROUP` is used to specify a resource group. The watch item of the runaway queries added by this statement will be applied to the sessions of this particular resource group. This parameter can be omitted, and when it is omitted, it applies to the `default` resource group.
 - The meaning of `ACTION` is the same as `QUERY LIMIT`. This parameter can be omitted. When it is omitted, it means that the corresponding action after identification adopts the `ACTION` configured by `QUERY LIMIT` in the resource group. If there is no `ACTION` configured in the resource group, an error will be reported.
 - The `QueryWatchTextOption` parameter has three options: `SQL DIGEST`, `PLAN DIGEST`, and `SQL TEXT`.
     - `SQL DIGEST` is the same as that of `SIMILAR`, and the parameters immediately following it can be strings, user-defined variables, and other expressions with string computation results, provided that the required string length is 64, which is the same as the definition of Digest in TiDB.
