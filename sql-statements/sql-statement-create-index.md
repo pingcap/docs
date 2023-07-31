@@ -233,15 +233,11 @@ Expression indexes have the same syntax and limitations as in MySQL. They are im
 
 ## Multi-valued indexes
 
-<<<<<<< HEAD
 > **Warning:**
 >
 > For the current version, this feature is still experimental and not recommended for production environments.
 
-Multi-valued index is a kind of secondary index defined on an array column. In a normal index, one index record corresponds to one data record (1:1). In a multi-valued index, multiple index records correspond to one data record (N:1). Multi-valued indexes are used to index JSON arrays. For example, a multi-valued index defined on the `zipcode` field will generate one index record for each element in the `zipcode` array.
-=======
 Multi-valued indexes are a kind of secondary index defined on an array column. In a normal index, one index record corresponds to one data record (1:1). In a multi-valued index, multiple index records correspond to one data record (N:1). Multi-valued indexes are used to index JSON arrays. For example, a multi-valued index defined on the `zipcode` field will generate one index record for each element in the `zipcode` array.
->>>>>>> 3495efed4 (update wording in multi-valued indexes (#14321))
 
 ```json
 {
@@ -341,20 +337,13 @@ See [Index Selection - Use multi-valued indexes](/choose-index.md#use-multi-valu
 ### Limitations
 
 - For an empty JSON array, no corresponding index record is generated.
-<<<<<<< HEAD
 - The target type in `CAST(... AS ... ARRAY)` cannot be any of `BINARY`, `JSON`, `YEAR`, `FLOAT`, `DOUBLE`, and `DECIMAL`. The source type must be JSON.
-- You cannot use a multi-valued index for sorting.
-- You can only create a multi-valued index on a JSON array.
-=======
-- The target type in `CAST(... AS ... ARRAY)` cannot be any of `BINARY`, `JSON`, `YEAR`, `FLOAT`, and `DECIMAL`. The source type must be JSON.
 - You cannot use multi-valued indexes for sorting.
 - You can only create multi-valued indexes on a JSON array.
->>>>>>> 3495efed4 (update wording in multi-valued indexes (#14321))
 - A multi-valued index cannot be a primary key or a foreign key.
 - The extra storage space used by a multi-valued index = the average number of array elements per row * the space used by a normal secondary index.
 - Compared with normal indexes, DML operations will modify more index records for multi-valued indexes, so multi-valued indexes will have a greater performance impact than normal indexes.
 - Because multi-valued indexes are a special type of expression index, multi-valued indexes have the same limitations as expression indexes.
-<<<<<<< HEAD
 
 ### Compatibility with TiDB tools
 
@@ -375,11 +364,6 @@ Multi-valued indexes are an experimental feature. It has some known compatibilit
 - sync-diff-inspector does not support validating data for tables with multi-valued indexes.
 
 </CustomContent>
-=======
-- If a table uses multi-valued indexes, you cannot back up, replicate, or import the table using BR, TiCDC, or TiDB Lightning to a TiDB cluster earlier than v6.6.0.
-- Due to the lack of collected statistics for multi-valued indexes, the selection rate of multi-valued indexes is currently based on fixed assumptions. When a query hits multiple multi-valued indexes, TiDB might not be able to select the optimal index. In such cases, it is recommended to use the [`use_index_merge`](/optimizer-hints.md#use_index_merget1_name-idx1_name--idx2_name-) optimizer hint to enforce a fixed execution plan.
-- For a query with complex conditions, TiDB might not be able to select multi-valued indexes. For information on the condition patterns supported by multi-valued indexes, refer to [Use multi-valued indexes](/choose-index.md#use-multi-valued-indexes).
->>>>>>> 3495efed4 (update wording in multi-valued indexes (#14321))
 
 ## Invisible index
 
