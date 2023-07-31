@@ -64,7 +64,7 @@ Currently, the `help_topic` is NULL.
 
 * `tidb_runaway_queries`: the history records of all identified runaway queries in the past 7 days
 * `tidb_runaway_watch`: the watch list for runaway queries
-* `tidb_runaway_watch_done`: a rapid identification list of deleted or expired runaway queries
+* `tidb_runaway_watch_done`: a watch list of deleted or expired runaway queries
 
 ## Miscellaneous system tables
 

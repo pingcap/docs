@@ -61,7 +61,7 @@ RESOURCE_GROUP_NAME: rg2
 ```
 
 ```sql
-query watch add resource group rg1 sql text exact to 'select * from sbtest.sbtest1'; -- Add identification list
+query watch add resource group rg1 sql text exact to 'select * from sbtest.sbtest1'; -- Add a watch item into list
 ```
 
 ```sql
@@ -105,7 +105,7 @@ The meanings of the columns in the `RUNAWAY_WATCHES` table are as follows:
 - RESOURCE_GROUP_NAME: the name of the resource group.
 - START_TIME: the start time.
 - END_TIME: the end time. `UNLIMITED` means that the watch item is valid forever.
-- WATCH: the type of the fast identification. The values are as follows:
+- WATCH: the type of the quick identification. The values are as follows:
     - `Plan` indicates that the Plan Digest is matched. In this case, the `WATCH_TEXT` column shows the Plan Digest.
     - `Similar` indicates that the SQL Digest is matched. In this case, the `WATCH_TEXT` column shows the SQL Digest.
     - `Exact` indicates that the SQL text is matched. In this case, the `WATCH_TEXT` column shows the SQL text.
