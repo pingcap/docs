@@ -5,32 +5,32 @@ summary: Learn the working principles of Runtime Filter and how to use it.
 
 # Runtime Filter
 
-Runtime Filter is a new feature introduced in TiDB v7.3, which aims to improve the performance of Hash Join in MPP scenarios. By generating filters dynamically to filter the data of Hash Join in advance, TiDB can reduce the amount of scanning and the amount of calculation of Hash Join at runtime, and ultimately improving the query performance.
+Runtime Filter is a new feature introduced in TiDB v7.3, which aims to improve the performance of hash join in MPP scenarios. By generating filters dynamically to filter the data of hash join in advance, TiDB can reduce the amount of scanning and the amount of calculation of hash join at runtime, and ultimately improving the query performance.
 
 ## Concepts
 
-- Hash join: a way to implement the Join relational algebra. It gets the result of Join by building a hash table on one side and continuously matching the hash table on the other side.
+- Hash join: a way to implement the join relational algebra. It gets the result of Join by building a hash table on one side and continuously matching the hash table on the other side.
 - Build side: one side of hash join used to build a hash table. In this document, the right table of Join is called the build side by default.
 - Probe side: one side of hash join used to continuously match the hash table. In this document, the left table of Join is called the probe side by default.
-- Filter: also known as predicate, which means the filter condition in this document.
+- Filter: also known as predicate, which refers to the filter condition in this document.
 
 ## Working principles of Runtime Filter
 
-Hash join performs the join operation by building a hash table on the right table and continuously probing the hash table on the left table. If some join key values cannot hit the hash table during the probing process, it means that these data do not exist in the right table and will not appear in the final join result. Therefore, if TiDB can **filter out these join key data in advance** during scanning, it will reduce the scanning time and network overhead, thereby greatly improving the join efficiency.
+Hash join performs the join operation by building a hash table on the right table and continuously probing the hash table on the left table. If some join key values cannot hit the hash table during the probing process, it means that the data does not exist in the right table and will not appear in the final join result. Therefore, if TiDB can **filter out the join key data in advance** during scanning, it will reduce the scanning time and network overhead, thereby greatly improving the join efficiency.
 
-Runtime Filter is a **dynamic predicate** generated during the query planning phase. This predicate has the same function as other predicates in the TiDB Selection operator. These predicates are all applied to the Table Scan operation to filter out rows that do not match the predicate conditions. The only difference is that the parameter values in Runtime Filter come from the results generated during the Hash Join build process.
+Runtime Filter is a **dynamic predicate** generated during the query planning phase. This predicate has the same function as other predicates in the TiDB Selection operator. These predicates are all applied to the Table Scan operation to filter out rows that do not match the predicate. The only difference is that the parameter values in Runtime Filter come from the results generated during the hash join build process.
 
 ### Example
 
-Assume that there is a Join query between the `store_sales` table and the `date_dim` table, and the Join method is Hash Join. `store_sales` is a fact table that mainly stores the sales data of stores, and the number of rows is 1 million. `date_dim` is a time dimension table that mainly stores date information. Currently, you want to query the sales data of year 2001, so the number of rows of `date_dim` table involved in the Join operation is 365.
+Assume that there is a join query between the `store_sales` table and the `date_dim` table, and the join method is hash join. `store_sales` is a fact table that mainly stores the sales data of stores, and the number of rows is 1 million. `date_dim` is a time dimension table that mainly stores date information. You want to query the sales data of 2001, so 365 rows of the `date_dim` table is involved in the join operation.
 
 ```sql
 SELECT * FROM store_sales, date_dim
-  WHERE ss_date_sk = d_date_sk
+WHERE ss_date_sk = d_date_sk
     AND d_year = 2001;
 ```
 
-The execution method of Hash Join is usually as follows:
+The execution plan of hash join is usually as follows:
 
 ```
                  +-------------------+
@@ -50,20 +50,18 @@ The execution method of Hash Join is usually as follows:
 
 *(The above figure omits the exchange node and other nodes.)*
 
-Runtime Filter 的执行方式如下：
-
 The execution process of Runtime Filter is as follows:
 
-1. Scan the data of `date_dim`, and PhysicalHashJoin calculates a filter condition based on the `date_dim` data, such as `date_dim in (2001/01/01~2001/12/31)`.
-2. Send the filter condition to the TableFullScan operator that is waiting to scan `store_sales`.
-3. The filter condition is applied to `store_sales`, and the filtered data is passed to PhysicalHashJoin, thereby reducing the amount of data scanned by the probe side and the amount of calculation of matching the hash table.
+1. Scan the data of the `date_dim` table, and `PhysicalHashJoin` calculates a filter condition based on the `date_dim` data, such as `date_dim in (2001/01/01~2001/12/31)`.
+2. Send the filter condition to the `TableFullScan` operator that is waiting to scan `store_sales`.
+3. The filter condition is applied to `store_sales`, and the filtered data is passed to `PhysicalHashJoin`, thereby reducing the amount of data scanned by the probe side and the amount of calculation of matching the hash table.
 
 ```
                          2. Build RF values
             +-------->+-------------------+
             |         |PhysicalHashJoin   |<-----+
             |    +----+                   |      |
-4. After RF  |    |    +-------------------+      | 1. Scan T2
+4. After RF |    |    +-------------------+      | 1. Scan T2
     5000    |    |3. Send RF                     |      365
             |    | filter data                   |
             |    |                               |
@@ -73,13 +71,13 @@ The execution process of Runtime Filter is as follows:
       +-----------------+                +----------------+
 ```
 
-From the above two figures, you can see that the amount of data scanned by `store_sales` is reduced from 1 million to 5000. By reducing the amount of data scanned by Table Full Scan, Runtime Filter can reduce the number of times to match the Hash Table, avoid unnecessary I/O and network transmission, and significantly improve the efficiency of the Join operation.
+From the above two figures, you can see that the amount of data scanned by `store_sales` is reduced from 1 million to 5000. By reducing the amount of data scanned by `TableFullScan`, Runtime Filter can reduce the number of times to match the hash table, avoid unnecessary I/O and network transmission, and significantly improve the efficiency of the join operation.
 
 ## Use Runtime Filter
 
-To use Runtime Filter, you only need to create a table with TiFlash replicas and set [`tidb_runtime_filter_mode`](/system-variables.md#tidb_runtime_filter_mode-introduced-in-v720) to `LOCAL`.
+To use Runtime Filter, you need to create a table with TiFlash replicas and set [`tidb_runtime_filter_mode`](/system-variables.md#tidb_runtime_filter_mode-introduced-in-v720) to `LOCAL`.
 
-Taking the TPC-DS dataset as an example, this section uses the `catalog_sales` table and the `date_dim` table for Join operations to illustrate how to use Runtime Filter to improve query efficiency.
+Taking the TPC-DS dataset as an example, this section uses the `catalog_sales` table and the `date_dim` table for join operations to illustrate how Runtime Filter improves query efficiency.
 
 ### Step 1: Create a table with TiFlash replicas
 
@@ -90,7 +88,6 @@ ALTER TABLE catalog_sales SET tiflash REPLICA 1;
 ALTER TABLE date_dim SET tiflash REPLICA 1;
 ```
 
-等待一段时间，并检查两个表的 TiFlash 副本已准备就绪，即副本的 `AVAILABLE` 字段和 `PROGRESS` 字段均为 `1`。
 Wait until the TiFlash replicas of the two tables are ready, that is, the `AVAILABLE` and `PROGRESS` fields of the replicas are both `1`.
 
 ```sql
@@ -140,14 +137,14 @@ WHERE d_date = '2002-2-01' AND
      cs_ship_date_sk = d_date_sk;
 ```
 
-When Runtime Filter takes effect, the corresponding Runtime Filter is mounted on the HashJoin node and the TableScan node, indicating that Runtime Filter is applied successfully.
+When Runtime Filter takes effect, the corresponding Runtime Filter is mounted on the `HashJoin` node and the `TableScan` node, indicating that Runtime Filter is applied successfully.
 
 ```
 TableFullScan: runtime filter:0[IN] -> tpcds50.catalog_sales.cs_ship_date_sk
 HashJoin: runtime filter:0[IN] <- tpcds50.date_dim.d_date_sk |
 ```
 
-The complete query plan is as follows:
+The complete query execution plan is as follows:
 
 ```
 +----------------------------------------+-------------+--------------+---------------------+-----------------------------------------------------------------------------------------------------------------------------------------------+
@@ -176,7 +173,7 @@ WHERE d_date = '2002-2-01' AND
 
 ### Step 4: Performance comparison
 
-This example uses the 50 GB TPC-DS data. After Runtime Filter is enabled, the query time is reduced from 0.38 seconds to 0.17 seconds, and the efficiency is improved by 50%. You can use the `ANALYZE` statement to view the execution time of each operator after Runtime Filter takes effect.
+This example uses the 50 GB TPC-DS data. After Runtime Filter is enabled, the query time is reduced from 0.38 seconds to 0.17 seconds, and efficiency is improved by 50%. You can use the `ANALYZE` statement to view the execution time of each operator after Runtime Filter takes effect.
 
 The following is the execution information of the query when Runtime Filter is not enabled:
 
@@ -222,14 +219,14 @@ mysql> EXPLAIN ANALYZE SELECT cs_ship_date_sk FROM catalog_sales, date_dim
 
 By comparing the execution information of the two queries, you can find the following improvements:
 
-* IO reduction: by comparing the `total_scanned_rows` of the TableFullScan operator, you can see that the scan volume of TableFullScan is reduced by 2/3 after Runtime Filter is enabled.
-* Hash join performance improvement: the execution duration of the HashJoin operator is reduced from 376.1 ms to 157.6 ms.
+* IO reduction: by comparing the `total_scanned_rows` of the TableFullScan operator, you can see that the scan volume of `TableFullScan` is reduced by 2/3 after Runtime Filter is enabled.
+* Hash join performance improvement: the execution duration of the `HashJoin` operator is reduced from 376.1 ms to 157.6 ms.
 
 ### Best practices
 
 Runtime Filter is applicable to the scenario where a large table and a small table are joined, such as the join query of a fact table and a dimension table. When the dimension table has a small amount of hit data, it means that the filter has fewer values, so the fact table can filter out the data that does not meet the conditions. Compared with the default scenario where the entire fact table is scanned, this significantly improves the query performance.
 
-The Join of the `Sales` table and the `date_dim` table in TPC-DS is a typical example.
+The join operation of the `Sales` table and the `date_dim` table in TPC-DS is a typical example.
 
 ## Configure Runtime Filter
 
@@ -239,8 +236,8 @@ When using Runtime Filter, you can configure the mode and predicate type of Runt
 
 The mode of Runtime Filter is the relationship between the **Filter Sender operator** and **Filter Receiver operator**. There are three modes: `OFF`, `LOCAL`, and `GLOBAL`. In v7.3.0, only `OFF` and `LOCAL` modes are supported. The Runtime Filter mode is controlled by the session-level system variable [`tidb_runtime_filter_mode`](/system-variables.md#tidb_runtime_filter_mode-new-in-v720).
 
-- `OFF`: represents that Runtime Filter is disabled. After it is disabled, the query behavior is the same as in previous versions.
-- `LOCAL`: represents that Runtime Filter is enabled in the local mode. In the local mode, the **Filter Sender operator** and **Filter Receiver operator** are in the same MPP Task. In other words, Runtime Filter can be applied to the scenario where the Hash Join operator and Table Scan operator are in the same Task. Currently, Runtime Filter only supports the local mode. To enable this mode, set it to `LOCAL`.
+- `OFF`: Runtime Filter is disabled. After it is disabled, the query behavior is the same as in previous versions.
+- `LOCAL`: Runtime Filter is enabled in the local mode. In the local mode, the **Filter Sender operator** and **Filter Receiver operator** are in the same MPP Task. In other words, Runtime Filter can be applied to the scenario where the hash join operator and Table Scan operator are in the same Task. Currently, Runtime Filter only supports the local mode. To enable this mode, set it to `LOCAL`.
 - `GLOBAL`: currently, the global mode is not supported. You cannot be set Runtime Filter to this mode.
 
 ### Runtime Filter type
@@ -252,7 +249,7 @@ The type of Runtime Filter is the type of the predicate used by the generated Fi
 ## Limitations
 
 - Runtime Filter is an optimization in the MPP architecture and can only be applied to queries pushed down to TiFlash.
-- Join type: Left outer, Full outer, and Anti join (when the left table is the Probe Side) do not support Runtime Filter. Because Runtime Filter filters the data involved in the Join in advance, the preceding types of Join do not discard the unmatched data, so this optimization cannot be used.
-- Equal Join expression: When the Probe column in the equal join expression is a complex expression, or when the Probe column type is JSON, Blob, Array, or other complex data types, Runtime Filter is not generated. The main reason is that the preceding types of column are rarely used as the join column. Even if the Filter is generated, the filtering rate is usually low.
+- Join type: Left outer, Full outer, and Anti join (when the left table is the probe side) do not support Runtime Filter. Because Runtime Filter filters the data involved in the join in advance, the preceding types of join do not discard the unmatched data, so Runtime Filter cannot be used.
+- Equal join expression: When the probe column in the equal join expression is a complex expression, or when the probe column type is JSON, Blob, Array, or other complex data types, Runtime Filter is not generated. The main reason is that the preceding types of column are rarely used as the join column. Even if the Filter is generated, the filtering rate is usually low.
 
 For the preceding limitations, if you need to confirm whether Runtime Filter is generated correctly, you can use the [`EXPLAIN` statement](/sql-statements/sql-statement-explain.md) to verify the execution plan.

@@ -260,7 +260,7 @@ Hash join performance is influenced by the following system variables:
 - [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query) (default value: 1GB) - if the memory quota for a query is exceeded, TiDB will attempt to spill the `Build` operator of a hash join to disk to save memory.
 - [`tidb_hash_join_concurrency`](/system-variables.md#tidb_hash_join_concurrency) (default value: `5`) - the number of concurrent hash join tasks.
 
-### Further optimizations
+### Related optimizations
 
 TiDB provides the Runtime Filter feature, which optimizes the performance of hash join and greatly improves its execution speed. For specific optimization usage, see [Runtime Filter](/runtime-filter.md).
 
