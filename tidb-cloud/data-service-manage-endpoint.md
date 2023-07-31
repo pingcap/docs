@@ -219,7 +219,7 @@ After testing the endpoint, you can see the response as JSON at the bottom of th
 
 ## Deploy an endpoint
 
-> **Tip:**
+> **Note:**
 >
 > If you have connected your Data App to GitHub with **Auto Sync & Deployment** enabled, any Data App changes you made in GitHub will be deployed in TiDB Cloud Data Service automatically. For more information, see [Deploy automatically with GitHub](/tidb-cloud/data-service-manage-github-connection.md).
 
