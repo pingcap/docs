@@ -141,9 +141,9 @@ The following uses Next.js as an example to demonstrate how to generate client c
 
     This command generates the client code using the `oas/doc.json` specification as input and outputs the client code to the `gen/api` directory.
 
-## Step 4. Develop your application
+## Step 4. Develop your Next.js application
 
-You can use the generated client code to develop your application.
+You can use the generated client code to develop your Next.js application.
 
 1. In the `hello-repos` project directory, create a `.env.local` file with the following variables, and then set the variable values to the public key and private key of your Data App.
 
@@ -194,7 +194,7 @@ You can use the generated client code to develop your application.
     >
     > Make sure to replace `basePath` with the actual endpoint path of your Data App. To get `${YOUR_REGION}` and `{YOUR_DATA_APP_ID}`, check the **Endpoint URL** in the endpoint **Properties** panel.
 
-## 5. Preview your application
+## 5. Preview your Next.js application
 
 > **Note:**
 >
