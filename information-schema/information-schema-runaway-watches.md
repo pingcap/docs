@@ -5,7 +5,7 @@ summary: Learn the `RUNAWAY_WATCHES` information_schema table。
 
 # RUNAWAY_WATCHES
 
-The `RUNAWAY_WATCHES` table shows a list of all identified runaway queries. See [Runaway Queries](/tidb-resource-control.md#manage-queries-that-consume-more-resources-than-expected-runaway-queries).
+The `RUNAWAY_WATCHES` table shows the watch list of runaway queries. See [Runaway Queries](/tidb-resource-control.md#manage-queries-that-consume-more-resources-than-expected-runaway-queries).
 
 ```sql
 USE information_schema;
@@ -35,7 +35,7 @@ DESC runaway_watches;
 ## Examples
 
 ```sql
-select * from information_schema.runaway_watches\G; -- Query runaway query identification list
+select * from information_schema.runaway_watches\G; -- Query the watch list of runaway query
 ```
 
 ```sql
@@ -65,7 +65,7 @@ query watch add resource group rg1 sql text exact to 'select * from sbtest.sbtes
 ```
 
 ```sql
-select * from information_schema.runaway_watches\G; -- Query runaway query identification list
+select * from information_schema.runaway_watches\G; -- Query the watch list of runaway query
 ```
 
 ```sql
@@ -101,13 +101,13 @@ RESOURCE_GROUP_NAME: rg1
 
 The meanings of the columns in the `RUNAWAY_WATCHES` table are as follows:
 
-- ID: the ID of the identification item.
+- ID: the ID of the watch item.
 - RESOURCE_GROUP_NAME: the name of the resource group.
 - START_TIME: the start time.
-- END_TIME: the end time. `UNLIMITED` means that the identification item is valid forever.
+- END_TIME: the end time. `UNLIMITED` means that the watch item is valid forever.
 - WATCH: the type of the fast identification. The values are as follows:
     - `Plan` indicates that the Plan Digest is matched. In this case, the `WATCH_TEXT` column shows the Plan Digest.
     - `Similar` indicates that the SQL Digest is matched. In this case, the `WATCH_TEXT` column shows the SQL Digest.
     - `Exact` indicates that the SQL text is matched. In this case, the `WATCH_TEXT` column shows the SQL text.
-- `SOURCE` indicates the source of the identification item. If it is identified by the `QUERY_LIMIT` rule, the identified TiDB IP address is displayed. If it is manually added, `manual` is displayed.
+- `SOURCE` indicates the source of the watch item. If it is identified by the `QUERY_LIMIT` rule, the identified TiDB IP address is displayed. If it is manually added, `manual` is displayed.
 - `ACTION` indicates the corresponding operation after the identification. If it is `NoneAction`, the `ACTION` configured in `QUERY_LIMIT` in the resource group is used.

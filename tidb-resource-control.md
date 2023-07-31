@@ -227,7 +227,7 @@ SELECT /*+ RESOURCE_GROUP(rg1) */ * FROM t limit 10;
 
 A runaway query is a query that takes excessive time or resources than expected.
 
-- Starting from v7.2.0, the resource control feature introduces the management of runaway queries. You can set criteria for a resource group to identify runaway queries and automatically take actions to prevent them from exhausting resources and affecting other queries. You can manage runaway queries for a resource group by configuring the `QUERY_LIMIT` field in [`CREATE RESOURCE GROUP`](/sql-statements/sql-statement-create-resource-group.md) or [`ALTER RESOURCE GROUP`](/sql-statements/sql-statement-alter-resource-group.md).
+- Starting from v7.2.0, the resource control feature introduces the management of runaway queries. You can set criteria for a resource group to identify runaway queries and automatically take actions to prevent them from exhausting resources and affecting other queries. You can manage runaway queries for a resource group by including the `QUERY_LIMIT` field in [`CREATE RESOURCE GROUP`](/sql-statements/sql-statement-create-resource-group.md) or [`ALTER RESOURCE GROUP`](/sql-statements/sql-statement-alter-resource-group.md).
 - Starting from v7.3.0, the resource control feature introduces manual management of runaway watches, enabling quick identification of runaway queries for a given SQL statement or Digest. You can execute the statement [`QUERY WATCH`](/sql-statements/sql-statement-query-watch.md) to manually manage the runaway queries identification list in the resource group.
 
 #### `QUERY_LIMIT` parameters
@@ -242,7 +242,7 @@ Supported operations (`ACTION`):
 - `COOLDOWN`: the execution priority of the query is lowered to the lowest level. The query continues to execute with the lowest priority and does not occupy resources of other operations.
 - `KILL`: the identified query is automatically terminated and reports an error `Query execution was interrupted, identified as runaway query`.
 
-To avoid too many concurrent runaway queries that exhaust system resources before being identified by conditions, the resource control feature introduces a quick identification mechanism. By using the `WATCH` clause, when a query is identified as a runaway query, the current TiDB instance marks the matching queries as runaway queries immediately in the next period of time (defined by `DURATION`), and takes the corresponding actions, instead of waiting for them to be identified by conditions. The `KILL` operation reports an error `Quarantined and interrupted because of being in runaway watch list`. In summary, it can be assumed that `WATCH` puts the identified queries into the runaway queries identification list, and these queries are identified directly before they are executed, thus achieving rapid identification.
+To avoid too many concurrent runaway queries that exhaust system resources before being identified by conditions, the resource control feature introduces a quick identification mechanism. By using the `WATCH` clause, when a query is identified as a runaway query, the current TiDB instance marks the matching queries as runaway queries immediately in the next period of time (defined by `DURATION`), and takes the corresponding actions, instead of waiting for them to be identified by conditions. The `KILL` operation reports an error `Quarantined and interrupted because of being in runaway watch list`. In summary, it can be assumed that `WATCH` puts the queries matched into the runaway queries watch list, and these queries are identified directly before they are executed, thus achieving quick identification.
 
 There are three methods for `WATCH` to match for rapid identification:
 
@@ -284,7 +284,7 @@ The parameters of `QUERY_LIMIT` are as follows:
 
 For more information about `QUERY WATCH` parameters, see [`QUERY WATCH`](/sql-statements/sql-statement-query-watch.md).
 
-- The `RESOURCE GROUP` is used to specify a resource group. The identification of the runaway queries added by this statement will be applied to this resource group. This parameter can be omitted, and when it is omitted, it applies to the `default` resource group.
+- The `RESOURCE GROUP` is used to specify a resource group. The identification of the runaway queries added by this statement will be applied to the sessions of this particular resource group. This parameter can be omitted, and when it is omitted, it applies to the `default` resource group.
 - The meaning of `ACTION` is the same as `QUERY LIMIT`. This parameter can be omitted. When it is omitted, it means that the corresponding action after identification adopts the `ACTION` configured by `QUERY LIMIT` in the resource group. If there is no `ACTION` configured in the resource group, an error will be reported.
 - The `QueryWatchTextOption` parameter has three options: `SQL DIGEST`, `PLAN DIGEST`, and `SQL TEXT`.
     - `SQL DIGEST` is the same as that of `SIMILAR`, and the parameters immediately following it can be strings, user-defined variables, and other expressions with string computation results, provided that the required string length is 64, which is the same as the definition of Digest in TiDB.

@@ -5,7 +5,7 @@ summary: An overview of the usage of QUERY WATCH for the TiDB database.
 
 # QUERY WATCH
 
-The `QUERY WATCH` statement is used to manually manage the `Runaway Queries` identification list in a resource group.
+The `QUERY WATCH` statement is used to manually manage the `Runaway Queries` watch list in a resource group.
 
 > **Warning:**
 >
