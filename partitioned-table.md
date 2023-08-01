@@ -355,11 +355,7 @@ You can also execute `ALTER TABLE employees DROP PARTITION pEast` to delete all 
 
 Starting from v7.3.0, List partitioning supports the default partition feature, which lets you add a default List partition to a List partitioned table. The default List partition acts as a catch-all partition, where rows that do not match any other defined value sets can be placed.
 
-The default List partition feature is controlled by the [`tidb_enable_default_list_partition`](/system-variables.md#tidb_enable_default_list_partition-new-in-v730) variable, which is disabled by default because it is a TiDB extension and is not compatible with MySQL.
-
-When [`tidb_enable_default_list_partition`](/system-variables.md#tidb_enable_default_list_partition-new-in-v730) is set to `ON`, you can add a default partition to an existing List partition table.
-
-Take the following List partition table as an example:
+Take the following List partitioned table as an example:
 
 ```sql
 CREATE TABLE t (
@@ -409,7 +405,7 @@ PARTITION BY LIST (store_id) (
 );
 ```
 
-When [`tidb_enable_default_list_partition`](/system-variables.md#tidb_enable_default_list_partition-new-in-v730) is `OFF`, List partition table does not support a default partition to store all values that do not belong to other partitions. Therefore, all expected values of a partition expression must be included in the `PARTITION ... VALUES IN (...)` clause. If the value to be inserted in an `INSERT` statement does not match the column value set of any partition, the statement fails to execute and an error is reported. See the following example:
+Without a default partition, all expected values of a partition expression must be included in the `PARTITION ... VALUES IN (...)` clause. If the value to be inserted in an `INSERT` statement does not match the column value set of any partition, the statement fails to execute and an error is reported. See the following example:
 
 ```sql
 CREATE TABLE t (
