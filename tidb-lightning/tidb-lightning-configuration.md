@@ -35,8 +35,8 @@ max-size = 128 # MB
 max-days = 28
 max-backups = 14
 
-# Whether to enable the diagnose log. The default value is false, that is, only the logs related to the import will be output, and the logs of other dependent components will not be output.
-# When you set it to true to enable it, both the logs related to the import and the logs of other dependent components will be output, and GRPC debug will be enabled, which can be used for diagnosis.
+# Controls whether to enable the diagnostic logs. The default value is false, that is, only the logs related to the import are output, and the logs of other dependent components are not output.
+# When you set it to true, logs from both the import process and other dependent components are output, and GRPC debugging is enabled, which can be used for diagnosis.
 # This parameter is introduced in v7.3.0.
 enable-diagnose-logs = false
 ```
