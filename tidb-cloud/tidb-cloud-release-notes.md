@@ -22,7 +22,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 - Support running Data App in Postman.
 
-    The Postman integration empowers you to import a Data App's endpoints as a collection into your preferred workspace. Then you can benefit from enhanced collaboration and seamless API testing with support for both Postman Web and Desktop clients.
+    The Postman integration empowers you to import a Data App's endpoints as a collection into your preferred workspace. Then you can benefit from enhanced collaboration and seamless API testing with support for both Postman web and desktop apps.
 
     For more information, see [Run Data App in Postman](/tidb-cloud/data-service-postman-integration.md).
 
