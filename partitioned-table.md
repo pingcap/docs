@@ -1817,10 +1817,10 @@ In `static` mode, TiDB accesses each partition separately using multiple operato
 
 ```sql
 mysql> create table t1(id int, age int, key(id)) partition by range(id) (
-    ->     partition p0 values less than (100),
-    ->     partition p1 values less than (200),
-    ->     partition p2 values less than (300),
-    ->     partition p3 values less than (400));
+        partition p0 values less than (100),
+        partition p1 values less than (200),
+        partition p2 values less than (300),
+        partition p3 values less than (400));
 Query OK, 0 rows affected (0.01 sec)
 
 mysql> explain select * from t1 where id < 150;
@@ -1870,10 +1870,10 @@ From the above query results, you can see that the `Union` operator in the execu
 
 ```sql
 mysql> create table t1 (id int, age int, key(id)) partition by range(id)
-    -> (partition p0 values less than (100),
-    ->  partition p1 values less than (200),
-    ->  partition p2 values less than (300),
-    ->  partition p3 values less than (400));
+    (partition p0 values less than (100),
+     partition p1 values less than (200),
+     partition p2 values less than (300),
+     partition p3 values less than (400));
 Query OK, 0 rows affected (0,08 sec)
 
 mysql> create table t2 (id int, code int);
