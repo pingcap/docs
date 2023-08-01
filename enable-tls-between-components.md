@@ -84,9 +84,9 @@ Currently, it is not supported to only enable encrypted transmission of some spe
 
     - TiFlash (New in v4.0.5)
 
-        Configure in the `tiflash.toml` file, and change the `http_port` item to `https_port`:
+       Configure in the `tiflash.toml` file, and change the `http_port` item to `https_port`:
 
-         ```toml
+        ```toml
         [security]
         ## The path for certificates. An empty string means that secure connections are disabled.
         # Path of the file that contains a list of trusted SSL CAs. If it is set, the following settings `cert_path` and `key_path` are also needed.
