@@ -5,7 +5,7 @@ summary: Learn how to create TiFlash replicas.
 
 # TiFlashレプリカの作成 {#create-tiflash-replicas}
 
-このドキュメントでは、テーブルとデータベースのTiFlashレプリカを作成する方法と、レプリカのスケジュール設定に使用可能なゾーンを設定する方法を紹介します。
+このドキュメントでは、テーブルとデータベースのTiFlashレプリカを作成し、レプリカのスケジュール設定に使用可能なゾーンを設定する方法を紹介します。
 
 ## テーブルのTiFlashレプリカを作成する {#create-tiflash-replicas-for-tables}
 
@@ -135,7 +135,7 @@ TiFlashレプリカが追加される前に、各 TiKV インスタンスはフ�
 
     これらの SQL ステートメントを実行すると、クラスターを再起動しなくても、構成の変更がすぐに有効になります。ただし、レプリケーション速度は依然として PD 制限によってグローバルに制限されているため、現時点では加速を観察することはできません。
 
-2.  新しいレプリカの速度制限を段階的に緩和するには、 [PD Control](https://docs.pingcap.com/tidb/stable/pd-control)を使用します。
+2.  新しいレプリカの速度制限を段階的に緩和するには、 [PD Control](https://docs.pingcap.com/tidb/stable/pd-control)使用します。
 
     デフォルトの新しいレプリカの速度制限は 30 です。これは、毎分約 30 のリージョンがTiFlashレプリカを追加することを意味します。次のコマンドを実行すると、すべてのTiFlashインスタンスの制限が 60 に調整され、元の速度が 2 倍になります。
 
@@ -143,10 +143,10 @@ TiFlashレプリカが追加される前に、各 TiKV インスタンスはフ�
     tiup ctl:v<CLUSTER_VERSION> pd -u http://<PD_ADDRESS>:2379 store limit all engine tiflash 60 add-peer
     ```
 
-    > 前述のコマンドでは、 `v<CLUSTER_VERSION>`実際のクラスターのバージョンに置き換える必要があります。たとえば、 `v6.5.0`と`<PD_ADDRESS>:2379`任意の PD ノードのアドレスに置き換えます。例えば：
+    > 前述のコマンドでは、 `v<CLUSTER_VERSION>`実際のクラスターのバージョンに置き換える必要があります。たとえば、 `v7.1.1`と`<PD_ADDRESS>:2379`任意の PD ノードのアドレスに置き換えます。例えば：
     >
     > ```shell
-    > tiup ctl:v6.1.1 pd -u http://192.168.1.4:2379 store limit all engine tiflash 60 add-peer
+    > tiup ctl:v7.1.1 pd -u http://192.168.1.4:2379 store limit all engine tiflash 60 add-peer
     > ```
 
     数分以内に、 TiFlashノードの CPU およびディスク IO リソースの使用量が大幅に増加することがわかり、 TiFlashはレプリカをより速く作成するはずです。同時に、TiKV ノードの CPU およびディスク IO リソースの使用量も増加します。
@@ -254,6 +254,6 @@ TiFlashレプリカが追加される前に、各 TiKV インスタンスはフ�
 
 <CustomContent platform="tidb">
 
-ラベルを使用したレプリカのスケジュール設定の詳細については、 [2 つの地域に配置された 3 つのデータ センター](/three-data-centers-in-two-cities-deployment.md)を参照してください。
+ラベルを使用したレプリカのスケジュール設定の詳細については、 [トポロジーラベルごとにレプリカをスケジュールする](/schedule-replicas-by-topology-labels.md) 、 [1 つの地域展開における複数のデータセンター](/multi-data-centers-in-one-city-deployment.md) 、および[2 つの地域に配置された 3 つのデータ センター](/three-data-centers-in-two-cities-deployment.md)を参照してください。
 
 </CustomContent>

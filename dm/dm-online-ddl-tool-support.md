@@ -31,7 +31,7 @@ online-ddl: true
 
 > **ノート：**
 >
-> v2.0.5 以降、 `online-ddl-scheme`非推奨になったので、 `online-ddl-scheme`の代わりに`online-ddl`使用する必要があります。つまり、設定`online-ddl: true` `online-ddl-scheme`を上書きし、設定`online-ddl-scheme: "pt"`または`online-ddl-scheme: "gh-ost"`は`online-ddl: true`に変換されます。
+> v2.0.5 以降、 `online-ddl-scheme`​​非推奨になったので、 `online-ddl-scheme`の代わりに`online-ddl`使用する必要があります。つまり、設定`online-ddl: true` `online-ddl-scheme`を上書きし、設定`online-ddl-scheme: "pt"`または`online-ddl-scheme: "gh-ost"`は`online-ddl: true`に変換されます。
 
 </div>
 

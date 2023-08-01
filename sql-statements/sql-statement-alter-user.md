@@ -171,10 +171,10 @@ SELECT USER, JSON_EXTRACT(User_attributes, "$.resource_group") FROM mysql.user W
 1 row in set (0.02 sec)
 ```
 
-ユーザーをリソース グループにバインド解除します。つまり、ユーザーがバインドされているリソース グループを空に設定します。バインドを解除すると、ユーザーは`default`リソース グループにバインドされます。
+ユーザーをリソース グループにバインド解除します。つまり、ユーザーを`default`リソース グループにバインドします。
 
 ```sql
-ALTER USER 'newuser' RESOURCE GROUP ``;
+ALTER USER 'newuser' RESOURCE GROUP `default`;
 SELECT USER, JSON_EXTRACT(User_attributes, "$.resource_group") FROM mysql.user WHERE user = "newuser";
 ```
 
@@ -182,7 +182,7 @@ SELECT USER, JSON_EXTRACT(User_attributes, "$.resource_group") FROM mysql.user W
 +---------+---------------------------------------------------+
 | USER    | JSON_EXTRACT(User_attributes, "$.resource_group") |
 +---------+---------------------------------------------------+
-| newuser | ""                                                |
+| newuser | "default"                                         |
 +---------+---------------------------------------------------+
 1 row in set (0.02 sec)
 ```

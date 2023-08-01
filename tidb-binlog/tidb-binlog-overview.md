@@ -16,7 +16,7 @@ TiDB Binlog には次の機能があります。
 
 > **ノート：**
 >
-> TiDB Binlog は、 TiDB v5.0 で導入された一部の機能と互換性がなく、一緒に使用することはできません。詳細は[TiCDC](/ticdc/ticdc-overview.md)使用することをお勧めします。
+> TiDB Binlog は、 TiDB v5.0 で導入された一部の機能と互換性がなく、一緒に使用することはできません。詳細は[ノート](#notes)を参照してください。 TiDB Binlogの代わりに[TiCDC](/ticdc/ticdc-overview.md)使用することをお勧めします。
 
 ## TiDBBinlogアーキテクチャ {#tidb-binlog-architecture}
 
@@ -41,11 +41,11 @@ TiDB Binlogクラスターは、 PumpとDrainerで構成されます。
 -   TiDB クラスターの現在の`tso`取得する
 -   Pump・Drainerの状態確認
 -   Pump/Drainerの状態を変更する
--   Pump/Drainerの一時停止または終了
+-   Pump/Drainerの一時停止または停止
 
 ## 主な特徴 {#main-features}
 
--   複数のポンプが水平方向にスケールアウトできるクラスターを形成します
+-   複数のポンプが水平​​方向にスケールアウトできるクラスターを形成します
 -   TiDB は、組み込みのPumpクライアントを使用してbinlogを各Pumpに送信します。
 -   Pumpはビンログを保存し、ビンログを順番にDrainerに送信します
 -   Drainer は、各Pumpのバイナリログを読み取り、バイナリログをマージしてソートし、バイナリログをダウンストリームに送信します。
@@ -60,13 +60,13 @@ TiDB Binlogクラスターは、 PumpとDrainerで構成されます。
 
 -   TiDB Binlog は、 TiDB v5.0 で導入された以下の機能と互換性がないため、併用することはできません。
 
-    -   [TiCDC](/ticdc/ticdc-overview.md)を使用してください。
-    -   TiDB システム変数[TiCDC](/ticdc/ticdc-overview.md)使用することをお勧めします。
-    -   TiDB システム変数[TiCDC](/ticdc/ticdc-overview.md)使用することをお勧めします。
+    -   [TiDB クラスター化インデックス](/clustered-indexes.md#limitations) : TiDB Binlogが有効になった後、TiDB は主キーとして非単一整数列を持つクラスター化インデックスの作成を許可しません。作成されたクラスター化インデックス テーブルのデータの挿入、削除、更新は、 TiDB Binlogを介してダウンストリームに複製されません。クラスター化インデックスを使用してテーブルをレプリケートする必要がある場合は、クラスターを v5.1 にアップグレードするか、代わりに[TiCDC](/ticdc/ticdc-overview.md)を使用してください。
+    -   TiDB システム変数[tidb_enable_async_commit](/system-variables.md#tidb_enable_async_commit-new-in-v50) : TiDB Binlogが有効になった後は、このオプションを有効にしてもパフォーマンスを向上させることはできません。 TiDB Binlogの代わりに[TiCDC](/ticdc/ticdc-overview.md)使用することをお勧めします。
+    -   TiDB システム変数[tidb_enable_1pc](/system-variables.md#tidb_enable_1pc-new-in-v50) : TiDB Binlogが有効になった後は、このオプションを有効にしてもパフォーマンスを向上させることはできません。 TiDB Binlogの代わりに[TiCDC](/ticdc/ticdc-overview.md)使用することをお勧めします。
 
 -   Drainer は、MySQL、TiDB、Kafka、またはローカル ファイルへのバイナリログのレプリケートをサポートしています。 Drainer がサポートしていない他の宛先にバイナリ ログをレプリケートする必要がある場合は、binlogをKafka にレプリケートし、binlogコンシューマ プロトコルに従ってカスタマイズされた処理のために Kafka でデータを読み取るようにDrainerを設定できます。 [Binlog Consumer Clientユーザー ガイド](/tidb-binlog/binlog-consumer-client.md)を参照してください。
 
--   増分データのリカバリに TiDB Binlogを使用するには、構成`db-type`から`file` (プロト バッファー形式のローカル ファイル) を設定します。 Drainer は、 binlog を指定された[Reparo](/tidb-binlog/tidb-binlog-reparo.md)使用してデータを段階的に回復できます。
+-   増分データのリカバリに TiDB Binlogを使用するには、構成`db-type`から`file` (プロト バッファー形式のローカル ファイル) を設定します。 Drainer は、 binlog を指定された[プロトバッファフォーマット](https://github.com/pingcap/tidb-binlog/blob/master/proto/pb_binlog.proto)のデータに変換し、そのデータをローカル ファイルに書き込みます。このように、 [Reparo](/tidb-binlog/tidb-binlog-reparo.md)使用してデータを段階的に回復できます。
 
     `db-type`の値に注意してください。
 

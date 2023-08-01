@@ -52,7 +52,7 @@ TiDB バージョン: 4.0.3
     -   デフォルトで実行情報の収集を有効にする[#18518](https://github.com/pingcap/tidb/pull/18518)
     -   `tiflash_tables`および`tiflash_segments`システム テーブルを追加します[#18536](https://github.com/pingcap/tidb/pull/18536)
     -   `AUTO RANDOM`実験的機能から外し、一般提供を発表します。改善点と互換性の変更は次のとおりです。
-        -   構成ファイル内の`experimental.allow-auto-random`非推奨にします。この項目がどのように構成されているかに関係なく、いつでも列に`AUTO RANDOM`機能を定義できます。 [#18623](https://github.com/pingcap/tidb/pull/18623)
+        -   構成ファイル内の`experimental.allow-auto-random`非推奨にします。この項目がどのように構成されているかに関係なく、いつでも列に`AUTO RANDOM`機能を定義できます。 [#18613](https://github.com/pingcap/tidb/pull/18613) [#18623](https://github.com/pingcap/tidb/pull/18623)
         -   `tidb_allow_auto_random_explicit_insert`セッション変数を追加して、 `AUTO RANDOM`の列への明示的な書き込みを制御します。デフォルト値は`false`です。これは、列への明示的な書き込みによって引き起こされる予期しない`AUTO_RANDOM_BASE`更新を回避するためです。 [#18508](https://github.com/pingcap/tidb/pull/18508)
         -   `BIGINT`と`UNSIGNED BIGINT`列でのみ`AUTO_RANDOM`の定義を許可し、シャード ビットの最大数を`15`に制限します。これにより、割り当て可能なスペースが急速に消費されるのを回避できます[#18538](https://github.com/pingcap/tidb/pull/18538)
         -   列`BIGINT`に属性`AUTO_RANDOM`を定義し、主キー[#17987](https://github.com/pingcap/tidb/pull/17987)に負の値を挿入する場合、更新`AUTO_RANDOM_BASE`をトリガーしないでください。

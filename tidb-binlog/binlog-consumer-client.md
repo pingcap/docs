@@ -121,7 +121,7 @@ message Binlog {
 
 ### Driver {#driver}
 
-[Driver](https://github.com/pingcap/tidb/tree/master/tidb-binlog/driver)提供します。次のような特徴があります。
+[TiDB ツール](https://github.com/pingcap/tidb-tools/)プロジェクトは、Kafka でbinlogデータを読み取るために使用される[Driver](https://github.com/pingcap/tidb/tree/master/tidb-binlog/driver)提供します。次のような特徴があります。
 
 -   Kafka データを読み取ります。
 -   `commit ts`に基づいて、Kafka に保存されているbinlogを見つけます。

@@ -43,7 +43,7 @@ MySQL とは異なり、TiDB のローカル一時テーブルはすべて外部
 
 > **ノート：**
 >
-> -   TiDB で一時テーブルを使用する前に、 [MySQL 一時テーブルとの互換性](#compatibility-with-mysql-temporary-tables)に注意してください。
+> -   TiDB で一時テーブルを使用する前に、 [他の TiDB 機能との互換性制限](#compatibility-restrictions-with-other-tidb-features)と[MySQL 一時テーブルとの互換性](#compatibility-with-mysql-temporary-tables)に注意してください。
 > -   TiDB v5.3.0 より前のクラスター上にローカル一時テーブルを作成した場合、これらのテーブルは実際には通常のテーブルであり、クラスターが TiDB v5.3.0 以降のバージョンにアップグレードされた後は通常のテーブルとして扱われます。
 
 通常のテーブル`users`があると仮定します。

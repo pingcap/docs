@@ -107,9 +107,9 @@ TiDB と MySQL のパスワード再利用ポリシーには次のような違�
 
 ## 認証プラグインのステータス {#authentication-plugin-status}
 
-TiDB は複数の認証方法をサポートしています。これらのメソッドは、 [`ALTER USER`](/sql-statements/sql-statement-create-user.md)を使用してユーザーごとに指定できます。これらのメソッドは、同じ名前の MySQL の認証メソッドと互換性があります。
+TiDB は複数の認証方法をサポートしています。これらのメソッドは、 [`CREATE USER`](/sql-statements/sql-statement-create-user.md)と[`ALTER USER`](/sql-statements/sql-statement-create-user.md)を使用してユーザーごとに指定できます。これらのメソッドは、同じ名前の MySQL の認証メソッドと互換性があります。
 
-次の表でサポートされている認証方法のいずれかを使用できます。クライアント/サーバー接続の確立時にサーバーがアドバタイズするデフォルトのメソッドを指定するには、変数[TiDB-JDBC](https://github.com/pingcap/mysql-connector-j/tree/release/8.0-sm3)を使用して TiDB に接続する必要があります。 `tidb_auth_token`は、 TiDB Cloudでのみ使用される JSON Web Token (JWT) ベースの認証方法です。
+次の表でサポートされている認証方法のいずれかを使用できます。クライアント/サーバー接続の確立時にサーバーがアドバタイズするデフォルトのメソッドを指定するには、変数[`default_authentication_plugin`](/system-variables.md#default_authentication_plugin)を設定します。 `tidb_sm3_password`は、TiDB でのみサポートされている SM3 認証方法です。したがって、この方法を使用して認証するには、 [TiDB-JDBC](https://github.com/pingcap/mysql-connector-j/tree/release/8.0-sm3)を使用して TiDB に接続する必要があります。 `tidb_auth_token`は、 TiDB Cloudでのみ使用される JSON Web Token (JWT) ベースの認証方法です。
 
 <CustomContent platform="tidb">
 

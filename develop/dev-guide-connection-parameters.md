@@ -22,7 +22,7 @@ Javaアプリケーション開発に関するその他のヒントに興味が�
 
 TiDB (MySQL) 接続の構築は (少なくとも OLTP シナリオでは) 比較的高価です。 TCP 接続の構築に加えて、接続認証も必要となるためです。したがって、クライアントは通常、TiDB (MySQL) 接続を接続プールに保存して再利用します。
 
-Java には、 [dbcp](https://commons.apache.org/proper/commons-dbcp/)などの多くの接続プール実装があります。 TiDB は使用する接続プールを制限しないため、アプリケーションに合わせて好きなものを選択できます。
+Java には、 [HikariCP](https://github.com/brettwooldridge/HikariCP) 、 [tomcat-jdbc](https://tomcat.apache.org/tomcat-10.1-doc/jdbc-pool.html) 、 [druid](https://github.com/alibaba/druid) 、 [c3p0](https://www.mchange.com/projects/c3p0/) 、 [dbcp](https://commons.apache.org/proper/commons-dbcp/)などの多くの接続プール実装があります。 TiDB は使用する接続プールを制限しないため、アプリケーションに合わせて好きなものを選択できます。
 
 ### 接続数を構成する {#configure-the-number-of-connections}
 
@@ -31,11 +31,11 @@ Java には、 [dbcp](https://commons.apache.org/proper/commons-dbcp/)などの�
 -   **minimumPoolSize** : 接続プール内の接続の最大数。この値が大きすぎる場合、TiDB は無駄な接続を維持するためにリソースを消費します。この値が小さすぎると、アプリケーションの接続が遅くなります。したがって、アプリケーションの特性に応じてこの値を設定する必要があります。詳細は[プールのサイジングについて](https://github.com/brettwooldridge/HikariCP/wiki/About-Pool-Sizing)を参照してください。
 -   **minimumIdle** : 接続プール内のアイドル状態の接続の最小数。これは主に、アプリケーションがアイドル状態のときに突然のリクエストに応答するためにいくつかの接続を予約するために使用されます。アプリケーションの特性に応じて構成する必要もあります。
 
-アプリケーションは、使用を終了した後に接続を返す必要があります。アプリケーションでは、対応する接続プール監視 ( **metricRegistry**など) を使用して、接続プールの問題を適時に特定することをお勧めします。
+アプリケーションは、使用を終了した後に接続を返す必要があります。アプリケーションでは、対応する接続​​プール監視 ( **metricRegistry**など) を使用して、接続プールの問題を適時に特定することをお勧めします。
 
 ### プローブの構成 {#probe-configuration}
 
-接続プールは、TiDB への永続的な接続を維持します。 TiDB は、デフォルトでは (エラーが報告されない限り) クライアント接続を積極的に閉じませんが、通常、クライアントと TiDB の間には[HAプロキシ](https://en.wikipedia.org/wiki/HAProxy)などのネットワーク プロキシもあります。通常、これらのプロキシは、一定期間アイドル状態の接続を積極的にクリーンアップします。プロキシのアイドル構成に注意を払うことに加えて、接続プールは接続を維持するか、接続をプローブする必要もあります。
+接続プールは、TiDB への永続的な接続を維持します。 TiDB は、デフォルトでは (エラーが報告されない限り) クライアント接続を積極的に閉じませんが、通常、クライアントと TiDB の間には[LVS](https://en.wikipedia.org/wiki/Linux_Virtual_Server)や[HAプロキシ](https://en.wikipedia.org/wiki/HAProxy)などのネットワーク プロキシもあります。通常、これらのプロキシは、一定期間アイドル状態の接続を積極的にクリーンアップします。プロキシのアイドル構成に注意を払うことに加えて、接続プールは接続を維持するか、接続をプローブする必要もあります。
 
 Javaアプリケーションで次のエラーが頻繁に表示される場合:
 
@@ -55,7 +55,7 @@ The last packet sent successfully to the server was 3600000 milliseconds ago. Th
 
 ### 経験に基づいた公式 {#formulas-based-on-experience}
 
-HikariCPの[経験に基づいた公式](https://github.com/brettwooldridge/HikariCP/wiki/About-Pool-Sizing#connections--core_count--2--effective_spindle_count)から始めることができます。次に、式から計算されたプール サイズのパフォーマンス結果に基づいて、最適なパフォーマンスが得られるようにサイズをさらに調整できます。
+HikariCPの[プールのサイジングについて](https://github.com/brettwooldridge/HikariCP/wiki/About-Pool-Sizing)記事によると、データベース接続プールの適切なサイズを設定する方法がわからない場合は、 [経験に基づいた公式](https://github.com/brettwooldridge/HikariCP/wiki/About-Pool-Sizing#connections--core_count--2--effective_spindle_count)から始めることができます。次に、式から計算されたプール サイズのパフォーマンス結果に基づいて、最適なパフォーマンスが得られるようにサイズをさらに調整できます。
 
 経験に基づいた式は次のとおりです。
 
@@ -117,7 +117,7 @@ JDBC API の使用法については、 [JDBC公式チュートリアル](https:
 
 #### 準備APIを使用する {#use-prepare-api}
 
-OLTP (オンライン トランザクション処理) シナリオの場合、プログラムによってデータベースに送信される SQL ステートメントは、パラメーターの変更を削除した後に枯渇する可能性があるいくつかのタイプです。したがって、通常の[準備されたステートメント](https://docs.oracle.com/javase/tutorial/jdbc/basics/prepared.html)使用し、Prepared Statement を再利用して直接実行することをお勧めします。これにより、TiDB で SQL 実行プランを繰り返し解析して生成するオーバーヘッドが回避されます。
+OLTP (オンライン トランザクション処理) シナリオの場合、プログラムによってデータベースに送信される SQL ステートメントは、パラメーターの変更を削除した後に枯渇する可能性があるいくつかのタイプです。したがって、通常の[テキストファイルからの実行](https://docs.oracle.com/javase/tutorial/jdbc/basics/processingsqlstatements.html#executing_queries)の代わりに[準備されたステートメント](https://docs.oracle.com/javase/tutorial/jdbc/basics/prepared.html)使用し、Prepared Statement を再利用して直接実行することをお勧めします。これにより、TiDB で SQL 実行プランを繰り返し解析して生成するオーバーヘッドが回避されます。
 
 現在、ほとんどの上位レベルのフレームワークは、SQL 実行のために Prepare API を呼び出します。 JDBC API を開発に直接使用する場合は、Prepare API の選択に注意してください。
 
@@ -151,7 +151,7 @@ TiDB は両方の方法をサポートしていますが、最初の方法を使
 
 ### MySQL JDBC パラメータ {#mysql-jdbc-parameters}
 
-JDBC は通常、実装関連の設定を JDBC URL パラメータの形式で提供します。このセクションでは[MariaDBのパラメータ設定](https://mariadb.com/kb/en/library/about-mariadb-connector-j/#optional-url-parameters)を参照してください)。このドキュメントではすべての構成項目をカバーすることはできないため、パフォーマンスに影響を与える可能性のあるいくつかのパラメーターに主に焦点を当てています。
+JDBC は通常、実装関連の設定を JDBC URL パラメータの形式で提供します。このセクションでは[MySQL Connector/J のパラメータ設定](https://dev.mysql.com/doc/connector-j/8.0/en/connector-j-reference-configuration-properties.html)を紹介します (MariaDB を使用する場合は[MariaDBのパラメータ設定](https://mariadb.com/kb/en/library/about-mariadb-connector-j/#optional-url-parameters)を参照してください)。このドキュメントではすべての構成項目をカバーすることはできないため、パフォーマンスに影響を与える可能性のあるいくつかのパラメーターに主に焦点を当てています。
 
 #### 関連パラメータの準備 {#prepare-related-parameters}
 
@@ -259,12 +259,12 @@ UPDATE `t` SET `a` = 10 WHERE `id` = 1; UPDATE `t` SET `a` = 11 WHERE `id` = 2; 
 
 モニタリングを通じて、アプリケーションは TiDB クラスターに対して`INSERT`操作のみを実行しますが、冗長な`SELECT`のステートメントが多数あることに気づくかもしれません。通常、これは、JDBC が設定をクエリするためにいくつかの SQL ステートメント (例: `select @@session.transaction_read_only`を送信するために発生します。これらの SQL ステートメントは TiDB では役に立たないため、余分なオーバーヘッドを避けるために`useConfigs=maxPerformance`を構成することをお勧めします。
 
-`useConfigs=maxPerformance`には構成のグループが含まれます。 MySQL Connector/J 8.0 の詳細な設定と MySQL Connector/J 5.1 の詳細な設定を取得するには、それぞれ[mysql-コネクタ-j 5.1](https://github.com/mysql/mysql-connector-j/blob/release/5.1/src/com/mysql/jdbc/configs/maxPerformance.properties)を参照してください。
+`useConfigs=maxPerformance`には構成のグループが含まれます。 MySQL Connector/J 8.0 の詳細な設定と MySQL Connector/J 5.1 の詳細な設定を取得するには、それぞれ[mysql-コネクタ-j 8.0](https://github.com/mysql/mysql-connector-j/blob/release/8.0/src/main/resources/com/mysql/cj/configurations/maxPerformance.properties)と[mysql-コネクタ-j 5.1](https://github.com/mysql/mysql-connector-j/blob/release/5.1/src/com/mysql/jdbc/configs/maxPerformance.properties)を参照してください。
 
 構成後、モニタリングをチェックして、 `SELECT`ステートメントの数が減少していることを確認できます。
 
 #### タイムアウト関連のパラメータ {#timeout-related-parameters}
 
-TiDB には、タイムアウトを制御するための 2 つの MySQL 互換パラメータ[`max_execution_time`](/system-variables.md#max_execution_time)が用意されています。これら 2 つのパラメータは、それぞれJavaアプリケーションとの接続アイドル タイムアウトと接続での SQL 実行のタイムアウトを制御します。つまり、これらのパラメータは、TiDB とJavaアプリケーション間の接続の最長アイドル時間と最長ビジー時間を制御します。 TiDB v5.4 以降、デフォルト値の`wait_timeout`は`28800`秒、つまり 8 時間です。 v5.4 より前の TiDB バージョンの場合、デフォルト値は`0`で、タイムアウトが無制限であることを意味します。デフォルト値`max_execution_time`は`0`で、これは SQL ステートメントの最大実行時間が無制限であることを意味します。
+TiDB には、タイムアウトを制御するための 2 つの MySQL 互換パラメータ[`wait_timeout`](/system-variables.md#wait_timeout)と[`max_execution_time`](/system-variables.md#max_execution_time)が用意されています。これら 2 つのパラメータは、それぞれJavaアプリケーションとの接続アイドル タイムアウトと接続での SQL 実行のタイムアウトを制御します。つまり、これらのパラメータは、TiDB とJavaアプリケーション間の接続の最長アイドル時間と最長ビジー時間を制御します。 TiDB v5.4 以降、デフォルト値の`wait_timeout`は`28800`秒、つまり 8 時間です。 v5.4 より前の TiDB バージョンの場合、デフォルト値は`0`で、タイムアウトが無制限であることを意味します。デフォルト値`max_execution_time`は`0`で、これは SQL ステートメントの最大実行時間が無制限であることを意味します。
 
 ただし、実際の本番環境では、アイドル状態の接続や実行時間が長すぎる SQL ステートメントはデータベースやアプリケーションに悪影響を及ぼします。アイドル状態の接続や長時間実行される SQL ステートメントを回避するために、アプリケーションの接続文字列でこれら 2 つのパラメーターを構成できます。たとえば、 `sessionVariables=wait_timeout=3600` （1時間）と`sessionVariables=max_execution_time=300000` （5分）を設定します。

@@ -91,7 +91,7 @@ summary: Understand how to deal with the alert information in DM.
     アラートを処理するには、次の方法を使用できます。
 
     -   不要なデータを手動で削除して、ディスクの空き容量を増やします。
-    -   [データを手動で消去する](/dm/relay-log.md#manual-purge)を再構成します。
+    -   [リレーログの自動データパージ戦略](/dm/relay-log.md#automatic-purge)または[データを手動で消去する](/dm/relay-log.md#manual-purge)を再構成します。
     -   コマンド`pause-relay`を実行して中継ログの取得処理を一時停止します。十分な空きディスク容量が確保できたら、コマンド`resume-relay`を実行してプロセスを再開します。リレー ログの取得プロセスが一時停止された後は、取得されていないアップストリームのbinlogファイルを削除しないでください。
 
 ### <code>DM_relay_log_data_corruption</code> {#code-dm-relay-log-data-corruption-code}

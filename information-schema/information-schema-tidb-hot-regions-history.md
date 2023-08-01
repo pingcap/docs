@@ -9,7 +9,7 @@ summary: Learn the `TIDB_HOT_REGIONS_HISTORY` information_schema table.
 
 <CustomContent platform="tidb">
 
-[PD設定ファイルの説明](/pd-configuration-file.md#hot-regions-write-interval-new-in-v540)を参照してください。
+[`hot-regions-write-interval`](/pd-configuration-file.md#hot-regions-write-interval-new-in-v540)を設定することで記録間隔を指定できます。デフォルト値は 10 分です。 [`hot-regions-reserved-days`](/pd-configuration-file.md#hot-regions-reserved-days-new-in-v540)を設定することで、ホット リージョンの履歴情報を保存する期間を指定できます。デフォルト値は 7 日です。詳細は[PD設定ファイルの説明](/pd-configuration-file.md#hot-regions-write-interval-new-in-v540)を参照してください。
 
 </CustomContent>
 
@@ -71,7 +71,7 @@ DESC tidb_hot_regions_history;
 
 > **ノート：**
 >
-> `UPDATE_TIME` 、 `REGION_ID` 、 `STORE_ID` 、 `PEER_ID` 、 `IS_LEARNER` 、 `IS_LEADER`および`TYPE`フィールドは、実行のために PD サーバーにプッシュダウンされます。テーブル使用のオーバーヘッドを軽減するには、検索の時間範囲を指定し、できるだけ多くの条件を指定する必要があります。たとえば、 `select * from tidb_hot_regions_history where store_id = 11 and update_time > '2020-05-18 20:40:00' and update_time < '2020-05-18 21:40:00' and type='write'` 。
+> `UPDATE_TIME` 、 `REGION_ID` 、 `STORE_ID` 、 `PEER_ID` 、 `IS_LEARNER` 、 `IS_LEADER` 、および`TYPE`フィールドは、実行のために PD サーバーにプッシュダウンされます。テーブル使用のオーバーヘッドを軽減するには、検索の時間範囲を指定し、できるだけ多くの条件を指定する必要があります。たとえば、 `select * from tidb_hot_regions_history where store_id = 11 and update_time > '2020-05-18 20:40:00' and update_time < '2020-05-18 21:40:00' and type='write'` 。
 
 ## 一般的なユーザー シナリオ {#common-user-scenarios}
 

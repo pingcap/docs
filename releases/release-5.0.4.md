@@ -12,7 +12,7 @@ TiDB バージョン: 5.0.4
 
 -   TiDB
 
-    -   新しいセッションで`SHOW VARIABLES`を実行すると遅いという問題を修正します。この修正により、 [#24326](https://github.com/pingcap/tidb/issues/24326)
+    -   新しいセッションで`SHOW VARIABLES`を実行すると遅いという問題を修正します。この修正により、 [#19341](https://github.com/pingcap/tidb/pull/19341)で行われた一部の変更が元に戻されるため、互換性の問題が発生する可能性があります。 [#24326](https://github.com/pingcap/tidb/issues/24326)
     -   `tidb_stmt_summary_max_stmt_count`変数のデフォルト値を`200`から`3000`に変更します[#25873](https://github.com/pingcap/tidb/pull/25873)
 
     <!---->
@@ -114,7 +114,7 @@ TiDB バージョン: 5.0.4
     -   `FLOAT64`種のオーバーフローチェックが[#23897](https://github.com/pingcap/tidb/issues/23897)と異なる問題を修正
     -   `case when`式[#26662](https://github.com/pingcap/tidb/issues/26662)の間違った文字セットと照合順序を修正します。
     -   悲観的トランザクションをコミットすると書き込み競合が発生する可能性がある問題を修正します[#25964](https://github.com/pingcap/tidb/issues/25964)
-    -   悲観的トランザクションのインデックスキーが繰り返しコミットされる可能性があるバグを修正[#10600](https://github.com/tikv/tikv/pull/10600)
+    -   悲観的トランザクションのインデックスキーが繰り返しコミットされる可能性があるバグを修正[#26359](https://github.com/pingcap/tidb/issues/26359) [#10600](https://github.com/tikv/tikv/pull/10600)
     -   非同期コミット ロックを解決するときに TiDB がpanicになる可能性がある問題を修正します[#25778](https://github.com/pingcap/tidb/issues/25778)
     -   `INDEX MERGE` [#25045](https://github.com/pingcap/tidb/issues/25045)を使用すると列が見つからない場合があるバグを修正
     -   `ALTER USER REQUIRE SSL`がユーザーの`authentication_string` [#25225](https://github.com/pingcap/tidb/issues/25225)をクリアしてしまうバグを修正
@@ -130,7 +130,7 @@ TiDB バージョン: 5.0.4
     -   `BIT`列で`approx_percentile`関数を使用するとpanic[#23662](https://github.com/pingcap/tidb/issues/23662)が発生する可能性がある問題を修正
     -   Grafana の**コプロセッサーキャッシュ**パネルのメトリクスが間違っている問題を修正します[#26338](https://github.com/pingcap/tidb/issues/26338)
     -   同じパーティションを同時に切り詰めると DDL ステートメントがスタックする問題を修正します[#26229](https://github.com/pingcap/tidb/issues/26229)
-    -   セッション変数が`GROUP BY`項目[#27106](https://github.com/pingcap/tidb/issues/27106)として使用されている場合に、間違ったクエリ結果が発生する問題を修正します。
+    -   セッション変数を`GROUP BY`項目[#27106](https://github.com/pingcap/tidb/issues/27106)として使用した場合に、間違ったクエリ結果が発生する問題を修正しました。
     -   テーブル[#25902](https://github.com/pingcap/tidb/issues/25902)を結合するときの`VARCHAR`とタイムスタンプの間の誤った暗黙的な変換を修正しました。
     -   関連するサブクエリ ステートメントの誤った結果を修正します[#27233](https://github.com/pingcap/tidb/issues/27233)
 
@@ -191,7 +191,7 @@ TiDB バージョン: 5.0.4
         -   `capture list`コマンド[#2388](https://github.com/pingcap/tiflow/issues/2388)の出力に古いキャプチャが表示されることがある問題を修正します。
         -   統合テスト[#2422](https://github.com/pingcap/tiflow/issues/2422)でDDLジョブの重複が発生した場合に発生するエラー`ErrSchemaStorageTableMiss`を修正
         -   `ErrGCTTLExceeded`エラーが発生するとチェンジフィードが削除できないバグを修正[#2391](https://github.com/pingcap/tiflow/issues/2391)
-        -   大きなテーブルを cdclog に複製すると失敗するバグを修正[#2424](https://github.com/pingcap/tiflow/issues/2424)
+        -   大きなテーブルを cdclog に複製すると失敗するバグを修正[#1259](https://github.com/pingcap/tiflow/issues/1259) [#2424](https://github.com/pingcap/tiflow/issues/2424)
         -   CLI の下位互換性の問題[#2373](https://github.com/pingcap/tiflow/issues/2373)を修正する
         -   `SinkManager` [#2299](https://github.com/pingcap/tiflow/pull/2299)のマップへの安全でない同時アクセスの問題を修正
         -   DDL ステートメントの実行時に所有者がクラッシュした場合に DDL が失われる可能性がある問題を修正します[#1260](https://github.com/pingcap/tiflow/issues/1260)

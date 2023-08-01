@@ -30,7 +30,7 @@ summary: Learn how to troubleshoot common errors in TiDB.
 ### 2.1 過渡的な増加 {#2-1-transient-increase}
 
 -   2.1.1 間違った TiDB 実行計画によりレイテンシーが増加します。 [3.3](#33-wrong-execution-plan)を参照してください。
--   2.1.2 PDLeader選挙の問題または OOM。 [5.3](#53-pd-oom)を参照してください。
+-   2.1.2 PDLeader選挙の問題または OOM。 [5.2](#52-pd-election)と[5.3](#53-pd-oom)を参照してください。
 -   2.1.3 一部の TiKV インスタンスでかなりの数のLeaderがドロップします。 [4.4](#44-some-tikv-nodes-drop-leader-frequently)を参照してください。
 -   2.1.4 その他の原因については、 [読み取りおよび書き込み遅延の増加のトラブルシューティング](/troubleshoot-cpu-issues.md)を参照してください。
 
@@ -68,7 +68,7 @@ summary: Learn how to troubleshoot common errors in TiDB.
 
     -   解決：
 
-        -   原因 1 の場合は、TiDB と TiKV/PD の間のネットワーク接続を確認してください。
+        -   原因 1 の場合は、TiDB と TiKV/PD 間のネットワーク接続を確認してください。
         -   原因 2 と 3 の問題は、以降のバージョンですでに修正されています。 TiDB を新しいバージョンにアップグレードできます。
         -   他の原因の場合は、次の DDL 所有者を移行する解決策を使用できます。
 
@@ -183,7 +183,7 @@ OOM のトラブルシューティングの詳細については、 [TiDB OOM �
 
 ### 3.5 遅いクエリの問題 {#3-5-slow-query-issues}
 
-遅いクエリを特定するには、 [遅いクエリを分析する](/analyze-slow-queries.md)参照してください。
+遅いクエリを特定するには、 [遅いクエリを特定する](/identify-slow-queries.md)を参照してください。遅いクエリを分析して処理するには、 [遅いクエリを分析する](/analyze-slow-queries.md)参照してください。
 
 ### 3.6 ホットスポットの問題 {#3-6-hotspot-issues}
 
@@ -346,11 +346,11 @@ TiDB は、トランザクション[`ADMIN CHECK [TABLE|INDEX]`](/sql-statements
 
     -   TiKV ディスクは容量の 80% を使用し、PD はレプリカを追加しません。この状況では、ミスピアの数が増加するため、TiKV をスケールアウトする必要があります。中国語の[ケース-801](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case801.md)を参照してください。
 
-    -   TiKV ノードがオフラインになると、一部のリージョンを他のノードに移行できなくなります。この問題は v3.0.4 ( [ケース-870](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case870.md)を参照してください。
+    -   TiKV ノードがオフラインになると、一部のリージョンを他のノードに移行できなくなります。この問題は v3.0.4 ( [#5526](https://github.com/tikv/tikv/pull/5526) ) で修正されました。中国語の[ケース-870](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case870.md)を参照してください。
 
 -   5.1.3 バランス
 
-    -   Leader/リージョンの数は均等に分散されていません。中国語の[ケース-759](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case759.md)を参照してください。主な原因は、天びんがリージョン/Leaderのサイズに基づいてスケジューリングを実行するため、カウントが不均一に分散される可能性があることです。 TiDB 4.0 では、 `[leader-schedule-policy]`パラメータが導入され、Leaderのスケジューリング ポリシーを`count`ベースまたは`size`ベースに設定できるようになります。
+    -   Leader/リージョンの数は均等に分散されていません。中国語の[ケース-394](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case394.md)と[ケース-759](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case759.md)を参照してください。主な原因は、天びんがリージョン/Leaderのサイズに基づいてスケジューリングを実行するため、カウントが不均一に分散される可能性があることです。 TiDB 4.0 では、 `[leader-schedule-policy]`パラメータが導入され、Leaderのスケジューリング ポリシーを`count`ベースまたは`size`ベースに設定できるようになります。
 
 ### 5.2 PDの選出 {#5-2-pd-election}
 
@@ -364,13 +364,13 @@ TiDB は、トランザクション[`ADMIN CHECK [TABLE|INDEX]`](/sql-statements
 
 -   5.2.2 PD がLeaderを選出できない、または選出が遅い。
 
-    -   PD はLeaderを選出できません: PD ログには`lease is not expired`表示されます。 [ケース-875](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case875.md)を参照してください。
+    -   PD はLeaderを選出できません: PD ログには`lease is not expired`表示されます。 [この問題](https://github.com/etcd-io/etcd/issues/10355) v3.0.x および v2.1.19 で修正されました。中国語の[ケース-875](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case875.md)を参照してください。
 
     -   選挙が遅い:リージョンの読み込み時間が長い。 PD ログで`grep "regions cost"`を実行すると、この問題を確認できます。結果が`load 460927 regions cost 11.77099s`などの秒単位の場合は、リージョンの読み込みが遅いことを意味します。 v3.0 では`use-region-storage`を`true`に設定することで`region storage`機能を有効にすることができ、これによりリージョンの読み込み時間が大幅に短縮されます。中国語の[ケース-429](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case429.md)を参照してください。
 
 -   5.2.3 TiDB が SQL ステートメントを実行すると PD がタイムアウトしました。
 
-    -   PD にはLeaderが存在しないか、Leaderを切り替えます。 [5.2.2](#52-pd-election)を参照してください。
+    -   PD にはLeaderが存在しないか、Leaderを切り替えます。 [5.2.1](#52-pd-election)と[5.2.2](#52-pd-election)を参照してください。
 
     -   ネットワークの問題。 **Grafana** -&gt; **blackbox_exporter** -&gt; **ping レイテンシー**モニターにアクセスして、TiDB から PD Leaderまでのネットワークが正常に動作しているかどうかを確認します。
 
@@ -382,7 +382,7 @@ TiDB は、トランザクション[`ADMIN CHECK [TABLE|INDEX]`](/sql-statements
 
 -   5.2.4 その他の問題
 
-    -   PD は`FATAL`エラーを報告し、ログには`range failed to find revision pair`が表示されます。この問題は v3.0.8 ( [ケース-947](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case947.md)を参照してください。
+    -   PD は`FATAL`エラーを報告し、ログには`range failed to find revision pair`が表示されます。この問題は v3.0.8 ( [#2040](https://github.com/pingcap/pd/pull/2040) ) で修正されました。詳細については、中国語の[ケース-947](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case947.md)を参照してください。
 
     -   その他の状況の場合は、 [バグを報告](https://github.com/pingcap/pd/issues/new?labels=kind%2Fbug&#x26;template=bug-report.md) 。
 
@@ -625,7 +625,7 @@ TiDB は、トランザクション[`ADMIN CHECK [TABLE|INDEX]`](/sql-statements
 
 -   7.2.3 `TxnLockNotFound` .
 
-    このトランザクションのコミットが遅すぎるため、Time To Live (TTL) 後に他のトランザクションによってロールバックされます。このトランザクションは自動的に再試行されるため、通常はビジネスに影響はありません。サイズが 0.25 MB 以下のトランザクションの場合、デフォルトの TTL は 3 秒です。詳細については、 [`LockNotFound`ファウンドエラー](/troubleshoot-lock-conflicts.md#locknotfound-error)を参照してください。
+    このトランザクションのコミットが遅すぎるため、Time To Live (TTL) 後に他のトランザクションによってロールバックされます。このトランザクションは自動的に再試行されるため、通常はビジネスに影響はありません。サイズが 0.25 MB 以下のトランザクションの場合、デフォルトの TTL は 3 秒です。詳細については、 [`LockNotFound`ファウンドエラー](/troubleshoot-lock-conflicts.md#locknotfound-error)参照してください。
 
 -   7.2.4 `PessimisticLockNotFound` .
 

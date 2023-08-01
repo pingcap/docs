@@ -26,7 +26,7 @@ TiDB Ansible バージョン: 2.1.18
     -   監視レコード[#12329](https://github.com/pingcap/tidb/pull/12329)にステートメント`PREPARE`の`sql_type`による期間が表示されない問題を修正
     -   `from_unixtime`関数が null [#12572](https://github.com/pingcap/tidb/pull/12572)を処理するときのpanicの問題を修正
     -   無効な値が`YEAR`タイプとして挿入されると、結果が`0000` [#12744](https://github.com/pingcap/tidb/pull/12744)ではなく`NULL`なるという互換性の問題を修正しました。
-    -   MySQL 自動インクリメント ロック ( [#12619](https://github.com/pingcap/tidb/pull/12619)
+    -   MySQL 自動インクリメント ロック ( [「連続」ロックモード](https://dev.mysql.com/doc/refman/5.7/en/innodb-auto-increment-handling.html) ) のデフォルト モードとの一貫性を維持するために、暗黙的に割り当てられたときの`AutoIncrement`カラムの動作を改善します。単一行`Insert`ステートメントで複数の`AutoIncrement` ID を暗黙的に割り当てる場合、TiDB は割り当てられた値の連続性。この改善により、JDBC `getGeneratedKeys()`メソッドはどのシナリオでも正しい結果が得られるようになります[#12619](https://github.com/pingcap/tidb/pull/12619)
     -   `HashAgg` `Apply` [#12769](https://github.com/pingcap/tidb/pull/12769)の子ノードとして機能する場合にクエリがハングする問題を修正
     -   型変換[#12813](https://github.com/pingcap/tidb/pull/12813)に関して、 `AND`と`OR`の論理式が誤った結果を返す問題を修正
 -   サーバ
@@ -47,7 +47,7 @@ TiDB Ansible バージョン: 2.1.18
     -   スロークエリログの`COM_STMT_FETCH`回のレコードが MySQL [#12953](https://github.com/pingcap/tidb/pull/12953)のレコードと一致しない問題を修正
     -   原因を迅速に特定するために、書き込み競合のエラー メッセージにエラー コードを追加します[#12878](https://github.com/pingcap/tidb/pull/12878)
 -   DDL
-    -   デフォルトでは、列の`AUTO INCREMENT`属性の削除は禁止されています。この属性を削除する必要がある場合は、変数`tidb_allow_remove_auto_inc`値を変更します。詳細については、 [#12146](https://github.com/pingcap/tidb/pull/12146)
+    -   デフォルトでは、列の`AUTO INCREMENT`属性の削除は禁止されています。この属性を削除する必要がある場合は、変数`tidb_allow_remove_auto_inc`値を変更します。詳細については、 [システム変数](/system-variables.md#tidb_allow_remove_auto_inc-new-in-v2118-and-v304)参照してください。 [#12146](https://github.com/pingcap/tidb/pull/12146)
     -   `Create Table`ステートメントで一意のインデックスを作成するときに複数の`unique`をサポートします[#12469](https://github.com/pingcap/tidb/pull/12469)
     -   `CREATE TABLE`ステートメントの外部キー制約にスキーマがない場合、 `No Database selected`エラー[#12678](https://github.com/pingcap/tidb/pull/12678)を返す代わりに、作成されたテーブルのスキーマを使用する必要があるという互換性の問題を修正しました。
     -   `ADMIN CANCEL DDL JOBS` [#12681](https://github.com/pingcap/tidb/pull/12681)を実行すると`invalid list index`エラーが報告される問題を修正

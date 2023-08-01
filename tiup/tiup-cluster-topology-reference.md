@@ -95,7 +95,7 @@ global:
 
 ### <code>monitored</code> {#code-monitored-code}
 
-`monitored`は、ターゲット マシン ( [`blackbox_exporter`](https://github.com/prometheus/blackbox_exporter)で監視サービスを構成するために使用されます。次のフィールドが含まれます。
+`monitored`ターゲット マシン ( [`node_exporter`](https://github.com/prometheus/node_exporter)および[`blackbox_exporter`](https://github.com/prometheus/blackbox_exporter)で監視サービスを構成するために使用されます。次のフィールドが含まれます。
 
 -   `node_exporter_port` : `node_exporter`のサービスポート。デフォルト値は`9100`です。
 
@@ -175,7 +175,7 @@ server_configs:
 
 -   `log_dir` : ログディレクトリを指定します。指定しない場合、または相対ディレクトリとして指定した場合は、 `global`で設定した`log_dir`ディレクトリに従ってログが生成されます。
 
--   `numa_node` : NUMA ポリシーをインスタンスに割り当てます。このフィールドを指定する前に、ターゲット マシンに[ヌマクトル](https://linux.die.net/man/8/numactl)を使用して割り当てられます。このフィールドは文字列型です。フィールド値は、「0,1」などの NUMA ノードの ID です。
+-   `numa_node` : NUMA ポリシーをインスタンスに割り当てます。このフィールドを指定する前に、ターゲット マシンに[ヌマクトル](https://linux.die.net/man/8/numactl)がインストールされていることを確認する必要があります。このフィールドが指定されている場合、 cpubind および membind ポリシーは[ヌマクトル](https://linux.die.net/man/8/numactl)を使用して割り当てられます。このフィールドは文字列型です。フィールド値は、「0,1」などの NUMA ノードの ID です。
 
 -   `config` : このフィールドの設定ルールは、 `server_configs`の`pd`の設定ルールと同じです。このフィールドが設定されている場合、フィールドの内容は`server_configs`の`pd`内容とマージされます (2 つのフィールドが重複する場合、このフィールドの内容が有効になります)。次に、構成ファイルが生成され、 `host`で指定されたマシンに送信されます。
 
@@ -229,7 +229,7 @@ pd_servers:
 
 -   `log_dir` : ログディレクトリを指定します。指定しない場合、または相対ディレクトリとして指定した場合は、 `global`で設定した`log_dir`ディレクトリに従ってログが生成されます。
 
--   `numa_node` : NUMA ポリシーをインスタンスに割り当てます。このフィールドを指定する前に、ターゲット マシンに[ヌマクトル](https://linux.die.net/man/8/numactl)を使用して割り当てられます。このフィールドは文字列型です。フィールド値は、「0,1」などの NUMA ノードの ID です。
+-   `numa_node` : NUMA ポリシーをインスタンスに割り当てます。このフィールドを指定する前に、ターゲット マシンに[ヌマクトル](https://linux.die.net/man/8/numactl)がインストールされていることを確認する必要があります。このフィールドが指定されている場合、 cpubind および membind ポリシーは[ヌマクトル](https://linux.die.net/man/8/numactl)を使用して割り当てられます。このフィールドは文字列型です。フィールド値は、「0,1」などの NUMA ノードの ID です。
 
 -   `config` : このフィールドの設定ルールは、 `server_configs`の`tidb`の設定ルールと同じです。このフィールドが設定されている場合、フィールドの内容は`server_configs`の`tidb`内容とマージされます (2 つのフィールドが重複する場合、このフィールドの内容が有効になります)。次に、構成ファイルが生成され、 `host`で指定されたマシンに送信されます。
 
@@ -263,7 +263,7 @@ tidb_servers:
 
 ### <code>tikv_servers</code> {#code-tikv-servers-code}
 
-`tikv_servers` TiKV サービスがデプロイされるマシンを指定します。また、各マシンのサービス構成も指定します。 `tikv_servers`は配列であり、配列の各要素には次のフィールドが含まれます。
+`tikv_servers` 、TiKV サービスがデプロイされるマシンを指定します。また、各マシンのサービス構成も指定します。 `tikv_servers`は配列であり、配列の各要素には次のフィールドが含まれます。
 
 -   `host` : TiKV サービスが展開されるマシンを指定します。フィールド値は IP アドレスであり、必須です。
 
@@ -281,7 +281,7 @@ tidb_servers:
 
 -   `log_dir` : ログディレクトリを指定します。指定しない場合、または相対ディレクトリとして指定した場合は、 `global`で設定した`log_dir`ディレクトリに従ってログが生成されます。
 
--   `numa_node` : NUMA ポリシーをインスタンスに割り当てます。このフィールドを指定する前に、ターゲット マシンに[ヌマクトル](https://linux.die.net/man/8/numactl)を使用して割り当てられます。このフィールドは文字列型です。フィールド値は、「0,1」などの NUMA ノードの ID です。
+-   `numa_node` : NUMA ポリシーをインスタンスに割り当てます。このフィールドを指定する前に、ターゲット マシンに[ヌマクトル](https://linux.die.net/man/8/numactl)インストールされていることを確認する必要があります。このフィールドが指定されている場合、 cpubind および membind ポリシーは[ヌマクトル](https://linux.die.net/man/8/numactl)を使用して割り当てられます。このフィールドは文字列型です。フィールド値は、「0,1」などの NUMA ノードの ID です。
 
 -   `config` : このフィールドの設定ルールは、 `server_configs`の`tikv`の設定ルールと同じです。このフィールドが設定されている場合、フィールドの内容は`server_configs`の`tikv`内容とマージされます (2 つのフィールドが重複する場合、このフィールドの内容が有効になります)。次に、構成ファイルが生成され、 `host`で指定されたマシンに送信されます。
 
@@ -341,7 +341,7 @@ tikv_servers:
 
 -   `tmp_path` : TiFlash一時ファイルのstorageパス。デフォルト値は [ `path`または`storage.latest.dir`の最初のディレクトリ] + &quot;/tmp&quot; です。
 
--   `numa_node` : NUMA ポリシーをインスタンスに割り当てます。このフィールドを指定する前に、ターゲット マシンに[ヌマクトル](https://linux.die.net/man/8/numactl)を使用して割り当てられます。このフィールドは文字列型です。フィールド値は、「0,1」などの NUMA ノードの ID です。
+-   `numa_node` : NUMA ポリシーをインスタンスに割り当てます。このフィールドを指定する前に、ターゲット マシンに[ヌマクトル](https://linux.die.net/man/8/numactl)がインストールされていることを確認する必要があります。このフィールドが指定されている場合、 cpubind および membind ポリシーは[ヌマクトル](https://linux.die.net/man/8/numactl)を使用して割り当てられます。このフィールドは文字列型です。フィールド値は、「0,1」などの NUMA ノードの ID です。
 
 -   `config` : このフィールドの設定ルールは、 `server_configs`の`tiflash`の設定ルールと同じです。このフィールドが設定されている場合、フィールドの内容は`server_configs`の`tiflash`内容とマージされます (2 つのフィールドが重複する場合、このフィールドの内容が有効になります)。次に、構成ファイルが生成され、 `host`で指定されたマシンに送信されます。
 
@@ -392,7 +392,7 @@ tiflash_servers:
 
 -   `log_dir` : ログディレクトリを指定します。指定しない場合、または相対ディレクトリとして指定した場合は、 `global`で設定した`log_dir`ディレクトリに従ってログが生成されます。
 
--   `numa_node` : NUMA ポリシーをインスタンスに割り当てます。このフィールドを指定する前に、ターゲット マシンに[ヌマクトル](https://linux.die.net/man/8/numactl)を使用して割り当てられます。このフィールドは文字列型です。フィールド値は、「0,1」などの NUMA ノードの ID です。
+-   `numa_node` : NUMA ポリシーをインスタンスに割り当てます。このフィールドを指定する前に、ターゲット マシンに[ヌマクトル](https://linux.die.net/man/8/numactl)がインストールされていることを確認する必要があります。このフィールドが指定されている場合、 cpubind および membind ポリシーは[ヌマクトル](https://linux.die.net/man/8/numactl)を使用して割り当てられます。このフィールドは文字列型です。フィールド値は、「0,1」などの NUMA ノードの ID です。
 
 -   `config` : このフィールドの設定ルールは、 `server_configs`の`pump`の設定ルールと同じです。このフィールドが設定されている場合、フィールドの内容は`server_configs`の`pump`内容とマージされます (2 つのフィールドが重複する場合、このフィールドの内容が有効になります)。次に、構成ファイルが生成され、 `host`で指定されたマシンに送信されます。
 
@@ -440,7 +440,7 @@ pump_servers:
 
 -   `commit_ts` (非推奨): Drainer が起動すると、チェックポイントが読み取られます。 Drainer がチェックポイントを取得しない場合、Drainer はこのフィールドを最初の起動時のレプリケーション時点として使用します。このフィールドのデフォルトは`-1`です (Drainer は常に PD から最新のタイムスタンプを commit_ts として取得します)。
 
--   `numa_node` : NUMA ポリシーをインスタンスに割り当てます。このフィールドを指定する前に、ターゲット マシンに[ヌマクトル](https://linux.die.net/man/8/numactl)を使用して割り当てられます。このフィールドは文字列型です。フィールド値は、「0,1」などの NUMA ノードの ID です。
+-   `numa_node` : NUMA ポリシーをインスタンスに割り当てます。このフィールドを指定する前に、ターゲット マシンに[ヌマクトル](https://linux.die.net/man/8/numactl)がインストールされていることを確認する必要があります。このフィールドが指定されている場合、 cpubind および membind ポリシーは[ヌマクトル](https://linux.die.net/man/8/numactl)を使用して割り当てられます。このフィールドは文字列型です。フィールド値は、「0,1」などの NUMA ノードの ID です。
 
 -   `config` : このフィールドの設定ルールは、 `server_configs`の`drainer`の設定ルールと同じです。このフィールドが設定されている場合、フィールドの内容は`server_configs`の`drainer`内容とマージされます (2 つのフィールドが重複する場合、このフィールドの内容が有効になります)。次に、構成ファイルが生成され、 `host`で指定されたマシンに送信されます。
 
@@ -501,7 +501,7 @@ drainer_servers:
 
 -   `tz` : TiCDC サービスが使用するタイムゾーン。 TiCDC は、タイムスタンプなどの時間データ型を内部で変換するとき、およびデータをダウンストリームにレプリケートするときに、このタイム ゾーンを使用します。デフォルト値は、プロセスが実行されるローカル タイム ゾーンです。
 
--   `numa_node` : NUMA ポリシーをインスタンスに割り当てます。このフィールドを指定する前に、ターゲット マシンに[ヌマクトル](https://linux.die.net/man/8/numactl)を使用して割り当てられます。このフィールドは文字列型です。フィールド値は、「0,1」などの NUMA ノードの ID です。
+-   `numa_node` : NUMA ポリシーをインスタンスに割り当てます。このフィールドを指定する前に、ターゲット マシンに[ヌマクトル](https://linux.die.net/man/8/numactl)がインストールされていることを確認する必要があります。このフィールドが指定されている場合、 cpubind および membind ポリシーは[ヌマクトル](https://linux.die.net/man/8/numactl)を使用して割り当てられます。このフィールドは文字列型です。フィールド値は、「0,1」などの NUMA ノードの ID です。
 
 -   `config` : フィールドの内容は`server_configs`の`cdc`内容とマージされます (2 つのフィールドが重複する場合、このフィールドの内容が有効になります)。次に、構成ファイルが生成され、 `host`で指定したマシンに送信されます。
 
@@ -639,7 +639,7 @@ tispark_workers:
 
 -   `host` : 監視サービスが展開されるマシンを指定します。フィールド値は IP アドレスであり、必須です。
 
--   `ng_port` : NgMonitoring がリッスンするポートを指定します。 TiUP v1.7.0 で導入されたこのフィールドは[Top SQL](/dashboard/top-sql.md)をサポートします。デフォルト値は`12020`です。
+-   `ng_port` : NgMonitoring がリッスンするポートを指定します。 TiUP v1.7.0 で導入されたこのフィールドは[継続的なプロファイリング](/dashboard/dashboard-profiling.md)と[Top SQL](/dashboard/top-sql.md)をサポートします。デフォルト値は`12020`です。
 
 -   `ssh_port` : 操作のためにターゲット マシンに接続する SSH ポートを指定します。指定しない場合は、 `global`セクションのうち`ssh_port`使用されます。
 
@@ -651,7 +651,7 @@ tispark_workers:
 
 -   `log_dir` : ログディレクトリを指定します。指定しない場合、または相対ディレクトリとして指定した場合は、 `global`で設定した`log_dir`ディレクトリに従ってログが生成されます。
 
--   `numa_node` : NUMA ポリシーをインスタンスに割り当てます。このフィールドを指定する前に、ターゲット マシンに[ヌマクトル](https://linux.die.net/man/8/numactl)を使用して割り当てられます。このフィールドは文字列型です。フィールド値は、「0,1」などの NUMA ノードの ID です。
+-   `numa_node` : NUMA ポリシーをインスタンスに割り当てます。このフィールドを指定する前に、ターゲット マシンに[ヌマクトル](https://linux.die.net/man/8/numactl)がインストールされていることを確認する必要があります。このフィールドが指定されている場合、 cpubind および membind ポリシーは[ヌマクトル](https://linux.die.net/man/8/numactl)を使用して割り当てられます。このフィールドは文字列型です。フィールド値は、「0,1」などの NUMA ノードの ID です。
 
 -   `storage_retention` : Prometheus 監視データの保持期間。デフォルト値は`"30d"`です。
 
@@ -704,7 +704,7 @@ monitoring_servers:
 
 ### <code>grafana_servers</code> {#code-grafana-servers-code}
 
-`grafana_servers` Grafana サービスがデプロイされるマシンを指定します。また、各マシンのサービス構成も指定します。 `grafana_servers`は配列です。各配列要素には次のフィールドが含まれます。
+`grafana_servers` 、Grafana サービスがデプロイされるマシンを指定します。また、各マシンのサービス構成も指定します。 `grafana_servers`は配列です。各配列要素には次のフィールドが含まれます。
 
 -   `host` : Grafana サービスがデプロイされるマシンを指定します。フィールド値は IP アドレスであり、必須です。
 
@@ -767,7 +767,7 @@ grafana_servers:
 
 -   `log_dir` : ログディレクトリを指定します。指定しない場合、または相対ディレクトリとして指定した場合は、 `global`で設定した`log_dir`ディレクトリに従ってログが生成されます。
 
--   `numa_node` : NUMA ポリシーをインスタンスに割り当てます。このフィールドを指定する前に、ターゲット マシンに[ヌマクトル](https://linux.die.net/man/8/numactl)を使用して割り当てられます。このフィールドは文字列型です。フィールド値は、「0,1」などの NUMA ノードの ID です。
+-   `numa_node` : NUMA ポリシーをインスタンスに割り当てます。このフィールドを指定する前に、ターゲット マシンに[ヌマクトル](https://linux.die.net/man/8/numactl)がインストールされていることを確認する必要があります。このフィールドが指定されている場合、 cpubind および membind ポリシーは[ヌマクトル](https://linux.die.net/man/8/numactl)を使用して割り当てられます。このフィールドは文字列型です。フィールド値は、「0,1」などの NUMA ノードの ID です。
 
 -   `config_file` : クラスタ構成の初期化フェーズ中にターゲット マシンに転送されるローカル ファイルを Alertmanager の構成として指定します。
 

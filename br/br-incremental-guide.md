@@ -5,7 +5,7 @@ summary: Learns about how to perform incremental backup and restore in TiDB.
 
 # TiDB 増分バックアップおよび復元ガイド {#tidb-incremental-backup-and-restore-guide}
 
-TiDB クラスターの増分データは、期間の開始スナップショットと終了スナップショットの間の差分データ、およびこの期間中に生成された DDL です。増分データは完全 (スナップショット) バックアップ データと比較してデータ量が小さいため、スナップショット バックアップを補完するものであり、バックアップ データの量を削減します。増分バックアップを実行するには、指定された期間内に生成された MVCC データが[`tidb_gc_life_time`](/system-variables.md#tidb_gc_life_time-new-in-v50) 1 時間より大きい値に設定する必要があります。
+TiDB クラスターの増分データは、期間の開始スナップショットと終了スナップショットの間の差分データ、およびこの期間中に生成された DDL です。増分データは完全 (スナップショット) バックアップ データと比較してデータ量が小さいため、スナップショット バックアップを補完するものであり、バックアップ データの量を削減します。増分バックアップを実行するには、指定された期間内に生成された MVCC データが[TiDB GC メカニズム](/garbage-collection-overview.md)によってガベージ コレクションされていないことを確認してください。たとえば、増分バックアップを 1 時間ごとに実行するには、 [`tidb_gc_life_time`](/system-variables.md#tidb_gc_life_time-new-in-v50) 1 時間より大きい値に設定する必要があります。
 
 > **警告：**
 >

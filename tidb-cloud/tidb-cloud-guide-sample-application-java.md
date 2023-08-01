@@ -23,19 +23,19 @@ summary: Learn how to build a simple CRUD application with TiDB and Java.
 
 TiDB クラスターの起動方法を紹介します。
 
-**TiDB CloudServerless Tierクラスターを使用する**
+**TiDB サーバーレス クラスターを使用する**
 
-詳細な手順については、 [Serverless Tierクラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster)を参照してください。
+詳細な手順については、 [TiDB サーバーレスクラスターを作成する](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-tidb-serverless-cluster)を参照してください。
 
 **ローカルクラスターを使用する**
 
-詳細な手順については、 [TiUPを使用した TiDBクラスタのデプロイ](/production-deployment-using-tiup.md)を参照してください。
+詳細な手順については、 [ローカルテストクラスターをデプロイ](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[TiUPを使用した TiDBクラスタのデプロイ](/production-deployment-using-tiup.md)を参照してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-[Serverless Tierクラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster)を参照してください。
+[TiDB サーバーレスクラスターを作成する](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-tidb-serverless-cluster)を参照してください。
 
 </CustomContent>
 
@@ -294,7 +294,7 @@ public interface PlayerMapper {
     id, coins, goods
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from player
     where id = #{id,jdbcType=VARCHAR}
@@ -405,7 +405,7 @@ public interface PlayerMapperEx extends PlayerMapper {
   </sql>
 
   <select id="selectByPrimaryKeyWithLock" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from player
     where `id` = #{id,jdbcType=VARCHAR}
@@ -1449,7 +1449,7 @@ JDBC を使用する場合は、クラスターに接続し、 `src/main/resourc
 
 <div label="Using Mybatis (Recommended)" value="mybatis">
 
-TiDB CloudServerless Tierクラスターを使用している場合は、 `mybatis-config.xml`の`dataSource.url` 、 `dataSource.username` 、 `dataSource.password`を変更します。
+TiDB サーバーレス クラスターを使用している場合は、 `mybatis-config.xml`の`dataSource.url` 、 `dataSource.username` 、 `dataSource.password`を変更します。
 
 ```xml
 <?xml version="1.0" encoding="UTF-8" ?>
@@ -1524,7 +1524,7 @@ TiDB CloudServerless Tierクラスターを使用している場合は、 `mybat
 
 <div label="Using Hibernate (Recommended)" value="hibernate">
 
-TiDB CloudServerless Tierクラスターを使用している場合は、 `hibernate.cfg.xml`の`hibernate.connection.url` 、 `hibernate.connection.username` 、 `hibernate.connection.password`を変更します。
+TiDB サーバーレス クラスターを使用している場合は、 `hibernate.cfg.xml`の`hibernate.connection.url` 、 `hibernate.connection.username` 、 `hibernate.connection.password`を変更します。
 
 ```xml
 <?xml version='1.0' encoding='utf-8'?>
@@ -1590,7 +1590,7 @@ TiDB CloudServerless Tierクラスターを使用している場合は、 `hiber
 
 <div label="Using JDBC" value="jdbc">
 
-TiDB CloudServerless Tierクラスターを使用している場合は、 `JDBCExample.java`でホスト、ポート、ユーザー、およびパスワードのパラメーターを変更します。
+TiDB サーバーレス クラスターを使用している場合は、 `JDBCExample.java`でホスト、ポート、ユーザー、およびパスワードのパラメーターを変更します。
 
 ```java
 mysqlDataSource.setServerName("localhost");

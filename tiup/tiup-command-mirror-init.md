@@ -40,7 +40,7 @@ tiup mirror init <path> [flags]
 ### 出力 {#outputs}
 
 -   コマンドが正常に実行された場合、出力はありません。
--   指定された`<path>`空でない場合、 TiUP はエラー`Error: the target path '%s' is not an empty directory`を報告します。
+-   指定された`<path>`が空でない場合、 TiUP はエラー`Error: the target path '%s' is not an empty directory`を報告します。
 -   指定された`<path>`ディレクトリではない場合、 TiUP はエラー`Error: fdopendir: not a directory`を報告します。
 
 [&lt;&lt; 前のページに戻る - TiUP Mirror コマンド一覧](/tiup/tiup-command-mirror.md#command-list)

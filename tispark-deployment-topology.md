@@ -7,7 +7,7 @@ summary: Learn the deployment topology of TiSpark using TiUP based on the minima
 
 > **警告：**
 >
-> TiUPクラスターでの TiSpark サポートは非推奨になりました。使用はお勧めし**ません**。
+> TiUPクラスターでの TiSpark サポートは非​​推奨になりました。使用はお勧めし**ません**。
 
 このドキュメントでは、TiSpark 導入トポロジと、最小クラスター トポロジに基づいて TiSpark を導入する方法を紹介します。
 

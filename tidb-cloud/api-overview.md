@@ -9,7 +9,7 @@ summary: Learn about what is TiDB Cloud API, its features, and how to use API to
 >
 > [TiDB CloudAPI](https://docs.pingcap.com/tidbcloud/api/v1beta)はベータ版です。
 
-TiDB CloudAPI は、 TiDB Cloud内の管理オブジェクトを管理するためのプログラムによるアクセスを提供する[RESTインターフェース](https://en.wikipedia.org/wiki/Representational_state_transfer)です。この API を通じて、プロジェクト、クラスター、バックアップ、復元などのリソースを自動的かつ効率的に管理できます。
+TiDB CloudAPI は、 TiDB Cloud内の管理オブジェクトを管理するためのプログラムによるアクセスを提供する[RESTインターフェース](https://en.wikipedia.org/wiki/Representational_state_transfer)です。この API を通じて、プロジェクト、クラスター、バックアップ、リストア、インポートなどのリソースを自動的かつ効率的に管理できます。
 
 API には次の機能があります。
 

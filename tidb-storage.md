@@ -104,4 +104,4 @@ KeyN_Version1 -> Value
 
 ## 分散ACIDトランザクション {#distributed-acid-transaction}
 
-TiKV のトランザクションは、 Google が[取引概要](/transaction-overview.md)参照してください。
+TiKV のトランザクションは、 Google が[パーコレーター](https://research.google.com/pubs/pub36726.html)で使用するモデルを採用しています。 TiKV の実装はこの論文からインスピレーションを受けており、多くの最適化が施されています。詳細は[取引概要](/transaction-overview.md)参照してください。

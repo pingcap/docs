@@ -14,7 +14,7 @@ TiDB Ansible バージョン: 2.1.9
 
 -   符号なし型オーバーフロー時の`MAKETIME`関数の互換性を修正[#10089](https://github.com/pingcap/tidb/pull/10089)
 -   場合によっては定数フォールディングによって引き起こされるスタック オーバーフローを修正しました[#10189](https://github.com/pingcap/tidb/pull/10189)
--   場合によってはエイリアスが存在する場合の`Update`の権限チェックの問題を修正[#10326](https://github.com/pingcap/tidb/pull/10326)
+-   場合によってはエイリアスが存在する場合の`Update`の権限チェックの問題を修正[#10157](https://github.com/pingcap/tidb/pull/10157) 、 [#10326](https://github.com/pingcap/tidb/pull/10326)
 -   DistSQL [#10197](https://github.com/pingcap/tidb/pull/10197)でのメモリ使用量の追跡と制御
 -   照合順序を`utf8mb4_0900_ai_ci` [#10201](https://github.com/pingcap/tidb/pull/10201)として指定することをサポート
 -   主キーが符号なしタイプ[#10209](https://github.com/pingcap/tidb/pull/10209)である場合の`MAX`関数の間違った結果の問題を修正
@@ -64,5 +64,5 @@ TiDB Ansible バージョン: 2.1.9
 
 ## TiDB Ansible {#tidb-ansible}
 
--   ドキュメントのリファクタリング[#741](https://github.com/pingcap/tidb-ansible/pull/741)に従って tidb-ansible ドキュメントのリンクを更新します。
+-   ドキュメントのリファクタリング[#740](https://github.com/pingcap/tidb-ansible/pull/740) 、 [#741](https://github.com/pingcap/tidb-ansible/pull/741)に従って tidb-ansible ドキュメントのリンクを更新します。
 -   `inventory.ini`ファイルの`enable_slow_query_log`パラメータを削除し、デフォルトでスロー クエリ ログを別のログ ファイルに出力します[#742](https://github.com/pingcap/tidb-ansible/pull/742)

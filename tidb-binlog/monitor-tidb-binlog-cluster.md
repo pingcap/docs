@@ -89,7 +89,7 @@ Drainer監視メトリクスを理解するには、次の表を確認してく�
     -   Drainer `event`とDrainer `execute latency`に基づいて、ダウンストリームでのデータの複製が遅すぎるかどうかを確認します。
 
         -   Drainer `execute time`が大きすぎる場合は、 Drainerが展開されているマシンとターゲット データベースが展開されているマシン間のネットワーク帯域幅とレイテンシー、およびターゲット データベースの状態を確認してください。
-        -   Drainer`execute time`が大きすぎず、Drainer`event`が小さすぎる場合は、 `work count`と`batch`を追加して再試行します。
+        -   Drainer`execute time`大きすぎず、Drainer`event`が小さすぎる場合は、 `work count`と`batch`を追加して再試行します。
 
     -   上記の 2 つの解決策が機能しない場合は、 [支持を得ます](/support.md) PingCAP またはコミュニティからの解決策。
 

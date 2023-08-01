@@ -52,7 +52,7 @@ set [session | global] tidb_replica_read = '<target value>';
 
 > **ノート：**
 >
-> `tidb_replica_read`の値が`closest-replicas`または`closest-adaptive`に設定されている場合は、指定された構成に従ってレプリカが可用性ゾーン全体に分散されるようにクラスターを構成する必要があります。 PD に`location-labels`設定し、TiDB および TiKV に正しい`labels`を設定するには、 [データの高可用性](https://docs.pingcap.com/tidb-in-kubernetes/v1.4/configure-a-tidb-cluster#high-availability-of-data)を参照してください。
+> `tidb_replica_read`の値が`closest-replicas`または`closest-adaptive`に設定されている場合は、指定された構成に従ってレプリカが可用性ゾーン全体に分散されるようにクラスターを構成する必要があります。 PD に`location-labels`設定し、TiDB および TiKV に正しい`labels`を設定するには、 [トポロジ ラベルごとにレプリカをスケジュールする](/schedule-replicas-by-topology-labels.md)を参照してください。 TiDB は、同じアベイラビリティ ゾーン内の TiKV ノードと一致するために`zone`ラベルに依存するため、 `zone`ラベルが PD の`location-labels`に含まれ、 `zone`が各 TiDB および TiKV ノードの構成に含まれていることを確認する必要があります。クラスターがTiDB Operatorを使用してデプロイされている場合は、 [データの高可用性](https://docs.pingcap.com/tidb-in-kubernetes/v1.4/configure-a-tidb-cluster#high-availability-of-data)を参照してください。
 
 </CustomContent>
 

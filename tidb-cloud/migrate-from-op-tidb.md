@@ -1,17 +1,17 @@
 ---
-title: Migrate from On-Premises TiDB to TiDB Cloud
-summary: Learn how to migrate data from on-premises TiDB to TiDB Cloud.
+title: Migrate from TiDB Self-Hosted to TiDB Cloud
+summary: Learn how to migrate data from TiDB Self-Hosted to TiDB Cloud.
 ---
 
-# オンプレミス TiDB からTiDB Cloudへの移行 {#migrate-from-on-premises-tidb-to-tidb-cloud}
+# TiDB セルフホストからTiDB Cloudへの移行 {#migrate-from-tidb-self-hosted-to-tidb-cloud}
 
-このドキュメントでは、 Dumplingと TiCDC を介してオンプレミス (OP) TiDB クラスターからTiDB Cloud(AWS) にデータを移行する方法について説明します。
+このドキュメントでは、 Dumplingと TiCDC を介して TiDB セルフホスト クラスターからTiDB Cloud(AWS) にデータを移行する方法について説明します。
 
 全体的な手順は次のとおりです。
 
 1.  環境を構築し、ツールを準備します。
 2.  完全なデータを移行します。プロセスは次のとおりです。
-    1.  Dumplingを使用して OP TiDB から Amazon S3 にデータをエクスポートします。
+    1.  Dumplingを使用して、TiDB Self-Hosted から Amazon S3 にデータをエクスポートします。
     2.  Amazon S3 からTiDB Cloudにデータをインポートします。
 3.  TiCDC を使用して増分データをレプリケートします。
 4.  移行されたデータを確認します。
@@ -24,7 +24,7 @@ S3 バケットとTiDB Cloudクラスターを同じリージョンに配置す�
 
 -   管理者アクセス権を持つ[AWSアカウント](https://docs.aws.amazon.com/AmazonS3/latest/userguide/setting-up-s3.html#sign-up-for-aws-gsg)
 -   [AWS S3バケット](https://docs.aws.amazon.com/AmazonS3/latest/userguide/creating-bucket.html)
--   [管理者アクセス権を持つTiDB CloudアカウントとTiDB Cloud(AWS) クラスター](/tidb-cloud/tidb-cloud-quickstart.md)
+-   [TiDB Cloudアカウント](/tidb-cloud/tidb-cloud-quickstart.md)と AWS でホストされているターゲットTiDB Cloudクラスターへのアクセスが少なくとも[`Project Data Access Read-Write`](/tidb-cloud/manage-user-access.md#user-roles)
 
 ## 道具を準備する {#prepare-tools}
 
@@ -35,7 +35,7 @@ S3 バケットとTiDB Cloudクラスターを同じリージョンに配置す�
 
 ### Dumpling {#dumpling}
 
-[Dumpling](https://docs.pingcap.com/tidb/dev/dumpling-overview)は、TiDB または MySQL から SQL または CSV ファイルにデータをエクスポートするツールです。 Dumpling を使用して、OP TiDB から完全なデータをエクスポートできます。
+[Dumpling](https://docs.pingcap.com/tidb/dev/dumpling-overview)は、TiDB または MySQL から SQL または CSV ファイルにデータをエクスポートするツールです。 Dumplingを使用して、TiDB セルフホストから完全なデータをエクスポートできます。
 
 Dumplingをデプロイする前に、次の点に注意してください。
 
@@ -77,9 +77,9 @@ tiup update --self && tiup update dumpling
 
 ### TiCDCのデプロイ {#deploy-ticdc}
 
-増分データを上流の TiDB クラスターからTiDB Cloudにレプリケートするには、 [TiCDC を導入する](https://docs.pingcap.com/tidb/dev/deploy-ticdc)を実行する必要があります。
+増分データを上流の TiDB クラスターからTiDB Cloudに複製するには、 [TiCDC を導入する](https://docs.pingcap.com/tidb/dev/deploy-ticdc)を実行する必要があります。
 
-1.  現在の TiDB バージョンが TiCDC をサポートしているかどうかを確認します。 TiDB v4.0.8.rc.1 以降のバージョンは TiCDC をサポートします。 TiDB クラスターで`select tidb_version();`を実行すると、TiDB のバージョンを確認できます。アップグレードする必要がある場合は、 [TiUPを使用して TiDB をアップグレードする](https://docs.pingcap.com/tidb/dev/deploy-ticdc#upgrade-ticdc-using-tiup)参照してください。
+1.  現在の TiDB バージョンが TiCDC をサポートしているかどうかを確認します。 TiDB v4.0.8.rc.1 以降のバージョンは TiCDC をサポートします。 TiDB クラスターで`select tidb_version();`を実行すると、TiDB のバージョンを確認できます。アップグレードする必要がある場合は、 [TiUPを使用して TiDB をアップグレードする](https://docs.pingcap.com/tidb/dev/deploy-ticdc#upgrade-ticdc-using-tiup)を参照してください。
 
 2.  TiCDCコンポーネントをTiDB クラスターに追加します。 [TiUPを使用して、TiCDC を既存の TiDB クラスターに追加またはスケールアウトする](https://docs.pingcap.com/tidb/dev/deploy-ticdc#add-or-scale-out-ticdc-to-an-existing-tidb-cluster-using-tiup)を参照してください。 `scale-out.yml`ファイルを編集して TiCDC を追加します。
 
@@ -102,18 +102,18 @@ tiup update --self && tiup update dumpling
 
 ## 全データを移行する {#migrate-full-data}
 
-OP TiDB クラスターからTiDB Cloudにデータを移行するには、次のように完全なデータ移行を実行します。
+TiDB セルフホスト クラスターからTiDB Cloudにデータを移行するには、次のように完全なデータ移行を実行します。
 
-1.  OP TiDB クラスターから Amazon S3 にデータを移行します。
+1.  TiDB セルフホストクラスターから Amazon S3 にデータを移行します。
 2.  Amazon S3 からTiDB Cloudにデータを移行します。
 
-### OP TiDB クラスターから Amazon S3 にデータを移行する {#migrate-data-from-the-op-tidb-cluster-to-amazon-s3}
+### TiDB セルフホストクラスターから Amazon S3 にデータを移行する {#migrate-data-from-the-tidb-self-hosted-cluster-to-amazon-s3}
 
-Dumplingを使用して、OP TiDB クラスターから Amazon S3 にデータを移行する必要があります。
+Dumplingを使用して、TiDB セルフホストクラスターから Amazon S3 にデータを移行する必要があります。
 
 TiDB クラスターがローカル IDC にある場合、またはDumplingサーバーと Amazon S3 間のネットワークが接続されていない場合は、最初にファイルをローカルstorageにエクスポートし、後で Amazon S3 にアップロードできます。
 
-#### ステップ 1. アップストリーム OP TiDB クラスターの GC メカニズムを一時的に無効にする {#step-1-disable-the-gc-mechanism-of-the-upstream-op-tidb-cluster-temporarily}
+#### ステップ 1. 上流の TiDB セルフホスト クラスターの GC メカニズムを一時的に無効にします。 {#step-1-disable-the-gc-mechanism-of-the-upstream-tidb-self-hosted-cluster-temporarily}
 
 増分移行中に新しく書き込まれたデータが失われないようにするには、移行を開始する前に上流クラスターのガベージコレクション(GC) メカニズムを無効にして、システムが履歴データをクリーンアップしないようにする必要があります。
 
@@ -199,7 +199,7 @@ Dumplingを使用して上流の TiDB クラスターから Amazon S3 にデー�
 
 ### Amazon S3 からTiDB Cloudにデータを移行する {#migrate-data-from-amazon-s3-to-tidb-cloud}
 
-OP TiDB クラスターから Amazon S3 にデータをエクスポートした後、データをTiDB Cloudに移行する必要があります。
+TiDB セルフホストクラスターから Amazon S3 にデータをエクスポートした後、データをTiDB Cloudに移行する必要があります。
 
 1.  TiDB Cloudコンソールでクラスターのアカウント ID と外部 ID を取得します。詳細については、 [ステップ 2. Amazon S3 アクセスを構成する](/tidb-cloud/tidb-cloud-auditing.md#step-2-configure-amazon-s3-access)を参照してください。
 
@@ -218,7 +218,7 @@ OP TiDB クラスターから Amazon S3 にデータをエクスポートした�
 
     -   kms:復号化
 
-3.  アクセスポリシーを設定します。 [「JSON」タブでのポリシーの作成](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create-console.html) 。
+3.  アクセスポリシーを設定します。 [AWS コンソール &gt; IAM &gt; アクセス管理 &gt; ポリシー](https://console.aws.amazon.com/iamv2/home#/policies)に進み、リージョンに切り替えて、 TiDB Cloudのアクセス ポリシーがすでに存在するかどうかを確認します。存在しない場合は、この文書に従ってポリシーを作成します[「JSON」タブでのポリシーの作成](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create-console.html) 。
 
     以下は、json ポリシーのテンプレートの例です。
 
@@ -269,7 +269,7 @@ OP TiDB クラスターから Amazon S3 にデータをエクスポートした�
 
 5.  ロール ARN を取得します。 [AWS コンソール &gt; IAM &gt; アクセス管理 &gt; ロール](https://console.aws.amazon.com/iamv2/home#/roles)に進みます。お住まいの地域に切り替えてください。作成したロールをクリックし、ARN をメモします。これは、データをTiDB Cloudにインポートするときに使用します。
 
-6.  データをTiDB Cloudにインポートします。 [ステップ 3. データをTiDB Cloudにインポートする](/tidb-cloud/migrate-from-amazon-s3-or-gcs.md#step-3-import-data-into-tidb-cloud)を参照してください。
+6.  データをTiDB Cloudにインポートします。 [Amazon S3 または GCS からTiDB Cloudに CSV ファイルをインポート](/tidb-cloud/import-csv-files.md)を参照してください。
 
 ## 増分データをレプリケートする {#replicate-incremental-data}
 
@@ -283,7 +283,7 @@ OP TiDB クラスターから Amazon S3 にデータをエクスポートした�
 
     ![Update Filter](/media/tidb-cloud/edit_traffic_filter_rules.png)
 
-3.  ダウンストリームTiDB Cloudクラスターの接続情報を取得します。 [標準接続で接続する](/tidb-cloud/connect-via-standard-connection.md)を参照してください。
+3.  ダウンストリームTiDB Cloudクラスターの接続情報を取得します。 [TiDB Cloudコンソール](https://tidbcloud.com/console/clusters)で、 **[概要]** &gt; **[接続]** &gt; **[標準接続]** &gt; **[SQL クライアントとの接続]**に移動します。接続情報から、クラスターのホスト IP アドレスとポートを取得できます。詳細については、 [標準接続で接続する](/tidb-cloud/connect-via-standard-connection.md)を参照してください。
 
 4.  増分レプリケーション タスクを作成して実行します。アップストリーム クラスターで次のコマンドを実行します。
 

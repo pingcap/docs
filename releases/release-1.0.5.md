@@ -8,7 +8,7 @@ title: TiDB 1.0.5 Release Notes
 
 ## TiDB {#tidb}
 
--   [`Show Create Table`ステートメントに現在の Auto_Increment ID の最大値を追加します。](https://github.com/pingcap/tidb/pull/5489)
+-   [現在の Auto_Increment ID の最大値を`Show Create Table`ステートメントに追加します。](https://github.com/pingcap/tidb/pull/5489)
 -   [潜在的な goroutine リークを修正します。](https://github.com/pingcap/tidb/pull/5486)
 -   [遅いクエリの別ファイルへの出力をサポートします。](https://github.com/pingcap/tidb/pull/5484)
 -   [新しいセッションを作成するときに、TiKV から`TimeZone`変数をロードします。](https://github.com/pingcap/tidb/pull/5479)

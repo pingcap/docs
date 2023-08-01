@@ -36,7 +36,7 @@ TiDB アプリケーションでは、データのオーバーフローを避け
 
 **説明**
 
-MySQL は、データベースに対して実行された操作の合計数を追跡するために、一連の[`SHOW GLOBAL STATUS LIKE 'Com_%'`](/sql-statements/sql-statement-show-status.md)を使用すると、TiDB と MySQL の違いを確認できます。
+MySQL は、データベースに対して実行された操作の合計数を追跡するために、一連の[`Com_`で始まるサーバーステータス変数](https://dev.mysql.com/doc/refman/8.0/en/server-status-variables.html#statvar_Com_xxx)維持します。たとえば、 `Com_select` 、(ステートメントが正常にクエリされなかった場合でも) MySQL が最後に起動されてから開始された`SELECT`のステートメントの合計数を記録します。 TiDB はこれらの変数を維持しません。ステートメント[`SHOW GLOBAL STATUS LIKE 'Com_%'`](/sql-statements/sql-statement-show-status.md)を使用すると、TiDB と MySQL の違いを確認できます。
 
 **回避方法**
 
@@ -180,7 +180,7 @@ TiDB は次の方法でこの問題を修正します。
 
 ## Sequelizeとの互換性 {#compatibility-with-sequelize}
 
-このセクションで説明する互換性情報は[シークライズ v6.21.4](https://www.npmjs.com/package/sequelize/v/6.21.4)に基づいています。
+このセクションで説明する互換性情報は[シークライズ v6.32.1](https://www.npmjs.com/package/sequelize/v/6.32.1)に基づいています。
 
 テスト結果によると、TiDB は Sequelize 機能のほとんどをサポートしています ( [`MySQL`方言として使用する](https://sequelize.org/docs/v6/other-topics/dialect-specific-things/#mysql) )。
 
@@ -192,12 +192,15 @@ TiDB は次の方法でこの問題を修正します。
 -   `READ-UNCOMMITTED`と`SERIALIZABLE` [分離レベル](/system-variables.md#transaction_isolation)はサポートされていません。
 -   デフォルトでは、列の`AUTO_INCREMENT`属性の変更は許可されていません。
 -   `FULLTEXT` 、 `HASH` 、および`SPATIAL`インデックスはサポートされていません。
+-   `sequelize.queryInterface.showIndex(Model.tableName);`はサポートされていません。
+-   `sequelize.options.databaseVersion`はサポートされていません。
+-   [`queryInterface.addColumn`](https://sequelize.org/api/v6/class/src/dialects/abstract/query-interface.js~queryinterface#instance-method-addColumn)を使用した外部キ​​ー参照の追加はサポートされていません。
 
 ### 整数の主キーの変更はサポートされていません {#modification-of-integer-primary-key-is-not-supported}
 
 **説明**
 
-整数の主キーの変更はサポートされていません。 TiDB は、主キーが整数型の場合、主キーをデータ編成のインデックスとして使用します。詳細については、 [クラスター化インデックス](/clustered-indexes.md)を参照してください。
+整数の主キーの変更はサポートされていません。 TiDB は、主キーが整数型の場合、主キーをデータ編成のインデックスとして使用します。詳細については、 [問題 #18090](https://github.com/pingcap/tidb/issues/18090)と[クラスター化インデックス](/clustered-indexes.md)を参照してください。
 
 ### <code>READ-UNCOMMITTED</code>および<code>SERIALIZABLE</code>分離レベルはサポートされていません {#the-code-read-uncommitted-code-and-code-serializable-code-isolation-levels-are-not-supported}
 

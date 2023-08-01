@@ -31,7 +31,7 @@ ACID は、トランザクションの 4 つの主要なプロパティ (アト�
 
 ### バケツ {#bucket}
 
-[バケット設計ドキュメント](https://github.com/tikv/rfcs/blob/master/text/0082-dynamic-size-region.md#bucket)を参照してください。
+[リージョン](#regionpeerraft-group)は論理的にバケットと呼ばれるいくつかの小さな範囲に分割されます。 TiKV はバケットごとにクエリ統計を収集し、バケットのステータスを PD に報告します。詳細は[バケット設計ドキュメント](https://github.com/tikv/rfcs/blob/master/text/0082-dynamic-size-region.md#bucket)を参照してください。
 
 ## C {#c}
 

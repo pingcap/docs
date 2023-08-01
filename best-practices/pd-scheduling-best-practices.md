@@ -109,7 +109,7 @@ summary: Learn best practice and strategy for PD scheduling.
 
 ## スケジュールステータスのクエリ {#query-scheduling-status}
 
-スケジューリングシステムの状態はメトリクス、pd-ctl、ログで確認できます。ここではメトリクスとpd-ctlの手法について簡単に紹介します。詳細は[PD Control](/pd-control.md)を参照してください。
+スケジューリングシステムの状態はメトリクス、pd-ctl、ログで確認できます。ここではメトリクスとpd-ctlの手法について簡単に紹介します。詳細は[PDモニタリングメトリクス](/grafana-pd-dashboard.md)と[PD Control](/pd-control.md)を参照してください。
 
 ### オペレーターのステータス {#operator-status}
 
@@ -228,7 +228,7 @@ PD の評価メカニズムでは、さまざまなストアのリーダー数�
 
 オペレーターは正常に生成されたものの、スケジューリング プロセスが遅い場合は、次の理由が考えられます。
 
--   スケジュール速度はデフォルトで制限されています。 `leader-schedule-limit`または`replica-schedule-limit`をより大きな値に調整できます。s 同様に、 `max-pending-peer-count`と`max-snapshot-count`の制限を緩めることを検討できます。
+-   スケジュール速度はデフォルトで制限されています。 `leader-schedule-limit`または`replica-schedule-limit`より大きな値に調整できます。s 同様に、 `max-pending-peer-count`と`max-snapshot-count`の制限を緩めることを検討できます。
 -   他のスケジューリング タスクが同時に実行され、システム内のリソースを奪い合っています。 [リーダー/地域が均等に分散されていない](#leadersregions-are-not-evenly-distributed)の解決策を参照してください。
 -   単一のノードをオフラインにすると、処理されるリージョン リーダーの数 (3 つのレプリカ構成では約 1/3) が削除するノードに分散されます。したがって、速度は、この単一ノードによってスナップショットが生成される速度によって制限されます。リーダーを移行するために手動で`evict-leader-scheduler`を追加すると、速度を上げることができます。
 
@@ -296,4 +296,4 @@ TiKV ノードに障害が発生した場合、PD はデフォルトで 30 分�
 
 実際には、ノード障害が回復不可能とみなされる場合は、すぐにオフラインにすることができます。これにより、PD はすぐに別のノードにレプリカを補充し、データ損失のリスクを軽減します。対照的に、ノードが回復可能であると考えられているものの、回復を 30 分以内に実行できない場合は、タイムアウト後の不必要なレプリカの補充とリソースの浪費を避けるために、一時的に`max-store-down-time`をより大きな値に調整できます。
 
-TiDB v5.2.0 では、TiKV に低速な TiKV ノード検出のメカニズムが導入されています。 TiKV でリクエストをサンプリングすることにより、このメカニズムは 1 ～ 100 の範囲のスコアを算出します。スコアが 80 以上の TiKV ノードは低速としてマークされます。 [`evict-slow-store-scheduler`](/pd-control.md#scheduler-show--add--remove--pause--resume--config--describe)を追加すると、遅いノードを検出してスケジュールすることができます。 TiKV が 1 つだけ低速として検出され、低速スコアが上限 (デフォルトでは 100) に達した場合、このノードのリーダーが排除されます ( `evict-leader-scheduler`の効果と同様)。
+TiDB v5.2.0 では、TiKV に低速な TiKV ノード検出のメカニズムが導入されています。 TiKV でリクエストをサンプリングすることにより、このメカニズムは 1 ～ 100 の範囲のスコアを算出します。スコアが 80 以上の TiKV ノードは低速としてマークされます。 [`evict-slow-store-scheduler`](/pd-control.md#scheduler-show--add--remove--pause--resume--config--describe)を追加すると、遅いノードを検出してスケジュールすることができます。 1 つの TiKV のみが低速として検出され、低速スコアが制限 (デフォルトでは 80) に達した場合、このノードのリーダーが排除されます ( `evict-leader-scheduler`の効果と同様)。

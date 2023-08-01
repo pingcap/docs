@@ -52,7 +52,7 @@ DROP PLACEMENT POLICY myplacementpolicy;
 
 ## 現在の配置ルールをビュー {#view-current-placement-rules}
 
-テーブルに配置ルールがアタッチされている場合は、 [`SHOW CREATE PLACEMENT POLICY`](/sql-statements/sql-statement-show-create-placement-policy.md)を実行します。
+テーブルに配置ルールがアタッチされている場合は、 [`SHOW CREATE TABLE`](/sql-statements/sql-statement-show-create-table.md)の出力で配置ルールを確認できます。利用可能なポリシーの定義を表示するには、 [`SHOW CREATE PLACEMENT POLICY`](/sql-statements/sql-statement-show-create-placement-policy.md)を実行します。
 
 ```sql
 tidb> SHOW CREATE TABLE t1\G
@@ -247,7 +247,7 @@ PARTITION BY RANGE( YEAR(purchased) ) (
 
 > **ノート：**
 >
-> 辞書とリストの形式は YAML パーサーに基づいていますが、YAML 構文が誤って解析される可能性があります。たとえば、 `"{+disk=ssd:1,+disk=nvme:2}"`は誤って`'{"+disk=ssd:1": null, "+disk=nvme:1": null}'`として解析されます。ただし、 `"{+disk=ssd: 1,+disk=nvme: 1}"`は`'{"+disk=ssd": 1, "+disk=nvme": 1}'`として正しく解析されます。
+> 辞書とリストの形式は YAML パーサーに基づいていますが、YAML 構文が誤って解析される可能性があります。たとえば、 `"{+disk=ssd:1,+disk=nvme:2}"`は​​誤って`'{"+disk=ssd:1": null, "+disk=nvme:1": null}'`として解析されます。ただし、 `"{+disk=ssd: 1,+disk=nvme: 1}"`は`'{"+disk=ssd": 1, "+disk=nvme": 1}'`として正しく解析されます。
 
 ### 生存の好み {#survival-preferences}
 
@@ -271,12 +271,12 @@ CREATE PLACEMENT POLICY singleaz CONSTRAINTS="[+zone=zone1]" SURVIVAL_PREFERENCE
 
 ## ツールとの互換性 {#compatibility-with-tools}
 
-| ツール名           | サポートされる最小バージョン | 説明                                                                                                                                                                |
-| -------------- | -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ツール名           | サポートされる最小バージョン | 説明                                                                                                 |
+| -------------- | -------------- | -------------------------------------------------------------------------------------------------- |
 | バックアップと復元 (BR) | 6.0            | 配置ルールのインポートとエクスポートをサポートします。詳細は[BRの互換性](/br/backup-and-restore-overview.md#compatibility)を参照してください。 |
-| TiDB Lightning | まだ互換性がありません    | TiDB Lightning が配置ポリシーを含むバックアップ データをインポートするとエラーが報告される                                                                                                             |
-| TiCDC          | 6.0            | 配置ルールを無視し、ルールをダウンストリームに複製しません。                                                                                                                                    |
-| TiDBBinlog     | 6.0            | 配置ルールを無視し、ルールをダウンストリームに複製しません。                                                                                                                                    |
+| TiDB Lightning | まだ互換性がありません    | TiDB Lightning が配置ポリシーを含むバックアップ データをインポートするとエラーが報告される                                              |
+| TiCDC          | 6.0            | 配置ルールを無視し、ルールをダウンストリームに複製しません。                                                                     |
+| TiDBBinlog     | 6.0            | 配置ルールを無視し、ルールをダウンストリームに複製しません。                                                                     |
 
 ## 既知の制限事項 {#known-limitations}
 

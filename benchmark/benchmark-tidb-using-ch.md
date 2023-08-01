@@ -7,11 +7,11 @@ summary: Learn how to run CH-benCHmark test on TiDB.
 
 このドキュメントでは、CH-benCHmark を使用して TiDB をテストする方法について説明します。
 
-CH-benCHmark は、 [混合ワークロード CH-benCHmark](https://research.tableau.com/sites/default/files/a8-cole.pdf)を参照してください。
+CH-benCHmark は、 [TPC-C](http://www.tpc.org/tpcc/)つと[TPC-H](http://www.tpc.org/tpch/)テストの両方を含む混合ワークロードです。これは、HTAP システムをテストするための最も一般的なワークロードです。詳細については、 [混合ワークロード CH-benCHmark](https://research.tableau.com/sites/default/files/a8-cole.pdf)を参照してください。
 
-CH-benCHmark テストを実行する前に、まず[TiFlashレプリカを作成する](#create-tiflash-replicas)を展開すると、TiKV は TPC-C オンライン トランザクションの最新データをリアルタイムでTiFlashにレプリケートし、TiDB オプティマイザーは効率的な実行のために TPC-H ワークロードからTiFlashの MPP エンジンに OLAP クエリを自動的にプッシュダウンします。
+CH-benCHmark テストを実行する前に、まず[TiFlash](/tiflash/tiflash-overview.md)をデプロイする必要があります。これは TiDB の HTAPコンポーネントです。 TiFlashと[TiFlashレプリカを作成する](#create-tiflash-replicas)を展開すると、TiKV は TPC-C オンライン トランザクションの最新データをリアルタイムでTiFlashにレプリケートし、TiDB オプティマイザーは効率的な実行のために TPC-H ワークロードからTiFlashの MPP エンジンに OLAP クエリを自動的にプッシュダウンします。
 
-このドキュメントの CH-benCHmark テストは[TiUP](/tiup/tiup-overview.md)コマンドを使用してテスト プログラムをダウンロードできます。
+このドキュメントの CH-benCHmark テストは[ゴーTPC](https://github.com/pingcap/go-tpc)に基づいて実装されています。次の[TiUP](/tiup/tiup-overview.md)コマンドを使用してテスト プログラムをダウンロードできます。
 
 {{< copyable "" >}}
 

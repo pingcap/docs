@@ -115,7 +115,7 @@ pd-addr = "${ip}:${port}" # The address of the PD cluster, e.g.: 172.16.31.3:237
 
     -   `grep`を使用してログ内のキーワード`progress`を検索します。デフォルトでは、進行状況は 5 分ごとに更新されます。
     -   [監視ダッシュボード](/tidb-lightning/monitor-tidb-lightning.md)で進行状況を確認します。
-    -   [TiDB LightningWeb インターフェース](/tidb-lightning/tidb-lightning-web-interface.md)で進行状況を確認します。
+    -   [TiDB LightningWeb インターフェイス](/tidb-lightning/tidb-lightning-web-interface.md)で進行状況を確認します。
 
     TiDB Lightning はインポートを完了すると、自動的に終了します。
 

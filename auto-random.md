@@ -15,6 +15,8 @@ TiDB で同時書き込み負荷の高いワークロードを処理する方法
 
 </CustomContent>
 
+[テーブルの作成](/sql-statements/sql-statement-create-table.md)ステートメントの`AUTO_RANDOM_BASE`パラメータは、増分部分の初期値`auto_random`を設定するために使用されます。このオプションは、内部インターフェイスの一部として考えることができます。このパラメータは無視して構いません。
+
 ## 基本概念 {#basic-concepts}
 
 `AUTO_RANDOM`は、 `BIGINT`列に値を自動的に割り当てるために使用される列属性です。自動的に割り当てられる値は**ランダム**で**一意**です。

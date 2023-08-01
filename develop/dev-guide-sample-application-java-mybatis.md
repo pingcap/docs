@@ -21,19 +21,19 @@ summary: Learn how to build a simple CRUD application with TiDB and Mybatis.
 
 TiDB クラスターの起動方法を紹介します。
 
-**TiDB CloudServerless Tierクラスターを使用する**
+**TiDB サーバーレス クラスターを使用する**
 
-詳細な手順については、 [Serverless Tierクラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster)を参照してください。
+詳細な手順については、 [TiDB サーバーレスクラスターを作成する](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-tidb-serverless-cluster)を参照してください。
 
 **ローカルクラスターを使用する**
 
-詳細な手順については、 [TiUPを使用した TiDBクラスタのデプロイ](/production-deployment-using-tiup.md)を参照してください。
+詳細な手順については、 [ローカルテストクラスターをデプロイ](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[TiUPを使用した TiDBクラスタのデプロイ](/production-deployment-using-tiup.md)を参照してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-[Serverless Tierクラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster)を参照してください。
+[TiDB サーバーレスクラスターを作成する](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-tidb-serverless-cluster)を参照してください。
 
 </CustomContent>
 
@@ -195,7 +195,7 @@ cd plain-java-mybatis
 </plugin>
 ```
 
-Maven プラグインに組み込むと、古い生成ファイルを削除し、 `mvn mybatis-generate`を使用して新しいファイルを作成できます。または、 `make gen`使用して古いファイルを削除し、同時に新しいファイルを生成することもできます。
+Maven プラグインに組み込むと、古い生成ファイルを削除し、 `mvn mybatis-generate`使用して新しいファイルを作成できます。または、 `make gen`使用して古いファイルを削除し、同時に新しいファイルを生成することもできます。
 
 > **ノート：**
 >
@@ -630,7 +630,7 @@ mysql --host 127.0.0.1 --port 4000 -u root < src/main/resources/dbinit.sql
 
 ### ステップ 3.2 TiDB Cloudのパラメータを変更する {#step-3-2-modify-parameters-for-tidb-cloud}
 
-TiDB CloudServerless Tierクラスターを使用している場合は、 `mybatis-config.xml`の`dataSource.url` 、 `dataSource.username` 、 `dataSource.password`を変更します。
+TiDB サーバーレス クラスターを使用している場合は、 `mybatis-config.xml`の`dataSource.url` 、 `dataSource.username` 、 `dataSource.password`を変更します。
 
 ```xml
 <?xml version="1.0" encoding="UTF-8" ?>

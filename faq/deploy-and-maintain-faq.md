@@ -7,11 +7,11 @@ summary: Learn about the FAQs related to TiDB deployment.
 
 このドキュメントには、TiDB 導入に関連する FAQ がまとめられています。
 
-## ソフトウェアとハードウェアの要件 {#software-and-hardware-requirements}
+## ソフトウェアとハ​​ードウェアの要件 {#software-and-hardware-requirements}
 
 ### TiDB はどのオペレーティング システムをサポートしていますか? {#what-operating-systems-does-tidb-support}
 
-TiDB がサポートするオペレーティング システムについては、 [ソフトウェアとハードウェアの推奨事項](/hardware-and-software-requirements.md)を参照してください。
+TiDB がサポートするオペレーティング システムについては、 [ソフトウェアとハ​​ードウェアの推奨事項](/hardware-and-software-requirements.md)を参照してください。
 
 ### 開発、テスト、または本番環境における TiDB クラスターの推奨ハードウェア構成は何ですか? {#what-is-the-recommended-hardware-configuration-for-a-tidb-cluster-in-the-development-test-or-production-environment}
 
@@ -31,11 +31,11 @@ TiDB は分散クラスターとして、PD が一意のタイムスタンプを
 -   PD はクラスターのメタデータを保存し、頻繁に読み取りおよび書き込みリクエストを行います。高い I/O ディスクが必要です。ディスクのパフォーマンスが低いと、クラスター全体のパフォーマンスに影響します。 SSD ディスクの使用をお勧めします。さらに、リージョンの数が増えると、CPU とメモリの要件も高くなります。
 -   TiKV には、CPU、メモリ、ディスクに対する高い要件があります。 SSDを使用するために必要です。
 
-詳細は[ソフトウェアとハードウェアの推奨事項](/hardware-and-software-requirements.md)を参照してください。
+詳細は[ソフトウェアとハ​​ードウェアの推奨事項](/hardware-and-software-requirements.md)を参照してください。
 
 ## インストールと展開 {#installation-and-deployment}
 
-本番環境では、 [TiUPを使用した TiDBクラスタのデプロイ](/production-deployment-using-tiup.md)を参照してください。
+本番環境では、 [TiUP](/tiup/tiup-overview.md)を使用して TiDB クラスターをデプロイすることをお勧めします。 [TiUPを使用した TiDBクラスタのデプロイ](/production-deployment-using-tiup.md)を参照してください。
 
 ### TiKV/PD 用に変更された<code>toml</code>構成が有効にならないのはなぜですか? {#why-the-modified-code-toml-code-configuration-for-tikv-pd-does-not-take-effect}
 
@@ -77,7 +77,7 @@ TiDB は分散クラスターとして、PD が一意のタイムスタンプを
 
 ### TiDB にスロークエリログを個別に記録するにはどうすればよいですか?遅いクエリ SQL ステートメントを見つけるにはどうすればよいですか? {#how-to-separately-record-the-slow-query-log-in-tidb-how-to-locate-the-slow-query-sql-statement}
 
-1.  TiDB のスロー クエリ定義は、TiDB 構成ファイルにあります。 `slow-threshold: 300`パラメータはスロークエリの閾値（単位：ミリ秒）を設定するために使用されます。
+1.  TiDB のスロー クエリ定義は、TiDB 構成ファイルにあります。 `tidb_slow_log_threshold: 300`パラメータはスロークエリの閾値（単位：ミリ秒）を設定するために使用されます。
 
 2.  スロークエリが発生した場合、Grafana を使用してスロークエリが発生している`tidb-server`のインスタンスとスロークエリの時点を特定し、対応するノードのログに記録されている SQL ステートメント情報を見つけることができます。
 
@@ -113,6 +113,6 @@ TiDB `label`の構成は、クラスター展開アーキテクチャに関連�
 
 ## 現在 TiDB でサポートされているパブリック クラウド ベンダーは何ですか? {#what-public-cloud-vendors-are-currently-supported-by-tidb}
 
-TiDB は[アリババクラウドACK](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-on-alibaba-cloud)でのデプロイメントをサポートします。
+TiDB は[Google Cloud GKE](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-on-gcp-gke) 、 [AWS EKS](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-on-aws-eks) 、および[アリババクラウドACK](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-on-alibaba-cloud)でのデプロイメントをサポートします。
 
 さらに、TiDB は現在、JD Cloud と UCloud で利用できます。

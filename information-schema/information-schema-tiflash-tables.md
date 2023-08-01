@@ -9,6 +9,10 @@ summary: Learn the `TIFLASH_TABLES` information_schema table.
 >
 > このテーブルは本番環境では使用しないでください。テーブルのフィールドは不安定であり、TiDB の新しいリリースでは予告なく変更される可能性があります。
 
+> **ノート：**
+>
+> このステートメントは、TiDB サーバーレス クラスターには適用されません。
+
 `TIFLASH_TABLES`表は、 TiFlashのデータ テーブルに関する統計情報を提供します。
 
 ```sql
@@ -109,7 +113,7 @@ DESC tiflash_tables;
 -   `TOTAL_STABLE_ROWS` : すべての安定層の行の合計数。
 -   `TOTAL_STABLE_SIZE` : すべての安定層のデータの合計サイズ (バイト単位)。
 -   `TOTAL_STABLE_SIZE_ON_DISK` : すべての安定層のデータが占めるディスク容量 (バイト単位)。
--   `AVG_STABLE_ROWS` : すべての安定層のデータの平均行数。
+-   `AVG_STABLE_ROWS` : すべての安定層のデータ行の平均数。
 -   `AVG_STABLE_SIZE` : すべての安定層のデータの平均サイズ (バイト単位)。
 -   `TOTAL_PACK_COUNT_IN_DELTA` : すべてのデルタ レイヤー内のカラムファイルの合計数。
 -   `MAX_PACK_COUNT_IN_DELTA` : 単一デルタレイヤー内のカラムファイルの最大数。

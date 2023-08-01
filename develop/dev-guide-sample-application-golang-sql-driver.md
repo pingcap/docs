@@ -21,19 +21,19 @@ summary: Learn how to build a simple CRUD application with TiDB and Go-MySQL-Dri
 
 TiDB クラスターの起動方法を紹介します。
 
-**TiDB CloudServerless Tierクラスターを使用する**
+**TiDB サーバーレス クラスターを使用する**
 
-詳細な手順については、 [Serverless Tierクラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster)を参照してください。
+詳細な手順については、 [TiDB サーバーレスクラスターを作成する](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-tidb-serverless-cluster)を参照してください。
 
 **ローカルクラスターを使用する**
 
-詳細な手順については、 [TiUPを使用した TiDBクラスタのデプロイ](/production-deployment-using-tiup.md)を参照してください。
+詳細な手順については、 [ローカルテストクラスターをデプロイ](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[TiUPを使用した TiDBクラスタのデプロイ](/production-deployment-using-tiup.md)を参照してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-[Serverless Tierクラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster)を参照してください。
+[TiDB サーバーレスクラスターを作成する](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-tidb-serverless-cluster)を参照してください。
 
 </CustomContent>
 
@@ -509,7 +509,7 @@ go-sql-driver/mysql を使用する場合は、クラスターに接続し、 `s
 
 ### ステップ 3.2 TiDB Cloudのパラメータを変更する {#step-3-2-modify-parameters-for-tidb-cloud}
 
-TiDB CloudServerless Tierクラスターを使用している場合は、 `dsn` in `sqldriver.go`の値を変更します。
+TiDB サーバーレス クラスターを使用している場合は、 `dsn` in `sqldriver.go`の値を変更します。
 
 ```go
 dsn := "root:@tcp(127.0.0.1:4000)/test?charset=utf8mb4"

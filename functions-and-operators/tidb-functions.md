@@ -9,35 +9,35 @@ summary: Learn about the usage of TiDB specific functions.
 
 <CustomContent platform="tidb">
 
-| 関数名                                                                                                                       | 機能説明                                                                                                                                                                                                                                                                                                                                                  |
-| :------------------------------------------------------------------------------------------------------------------------ | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `TIDB_BOUNDED_STALENESS()`                                                                                                | `TIDB_BOUNDED_STALENESS`関数は、時間範囲内でできるだけ新しいデータを読み取るように TiDB に指示します。参照: [`AS OF TIMESTAMP`句を使用した履歴データの読み取り](/as-of-timestamp.md)                                                                                                                                                                                      |
-| [`TIDB_DECODE_KEY(str)`](#tidb_decode_key)                                                 | `TIDB_DECODE_KEY`関数を使用すると、TiDB でエンコードされたキー エントリを`_tidb_rowid`と`table_id`を含む JSON 構造にデコードできます。これらのエンコードされたキーは、一部のシステム テーブルおよびログ出力に含まれています。                                                                                                                                                                                                             |
-| [`TIDB_DECODE_PLAN(str)`](#tidb_decode_plan)                                              | `TIDB_DECODE_PLAN`関数は、TiDB 実行プランをデコードするために使用できます。                                                                                                                                                                                                                                                                                                     |
-| `TIDB_IS_DDL_OWNER()`                                                                                                     | `TIDB_IS_DDL_OWNER`関数を使用すると、接続している TiDB インスタンスが DDL 所有者であるかどうかを確認できます。 DDL オーナーは、クラスター内の他のすべてのノードに代わって DDL ステートメントを実行する任務を負った TiDB インスタンスです。                                                                                                                                                                                                          |
-| [`tidb_current_ts`](/system-variables.md#tidb_current_ts)も参照してください。                                                                                                                                                                   |
-| [`TIDB_VERSION()`](#tidb_version)                                                             | `TIDB_VERSION`関数は、追加のビルド情報を含む TiDB バージョンを返します。                                                                                                                                                                                                                                                                                                        |
-| [`TIDB_DECODE_SQL_DIGESTS(digests, stmtTruncateLength)`](#tidb_decode_sql_digests) | `TIDB_DECODE_SQL_DIGESTS()`関数は、クラスター内の SQL ダイジェストのセットに対応する正規化された SQL ステートメント (形式と引数のない形式) をクエリするために使用されます。                                                                                                                                                                                                                                            |
-| `VITESS_HASH(str)`                                                                                                        | `VITESS_HASH`関数は、Vitess の`HASH`関数と互換性のある文字列のハッシュを返します。これは、Vitess からのデータ移行を支援することを目的としています。                                                                                                                                                                                                                                                            |
-| `TIDB_SHARD()`                                                                                                            | `TIDB_SHARD`関数を使用すると、インデックス ホットスポットを分散するシャード インデックスを作成できます。シャード インデックスは、接頭辞として`TIDB_SHARD`関数が付いている式インデックスです。                                                                                                                                                                                                                                          |
-| `TIDB_ROW_CHECKSUM()`                                                                                                     | `TIDB_ROW_CHECKSUM`関数は、行のチェックサム値をクエリするために使用されます。この関数は、FastPlan プロセス内の`SELECT`のステートメントでのみ使用できます。つまり、 `SELECT TIDB_ROW_CHECKSUM() FROM t WHERE id = ?`や`SELECT TIDB_ROW_CHECKSUM() FROM t WHERE id IN (?, ?, ...)`のようなステートメントを通じてクエリを実行できます。 [単一行データのデータ整合性検証](/ticdc/ticdc-integrity-check.md)も参照してください。 |
+| 関数名                                                                                | 機能説明                                                                                                                                                                                                                                                                                                    |
+| :--------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `TIDB_BOUNDED_STALENESS()`                                                         | `TIDB_BOUNDED_STALENESS`関数は、時間範囲内でできるだけ新しいデータを読み取るように TiDB に指示します。参照: [`AS OF TIMESTAMP`句を使用した履歴データの読み取り](/as-of-timestamp.md)                                                                                                                                                                          |
+| [`TIDB_DECODE_KEY(str)`](#tidb_decode_key)                                         | `TIDB_DECODE_KEY`関数を使用すると、TiDB でエンコードされたキー エントリを`_tidb_rowid`と`table_id`を含む JSON 構造にデコードできます。これらのエンコードされたキーは、一部のシステム テーブルおよびログ出力に含まれています。                                                                                                                                                               |
+| [`TIDB_DECODE_PLAN(str)`](#tidb_decode_plan)                                       | `TIDB_DECODE_PLAN`関数は、TiDB 実行プランをデコードするために使用できます。                                                                                                                                                                                                                                                       |
+| `TIDB_IS_DDL_OWNER()`                                                              | `TIDB_IS_DDL_OWNER`関数を使用すると、接続している TiDB インスタンスが DDL 所有者であるかどうかを確認できます。 DDL オーナーは、クラスター内の他のすべてのノードに代わって DDL ステートメントを実行する任務を負った TiDB インスタンスです。                                                                                                                                                            |
+| [`TIDB_PARSE_TSO(num)`](#tidb_parse_tso)                                           | `TIDB_PARSE_TSO`関数を使用すると、TiDB TSO タイムスタンプから物理タイムスタンプを抽出できます。 [`tidb_current_ts`](/system-variables.md#tidb_current_ts)も参照してください。                                                                                                                                                                        |
+| [`TIDB_VERSION()`](#tidb_version)                                                  | `TIDB_VERSION`関数は、追加のビルド情報を含む TiDB バージョンを返します。                                                                                                                                                                                                                                                          |
+| [`TIDB_DECODE_SQL_DIGESTS(digests, stmtTruncateLength)`](#tidb_decode_sql_digests) | `TIDB_DECODE_SQL_DIGESTS()`関数は、クラスター内の SQL ダイジェストのセットに対応する正規化された SQL ステートメント (形式と引数のない形式) をクエリするために使用されます。                                                                                                                                                                                              |
+| `VITESS_HASH(str)`                                                                 | `VITESS_HASH`関数は、Vitess の`HASH`関数と互換性のある文字列のハッシュを返します。これは、Vitess からのデータ移行を支援することを目的としています。                                                                                                                                                                                                              |
+| `TIDB_SHARD()`                                                                     | `TIDB_SHARD`関数を使用すると、インデックス ホットスポットを分散するシャード インデックスを作成できます。シャード インデックスは、接頭辞として`TIDB_SHARD`関数が付いている式インデックスです。                                                                                                                                                                                            |
+| `TIDB_ROW_CHECKSUM()`                                                              | `TIDB_ROW_CHECKSUM`関数は、行のチェックサム値をクエリするために使用されます。この関数は、FastPlan プロセス内の`SELECT`のステートメントでのみ使用できます。つまり、 `SELECT TIDB_ROW_CHECKSUM() FROM t WHERE id = ?`や`SELECT TIDB_ROW_CHECKSUM() FROM t WHERE id IN (?, ?, ...)`のようなステートメントを通じてクエリを実行できます。 [単一行データのデータ整合性検証](/ticdc/ticdc-integrity-check.md)も参照してください。 |
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-| 関数名                                                                                                                       | 機能説明                                                                                                                                                                                                                                                                                                                                                                                                        |
-| :------------------------------------------------------------------------------------------------------------------------ | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `TIDB_BOUNDED_STALENESS()`                                                                                                | `TIDB_BOUNDED_STALENESS`関数は、時間範囲内でできるだけ新しいデータを読み取るように TiDB に指示します。参照: [`AS OF TIMESTAMP`句を使用した履歴データの読み取り](/as-of-timestamp.md)                                                                                                                                                                                                                                            |
-| [`TIDB_DECODE_KEY(str)`](#tidb_decode_key)                                                 | `TIDB_DECODE_KEY`関数を使用すると、TiDB でエンコードされたキー エントリを`_tidb_rowid`と`table_id`を含む JSON 構造にデコードできます。これらのエンコードされたキーは、一部のシステム テーブルおよびログ出力に含まれています。                                                                                                                                                                                                                                                                   |
-| [`TIDB_DECODE_PLAN(str)`](#tidb_decode_plan)                                              | `TIDB_DECODE_PLAN`関数は、TiDB 実行プランをデコードするために使用できます。                                                                                                                                                                                                                                                                                                                                                           |
-| `TIDB_IS_DDL_OWNER()`                                                                                                     | `TIDB_IS_DDL_OWNER`関数を使用すると、接続している TiDB インスタンスが DDL 所有者であるかどうかを確認できます。 DDL オーナーは、クラスター内の他のすべてのノードに代わって DDL ステートメントを実行する任務を負った TiDB インスタンスです。                                                                                                                                                                                                                                                                |
-| [`tidb_current_ts`](/system-variables.md#tidb_current_ts)も参照してください。                                                                                                                                                                                                                         |
-| [`TIDB_VERSION()`](#tidb_version)                                                             | `TIDB_VERSION`関数は、追加のビルド情報を含む TiDB バージョンを返します。                                                                                                                                                                                                                                                                                                                                                              |
-| [`TIDB_DECODE_SQL_DIGESTS(digests, stmtTruncateLength)`](#tidb_decode_sql_digests) | `TIDB_DECODE_SQL_DIGESTS()`関数は、クラスター内の SQL ダイジェストのセットに対応する正規化された SQL ステートメント (形式と引数のない形式) をクエリするために使用されます。                                                                                                                                                                                                                                                                                                  |
-| `VITESS_HASH(str)`                                                                                                        | `VITESS_HASH`関数は、Vitess の`HASH`関数と互換性のある文字列のハッシュを返します。これは、Vitess からのデータ移行を支援することを目的としています。                                                                                                                                                                                                                                                                                                                  |
-| `TIDB_SHARD()`                                                                                                            | `TIDB_SHARD`関数を使用すると、インデックス ホットスポットを分散するシャード インデックスを作成できます。シャード インデックスは、接頭辞として`TIDB_SHARD`関数が付いている式インデックスです。                                                                                                                                                                                                                                                                                                |
-| `TIDB_ROW_CHECKSUM()`                                                                                                     | `TIDB_ROW_CHECKSUM`関数は、行のチェックサム値をクエリするために使用されます。この関数は、FastPlan プロセス内の`SELECT`のステートメントでのみ使用できます。つまり、 `SELECT TIDB_ROW_CHECKSUM() FROM t WHERE id = ?`や`SELECT TIDB_ROW_CHECKSUM() FROM t WHERE id IN (?, ?, ...)`のようなステートメントを通じてクエリを実行できます。 [単一行データのデータ整合性検証](https://docs.pingcap.com/tidb/stable/ticdc-integrity-check)も参照してください。 |
+| 関数名                                                                                | 機能説明                                                                                                                                                                                                                                                                                                                               |
+| :--------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `TIDB_BOUNDED_STALENESS()`                                                         | `TIDB_BOUNDED_STALENESS`関数は、時間範囲内でできるだけ新しいデータを読み取るように TiDB に指示します。参照: [`AS OF TIMESTAMP`句を使用した履歴データの読み取り](/as-of-timestamp.md)                                                                                                                                                                                                     |
+| [`TIDB_DECODE_KEY(str)`](#tidb_decode_key)                                         | `TIDB_DECODE_KEY`関数を使用すると、TiDB でエンコードされたキー エントリを`_tidb_rowid`と`table_id`を含む JSON 構造にデコードできます。これらのエンコードされたキーは、一部のシステム テーブルおよびログ出力に含まれています。                                                                                                                                                                                          |
+| [`TIDB_DECODE_PLAN(str)`](#tidb_decode_plan)                                       | `TIDB_DECODE_PLAN`関数は、TiDB 実行プランをデコードするために使用できます。                                                                                                                                                                                                                                                                                  |
+| `TIDB_IS_DDL_OWNER()`                                                              | `TIDB_IS_DDL_OWNER`関数を使用すると、接続している TiDB インスタンスが DDL 所有者であるかどうかを確認できます。 DDL オーナーは、クラスター内の他のすべてのノードに代わって DDL ステートメントを実行する任務を負った TiDB インスタンスです。                                                                                                                                                                                       |
+| [`TIDB_PARSE_TSO(num)`](#tidb_parse_tso)                                           | `TIDB_PARSE_TSO`関数を使用すると、TiDB TSO タイムスタンプから物理タイムスタンプを抽出できます。 [`tidb_current_ts`](/system-variables.md#tidb_current_ts)も参照してください。                                                                                                                                                                                                   |
+| [`TIDB_VERSION()`](#tidb_version)                                                  | `TIDB_VERSION`関数は、追加のビルド情報を含む TiDB バージョンを返します。                                                                                                                                                                                                                                                                                     |
+| [`TIDB_DECODE_SQL_DIGESTS(digests, stmtTruncateLength)`](#tidb_decode_sql_digests) | `TIDB_DECODE_SQL_DIGESTS()`関数は、クラスター内の SQL ダイジェストのセットに対応する正規化された SQL ステートメント (形式と引数のない形式) をクエリするために使用されます。                                                                                                                                                                                                                         |
+| `VITESS_HASH(str)`                                                                 | `VITESS_HASH`関数は、Vitess の`HASH`関数と互換性のある文字列のハッシュを返します。これは、Vitess からのデータ移行を支援することを目的としています。                                                                                                                                                                                                                                         |
+| `TIDB_SHARD()`                                                                     | `TIDB_SHARD`関数を使用すると、インデックス ホットスポットを分散するシャード インデックスを作成できます。シャード インデックスは、接頭辞として`TIDB_SHARD`関数が付いている式インデックスです。                                                                                                                                                                                                                       |
+| `TIDB_ROW_CHECKSUM()`                                                              | `TIDB_ROW_CHECKSUM`関数は、行のチェックサム値をクエリするために使用されます。この関数は、FastPlan プロセス内の`SELECT`のステートメントでのみ使用できます。つまり、 `SELECT TIDB_ROW_CHECKSUM() FROM t WHERE id = ?`や`SELECT TIDB_ROW_CHECKSUM() FROM t WHERE id IN (?, ?, ...)`のようなステートメントを通じてクエリを実行できます。 [単一行データのデータ整合性検証](https://docs.pingcap.com/tidb/stable/ticdc-integrity-check)も参照してください。 |
 
 </CustomContent>
 
@@ -131,8 +131,6 @@ TiDB 実行プランは、スロー クエリ ログでエンコードされた�
 
 この関数は、ステートメントの実行時にプランが取得されるため便利です。データの分散と統計が時間の経過とともに進化するにつれて、 `EXPLAIN`のステートメントを再実行すると、異なる結果が生じる可能性があります。
 
-{{< copyable "" >}}
-
 ```sql
 SELECT tidb_decode_plan('8QIYMAkzMV83CQEH8E85LjA0CWRhdGE6U2VsZWN0aW9uXzYJOTYwCXRpbWU6NzEzLjHCtXMsIGxvb3BzOjIsIGNvcF90YXNrOiB7bnVtOiAxLCBtYXg6IDU2OC41wgErRHByb2Nfa2V5czogMCwgcnBjXxEpAQwFWBAgNTQ5LglZyGNvcHJfY2FjaGVfaGl0X3JhdGlvOiAwLjAwfQkzLjk5IEtCCU4vQQoxCTFfNgkxXzAJMwm2SGx0KHRlc3QudC5hLCAxMDAwMCkNuQRrdgmiAHsFbBQzMTMuOMIBmQnEDDk2MH0BUgEEGAoyCTQzXzUFVwX1oGFibGU6dCwga2VlcCBvcmRlcjpmYWxzZSwgc3RhdHM6cHNldWRvCTk2ISE2aAAIMTUzXmYA')\G
 ```
@@ -154,8 +152,6 @@ TSO は、次の 2 つの部分で構成される数値です。
 -   物理的なタイムスタンプ
 -   論理カウンター
 
-{{< copyable "" >}}
-
 ```sql
 BEGIN;
 SELECT TIDB_PARSE_TSO(@@tidb_current_ts);
@@ -176,8 +172,6 @@ ROLLBACK;
 ### TIDB_VERSION {#tidb-version}
 
 `TIDB_VERSION`関数を使用すると、接続している TiDBサーバーのバージョンとビルドの詳細を取得できます。この機能は、GitHub で問題を報告するときに使用できます。
-
-{{< copyable "" >}}
 
 ```sql
 SELECT TIDB_VERSION()\G
@@ -232,8 +226,6 @@ select tidb_decode_sql_digests(@digests);
 
 上の例では、パラメーターは 3 つの SQL ダイジェストを含む JSON 配列であり、対応する SQL ステートメントはクエリ結果の 3 つの項目です。ただし、2 番目の SQL ダイジェストに対応する SQL ステートメントがクラスターから見つからないため、結果の 2 番目の項目は`null`になります。
 
-{{< copyable "" >}}
-
 ```sql
 select tidb_decode_sql_digests(@digests, 10);
 ```
@@ -258,8 +250,6 @@ select tidb_decode_sql_digests(@digests, 10);
 
 `TIDB_SHARD`関数を使用すると、インデックス ホットスポットを分散するシャード インデックスを作成できます。シャード インデックスは、 `TIDB_SHARD`関数が接頭辞として付けられた式インデックスです。
 
-#### シャードインデックス {#shard-index}
-
 -   作成:
 
     インデックス フィールド`a`のシャード インデックスを作成するには、 `uk((tidb_shard(a)), a))`使用できます。一意のセカンダリインデックス`uk((tidb_shard(a)), a))`のインデックスフィールド`a`上のデータが単調増加または減少することによって引き起こされるホットスポットがある場合、インデックスのプレフィックス`tidb_shard(a)`によってホットスポットを分散させ、クラスターのスケーラビリティを向上させることができます。
@@ -282,14 +272,7 @@ select tidb_decode_sql_digests(@digests, 10);
     -   FastPlan プロセスを実行できないため、オプティマイザーのパフォーマンスに影響します。
     -   実行プラン キャッシュの準備には使用できません。
 
-#### あらすじ {#synopsis}
-
-```ebnf+diagram
-TIDBShardExpr ::=
-    "TIDB_SHARD" "(" expr ")"
-```
-
-#### 例 {#example}
+次の例は、 `TIDB_SHARD`関数の使用方法を示しています。
 
 -   `TIDB_SHARD`関数を使用して SHARD 値を計算します。
 
@@ -323,15 +306,6 @@ TIDBShardExpr ::=
 ### TIDB_ROW_CHECKSUM {#tidb-row-checksum}
 
 `TIDB_ROW_CHECKSUM`関数は、行のチェックサム値をクエリするために使用されます。この関数は、FastPlan プロセス内の`SELECT`のステートメントでのみ使用できます。つまり、 `SELECT TIDB_ROW_CHECKSUM() FROM t WHERE id = ?`や`SELECT TIDB_ROW_CHECKSUM() FROM t WHERE id IN (?, ?, ...)`のようなステートメントを通じてクエリを実行できます。
-
-概要は次のとおりです。
-
-```ebnf+diagram
-TableStmt ::=
-    "TIDB_ROW_CHECKSUM()"
-```
-
-次の例は、 `TIDB_ROW_CHECKSUM`関数を使用して行データのチェックサム値をクエリする方法を示しています。
 
 TiDB の単一行データのチェックサム機能 (システム変数[`tidb_enable_row_level_checksum`](/system-variables.md#tidb_enable_row_level_checksum-new-in-v710)によって制御) を有効にするには、次のステートメントを実行します。
 

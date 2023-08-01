@@ -26,9 +26,9 @@ TiDB Ansible バージョン: 4.0.0-beta.2
 
 -   ツール
     -   TiDBBinlog
-        -   TiDB クラスター間の双方向データ レプリケーションをサポート[#903](https://github.com/pingcap/tidb-binlog/pull/903)
+        -   TiDB クラスター間の双方向データ レプリケーションをサポート[#879](https://github.com/pingcap/tidb-binlog/pull/879) [#903](https://github.com/pingcap/tidb-binlog/pull/903)
     -   TiDB Lightning
-        -   TLS 構成のサポート[#270](https://github.com/pingcap/tidb-lightning/pull/270)
+        -   TLS 構成のサポート[#40](https://github.com/tikv/importer/pull/40) [#270](https://github.com/pingcap/tidb-lightning/pull/270)
     -   TiCDC
         -   変更データ キャプチャ (CDC) の初期リリースでは、次の機能が提供されます。
             -   TiKV からの変更データのキャプチャのサポート
@@ -46,7 +46,7 @@ TiDB Ansible バージョン: 4.0.0-beta.2
 
 -   TiKV
     -   バックアップ中に空の short 値に遭遇したときに発生する可能性があるpanicの問題を修正します[#6718](https://github.com/tikv/tikv/pull/6718)
-    -   場合によっては Hibernate リージョンが正しく起動されないことがある問題を修正[#6376](https://github.com/tikv/tikv/pull/6736)
+    -   場合によっては Hibernate リージョンが正しく起動されないことがある問題を修正[#6772](https://github.com/tikv/tikv/pull/6672) [#6648](https://github.com/tikv/tikv/pull/6648) [#6376](https://github.com/tikv/tikv/pull/6736)
 
 -   PD
     -   ルール チェッカーがリージョン[#2160](https://github.com/pingcap/pd/pull/2160)にストアを割り当てることができないというpanicの問題を修正します。

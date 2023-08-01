@@ -30,7 +30,7 @@ TiDB v6.1.0 以降、TiCDC は、Avro 形式での Confluent への増分デー�
     tiup status
     ```
 
-    TiUPがまだインストールされていない場合は、 [TiCDCのデプロイ](/ticdc/deploy-ticdc.md)手順に従って TiCDC をデプロイできます。
+    TiUPがまだインストールされていない場合は、 [TiUPをインストールする](/tiup/tiup-overview.md#install-tiup)を参照してください。本番環境では、 [TiCDCのデプロイ](/ticdc/deploy-ticdc.md)手順に従って TiCDC をデプロイできます。
 
 2.  Confluent Cloud を登録し、Confluent クラスターを作成します。
 

@@ -133,7 +133,7 @@ public List<Author> getTop50EldestAuthorInfo() throws SQLException {
 <SimpleTab groupId="language">
 <div label="SQL" value="sql">
 
-グローバル一時テーブルを作成するには、 `GLOBAL`キーワードを追加し、末尾に`ON COMMIT DELETE ROWS`を付けます。これは、現在のトランザクションが終了した後にテーブルが削除されることを意味します。
+グローバル一時テーブルを作成するには、 `GLOBAL`キーワードを追加し、末尾に`ON COMMIT DELETE ROWS`付けます。これは、現在のトランザクションが終了した後にテーブルが削除されることを意味します。
 
 ```sql
 CREATE GLOBAL TEMPORARY TABLE IF NOT EXISTS top_50_eldest_authors_global (

@@ -9,7 +9,7 @@ summary: Learn the TiDB configuration file options that are not involved in comm
 
 # TiDBコンフィグレーションファイル {#tidb-configuration-file}
 
-TiDB 構成ファイルは、コマンドライン パラメーターよりも多くのオプションをサポートしています。デフォルトの構成ファイル[コマンドラインオプション](/command-line-flags-for-tidb-configuration.md)に関係しないオプションのみについて説明します。
+TiDB 構成ファイルは、コマンドライン パラメーターよりも多くのオプションをサポートしています。デフォルトの構成ファイル[`config.toml.example`](https://github.com/pingcap/tidb/blob/master/config/config.toml.example)ダウンロードし、その名前を`config.toml`に変更できます。このドキュメントでは、 [コマンドラインオプション](/command-line-flags-for-tidb-configuration.md)に関係しないオプションのみについて説明します。
 
 > **ヒント：**
 >
@@ -49,6 +49,10 @@ TiDB 構成ファイルは、コマンドライン パラメーターよりも�
 -   TiDB が一時データを保存するために使用するファイル システムの場所。機能が TiDB ノードのローカルstorageを必要とする場合、TiDB は対応する一時データをこの場所に保存します。
 -   インデックスの作成時に[`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630)が有効な場合、新しく作成されたインデックスに対してバックフィルする必要があるデータは、最初に TiDB ローカル一時ディレクトリに保存され、次にバッチで TiKV にインポートされるため、インデックスの作成が高速化されます。
 -   デフォルト値: `"/tmp/tidb"`
+
+> **ノート：**
+>
+> ディレクトリが存在しない場合、TiDB は起動時に自動的に作成します。ディレクトリの作成が失敗した場合、または TiDB にそのディレクトリに対する読み取りおよび書き込み権限がない場合、予期しない問題が発生する可能[`Fast Online DDL`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630)があります。
 
 ### <code>oom-use-tmp-storage</code> {#code-oom-use-tmp-storage-code}
 
@@ -127,7 +131,7 @@ TiDB 構成ファイルは、コマンドライン パラメーターよりも�
 
 ### <code>repair-table-list</code> {#code-repair-table-list-code}
 
--   `repair-table-list` [`repair-mode`](#repair-mode) `true`に設定されている場合にのみ有効です。 `repair-table-list`は、インスタンス内で修復する必要がある不良テーブルのリストです。リストの例は次のとおりです: [&quot;db.table1&quot;,&quot;db.table2&quot;...]。
+-   `repair-table-list`は、 [`repair-mode`](#repair-mode) `true`に設定されている場合にのみ有効です。 `repair-table-list`は、インスタンス内で修復する必要がある不良テーブルのリストです。リストの例は次のとおりです: [&quot;db.table1&quot;,&quot;db.table2&quot;...]。
 -   デフォルト値: []
 -   デフォルトではリストは空です。これは、修復する必要がある不良テーブルがないことを意味します。
 
@@ -142,7 +146,7 @@ TiDB 構成ファイルは、コマンドライン パラメーターよりも�
 -   TiDB で許可される同時クライアント接続の最大数。リソースを制御するために使用されます。
 -   デフォルト値: `0`
 -   デフォルトでは、TiDB は同時クライアント接続数に制限を設定しません。この構成項目の値が`0`より大きく、実際のクライアント接続の数がこの値に達すると、TiDBサーバーは新しいクライアント接続を拒否します。
--   v6.2.0 以降、TiDB 構成項目[`max_connections`](/system-variables.md#max_connections)は、TiDB で許可される同時クライアント接続の最大数を設定するために使用されます。 `max-server-connections`は引き続き有効です。ただし、 `max-server-connections`と`instance.max_connections`同時に設定した場合は、後者が有効になります。
+-   v6.2.0 以降、TiDB 構成項目[`instance.max_connections`](/tidb-configuration-file.md#max_connections)またはシステム変数[`max_connections`](/system-variables.md#max_connections)は、TiDB で許可される同時クライアント接続の最大数を設定するために使用されます。 `max-server-connections`は引き続き有効です。ただし、 `max-server-connections`と`instance.max_connections`同時に設定した場合は、後者が有効になります。
 
 ### <code>max-index-length</code> {#code-max-index-length-code}
 
@@ -168,7 +172,7 @@ TiDB 構成ファイルは、コマンドライン パラメーターよりも�
 -   TiDB でのテレメトリ収集を有効または無効にします。
 -   デフォルト値: `false`
 -   TiDB インスタンスでこの構成が`true`に設定されている場合、この TiDB インスタンスのテレメトリ収集が有効になり、システム変数[`tidb_enable_telemetry`](/system-variables.md#tidb_enable_telemetry-new-in-v402)有効になります。
--   すべての TiDB インスタンスでこの構成が`false`に設定されている場合、TiDB のテレメトリ収集は無効になり、 [テレメトリー](/telemetry.md)を参照してください。
+-   すべての TiDB インスタンスでこの構成が`false`に設定されている場合、TiDB のテレメトリ収集は無効になり、 [`tidb_enable_telemetry`](/system-variables.md#tidb_enable_telemetry-new-in-v402)システム変数は有効になりません。詳細は[テレメトリー](/telemetry.md)を参照してください。
 
 ### <code>enable-tcp4-only</code> <span class="version-mark">v5.0 の新機能</span> {#code-enable-tcp4-only-code-span-class-version-mark-new-in-v5-0-span}
 
@@ -225,7 +229,7 @@ TiDB 構成ファイルは、コマンドライン パラメーターよりも�
 
 > **ノート：**
 >
-> -   TiDB では、 `zone`ラベルはサーバーが配置されているゾーンを指定するために特別に使用されます。 `zone`が null 以外の値に設定されている場合、対応する値が[`Follower read`](/follower-read.md)などの機能によって自動的に使用されます。
+> -   TiDB では、 `zone`ラベルはサーバーが配置されているゾーンを指定するために特別に使用されます。 `zone`が null 以外の値に設定されている場合、対応する値が[`txn-score`](/system-variables.md#txn_scope)や[`Follower read`](/follower-read.md)などの機能によって自動的に使用されます。
 > -   `group`ラベルはTiDB Operatorで特別な用途があります。 [TiDB Operator](/tidb-operator-overview.md)使用してデプロイされたクラスターの場合、 `group`ラベルを手動で指定することは**お**勧めできません。
 
 ## ログ {#log}
@@ -252,7 +256,7 @@ TiDB 構成ファイルは、コマンドライン パラメーターよりも�
 
 > **ノート：**
 >
-> -   下位互換性を保つために、最初の`disable-timestamp`構成項目は引き続き有効です。ただし、 `disable-timestamp`値が`enable-timestamp`の値と意味的に競合する場合 (たとえば、 `enable-timestamp`と`disable-timestamp`の両方が`true`に設定されている場合)、TiDB は`disable-timestamp`の値を無視します。
+> -   下位互換性を保つために、最初の`disable-timestamp`構成項目は引き続き有効です。ただし、 `disable-timestamp`の値が`enable-timestamp`の値と意味的に競合する場合 (たとえば、 `enable-timestamp`と`disable-timestamp`の両方が`true`に設定されている場合)、TiDB は`disable-timestamp`の値を無視します。
 > -   現在、TiDB はログにタイムスタンプを出力するかどうかを決定するために`disable-timestamp`を使用します。この状況では、 `enable-timestamp`の値は`null`になります。
 > -   以降のバージョンでは、 `disable-timestamp`構成は削除されます。 `disable-timestamp`破棄し、意味的に理解しやすい`enable-timestamp`を使用します。
 
@@ -261,7 +265,7 @@ TiDB 構成ファイルは、コマンドライン パラメーターよりも�
 -   スロークエリログを有効にするかどうかを決定します。
 -   デフォルト値: `true`
 -   スロークエリログを有効にするには、 `enable-slow-log` ～ `true`を設定します。それ以外の場合は、 `false`に設定します。
--   v6.1.0 以降、スロー クエリ ログを有効にするかどうかは、TiDB 構成項目[`tidb_enable_slow_log`](/system-variables.md#tidb_enable_slow_log)によって決定されます。 `enable-slow-log`は引き続き有効です。ただし、 `enable-slow-log`と`instance.tidb_enable_slow_log`同時に設定した場合は、後者が有効になります。
+-   v6.1.0 以降、スロー クエリ ログを有効にするかどうかは、TiDB 構成項目[`instance.tidb_enable_slow_log`](/tidb-configuration-file.md#tidb_enable_slow_log)またはシステム変数[`tidb_enable_slow_log`](/system-variables.md#tidb_enable_slow_log)によって決定されます。 `enable-slow-log`は引き続き有効です。ただし、 `enable-slow-log`と`instance.tidb_enable_slow_log`同時に設定した場合は、後者が有効になります。
 
 ### <code>slow-query-file</code> {#code-slow-query-file-code}
 
@@ -276,15 +280,19 @@ TiDB 構成ファイルは、コマンドライン パラメーターよりも�
 -   デフォルト値: `300`
 -   単位: ミリ秒
 -   クエリの値がデフォルト値より大きい場合、それは低速クエリであり、低速ログに出力されます。
--   v6.1.0 以降、スローログの消費時間の閾値は TiDB 設定項目[`tidb_slow_log_threshold`](/system-variables.md#tidb_slow_log_threshold)で指定されます。 `slow-threshold`は引き続き有効です。ただし、 `slow-threshold`と`instance.tidb_slow_log_threshold`同時に設定した場合は、後者が有効になります。
+-   v6.1.0 以降、スローログの消費時間の閾値は TiDB 設定項目[`instance.tidb_slow_log_threshold`](/tidb-configuration-file.md#tidb_slow_log_threshold)またはシステム変数[`tidb_slow_log_threshold`](/system-variables.md#tidb_slow_log_threshold)で指定されます。 `slow-threshold`は引き続き有効です。ただし、 `slow-threshold`と`instance.tidb_slow_log_threshold`同時に設定した場合は、後者が有効になります。
 
 ### <code>record-plan-in-slow-log</code> {#code-record-plan-in-slow-log-code}
 
 -   実行計画を低速ログに記録するかどうかを決定します。
 -   デフォルト値: `1`
--   v6.1.0 以降、実行計画をスロー ログに記録するかどうかは、TiDB 構成項目[`tidb_record_plan_in_slow_log`](/system-variables.md#tidb_record_plan_in_slow_log)によって決定されます。 `record-plan-in-slow-log`は引き続き有効です。ただし、 `record-plan-in-slow-log`と`instance.tidb_record_plan_in_slow_log`同時に設定した場合は、後者が有効になります。
+-   v6.1.0 以降、実行計画をスロー ログに記録するかどうかは、TiDB 構成項目[`instance.tidb_record_plan_in_slow_log`](/tidb-configuration-file.md#tidb_record_plan_in_slow_log)またはシステム変数[`tidb_record_plan_in_slow_log`](/system-variables.md#tidb_record_plan_in_slow_log)によって決定されます。 `record-plan-in-slow-log`は引き続き有効です。ただし、 `record-plan-in-slow-log`と`instance.tidb_record_plan_in_slow_log`同時に設定した場合は、後者が有効になります。
 
 ### <code>expensive-threshold</code> {#code-expensive-threshold-code}
+
+> **警告：**
+>
+> v5.4.0 以降、 `expensive-threshold`構成項目は非推奨になり、システム変数[`tidb_expensive_query_time_threshold`](/system-variables.md#tidb_expensive_query_time_threshold)に置き換えられます。
 
 -   `expensive`操作の行数の閾値を出力します。
 -   デフォルト値: `10000`
@@ -520,7 +528,7 @@ TiDB 構成ファイルは、コマンドライン パラメーターよりも�
 -   すべてのステートメントの優先順位を設定します。
 -   デフォルト値: `NO_PRIORITY`
 -   値のオプション: デフォルト値`NO_PRIORITY`は、ステートメントの優先順位が強制的に変更されないことを意味します。他のオプションは昇順で`LOW_PRIORITY` 、 `DELAYED` 、および`HIGH_PRIORITY`です。
--   v6.1.0 以降、すべてのステートメントの優先順位は、TiDB 構成項目[`tidb_force_priority`](/system-variables.md#tidb_force_priority)によって決定されます。 `force-priority`は引き続き有効です。ただし、 `force-priority`と`instance.tidb_force_priority`同時に設定した場合は、後者が有効になります。
+-   v6.1.0 以降、すべてのステートメントの優先順位は、TiDB 構成項目[`instance.tidb_force_priority`](/tidb-configuration-file.md#tidb_force_priority)またはシステム変数[`tidb_force_priority`](/system-variables.md#tidb_force_priority)によって決定されます。 `force-priority`は引き続き有効です。ただし、 `force-priority`と`instance.tidb_force_priority`同時に設定した場合は、後者が有効になります。
 
 ### <code>distinct-agg-push-down</code> {#code-distinct-agg-push-down-code}
 
@@ -794,7 +802,7 @@ TiDB サービスのステータスに関連するコンフィグレーション
 
 ### deadlock-history-collect-retryable {#deadlock-history-collect-retryable}
 
--   [再試行可能なデッドロック エラー](/information-schema/information-schema-deadlocks.md#retryable-deadlock-errors)を参照してください。
+-   [`INFORMATION_SCHEMA.DEADLOCKS`](/information-schema/information-schema-deadlocks.md)テーブルが再試行可能なデッドロック エラーの情報を収集するかどうかを制御します。再試行可能なデッドロック エラーの説明については、 [再試行可能なデッドロック エラー](/information-schema/information-schema-deadlocks.md#retryable-deadlock-errors)を参照してください。
 -   デフォルト値: `false`
 
 ### pessimistic-auto-commit<span class="version-mark">v6.0.0 の新機能</span> {#pessimistic-auto-commit-span-class-version-mark-new-in-v6-0-0-span}
@@ -841,6 +849,16 @@ TiDB サービスのステータスに関連するコンフィグレーション
 -   範囲: `[-1, 9223372036854775807]`
 -   単位: ミリ秒
 -   v6.1.0 より前では、この構成は`slow-threshold`によって設定されます。
+
+### <code>tidb_expensive_query_time_threshold</code> {#code-tidb-expensive-query-time-threshold-code}
+
+-   この構成は、高価なクエリ ログを印刷するかどうかを決定するしきい値を設定するために使用されます。高価なクエリ ログと低速なクエリ ログの違いは次のとおりです。
+    -   スローログはステートメントの実行後に出力されます。
+    -   負荷の高いクエリ ログには、実行時間がしきい値を超えて実行されているステートメントとその関連情報が出力されます。
+-   デフォルト値: `60`
+-   範囲: `[10, 2147483647]`
+-   単位: 秒
+-   v5.4.0 より前では、この構成は`expensive-threshold`によって設定されます。
 
 ### <code>tidb_record_plan_in_slow_log</code> {#code-tidb-record-plan-in-slow-log-code}
 
@@ -939,6 +957,11 @@ PROXYプロトコルに関するコンフィグレーション項目。
 > **警告：**
 >
 > `*`を使用すると、任意の IP アドレスのクライアントがその IP アドレスを報告できるようになるため、セキュリティ リスクが生じる可能性があるため、注意して使用してください。さらに、 `*`を使用すると、TiDB に直接接続する内部コンポーネント(TiDB ダッシュボードなど) が使用できなくなる可能性があります。
+
+### <code>fallbackable</code> <span class="version-mark">v6.5.1 の新機能</span> {#code-fallbackable-code-span-class-version-mark-new-in-v6-5-1-span}
+
+-   PROXY プロトコル フォールバック モードを有効にするかどうかを制御します。この構成項目が`true`に設定されている場合、TiDB は、PROXY プロトコル仕様を使用せず、または PROXY プロトコル ヘッダーを送信せずに、 `proxy-protocol.networks`に属するクライアントによる TiDB への接続を受け入れることができます。デフォルトでは、TiDB は`proxy-protocol.networks`に属し、PROXY プロトコル ヘッダーを送信するクライアント接続のみを受け入れます。
+-   デフォルト値: `false`
 
 ## 実験的 {#experimental}
 

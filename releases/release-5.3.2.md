@@ -10,7 +10,7 @@ TiDB バージョン: 5.3.2
 
 > **警告：**
 >
-> このバージョンには既知のバグがあるため、v5.3.2 の使用は推奨されません。詳細は[v5.3.3](/releases/release-5.3.3.md)を使用することをお勧めします。
+> このバージョンには既知のバグがあるため、v5.3.2 の使用は推奨されません。詳細は[#12934](https://github.com/tikv/tikv/issues/12934)を参照してください。このバグは v5.3.3 で修正されました。 [v5.3.3](/releases/release-5.3.3.md)を使用することをお勧めします。
 
 ## 互換性の変更 {#compatibility-changes}
 
@@ -39,7 +39,7 @@ TiDB バージョン: 5.3.2
 
     -   TiDB Lightning
 
-        -   散乱リージョンをバッチ モードに最適化して、散乱リージョンプロセスの安定性を向上させます[#33618](https://github.com/pingcap/tidb/issues/33618)
+        -   散乱リージョンプロセスの安定性を向上させるために、散乱リージョンをバッチ モードに最適化します[#33618](https://github.com/pingcap/tidb/issues/33618)
 
 ## バグの修正 {#bug-fixes}
 
@@ -148,7 +148,7 @@ TiDB バージョン: 5.3.2
 
     -   TiDB データ移行 (DM)
 
-        -   タスクが自動的に再開された後、DM がより多くのディスク領域を占有する問題を修正[#5344](https://github.com/pingcap/tiflow/issues/5344)
+        -   タスクが自動的に再開された後、DM がより多くのディスク領域を占有する問題を修正[#3734](https://github.com/pingcap/tiflow/issues/3734) [#5344](https://github.com/pingcap/tiflow/issues/5344)
         -   `case-sensitive: true`が設定されていない場合、大文字のテーブルが複製できない問題を修正します[#5255](https://github.com/pingcap/tiflow/issues/5255)
         -   場合によっては、フィルタリングされた DDL をダウンストリームで手動で実行すると、タスクの再開が失敗する可能性がある問題を修正します[#5272](https://github.com/pingcap/tiflow/issues/5272)
         -   `SHOW CREATE TABLE`ステートメント[#5159](https://github.com/pingcap/tiflow/issues/5159)によって返されるインデックスの先頭に主キーがない場合に発生する DM ワーカーのpanic問題を修正します。
@@ -159,4 +159,4 @@ TiDB バージョン: 5.3.2
 
         -   `auto_increment`列[#27937](https://github.com/pingcap/tidb/issues/27937)の範囲外データが原因でローカル バックエンドのインポートが失敗する問題を修正
         -   事前チェックでローカル ディスク リソースとクラスターの可用性がチェックされない問題を修正します[#34213](https://github.com/pingcap/tidb/issues/34213)
-        -   チェックサム エラー「GC ライフタイムがトランザクション期間よりも短い」を修正します[#32733](https://github.com/pingcap/tidb/issues/32733)
+        -   チェックサム エラー「GC ライフタイムがトランザクション期間よりも短い」 [#32733](https://github.com/pingcap/tidb/issues/32733)を修正

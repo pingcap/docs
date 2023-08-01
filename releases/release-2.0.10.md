@@ -23,14 +23,14 @@ title: TiDB 2.0.10 Release Notes
 -   返されたデフォルト値`enum`が文字列[#8476](https://github.com/pingcap/tidb/pull/8476)である場合のpanicの問題を修正
 -   幅の広いテーブル[#8467](https://github.com/pingcap/tidb/pull/8467)のシナリオでメモリが過剰に消費される問題を修正します。
 -   パーサーが mod オペコード[#8431](https://github.com/pingcap/tidb/pull/8431)を誤ってフォーマットしたときに発生する問題を修正
--   場合によっては外部キー制約を追加することによって引き起こされるpanicの問題を修正します[#8410](https://github.com/pingcap/tidb/pull/8410)
+-   場合によっては外部キー制約を追加することによって引き起こされるpanicの問題を修正します[#8421](https://github.com/pingcap/tidb/pull/8421) 、 [#8410](https://github.com/pingcap/tidb/pull/8410)
 -   `YEAR`列タイプがゼロ値[#8396](https://github.com/pingcap/tidb/pull/8396)を誤って変換する問題を修正します。
 -   `VALUES`関数の引数が列[#8404](https://github.com/pingcap/tidb/pull/8404)ではない場合に発生するpanicの問題を修正
 -   サブクエリを含むステートメントのプラン キャッシュを無効にする[#8395](https://github.com/pingcap/tidb/pull/8395)
 
 ## PD {#pd}
 
--   デッドロック[#1370](https://github.com/pingcap/pd/pull/1370)が原因で RaftCluster が停止できない可能性がある問題を修正
+-   デッドロック[#1370](https://github.com/pingcap/pd/pull/1370)により RaftCluster が停止できない可能性がある問題を修正
 
 ## TiKV {#tikv}
 

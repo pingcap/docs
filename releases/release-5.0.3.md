@@ -68,7 +68,7 @@ TiDB バージョン: 5.0.3
 
     -   TiCDC
 
-        -   gRPC の再接続ロジックを改良し、KV クライアントのスループットを向上させる[#1904](https://github.com/pingcap/tiflow/issues/1904)
+        -   gRPC の再接続ロジックを改良し、KV クライアントのスループットを向上させる[#1586](https://github.com/pingcap/tiflow/issues/1586) [#1501](https://github.com/pingcap/tiflow/issues/1501#issuecomment-820027078) [#1682](https://github.com/pingcap/tiflow/pull/1682) [#1393](https://github.com/pingcap/tiflow/issues/1393) [#1847](https://github.com/pingcap/tiflow/pull/1847) [#1905](https://github.com/pingcap/tiflow/issues/1905) [#1904](https://github.com/pingcap/tiflow/issues/1904)
         -   ソーターの I/O エラーをより使いやすくする
 
 ## バグの修正 {#bug-fixes}
@@ -90,7 +90,7 @@ TiDB バージョン: 5.0.3
     -   `tidb_snapshot`変数を予想外に大きな値に設定すると、トランザクション分離[#25680](https://github.com/pingcap/tidb/issues/25680)損なわれる可能性がある問題を修正します。
     -   ODBC スタイルの定数 (たとえば、 `{d '2020-01-01'}` ) を式[#25531](https://github.com/pingcap/tidb/issues/25531)として使用できない問題を修正します。
     -   `SELECT DISTINCT`を`Batch Get`に変換すると誤った結果が生じる問題を修正[#25320](https://github.com/pingcap/tidb/issues/25320)
-    -   TiFlashから TiKV へのバックオフ クエリをトリガーできない問題を修正[#24421](https://github.com/pingcap/tidb/issues/24421)
+    -   TiFlashから TiKV へのバックオフ クエリをトリガーできない問題を修正[#23665](https://github.com/pingcap/tidb/issues/23665) [#24421](https://github.com/pingcap/tidb/issues/24421)
     -   `only_full_group_by` [#23839](https://github.com/pingcap/tidb/issues/23839) )のチェック時に発生する`index-out-of-range`エラーを修正
     -   相関サブクエリのインデクス結合結果が正しくない問題を修正[#25799](https://github.com/pingcap/tidb/issues/25799)
 
@@ -98,14 +98,14 @@ TiDB バージョン: 5.0.3
 
     -   間違った`tikv_raftstore_hibernated_peer_state`メトリック[#10330](https://github.com/tikv/tikv/issues/10330)を修正します
     -   コプロセッサ[#10176](https://github.com/tikv/tikv/issues/10176)の`json_unquote()`関数の間違った引数の型を修正しました。
-    -   場合によってはACIDの破損を避けるため、正常なシャットダウン中にコールバックのクリアをスキップします[#10307](https://github.com/tikv/tikv/issues/10307)
+    -   場合によってはACIDの破損を避けるため、正常なシャットダウン中にコールバックのクリアをスキップします[#10353](https://github.com/tikv/tikv/issues/10353) [#10307](https://github.com/tikv/tikv/issues/10307)
     -   Leader[#10347](https://github.com/tikv/tikv/issues/10347)のレプリカ読み取りで読み取りインデックスが共有されるバグを修正
     -   `DOUBLE`を`DOUBLE` [#25200](https://github.com/pingcap/tidb/issues/25200)にキャストする間違った関数を修正
 
 -   PD
 
     -   スケジューラーの起動後に TTL 構成をロードするときに発生するデータ競合の問題を修正します[#3771](https://github.com/tikv/pd/issues/3771)
-    -   TiDBの`TIKV_REGION_PEERS`テーブルの`is_learner`フィールドが間違っているバグを修正[#24293](https://github.com/pingcap/tidb/issues/24293)
+    -   TiDBの`TIKV_REGION_PEERS`テーブルの`is_learner`フィールドが間違っているバグを修正[#3372](https://github.com/tikv/pd/issues/3372) [#24293](https://github.com/pingcap/tidb/issues/24293)
     -   ゾーン内のすべての TiKV ノードがオフラインまたはダウンしている場合、PD が他のゾーンにレプリカをスケジュールしない問題を修正します[#3705](https://github.com/tikv/pd/issues/3705)
     -   スキャターリージョンスケジューラの追加後に PD がpanicになる可能性がある問題を修正[#3762](https://github.com/tikv/pd/pull/3762)
 
@@ -128,13 +128,13 @@ TiDB バージョン: 5.0.3
         -   チェックポイント[#1902](https://github.com/pingcap/tiflow/issues/1902)を更新するときに TiCDC 所有者が終了する問題を修正
         -   MySQL シンクがエラーに遭遇して一時停止した後、一部の MySQL 接続がリークする可能性があるバグを修正します[#1946](https://github.com/pingcap/tiflow/pull/1946)
         -   TiCDC が`/proc/meminfo` [#2024](https://github.com/pingcap/tiflow/pull/2024)の読み取りに失敗したときに発生するpanicの問題を修正
-        -   TiCDC のランタイムメモリ消費量を削減[#1958](https://github.com/pingcap/tiflow/pull/1958)
+        -   TiCDC のランタイムメモリ消費量を削減[#2012](https://github.com/pingcap/tiflow/pull/2012) [#1958](https://github.com/pingcap/tiflow/pull/1958)
         -   解決された ts [#1576](https://github.com/pingcap/tiflow/issues/1576)の計算が遅いために TiCDCサーバーのpanicを引き起こす可能性があるバグを修正しました。
         -   プロセッサ[#2142](https://github.com/pingcap/tiflow/pull/2142)の潜在的なデッドロックの問題を修正します。
 
     -   バックアップと復元 (BR)
 
-        -   復元中にすべてのシステム テーブルがフィルタリングされるバグを修正[#1201](https://github.com/pingcap/br/issues/1201)
+        -   復元中にすべてのシステム テーブルがフィルタリングされるバグを修正[#1197](https://github.com/pingcap/br/issues/1197) [#1201](https://github.com/pingcap/br/issues/1201)
         -   復元中に TDE が有効になっている場合、バックアップと復元で「ファイルはすでに存在します」というエラーが報告される問題を修正します[#1179](https://github.com/pingcap/br/issues/1179)
 
     -   TiDB Lightning

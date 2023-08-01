@@ -9,17 +9,17 @@ summary: A brief introduction to TiDB's CURD SQL.
 
 ## 始める前に {#before-you-start}
 
-TiDB クラスターに接続していることを確認してください。そうでない場合は、 [TiDB Cloud(Serverless Tier) で TiDBクラスタを構築する](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster)を参照してServerless Tierクラスターを作成します。
+TiDB クラスターに接続していることを確認してください。そうでない場合は、 [TiDB サーバーレスクラスタを構築する](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-tidb-serverless-cluster)を参照して TiDB サーバーレス クラスターを作成します。
 
 ## TiDB で SQL を探索する {#explore-sql-with-tidb}
 
 > **ノート：**
 >
-> このドキュメントでは[TiDB で SQL を探索する](/basic-sql-operations.md)を参照してください。
+> このドキュメントでは[TiDB で SQL を探索する](/basic-sql-operations.md)を参照し、簡略化しています。詳細については、 [TiDB で SQL を探索する](/basic-sql-operations.md)を参照してください。
 
 TiDB は MySQL と互換性があり、ほとんどの場合、MySQL ステートメントを直接使用できます。サポートされていない機能については、 [MySQLとの互換性](/mysql-compatibility.md#unsupported-features)を参照してください。
 
-SQL を実験し、MySQL クエリと TiDB の互換性をテストするには、[TiDB Playground](https://play.tidbcloud.com/?utm_source=docs&utm_medium=basic-sql-operations) ことができます。最初に TiDB クラスターをデプロイしてから、その中で SQL ステートメントを実行することもできます。
+SQL を試して、MySQL クエリと TiDB の互換性をテストするには、 [TiDB プレイグラウンド](https://play.tidbcloud.com/?utm_source=docs&#x26;utm_medium=basic-sql-operations)を試してください。最初に TiDB クラスターをデプロイしてから、その中で SQL ステートメントを実行することもできます。
 
 このページでは、DDL、DML、CRUD 操作などの基本的なTiDB SQLステートメントについて説明します。 TiDB ステートメントの完全なリストについては、 [TiDB SQL構文図](https://pingcap.github.io/sqlgram/)を参照してください。
 
@@ -35,7 +35,7 @@ SQLは関数に応じて以下の4種類に分類されます。
 
 -   **DCL (Data Control Language)** : アクセス権限とセキュリティ レベルを定義するために使用されます。
 
-以下では主にDMLとDQLについて紹介します。 DDL と DCL の詳細については、 [TiDB SQL構文の詳細な説明](https://pingcap.github.io/sqlgram/)を参照してください。
+以下では主にDMLとDQLについて紹介します。 DDL と DCL の詳細については、 [TiDB で SQL を探索する](/basic-sql-operations.md)または[TiDB SQL構文の詳細な説明](https://pingcap.github.io/sqlgram/)を参照してください。
 
 ## データ操作言語 {#data-manipulation-language}
 
@@ -79,7 +79,7 @@ DQL は、1 つまたは複数のテーブルから目的のデータ行を取�
 SELECT * FROM person;
 ```
 
-特定の列をクエリするには、 `SELECT`キーワードの後に列名を追加します。
+特定の列をクエリするには、 `SELECT`キーワードの後に​​列名を追加します。
 
 ```sql
 SELECT name FROM person;

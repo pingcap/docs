@@ -28,7 +28,7 @@ Global Flags:
 Use "dmctl config [command] --help" for more information about a command.
 ```
 
-## クラスターのデータソースとタスク構成をエクスポートする {#export-the-data-source-and-task-configuration-of-clusters}
+## クラスターのデータソースとタスク構成をエ​​クスポートする {#export-the-data-source-and-task-configuration-of-clusters}
 
 `export`コマンドを使用して、クラスターのデータ ソースとタスク構成を指定したファイルにエクスポートできます。
 

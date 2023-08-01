@@ -13,11 +13,11 @@ summary: Learn about the expression syntax in TiDB.
 
 -   述語、数値、文字列、日付式。これらのタイプの[リテラル値](/literal-values.md)も式です。
 
--   関数呼び出しとウィンドウ関数。参考までに[ウィンドウ関数](/functions-and-operators/window-functions.md)をご覧ください。
+-   関数呼び出しとウィンドウ関数。参考までに[関数と演算子の概要](/functions-and-operators/functions-and-operators-overview.md)と[ウィンドウ関数](/functions-and-operators/window-functions.md)をご覧ください。
 
 -   ParamMarker ( `?` )、システム変数、ユーザー変数、および CASE 式。
 
-次のルールは、TiDB パーサーの[TiDB SQL構文図](https://pingcap.github.io/sqlgram/#Expression)を参照してください。
+次のルールは、TiDB パーサーの[parser.y](https://github.com/pingcap/parser/blob/master/parser.y)ルールに基づいた式の構文です。次の構文図のナビゲート可能なバージョンについては、 [TiDB SQL構文図](https://pingcap.github.io/sqlgram/#Expression)を参照してください。
 
 ```ebnf+diagram
 Expression ::=

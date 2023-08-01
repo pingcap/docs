@@ -11,19 +11,19 @@ summary: Learn the terms used in TiDB Data Migration.
 
 ### Binlog {#binlog}
 
-TiDB DM では、binlog は TiDB データベースで生成されたバイナリ ログ ファイルを指します。 MySQL や MariaDB と同じ兆候があります。詳細は[MariaDB バイナリ ログ](https://mariadb.com/kb/en/library/binary-log/)を参照してください。
+TiDB DM では、binlog は TiDB データベースで生成されたバイナリ ログ ファイルを指します。 MySQL や MariaDB と同じ兆候があります。詳細は[MySQLバイナリログ](https://dev.mysql.com/doc/dev/mysql-server/latest/page_protocol_replication.html)と[MariaDB バイナリ ログ](https://mariadb.com/kb/en/library/binary-log/)を参照してください。
 
 ### Binlogイベント {#binlog-event}
 
-Binlogイベントは、MySQL または MariaDBサーバーインスタンスに対して行われたデータ変更に関する情報です。これらのbinlogイベントはbinlogファイルに保存されます。詳細は[MariaDBBinlogイベント](https://mariadb.com/kb/en/library/1-binlog-events/)を参照してください。
+Binlogイベントは、MySQL または MariaDBサーバーインスタンスに対して行われたデータ変更に関する情報です。これらのbinlogイベントはbinlogファイルに保存されます。詳細は[MySQLBinlogイベント](https://dev.mysql.com/doc/dev/mysql-server/latest/page_protocol_replication_binlog_event.html)と[MariaDBBinlogイベント](https://mariadb.com/kb/en/library/1-binlog-events/)を参照してください。
 
 ### Binlogイベントフィルター {#binlog-event-filter}
 
-[binlogイベントフィルター](/dm/dm-binlog-event-filter.md)を参照してください。
+[Binlogイベントフィルター](/dm/dm-binlog-event-filter.md)は、ブロックおよび許可リストのフィルタリング ルールよりも詳細なフィルタリング機能です。詳細は[binlogイベントフィルター](/dm/dm-binlog-event-filter.md)を参照してください。
 
 ### Binlog位置 {#binlog-position}
 
-binlog位置は、 binlogファイル内のbinlogイベントのオフセット情報です。詳細は[MariaDB `SHOW BINLOG EVENTS`](https://mariadb.com/kb/en/library/show-binlog-events/)を参照してください。
+binlog位置は、 binlogファイル内のbinlogイベントのオフセット情報です。詳細は[MySQL の`SHOW BINLOG EVENTS`](https://dev.mysql.com/doc/refman/8.0/en/show-binlog-events.html)と[MariaDB `SHOW BINLOG EVENTS`](https://mariadb.com/kb/en/library/show-binlog-events/)を参照してください。
 
 ### Binlogレプリケーション処理ユニット/同期ユニット {#binlog-replication-processing-unit-sync-unit}
 
@@ -31,7 +31,7 @@ Binlogレプリケーション処理ユニットは、DM ワーカーで上流�
 
 ### ブロックおよび許可テーブルのリスト {#block-x26-allow-table-list}
 
-ブロックおよび許可テーブル リストは、一部のデータベースまたは一部のテーブルのすべての操作をフィルタリングするか、移行のみを行う機能です。詳細は[MariaDB レプリケーション フィルター](https://mariadb.com/kb/en/replication-filters/)に似ています。
+ブロックおよび許可テーブル リストは、一部のデータベースまたは一部のテーブルのすべての操作をフィルタリングするか、移行のみを行う機能です。詳細は[ブロックおよび許可テーブルリスト](/dm/dm-block-allow-table-lists.md)を参照してください。この機能は[MySQL レプリケーション フィルタリング](https://dev.mysql.com/doc/refman/5.6/en/replication-rules.html)および[MariaDB レプリケーション フィルター](https://mariadb.com/kb/en/replication-filters/)に似ています。
 
 ## C {#c}
 
@@ -40,9 +40,9 @@ Binlogレプリケーション処理ユニットは、DM ワーカーで上流�
 チェックポイントは、完全データ インポートまたは増分レプリケーション タスクが一時停止して再開される位置、または停止して再開される位置を示します。
 
 -   完全インポート タスクでは、チェックポイントは、インポート中のファイル内の正常にインポートされたデータのオフセットおよびその他の情報に対応します。チェックポイントは、データ インポート タスクと同期して更新されます。
--   インクリメンタル レプリケーションでは、チェックポイントは[binlogイベント](#binlog-event)のその他の情報に対応します。チェックポイントは、DDL 操作が正常に移行された後、または最後の更新から 30 秒後に更新されます。
+-   インクリメンタル レプリケーションでは、チェックポイントは[binlogの位置](#binlog-position)と、正常に解析されてダウンストリームに移行された[binlogイベント](#binlog-event)のその他の情報に対応します。チェックポイントは、DDL 操作が正常に移行された後、または最後の更新から 30 秒後に更新されます。
 
-さらに、 [binlogの位置](#binlog-position)またはこのイベントに対応する GTID 情報を書き込みます。
+さらに、 [中継処理装置](#relay-processing-unit)に対応する`relay.meta`情報はチェックポイントと同様に機能します。中継処理部は上流から[binlogイベント](#binlog-event)プルして[リレーログ](#relay-log)にこのイベントを書き込み、 `relay.meta`に[binlogの位置](#binlog-position)またはこのイベントに対応する GTID 情報を書き込みます。
 
 ## D {#d}
 
@@ -54,7 +54,7 @@ Binlogレプリケーション処理ユニットは、DM ワーカーで上流�
 
 ### GTID {#gtid}
 
-GTID は、MySQL または MariaDB のグローバル トランザクション ID です。この機能を有効にすると、GTID 情報がbinlogファイルに記録されます。複数の GTID が GTID セットを形成します。詳細は[MariaDB グローバルトランザクションID](https://mariadb.com/kb/en/library/gtid/)を参照してください。
+GTID は、MySQL または MariaDB のグローバル トランザクション ID です。この機能を有効にすると、GTID 情報がbinlogファイルに記録されます。複数の GTID が GTID セットを形成します。詳細は[MySQL GTID の形式とストレージ](https://dev.mysql.com/doc/refman/5.7/en/replication-gtids-concepts.html)と[MariaDB グローバルトランザクションID](https://mariadb.com/kb/en/library/gtid/)を参照してください。
 
 ## L {#l}
 
@@ -74,7 +74,7 @@ TiDB データ移行ツールを使用して、アップストリーム デー�
 
 ### リレーログ {#relay-log}
 
-リレー ログは、DM ワーカーが上流の MySQL または MariaDB から取得し、ローカル ディスクに保存するbinlogファイルを指します。リレー ログの形式は標準のbinlogファイルであり、互換性のあるバージョンの[MariaDB リレーログ](https://mariadb.com/kb/en/library/relay-log/)と似ています。
+リレー ログは、DM ワーカーが上流の MySQL または MariaDB から取得し、ローカル ディスクに保存するbinlogファイルを指します。リレー ログの形式は標準のbinlogファイルであり、互換性のあるバージョンの[mysqlbinlog](https://dev.mysql.com/doc/refman/8.0/en/mysqlbinlog.html)などのツールで解析できます。その役割は[MySQLリレーログ](https://dev.mysql.com/doc/refman/5.7/en/replica-logs-relaylog.html)および[MariaDB リレーログ](https://mariadb.com/kb/en/library/relay-log/)と似ています。
 
 リレー ログのディレクトリ構造、初期移行ルール、TiDB DM でのデータ パージなどの詳細については、 [TiDB DMリレーログ](/dm/relay-log.md)を参照してください。
 

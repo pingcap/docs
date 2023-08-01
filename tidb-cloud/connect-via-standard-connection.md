@@ -1,44 +1,25 @@
 ---
-title: Connect via Standard Connection
+title: Connect to TiDB Dedicated via Standard Connection
 summary: Learn how to connect to your TiDB Cloud cluster via standard connection.
 ---
 
-# 標準接続で接続する {#connect-via-standard-connection}
+# 標準接続経由で TiDB 専用に接続する {#connect-to-tidb-dedicated-via-standard-connection}
 
-このドキュメントでは、標準接続を介してTiDB Cloudクラスターに接続する方法について説明します。標準接続では、トラフィック フィルターを備えたパブリック エンドポイントが公開されるため、ラップトップから SQL クライアント経由で TiDB クラスターに接続できます。
+このドキュメントでは、標準接続を介して TiDB 専用クラスターに接続する方法について説明します。標準接続では、トラフィック フィルターを備えたパブリック エンドポイントが公開されるため、ラップトップから SQL クライアントを介して TiDB 専用クラスターに接続できます。
 
-標準接続は、Serverless TierとDedicated Tierの両方で使用できます。
+> **ヒント：**
+>
+> 標準接続経由で TiDB サーバーレス クラスターに接続する方法については、 [パブリックエンドポイント経由で TiDB サーバーレスに接続する](/tidb-cloud/connect-via-standard-connection-serverless.md)を参照してください。
 
-## Serverless Tier {#serverless-tier}
-
-標準接続経由でServerless Tierクラスターに接続するには、次の手順を実行します。
-
-1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット クラスターの名前をクリックして、その概要ページに移動します。
-
-2.  右上隅にある**「接続」**をクリックします。接続ダイアログが表示されます。
-
-3.  ダイアログで、希望の接続方法とオペレーティング システムを選択して、対応する接続文字列を取得します。
-
-4.  パスワードをまだ設定していない場合は、 **「パスワードの作成」**をクリックしてランダムなパスワードを生成します。生成されたパスワードは再度表示されないため、パスワードを安全な場所に保存してください。
-
-5.  接続文字列を使用してクラスターに接続します。
-
-    > **ノート：**
-    >
-    > -   Serverless Tierクラスターに接続するときは、ユーザー名にクラスターのプレフィックスを含め、名前を引用符で囲む必要があります。詳細については、 [ユーザー名のプレフィックス](/tidb-cloud/select-cluster-tier.md#user-name-prefix)を参照してください。
-    > -   Serverless Tierクラスターは TLS 接続のみをサポートします。詳細については、 [Serverless Tierクラスターへのセキュリティ接続](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md)を参照してください。
-
-## Dedicated Tier {#dedicated-tier}
-
-標準接続経由でDedicated Tierクラスターに接続するには、次の手順を実行します。
+標準接続経由で TiDB 専用クラスターに接続するには、次の手順を実行します。
 
 1.  ターゲットクラスターの概要ページを開きます。
 
-    1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動します。
+    1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、プロジェクトの[**クラスター**](https://tidbcloud.com/console/clusters)ページに移動します。
 
         > **ヒント：**
         >
-        > 複数のプロジェクトがある場合は、 **「クラスター」**ページの左側のナビゲーション・ペインでターゲット・プロジェクトに切り替えることができます。
+        > 複数のプロジェクトがある場合は、<mdsvgicon name="icon-left-projects">左下隅の をクリックして、別のプロジェクトに切り替えます。</mdsvgicon>
 
     2.  ターゲット クラスターの名前をクリックして、その概要ページに移動します。
 
@@ -61,7 +42,7 @@ summary: Learn how to connect to your TiDB Cloud cluster via standard connection
 
     > **ノート：**
     >
-    > -   TiDB クラスター CA は、Dedicated Tierクラスターでのみ使用できます。
+    > -   TiDB クラスター CA は、TiDB 専用クラスターでのみ使用できます。
     > -   現在、 TiDB Cloud は、MySQL、MyCLI、JDBC、Python、Go、Node.js の接続方法の接続文字列とサンプル コードのみを提供しています。
 
 5.  ダイアログの**「ステップ 3: SQL クライアントに接続する」**で、希望する接続方法のタブをクリックし、タブ上の接続文字列とサンプル コードを参照してクラスターに接続します。

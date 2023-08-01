@@ -180,6 +180,6 @@ SELECT @col FROM t;
 
 ## MySQLの互換性 {#mysql-compatibility}
 
-`SELECT ... INTO <variable>`を除いて、MySQL と TiDB でサポートされる構文は同一です。
+`SELECT ... INTO <variable>`を除いて、MySQL と TiDB でサポートされる構文は同じです。
 
 詳細については、 [MySQL のユーザー定義変数](https://dev.mysql.com/doc/refman/5.7/en/user-variables.html)を参照してください。

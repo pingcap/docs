@@ -1,6 +1,7 @@
 ---
 title: Migration and Import Overview
 summary: Learn an overview of data migration and import scenarios for TiDB Cloud.
+aliases: ['/tidbcloud/export-data-from-tidb-cloud']
 ---
 
 # 移行とインポートの概要 {#migration-and-import-overview}
@@ -26,9 +27,9 @@ MySQL 互換データベースからデータを移行する場合、完全な�
 
     アプリケーションがデータstorageに MySQL シャードを使用している場合、これらのシャードを 1 つのテーブルとしてTiDB Cloudに移行できます。詳細については、 [大規模なデータセットの MySQL シャードをTiDB Cloudに移行およびマージ](/tidb-cloud/migrate-sql-shards.md)を参照してください。
 
--   オンプレミス TiDB からの移行
+-   TiDB セルフホスト型からの移行
 
-    Dumplingと TiCDC を通じて、オンプレミス (OP) TiDB クラスターからTiDB Cloud(AWS) にデータを移行できます。詳細については、 [オンプレミス TiDB からTiDB Cloudへの移行](/tidb-cloud/migrate-from-op-tidb.md)を参照してください。
+    Dumplingと TiCDC を通じて、TiDB セルフホスト クラスターからTiDB Cloud(AWS) にデータを移行できます。詳細については、 [TiDB セルフホストからTiDB Cloudへの移行](/tidb-cloud/migrate-from-op-tidb.md)を参照してください。
 
 ## ファイルからTiDB Cloudにデータをインポート {#import-data-from-files-to-tidb-cloud}
 

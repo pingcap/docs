@@ -132,7 +132,7 @@ TiDB ノードは、起動後に統計をメモリにロードする必要があ
 
 #### <code>tidb_enable_rate_limit_action</code>が正しく構成されていません {#code-tidb-enable-rate-limit-action-code-is-not-configured-properly}
 
-システム変数[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)制御下にない可能性があり、OOM のリスクが増加します。
+システム変数[`tidb_enable_rate_limit_action`](/system-variables.md#tidb_enable_rate_limit_action) 、SQL ステートメントがデータの読み取りのみを行う場合のメモリ使用量を効果的に制御します。この変数が有効で、計算操作 (結合操作や集計操作など) が必要な場合、メモリ使用量が[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)制御下にない可能性があり、OOM のリスクが増加します。
 
 このシステム変数を無効にすることをお勧めします。 TiDB v6.3.0 以降、このシステム変数はデフォルトで無効になっています。
 

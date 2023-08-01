@@ -9,7 +9,7 @@ summary: Use the Data Migration tool to migrate the full data and the incrementa
 
 ## ステップ 1: DM クラスターをデプロイ {#step-1-deploy-the-dm-cluster}
 
-[バイナリを使用して DM クラスターをデプロイする](/dm/deploy-a-dm-cluster-using-binary.md)行うこともできます。
+[TiUPを使用して DM クラスターをデプロイする](/dm/deploy-a-dm-cluster-using-tiup.md)にオススメです。トライアルまたはテスト用に[バイナリを使用して DM クラスターをデプロイする](/dm/deploy-a-dm-cluster-using-binary.md)行うこともできます。
 
 > **ノート：**
 >
@@ -121,7 +121,7 @@ mydumpers:
 データ移行構成の潜在的なエラーを事前に検出するために、DM は事前チェック機能を提供します。
 
 -   DM は、データ移行タスクの開始時に、対応する権限と構成を自動的にチェックします。
--   `check-task`コマンドを使用して、アップストリームの MySQL インスタンス構成が DM 要件を満たしているかどうかを手動で事前チェックすることもできます。
+-   `check-task`コマンドを使用して、アップストリームの MySQL インスタンス構成が DM 要件を満たしているかどうかを手動で事前チェ​​ックすることもできます。
 
 事前チェック機能の詳細については、 [アップストリームの MySQL インスタンス構成を事前チェックする](/dm/dm-precheck.md)を参照してください。
 
@@ -182,7 +182,7 @@ tiup dmctl --master-addr 172.16.10.71:8261 stop-task test
 
 ## ステップ 8: タスクを監視し、ログを確認する {#step-8-monitor-the-task-and-check-logs}
 
-Prometheus、Alertmanager、および Grafana がTiUP を使用した DM クラスターのデプロイメントとともに正常にデプロイされ、Grafana アドレスが`172.16.10.71`であると仮定します。 DM に関連するアラート情報を表示するには、ブラウザで[http://172.16.10.71:3000](http://172.16.10.71:3000)に進み、DM ダッシュボードを選択します。
+Prometheus、Alertmanager、および Grafana がTiUP を使用した DM クラスターのデプロイメントとともに正常にデプロイされ、Grafana アドレスが`172.16.10.71`であると仮定します。 DM に関連するアラート情報を表示するには、ブラウザで[http://172.16.10.71:9093](http://172.16.10.71:9093)を開き、Alertmanager に入ります。監視メトリクスを確認するには、 [http://172.16.10.71:3000](http://172.16.10.71:3000)に進み、DM ダッシュボードを選択します。
 
 DM クラスターの実行中、DM-master、DM-worker、および dmctl はログを通じて監視メトリック情報を出力します。各コンポーネントのログディレクトリは次のとおりです。
 

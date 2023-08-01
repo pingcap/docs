@@ -47,7 +47,7 @@ Top SQL機能はまだ初期段階にあり、継続的に強化されていま�
 >
 > Top SQLを使用するには、最新バージョンのTiUP (v1.9.0 以降) またはTiDB Operator (v1.3.0 以降) を使用してクラスターをデプロイまたはアップグレードする必要があります。クラスターが以前のバージョンのTiUPまたはTiDB Operatorを使用してアップグレードされた場合、手順については[FAQ](/dashboard/dashboard-faq.md#a-required-component-ngmonitoring-is-not-started-error-is-shown)を参照してください。
 
-Top SQLは、有効にするとクラスターのパフォーマンスにわずかな影響 (平均 3% 以内) を与えるため、デフォルトでは有効になりません。次の手順でTop SQL を有効にできます。
+Top SQL は、有効にするとクラスターのパフォーマンスにわずかな影響 (平均 3% 以内) を与えるため、デフォルトでは有効になりません。次の手順でTop SQL を有効にできます。
 
 1.  [Top SQLページ](#access-the-page)にアクセスしてください。
 2.  **[設定を開く]**をクリックします。 **[設定]**領域の右側で、 **[機能を有効にする**] をオンにします。
@@ -85,7 +85,7 @@ SET GLOBAL tidb_enable_top_sql = 1;
 
     ![Details](/media/dashboard/top-sql-details.png)
 
-5.  これらの最初の手がかりに基づいて、 [遅いクエリ](/dashboard/dashboard-slow-query.md)ページをさらに調査して、CPU 消費量の増加や SQL ステートメントの大規模なデータ スキャンの根本原因を見つけることができます。
+5.  これらの最初の手がかりに基づいて、 [SQL文](/dashboard/dashboard-statement-list.md)または[遅いクエリ](/dashboard/dashboard-slow-query.md)ページをさらに調査して、CPU 消費量の増加や SQL ステートメントの大規模なデータ スキャンの根本原因を見つけることができます。
 
 さらに、次のようにTop SQLを構成できます。
 

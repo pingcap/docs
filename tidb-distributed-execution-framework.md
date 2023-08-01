@@ -13,7 +13,7 @@ summary: Learn the use cases, limitations, usage, and implementation principles 
 
 > **ノート：**
 >
-> 現在、この機能はDedicated Tierクラスターにのみ適用されます。Serverless Tierクラスターでは使用できません。
+> 現在、この機能は TiDB 専用クラスターにのみ適用されます。 TiDB サーバーレス クラスターでは使用できません。
 
 </CustomContent>
 
@@ -63,7 +63,7 @@ CREATE INDEX idx1 ON table t1(c1);
 
 > **ノート：**
 >
-> TiDB を v6.5.0 以降にアップグレードする前に、TiDB の[`temp-dir`](/tidb-configuration-file.md#temp-dir-new-in-v630)パスが SSD ディスクに正しくマウントされているかどうかを確認することをお勧めします。このパスは TiDB 構成アイテムであり、TiDB の再起動後に有効になります。したがって、アップグレード前にこの構成項目を事前に設定しておくと、再度の再起動を回避できます。
+> TiDB を v6.5.0 以降にアップグレードする前に、TiDB の[`temp-dir`](/tidb-configuration-file.md#temp-dir-new-in-v630)パスが SSD ディスクに正しくマウントされているかどうかを確認することをお勧めします。 TiDB を実行するオペレーティング システム ユーザーが、このディレクトリに対する読み取りおよび書き込み権限を持っていることを確認してください。そうしないと、DDL 操作で予期しない問題が発生する可能性があります。このパスは TiDB 構成アイテムであり、TiDB の再起動後に有効になります。したがって、アップグレード前にこの構成項目を事前に設定しておくと、再度の再起動を回避できます。
 
 </CustomContent>
 
@@ -78,7 +78,7 @@ Fast Online DDL に関連する次のシステム変数を調整します。
 
 ## 使用法 {#usage}
 
-1.  分散フレームワークを有効にするには、値[`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710)から`ON`を設定します。
+1.  分散フレームワークを有効にするには、値[`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710)から`ON`設定します。
 
     ```sql
     SET GLOBAL tidb_enable_dist_task = ON;

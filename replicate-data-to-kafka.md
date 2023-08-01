@@ -27,7 +27,7 @@ summary: Learn how to replicate TiDB data to Apache Kafka and Apache Flink using
     tiup status
     ```
 
-    TiUPがまだインストールされていない場合は、 [TiCDCのデプロイ](/ticdc/deploy-ticdc.md)手順に従って TiCDC をデプロイできます。
+    TiUPがまだインストールされていない場合は、 [TiUPをインストールする](/tiup/tiup-overview.md#install-tiup)を参照してください。本番環境では、 [TiCDCのデプロイ](/ticdc/deploy-ticdc.md)手順に従って TiCDC をデプロイできます。
 
 2.  Kafka クラスターを作成します。
 
@@ -107,7 +107,7 @@ summary: Learn how to replicate TiDB data to Apache Kafka and Apache Flink using
     ./bin/kafka-console-consumer.sh --bootstrap-server 127.0.0.1:9092 --from-beginning --topic `${topic-name}`
     ```
 
-この時点で、TiDB データベースの増分データは Kafka に正常にレプリケートされます。次に、Flink を使用して Kafka データを使用できます。あるいは、特定のサービス シナリオ向けに Kafka コンシューマ クライアントを自分で開発することもできます。
+この時点で、TiDB データベースの増分データは Kafka に正常にレプリケートされます。次に、Flink を使用して Kafka データを使用できます。あるいは、特定のサービス シナリオ向けに Kafka コンシューマー クライアントを自分で開発することもできます。
 
 ## (オプション) ステップ 4. Kafka データを消費するように Flink を構成する {#optional-step-4-configure-flink-to-consume-kafka-data}
 

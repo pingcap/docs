@@ -70,21 +70,25 @@ ADMIN CHECKSUM TABLE `schema`.`table`;
 
 TiDB Lightningは以下をサポートします。
 
--   [Amazon Auroraによって生成された Apache Parquet ファイル](/migrate-aurora-to-tidb.md)でエクスポートしたファイルをインポートします。
+-   [Dumpling](/dumpling-overview.md) 、CSVファイル、 [Amazon Auroraによって生成された Apache Parquet ファイル](/migrate-aurora-to-tidb.md)でエクスポートしたファイルをインポートします。
 -   ローカル ディスクまたは Amazon S3storageからのデータの読み取り。
 
 ## TiDB Lightning はスキーマとテーブルの作成をスキップできますか? {#could-tidb-lightning-skip-creating-schema-and-tables}
 
 v5.1 以降、 TiDB Lightning はダウンストリームのスキーマとテーブルを自動的に認識できるようになりました。 TiDB Lightning v5.1 より前のバージョンを使用している場合は、 `tidb-lightning.toml`の`[mydumper]`セクションに`no-schema = true`を設定する必要があります。これにより、 TiDB Lightning は`CREATE TABLE`の呼び出しをスキップし、ターゲット データベースから直接メタデータをフェッチします。実際にテーブルが欠落している場合、 TiDB Lightning はエラーで終了します。
 
-## 厳密 SQL モードを無効にして、無効なデータをインポートできるようにすることはできますか? {#can-the-strict-sql-mode-be-disabled-to-allow-importing-invalid-data}
+## 無効なデータのインポートを禁止するにはどうすればよいですか? {#how-to-prohibit-importing-invalid-data}
 
-はい。デフォルトでは、 TiDB Lightningで使用される[`sql_mode`](https://dev.mysql.com/doc/refman/5.7/en/sql-mode.html) `"STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION"`で、日付`1970-00-00`などの無効なデータは許可されません。モードは、 `tidb-lightning.toml`の`[tidb]`セクションの`sql-mode`設定を変更することで変更できます。
+厳密 SQL モードを有効にすることで、無効なデータのインポートを禁止できます。
+
+デフォルトでは、 TiDB Lightningで使用される[`sql_mode`](https://dev.mysql.com/doc/refman/5.7/en/sql-mode.html) `"ONLY_FULL_GROUP_BY,NO_AUTO_CREATE_USER"`で、日付`1970-00-00`などの無効なデータが許可されます。
+
+不正なデータのインポートを禁止するには、 `tidb-lightning.toml`の`[tidb]`の設定を`sql-mode`から`"STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION"`に変更する必要があります。
 
 ```toml
 ...
 [tidb]
-sql-mode = ""
+sql-mode = "STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION"
 ...
 ```
 

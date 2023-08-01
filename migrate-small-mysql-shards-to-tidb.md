@@ -208,7 +208,7 @@ tiup dmctl --master-addr ${advertise-addr} start-task task.yaml
 | `--master-addr` | dmctl が接続するクラスター内の任意の DM マスター ノードの`{advertise-addr}` 。例: 172.16.10.71:8261 |
 | `start-task`    | データ移行タスクを開始します。                                                            |
 
-移行タスクの開始に失敗した場合は、エラー情報に従って構成情報を変更し、再度`start-task task.yaml`を実行して移行タスクを開始します。問題が発生した場合は、 [FAQ](/dm/dm-faq.md)を参照してください。
+移行タスクの開始に失敗した場合は、エラー情報に従って構成情報を変更し、再度`start-task task.yaml`を実行して移行タスクを開始します。問題が発生した場合は、 [エラーの処理](/dm/dm-error-handling.md)と[FAQ](/dm/dm-faq.md)を参照してください。
 
 ## ステップ4. タスクを確認する {#step-4-check-the-task}
 

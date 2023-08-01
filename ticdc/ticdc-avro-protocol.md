@@ -5,7 +5,7 @@ summary: Learn the concept of TiCDC Avro Protocol and how to use it.
 
 # TiCDC Avro プロトコル {#ticdc-avro-protocol}
 
-Avro は、 [Confluent スキーマ レジストリ](https://docs.confluent.io/platform/current/schema-registry/index.html)の間の対話など、TiCDC での Avro データ形式の実装について説明します。
+Avro は、 [Apache Avro™](https://avro.apache.org/)によって定義され、 [コンフルエントなプラットフォーム](https://docs.confluent.io/platform/current/platform.html)によってデフォルトのデータ交換形式として選択されるデータ交換形式プロトコルです。このドキュメントでは、TiDB 拡張フィールド、Avro データ形式の定義、Avro と[Confluent スキーマ レジストリ](https://docs.confluent.io/platform/current/schema-registry/index.html)の間の対話など、TiCDC での Avro データ形式の実装について説明します。
 
 ## アブロを使用する {#use-avro}
 
@@ -69,7 +69,7 @@ TiCDC は DML イベントを Kafka イベントに変換し、イベントの�
 }
 ```
 
--   `{{TableName}}`イベントが発生するテーブルの名前を示します。
+-   `{{TableName}}`イベントが発生したテーブルの名前を示します。
 -   `{{Namespace}}`は Avro の名前空間です。
 -   `{{ColumnValueBlock}}`データの各列の形式を定義します。
 
@@ -165,29 +165,29 @@ TiCDC は DML イベントを Kafka イベントに変換し、イベントの�
 | ミディアムミント | INT       | 整数        | 署名されていない場合、TIDB_TYPE は INT UNSIGNED になります。                                                                  |
 | INT      | INT       | 整数        | 署名されていない場合、TIDB_TYPE は INT UNSIGNED で、AVRO_TYPE はlongになります。                                                 |
 | BIGINT   | BIGINT    | 長さ        | 署名されていない場合、TIDB_TYPE は BIGINT UNSIGNED になります。 `avro-bigint-unsigned-handling-mode`が文字列の場合、AVRO_TYPE は文字列です。 |
-| タイニーブロブ  | BLOB      | バイト       | <li></li>                                                                                        |
-| BLOB     | BLOB      | バイト       | <li></li>                                                                                        |
-| ミディアムブロブ | BLOB      | バイト       | <li></li>                                                                                        |
-| ロングブロブ   | BLOB      | バイト       | <li></li>                                                                                        |
-| バイナリ     | BLOB      | バイト       | <li></li>                                                                                        |
-| ヴァービナリー  | BLOB      | バイト       | <li></li>                                                                                        |
-| 小さなテキスト  | TEXT      | 弦         | <li></li>                                                                                        |
-| TEXT     | TEXT      | 弦         | <li></li>                                                                                        |
-| メディアテキスト | TEXT      | 弦         | <li></li>                                                                                        |
-| 長文       | TEXT      | 弦         | <li></li>                                                                                        |
-| チャー      | TEXT      | 弦         | <li></li>                                                                                        |
-| VARCHAR  | TEXT      | 弦         | <li></li>                                                                                        |
-| 浮く       | 浮く        | ダブル       | <li></li>                                                                                        |
-| ダブル      | ダブル       | ダブル       | <li></li>                                                                                        |
-| 日にち      | 日にち       | 弦         | <li></li>                                                                                        |
-| 日付時刻     | 日付時刻      | 弦         | <li></li>                                                                                        |
-| タイムスタンプ  | タイムスタンプ   | 弦         | <li></li>                                                                                        |
-| 時間       | 時間        | 弦         | <li></li>                                                                                        |
-| 年        | 年         | 整数        | <li></li>                                                                                        |
-| 少し       | 少し        | バイト       | <li></li>                                                                                        |
-| JSON     | JSON      | 弦         | <li></li>                                                                                        |
-| ENUM     | ENUM      | 弦         | <li></li>                                                                                        |
-| 設定       | 設定        | 弦         | <li></li>                                                                                        |
+| タイニーブロブ  | BLOB      | バイト       | <li></li>                                                                                                   |
+| BLOB     | BLOB      | バイト       | <li></li>                                                                                                   |
+| ミディアムブロブ | BLOB      | バイト       | <li></li>                                                                                                   |
+| ロングブロブ   | BLOB      | バイト       | <li></li>                                                                                                   |
+| バイナリ     | BLOB      | バイト       | <li></li>                                                                                                   |
+| ヴァービナリー  | BLOB      | バイト       | <li></li>                                                                                                   |
+| 小さなテキスト  | TEXT      | 弦         | <li></li>                                                                                                   |
+| TEXT     | TEXT      | 弦         | <li></li>                                                                                                   |
+| メディアテキスト | TEXT      | 弦         | <li></li>                                                                                                   |
+| 長文       | TEXT      | 弦         | <li></li>                                                                                                   |
+| チャー      | TEXT      | 弦         | <li></li>                                                                                                   |
+| VARCHAR  | TEXT      | 弦         | <li></li>                                                                                                   |
+| 浮く       | 浮く        | ダブル       | <li></li>                                                                                                   |
+| ダブル      | ダブル       | ダブル       | <li></li>                                                                                                   |
+| 日にち      | 日にち       | 弦         | <li></li>                                                                                                   |
+| 日付時刻     | 日付時刻      | 弦         | <li></li>                                                                                                   |
+| タイムスタンプ  | タイムスタンプ   | 弦         | <li></li>                                                                                                   |
+| 時間       | 時間        | 弦         | <li></li>                                                                                                   |
+| 年        | 年         | 整数        | <li></li>                                                                                                   |
+| 少し       | 少し        | バイト       | <li></li>                                                                                                   |
+| JSON     | JSON      | 弦         | <li></li>                                                                                                   |
+| ENUM     | ENUM      | 弦         | <li></li>                                                                                                   |
+| 設定       | 設定        | 弦         | <li></li>                                                                                                   |
 | 10進数     | 10進数      | バイト       | `avro-decimal-handling-mode`が文字列の場合、AVRO_TYPE は文字列です。                                                       |
 
 Avro プロトコルでは、他の 2 つの`sink-uri`パラメーター ( `avro-decimal-handling-mode`と`avro-bigint-unsigned-handling-mode`もカラムデータ形式に影響を与える可能性があります。

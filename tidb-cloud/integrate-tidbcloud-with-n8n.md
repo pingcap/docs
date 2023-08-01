@@ -5,14 +5,14 @@ summary: Learn the use of TiDB Cloud node in n8n.
 
 # TiDB Cloudと n8n を統合する {#integrate-tidb-cloud-with-n8n}
 
-[フェアコード](https://faircode.io/)ディストリビューション モデルを使用すると、n8n には常にソース コードが表示され、セルフホストが可能になり、カスタム関数、ロジック、アプリを追加できるようになります。
+[n8n](https://n8n.io/)は、拡張可能なワークフロー自動化ツールです。 [フェアコード](https://faircode.io/)ディストリビューション モデルを使用すると、n8n には常にソース コードが表示され、セルフホストが可能になり、カスタム関数、ロジック、アプリを追加できるようになります。
 
-このドキュメントでは、自動ワークフローの構築方法を紹介します。つまり、 TiDB CloudServerless Tierクラスターを作成し、Hacker News RSS を収集し、それを TiDB に保存し、ブリーフィング電子メールを送信します。
+このドキュメントでは、自動ワークフローの構築方法を紹介します。つまり、TiDB サーバーレス クラスターを作成し、Hacker News RSS を収集し、それを TiDB に保存し、ブリーフィング電子メールを送信します。
 
 ## 前提条件: TiDB CloudAPI キーを取得する {#prerequisites-get-tidb-cloud-api-key}
 
 1.  TiDB Cloudダッシュボードにアクセスします。
-2.  クリック<mdsvgicon name="icon-top-organization">右上隅の**「組織」** &gt; **「組織の設定」** 。</mdsvgicon>
+2.  クリック<mdsvgicon name="icon-top-organization">をクリックし、左下隅にある**「組織の設定」**をクリックします。</mdsvgicon>
 3.  **「API キー」**タブをクリックします。
 4.  **「API キーの作成」**ボタンをクリックして、新しい API キーを作成します。
 5.  作成した API キーを保存して、後で n8n で使用できるようにします。
@@ -76,9 +76,9 @@ TiDB Cloudノードは、npm リポジトリでは`n8n-nodes-tidb-cloud`とい�
 
 ![img](/media/tidb-cloud/integration-n8n-workflow-rss.jpg)
 
-### (オプション) TiDB CloudServerless Tierクラスターを作成する {#optional-create-a-tidb-cloud-serverless-tier-cluster}
+### (オプション) TiDB サーバーレスクラスターを作成する {#optional-create-a-tidb-serverless-cluster}
 
-TiDB CloudServerless Tierクラスターがない場合は、このノードを使用してクラスターを作成できます。それ以外の場合は、この操作をスキップしてください。
+TiDB サーバーレス クラスターがない場合は、このノードを使用してクラスターを作成できます。それ以外の場合は、この操作をスキップしてください。
 
 1.  **「ワークフロー」**パネルに移動し、 **「ワークフローの追加」**をクリックします。
 2.  新しいワークフロー ワークスペースで、右上隅の**[+]**をクリックし、 **[すべての**フィールド] を選択します。
@@ -212,7 +212,7 @@ TiDB CloudServerless Tierクラスターがない場合は、このノードを�
 
 ワークフローを構築した後、 **「ワークフローの実行」を**クリックしてテスト実行できます。
 
-ワークフローが期待どおりに実行されると、Hacker News の概要メールが届きます。これらのニュース コンテンツはTiDB CloudServerless Tierクラスターに記録されるため、紛失することを心配する必要はありません。
+ワークフローが期待どおりに実行されると、Hacker News の概要メールが届きます。これらのニュース コンテンツは TiDB サーバーレス クラスターに記録されるため、紛失することを心配する必要はありません。
 
 これで、 **「ワークフロー」**パネルでこのワークフローをアクティブ化できるようになりました。このワークフローは、Hacker News のトップページの記事を毎日取得するのに役立ちます。
 
@@ -222,7 +222,7 @@ TiDB CloudServerless Tierクラスターがない場合は、このノードを�
 
 TiDB Cloudノードは[通常のノード](https://docs.n8n.io/workflows/nodes/#regular-nodes)として機能し、次の 5 つの操作のみをサポートします。
 
--   **サーバーレスクラスタの作成**: TiDB CloudServerless Tierクラスターを作成します。
+-   **サーバーレスクラスタの作成**: TiDB サーバーレスクラスターを作成します。
 -   **SQL の実行**: TiDB で SQL ステートメントを実行します。
 -   **削除**: TiDB 内の行を削除します。
 -   **Insert** : TiDB に行を挿入します。

@@ -16,7 +16,7 @@ summary: Learn how to filter DML events using SQL expressions.
 
 この問題に対処するために、DM は v2.0.5 以降、増分データ レプリケーションで`binlog value filter`を使用してデータをフィルタリングすることをサポートしています。 DM でサポートされている`ROW`形式のbinlogの中で、 binlogイベントはすべての列の値を保持し、これらの値に基づいて SQL 式を構成できます。式で行の変更が`TRUE`として計算される場合、DM はこの行の変更をダウンストリームにレプリケートしません。
 
-[DM 拡張タスク構成ファイル](/dm/task-configuration-file-full.md#task-configuration-file-template-advanced)を参照してください。
+[Binlogイベントフィルター](/filter-binlog-event.md)と同様に、タスク構成ファイルで`binlog value filter`を構成する必要があります。詳細については、以下の構成例を参照してください。高度なタスクの構成と説明については、 [DM 拡張タスク構成ファイル](/dm/task-configuration-file-full.md#task-configuration-file-template-advanced)を参照してください。
 
 ```yaml
 name: test

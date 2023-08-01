@@ -11,13 +11,13 @@ summary: Learn the definitions, rules, and guidelines in table creation.
 
 このドキュメントを読む前に、次のタスクが完了していることを確認してください。
 
--   [TiDB Cloud(Serverless Tier) で TiDBクラスタを構築する](/develop/dev-guide-build-cluster-in-cloud.md) 。
+-   [TiDB サーバーレスクラスタを構築する](/develop/dev-guide-build-cluster-in-cloud.md) 。
 -   [スキーマ設計の概要](/develop/dev-guide-schema-design-overview.md)を読みます。
 -   [データベースを作成する](/develop/dev-guide-create-database.md) 。
 
 ## テーブルとは {#what-is-a-table}
 
-[データベース](/develop/dev-guide-schema-design-overview.md#database)に従属する TiDB クラスター内の論理オブジェクトです。 SQL ステートメントから送信されたデータを保存するために使用されます。テーブルはデータ レコードを行と列の形式で保存します。テーブルには少なくとも 1 つの列があります。 `n`列を定義した場合、データの各行には`n`の列とまったく同じフィールドが含まれます。
+[テーブル](/develop/dev-guide-schema-design-overview.md#table) [データベース](/develop/dev-guide-schema-design-overview.md#database)に従属する TiDB クラスター内の論理オブジェクトです。 SQL ステートメントから送信されたデータを保存するために使用されます。テーブルはデータ レコードを行と列の形式で保存します。テーブルには少なくとも 1 つの列があります。 `n`列を定義した場合、データの各行には`n`の列とまったく同じフィールドが含まれます。
 
 ## テーブルに名前を付けます {#name-a-table}
 
@@ -73,9 +73,9 @@ CREATE TABLE `bookshop`.`users` (
 
 次に、 `nickname`という名前のフィールドが定義されます。これはタイプ[可変長文字](/data-type-string.md#varchar-type)で、長さの制限は 100 文字です。これは、ユーザーのうち`nicknames`人が`varchar`タイプを使用しており、文字数が 100 文字以下であることを意味します。
 
-最後に、 `balance`という名前のフィールドが追加されます。これは[固定小数点型](/data-type-numeric.md#fixed-point-types)で、数値を正確に格納するために使用できます。正確な数値が必要なシナリオ (ユーザー プロパティ関連など) では、必ず**10 進数**タイプを使用してください。
+最後に、 `balance`という名前のフィールドが追加されます。これは[10進数](/data-type-numeric.md#decimal-type)タイプで、**精度**`15`および**スケール**`2`です。**精度は**フィールド内の合計桁数を表し、**位取りは**小数点以下の桁数を表します。たとえば、 `decimal(5,2)` 、精度`5`とスケール`2`を意味し、範囲は`-999.99`から`999.99`です。 `decimal(6,1)`精度`6`とスケール`1`を意味し、範囲は`-99999.9` ～ `99999.9`です。 **10 進数**は[固定小数点型](/data-type-numeric.md#fixed-point-types)で、数値を正確に格納するために使用できます。正確な数値が必要なシナリオ (ユーザー プロパティ関連など) では、必ず**10 進数**タイプを使用してください。
 
-TiDB は、 [データ型](/data-type-overview.md)を参照して、データベースに保存するデータに一致する**データ型を**使用できます。
+TiDB は、 [整数型](/data-type-numeric.md#integer-types) 、 [浮動小数点型](/data-type-numeric.md#floating-point-types) 、 [固定小数点型](/data-type-numeric.md#fixed-point-types) 、 [日付と時刻のタイプ](/data-type-date-and-time.md) 、 [列挙型](/data-type-string.md#enum-type)など、他の多くの列データ型をサポートします。サポートされている列[データ型](/data-type-overview.md)を参照して、データベースに保存するデータに一致する**データ型を**使用できます。
 
 もう少し複雑にするために、 `bookshop`のデータの中核となる`books`テーブルを定義できます。テーブル`books`には、本の ID、タイトル、種類 (雑誌、小説、人生、芸術など)、在庫、価格、発行日のフィールドが含まれています。
 
@@ -110,9 +110,9 @@ CREATE TABLE `bookshop`.`books` (
 
 **主キーは**`CREATE TABLE`ステートメントで定義されます。 [主キー制約](/constraints.md#primary-key)すべての制約された列に NULL 以外の値のみが含まれる必要があります。
 
-テーブルは、**主キー**なしで、または非整数の**主キー**を使用して作成できます。この場合、TiDB は**暗黙的な主キー**として`_tidb_rowid`を作成します。暗黙的な主キー`_tidb_rowid`は単調増加する性質があるため、書き込みが集中するシナリオでは書き込みホットスポットが発生する可能性があります。したがって、アプリケーションが書き込み集中型である場合は、 [`PRE_SPLIT_REGIONS`](/sql-statements/sql-statement-split-region.md#pre_split_regions)パラメータを使用してデータをシャーディングすることを検討してください。ただし、これにより読み取り増幅が発生する可能性があるため、独自のトレードオフを行う必要があります。
+テーブルは、**主キー**なしで、または非整数の**主キー**を使用して作成できます。この場合、TiDB は**暗黙的な主キー**として`_tidb_rowid`を作成します。暗黙的な主キー`_tidb_rowid`は単調増加する性質があるため、書き込みが集中するシナリオでは書き込みホットスポットが発生する可能性があります。したがって、アプリケーションが書き込み集中型である場合は、 [`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md)および[`PRE_SPLIT_REGIONS`](/sql-statements/sql-statement-split-region.md#pre_split_regions)パラメータを使用してデータをシャーディングすることを検討してください。ただし、これにより読み取り増幅が発生する可能性があるため、独自のトレードオフを行う必要があります。
 
-テーブルの**主キー**が[`AUTO_RANDOM`](/auto-random.md)使用して行 ID の連続性を排除できます。
+テーブルの**主キー**が[整数型](/data-type-numeric.md#integer-types)で`AUTO_INCREMENT`が使用されている場合、 `SHARD_ROW_ID_BITS`を使用してもホットスポットを回避できません。ホットスポットを回避する必要があり、連続増分主キーが必要ない場合は、 `AUTO_INCREMENT`の代わりに[`AUTO_RANDOM`](/auto-random.md)使用して行 ID の連続性を排除できます。
 
 <CustomContent platform="tidb">
 
@@ -165,7 +165,7 @@ CREATE TABLE `bookshop`.`ratings` (
 
 ## 列制約を追加する {#add-column-constraints}
 
-[TiDB の制約](/constraints.md)を参照してください。
+[主キー制約](#select-primary-key)に加えて、TiDB は[NULLではありません](/constraints.md#not-null)制約、 [固有のキー](/constraints.md#unique-key)制約、 `DEFAULT`などの他の**列制約**もサポートします。完全な制約については、ドキュメント[TiDB の制約](/constraints.md)を参照してください。
 
 ### デフォルト値を設定する {#set-default-value}
 
@@ -183,7 +183,7 @@ CREATE TABLE `bookshop`.`ratings` (
 );
 ```
 
-さらに、データの更新時に現在時刻もデフォルトで入力される場合は、次のステートメントを使用できます (ただし、 `ON UPDATE`後には[より多くのオプション](https://pingcap.github.io/sqlgram/#DefaultValueExpr)がサポートされます)。
+さらに、データの更新時に現在時刻もデフォルトで入力される場合は、次のステートメントを使用できます (ただし、 `ON UPDATE`後には[現在時刻に関連するステートメント](https://pingcap.github.io/sqlgram/#NowSymOptionFraction)のみを入力でき、 `DEFAULT`後には[より多くのオプション](https://pingcap.github.io/sqlgram/#DefaultValueExpr)がサポートされます)。
 
 ```sql
 CREATE TABLE `bookshop`.`ratings` (
@@ -253,15 +253,15 @@ CREATE TABLE `bookshop`.`users` (
 
 <CustomContent platform="tidb">
 
-現在、TiDB は、 **TiFlash**と**TiSpark という**2 つのデータ分析エンジンをサポートしています。大規模データ シナリオ (100 T) の場合、 **TiFlash MPP が**HTAP の主要ソリューションとして推奨され、 **TiSpark が**補完ソリューションとして推奨されます。
+現在、TiDB は、 **TiFlash**と**TiSpark という**2 つのデータ分析エンジンをサポートしています。大規模データ シナリオ (100 T) の場合、 **TiFlash MPP が**HTAP の主要なソリューションとして推奨され、 **TiSpark が**補完的なソリューションとして推奨されます。
 
-TiDB HTAP機能の詳細については、ドキュメント[HTAP を探索する](/explore-htap.md)を参照してください。
+TiDB HTAP機能の詳細については、ドキュメント[TiDB HTAPのクイック スタート ガイド](/quick-start-with-htap.md)および[HTAP を探索する](/explore-htap.md)を参照してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-TiDB HTAP機能の詳細については、 [TiFlashで HTAPクラスタを使用する](/tiflash/tiflash-overview.md)を参照してください。
+TiDB HTAP機能の詳細については、 [TiDB CloudHTAP クイック スタート](/tidb-cloud/tidb-cloud-htap-quickstart.md)および[TiFlashで HTAPクラスタを使用する](/tiflash/tiflash-overview.md)を参照してください。
 
 </CustomContent>
 
@@ -290,7 +290,7 @@ ALTER TABLE `bookshop`.`ratings` SET TIFLASH REPLICA 1;
 
 > **ノート：**
 >
-> クラスターに**TiFlash**ノードが含まれていない場合、この SQL ステートメントはエラー`1105 - the tiflash replica count: 1 should be less than the total tiflash server count: 0`を報告します。 [TiDB Cloud(Serverless Tier) で TiDBクラスタを構築する](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster)を使用すると、 **TiFlash**を含むServerless Tierクラスターを作成できます。
+> クラスターに**TiFlash**ノードが含まれていない場合、この SQL ステートメントはエラー`1105 - the tiflash replica count: 1 should be less than the total tiflash server count: 0`を報告します。 [TiDB サーバーレスクラスタを構築する](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-tidb-serverless-cluster)を使用すると、 **TiFlash**を含む TiDB サーバーレス クラスターを作成できます。
 
 次に、次のクエリを実行できます。
 
@@ -322,7 +322,7 @@ EXPLAIN ANALYZE SELECT HOUR(`rated_at`), AVG(`score`) FROM `bookshop`.`ratings` 
 
 ## <code>CREATE TABLE</code>ステートメントを実行します {#execute-the-code-create-table-code-statement}
 
-上記のルールに従ってすべてのテーブルを作成した後、 [テーブルの説明](/develop/dev-guide-bookshop-schema-design.md#description-of-the-tables)を参照してください。
+上記のルールに従ってすべてのテーブルを作成した後、 [データベースの初期化](/develop/dev-guide-bookshop-schema-design.md#database-initialization-script-dbinitsql)のスクリプトは次のようになります。テーブル情報を詳しく見たい場合は[テーブルの説明](/develop/dev-guide-bookshop-schema-design.md#description-of-the-tables)を参照してください。
 
 データベース初期化スクリプトに`init.sql`という名前を付けて保存するには、次のステートメントを実行してデータベースを初期化します。
 
@@ -383,7 +383,7 @@ SHOW TABLES IN `bookshop`;
 -   複雑なデータ型を使用することはお勧めできません。
 -   結合するフィールドについては、データ型が一貫していることを確認し、暗黙的な変換を避けてください。
 -   単一の単調データ列に**主キー**を定義することは避けてください。単一の単調データ列 (たとえば、 `AUTO_INCREMENT`属性を持つ列) を使用して**主キー**を定義すると、書き込みパフォーマンスに影響を与える可能性があります。可能であれば、 `AUTO_INCREMENT`の代わりに`AUTO_RANDOM`使用してください。これにより、主キーの継続的および増分属性が破棄されます。
--   書き込み集中型のシナリオで単一の単調データ列にインデックスを作成する必要がある場合は、この単調データ列を**主キー**として定義する代わりに、 `AUTO_RANDOM`使用してそのテーブルの**主キー**を作成するか、 [`PRE_SPLIT_REGIONS`](/sql-statements/sql-statement-split-region.md#pre_split_regions)を使用できます。シャードへ`_tidb_rowid` 。
+-   書き込み集中型のシナリオで単一の単調データ列にインデックスを作成する必要がある場合は、この単調データ列を**主キー**として定義する代わりに、 `AUTO_RANDOM`使用してそのテーブルの**主キー**を作成するか、 [`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md)と[`PRE_SPLIT_REGIONS`](/sql-statements/sql-statement-split-region.md#pre_split_regions)を使用できます。シャードへ`_tidb_rowid` 。
 
 ### クラスター化インデックスを選択する際に従うべきガイドライン {#guidelines-to-follow-when-selecting-clustered-index}
 

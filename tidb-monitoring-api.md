@@ -7,7 +7,7 @@ summary: Learn the API of TiDB monitoring services.
 
 次のタイプのインターフェイスを使用して、TiDB クラスターのステータスを監視できます。
 
--   [storage情報](#storage-information)を取得できます。
+-   [ステータスインターフェース](#use-the-status-interface) : このインターフェイスは HTTP インターフェイスを使用してコンポーネント情報を取得します。このインターフェースを使用すると、現在の TiDBサーバーの[実行ステータス](#running-status)とテーブルの[storage情報](#storage-information)を取得できます。
 -   [メトリクスインターフェイス](#use-the-metrics-interface) : このインターフェイスは Prometheus を使用してコンポーネントのさまざまな操作の詳細情報を記録し、Grafana を使用してこれらのメトリクスを表示します。
 
 ## ステータスインターフェイスを使用する {#use-the-status-interface}
@@ -27,7 +27,7 @@ summary: Learn the API of TiDB monitoring services.
 curl http://127.0.0.1:10080/status
 {
     connections: 0,  # The current number of clients connected to the TiDB server.
-    version: "5.7.25-TiDB-v3.0.0-beta-250-g778c3f4a5",  # The TiDB version number.
+    version: "5.7.25-TiDB-v7.1.1",  # The TiDB version number.
     git_hash: "778c3f4a5a716880bcd1d71b257c8165685f0d70"  # The Git Hash of the current TiDB code.
 }
 ```

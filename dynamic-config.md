@@ -332,7 +332,7 @@ select @@tidb_slow_log_threshold;
 
 次の TiDB 構成項目は動的に変更できます。
 
-|コンフィグレーション項目 | SQL 変数 |説明 | | :--- | :--- | | `log.enable-slow-log` | `tidb_enable_slow_log` |スローログを有効にするかどうか | | `log.slow-threshold` | `tidb_slow_log_threshold` |スローログのしきい値 | | `log.expensive-threshold` | `tidb_expensive_query_time_threshold` |高価なクエリのしきい値 |
+|コンフィグレーション項目 | SQL 変数 |説明 | | :--- | :--- | | `instance.tidb_enable_slow_log` | `tidb_enable_slow_log` |スローログを有効にするかどうか | | `instance.tidb_slow_log_threshold` | `tidb_slow_log_threshold` |スローログのしきい値 | | `instance.tidb_expensive_query_time_threshold` | `tidb_expensive_query_time_threshold` |高価なクエリのしきい値 |
 
 ### TiFlash構成を動的に変更する {#modify-tiflash-configuration-dynamically}
 

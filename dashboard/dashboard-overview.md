@@ -46,7 +46,7 @@ TiDB ダッシュボードにログインすると、デフォルトで概要ペ
 
 ![Top SQL](/media/dashboard/dashboard-overview-top-statements.png)
 
-この領域に表示される情報は、より詳細な[SQL ステートメントページ](/dashboard/dashboard-statement-list.md)を参照してください。
+この領域に表示される情報は、より詳細な[SQL ステートメントページ](/dashboard/dashboard-statement-list.md)と一致しています。 **「Top SQLステートメント」**見出しをクリックすると、完全なリストが表示されます。この表の列の詳細については、 [SQL ステートメントページ](/dashboard/dashboard-statement-list.md)を参照してください。
 
 > **ノート：**
 >
@@ -58,9 +58,9 @@ TiDB ダッシュボードにログインすると、デフォルトで概要ペ
 
 ![Recent slow queries](/media/dashboard/dashboard-overview-slow-query.png)
 
-デフォルトでは、300 ミリ秒を超えて実行される SQL クエリは低速クエリとしてカウントされ、テーブルに表示されます。このしきい値は、 [遅いしきい値](/tidb-configuration-file.md#slow-threshold) TiDB パラメータを変更することで変更できます。
+デフォルトでは、300 ミリ秒を超えて実行される SQL クエリは低速クエリとしてカウントされ、テーブルに表示されます。このしきい値は、 [tidb_slow_log_threshold](/system-variables.md#tidb_slow_log_threshold)変数または[インスタンス.tidb_slow_log_threshold](/tidb-configuration-file.md#tidb_slow_log_threshold) TiDB パラメータを変更することで変更できます。
 
-この領域に表示される内容は、より詳細な[遅いクエリページ](/dashboard/dashboard-slow-query.md)を参照してください。
+この領域に表示される内容は、より詳細な[遅いクエリページ](/dashboard/dashboard-slow-query.md)と一致しています。 **「最近の遅いクエリ」の**タイトルをクリックすると、完全なリストが表示されます。この表の列の詳細については、この[遅いクエリページ](/dashboard/dashboard-slow-query.md)を参照してください。
 
 > **ノート：**
 >

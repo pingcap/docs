@@ -90,7 +90,7 @@ EXPLAIN SELECT /*+ USE_INDEX_MERGE(t, idx_a, idx_b, idx_c) */ * FROM t WHERE a >
 >
 > -   インデックス マージ機能は、v5.4.0 からデフォルトで有効になっています。つまり、 [`tidb_enable_index_merge`](/system-variables.md#tidb_enable_index_merge-new-in-v40)は`ON`です。
 >
-> -   SQL ヒント[`USE_INDEX_MERGE`](/optimizer-hints.md#use_index_merget1_name-idx1_name--idx2_name-)を使用する必要があります。
+> -   SQL ヒント[`USE_INDEX_MERGE`](/optimizer-hints.md#use_index_merget1_name-idx1_name--idx2_name-)使用すると、 `tidb_enable_index_merge`の設定に関係なく、オプティマイザにインデックス マージを強制的に適用できます。フィルター条件にプッシュダウンできない式が含まれている場合にインデックス マージを有効にするには、SQL ヒント[`USE_INDEX_MERGE`](/optimizer-hints.md#use_index_merget1_name-idx1_name--idx2_name-)を使用する必要があります。
 >
 > -   オプティマイザがクエリ プランに対して単一インデックス スキャン方法 (フル テーブル スキャン以外) を選択できる場合、オプティマイザは自動的にインデックス マージを使用しません。オプティマイザーがインデックスのマージを使用するには、オプティマイザー ヒントを使用する必要があります。
 >

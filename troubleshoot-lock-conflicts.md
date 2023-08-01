@@ -9,7 +9,7 @@ TiDB は完全な分散トランザクションをサポートします。 v3.0 
 
 ## ロックビューを使用してロックの問題をトラブルシューティングする {#use-lock-view-to-troubleshoot-lock-issues}
 
-v5.1 以降、TiDB はロックビュー機能をサポートしています。この機能には、ロックの競合とロックの待機に関する詳細情報を提供するいくつかのシステム テーブルが`information_schema`れています。
+v5.1 以降、TiDB はロックビュー機能をサポートしています。この機能には、ロックの競合とロックの待機に関する詳細情報を提供する複数のシステム テーブルが`information_schema`れています。
 
 > **ノート：**
 >
@@ -173,7 +173,7 @@ TiDB クラスター内の読み取り/書き込み競合は、次の方法で�
 
 1.  TiDBサーバーのメトリクスとログのモニタリング
 
-    -   Grafana を介したデータの監視
+    -   Grafana を介したデータのモニタリング
 
         TiDB ダッシュボードの`KV Errors`パネルでは、 `Lock Resolve OPS`の`not_expired` / `resolve`と`KV Backoff OPS`の`tikvLockFast`が、トランザクション内の読み取り/書き込み競合をチェックするために使用できるモニタリング メトリックです。すべてのメトリックの値が増加すると、読み取り/書き込みの競合が多数発生する可能性があります。 `not_expired`項目は、トランザクションのロックがタイムアウトしていないことを意味します。 `resolve`項目は、他のトランザクションがロックをクリーンアップしようとしていることを意味します。 `tikvLockFast`項目は、読み取り/書き込みの競合が発生することを意味します。
 
@@ -347,5 +347,5 @@ TTL manager has timed out, pessimistic locks may expire, please commit or rollba
 
 解決策:
 
--   v5.1 以降のバージョンでデッドロックの原因を確認することが難しい場合は、システム テーブル`INFORMATION_SCHEMA.DEADLOCKS`または`INFORMATION_SCHEMA.CLUSTER_DEADLOCKS`にクエリを実行して、デッドロック待機チェーンの情報を取得することをお勧めします。詳細については、 [`DEADLOCKS`テーブル](/information-schema/information-schema-deadlocks.md)ドキュメントを参照してください。
+-   v5.1 以降のバージョンでデッドロックの原因を確認することが難しい場合は、システム テーブル`INFORMATION_SCHEMA.DEADLOCKS`または`INFORMATION_SCHEMA.CLUSTER_DEADLOCKS`にクエリを実行して、デッドロック待機チェーンの情報を取得することをお勧めします。詳細については、 [デッドロックエラー](#deadlock-errors)節および[`DEADLOCKS`テーブル](/information-schema/information-schema-deadlocks.md)ドキュメントを参照してください。
 -   デッドロックが頻繁に発生する場合は、アプリケーションのトランザクション クエリ ロジックを調整して、デッドロックの発生を減らす必要があります。

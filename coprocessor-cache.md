@@ -54,7 +54,7 @@ TiDB 構成ファイルの`tikv-client.copr-cache`構成項目を使用して、
 
 ### <code>EXPLAIN ANALYZE</code>を使用する {#use-code-explain-analyze-code}
 
-[`EXPLAIN ANALYZE`文](/sql-statements/sql-statement-explain-analyze.md)を使用して表示できます。次の例を参照してください。
+[テーブルにアクセスするための演算子](/choose-index.md#operators-for-accessing-tables)のキャッシュ ヒット率は[`EXPLAIN ANALYZE`文](/sql-statements/sql-statement-explain-analyze.md)を使用して表示できます。次の例を参照してください。
 
 ```sql
 EXPLAIN ANALYZE SELECT * FROM t USE INDEX(a);

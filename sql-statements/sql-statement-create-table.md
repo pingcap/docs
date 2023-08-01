@@ -127,15 +127,15 @@ PlacementPolicyOption ::=
 
 次の*table_options が*サポートされています。 `AVG_ROW_LENGTH` 、 `CHECKSUM` 、 `COMPRESSION` 、 `CONNECTION` 、 `DELAY_KEY_WRITE` 、 `ENGINE` 、 `KEY_BLOCK_SIZE` 、 `MAX_ROWS` 、 `MIN_ROWS` 、 `ROW_FORMAT` 、 `STATS_PERSISTENT`などの他のオプションは解析されますが、無視されます。
 
-| オプション                                                                            | 説明                                                                                                    | 例                                   |
-| -------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------- |
-| `AUTO_INCREMENT`                                                                 | インクリメントフィールドの初期値                                                                                      | `AUTO_INCREMENT` = 5                |
-| [`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md) | 暗黙的な`_tidb_rowid`シャードのビット数を設定するには                                                                     | `SHARD_ROW_ID_BITS` = 4             |
-| `PRE_SPLIT_REGIONS`                                                              | テーブルの作成時に`2^(PRE_SPLIT_REGIONS)`リージョンを事前に分割するには                                                       | `PRE_SPLIT_REGIONS` = 4             |
-| `AUTO_ID_CACHE`                                                                  | TiDB インスタンスで自動 ID キャッシュ サイズを設定するには。デフォルトでは、TiDB は自動 ID の割り当て速度に応じてこのサイズを自動的に変更します。                    | `AUTO_ID_CACHE` = 200               |
-| `AUTO_RANDOM_BASE`                                                               | auto_random の初期増分部分値を設定します。このオプションは、内部インターフェイスの一部として考えることができます。ユーザーはこのパラメータを無視できます                    | `AUTO_RANDOM_BASE` = 0              |
-| `CHARACTER SET`                                                                  | テーブルに[キャラクターセット](/character-set-and-collation.md)指定するには | `CHARACTER SET` = &#39;utf8mb4&#39; |
-| `COMMENT`                                                                        | コメント情報は                                                                                               | `COMMENT` = &#39;コメント情報&#39;        |
+| オプション                                        | 説明                                                                                 | 例                                   |
+| -------------------------------------------- | ---------------------------------------------------------------------------------- | ----------------------------------- |
+| `AUTO_INCREMENT`                             | インクリメントフィールドの初期値                                                                   | `AUTO_INCREMENT` = 5                |
+| [`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md) | 暗黙的な`_tidb_rowid`シャードのビット数を設定するには                                                  | `SHARD_ROW_ID_BITS` = 4             |
+| `PRE_SPLIT_REGIONS`                          | テーブルの作成時に`2^(PRE_SPLIT_REGIONS)`リージョンを事前に分割するには                                    | `PRE_SPLIT_REGIONS` = 4             |
+| `AUTO_ID_CACHE`                              | TiDB インスタンスで自動 ID キャッシュ サイズを設定するには。デフォルトでは、TiDB は自動 ID の割り当て速度に応じてこのサイズを自動的に変更します。 | `AUTO_ID_CACHE` = 200               |
+| `AUTO_RANDOM_BASE`                           | auto_random の初期増分部分値を設定します。このオプションは、内部インターフェイスの一部として考えることができます。ユーザーはこのパラメータを無視できます | `AUTO_RANDOM_BASE` = 0              |
+| `CHARACTER SET`                              | テーブルに[キャラクターセット](/character-set-and-collation.md)指定するには                            | `CHARACTER SET` = &#39;utf8mb4&#39; |
+| `COMMENT`                                    | コメント情報は                                                                            | `COMMENT` = &#39;コメント情報&#39;        |
 
 <CustomContent platform="tidb">
 
@@ -220,9 +220,9 @@ mysql> DROP TABLE IF EXISTS t1;
 Query OK, 0 rows affected (0.22 sec)
 
 mysql> CREATE TABLE IF NOT EXISTS t1 (
-    ->  id BIGINT NOT NULL PRIMARY KEY auto_increment,
-    ->  b VARCHAR(200) NOT NULL
-    -> );
+         id BIGINT NOT NULL PRIMARY KEY auto_increment,
+         b VARCHAR(200) NOT NULL
+        );
 Query OK, 0 rows affected (0.08 sec)
 
 mysql> DESC t1;

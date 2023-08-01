@@ -105,7 +105,7 @@ PD 構成ファイルは、コマンドライン パラメーターよりも多�
 
 -   PD が TSO の物理時間を更新する間隔。
 -   TSO 物理時間のデフォルトの更新間隔では、PD は最大 262144 個の TSO を提供します。より多くの TSO を取得するには、この構成項目の値を減らすことができます。最小値は`1ms`です。
--   この設定項目を減らすと、PD の CPU 使用率が増加する可能性があります。実験によると、間隔が`50ms`場合に比べ、間隔が`1ms`の場合は PD の[CPU使用率](https://man7.org/linux/man-pages/man1/top.1.html)が約 10% 増加します。
+-   この設定項目を減らすと、PD の CPU 使用率が増加する可能性があります。実験によると、間隔が`50ms`場合に比べ、間隔が`1ms`の場合は PD の[CPU使用率](https://man7.org/linux/man-pages/man1/top.1.html)約 10% 増加します。
 -   デフォルト値: `50ms`
 -   最小値: `1ms`
 
@@ -158,11 +158,22 @@ pd-serverに関するコンフィグレーション項目
 ### <code>flow-round-by-digit</code> <span class="version-mark">TiDB 5.1 の新機能</span> {#code-flow-round-by-digit-code-span-class-version-mark-new-in-tidb-5-1-span}
 
 -   デフォルト値: 3
--   PD はフロー番号の最下位の桁を丸めます。これにより、リージョンフロー情報の変更によって引き起こされる統計の更新が削減されます。この設定項目は、リージョンフロー情報の四捨五入の最下位桁数を指定するために使用されます。たとえば、デフォルト値が`3`であるため、フロー`100512` `101000`に丸められます。この構成は`trace-region-flow`を置き換えます。
+-   PD はフロー番号の最下位の桁を丸めます。これにより、リージョンフロー情報の変更によって引き起こされる統計の更新が削減されます。この設定項目は、リージョンフロー情報の四捨五入の最下位桁数を指定するために使用されます。たとえば、デフォルト値が`3`であるため、フロー`100512` `101000`に丸められます。この構成は`trace-region-flow`を置き​​換えます。
 
 > **ノート：**
 >
 > クラスターを TiDB 4.0 バージョンから現在のバージョンにアップグレードした場合、アップグレード後の`flow-round-by-digit`の動作とアップグレード前の`trace-region-flow`の動作はデフォルトで一貫しています。これは、アップグレード前の値`trace-region-flow`が false の場合、アップグレード後の値`flow-round-by-digit`は 127 であることを意味します。アップグレード前の値`trace-region-flow`が`true`の場合、アップグレード後の値`flow-round-by-digit`は`3`になります。
+
+### <code>min-resolved-ts-persistence-interval</code> <span class="version-mark">v6.0.0 の新機能</span> {#code-min-resolved-ts-persistence-interval-code-span-class-version-mark-new-in-v6-0-0-span}
+
+-   最小の解決されたタイムスタンプが PD に対して永続化される間隔を決定します。この値が`0`に設定されている場合は、永続性が無効になっていることを意味します。
+-   デフォルト値: v6.3.0 より前のデフォルト値は`"0s"`です。 v6.3.0 以降、デフォルト値は`"1s"`で、これは正の最小値です。
+-   最小値: `0`
+-   単位：秒
+
+> **ノート：**
+>
+> v6.0.0 ～ v6.2.0 からアップグレードされたクラスターの場合、デフォルト値`min-resolved-ts-persistence-interval`はアップグレード後も変更されず、 `"0s"`のままになります。この機能を有効にするには、この構成項目の値を手動で変更する必要があります。
 
 ## 安全 {#security}
 
@@ -300,7 +311,7 @@ pd-serverに関するコンフィグレーション項目
 ### <code>enable-diagnostic</code> <span class="version-mark">v6.3.0 の新機能</span> {#code-enable-diagnostic-code-span-class-version-mark-new-in-v6-3-0-span}
 
 -   診断機能を有効にするかどうかを制御します。有効にすると、PD はスケジューリング中に状態を記録し、診断に役立てます。有効にすると、ストアの数が多い場合、スケジューリング速度にわずかに影響し、より多くのメモリを消費する可能性があります。
--   デフォルト値: true
+-   デフォルト値: v7.1.0 以降、デフォルト値は`false`から`true`に変更されます。クラスターが v7.1.0 より前のバージョンから v7.1.0 以降にアップグレードされた場合、デフォルト値は変更されません。
 
 ### <code>hot-region-schedule-limit</code> {#code-hot-region-schedule-limit-code}
 
@@ -481,7 +492,7 @@ pd-serverに関するコンフィグレーション項目
 
 ### <code>request-unit</code> {#code-request-unit-code}
 
-[リクエストユニット (RU)](/tidb-resource-control.md#what-is-request-unit-ru)に関する設定項目は以下のとおりです。
+[リクエストユニット(RU)](/tidb-resource-control.md#what-is-request-unit-ru)に関する設定項目は以下のとおりです。
 
 #### <code>read-base-cost</code> {#code-read-base-cost-code}
 

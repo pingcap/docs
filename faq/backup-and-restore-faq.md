@@ -9,7 +9,7 @@ summary: Learn about Frequently Asked Questions (FAQs) and the solutions of back
 
 ## 誤ってデータを削除または更新した後、すぐにデータを復元するにはどうすればよいですか? {#what-should-i-do-to-quickly-recover-data-after-mistakenly-deleting-or-updating-data}
 
-TiDB v6.4.0 にはフラッシュバック機能が導入されています。この機能を使用すると、GC 時間内で指定した時点までデータを迅速にリカバリできます。したがって、誤操作が発生した場合、この機能を使用してデータを回復できます。詳細は[フラッシュバックデータベース](/sql-statements/sql-statement-flashback-database.md)を参照してください。
+TiDB v6.4.0 にはフラッシュバック機能が導入されています。この機能を使用すると、GC 時間内で指定した時点までデータを迅速にリカバリできます。したがって、誤操作が発生した場合、この機能を使用してデータを回復できます。詳細は[フラッシュバッククラスタ](/sql-statements/sql-statement-flashback-to-timestamp.md)および[フラッシュバックデータベース](/sql-statements/sql-statement-flashback-database.md)を参照してください。
 
 ## TiDB v5.4.0 以降のバージョンでは、負荷の高いクラスターでバックアップ タスクが実行されると、バックアップ タスクの速度が遅くなるのはなぜですか? {#in-tidb-v5-4-0-and-later-versions-when-backup-tasks-are-performed-on-the-cluster-under-a-heavy-workload-why-does-the-speed-of-backup-tasks-become-slow}
 
@@ -133,7 +133,7 @@ Error: failed to check gc safePoint, checkpoint ts 433177834291200000: GC safepo
 
 -   v4.0.3 より前では、リストア中に生成された DDL ジョブにより、 TiCDC/ Drainerで予期しない DDL 実行が発生する可能性がありました。したがって、 TiCDC/ Drainerの上流クラスターでリストアを実行する必要がある場合は、 br コマンドライン ツールを使用してリストアされたすべてのテーブルを TiCDC/ Drainerブロック リストに追加します。
 
-[`syncer.ignore-table`](/tidb-binlog/tidb-binlog-configuration-file.md#ignore-table)を使用してDrainerのブロック リストを構成できます。
+[`filter.rules`](https://github.com/pingcap/tiflow/blob/7c3c2336f98153326912f3cf6ea2fbb7bcc4a20c/cmd/changefeed.toml#L16)を使用して TiCDC のブロック リストを構成し、 [`syncer.ignore-table`](/tidb-binlog/tidb-binlog-configuration-file.md#ignore-table)を使用してDrainerのブロック リストを構成できます。
 
 ### リストア中に<code>new_collations_enabled_on_first_bootstrap</code>の不一致が報告されるのはなぜですか? {#why-is-code-new-collations-enabled-on-first-bootstrap-code-mismatch-reported-during-restore}
 
@@ -168,7 +168,7 @@ v6.0.0 より前では、 BR は[配置ルール](/placement-rules-in-sql.md)を
 
 `--ddl-batch-size` ～ `128` 、またはそれより小さい値を設定すると、バッチで作成されるテーブルの数を減らすことができます。
 
-BRを使用して`1`より大きい[`raft-entry-max-size`](/tikv-configuration-file.md#raft-entry-max-size) ）。したがって、 `--ddl-batch-size`過度に大きな値に設定すると、TiDB によって一度にバッチで送信されるテーブルのスキーマ サイズが指定値を超え、 BRで`entry too large, the max entry size is 6291456, the size of data is 7690800`エラーが報告されます。
+BRを使用して`1`より大きい[`--ddl-batch-size`](/br/br-batch-create-table.md#use-batch-create-table)の値を持つバックアップ データを復元すると、TiDB はテーブル作成の DDL ジョブを TiKV によって維持される DDL ジョブ キューに書き込みます。現時点では、ジョブ メッセージの最大値はデフォルトで`6 MB`であるため、TiDB によって一度に送信されるすべてのテーブル スキーマの合計サイズは 6 MB を超えてはなりません (この値を変更することは**お勧めできません**。詳細については、9 と[`txn-entry-size-limit`](/tidb-configuration-file.md#txn-entry-size-limit-new-in-v50)を参照してください)。 [`raft-entry-max-size`](/tikv-configuration-file.md#raft-entry-max-size) ）。したがって、 `--ddl-batch-size`過度に大きな値に設定すると、TiDB によって一度にバッチで送信されるテーブルのスキーマ サイズが指定値を超え、 BRで`entry too large, the max entry size is 6291456, the size of data is 7690800`エラーが報告されます。
 
 ### <code>local</code>storageを使用する場合、バックアップ ファイルはどこに保存されますか? {#where-are-the-backed-up-files-stored-when-i-use-code-local-code-storage}
 

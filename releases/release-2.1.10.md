@@ -17,7 +17,7 @@ TiDB Ansible バージョン: 2.1.10
 -   `Replace`または`Insert on duplicate update`ステートメントの`Generated Column`の誤った動作を修正します[#10385](https://github.com/pingcap/tidb/pull/10385)
 -   `DATE`比較[#10407](https://github.com/pingcap/tidb/pull/10407)の`BETWEEN`関数のバグ`DATETIME`修正
 -   `SLOW_QUERY`テーブルを使用してスロー ログ[#10412](https://github.com/pingcap/tidb/pull/10412)をクエリするときに、長すぎるスロー ログの 1 行によってエラー レポートが発生する問題を修正します。
--   `DATETIME`に`INTERVAL`を加えた結果が MySQL の結果と異なる場合がある問題を修正[#10418](https://github.com/pingcap/tidb/pull/10418)
+-   `DATETIME`に`INTERVAL`を加えた結果が MySQL の結果と異なる場合がある問題を修正[#10416](https://github.com/pingcap/tidb/pull/10416) 、 [#10418](https://github.com/pingcap/tidb/pull/10418)
 -   閏年の 2 月が無効になる場合のチェックを追加[#10417](https://github.com/pingcap/tidb/pull/10417)
 -   クラスター[#10426](https://github.com/pingcap/tidb/pull/10426)の初期化時に多数の競合エラー レポートが発生するのを避けるために、内部初期化操作の制限を DDL 所有者のみで実行します。
 -   出力タイムスタンプ列のデフォルト値が`default current_timestamp on update current_timestamp` [#10337](https://github.com/pingcap/tidb/issues/10337)の場合、 `DESC`は MySQL と互換性がないという問題を修正

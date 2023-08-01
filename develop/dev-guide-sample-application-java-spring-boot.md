@@ -8,7 +8,7 @@ aliases: ['/tidb/v7.1/dev-guide-sample-application-spring-boot']
 
 # Spring Boot を使用して TiDB アプリを構築する {#build-a-tidb-app-using-spring-boot}
 
-このチュートリアルでは、TiDB を使用して[GitHub](https://github.com/pingcap-inc/tidb-example-java)からダウンロードできます。
+このチュートリアルでは、TiDB を使用して[スプリングブーツ](https://spring.io/projects/spring-boot) Web アプリケーションを構築する方法を示します。 [Spring Data JPA](https://spring.io/projects/spring-data-jpa)モジュールは、データ アクセス機能のフレームワークとして使用されます。このサンプル アプリケーションのコードは[GitHub](https://github.com/pingcap-inc/tidb-example-java)からダウンロードできます。
 
 これは、RESTful API を構築するためのサンプル アプリケーションであり、 **TiDB**をデータベースとして使用する汎用**Spring Boot**バックエンド サービスを示しています。次のプロセスは、現実世界のシナリオを再現するために設計されました。
 
@@ -22,19 +22,19 @@ aliases: ['/tidb/v7.1/dev-guide-sample-application-spring-boot']
 
 TiDB クラスターの起動方法を紹介します。
 
-**TiDB CloudServerless Tierクラスターを使用する**
+**TiDB サーバーレス クラスターを使用する**
 
-詳細な手順については、 [Serverless Tierクラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster)を参照してください。
+詳細な手順については、 [TiDB サーバーレスクラスターを作成する](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-tidb-serverless-cluster)を参照してください。
 
 **ローカルクラスターを使用する**
 
-詳細な手順については、 [TiUPを使用した TiDBクラスタのデプロイ](/production-deployment-using-tiup.md)を参照してください。
+詳細な手順については、 [ローカルテストクラスターをデプロイ](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[TiUPを使用した TiDBクラスタのデプロイ](/production-deployment-using-tiup.md)を参照してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-[Serverless Tierクラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster)を参照してください。
+[TiDB サーバーレスクラスターを作成する](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-tidb-serverless-cluster)を参照してください。
 
 </CustomContent>
 
@@ -98,7 +98,7 @@ TiDB クラスターの起動方法を紹介します。
 
 ### ステップ5.1 パラメータの変更 {#step-5-1-change-parameters}
 
-TiDB CloudServerless Tierクラスターを使用している場合は、 `application.yml` ( `src/main/resources`にあります) の`spring.datasource.url` 、 `spring.datasource.username` 、 `spring.datasource.password`パラメーターを変更します。
+TiDB サーバーレス クラスターを使用している場合は、 `application.yml` ( `src/main/resources`にあります) の`spring.datasource.url` 、 `spring.datasource.username` 、 `spring.datasource.password`パラメーターを変更します。
 
 ```yaml
 spring:
@@ -210,7 +210,7 @@ Hibernate: create table player_jpa (id bigint not null, coins integer, goods int
 2023-01-05T14:06:55.714+08:00  INFO 22005 --- [           main] com.pingcap.App                          : Started App in 1.432 seconds (process running for 1.654)
 ```
 
-出力ログには、起動時のアプリケーションの動作が示されます。この例では、アプリケーションは[HikariCP](https://github.com/brettwooldridge/HikariCP)を使用し、データベースダイアレクトとして`org.hibernate.dialect.TiDBDialect`を使用します。起動後、Hibernate は`player_jpa`テーブルと`player_jpa_id_seq`シーケンスを削除して再作成します。起動の最後に、アプリケーションはポート`8080`をリッスンして、外部に HTTP サービスを提供します。
+出力ログには、起動時のアプリケーションの動作が示されます。この例では、アプリケーションは[トムキャット](https://tomcat.apache.org/)使用して**サーブレット**を開始し、ORM として Hibernate を使用し、データベース接続プールの実装として[HikariCP](https://github.com/brettwooldridge/HikariCP)を使用し、データベースダイアレクトとして`org.hibernate.dialect.TiDBDialect`を使用します。起動後、Hibernate は`player_jpa`テーブルと`player_jpa_id_seq`シーケンスを削除して再作成します。起動の最後に、アプリケーションはポート`8080`をリッスンして、外部に HTTP サービスを提供します。
 
 このアプリケーションのコードについて詳しく知りたい場合は、 [実装の詳細](#implementation-details)を参照してください。
 
@@ -220,7 +220,7 @@ Hibernate: create table player_jpa (id bigint not null, coins integer, goods int
 
 ### ステップ 6.1 Postman リクエストを使用する (推奨) {#step-6-1-use-postman-requests-recommended}
 
-次に示すように、この[郵便屋さん](https://www.postman.com/)にインポートできます。
+次に示すように、この[設定ファイル](https://raw.githubusercontent.com/pingcap-inc/tidb-example-java/main/spring-jpa-hibernate/Player.postman_collection.json)ローカルにダウンロードして[郵便屋さん](https://www.postman.com/)にインポートできます。
 
 ![import the collection into Postman](/media/develop/IMG_20220402-003303222.png)
 
@@ -603,7 +603,7 @@ public class App {
 }
 ```
 
-エントリ クラスは、Spring Boot アプリケーションの標準構成アノテーション[`@SpringBootApplication`アノテーションの使用](https://docs.spring.io/spring-boot/docs/current/reference/html/using-spring-boot.html#using-boot-using-springbootapplication-annotation)を参照してください。次に、プログラムはアプリケーションの起動時に`ApplicationPidFileWriter`を使用して`spring-jpa-hibernate.pid`という PID (プロセス識別番号) ファイルを書き込みます。 PID ファイルを使用して、外部ソースからこのアプリケーションを閉じることができます。
+エントリ クラスは、Spring Boot アプリケーションの標準構成アノテーション[`@SpringBootApplication`](https://docs.spring.io/spring-boot/docs/current/api/org/springframework/boot/autoconfigure/SpringBootApplication.html)で始まります。詳細については、Spring Boot 公式ドキュメントの[`@SpringBootApplication`アノテーションの使用](https://docs.spring.io/spring-boot/docs/current/reference/html/using-spring-boot.html#using-boot-using-springbootapplication-annotation)参照してください。次に、プログラムはアプリケーションの起動時に`ApplicationPidFileWriter`を使用して`spring-jpa-hibernate.pid`という PID (プロセス識別番号) ファイルを書き込みます。 PID ファイルを使用して、外部ソースからこのアプリケーションを閉じることができます。
 
 ### データアクセスオブジェクト {#data-access-object}
 
@@ -682,7 +682,7 @@ public class PlayerBean {
 
 #### リポジトリ {#repository}
 
-データベースレイヤーを抽象化するために、Spring アプリケーションは[`SELECT`](/sql-statements/sql-statement-select.md)などのいくつかの事前構築メソッドを実装します。
+データベースレイヤーを抽象化するために、Spring アプリケーションは[`Repository`](https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#repositories)インターフェイス、または`Repository`のサブインターフェイスを使用します。このインターフェイスは、テーブルなどのデータベース オブジェクトにマップされます。 JPA は、主キーを使用して[`INSERT`](/sql-statements/sql-statement-insert.md)や[`SELECT`](/sql-statements/sql-statement-select.md)などのいくつかの事前構築メソッドを実装します。
 
 ```java
 package com.pingcap.dao;
@@ -735,7 +735,7 @@ public interface PlayerRepository extends JpaRepository<PlayerBean, Long> {
 
 `getPlayersByLimit`アノテーションの SQL では、Hibernate では`:limit` [名前付きパラメータ](https://docs.jboss.org/hibernate/orm/6.0/userguide/html_single/Hibernate_User_Guide.html#jpql-query-parameters)と呼ばれます。 Hibernate は、アノテーションが存在するインターフェース内で名前によってパラメーターを自動的に検索し、結合します。 `@Param`使用して、インジェクションのパラメータとは異なる名前を指定することもできます。
 
-`getPlayerAndLock`では、アノテーション[エンティティのロック](https://openjpa.apache.org/builds/2.2.2/apache-openjpa/docs/jpa_overview_em_locking.html)を参照してください。 `@Lock`アノテーションは`HQL`と一緒に使用する必要があります。そうしないとエラーが発生します。ロックに SQL を直接使用したい場合は、コメントの注釈を使用できます。
+`getPlayerAndLock`では、アノテーション[`@Lock`](https://docs.spring.io/spring-data/jpa/docs/current/api/org/springframework/data/jpa/repository/Lock.html)を使用して、悲観的ロックが適用されることを宣言します。その他のロック方法については、 [エンティティのロック](https://openjpa.apache.org/builds/2.2.2/apache-openjpa/docs/jpa_overview_em_locking.html)を参照してください。 `@Lock`アノテーションは`HQL`と一緒に使用する必要があります。そうしないとエラーが発生します。ロックに SQL を直接使用したい場合は、コメントの注釈を使用できます。
 
 ```java
 @Query(value = "SELECT * FROM player_jpa WHERE id = :id FOR UPDATE", nativeQuery = true)
@@ -891,7 +891,7 @@ public class PlayerServiceImpl implements PlayerService {
 
 `@Service`アノテーションは、このオブジェクトのライフサイクルが`Spring`によって管理されることを宣言するために使用されます。
 
-`PlayerServiceImpl`実装クラスには、 `@Service`アノテーションに加えて[`@EnableTransactionManagement`](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/transaction/annotation/EnableTransactionManagement.html)使用して有効にできますが、デフォルトでは`Spring Boot`で有効になります。手動で構成する必要はありません。)、 `Spring`プロキシ内の`@Transactional`アノテーションを持つすべてのオブジェクトを自動的にラップし、オブジェクト呼び出し処理にこのプロキシを使用します。
+`PlayerServiceImpl`実装クラスには、 `@Service`アノテーションに加えて[`@Transactional`](https://docs.spring.io/spring-framework/docs/current/reference/html/data-access.html#transaction-declarative-annotations)アノテーションもあります。アプリケーションでトランザクション管理が有効になっている場合 (これは[`@EnableTransactionManagement`](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/transaction/annotation/EnableTransactionManagement.html)使用して有効にできますが、デフォルトでは`Spring Boot`で有効になります。手動で構成する必要はありません。)、 `Spring`プロキシ内の`@Transactional`アノテーションを持つすべてのオブジェクトを自動的にラップし、オブジェクト呼び出し処理にこのプロキシを使用します。
 
 エージェントが`@Transactional`アノテーションを持つオブジェクト内の関数を呼び出すと、次のように単純に想定できます。
 
@@ -899,7 +899,7 @@ public class PlayerServiceImpl implements PlayerService {
 -   関数が戻ると、 `transaction.commit()`を呼び出してトランザクションをコミットします。
 -   実行時エラーが発生すると、エージェントは`transaction.rollback()`を呼び出してロールバックします。
 
-取引に関する詳細については[Spring Framework の宣言型トランザクション実装を理解する](https://docs.spring.io/spring-framework/docs/current/reference/html/data-access.html#tx-decl-explained)を参照してください。
+取引に関する詳細については[データベーストランザクション](/develop/dev-guide-transaction-overview.md)を参照するか、 `Spring` Web サイトの[Spring Framework の宣言型トランザクション実装を理解する](https://docs.spring.io/spring-framework/docs/current/reference/html/data-access.html#tx-decl-explained)を参照してください。
 
 すべての実装クラスで、 `buyGoods`関数に注意が必要です。関数が非論理的な操作に遭遇すると、例外をスローし、不正なデータを防ぐために Hibernate にトランザクションのロールバックを実行するよう指示します。
 
@@ -965,15 +965,15 @@ public class PlayerController {
 
 `PlayerController`機能を説明するために可能な限り多くの注釈を使用します。実際のプロジェクトでは、会社やチームのルールに従いながら、スタイルの一貫性を保ちます。 `PlayerController`の注釈は次のように説明されます。
 
--   [ウェブコントローラー](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller)として宣言し、戻り値を`JSON`出力としてシリアル化します。
+-   [`@RestController`](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/bind/annotation/RestController.html) `PlayerController` [ウェブコントローラー](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller)として宣言し、戻り値を`JSON`出力としてシリアル化します。
 -   [`@RequestMapping`](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/bind/annotation/RequestMapping.html) URL エンドポイントを`/player`にマップします。つまり、この`Web Controller` `/player` URL に送信されたリクエストのみをリッスンします。
 -   `@Autowired` 、 `Spring`コンテナが連携 Bean 間の関係を自動配線できることを意味します。宣言には`PlayerService`オブジェクトが必要ですが、これはインターフェイスであり、使用する実装クラスは指定しません。これは Spring によって組み立てられます。この集会のルールについては、Spring の公式 Web サイトの[IoCコンテナ](https://docs.spring.io/spring-framework/docs/3.2.x/spring-framework-reference/html/beans.html)を参照してください。
--   [役職](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST)リクエストに応答することを宣言します。
+-   [`@PostMapping`](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/bind/annotation/PostMapping.html) 、この関数が HTTP の[役職](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST)リクエストに応答することを宣言します。
     -   `@RequestBody` 、HTTP ペイロード全体が`playerList`パラメータに解析されることを宣言します。
     -   `@NonNull`パラメータが null であってはいけないことを宣言します。それ以外の場合は、エラーが返されます。
--   [得る](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET)リクエストに応答することを宣言します。
+-   [`@GetMapping`](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/bind/annotation/GetMapping.html) 、この関数が HTTP の[得る](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET)リクエストに応答することを宣言します。
     -   [`@PathVariable`](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/bind/annotation/PathVariable.html) 、注釈に`{id}`や`{limit_size}`のようなプレースホルダがあり、これらは`@PathVariable`で注釈が付けられた変数にバインドされていることを示します。このようなバインディングは、アノテーション属性`name`に基づいています。注釈属性`name`が指定されていない場合は、変数名と同じになります。変数名は省略できます。つまり、 `@PathVariable(name="limit_size")` `@PathVariable("limit_size")`と書くことができます。
--   [置く](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/PUT)リクエストに応答することを宣言します。
+-   [`@PutMapping`](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/bind/annotation/PutMapping.html) 、この関数が HTTP の[置く](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/PUT)リクエストに応答することを宣言します。
 -   [`@RequestParam`](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/bind/annotation/RequestParam.html)は、この関数がリクエスト内の URL パラメーター、フォーム パラメーター、およびその他のパラメーターを解析し、それらをアノテーション付き変数にバインドすることを宣言します。
 
 ## 同じ依存関係を持つ空のアプリケーションを作成します (オプション) {#create-a-blank-application-with-the-same-dependency-optional}

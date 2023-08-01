@@ -36,7 +36,7 @@ title: TiDB 2.1 RC5 Release Notes
     -   `tidb_slow_log_threshold`環境変数のしきい値を追加します。これにより、スロー ログが動的に設定されます[#8094](https://github.com/pingcap/tidb/pull/8094)
     -   `tidb_query_log_max_len`環境変数が動的にログを設定する間に、切り詰められた SQL ステートメントの元の長さを追加します[#8200](https://github.com/pingcap/tidb/pull/8200)
     -   `tidb_opt_write_row_id`環境変数を追加して、書き込みを許可するかどうかを制御します`_tidb_rowid` [#8218](https://github.com/pingcap/tidb/pull/8218)
-    -   オーバーバウンドスキャンを避けるために、ticlient の`Scan`コマンドに上限を追加します[#8247](https://github.com/pingcap/tidb/pull/8247)
+    -   オーバーバウンドスキャンを避けるために、ticlient の`Scan`コマンドに上限を追加します[#8081](https://github.com/pingcap/tidb/pull/8081) 、 [#8247](https://github.com/pingcap/tidb/pull/8247)
 -   DDL
     -   トランザクションで DDL ステートメントを実行すると、場合によってはエラーが発生する問題を修正します[#8056](https://github.com/pingcap/tidb/pull/8056)
     -   パーティションテーブルで`truncate table`実行しても有効にならない問題を修正[#8103](https://github.com/pingcap/tidb/pull/8103)
@@ -62,4 +62,4 @@ title: TiDB 2.1 RC5 Release Notes
 
 ## ツール {#tools}
 
--   TiDB-Binlog クラスターをサポートします。これは、 binlog [ドキュメンテーション](/tidb-binlog/tidb-binlog-overview.md)
+-   TiDB-Binlog クラスターをサポートします。これは、 binlog [#8093](https://github.com/pingcap/tidb/pull/8093)の古いバージョンと互換性がありません[ドキュメンテーション](/tidb-binlog/tidb-binlog-overview.md)

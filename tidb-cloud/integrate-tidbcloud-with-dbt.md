@@ -5,7 +5,7 @@ summary: Learn the use cases of dbt in TiDB Cloud.
 
 # TiDB Cloudと dbt を統合する {#integrate-tidb-cloud-with-dbt}
 
-[dbt-tidb](https://github.com/pingcap/dbt-tidb)プラグインを使用すると、 TiDB Cloudを使用する分析エンジニアは、テーブルやビューの作成プロセスを考慮することなく、SQL を介してフォームを直接作成し、データを照合することができます。
+[データ構築ツール（dbt）](https://www.getdbt.com/)は、分析エンジニアが SQL ステートメントを使用してウェアハウス内のデータを変換するのに役立つ、人気のあるオープンソース データ変換ツールです。 [dbt-tidb](https://github.com/pingcap/dbt-tidb)プラグインを使用すると、 TiDB Cloudを使用する分析エンジニアは、テーブルやビューの作成プロセスを考慮することなく、SQL を介してフォームを直接作成し、データを照合することができます。
 
 このドキュメントでは、dbt プロジェクトを例として、 TiDB Cloudで dbt を使用する方法を紹介します。
 
@@ -90,7 +90,7 @@ cd jaffle_shop
            password: "your_password"                                   # The password to use for authenticating to the TiDB Cloud clusters
     ```
 
-    TiDB Cloudコンソールの[**接続**](/tidb-cloud/connect-via-standard-connection.md)ダイアログから`server` 、 `port` 、および`username`の値を取得できます。
+    `server` 、 `port` 、および`username`の値は、クラスターの接続ダイアログから取得できます。このダイアログを開くには、プロジェクトの[**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動し、右上隅の**[接続]**をクリックします。
 
 2.  プロジェクトの構成を完了します。
 

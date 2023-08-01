@@ -99,7 +99,7 @@ summary: Learn how to migrate data from one TiDB cluster to another TiDB cluster
 
 ## ステップ 2. 全データを移行する {#step-2-migrate-full-data}
 
-環境をセットアップしたら、 [三つの方法](/br/br-use-overview.md#deploy-and-use-br)で起動可能です。このドキュメントでは、SQL ステートメント`BACKUP`と`RESTORE`を使用します。
+環境をセットアップしたら、 [BR](https://github.com/pingcap/tidb/tree/master/br)のバックアップおよびリストア関数を使用して、完全なデータを移行できます。 BRは[三つの方法](/br/br-use-overview.md#deploy-and-use-br)で起動可能です。このドキュメントでは、SQL ステートメント`BACKUP`と`RESTORE`を使用します。
 
 > **ノート：**
 >

@@ -5,7 +5,7 @@ summary: Learn how to use DM to replicate incremental data from databases that u
 
 # gh-ost または pt-osc を使用するデータベースからの連続レプリケーション {#continuous-replication-from-databases-that-use-gh-ost-or-pt-osc}
 
-本番シナリオでは、DDL 実行中のテーブル ロックにより、データベースへの読み取りまたは書き込みがある程度ブロックされる可能性があります。したがって、読み取りと書き込みへの影響を最小限に抑えるために、オンライン DDL ツールを使用して DDL を実行することがよくあります。一般的な DDL ツールは[pt-osc](https://www.percona.com/doc/percona-toolkit/3.0/pt-online-schema-change.html)です。
+本番シナリオでは、DDL 実行中のテーブル ロックにより、データベースへの読み取りまたは書き込みがある程度ブロックされる可能性があります。したがって、読み取りと書き込みへの影響を最小限に抑えるために、オンライン DDL ツールを使用して DDL を実行することがよくあります。一般的な DDL ツールは[おばけ](https://github.com/github/gh-ost)と[pt-osc](https://www.percona.com/doc/percona-toolkit/3.0/pt-online-schema-change.html)です。
 
 DM を使用して MySQL から TiDB にデータを移行する場合、 `online-ddl`有効にして DM と gh-ost または pt-osc のコラボレーションを許可できます。
 

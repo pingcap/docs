@@ -5,7 +5,7 @@ summary: Use the slow query log to identify problematic SQL statements.
 
 # 遅いクエリを特定する {#identify-slow-queries}
 
-ユーザーが遅いクエリを特定し、SQL 実行のパフォーマンスを分析して改善できるようにするために、TiDB は実行時間が[スロークエリファイル](/tidb-configuration-file.md#slow-query-file) (デフォルト値は「tidb-slow.log」) を超えるステートメントを出力します。
+ユーザーが遅いクエリを特定し、SQL 実行のパフォーマンスを分析して改善できるようにするために、TiDB は実行時間が[`tidb_slow_log_threshold`](/system-variables.md#tidb_slow_log_threshold) (デフォルト値は 300 ミリ秒) から[スロークエリファイル](/tidb-configuration-file.md#slow-query-file) (デフォルト値は「tidb-slow.log」) を超えるステートメントを出力します。
 
 TiDB はデフォルトで低速クエリ ログを有効にします。システム変数[`tidb_enable_slow_log`](/system-variables.md#tidb_enable_slow_log)を変更することで、この機能を有効または無効にできます。
 
@@ -86,7 +86,7 @@ insert into t select * from t;
 -   `KV_total` : このステートメントによって TiKV またはTiFlash上のすべての RPC リクエストに費やされた時間。
 -   `PD_total` : このステートメントによって PD 上のすべての RPC リクエストに費やされた時間。
 -   `Backoff_total` : このステートメントの実行中にすべてのバックオフに費やされた時間。
--   `Write_sql_response_total` : このステートメントによって結果をクライアントに送信するために費やされた時間。
+-   `Write_sql_response_total` : このステートメントによって結果をクライアントに送信するために費やされる時間。
 -   `Result_rows` : クエリ結果の行数。
 -   `IsExplicitTxn` : このステートメントが明示的なトランザクション内にあるかどうか。値が`false`の場合、トランザクションは`autocommit=1`であり、ステートメントは実行後に自動的にコミットされます。
 -   `Warnings` : このステートメントの実行中に生成される JSON 形式の警告。これらの警告は通常、 [`SHOW WARNINGS`](/sql-statements/sql-statement-show-warnings.md)ステートメントの出力と一致しますが、より多くの診断情報を提供する追加の警告が含まれる場合があります。これらの追加の警告は`IsExtra: true`としてマークされます。
@@ -149,13 +149,13 @@ TiKVコプロセッサータスク フィールド:
 
 `backoff-type`は通常、次のタイプが含まれます。
 
--   `tikvRPC` : TiKV への RPC リクエストの送信に失敗したことによって発生するバックオフ。
+-   `tikvRPC` : TiKV への RPC リクエストの送信失敗によって発生するバックオフ。
 -   `tiflashRPC` : TiFlashへの RPC リクエストの送信に失敗したことによって発生するバックオフ。
 -   `pdRPC` : RPC リクエストを PD に送信できなかったことによって発生するバックオフ。
 -   `txnLock` : ロックの競合によって発生するバックオフ。
 -   `regionMiss` : リージョンの分割またはマージ後に TiDBリージョンキャッシュ情報が古くなると、リクエストの処理によって引き起こされるバックオフは失敗します。
 -   `regionScheduling` : リージョンがスケジュールされており、Leaderが選択されていない場合、TiDB によって発生するバックオフはリクエストを処理できません。
--   `tikvServerBusy` : TiKV 負荷が高すぎて新しいリクエストを処理できないことによって引き起こされるバックオフ。
+-   `tikvServerBusy` : TiKV 負荷が高すぎて新しいリクエストを処理できないことによって発生するバックオフ。
 -   `tiflashServerBusy` : TiFlash の負荷が高すぎて新しいリクエストを処理できないことによって発生するバックオフ。
 -   `tikvDiskFull` : TiKV ディスクがいっぱいであることによって発生するバックオフ。
 -   `txnLockFast` : データ読み取り中にロックによって発生するバックオフが発生します。
@@ -188,7 +188,7 @@ TiKVコプロセッサータスク フィールド:
 set @@tidb_enable_collect_execution_info=0;
 ```
 
-`Plan`フィールドの返される結果の形式は、 `EXPLAIN`または`EXPLAIN ANALYZE`の形式とほぼ同じです。実行計画の詳細については、 [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md)を参照してください。
+`Plan`フィールドの返される結果の形式は、 `EXPLAIN`または`EXPLAIN ANALYZE`の形式とほぼ同じです。実行計画の詳細については、 [`EXPLAIN`](/sql-statements/sql-statement-explain.md)または[`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md)を参照してください。
 
 詳細については、 [TiDB 固有の変数と構文](/system-variables.md)を参照してください。
 
@@ -246,7 +246,7 @@ TiDB 4.0 の場合、 `SLOW_QUERY` 、ローテーションされたスロー �
 >
 > 指定した時間範囲のスロー ログ ファイルが削除されている場合、またはスロー クエリがない場合、クエリは NULL を返します。
 
-TiDB 4.0 では、すべての TiDB ノードのスロー クエリ情報をクエリするための[`SLOW_QUERY`](/information-schema/information-schema-slow-query.md)と同じように使用できます。
+TiDB 4.0 では、すべての TiDB ノードのスロー クエリ情報をクエリするための[`CLUSTER_SLOW_QUERY`](/information-schema/information-schema-slow-query.md#cluster_slow_query-table)システム テーブルが追加されています。 `CLUSTER_SLOW_QUERY`テーブルのテーブル スキーマは、 `CLUSTER_SLOW_QUERY`に`INSTANCE`列が追加されるという点で`SLOW_QUERY`テーブルのテーブル スキーマとは異なります。 `INSTANCE`列は、スロー クエリの行情報の TiDB ノード アドレスを表します。 `CLUSTER_SLOW_QUERY` [`SLOW_QUERY`](/information-schema/information-schema-slow-query.md)と同じように使用できます。
 
 `CLUSTER_SLOW_QUERY`テーブルにクエリを実行すると、TiDB は他のノードからすべての低速クエリ情報を取得して 1 つの TiDB ノードで操作を実行するのではなく、計算と判断を他のノードにプッシュします。
 
@@ -595,7 +595,7 @@ ADMIN SHOW SLOW top internal 3
 ADMIN SHOW SLOW top all 5
 ```
 
-メモリが限られているため、TiDB は限られた数のスロー クエリ レコードのみを保存します。クエリ コマンドの値`N`レコード数より大きい場合、返されるレコードの数は`N`より小さくなります。
+メモリが限られているため、TiDB は限られた数のスロー クエリ レコードのみを保存します。クエリ コマンドの値`N`がレコード数より大きい場合、返されるレコードの数は`N`より小さくなります。
 
 次の表に出力の詳細を示します。
 

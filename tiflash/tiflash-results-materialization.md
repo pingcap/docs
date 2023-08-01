@@ -11,9 +11,9 @@ v6.5.0 以降、TiDB は、 TiFlashクエリ結果のテーブルへの保存、
 
 > **ノート：**
 >
-> デフォルト ( [SQLモード](/sql-mode.md)とTiFlashレプリカのコスト見積もりに基づいて、クエリをTiFlashにプッシュするかどうかをインテリジェントに決定します。
+> デフォルト ( [`tidb_allow_mpp = ON`](/system-variables.md#tidb_allow_mpp-new-in-v50) ) では、オプティマイザは[SQLモード](/sql-mode.md)とTiFlashレプリカのコスト見積もりに基づいて、クエリをTiFlashにプッシュするかどうかをインテリジェントに決定します。
 >
-> -   現在のセッションの[`tidb_enforce_mpp`](/system-variables.md#tidb_enforce_mpp-new-in-v51)システム変数を`ON`に設定できます。
+> -   現在のセッションの[SQLモード](/sql-mode.md)厳密でない場合 (つまり、 `sql_mode`値に`STRICT_TRANS_TABLES` &#39; と`STRICT_ALL_TABLES`が含まれていない場合)、オプティマイザは、 TiFlashレプリカのコスト推定に基づいて、 `INSERT INTO SELECT` `SELECT`サブクエリをTiFlashにプッシュするかどうかをインテリジェントに決定します。このモードでは、オプティマイザのコスト見積もりを無視してクエリをTiFlashにプッシュダウンするようにしたい場合は、 [`tidb_enforce_mpp`](/system-variables.md#tidb_enforce_mpp-new-in-v51)システム変数を`ON`に設定できます。
 > -   現在のセッションの[SQLモード](/sql-mode.md)厳密である場合 (つまり、 `sql_mode`値に`STRICT_TRANS_TABLES`または`STRICT_ALL_TABLES`含まれる)、 `INSERT INTO SELECT`の`SELECT`サブクエリをTiFlashにプッシュダウンすることはできません。
 
 `INSERT INTO SELECT`の構文は次のとおりです。
@@ -58,7 +58,7 @@ SELECT app_name, country FROM t1;
 
 <CustomContent platform="tidb">
 
--   `INSERT INTO SELECT`ステートメントの TiDBメモリ制限は、システム変数[`txn-total-size-limit`](/tidb-configuration-file.md#txn-total-size-limit)を使用することは推奨されません。
+-   `INSERT INTO SELECT`ステートメントの TiDBメモリ制限は、システム変数[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)を使用して調整できます。 v6.5.0 以降、トランザクションメモリサイズを制御するために[`txn-total-size-limit`](/tidb-configuration-file.md#txn-total-size-limit)を使用することは推奨されません。
 
     詳細については、 [TiDBメモリ制御](/configure-memory-usage.md)を参照してください。
 
@@ -66,7 +66,7 @@ SELECT app_name, country FROM t1;
 
 <CustomContent platform="tidb-cloud">
 
--   `INSERT INTO SELECT`ステートメントの TiDBメモリ制限は、システム変数[`txn-total-size-limit`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#txn-total-size-limit)を使用することは推奨されません。
+-   `INSERT INTO SELECT`ステートメントの TiDBメモリ制限は、システム変数[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)を使用して調整できます。 v6.5.0 以降、トランザクションメモリサイズを制御するために[`txn-total-size-limit`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#txn-total-size-limit)を使用することは推奨されません。
 
     詳細については、 [TiDBメモリ制御](https://docs.pingcap.com/tidb/stable/configure-memory-usage)を参照してください。
 
@@ -121,4 +121,4 @@ SELECT DATE(ts), customer_id, sum(detail_fee) FROM detail_data WHERE DATE(ts) = 
 SELECT MONTH(rec_date), customer_id, sum(daily_fee) FROM daily_data GROUP BY MONTH(rec_date), customer_id;
 ```
 
-上記の例では、日次の分析結果を具体化して日次結果テーブルに保存し、それを基に月次のデータ分析を高速化し、データ分析の効率を向上させます。
+上記の例では、日次の分析結果を具体化して日次結果テーブルに保存し、それを基に月次のデータ分析を高速化し、データ分析の効率を向上させています。

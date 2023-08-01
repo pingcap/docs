@@ -25,7 +25,7 @@ TiDB Ansible バージョン: 3.0.8
     -   句が括弧内にある場合に`group by item`の実行でエラーが報告される問題を修正します[#13658](https://github.com/pingcap/tidb/pull/13658)
     -   TiDB が`group by item` [#14014](https://github.com/pingcap/tidb/pull/14014)を誤って計算するため、 `OUTER JOIN`を実行するとエラーが報告される可能性がある問題を修正
     -   範囲を超えるデータが範囲パーティション テーブル[#14107](https://github.com/pingcap/tidb/pull/14107)に書き込まれるときにエラー メッセージが不正確になる問題を修正します。
-    -   MySQL 8 がすぐに`PadCharToFullLength`破棄することを考慮して、特殊な場合に予期しないクエリ結果を回避するために[#14157](https://github.com/pingcap/tidb/pull/14157)
+    -   MySQL 8 がすぐに`PadCharToFullLength`破棄することを考慮して、特殊な場合に予期しないクエリ結果を回避するために[PR #10124](https://github.com/pingcap/tidb/pull/10124)元に戻し、 `PadCharToFullLength`効果をキャンセルします[#14157](https://github.com/pingcap/tidb/pull/14157)
     -   `ExplainExec` [#14226](https://github.com/pingcap/tidb/pull/14226)での保証されていない`close()`呼び出しによって引き起こされる`EXPLAIN ANALYZE`ステートメントを実行するときの goroutine リークの問題を修正します。
 -   DDL
     -   `change column` / `modify column`のエラーメッセージ出力を最適化して分かりやすくする[#13796](https://github.com/pingcap/tidb/pull/13796)
@@ -35,7 +35,7 @@ TiDB Ansible バージョン: 3.0.8
     -   `DROP COLUMN` / `MODIFY COLUMN` / `CHANGE COLUMN`の実行時に外部キーがチェックされないため、 `SELECT * FROM information_schema.KEY_COLUMN_USAGE`の実行時にパニックが発生するpanicを修正[#14105](https://github.com/pingcap/tidb/pull/14105)
 -   サーバ
     -   ステートメントの概要の改善:
-        -   多数の SQL メトリック フィールドを追加して、SQL ステートメントをより詳細に分析し[#14151](https://github.com/pingcap/tidb/pull/14151)
+        -   多数の SQL メトリック フィールドを追加して、SQL ステートメントをより詳細に分析し[#14168](https://github.com/pingcap/tidb/pull/14168)します[#14151](https://github.com/pingcap/tidb/pull/14151)
         -   `stmt-summary.refresh-interval`パラメータを追加して、古いデータを`events_statements_summary_by_digest`テーブルから`events_statements_summary_by_digest_history`テーブルに移動するかどうかを制御します (デフォルトの間隔: 30 分) [#14161](https://github.com/pingcap/tidb/pull/14161)
         -   `events_statements_summary_by_digest_history`テーブルを追加して、古いデータを`events_statements_summary_by_digest` [#14166](https://github.com/pingcap/tidb/pull/14166)に保存します
     -   RBAC 関連の内部 SQL ステートメントが実行されると、 binlogが誤って出力される問題を修正します[#13890](https://github.com/pingcap/tidb/pull/13890)
@@ -60,7 +60,7 @@ TiDB Ansible バージョン: 3.0.8
     -   `tidb_enable_table_partition`変数を`GLOBAL SCOPE` [#14091](https://github.com/pingcap/tidb/pull/14091)サポートにする
     -   新しい権限を追加するときに、新しく追加された権限が該当するユーザーに正しく付与されず、ユーザー権限が欠落しているか、誤って追加される可能性がある問題を修正します[#14178](https://github.com/pingcap/tidb/pull/14178)
     -   TiKVサーバーが切断されたときに`rpcClient`閉じないため、 `CheckStreamTimeoutLoop`ゴルーチンがリークする可能性がある問題を修正[#14227](https://github.com/pingcap/tidb/pull/14227)
-    -   証明書ベースの認証をサポート ( [#13955](https://github.com/pingcap/tidb/pull/13955)
+    -   証明書ベースの認証をサポート ( [ユーザードキュメント](/certificate-authentication.md) ) [#13955](https://github.com/pingcap/tidb/pull/13955)
 -   トランザクション
     -   新しいクラスターの作成時に`tidb_txn_mode`変数のデフォルト値を`""`から`"pessimistic"`に更新します[#14171](https://github.com/pingcap/tidb/pull/14171)
     -   トランザクションの再試行時に単一ステートメントのロック待機時間がリセットされないため、悲観的トランザクションに対してロック待機時間が長すぎる問題を修正します[#13990](https://github.com/pingcap/tidb/pull/13990)
@@ -94,7 +94,7 @@ TiDB Ansible バージョン: 3.0.8
     -   `KeepAlive`接続[#2035](https://github.com/pingcap/pd/pull/2035)の作成をサポート
 -   `/api/v1/regions` API [#1986](https://github.com/pingcap/pd/pull/1986)のパフォーマンスを最適化する
 -   `tombstone`状態でストアを削除するとpanic[#2038](https://github.com/pingcap/pd/pull/2038)が発生する可能性がある問題を修正
--   ディスク[#2040](https://github.com/pingcap/pd/pull/2040)際に、重複したリージョンが誤って削除される問題を修正
+-   ディスク[#2011](https://github.com/pingcap/pd/issues/2011)からリージョン情報をロード[#2040](https://github.com/pingcap/pd/pull/2040)際に、重複したリージョンが誤って削除される問題を修正
 -   etcd を v3.4.0 から v3.4.3 にアップグレードします (アップグレード後は、pd-recover を使用して etcd をデグレードすることしかできないことに注意してください) [#2058](https://github.com/pingcap/pd/pull/2058)
 
 ## ツール {#tools}

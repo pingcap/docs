@@ -5,14 +5,14 @@ summary: Learn about the SQL syntax, best practices, and examples for deleting d
 
 # データの削除 {#delete-data}
 
-このドキュメントでは、 [有効期間](/time-to-live.md)機能を使用してください。
+このドキュメントでは、 [消去](/sql-statements/sql-statement-delete.md) SQL ステートメントを使用して TiDB 内のデータを削除する方法について説明します。期限切れのデータを定期的に削除する必要がある場合は、 [有効期間](/time-to-live.md)機能を使用してください。
 
 ## 始める前に {#before-you-start}
 
 このドキュメントを読む前に、以下を準備する必要があります。
 
--   [TiDB Cloud(Serverless Tier) で TiDBクラスタを構築する](/develop/dev-guide-build-cluster-in-cloud.md)
--   [セカンダリインデックスの作成](/develop/dev-guide-create-secondary-indexes.md)を読み取ります
+-   [TiDB サーバーレスクラスタを構築する](/develop/dev-guide-build-cluster-in-cloud.md)
+-   [スキーマ設計の概要](/develop/dev-guide-schema-design-overview.md) 、 [データベースを作成する](/develop/dev-guide-create-database.md) 、 [テーブルを作成する](/develop/dev-guide-create-table.md) 、および[セカンダリインデックスの作成](/develop/dev-guide-create-secondary-indexes.md)を読み取ります
 -   [データの挿入](/develop/dev-guide-insert-data.md)
 
 ## SQL 構文 {#sql-syntax}
@@ -38,7 +38,7 @@ DELETE FROM {table} WHERE {filter}
 
 <CustomContent platform="tidb">
 
--   大量の行 (たとえば、1 万行以上) を削除する場合は、 [txn 合計サイズ制限](/tidb-configuration-file.md#txn-total-size-limit) MB)。
+-   大量の行 (たとえば、1 万行以上) を削除する場合は、 [一括削除](#bulk-delete)を使用します。これは、TiDB が単一トランザクションのサイズを制限しているためです (デフォルトでは[txn 合計サイズ制限](/tidb-configuration-file.md#txn-total-size-limit) MB)。
 
 </CustomContent>
 
@@ -172,7 +172,7 @@ with connection:
 
 <CustomContent platform="tidb">
 
-`rated_at`フィールドは[タイムゾーン](/configure-time-zone.md)で異なる時刻文字列を表示します。
+`rated_at`フィールドは[日付と時刻のタイプ](/data-type-date-and-time.md)の`DATETIME`タイプです。タイムゾーンに関係なく、TiDB にリテラル数量として保存されていると想定できます。一方、 `TIMESTAMP`タイプはタイムスタンプを格納するため、異なる[タイムゾーン](/configure-time-zone.md)で異なる時刻文字列を表示します。
 
 </CustomContent>
 
@@ -198,7 +198,7 @@ GC はデフォルトで 10 分ごとにトリガーされます。各 GC は、
 
 ### 統計情報を更新する {#update-statistical-information}
 
-TiDB は[手動収集](/statistics.md#manual-collection)使用して統計を更新できます。これは、SQL パフォーマンスを最適化するためのより正確な統計情報を TiDB オプティマイザーに提供します。
+TiDB は[統計情報](/statistics.md)を使用してインデックスの選択を決定します。大量のデータが削除された後は、インデックスが正しく選択されない可能性が高くなります。 [手動収集](/statistics.md#manual-collection)使用して統計を更新できます。これは、SQL パフォーマンスを最適化するためのより正確な統計情報を TiDB オプティマイザーに提供します。
 
 ## 一括削除 {#bulk-delete}
 

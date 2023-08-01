@@ -30,7 +30,7 @@ Load Base Split によって分割されたリージョンはすぐにはマー�
 
 ロード ベース分割機能は現在、次のパラメータによって制御されています。
 
--   [`region-split-size`](/tikv-configuration-file.md#region-split-size)が 4 GB 未満の場合、デフォルト値は`3000` /秒です。それ以外の場合、デフォルト値は`7000`です。
+-   [`split.qps-threshold`](/tikv-configuration-file.md#qps-threshold) :リージョンがホットスポットとして識別される QPS しきい値。 [`region-split-size`](/tikv-configuration-file.md#region-split-size)が 4 GB 未満の場合、デフォルト値は`3000` /秒です。それ以外の場合、デフォルト値は`7000`です。
 -   [`split.byte-threshold`](/tikv-configuration-file.md#byte-threshold-new-in-v50) : (v5.0 で導入)リージョンがホットスポットとして識別されるトラフィックのしきい値。単位はバイトです。 `region-split-size` 4 GB 未満の場合、デフォルト値は 30 MiB/秒です。それ以外の場合、デフォルト値は 100 MiB/秒です。
 -   [`split.region-cpu-overload-threshold-ratio`](/tikv-configuration-file.md#region-cpu-overload-threshold-ratio-new-in-v620) : (v6.2.0 で導入)リージョンがホットスポットとして識別される CPU 使用率のしきい値 (読み取りスレッド プールの CPU 時間の割合)。 `region-split-size`が 4 GB 未満の場合、デフォルト値は`0.25`です。それ以外の場合、デフォルト値は`0.75`です。
 

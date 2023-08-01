@@ -17,7 +17,7 @@ summary: This document describes best practices for configuration and usage of H
 
 HAProxy は、C 言語で書かれた無料のオープンソース ソフトウェアで、TCP および HTTP ベースのアプリケーションに高可用性ロード バランサーとプロキシサーバーを提供します。 HAProxy は CPU とメモリを高速かつ効率的に使用できるため、現在、GitHub、Bitbucket、Stack Overflow、Reddit、Tumblr、Twitter、Tuenti、AWS (アマゾン ウェブ サービス) などの多くの有名な Web サイトで広く使用されています。
 
-HAProxy は、Linux カーネルの中心的な貢献者である Willy Tarreau によって 2000 年に作成されました。彼は現在もプロジェクトの保守を担当しており、オープンソース コミュニティで無料のソフトウェア アップデートを提供しています。このガイドでは、HAProxy [HAProxy のリリースされたバージョン](http://www.haproxy.org/)参照してください。
+HAProxy は、Linux カーネルの中心的な貢献者である Willy Tarreau によって 2000 年に作成されました。彼は現在もプロジェクトの保守を担当しており、オープンソース コミュニティで無料のソフトウェア アップデートを提供しています。このガイドでは、HAProxy [2.6](https://www.haproxy.com/blog/announcing-haproxy-2-6/)が使用されます。最新の安定バージョンを使用することをお勧めします。詳細は[HAProxy のリリースされたバージョン](http://www.haproxy.org/)参照してください。
 
 ## 基本的な機能 {#basic-features}
 
@@ -36,12 +36,12 @@ HAProxy を展開する前に、ハードウェアとソフトウェアの要件
 
 サーバーについては、次のハードウェア要件を満たすことをお勧めします。負荷分散環境に応じてサーバーのスペックを向上させることもできます。
 
-| ハードウェアリソース        | 最小仕様         |
-| :---------------- | :----------- |
-| CPU               | 2コア、3.5GHz   |
-| メモリー              | 16ギガバイト      |
-| 保管所               | 50GB(SATA)   |
-| ネットワークインターフェースカード | 10Gネットワークカード |
+| ハードウェアリソース        | 最小仕様           |
+| :---------------- | :------------- |
+| CPU               | 2コア、3.5GHz     |
+| メモリー              | 16ギガバイト        |
+| 保管所               | 50GB(SATA)     |
+| ネットワークインターフェースカード | 10Gネットワ​​ークカード |
 
 ### ソフトウェア要件 {#software-requirements}
 
@@ -76,7 +76,7 @@ yum -y install epel-release gcc systemd-devel
 
 ## HAProxyのデプロイ {#deploy-haproxy}
 
-HAProxy を使用すると、負荷分散されたデータベース環境を簡単に構成およびセットアップできます。このセクションでは、一般的な展開操作について説明します。実際のシナリオに基づいて[設定ファイル](http://cbonte.github.io/haproxy-dconv/2.6/configuration.html)カスタマイズできます。
+HAProxy を使用すると、負荷分散されたデータベース環境を簡単に構成およびセットアップできます。このセクションでは、一般的な展開操作について説明します。実際のシナリオに基づいて[設定ファイル](http://cbonte.github.io/haproxy-dconv/2.6/configuration.html)をカスタマイズできます。
 
 ### HAProxy をインストールする {#install-haproxy}
 
@@ -137,7 +137,7 @@ haproxy --help
 | オプション                           | 説明                                                                                                                                                        |
 | :------------------------------ | :-------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `-v`                            | バージョンとビルド日を報告します。                                                                                                                                         |
-| `-vv`                           | バージョン、ビルド オプション、ライブラリのバージョン、使用可能なポーラーを表示します。                                                                                                              |
+| `-vv`                           | バージョン、ビルド オプション、ライブラリのバージョン、および使用可能なポーラーを表示します。                                                                                                           |
 | `-d`                            | デバッグモードを有効にします。                                                                                                                                           |
 | `-db`                           | バックグラウンドモードとマルチプロセスモードを無効にします。                                                                                                                            |
 | `-dM [<byte>]`                  | メモリポイズニングを強制します。つまり、malloc() または pool_alloc2() で割り当てられたすべてのメモリ領域は、呼び出し元に渡される前に`<byte>`で埋められます。                                                            |
@@ -163,7 +163,7 @@ haproxy --help
 | `-x <unix_socket>`              | 指定されたソケットに接続し、古いプロセスからリスニングしているすべてのソケットを取得します。その後、これらのソケットは新しいソケットをバインドする代わりに使用されます。                                                                      |
 | `-S <bind>[,<bind_options>...]` | マスター/ワーカー モードでは、マスター CLI を作成します。この CLI により、すべてのワーカーの CLI へのアクセスが可能になります。デバッグに便利で、終了プロセスにアクセスする便利な方法です。                                                    |
 
-HAProxy コマンド ライン オプションの詳細については、 [HAProxyの一般コマンドマニュアル](https://manpages.debian.org/buster-backports/haproxy/haproxy.1.en.html)を参照してください。
+HAProxy コマンド ライン オプションの詳細については、 [HAProxy管理ガイド](http://cbonte.github.io/haproxy-dconv/2.6/management.html)および[HAProxyの一般コマンドマニュアル](https://manpages.debian.org/buster-backports/haproxy/haproxy.1.en.html)を参照してください。
 
 ### HAProxy の構成 {#configure-haproxy}
 

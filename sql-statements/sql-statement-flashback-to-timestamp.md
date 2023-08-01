@@ -11,7 +11,7 @@ TiDB v6.4.0 では`FLASHBACK CLUSTER TO TIMESTAMP`構文が導入されていま
 
 > **警告：**
 >
-> `FLASHBACK CLUSTER TO TIMESTAMP`構文はTiDB Cloud [Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta)クラスターには適用されません。予期しない結果を避けるため、Serverless Tierクラスターではこのステートメントを実行しないでください。
+> `FLASHBACK CLUSTER TO TIMESTAMP`構文は[TiDB サーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless)クラスターには適用されません。予期しない結果を避けるため、TiDB サーバーレス クラスターではこのステートメントを実行しないでください。
 
 </CustomContent>
 
@@ -57,7 +57,7 @@ FlashbackToTimestampStmt ::=
 -   `FLASHBACK`ステートメントで指定された時点で、完全に実行されていない DDL ステートメントがあってはなりません。そのような DDL が存在する場合、TiDB はそれを拒否します。
 -   `FLASHBACK CLUSTER TO TIMESTAMP`を実行する前に、TiDB は関連するすべての接続を切断し、ステートメント`FLASHBACK CLUSTER`完了するまでこれらのテーブルに対する読み取りおよび書き込み操作を禁止します。
 -   `FLASHBACK CLUSTER TO TIMESTAMP`ステートメントは実行後にキャンセルできません。 TiDB は成功するまで再試行を続けます。
--   `FLASHBACK CLUSTER`の実行中にデータをバックアップする必要がある場合は、 [ログのバックアップ](/br/br-pitr-guide.md)を有効にすると失敗します。したがって、 `FLASHBACK CLUSTER`が完了した後でログのバックアップを有効にするようにしてください。
+-   `FLASHBACK CLUSTER`の実行中にデータをバックアップする必要がある場合は、 [復元する](/br/br-snapshot-guide.md)のみを使用し、 `FLASHBACK CLUSTER`の開始時刻よりも前の`BackupTS`を指定できます。さらに、 `FLASHBACK CLUSTER`の実行中に[ログのバックアップ](/br/br-pitr-guide.md)を有効にすると失敗します。したがって、 `FLASHBACK CLUSTER`が完了した後でログのバックアップを有効にするようにしてください。
 -   `FLASHBACK CLUSTER`ステートメントによってメタデータ (テーブル構造、データベース構造) のロールバックが発生した場合、関連する変更は TiCDC によってレプリケートされませ**ん**。したがって、タスクを手動で一時停止し、 `FLASHBACK CLUSTER`の完了を待ち、アップストリームとダウンストリームのスキーマ定義を手動でレプリケートして、一貫性があることを確認する必要があります。その後、TiCDC 変更フィードを再作成する必要があります。
 
 </CustomContent>

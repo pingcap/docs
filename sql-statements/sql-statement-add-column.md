@@ -5,7 +5,7 @@ summary: An overview of the usage of ADD COLUMN for the TiDB database.
 
 # 列の追加 {#add-column}
 
-`ALTER TABLE.. ADD COLUMN`ステートメントは、既存のテーブルに列を追加します。この操作は TiDB でオンラインです。つまり、テーブルへの読み取りも書き込みも列の追加によってブロックされません。
+`ALTER TABLE.. ADD COLUMN`ステートメントは、既存のテーブルに列を追加します。この操作は TiDB ではオンラインです。つまり、テーブルへの読み取りも書き込みも列の追加によってブロックされません。
 
 ## あらすじ {#synopsis}
 

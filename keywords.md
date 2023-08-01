@@ -612,7 +612,7 @@ TiDB のキーワードを次のリストに示します。予約されたキー
 -   SQL_BIG_RESULT(R)
 -   SQL_BUFFER_RESULT
 -   SQL_CACHE
--   SQL_CALC_FOUND_ROWS (R)
+-   SQL_CALC_FOUND_ROWS(R)
 -   SQL_NO_CACHE
 -   SQL_SMALL_RESULT (R)
 -   SQL_TSI_DAY

@@ -86,43 +86,9 @@ Warning: Unable to load '/usr/share/zoneinfo/zone.tab' as time zone. Skipping it
 Warning: Unable to load '/usr/share/zoneinfo/zone1970.tab' as time zone. Skipping it.
 ```
 
-ダウンストリームが特殊な MySQL 環境 (パブリック クラウド RDS または一部の MySQL 派生バージョン) であり、上記の方法を使用したタイム ゾーンのインポートが失敗する場合は、 `sink-uri` `time-zone`パラメーターを使用してダウンストリームの MySQL タイム ゾーンを指定する必要があります。まず、MySQL で使用されるタイム ゾーンをクエリできます。
+ダウンストリームが特別な MySQL 環境 (パブリック クラウド RDS または一部の MySQL 派生バージョン) であり、前述の方法を使用したタイム ゾーンのインポートが失敗した場合は、次のように`time-zone`を空の値に設定することで、ダウンストリームのデフォルトのタイム ゾーンを使用できます。 `time-zone=""` ．
 
-1.  MySQL で使用されるタイムゾーンをクエリします。
-
-    {{< copyable "" >}}
-
-    ```sql
-    show variables like '%time_zone%';
-    ```
-
-    ```
-    +------------------+--------+
-    | Variable_name    | Value  |
-    +------------------+--------+
-    | system_time_zone | CST    |
-    | time_zone        | SYSTEM |
-    +------------------+--------+
-    ```
-
-2.  レプリケーション タスクを作成し、TiCDC サービスを作成するときにタイム ゾーンを指定します。
-
-    {{< copyable "" >}}
-
-    ```shell
-    cdc cli changefeed create --sink-uri="mysql://root@127.0.0.1:3306/?time-zone=CST" --server=http://127.0.0.1:8300
-    ```
-
-    > **ノート：**
-    >
-    > CST は、次の 4 つの異なるタイム ゾーンの略語である場合があります。
-    >
-    > -   中部標準時 (米国) UT-6:00
-    > -   中部標準時 (オーストラリア) UT+9:30
-    > -   中国標準時 UT+8:00
-    > -   キューバ標準時 UT-4:00
-    >
-    > 中国では、CST は通常中国標準時を表します。
+TiCDC でタイム ゾーンを使用する場合は、 `time-zone="Asia/Shanghai"`などのタイム ゾーンを明示的に指定することをお勧めします。また、TiCDCサーバー構成で指定された`tz`とシンク URI で指定された`time-zone` 、ダウンストリーム データベースのタイム ゾーン構成と一致していることを確認してください。これにより、タイムゾーンの不一致によるデータの不整合が防止されます。
 
 ## TiCDC のアップグレードによって引き起こされる構成ファイルの非互換性の問題にはどのように対処すればよいですか? {#how-do-i-handle-the-incompatibility-issue-of-configuration-files-caused-by-ticdc-upgrade}
 

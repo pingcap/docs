@@ -143,4 +143,4 @@ TiFlashレプリカを読み取る上記の 3 つの方法では、エンジン�
 
 > **ノート：**
 >
-> v4.0.3 より前では、読み取り専用以外の SQL ステートメント ( `INSERT INTO ... SELECT` 、 `SELECT ... FOR UPDATE` 、 `UPDATE ...` 、 `DELETE ...`など) でTiFlashレプリカから読み取る動作は未定義です。 v4.0.3 以降のバージョンでは、データの正確性を保証するために、TiDB は内部的に読み取り専用以外の SQL ステートメントのTiFlashレプリカを無視します。つまり、 [手動ヒント](#manual-hint)の場合、TiDB はヒントを無視します。
+> v4.0.3 より前では、読み取り専用以外の SQL ステートメント ( `INSERT INTO ... SELECT` 、 `SELECT ... FOR UPDATE` 、 `UPDATE ...` 、 `DELETE ...`など) でTiFlashレプリカから読み取る動作は未定義です。 v4.0.3 以降のバージョンでは、データの正確性を保証するために、TiDB は内部的に読み取り専用以外の SQL ステートメントのTiFlashレプリカを無視します。つまり、 [賢い選択](#smart-selection)場合、TiDB は非TiFlashレプリカを自動的に選択します。 TiFlashレプリカ**のみ**を指定する[エンジンの隔離](#engine-isolation)の場合、TiDB はエラーを報告します。 [手動ヒント](#manual-hint)の場合、TiDB はヒントを無視します。

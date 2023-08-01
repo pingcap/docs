@@ -53,7 +53,16 @@ TINYTEXT [CHARACTER SET charset_name] [COLLATE collation_name]
 
 ### <code>MEDIUMTEXT</code>型 {#code-mediumtext-code-type}
 
-`MEDIUMTEXT`タイプは[TiDB の単一列の制限](/tidb-limitations.md#limitation-on-a-single-column)により、TiDB の単一列の最大storageサイズはデフォルトで 6 MiB ですが、構成を変更することで 120 MiB まで増やすことができます。
+<CustomContent platform="tidb">
+
+`MEDIUMTEXT`タイプは[`TEXT`タイプ](#text-type)と似ています。違いは、 `MEDIUMTEXT`の最大列長が 16,777,215 であることです。ただし、 [`txn-entry-size-limit`](/tidb-configuration-file.md#txn-entry-size-limit-new-in-v50)の制限により、TiDB の単一行の最大storageサイズはデフォルトで 6 MiB ですが、構成を変更することで 120 MiB まで増やすことができます。
+
+</CustomContent>
+<CustomContent platform="tidb-cloud">
+
+`MEDIUMTEXT`タイプは[`TEXT`タイプ](#text-type)と似ています。違いは、 `MEDIUMTEXT`の最大列長が 16,777,215 であることです。ただし、 [`txn-entry-size-limit`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#txn-entry-size-limit-new-in-v50)の制限により、TiDB の単一行の最大storageサイズはデフォルトで 6 MiB ですが、構成を変更することで 120 MiB まで増やすことができます。
+
+</CustomContent>
 
 ```sql
 MEDIUMTEXT [CHARACTER SET charset_name] [COLLATE collation_name]
@@ -61,7 +70,16 @@ MEDIUMTEXT [CHARACTER SET charset_name] [COLLATE collation_name]
 
 ### <code>LONGTEXT</code>型 {#code-longtext-code-type}
 
-`LONGTEXT`タイプは[TiDB の単一列の制限](/tidb-limitations.md#limitation-on-a-single-column)により、TiDB の単一列の最大storageサイズはデフォルトで 6 MiB ですが、構成を変更することで 120 MiB まで増やすことができます。
+<CustomContent platform="tidb">
+
+`LONGTEXT`タイプは[`TEXT`タイプ](#text-type)と似ています。違いは、 `LONGTEXT`の最大列長が 4,294,967,295 であることです。ただし、 [`txn-entry-size-limit`](/tidb-configuration-file.md#txn-entry-size-limit-new-in-v50)の制限により、TiDB の単一行の最大storageサイズはデフォルトで 6 MiB ですが、構成を変更することで 120 MiB まで増やすことができます。
+
+</CustomContent>
+<CustomContent platform="tidb-cloud">
+
+`LONGTEXT`タイプは[`TEXT`タイプ](#text-type)と似ています。違いは、 `LONGTEXT`の最大列長が 4,294,967,295 であることです。ただし、 [`txn-entry-size-limit`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#txn-entry-size-limit-new-in-v50)の制限により、TiDB の単一行の最大storageサイズはデフォルトで 6 MiB ですが、構成を変更することで 120 MiB まで増やすことができます。
+
+</CustomContent>
 
 ```sql
 LONGTEXT [CHARACTER SET charset_name] [COLLATE collation_name]
@@ -101,7 +119,16 @@ TINYBLOB
 
 ### <code>MEDIUMBLOB</code>タイプ {#code-mediumblob-code-type}
 
-`MEDIUMBLOB`タイプは[TiDB の単一列の制限](/tidb-limitations.md#limitation-on-a-single-column)により、TiDB の単一列の最大storageサイズはデフォルトで 6 MiB ですが、構成を変更することで 120 MiB まで増やすことができます。
+<CustomContent platform="tidb">
+
+`MEDIUMBLOB`タイプは[`BLOB`タイプ](#blob-type)と似ています。違いは、 `MEDIUMBLOB`の最大列長が 16,777,215 であることです。ただし、 [`txn-entry-size-limit`](/tidb-configuration-file.md#txn-entry-size-limit-new-in-v50)の制限により、TiDB の単一行の最大storageサイズはデフォルトで 6 MiB ですが、構成を変更することで 120 MiB まで増やすことができます。
+
+</CustomContent>
+<CustomContent platform="tidb-cloud">
+
+`MEDIUMBLOB`タイプは[`BLOB`タイプ](#blob-type)と似ています。違いは、 `MEDIUMBLOB`の最大列長が 16,777,215 であることです。ただし、 [`txn-entry-size-limit`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#txn-entry-size-limit-new-in-v50)の制限により、TiDB の単一行の最大storageサイズはデフォルトで 6 MiB ですが、構成を変更することで 120 MiB まで増やすことができます。
+
+</CustomContent>
 
 ```sql
 MEDIUMBLOB
@@ -109,7 +136,16 @@ MEDIUMBLOB
 
 ### <code>LONGBLOB</code>型 {#code-longblob-code-type}
 
-`LONGBLOB`タイプは[TiDB の単一列の制限](/tidb-limitations.md#limitation-on-a-single-column)により、TiDB の単一列の最大storageサイズはデフォルトで 6 MiB ですが、構成を変更することで 120 MiB まで増やすことができます。
+<CustomContent platform="tidb">
+
+`LONGBLOB`タイプは[`BLOB`タイプ](#blob-type)と似ています。違いは、 `LONGBLOB`の最大列長が 4,294,967,295 であることです。ただし、 [`txn-entry-size-limit`](/tidb-configuration-file.md#txn-entry-size-limit-new-in-v50)の制限により、TiDB の単一行の最大storageサイズはデフォルトで 6 MiB ですが、構成を変更することで 120 MiB まで増やすことができます。
+
+</CustomContent>
+<CustomContent platform="tidb-cloud">
+
+`LONGBLOB`タイプは[`BLOB`タイプ](#blob-type)と似ています。違いは、 `LONGBLOB`の最大列長が 4,294,967,295 であることです。ただし、 [`txn-entry-size-limit`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#txn-entry-size-limit-new-in-v50)の制限により、TiDB の単一行の最大storageサイズはデフォルトで 6 MiB ですが、構成を変更することで 120 MiB まで増やすことができます。
+
+</CustomContent>
 
 ```sql
 LONGBLOB

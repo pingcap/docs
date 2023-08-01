@@ -71,7 +71,7 @@ trim-last-separator = false
 
 *一重引用*符で囲まれた文字列 ( `'…'` ) を使用すると、バックスラッシュのエスケープを抑制できます。たとえば、 `terminator = '\n'` 、LF `\n`ではなく、バックスラッシュ ( `\` ) とその後に文字`n`が続いた 2 文字の文字列をターミネータとして使用することを意味します。
 
-詳細については、 [TOML v1.0.0 仕様](https://toml.io/en/v1.0.0#string)を参照してください。
+詳細については、 [TOML v1.0.0 仕様](https://toml.io/en/v1.0.0#string)参照してください。
 
 #### <code>separator</code> {#code-separator-code}
 
@@ -306,7 +306,7 @@ TiDB Lightning は現在、 Dumplingによってエクスポートされた圧�
 
 TiDB Lightning は、命名パターンに従ったデータ ファイルのみを認識します。場合によっては、データ ファイルが命名パターンに従っていない可能性があるため、ファイルをインポートせずにデータのインポートが短時間で完了します。
 
-この問題を解決するには、カスタマイズした式で`[[mydumper.files]]`を使用してデータ ファイルを照合します。
+この問題を解決するには、カスタマイズした式で`[[mydumper.files]]`​​を使用してデータ ファイルを照合します。
 
 S3 にエクスポートされたAuroraスナップショットを例に挙げます。 Parquet ファイルの完全なパスは`S3://some-bucket/some-subdir/some-database/some-database.some-table/part-00000-c5a881bb-58ff-4ee6-1111-b41ecff340a3-c000.gz.parquet`です。
 

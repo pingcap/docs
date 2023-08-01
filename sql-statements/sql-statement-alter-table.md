@@ -5,10 +5,10 @@ summary: An overview of the usage of ALTER TABLE for the TiDB database.
 
 # 他の机 {#alter-table}
 
-このステートメントは、新しいテーブル構造に適合するように既存のテーブルを変更します。ステートメント`ALTER TABLE`次の目的で使用できます。
+このステートメントは、新しいテーブル構造に適合するように既存のテーブルを変更します。ステートメント`ALTER TABLE`は次の目的で使用できます。
 
--   [`RENAME`](/sql-statements/sql-statement-rename-index.md)インデックス
--   [`CHANGE`](/sql-statements/sql-statement-change-column.md)列
+-   [`ADD`](/sql-statements/sql-statement-add-index.md) 、 [`DROP`](/sql-statements/sql-statement-drop-index.md) 、または[`RENAME`](/sql-statements/sql-statement-rename-index.md)インデックス
+-   [`ADD`](/sql-statements/sql-statement-add-column.md) 、 [`DROP`](/sql-statements/sql-statement-drop-column.md) 、 [`MODIFY`](/sql-statements/sql-statement-modify-column.md)または[`CHANGE`](/sql-statements/sql-statement-change-column.md)列
 -   [`COMPACT`](/sql-statements/sql-statement-alter-table-compact.md)テーブルデータ
 
 ## あらすじ {#synopsis}
@@ -185,11 +185,11 @@ TiDB の`ALTER TABLE`には、次の主要な制限が適用されます。
 
 -   `ALTER TABLE t CACHE | NOCACHE`は、MySQL 構文の TiDB 拡張機能です。詳細は[キャッシュされたテーブル](/cached-tables.md)を参照してください。
 
-さらなる制限については、 [MySQL の互換性](/mysql-compatibility.md#ddl)を参照してください。
+さらなる制限については、 [MySQL の互換性](/mysql-compatibility.md#ddl-operations)を参照してください。
 
 ## こちらも参照 {#see-also}
 
--   [MySQL の互換性](/mysql-compatibility.md#ddl)
+-   [MySQL の互換性](/mysql-compatibility.md#ddl-operations)
 -   [列の追加](/sql-statements/sql-statement-add-column.md)
 -   [ドロップカラム](/sql-statements/sql-statement-drop-column.md)
 -   [インデックスの追加](/sql-statements/sql-statement-add-index.md)

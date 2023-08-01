@@ -5,7 +5,7 @@ summary: Describes the storage URI format used in TiDB backup and restore.
 
 # バックアップストレージ {#backup-storages}
 
-TiDB は、Amazon S3、Google Cloud Storage (GCS)、Azure Blob Storage、NFS へのバックアップ データの保存をサポートしています。具体的には、 `br`のコマンドの`--storage`または`-s`パラメータにバックアップstorageのURIを指定できます。このドキュメントでは、さまざまな外部storageサービスの[サーバー側の暗号化](#server-side-encryption)を紹介します。
+TiDB は、Amazon S3、Google Cloud Storage (GCS)、Azure Blob Storage、NFS へのバックアップ データの保存をサポートしています。具体的には、 `br`のコマンドの`--storage`または`-s`パラメータにバックアップstorageのURIを指定できます。このドキュメントでは、さまざまな外部storageサービスの[URI形式](#uri-format)と[認証](#authentication) 、および[サーバー側の暗号化](#server-side-encryption)を紹介します。
 
 ## 資格情報を TiKV に送信する {#send-credentials-to-tikv}
 
@@ -21,7 +21,7 @@ TiDB は、Amazon S3、Google Cloud Storage (GCS)、Azure Blob Storage、NFS へ
 ./br backup full -c=0 -u pd-service:2379 --storage 's3://bucket-name/prefix'
 ```
 
-[`RESTORE`](/sql-statements/sql-statement-restore.md)ステートメントを使用してデータをバックアップまたは復元する場合は、 `SEND_CREDENTIALS_TO_TIKV = FALSE`オプションを追加できます。
+[`BACKUP`](/sql-statements/sql-statement-backup.md)および[`RESTORE`](/sql-statements/sql-statement-restore.md)ステートメントを使用してデータをバックアップまたは復元する場合は、 `SEND_CREDENTIALS_TO_TIKV = FALSE`オプションを追加できます。
 
 ```sql
 BACKUP DATABASE * TO 's3://bucket-name/prefix' SEND_CREDENTIALS_TO_TIKV = FALSE;
@@ -54,6 +54,8 @@ BACKUP DATABASE * TO 's3://bucket-name/prefix' SEND_CREDENTIALS_TO_TIKV = FALSE;
     -   `sse` : アップロードされたオブジェクトの暗号化に使用されるサーバー側の暗号化アルゴリズムを指定します (値のオプション: ``、 `AES256` 、または`aws:kms` )。
     -   `sse-kms-key-id` : `sse`が`aws:kms`に設定されている場合、KMS ID を指定します。
     -   `acl` : アップロードされたオブジェクトの既定の ACL を指定します (たとえば、 `private`または`authenticated-read` )。
+    -   `role-arn` : 指定された[IAMの役割](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html)使用してサードパーティの Amazon S3 データにアクセスする必要がある場合、 `role-arn` URL クエリ パラメーター ( `arn:aws:iam::888888888888:role/my-role`など) を使用してIAMロールの対応する[Amazon リソースネーム (ARN)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)指定できます。 IAMロールを使用してサードパーティから Amazon S3 データにアクセスする方法の詳細については、 [AWS ドキュメント](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_common-scenarios_third-party.html)を参照してください。
+    -   `external-id` : サードパーティから Amazon S3 データにアクセスする場合、 [IAMの役割](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html)想定するには正しい[外部ID](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user_externalid.html)を指定する必要がある場合があります。この場合、この`external-id` URL クエリ パラメーターを使用して外部 ID を指定し、 IAMロールを確実に引き受けることができます。外部 ID は、Amazon S3 データにアクセスするためにIAMロール ARN とともにサードパーティによって提供される任意の文字列です。 IAMロールを引き受ける場合、外部 ID の指定はオプションです。つまり、サードパーティがIAMロールに外部 ID を必要としない場合は、このパラメータを指定せずにIAMロールを引き受けて、対応する Amazon S3 データにアクセスできます。
 
 </div>
 <div label="GCS" value="gcs">
@@ -90,7 +92,7 @@ BACKUP DATABASE * TO 's3://bucket-name/prefix' SEND_CREDENTIALS_TO_TIKV = FALSE;
 **スナップショット データを Amazon S3 にバックアップする**
 
 ```shell
-./br restore full -u "${PD_IP}:2379" \
+./br backup full -u "${PD_IP}:2379" \
 --storage "s3://external/backup-20220915?access-key=${access-key}&secret-access-key=${secret-access-key}"
 ```
 
@@ -150,7 +152,7 @@ BACKUP DATABASE * TO 's3://bucket-name/prefix' SEND_CREDENTIALS_TO_TIKV = FALSE;
 -   バックアップ中にバックアップ ディレクトリにアクセスするための TiKV およびバックアップ &amp; リストア ( BR ) の最小権限: `s3:ListBucket` 、 `s3:PutObject` 、および`s3:AbortMultipartUpload`
 -   TiKV およびBR が復元中にバックアップ ディレクトリにアクセスするための最小権限: `s3:ListBucket` 、 `s3:GetObject` 、および`s3:PutObject` 。 BR は、チェックポイント情報をバックアップ ディレクトリの下の`./checkpoints`サブディレクトリに書き込みます。ログ バックアップ データを復元するとき、 BR は復元されたクラスターのテーブル ID マッピング関係をバックアップ ディレクトリの下の`./pitr_id_maps`サブディレクトリに書き込みます。
 
-バックアップ ディレクトリをまだ作成していない場合は、 [フォルダーを作成する](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-folders.html)を参照してバケット内にフォルダーを作成することもできます。
+バックアップ ディレクトリをまだ作成していない場合は、 [バケットを作成する](https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-bucket-overview.html)を参照して、指定したリージョンに S3 バケットを作成します。必要に応じて、 [フォルダーを作成する](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-folders.html)を参照してバケット内にフォルダーを作成することもできます。
 
 次のいずれかの方法を使用して S3 へのアクセスを構成することをお勧めします。
 

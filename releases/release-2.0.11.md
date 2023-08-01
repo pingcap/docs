@@ -16,4 +16,4 @@ title: TiDB 2.0.11 Release Notes
 
 ## TiKV {#tikv}
 
--   リージョンのマージ[#4004](https://github.com/tikv/tikv/pull/4004)に関する 2 つの問題を修正
+-   リージョンのマージ[#4003](https://github.com/tikv/tikv/pull/4003) 、 [#4004](https://github.com/tikv/tikv/pull/4004)に関する 2 つの問題を修正

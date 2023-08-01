@@ -46,7 +46,7 @@ hide_commit: true
 
 <LearningPath label="Deploy" icon="deploy">
 
-[ソフトウェアとハードウェアの要件](https://docs.pingcap.com/tidb/v7.1/hardware-and-software-requirements)
+[ソフトウェアとハ​​ードウェアの要件](https://docs.pingcap.com/tidb/v7.1/hardware-and-software-requirements)
 
 [TiUPを使用した TiDBクラスタのデプロイ](https://docs.pingcap.com/tidb/v7.1/production-deployment-using-tiup)
 

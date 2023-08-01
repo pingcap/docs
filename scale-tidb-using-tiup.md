@@ -275,7 +275,7 @@ TiDB クラスターの容量は、オンライン サービスを中断する�
     ```
     Starting /root/.tiup/components/cluster/v1.11.3/cluster display <cluster-name>
     TiDB Cluster: <cluster-name>
-    TiDB Version: v7.1.0
+    TiDB Version: v7.1.1
     ID              Role         Host        Ports                            Status  Data Dir                Deploy Dir
     --              ----         ----        -----                            ------  --------                ----------
     10.0.1.3:8300   cdc          10.0.1.3    8300                             Up      data/cdc-8300           deploy/cdc-8300
@@ -342,7 +342,7 @@ TiDB クラスターの容量は、オンライン サービスを中断する�
     SELECT * FROM information_schema.tiflash_replica WHERE REPLICA_COUNT >  'tobe_left_nodes';
     ```
 
-2.  スケールイン後、 TiFlashノードの数を超えるTiFlashレプリカを持つすべてのテーブルに対して次のステートメントを実行します。 `new_replica_num` `tobe_left_nodes`以下でなければなりません。
+2.  スケールイン後に、 TiFlashノードの数を超えるTiFlashレプリカを持つすべてのテーブルに対して次のステートメントを実行します。 `new_replica_num` `tobe_left_nodes`以下でなければなりません。
 
     ```sql
     ALTER TABLE <db-name>.<table-name> SET tiflash replica 'new_replica_num';

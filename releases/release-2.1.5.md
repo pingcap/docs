@@ -11,13 +11,13 @@ title: TiDB 2.1.5 Release Notes
 -   SQL オプティマイザー/エグゼキューター
     -   `SHOW CREATE TABLE`のカラムの文字セット情報がテーブルの文字セット情報と同じである場合、カラムの文字セット情報を出力しないようにして、 `SHOW CREATE TABLE`と MySQL [#9306](https://github.com/pingcap/tidb/pull/9306)の互換性を向上させます。
     -   `Sort` [#9319](https://github.com/pingcap/tidb/pull/9319)の計算panicを簡素化するために、 `Sort`から`ScalarFunc`抽出して`Projection`演算子として計算することにより、場合によっては`Sort`演算子のパニックや誤った結果が修正されました。
-    -   `Sort`演算子[#9440](https://github.com/pingcap/tidb/pull/9440)の定数値を含む並べ替えフィールドを削除します。
+    -   `Sort`演算子[#9335](https://github.com/pingcap/tidb/pull/9335) 、 [#9440](https://github.com/pingcap/tidb/pull/9440)の定数値を含む並べ替えフィールドを削除します。
     -   符号なし整数列[#9339](https://github.com/pingcap/tidb/pull/9339)にデータを挿入するときのデータ オーバーフローの問題を修正します。
     -   対象バイナリの長さが`max_allowed_packet` [#9349](https://github.com/pingcap/tidb/pull/9349)を超える場合は`cast_as_binary` ～ `NULL`を設定します。
     -   `IF`と`IFNULL`の定数折り込みプロセスを最適化する[#9351](https://github.com/pingcap/tidb/pull/9351)
     -   スカイライン プルーニングを使用して TiDB のインデックス選択を最適化し、単純なクエリの安定性を向上させます[#9356](https://github.com/pingcap/tidb/pull/9356)
     -   `DNF`式[#9405](https://github.com/pingcap/tidb/pull/9405)の選択性の計算をサポートします。
-    -   場合によっては`!=ANY()`と`=ALL()`の間違った SQL クエリ結果を修正[#9403](https://github.com/pingcap/tidb/pull/9403)
+    -   場合によっては`!=ANY()`と`=ALL()`の間違った SQL クエリ結果を修正します[#9403](https://github.com/pingcap/tidb/pull/9403)
     -   `Merge Join`操作が実行される 2 つのテーブルの結合キーの種類が異なる場合にpanicまたは間違った結果が発生する問題を修正[#9438](https://github.com/pingcap/tidb/pull/9438)
     -   `RAND()`関数の結果が MySQL [#9446](https://github.com/pingcap/tidb/pull/9446)と互換性がない問題を修正
     -   `Semi Join`処理`NULL`と空の結果セットのロジックをリファクタリングして正しい結果を取得し、MySQL [#9449](https://github.com/pingcap/tidb/pull/9449)との互換性を向上させます。

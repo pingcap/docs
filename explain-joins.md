@@ -169,11 +169,11 @@ EXPLAIN ANALYZE SELECT * FROM t1 INNER JOIN t2 ON t1.id = t2.t1_id WHERE t1.int_
 
 > **ノート：**
 >
-> 上記の例では、SQL オプティマイザーはインデックス結合よりもパフォーマンスの悪いハッシュ結合プランを選択します。クエリの最適化は[SQL計画管理](/sql-plan-management.md)使用してヒントをクエリにバインドすることをお勧めします。これは、アプリケーションが TiDB に送信するクエリにヒントを挿入するよりも管理が簡単です。
+> 上記の例では、SQL オプティマイザーはインデックス結合よりもパフォーマンスの悪いハッシュ結合プランを選択します。クエリの最適化は[NP完全問題](https://en.wikipedia.org/wiki/NP-completeness)であり、最適とはいえないプランが選択される可能性があります。これが頻繁なクエリの場合は、 [SQL計画管理](/sql-plan-management.md)使用してヒントをクエリにバインドすることをお勧めします。これは、アプリケーションが TiDB に送信するクエリにヒントを挿入するよりも管理が簡単です。
 
 ### インデックス結合のバリエーション {#variations-of-index-join}
 
-ヒント[`INL_HASH_JOIN`](/optimizer-hints.md#inl_hash_join)を使用した外部テーブルでのハッシュ テーブルの作成もサポートしています。これらのインデックス結合の各バリエーションは、SQL オプティマイザーによって自動的に選択されます。
+ヒント[`INL_JOIN`](/optimizer-hints.md#inl_joint1_name--tl_name-)を使用したインデックス結合操作では、外部表に結合する前に中間結果のハッシュ テーブルが作成されます。 TiDB は、ヒント[`INL_HASH_JOIN`](/optimizer-hints.md#inl_hash_join)を使用した外部テーブルでのハッシュ テーブルの作成もサポートしています。これらのインデックス結合の各バリエーションは、SQL オプティマイザーによって自動的に選択されます。
 
 ### コンフィグレーション {#configuration}
 
@@ -219,7 +219,7 @@ EXPLAIN SELECT /*+ HASH_JOIN(t1, t2) */ * FROM t1, t2 WHERE t1.id = t2.id;
 
 ### 実行時の統計 {#runtime-statistics}
 
-[`tidb_enable_tmp_storage_on_oom`](/system-variables.md#tidb_enable_tmp_storage_on_oom)値が`ON` (デフォルト) の場合、TiDB は一時storageの使用を試み、ディスク上に`Build`演算子 (ハッシュ結合の一部として使用) を作成する可能性があります。メモリ使用量などの実行時の統計は、 `EXPLAIN ANALYZE`中`execution info`の結果テーブルに記録されます。次の例は、 1 GB (デフォルト) と`tidb_mem_quota_query`の 500 MB クォータを備えた`EXPLAIN ANALYZE`の出力を示しています。 500 MB では、ディスクが一時storageとして使用されます。
+[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query) (デフォルト値: 1 GB) を超え、 [`tidb_enable_tmp_storage_on_oom`](/system-variables.md#tidb_enable_tmp_storage_on_oom)値が`ON` (デフォルト) の場合、TiDB は一時storageの使用を試み、ディスク上に`Build`演算子 (ハッシュ結合の一部として使用) を作成する可能性があります。メモリ使用量などの実行時の統計は、 `EXPLAIN ANALYZE`中`execution info`の結果テーブルに記録されます。次の例は、 1 GB (デフォルト) と`tidb_mem_quota_query`の 500 MB クォータを備えた`EXPLAIN ANALYZE`の出力を示しています。 500 MB では、ディスクが一時storageとして使用されます。
 
 ```sql
 EXPLAIN ANALYZE SELECT /*+ HASH_JOIN(t1, t2) */ * FROM t1, t2 WHERE t1.id = t2.id;

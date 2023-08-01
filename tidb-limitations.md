@@ -20,7 +20,7 @@ summary: Learn the usage limitations of TiDB.
 
 ## データベース、テーブル、ビュー、接続の合計数の制限 {#limitations-on-the-total-number-of-databases-tables-views-and-connections}
 
-| 識別子の種類 | 最大数 |
+| タイプ    | 最大数 |
 | :----- | :-- |
 | データベース | 無制限 |
 | テーブル   | 無制限 |
@@ -51,18 +51,6 @@ summary: Learn the usage limitations of TiDB.
 </CustomContent>
 
 ## 単一行の制限 {#limitation-on-a-single-row}
-
-| タイプ | 上限値（デフォルト値）                      |
-| :-- | :------------------------------- |
-| サイズ | デフォルトは 6 MiB ですが、120 MiB に調整可能です |
-
-<CustomContent platform="tidb">
-
-[`txn-entry-size-limit`](/tidb-configuration-file.md#txn-entry-size-limit-new-in-v50)設定項目でサイズ制限を調整できます。
-
-</CustomContent>
-
-## 単一列の制限 {#limitation-on-a-single-column}
 
 | タイプ | 上限値（デフォルト値）                      |
 | :-- | :------------------------------- |

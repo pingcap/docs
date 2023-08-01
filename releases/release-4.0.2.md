@@ -23,7 +23,7 @@ TiDB バージョン: 4.0.2
 
 ## 新しい変化 {#new-change}
 
--   デフォルトでは、TiDB と TiDB ダッシュボードは使用状況の詳細を PingCAP と共有し、製品の改善方法を理解するのに役立ちます[テレメトリー](/telemetry.md)を参照してください。
+-   デフォルトでは、TiDB と TiDB ダッシュボードは使用状況の詳細を PingCAP と共有し、製品の改善方法を理解するのに役立ちます[#18180](https://github.com/pingcap/tidb/pull/18180) 。共有内容と共有を無効にする方法については、 [テレメトリー](/telemetry.md)を参照してください。
 
 ## 新機能 {#new-features}
 
@@ -34,13 +34,13 @@ TiDB バージョン: 4.0.2
     -   `REGEXP()`関数[#17581](https://github.com/pingcap/tidb/pull/17581)の照合順序のサポート
     -   `sql_select_limit`セッションとグローバル変数[#17604](https://github.com/pingcap/tidb/pull/17604)をサポート
     -   新しく追加されたパーティションのリージョン分割をデフォルトでサポートします[#17665](https://github.com/pingcap/tidb/pull/17665)
-    -   `IF()` / `BITXOR()` / `BITNEG()` / `JSON_LENGTH()`関数のTiFlashコプロセッサーへのプッシュをサポート[#17592](https://github.com/pingcap/tidb/pull/17592)
+    -   `IF()` / `BITXOR()` / `BITNEG()` / `JSON_LENGTH()`関数のTiFlashコプロセッサーへのプッシュをサポート[#17651](https://github.com/pingcap/tidb/pull/17651) [#17592](https://github.com/pingcap/tidb/pull/17592)
     -   `COUNT(DISTINCT)` [#18120](https://github.com/pingcap/tidb/pull/18120)の近似結果を計算するための新しい集計関数`APPROX_COUNT_DISTINCT()`サポートします。
     -   TiFlashでの照合順序をサポートし、照合関連の関数をTiFlash [#17705](https://github.com/pingcap/tidb/pull/17705)にプッシュ
     -   サーバー[#17695](https://github.com/pingcap/tidb/pull/17695)のステータス アドレスを示すために、テーブル`INFORMATION_SCHEMA.INSPECTION_RESULT`に`STATUS_ADDRESS`列を追加します。
     -   `MYSQL.BIND_INFO`テーブルに`SOURCE`列を追加して、バインディングの作成方法を示します[#17587](https://github.com/pingcap/tidb/pull/17587)
     -   `PERFORMANCE_SCHEMA.EVENTS_STATEMENTS_SUMMARY_BY_DIGEST`テーブルに`PLAN_IN_CACHE`と`PLAN_CACHE_HITS`列を追加して、SQL ステートメントのプラン キャッシュの使用量を示します[#17493](https://github.com/pingcap/tidb/pull/17493)
-    -   各オペレーターの実行情報を収集し、スロークエリログに情報を記録するかどうかを制御するための`enable-collect-execution-info`構成アイテムと`tidb_enable_collect_execution_info`セッション変数を追加します[#18072](https://github.com/pingcap/tidb/pull/18072)
+    -   各オペレーターの実行情報を収集し、スロークエリログに情報を記録するかどうかを制御するための`enable-collect-execution-info`構成アイテムと`tidb_enable_collect_execution_info`セッション変数を追加します[#18073](https://github.com/pingcap/tidb/pull/18073) [#18072](https://github.com/pingcap/tidb/pull/18072)
     -   `tidb_slow_log_masking`グローバル変数を追加して、低速クエリ ログ[#17694](https://github.com/pingcap/tidb/pull/17694)のクエリを鈍感にするかどうかを制御します。
     -   `INFORMATION_SCHEMA.INSPECTION_RESULT`テーブルに`storage.block-cache.capacity` TiKV 構成項目[#17671](https://github.com/pingcap/tidb/pull/17671)の診断ルールを追加します。
     -   データをバックアップおよび復元するために`BACKUP`および`RESTORE` SQL ステートメントを追加します[#15274](https://github.com/pingcap/tidb/pull/15274)
@@ -103,7 +103,7 @@ TiDB バージョン: 4.0.2
     -   `tidb_isolation_read_engines`を変更した後、プラン キャッシュから取得された実行プランが正しくなくなる問題を修正[#17570](https://github.com/pingcap/tidb/pull/17570)
     -   `EXPLAIN FOR CONNECTION`ステートメント[#18124](https://github.com/pingcap/tidb/pull/18124)の実行時に時折発生するランタイム エラーを修正しました。
     -   場合によっては`last_plan_from_cache`セッション変数の誤った結果が修正される[#18111](https://github.com/pingcap/tidb/pull/18111)
-    -   プラン キャッシュ[#17673](https://github.com/pingcap/tidb/pull/17673)から`UNIX_TIMESTAMP()`関数を実行するときに発生するランタイム エラーを修正します。
+    -   プラン キャッシュ[#18002](https://github.com/pingcap/tidb/pull/18002) [#17673](https://github.com/pingcap/tidb/pull/17673)から`UNIX_TIMESTAMP()`関数を実行するときに発生するランタイム エラーを修正します。
     -   `HashJoin`エグゼキューターの子が`NULL`列[#17937](https://github.com/pingcap/tidb/pull/17937)を返すときのランタイム エラーを修正しました。
     -   同じデータベース[#17659](https://github.com/pingcap/tidb/pull/17659)内で`DROP DATABASE`ステートメントと他の DDL ステートメントを同時に実行することによって発生するランタイム エラーを修正します。
     -   ユーザー変数[#17890](https://github.com/pingcap/tidb/pull/17890)に対する関数`COERCIBILITY()`の誤った結果を修正しました。

@@ -131,7 +131,7 @@ TiDB バージョン: 4.0.0-rc.2
     -   悲観的トランザクションモード[#16897](https://github.com/pingcap/tidb/pull/16897)のスローログに`SELECT FOR UPDATE`ステートメントが記録できない問題を修正
     -   `Enum`または`Set`タイプ[#16892](https://github.com/pingcap/tidb/pull/16892)の列に対して`SELECT DISTINCT`実行したときに発生する間違った結果を修正しました。
     -   `SHOW CREATE TABLE`ステートメント[#16864](https://github.com/pingcap/tidb/pull/16864)の`auto_random_base`の表示エラーを修正
-    -   `WHERE`節[#16559](https://github.com/pingcap/tidb/pull/16559)の誤った値`string_value`修正します。
+    -   `WHERE`節[#16559](https://github.com/pingcap/tidb/pull/16559)の誤った値`string_value`を修正します。
     -   `GROUP BY` window関数のエラーメッセージがMySQL [#16165](https://github.com/pingcap/tidb/pull/16165)のエラーメッセージと一致しない問題を修正
     -   データベース名に大文字の[#17167](https://github.com/pingcap/tidb/pull/17167)が含まれる場合、 `FLASH TABLE`ステートメントの実行が失敗する問題を修正します。
     -   Projection Executor [#17118](https://github.com/pingcap/tidb/pull/17118)の不正確なメモリトレースを修正しました。
@@ -158,7 +158,7 @@ TiDB バージョン: 4.0.0-rc.2
     -   無効な日付が格納されている場合に SQL ステートメントの実行が失敗する問題を修正します[#7268](https://github.com/tikv/tikv/pull/7268)
     -   [#7739](https://github.com/tikv/tikv/pull/7739)からバックアップデータを復元できない問題を修正
     -   保存時の暗号化中に KMS キー ID が検証されない問題を修正[#7719](https://github.com/tikv/tikv/pull/7719)
-    -   異なるアーキテクチャのコンパイラーにおけるコプロセッサーの根本的な正確性の問題を修正します[#7730](https://github.com/tikv/tikv/pull/7730)
+    -   異なるアーキテクチャのコンパイラーにおけるコプロセッサーの根本的な正確性の問題を修正します[#7714](https://github.com/tikv/tikv/pull/7714) [#7730](https://github.com/tikv/tikv/pull/7730)
     -   暗号化が有効な場合の`snapshot ingestion`エラーを修正[#7815](https://github.com/tikv/tikv/pull/7815)
     -   `Invalid cross-device link`設定ファイル書き換え時のエラーを修正[#7817](https://github.com/tikv/tikv/pull/7817)
     -   設定ファイルを空のファイルに書き込むときに間違った toml 形式が発生する問題を修正します[#7817](https://github.com/tikv/tikv/pull/7817)

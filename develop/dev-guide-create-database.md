@@ -11,7 +11,7 @@ summary: Learn steps, rules, and examples to create a database.
 
 データベースを作成する前に、次の手順を実行します。
 
--   [TiDB Cloud(Serverless Tier) で TiDBクラスタを構築する](/develop/dev-guide-build-cluster-in-cloud.md) 。
+-   [TiDB サーバーレスクラスタを構築する](/develop/dev-guide-build-cluster-in-cloud.md) 。
 -   [スキーマ設計の概要](/develop/dev-guide-schema-design-overview.md)を読みます。
 
 ## データベースとは {#what-is-database}

@@ -1,6 +1,6 @@
 # TiDB ドキュメント貢献ガイド {#tidb-documentation-contributing-guide}
 
-[TiDB コミュニティ](https://github.com/pingcap/community/)に参加してくれることを楽しみにしています。
+[TiDB](https://github.com/pingcap/tidb)ドキュメントへようこそ!私たちは、あなたが[TiDB コミュニティ](https://github.com/pingcap/community/)に参加してくれることを楽しみにしています。
 
 ## あなたが貢献できること {#what-you-can-contribute}
 

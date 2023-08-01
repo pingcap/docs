@@ -8,7 +8,7 @@ title: TiDB 5.1.5 Release Notes
 
 TiDB バージョン: 5.1.5
 
-クイックアクセス: [インストールパッケージ](https://www.pingcap.com/download/?version=v5.1.5#version-list)
+クイックアクセス: [クイックスタート](https://docs.pingcap.com/tidb/v5.1/quick-start-with-tidb) | [本番展開](https://docs.pingcap.com/tidb/v5.1/production-deployment-using-tiup) | [インストールパッケージ](https://www.pingcap.com/download/?version=v5.1.5#version-list)
 
 ## 互換性の変更 {#compatibility-changes}
 

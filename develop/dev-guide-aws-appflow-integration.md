@@ -5,11 +5,11 @@ summary: Introduce how to integrate TiDB with Amazon AppFlow step by step.
 
 # TiDB と Amazon AppFlow を統合する {#integrate-tidb-with-amazon-appflow}
 
-[サポートされているソースおよび宛先アプリケーション](https://docs.aws.amazon.com/appflow/latest/userguide/app-specific.html)参照してください。
+[Amazon アプリフロー](https://aws.amazon.com/appflow/)は、Software as a Service (SaaS) アプリケーションを AWS サービスに接続し、データを安全に転送するために使用するフルマネージド API 統合サービスです。 Amazon AppFlow を使用すると、TiDB との間で、Salesforce、Amazon S3、LinkedIn、GitHub などのさまざまなタイプのデータプロバイダーにデータをインポートおよびエクスポートできます。詳細については、AWS ドキュメントの[サポートされているソースおよび宛先アプリケーション](https://docs.aws.amazon.com/appflow/latest/userguide/app-specific.html)参照してください。
 
-このドキュメントでは、TiDB を Amazon AppFlow と統合する方法について説明し、例としてTiDB CloudServerless Tierクラスターの統合を取り上げます。
+このドキュメントでは、TiDB を Amazon AppFlow と統合する方法について説明し、例として TiDB サーバーレスクラスターの統合を取り上げます。
 
-TiDB クラスターがない場合は、 [Serverless Tier](https://tidbcloud.com/console/clusters)クラスターを作成できます。これは無料で、約 30 秒で作成できます。
+TiDB クラスターがない場合は、 [TiDB サーバーレス](https://tidbcloud.com/console/clusters)クラスターを作成できます。これは無料で、約 30 秒で作成できます。
 
 ## 前提条件 {#prerequisites}
 
@@ -71,7 +71,7 @@ git clone https://github.com/pingcap-inc/tidb-appflow-integration
     >
     > -   `--guided`オプションでは、プロンプトを使用して展開をガイドします。入力は構成ファイルに保存されます。デフォルトでは`samconfig.toml`です。
     > -   `stack_name`デプロイする AWS Lambda の名前を指定します。
-    > -   このプロンプト ガイドでは、 TiDB CloudServerless Tierのクラウド プロバイダーとして AWS を使用します。 Amazon S3 を送信元または宛先として使用するには、AWS Lambda の`region`を Amazon S3 の 1 と同じに設定する必要があります。
+    > -   このプロンプト ガイドでは、TiDB サーバーレスのクラウド プロバイダーとして AWS を使用します。 Amazon S3 を送信元または宛先として使用するには、AWS Lambda の`region`を Amazon S3 の 1 と同じに設定する必要があります。
     > -   すでに`sam deploy --guided`を実行している場合は、代わりに`sam deploy`実行するだけで済みます。SAM CLI は構成ファイル`samconfig.toml`を使用して対話を簡素化します。
 
     次のような出力が表示された場合、この Lambda は正常にデプロイされています。
@@ -86,7 +86,7 @@ git clone https://github.com/pingcap-inc/tidb-appflow-integration
 
 ### Lambda を使用してコネクタを登録する {#use-lambda-to-register-a-connector}
 
-1.  [Amazon AppFlow &gt; コネクタ](https://console.aws.amazon.com/appflow/home#/gallery)に移動し、 **[新しいコネクタの登録]**をクリックします。
+1.  [AWS マネジメントコンソール](https://console.aws.amazon.com)で、 [Amazon AppFlow &gt; コネクタ](https://console.aws.amazon.com/appflow/home#/gallery)に移動し、 **[新しいコネクタの登録]**をクリックします。
 
     ![register connector](/media/develop/aws-appflow-step-register-connector.png)
 
@@ -154,7 +154,7 @@ git clone https://github.com/pingcap-inc/tidb-appflow-integration
 
 5.  `sf_account`テーブルが作成されたら、 **「接続」**をクリックします。接続ダイアログが表示されます。
 
-6.  **[TiDB コネクタに接続]**ダイアログで、TiDB クラスターの接続プロパティを入力します。 TiDB CloudServerless Tierクラスターを使用する場合は、 **TLS**オプションを`Yes`に設定する必要があります。これにより、TiDB コネクタが TLS 接続を使用できるようになります。次に、 **「接続」を**クリックします。
+6.  **[TiDB コネクタに接続]**ダイアログで、TiDB クラスターの接続プロパティを入力します。 TiDB サーバーレス クラスターを使用する場合は、 **TLS**オプションを`Yes`に設定する必要があります。これにより、TiDB コネクタが TLS 接続を使用できるようになります。次に、 **「接続」を**クリックします。
 
     ![tidb connection message](/media/develop/aws-appflow-step-tidb-connection-message.png)
 
@@ -250,5 +250,5 @@ test> SELECT * FROM sf_account;
 
 -   何か問題が発生した場合は、AWS マネジメント コンソールの[クラウドウォッチ](https://console.aws.amazon.com/cloudwatch/home)ページに移動してログを取得できます。
 -   このドキュメントの手順は[Amazon AppFlow カスタムコネクタ SDK を使用したカスタムコネクタの構築](https://aws.amazon.com/blogs/compute/building-custom-connectors-using-the-amazon-appflow-custom-connector-sdk/)に基づいています。
--   [TiDB CloudServerless Tier](https://docs.pingcap.com/tidbcloud/select-cluster-tier#serverless-tier-beta)本番環境**ではありません**。
+-   [TiDB サーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless)本番環境**ではありません**。
 -   長すぎるのを防ぐために、このドキュメントの例では`Insert`戦略のみを示していますが、 `Update`と`Upsert`戦略もテストされており、使用できます。

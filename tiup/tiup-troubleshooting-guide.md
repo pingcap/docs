@@ -27,7 +27,7 @@ CDNサーバーのキャッシュ時間が短いため、新しいチェック�
 
 ## TiUPクラスターコンポーネントのトラブルシューティング {#troubleshoot-tiup-cluster-component}
 
-### <code>unable to authenticate, attempted methods [none publickey]</code>展開中にプロンプト表示される {#code-unable-to-authenticate-attempted-methods-none-publickey-code-is-prompted-during-deployment}
+### <code>unable to authenticate, attempted methods [none publickey]</code>展開中にプロンプ​​ト表示される {#code-unable-to-authenticate-attempted-methods-none-publickey-code-is-prompted-during-deployment}
 
 展開中に、コンポーネントパッケージがリモート ホストにアップロードされ、初期化が実行されます。このプロセスでは、リモート ホストに接続する必要があります。このエラーは、リモート ホストに接続するための SSH 秘密キーが見つからないことが原因で発生します。
 
@@ -49,7 +49,7 @@ CDNサーバーのキャッシュ時間が短いため、新しいチェック�
 
 ローリング再起動中にアップグレードが中断された場合は、 `tiup cluster upgrade`操作を繰り返す代わりに、 `tiup cluster restart -N <node1> -N <node2>`使用して、再起動が完了していないノードを再起動できます。
 
-同じコンポーネントの再起動されていないノードの数が比較的多い場合は、 `tiup cluster restart -R <component>`を実行して特定のタイプのコンポーネントを再起動することもできます。
+同じコンポーネントの再起動されていないノードの数が比較的多い場合は、 `tiup cluster restart -R <component>`を実行して特定の種類のコンポーネントを再起動することもできます。
 
 ### アップグレード中に、 <code>node_exporter-9100.service/blackbox_exporter-9115.service</code>が存在しないことがわかります。 {#during-the-upgrade-you-find-that-code-node-exporter-9100-service-blackbox-exporter-9115-service-code-does-not-exist}
 

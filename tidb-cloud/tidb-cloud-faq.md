@@ -19,13 +19,13 @@ TiDB Cloud を使用すると、ほとんどまたはまったくトレーニン
 
 ### TiDB とTiDB Cloudの関係は何ですか? {#what-is-the-relationship-between-tidb-and-tidb-cloud}
 
-TiDB はオープンソース データベースであり、TiDB を自社のデータ センター、自己管理型のクラウド環境、またはその 2 つのハイブリッド環境でオンプレミスで実行したい組織にとって最適なオプションです。
+TiDB はオープンソース データベースであり、TiDB セルフホスト型を自社のデータ センター、自己管理型のクラウド環境、またはその 2 つのハイブリッドで実行したい組織にとって最適なオプションです。
 
 TiDB Cloud は、TiDB のサービスとしてのフルマネージド クラウド データベースです。使いやすい Web ベースの管理コンソールを備えており、ミッションクリティカルな本番環境の TiDB クラスターを管理できます。
 
 ### TiDB Cloud はMySQL と互換性がありますか? {#is-tidb-cloud-compatible-with-mysql}
 
-現在、 TiDB Cloud は、トリガー、ストアド プロシージャ、およびユーザー定義関数を除く、 MySQL 5.7構文の大部分をサポートしています。詳細については、 [MySQLとの互換性](https://docs.pingcap.com/tidb/stable/mysql-compatibility)を参照してください。
+現在、 TiDB Cloud は、トリガー、ストアド プロシージャ、ユーザー定義関数、外部キーを除く、 MySQL 5.7構文の大部分をサポートしています。詳細については、 [MySQLとの互換性](https://docs.pingcap.com/tidb/stable/mysql-compatibility)を参照してください。
 
 ### TiDB Cloudを操作するにはどのようなプログラミング言語を使用できますか? {#what-programming-languages-can-i-use-to-work-with-tidb-cloud}
 
@@ -41,7 +41,10 @@ TiDB Cloudは現在、アマゾン ウェブ サービスと Google Cloud で利
 
 ### TiDB Cloudではどのバージョンの TiDB がサポートされていますか? {#what-versions-of-tidb-are-supported-on-tidb-cloud}
 
-現在サポートされている TiDB のバージョンについては、 [TiDB Cloudリリースノート](/tidb-cloud/tidb-cloud-release-notes.md)を参照してください。
+-   2023 年 6 月 20 日以降、新しい TiDB 専用クラスターのデフォルトの TiDB バージョンは v6.5.3 になります。
+-   2023 年 3 月 7 日以降、新しい TiDB サーバーレス クラスターのデフォルトの TiDB バージョンは v6.6.0 になります。
+
+詳細については、 [TiDB Cloudリリースノート](/tidb-cloud/tidb-cloud-release-notes.md)を参照してください。
 
 ### TiDB またはTiDB Cloud を本番で使用しているのはどの企業ですか? {#what-companies-are-using-tidb-or-tidb-cloud-in-production}
 
@@ -57,7 +60,11 @@ TiDB Cloudについて学ぶ最善の方法は、ステップバイステップ�
 
 -   [TiDB Cloudの紹介](/tidb-cloud/tidb-cloud-intro.md)
 -   [始めましょう](/tidb-cloud/tidb-cloud-quickstart.md)
--   [TiDBクラスタを作成する](/tidb-cloud/create-tidb-cluster.md)
+-   [TiDB サーバーレスクラスタの作成](/tidb-cloud/create-tidb-cluster-serverless.md)
+
+### クラスターを削除する場合、 <code>XXX&#39;s Org/default project/Cluster0</code>は何を参照しますか? {#what-does-code-xxx-s-org-default-project-cluster0-code-refer-to-when-deleting-a-cluster}
+
+TiDB Cloudでは、クラスターは組織名、プロジェクト名、クラスター名の組み合わせによって一意に識別されます。目的のクラスターを確実に削除するには、そのクラスターの完全修飾名 ( `XXX's Org/default project/Cluster0`など) を指定する必要があります。
 
 ## アーキテクチャに関するよくある質問 {#architecture-faqs}
 
@@ -91,13 +98,13 @@ Software as a Service (SaaS) プロバイダーとして、当社はデータの
 
 ### 別の RDBMS からTiDB Cloudへの簡単な移行パスはありますか? {#is-there-an-easy-migration-path-from-another-rdbms-to-tidb-cloud}
 
-TiDB は MySQL と高い互換性があります。データがセルフホスト型 MySQL インスタンスからのものであっても、パブリック クラウドによって提供される RDS サービスからのものであっても、MySQL 互換データベースから TiDB にスムーズにデータを移行できます。詳細については、 [MySQL 互換データベースからのデータの移行](/tidb-cloud/migrate-data-into-tidb.md)を参照してください。
+TiDB は MySQL と高い互換性があります。データがセルフホスト型 MySQL インスタンスからのものであっても、パブリック クラウドによって提供される RDS サービスからのものであっても、MySQL 互換データベースから TiDB にスムーズにデータを移行できます。詳細については、 [データ移行を使用して MySQL 互換データベースをTiDB Cloudに移行する](/tidb-cloud/migrate-from-mysql-using-data-migration.md)を参照してください。
 
 ## バックアップと復元に関するFAQ {#backup-and-restore-faq}
 
 ### TiDB Cloud は増分バックアップをサポートしていますか? {#does-tidb-cloud-support-incremental-backups}
 
-いいえ。クラスターのバックアップ保持期間内の任意の時点にデータを復元する必要がある場合は、 [PITR (ポイントインタイムリカバリ) を使用する](/tidb-cloud/backup-and-restore.md#automatic-backup)を実行できます。
+いいえ。クラスターのバックアップ保持期間内の任意の時点にデータを復元する必要がある場合は、PITR (Point-in-time Recovery) を使用できます。詳細については、 [TiDB 専用クラスターで PITR を使用する](/tidb-cloud/backup-and-restore.md#automatic-backup)または[TiDB サーバーレスクラスターで PITR を使用する](/tidb-cloud/backup-and-restore-serverless.md#restore)を参照してください。
 
 ## HTAPに関するよくある質問 {#htap-faqs}
 
@@ -142,16 +149,16 @@ TiDB CloudはTLS 1.2 または TLS 1.3 をサポートします。
 
 ### 私の TiDB クラスターは安全ですか? {#is-my-tidb-cluster-secure}
 
-TiDB Cloudでは、ニーズに応じてDedicated TierクラスターまたはServerless Tierクラスターのいずれかを使用できます。
+TiDB Cloudでは、ニーズに応じて TiDB 専用クラスターまたは TiDB サーバーレス クラスターのいずれかを使用できます。
 
-Dedicated Tierクラスターの場合、 TiDB Cloudは次の手段でクラスターのセキュリティを確保します。
+TiDB 専用クラスターの場合、 TiDB Cloud は次の手段でクラスターのセキュリティを確保します。
 
 -   クラスターごとに独立したサブアカウントと VPC を作成します。
 -   外部接続を分離するファイアウォール ルールを設定します。
 -   転送中のクラスター データを暗号化するために、クラスターごとにサーバー側 TLS 証明書とコンポーネント レベルの TLS 証明書を作成します。
 -   各クラスターに IP アクセス ルールを指定して、許可された送信元 IP アドレスのみがクラスターにアクセスできるようにします。
 
-Serverless Tierクラスターの場合、 TiDB Cloud は次の手段でクラスターのセキュリティを確保します。
+TiDB サーバーレス クラスターの場合、 TiDB Cloudは次の手段でクラスターのセキュリティを確保します。
 
 -   クラスターごとに独立したサブアカウントを作成します。
 -   外部接続を分離するファイアウォール ルールを設定します。
@@ -159,25 +166,31 @@ Serverless Tierクラスターの場合、 TiDB Cloud は次の手段でクラ�
 
 ### TiDB クラスター内のデータベースに接続するにはどうすればよいですか? {#how-do-i-connect-to-my-database-in-a-tidb-cluster}
 
-Dedicated Tierクラスターの場合、クラスターに接続する手順は次のように簡略化されます。
+<SimpleTab>
+<div label="TiDB Dedicated">
+
+TiDB 専用クラスターの場合、クラスターに接続する手順は次のように簡略化されます。
 
 1.  ネットワークを認証します。
 2.  データベース ユーザーとログイン資格情報を設定します。
 3.  クラスタサーバー用に TLS をダウンロードして構成します。
 4.  SQL クライアントを選択し、 TiDB CloudUI に表示される自動生成された接続文字列を取得し、その文字列を使用して SQL クライアント経由でクラスターに接続します。
 
-Serverless Tierクラスターの場合、クラスターに接続する手順は次のように簡略化されます。
+詳細については、 [TiDB 専用クラスタに接続する](/tidb-cloud/connect-to-tidb-cluster.md)を参照してください。
+
+</div>
+
+<div label="TiDB Serverless">
+
+TiDB サーバーレス クラスターの場合、クラスターに接続する手順は次のように簡略化されます。
 
 1.  データベース ユーザーとログイン資格情報を設定します。
 2.  SQL クライアントを選択し、 TiDB CloudUI に表示される自動生成された接続文字列を取得し、その文字列を使用して SQL クライアント経由でクラスターに接続します。
 
-詳細については、 [TiDBクラスタに接続する](/tidb-cloud/connect-to-tidb-cluster.md)を参照してください。
+詳細については、 [TiDB サーバーレスクラスタに接続する](/tidb-cloud/connect-to-tidb-cluster-serverless.md)を参照してください。
 
-### データベース クラスターの私のビジネス データにアクセスできるのは誰ですか? {#who-has-access-to-my-business-data-of-a-database-cluster}
-
-自分の TiDB クラスター内のテーブル データにアクセスできるのは自分だけです。 TiDB Cloudサポートは、TiDB クラスター内のデータに直接アクセスできません。唯一の例外は、製品を改善し、クラスター操作の問題を解決する必要がある場合、内部で一時的な許可を与えた後、 TiDB Cloudサポートがクラスター操作データにアクセスできることです。すべての認可およびアクセス記録は、PCI-DSS、SOC2、ISO27701 などのサードパーティ監査組織によって毎年監査されます。
-
-TiDB Cloudの運用データについては[TiDB Cloudデータ処理契約](https://www.pingcap.com/legal/data-processing-agreement-for-tidb-cloud-services/)で説明します。
+</div>
+</SimpleTab>
 
 ## サポートに関するFAQ {#support-faq}
 

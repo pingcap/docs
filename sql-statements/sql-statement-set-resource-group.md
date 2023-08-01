@@ -11,7 +11,7 @@ summary: An overview of the usage of SET RESOURCE GROUP in the TiDB database.
 
 > **ノート：**
 >
-> この機能は[Serverless Tierクラスター](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta)では使用できません。
+> この機能は[TiDB サーバーレスクラスター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless)では使用できません。
 
 </CustomContent>
 
@@ -71,7 +71,7 @@ SELECT CURRENT_RESOURCE_GROUP();
 `SET RESOURCE GROUP`を実行して、デフォルトのリソース グループを使用する現在のセッションを指定します。
 
 ```sql
-SET RESOURCE GROUP ``;
+SET RESOURCE GROUP `default`;
 SELECT CURRENT_RESOURCE_GROUP();
 ```
 

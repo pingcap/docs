@@ -7,7 +7,7 @@ summary: Learn the CTE feature of TiDB, which help you write SQL statements more
 
 一部のトランザクション シナリオでは、アプリケーションの複雑さにより、最大 2,000 行の単一 SQL ステートメントを作成する必要がある場合があります。このステートメントにはおそらく、多数の集計と複数レベルのサブクエリのネストが含まれています。このような長い SQL ステートメントを維持することは、開発者にとって悪夢となる可能性があります。
 
-このような長い SQL ステートメントを回避するには、 [一時テーブル](/develop/dev-guide-use-temporary-tables.md)を使用して中間クエリ結果をキャッシュします。
+このような長い SQL ステートメントを回避するには、 [ビュー](/develop/dev-guide-use-views.md)使用してクエリを簡素化するか、 [一時テーブル](/develop/dev-guide-use-temporary-tables.md)を使用して中間クエリ結果をキャッシュします。
 
 このドキュメントでは、クエリ結果を再利用するためのより便利な方法である TiDB の Common Table Expression (CTE) 構文を紹介します。
 

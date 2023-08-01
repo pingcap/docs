@@ -8,7 +8,7 @@ summary: Learn how to configure the memory quota of a query and avoid OOM (out o
 現在、TiDB は単一の SQL クエリのメモリクォータを追跡し、メモリ使用量が特定のしきい値を超えた場合に OOM (メモリ不足) を防止したり、OOM のトラブルシューティングを行ったりすることができます。システム変数[`tidb_mem_oom_action`](/system-variables.md#tidb_mem_oom_action-new-in-v610)は、クエリがメモリ制限に達したときに実行するアクションを指定します。
 
 -   値`LOG`は、制限[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)に達してもクエリは実行し続けるが、TiDB はログにエントリを出力することを意味します。
--   値`CANCEL`は、TiDB が[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)制限に達した直後に SQL クエリの実行を停止し、クライアントにエラーを返すことを意味します。エラー情報には、SQL 実行プロセスでメモリを消費する各物理実行オペレータのメモリ使用量が明確に示されます。
+-   値`CANCEL` 、TiDB が[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)制限に達した直後に SQL クエリの実行を停止し、クライアントにエラーを返すことを意味します。エラー情報には、SQL 実行プロセスでメモリを消費する各物理実行オペレータのメモリ使用量が明確に示されます。
 
 ## クエリのメモリ割り当てを構成する {#configure-the-memory-quota-of-a-query}
 
@@ -134,7 +134,7 @@ tidb-server インスタンスのメモリ使用量がメモリしきい値 (デ
 
 ### フロー制御 {#flow-control}
 
--   TiDB は、データを読み取るオペレーターの動的メモリ制御をサポートします。デフォルトでは、この演算子は[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)を超えると、データを読み取るオペレーターは 1 つのスレッドを停止します。
+-   TiDB は、データを読み取るオペレーターの動的メモリ制御をサポートします。デフォルトでは、この演算子は[`tidb_distsql_scan_concurrency`](/system-variables.md#tidb_distsql_scan_concurrency)データの読み取りが許可される最大スレッド数を使用します。 1 回の SQL 実行のメモリ使用量が毎回[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)を超えると、データを読み取るオペレーターは 1 つのスレッドを停止します。
 
 -   このフロー制御動作は、システム変数[`tidb_enable_rate_limit_action`](/system-variables.md#tidb_enable_rate_limit_action)によって制御されます。
 
@@ -144,7 +144,7 @@ tidb-server インスタンスのメモリ使用量がメモリしきい値 (デ
 
 TiDB は、実行オペレーターのディスク スピルをサポートしています。 SQL 実行のメモリ使用量がメモリクォータを超えると、 tidb-server は実行演算子の中間データをディスクに書き込み、メモリの圧迫を軽減することができます。ディスク流出をサポートする演算子には、Sort、MergeJoin、HashJoin、および HashAgg が含まれます。
 
--   ディスク スピルの動作は、パラメータ[`tmp-storage-quota`](/tidb-configuration-file.md#tmp-storage-quota)によって共同制御されます。
+-   ディスク スピルの動作は、パラメータ[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query) 、 [`tidb_enable_tmp_storage_on_oom`](/system-variables.md#tidb_enable_tmp_storage_on_oom) 、 [`tmp-storage-path`](/tidb-configuration-file.md#tmp-storage-path) 、および[`tmp-storage-quota`](/tidb-configuration-file.md#tmp-storage-quota)によって共同制御されます。
 -   ディスク流出がトリガーされると、TiDB はキーワード`memory exceeds quota, spill to disk now`または`memory exceeds quota, set aggregate mode to spill-mode`を含むログを出力します。
 -   Sort、MergeJoin、および HashJoin オペレーターのディスク スピルは v4.0.0 で導入されました。 HashAgg オペレーターのディスク スピルは v5.2.0 で導入されました。
 -   Sort、MergeJoin、または HashJoin を含む SQL 実行によって OOM が発生すると、TiDB はデフォルトでディスク スピルをトリガーします。 HashAgg を含む SQL 実行によって OOM が発生しても、TiDB はデフォルトでディスク スピルをトリガーしません。 HashAgg のディスク スピルをトリガーするようにシステム変数`tidb_executor_concurrency = 1`を構成できます。

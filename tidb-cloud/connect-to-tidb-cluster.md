@@ -1,33 +1,19 @@
 ---
-title: Connect to Your TiDB Cluster
-summary: Learn how to connect to your TiDB cluster via different methods.
+title: Connect to Your TiDB Dedicated Cluster
+summary: Learn how to connect to your TiDB Dedicated cluster via different methods.
 ---
 
-# TiDBクラスタに接続する {#connect-to-your-tidb-cluster}
+# TiDB 専用クラスタに接続する {#connect-to-your-tidb-dedicated-cluster}
 
-TiDB クラスターがTiDB Cloud上に作成されたら、TiDB クラスターに接続できます。Serverless TierクラスターとDedicated Tierクラスターのどちらを使用しているかに応じて、使用可能な接続方法を次のように見つけることができます。
+このドキュメントでは、TiDB 専用クラスターに接続する方法を紹介します。
 
-## Serverless Tier {#serverless-tier}
+> **ヒント：**
+>
+> TiDB サーバーレス クラスターに接続する方法については、 [TiDB サーバーレスクラスタに接続する](/tidb-cloud/connect-to-tidb-cluster-serverless.md)を参照してください。
 
-Serverless Tierクラスターの場合、標準接続またはTiDB Cloudコンソールの Chat2Query (ベータ) 経由でクラスターに接続できます。
+TiDB 専用クラスターがTiDB Cloud上に作成されたら、次のいずれかの方法でそれに接続できます。
 
--   [標準接続で接続する](/tidb-cloud/connect-via-standard-connection.md#serverless-tier)
-
-    標準接続では、トラフィック フィルターを備えたパブリック エンドポイントが公開されるため、ラップトップから SQL クライアント経由で TiDB クラスターに接続できます。
-
-    Serverless Tier[TLS接続をサポート](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md)のみ。これにより、アプリケーションから TiDB クラスターへのデータ送信のセキュリティが保証されます。
-
--   [Chat2Query (ベータ版)](/tidb-cloud/explore-data-with-chat2query.md)経由で接続する
-
-    TiDB Cloud は人工知能 (AI) を活用しています。 [TiDB Cloudコンソール](https://tidbcloud.com/)の AI を活用した SQL エディターである Chat2Query (ベータ版) を使用すると、データの価値を最大化できます。
-
-    Chat2Query では、 `--`を入力してから AI に SQL クエリを自動的に生成させる指示を入力するか、SQL クエリを手動で作成して、ターミナルを使用せずにデータベースに対して SQL クエリを実行することができます。クエリ結果をテーブルで直感的に見つけたり、クエリログを簡単に確認したりできます。
-
-## Dedicated Tier {#dedicated-tier}
-
-Dedicated Tierクラスターの場合は、次のいずれかの方法でクラスターに接続できます。
-
--   [標準接続で接続する](/tidb-cloud/connect-via-standard-connection.md#dedicated-tier)
+-   [標準接続で接続する](/tidb-cloud/connect-via-standard-connection.md)
 
     標準接続では、トラフィック フィルターを備えたパブリック エンドポイントが公開されるため、ラップトップから SQL クライアント経由で TiDB クラスターに接続できます。 TLS を使用して TiDB クラスターに接続できます。これにより、アプリケーションから TiDB クラスターへのデータ送信のセキュリティが確保されます。
 
@@ -38,6 +24,16 @@ Dedicated Tierクラスターの場合は、次のいずれかの方法でクラ
 -   [VPC ピアリング経由で接続する](/tidb-cloud/set-up-vpc-peering-connections.md)
 
     レイテンシーを短縮し、セキュリティを強化したい場合は、VPC ピアリングを設定し、クラウド アカウント内の対応するクラウド プロバイダー上の VM インスタンスを使用してプライベート エンドポイント経由で接続します。
+
+-   [Chat2Query 経由で接続する (ベータ版)](/tidb-cloud/explore-data-with-chat2query.md)
+
+    > **ノート：**
+    >
+    > [TiDB専用](/tidb-cloud/select-cluster-tier.md#tidb-dedicated)クラスターで Chat2Query を使用するには、 [TiDB Cloudのサポート](/tidb-cloud/tidb-cloud-support.md)にお問い合わせください。
+
+    TiDB Cloud は人工知能 (AI) を活用しています。Dedicated TierがAWS でホストされており、クラスターの TiDB バージョンが v6.5.0 以降の場合、 [TiDB Cloudコンソール](https://tidbcloud.com/)の AI 搭載 SQL エディターである Chat2Query (ベータ) を使用して、データの価値を最大化できます。
+
+    Chat2Query では、 `--`を入力してから AI に SQL クエリを自動的に生成させる指示を入力するか、SQL クエリを手動で作成して、ターミナルを使用せずにデータベースに対して SQL クエリを実行することができます。クエリ結果をテーブルで直感的に見つけたり、クエリログを簡単に確認したりできます。
 
 -   [SQL シェル経由で接続する](/tidb-cloud/connect-via-sql-shell.md) : TiDB SQLを試して、TiDB と MySQL の互換性をすぐにテストするか、ユーザー権限を管理します。
 

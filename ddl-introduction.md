@@ -101,7 +101,7 @@ TiDB v6.2.0 より前は、DDL 実行フレームワークには次の制限が�
 -   DDL 所有者は常に DDL ジョブを先入れ先出し方式で処理します。
 -   DDL 所有者は、一度に同じタイプ (論理または物理) の DDL タスクを 1 つだけ実行できます。これは比較的厳密であり、ユーザー エクスペリエンスに影響します。
 
-これらの制限により、「意図しない」DDL ブロック動作が発生する可能性があります。詳細については、 [SQL FAQ - DDL の実行](/faq/sql-faq.md#ddl-execution)を参照してください。
+これらの制限により、「意図しない」DDL ブロック動作が発生する可能性があります。詳細については、 [SQL FAQ - DDL の実行](https://docs.pingcap.com/tidb/stable/sql-faq#ddl-execution)を参照してください。
 
 </div>
 <div label="Parallel DDL framework starting from v6.2.0">
@@ -180,4 +180,4 @@ TiDB がインデックスを追加しているとき、データのバックフ
 
 ## よくある質問 {#common-questions}
 
-DDL の実行に関するよくある質問については、 [SQL FAQ - DDL の実行](/faq/sql-faq.md#ddl-execution)を参照してください。
+DDL の実行に関するよくある質問については、 [SQL FAQ - DDL の実行](https://docs.pingcap.com/tidb/stable/sql-faq)を参照してください。

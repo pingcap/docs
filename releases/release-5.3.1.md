@@ -44,7 +44,7 @@ TiDB バージョン: 5.3.1
         -   TiCDC が Kafka パーティション間でメッセージをより均等に分散できるように、Kafka Sink のデフォルト値`partition-num`を[#3337](https://github.com/pingcap/tiflow/issues/3337)に変更します。
         -   「EventFeed 再試行速度制限」ログの数を減らす[#4006](https://github.com/pingcap/tiflow/issues/4006)
         -   デフォルト値の`max-message-bytes`を 10M [#4041](https://github.com/pingcap/tiflow/issues/4041)に設定します。
-        -   `no owner alert` 、 `mounter row` 、 `table sink total row` 、 `buffer sink total row`などの Prometheus および Grafana モニタリング メトリックとアラートを追加します[#1606](https://github.com/pingcap/tiflow/issues/1606)
+        -   `no owner alert` 、 `mounter row` 、 `table sink total row` 、 `buffer sink total row`などの Prometheus および Grafana モニタリング メトリックとアラートを追加します[#4054](https://github.com/pingcap/tiflow/issues/4054) [#1606](https://github.com/pingcap/tiflow/issues/1606)
         -   TiKV ストアがダウンした場合に KV クライアントが回復するまでの時間を短縮します[#3191](https://github.com/pingcap/tiflow/issues/3191)
 
     -   TiDB Lightning
@@ -55,7 +55,7 @@ TiDB バージョン: 5.3.1
 
 -   TiDB
 
-    -   TiDB の`date_format`が MySQL と互換性のない方法で`'\n'`処理する問題を修正します[#32232](https://github.com/pingcap/tidb/issues/32232)
+    -   TiDB の`date_format`が MySQL と互換性のない方法で`'\n'`を処理する問題を修正します[#32232](https://github.com/pingcap/tidb/issues/32232)
     -   `alter column set default`テーブル スキーマが誤って更新される問題を修正[#31074](https://github.com/pingcap/tidb/issues/31074)
     -   `tidb_restricted_read_only`を有効にすると`tidb_super_read_only`が自動的に有効にならないバグを修正[#31745](https://github.com/pingcap/tidb/issues/31745)
     -   照合順序のある`greatest`または`least`関数が間違った結果を取得する問題を修正[#31789](https://github.com/pingcap/tidb/issues/31789)
@@ -103,7 +103,7 @@ TiDB バージョン: 5.3.1
     -   `cast(string as decimal)`が間違った結果を返す問題を修正
     -   主キー列をより大きな int データ型に変更した後の潜在的なデータの不整合を修正
     -   `select (arg0, arg1) in (x,y)` 、 `in`などのステートメントで`in`複数の引数がある場合に間違った結果が返されるバグを修正
-    -   MPP クエリが停止するとTiFlash がpanicになる問題を修正
+    -   MPP クエリが停止するとTiFlashがpanicになる問題を修正
     -   入力引数の先頭にゼロがある場合に`str_to_date`が間違った結果を返す問題を修正
     -   フィルターが`where <string>`形式の場合、クエリが間違った結果を返す問題を修正します。
     -   入力引数`string` `%Y-%m-%d\n%H:%i:%s`形式の場合、 `cast(string as datetime)`が間違った結果を返す問題を修正
@@ -112,7 +112,7 @@ TiDB バージョン: 5.3.1
 
     -   バックアップと復元 (BR)
 
-        -   復元操作の終了後にリージョンが不均一に分散される可能性がある潜在的な問題を修正します[#31034](https://github.com/pingcap/tidb/issues/31034)
+        -   復元操作の完了後にリージョンが不均等に分散される可能性がある潜在的な問題を修正します[#31034](https://github.com/pingcap/tidb/issues/31034)
 
     -   TiCDC
 

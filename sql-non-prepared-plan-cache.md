@@ -13,7 +13,7 @@ TiDB は、 [ステートメントの`Prepare` / `Execute`](/sql-prepared-plan-c
 
 ## 原理 {#principle}
 
-準備されていないプラン キャッシュは、 [準備されたプランのキャッシュ](/sql-prepared-plan-cache.md)とキャッシュを共有するセッション レベルの機能です。準備されていないプラン キャッシュの基本原理は次のとおりです。
+準備されていないプラン キャッシュは、キャッシュを[準備されたプランのキャッシュ](/sql-prepared-plan-cache.md)と共有するセッション レベルの機能です。準備されていないプラン キャッシュの基本原理は次のとおりです。
 
 1.  未準備プラン キャッシュを有効にすると、TiDB はまず抽象構文ツリー (AST) に基づいてクエリをパラメータ化します。たとえば、 `SELECT * FROM t WHERE b < 10 AND a = 1`は`SELECT * FROM t WHERE b < ? and a = ?`としてパラメータ化されます。
 2.  次に、TiDB はパラメーター化されたクエリを使用してプラン キャッシュを検索します。
@@ -22,7 +22,7 @@ TiDB は、 [ステートメントの`Prepare` / `Execute`](/sql-prepared-plan-c
 
 ## 使用法 {#usage}
 
-準備されていないプラン キャッシュを有効または無効にするには、 [`tidb_session_plan_cache_size`](/system-variables.md#tidb_session_plan_cache_size-new-in-v710)システム変数を使用して、準備されていないプラン キャッシュのサイズを制御することもできます。キャッシュされたプランの数が`tidb_session_plan_cache_size`を超えると、TiDB は最も最近使用されていない (LRU) 戦略を使用してプランを削除します。
+準備されていないプラン キャッシュを有効または無効にするには、 [`tidb_enable_non_prepared_plan_cache`](/system-variables.md#tidb_enable_non_prepared_plan_cache)システム変数を設定します。 [`tidb_session_plan_cache_size`](/system-variables.md#tidb_session_plan_cache_size-new-in-v710)システム変数を使用して、準備されていないプラン キャッシュのサイズを制御することもできます。キャッシュされたプランの数が`tidb_session_plan_cache_size`を超えると、TiDB は最も最近使用されていない (LRU) 戦略を使用してプランを削除します。
 
 v7.1.0 以降、システム変数[`tidb_plan_cache_max_plan_size`](/system-variables.md#tidb_plan_cache_max_plan_size-new-in-v710)を使用してキャッシュできるプランの最大サイズを制御できます。デフォルト値は 2 MB です。プランのサイズがこの値を超える場合、プランはキャッシュされません。
 
@@ -88,7 +88,7 @@ TiDB は、パラメーター化されたクエリに対して 1 つのプラン
 -   `ORDER BY 1`や`GROUP BY a+1`など、 `ORDER BY`または`GROUP BY`直後に数値または式を含むクエリはサポートされていません。 `ORDER BY column_name`と`GROUP BY column_name`のみがサポートされます。
 -   `JSON` 、 `ENUM` 、 `SET` 、または`BIT`タイプの列でフィルター処理するクエリ ( `SELECT * FROM t WHERE json_col = '{}'`など) はサポートされていません。
 -   `SELECT * FROM t WHERE a is NULL`など、 `NULL`の値でフィルタリングするクエリはサポートされていません。
--   パラメータ化後に 200 を超えるパラメータを含むクエリ ( `SELECT * FROM t WHERE a in (1, 2, 3, ... 201)`など) はサポートされません。
+-   パラメータ化後のパラメータが 200 を超えるクエリ ( `SELECT * FROM t WHERE a in (1, 2, 3, ... 201)`など) は、デフォルトではサポートされていません。 v7.1.1 以降、 [`tidb_opt_fix_control`](/system-variables.md#tidb_opt_fix_control-new-in-v710)システム変数を使用してこの制限を変更できます。
 -   パーティション化されたテーブル、仮想列、一時テーブル、ビュー、またはメモリテーブルにアクセスするクエリ ( `SELECT * FROM INFORMATION_SCHEMA.COLUMNS`など) はサポートされていません。ここで、 `COLUMNS`は TiDBメモリテーブルです。
 -   ヒントまたはバインディングを含むクエリはサポートされていません。
 -   DML ステートメントまたは`FOR UPDATE`句を含む`SELECT`ステートメントは、デフォルトではサポートされていません。この制限を解除するには、 `SET tidb_enable_non_prepared_plan_cache_for_dml = ON`を実行します。

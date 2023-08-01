@@ -12,7 +12,7 @@ TiDB バージョン: 5.1.1
 
 -   TiDB
 
-    -   TiDB クラスターを v4.0 から v5.1 にアップグレードする場合、デフォルト値`tidb_multi_statement_mode`は`OFF`です。代わりに、クライアント ライブラリのマルチステートメント機能を使用することをお勧めします。詳細は[#25751](https://github.com/pingcap/tidb/pull/25751)
+    -   TiDB クラスターを v4.0 から v5.1 にアップグレードする場合、デフォルト値`tidb_multi_statement_mode`は`OFF`です。代わりに、クライアント ライブラリのマルチステートメント機能を使用することをお勧めします。詳細は[`tidb_multi_statement_mode`に関するドキュメント](/system-variables.md#tidb_multi_statement_mode-new-in-v4011)を参照してください。 [#25751](https://github.com/pingcap/tidb/pull/25751)
     -   `tidb_stmt_summary_max_stmt_count`変数のデフォルト値を`200`から`3000`に変更します[#25874](https://github.com/pingcap/tidb/pull/25874)
     -   `table_storage_stats`テーブル[#26352](https://github.com/pingcap/tidb/pull/26352)にアクセスするには`SUPER`権限が必要です
     -   他のユーザーの権限を表示するには`information_schema.user_privileges`テーブルにアクセスするには`mysql.user`の`SELECT`権限が必要です[#26311](https://github.com/pingcap/tidb/pull/26311)
@@ -91,7 +91,7 @@ TiDB バージョン: 5.1.1
     -   オプティマイザーがパーティション[#26227](https://github.com/pingcap/tidb/issues/26227)を検索する際の整数オーバーフローのリスクを修正します。
     -   `DATE`をタイムスタンプ[#26292](https://github.com/pingcap/tidb/issues/26292)にキャストするときに無効な値が書き込まれる可能性がある問題を修正
     -   Grafana [#26338](https://github.com/pingcap/tidb/issues/26338)でコプロセッサーキャッシュ メトリクスが表示されない問題を修正
-    -   テレメトリによって発生する煩わしいログの問題を修正[#25785](https://github.com/pingcap/tidb/issues/25785)
+    -   テレメトリによって発生する煩わしいログの問題を修正[#25760](https://github.com/pingcap/tidb/issues/25760) [#25785](https://github.com/pingcap/tidb/issues/25785)
     -   プレフィックスインデックス[#26029](https://github.com/pingcap/tidb/issues/26029)のクエリ範囲のバグを修正
     -   同じパーティションを同時に切り詰めると DDL 実行がハングする問題を修正します[#26229](https://github.com/pingcap/tidb/issues/26229)
     -   `ENUM`アイテム[#25955](https://github.com/pingcap/tidb/issues/25955)が重複する問題を修正
@@ -109,7 +109,7 @@ TiDB バージョン: 5.1.1
     -   Load Base Split で`batch_get_command` [#10542](https://github.com/tikv/tikv/issues/10542)のエンコードされていないキーが誤って使用される問題を修正
     -   `resolved-ts.advance-ts-interval`構成を動的に変更してもすぐに有効にならない問題を修正します[#10426](https://github.com/tikv/tikv/issues/10426)
     -   4 つを超えるレプリカでまれにフォロワーのメタデータが破損する問題を修正[#10225](https://github.com/tikv/tikv/issues/10225)
-    -   暗号化が有効になっている場合にスナップショットを 2 回構築すると発生するpanicの問題を修正します[#10407](https://github.com/tikv/tikv/issues/10407)
+    -   暗号化が有効になっている場合にスナップショットを 2 回構築すると発生するpanicの問題を修正します[#9786](https://github.com/tikv/tikv/issues/9786) [#10407](https://github.com/tikv/tikv/issues/10407)
     -   間違った`tikv_raftstore_hibernated_peer_state`メトリック[#10330](https://github.com/tikv/tikv/issues/10330)を修正します
     -   コプロセッサ[#10176](https://github.com/tikv/tikv/issues/10176)の`json_unquote()`関数の間違った引数の型を修正しました。
     -   悲観的トランザクションのインデックスキーが繰り返しコミットされる可能性があるバグを修正[#10468](https://github.com/tikv/tikv/issues/10468#issuecomment-869491061)
@@ -117,7 +117,7 @@ TiDB バージョン: 5.1.1
 
 -   PD
 
-    -   複数のスケジューラが同時に実行されているために競合が発生した場合、期待したスケジューリングが生成できない問題を修正します[#3778](https://github.com/tikv/pd/issues/3778)
+    -   複数のスケジューラが同時に実行されているために競合が発生した場合、期待したスケジューリングが生成できない問題を修正します[#3807](https://github.com/tikv/pd/issues/3807) [#3778](https://github.com/tikv/pd/issues/3778)
     -   スケジューラーを削除してもスケジューラーが再度表示される場合がある問題を修正[#2572](https://github.com/tikv/pd/issues/2572)
 
 -   TiFlash
@@ -153,4 +153,4 @@ TiDB バージョン: 5.1.1
     -   TiDB Lightning
 
         -   TiDB が Parquet ファイル[#1275](https://github.com/pingcap/br/pull/1275)の`DECIMAL`タイプのデータの解析に失敗する問題を修正します。
-        -   キー間隔[#1290](https://github.com/pingcap/br/issues/1290)を計算する際の整数オーバーフローの問題を修正
+        -   キー間隔[#1291](https://github.com/pingcap/br/issues/1291) [#1290](https://github.com/pingcap/br/issues/1290)を計算する際の整数オーバーフローの問題を修正

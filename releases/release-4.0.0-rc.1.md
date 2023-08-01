@@ -43,16 +43,16 @@ TiDB バージョン: 4.0.0-rc.1
 
 -   TiCDC
 
-    -   TiCDC で内部的に維持されているスキーマが読み取りおよび書き込み操作のタイミングの問題を正しく処理できないために発生するレプリケーション エラーを修正します[#496](https://github.com/pingcap/tiflow/pull/496)
-    -   TiKV 異常が発生したときに TiKV クライアントが内部リソースを正しく維持できないバグを修正[#492](https://github.com/pingcap/tiflow/pull/492)
-    -   メタデータが正しくクリーンアップされず、TiCDC ノードに異常に残るバグを修正[#504](https://github.com/pingcap/tiflow/pull/504)
+    -   TiCDC で内部的に維持されているスキーマが読み取りおよび書き込み操作のタイミングの問題を正しく処理できないために発生するレプリケーション エラーを修正します[#438](https://github.com/pingcap/tiflow/pull/438) [#450](https://github.com/pingcap/tiflow/pull/450) [#478](https://github.com/pingcap/tiflow/pull/478) [#496](https://github.com/pingcap/tiflow/pull/496)
+    -   TiKV 異常が発生したときに TiKV クライアントが内部リソースを正しく維持できないバグを修正[#499](https://github.com/pingcap/tiflow/pull/499) [#492](https://github.com/pingcap/tiflow/pull/492)
+    -   メタデータが正しくクリーンアップされず、TiCDC ノードに異常に残るバグを修正[#488](https://github.com/pingcap/tiflow/pull/488) [#504](https://github.com/pingcap/tiflow/pull/504)
     -   TiKV クライアントが事前書き込みイベント[#446](https://github.com/pingcap/tiflow/pull/446)の繰り返し送信を正しく処理できない問題を修正します。
     -   TiKV クライアントが初期化前に受信した冗長事前書き込みイベントを正しく処理できない問題を修正します[#448](https://github.com/pingcap/tiflow/pull/448)
 
 -   バックアップと復元 (BR)
 
     -   チェックサムが無効になっている場合でもチェックサムが実行される問題を修正[#223](https://github.com/pingcap/br/pull/223)
-    -   TiDB [#231](https://github.com/pingcap/br/pull/231)で`auto-random`または`alter-pk`が有効になっている場合の増分レプリケーションの失敗を修正
+    -   TiDB [#230](https://github.com/pingcap/br/pull/230) [#231](https://github.com/pingcap/br/pull/231)で`auto-random`または`alter-pk`が有効になっている場合の増分レプリケーションの失敗を修正
 
 ## 新機能 {#new-features}
 

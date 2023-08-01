@@ -5,7 +5,7 @@ summary: Learn how to implement primary-secondary disaster recovery based on TiC
 
 # プライマリ クラスタとセカンダリ クラスタに基づく DR ソリューション {#dr-solution-based-on-primary-and-secondary-clusters}
 
-プライマリ データベースとセカンダリ データベースに基づく災害復旧 (DR) は、一般的なソリューションです。このソリューションでは、DR システムにはプライマリ クラスターとセカンダリ クラスターがあります。プライマリ クラスタはユーザーのリクエストを処理し、セカンダリ クラスタはプライマリ クラスタからのデータをバックアップします。プライマリ クラスタに障害が発生した場合、セカンダリ クラスタがサービスを引き継ぎ、バックアップ データを使用してサービスを提供し続けます。これにより、ビジネス システムは障害による中断なしに正常に動作し続けることが保証されます。
+プライマリ データベースとセカンダリ データベースに基づく災害復旧 (DR) は、一般的なソリューションです。このソリューションでは、DR システムにはプライマリ クラスタとセカンダリ クラスタがあります。プライマリ クラスタはユーザーのリクエストを処理し、セカンダリ クラスタはプライマリ クラスタからのデータをバックアップします。プライマリ クラスタに障害が発生した場合、セカンダリ クラスタがサービスを引き継ぎ、バックアップ データを使用してサービスを提供し続けます。これにより、ビジネス システムは障害による中断なしに正常に動作し続けることが保証されます。
 
 プライマリ-セカンダリ DR ソリューションには次の利点があります。
 
@@ -58,7 +58,7 @@ summary: Learn how to implement primary-secondary disaster recovery based on TiC
 
 サーバー構成については、次のドキュメントを参照してください。
 
--   [TiDB のソフトウェアとハードウェアの推奨事項](/hardware-and-software-requirements.md)
+-   [TiDB のソフトウェアとハ​​ードウェアの推奨事項](/hardware-and-software-requirements.md)
 -   [TiCDC のソフトウェアおよびハードウェアの推奨事項](/ticdc/deploy-ticdc.md#software-and-hardware-recommendations)
 
 TiDB プライマリ クラスターとセカンダリ クラスターを展開する方法の詳細については、 [TiDB クラスターをデプロイ](/production-deployment-using-tiup.md)を参照してください。
@@ -417,4 +417,4 @@ storage = "s3://redo?access-key=minio&secret-access-key=miniostorage&endpoint=ht
 
 ## トラブルシューティング {#troubleshooting}
 
-前の手順で問題が発生した場合は、まず[問題](https://github.com/pingcap/tidb/issues/new/choose)を報告してください。
+前の手順で問題が発生した場合は、まず[TiDB よくある質問](/faq/faq-overview.md)で問題の解決策を見つけることができます。問題が解決しない場合は、GitHub で[問題](https://github.com/pingcap/tidb/issues/new/choose)を報告してください。

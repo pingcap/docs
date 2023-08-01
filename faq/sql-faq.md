@@ -9,7 +9,7 @@ summary: Learn about the FAQs related to TiDB SQL.
 
 ## TiDB は二次キーをサポートしていますか? {#does-tidb-support-the-secondary-key}
 
-はい。一意の[`NOT NULL`制約](/constraints.md#not-null)設定できます。この場合、列は 2 次キーとして機能します。
+はい。一意の[セカンダリインデックス](/develop/dev-guide-create-secondary-indexes.md)を持つ非主キー列に[`NOT NULL`制約](/constraints.md#not-null)設定できます。この場合、列は 2 次キーとして機能します。
 
 ## 大きなテーブルで DDL 操作を実行する場合、TiDB はどのように動作しますか? {#how-does-tidb-perform-when-executing-ddl-operations-on-a-large-table}
 
@@ -32,7 +32,7 @@ TiDB にはコストベースのオプティマイザーが含まれています
 
 ## 特定の SQL ステートメントの実行を防ぐにはどうすればよいですか? {#how-to-prevent-the-execution-of-a-particular-sql-statement}
 
-[`MAX_EXECUTION_TIME`](/optimizer-hints.md#max_execution_timen)ヒントを作成すると、特定のステートメントの実行時間を小さい値 (1ms など) に制限できます。このようにして、ステートメントはしきい値によって自動的に終了します。
+[SQLバインディング](/sql-plan-management.md#sql-binding)と[`MAX_EXECUTION_TIME`](/optimizer-hints.md#max_execution_timen)ヒントを作成すると、特定のステートメントの実行時間を小さい値 (1ms など) に制限できます。このようにして、ステートメントはしきい値によって自動的に終了します。
 
 たとえば、 `SELECT * FROM t1, t2 WHERE t1.id = t2.id`の実行を防ぐには、次の SQL バインディングを使用してステートメントの実行時間を 1 ミリ秒に制限します。
 
@@ -142,7 +142,7 @@ TiDB はデフォルトで UTF-8 文字セットを使用し、現在は UTF-8 �
 
 ## TiDB で後から挿入されたデータの自動インクリメント ID が、前に挿入されたデータの自動インクリメント ID より小さいのはなぜですか? {#why-does-the-auto-increment-id-of-the-later-inserted-data-is-smaller-than-that-of-the-earlier-inserted-data-in-tidb}
 
-TiDB の自動インクリメント ID 機能は、自動的に増分され、一意であることが保証されるだけで、連続的に割り当てられることは保証されません。現在、TiDB はバッチで ID を割り当てています。データが複数の TiDB サーバーに同時に挿入される場合、割り当てられる ID は連続しません。複数のスレッドが複数の`tidb-server`インスタンスにデータを同時に挿入すると、後から挿入されたデータの自動インクリメント ID が小さくなる可能性があります。 TiDB では、整数フィールドに`AUTO_INCREMENT`指定できますが、1 つのテーブル内で`AUTO_INCREMENT`フィールドは 1 つだけ許可されます。詳細については、 [AUTO_INCREMENT 属性](/auto-increment.md)を参照してください。
+TiDB の自動インクリメント ID 機能は、自動的に増分され、一意であることが保証されるだけで、連続的に割り当てられることは保証されません。現在、TiDB はバッチで ID を割り当てています。データが複数の TiDB サーバーに同時に挿入される場合、割り当てられる ID は連続しません。複数のスレッドが複数の`tidb-server`インスタンスにデータを同時に挿入すると、後から挿入されたデータの自動インクリメント ID が小さくなる可能性があります。 TiDB では、整数フィールドに`AUTO_INCREMENT`指定できますが、単一テーブル内で`AUTO_INCREMENT`フィールドは 1 つだけ許可されます。詳細については、 [自動インクリメントID](/mysql-compatibility.md#auto-increment-id)および[AUTO_INCREMENT 属性](/auto-increment.md)を参照してください。
 
 ## TiDB で<code>sql_mode</code>を変更するにはどうすればよいですか? {#how-do-i-modify-the-code-sql-mode-code-in-tidb}
 
@@ -184,7 +184,7 @@ Sqoop では、 `--batch`各バッチで 100 個のステートメントをコ�
 
 ## データを削除するとクエリ速度が遅くなるのはなぜですか? {#why-does-the-query-speed-get-slow-after-data-is-deleted}
 
-大量のデータを削除すると、無駄なキーが大量に残り、クエリの効率に影響します。この問題を解決するには、 [TiDB ベスト プラクティスのデータの削除セクション](https://en.pingcap.com/blog/tidb-best-practice/#write)を参照してください。
+大量のデータを削除すると、無駄なキーが大量に残り、クエリの効率に影響します。この問題を解決するには、 [リージョンのマージ](/best-practices/massive-regions-best-practices.md#method-3-enable-region-merge)機能を使用できます。詳細は[TiDB ベスト プラクティスのデータの削除セクション](https://en.pingcap.com/blog/tidb-best-practice/#write)を参照してください。
 
 ## データを削除した後にstorage領域を再利用するのが遅い場合はどうすればよいですか? {#what-should-i-do-if-it-is-slow-to-reclaim-storage-space-after-deleting-data}
 
@@ -207,7 +207,7 @@ TiDB は、 [グローバル](/system-variables.md#tidb_force_priority)または
 
 -   `DELAYED` : このステートメントは通常の優先順位を持ち、 `tidb_force_priority`の`NO_PRIORITY`設定と同じです。
 
-上記 2 つのパラメータを TiDB の DML と組み合わせて使用できます。例えば：
+上記 2 つのパラメータを TiDB の DML と組み合わせて使用​​できます。例えば：
 
 1.  データベースに SQL ステートメントを記述して優先度を調整します。
 
@@ -233,7 +233,7 @@ auto analyzeを無効にするには、システム変数`tidb_enable_auto_analy
 
 ## オプティマイザーのヒントを使用してオプティマイザーの動作をオーバーライドできますか? {#can-i-use-optimizer-hints-to-override-the-optimizer-behavior}
 
-TiDB は、デフォルトのクエリ オプティマイザーの動作をオーバーライドする複数の方法 ( [SQL計画管理](/sql-plan-management.md)など) をサポートしています。基本的な使用法は MySQL と似ていますが、TiDB 固有の拡張機能がいくつかあります。
+TiDB は、デフォルトのクエリ オプティマイザーの動作をオーバーライドする複数の方法 ( [ヒント](/optimizer-hints.md)や[SQL計画管理](/sql-plan-management.md)など) をサポートしています。基本的な使用法は MySQL と似ていますが、TiDB 固有の拡張機能がいくつかあります。
 
 ```sql
 SELECT column_name FROM table_name USE INDEX（index_name）WHERE where_condition;
@@ -347,10 +347,10 @@ TiDB v6.2.0 以降、TiDB DDL モジュールは同時フレームワークを�
 
 推奨事項:
 
--   ハードウェア構成を改善します。 [ソフトウェアとハードウェアの要件](/hardware-and-software-requirements.md)を参照してください。
+-   ハードウェア構成を改善します。 [ソフトウェアとハ​​ードウェアの要件](/hardware-and-software-requirements.md)を参照してください。
 -   同時実行性を改善します。デフォルト値は 10 です。50 に改善して試してみてください。ただし、通常、改善はデフォルト値の 2 ～ 4 倍です。
 -   データ量が多い場合は`count`をテストしてください。
--   TiKV 構成を最適化します。 [TiKV メモリ パフォーマンスの調整](/tune-tikv-memory-performance.md)を参照してください。
+-   TiKV 構成を最適化します。 [TiKV スレッドのパフォーマンスを調整する](/tune-tikv-thread-performance.md)と[TiKV メモリ パフォーマンスの調整](/tune-tikv-memory-performance.md)を参照してください。
 -   [コプロセッサーキャッシュ](/coprocessor-cache.md)を有効にします。
 
 ### 現在の DDL ジョブの進行状況を確認するにはどうすればよいですか? {#how-to-view-the-progress-of-the-current-ddl-job}
@@ -395,7 +395,7 @@ RUNNING_JOBS: ID:121, Type:add index, State:running, SchemaState:write reorganiz
 
 `cop task`は、分散実行のために KV エンドにプッシュダウンされるコンピューティング タスクです。 `root task`は、TiDB 側でのシングル ポイント実行のコンピューティング タスクです。
 
-通常、入力データ`root task`は`cop task`から取得されます。 `root task`データを処理するとき、TiKV の`cop task`は同時にデータを処理でき、TiDB の`root task`のプルを待ちます。したがって、 `cop`タスクは`root task`と同時に実行されると考えることができます。しかし、それらのデータには上流と下流の関係があります。実行プロセス中、ある時間内で同時に実行されます。たとえば、最初の`cop task` [100, 200] のデータを処理し、2 番目の`cop task` [1, 100] のデータを処理します。詳細については、 [TiDB クエリ プランを理解する](/explain-overview.md)を参照してください。
+通常、入力データ`root task`は`cop task`から取得されます。 `root task`データを処理するとき、TiKV の`cop task`は同時にデータを処理でき、TiDB の`root task`のプルを待ちます。したがって、 `cop`タスクは`root task`と同時に実行されると考えることができます。しかし、それらのデータには上流と下流の関係があります。実行プロセス中、ある時間内で同時に実行されます。たとえば、最初の`cop task` [100, 200] のデータを処理し、2 番目の`cop task` [1, 100] のデータを処理します。詳細については、 [TiDB クエリ プランを理解する](/explain-overview.md)参照してください。
 
 ## データベースの最適化 {#database-optimization}
 
@@ -417,4 +417,4 @@ RUNNING_JOBS: ID:121, Type:add index, State:running, SchemaState:write reorganiz
 
 ### TiKV のパフォーマンスを調整する {#tune-tikv-performance}
 
-[TiKV メモリ パフォーマンスの調整](/tune-tikv-memory-performance.md)を参照してください。
+[TiKV スレッドのパフォーマンスを調整する](/tune-tikv-thread-performance.md)と[TiKV メモリ パフォーマンスの調整](/tune-tikv-memory-performance.md)を参照してください。

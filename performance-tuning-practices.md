@@ -5,13 +5,13 @@ summary: This document describes how to analyze and tune performance for OLTP wo
 
 # OLTP シナリオの性能チューニングの実践 {#performance-tuning-practices-for-oltp-scenarios}
 
-TiDB は、TiDB ダッシュボードの[パフォーマンス概要ダッシュボード](/grafana-performance-overview-dashboard.md)など、包括的なパフォーマンス診断および分析機能を提供します。
+TiDB は、TiDB ダッシュボードの[Top SQL](/dashboard/top-sql.md)および[継続的なプロファイリング](/dashboard/continuous-profiling.md)の機能や TiDB [パフォーマンス概要ダッシュボード](/grafana-performance-overview-dashboard.md)など、包括的なパフォーマンス診断および分析機能を提供します。
 
-このドキュメントでは、これらの機能を組み合わせて使用し、7 つの異なるランタイム シナリオで同じ OLTP ワークロードのパフォーマンスを分析および比較する方法について説明します。これは、TiDB のパフォーマンスを効率的に分析および調整するのに役立つパフォーマンス チューニング プロセスを示しています。
+このドキュメントでは、これらの機能を組み合わせて使用​​し、7 つの異なるランタイム シナリオで同じ OLTP ワークロードのパフォーマンスを分析および比較する方法について説明します。これは、TiDB のパフォーマンスを効率的に分析および調整するのに役立つパフォーマンス チューニング プロセスを示しています。
 
 > **ノート：**
 >
-> [継続的なプロファイリング](/dashboard/continuous-profiling.md)デフォルトでは有効になっていません。事前に有効にしておく必要があります。
+> [Top SQL](/dashboard/top-sql.md)と[継続的なプロファイリング](/dashboard/continuous-profiling.md)デフォルトでは有効になっていません。事前に有効にしておく必要があります。
 
 このドキュメントでは、これらのシナリオで同じアプリケーションを異なる JDBC 構成で実行することにより、アプリケーションとデータベース間のさまざまな相互作用によってシステム全体のパフォーマンスがどのような影響を受けるかを示し、パフォーマンスを向上させるために[TiDB を使用したJavaアプリケーション開発のベスト プラクティス](/best-practices/java-app-best-practices.md)適用できるようにします。
 
@@ -304,7 +304,7 @@ TiDB の平均 CPU 使用率は 827% から 577% に低下します。 QPS が�
 -   シナリオ 4 と比較すると、シナリオ 5 の**[CPS By Type]**ペインには`StmtExecute`コマンドのみがあり、これによりネットワークの 2 つの往復が回避され、システム全体の QPS が向上します。
 -   QPS が増加した場合、解析時間、コンパイル時間、実行時間の点でレイテンシーは減少しますが、代わりにクエリ時間が増加します。これは、TiDB が`StmtPrepare`と`StmtClose`非常に高速に処理し、これら 2 つのコマンド タイプを削除すると平均クエリ時間が増加するためです。
 -   SQL フェーズごとのデータベース時間では、 `execute`最も時間がかかり、データベース時間に近くなります。 SQL 実行時間の概要では、 `tso wait`ほとんどの時間を要し、 `execute`時間の 4 分の 1 以上が TSO の待機にかかります。
--   `tso wait`秒間に1回の合計は5.46秒です。平均`tso wait`回は 196 us、1 秒あたり`tso cmd`回の回数は 28k で、QPS の 30.9k に非常に近いです。これは、TiDB の分離レベル`read committed`の実装に従って、トランザクション内のすべての SQL ステートメントが PD から TSO を要求する必要があるためです。
+-   `tso wait`秒間に1回の合計は5.46秒です。平均`tso wait`回は 196 us、1 秒あたり`tso cmd`回の回数は 28k で、QPS の 30.9k に非常に近くなります。これは、TiDB の分離レベル`read committed`の実装に従って、トランザクション内のすべての SQL ステートメントが PD から TSO を要求する必要があるためです。
 
 TiDB v6.0 は`rc read`を提供します。これは、 `tso cmd`を減らすことで`read committed`分離レベルを最適化します。この機能はグローバル変数`set global tidb_rc_read_check_ts=on;`によって制御されます。この変数が有効な場合、TiDB のデフォルト動作は`repeatable-read`分離レベルと同じように動作します。この場合、PD から取得する必要があるのは`start-ts`と`commit-ts`だけです。トランザクション内のステートメントは、最初に`start-ts`を使用して TiKV からデータを読み取ります。 TiKV から読み取られたデータが`start-ts`より前の場合、データは直接返されます。 TiKV から読み取られたデータが`start-ts`より後の場合、データは破棄されます。 TiDB は PD から TSO を要求し、読み取りを再試行します。後続のステートメントの`for update ts` 、最新の PD TSO が使用されます。
 

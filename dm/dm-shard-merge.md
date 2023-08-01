@@ -11,7 +11,7 @@ TiDB データ移行 (DM) は、アップストリームの MySQL/MariaDB シャ
 
 ## 制限 {#restrictions}
 
-現在、シャード マージ機能は限られたシナリオでのみサポートされています。詳細は[シャーディング DDL の使用法楽観的モードでの制限事項](/dm/feature-shard-merge-optimistic.md#restrictions)を参照してください。
+現在、シャード マージ機能は限られたシナリオでのみサポートされています。詳細は[シャーディング DDL の使用法悲観的モードでの制限事項](/dm/feature-shard-merge-pessimistic.md#restrictions) 、 [シャーディング DDL の使用法楽観的モードでの制限事項](/dm/feature-shard-merge-optimistic.md#restrictions)を参照してください。
 
 ## パラメータを設定する {#configure-parameters}
 

@@ -3,7 +3,7 @@ title: Certificate-Based Authentication for Login
 summary: Learn the certificate-based authentication used for login.
 ---
 
-# ログイン用の証明書ベースの認証 {#certificate-based-authentication-for-login}
+# 証明書ベースのログイン認証 {#certificate-based-authentication-for-login}
 
 TiDB は、ユーザーが TiDB にログインするための証明書ベースの認証方法をサポートしています。この方法を使用すると、TiDB はさまざまなユーザーに証明書を発行し、暗号化された接続を使用してデータを転送し、ユーザーがログインするときに証明書を検証します。このアプローチは、MySQL ユーザーが一般的に使用する従来のパスワードベースの認証方法よりも安全であるため、MySQL ユーザーによって採用されています。ユーザー数の増加。
 
@@ -20,13 +20,13 @@ TiDB は、ユーザーが TiDB にログインするための証明書ベース
 
 <CustomContent platform="tidb">
 
-キーと証明書を作成するには[TiDB クライアントとサーバー間で TLS を有効にする](/enable-tls-between-clients-and-servers.md)で説明したプロセスと同様です。次の段落では、証明書で検証する必要があるその他の属性フィールドを構成する方法を示します。
+キーと証明書を作成するには[OpenSSL](https://www.openssl.org/)を使用することをお勧めします。証明書の生成プロセスは、 [TiDB クライアントとサーバー間で TLS を有効にする](/enable-tls-between-clients-and-servers.md)で説明したプロセスと同様です。次の段落では、証明書で検証する必要があるその他の属性フィールドを構成する方法を示します。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-キーと証明書を作成するには[TiDB クライアントとサーバー間で TLS を有効にする](https://docs.pingcap.com/tidb/stable/enable-tls-between-clients-and-servers)で説明したプロセスと同様です。次の段落では、証明書で検証する必要があるその他の属性フィールドを構成する方法を示します。
+キーと証明書を作成するには[OpenSSL](https://www.openssl.org/)を使用することをお勧めします。証明書の生成プロセスは、 [TiDB クライアントとサーバー間で TLS を有効にする](https://docs.pingcap.com/tidb/stable/enable-tls-between-clients-and-servers)で説明したプロセスと同様です。次の段落では、証明書で検証する必要があるその他の属性フィールドを構成する方法を示します。
 
 </CustomContent>
 

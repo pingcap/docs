@@ -113,7 +113,7 @@ TiDB クラスターを開始するときは、コマンドライン オプシ�
 
 ## <code>--proxy-protocol-fallbackable</code> {#code-proxy-protocol-fallbackable-code}
 
--   PROXY プロトコル フォールバック モードを有効にするかどうかを制御します。このパラメータが`true`に設定されている場合、TiDB は PROXY クライアント接続および PROXY プロトコル ヘッダーのないクライアント接続を受け入れます。デフォルトでは、TiDB は PROXY プロトコル ヘッダーを持つクライアント接続のみを受け入れます。
+-   PROXY プロトコル フォールバック モードを有効にするかどうかを制御します。このパラメーターが`true`に設定されている場合、TiDB は、PROXY プロトコル仕様を使用せず、または PROXY プロトコル ヘッダーを送信せずに、 `--proxy-protocol-networks`に属するクライアント接続を受け入れます。デフォルトでは、TiDB は`--proxy-protocol-networks`に属し、PROXY プロトコル ヘッダーを送信するクライアント接続のみを受け入れます。
 -   デフォルト値: `false`
 
 ## <code>--proxy-protocol-networks</code> {#code-proxy-protocol-networks-code}
@@ -152,7 +152,7 @@ TiDB クラスターを開始するときは、コマンドライン オプシ�
 
 ## <code>--run-ddl</code> {#code-run-ddl-code}
 
--   `tidb-server` DDL ステートメントを実行するかどうかを確認し、クラスター内で`tidb-server`の数が 2 を超えたときに設定します。
+-   `tidb-server`が DDL ステートメントを実行するかどうかを確認し、クラスター内で`tidb-server`の数が 2 を超えたときに設定します。
 -   デフォルト: `true`
 -   値は (true) または (false) です。 (true) は、 `tidb-server` DDL 自体を実行することを示します。 (false) は、 `tidb-server` DDL 自体を実行しないことを示します。
 
@@ -166,7 +166,7 @@ TiDB クラスターを開始するときは、コマンドライン オプシ�
 
 -   TiDBサーバーのステータス レポート ポート
 -   デフォルト: `"10080"`
--   このポートはサーバーの内部データを取得するために使用されます。データには[プロフ](https://golang.org/pkg/net/http/pprof/)が含まれます。
+-   このポートはサーバーの内部データを取得するために使用されます。データには[プロメテウスのメトリクス](https://prometheus.io/)と[プロフ](https://golang.org/pkg/net/http/pprof/)が含まれます。
 -   Prometheus メトリクスには`"http://host:status_port/metrics"`でアクセスできます。
 -   pprof データには`"http://host:status_port/debug/pprof"`によってアクセスできます。
 

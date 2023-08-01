@@ -5,21 +5,21 @@ summary: Learn transactions in TiDB.
 
 # 取引 {#transactions}
 
-TiDB は、 [楽観的](/optimistic-transaction.md)トランザクション モードを使用した分散トランザクションをサポートします。 TiDB 3.0.8 以降、TiDB はデフォルトで悲観的トランザクション モードを使用します。
+TiDB は、 [悲観的](/pessimistic-transaction.md)または[楽観的](/optimistic-transaction.md)トランザクション モードを使用した分散トランザクションをサポートします。 TiDB 3.0.8 以降、TiDB はデフォルトで悲観的トランザクション モードを使用します。
 
 このドキュメントでは、一般的に使用されるトランザクション関連のステートメント、明示的および暗黙的なトランザクション、分離レベル、制約の遅延チェック、およびトランザクション サイズについて紹介します。
 
-共通変数には、 [`tidb_txn_mode`](/system-variables.md#tidb_txn_mode)が含まれます。
+共通変数には、 [`autocommit`](#autocommit) 、 [`tidb_disable_txn_auto_retry`](/system-variables.md#tidb_disable_txn_auto_retry) 、 [`tidb_retry_limit`](/system-variables.md#tidb_retry_limit) 、および[`tidb_txn_mode`](/system-variables.md#tidb_txn_mode)が含まれます。
 
 > **ノート：**
 >
-> 変数[`tidb_retry_limit`](/system-variables.md#tidb_retry_limit)は楽観的トランザクションにのみ適用され、悲観的トランザクションには適用されません。
+> 変数[`tidb_disable_txn_auto_retry`](/system-variables.md#tidb_disable_txn_auto_retry)と[`tidb_retry_limit`](/system-variables.md#tidb_retry_limit)は楽観的トランザクションにのみ適用され、悲観的トランザクションには適用されません。
 
 ## 一般的なステートメント {#common-statements}
 
 ### トランザクションの開始 {#starting-a-transaction}
 
-ステートメント[`START TRANSACTION`](/sql-statements/sql-statement-start-transaction.md)は、新しいトランザクションを明示的に開始するために同じ意味で使用できます。
+ステートメント[`BEGIN`](/sql-statements/sql-statement-begin.md)と[`START TRANSACTION`](/sql-statements/sql-statement-start-transaction.md)は、新しいトランザクションを明示的に開始するために同じ意味で使用できます。
 
 構文：
 
@@ -67,7 +67,7 @@ COMMIT;
 
 > **ヒント：**
 >
-> [悲観的取引](/pessimistic-transaction.md)を使用することをお勧めします。
+> [楽観的取引](/optimistic-transaction.md)を有効にする前に、 `COMMIT`ステートメントがエラーを返す可能性があることをアプリケーションが正しく処理していることを確認してください。アプリケーションがこれをどのように処理するかわからない場合は、代わりにデフォルトの[悲観的取引](/pessimistic-transaction.md)を使用することをお勧めします。
 
 ### トランザクションのロールバック {#rolling-back-a-transaction}
 
@@ -91,9 +91,9 @@ MySQL との互換性の必要に応じて、TiDB はデフォルトでステー
 
 ```sql
 mysql> CREATE TABLE t1 (
-    ->  id INT NOT NULL PRIMARY KEY auto_increment,
-    ->  pad1 VARCHAR(100)
-    -> );
+     id INT NOT NULL PRIMARY KEY auto_increment,
+     pad1 VARCHAR(100)
+    );
 Query OK, 0 rows affected (0.09 sec)
 
 mysql> SELECT @@autocommit;
@@ -131,9 +131,9 @@ COMMIT;
 
 ```sql
 mysql> CREATE TABLE t2 (
-    ->  id INT NOT NULL PRIMARY KEY auto_increment,
-    ->  pad1 VARCHAR(100)
-    -> );
+     id INT NOT NULL PRIMARY KEY auto_increment,
+     pad1 VARCHAR(100)
+    );
 Query OK, 0 rows affected (0.10 sec)
 
 mysql> SELECT @@autocommit;
@@ -157,7 +157,7 @@ mysql> SELECT * FROM t2;
 Empty set (0.00 sec)
 ```
 
-[変更可能](/sql-statements/sql-statement-set-variable.md) 。
+[`autocommit`](/system-variables.md#autocommit)グローバルまたはセッションベースのシステム変数[変更可能](/sql-statements/sql-statement-set-variable.md) 。
 
 例えば：
 
@@ -187,7 +187,7 @@ DDL ステートメントの場合、トランザクションは自動的にコ�
 
 ## 制約の遅延チェック {#lazy-check-of-constraints}
 
-デフォルトでは、楽観的トランザクションは、DML ステートメントの実行時に[固有の制約](/constraints.md#unique-key)をチェックしません。これらのチェックは、代わりにトランザクション`COMMIT`で実行されます。
+デフォルトでは、楽観的トランザクションは、DML ステートメントの実行時に[主キー](/constraints.md#primary-key)または[固有の制約](/constraints.md#unique-key)をチェックしません。これらのチェックは、代わりにトランザクション`COMMIT`で実行されます。
 
 例えば：
 
@@ -306,9 +306,9 @@ TiDB は以前、単一トランザクションのキーと値のペアの総数
 
 > **ノート：**
 >
-> 因果的一貫性のあるトランザクションは、非同期コミット機能と 1 フェーズ コミット機能が有効になっている場合にのみ有効になります。 2つの機能の詳細については、 [`tidb_enable_1pc`](/system-variables.md#tidb_enable_1pc-new-in-v50)を参照してください。
+> 因果的一貫性のあるトランザクションは、非同期コミット機能と 1 フェーズ コミット機能が有効になっている場合にのみ有効になります。 2つの機能の詳細については、 [`tidb_enable_async_commit`](/system-variables.md#tidb_enable_async_commit-new-in-v50)と[`tidb_enable_1pc`](/system-variables.md#tidb_enable_1pc-new-in-v50)を参照してください。
 
-TiDB は、トランザクションの因果関係の一貫性の有効化をサポートしています。因果的一貫性のあるトランザクションは、コミット時に PD からタイムスタンプを取得する必要がなく、コミットのレイテンシーが短くなります。因果関係の一貫性を有効にする構文は次のとおりです。
+TiDB は、トランザクションの因果関係の一貫性の有効化をサポートします。因果的一貫性のあるトランザクションは、コミット時に PD からタイムスタンプを取得する必要がなく、コミットのレイテンシーが短くなります。因果関係の一貫性を有効にする構文は次のとおりです。
 
 {{< copyable "" >}}
 

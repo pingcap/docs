@@ -18,7 +18,7 @@ TiDB Ansible バージョン: 3.1.0-beta.2
 
 -   ツール
     -   TiDB Lightning
-        -   構成ファイルで構成されていない特定の項目については、 [#255](https://github.com/pingcap/tidb-lightning/pull/255)
+        -   構成ファイルで構成されていない特定の項目については、 [TiDB Lightningコンフィグレーション](/tidb-lightning/tidb-lightning-configuration.md)で指定したデフォルト構成を使用します[#255](https://github.com/pingcap/tidb-lightning/pull/255)
         -   `--tidb-password` CLI パラメータを追加して TiDB パスワードを設定します[#253](https://github.com/pingcap/tidb-lightning/pull/253)
 
 ## 新機能 {#new-features}
@@ -52,7 +52,7 @@ TiDB Ansible バージョン: 3.1.0-beta.2
     -   Raftstore
         -   Hibernate リージョン[#6450](https://github.com/tikv/tikv/pull/6450)からデータが適切に読み取られないため、読み取りリクエストが処理できない問題を修正します。
         -   リーダー転送プロセス[#6613](https://github.com/tikv/tikv/pull/6613)中の`ReadIndex`リクエストによって引き起こされるpanicの問題を修正
-        -   一部の特殊な状況で休止領域が正しく起動されない問題を修正[#6972](https://github.com/tikv/tikv/pull/6972)
+        -   一部の特殊な状況で休止領域が正しく起動されない問題を修正[#6730](https://github.com/tikv/tikv/pull/6730) [#6737](https://github.com/tikv/tikv/pull/6737) [#6972](https://github.com/tikv/tikv/pull/6972)
     -   バックアップ
         -   追加データのバックアップによって引き起こされる復元中のデータ インデックスの不一致を修正します[#6659](https://github.com/tikv/tikv/pull/6659)
         -   バックアップ中に削除された値が誤って処理されることによって引き起こされるpanicを修正します[#6726](https://github.com/tikv/tikv/pull/6726)

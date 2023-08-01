@@ -417,7 +417,7 @@ SELECT * FROM mysql.default_roles;
 2 rows in set (0.00 sec)
 ```
 
--   `HOST`と`USER`はそれぞれユーザーのホスト名とユーザー名を示します。
+-   `HOST`と`USER`それぞれユーザーのホスト名とユーザー名を示します。
 -   `DEFAULT_ROLE_HOST`と`DEFAULT_ROLE_USER` 、それぞれデフォルトのロールのホスト名とユーザー名を示します。
 
 ### 参考文献 {#references}

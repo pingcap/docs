@@ -7,7 +7,7 @@ summary: Learn the Slow Queries page of TiDB Dashboard.
 
 TiDB ダッシュボードの「スロー クエリ」ページでは、クラスター内のすべてのスロー クエリを検索して表示できます。
 
-デフォルトでは、実行時間が 300 ミリ秒を超える SQL クエリは低速クエリとみなされます。これらのクエリは[`slow-threshold`](/tidb-configuration-file.md#slow-threshold) TiDB パラメータを通じて調整できます。
+デフォルトでは、実行時間が 300 ミリ秒を超える SQL クエリは低速クエリとみなされます。これらのクエリは[遅いクエリログ](/identify-slow-queries.md)に記録され、TiDB ダッシュボード経由で検索できます。低速クエリのしきい値は、 [`tidb_slow_log_threshold`](/system-variables.md#tidb_slow_log_threshold)セッション変数または[`instance.tidb_slow_log_threshold`](/tidb-configuration-file.md#tidb_slow_log_threshold) TiDB パラメータを通じて調整できます。
 
 > **ノート：**
 >
@@ -34,6 +34,12 @@ TiDB ダッシュボードの「スロー クエリ」ページでは、クラ�
 ページ上の**[列]**をクリックすると、さらに列を表示することを選択できます。列名の右側にある**(i)**アイコンにマウスを移動すると、この列の説明が表示されます。
 
 ![Show more columns](/media/dashboard/dashboard-slow-queries-list2-v620.png)
+
+### 遅いクエリをローカルにエクスポートする {#export-slow-queries-locally}
+
+ページの右上隅にある ☰ ( [**詳細**] ) をクリックして、 **[エクスポート]**オプションを表示します。 **[エクスポート]**をクリックすると、TiDB ダッシュボードは現在のリスト内の低速クエリを CSV ファイルとしてエクスポートします。
+
+![Export slow queries locally](/media/dashboard/dashboard-slow-queries-export-v651.png)
 
 ### 列ごとに並べ替える {#sort-by-column}
 

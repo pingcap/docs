@@ -122,7 +122,7 @@ DELETE FROM t;
 
 ### 主キーのベスト プラクティス {#primary-key-best-practices}
 
-[主キーを選択するときに従うべきルール](/develop/dev-guide-create-table.md#guidelines-to-follow-when-selecting-primary-key)参照してください。
+[主キーを選択するときに従うべきルール](/develop/dev-guide-create-table.md#guidelines-to-follow-when-selecting-primary-key)を参照してください。
 
 ## インデックスのベストプラクティス {#index-best-practices}
 
@@ -130,7 +130,7 @@ DELETE FROM t;
 
 ### インデックスのベスト プラクティスを追加する {#add-index-best-practices}
 
-TiDB は、オンラインのインデックス追加操作をサポートしています。 [インデックスの作成](/sql-statements/sql-statement-create-index.md)ステートメントを使用してインデックスを追加できます。テーブル内のデータの読み取りと書き込みはブロックされません。次のシステム変数を変更することで、インデックス追加操作の`re-organize`フェーズ中に同時実行性とバッチ サイズを調整できます。
+TiDB は、オンラインのインデックス追加操作をサポートしています。 [インデックスの追加](/sql-statements/sql-statement-add-index.md)または[インデックスの作成](/sql-statements/sql-statement-create-index.md)ステートメントを使用してインデックスを追加できます。テーブル内のデータの読み取りと書き込みはブロックされません。次のシステム変数を変更することで、インデックス追加操作の`re-organize`フェーズ中に同時実行性とバッチ サイズを調整できます。
 
 -   [`tidb_ddl_reorg_worker_cnt`](/system-variables.md#tidb_ddl_reorg_worker_cnt)
 -   [`tidb_ddl_reorg_batch_size`](/system-variables.md#tidb_ddl_reorg_batch_size)

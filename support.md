@@ -14,7 +14,7 @@ TiDB の使用中に問題が発生した場合は、次の方法で PingCAP ま
 -   TiDB コミュニティに助けを求めてください。
 
     -   [TiDB フォーラム](https://ask.pingcap.com/)
-    -   Slackチャンネル： [#tidb-japan](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=tidb-japan&#x26;ref=docs) （日本語）
+    -   Slackチャンネル： [＃みんな](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=everyone&#x26;ref=docs) （英語）、 [#tidb-japan](https://slack.tidb.io/invite?team=tidb-community&#x26;channel=tidb-japan&#x26;ref=docs) （日本語）
     -   [スタックオーバーフロー](https://stackoverflow.com/questions/tagged/tidb) (#tidb でタグ付けされた質問)
 
 -   TiDB の実装と設計を学ぶ

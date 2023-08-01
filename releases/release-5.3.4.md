@@ -23,7 +23,7 @@ TiDB バージョン: 5.3.4
     -   データベースレベルの権限が誤ってクリーンアップされる問題を修正[#38363](https://github.com/pingcap/tidb/issues/38363)
     -   `mysql.tables_priv`テーブル[#38293](https://github.com/pingcap/tidb/issues/38293)の`grantor`フィールドが欠落している問題を修正
     -   アイドル状態の接続で`KILL TIDB`がすぐに有効にならない問題を修正[#24031](https://github.com/pingcap/tidb/issues/24031)
-    -   TiDB と MySQL [#27573](https://github.com/pingcap/tidb/issues/27573)で`date_add`と`date_sub`の戻り値の型が異なる問題を修正
+    -   TiDB と MySQL [#36394](https://github.com/pingcap/tidb/issues/36394) 、 [#27573](https://github.com/pingcap/tidb/issues/27573)で`date_add`と`date_sub`の戻り値の型が異なる問題を修正
     -   パーサーがテーブル オプション[#38368](https://github.com/pingcap/tidb/issues/38368)を復元するときの誤った`INSERT_METHOD`値を修正しました。
     -   v5.1 以前の MySQL クライアントが TiDBサーバーに接続するときに認証が失敗する問題を修正します[#29725](https://github.com/pingcap/tidb/issues/29725)
     -   符号なし`BIGINT`引数[#30101](https://github.com/pingcap/tidb/issues/30101)を渡すときの`GREATEST`と`LEAST`の間違った結果を修正

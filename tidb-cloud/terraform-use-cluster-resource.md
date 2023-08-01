@@ -5,9 +5,15 @@ summary: Learn how to use the cluster resource to create and modify a TiDB Cloud
 
 # クラスタリソースの使用 {#use-cluster-resource}
 
-このドキュメントでは、 `tidbcloud_cluster`リソースを使用してTiDB Cloudクラスターを作成および変更する方法を学習できます。
+このドキュメントでは、 `tidbcloud_cluster`リソースを使用してTiDB Cloudクラスターを管理する方法を学習できます。
 
 さらに、 `tidbcloud_projects`と`tidbcloud_cluster_specs`データ ソースを使用して必要な情報を取得する方法も学習します。
+
+`tidbcloud_cluster`リソースの特徴は次のとおりです。
+
+-   TiDB サーバーレス クラスターと TiDB 専用クラスターを作成します。
+-   TiDB 専用クラスターを変更します。
+-   TiDB サーバーレス クラスターと TiDB 専用クラスターを削除します。
 
 ## 前提条件 {#prerequisites}
 
@@ -26,15 +32,13 @@ summary: Learn how to use the cluster resource to create and modify a TiDB Cloud
       required_providers {
         tidbcloud = {
           source = "tidbcloud/tidbcloud"
-          version = "~> 0.1.0"
         }
       }
-      required_version = ">= 1.0.0"
     }
 
     provider "tidbcloud" {
-      public_key = "fake_public_key"
-      private_key = "fake_private_key"
+      public_key = "your_public_key"
+      private_key = "your_private_key"
     }
 
     data "tidbcloud_projects" "example_project" {
@@ -127,14 +131,12 @@ summary: Learn how to use the cluster resource to create and modify a TiDB Cloud
       required_providers {
         tidbcloud = {
           source = "tidbcloud/tidbcloud"
-          version = "~> 0.1.0"
         }
       }
-      required_version = ">= 1.0.0"
     }
     provider "tidbcloud" {
-      public_key = "fake_public_key"
-      private_key = "fake_private_key"
+      public_key = "your_public_key"
+      private_key = "your_private_key"
     }
     data "tidbcloud_cluster_specs" "example_cluster_spec" {
     }
@@ -274,7 +276,7 @@ summary: Learn how to use the cluster resource to create and modify a TiDB Cloud
 
 -   `cloud_provider`は、TiDB クラスターをホストできるクラウド プロバイダーです。
 -   `region`は`cloud_provider`の領域です。
--   `node_quantity_range`最小ノード数とノードをスケーリングするステップを示します。
+-   `node_quantity_range`最小ノード番号とノードをスケーリングするステップを示します。
 -   `node_size`はノードのサイズです。
 -   `storage_size_gib_range`ノードに設定できる最小および最大storageサイズを示します。
 
@@ -286,7 +288,7 @@ summary: Learn how to use the cluster resource to create and modify a TiDB Cloud
 
 `tidbcloud_cluster`リソースを使用してクラスターを作成できます。
 
-次の例は、Dedicated Tierクラスターを作成する方法を示しています。
+次の例は、TiDB 専用クラスターを作成する方法を示しています。
 
 1.  クラスター用のディレクトリを作成し、そこに入ります。
 
@@ -297,15 +299,13 @@ summary: Learn how to use the cluster resource to create and modify a TiDB Cloud
      required_providers {
        tidbcloud = {
          source = "tidbcloud/tidbcloud"
-         version = "~> 0.1.0"
        }
      }
-     required_version = ">= 1.0.0"
     }
 
     provider "tidbcloud" {
-     public_key = "fake_public_key"
-     private_key = "fake_private_key"
+     public_key = "your_public_key"
+     private_key = "your_private_key"
     }
 
     resource "tidbcloud_cluster" "example_cluster" {
@@ -486,9 +486,9 @@ summary: Learn how to use the cluster resource to create and modify a TiDB Cloud
 
 ステータスが`AVAILABLE`の場合、TiDB クラスターが作成され、使用する準備ができていることを示します。
 
-## Dedicated Tierクラスターを変更する {#modify-a-dedicated-tier-cluster}
+## TiDB 専用クラスターを変更する {#modify-a-tidb-dedicated-cluster}
 
-Dedicated Tierクラスターの場合、Terraform を使用してクラスター リソースを次のように管理できます。
+TiDB 専用クラスターの場合、Terraform を使用して次のようにクラスター リソースを管理できます。
 
 -   TiFlashコンポーネントをクラスターに追加します。
 -   クラスターをスケーリングします。
@@ -844,13 +844,13 @@ TiDB クラスターのステータスが`AVAILABLE`の場合、TiDB クラス�
 
 6.  しばらく待ってから、 `terraform refersh`コマンドを使用して状態を更新します。最終的にステータスは`AVAILABLE`になります。
 
-これで、Terraform を使用してDedicated Tierクラスターを作成および管理しました。次に、 [バックアップリソース](/tidb-cloud/terraform-use-backup-resource.md)によってクラスターのバックアップを作成してみてください。
+これで、Terraform を使用して TiDB 専用クラスターを作成および管理できました。次に、 [バックアップリソース](/tidb-cloud/terraform-use-backup-resource.md)によってクラスターのバックアップを作成してみてください。
 
 ## クラスターをインポートする {#import-a-cluster}
 
 Terraform によって管理されていない TiDB クラスターの場合は、インポートするだけで Terraform を使用して管理できます。
 
-たとえば、Terraform によって作成されていないクラスターをインポートしたり、 [復元リソースを使用して作成された](/tidb-cloud/terraform-use-restore-resource.md#create-a-restore-task-with-the-restore-resource)のクラスターをインポートしたりできます。
+たとえば、Terraform によって作成されていないクラスターをインポートしたり、 [復元リソースを使用して作成された](/tidb-cloud/terraform-use-restore-resource.md#create-a-restore-task)のクラスターをインポートしたりできます。
 
 1.  次のように`import_cluster.tf`ファイルを作成します。
 
@@ -859,10 +859,8 @@ Terraform によって管理されていない TiDB クラスターの場合は�
      required_providers {
        tidbcloud = {
          source = "tidbcloud/tidbcloud"
-         version = "~> 0.1.0"
        }
      }
-     required_version = ">= 1.0.0"
     }
     resource "tidbcloud_cluster" "import_cluster" {}
     ```

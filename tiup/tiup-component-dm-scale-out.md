@@ -14,7 +14,7 @@ tiup dm scale-out <cluster-name> <topology.yaml> [flags]
 
 `<cluster-name>` : 操作するクラスターの名前。クラスター名を忘れた場合は、 [クラスタリスト](/tiup/tiup-component-dm-list.md)コマンドで確認できます。
 
-`<topology.yaml>` : 準備された[トポロジファイル](/tiup/tiup-dm-topology-reference.md) 。このトポロジ ファイルには、現在のクラスターに追加される新しいノードのみが含まれている必要があります。
+`<topology.yaml>` : 準備された[トポロジーファイル](/tiup/tiup-dm-topology-reference.md) 。このトポロジ ファイルには、現在のクラスターに追加される新しいノードのみが含まれている必要があります。
 
 ## オプション {#options}
 
@@ -28,7 +28,7 @@ tiup dm scale-out <cluster-name> <topology.yaml> [flags]
 
 -   ターゲット マシンへの接続に使用するキー ファイルを指定します。
 -   データ型: `STRING`
--   このオプションがコマンドで指定されていない場合、デフォルトでは`~/.ssh/id_rsa`ファイルがターゲット マシンへの接続に使用されます。
+-   このオプションがコマンドで指定されていない場合、デフォルトで`~/.ssh/id_rsa`ファイルがターゲット マシンへの接続に使用されます。
 
 ### -p、--パスワード {#p-password}
 

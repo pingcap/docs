@@ -20,7 +20,7 @@ summary: Learn about GC configuration parameters.
 
 > **ノート：**
 >
-> このセクションは、オンプレミス TiDB にのみ適用されます。 TiDB Cloud には、デフォルトでは GC I/O 制限がありません。
+> このセクションは、TiDB セルフホスト型にのみ適用されます。 TiDB Cloud には、デフォルトでは GC I/O 制限がありません。
 
 </CustomContent>
 
@@ -58,7 +58,7 @@ TiDB v6.1.0 では、アクティブなトランザクションが GC セーフ 
 
 > **ノート：**
 >
-> TiKV 構成を変更する次の例は、オンプレミス TiDB にのみ適用されます。 TiDB Cloudの場合、コンパクション フィルターの GC メカニズムはデフォルトで有効になっています。
+> TiKV 構成を変更する次の例は、TiDB セルフホストにのみ適用されます。 TiDB Cloudの場合、コンパクション フィルターの GC メカニズムはデフォルトで有効になっています。
 
 </CustomContent>
 

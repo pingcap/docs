@@ -5,7 +5,7 @@ summary: Learn about the execution plan information returned by the EXPLAIN stat
 
 # MPP モードでの Explain ステートメント {#explain-statements-in-the-mpp-mode}
 
-TiDB は、 [TiFlash](/tiflash/tiflash-overview.md)にレプリカがあるテーブルでのみ使用できることに注意してください。
+TiDB は、 [MPPモード](/tiflash/use-tiflash-mpp-mode.md)を使用したクエリの実行をサポートしています。 MPP モードでは、TiDB オプティマイザーは MPP の実行プランを生成します。 MPP モードは、 [TiFlash](/tiflash/tiflash-overview.md)にレプリカがあるテーブルでのみ使用できることに注意してください。
 
 このドキュメントの例は、次のサンプル データに基づいています。
 

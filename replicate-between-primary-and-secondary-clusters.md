@@ -11,7 +11,7 @@ summary: Learn how to replicate data from a primary cluster to a secondary clust
 2.  増分データをプライマリ クラスタからセカンダリ クラスタにレプリケートします。
 3.  プライマリ クラスターがダウンしたときに、REDO ログを使用してデータを一貫して復元します。
 
-実行中の TiDB クラスターからそのセカンダリ クラスターに増分データをレプリケートするには、バックアップ &amp; リストア[TiCDC](/ticdc/ticdc-overview.md)を使用できます。
+実行中の TiDB クラスターからそのセカンダリ クラスターに増分データをレプリケートするには、バックアップ &amp; リストア[BR](/br/backup-and-restore-overview.md)および[TiCDC](/ticdc/ticdc-overview.md)を使用できます。
 
 ## ステップ 1. 環境をセットアップする {#step-1-set-up-the-environment}
 
@@ -98,7 +98,7 @@ summary: Learn how to replicate data from a primary cluster to a secondary clust
 
 ## ステップ 2. 全データを移行する {#step-2-migrate-full-data}
 
-環境をセットアップしたら、 [三つの方法](/br/br-use-overview.md#deploy-and-use-br)で起動可能です。このドキュメントでは、SQL ステートメント`BACKUP`と`RESTORE`を使用します。
+環境をセットアップしたら、 [BR](https://github.com/pingcap/tidb/tree/master/br) ) のバックアップおよびリストア関数を使用して、完全なデータを移行できます。 BRは[三つの方法](/br/br-use-overview.md#deploy-and-use-br)で起動可能です。このドキュメントでは、SQL ステートメント`BACKUP`と`RESTORE`を使用します。
 
 > **ノート：**
 >

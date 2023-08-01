@@ -32,7 +32,7 @@ TiDB バージョン: 4.0.8
     -   コプロセッサー・ランタイム統計[#19264](https://github.com/pingcap/tidb/pull/19264)にさらに多くの RPC ランタイム情報を記録します。
     -   遅いログの解析を高速化し、クエリのパフォーマンスを向上させます[#20556](https://github.com/pingcap/tidb/pull/20556)
     -   SQL オプティマイザーが潜在的な新しいプランを検証しているときに、プラン バインディング ステージで実行プランがタイムアウトになるまで待機し、さらにデバッグ情報を記録します[#20530](https://github.com/pingcap/tidb/pull/20530)
-    -   低速ログの実行再試行時間と低速クエリ結果を追加します[#20494](https://github.com/pingcap/tidb/pull/20494)
+    -   低速ログの実行再試行時間と低速クエリ結果を追加します[#20495](https://github.com/pingcap/tidb/pull/20495) [#20494](https://github.com/pingcap/tidb/pull/20494)
     -   `table_storage_stats`システムテーブル[#20431](https://github.com/pingcap/tidb/pull/20431)を追加します。
     -   `INSERT` / `UPDATE` / `REPLACE`ステートメントの RPC ランタイム統計情報を追加します[#20430](https://github.com/pingcap/tidb/pull/20430)
     -   `EXPLAIN FOR CONNECTION` [#20384](https://github.com/pingcap/tidb/pull/20384)の結果に演算子情報を追加

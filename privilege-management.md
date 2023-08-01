@@ -209,7 +209,7 @@ v5.1 以降、TiDB 機能は、MySQL 8.0 から借用した機能である動的
 ## <code>SUPER</code>特典 {#code-super-code-privilege}
 
 -   `SUPER`権限により、ユーザーはほぼすべての操作を実行できます。デフォルトでは、 `root`ユーザーのみにこの権限が付与されます。この権限を他のユーザーに付与する場合は注意してください。
--   `SUPER`権限は[動的権限](#dynamic-privileges)に置き換えることができます。
+-   `SUPER`権限は[MySQL 8.0 では非推奨になりました](https://dev.mysql.com/doc/refman/8.0/en/privileges-provided.html#dynamic-privileges-migration-from-super)とみなされ、よりきめ細かいアクセス制御を提供するために[動的権限](#dynamic-privileges)に置き換えることができます。
 
 ## TiDB 操作に必要な権限 {#privileges-required-for-tidb-operations}
 
@@ -264,7 +264,7 @@ mysql> SELECT * FROM INFORMATION_SCHEMA.USER_PRIVILEGES WHERE grantee = "'root'@
 
 > **ノート：**
 >
-> MySQL 5.7 のドキュメントでは、ユーザーがテーブルに対して`ALTER`操作を実行するには`INSERT`と`CREATE`権限が必要です。しかし実際には、 MySQL 5.7.25 では、この場合に必要なのは`ALTER`権限のみです。現在、TiDB の`ALTER`権限は MySQL の実際の動作と一致しています。
+> MySQL 5.7 のドキュメントでは、ユーザーがテーブルに対して`ALTER`操作を実行するには`INSERT`と`CREATE`権限が必要です。しかし実際には、 MySQL 5.7.25 では、この場合に必要なのは`ALTER`権限のみです。現在、TiDB の`ALTER`権限は、MySQL の実際の動作と一致しています。
 
 ### バックアップ {#backup}
 

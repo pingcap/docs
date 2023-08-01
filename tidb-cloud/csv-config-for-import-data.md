@@ -22,12 +22,6 @@ summary: Learn how to use CSV configurations for the Import Data service on TiDB
 
 -   デフォルト: `,`
 
-## ヘッダ {#header}
-
--   定義:*すべての*CSV ファイルにヘッダー行が含まれているかどうか。 **Header**が`True`の場合、最初の行が列名として使用されます。 **Header**が`False`の場合、最初の行は通常のデータ行として扱われます。
-
--   デフォルト: `True`
-
 ## デリミタ {#delimiter}
 
 -   定義: 引用符で使用する区切り文字を定義します。 **Delimiter**が空の場合、すべてのフィールドは引用符で囲まれません。
@@ -39,9 +33,15 @@ summary: Learn how to use CSV configurations for the Import Data service on TiDB
 
 -   デフォルト: `"`
 
-## バックスラッシュとエスケープ {#backslash-escape}
+## ヘッダー付き {#with-header}
 
--   定義: フィールド内のバックスラッシュをエスケープ文字として解析するかどうか。 **Backslash-escape**が`True`の場合、次のシーケンスが認識されて変換されます。
+-   定義:*すべての*CSV ファイルにヘッダー行が含まれているかどうか。 **With header**が`True`の場合、最初の行が列名として使用されます。 **With header**が`False`の場合、最初の行は通常のデータ行として扱われます。
+
+-   デフォルト: `True`
+
+## バックスラッシュのエスケープ {#backslash-escape}
+
+-   定義: フィールド内のバックスラッシュをエスケープ文字として解析するかどうか。**バックスラッシュ エスケープ**が`True`の場合、次のシーケンスが認識されて変換されます。
 
     | シーケンス | に変換                      |
     | ----- | ------------------------ |
@@ -54,57 +54,21 @@ summary: Learn how to use CSV configurations for the Import Data service on TiDB
 
     他のすべての場合 (たとえば、 `\"` )、バックスラッシュは取り除かれ、次の文字 ( `"` ) がフィールドに残ります。左側の文字には特別な役割 (デリミタなど) はなく、単なる通常の文字です。引用符は、バックスラッシュがエスケープ文字として解析されるかどうかには影響しません。
 
-    スクリーンショットのフィールドを例に挙げます。
+    次のフィールドを例として取り上げます。
 
     -   値が`True`の場合、 `"nick name is \"Mike\""` `nick name is "Mike"`として解析され、ターゲット テーブルに書き込まれます。
     -   値が`False`の場合、値は`"nick name is \"` 、 `Mike\` 、および`""`の 3 つのフィールドとして解析されます。ただし、フィールドが互いに分離されていないため、正しく解析できません。
 
-    標準の CSV ファイルの場合、記録するフィールドに二重引用符で囲まれた文字がある場合は、二重引用符を 2 つ使用してエスケープする必要があります。この場合、 `Backslash-escape = True`を使用すると解析エラーが発生しますが、 `Backslash-escape = False`使用すると正しく解析されます。一般的なシナリオは、インポートされたフィールドに JSON コンテンツが含まれている場合です。標準の CSV JSON フィールドは通常、次のように保存されます。
+    標準の CSV ファイルの場合、記録するフィールドに二重引用符で囲まれた文字がある場合は、二重引用符を 2 つ使用してエスケープする必要があります。この場合、 `Backslash escape = True`を使用すると解析エラーが発生しますが、 `Backslash escape = False`使用すると正しく解析されます。一般的なシナリオは、インポートされたフィールドに JSON コンテンツが含まれている場合です。標準の CSV JSON フィールドは通常、次のように保存されます。
 
     `"{""key1"":""val1"", ""key2"": ""val2""}"`
 
-    この場合、 `Backslash-escape = False`設定すると、次のようにフィールドがデータベースに正しくエスケープされます。
+    この場合、 `Backslash escape = False`設定すると、次のようにフィールドがデータベースに正しくエスケープされます。
 
     `{"key1": "val1", "key2": "val2"}`
 
-    以下のようにCSVソースファイルの内容をJSONとして保存する場合は、以下のように設定`Backslash-escape = True`を検討してください。ただし、これは CSV の標準形式ではありません。
+    以下のようにCSVソースファイルの内容をJSONとして保存する場合は、以下のように設定`Backslash escape = True`を検討してください。ただし、これは CSV の標準形式ではありません。
 
     `"{\"key1\": \"val1\", \"key2\":\"val2\" }"`
 
 -   デフォルト: `True`
-
-## 非ヌルとヌル {#not-null-and-null}
-
-> **ノート：**
->
-> TiDB Cloudに[ローカルファイルのインポート](/tidb-cloud/tidb-cloud-import-local-files.md)場合、 **Not-null**および**Null**設定を構成することはできません。
-
--   定義: **Not-null**設定は、すべてのフィールドが null 値を許容できないかどうかを制御します。 **Not-null**が`False`の場合、 **Null**で指定された文字列は、特定の値ではなく SQL NULL に変換されます。
-
--   引用符は、フィールドが null かどうかには影響しません。
-
-    たとえば、次の CSV ファイルでは:
-
-    ```csv
-    column_A,column_B,column_C
-    \N,"\N",
-    ```
-
-    デフォルト設定 ( `Not-null = False; Null = '\N'` ) では、列`column_A`と列`column_B`は両方とも TiDB にインポートされた後に NULL に変換されます。列`column_C`は空の文字列`''`ですが、NULL ではありません。
-
--   デフォルト: Not-null=False、Null=\N
-
-## 最後の区切り文字をトリミング {#trim-last-separator}
-
--   定義: `Separator`行末記号として扱い、末尾の区切り記号をすべてトリミングするかどうか。
-
-    たとえば、次の CSV ファイルでは:
-
-    ```csv
-    A,,B,,
-    ```
-
-    -   `Trim-last-separator = False`の場合、これは 5 つのフィールドの行として解釈されます`('A', '', 'B', '', '')` 。
-    -   `Trim-last-separator = True`の場合、これは 3 つのフィールドの行として解釈されます`('A', '', 'B')` 。
-
--   デフォルト: `False`

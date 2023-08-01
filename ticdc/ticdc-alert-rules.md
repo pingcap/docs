@@ -17,7 +17,7 @@ summary: Learn about TiCDC alert rules and how to handle the alerts.
 
 -   アラート ルール:
 
-    (time() - ticdc_processor_checkpoint_ts / 1000) &gt; 600
+    (time() - ticdc_owner_checkpoint_ts / 1000) &gt; 600
 
 -   説明：
 
@@ -31,7 +31,7 @@ summary: Learn about TiCDC alert rules and how to handle the alerts.
 
 -   アラート ルール:
 
-    (time() - ticdc_processor_resolved_ts / 1000) &gt; 300
+    (time() - ticdc_owner_resolved_ts / 1000) &gt; 300
 
 -   説明：
 
@@ -73,25 +73,11 @@ summary: Learn about TiCDC alert rules and how to handle the alerts.
 
     TiCDC ログを収集して根本原因を特定します。
 
-### <code>ticdc_mounter_unmarshal_and_mount_time_more_than_1s</code> {#code-ticdc-mounter-unmarshal-and-mount-time-more-than-1s-code}
+### <code>cdc_sink_flush_duration_time_more_than_10s</code> {#code-cdc-sink-flush-duration-time-more-than-10s-code}
 
 -   アラート ルール:
 
-`histogram_quantile(0.9, rate(ticdc_mounter_unmarshal_and_mount_bucket[1m])) * 1000 > 1000`
-
--   説明：
-
-    レプリケーション タスクでは、データ変更をアンマーシャリングするのに 1 秒以上かかります。
-
--   解決：
-
-    TiCDC ログを収集して根本原因を特定します。
-
-### <code>cdc_sink_execute_duration_time_more_than_10s</code> {#code-cdc-sink-execute-duration-time-more-than-10s-code}
-
--   アラート ルール:
-
-    `histogram_quantile(0.9, rate(ticdc_sink_txn_exec_duration_bucket[1m])) > 10`
+    `histogram_quantile(0.9, rate(ticdc_sink_txn_worker_flush_duration[1m])) > 10`
 
 -   説明：
 

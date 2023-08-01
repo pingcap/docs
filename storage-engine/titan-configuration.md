@@ -45,7 +45,7 @@ Titan が有効になった後、RocksDB に保存されている既存のデー
 
 > **ノート：**
 >
-> Titan が無効になっている場合、RocksDB は Titan に移行されたデータを読み取ることができません。 Titan がすでに有効になっている (誤って`rocksdb.titan.enabled`から`false`に設定されている) TiKV インスタンスで Titan が誤って無効になっている場合、TiKV は起動に失敗し、TiKV ログに`You have disabled titan when its data directory is not empty`エラーが表示されます。 Titan を正しく無効にするには、 [タイタンを無効にする](#disable-titan)を参照してください。
+> Titan が無効になっている場合、RocksDB は Titan に移行されたデータを読み取ることができません。 Titan がすでに有効になっている (誤って`rocksdb.titan.enabled`から`false`に設定されている) TiKV インスタンスで Titan が誤って無効になっている場合、TiKV は起動に失敗し、TiKV ログに`You have disabled titan when its data directory is not empty`エラーが表示されます。 Titan を正しく無効にするには、 [タイタンを無効にする](#disable-titan)参照してください。
 
 ## パラメーター {#parameters}
 
@@ -148,7 +148,7 @@ Titan を無効にするには、 `rocksdb.defaultcf.titan.blob-run-mode`オプ�
 
 ## レベル マージ (実験的) {#level-merge-experimental}
 
-TiKV 4.0 では、範囲クエリのパフォーマンスを向上させ、フォアグラウンド書き込み操作に対する Titan GC の影響を軽減するために、新しいアルゴリズム[レベルマージ](/storage-engine/titan-overview.md#level-merge)が導入されました。次のオプションを使用してレベル マージを有効にできます。
+TiKV 4.0, [レベルマージ](/storage-engine/titan-overview.md#level-merge)では、範囲クエリのパフォーマンスを向上させ、フォアグラウンド書き込み操作に対する Titan GC の影響を軽減するために、新しいアルゴリズムが導入されました。次のオプションを使用してレベル マージを有効にできます。
 
 ```toml
 [rocksdb.defaultcf.titan]

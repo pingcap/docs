@@ -14,8 +14,8 @@ summary: Learn about how to update data and batch update data.
 
 このドキュメントを読む前に、以下を準備する必要があります。
 
--   [TiDB Cloud(Serverless Tier) で TiDBクラスタを構築する](/develop/dev-guide-build-cluster-in-cloud.md) 。
--   [セカンダリインデックスの作成](/develop/dev-guide-create-secondary-indexes.md)を読み取ります。
+-   [TiDB サーバーレスクラスタを構築する](/develop/dev-guide-build-cluster-in-cloud.md) 。
+-   [スキーマ設計の概要](/develop/dev-guide-schema-design-overview.md) 、 [データベースを作成する](/develop/dev-guide-create-database.md) 、 [テーブルを作成する](/develop/dev-guide-create-table.md) 、および[セカンダリインデックスの作成](/develop/dev-guide-create-secondary-indexes.md)を読み取ります。
 -   データを`UPDATE`にしたい場合は、まず[データを挿入する](/develop/dev-guide-insert-data.md)を行う必要があります。
 
 ## <code>UPDATE</code>を使用する {#use-code-update-code}
@@ -52,13 +52,13 @@ UPDATE {table} SET {update_column} = {update_value} WHERE {filter_column} = {fil
 
 <CustomContent platform="tidb">
 
--   多数の行 (たとえば、1 万行以上) を更新する必要がある場合は、 [楽観的取引](/optimistic-transaction.md) ) することがあります。
+-   多数の行 (たとえば、1 万行を超える) を更新する必要がある場合は、 [一括更新](#bulk-update)使用します。 TiDB は 1 つのトランザクションのサイズを制限しているため (デフォルトでは[txn 合計サイズ制限](/tidb-configuration-file.md#txn-total-size-limit) MB)、一度に更新するデータが多すぎると、ロックが長時間保持されすぎたり ( [悲観的取引](/pessimistic-transaction.md) )、競合が発生したり ( [楽観的取引](/optimistic-transaction.md) ) することがあります。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
--   多数の行 (たとえば、1 万行以上) を更新する必要がある場合は、 [楽観的取引](/optimistic-transaction.md) ) する可能性があります。
+-   多数の行 (たとえば、1 万行以上) を更新する必要がある場合は、 [一括更新](#bulk-update)使用します。 TiDB はデフォルトで 1 つのトランザクションのサイズを 100 MB に制限しているため、一度に更新するデータが多すぎると、ロックが長時間保持されすぎたり ( [悲観的取引](/pessimistic-transaction.md) )、競合が発生したり ( [楽観的取引](/optimistic-transaction.md) ) する可能性があります。
 
 </CustomContent>
 
@@ -164,13 +164,13 @@ VALUES (?, ?, ?, NOW()) ON DUPLICATE KEY UPDATE `score` = ?, `rated_at` = NOW()"
 
 <CustomContent platform="tidb">
 
-ただし、多数の行 (たとえば、1 万行以上) を更新する必要がある場合は、データを繰り返し更新することをお勧めします。つまり、更新が完了するまで、各繰り返しでデータの一部のみを更新します。 。これは、TiDB が単一トランザクションのサイズを制限しているためです (デフォルトでは[楽観的取引](/optimistic-transaction.md) ) します。プログラムまたはスクリプトでループを使用すると、操作を完了できます。
+ただし、多数の行 (たとえば、1 万行以上) を更新する必要がある場合は、データを繰り返し更新することをお勧めします。つまり、更新が完了するまで、各繰り返しでデータの一部のみを更新します。 。これは、TiDB が単一トランザクションのサイズを制限しているためです (デフォルトでは[txn 合計サイズ制限](/tidb-configuration-file.md#txn-total-size-limit) MB)。一度にあまりに多くのデータ更新を行うと、ロックが長時間保持されすぎたり ( [悲観的取引](/pessimistic-transaction.md) )、競合が発生したり ( [楽観的取引](/optimistic-transaction.md) ) します。プログラムまたはスクリプトでループを使用すると、操作を完了できます。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-ただし、多数の行 (たとえば、1 万行以上) を更新する必要がある場合は、データを繰り返し更新することをお勧めします。つまり、更新が完了するまで、各繰り返しでデータの一部のみを更新します。 。これは、TiDB がデフォルトで 1 つのトランザクションのサイズを 100 MB に制限しているためです。一度にあまりに多くのデータ更新を行うと、ロックが長時間保持されすぎたり ( [楽観的取引](/optimistic-transaction.md) ) します。プログラムまたはスクリプトでループを使用して操作を完了できます。
+ただし、多数の行 (たとえば、1 万行以上) を更新する必要がある場合は、データを繰り返し更新することをお勧めします。つまり、更新が完了するまで、各繰り返しでデータの一部のみを更新します。 。これは、TiDB がデフォルトで 1 つのトランザクションのサイズを 100 MB に制限しているためです。一度にあまりに多くのデータ更新を行うと、ロックが長時間保持されすぎたり ( [悲観的取引](/pessimistic-transaction.md) )、競合が発生したり ( [楽観的取引](/optimistic-transaction.md) ) します。プログラムまたはスクリプトでループを使用して操作を完了できます。
 
 </CustomContent>
 
@@ -275,7 +275,7 @@ func placeHolder(n int) string {
 }
 ```
 
-各反復では、主キーの順に`SELECT`が実行されます。 10 点スケール ( `ten_point`は`false` ) に更新されていない最大`1000`行の主キー値を選択します。 `SELECT`つの各ステートメントは、重複を防ぐために、前の`SELECT`の結果の最大のものよりも大きい主キーを選択します。次に、Bulk-update を使用し、その`score`列を`2`で乗算し、 `ten_point` `true`に設定します。更新`ten_point`の目的は、クラッシュ後の再起動の場合に、更新アプリケーションが同じ行を繰り返し更新することを防ぐことであり、これによりデータ破損が発生する可能性があります。各ループに`time.Sleep(time.Second)`すると、更新アプリケーションがハードウェア リソースを過剰に消費するのを防ぐために、更新アプリケーションが 1 秒間一時停止します。
+各反復では、主キーの順に`SELECT`が実行されます。 10 点スケール ( `ten_point`は`false` ) に更新されていない最大`1000`行の主キー値を選択します。 `SELECT`つの各ステートメントは、重複を防ぐために、前の`SELECT`の結果の最大のものよりも大きい主キーを選択します。次に、Bulk-update を使用し、その`score`列を`2`で乗算し、 `ten_point` `true`に設定します。更新`ten_point`の目的は、クラッシュ後の再起動の場合に、更新アプリケーションが同じ行を繰り返し更新することを防ぐことであり、これによりデータ破損が発生する可能性があります。各ループに`time.Sleep(time.Second)`指定すると、更新アプリケーションがハードウェア リソースを過剰に消費するのを防ぐために、更新アプリケーションが 1 秒間一時停止します。
 
 </div>
 
@@ -441,7 +441,7 @@ public class BatchUpdateExample {
 </hibernate-configuration>
 ```
 
-各反復では、主キーの順に`SELECT`が実行されます。 10 点スケール ( `ten_point`は`false` ) に更新されていない最大`1000`行の主キー値を選択します。 `SELECT`つの各ステートメントは、重複を防ぐために、前の`SELECT`の結果の最大のものよりも大きい主キーを選択します。次に、Bulk-update を使用し、その`score`列を`2`で乗算し、 `ten_point` `true`に設定します。更新`ten_point`の目的は、クラッシュ後の再起動の場合に、更新アプリケーションが同じ行を繰り返し更新することを防ぐことであり、これによりデータ破損が発生する可能性があります。各ループに`TimeUnit.SECONDS.sleep(1);`すると、更新アプリケーションがハードウェア リソースを過剰に消費するのを防ぐために、更新アプリケーションが 1 秒間一時停止します。
+各反復では、主キーの順に`SELECT`が実行されます。 10 点スケール ( `ten_point`は`false` ) に更新されていない最大`1000`行の主キー値を選択します。 `SELECT`つの各ステートメントは、重複を防ぐために、前の`SELECT`の結果の最大のものよりも大きい主キーを選択します。次に、Bulk-update を使用し、その`score`列を`2`で乗算し、 `ten_point` `true`に設定します。更新`ten_point`の目的は、クラッシュ後の再起動の場合に、更新アプリケーションが同じ行を繰り返し更新することを防ぐことであり、これによりデータ破損が発生する可能性があります。各ループに`TimeUnit.SECONDS.sleep(1);`指定すると、更新アプリケーションがハードウェア リソースを過剰に消費するのを防ぐために、更新アプリケーションが 1 秒間一時停止します。
 
 </div>
 

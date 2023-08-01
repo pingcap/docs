@@ -58,5 +58,5 @@ title: TiDB 2.1 RC3 Release Notes
     -   `year`機能[#3622](https://github.com/tikv/tikv/pull/3622)のサポートを追加します。
     -   `truncate_real`機能[#3633](https://github.com/tikv/tikv/pull/3633)のサポートを追加します。
 -   バグの修正
-    -   時間関数[#3615](https://github.com/tikv/tikv/pull/3615)に関連するレポート エラー動作を修正しました。
+    -   時間関数[#3487](https://github.com/tikv/tikv/pull/3487) 、 [#3615](https://github.com/tikv/tikv/pull/3615)に関連するレポート エラー動作を修正しました。
     -   文字列から解析された時間が TiDB [#3589](https://github.com/tikv/tikv/pull/3589)の時間と一致しない問題を修正

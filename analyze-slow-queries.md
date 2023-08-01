@@ -10,7 +10,7 @@ summary: Learn how to locate and analyze slow queries.
 1.  多くのクエリの中で、どのタイプのクエリが遅いかを特定します。
 2.  このタイプのクエリが遅い理由を分析します。
 
-ステップ 1 は、 [TiDB ダッシュボード](/dashboard/dashboard-intro.md)使用することをお勧めします。
+ステップ 1 は、 [遅いクエリログ](/dashboard/dashboard-slow-query.md)と[ステートメント概要表](/statement-summary-tables.md)機能を使用して簡単に実行できます。 2 つの機能を統合し、遅いクエリをブラウザに直接表示する[TiDB ダッシュボード](/dashboard/dashboard-intro.md)使用することをお勧めします。
 
 このドキュメントでは、ステップ 2 を実行する方法 (このタイプのクエリが遅い理由を分析する) に焦点を当てています。
 
@@ -35,7 +35,7 @@ summary: Learn how to locate and analyze slow queries.
 
 次のメソッドを使用して期間情報を取得できます。
 
--   [TiDB ダッシュボード](/dashboard/dashboard-overview.md)でスローログを表示することをお勧めします。
+-   [遅いログ](/identify-slow-queries.md) 。 [TiDB ダッシュボード](/dashboard/dashboard-overview.md)でスローログを表示することをお勧めします。
 -   [`EXPLAIN ANALYZE`文](/sql-statements/sql-statement-explain-analyze.md) 。
 
 上記の方法は、次の点で異なります。

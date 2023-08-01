@@ -102,7 +102,7 @@ SELECT id, title, type, price FROM books AS OF TIMESTAMP '2022-04-20 15:20:00' O
 
 指定するタイムスタンプまたは間隔は、現在時刻より早すぎたり遅すぎたりすることはできないことに注意してください。さらに、秒精度のデフォルトは`NOW()`です。より高い精度を実現するには、ミリ秒の精度に`NOW(3)`使用するなど、パラメーターを追加できます。詳細については、 [MySQL ドキュメント](https://dev.mysql.com/doc/refman/5.7/en/date-and-time-functions.html#function_now)を参照してください。
 
-期限切れのデータは TiDB で[GC ライフタイム (デフォルトは 10 分)](/system-variables.md#tidb_gc_life_time-new-in-v50)と呼びます。 GC が開始されると、現在時刻から期間を引いた時間が**GC セーフ ポイント**として使用されます。 GC セーフ ポイントの前にデータを読み取ろうとすると、TiDB は次のエラーを報告します。
+期限切れのデータは TiDB で[ガベージコレクション](/garbage-collection-overview.md)によってリサイクルされ、データは消去されるまで短期間保持されます。この期間を[GC ライフタイム (デフォルトは 10 分)](/system-variables.md#tidb_gc_life_time-new-in-v50)と呼びます。 GC が開始されると、現在時刻から期間を引いた時間が**GC セーフ ポイント**として使用されます。 GC セーフ ポイントの前にデータを読み取ろうとすると、TiDB は次のエラーを報告します。
 
 ```
 ERROR 9006 (HY000): GC life time is shorter than transaction duration...

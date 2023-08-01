@@ -7,7 +7,7 @@ summary: Learn how to handle failed DDL statements when you're using the TiDB Da
 
 このドキュメントでは、TiDB データ移行 (DM) ツールを使用してデータを移行するときに失敗した DDL ステートメントを処理する方法を紹介します。
 
-現在、TiDB はすべての MySQL 構文と完全に互換性があるわけではありません ( [TiDB によってサポートされる DDL ステートメント](/mysql-compatibility.md#ddl)を参照)。したがって、DM が MySQL から TiDB にデータを移行していて、TiDB が対応する DDL ステートメントをサポートしていない場合、エラーが発生して移行プロセスが中断される可能性があります。この場合、DM の`binlog`コマンドを使用して移行を再開できます。
+現在、TiDB はすべての MySQL 構文と完全に互換性があるわけではありません ( [TiDB によってサポートされる DDL ステートメント](/mysql-compatibility.md#ddl-operations)を参照)。したがって、DM が MySQL から TiDB にデータを移行していて、TiDB が対応する DDL ステートメントをサポートしていない場合、エラーが発生して移行プロセスが中断される可能性があります。この場合、DM の`binlog`コマンドを使用して移行を再開できます。
 
 ## 制限 {#restrictions}
 
@@ -639,7 +639,7 @@ ALTER TABLE `shard_db_*`.`shard_table_*` ADD COLUMN new_col INT UNIQUE;
 }
 ```
 
-この DDL ステートメントを 2 つの同等の DDL ステートメントに置き換えることができます。手順は次のとおりです。
+この DDL ステートメントは、2 つの同等の DDL ステートメントに置き換えることができます。手順は次のとおりです。
 
 1.  次のコマンドを使用して、MySQL インスタンス 1 と MySQL インスタンス 2 の間違った DDL ステートメントをそれぞれ置き換えます。
 

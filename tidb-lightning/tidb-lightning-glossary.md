@@ -13,7 +13,7 @@ summary: List of special terms used in TiDB Lightning.
 
 ### 分析する {#analyze}
 
-[統計](/statistics.md)情報を再構築する操作。
+[`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md)ステートメントを実行している TiDB テーブルの[統計](/statistics.md)情報を再構築する操作。
 
 TiDB Lightning はTiDB を経由せずにデータをインポートするため、統計情報は自動的に更新されません。したがって、 TiDB Lightning はインポート後にすべてのテーブルを明示的に分析します。この手順は、 `post-restore.analyze`構成を`false`に設定することで省略できます。
 
@@ -49,7 +49,7 @@ TiDB Lightningでは、テーブルのチェックサムは、そのテーブル
 -   すべての KV ペアの合計長、および
 -   各ペアの[CRC-64-ECMA](https://en.wikipedia.org/wiki/Cyclic_redundancy_check)の値のビットごとの XOR。
 
-TiDB Lightning [リモートチェックサム](/tidb-lightning/tidb-lightning-glossary.md#remote-checksum)を比較します。いずれかのペアが一致しない場合、プログラムは停止します。 `post-restore.checksum`構成を`false`に設定すると、このチェックをスキップできます。
+TiDB Lightning [インポートされたデータを検証します](/tidb-lightning/tidb-lightning-faq.md#how-to-ensure-the-integrity-of-the-imported-data)各テーブルの[地元](/tidb-lightning/tidb-lightning-glossary.md#local-checksum)と[リモートチェックサム](/tidb-lightning/tidb-lightning-glossary.md#remote-checksum)を比較します。いずれかのペアが一致しない場合、プログラムは停止します。 `post-restore.checksum`構成を`false`に設定すると、このチェックをスキップできます。
 
 チェックサムの不一致を適切に処理する方法については、 [よくある質問](/tidb-lightning/troubleshoot-tidb-lightning.md#checksum-failed-checksum-mismatched-remote-vs-local)も参照してください。
 
@@ -93,7 +93,7 @@ TiDB Lightning は、エンジンを通じてデータを TiKV Importer に転�
 
 エンジンは TiKV Importer の`import-dir`一時storageとして使用します。これは「エンジン ファイル」と呼ばれることもあります。
 
-[インデックスエンジン](/tidb-lightning/tidb-lightning-glossary.md#index-engine)も参照してください。
+[データエンジン](/tidb-lightning/tidb-lightning-glossary.md#data-engine)と[インデックスエンジン](/tidb-lightning/tidb-lightning-glossary.md#index-engine)も参照してください。
 
 <!-- F -->
 
@@ -113,7 +113,7 @@ TiDB Lightning は、エンジンを通じてデータを TiKV Importer に転�
 
 読み取り速度とスペース使用量の低下を犠牲にして、書き込み用に TiKV を最適化する構成。
 
-TiDB Lightning は、実行中に自動的にインポート モードに切り替わったり、インポート モードがオフになったりします。ただし、TiKV がインポート モードでスタックした場合は、 `tidb-lightning-ctl` ～ [ノーマルモード](/tidb-lightning/tidb-lightning-glossary.md#normal-mode)を使用できます。
+TiDB Lightning は、実行中に自動的にインポート モードに切り替わったり、インポート モードがオフになったりします。ただし、TiKV がインポート モードでスタックした場合は、 `tidb-lightning-ctl` ～ [強制的に元に戻す](/tidb-lightning/troubleshoot-tidb-lightning.md#the-tidb-cluster-uses-lots-of-cpu-resources-and-runs-very-slowly-after-using-tidb-lightning) ～ [ノーマルモード](/tidb-lightning/tidb-lightning-glossary.md#normal-mode)を使用できます。
 
 ### インデックスエンジン {#index-engine}
 
@@ -165,7 +165,7 @@ KV ペアを TiKV Importer に送信する前に、 TiDB Lightning自体によ�
 
 ### 後処理 {#post-processing}
 
-データ ソース全体が解析されて TiKV インポーターに送信された後の期間。 TiDB Lightning は、 TiKV インポーターがアップロードするのを待っています[SST ファイル](/tidb-lightning/tidb-lightning-glossary.md#sst-file) 。
+データ ソース全体が解析されて TiKV インポーターに送信された後の期間。 TiDB Lightning は、 TiKV インポーターがアップロードするのを待っています[摂取する](/tidb-lightning/tidb-lightning-glossary.md#ingest) [SST ファイル](/tidb-lightning/tidb-lightning-glossary.md#sst-file) 。
 
 <!-- R -->
 
@@ -185,10 +185,10 @@ KV ペアを TiKV Importer に送信する前に、 TiDB Lightning自体によ�
 
 ### 分割 {#splitting}
 
-通常、エンジンは非常に大きく (約 100 GB)、単一の[SST ファイル](/tidb-lightning/tidb-lightning-glossary.md#sst-file) (TiKV Importer の`import.region-split-size`設定で構成可能) に分割します。
+通常、エンジンは非常に大きく (約 100 GB)、単一の[領域](/glossary.md#regionpeerraft-group)として扱う場合は TiKV にとって好ましくありません。 TiKV Importer は、アップロードする前にエンジンを複数の小さな[SST ファイル](/tidb-lightning/tidb-lightning-glossary.md#sst-file) (TiKV Importer の`import.region-split-size`設定で構成可能) に分割します。
 
 ### SSTファイル {#sst-file}
 
 SSTとは「ソート文字列テーブル」の略称です。 SST ファイルは、RocksDB (したがって TiKV) の KV ペアのコレクションのネイティブstorage形式です。
 
-TiKV インポーターは、閉じた[摂取した](/tidb-lightning/tidb-lightning-glossary.md#ingest)されます。
+TiKV インポーターは、閉じた[エンジン](/tidb-lightning/tidb-lightning-glossary.md#engine)から SST ファイルを生成します。これらの SST ファイルはアップロードされ、TiKV ストアに[摂取した](/tidb-lightning/tidb-lightning-glossary.md#ingest)されます。

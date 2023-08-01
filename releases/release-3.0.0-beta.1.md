@@ -74,7 +74,7 @@ TiDB Ansible バージョン: 3.0.0-beta.1
 ## PD {#pd}
 
 -   [ログ形式](https://github.com/tikv/rfcs/blob/master/text/0018-unified-log-format.md)統合してツールによる収集と分析を容易にする
--   シミュレーター
+-   シミュレータ
     -   異なるストアで異なるハートビート間隔をサポート[#1418](https://github.com/pingcap/pd/pull/1418)
     -   データのインポートに関するケースを追加[#1263](https://github.com/pingcap/pd/pull/1263)
 -   ホットスポットのスケジュールを構成可能にする[#1412](https://github.com/pingcap/pd/pull/1412)
@@ -106,7 +106,7 @@ TiDB Ansible バージョン: 3.0.0-beta.1
     -   レプリケートする必要のないファイルのフィルタリングをサポート
     -   生成された列のレプリケートをサポート
 -   雷
-    -   TiKV の定期的なレベル 1 コンパクションの無効化をサポートし、TiKV クラスターのバージョンが 2.1.4 以降の場合、インポート モード[#4199](https://github.com/tikv/tikv/pull/4199)でレベル 1 コンパクションが自動的に実行されます。
+    -   TiKV の定期的なレベル 1 コンパクションの無効化をサポートし、TiKV クラスターのバージョンが 2.1.4 以降の場合、インポート モード[#119](https://github.com/pingcap/tidb-lightning/pull/119) 、 [#4199](https://github.com/tikv/tikv/pull/4199)でレベル 1 コンパクションが自動的に実行されます。
     -   `table_concurrency`構成項目を追加して、インポート エンジンの数 (デフォルトでは「16」) を制限し、インポーターのディスク領域の過剰使用を回避します[#119](https://github.com/pingcap/tidb-lightning/pull/119)
     -   メモリ使用量を削減するために、中間状態の SST をディスクに保存するサポート[#4369](https://github.com/tikv/tikv/pull/4369)
     -   TiKV-Importer のインポート パフォーマンスを最適化し、大きなテーブルのデータとインデックスの個別のインポートをサポートします[#132](https://github.com/pingcap/tidb-lightning/pull/132)

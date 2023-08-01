@@ -48,25 +48,34 @@ summary: Learn about the naming conventions for CSV, Parquet, Aurora Snapshot, a
 
 CSV ファイルをインポートするときは、データ ファイルに次の名前を付けます。
 
--   `${db_name}.${table_name}[.XXXXXX].csv` ([.XXXXXX] はオプションです)
+`${db_name}.${table_name}${suffix}.csv.${compress}`
 
-例えば：
+`${suffix}`はオプションで、次の形式のいずれかを指定できます*`xxx`*には任意の数字を指定できます。
+
+-   *`.xxx`* 、たとえば`.01`
+-   *`._xxx_xxx_xxx`* 、たとえば`._0_0_01`
+-   *`_xxx_xxx_xxx`* 、たとえば`_0_0_01`
+
+`${compress}`は圧縮形式であり、オプションです。 TiDB Cloud は、 `.gzip` 、 `.gz` 、 `.zstd` 、 `.zst`および`.snappy`の形式をサポートします。
+
+たとえば、次のすべてのファイルのターゲット データベースとテーブルは`import_db`と`test_table`です。
 
 -   `import_db.test_table.csv`
 -   `import_db.test_table.01.csv`
+-   `import_db.test_table._0_0_01.csv`
+-   `import_db.test_table_0_0_01.csv`
+-   `import_db.test_table_0_0_01.csv.gz`
 
 ### 寄木細工 {#parquet}
 
 Parquet ファイルをインポートするときは、データ ファイルに次のような名前を付けます。
 
--   `${db_name}.${table_name}[.XXXXXX].parquet[.{snappy|gz|lzo}]` ( `[.XXXXXXX]`と`[.{snappy|gz|lzo}]`はオプション)
+`${db_name}.${table_name}${suffix}.parquet` ( `${suffix}`はオプション)
 
 例えば：
 
 -   `import_db.test_table.parquet`
 -   `import_db.test_table.01.parquet`
--   `import_db.test_table.parquet.gz`
--   `import_db.test_table.01.parquet.gz`
 
 ### Auroraのスナップショット {#aurora-snapshot}
 
@@ -82,12 +91,21 @@ Aurora Snapshot ファイルの場合、 `${db_name}.${table_name}/`フォルダ
 
 SQL ファイルをインポートするときは、データ ファイルに次のような名前を付けます。
 
--   `${db_name}.${table_name}[.XXXXXXX].sql` ([.XXXXXXX] はオプションです)
+`${db_name}.${table_name}${suffix}.sql.${compress}`
+
+`${suffix}`はオプションで、次の形式のいずれかを指定できます*`xxx`*には任意の数字を指定できます。
+
+-   *`.xxx`* 、たとえば`.01`
+-   *`._xxx_xxx_xxx`* 、たとえば`._0_0_01`
+-   *`_xxx_xxx_xxx`* 、たとえば`_0_0_01`
+
+`${compress}`は圧縮形式であり、オプションです。 TiDB Cloud は、 `.gzip` 、 `.gz` 、 `.zstd` 、 `.zst`および`.snappy`の形式をサポートします。
 
 例えば：
 
 -   `import_db.test_table.sql`
 -   `import_db.test_table.01.sql`
+-   `import_db.test_table.01.sql.gz`
 
 SQL ファイルがデフォルト構成の TiDB Dumplingを介してエクスポートされる場合、デフォルトで命名規則に従います。
 

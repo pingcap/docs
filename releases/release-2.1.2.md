@@ -24,7 +24,7 @@ title: TiDB 2.1.2 Release Notes
 
 -   `DAY` ( `d` ) 単位の構成フォーマットをサポートし、構成互換性の問題を修正します[#3931](https://github.com/tikv/tikv/pull/3931)
 -   `Approximate Size Split` [#3942](https://github.com/tikv/tikv/pull/3942)によって発生する可能性のpanicの問題を修正
--   リージョンのマージ[#3873](https://github.com/tikv/tikv/pull/3873)に関する 2 つの問題を修正
+-   リージョンのマージ[#3822](https://github.com/tikv/tikv/pull/3822) 、 [#3873](https://github.com/tikv/tikv/pull/3873)に関する 2 つの問題を修正
 
 ## ツール {#tools}
 

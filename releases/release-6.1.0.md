@@ -9,7 +9,7 @@ summary: Learn about the new features, compatibility changes, improvements, and 
 
 TiDB バージョン: 6.1.0
 
-クイックアクセス: [インストールパッケージ](https://www.pingcap.com/download/?version=v6.1.0#version-list)
+クイックアクセス: [クイックスタート](https://docs.pingcap.com/tidb/v6.1/quick-start-with-tidb) | [本番展開](https://docs.pingcap.com/tidb/v6.1/production-deployment-using-tiup) | [インストールパッケージ](https://www.pingcap.com/download/?version=v6.1.0#version-list)
 
 6.1.0 の主な新機能または改善点は次のとおりです。
 
@@ -29,13 +29,13 @@ TiDB バージョン: 6.1.0
 
 -   List パーティショニングとリスト COLUMNS パーティショニングが GA になりました。どちらもMySQL 5.7と互換性があります。
 
-    ユーザードキュメント: [List COLUMNS パーティショニング](/partitioned-table.md#list-columns-partitioning)
+    ユーザードキュメント: [List パーティショニング](/partitioned-table.md#list-partitioning) 、 [List COLUMNS パーティショニング](/partitioned-table.md#list-columns-partitioning)
 
 -   TiFlash は、コンパクト コマンドの開始をサポートしています。 (実験的)
 
     TiFlash v6.1.0 では、既存のバックグラウンド圧縮メカニズムに基づいて物理データを手動で圧縮する方法を提供する`ALTER TABLE ... COMPACT`ステートメントが導入されています。このステートメントを使用すると、必要に応じていつでも以前の形式でデータを更新し、読み取り/書き込みのパフォーマンスを向上させることができます。クラスターを v6.1.0 にアップグレードした後、このステートメントを実行してデータを圧縮することをお勧めします。このステートメントは標準 SQL 構文の拡張であるため、MySQL クライアントと互換性があります。 TiFlashアップグレード以外のシナリオでは、通常、このステートメントを使用する必要はありません。
 
-    [#4145](https://github.com/pingcap/tiflash/issues/4145)
+    [ユーザードキュメント](/sql-statements/sql-statement-alter-table-compact.md) [#4145](https://github.com/pingcap/tiflash/issues/4145)
 
 -   TiFlash はウィンドウ関数フレームワークを実装し、次のウィンドウ関数をサポートします。
 
@@ -43,7 +43,7 @@ TiDB バージョン: 6.1.0
     -   `DENSE_RANK()`
     -   `ROW_NUMBER()`
 
-    [#33072](https://github.com/pingcap/tidb/issues/33072)
+    [ユーザードキュメント](/tiflash/tiflash-supported-pushdown-calculations.md) [#33072](https://github.com/pingcap/tidb/issues/33072)
 
 ### 可観測性 {#observability}
 
@@ -63,13 +63,13 @@ TiDB バージョン: 6.1.0
 
     リージョンをより大きなサイズに設定すると、リージョンの数が効果的に減り、リージョンの管理が容易になり、クラスターのパフォーマンスと安定性が向上します。この機能では、リージョン内のより小さな範囲であるバケットの概念が導入されます。リージョンがより大きなサイズに設定されている場合、クエリ単位としてバケットを使用すると、同時クエリのパフォーマンスを最適化できます。バケットをクエリ単位として使用すると、ホット リージョンのサイズを動的に調整して、スケジューリングの効率と負荷バランスを確保することもできます。この機能は現在実験的です。本番環境での使用はお勧めできません。
 
-    [#11515](https://github.com/tikv/tikv/issues/11515)
+    [ユーザードキュメント](/tune-region-performance.md) [#11515](https://github.com/tikv/tikv/issues/11515)
 
 -   Raft Engine をデフォルトのログstorageエンジンとして使用する
 
     v6.1.0 以降、TiDB はログのデフォルトのstorageエンジンとしてRaft Engineを使用します。 RocksDB と比較して、 Raft Engine はTiKV I/O 書き込みトラフィックを最大 40% 削減し、CPU 使用率を 10% 削減すると同時に、特定の負荷の下でフォアグラウンドレイテンシーを約 5% 向上させ、テール レイテンシーを 20% 削減します。
 
-    [#95](https://github.com/tikv/raft-engine/issues/95)
+    [ユーザードキュメント](/tikv-configuration-file.md#raft-engine) [#95](https://github.com/tikv/raft-engine/issues/95)
 
 -   結合順序ヒント構文のサポート
 
@@ -78,7 +78,7 @@ TiDB バージョン: 6.1.0
 
     これにより、テーブル結合の順序を修正する方法が提供されます。ヒントを適切に使用すると、SQL のパフォーマンスとクラスターの安定性を効果的に向上させることができます。
 
-    ユーザードキュメント: [#29932](https://github.com/pingcap/tidb/issues/29932)
+    ユーザードキュメント: [`LEADING`](/optimizer-hints.md#leadingt1_name--tl_name-) 、 [`STRAIGHT_JOIN`](/optimizer-hints.md#straight_join) 、 [#29932](https://github.com/pingcap/tidb/issues/29932)
 
 -   TiFlash はさらに 4 つの関数をサポートします。
 
@@ -87,13 +87,13 @@ TiDB バージョン: 6.1.0
     -   `TO_SECONDS`
     -   `WEEKOFYEAR`
 
-    [#4677](https://github.com/pingcap/tiflash/issues/4677)
+    [ユーザードキュメント](/tiflash/tiflash-supported-pushdown-calculations.md) [#4679](https://github.com/pingcap/tiflash/issues/4679) [#4678](https://github.com/pingcap/tiflash/issues/4678) [#4677](https://github.com/pingcap/tiflash/issues/4677)
 
 -   TiFlash は、動的プルーニング モードでパーティション化されたテーブルをサポートします。
 
-    OLAP シナリオのパフォーマンスを向上させるために、パーティション化されたテーブルに対して動的プルーニング モードがサポートされています。 TiDB が v6.0.0 より前のバージョンからアップグレードされている場合は、パフォーマンスを最大化するために、既存のパーティション化されたテーブルの統計を手動で更新することをお勧めします (新規インストールまたは v6.1.0 へのアップグレード後に作成された新しいパーティションの場合は必要ありません)。
+    OLAP シナリオのパフォーマンスを向上させるために、パーティション テーブルに対して動的プルーニング モードがサポートされています。 TiDB が v6.0.0 より前のバージョンからアップグレードされている場合は、パフォーマンスを最大化するために、既存のパーティション化されたテーブルの統計を手動で更新することをお勧めします (新規インストールまたは v6.1.0 へのアップグレード後に作成された新しいパーティションの場合は必要ありません)。
 
-    ユーザードキュメント: [#3873](https://github.com/pingcap/tiflash/issues/3873)
+    ユーザードキュメント: [MPP モードでパーティション化されたテーブルにアクセスする](/tiflash/use-tiflash-mpp-mode.md#access-partitioned-tables-in-the-mpp-mode) 、 [動的プルーニングモード](/partitioned-table.md#dynamic-pruning-mode) 、 [#3873](https://github.com/pingcap/tiflash/issues/3873)
 
 ### 安定性 {#stability}
 
@@ -101,7 +101,7 @@ TiDB バージョン: 6.1.0
 
     RocksDB がバックグラウンドで破損した SST ファイルを検出すると、TiKV は影響を受けるピアをスケジュールし、他のレプリカを使用してそのデータを回復しようとします。 `background-error-recovery-window`パラメータを使用して、回復の最大許容時間を設定できます。回復操作が時間枠内に完了しない場合、TiKV はpanicになります。この機能は、回復可能な破損したstorageを自動的に検出して回復するため、クラスターの安定性が向上します。
 
-    [#10578](https://github.com/tikv/tikv/issues/10578)
+    [ユーザードキュメント](/tikv-configuration-file.md#background-error-recovery-window-new-in-v610) [#10578](https://github.com/tikv/tikv/issues/10578)
 
 -   非トランザクション DML ステートメントのサポート
 
@@ -129,7 +129,7 @@ TiDB バージョン: 6.1.0
 
     TiDB v6.1.0 より前は、マシンの障害により複数のリージョンレプリカが失われた場合、ユーザーはすべての TiKV サーバーを停止し、 TiKV Controlを使用して TiKV を 1 つずつ復元する必要がありました。 TiDB v6.1.0 以降、リカバリ プロセスは完全に自動化されており、TiKV を停止する必要がなく、オンラインの他のアプリケーションにも影響を与えません。回復プロセスはPD Controlを使用してトリガーでき、よりユーザーフレンドリーな概要情報を提供します。
 
-    [#10483](https://github.com/tikv/tikv/issues/10483)
+    [ユーザードキュメント](/online-unsafe-recovery.md) [#10483](https://github.com/tikv/tikv/issues/10483)
 
 -   履歴統計収集タスクの表示をサポート
 
@@ -160,7 +160,7 @@ TiDB バージョン: 6.1.0
 
     TiDB v6.1.0 より前では、操作で大量のリソースが消費され、クラスターの安定性の問題が発生する場合、ターゲット TiDB インスタンスに接続し、 `KILL TIDB ${id};`コマンドを実行してターゲットの接続と操作を終了する必要がありました。多くの TiDB インスタンスの場合、この方法は使用が簡単ではなく、誤った操作が発生する傾向があります。 v6.1.0 以降、 `enable-global-kill`構成が導入され、デフォルトで有効になります。クライアントと TiDB の間にプロキシがある場合、他のクエリやセッションを誤って終了することを心配することなく、任意の TiDB インスタンスで kill コマンドを実行して、指定された接続と操作を終了できます。現在、TiDB は、Ctrl+C を使用したクエリまたはセッションの終了をサポートしていません。
 
-    [#8854](https://github.com/pingcap/tidb/issues/8854)
+    [ユーザードキュメント](/tidb-configuration-file.md#enable-global-kill-new-in-v610) [#8854](https://github.com/pingcap/tidb/issues/8854)
 
 -   TiKV API V2 (実験的)
 
@@ -173,7 +173,7 @@ TiDB バージョン: 6.1.0
 
     <Warning>基盤となるstorage形式が大幅に変更されたため、API V2 を有効にした後は、TiKV クラスターを v6.1.0 より前のバージョンにロールバックできません。 TiKV をダウングレードすると、データが破損する可能性があります。</Warning>
 
-    [#11745](https://github.com/tikv/tikv/issues/11745)
+    [ユーザードキュメント](/tikv-configuration-file.md#api-version-new-in-v610) [#11745](https://github.com/tikv/tikv/issues/11745)
 
 ### MySQLの互換性 {#mysql-compatibility}
 
@@ -181,7 +181,7 @@ TiDB バージョン: 6.1.0
 
     ユーザーレベルのロックは、MySQL が組み込み関数を通じて提供するユーザー名付きのロック管理システムです。ロック関数は、ロックのブロック、待機、その他のロック管理機能を提供します。ユーザーレベルのロックは、Rails、Elixir、Ecto などの ORM フレームワークでも広く使用されています。 v6.1.0 以降、TiDB は MySQL と互換性のあるユーザーレベル`RELEASE_LOCK` `GET_LOCK`および`RELEASE_ALL_LOCKS`関数をサポートしています。
 
-    [#14994](https://github.com/pingcap/tidb/issues/14994)
+    [ユーザードキュメント](/functions-and-operators/locking-functions.md) [#14994](https://github.com/pingcap/tidb/issues/14994)
 
 ### データ移行 {#data-migration}
 
@@ -195,7 +195,7 @@ TiDB バージョン: 6.1.0
 
     移行タスクを開始するときに、開始時刻とセーフ モードの期間を指定できます。これは、多数のソースを含む増分移行タスクを作成する場合に特に便利で、ソースごとにbinlogの開始位置を指定する必要がなくなります。
 
-    [#5442](https://github.com/pingcap/tiflow/issues/5442)
+    [ユーザードキュメント](/dm/dm-webui-guide.md) [#5442](https://github.com/pingcap/tiflow/issues/5442)
 
 ### TiDB データ共有サブスクリプション {#tidb-data-share-subscription}
 
@@ -203,83 +203,83 @@ TiDB バージョン: 6.1.0
 
     -   TiCDC は、TiDB 増分データを Avro 形式で Kafka に送信することをサポートしており、Confluent を介して KSQL や Snowflake などのサードパーティとデータを共有できます。
 
-        [#5338](https://github.com/pingcap/tiflow/issues/5338)
+        [ユーザードキュメント](/ticdc/ticdc-avro-protocol.md) [#5338](https://github.com/pingcap/tiflow/issues/5338)
 
     -   TiCDC は、TiDB からの増分データをテーブルごとにさまざまな Kafka トピックにディスパッチすることをサポートしています。これを Canal-json 形式と組み合わせることで、Flink と直接データを共有できます。
 
-        [#4423](https://github.com/pingcap/tiflow/issues/4423)
+        [ユーザードキュメント](/ticdc/ticdc-sink-to-kafka.md#customize-the-rules-for-topic-and-partition-dispatchers-of-kafka-sink) [#4423](https://github.com/pingcap/tiflow/issues/4423)
 
     -   TiCDC は SASL GSSAPI 認証タイプをサポートし、Kafka を使用した SASL 認証例を追加します。
 
-        [#4423](https://github.com/pingcap/tiflow/issues/4423)
+        [ユーザードキュメント](/ticdc/ticdc-sink-to-kafka.md#ticdc-uses-the-authentication-and-authorization-of-kafka) [#4423](https://github.com/pingcap/tiflow/issues/4423)
 
 -   TiCDC は`charset=GBK`テーブルの複製をサポートします。
 
-    [#4806](https://github.com/pingcap/tiflow/issues/4806)
+    [ユーザードキュメント](/character-set-gbk.md#component-compatibility) [#4806](https://github.com/pingcap/tiflow/issues/4806)
 
 ## 互換性の変更 {#compatibility-changes}
 
 ### システム変数 {#system-variables}
 
-| 変数名                                                                                                                                                                                                                      | 種類の変更    | 説明                                                                                                                                                                                                       |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [`tidb_enable_list_partition`](/system-variables.md#tidb_enable_list_partition-new-in-v50)                                                      | 修正済み     | デフォルト値が`OFF`から`ON`に変更されました。                                                                                                                                                                              |
-| [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)                                                                                              | 修正済み     | この変数は GLOBAL スコープを追加し、変数値はクラスターに保持されます。                                                                                                                                                                  |
-| [`tidb_query_log_max_len`](/system-variables.md#tidb_query_log_max_len)                                                                                        | 修正済み     | 変数のスコープが INSTANCE から GLOBAL に変更されます。変数値はクラスターに保持され、値の範囲は`[0, 1073741824]`に変更されます。                                                                                                                        |
-| [`require_secure_transport`](/system-variables.md#require_secure_transport-new-in-v610)                                                          | 新しく追加された | この設定は以前は`tidb.toml`オプション ( `security.require-secure-transport` ) でしたが、TiDB v6.1.0 以降はシステム変数に変更されました。                                                                                                     |
-| [`tidb_committer_concurrency`](/system-variables.md#tidb_committer_concurrency-new-in-v610)                                                    | 新しく追加された | この設定は以前は`tidb.toml`オプション ( `performance.committer-concurrency` ) でしたが、TiDB v6.1.0 以降はシステム変数に変更されました。                                                                                                     |
-| [`tidb_enable_auto_analyze`](/system-variables.md#tidb_enable_auto_analyze-new-in-v610)                                                          | 新しく追加された | この設定は以前は`tidb.toml`オプション ( `run-auto-analyze` ) でしたが、TiDB v6.1.0 以降はシステム変数に変更されました。                                                                                                                      |
-| [`tidb_enable_new_only_full_group_by_check`](/system-variables.md#tidb_enable_new_only_full_group_by_check-new-in-v610)          | 新しく追加された | この変数は、TiDB が`ONLY_FULL_GOUP_BY`チェックを実行するときの動作を制御します。                                                                                                                                                     |
-| [`tidb_enable_outer_join_reorder`](/system-variables.md#tidb_enable_outer_join_reorder-new-in-v610)                                        | 新しく追加された | v6.1.0 以降、TiDB の結合したテーブルの再配置アルゴリズムは、Outer Join をサポートしています。この変数はサポート動作を制御します。デフォルト値は`ON`です。                                                                                                               |
-| [`tidb_enable_prepared_plan_cache`](/system-variables.md#tidb_enable_prepared_plan_cache-new-in-v610)                                     | 新しく追加された | この設定は以前は`tidb.toml`オプション ( `prepared-plan-cache.enabled` ) でしたが、TiDB v6.1.0 以降はシステム変数に変更されました。                                                                                                           |
-| [`tidb_gc_max_wait_time`](/system-variables.md#tidb_gc_max_wait_time-new-in-v610)                                                                   | 新しく追加された | この変数は、コミットされていないトランザクションによってブロックされる GC セーフ ポイントの最大時間を設定するために使用されます。                                                                                                                                      |
-| [tidb_max_auto_analyze_time](/system-variables.md#tidb_max_auto_analyze_time-new-in-v610)                                                      | 新しく追加された | この変数は、auto analyzeの最大実行時間を指定するために使用されます。                                                                                                                                                                 |
-| [`tidb_max_tiflash_threads`](/system-variables.md#tidb_max_tiflash_threads-new-in-v610)                                                          | 新しく追加された | この変数は、リクエストを実行するためのTiFlash の最大同時実行数を設定するために使用されます。                                                                                                                                                       |
-| [`tidb_mem_oom_action`](/system-variables.md#tidb_mem_oom_action-new-in-v610)                                                                         | 新しく追加された | この設定は以前は`tidb.toml`オプション ( `oom-action` ) でしたが、TiDB v6.1.0 以降はシステム変数に変更されました。                                                                                                                            |
-| [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md)ユーザーによる手動実行や TiDB バックグラウンドでの自動分析タスクなど、TiDB が統計を更新するときの最大メモリ使用量を制御します。 |
-| [`tidb_nontransactional_ignore_error`](/system-variables.md#tidb_nontransactional_ignore_error-new-in-v610)                            | 新しく追加された | この変数は、非トランザクション DML ステートメントでエラーが発生した場合に、ただちにエラーを返すかどうかを指定します。                                                                                                                                            |
-| [`tidb_prepared_plan_cache_memory_guard_ratio`](/system-variables.md#tidb_prepared_plan_cache_memory_guard_ratio-new-in-v610) | 新しく追加された | この設定は以前は`tidb.toml`オプション ( `prepared-plan-cache.memory-guard-ratio` ) でしたが、TiDB v6.1.0 以降はシステム変数に変更されました。                                                                                                |
-| [`tidb_prepared_plan_cache_size`](/system-variables.md#tidb_prepared_plan_cache_size-new-in-v610)                                           | 新しく追加された | この設定は以前は`tidb.toml`オプション ( `prepared-plan-cache.capacity` ) でしたが、TiDB v6.1.0 以降はシステム変数に変更されました。                                                                                                          |
-| [`tidb_stats_cache_mem_quota`](/system-variables.md#tidb_stats_cache_mem_quota-new-in-v610)                                                    | 新しく追加された | この変数は、TiDB 統計キャッシュのメモリ割り当てを設定します。                                                                                                                                                                        |
+| 変数名                                                                                                                           | 種類の変更    | 説明                                                                                                                                          |
+| ----------------------------------------------------------------------------------------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| [`tidb_enable_list_partition`](/system-variables.md#tidb_enable_list_partition-new-in-v50)                                    | 修正済み     | デフォルト値が`OFF`から`ON`に変更されました。                                                                                                                 |
+| [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)                                                           | 修正済み     | この変数は GLOBAL スコープを追加し、変数値はクラスターに保持されます。                                                                                                     |
+| [`tidb_query_log_max_len`](/system-variables.md#tidb_query_log_max_len)                                                       | 修正済み     | 変数のスコープが INSTANCE から GLOBAL に変更されます。変数値はクラスターに保持され、値の範囲は`[0, 1073741824]`に変更されます。                                                           |
+| [`require_secure_transport`](/system-variables.md#require_secure_transport-new-in-v610)                                       | 新しく追加された | この設定は以前は`tidb.toml`オプション ( `security.require-secure-transport` ) でしたが、TiDB v6.1.0 以降はシステム変数に変更されました。                                        |
+| [`tidb_committer_concurrency`](/system-variables.md#tidb_committer_concurrency-new-in-v610)                                   | 新しく追加された | この設定は以前は`tidb.toml`オプション ( `performance.committer-concurrency` ) でしたが、TiDB v6.1.0 以降はシステム変数に変更されました。                                        |
+| [`tidb_enable_auto_analyze`](/system-variables.md#tidb_enable_auto_analyze-new-in-v610)                                       | 新しく追加された | この設定は以前は`tidb.toml`オプション ( `run-auto-analyze` ) でしたが、TiDB v6.1.0 以降はシステム変数に変更されました。                                                         |
+| [`tidb_enable_new_only_full_group_by_check`](/system-variables.md#tidb_enable_new_only_full_group_by_check-new-in-v610)       | 新しく追加された | この変数は、TiDB が`ONLY_FULL_GROUP_BY`チェックを実行するときの動作を制御します。                                                                                       |
+| [`tidb_enable_outer_join_reorder`](/system-variables.md#tidb_enable_outer_join_reorder-new-in-v610)                           | 新しく追加された | v6.1.0 以降、TiDB の結合したテーブルの再配置アルゴリズムは、Outer Join をサポートしています。この変数はサポート動作を制御します。デフォルト値は`ON`です。                                                  |
+| [`tidb_enable_prepared_plan_cache`](/system-variables.md#tidb_enable_prepared_plan_cache-new-in-v610)                         | 新しく追加された | この設定は以前は`tidb.toml`オプション ( `prepared-plan-cache.enabled` ) でしたが、TiDB v6.1.0 以降はシステム変数に変更されました。                                              |
+| [`tidb_gc_max_wait_time`](/system-variables.md#tidb_gc_max_wait_time-new-in-v610)                                             | 新しく追加された | この変数は、コミットされていないトランザクションによってブロックされる GC セーフ ポイントの最大時間を設定するために使用されます。                                                                         |
+| [tidb_max_auto_analyze_time](/system-variables.md#tidb_max_auto_analyze_time-new-in-v610)                                     | 新しく追加された | この変数は、auto analyzeの最大実行時間を指定するために使用されます。                                                                                                    |
+| [`tidb_max_tiflash_threads`](/system-variables.md#tidb_max_tiflash_threads-new-in-v610)                                       | 新しく追加された | この変数は、リクエストを実行するためのTiFlash の最大同時実行数を設定するために使用されます。                                                                                          |
+| [`tidb_mem_oom_action`](/system-variables.md#tidb_mem_oom_action-new-in-v610)                                                 | 新しく追加された | この設定は以前は`tidb.toml`オプション ( `oom-action` ) でしたが、TiDB v6.1.0 以降はシステム変数に変更されました。                                                               |
+| [`tidb_mem_quota_analyze`](/system-variables.md#tidb_mem_quota_analyze-new-in-v610)                                           | 新しく追加された | この変数は[`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md)ユーザーによる手動実行や TiDB バックグラウンドでの自動分析タスクなど、TiDB が統計を更新するときの最大メモリ使用量を制御します。 |
+| [`tidb_nontransactional_ignore_error`](/system-variables.md#tidb_nontransactional_ignore_error-new-in-v610)                   | 新しく追加された | この変数は、非トランザクション DML ステートメントでエラーが発生した場合に、ただちにエラーを返すかどうかを指定します。                                                                               |
+| [`tidb_prepared_plan_cache_memory_guard_ratio`](/system-variables.md#tidb_prepared_plan_cache_memory_guard_ratio-new-in-v610) | 新しく追加された | この設定は以前は`tidb.toml`オプション ( `prepared-plan-cache.memory-guard-ratio` ) でしたが、TiDB v6.1.0 以降はシステム変数に変更されました。                                   |
+| [`tidb_prepared_plan_cache_size`](/system-variables.md#tidb_prepared_plan_cache_size-new-in-v610)                             | 新しく追加された | この設定は以前は`tidb.toml`オプション ( `prepared-plan-cache.capacity` ) でしたが、TiDB v6.1.0 以降はシステム変数に変更されました。                                             |
+| [`tidb_stats_cache_mem_quota`](/system-variables.md#tidb_stats_cache_mem_quota-new-in-v610)                                   | 新しく追加された | この変数は、TiDB 統計キャッシュのメモリ割り当てを設定します。                                                                                                           |
 
 ### コンフィグレーションファイルのパラメータ {#configuration-file-parameters}
 
-| コンフィグレーションファイル | コンフィグレーション                                                                                                                                                                                                                                                                                                                                          | 種類の変更    | 説明                                                                                                                                                                                                                   |
-| -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| TiDB           | `committer-concurrency`                                                                                                                                                                                                                                                                                                                             | 削除されました  | システム変数`tidb_committer_concurrency`に置き換えられます。この設定項目はもう有効ではありません。値を変更したい場合は、対応するシステム変数を変更する必要があります。                                                                                                                    |
-| TiDB           | `lower-case-table-names`                                                                                                                                                                                                                                                                                                                            | 削除されました  | 現在、TiDB は`lower_case_table_name=2`のみをサポートします。別の値が設定されている場合、クラスターを v6.1.0 にアップグレードすると、その値は失われます。                                                                                                                      |
-| TiDB           | `mem-quota-query`                                                                                                                                                                                                                                                                                                                                   | 削除されました  | システム変数`tidb_mem_quota_query`に置き換えられます。この設定項目はもう有効ではありません。値を変更したい場合は、対応するシステム変数を変更する必要があります。                                                                                                                          |
-| TiDB           | `oom-action`                                                                                                                                                                                                                                                                                                                                        | 削除されました  | システム変数`tidb_mem_oom_action`に置き換えられます。この設定項目はもう有効ではありません。値を変更したい場合は、対応するシステム変数を変更する必要があります。                                                                                                                           |
-| TiDB           | `prepared-plan-cache.capacity`                                                                                                                                                                                                                                                                                                                      | 削除されました  | システム変数`tidb_prepared_plan_cache_size`に置き換えられます。この設定項目はもう有効ではありません。値を変更したい場合は、対応するシステム変数を変更する必要があります。                                                                                                                 |
-| TiDB           | `prepared-plan-cache.enabled`                                                                                                                                                                                                                                                                                                                       | 削除されました  | システム変数`tidb_enable_prepared_plan_cache`に置き換えられます。この設定項目はもう有効ではありません。値を変更したい場合は、対応するシステム変数を変更する必要があります。                                                                                                               |
-| TiDB           | `query-log-max-len`                                                                                                                                                                                                                                                                                                                                 | 削除されました  | システム変数`tidb_query_log_max_len`に置き換えられます。この設定項目はもう有効ではありません。値を変更したい場合は、対応するシステム変数を変更する必要があります。                                                                                                                        |
-| TiDB           | `require-secure-transport`                                                                                                                                                                                                                                                                                                                          | 削除されました  | システム変数`require_secure_transport`に置き換えられます。この設定項目はもう有効ではありません。値を変更したい場合は、対応するシステム変数を変更する必要があります。                                                                                                                      |
-| TiDB           | `run-auto-analyze`                                                                                                                                                                                                                                                                                                                                  | 削除されました  | システム変数`tidb_enable_auto_analyze`に置き換えられます。この設定項目はもう有効ではありません。値を変更したい場合は、対応するシステム変数を変更する必要があります。                                                                                                                      |
-| TiDB           | [`enable-global-kill`](/tidb-configuration-file.md#enable-global-kill-new-in-v610)                                                                                                                                                                                         | 新しく追加された | Global Kill (インスタンス間でのクエリまたは接続の終了) 機能を有効にするかどうかを制御します。値が`true`の場合、 `KILL`と`KILL TIDB`ステートメントの両方でインスタンス間のクエリまたは接続を終了できるため、クエリまたは接続が誤って終了することを心配する必要はありません。                                                            |
-| TiDB           | [`enable-stats-cache-mem-quota`](/tidb-configuration-file.md#enable-stats-cache-mem-quota-new-in-v610)                                                                                                                                                           | 新しく追加された | 統計キャッシュのメモリ割り当てを有効にするかどうかを制御します。                                                                                                                                                                                     |
-| TiKV           | [`raft-engine.enable`](/tikv-configuration-file.md#enable-1)                                                                                                                                                                                                                                     | 修正済み     | デフォルト値が`FALSE`から`TRUE`に変更されました。                                                                                                                                                                                      |
-| TiKV           | [`region-max-keys`](/tikv-configuration-file.md#region-max-keys)                                                                                                                                                                                                                          | 修正済み     | デフォルト値は 1440000 から`region-split-keys / 2 * 3`に変更されます。                                                                                                                                                                |
-| TiKV           | [`region-max-size`](/tikv-configuration-file.md#region-max-size)                                                                                                                                                                                                                          | 修正済み     | デフォルト値が 144 MB から`region-split-size / 2 * 3`に変更されました。                                                                                                                                                                |
-| TiKV           | [`coprocessor.enable-region-bucket`](/tikv-configuration-file.md#enable-region-bucket-new-in-v610)                                                                                                                                                                       | 新しく追加された | リージョンをバケットと呼ばれる小さな範囲に分割するかどうかを決定します。                                                                                                                                                                                 |
-| TiKV           | [`coprocessor.region-bucket-size`](/tikv-configuration-file.md#region-bucket-size-new-in-v610)                                                                                                                                                                             | 新しく追加された | `enable-region-bucket`が true の場合のバケットのサイズ。                                                                                                                                                                           |
-| TiKV           | [`causal-ts.renew-batch-min-size`](/tikv-configuration-file.md#renew-batch-min-size)                                                                                                                                                                                                 | 新しく追加された | ローカルにキャッシュされたタイムスタンプの最小数。                                                                                                                                                                                            |
-| TiKV           | [`causal-ts.renew-interval`](/tikv-configuration-file.md#renew-interval)                                                                                                                                                                                                                   | 新しく追加された | ローカルにキャッシュされたタイムスタンプが更新される間隔。                                                                                                                                                                                        |
-| TiKV           | [`max-snapshot-file-raw-size`](/tikv-configuration-file.md#max-snapshot-file-raw-size-new-in-v610)                                                                                                                                                                 | 新しく追加された | スナップショット ファイルのサイズがこの値を超えると、スナップショット ファイルは複数のファイルに分割されます。                                                                                                                                                             |
-| TiKV           | [`raft-engine.memory-limit`](/tikv-configuration-file.md#memory-limit)                                                                                                                                                                                                                       | 新しく追加された | Raft Engineのメモリ使用量の制限を指定します。                                                                                                                                                                                         |
-| TiKV           | [`storage.background-error-recovery-window`](/tikv-configuration-file.md#background-error-recovery-window-new-in-v610)                                                                                                                                       | 新しく追加された | RocksDB が回復可能なバックグラウンド エラーを検出した後、最大回復時間が許可されます。                                                                                                                                                                      |
-| TiKV           | [`storage.api-version`](/tikv-configuration-file.md#api-version-new-in-v610)                                                                                                                                                                                                      | 新しく追加された | TiKV が生のキー/値ストアとして機能するときに TiKV によって使用されるstorage形式とインターフェイスのバージョン。                                                                                                                                                    |
-| PD             | [`schedule.max-store-preparing-time`](/pd-configuration-file.md#max-store-preparing-time-new-in-v610)                                                                                                                                                                  | 新しく追加された | ストアがオンラインになるまでの最大待ち時間を制御します。                                                                                                                                                                                         |
-| TiCDC          | [`enable-tls`](/ticdc/ticdc-sink-to-kafka.md#configure-sink-uri-for-kafka)                                                                                                                                                                                                 | 新しく追加された | TLS を使用してダウンストリーム Kafka インスタンスに接続するかどうか。                                                                                                                                                                             |
-| TiCDC          | `sasl-gssapi-user`<br/>`sasl-gssapi-password`<br/>`sasl-gssapi-auth-type`<br/>`sasl-gssapi-service-name`<br/>`sasl-gssapi-realm`<br/>`sasl-gssapi-key-tab-path`<br/>`sasl-gssapi-kerberos-config-path`                                                                                                                                              | 新しく追加された | Kafka の SASL/GSSAPI 認証をサポートするために使用されます。詳細は[`kafka`を使用してシンク URI を構成する](/ticdc/ticdc-sink-to-kafka.md#configure-sink-uri-for-kafka)を参照してください。 |
-| TiCDC          | [`avro-bigint-unsigned-handling-mode`](/ticdc/ticdc-sink-to-kafka.md#configure-sink-uri-for-kafka) | 新しく追加された | Avro 形式の出力詳細を決定します。                                                                                                                                                                                                  |
-| TiCDC          | [`dispatchers.topic`](/ticdc/ticdc-sink-to-kafka.md#customize-the-rules-for-topic-and-partition-dispatchers-of-kafka-sink)                                                                                                        | 新しく追加された | TiCDC が増分データをさまざまな Kafka トピックにディスパッチする方法を制御します。                                                                                                                                                                      |
-| TiCDC          | [`dispatchers.partition`](/ticdc/ticdc-sink-to-kafka.md#customize-the-rules-for-topic-and-partition-dispatchers-of-kafka-sink)                                                                                                    | 新しく追加された | `dispatchers.partition`は`dispatchers.dispatcher`のエイリアスです。 TiCDC が増分データを Kafka パーティションにディスパッチする方法を制御します。                                                                                                              |
-| TiCDC          | [`schema-registry`](/ticdc/ticdc-sink-to-kafka.md#integrate-ticdc-with-kafka-connect-confluent-platform)                                                                                                                                          | 新しく追加された | Avro スキーマを保存するスキーマ レジストリ エンドポイントを指定します。                                                                                                                                                                              |
-| DM             | `dmctl start-relay`コマンドの`worker`                                                                                                                                                                                                                                                                                                                    | 削除されました  | このパラメータの使用は推奨されません。よりシンプルな実装を提供します。                                                                                                                                                                                  |
-| DM             | ソース構成ファイル内の`relay-dir`                                                                                                                                                                                                                                                                                                                              | 削除されました  | ワーカー構成ファイル内の同じ構成項目に置き換えられます。                                                                                                                                                                                         |
-| DM             | タスク構成ファイル内の`is-sharding`                                                                                                                                                                                                                                                                                                                            | 削除されました  | `shard-mode`の構成アイテムに置き換えられます。                                                                                                                                                                                        |
-| DM             | タスク構成ファイル内の`auto-fix-gtid`                                                                                                                                                                                                                                                                                                                          | 削除されました  | v5.x で非推奨となり、v6.1.0 で正式に削除されました。                                                                                                                                                                                     |
-| DM             | ソース構成ファイルの`meta-dir`と`charset`                                                                                                                                                                                                                                                                                                                      | 削除されました  | v5.x で非推奨となり、v6.1.0 で正式に削除されました。                                                                                                                                                                                     |
+| コンフィグレーションファイル | コンフィグレーション                                                                                                                                                                                             | 種類の変更    | 説明                                                                                                                                                        |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| TiDB           | `committer-concurrency`                                                                                                                                                                                | 削除されました  | システム変数`tidb_committer_concurrency`に置き換えられます。この設定項目はもう有効ではありません。値を変更したい場合は、対応するシステム変数を変更する必要があります。                                                         |
+| TiDB           | `lower-case-table-names`                                                                                                                                                                               | 削除されました  | 現在、TiDB は`lower_case_table_name=2`のみをサポートします。別の値が設定されている場合、クラスターを v6.1.0 にアップグレードすると、その値は失われます。                                                           |
+| TiDB           | `mem-quota-query`                                                                                                                                                                                      | 削除されました  | システム変数`tidb_mem_quota_query`に置き換えられます。この設定項目はもう有効ではありません。値を変更したい場合は、対応するシステム変数を変更する必要があります。                                                               |
+| TiDB           | `oom-action`                                                                                                                                                                                           | 削除されました  | システム変数`tidb_mem_oom_action`に置き換えられます。この設定項目はもう有効ではありません。値を変更したい場合は、対応するシステム変数を変更する必要があります。                                                                |
+| TiDB           | `prepared-plan-cache.capacity`                                                                                                                                                                         | 削除されました  | システム変数`tidb_prepared_plan_cache_size`に置き換えられます。この設定項目はもう有効ではありません。値を変更したい場合は、対応するシステム変数を変更する必要があります。                                                      |
+| TiDB           | `prepared-plan-cache.enabled`                                                                                                                                                                          | 削除されました  | システム変数`tidb_enable_prepared_plan_cache`に置き換えられます。この設定項目はもう有効ではありません。値を変更したい場合は、対応するシステム変数を変更する必要があります。                                                    |
+| TiDB           | `query-log-max-len`                                                                                                                                                                                    | 削除されました  | システム変数`tidb_query_log_max_len`に置き換えられます。この設定項目はもう有効ではありません。値を変更したい場合は、対応するシステム変数を変更する必要があります。                                                             |
+| TiDB           | `require-secure-transport`                                                                                                                                                                             | 削除されました  | システム変数`require_secure_transport`に置き換えられます。この設定項目はもう有効ではありません。値を変更したい場合は、対応するシステム変数を変更する必要があります。                                                           |
+| TiDB           | `run-auto-analyze`                                                                                                                                                                                     | 削除されました  | システム変数`tidb_enable_auto_analyze`に置き換えられます。この設定項目はもう有効ではありません。値を変更したい場合は、対応するシステム変数を変更する必要があります。                                                           |
+| TiDB           | [`enable-global-kill`](/tidb-configuration-file.md#enable-global-kill-new-in-v610)                                                                                                                     | 新しく追加された | Global Kill (インスタンス間でのクエリまたは接続の終了) 機能を有効にするかどうかを制御します。値が`true`の場合、 `KILL`と`KILL TIDB`ステートメントの両方でインスタンス間のクエリまたは接続を終了できるため、クエリまたは接続が誤って終了することを心配する必要はありません。 |
+| TiDB           | [`enable-stats-cache-mem-quota`](/tidb-configuration-file.md#enable-stats-cache-mem-quota-new-in-v610)                                                                                                 | 新しく追加された | 統計キャッシュのメモリ割り当てを有効にするかどうかを制御します。                                                                                                                          |
+| TiKV           | [`raft-engine.enable`](/tikv-configuration-file.md#enable-1)                                                                                                                                           | 修正済み     | デフォルト値が`FALSE`から`TRUE`に変更されました。                                                                                                                           |
+| TiKV           | [`region-max-keys`](/tikv-configuration-file.md#region-max-keys)                                                                                                                                       | 修正済み     | デフォルト値は 1440000 から`region-split-keys / 2 * 3`に変更されます。                                                                                                     |
+| TiKV           | [`region-max-size`](/tikv-configuration-file.md#region-max-size)                                                                                                                                       | 修正済み     | デフォルト値が 144 MB から`region-split-size / 2 * 3`に変更されました。                                                                                                     |
+| TiKV           | [`coprocessor.enable-region-bucket`](/tikv-configuration-file.md#enable-region-bucket-new-in-v610)                                                                                                     | 新しく追加された | リージョンをバケットと呼ばれる小さな範囲に分割するかどうかを決定します。                                                                                                                      |
+| TiKV           | [`coprocessor.region-bucket-size`](/tikv-configuration-file.md#region-bucket-size-new-in-v610)                                                                                                         | 新しく追加された | `enable-region-bucket`が true の場合のバケットのサイズ。                                                                                                                |
+| TiKV           | [`causal-ts.renew-batch-min-size`](/tikv-configuration-file.md#renew-batch-min-size)                                                                                                                   | 新しく追加された | ローカルにキャッシュされたタイムスタンプの最小数。                                                                                                                                 |
+| TiKV           | [`causal-ts.renew-interval`](/tikv-configuration-file.md#renew-interval)                                                                                                                               | 新しく追加された | ローカルにキャッシュされたタイムスタンプが更新される間隔。                                                                                                                             |
+| TiKV           | [`max-snapshot-file-raw-size`](/tikv-configuration-file.md#max-snapshot-file-raw-size-new-in-v610)                                                                                                     | 新しく追加された | スナップショット ファイルのサイズがこの値を超えると、スナップショット ファイルは複数のファイルに分割されます。                                                                                                  |
+| TiKV           | [`raft-engine.memory-limit`](/tikv-configuration-file.md#memory-limit)                                                                                                                                 | 新しく追加された | Raft Engineのメモリ使用量の制限を指定します。                                                                                                                              |
+| TiKV           | [`storage.background-error-recovery-window`](/tikv-configuration-file.md#background-error-recovery-window-new-in-v610)                                                                                 | 新しく追加された | RocksDB が回復可能なバックグラウンド エラーを検出した後、最大回復時間が許可されます。                                                                                                           |
+| TiKV           | [`storage.api-version`](/tikv-configuration-file.md#api-version-new-in-v610)                                                                                                                           | 新しく追加された | TiKV が生のキー/値ストアとして機能するときに TiKV によって使用されるstorage形式とインターフェイスのバージョン。                                                                                         |
+| PD             | [`schedule.max-store-preparing-time`](/pd-configuration-file.md#max-store-preparing-time-new-in-v610)                                                                                                  | 新しく追加された | ストアがオンラインになるまでの最大待ち時間を制御します。                                                                                                                              |
+| TiCDC          | [`enable-tls`](/ticdc/ticdc-sink-to-kafka.md#configure-sink-uri-for-kafka)                                                                                                                             | 新しく追加された | TLS を使用してダウンストリーム Kafka インスタンスに接続するかどうか。                                                                                                                  |
+| TiCDC          | `sasl-gssapi-user`<br/>`sasl-gssapi-password`<br/>`sasl-gssapi-auth-type`<br/>`sasl-gssapi-service-name`<br/>`sasl-gssapi-realm`<br/>`sasl-gssapi-key-tab-path`<br/>`sasl-gssapi-kerberos-config-path` | 新しく追加された | Kafka の SASL/GSSAPI 認証をサポートするために使用されます。詳細は[`kafka`を使用してシンク URI を構成する](/ticdc/ticdc-sink-to-kafka.md#configure-sink-uri-for-kafka)を参照してください。               |
+| TiCDC          | [`avro-decimal-handling-mode`](/ticdc/ticdc-sink-to-kafka.md#configure-sink-uri-for-kafka)<br/>[`avro-bigint-unsigned-handling-mode`](/ticdc/ticdc-sink-to-kafka.md#configure-sink-uri-for-kafka)      | 新しく追加された | Avro 形式の出力詳細を決定します。                                                                                                                                       |
+| TiCDC          | [`dispatchers.topic`](/ticdc/ticdc-sink-to-kafka.md#customize-the-rules-for-topic-and-partition-dispatchers-of-kafka-sink)                                                                             | 新しく追加された | TiCDC が増分データをさまざまな Kafka トピックにディスパッチする方法を制御します。                                                                                                           |
+| TiCDC          | [`dispatchers.partition`](/ticdc/ticdc-sink-to-kafka.md#customize-the-rules-for-topic-and-partition-dispatchers-of-kafka-sink)                                                                         | 新しく追加された | `dispatchers.partition`は`dispatchers.dispatcher`のエイリアスです。 TiCDC が増分データを Kafka パーティションにディスパッチする方法を制御します。                                                   |
+| TiCDC          | [`schema-registry`](/ticdc/ticdc-sink-to-kafka.md#integrate-ticdc-with-kafka-connect-confluent-platform)                                                                                               | 新しく追加された | Avro スキーマを保存するスキーマ レジストリ エンドポイントを指定します。                                                                                                                   |
+| DM             | `dmctl start-relay`コマンドの`worker`                                                                                                                                                                       | 削除されました  | このパラメータの使用は推奨されません。よりシンプルな実装を提供します。                                                                                                                       |
+| DM             | ソース構成ファイル内の`relay-dir`                                                                                                                                                                                 | 削除されました  | ワーカー構成ファイル内の同じ構成項目に置き換えられます。                                                                                                                              |
+| DM             | タスク構成ファイル内の`is-sharding`                                                                                                                                                                               | 削除されました  | `shard-mode`の構成アイテムに置き換えられます。                                                                                                                             |
+| DM             | タスク構成ファイル内の`auto-fix-gtid`                                                                                                                                                                             | 削除されました  | v5.x で非推奨となり、v6.1.0 で正式に削除されました。                                                                                                                          |
+| DM             | ソース構成ファイルの`meta-dir`と`charset`                                                                                                                                                                         | 削除されました  | v5.x で非推奨となり、v6.1.0 で正式に削除されました。                                                                                                                          |
 
 ### その他 {#others}
 
@@ -370,7 +370,7 @@ TiDB バージョン: 6.1.0
     -   クラスターの PD ノードが交換された後、一部の DDL ステートメントが一定期間スタックすることがある問題を修正します[#33908](https://github.com/pingcap/tidb/issues/33908)
     -   `INFORMATION_SCHEMA.CLUSTER_SLOW_QUERY`テーブルがクエリされるときに TiDBサーバーがメモリ不足になる可能性がある問題を修正します。この問題は、Grafana ダッシュボード[#33893](https://github.com/pingcap/tidb/issues/33893)で遅いクエリをチェックすると発生する可能性があります。
     -   システム変数`max_allowed_packet`が有効にならない問題を修正[#31422](https://github.com/pingcap/tidb/issues/31422)
-    -   TopSQL モジュールのメモリリークの問題を修正[#34502](https://github.com/pingcap/tidb/issues/34502)
+    -   TopSQL モジュールのメモリリークの問題を修正[#34525](https://github.com/pingcap/tidb/issues/34525) [#34502](https://github.com/pingcap/tidb/issues/34502)
     -   PointGet プラン[#32371](https://github.com/pingcap/tidb/issues/32371)でプラン キャッシュが間違っている可能性がある問題を修正
     -   RC 分離レベル[#34447](https://github.com/pingcap/tidb/issues/34447)でプラン キャッシュを開始すると、クエリ結果が間違っていることがある問題を修正
 
@@ -409,7 +409,7 @@ TiDB バージョン: 6.1.0
     -   TiDB データ移行 (DM)
 
         -   `start-time`タイム ゾーンの問題を修正し、DM の動作をダウンストリーム タイム ゾーンの使用からアップストリーム タイム ゾーン[#5271](https://github.com/pingcap/tiflow/issues/5471)の使用に変更します。
-        -   タスクが自動的に再開された後、DM がより多くのディスク領域を占有する問題を修正[#5344](https://github.com/pingcap/tiflow/issues/5344)
+        -   タスクが自動的に再開された後、DM がより多くのディスク領域を占有する問題を修正[#3734](https://github.com/pingcap/tiflow/issues/3734) [#5344](https://github.com/pingcap/tiflow/issues/5344)
         -   チェックポイントフラッシュにより失敗した行のデータがスキップされる場合がある問題を修正[#5279](https://github.com/pingcap/tiflow/issues/5279)
         -   場合によっては、フィルタリングされた DDL をダウンストリームで手動で実行すると、タスクの再開が失敗する可能性がある問題を修正します[#5272](https://github.com/pingcap/tiflow/issues/5272)
         -   `case-sensitive: true`が設定されていない場合、大文字のテーブルが複製できない問題を修正します[#5255](https://github.com/pingcap/tiflow/issues/5255)

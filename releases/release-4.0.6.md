@@ -60,8 +60,8 @@ TiDB バージョン: 4.0.6
     -   リージョンとストアハートビート[#2891](https://github.com/tikv/pd/pull/2891)のメトリクスを追加します。
     -   低スペースしきい値を制御する元の方法に戻します[#2875](https://github.com/pingcap/pd/pull/2875)
     -   標準エラーコードをサポート
-        -   [#2912](https://github.com/tikv/pd/pull/2912)
-        -   [#2902](https://github.com/tikv/pd/pull/2902)
+        -   [#2918](https://github.com/tikv/pd/pull/2918) [#2911](https://github.com/tikv/pd/pull/2911) [#2913](https://github.com/tikv/pd/pull/2913) [#2915](https://github.com/tikv/pd/pull/2915) [#2912](https://github.com/tikv/pd/pull/2912)
+        -   [#2907](https://github.com/tikv/pd/pull/2907) [#2906](https://github.com/tikv/pd/pull/2906) [#2903](https://github.com/tikv/pd/pull/2903) [#2806](https://github.com/tikv/pd/pull/2806) [#2900](https://github.com/tikv/pd/pull/2900) [#2902](https://github.com/tikv/pd/pull/2902)
 
 -   TiFlash
 
@@ -136,7 +136,7 @@ TiDB バージョン: 4.0.6
     -   `ENUM` / `SET`列の`Max` / `Min`関数の誤った動作を修正[#19869](https://github.com/pingcap/tidb/pull/19869)
     -   一部のTiFlashノードがオフラインの場合の`tiflash_segments`および`tiflash_tables`システム テーブルからの読み取りエラーを修正[#19748](https://github.com/pingcap/tidb/pull/19748)
     -   `Count(col)`集計関数の間違った結果を修正します[#19628](https://github.com/pingcap/tidb/pull/19628)
-    -   `TRUNCATE`オペレーション[#19445](https://github.com/pingcap/tidb/pull/19445)の実行時エラーを修正
+    -   `TRUNCATE`操作[#19445](https://github.com/pingcap/tidb/pull/19445)の実行時エラーを修正
     -   `Var`に大文字が含まれる場合、 `PREPARE statement FROM @Var`が失敗する問題を修正[#19378](https://github.com/pingcap/tidb/pull/19378)
     -   大文字のスキーマでスキーマ文字セットを変更するとpanic[#19302](https://github.com/pingcap/tidb/pull/19302)が発生するバグを修正
     -   情報に`tikv/tiflash` [#19159](https://github.com/pingcap/tidb/pull/19159)が含まれる場合、 `information_schema.statements_summary`と`explain`の間の計画の不一致を修正します。
@@ -161,7 +161,7 @@ TiDB バージョン: 4.0.6
     -   `initial-cluster-token`構成を追加して、ブートストラップ[#2922](https://github.com/pingcap/pd/pull/2922)中に異なるクラスターが相互に通信しないようにします。
     -   モード`auto` [#2826](https://github.com/pingcap/pd/pull/2826)時のストアリミットレートの単位を修正
     -   一部のスケジューラーがエラーを解決せずに構成を保持する問題を修正します[#2818](https://github.com/tikv/pd/pull/2818)
-    -   スケジューラ[#2874](https://github.com/tikv/pd/pull/2874)の空の HTTP 応答を修正
+    -   スケジューラ[#2871](https://github.com/tikv/pd/pull/2871) [#2874](https://github.com/tikv/pd/pull/2874)の空の HTTP 応答を修正
 
 -   TiFlash
 

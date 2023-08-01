@@ -45,7 +45,7 @@ TiDB バージョン: 5.0.6
         -   頻繁な etcd 書き込みが PD サービスに影響を与えるのを防ぐために、EtcdWorker にティック頻度制限を追加します[#3112](https://github.com/pingcap/ticdc/issues/3112)
         -   Kafka シンク[#3352](https://github.com/pingcap/tiflow/issues/3352)に`config.Metadata.Timeout`のデフォルト構成を追加します。
         -   Kafka メッセージが送信できない可能性を減らすには、デフォルト値の`max-message-bytes`を`10M`に設定します[#3081](https://github.com/pingcap/tiflow/issues/3081)
-        -   `no owner alert` 、 `mounter row` 、 `table sink total row` 、 `buffer sink total row`などの Prometheus および Grafana モニタリング メトリックとアラートを追加します[#1606](https://github.com/pingcap/tiflow/issues/1606)
+        -   `no owner alert` 、 `mounter row` 、 `table sink total row` 、 `buffer sink total row`などの Prometheus および Grafana モニタリング メトリックとアラートを追加します[#4054](https://github.com/pingcap/tiflow/issues/4054) [#1606](https://github.com/pingcap/tiflow/issues/1606)
 
     -   バックアップと復元 (BR)
 
@@ -70,7 +70,7 @@ TiDB バージョン: 5.0.6
     -   ベクトル化された式[#29244](https://github.com/pingcap/tidb/issues/29244)の関数`microsecond`の誤った結果を修正します。
     -   `auto analyze`結果[#29188](https://github.com/pingcap/tidb/issues/29188)のログ情報が不完全である問題を修正
     -   ベクトル化された式[#28643](https://github.com/pingcap/tidb/issues/28643)の関数`hour`の誤った結果を修正しました。
-    -   サポートされていない`cast`がTiFlash [#23907](https://github.com/pingcap/tidb/issues/23907)にプッシュダウンされた場合の`tidb_cast to Int32 is not supported`のような予期しないエラーを修正
+    -   サポートされていない`cast` TiFlash [#23907](https://github.com/pingcap/tidb/issues/23907)にプッシュダウンされた場合の`tidb_cast to Int32 is not supported`のような予期しないエラーを修正
     -   MPP ノードの可用性検出が一部の特殊なケースで機能しないバグを修正[#3118](https://github.com/pingcap/tics/issues/3118)
     -   `MPP task ID` [#27952](https://github.com/pingcap/tidb/issues/27952)を割り当てるときの`DATA RACE`問題を修正
     -   空`dual table` [#28250](https://github.com/pingcap/tidb/issues/28250)を削除した後の MPP クエリの`INDEX OUT OF RANGE`エラーを修正

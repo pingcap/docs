@@ -37,7 +37,7 @@ TiFlash はTiDB と TiSpark の両方と互換性があるため、これら 2 �
 
 現在、データをTiFlashに直接書き込むことはできません。 TiKV はLearnerの役割として TiDB クラスターに接続するため、データを TiKV に書き込んでからTiFlashにレプリケートする必要があります。 TiFlash はテーブル単位でのデータ複製をサポートしていますが、展開後のデフォルトではデータは複製されません。指定したテーブルのデータを複製するには、 [テーブルのTiFlashレプリカを作成する](/tiflash/create-tiflash-replicas.md#create-tiflash-replicas-for-tables)を参照してください。
 
-TiFlashには、柱状storageモジュール、 `tiflash proxy` 、および`pd buddy`つのコンポーネントがあります。 `tiflash proxy` Multi-Raft コンセンサス アルゴリズムを使用した通信を担当します。 `pd buddy` PDと連携してTiKVからTiFlashへテーブル単位でデータを複製します。
+TiFlash には、柱状storageモジュール、 `tiflash proxy` 、および`pd buddy`つのコンポーネントがあります。 `tiflash proxy` Multi-Raft コンセンサス アルゴリズムを使用した通信を担当します。 `pd buddy` PDと連携してTiKVからTiFlashへテーブル単位でデータを複製します。
 
 TiDB がTiFlashにレプリカを作成する DDL コマンドを受信すると、 `pd buddy`コンポーネントはTiDB のステータス ポートを介してレプリケーション対象のテーブルの情報を取得し、その情報を PD に送信します。次に、PD は`pd buddy`によって提供された情報に従って、対応するデータ スケジューリングを実行します。
 

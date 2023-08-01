@@ -17,7 +17,7 @@ summary: This document describes how to query data from a single table in a data
 
 <CustomContent platform="tidb">
 
-1.  TiDB クラスターを構築します ( [TiUP](/production-deployment-using-tiup.md)の使用を推奨)。
+1.  TiDB クラスターを構築します ( [TiDB Cloud](/develop/dev-guide-build-cluster-in-cloud.md)または[TiUP](/production-deployment-using-tiup.md)の使用を推奨)。
 
 </CustomContent>
 
@@ -78,7 +78,7 @@ SELECT id, name FROM authors;
 </div>
 <div label="Java" value="java">
 
-Javaでは、作成者の基本情報を保存するために、クラス`Author`を宣言できます。データベースの[値の範囲](/data-type-numeric.md)に従って、適切なJavaデータ型を選択する必要があります。例えば：
+Javaでは、作成者の基本情報を保存するために、クラス`Author`を宣言できます。データベースの[データ型](/data-type-overview.md)と[値の範囲](/data-type-numeric.md)に従って、適切なJavaデータ型を選択する必要があります。例えば：
 
 -   タイプ`int`のデータを格納するには、タイプ`Int`の変数を使用します。
 -   タイプ`bigint`のデータを格納するには、タイプ`Long`の変数を使用します。

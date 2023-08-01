@@ -25,7 +25,7 @@ v2.0以降で用意される設定ファイルには、上流データベース�
 
 ### アップストリームデータベース構成ファイル {#upstream-database-configuration-file}
 
-v2.0 以降では、 [v1.0.x DM ワーカー構成](/dm/dm-worker-configuration-file.md)に基づいてソース構成を取得する必要があります。
+v2.0 以降では、 [上流データベース構成ファイル](/dm/dm-source-configuration-file.md)が DM ワーカーのプロセス構成から分離されているため、 [v1.0.x DM ワーカー構成](/dm/dm-worker-configuration-file.md)に基づいてソース構成を取得する必要があります。
 
 > **ノート：**
 >
@@ -116,7 +116,7 @@ from:
 
 ## ステップ 4: データ移行タスクのアップグレード {#step-4-upgrade-data-migration-task}
 
-1.  [ステップ1](#step-1-prepare-v20-configuration-file)から v2.0+ クラスターにロードします。
+1.  [`operate-source`](/dm/dm-manage-source.md#operate-data-source)コマンドを使用して、アップストリーム データベース ソース構成を[ステップ1](#step-1-prepare-v20-configuration-file)から v2.0+ クラスターにロードします。
 
 2.  ダウンストリーム TiDB クラスターで、v1.0.x データ移行タスクの増分チェックポイント テーブルから対応するグローバル チェックポイント情報を取得します。
 

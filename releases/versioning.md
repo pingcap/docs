@@ -7,7 +7,7 @@ summary: Learn the version numbering system of TiDB.
 
 <Important>常に、リリース シリーズの最新のパッチ リリースにアップグレードすることをお勧めします。</Important>
 
-TiDB は 2 つのリリース シリーズを提供します。
+TiDB は 2 つのリリース シリーズを提供しています。
 
 -   長期サポートのリリース
 -   開発マイルストーン リリース (TiDB v6.0.0 で導入)

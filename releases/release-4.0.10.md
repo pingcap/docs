@@ -54,7 +54,7 @@ TiDB バージョン: 4.0.10
     -   リージョンのマージが発生したときに GC ロックが正しく解放されるようになりました[#22267](https://github.com/pingcap/tidb/pull/22267)
     -   `datetime`タイプ[#22143](https://github.com/pingcap/tidb/pull/22143)のユーザー変数に対して正しい値を返す
     -   複数のテーブル フィルターがある場合のインデックス マージの使用の問題を修正します[#22124](https://github.com/pingcap/tidb/pull/22124)
-    -   `prepare`プラン キャッシュ[#21960](https://github.com/pingcap/tidb/pull/21960)によって引き起こされるTiFlashの`wrong precision`の問題を修正
+    -   `prepare`プラン キャッシュ[#21960](https://github.com/pingcap/tidb/pull/21960)によって引き起こされるTiFlashの`wrong precision`問題を修正
     -   スキーマ変更[#21596](https://github.com/pingcap/tidb/pull/21596)によって引き起こされる誤った結果の問題を修正します。
     -   `ALTER TABLE` [#21474](https://github.com/pingcap/tidb/pull/21474)での不必要な列フラグの変更を避ける
     -   オプティマイザ ヒント[#21380](https://github.com/pingcap/tidb/pull/21380)で使用されるクエリ ブロックのテーブル エイリアスのデータベース名を設定します。
@@ -67,7 +67,7 @@ TiDB バージョン: 4.0.10
 
 -   PD
 
-    -   ID割り当てが単調でない問題を修正[#3323](https://github.com/tikv/pd/pull/3323)
+    -   ID割り当てが単調でない問題を修正[#3308](https://github.com/tikv/pd/pull/3308) [#3323](https://github.com/tikv/pd/pull/3323)
     -   PDクライアントがブロックされる場合がある問題を修正[#3285](https://github.com/pingcap/pd/pull/3285)
 
 -   TiFlash
@@ -92,7 +92,7 @@ TiDB バージョン: 4.0.10
 
     -   Dumpling
 
-        -   デフォルトの動作を[#233](https://github.com/pingcap/dumpling/pull/233)に設定することで、TiDB のメモリ不足 (OOM) を回避します。
+        -   デフォルトの動作を[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query) [#233](https://github.com/pingcap/dumpling/pull/233)に設定することで、TiDB のメモリ不足 (OOM) を回避します。
 
     -   バックアップと復元 (BR)
 

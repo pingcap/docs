@@ -46,7 +46,7 @@ TiDB ダッシュボードでテレメトリ収集機能が有効になってい
 -   ユーザーがアクセスした TiDB ダッシュボード Web ページの名前などのユーザー操作情報。
 -   ブラウザ名、OS名、画面解像度などのブラウザとOSの情報。
 
-PingCAP に共有されている使用状況情報の完全な内容を表示するには、 [Firefox 開発者ツールのネットワーク モニター](https://developer.mozilla.org/en-US/docs/Tools/Network_Monitor)を使用します。
+PingCAP に共有されている使用状況情報の完全な内容を表示するには、 [Chrome DevTools のネットワーク アクティビティ インスペクター](https://developers.google.com/web/tools/chrome-devtools/network)または[Firefox 開発者ツールのネットワーク モニター](https://developer.mozilla.org/en-US/docs/Tools/Network_Monitor)を使用します。
 
 ### TiUP {#tiup}
 
@@ -68,7 +68,7 @@ TIUP_CLUSTER_DEBUG=enable tiup cluster list
 
 > **ノート：**
 >
-> v3.3 以降、TiSpark ではテレメトリ収集がデフォルトで無効になっており、使用状況情報は収集されず、PingCAP と共有されません。
+> v3.0.3 以降、TiSpark ではテレメトリ収集がデフォルトで無効になっており、使用状況情報は収集されず、PingCAP と共有されません。
 
 TiSpark のテレメトリ収集機能が有効になっている場合、Spark モジュールは、以下を含む (ただしこれらに限定されない) TiSpark の使用状況の詳細を共有します。
 
@@ -102,7 +102,7 @@ enable-telemetry = false
 
 上記の構成ファイルを有効にするには、TiDB を起動するときに`--config=tidb_config.toml`コマンドライン パラメーターを指定します。
 
-詳細については、 [TiDBコンフィグレーションファイル](/tidb-configuration-file.md#enable-telemetry-new-in-v402)を参照してください。
+詳細については、 [TiDBコンフィグレーションオプション](/command-line-flags-for-tidb-configuration.md#--config)と[TiDBコンフィグレーションファイル](/tidb-configuration-file.md#enable-telemetry-new-in-v402)を参照してください。
 
 </details>
 
@@ -150,7 +150,7 @@ server_configs:
 
 > **ノート：**
 >
-> この構成項目を有効にするには、TiDB Operator v1.1.3 以降が必要です。
+> この構成項目を有効にするには、 TiDB Operator v1.1.3 以降が必要です。
 
 </details>
 
@@ -187,7 +187,7 @@ enable-telemetry = false
 
 PD を開始するときに`--config=pd_config.toml`コマンドライン パラメータを指定して有効にします。
 
-詳細については、 [PDコンフィグレーションファイル](/pd-configuration-file.md#enable-telemetry)を参照してください。
+詳細については、 [PDコンフィグレーションフラグ](/command-line-flags-for-pd-configuration.md#--config)と[PDコンフィグレーションファイル](/pd-configuration-file.md#enable-telemetry)を参照してください。
 
 </details>
 
@@ -236,7 +236,7 @@ server_configs:
 
 > **ノート：**
 >
-> この構成項目を有効にするには、TiDB Operator v1.1.3 以降が必要です。
+> この構成項目を有効にするには、 TiDB Operator v1.1.3 以降が必要です。
 
 </details>
 

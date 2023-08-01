@@ -25,7 +25,7 @@ summary: Learn about the most frequently asked questions (FAQs) relating to TiDB
 
 ### TiDB のアーキテクチャとは何ですか? {#what-is-tidb-s-architecture}
 
-TiDB クラスターには、TiDBサーバー、PD (配置Driver)サーバー、および TiKVサーバーの3 つのコンポーネントがあります。詳細については、 [TiDB のスケジューリング](/tidb-scheduling.md)を参照してください。
+TiDB クラスターには、TiDBサーバー、PD (配置Driver)サーバー、および TiKVサーバーの3 つのコンポーネントがあります。詳細については、 [TiDBアーキテクチャ](/tidb-architecture.md) 、 [TiDBstorage](/tidb-storage.md) 、 [TiDB コンピューティング](/tidb-computing.md) 、および[TiDB のスケジューリング](/tidb-scheduling.md)を参照してください。
 
 ### TiDB は MySQL に基づいていますか? {#is-tidb-based-on-mysql}
 

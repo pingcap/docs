@@ -5,11 +5,11 @@ summary: Learn seven tips for efficiently using Grafana to monitor TiDB.
 
 # Grafana を使用して TiDB をモニタリングするためのベスト プラクティス {#best-practices-for-monitoring-tidb-using-grafana}
 
-Grafana と Prometheus をトポロジー構成に追加すると、TiDB クラスター内のさまざまなコンポーネントとマシンのメトリクスを収集して表示するために、 [TiUPを使用して TiDB クラスターをデプロイする](/production-deployment-using-tiup.md)セットが同時にデプロイされます。このドキュメントでは、Grafana を使用して TiDB を監視するためのベスト プラクティスについて説明します。これは、メトリクスを使用して TiDB クラスターのステータスを分析し、問題を診断できるようにすることを目的としています。
+Grafana と Prometheus をトポロジー構成に追加すると、TiDB クラスター内のさまざまなコンポーネントとマシンのメトリクスを収集して表示するために、 [Grafana + Prometheus モニタリング プラットフォーム](/tidb-monitoring-framework.md) [TiUPを使用して TiDB クラスターをデプロイする](/production-deployment-using-tiup.md)セットが同時にデプロイされます。このドキュメントでは、Grafana を使用して TiDB を監視するためのベスト プラクティスについて説明します。これは、メトリクスを使用して TiDB クラスターのステータスを分析し、問題を診断できるようにすることを目的としています。
 
 ## 監視アーキテクチャ {#monitoring-architecture}
 
-[グラファナ](https://grafana.com/)は、メトリクスを分析および視覚化するためのオープンソース監視システムです。
+[プロメテウス](https://prometheus.io/)は、多次元データ モデルと柔軟なクエリ言語を備えた時系列データベースです。 [グラファナ](https://grafana.com/)は、メトリクスを分析および視覚化するためのオープンソース監視システムです。
 
 ![The monitoring architecture in the TiDB cluster](/media/prometheus-in-tidb.png)
 

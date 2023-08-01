@@ -166,7 +166,7 @@ TiDB でサポートされる TLS バージョン、鍵交換プロトコル、�
 
 ## 証明書、キー、CA をリロードする {#reload-certificate-key-and-ca}
 
-証明書、キー、または CA を置き換えるには、まず対応するファイルを置き換えてから、実行中の TiDB インスタンスで[`ssl-ca`](/tidb-configuration-file.md#ssl-ca) ) を再ロードします。道。この方法では、TiDB インスタンスを再起動する必要はありません。
+証明書、キー、または CA を置き換えるには、まず対応するファイルを置き換えてから、実行中の TiDB インスタンスで[`ALTER INSTANCE RELOAD TLS`](/sql-statements/sql-statement-alter-instance.md)ステートメントを実行して、元の構成から証明書 ( [`ssl-cert`](/tidb-configuration-file.md#ssl-cert) )、キー ( [`ssl-key`](/tidb-configuration-file.md#ssl-key) )、および CA ( [`ssl-ca`](/tidb-configuration-file.md#ssl-ca) ) を再ロードします。道。この方法では、TiDB インスタンスを再起動する必要はありません。
 
 新しくロードされた証明書、キー、および CA は、ステートメントが正常に実行された後に確立された接続で有効になります。ステートメントの実行前に確立された接続は影響を受けません。
 

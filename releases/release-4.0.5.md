@@ -13,7 +13,7 @@ TiDB バージョン: 4.0.5
 -   TiDB
 
     -   複数のパーティションの ID 配列をサポートするように`drop partition`と`truncate partition`のジョブ引数を変更します[#18930](https://github.com/pingcap/tidb/pull/18930)
-    -   `add partition`レプリカ[#18865](https://github.com/pingcap/tidb/pull/18865)をチェックするための削除専用状態を追加します。
+    -   `add partition`レプリ​​カ[#18865](https://github.com/pingcap/tidb/pull/18865)をチェックするための削除専用状態を追加します。
 
 ## 新機能 {#new-features}
 
@@ -70,7 +70,7 @@ TiDB バージョン: 4.0.5
 
 -   TiFlash
 
-    -   CPU、I/O、RAM 使用率のメトリクスとstorageエンジンのメトリクスを表示する Grafana パネルを追加します。
+    -   CPU、I/O、RAM 使用率のメトリクスとstorageエンジンのメトリクスを表示するための Grafana パネルを追加します。
     -   Raftログの処理ロジックを最適化することで I/O 操作を削減します。
     -   ブロックされた`add partition` DDL ステートメントのリージョンスケジューリングを高速化する
     -   DeltaTree でデルタ データの圧縮を最適化し、読み取りおよび書き込みの増幅を削減します。

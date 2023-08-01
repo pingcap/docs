@@ -9,7 +9,39 @@ summary: Learn how to configure Amazon Simple Storage Service (Amazon S3) access
 
 ## Amazon S3 アクセスを構成する {#configure-amazon-s3-access}
 
-TiDB Cloud がAmazon S3 バケット内のソース データにアクセスできるようにするには、次の手順を実行してTiDB Cloudのバケット アクセスを設定し、Role-ARN を取得します。
+TiDB Cloud がAmazon S3 バケット内のソース データにアクセスできるようにするには、 TiDB Cloudのバケット アクセスを設定する必要があります。次のいずれかの方法を使用してバケット アクセスを構成できます。
+
+-   AWS アクセス キーを使用する: IAMユーザーのアクセス キーを使用して、Amazon S3 バケットにアクセスします。
+-   ロール ARN を使用する: ロール ARN を使用して、Amazon S3 バケットにアクセスします。
+
+<SimpleTab>
+<div label="Access Key">
+
+アクセスキーを作成するには、(AWS アカウントの root ユーザーではなく) IAMユーザーを使用することをお勧めします。
+
+アクセス キーを構成するには、次の手順を実行します。
+
+1.  次のポリシーを使用してIAMユーザーを作成します。
+
+    -   `AmazonS3ReadOnlyAccess`
+    -   [`CreateOwnAccessKeys` (必須) および`ManageOwnAccessKeys` (オプション)](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#access-keys_required-permissions)
+
+    これらのポリシーは、ソース データを保存するバケットに対してのみ機能することをお勧めします。
+
+    詳細については、 [IAMユーザーの作成](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html#id_users_create_console)を参照してください。
+
+2.  AWS アカウント ID またはアカウント エイリアス、およびIAMユーザー名とパスワードを使用して[IAMコンソール](https://console.aws.amazon.com/iam)にサインインします。
+
+3.  アクセスキーを作成します。詳細については、 [IAMユーザーのアクセスキーの作成](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey)を参照してください。
+
+> **ノート：**
+>
+> TiDB Cloudはアクセス キーを保存しません。インポートが完了したら[アクセスキーを削除する](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey)を実行することをお勧めします。
+
+</div>
+<div label="Role ARN">
+
+TiDB Cloudのバケット アクセスを構成し、次のようにロール ARN を取得します。
 
 1.  [TiDB Cloudコンソール](https://tidbcloud.com/)では、ターゲット TiDB クラスターのTiDB Cloudアカウント ID と外部 ID を取得します。
 
@@ -17,7 +49,7 @@ TiDB Cloud がAmazon S3 バケット内のソース データにアクセスで�
 
         > **ヒント：**
         >
-        > 複数のプロジェクトがある場合は、 **「クラスター」**ページの左側のナビゲーション・ペインでターゲット・プロジェクトに切り替えることができます。
+        > 複数のプロジェクトがある場合は、<mdsvgicon name="icon-left-projects">左下隅の をクリックして、別のプロジェクトに切り替えます。</mdsvgicon>
 
     2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[インポート]**をクリックします。
 
@@ -103,6 +135,9 @@ TiDB Cloud がAmazon S3 バケット内のソース データにアクセスで�
 
 4.  TiDB Cloudコンソールで、 **「データ インポート」**ページに移動し、 TiDB Cloudアカウント ID と外部 ID を取得し、ロール ARN を**「ロール ARN」**フィールドに貼り付けます。
 
+</div>
+</SimpleTab>
+
 ## GCS アクセスを構成する {#configure-gcs-access}
 
 TiDB Cloud がGCS バケット内のソース データにアクセスできるようにするには、バケットの GCS アクセスを構成する必要があります。プロジェクト内の 1 つの TiDB クラスターの構成が完了すると、そのプロジェクト内のすべての TiDB クラスターが GCS バケットにアクセスできるようになります。
@@ -113,7 +148,7 @@ TiDB Cloud がGCS バケット内のソース データにアクセスできる�
 
         > **ヒント：**
         >
-        > 複数のプロジェクトがある場合は、 **「クラスター」**ページの左側のナビゲーション・ペインでターゲット・プロジェクトに切り替えることができます。
+        > 複数のプロジェクトがある場合は、<mdsvgicon name="icon-left-projects">左下隅の をクリックして、別のプロジェクトに切り替えます。</mdsvgicon>
 
     2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[インポート]**をクリックします。
 

@@ -494,7 +494,7 @@ storageに関するコンフィグレーション項目。
 
 -   TiKV が RawKV ストアとして機能するときに TiKV によって使用されるstorage形式とインターフェイスのバージョン。
 -   値のオプション:
-    -   `1` : API V1を使用し、クライアントから渡されたデータをエンコードせず、そのままのデータを格納します。 v6.1.0 より前のバージョンでは、TiKV はデフォルトで API V1 を使用します。
+    -   `1` : API V1を使用し、クライアントから渡されたデータをエンコードせず、そのままのデータを保存します。 v6.1.0 より前のバージョンでは、TiKV はデフォルトで API V1 を使用します。
     -   `2` : API V2 を使用します:
         -   データはマルチバージョン同時実行制御 (MVCC) 形式で保存され、タイムスタンプは tikv-server によって PD (TSO) から取得されます。
         -   データはさまざまな用途に応じてスコープ設定されており、API V2 は、単一クラスター内での TiDB、トランザクション KV、および RawKV アプリケーションの共存をサポートします。
@@ -713,7 +713,7 @@ Raftstoreに関連するコンフィグレーション項目。
 
 ### <code>raft-log-gc-size-limit</code> {#code-raft-log-gc-size-limit-code}
 
--   Raftの残存丸太の許容サイズに対する厳しい制限
+-   Raft の残存丸太の許容サイズに対する厳しい制限
 -   デフォルト値:リージョンサイズの 3/4
 -   最小値: `0`より大きい
 
@@ -760,7 +760,10 @@ Raftstoreに関連するコンフィグレーション項目。
 ### <code>region-compact-check-step</code> {#code-region-compact-check-step-code}
 
 -   手動圧縮の各ラウンドで一度にチェックされるリージョンの数
--   デフォルト値: `100`
+-   デフォルト値:
+
+    -   `storage.engine="raft-kv"`の場合、デフォルト値は`100`です。
+    -   `storage.engine="partitioned-raft-kv"`の場合、デフォルト値は`5`です。
 -   最小値: `0`
 
 ### <code>region-compact-min-tombstones</code> {#code-region-compact-min-tombstones-code}
@@ -775,6 +778,28 @@ Raftstoreに関連するコンフィグレーション項目。
 -   デフォルト値: `30`
 -   最小値: `1`
 -   最大値： `100`
+
+### <code>region-compact-min-redundant-rows</code> <span class="version-mark">v7.1.0 の新機能</span> {#code-region-compact-min-redundant-rows-code-span-class-version-mark-new-in-v7-1-0-span}
+
+-   RocksDB 圧縮をトリガーするために必要な冗長 MVCC 行の数。この設定は、Partitioned Raft KV ( `storage.engine="partitioned-raft-kv"` ) に対してのみ有効です。
+-   デフォルト値: `50000`
+-   最小値: `0`
+
+### <code>region-compact-redundant-rows-percent</code> <span class="version-mark">v7.1.0 の新機能</span> {#code-region-compact-redundant-rows-percent-code-span-class-version-mark-new-in-v7-1-0-span}
+
+-   RocksDB 圧縮をトリガーするために必要な冗長 MVCC 行の割合。この設定は、Partitioned Raft KV ( `storage.engine="partitioned-raft-kv"` ) に対してのみ有効です。
+-   デフォルト値: `20`
+-   最小値: `1`
+-   最大値： `100`
+
+### <code>report-region-buckets-tick-interval</code> <span class="version-mark">v6.1.0 の新機能</span> {#code-report-region-buckets-tick-interval-code-span-class-version-mark-new-in-v6-1-0-span}
+
+> **警告：**
+>
+> `report-region-buckets-tick-interval`は、TiDB v6.1.0 で導入された実験的機能です。本番環境で使用することはお勧めできません。
+
+-   `enable-region-bucket`が true の場合、TiKV がバケット情報を PD に報告する間隔。
+-   デフォルト値: `10s`
 
 ### <code>pd-heartbeat-tick-interval</code> {#code-pd-heartbeat-tick-interval-code}
 
@@ -988,10 +1013,10 @@ Raftstoreに関連するコンフィグレーション項目。
 -   デフォルト値: `1MB`
 -   最小値: `0`
 
-### <code>report-min-resolved-ts-interval</code> {#code-report-min-resolved-ts-interval-code}
+### <code>report-min-resolved-ts-interval</code> <span class="version-mark">v6.0.0 の新機能</span> {#code-report-min-resolved-ts-interval-code-span-class-version-mark-new-in-v6-0-0-span}
 
--   解決されたタイムスタンプが PD リーダーに報告される最小間隔を決定します。この値が`0`に設定されている場合、レポートが無効になっていることを意味します。
--   デフォルト値: `"1s"` (正の最小値)
+-   最小解決タイムスタンプが PD リーダーに報告される間隔を決定します。この値が`0`に設定されている場合、レポートが無効になっていることを意味します。
+-   デフォルト値: v6.3.0 より前のデフォルト値は`"0s"`です。 v6.3.0 以降、デフォルト値は`"1s"`で、これは正の最小値です。
 -   最小値: `0`
 -   単位：秒
 
@@ -1066,15 +1091,6 @@ Raftstoreに関連するコンフィグレーション項目。
 >
 > `region-bucket-size`は、TiDB v6.1.0 で導入された実験的機能です。本番環境で使用することはお勧めできません。
 
-### <code>report-region-buckets-tick-interval</code> <span class="version-mark">v6.1.0 の新機能</span> {#code-report-region-buckets-tick-interval-code-span-class-version-mark-new-in-v6-1-0-span}
-
-> **警告：**
->
-> `report-region-buckets-tick-interval`は、TiDB v6.1.0 で導入された実験的機能です。本番環境で使用することはお勧めできません。
-
--   `enable-region-bucket`が true の場合、TiKV がバケット情報を PD に報告する間隔。
--   デフォルト値: `10s`
-
 ## ロックスデータベース {#rocksdb}
 
 RocksDBに関するコンフィグレーション項目
@@ -1128,7 +1144,7 @@ RocksDBに関するコンフィグレーション項目
     -   `"tolerate-corrupted-tail-records"` : すべてのログ上で不完全な末尾データを持つレコードを許容し、破棄します。
     -   `"absolute-consistency"` : 破損したログが見つかった場合、回復を中止します。
     -   `"point-in-time"` : 最初の破損したログが見つかるまで、ログを順番に回復します。
-    -   `"skip-any-corrupted-records"` : 災害後の復旧。データは可能な限り復元され、破損したレコードはスキップされます。
+    -   `"skip-any-corrupted-records"` : 災害後の回復。データは可能な限り復元され、破損したレコードはスキップされます。
 -   デフォルト値: `"point-in-time"`
 
 ### <code>wal-dir</code> {#code-wal-dir-code}
@@ -1199,7 +1215,7 @@ RocksDBに関するコンフィグレーション項目
 
 ### <code>rate-limiter-auto-tuned</code> <span class="version-mark">v5.0 の新機能</span> {#code-rate-limiter-auto-tuned-code-span-class-version-mark-new-in-v5-0-span}
 
--   最近のワークロードに基づいて、RocksDB の圧縮レート リミッターの構成を自動的に最適化するかどうかを決定します。この構成を有効にすると、圧縮保留中のバイト数が通常よりわずかに多くなります。
+-   最近のワークロードに基づいて、RocksDB の圧縮レート リミッターの構成を自動的に最適化するかどうかを決定します。この構成を有効にすると、圧縮保留中のバイト数が通常よりわずかに増加します。
 -   デフォルト値: `true`
 
 ### <code>enable-pipelined-write</code> {#code-enable-pipelined-write-code}
@@ -1348,12 +1364,6 @@ RocksDBに関するコンフィグレーション項目
 -   `defaultcf`のデフォルト値: `true`
 -   `writecf`と`lockcf`のデフォルト値: `false`
 
-### <code>optimize-filters-for-memory</code> <span class="version-mark">v7.1.0 の新機能</span> {#code-optimize-filters-for-memory-code-span-class-version-mark-new-in-v7-1-0-span}
-
--   メモリ内部の断片化を最小限に抑えるブルーム/リボン フィルターを生成するかどうかを決定します。
--   この設定項目は[`format-version`](#format-version-new-in-v620) &gt;= 5 の場合にのみ有効であることに注意してください。
--   デフォルト値: `false`
-
 ### <code>whole-key-filtering</code> {#code-whole-key-filtering-code}
 
 -   キー全体をブルームフィルターに入れるかどうかを決定します
@@ -1369,12 +1379,6 @@ RocksDBに関するコンフィグレーション項目
 ### <code>block-based-bloom-filter</code> {#code-block-based-bloom-filter-code}
 
 -   各ブロックがブルームフィルターを作成するかどうかを決定します
--   デフォルト値: `false`
-
-### <code>ribbon-filter-above-level</code> <span class="version-mark">v7.1.0 の新機能</span> {#code-ribbon-filter-above-level-code-span-class-version-mark-new-in-v7-1-0-span}
-
--   この値以上のレベルにリボン フィルターを使用し、この値未満のレベルに非ブロックベースのブルーム フィルターを使用するかどうかを決定します。この設定項目が設定されている場合、 [`block-based-bloom-filter`](#block-based-bloom-filter)は無視されます。
--   この設定項目は[`format-version`](#format-version-new-in-v620) &gt;= 5 の場合にのみ有効であることに注意してください。
 -   デフォルト値: `false`
 
 ### <code>read-amp-bytes-per-bit</code> {#code-read-amp-bytes-per-bit-code}
@@ -2247,7 +2251,7 @@ TiKVstorageレイヤーのリソース制御に関するコンフィグレーシ
 
 ### <code>enabled</code> <span class="version-mark">v6.6.0 の新機能</span> {#code-enabled-code-span-class-version-mark-new-in-v6-6-0-span}
 
--   対応するリソース グループの[TiDB リソース制御](/tidb-resource-control.md)を参照してください。
+-   対応するリソース グループの[リクエストユニット(RU)](/tidb-resource-control.md#what-is-request-unit-ru)に従って、ユーザーのフォアグラウンド読み取り/書き込み要求のスケジューリングを有効にするかどうかを制御します。 TiDB リソース グループとリソース制御については、 [TiDB リソース制御](/tidb-resource-control.md)を参照してください。
 -   この設定項目を有効にすると、TiDB で[`tidb_enable_resource_control](/system-variables.md#tidb_enable_resource_control-new-in-v660)が有効になっている場合にのみ機能します。この構成項目が有効になっている場合、TiKV はプライオリティ キューを使用して、フォアグラウンド ユーザーからのキューに入れられた読み取り/書き込み要求をスケジュールします。リクエストのスケジューリング優先度は、このリクエストを受信するリソース グループによって既に消費されているリソースの量に反比例し、対応するリソース グループのクォータに正の相関関係があります。
 -   デフォルト値: `true` 。これは、リソース グループの RU に基づくスケジューリングが有効であることを意味します。
 

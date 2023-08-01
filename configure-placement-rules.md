@@ -312,7 +312,7 @@ pd-ctl config placement-rules rule-bundle save --in="rules.json"
 
 ### tidb-ctl を使用してテーブル関連のキー範囲をクエリする {#use-tidb-ctl-to-query-the-table-related-key-range}
 
-メタデータまたは特定のテーブルに特別な構成が必要な場合は、 [tidb-ctl](https://github.com/pingcap/tidb-ctl)を実行して関連キーをクエリできます。コマンドの最後に`--encode`を忘れずに追加してください。
+メタデータまたは特定のテーブルに特別な構成が必要な場合は、 [`keyrange`コマンド](https://github.com/pingcap/tidb-ctl/blob/master/doc/tidb-ctl_keyrange.md) / [tidb-ctl](https://github.com/pingcap/tidb-ctl)を実行して関連キーをクエリできます。コマンドの最後に`--encode`を忘れずに追加してください。
 
 {{< copyable "" >}}
 

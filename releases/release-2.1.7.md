@@ -21,7 +21,7 @@ TiDB Ansible バージョン: 2.1.7
 -   MySQL [#9876](https://github.com/pingcap/tidb/pull/9876)との一貫性を保つために、 `Truncate Table`に必要な権限を`Delete`から`Drop`に変更します。
 -   `DO`ステートメントでのサブクエリの使用のサポート[#9877](https://github.com/pingcap/tidb/pull/9877)
 -   `default_week_format`変数が`week`関数で有効にならない問題を修正[#9753](https://github.com/pingcap/tidb/pull/9753)
--   プラグイン フレームワーク[#9888](https://github.com/pingcap/tidb/pull/9888)をサポートします。
+-   プラグイン フレームワーク[#9880](https://github.com/pingcap/tidb/pull/9880) 、 [#9888](https://github.com/pingcap/tidb/pull/9888)をサポートします。
 -   `log_bin`システム変数[#9634](https://github.com/pingcap/tidb/pull/9634)を使用したbinlogの有効化状態のチェックのサポート
 -   SQL ステートメントを使用したPump/Drainerのステータスのチェックをサポート[#9896](https://github.com/pingcap/tidb/pull/9896)
 -   TiDB [#9887](https://github.com/pingcap/tidb/pull/9887)をアップグレードする際の utf8 での mb4 文字のチェックに関する互換性の問題を修正

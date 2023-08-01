@@ -29,7 +29,7 @@ TiDB Ansible バージョン: 3.1.0-beta.1
 -   BR (バックアップと復元)
     -   不正確なバックアップ進行状況情報を修正[#127](https://github.com/pingcap/br/pull/127)
     -   領域[#122](https://github.com/pingcap/br/pull/122)の分割のパフォーマンスを向上させます。
-    -   パーティション化されたテーブルのバックアップおよび復元機能を追加する[#137](https://github.com/pingcap/br/pull/137)
+    -   パーティション化されたテーブルのバックアップおよび復元機能を追加します[#137](https://github.com/pingcap/br/pull/137)
     -   PDスケジューラ[#123](https://github.com/pingcap/br/pull/123)の自動スケジュール機能を追加
     -   `PKIsHandle`以外のテーブルが復元された後にデータが上書きされる問題を修正[#139](https://github.com/pingcap/br/pull/139)
 

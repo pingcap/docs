@@ -23,11 +23,11 @@ INSERT INTO city (id,detail) VALUES (1, '{"name": "Beijing", "population": 100}'
 SELECT id FROM city WHERE population >= 100;
 ```
 
-詳細については、 [生成された列](/generated-columns.md)を参照してください。
+詳細については、 [JSON関数](/functions-and-operators/json-functions.md)および[生成された列](/generated-columns.md)を参照してください。
 
 ## 制限 {#restrictions}
 
--   現在、TiDB は`JSON`関数をTiFlashにプッシュダウンすることをサポートしていません。
+-   現在、TiDB は、限られた`JSON`関数のTiFlashへのプッシュダウンのみをサポートしています。詳細については、 [プッシュダウン式](/tiflash/tiflash-supported-pushdown-calculations.md#push-down-expressions)を参照してください。
 -   v6.3.0 より前の TiDB バックアップ &amp; リストア (BR) バージョンは、JSON 列を含むデータのリカバリをサポートしていません。 BRのどのバージョンも、JSON 列を含むデータを v6.3.0 より前の TiDB クラスターにリカバリすることをサポートしていません。
 -   `DATE` 、 `DATETIME` 、 `TIME`などの非標準の`JSON`データ型を含むデータをレプリケートするためにレプリケーション ツールを使用しないでください。
 
@@ -101,4 +101,4 @@ SELECT id FROM city WHERE population >= 100;
     INSERT INTO t VALUES (3);
     ```
 
-`JSON`データ型の詳細については、 [生成された列](/generated-columns.md)を参照してください。
+`JSON`データ型の詳細については、 [JSON関数](/functions-and-operators/json-functions.md)および[生成された列](/generated-columns.md)を参照してください。

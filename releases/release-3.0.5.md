@@ -25,7 +25,7 @@ TiDB Ansible バージョン: 3.0.5
     -   `from_unixtime`関数が null [#12551](https://github.com/pingcap/tidb/pull/12551)を処理するときのpanicの問題を修正
     -   DDL ジョブ[#12671](https://github.com/pingcap/tidb/pull/12671)をキャンセルするときに報告される`invalid list index`エラーを修正します。
     -   ウィンドウ関数使用時に配列が範囲外になる問題を修正[#12660](https://github.com/pingcap/tidb/pull/12660)
-    -   MySQL 自動インクリメント ロック ( [#12602](https://github.com/pingcap/tidb/pull/12602)
+    -   MySQL 自動インクリメント ロック ( [「連続」ロックモード](https://dev.mysql.com/doc/refman/5.7/en/innodb-auto-increment-handling.html) ) のデフォルト モードとの一貫性を維持するために、暗黙的に割り当てられたときの`AutoIncrement`カラムの動作を改善します。単一行`Insert`ステートメントで複数の`AutoIncrement` ID を暗黙的に割り当てる場合、TiDB は割り当てられた値の連続性。この改善により、JDBC `getGeneratedKeys()`メソッドはどのようなシナリオでも正しい結果が得られるようになります。 [#12602](https://github.com/pingcap/tidb/pull/12602)
     -   `HashAgg` `Apply` [#12766](https://github.com/pingcap/tidb/pull/12766)の子ノードとして機能する場合にクエリがハングする問題を修正
     -   型変換[#12811](https://github.com/pingcap/tidb/pull/12811)に関して、 `AND`と`OR`の論理式が誤った結果を返す問題を修正
 -   サーバ
@@ -48,14 +48,14 @@ TiDB Ansible バージョン: 3.0.5
     -   Date または Datetime 型の列をパーティション キーとして持つレンジ パーティションパーティションテーブルに対して、テーブルの作成時またはパーティションの追加時に、パーティション タイプとパーティション キー タイプの整合性チェックをサポートします[#12792](https://github.com/pingcap/tidb/pull/12792)
     -   レンジパーティションテーブル[#12718](https://github.com/pingcap/tidb/pull/12718)を作成するときに、一意のキー列セットがパーティション列セット以上である必要があることを確認するチェックを追加します。
 -   モニター
-    -   コミットおよびロールバック操作の監視メトリックをダッシュボードに追加します`Transaction OPS`ダッシュボード[#12505](https://github.com/pingcap/tidb/pull/12505)
+    -   コミットおよびロールバック操作の監視メトリックをダッシュ​​ボードに追加します`Transaction OPS`ダッシュボード[#12505](https://github.com/pingcap/tidb/pull/12505)
     -   `Add Index`操作の進行状況[#12390](https://github.com/pingcap/tidb/pull/12390)の監視メトリクスを追加します。
 
 ## TiKV {#tikv}
 
 -   保管所
     -   悲観的トランザクションの新機能を追加します。トランザクション クリーンアップ インターフェイスは、TTL が古いロックのクリーンアップのみをサポートします[#5589](https://github.com/tikv/tikv/pull/5589)
-    -   トランザクションの主キーのロールバックが折りたたまれている問題を修正[#5671](https://github.com/tikv/tikv/pull/5671)
+    -   トランザクションの主キーのロールバックが折りたたまれている問題を修正[#5646](https://github.com/tikv/tikv/pull/5646) 、 [#5671](https://github.com/tikv/tikv/pull/5671)
     -   悲観的ロックの下で、ポイント クエリが以前のバージョンのデータを返す可能性がある問題を修正します[#5634](https://github.com/tikv/tikv/pull/5634)
 -   Raftstore
     -   Raftstoreでのメッセージ フラッシュ操作を減らしてパフォーマンスを向上させ、CPU 使用率を削減します[#5617](https://github.com/tikv/tikv/pull/5617)
@@ -86,7 +86,7 @@ TiDB Ansible バージョン: 3.0.5
 ## TiDB Ansible {#tidb-ansible}
 
 -   インデックス速度[#986](https://github.com/pingcap/tidb-ansible/pull/986)を追加する監視メトリクスを追加します。
--   構成ファイルの内容を簡素化し、ユーザーが構成する必要のないパラメータを削除します[#998](https://github.com/pingcap/tidb-ansible/pull/998)
+-   構成ファイルの内容を簡素化し、ユーザーが構成する必要のないパラメータを削除します[#1043c](https://github.com/pingcap/tidb-ansible/commit/1043c3df7ddb72eb234c55858960e9fdd3830a14) 、 [#998](https://github.com/pingcap/tidb-ansible/pull/998)
 -   パフォーマンスリード、パフォーマンスライト[#e90e7](https://github.com/pingcap/tidb-ansible/commit/e90e79f5117bb89197e01b1391fd02e25d57a440)の監視式エラーを修正
 -   Raftstore CPU使用率[#992](https://github.com/pingcap/tidb-ansible/pull/992)の監視表示方法とアラームルールを更新
 -   概要監視ダッシュボードの TiKV CPU 監視項目を更新して、過剰な監視コンテンツを除外します[#1001](https://github.com/pingcap/tidb-ansible/pull/1001)

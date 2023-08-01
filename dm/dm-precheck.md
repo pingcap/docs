@@ -94,7 +94,7 @@ tiup dmctl check-task ./task.yaml
 
 #### 現物輸入のチェック項目 {#check-items-for-physical-import}
 
-タスク構成で`import-mode: "physical"`を設定した場合、 [論理インポートモード](/tidb-lightning/tidb-lightning-logical-import-mode.md)を使用してデータをインポートしてみてください。
+タスク構成で`import-mode: "physical"`を設定した場合、 [物理的なインポート](/tidb-lightning/tidb-lightning-physical-import-mode.md)正常に動作することを確認するために以下のチェック項目が追加されます。指示に従っても、これらのチェック項目の要件を満たすことが難しい場合は、 [論理インポートモード](/tidb-lightning/tidb-lightning-logical-import-mode.md)を使用してデータをインポートしてみてください。
 
 -   ダウンストリーム データベース内の空の領域
 
@@ -114,7 +114,7 @@ tiup dmctl check-task ./task.yaml
 
 -   ダウンストリーム データベースが物理インポートと互換性のないタスクを実行しているかどうか
 
-    -   現在、物理インポートは[PITR](/br/br-pitr-guide.md)タスクと互換性がありません。これらのタスクがダウンストリーム データベースで実行されている場合、事前チェックはエラーを返します。
+    -   現在、物理インポートは[TiCDC](/ticdc/ticdc-overview.md)および[PITR](/br/br-pitr-guide.md)タスクと互換性がありません。これらのタスクがダウンストリーム データベースで実行されている場合、事前チェックはエラーを返します。
 
 ### 増分データ移行のチェック項目 {#check-items-for-incremental-data-migration}
 
@@ -140,28 +140,28 @@ tiup dmctl check-task ./task.yaml
 
 ### 完全データ移行および増分データ移行のチェック項目 {#check-items-for-full-and-incremental-data-migration}
 
-完全および増分データ移行モード ( `task-mode: all` ) の場合、事前チェックには[増分データ移行のチェック項目](#check-items-for-incremental-data-migration)も含まれます。
+完全および増分データ移行モード ( `task-mode: all` ) の場合、事前チェックには[よくあるチェック項目](#common-check-items)に加えて[完全なデータ移行チェック項目](#check-items-for-full-data-migration)および[増分データ移行のチェック項目](#check-items-for-incremental-data-migration)も含まれます。
 
 ### 無視できるチェック項目 {#ignorable-check-items}
 
 事前チェックにより、環境内の潜在的なリスクを見つけることができます。チェック項目を無視することはお勧めできません。データ移行タスクに特別なニーズがある場合は、「 [`ignore-checking-items`設定項目](/dm/task-configuration-file-full.md#task-configuration-file-template-advanced)を使用して一部のチェック項目をスキップできます。
 
-| チェック項目                      | 説明                                                                                                 |
-| :-------------------------- | :------------------------------------------------------------------------------------------------- |
-| `dump_privilege`            | 上流の MySQL インスタンスのユーザーのダンプ権限を確認します。                                                                 |
-| `replication_privilege`     | 上流の MySQL インスタンスのユーザーのレプリケーション権限を確認します。                                                            |
-| `version`                   | 上流データベースのバージョンを確認します。                                                                              |
-| `server_id`                 | server_id がアップストリーム データベースで構成されているかどうかを確認します。                                                      |
-| `binlog_enable`             | アップストリーム データベースでbinlogが有効になっているかどうかを確認します。                                                         |
-| `table_schema`              | アップストリームの MySQL テーブル内のテーブル スキーマの互換性をチェックします。                                                       |
-| `schema_of_shard_tables`    | アップストリームの MySQL マルチインスタンス シャード内のテーブル スキーマの一貫性をチェックします。                                             |
-| `auto_increment_ID`         | 自動インクリメント主キーがアップストリームの MySQL マルチインスタンス シャードで競合するかどうかを確認します。                                        |
-| `online_ddl`                | 上流が[オンライン DDL](/dm/feature-online-ddl.md)のプロセス中かどうかを確認します。 |
-| `empty_region`              | 物理インポート用にダウンストリーム データベース内の空のリージョンの数を確認します。                                                         |
-| `region_distribution`       | 物理インポートのダウンストリーム データベース内のリージョンの分布を確認します。                                                           |
-| `downstream_version`        | ダウンストリーム データベース内の TiDB、PD、および TiKV のバージョンを確認します。                                                   |
-| `free_space`                | ダウンストリームデータベースの空き容量を確認します。                                                                         |
-| `downstream_mutex_features` | ダウンストリーム データベースが物理インポートと互換性のないタスクを実行していないかどうかを確認します。                                               |
+| チェック項目                      | 説明                                                          |
+| :-------------------------- | :---------------------------------------------------------- |
+| `dump_privilege`            | 上流の MySQL インスタンスのユーザーのダンプ権限を確認します。                          |
+| `replication_privilege`     | 上流の MySQL インスタンスのユーザーのレプリケーション権限を確認します。                     |
+| `version`                   | 上流データベースのバージョンを確認します。                                       |
+| `server_id`                 | server_id がアップストリーム データベースで構成されているかどうかを確認します。               |
+| `binlog_enable`             | アップストリーム データベースでbinlogが有効になっているかどうかを確認します。                  |
+| `table_schema`              | アップストリームの MySQL テーブル内のテーブル スキーマの互換性をチェックします。                |
+| `schema_of_shard_tables`    | アップストリームの MySQL マルチインスタンス シャード内のテーブル スキーマの一貫性をチェックします。      |
+| `auto_increment_ID`         | 自動インクリメント主キーがアップストリームの MySQL マルチインスタンス シャードで競合するかどうかを確認します。 |
+| `online_ddl`                | 上流が[オンライン DDL](/dm/feature-online-ddl.md)のプロセス中かどうかを確認します。  |
+| `empty_region`              | 物理インポート用にダウンストリーム データベース内の空のリージョンの数を確認します。                  |
+| `region_distribution`       | 物理インポートのダウンストリーム データベース内のリージョンの分布を確認します。                    |
+| `downstream_version`        | ダウンストリーム データベース内の TiDB、PD、および TiKV のバージョンを確認します。            |
+| `free_space`                | ダウンストリームデータベースの空き容量を確認します。                                  |
+| `downstream_mutex_features` | ダウンストリーム データベースが物理インポートと互換性のないタスクを実行していないかどうかを確認します。        |
 
 > **ノート：**
 >

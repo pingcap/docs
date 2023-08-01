@@ -35,7 +35,7 @@ TiCDC は、デフォルトでデータ整合性検証を無効にします。�
     corruption-handle-level = "warn"
     ```
 
-3.  データのエンコード形式として Avro を使用する場合は、 [`avro-bigint-unsigned-handling-mode=string`](/ticdc/ticdc-sink-to-kafka.md#configure-sink-uri-for-kafka)を設定する必要もあります。以下は例です。
+3.  データのエンコード形式として Avro を使用する場合は、 [`sink-uri`](/ticdc/ticdc-sink-to-kafka.md#configure-sink-uri-for-kafka)に[`enable-tidb-extension=true`](/ticdc/ticdc-sink-to-kafka.md#configure-sink-uri-for-kafka)を設定する必要があります。チェックサム検証の失敗を引き起こす可能性があるネットワーク送信中の数値精度の損失を防ぐには、 [`avro-decimal-handling-mode=string`](/ticdc/ticdc-sink-to-kafka.md#configure-sink-uri-for-kafka)と[`avro-bigint-unsigned-handling-mode=string`](/ticdc/ticdc-sink-to-kafka.md#configure-sink-uri-for-kafka)を設定する必要もあります。以下は例です。
 
     ```shell
     cdc cli changefeed create --server=http://127.0.0.1:8300 --changefeed-id="kafka-avro-checksum" --sink-uri="kafka://127.0.0.1:9092/topic-name?protocol=avro&enable-tidb-extension=true&avro-decimal-handling-mode=string&avro-bigint-unsigned-handling-mode=string" --schema-registry=http://127.0.0.1:8081 --config changefeed_config.toml
@@ -92,18 +92,17 @@ fn checksum(columns) {
     -   BIT、ENUM、SET 型は UINT64 に変換されます。
 
         -   BIT型はバイナリ形式のUINT64に変換されます。
-        -   ENUM 型と SET 型は、UINT64 の対応する INT 値に変換されます。たとえば、タイプ`SET('a','b','c')`列のデータ値が`'a,c'`の場合、値は`0b101`としてエンコードされます。
+        -   ENUM 型と SET 型は、UINT64 の対応する INT 値に変換されます。たとえば、タイプ`SET('a','b','c')`列のデータ値が`'a,c'`の場合、値は`0b101` (10 進数の`5`としてエンコードされます。
 
-    -   TIMESTAMP、DATE、DURATION、DATETIME、JSON、および DECIMAL 型は STRING に変換され、UTF8 バイトとしてエンコードされます。
+    -   TIMESTAMP、DATE、DURATION、DATETIME、JSON、および DECIMAL 型は、まず STRING に変換され、次にバイトに変換されます。
 
-    -   VARBIANRY、BINARY、および BLOB 型 (TINY、MEDIUM、LONG を含む) はバイトとして直接エンコードされます。
-
-    -   VARCHAR、CHAR、 TEXT型 (TINY、MEDIUM、LONG を含む) は UTF8 バイトとしてエンコードされます。
+    -   CHAR、VARCHAR、VARSTRING、STRING、 TEXT、および BLOB 型 (TINY、MEDIUM、LONG を含む) はバイトに直接変換されます。
 
     -   NULL および GEOMETRY タイプはチェックサム計算から除外され、この関数は空のバイトを返します。
 
+Golangを使用したデータ消費とチェックサム検証の実装の詳細については、 [TiCDC 行データのチェックサム検証](/ticdc/ticdc-avro-checksum-verification.md)を参照してください。
+
 > **ノート：**
 >
-> チェックサム検証機能を有効にすると、DECIMAL 型および UNSIGNED BIGINT 型のデータが文字列型に変換されます。したがって、ダウンストリームのコンシューマー コードでは、チェックサム値を計算する前に、それらを対応する数値型に変換し直す必要があります。
-
-Golangで記述されたコンシューマー コードは、Kafka から読み取られたデータのデコード、スキーマ フィールドによる並べ替え、チェックサム値の計算などの手順を実装します。詳細については、 [`avro/decoder.go`](https://github.com/pingcap/tiflow/blob/master/pkg/sink/codec/avro/decoder.go)を参照してください。
+> -   チェックサム検証機能を有効にすると、DECIMAL 型および UNSIGNED BIGINT 型のデータが STRING 型に変換されます。したがって、ダウンストリームのコンシューマー コードでは、チェックサム値を計算する前に、それらを対応する数値型に変換し直す必要があります。
+> -   チェックサム検証プロセスには DELETE イベントは含まれません。これは、DELETE イベントにはハンドル キー列のみが含まれるのに対し、チェックサムはすべての列に基づいて計算されるためです。

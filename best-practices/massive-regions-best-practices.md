@@ -67,7 +67,7 @@ Raftstore はTiDB v3.0 以降マルチスレッド モジュールにアップ�
 
 実際の状況では、読み取りおよび書き込みリクエストはすべてのリージョンに均等に分散されません。代わりに、それらはいくつかの地域に集中しています。その後、 Raftリーダーと、一時的にアイドル状態になっているリージョンのフォロワー間のメッセージの数を最小限に抑えることができます。これが Hibernateリージョンの機能です。この機能では、 Raftstore は、必要がない場合に、アイドル状態のリージョンのRaftステート マシンにティック メッセージを送信します。そうすれば、これらのRaftステート マシンはハートビートメッセージを生成するためにトリガーされなくなり、 Raftstoreのワークロードを大幅に軽減できます。
 
-Hibernateリージョンは[休止状態リージョンの構成](/tikv-configuration-file.md)を参照してください。
+Hibernateリージョンは[TiKVマスター](https://github.com/tikv/tikv/tree/master)ではデフォルトで有効になっています。この機能は必要に応じて設定できます。詳細は[休止状態リージョンの構成](/tikv-configuration-file.md)を参照してください。
 
 ### 方法 3: <code>Region Merge</code>を有効にする {#method-3-enable-code-region-merge-code}
 
@@ -87,7 +87,7 @@ config set max-merge-region-keys 200000
 config set merge-schedule-limit 8
 ```
 
-詳細については、 [PD設定ファイル](/pd-configuration-file.md#schedule)の次の 3 つの構成パラメータを参照してください。
+詳細については、 [リージョンのマージ](https://tikv.org/docs/4.0/tasks/configure/region-merge/)と、 [PD設定ファイル](/pd-configuration-file.md#schedule)の次の 3 つの構成パラメータを参照してください。
 
 -   [`max-merge-region-size`](/pd-configuration-file.md#max-merge-region-size)
 -   [`max-merge-region-keys`](/pd-configuration-file.md#max-merge-region-keys)

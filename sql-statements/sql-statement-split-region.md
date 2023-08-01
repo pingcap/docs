@@ -163,7 +163,7 @@ SPLIT TABLE t INDEX idx BETWEEN (-9223372036854775808) AND (9223372036854775807)
 
 このステートメントは、テーブル t のインデックス idx のリージョンを`minInt64`から`maxInt64`までの 16 個の領域に分割します。
 
-インデックス idx1 の列が varchar 型で、インデックス データをプレフィックス文字によって分割する場合。
+インデックス idx1 の列が varchar 型で、インデックス データをプレフィックス文字で分割する場合。
 
 {{< copyable "" >}}
 
@@ -438,7 +438,7 @@ region4:   [ 3<<61     ,  +inf  )
 
 > **ノート：**
 >
-> Split リージョンステートメントによって分割されたリージョンは、PD の[動的に変更する](/pd-control.md)設定項目を行う必要があります。
+> Split リージョンステートメントによって分割されたリージョンは、PD の[リージョンのマージ](/best-practices/pd-scheduling-best-practices.md#region-merge)スケジューラによって制御されます。 PD が新しく分割されたリージョンをすぐに再マージしないようにするには、リージョンのマージ機能に関連する[動的に変更する](/pd-control.md)設定項目を行う必要があります。
 
 </CustomContent>
 
@@ -449,4 +449,4 @@ region4:   [ 3<<61     ,  +inf  )
 ## こちらも参照 {#see-also}
 
 -   [テーブル領域を表示](/sql-statements/sql-statement-show-table-regions.md)
--   セッション変数: [`tidb_wait_split_region_timeout`](/system-variables.md#tidb_wait_split_region_timeout) 。
+-   セッション変数: [`tidb_scatter_region`](/system-variables.md#tidb_scatter_region) 、 [`tidb_wait_split_region_finish`](/system-variables.md#tidb_wait_split_region_finish) 、および[`tidb_wait_split_region_timeout`](/system-variables.md#tidb_wait_split_region_timeout) 。

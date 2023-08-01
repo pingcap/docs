@@ -19,7 +19,7 @@ summary: Learn how to solve the wrong index issue.
 
 等価性クエリの場合、原因は[カウントミニスケッチ](/statistics.md#count-min-sketch)である可能性があります。 Count-Min Sketch が原因かどうかを確認し、対応する解決策を講じることができます。
 
-上記の原因が問題に当てはまらない場合は、 `USE_INDEX`または`use index`オプティマイザー ヒントを使用してインデックスを強制的に選択できます (詳細については[SQL計画管理](/sql-plan-management.md)を使用してクエリの動作を変更することもできます。
+上記の原因が問題に当てはまらない場合は、 `USE_INDEX`または`use index`オプティマイザー ヒントを使用してインデックスを強制的に選択できます (詳細については[USE_INDEX](/optimizer-hints.md#use_indext1_name-idx1_name--idx2_name-)を参照)。また、非侵入的な方法で[SQL計画管理](/sql-plan-management.md)を使用してクエリの動作を変更することもできます。
 
 ## その他の状況 {#other-situations}
 

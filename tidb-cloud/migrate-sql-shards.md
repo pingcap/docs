@@ -68,14 +68,14 @@ Amazon S3 バケットに第 1 レベルのディレクトリ`store` (データ�
 
 ### ステップ 2. Dumpling を使用してデータを Amazon S3 にエクスポートする {#step-2-use-dumpling-to-export-data-to-amazon-s3}
 
-Dumplingのインストール方法については、 [Dumplingの紹介](/dumpling-overview.md)を参照してください。
+Dumplingのインストール方法については、 [Dumplingの紹介](https://docs.pingcap.com/tidb/stable/dumpling-overview)を参照してください。
 
 Dumplingを使用してデータを Amazon S3 にエクスポートする場合は、次の点に注意してください。
 
 -   アップストリーム クラスターのbinlog を有効にします。
 -   正しい Amazon S3 ディレクトリとリージョンを選択します。
--   `-t`オプションを構成して上流クラスターへの影響を最小限に抑えるか、バックアップ データベースから直接エクスポートして、適切な同時実行性を選択します。このパラメータの使用方法の詳細については、 [Dumplingのオプション一覧](/dumpling-overview.md#option-list-of-dumpling)を参照してください。
--   `--filetype csv`と`--no-schemas`に適切な値を設定します。これらのパラメータの使用方法の詳細については、 [Dumplingのオプション一覧](/dumpling-overview.md#option-list-of-dumpling)を参照してください。
+-   `-t`オプションを構成して上流クラスターへの影響を最小限に抑えるか、バックアップ データベースから直接エクスポートして、適切な同時実行性を選択します。このパラメータの使用方法の詳細については、 [Dumplingのオプション一覧](https://docs.pingcap.com/tidb/stable/dumpling-overview#option-list-of-dumpling)を参照してください。
+-   `--filetype csv`と`--no-schemas`に適切な値を設定します。これらのパラメータの使用方法の詳細については、 [Dumplingのオプション一覧](https://docs.pingcap.com/tidb/stable/dumpling-overview#option-list-of-dumpling)を参照してください。
 
 CSV ファイルに次の名前を付けます。
 
@@ -83,7 +83,7 @@ CSV ファイルに次の名前を付けます。
 
 > **ノート：**
 >
-> 場合によっては、前述のルールに従って CSV ファイル名を更新できない場合 (たとえば、CSV ファイルのリンクが他のプログラムでも使用されている場合)、ファイル名を変更しないで、 [ステップ5](#step-5-perform-the-data-import-task)の**ファイル パターンを**使用してソース データをインポートできます。単一のターゲットテーブルに。
+> 場合によっては、前述のルールに従って CSV ファイル名を更新できない場合 (たとえば、CSV ファイルのリンクが他のプログラムでも使用されている場合)、ファイル名を変更しないで、 [ステップ5](#step-5-perform-the-data-import-task)の**ファイル パターン**を使用してソース データをインポートできます。単一のターゲットテーブルに。
 
 データを Amazon S3 にエクスポートするには、次の手順を実行します。
 
@@ -100,7 +100,7 @@ CSV ファイルに次の名前を付けます。
     [root@localhost ~]# tiup dumpling -u {username} -p {password} -P {port} -h {mysql01-ip} -B store_01,store_02 -r 20000 --filetype csv --no-schemas -o "s3://dumpling-s3/store/sales/instance01/" --s3.region "ap-northeast-1"
     ```
 
-    パラメータの詳細については、 [Dumplingのオプション一覧](/dumpling-overview.md#option-list-of-dumpling)を参照してください。
+    パラメータの詳細については、 [Dumplingのオプション一覧](https://docs.pingcap.com/tidb/stable/dumpling-overview#option-list-of-dumpling)を参照してください。
 
 3.  MySQL インスタンス 2 から Amazon S3 バケットの`s3://dumpling-s3/store/sales/instance02/`ディレクトリにデータをエクスポートします。
 
@@ -108,7 +108,7 @@ CSV ファイルに次の名前を付けます。
     [root@localhost ~]# tiup dumpling -u {username} -p {password} -P {port} -h {mysql02-ip} -B store_01,store_02 -r 20000 --filetype csv --no-schemas -o "s3://dumpling-s3/store/sales/instance02/" --s3.region "ap-northeast-1"
     ```
 
-詳細な手順については、 [データを Amazon S3 クラウドstorageにエクスポートする](/dumpling-overview.md#export-data-to-amazon-s3-cloud-storage)を参照してください。
+詳細な手順については、 [データを Amazon S3 クラウドstorageにエクスポートする](https://docs.pingcap.com/tidb/stable/dumpling-overview#export-data-to-amazon-s3-cloud-storage)を参照してください。
 
 ### ステップ 3. TiDB Cloudクラスターでスキーマを作成する {#step-3-create-schemas-in-tidb-cloud-cluster}
 
@@ -125,12 +125,12 @@ Database changed
 
 ```sql
 mysql> CREATE TABLE `sales` (
-   ->   `id` bigint(20) NOT NULL ,
-   ->   `uid` varchar(40) NOT NULL,
-   ->   `sale_num` bigint DEFAULT NULL,
-   ->   INDEX (`id`),
-   ->   UNIQUE KEY `ind_uid` (`uid`)
-   -> );
+         `id` bigint(20) NOT NULL ,
+         `uid` varchar(40) NOT NULL,
+         `sale_num` bigint DEFAULT NULL,
+         INDEX (`id`),
+         UNIQUE KEY `ind_uid` (`uid`)
+        );
 Query OK, 0 rows affected (0.17 sec)
 ```
 
@@ -177,11 +177,11 @@ Amazon S3 アクセスを構成した後、次のようにTiDB Cloudコンソー
 
 1.  ターゲットクラスターの**インポート**ページを開きます。
 
-    1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動します。
+    1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、プロジェクトの[**クラスター**](https://tidbcloud.com/console/clusters)ページに移動します。
 
         > **ヒント：**
         >
-        > 複数のプロジェクトがある場合は、 **「クラスター」**ページの左側のナビゲーション・ペインでターゲット・プロジェクトに切り替えることができます。
+        > 複数のプロジェクトがある場合は、<mdsvgicon name="icon-left-projects">左下隅の をクリックして、別のプロジェクトに切り替えます。</mdsvgicon>
 
     2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[インポート]**をクリックします。
 
@@ -220,7 +220,7 @@ Amazon S3 アクセスを構成した後、次のようにTiDB Cloudコンソー
 
 5.  **「次へ」**をクリックします。
 
-6.  **[プレビュー]**ページでは、データのプレビューを表示できます。プレビューされたデータが期待したものと異なる場合は、 **「ここをクリックして CSV 設定を編集」**リンクをクリックして、区切り文字、区切り文字、ヘッダー、非 null、null、バックスラッシュエスケープ、最後の区切り文字のトリミングなどの CSV 固有の設定を更新します。 。
+6.  **[プレビュー]**ページでは、データのプレビューを表示できます。プレビューされたデータが期待したものと異なる場合は、 **「ここをクリックして CSV 構成を編集します」リンクを**クリックして、区切り文字、区切り記号、ヘッダー、 `backslash escape` 、および`trim last separator`を含む CSV 固有の構成を更新します。
 
     > **ノート：**
     >
@@ -238,7 +238,7 @@ binlogに基づいてデータ変更を上流クラスターの指定された�
 
 ### あなたが始める前に {#before-you-begin}
 
-TiDB Cloudコンソールには、増分データ レプリケーションに関する機能がまだ提供されていません。増分データを移行するには、TiDB DM をデプロイする必要があります。詳細な手順については、 [TiUPを使用した DMクラスタのデプロイ](https://docs.pingcap.com/tidb/stable/deploy-a-dm-cluster-using-tiup)を参照してください。
+増分データを移行し、MySQL シャードをTiDB Cloudにマージする場合は、TiDB DM を手動でデプロイする必要があります。これは、 TiDB Cloud がMySQL シャードの移行とマージをまだサポートしていないためです。詳細な手順については、 [TiUPを使用した DMクラスタのデプロイ](https://docs.pingcap.com/tidb/stable/deploy-a-dm-cluster-using-tiup)を参照してください。
 
 ### ステップ 1. データソースを追加する {#step-1-add-the-data-source}
 
@@ -292,7 +292,7 @@ TiDB Cloudコンソールには、増分データ レプリケーションに関
     ```shell
     tiup is checking updates for component dmctl ...
 
-    Starting component `dmctl`: /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl --master-addr 192.168.11.110:9261 operate-source create dm-source1.yaml
+    Starting component `dmctl`: /root/.tiup/components/dmctl/${tidb_version}/dmctl/dmctl /root/.tiup/components/dmctl/${tidb_version}/dmctl/dmctl --master-addr 192.168.11.110:9261 operate-source create dm-source1.yaml
 
     {
        "result": true,
@@ -320,7 +320,7 @@ TiDB Cloudコンソールには、増分データ レプリケーションに関
     ```shell
     tiup is checking updates for component dmctl ...
 
-    Starting component `dmctl`: /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl --master-addr 192.168.11.110:9261 operate-source create dm-source2.yaml
+    Starting component `dmctl`: /root/.tiup/components/dmctl/${tidb_version}/dmctl/dmctl /root/.tiup/components/dmctl/${tidb_version}/dmctl/dmctl --master-addr 192.168.11.110:9261 operate-source create dm-source2.yaml
 
     {
        "result": true,
@@ -406,7 +406,7 @@ TiDB Cloudコンソールには、増分データ レプリケーションに関
      host: "tidb.xxxxxxx.xxxxxxxxx.ap-northeast-1.prod.aws.tidbcloud.com"
      port: 4000
      user: "root"
-     password: "${password}"  # If the password is not empty, it is recommended to use a dmctl-encrypted cipher. 
+     password: "${password}"  # If the password is not empty, it is recommended to use a dmctl-encrypted cipher.
 
     ## ******** Function Configuration **********
     routes:
@@ -449,7 +449,7 @@ TiDB Cloudコンソールには、増分データ レプリケーションに関
 ```shell
 tiup is checking updates for component dmctl ...
 
-Starting component `dmctl`: /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl --master-addr 192.168.11.110:9261 check-task dm-task.yaml
+Starting component `dmctl`: /root/.tiup/components/dmctl/${tidb_version}/dmctl/dmctl /root/.tiup/components/dmctl/${tidb_version}/dmctl/dmctl --master-addr 192.168.11.110:9261 check-task dm-task.yaml
 
 {
    "result": true,
@@ -477,7 +477,7 @@ Starting component `dmctl`: /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl /roo
 ```shell
 tiup is checking updates for component dmctl ...
 
-Starting component `dmctl`: /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl --master-addr 192.168.11.110:9261 start-task dm-task.yaml
+Starting component `dmctl`: /root/.tiup/components/dmctl/${tidb_version}/dmctl/dmctl /root/.tiup/components/dmctl/${tidb_version}/dmctl/dmctl --master-addr 192.168.11.110:9261 start-task dm-task.yaml
 
 {
    "result": true,
@@ -503,7 +503,7 @@ Starting component `dmctl`: /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl /roo
 
 タスクの開始に失敗した場合は、プロンプト メッセージを確認して構成を修正します。その後、上記のコマンドを再実行してタスクを開始できます。
 
-何か問題が発生した場合は、 [DMに関するFAQ](https://docs.pingcap.com/tidb/stable/dm-faq)を参照してください。
+何か問題が発生した場合は、 [DMエラー処理](https://docs.pingcap.com/tidb/stable/dm-error-handling)と[DMに関するFAQ](https://docs.pingcap.com/tidb/stable/dm-faq)を参照してください。
 
 ### ステップ 4. レプリケーションタスクのステータスを確認する {#step-4-check-the-replication-task-status}
 

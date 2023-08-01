@@ -19,19 +19,19 @@ summary: Learn how to delete a TiDB cluster.
 
 3.  ドロップダウン メニューで**[削除]**をクリックします。
 
-4.  クラスタ削除画面でクラスタ名を入力します。
+4.  クラスターの削除ウィンドウで、 `<organization name>/<project name>/<cluster name>`を入力します。
 
-    将来クラスターを復元する場合は、クラスターのバックアップがあることを確認してください。そうしないと、もう復元できません。Dedicated Tierクラスターをバックアップする方法の詳細については、 [TiDBクラスタデータのバックアップと復元](/tidb-cloud/backup-and-restore.md)を参照してください。
+    将来クラスターを復元する場合は、クラスターのバックアップがあることを確認してください。そうしないと、もう復元できません。 TiDB 専用クラスターをバックアップする方法の詳細については、 [TiDB 専用データのバックアップと復元](/tidb-cloud/backup-and-restore.md)を参照してください。
 
     > **ノート：**
     >
-    > [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview)使用して、データをバックアップとしてエクスポートできます。
+    > [TiDB サーバーレスクラスター](/tidb-cloud/select-cluster-tier.md#tidb-serverless) [バックアップからのインプレース復元](/tidb-cloud/backup-and-restore-serverless.md#restore)のみをサポートし、削除後のデータの復元をサポートしません。将来、TiDB サーバーレス クラスターを削除し、そのデータを復元したい場合は、 [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview)使用してデータをバックアップとしてエクスポートできます。
 
 5.  **「結果を理解しました」をクリックします。このクラスターを削除します**。
 
-バックアップされたDedicated Tierクラスターが削除されると、クラスターの既存のバックアップ ファイルはごみ箱に移動されます。
+バックアップされた TiDB 専用クラスターが削除されると、クラスターの既存のバックアップ ファイルはごみ箱に移動されます。
 
 -   自動バックアップからのバックアップ ファイルの場合、ごみ箱には 7 日間保存できます。
 -   手動バックアップからのバックアップ ファイルには有効期限はありません。
 
-クラスターをごみ箱から復元する場合は、 [削除されたクラスターを復元する](/tidb-cloud/backup-and-restore.md#restore-a-deleted-cluster)を参照してください。
+TiDB 専用クラスターをごみ箱から復元する場合は、 [削除されたクラスターを復元する](/tidb-cloud/backup-and-restore.md#restore-a-deleted-cluster)を参照してください。

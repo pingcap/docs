@@ -101,7 +101,7 @@ Query OK, 0 rows affected (10.22 sec)
 
 `ANALYZE TABLE`が実行されると、 `└─TableFullScan_18`演算子の推定行が正確で、 `└─Selection_19`の推定もかなり近づいていることがわかります。上記の 2 つのケースでは、実行計画 (TiDB がこのクエリを実行するために使用する一連の演算子) は変更されていませんが、非常に頻繁に、古い統計が原因で次善の計画が発生します。
 
-`ANALYZE TABLE`に加えて、TiDB はしきい値[`SHOW STATS_HEALTHY`](/sql-statements/sql-statement-show-stats-healthy.md)ステートメントを実行すると、TiDB がこのしきい値にどの程度近づいているか (TiDB が統計がどの程度健全であるとみなしているか) を確認できます。
+`ANALYZE TABLE`に加えて、TiDB はしきい値[`tidb_auto_analyze_ratio`](/system-variables.md#tidb_auto_analyze_ratio)に達した後、バックグラウンド操作として統計を自動的に再生成します。次の[`SHOW STATS_HEALTHY`](/sql-statements/sql-statement-show-stats-healthy.md)ステートメントを実行すると、TiDB がこのしきい値にどの程度近づいているか (TiDB が統計がどの程度健全であるとみなしているか) を確認できます。
 
 {{< copyable "" >}}
 
@@ -167,7 +167,7 @@ Query OK, 0 rows affected (2 min 10.23 sec)
 
 > **ノート：**
 >
-> [`tidb_ddl_reorg_worker_cnt`](/system-variables.md#tidb_ddl_reorg_worker_cnt)値を増やすことを検討してください。参照システムでは、バッチ サイズ`10240`とワーカー数`32`により、デフォルトと比較して 10 倍のパフォーマンス向上を達成できます。
+> [`ADMIN SHOW DDL JOBS`](/sql-statements/sql-statement-admin-show-ddl.md)コマンドを使用して、DDL ジョブの進行状況を監視できます。 TiDB のデフォルトは、インデックスの追加が実本番ワークロードに大きな影響を与えないよう慎重に選択されています。テスト環境の場合は、 [`tidb_ddl_reorg_batch_size`](/system-variables.md#tidb_ddl_reorg_batch_size)と[`tidb_ddl_reorg_worker_cnt`](/system-variables.md#tidb_ddl_reorg_worker_cnt)値を増やすことを検討してください。参照システムでは、バッチ サイズ`10240`とワーカー数`32`により、デフォルトと比較して 10 倍のパフォーマンス向上を達成できます。
 
 インデックスを追加した後、 `EXPLAIN`のクエリを繰り返すことができます。次の出力では、新しい実行プランが選択され、 `TableFullScan`と`Selection`演算子が削除されていることがわかります。
 

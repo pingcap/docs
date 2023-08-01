@@ -18,7 +18,7 @@ TiDB は、 `Prepare` / `Execute`ステートメントと同様に、一部の�
 
 TiDB の現在のバージョンでは、 `Prepare`ステートメントが次の条件のいずれかを満たしている場合、クエリまたはプランはキャッシュされません。
 
--   クエリには`SELECT` 、 `UPDATE` 、 `INSERT` 、 `DELETE` 、 `Union` 、 `Intersect` 、および`Except`以外の SQL ステートメントが含まれています。
+-   クエリには`SELECT` 、 `UPDATE` 、 `INSERT` 、 `DELETE` 、 `Union` 、 `Intersect` 、 `Except`以外の SQL ステートメントが含まれています。
 -   クエリは、パーティション化されたテーブル、一時テーブル、または生成された列を含むテーブルにアクセスします。
 -   クエリには、 `SELECT * FROM t1 WHERE t1.a > (SELECT 1 FROM t2 WHERE t2.b < 1)`などの相関のないサブクエリが含まれています。
 -   クエリには、実行プランに演算子が`PhysicalApply`ある相関サブクエリ ( `SELECT * FROM t1 WHERE t1.a > (SELECT a FROM t2 WHERE t1.b > t2.b)`など) が含まれています。
@@ -344,6 +344,6 @@ TiDB ページの**Executor**セクションの[Grafana ダッシュボード](/
 
 <CustomContent platform="tidb-cloud">
 
-[**モニタリング**](/tidb-cloud/built-in-monitoring.md)ページでは、 `Queries Using Plan Cache OPS`メトリクスをチェックして、すべての TiDB インスタンスで 1 秒あたりのプラン キャッシュを使用しているクエリまたは欠落しているクエリの数を取得できます。
+[TiDB Cloudコンソール](https://tidbcloud.com/)の[**モニタリング**](/tidb-cloud/built-in-monitoring.md)ページでは、 `Queries Using Plan Cache OPS`メトリクスをチェックして、すべての TiDB インスタンスで 1 秒あたりのプラン キャッシュを使用しているクエリまたは欠落しているクエリの数を取得できます。
 
 </CustomContent>

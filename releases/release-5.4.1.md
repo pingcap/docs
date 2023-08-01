@@ -56,7 +56,7 @@ TiDB v5.4.1 では、製品設計に互換性の変更は導入されていま�
     -   TiDB [#31638](https://github.com/pingcap/tidb/issues/31638)で新しい照合順序が有効になっている場合、 `ENUM`または`SET`列の`MAX`または`MIN`関数が間違った結果を返す問題を修正します。
     -   クエリがエラーを報告すると CTE がブロックされる可能性があるバグを修正[#31302](https://github.com/pingcap/tidb/issues/31302)
     -   Enum 値[#32428](https://github.com/pingcap/tidb/issues/32428)に対する Nulleq 関数の間違った範囲計算結果を修正しました。
-    -   ChunkRPC を使用してデータをエクスポートするときの TiDB OOM を修正[#30880](https://github.com/pingcap/tidb/issues/30880)
+    -   ChunkRPC を使用してデータをエクスポートするときの TiDB OOM を修正[#31981](https://github.com/pingcap/tidb/issues/31981) [#30880](https://github.com/pingcap/tidb/issues/30880)
     -   `tidb_restricted_read_only`を有効にすると`tidb_super_read_only`が自動的に有効にならないバグを修正[#31745](https://github.com/pingcap/tidb/issues/31745)
     -   照合順序のある`greatest`または`least`関数が間違った結果を取得する問題を修正[#31789](https://github.com/pingcap/tidb/issues/31789)
     -   エスケープ文字[#31589](https://github.com/pingcap/tidb/issues/31589)でデータが壊れた場合のロード データpanicを修正
@@ -65,7 +65,7 @@ TiDB v5.4.1 では、製品設計に互換性の変更は導入されていま�
     -   TiDB が重複したタスクをTiFlash [#32814](https://github.com/pingcap/tidb/issues/32814)にディスパッチする可能性があるバグを修正
     -   v4.0 [#33588](https://github.com/pingcap/tidb/issues/33588)からアップグレードされたクラスターで`all`権限の付与が失敗する場合がある問題を修正
     -   MySQL バイナリ プロトコル[#33509](https://github.com/pingcap/tidb/issues/33509)でテーブル スキーマを変更した後にプリペアドステートメントを実行するときに発生するセッションpanicを修正しました。
-    -   `compress()`式と`tidb_enable_vectorized_expression`を有効にした SQL ステートメントの実行が失敗する問題を修正します[#33397](https://github.com/pingcap/tidb/issues/33397)
+    -   `compress()`式と`tidb_enable_vectorized_expression`有効にした SQL ステートメントの実行が失敗する問題を修正します[#33397](https://github.com/pingcap/tidb/issues/33397)
     -   `reArrangeFallback`機能[#30353](https://github.com/pingcap/tidb/issues/30353)による CPU 使用率が高くなる問題を修正
     -   新しいパーティションの追加時にテーブル属性のインデックスが作成されない問題と、パーティションの変更時にテーブル範囲情報が更新されない問題を修正します[#33929](https://github.com/pingcap/tidb/issues/33929)
     -   `TopN`初期化時のテーブルの統計情報が正しくソートされないバグを修正[#34216](https://github.com/pingcap/tidb/issues/34216)

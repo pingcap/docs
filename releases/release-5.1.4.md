@@ -12,8 +12,8 @@ TiDB バージョン: 5.1.4
 
 -   TiDB
 
-    -   システム変数[#31748](https://github.com/pingcap/tidb/issues/31748)
-    -   v5.1.4 以降、TiKV が`storage.enable-ttl = true`で構成されている場合、TiKV の TTL 機能は[#27303](https://github.com/pingcap/tidb/issues/27303)のみをサポートしているため、TiDB からのリクエストは拒否されます。
+    -   システム変数[`tidb_analyze_version`](/system-variables.md#tidb_analyze_version-new-in-v510)のデフォルト値を`2`から`1`に変更します[#31748](https://github.com/pingcap/tidb/issues/31748)
+    -   v5.1.4 以降、TiKV が`storage.enable-ttl = true`で構成されている場合、TiKV の TTL 機能は[RawKVモード](https://tikv.org/docs/5.1/concepts/explore-tikv-features/ttl/) [#27303](https://github.com/pingcap/tidb/issues/27303)のみをサポートしているため、TiDB からのリクエストは拒否されます。
 
 -   ツール
 
@@ -53,7 +53,7 @@ TiDB バージョン: 5.1.4
         -   多数のテーブルをレプリケートする場合のレプリケーションのレイテンシーを短縮します[#3900](https://github.com/pingcap/tiflow/issues/3900)
         -   インクリメンタル スキャン[#2985](https://github.com/pingcap/tiflow/issues/2985)の残り時間を監視するためのメトリクスを追加します。
         -   「EventFeed 再試行速度制限」ログの数を減らす[#4006](https://github.com/pingcap/tiflow/issues/4006)
-        -   `no owner alert` 、 `mounter row` 、 `table sink total row` 、 `buffer sink total row`などの Prometheus および Grafana モニタリング メトリックとアラートを追加します[#1606](https://github.com/pingcap/tiflow/issues/1606)
+        -   `no owner alert` 、 `mounter row` 、 `table sink total row` 、 `buffer sink total row`などの Prometheus および Grafana モニタリング メトリックとアラートを追加します[#4054](https://github.com/pingcap/tiflow/issues/4054) [#1606](https://github.com/pingcap/tiflow/issues/1606)
         -   TiKV リロードのレート制限制御を最適化し、チェンジフィードの初期化中の gPRC の輻輳を軽減します[#3110](https://github.com/pingcap/ticdc/issues/3110)
         -   TiKV ストアがダウンした場合に KV クライアントが回復するまでの時間を短縮します[#3191](https://github.com/pingcap/tiflow/issues/3191)
 
@@ -66,13 +66,13 @@ TiDB バージョン: 5.1.4
     -   `INSERT ... SELECT ... ON DUPLICATE KEY UPDATE`ステートメントを実行するとpanic[#28078](https://github.com/pingcap/tidb/issues/28078)が発生する問題を修正
     -   `ENUM`型列[#27831](https://github.com/pingcap/tidb/issues/27831)で`JOIN`実行したときに発生する可能性がある間違った結果を修正しました。
     -   INDEX HASH JOIN が`send on closed channel`エラー[#31129](https://github.com/pingcap/tidb/issues/31129)を返す問題を修正
-    -   [#32500](https://github.com/pingcap/tidb/issues/32500)
+    -   [`BatchCommands`](/tidb-configuration-file.md#max-batch-size) API を使用すると、まれに TiKV への TiDB リクエストの送信がブロックされる可能性がある問題を修正します[#32500](https://github.com/pingcap/tidb/issues/32500)
     -   楽観的トランザクション モード[#30410](https://github.com/pingcap/tidb/issues/30410)での潜在的なデータ インデックスの不一致の問題を修正します。
     -   トランザクションを使用する場合と使用しない場合に、ウィンドウ関数が異なる結果を返す可能性がある問題を修正します[#29947](https://github.com/pingcap/tidb/issues/29947)
     -   `Decimal` ～ `String` [#29417](https://github.com/pingcap/tidb/issues/29417)をキャストする際に長さ情報が間違っている問題を修正
     -   `tidb_enable_vectorized_expression`ベクトル化式を`off` [#29434](https://github.com/pingcap/tidb/issues/29434)に設定すると、 `GREATEST`関数が誤った結果を返す問題を修正します。
     -   場合によってはオプティマイザが`join`の無効なプランをキャッシュする可能性がある問題を修正します[#28087](https://github.com/pingcap/tidb/issues/28087)
-    -   ベクトル化された式の`microsecond`および`hour`関数の誤った結果を修正[#28643](https://github.com/pingcap/tidb/issues/28643)
+    -   ベクトル化された式の`microsecond`および`hour`関数の誤った結果を修正[#29244](https://github.com/pingcap/tidb/issues/29244) [#28643](https://github.com/pingcap/tidb/issues/28643)
     -   場合によっては`ALTER TABLE.. ADD INDEX`ステートメント実行時の TiDBpanicを修正[#27687](https://github.com/pingcap/tidb/issues/27687)
     -   MPP ノードの可用性検出が一部の特殊なケースで機能しないバグを修正[#3118](https://github.com/pingcap/tics/issues/3118)
     -   `MPP task ID` [#27952](https://github.com/pingcap/tidb/issues/27952)を割り当てるときの`DATA RACE`問題を修正
@@ -122,7 +122,7 @@ TiDB バージョン: 5.1.4
     -   入力時刻が 1970-01-01 00:00:01 UTC より前の場合、 `unix_timestamp`の動作が TiDB または MySQL の動作と一致しない問題を修正
     -   主キーがハンドルである場合に主キー列の幅を広げることによって引き起こされる潜在的なデータの不整合を修正
     -   オーバーフローのバグと、 `DECIMAL`データ型のデータを比較するときに`Can't compare`エラーが報告される問題を修正しました。
-    -   `3rd arguments of function substringUTF8 must be constants.`の予期しないエラーを修正
+    -   `3rd arguments of function substringUTF8 must be constants.`の予期​​しないエラーを修正
     -   `nsl`ライブラリがないプラットフォームでTiFlash が起動できない問題を修正
     -   データを`DECIMAL`データ型にキャストするときのオーバーフローのバグを修正
     -   TiFlashと TiDB/TiKV で`castStringAsReal`動作が矛盾する問題を修正
@@ -130,8 +130,8 @@ TiDB バージョン: 5.1.4
     -   TiFlashレプリカの数を 0 に設定した後、古いデータを再利用できない問題を修正
     -   TiFlashと TiDB/TiKV で`CastStringAsDecimal`動作が矛盾する問題を修正
     -   `where <string>`句を含むクエリが間違った結果を返す問題を修正
-    -   MPP クエリが停止するとTiFlash がpanicになる問題を修正
-    -   `Unexpected type of column: Nullable(Nothing)`の予期しないエラーを修正
+    -   MPP クエリが停止するとTiFlashがpanicになる問題を修正
+    -   `Unexpected type of column: Nullable(Nothing)`の予期​​しないエラーを修正
 
 -   ツール
 
@@ -147,7 +147,7 @@ TiDB バージョン: 5.1.4
         -   EtcdWorker がオーナーとプロセッサ[#3750](https://github.com/pingcap/tiflow/issues/3750)をハングさせる可能性があるバグを修正
         -   `stopped`クラスターのアップグレード後に変更フィードが自動的に再開される問題を修正[#3473](https://github.com/pingcap/tiflow/issues/3473)
         -   デフォルト値を複製できない問題を修正[#3793](https://github.com/pingcap/tiflow/issues/3793)
-        -   TiCDC デフォルト値パディング例外によって引き起こされるデータの不整合を修正[#3929](https://github.com/pingcap/tiflow/issues/3929)
+        -   TiCDC デフォルト値パディング例外によって引き起こされるデータの不整合を修正[#3918](https://github.com/pingcap/tiflow/issues/3918) [#3929](https://github.com/pingcap/tiflow/issues/3929)
         -   PDリーダーがシャットダウンして新しいノード[#3615](https://github.com/pingcap/tiflow/issues/3615)に転送するとオーナーがスタックするバグを修正
         -   etcd [#2980](https://github.com/pingcap/tiflow/issues/2980)でタスクステータスを手動でクリーンアップするときに発生する TiCDCpanicの問題を修正します。
         -   RHEL リリース[#3584](https://github.com/pingcap/tiflow/issues/3584)のタイムゾーンの問題によりサービスを開始できない問題を修正
@@ -166,7 +166,7 @@ TiDB バージョン: 5.1.4
 
     -   バックアップと復元 (BR)
 
-        -   復元操作の完了後にリージョンが不均一に分散される可能性がある潜在的な問題を修正します[#31034](https://github.com/pingcap/tidb/issues/31034)
+        -   復元操作の完了後にリージョンが不均一に分散される可能性がある潜在的な問題を修正します[#30425](https://github.com/pingcap/tidb/issues/30425) [#31034](https://github.com/pingcap/tidb/issues/31034)
 
     -   TiDBBinlog
 
@@ -174,4 +174,4 @@ TiDB バージョン: 5.1.4
 
     -   TiDB Lightning
 
-        -   S3storageパスが存在しない場合にTiDB Lightning がエラーを報告しない問題を修正[#30709](https://github.com/pingcap/tidb/issues/30709)
+        -   S3storageパスが存在しない場合にTiDB Lightning がエラーを報告しない問題を修正[#28031](https://github.com/pingcap/tidb/issues/28031) [#30709](https://github.com/pingcap/tidb/issues/30709)

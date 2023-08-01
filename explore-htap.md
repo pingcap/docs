@@ -13,7 +13,7 @@ summary: Learn how to explore and use the features of TiDB HTAP.
 
 ## ユースケース {#use-cases}
 
-TiDB HTAP は、急速に増加する大量のデータを処理し、DevOps のコストを削減し、オンプレミス環境またはクラウド環境に簡単にデプロイできるため、データ資産の価値をリアルタイムにもたらします。
+TiDB HTAP は、急速に増加する大量のデータを処理し、DevOps のコストを削減し、セルフホスト環境またはクラウド環境に簡単にデプロイできるため、データ資産の価値をリアルタイムで実現します。
 
 HTAP の一般的な使用例は次のとおりです。
 
@@ -33,7 +33,7 @@ TiDB HTAPの使用例の詳細については、 [PingCAP Web サイトの HTAP 
 
 ## アーキテクチャ {#architecture}
 
-TiDB では、オンライン トランザクション処理 (OLTP) 用の行ベースのstorageエンジン[TiFlash](/tiflash/tiflash-overview.md)が共存し、データを自動的に複製し、強整合性を維持します。
+TiDB では、オンライン トランザクション処理 (OLTP) 用の行ベースのstorageエンジン[TiKV](/tikv-overview.md)とオンライン分析処理 (OLAP) 用のカラム型storageエンジン[TiFlash](/tiflash/tiflash-overview.md)が共存し、データを自動的に複製し、強整合性を維持します。
 
 アーキテクチャの詳細については、 [TiDB HTAPのアーキテクチャ](/tiflash/tiflash-overview.md#architecture)を参照してください。
 
@@ -44,7 +44,7 @@ TiDB HTAPの機能を調べる前に、データ量に応じて TiDB と対応�
 -   TiFlash
 
     -   TiFlashノードのない TiDB クラスターをデプロイした場合は、現在の TiDB クラスターにTiFlashノードを追加します。詳細については、 [TiFlashクラスターをスケールアウトする](/scale-tidb-using-tiup.md#scale-out-a-tiflash-cluster)を参照してください。
-    -   TiDB クラスターをデプロイしていない場合は、 [TiFlashのトポロジ](/tiflash-deployment-topology.md)もデプロイする必要があります。
+    -   TiDB クラスターをデプロイしていない場合は、 [TiUPを使用して TiDBクラスタをデプロイ](/production-deployment-using-tiup.md)を参照してください。最小限の TiDB トポロジに基づいて、 [TiFlashのトポロジ](/tiflash-deployment-topology.md)もデプロイする必要があります。
     -   TiFlashノードの数を選択する方法を決定するときは、次のシナリオを考慮してください。
 
         -   ユースケースで小規模な分析処理とアドホック クエリを備えた OLTP が必要な場合は、1 つまたは複数のTiFlashノードをデプロイします。これらにより、分析クエリの速度が大幅に向上します。
@@ -74,7 +74,7 @@ TiDB を使用すると、クエリまたは書き込みリクエストの SQL �
 > TiFlashの MPP モードはデフォルトで有効になっています。 SQL ステートメントが実行されると、TiDB はオプティマイザーを通じて MPP モードで実行するかどうかを自動的に決定します。
 >
 > -   TiFlashの MPP モードを無効にするには、システム変数[tidb_allow_mpp](/system-variables.md#tidb_allow_mpp-new-in-v50)の値を`OFF`に設定します。
-> -   クエリ実行のためにTiFlashの MPP モードを強制的に有効にするには、 [tidb_enforce_mpp](/system-variables.md#tidb_enforce_mpp-new-in-v51)の値を`ON`に設定します。
+> -   クエリ実行のためにTiFlashの MPP モードを強制的に有効にするには、 [tidb_allow_mpp](/system-variables.md#tidb_allow_mpp-new-in-v50)と[tidb_enforce_mpp](/system-variables.md#tidb_enforce_mpp-new-in-v51)の値を`ON`に設定します。
 > -   TiDB が特定のクエリを実行するために MPP モードを選択するかどうかを確認するには、 [MPP モードでの Explain ステートメント](/explain-mpp.md#explain-statements-in-the-mpp-mode)を参照してください。 `EXPLAIN`ステートメントの出力に`ExchangeSender`および`ExchangeReceiver`演算子が含まれる場合、MPP モードが使用されています。
 
 ## パフォーマンス監視 {#performance-monitoring}
@@ -84,7 +84,7 @@ TiDB を使用する場合、次のいずれかの方法で TiDB クラスター
 -   [TiDB ダッシュボード](/dashboard/dashboard-intro.md) : TiDB クラスターの全体的な実行ステータスを確認し、読み取りおよび書き込みトラフィックの分布と傾向を分析し、遅いクエリの詳細な実行情報を確認できます。
 -   [監視システム (Prometheus &amp; Grafana)](/grafana-overview-dashboard.md) : PD、TiDB、TiKV、 TiFlash、TiCDC、Node_exporter などの TiDB クラスター関連コンポーネントのモニタリング パラメーターを表示できます。
 
-TiDB クラスターとTiFlashクラスターのアラート ルールを確認するには、 [TiFlashアラート ルール](/tiflash/tiflash-alert-rules.md)を参照してください。
+TiDB クラスターとTiFlashクラスターのアラート ルールを確認するには、 [TiDB クラスターのアラート ルール](/alert-rules.md)と[TiFlashアラート ルール](/tiflash/tiflash-alert-rules.md)を参照してください。
 
 ## トラブルシューティング {#troubleshooting}
 
@@ -96,7 +96,7 @@ TiDB の使用中に問題が発生した場合は、次のドキュメントを
 -   [TiDB クラスターのトラブルシューティング ガイド](/troubleshoot-tidb-cluster.md)
 -   [TiFlashクラスタのトラブルシューティング](/tiflash/troubleshoot-tiflash.md)
 
-[AskTUG](https://asktug.com/)で質問を送信したりすることもできます。
+[Githubの問題](https://github.com/pingcap/tiflash/issues)を作成したり、 [AskTUG](https://asktug.com/)で質問を送信したりすることもできます。
 
 ## 次は何ですか {#what-s-next}
 

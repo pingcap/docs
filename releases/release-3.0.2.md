@@ -16,7 +16,7 @@ TiDB Ansible バージョン: 3.0.2
     -   クエリ内で同じテーブルが複数回発生し、論理的にクエリ結果が常に空になる場合に、「スキーマ内に列が見つかりません」というメッセージが報告される問題を修正します[#11247](https://github.com/pingcap/tidb/pull/11247)
     -   場合によっては`TIDB_INLJ`ヒントが正しく機能しないことが原因でクエリ プランが期待を満たさない問題 ( `explain select /*+ TIDB_INLJ(t1) */ t1.b, t2.a from t t1, t t2 where t1.b = t2.a`など) を修正します[#11362](https://github.com/pingcap/tidb/pull/11362)
     -   場合によってはクエリ結果の列名が間違っている問題を修正します ( `SELECT IF(1,c,c) FROM t`など) [#11379](https://github.com/pingcap/tidb/pull/11379)
-    -   場合によっては`LIKE`の式が暗黙的に 0 に変換されるため、 `SELECT 0 LIKE 'a string'`のような一部のクエリが`TRUE`返す問題を修正します[#11411](https://github.com/pingcap/tidb/pull/11411)
+    -   場合によっては`LIKE`式が暗黙的に 0 に変換されるため、 `SELECT 0 LIKE 'a string'`のような一部のクエリが`TRUE`返す問題を修正します[#11411](https://github.com/pingcap/tidb/pull/11411)
     -   `SHOW`ステートメントでのサブクエリのサポート ( `SHOW COLUMNS FROM tbl WHERE FIELDS IN (SELECT 'a')` [#11459](https://github.com/pingcap/tidb/pull/11459)など)
     -   集計関数の関連列が見つからず、 `outerJoinElimination`の別名を正しく処理しない最適化ルールが原因でエラーが報告される問題を修正します。最適化プロセスでのエイリアス解析を改善し、 [#11377](https://github.com/pingcap/tidb/pull/11377)多くのクエリ タイプを最適化でカバーできるようにします。
     -   Window 関数で構文制限に違反した場合にエラーが報告されない問題を修正しました (たとえば、Frame 定義の最後に`UNBOUNDED PRECEDING`を指定することは許可されません) [#11543](https://github.com/pingcap/tidb/pull/11543)
@@ -126,7 +126,7 @@ TiDB Lightning
 
 ## TiDB Ansible {#tidb-ansible}
 
--   ディスクパフォーマンスモニターが秒をミリ秒として扱う単位エラーを修正[#840](https://github.com/pingcap/tidb-ansible/pull/840)
+-   ディスクパフォ​​ーマンスモニターが秒をミリ秒として扱う単位エラーを修正[#840](https://github.com/pingcap/tidb-ansible/pull/840)
 -   Spark [#841](https://github.com/pingcap/tidb-ansible/pull/841)に`log4j`構成ファイルを追加します
 -   Binlog が有効で、Kafka または ZooKeeper が構成されている場合に、Prometheus 構成ファイルが間違った形式で生成される問題を修正します[#844](https://github.com/pingcap/tidb-ansible/pull/844)
 -   生成された TiDB 構成ファイル[#850](https://github.com/pingcap/tidb-ansible/pull/850)で`pessimistic-txn`構成パラメーターが省略される問題を修正します。

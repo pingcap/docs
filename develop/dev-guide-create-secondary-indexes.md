@@ -11,7 +11,7 @@ summary: Learn steps, rules, and examples to create a secondary index.
 
 セカンダリ インデックスを作成する前に、次の手順を実行します。
 
--   [TiDB Cloud(Serverless Tier) で TiDBクラスタを構築する](/develop/dev-guide-build-cluster-in-cloud.md) 。
+-   [TiDB サーバーレスクラスタを構築する](/develop/dev-guide-build-cluster-in-cloud.md) 。
 -   [スキーマ設計の概要](/develop/dev-guide-schema-design-overview.md)を読みます。
 -   [データベースを作成する](/develop/dev-guide-create-database.md) 。
 -   [テーブルを作成する](/develop/dev-guide-create-table.md) 。
@@ -32,7 +32,7 @@ summary: Learn steps, rules, and examples to create a secondary index.
 
 </CustomContent>
 
-TiDB では、 [新しいテーブルを作成するときにセカンダリインデックスを作成する](#create-a-secondary-index-when-creating-a-new-table)いずれかを選択できます。
+TiDB では、 [既存のテーブルにセカンダリ インデックスを追加する](#add-a-secondary-index-to-an-existing-table)または[新しいテーブルを作成するときにセカンダリインデックスを作成する](#create-a-secondary-index-when-creating-a-new-table)いずれかを選択できます。
 
 ## 既存のテーブルにセカンダリ インデックスを追加する {#add-a-secondary-index-to-an-existing-table}
 
@@ -144,7 +144,7 @@ CREATE INDEX `idx_book_published_at` ON `bookshop`.`books` (`bookshop`.`books`.`
 
 出力では、 **TableFullScan**の代わりに**IndexRangeScan**が表示されます。これは、TiDB がこのクエリを実行するためにインデックスを使用する準備ができていることを意味します。
 
-実行計画内の**TableFullScan**や**IndexRangeScan**などの単語は、TiDB では[TiDB クエリ実行計画の概要](/explain-overview.md)を参照してください。
+実行計画内の**TableFullScan**や**IndexRangeScan**などの単語は、TiDB では[演算子](/explain-overview.md#operator-overview)です。実行プランと演算子の詳細については、 [TiDB クエリ実行計画の概要](/explain-overview.md)を参照してください。
 
 <CustomContent platform="tidb">
 
@@ -160,7 +160,7 @@ CREATE INDEX `idx_book_published_at` ON `bookshop`.`books` (`bookshop`.`books`.`
 
 > **ノート：**
 >
-> TiDB はクエリ時のインデックスの明示的な使用もサポートしており、 [SQL 計画管理 (SPM)](/sql-plan-management.md)使用してインデックスの使用を人為的に制御できます。ただし、インデックス、オプティマイザ ヒント、または SPM についてよく知らない場合は、予期しない結果を避けるためにこの機能を使用し**ないでください**。
+> TiDB はクエリ時のインデックスの明示的な使用もサポートしており、 [オプティマイザーのヒント](/optimizer-hints.md)または[SQL 計画管理 (SPM)](/sql-plan-management.md)使用してインデックスの使用を人為的に制御できます。ただし、インデックス、オプティマイザ ヒント、または SPM についてよく知らない場合は、予期しない結果を避けるためにこの機能を使用し**ないでください**。
 
 テーブルのインデックスをクエリするには、 [インデックスを表示](/sql-statements/sql-statement-show-indexes.md)ステートメントを使用できます。
 
@@ -182,4 +182,4 @@ SHOW INDEXES FROM `bookshop`.`books`;
 
 ## 次のステップ {#next-step}
 
-データベースを作成し、テーブルとセカンダリ インデックスを追加した後、アプリケーションにデータ[読む](/develop/dev-guide-get-data-from-single-table.md)機能の追加を開始できます。
+データベースを作成し、テーブルとセカンダリ インデックスを追加した後、アプリケーションにデータ[書く](/develop/dev-guide-insert-data.md)および[読む](/develop/dev-guide-get-data-from-single-table.md)機能の追加を開始できます。

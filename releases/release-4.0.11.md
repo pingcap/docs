@@ -101,7 +101,7 @@ TiDB バージョン: 4.0.11
     -   `dyname`関数が MySQL [#21850](https://github.com/pingcap/tidb/pull/21850)と互換性がない問題を修正
     -   入力データが長すぎる場合に`to_base64`関数が`NULL`返す問題を修正[#21813](https://github.com/pingcap/tidb/pull/21813)
     -   サブクエリ[#21808](https://github.com/pingcap/tidb/pull/21808)での複数のフィールドの比較の失敗を修正
-    -   JSON [#21785](https://github.com/pingcap/tidb/pull/21785)の float 型を比較するときに発生する問題を修正
+    -   JSON [#21785](https://github.com/pingcap/tidb/pull/21785)の float 型を比較す​​るときに発生する問題を修正
     -   JSON オブジェクトのタイプを比較するときに発生する問題を修正します[#21718](https://github.com/pingcap/tidb/pull/21718)
     -   `cast`関数の強制値が正しく設定されない問題を修正[#21714](https://github.com/pingcap/tidb/pull/21714)
     -   `IF`機能[#21711](https://github.com/pingcap/tidb/pull/21711)使用時の予期せぬpanicを修正しました。

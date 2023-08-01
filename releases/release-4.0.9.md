@@ -59,7 +59,7 @@ TiDB バージョン: 4.0.9
     -   取り込み SST エラーの監視メトリクスを追加[#9096](https://github.com/tikv/tikv/pull/9096)
     -   一部のピアがログを複製する必要がある場合にリーダーが休止状態にならないようにする[#9093](https://github.com/tikv/tikv/pull/9093)
     -   パイプライン化された悲観的ロックの成功率を向上させる[#9086](https://github.com/tikv/tikv/pull/9086)
-    -   デフォルト値の`apply-max-batch-size`と`store-max-batch-size`を`1024` [#9020](https://github.com/tikv/tikv/pull/9020)に変更します。
+    -   デフォルト値の`apply-max-batch-size`と`store-max-batch-size` `1024` [#9020](https://github.com/tikv/tikv/pull/9020)に変更します。
     -   `max-background-flushes`設定項目[#8947](https://github.com/tikv/tikv/pull/8947)を追加します
     -   パフォーマンスを向上させるには、デフォルトで`force-consistency-checks`を無効にします[#9029](https://github.com/tikv/tikv/pull/9029)
     -   リージョンサイズ`pd heartbeat worker` ～ `split check worker` [#9185](https://github.com/tikv/tikv/pull/9185)に関するクエリをオフロードします。

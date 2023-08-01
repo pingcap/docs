@@ -55,7 +55,7 @@ DM ツールを使用する前に、次の制限事項に注意してくださ�
 
 -   DDL 構文の互換性
 
-    -   現在、TiDB は、MySQL がサポートするすべての DDL ステートメントと互換性があるわけではありません。 DM は TiDB パーサーを使用して DDL ステートメントを処理するため、TiDB パーサーによってサポートされる DDL 構文のみをサポートします。詳細は[MySQL の互換性](/mysql-compatibility.md#ddl)を参照してください。
+    -   現在、TiDB は、MySQL がサポートするすべての DDL ステートメントと互換性があるわけではありません。 DM は TiDB パーサーを使用して DDL ステートメントを処理するため、TiDB パーサーによってサポートされる DDL 構文のみをサポートします。詳細は[MySQL の互換性](/mysql-compatibility.md#ddl-operations)を参照してください。
 
     -   DM は、互換性のない DDL ステートメントが発生するとエラーを報告します。このエラーを解決するには、dmctl を使用して手動で処理し、この DDL ステートメントをスキップするか、指定された DDL ステートメントに置き換える必要があります。詳細は[異常な SQL ステートメントをスキップまたは置換する](/dm/dm-faq.md#how-to-handle-incompatible-ddl-statements)を参照してください。
 

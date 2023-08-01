@@ -12,7 +12,7 @@ TiDB バージョン: 4.0.15
 
 -   TiDB
 
-    -   新しいセッションで`SHOW VARIABLES`を実行すると遅いという問題を修正します。この修正により、 [#24326](https://github.com/pingcap/tidb/issues/24326)
+    -   新しいセッションで`SHOW VARIABLES`を実行すると遅いという問題を修正します。この修正により、 [#21045](https://github.com/pingcap/tidb/pull/21045)で行われた一部の変更が元に戻されるため、互換性の問題が発生する可能性があります。 [#24326](https://github.com/pingcap/tidb/issues/24326)
 
     <!---->
 
@@ -78,7 +78,7 @@ TiDB バージョン: 4.0.15
         -   グローバル gRPC 接続プールを追加し、KV クライアント間で gRPC 接続を共有する[#2531](https://github.com/pingcap/tiflow/pull/2531)
         -   回復不可能な DML エラーに対するフェイルファスト[#1724](https://github.com/pingcap/tiflow/issues/1724)
         -   統合ソーターがデータの並べ替えにメモリを使用している場合、メモリ管理を最適化します[#2553](https://github.com/pingcap/tiflow/issues/2553)
-        -   DDL 実行用の Prometheus メトリクスを追加[#2669](https://github.com/pingcap/tiflow/issues/2669)
+        -   DDL 実行用の Prometheus メトリクスを追加[#2595](https://github.com/pingcap/tiflow/issues/2595) [#2669](https://github.com/pingcap/tiflow/issues/2669)
         -   メジャー バージョンまたはマイナー バージョンにまたがる TiCDC クラスターの操作を禁止する[#2601](https://github.com/pingcap/tiflow/pull/2601)
         -   `file sorter` [#2325](https://github.com/pingcap/tiflow/pull/2325)を削除
         -   チェンジフィードが削除されたときにチェンジフィード メトリクスをクリーンアップし、プロセッサが終了したときにプロセッサ メトリクスをクリーンアップします[#2156](https://github.com/pingcap/tiflow/issues/2156)
@@ -92,7 +92,7 @@ TiDB バージョン: 4.0.15
 
     -   クエリに`GROUP BY`と`UNION`両方が含まれている場合に発生する「インデックスが範囲外です」エラーを修正[#26553](https://github.com/pingcap/tidb/pull/26553)
 
-    -   TiKV にトゥームストーン ストアがある場合、TiDB がリクエストの送信に失敗する可能性がある問題を修正[#24648](https://github.com/pingcap/tidb/issues/24648)
+    -   TiKV にトゥームストーン ストアがある場合、TiDB がリクエストの送信に失敗する可能性がある問題を修正[#23676](https://github.com/pingcap/tidb/issues/23676) [#24648](https://github.com/pingcap/tidb/issues/24648)
 
     -   文書化されていない`/debug/sub-optimal-plan` HTTP API [#27264](https://github.com/pingcap/tidb/pull/27264)を削除します。
 

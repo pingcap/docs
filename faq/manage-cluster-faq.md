@@ -55,7 +55,7 @@ MySQL と同様に、TiDB にはシステム テーブルも含まれており�
 
 ### TiDB はセッション タイムアウトをサポートしていますか? {#does-tidb-support-session-timeout}
 
-TiDB は現在 2 つのタイムアウト、 [`interactive_timeout`](/system-variables.md#interactive_timeout)をサポートしています。
+TiDB は現在 2 つのタイムアウト、 [`wait_timeout`](/system-variables.md#wait_timeout)と[`interactive_timeout`](/system-variables.md#interactive_timeout)をサポートしています。
 
 ### TiDB のバージョン管理戦略とは何ですか? {#what-is-the-tidb-version-management-strategy}
 
@@ -66,14 +66,14 @@ TiDB のバージョン管理の詳細については、 [TiDB のバージョ�
 TiDB は、クラスターを低コストで簡単に管理できるいくつかの機能と[ツール](/ecosystem-tool-user-guide.md)を提供します。
 
 -   メンテナンス操作の場合、 [TiUP](/tiup/tiup-documentation-guide.md)パッケージ マネージャーとして機能し、展開、スケーリング、アップグレード、およびその他のメンテナンス タスクを簡素化します。
--   監視の場合、 [グラファナ](https://grafana.com/grafana/)を使用してこれらのメトリクスを視覚化します。数百のメトリクスを備えた数十の組み込みパネルが利用可能です。
+-   監視の場合、 [TiDB監視フレームワーク](/tidb-monitoring-framework.md) [プロメテウス](https://prometheus.io/)を使用して監視とパフォーマンスのメトリクスを保存し、 [グラファナ](https://grafana.com/grafana/)を使用してこれらのメトリクスを視覚化します。数百のメトリクスを備えた数十の組み込みパネルが利用可能です。
 -   トラブルシューティングのために、TiDBサーバーとその他のコンポーネントの一般的な問題が[TiDB トラブルシューティング マップ](/tidb-troubleshooting-map.md)にまとめられています。関連する問題が発生した場合は、このマップを使用して問題を診断し、解決できます。
 
 ### さまざまな TiDB マスター バージョンの違いは何ですか? {#what-s-the-difference-between-various-tidb-master-versions}
 
 TiDB コミュニティは非常に活発です。エンジニアは機能の最適化とバグの修正を続けてきました。したがって、TiDB のバージョンは非常に速く更新されます。最新バージョンの情報を常に知りたい場合は、 [TiDB リリース タイムライン](/releases/release-timeline.md)を参照してください。
 
-TiDB [TiDB Operatorを使用する](https://docs.pingcap.com/tidb-in-kubernetes/stable)を導入することをお勧めします。 TiDBではバージョン番号を一元管理しています。次のいずれかの方法を使用してバージョン番号を表示できます。
+TiDB [TiUPを使用する](/production-deployment-using-tiup.md)または[TiDB Operatorを使用する](https://docs.pingcap.com/tidb-in-kubernetes/stable)を導入することをお勧めします。 TiDBではバージョン番号を一元管理しています。次のいずれかの方法を使用してバージョン番号を表示できます。
 
 -   `select tidb_version()`
 -   `tidb-server -V`
@@ -86,8 +86,8 @@ TiDB [TiDB Operatorを使用する](https://docs.pingcap.com/tidb-in-kubernetes/
 
 オンライン サービスを中断することなく TiDB クラスターをスケールアウトできます。
 
--   クラスターが[TiUPを使用して TiDBクラスタをスケールする](/scale-tidb-using-tiup.md)を参照してください。
--   クラスターが Kubernetes 上の[Kubernetes 上で TiDB を手動でスケールする](https://docs.pingcap.com/tidb-in-kubernetes/stable/scale-a-tidb-cluster)を参照してください。
+-   クラスターが[TiUP](/production-deployment-using-tiup.md)使用してデプロイされている場合は、 [TiUPを使用して TiDBクラスタをスケールする](/scale-tidb-using-tiup.md)を参照してください。
+-   クラスターが Kubernetes 上の[TiDB Operator](/tidb-operator-overview.md)使用してデプロイされている場合は、 [Kubernetes 上で TiDB を手動でスケールする](https://docs.pingcap.com/tidb-in-kubernetes/stable/scale-a-tidb-cluster)を参照してください。
 
 ### TiDB を水平方向にスケーリングするにはどうすればよいですか? {#how-to-scale-tidb-horizontally}
 
@@ -128,7 +128,7 @@ TiDB [TiDB Operatorを使用する](https://docs.pingcap.com/tidb-in-kubernetes/
 
 ### トランザクションが非同期コミットまたは 1 フェーズ コミット機能を使用しないのはなぜですか? {#why-does-the-transaction-not-use-the-async-commit-or-the-one-phase-commit-feature}
 
-次の状況では、システム変数を使用して機能[1フェーズコミット](/system-variables.md#tidb_enable_1pc-new-in-v50)を有効にしても、TiDB はこれらの機能を使用しません。
+次の状況では、システム変数を使用して機能[非同期コミット](/system-variables.md#tidb_enable_async_commit-new-in-v50)と機能[1フェーズコミット](/system-variables.md#tidb_enable_1pc-new-in-v50)を有効にしても、TiDB はこれらの機能を使用しません。
 
 -   TiDB Binlogの実装によって制限されている TiDB Binlogを有効にしている場合、TiDB は非同期コミットまたは 1 フェーズ コミット機能を使用しません。
 -   TiDB は、トランザクションに書き込まれるキーと値のペアが 256 個以下で、キーの合計サイズが 4 KB 以下の場合にのみ、非同期コミットまたは 1 フェーズ コミット機能を使用します。これは、大量のデータを書き込むトランザクションの場合、非同期コミットを使用してもパフォーマンスを大幅に改善できないためです。
@@ -161,7 +161,7 @@ PD Control を使用して、TiKV ストアのステータス情報を確認で�
 
 ### PD の<code>leader-schedule-limit</code>パラメーターと<code>region-schedule-limit</code>スケジューリング パラメーターの違いは何ですか? {#what-is-the-difference-between-the-code-leader-schedule-limit-code-and-code-region-schedule-limit-code-scheduling-parameters-in-pd}
 
--   `leader-schedule-limit`スケジューリング パラメーターは、さまざまな TiKV サーバーのLeader数のバランスをとるために使用され、クエリ処理の負荷に影響します。
+-   `leader-schedule-limit`スケジューリング パラメーターは、さまざまな TiKV サーバーのLeader数のバランスを取るために使用され、クエリ処理の負荷に影響します。
 -   `region-schedule-limit`スケジューリング パラメーターは、さまざまな TiKV サーバーのレプリカ数のバランスをとるために使用され、さまざまなノードのデータ量に影響します。
 
 ### 各リージョンのレプリカの数は構成可能ですか? 「はい」の場合、どのように設定すればよいですか? {#is-the-number-of-replicas-in-each-region-configurable-if-yes-how-to-configure-it}
@@ -193,7 +193,7 @@ pd-ctl ツールを使用して、クラスターの一般的なステータス�
 
 処理時間はシナリオによって異なります。一般に、次の 3 つのシナリオが考えられます。
 
-1.  対応するデータテーブルの行数が比較的少ない`Add Index`の操作: 約 3 秒
+1.  対応するデータテーブルの行数が比較的少ない`Add Index`操作: 約 3 秒
 2.  対応するデータテーブル内の行数が比較的多い`Add Index`操作: 処理時間は、特定の行数とその時点の QPS によって異なります ( `Add Index`操作は通常の SQL 操作より優先順位が低くなります)
 3.  その他の DDL 操作: 約 1 秒
 
@@ -442,7 +442,7 @@ TiDB は、小さなサイズのテーブル (1,000 万レベル未満など) �
 
 ### TiDB のデータをバックアップするにはどうすればよいですか? {#how-to-back-up-data-in-tidb}
 
-現在、大容量データ (1 TB を超える) のバックアップには、 [Dumpling](/dumpling-overview.md)です。 TiDB では、データのバックアップと復元のために公式 MySQL ツール`mysqldump`もサポートされていますが、そのパフォーマンスはBRに劣らず、大量のデータのバックアップと復元にはさらに多くの時間が必要です。
+現在、大容量データ (1 TB を超える) のバックアップには、 [バックアップと復元 (BR)](/br/backup-and-restore-overview.md)使用する方法が推奨されています。それ以外の場合、推奨されるツールは[Dumpling](/dumpling-overview.md)です。 TiDB では、データのバックアップと復元のために公式 MySQL ツール`mysqldump`もサポートされていますが、そのパフォーマンスはBRに劣らず、大量のデータのバックアップと復元にはさらに多くの時間が必要です。
 
 BRに関するその他の FAQ については、 [BRよくある質問](/faq/backup-and-restore-faq.md)を参照してください。
 

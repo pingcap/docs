@@ -9,7 +9,13 @@ summary: Learn about the physical import mode in TiDB Lightning.
 
 物理インポートモードを使用する前に、必ず[要件と制限事項](#requirements-and-restrictions)をお読みください。
 
-物理インポート モードのバックエンドは`local`です。
+物理インポート モードのバックエンドは`local`です。 `tidb-lightning.toml`で変更できます。
+
+```toml
+[tikv-importer]
+# Set the import mode to "local" to use the physical import mode.
+backend = "local"
+```
 
 ## 実装 {#implementation}
 
@@ -21,7 +27,7 @@ summary: Learn about the physical import mode in TiDB Lightning.
 
 2.  TiDB Lightning は、ターゲット データベースにテーブル スキーマを作成し、メタデータをフェッチします。
 
-    `add-index-by-sql`から`true`に設定すると、 `tidb-lightning` SQL インターフェイス経由でインデックスを追加し、データをインポートする前にターゲット テーブルからすべてのセカンダリ インデックスを削除します。
+    `add-index-by-sql`から`true`に設定すると、 `tidb-lightning` SQL インターフェイス経由でインデックスを追加し、データをインポートする前にターゲット テーブルからすべてのセカンダリ インデックスを削除します。デフォルト値は`false`で、これは以前のバージョンと一致しています。
 
 3.  各テーブルは複数の連続した**ブロック**に分割されているため、 TiDB Lightning は大きなテーブル (200 GB を超える) から並行してデータをインポートできます。
 
@@ -70,7 +76,7 @@ summary: Learn about the physical import mode in TiDB Lightning.
 -   本番の TiDB クラスターにデータを直接インポートするために物理インポート モードを使用しないでください。これはパフォーマンスに重大な影響を及ぼします。必要な場合は[テーブルレベルでのスケジュールの一時停止](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#scope-of-pausing-scheduling-during-import)を参照してください。
 -   デフォルトでは、同じ TiDB クラスターにデータをインポートするために複数のTiDB Lightningインスタンスを使用しないでください。代わりに[並行輸入品](/tidb-lightning/tidb-lightning-distributed-import.md)を使用してください。
 -   複数のTiDB Lightningを使用して同じターゲット クラスターにデータをインポートする場合は、インポート モードを混合しないでください。つまり、物理インポート モードと論理インポート モードを同時に使用しないでください。
--   データのインポート処理中は、ターゲットテーブルで書き込み操作を実行しないでください。そうしないと、インポートが失敗するか、データに不整合が生じます。同時に、読み取ったデータに一貫性がない可能性があるため、読み取り操作を実行することはお勧めできません。インポート操作が完了した後、読み取りおよび書き込み操作を実行できます。
+-   データのインポート処理中は、ターゲットテーブルで DDL および DML 操作を実行しないでください。そうしないと、インポートが失敗するか、データに不整合が生じます。同時に、読み取ったデータに一貫性がない可能性があるため、読み取り操作を実行することはお勧めできません。インポート操作が完了した後、読み取りおよび書き込み操作を実行できます。
 -   1 つの Lightning プロセスで最大 10 TB の単一テーブルをインポートできます。並行インポートでは、最大 10 個の Lightning インスタンスを使用できます。
 
 ### 他のコンポーネントと併用する場合のヒント {#tips-for-using-with-other-components}

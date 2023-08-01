@@ -35,8 +35,8 @@ TiDB バージョン: 5.2.2
     -   TiCDC
 
         -   Kafka シンク構成項目`MaxMessageBytes`のデフォルト値を 64 MB から 1 MB に減らし、大きなメッセージが Kafka ブローカーによって拒否される問題を修正します[#3104](https://github.com/pingcap/tiflow/pull/3104)
-        -   再複製パイプラインでのメモリ使用量を削減する[#2726](https://github.com/pingcap/tiflow/pull/2726)
-        -   監視項目とアラートルールを最適化し、同期リンク、メモリGC、ストックデータスキャン処理の可観測性を向上[#2156](https://github.com/pingcap/tiflow/issues/2156)
+        -   再複製パイプラインでのメモリ使用量を削減する[#2553](https://github.com/pingcap/tiflow/issues/2553) [#3037](https://github.com/pingcap/tiflow/pull/3037) [#2726](https://github.com/pingcap/tiflow/pull/2726)
+        -   監視項目とアラートルールを最適化し、同期リンク、メモリGC、ストックデータスキャン処理の可観測性を向上[#2735](https://github.com/pingcap/tiflow/pull/2735) [#1606](https://github.com/pingcap/tiflow/issues/1606) [#3000](https://github.com/pingcap/tiflow/pull/3000) [#2985](https://github.com/pingcap/tiflow/issues/2985) [#2156](https://github.com/pingcap/tiflow/issues/2156)
         -   同期タスクのステータスが正常な場合、ユーザーの誤解を避けるために、履歴エラー メッセージは表示されません[#2242](https://github.com/pingcap/tiflow/issues/2242)
 
 ## バグの修正 {#bug-fixes}

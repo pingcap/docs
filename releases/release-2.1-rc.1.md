@@ -10,7 +10,7 @@ title: TiDB 2.1 RC1 Release Notes
 
 -   SQLオプティマイザー
     -   相関サブクエリを非相関化すると、場合によっては間違った結果が返される問題を修正[#6972](https://github.com/pingcap/tidb/pull/6972)
-    -   `Explain` [#7041](https://github.com/pingcap/tidb/pull/7041)の出力結果を最適化します。
+    -   `Explain` [#7011](https://github.com/pingcap/tidb/pull/7011) [#7041](https://github.com/pingcap/tidb/pull/7041)の出力結果を最適化します。
     -   `IndexJoin` [#7019](https://github.com/pingcap/tidb/pull/7019)の外部テーブルの選択戦略を最適化します。
     -   非`PREPARE`ステートメント[#7040](https://github.com/pingcap/tidb/pull/7040)のプラン キャッシュを削除します。
     -   `INSERT`ステートメントが正しく解析されずに実行される場合がある問題を修正[#7068](https://github.com/pingcap/tidb/pull/7068)
@@ -28,11 +28,11 @@ title: TiDB 2.1 RC1 Release Notes
     -   `REPLACE INTO`ステートメントの実行速度を最適化し、パフォーマンスを 10 倍近く向上させます[#7027](https://github.com/pingcap/tidb/pull/7027)
     -   時間型データのメモリ使用量を最適化し、時間型データのメモリ使用量を 50% 削減します[#7043](https://github.com/pingcap/tidb/pull/7043)
     -   返された結果が`UNION`ステートメントで符号付き整数と符号なし整数が混在するという問題を修正します。これは MySQL [#7112](https://github.com/pingcap/tidb/pull/7112)と互換性がありません。
-    -   `LPAD` / `RPAD` / `TO_BASE64` / `FROM_BASE64` / `REPEAT` [#7431](https://github.com/pingcap/tidb/pull/7431)によって適用されるメモリが多すぎることによってpanicの問題を修正
+    -   `LPAD` / `RPAD` / `TO_BASE64` / `FROM_BASE64` / `REPEAT` [#7171](https://github.com/pingcap/tidb/pull/7171) [#7266](https://github.com/pingcap/tidb/pull/7266) [#7409](https://github.com/pingcap/tidb/pull/7409) [#7431](https://github.com/pingcap/tidb/pull/7431)によって適用されるメモリが多すぎることによってpanicの問題を修正
     -   `MergeJoin` / `IndexJoin`が`NULL`値[#7255](https://github.com/pingcap/tidb/pull/7255)を処理する場合の誤った結果を修正
     -   場合によっては`Outer Join`の誤った結果を修正[#7288](https://github.com/pingcap/tidb/pull/7288)
     -   `Data Truncated`のエラー メッセージを改善して、テーブル[#7401](https://github.com/pingcap/tidb/pull/7401)内の間違ったデータと対応するフィールドを見つけやすくしました。
-    -   場合によっては`decimal`の誤った結果を修正[#7208](https://github.com/pingcap/tidb/pull/7208)
+    -   場合によっては`decimal`の誤った結果を修正[#7001](https://github.com/pingcap/tidb/pull/7001) [#7113](https://github.com/pingcap/tidb/pull/7113) [#7202](https://github.com/pingcap/tidb/pull/7202) [#7208](https://github.com/pingcap/tidb/pull/7208)
     -   ポイントセレクトパフォーマンスの最適化[#6937](https://github.com/pingcap/tidb/pull/6937)
     -   根本的な問題[#7211](https://github.com/pingcap/tidb/pull/7211)を回避するには、分離レベル`Read Committed`禁止します。
     -   場合によっては`LTRIM` / `RTRIM` / `TRIM`の誤った結果を修正[#7291](https://github.com/pingcap/tidb/pull/7291)
@@ -116,7 +116,7 @@ title: TiDB 2.1 RC1 Release Notes
     -   `label`での特殊文字の使用を禁止する
     -   スケジュールシミュレータを改善する
     -   pd-ctl の統計を使用したリージョン分割のサポート
-    -   pd-ctl で`jq`を呼び出すことによる JSON 出力のフォーマットのサポート
+    -   pd-ctl で`jq`呼び出すことによる JSON 出力のフォーマットのサポート
     -   etcd Raftステートマシンに関するメトリクスを追加
 -   バグの修正
     -   Leaderを切り替えた後に名前空間がリロードされない問題を修正

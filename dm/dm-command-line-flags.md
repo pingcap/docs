@@ -91,7 +91,7 @@ summary: Learn about the command-line flags in DM.
 
 ### <code>--join</code> {#code-join-code}
 
--   DM ワーカーがこのクラスターに登録されるときの、クラスター内の DM マスター ノードのリスト`{advertise-addr}`
+-   DM ワーカーがこのクラスターに登録されるときのクラスター内の DM マスター ノードのリスト`{advertise-addr}`
 -   デフォルト値は`""`です
 -   必須のフラグ。 3ノード(DMマスターノード)クラスタの構成例は`"172.16.15.11:8261,172.16.15.12:8261,172.16.15.13:8261"`
 

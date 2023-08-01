@@ -15,4 +15,4 @@ TiDB Binlogの実行中にエラーが発生した場合は、次の手順に従
 
 3.  PumpログまたはDrainerに`ERROR`または`WARN`が存在するか確認してください。
 
-上記の手順で問題が判明したら、 [問題](https://github.com/pingcap/tidb-binlog/issues)を送信してサポートを求めてください。
+上記の手順で問題が判明したら、 [FAQ](/tidb-binlog/tidb-binlog-faq.md)と[TiDBBinlogのエラー処理](/tidb-binlog/handle-tidb-binlog-errors.md)を参照して解決してください。解決策が見つからない場合、または提供された解決策が役に立たない場合は、「 [問題](https://github.com/pingcap/tidb-binlog/issues)を送信してサポートを求めてください。

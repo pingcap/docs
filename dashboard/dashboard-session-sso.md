@@ -5,7 +5,7 @@ summary: Learn how to enable SSO to sign into TiDB Dashboard.
 
 # TiDB ダッシュボードの SSO を構成する {#configure-sso-for-tidb-dashboard}
 
-TiDB ダッシュボードは、 [OIDC](https://openid.net/connect/)ベースのシングル サインオン (SSO) をサポートしています。 TiDB ダッシュボードの SSO 機能を有効にすると、構成された SSO サービスがサインイン認証に使用され、SQL ユーザー パスワードを入力せずに TiDB ダッシュボードにアクセスできるようになります。
+TiDB ダッシュボードは、 [OIDC](https://openid.net/connect/)ベースのシングル サインオン (SSO) をサポートします。 TiDB ダッシュボードの SSO 機能を有効にすると、構成された SSO サービスがサインイン認証に使用され、SQL ユーザー パスワードを入力せずに TiDB ダッシュボードにアクセスできるようになります。
 
 ## OIDC SSO の構成 {#configure-oidc-sso}
 
@@ -188,7 +188,7 @@ Okta と同様に、 [認証0](https://auth0.com/)も OIDC SSO ID サービス�
 
     ![Settings](/media/dashboard/dashboard-session-sso-auth0-settings-2.png)
 
-7.  他の設定についてはデフォルト値をそのまま使用し、 **「変更を保存」**をクリックします。
+7.  他の設定についてはデフォルト値をそのまま使用し、 **「変更を保存」を**クリックします。
 
 ### ステップ 2: OIDC 情報を取得し、TiDB ダッシュボードに入力します {#step-2-obtain-oidc-information-and-fill-in-tidb-dashboard}
 
@@ -202,7 +202,7 @@ Okta と同様に、 [認証0](https://auth0.com/)も OIDC SSO ID サービス�
 
 ## 例 3: TiDB ダッシュボードの SSO サインインに Casdoor を使用する {#example-3-use-casdoor-for-tidb-dashboard-sso-sign-in}
 
-[カスドール](https://casdoor.org/)は、独自のホストに展開できるオープンソースの SSO プラットフォームです。 TiDB ダッシュボードの SSO 機能と互換性があります。次の手順では、Casdoor を TiDB ダッシュボード SSO プロバイダーとして使用できるように Casdoor と TiDB ダッシュボードを構成する方法について説明します。
+[カスドア](https://casdoor.org/)は、独自のホストに展開できるオープンソースの SSO プラットフォームです。 TiDB ダッシュボードの SSO 機能と互換性があります。次の手順では、Casdoor を TiDB ダッシュボード SSO プロバイダーとして使用できるように Casdoor と TiDB ダッシュボードを構成する方法について説明します。
 
 ### ステップ 1: Casdoor を構成する {#step-1-configure-casdoor}
 

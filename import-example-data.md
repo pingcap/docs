@@ -5,7 +5,7 @@ summary: Install the Bikeshare example database.
 
 # サンプルデータベースのインポート {#import-example-database}
 
-TiDB マニュアルで使用されている例では、Capital Bikeshare の[システムデータ](https://www.capitalbikeshare.com/system-data)使用しています。
+TiDB マニュアルで使用されている例では、Capital Bikeshare の[Capital Bikeshare データライセンス契約](https://www.capitalbikeshare.com/data-license-agreement)の下でリリースされた[システムデータ](https://www.capitalbikeshare.com/system-data)使用しています。
 
 ## すべてのデータ ファイルをダウンロードする {#download-all-data-files}
 
@@ -43,7 +43,6 @@ CREATE TABLE trips (
 ここの例`LOAD DATA`コマンドを使用してファイルを個別にインポートすることも、以下の bash ループを使用してすべてのファイルをインポートすることもできます。
 
 ```sql
-SET tidb_dml_batch_size = 20000;
 LOAD DATA LOCAL INFILE '2017Q1-capitalbikeshare-tripdata.csv' INTO TABLE trips
   FIELDS TERMINATED BY ',' ENCLOSED BY '"'
   LINES TERMINATED BY '\r\n'
@@ -63,6 +62,6 @@ bash ループですべての`*.csv`ファイルを TiDB にインポートす�
 ```bash
 for FILE in *.csv; do
  echo "== $FILE =="
- mysql bikeshare --local-infile=1 -e "SET tidb_dml_batch_size = 20000; LOAD DATA LOCAL INFILE '${FILE}' INTO TABLE trips FIELDS TERMINATED BY ',' ENCLOSED BY '\"' LINES TERMINATED BY '\r\n' IGNORE 1 LINES (duration, start_date, end_date, start_station_number, start_station, end_station_number, end_station, bike_number, member_type);"
+ mysql bikeshare --local-infile=1 -e "LOAD DATA LOCAL INFILE '${FILE}' INTO TABLE trips FIELDS TERMINATED BY ',' ENCLOSED BY '\"' LINES TERMINATED BY '\r\n' IGNORE 1 LINES (duration, start_date, end_date, start_station_number, start_station, end_station_number, end_station, bike_number, member_type);"
 done;
 ```

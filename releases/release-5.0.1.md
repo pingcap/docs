@@ -62,7 +62,7 @@ TiDB バージョン: 5.0.1
 -   TiFlash
 
     -   storageエンジンが一部の範囲のデータを削除できない問題を修正
-    -   時間型を整数型にキャストするときに誤った結果が表示される問題を修正
+    -   時刻型を整数型にキャストするときに誤った結果が表示される問題を修正
     -   `receiver`が10秒以内に対応するタスクを見つけられないバグを修正
     -   `cancelMPPQuery`に無効な反復子が存在する可能性がある問題を修正
     -   `bitwise`オペレーターの挙動がTiDBと異なるバグを修正
@@ -92,6 +92,6 @@ TiDB バージョン: 5.0.1
         -   統合ソーターの同時実行の問題を修正し、役に立たないエラー メッセージをフィルタリングします[#1678](https://github.com/pingcap/tiflow/pull/1678)
         -   冗長ディレクトリの作成により MinIO [#1672](https://github.com/pingcap/tiflow/pull/1672)でのレプリケーションが中断される可能性があるバグを修正
         -   `explicit_defaults_for_timestamp`セッション変数のデフォルト値を`ON`に設定して、 MySQL 5.7ダウンストリームがアップストリームの TiDB [#1659](https://github.com/pingcap/tiflow/pull/1659)と同じ動作を維持できるようにします。
-        -   `io.EOF`の処理を誤るとレプリケーションが中断される可能性がある問題を修正[#1648](https://github.com/pingcap/tiflow/pull/1648)
+        -   `io.EOF`の処理を​​誤るとレプリケーションが中断される可能性がある問題を修正[#1648](https://github.com/pingcap/tiflow/pull/1648)
         -   TiCDC ダッシュボード[#1645](https://github.com/pingcap/tiflow/pull/1645)で TiKV CDC エンドポイントの CPU メトリックを修正します。
         -   場合によってはレプリケーションのブロックを避けるために`defaultBufferChanSize`を増やします[#1632](https://github.com/pingcap/tiflow/pull/1632)

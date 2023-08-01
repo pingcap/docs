@@ -9,7 +9,7 @@ summary: Learn how to use the resource control feature to control and schedule a
 
 > **ノート：**
 >
-> この機能は[Serverless Tierクラスター](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta)では使用できません。
+> この機能は[TiDB サーバーレスクラスター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless)では使用できません。
 
 </CustomContent>
 
@@ -43,21 +43,15 @@ TiDB リソース制御機能は、TiDBレイヤーのフロー制御機能と T
 
 ## リクエストユニット(RU)とは {#what-is-request-unit-ru}
 
-リクエスト ユニット (RU) は、システム リソースに対する TiDB の統合抽象化ユニットであり、現在、CPU、IOPS、および IO 帯域幅のメトリクスが含まれています。これら 3 つのメトリックの消費は、特定の比率に従って RU で表されます。
+リクエスト ユニット (RU) は、システム リソースに対する TiDB の統合抽象化ユニットであり、現在、CPU、IOPS、および IO 帯域幅のメトリクスが含まれています。これは、データベースへの 1 回のリクエストによって消費されるリソースの量を示すために使用されます。要求によって消費される RU の数は、操作の種類、クエリまたは変更されるデータの量などのさまざまな要因によって異なります。現在、RU には次の表のリソースの消費統計が含まれています。
 
-次の表は、ユーザー リクエストによる TiKVstorageレイヤーのCPU および IO リソースの消費量と、対応する RU の重みを示しています。
+<table><thead><tr><th>リソースの種類</th><th>RUの消費量</th></tr></thead><tbody><tr><td rowspan="3">読む</td><td>2 つのstorage読み取りバッチは 1 RU を消費します</td></tr><tr><td>8 つのstorage読み取りリクエストは 1 RU を消費します</td></tr><tr><td>64 KiB の読み取り要求ペイロードは 1 RU を消費します</td></tr><tr><td rowspan="3">書く</td><td>1 つのstorage書き込みバッチはレプリカごとに 1 RU を消費します</td></tr><tr><td>1 つのstorage書き込みリクエストは 1 RU を消費します</td></tr><tr><td>1 KiB の書き込み要求ペイロードは 1 RU を消費します</td></tr><tr><td>SQL CPU</td><td> 3 ミリ秒で 1 RU を消費</td></tr></tbody></table>
 
-| リソース                  | RUの重量      |
-| :-------------------- | :--------- |
-| CPU                   | 1/3 RU/ミリ秒 |
-| IOの読み取り               | 1/64 RU/KB |
-| 書き込みIO                | 1RU/KB     |
-| 読み取りリクエストの基本的なオーバーヘッド | 0.25RU     |
-| 書き込みリクエストの基本的なオーバーヘッド | 1.5RU      |
-
-上記の表に基づいて、リソース グループによって消費される TiKV 時間が`c`ミリ秒であると仮定すると、 `r1`回のリクエストで`r2` KB のデータが読み取られ、 `w1`回の書き込みリクエストで`w2` KB のデータが書き込まれ、リソース グループ内の非監視 TiKV ノードの数が計算されます。クラスターは`n`です。次に、リソース グループによって消費される合計 RU の式は次のようになります。
-
-`c` * 1/3 + ( `r1` * 0.25 + `r2` * 1/64) + (1.5 * `w1` + `w2` * 1 * `n` )
+> **ノート：**
+>
+> -   各書き込み操作は、最終的にすべてのレプリカに複製されます (デフォルトでは、TiKV には 3 つのレプリカがあります)。各レプリケーション操作は、異なる書き込み操作とみなされます。
+> -   ユーザーによって実行されるクエリに加えて、自動統計収集などのバックグラウンド タスクによって RU が消費される場合があります。
+> -   上の表には、ネットワークとstorageの消費量を除いて、TiDB セルフホスト クラスターの RU 計算に関係するリソースのみがリストされています。 TiDB サーバーレス RU については、 [TiDB サーバーレスの料金詳細](https://www.pingcap.com/tidb-cloud-serverless-pricing-details/)を参照してください。
 
 ## リソース制御用パラメータ {#parameters-for-resource-control}
 
@@ -73,7 +67,7 @@ TiDB リソース制御機能は、TiDBレイヤーのフロー制御機能と T
 
 <CustomContent platform="tidb-cloud">
 
--   TiKV: オンプレミス TiDB の場合、 `resource-control.enabled`パラメーターを使用して、リソース グループ クォータに基づいてリクエストのスケジューリングを使用するかどうかを制御できます。 TiDB Cloudの場合、 `resource-control.enabled`パラメーターの値はデフォルトで`true`であり、動的変更はサポートされていません。
+-   TiKV: TiDB セルフホストの場合、 `resource-control.enabled`パラメーターを使用して、リソース グループ クォータに基づいてリクエストのスケジューリングを使用するかどうかを制御できます。 TiDB Cloudの場合、 `resource-control.enabled`パラメーターの値はデフォルトで`true`であり、動的変更はサポートされていません。
 
 </CustomContent>
 
@@ -92,20 +86,22 @@ TiDB v7.0.0 以降、両方のパラメータがデフォルトで有効にな�
 
 ### クラスター容量の見積もり {#estimate-cluster-capacity}
 
+<CustomContent platform="tidb">
+
 リソースを計画する前に、クラスターの全体的な容量を把握する必要があります。 TiDB は、クラスター容量を見積もるためのステートメント[`CALIBRATE RESOURCE`](/sql-statements/sql-statement-calibrate-resource.md)を提供します。次のいずれかの方法を使用できます。
 
 -   [実際のワークロードに基づいて容量を見積もる](/sql-statements/sql-statement-calibrate-resource.md#estimate-capacity-based-on-actual-workload)
 -   [ハードウェア導入に基づいて容量を見積もる](/sql-statements/sql-statement-calibrate-resource.md#estimate-capacity-based-on-hardware-deployment)
 
-<CustomContent platform="tidb">
-
-[`CALIBRATE RESOURCE`](/sql-statements/sql-statement-calibrate-resource.md#methods-for-estimating-capacity)を参照してください。
+[リソースマネージャーページ](/dashboard/dashboard-resource-manager.md) TiDB ダッシュボードで確認できます。詳細については、 [`CALIBRATE RESOURCE`](/sql-statements/sql-statement-calibrate-resource.md#methods-for-estimating-capacity)を参照してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-詳細については、 [`CALIBRATE RESOURCE`](/sql-statements/sql-statement-calibrate-resource.md#methods-for-estimating-capacity)を参照してください。
+TiDB セルフホストの場合、 [`CALIBRATE RESOURCE`](https://docs.pingcap.com/zh/tidb/stable/sql-statement-calibrate-resource)ステートメントを使用してクラスター容量を見積もることができます。
+
+TiDB Cloudの場合、 [`CALIBRATE RESOURCE`](https://docs.pingcap.com/zh/tidb/stable/sql-statement-calibrate-resource)ステートメントは適用されません。
 
 </CustomContent>
 
@@ -145,7 +141,7 @@ TiDB v7.0.0 以降、両方のパラメータがデフォルトで有効にな�
 
 TiDB は、次の 3 つのレベルのリソース グループ設定をサポートしています。
 
--   ユーザーレベル。 [`ALTER USER`](/sql-statements/sql-statement-alter-user.md#modify-the-resource-group-bound-to-the-user)ステートメントを使用して、ユーザーを特定のリソース グループにバインドします。ユーザーがリソース グループにバインドされると、ユーザーが作成したセッションは、対応するリソース グループに自動的にバインドされます。
+-   ユーザーレベル。 [`CREATE USER`](/sql-statements/sql-statement-create-user.md)または[`ALTER USER`](/sql-statements/sql-statement-alter-user.md#modify-the-resource-group-bound-to-the-user)ステートメントを使用して、ユーザーを特定のリソース グループにバインドします。ユーザーがリソース グループにバインドされると、ユーザーが作成したセッションは、対応するリソース グループに自動的にバインドされます。
 -   セッションレベル。 [`SET RESOURCE GROUP`](/sql-statements/sql-statement-set-resource-group.md)を介して現在のセッションのリソース グループを設定します。
 -   発言レベル。 [`RESOURCE_GROUP()`](/optimizer-hints.md#resource_groupresource_group_name)オプティマイザー ヒントを使用して、現在のステートメントのリソース グループを設定します。
 
@@ -214,7 +210,7 @@ SELECT /*+ RESOURCE_GROUP(rg1) */ * FROM t limit 10;
     SET GLOBAL tidb_enable_resource_control = 'OFF';
     ```
 
-2.  オンプレミス TiDB の場合、 `resource-control.enabled`パラメーターを使用して、リソース グループ クォータに基づいてリクエストのスケジューリングを使用するかどうかを制御できます。 TiDB Cloudの場合、 `resource-control.enabled`パラメーターの値はデフォルトで`true`であり、動的変更はサポートされていません。 TiDB CloudDedicated Tierクラスターに対してこれを無効にする必要がある場合は、 [TiDB Cloudのサポート](/tidb-cloud/tidb-cloud-support.md)にお問い合わせください。
+2.  TiDB セルフホストの場合、 `resource-control.enabled`パラメーターを使用して、リソース グループ クォータに基づいてリクエストのスケジューリングを使用するかどうかを制御できます。 TiDB Cloudの場合、 `resource-control.enabled`パラメーターの値はデフォルトで`true`であり、動的変更はサポートされていません。 TiDB 専用クラスターでこれを無効にする必要がある場合は、 [TiDB Cloudのサポート](/tidb-cloud/tidb-cloud-support.md)にお問い合わせください。
 
 </CustomContent>
 
@@ -226,7 +222,7 @@ TiDB はリソース制御に関する実行時情報を定期的に収集し、
 
 TiKV は、さまざまなリソース グループからのリクエスト QPS も記録します。詳細については、 [TiKV モニタリング メトリクスの詳細](/grafana-tikv-dashboard.md#grpc)を参照してください。
 
-TiDB ダッシュボードの現在の[リソースマネージャーページ](/dashboard/dashboard-resource-manager.md)を参照してください。
+TiDB ダッシュボードの現在の[`RESOURCE_GROUPS`](/information-schema/information-schema-resource-groups.md)のテーブルでリソース グループのデータを表示できます。詳細については、 [リソースマネージャーページ](/dashboard/dashboard-resource-manager.md)を参照してください。
 
 </CustomContent>
 
@@ -234,7 +230,7 @@ TiDB ダッシュボードの現在の[リソースマネージャーページ](
 
 > **ノート：**
 >
-> このセクションは、オンプレミス TiDB にのみ適用されます。現在、 TiDB Cloud はリソース制御メトリクスを提供していません。
+> このセクションは、TiDB セルフホスト型にのみ適用されます。現在、 TiDB Cloud はリソース制御メトリクスを提供していません。
 
 TiDB はリソース制御に関する実行時情報を定期的に収集し、Grafana の**[TiDB]** &gt; **[リソース制御]**ダッシュボードにメトリクスの視覚的なグラフを提供します。
 
@@ -254,7 +250,7 @@ TiKV は、Grafana の**TiKV**ダッシュボードにさまざまなリソー�
 
 2.  データベース ユーザーを複数のリソース グループにバインドできますか?
 
-    いいえ。データベース ユーザーは 1 つのリソース グループにのみバインドできます。ただし、セッションの実行中は、 [`RESOURCE_GROUP()`](/optimizer-hints.md#resource_groupresource_group_name)使用して、実行中のステートメントのリソース グループを設定することもできます。
+    いいえ。データベース ユーザーは 1 つのリソース グループにのみバインドできます。ただし、セッションの実行中は、 [`SET RESOURCE GROUP`](/sql-statements/sql-statement-set-resource-group.md)を使用して、現在のセッションで使用されるリソース グループを設定できます。オプティマイザ ヒント[`RESOURCE_GROUP()`](/optimizer-hints.md#resource_groupresource_group_name)使用して、実行中のステートメントのリソース グループを設定することもできます。
 
 3.  すべてのリソース グループのリソース割り当ての合計 ( `RU_PER_SEC` ) がシステム容量を超えるとどうなりますか?
 

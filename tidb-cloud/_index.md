@@ -1,5 +1,6 @@
 ---
 title: TiDB Cloud Documentation
+aliases: ['/tidbcloud/privacy-policy', '/tidbcloud/terms-of-service', '/tidbcloud/service-level-agreement']
 hide_sidebar: true
 hide_commit: true
 ---
@@ -36,7 +37,7 @@ hide_commit: true
 
 </LearningPath>
 
-<LearningPath label="Use" icon="cloud7">
+<LearningPath label="Maintain" icon="cloud7">
 
 [クラスタを作成する](https://docs.pingcap.com/tidbcloud/create-tidb-cluster)
 
@@ -44,11 +45,17 @@ hide_commit: true
 
 [HTAPクラスタを使用する](https://docs.pingcap.com/tidbcloud/tiflash-overview)
 
+[データのバックアップと復元](https://docs.pingcap.com/tidbcloud/backup-and-restore)
+
 [クラスタをスケールする](https://docs.pingcap.com/tidbcloud/scale-tidb-cluster)
 
 [TiDBクラスタの一時停止または再開](https://docs.pingcap.com/tidbcloud/pause-or-resume-tidb-cluster)
 
+[ストリームデータ](http://docs.pingcap.com/tidbcloud/changefeed-overview)
+
 [APIを使用する（ベータ版）](https://docs.pingcap.com/tidbcloud/api-overview)
+
+[TiDB CloudCLI を使用する](https://docs.pingcap.com/tidbcloud/get-started-with-cli)
 
 </LearningPath>
 
@@ -94,13 +101,13 @@ hide_commit: true
 
 [パスワード認証](https://docs.pingcap.com/tidbcloud/tidb-cloud-password-authentication)
 
+[ユーザーの役割](https://docs.pingcap.com/tidbcloud/manage-user-access#user-roles)
+
 [ユーザープロファイルの管理](https://docs.pingcap.com/tidbcloud/manage-user-access#manage-user-profiles)
 
 [組織のアクセスを管理する](https://docs.pingcap.com/tidbcloud/manage-user-access#manage-organization-access)
 
 [プロジェクトへのアクセスを管理する](https://docs.pingcap.com/tidbcloud/manage-user-access#manage-project-access)
-
-[役割の構成](https://docs.pingcap.com/tidbcloud/manage-user-access#manage-role-access)
 
 [Security設定を構成する](https://docs.pingcap.com/tidbcloud/configure-security-settings)
 
@@ -122,13 +129,13 @@ hide_commit: true
 
 [データドッグ](https://docs.pingcap.com/tidbcloud/monitor-datadog-integration)
 
-[dbt](https://docs.pingcap.com/tidbcloud/integrate-tidbcloud-with-dbt)
+[ザピエル](https://docs.pingcap.com/tidbcloud/integrate-tidbcloud-with-zapier)
 
-[プロメテウスとグラファナ](https://docs.pingcap.com/tidbcloud/monitor-prometheus-and-grafana-integration)
+[ヴェルセル](https://docs.pingcap.com/tidbcloud/integrate-tidbcloud-with-vercel)
 
 [テラフォーム](https://docs.pingcap.com/tidbcloud/terraform-tidbcloud-provider-overview)
 
-[ヴェルセル](https://docs.pingcap.com/tidbcloud/integrate-tidbcloud-with-vercel)
+[Amazon アプリフロー](https://docs.pingcap.com/tidbcloud/dev-guide-aws-appflow-integration)
 
 </LearningPath>
 

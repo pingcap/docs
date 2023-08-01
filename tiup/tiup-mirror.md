@@ -86,9 +86,9 @@ tiup mirror clone <target-dir> [global-version] [flags]
 
     コンポーネントの 1 つのバージョン (すべてのバージョンではない) のみを複製する場合は、 `--<component>=<version>`を使用してこのバージョンを指定します。例えば：
 
-    -   `tiup mirror clone <target-dir> --tidb v7.1.0`コマンドを実行して、TiDBコンポーネントの v7.1.0 バージョンのクローンを作成します。
-    -   `tiup mirror clone <target-dir> --tidb v7.1.0 --tikv all`コマンドを実行して、v7.1.0 バージョンの TiDBコンポーネントとすべてのバージョンの TiKVコンポーネントのクローンを作成します。
-    -   `tiup mirror clone <target-dir> v7.1.0`コマンドを実行して、クラスター内のすべてのコンポーネントの v7.1.0 バージョンのクローンを作成します。
+    -   `tiup mirror clone <target-dir> --tidb v7.1.1`コマンドを実行して、TiDBコンポーネントの v7.1.1 バージョンのクローンを作成します。
+    -   `tiup mirror clone <target-dir> --tidb v7.1.1 --tikv all`コマンドを実行して、v7.1.1 バージョンの TiDBコンポーネントとすべてのバージョンの TiKVコンポーネントのクローンを作成します。
+    -   `tiup mirror clone <target-dir> v7.1.1`コマンドを実行して、クラスター内のすべてのコンポーネントの v7.1.1 バージョンのクローンを作成します。
 
 クローン作成後、署名キーが自動的に設定されます。
 
@@ -115,7 +115,7 @@ export TIUP_MIRRORS=/shared_data/tiup
 tiup list
 ```
 
-`TIUP_MIRRORS`設定では、ミラー構成を永続的に変更できます (例: `tiup mirror set` )。詳細は[ティアップ号 #651](https://github.com/pingcap/tiup/issues/651)を参照してください。
+`TIUP_MIRRORS`設定では、ミラー構成を永続的に変更できます (例: `tiup mirror set` 。詳細は[ティアップ号 #651](https://github.com/pingcap/tiup/issues/651)を参照してください。
 
 ### プライベートリポジトリを更新する {#update-the-private-repository}
 

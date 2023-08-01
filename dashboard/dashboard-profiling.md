@@ -47,7 +47,7 @@ summary: Learn how to collect performance data to analyze sophisticated problems
 
 プロファイリングを開始する前に、プロファイリングの期間を変更できます。この期間は、プロファイリングに必要な時間によって決まります。デフォルトでは 30 秒です。 30 秒の期間が完了するまでに 30 秒かかります。
 
-[継続的プロファイリングページ](/dashboard/continuous-profiling.md#access-the-page)で最新のプロファイリング結果をクリックします。
+[継続的なプロファイリング](/dashboard/continuous-profiling.md)が有効になっているクラスターでは手動プロファイリングを開始できません。現時点でのパフォーマンス データを表示するには、 [継続的プロファイリングページ](/dashboard/continuous-profiling.md#access-the-page)で最新のプロファイリング結果をクリックします。
 
 ## プロファイリングステータスのビュー {#view-profiling-status}
 

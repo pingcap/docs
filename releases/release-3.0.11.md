@@ -25,10 +25,10 @@ TiDB Ansible バージョン: 3.0.11
     -   `information_schema.PARTITIONS`テーブル[#14849](https://github.com/pingcap/tidb/pull/14849)のパーティションテーブルのメタ情報の表示をサポート
 
 -   TiDBBinlog
-    -   TiDB クラスター間の双方向データ レプリケーションをサポート[#909](https://github.com/pingcap/tidb-binlog/pull/909)
+    -   TiDB クラスター間の双方向データ レプリケーションをサポート[#884](https://github.com/pingcap/tidb-binlog/pull/884) [#909](https://github.com/pingcap/tidb-binlog/pull/909)
 
 -   TiDB Lightning
-    -   TLS 構成のサポート[#270](https://github.com/pingcap/tidb-lightning/pull/270)
+    -   TLS 構成のサポート[#44](https://github.com/tikv/importer/pull/44) [#270](https://github.com/pingcap/tidb-lightning/pull/270)
 
 -   TiDB Ansible
     -   制御マシンのユーザーが`ansible_user` [#1184](https://github.com/pingcap/tidb-ansible/pull/1184)と一致する必要がないように`create_users.yml`のロジックを変更します。
@@ -42,13 +42,13 @@ TiDB Ansible バージョン: 3.0.11
     -   サポートされていない式を使用してパーティション テーブルを作成するときの TiDBサーバーのpanicを修正しました。このpanicを修正すると、エラー情報`This partition function is not allowed`が返されます。 [#14769](https://github.com/pingcap/tidb/pull/14769)
     -   `Union` [#14944](https://github.com/pingcap/tidb/pull/14944)を含むサブクエリを使用して`select max() from subquery`ステートメントを実行すると、誤った結果が発生する問題を修正しました。
     -   実行バインディング[#14865](https://github.com/pingcap/tidb/pull/14865)を削除する`DROP BINDING`を実行した後に`SHOW BINDINGS`ステートメントを実行すると、エラー メッセージが返される問題を修正します。
-    -   MySQL プロトコルではクエリ内のエイリアスの最大長は 256 文字ですが、TiDB はこのプロトコルに従ってクエリ結果に[#14940](https://github.com/pingcap/tidb/pull/14940)
+    -   MySQL プロトコルではクエリ内のエイリアスの最大長は 256 文字ですが、TiDB はこのプロトコルに従ってクエリ結果に[エイリアスを切り取る](https://dev.mysql.com/doc/refman/8.0/en/identifier-length.html)含まないため、接続が切断される問題を修正します[#14940](https://github.com/pingcap/tidb/pull/14940)
     -   `DIV`の文字列型を使用した場合に発生する可能性がある誤ったクエリ結果を修正します。たとえば、 `select 1 / '2007' div 1`ステートメント[#14098](https://github.com/pingcap/tidb/pull/14098)を正しく実行できるようになりました。
 
 -   TiKV
     -   不要なログを削除してログ出力を最適化する[#6657](https://github.com/tikv/tikv/pull/6657)
     -   高負荷時にピアが削除されたときに発生する可能性のあるpanicを修正しました[#6704](https://github.com/tikv/tikv/pull/6704)
-    -   場合によっては Hibernate リージョンが起動しない問題を修正[#6738](https://github.com/tikv/tikv/pull/6738)
+    -   場合によっては Hibernate リージョンが起動しない問題を修正[#6732](https://github.com/tikv/tikv/pull/6732) [#6738](https://github.com/tikv/tikv/pull/6738)
 
 -   TiDB Ansible
     -   `tidb-ansible` [#1169](https://github.com/pingcap/tidb-ansible/pull/1169)に古いドキュメントのリンクを更新します

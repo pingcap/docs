@@ -13,13 +13,13 @@ TiDB バージョン: 5.2.4
 
 -   TiDB
 
-    -   システム変数[#31748](https://github.com/pingcap/tidb/issues/31748)
+    -   システム変数[`tidb_analyze_version`](/system-variables.md#tidb_analyze_version-new-in-v510)のデフォルト値を`2`から`1`に変更します[#31748](https://github.com/pingcap/tidb/issues/31748)
 
 -   TiKV
 
-    -   不要なRaftログを圧縮するための時間間隔 (デフォルトでは`"2s"` ) を制御するには[#11404](https://github.com/tikv/tikv/issues/11404)
-    -   デフォルト値の[#11404](https://github.com/tikv/tikv/issues/11404)
-    -   [#11424](https://github.com/tikv/tikv/issues/11424)の値を上書きします。
+    -   不要なRaftログを圧縮するための時間間隔 (デフォルトでは`"2s"` ) を制御するには[`raft-log-compact-sync-interval`](https://docs.pingcap.com/tidb/v5.2/tikv-configuration-file#raft-log-compact-sync-interval-new-in-v524)を追加します[#11404](https://github.com/tikv/tikv/issues/11404)
+    -   デフォルト値の[`raft-log-gc-tick-interval`](/tikv-configuration-file.md#raft-log-gc-tick-interval)を`"10s"`から`"3s"`に変更します[#11404](https://github.com/tikv/tikv/issues/11404)
+    -   [`storage.flow-control.enable`](/tikv-configuration-file.md#enable)を`true`に設定すると、 [`storage.flow-control.hard-pending-compaction-bytes-limit`](/tikv-configuration-file.md#hard-pending-compaction-bytes-limit)の値が[`rocksdb.(defaultcf|writecf|lockcf).hard-pending-compaction-bytes-limit`](/tikv-configuration-file.md#hard-pending-compaction-bytes-limit-1) [#11424](https://github.com/tikv/tikv/issues/11424)の値を上書きします。
 
 -   ツール
 
@@ -48,7 +48,7 @@ TiDB バージョン: 5.2.4
         -   変更フィードを再開するための指数バックオフ メカニズムを追加します[#3329](https://github.com/pingcap/tiflow/issues/3329)
         -   「EventFeed 再試行速度制限」ログの数を減らす[#4006](https://github.com/pingcap/tiflow/issues/4006)
         -   デフォルト値の`max-message-bytes`を 10M [#4041](https://github.com/pingcap/tiflow/issues/4041)に設定します。
-        -   `no owner alert` 、 `mounter row` 、 `table sink total row` 、 `buffer sink total row`などの Prometheus および Grafana モニタリング メトリックとアラートを追加します[#1606](https://github.com/pingcap/tiflow/issues/1606)
+        -   `no owner alert` 、 `mounter row` 、 `table sink total row` 、 `buffer sink total row`などの Prometheus および Grafana モニタリング メトリックとアラートを追加します[#4054](https://github.com/pingcap/tiflow/issues/4054) [#1606](https://github.com/pingcap/tiflow/issues/1606)
         -   Grafana ダッシュボードで複数の Kubernetes クラスターをサポート[#4665](https://github.com/pingcap/tiflow/issues/4665)
         -   キャッチアップ ETA (到着予定時刻) を`changefeed checkpoint`モニタリング指標に追加します[#5232](https://github.com/pingcap/tiflow/issues/5232)
 
@@ -62,7 +62,7 @@ TiDB バージョン: 5.2.4
     -   楽観的トランザクション モード[#30410](https://github.com/pingcap/tidb/issues/30410)での潜在的なデータ インデックスの不一致の問題を修正します。
     -   JSON 型の列が`CHAR`型の列[#29401](https://github.com/pingcap/tidb/issues/29401)に結合すると SQL 操作がキャンセルされる問題を修正
     -   トランザクションを使用する場合と使用しない場合に、ウィンドウ関数が異なる結果を返す可能性がある問題を修正します[#29947](https://github.com/pingcap/tidb/issues/29947)
-    -   SQL ステートメントに自然結合[#25041](https://github.com/pingcap/tidb/issues/25041)が含まれる場合、予期せず`Column 'col_name' in field list is ambiguous`エラーが報告される問題を修正します。
+    -   SQL ステートメントに自然結合[#25041](https://github.com/pingcap/tidb/issues/25041)含まれる場合、予期せず`Column 'col_name' in field list is ambiguous`エラーが報告される問題を修正します。
     -   `Decimal` ～ `String` [#29417](https://github.com/pingcap/tidb/issues/29417)をキャストする際に長さ情報が間違っている問題を修正
     -   `tidb_enable_vectorized_expression`の値が異なるために`GREATEST`関数が一貫性のない結果を返す問題を修正します ( `on`または`off`に設定) [#29434](https://github.com/pingcap/tidb/issues/29434)
     -   `left join` [#31321](https://github.com/pingcap/tidb/issues/31321)を使用して複数のテーブルのデータを削除した場合の誤った結果を修正
@@ -92,7 +92,7 @@ TiDB バージョン: 5.2.4
     -   データ[#29711](https://github.com/pingcap/tidb/issues/29711)のクエリにプレフィックス列インデックスが使用されている場合、1 つのステートメントで`ORDER BY`と`LIMIT`を一緒に使用すると間違った結果が出力される可能性がある問題を修正します。
     -   楽観的トランザクションのリトライ時にDOUBLE型の自動インクリメント列が変更される場合がある問題を修正[#29892](https://github.com/pingcap/tidb/issues/29892)
     -   STR_TO_DATE 関数がマイクロ秒部分の前のゼロを正しく処理できない問題を修正します[#30078](https://github.com/pingcap/tidb/issues/30078)
-    -   TiFlash は空の範囲を持つテーブルの読み取りをまだサポートしていませんが、 TiFlashを使用して空の範囲を持つテーブルをスキャンすると、 TiFlashが間違った結果を取得する問題を修正します[#33083](https://github.com/pingcap/tidb/issues/33083)
+    -   TiFlash は空の範囲を持つテーブルの読み取りをまだサポートしていませんが、 TiFlashを使用して空の範囲を持つテーブルをスキャンすると、TiDB が間違った結果を取得する問題を修正します[#33083](https://github.com/pingcap/tidb/issues/33083)
 
 -   TiKV
 
@@ -118,7 +118,7 @@ TiDB バージョン: 5.2.4
     -   TiKV が逆テーブル スキャンを実行するときに TiKV がメモリロックを検出できない問題を修正します[#11440](https://github.com/tikv/tikv/issues/11440)
     -   コルーチンの実行が速すぎる場合に時折発生するデッドロックの問題を修正します[#11549](https://github.com/tikv/tikv/issues/11549)
     -   ピアを破棄するとレイテンシーが長くなる可能性がある問題を修正[#10210](https://github.com/tikv/tikv/issues/10210)
-    -   マージ対象のターゲットリージョンが無効なため、TiKV がパニックを起こして予期せずピアを破棄する問題を修正します[#12232](https://github.com/tikv/tikv/issues/12232)
+    -   マージ対象のターゲットリージョンが無効であるため、TiKV がパニックを起こして予期せずピアを破棄する問題を修正します[#12232](https://github.com/tikv/tikv/issues/12232)
     -   リージョン[#12048](https://github.com/tikv/tikv/issues/12048)をマージするときに、ターゲット ピアが初期化されずに破棄されたピアに置き換えられるときに発生する TiKVpanicの問題を修正します。
     -   スナップショットの適用が中止されたときに発生する TiKVpanicの問題を修正します[#11618](https://github.com/tikv/tikv/issues/11618)
     -   オペレーターの実行が失敗した場合、TiKV が送信されるスナップショットの数を正しく計算できないバグを修正[#11341](https://github.com/tikv/tikv/issues/11341)
@@ -147,7 +147,7 @@ TiDB バージョン: 5.2.4
     -   主キーが`handle` [#3569](https://github.com/pingcap/tiflash/issues/3569)の主キー列を拡張するときに発生する可能性のあるデータの不整合を修正しました。
     -   SQL ステートメントに非常に長いネストされた式が含まれている場合に発生する可能性のある解析エラーを修正します[#3354](https://github.com/pingcap/tiflash/issues/3354)
     -   クエリに`where <string>`句[#3447](https://github.com/pingcap/tiflash/issues/3447)が含まれる場合に発生する可能性のある間違った結果を修正
-    -   `new_collations_enabled_on_first_bootstrap`有効になっている場合に発生する可能性のある間違った結果を修正[#3391](https://github.com/pingcap/tiflash/issues/3391)
+    -   `new_collations_enabled_on_first_bootstrap`有効になっている場合に発生する可能性のある間違った結果を修正[#3388](https://github.com/pingcap/tiflash/issues/3388) 、 [#3391](https://github.com/pingcap/tiflash/issues/3391)
     -   TLS が有効になっているときに発生するpanicの問題を修正します[#4196](https://github.com/pingcap/tiflash/issues/4196)
     -   メモリ制限が有効になっているときに発生するpanicの問題を修正します[#3902](https://github.com/pingcap/tiflash/issues/3902)
     -   MPP クエリが停止するとTiFlashが時折クラッシュする問題を修正[#3401](https://github.com/pingcap/tiflash/issues/3401)
@@ -197,5 +197,5 @@ TiDB バージョン: 5.2.4
         -   TiDB Lightning にテーブル`mysql.tidb`へのアクセス権限[#31088](https://github.com/pingcap/tidb/issues/31088)ない場合にインポート結果が正しくない問題を修正
         -   チェックサム エラー「GC ライフタイムがトランザクション期間よりも短い」 [#32733](https://github.com/pingcap/tidb/issues/32733)を修正
         -   一部のインポートタスクにソースファイルが含まれていない場合、 TiDB Lightning がメタデータスキーマを削除できないことがあるバグを修正[#28144](https://github.com/pingcap/tidb/issues/28144)
-        -   S3storageパスが存在しない場合にTiDB Lightning がエラーを報告しない問題を修正[#30709](https://github.com/pingcap/tidb/issues/30709)
+        -   S3storageパスが存在しない場合にTiDB Lightning がエラーを報告しない問題を修正[#28031](https://github.com/pingcap/tidb/issues/28031) [#30709](https://github.com/pingcap/tidb/issues/30709)
         -   GCS [#30377](https://github.com/pingcap/tidb/issues/30377)で 1000 を超えるキーを反復するときに発生するエラーを修正

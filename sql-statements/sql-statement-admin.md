@@ -17,24 +17,24 @@ summary: An overview of the usage of ADMIN for the TiDB database.
 
 <CustomContent platform="tidb-cloud">
 
-| 声明                                                                                                                                                             | 説明                                 |
-| -------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------- |
-| [`ADMIN CANCEL DDL JOBS`](/sql-statements/sql-statement-admin-cancel-ddl.md)                   | 現在実行中の DDL ジョブをキャンセルします。           |
-| [`ADMIN CHECKSUM TABLE`](/sql-statements/sql-statement-admin-checksum-table.md)            | テーブルのすべての行 + インデックスの CRC64 を計算します。 |
+| 声明                                                                                      | 説明                                 |
+| --------------------------------------------------------------------------------------- | ---------------------------------- |
+| [`ADMIN CANCEL DDL JOBS`](/sql-statements/sql-statement-admin-cancel-ddl.md)            | 現在実行中の DDL ジョブをキャンセルします。           |
+| [`ADMIN CHECKSUM TABLE`](/sql-statements/sql-statement-admin-checksum-table.md)         | テーブルのすべての行 + インデックスの CRC64 を計算します。 |
 | [`ADMIN CHECK [TABLE|INDEX]`](/sql-statements/sql-statement-admin-check-table-index.md) | テーブルまたはインデックスの整合性をチェックします。         |
-| [`ADMIN SHOW DDL [JOBS|QUERIES]`](/sql-statements/sql-statement-admin-show-ddl.md)               | 現在実行中または最近完了した DDL ジョブの詳細を表示します。   |
+| [`ADMIN SHOW DDL [JOBS|QUERIES]`](/sql-statements/sql-statement-admin-show-ddl.md)      | 現在実行中または最近完了した DDL ジョブの詳細を表示します。   |
 
 </CustomContent>
 
 <CustomContent platform="tidb">
 
-| 声明                                                                                                                                                             | 説明                                      |
-| -------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------- |
-| [`ADMIN CANCEL DDL JOBS`](/sql-statements/sql-statement-admin-cancel-ddl.md)                   | 現在実行中の DDL ジョブをキャンセルします。                |
-| [`ADMIN CHECKSUM TABLE`](/sql-statements/sql-statement-admin-checksum-table.md)            | テーブルのすべての行 + インデックスの CRC64 を計算します。      |
+| 声明                                                                                      | 説明                                      |
+| --------------------------------------------------------------------------------------- | --------------------------------------- |
+| [`ADMIN CANCEL DDL JOBS`](/sql-statements/sql-statement-admin-cancel-ddl.md)            | 現在実行中の DDL ジョブをキャンセルします。                |
+| [`ADMIN CHECKSUM TABLE`](/sql-statements/sql-statement-admin-checksum-table.md)         | テーブルのすべての行 + インデックスの CRC64 を計算します。      |
 | [`ADMIN CHECK [TABLE|INDEX]`](/sql-statements/sql-statement-admin-check-table-index.md) | テーブルまたはインデックスの整合性をチェックします。              |
-| [`ADMIN SHOW DDL [JOBS|QUERIES]`](/sql-statements/sql-statement-admin-show-ddl.md)               | 現在実行中または最近完了した DDL ジョブの詳細を表示します。        |
-| [`ADMIN SHOW TELEMETRY`](/sql-statements/sql-statement-admin-show-telemetry.md)            | テレメトリ機能の一部として PingCAP にレポートされる情報を表示します。 |
+| [`ADMIN SHOW DDL [JOBS|QUERIES]`](/sql-statements/sql-statement-admin-show-ddl.md)      | 現在実行中または最近完了した DDL ジョブの詳細を表示します。        |
+| [`ADMIN SHOW TELEMETRY`](/sql-statements/sql-statement-admin-show-telemetry.md)         | テレメトリ機能の一部として PingCAP にレポートされる情報を表示します。 |
 
 </CustomContent>
 
@@ -128,7 +128,7 @@ ADMIN REPAIR TABLE tbl_name CREATE TABLE STATEMENT;
 
 <CustomContent platform="tidb">
 
-ここでの「信頼できない」とは、元のテーブルのメタデータが`CREATE TABLE STATEMENT`操作でカバーできることを手動で確認する必要があることを意味します。この`REPAIR`ステートメントを使用するには、 [`repair-table-list`](/tidb-configuration-file.md#repair-table-list)にリストされていることを確認します。
+ここでの「信頼できない」とは、元のテーブルのメタデータが`CREATE TABLE STATEMENT`操作でカバーできることを手動で確認する必要があることを意味します。この`REPAIR`ステートメントを使用するには、 [`repair-mode`](/tidb-configuration-file.md#repair-mode)構成項目を有効にし、修復するテーブルが[`repair-table-list`](/tidb-configuration-file.md#repair-table-list)にリストされていることを確認します。
 
 </CustomContent>
 

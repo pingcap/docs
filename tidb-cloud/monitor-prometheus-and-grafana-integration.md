@@ -1,11 +1,11 @@
 ---
-title: Integrate TiDB Cloud with Prometheus and Grafana
+title: Integrate TiDB Cloud with Prometheus and Grafana (Beta)
 summary: Learn how to monitor your TiDB cluster with the Prometheus and Grafana integration.
 ---
 
-# TiDB CloudをPrometheus および Grafana と統合する {#integrate-tidb-cloud-with-prometheus-and-grafana}
+# TiDB Cloudを Prometheus および Grafana と統合 (ベータ版) {#integrate-tidb-cloud-with-prometheus-and-grafana-beta}
 
-TiDB Cloud は[プロメテウス](https://prometheus.io/) API エンドポイントを提供します。 Prometheus サービスをお持ちの場合は、 TiDB Cloudの主要なメトリクスをエンドポイントから簡単に監視できます。
+TiDB Cloud は[プロメテウス](https://prometheus.io/) API エンドポイント (ベータ版) を提供します。 Prometheus サービスをお持ちの場合は、 TiDB Cloudの主要なメトリクスをエンドポイントから簡単に監視できます。
 
 このドキュメントでは、 TiDB Cloudエンドポイントから主要なメトリクスを読み取るように Prometheus サービスを構成する方法と、 [グラファナ](https://grafana.com/)使用してメトリクスを表示する方法について説明します。
 
@@ -17,7 +17,9 @@ TiDB Cloud は[プロメテウス](https://prometheus.io/) API エンドポイ�
 
 ## 制限 {#limitation}
 
-[Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta)では Prometheus と Grafana の統合を使用できません。
+-   [TiDB サーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-serverless)クラスターでは Prometheus と Grafana の統合を使用できません。
+
+-   Prometheus と Grafana の統合は、クラスターのステータスが**CREATING** 、 **RESTORING** 、 **PAused** 、または**RESUMING**の場合は使用できません。
 
 ## ステップ {#steps}
 
@@ -29,12 +31,9 @@ Prometheus のscrape_config ファイルを取得するには、次の手順を�
 
 1.  [TiDB Cloudコンソール](https://tidbcloud.com)にログインします。
 
-2.  [**クラスター**](https://tidbcloud.com/console/clusters)ページの左側のナビゲーション ウィンドウで、次のいずれかを実行します。
+2.  クリック<mdsvgicon name="icon-left-projects">複数のプロジェクトがある場合は、左下隅でターゲット プロジェクトに切り替え、 **[プロジェクト設定]**をクリックします。</mdsvgicon>
 
-    -   複数のプロジェクトがある場合は、ターゲット プロジェクトに切り替えて、 **[管理]** &gt; **[統合]**をクリックします。
-    -   プロジェクトが 1 つだけの場合は、 **[管理]** &gt; **[統合]**をクリックします。
-
-3.  **「Prometheus への統合」を**クリックします。
+3.  プロジェクトの [**プロジェクト設定]**ページで、左側のナビゲーション ペインの**[統合]**をクリックし、 **[Prometheus への統合 (ベータ)]**をクリックします。
 
 4.  **「ファイルの追加」**をクリックして、現在のプロジェクトのscrape_configファイルを生成して表示します。
 
@@ -58,7 +57,7 @@ Prometheus のscrape_config ファイルを取得するには、次の手順を�
 
 Prometheus サービスがTiDB Cloudからメトリクスを読み取った後、次のように Grafana GUI ダッシュボードを使用してメトリクスを視覚化できます。
 
-1.  TiDB Cloud [ここ](https://github.com/pingcap/docs/blob/release-6.1/tidb-cloud/monitor-prometheus-and-grafana-integration-grafana-dashboard-UI.json)の Grafana ダッシュボード JSON をダウンロードします。
+1.  TiDB Cloud [ここ](https://github.com/pingcap/docs/blob/master/tidb-cloud/monitor-prometheus-and-grafana-integration-grafana-dashboard-UI.json)の Grafana ダッシュボード JSON をダウンロードします。
 2.  [この JSON を独自の Grafana GUI にインポートします](https://grafana.com/docs/grafana/v8.5/dashboards/export-import/#import-dashboard)を指定すると、メトリクスが視覚化されます。
 3.  (オプション) パネルの追加または削除、データ ソースの変更、表示オプションの変更により、必要に応じてダッシュボードをカスタマイズします。
 
@@ -77,15 +76,23 @@ Grafana の使用方法の詳細については、 [Grafana のドキュメン�
 
 Prometheus は、TiDB クラスターの次のメトリック データを追跡します。
 
-| メトリクス名                                | メトリックタイプ | ラベル                                                                                                                   | 説明                              |
-| :------------------------------------ | :------- | :-------------------------------------------------------------------------------------------------------------------- | :------------------------------ |
-| tidbcloud_db_queries_total            | カウント     | SQL_type: `Select\|Insert\|...`<br/>クラスター名: `<cluster name>`<br/>インスタンス: `tidb-0\|tidb-1…`<br/>コンポーネント: `tidb`        | 実行されたステートメントの総数                 |
-| tidbcloud_db_failed_queries_total     | カウント     | タイプ: `planner:xxx\|executor:2345\|...`<br/>クラスター名: `<cluster name>`<br/>インスタンス: `tidb-0\|tidb-1…`<br/>コンポーネント: `tidb` | 実行エラーの合計数                       |
-| tidbcloud_db_connections              | ゲージ      | クラスター名: `<cluster name>`<br/>インスタンス: `tidb-0\|tidb-1…`<br/>コンポーネント: `tidb`                                            | TiDBサーバーの現在の接続数                 |
-| tidbcloud_db_query_duration_秒         | ヒストグラム   | SQL_type: `Select\|Insert\|...`<br/>クラスター名: `<cluster name>`<br/>インスタンス: `tidb-0\|tidb-1…`<br/>コンポーネント: `tidb`        | ステートメントの長さのヒストグラム               |
-| tidbcloud_node_storage_used_bytes     | ゲージ      | クラスター名: `<cluster name>`<br/>インスタンス: `tikv-0\|tikv-1…\|tiflash-0\|tiflash-1…`<br/>コンポーネント: `tikv\|tiflash`            | TiKV/ TiFlashノードのディスク使用量バイト     |
-| tidbcloud_node_storage_capacity_bytes | ゲージ      | クラスター名: `<cluster name>`<br/>インスタンス: `tikv-0\|tikv-1…\|tiflash-0\|tiflash-1…`<br/>コンポーネント: `tikv\|tiflash`            | TiKV/ TiFlashノードのディスク容量バイト      |
-| tidbcloud_node_cpu_seconds_total      | カウント     | クラスター名: `<cluster name>`<br/>インスタンス: `tidb-0\|tidb-1…\|tikv-0…\|tiflash-0…`<br/>コンポーネント: `tidb\|tikv\|tiflash`        | TiDB/TiKV/ TiFlashノードの CPU 使用率  |
-| tidbcloud_node_cpu_capacity_cores     | ゲージ      | クラスター名: `<cluster name>`<br/>インスタンス: `tidb-0\|tidb-1…\|tikv-0…\|tiflash-0…`<br/>コンポーネント: `tidb\|tikv\|tiflash`        | TiDB/TiKV/ TiFlashノードの CPU 制限コア |
-| tidbcloud_node_memory_used_bytes      | ゲージ      | クラスター名: `<cluster name>`<br/>インスタンス: `tidb-0\|tidb-1…\|tikv-0…\|tiflash-0…`<br/>コンポーネント: `tidb\|tikv\|tiflash`        | TiDB/TiKV/ TiFlashノードの使用メモリバイト  |
-| tidbcloud_node_memory_capacity_bytes  | ゲージ      | クラスター名: `<cluster name>`<br/>インスタンス: `tidb-0\|tidb-1…\|tikv-0…\|tiflash-0…`<br/>コンポーネント: `tidb\|tikv\|tiflash`        | TiDB/TiKV/ TiFlashノードのメモリ容量バイト  |
+| メトリクス名                                | メトリックタイプ | ラベル                                                                                                                   | 説明                                         |
+| :------------------------------------ | :------- | :-------------------------------------------------------------------------------------------------------------------- | :----------------------------------------- |
+| tidbcloud_db_queries_total            | カウント     | SQL_type: `Select\|Insert\|...`<br/>クラスター名: `<cluster name>`<br/>インスタンス: `tidb-0\|tidb-1…`<br/>コンポーネント: `tidb`        | 実行されたステートメントの総数                            |
+| tidbcloud_db_failed_queries_total     | カウント     | タイプ: `planner:xxx\|executor:2345\|...`<br/>クラスター名: `<cluster name>`<br/>インスタンス: `tidb-0\|tidb-1…`<br/>コンポーネント: `tidb` | 実行エラーの合計数                                  |
+| tidbcloud_db_connections              | ゲージ      | クラスター名: `<cluster name>`<br/>インスタンス: `tidb-0\|tidb-1…`<br/>コンポーネント: `tidb`                                            | TiDBサーバーの現在の接続数                            |
+| tidbcloud_db_query_duration_秒         | ヒストグラム   | SQL_type: `Select\|Insert\|...`<br/>クラスター名: `<cluster name>`<br/>インスタンス: `tidb-0\|tidb-1…`<br/>コンポーネント: `tidb`        | ステートメントの長さのヒストグラム                          |
+| tidbcloud_changefeed_latency          | ゲージ      | フィードIDの変更                                                                                                             | 変更フィードの上流と下流の間のデータ レプリケーションのレイテンシー         |
+| tidbcloud_changefeed_replica_rows     | ゲージ      | フィードIDの変更                                                                                                             | チェンジフィードが 1 秒あたりにダウンストリームに書き込むレプリケートされた行の数 |
+| tidbcloud_node_storage_used_bytes     | ゲージ      | クラスター名: `<cluster name>`<br/>インスタンス: `tikv-0\|tikv-1…\|tiflash-0\|tiflash-1…`<br/>コンポーネント: `tikv\|tiflash`            | TiKV/ TiFlashノードのディスク使用量バイト                |
+| tidbcloud_node_storage_capacity_bytes | ゲージ      | クラスター名: `<cluster name>`<br/>インスタンス: `tikv-0\|tikv-1…\|tiflash-0\|tiflash-1…`<br/>コンポーネント: `tikv\|tiflash`            | TiKV/ TiFlashノードのディスク容量バイト                 |
+| tidbcloud_node_cpu_seconds_total      | カウント     | クラスター名: `<cluster name>`<br/>インスタンス: `tidb-0\|tidb-1…\|tikv-0…\|tiflash-0…`<br/>コンポーネント: `tidb\|tikv\|tiflash`        | TiDB/TiKV/ TiFlashノードの CPU 使用率             |
+| tidbcloud_node_cpu_capacity_cores     | ゲージ      | クラスター名: `<cluster name>`<br/>インスタンス: `tidb-0\|tidb-1…\|tikv-0…\|tiflash-0…`<br/>コンポーネント: `tidb\|tikv\|tiflash`        | TiDB/TiKV/ TiFlashノードの CPU 制限コア            |
+| tidbcloud_node_memory_used_bytes      | ゲージ      | クラスター名: `<cluster name>`<br/>インスタンス: `tidb-0\|tidb-1…\|tikv-0…\|tiflash-0…`<br/>コンポーネント: `tidb\|tikv\|tiflash`        | TiDB/TiKV/ TiFlashノードの使用メモリバイト             |
+| tidbcloud_node_memory_capacity_bytes  | ゲージ      | クラスター名: `<cluster name>`<br/>インスタンス: `tidb-0\|tidb-1…\|tikv-0…\|tiflash-0…`<br/>コンポーネント: `tidb\|tikv\|tiflash`        | TiDB/TiKV/ TiFlashノードのメモリ容量バイト             |
+
+## FAQ {#faq}
+
+-   Grafana とTiDB Cloudコンソールで同じメトリクスが同時に異なる値を持つのはなぜですか?
+
+    Grafana とTiDB Cloudでは集計計算ロジックが異なるため、表示される集計値が異なる場合があります。 Grafana で`mini step`構成を調整して、より詳細なメトリック値を取得できます。

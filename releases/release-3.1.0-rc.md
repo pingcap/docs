@@ -47,12 +47,12 @@ TiDB Ansible バージョン: 3.1.0-rc
 
     -   TiDBBinlog
 
-        -   コンポーネント間の TLS 認証をサポート[#939](https://github.com/pingcap/tidb-binlog/pull/939)
+        -   コンポーネント間の TLS 認証をサポート[#931](https://github.com/pingcap/tidb-binlog/pull/931) [#937](https://github.com/pingcap/tidb-binlog/pull/937) [#939](https://github.com/pingcap/tidb-binlog/pull/939)
         -   Drainerに`kafka-client-id`構成項目を追加して、Kafka のクライアント ID [#929](https://github.com/pingcap/tidb-binlog/pull/929)を構成します。
 
     -   TiDB Lightning
 
-        -   TiDB Lightning [#275](https://github.com/pingcap/tidb-lightning/pull/275)のパフォーマンスを最適化する
+        -   TiDB Lightning [#281](https://github.com/pingcap/tidb-lightning/pull/281) [#275](https://github.com/pingcap/tidb-lightning/pull/275)のパフォーマンスを最適化する
         -   TiDB Lightning [#270](https://github.com/pingcap/tidb-lightning/pull/270)の TLS 認証をサポート
 
     -   バックアップと復元 (BR)
@@ -86,7 +86,7 @@ TiDB Ansible バージョン: 3.1.0-rc
 
     -   整合性チェック パラメータ[#7112](https://github.com/tikv/tikv/pull/7112)無効にすると、既存のキーをトランザクションに挿入し、すぐに削除することによって発生する競合チェックの失敗またはデータ インデックスの不整合の問題を修正しました。
     -   `TopN`符号なし整数[#7199](https://github.com/tikv/tikv/pull/7199)を比較するときの計算エラーを修正
-    -   Raftstoreにフロー制御メカニズムを導入して、フロー制御がないとログ追跡が遅くなり、クラスターがスタックする可能性があるという問題を解決します。トランザクションサイズが大きいため、TiKV サーバー間の再接続が頻繁に発生する可能性があるという問題[#7078](https://github.com/tikv/tikv/pull/7078)
+    -   Raftstoreにフロー制御メカニズムを導入して、フロー制御がないとログ追跡が遅くなり、クラスターがスタックする可能性があるという問題を解決します。トランザクションサイズが大きいため、TiKV サーバー間の再接続が頻繁に発生する可能性があるという問題[#7087](https://github.com/tikv/tikv/pull/7087) [#7078](https://github.com/tikv/tikv/pull/7078)
     -   レプリカに送信された保留中の読み取りリクエストが永続的にブロックされる可能性がある問題を修正します[#6543](https://github.com/tikv/tikv/pull/6543)
     -   スナップショット[#7249](https://github.com/tikv/tikv/pull/7249)を適用するとレプリカの読み取りがブロックされる可能性がある問題を修正します。
     -   リーダーを移動すると TiKV がpanicになる可能性がある問題を修正[#7240](https://github.com/tikv/tikv/pull/7240)

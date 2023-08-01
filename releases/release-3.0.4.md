@@ -46,7 +46,7 @@ TiDB Ansible バージョン: 3.0.4
     -   クエリに`SLEEP`関数 (たとえば、 `select 1 from (select sleep(1)) t;)` ) が含まれている場合、列のプルーニングによってクエリ[#11953](https://github.com/pingcap/tidb/pull/11953)中に無効な`sleep(1)`が発生する問題を修正します。
     -   クエリがテーブル データではなく列数のみに関係する場合は、インデックス スキャンを使用して IO を削減します[#12112](https://github.com/pingcap/tidb/pull/12112)
     -   MySQL [#12100](https://github.com/pingcap/tidb/pull/12100)との互換性を保つために、 `use index()`でインデックスが指定されていない場合はインデックスを使用しないでください。
-    -   `TopN`数が TiDB のトランザクション サイズ制限を超えているため、ステートメント`ANALYZE`が失敗する問題を修正するために、統計`CMSketch`の 1 レコードの数を厳密に制限します[#11914](https://github.com/pingcap/tidb/pull/11914)
+    -   `TopN`数が TiDB のトランザクション サイズ制限を超えているため、ステートメント`ANALYZE`が失敗する問題を修正するために、統計`CMSketch` 1 レコードの数を厳密に制限します[#11914](https://github.com/pingcap/tidb/pull/11914)
     -   `Update`ステートメント[#12483](https://github.com/pingcap/tidb/pull/12483)に含まれるサブクエリの変換時に発生したエラーを修正
     -   Limit 演算子を`IndexLookUpReader`実行ロジックにプッシュダウンすることで、 `select ... limit ... offset ...`ステートメントの実行パフォーマンスを最適化します[#12378](https://github.com/pingcap/tidb/pull/12378)
 -   SQL実行エンジン
@@ -98,7 +98,7 @@ TiDB Ansible バージョン: 3.0.4
     -   アイドル状態のクラスターでのファイル記述子のリークにより、プロセスが長時間実行されると TiKV プロセスが異常終了する可能性があるという TiKV の問題を修正します[#5567](https://github.com/tikv/tikv/pull/5567)
 -   保管所
     -   `txn_heart_beat` TiDB の悲観的ロックを MySQL の悲観的ロックと可能な限り一致させるための API をサポートします[#5507](https://github.com/tikv/tikv/pull/5507)
-    -   一部の状況でポイントクエリのパフォーマンスが低下する問題を修正[#5463](https://github.com/tikv/tikv/pull/5463)
+    -   一部の状況でポイントクエリのパフォーマンスが低下する問題を修正[#5495](https://github.com/tikv/tikv/pull/5495) [#5463](https://github.com/tikv/tikv/pull/5463)
 
 ## PD {#pd}
 
@@ -124,5 +124,5 @@ TiDB Ansible バージョン: 3.0.4
 -   TiDB Ansible に 2 つのパフォーマンス ツール`iosnoop`と`funcslower`を追加して、クラスターの状態をより適切に診断します[#946](https://github.com/pingcap/tidb-ansible/pull/946)
 -   パスワードの有効期限が切れた場合などの長い待ち時間に対処するために、raw モジュールをシェル モジュールに置き換えます[#949](https://github.com/pingcap/tidb-ansible/pull/949)
 -   TiDB 構成項目`txn_local_latches`のデフォルト値を`false`に更新します。
--   Grafana ダッシュボードの監視メトリクスとアラート ルールを最適化する[#969](https://github.com/pingcap/tidb-ansible/pull/963)
--   導入およびアップグレードの前に構成ファイルを確認してください[#972](https://github.com/pingcap/tidb-ansible/pull/972)
+-   Grafana ダッシュボードの監視メトリクスとアラート ルールを最適化する[#962](https://github.com/pingcap/tidb-ansible/pull/962) [#963](https://github.com/pingcap/tidb-ansible/pull/963) [#969](https://github.com/pingcap/tidb-ansible/pull/963)
+-   導入およびアップグレードの前に構成ファイルを確認してください[#934](https://github.com/pingcap/tidb-ansible/pull/934) [#972](https://github.com/pingcap/tidb-ansible/pull/972)

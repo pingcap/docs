@@ -41,7 +41,7 @@ TiDB Ansible バージョン: 3.0.0-rc.1
         -   サポート`SHOW GRANT` [#10016](https://github.com/pingcap/tidb/pull/10016)
         -   サポート`SET DEFAULT ROLE` [#9949](https://github.com/pingcap/tidb/pull/9949)
     -   サポート`GRANT ROLE` [#9721](https://github.com/pingcap/tidb/pull/9721)
-    -   TiDB を終了させる`whitelist`プラグインの`ConnectionEvent`エラーを修正[#9889](https://github.com/pingcap/tidb/pull/9889)
+    -   TiDB を終了させる`whitelist`プラグインの`ConnectionEvent`のエラーを修正[#9889](https://github.com/pingcap/tidb/pull/9889)
     -   読み取り専用ステートメントをトランザクション履歴に誤って追加する問題を修正[#9723](https://github.com/pingcap/tidb/pull/9723)
     -   `kill`ステートメントを改善して SQL の実行を停止し、リソースをより迅速に解放します[#9844](https://github.com/pingcap/tidb/pull/9844)
     -   起動オプション`config-check`を追加して、設定ファイル[#9855](https://github.com/pingcap/tidb/pull/9855)の有効性を確認します。
@@ -122,7 +122,7 @@ TiDB Ansible バージョン: 3.0.0-rc.1
     -   SST を TiKV [#4412](https://github.com/tikv/tikv/pull/4412)にアップロードする際のインポーターでの速度制限のサポート
     -   サイズごとのテーブルのインポートをサポートし、大きなテーブルのチェックサムと分析によるクラスターへの影響を軽減し、チェックサムと分析[#156](https://github.com/pingcap/tidb-lightning/pull/156)の成功率を向上させます。
     -   データソースファイルを TiDB の type.Datum として直接解析し、KV エンコーダからの余分な解析オーバーヘッドを節約することで、Lightning の SQL エンコードパフォーマンスが 50% 向上します[#145](https://github.com/pingcap/tidb-lightning/pull/145)
-    -   ログ形式を[#162](https://github.com/pingcap/tidb-lightning/pull/162)に変更します
+    -   ログ形式を[統一されたログ形式](https://github.com/tikv/rfcs/blob/master/text/0018-unified-log-format.md) [#162](https://github.com/pingcap/tidb-lightning/pull/162)に変更します
     -   構成ファイルが見つからない場合に使用するコマンド ライン オプションをいくつか追加します[#157](https://github.com/pingcap/tidb-lightning/pull/157)
 
 -   同期差分インスペクター

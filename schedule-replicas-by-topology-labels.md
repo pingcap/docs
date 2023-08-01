@@ -65,7 +65,7 @@ host = "<host>"
 
 > **ノート：**
 >
-> 現在、TiDB は、同じリージョン内にあるレプリカの照合と選択を`zone`ラベルに依存しています。この機能を使用するには、 [TiKV およびTiFlashの`labels`を構成する](#configure-labels-for-tikv-and-tiflash)を参照してください。
+> 現在、TiDB は、同じリージョン内にあるレプリカの照合と選択を`zone`ラベルに依存しています。この機能を使用するには、 [PD の`location-labels`の設定](#configure-location-labels-for-pd)の場合は`zone`を含める必要があり、 TiDB、TiKV、およびTiFlashに対して`labels`構成する場合は`zone`を構成する必要があります。詳細については、 [TiKV およびTiFlashの`labels`を構成する](#configure-labels-for-tikv-and-tiflash)を参照してください。
 
 ### PD の<code>location-labels</code>を構成する {#configure-code-location-labels-code-for-pd}
 

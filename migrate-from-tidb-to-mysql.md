@@ -108,7 +108,9 @@ summary: Learn how to migrate data from TiDB to MySQL-compatible databases.
 
 3.  データを復元します。
 
-    MyLoader (オープンソース ツール) を使用して、データをダウンストリーム MySQL インスタンスにインポートします。 MyLoaderのインストール方法と使用方法の詳細については、 [MyDumpler/MyLoader](https://github.com/mydumper/mydumper)を参照してください。次のコマンドを実行して、 Dumplingによってエクスポートされた完全なデータを MySQL にインポートします。
+    MyLoader (オープンソース ツール) を使用して、データをダウンストリーム MySQL インスタンスにインポートします。 MyLoaderのインストール方法と使用方法の詳細については、 [MyDumpler/MyLoader](https://github.com/mydumper/mydumper)を参照してください。 MyLoader v0.10 以前のバージョンを使用する必要があることに注意してください。上位バージョンでは、 Dumplingによってエクスポートされたメタデータ ファイルを処理できません。
+
+    次のコマンドを実行して、 Dumplingによってエクスポートされた完全なデータを MySQL にインポートします。
 
     ```shell
     myloader -h 127.0.0.1 -P 3306 -d ./dumpling_output/

@@ -31,17 +31,17 @@ PREPARE {prepared_statement_name} FROM '{prepared_statement_sql}';
 
 ### プリペアドステートメントを使用する {#use-the-prepared-statement}
 
-プリペアドステートメントは**ユーザー変数を**パラメータとしてのみ使用できるため、 [`SET`ステートメント](/sql-statements/sql-statement-set-variable.md)を使用して変数を設定します。
+プリペアドステートメントは**ユーザー変数を**パラメータとしてのみ使用できるため、 [`EXECUTE`文](/sql-statements/sql-statement-execute.md)がプリペアドステートメントを呼び出す前に、 [`SET`ステートメント](/sql-statements/sql-statement-set-variable.md)を使用して変数を設定します。
 
 ```sql
 SET @{parameter_name} = {parameter_value};
 EXECUTE {prepared_statement_name} USING @{parameter_name};
 ```
 
-|            パラメータ名           |                                                                説明                                                               |
-| :-------------------------: | :-----------------------------------------------------------------------------------------------------------------------------: |
-|      `{parameter_name}`     |                                                             ユーザー変数名                                                             |
-|     `{parameter_value}`     |                                                             ユーザー変数の値                                                            |
+|            パラメータ名           |                                          説明                                          |
+| :-------------------------: | :----------------------------------------------------------------------------------: |
+|      `{parameter_name}`     |                                        ユーザー変数名                                       |
+|     `{parameter_value}`     |                                       ユーザー変数の値                                       |
 | `{prepared_statement_name}` | 前処理ステートメントの名前[プリペアドステートメントを作成する](#create-a-prepared-statement)で定義された名前と同じである必要があります。 |
 
 詳細については[`EXECUTE`文](/sql-statements/sql-statement-execute.md)参照してください。
@@ -52,8 +52,8 @@ EXECUTE {prepared_statement_name} USING @{parameter_name};
 DEALLOCATE PREPARE {prepared_statement_name};
 ```
 
-|            パラメータ名           |                                                                説明                                                               |
-| :-------------------------: | :-----------------------------------------------------------------------------------------------------------------------------: |
+|            パラメータ名           |                                          説明                                          |
+| :-------------------------: | :----------------------------------------------------------------------------------: |
 | `{prepared_statement_name}` | 前処理ステートメントの名前[プリペアドステートメントを作成する](#create-a-prepared-statement)で定義された名前と同じである必要があります。 |
 
 詳細については[`DEALLOCATE`文](/sql-statements/sql-statement-deallocate.md)参照してください。
@@ -135,7 +135,7 @@ try (Connection connection = ds.getConnection()) {
 
 ### <code>INSERT</code>例 {#code-insert-code-example}
 
-例として[データの挿入](/develop/dev-guide-insert-data.md)を参照してください。
+例として[`books`テーブル](/develop/dev-guide-bookshop-schema-design.md#books-table)を使用すると、 `title = TiDB Developer Guide` 、 `type = Science & Technology` 、 `stock = 100` 、 `price = 0.0` 、および`published_at = NOW()` (挿入の現在の時刻) を持つ本を挿入する必要があります。 `books`テーブルの**主キー**に`AUTO_RANDOM`属性を指定する必要がないことに注意してください。データの挿入の詳細については、 [データの挿入](/develop/dev-guide-insert-data.md)を参照してください。
 
 <SimpleTab groupId="language">
 

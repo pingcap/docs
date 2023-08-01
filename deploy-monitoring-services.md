@@ -227,7 +227,7 @@ PDサーバー、TiKVサーバー、および TiDBサーバーの Grafana ダッ
 
 2.  サイドバー メニューで、 **[ダッシュボード**] -&gt; **[インポート]**をクリックして、 **[ダッシュボードのインポート]**ウィンドウを開きます。
 
-3.  **「.json ファイルのアップロード」**をクリックして JSON ファイルをアップロードします (TiDB Grafana 構成ファイルを[tikv/pd](https://github.com/tikv/pd/tree/master/metrics/grafana)からダウンロードします)。
+3.  **「.json ファイルのアップロード」**をクリックして JSON ファイルをアップロードします (TiDB Grafana 構成ファイルを[pingcap/tidb](https://github.com/pingcap/tidb/tree/master/metrics/grafana) 、 [ティクブ/ティクブ](https://github.com/tikv/tikv/tree/master/metrics/grafana) 、および[tikv/pd](https://github.com/tikv/pd/tree/master/metrics/grafana)からダウンロードします)。
 
     > **ノート：**
     >

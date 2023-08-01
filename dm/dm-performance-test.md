@@ -109,7 +109,7 @@ DM ワーカーのログを確認します。 `all data files have been finished
 
 #### データ移行タスクを作成する {#create-a-data-migration-task}
 
-1.  上流の MySQL のソースを作成します。 `source-id` ～ `source-1`を設定します（ [データソース構成をロードする](/dm/dm-manage-source.md#operate-data-source)を参照してください。
+1.  上流の MySQL のソースを作成します。 `source-id` ～ `source-1`を設定します（ [フルインポートベンチマークケース](#full-import-benchmark-case)でソースを作成している場合は、再度作成する必要はありません）。詳細は[データソース構成をロードする](/dm/dm-manage-source.md#operate-data-source)を参照してください。
 
 2.  DM 移行タスクを作成します ( `all`モード)。以下はタスク構成ファイルの例です。
 

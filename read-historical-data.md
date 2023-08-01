@@ -32,7 +32,7 @@ TiDB は、特別なクライアントやドライバーを使用せずに、標
 
 > **ノート：**
 >
-> TiDB トランザクションのタイムスタンプは配置Driver(PD) によって割り当てられるため、保存されたデータのバージョンも PD によって割り当てられたタイムスタンプに基づいてマークされます。スナップショットが作成されるとき、バージョン番号は`tidb_snapshot`変数の値に基づきます。 TiDBサーバーと PDサーバーのローカル時刻に大きな差異がある場合は、PDサーバーの時刻を使用します。
+> TiDB トランザクションのタイムスタンプは配置Driver(PD) によって割り当てられるため、保存されたデータのバージョンも PD によって割り当てられたタイムスタンプに基づいてマークされます。スナップショットが作成されるとき、バージョン番号は`tidb_snapshot`変数の値に基づきます。 TiDBサーバーと PDサーバーのローカル時刻に大きな差がある場合は、PDサーバーの時刻を使用します。
 
 履歴バージョンからデータを読み取った後、現在のセッションを終了するか、 `SET`ステートメントを使用して`tidb_snapshot`変数の値を &quot;&quot; (空の文字列) に設定することで、最新バージョンからデータを読み取ることができます。
 
@@ -172,6 +172,6 @@ SET GLOBAL tidb_gc_life_time="60m";
 
 古いバージョンからデータを復元するには、次のいずれかの方法を使用できます。
 
--   単純な場合は、変数`tidb_snapshot`設定した後に`SELECT`使用し、出力をコピーして貼り付けるか、 `SELECT ... INTO LOCAL OUTFLE`を使用し、後でデータをインポートするために`LOAD DATA`を使用します。
+-   単純な場合は、変数`tidb_snapshot`設定した後に[`SELECT`](/sql-statements/sql-statement-select.md)使用して出力をコピー＆ペーストするか、 `SELECT ... INTO OUTFILE`を使用してから[`LOAD DATA`](/sql-statements/sql-statement-load-data.md)を使用して後でデータをインポートします。
 
--   履歴スナップショットをエクスポートするには[Dumpling](/dumpling-overview.md#export-historical-data-snapshots-of-tidb)使用します。 Dumpling は、大規模なデータセットのエクスポートに優れたパフォーマンスを発揮します。
+-   履歴スナップショットをエクスポートするには[Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview#export-historical-data-snapshots-of-tidb)使用します。 Dumpling は、大規模なデータセットのエクスポートに優れたパフォーマンスを発揮します。

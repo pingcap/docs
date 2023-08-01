@@ -7,7 +7,7 @@ summary: Learn the directory structure, initial migration rules and data purge o
 
 データ移行 (DM) リレー ログは、データベースの変更を説明するイベントを含む番号付きファイルのいくつかのセットと、使用されるすべてのリレー ログ ファイルの名前を含むインデックス ファイルで構成されます。
 
-リレーログが有効になると、DM-worker はアップストリームのbinlogをローカル構成ディレクトリに自動的に移行します ( TiUPを使用して DM が展開されている場合、デフォルトの移行ディレクトリは`<deploy_dir>/<relay_log>`です)。デフォルト値`<relay_log>`は`relay-dir`ですが、 [DM ワーカー構成ファイル](/dm/dm-worker-configuration-file.md)の`relay-dir`から 9 までのローカル構成ディレクトリを構成できます。これは、アップストリーム データベースの構成ファイルよりも優先されます。
+リレーログが有効になると、DM-worker はアップストリームのbinlogをローカル構成ディレクトリに自動的に移行します ( TiUPを使用して DM が展開されている場合、デフォルトの移行ディレクトリは`<deploy_dir>/<relay_log>`です)。デフォルト値`<relay_log>`は`relay-dir`ですが、 [アップストリーム データベースコンフィグレーションファイル](/dm/dm-source-configuration-file.md)で変更できます。 v5.4.0 以降、 [DM ワーカー設定ファイル](/dm/dm-worker-configuration-file.md)の`relay-dir`から 9 までのローカル構成ディレクトリを構成できます。これは、アップストリーム データベースの構成ファイルよりも優先されます。
 
 ## ユーザーシナリオ {#user-scenarios}
 

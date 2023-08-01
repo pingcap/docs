@@ -7,7 +7,7 @@ summary: Learn how to use PingCAP Clinic to collect, upload, and view cluster di
 
 このドキュメントでは、 PingCAPクリニック診断サービス (PingCAPクリニック) を使用してクラスター診断データを迅速に収集、アップロード、および表示する方法について説明します。
 
-PingCAPクリニック は、 2 つのコンポーネントで構成されています[PingCAPクリニックの概要](/clinic/clinic-introduction.md)を参照してください。
+PingCAPクリニック は、 2 つのコンポーネントで構成されています[クライアントを診断する](https://github.com/pingcap/diag) (Diag と短縮) と Clinic Server クラウド サービス (Clinic Server と短縮)。これら 2 つのコンポーネントの詳細については、 [PingCAPクリニックの概要](/clinic/clinic-introduction.md)を参照してください。
 
 ## ユーザーシナリオ {#user-scenarios}
 
@@ -16,7 +16,7 @@ PingCAPクリニック は、 2 つのコンポーネントで構成されてい
 
 > **ノート：**
 >
-> -   データを収集してアップロードする次の方法は[TiDB Operator環境向けPingCAPクリニック](https://docs.pingcap.com/tidb-in-kubernetes/stable/clinic-user-guide)を参照してください。
+> -   データを収集してアップロードする次の方法は[TiUPを使用してデプロイされたクラスター](/production-deployment-using-tiup.md)に**のみ**適用されます。 TiDB Operator on Kubernetes を使用してデプロイされたクラスターについては、 [TiDB Operator環境向けPingCAPクリニック](https://docs.pingcap.com/tidb-in-kubernetes/stable/clinic-user-guide)を参照してください。
 > -   PingCAPクリニックによって収集された診断データは、クラスターの問題のトラブルシューティングに**のみ**使用されます。
 
 ## 前提条件 {#prerequisites}

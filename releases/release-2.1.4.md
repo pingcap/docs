@@ -29,7 +29,7 @@ title: TiDB 2.1.4 Release Notes
 ## ツール {#tools}
 
 -   雷
-    -   メモリ使用量を最適化する[#108](https://github.com/pingcap/tidb-lightning/pull/108)
+    -   メモリ使用量を最適化する[#107](https://github.com/pingcap/tidb-lightning/pull/107) 、 [#108](https://github.com/pingcap/tidb-lightning/pull/108)
     -   ダンプ ファイルの余分な解析を避けるために、ダンプ ファイルのチャンク分離を削除します[#109](https://github.com/pingcap/tidb-lightning/pull/109)
     -   ダンプ ファイルの読み取りの同時 I/O を制限して、キャッシュ ミスが多すぎることによるパフォーマンスの低下を回避します[#110](https://github.com/pingcap/tidb-lightning/pull/110)
     -   単一テーブルのデータのバッチインポートをサポートし、インポートの安定性を向上[#110](https://github.com/pingcap/tidb-lightning/pull/113)

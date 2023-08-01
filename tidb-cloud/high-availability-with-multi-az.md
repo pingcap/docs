@@ -7,7 +7,7 @@ summary: TiDB Cloud supports high availability with Multi-AZ deployments.
 
 TiDB は、 Raftコンセンサス アルゴリズムを使用して、データの可用性が高く、 Raftグループ内のstorage全体に安全に複製されることを保証します。マシンやデータセンターの障害から保護するために、データはstorageノード間で冗長的にコピーされ、異なるアベイラビリティ ゾーンに配置されます。 TiDB は自動フェイルオーバーにより、サービスが常に稼働していることを保証します。
 
-TiDB Cloudクラスターは、TiDB ノード、TiKV ノード、 TiFlashノードの 3 つの主要コンポーネントで構成されます。Dedicated Tierの各コンポーネントの高可用性実装は次のとおりです。
+TiDB Cloudクラスターは、TiDB ノード、TiKV ノード、 TiFlashノードの 3 つの主要コンポーネントで構成されます。 TiDB Dended の各コンポーネントの高可用性実装は次のとおりです。
 
 -   **TiDB ノード**
 

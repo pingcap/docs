@@ -47,4 +47,4 @@ PD 側でログ編集を有効にするには、値[`security.redact-info-log`](
 
 ## TiFlash側でのログ編集 {#log-redaction-in-tiflash-side}
 
-TiFlash側でログ編集を有効にするには、 tflash-server の[`security.redact-info-log`](/tiflash/tiflash-configuration.md#configure-the-tiflash-learnertoml-file)値の両方を`true`に設定します。どちらの構成値もデフォルトで`false`に設定されており、これはログ編集が無効であることを意味します。
+TiFlash側でログ編集を有効にするには、 tflash-server の[`security.redact_info_log`](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file)値と tflash-learner の[`security.redact-info-log`](/tiflash/tiflash-configuration.md#configure-the-tiflash-learnertoml-file)値の両方を`true`に設定します。どちらの構成値もデフォルトで`false`に設定されており、これはログ編集が無効であることを意味します。

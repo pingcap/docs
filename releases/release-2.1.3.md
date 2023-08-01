@@ -31,7 +31,7 @@ title: TiDB 2.1.3 Release Notes
     -   `ADD INDEX`の同時変更をすぐに有効にするサポート[#8786](https://github.com/pingcap/tidb/pull/8786)
     -   `UPDATE`プロセス中に発生するpanicの問題を修正`ADD COLUMN`場合によっては[#8906](https://github.com/pingcap/tidb/pull/8906)
     -   場合によってはテーブル パーティションが同時に作成される問題を修正[#8902](https://github.com/pingcap/tidb/pull/8902)
-    -   `utf8`文字セットから`utf8mb4` [#9152](https://github.com/pingcap/tidb/pull/9152)への変換をサポート
+    -   `utf8`文字セットから`utf8mb4` [#8951](https://github.com/pingcap/tidb/pull/8951) [#9152](https://github.com/pingcap/tidb/pull/9152)への変換をサポート
     -   シャードビットのオーバーフローの問題を修正[#8976](https://github.com/pingcap/tidb/pull/8976)
     -   `SHOW CREATE TABLE` [#9053](https://github.com/pingcap/tidb/pull/9053)の列文字セットの出力をサポート
     -   `utf8mb4` [#8818](https://github.com/pingcap/tidb/pull/8818)の varchar 型カラムの最大長制限の問題を修正

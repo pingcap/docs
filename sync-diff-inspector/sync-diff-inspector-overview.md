@@ -289,5 +289,5 @@ REPLACE INTO `sbtest`.`sbtest99`(`id`,`k`,`c`,`pad`) VALUES (3700000,2501808,'he
 -   sync-diff-inspector はデータをチェックするときに一定量のサーバーリソースを消費します。営業時間のピーク時に sync-diff-inspector を使用してデータをチェックすることは避けてください。
 -   MySQL のデータと TiDB のデータを比較する前に、テーブルの照合順序構成に注意してください。主キーまたは一意キーが`varchar`タイプで、MySQL の照合構成が TiDB の照合順序構成と異なる場合、照合順序順序の問題により、最終チェック結果が正しくない可能性があります。 sync-diff-inspector 構成ファイルに照合順序を追加する必要があります。
 -   sync-diff-inspector は、まず TiDB 統計に従ってデータをチャンクに分割します。統計の正確性を保証する必要があります。 TiDB サーバーの*ワークロードが軽い*場合は、 `analyze table {table_name}`コマンドを手動で実行できます。
--   `table-rules`に特に注意してください。 `schema-pattern="test1"` `table-pattern = "t_1"`設定する`target-schema="test2"` 、 `target-table = "t_2"` `test1`ソース データベースの`t_1`スキーマと`test2` 。対象データベース内の`t_2`スキーマが比較されます。シャーディングは sync-diff-inspector でデフォルトで有効になっているため、ソース データベースに`test2` . `t_2`表、 `test1` 。 `t_1`テーブルと`test2` 。シャーディングとして機能するソース データベース内の`t_2`テーブルは、 `test2`と比較されます。 `t_2`ターゲットデータベースのテーブル。
+-   `table-rules`に特に注意してください。 `schema-pattern="test1"` `table-pattern = "t_1"`設定すると`target-schema="test2"` `target-table = "t_2"` `test1`ソース データベースの`t_1`スキーマと`test2` 。対象データベース内の`t_2`スキーマが比較されます。シャーディングは sync-diff-inspector でデフォルトで有効になっているため、ソース データベースに`test2` . `t_2`表、 `test1` 。 `t_1`テーブルと`test2` 。シャーディングとして機能するソース データベース内の`t_2`テーブルは、 `test2`と比較されます。 `t_2`ターゲットデータベースのテーブル。
 -   生成された SQL ファイルはデータ修復の参考としてのみ使用されるため、これらの SQL ステートメントを実行してデータを修復する前に確認する必要があります。

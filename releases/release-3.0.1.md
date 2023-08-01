@@ -27,7 +27,7 @@ TiDB Ansible バージョン: 3.0.1
 -   `UPDATE … SELECT`ステートメントの`SELECT`サブクエリが`UPDATE`式の列の解析に失敗し、列が誤ってプルーニングされた場合にエラーが報告される問題を修正します[#11252](https://github.com/pingcap/tidb/pull/11252)
 -   ポイント クエリ中に列が複数回クエリされ、返された結果が NULL である場合に発生するpanicの問題を修正します[#11226](https://github.com/pingcap/tidb/pull/11226)
 -   `RAND`関数[#11169](https://github.com/pingcap/tidb/pull/11169)の使用時に非スレッド セーフ`rand.Rand`によって引き起こされるデータ競合の問題を修正します。
--   `oom-action="cancel"`を設定した場合、SQL文のメモリ使用量が[#11004](https://github.com/pingcap/tidb/pull/11004)を超えても実行がキャンセルされず、返される結果が正しくない場合がある不具合を修正
+-   `oom-action="cancel"`を設定した場合、SQL文のメモリ使用量が閾値を超えても実行がキャンセルされず、返される結果が正しくない場合がある不具合を[#11004](https://github.com/pingcap/tidb/pull/11004)
 -   MemTracker のメモリ使用量が正しくクリーンアップされていないため、メモリ使用量が`0`ではないことが`SHOW PROCESSLIST`表示される問題を修正[#10970](https://github.com/pingcap/tidb/pull/10970)
 -   整数と非整数の比較結果が正しくない場合があるバグを修正[#11194](https://github.com/pingcap/tidb/pull/11194)
 -   明示的なトランザクション[#11196](https://github.com/pingcap/tidb/pull/11196)でテーブルパーティションに対するクエリに述語が含まれる場合、クエリ結果が正しくないバグを修正
@@ -52,7 +52,7 @@ TiDB Ansible バージョン: 3.0.1
 
 -   統計情報[#5060](https://github.com/tikv/tikv/pull/5060)に BLOB ファイルのサイズの統計を追加します。
 -   プロセス終了時にメモリリソースが誤ってクリーンアップされることによって引き起こされるコア ダンプの問題を修正します[#5053](https://github.com/tikv/tikv/pull/5053)
--   Titan エンジン[#4836](https://github.com/tikv/tikv/pull/4836)に関連するすべての監視メトリクスを追加します。
+-   Titan エンジン[#4772](https://github.com/tikv/tikv/pull/4772) 、 [#4836](https://github.com/tikv/tikv/pull/4836)に関連するすべての監視メトリクスを追加します。
 -   ファイル ハンドルの統計が不正確であるために使用可能なファイル ハンドルがないという問題を回避するために、開いているファイル ハンドルの数をカウントするときに Titan の開いているファイル ハンドルの数を追加します[#5026](https://github.com/tikv/tikv/pull/5026)
 -   特定の CF [#4991](https://github.com/tikv/tikv/pull/4991)で Titan エンジンを有効にするかどうかを決定するには、 `blob_run_mode`を設定します。
 -   読み取り操作で悲観的トランザクションのコミット情報を取得できない問題を修正[#5067](https://github.com/tikv/tikv/pull/5067)
@@ -83,8 +83,8 @@ TiDB Lightning
 
 ## TiDB Ansible {#tidb-ansible}
 
--   ansible コマンドとその`jmespath`および`jinja2`依存関係パッケージ[#813](https://github.com/pingcap/tidb-ansible/pull/813)の事前チェック機能を追加します。
+-   ansible コマンドとその`jmespath`および`jinja2`依存関係パッケージ[#803](https://github.com/pingcap/tidb-ansible/pull/803) 、 [#813](https://github.com/pingcap/tidb-ansible/pull/813)の事前チェック機能を追加します。
 -   Pumpに`stop-write-at-available-space`パラメータ (デフォルトでは 10 GiB) を追加して、利用可能なディスク容量がパラメータ値[#806](https://github.com/pingcap/tidb-ansible/pull/806)未満の場合にPumpでのbinlogファイルの書き込みを停止します。
 -   TiKV監視情報のI/O監視項目を更新し、新バージョン[#820](https://github.com/pingcap/tidb-ansible/pull/820)の監視コンポーネントに対応させます。
--   PD監視情報を更新し、ディスクパフォーマンスダッシュボード[#817](https://github.com/pingcap/tidb-ansible/pull/817)でDisk Latencyが空になる異常を修正
+-   PD監視情報を更新し、ディスクパフォ​​ーマンスダッシュボード[#817](https://github.com/pingcap/tidb-ansible/pull/817)でDisk Latencyが空になる異常を修正
 -   TiKV 詳細ダッシュボードに Titan の監視項目を追加します[#824](https://github.com/pingcap/tidb-ansible/pull/824)

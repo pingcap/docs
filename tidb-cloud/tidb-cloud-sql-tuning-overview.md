@@ -23,7 +23,7 @@ TiDB Cloud には、クラスター上の遅いクエリの分析に役立つツ
 
 ### 「診断」タブの「ステートメントを使用」 {#use-statement-on-the-diagnosis-tab}
 
-TiDB Cloudコンソールには、 **[SQL 診断**] タブに**<a href="/tidb-cloud/tune-performance.md#statement-analysis">[SQL ステートメント]</a>**サブタブがあります。クラスター上のすべてのデータベースの SQL ステートメントの実行統計を収集します。これを使用すると、合計または 1 回の実行で長時間かかる SQL ステートメントを特定して分析できます。
+TiDB Cloudコンソールには、 **[診断]**タブに**<a href="/tidb-cloud/tune-performance.md#statement-analysis">[SQL ステートメント]</a>**サブタブがあります。クラスター上のすべてのデータベースの SQL ステートメントの実行統計を収集します。これを使用すると、合計または 1 回の実行で長時間かかる SQL ステートメントを特定して分析できます。
 
 このサブタブでは、同じ構造を持つ SQL クエリ (クエリ パラメータが一致しない場合でも) が同じ SQL ステートメントにグループ化されることに注意してください。たとえば、 `SELECT * FROM employee WHERE id IN (1, 2, 3)`と`select * from EMPLOYEE where ID in (4, 5)`はどちらも同じ SQL ステートメント`select * from employee where id in (...)`の一部です。
 
@@ -49,7 +49,7 @@ TiDB によって選択された実行計画が最適でない場合は、 EXPLA
 
 これらの等価性の変更により、論理実行プランでのクエリの処理が容易になります。等価性が変更された後、TiDB は元のクエリと同等のクエリ プラン構造を取得し、データ分散とオペレーターの特定の実行オーバーヘッドに基づいて最終的な実行プランを取得します。詳細については、 [SQLの物理的な最適化](/sql-physical-optimization.md)を参照してください。
 
-また、TiDB は、 [準備された実行計画キャッシュ](/sql-prepared-plan-cache.md)で紹介したように、 `PREPARE`ステートメントの実行時に実行プランの作成オーバーヘッドを削減するために、実行プラン キャッシュを有効にすることを選択できます。
+また、TiDB は、 [実行計画キャッシュの準備](/sql-prepared-plan-cache.md)で紹介したように、 `PREPARE`ステートメントの実行時に実行プランの作成オーバーヘッドを削減するために、実行プラン キャッシュを有効にすることを選択できます。
 
 ### フルテーブルスキャンを最適化する {#optimize-full-table-scan}
 

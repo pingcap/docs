@@ -29,12 +29,12 @@ title: TiDB 2.0.9 Release Notes
 -   場合によっては`UNION`ステートメントの予期しないエラーを修正します[#8318](https://github.com/pingcap/tidb/pull/8318)
 -   DDL ジョブをキャンセルしても、場合によってはスキーマがロールバックされない問題を修正します[#8312](https://github.com/pingcap/tidb/pull/8312)
 -   `tidb_max_chunk_size`をグローバル変数[#8333](https://github.com/pingcap/tidb/pull/8333)に変更します
--   オーバーバウンドスキャンを避けるために、ticlient の`Scan`コマンドに上限を追加します[#8310](https://github.com/pingcap/tidb/pull/8310)
+-   オーバーバウンドスキャンを避けるために、ticlient の`Scan`コマンドに上限を追加します[#8309](https://github.com/pingcap/tidb/pull/8309) [#8310](https://github.com/pingcap/tidb/pull/8310)
 
 ## PD {#pd}
 
 -   etcd の起動失敗により PDサーバーが停止する問題を修正[#1267](https://github.com/pingcap/pd/pull/1267)
--   `pd-ctl`リージョンキーの読み取りに関連する問題を修正します[#1308](https://github.com/pingcap/pd/pull/1308)
+-   `pd-ctl`リージョンキーの読み取りに関連する問題を修正します[#1298](https://github.com/pingcap/pd/pull/1298) [#1299](https://github.com/pingcap/pd/pull/1299) [#1308](https://github.com/pingcap/pd/pull/1308)
 -   `regions/check` API が間違った結果を返す問題を修正[#1311](https://github.com/pingcap/pd/pull/1311)
 -   PD 参加失敗後に PD が参加を再開できない問題を修正[#1279](https://github.com/pingcap/pd/pull/1279)
 

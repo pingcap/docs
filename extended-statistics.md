@@ -63,7 +63,7 @@ ALTER TABLE table_name ADD STATS_EXTENDED IF NOT EXISTS stats_name stats_type(co
 
 `mysql.stats_extended`テーブルの各行には`version`列があります。行が更新されると、 `version`の値が増加します。このように、TiDB はテーブルを完全ではなく段階的にメモリにロードします。
 
-TiDB は、キャッシュがテーブル内のデータと同じに保たれるように、定期的に`mysql.stats_extended`ロードします。
+TiDB は、キャッシュがテーブル内のデータと同じに保たれるように、定期的に`mysql.stats_extended`をロードします。
 
 > **警告：**
 >

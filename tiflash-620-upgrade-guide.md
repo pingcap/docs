@@ -54,7 +54,7 @@ TiFlashプロキシは v6.1.0 でアップグレードされます (TiKV v6.0.0 
 
 ## v5.x または v6.0 から v6.2 へ {#from-v5-x-or-v6-0-to-v6-2}
 
-TiDB v6.2 では、 TiFlashのデータstorage形式が V3 バージョンにアップグレードされます。したがって、 TiFlash をv5.x または v6.0 から v6.2 にアップグレードする場合は、 [動的枝刈り](#dynamic-pruning)の機能変更に加えて、PageStorage の機能変更にも注意する必要があります。
+TiDB v6.2 では、 TiFlashのデータstorage形式が V3 バージョンにアップグレードされます。したがって、 TiFlash をv5.x または v6.0 から v6.2 にアップグレードする場合は、 [TiFlashプロキシ](#tiflash-proxy)と[動的枝刈り](#dynamic-pruning)の機能変更に加えて、PageStorage の機能変更にも注意する必要があります。
 
 ### ページストレージ {#pagestorage}
 

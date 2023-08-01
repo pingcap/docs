@@ -11,7 +11,7 @@ TiDB は統計を使用して決定します[どのインデックスを選択�
 
 `tidb_analyze_version`変数は、TiDB によって収集される統計を制御します。現在、統計の 2 つのバージョン、 `tidb_analyze_version = 1`と`tidb_analyze_version = 2`がサポートされています。
 
--   オンプレミス TiDB の場合、v5.1.0 より前のこの変数のデフォルト値は`1`です。 v5.3.0 以降のバージョンでは、この変数のデフォルト値は`2`です。クラスターが v5.3.0 より前のバージョンから v5.3.0 以降にアップグレードされた場合、デフォルト値の`tidb_analyze_version`は変更されません。
+-   TiDB セルフホストの場合、v5.1.0 より前のこの変数のデフォルト値は`1`です。 v5.3.0 以降のバージョンでは、この変数のデフォルト値は`2`です。クラスターが v5.3.0 より前のバージョンから v5.3.0 以降にアップグレードされた場合、デフォルト値の`tidb_analyze_version`は変更されません。
 -   TiDB Cloudの場合、この変数のデフォルト値は`1`です。
 
 バージョン 1 と比較して、バージョン 2 の統計は、データ量が膨大な場合にハッシュの衝突によって引き起こされる潜在的な不正確さを回避します。また、ほとんどのシナリオで推定精度も維持されます。
@@ -125,7 +125,7 @@ Count-Min Sketch はハッシュ構造であるため、ハッシュの衝突が
 
 v5.3.0 より前では、TiDB はリザーバー サンプリング方式を使用して統計を収集します。 v5.3.0 以降、TiDB バージョン 2 統計では、デフォルトでベルヌーイ サンプリング法を使用して統計が収集されます。貯留層サンプリング方法を再利用するには、 `WITH NUM SAMPLES`ステートメントを使用します。
 
-現在のサンプリング レートは、適応アルゴリズムに基づいて計算されます。 [`TABLE_STORAGE_STATS`](/information-schema/information-schema-table-storage-stats.md)表の`TABLE_KEYS`列を別の参照として使用して、サンプリング レートを計算できます。
+現在のサンプリング レートは、適応アルゴリズムに基づいて計算されます。 [`SHOW STATS_META`](/sql-statements/sql-statement-show-stats-meta.md)を使用してテーブル内の行数を確認できる場合、この行数を使用して 100,000 行に対応するサンプリング レートを計算できます。この数値を確認できない場合は、 [`TABLE_STORAGE_STATS`](/information-schema/information-schema-table-storage-stats.md)表の`TABLE_KEYS`列を別の参照として使用して、サンプリング レートを計算できます。
 
 <CustomContent platform="tidb">
 
@@ -461,7 +461,7 @@ v5.4.0 以降、TiDB は一部の`ANALYZE`構成の永続化をサポートし�
 
 <CustomContent platform="tidb">
 
-`ANALYZE`構成永続機能はデフォルトで有効になっています (デフォルトでは、システム変数`tidb_analyze_version`は`2` `tidb_persist_analyze_options` `ON`です)。
+`ANALYZE`構成永続機能はデフォルトで有効`ON`なっています (デフォルトでは、システム変数`tidb_analyze_version`は`2`は`tidb_persist_analyze_options`です)。
 
 </CustomContent>
 

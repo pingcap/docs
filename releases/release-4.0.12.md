@@ -126,7 +126,7 @@ TiDB バージョン: 4.0.12
 
     -   バックアップと復元 (BR)
 
-        -   ターゲットパスがバケット名[#733](https://github.com/pingcap/br/pull/733)の場合、s3storageの`WalkDir` `nil`を返すバグを修正
+        -   ターゲットパスがバケット名[#733](https://github.com/pingcap/br/pull/733)の場合、s3storageの`WalkDir` `nil`返すバグを修正
         -   `status`ポートが TLS [#839](https://github.com/pingcap/br/pull/839)で提供されないバグを修正
 
     -   TiDB Lightning

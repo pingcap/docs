@@ -13,8 +13,8 @@ summary: Learn about how to insert data.
 
 このドキュメントを読む前に、以下を準備する必要があります。
 
--   [TiDB Cloud(Serverless Tier) で TiDBクラスタを構築する](/develop/dev-guide-build-cluster-in-cloud.md) 。
--   [セカンダリインデックスの作成](/develop/dev-guide-create-secondary-indexes.md)を読み取ります
+-   [TiDB サーバーレスクラスタを構築する](/develop/dev-guide-build-cluster-in-cloud.md) 。
+-   [スキーマ設計の概要](/develop/dev-guide-schema-design-overview.md) 、 [データベースを作成する](/develop/dev-guide-create-database.md) 、 [テーブルを作成する](/develop/dev-guide-create-table.md) 、および[セカンダリインデックスの作成](/develop/dev-guide-create-secondary-indexes.md)を読み取ります
 
 ## 行の挿入 {#insert-rows}
 
@@ -38,7 +38,7 @@ summary: Learn about how to insert data.
     INSERT INTO `player` (`id`, `coins`, `goods`) VALUES (3, 300, 5);
     ```
 
-一般に、 `multi-line insertion statement`倍数の`single-line insertion statements`よりも高速に実行されます。
+一般に、 `multi-line insertion statement`​​倍数の`single-line insertion statements`よりも高速に実行されます。
 
 <SimpleTab>
 <div label="SQL">
@@ -82,13 +82,13 @@ try (Connection connection = ds.getConnection()) {
 
 デフォルトの MySQL JDBCDriver設定により、一括挿入のパフォーマンスを向上させるには、いくつかのパラメーターを変更する必要があります。
 
-|            パラメータ           |                  意味                 |                                                                                           推奨シナリオ                                                                                           |        推奨されるコンフィグレーション        |
-| :------------------------: | :---------------------------------: | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :---------------------------: |
-|    `useServerPrepStmts`    |   サーバー側を使用してプリペアドステートメントを有効にするかどうか  |                                                                                 プリペアドステートメントを複数回使用する必要がある場合                                                                                |             `true`            |
-|      `cachePrepStmts`      |   クライアントが準備されたステートメントをキャッシュするかどうか   |                                                                                 `useServerPrepStmts=true`時                                                                                 |             `true`            |
-|   `prepStmtCacheSqlLimit`  | プリペアドステートメントの最大サイズ (デフォルトでは 256 文字) |                                                                                 プリペアドステートメントが 256 文字を超える場合                                                                                 | プリペアドステートメントの実際のサイズに応じて構成されます |
-|     `prepStmtCacheSize`    |  プリペアドステートメントキャッシュの最大数 (デフォルトでは 25) |                                                                                  準備されたステートメントの数が 25 を超える場合                                                                                 |   実際の準備済みステートメントの数に応じて構成されます  |
-| `rewriteBatchedStatements` |     **Batched**ステートメントを書き換えるかどうか    |                                                                                         バッチ操作が必要な場合                                                                                        |             `true`            |
+|            パラメータ           |                  意味                 |                                                                推奨シナリオ                                                                |        推奨されるコンフィグレーション        |
+| :------------------------: | :---------------------------------: | :----------------------------------------------------------------------------------------------------------------------------------: | :---------------------------: |
+|    `useServerPrepStmts`    |   サーバー側を使用してプリペアドステートメントを有効にするかどうか  |                                                      プリペアドステートメントを複数回使用する必要がある場合                                                     |             `true`            |
+|      `cachePrepStmts`      |   クライアントが準備されたステートメントをキャッシュするかどうか   |                                                      `useServerPrepStmts=true`時                                                      |             `true`            |
+|   `prepStmtCacheSqlLimit`  | プリペアドステートメントの最大サイズ (デフォルトでは 256 文字) |                                                      プリペアドステートメントが 256 文字を超える場合                                                      | プリペアドステートメントの実際のサイズに応じて構成されます |
+|     `prepStmtCacheSize`    |  プリペアドステートメントキャッシュの最大数 (デフォルトでは 25) |                                                       準備されたステートメントの数が 25 を超える場合                                                      |   実際の準備済みステートメントの数に応じて構成されます  |
+| `rewriteBatchedStatements` |     **Batched**ステートメントを書き換えるかどうか    |                                                              バッチ操作が必要な場合                                                             |             `true`            |
 |     `allowMultiQueries`    |              バッチ操作を開始する             | `rewriteBatchedStatements = true`と`useServerPrepStmts = true`の場合、 [クライアントのバグ](https://bugs.mysql.com/bug.php?id=96623)これを設定する必要があるため |             `true`            |
 
 MySQL JDBC Driver は、 `useConfigs`統合構成も提供します。 `maxPerformance`で構成すると、一連の構成を構成することと同じになります。 `mysql:mysql-connector-java:8.0.28`例にとると、 `useConfigs=maxPerformance`には次のものが含まれます。
@@ -234,11 +234,11 @@ Python の完全な例については、以下を参照してください。
 
 一括挿入に推奨されるツールは次のとおりです。
 
--   データのエクスポート: [Dumpling](/dumpling-overview.md) . MySQL または TiDB データをローカルまたは Amazon S3 にエクスポートできます。
+-   データのエクスポート: [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview) . MySQL または TiDB データをローカルまたは Amazon S3 にエクスポートできます。
 
 <CustomContent platform="tidb">
 
--   データインポート: [Amazon Auroraから TiDB へのデータの移行](/migrate-aurora-to-tidb.md)をインポートできます。ローカル ディスクまたは Amazon S3 クラウド ディスクからのデータの読み取りもサポートします。
+-   データインポート: [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md) . **Dumpling の**エクスポート データ、 **CSV**ファイル、または[Amazon Auroraから TiDB へのデータの移行](/migrate-aurora-to-tidb.md)をインポートできます。ローカル ディスクまたは Amazon S3 クラウド ディスクからのデータの読み取りもサポートします。
 -   データ複製: [TiDB データ移行](/dm/dm-overview.md) 。 MySQL、MariaDB、Amazon Auroraデータベースを TiDB にレプリケートできます。また、ソース データベースからのシャード化されたインスタンスとテーブルのマージと移行もサポートします。
 -   データのバックアップと復元: [バックアップと復元 (BR)](/br/backup-and-restore-overview.md) . **Dumpling**と比較して、 **BR は*****ビッグデータの***シナリオにより適しています。
 
@@ -246,7 +246,7 @@ Python の完全な例については、以下を参照してください。
 
 <CustomContent platform="tidb-cloud">
 
--   データのインポート: TiDB Cloudコンソールの[Amazon Auroraから TiDB へのデータの移行](/tidb-cloud/migrate-from-aurora-bulk-import.md)をインポートできます。ローカル ディスク、Amazon S3 クラウド ディスク、または GCS クラウド ディスクからのデータの読み取りもサポートしています。
+-   データインポート: [TiDB Cloudコンソール](https://tidbcloud.com/)の[インポートの作成](/tidb-cloud/import-sample-data.md)ページ。 **Dumpling の**エクスポート データをインポートしたり、ローカルの**CSV**ファイルをインポートしたり、 [Amazon S3 または GCS からTiDB Cloudに CSV ファイルをインポート](/tidb-cloud/import-csv-files.md)実行したりできます。ローカル ディスク、Amazon S3 クラウド ディスク、または GCS クラウド ディスクからのデータの読み取りもサポートしています。
 -   データ複製: [TiDB データ移行](https://docs.pingcap.com/tidb/stable/dm-overview) 。 MySQL、MariaDB、Amazon Auroraデータベースを TiDB にレプリケートできます。また、ソース データベースからのシャード化されたインスタンスとテーブルのマージと移行もサポートします。
 -   データのバックアップと復元: TiDB Cloudコンソールの[バックアップ](/tidb-cloud/backup-and-restore.md)ページ。 **Dumpling**と比較して、バックアップと復元は***ビッグ データの***シナリオにより適しています。
 
@@ -254,7 +254,7 @@ Python の完全な例については、以下を参照してください。
 
 ## ホットスポットを避ける {#avoid-hotspots}
 
-テーブルを設計するときは、多数の挿入操作があるかどうかを考慮する必要があります。その場合、テーブルの設計中にホットスポットを回避する必要があります。 [主キーを選択する際のルール](/develop/dev-guide-create-table.md#guidelines-to-follow-when-selecting-primary-key)に従ってください。
+テーブルを設計するときは、多数の挿入操作があるかどうかを考慮する必要があります。その場合、テーブルの設計中にホットスポットを回避する必要があります。 [主キーを選択](/develop/dev-guide-create-table.md#select-primary-key)セクションを参照し、 [主キーを選択する際のルール](/develop/dev-guide-create-table.md#guidelines-to-follow-when-selecting-primary-key)に従ってください。
 
 <CustomContent platform="tidb">
 
@@ -264,7 +264,7 @@ Python の完全な例については、以下を参照してください。
 
 ## <code>AUTO_RANDOM</code>主キーを使用してテーブルにデータを挿入する {#insert-data-to-a-table-with-the-code-auto-random-code-primary-key}
 
-挿入するテーブルの主キーに`AUTO_RANDOM`属性がある場合、デフォルトでは主キーを指定できません。たとえば、データベース[`users`テーブル](/develop/dev-guide-bookshop-schema-design.md#users-table)の`id`フィールドに`AUTO_RANDOM`属性が含まれていることがわかります。
+挿入するテーブルの主キーに`AUTO_RANDOM`属性がある場合、デフォルトでは主キーを指定できません。たとえば、データベース[`bookshop`](/develop/dev-guide-bookshop-schema-design.md)では、 [`users`テーブル](/develop/dev-guide-bookshop-schema-design.md#users-table)の`id`フィールドに`AUTO_RANDOM`属性が含まれていることがわかります。
 
 この場合、次のような SQL を使用して挿入する**ことはできません**。
 

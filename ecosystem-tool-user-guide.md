@@ -74,7 +74,7 @@ Dumplingの基本は以下の通りです。
 
 > **ノート：**
 >
-> PingCAP は以前、TiDB に固有の拡張機能を備えた[Dumpling](/dumpling-overview.md)に置き換えられ、TiDB に固有の最適化がさらに強化されました。 mydumper の代わりにDumpling を使用することを強くお勧めします。
+> PingCAP は以前、TiDB に固有の拡張機能を備えた[マイダンパープロジェクト](https://github.com/maxbube/mydumper)のフォークを維持していました。その後、このフォークはGolangで書き直された[Dumpling](/dumpling-overview.md)に置き換えられ、TiDB に固有の最適化がさらに強化されました。 mydumper の代わりにDumpling を使用することを強くお勧めします。
 
 ### 完全なデータのインポート - TiDB Lightning {#full-data-import-tidb-lightning}
 
@@ -111,7 +111,7 @@ BRの基本は次のとおりです。
 
 -   サポートされている TiDB バージョン: v4.0 以降のバージョン
 
--   Kubernetes のサポート: はい。詳細については、 [BRを使用して S3 互換ストレージからデータを復元する](https://docs.pingcap.com/tidb-in-kubernetes/stable/restore-from-aws-s3-using-br)を参照してください。
+-   Kubernetes のサポート: はい。詳細については、 [BRを使用して S3 互換ストレージにデータをバックアップする](https://docs.pingcap.com/tidb-in-kubernetes/stable/backup-to-aws-s3-using-br)と[BRを使用して S3 互換ストレージからデータを復元する](https://docs.pingcap.com/tidb-in-kubernetes/stable/restore-from-aws-s3-using-br)を参照してください。
 
 ### 増分データ レプリケーション - TiCDC {#incremental-data-replication-ticdc}
 
@@ -132,7 +132,7 @@ TiDB Binlogの基本は次のとおりです。
 -   出典: TiDB クラスター
 -   ターゲット: TiDB クラスター、MySQL、Kafka、または増分バックアップ ファイル
 -   サポートされている TiDB バージョン: v2.1 以降のバージョン
--   Kubernetes のサポート: はい。詳細については、 [Kubernetes での TiDBBinlogDrainer構成](https://docs.pingcap.com/tidb-in-kubernetes/stable/configure-tidb-binlog-drainer)を参照してください。
+-   Kubernetes のサポート: はい。詳細については、 [TiDBBinlogクラスタの操作](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-tidb-binlog)と[Kubernetes での TiDBBinlogDrainer構成](https://docs.pingcap.com/tidb-in-kubernetes/stable/configure-tidb-binlog-drainer)を参照してください。
 
 ### 同期差分インスペクター {#sync-diff-inspector}
 

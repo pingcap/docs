@@ -13,7 +13,7 @@ summary: Learn how to quickly get started with the TiDB HTAP.
 
 ## 基本概念 {#basic-concepts}
 
-TiDB HTAPを使用する前に、 [TiFlash](/tiflash/tiflash-overview.md) 、TiDB オンライン分析処理 (OLAP) の列指向storageエンジンに関する基本的な知識を持っている必要があります。
+TiDB HTAPを使用する前に、 [TiKV](/tikv-overview.md) 、TiDB オンライン トランザクション処理 (OLTP) 用の行ベースのstorageエンジン、および[TiFlash](/tiflash/tiflash-overview.md) 、TiDB オンライン分析処理 (OLAP) の列指向storageエンジンに関する基本的な知識を持っている必要があります。
 
 -   HTAP のストレージ エンジン: HTAP では、行ベースのstorageエンジンとカラムナ型のstorageエンジンが共存します。どちらのstorageエンジンもデータを自動的に複製し、強い整合性を維持できます。行ベースのstorageエンジンは OLTP のパフォーマンスを最適化し、列指向のstorageエンジンは OLAP のパフォーマンスを最適化します。
 -   HTAP のデータ整合性: TiKV は、分散型のトランザクション キー/値データベースとして、 ACID準拠のトランザクション インターフェイスを提供し、複数のレプリカ間のデータ整合性と[Raftコンセンサスアルゴリズム](https://raft.github.io/raft.pdf)の実装による高可用性を保証します。 TiKV のカラムナstorage拡張機能として、 TiFlash はRaft Learnerコンセンサス アルゴリズムに従ってリアルタイムで TiKV からデータを複製します。これにより、TiKV とTiFlashの間でデータの一貫性が確実に高まります。
@@ -22,7 +22,7 @@ TiDB HTAPを使用する前に、 [TiFlash](/tiflash/tiflash-overview.md) 、TiD
 
 ## ステップ {#steps}
 
-このドキュメントでは、 [TPC-H](http://www.tpc.org/tpch/)にアクセスして、クエリ ステートメントとデータを生成する方法の手順を確認してください。
+このドキュメントでは、 [TPC-H](http://www.tpc.org/tpch/)データセット内のサンプル テーブルをクエリすることで、 TiDB HTAPの利便性と高いパフォーマンスを体験できます。 TPC-H は、一般的な意思決定支援ベンチマークであり、大量のデータと高度な複雑性を備えた一連のビジネス指向のアドホック クエリで構成されます。 TPC-H を使用して 22 の完全な SQL クエリを体験するには、 [tidb-bench リポジトリ](https://github.com/pingcap/tidb-bench/tree/master/tpch/queries)または[TPC-H](http://www.tpc.org/tpch/)にアクセスして、クエリ ステートメントとデータを生成する方法の手順を確認してください。
 
 ### ステップ 1. ローカル テスト環境をデプロイ {#step-1-deploy-a-local-test-environment}
 
@@ -40,7 +40,7 @@ tiup playground
 
 ### ステップ2. テストデータを準備する {#step-2-prepare-test-data}
 
-次の手順では、 TiDB HTAPを使用するためのテスト データとして[一般的な実装ガイドライン](http://tpc.org/tpc_documents_current_versions/pdf/tpc-h_v3.0.0.pdf)参照してください。
+次の手順では、 TiDB HTAPを使用するためのテスト データとして[TPC-H](http://www.tpc.org/tpch/)データセットを作成できます。 TPC-H に興味がある場合は、 [一般的な実装ガイドライン](http://tpc.org/tpc_documents_current_versions/pdf/tpc-h_v3.0.0.pdf)を参照してください。
 
 > **ノート：**
 >

@@ -25,7 +25,7 @@ docker run -p 127.0.0.1:$LOCAL_PORT:4000 pingcap/tidb:v5.1.0
 >
 > 「実際の」TiDB クラスターを実本番にデプロイするには、次のガイドを参照してください。
 >
-> -   [オンプレミス向けTiUPを使用して TiDBをデプロイ](https://docs.pingcap.com/tidb/v5.1/production-deployment-using-tiup)
+> -   [セルフホスト環境向けにTiUPを使用して TiDBをデプロイ](https://docs.pingcap.com/tidb/v5.1/production-deployment-using-tiup)
 > -   [TiDB を Kubernetes にデプロイ](https://docs.pingcap.com/tidb-in-kubernetes/stable)
 >
 > また、TiDB のフルマネージド Database-as-a-Service (DBaaS) [TiDB Cloudを使用する](https://pingcap.com/products/tidbcloud/)を使用することもできます。
@@ -228,7 +228,7 @@ docker run -p 127.0.0.1:$LOCAL_PORT:4000 pingcap/tidb:v5.1.0
 
 ## ステップ 5. Django アプリケーションをセットアップして実行する {#step-5-set-up-and-run-the-django-application}
 
-一番上の`tidb_example`ディレクトリで、 [Django の移行](https://docs.djangoproject.com/en/3.1/topics/migrations/)を作成します。
+一番上の`tidb_example`ディレクトリで、 [`manage.py`](https://docs.djangoproject.com/en/3.1/ref/django-admin/)スクリプトを使用して、アプリケーションのデータベースを初期化する[Django の移行](https://docs.djangoproject.com/en/3.1/topics/migrations/)を作成します。
 
 ```bash
 python manage.py makemigrations tidb_example

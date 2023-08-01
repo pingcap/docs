@@ -27,7 +27,7 @@ TiDB ダッシュボードにアクセスしてサインインするには、最
 >
 > TiDB v6.5.0 (以降) およびTiDB Operator v1.4.0 (以降) は、Kubernetes 上の独立したポッドとして TiDB ダッシュボードをデプロイすることをサポートしています。 TiDB Operatorを使用すると、このポッドの IP アドレスにアクセスして TiDB ダッシュボードを起動できます。このポートは PD の他の特権インターフェイスとは通信せず、外部に提供される場合は追加のファイアウォールは必要ありません。詳細は[TiDB Operatorで TiDB ダッシュボードを独立してデプロイ](https://docs.pingcap.com/tidb-in-kubernetes/dev/get-started#deploy-tidb-dashboard-independently)を参照してください。
 
-TiDB ダッシュボードは、PD クライアント ポート (デフォルトは[http://IP:2379/pd/api/v1/members](http://IP:2379/pd/api/v1/members)など) は ID 認証を必要とせず、特権操作を実行できます。したがって、PD クライアント ポートを外部ネットワークに直接公開することは非常に危険です。
+TiDB ダッシュボードは、PD クライアント ポート (デフォルトは[http://IP:2379/ダッシュボード/](http://IP:2379/dashboard/)を通じてサービスを提供します。 TiDB ダッシュボードには ID 認証が必要ですが、PD クライアント ポートで伝送される PD の他の特権インターフェイス ( [http://IP:2379/pd/api/v1/members](http://IP:2379/pd/api/v1/members)など) は ID 認証を必要とせず、特権操作を実行できます。したがって、PD クライアント ポートを外部ネットワークに直接公開することは非常に危険です。
 
 次のような対策を講じることをお勧めします。
 
@@ -82,7 +82,7 @@ http://192.168.0.123:2379/dashboard/
 
 ## TiDB ダッシュボード専用のリバース プロキシ {#reverse-proxy-only-for-tidb-dashboard}
 
-[ファイアウォールを使用して信頼できないアクセスをブロックする](#use-a-firewall-to-block-untrusted access) で説明したように、PD クライアント ポートで提供されるサービスには、TiDB ダッシュボード ( [http://IP:2379/pd/api/v1/members](http://IP:2379/pd/api/v1/members)など)。したがって**、**リバース プロキシを使用`/dashboard`て TiDB ダッシュボードを外部ネットワークに提供する場合は、外部**ネットワーク**がリバースプロキシ。
+[ファイアウォールを使用して信頼できないアクセスをブロックする](#use-a-firewall-to-block-untrusted access) で説明したように、PD クライアント ポートで提供されるサービスには、TiDB ダッシュボード ( [http://IP:2379/ダッシュボード/](http://IP:2379/dashboard/)にあります) だけでなく、その他のサービスも含まれます。 PD の特権インターフェイス ( [http://IP:2379/pd/api/v1/members](http://IP:2379/pd/api/v1/members)など)。したがって**、**リバース プロキシを使用`/dashboard`て TiDB ダッシュボードを外部ネットワークに提供する場合は、外部**ネットワーク**がリバースプロキシ。
 
 安全で推奨されるリバース プロキシ構成については、 [リバース プロキシの背後で TiDB ダッシュボードを使用する](/dashboard/dashboard-ops-reverse-proxy.md)を参照することをお勧めします。
 
@@ -90,7 +90,7 @@ http://192.168.0.123:2379/dashboard/
 
 トランスポートレイヤーのセキュリティをさらに強化するには、リバース プロキシの TLS を有効にし、ユーザー証明書を認証するために mTLS を導入することもできます。
 
-詳細については、 [HAProxy SSL 終了](https://www.haproxy.com/blog/haproxy-ssl-termination/)を参照してください。
+詳細については、 [HTTPSサーバーの構成](http://nginx.org/en/docs/http/configuring_https_servers.html)と[HAProxy SSL 終了](https://www.haproxy.com/blog/haproxy-ssl-termination/)を参照してください。
 
 ## その他の推奨される安全対策 {#other-recommended-safety-measures}
 

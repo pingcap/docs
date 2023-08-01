@@ -19,7 +19,7 @@ summary: Learn the monitoring and alert of the backup and restore feature.
 ### グラファナの構成 {#grafana-configuration}
 
 -   TiUPを使用してデプロイされたクラスターの場合、 [グラファナ](https://grafana.com/)ダッシュボードにはポイントインタイム リカバリ (PITR) パネルが含まれています。 TiKV-Details ダッシュボードの**バックアップ ログ**パネルは PITR パネルです。
--   手動でデプロイされたクラスターの場合は、 [tikv_details](https://github.com/tikv/tikv/blob/master/metrics/grafana/tikv_details.json) JSON ファイルを Grafana にアップロードします。次に、TiKV-Details ダッシュボードで**[バックアップ ログ]**パネルを見つけます。
+-   手動でデプロイされたクラスターの場合は、 [Grafana ダッシュボードをインポートする](/deploy-monitoring-services.md#step-2-import-a-grafana-dashboard)を参照し、 [tikv_details](https://github.com/tikv/tikv/blob/master/metrics/grafana/tikv_details.json) JSON ファイルを Grafana にアップロードします。次に、TiKV-Details ダッシュボードで**[バックアップ ログ]**パネルを見つけます。
 
 ### モニタリング指標 {#monitoring-metrics}
 

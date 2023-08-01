@@ -151,4 +151,4 @@ TiDB バージョン: 5.1.2
         -   TiCDC がテーブル[#2230](https://github.com/pingcap/tiflow/issues/2230)を再スケジュールしているときに、複数のプロセッサが同じテーブルにデータを書き込む可能性があるバグを修正
         -   TiCDC が`ErrSchemaStorageTableMiss`エラー[#2422](https://github.com/pingcap/tiflow/issues/2422)を取得したときに変更フィードが予期せずリセットされる可能性があるバグを修正
         -   TiCDC が`ErrGCTTLExceeded`エラー[#2391](https://github.com/pingcap/tiflow/issues/2391)を取得した場合に変更フィードを削除できないバグを修正
-        -   TiCDC が大きなテーブルを cdclog [#2424](https://github.com/pingcap/tiflow/issues/2424)に同期できないというバグを修正しました。
+        -   TiCDC が大きなテーブルを cdclog [#1259](https://github.com/pingcap/tiflow/issues/1259) [#2424](https://github.com/pingcap/tiflow/issues/2424)に同期できないというバグを修正しました。

@@ -9,7 +9,7 @@ TiUPを使用してデプロイされた TiDB クラスターおよび DM クラ
 
 > **ノート：**
 >
-> -   このドキュメントは、オンプレミス環境でTiUP を使用してデプロイされたクラスターに**のみ**適用されます。 TiDB Operator on Kubernetes を使用してデプロイされたクラスターについては、 [TiDB Operator環境向けPingCAPクリニック](https://docs.pingcap.com/tidb-in-kubernetes/stable/clinic-user-guide)を参照してください。
+> -   このドキュメントは、セルフホスト環境でTiUP を使用してデプロイされたクラスターに**のみ**適用されます。 TiDB Operator on Kubernetes を使用してデプロイされたクラスターについては、 [TiDB Operator環境向けPingCAPクリニック](https://docs.pingcap.com/tidb-in-kubernetes/stable/clinic-user-guide)を参照してください。
 >
 > -   PingCAPクリニック は、 TiDB Ansible を使用してデプロイされたクラスターからのデータ収集を**サポートしていません**。
 

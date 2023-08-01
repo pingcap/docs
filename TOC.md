@@ -20,7 +20,7 @@
 -   発展
     -   [概要](/develop/dev-guide-overview.md)
     -   クイックスタート
-        -   [TiDB Cloud(Serverless Tier) で TiDBクラスタを構築する](/develop/dev-guide-build-cluster-in-cloud.md)
+        -   [TiDB サーバーレスクラスタを構築する](/develop/dev-guide-build-cluster-in-cloud.md)
         -   [TiDB の CRUD SQL](/develop/dev-guide-tidb-crud-sql.md)
     -   アプリケーション例
         -   Java
@@ -96,14 +96,14 @@
         -   [ProxySQL 統合ガイド](/develop/dev-guide-proxysql-integration.md)
         -   [Amazon AppFlow 統合ガイド](/develop/dev-guide-aws-appflow-integration.md)
 -   デプロイ
-    -   [ソフトウェアとハードウェアの要件](/hardware-and-software-requirements.md)
+    -   [ソフトウェアとハ​​ードウェアの要件](/hardware-and-software-requirements.md)
     -   [環境コンフィグレーションチェックリスト](/check-before-deployment.md)
     -   クラスタトポロジの計画
         -   [最小限のトポロジー](/minimal-deployment-topology.md)
-        -   [TiFlashトポロジー](/tiflash-deployment-topology.md)
+        -   [TiFlashトポロジ](/tiflash-deployment-topology.md)
         -   [TiCDC トポロジー](/ticdc-deployment-topology.md)
         -   [TiDBBinlogトポロジ](/tidb-binlog-deployment-topology.md)
-        -   [TiSpark トポロジー](/tispark-deployment-topology.md)
+        -   [TiSpark トポロジ](/tispark-deployment-topology.md)
         -   [クロス DC トポロジ](/geo-distributed-deployment-topology.md)
         -   [ハイブリッド トポロジ](/hybrid-deployment-topology.md)
     -   インストールして開始する
@@ -117,6 +117,7 @@
 -   移行する
     -   [概要](/migration-overview.md)
     -   [移行ツール](/migration-tools.md)
+    -   [インポートのベストプラクティス](/tidb-lightning/data-import-best-practices.md)
     -   移行シナリオ
         -   [Auroraからの移行](/migrate-aurora-to-tidb.md)
         -   [小規模なデータセットの MySQL を移行する](/migrate-small-mysql-to-tidb.md)
@@ -223,6 +224,7 @@
         -   [パフォーマンスの分析とチューニング](/performance-tuning-methods.md)
         -   [OLTP シナリオの性能チューニングの実践](/performance-tuning-practices.md)
         -   [レイテンシの内訳](/latency-breakdown.md)
+        -   [パブリック クラウドにおける TiDB のベスト プラクティス](/best-practices-on-public-cloud.md)
     -   コンフィグレーションのチューニング
         -   [オペレーティング システムのパフォーマンスを調整する](/tune-operating-system.md)
         -   [TiDB メモリを調整する](/configure-memory-usage.md)
@@ -276,6 +278,7 @@
             -   [オプティマイザーのヒント](/optimizer-hints.md)
             -   [SQL計画管理](/sql-plan-management.md)
             -   [最適化ルールと式プッシュダウンのブロックリスト](/blocklist-control-plan.md)
+            -   [オプティマイザー修正コントロール](/optimizer-fix-controls.md)
 -   チュートリアル
     -   [1 つのリージョンでの複数のアベイラビリティーゾーンの展開](/multi-data-centers-in-one-city-deployment.md)
     -   [2 つのリージョンに 3 つのアベイラビリティーゾーンを展開](/three-data-centers-in-two-cities-deployment.md)
@@ -551,7 +554,9 @@
                 -   [TiCDC CSV プロトコル](/ticdc/ticdc-csv.md)
             -   [TiCDC オープン API v2](/ticdc/ticdc-open-api-v2.md)
             -   [TiCDC オープン API v1](/ticdc/ticdc-open-api.md)
-            -   [ストレージ シンク コンシューマの開発ガイド](/ticdc/ticdc-storage-consumer-dev-guide.md)
+            -   TiCDC データ消費量
+                -   [Avro に基づく TiCDC 行データ チェックサム検証](/ticdc/ticdc-avro-checksum-verification.md)
+                -   [ストレージ シンク コンシューマの開発ガイド](/ticdc/ticdc-storage-consumer-dev-guide.md)
             -   [互換性](/ticdc/ticdc-compatibility.md)
         -   [トラブルシューティング](/ticdc/troubleshoot-ticdc.md)
         -   [よくある質問](/ticdc/ticdc-faq.md)
@@ -978,12 +983,14 @@
     -   [TiDB のバージョン管理](/releases/versioning.md)
     -   [TiDB インストール パッケージ](/binary-package.md)
     -   v7.1
+        -   [7.1.1](/releases/release-7.1.1.md)
         -   [7.1.0](/releases/release-7.1.0.md)
     -   v7.0
         -   [7.0.0-DMR](/releases/release-7.0.0.md)
     -   v6.6
         -   [6.6.0-DMR](/releases/release-6.6.0.md)
     -   v6.5
+        -   [6.5.3](/releases/release-6.5.3.md)
         -   [6.5.2](/releases/release-6.5.2.md)
         -   [6.5.1](/releases/release-6.5.1.md)
         -   [6.5.0](/releases/release-6.5.0.md)
@@ -994,6 +1001,7 @@
     -   v6.2
         -   [6.2.0-DMR](/releases/release-6.2.0.md)
     -   v6.1
+        -   [6.1.7](/releases/release-6.1.7.md)
         -   [6.1.6](/releases/release-6.1.6.md)
         -   [6.1.5](/releases/release-6.1.5.md)
         -   [6.1.4](/releases/release-6.1.4.md)
@@ -1137,7 +1145,7 @@
         -   [2.0](/releases/release-2.0-ga.md)
         -   [2.0 RC5](/releases/release-2.0-rc.5.md)
         -   [2.0 RC4](/releases/release-2.0-rc.4.md)
-        -   [2.0RC3](/releases/release-2.0-rc.3.md)
+        -   [2.0 RC3](/releases/release-2.0-rc.3.md)
         -   [2.0 RC1](/releases/release-2.0-rc.1.md)
         -   [1.1 ベータ版](/releases/release-1.1-beta.md)
         -   [1.1 アルファ](/releases/release-1.1-alpha.md)

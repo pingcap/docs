@@ -4,7 +4,7 @@ title: Identify Expensive Queries
 
 # 負荷の高いクエリを特定する {#identify-expensive-queries}
 
-TiDB を使用すると、SQL 実行中に負荷の高いクエリを特定できるため、SQL 実行のパフォーマンスを診断して改善できます。具体的には、TiDB は、実行時間が[tidb サーバーのログ ファイル](/tidb-configuration-file.md#logfile) (デフォルトで「tidb.log」) に出力。
+TiDB を使用すると、SQL 実行中に負荷の高いクエリを特定できるため、SQL 実行のパフォーマンスを診断して改善できます。具体的には、TiDB は、実行時間が[`tidb_expensive_query_time_threshold`](/system-variables.md#tidb_expensive_query_time_threshold) (デフォルトで 60 秒) を超えるか、メモリ使用量が[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query) (デフォルトで 1 GB) を超えるステートメントに関する情報を[tidb サーバーのログ ファイル](/tidb-configuration-file.md#logfile) (デフォルトで「tidb.log」) に出力。
 
 > **ノート：**
 >

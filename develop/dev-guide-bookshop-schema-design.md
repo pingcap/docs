@@ -12,13 +12,13 @@ Bookshop は、さまざまなカテゴリの本を購入したり、読んだ�
 
 <CustomContent platform="tidb">
 
-Bookshop テーブルの構造とデータは[TiDB Cloudのインポート機能経由](#method-2-via-tidb-cloud-import)いずれかでインポートできます。
+Bookshop テーブルの構造とデータは[TiUP経由](#method-1-via-tiup-demo)または[TiDB Cloudのインポート機能経由](#method-2-via-tidb-cloud-import)いずれかでインポートできます。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-TiDB Cloudの場合は、 [TiDB Cloudのインポート機能経由](#method-2-via-tidb-cloud-import)をインポートできます。
+TiDB Cloudの場合は、 [方法 1: `tiup demo`経由](#method-1-via-tiup-demo)スキップして Bookshop テーブル構造[TiDB Cloudのインポート機能経由](#method-2-via-tidb-cloud-import)をインポートできます。
 
 </CustomContent>
 
@@ -197,33 +197,33 @@ WHERE table_schema LIKE 'bookshop';
 
 このテーブルには、書籍に対するユーザー評価の記録が保存されます。
 
-| フィールド名  | タイプ    | 説明                                                                 |
-| ------- | ------ | ------------------------------------------------------------------ |
+| フィールド名  | タイプ    | 説明                                      |
+| ------- | ------ | --------------------------------------- |
 | book_id | ビギント   | 書籍の一意の ID ( [本](#books-table)にリンク)      |
 | ユーザーID  | ビギント   | ユーザーの一意の識別子 ( [ユーザー](#users-table)にリンク) |
-| スコア     | タイニーント | ユーザー評価 (1-5)                                                       |
-| 評価済み    | 日付時刻   | 評価時間                                                               |
+| スコア     | タイニーント | ユーザー評価 (1-5)                            |
+| 評価済み    | 日付時刻   | 評価時間                                    |
 
 ### <code>book_authors</code>テーブル {#code-book-authors-code-table}
 
 著者は複数の本を執筆する場合があり、また、1 つの本に複数の著者が関与する場合もあります。このテーブルには、書籍と著者間の対応関係が格納されます。
 
-| フィールド名  | タイプ        | 説明                                                              |
-| ------- | ---------- | --------------------------------------------------------------- |
-| book_id | bigint(20) | 書籍の一意の ID ( [本](#books-table)にリンク)   |
+| フィールド名  | タイプ        | 説明                                 |
+| ------- | ---------- | ---------------------------------- |
+| book_id | bigint(20) | 書籍の一意の ID ( [本](#books-table)にリンク) |
 | 著者ID    | bigint(20) | 著者固有のID（リンク先[著者](#authors-table) ） |
 
 ### <code>orders</code>テーブル {#code-orders-code-table}
 
 このテーブルにはユーザーの購入情報が格納されます。
 
-| フィールド名  | タイプ        | 説明                                                                        |
-| ------- | ---------- | ------------------------------------------------------------------------- |
-| ID      | bigint(20) | 注文の一意のID                                                                  |
+| フィールド名  | タイプ        | 説明                                             |
+| ------- | ---------- | ---------------------------------------------- |
+| ID      | bigint(20) | 注文の一意のID                                       |
 | book_id | bigint(20) | 書籍の一意の ID ( [本](#books-table)にリンク)             |
 | ユーザーID  | bigint(20) | ユーザーの一意の識別子 ( [ユーザー](#users-table)に関連付けられています) |
-| 量       | tinyint(4) | 購入数量                                                                      |
-| 注文済みの番号 | 日付時刻       | 購入時間                                                                      |
+| 量       | tinyint(4) | 購入数量                                           |
+| 注文済みの番号 | 日付時刻       | 購入時間                                           |
 
 ## データベース初期化スクリプト<code>dbinit.sql</code> {#database-initialization-script-code-dbinit-sql-code}
 

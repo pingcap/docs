@@ -111,7 +111,7 @@ SET GLOBAL validate_password.dictionary = 'mysql;abcd';
 
 ### パスワードの複雑さチェックの例 {#password-complexity-check-examples}
 
-システム変数`validate_password.enable`が`ON`に設定されている場合、TiDB はパスワードの複雑さのチェックを有効にします。チェック結果の例は次のとおりです。
+システム変数`validate_password.enable` `ON`に設定されている場合、TiDB はパスワードの複雑さのチェックを有効にします。チェック結果の例は次のとおりです。
 
 TiDB は、ユーザーの平文パスワードをデフォルトのパスワード複雑さポリシーと照合してチェックします。設定されたパスワードがポリシーを満たさない場合、パスワードは拒否されます。
 
@@ -120,7 +120,7 @@ mysql> ALTER USER 'test'@'localhost' IDENTIFIED BY 'abc';
 ERROR 1819 (HY000): Require Password Length: 8
 ```
 
-TiDB は、ハッシュされたパスワードをパスワードの複雑さのポリシーに照らしてチェックしません。
+TiDB は、ハッシュ化されたパスワードをパスワードの複雑さのポリシーに照らしてチェックしません。
 
 ```sql
 mysql> ALTER USER 'test'@'localhost' IDENTIFIED WITH mysql_native_password AS '*0D3CED9BEC10A777AEC23CCC353A8C08A633045E';
@@ -299,7 +299,7 @@ TiDB はアカウントのパスワード履歴を記録し、履歴からの新
 
 ### グローバルレベルのパスワード再利用ポリシー {#global-level-password-reuse-policy}
 
-グローバルなパスワード再利用ポリシーを確立するには、 [`password_reuse_interval`](/system-variables.md#password_reuse_interval-new-in-v650)システム変数を使用します。
+グローバルなパスワード再利用ポリシーを確立するには、 [`password_history`](/system-variables.md#password_history-new-in-v650)および[`password_reuse_interval`](/system-variables.md#password_reuse_interval-new-in-v650)システム変数を使用します。
 
 たとえば、過去 6 個のパスワードと過去 365 日以内に使用されたパスワードの再利用を禁止するグローバル パスワード再利用ポリシーを確立するには、次のようにします。
 

@@ -11,7 +11,7 @@ summary: An overview of the usage of CALIBRATE RESOURCE for the TiDB database.
 
 > **ノート：**
 >
-> この機能は[Serverless Tierクラスター](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta)では使用できません。
+> この機能は[TiDB サーバーレスクラスター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless)では使用できません。
 
 </CustomContent>
 
@@ -46,6 +46,10 @@ TiDB は 2 つの推定方法を提供します。
 -   `START_TIME`パラメーターを指定した後、 `END_TIME`パラメーターを使用して推定終了時刻を指定するか、 `DURATION`パラメーターを使用して`START_TIME`からの推定時間ウィンドウを指定できます。
 -   時間枠の範囲は 10 分から 24 時間です。
 -   指定した時間枠内で、TiDB および TiKV の CPU 使用率が低すぎる場合、容量を見積もることはできません。
+
+> **ノート：**
+>
+> TiKV は、macOS 上の CPU 使用率メト​​リクスを監視しません。 macOS 上の実際のワークロードに基づく容量の見積もりはサポートされていません。
 
 ### ハードウェア導入に基づいて容量を見積もる {#estimate-capacity-based-on-hardware-deployment}
 
@@ -100,6 +104,20 @@ ERROR 1105 (HY000): the duration of calibration is too short, which could lead t
 ```sql
 CALIBRATE RESOURCE START_TIME '2023-04-18 08:00:00' DURATION '60m';
 ERROR 1105 (HY000): The workload in selected time window is too low, with which TiDB is unable to reach a capacity estimation; please select another time window with higher workload, or calibrate resource by hardware instead
+```
+
+容量推定機能で`tidb_server_maxprocs` 、実際のワークロードに応じてメトリクス データ ( `resource_manager_resource_unit`など) `process_cpu_usage` `tikv_cpu_quota`する必要があります。該当するモニタデータが空の場合、以下の例のように該当するモニタ項目名でエラーとなります。ワークロードがなく、 `resource_manager_resource_unit`が空の場合も、このエラーが発生します。
+
+```sql
+CALIBRATE RESOURCE START_TIME '2023-04-18 08:00:00' DURATION '60m';
+Error 1105 (HY000): metrics 'resource_manager_resource_unit' is empty
+```
+
+TiKV は macOS 上の CPU 使用率を監視しません。 macOS で実際のワークロードに基づいて容量を見積もると、次のエラーが発生します。
+
+```sql
+CALIBRATE RESOURCE START_TIME '2023-04-18 08:00:00' DURATION '60m';
+ERROR 1105 (HY000): metrics 'process_cpu_usage' is empty
 ```
 
 RU 容量を表示するには`WORKLOAD`を指定します。デフォルト値は`TPCC`です。

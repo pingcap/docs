@@ -48,7 +48,7 @@ DM バイナリはTiDB Toolkitに含まれています。 TiDB Toolkitをダウ�
 
 ### DMマスターをデプロイ {#deploy-dm-master}
 
-[設定ファイル](#dm-master-configuration-file)を使用して DM マスターを構成できます。
+[コマンドラインパラメータ](#dm-master-command-line-parameters)または[設定ファイル](#dm-master-configuration-file)を使用して DM マスターを構成できます。
 
 #### DM マスターのコマンドラインパラメータ {#dm-master-command-line-parameters}
 
@@ -131,7 +131,7 @@ Usage of dm-master:
 
 ### DM ワーカーをデプロイ {#deploy-dm-worker}
 
-[設定ファイル](#dm-worker-configuration-file)を使用して DM ワーカーを構成できます。
+[コマンドラインパラメータ](#dm-worker-command-line-parameters)または[設定ファイル](#dm-worker-configuration-file)を使用して DM ワーカーを構成できます。
 
 #### DM-worker コマンドラインパラメータ {#dm-worker-command-line-parameters}
 

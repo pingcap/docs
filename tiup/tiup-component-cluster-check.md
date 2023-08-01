@@ -156,7 +156,7 @@ tiup cluster check <topology.yml | cluster-name> [flags]
 -   デプロイ済みのクラスターをチェックすることを示します。
 -   データ型: `BOOLEAN`
 -   このオプションは、値`false`を指定するとデフォルトで無効になります。このオプションを有効にするには、このオプションをコマンドに追加し、値`true`渡すか、値を渡しません。
--   コマンド形式：
+-   コマンド形式:
 
     ```shell
     tiup cluster check <topology.yml | cluster-name> --cluster [flags]

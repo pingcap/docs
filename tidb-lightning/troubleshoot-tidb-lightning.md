@@ -48,7 +48,7 @@ strict-format = true
 
 コマンドラインで`nohup`直接使用して`tidb-lightning`を開始することはお勧めできません。 [`tidb-lightning`を開始する](/tidb-lightning/deploy-tidb-lightning.md#step-3-start-tidb-lightning)スクリプトを実行することで実行できます。
 
-さらに、 TiDB Lightningの最後のログでエラーが「コンテキストがキャンセルされました」であることが示されている場合は、最初の「ERROR」レベルのログを検索する必要があります。通常、この「ERROR」レベルのログの後には「終了する信号を取得しました」というメッセージが続きます。これは、 TiDB Lightning が割り込み信号を受信して終了したことを示します。
+さらに、 TiDB Lightningの最後のログでエラーが「コンテキストがキャンセルされました」であることが示されている場合は、最初の「ERROR」レベルのログを検索する必要があります。通常、この「ERROR」レベルのログの後には「終了する信号を取得しました」というメッセージが続きます。これは、 TiDB Lightning が割り込み信号を受信して​​終了したことを示します。
 
 ## TiDB クラスターは大量の CPU リソースを使用し、 TiDB Lightningを使用した後は動作が非常に遅くなります。 {#the-tidb-cluster-uses-lots-of-cpu-resources-and-runs-very-slowly-after-using-tidb-lightning}
 

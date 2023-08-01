@@ -17,7 +17,7 @@ TTL は、オンラインの読み取りおよび書き込みのワークロー�
 
 ## 構文 {#syntax}
 
-[`ALTER TABLE`](/sql-statements/sql-statement-alter-table.md)ステートメントを使用して、テーブルの TTL 属性を構成できます。
+[`CREATE TABLE`](/sql-statements/sql-statement-create-table.md)または[`ALTER TABLE`](/sql-statements/sql-statement-alter-table.md)ステートメントを使用して、テーブルの TTL 属性を構成できます。
 
 ### TTL属性を持つテーブルを作成する {#create-a-table-with-a-ttl-attribute}
 
@@ -136,7 +136,7 @@ ALTER TABLE orders TTL_JOB_INTERVAL = '24h';
 
 デフォルトでは`TTL_JOB_INTERVAL` `1h`に設定されます。
 
-TTL ジョブを実行するとき、TiDB はテーブルを最大 64 のタスクに分割します。リージョンは最小単位です。これらのタスクは分散的に実行されます。システム変数[制限事項](#limitations)セクションを参照してください。
+TTL ジョブを実行するとき、TiDB はテーブルを最大 64 のタスクに分割します。リージョンは最小単位です。これらのタスクは分散的に実行されます。システム変数[`tidb_ttl_running_tasks`](/system-variables.md#tidb_ttl_running_tasks-new-in-v700)を設定することで、クラスター全体での同時 TTL タスクの数を制限できます。ただし、すべての種類のテーブルのすべての TTL ジョブをタスクに分割できるわけではありません。どの種類のテーブルの TTL ジョブをタスクに分割できないかについて詳しくは、 [制限事項](#limitations)セクションを参照してください。
 
 TTL ジョブの実行を無効にするには、 `TTL_ENABLE='OFF'`テーブル オプションを設定するだけでなく、 [`tidb_ttl_job_enable`](/system-variables.md#tidb_ttl_job_enable-new-in-v650)グローバル変数を設定してクラスター全体で TTL ジョブの実行を無効にすることもできます。
 
@@ -144,7 +144,7 @@ TTL ジョブの実行を無効にするには、 `TTL_ENABLE='OFF'`テーブル
 SET @@global.tidb_ttl_job_enable = OFF;
 ```
 
-シナリオによっては、特定の時間枠内でのみ TTL ジョブの実行を許可したい場合があります。この場合、 [`tidb_ttl_job_schedule_window_end_time`](/system-variables.md#tidb_ttl_job_schedule_window_end_time-new-in-v650)グローバル変数を設定して時間枠を指定できます。例えば：
+シナリオによっては、特定の時間枠内でのみ TTL ジョブの実行を許可したい場合があります。この場合、 [`tidb_ttl_job_schedule_window_start_time`](/system-variables.md#tidb_ttl_job_schedule_window_start_time-new-in-v650)と[`tidb_ttl_job_schedule_window_end_time`](/system-variables.md#tidb_ttl_job_schedule_window_end_time-new-in-v650)グローバル変数を設定して時間枠を指定できます。例えば：
 
 ```sql
 SET @@global.tidb_ttl_job_schedule_window_start_time = '01:00 +0000';
@@ -159,7 +159,7 @@ SET @@global.tidb_ttl_job_schedule_window_end_time = '05:00 +0000';
 
 > **ノート：**
 >
-> このセクションは、オンプレミス TiDB にのみ適用されます。現在、 TiDB Cloud はTTL メトリクスを提供していません。
+> このセクションは、TiDB セルフホスト型にのみ適用されます。現在、 TiDB Cloud はTTL メトリクスを提供していません。
 
 </CustomContent>
 
@@ -239,11 +239,11 @@ TTL は、他の TiDB 移行、バックアップ、およびリカバリ ツー
 
 ## SQLとの互換性 {#compatibility-with-sql}
 
-| 機能名                                                                                                                                                               | 説明                                                                                                                                                                                                                                 |
-| :---------------------------------------------------------------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [`FLASHBACK TABLE`](/sql-statements/sql-statement-flashback-table.md)                              | `FLASHBACK TABLE`指定すると、テーブルの`TTL_ENABLE`属性が`OFF`に設定されます。これにより、TiDB がフラッシュバック後に期限切れのデータをすぐに削除するのを防ぎます。各テーブルの TTL を再度有効にするには、 `TTL_ENABLE`属性を手動でオンにする必要があります。                                                                        |
-| [`FLASHBACK DATABASE`](/sql-statements/sql-statement-flashback-database.md)                     | `FLASHBACK DATABASE`指定すると、テーブルの`TTL_ENABLE`属性が`OFF`に設定され、 `TTL_ENABLE`属性は変更されません。これにより、TiDB がフラッシュバック後に期限切れのデータをすぐに削除するのを防ぎます。各テーブルの TTL を再度有効にするには、 `TTL_ENABLE`属性を手動でオンにする必要があります。                                               |
-| [`TIDB_TTL_JOB_ENABLE`](/system-variables.md#tidb_ttl_job_enable-new-in-v650) `OFF`に設定され、 `TTL_ENABLE`属性の値は変更されません。 |
+| 機能名                                                                                         | 説明                                                                                                                                                                                   |
+| :------------------------------------------------------------------------------------------ | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [`FLASHBACK TABLE`](/sql-statements/sql-statement-flashback-table.md)                       | `FLASHBACK TABLE`指定すると、テーブルの`TTL_ENABLE`属性が`OFF`に設定されます。これにより、TiDB がフラッシュバック後に期限切れのデータをすぐに削除するのを防ぎます。各テーブルの TTL を再度有効にするには、 `TTL_ENABLE`属性を手動でオンにする必要があります。                          |
+| [`FLASHBACK DATABASE`](/sql-statements/sql-statement-flashback-database.md)                 | `FLASHBACK DATABASE`指定すると、テーブルの`TTL_ENABLE`属性が`OFF`に設定され、 `TTL_ENABLE`属性は変更されません。これにより、TiDB がフラッシュバック後に期限切れのデータをすぐに削除するのを防ぎます。各テーブルの TTL を再度有効にするには、 `TTL_ENABLE`属性を手動でオンにする必要があります。 |
+| [`FLASHBACK CLUSTER TO TIMESTAMP`](/sql-statements/sql-statement-flashback-to-timestamp.md) | `FLASHBACK CLUSTER TO TIMESTAMP`指定すると、システム変数[`TIDB_TTL_JOB_ENABLE`](/system-variables.md#tidb_ttl_job_enable-new-in-v650) `OFF`に設定され、 `TTL_ENABLE`属性の値は変更されません。                      |
 
 ## 制限事項 {#limitations}
 
@@ -253,7 +253,7 @@ TTL は、他の TiDB 移行、バックアップ、およびリカバリ ツー
 -   TTL 属性を持つテーブルは、外部キー制約の主テーブルとして他のテーブルから参照されることをサポートしません。
 -   期限切れのデータがすべて直ちに削除されるという保証はありません。期限切れのデータが削除される時間は、バックグラウンド クリーンアップ ジョブのスケジュール間隔とスケジュール期間によって異なります。
 -   [クラスター化インデックス](/clustered-indexes.md)を使用するテーブルの場合、主キーが整数でもバイナリ文字列タイプでもない場合、TTL ジョブを複数のタスクに分割することはできません。これにより、TTL ジョブが単一の TiDB ノード上で順次実行されます。テーブルに大量のデータが含まれている場合、TTL ジョブの実行が遅くなる可能性があります。
--   [TiDB CloudServerless Tier](https://docs.pingcap.com/tidbcloud/select-cluster-tier#serverless-tier-beta)では TTL は使用できません。
+-   [TiDB サーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless)では TTL は使用できません。
 
 ## よくある質問 {#faqs}
 

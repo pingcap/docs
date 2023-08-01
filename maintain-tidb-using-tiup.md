@@ -112,7 +112,7 @@ tiup cluster display ${cluster-name}
 
     **を使用します`.`構成アイテムの階層を表します**。
 
-    コンポーネントの構成パラメータの詳細については、 [PD `config.toml.example`](https://github.com/tikv/pd/blob/master/conf/config.toml)を参照してください。
+    コンポーネントの構成パラメータの詳細については、 [TiDB `config.toml.example`](https://github.com/pingcap/tidb/blob/master/config/config.toml.example) 、 [TiKV `config.toml.example`](https://github.com/tikv/tikv/blob/master/etc/config-template.toml) 、および[PD `config.toml.example`](https://github.com/tikv/pd/blob/master/conf/config.toml)を参照してください。
 
 3.  `reload`コマンドを実行して、構成をローリング更新し、対応するコンポーネントを再起動します。
 

@@ -81,7 +81,7 @@ TiDB Ansible バージョン: 3.0.0-rc.3
     -   リーダーの移動および`conf` [#4734](https://github.com/tikv/tikv/pull/4734)の変更時にリクエスト遅延が増加する場合がある問題を修正
     -   古いコマンドが誤って報告される問題を修正[#4682](https://github.com/tikv/tikv/pull/4682)
     -   コマンドが長時間保留される可能性がある問題を修正[#4810](https://github.com/tikv/tikv/pull/4810)
-    -   スナップショット ファイルとディスク[#4850](https://github.com/tikv/tikv/pull/4850)破損する問題を修正します。
+    -   スナップショット ファイルとディスク[#4807](https://github.com/tikv/tikv/pull/4807)の同期の遅延が原因で、停電後にファイル[#4850](https://github.com/tikv/tikv/pull/4850)破損する問題を修正します。
 
 -   コプロセッサー
     -   ベクトル計算で上位 N をサポート[#4827](https://github.com/tikv/tikv/pull/4827)
@@ -96,7 +96,7 @@ TiDB Ansible バージョン: 3.0.0-rc.3
     -   ベクトル計算[#4808](https://github.com/tikv/tikv/pull/4808)で`UnaryNot`式をサポート
 
 -   トランザクション
-    -   悲観的トランザクション[#4883](https://github.com/tikv/tikv/pull/4883)競合によりエラーが発生する問題を修正
+    -   悲観的トランザクション[#4801](https://github.com/tikv/tikv/pull/4801)で非悲観的ロック[#4883](https://github.com/tikv/tikv/pull/4883)競合によりエラーが発生する問題を修正
     -   パフォーマンスを向上させるために楽観的トランザクションを有効にした後、悲観的トランザクションの不要な計算を削減します[#4813](https://github.com/tikv/tikv/pull/4813)
     -   単一ステートメントのロールバック機能を追加して、デッドロック状況でトランザクション全体がロールバック操作を必要としないようにします[#4848](https://github.com/tikv/tikv/pull/4848)
     -   悲観的トランザクション関連の監視項目を追加[#4852](https://github.com/tikv/tikv/pull/4852)

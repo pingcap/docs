@@ -71,7 +71,7 @@ mysql> SHOW KEYS FROM t1;
 
 ## MySQLの互換性 {#mysql-compatibility}
 
-MySQL の`Cardinality`列は、インデックス上のさまざまな値の数を示します。 TiDB では、 `Cardinality`列には常に`0`が表示されます。
+TiDB の`SHOW INDEXES [FROM|IN]`ステートメントは MySQL と完全な互換性があります。互換性の違いを見つけた場合は、 [GitHub の問題](https://github.com/pingcap/tidb/issues/new/choose)を介して報告してください。
 
 ## こちらも参照 {#see-also}
 

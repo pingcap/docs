@@ -10,7 +10,7 @@ summary: Learn how to tune the parameters of the operating system.
 > **ノート：**
 >
 > -   CentOS 7 オペレーティング システムのデフォルト構成は、中程度のワークロードで実行されるほとんどのサービスに適しています。特定のサブシステムのパフォーマンスを調整すると、他のサブシステムに悪影響を及ぼす可能性があります。したがって、システムをチューニングする前に、すべてのユーザー データと構成情報をバックアップしてください。
-> -   すべての変更を実稼働環境に適用する前に、本番環境で完全にテストしてください。
+> -   すべての変更を実本番環境に適用する前に、テスト環境で完全にテストしてください。
 
 ## 性能分析手法 {#performance-analysis-methods}
 
@@ -39,7 +39,7 @@ perf は、Linux カーネルによって提供される重要なパフォーマ
 
 ### BCC/bpftrace {#bcc-bpftrace}
 
-CentOS 7.6 以降、Linux カーネルは Berkeley Packet Filter (BPF) をサポートしています。したがって、適切なツールを選択して、 [BPF コンパイラ コレクション (BCC)](https://github.com/iovisor/bcc/blob/master/README.md)を参照してください。
+CentOS 7.6 以降、Linux カーネルは Berkeley Packet Filter (BPF) をサポートしています。したがって、適切なツールを選択して、 [60秒以内に](#in-60-seconds)の結果に基づいて詳細な分析を実行できます。 perf/ftrace と比較して、BPF はプログラム可能であり、パフォーマンスのオーバーヘッドが小さくなります。 kprobe と比較して、BPF はより高いセキュリティを提供し、本番環境により適しています。 BCC ツールキットの詳しい使用方法については、 [BPF コンパイラ コレクション (BCC)](https://github.com/iovisor/bcc/blob/master/README.md)を参照してください。
 
 ## 性能調整 {#performance-tuning}
 
@@ -47,7 +47,7 @@ CentOS 7.6 以降、Linux カーネルは Berkeley Packet Filter (BPF) をサポ
 
 ### CPU—周波数スケーリング {#cpu-frequency-scaling}
 
-cpufreq は、CPU 周波数を動的に調整するモジュールです。 5つのモードをサポートしています。サービスのパフォーマンスを確保するには、パフォーマンス モードを選択し、動的調整を行わずに CPU 周波数をサポートされている最高の動作周波数に固定します。この操作のコマンドは`cpupower frequency-set --governor performance`です。
+cpufreq は、CPU 周波数を動的に調整するモジュールです。 5つのモードをサポートします。サービスのパフォーマンスを確保するには、パフォーマンス モードを選択し、動的調整を行わずに CPU 周波数をサポートされている最高の動作周波数に固定します。この操作のコマンドは`cpupower frequency-set --governor performance`です。
 
 ### CPU - 割り込みアフィニティ {#cpu-interrupt-affinity}
 
@@ -64,7 +64,7 @@ Non-Uniform Memory Access (NUMA) ノード間でのメモリへのアクセス�
 
 ### メモリ - 透過的巨大ページ (THP) {#memory-transparent-huge-page-thp}
 
-データベースには連続的なメモリアクセス パターンではなく、疎なメモリ アクセス パターンが存在することが多いため、データベース アプリケーションに THP を使用することは**お勧めでき**ません。高レベルのメモリ断片化が深刻な場合、THP ページが割り当てられるときにレイテンシーが長くなります。 THP に対して直接圧縮が有効になっている場合、CPU 使用率が急増します。したがって、THP を無効にすることをお勧めします。
+データベースには連続的なメモリアクセス パターンではなく、疎なメモリ アクセス パターンが存在することが多いため、データベース アプリケーションに THP を使用することは**お**勧めできません。高レベルのメモリ断片化が深刻な場合、THP ページが割り当てられるときにレイテンシーが長くなります。 THP に対して直接圧縮が有効になっている場合、CPU 使用率が急増します。したがって、THP を無効にすることをお勧めします。
 
 ```shell
 echo never > /sys/kernel/mm/transparent_hugepage/enabled
@@ -110,7 +110,7 @@ echo noop > /sys/block/${SSD_DEV_NAME}/queue/scheduler
 
 -   NIC ハードウェア キャッシュ: ハードウェア レベルでパケット損失を正確に観察するには、 `ethtool -S ${NIC_DEV_NAME}`コマンドを使用して`drops`フィールドを観察します。パケットロスが発生した場合、ハード/ソフト割り込みの処理速度がNICの受信速度に追いつかない可能性があります。受信バッファ サイズが上限より小さい場合は、パケット損失を避けるために RX バッファを増やすこともできます。クエリ コマンドは`ethtool -g ${NIC_DEV_NAME}` 、変更コマンドは`ethtool -G ${NIC_DEV_NAME}`です。
 
--   ハードウェア割り込み: NIC が Receive-Side Scaling (RSS、マルチ NIC 受信とも呼ばれる) 機能をサポートしている場合は、 `/proc/interrupts` NIC 割り込みを観察します。割り込みが不均一な場合は、 [カーネルドキュメント](https://www.kernel.org/doc/Documentation/networking/scaling.txt)参照してください。
+-   ハードウェア割り込み: NIC が Receive-Side Scaling (RSS、マルチ NIC 受信とも呼ばれる) 機能をサポートしている場合は、 `/proc/interrupts` NIC 割り込みを観察します。割り込みが不均一な場合は、 [CPU—周波数スケーリング](#cpufrequency-scaling) 、 [CPU - 割り込みアフィニティ](#cpuinterrupt-affinity) 、および[NUMA CPU バインディング](#numa-cpu-binding)を参照してください。 NIC が RSS をサポートしていない場合、または RSS の数が物理 CPU コアの数よりもはるかに少ない場合は、受信パケット ステアリング (RPS、RSS のソフトウェア実装と見なすことができます) および RPS 拡張受信フロー ステアリング ( RFS）。詳細な設定については、 [カーネルドキュメント](https://www.kernel.org/doc/Documentation/networking/scaling.txt)参照してください。
 
 -   ソフトウェア割り込み: `/proc/net/softnet_stat`の監視を観察します。 3 番目の列を除く他の列の値が増加している場合は、CPU 時間を増やすために`softirq`に対して`net.core.netdev_budget`または`net.core.dev_weight`の値を適切に調整します。さらに、CPU 使用率をチェックして、どのタスクが CPU を頻繁に使用しているのか、またそれらのタスクを最適化できるかどうかを判断する必要もあります。
 

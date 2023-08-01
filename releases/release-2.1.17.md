@@ -87,5 +87,5 @@ TiDB Ansible バージョン: 2.1.17
 
 ## TiDB Ansible {#tidb-ansible}
 
--   Spark バージョンを 2.4.3 に更新し、TiSpark バージョン[#914](https://github.com/pingcap/tidb-ansible/pull/914)
--   リモートマシンのパスワードの有効期限が切れた場合に待ち時間が長くなる問題を修正[#948](https://github.com/pingcap/tidb-ansible/pull/948)
+-   Spark バージョンを 2.4.3 に更新し、TiSpark バージョン[#919](https://github.com/pingcap/tidb-ansible/pull/927) Spark 2.4.3 と互換性のある 2.2.0 に更新します[#914](https://github.com/pingcap/tidb-ansible/pull/914)
+-   リモートマシンのパスワードの有効期限が切れた場合に待ち時間が長くなる問題を修正[#937](https://github.com/pingcap/tidb-ansible/pull/937) 、 [#948](https://github.com/pingcap/tidb-ansible/pull/948)

@@ -15,7 +15,7 @@ Alibaba Cloud RDS の主キーのない上流テーブルの場合、そのbinlo
 
 互換性のない既知の問題をいくつか次に示します。
 
--   **Alibaba Cloud RDS**では、主キーのない上流テーブルの場合、そのbinlogには依然として非表示の主キー列が含まれており、元のテーブル構造と矛盾します。
+-   **Alibaba Cloud RDS**では、主キーのない上流テーブルの場合、そのbinlogには依然として非表示の主キー列が含まれており、元のテーブル構造と矛盾しています。
 -   **HUAWEI Cloud RDS**では、 binlogファイルの直接読み取りはサポートされていません。詳細については、 [HUAWEI Cloud RDS はBinlogバックアップ ファイルを直接読み取ることができますか?](https://support.huaweicloud.com/en-us/rds_faq/rds_faq_0210.html)参照してください。
 
 ## タスク設定のブロックと許可リストの正規表現は<code>non-capturing (?!)</code>をサポートしていますか? {#does-the-regular-expression-of-the-block-and-allow-list-in-the-task-configuration-support-code-non-capturing-code}
@@ -32,7 +32,7 @@ TiDB でサポートされていない DDL ステートメントが発生した�
 
 > **ノート：**
 >
-> 現在、TiDB は、MySQL がサポートするすべての DDL ステートメントと互換性があるわけではありません。 [MySQL の互換性](/mysql-compatibility.md#ddl)を参照してください。
+> 現在、TiDB は、MySQL がサポートするすべての DDL ステートメントと互換性があるわけではありません。 [MySQL の互換性](/mysql-compatibility.md#ddl-operations)を参照してください。
 
 ## DM はビュー関連の DDL ステートメントと DML ステートメントを TiDB にレプリケートしますか? {#does-dm-replicate-view-related-ddl-statements-and-dml-statements-to-tidb}
 
@@ -251,7 +251,7 @@ DM v2.0.1 以前のバージョンでは、完全なインポートが完了す�
 
 これは DM の既知のバグであり、DM v2.0.2 で修正されています。このバグは、次の 2 つの条件が同時に完全に満たされた場合に発生します。
 
-1.  パラメータ`enable-relay`と`enable-gtid`は、ソース構成ファイルで`true`に設定されます。
+1.  パラメータ`enable-relay`と`enable-gtid`ソース構成ファイルで`true`に設定されます。
 2.  アップストリーム データベースは**MySQL セカンダリ データベース**です。コマンド`show binlog events in '<newest-binlog>' limit 2`を実行してデータベースの`previous_gtids`をクエリすると、次の例のように結果が不連続になります。
 
 ```

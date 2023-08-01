@@ -5,7 +5,7 @@ summary: Create, manage, and update your TiDB Cloud resources through Terraform.
 
 # Terraform 統合の概要 {#terraform-integration-overview}
 
-[テラフォーム](https://www.terraform.io/)は、コードとしてのインフラストラクチャ ツールであり、これを使用すると、バージョン管理、再利用、共有が可能な人間が判読できる構成ファイルでクラウド リソースとオンプレミス リソースの両方を定義できます。
+[テラフォーム](https://www.terraform.io/)はコードとしてのインフラストラクチャ ツールであり、これを使用すると、クラウド リソースとセルフホスト リソースの両方を、バージョン管理、再利用、共有できる人間が判読できる構成ファイルで定義できます。
 
 [TiDB CloudTerraform プロバイダー](https://registry.terraform.io/providers/tidbcloud/tidbcloud)は、Terraform を使用して、クラスター、バックアップ、復元などのTiDB Cloudリソースを管理できるようにするプラグインです。
 
@@ -21,19 +21,20 @@ summary: Create, manage, and update your TiDB Cloud resources through Terraform.
 
 -   [TiDB Cloudアカウント](https://tidbcloud.com/free-trial)
 -   [Terraform バージョン](https://www.terraform.io/downloads.html) &gt;= 1.0
--   [TiDB CloudTerraform プロバイダー](https://github.com/tidbcloud/terraform-provider-tidbcloud)をビルドする場合にのみ必要)
+-   [Goのバージョン](https://golang.org/doc/install) &gt;= 1.18 (ローカルで[TiDB CloudTerraform プロバイダー](https://github.com/tidbcloud/terraform-provider-tidbcloud)をビルドする場合にのみ必要)
 
 ## サポートされているリソースとデータソース {#supported-resources-and-data-sources}
 
-[データソース](https://www.terraform.io/language/data-sources)は、Terraform 言語の 2 つの最も重要な要素です。
+[資力](https://www.terraform.io/language/resources)と[データソース](https://www.terraform.io/language/data-sources)は、Terraform 言語の 2 つの最も重要な要素です。
 
 TiDB Cloudは、次のリソースとデータ ソースをサポートします。
 
 -   資力
 
     -   `tidbcloud_cluster`
-    -   `tidbcloud_backup` (アップデートはサポートされていません)
-    -   `tidbcloud_restore` (更新と削除はサポートされていません)
+    -   `tidbcloud_backup`
+    -   `tidbcloud_restore`
+    -   `tidbcloud_import`
 
 -   データソース
 

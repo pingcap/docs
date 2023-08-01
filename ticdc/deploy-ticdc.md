@@ -9,7 +9,7 @@ summary: Learn the hardware and software recommendations for deploying and runni
 
 ## ソフトウェアとハ​​ードウェアの推奨事項 {#software-and-hardware-recommendations}
 
-本番環境での TiCDC のソフトウェアとハードウェアの推奨事項は次のとおりです。
+本番環境での TiCDC のソフトウェアとハ​​ードウェアの推奨事項は次のとおりです。
 
 | Linux OS              |    バージョン    |
 | :-------------------- | :---------: |
@@ -60,7 +60,7 @@ TiCDC クラスターをスケールアウトする方法は、TiCDC クラス�
       - host: 10.1.1.2
         gc-ttl: 86400
         data_dir: /tidb-data/cdc-8300
-      - host: 10.0.1.4:8300
+      - host: 10.0.1.4
         gc-ttl: 86400
         data_dir: /tidb-data/cdc-8300
     ```
@@ -85,7 +85,7 @@ tiup cluster scale-in <cluster-name> --node 10.0.1.4:8300
 
 ## TiUPを使用して TiCDC をアップグレードする {#upgrade-ticdc-using-tiup}
 
-TiUP を使用して TiDB クラスターをアップグレードでき、その際に TiCDC もアップグレードされます。アップグレード コマンドを実行すると、 TiUP は自動的に TiCDCコンポーネントをアップグレードします。以下は例です。
+TiUP を使用して TiDB クラスターをアップグレードでき、その際に TiCDC もアップグレードされます。アップグレード コマンドを実行すると、 TiUP はTiCDCコンポーネントを自動的にアップグレードします。以下は例です。
 
 ```shell
 tiup update --self && \
@@ -95,7 +95,7 @@ tiup cluster upgrade <cluster-name> <version> --transfer-timeout 600
 
 > **ノート：**
 >
-> 前述のコマンドでは、 `<cluster-name>`と`<version>`実際のクラスター名とクラスターのバージョンに置き換える必要があります。たとえば、バージョンは v7.1.0 になります。
+> 前述のコマンドでは、 `<cluster-name>`と`<version>`実際のクラスター名とクラスターのバージョンに置き換える必要があります。たとえば、バージョンは v7.1.1 になります。
 
 ### アップグレードに関する注意事項 {#upgrade-cautions}
 
@@ -154,7 +154,7 @@ TiUP を使用すると、TiCDC ノードを簡単に停止および起動でき
 
 ## コマンドライン ツールを使用して TiCDC ステータスをビュー {#view-ticdc-status-using-the-command-line-tool}
 
-次のコマンドを実行して、TiCDC クラスターのステータスを表示します。 `v<CLUSTER_VERSION>` TiCDC クラスターのバージョン ( `v6.5.0`など) に置き換える必要があることに注意してください。
+次のコマンドを実行して、TiCDC クラスターのステータスを表示します。 `v<CLUSTER_VERSION>` TiCDC クラスターのバージョン ( `v7.1.1`など) に置き換える必要があることに注意してください。
 
 ```shell
 tiup ctl:v<CLUSTER_VERSION> cdc capture list --server=http://10.0.10.25:8300

@@ -21,14 +21,14 @@ PD Controlを使用するには、 `tiup ctl:v<CLUSTER_VERSION> pd -u http://<pd
 
 最新バージョンの`pd-ctl`を入手するには、TiDBサーバーインストール パッケージをダウンロードします。 `ctl-{version}-linux-{arch}.tar.gz`パッケージには`pd-ctl`が含まれます。
 
-| インストールパッケージ                                                                                | OS    | アーキテクチャ | SHA256チェックサム                                                                      |
-| :----------------------------------------------------------------------------------------- | :---- | :------ | :-------------------------------------------------------------------------------- |
-| `https://download.pingcap.org/tidb-community-server-{version}-linux-amd64.tar.gz` (PD-CTL) | Linux | amd64   | `https://download.pingcap.org/tidb-community-server-{version}-linux-amd64.sha256` |
-| `https://download.pingcap.org/tidb-community-server-{version}-linux-arm64.tar.gz` (PD-CTL) | Linux | 腕64     | `https://download.pingcap.org/tidb-community-server-{version}-linux-arm64.sha256` |
+| インストールパッケージ                                                                                | OS    | アーキテクチャ | SHA256チェックサム                                                                             |
+| :----------------------------------------------------------------------------------------- | :---- | :------ | :--------------------------------------------------------------------------------------- |
+| `https://download.pingcap.org/tidb-community-server-{version}-linux-amd64.tar.gz` (PD-CTL) | Linux | amd64   | `https://download.pingcap.org/tidb-community-server-{version}-linux-amd64.tar.gz.sha256` |
+| `https://download.pingcap.org/tidb-community-server-{version}-linux-arm64.tar.gz` (PD-CTL) | Linux | 腕64     | `https://download.pingcap.org/tidb-community-server-{version}-linux-arm64.tar.gz.sha256` |
 
 > **ノート：**
 >
-> リンク内の`{version}`は、TiDB のバージョン番号を示します。たとえば、 `amd64`アーキテクチャの`v7.1.0`のダウンロード リンクは`https://download.pingcap.org/tidb-community-server-v7.1.0-linux-amd64.tar.gz`です。
+> リンク内の`{version}`は、TiDB のバージョン番号を示します。たとえば、 `amd64`アーキテクチャの`v7.1.1`のダウンロード リンクは`https://download.pingcap.org/tidb-community-server-v7.1.1-linux-amd64.tar.gz`です。
 
 ### ソースコードからコンパイルする {#compile-from-source-code}
 
@@ -339,7 +339,7 @@ tiup ctl:v<CLUSTER_VERSION> pd -u https://127.0.0.1:2379 --cacert="path/to/ca" -
     config set store-limit-version v2       // using store limit v2
     ```
 
--   PD はフロー番号の最下位の桁を丸めます。これにより、リージョンフロー情報の変更によって引き起こされる統計の更新が削減されます。この設定項目は、リージョンフロー情報の四捨五入の最下位桁数を指定するために使用されます。たとえば、デフォルト値が`3`であるため、フロー`100512` `101000`に丸められます。この構成は`trace-region-flow`を置き換えます。
+-   PD はフロー番号の最下位の桁を丸めます。これにより、リージョンフロー情報の変更によって引き起こされる統計の更新が削減されます。この設定項目は、リージョンフロー情報の四捨五入の最下位桁数を指定するために使用されます。たとえば、デフォルト値が`3`であるため、フロー`100512` `101000`に丸められます。この構成は`trace-region-flow`を置き​​換えます。
 
 -   たとえば、値`flow-round-by-digit`を`4`に設定します。
 

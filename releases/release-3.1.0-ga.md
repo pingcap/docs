@@ -41,8 +41,8 @@ TiDB Ansible バージョン: 3.1.0 GA
 
 -   TiDB Ansible
 
-    -   TiFlashモニターを追加[#1257](https://github.com/pingcap/tidb-ansible/pull/1257)
-    -   TiFlash [#1271](https://github.com/pingcap/tidb-ansible/pull/1271)の設定パラメータを最適化します。
+    -   TiFlashモニターを追加[#1253](https://github.com/pingcap/tidb-ansible/pull/1253) [#1257](https://github.com/pingcap/tidb-ansible/pull/1257)
+    -   TiFlash [#1262](https://github.com/pingcap/tidb-ansible/pull/1262) [#1265](https://github.com/pingcap/tidb-ansible/pull/1265) [#1271](https://github.com/pingcap/tidb-ansible/pull/1271)の設定パラメータを最適化します。
     -   TiDB 起動スクリプト[#1268](https://github.com/pingcap/tidb-ansible/pull/1268)を最適化する
 
 ## バグの修正 {#bug-fixes}
@@ -69,7 +69,7 @@ TiDB Ansible バージョン: 3.1.0 GA
 
 -   TiKV
 
-    -   レプリカ読み取りによるpanic問題を修正[#7369](https://github.com/tikv/tikv/pull/7369)
+    -   レプリカ読み取りによるpanic問題を修正[#7418](https://github.com/tikv/tikv/pull/7418) [#7369](https://github.com/tikv/tikv/pull/7369)
     -   復元プロセスで空のリージョン[#7419](https://github.com/tikv/tikv/pull/7419)が作成される問題を修正
     -   ロック解決リクエストを繰り返すと、悲観的トランザクションのアトミック性が損なわれる可能性がある問題を修正します[#7389](https://github.com/tikv/tikv/pull/7389)
 
@@ -84,9 +84,9 @@ TiDB Ansible バージョン: 3.1.0 GA
 
     -   TiDBBinlog
 
-        -   TiFlash関連の DDL ジョブがDrainer [#942](https://github.com/pingcap/tidb-binlog/pull/942)のレプリケーションを中断する可能性がある問題を修正
+        -   TiFlash関連の DDL ジョブがDrainer [#948](https://github.com/pingcap/tidb-binlog/pull/948) [#942](https://github.com/pingcap/tidb-binlog/pull/942)のレプリケーションを中断する可能性がある問題を修正
 
     -   バックアップと復元 (BR)
 
         -   `checksum`操作が無効になっている場合でも実行される問題を修正[#223](https://github.com/pingcap/br/pull/223)
-        -   TiDB が`auto-random`または`alter-pk`を有効にすると増分バックアップが失敗する問題[#231](https://github.com/pingcap/br/pull/231)
+        -   TiDB が`auto-random`または`alter-pk`を有効にすると増分バックアップが失敗する問題[#230](https://github.com/pingcap/br/pull/230)修正[#231](https://github.com/pingcap/br/pull/231)

@@ -13,7 +13,7 @@ TiDB バージョン: 3.0.15
 -   TiDB
 
     -   パーティション テーブル内のクエリでプラン キャッシュ機能を使用することを禁止します[#16759](https://github.com/pingcap/tidb/pull/16759)
-    -   パーティションテーブルで`admin recover index`および`admin check index`ステートメントをサポート[#17390](https://github.com/pingcap/tidb/pull/17390)
+    -   パーティションテーブルで`admin recover index`および`admin check index`ステートメントをサポート[#17315](https://github.com/pingcap/tidb/pull/17315) [#17390](https://github.com/pingcap/tidb/pull/17390)
     -   レンジ パーティション テーブル[#17318](https://github.com/pingcap/tidb/pull/17318)の`in`条件のパーティション プルーニングをサポートします。
     -   `SHOW CREATE TABLE`の出力を最適化し、パーティション名に引用符を追加します[#16315](https://github.com/pingcap/tidb/pull/16315)
     -   `GROUP_CONCAT`機能[#16988](https://github.com/pingcap/tidb/pull/16988)の`ORDER BY`句をサポートします。

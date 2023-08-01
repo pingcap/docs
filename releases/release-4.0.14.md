@@ -12,7 +12,7 @@ TiDB バージョン: 4.0.14
 
 -   TiDB
 
-    -   v4.0 では、デフォルト値`tidb_multi_statement_mode`を`WARN`から`OFF`に変更します。代わりに、クライアント ライブラリのマルチステートメント機能を使用することをお勧めします。詳細は[#25749](https://github.com/pingcap/tidb/pull/25749)
+    -   v4.0 では、デフォルト値`tidb_multi_statement_mode`を`WARN`から`OFF`に変更します。代わりに、クライアント ライブラリのマルチステートメント機能を使用することをお勧めします。詳細は[`tidb_multi_statement_mode`に関するドキュメント](/system-variables.md#tidb_multi_statement_mode-new-in-v4011)を参照してください。 [#25749](https://github.com/pingcap/tidb/pull/25749)
     -   Grafana ダッシュボードを v6.1.16 から v7.5.7 にアップグレードして、2 つのセキュリティ脆弱性を解決します。詳細は[グラファナのブログ投稿](https://grafana.com/blog/2020/06/03/grafana-6.7.4-and-7.0.2-released-with-important-security-fix/)を参照してください。
     -   `tidb_stmt_summary_max_stmt_count`変数のデフォルト値を`200`から`3000`に変更します[#25872](https://github.com/pingcap/tidb/pull/25872)
 
@@ -51,7 +51,7 @@ TiDB バージョン: 4.0.14
 
 -   PD
 
-    -   同時に実行される複数のスケジューラ間の競合を軽減します[#3854](https://github.com/tikv/pd/pull/3854)
+    -   同時に実行される複数のスケジューラ間の競合を軽減します[#3858](https://github.com/pingcap/pd/pull/3858) [#3854](https://github.com/tikv/pd/pull/3854)
 
 -   TiDB ダッシュボード
 
@@ -101,15 +101,15 @@ TiDB バージョン: 4.0.14
     -   特定のプラットフォームで継続時間の計算がpanicになる問題を修正[#関連問題](https://github.com/rust-lang/rust/issues/86470#issuecomment-877557654)
     -   `DOUBLE`を`DOUBLE` [#25200](https://github.com/pingcap/tidb/issues/25200)にキャストする間違った関数を修正
     -   非同期ロガー[#8998](https://github.com/tikv/tikv/issues/8998)を使用するとpanicログが失われる可能性がある問題を修正
-    -   暗号化が有効になっている場合にスナップショットを 2 回構築すると発生するpanicの問題を修正します[#10407](https://github.com/tikv/tikv/issues/10407)
+    -   暗号化が有効になっている場合にスナップショットを 2 回構築すると発生するpanicの問題を修正します[#9786](https://github.com/tikv/tikv/issues/9786) [#10407](https://github.com/tikv/tikv/issues/10407)
     -   コプロセッサ[#10176](https://github.com/tikv/tikv/issues/10176)の`json_unquote()`関数の間違った引数の型を修正しました。
-    -   シャットダウン中の不審な警告とRaftstoreからの非決定的な応答の問題を修正[#10307](https://github.com/tikv/tikv/issues/10307)
+    -   シャットダウン中の不審な警告とRaftstoreからの非決定的な応答の問題を修正[#10353](https://github.com/tikv/tikv/issues/10353) [#10307](https://github.com/tikv/tikv/issues/10307)
     -   バックアップスレッドのリーク[#10287](https://github.com/tikv/tikv/issues/10287)の問題を修正
-    -   分割プロセスが遅すぎてリージョンのリージョンがパニックを起こしてメタデータが破損する可能性がある問題を修正します[#8783](https://github.com/tikv/tikv/issues/8783)
+    -   分割プロセスが遅すぎてリージョンのリージョンがパニックを起こしてメタデータが破損する可能性がある問題を修正します[#8456](https://github.com/tikv/tikv/issues/8456) [#8783](https://github.com/tikv/tikv/issues/8783)
     -   状況によっては、リージョンのハートビートによって TiKV が大きなリージョンを分割できないという問題を修正します[#10111](https://github.com/tikv/tikv/issues/10111)
     -   TiKV と TiDB [#25638](https://github.com/pingcap/tidb/issues/25638)の間の CM スケッチの形式の不一致によって引き起こされる間違った統計を修正しました。
     -   `apply wait duration`メトリクス[#9893](https://github.com/tikv/tikv/issues/9893)の間違った統計を修正します。
-    -   Titan [#10232](https://github.com/tikv/tikv/pull/10232)で`delete_files_in_range`を使用した後の「Missing Blob」エラーを修正
+    -   Titan [#10232](https://github.com/tikv/tikv/pull/10232)で`delete_files_in_range`使用した後の「Missing Blob」エラーを修正
 
 -   PD
 
@@ -159,7 +159,7 @@ TiDB バージョン: 4.0.14
 
         -   新しいテーブル パーティションを追加した後の余分なパーティションのディスパッチの問題を修正[#2205](https://github.com/pingcap/tiflow/pull/2205)
         -   TiCDC が`/proc/meminfo` [#2023](https://github.com/pingcap/tiflow/pull/2023)の読み取りに失敗したときに発生するpanicの問題を修正
-        -   TiCDC のランタイムメモリ消費量を削減[#1957](https://github.com/pingcap/tiflow/pull/1957)
+        -   TiCDC のランタイムメモリ消費量を削減[#2011](https://github.com/pingcap/tiflow/pull/2011) [#1957](https://github.com/pingcap/tiflow/pull/1957)
         -   MySQL シンクがエラーに遭遇して一時停止した後、一部の MySQL 接続がリークする可能性があるバグを修正します[#1945](https://github.com/pingcap/tiflow/pull/1945)
         -   開始 TS が現在の TS から GC TTL [#1839](https://github.com/pingcap/tiflow/issues/1839)を引いたものより小さい場合、TiCDC チェンジフィードを作成できない問題を修正
         -   過剰な CPU オーバーヘッドを避けるために、ソート ヒープ内のメモリ`malloc`を削減します[#1853](https://github.com/pingcap/tiflow/issues/1853)

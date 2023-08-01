@@ -88,7 +88,7 @@ sysbench $testname \
 1.  `oltp_read_write`テストを開始します。
 2.  ステップ 1 と同時に実行します`alter table sbtest1 add index c_idx(c)`を使用してインデックスを追加します。
 3.  ステップ 2 の最後に実行します。インデックスが正常に追加されたら、テスト`oltp_read_write`を停止します。
-4.  `alter table ... add index`の期間と、この期間における Sysbench の平均 TPS および QPS を取得します。
+4.  `alter table ... add index`の期間と、この期間における Sysbench の平均 TPS と QPS を取得します。
 5.  2 つのパラメーター`tidb_ddl_reorg_worker_cnt`および`tidb_ddl_reorg_batch_size`の値を徐々に増やしてから、ステップ 1 ～ 4 を繰り返します。
 
 ### 試験結果 {#test-results}
@@ -223,7 +223,7 @@ sysbench $testname \
 1.  `oltp_read_only`テストを開始します。
 2.  ステップ 1 と同時に実行します`alter table sbtest1 add index c_idx(c)`を使用してインデックスを追加します。
 3.  ステップ 2 の最後に実行します。インデックスが正常に追加されたら、テスト`oltp_read_only`を停止します。
-4.  `alter table ... add index`の期間と、この期間における Sysbench の平均 TPS および QPS を取得します。
+4.  `alter table ... add index`の期間と、この期間における Sysbench の平均 TPS と QPS を取得します。
 5.  2 つのパラメーター`tidb_ddl_reorg_worker_cnt`および`tidb_ddl_reorg_batch_size`の値を徐々に増やしてから、ステップ 1 ～ 4 を繰り返します。
 
 ### 試験結果 {#test-results}
@@ -285,7 +285,7 @@ sysbench $testname \
 1.  `oltp_read_write`テストを開始します。
 2.  ステップ 1 と同時に実行します`alter table test add index pad_idx(pad)`を使用してインデックスを追加します。
 3.  ステップ 2 の最後に実行します。インデックスが正常に追加されたら、テスト`oltp_read_only`を停止します。
-4.  `alter table ... add index`の期間と、この期間における Sysbench の平均 TPS および QPS を取得します。
+4.  `alter table ... add index`の期間と、この期間における Sysbench の平均 TPS と QPS を取得します。
 5.  2 つのパラメーター`tidb_ddl_reorg_worker_cnt`および`tidb_ddl_reorg_batch_size`の値を徐々に増やしてから、ステップ 1 ～ 4 を繰り返します。
 
 ### 試験結果 {#test-results}

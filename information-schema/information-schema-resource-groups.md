@@ -9,7 +9,7 @@ summary: Learn the `RESOURCE_GROUPS` information_schema table.
 
 > **ノート：**
 >
-> この機能は[Serverless Tierクラスター](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta)では使用できません。
+> この機能は[TiDB サーバーレスクラスター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless)では使用できません。
 
 </CustomContent>
 

@@ -29,31 +29,31 @@ v5.3 の主な新機能または改善点は次のとおりです。
 
 ### システム変数 {#system-variables}
 
-| 変数名                                                                                                                                                                                                    | 種類の変更    | 説明                                                                                                                                                                                                                                                                                                                                                |
-| :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| [`tidb_enable_noop_functions`](/system-variables.md#tidb_enable_noop_functions-new-in-v40)                                    | 修正済み     | 一時テーブルが TiDB でサポートされるようになったので、 `CREATE TEMPORARY TABLE`と`DROP TEMPORARY TABLE` `tidb_enable_noop_functions`を有効にする必要がなくなりました。                                                                                                                                                                                                                      |
-| [`pseudo-estimate-ratio`](/tidb-configuration-file.md#pseudo-estimate-ratio)で調整できます)、オプティマイザは行の合計数以外の統計は信頼できなくなったとみなし、疑似統計を使用します。代わりに統計。値を`OFF`に設定すると、統計の有効期限が切れても、オプティマイザは統計を引き続き使用します。 |
-| [`tidb_enable_tso_follower_proxy`](/system-variables.md#tidb_enable_tso_follower_proxy-new-in-v530)                      | 新しく追加された | TSOFollowerプロキシ機能を有効にするか無効にするかを決定します。デフォルト値は`OFF`で、TSO Follower Proxy 機能が無効であることを意味します。現時点では、TiDB は PD リーダーからのみ TSO を取得します。この機能が有効になっている場合、TiDB は TSO を取得するときにすべての PD ノードにリクエストを均等に送信します。次に、PD フォロワーは TSO 要求を転送して、PD リーダーの CPU 負荷を軽減します。                                                                                                          |
-| [`tidb_tso_client_batch_max_wait_time`](/system-variables.md#tidb_tso_client_batch_max_wait_time-new-in-v530)       | 新しく追加された | TiDB が PD から TSO を要求するときのバッチ保存操作の最大待ち時間を設定します。デフォルト値は`0`で、追加の待機がないことを意味します。                                                                                                                                                                                                                                                                       |
-| [一時テーブル](/temporary-tables.md)の最大サイズを制限します。一時テーブルがこのサイズを超えるとエラーが発生します。                                                                                                                                                                                                                                      |
+| 変数名                                                                                                               | 種類の変更    | 説明                                                                                                                                                                                                                                                                                |
+| :---------------------------------------------------------------------------------------------------------------- | :------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [`tidb_enable_noop_functions`](/system-variables.md#tidb_enable_noop_functions-new-in-v40)                        | 修正済み     | 一時テーブルが TiDB でサポートされるようになったので、 `CREATE TEMPORARY TABLE`と`DROP TEMPORARY TABLE` `tidb_enable_noop_functions`を有効にする必要がなくなりました。                                                                                                                                                      |
+| [`tidb_enable_pseudo_for_outdated_stats`](/system-variables.md#tidb_enable_pseudo_for_outdated_stats-new-in-v530) | 新しく追加された | テーブルの統計の有効期限が切れたときのオプティマイザの動作を制御します。デフォルト値は`ON`です。テーブル内の変更された行の数が合計行の 80% を超える場合 (この比率は構成[`pseudo-estimate-ratio`](/tidb-configuration-file.md#pseudo-estimate-ratio)で調整できます)、オプティマイザは行の合計数以外の統計は信頼できなくなったとみなし、疑似統計を使用します。代わりに統計。値を`OFF`に設定すると、統計の有効期限が切れても、オプティマイザは引き続き統計を使用します。 |
+| [`tidb_enable_tso_follower_proxy`](/system-variables.md#tidb_enable_tso_follower_proxy-new-in-v530)               | 新しく追加された | TSOFollowerプロキシ機能を有効にするか無効にするかを決定します。デフォルト値は`OFF`で、TSO Follower Proxy 機能が無効であることを意味します。現時点では、TiDB は PD リーダーからのみ TSO を取得します。この機能が有効になっている場合、TiDB は TSO を取得するときにすべての PD ノードにリクエストを均等に送信します。次に、PD フォロワーは TSO 要求を転送して、PD リーダーの CPU 負荷を軽減します。                                          |
+| [`tidb_tso_client_batch_max_wait_time`](/system-variables.md#tidb_tso_client_batch_max_wait_time-new-in-v530)     | 新しく追加された | TiDB が PD から TSO を要求するときのバッチ保存操作の最大待ち時間を設定します。デフォルト値は`0`で、追加の待機がないことを意味します。                                                                                                                                                                                                       |
+| [`tidb_tmp_table_max_size`](/system-variables.md#tidb_tmp_table_max_size-new-in-v530)                             | 新しく追加された | 単一の[一時テーブル](/temporary-tables.md)の最大サイズを制限します。一時テーブルがこのサイズを超えるとエラーが発生します。                                                                                                                                                                                                         |
 
 ### コンフィグレーションファイルのパラメータ {#configuration-file-parameters}
 
-| コンフィグレーションファイル | コンフィグレーション項目                                                                                                                                                                   | 種類の変更    | 説明                                                                                                                                                                                                                                                                                           |
-| :------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| TiDB           | [`prepared-plan-cache.capacity`](/tidb-configuration-file.md#capacity)                                                      | 修正済み     | キャッシュされたステートメントの数を制御します。デフォルト値が`100`から`1000`に変更されました。                                                                                                                                                                                                                                        |
-| TiKV           | [`storage.reserve-space`](/tikv-configuration-file.md#reserve-space)                                                   | 修正済み     | TiKV の起動時にディスク保護のために予約されるスペースを制御します。 v5.3.0 以降、予約領域の 80% は、ディスク領域が不足した場合の運用および保守に必要な追加ディスク領域として使用され、残りの 20% は一時ファイルの保存に使用されます。                                                                                                                                                               |
-| TiKV           | `memory-usage-limit`                                                                                                                                                           | 修正済み     | この構成項目は TiDB v5.3.0 の新機能であり、その値はstorage.block-cache.capacity に基づいて計算されます。                                                                                                                                                                                                                    |
-| TiKV           | [TiKV スレッド プールのパフォーマンス チューニング](/tune-tikv-thread-performance.md#performance-tuning-for-tikv-thread-pools)を参照してください。 |
-| TiKV           | [`raftstore.raft-write-size-limit`](/tikv-configuration-file.md#raft-write-size-limit-new-in-v530) | 新しく追加された | Raftデータがディスクに書き込まれるしきい値を決定します。データサイズがこの設定項目の値より大きい場合、データはディスクに書き込まれます。 `raftstore.store-io-pool-size`の値が`0`の場合、この構成項目は有効になりません。                                                                                                                                                              |
-| TiKV           | `raftstore.raft-msg-flush-interval`                                                                                                                                            | 新しく追加された | Raftメッセージがバッチで送信される間隔を決定します。バッチ内のRaftメッセージは、この設定項目で指定された間隔ごとに送信されます。 `raftstore.store-io-pool-size`の値が`0`の場合、この構成項目は有効になりません。                                                                                                                                                                |
-| TiKV           | `raftstore.raft-reject-transfer-leader-duration`                                                                                                                               | 削除されました  | Leaderが新しく追加されたノードに転送される最小時間を決定します。                                                                                                                                                                                                                                                          |
-| PD             | [`log.file.max-days`](/pd-configuration-file.md#max-days)                                                                     | 修正済み     | ログが保持される最大日数を制御します。デフォルト値が`1`から`0`に変更されました。                                                                                                                                                                                                                                                  |
-| PD             | [`log.file.max-backups`](/pd-configuration-file.md#max-backups)                                                            | 修正済み     | 保持されるログの最大数を制御します。デフォルト値が`7`から`0`に変更されました。                                                                                                                                                                                                                                                   |
-| PD             | [`patrol-region-interval`](/pd-configuration-file.md#patrol-region-interval)                                    | 修正済み     | レプリカチェッカーがリージョンの正常性状態をチェックする実行頻度を制御します。この値が小さいほど、replicaChecker の実行が速くなります。通常、このパラメータを調整する必要はありません。デフォルト値が`100ms`から`10ms`に変更されました。                                                                                                                                                           |
-| PD             | [`max-snapshot-count`](/pd-configuration-file.md#max-snapshot-count)                                                | 修正済み     | 単一ストアが同時に受信または送信するスナップショットの最大数を制御します。 PD スケジューラは、この設定に依存して、通常のトラフィックに使用されるリソースがプリエンプトされるのを防ぎます。デフォルト値が`3`から`64`に変更されました。                                                                                                                                                                     |
-| PD             | [`max-pending-peer-count`](/pd-configuration-file.md#max-pending-peer-count)                                    | 修正済み     | 単一ストア内の保留中のピアの最大数を制御します。 PD スケジューラーはこの構成に依存して、一部のノードで古いログを持つリージョンが多数生成されるのを防ぎます。デフォルト値が`16`から`64`に変更されました。                                                                                                                                                                                   |
-| TiD ライトニング     | `meta-schema-name`                                                                                                                                                             | 新しく追加された | 各TiDB Lightningインスタンスのメタ情報がターゲット クラスターに保存されているスキーマ名。デフォルト値は「lightning_metadata」です。                                                                                                                                                                                                           |
+| コンフィグレーションファイル | コンフィグレーション項目                                                                                       | 種類の変更    | 説明                                                                                                                                                                                                   |
+| :------------- | :------------------------------------------------------------------------------------------------- | :------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| TiDB           | [`prepared-plan-cache.capacity`](/tidb-configuration-file.md#capacity)                             | 修正済み     | キャッシュされたステートメントの数を制御します。デフォルト値が`100`から`1000`に変更されました。                                                                                                                                                |
+| TiKV           | [`storage.reserve-space`](/tikv-configuration-file.md#reserve-space)                               | 修正済み     | TiKV の起動時にディスク保護のために予約されるスペースを制御します。 v5.3.0 以降、予約領域の 80% は、ディスク領域が不足した場合の運用および保守に必要な追加ディスク領域として使用され、残りの 20% は一時ファイルの保存に使用されます。                                                                       |
+| TiKV           | `memory-usage-limit`                                                                               | 修正済み     | この構成項目は TiDB v5.3.0 の新機能であり、その値はstorage.block-cache.capacity に基づいて計算されます。                                                                                                                            |
+| TiKV           | [`raftstore.store-io-pool-size`](/tikv-configuration-file.md#store-io-pool-size-new-in-v530)       | 新しく追加された | Raft I/O タスクを処理するスレッドの許容数。これは StoreWriter スレッド プールのサイズです。このスレッド プールのサイズを変更する場合は、 [TiKV スレッド プールのパフォーマンス チューニング](/tune-tikv-thread-performance.md#performance-tuning-for-tikv-thread-pools)を参照してください。 |
+| TiKV           | [`raftstore.raft-write-size-limit`](/tikv-configuration-file.md#raft-write-size-limit-new-in-v530) | 新しく追加された | Raftデータがディスクに書き込まれるしきい値を決定します。データサイズがこの設定項目の値より大きい場合、データはディスクに書き込まれます。 `raftstore.store-io-pool-size`の値が`0`の場合、この構成項目は有効になりません。                                                                      |
+| TiKV           | `raftstore.raft-msg-flush-interval`                                                                | 新しく追加された | Raftメッセージがバッチで送信される間隔を決定します。バッチ内のRaftメッセージは、この設定項目で指定された間隔ごとに送信されます。 `raftstore.store-io-pool-size`の値が`0`の場合、この構成項目は有効になりません。                                                                        |
+| TiKV           | `raftstore.raft-reject-transfer-leader-duration`                                                   | 削除されました  | Leaderが新しく追加されたノードに転送される最小時間を決定します。                                                                                                                                                                  |
+| PD             | [`log.file.max-days`](/pd-configuration-file.md#max-days)                                          | 修正済み     | ログが保持される最大日数を制御します。デフォルト値が`1`から`0`に変更されました。                                                                                                                                                          |
+| PD             | [`log.file.max-backups`](/pd-configuration-file.md#max-backups)                                    | 修正済み     | 保持されるログの最大数を制御します。デフォルト値が`7`から`0`に変更されました。                                                                                                                                                           |
+| PD             | [`patrol-region-interval`](/pd-configuration-file.md#patrol-region-interval)                       | 修正済み     | レプリカチェッカーがリージョンの正常性状態をチェックする実行頻度を制御します。この値が小さいほど、replicaChecker の実行が速くなります。通常、このパラメータを調整する必要はありません。デフォルト値が`100ms`から`10ms`に変更されました。                                                                   |
+| PD             | [`max-snapshot-count`](/pd-configuration-file.md#max-snapshot-count)                               | 修正済み     | 単一ストアが同時に受信または送信するスナップショットの最大数を制御します。 PD スケジューラは、この設定に依存して、通常のトラフィックに使用されるリソースがプリエンプトされるのを防ぎます。デフォルト値が`3`から`64`に変更されました。                                                                             |
+| PD             | [`max-pending-peer-count`](/pd-configuration-file.md#max-pending-peer-count)                       | 修正済み     | 単一ストア内の保留中のピアの最大数を制御します。 PD スケジューラーはこの構成に依存して、一部のノードで古いログを持つリージョンが多数生成されるのを防ぎます。デフォルト値が`16`から`64`に変更されました。                                                                                           |
+| TiD ライトニング     | `meta-schema-name`                                                                                 | 新しく追加された | 各TiDB Lightningインスタンスのメタ情報がターゲット クラスターに保存されているスキーマ名。デフォルト値は「lightning_metadata」です。                                                                                                                   |
 
 ### その他 {#others}
 
@@ -66,7 +66,7 @@ v5.3 の主な新機能または改善点は次のとおりです。
         -   TiDB 移行ツールを使用してインポートされるクラスター
         -   TiDB 移行ツールを使用して復元されたクラスター
         -   TiDB 移行ツールを使用したレプリケーション タスクのダウンストリーム クラスター
-    -   一時テーブルの互換性情報については、 [他の TiDB 機能との互換性制限](/temporary-tables.md#compatibility-restrictions-with-other-tidb-features)を参照してください。
+    -   一時テーブルの互換性情報については、 [MySQL 一時テーブルとの互換性](/temporary-tables.md#compatibility-with-mysql-temporary-tables)および[他の TiDB 機能との互換性制限](/temporary-tables.md#compatibility-restrictions-with-other-tidb-features)を参照してください。
 
 -   v5.3.0 より前のリリースでは、システム変数が不正な値に設定されている場合、TiDB はエラーを報告します。 v5.3.0 以降のリリースでは、システム変数が不正な値に設定されている場合、TiDB は「|警告 | 1292 | 切り捨てられた不正な xxx: &#39;xx&#39;」などの警告とともに成功を返します。
 
@@ -82,7 +82,7 @@ v5.3 の主な新機能または改善点は次のとおりです。
 
 -   DM コードは[TiCDC コード リポジトリ内のフォルダー「dm」](https://github.com/pingcap/tiflow/tree/master/dm)に移行されます。現在、DM は TiDB のバージョン番号に従うようになりました。 v2.0.x の次の新しい DM バージョンは v5.3.0 で、リスクなしで v2.0.x から v5.3.0 にアップグレードできます。
 
--   Prometheus のデフォルトのデプロイ バージョンは v2.8.1 から[プロメテウスのコミット](https://github.com/prometheus/prometheus/commit/7646cbca328278585be15fa615e22f2a50b47d06)を参照してください。
+-   Prometheus のデフォルトのデプロイ バージョンは v2.8.1 から[v2.27.1](https://github.com/prometheus/prometheus/releases/tag/v2.27.1)にアップグレードされ、2021 年 5 月にリリースされます。このバージョンでは、より多くの機能が提供され、セキュリティ問題が修正されています。 Prometheus v2.8.1 と比較すると、v2.27.1 のアラート時刻表現は Unix タイムスタンプから UTC に変更されています。詳細は[プロメテウスのコミット](https://github.com/prometheus/prometheus/commit/7646cbca328278585be15fa615e22f2a50b47d06)を参照してください。
 
 ## 新機能 {#new-features}
 
@@ -98,7 +98,7 @@ v5.3 の主な新機能または改善点は次のとおりです。
     -   ホットスポット データのリーダーを高性能 TiKV インスタンスにスケジュールする
     -   コールド データを低コストのstorageメディアに分離して、コスト効率を向上させます。
 
-    [#18030](https://github.com/pingcap/tidb/issues/18030)
+    [ユーザードキュメント](/placement-rules-in-sql.md) [#18030](https://github.com/pingcap/tidb/issues/18030)
 
 -   **一時テーブル**
 
@@ -113,13 +113,13 @@ v5.3 の主な新機能または改善点は次のとおりです。
         -   重複したテーブル名をサポートします。アプリケーション用に複雑な命名規則を設計する必要はありません。
         -   セッション レベルのデータ分離を提供し、よりシンプルなアプリケーション ロジックを設計できるようにします。トランザクションが完了すると、一時テーブルは削除されます。
 
-        [#24169](https://github.com/pingcap/tidb/issues/24169)
+        [ユーザードキュメント](/temporary-tables.md) [#24169](https://github.com/pingcap/tidb/issues/24169)
 
 -   **`FOR UPDATE OF TABLES`構文のサポート**
 
     複数のテーブルを結合する SQL ステートメントの場合、TiDB は、 `OF TABLES`に含まれるテーブルに関連付けられた行に対する悲観的ロックの取得をサポートします。
 
-    [#28689](https://github.com/pingcap/tidb/issues/28689)
+    [ユーザードキュメント](/sql-statements/sql-statement-select.md) [#28689](https://github.com/pingcap/tidb/issues/28689)
 
 -   **テーブルの属性**
 
@@ -127,7 +127,7 @@ v5.3 の主な新機能または改善点は次のとおりです。
 
     ユーザー シナリオ: `SPLIT TABLE`操作を実行するときに、一定期間 (PD パラメーター[`split-merge-interval`](/pd-configuration-file.md#split-merge-interval)で制御) が経過してもデータが挿入されない場合、空のリージョンはデフォルトで自動的にマージされます。この場合、テーブル属性を`merge_option=deny`に設定して、リージョンの自動マージを回避できます。
 
-    [#3839](https://github.com/tikv/pd/issues/3839)
+    [ユーザードキュメント](/table-attributes.md) [#3839](https://github.com/tikv/pd/issues/3839)
 
 ### Security {#security}
 
@@ -157,7 +157,7 @@ v5.3 の主な新機能または改善点は次のとおりです。
     >
     > TSO 要求の負荷が高くない場合、この変数値を変更することはお勧めできません。
 
-    [#3149](https://github.com/tikv/pd/issues/3149)
+    [ユーザードキュメント](/system-variables.md#tidb_tso_client_batch_max_wait_time-new-in-v530) [#3149](https://github.com/tikv/pd/issues/3149)
 
 ### 安定性 {#stability}
 
@@ -167,7 +167,7 @@ v5.3 の主な新機能または改善点は次のとおりです。
 
     TiDB チームのサポートを受けて機能関連の操作を実行することをお勧めします。
 
-    [#10483](https://github.com/tikv/tikv/issues/10483)
+    [ユーザードキュメント](/online-unsafe-recovery.md) [#10483](https://github.com/tikv/tikv/issues/10483)
 
 ### データ移行 {#data-migration}
 
@@ -190,7 +190,7 @@ v5.3 の主な新機能または改善点は次のとおりです。
 
     TiDB Lightning は、元の機能を拡張するための並行インポート機能を提供します。これにより、複数の Lightning インスタンスを同時にデプロイして、単一のテーブルまたは複数のテーブルをダウンストリーム TiDB に並行してインポートできます。顧客の使用方法を変えることなく、データ移行機能が大幅に向上し、よりリアルタイムの方法でデータを移行して、データをさらに処理、統合、分析できるようになります。企業のデータ管理の効率が向上します。
 
-    私たちのテストでは、10 個のTiDB Lightningインスタンスを使用して、合計 20 TiB MySQL データを 8 時間以内に TiDB にインポートできます。複数テーブルのインポートのパフォーマンスも向上しました。単一のTiDB Lightningインスタンスは 250 GiB/h でのインポートをサポートでき、全体的な移行は元のパフォーマンスの 8 倍高速になります。
+    私たちのテストでは、10 個のTiDB Lightningインスタンスを使用して、合計 20 TiB MySQL データを 8 時間以内に TiDB にインポートできました。複数テーブルのインポートのパフォーマンスも向上しました。単一のTiDB Lightningインスタンスは 250 GiB/h でのインポートをサポートでき、全体的な移行は元のパフォーマンスの 8 倍高速になります。
 
     [ユーザードキュメント](/tidb-lightning/tidb-lightning-distributed-import.md)
 
@@ -225,7 +225,7 @@ v5.3 の主な新機能または改善点は次のとおりです。
     -   オンサイトのトラブルシューティングで TiDB クラスターの情報を ZIP 形式のファイルにエクスポートしてstorage。
     -   別の TiDB クラスターからエクスポートされた ZIP 形式のファイルをクラスターにインポートします。このファイルには、オンサイトのトラブルシューティングにおける後者の TiDB クラスターの情報が含まれています。
 
-    [#26325](https://github.com/pingcap/tidb/issues/26325)
+    [ユーザードキュメント](/sql-plan-replayer.md) [#26325](https://github.com/pingcap/tidb/issues/26325)
 
 ### TiDB データ共有サブスクリプション {#tidb-data-share-subscription}
 
@@ -286,7 +286,7 @@ TiCDC v5.3.0 以降、TiDB クラスター間の循環レプリケーション�
 
     -   書き込みクエリの統計タイプをさらに追加[#10507](https://github.com/tikv/tikv/issues/10507)
 
-    -   I/O 操作をRaftstoreスレッド プールから分離することで書き込みレイテンシーを短縮します (デフォルトでは無効)。チューニングの詳細については、 [#10540](https://github.com/tikv/tikv/issues/10540)を参照してください。
+    -   I/O 操作をRaftstoreスレッド プールから分離することで書き込みレイテンシーを短縮します (デフォルトでは無効)。チューニングの詳細については、 [TiKV スレッド プールのパフォーマンスを調整する](/tune-tikv-thread-performance.md) [#10540](https://github.com/tikv/tikv/issues/10540)を参照してください。
 
 -   PD
 
@@ -329,15 +329,15 @@ TiCDC v5.3.0 以降、TiDB クラスター間の循環レプリケーション�
     -   TiCDC
 
         -   Kafka シンク構成項目`MaxMessageBytes`のデフォルト値を 64 MB から 1 MB に減らし、大きなメッセージが Kafka ブローカーによって拒否される問題を修正します[#3104](https://github.com/pingcap/tiflow/pull/3104)
-        -   レプリケーション パイプラインのメモリ使用量を削減する[#2726](https://github.com/pingcap/tiflow/pull/2726)
-        -   監視項目とアラートルールを最適化し、同期リンク、メモリGC、ストックデータスキャン処理の可観測性を向上[#2156](https://github.com/pingcap/tiflow/issues/2156)
+        -   レプリケーション パイプラインのメモリ使用量を削減する[#2553](https://github.com/pingcap/tiflow/issues/2553) [#3037](https://github.com/pingcap/tiflow/pull/3037) [#2726](https://github.com/pingcap/tiflow/pull/2726)
+        -   監視項目とアラートルールを最適化し、同期リンク、メモリGC、ストックデータスキャン処理の可観測性を向上[#2735](https://github.com/pingcap/tiflow/pull/2735) [#1606](https://github.com/pingcap/tiflow/issues/1606) [#3000](https://github.com/pingcap/tiflow/pull/3000) [#2985](https://github.com/pingcap/tiflow/issues/2985) [#2156](https://github.com/pingcap/tiflow/issues/2156)
         -   同期タスクのステータスが正常な場合、ユーザーの誤解を避けるために、履歴エラー メッセージは表示されません[#2242](https://github.com/pingcap/tiflow/issues/2242)
 
 ## バグの修正 {#bug-fixes}
 
 -   TiDB
 
-    -   間違った実行計画が原因で実行中に発生するエラーを修正します。間違った実行プランは、パーティション化されたテーブルで集計演算子をプッシュダウンするときにスキーマ列の浅いコピーが原因で発生します[#26554](https://github.com/pingcap/tidb/issues/26554)
+    -   間違った実行計画が原因で実行中に発生するエラーを修正します。間違った実行プランは、パーティション化されたテーブルで集計演算子をプッシュダウンするときにスキーマ列の浅いコピーが原因で発生します[#27797](https://github.com/pingcap/tidb/issues/27797) [#26554](https://github.com/pingcap/tidb/issues/26554)
     -   `plan cache`符号なしフラグの変更を検出できない問題を修正[#28254](https://github.com/pingcap/tidb/issues/28254)
     -   パーティション関数が範囲[#28233](https://github.com/pingcap/tidb/issues/28233)の外にある場合の間違ったパーティション プルーニングを修正しました。
     -   場合によってはプランナーが`join`の無効なプランをキャッシュする可能性がある問題を修正します[#28087](https://github.com/pingcap/tidb/issues/28087)
@@ -408,7 +408,7 @@ TiCDC v5.3.0 以降、TiDB クラスター間の循環レプリケーション�
     -   新しい照合順序が有効になっている場合に発生する可能性のある間違った結果を修正
     -   SQL ステートメントに非常に長いネストされた式が含まれている場合に発生する可能性のある解析エラーを修正しました。
     -   Exchange オペレーターで発生する可能性のある`Block schema mismatch`エラーを修正
-    -   Decimal 型を比較するときに発生する可能性のある`Can't compare`エラーを修正
+    -   Decimal 型を比較す​​るときに発生する可能性のある`Can't compare`エラーを修正
     -   `left/substring`機能の`3rd arguments of function substringUTF8 must be constants`エラーを修正
 
 -   ツール

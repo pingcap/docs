@@ -29,7 +29,7 @@ TiDB 4.0 以降、すべての TiDB 移行ツールは、サブセットを定�
 
 </CustomContent>
 
--   [Dumpling](/dumpling-overview.md) :
+-   [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview) :
 
     ```shell
     ./dumpling -f 'foo*.*' -f 'bar*.*' -P 3306 -o /tmp/data/

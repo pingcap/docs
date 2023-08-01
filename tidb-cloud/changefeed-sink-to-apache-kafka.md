@@ -1,19 +1,30 @@
 ---
-title: Sink to Apache Kafka
+title: Sink to Apache Kafka (Beta)
 Summary: Learn how to create a changefeed to stream data from TiDB Cloud to Apache Kafka.
 ---
 
-# Apache Kafka にシンクする {#sink-to-apache-kafka}
+# Apache Kafka にシンク (ベータ) {#sink-to-apache-kafka-beta}
 
 このドキュメントでは、 TiDB Cloudから Apache Kafka にデータをストリーミングするためのチェンジフィードを作成する方法について説明します。
 
 > **ノート：**
 >
-> 現在、Kafka シンクは**ベータ版**です。 Changefeed 機能を使用するには、TiDB クラスターのバージョンが v6.4.0 以降であり、TiKV ノードのサイズが少なくとも 8 vCPU および 16 GiB であることを確認してください。
->
-> [Serverless Tierクラスター](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta)の場合、チェンジフィード機能は使用できません。
+> -   現在、Kafka シンクは**ベータ版**です。チェンジフィード機能を使用するには、TiDB 専用クラスターのバージョンが v6.4.0 以降であることを確認してください。
+> -   [TiDB サーバーレスクラスター](/tidb-cloud/select-cluster-tier.md#tidb-serverless)の場合、チェンジフィード機能は使用できません。
+
+## 制限 {#restrictions}
+
+-   TiDB Cloudクラスターごとに、最大 5 つの変更フィードを作成できます。
+-   現在、 TiDB Cloud は、Kafka ブローカーに接続するための自己署名 TLS 証明書のアップロードをサポートしていません。
+-   TiDB Cloud はTiCDC を使用して変更フィードを確立するため、同じ[TiCDC としての制限](https://docs.pingcap.com/tidb/stable/ticdc-overview#unsupported-scenarios)を持ちます。
+-   レプリケートされるテーブルに主キーまたは NULL 以外の一意のインデックスがない場合、レプリケーション中に一意制約がないため、一部の再試行シナリオでは重複したデータがダウンストリームに挿入される可能性があります。
 
 ## 前提条件 {#prerequisites}
+
+データを Apache Kafka にストリーミングするための変更フィードを作成する前に、次の前提条件を満たしている必要があります。
+
+-   ネットワーク接続をセットアップする
+-   Kafka ACL 認可のためのアクセス許可を追加する
 
 ### 通信網 {#network}
 
@@ -46,7 +57,7 @@ TiDB Cloud変更フィードがデータを Apache Kafka にストリーミン�
 -   Kafka のトピック リソース タイプに`Create`および`Write`権限が追加されます。
 -   Kafka のクラスター リソース タイプに`DescribeConfigs`権限が追加されます。
 
-たとえば、Kafka クラスターが Confluent Cloud にある場合、詳細については Confluent ドキュメントの[ACLの追加](https://docs.confluent.io/platform/current/kafka/authorization.html#adding-acls)を参照してください。
+たとえば、Kafka クラスターが Confluent Cloud にある場合、詳細については Confluent ドキュメントの[資力](https://docs.confluent.io/platform/current/kafka/authorization.html#resources)と[ACLの追加](https://docs.confluent.io/platform/current/kafka/authorization.html#adding-acls)を参照してください。
 
 ## ステップ 1. Apache Kafka のチェンジフィード ページを開く {#step-1-open-the-changefeed-page-for-apache-kafka}
 
@@ -75,7 +86,7 @@ TiDB Cloud変更フィードがデータを Apache Kafka にストリーミン�
 1.  **テーブル フィルターを**カスタマイズして、複製するテーブルをフィルターします。ルールの構文については、 [テーブルフィルタールール](/table-filter.md)を参照してください。
 
     -   **フィルター ルールの追加**: この列でフィルター ルールを設定できます。デフォルトでは、すべてのテーブルを複製することを表すルール`*.*`があります。新しいルールを追加すると、 TiDB CloudはTiDB 内のすべてのテーブルをクエリし、ルールに一致するテーブルのみを**[複製する**テーブル] 列に表示します。
-    -   **複製されるテーブル**: この列には、複製されるテーブルが表示されます。ただし、今後複製される新しいテーブルや完全に複製されるスキーマは表示されません。
+    -   **複製されるテーブル**: この列には、複製されるテーブルが表示されます。ただし、今後複製​​される新しいテーブルや完全に複製されるスキーマは表示されません。
     -   **有効なキーのないテーブル**: この列には、一意キーと主キーのないテーブルが表示されます。これらのテーブルでは、ダウンストリーム システムが重複イベントを処理するために一意の識別子を使用できないため、レプリケーション中にデータが不整合になる可能性があります。このような問題を回避するには、レプリケーションの前にこれらのテーブルに一意キーまたは主キーを追加するか、これらのテーブルをフィルターで除外するフィルター ルールを設定することをお勧めします。たとえば、「!test.tbl1」を使用してテーブル`test.tbl1`を除外できます。
 
 2.  **「データ形式」**領域で、Kafka メッセージの希望の形式を選択します。
@@ -85,7 +96,7 @@ TiDB Cloud変更フィードがデータを Apache Kafka にストリーミン�
 
 3.  **TiDB 拡張フィールドを Kafka メッセージ本文に追加する場合は、TiDB 拡張**オプションを有効にします。
 
-    TiDB 拡張フィールドの詳細については、 [Canal-JSON データ形式の TiDB 拡張フィールド](https://docs.pingcap.com/tidb/stable/ticdc-canal-json#tidb-extension-field)を参照してください。
+    TiDB 拡張フィールドの詳細については、 [Avro データ形式の TiDB 拡張フィールド](https://docs.pingcap.com/tidb/stable/ticdc-avro-protocol#tidb-extension-fields)および[Canal-JSON データ形式の TiDB 拡張フィールド](https://docs.pingcap.com/tidb/stable/ticdc-canal-json#tidb-extension-field)を参照してください。
 
 4.  データ形式として**Avro**を選択すると、ページに Avro 固有の構成がいくつか表示されます。これらの構成は次のように入力できます。
 
@@ -129,16 +140,16 @@ TiDB Cloud変更フィードがデータを Apache Kafka にストリーミン�
     -   **レプリケーション係数**: 各 Kafka メッセージがレプリケートされる Kafka サーバーの数を制御します。
     -   **パーティション番号**: トピック内に存在するパーティションの数を制御します。
 
-8.  **「次へ」**をクリックして設定した構成を確認し、次のページに進みます。
+8.  **「次へ」**をクリックします。
 
-## ステップ 4. 構成を確認する {#step-4-review-the-configurations}
+## ステップ 4. 変更フィード仕様を構成する {#step-4-configure-your-changefeed-specification}
+
+1.  **「変更フィードの仕様」**領域で、変更フィードで使用するレプリケーション キャパシティ ユニット (RCU) の数を指定します。
+2.  **「変更フィード名」**領域で、変更フィードの名前を指定します。
+3.  **「次へ」**をクリックして設定した構成を確認し、次のページに進みます。
+
+## ステップ 5. 構成を確認する {#step-5-review-the-configurations}
 
 このページでは、設定したすべての変更フィード構成を確認できます。
 
 エラーが見つかった場合は、戻ってエラーを修正できます。エラーがない場合は、下部のチェックボックスをクリックし、 **[作成]**をクリックして変更フィードを作成します。
-
-## 制限 {#restrictions}
-
--   TiDB Cloudクラスターごとに、最大 10 個の変更フィードを作成できます。
--   現在、 TiDB Cloud は、Kafka ブローカーに接続するための自己署名 TLS 証明書のアップロードをサポートしていません。
--   TiDB Cloud はTiCDC を使用して変更フィードを確立するため、同じ[TiCDC としての制限](https://docs.pingcap.com/tidb/stable/ticdc-overview#restrictions)を持ちます。

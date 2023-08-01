@@ -53,7 +53,7 @@ TiDB バージョン: 5.0.2
 
         -   いくつかのあいまいなエラー メッセージを明確にする[#1132](https://github.com/pingcap/br/pull/1132)
         -   バックアップのクラスター バージョンの確認のサポート[#1091](https://github.com/pingcap/br/pull/1091)
-        -   `mysql`スキーマ[#1078](https://github.com/pingcap/br/pull/1078)でのシステム テーブルのバックアップと復元のサポート
+        -   `mysql`スキーマ[#1143](https://github.com/pingcap/br/pull/1143) [#1078](https://github.com/pingcap/br/pull/1078)でのシステム テーブルのバックアップと復元のサポート
 
     -   Dumpling
 
@@ -63,7 +63,7 @@ TiDB バージョン: 5.0.2
 
 -   TiDB
 
-    -   場合によってはプレフィックスインデックスとインデックスジョインの使用によって引き起こされるpanicの問題を修正[#24717](https://github.com/pingcap/tidb/issues/24717)
+    -   場合によってはプレフィックスインデックスとインデックスジョインの使用によって引き起こされるpanicの問題を修正[#24547](https://github.com/pingcap/tidb/issues/24547) [#24716](https://github.com/pingcap/tidb/issues/24716) [#24717](https://github.com/pingcap/tidb/issues/24717)
     -   準備されたプラン キャッシュ`point get`がトランザクション[#24741](https://github.com/pingcap/tidb/issues/24741)の`point get`ステートメントによって誤って使用される問題を修正します。
     -   照合順序が`ascii_bin`または`latin1_bin` [#24569](https://github.com/pingcap/tidb/issues/24569)場合に、間違ったプレフィックス インデックス値が書き込まれる問題を修正します。
     -   進行中のトランザクションが GC ワーカーによって中断される可能性がある問題を修正します[#24591](https://github.com/pingcap/tidb/issues/24591)
@@ -82,7 +82,7 @@ TiDB バージョン: 5.0.2
 
 -   TiKV
 
-    -   古い値の読み取りによって発生する TiCDC OOM 問題を修正[#9981](https://github.com/tikv/tikv/issues/9981)
+    -   古い値の読み取りによって発生する TiCDC OOM 問題を修正[#9996](https://github.com/tikv/tikv/issues/9996) [#9981](https://github.com/tikv/tikv/issues/9981)
     -   照合順序が`latin1_bin` [#24548](https://github.com/pingcap/tidb/issues/24548)の場合に、クラスター化された主キー列のセカンダリ インデックスに空の値が表示される問題を修正します。
     -   `abort-on-panic`構成を追加します。これにより、panic発生時に TiKV がコア ダンプ ファイルを生成できるようになります。ユーザーは、コア ダンプ[#10216](https://github.com/tikv/tikv/pull/10216)を有効にするために環境を正しく構成する必要があります。
     -   TiKV がビジーでないときに発生する`point get`クエリのパフォーマンス低下の問題を修正します[#10046](https://github.com/tikv/tikv/issues/10046)

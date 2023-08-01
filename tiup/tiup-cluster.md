@@ -61,7 +61,7 @@ Flags:
 tiup cluster deploy <cluster-name> <version> <topology.yaml> [flags]
 ```
 
-このコマンドでは、クラスター名、TiDB クラスターのバージョン ( `v6.5.0`など)、およびクラスターのトポロジー ファイルを指定する必要があります。
+このコマンドでは、クラスター名、TiDB クラスターのバージョン ( `v7.1.1`など)、およびクラスターのトポロジー ファイルを指定する必要があります。
 
 トポロジ ファイルを作成するには、 [例](https://github.com/pingcap/tiup/blob/master/embed/examples/cluster/topology.example.yaml)を参照してください。次のファイルは、最も単純なトポロジの例です。
 
@@ -118,12 +118,12 @@ tidb_servers:
 ...
 ```
 
-ファイルを`/tmp/topology.yaml`として保存します。 TiDB v7.1.0 を使用し、クラスター名が`prod-cluster`場合は、次のコマンドを実行します。
+ファイルを`/tmp/topology.yaml`として保存します。 TiDB v7.1.1 を使用する場合で、クラスター名が`prod-cluster`場合は、次のコマンドを実行します。
 
 {{< copyable "" >}}
 
 ```shell
-tiup cluster deploy -p prod-cluster v7.1.0 /tmp/topology.yaml
+tiup cluster deploy -p prod-cluster v7.1.1 /tmp/topology.yaml
 ```
 
 実行中、 TiUP はトポロジを再度確認するように求め、ターゲット マシンの root パスワードを要求します ( `-p`フラグはパスワードの入力を意味します)。
@@ -131,7 +131,7 @@ tiup cluster deploy -p prod-cluster v7.1.0 /tmp/topology.yaml
 ```bash
 Please confirm your topology:
 TiDB Cluster: prod-cluster
-TiDB Version: v7.1.0
+TiDB Version: v7.1.1
 Type        Host          Ports                            OS/Arch       Directories
 ----        ----          -----                            -------       -----------
 pd          172.16.5.134  2379/2380                        linux/x86_64  deploy/pd-2379,data/pd-2379
@@ -174,7 +174,7 @@ tiup cluster list
 Starting /root/.tiup/components/cluster/v1.11.3/cluster list
 Name          User  Version    Path                                               PrivateKey
 ----          ----  -------    ----                                               ----------
-prod-cluster  tidb  v7.1.0    /root/.tiup/storage/cluster/clusters/prod-cluster  /root/.tiup/storage/cluster/clusters/prod-cluster/ssh/id_rsa
+prod-cluster  tidb  v7.1.1    /root/.tiup/storage/cluster/clusters/prod-cluster  /root/.tiup/storage/cluster/clusters/prod-cluster/ssh/id_rsa
 ```
 
 ## クラスターを開始する {#start-the-cluster}
@@ -204,7 +204,7 @@ tiup cluster display prod-cluster
 ```
 Starting /root/.tiup/components/cluster/v1.11.3/cluster display prod-cluster
 TiDB Cluster: prod-cluster
-TiDB Version: v7.1.0
+TiDB Version: v7.1.1
 ID                  Role        Host          Ports                            OS/Arch       Status  Data Dir              Deploy Dir
 --                  ----        ----          -----                            -------       ------  --------              ----------
 172.16.5.134:3000   grafana     172.16.5.134  3000                             linux/x86_64  Up      -                     deploy/grafana-3000
@@ -278,7 +278,7 @@ tiup cluster display prod-cluster
 ```
 Starting /root/.tiup/components/cluster/v1.11.3/cluster display prod-cluster
 TiDB Cluster: prod-cluster
-TiDB Version: v7.1.0
+TiDB Version: v7.1.1
 ID                  Role        Host          Ports                            OS/Arch       Status   Data Dir              Deploy Dir
 --                  ----        ----          -----                            -------       ------   --------              ----------
 172.16.5.134:3000   grafana     172.16.5.134  3000                             linux/x86_64  Up       -                     deploy/grafana-3000
@@ -389,12 +389,12 @@ Global Flags:
   -y, --yes               Skip all confirmations and assumes 'yes'
 ```
 
-たとえば、次のコマンドはクラスターを v7.1.0 にアップグレードします。
+たとえば、次のコマンドはクラスターを v7.1.1 にアップグレードします。
 
 {{< copyable "" >}}
 
 ```bash
-tiup cluster upgrade tidb-test v7.1.0
+tiup cluster upgrade tidb-test v7.1.1
 ```
 
 ## 構成を更新する {#update-configuration}
@@ -579,11 +579,11 @@ tiup cluster audit
 Starting component `cluster`: /home/tidb/.tiup/components/cluster/v1.11.3/cluster audit
 ID      Time                       Command
 --      ----                       -------
-4BLhr0  2023-05-31T23:55:09+08:00  /home/tidb/.tiup/components/cluster/v1.11.3/cluster deploy test v7.1.0 /tmp/topology.yaml
-4BKWjF  2022-03-029T23:36:57+08:00  /home/tidb/.tiup/components/cluster/v1.11.3/cluster deploy test v7.1.0 /tmp/topology.yaml
-4BKVwH  2023-05-31T23:02:08+08:00  /home/tidb/.tiup/components/cluster/v1.11.3/cluster deploy test v7.1.0 /tmp/topology.yaml
-4BKKH1  2023-05-31T16:39:04+08:00  /home/tidb/.tiup/components/cluster/v1.11.3/cluster destroy test
-4BKKDx  2023-05-31T16:36:57+08:00  /home/tidb/.tiup/components/cluster/v1.11.3/cluster deploy test v7.1.0 /tmp/topology.yaml
+4BLhr0  2023-07-20T23:55:09+08:00  /home/tidb/.tiup/components/cluster/v1.11.3/cluster deploy test v7.1.1 /tmp/topology.yaml
+4BKWjF  2022-03-029T23:36:57+08:00  /home/tidb/.tiup/components/cluster/v1.11.3/cluster deploy test v7.1.1 /tmp/topology.yaml
+4BKVwH  2023-07-20T23:02:08+08:00  /home/tidb/.tiup/components/cluster/v1.11.3/cluster deploy test v7.1.1 /tmp/topology.yaml
+4BKKH1  2023-07-20T16:39:04+08:00  /home/tidb/.tiup/components/cluster/v1.11.3/cluster destroy test
+4BKKDx  2023-07-20T16:36:57+08:00  /home/tidb/.tiup/components/cluster/v1.11.3/cluster deploy test v7.1.1 /tmp/topology.yaml
 ```
 
 最初の列は`audit-id`です。特定のコマンドの実行ログを表示するには、次のようにコマンドの`audit-id`をフラグとして渡します。
@@ -699,7 +699,7 @@ CPU スレッド数チェック、メモリサイズチェック、ディスク 
 
 次に、 `--ssh=system`コマンド ライン フラグを使用して、システム ネイティブのコマンド ライン ツールを有効にします。
 
--   クラスターをデプロイ。 `tiup cluster deploy <cluster-name> <version> <topo> --ssh=system` . `<cluster-name>`にはクラスターの名前を、 `<version>`にはデプロイする TiDB バージョン ( `v6.5.0`など)、 `<topo>`にはトポロジ ファイルを入力します。
+-   クラスターをデプロイ。 `tiup cluster deploy <cluster-name> <version> <topo> --ssh=system` . `<cluster-name>`にはクラスターの名前を、 `<version>`にはデプロイする TiDB バージョン ( `v7.1.1`など)、 `<topo>`にはトポロジ ファイルを入力します。
 -   クラスターを開始します: `tiup cluster start <cluster-name> --ssh=system`
 -   クラスターのアップグレード: `tiup cluster upgrade ... --ssh=system`
 

@@ -51,7 +51,10 @@ mysql> ADMIN SHOW DDL;
 -   `JOB_ID` : 各 DDL 操作は DDL ジョブに対応します。 `JOB_ID`世界的にユニークです。
 -   `DB_NAME` : DDL 操作が実行されるデータベースの名前。
 -   `TABLE_NAME` : DDL 操作が実行されるテーブルの名前。
--   `JOB_TYPE` : DDL 操作のタイプ。
+-   `JOB_TYPE` : DDL 操作のタイプ。一般的なジョブ タイプには次のものがあります。
+    -   `ingest` : [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630)で構成された加速されたインデックス バックフィルを使用した取り込み。
+    -   `txn` : 基本的なトランザクション バックフィル。
+    -   `txn-merge` : バックフィルの終了時に元のインデックスとマージされる一時インデックスによるトランザクション バックフィル。
 -   `SCHEMA_STATE` : DDL が操作するスキーマ オブジェクトの現在の状態。 `JOB_TYPE`が`ADD INDEX`の場合、それはインデックスの状態です。 `JOB_TYPE`が`ADD COLUMN`の場合、それは列の状態です。 `JOB_TYPE`が`CREATE TABLE`の場合、それはテーブルの状態です。一般的な状態には次のようなものがあります。
     -   `none` : 存在しないことを示します。通常、 `DROP`操作後、または`CREATE`操作が失敗してロールバックした後、 `none`状態になります。
     -   `delete only` 、 `write only` 、 `delete reorganization` 、 `write reorganization` : これら 4 つの状態は中間状態です。それぞれの具体的な意味については、 [TiDB でのオンライン DDL 非同期変更の仕組み](/ddl-introduction.md#how-the-online-ddl-asynchronous-change-works-in-tidb)を参照してください。中間状態の変換は高速であるため、これらの状態は通常、動作中に表示されません。 `ADD INDEX`操作を実行した場合にのみ、インデックス データが追加されていることを示す`write reorganization`状態が表示されます。
@@ -138,7 +141,7 @@ ADMIN SHOW DDL JOBS [NUM] [WHERE where_condition];
 ```
 
 -   `NUM` : 完了した DDL ジョブ キュー内の最後の`NUM`の結果を表示します。指定しない場合、デフォルトでは`NUM` 10 になります。
--   `WHERE` : フィルター条件を追加します。
+-   `WHERE` : フィルタ条件を追加します。
 
 ### <code>ADMIN SHOW DDL JOB QUERIES</code> {#code-admin-show-ddl-job-queries-code}
 

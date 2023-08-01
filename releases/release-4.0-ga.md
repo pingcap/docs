@@ -37,7 +37,7 @@ TiDB バージョン: 4.0.0
     -   `insert/replace into tbl_name partition` ( `partition_name_list` ) ステートメントをサポートします[#17313](https://github.com/pingcap/tidb/pull/17313)
     -   `Distinct`関数使用時の`collations`の値のチェックをサポート[#17240](https://github.com/pingcap/tidb/pull/17240)
     -   ハッシュ パーティション プルーニング中の`is null`フィルター条件のサポート[#17310](https://github.com/pingcap/tidb/pull/17310)
-    -   パーティション化されたテーブルで`admin check index` 、 `admin cleanup index` 、および`admin recover index`をサポート[#17317](https://github.com/pingcap/tidb/pull/17317)
+    -   パーティション化されたテーブルで`admin check index` 、 `admin cleanup index` 、および`admin recover index`をサポート[#17392](https://github.com/pingcap/tidb/pull/17392) [#17405](https://github.com/pingcap/tidb/pull/17405) [#17317](https://github.com/pingcap/tidb/pull/17317)
     -   `in`式[#17320](https://github.com/pingcap/tidb/pull/17320)の範囲パーティション プルーニングをサポートします。
 
 -   TiFlash
@@ -110,6 +110,6 @@ TiDB バージョン: 4.0.0
     -   バックアップと復元 (BR)
         -   BR がクラウドstorage[#298](https://github.com/pingcap/br/pull/298)からデータを復元するときに、ネットワークの問題によりデータの復元が失敗する問題を修正します。
     -   TiCDC
-        -   データ競合によるシステムパニックを修正[#566](https://github.com/pingcap/tiflow/pull/566)
-        -   不適切な処理ロジックによって引き起こされるリソース リークまたはシステムのブロックを修正します[#586](https://github.com/pingcap/tiflow/pull/586)
+        -   データ競合によるシステムパニックを修正[#565](https://github.com/pingcap/tiflow/pull/565) [#566](https://github.com/pingcap/tiflow/pull/566)
+        -   不適切な処理ロジックによって引き起こされるリソース リークまたはシステムのブロックを修正します[#574](https://github.com/pingcap/tiflow/pull/574) [#586](https://github.com/pingcap/tiflow/pull/586)
         -   CLI が PD [#579](https://github.com/pingcap/tiflow/pull/579)に接続できないためにコマンド ラインがスタックする問題を修正

@@ -29,7 +29,7 @@ TiKV クラスターに次の特性がある場合、この機能を使用でき
 
 ## 使用法 {#usage}
 
-Partitioned Raft KV を有効にするには、クラスター作成時に構成項目[`rocksdb.write-buffer-limit`](/tikv-configuration-file.md#write-buffer-limit-new-in-v660)を使用して、 Raft KV を使用するときに RocksDB のメモリ使用量を制御できます。
+Partitioned Raft KV を有効にするには、クラスター作成時に構成項目[`storage.engine`](/tikv-configuration-file.md#engine-new-in-v660) ～ `"partitioned-raft-kv"`を設定します。同時に、構成項目[`rocksdb.write-buffer-flush-oldest-first`](/tikv-configuration-file.md#write-buffer-flush-oldest-first-new-in-v660)と[`rocksdb.write-buffer-limit`](/tikv-configuration-file.md#write-buffer-limit-new-in-v660)を使用して、 Raft KV を使用するときに RocksDB のメモリ使用量を制御できます。
 
 ## 制限 {#restrictions}
 
@@ -38,4 +38,5 @@ Partitioned Raft KV を有効にするには、クラスター作成時に構成
 -   EBS ボリューム スナップショット バックアップはまだサポートされていません。
 -   オンラインの安全でない復元や Titan はまだサポートされていません。
 -   tikv-ctl コマンドライン ツールはまだサポートされていません。
+-   TiFlashにはまだ対応していません。
 -   クラスターの初期化後は、この機能を有効または無効にすることはできません。

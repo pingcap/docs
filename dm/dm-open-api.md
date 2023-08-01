@@ -25,9 +25,11 @@ OpenAPI を有効にするには、次のいずれかの操作を実行します
 
 > **ノート：**
 >
-> -   DM は、OpenAPI 3.0.0 標準を満たす[スワガーエディター](https://editor.swagger.io/)でプレビューできます。
+> -   DM は、OpenAPI 3.0.0 標準を満たす[仕様書](https://github.com/pingcap/tiflow/blob/master/dm/openapi/spec/dm.yaml)を提供します。このドキュメントには、すべてのリクエスト パラメーターと戻り値が含まれています。ドキュメント yaml をコピーして、 [スワガーエディター](https://editor.swagger.io/)でプレビューできます。
 >
 > -   DM マスター ノードを展開した後、 `http://{master-addr}/api/v1/docs`にアクセスしてドキュメントをオンラインでプレビューできます。
+>
+> -   構成ファイルでサポートされている一部の機能は、OpenAPI ではサポートされていません。それらの機能は完全には一致していません。本番環境では、 [設定ファイル](/dm/dm-config-overview.md)を使用することをお勧めします。
 
 API を使用して、DM クラスター上で次のメンテナンス操作を実行できます。
 
@@ -596,7 +598,7 @@ curl -X 'POST' \
 
 ## データソースのリレーログ機能を停止する {#stop-the-relay-log-feature-for-data-sources}
 
-この API は非同期インターフェイスです。リクエストが成功した場合、返される本文のステータス コードは 200 です。最新のステータスを確認するには、 [データソースの情報を取得する](#get-the-information-of-a-data-source)を実行します。
+この API は非同期インターフェイスです。リクエストが成功した場合、返される本文のステータス コードは 200 です。最新のステータスを確認するには、 [データソースの情報を取得する](#get-the-information-of-a-data-source)手順を実行します。
 
 ### リクエストURI {#request-uri}
 
@@ -643,7 +645,7 @@ curl -X 'POST' \
 
 ## データソースとDMワーカー間のバインディングを変更する {#change-the-bindings-between-the-data-source-and-dm-workers}
 
-この API は非同期インターフェイスです。リクエストが成功した場合、返される本文のステータス コードは 200 です。最新のステータスを確認するには、 [DMワーカーノードの情報を取得する](#get-the-information-of-a-dm-worker-node)を実行します。
+この API は非同期インターフェイスです。リクエストが成功した場合、返される本文のステータス コードは 200 です。最新のステータスを確認するには、 [DMワーカーノードの情報を取得する](#get-the-information-of-a-dm-worker-node)手順を実行します。
 
 ### リクエストURI {#request-uri}
 

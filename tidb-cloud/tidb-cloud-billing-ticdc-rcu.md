@@ -1,39 +1,31 @@
 ---
 title: Changefeed Billing
 summary: Learn about billing for changefeeds in TiDB Cloud.
+aliases: ['/tidbcloud/tidb-cloud-billing-tcu']
 ---
 
 # 変更フィード請求 {#changefeed-billing}
 
-TiDB Cloud は、変更フィードの容量を TiCDC レプリケーション キャパシティ ユニット (RCU) で測定します。クラスターの最初の変更フィードを作成すると、 TiDB Cloudによって自動的に TiCDC RCU がセットアップされ、これらの TiCDC RCU に対して料金が発生します。単一クラスター内に作成されたすべての変更フィードは、同じ TiCDC RCU を共有します。
+TiDB Cloudは、 TiCDC レプリケーション キャパシティ ユニット (RCU) で[変更フィード](/tidb-cloud/changefeed-overview.md)のキャパシティを測定します。クラスタの[変更フィードを作成する](/tidb-cloud/changefeed-overview.md#create-a-changefeed)は、適切な仕様を選択できます。 RCU が高いほど、レプリケーションのパフォーマンスが向上します。これらの TiCDC 変更フィード RCU に対して料金が発生します。
 
 ## TiCDC RCU の数 {#number-of-ticdc-rcus}
 
-TiDB クラスターごとに、TiCDC RCU の数は、クラスター内のすべての TiKV ノードの合計 vCPU 数に応じてTiDB Cloudによって次のように設定されます。
+次の表に、変更フィードの仕様と対応するレプリケーション パフォーマンスを示します。
 
-| すべての TiKV ノードの vCPU の合計                     | RCUの数 |
-| ------------------------------------------- | ----- |
-| &lt; 48                                     | 16    |
-| <blockquote>= 48、かつ &lt; 120</blockquote>   | 24    |
-| <blockquote>= 120、かつ &lt;= 168</blockquote> | 32    |
-| <blockquote>168</blockquote>                | 40    |
+| 仕様     | 最大のレプリケーションパフォーマンス |
+| ------ | ------------------ |
+| 2 RCU  | 5,000行/秒           |
+| 4 RCU  | 10,000行/秒          |
+| 8 RCU  | 20,000行/秒          |
+| 16 RCU | 40,000行/秒          |
+| 24 RCU | 60,000行/秒          |
+| 32 RCU | 80,000行/秒          |
+| 40 RCU | 100,000行/秒         |
+
+> **ノート：**
+>
+> 上記のパフォーマンス データは参照のみを目的としており、シナリオによって異なる場合があります。
 
 ## 価格 {#price}
 
-次の表に、各 TiCDC RCU のTiDB Cloudの価格を示します。
-
-| クラウドプロバイダー | リージョン                   | RCU 価格 ($/時間) |
-| ---------- | ----------------------- | ------------- |
-| AWS        | オレゴン州 (us-west-2)       | $0.1307       |
-| AWS        | バージニア北部 (us-east-1)     | $0.1307       |
-| AWS        | ムンバイ (ap-south-1)       | $0.1393       |
-| AWS        | シンガポール (ap-southeast-1) | $0.1623       |
-| AWS        | 東京 (ap-northeast-1)     | $0.1669       |
-| AWS        | フランクフルト (EU-central-1)  | $0.1564       |
-| GCP        | オレゴン州 (us-west1)        | $0.1452       |
-| GCP        | バージニア北部 (us-east4)      | $0.1626       |
-| GCP        | アイオワ州 (us-central1)     | $0.1452       |
-| GCP        | シンガポール (アジア南東1)         | $0.1746       |
-| GCP        | 台湾 (アジア東1)              | $0.1628       |
-| GCP        | 東京 (アジア北東1)             | $0.1868       |
-| GCP        | 大阪（アジア東北2）              | $0.1868       |
+各 TiCDC RCU のサポートされるリージョンとTiDB Cloudの価格については、 [変更フィードのコスト](https://www.pingcap.com/tidb-cloud-pricing-details/#changefeed-cost)を参照してください。

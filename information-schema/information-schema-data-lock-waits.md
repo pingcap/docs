@@ -63,7 +63,7 @@ DESC data_lock_waits;
 -   `"index_name"` : インデックスキーが属するインデックスの名前。
 -   `"index_values"` : インデックス キーのインデックス値。
 
-上記のフィールドでは、フィールドの情報が適用できない場合、または現在利用できない場合、そのフィールドはクエリ結果で省略されます。たとえば、行キー情報には`index_id` 、 `index_name` 、および`index_values`は含まれません。インデックス キーには`handle_type`と`handle_value`が含まれません。パーティション化されていないテーブルには`partition_id`と`partition_name`は表示されません。削除されたテーブルのキー情報は、 `table_name`などのスキーマ情報`db_name`取得できず、テーブルがパーティションテーブルで`index_name` `db_id`どうかを区別できません。
+上記のフィールドでは、フィールドの情報が適用できない場合、または現在利用できない場合、そのフィールドはクエリ結果で省略されます。たとえば、行キー情報には`index_id` 、 `index_name` 、および`index_values`は含まれません。インデックス キーには`handle_type`と`handle_value`は含まれません。パーティション化されていないテーブルには`partition_id`と`partition_name`は表示されません。削除されたテーブルのキー情報は、 `table_name`などのスキーマ情報`db_name`取得できず、テーブルがパーティションテーブルで`index_name` `db_id`どうかを区別できません。
 
 > **ノート：**
 >

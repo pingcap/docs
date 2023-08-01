@@ -9,7 +9,7 @@ summary: Learn how to use partitioning in TiDB.
 
 ## パーティショニングの種類 {#partitioning-types}
 
-このセクションでは、TiDB のパーティショニングの種類を紹介します。現在、TiDB は[キーの分割](#key-partitioning)をサポートしています。
+このセクションでは、TiDB のパーティショニングの種類を紹介します。現在、TiDB は[範囲分割](#range-partitioning) 、 [範囲COLUMNSパーティショニング](#range-columns-partitioning) 、 [List パーティショニング](#list-partitioning) 、 [List COLUMNS パーティショニング](#list-columns-partitioning) 、 [ハッシュ分割](#hash-partitioning) 、および[キーの分割](#key-partitioning)をサポートしています。
 
 -   レンジ パーティショニング、レンジ COLUMNS パーティショニング、List パーティショニング、およびList COLUMNS パーティショニングは、アプリケーションでの大量の削除によって引き起こされるパフォーマンスの問題を解決するために使用され、パーティションの迅速な削除をサポートします。
 -   ハッシュ パーティショニングとキー パーティショニングは、大量の書き込みが行われるシナリオでデータを分散するために使用されます。ハッシュ パーティショニングと比較して、キー パーティショニングは、複数の列のデータの分散と非整数列によるパーティショニングをサポートします。
@@ -176,22 +176,16 @@ CREATE TABLE t (
   name varchar(255) CHARACTER SET ascii,
   notes text
 )
-PARTITION BY RANGE COLUMNS(name,valid_until)
+PARTITION BY RANGE COLUMNS(name, valid_until)
 (PARTITION `p2022-g` VALUES LESS THAN ('G','2023-01-01 00:00:00'),
  PARTITION `p2023-g` VALUES LESS THAN ('G','2024-01-01 00:00:00'),
- PARTITION `p2024-g` VALUES LESS THAN ('G','2025-01-01 00:00:00'),
  PARTITION `p2022-m` VALUES LESS THAN ('M','2023-01-01 00:00:00'),
  PARTITION `p2023-m` VALUES LESS THAN ('M','2024-01-01 00:00:00'),
- PARTITION `p2024-m` VALUES LESS THAN ('M','2025-01-01 00:00:00'),
  PARTITION `p2022-s` VALUES LESS THAN ('S','2023-01-01 00:00:00'),
- PARTITION `p2023-s` VALUES LESS THAN ('S','2024-01-01 00:00:00'),
- PARTITION `p2024-s` VALUES LESS THAN ('S','2025-01-01 00:00:00'),
- PARTITION `p2022-` VALUES LESS THAN (0x7f,'2023-01-01 00:00:00'),
- PARTITION `p2023-` VALUES LESS THAN (0x7f,'2024-01-01 00:00:00'),
- PARTITION `p2024-` VALUES LESS THAN (0x7f,'2025-01-01 00:00:00'))
+ PARTITION `p2023-s` VALUES LESS THAN ('S','2024-01-01 00:00:00'))
 ```
 
-データは、[&#39;&#39;, &#39;G&#39;)、[&#39;G&#39;, &#39;M&#39;)、[&#39;M&#39;, &#39;S&#39;)、および [&#39;S&#39;,) の範囲の年と名前によって分割されます。これにより、 `name`と`valid_until`列の両方でパーティション プルーニングの恩恵を受けながら、無効なデータを簡単に削除できます。この例では、 `[,)`左が閉じ、右が開いた範囲を示します。たとえば、 [&#39;G&#39;, &#39;M&#39;) は、 `G`と`G` ～ `M`を含み、 `M`を除く範囲を示します。
+前述の SQL ステートメントは、データを年と名前の範囲`[ ('', ''), ('G', '2023-01-01 00:00:00') )` 、 `[ ('G', '2023-01-01 00:00:00'), ('G', '2024-01-01 00:00:00') )` 、 `[ ('G', '2024-01-01 00:00:00'), ('M', '2023-01-01 00:00:00') )` 、 `[ ('M', '2023-01-01 00:00:00'), ('M', '2024-01-01 00:00:00') )` 、 `[ ('M', '2024-01-01 00:00:00'), ('S', '2023-01-01 00:00:00') )` 、および`[ ('S', '2023-01-01 00:00:00'), ('S', '2024-01-01 00:00:00') )`で分割します。これにより、 `name`と`valid_until`列の両方でパーティション プルーニングの恩恵を受けながら、無効なデータを簡単に削除できます。この例では、 `[,)`左が閉じ、右が開いた範囲を示します。たとえば、 `[ ('G', '2023-01-01 00:00:00'), ('G', '2024-01-01 00:00:00') )` 、名前が`'G'`で、年には`2023-01-01 00:00:00`含まれ、 `2023-01-01 00:00:00`より大きく`2024-01-01 00:00:00`より小さいデータ範囲を示します。 `(G, 2024-01-01 00:00:00)`含まれません。
 
 ### 範囲間隔パーティショニング {#range-interval-partitioning}
 
@@ -275,7 +269,7 @@ PARTITION BY RANGE COLUMNS(`report_date`)
  PARTITION `P_LT_2025-01-01` VALUES LESS THAN ('2025-01-01'))
 ```
 
-オプションのパラメーター`NULL PARTITION`は、定義が`PARTITION P_NULL VALUES LESS THAN (<minimum value of the column type>)`であるパーティションを作成し、パーティション式が`NULL`と評価される場合にのみ一致します。 `NULL`が他の値より小さいとみなされることを説明する[範囲パーティショニングによる NULL の処理](#handling-of-null-with-range-partitioning)を参照してください。
+オプションのパラメーター`NULL PARTITION`は、定義が`PARTITION P_NULL VALUES LESS THAN (<minimum value of the column type>)`であるパー​​ティションを作成し、パーティション式が`NULL`と評価される場合にのみ一致します。 `NULL`が他の値より小さいとみなされることを説明する[範囲パーティショニングによる NULL の処理](#handling-of-null-with-range-partitioning)を参照してください。
 
 オプションのパラメータ`MAXVALUE PARTITION`は、最後のパーティションを`PARTITION P_MAXVALUE VALUES LESS THAN (MAXVALUE)`として作成します。
 
@@ -365,13 +359,13 @@ PARTITION BY LIST (store_id) (
 
 ```sql
 test> CREATE TABLE t (
-    ->   a INT,
-    ->   b INT
-    -> )
-    -> PARTITION BY LIST (a) (
-    ->   PARTITION p0 VALUES IN (1, 2, 3),
-    ->   PARTITION p1 VALUES IN (4, 5, 6)
-    -> );
+      a INT,
+      b INT
+    )
+    PARTITION BY LIST (a) (
+      PARTITION p0 VALUES IN (1, 2, 3),
+      PARTITION p1 VALUES IN (4, 5, 6)
+    );
 Query OK, 0 rows affected (0.11 sec)
 
 test> INSERT INTO t VALUES (7, 7);
@@ -414,7 +408,7 @@ List COLUMNS パーティショニングは、List パーティショニング�
 | 4      | Atlanta, Raleigh, Cincinnati   |
 ```
 
-以下に示すように、List COLUMNS パーティショニングを使用してテーブルを作成し、従業員の都市に対応するパーティションに各行を格納できます。
+以下に示すように、 List COLUMNS パーティショニングを使用してテーブルを作成し、従業員の都市に対応するパーティションに各行を格納できます。
 
 {{< copyable "" >}}
 
@@ -1596,7 +1590,7 @@ YEARWEEK()
 
 現在、TiDB はキー パーティション化に空のパーティション列リストの使用をサポートしていません。
 
-パーティション管理に関しては、最下位の実装でデータの移動を必要とする操作は現在サポートされていません。これには、ハッシュパーティションテーブル内のパーティション数の調整、レンジパーティションテーブルの範囲の変更、パーティションのマージ、およびこれらに限定されません。パーティションを交換します。
+パーティション管理に関しては、現在、最下位の実装でデータの移動を必要とする操作はサポートされていません。これには、ハッシュパーティションテーブルのパーティション数の調整、レンジパーティションテーブルの範囲の変更、パーティションのマージなどが含まれますが、これらに限定されません。 。
 
 サポートされていないパーティション タイプの場合、TiDB でテーブルを作成すると、パーティション情報は無視され、テーブルは通常の形式で作成され、警告が報告されます。
 
@@ -1710,7 +1704,7 @@ set @@session.tidb_partition_prune_mode = 'dynamic'
 
 `static`モードでは、パーティション テーブルはパーティション レベルの統計を使用します。 `dynamic`モードでは、パーティション テーブルはテーブル レベルの GlobalStats を使用します。
 
-`static`モードから`dynamic`モードに切り替える場合は、統計を手動で確認して収集する必要があります。これは、 `dynamic`モードに切り替えた後、パーティション テーブルにはパーティション レベルの統計のみが含まれ、テーブル レベルの統計が含まれないためです。 GlobalStats は、次の`auto-analyze`操作時にのみ収集されます。
+`static`モードから`dynamic`モードに切り替える場合は、統計を手動で確認して収集する必要があります。これは、 `dynamic`モードに切り替えた後、パーティション化されたテーブルにはパーティション レベルの統計のみが含まれ、テーブル レベルの統計が含まれないためです。 GlobalStats は、次の`auto-analyze`操作時にのみ収集されます。
 
 {{< copyable "" >}}
 
@@ -1773,10 +1767,10 @@ set global tidb_partition_prune_mode = dynamic
 
 ```sql
 mysql> create table t1(id int, age int, key(id)) partition by range(id) (
-    ->     partition p0 values less than (100),
-    ->     partition p1 values less than (200),
-    ->     partition p2 values less than (300),
-    ->     partition p3 values less than (400));
+        partition p0 values less than (100),
+        partition p1 values less than (200),
+        partition p2 values less than (300),
+        partition p3 values less than (400));
 Query OK, 0 rows affected (0.01 sec)
 
 mysql> explain select * from t1 where id < 150;
@@ -1826,10 +1820,10 @@ mysql> explain select * from t1 where id < 150;
 
 ```sql
 mysql> create table t1 (id int, age int, key(id)) partition by range(id)
-    -> (partition p0 values less than (100),
-    ->  partition p1 values less than (200),
-    ->  partition p2 values less than (300),
-    ->  partition p3 values less than (400));
+    (partition p0 values less than (100),
+     partition p1 values less than (200),
+     partition p2 values less than (300),
+     partition p3 values less than (400));
 Query OK, 0 rows affected (0,08 sec)
 
 mysql> create table t2 (id int, code int);

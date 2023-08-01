@@ -19,7 +19,7 @@ TiDB バージョン: 5.4.3
 
     -   TiDB Lightning
 
-        -   散乱リージョンをバッチ モードに最適化して、散乱リージョンプロセスの安定性を向上させます[#33618](https://github.com/pingcap/tidb/issues/33618)
+        -   散乱リージョンプロセスの安定性を向上させるために、散乱リージョンをバッチ モードに最適化します[#33618](https://github.com/pingcap/tidb/issues/33618)
 
     -   TiCDC
 

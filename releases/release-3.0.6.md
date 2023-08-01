@@ -16,8 +16,8 @@ TiDB Ansible バージョン: 3.0.6
     -   ウィンドウ関数 AST が SQL テキストを復元した後の結果が正しくない問題を修正します。たとえば、 `over w`が誤って`over (w)` [#12933](https://github.com/pingcap/tidb/pull/12933)に復元されるなどです。
     -   `STREAM AGG()`から`doubleRead` [#12690](https://github.com/pingcap/tidb/pull/12690)まで押し下げられる問題を修正
     -   SQL バインディング[#13117](https://github.com/pingcap/tidb/pull/13117)で引用符が正しく処理されない問題を修正します。
-    -   `select max(_tidb_rowid) from t`シナリオを最適化してテーブル全体のスキャンを回避する[#13095](https://github.com/pingcap/tidb/pull/13095)
-    -   クエリ ステートメントに変数代入式[#13231](https://github.com/pingcap/tidb/pull/13231)含まれている場合、クエリ結果が正しくない問題を修正します。
+    -   テーブル全体のスキャンを回避するために`select max(_tidb_rowid) from t`シナリオを最適化する[#13095](https://github.com/pingcap/tidb/pull/13095)
+    -   クエリ ステートメントに変数代入式[#13231](https://github.com/pingcap/tidb/pull/13231)が含まれている場合、クエリ結果が正しくない問題を修正します。
     -   `UPDATE`ステートメントにサブクエリと生成された列の両方が含まれている場合、結果が正しくないという問題を修正します。このステートメントに異なるソース データベースの 2 `UPDATE`の同じ名前のテーブルが含まれている場合のステートメント実行エラーを修正します[#13350](https://github.com/pingcap/tidb/pull/13350)
     -   ポイントクエリ[#13416](https://github.com/pingcap/tidb/pull/13416)のサポート`_tidb_rowid`
     -   パーティションテーブル統計[#13628](https://github.com/pingcap/tidb/pull/13628)の誤った使用が原因で、生成されたクエリ実行プランが正しくない問題を修正します。
@@ -85,7 +85,7 @@ TiDB Ansible バージョン: 3.0.6
 -   各フィルタに`ActOn`ディメンションを追加して、各スケジューラとチェッカーがフィルタの影響を受けることを示し、2 つの未使用フィルタ`disconnectFilter`と`rejectLeaderFilter` [#1911](https://github.com/pingcap/pd/pull/1911)を削除します。
 -   PD [#1867](https://github.com/pingcap/pd/pull/1867)でタイムスタンプの生成に 5 ミリ秒以上かかる場合、警告ログを出力します。
 -   使用できないエンドポイントをクライアント[#1856](https://github.com/pingcap/pd/pull/1856)に渡すときにクライアントのログ レベルを下げる
--   gRPC メッセージ パッケージが`region_syncer`レプリケーション プロセスの最大サイズを超える可能性がある問題を修正[#1952](https://github.com/pingcap/pd/pull/1952)
+-   gRPC メッセージ パッケージが`region_syncer`レプリ​​ケーション プロセスの最大サイズを超える可能性がある問題を修正[#1952](https://github.com/pingcap/pd/pull/1952)
 
 ## ツール {#tools}
 

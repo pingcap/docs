@@ -21,7 +21,7 @@ summary: Learn how deploy Cloudflare Workers with TiDB Cloud.
 
 この記事の手順を試す前に、次のものを準備する必要があります。
 
--   TiDB CloudアカウントとTiDB Cloud上のServerless Tierクラスター。詳細については、 [TiDB Cloudクイック スタート](/tidb-cloud/tidb-cloud-quickstart.md#step-1-create-a-tidb-cluster)を参照してください。
+-   TiDB CloudアカウントとTiDB Cloud上の TiDB サーバーレス クラスター。詳細については、 [TiDB Cloudクイック スタート](/tidb-cloud/tidb-cloud-quickstart.md#step-1-create-a-tidb-cluster)を参照してください。
 -   回答[Cloudflare ワーカーアカウント](https://dash.cloudflare.com/login) ．
 -   回答[Prisma データ プラットフォーム アカウント](https://cloud.prisma.io/) ．
 -   回答[GitHub アカウント](https://github.com/login) ．
@@ -108,7 +108,7 @@ Cloudflare Workers では、TCP サポートがないため、データベース
 
 2.  **接続文字列**にこのパターンを入力します`mysql://USER:PASSWORD@HOST:PORT/DATABASE?sslaccept=strict` 。接続情報は[TiDB Cloudコンソール](https://tidbcloud.com/console/clusters)にあります。
 
-3.  TiDB CloudServerless Tierにはどの IP アドレスからでもアクセスできるため**、静的 IP は**無効のままにしておきます。
+3.  TiDB Serverless にはどの IP アドレスからでもアクセスできるため、**静的 IP は**無効のままにしておきます。
 
 4.  TiDB Cloudクラスターの場所に地理的に近いデータ プロキシ リージョンを選択します。次に、 **「プロジェクトの作成」**をクリックします。
 

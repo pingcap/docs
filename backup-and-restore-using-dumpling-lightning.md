@@ -7,7 +7,7 @@ summary: Learn how to use Dumpling and TiDB Lightning to back up and restore ful
 
 このドキュメントでは、 DumplingとTiDB Lightning を使用して、TiDB の完全なデータをバックアップおよび復元する方法を紹介します。
 
-少量のデータ (たとえば、50 GB 未満) をバックアップする必要があり、高いバックアップ速度が必要ない場合は、 [TiDB のバックアップと復元の概要](/br/backup-and-restore-overview.md)を参照してください。
+少量のデータ (たとえば、50 GB 未満) をバックアップする必要があり、高いバックアップ速度が必要ない場合は、 [Dumpling](/dumpling-overview.md)使用して TiDB データベースからデータをエクスポートし、 [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)使用してデータを別の TiDB にインポートできます。データベース。バックアップと復元の詳細については、 [TiDB のバックアップと復元の概要](/br/backup-and-restore-overview.md)を参照してください。
 
 ## 要件 {#requirements}
 
@@ -39,7 +39,7 @@ summary: Learn how to use Dumpling and TiDB Lightning to back up and restore ful
 
 1 つのバックアップ タスクのデータをローカル ディスクに保存する必要がある場合は、次の制限事項に注意してください。
 
--   Dumplingには、データ ソース全体を保存できる (またはエクスポートされるすべてのアップストリーム テーブルを保存できる) ディスク領域が必要です。必要なスペースを計算するには、 [ダウンストリームのstorageスペース要件](/tidb-lightning/tidb-lightning-requirements.md#storage-space-of-the-target-database)を参照してください。
+-   Dumplingには、データ ソース全体を保存できる (またはエクスポートされるすべてのアップストリーム テーブルを保存できる) ディスク容量が必要です。必要なスペースを計算するには、 [ダウンストリームのstorageスペース要件](/tidb-lightning/tidb-lightning-requirements.md#storage-space-of-the-target-database)を参照してください。
 -   インポート中、 TiDB Lightning はソートされたキーと値のペアを保存するための一時スペースを必要とします。ディスク容量は、データ ソースからの最大の単一テーブルを保持するのに十分である必要があります。
 
 **注**: Dumplingによって MySQL からエクスポートされる正確なデータ量を計算することは困難ですが、次の SQL ステートメントを使用してテーブル`information_schema.tables`の`data-length`フィールドを要約することで、データ量を見積もることができます。

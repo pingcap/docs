@@ -5,13 +5,13 @@ summary: This document introduces the `online-ddl/online-ddl-scheme` feature of 
 
 # GH-ost/PT-osc を使用するデータベースからの移行 {#migrate-from-databases-that-use-gh-ost-pt-osc}
 
-本番シナリオでは、DDL 実行中のテーブル ロックにより、データベースへの読み取りまたは書き込みがある程度ブロックされる可能性があります。したがって、読み取りと書き込みへの影響を最小限に抑えるために、オンライン DDL ツールを使用して DDL を実行することがよくあります。一般的な DDL ツールは[pt-osc](https://www.percona.com/doc/percona-toolkit/3.0/pt-online-schema-change.html)です。
+本番シナリオでは、DDL 実行中のテーブル ロックにより、データベースへの読み取りまたは書き込みがある程度ブロックされる可能性があります。したがって、読み取りと書き込みへの影響を最小限に抑えるために、オンライン DDL ツールを使用して DDL を実行することがよくあります。一般的な DDL ツールは[おばけ](https://github.com/github/gh-ost)と[pt-osc](https://www.percona.com/doc/percona-toolkit/3.0/pt-online-schema-change.html)です。
 
 DM を使用して MySQL から TiDB にデータを移行する場合、online-ddl を有効にして、DM と gh-ost または pt-osc のコラボレーションを可能にすることができます。 online-ddl を有効にする方法と、このオプションを有効にした後のワークフローの詳細については、 [gh-ost または pt-osc による継続的レプリケーション](/migrate-with-pt-ghost.md)を参照してください。このドキュメントでは、DM とオンライン DDL ツールのコラボレーションの詳細に焦点を当てます。
 
 ## オンライン DDL ツールを使用した DM の動作の詳細 {#working-details-for-dm-with-online-ddl-tools}
 
-このセクションでは、online-schema-change を実装する場合のオンライン DDL ツール[pt-osc](https://www.percona.com/doc/percona-toolkit/3.0/pt-online-schema-change.html)を使用した DM の動作の詳細について説明します。
+このセクションでは、online-schema-change を実装する場合のオンライン DDL ツール[おばけ](https://github.com/github/gh-ost)および[pt-osc](https://www.percona.com/doc/percona-toolkit/3.0/pt-online-schema-change.html)を使用した DM の動作の詳細について説明します。
 
 ### オンラインスキーマ変更: gh-ost {#online-schema-change-gh-ost}
 
@@ -134,7 +134,7 @@ pt-osc で主に使用される SQL ステートメントと、それに対応�
     date date DEFAULT NULL, account_id bigint(20) DEFAULT NULL, conversion_price decimal(20,3) DEFAULT NULL, ocpc_matched_conversions bigint(20) DEFAULT NULL, ad_cost decimal(20,3) DEFAULT NULL,cl2 varchar(20) COLLATE utf8mb4_bin NOT NULL,cl1 varchar(20) COLLATE utf8mb4_bin NOT NULL,PRIMARY KEY (id) ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin ;
     ```
 
-    DM は`_test4_new`テーブルを作成しません。 DM は`ghost_table` `dm_worker`の`ghost_schema` 、および`server_id`に従って、ダウンストリームの`dm_meta.{task_name}_onlineddl`レコードを削除し、メモリ内の関連情報をクリアします。
+    DM は`_test4_new`テーブルを作成しません。 DM は、 `ghost_table`の`ghost_schema` 、および`server_id`に従って、ダウンストリームの`dm_meta.{task_name}_onlineddl`レコードを削除`dm_worker` 、メモリ内の関連情報をクリアします。
 
     ```sql
     DELETE FROM dm_meta.{task_name}_onlineddl WHERE id = {server_id} and ghost_schema = {ghost_schema} and ghost_table = {ghost_table};

@@ -5,13 +5,13 @@ summary: Learn how to use HTAP cluster in TiDB Cloud.
 
 # HTAPクラスタを使用する {#use-an-htap-cluster}
 
-[TiFlash](https://docs.pingcap.com/tidb/stable/tiflash-overview)で構成されます。アプリケーション データはまず TiKV に保存され、次にRaftコンセンサス アルゴリズムを介してTiFlashにレプリケートされます。つまり、行ストアから列ストアへのリアルタイム レプリケーションです。
+[HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing)ハイブリッド トランザクション/分析処理を意味します。 TiDB Cloudの HTAP クラスターは、トランザクション処理用に設計された行ベースのstorageエンジン[TiKV](https://tikv.org)と、分析処理用に設計されたカラム型storage[TiFlash](https://docs.pingcap.com/tidb/stable/tiflash-overview)で構成されます。アプリケーション データはまず TiKV に保存され、次にRaftコンセンサス アルゴリズムを介してTiFlashにレプリケートされます。つまり、行ストアから列ストアへのリアルタイム レプリケーションです。
 
 TiDB Cloudを使用すると、HTAP ワークロードに応じて 1 つ以上のTiFlashノードを指定することで、HTAP クラスターを簡単に作成できます。クラスターの作成時にTiFlashノード数が指定されていない場合、またはTiFlashノードをさらに追加したい場合は、ノード数を[クラスターのスケーリング](/tidb-cloud/scale-tidb-cluster.md)ずつ変更できます。
 
 > **ノート：**
 >
-> TiFlashはServerless Tierクラスターに対して常に有効になっています。無効にすることはできません。
+> TiFlash は、 TiDB サーバーレス クラスターに対して常に有効になっています。無効にすることはできません。
 
 TiKV データは、デフォルトではTiFlashにレプリケートされません。次の SQL ステートメントを使用して、 TiFlashにレプリケートするテーブルを選択できます。
 

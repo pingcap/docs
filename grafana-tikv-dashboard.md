@@ -76,14 +76,21 @@ Grafana ダッシュボードは、Overview、PD、TiDB、TiKV、Node_exporter�
 
 -   Raftストア CPU: `raftstore`スレッドの CPU 使用率。通常の場合、CPU 使用率は 80% * `raftstore.store-pool-size`未満である必要があります。
 -   非同期適用 CPU: `async apply`スレッドの CPU 使用率。通常の場合、CPU 使用率は 90% * `raftstore.apply-pool-size`未満になります。
--   スケジューラ ワーカー CPU: `scheduler worker`スレッドの CPU 使用率。通常の場合、CPU 使用率は 90% * `storage.scheduler-worker-pool-size`未満になります。
+-   ストア ライター CPU: 非同期 IO スレッドの CPU 使用率。通常の場合、CPU 使用率は 90% ※ `raftstore.store-io-pool-size`未満になります。
 -   gRPC ポーリング CPU: `gRPC`スレッドの CPU 使用率。通常の場合、CPU 使用率は 80% * `server.grpc-concurrency`未満である必要があります。
--   統合読み取りプール CPU: `unified read pool`スレッドの CPU 使用率
+-   スケジューラ ワーカー CPU: `scheduler worker`スレッドの CPU 使用率。通常の場合、CPU 使用率は 90% * `storage.scheduler-worker-pool-size`未満になります。
 -   Storage ReadPool CPU: `storage read pool`スレッドの CPU 使用率
--   コプロセッサーCPU: `coprocessor`スレッドの CPU 使用率
+-   統合読み取りプール CPU: `unified read pool`スレッドの CPU 使用率
 -   RocksDB CPU: RocksDB スレッドの CPU 使用率
+-   コプロセッサーCPU: `coprocessor`スレッドの CPU 使用率
 -   GC ワーカー CPU: `GC worker`スレッドの CPU 使用率
 -   BackGround ワーカー CPU: `background worker`スレッドの CPU 使用率
+-   インポートCPU: `import`スレッドのCPU使用率
+-   バックアップ ワーカー CPU: `backup`スレッドの CPU 使用率
+-   CDC ワーカー CPU: `CDC worker`スレッドの CPU 使用率
+-   CDC エンドポイント CPU: `CDC endpoint`スレッドの CPU 使用率
+-   Raftlog フェッチ ワーカー CPU: 非同期 Raft ログ フェッチ ワーカーの CPU 使用率
+-   TSO ワーカー CPU: `TSO worker`スレッドの CPU 使用率
 
 ### PD {#pd}
 
@@ -116,6 +123,9 @@ Grafana ダッシュボードは、Overview、PD、TiDB、TiKV、Node_exporter�
 -   0.99 Raftストア イベントの継続時間: Raftstoreイベントによって消費される時間 (P99)
 -   プロセスの準備完了時間: Raftでプロセスの準備が完了するまでにかかる時間
 -   サーバーごとのプロセス準備完了時間 : TiKV インスタンスごとのRaftでピア プロセスの準備が完了するまでにかかる時間。 2 秒未満である必要があります (P99.99)。
+-   Raftストア イベントの最大継続時間: 最も遅いRaftstoreイベントによって消費される時間。
+-   レプリカ読み取りロックのチェック期間: レプリカ読み取りの処理時にロックをチェックするために費やされる時間。
+-   ピア メッセージの長さの分布: 各 TiKV インスタンスの各リージョンによって一度に処理されるメッセージの数。メッセージが多いほど、ピアはビジーになります。
 
 ![TiKV Dashboard - Raft process metrics](/media/tikv-dashboard-raft-process.png)
 
@@ -264,7 +274,7 @@ Grafana ダッシュボードは、Overview、PD、TiDB、TiKV、Node_exporter�
 
 ### コプロセッサーの概要 {#coprocessor-overview}
 
--   リクエスト期間: コプロセッサリクエストを受信してからリクエストの処理が完了するまでの合計期間
+-   リクエスト期間: コプロセッサリクエストを受信して​​からリクエストの処理が完了するまでの合計期間
 -   合計リクエスト数: 1 秒あたりのタイプ別のリクエスト数
 -   ハンドル期間: 1 分あたりのコプロセッサー要求の実際の処理にかかった時間のヒストグラム
 -   Total Request Errors: 1 秒あたりのコプロセッサーのリクエスト エラーの数。短時間に多くのエラーが発生してはなりません。
@@ -329,6 +339,30 @@ Grafana ダッシュボードは、Overview、PD、TiDB、TiKV、Node_exporter�
 -   各レベルのファイル数: 各レベルの異なる列ファミリーの SST ファイルの数
 -   SST の取り込み期間秒: SST ファイルの取り込みにかかる時間
 -   各CFのストール条件変更：各カラムファミリーのストール条件変更
+
+### Raft Engine {#raft-engine}
+
+-   オペレーション
+    -   write: Raft Engineによる 1 秒あたりの書き込み操作の数
+    -   read_entry: Raft Engineによる 1 秒あたりの raft ログ読み取りオペレーションの数
+    -   read_message: Raft Engineによる 1 秒あたりの raft メタデータ読み取りオペレーションの数
+-   書き込み期間: Raft Engineによる書き込み操作の期間。この期間は、これらのデータの書き込みに伴うディスク IO のレイテンシーの合計に近いです。
+-   フロー
+    -   write: Raft Engineの書き込みトラフィック
+    -   rewrite append: 追加ログの書き換えのトラフィック
+    -   rewrite rewrite: リライトログのリライトのトラフィック
+-   書き込み時間の内訳 (99%)
+    -   wal: Raft Engine WAL の書き込みのレイテンシー
+    -   wait: 書き込み前の待ち時間
+    -   apply: データをメモリに適用するのにかかる時間
+-   Bytes/Written: Raft Engineによって毎回書き込まれるバイト数
+-   WAL 所要時間の内訳 (P99%): Raft Engine WAL の作成の各段階で消費された時間
+-   ファイル数
+    -   append: Raft Engineによるデータの追加に使用されるファイルの数
+    -   rewrite: Raft Engineによるデータの書き換えに使用されるファイルの数 (書き換えは RocksDB の圧縮に似ています)
+-   エントリ数
+    -   rewrite: Raft Engineによって書き換えられたエントリの数
+    -   append: Raft Engineによって追加されたエントリの数
 
 ### タイタン - すべて {#titan-all}
 

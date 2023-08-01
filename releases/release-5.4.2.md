@@ -10,7 +10,7 @@ TiDB バージョン: 5.4.2
 
 > **警告：**
 >
-> このバージョンには既知のバグがあるため、v5.4.2 の使用はお勧めできません。詳細は[v5.4.3](/releases/release-5.4.3.md)を使用することをお勧めします。
+> このバージョンには既知のバグがあるため、v5.4.2 の使用はお勧めできません。詳細は[#12934](https://github.com/tikv/tikv/issues/12934)を参照してください。このバグは v5.4.3 で修正されました。 [v5.4.3](/releases/release-5.4.3.md)を使用することをお勧めします。
 
 ## 改善点 {#improvements}
 
@@ -38,7 +38,7 @@ TiDB バージョン: 5.4.2
 
 -   TiDB
 
-    -   バイナリ プロトコルでキャッシュされた間違った TableDual プランの問題を修正[#34678](https://github.com/pingcap/tidb/issues/34678)
+    -   バイナリ プロトコルでキャッシュされた間違った TableDual プランの問題を修正[#34690](https://github.com/pingcap/tidb/issues/34690) [#34678](https://github.com/pingcap/tidb/issues/34678)
     -   EqualAll ケース[#34584](https://github.com/pingcap/tidb/issues/34584)におけるTiFlash `firstrow`集計関数の null フラグが誤って推論される問題を修正
     -   プランナーがTiFlash [#34682](https://github.com/pingcap/tidb/issues/34682)に対して間違った 2 フェーズ集約プランを生成する問題を修正
     -   `tidb_opt_agg_push_down`と`tidb_enforce_mpp`が有効になっている場合に発生するプランナーの誤った動作を修正します[#34465](https://github.com/pingcap/tidb/issues/34465)
@@ -98,7 +98,7 @@ TiDB バージョン: 5.4.2
         -   リージョンリーダーが見つからず、再試行が制限[#5230](https://github.com/pingcap/tiflow/issues/5230)を超えた場合に発生するレプリケーションの中断を修正しました。
         -   MySQL シンクが間違ったチェックポイント Ts [#5107](https://github.com/pingcap/tiflow/issues/5107)を保存する可能性があるバグを修正
         -   HTTPサーバーで goroutine リークを引き起こす可能性があるバグを修正[#5303](https://github.com/pingcap/tiflow/issues/5303)
-        -   メタリージョンの変更によりレイテンシーが増加する可能性がある問題を修正[#4762](https://github.com/pingcap/tiflow/issues/4762)
+        -   メタリージョンの変更によりレイテンシーが増加する可能性がある問題を修正[#4756](https://github.com/pingcap/tiflow/issues/4756) [#4762](https://github.com/pingcap/tiflow/issues/4762)
 
     -   TiDB データ移行 (DM)
 

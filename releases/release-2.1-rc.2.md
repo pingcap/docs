@@ -19,7 +19,7 @@ title: TiDB 2.1 RC2 Release Notes
     -   `HashJoin`オペレーターがエラー[#7554](https://github.com/pingcap/tidb/pull/7554)を検出した場合の潜在的な`DataRace`問題を修正します。
     -   `HashJoin`演算子に内部テーブルを読み取り、同時にハッシュ テーブルを構築させる[#7544](https://github.com/pingcap/tidb/pull/7544)
     -   ハッシュ集計演算子のパフォーマンスを最適化する[#7541](https://github.com/pingcap/tidb/pull/7541)
-    -   結合演算子[#7433](https://github.com/pingcap/tidb/pull/7433)のパフォーマンスを最適化します。
+    -   結合演算子[#7493](https://github.com/pingcap/tidb/pull/7493) 、 [#7433](https://github.com/pingcap/tidb/pull/7433)のパフォーマンスを最適化します。
     -   結合順序を変更した場合、 `UPDATE JOIN`の結果が正しくなくなる問題を修正[#7571](https://github.com/pingcap/tidb/pull/7571)
     -   チャンクのイテレータ[#7585](https://github.com/pingcap/tidb/pull/7585)のパフォーマンスを向上させます。
 -   統計
@@ -89,7 +89,7 @@ title: TiDB 2.1 RC2 Release Notes
 
 -   特徴
     -   `GetAllStores`インターフェイス[#1228](https://github.com/pingcap/pd/pull/1228)をサポート
-    -   シミュレータ[#1218](https://github.com/pingcap/pd/pull/1218)にスケジューリング見積もりの統計を追加
+    -   シミュレータ[#1218](https://github.com/pingcap/pd/pull/1218)にスケジューリング見積もりの​​統計を追加
 -   改善点
     -   ダウンストアの処理プロセスを最適化し、できるだけ早くレプリカを作成します[#1222](https://github.com/pingcap/pd/pull/1222)
     -   コーディネーターの起動を最適化し、PD [#1225](https://github.com/pingcap/pd/pull/1225)の再起動によって生じる不必要なスケジューリングを削減します。

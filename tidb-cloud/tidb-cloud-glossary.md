@@ -2,6 +2,7 @@
 title: TiDB Cloud Glossary
 summary: Learn the terms used in TiDB Cloud.
 category: glossary
+aliases: ['/tidbcloud/glossary']
 ---
 
 # TiDB Cloud集 {#tidb-cloud-glossary}
@@ -22,13 +23,39 @@ ACID は、トランザクションの 4 つの主要なプロパティ (アト�
 
 ## C {#c}
 
-### クラスター層 {#cluster-tier}
+### チャット2クエリ {#chat2query}
 
-クラスターの機能と容量を決定します。クラスター層が異なると、クラスター内に提供される TiDB、TiKV、およびTiFlashノードの数も異なります。
+TiDB CloudはAI を活用しています。 [TiDB Cloudコンソール](https://tidbcloud.com/)の AI を活用した SQL エディターである Chat2Query (ベータ版) を使用すると、データの価値を最大化できます。
 
-## クレジット {#credit}
+Chat2Query では、 `--`を入力してから AI に SQL クエリを自動的に生成させる指示を入力するか、SQL クエリを手動で作成して、ターミナルを使用せずにデータベースに対して SQL クエリを実行することができます。クエリ結果をテーブルで直感的に見つけたり、クエリログを簡単に確認したりできます。詳細については、 [Chat2Query (ベータ版)](/tidb-cloud/explore-data-with-chat2query.md)を参照してください。
+
+さらに、 TiDB Cloud は、TiDB サーバーレス クラスター用の Chat2Query API を提供します。有効にすると、 TiDB Cloud は**Chat2Query**と呼ばれるシステム データ アプリと Data Service に Chat2Data エンドポイントを自動的に作成します。このエンドポイントを呼び出して、AI に指示を提供して SQL ステートメントを生成および実行させることができます。詳細については、 [Chat2Query API を使ってみる](/tidb-cloud/use-chat2query-api.md)を参照してください。
+
+### クレジット {#credit}
 
 TiDB Cloud は、概念実証 (PoC) ユーザーに一定数のクレジットを提供します。 1 クレジットは 1 米ドルに相当します。クレジットの有効期限が切れる前に、クレジットを使用して TiDB クラスター料金を支払うことができます。
+
+## D {#d}
+
+### データアプリ {#data-app}
+
+[データサービス（ベータ版）](#data-service)のデータ アプリは、特定のアプリケーションのデータにアクセスするために使用できるエンドポイントのグループです。 API キーを使用して認証設定を構成し、データ アプリのエンドポイントへのアクセスを制限できます。
+
+詳細については、 [データアプリを管理する](/tidb-cloud/data-service-manage-data-app.md)を参照してください。
+
+### データサービス {#data-service}
+
+データ サービス (ベータ) を使用すると、カスタム API [終点](#endpoint)を使用した HTTPS リクエスト経由でTiDB Cloudデータにアクセスできます。この機能は、サーバーレスアーキテクチャを使用してコンピューティング リソースと柔軟なスケーリングを処理するため、インフラストラクチャやメンテナンスのコストを心配することなく、エンドポイントのクエリ ロジックに集中できます。
+
+詳細については、 [データサービスの概要](/tidb-cloud/data-service-overview.md)を参照してください。
+
+## E {#e}
+
+### 終点 {#endpoint}
+
+Data Service のエンドポイントは、SQL ステートメントを実行するようにカスタマイズできる Web API です。 `WHERE`句で使用される値など、SQL ステートメントのパラメータを指定できます。クライアントがエンドポイントを呼び出し、リクエスト URL 内のパラメータの値を指定すると、エンドポイントは指定されたパラメータを使用して対応する SQL ステートメントを実行し、結果を HTTP 応答の一部として返します。
+
+詳細については、 [エンドポイントを管理する](/tidb-cloud/data-service-manage-endpoint.md)を参照してください。
 
 ## M {#m}
 
@@ -50,15 +77,9 @@ TiDB Cloud は、概念実証 (PoC) ユーザーに一定数のクレジット�
 
 ### 組織メンバー {#organization-members}
 
-組織メンバーは、組織所有者によって組織に参加するよう招待されたユーザーです。組織のメンバーは、組織のメンバーを表示したり、組織内のプロジェクトに招待したりできます。
+組織メンバーは、組織所有者またはプロジェクト所有者によって組織に参加するよう招待されたユーザーです。組織のメンバーは、組織のメンバーを表示したり、組織内のプロジェクトに招待したりできます。
 
 ## P {#p}
-
-### 遊び場 {#playground}
-
-Playground には、GitHub イベントのプリロードされたデータセットが含まれており、Serverless Tierユーザーは、データのインポートやクライアントへの接続を行わずに、クエリを即座に実行してTiDB Cloudを使い始めることができます。
-
-[Serverless Tierクラスターの作成](/tidb-cloud/tidb-cloud-quickstart.md#step-1-create-a-tidb-cluster)以降、プレイグラウンドにアクセスできるようになります。
 
 ### ポリシー {#policy}
 
@@ -96,11 +117,21 @@ Playground には、GitHub イベントのプリロードされたデータセ�
 
 チェンジフィードのレプリケーションは、TiCDC レプリケーション容量単位であるコンピューティング リソースに応じて課金されます。
 
+### リクエストユニット {#request-unit}
+
+リクエスト ユニット (RU) は、データベースへの 1 回のリクエストによって消費されるリソースの量を表すために使用される測定単位です。要求によって消費される RU の量は、操作の種類や取得または変更されるデータの量などのさまざまな要因によって異なります。詳細については、 [TiDB サーバーレスの料金詳細](https://www.pingcap.com/tidb-cloud-serverless-pricing-details)を参照してください。
+
+## S {#s}
+
+### 支出制限 {#spending-limit}
+
+支出制限とは、1 か月に特定のワークロードに費やすことができる最大金額を指します。これは、TiDB サーバーレス クラスターの予算を設定できるコスト管理メカニズムです。クラスターの使用制限が 0 より大きい場合、クラスターは有料クラスターとみなされます。また、有料クラスターは、条件を満たしていれば無料クォータを持つことができます。無料クォータを持つ有料クラスターは、最初に無料クォータを消費します。
+
 ## T {#t}
 
 ### TiDB クラスター {#tidb-cluster}
 
-機能的な作業データベースを形成する[TiFlash](https://docs.pingcap.com/tidb/stable/tiflash-overview)ノードのコレクション。
+機能的な作業データベースを形成する[TiDB](https://docs.pingcap.com/tidb/stable/tidb-computing) 、 [TiKV](https://docs.pingcap.com/tidb/stable/tidb-storage) 、 [配置Driver](https://docs.pingcap.com/tidb/stable/tidb-scheduling) (PD)、および[TiFlash](https://docs.pingcap.com/tidb/stable/tiflash-overview)ノードのコレクション。
 
 ### TiDB ノード {#tidb-node}
 

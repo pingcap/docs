@@ -27,7 +27,7 @@ summary: Learn how to configure TiFlash.
     -   指定したストアのリージョンのスケジュール レートを設定しない場合、このストアは`store-balance-rate`の設定を継承します。
     -   `pd-ctl -u <pd_ip:pd_port> store limit`コマンドを実行すると、 `store-balance-rate`の現在の設定値を表示できます。
 
--   [地理分散展開トポロジ](/geo-distributed-deployment-topology.md)を参照してください。
+-   [`replication.location-labels`](/pd-configuration-file.md#location-labels) : TiKV インスタンスのトポロジー関係を示します。キーの順序は、さまざまなラベルの階層関係を示します。 TiFlashが有効な場合は、 [`pd-ctl config placement-rules`](/pd-control.md#config-show--set-option-value--placement-rules)を使用してデフォルト値を設定する必要があります。詳細は[地理分散展開トポロジ](/geo-distributed-deployment-topology.md)を参照してください。
 
 ## TiFlash設定パラメータ {#tiflash-configuration-parameters}
 

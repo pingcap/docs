@@ -9,7 +9,7 @@ TiDB は MySQL と互換性があり、ほとんどの場合、MySQL ステー�
 
 <CustomContent platform="tidb">
 
-SQL を実験し、MySQL クエリと TiDB の互換性をテストするには、[TiDB Playground](https://play.tidbcloud.com/?utm_source=docs&utm_medium=basic-sql-operations) ことができます。最初に TiDB クラスターをデプロイしてから、その中で SQL ステートメントを実行することもできます。
+SQL を試して、MySQL クエリと TiDB の互換性をテストするには、 [TiDB プレイグラウンド](https://play.tidbcloud.com/?utm_source=docs&#x26;utm_medium=basic-sql-operations)を試してください。最初に TiDB クラスターをデプロイしてから、その中で SQL ステートメントを実行することもできます。
 
 </CustomContent>
 
@@ -233,7 +233,7 @@ DQL は、1 つまたは複数のテーブルから目的のデータ行を取�
 SELECT * FROM person;
 ```
 
-特定の列をクエリするには、 `SELECT`キーワードの後に列名を追加します。
+特定の列をクエリするには、 `SELECT`キーワードの後に​​列名を追加します。
 
 {{< copyable "" >}}
 

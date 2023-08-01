@@ -5,7 +5,7 @@ summary: An overview of the usage of BEGIN for the TiDB database.
 
 # 始める {#begin}
 
-このステートメントは、TiDB 内で新しいトランザクションを開始します。これはステートメント`START TRANSACTION`と`SET autocommit=0`に似ています。
+このステートメントは、TiDB 内で新しいトランザクションを開始します。これはステートメント`START TRANSACTION`とステートメント`SET autocommit=0`に似ています。
 
 `BEGIN`ステートメントがない場合、デフォルトでは、すべてのステートメントが独自のトランザクションで自動コミットされます。この動作により、MySQL との互換性が保証されます。
 

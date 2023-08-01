@@ -156,7 +156,7 @@ curl -X GET http://127.0.0.1:8300/api/v1/health
 
 ### 例 {#example}
 
-次のリクエストは、ID が`test5`および`sink_uri`が`blackhome://`のレプリケーション タスクを作成します。
+次のリクエストは、ID が`test5`および`sink_uri`が`blackhole://`のレプリケーション タスクを作成します。
 
 {{< copyable "" >}}
 

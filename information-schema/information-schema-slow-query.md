@@ -11,7 +11,7 @@ summary: Learn the `SLOW_QUERY` INFORMATION_SCHEMA table.
 
 > **ノート：**
 >
-> `SLOW_QUERY`テーブルは[Serverless Tierクラスター](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta)では使用できません。
+> `SLOW_QUERY`テーブルは[TiDB サーバーレスクラスター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless)では使用できません。
 
 </CustomContent>
 

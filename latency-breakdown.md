@@ -69,7 +69,7 @@ e2e duration =
 -   `tidb_session_compile_duration_seconds` AST を実行プランにコンパイルする時間を記録します。これは[SQLで準備された実行プランのキャッシュ](/sql-prepared-plan-cache.md)でスキップできます。
 -   `tidb_session_execute_duration_seconds{type="general"}` 、あらゆる種類のユーザー クエリが混在する実行時間を記録します。パフォーマンスの問題やボトルネックを分析するには、これを細かい期間に分割する必要があります。
 
-一般に、OLTP (オンライン トランザクション処理) ワークロードは、いくつかの重要なコードを共有する読み取りクエリと書き込みクエリに分割できます。次のセクションでは、実行方法が異なる[クエリを書く](#write-queries)のレイテンシーについて説明します。
+一般に、OLTP (オンライン トランザクション処理) ワークロードは、いくつかの重要なコードを共有する読み取りクエリと書き込みクエリに分割できます。次のセクションでは、実行方法が異なる[クエリの読み取り](#read-queries)と[クエリを書く](#write-queries)のレイテンシーについて説明します。
 
 ## クエリの読み取り {#read-queries}
 
@@ -140,7 +140,7 @@ read value duration(from disk) =
     sum(rate(tikv_storage_rocksdb_perf{metric="block_read_time",req="get/batch_get_command"})) / sum(rate(tikv_storage_rocksdb_perf{metric="block_read_count",req="get/batch_get_command"}))
 ```
 
-TiKV はstorageエンジンとして RocksDB を使用しています。必要な値がブロックキャッシュにない場合、TiKV はディスクから値をロードする必要があります。 `tikv_storage_rocksdb_perf`の場合、get リクエストは`get`または`batch_get_command`いずれかになります。
+TiKV はstorageエンジンとして RocksDB を使用しています。必要な値がブロックキャッシュにない場合、TiKV はディスクから値をロードする必要があります。 `tikv_storage_rocksdb_perf`の場合、get リクエストは`get`または`batch_get_command`のいずれかになります。
 
 ### バッチポイントゲット {#batch-point-get}
 
@@ -379,7 +379,7 @@ execution(non-clustered PK or UK) =
     tidb_tikvclient_txn_cmd_duration_seconds{type="lock_keys"}
 ```
 
-ロック時バッチ ポイント get の実行は、ロック時バッチ ポイント get が 1 つの RPC で複数の値を読み取ることを除いて、 [バッチポイントゲット](#batch-point-get)セクションを参照してください。
+ロック時バッチ ポイント get の実行は、ロック時バッチ ポイント get が 1 つの RPC で複数の値を読み取ることを除いて、 [ロックタイムポイントゲット](#lock-time-point-get)と似ています。 `tidb_tikvclient_txn_cmd_duration_seconds{type="batch_get"}`期間の詳細については、 [バッチポイントゲット](#batch-point-get)セクションを参照してください。
 
 ### ロック {#lock}
 
@@ -523,7 +523,7 @@ Commit_time =
 コミット期間は 4 つの指標に分類できます。
 
 -   `Get_latest_ts_time`非同期コミットまたは単一フェーズ コミット (1PC) トランザクションで最新の TSO を取得する時間を記録します。
--   `Prewrite_time`事前書き込みフェーズの期間を記録します。
+-   `Prewrite_time` 、事前書き込みフェーズの期間を記録します。
 -   `Get_commit_ts_time` 、共通 2PC トランザクションの期間を記録します。
 -   `Commit_time`コミットフェーズの継続時間を記録します。非同期コミットまたは 1PC トランザクションにはこのフェーズがないことに注意してください。
 
@@ -865,7 +865,7 @@ tikv_raftstore_apply_log_duration_seconds =
 
 `SELECT`ステートメントがデータベース時間のかなりの部分を占めている場合は、TiDB の読み取りクエリが遅いと想定できます。
 
-遅いクエリの実行プランは、TiDB ダッシュボードの[単純なコプロセッサクエリ](#table-scan--index-scan)を分析できます。
+遅いクエリの実行プランは、TiDB ダッシュボードの[Top SQLステートメント](/dashboard/dashboard-overview.md#top-sql-statements)パネルに表示されます。低速読み取りクエリの時間コストを調査するには、前述の説明に従って[ポイントゲット](#point-get) 、 [バッチポイントゲット](#batch-point-get) 、および一部の[単純なコプロセッサクエリ](#table-scan--index-scan)を分析できます。
 
 ### 書き込みが遅いクエリ {#slow-write-queries}
 
@@ -874,4 +874,4 @@ tikv_raftstore_apply_log_duration_seconds =
 -   一部の特定の TiKV インスタンスでこのメトリクスが高い場合、ホット リージョンで競合が発生している可能性があります。
 -   このメトリックがすべてのインスタンスにわたって高い場合は、アプリケーションで競合が発生している可能性があります。
 
-アプリケーションから競合の原因を確認した後、 [専念](#commit)の継続時間を分析することで、遅い書き込みクエリを調査できます。
+アプリケーションから競合の原因を確認した後、 [ロック](#lock)と[専念](#commit)の継続時間を分析することで、遅い書き込みクエリを調査できます。

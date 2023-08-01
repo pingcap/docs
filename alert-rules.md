@@ -200,7 +200,7 @@ summary: Learn the alert rules in a TiDB cluster.
 
 -   説明：
 
-    PD は長時間 TiKV/ TiFlashハートビートを受信していません (デフォルト設定は 30 分です)。
+    PD は長時間 TiKV/ TiFlashハートビートを受信して​​いません (デフォルト設定は 30 分です)。
 
 -   解決：
 
@@ -267,7 +267,7 @@ summary: Learn the alert rules in a TiDB cluster.
 
 -   説明：
 
-    不健全な店舗があることを示します。この状況がしばらく続く場合 ( [`PD_cluster_down_store_nums`](#pd_cluster_down_store_nums)アラートがトリガーされる可能性があります。
+    不健全な店舗があることを示します。この状況がしばらく続く場合 ( [`max-store-down-time`](/pd-configuration-file.md#max-store-down-time)で構成され、デフォルトは`30m` )、ストアは`Offline`状態に変化し、 [`PD_cluster_down_store_nums`](#pd_cluster_down_store_nums)アラートがトリガーされる可能性があります。
 
 -   解決：
 
@@ -499,7 +499,7 @@ summary: Learn the alert rules in a TiDB cluster.
 
     1.  [**TiKV-詳細**&gt; **Raft提案**ダッシュボード](/grafana-tikv-dashboard.md#raft-propose)観察し、アラートされた TiKV ノードのRaftプロポーザルが他の TiKV ノードよりもはるかに高いかどうかを確認します。そうであれば、この TiKV に 1 つ以上のホット スポットがあることを意味します。ホットスポットのスケジューリングが適切に機能するかどうかを確認する必要があります。
     2.  [**TiKV-詳細**&gt; **Raft IO**ダッシュボード](/grafana-tikv-dashboard.md#raft-io)見て、レイテンシーが増加するかどうかを確認します。レイテンシーが長い場合は、ディスクにボトルネックが存在する可能性があることを意味します。
-    3.  [`raftstore.raft-base-tick-interval`](/tikv-configuration-file.md#raft-base-tick-interval) ～ `"2s"`を設定する必要があります。
+    3.  [**TiKV-詳細**&gt; **Raftプロセス**ダッシュボード](/grafana-tikv-dashboard.md#raft-process)見て、 `tick duration`が高いかどうかを確認します。その場合は、 [`raftstore.raft-base-tick-interval`](/tikv-configuration-file.md#raft-base-tick-interval) ～ `"2s"`を設定する必要があります。
 
 #### <code>TiKV_write_stall</code> {#code-tikv-write-stall-code}
 

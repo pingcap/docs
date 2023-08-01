@@ -20,7 +20,7 @@ PumpとDrainer は、 Intel x86-64アーキテクチャを備えた 64 ビット
 
 ## TiUP を使用して TiDB Binlogをデプロイ {#deploy-tidb-binlog-using-tiup}
 
-TiUP を使用して TiDB Binlogを展開することをお勧めします。そのためには、 TiUPを使用して TiDB をデプロイするときに、 [TiUPを使用した TiDBクラスタのデプロイ](/production-deployment-using-tiup.md)を参照してください。
+TiUP を使用して TiDB Binlogを展開することをお勧めします。そのためには、 TiUPを使用して TiDB をデプロイするときに、 [TiDBBinlog展開トポロジ](/tidb-binlog-deployment-topology.md)に TiDB Binlogの`drainer`と`pump`のノード情報を追加する必要があります。導入の詳細については、 [TiUPを使用した TiDBクラスタのデプロイ](/production-deployment-using-tiup.md)を参照してください。
 
 ## バイナリ パッケージを使用して TiDB Binlogをデプロイ {#deploy-tidb-binlog-using-a-binary-package}
 

@@ -8,7 +8,7 @@ title: tiup cluster edit-config
 
 > **ノート：**
 >
-> -   構成を変更する場合、マシンを追加または削除することはできません。マシンの追加方法については、 [クラスタースケールイン](/tiup/tiup-component-cluster-scale-in.md)を参照してください。
+> -   構成を変更する場合、マシンを追加または削除することはできません。マシンの追加方法については、 [クラスターをスケールアウトする](/tiup/tiup-component-cluster-scale-out.md)を参照してください。マシンの削除方法については、 [クラスタースケールイン](/tiup/tiup-component-cluster-scale-in.md)を参照してください。
 > -   `tiup cluster edit-config`コマンドを実行すると、制御マシンのみの設定が変更されます。次に、 `tiup cluster reload`コマンドを実行して構成を再ロードする必要があります。
 
 ## 構文 {#syntax}
@@ -30,6 +30,6 @@ tiup cluster edit-config <cluster-name> [flags]
 ## 出力 {#output}
 
 -   コマンドが正常に実行された場合、出力はありません。
--   変更できないフィールドを誤って変更した場合、ファイルを保存するときにエラーが報告され、ファイルを再度編集するよう通知されます。変更できないフィールドについては、 [トポロジファイル](/tiup/tiup-cluster-topology-reference.md)を参照してください。
+-   変更できないフィールドを誤って変更した場合、ファイルを保存するときにエラーが報告され、ファイルを再度編集するよう通知されます。変更できないフィールドについては、 [トポロジーファイル](/tiup/tiup-cluster-topology-reference.md)を参照してください。
 
 [&lt;&lt; 前のページに戻る - TiUPクラスタコマンド リスト](/tiup/tiup-component-cluster.md#command-list)

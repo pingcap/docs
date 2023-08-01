@@ -32,13 +32,13 @@ v5.0 の主な新機能または改善点は次のとおりです。
 
 -   [`tidb_enable_strict_double_type_check`](/system-variables.md#tidb_enable_strict_double_type_check-new-in-v50)システム変数を追加して、 `double(N)`のような構文をテーブル スキーマで定義できるかどうかを判断します。このデフォルト値は`OFF`です。
 
--   デフォルト値の[`tidb_dml_batch_size`](/system-variables.md#tidb_dml_batch_size)を`20000`から`0`に変更します。これは、バッチ DML ステートメント`INSERT INTO SELECT ...` `LOAD`ではデフォルトで使用されなくなったことを意味します。代わりに、厳密なACIDセマンティクスに準拠するために大規模なトランザクションが使用されます。
+-   デフォルト値の[`tidb_dml_batch_size`](/system-variables.md#tidb_dml_batch_size)を`20000`から`0`に変更します。これは、バッチ DML ステートメントが`LOAD`ではデフォルトで使用されなくなったことを意味し`INSERT INTO SELECT ...` 。代わりに、厳密なACIDセマンティクスに準拠するために大規模なトランザクションが使用されます。
 
     > **ノート：**
     >
     > 変数のスコープがセッションからグローバルに変更され、デフォルト値が`20000`から`0`に変更されます。アプリケーションが元のデフォルト値に依存している場合は、アップグレード後に`set global`ステートメントを使用して変数を元の値に変更する必要があります。
 
--   [`tidb_enable_noop_functions`](/system-variables.md#tidb_enable_noop_functions-new-in-v40)システム変数を使用して、一時テーブルの構文の互換性を制御します。この変数値が`OFF`場合、 `CREATE TEMPORARY TABLE`構文はエラーを返します。
+-   [`tidb_enable_noop_functions`](/system-variables.md#tidb_enable_noop_functions-new-in-v40)システム変数を使用して、一時テーブルの構文の互換性を制御します。この変数値が`OFF`の場合、 `CREATE TEMPORARY TABLE`構文はエラーを返します。
 
 -   次のシステム変数を追加して、ガベージコレクション関連のパラメーターを直接制御します。
     -   [`tidb_gc_concurrency`](/system-variables.md#tidb_gc_concurrency-new-in-v50)
@@ -103,7 +103,7 @@ List COLUMNS パーティショニングを有効にするには、セッショ�
 
 #### 非表示のインデックス {#invisible-indexes}
 
-[#9246](https://github.com/pingcap/tidb/issues/9246)
+[ユーザードキュメント](/sql-statements/sql-statement-alter-index.md) [#9246](https://github.com/pingcap/tidb/issues/9246)
 
 パフォーマンスを調整したり、最適なインデックスを選択したりする場合、SQL ステートメントを使用してインデックスを`Visible`または`Invisible`に設定できます。この設定により、 `DROP INDEX`や`ADD INDEX`などのリソースを消費する操作の実行を回避できます。
 
@@ -111,7 +111,7 @@ List COLUMNS パーティショニングを有効にするには、セッショ�
 
 #### <code>EXCEPT</code>演算子と<code>INTERSECT</code>演算子 {#code-except-code-and-code-intersect-code-operators}
 
-[#18031](https://github.com/pingcap/tidb/issues/18031)
+[ユーザードキュメント](/functions-and-operators/set-operators.md) [#18031](https://github.com/pingcap/tidb/issues/18031)
 
 `INTERSECT`演算子は集合演算子で、2 つ以上のクエリの結果セットの共通部分を返します。ある程度、これは`Inner Join`演算子の代替となります。
 
@@ -121,7 +121,7 @@ List COLUMNS パーティショニングを有効にするには、セッショ�
 
 [#18005](https://github.com/pingcap/tidb/issues/18005)
 
-悲観的トランザクション モードでは、トランザクションに関係するテーブルに同時 DDL 操作または`SCHEMA VERSION`の変更が含まれている場合、システムはトランザクションの`SCHEMA VERSION`を最新のものに自動的に更新して、トランザクションのコミットが成功することを保証し、クライアントがエラー`Information schema is changed`受け取るのを回避します。 DDL 操作または`SCHEMA VERSION`によってトランザクションが中断されました。
+悲観的トランザクション モードでは、トランザクションに関係するテーブルに同時 DDL 操作または`SCHEMA VERSION`変更が含まれている場合、システムはトランザクションの`SCHEMA VERSION`最新のものに自動的に更新して、トランザクションのコミットが成功することを保証し、クライアントがエラー`Information schema is changed`受け取るのを回避します。 DDL 操作または`SCHEMA VERSION`によってトランザクションが中断されました。
 
 この機能はデフォルトでは無効になっています。この機能を有効にするには、 `tidb_enable_amend_pessimistic_txn`のシステム変数の値を変更します。この機能は v4.0.7 で導入され、v5.0 では次の問題が修正されています。
 
@@ -137,12 +137,12 @@ List COLUMNS パーティショニングを有効にするには、セッショ�
 
 ### 文字セットと照合順序 {#character-set-and-collation}
 
--   `utf8mb4_unicode_ci`および`utf8_unicode_ci`照合順序をサポートします。 [#17596](https://github.com/pingcap/tidb/issues/17596)
+-   `utf8mb4_unicode_ci`および`utf8_unicode_ci`照合順序をサポートします。 [ユーザードキュメント](/character-set-and-collation.md#new-framework-for-collations) [#17596](https://github.com/pingcap/tidb/issues/17596)
 -   照合順序で大文字と小文字を区別しない比較ソートをサポートする
 
 ### Security {#security}
 
-[#18566](https://github.com/pingcap/tidb/issues/18566)
+[ユーザードキュメント](/log-redaction.md) [#18566](https://github.com/pingcap/tidb/issues/18566)
 
 セキュリティ コンプライアンス要件 (*一般データ保護規則*(GDPR) など) を満たすために、システムは、出力エラー メッセージおよびログ内の情報 (ID やクレジット カード番号など) の機密性を解除することをサポートしており、機密情報の漏洩を回避できます。
 
@@ -180,7 +180,7 @@ TPC-H 100 ベンチマーク テストでは、 TiFlash MPP は、従来の分�
 
 ### クラスター化インデックス {#clustered-index}
 
-[#4841](https://github.com/pingcap/tidb/issues/4841)
+[ユーザードキュメント](/clustered-indexes.md) [#4841](https://github.com/pingcap/tidb/issues/4841)
 
 テーブル構造を設計したり、データベースの動作を分析したりするときに、主キーを持つ一部の列がグループ化および並べ替えられることが多く、これらの列に対するクエリで特定の範囲のデータまたは少量のデータが返されることが多いことが判明した場合は、クラスタード インデックス機能を使用することをお勧めします。異なる値を持つデータが含まれており、対応するデータによって読み取りまたは書き込みのホットスポットの問題が発生することはありません。
 
@@ -241,7 +241,7 @@ CREATE TABLE `t` (`a` VARCHAR(255) PRIMARY KEY CLUSTERED, `b` INT);
 
 ### 非同期コミット {#async-commit}
 
-[#8316](https://github.com/tikv/tikv/issues/8316)
+[ユーザードキュメント](/system-variables.md#tidb_enable_async_commit-new-in-v50) [#8316](https://github.com/tikv/tikv/issues/8316)
 
 データベースのクライアントは、データベース システムがトランザクションのコミットを 2 フェーズ (2PC) で同期的に完了するのを待ちます。第 1 フェーズのコミットが成功した後、トランザクションは結果をクライアントに返し、システムは第 2 フェーズのコミット操作をバックグラウンドで非同期に実行して、トランザクションのコミットレイテンシーを短縮します。トランザクション書き込みに関与するリージョンが1 つだけの場合、2 番目のフェーズは直接省略され、トランザクションは 1 フェーズ コミットになります。
 
@@ -263,7 +263,7 @@ CREATE TABLE `t` (`a` VARCHAR(255) PRIMARY KEY CLUSTERED, `b` INT);
 
 ### コプロセッサーキャッシュ機能をデフォルトで有効にする {#enable-the-coprocessor-cache-feature-by-default}
 
-[#18028](https://github.com/pingcap/tidb/issues/18028)
+[ユーザードキュメント](/tidb-configuration-file.md#tikv-clientcopr-cache-new-in-v400) [#18028](https://github.com/pingcap/tidb/issues/18028)
 
 5.0 GA では、コプロセッサーキャッシュ機能がデフォルトで有効になっています。この機能が有効になった後、データ読み取りのレイテンシーを短縮するために、TiDB は tikv-server にプッシュダウンされた演算子の計算結果を tidb-server にキャッシュします。
 
@@ -311,7 +311,7 @@ v5.0 より前では、バックグラウンド タスクとフォアグラウ�
 
 #### デフォルトで GC 圧縮フィルター機能を有効にして、GC による CPU および I/O リソースの消費を削減します。 {#enable-the-gc-compaction-filter-feature-by-default-to-reduce-gc-s-consumption-of-cpu-and-i-o-resources}
 
-[#18009](https://github.com/pingcap/tidb/issues/18009)
+[ユーザードキュメント](/garbage-collection-configuration.md#gc-in-compaction-filter) [#18009](https://github.com/pingcap/tidb/issues/18009)
 
 TiDB がガベージコレクション(GC) とデータ圧縮を実行すると、パーティションが CPU と I/O リソースを占有します。これら 2 つのタスクの実行中に、重複するデータが存在します。
 
@@ -349,7 +349,7 @@ TiFlash が失敗した場合に TiKV にクエリをフォールバックする
 
 ### TiCDC の安定性を向上させ、増分データの複製が多すぎることによって引き起こされる OOM 問題を軽減します。 {#improve-ticdc-stability-and-alleviate-the-oom-issue-caused-by-replicating-too-much-incremental-data}
 
-[#1150](https://github.com/pingcap/tiflow/issues/1150)
+[ユーザードキュメント](/ticdc/ticdc-manage-changefeed.md#unified-sorter) [#1150](https://github.com/pingcap/tiflow/issues/1150)
 
 TiCDC v4.0.9 以前のバージョンでは、あまりにも多くのデータ変更をレプリケートすると OOM が発生する可能性があります。 v5.0 では、次のシナリオによって発生する OOM 問題を軽減するために、統合ソーター機能がデフォルトで有効になっています。
 
@@ -366,7 +366,7 @@ TiCDC v4.0.9 以前のバージョンでは、あまりにも多くのデータ�
 
 ### リージョンのメンバーシップ変更時のシステム可用性の向上 {#improve-system-availability-during-region-membership-change}
 
-[#2860](https://github.com/tikv/pd/issues/2860)
+[ユーザードキュメント](/pd-configuration-file.md#enable-joint-consensus-new-in-v50) [#18079](https://github.com/pingcap/tidb/issues/18079) [#7587](https://github.com/tikv/tikv/issues/7587) [#2860](https://github.com/tikv/pd/issues/2860)
 
 リージョンのメンバーシップ変更のプロセスでは、「メンバーの追加」と「メンバーの削除」の 2 つの操作が 2 つのステップで実行されます。メンバーシップの変更が完了するときに障害が発生すると、リージョンは使用できなくなり、フォアグラウンド アプリケーションのエラーが返されます。
 
@@ -388,8 +388,8 @@ TiDB データ移行ツールは、データ移行の中間として Amazon S3 (
 
 この機能を使用するには、次のドキュメントを参照してください。
 
--   [#8](https://github.com/pingcap/dumpling/issues/8)
--   [#266](https://github.com/pingcap/tidb-lightning/issues/266)
+-   [データを Amazon S3 クラウドstorageにエクスポートする](/dumpling-overview.md#export-data-to-amazon-s3-cloud-storage) [#8](https://github.com/pingcap/dumpling/issues/8)
+-   [TiDB Lightningを使用した Amazon Aurora MySQL からの移行](/migrate-aurora-to-tidb.md) [#266](https://github.com/pingcap/tidb-lightning/issues/266)
 
 ### TiDB Cloudのデータインポートパフォーマンスを最適化する {#optimize-the-data-import-performance-of-tidb-cloud}
 
@@ -399,7 +399,7 @@ TiDB Lightning は、特にTiDB Cloudの AWS T1.standard 構成 (または同等
 
 ### TiCDC を使用して TiDB を Kafka Connect (Confluent Platform) に統合する (<strong>実験的機能</strong>) {#integrate-tidb-to-kafka-connect-confluent-platform-using-ticdc-strong-experimental-feature-strong}
 
-[#660](https://github.com/pingcap/tiflow/issues/660)
+[ユーザードキュメント](/ticdc/integrate-confluent-using-ticdc.md) [#660](https://github.com/pingcap/tiflow/issues/660)
 
 TiDB データを他のシステムにストリーミングするというビジネス要件をサポートするために、この機能を使用すると、TiDB データを Kafka、Hadoop、Oracle などのシステムにストリーミングできるようになります。
 

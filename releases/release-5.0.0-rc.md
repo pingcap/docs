@@ -83,7 +83,7 @@ TiDB は、ID 情報やクレジット カード番号などの機密情報の�
 
 -   TiDB 側では、tidb-server の SQL ステートメントを使用して`tidb_redact_log=1`変数を設定します。
 -   TiKV側では、tikv-serverに`security.redact-info-log = true`設定を行います。
--   PD 側の場合は、pd-server に`security.redact-info-log = true`構成を設定します。 [#3011](https://github.com/tikv/pd/pull/3011)
+-   PD 側の場合は、pd-server に`security.redact-info-log = true`構成を設定します。 [#2852](https://github.com/tikv/pd/issues/2852) [#3011](https://github.com/tikv/pd/pull/3011)
 -   TiFlash側では、tflash-server で`security.redact_info_log = true`設定を設定し、tflash-learner で`security.redact-info-log = true`設定を設定します。
 
 [ユーザードキュメント](/log-redaction.md)
@@ -144,7 +144,7 @@ TiDB スケジューリング プロセスは、I/O、ネットワーク、CPU�
 
 ### リージョンのメンバーシップ変更時のシステム可用性の向上 (実験的) {#improve-system-availability-during-region-membership-change-experimental}
 
-リージョンのメンバーシップ変更のプロセスでは、「メンバーの追加」と「メンバーの削除」の 2 つの操作が 2 つのステップで実行されます。メンバーシップの変更が完了するときに障害が発生すると、リージョンは使用できなくなり、フォアグラウンド アプリケーションのエラーが返されます。導入されたRaft Joint Consensus アルゴリズムにより、リージョンのメンバーシップ変更時のシステムの可用性が向上します。会員変更時の「会員追加」と「会員削除」の操作を一つにまとめて全会員に送信します。変更プロセス中、リージョンは中間状態になります。変更されたメンバーのいずれかが失敗した場合でも、システムは引き続き使用できます。ユーザーは、 `pd-ctl config set enable-joint-consensus true`を実行してメンバーシップ変数を変更することで、この機能を有効にできます。 [#2860](https://github.com/tikv/pd/issues/2860)
+リージョンのメンバーシップ変更のプロセスでは、「メンバーの追加」と「メンバーの削除」の 2 つの操作が 2 つのステップで実行されます。メンバーシップの変更が完了するときに障害が発生すると、リージョンは使用できなくなり、フォアグラウンド アプリケーションのエラーが返されます。導入されたRaft Joint Consensus アルゴリズムにより、リージョンのメンバーシップ変更時のシステムの可用性が向上します。会員変更時の「会員追加」と「会員削除」の操作を一つにまとめて全会員に送信します。変更プロセス中、リージョンは中間状態になります。変更されたメンバーのいずれかが失敗した場合でも、システムは引き続き使用できます。ユーザーは、 `pd-ctl config set enable-joint-consensus true`を実行してメンバーシップ変数を変更することで、この機能を有効にできます。 [#7587](https://github.com/tikv/tikv/issues/7587) [#2860](https://github.com/tikv/pd/issues/2860)
 
 -   [ユーザードキュメント](/pd-configuration-file.md#enable-joint-consensus-new-in-v50)
 -   関連問題: [#18079](https://github.com/pingcap/tidb/issues/18079)
@@ -165,13 +165,13 @@ TiDB スケジューリング プロセスは、I/O、ネットワーク、CPU�
 
 -   TiDB Lightning は、 AWS S3storageから TiDB へのAuroraスナップショット データのインポートをサポートしています。 (関連問題: [#266](https://github.com/pingcap/tidb-lightning/issues/266) )
 -   1 TiB のデータを DBaaS T1.standard にインポートする TPC-C テストでは、パフォーマンスが 254 GiB/h から 366 GiB/h に 40% 向上しました。
--   Dumpling は、 TiDB/MySQL から AWS S3storageへのデータのエクスポートをサポートしています (実験的) (関連問題: [ユーザードキュメント](/dumpling-overview.md#export-data-to-amazon-s3-cloud-storage) )
+-   Dumpling は、 TiDB/MySQL から AWS S3storageへのデータのエクスポートをサポートしています (実験的) (関連問題: [#8](https://github.com/pingcap/dumpling/issues/8) 、 [ユーザードキュメント](/dumpling-overview.md#export-data-to-amazon-s3-cloud-storage) )
 
 ## 診断 {#diagnostics}
 
 ### より多くの情報が収集され、最適化された<code>EXPLAIN</code>機能は、ユーザーがパフォーマンスの問題をトラブルシューティングするのに役立ちます {#optimized-code-explain-code-features-with-more-collected-information-help-users-troubleshoot-performance-issues}
 
-ユーザーが SQL パフォーマンスの問題をトラブルシューティングする場合、パフォーマンスの問題の原因を特定するための詳細な診断情報が必要です。以前の TiDB バージョンでは、 `EXPLAIN`ステートメントによって収集される情報の詳細が十分ではありませんでした。 DBA は、ログ情報、監視情報、または推測に基づいてのみトラブルシューティングを実行していたため、非効率的である可能性がありました。 TiDB v5.0 では、ユーザーがパフォーマンスの問題をより効率的にトラブルシューティングできるように、次の改良が加えられています。
+ユーザーが SQL パフォーマンスの問題をトラブルシューティングする場合、パフォーマンスの問題の原因を特定するための詳細な診断情報が必要です。以前の TiDB バージョンでは、 `EXPLAIN`ステートメントによって収集された情報の詳細が十分ではありませんでした。 DBA は、ログ情報、監視情報、または推測に基づいてのみトラブルシューティングを実行していたため、非効率的である可能性がありました。 TiDB v5.0 では、ユーザーがパフォーマンスの問題をより効率的にトラブルシューティングできるように、次の改良が加えられています。
 
 -   `EXPLAIN ANALYZE`はすべての DML ステートメントの分析をサポートし、実際のパフォーマンス プランと各オペレーターの実行情報を表示します。 [#18056](https://github.com/pingcap/tidb/issues/18056)
 -   ユーザーは`EXPLAIN FOR CONNECTION`を使用して、実行中の SQL ステートメントのステータス情報を分析できます。この情報には、各演算子の実行時間と処理された行の数が含まれます。 [#18233](https://github.com/pingcap/tidb/issues/18233)

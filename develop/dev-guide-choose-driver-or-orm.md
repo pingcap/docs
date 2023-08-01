@@ -27,7 +27,7 @@ TiDB は MySQL プロトコルと高い互換性がありますが、一部の�
 
 サポートレベル:**フル**
 
-[MySQL ドキュメント](https://dev.mysql.com/doc/connector-j/8.0/en/)に従って、 Java JDBC ドライバーをダウンロードして構成できます。 TiDB v6.3.0 以降では MySQL Connector/J 8.0.29 以降を使用することをお勧めします。
+[MySQL ドキュメント](https://dev.mysql.com/doc/connector-j/8.0/en/)に従って、 Java JDBC ドライバーをダウンロードして構成できます。 TiDB v6.3.0 以降では MySQL Connector/J 8.0.33 以降を使用することをお勧めします。
 
 > **ヒント：**
 >
@@ -98,7 +98,7 @@ implementation group: 'org.bouncycastle', name: 'bcpkix-jdk15on', version: '1.67
 
 サポートレベル:**フル**
 
-アプリケーションのさまざまな依存関係間の複雑な関係を手動で管理することを避けるために、 [メイビン](https://maven.apache.org/install.html)を使用して、間接的な依存関係を含むアプリケーションのすべての依存関係を取得できます。 Hibernate `6.0.0.Beta2`以降のみが TiDB ダイアレクトをサポートしていることに注意してください。
+アプリケーションのさまざまな依存関係間の複雑な関係を手動で管理することを避けるために、 [グラドル](https://gradle.org/install)または[メイビン](https://maven.apache.org/install.html)を使用して、間接的な依存関係を含むアプリケーションのすべての依存関係を取得できます。 Hibernate `6.0.0.Beta2`以降のみが TiDB ダイアレクトをサポートしていることに注意してください。
 
 **Maven を**使用している場合は、以下を`<dependencies></dependencies>`に追加します。
 
@@ -126,7 +126,7 @@ implementation 'mysql:mysql-connector-java:5.1.49'
 -   Hibernate を使用してネイティブJavaによって TiDB アプリケーションを構築する例については、 [TiDB と Hibernate を使用してシンプルな CRUD アプリを構築する](/develop/dev-guide-sample-application-java-hibernate.md)を参照してください。
 -   Spring Data JPA または Hibernate を使用して Spring で TiDB アプリケーションを構築する例については、 [Spring Boot を使用して TiDB アプリを構築する](/develop/dev-guide-sample-application-java-spring-boot.md)を参照してください。
 
-さらに、 TiDB ダイアレクトを[Hibernate 設定ファイル](https://www.tutorialspoint.com/hibernate/hibernate_configuration.htm) : `org.hibernate.dialect.TiDBDialect`で指定する必要があります。これは Hibernate `6.0.0.Beta2`以降でのみサポートされます。 `Hibernate`バージョンが`6.0.0.Beta2`より前の場合は、まずそれをアップグレードしてください。
+さらに、 TiDB ダイアレクトを[Hibernate 構成ファイル](https://www.tutorialspoint.com/hibernate/hibernate_configuration.htm) : `org.hibernate.dialect.TiDBDialect`で指定する必要があります。これは Hibernate `6.0.0.Beta2`以降でのみサポートされます。 `Hibernate`バージョンが`6.0.0.Beta2`より前の場合は、まずそれをアップグレードしてください。
 
 > **ノート：**
 >
@@ -138,7 +138,7 @@ implementation 'mysql:mysql-connector-java:5.1.49'
 
 サポートレベル:**フル**
 
-アプリケーションのさまざまな依存関係間の複雑な関係を手動で管理することを避けるために、 [メイビン](https://maven.apache.org/install.html)を使用して、間接的な依存関係を含むアプリケーションのすべての依存関係を取得できます。
+アプリケーションのさまざまな依存関係間の複雑な関係を手動で管理することを避けるために、 [グラドル](https://gradle.org/install)または[メイビン](https://maven.apache.org/install.html)を使用して、間接的な依存関係を含むアプリケーションのすべての依存関係を取得できます。
 
 Maven を使用している場合は、次の行を`<dependencies></dependencies>`に追加します。
 
@@ -275,7 +275,7 @@ MySQL コネクタ/Python を使用して TiDB アプリケーションを構築
 <SimpleTab>
 <div label="SQLAlchemy">
 
-サポートレベル:**互換性あり**
+サポートレベル:**フル**
 
 [SQLアルケミー](https://www.sqlalchemy.org/)は、Python の人気のある ORM フレームワークです。アプリケーション内のすべての依存関係を取得するには、 `pip install SQLAlchemy==1.4.44`コマンドを使用します。 SQLAlchemy 1.4.44 以降のバージョンを使用することをお勧めします。
 

@@ -71,7 +71,7 @@ TiUPバージョン：0.0.3
 
     -   TiDB Lightning
 
-        -   TiDB Lightning [#275](https://github.com/pingcap/tidb-lightning/pull/275)のパフォーマンスを最適化する
+        -   TiDB Lightning [#281](https://github.com/pingcap/tidb-lightning/pull/281) [#275](https://github.com/pingcap/tidb-lightning/pull/275)のパフォーマンスを最適化する
 
 ## バグの修正 {#bug-fixes}
 

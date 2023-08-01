@@ -7,22 +7,14 @@ summary: An overview of the usage of LOAD DATA for the TiDB database.
 
 `LOAD DATA`ステートメントのバッチはデータを TiDB テーブルにロードします。
 
-TiDB v7.0.0 では、 `LOAD DATA` SQL ステートメントは次の機能をサポートします。
+TiDB v7.0.0 以降、 `LOAD DATA` SQL ステートメントは次の機能をサポートします。
 
 -   S3 および GCS からのデータのインポートをサポート
 -   新しいパラメータを追加`FIELDS DEFINED NULL BY`
 
 > **警告：**
 >
-> 新しいパラメータ`FIELDS DEFINED NULL BY`と、v7.0.0 での S3 および GCS からのデータのインポートのサポートは実験的ものです。本番環境で使用することはお勧めできません。この機能は予告なく変更または削除される場合があります。バグを見つけた場合は、GitHub で[問題](https://github.com/pingcap/tidb/issues)を報告できます。
-
-<CustomContent platform="tidb-cloud">
-
-> **ノート：**
->
-> この機能は[Serverless Tierクラスター](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta)でのみ使用できます。
-
-</CustomContent>
+> 新しいパラメータ`FIELDS DEFINED NULL BY`と、S3 および GCS からのデータのインポートのサポートは実験的ものです。本番環境で使用することはお勧めできません。この機能は予告なく変更または削除される場合があります。バグを見つけた場合は、GitHub で[問題](https://github.com/pingcap/tidb/issues)を報告できます。
 
 ## あらすじ {#synopsis}
 
@@ -45,17 +37,31 @@ Fields ::=
 
 `LOCAL`を使用して、インポートするクライアント上のデータ ファイルを指定できます。この場合、file パラメーターはクライアント上のファイル システム パスである必要があります。
 
+TiDB Cloudを使用している場合、 `LOAD DATA`ステートメントを使用してローカル データ ファイルをロードするには、 TiDB Cloudに接続するときに接続文字列に`--local-infile`オプションを追加する必要があります。
+
+-   以下は、TiDB サーバーレスの接続文字列の例です。
+
+    ```
+    mysql --connect-timeout 15 -u '<user_name>' -h <host_name> -P 4000 -D test --ssl-mode=VERIFY_IDENTITY --ssl-ca=/etc/ssl/cert.pem -p<your_password> --local-infile
+    ```
+
+-   以下は、TiDB Dended の接続文字列の例です。
+
+    ```
+    mysql --connect-timeout 15 --ssl-mode=VERIFY_IDENTITY --ssl-ca=<CA_path> --tls-version="TLSv1.2" -u root -h <host_name> -P 4000 -D test -p<your_password> --local-infile
+    ```
+
 ### S3 および GCSstorage {#s3-and-gcs-storage}
 
 <CustomContent platform="tidb">
 
-`LOCAL`を指定しない場合、 [外部storage](/br/backup-and-restore-storages.md)で詳しく説明されているように、 file パラメーターは有効な S3 または GCS パスである必要があります。
+`LOCAL`指定しない場合、 [外部storage](/br/backup-and-restore-storages.md)で詳しく説明されているように、 file パラメーターは有効な S3 または GCS パスである必要があります。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-`LOCAL`を指定しない場合、 [外部storage](https://docs.pingcap.com/tidb/stable/backup-and-restore-storages)で詳しく説明されているように、 file パラメーターは有効な S3 または GCS パスである必要があります。
+`LOCAL`指定しない場合、 [外部storage](https://docs.pingcap.com/tidb/stable/backup-and-restore-storages)で詳しく説明されているように、 file パラメーターは有効な S3 または GCS パスである必要があります。
 
 </CustomContent>
 
@@ -148,7 +154,7 @@ LOAD DATA LOCAL INFILE '/mnt/evo970/data-sets/bikeshare-data/2017Q4-capitalbikes
 >
 > -   TiDB v4.0.0 より前のバージョンでは、20000 行ごとに`LOAD DATA`コミットされます。
 > -   TiDB v4.0.0 から v6.6.0 までのバージョンの場合、TiDB はデフォルトで 1 つのトランザクションですべての行をコミットします。
-> -   TiDB v4.0.0 以前のバージョンからアップグレードした後、 `ERROR 8004 (HY000) at line 1: Transaction is too large, size: 100000058`が発生する可能性があります。このエラーを解決する推奨方法は、 `tidb.toml`ファイルの[`tidb_dml_batch_size`](/system-variables.md#tidb_dml_batch_size)から`20000`に設定することで、アップグレード前の動作を復元することもできます。 v7.0.0 以降、 `tidb_dml_batch_size` `LOAD DATA`ステートメントに影響しなくなることに注意してください。
+> -   TiDB v4.0.0 以前のバージョンからアップグレードした後、 `ERROR 8004 (HY000) at line 1: Transaction is too large, size: 100000058`が発生する可能性があります。このエラーを解決する推奨方法は、 `tidb.toml`ファイルの[`txn-total-size-limit`](/tidb-configuration-file.md#txn-total-size-limit)値を増やすことです。この制限を増やすことができない場合は、 [`tidb_dml_batch_size`](/system-variables.md#tidb_dml_batch_size)から`20000`に設定することで、アップグレード前の動作を復元することもできます。 v7.0.0 以降、 `tidb_dml_batch_size` `LOAD DATA`ステートメントに影響しなくなることに注意してください。
 > -   トランザクションでコミットされた行の数に関係なく、明示的なトランザクションの[`ROLLBACK`](/sql-statements/sql-statement-rollback.md)ステートメントによって`LOAD DATA`ロールバックされません。
 > -   `LOAD DATA`ステートメントは、TiDB トランザクション モードの構成に関係なく、常に楽観的トランザクション モードで実行されます。
 

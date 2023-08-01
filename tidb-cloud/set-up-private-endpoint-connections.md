@@ -1,13 +1,15 @@
 ---
-title: Connect via Private Endpoint
+title: Connect to TiDB Dedicated via Private Endpoint
 summary: Learn how to connect to your TiDB Cloud cluster via private endpoint.
 ---
 
-# プライベートエンドポイント経由で接続する {#connect-via-private-endpoint}
+# プライベートエンドポイント経由で TiDB 専用に接続する {#connect-to-tidb-dedicated-via-private-endpoint}
 
-> **ノート：**
+このドキュメントでは、プライベート エンドポイント経由で TiDB 専用クラスターに接続する方法について説明します。
+
+> **ヒント：**
 >
-> プライベート エンドポイント接続は、Dedicated Tierクラスターでのみ使用できます。プライベート エンドポイントを使用して[Serverless Tierクラスター](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta)に接続することはできません。
+> プライベート エンドポイント経由で TiDB サーバーレス クラスターに接続する方法については、 [プライベートエンドポイント経由で TiDB サーバーレスに接続する](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)を参照してください。
 
 TiDB Cloud は、 AWS VPC でホストされているTiDB Cloudサービスへの[AWS プライベートリンク](https://aws.amazon.com/privatelink/?privatelink-blogs.sort-by=item.additionalFields.createdDate&#x26;privatelink-blogs.sort-order=desc)経由の、あたかもそのサービスが独自の VPC 内にあるかのように、安全性の高い一方向のアクセスをサポートします。プライベート エンドポイントが VPC で公開され、許可を得てエンドポイント経由でTiDB Cloudサービスへの接続を作成できます。
 
@@ -25,7 +27,6 @@ AWS PrivateLink を利用したエンドポイント接続は安全かつプラ�
 ## 制限 {#restrictions}
 
 -   現在、 TiDB Cloud は、エンドポイント サービスが AWS でホストされている場合にのみプライベート エンドポイント接続をサポートします。サービスが Google Cloud Platform (GCP) でホストされている場合、プライベート エンドポイントは適用されません。
--   プライベート エンドポイントのサポートは、 TiDB CloudDedicated Tierに対してのみ提供され、Serverless Tierに対しては提供されません。
 -   リージョン間のプライベート エンドポイント接続はサポートされていません。
 
 ほとんどのシナリオでは、VPC ピアリング経由でプライベート エンドポイント接続を使用することをお勧めします。ただし、次のシナリオでは、プライベート エンドポイント接続の代わりに VPC ピアリングを使用する必要があります。
@@ -36,9 +37,7 @@ AWS PrivateLink を利用したエンドポイント接続は安全かつプラ�
 
 ## AWS でプライベート エンドポイントをセットアップする {#set-up-a-private-endpoint-with-aws}
 
-このセクションでは、AWS PrivateLink を使用してプライベート エンドポイントを設定する方法について説明します。
-
-[前提条件](#prerequisites)に加えて、AWS PrivateLink とのプライベート エンドポイント接続を設定するには 5 つの手順があります。
+プライベート エンドポイント経由で TiDB 専用クラスターに接続するには、 [前提条件](#prerequisites)を完了し、次の手順に従います。
 
 1.  [TiDB クラスターを選択する](#step-1-choose-a-tidb-cluster)
 2.  [サービスエンドポイントのリージョンを確認する](#step-2-check-the-service-endpoint-region)
@@ -51,24 +50,14 @@ AWS PrivateLink を利用したエンドポイント接続は安全かつプラ�
 
 ### 前提条件 {#prerequisites}
 
-TiDB Cloudは、Dedicated Tierクラスターのプライベート エンドポイントのみをサポートします。プライベート エンドポイントを作成する前に、Dedicated Tierクラスターを作成する必要があります。詳細な手順については、 [TiDB Cloudで TiDBクラスタを作成する](/tidb-cloud/create-tidb-cluster.md)を参照してください。
-
-プライベート エンドポイントのセットアップを開始するには、プライベート エンドポイントの作成ページを開きます。
-
 1.  [TiDB Cloudコンソール](https://tidbcloud.com)にログインします。
-
-2.  [**クラスター**](https://tidbcloud.com/console/clusters)ページの左側のナビゲーション ウィンドウで、次のいずれかを実行します。
-
-    -   複数のプロジェクトがある場合は、ターゲット プロジェクトに切り替えて、 **[管理]** &gt; **[ネットワーク アクセス]**をクリックします。
-    -   プロジェクトが 1 つだけの場合は、 **[管理]** &gt; **[ネットワーク アクセス]**をクリックします。
-
-3.  **[プライベート エンドポイント]**タブをクリックします。
-
+2.  クリック<mdsvgicon name="icon-left-projects">複数のプロジェクトがある場合は、左下隅でターゲット プロジェクトに切り替え、 **[プロジェクト設定]**をクリックします。</mdsvgicon>
+3.  プロジェクトの**[プロジェクト設定]**ページで、左側のナビゲーション ペインで**[ネットワーク アクセス]**をクリックし、 **[プライベート エンドポイント]**タブをクリックします。
 4.  右上隅の**「追加」**をクリックします。
 
 ### ステップ 1. TiDB クラスターを選択する {#step-1-choose-a-tidb-cluster}
 
-1.  ドロップダウン リストをクリックして、利用可能な TiDB クラスターを選択します。
+1.  ドロップダウン リストをクリックして、利用可能な TiDB 専用クラスターを選択します。
 2.  **「次へ」**をクリックします。
 
 ### ステップ 2. サービスエンドポイントリージョンを確認する {#step-2-check-the-service-endpoint-region}
@@ -81,12 +70,14 @@ TiDB Cloudは、Dedicated Tierクラスターのプライベート エンドポ�
 
 ### ステップ 3. AWS インターフェースエンドポイントを作成する {#step-3-create-an-aws-interface-endpoint}
 
-TiDB Cloud はエンドポイント サービスの作成を開始します。これには 3 ～ 4 分かかります。
+> **ノート：**
+>
+> 2023 年 3 月 28 日以降に作成された各 TiDB 専用クラスターでは、対応するエンドポイント サービスがクラスター作成後 3 ～ 4 分で自動的に作成されます。
 
-エンドポイント サービスが作成されたら、コンソールの下部領域にあるコマンドからエンドポイント サービス名をメモします。
+`Endpoint Service Ready`メッセージが表示された場合は、後で使用できるように、コンソールの下部領域にあるコマンドからエンドポイント サービス名をメモしておきます。それ以外の場合は、 TiDB Cloud がクラスターのエンドポイント サービスを作成するまで 3 ～ 4 分待ちます。
 
 ```bash
-aws ec2 create-vpc-endpoint --vpc-id <your_vpc_id> --region <your_region> --service-name <your_endpoint_service_name> --vpc-endpoint-type Interface --subnet-ids <your_application_subnet_ids>
+aws ec2 create-vpc-endpoint --vpc-id ${your_vpc_id} --region ${your_region} --service-name ${your_endpoint_service_name} --vpc-endpoint-type Interface --subnet-ids ${your_application_subnet_ids}
 ```
 
 次に、AWS マネジメントコンソールまたは AWS CLI を使用して、AWS インターフェイスエンドポイントを作成します。
@@ -96,9 +87,9 @@ aws ec2 create-vpc-endpoint --vpc-id <your_vpc_id> --region <your_region> --serv
 
 AWS マネジメントコンソールを使用して VPC インターフェイスエンドポイントを作成するには、次の手順を実行します。
 
-1.  **[VPC]** &gt; **[エンドポイント]**に移動します。
+1.  [AWS マネジメントコンソール](https://aws.amazon.com/console/)にサインインし、 [https://console.aws.amazon.com/vpc/](https://console.aws.amazon.com/vpc/)で Amazon VPC コンソールを開きます。
 
-2.  **「エンドポイントの作成」**をクリックします。
+2.  ナビゲーション ペインで**[エンドポイント]**をクリックし、右上隅の**[エンドポイントの作成]**をクリックします。
 
     **[エンドポイントの作成]**ページが表示されます。
 
@@ -106,7 +97,7 @@ AWS マネジメントコンソールを使用して VPC インターフェイ�
 
 3.  **[その他のエンドポイント サービス]**を選択します。
 
-4.  エンドポイントサービス名を入力します。
+4.  TiDB Cloudコンソールで見つけたサービス名を入力します。
 
 5.  **[サービスの確認]**をクリックします。
 
@@ -173,7 +164,7 @@ AWS マネジメントコンソールでプライベート DNS を有効にす�
 AWS CLI を使用してプライベート DNS を有効にするには、コマンドをコピーし、AWS CLI で実行します。
 
 ```bash
-aws ec2 modify-vpc-endpoint --vpc-endpoint-id <your_vpc_endpoint_id> --private-dns-enabled
+aws ec2 modify-vpc-endpoint --vpc-endpoint-id ${your_vpc_endpoint_id} --private-dns-enabled
 ```
 
 </div>
@@ -196,13 +187,13 @@ TiDB Cloudコンソールで**[作成]**をクリックして、プライベー�
 >
 > クラスターに接続できない場合は、AWS の VPC エンドポイントのセキュリティ グループが適切に設定されていないことが原因である可能性があります。解決策については[このFAQ](#troubleshooting)参照してください。
 
-## プライベート エンドポイントのステータス参照 {#private-endpoint-status-reference}
+### プライベート エンドポイントのステータス参照 {#private-endpoint-status-reference}
 
 プライベート エンドポイント接続を使用すると、プライベート エンドポイントまたはプライベート エンドポイント サービスのステータスが[**プライベートエンドポイント**ページ](#prerequisites)に表示されます。
 
 プライベート エンドポイントの考えられるステータスについては、次のように説明します。
 
--   **未構成**: エンドポイント サービスを作成したばかりですが、プライベート エンドポイントはまだ作成していません。
+-   **未構成**: エンドポイント サービスは作成されていますが、プライベート エンドポイントはまだ作成されていません。
 -   **保留中**: 処理を待っています。
 -   **Active** : プライベート エンドポイントを使用する準備ができています。このステータスのプライベート エンドポイントは編集できません。
 -   **削除中**: プライベート エンドポイントは削除中です。

@@ -5,9 +5,9 @@ summary: Learn about the supported date and time types.
 
 # 日付と時刻のタイプ {#date-and-time-types}
 
-TiDB は、時間値を格納するためにすべての MySQL 日付と時刻のデータ型 ( [MySQL の日付と時刻のデータ型](https://dev.mysql.com/doc/refman/5.7/en/date-and-time-types.html)を参照してください。
+TiDB は、時間値を格納するためにすべての MySQL 日付と時刻のデータ型 ( [`DATE`](#date-type) 、 [`TIME`](#time-type) 、 [`DATETIME`](#datetime-type) 、 [`TIMESTAMP`](#timestamp-type) 、および[`YEAR`](#year-type)をサポートします。詳細については、 [MySQL の日付と時刻のデータ型](https://dev.mysql.com/doc/refman/5.7/en/date-and-time-types.html)を参照してください。
 
-これらの型にはそれぞれ有効な値の範囲があり、無効な値であることを示すためにゼロ値を使用します。さらに、タイプ`TIMESTAMP`と`DATETIME`は、変更時に新しい時間値を自動的に生成できます。
+これらの型にはそれぞれ有効な値の範囲があり、無効な値であることを示すためにゼロ値を使用します。さらに、タイプ`TIMESTAMP`とタイプ`DATETIME`は、変更時に新しい時間値を自動的に生成できます。
 
 日付と時刻の値の型を扱うときは、次の点に注意してください。
 

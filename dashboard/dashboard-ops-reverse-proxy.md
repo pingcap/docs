@@ -12,7 +12,7 @@ title: Use TiDB Dashboard behind a Reverse Proxy
 
 複数の PD インスタンスがクラスターにデプロイされている場合、PD インスタンスのうち 1 つだけが実際に TiDB ダッシュボードを実行します。したがって、リバース プロキシの上流が正しいアドレスを指していることを確認する必要があります。この仕組みの詳細については、 [複数の PD インスタンスを使用したデプロイメント](/dashboard/dashboard-ops-deploy.md#deployment-with-multiple-pd-instances)を参照してください。
 
-TiUPツールを使用して展開する場合は、次のコマンドを実行して実際の TiDB ダッシュボード アドレスを取得します ( `CLUSTER_NAME`をクラスター名に置き換えます)。
+TiUPツールを使用して展開する場合は、次のコマンドを実行して実際の TiDB ダッシュボード アドレスを取得します ( `CLUSTER_NAME`クラスター名に置き換えます)。
 
 {{< copyable "" >}}
 
