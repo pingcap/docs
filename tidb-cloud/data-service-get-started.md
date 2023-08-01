@@ -27,7 +27,7 @@ A Data App is a group of endpoints that you can use to access data for a specifi
 
 2. On the **Data Service** page, click **Create Data App**.
 
-3. In the **Create Data App** dialog, enter a name and select clusters that you want the Data App to access.
+3. In the **Create Data App** dialog, enter a name, a description, and select clusters that you want the Data App to access.
 
 4. (Optional) To automatically deploy endpoints of the Data App to your preferred GitHub repository and branch, enable **Connect to GitHub**, and then do the following:
 
@@ -95,7 +95,7 @@ You can customize SQL statements for the endpoint in the SQL editor, which is th
     > - The parameter name is case-sensitive.
     > - The parameter cannot be used as a table name or column name.
 
-    - In the **Definition** section, you can specify whether the parameter is required when a client calls the endpoint, the data type (`STRING`, `NUMBER`, or `BOOLEAN`), and the default value of the parameter. When using a `STRING` type parameter, you do not need to add quotation marks (`'` or `"`). For example, `foo` is valid for the `STRING` type and is processed as `"foo"`, whereas `"foo"` is processed as `"\"foo\""`.
+    - In the **Definition** section, you can specify whether the parameter is required when a client calls the endpoint, the data type (`STRING`, `NUMBER`, `INTEGER`, or `BOOLEAN`), and the default value of the parameter. When using a `STRING` type parameter, you do not need to add quotation marks (`'` or `"`). For example, `foo` is valid for the `STRING` type and is processed as `"foo"`, whereas `"foo"` is processed as `"\"foo\""`.
     - In the **Test Values** section, you can set the test value for a parameter. The test values are used when you run the SQL statements or test the endpoint. If you do not set the test values, the default values are used.
     - For more information, see [Configure parameters](/tidb-cloud/data-service-manage-endpoint.md#configure-parameters).
 

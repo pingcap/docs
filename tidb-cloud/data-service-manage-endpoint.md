@@ -169,7 +169,7 @@ In the **Definition** section, you can view and manage the following properties 
 
 - The parameter name: the name can only include letters, digits, and underscores (`_`) and must start with a letter or an underscore (`_`).
 - **Required**: specifies whether the parameter is required in the request. The default configuration is set to not required.
-- **Type**: specifies the data type of the parameter. Supported values are `STRING`, `NUMBER`, and `BOOLEAN`.  When using a `STRING` type parameter, you do not need to add quotation marks (`'` or `"`). For example, `foo` is valid for the `STRING` type and is processed as `"foo"`, whereas `"foo"` is processed as `"\"foo\""`.
+- **Type**: specifies the data type of the parameter. Supported values are `STRING`, `NUMBER`, `INTEGER`, and `BOOLEAN`. When using a `STRING` type parameter, you do not need to add quotation marks (`'` or `"`). For example, `foo` is valid for the `STRING` type and is processed as `"foo"`, whereas `"foo"` is processed as `"\"foo\""`.
 - **Default Value**: specifies the default value of the parameter.
 
     - Make sure that the value can be converted to the type of parameter. Otherwise, the endpoint returns an error.
@@ -194,6 +194,10 @@ To rename an endpoint, perform the following steps:
 ## Test an endpoint
 
 To test an endpoint, perform the following steps:
+
+> **Tip:**
+>
+> If you have imported your Data App to Postman, you can also test endpoints of the Data App in Postman. For more information, see [Run Data App in Postman](/tidb-cloud/data-service-postman-integration.md).
 
 1. Navigate to the [**Data Service**](https://tidbcloud.com/console/data-service) page of your project.
 2. In the left pane, click the name of your target Data App to view its endpoints.
@@ -232,6 +236,10 @@ To deploy an endpoint, perform the following steps:
 ## Call an endpoint
 
 To call an endpoint, you can send an HTTPS request to either an undeployed draft version or a deployed online version of the endpoint.
+
+> **Tip:**
+>
+> If you have imported your Data App to Postman, you can also call endpoints of the Data App in Postman. For more information, see [Run Data App in Postman](/tidb-cloud/data-service-postman-integration.md).
 
 ### Prerequisites
 

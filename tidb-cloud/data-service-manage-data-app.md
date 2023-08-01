@@ -19,7 +19,8 @@ To create a Data App for your project, perform the following steps:
     >
     > If this is the first Data App in your project, click **Create Data App** in the middle of the page.
 
-2. Enter a name for the Data App, and select clusters that you want the Data App to access.
+2. Enter a name, a description, and select clusters that you want the Data App to access.
+
 3. (Optional) To automatically deploy endpoints of the Data App to your preferred GitHub repository and branch, enable **Connect to GitHub**, and then do the following:
 
     1. Click **Install on GitHub**, and then follow the on-screen instructions to install **TiDB Cloud Data Service** as an application on your target repository.
@@ -40,17 +41,17 @@ To create a Data App for your project, perform the following steps:
 
     For your new Data App, **Auto Sync & Deployment** and **Review Draft** are enabled by default so you can easily synchronize Data App changes between TiDB Cloud console and GitHub and review changes before the deployment. For more information about the GitHub integration, see [Deploy your Data App changes with GitHub automatically](/tidb-cloud/data-service-manage-github-connection.md).
 
-## Modify a Data App
+## Configure a Data App
 
-You can rename a Data App, and manage its API keys, linked clusters, and endpoints.
+You can edit the name, version, or description of a Data App, and manage its GitHub connection, linked data sources, API keys, endpoints, and deployments.
 
-### Rename a Data App
+### Edit Data App properties
 
-To rename a Data App, perform the following steps:
+You can edit the name, version, and description of a Data App. To edit Data App properties, perform the following steps:
 
 1. Navigate to the [**Data Service**](https://tidbcloud.com/console/data-service) page of your project.
 2. In the left pane, click the name of your target Data App to view its details.
-3. In the **Data App Properties** area, click <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" color="gray.1"><path d="M11 3.99998H6.8C5.11984 3.99998 4.27976 3.99998 3.63803 4.32696C3.07354 4.61458 2.6146 5.07353 2.32698 5.63801C2 6.27975 2 7.11983 2 8.79998V17.2C2 18.8801 2 19.7202 2.32698 20.362C2.6146 20.9264 3.07354 21.3854 3.63803 21.673C4.27976 22 5.11984 22 6.8 22H15.2C16.8802 22 17.7202 22 18.362 21.673C18.9265 21.3854 19.3854 20.9264 19.673 20.362C20 19.7202 20 18.8801 20 17.2V13M7.99997 16H9.67452C10.1637 16 10.4083 16 10.6385 15.9447C10.8425 15.8957 11.0376 15.8149 11.2166 15.7053C11.4184 15.5816 11.5914 15.4086 11.9373 15.0627L21.5 5.49998C22.3284 4.67156 22.3284 3.32841 21.5 2.49998C20.6716 1.67156 19.3284 1.67155 18.5 2.49998L8.93723 12.0627C8.59133 12.4086 8.41838 12.5816 8.29469 12.7834C8.18504 12.9624 8.10423 13.1574 8.05523 13.3615C7.99997 13.5917 7.99997 13.8363 7.99997 14.3255V16Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>, modify the **App Name** field, and then click **Confirm**.
+3. In the **Data App Properties** area, click <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" color="gray.1"><path d="M11 3.99998H6.8C5.11984 3.99998 4.27976 3.99998 3.63803 4.32696C3.07354 4.61458 2.6146 5.07353 2.32698 5.63801C2 6.27975 2 7.11983 2 8.79998V17.2C2 18.8801 2 19.7202 2.32698 20.362C2.6146 20.9264 3.07354 21.3854 3.63803 21.673C4.27976 22 5.11984 22 6.8 22H15.2C16.8802 22 17.7202 22 18.362 21.673C18.9265 21.3854 19.3854 20.9264 19.673 20.362C20 19.7202 20 18.8801 20 17.2V13M7.99997 16H9.67452C10.1637 16 10.4083 16 10.6385 15.9447C10.8425 15.8957 11.0376 15.8149 11.2166 15.7053C11.4184 15.5816 11.5914 15.4086 11.9373 15.0627L21.5 5.49998C22.3284 4.67156 22.3284 3.32841 21.5 2.49998C20.6716 1.67156 19.3284 1.67155 18.5 2.49998L8.93723 12.0627C8.59133 12.4086 8.41838 12.5816 8.29469 12.7834C8.18504 12.9624 8.10423 13.1574 8.05523 13.3615C7.99997 13.5917 7.99997 13.8363 7.99997 14.3255V16Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>, modify the App name, version, or description, and then click **Confirm**.
 
 ### Manage GitHub connection
 
@@ -106,6 +107,49 @@ To manage deployments, perform the following steps:
 
 5. In the **Action** column, you can edit or re-deploy your changes according to your needs.
 
+## Use the OpenAPI Specification
+
+Data Service (beta) supports generating the OpenAPI Specification 3.0 for each Data App, which enables you to interact with your endpoints in a standardized format. You can use this specification to generate standardized OpenAPI documentation, client SDKs, and server stubs.
+
+### Download the OpenAPI Specification
+
+To download the OpenAPI Specification in JSON or YAML format for a Data App, perform the following steps:
+
+1. Navigate to the [**Data Service**](https://tidbcloud.com/console/data-service) page of your project.
+2. In the left pane, click the name of your target Data App to view its details.
+3. In the **API Specification** area, click **Download** and select **JSON** or **YAML**.
+
+    If this is your first time downloading the OpenAPI Specification, you need to authorize the request when prompted.
+
+4. Then, the OpenAPI Specification is downloaded to your local machine.
+
+### View the OpenAPI documentation
+
+Data Service (beta) provides autogenerated OpenAPI documentation for each Data App. In the documentation, you can view the endpoints, parameters, and responses, and try out the endpoints.
+
+To access the OpenAPI documentation, perform the following steps:
+
+1. Navigate to the [**Data Service**](https://tidbcloud.com/console/data-service) page of your project.
+2. In the left pane, click the name of your target Data App to view its details.
+3. In the upper-right corner of the page, click **View API Docs**.
+
+    If this is your first time using the OpenAPI Specification, you need to authorize the request when prompted.
+
+4. Then, the OpenAPI documentation is opened in a new tab. In the documentation, you can view the following information:
+
+    - Data App name, version, and description.
+    - Endpoints grouped by tags.
+
+5. (Optional) To try out an endpoint, take the following steps:
+
+    1. Click **Authorize** and enter your Data App public key as **Username** and private key as **Password** in the displayed dialog box.
+
+        For more information, see [Manage an API key](/tidb-cloud/data-service-api-key.md).
+
+    2. Locate your target endpoint, provide the required parameters, and then click **Try it out**. You can view the response in the **Response body** area.
+
+  For more information about how to use the OpenAPI documentation, see [Swagger UI](https://swagger.io/tools/swagger-ui/).
+
 ## Delete a Data App
 
 > **Note:**
@@ -120,3 +164,7 @@ To delete a Data App, perform the following steps:
 4. Type your `<organization name>/<project name>/<data app name>`, and then click **I understand, delete**.
 
     Once a Data App is deleted, the existing endpoints and API keys in the Data App are also deleted. If this Data App is connected to GitHub, deleting the App does not delete the files in the corresponding GitHub repository.
+
+## Learn more
+
+- [Run Data App in Postman](/tidb-cloud/data-service-postman-integration.md)
