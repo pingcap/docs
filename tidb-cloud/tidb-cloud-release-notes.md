@@ -26,7 +26,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
     For more information, see [Run Data App in Postman](/tidb-cloud/data-service-postman-integration.md).
 
-- Introduce a new **Pausing** status for TiDB Dedicated clusters, allowing cost-effective pauses with no charges during this period.
+- Introduce a new **Pausing** status for [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) clusters, allowing cost-effective pauses with no charges during this period.
 
     When you click **Pause** for a TiDB Dedicated cluster, the cluster will enter the **Pausing** status first. Once the pause operation is completed, the cluster status will transition to **Paused**.
 
