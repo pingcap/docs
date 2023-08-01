@@ -87,7 +87,7 @@ The following uses Next.js as an example to demonstrate how to generate client c
     2. In the **API Specification** area, click **Download**, select the JSON format, and then click **Authorize** if prompted.
     3. Save the downloaded file as `oas/doc.json` in the `hello-repos` project directory.
 
-  For more information, see [Download the OpenAPI Specification](/tidb-cloud/data-service-manage-data-app.md#download-the-openapi-specification).
+    For more information, see [Download the OpenAPI Specification](/tidb-cloud/data-service-manage-data-app.md#download-the-openapi-specification).
 
     The structure of the `oas/doc.json` file is as follows:
 
