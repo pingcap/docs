@@ -82,11 +82,7 @@ To learn more about the Postman usage, see [Postman documentation](https://learn
 
 ## Deal with new changes in Data App
 
-After a Data App is imported to Postman, TiDB Cloud Data Service will not automatically synchronize the following new changes of the Data App to Postman.
-
-- The creation of new endpoints
-- The renaming or deletion of existing endpoints
-- The parameter modification of existing endpoints
+After a Data App is imported to Postman, TiDB Cloud Data Service will not automatically synchronize new changes of the Data App to Postman.
 
 If you want any new changes to reflect in Postman, you have to [follow the import process](/tidb-cloud/data-service-postman-integration.md#step-1-import-your-data-app-to-postman) once again. Because the collection name is unique in a Postman workspace, you can either use the latest Data App to replace the previously imported one or import the latest Data App as a new collection.
 
