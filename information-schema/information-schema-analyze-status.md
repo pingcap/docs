@@ -66,7 +66,7 @@ Fields in the `ANALYZE_STATUS` table are described as follows:
 * `TABLE_SCHEMA`: The name of the database to which the table belongs.
 * `TABLE_NAME`: The name of the table.
 * `PARTITION_NAME`: The name of the partitioned table.
-* `JOB_INFO`: The information of the `ANALYZE` task. If an index is analyzed, this information will include the index name. When `tidb_analyze_version =2`, this information will include configuration items such as sample rate.
+* `JOB_INFO`: The information of the `ANALYZE` task. If an index is analyzed, this information will include the index name. When `tidb_analyze_version = 2`, this information will include configuration items such as sample rate.
 * `PROCESSED_ROWS`: The number of rows that have been processed.
 * `START_TIME`: The start time of the `ANALYZE` task.
 * `END_TIME`: The end time of the `ANALYZE` task.
