@@ -117,7 +117,7 @@ To download the OpenAPI Specification in JSON or YAML format for a Data App, per
 
 1. Navigate to the [**Data Service**](https://tidbcloud.com/console/data-service) page of your project.
 2. In the left pane, click the name of your target Data App to view its details.
-3. In the **OpenAPI Specification** area, click **Download** and select **JSON** or **YAML**.
+3. In the **API Specification** area, click **Download** and select **JSON** or **YAML**.
 
     If this is your first time downloading the OpenAPI Specification, you need to authorize the request when prompted.
 

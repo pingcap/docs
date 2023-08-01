@@ -84,7 +84,7 @@ The following uses Next.js as an example to demonstrate how to generate client c
 3. Download the OpenAPI Specification and save it as `oas/doc.json`.
 
     1. On the TiDB Cloud [**Data Service**](https://tidbcloud.com/console/data-service) page, click your Data App name in the left pane to view the App settings.
-    2. In the **OpenAPI Specification** area, click **Download**, select the JSON format, and then click **Authorize** if prompted.
+    2. In the **API Specification** area, click **Download**, select the JSON format, and then click **Authorize** if prompted.
     3. Save the downloaded file as `oas/doc.json` in the `hello-repos` project directory.
 
       For more information, see [Download the OpenAPI Specification](/tidb-cloud/data-service-manage-data-app.md#download-the-openapi-specification).
