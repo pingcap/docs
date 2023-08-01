@@ -50,8 +50,6 @@ The execution method of Hash Join is usually as follows:
 
 *(The above figure omits the exchange node and other nodes.)*
 
-Runtime Filter 的执行方式如下：
-
 The execution process of Runtime Filter is as follows:
 
 1. Scan the data of `date_dim`, and PhysicalHashJoin calculates a filter condition based on the `date_dim` data, such as `date_dim in (2001/01/01~2001/12/31)`.
