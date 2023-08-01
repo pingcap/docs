@@ -31,7 +31,7 @@ After your TiDB Dedicated cluster is created on TiDB Cloud, you can connect to i
     >
     > To use Chat2Query on [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) clusters, contact [TiDB Cloud support](/tidb-cloud/tidb-cloud-support.md).
 
-    TiDB Cloud is powered by artificial intelligence (AI). If your Dedicated Tier is hosted on AWS and the TiDB version of the cluster is v6.5.0 or later, you can use Chat2Query (beta), an AI-powered SQL editor in the [TiDB Cloud console](https://tidbcloud.com/), to maximize your data value.
+    TiDB Cloud is powered by artificial intelligence (AI). If your cluster is hosted on AWS and the TiDB version of the cluster is v6.5.0 or later, you can use Chat2Query (beta), an AI-powered SQL editor in the [TiDB Cloud console](https://tidbcloud.com/), to maximize your data value.
 
     In Chat2Query, you can either simply type `--` followed by your instructions to let AI generate SQL queries automatically or write SQL queries manually, and then run SQL queries against databases without a terminal. You can find the query results in tables intuitively and check the query logs easily.
 
