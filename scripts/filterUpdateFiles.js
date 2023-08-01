@@ -12,14 +12,14 @@ const octokit = GH_TOKEN
   : new Octokit();
 
 const getLocalCfg = () => {
-  const fileContent = fs.readFileSync("./latest_commit.json");
+  const fileContent = fs.readFileSync("./latest_translation_commit.json");
   const data = JSON.parse(fileContent);
   return data;
 };
 
 const writeLocalCfg = (cfg) => {
   const data = JSON.stringify(cfg);
-  fs.writeFileSync("./latest_commit.json", data);
+  fs.writeFileSync("./latest_translation_commit.json", data);
 };
 
 const ghGetBranch = async (branchName = "master") => {
