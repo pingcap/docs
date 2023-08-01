@@ -12,9 +12,9 @@ This document introduces how to use the OpenAPI Specification of a [Data App](/t
 Before using OpenAPI Specification with Next.js, make sure that you have the following:
 
 - A TiDB cluster. For more information, see [Create a TiDB Serverless cluster](/tidb-cloud/create-tidb-cluster-serverless.md) or [Create a TiDB Dedicated cluster](/tidb-cloud/create-tidb-cluster.md).
-- [Node.js](https://nodejs.org/en/download).
-- [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm).
-- [yarn](https://yarnpkg.com/getting-started/install).
+- [Node.js](https://nodejs.org/en/download)
+- [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
+- [yarn](https://yarnpkg.com/getting-started/install)
 
 This document uses a TiDB Serverless cluster as an example.
 
@@ -51,7 +51,7 @@ After the data is inserted, navigate to the [**Data Service**](https://tidbcloud
 SELECT * FROM test.repository;
 ```
 
-For more information, see [Get started with Data Service](/tidb-cloud/data-service-get-started.md)
+For more information, see [Get started with Data Service](/tidb-cloud/data-service-get-started.md).
 
 ## Step 3. Generate client code
 
@@ -87,7 +87,7 @@ The following uses Next.js as an example to demonstrate how to generate client c
     2. In the **API Specification** area, click **Download**, select the JSON format, and then click **Authorize** if prompted.
     3. Save the downloaded file as `oas/doc.json` in the `hello-repos` project directory.
 
-      For more information, see [Download the OpenAPI Specification](/tidb-cloud/data-service-manage-data-app.md#download-the-openapi-specification).
+  For more information, see [Download the OpenAPI Specification](/tidb-cloud/data-service-manage-data-app.md#download-the-openapi-specification).
 
     The structure of the `oas/doc.json` file is as follows:
 
@@ -182,7 +182,7 @@ You can use the generated client code to develop your Next.js application.
 
     > **Note:**
     >
-    > If your Data App is deployed across multiple regions, you also need to configure the endpoint path in the `config` object as follows:
+    > If the linked clusters of your Data App are hosted in different regions, you wil see multiple items in the `servers` section of the downloaded OpenAPI Specification file. In this case, you also need to configure the endpoint path in the `config` object as follows:
     >
     >  ```js
     >  const config = new Configuration({

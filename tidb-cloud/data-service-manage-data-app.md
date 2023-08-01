@@ -143,7 +143,9 @@ To access the OpenAPI documentation, perform the following steps:
 5. (Optional) To try out an endpoint, take the following steps:
 
     1. Click **Authorize** and enter your Data App public key as **Username** and private key as **Password** in the displayed dialog box.
+
         For more information, see [Manage an API key](/tidb-cloud/data-service-api-key.md).
+
     2. Locate your target endpoint, provide the required parameters, and then click **Try it out**. You can view the response in the **Response body** area.
 
   For more information about how to use the OpenAPI documentation, see [Swagger UI](https://swagger.io/tools/swagger-ui/).

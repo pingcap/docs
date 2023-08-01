@@ -81,7 +81,7 @@ The description of each field is as follows:
 | `app_id`   | String | The Data App ID. Do not change this field unless your `dataapp_config.json` file is copied from another Data App and you want to update it to the ID of your current Data App. Otherwise, the deployment triggered by this modification will fail. |
 | `app_name` | String | The Data App name. |
 | `app_type` | String | The Data App type, which can only be `"dataapi"`. |
-| `app_version` | String | The Data App version. |
+| `app_version` | String | The Data App version, which is in the `"<major>.<minor>.<patch>"` format. For example, `"1.0.0"`. |
 | `description` | String | The Data App description. |
 
 ## HTTP endpoint configuration
