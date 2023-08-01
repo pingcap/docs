@@ -194,7 +194,7 @@ You can use the generated client code to develop your Next.js application.
     >
     > Make sure to replace `basePath` with the actual endpoint path of your Data App. To get `${YOUR_REGION}` and `{YOUR_DATA_APP_ID}`, check the **Endpoint URL** in the endpoint **Properties** panel.
 
-## 5. Preview your Next.js application
+## Step 5. Preview your Next.js application
 
 > **Note:**
 >
