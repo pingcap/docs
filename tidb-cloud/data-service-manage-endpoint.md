@@ -195,6 +195,10 @@ To rename an endpoint, perform the following steps:
 
 To test an endpoint, perform the following steps:
 
+> **Tip:**
+>
+> If you have imported your Data App to Postman, you can also test endpoints of the Data App in Postman. For more information, see [Run Data App in Postman](/tidb-cloud/data-service-postman-integration.md).
+
 1. Navigate to the [**Data Service**](https://tidbcloud.com/console/data-service) page of your project.
 2. In the left pane, click the name of your target Data App to view its endpoints.
 3. Click the name of the endpoint you want to test to view its details.
@@ -232,6 +236,10 @@ To deploy an endpoint, perform the following steps:
 ## Call an endpoint
 
 To call an endpoint, you can send an HTTPS request to either an undeployed draft version or a deployed online version of the endpoint.
+
+> **Tip:**
+>
+> If you have imported your Data App to Postman, you can also call endpoints of the Data App in Postman. For more information, see [Run Data App in Postman](/tidb-cloud/data-service-postman-integration.md).
 
 ### Prerequisites
 
