@@ -32,7 +32,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
     A cluster can only be resumed after its status transitions to **Paused**, which resolves the abnormal resumption issue caused by rapid clicks of **Pause** and **Resume**.
 
-    For more information, see [Pause or resume a TiDB Dedicated cluster](/tidb-cloud/pause-or-resume-tidb-cluster.md)
+    For more information, see [Pause or resume a TiDB Dedicated cluster](/tidb-cloud/pause-or-resume-tidb-cluster.md).
 
 ## July 26, 2023
 
