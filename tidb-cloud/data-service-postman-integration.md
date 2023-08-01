@@ -5,7 +5,7 @@ summary: Learn how to run your Data App in Postman.
 
 # Run Data App in Postman
 
-[Postman](https://www.postman.com/) is an API platform for building and using APIs, which simplifies each step of the API lifecycle and streamlines collaboration so you can create better APIs—faster.
+[Postman](https://www.postman.com/) is an API platform that simplifies the API lifecycle and enhances collaboration for faster and better API development.
 
 In TiDB Cloud [Data Service](https://tidbcloud.com/console/data-service), you can easily import your Data App to Postman and leverage Postman's extensive tools to enhance your API development experience.
 
@@ -15,9 +15,9 @@ This document describes how to import your Data App to Postman and how to run yo
 
 Before importing a Data App to Postman, make sure that you have the following:
 
-- A [Postman](https://www.postman.com/) account.
-- A [Postman desktop app](https://www.postman.com/downloads) (Optional. You can use the Postman webpage version without downloading the app.)
-- A [Data App](/tidb-cloud/data-service-manage-data-app.md) with at least one [endpoint](/tidb-cloud/data-service-manage-endpoint.md). Only endpoints that meet the following requirements can be imported to Postman:
+- A [Postman](https://www.postman.com/) account
+- A [Postman desktop app](https://www.postman.com/downloads) (optional). Alternatively, you can use the Postman web version without downloading the app.
+- A [Data App](/tidb-cloud/data-service-manage-data-app.md) with at least one well-defined [endpoint](/tidb-cloud/data-service-manage-endpoint.md). Only endpoints that meet the following requirements can be imported to Postman:
 
     - The target cluster is selected.
     - The endpoint path and request method are configured.
@@ -31,26 +31,26 @@ To import your Data App to Postman, take the following steps:
 
 1. In the [TiDB Cloud console](https://tidbcloud.com), navigate to the [**Data Service**](https://tidbcloud.com/console/data-service) page of your project.
 2. In the left pane, click the name of your target Data App to view its details.
-3. In the upper-right corner of the page, click **Run in Postman**. A dialog for import instructions is displayed.
+3. In the upper-right corner of the page, click **Run in Postman**. A dialog with import instructions is displayed.
 
     > **Note:**
     >
-    > - If a Data App does not have any endpoint with the target cluster, path, request method, and SQL statements configured, **Run in Postman** is unclickable for the Data App.
-    > - For a Chat2Query Data App, **Run in Postman** is unavailable.
+    > - If a Data App lacks a well-defined endpoint (the target cluster, path, request method, and SQL statements are configured), **Run in Postman** remains disabled for the Data App.
+    > - For a Chat2Query Data App, **Run in Postman** is not available.
 
 4. Follow the steps provided in the dialog for the Data App import:
 
-    1. Depending on the Postman version you want to use, click **Run in Postman for Web** or **Run in Postman Desktop** to open your Postman workspaces, and then select your target workspace in Postman.
+    1. Depending on your preference, choose either **Run in Postman for Web** or **Run in Postman Desktop** to open your Postman workspaces, and then select your target workspace.
 
         - If you have not logged into Postman, follow the on-screen instructions to log into Postman first.
-        - If you clicked **Run in Postman Desktop**, follow the on-screen instructions to open the Postman desktop app.
+        - If you clicked **Run in Postman Desktop**, follow the on-screen instructions to launch the Postman desktop app.
 
     2. On the page of your target workspace in Postman, click **Import** in the left navigation menu.
-    3. Copy the Data App URL in the TiDB Cloud dialog, and then paste the URL to Postman for the import.
+    3. Copy the Data App URL from the TiDB Cloud dialog, and then paste the URL to Postman for the import.
 
 5. After you paste the URL, Postman imports the Data App automatically as a new [collection](https://learning.postman.com/docs/collections/collections-overview). The name of the collection is in the `TiDB Data Service - <Your App Name>` format.
 
-    In the collection, the deployed endpoints are grouped in the **Deployed** folder and the undeployed endpoints are grouped in the **Draft** folder.
+    In the collection, the deployed endpoints are grouped under the **Deployed** folder and the un-deployed endpoints are grouped under the **Draft** folder.
 
 ## Step 2. Configure your Data App API key in Postman
 
@@ -82,12 +82,12 @@ To learn more about the Postman usage, see [Postman documentation](https://learn
 
 ## Deal with new changes in Data App
 
-After a Data App is imported to Postman, TiDB Cloud Data Service will not synchronize the following new changes of the Data App to Postman.
+After a Data App is imported to Postman, TiDB Cloud Data Service will not automatically synchronize the following new changes of the Data App to Postman.
 
 - The creation of new endpoints
 - The renaming or deletion of existing endpoints
 - The parameter modification of existing endpoints
 
-If you want to have these changes in Postman, you need to [import the latest Data App](/tidb-cloud/data-service-postman-integration.md#step-1-import-your-data-app-to-postman) to Postman again. Because the collection name is unique in a Postman workspace, you can either use the latest Data App to replace the previously imported one or import the latest Data App as a new collection.
+If you want any new changes to reflect in Postman, you have to [follow the import process](/tidb-cloud/data-service-postman-integration.md#step-1-import-your-data-app-to-postman) once again. Because the collection name is unique in a Postman workspace, you can either use the latest Data App to replace the previously imported one or import the latest Data App as a new collection.
 
-After the import, you need to [configure the API key for the newly imported App](#step-2-configure-your-data-app-api-key-in-postman) in Postman again.
+Also, after re-importing the Data App, you will have to [configure the API key for the newly imported App](#step-2-configure-your-data-app-api-key-in-postman) in Postman again.
