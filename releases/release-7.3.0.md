@@ -54,7 +54,7 @@ This drastically improves write performance, reduces I/O amplication, speeds up 
 
 * TiFlash supports executing common table expressions (CTEs) (experimental) [#43333](https://github.com/pingcap/tidb/issues/43333) @[winoros](https://github.com/winoros) **tw@ran-huang** <!--1244-->
 
-    Before v7.3.0, the MPP engine of TiFlash cannot execute queries that contain CTEs by default. To achieve the best execution performance within the MPP framework, you need to use the system variable [`tidb_opt_force_inline_cte`](/system-variables.md#tidb_opt_force_inline_cte-introduced-since-v630) to inline expand CTE.
+    Before v7.3.0, the MPP engine of TiFlash cannot execute queries that contain CTEs by default. To achieve the best execution performance within the MPP framework, you need to use the system variable [`tidb_opt_force_inline_cte`](/system-variables.md#tidb_opt_force_inline_cte-introduced-since-v630) to enforce inlining CTE.
 
     Starting from v7.3.0, TiFlash's MPP engine supports executing queries with CTEs without inline expanding them, allowing for optimal query execution within the MPP framework. In TPC-DS benchmark tests, compared to using inline expansion, this feature has shown a 20% improvement in overall query execution speed for queries containing CTE.
 
