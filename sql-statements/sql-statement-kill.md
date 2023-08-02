@@ -47,13 +47,19 @@ Query OK, 0 rows affected (0.00 sec)
 ## MySQL compatibility
 
 - The `KILL` statement of MySQL can only terminate a connection in the currently connected MySQL instance, while the `KILL` statement of TiDB can terminate a connection in any TiDB instance in the entire cluster.
-- Currently, using the MySQL command line <kbd>ctrl</kbd>+<kbd>c</kbd> to terminate a query or connection in TiDB is not supported.
+- In v7.2.0 and earlier versions, using the MySQL command line <kbd>ctrl</kbd>+<kbd>c</kbd> to terminate a query or connection in TiDB is not supported.
 
 ## Behavior change descriptions
 
 <CustomContent platform="tidb">
 
 Starting from v6.1.0, TiDB supports the Global Kill feature, which is enabled by default and controlled by the [`enable-global-kill`](/tidb-configuration-file.md#enable-global-kill-new-in-v610) configuration.
+
+Starting from v7.3.0, TiDB supports generating 32-bit connection ID, which is enabled by default and controlled by the [`enable-32bits-connection-id`](/tidb-configuration-file.md#enable-32bits-connection-id-introduced-in-version-v730) configuration. When both Global Kill and 32-bit connection ID are enabled, TiDB will generate a 32-bit connection ID, allowing the termination of queries or connections in the MySQL command-line using <kbd>ctrl</kbd>+<kbd>c</kbd>.
+
+ > **Warning:**
+ >
+ > When the number of TiDB instances in the cluster exceeds 2048 or the concurrent connection count of a single TiDB instance exceeds 1048576, the 32-bit connection ID space is insufficient and will be automatically upgraded to 64-bit connection ID. During the upgrade process, existing business and established connections will not be affected. However, subsequent new connections will not be able to be terminated using <kbd>ctrl</kbd>+<kbd>c</kbd> in the MySQL command-line.
 
 </CustomContent>
 
