@@ -13,10 +13,10 @@ import openpyxl
 import os
 import shutil
 
-version = '6.5.3' # specifies the target TiDB version
-release_note_excel = r'/Users/userid/Downloads/download_tirelease_tmp_patch_6.5.3_release_note_2023-06-06.xlsx' # specifies the path of release note table with PR links and issue links
-ext_path = r'/Users/userid/Documents/GitHub/mygithubid/docs-cn/releases'  # specifies the path of the existing release notes
-template_file = r'/Users/userid/Documents/GitHub/mygithubid/docs/resources/doc-templates/patch_release_note_template_zh.md' # specifies the path of the release note template file
+version = '6.5.3' # Specifies the target TiDB version
+release_note_excel = r'/Users/userid/Downloads/download_tirelease_tmp_patch_6.5.3_release_note_2023-06-06.xlsx' # Specifies the path of release note table with PR links and issue links
+ext_path = r'/Users/userid/Documents/GitHub/mygithubid/docs-cn/releases'  # Specifies the path of the existing release notes
+template_file = r'/Users/userid/Documents/GitHub/mygithubid/docs/resources/doc-templates/patch_release_note_template_zh.md' # Specifies the path of the release note template file
 
 with open("/Users/userid/Documents/PingCAP/Python_scripts/GitHub/gh_token2.txt", "r") as f: # Read the GitHub personal access token from the token.txt file
     access_token = f.read().strip()
@@ -35,7 +35,7 @@ def store_exst_rn(ext_path, version):
     for maindir, subdir, files in os.walk(ext_path):
         for afile in files:
             file_path = (os.path.join(maindir, afile))
-            if file_path.endswith('.md') and major_minor_version not in afile: #excluding duplicate notes that are in the same major or minor releases. For example, excluding 6.5.x dup release notes for v6.5.3
+            if file_path.endswith('.md') and major_minor_version not in afile: # Exclude duplicate notes that are in the same major or minor releases. For example, excluding 6.5.x dup release notes for v6.5.3
                 with open(file_path,'r', encoding='utf-8') as fp:
                     level1 = level2 = level3 = ""
                     for line in fp:
@@ -133,7 +133,7 @@ def update_pr_author_and_release_notes(excel_path):
         current_formated_rn= row[pr_formated_rn_index]
         if current_pr_author in ['ti-chi-bot', 'ti-srebot']:
            print ("Replacing the author info for row " + str(row_index) + ".")
-           actual_pr_author = get_pr_info_from_github(row[pr_link_index], row[pr_title_index], current_pr_author) #Get the PR author according to the cherry-pick PR
+           actual_pr_author = get_pr_info_from_github(row[pr_link_index], row[pr_title_index], current_pr_author) # Get the PR author according to the cherry-pick PR
            pr_author_cell = sheet.cell(row=row_index, column=pr_author_index+1, value = actual_pr_author)#Fill in the pr_author_cell
            updated_formated_rn = current_formated_rn.replace("[{}](https://github.com/{}".format(current_pr_author, current_pr_author),"[{}](https://github.com/{}".format(actual_pr_author, actual_pr_author))
            formated_release_note_cell = sheet.cell(row=row_index, column=pr_formated_rn_index+1, value = updated_formated_rn) # Fill in the formated_release_note_cell
@@ -150,7 +150,7 @@ def update_pr_author_and_release_notes(excel_path):
                     dup_formated_rn = '- (dup): {} {} {}'.format(note_pair[2], note_pair[3], note_pair[1])
                     #print (note_pair)
                     sheet.cell(row=row_index, column=pr_last_col_index+1, value=dup_formated_rn)
-                    if dup_formated_rn not in dup_notes: #collect the dup release note if it is not collected before
+                    if dup_formated_rn not in dup_notes: # Collect the dup release note if it is not collected before
                         dup_notes.append(dup_formated_rn)
                         print ("-----")
                         print (dup_formated_rn)
@@ -191,18 +191,18 @@ def create_release_file(version, dup_notes_levels, dup_notes):
                 note_level = level1 + level2 + level3
                 note_levels.append(note_level)
                 newline = line.replace("- placeholder", "")
-                for dup_note_level, dup_note in zip(dup_notes_levels, dup_notes): #add the dup release notes to the release note file
+                for dup_note_level, dup_note in zip(dup_notes_levels, dup_notes): # Add the dup release notes to the release note file
                     if dup_note_level == note_level:
                         newlines.append(newline+dup_note)
                     else:
                         continue
-                if "Other dup notes" in note_level: #add the dup release notes without corresponding categories to the release note file
+                if "Other dup notes" in note_level: # Add the dup release notes without corresponding categories to the release note file
                     for dup_note_level, dup_note in zip(dup_notes_levels, dup_notes):
                         if dup_note_level not in note_levels:
                             newlines.append(newline+dup_note)
                             other_dup_notes.append(dup_note)
                     if len(other_dup_notes) == 0:
-                        newlines = newlines[:-2] # remove the last two lines if other dup notes do not exist
+                        newlines = newlines[:-2] # Remove the last two lines if other dup notes do not exist
                     else:
                         pass
             elif line.startswith("##"):
