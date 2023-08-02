@@ -1,15 +1,15 @@
 ---
 title: RUNAWAY_WATCHES
-summary: Learn the `RUNAWAY_WATCHES` information_schema table。
+summary: Learn the `RUNAWAY_WATCHES` INFORMATION_SCHEMA table。
 ---
 
 # RUNAWAY_WATCHES
 
-The `RUNAWAY_WATCHES` table shows the watch list of runaway queries. See [Runaway Queries](/tidb-resource-control.md#manage-queries-that-consume-more-resources-than-expected-runaway-queries).
+The `RUNAWAY_WATCHES` table shows the watch list of runaway queries that consume more resources than expected. See [Runaway Queries](/tidb-resource-control.md#manage-queries-that-consume-more-resources-than-expected-runaway-queries).
 
 ```sql
-USE information_schema;
-DESC runaway_watches;
+USE INFORMATION_SCHEMA;
+DESC RUNAWAY_WATCHES;
 ```
 
 ```sql
@@ -34,9 +34,13 @@ DESC runaway_watches;
 
 ## Examples
 
+Query the watch list of runaway query:
+
 ```sql
-select * from information_schema.runaway_watches\G; -- Query the watch list of runaway query
+SELECT * FROM INFORMATION_SCHEMA.RUNAWAY_WATCHES;
 ```
+
+The output is as follows:
 
 ```sql
 *************************** 1. row ***************************
@@ -60,13 +64,20 @@ RESOURCE_GROUP_NAME: rg2
 2 rows in set (0.00 sec)
 ```
 
-```sql
-query watch add resource group rg1 sql text exact to 'select * from sbtest.sbtest1'; -- Add a watch item into list
-```
+Add a watch item into list to the resource group `rg1`:
 
 ```sql
-select * from information_schema.runaway_watches\G; -- Query the watch list of runaway query
+query watch add resource group rg1 sql text exact to 'select * from sbtest.sbtest1'; --
+QUERY WATCH ADD RESOURCE GROUP rg1 SQL TEXT EXACT TO 'select * from sbtest.sbtest1';
 ```
+
+Query the watch list of runaway query again:
+
+```sql
+SELECT * FROM INFORMATION_SCHEMA.RUNAWAY_WATCHES\G;
+```
+
+The output is as follows:
 
 ```sql
 *************************** 1. row ***************************
@@ -109,5 +120,5 @@ The meanings of the columns in the `RUNAWAY_WATCHES` table are as follows:
     - `Plan` indicates that the Plan Digest is matched. In this case, the `WATCH_TEXT` column shows the Plan Digest.
     - `Similar` indicates that the SQL Digest is matched. In this case, the `WATCH_TEXT` column shows the SQL Digest.
     - `Exact` indicates that the SQL text is matched. In this case, the `WATCH_TEXT` column shows the SQL text.
-- `SOURCE` indicates the source of the watch item. If it is identified by the `QUERY_LIMIT` rule, the identified TiDB IP address is displayed. If it is manually added, `manual` is displayed.
-- `ACTION` indicates the corresponding operation after the identification. If it is `NoneAction`, the `ACTION` configured in `QUERY_LIMIT` in the resource group is used.
+- `SOURCE`: the source of the watch item. If it is identified by the `QUERY_LIMIT` rule, the identified TiDB IP address is displayed. If it is manually added, `manual` is displayed.
+- `ACTION`: the corresponding operation after the identification. If it is `NoneAction`, the `ACTION` configured in `QUERY_LIMIT` in the resource group is used.
