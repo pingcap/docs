@@ -74,11 +74,11 @@ This drastically improves write performance, reduces I/O amplication, speeds up 
 
 * Manually mark queries that use resources more than expected (experimental) [#43691](https://github.com/pingcap/tidb/issues/43691) @[Connor1996](https://github.com/Connor1996) @[CabinfeverB](https://github.com/CabinfeverB) **tw@hfxsd** <!--1446-->
 
-    In v7.2.0, TiDB automatically manages runaway queries, where queries that take longer than expected can be automatically demoted or canceled. In practice, it is not possible to cover all cases by relying on rules alone. Therefore, in v7.3.0, TiDB adds the ability to manually mark queries. With the new command [`QUERY WATCH`](/sql-statements/sql-statement-query-watch.md), you can mark queries based on SQL text, SQL Digest, or execution plan. Queries that are marked can be downgraded or canceled.
+    In v7.2.0, TiDB automatically manages queries that use resources more than expected (Runaway Query) by automatically downgrading or canceling runaway queries. In actual practice, rules alone cannot cover all cases. Therefore, TiDB v7.3.0 introduces the ability to manually mark runaway queries. With the new command [`QUERY WATCH`](/sql-statements/sql-statement-query-watch.md), you can mark runaway queries based on SQL text, SQL Digest, or execution plan, and the marked runaway queries can be downgraded or cancelled.
 
-    The ability of manually marking runaway queries provides an effective means of intervening in unexpected performance problems in the database. For query-induced performance problems, the impact on overall performance can be quickly mitigated before the root cause of the problem is found, improving system service quality. 
+    This feature provides an effective intervention method for sudden performance issues in the database. For performance issues caused by queries, before identifying the root cause, this feature can quickly alleviate its impact on overall performance, thereby improving system service quality.
 
-    For more information, refer to [user documentation](/tidb-resource-control.md#query-watch-parameters)
+    For more information, see [documentation](/tidb-resource-control.md#query-watch-parameters).
 
 ### SQL
 
@@ -114,19 +114,19 @@ This drastically improves write performance, reduces I/O amplication, speeds up 
 
 ### Data migration
 
-* TiDB Lightning introduces a new version of conflict data detection and processing capabilities [#41629](https://github.com/pingcap/tidb/issues/41629) @[lance6716](https://github.com/lance6716) **tw@hfxsd** <!--1296-->
-     
-    Previous versions of TiDB Lightning used different conflict detection and handling methods for logical and physical import modes, which were complicated to configure and not easy for users to understand. In addition, when you use physical import mode, conflicting data cannot be handled by the `replace` and `ignore` policies. In the new version of conflict detection and handling, both logical import mode and physical import mode use the same set of conflict detection and handling, that is, reporting error (`error`), replacing (`replace`) or ignoring (`ignore`) conflicting data when encountering conflicting data. It also allows you to set an upper limit on the number of conflict records, such as how many conflict records should be processed before the task is interrupted and exits. You can also let the program record the data in conflict for easy troubleshooting.
+* TiDB Lightning introduces a new version of conflict data detection and handling strategy [#41629](https://github.com/pingcap/tidb/issues/41629) @[lance6716](https://github.com/lance6716) **tw@hfxsd** <!--1296-->
 
-    When it is clear that the import data has a high amount of conflicting data, it is recommended to use the new version of the conflict detection and handling strategy for better performance. Note that the new version and the old version of the conflict policy are mutually exclusive, and cannot be used at the same time. The old conflict detection and handling policy will be deprecated in the future.
-    
-    For more information, refer to [user documentation](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#conflict-detection).
+    In previous versions, TiDB Lightning uses different conflict detection and handling methods for Logical Import Mode and Physical Import Mode, which are complex to configure and not easy for users to understand. In addition, Physical Import Mode cannot handle conflicts using the `replace` or `ignore` policy. Starting from v7.3.0, TiDB Lightning introduces a unified conflict detection and handling strategy for both Logical Import Mode and Physical Import Mode. You can choose to report an error (`error`), replace (`replace`) or ignore (`ignore`) conflicting data when encountering conflicts. You can limit the number of conflict records, such as the task is interrupted and terminated after processing a specified number of conflict records. Furthermore, the system can record conflicting data for troubleshooting.
 
-* TiDB Lightning introduces a new parameter `enable-diagnose-log` to print more diagnostic logs and make it easier to pinpoint problems [#45497](https://github.com/pingcap/tidb/issues/45497) @[D3Hunter](https://github.com/D3Hunter) **tw@hfxsd** <!--1517-->
-    
-    By default, this feature is not enabled and only prints logs containing `lightning/main`. When enabled, it prints logs for all packages (including `client-go` and `tidb`) to help diagnose problems related to `client-go` and `tidb`.
-    
-    For more information, refer to [user documentation](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-global).
+    For import data with many conflicts, it is recommended to use the new version of the conflict detection and handling strategy for better performance. Note that the new version and the old version of the conflict strategy cannot be used at the same time. The old conflict detection and handling strategy will be deprecated in the future.
+
+    For more information, see [documentation](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#conflict-detection).
+
+* TiDB Lightning introduces a new parameter `enable-diagnose-log` to enhance troubleshooting by printing more diagnostic logs [#45497](https://github.com/pingcap/tidb/issues/45497) @[D3Hunter](https://github.com/D3Hunter) **tw@hfxsd** <!--1517-->
+
+    By default, this feature is disabled and TiDB Lightning only prints logs containing `lightning/main`. When enabled, TiDB Lightning prints logs for all packages (including `client-go` and `tidb`) to help diagnose issues related to `client-go` and `tidb`.
+
+    For more information, see [documentation](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-global).
 
 ## Compatibility changes
 
@@ -141,7 +141,7 @@ This drastically improves write performance, reduces I/O amplication, speeds up 
 * TiDB Lightning **tw@hfxsd**
 
     - `tikv-importer.on-duplicate` is deprecated and replaced by [`conflict.strategy`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task).
-    - The `max-error` parameter for the maximum number of non-fatal errors that can be tolerated before TiDB Lightning stops the migration task no longer contains an upper limit for import data conflicts. A new parameter [`conflict.threshold`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task) controls the maximum number of conflicting records that can be tolerated.
+    - The `max-error` parameter, which controls the maximum number of non-fatal errors that TiDB Lightning can tolerate before stopping the migration task, no longer limits import data conflicts. The [`conflict.threshold`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task) parameter now controls the maximum number of conflicting records that can be tolerated.
 
 * 兼容性 2
 
