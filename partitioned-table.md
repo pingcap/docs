@@ -353,7 +353,11 @@ You can also execute `ALTER TABLE employees DROP PARTITION pEast` to delete all 
 
 #### Default List partition
 
-Starting from v7.3.0, List partitioning supports the default partition feature, which lets you add a default List partition to a List partitioned table. The default List partition acts as a catch-all partition, where rows that do not match any other defined value sets can be placed.
+Starting from v7.3.0, you can add a default partition to a List or List COLUMNS partitioned table. The default partition acts as a fallback partition, where rows that do not match defined value sets of any partitions can be placed.
+
+> **Note:**
+>
+> This feature is a TiDB extension to MySQL syntax. For a List or List COLUMNS partitioned table with a default partition, the data in the table cannot be directly replicated to MySQL.
 
 Take the following List partitioned table as an example:
 
@@ -381,14 +385,14 @@ or
 ALTER TABLE t ADD PARTITION (PARTITION pDef VALUES IN (DEFAULT));
 ```
 
-In this way, any newly inserted values that do not match the value sets by any partitions automatically go into the default partition.
+In this way, newly inserted values that do not match defined value sets of any partitions can automatically go into the default partition.
 
 ```sql
 INSERT INTO t VALUES (7, 7);
 Query OK, 1 row affected (0.01 sec)
 ```
 
-You can also add a default partition when creating a List partitioned table. For example:
+You can also add a default partition when creating a List or List COLUMNS partitioned table. For example:
 
 ```sql
 CREATE TABLE employees (
@@ -405,7 +409,7 @@ PARTITION BY LIST (store_id) (
 );
 ```
 
-Without a default partition, all expected values of a partition expression must be included in the `PARTITION ... VALUES IN (...)` clause. If the value to be inserted in an `INSERT` statement does not match the column value set of any partition, the statement fails to execute and an error is reported. See the following example:
+For a List or List COLUMNS partitioned table without a default partition, all expected values of a partition expression must be included in the `PARTITION ... VALUES IN (...)` clause. If the value to be inserted in an `INSERT` statement does not match defined value sets of any partitions, the statement fails to execute and an error is reported. See the following example:
 
 ```sql
 CREATE TABLE t (
@@ -422,7 +426,7 @@ INSERT INTO t VALUES (7, 7);
 ERROR 1525 (HY000): Table has no partition for value 7
 ```
 
-To ignore the error type above, you can use the `IGNORE` keyword. After using this keyword, if a row contains values that do not match the column value set of any partition, this row will not be inserted. Instead, only rows with matched values are inserted, and no error is reported:
+To ignore the error above, you can use the `IGNORE` keyword. After using this keyword, if a row contains values that do not match defined value sets of any partitions, this row will not be inserted. Instead, only rows with matched values are inserted, and no error is reported:
 
 ```sql
 test> TRUNCATE t;
