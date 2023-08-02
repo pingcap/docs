@@ -31,12 +31,6 @@ data-source-dir = "/data/my_database"
 # Import mode. "tidb" means using the logical import mode.
 backend = "tidb"
 
-# The operation of inserting duplicate data in the logical import mode.
-# - replace: replace existing data with new data
-# - ignore: keep existing data and ignore new data
-# - error: pause the import and report an error
-on-duplicate = "replace"
-
 [tidb]
 # The information of the target cluster. The address of any tidb-server from the cluster.
 host = "172.16.31.1"
