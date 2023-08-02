@@ -100,11 +100,11 @@ This drastically improves write performance, reduces I/O amplication, speeds up 
 
 ### Observability
 
-* 显示统计信息收集的进度 [#issue号](链接) @[hawkingrei](https://github.com/hawkingrei) **tw@Oreoxmt** <!--1380-->
+* Show the progress of collecting statistics [#issue号](链接) @[hawkingrei](https://github.com/hawkingrei) **tw@Oreoxmt** <!--1380-->
 
-    对大表的统计信息收集经常会持续比较长的时间。在过去的版本里，用户无从得知统计信息收集的进度，进而没法预测完成时间。在 v7.3.0 中，TiDB 加入了对统计信息收集进度的信息展示，能够显示各个子任务的总体工作量、当前进度、以及对完成时间的预测。在大规模数据导入、SQL 性能优化等场景下，用户能够了解整体任务进展，提升用户体验。
+    Collecting statistics for large tables often takes a long time. In previous versions, you cannot see the progress of collecting statistics, and therefore cannot predict the completion time. TiDB v7.3.0 introduces a feature to show the progress of collecting statistics. You can view the overall workload, current progress, and estimated completion time for each subtask using the system table `mysql.analyze_jobs` or `SHOW ANALYZE STATUS`. In scenarios such as large-scale data import and SQL performance optimization, this feature helps you understand the overall task progress and improves the user experience.
 
-    更多信息，请参考[用户文档](链接)。
+    For more information, see [documentation](/sql-statements/sql-statement-show-analyze-status.md).
 
 * Plan Replayer supports exporting historical statistics [#45038](https://github.com/pingcap/tidb/issues/45038) @[time-and-fate](https://github.com/time-and-fate) **tw@ran-huang** <!--1445-->
 
@@ -182,8 +182,8 @@ This drastically improves write performance, reduces I/O amplication, speeds up 
 + TiDB
 
     - 游标 (Cursor) 结果过大时，写入 TiDB 临时磁盘空间从而避免OOM [#43233](https://github.com/pingcap/tidb/issues/43233) @[YangKeao](https://github.com/YangKeao) <!--1430-->
-    - EXPLAIN 新增开关用以展示在优化期间被执行的子查询 [#22076](https://github.com/pingcap/tidb/issues/22076) @[winoros](https://github.com/winoros] **tw@Oreoxmt** <!--983-->
-    - 在启用 [`Global Kill`](/tidb-configuration-file#enable-global-kill-从-v610-版本开始引入) 的情况下，可以通过 Ctrl+C 终止当前会话。 [#8854](https://github.com/pingcap/tidb/issues/8854) @[pingyu](https://github.com/pingyu)
+    - Introduce a new system variable `tidb_opt_enable_non_eval_scalar_subquery` to control whether the `EXPLAIN` statement executes subqueries in advance during the optimization phase [#22076](https://github.com/pingcap/tidb/issues/22076) @[winoros](https://github.com/winoros) **tw@Oreoxmt** <!--983-->
+    - When [Global Kill](/tidb-configuration-file#enable-global-kill-new-in-v610) is enabled, you can terminate the current session by pressing <kbd>Control+C</kbd> [#8854](https://github.com/pingcap/tidb/issues/8854) @[pingyu](https://github.com/pingyu) **tw@Oreoxmt**
     - note [#issue](链接) @[贡献者 GitHub ID](链接)
 
 + TiKV
@@ -206,7 +206,7 @@ This drastically improves write performance, reduces I/O amplication, speeds up 
 
     + Backup & Restore (BR)
 
-        - 为外部存储 Azure Blob Storage 提供加密范围和加密密钥的支持 [#45025](https://github.com/pingcap/tidb/issues/45025) @[Leavrth](https://github.com/Leavrth) **tw@Oreoxmt** <!--1385-->
+        - When backing up data to Azure Blob Storage using BR, you can specify either an encryption scope or an encryption key for server-side encryption [#45025](https://github.com/pingcap/tidb/issues/45025) @[Leavrth](https://github.com/Leavrth) **tw@Oreoxmt** <!--1385-->
         - note [#issue](链接) @[贡献者 GitHub ID](链接)
 
     + TiCDC
