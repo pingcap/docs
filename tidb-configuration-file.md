@@ -51,6 +51,10 @@ The TiDB configuration file supports more options than command-line parameters. 
 + When [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md) is used to import data, the sorted data is first stored in the TiDB local temporary directory, and then imported into TiKV in batches.
 + Default value: `"/tmp/tidb"`
 
+> **Note:**
+>
+> If the directory does not exist, TiDB will automatically create it upon startup. If the directory creation fails or TiDB does not have the read and write permissions on that directory, [`Fast Online DDL`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) might experience unpredictable issues.
+
 ### `oom-use-tmp-storage`
 
 > **Warning:**
@@ -286,6 +290,10 @@ Configuration items related to log.
 - Since v6.1.0, whether to record execution plans in the slow log is determined by the TiDB configuration item [`instance.tidb_record_plan_in_slow_log`](/tidb-configuration-file.md#tidb_record_plan_in_slow_log) or the system variable [`tidb_record_plan_in_slow_log`](/system-variables.md#tidb_record_plan_in_slow_log). `record-plan-in-slow-log` still takes effect. But if `record-plan-in-slow-log` and `instance.tidb_record_plan_in_slow_log` are set at the same time, the latter takes effect.
 
 ### `expensive-threshold`
+
+> **Warning:**
+>
+> Starting from v5.4.0, the `expensive-threshold` configuration item is deprecated and replaced by the system variable [`tidb_expensive_query_time_threshold`](/system-variables.md#tidb_expensive_query_time_threshold).
 
 - Outputs the threshold value of the number of rows for the `expensive` operation.
 - Default value: `10000`
@@ -831,6 +839,16 @@ Configuration items related to read isolation.
 - Unit: Milliseconds
 - Before v6.1.0, this configuration is set by `slow-threshold`.
 
+### `tidb_expensive_query_time_threshold`
+
+- This configuration is used to set the threshold value that determines whether to print expensive query logs. The difference between expensive query logs and slow query logs is:
+    - Slow logs are printed after the statement is executed.
+    - Expensive query logs print the statements that are being executed, with execution time exceeding the threshold value, and their related information.
+- Default value: `60`
+- Range: `[10, 2147483647]`
+- Unit: Seconds
+- Before v5.4.0, this configuration is set by `expensive-threshold`.
+
 ### `tidb_record_plan_in_slow_log`
 
 - This configuration is used to control whether to include the execution plan of slow queries in the slow log.
@@ -928,6 +946,11 @@ Configuration items related to the PROXY protocol.
 > **Warning:**
 >
 > Use `*` with caution because it might introduce security risks by allowing a client of any IP address to report its IP address. In addition, using `*` might also cause the internal component that directly connects to TiDB (such as TiDB Dashboard) to be unavailable.
+
+### `fallbackable` <span class="version-mark">New in v6.5.1</span>
+
++ Controls whether to enable the PROXY protocol fallback mode. If this configuration item is set to `true`, TiDB can accept clients that belong to `proxy-protocol.networks` to connect to TiDB without using the PROXY protocol specification or without sending the PROXY protocol header. By default, TiDB only accepts client connections that belong to `proxy-protocol.networks` and send a PROXY protocol header.
++ Default value: `false`
 
 ## experimental
 

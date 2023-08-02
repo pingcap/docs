@@ -1364,7 +1364,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 > **Note:**
 >
-> To improve the speed for index creation using this variable, make sure that your TiDB cluster is hosted on AWS and your TiDB node size is at least 8 vCPU. For [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless-beta) clusters, this feature is unavailable.
+> To improve the speed for index creation using this variable, make sure that your TiDB cluster is hosted on AWS and your TiDB node size is at least 8 vCPU. For [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless) clusters, this feature is unavailable.
 
 </CustomContent>
 
@@ -1386,7 +1386,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 >
 > * Index acceleration requires a [`temp-dir`](/tidb-configuration-file.md#temp-dir-new-in-v630) that is writable and has enough free space. If the `temp-dir` is unusable, TiDB falls back to non-accelerated index building. It is recommended to put the `temp-dir` on a SSD disk.
 >
-> * Before you upgrade TiDB to v6.5.0 or later, it is recommended that you check whether the [`temp-dir`](/tidb-configuration-file.md#temp-dir-new-in-v630) path of TiDB is correctly mounted to an SSD disk. This path is a TiDB configuration item, which takes effect after TiDB is restarted. Therefore, setting this configuration item before upgrading can avoid another restart.
+> * Before you upgrade TiDB to v6.5.0 or later, it is recommended that you check whether the [`temp-dir`](/tidb-configuration-file.md#temp-dir-new-in-v630) path of TiDB is correctly mounted to an SSD disk. Make sure that the operating system user that runs TiDB has the read and write permissions for this directory. Otherwise, The DDL operations might experience unpredictable issues. This path is a TiDB configuration item, which takes effect after TiDB is restarted. Therefore, setting this configuration item before upgrading can avoid another restart.
 
 </CustomContent>
 
@@ -1755,7 +1755,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 > **Note:**
 >
-> This variable does not work for [multi-valued indexes](/sql-statements/sql-statement-create-index.md#multi-valued-index) and prefix indexes.
+> This variable does not work for [multi-valued indexes](/sql-statements/sql-statement-create-index.md#multi-valued-indexes) and prefix indexes.
 
 - Scope: SESSION | GLOBAL
 - Persists to the cluster: Yes
@@ -1919,7 +1919,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Persists to cluster: Yes
 - Type: Boolean
 - Default value: `OFF`
-- This variable controls the behavior when TiDB performs the `ONLY_FULL_GOUP_BY` check. For detailed information about `ONLY_FULL_GROUP_BY`, see the [MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/sql-mode.html#sqlmode_only_full_group_by). In v6.1.0, TiDB handles this check more strictly and correctly.
+- This variable controls the behavior when TiDB performs the `ONLY_FULL_GROUP_BY` check. For detailed information about `ONLY_FULL_GROUP_BY`, see the [MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/sql-mode.html#sqlmode_only_full_group_by). In v6.1.0, TiDB handles this check more strictly and correctly.
 - To avoid potential compatibility issues caused by version upgrades, the default value of this variable is `OFF` in v6.1.0.
 
 ### tidb_enable_noop_functions <span class="version-mark">New in v4.0</span>

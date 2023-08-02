@@ -112,7 +112,7 @@ If you encounter problems when connecting to TiDB using the tools listed in this
          <td>2.1.1</td>
          <td>Compatible</td>
          <td>N/A</td>
-         <td><a href="/tidb/dev/dev-guide-sample-application-python-mysqlclien">Build a Simple CRUD App with TiDB and mysqlclient</a></td>
+         <td><a href="/tidb/dev/dev-guide-sample-application-python-mysqlclient">Build a Simple CRUD App with TiDB and mysqlclient</a></td>
       </tr>
       <tr>
          <td><a href="https://pypi.org/project/PyMySQL/" target="_blank" referrerpolicy="no-referrer-when-downgrade">PyMySQL</a></td>
@@ -215,7 +215,7 @@ If you encounter problems when connecting to TiDB using the tools listed in this
          <td rowspan="4">JavaScript / TypeScript</td>
          <td><a href="https://www.npmjs.com/package/sequelize" target="_blank" referrerpolicy="no-referrer-when-downgrade">sequelize</a></td>
          <td>v6.20.1</td>
-         <td>Compatible</td>
+         <td>Full</td>
          <td>N/A</td>
          <td>N/A</td>
       </tr>
@@ -251,10 +251,17 @@ If you encounter problems when connecting to TiDB using the tools listed in this
       <tr>
          <td rowspan="4">Python</td>
          <td><a href="https://pypi.org/project/Django/" target="_blank" referrerpolicy="no-referrer-when-downgrade">Django</a></td>
-         <td>v4.0.5</td>
-         <td>Compatible</td>
+         <td>v4.1</td>
+         <td>Full</td>
          <td><a href="https://github.com/pingcap/django-tidb" target="_blank" referrerpolicy="no-referrer-when-downgrade">django-tidb</a></td>
          <td>N/A</td>
+      </tr>
+      <tr>
+         <td><a href="https://www.sqlalchemy.org/" target="_blank" referrerpolicy="no-referrer-when-downgrade">SQLAlchemy</a></td>
+         <td>v1.4.37</td>
+         <td>Full</td>
+         <td>N/A</td>
+         <td><a href="/tidb/dev/dev-guide-sample-application-python-sqlalchemy">Build a Simple CRUD App with TiDB and SQLAlchemy</a></td>
       </tr>
       <tr>
          <td><a href="https://github.com/coleifer/peewee/" target="_blank" referrerpolicy="no-referrer-when-downgrade">peewee</a></td>
@@ -262,13 +269,6 @@ If you encounter problems when connecting to TiDB using the tools listed in this
          <td>Compatible</td>
          <td>N/A</td>
          <td><a href="/tidb/dev/dev-guide-sample-application-python-peewee">Build a Simple CRUD App with TiDB and peewee</a></td>
-      </tr>
-      <tr>
-         <td><a href="https://www.sqlalchemy.org/" target="_blank" referrerpolicy="no-referrer-when-downgrade">SQLAlchemy</a></td>
-         <td>v1.4.37</td>
-         <td>Compatible</td>
-         <td>N/A</td>
-         <td><a href="/tidb/dev/dev-guide-sample-application-python-sqlalchemy">Build a Simple CRUD App with TiDB and SQLAlchemy</a></td>
       </tr>
    </tbody>
 </table>
