@@ -130,9 +130,9 @@ driver = "file"
 # - "ignore": when encountering data with conflicting primary or unique keys, the old data is retained and the new data is ignored.
 # It cannot be used together with `tikv-importer.duplicate-resolution` (the old version of conflict detection).
 strategy = ""
-# When `strategy` is "replace" or "ignore", this parameter controls the upper limit of the conflicting data. You can set it only when `strategy` is "replace" or "ignore". The default value is 9223372036854775807, which means that almost all errors are tolerated.
+# When strategy is "replace" or "ignore", this parameter controls the upper limit of the conflicting data. You can set it only when strategy is "replace" or "ignore". The default value is 9223372036854775807, which means that almost all errors are tolerated.
 # threshold = 9223372036854775807
-# Controls the maximum number of rows in the `conflict_records` table. The default value is 100. If the strategy is "ignore", the conflict records that are ignored will be recorded; if the strategy is "replace", the conflict records that are overwritten will be recorded. However, there is a limitation that the replace strategy cannot record the conflict records in the logical import mode.
+# Controls the maximum number of rows in the `conflict_records` table. The default value is 100. If the strategy is "ignore", the conflict records that are ignored will be recorded; if the strategy is "replace", the conflict records that are overwritten will be recorded. However, the "replace" strategy cannot record the conflict records in the logical import mode.
 # max-record-rows = 100
 
 [tikv-importer]
