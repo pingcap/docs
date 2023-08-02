@@ -46,7 +46,7 @@ This drastically improves write performance, reduces I/O amplication, speeds up 
 
 * TiFlash supports Runtime Filter within nodes [#40220](https://github.com/pingcap/tidb/issues/40220) @[elsa0520](https://github.com/elsa0520) **tw@ran-huang** <!--1130-->
 
-    Runtime Filter is a predicate that generates dynamic values during query planning. During the process of table joining, these dynamic predicates can further filter out rows that do not meet the conditions, reducing scan time and network overhead, and improving the efficiency of table joining. Starting from v7.3.0, TiFlash supports Runtime Filter within nodes, improving the overall performance of analytical queries with performance improvements ranging from 10% to 50% in some TPC-DS workloads.
+    Runtime Filter is a **dynamic predicate** generated during the query planning phase. In the process of table joining, these dynamic predicates can effectively filter out rows that do not meet the join conditions, reducing scan time and network overhead, and improving the efficiency of table joining. Starting from v7.3.0, TiFlash supports Runtime Filter within nodes, improving the overall performance of analytical queries. In some TPC-DS workloads, the performance can be improved by 10% to 50%.
 
     This feature is disabled by default in v7.3.0. To enable this feature, set the system variable [`tidb_runtime_filter_mode`](/system-variables.md#tidb_runtime_filter_mode-new-in-v720) to `LOCAL`.
 
@@ -58,7 +58,7 @@ This drastically improves write performance, reduces I/O amplication, speeds up 
 
     Starting from v7.3.0, TiFlash's MPP engine supports executing queries with CTEs without inline expanding them, allowing for optimal query execution within the MPP framework. In TPC-DS benchmark tests, compared to using inline expansion, this feature has shown a 20% improvement in overall query execution speed for queries containing CTE.
 
-    This feature is an experimental feature and is disabled by default. It is controlled by the system variable [`tidb_opt_enable_mpp_shared_cte_execution`](/system-variables.md#tidb_opt_enable_mpp_shared_cte_execution-new-in-v720).
+    This feature is experimental and is disabled by default. It is controlled by the system variable [`tidb_opt_enable_mpp_shared_cte_execution`](/system-variables.md#tidb_opt_enable_mpp_shared_cte_execution-new-in-v720).
 
 ### Reliability
 
@@ -66,9 +66,9 @@ This drastically improves write performance, reduces I/O amplication, speeds up 
 
     In v7.3.0, TiDB introduces several new optimizer hints to control the join methods between tables, including:
 
-    - [`INDEX_JOIN()`](link) selects index nested loop join, which uses indexes to filter and use the result set as the inner table to join.
-    - [`NO_HASH_JOIN()`](link) selects join methods other than hash join.
-    - [`NO_INDEX_HASH_JOIN()`](link) selects join methods other than [index nested loop join](/optimizer-hints.md#inl_hash_join).
+    - [`INDEX_JOIN()`](link) selects index nested loop join, which uses indexes to filter and uses the filter result as the inner table to join.
+    - [`NO_HASH_JOIN()`](/optimizer-hints.md#no_hash_joint1_name--tl_name-) selects join methods other than hash join.
+    - [`NO_INDEX_HASH_JOIN()`](/optimizer-hints.md#no_index_hash_joint1_name--tl_name-) selects join methods other than [index nested loop join](/optimizer-hints.md#inl_hash_join).
 
     For more information, refer to [user documentation](/optimizer-hints).
 
