@@ -68,6 +68,12 @@ TiDB 版本：x.y.z
         - note [#issue](链接) @[贡献者 GitHub ID](链接)
         - placeholder
 
+    + Dumpling
+
+        - note [#issue](链接) @[贡献者 GitHub ID](链接)
+        - note [#issue](链接) @[贡献者 GitHub ID](链接)
+        - placeholder
+
     + TiUP
 
         - note [#issue](链接) @[贡献者 GitHub ID](链接)
@@ -127,6 +133,12 @@ TiDB 版本：x.y.z
         - placeholder
 
     + TiDB Lightning
+
+        - note [#issue](链接) @[贡献者 GitHub ID](链接)
+        - note [#issue](链接) @[贡献者 GitHub ID](链接)
+        - placeholder
+
+    + Dumpling
 
         - note [#issue](链接) @[贡献者 GitHub ID](链接)
         - note [#issue](链接) @[贡献者 GitHub ID](链接)
