@@ -174,6 +174,7 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 | [Randomly sample about 10000 rows of data to quickly build statistics](/system-variables.md#tidb_enable_fast_analyze) | E | E | E | E | E | E | E | E | E | E | E |
 | [Lock statistics](/statistics.md#lock-statistics) | E | E | E | E | N | N | N | N | N | N | N |
 | [Lightweight statistics initialization](/statistics.md#load-statistics) | Y | Y | E | N | N | N | N | N | N | N | N |
+| [Show the process of collecting statistics](/sql-statements/sql-statement-show-analyze-status.md) | Y | N | N | N | N | N | N | N | N | N | N |
 
 ## Security
 
