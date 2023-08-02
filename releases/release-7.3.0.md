@@ -84,9 +84,9 @@ This drastically improves write performance, reduces I/O amplication, speeds up 
 
 * List and List COLUMNS partitioned tables support default partitions [#20679](https://github.com/pingcap/tidb/issues/20679) @[mjonss](https://github.com/mjonss) @[bb7133](https://github.com/bb7133) **tw@qiancai** <!--1342-->
 
-    When you use the `INSERT` statement to insert data into List or List COLUMNS partitioned tables, the data needs to meet the specified partitioning conditions of the table. If the data to be inserted does not meet any partitioning condition, the execution of the statement will fail, or the data that does not meet any partitioning condition will be ignored.
+    Before v7.3.0, when you use the `INSERT` statement to insert data into List or List COLUMNS partitioned tables, the data needs to meet the specified partitioning conditions of the table. If the data to be inserted does not meet any of these conditions, either the execution of the statement will fail or the non-compliant data will be ignored.
 
-   Starting from v7.3.0, List and List COLUMNS partitioned tables support default partitions. After a default partition is created, if the data to be inserted does not meet any partitioning condition, it will be written to the default partition. The default partition feature improves the usability of List and List COLUMNS partitioning, avoiding the execution failure of the `INSERT` statement or data being ignored due to data that does not meet partitioning conditions.
+   Starting from v7.3.0, List and List COLUMNS partitioned tables support default partitions. After a default partition is created, if the data to be inserted does not meet any partitioning condition, it will be written to the default partition. This feature improves the usability of List and List COLUMNS partitioning, avoiding the execution failure of the `INSERT` statement or data being ignored due to data that does not meet partitioning conditions.
 
     Note that this feature is a TiDB extension to MySQL syntax. For a partitioned table with a default partition, the data in the table cannot be directly replicated to MySQL.
 
