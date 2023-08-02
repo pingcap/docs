@@ -4875,20 +4875,27 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
     * Integer greater than 0: the Fine Grained Shuffle feature is enabled. The window function pushed down to TiFlash is executed in multiple threads. The concurrency level is: min(`tiflash_fine_grained_shuffle_stream_count`, the number of physical threads on TiFlash nodes).
 - Theoretically, the performance of the window function increases linearly with this value. However, if the value exceeds the actual number of physical threads, it instead leads to performance degradation.
 
-### tiflash_replica_read
+### tiflash_replica_read <span class="version-mark">New in v7.3.0</span>
+
+> **Note:**
+>
+> This TiDB variable is not applicable to TiDB Cloud.
+
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
 - Type: Enumeration
-- Default value: "all_replicas"
-- Value options: "all_replicas", "closest_adaptive", "closest_replicas"
+- Default value: `all_replicas`
+- Value options: `all_replicas`, `closest_adaptive`, or `closest_replicas`
 - This variable is used to set the strategy for selecting TiFlash replicas when a query requires the TiFlash engine.
-  - "all_replicas" means using all available TiFlash replicas for analytical computing.
-  - "closest_adaptive" means preferring to use TiFlash replicas in the same zone as the entry TiDB for analytical computing. If not all TiFlash data can be accessed, the query will involve TiFlash replicas from different zones along with their corresponding TiFlash nodes.
-  - "closest_replicas" means using only TiFlash replicas in the same zone as the entry TiDB. If not all TiFlash data can be accessed, the query will result in an error.
-- Special cases
-  - If TiDB nodes do not have zone attributes set and the tiflash_replica_read policy is not "all_replicas", the tiflash_replica_read policy will be ignored, and all TiFlash replicas will be used in the TiFlash query. A warning message will be displayed: "The variable tiflash_replica_read is ignored."
-  - If TiFlash nodes do not have zone attributes set, they will be treated as nodes not belonging to any zone.
+  - `all_replicas` means using all available TiFlash replicas for analytical computing.
+  - `closest_adaptive` means preferring to use TiFlash replicas in the same zone as the TiDB node initiating the query. If replicas in this zone do not contain all the required data, the query will involve TiFlash replicas from other zones along with their corresponding TiFlash nodes.
+  - `closest_replicas` means using only TiFlash replicas in the same zone as the TiDB node initiating the query. If replicas in this zone do not contain all the required data, the query will return an error.
+
+> **Note:**
+> 
+  - If TiDB nodes do not have [zone attributes](/schedule-replicas-by-topology-labels.md#optional-configure-labels-for-tidb) configured and `tiflash_replica_read policy` is not `all_replicas`, TiFlash ignores the replica selection strategy, uses all TiFlash replicas for TiFlash queries, and returns the `The variable tiflash_replica_read is ignored.` warning.
+  - If TiFlash nodes do not have [zone attributes](/schedule-replicas-by-topology-labels.md#configure-labels-for-tikv-and-tiflash) configured, they are treated as nodes not belonging to any zone.
 
 ### time_zone
 
