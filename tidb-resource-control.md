@@ -252,6 +252,8 @@ There are three methods for `WATCH` to match for quick identification:
 
 The `DURATION` option in `WATCH` indicates the duration of this identification item, which is infinite by default.
 
+When a watch item is added, neither the matching feature nor the ACTION is changed or deleted whenever the `QUERY_LIMIT` configuration is changed or deleted. You can use `QUERY WATCH REMOVE` to remove a watch item.
+
 The parameters of `QUERY_LIMIT` are as follows:
 
 | Parameter          | Description            | Note                                  |
@@ -285,7 +287,7 @@ The parameters of `QUERY_LIMIT` are as follows:
 For more information about `QUERY WATCH` parameters, see [`QUERY WATCH`](/sql-statements/sql-statement-query-watch.md).
 
 - The `RESOURCE GROUP` is used to specify a resource group. The watch item of the runaway queries added by this statement will be applied to the sessions of this particular resource group. This parameter can be omitted, and when it is omitted, it applies to the `default` resource group.
-- The meaning of `ACTION` is the same as `QUERY LIMIT`. This parameter can be omitted. When it is omitted, it means that the corresponding action after identification adopts the `ACTION` configured by `QUERY LIMIT` in the resource group. If there is no `ACTION` configured in the resource group, an error will be reported.
+- The meaning of `ACTION` is the same as `QUERY LIMIT`. This parameter can be omitted. When it is omitted, it means that the corresponding action after identification adopts the `ACTION` configured by `QUERY LIMIT` in the resource group, and the action does not change with the `QUERY LIMIT` configuration. If there is no `ACTION` configured in the resource group, an error will be reported.
 - The `QueryWatchTextOption` parameter has three options: `SQL DIGEST`, `PLAN DIGEST`, and `SQL TEXT`.
     - `SQL DIGEST` is the same as that of `SIMILAR`, and the parameters immediately following it can be strings, user-defined variables, and other expressions with string computation results, provided that the required string length is 64, which is the same as the definition of Digest in TiDB.
     - The meaning of `PLAN DIGEST` is the same as `PLAN`. The input parameter is the Digest string.
@@ -309,6 +311,29 @@ For more information about `QUERY WATCH` parameters, see [`QUERY WATCH`](/sql-st
     QUERY WATCH ADD RESOURCE GROUP rg1 ACTION KILL PLAN DIGEST 'd08bc323a934c39dc41948b0a073725be3398479b6fa4f6dd1db2a9b115f7f57';
     ```
 
+4. Get the watch item ID by querying `information_schema.runaway_watches` and delete the watch item.
+   
+    ```sql
+    SELECT * from information_schema.runaway_watches ORDER BY id;
+    ```
+    
+    ```sql
+    *************************** 1. row ***************************
+                    ID: 20003
+    RESOURCE_GROUP_NAME: rg2
+            START_TIME: 2023-07-28 13:06:08
+            END_TIME: UNLIMITED
+                WATCH: Similar
+            WATCH_TEXT: 5b7fd445c5756a16f910192ad449c02348656a5e9d2aa61615e6049afbc4a82e
+                SOURCE: 127.0.0.1:4000
+                ACTION: Kill
+    1 row in set (0.00 sec)
+    ```
+    
+    ```sql
+    QUERY WATCH REMOVE 20003;
+    ```
+    
 #### Observability
 
 You can get more information about runaway queries from the following system tables and `INFORMATION_SCHEMA`:
