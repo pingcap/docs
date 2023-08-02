@@ -72,13 +72,13 @@ This drastically improves write performance, reduces I/O amplication, speeds up 
 
     For more information, refer to [user documentation](/optimizer-hints).
 
-* 手工标记资源使用超出预期的查询 (实验特性) [#43691](https://github.com/pingcap/tidb/issues/43691) @[Connor1996](https://github.com/Connor1996) @[CabinfeverB](https://github.com/CabinfeverB) **tw@hfxsd** <!--1446-->
+* Manually mark queries that use resources more than expected (experimental) [#43691](https://github.com/pingcap/tidb/issues/43691) @[Connor1996](https://github.com/Connor1996) @[CabinfeverB](https://github.com/CabinfeverB) **tw@hfxsd** <!--1446-->
 
-    在 v7.2.0 中，TiDB 对资源使用超出预期的查询 (Runaway Queries) 实施自动管理，运行时间超过预期的查询能够被自动降级或取消。在实际运行时，只依靠规则无法筛覆盖所有情况。 因此，在 v7.3.0 中，TiDB 补充了手工标记查询的能力。 利用新增的命令 [`QUERY WATCH`]()，用户可以根据 SQL 的文本、SQL Digest、或者执行计划对查询进行标记，命中的查询可以被降级或取消。
+    In v7.2.0, TiDB automatically manages runaway queries, where queries that take longer than expected can be automatically demoted or canceled. In practice, it is not possible to cover all cases by relying on rules alone. Therefore, in v7.3.0, TiDB adds the ability to manually mark queries. With the new command [`QUERY WATCH`](/sql-statements/sql-statement-query-watch.md), you can mark queries based on SQL text, SQL Digest, or execution plan. Queries that are marked can be downgraded or canceled.
 
-    手工标记 Runaway Queries 的能力，为数据库中突发的性能问题提供了有效的干预手段。针对由查询引发的性能问题，在找到问题根本原因之前，能够快速缓解其对整体性能的影响，提升系统服务质量。
+    The ability of manually marking runaway queries provides an effective means of intervening in unexpected performance problems in the database. For query-induced performance problems, the impact on overall performance can be quickly mitigated before the root cause of the problem is found, improving system service quality. 
 
-    更多信息，请参考[用户文档](/tidb-resource-control#管理资源消耗超出预期的查询-runaway-queries)。
+    For more information, refer to [user documentation](/tidb-resource-control.md#query-watch-parameters)
 
 ### SQL
 
@@ -114,25 +114,19 @@ This drastically improves write performance, reduces I/O amplication, speeds up 
 
 ### Data migration
 
-* Lightning 引入新版冲突数据检测与处理的能力 [#41629](https://github.com/pingcap/tidb/issues/41629) @[lance6716](https://github.com/lance6716) **tw@hfxsd** <!--1296-->
+* TiDB Lightning introduces a new version of conflict data detection and processing capabilities [#41629](https://github.com/pingcap/tidb/issues/41629) @[lance6716](https://github.com/lance6716) **tw@hfxsd** <!--1296-->
+     
+    Previous versions of TiDB Lightning used different conflict detection and handling methods for logical and physical import modes, which were complicated to configure and not easy for users to understand. In addition, when you use physical import mode, conflicting data cannot be handled by the `replace` and `ignore` policies. In the new version of conflict detection and handling, both logical import mode and physical import mode use the same set of conflict detection and handling, that is, reporting error (`error`), replacing (`replace`) or ignoring (`ignore`) conflicting data when encountering conflicting data. It also allows you to set an upper limit on the number of conflict records, such as how many conflict records should be processed before the task is interrupted and exits. You can also let the program record the data in conflict for easy troubleshooting.
 
-    之前的版本 Lightning 逻辑导入和物理导入模式都有各自的冲突检测和处理的方式，配置较为复杂且不利于用户理解。同时使用物理导入模式，冲突的数据无法通过 replace 和 ignore 策略来处理。新版的冲突检测和处理方式，逻辑导入和物理导入都是用同一套冲突检测和处理方式即遇到冲突数据报错，或者 replace 以及 ignore 掉冲突数据。同时还支持用户设置冲突记录的上限，如处理多少冲突记录后任务中断退出，用户也可以让程序记录哪些数据发生了冲突，方便用户排查。
+    When it is clear that the import data has a high amount of conflicting data, it is recommended to use the new version of the conflict detection and handling strategy for better performance. Note that the new version and the old version of the conflict policy are mutually exclusive, and cannot be used at the same time. The old conflict detection and handling policy will be deprecated in the future.
+    
+    For more information, refer to [user documentation](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#conflict-detection).
 
-    在明确所需导入数据有较多的冲突数据时，推荐使用新版的冲突检测和处理策略，会有更好的性能。注意新、旧版冲突策略互斥使用，会在未来废弃掉旧版冲突检测和处理策略。
-
-    更多信息，请参考[用户文档](链接)。
-
-* Lightning 支持 Partitioned Raft KV（实验特性） [#15069](https://github.com/tikv/tikv/pull/15069) @[GMHDBJD](https://github.com/GMHDBJD) **tw@hfxsd** <!--1507-->
-
-    该版本 Lightning 支持了 Partitioned Raft KV ，当用户使用了 Partitioned Raft KV 特性后，能提升 Lightning 导入数据的性能。
-
-    更多信息，请参考[用户文档](链接)。
-
-* Lightning 引入新的参数"enable-diagnose-log" 用于打印更多的诊断日志，方便定位问题 [#45497](https://github.com/pingcap/tidb/issues/45497) @[D3Hunter](https://github.com/D3Hunter) **tw@hfxsd** <!--1517-->
-
-    默认情况下，此功能未启用，只会打印包含 "lightning/main" 的日志。当启用时，将打印所有包（包括 "client-go" 和 "tidb"）的日志，以帮助诊断与 "client-go" 和 "tidb" 相关的问题。
-
-    更多信息，请参考[用户文档](链接)。
+* TiDB Lightning introduces a new parameter `enable-diagnose-log` to print more diagnostic logs and make it easier to pinpoint problems [#45497](https://github.com/pingcap/tidb/issues/45497) @[D3Hunter](https://github.com/D3Hunter) **tw@hfxsd** <!--1517-->
+    
+    By default, this feature is not enabled and only prints logs containing `lightning/main`. When enabled, it prints logs for all packages (including `client-go` and `tidb`) to help diagnose problems related to `client-go` and `tidb`.
+    
+    For more information, refer to [user documentation](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-global).
 
 ## Compatibility changes
 
@@ -146,8 +140,8 @@ This drastically improves write performance, reduces I/O amplication, speeds up 
 
 * TiDB Lightning **tw@hfxsd**
 
-    - 逻辑导入模式插入冲突数据时执行的操作，默认配置从 on-duplicate = "replace" 改为 on-duplicate = "error" 即遇到冲突数据即报错。
-    - TiDB Lightning 停止迁移任务之前能容忍的最大非严重 (non-fatal errors) 错误数的参数 "max-error" 不再包含导入数据冲突的上限。而是由新的参数 "conflict.threshold" 来控制可容忍的最大冲突的记录数。
+    - `tikv-importer.on-duplicate` is deprecated and replaced by [`conflict.strategy`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task).
+    - The `max-error` parameter for the maximum number of non-fatal errors that can be tolerated before TiDB Lightning stops the migration task no longer contains an upper limit for import data conflicts. A new parameter [`conflict.threshold`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task) controls the maximum number of conflicting records that can be tolerated.
 
 * 兼容性 2
 
@@ -166,10 +160,11 @@ This drastically improves write performance, reduces I/O amplication, speeds up 
 | -------- | -------- | -------- | -------- |
 |          |          |          |          |
 |          |          |          |          |
-| TiDB Lightning | `send-kv-pairs` | 废弃 | 从 7.2 版本开始 TiDB Lightning 配置文件的参数 "send-kv-pairs" 不再生效，由新的参数 "send-kv-size" 代替。该新参数用于指定 KV 键值对的大小阈值，单位为 KiB 或 MiB，默认值为 "16 KiB"。当 KV 键值对的大小达到设定的阈值时，它们将立即发送到 TiKV，避免在导入大宽表等一些场景因为 Lightning 节点内存积累键值对过多导致 OOM 的问题。**tw@hfxsd** <!--1420--> |
-| TiDB Lightning | `send-kv-size` | 新增 | 从 7.2 版本开始在 Lightning 配置文件 "[tikv-importer]" 这个 Session 中引入 `send-kv-size` 参数，用于设置发单次送到 TiKV 的 KV pairs 的大小。当 KV 键值对的大小达到设定的阈值时，它们将被 Lightning 立即发送到 TiKV，避免在导入大宽表的时候 Lightning 节点因为内存积累键值对过多导致 OOM 的问题。通过调整 "send-kv-size" 参数，你可以在内存使用和导入速度之间找到平衡，提高导入过程的稳定性和效率。**tw@hfxsd** <!--1420-->|
-|TiDB Lightning  | `tikv-importer.parallel-import` | Newly added | TiDB Lightning parallel import parameter. It replaces the existing `tikv-importer.incremental-import` parameter, which could be mistaken as an incremental import parameter and misused.  **tw:qiancai** <!--1516--> |
-|TiDB Lightning  | `tikv-importer.incremental-import` | Deleted | TiDB Lightning parallel import parameter. Because it could easily be mistaken as an incremental import parameter, this parameter is now renamed to `tikv-importer.parallel-import`. If a user passes in the old parameter name, it will be automatically converted to the new one. |
+|TiDB Lightning  | `conflict.max-record-rows` | Newly added | The new version of strategy to handle conflicting data. It controls the maximum number of rows in the `conflict_records` table. The default value is 100. |
+|TiDB Lightning  | `conflict.strategy` | Newly added | The new version of strategy to handle conflicting data.  It includes the following options: "" (TiDB Lightning does not detect and process conflicting data), `error` (terminate the import and report an error if a primary or unique key conflict is detected in the imported data), `replace` (when encountering data with conflicting primary or unique keys, the new data is retained and the old data is overwritten.), `ignore` (when encountering data with conflicting primary or unique keys, the old data is retained and the new data is ignored.). The default value is "", that is, TiDB Lightning does not detect and process conflicting data. |
+|TiDB Lightning  | `conflict.threshold` | Newly added | Controls the upper limit of the conflicting data. When `conflict.strategy="error"`, the default value is `0`. When `conflict.strategy="replace”` or `conflict.strategy=“ignore"`, you can set it as a maxint. |
+|TiDB Lightning  | `enable-diagnose-logs` | Newly added | Controls whether to enable the diagnostic logs. The default value is `false`, that is, only the logs related to the import are output, and the logs of other dependent components are not output. When you set it to `true`, logs from both the import process and other dependent components are output, and GRPC debugging is enabled, which can be used for diagnosis. |
+|TiDB Lightning  | `tikv-importer.on-duplicate` | Deprecated | Controls action to do when trying to insert a conflicting record in the logical import mode. Startign from v7.3.0, this parameter is replaced by [`conflict.strategy`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task). |
 | Data Migration | `strict-optimistic-shard-mode` | 新增 | 用于兼容历史版本 2.0 分库分表同步 DDL 的行为。当用户选择乐观模式时，可以启用该参数，开启后，乐观模式下，同步任务遇到二类 DDL 时，整个任务会中断，在多个表的 DDL变更有依赖关系的场景，可以及时中断，用户手动处理完各表的 DDL 后，再继续同步数据，保障上下游数据的一致性。 **tw@ran-huang** <!--1414-->|
 | TiCDC | [`large-message-handle-option`](/ticdc/ticdc-sink-to-kafka.md#handle-messages-that-exceed-the-kafka-topic-limit) | Newly added | Empty by default, which means that when the message size exceeds the limit of Kafka topic, the changefeed fails. When this configuration is set to `"handle-key-only"`, if the message exceeds the size limit, only the handle key will be sent to reduce the message size; if the reduced message still exceeds the limit, then the changefeed fails. |
 
