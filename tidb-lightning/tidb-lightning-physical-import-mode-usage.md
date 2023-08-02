@@ -29,7 +29,7 @@ data-source-dir = "/data/my_database"
 
 [conflict]
 # Starting from v7.3.0, a new version of strategy is introduced to handle conflicting data. The default value is "".
-# - "": TiDB Lightning does not detect and process conflicting data. But if there are conflicting primary or unique key records in the source file, an error is reported in the subsequent step (Checksum).
+# - "": TiDB Lightning does not detect and process conflicting data. But if there are conflicting primary or unique key records in the source file, an error is reported in the subsequent step.
 # - "error": terminate the import and report an error if a primary or unique key conflict is detected in the imported data.
 # - "replace": when encountering data with conflicting primary or unique keys, the new data is retained and the old data is overwritten.
 # - "ignore": when encountering data with conflicting primary or unique keys, the old data is retained and the new data is ignored.
@@ -96,7 +96,7 @@ For the complete configuration file, refer to [the configuration file and comman
 
 ## Conflict detection
 
-Conflicting data refers to two or more records with the same PK/UK column data. When the data source contains conflicting data and conflict detection feature is not turned on, the actual number of rows in the table is different from the total number of rows returned by the query using unique index.
+Conflicting data refers to two or more records with the same primary key or unique key column data. When the data source contains conflicting data and conflict detection feature is not turned on, the actual number of rows in the table is different from the total number of rows returned by the query using unique index.
 
 There are two methods for conflict detection:
 
@@ -109,10 +109,10 @@ The meaning of configuration values are as follows:
 
 | Strategy | Default behavior of conflicting data | The corresponding SQL statement |
 | :-- | :-- | :-- |
-| `replace` | Replacing existing data with new data. | `REPLACE INTO ...` |
-| `ignore` | Keeping existing data and ignoring new data. | `INSERT IGNORE INTO ...` |
-| `error` | Pausing the import and reporting an error. | `INSERT INTO ...` |
-| "" | no actions. TiDB Lightning might exit due to an error. |  None   |
+| `"replace"` | Replacing existing data with new data. | `REPLACE INTO ...` |
+| `"ignore"` | Keeping existing data and ignoring new data. | `INSERT IGNORE INTO ...` |
+| `"error"` | Pausing the import and reporting an error. | `INSERT INTO ...` |
+| `""` | no actions. TiDB Lightning might exit due to an error. |  None   |
 
 Note that due to the internal implementation and limitation of TiDB Lightning, the result of conflict detection might be different from the result of SQL-based import.
 
