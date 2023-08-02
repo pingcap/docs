@@ -53,7 +53,7 @@ Query OK, 0 rows affected (0.00 sec)
 
 <CustomContent platform="tidb">
 
-Starting from v7.3.0, TiDB supports generating 32-bit connection ID, which is enabled by default and controlled by the [`enable-32bits-connection-id`](/tidb-configuration-file.md#enable-32bits-connection-id-introduced-in-version-v730) configuration. When both Global Kill and 32-bit connection ID are enabled, TiDB will generate a 32-bit connection ID, allowing the termination of queries or connections in the MySQL command-line using <kbd>Control+C</kbd>.
+Starting from v7.3.0, TiDB supports generating 32-bit connection ID, which is enabled by default and controlled by the [`enable-32bits-connection-id`](/tidb-configuration-file.md#enable-32bits-connection-id-new-in-v730) configuration. When both Global Kill and 32-bit connection ID are enabled, TiDB will generate a 32-bit connection ID, allowing the termination of queries or connections in the MySQL command-line using <kbd>Control+C</kbd>.
 
  > **Warning:**
  >

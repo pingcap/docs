@@ -202,13 +202,13 @@ The TiDB configuration file supports more options than command-line parameters. 
 
 ### `enable-32bits-connection-id` <span class="version-mark">New in v7.3.0</span>
 
- + Controls whether to enable the 32-bit connection ID feature.
- + Default value: `true`
- + When this configuration item, as well as `enable-global-kill`, is set to true, 32-bit connection IDs will be generated, allowing the termination of queries or connections by the MySQL command-line <kbd>Control+C</kbd>.
++ Controls whether to enable the 32-bit connection ID feature.
++ Default value: `true`
++ When this configuration item, as well as `enable-global-kill`, is set to true, 32-bit connection IDs will be generated, allowing the termination of queries or connections by the MySQL command-line <kbd>Control+C</kbd>.
 
- > **Warning:**
- >
- > When the number of TiDB instances in the cluster exceeds 2048 or the concurrent connection count of a single TiDB instance exceeds 1048576, the 32-bit connection ID space is insufficient and will be automatically upgraded to 64-bit connection ID. During the upgrade process, existing business and established connections will not be affected. However, subsequent new connections will not be able to be terminated using <kbd>Control+C</kbd> in the MySQL command-line.
+> **Warning:**
+>
+> When the number of TiDB instances in the cluster exceeds 2048 or the concurrent connection count of a single TiDB instance exceeds 1048576, the 32-bit connection ID space is insufficient and will be automatically upgraded to 64-bit connection ID. During the upgrade process, existing business and established connections will not be affected. However, subsequent new connections will not be able to be terminated using <kbd>Control+C</kbd> in the MySQL command-line.
 
 ### `initialize-sql-file` <span class="version-mark">New in v6.6.0</span>
 
