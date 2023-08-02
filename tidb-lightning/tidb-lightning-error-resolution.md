@@ -7,7 +7,7 @@ summary: Learn how to resolve type conversion and duplication errors during data
 
 Starting from v5.4.0, you can configure TiDB Lightning to skip errors like invalid type conversion and unique key conflicts, and to continue the data processing as if those wrong row data does not exist. A report will be generated for you to read and manually fix errors afterward. This is ideal for importing from a slightly dirty data source, where locating the errors manually is difficult and restarting TiDB Lightning on every encounter is costly.
 
-This document introduces error types and how to query the errors. At the end of this document, an example is provided. The following configuration items are involved:
+This document introduces TiDB Lightning error types and how to query the errors. At the end of this document, an example is provided. The following configuration items are involved:
 
 - `lightning.max-error`: the threshold or type error 
 - `conflict.strategy`, `conflict.threshold`, and `conflict.max-record-rows`: configurations related to conflicting data 
