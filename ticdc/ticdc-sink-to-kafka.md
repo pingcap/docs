@@ -244,3 +244,47 @@ You can use `partition = "xxx"` to specify a partition dispatcher. It supports f
 > ```
 > {matcher = ['*.*'], dispatcher = "ts", partition = "table"},
 > ```
+<<<<<<< HEAD
+=======
+
+> **Warning:**
+>
+> When the [Old Value feature](/ticdc/ticdc-manage-changefeed.md#output-the-historical-value-of-a-row-changed-event) is enabled (`enable-old-value = true`), using the index-value dispatcher might fail to ensure the order of row changes with the same index value. Therefore, it is recommended to use the default dispatcher.
+>
+> For more information, see [What changes occur to the change event format when TiCDC enables the Old Value feature?](/ticdc/ticdc-faq.md#what-changes-occur-to-the-change-event-format-when-ticdc-enables-the-old-value-feature).
+
+## Scale out the load of a single large table to multiple TiCDC nodes
+
+This feature splits the data replication range of a single large table into multiple ranges, according to the data volume and the number of modified rows per minute, and it makes the data volume and the number of modified rows replicated in each range approximately the same. This feature distributes these ranges to multiple TiCDC nodes for replication, so that multiple TiCDC nodes can replicate a large single table at the same time. This feature can solve the following two problems:
+
+- A single TiCDC node cannot replicate a large single table in time.
+- The resources (such as CPU and memory) consumed by TiCDC nodes are not evenly distributed.
+
+> **Warning:**
+>
+> TiCDC v7.0.0 only supports scaling out the load of a large single table on Kafka changefeeds.
+
+Sample configuration:
+
+```toml
+[scheduler]
+# The default value is "false". You can set it to "true" to enable this feature.
+enable-table-across-nodes = true
+# When you enable this feature, it only takes effect for tables with the number of regions greater than the `region-threshold` value.
+region-threshold = 100000
+# When you enable this feature, it takes effect for tables with the number of rows modified per minute greater than the `write-key-threshold` value.
+# Note:
+# * The default value of `write-key-threshold` is 0, which means that the feature does not split the table replication range according to the number of rows modified in a table by default.
+# * You can configure this parameter according to your cluster workload. For example, if it is configured as 30000, it means that the feature will split the replication range of a table when the number of modified rows per minute in the table exceeds 30000.
+# * When `region-threshold` and `write-key-threshold` are configured at the same time:
+#   TiCDC will check whether the number of modified rows is greater than `write-key-threshold` first.
+#   If not, next check whether the number of Regions is greater than `region-threshold`.
+write-key-threshold = 30000
+```
+
+You can query the number of Regions a table contains by the following SQL statement:
+
+```sql
+SELECT COUNT(*) FROM INFORMATION_SCHEMA.TIKV_REGION_STATUS WHERE DB_NAME="database1" AND TABLE_NAME="table1" AND IS_INDEX=0;
+```
+>>>>>>> f7ebef1d47 (ticdc: add docs for old value behavior (#14354))
