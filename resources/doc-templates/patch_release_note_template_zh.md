@@ -13,147 +13,147 @@ TiDB 版本：x.y.z
 
 ## 兼容性变更
 
-- note [#issue](https://github.com/pingcap/<repo>/issues/<issue-id>) @[贡献者 GitHub ID](https://github.com/<github-id>)
+- note [#issue](https://github.com/pingcap/${repo-name}/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
 - placeholder
 
 ## 改进提升
 
 + TiDB
 
-    - note [#issue](https://github.com/pingcap/tidb/issues/<issue-id>) @[贡献者 GitHub ID](https://github.com/<github-id>)
-    - note [#issue](https://github.com/pingcap/tidb/issues/<issue-id>) @[贡献者 GitHub ID](https://github.com/<github-id>)
+    - note [#issue](https://github.com/pingcap/tidb/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
+    - note [#issue](https://github.com/pingcap/tidb/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
     - placeholder
 
 + TiKV
 
-    - note [#issue](https://github.com/tikv/tikv/issues/<issue-id>) @[贡献者 GitHub ID](https://github.com/<github-id>)
-    - note [#issue](https://github.com/tikv/tikv/issues/<issue-id>) @[贡献者 GitHub ID](https://github.com/<github-id>)
+    - note [#issue](https://github.com/tikv/tikv/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
+    - note [#issue](https://github.com/tikv/tikv/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
     - placeholder
 
 + PD
 
-    - note [#issue](https://github.com/tikv/pd/issues/<issue-id>) @[贡献者 GitHub ID](https://github.com/<github-id>)
-    - note [#issue](https://github.com/tikv/pd/issues/<issue-id>) @[贡献者 GitHub ID](https://github.com/<github-id>)
+    - note [#issue](https://github.com/tikv/pd/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
+    - note [#issue](https://github.com/tikv/pd/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
     - placeholder
 
 + TiFlash
 
-    - note [#issue](https://github.com/pingcap/tiflash/issues/<issue-id>) @[贡献者 GitHub ID](https://github.com/<github-id>)
-    - note [#issue](https://github.com/pingcap/tiflash/issues/<issue-id>) @[贡献者 GitHub ID](https://github.com/<github-id>)
+    - note [#issue](https://github.com/pingcap/tiflash/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
+    - note [#issue](https://github.com/pingcap/tiflash/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
     - placeholder
 
 + Tools
 
     + Backup & Restore (BR)
 
-        - note [#issue](https://github.com/pingcap/tidb/issues/<issue-id>) @[贡献者 GitHub ID](https://github.com/<github-id>)
-        - note [#issue](https://github.com/pingcap/tidb/issues/<issue-id>) @[贡献者 GitHub ID](https://github.com/<github-id>)
+        - note [#issue](https://github.com/pingcap/tidb/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
+        - note [#issue](https://github.com/pingcap/tidb/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
         - placeholder
 
     + TiCDC
 
-        - note [#issue](https://github.com/pingcap/tiflow/issues/<issue-id>) @[贡献者 GitHub ID](https://github.com/<github-id>)
-        - note [#issue](https://github.com/pingcap/tiflow/issues/<issue-id>) @[贡献者 GitHub ID](https://github.com/<github-id>)
+        - note [#issue](https://github.com/pingcap/tiflow/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
+        - note [#issue](https://github.com/pingcap/tiflow/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
         - placeholder
 
     + TiDB Data Migration (DM)
 
-        - note [#issue](https://github.com/pingcap/tiflow/issues/<issue-id>) @[贡献者 GitHub ID](https://github.com/<github-id>)
-        - note [#issue](https://github.com/pingcap/tiflow/issues/<issue-id>) @[贡献者 GitHub ID](https://github.com/<github-id>)
+        - note [#issue](https://github.com/pingcap/tiflow/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
+        - note [#issue](https://github.com/pingcap/tiflow/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
         - placeholder
 
     + TiDB Lightning
 
-        - note [#issue](https://github.com/pingcap/tidb/issues/<issue-id>) @[贡献者 GitHub ID](https://github.com/<github-id>)
-        - note [#issue](https://github.com/pingcap/tidb/issues/<issue-id>) @[贡献者 GitHub ID](https://github.com/<github-id>)
+        - note [#issue](https://github.com/pingcap/tidb/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
+        - note [#issue](https://github.com/pingcap/tidb/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
         - placeholder
 
     + Dumpling
 
-        - note [#issue](https://github.com/pingcap/tidb/issues/<issue-id>) @[贡献者 GitHub ID](https://github.com/<github-id>)
-        - note [#issue](https://github.com/pingcap/tidb/issues/<issue-id>) @[贡献者 GitHub ID](https://github.com/<github-id>)
+        - note [#issue](https://github.com/pingcap/tidb/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
+        - note [#issue](https://github.com/pingcap/tidb/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
         - placeholder
 
     + TiUP
 
-        - note [#issue](https://github.com/pingcap/tiup/issues/<issue-id>) @[贡献者 GitHub ID](https://github.com/<github-id>)
-        - note [#issue](https://github.com/pingcap/tiup/issues/<issue-id>) @[贡献者 GitHub ID](https://github.com/<github-id>)
+        - note [#issue](https://github.com/pingcap/tiup/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
+        - note [#issue](https://github.com/pingcap/tiup/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
         - placeholder
 
     + TiDB Binlog
 
-        - note [#issue](https://github.com/pingcap/tidb-binlog/issues/<issue-id>) @[贡献者 GitHub ID](https://github.com/<github-id>)
-        - note [#issue](https://github.com/pingcap/tidb-binlog/issues/<issue-id>) @[贡献者 GitHub ID](https://github.com/<github-id>)
+        - note [#issue](https://github.com/pingcap/tidb-binlog/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
+        - note [#issue](https://github.com/pingcap/tidb-binlog/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
         - placeholder
 
 ## 错误修复
 
 + TiDB
 
-    - note [#issue](https://github.com/pingcap/tidb/issues/<issue-id>) @[贡献者 GitHub ID](https://github.com/<github-id>)
-    - note [#issue](https://github.com/pingcap/tidb/issues/<issue-id>) @[贡献者 GitHub ID](https://github.com/<github-id>)
+    - note [#issue](https://github.com/pingcap/tidb/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
+    - note [#issue](https://github.com/pingcap/tidb/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
     - placeholder
 
 + TiKV
 
-    - note [#issue](https://github.com/tikv/tikv/issues/<issue-id>) @[贡献者 GitHub ID](https://github.com/<github-id>)
-    - note [#issue](https://github.com/tikv/tikv/issues/<issue-id>) @[贡献者 GitHub ID](https://github.com/<github-id>)
+    - note [#issue](https://github.com/tikv/tikv/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
+    - note [#issue](https://github.com/tikv/tikv/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
     - placeholder
 
 + PD
 
-    - note [#issue](https://github.com/tikv/pd/issues/<issue-id>) @[贡献者 GitHub ID](https://github.com/<github-id>)
-    - note [#issue](https://github.com/tikv/pd/issues/<issue-id>) @[贡献者 GitHub ID](https://github.com/<github-id>)
+    - note [#issue](https://github.com/tikv/pd/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
+    - note [#issue](https://github.com/tikv/pd/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
     - placeholder
 
 + TiFlash
 
-    - note [#issue](https://github.com/pingcap/tiflash/issues/<issue-id>) @[贡献者 GitHub ID](https://github.com/<github-id>)
-    - note [#issue](https://github.com/pingcap/tiflash/issues/<issue-id>) @[贡献者 GitHub ID](https://github.com/<github-id>)
+    - note [#issue](https://github.com/pingcap/tiflash/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
+    - note [#issue](https://github.com/pingcap/tiflash/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
     - placeholder
 
 + Tools
 
     + Backup & Restore (BR)
 
-        - note [#issue](https://github.com/pingcap/tidb/issues/<issue-id>) @[贡献者 GitHub ID](https://github.com/<github-id>)
-        - note [#issue](https://github.com/pingcap/tidb/issues/<issue-id>) @[贡献者 GitHub ID](https://github.com/<github-id>)
+        - note [#issue](https://github.com/pingcap/tidb/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
+        - note [#issue](https://github.com/pingcap/tidb/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
         - placeholder
 
     + TiCDC
 
-        - note [#issue](https://github.com/pingcap/tiflow/issues/<issue-id>) @[贡献者 GitHub ID](https://github.com/<github-id>)
-        - note [#issue](https://github.com/pingcap/tiflow/issues/<issue-id>) @[贡献者 GitHub ID](https://github.com/<github-id>)
+        - note [#issue](https://github.com/pingcap/tiflow/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
+        - note [#issue](https://github.com/pingcap/tiflow/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
         - placeholder
 
     + TiDB Data Migration (DM)
 
-        - note [#issue](https://github.com/pingcap/tiflow/issues/<issue-id>) @[贡献者 GitHub ID](https://github.com/<github-id>)
-        - note [#issue](https://github.com/pingcap/tiflow/issues/<issue-id>) @[贡献者 GitHub ID](https://github.com/<github-id>)
+        - note [#issue](https://github.com/pingcap/tiflow/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
+        - note [#issue](https://github.com/pingcap/tiflow/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
         - placeholder
 
     + TiDB Lightning
 
-        - note [#issue](https://github.com/pingcap/tidb/issues/<issue-id>) @[贡献者 GitHub ID](https://github.com/<github-id>)
-        - note [#issue](https://github.com/pingcap/tidb/issues/<issue-id>) @[贡献者 GitHub ID](https://github.com/<github-id>)
+        - note [#issue](https://github.com/pingcap/tidb/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
+        - note [#issue](https://github.com/pingcap/tidb/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
         - placeholder
 
     + Dumpling
 
-        - note [#issue](https://github.com/pingcap/tidb/issues/<issue-id>) @[贡献者 GitHub ID](https://github.com/<github-id>)
-        - note [#issue](https://github.com/pingcap/tidb/issues/<issue-id>) @[贡献者 GitHub ID](https://github.com/<github-id>)
+        - note [#issue](https://github.com/pingcap/tidb/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
+        - note [#issue](https://github.com/pingcap/tidb/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
         - placeholder
 
     + TiUP
 
-        - note [#issue](https://github.com/pingcap/tiup/issues/<issue-id>) @[贡献者 GitHub ID](https://github.com/<github-id>)
-        - note [#issue](https://github.com/pingcap/tiup/issues/<issue-id>) @[贡献者 GitHub ID](https://github.com/<github-id>)
+        - note [#issue](https://github.com/pingcap/tiup/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
+        - note [#issue](https://github.com/pingcap/tiup/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
         - placeholder
 
     + TiDB Binlog
 
-        - note [#issue](https://github.com/pingcap/tidb-binlog/issues/<issue-id>) @[贡献者 GitHub ID](https://github.com/<github-id>)
-        - note [#issue](https://github.com/pingcap/tidb-binlog/issues/<issue-id>) @[贡献者 GitHub ID](https://github.com/<github-id>)
+        - note [#issue](https://github.com/pingcap/tidb-binlog/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
+        - note [#issue](https://github.com/pingcap/tidb-binlog/issues/${issue-id}) @[贡献者 GitHub ID](https://github.com/${github-id})
         - placeholder
 
 ## Other dup notes
