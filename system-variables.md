@@ -4893,7 +4893,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 
 > **Note:**
 > 
-  - If TiDB nodes do not have [zone attributes](/schedule-replicas-by-topology-labels.md#optional-configure-labels-for-tidb) configured and `tiflash_replica_read policy` is not `all_replicas`, TiFlash ignores the replica selection strategy, uses all TiFlash replicas for TiFlash queries, and returns the `The variable tiflash_replica_read is ignored.` warning.
+> - If TiDB nodes do not have [zone attributes](/schedule-replicas-by-topology-labels.md#optional-configure-labels-for-tidb) configured and `tiflash_replica_read` is not set to `all_replicas`, TiFlash ignores the replica selection strategy. Instead, it uses all TiFlash replicas for queries and returns the `The variable tiflash_replica_read is ignored.` warning.
 > - If TiFlash nodes do not have [zone attributes](/schedule-replicas-by-topology-labels.md#configure-labels-for-tikv-and-tiflash) configured, they are treated as nodes not belonging to any zone.
 
 ### time_zone
