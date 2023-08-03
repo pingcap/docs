@@ -16,13 +16,13 @@ Runtime Filter is a new feature introduced in TiDB v7.3, which aims to improve t
 
 ## Working principles of Runtime Filter
 
-Hash join performs the join operation by building a hash table on the right table and continuously probing the hash table on the left table. If some join key values cannot hit the hash table during the probing process, it means that the data does not exist in the right table and will not appear in the final join result. Therefore, if TiDB can **filter out the join key data in advance** during scanning, it will reduce the scanning time and network overhead, thereby greatly improving the join efficiency.
+Hash join performs the join operation by building a hash table based on the right table and continuously probing the hash table using the left table. If some join key values cannot hit the hash table during the probing process, it means that the data does not exist in the right table and will not appear in the final join result. Therefore, if TiDB can **filter out the join key data in advance** during scanning, it will reduce the scanning time and network overhead, thereby greatly improving the join efficiency.
 
 Runtime Filter is a **dynamic predicate** generated during the query planning phase. This predicate has the same function as other predicates in the TiDB Selection operator. These predicates are all applied to the Table Scan operation to filter out rows that do not match the predicate. The only difference is that the parameter values in Runtime Filter come from the results generated during the hash join build process.
 
 ### Example
 
-Assume that there is a join query between the `store_sales` table and the `date_dim` table, and the join method is hash join. `store_sales` is a fact table that mainly stores the sales data of stores, and the number of rows is 1 million. `date_dim` is a time dimension table that mainly stores date information. You want to query the sales data of 2001, so 365 rows of the `date_dim` table is involved in the join operation.
+Assume that there is a join query between the `store_sales` table and the `date_dim` table, and the join method is hash join. `store_sales` is a fact table that mainly stores the sales data of stores, and the number of rows is 1 million. `date_dim` is a time dimension table that mainly stores date information. You want to query the sales data of the year 2001, so 365 rows of the `date_dim` table are involved in the join operation.
 
 ```sql
 SELECT * FROM store_sales, date_dim
@@ -234,15 +234,15 @@ When using Runtime Filter, you can configure the mode and predicate type of Runt
 
 ### Runtime Filter mode
 
-The mode of Runtime Filter is the relationship between the **Filter Sender operator** and **Filter Receiver operator**. There are three modes: `OFF`, `LOCAL`, and `GLOBAL`. In v7.3.0, only `OFF` and `LOCAL` modes are supported. The Runtime Filter mode is controlled by the session-level system variable [`tidb_runtime_filter_mode`](/system-variables.md#tidb_runtime_filter_mode-new-in-v720).
+The mode of Runtime Filter is the relationship between the **Filter Sender operator** and **Filter Receiver operator**. There are three modes: `OFF`, `LOCAL`, and `GLOBAL`. In v7.3.0, only `OFF` and `LOCAL` modes are supported. The Runtime Filter mode is controlled by the system variable [`tidb_runtime_filter_mode`](/system-variables.md#tidb_runtime_filter_mode-new-in-v720).
 
 - `OFF`: Runtime Filter is disabled. After it is disabled, the query behavior is the same as in previous versions.
-- `LOCAL`: Runtime Filter is enabled in the local mode. In the local mode, the **Filter Sender operator** and **Filter Receiver operator** are in the same MPP Task. In other words, Runtime Filter can be applied to the scenario where the hash join operator and Table Scan operator are in the same Task. Currently, Runtime Filter only supports the local mode. To enable this mode, set it to `LOCAL`.
+- `LOCAL`: Runtime Filter is enabled in the local mode. In the local mode, the **Filter Sender operator** and **Filter Receiver operator** are in the same MPP task. In other words, Runtime Filter can be applied to the scenario where the HashJoin operator and TableScan operator are in the same task. Currently, Runtime Filter only supports the local mode. To enable this mode, set it to `LOCAL`.
 - `GLOBAL`: currently, the global mode is not supported. You cannot set Runtime Filter to this mode.
 
 ### Runtime Filter type
 
-The type of Runtime Filter is the type of the predicate used by the generated Filter operator. Currently, only one type is supported: `IN`, which means that the generated predicated is similar to `k1 in (xxx)`. The Runtime Filter type is controlled by the session-level system variable [`tidb_runtime_filter_type`](/system-variables.md#tidb_runtime_filter_type-new-in-v720).
+The type of Runtime Filter is the type of the predicate used by the generated Filter operator. Currently, only one type is supported: `IN`, which means that the generated predicated is similar to `k1 in (xxx)`. The Runtime Filter type is controlled by the system variable [`tidb_runtime_filter_type`](/system-variables.md#tidb_runtime_filter_type-new-in-v720).
 
 - `IN`: the default type. It means that the generated Runtime Filter uses the `IN` type predicate.
 
@@ -250,6 +250,6 @@ The type of Runtime Filter is the type of the predicate used by the generated Fi
 
 - Runtime Filter is an optimization in the MPP architecture and can only be applied to queries pushed down to TiFlash.
 - Join type: Left outer, Full outer, and Anti join (when the left table is the probe side) do not support Runtime Filter. Because Runtime Filter filters the data involved in the join in advance, the preceding types of join do not discard the unmatched data, so Runtime Filter cannot be used.
-- Equal join expression: When the probe column in the equal join expression is a complex expression, or when the probe column type is JSON, Blob, Array, or other complex data types, Runtime Filter is not generated. The main reason is that the preceding types of column are rarely used as the join column. Even if the Filter is generated, the filtering rate is usually low.
+- Equal join expression: When the probe column in the equal join expression is a complex expression, or when the probe column type is JSON, Blob, Array, or other complex data types, Runtime Filter is not generated. The main reason is that the preceding types of columns are rarely used as the join column. Even if the Filter is generated, the filtering rate is usually low.
 
 For the preceding limitations, if you need to confirm whether Runtime Filter is generated correctly, you can use the [`EXPLAIN` statement](/sql-statements/sql-statement-explain.md) to verify the execution plan.
