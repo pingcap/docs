@@ -7,12 +7,12 @@ summary: Learn how to resolve type conversion and duplication errors during data
 
 Starting from v5.4.0, you can configure TiDB Lightning to skip errors like invalid type conversion and unique key conflicts, and to continue the data processing as if those wrong row data does not exist. A report will be generated for you to read and manually fix errors afterward. This is ideal for importing from a slightly dirty data source, where locating the errors manually is difficult and restarting TiDB Lightning on every encounter is costly.
 
-This document introduces TiDB Lightning error types and how to query the errors. At the end of this document, an example is provided. The following configuration items are involved:
+This document introduces TiDB Lightning error types, how to query the errors, and provides an example. The following configuration items are involved:
 
-- `lightning.max-error`: the threshold or type error 
-- `conflict.strategy`, `conflict.threshold`, and `conflict.max-record-rows`: configurations related to conflicting data 
-- `tikv-importer.duplicate-resolution`: a duplication resolution algorithm that can only be used in physical import mode
-- `lightning.task-info-schema-name`: a location that records error tables 
+- `lightning.max-error`: the tolerance threshold of type error
+- `conflict.strategy`, `conflict.threshold`, and `conflict.max-record-rows`: configurations related to conflicting data
+- `tikv-importer.duplicate-resolution`: the conflict handling configuration that can only be used in the physical import mode
+- `lightning.task-info-schema-name`: the database where data is stored when TiDB Lightning detects conflicts
 
 For more information, see [TiDB Lightning (Task)](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task).
 
@@ -47,7 +47,7 @@ The following errors are always fatal, and cannot be skipped by changing `lightn
 
 ## Conflict errors
 
-You can use the [`conflict.threshold`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task) configuration to increase the tolerance of errors related to data conflict. If this configuration is set to *N*, TiDB Lightning allows and skips up to *N* conflict errors from the data source before it exits. The default value is `9223372036854775807`, which means that almost all errors are tolerated.
+You can use the [`conflict.threshold`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task) configuration item to increase the tolerance of errors related to data conflict. If this configuration item is set to *N*, TiDB Lightning allows and skips up to *N* conflict errors from the data source before it exits. The default value is `9223372036854775807`, which means that almost all errors are tolerated.
 
 These errors are recorded in a table. After the import is completed, you can view the errors in the database and process them manually. For more information, see [Error Report](#error-report)
 
@@ -117,11 +117,11 @@ CREATE TABLE conflict_records (
 );
 ```
 
-`type_error_v1` records all [type errors](#type-error) managed by the `lightning.max-error` configuration. There is one row for each error.
+`type_error_v1` records all [type errors](#type-error) managed by `lightning.max-error`. Each error corresponds to one row.
 
-`conflict_error_v1` records all unique and primary key conflicts managed by `tikv-importer.duplicate-resolution` in the physical import mode. There are two rows for each pair of conflicts.
+`conflict_error_v1` records all unique and primary key conflicts managed by `tikv-importer.duplicate-resolution` in the physical import mode. Each pair of conflicts corresponds to two rows.
 
-`conflict_records` records all unique and primary key conflicts managed by the `conflict` configuration group in logical import mode and physical import mode. There is one row for each error.
+`conflict_records` records all unique and primary key conflicts managed by the `conflict` configuration group in logical import mode and physical import mode. Each error corresponds to one row.
 
 | Column       | Syntax | Type | Conflict | Description                                                                                                                         |
 | ------------ | ------ | ---- | -------- | ----------------------------------------------------------------------------------------------------------------------------------- |

@@ -123,16 +123,16 @@ driver = "file"
 # keep-after-success = false
 
 [conflict]
-# The new version strategy to handle conflicting data. The default value is "".
-# - "": TiDB Lightning does not detect and process conflicting data. But if there are conflicting primary or unique key records in the source file, an error is reported in the subsequent step.
-# - "error": terminate the import and report an error if data with conflicting primary or unique keys is detected in the imported data.
-# - "replace": when encountering data with conflicting primary or unique keys, the new data is retained and the old data is overwritten.
-# - "ignore": when encountering data with conflicting primary or unique keys, the old data is retained and the new data is ignored.
-# It cannot be used together with `tikv-importer.duplicate-resolution` (the old version of conflict detection).
+# Starting from v7.3.0, a new version of strategy is introduced to handle conflicting data. The default value is "".
+# - "": TiDB Lightning does not detect or handle conflicting data. If the source file contains conflicting primary or unique key records, the subsequent step reports an error.
+# - "error": when detecting conflicting primary or unique key records in the imported data, TiDB Lightning terminates the import and reports an error.
+# - "replace": when encountering conflicting primary or unique key records, TiDB Lightning retains the new data and overwrites the old data.
+# - "ignore": when encountering conflicting primary or unique key records, TiDB Lightning retains the old data and ignores the new data.
+# The new version strategy cannot be used together with tikv-importer.duplicate-resolution (the old version of conflict detection).
 strategy = ""
-# When strategy is "replace" or "ignore", this parameter controls the upper limit of the conflicting data. You can set it only when strategy is "replace" or "ignore". The default value is 9223372036854775807, which means that almost all errors are tolerated.
+# Controls the upper limit of the conflicting data that can be handled when strategy is "replace" or "ignore". You can set it only when strategy is "replace" or "ignore". The default value is 9223372036854775807, which means that almost all errors are tolerated.
 # threshold = 9223372036854775807
-# Controls the maximum number of rows in the `conflict_records` table. The default value is 100. If the strategy is "ignore", the conflict records that are ignored will be recorded; if the strategy is "replace", the conflict records that are overwritten will be recorded. However, the "replace" strategy cannot record the conflict records in the logical import mode.
+# Controls the maximum number of records in the conflict_records table. The default value is 100. If the strategy is "ignore", the conflict records that are ignored are recorded; if the strategy is "replace", the conflict records that are overwritten are recorded. However, the "replace" strategy cannot record the conflict records in the logical import mode.
 # max-record-rows = 100
 
 [tikv-importer]

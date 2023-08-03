@@ -47,18 +47,18 @@ For the complete configuration file, refer to [TiDB Lightning Configuration](/ti
 
 ## Conflict detection
 
-Conflicting data refers to two or more records with the same data in the PK or UK column. In the logical import mode, you can configure the strategy for resolving conflicting data by setting the [`conflict.strategy`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task) configuration item. Based on the strategy, TiDB Lightning imports data with different SQL statements.
+Conflicting data refers to two or more records with the same data in the PK or UK column. In the logical import mode, you can configure the strategy for handling conflicting data by setting the [`conflict.strategy`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task) configuration item. Based on the strategy, TiDB Lightning imports data with different SQL statements.
 
 | Strategy | Default behavior of conflicting data | The corresponding SQL statement |
 | :-- | :-- | :-- |
 | `"replace"` | Replacing existing data with new data. | `REPLACE INTO ...` |
 | `"ignore"` | Keeping existing data and ignoring new data. | `INSERT IGNORE INTO ...` |
 | `"error"` | Pausing the import and reporting an error. | `INSERT INTO ...` |
-|  `""`  | no actions. TiDB Lightning might exit due to an error. |  None   |
+|  `""`  | No actions. If data with primary and unique key conflicts exists, the subsequent step reports an error. |  None   |
 
-When the strategy is `error`, conflicting data will fail the import task. When the strategy is `replace` or `ignore`, the maximum tolerable conflicting count can be configurated by `conflict.threshold`, which has the default value 922337203685477580.
+When the strategy is `"error"`, errors caused by conflicting data directly terminates the import task. When the strategy is `"replace"` or `"ignore"`, you can control the maximum tolerable conflicts by configuring [`conflict.threshold`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task). The default value is `9223372036854775807`, which means that almost all errors are tolerable.
 
-When the strategy is `ignore`, conflicting data will be recorded in the conflict_records table at downstream. For further details, please see [tolerable errors](/tidb-lightning/tidb-lightning-error-resolution.md). And the maximum recording count can be configurated by `conflict.max-record-rows`. Conflicting data that exceeds the maximum recording count will be skipped and import continues. The default value of `conflict.max-record-rows` is 100.
+When the strategy is `"ignore"`, conflicting data is recorded in the downstream `conflict_records` table. For further details, see [tolerable errors](/tidb-lightning/tidb-lightning-error-resolution.md). In this case, you can limit the records by configuring [`conflict.max-record-rows`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task), and conflicting data that exceeds the limit is skipped and not recorded. The default value is `100`.
 
 ## Performance tuning
 
