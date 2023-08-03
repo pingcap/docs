@@ -1,11 +1,11 @@
 ---
 title: RUNAWAY_WATCHES
-summary: Learn the `RUNAWAY_WATCHES` INFORMATION_SCHEMA table。
+summary: Learn the `RUNAWAY_WATCHES` INFORMATION_SCHEMA table.
 ---
 
 # RUNAWAY_WATCHES
 
-The `RUNAWAY_WATCHES` table shows the watch list of runaway queries that consume more resources than expected. See [Runaway Queries](/tidb-resource-control.md#manage-queries-that-consume-more-resources-than-expected-runaway-queries).
+The `RUNAWAY_WATCHES` table shows the watch list of runaway queries that consume more resources than expected. For more information, see [Runaway Queries](/tidb-resource-control.md#manage-queries-that-consume-more-resources-than-expected-runaway-queries).
 
 ```sql
 USE INFORMATION_SCHEMA;
@@ -30,11 +30,11 @@ DESC RUNAWAY_WATCHES;
 
 > **Warning:**
 >
-> This feature is an experimental feature. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+> This feature is experimental. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
 
 ## Examples
 
-Query the watch list of runaway query:
+Query the watch list of runaway queries:
 
 ```sql
 SELECT * FROM INFORMATION_SCHEMA.RUNAWAY_WATCHES;
@@ -67,11 +67,10 @@ RESOURCE_GROUP_NAME: rg2
 Add a watch item into list to the resource group `rg1`:
 
 ```sql
-query watch add resource group rg1 sql text exact to 'select * from sbtest.sbtest1'; --
 QUERY WATCH ADD RESOURCE GROUP rg1 SQL TEXT EXACT TO 'select * from sbtest.sbtest1';
 ```
 
-Query the watch list of runaway query again:
+Query the watch list of runaway queries again:
 
 ```sql
 SELECT * FROM INFORMATION_SCHEMA.RUNAWAY_WATCHES\G;
@@ -110,15 +109,15 @@ RESOURCE_GROUP_NAME: rg1
 3 row in set (0.00 sec)
 ```
 
-The meanings of the columns in the `RUNAWAY_WATCHES` table are as follows:
+The meaning of each column field in the `RUNAWAY_WATCHES` table is as follows:
 
-- ID: the ID of the watch item.
-- RESOURCE_GROUP_NAME: the name of the resource group.
-- START_TIME: the start time.
-- END_TIME: the end time. `UNLIMITED` means that the watch item is valid forever.
-- WATCH: the type of the quick identification. The values are as follows:
+- `ID`: the ID of the watch item.
+- `RESOURCE_GROUP_NAME`: the name of the resource group.
+- `START_TIME`: the start time.
+- `END_TIME`: the end time. `UNLIMITED` means that the watch item has an unlimited validity period.
+- `WATCH`: the match type of the quick identification. The values are as follows:
     - `Plan` indicates that the Plan Digest is matched. In this case, the `WATCH_TEXT` column shows the Plan Digest.
     - `Similar` indicates that the SQL Digest is matched. In this case, the `WATCH_TEXT` column shows the SQL Digest.
     - `Exact` indicates that the SQL text is matched. In this case, the `WATCH_TEXT` column shows the SQL text.
 - `SOURCE`: the source of the watch item. If it is identified by the `QUERY_LIMIT` rule, the identified TiDB IP address is displayed. If it is manually added, `manual` is displayed.
-- `ACTION`: the corresponding operation after the identification. If it is `NoneAction`, the `ACTION` configured in `QUERY_LIMIT` in the resource group is used.
+- `ACTION`: the corresponding operation after the identification.
