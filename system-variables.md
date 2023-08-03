@@ -4881,21 +4881,20 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 >
 > This TiDB variable is not applicable to TiDB Cloud.
 
-
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
 - Type: Enumeration
 - Default value: `all_replicas`
 - Value options: `all_replicas`, `closest_adaptive`, or `closest_replicas`
 - This variable is used to set the strategy for selecting TiFlash replicas when a query requires the TiFlash engine.
-  - `all_replicas` means using all available TiFlash replicas for analytical computing.
-  - `closest_adaptive` means preferring to use TiFlash replicas in the same zone as the TiDB node initiating the query. If replicas in this zone do not contain all the required data, the query will involve TiFlash replicas from other zones along with their corresponding TiFlash nodes.
-  - `closest_replicas` means using only TiFlash replicas in the same zone as the TiDB node initiating the query. If replicas in this zone do not contain all the required data, the query will return an error.
+    - `all_replicas` means using all available TiFlash replicas for analytical computing.
+    - `closest_adaptive` means preferring to use TiFlash replicas in the same zone as the TiDB node initiating the query. If replicas in this zone do not contain all the required data, the query will involve TiFlash replicas from other zones along with their corresponding TiFlash nodes.
+    - `closest_replicas` means using only TiFlash replicas in the same zone as the TiDB node initiating the query. If replicas in this zone do not contain all the required data, the query will return an error.
 
 > **Note:**
 > 
   - If TiDB nodes do not have [zone attributes](/schedule-replicas-by-topology-labels.md#optional-configure-labels-for-tidb) configured and `tiflash_replica_read policy` is not `all_replicas`, TiFlash ignores the replica selection strategy, uses all TiFlash replicas for TiFlash queries, and returns the `The variable tiflash_replica_read is ignored.` warning.
-  - If TiFlash nodes do not have [zone attributes](/schedule-replicas-by-topology-labels.md#configure-labels-for-tikv-and-tiflash) configured, they are treated as nodes not belonging to any zone.
+> - If TiFlash nodes do not have [zone attributes](/schedule-replicas-by-topology-labels.md#configure-labels-for-tikv-and-tiflash) configured, they are treated as nodes not belonging to any zone.
 
 ### time_zone
 
