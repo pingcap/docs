@@ -122,7 +122,7 @@ The new version of conflict detection has the following limitations:
 
 - Before importing, TiDB Lightning prechecks potential conflicting data by reading all data and encoding it. During the detection process, TiDB Lightning uses `tikv-importer.sorted-kv-dir` to store temporary files. After the detection is complete, TiDB Lightning retains the results for import phase. This introduces additional overhead for time consumption, disk space usage, and API requests to read the data.
 - The new version of conflict detection only works in a single node, and does not apply to parallel imports and scenarios where the `disk-quota` parameter is enabled.
-- The new version (`conflict`) and old version (`tikv-importer.duplicate-resolution`) conflict detection cannot be used at the same time.The new version of conflict detection is enabled when the configuration [`conflict.strategy`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task) is set. 
+- The new version (`conflict`) and old version (`tikv-importer.duplicate-resolution`) conflict detection cannot be used at the same time. The new version of conflict detection is enabled when the configuration [`conflict.strategy`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task) is set. 
 
 Compared with the old version of conflict detection, the new version takes less time when the imported data contains a large amount of conflicting data. It is recommended that you use the new version of conflict detection in non-parallel import tasks when the data contains conflicting data and there is sufficient local disk space.
 
