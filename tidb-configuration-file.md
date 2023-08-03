@@ -241,6 +241,10 @@ Configuration items related to log.
 
 ### `expensive-threshold`
 
+> **Warning:**
+>
+> Starting from v5.4.0, the `expensive-threshold` configuration item is deprecated and replaced by the system variable [`tidb_expensive_query_time_threshold`](/system-variables.md#tidb_expensive_query_time_threshold).
+
 - Outputs the threshold value of the number of rows for the `expensive` operation.
 - Default value: `10000`
 - When the number of query rows (including the intermediate results based on statistics) is larger than this value, it is an `expensive` operation and outputs log with the `[EXPENSIVE_QUERY]` prefix.
@@ -721,6 +725,54 @@ Configuration items related to read isolation.
 - Controls from which engine TiDB allows to read data.
 - Default value: ["tikv", "tiflash", "tidb"], indicating that the engine is automatically selected by the optimizer.
 - Value options: Any combinations of "tikv", "tiflash", and "tidb", for example, ["tikv", "tidb"] or ["tiflash", "tidb"]
+
+## instance
+
+### `tidb_enable_collect_execution_info`
+
+- This configuration controls whether to record the execution information of each operator in the slow query log.
+- Default value: `true`
+- Before v6.1.0, this configuration is set by `enable-collect-execution-info`.
+
+### `tidb_enable_slow_log`
+
+- This configuration is used to control whether to enable the slow log feature.
+- Default value: `true`
+- Value options: `true` or `false`
+- Before v6.1.0, this configuration is set by `enable-slow-log`.
+
+### `tidb_slow_log_threshold`
+
+- This configuration is used to output the threshold value of the time consumed by the slow log. When the time consumed by a query is larger than this value, this query is considered as a slow log and its log is output to the slow query log.
+- Default value: `300`
+- Range: `[-1, 9223372036854775807]`
+- Unit: Milliseconds
+- Before v6.1.0, this configuration is set by `slow-threshold`.
+
+### `tidb_expensive_query_time_threshold`
+
+- This configuration is used to set the threshold value that determines whether to print expensive query logs. The difference between expensive query logs and slow query logs is:
+    - Slow logs are printed after the statement is executed.
+    - Expensive query logs print the statements that are being executed, with execution time exceeding the threshold value, and their related information.
+- Default value: `60`
+- Range: `[10, 2147483647]`
+- Unit: Seconds
+- Before v5.4.0, this configuration is set by `expensive-threshold`.
+
+### `tidb_record_plan_in_slow_log`
+
+- This configuration is used to control whether to include the execution plan of slow queries in the slow log.
+- Default value: `1`
+- Value options: `1` (enabled, default) or `0` (disabled).
+- The value of this configuration will initialize the value of system variable [`tidb_record_plan_in_slow_log`](/system-variables.md#tidb_record_plan_in_slow_log)
+- Before v6.1.0, this configuration is set by `record-plan-in-slow-log`.
+
+### `tidb_force_priority`
+
+- This configuration is used to change the default priority for statements executed on a TiDB server.
+- Default value: `NO_PRIORITY`
+- The default value `NO_PRIORITY` means that the priority for statements is not forced to change. Other options are `LOW_PRIORITY`, `DELAYED`, and `HIGH_PRIORITY` in ascending order.
+- Before v6.1.0, this configuration is set by `force-priority`.
 
 ## proxy-protocol
 
