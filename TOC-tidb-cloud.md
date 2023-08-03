@@ -560,7 +560,6 @@
         - [Spill to Disk](/tiflash/tiflash-spill-disk.md)
   - [Dumpling](/dumpling-overview.md)
   - [Table Filter](/table-filter.md)
-  - [Troubleshoot Inconsistency Between Data and Indexes](/troubleshoot-data-inconsistency-errors.md)
   - [Serverless Tier Limitations](/tidb-cloud/serverless-tier-limitations.md)
   - [Resource Control](/tidb-resource-control.md)
   - [TiDB Backend Task Distributed Execution Framework](/tidb-distributed-execution-framework.md)
