@@ -25,7 +25,8 @@ IfNotExists ::=
     ('IF' 'NOT' 'EXISTS')?
 
 ResourceGroupName ::=
-   Identifier
+    Identifier
+|   "DEFAULT"
 
 ResourceGroupOptionList ::=
     DirectResourceGroupOption
@@ -46,7 +47,7 @@ ResourceGroupPriorityOption ::=
 |   MEDIUM
 |   HIGH
 
-ResourceGroupRunawayOptionList ::=
+ResourceGroupRunawayOptionList ::= 
     DirectResourceGroupRunawayOption
 |   ResourceGroupRunawayOptionList DirectResourceGroupRunawayOption
 |   ResourceGroupRunawayOptionList ',' DirectResourceGroupRunawayOption
