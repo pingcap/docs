@@ -153,6 +153,7 @@ This drastically improves write performance, reduces I/O amplication, speeds up 
 
     - When Kafka sink uses Avro protocol, if the `force-replicate` parameter is set to `true`, TiCDC reports an error when creating a changefeed.
     - Due to incompatibility between `delete-only-output-handle-key-columns` and `force-replicate` parameters, when both parameters are enabled, TiCDC reports an error when creating a changefeed.
+    - When the output protocol is Open Protocol, the `UPDATE` events only output the changed columns.
 
 ### System variables
 
