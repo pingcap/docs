@@ -105,24 +105,23 @@ To import the CSV files to TiDB Cloud, take the following steps:
 3. Provide the following information for the source CSV files:
 
     - **Location**: select **Amazon S3**.
-    - **Data Format**: select **CSV**.
-    - **Bucket URI**: select the bucket URI where your CSV files are located.
+    - **Data Format**: select **CSV**. If you need to edit the CSV configurations, click **Edit CSV configuration** to update the CSV-specific configurations. For more information, see [CSV Configurations for Importing Data](/tidb-cloud/csv-config-for-import-data.md).
+
+        > **Note:**
+        >
+        > For the configurations of separator and delimiter, you can use both alphanumeric characters and certain special characters. The supported special characters include `\t`, `\b`, `\n`, `\r`, `\f`, and `\u0001`.
+
+    - **Bucket URI**: select the bucket URI where your CSV files are located. Note that you must include `/` at the end of the URI, for example, `s3://sampledate/ingest/`.
     - **Bucket Access** (This field is visible only for AWS S3): you can use either an AWS access key or an AWS Role ARN to access your bucket. For more information, see [Configure Amazon S3 access](/tidb-cloud/config-s3-and-gcs-access.md#configure-amazon-s3-access).
         - **AWS Access Keys**: enter the AWS access key ID and AWS secret access key.
         - **AWS Role ARN**: enter the AWS Role ARN value.
 
-4. If you need to edit the CSV configurations, click **Edit CSV configuration** to update the CSV-specific configurations. For more information, see [CSV Configurations for Importing Data](/tidb-cloud/csv-config-for-import-data.md).
-
-    > **Note:**
-    >
-    > For the configurations of separator and delimiter, you can use both alphanumeric characters and certain special characters. The supported special characters include `\t`, `\b`, `\n`, `\r`, `\f`, and `\u0001`.
-
-5. You can choose to **Import into Pre-created Tables**, or **Import Schema and Data from S3**.
+4. You can choose to **Import into Pre-created Tables**, or **Import Schema and Data from S3**.
 
     - **Import into Pre-created Tables** allows you to create tables in TiDB in advance and select the tables that you want to import data into. In this case, you can choose up to 1000 tables to import. To create tables, click on **Chat2Qury** in the left navigation pane. For more information about how to use Chat2Qury, see [Explore Your Data with AI-Powered Chat2Query](/tidb-cloud/explore-data-with-chat2query.md).
     - **Import Schema and Data from S3** allows you to import SQL scripts that creates a table along with its corresponding data stored in S3 directly into TiDB.
 
-6. If the source files do not meet the naming conventions, you can define a custom mapping rule for each target table and its corresponding CSV file. After that, the data source files will be re-scanned using the provided custom mapping rule. To modify the mapping, go to **Advanced Settings** and then click **Mapping Settings**. Note that **Mapping Settings** is available only when you choose **Import into Pre-created Tables**.
+5. If the source files do not meet the naming conventions, you can define a custom mapping rule for each target table and its corresponding CSV file. After that, the data source files will be re-scanned using the provided custom mapping rule. To modify the mapping, go to **Advanced Settings** and then click **Mapping Settings**. Note that **Mapping Settings** is available only when you choose **Import into Pre-created Tables**.
 
     - **Target Database**: enter the name of the target database you select.
 
@@ -130,13 +129,9 @@ To import the CSV files to TiDB Cloud, take the following steps:
 
     - **Source file URIs and names**: enter the source file URI and name in the following format `s3://[bucket_name]/[data_source_folder]/[file_name].csv`. For example, `s3://sampledate/ingest/TableName.01.csv`. You can also use wildcards to match the source files. For more information, see [Mapping Settings](#mapping-settings).
 
-7. Click **Start Import**. If you see a warning message, resolve this by providing the correct source file, renaming the existing one according to [Naming Conventions for Data Import](/tidb-cloud/naming-conventions-for-data-import.md), or using **Advanced Settings** to make changes. After resolving these issues, you need to import the data again.
+6. Click **Start Import**.
 
-8. When the import progress shows **Completed**, check the imported tables.
-
-    If the number is zero, it means no data files matched the value you entered in the **Source file name** field. In this case, ensure that there are no typos in the **Source file name** field and try again.
-
-9. After the import task is completed, you can click **Chat2Qury** in the left navigation pane to query your imported data. For more information about how to use Chat2Qury, see [Explore Your Data with AI-Powered Chat2Query](/tidb-cloud/explore-data-with-chat2query.md).
+7. When the import progress shows **Completed**, check the imported tables.
 
 When you run an import task, if any unsupported or invalid conversions are detected, TiDB Cloud terminates the import job automatically and reports an importing error.
 
@@ -164,3 +159,15 @@ Note that only `?` and `*` are supported.
 > **Note:**
 >
 > The URI must contain the data source folder.
+
+## Troubleshooting
+
+### Resolve warnings during data import
+
+After clicking **Start Import**, if you see a warning message such as `can't find the corresponding source files`, resolve this by providing the correct source file, renaming the existing one according to [Naming Conventions for Data Import](/tidb-cloud/naming-conventions-for-data-import.md), or using **Advanced Settings** to make changes.
+
+After resolving these issues, you need to import the data again.
+
+### Zero rows in the imported tables
+
+After the import progress shows **Completed**, check the imported tables. If the number of rows is zero, it means no data files matched the Bucket URI that you entered. In this case, resolve this issue by providing the correct source file, renaming the existing one according to [Naming Conventions for Data Import](/tidb-cloud/naming-conventions-for-data-import.md), or using **Advanced Settings** to make changes. After that, import those tables again.
