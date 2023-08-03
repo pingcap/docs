@@ -66,9 +66,11 @@ This drastically improves write performance, reduces I/O amplication, speeds up 
 
     In v7.3.0, TiDB introduces several new optimizer hints to control the join methods between tables, including:
 
-    - [`INDEX_JOIN()`](link) selects index nested loop join, which uses indexes to filter and uses the filter result as the inner table to join.
+    - [`NO_MERGE_JOIN()`](/optimizer-hints.md#no_merge_joint1_name--tl_name-) selects join methods other than merge join.
+    - [`NO_INDEX_JOIN()`](/optimizer-hints.md#no_index_joint1_name--tl_name-) selects join methods other than index nested loop join.
+    - [`NO_INDEX_MERGE_JOIN()`](/optimizer-hints.md#no_index_merge_joint1_name--tl_name-) selects join methods other than index nested loop merge join.
     - [`NO_HASH_JOIN()`](/optimizer-hints.md#no_hash_joint1_name--tl_name-) selects join methods other than hash join.
-    - [`NO_INDEX_HASH_JOIN()`](/optimizer-hints.md#no_index_hash_joint1_name--tl_name-) selects join methods other than [index nested loop join](/optimizer-hints.md#inl_hash_join).
+    - [`NO_INDEX_HASH_JOIN()`](/optimizer-hints.md#no_index_hash_joint1_name--tl_name-) selects join methods other than [index nested loop hash join](/optimizer-hints.md#inl_hash_join).
 
     For more information, refer to [user documentation](/optimizer-hints).
 
