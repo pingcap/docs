@@ -299,10 +299,10 @@ ALTER TABLE table_name LAST PARTITION LESS THAN (<expression>)
 
 ### List partitioning
 
-Before creating a List partitioned table, make sure the following:
+Before creating a List partitioned table, make sure the following system variables are set to their default values of `ON`:
 
-- The [`tidb_enable_list_partition`](/system-variables#tidb_enable_list_partition-new-in-v50) system variable is set to its default value `ON`.
-- The [`tidb_enable_table_partition`](/system-variables#tidb_enable_table_partition) system variable is set to to its default value `ON`.
+- [`tidb_enable_list_partition`](/system-variables#tidb_enable_list_partition-new-in-v50)
+- [`tidb_enable_table_partition`](/system-variables#tidb_enable_table_partition)
 
 List partitioning is similar to Range partitioning. Unlike Range partitioning, in List partitioning, the partitioning expression values for all rows in each partition are in a given value set. This value set defined for each partition can have any number of values but cannot have duplicate values. You can use the `PARTITION ... VALUES IN (...)` clause to define a value set.
 
@@ -353,7 +353,7 @@ You can also execute `ALTER TABLE employees DROP PARTITION pEast` to delete all 
 
 #### Default List partition
 
-Starting from v7.3.0, you can add a default partition to a List or List COLUMNS partitioned table. The default partition acts as a fallback partition, where rows that do not match defined value sets of any partitions can be placed.
+Starting from v7.3.0, you can add a default partition to a List or List COLUMNS partitioned table. The default partition acts as a fallback partition, where rows that do not match value sets of any partitions can be placed.
 
 > **Note:**
 >
@@ -385,7 +385,7 @@ or
 ALTER TABLE t ADD PARTITION (PARTITION pDef VALUES IN (DEFAULT));
 ```
 
-In this way, newly inserted values that do not match defined value sets of any partitions can automatically go into the default partition.
+In this way, newly inserted values that do not match value sets of any partitions can automatically go into the default partition.
 
 ```sql
 INSERT INTO t VALUES (7, 7);
@@ -409,7 +409,8 @@ PARTITION BY LIST (store_id) (
 );
 ```
 
-For a List or List COLUMNS partitioned table without a default partition, all expected values of a partition expression must be included in the `PARTITION ... VALUES IN (...)` clause. If the value to be inserted in an `INSERT` statement does not match defined value sets of any partitions, the statement fails to execute and an error is reported. See the following example:
+For a List or List COLUMNS partitioned table without a default partition, the values to be inserted using an `INSERT` statement must match value sets defined in the `PARTITION ... VALUES IN (...)` clauses of the table. If the values to be inserted do not match value sets of any partitions, the statement will fail and an error is returned, as shown in the following example:
+
 
 ```sql
 CREATE TABLE t (
@@ -426,7 +427,7 @@ INSERT INTO t VALUES (7, 7);
 ERROR 1525 (HY000): Table has no partition for value 7
 ```
 
-To ignore the error above, you can use the `IGNORE` keyword. After using this keyword, if a row contains values that do not match defined value sets of any partitions, this row will not be inserted. Instead, only rows with matched values are inserted, and no error is reported:
+To ignore the preceding error, you can add the `IGNORE` keyword to the `INSERT` statement. After this keyword is added, the `INSERT` statement will only insert rows that match the partition value sets and will not insert unmatched rows, without returning an error:
 
 ```sql
 test> TRUNCATE t;
