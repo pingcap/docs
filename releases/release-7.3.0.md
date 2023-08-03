@@ -122,6 +122,10 @@ This drastically improves write performance, reduces I/O amplication, speeds up 
 
     For more information, see [documentation](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#conflict-detection).
 
+* TiDB Lightning supports Partitioned Raft KV (experimental) [#14916](https://github.com/tikv/tikv/issues/14916) @[GMHDBJD](https://github.com/GMHDBJD) **tw@hfxsd** <!--1507-->
+
+    TiDB Lightning now supports Partitioned Raft KV. This feature helps improve the data import performance of TiDB Lightning.
+
 * TiDB Lightning introduces a new parameter `enable-diagnose-log` to enhance troubleshooting by printing more diagnostic logs [#45497](https://github.com/pingcap/tidb/issues/45497) @[D3Hunter](https://github.com/D3Hunter) **tw@hfxsd** <!--1517-->
 
     By default, this feature is disabled and TiDB Lightning only prints logs containing `lightning/main`. When enabled, TiDB Lightning prints logs for all packages (including `client-go` and `tidb`) to help diagnose issues related to `client-go` and `tidb`.
