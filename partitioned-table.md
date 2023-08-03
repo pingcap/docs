@@ -411,7 +411,6 @@ PARTITION BY LIST (store_id) (
 
 For a List or List COLUMNS partitioned table without a default partition, the values to be inserted using an `INSERT` statement must match value sets defined in the `PARTITION ... VALUES IN (...)` clauses of the table. If the values to be inserted do not match value sets of any partitions, the statement will fail and an error is returned, as shown in the following example:
 
-
 ```sql
 CREATE TABLE t (
   a INT,
