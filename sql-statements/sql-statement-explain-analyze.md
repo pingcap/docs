@@ -281,9 +281,9 @@ commit_txn: {prewrite:48.564544ms, wait_prewrite_binlog:47.821579, get_commit_ts
 - `write_keys`: The total `keys` written in the transaction.
 - `write_byte`: The total bytes of `key-value` written in the transaction, and the unit is byte.
 
-### RU (Request Unit) Consumption
+### RU (Request Unit) consumption
 
-[Request Unit (RU)](/tidb-resource-control.md#what-is-request-unit-ru) is a unified abstraction unit of system resources which is defined in TiDB resource control. The `execution info` of top level operator shows the overall RU consumption of this particular SQL statement.
+[Request Unit (RU)](/tidb-resource-control.md#what-is-request-unit-ru) is a unified abstraction unit of system resources, which is defined in TiDB resource control. The `execution info` of the top-level operator shows the overall RU consumption of this particular SQL statement.
 
 ```
 RU:273.842670
@@ -291,7 +291,7 @@ RU:273.842670
 
 > **Note:**
 >
-> This value shows the actual RU consumed by this execution. The same SQL might consume different amounts of RUs each time it is executed due to the effects of caching (for example, [coprocessor cache](/coprocessor-cache.md)).
+> This value shows the actual RUs consumed by this execution. The same SQL statement might consume different amounts of RUs each time it is executed due to the effects of caching (for example, [coprocessor cache](/coprocessor-cache.md)).
 
 ### Other common execution information
 
