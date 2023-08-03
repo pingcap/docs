@@ -104,10 +104,6 @@
     - [TiFlash Query Result Materialization](/tiflash/tiflash-results-materialization.md)
     - [TiFlash Late Materialization](/tiflash/tiflash-late-materialization.md)
     - [Compatibility](/tiflash/tiflash-compatibility.md)
-<<<<<<< HEAD
-  - [Scale a TiDB Cluster](/tidb-cloud/scale-tidb-cluster.md)
-  - [Pause or Resume a TiDB Cluster](/tidb-cloud/pause-or-resume-tidb-cluster.md)
-=======
   - Monitor and Alert
     - [Overview](/tidb-cloud/monitor-tidb-cluster.md)
     - [Built-in Metrics](/tidb-cloud/built-in-monitoring.md)
@@ -168,7 +164,6 @@
        - [Overview](/garbage-collection-overview.md)
        - [Configuration](/garbage-collection-configuration.md)
     - [Tune TiFlash Performance](/tiflash/tune-tiflash-performance.md)
->>>>>>> d99ff1987 (cloud: customize doc content for TiDB Cloud in v7.1 (#14349))
   - [Upgrade a TiDB Cluster](/tidb-cloud/upgrade-tidb-cluster.md)
   - [Delete a TiDB Cluster](/tidb-cloud/delete-tidb-cluster.md)
 - Migrate or Import Data
@@ -326,13 +321,10 @@
       - [`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md)
       - [`ADMIN CHECKSUM TABLE`](/sql-statements/sql-statement-admin-checksum-table.md)
       - [`ADMIN CHECK [TABLE|INDEX]`](/sql-statements/sql-statement-admin-check-table-index.md)
-<<<<<<< HEAD
-      - [`ADMIN PAUSE DDL`](/sql-statements/sql-statement-admin-pause-ddl.md)
-      - [`ADMIN RESUME DDL`](/sql-statements/sql-statement-admin-resume-ddl.md)
-=======
       - [`ADMIN CLEANUP INDEX`](/sql-statements/sql-statement-admin-cleanup.md)
+      - [`ADMIN PAUSE DDL`](/sql-statements/sql-statement-admin-pause-ddl.md)
       - [`ADMIN RECOVER INDEX`](/sql-statements/sql-statement-admin-recover.md)
->>>>>>> d99ff1987 (cloud: customize doc content for TiDB Cloud in v7.1 (#14349))
+      - [`ADMIN RESUME DDL`](/sql-statements/sql-statement-admin-resume-ddl.md)
       - [`ADMIN SHOW DDL [JOBS|JOB QUERIES]`](/sql-statements/sql-statement-admin-show-ddl.md)
       - [`ALTER DATABASE`](/sql-statements/sql-statement-alter-database.md)
       - [`ALTER INDEX`](/sql-statements/sql-statement-alter-index.md)
