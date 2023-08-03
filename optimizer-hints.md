@@ -980,7 +980,7 @@ EXPLAIN SELECT /*+ leading(t1, t3), inl_join(t3) */ * FROM t1, t2, t3 WHERE t1.i
 The `Can't find a proper physical plan for this query` error might occur in the following scenarios:
 
 - A query itself does not require reading indexes in order. That is, for this query, the optimizer does not generate a plan to read indexes in order in any case without using hints. In this case, if the `ORDER_INDEX` hint is specified, this error occurs. To resolve this issue, remove the corresponding `ORDER_INDEX` hint.
-- All possible join methods are excluded by using `NO_JOIN` hints.
+- A query excludes all possible join methods by using the `NO_JOIN` related hints.
 
 ```sql
 CREATE TABLE t1 (a INT);
