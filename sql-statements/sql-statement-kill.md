@@ -65,6 +65,8 @@ Starting from v6.1.0, TiDB supports the Global Kill feature, which is enabled by
 
 <CustomContent platform="tidb-cloud">
 
+Starting from v7.3.0, TiDB supports generating 32-bit connection IDs, which is enabled by default. When both the Global Kill feature and 32-bit connection ID are enabled, You can terminate queries or connections in the MySQL command-line using <kbd>Control+C</kbd>.
+
 Starting from v6.1.0, TiDB supports the Global Kill feature, which is enabled by default.
 
 </CustomContent>
