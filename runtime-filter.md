@@ -5,7 +5,7 @@ summary: Learn the working principles of Runtime Filter and how to use it.
 
 # Runtime Filter
 
-Runtime Filter is a new feature introduced in TiDB v7.3, which aims to improve the performance of hash join in MPP scenarios. By generating filters dynamically to filter the data of hash join in advance, TiDB can reduce the amount of scanning and the amount of calculation of hash join at runtime, and ultimately improving the query performance.
+Runtime Filter is a new feature introduced in TiDB v7.3, which aims to improve the performance of hash join in MPP scenarios. By generating filters dynamically to filter the data of hash join in advance, TiDB can reduce the amount of data scanning and the amount of calculation of hash join at runtime, ultimately improving the query performance.
 
 ## Concepts
 
