@@ -52,9 +52,10 @@ The execution plan of hash join is usually as follows:
 
 The execution process of Runtime Filter is as follows:
 
-1. Scan the data of the `date_dim` table, and `PhysicalHashJoin` calculates a filter condition based on the `date_dim` data, such as `date_dim in (2001/01/01~2001/12/31)`.
-2. Send the filter condition to the `TableFullScan` operator that is waiting to scan `store_sales`.
-3. The filter condition is applied to `store_sales`, and the filtered data is passed to `PhysicalHashJoin`, thereby reducing the amount of data scanned by the probe side and the amount of calculation of matching the hash table.
+1. Scan the data of the `date_dim` table.
+2. `PhysicalHashJoin` calculates a filter condition based on the data of the build side, such as `date_dim in (2001/01/01~2001/12/31)`.
+3. Send the filter condition to the `TableFullScan` operator that is waiting to scan `store_sales`.
+4. The filter condition is applied to `store_sales`, and the filtered data is passed to `PhysicalHashJoin`, thereby reducing the amount of data scanned by the probe side and the amount of calculation of matching the hash table.
 
 ```
                          2. Build RF values
@@ -71,7 +72,9 @@ The execution process of Runtime Filter is as follows:
       +-----------------+                +----------------+
 ```
 
-From the above two figures, you can see that the amount of data scanned by `store_sales` is reduced from 1 million to 5000. By reducing the amount of data scanned by `TableFullScan`, Runtime Filter can reduce the number of times to match the hash table, avoid unnecessary I/O and network transmission, and significantly improve the efficiency of the join operation.
+*(RF is short for Runtime Filter)*
+
+From the above two figures, you can see that the amount of data scanned by `store_sales` is reduced from 1 million to 5000. By reducing the amount of data scanned by `TableFullScan`, Runtime Filter can reduce the number of times to match the hash table, avoiding unnecessary I/O and network transmission, this significantly improving the efficiency of the join operation.
 
 ## Use Runtime Filter
 
