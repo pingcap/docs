@@ -10,8 +10,8 @@ Runtime Filter is a new feature introduced in TiDB v7.3, which aims to improve t
 ## Concepts
 
 - Hash join: a way to implement the join relational algebra. It gets the result of Join by building a hash table on one side and continuously matching the hash table on the other side.
-- Build side: one side of hash join used to build a hash table. In this document, the right table of Join is called the build side by default.
-- Probe side: one side of hash join used to continuously match the hash table. In this document, the left table of Join is called the probe side by default.
+- Build side: one side of hash join used to build a hash table. In this document, the right table of hash join is called the build side by default.
+- Probe side: one side of hash join used to continuously match the hash table. In this document, the left table of hash join is called the probe side by default.
 - Filter: also known as predicate, which refers to the filter condition in this document.
 
 ## Working principles of Runtime Filter
@@ -79,7 +79,7 @@ To use Runtime Filter, you need to create a table with TiFlash replicas and set 
 
 Taking the TPC-DS dataset as an example, this section uses the `catalog_sales` table and the `date_dim` table for join operations to illustrate how Runtime Filter improves query efficiency.
 
-### Step 1: Create a table with TiFlash replicas
+### Step 1. Create TiFlash replicas for tables to be joined
 
 Add a TiFlash replica to each of the `catalog_sales` table and the `date_dim` table.
 
@@ -91,7 +91,7 @@ ALTER TABLE date_dim SET tiflash REPLICA 1;
 Wait until the TiFlash replicas of the two tables are ready, that is, the `AVAILABLE` and `PROGRESS` fields of the replicas are both `1`.
 
 ```sql
-mysql> SELECT * FROM INFORMATION_SCHEMA.TIFLASH_REPLICA WHERE TABLE_NAME='catalog_sales';
+SELECT * FROM INFORMATION_SCHEMA.TIFLASH_REPLICA WHERE TABLE_NAME='catalog_sales';
 +--------------+---------------+----------+---------------+-----------------+-----------+----------+
 | TABLE_SCHEMA | TABLE_NAME    | TABLE_ID | REPLICA_COUNT | LOCATION_LABELS | AVAILABLE | PROGRESS |
 +--------------+---------------+----------+---------------+-----------------+-----------+----------+
@@ -106,7 +106,7 @@ mysql> SELECT * FROM INFORMATION_SCHEMA.TIFLASH_REPLICA WHERE TABLE_NAME='date_d
 +--------------+------------+----------+---------------+-----------------+-----------+----------+
 ```
 
-### Step 2: Enable Runtime Filter
+### Step 2. Enable Runtime Filter
 
 To enable Runtime Filter, set the value of the system variable [`tidb_runtime_filter_mode`](/system-variables.md#tidb_runtime_filter_new-in-v720) to `LOCAL`.
 
@@ -127,9 +127,9 @@ SHOW VARIABLES LIKE "tidb_runtime_filter_mode";
 
 If the value of the system variable is `LOCAL`, Runtime Filter is enabled.
 
-### Step 3: Execute the query
+### Step 3. Execute the query
 
-Before executing the query, check the query plan. Use the [`EXPLAIN` statement](/sql-statements/sql-statement-explain.md) to check whether Runtime Filter has taken effect.
+Before executing the query, use the [`EXPLAIN` statement](/sql-statements/sql-statement-explain.md) to show the execution plan and check whether Runtime Filter has taken effect.
 
 ```sql
 EXPLAIN SELECT cs_ship_date_sk FROM catalog_sales, date_dim
@@ -171,14 +171,14 @@ WHERE d_date = '2002-2-01' AND
      cs_ship_date_sk = d_date_sk;
 ```
 
-### Step 4: Performance comparison
+### Step 4. Performance comparison
 
 This example uses the 50 GB TPC-DS data. After Runtime Filter is enabled, the query time is reduced from 0.38 seconds to 0.17 seconds, and efficiency is improved by 50%. You can use the `ANALYZE` statement to view the execution time of each operator after Runtime Filter takes effect.
 
 The following is the execution information of the query when Runtime Filter is not enabled:
 
 ```sql
-mysql> EXPLAIN ANALYZE SELECT cs_ship_date_sk FROM catalog_sales, date_dim WHERE d_date = '2002-2-01' AND cs_ship_date_sk = d_date_sk;
+EXPLAIN ANALYZE SELECT cs_ship_date_sk FROM catalog_sales, date_dim WHERE d_date = '2002-2-01' AND cs_ship_date_sk = d_date_sk;
 +----------------------------------------+-------------+----------+--------------+---------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------+---------+------+
 | id                                     | estRows     | actRows  | task         | access object       | execution info                                                                                                                                                                                                                                                                                                                                                                                    | operator info                                                                                | memory  | disk |
 +----------------------------------------+-------------+----------+--------------+---------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------+---------+------+
@@ -198,7 +198,7 @@ mysql> EXPLAIN ANALYZE SELECT cs_ship_date_sk FROM catalog_sales, date_dim WHERE
 The following is the execution information of the query when Runtime Filter is enabled:
 
 ```sql
-mysql> EXPLAIN ANALYZE SELECT cs_ship_date_sk FROM catalog_sales, date_dim
+EXPLAIN ANALYZE SELECT cs_ship_date_sk FROM catalog_sales, date_dim
     -> WHERE d_date = '2002-2-01' AND
     ->      cs_ship_date_sk = d_date_sk;
 +----------------------------------------+-------------+---------+--------------+---------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------+---------+------+
@@ -224,7 +224,7 @@ By comparing the execution information of the two queries, you can find the foll
 
 ### Best practices
 
-Runtime Filter is applicable to the scenario where a large table and a small table are joined, such as the join query of a fact table and a dimension table. When the dimension table has a small amount of hit data, it means that the filter has fewer values, so the fact table can filter out the data that does not meet the conditions. Compared with the default scenario where the entire fact table is scanned, this significantly improves the query performance.
+Runtime Filter is applicable to the scenario where a large table and a small table are joined, such as a join query of a fact table and a dimension table. When the dimension table has a small amount of hit data, it means that the filter has fewer values, so the fact table can filter out the data that does not meet the conditions more effectively. Compared with the default scenario where the entire fact table is scanned, this significantly improves the query performance.
 
 The join operation of the `Sales` table and the `date_dim` table in TPC-DS is a typical example.
 
@@ -238,7 +238,7 @@ The mode of Runtime Filter is the relationship between the **Filter Sender opera
 
 - `OFF`: Runtime Filter is disabled. After it is disabled, the query behavior is the same as in previous versions.
 - `LOCAL`: Runtime Filter is enabled in the local mode. In the local mode, the **Filter Sender operator** and **Filter Receiver operator** are in the same MPP Task. In other words, Runtime Filter can be applied to the scenario where the hash join operator and Table Scan operator are in the same Task. Currently, Runtime Filter only supports the local mode. To enable this mode, set it to `LOCAL`.
-- `GLOBAL`: currently, the global mode is not supported. You cannot be set Runtime Filter to this mode.
+- `GLOBAL`: currently, the global mode is not supported. You cannot set Runtime Filter to this mode.
 
 ### Runtime Filter type
 
