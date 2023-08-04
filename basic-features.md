@@ -105,6 +105,7 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 | [MPP execution engine](/explain-mpp.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y | N |
 | [MPP execution engine - compression exchange](/explain-mpp.md#mpp-version-and-exchange-data-compression) | Y | Y | Y | N | N | N | N | N | N | N | N |
 | [TiFlash Pipeline Model](/tiflash/tiflash-pipeline-model.md) | E | E | N | N | N | N | N | N | N | N | N |
+| [TiFlash replica selection strategy](/system-variables.md#tiflash_replica_read-new-in-v730) | Y | N | N | N | N | N | N | N | N | N | N |
 | [Index Merge](/explain-index-merge.md) | Y | Y | Y | Y | Y | Y | E | E | E | E | E |
 | [Placement Rules in SQL](/placement-rules-in-sql.md) | Y | Y | Y | Y | Y | E | E | N | N | N | N |
 | [Cascades Planner](/system-variables.md#tidb_enable_cascades_planner) | E | E | E | E | E | E | E | E | E | E | E |
