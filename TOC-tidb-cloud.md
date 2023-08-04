@@ -221,9 +221,75 @@
 - Stream Data
   - [Changefeed Overview](/tidb-cloud/changefeed-overview.md)
   - [To MySQL Sink](/tidb-cloud/changefeed-sink-to-mysql.md)
+<<<<<<< HEAD
   - [To Kafka Sink (Beta)](/tidb-cloud/changefeed-sink-to-apache-kafka.md)
   - [To TiDB Cloud Sink](/tidb-cloud/changefeed-sink-to-tidb-cloud.md)
   - [To Cloud Storage](/tidb-cloud/changefeed-sink-to-cloud-storage.md)
+=======
+  - [To Kafka Sink](/tidb-cloud/changefeed-sink-to-apache-kafka.md)
+- Back Up and Restore
+  - [Automatic Backup](/tidb-cloud/backup-and-restore.md)
+  - [Manual Backup](/tidb-cloud/backup-and-restore.md#manual-backup)
+  - [Restore](/tidb-cloud/backup-and-restore.md#restore)
+- Monitor and Alert
+  - [Overview](/tidb-cloud/monitor-tidb-cluster.md)
+  - [Built-in Monitoring](/tidb-cloud/built-in-monitoring.md)
+  - [Built-in Alerting](/tidb-cloud/monitor-built-in-alerting.md)
+  - [Third-Party Monitoring Integrations](/tidb-cloud/third-party-monitoring-integrations.md)
+- Tune Performance
+  - [Overview](/tidb-cloud/tidb-cloud-tune-performance-overview.md)
+  - Analyze Performance
+    - [Use the Diagnosis Tab](/tidb-cloud/tune-performance.md)
+    - [Use Statement Summary Tables](/statement-summary-tables.md)
+  - SQL Tuning
+    - [Overview](/tidb-cloud/tidb-cloud-sql-tuning-overview.md)
+    - Understanding the Query Execution Plan
+      - [Overview](/explain-overview.md)
+      - [`EXPLAIN` Walkthrough](/explain-walkthrough.md)
+      - [Indexes](/explain-indexes.md)
+      - [Joins](/explain-joins.md)
+      - [MPP Queries](/explain-mpp.md)
+      - [Subqueries](/explain-subqueries.md)
+      - [Aggregation](/explain-aggregation.md)
+      - [Views](/explain-views.md)
+      - [Partitions](/explain-partitions.md)
+      - [Index Merge](/explain-index-merge.md)
+    - SQL Optimization Process
+      - [Overview](/sql-optimization-concepts.md)
+      - Logic Optimization
+        - [Overview](/sql-logical-optimization.md)
+        - [Subquery Related Optimizations](/subquery-optimization.md)
+        - [Column Pruning](/column-pruning.md)
+        - [Decorrelation of Correlated Subquery](/correlated-subquery-optimization.md)
+        - [Eliminate Max/Min](/max-min-eliminate.md)
+        - [Predicates Push Down](/predicate-push-down.md)
+        - [Partition Pruning](/partition-pruning.md)
+        - [TopN and Limit Push Down](/topn-limit-push-down.md)
+        - [Join Reorder](/join-reorder.md)
+        - [Derive TopN or Limit from Window Functions](/derive-topn-from-window.md)
+      - Physical Optimization
+        - [Overview](/sql-physical-optimization.md)
+        - [Index Selection](/choose-index.md)
+        - [Statistics](/statistics.md)
+        - [Extended Statistics](/extended-statistics.md)
+        - [Wrong Index Solution](/wrong-index-solution.md)
+        - [Distinct Optimization](/agg-distinct-optimization.md)
+        - [Cost Model](/cost-model.md)
+      - [Prepared Execution Plan Cache](/sql-prepared-plan-cache.md)
+      - [Non-Prepared Execution Plan Cache](/sql-non-prepared-plan-cache.md)
+    - Control Execution Plans
+      - [Overview](/control-execution-plan.md)
+      - [Optimizer Hints](/optimizer-hints.md)
+      - [SQL Plan Management](/sql-plan-management.md)
+      - [The Blocklist of Optimization Rules and Expression Pushdown](/blocklist-control-plan.md)
+      - [Optimizer Fix Controls](/optimizer-fix-controls.md)
+  - [TiKV Follower Read](/follower-read.md)
+  - [Coprocessor Cache](/coprocessor-cache.md)
+  - Garbage Collection (GC)
+     - [Overview](/garbage-collection-overview.md)
+     - [Configuration](/garbage-collection-configuration.md)
+  - [Tune TiFlash performance](/tiflash/tune-tiflash-performance.md)
+>>>>>>> 61098232fb (cloud: customize doc content for TiDB Cloud in v7.1 (#14349) (#14362))
 - Security
   - Identity Access Control
     - [Password Authentication](/tidb-cloud/tidb-cloud-password-authentication.md)
@@ -311,7 +377,13 @@
       - [`ADMIN CHECKSUM TABLE`](/sql-statements/sql-statement-admin-checksum-table.md)
       - [`ADMIN CHECK [TABLE|INDEX]`](/sql-statements/sql-statement-admin-check-table-index.md)
       - [`ADMIN CLEANUP INDEX`](/sql-statements/sql-statement-admin-cleanup.md)
+<<<<<<< HEAD
       - [`ADMIN RECOVER INDEX`](/sql-statements/sql-statement-admin-recover.md)
+=======
+      - [`ADMIN PAUSE DDL`](/sql-statements/sql-statement-admin-pause-ddl.md)
+      - [`ADMIN RECOVER INDEX`](/sql-statements/sql-statement-admin-recover.md)
+      - [`ADMIN RESUME DDL`](/sql-statements/sql-statement-admin-resume-ddl.md)
+>>>>>>> 61098232fb (cloud: customize doc content for TiDB Cloud in v7.1 (#14349) (#14362))
       - [`ADMIN SHOW DDL [JOBS|JOB QUERIES]`](/sql-statements/sql-statement-admin-show-ddl.md)
       - [`ALTER DATABASE`](/sql-statements/sql-statement-alter-database.md)
       - [`ALTER INDEX`](/sql-statements/sql-statement-alter-index.md)
@@ -580,6 +652,10 @@
       - [list](/tidb-cloud/ticloud-project-list.md)
     - [update](/tidb-cloud/ticloud-update.md)
   - [Table Filter](/table-filter.md)
+<<<<<<< HEAD
+=======
+  - [Serverless Tier Limitations](/tidb-cloud/serverless-tier-limitations.md)
+>>>>>>> 61098232fb (cloud: customize doc content for TiDB Cloud in v7.1 (#14349) (#14362))
   - [Resource Control](/tidb-resource-control.md)
   - [TiDB Backend Task Distributed Execution Framework](/tidb-distributed-execution-framework.md)
   - [DDL Execution Principles and Best Practices](/ddl-introduction.md)
