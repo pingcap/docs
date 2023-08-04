@@ -104,6 +104,8 @@
     - [TiFlash Query Result Materialization](/tiflash/tiflash-results-materialization.md)
     - [TiFlash Late Materialization](/tiflash/tiflash-late-materialization.md)
     - [Compatibility](/tiflash/tiflash-compatibility.md)
+  - [Scale a TiDB Cluster](/tidb-cloud/scale-tidb-cluster.md)	
+  - [Pause or Resume a TiDB Cluster](/tidb-cloud/pause-or-resume-tidb-cluster.md)
   - [Upgrade a TiDB Cluster](/tidb-cloud/upgrade-tidb-cluster.md)
   - [Delete a TiDB Cluster](/tidb-cloud/delete-tidb-cluster.md)
 - Migrate or Import Data
