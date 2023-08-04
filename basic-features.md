@@ -151,6 +151,7 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 | [Key partitioning](/partitioned-table.md#key-partitioning) | Y | Y | Y | N | N | N | N | N | N | N | N |
 | [List partitioning](/partitioned-table.md#list-partitioning) | Y | Y | Y | Y | Y | E | E | E | E | E | N |
 | [List COLUMNS partitioning](/partitioned-table.md) | Y | Y | Y | Y | Y | E | E | E | E | E | N |
+| [Default partition for List and List COLUMNS partitioned tables ](/partitioned-table.md#default-list-partition) | Y | N | N | N | N | N | N | N | N | N | N |
 | [`EXCHANGE PARTITION`](/partitioned-table.md) | Y | Y | Y | Y | E | E | E | E | E | E | N |
 | [`REORGANIZE PARTITION`](/partitioned-table.md#reorganize-partitions) | Y | Y | Y | N | N | N | N | N | N | N | N |
 | [`COALESCE PARTITION`](/partitioned-table.md#decrease-the-number-of-partitions) | Y | Y | Y | N | N | N | N | N | N | N | N |
