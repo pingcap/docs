@@ -223,7 +223,7 @@ SELECT /*+ RESOURCE_GROUP(rg1) */ * FROM t limit 10;
 
 > **Warning:**
 >
-> This feature is an experimental feature. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+> This feature is experimental. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
 
 A runaway query is a query that consumes more time or resources than expected. The term **runaway queries** is used in the following to describe the feature of managing the runaway query.
 
@@ -242,7 +242,7 @@ Supported operations (`ACTION`):
 - `COOLDOWN`: the execution priority of the query is lowered to the lowest level. The query continues to execute with the lowest priority and does not occupy resources of other operations.
 - `KILL`: the identified query is automatically terminated and reports an error `Query execution was interrupted, identified as runaway query`.
 
-To avoid too many concurrent runaway queries that exhaust system resources before being identified by conditions, the resource control feature introduces a quick identification mechanism. By using the `WATCH` clause, when a query is identified as a runaway query, the current TiDB instance marks the matching queries as runaway queries immediately in the next period of time (defined by `DURATION`), and takes the corresponding actions, instead of waiting for them to be identified by conditions. The `KILL` operation reports an error `Quarantined and interrupted because of being in runaway watch list`. In summary, it can be assumed that `WATCH` puts the queries matched into the runaway queries watch list, and these queries are identified directly before they are executed, thus achieving quick identification.
+To avoid too many concurrent runaway queries that exhaust system resources, the resource control feature introduces a quick identification mechanism, which can quickly identify and isolate runaway queries. You can use this feature through the `WATCH` clause. When a query is identified as a runaway query, this mechanism extracts the matching feature (defined by the parameter after `WATCH`) of the query. In the next period of time (defined by `DURATION`), the matching feature of the runaway query is added to the watch list, and the TiDB instance matches queries with the watch list. The matching queries are directly marked as runaway queries and isolated according to the corresponding action, instead of waiting for them to be identified by conditions. The `KILL` operation terminates the query and reports an error `Quarantined and interrupted because of being in runaway watch list`.
 
 There are three methods for `WATCH` to match for quick identification:
 
@@ -250,9 +250,9 @@ There are three methods for `WATCH` to match for quick identification:
 - `SIMILAR` indicates all SQL statements with the same pattern are matched by Plan Digest, and the literal values are ignored.
 - `PLAN` indicates all SQL statements with the same pattern are matched by Plan Digest.
 
-The `DURATION` option in `WATCH` indicates the duration of this identification item, which is infinite by default.
+The `DURATION` option in `WATCH` indicates the duration of the identification item, which is infinite by default.
 
-When a watch item is added, neither the matching feature nor the ACTION is changed or deleted whenever the `QUERY_LIMIT` configuration is changed or deleted. You can use `QUERY WATCH REMOVE` to remove a watch item.
+After a watch item is added, neither the matching feature nor the `ACTION` is changed or deleted whenever the `QUERY_LIMIT` configuration is changed or deleted. You can use `QUERY WATCH REMOVE` to remove a watch item.
 
 The parameters of `QUERY_LIMIT` are as follows:
 
@@ -286,32 +286,34 @@ The parameters of `QUERY_LIMIT` are as follows:
 
 For more information about `QUERY WATCH` parameters, see [`QUERY WATCH`](/sql-statements/sql-statement-query-watch.md).
 
-- The `RESOURCE GROUP` is used to specify a resource group. The watch item of the runaway queries added by this statement will be applied to the sessions of this particular resource group. This parameter can be omitted, and when it is omitted, it applies to the `default` resource group.
-- The meaning of `ACTION` is the same as `QUERY LIMIT`. This parameter can be omitted. When it is omitted, it means that the corresponding action after identification adopts the `ACTION` configured by `QUERY LIMIT` in the resource group, and the action does not change with the `QUERY LIMIT` configuration. If there is no `ACTION` configured in the resource group, an error will be reported.
-- The `QueryWatchTextOption` parameter has three options: `SQL DIGEST`, `PLAN DIGEST`, and `SQL TEXT`.
-    - `SQL DIGEST` is the same as that of `SIMILAR`, and the parameters immediately following it can be strings, user-defined variables, and other expressions with string computation results, provided that the required string length is 64, which is the same as the definition of Digest in TiDB.
-    - The meaning of `PLAN DIGEST` is the same as `PLAN`. The input parameter is the Digest string.
-    - `SQL TEXT` can be used as a pattern match on the input SQL as a raw string (`EXACT`), or parsed and compiled into `SQL DIGEST` (`SIMILAR`) or `PLAN DIGEST` (`PLAN`), depending on the parameters immediately following.
+The parameters are as follows:
 
-1. When no resource group is specified, the runaway queries identification list is managed by the default resource group. You can add watch items to the runaway query watch list for the default resource group. You need to set `QUERY LIMIT` for the default resource group in advance.
+- The `RESOURCE GROUP` specifies a resource group. The matching features of runaway queries added by this statement are added to the watch list of the resource group. This parameter can be omitted. If omitted, it applies to the `default` resource group.
+- The meaning of `ACTION` is the same as `QUERY LIMIT`. This parameter can be omitted. If omitted, the corresponding action after identification adopts the `ACTION` configured by `QUERY LIMIT` in the resource group, and the action does not change with the `QUERY LIMIT` configuration. If there is no `ACTION` configured in the resource group, an error is reported.
+- The `QueryWatchTextOption` parameter has three options: `SQL DIGEST`, `PLAN DIGEST`, and `SQL TEXT`.
+    - `SQL DIGEST` is the same as that of `SIMILAR`. The following parameters accept strings, user-defined variables, or other expressions that yield string result. The string length must be 64, which is the same as the Digest definition in TiDB.
+    - `PLAN DIGEST` is the same as `PLAN`. The following parameter is a Digest string.
+    - `SQL TEXT` matches the input SQL as a raw string (`EXACT`), or parses and compiles it into `SQL DIGEST` (`SIMILAR`) or `PLAN DIGEST` (`PLAN`), depending on the following parameter.
+
+- Add a matching feature to the runaway query watch list for the default resource group (you need to set `QUERY LIMIT` for the default resource group in advance).
 
     ```sql
     QUERY WATCH ADD ACTION KILL SQL TEXT EXACT TO 'select * from test.t2';
     ```
 
-2. Add a watch item to the runaway query watch list for the `rg1` resource group via SQL DIGEST. When `ACTION` is not specified, the `ACTION` option already configured for the `rg1` resource group is used.
+- Add a matching feature to the runaway query watch list for the `rg1` resource group by parsing the SQL into SQL Digest. When `ACTION` is not specified, the `ACTION` option already configured for the `rg1` resource group is used.
 
     ```sql
     QUERY WATCH ADD RESOURCE GROUP rg1 SQL TEXT SIMILAR TO 'select * from test.t2';
     ```
 
-3. Add an watch item to the runaway query watch list for the `rg1` resource group via PLAN DIGEST.
+- Add a matching feature to the runaway query watch list for the `rg1` resource group using `PLAN DIGEST`.
 
     ```sql
     QUERY WATCH ADD RESOURCE GROUP rg1 ACTION KILL PLAN DIGEST 'd08bc323a934c39dc41948b0a073725be3398479b6fa4f6dd1db2a9b115f7f57';
     ```
 
-4. Get the watch item ID by querying `information_schema.runaway_watches` and delete the watch item.
+- Get the watch item ID by querying `INFORMATION_SCHEMA.RUNAWAY_WATCHES` and delete the watch item.
    
     ```sql
     SELECT * from information_schema.runaway_watches ORDER BY id;
@@ -357,7 +359,7 @@ You can get more information about runaway queries from the following system tab
     - `identify` means that it matches the condition of the runaway query.
     - `watch` means that it matches the quick identification rule in the watch list.
 
-+ The `information_schema.runaway_watches` table contains records of quick identification rules for runaway queries. See [`RUNAWAY_WATCHES`](/information-schema/information-schema-runaway-watches.md) for details.
++ The `information_schema.runaway_watches` table contains records of quick identification rules for runaway queries. For more information, see [`RUNAWAY_WATCHES`](/information-schema/information-schema-runaway-watches.md).
 
 ## Disable resource control
 
