@@ -4440,8 +4440,8 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 - Default value: `ON`
 - When accesing a partitioned table in [dynamic pruning mode](/partitioned-table.md#dynamic-pruning-mode), TiDB aggregates the statistics of each partition to generate GlobalStats. This variable controls the generation of GlobalStats when partition statistics are missing.
 
-    - When this variable is `ON`, TiDB skips missing partition statistics when generating GlobalStats so the generation of GlobalStats is not affected.
-    - When this variable is `OFF`, TiDB stops generating GloablStats when it detects any missing partition statistics.
+    - If this variable is `ON`, TiDB skips missing partition statistics when generating GlobalStats so the generation of GlobalStats is not affected.
+    - If this variable is `OFF`, TiDB stops generating GloablStats when it detects any missing partition statistics.
 
 ### tidb_skip_utf8_check
 
