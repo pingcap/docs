@@ -4891,10 +4891,14 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
     - `closest_adaptive` means preferring to use TiFlash replicas in the same zone as the TiDB node initiating the query. If replicas in this zone do not contain all the required data, the query will involve TiFlash replicas from other zones along with their corresponding TiFlash nodes.
     - `closest_replicas` means using only TiFlash replicas in the same zone as the TiDB node initiating the query. If replicas in this zone do not contain all the required data, the query will return an error.
 
+<CustomContent platform="tidb">
+
 > **Note:**
 > 
 > - If TiDB nodes do not have [zone attributes](/schedule-replicas-by-topology-labels.md#optional-configure-labels-for-tidb) configured and `tiflash_replica_read` is not set to `all_replicas`, TiFlash ignores the replica selection strategy. Instead, it uses all TiFlash replicas for queries and returns the `The variable tiflash_replica_read is ignored.` warning.
 > - If TiFlash nodes do not have [zone attributes](/schedule-replicas-by-topology-labels.md#configure-labels-for-tikv-and-tiflash) configured, they are treated as nodes not belonging to any zone.
+
+</CustomContent>
 
 ### time_zone
 
