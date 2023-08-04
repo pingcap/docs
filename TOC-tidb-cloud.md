@@ -188,6 +188,7 @@
       - [Optimizer Hints](/optimizer-hints.md)
       - [SQL Plan Management](/sql-plan-management.md)
       - [The Blocklist of Optimization Rules and Expression Pushdown](/blocklist-control-plan.md)
+      - [Optimizer Fix Controls](/optimizer-fix-controls.md)
   - [TiKV Follower Read](/follower-read.md)
   - [Coprocessor Cache](/coprocessor-cache.md)
   - Garbage Collection (GC)
