@@ -301,8 +301,8 @@ ALTER TABLE table_name LAST PARTITION LESS THAN (<expression>)
 
 Before creating a List partitioned table, make sure the following system variables are set to their default values of `ON`:
 
-- [`tidb_enable_list_partition`](/system-variables#tidb_enable_list_partition-new-in-v50)
-- [`tidb_enable_table_partition`](/system-variables#tidb_enable_table_partition)
+- [`tidb_enable_list_partition`](/system-variables.md#tidb_enable_list_partition-new-in-v50)
+- [`tidb_enable_table_partition`](/system-variables.md#tidb_enable_table_partition)
 
 List partitioning is similar to Range partitioning. Unlike Range partitioning, in List partitioning, the partitioning expression values for all rows in each partition are in a given value set. This value set defined for each partition can have any number of values but cannot have duplicate values. You can use the `PARTITION ... VALUES IN (...)` clause to define a value set.
 
