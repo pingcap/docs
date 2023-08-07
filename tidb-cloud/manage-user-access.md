@@ -290,7 +290,7 @@ To invite a member to a project, take the following steps:
 
 7. After receiving this email, the user needs to click the link in the email to verify the identity, and a new page shows.
 
-8. On the new page, the user needs to view and agree with our license, and then click **Submit** to create the account in TiDB Cloud. After that, the user is redirected to the login page.
+8. On the new page, the user needs to set the login information (including first name, last name, and password), view and agree with our license, and then click **Join** to create an account in TiDB Cloud. After that, the user is redirected to the login page.
 
 > **Note:**
 >
