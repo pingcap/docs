@@ -5,7 +5,10 @@ summary: Learn how to create, edit, and delete an API key for a Data App.
 
 # API Keys in Data Service
 
-The TiDB Cloud Data API uses [HTTP Digest Authentication](https://en.wikipedia.org/wiki/Digest_access_authentication). It protects your private key from being sent over the network. For more details about HTTP Digest Authentication, refer to the [IETF RFC](https://datatracker.ietf.org/doc/html/rfc7616).
+The TiDB Cloud Data API supports both [Basic Authentication](https://en.wikipedia.org/wiki/Basic_access_authentication) and [Digest Authentication](https://en.wikipedia.org/wiki/Digest_access_authentication).
+
+- [Basic Authentication](https://en.wikipedia.org/wiki/Basic_access_authentication) lets you use API public key as the username and private key as the password, with requests using standard HTTP Basic Authentication.
+- [Digest Authentication](https://en.wikipedia.org/wiki/Digest_access_authentication) protects your private key from being sent over the network. For more details about HTTP Digest Authentication, refer to the [IETF RFC](https://datatracker.ietf.org/doc/html/rfc7616).
 
 > **Note:**
 >
@@ -13,7 +16,7 @@ The TiDB Cloud Data API uses [HTTP Digest Authentication](https://en.wikipedia.o
 
 ## API key overview
 
-- An API key contains a public key and a private key, which act as the username and password required in the HTTP Digest Authentication. The private key is only displayed upon the key creation.
+- An API key contains a public key and a private key, which act as the username and password required in the authentication. The private key is only displayed upon the key creation.
 - Each API key belongs to one Data App only and is used to access the data in the TiDB Cloud clusters.
 - You must provide the correct API key in every request. Otherwise, TiDB Cloud responds with a `401` error.
 

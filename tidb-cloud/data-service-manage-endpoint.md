@@ -260,14 +260,14 @@ TiDB Cloud Data Service generates code examples to help you call an endpoint. To
     > - The code examples are generated based on the properties and parameters of the endpoint.
     > - Currently, TiDB Cloud Data Service only provides the curl code example.
 
-    - Environment: choose **Test** or **Online** depending on your need. The **Online** environment is available only after you deploy the endpoint.
-    - Authentication method: choose **Basic Auth** or **Digest Auth**.
-        - **Basic Auth** transmits your API key as plain text.
-        - **Digest Auth** transmits your API key in an encrypted form so it is more secure.
+    - Environment: choose **Test Environment** or **Online Environment** depending on your need. **Online Environment** is available only after you deploy the endpoint.
+    - Authentication method: choose **Basic Authentication** or **Digest Authentication**.
+        - **Basic Authentication** transmits your API key as plain text.
+        - **Digest Authentication** transmits your API key in an encrypted form so it is more secure.
 
-      Compared with **Basic Auth**, the curl code of **Digest Auth** includes an additional `--digest`option.
+      Compared with **Basic Authentication**, the curl code of **Digest Authentication** includes an additional `--digest`option.
 
-    Here is an example of a curl code snippet for a `POST` request that enables **Batch Operation** and uses **Digest Auth**:
+    Here is an example of a curl code snippet for a `POST` request that enables **Batch Operation** and uses **Digest Authentication**:
 
     <SimpleTab>
     <div label="Test Environment">
