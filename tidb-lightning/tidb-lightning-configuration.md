@@ -130,7 +130,7 @@ driver = "file"
 # - "ignore": when encountering conflicting primary or unique key records, TiDB Lightning retains the old data and ignores the new data.
 # The new version strategy cannot be used together with tikv-importer.duplicate-resolution (the old version of conflict detection).
 strategy = ""
-# Controls the upper limit of the conflicting data that can be handled when strategy is "replace" or "ignore". You can set it only when strategy is "replace" or "ignore". The default value is 9223372036854775807, which means that almost all errors are tolerated.
+# Controls the upper limit of the conflicting data that can be handled when strategy is "replace" or "ignore". You can set it only when strategy is "replace" or "ignore". The default value is 9223372036854775807, which means that almost all errors are tolerant.
 # threshold = 9223372036854775807
 # Controls the maximum number of records in the conflict_records table. The default value is 100. If the strategy is "ignore", the conflict records that are ignored are recorded; if the strategy is "replace", the conflict records that are overwritten are recorded. However, the "replace" strategy cannot record the conflict records in the logical import mode.
 # max-record-rows = 100

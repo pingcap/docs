@@ -116,7 +116,7 @@ The meaning of configuration values are as follows:
 >
 > The conflict detection result in the physical import mode might differ from SQL-based import due to internal implementation and limitation of TiDB Lightning.
 
-When the strategy is `"replace"` or `"ignore"`, conflicting data is treated as [conflict errors](/tidb-lightning/tidb-lightning-error-resolution.md#conflict-errors). If the [`conflict.threshold`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task) value is greater than `0`, TiDB Lightning tolerates the specified number of conflict errors. The default value is `9223372036854775807`, which means that almost all errors are tolerated. For more information, see [error resolution](/tidb-lightning/tidb-lightning-error-resolution.md).
+When the strategy is `"replace"` or `"ignore"`, conflicting data is treated as [conflict errors](/tidb-lightning/tidb-lightning-error-resolution.md#conflict-errors). If the [`conflict.threshold`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task) value is greater than `0`, TiDB Lightning tolerates the specified number of conflict errors. The default value is `9223372036854775807`, which means that almost all errors are tolerant. For more information, see [error resolution](/tidb-lightning/tidb-lightning-error-resolution.md).
 
 The new version of conflict detection has the following limitations:
 

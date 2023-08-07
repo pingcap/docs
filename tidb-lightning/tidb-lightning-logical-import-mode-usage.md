@@ -56,9 +56,9 @@ Conflicting data refers to two or more records with the same data in the PK or U
 | `"error"` | Pausing the import and reporting an error. | `INSERT INTO ...` |
 |  `""`  | No actions. If data with primary and unique key conflicts exists, the subsequent step reports an error. |  None   |
 
-When the strategy is `"error"`, errors caused by conflicting data directly terminates the import task. When the strategy is `"replace"` or `"ignore"`, you can control the maximum tolerable conflicts by configuring [`conflict.threshold`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task). The default value is `9223372036854775807`, which means that almost all errors are tolerable.
+When the strategy is `"error"`, errors caused by conflicting data directly terminates the import task. When the strategy is `"replace"` or `"ignore"`, you can control the maximum tolerant conflicts by configuring [`conflict.threshold`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task). The default value is `9223372036854775807`, which means that almost all errors are tolerant.
 
-When the strategy is `"ignore"`, conflicting data is recorded in the downstream `conflict_records` table. For further details, see [tolerable errors](/tidb-lightning/tidb-lightning-error-resolution.md). In this case, you can limit the records by configuring [`conflict.max-record-rows`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task), and conflicting data that exceeds the limit is skipped and not recorded. The default value is `100`.
+When the strategy is `"ignore"`, conflicting data is recorded in the downstream `conflict_records` table. For further details, see [Error report](/tidb-lightning/tidb-lightning-error-resolution.md#error-report). In this case, you can limit the records by configuring [`conflict.max-record-rows`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task), and conflicting data that exceeds the limit is skipped and not recorded. The default value is `100`.
 
 ## Performance tuning
 
