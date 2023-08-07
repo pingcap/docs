@@ -4311,7 +4311,7 @@ SHOW WARNINGS;
 - Type: Enumeration
 - Default value: `OFF`
 - Possible values: `OFF`, `LOCAL`
-- Controls the mode of Runtime Filter, that is, the relationship between the **Filter Sender operator** and **Filter Receiver operator**. There are two modes: `OFF` and `LOCAL`. `OFF` means disabling Runtime Filter. `LOCAL` means enabling Runtime Filter in the local mode. For more information, refer to [Runtime Filter mode](/runtime-filter.md#runtime-filter-mode).
+- Controls the mode of Runtime Filter, that is, the relationship between the **Filter Sender operator** and **Filter Receiver operator**. There are two modes: `OFF` and `LOCAL`. `OFF` means disabling Runtime Filter. `LOCAL` means enabling Runtime Filter in the local mode. For more information, see [Runtime Filter mode](/runtime-filter.md#runtime-filter-mode).
 
 ### tidb_runtime_filter_type <span class="version-mark">New in v7.2.0</span>
 
@@ -4320,7 +4320,7 @@ SHOW WARNINGS;
 - Type: Enumeration
 - Default value: `IN`
 - Possible values: `IN`
-- Controls the type of predicate used by the generated Filter operator. Currently, only one type is supported: `IN`. For more information, refer to [Runtime Filter type](/runtime-filter.md#runtime-filter-type).
+- Controls the type of predicate used by the generated Filter operator. Currently, only one type is supported: `IN`. For more information, see [Runtime Filter type](/runtime-filter.md#runtime-filter-type).
 
 ### tidb_scatter_region
 

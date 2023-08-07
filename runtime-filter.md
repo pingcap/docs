@@ -74,7 +74,7 @@ The execution process of Runtime Filter is as follows:
 
 *(RF is short for Runtime Filter)*
 
-From the above two figures, you can see that the amount of data scanned by `store_sales` is reduced from 1 million to 5000. By reducing the amount of data scanned by `TableFullScan`, Runtime Filter can reduce the number of times to match the hash table, avoiding unnecessary I/O and network transmission, this significantly improving the efficiency of the join operation.
+From the above two figures, you can see that the amount of data scanned by `store_sales` is reduced from 1 million to 5000. By reducing the amount of data scanned by `TableFullScan`, Runtime Filter can reduce the number of times to match the hash table, avoiding unnecessary I/O and network transmission, thus significantly improving the efficiency of the join operation.
 
 ## Use Runtime Filter
 
@@ -101,7 +101,7 @@ SELECT * FROM INFORMATION_SCHEMA.TIFLASH_REPLICA WHERE TABLE_NAME='catalog_sales
 | tpcds50      | catalog_sales |     1055 |             1 |                 |         1 |        1 |
 +--------------+---------------+----------+---------------+-----------------+-----------+----------+
 
-mysql> SELECT * FROM INFORMATION_SCHEMA.TIFLASH_REPLICA WHERE TABLE_NAME='date_dim';
+SELECT * FROM INFORMATION_SCHEMA.TIFLASH_REPLICA WHERE TABLE_NAME='date_dim';
 +--------------+------------+----------+---------------+-----------------+-----------+----------+
 | TABLE_SCHEMA | TABLE_NAME | TABLE_ID | REPLICA_COUNT | LOCATION_LABELS | AVAILABLE | PROGRESS |
 +--------------+------------+----------+---------------+-----------------+-----------+----------+
