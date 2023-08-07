@@ -215,7 +215,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.3/quick-start-with-
 ### 系统表
 
 - 新增系统表 `mysql.tidb_timers` 用来存储系统内部定时器的元信息。
-	
+
 ## Deprecated features
 
 - note [#issue](链接) @[贡献者 GitHub ID](链接)
@@ -337,4 +337,16 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.3/quick-start-with-
 
 We would like to thank the following contributors from the TiDB community:
 
-- [Contributor GitHub ID](链接)
+- [charleszheng44](https://github.com/charleszheng44)
+- [dhysum](https://github.com/dhysum)
+- [haiyux](https://github.com/haiyux)
+- [Jiang-Hua](https://github.com/Jiang-Hua)
+- [Jille](https://github.com/Jille)
+- [jiyfhust](https://github.com/jiyfhust)
+- [krishnaduttPanchagnula](https://github.com/krishnaduttPanchagnula)
+- [L-maple](https://github.com/L-maple)
+- [pingandb](https://github.com/pingandb)
+- [testwill](https://github.com/testwill)
+- [tisonkun](https://github.com/tisonkun)
+- [xuyifangreeneyes](https://github.com/xuyifangreeneyes)
+- [yumchina](https://github.com/yumchina)
