@@ -19,8 +19,8 @@ Compared with TiDB [6.4.0-DMR](/releases/release-6.4.0.md), TiDB 6.5.0 introduce
 >
 > Compared with the previous LTS 6.1.0, TiDB 6.5.0 also include new features, improvements, and bug fixes released in [6.2.0-DMR](/releases/release-6.2.0.md), [6.3.0-DMR](/releases/release-6.3.0.md), and [6.4.0-DMR](/releases/release-6.4.0.md).
 >
-> - To get a full list of changes between the LTS 6.1.0 and 6.5.0, besides this release notes, also see [6.2.0-DMR release notes](/releases/release-6.2.0.md), [6.3.0-DMR release notes](/releases/release-6.3.0.md), and [6.4.0-DMR release notes](/releases/release-6.4.0.md).
-> - To have a quick comparison of key features between LTS 6.1.0 and 6.5.0, you can check the `v6.1` and `v6.5` columns in [TiDB features](/basic-features.md).
+> - To get a full list of changes between the 6.1.0 LTS and 6.5.0 LTS versions, in addition to this release notes, also see [6.2.0-DMR release notes](/releases/release-6.2.0.md), [6.3.0-DMR release notes](/releases/release-6.3.0.md), and [6.4.0-DMR release notes](/releases/release-6.4.0.md).
+> - To have a quick comparison of key features between the 6.1.0 LTS and 6.5.0 LTS versions, you can check the `v6.1` and `v6.5` columns in [TiDB features](/basic-features.md).
 
 - The [index acceleration](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) feature becomes generally available (GA), which improves the performance of adding indexes by about 10 times compared with v6.1.0.
 - The TiDB global memory control becomes GA, and you can control the memory consumption threshold via [`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-new-in-v640).
