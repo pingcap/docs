@@ -15,7 +15,7 @@ The API has the following features:
 
 - **JSON entities.** All entities are expressed in JSON.
 - **HTTPS-only.** You can only access the API via HTTPS, ensuring all the data sent over the network is encrypted with TLS.
-- **Key-based access and digest authentication.** Before you access TiDB Cloud API, you must generate an API key. All requests are authenticated through [HTTP Digest Authentication](https://en.wikipedia.org/wiki/Digest_access_authentication), ensuring the API key is never sent over the network.
+- **Key-based access and authentication.** Before you access TiDB Cloud API, you must generate an API key for authentication. You can use either [Basic Authentication](https://en.wikipedia.org/wiki/Basic_access_authentication) or [Digest Authentication](https://en.wikipedia.org/wiki/Digest_access_authentication) to call an endpoint depending on your security requirement.
 
 To start using TiDB Cloud API, refer to the following resources in [TiDB Cloud API Documentation](https://docs.pingcap.com/tidbcloud/api/v1beta):
 
