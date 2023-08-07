@@ -78,7 +78,7 @@ From the above two figures, you can see that the amount of data scanned by `stor
 
 ## Use Runtime Filter
 
-To use Runtime Filter, you need to create a table with TiFlash replicas and set [`tidb_runtime_filter_mode`](/system-variables.md#tidb_runtime_filter_mode-introduced-in-v720) to `LOCAL`.
+To use Runtime Filter, you need to create a table with TiFlash replicas and set [`tidb_runtime_filter_mode`](/system-variables.md#tidb_runtime_filter_mode-new-in-v720) to `LOCAL`.
 
 Taking the TPC-DS dataset as an example, this section uses the `catalog_sales` table and the `date_dim` table for join operations to illustrate how Runtime Filter improves query efficiency.
 
@@ -111,7 +111,7 @@ SELECT * FROM INFORMATION_SCHEMA.TIFLASH_REPLICA WHERE TABLE_NAME='date_dim';
 
 ### Step 2. Enable Runtime Filter
 
-To enable Runtime Filter, set the value of the system variable [`tidb_runtime_filter_mode`](/system-variables.md#tidb_runtime_filter_new-in-v720) to `LOCAL`.
+To enable Runtime Filter, set the value of the system variable [`tidb_runtime_filter_mode`](/system-variables.md#tidb_runtime_filter_mode-new-in-v720  ) to `LOCAL`.
 
 ```sql
 SET tidb_runtime_filter_mode="LOCAL";
