@@ -4432,7 +4432,7 @@ tidb> set tx_isolation='serializable';
 Query OK, 0 rows affected, 1 warning (0.00 sec)
 ```
 
-### tidb_skip_missing_partition_stats <span class="version-mark">New in  v7.3.0</span>
+### tidb_skip_missing_partition_stats <span class="version-mark">New in v7.3.0</span>
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
