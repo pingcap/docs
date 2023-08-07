@@ -1,33 +1,31 @@
 ---
-title: Connect to TiDB Dedicated via Private Endpoint with AWS
-summary: Learn how to connect to your TiDB Cloud cluster via private endpoint with AWS.
+title: Connect to TiDB Dedicated via Private Service Connect on Google Cloud
+summary: Learn how to connect to your TiDB Cloud cluster via Private Service Connect on Google Cloud.
 ---
 
-# Connect to TiDB Dedicated via Private Endpoint with AWS
+# Connect to TiDB Dedicated via Private Service Connect on Google Cloud
 
-This document describes how to connect to your TiDB Dedicated cluster via private endpoint with AWS.
+This document describes how to connect to your TiDB Dedicated cluster via Private Service Connect on Google Cloud.
 
 > **Tip:**
 >
 > To learn how to connect to a TiDB Serverless cluster via private endpoint, see [Connect to TiDB Serverless via Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections-serverless.md).
-> To learn how to connect to a TiDB Dedicated cluster via private endpoint on Google Cloud, see [Connect to TiDB Dedicated via Private Service Connect on Google Cloud](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md).
 
-TiDB Cloud supports highly secure and one-way access to the TiDB Cloud service hosted in an AWS VPC via the [AWS PrivateLink](https://aws.amazon.com/privatelink/?privatelink-blogs.sort-by=item.additionalFields.createdDate&privatelink-blogs.sort-order=desc), as if the service were in your own VPC. A private endpoint is exposed in your VPC and you can create a connection to the TiDB Cloud service via the endpoint with permission.
+TiDB Cloud supports highly secure and one-way access to the TiDB Cloud service hosted in an Google Cloud VPC via the [Private Service Connect](https://cloud.google.com/vpc/docs/private-service-connect), as if the service were in your own VPC. A private endpoint is exposed in your VPC and you can create a connection to the TiDB Cloud service via the endpoint with permission.
 
-Powered by AWS PrivateLink, the endpoint connection is secure and private, and does not expose your data to the public internet. In addition, the endpoint connection supports CIDR overlap and is easier for network management.
+Powered by Google Cloud Private Service Connect, the endpoint connection is secure and private, and does not expose your data to the public internet. In addition, the endpoint connection supports CIDR overlap and is easier for network management.
 
 The architecture of the private endpoint is as follows:
 
-![Private endpoint architecture](/media/tidb-cloud/google-cloud-psc-endpoint-overview.png)
+![Private Service Connect architecture](/media/tidb-cloud/google-cloud-psc-endpoint-overview.png)
 
-For more detailed definitions of the private endpoint and endpoint service, see the following AWS documents:
+For more detailed definitions of the private endpoint and endpoint service, see the following Google Cloud documents:
 
-- [What is AWS PrivateLink?](https://docs.aws.amazon.com/vpc/latest/privatelink/what-is-privatelink.html)
-- [AWS PrivateLink concepts](https://docs.aws.amazon.com/vpc/latest/privatelink/concepts.html)
+- [Private Service Connect](https://cloud.google.com/vpc/docs/private-service-connect)
+- [Using Private Service Connect to publish and consume services](https://codelabs.developers.google.com/cloudnet-psc-ilb#0)
 
 ## Restrictions
 
-- Currently, TiDB Cloud supports private endpoint connection only when the endpoint service is hosted in AWS. If the service is hosted in Google Cloud Platform (GCP), the private endpoint is not applicable.
 - Private endpoint connection across regions is not supported.
 
 In most scenarios, you are recommended to use private endpoint connection over VPC peering. However, in the following scenarios, you should use VPC peering instead of private endpoint connection:
@@ -36,7 +34,7 @@ In most scenarios, you are recommended to use private endpoint connection over V
 - You are using a TiCDC cluster to replicate data to a downstream cluster (such as Amazon Aurora, MySQL, and Kafka) but you cannot maintain the endpoint service on your own.
 - You are connecting to PD or TiKV nodes directly.
 
-## Set up a private endpoint with AWS
+## Set up a private endpoint with Google Cloud Private Service Connect
 
 To connect to your TiDB Dedicated cluster via a private endpoint, complete the [prerequisites](#prerequisites) and follow these steps:
 
@@ -69,7 +67,7 @@ Your service endpoint region is selected by default. Have a quick check and clic
 >
 > The default region is where your cluster is located. Do not change it. Cross-region private endpoint is currently not supported.
 
-### Step 3. Create an AWS interface endpoint
+### Step 3. Create an Google Cloud interface endpoint
 
 > **Note:**
 >
@@ -81,7 +79,7 @@ If you see the `Endpoint Service Ready` message, take note of your endpoint serv
 aws ec2 create-vpc-endpoint --vpc-id ${your_vpc_id} --region ${your_region} --service-name ${your_endpoint_service_name} --vpc-endpoint-type Interface --subnet-ids ${your_application_subnet_ids}
 ```
 
-Then create an AWS interface endpoint either using the AWS Management Console or using the AWS CLI.
+Then create an Google Cloud interface endpoint either using the AWS Management Console or using the AWS CLI.
 
 <SimpleTab>
 <div label="Use AWS Console">
