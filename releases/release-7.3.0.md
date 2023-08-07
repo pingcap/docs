@@ -23,27 +23,27 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.3/quick-start-with-
 </thead>
 <tbody>
   <tr>
-    <td rowspan="1">Scalability and Performance</td>
+    <td>Scalability and Performance</td>
     <td>TiDB Lightning supports Partitioned Raft KV </td>
     <td>TiDB Lightning now supports the new Partitioned Raft KV architecture, as part of the near-term GA of the architecture.
     </td>
   </tr>
   <tr>
     <td rowspan="2">Reliability and Availability</td>
-    <td><a href="https://docs.pingcap.com/tidb/dev/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#conflict-detection">Add automatic conflict detection and resolution on imports</td>
+    <td><a href="https://docs.pingcap.com/tidb/v7.3/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#conflict-detection">Add automatic conflict detection and resolution on imports</a></td>
     <td>The TiDB Lightning Physical Import Mode supports the new version of conflict detection and implementing the semantics of replacing (`replace`) or ignoring (`ignore`) conflicting data when encountering conflicts. It automatically handles conflicting data for you while improving the performance of conflict resolution.</td>
   </tr>
   <tr>
-    <td><a href="https://docs.pingcap.com/tidb/dev/tidb-resource-control.md#query-watch-parameters">Manual management of runaway queries </a>(experimental)</td>
+    <td><a href="https://docs.pingcap.com/tidb/v7.3/tidb-resource-control.md#query-watch-parameters">Manual management of runaway queries </a>(experimental)</td>
     <td>Query timeouts exist on a per-TiKV node basis but now Resource Groups can manage queries by global parallel execution time and either deprioritize or kill them. Allowing operators to mark target queries by SQL manually Text, SQL Digest or Plan Digest and what do with the queries at a Resource Group level, gives them much more control over the impact unexpected large queries may have on the cluster.</td>
   </tr>
   <tr>
     <td>SQL</td>
-    <td><a href="https://docs.pingcap.com/tidb/dev/optimizer-hints">Enhanced operator control over query stability by adding more complex optimizer hints to the query planner</a></td>
+    <td><a href="https://docs.pingcap.com/tidb/v7.3/optimizer-hints">Enhanced operator control over query stability by adding more complex optimizer hints to the query planner</a></td>
     <td>Added hints: <code>NO_INDEX_JOIN()</code>, <code>NO_MERGE_JOIN()</code>, <code>NO_INDEX_MERGE_JOIN()</code>, <code>NO_HASH_JOIN()</code>,  <code>NO_INDEX_HASH_JOIN()</code>
   <tr>
     <td>DB Operations and Observability</td>
-    <td><a href="https://docs.pingcap.com/tidb/dev/sql-statement-show-analyze-status">Show the progress of statistics collection tasks</a></td>
+    <td><a href="https://docs.pingcap.com/tidb/v7.3/sql-statement-show-analyze-status">Show the progress of statistics collection tasks</a></td>
     <td>Support viewing the progress of <code>ANALYZE</code> tasks using <code>SHOW ANALYZE STATUS</code> or through the system table <code>mysql.analyze_jobs</code>.</td>
   </tr>
 </tbody>
