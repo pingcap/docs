@@ -1755,7 +1755,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 > **Note:**
 >
-> This variable does not work for [multi-valued indexes](/sql-statements/sql-statement-create-index.md#multi-valued-index) and prefix indexes.
+> This variable does not work for [multi-valued indexes](/sql-statements/sql-statement-create-index.md#multi-valued-indexes) and prefix indexes.
 
 - Scope: SESSION | GLOBAL
 - Persists to the cluster: Yes
@@ -2144,6 +2144,10 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 </CustomContent>
 
 ### tidb_enable_resource_control <span class="version-mark">New in v6.6.0</span>
+
+> **Note:**
+>
+> This variable is read-only for [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless).
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
@@ -2934,6 +2938,17 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 </CustomContent>
 
+### `tidb_lock_unchanged_keys` <span class="version-mark">New in v7.1.1 and v7.3.0</span>
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Type: Boolean
+- Default value: `ON`
+- This variable is used to control whether to lock specific keys in the following scenarios. When the value is set to `ON`, these keys are locked. When the value is set to `OFF`, these keys are not locked.
+    - Duplicate keys in `INSERT IGNORE` and `REPLACE` statements. Before v6.1.6, these keys were not locked. This issue has been fixed in [#42121](https://github.com/pingcap/tidb/issues/42121).
+    - Unique keys in `UPDATE` statements when the values of the keys are not changed. Before v6.5.2, these keys were not locked. This issue has been fixed in [#36438](https://github.com/pingcap/tidb/issues/36438).
+- To maintain the consistency and rationality of the transaction, it is not recommended to change this value. If upgrading TiDB causes severe performance issues due to these two fixes, and the behavior without locks is acceptable (see the preceding issues), you can set this variable to `OFF`.
+
 ### tidb_log_file_max_days <span class="version-mark">New in v5.3.0</span>
 
 - Scope: GLOBAL
@@ -3502,6 +3517,14 @@ mysql> desc select count(distinct a) from test.t;
 - Default value: `ON`
 - This variable is used to control whether the optimizer estimates the number of rows based on column order correlation
 
+### `tidb_opt_enable_non_eval_scalar_subquery` <span class="version-mark">New in v7.3.0</span>
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Type: Boolean
+- Default value: `OFF`
+- This variable is used to control whether the `EXPLAIN` statement disables the execution of constant subqueries that can be expanded at the optimization stage. When this variable is set to `OFF`, the `EXPLAIN` statement expands the subquery in advance at the optimization stage. When this variable is set to `ON`, the `EXPLAIN` statement does not expand the subquery at the optimization stage. For more information, see [Disable subquery expansion](/explain-walkthrough.md#disable-the-early-execution-of-subqueries).
+
 ### tidb_opt_enable_late_materialization <span class="version-mark">New in v7.0.0</span>
 
 - Scope: SESSION | GLOBAL
@@ -3515,13 +3538,13 @@ mysql> desc select count(distinct a) from test.t;
 
 > **Warning:**
 >
-> The feature controlled by this variable is not fully functional in the current TiDB version. Do not change the default value.
+> The feature controlled by this variable is experimental. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
 - Type: Boolean
 - Default value: `OFF`
-- This variable controls whether the non-recursive [common table expressions (CTE)](/sql-statements/sql-statement-with.md) can be executed on TiFlash MPP instead of on TiDB.
+- This variable controls whether the non-recursive [Common Table Expressions (CTE)](/sql-statements/sql-statement-with.md) can be executed on TiFlash MPP. By default, when this variable is disabled, CTE is executed on TiDB, which has a large performance gap compared with enabling this feature.
 
 ### tidb_opt_fix_control <span class="version-mark">New in v7.1.0</span>
 
@@ -4420,6 +4443,17 @@ tidb> set tx_isolation='serializable';
 Query OK, 0 rows affected, 1 warning (0.00 sec)
 ```
 
+### tidb_skip_missing_partition_stats <span class="version-mark">New in v7.3.0</span>
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Type: Boolean
+- Default value: `ON`
+- When accesing a partitioned table in [dynamic pruning mode](/partitioned-table.md#dynamic-pruning-mode), TiDB aggregates the statistics of each partition to generate GlobalStats. This variable controls the generation of GlobalStats when partition statistics are missing.
+
+    - If this variable is `ON`, TiDB skips missing partition statistics when generating GlobalStats so the generation of GlobalStats is not affected.
+    - If this variable is `OFF`, TiDB stops generating GloablStats when it detects any missing partition statistics.
+
 ### tidb_skip_utf8_check
 
 - Scope: SESSION | GLOBAL
@@ -4940,6 +4974,10 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 
 ### tidb_ttl_running_tasks <span class="version-mark">New in v7.0.0</span>
 
+> **Note:**
+>
+> This variable is read-only for [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless).
+
 - Scope: GLOBAL
 - Persists to cluster: Yes
 - Type: Integer
@@ -5064,6 +5102,31 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
     * 0: the Fine Grained Shuffle feature is enabled. If [`tidb_max_tiflash_threads`](/system-variables.md#tidb_max_tiflash_threads-new-in-v610) is set to a valid value (greater than 0), then `tiflash_fine_grained_shuffle_stream_count` is set to the value of [`tidb_max_tiflash_threads`](/system-variables.md#tidb_max_tiflash_threads-new-in-v610). Otherwise, it is set to 8. The actual concurrency level of the window function on TiFlash is: min(`tiflash_fine_grained_shuffle_stream_count`, the number of physical threads on TiFlash nodes).
     * Integer greater than 0: the Fine Grained Shuffle feature is enabled. The window function pushed down to TiFlash is executed in multiple threads. The concurrency level is: min(`tiflash_fine_grained_shuffle_stream_count`, the number of physical threads on TiFlash nodes).
 - Theoretically, the performance of the window function increases linearly with this value. However, if the value exceeds the actual number of physical threads, it instead leads to performance degradation.
+
+### tiflash_replica_read <span class="version-mark">New in v7.3.0</span>
+
+> **Note:**
+>
+> This TiDB variable is not applicable to TiDB Cloud.
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Type: Enumeration
+- Default value: `all_replicas`
+- Value options: `all_replicas`, `closest_adaptive`, or `closest_replicas`
+- This variable is used to set the strategy for selecting TiFlash replicas when a query requires the TiFlash engine.
+    - `all_replicas` means using all available TiFlash replicas for analytical computing.
+    - `closest_adaptive` means preferring to use TiFlash replicas in the same zone as the TiDB node initiating the query. If replicas in this zone do not contain all the required data, the query will involve TiFlash replicas from other zones along with their corresponding TiFlash nodes.
+    - `closest_replicas` means using only TiFlash replicas in the same zone as the TiDB node initiating the query. If replicas in this zone do not contain all the required data, the query will return an error.
+
+<CustomContent platform="tidb">
+
+> **Note:**
+> 
+> - If TiDB nodes do not have [zone attributes](/schedule-replicas-by-topology-labels.md#optional-configure-labels-for-tidb) configured and `tiflash_replica_read` is not set to `all_replicas`, TiFlash ignores the replica selection strategy. Instead, it uses all TiFlash replicas for queries and returns the `The variable tiflash_replica_read is ignored.` warning.
+> - If TiFlash nodes do not have [zone attributes](/schedule-replicas-by-topology-labels.md#configure-labels-for-tikv-and-tiflash) configured, they are treated as nodes not belonging to any zone.
+
+</CustomContent>
 
 ### time_zone
 

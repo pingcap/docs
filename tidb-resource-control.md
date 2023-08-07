@@ -86,6 +86,10 @@ Request Unit (RU) is a unified abstraction unit in TiDB for system resources, wh
 > - In addition to queries executed by users, RU can be consumed by background tasks, such as automatic statistics collection.
 > - The preceding table lists only the resources involved in RU calculation for TiDB Self-Hosted clusters, excluding the network and storage consumption. For TiDB Serverless RUs, see [TiDB Serverless Pricing Details](https://www.pingcap.com/tidb-cloud-serverless-pricing-details/).
 
+## Estimate RU consumption of SQL statements
+
+You can use the [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md#ru-request-unit-consumption) statement to get the amount of RUs consumed during SQL execution. Note that the amount of RUs is affected by the cache (for example, [coprocessor cache](/coprocessor-cache.md)). When the same SQL is executed multiple times, the amount of RUs consumed by each execution might be different. The RU value does not represent the exact value for each execution, but can be used as a reference for estimation.
+
 ## Parameters for resource control
 
 The resource control feature introduces two new global variables.
@@ -119,12 +123,12 @@ This section describes how to use the resource control feature to manage resourc
 
 ### Estimate cluster capacity
 
+<CustomContent platform="tidb">
+
 Before resource planning, you need to know the overall capacity of the cluster. TiDB provides the statement [`CALIBRATE RESOURCE`](/sql-statements/sql-statement-calibrate-resource.md) to estimate the cluster capacity. You can use one of the following methods:
 
 - [Estimate capacity based on actual workload](/sql-statements/sql-statement-calibrate-resource.md#estimate-capacity-based-on-actual-workload)
 - [Estimate capacity based on hardware deployment](/sql-statements/sql-statement-calibrate-resource.md#estimate-capacity-based-on-hardware-deployment)
-
-<CustomContent platform="tidb">
 
 You can view the [Resource Manager page](/dashboard/dashboard-resource-manager.md) in TiDB Dashboard. For more information, see [`CALIBRATE RESOURCE`](/sql-statements/sql-statement-calibrate-resource.md#methods-for-estimating-capacity).
 
@@ -132,7 +136,9 @@ You can view the [Resource Manager page](/dashboard/dashboard-resource-manager.m
 
 <CustomContent platform="tidb-cloud">
 
-For more information, see [`CALIBRATE RESOURCE`](/sql-statements/sql-statement-calibrate-resource.md#methods-for-estimating-capacity).
+For TiDB Self-Hosted, you can use the [`CALIBRATE RESOURCE`](https://docs.pingcap.com/zh/tidb/stable/sql-statement-calibrate-resource) statement to estimate the cluster capacity.
+
+For TiDB Cloud, the [`CALIBRATE RESOURCE`](https://docs.pingcap.com/zh/tidb/stable/sql-statement-calibrate-resource) statement is inapplicable.
 
 </CustomContent>
 

@@ -57,7 +57,7 @@ Compared with the previous LTS 6.5.0, 7.1.0 not only includes new features, impr
   </tr>
   <tr>
     <td rowspan="3">SQL</td>
-    <td><a href="https://docs.pingcap.com/tidb/v7.1/sql-statement-create-index#multi-valued-index" target="_blank">Multi-valued index</a> (GA)</td>
+    <td><a href="https://docs.pingcap.com/tidb/v7.1/sql-statement-create-index#multi-valued-indexes" target="_blank">Multi-valued indexes</a> (GA)</td>
     <td>Support MySQL-compatible multi-valued indexes and enhance the JSON type to improve compatibility with MySQL 8.0. This feature improves the efficiency of membership checks on multi-valued columns.</td>
   </tr>
   <tr>
@@ -88,7 +88,7 @@ Compared with the previous LTS 6.5.0, 7.1.0 not only includes new features, impr
 
     TiDB v6.6.0 introduces the Partitioned Raft KV storage engine as an experimental feature, which uses multiple RocksDB instances to store TiKV Region data, and the data of each Region is independently stored in a separate RocksDB instance. The new storage engine can better control the number and level of files in the RocksDB instance, achieve physical isolation of data operations between Regions, and support stably managing more data. Compared with the original TiKV storage engine, using the Partitioned Raft KV storage engine can achieve about twice the write throughput and reduce the elastic scaling time by about 4/5 under the same hardware conditions and mixed read and write scenarios.
 
-    In TiDB v7.1.0, the Partitioned Raft KV storage engine is compatible with TiFlash and supports tools such as TiDB Lightning, BR, and TiCDC.
+    In TiDB v7.1.0, the Partitioned Raft KV storage engine supports tools such as TiDB Lightning, BR, and TiCDC.
 
     Currently, this feature is experimental and not recommended for use in production environments. You can only use this engine in a newly created cluster and you cannot directly upgrade from the original TiKV storage engine.
 
@@ -213,9 +213,9 @@ Compared with the previous LTS 6.5.0, 7.1.0 not only includes new features, impr
 
     Filtering the values of an array in a JSON column is a common operation, but normal indexes cannot help speed up such an operation. Creating a multi-valued index on an array can greatly improve filtering performance. If an array in the JSON column has a multi-valued index, you can use the multi-valued index to filter retrieval conditions in `MEMBER OF()`, `JSON_CONTAINS()`, and `JSON_OVERLAPS()` functions, thereby reducing I/O consumption and improving operation speed.
 
-    In v7.1.0, the multi-valued index feature becomes generally available (GA). It supports more complete data types and is compatible with TiDB tools. You can use multi-valued indexes to speed up the search operations on JSON arrays in production environments.
+    In v7.1.0, the multi-valued indexes feature becomes generally available (GA). It supports more complete data types and is compatible with TiDB tools. You can use multi-valued indexes to speed up the search operations on JSON arrays in production environments.
 
-    For more information, see [documentation](/sql-statements/sql-statement-create-index.md#multi-valued-index).
+    For more information, see [documentation](/sql-statements/sql-statement-create-index.md#multi-valued-indexes).
 
 * Improve the partition management for Hash and Key partitioned tables [#42728](https://github.com/pingcap/tidb/issues/42728) @[mjonss](https://github.com/mjonss)
 
