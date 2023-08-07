@@ -24,7 +24,7 @@ Data Service では、エンドポイントを自動的に生成することも�
 
 > **ヒント：**
 >
-> Chat2Query (ベータ) の SQL ファイルからエンドポイントを作成することもできます。詳細については、 [SQL ファイルからエンドポイントを生成する](/tidb-cloud/explore-data-with-chat2query.md#generate-an-endpoint-from-a-sql-file)を参照してください。
+> Chat2Query (ベータ版) では、SQL ファイルからエンドポイントを作成することもできます。詳細については、 [SQL ファイルからエンドポイントを生成する](/tidb-cloud/explore-data-with-chat2query.md#generate-an-endpoint-from-a-sql-file)を参照してください。
 
 ### エンドポイントを自動的に生成する {#generate-an-endpoint-automatically}
 
@@ -174,7 +174,7 @@ TiDB Cloud Data Service では、次のように 1 つまたは複数のエン�
 
 -   パラメータ名: 名前には文字、数字、アンダースコア ( `_` ) のみを含めることができ、文字またはアンダースコア ( `_` ) で始める必要があります。
 -   **Required** : リクエストでパラメータが必須かどうかを指定します。デフォルトの構成は不要に設定されています。
--   **Type** : パラメータのデータ型を指定します。サポートされている値は`STRING` 、 `NUMBER` 、および`BOOLEAN`です。 `STRING`型のパラメータを使用する場合は、引用符 ( `'`または`"` ) を追加する必要はありません。たとえば、 `foo` `STRING`タイプに対して有効であり、 `"foo"`として処理されますが、 `"foo"`は`"\"foo\""`として処理されます。
+-   **Type** : パラメーターのデータ型を指定します。サポートされている値は`STRING` 、 `NUMBER` 、 `INTEGER` 、および`BOOLEAN`です。 `STRING`型パラメータを使用する場合は、引用符 ( `'`または`"` ) を追加する必要はありません。たとえば、 `foo` `STRING`タイプに対して有効であり、 `"foo"`として処理されますが、 `"foo"`は`"\"foo\""`として処理されます。
 -   **デフォルト値**: パラメータのデフォルト値を指定します。
 
     -   値がパラメータの型に変換できることを確認してください。それ以外の場合、エンドポイントはエラーを返します。
@@ -199,6 +199,10 @@ TiDB Cloud Data Service では、次のように 1 つまたは複数のエン�
 ## エンドポイントをテストする {#test-an-endpoint}
 
 エンドポイントをテストするには、次の手順を実行します。
+
+> **ヒント：**
+>
+> データ アプリを Postman にインポートした場合は、Postman でデータ アプリのエンドポイントをテストすることもできます。詳細については、 [Postman でデータ アプリを実行する](/tidb-cloud/data-service-postman-integration.md)を参照してください。
 
 1.  プロジェクトの[**データサービス**](https://tidbcloud.com/console/data-service)ページに移動します。
 
@@ -240,6 +244,10 @@ TiDB Cloud Data Service では、次のように 1 つまたは複数のエン�
 ## エンドポイントを呼び出す {#call-an-endpoint}
 
 エンドポイントを呼び出すには、エンドポイントの未デプロイのドラフト バージョンまたはデプロイされたオンライン バージョンのいずれかに HTTPS リクエストを送信できます。
+
+> **ヒント：**
+>
+> データ アプリを Postman にインポートした場合は、Postman でデータ アプリのエンドポイントを呼び出すこともできます。詳細については、 [Postman でデータ アプリを実行する](/tidb-cloud/data-service-postman-integration.md)を参照してください。
 
 ### 前提条件 {#prerequisites}
 

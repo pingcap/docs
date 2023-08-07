@@ -52,7 +52,7 @@ GitHub 接続で**自動同期とデプロイ**が有効になっている場合
 
     4.  TiDB Cloudコンソールまたは GitHub で行われたデータ アプリの変更が相互に同期されるようにするには、 **[自動同期とデプロイメントの構成]**を有効にします。
 
-        -   これを有効にすると、指定した GitHub ディレクトリで行われた変更を自動的にTiDB Cloudにデプロイでき、 TiDB Cloudコンソールで行われた変更も同様に GitHub にプッシュできます。データ アプリのデプロイ履歴で、対応するデプロイとコミットの情報を見つけることができます。
+        -   これを有効にすると、指定した GitHub ディレクトリで行われた変更をTiDB Cloudに自動的にデプロイでき、 TiDB Cloudコンソールで行われた変更も同様に GitHub にプッシュできます。データ アプリのデプロイ履歴で、対応するデプロイとコミットの情報を見つけることができます。
         -   これを無効にすると、指定した GitHub ディレクトリで行われた変更はTiDB Cloudにデプロイされ**ず**、 TiDB Cloudコンソールで行われた変更も GitHub に**プッシュ**されません。
 
 5.  **[接続の確認]**をクリックします。
@@ -69,7 +69,7 @@ GitHub 接続で**自動同期とデプロイ**が有効になっている場合
 ├── <Your Data App directory on GitHub>
 │   ├── data_sources
 │   │   └── cluster.json  # specifies the linked clusters.
-│   ├── dataapp_config.json # specifies the Data APP ID, name, and type.
+│   ├── dataapp_config.json # specifies the Data APP ID, name, type, version, and description.
 │   ├── http_endpoints
 │   │   ├── config.json # specifies the endpoints.
 │   │   └── sql # contains SQL files of the endpoints.
@@ -157,7 +157,7 @@ TiDB Cloudコンソールで[Data App エンドポイントの変更](/tidb-clou
 
 5.  TiDB Cloudコンソールまたは GitHub で行われたデータ アプリの変更が相互に同期されるようにするには、 **[自動同期とデプロイメントの構成]**を有効にします。
 
-    -   これを有効にすると、指定した GitHub ディレクトリで行われた変更を自動的にTiDB Cloudにデプロイでき、 TiDB Cloudコンソールで行われた変更も同様に GitHub にプッシュできます。データ アプリのデプロイ履歴で、対応するデプロイとコミットの情報を見つけることができます。
+    -   これを有効にすると、指定した GitHub ディレクトリで行われた変更をTiDB Cloudに自動的にデプロイでき、 TiDB Cloudコンソールで行われた変更も同様に GitHub にプッシュできます。データ アプリのデプロイ履歴で、対応するデプロイとコミットの情報を見つけることができます。
     -   これを無効にすると、指定した GitHub ディレクトリで行われた変更はTiDB Cloudにデプロイされ**ず**、 TiDB Cloudコンソールで行われた変更も GitHub に**プッシュ**されません。
 
 6.  **[接続の確認]**をクリックします。

@@ -60,7 +60,7 @@ cdc cli changefeed list --server=http://127.0.0.1:8300
 
 ## TiCDC の<code>gc-ttl</code>は何ですか? {#what-is-code-gc-ttl-code-in-ticdc}
 
-v4.0.0-rc.1 以降、PD はサービス レベルの GC セーフポイントの設定において外部サービスをサポートしています。どのサービスでも GC セーフポイントを登録および更新できます。 PD は、この GC セーフポイントより後のキーと値のデータが GC によってクリーンアップされないことを保証します。
+v4.0.0-rc.1 以降、PD はサービス レベルの GC セーフポイントの設定において外部サービスをサポートします。どのサービスでも GC セーフポイントを登録および更新できます。 PD は、この GC セーフポイントより後のキーと値のデータが GC によってクリーンアップされないことを保証します。
 
 この機能により、レプリケーション タスクが利用できないか中断された場合、TiCDC によって消費されるデータが GC によってクリーンアップされずに TiKV に保持されることが保証されます。
 
@@ -187,7 +187,7 @@ Old Value 機能が有効になっていない場合、TiCDC Open Protocol の�
 
 ## TiCDC はどのくらいの PDstorageを使用しますか? {#how-much-pd-storage-does-ticdc-use}
 
-TiCDC は PD で etcd を使用してメタデータを保存し、定期的に更新します。 etcd の MVCC と PD のデフォルト圧縮の間の時間間隔は 1 時間であるため、TiCDC が使用する PDstorageの量は、この 1 時間以内に生成されるメタデータ バージョンの量に比例します。ただし、v4.0.5、v4.0.6、および v4.0.7 では、TiCDC には頻繁な書き込みの問題があるため、1 時間に 1000 のテーブルが作成またはスケジュールされている場合、etcdstorageがすべて占有され、 `etcdserver: mvcc: database space exceeded`エラーが返されます。 。このエラーが発生した後は、etcdstorageをクリーンアップする必要があります。詳細は[etcd メンテナンススペースクォータ](https://etcd.io/docs/v3.4.0/op-guide/maintenance/#space-quota)参照してください。クラスターを v4.0.9 以降のバージョンにアップグレードすることをお勧めします。
+TiCDC は PD で etcd を使用してメタデータを保存し、定期的に更新します。 etcd の MVCC と PD のデフォルトの圧縮の間の時間間隔は 1 時間であるため、TiCDC が使用する PDstorageの量は、この 1 時間以内に生成されるメタデータ バージョンの量に比例します。ただし、v4.0.5、v4.0.6、および v4.0.7 では、TiCDC に頻繁な書き込みの問題があるため、1 時間に 1000 のテーブルが作成またはスケジュールされている場合、etcdstorageがすべて占有され、 `etcdserver: mvcc: database space exceeded`エラーが返されます。 。このエラーが発生した後は、etcdstorageをクリーンアップする必要があります。詳細は[etcd メンテナンススペースクォータ](https://etcd.io/docs/v3.4.0/op-guide/maintenance/#space-quota)参照してください。クラスターを v4.0.9 以降のバージョンにアップグレードすることをお勧めします。
 
 ## TiCDC は大規模なトランザクションのレプリケーションをサポートしていますか?リスクはありますか? {#does-ticdc-support-replicating-large-transactions-is-there-any-risk}
 
@@ -246,7 +246,7 @@ v5.0.1 または v4.0.13 以降、MySQL へのレプリケーションごとに�
 
 ## TiCDC レプリケーション タスクを作成するときに<code>safe-mode</code>を<code>true</code>に設定すると、アップストリームからの<code>INSERT</code> / <code>UPDATE</code>ステートメントがダウンストリームにレプリケートされた後に<code>REPLACE INTO</code>になるのはなぜですか? {#why-do-code-insert-code-code-update-code-statements-from-the-upstream-become-code-replace-into-code-after-being-replicated-to-the-downstream-if-i-set-code-safe-mode-code-to-code-true-code-when-i-create-a-ticdc-replication-task}
 
-TiCDC は、すべてのデータが少なくとも 1 回複製されることを保証します。下流に重複データがあると書き込み競合が発生します。この問題を回避するために、TiCDC は`INSERT`と`UPDATE`ステートメントを`REPLACE INTO`のステートメントに変換します。この動作は`safe-mode`パラメータによって制御されます。
+TiCDC は、すべてのデータが少なくとも 1 回複製されることを保証します。下流に重複データがあると書き込み競合が発生します。この問題を回避するために、TiCDC は`INSERT`と`UPDATE`ステートメントを`REPLACE INTO`ステートメントに変換します。この動作は`safe-mode`パラメータによって制御されます。
 
 v6.1.3 より前のバージョンでは、 `safe-mode`デフォルトは`true`で、これはすべての`INSERT`および`UPDATE`ステートメントが`REPLACE INTO`ステートメントに変換されることを意味します。 v6.1.3 以降のバージョンでは、TiCDC はダウンストリームに重複データがあるかどうかを自動的に判断できるため、デフォルト値`safe-mode`が`false`に変更されます。重複データが検出されない場合、TiCDC は`INSERT`および`UPDATE`ステートメントを変換せずに複製します。
 
@@ -297,6 +297,72 @@ TiCDC をダウンストリーム TiDB クラスターにデプロイするこ�
 ## アップストリームに長時間実行されているコミットされていないトランザクションがある場合、TiCDC レプリケーションは停止しますか? {#does-ticdc-replication-get-stuck-if-the-upstream-has-long-running-uncommitted-transactions}
 
 TiDB にはトランザクション タイムアウト メカニズムがあります。トランザクションが[`max-txn-ttl`](/tidb-configuration-file.md#max-txn-ttl)より長い期間実行されると、TiDB はトランザクションを強制的にロールバックします。 TiCDC はトランザクションがコミットされるのを待ってからレプリケーションを続行するため、レプリケーションの遅延が発生します。
+
+## TiCDC が古い値機能を有効にすると、変更イベント形式にどのような変更が発生しますか? {#what-changes-occur-to-the-change-event-format-when-ticdc-enables-the-old-value-feature}
+
+以下の説明では、有効なインデックスの定義は次のとおりです。
+
+-   主キー ( `PRIMARY KEY` ) は有効なインデックスです。
+-   一意のインデックス ( `UNIQUE INDEX` ) は、インデックスのすべての列が null 非許容として明示的に定義され ( `NOT NULL` )、インデックスに仮想生成列 ( `VIRTUAL GENERATED COLUMNS` ) がない場合に有効です。
+
+TiDB は、v5.0 以降、クラスター化インデックス機能をサポートします。この機能は、主キーを含むテーブルにデータを格納する方法を制御します。詳細については、 [クラスター化インデックス](/clustered-indexes.md)を参照してください。
+
+[古い値の機能](/ticdc/ticdc-manage-changefeed.md#output-the-historical-value-of-a-row-changed-event)を有効にすると、TiCDC は次のように動作します。
+
+-   無効なインデックス列の変更イベントの場合、出力には新しい値と古い値の両方が含まれます。
+-   有効なインデックス列の変更イベントの場合、出力は特定の条件に基づいて異なります。
+    -   一意のインデックス列 ( `UNIQUE INDEX` ) が更新され、テーブルに主キーがない場合、出力には新しい値と古い値の両方が含まれます。
+    -   上流の TiDB クラスターでクラスター化インデックスが無効になっており、非 INT タイプの主キー列が更新された場合、出力には新しい値と古い値の両方が含まれます。
+    -   それ以外の場合、変更イベントは古い値の削除イベントと新しい値の挿入イベントに分割されます。
+
+上記の動作変更により、次の問題が発生する可能性があります。
+
+### 有効なインデックス列の変更イベントに新しい値と古い値の両方が含まれている場合、Kafka シンクの分散動作では、同じインデックス列を持つ変更イベントが同じパーティションに分散されることが保証されない可能性があります。 {#when-change-events-on-a-valid-index-column-contains-both-new-and-old-values-the-distribution-behavior-of-kafka-sink-might-not-guarantee-that-change-events-with-the-same-index-columns-are-distributed-to-the-same-partition}
+
+Kafka Sink のインデックス値モードは、インデックス列の値に従ってイベントを分散します。変更イベントに新しい値と古い値の両方が含まれる場合、インデックス列の値が変更され、同じインデックス列を持つ変更イベントが異なるパーティションに分散される可能性があります。以下は例です。
+
+TiDB クラスター化インデックス機能が無効になっている場合にテーブル`t`を作成します。
+
+```sql
+CREATE TABLE t (a VARCHAR(255) PRIMARY KEY NONCLUSTERED);
+```
+
+次の DML ステートメントを実行します。
+
+```sql
+INSERT INTO t VALUES ("2");
+UPDATE t SET a="1" WHERE a="2";
+INSERT INTO t VALUES ("2");
+UPDATE t SET a="3" WHERE a="2";
+```
+
+-   古い値機能が無効になっている場合、変更イベントは古い値の削除イベントと新しい値の挿入イベントに分割されます。 Kafka Sink のインデックス値ディスパッチャは、各イベントに対応するパーティションを計算します。前述の DML イベントは次のパーティションに分散されます。
+
+    | パーティション-1 | パーティション-2 | パーティション-3 |
+    | --------- | --------- | --------- |
+    | a = 2を挿入  | a = 1 を挿入 | a = 3 を挿入 |
+    | 削除 a = 2  |           |           |
+    | a = 2を挿入  |           |           |
+    | 削除 a = 2  |           |           |
+
+    Kafka は各パーティション内のメッセージの順序を保証するため、コンシューマーは各パーティション内のデータを独立して処理し、DML の実行順序と同じ結果を得ることができます。
+
+-   Old Value 機能が有効になっている場合、Kafka シンクのインデックス値ディスパッチャーは、同じインデックス列を持つ変更イベントを異なるパーティションに分散します。したがって、前述の DML は次のパーティションに分散されます (変更イベントには新しい値と古い値の両方が含まれます)。
+
+    | パーティション-1 | パーティション-2              | パーティション-3              |
+    | --------- | ---------------------- | ---------------------- |
+    | a = 2を挿入  | a = 2 の場合、a = 1 を更新します | a = 2 の場合、a = 3 を更新します |
+    | a = 2を挿入  |                        |                        |
+
+    Kafka はパーティション間のメッセージの順序を保証しないため、前述の DML は使用中にインデックス列の更新順序を保持しない可能性があります。出力に新しい値と古い値の両方が含まれている場合にインデックス列の更新順序を維持するには、古い値機能を有効にするときにデフォルトのディスパッチャーを使用できます。
+
+### 無効なインデックス列の変更イベントと有効なインデックス列の変更イベントの両方に新しい値と古い値が含まれている場合、Kafka シンクの Avro 形式は古い値を正しく出力できません {#when-change-events-on-an-invalid-index-column-and-change-events-on-a-valid-index-column-both-contain-new-and-old-values-the-avro-format-of-kafka-sink-cannot-correctly-output-the-old-value}
+
+Avro 実装では、Kafka メッセージ値には現在の列の値のみが含まれます。したがって、イベントに新しい値と古い値が両方含まれている場合、古い値は正しく出力されません。古い値を出力するには、古い値機能を無効にして、分割削除イベントと挿入イベントを取得します。
+
+### 無効なインデックス列の変更イベントと有効なインデックス列の変更イベントの両方に新しい値と古い値が含まれている場合、Cloud Storage シンクの CSV 形式は古い値を正しく出力できません {#when-change-events-on-an-invalid-index-column-and-change-events-on-a-valid-index-column-both-contain-new-and-old-values-the-csv-format-of-cloud-storage-sink-cannot-correctly-output-the-old-value}
+
+CSV ファイルの列数は固定されているため、イベントに新しい値と古い値が両方含まれる場合、古い値は正しく出力されません。古い値を出力するには、Canal-JSON 形式を使用できます。
 
 ## TiDB Operatorによってデプロイされた TiCDC クラスターを操作するために<code>cdc cli</code>コマンドを使用できないのはなぜですか? {#why-can-t-i-use-the-code-cdc-cli-code-command-to-operate-a-ticdc-cluster-deployed-by-tidb-operator}
 

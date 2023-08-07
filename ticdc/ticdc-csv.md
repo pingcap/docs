@@ -7,6 +7,12 @@ summary: Learn the concept of TiCDC CSV Protocol and how to use it.
 
 クラウドstorageサービスをダウンストリーム シンクとして使用する場合、DML イベントを CSV 形式でクラウドstorageサービスに送信できます。
 
+> **警告：**
+>
+> [古い値の機能](/ticdc/ticdc-manage-changefeed.md#output-the-historical-value-of-a-row-changed-event)が有効( `enable-old-value = true` )の場合、CSVデータ形式では変更イベントの古い値を出力できません。
+>
+> 詳細については、 [TiCDC が古い値機能を有効にすると、変更イベント形式にどのような変更が発生しますか?](/ticdc/ticdc-faq.md#what-changes-occur-to-the-change-event-format-when-ticdc-enables-the-old-value-feature)を参照してください。
+
 ## CSVを使用する {#use-csv}
 
 以下は、CSV プロトコルを使用する場合の構成の例です。
@@ -39,7 +45,7 @@ include-commit-ts = true
 
 データのstorageパス構造の詳細については、 [ストレージパス構造](/ticdc/ticdc-sink-to-cloud-storage.md#storage-path-structure)を参照してください。
 
-## データ形式の定義 {#definition-of-the-data-format}
+## データフォーマットの定義 {#definition-of-the-data-format}
 
 CSV ファイルでは、各列は次のように定義されます。
 

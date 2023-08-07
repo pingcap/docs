@@ -15,7 +15,7 @@ summary: Learn how to build a simple CRUD application with TiDB and GORM.
 
 > **ノート：**
 >
-> Golang 1.16 以降のバージョンを使用することをお勧めします。
+> Golang 1.20 以降のバージョンを使用することをお勧めします。
 
 ## ステップ 1. TiDB クラスターを起動する {#step-1-launch-your-tidb-cluster}
 
@@ -281,7 +281,7 @@ func buyGoods(db *gorm.DB, sellID, buyID string, amount, price int) error {
 
 ### ステップ 3.1 TiDB Cloudのパラメータを変更する {#step-3-1-modify-parameters-for-tidb-cloud}
 
-TiDB サーバーレス クラスターを使用している場合は、 `dsn` in `gorm.go`の値を変更します。
+TiDB サーバーレス クラスターを使用している場合は、 `gorm.go`の`dsn`の値を変更します。
 
 ```go
 dsn := "root:@tcp(127.0.0.1:4000)/test?charset=utf8mb4"
@@ -293,15 +293,10 @@ dsn := "root:@tcp(127.0.0.1:4000)/test?charset=utf8mb4"
 -   ポート: `4000`
 -   ユーザー: `2aEp24QWEDLqRFs.root`
 
-この場合、 `mysql.RegisterTLSConfig`と`dsn`次のように変更できます。
+この場合、 `dsn`を次のように変更できます。
 
 ```go
-mysql.RegisterTLSConfig("register-tidb-tls", &tls.Config {
-    MinVersion: tls.VersionTLS12,
-    ServerName: "xxx.tidbcloud.com",
-})
-
-dsn := "2aEp24QWEDLqRFs.root:123456@tcp(xxx.tidbcloud.com:4000)/test?charset=utf8mb4&tls=register-tidb-tls"
+dsn := "2aEp24QWEDLqRFs.root:123456@tcp(xxx.tidbcloud.com:4000)/test?charset=utf8mb4&tls=true"
 ```
 
 ### ステップ 3.2 コードを実行する {#step-3-2-run-the-code}

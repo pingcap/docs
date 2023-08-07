@@ -7,6 +7,12 @@ summary: Learn the concept of TiCDC Avro Protocol and how to use it.
 
 Avro は、 [Apache Avro™](https://avro.apache.org/)によって定義され、 [コンフルエントなプラットフォーム](https://docs.confluent.io/platform/current/platform.html)によってデフォルトのデータ交換形式として選択されるデータ交換形式プロトコルです。このドキュメントでは、TiDB 拡張フィールド、Avro データ形式の定義、Avro と[Confluent スキーマ レジストリ](https://docs.confluent.io/platform/current/schema-registry/index.html)の間の対話など、TiCDC での Avro データ形式の実装について説明します。
 
+> **警告：**
+>
+> [古い値の機能](/ticdc/ticdc-manage-changefeed.md#output-the-historical-value-of-a-row-changed-event)が有効 ( `enable-old-value = true` ) の場合、Avro データ形式は変更イベントの古い値を出力できません。
+>
+> 詳細については、 [TiCDC が古い値機能を有効にすると、変更イベント形式にどのような変更が発生しますか?](/ticdc/ticdc-faq.md#what-changes-occur-to-the-change-event-format-when-ticdc-enables-the-old-value-feature)を参照してください。
+
 ## アブロを使用する {#use-avro}
 
 Message Queue (MQ) をダウンストリーム シンクとして使用する場合、 `sink-uri`で Avro を指定できます。 TiCDC は、TiDB DML イベントをキャプチャし、これらのイベントから Avro メッセージを作成し、メッセージをダウンストリームに送信します。 Avro はスキーマの変更を検出すると、最新のスキーマをスキーマ レジストリに登録します。
@@ -51,7 +57,7 @@ dispatchers = [
 ]
 ```
 
-## データフォーマットの定義 {#definition-of-the-data-format}
+## データ形式の定義 {#definition-of-the-data-format}
 
 TiCDC は DML イベントを Kafka イベントに変換し、イベントのキーと値は Avro プロトコルに従ってエンコードされます。
 

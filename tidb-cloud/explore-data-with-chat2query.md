@@ -7,7 +7,7 @@ summary: Learn how to use Chat2Query, an AI-powered SQL editor in the TiDB Cloud
 
 TiDB CloudはAI を活用しています。 [TiDB Cloudコンソール](https://tidbcloud.com/)の AI を活用した SQL エディターである Chat2Query (ベータ版) を使用すると、データの価値を最大化できます。
 
-Chat2Query では、 `--`を入力してから AI に SQL クエリを自動的に生成させる指示を入力するか、SQL クエリを手動で作成して、ターミナルを使用せずにデータベースに対して SQL クエリを実行することができます。クエリ結果をテーブルで直感的に見つけたり、クエリログを簡単に確認したりできます。
+Chat2Query では、 `--`入力してから AI に SQL クエリを自動的に生成させる指示を入力するか、SQL クエリを手動で作成して、ターミナルを使用せずにデータベースに対して SQL クエリを実行することができます。クエリ結果をテーブルで直感的に見つけたり、クエリログを簡単に確認したりできます。
 
 > **ノート：**
 >
@@ -43,15 +43,15 @@ Chat2Query の推奨される使用例は次のとおりです。
     >
     > 次の場合、 **Chat2Query**エントリは灰色で表示され、クリックできません。
     >
-    > -   Dedicated Tierクラスターは v6.5.0 より前です。 Chat2Query を使用するには、クラスターをアップグレードするために[TiDB Cloudのサポート](/tidb-cloud/tidb-cloud-support.md)を契約する必要があります。
-    > -   Dedicated Tierクラスターが作成されたばかりで、Chat2Query の実行環境はまだ準備中です。この場合、数分待つと Chat2Query が使用可能になります。
-    > -   Dedicated Tierクラスターは[一時停止した](/tidb-cloud/pause-or-resume-tidb-cluster.md)です。
+    > -   TiDB 専用クラスターは v6.5.0 より前です。 Chat2Query を使用するには、クラスターをアップグレードするために[TiDB Cloudのサポート](/tidb-cloud/tidb-cloud-support.md)を契約する必要があります。
+    > -   TiDB 専用クラスターが作成されたばかりで、Chat2Query の実行環境はまだ準備中です。この場合、数分待つと Chat2Query が使用可能になります。
+    > -   TiDB 専用クラスターは[一時停止した](/tidb-cloud/pause-or-resume-tidb-cluster.md)です。
 
 ## AI による SQL クエリの生成を有効または無効にする {#enable-or-disable-ai-to-generate-sql-queries}
 
 PingCAP は、ユーザーのデータのプライバシーとセキュリティを最優先事項としています。 Chat2Query の AI 機能は、データ自体ではなく、データベース スキーマにアクセスして SQL クエリを生成することのみが必要です。詳細については、 [Chat2Query のプライバシーに関するFAQ](https://www.pingcap.com/privacy-policy/privacy-chat2query)を参照してください。
 
-Chat2Query に初めてアクセスすると、PingCAP と OpenAI がコード スニペットを使用してサービスを調査および改善することを許可するかどうかを尋ねるダイアログが表示されます。
+初めて Chat2Query にアクセスすると、PingCAP と OpenAI がコード スニペットを使用してサービスを調査および改善することを許可するかどうかを尋ねるダイアログが表示されます。
 
 -   AI が SQL クエリを生成できるようにするには、チェックボックスを選択し、 **[保存して開始]**をクリックします。
 -   AI による SQL クエリの生成を無効にするには、このダイアログを直接閉じます。

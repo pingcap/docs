@@ -33,7 +33,7 @@ ExplainableStmt ::=
 
 ## EXPLAIN ANALYZE の出力形式 {#explain-analyze-output-format}
 
-`EXPLAIN`とは異なり、 `EXPLAIN ANALYZE`対応する SQL ステートメントを実行し、その実行時情報を記録し、その情報を実行計画とともに返します。したがって、 `EXPLAIN ANALYZE` `EXPLAIN`ステートメントの拡張であると考えることができます。 `EXPLAIN` (クエリ実行のデバッグ用) と比較して、 `EXPLAIN ANALYZE`の返される結果には、 `actRows` 、 `execution info` 、 `memory` 、 `disk`などの情報列も含まれています。これらの列の詳細は次のとおりです。
+`EXPLAIN`とは異なり、 `EXPLAIN ANALYZE`対応する SQL ステートメントを実行し、そのランタイム情報を記録し、その情報を実行計画とともに返します。したがって、 `EXPLAIN ANALYZE` `EXPLAIN`ステートメントの拡張であると考えることができます。 `EXPLAIN` (クエリ実行のデバッグ用) と比較して、 `EXPLAIN ANALYZE`の返される結果には、 `actRows` 、 `execution info` 、 `memory` 、 `disk`などの情報列も含まれています。これらの列の詳細は次のとおりです。
 
 | 属性名  | 説明                                                                                                                                                                                 |
 | :--- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -105,7 +105,7 @@ EXPLAIN ANALYZE SELECT * FROM t1;
 `Point_Get`オペレーターからの実行情報には通常、次の情報が含まれます。
 
 -   `Get:{num_rpc:1, total_time:697.051µs}` : TiKV に送信された`Get` RPC リクエストの数 ( `num_rpc` ) と、すべての RPC リクエストの合計継続時間 ( `total_time` )。
--   `ResolveLock:{num_rpc:1, total_time:12.117495ms}` : データの読み取り時に TiDB がロックに遭遇した場合、最初にロックを解決する必要があります。これは通常、読み取り/書き込み競合のシナリオで発生します。この情報は、ロックの解決にかかる時間を示します。
+-   `ResolveLock:{num_rpc:1, total_time:12.117495ms}` : データの読み取り時に TiDB がロックに遭遇した場合、最初にロックを解決する必要があります。これは通常、読み取りと書き込みの競合シナリオで発生します。この情報は、ロックの解決にかかる時間を示します。
 -   `regionMiss_backoff:{num:11, total_time:2010 ms},tikvRPC_backoff:{num:11, total_time:10691 ms}` : RPC リクエストが失敗した場合、TiDB はリクエストを再試行する前にバックオフ時間待機します。バックオフ統計には、バックオフのタイプ ( `regionMiss`や`tikvRPC`など)、合計待機時間 ( `total_time` )、およびバックオフの合計数 ( `num` ) が含まれます。
 
 ### バッチポイント取得 {#batch-point-get}
@@ -251,7 +251,7 @@ tiflash_scan: {
 
 ### lock_keys 実行情報 {#lock-keys-execution-information}
 
-DML ステートメントが悲観的トランザクションで実行される場合、オペレーターの実行情報には`lock_keys`の実行情報も含まれる可能性があります。例えば：
+DML ステートメントが悲観的トランザクションで実行される場合、演算子の実行情報には`lock_keys`の実行情報も含まれる場合があります。例えば：
 
 ```
 lock_keys: {time:94.096168ms, region:6, keys:8, lock_rpc:274.503214ms, rpc_count:6}
@@ -265,7 +265,7 @@ lock_keys: {time:94.096168ms, region:6, keys:8, lock_rpc:274.503214ms, rpc_count
 
 ### commit_txnの実行情報 {#commit-txn-execution-information}
 
-`autocommit=1`のトランザクションで書き込み型の DML ステートメントが実行される場合、書き込み演算子の実行情報にはトランザクション コミットの期間情報も含まれます。例えば：
+`autocommit=1`のトランザクションで書き込み型の DML ステートメントが実行される場合、書き込み演算子の実行情報には、トランザクション コミットの期間情報も含まれます。例えば：
 
 ```
 commit_txn: {prewrite:48.564544ms, wait_prewrite_binlog:47.821579, get_commit_ts:4.277455ms, commit:50.431774ms, region_num:7, write_keys:16, write_byte:536}
@@ -277,6 +277,18 @@ commit_txn: {prewrite:48.564544ms, wait_prewrite_binlog:47.821579, get_commit_ts
 -   `commit` : トランザクションの 2PC コミット中の`commit`フェーズに費やされた時間。
 -   `write_keys` : トランザクションに書き込まれた合計`keys` 。
 -   `write_byte` : トランザクションで書き込まれた`key-value`の合計バイト数。単位はバイトです。
+
+### RU（リクエストユニット）の消費量 {#ru-request-unit-consumption}
+
+[リクエストユニット (RU)](/tidb-resource-control.md#what-is-request-unit-ru)は、TiDB リソース制御で定義されるシステム リソースの統一抽象化単位です。最上位演算子の`execution info` 、この特定の SQL ステートメントの全体的な RU 消費量を示します。
+
+```
+RU:273.842670
+```
+
+> **ノート：**
+>
+> この値は、この実行によって消費された実際の RU を示します。同じ SQL ステートメントは、キャッシュの影響により、実行されるたびに異なる量の RU を消費する可能性があります (たとえば、 [コプロセッサキャッシュ](/coprocessor-cache.md) )。
 
 ### その他の一般的な実行情報 {#other-common-execution-information}
 

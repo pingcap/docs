@@ -17,7 +17,7 @@ summary: Learn how to use the resource control feature to control and schedule a
 
 TiDB リソース制御機能は、TiDBレイヤーのフロー制御機能と TiKVレイヤーの優先スケジューリング機能の 2 層のリソース管理機能を提供します。 2 つの機能は個別に有効にすることも、同時に有効にすることもできます。詳細は[リソース制御用パラメータ](#parameters-for-resource-control)を参照してください。これにより、TiDBレイヤーがリソース グループに設定されたクォータに基づいてユーザーの読み取りおよび書き込みリクエストのフローを制御できるようになり、TiKVレイヤーが読み取りおよび書き込みクォータにマップされた優先順位に基づいてリクエストをスケジュールできるようになります。これにより、アプリケーションのリソース分離を確保し、サービス品質 (QoS) 要件を満たすことができます。
 
--   TiDB フロー制御: TiDB フロー制御は[トークンバケットアルゴリズム](https://en.wikipedia.org/wiki/Token_bucket)を使用します。バケット内に十分なトークンがなく、リソース グループが`BURSTABLE`オプションを指定していない場合、リソース グループへのリクエストは、トークン バケットにトークンがバックフィルされるまで待機して、再試行します。タイムアウトにより再試行が失敗する場合があります。
+-   TiDB フロー制御: TiDB フロー制御は[トークンバケットアルゴリズム](https://en.wikipedia.org/wiki/Token_bucket)を使用します。バケット内に十分なトークンがなく、リソース グループが`BURSTABLE`オプションを指定していない場合、リソース グループへのリクエストは、トークン バケットにトークンがバックフィルされるのを待って再試行します。タイムアウトにより再試行が失敗する場合があります。
 
 -   TiKV スケジューリング: 必要に応じて絶対優先度[( `PRIORITY` )](/information-schema/information-schema-resource-groups.md#examples)を設定できます。 `PRIORITY`の設定に従って、さまざまなリソースがスケジュールされます。高`PRIORITY`のタスクが最初にスケジュールされます。絶対優先度を設定しない場合、TiKV は各リソース グループの値`RU_PER_SEC`を使用して、各リソース グループの読み取りおよび書き込みリクエストの優先度を決定します。優先順位に基づいて、storageレイヤーは優先キューを使用してリクエストをスケジュールし、処理します。
 
@@ -52,6 +52,10 @@ TiDB リソース制御機能は、TiDBレイヤーのフロー制御機能と T
 > -   各書き込み操作は、最終的にすべてのレプリカに複製されます (デフォルトでは、TiKV には 3 つのレプリカがあります)。各レプリケーション操作は、異なる書き込み操作とみなされます。
 > -   ユーザーによって実行されるクエリに加えて、自動統計収集などのバックグラウンド タスクによって RU が消費される場合があります。
 > -   上の表には、ネットワークとstorageの消費量を除いて、TiDB セルフホスト クラスターの RU 計算に関係するリソースのみがリストされています。 TiDB サーバーレス RU については、 [TiDB サーバーレスの料金詳細](https://www.pingcap.com/tidb-cloud-serverless-pricing-details/)を参照してください。
+
+## SQL ステートメントの RU 消費量を見積もる {#estimate-ru-consumption-of-sql-statements}
+
+[`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md#ru-request-unit-consumption)ステートメントを使用すると、SQL の実行中に消費された RU の量を取得できます。 RU の量はキャッシュの影響を受けることに注意してください (たとえば、 [コプロセッサキャッシュ](/coprocessor-cache.md) )。同じ SQL が複数回実行されると、各実行で消費される RU の量が異なる場合があります。 RU 値は各実行の正確な値を表すものではありませんが、推定の参考として使用できます。
 
 ## リソース制御用パラメータ {#parameters-for-resource-control}
 
@@ -218,7 +222,7 @@ SELECT /*+ RESOURCE_GROUP(rg1) */ * FROM t limit 10;
 
 <CustomContent platform="tidb">
 
-TiDB はリソース制御に関する実行時情報を定期的に収集し、Grafana の**[TiDB]** &gt; **[リソース制御]**ダッシュボードにメトリクスの視覚的なグラフを提供します。メトリクスについては、 [TiDB の重要なモニタリング指標](/grafana-tidb-dashboard.md)の**「リソース制御」**セクションで詳しく説明されています。
+TiDB はリソース制御に関するランタイム情報を定期的に収集し、Grafana の**[TiDB]** &gt; **[リソース制御]**ダッシュボードにメトリクスの視覚的なグラフを提供します。メトリクスについては、 [TiDB の重要なモニタリング指標](/grafana-tidb-dashboard.md)の**「リソース制御」**セクションで詳しく説明されています。
 
 TiKV は、さまざまなリソース グループからのリクエスト QPS も記録します。詳細については、 [TiKV モニタリング メトリクスの詳細](/grafana-tikv-dashboard.md#grpc)を参照してください。
 

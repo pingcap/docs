@@ -5,7 +5,7 @@ summary: An overview of the usage of ANALYZE for the TiDB database.
 
 # 分析する {#analyze}
 
-このステートメントは、TiDB がテーブルとインデックスに基づいて構築する統計を更新します。大規模なバッチ更新またはレコードのインポートを実行した後、またはクエリ実行プランが最適ではないことに気づいた場合は、 `ANALYZE`実行することをお勧めします。
+このステートメントは、TiDB がテーブルとインデックスに基づいて構築する統計を更新します。大規模なバッチ更新またはレコードのインポートを実行した後、またはクエリ実行プランが最適ではないことに気付いた場合は、 `ANALYZE`実行することをお勧めします。
 
 TiDB はまた、統計が独自の推定値と矛盾していることを発見すると、時間の経過とともに自動的に統計を更新します。
 
@@ -21,7 +21,7 @@ AnalyzeOptionListOpt ::=
 ( WITH AnalyzeOptionList )?
 
 AnalyzeOptionList ::=
-AnalyzeOption ( ',' AnlyzeOption )*
+AnalyzeOption ( ',' AnalyzeOption )*
 
 AnalyzeOption ::=
 ( NUM ( 'BUCKETS' | 'TOPN' | ( 'CMSKETCH' ( 'DEPTH' | 'WIDTH' ) ) | 'SAMPLES' ) ) | ( FLOATNUM 'SAMPLERATE' )

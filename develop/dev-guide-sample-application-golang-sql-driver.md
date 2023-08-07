@@ -13,7 +13,7 @@ summary: Learn how to build a simple CRUD application with TiDB and Go-MySQL-Dri
 
 > **ノート：**
 >
-> Golang 1.16 以降のバージョンを使用することをお勧めします。
+> Golang 1.20 以降のバージョンを使用することをお勧めします。
 
 ## ステップ 1. TiDB クラスターを起動する {#step-1-launch-your-tidb-cluster}
 
@@ -509,7 +509,7 @@ go-sql-driver/mysql を使用する場合は、クラスターに接続し、 `s
 
 ### ステップ 3.2 TiDB Cloudのパラメータを変更する {#step-3-2-modify-parameters-for-tidb-cloud}
 
-TiDB サーバーレス クラスターを使用している場合は、 `dsn` in `sqldriver.go`の値を変更します。
+TiDB サーバーレス クラスターを使用している場合は、 `sqldriver.go`の`dsn`の値を変更します。
 
 ```go
 dsn := "root:@tcp(127.0.0.1:4000)/test?charset=utf8mb4"

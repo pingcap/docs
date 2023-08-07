@@ -31,9 +31,9 @@ TiDB 専用クラスターがTiDB Cloud上に作成されたら、次のいず�
     >
     > [TiDB専用](/tidb-cloud/select-cluster-tier.md#tidb-dedicated)クラスターで Chat2Query を使用するには、 [TiDB Cloudのサポート](/tidb-cloud/tidb-cloud-support.md)にお問い合わせください。
 
-    TiDB Cloud は人工知能 (AI) を活用しています。Dedicated TierがAWS でホストされており、クラスターの TiDB バージョンが v6.5.0 以降の場合、 [TiDB Cloudコンソール](https://tidbcloud.com/)の AI 搭載 SQL エディターである Chat2Query (ベータ) を使用して、データの価値を最大化できます。
+    TiDB Cloudは人工知能 (AI) を活用しています。クラスターが AWS でホストされており、クラスターの TiDB バージョンが v6.5.0 以降[TiDB Cloudコンソール](https://tidbcloud.com/)場合は、AI を活用した SQL エディターである Chat2Query (ベータ版) を使用して、データの価値を最大化できます。
 
-    Chat2Query では、 `--`を入力してから AI に SQL クエリを自動的に生成させる指示を入力するか、SQL クエリを手動で作成して、ターミナルを使用せずにデータベースに対して SQL クエリを実行することができます。クエリ結果をテーブルで直感的に見つけたり、クエリログを簡単に確認したりできます。
+    Chat2Query では、 `--`入力してから AI に SQL クエリを自動的に生成させる指示を入力するか、SQL クエリを手動で作成して、ターミナルを使用せずにデータベースに対して SQL クエリを実行することができます。クエリ結果をテーブルで直感的に見つけたり、クエリログを簡単に確認したりできます。
 
 -   [SQL シェル経由で接続する](/tidb-cloud/connect-via-sql-shell.md) : TiDB SQLを試して、TiDB と MySQL の互換性をすぐにテストするか、ユーザー権限を管理します。
 

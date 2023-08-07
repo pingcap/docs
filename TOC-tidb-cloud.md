@@ -214,7 +214,9 @@
     -   [データ管理アプリ](/tidb-cloud/data-service-manage-data-app.md)
     -   [エンドポイントの管理](/tidb-cloud/data-service-manage-endpoint.md)
     -   [APIキー](/tidb-cloud/data-service-api-key.md)
+    -   [ポストマンで実行](/tidb-cloud/data-service-postman-integration.md)
     -   [GitHub を使用して自動的にデプロイ](/tidb-cloud/data-service-manage-github-connection.md)
+    -   [Next.js で OpenAPI 仕様を使用する](/tidb-cloud/data-service-oas-with-nextjs.md)
     -   [データアプリコンフィグレーションファイル](/tidb-cloud/data-service-app-config-files.md)
     -   [レスポンスとステータスコード](/tidb-cloud/data-service-response-and-status-code.md)
 -   ストリームデータ
