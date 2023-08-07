@@ -1,4 +1,4 @@
---- 
+---
 title: TiDB Cloud Built-in Alerting
 summary: Learn how to monitor your TiDB cluster by getting alert notification emails from TiDB Cloud.
 ---
