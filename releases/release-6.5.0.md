@@ -13,7 +13,14 @@ TiDB バージョン: 6.5.0
 
 TiDB 6.5.0 は長期サポート リリース (LTS) です。
 
-以前の LTS 6.1.0 と比較して、6.5.0 には[6.2.0-DMR](/releases/release-6.2.0.md) 、 [6.3.0-DMR](/releases/release-6.3.0.md) 、 [6.4.0-DMR](/releases/release-6.4.0.md)でリリースされた新機能、改善、バグ修正が含まれているだけでなく、次の主要な機能と改善も導入されています。
+TiDB [6.4.0-DMR](/releases/release-6.4.0.md)と比較して、TiDB 6.5.0 には次の主要な機能と改善点が導入されています。
+
+> **ヒント：**
+>
+> 以前の LTS 6.1.0 と比較して、TiDB 6.5.0 には、 [6.2.0-DMR](/releases/release-6.2.0.md) 、 [6.3.0-DMR](/releases/release-6.3.0.md) 、および[6.4.0-DMR](/releases/release-6.4.0.md)でリリースされた新機能、改善、バグ修正も含まれています。
+>
+> -   6.1.0 LTS バージョンと 6.5.0 LTS バージョン間の変更点の完全なリストを取得するには、このリリース ノートに加えて、 [6.2.0-DMR リリースノート](/releases/release-6.2.0.md) 、 [6.3.0-DMR リリースノート](/releases/release-6.3.0.md) 、および[6.4.0-DMR リリースノート](/releases/release-6.4.0.md)も参照してください。
+> -   6.1.0 LTS バージョンと 6.5.0 LTS バージョンの主な機能を簡単に比較するには、 [TiDBの特徴](/basic-features.md)の`v6.1`と`v6.5`列を確認します。
 
 -   [インデックス加速度](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630)機能が一般公開 (GA) され、インデックス追加のパフォーマンスが v6.1.0 と比較して約 10 倍向上しました。
 -   TiDB グローバルメモリコントロールが GA になり、 [`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-new-in-v640)を介してメモリ消費のしきい値を制御できるようになります。
@@ -61,7 +68,7 @@ TiDB 6.5.0 は長期サポート リリース (LTS) です。
 
     詳細については、 [ドキュメンテーション](/time-to-live.md)を参照してください。
 
--   `INSERT INTO SELECT`ステートメントを使用したTiFlashクエリ結果の保存をサポート (実験的) [#37515](https://github.com/pingcap/tidb/issues/37515) @ [ゲンリチ](https://github.com/gengliqi)
+-   `INSERT INTO SELECT`ステートメントを使用したTiFlashクエリ結果の保存をサポート (実験的) [#37515](https://github.com/pingcap/tidb/issues/37515) @ [ゲンリキ](https://github.com/gengliqi)
 
     v6.5.0 以降、TiDB は`INSERT INTO SELECT`ステートメントの`SELECT`句 (分析クエリ) をTiFlashにプッシュダウンすることをサポートします。このようにして、さらに分析するために、 TiFlashクエリ結果を`INSERT INTO`で指定された TiDB テーブルに簡単に保存できます。これは、結果のキャッシュ (つまり、結果の具体化) として有効になります。例えば：
 
@@ -142,7 +149,7 @@ TiDB 6.5.0 は長期サポート リリース (LTS) です。
 
 -   [インデックスのマージ](/glossary.md#index-merge) `AND` [#39333](https://github.com/pingcap/tidb/issues/39333) @ [グオシャオゲ](https://github.com/guo-shaoge) @ [時間と運命](https://github.com/time-and-fate) @ [ハイランフー](https://github.com/hailanwhu)で接続された式をサポートします
 
-    v6.5.0 より前では、TiDB は`OR`で接続されたフィルター条件に対するインデックス マージの使用のみをサポートしていました。 v6.5.0 以降、TiDB は`WHERE`句の`AND`で接続されたフィルタ条件のインデックス マージの使用をサポートしました。このようにして、TiDB のインデックス マージは、クエリ フィルター条件のより一般的な組み合わせをカバーできるようになり、union ( `OR` ) 関係に限定されなくなりました。現在の v6.5.0 バージョンは、オプティマイザによって自動的に選択された`OR`条件でのインデックス マージのみをサポートします。 `AND`条件のインデックス マージを有効にするには、 [`USE_INDEX_MERGE`](/optimizer-hints.md#use_index_merget1_name-idx1_name--idx2_name-)ヒントを使用する必要があります。
+    v6.5.0 より前では、TiDB は`OR`で接続されたフィルター条件に対するインデックス マージの使用のみをサポートしていました。 v6.5.0 以降、TiDB は`WHERE`句の`AND`で接続されたフィルタ条件のインデックス マージの使用をサポートしました。このように、TiDB のインデックス マージは、クエリ フィルター条件のより一般的な組み合わせをカバーできるようになり、union ( `OR` ) 関係に限定されなくなりました。現在の v6.5.0 バージョンは、オプティマイザによって自動的に選択された`OR`条件でのインデックス マージのみをサポートします。 `AND`条件のインデックス マージを有効にするには、 [`USE_INDEX_MERGE`](/optimizer-hints.md#use_index_merget1_name-idx1_name--idx2_name-)ヒントを使用する必要があります。
 
     インデックスのマージの詳細については、 [v5.4.0 リリースノート](/releases/release-5.4.0.md#performance)および[インデックスのマージについて説明する](/explain-index-merge.md)を参照してください。
 
@@ -168,11 +175,11 @@ TiDB 6.5.0 は長期サポート リリース (LTS) です。
 
 -   [パーティション化されたテーブル](/partitioned-table.md)から TiKV [#26166](https://github.com/pingcap/tidb/issues/26166) @ [ウィノロス](https://github.com/winoros)までのソート操作のプッシュダウンをサポート
 
-    [パーティションテーブル](/partitioned-table.md)機能は v6.1.0 以降 GA になっていますが、TiDB は継続的にパフォーマンスを向上させています。 v6.5.0 では、TiDB は、計算とフィルタリングのために`ORDER BY`や`LIMIT`の並べ替え操作を TiKV にプッシュダウンすることをサポートします。これにより、パーティション分割テーブルを使用する場合、ネットワーク I/O オーバーヘッドが削減され、SQL パフォーマンスが向上します。
+    [パーティションテーブル](/partitioned-table.md)機能は v6.1.0 以降 GA になっていますが、TiDB は継続的にパフォーマンスを向上させています。 v6.5.0 では、TiDB は、計算とフィルタリングのために`ORDER BY`や`LIMIT`の並べ替え操作を TiKV にプッシュダウンすることをサポートします。これにより、パーティション化されたテーブルを使用する場合、ネットワーク I/O オーバーヘッドが削減され、SQL パフォーマンスが向上します。
 
 -   オプティマイザーは、より正確なコスト モデル バージョン 2 (GA) [#35240](https://github.com/pingcap/tidb/issues/35240) @ [qw4990](https://github.com/qw4990)を導入します。
 
-    TiDB v6.2.0 では、実験的機能として[コストモデルバージョン2](/cost-model.md#cost-model-version-2)が導入されています。このモデルは、オプティマイザーが最適な実行計画を選択できるように、より正確なコスト推定方法を使用します。特にTiFlashが導入されている場合、コスト モデル バージョン 2 は適切なstorageエンジンの選択を自動的に支援し、多くの手動介入を回避します。一定期間の実際のシーンでのテストの後、このモデルは v6.5.0 で GA になります。 v6.5.0 以降、新しく作成されたクラスターはデフォルトでコスト モデル バージョン 2 を使用します。クラスターを v6.5.0 にアップグレードする場合、コスト モデル バージョン 2 によってクエリ プランが変更される可能性があるため、十分なパフォーマンス テストを行った後、新しいコスト モデルを使用するように[`tidb_cost_model_version = 2`](/system-variables.md#tidb_cost_model_version-new-in-v620)変数を設定できます。
+    TiDB v6.2.0 では、実験的機能として[コストモデルバージョン2](/cost-model.md#cost-model-version-2)が導入されています。このモデルは、オプティマイザーが最適な実行計画を選択できるように、より正確なコスト推定方法を使用します。特にTiFlashが導入されている場合、コスト モデル バージョン 2 は適切なstorageエンジンの選択を自動的に支援し、多くの手動介入を回避します。一定期間の実際のシーンでのテストの後、このモデルは v6.5.0 で GA になります。 v6.5.0 以降、新しく作成されたクラスターはデフォルトでコスト モデル バージョン 2 を使用します。クラスターを v6.5.0 にアップグレードする場合、コスト モデル バージョン 2 によりクエリ プランが変更される可能性があるため、十分なパフォーマンス テストを行った後、新しいコスト モデルを使用するように[`tidb_cost_model_version = 2`](/system-variables.md#tidb_cost_model_version-new-in-v620)変数を設定できます。
 
     コスト モデル バージョン 2 は、TiDB オプティマイザーの全体的な機能を大幅に向上させ、TiDB がより強力な HTAP データベースに向けて進化するのに役立つ機能として一般提供されます。
 
@@ -224,7 +231,7 @@ TiDB 6.5.0 は長期サポート リリース (LTS) です。
 
 -   gzip、snappy、zstd 圧縮形式での SQL および CSV ファイルのエクスポートとインポートをサポート[#38514](https://github.com/pingcap/tidb/issues/38514) @ [リチュンジュ](https://github.com/lichunzhu)
 
-    Dumpling は、 gzip、snappy、zstd の圧縮形式での圧縮 SQL ファイルおよび CSV ファイルへのデータのエクスポートをサポートしています。 TiDB Lightning は、これらの形式の圧縮ファイルのインポートもサポートしています。
+    Dumpling は、 gzip、snappy、zstd の圧縮形式での圧縮 SQL および CSV ファイルへのデータのエクスポートをサポートしています。 TiDB Lightning は、これらの形式の圧縮ファイルのインポートもサポートしています。
 
     以前は、CSV ファイルや SQL ファイルを保存するためにデータをエクスポートまたはインポートするために大規模なstorageスペースを提供する必要があり、storageコストが高くなっていました。この機能のリリースにより、データ ファイルを圧縮することでstorageコストを大幅に削減できます。
 
@@ -282,7 +289,7 @@ TiDB 6.5.0 は長期サポート リリース (LTS) です。
 
     TiDB スナップショット バックアップは、チェックポイントからのバックアップの再開をサポートしています。バックアップと復元 (BR) で回復可能なエラーが発生すると、バックアップが再試行されます。ただし、再試行が数回失敗すると、 BR は終了します。チェックポイント バックアップ機能を使用すると、数十分にわたるネットワーク障害など、より長時間の回復可能な障害の再試行が可能になります。
 
-    BR終了後 1 時間以内にシステムを障害から回復しないと、バックアップされるスナップショット データが GC メカニズムによって再利用され、バックアップが失敗する可能性があることに注意してください。詳細については、 [ドキュメンテーション](/br/br-checkpoint-backup.md#backup-retry-must-be-prior-to-gc)を参照してください。
+    BR終了後 1 時間以内にシステムを障害から回復しないと、バックアップ対象のスナップショット データが GC メカニズムによって再利用され、バックアップが失敗する可能性があることに注意してください。詳細については、 [ドキュメンテーション](/br/br-checkpoint-backup.md#backup-retry-must-be-prior-to-gc)を参照してください。
 
 -   PITR パフォーマンスが大幅に向上 @ [ジョッカウ](https://github.com/joccau)
 
@@ -357,11 +364,11 @@ TiDB 6.5.0 は長期サポート リリース (LTS) です。
 ### その他 {#others}
 
 -   v6.5.0 以降、 `mysql.user`テーブルには`Password_reuse_history`と`Password_reuse_time`という 2 つの新しい列が追加されます。
--   v6.5.0 以降、 [インデックス加速度](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630)機能はデフォルトで有効になります。この機能は[単一の`ALTER TABLE`ステートメントで複数の列またはインデックスを変更する](/sql-statements/sql-statement-alter-table.md)と完全な互換性はありません。インデックス アクセラレーションを使用して一意のインデックスを追加する場合は、同じステートメント内の他の列やインデックスを変更しないようにする必要があります。この機能は[PITR (ポイントインタイムリカバリ)](/br/br-pitr-guide.md)とも互換性がありません。インデックス アクセラレーション機能を使用する場合は、PITR バックアップ タスクがバックグラウンドで実行されていないことを確認する必要があります。そうしないと、予期しない結果が発生する可能性があります。詳細については、 [ドキュメンテーション](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630)を参照してください。
+-   v6.5.0 以降、 [インデックス加速度](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630)機能はデフォルトで有効になっています。この機能は[単一の`ALTER TABLE`ステートメントで複数の列またはインデックスを変更する](/sql-statements/sql-statement-alter-table.md)と完全な互換性はありません。インデックス アクセラレーションを使用して一意のインデックスを追加する場合は、同じステートメント内の他の列やインデックスを変更しないようにする必要があります。この機能は[PITR (ポイントインタイムリカバリ)](/br/br-pitr-guide.md)とも互換性がありません。インデックス アクセラレーション機能を使用する場合は、PITR バックアップ タスクがバックグラウンドで実行されていないことを確認する必要があります。そうしないと、予期しない結果が発生する可能性があります。詳細については、 [ドキュメンテーション](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630)を参照してください。
 
 ## 廃止された機能 {#deprecated-feature}
 
-v6.5.0 以降、v4.0.7 で導入された`AMEND TRANSACTION`メカニズムは非推奨となり、 [メタデータロック](/metadata-lock.md)に置き換えられます。
+v6.5.0 以降、v4.0.7 で導入された`AMEND TRANSACTION`メカニズムは非推奨になり、 [メタデータロック](/metadata-lock.md)に置き換えられます。
 
 ## 改善点 {#improvements}
 
@@ -456,7 +463,7 @@ v6.5.0 以降、v4.0.7 で導入された`AMEND TRANSACTION`メカニズムは�
 
 -   TiFlash
 
-    -   TiFlash [#6159](https://github.com/pingcap/tiflash/issues/6159) @ [リデズ](https://github.com/lidezhu)の再起動後にデルタレイヤーのカラムファイルが圧縮できない問題を修正
+    -   TiFlash [#6159](https://github.com/pingcap/tiflash/issues/6159) @ [リデジュ](https://github.com/lidezhu)の再起動後にデルタレイヤーのカラムファイルが圧縮できない問題を修正
     -   TiFlashファイルオープン OPS が高すぎる問題を修正[#6345](https://github.com/pingcap/tiflash/issues/6345) @ [ジェイ・ソン・ファン](https://github.com/JaySon-Huang)
 
 -   ツール

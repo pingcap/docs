@@ -5,14 +5,16 @@ summary: Learn about GC configuration parameters.
 
 # ガベージコレクションのコンフィグレーション {#garbage-collection-configuration}
 
-ガベージ コレクションは、次のシステム変数を介して構成されます。
+次のシステム変数を使用してガベージコレクション(GC) を構成できます。
 
--   [`tidb_gc_enable`](/system-variables.md#tidb_gc_enable-new-in-v50)
--   [`tidb_gc_run_interval`](/system-variables.md#tidb_gc_run_interval-new-in-v50)
--   [`tidb_gc_life_time`](/system-variables.md#tidb_gc_life_time-new-in-v50)
--   [`tidb_gc_concurrency`](/system-variables.md#tidb_gc_concurrency-new-in-v50)
--   [`tidb_gc_scan_lock_mode`](/system-variables.md#tidb_gc_scan_lock_mode-new-in-v50)
--   [`tidb_gc_max_wait_time`](/system-variables.md#tidb_gc_max_wait_time-new-in-v610)
+-   [`tidb_gc_enable`](/system-variables.md#tidb_gc_enable-new-in-v50) : TiKV のガベージコレクションを有効にするかどうかを制御します。
+-   [`tidb_gc_run_interval`](/system-variables.md#tidb_gc_run_interval-new-in-v50) : GC 間隔を指定します。
+-   [`tidb_gc_life_time`](/system-variables.md#tidb_gc_life_time-new-in-v50) : 各 GC のデータが保持される時間制限を指定します。
+-   [`tidb_gc_concurrency`](/system-variables.md#tidb_gc_concurrency-new-in-v50) : GC の[ロックの解決](/garbage-collection-overview.md#resolve-locks)ステップのスレッド数を指定します。
+-   [`tidb_gc_scan_lock_mode`](/system-variables.md#tidb_gc_scan_lock_mode-new-in-v50) : GC のロックの解決ステップでロックをスキャンする方法を指定します。
+-   [`tidb_gc_max_wait_time`](/system-variables.md#tidb_gc_max_wait_time-new-in-v610) : アクティブなトランザクションが GC セーフ ポイントをブロックする最大時間を指定します。
+
+システム変数の値を変更する方法の詳細については、 [システム変数](/system-variables.md)を参照してください。
 
 ## GC I/O 制限 {#gc-i-o-limit}
 
@@ -46,7 +48,7 @@ TiDB の以前のリリースでは、ガベージコレクションは`mysql.ti
 
 ## TiDB 6.1.0 の変更点 {#changes-in-tidb-6-1-0}
 
-TiDB v6.1.0 より前では、TiDB のトランザクションは GC セーフ ポイントに影響しません。 v6.1.0 以降、TiDB は GC セーフ ポイントを計算する際にトランザクションの startTS を考慮し、アクセス対象のデータがクリアされている問題を解決します。トランザクションが長すぎると、安全なポイントが長時間ブロックされ、アプリケーションのパフォーマンスに影響します。
+TiDB v6.1.0 より前では、TiDB 内のトランザクションは GC セーフ ポイントに影響しません。 v6.1.0 以降、TiDB は GC セーフ ポイントを計算する際にトランザクションの startTS を考慮し、アクセス対象のデータがクリアされているという問題を解決します。トランザクションが長すぎると、安全なポイントが長時間ブロックされ、アプリケーションのパフォーマンスに影響します。
 
 TiDB v6.1.0 では、アクティブなトランザクションが GC セーフ ポイントをブロックする最大時間を制御するためにシステム変数[`tidb_gc_max_wait_time`](/system-variables.md#tidb_gc_max_wait_time-new-in-v610)が導入されました。この値を超えると、GC セーフ ポイントが強制的に転送されます。
 
