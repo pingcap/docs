@@ -284,7 +284,7 @@ The parameters of `QUERY_LIMIT` are as follows:
 
 #### `QUERY WATCH` parameters
 
-For more information about `QUERY WATCH` parameters, see [`QUERY WATCH`](/sql-statements/sql-statement-query-watch.md).
+For more information about the synopsis of `QUERY WATCH`, see [`QUERY WATCH`](/sql-statements/sql-statement-query-watch.md).
 
 The parameters are as follows:
 
