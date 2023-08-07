@@ -17,7 +17,7 @@ Compared with TiDB [6.4.0-DMR](/releases/release-6.4.0.md), TiDB 6.5.0 introduce
 
 > **Tip**
 >
-> Compared with the previous LTS 6.1.0, TiDB 6.5.0 also include new features, improvements, and bug fixes released in [6.2.0-DMR](/releases/release-6.2.0.md), [6.3.0-DMR](/releases/release-6.3.0.md), [6.4.0-DMR](/releases/release-6.4.0.md).
+> Compared with the previous LTS 6.1.0, TiDB 6.5.0 also include new features, improvements, and bug fixes released in [6.2.0-DMR](/releases/release-6.2.0.md), [6.3.0-DMR](/releases/release-6.3.0.md), and [6.4.0-DMR](/releases/release-6.4.0.md).
 >
 > - To get a full list of changes between the LTS 6.1.0 and 6.5.0, besides this release notes, also see [6.2.0-DMR release notes](/releases/release-6.2.0.md), [6.3.0-DMR release notes](/releases/release-6.3.0.md), and [6.4.0-DMR release notes](/releases/release-6.4.0.md).
 > - To have a quick comparison of key features between LTS 6.1.0 and 6.5.0, you can check the `v6.1` and `v6.5` columns in [TiDB features](/basic-features.md).
