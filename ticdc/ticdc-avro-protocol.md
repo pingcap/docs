@@ -13,7 +13,7 @@ Avro is a data exchange format protocol defined by [Apache Avro™](https://avro
 >
 > For more information, see [What changes occur to the change event format when TiCDC enables the Old Value feature?](/ticdc/ticdc-faq.md#what-changes-occur-to-the-change-event-format-when-ticdc-enables-the-old-value-feature).
 >
-> Starting from v7.3.0, if you enable TiCDC to [replicate tables without a valid index](/ticdc/ticdc-manage-changefeed.md#replicate-tables-without-a-valid-index), TiCDC will report an error when you create a changefeed that uses Avro protocol.
+> Starting from v7.3.0, if you enable TiCDC to [replicate tables without a valid index](/ticdc/ticdc-manage-changefeed.md#replicate-tables-without-a-valid-index), TiCDC will report an error when you create a changefeed that uses the Avro protocol.
 
 ## Use Avro
 
