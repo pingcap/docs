@@ -1,7 +1,6 @@
 ---
 title: TiDB Query Execution Plan Overview
 summary: Learn about the execution plan information returned by the `EXPLAIN` statement in TiDB.
-aliases: ['/docs/dev/query-execution-plan/','/docs/dev/reference/performance/understanding-the-query-execution-plan/','/docs/dev/index-merge/','/docs/dev/reference/performance/index-merge/','/tidb/dev/index-merge','/tidb/dev/query-execution-plan']
 ---
 
 # TiDB Query Execution Plan Overview
@@ -99,7 +98,7 @@ The following describes the output of the `EXPLAIN` statement above:
 > |       └─Limit_20                | 1.00     | cop[tikv] |                       | offset:0, count:1                                                            |
 > |         └─IndexRangeScan_19     | 1.00     | cop[tikv] | table:t2, index:ia(a) | range: decided by [eq(test.t2.a, test.t1.b)], keep order:false, stats:pseudo |
 > +---------------------------------+----------+-----------+-----------------------+------------------------------------------------------------------------------+
-> 
+>
 > -- Since v6.4.0:
 >
 > -- You can find that the `estRows` column values for `IndexLookUp_11`, `Selection_10`, `IndexRangeScan_8`, and `TableRowIDScan_9` since v6.4.0 are different from that before v6.4.0.

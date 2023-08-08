@@ -1,7 +1,6 @@
 ---
 title: Split Region
 summary: An overview of the usage of Split Region for the TiDB database.
-aliases: ['/docs/dev/sql-statements/sql-statement-split-region/','/docs/dev/reference/sql/statements/split-region/']
 ---
 
 # Split Region
@@ -182,7 +181,7 @@ In the split method above, both data with the `y` and `z` prefixes are written i
 SPLIT TABLE t INDEX idx1 BETWEEN ("a") AND ("{") REGIONS 26;
 ```
 
-This statement splits index idx1 of the table `t` into 26 Regions from a~`{`. The range of Region 1 is `[minIndexValue, b)`; the range of Region 2 is `[b, c)`; … the range of Region 25 is `[y, z)`, and the range of Region 26 is `[z, maxIndexValue)`. 
+This statement splits index idx1 of the table `t` into 26 Regions from a~`{`. The range of Region 1 is `[minIndexValue, b)`; the range of Region 2 is `[b, c)`; … the range of Region 25 is `[y, z)`, and the range of Region 26 is `[z, maxIndexValue)`.
 
 If the column of index `idx2` is of time type like timestamp/datetime, and you want to split index Region by year:
 

@@ -1,7 +1,6 @@
 ---
 title: Deploy a DM Cluster Using TiUP
 summary: Learn how to deploy TiDB Data Migration using TiUP DM.
-aliases: ['/docs/tidb-data-migration/dev/deploy-a-dm-cluster-using-ansible/','/docs/tools/dm/deployment/']
 ---
 
 # Deploy a DM Cluster Using TiUP
@@ -134,7 +133,7 @@ alertmanager_servers:
 ```
 
 > **Note:**
-> 
+>
 > - It is not recommended to run too many DM-workers on one host. Each DM-worker should be allocated at least 2 core CPU and 4 GiB memory.
 >
 > - Make sure that the ports among the following components are interconnected:
