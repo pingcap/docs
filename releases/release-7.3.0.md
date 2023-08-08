@@ -287,7 +287,20 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.3/quick-start-with-
     - Fix the issue that `resolve lock` might hang when there is a sudden change in PD time [#44822](https://github.com/pingcap/tidb/issues/44822) @[zyguan](https://github.com/zyguan)
     - Fix the issue that the GC Resolve Locks step might miss some pessimistic locks [#45134](https://github.com/pingcap/tidb/issues/45134) @[MyonKeminta](https://github.com/MyonKeminta)
     - Fix the issue that the query with `ORDER BY` returns incorrect results in dynamic pruning mode [#45007](https://github.com/pingcap/tidb/issues/45007) @[Defined2014](https://github.com/Defined2014)
-
+    - Fix the issue that `AUTO_INCREMENT` and the default value cannot coexist in the column definition [#45136](https://github.com/pingcap/tidb/issues/45136) @[Defined2014](https://github.com/Defined2014)
+    - Fix the issue that in some scenarios, querying the system table `information_schema.TIKV_REGION_STATUS` returns incorrect results [#45531](https://github.com/pingcap/tidb/issues/45531) @[Defined2014](https://github.com/Defined2014)
+    - Fix the issue of incorrect partition pruning of partition table partitions in some scenarios [#42273](https://github.com/pingcap/tidb/issues/42273) @[jiyfhust](https://github.com/jiyfhust)
+    - Fix the issue that global indexes cannot be cleared when executing `TRUNCATE` to truncate a certain partition of a partitioned table [#42435](https://github.com/pingcap/tidb/issues/42435) @[L-maple](https://github.com/L-maple)
+    - Fix the issue that in some scenarios unfinished TTL tasks cannot be re-executed after TiDB restarts [#45022](https://github.com/pingcap/tidb/issues/45022) @[lcwangchao](https://github.com/lcwangchao)
+    - Fix the memory leak issue when TTL is running [#45510](https://github.com/pingcap/tidb/issues/45510) @[lcwangchao](https://github.com/lcwangchao)
+    - Fix the issue of inaccurate error messages when inserting data into partitioned tables [#44966](https://github.com/pingcap/tidb/issues/44966) @[lilinghai](https://github.com/lilinghai)
+    - Fix the read permission issue on the `information_schema.tiflash_replica` table [#7795](https://github.com/pingcap/tiflash/issues/7795) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
+    - Fix the issue that an error occurs when using the wrong partition table name [#44967](https://github.com/pingcap/tidb/issues/44967) @[River2000i](https://github.com/River2000i)
+    - Fix the issue that in some scenarios creating indexes gets stuck when `tidb_enable_dist_task` is enabled [#44440](https://github.com/pingcap/tidb/issues/44440) @[tangenta](https://github.com/tangenta)
+    - Fix the issue that using BR to recover a table with `AUTO_ID_CACHE = 1` causes the `Duplicate entry` error [#44716](https://github.com/pingcap/tidb/issues/44716) @[tiancaiamao](https://github.com/tiancaiamao)
+    - Fix the issue that the time consumed for executing `TRUNCATE TABLE` is not consistent with the task execution time shown in the `ADMIN SHOW DDL JOBS` result [#44785](https://github.com/pingcap/tidb/issues/44785) @[tangenta](https://github.com/tangenta)
+    - Fix the issue that upgrading TiDB gets stuck when reading metadata takes longer than one DDL lease [#45176](https://github.com/pingcap/tidb/issues/45176) @[zimulala](https://github.com/zimulala)
+    
 + TiKV
 
     <!-- Oreoxmt -->
