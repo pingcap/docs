@@ -33,7 +33,7 @@ For other operating systems, see [Terraform documentation](https://learn.hashico
 
 ## Step 2. Create an API key
 
-TiDB Cloud API use API keys for authentication.
+TiDB Cloud API uses HTTP Digest Authentication. It protects your private key from being sent over the network.
 
 Currently, TiDB Cloud Terraform Provider does not support managing API keys. So you need to create an API key in the [TiDB Cloud console](https://tidbcloud.com/console/clusters).
 
