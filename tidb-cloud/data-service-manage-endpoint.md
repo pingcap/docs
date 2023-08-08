@@ -122,10 +122,6 @@ On the right pane of the endpoint details page, you can click the **Properties**
 - **Tag**: the tag used for identifying a group of endpoints.
 - **Batch Operation**: this property is visible only when the request method is `POST`, `PUT`, or `DELETE`. When **Batch Operation** is enabled, you can operate on multiple rows in a single request. For example, you can insert multiple rows of data in a single `POST` request by adding an array of data objects in the `--data-raw` option of your curl command when calling the endpoint.
 
-    > **Note:**
-    >
-    > If the request method of your endpoint is `DELETE` and **Batch Operation** is enabled, you need to use `%2C` instead of comma (`,`) to separate the rows to be deleted in your curl command, such as `/endpoint/<Endpoint Path>?id=${id}%2C${id}`. This is because comma (`,`) is a reserved character in URLs and cannot be used directly.
-
 ### Write SQL statements
 
 On the SQL editor of the endpoint details page, you can write and run the SQL statements for an endpoint. You can also simply type `--` followed by your instructions to let AI generate SQL statements automatically.
@@ -257,15 +253,21 @@ TiDB Cloud Data Service generates code examples to help you call an endpoint. To
     >
     > Alternatively, you can also click the endpoint name to view its details and click **...** > **Code Example** in the upper-right corner.
 
-4. In the dialog box, select the cluster and database that you want to use to call the endpoint, and then copy the code example.
+4. In the dialog box, select the environment and authentication method that you want to use to call the endpoint, and then copy the code example.
 
     > **Note:**
     >
     > - The code examples are generated based on the properties and parameters of the endpoint.
-    > - The online environment is available only after you deploy the endpoint.
     > - Currently, TiDB Cloud Data Service only provides the curl code example.
 
-    Here is an example of a curl code snippet for a `POST` request with **Batch Operation** enabled:
+    - Environment: choose **Test Environment** or **Online Environment** depending on your need. **Online Environment** is available only after you deploy the endpoint.
+    - Authentication method: choose **Basic Authentication** or **Digest Authentication**.
+        - **Basic Authentication** transmits your API key as based64 encoded text.
+        - **Digest Authentication** transmits your API key in an encrypted form, which is more secure.
+
+      Compared with **Basic Authentication**, the curl code of **Digest Authentication** includes an additional `--digest` option.
+
+    Here is an example of a curl code snippet for a `POST` request that enables **Batch Operation** and uses **Digest Authentication**:
 
     <SimpleTab>
     <div label="Test Environment">
@@ -317,7 +319,7 @@ TiDB Cloud Data Service generates code examples to help you call an endpoint. To
         - For endpoints with **Batch Operation** enabled, the `--data-raw` option accepts an array of data objects so you can operate on multiple rows of data using one endpoint.
         - For endpoints with **Batch Operation** not enabled, the `--data-raw` option only accepts one data object.
 
-    - If the request method of your endpoint is `DELETE` and **Batch Operation** is enabled for the endpoint, you need to use `%2C` instead of comma (`,`) to separate the rows to be deleted in your curl command, such as `/endpoint/<Endpoint Path>?id=${id}%2C${id}`. This is because comma (`,`) is a reserved character in URLs and cannot be used directly.
+    - If the request method of your endpoint is `DELETE` and **Batch Operation** is enabled for the endpoint, you can use comma (`,`) to separate multiple rows to be deleted in your curl command, such as `/endpoint/<Endpoint Path>?id=${id1},${id2},${id3}`.
     - If the endpoint contains parameters, specify the parameter values when calling the endpoint.
 
 ### Response
