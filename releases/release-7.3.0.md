@@ -201,6 +201,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.3/quick-start-with-
 | TiKV | [`storage.block-cache.capacity`](/tikv-configuration-file.md#capacity) | Modified | When using Partitioned Raft KV (`storage.engine="partitioned-raft-kv"`), to compensate for the memory overhead of memtables, TiKV changes the default value from 45% to 30% of the size of total system memory. |
 | TiKV | [`rocksdb.write-buffer-limit`](/tikv-configuration-file.md#write-buffer-limit-new-in-v660) | Modified | To reduce the memory overhead of memtables, when `storage.engine="raft-kv"`, TiKV changes the default value from 25% of the memory of the machine to `0`, which means no limit. When using Partitioned Raft KV (`storage.engine="partitioned-raft-kv"`), TiKV changes the default value from 25% to 20% of the memory of the machine. |
 | TiKV | [`rocksdb.lockcf.write-buffer-size`](/tikv-configuration-file.md#write-buffer-size) | Modified | When using Partitioned Raft KV (`storage.engine="partitioned-raft-kv"`), to speed up compaction on lockcf, TiKV changes the default value from `"32MB"` to `"4MB"`. |
+| TiFlash | [`storage.format_version`](/tiflash/tiflash-configuration.md) | Modified | Introduces a new DTFile format `format_version = 5` to reduce the number of physical files by merging smaller files. Note that this format is experimental and not enabled by default. 
 |TiDB Lightning  | `conflict.max-record-rows` | Newly added | The new version of strategy to handle conflicting data. It controls the maximum number of rows in the `conflict_records` table. The default value is 100. |
 |TiDB Lightning  | `conflict.strategy` | Newly added | The new version of strategy to handle conflicting data.  It includes the following options: "" (TiDB Lightning does not detect and process conflicting data), `error` (terminate the import and report an error if a primary or unique key conflict is detected in the imported data), `replace` (when encountering data with conflicting primary or unique keys, the new data is retained and the old data is overwritten.), `ignore` (when encountering data with conflicting primary or unique keys, the old data is retained and the new data is ignored.). The default value is "", that is, TiDB Lightning does not detect and process conflicting data. |
 |TiDB Lightning  | `conflict.threshold` | Newly added | Controls the upper limit of the conflicting data. When `conflict.strategy="error"`, the default value is `0`. When `conflict.strategy="replace”` or `conflict.strategy=“ignore"`, you can set it as a maxint. |
@@ -245,7 +246,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.3/quick-start-with-
 + TiFlash
 
     <!-- qiancai -->
-    - Support a new DTFile format version to reduce the number of physical files (experimental) [#7595](https://github.com/pingcap/tiflash/issues/7595) @[hongyunyan](https://github.com/hongyunyan)
+    - Support a new DTFile format version [`storage.format_version = 5`](/tiflash/tiflash-configuration.md) to reduce the number of physical files (experimental) [#7595](https://github.com/pingcap/tiflash/issues/7595) @[hongyunyan](https://github.com/hongyunyan)
 
 + Tools
 
