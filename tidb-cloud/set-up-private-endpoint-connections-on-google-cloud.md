@@ -121,13 +121,3 @@ The possible statuses of a private endpoint service are explained as follows:
 - **Deleting**: The endpoint service or the cluster is being deleted, which takes 3 to 5 minutes.
 
 ## Troubleshooting
-
-### I cannot connect to a TiDB cluster via a private endpoint after enabling private DNS. Why?
-
-You might need to properly set the security group for your VPC endpoint in the AWS Management Console. Go to **VPC** > **Endpoints**. Right-click your VPC endpoint and select the proper **Manage security groups**. A proper security group within your VPC that allows inbound access from your EC2 instances on Port 4000 or a customer-defined port.
-
-![Manage security groups](/media/tidb-cloud/private-endpoint/manage-security-groups.png)
-
-### I cannot enable private DNS. An error is reported indicating that the `enableDnsSupport` and `enableDnsHostnames` VPC attributes are not enabled
-
-Make sure that DNS hostname and DNS resolution are both enabled in your VPC setting. They are disabled by default when you create a VPC in the AWS Management Console.
