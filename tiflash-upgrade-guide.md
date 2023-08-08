@@ -88,6 +88,6 @@ When you upgrade TiFlash from v6.1 to v6.2, pay attention to the change in data 
 
 ## From v6.x or v7.x to v7.3 with `storage.format_version = 5` configured
 
-Starting from v7.3, TiFlash introduces a new DTFile version: DTFile V3. This new DTFile version can merge multiple small files into a single larger file to reduce the total number of files. In v7.3, the default DTFile version is still V2. To use V3, you can set the [TiFlash configuration parameter](/tiflash/tiflash-configuration.md) `storage.format_version = 5`. After the setting, TiFlash can still read V2 DTFiles and will gradually rewrite existing V2 DTFiles to V3 DTFiles during subsequent data compaction.
+Starting from v7.3, TiFlash introduces a new DTFile version: DTFile V3 (experimental). This new DTFile version can merge multiple small files into a single larger file to reduce the total number of files. In v7.3, the default DTFile version is still V2. To use V3, you can set the [TiFlash configuration parameter](/tiflash/tiflash-configuration.md) `storage.format_version = 5`. After the setting, TiFlash can still read V2 DTFiles and will gradually rewrite existing V2 DTFiles to V3 DTFiles during subsequent data compaction.
 
 After upgrading TiFlash to v7.3 and configuring TiFlash to use V3 DTFiles, if you need to revert TiFlash to an earlier version, you can use the DTTool offline to rewrite V3 DTFiles back to V2 DTFiles. For more information, see [DTTool Migration Tool](/tiflash/tiflash-command-line-flags.md#dttool-migrate).
