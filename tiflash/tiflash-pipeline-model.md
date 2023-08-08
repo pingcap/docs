@@ -11,17 +11,9 @@ Starting from v7.2.0, TiFlash supports a new execution model, the pipeline execu
 
 Inspired by the paper [Morsel-Driven Parallelism: A NUMA-Aware Query Evaluation Framework for the Many-Core Age](https://dl.acm.org/doi/10.1145/2588555.2610507), the TiFlash pipeline execution model provides a fine-grained task scheduling model, which is different from the traditional thread scheduling model. It reduces the overhead of operating system thread scheduling and provides a fine-grained scheduling mechanism.
 
-> **Note:**
->
-> - The pipeline execution model is currently an experimental feature and is not recommended to use in production environments.
-> - The pipeline execution model does not support the following features. When the following features are enabled, even if `tidb_enable_tiflash_pipeline_model` is set to `ON`, the query pushed down to TiFlash will still be executed using the original stream model.
->
->     - [Join operator spill to disk](/system-variables.md#tidb_max_bytes_before_tiflash_external_join-new-in-v700)
->     - [TiFlash Disaggregated Storage and Compute Architecture and S3 Support](/tiflash/tiflash-disaggregated-and-s3.md)
-
 ## Enable and disable the pipeline execution model
 
-To enable or disable the pipeline execution model, you can use the [`tidb_enable_tiflash_pipeline_model`](/system-variables.md#tidb_enable_tiflash_pipeline_model-new-in-v720) system variable. This variable can take effect at the session level and global level. By default, `tidb_enable_tiflash_pipeline_model` is set to `OFF`, which means that the TiFlash pipeline execution model is disabled. You can use the following statement to view the variable value:
+To enable or disable the pipeline execution model, you can use the [`tidb_enable_tiflash_pipeline_model`](/system-variables.md#tidb_enable_tiflash_pipeline_model-new-in-v720) system variable. This variable can take effect at the session level and global level. By default, `tidb_enable_tiflash_pipeline_model` is set to `ON`, which means that the TiFlash pipeline execution model is disabled. You can use the following statement to view the variable value:
 
 ```sql
 SHOW VARIABLES LIKE 'tidb_enable_tiflash_pipeline_model';
@@ -31,7 +23,7 @@ SHOW VARIABLES LIKE 'tidb_enable_tiflash_pipeline_model';
 +------------------------------------+-------+
 | Variable_name                      | Value |
 +------------------------------------+-------+
-| tidb_enable_tiflash_pipeline_model | OFF   |
+| tidb_enable_tiflash_pipeline_model | ON    |
 +------------------------------------+-------+
 ```
 
@@ -43,7 +35,7 @@ SHOW GLOBAL VARIABLES LIKE 'tidb_enable_tiflash_pipeline_model';
 +------------------------------------+-------+
 | Variable_name                      | Value |
 +------------------------------------+-------+
-| tidb_enable_tiflash_pipeline_model | OFF   |
+| tidb_enable_tiflash_pipeline_model | ON    |
 +------------------------------------+-------+
 ```
 
