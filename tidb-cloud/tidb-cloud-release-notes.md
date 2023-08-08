@@ -8,6 +8,16 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2023.
 
+## August 8, 2023
+
+**General changes**
+
+- [Data Service](https://tidbcloud.com/console/data-service) now supports Basic Authentication.
+
+    You can provide your public key as the username and private key as the password in requests using [the 'Basic' HTTP Authentication](https://datatracker.ietf.org/doc/html/rfc7617). Compared with Digest Authentication, the Basic Authentication is simpler, enabling more straightforward usage when calling Data Service endpoints.
+
+    For more information, see [Call an endpoint](/tidb-cloud/data-service-manage-endpoint.md#call-an-endpoint).
+
 ## August 1, 2023
 
 **General changes**
