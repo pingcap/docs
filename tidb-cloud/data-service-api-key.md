@@ -7,8 +7,8 @@ summary: Learn how to create, edit, and delete an API key for a Data App.
 
 The TiDB Cloud Data API supports both [Basic Authentication](https://en.wikipedia.org/wiki/Basic_access_authentication) and [Digest Authentication](https://en.wikipedia.org/wiki/Digest_access_authentication).
 
-- [Basic Authentication](https://en.wikipedia.org/wiki/Basic_access_authentication) lets you use API public key as the username and private key as the password, with requests using standard HTTP Basic Authentication.
-- [Digest Authentication](https://en.wikipedia.org/wiki/Digest_access_authentication) protects your private key from being sent over the network. For more details about HTTP Digest Authentication, refer to the [IETF RFC](https://datatracker.ietf.org/doc/html/rfc7616).
+- [Basic Authentication](https://en.wikipedia.org/wiki/Basic_access_authentication) uses non-encrypted base64 encoding to transmit your public key and private key. Transmission security is ensured through HTTPS. For more information, see [RFC 7617 - The 'Basic' HTTP Authentication Scheme](https://datatracker.ietf.org/doc/html/rfc7617)
+- [Digest Authentication](https://en.wikipedia.org/wiki/Digest_access_authentication) offers an additional security layer by hashing your public key, private key, and so on before network transmission. This encrypts the private key to prevent it from being transmitted in plain text. For more information, see [RFC 7616 - HTTP Digest Access Authentication](https://datatracker.ietf.org/doc/html/rfc7616)
 
 > **Note:**
 >
