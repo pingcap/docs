@@ -1,7 +1,6 @@
 ---
 title: TiDB Environment and System Configuration Check
 summary: Learn the environment check operations before deploying TiDB.
-aliases: ['/docs/dev/check-before-deployment/']
 ---
 
 # TiDB Environment and System Configuration Check
@@ -141,7 +140,7 @@ Some operations in TiDB require writing temporary files to the server, so it is 
     When the variable [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) is set to `ON` (the default value in v6.5.0 and later versions), `Fast Online DDL` is enabled, and some DDL operations need to read and write temporary files in filesystems. The location is defined by the configuration item [`temp-dir`](/tidb-configuration-file.md#temp-dir-new-in-v630). You need to ensure that the user that runs TiDB has read and write permissions for that directory of the operating system. Taking the default directory `/tmp/tidb` as an example:
 
     > **Note:**
-    > 
+    >
     > If DDL operations on large objects exist in your application, it is highly recommended to configure an independent large file system for [`temp-dir`](/tidb-configuration-file.md#temp-dir-new-in-v630).
 
     ```shell

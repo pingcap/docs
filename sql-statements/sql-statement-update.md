@@ -1,7 +1,6 @@
 ---
 title: UPDATE | TiDB SQL Statement Reference
 summary: An overview of the usage of UPDATE for the TiDB database.
-aliases: ['/docs/dev/sql-statements/sql-statement-update/','/docs/dev/reference/sql/statements/update/']
 ---
 
 # UPDATE
@@ -79,7 +78,7 @@ INSERT INTO t VALUES (1,2);
 UPDATE t SET a = a+1,b=a;
 ```
 
-In MySQL, the column `b` is updated to 2 because it is set to the value of `a`, and the value of `a` (which is 1) is updated to `a+1` (which is 2) in the same statement. 
+In MySQL, the column `b` is updated to 2 because it is set to the value of `a`, and the value of `a` (which is 1) is updated to `a+1` (which is 2) in the same statement.
 
 TiDB follows the more standard SQL behavior, and updates `b` to 1.
 

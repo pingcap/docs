@@ -1,7 +1,6 @@
 ---
 title: TiDB Tools Use Cases
 summary: Learn the common use cases of TiDB tools and how to choose the tools.
-aliases: ['/docs/dev/ecosystem-tool-user-case/']
 ---
 
 # TiDB Tools Use Cases

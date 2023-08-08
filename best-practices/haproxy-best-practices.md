@@ -1,7 +1,6 @@
 ---
 title: Best Practices for Using HAProxy in TiDB
 summary: This document describes best practices for configuration and usage of HAProxy in TiDB.
-aliases: ['/docs/dev/best-practices/haproxy-best-practices/','/docs/dev/reference/best-practices/haproxy/']
 ---
 
 # Best Practices for Using HAProxy in TiDB
@@ -213,7 +212,7 @@ listen tidb-cluster                        # Database load balancing.
 To check the source IP address using `SHOW PROCESSLIST`, you need to configure the [PROXY protocol](https://www.haproxy.org/download/1.8/doc/proxy-protocol.txt) to connect to TiDB.
 
 ```yaml
-   server tidb-1 10.9.18.229:4000 send-proxy check inter 2000 rise 2 fall 3       
+   server tidb-1 10.9.18.229:4000 send-proxy check inter 2000 rise 2 fall 3
    server tidb-2 10.9.39.208:4000 send-proxy check inter 2000 rise 2 fall 3
    server tidb-3 10.9.64.166:4000 send-proxy check inter 2000 rise 2 fall 3
 ```
