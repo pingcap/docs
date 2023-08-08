@@ -25,7 +25,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.3/quick-start-with-
   <tr>
     <td>Scalability and Performance</td>
     <td>TiDB Lightning supports Partitioned Raft KV </td>
-    <td>TiDB Lightning now supports the new [Partitioned Raft KV](https://docs.pingcap.com/tidb/v7.3/partitioned-raft-kv) architecture, as part of the near-term GA of the architecture.
+    <td>TiDB Lightning now supports the new <a href="https://docs.pingcap.com/tidb/v7.3/partitioned-raft-kv">Partitioned Raft KV</a> architecture, as part of the near-term GA of the architecture.
     </td>
   </tr>
   <tr>
