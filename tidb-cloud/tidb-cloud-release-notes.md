@@ -14,9 +14,9 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 - [Data Service](https://tidbcloud.com/console/data-service) now supports Basic Authentication.
 
-    You can provide your public key as the username and private key as the password in requests using standard [HTTP Basic Authentication](https://datatracker.ietf.org/doc/html/rfc7617). Compared with Digest Authentication, Basic Authentication is simpler, enabling more straightforward usage when calling Data Service endpoints.
+    You can provide your public key as the username and private key as the password in requests using [the 'Basic' HTTP Authentication](https://datatracker.ietf.org/doc/html/rfc7617). Compared with Digest Authentication, the Basic Authentication is simpler, enabling more straightforward usage when calling Data Service endpoints.
 
-     For more information, see [Call an endpoint](/tidb-cloud/data-service-manage-endpoint.md#call-an-endpoint).
+    For more information, see [Call an endpoint](/tidb-cloud/data-service-manage-endpoint.md#call-an-endpoint).
 
 ## August 1, 2023
 
