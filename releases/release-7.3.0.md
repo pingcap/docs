@@ -304,7 +304,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.3/quick-start-with-
 + TiKV
 
     <!-- Oreoxmt -->
-    - Fix the issue that in some rare cases, reading data during GC might cause TiKV panic [#15109](https://github.com/tikv/tikv/issues/15109) [@MyonKeminta](https://github.com/MyonKeminta)
+    - Fix the issue that reading data during GC might cause TiKV panic in some rare cases [#15109](https://github.com/tikv/tikv/issues/15109) [@MyonKeminta](https://github.com/MyonKeminta)
 
 + PD
 
