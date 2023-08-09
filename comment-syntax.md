@@ -11,8 +11,6 @@ TiDB supports three comment styles:
 
 - Use `#` to comment a line:
 
-    {{< copyable "sql" >}}
-
     ```sql
     SELECT 1+1;     # comments
     ```
