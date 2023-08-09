@@ -1973,8 +1973,6 @@ Currently, neither `static` nor `dynamic` pruning mode supports prepared stateme
 
 2. Generate the statements for updating the statistics of all partitioned tables:
 
-    {{< copyable "sql" >}}
-
     ```sql
     SELECT DISTINCT CONCAT('ANALYZE TABLE ',TABLE_SCHEMA,'.',TABLE_NAME,' ALL COLUMNS;')
         FROM information_schema.PARTITIONS
@@ -1995,9 +1993,7 @@ Currently, neither `static` nor `dynamic` pruning mode supports prepared stateme
 
 3. Export the batch update statements to a file:
 
-    {{< copyable "sql" >}}
-
-    ```sql
+    ```shell
     mysql --host xxxx --port xxxx -u root -p -e "SELECT DISTINCT CONCAT('ANALYZE TABLE ',TABLE_SCHEMA,'.',TABLE_NAME,' ALL COLUMNS;') \
         FROM information_schema.PARTITIONS \
         WHERE TIDB_PARTITION_ID IS NOT NULL \
