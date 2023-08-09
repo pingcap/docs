@@ -24,14 +24,14 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.3/quick-start-with-
 <tbody>
   <tr>
     <td>Scalability and Performance</td>
-    <td>TiDB Lightning supports Partitioned Raft KV </td>
-    <td>TiDB Lightning now supports the new <a href="https://docs.pingcap.com/tidb/v7.3/partitioned-raft-kv">Partitioned Raft KV</a> architecture, as part of the near-term GA of the architecture.
+    <td>TiDB Lightning supports <a href="https://docs.pingcap.com/tidb/v7.3/partitioned-raft-kv">Partitioned Raft KV</a> (experimental)</td>
+    <td>TiDB Lightning now supports the new Partitioned Raft KV architecture, as part of the near-term GA of the architecture.
     </td>
   </tr>
   <tr>
     <td rowspan="2">Reliability and Availability</td>
-    <td><a href="https://docs.pingcap.com/tidb/v7.3/tidb-lightning-physical-import-mode-usage#conflict-detection">Add automatic conflict detection and resolution on imports</a></td>
-    <td>The TiDB Lightning Physical Import Mode supports a new version of conflict detection, which implements the semantics of replacing (`replace`) or ignoring (`ignore`) conflict data when encountering conflicts. It automatically handles conflict data for you while improving the performance of conflict resolution.</td>
+    <td><a href="https://docs.pingcap.com/tidb/v7.3/tidb-lightning-physical-import-mode-usage#conflict-detection">Add automatic conflict detection and resolution on data imports</a></td>
+    <td>The TiDB Lightning Physical Import Mode supports a new version of conflict detection, which implements the semantics of replacing (<code>replace</code>) or ignoring (<code>ignore</code>) conflict data when encountering conflicts. It automatically handles conflict data for you while improving the performance of conflict resolution.</td>
   </tr>
   <tr>
     <td><a href="https://docs.pingcap.com/tidb/v7.3/tidb-resource-control#query-watch-parameters">Manual management of runaway queries </a>(experimental)</td>
