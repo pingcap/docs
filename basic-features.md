@@ -109,6 +109,7 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 | [Index Merge](/explain-index-merge.md) | Y | Y | Y | Y | Y | Y | E | E | E | E | E |
 | [Placement Rules in SQL](/placement-rules-in-sql.md) | Y | Y | Y | Y | Y | E | E | N | N | N | N |
 | [Cascades Planner](/system-variables.md#tidb_enable_cascades_planner) | E | E | E | E | E | E | E | E | E | E | E |
+| [Runtime Filter](/runtime-filter.md) | Y | N | N | N | N | N | N | N | N | N | N |
 
 ## Data definition language (DDL)
 
