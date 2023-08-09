@@ -1975,9 +1975,13 @@ Currently, neither `static` nor `dynamic` pruning mode supports prepared stateme
     {{< copyable "sql" >}}
 
     ```sql
-    select distinct concat('ANALYZE TABLE ',TABLE_SCHEMA,'.',TABLE_NAME,' ALL COLUMNS;')
-        from information_schema.PARTITIONS
-        where TABLE_SCHEMA not in ('INFORMATION_SCHEMA','mysql','sys','PERFORMANCE_SCHEMA','METRICS_SCHEMA');
+    SELECT DISTINCT CONCAT('ANALYZE TABLE ',TABLE_SCHEMA,'.',TABLE_NAME,' ALL COLUMNS;')
+        FROM information_schema.PARTITIONS
+        WHERE TIDB_PARTITION_ID IS NOT NULL
+        AND TABLE_SCHEMA NOT IN ('INFORMATION_SCHEMA','mysql','sys','PERFORMANCE_SCHEMA','METRICS_SCHEMA');
+    ```
+
+    ```
     +----------------------------------------------------------------------+
     | concat('ANALYZE TABLE ',TABLE_SCHEMA,'.',TABLE_NAME,' ALL COLUMNS;') |
     +----------------------------------------------------------------------+
@@ -1993,9 +1997,10 @@ Currently, neither `static` nor `dynamic` pruning mode supports prepared stateme
     {{< copyable "sql" >}}
 
     ```sql
-    mysql --host xxxx --port xxxx -u root -p -e "select distinct concat('ANALYZE TABLE ',TABLE_SCHEMA,'.',TABLE_NAME,' ALL COLUMNS;') \
-        from information_schema.PARTITIONS \
-        where TABLE_SCHEMA not in ('INFORMATION_SCHEMA','mysql','sys','PERFORMANCE_SCHEMA','METRICS_SCHEMA');" | tee gatherGlobalStats.sql
+    mysql --host xxxx --port xxxx -u root -p -e "SELECT DISTINCT CONCAT('ANALYZE TABLE ',TABLE_SCHEMA,'.',TABLE_NAME,' ALL COLUMNS;') \
+        FROM information_schema.PARTITIONS \
+        WHERE TIDB_PARTITION_ID IS NOT NULL \
+        AND TABLE_SCHEMA NOT IN ('INFORMATION_SCHEMA','mysql','sys','PERFORMANCE_SCHEMA','METRICS_SCHEMA');" | tee gatherGlobalStats.sql
     ```
 
 4. Execute a batch update:
