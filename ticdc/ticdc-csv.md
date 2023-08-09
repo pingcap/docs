@@ -7,6 +7,12 @@ summary: Learn the concept of TiCDC CSV Protocol and how to use it.
 
 When using a cloud storage service as the downstream sink, you can send DML events to the cloud storage service in CSV format.
 
+> **Warning:**
+>
+> When the [Old Value feature](/ticdc/ticdc-manage-changefeed.md#output-the-historical-value-of-a-row-changed-event) is enabled (`enable-old-value = true`), the CSV data format cannot output the old value of change events.
+>
+> For more information, see [What changes occur to the change event format when TiCDC enables the Old Value feature?](/ticdc/ticdc-faq.md#what-changes-occur-to-the-change-event-format-when-ticdc-enables-the-old-value-feature).
+
 ## Use CSV
 
 The following is an example of the configuration when using the CSV protocol:
@@ -83,7 +89,7 @@ The DML events of this table are stored in the CSV format as follows:
 | `TIME`                                                | String   | `"23:59:59"`                   | Format: `yyyy-MM-dd`                         |
 | `YEAR`                                                | Integer  | `1970`                         |  -                                     |
 | `VARCHAR`/`JSON`/`TINYTEXT`/`MEDIUMTEXT`/`LONGTEXT`/`TEXT`/`CHAR` | String   | `"test"`                       | UTF-8 encoded                       |
-| `VARBINARY`/`TINYBLOB`/`MEDIUMBLOB`/`LONGBLOB`/`BLOB`/`BINARY`  | String   | `"6Zi/5pav"`                   | base64 encoded                      |
+| `VARBINARY`/`TINYBLOB`/`MEDIUMBLOB`/`LONGBLOB`/`BLOB`/`BINARY`  | String   | `"6Zi/5pav"` or `"e998bfe696af"`                  | Base64 or hex encoded                      |
 | `BIT`                                                 | Integer  | `81`                           | -                                      |
 | `DECIMAL`                                             | String   | `"129012.1230000"`             | -                                      |
 | `ENUM`                                                | String   | `"a"`                          | -                                     |
