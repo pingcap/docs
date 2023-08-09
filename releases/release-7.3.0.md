@@ -62,7 +62,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.3/quick-start-with-
 
     For a cluster that is deployed in multiple data centers and each data center has complete TiFlash data replicas, you can configure this strategy to only select TiFlash replicas from the current data center. This means data scanning and MPP calculations are performed only on TiFlash nodes in the current data center, which avoids excessive network data transmission across data centers.
 
-    For more information，see [documentation](/system-variables.md/system-variables.md#tiflash_replica_read-new-in-v730).
+    For more information, see [documentation](/system-variables.md/system-variables.md#tiflash_replica_read-new-in-v730).
 
 * TiFlash supports Runtime Filter within nodes [#40220](https://github.com/pingcap/tidb/issues/40220) @[elsa0520](https://github.com/elsa0520) **tw@ran-huang** <!--1130-->
 
