@@ -276,6 +276,8 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.3/quick-start-with-
     - Fix the `duplicate entry` error that occurs when restoring a table with `AUTO_ID_CACHE=1` using BR [#44716](https://github.com/pingcap/tidb/issues/44716) @[tiancaiamao](https://github.com/tiancaiamao)
     - Fix the issue that the time consumed for executing `TRUNCATE TABLE` is inconsistent with the task execution time shown in `ADMIN SHOW DDL JOBS` [#44785](https://github.com/pingcap/tidb/issues/44785) @[tangenta](https://github.com/tangenta)
     - Fix the issue that upgrading TiDB gets stuck when reading metadata takes longer than one DDL lease [#45176](https://github.com/pingcap/tidb/issues/45176) @[zimulala](https://github.com/zimulala)
+    - Fix the issue that the query result of the `SELECT CAST(n AS CHAR)` statement is incorrect when `n` in the statement is a negative number [#44786](https://github.com/pingcap/tidb/issues/44786) @[xhebox](https://github.com/xhebox)
+    - Fix the issue that queries might return incorrect results when `tidb_opt_agg_push_down` is enabled [#44795](https://github.com/pingcap/tidb/issues/44795) @[AilinKid](https://github.com/AilinKid)
 
 + TiKV <!-- Oreoxmt -->
 
@@ -309,6 +311,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.3/quick-start-with-
     + TiDB Lightning
 
         - Fix the issue that executing checksum after TiDB Lightning completes import might get SSL errors [#45462](https://github.com/pingcap/tidb/issues/45462) @[D3Hunter](https://github.com/D3Hunter)
+        - Fix the issue that in Logical Import Mode, deleting tables downstream during import might cause TiDB Lightning metadata not to be updated in time [#44614](https://github.com/pingcap/tidb/issues/44614) @[dsdashun](https://github.com/dsdashun)
 
 ## Contributors
 
