@@ -1,3 +1,0 @@
-area/tidb-cloud:
-  - any: ['tidb-cloud/**', 'media/tidb-cloud/**']
-    # all: ['!/*.md']
