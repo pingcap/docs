@@ -31,7 +31,7 @@ The following function is only supported by TiDB, and there is no equivalent fun
 
 | Name | Description |
 |:-----|:------------|
-| `CURRENT_RESOURCE_GROUP()`  | Return the name of the resource group that the current session is bound to |
+| [`CURRENT_RESOURCE_GROUP()`](/functions-and-operators/tidb-functions.md#current_resource_group)  | Return the name of the resource group that the current session is bound to |
 
 ## Unsupported functions
 
