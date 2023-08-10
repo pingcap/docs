@@ -57,8 +57,8 @@ In most scenarios, it is recommended that you use private endpoint connection ov
 To connect to your TiDB Dedicated cluster via a private endpoint, complete the [prerequisites](#prerequisites) and follow these steps:
 
 1. [Choose a TiDB cluster](#step-1-choose-a-tidb-cluster)
-2. [Provivde the information for creating an endpoint](#step-2-provide-the-information-for-creating-an-endpoint)
-3. [Accept the endpoint connection](#step-3-accept-the-endpoint-connection)
+2. [Provide the information for creating an endpoint](#step-2-provide-the-information-for-creating-an-endpoint)
+3. [Accept endpoint access](#step-3-accept-endpoint-access)
 4. [Connect to your TiDB cluster](#step-4-connect-to-your-tidb-cluster)
 
 If you have multiple clusters, you need to repeat these steps for each cluster that you want to connect to using Google Cloud Private Service Connect.
@@ -72,7 +72,14 @@ If you have multiple clusters, you need to repeat these steps for each cluster t
 
 ### Step 1. Choose a TiDB cluster
 
-Click the drop-down list and choose an available TiDB Dedicated cluster. You can select a cluster with any of the following statuses: **Available**, **Restoring**, **Modifying**, or **Importing**.
+Click the drop-down list and choose an available TiDB Dedicated cluster.
+
+You can select a cluster with any of the following statuses:
+
+- **Available**
+- **Restoring**
+- **Modifying**
+- **Importing**
 
 ### Step 2. Provide the information for creating an endpoint
 
@@ -82,9 +89,10 @@ Click the drop-down list and choose an available TiDB Dedicated cluster. You can
     - **Google Cloud Subnet Name**: the name of the subnet in the specified VPC. You can find it on the **VPC network details** page.
     - **Private Service Connect Endpoint Name**: enter a unique name for the Private Endpoint that will be created.
 2. After entering the information, click **Generate Command**.
-3. Copy the command and go to the [Google Cloud Shell](https://console.cloud.google.com/home/dashboard) to execute it.
+3. Copy the command.
+4. Go to the [Google Cloud Shell](https://console.cloud.google.com/home/dashboard) to execute the command.
 
-### Step 3. Accept the endpoint connection
+### Step 3. Accept endpoint access
 
 After executing the command in the Google Cloud Shell, go back to the TiDB Cloud console and then click **Accept endpoint access**.
 
