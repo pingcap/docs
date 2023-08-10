@@ -38,10 +38,10 @@ For more detailed definitions of the private endpoint and endpoint service, see 
         - [Cloud DNS API](https://cloud.google.com/dns/docs/reference/v1)
     - The following [IAM roles](https://cloud.google.com/iam/docs/understanding-roles) provide the permissions needed to create an endpoint.
 
-    | Task | IAM Roles |
-    |---|---|
-    | Create an endpoint | Both of these roles: [Compute Network Admin](https://cloud.google.com/iam/docs/understanding-roles#compute.networkAdmin) (roles/compute.networkAdmin) and [Service Directory Editor](https://cloud.google.com/iam/docs/understanding-roles#servicedirectory.editor) (roles/servicedirectory.editor) |
-    | Automatically or manually configure [DNS entries](https://cloud.google.com/vpc/docs/configure-private-service-connect-services#dns-endpoint) for an endpoint | Both of these roles: [Compute Network Admin](https://cloud.google.com/iam/docs/understanding-roles#compute.networkAdmin) (roles/compute.networkAdmin) and [Service Directory Editor](https://cloud.google.com/iam/docs/understanding-roles#servicedirectory.editor) (roles/servicedirectory.editor) |
+        | Task | IAM Roles |
+        |---|---|
+        | Create an endpoint | Both of these roles: [Compute Network Admin](https://cloud.google.com/iam/docs/understanding-roles#compute.networkAdmin) (roles/compute.networkAdmin) and [Service Directory Editor](https://cloud.google.com/iam/docs/understanding-roles#servicedirectory.editor) (roles/servicedirectory.editor) |
+        | Automatically or manually configure [DNS entries](https://cloud.google.com/vpc/docs/configure-private-service-connect-services#dns-endpoint) for an endpoint | Both of these roles: [Compute Network Admin](https://cloud.google.com/iam/docs/understanding-roles#compute.networkAdmin) (roles/compute.networkAdmin) and [Service Directory Editor](https://cloud.google.com/iam/docs/understanding-roles#servicedirectory.editor) (roles/servicedirectory.editor) |
 
 - Egress firewall rules must permit traffic to the internal IP address of the endpoint. The implied allow egress firewall rule permits egress to any destination IP address.
 - If you have created egress deny firewall rules in your VPC network, or if you have created hierarchical firewall policies that modify the implied allowed egress behavior, access to the endpoint might be affected. You need to create a specific egress allow firewall rule or policy to permit traffic to internal IP address destination of the service endpoint.
