@@ -5,15 +5,18 @@ summary: Learn how to create, edit, and delete an API key for a Data App.
 
 # データサービスの API キー {#api-keys-in-data-service}
 
-TiDB Cloudデータ API は[HTTPダイジェスト認証](https://en.wikipedia.org/wiki/Digest_access_authentication)を使用します。秘密キーがネットワーク経由で送信されるのを防ぎます。 HTTPダイジェスト認証の詳細については、 [IETF RFC](https://datatracker.ietf.org/doc/html/rfc7616)を参照してください。
+TiDB Cloud Data API は[基本認証](https://en.wikipedia.org/wiki/Basic_access_authentication)と[ダイジェスト認証](https://en.wikipedia.org/wiki/Digest_access_authentication)の両方をサポートします。
 
-> **ノート：**
+-   [基本認証](https://en.wikipedia.org/wiki/Basic_access_authentication)暗号化されていない Base64 エンコードを使用して、公開キーと秘密キーを送信します。 HTTPS により通信のセキュリティが確保されます。詳細については、 [RFC 7617 - 「基本」HTTP 認証スキーム](https://datatracker.ietf.org/doc/html/rfc7617)を参照してください。
+-   [ダイジェスト認証](https://en.wikipedia.org/wiki/Digest_access_authentication)ネットワーク送信前に公開キー、秘密キー、サーバー提供の nonce 値、HTTP メソッド、および要求された URI をハッシュすることにより、追加のセキュリティレイヤーを提供します。これにより、秘密キーが暗号化され、平文で送信されるのを防ぎます。詳細については、 [RFC 7616 - HTTP ダイジェスト アクセス認証](https://datatracker.ietf.org/doc/html/rfc7616)を参照してください。
+
+> **注記：**
 >
 > Data Service の Data API キーは、 [TiDB CloudAPI](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication)で使用されるキーとは異なります。 Data API キーはTiDB Cloudクラスター内のデータにアクセスするために使用され、 TiDB CloudAPI キーはプロジェクト、クラスター、バックアップ、復元、インポートなどのリソースを管理するために使用されます。
 
 ## APIキーの概要 {#api-key-overview}
 
--   API キーには公開キーと秘密キーが含まれており、これらは HTTP ダイジェスト認証で必要なユーザー名とパスワードとして機能します。秘密キーはキーの作成時にのみ表示されます。
+-   API キーには公開キーと秘密キーが含まれており、認証に必要なユーザー名とパスワードとして機能します。秘密キーはキーの作成時にのみ表示されます。
 -   各 API キーは 1 つのデータ アプリにのみ属し、 TiDB Cloudクラスター内のデータにアクセスするために使用されます。
 -   すべてのリクエストで正しい API キーを指定する必要があります。それ以外の場合、 TiDB Cloud は`401`エラーで応答します。
 
@@ -65,7 +68,7 @@ API キーの説明を編集するには、次の手順を実行します。
 
 ### APIキーを削除する {#delete-an-api-key}
 
-> **ノート：**
+> **注記：**
 >
 > API キーを削除する前に、その API キーがどのデータ アプリでも使用されていないことを確認してください。
 

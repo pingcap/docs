@@ -21,6 +21,7 @@ summary: Learn about the usage of TiDB specific functions.
 | `VITESS_HASH(str)`                                                                 | `VITESS_HASH`関数は、Vitess の`HASH`関数と互換性のある文字列のハッシュを返します。これは、Vitess からのデータ移行を支援することを目的としています。                                                                                                                                                                                                              |
 | `TIDB_SHARD()`                                                                     | `TIDB_SHARD`関数を使用すると、インデックス ホットスポットを分散するシャード インデックスを作成できます。シャード インデックスは、接頭辞として`TIDB_SHARD`関数が付いている式インデックスです。                                                                                                                                                                                            |
 | `TIDB_ROW_CHECKSUM()`                                                              | `TIDB_ROW_CHECKSUM`関数は、行のチェックサム値をクエリするために使用されます。この関数は、FastPlan プロセス内の`SELECT`のステートメントでのみ使用できます。つまり、 `SELECT TIDB_ROW_CHECKSUM() FROM t WHERE id = ?`や`SELECT TIDB_ROW_CHECKSUM() FROM t WHERE id IN (?, ?, ...)`のようなステートメントを通じてクエリを実行できます。 [単一行データのデータ整合性検証](/ticdc/ticdc-integrity-check.md)も参照してください。 |
+| `CURRENT_RESOURCE_GROUP()`                                                         | `CURRENT_RESOURCE_GROUP`関数は、現在のセッションがバインドされているリソース グループ名を返すために使用されます。 [リソース制御を使用してリソースの分離を実現する](/tidb-resource-control.md)も参照してください。                                                                                                                                                                    |
 
 </CustomContent>
 
@@ -38,6 +39,7 @@ summary: Learn about the usage of TiDB specific functions.
 | `VITESS_HASH(str)`                                                                 | `VITESS_HASH`関数は、Vitess の`HASH`関数と互換性のある文字列のハッシュを返します。これは、Vitess からのデータ移行を支援することを目的としています。                                                                                                                                                                                                                                         |
 | `TIDB_SHARD()`                                                                     | `TIDB_SHARD`関数を使用すると、インデックス ホットスポットを分散するシャード インデックスを作成できます。シャード インデックスは、接頭辞として`TIDB_SHARD`関数が付いている式インデックスです。                                                                                                                                                                                                                       |
 | `TIDB_ROW_CHECKSUM()`                                                              | `TIDB_ROW_CHECKSUM`関数は、行のチェックサム値をクエリするために使用されます。この関数は、FastPlan プロセス内の`SELECT`のステートメントでのみ使用できます。つまり、 `SELECT TIDB_ROW_CHECKSUM() FROM t WHERE id = ?`や`SELECT TIDB_ROW_CHECKSUM() FROM t WHERE id IN (?, ?, ...)`のようなステートメントを通じてクエリを実行できます。 [単一行データのデータ整合性検証](https://docs.pingcap.com/tidb/stable/ticdc-integrity-check)も参照してください。 |
+| `CURRENT_RESOURCE_GROUP()`                                                         | `CURRENT_RESOURCE_GROUP`関数は、現在のセッションがバインドされているリソース グループ名を返すために使用されます。 [リソース制御を使用してリソースの分離を実現する](/tidb-resource-control.md)も参照してください。                                                                                                                                                                                               |
 
 </CustomContent>
 
@@ -200,7 +202,7 @@ Check Table Before Drop: false
 
 この関数は、JSON 文字列配列形式の文字列を返します。配列内の*i*番目の項目は、 `digests`パラメータの*i*番目の要素に対応する正規化された SQL ステートメントです。 `digests`パラメータの要素が有効な SQL ダイジェストではない場合、またはシステムが対応する SQL ステートメントを見つけられない場合、返される結果の対応する項目は`null`です。切り捨ての長さが指定されている場合 ( `stmtTruncateLength > 0` )、この長さを超える返された結果の各ステートメントについて、最初の`stmtTruncateLength`文字が保持され、切り捨てを示すサフィックス`"..."`が最後に追加されます。 `digests`パラメータが`NULL`の場合、関数の戻り値は`NULL`です。
 
-> **ノート：**
+> **注記：**
 >
 > -   この機能は[プロセス](https://dev.mysql.com/doc/refman/8.0/en/privileges-provided.html#priv_process)権限を持つユーザーのみが使用できます。
 > -   `TIDB_DECODE_SQL_DIGESTS`が実行されると、TiDB はステートメント概要テーブルから各 SQL ダイジェストに対応するステートメントをクエリするため、対応するステートメントが SQL ダイジェストに対して常に見つかるという保証はありません。クラスター内で実行されたステートメントのみが検索され、これらの SQL ステートメントをクエリできるかどうかは、ステートメント サマリー テーブルの関連構成にも影響されます。ステートメント集計テーブルの詳細な説明については、 [ステートメント概要テーブル](/statement-summary-tables.md)を参照してください。
@@ -239,7 +241,7 @@ select tidb_decode_sql_digests(@digests, 10);
 1 row in set (0.01 sec)
 ```
 
-上記の呼び出しでは、2 番目のパラメーター (切り捨ての長さ) を 10 として指定し、クエリ結果の 3 番目のステートメントの長さが 10 を超えています。したがって、最初の 10 文字のみが保持され、最後に`"..."`が追加されます。 end は切り捨てを示します。
+上記の呼び出しでは、2 番目のパラメーター (つまり、切り捨ての長さ) を 10 として指定し、クエリ結果の 3 番目のステートメントの長さが 10 を超えています。したがって、最初の 10 文字のみが保持され、最後に`"..."`が追加されます。 end は切り捨てを示します。
 
 以下も参照してください。
 
@@ -336,4 +338,52 @@ SELECT *, TIDB_ROW_CHECKSUM() FROM t WHERE id = 1;
 |  1 |   10 | a    | 3813955661          |
 +----+------+------+---------------------+
 1 row in set (0.000 sec)
+```
+
+### CURRENT_RESOURCE_GROUP {#current-resource-group}
+
+`CURRENT_RESOURCE_GROUP`関数は、現在のセッションがバインドされているリソース グループ名を表示するために使用されます。 [リソース制御](/tidb-resource-control.md)機能が有効になっている場合、SQL ステートメントで使用できる利用可能なリソースは、バインドされたリソース グループのリソース クォータによって制限されます。
+
+セッションが確立されると、TiDB はログイン ユーザーがデフォルトでバインドされているリソース グループにセッションをバインドします。ユーザーがどのリソース グループにもバインドされていない場合、セッションは`default`リソース グループにバインドされます。セッションが確立されると、ユーザーのバインドされたリソース グループが[ユーザーにバインドされたリソース グループを変更する](/sql-statements/sql-statement-alter-user.md#modify-basic-user-information)によって変更されても、デフォルトではバインドされたリソース グループは変更されません。現在のセッションのバインドされたリソース グループを変更するには、 [`SET RESOURCE GROUP`](/sql-statements/sql-statement-set-resource-group.md)を使用できます。
+
+#### 例 {#example}
+
+ユーザー`user1`を作成し、2 つのリソース グループ`rg1`と`rg2`を作成し、ユーザー`user1`をリソース グループ`rg1`にバインドします。
+
+```sql
+CREATE USER 'user1';
+CREATE RESOURCE GROUP 'rg1' RU_PER_SEC = 1000;
+CREATE RESOURCE GROUP 'rg2' RU_PER_SEC = 2000;
+ALTER USER 'user1' RESOURCE GROUP `rg1`;
+```
+
+`user1`を使用してログインし、現在のユーザーにバインドされているリソース グループを表示します。
+
+```sql
+SELECT CURRENT_RESOURCE_GROUP();
+```
+
+```
++--------------------------+
+| CURRENT_RESOURCE_GROUP() |
++--------------------------+
+| rg1                      |
++--------------------------+
+1 row in set (0.00 sec)
+```
+
+`SET RESOURCE GROUP`を実行して現在のセッションのリソース グループを`rg2`に設定し、現在のユーザーにバインドされているリソース グループを表示します。
+
+```sql
+SET RESOURCE GROUP `rg2`;
+SELECT CURRENT_RESOURCE_GROUP();
+```
+
+```
++--------------------------+
+| CURRENT_RESOURCE_GROUP() |
++--------------------------+
+| rg2                      |
++--------------------------+
+1 row in set (0.00 sec)
 ```

@@ -8,6 +8,16 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 このページには 2023 年[TiDB Cloud](https://www.pingcap.com/tidb-cloud/)のリリースノートが記載されています。
 
+## 2023 年 8 月 8 日 {#august-8-2023}
+
+**一般的な変更点**
+
+-   [データサービス](https://tidbcloud.com/console/data-service)では Basic 認証がサポートされるようになりました。
+
+    [「基本」HTTP 認証](https://datatracker.ietf.org/doc/html/rfc7617)を使用して、リクエストで公開キーをユーザー名として、秘密キーをパスワードとして指定できます。ダイジェスト認証と比較して、基本認証はシンプルであり、データ サービス エンドポイントを呼び出すときにより簡単に使用できます。
+
+    詳細については、 [エンドポイントを呼び出す](/tidb-cloud/data-service-manage-endpoint.md#call-an-endpoint)を参照してください。
+
 ## 2023 年 8 月 1 日 {#august-1-2023}
 
 **一般的な変更点**
@@ -105,7 +115,7 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 -   [TiDB サーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-serverless)が一般提供になりました。
 
--   TiDB Bot (ベータ) は、多言語サポート、24 時間年中無休のリアルタイム応答、統合されたドキュメント アクセスを提供する OpenAI 搭載チャットボットです。
+-   TiDB Bot (ベータ版) は、多言語サポート、年中無休のリアルタイム応答、統合されたドキュメント アクセスを提供する OpenAI 搭載チャットボットです。
 
     TiDB ボットには次の利点があります。
 
@@ -247,7 +257,7 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 -   TiDB Cloudのデータ移行機能の増分データ移行のサポートを強化します。
 
-    binlog位置またはグローバル トランザクション識別子 (GTID) を指定して、指定された位置以降に生成された増分データのみをTiDB Cloudに複製できるようになりました。この機能強化により、特定の要件に合わせて、必要なデータをより柔軟に選択して複製できるようになります。
+    binlog位置またはグローバル トランザクション識別子 (GTID) を指定して、指定された位置の後に生成された増分データのみをTiDB Cloudに複製できるようになりました。この機能強化により、特定の要件に合わせて、必要なデータをより柔軟に選択して複製できるようになります。
 
     詳細は[データ移行を使用して、MySQL 互換データベースからTiDB Cloudに増分データのみを移行する](/tidb-cloud/migrate-incremental-data-from-mysql-using-data-migration.md)を参照してください。
 
@@ -371,9 +381,9 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 **コンソールの変更**
 
--   [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-dedicated)クラスターの[モニタリング](/tidb-cloud/built-in-monitoring.md#view-the-metrics-page)ページ用の新しいネイティブ Web インフラストラクチャをリリースします。
+-   [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-dedicated)クラスターの[監視](/tidb-cloud/built-in-monitoring.md#view-the-metrics-page)ページ用の新しいネイティブ Web インフラストラクチャをリリースします。
 
-    新しいインフラストラクチャを使用すると、 [モニタリング](/tidb-cloud/built-in-monitoring.md#view-the-metrics-page)ページ内を簡単に移動し、より直感的かつ効率的な方法で必要な情報にアクセスできます。新しいインフラストラクチャは、UX に関する多くの問題も解決し、監視プロセスをより使いやすくしています。
+    新しいインフラストラクチャを使用すると、 [監視](/tidb-cloud/built-in-monitoring.md#view-the-metrics-page)ページ内を簡単に移動し、より直感的かつ効率的な方法で必要な情報にアクセスできます。新しいインフラストラクチャは、UX に関する多くの問題も解決し、監視プロセスをより使いやすくしています。
 
 ## 2023 年 4 月 18 日 {#april-18-2023}
 
@@ -423,11 +433,11 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 **コンソールの変更**
 
--   [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-dedicated)クラスターの[モニタリング](/tidb-cloud/built-in-monitoring.md#view-the-metrics-page)ページを更新して、 [ノードレベルのリソースメトリック](/tidb-cloud/built-in-monitoring.md#server)を使用します。
+-   [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-dedicated)クラスターの[監視](/tidb-cloud/built-in-monitoring.md#view-the-metrics-page)ページを更新して、 [ノードレベルのリソースメトリック](/tidb-cloud/built-in-monitoring.md#server)を使用します。
 
     ノードレベルのリソースメトリクスを使用すると、リソース消費をより正確に表示して、購入したサービスの実際の使用状況をより深く理解できます。
 
-    これらのメトリックにアクセスするには、クラスターの[モニタリング](/tidb-cloud/built-in-monitoring.md#view-the-metrics-page)ページに移動し、 **[メトリック]**タブの [**サーバー]**カテゴリを確認します。
+    これらのメトリックにアクセスするには、クラスターの[監視](/tidb-cloud/built-in-monitoring.md#view-the-metrics-page)ページに移動し、 **[メトリック]**タブの [**サーバー]**カテゴリを確認します。
 
 -   **「プロジェクト別集計」**と**「サービス別集計」**の請求項目を再整理し、請求内容をよりわかりやすく[請求する](/tidb-cloud/tidb-cloud-billing.md#billing-details)ページを最適化しました。
 
@@ -456,7 +466,7 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
     これで、 [TiDB Cloudのヘルプ情報](/tidb-cloud/tidb-cloud-support.md)すべて取得し、 **「?」**をクリックしてサポートに問い合わせることができます。 [TiDB Cloudコンソール](https://tidbcloud.com/)の右下隅にあります。
 
--   TiDB Cloudについて学ぶのに役立つ[入門](https://tidbcloud.com/console/getting-started)ページを紹介します。
+-   TiDB Cloudについて学ぶのに役立つ[はじめる](https://tidbcloud.com/console/getting-started)ページを紹介します。
 
     **「はじめに」**ページでは、インタラクティブなチュートリアル、重要なガイド、便利なリンクが提供されます。インタラクティブなチュートリアルに従うことで、事前に構築された業界固有のデータセット (Steam ゲーム データセットおよび S&amp;P 500 データセット) を使用してTiDB Cloud機能と HTAP 機能を簡単に探索できます。
 
@@ -736,11 +746,11 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
     ノード サイズを[TiDB Cloudコンソールの使用](/tidb-cloud/scale-tidb-cluster.md#change-vcpu-and-ram)または[TiDB CloudAPI (ベータ版) を使用する](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/UpdateCluster)に増やすことができます。
 
--   [**モニタリング**](/tidb-cloud/built-in-monitoring.md)ページのメトリクスの保持期間を 2 日に延長します。
+-   [**監視**](/tidb-cloud/built-in-monitoring.md)ページのメトリクスの保持期間を 2 日に延長します。
 
     過去 2 日間のメトリクス データにアクセスできるようになり、クラスターのパフォーマンスと傾向をより柔軟に把握できるようになりました。
 
-    この改善には追加コストはかからず、クラスターの[**モニタリング**](/tidb-cloud/built-in-monitoring.md)ページの**[診断]**タブからアクセスできます。これは、パフォーマンスの問題を特定してトラブルシューティングし、クラスター全体の状態をより効果的に監視するのに役立ちます。
+    この改善には追加コストはかからず、クラスターの[**監視**](/tidb-cloud/built-in-monitoring.md)ページの**[診断]**タブからアクセスできます。これは、パフォーマンスの問題を特定してトラブルシューティングし、クラスター全体の状態をより効果的に監視するのに役立ちます。
 
 -   Prometheus 統合のための Grafana ダッシュボード JSON のカスタマイズをサポートします。
 

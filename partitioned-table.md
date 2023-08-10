@@ -634,9 +634,9 @@ v6.4.0 より前では、TiDB で[MySQL 線形ハッシュ](https://dev.mysql.co
 
 v6.4.0 以降、TiDB は MySQL `PARTITION BY LINEAR HASH`構文の解析をサポートしますが、その中の`LINEAR`キーワードは無視されます。 MySQL Linear Hash パーティションの既存の DDL および DML ステートメントがある場合は、それらを変更せずに TiDB で実行できます。
 
--   MySQL リニア ハッシュ パーティションの`CREATE`ステートメントの場合、TiDB は非リニア ハッシュパーティションテーブルを作成します (TiDB にはリニア ハッシュパーティションテーブルがないことに注意してください)。パーティション数が 2 の累乗の場合、TiDB ハッシュパーティションテーブル内の行は、MySQL Linear Hashパーティションテーブル内の行と同じように分散されます。それ以外の場合、TiDB でのこれらの行の分散は MySQL とは異なります。これは、非線形パーティション テーブルでは単純な「パーティションの剰余数」が使用されるのに対し、線形パーティション テーブルでは「2 の次の累乗を剰余とし、パーティション数と次の 2 の累乗の間で値を折り畳む」が使用されるためです。詳細は[#38450](https://github.com/pingcap/tidb/issues/38450)を参照してください。
+-   MySQL リニア ハッシュ パーティションの`CREATE`ステートメントの場合、TiDB は非リニア ハッシュパーティションテーブルを作成します (TiDB にはリニア ハッシュパーティションテーブルがないことに注意してください)。パーティション数が 2 の累乗の場合、TiDB ハッシュパーティションテーブルの行は、MySQL Linear Hashパーティションテーブルの行と同じように分散されます。それ以外の場合、TiDB でのこれらの行の分散は MySQL とは異なります。これは、非線形パーティション テーブルでは単純な「パーティションの剰余数」が使用されるのに対し、線形パーティション テーブルでは「2 の次の累乗を法とし、パーティション数と次の 2 の累乗の間で値を折り畳む」が使用されるためです。詳細は[#38450](https://github.com/pingcap/tidb/issues/38450)を参照してください。
 
--   MySQL Linear Hash パーティションの他のすべてのステートメントは、TiDB で MySQL と同じように機能します。ただし、パーティションの数が 2 の累乗でない場合、行の分散方法が異なります。これにより、 [パーティションの選択](#partition-selection) 、 `TRUNCATE PARTITION` 、および`EXCHANGE PARTITION` 。
+-   MySQL Linear Hash パーティションの他のすべてのステートメントは、TiDB でも MySQL と同じように機能します。ただし、パーティションの数が 2 のべき乗ではない場合、行の分散方法が異なります。これにより、 [パーティションの選択](#partition-selection) 、 `TRUNCATE PARTITION` 、および`EXCHANGE PARTITION` 。
 
 ### TiDB がリニア キー パーティションを処理する方法 {#how-tidb-handles-linear-key-partitions}
 
@@ -648,13 +648,13 @@ v7.0.0 より前では、Keyパーティションテーブルを作成しよう�
 
 TiDB では、パーティショニング式の計算結果として`NULL`を使用することが許可されています。
 
-> **ノート：**
+> **注記：**
 >
 > `NULL`は整数ではありません。 TiDB のパーティショニング実装では、 `ORDER BY`と同様に、 `NULL`が他の整数値よりも小さいものとして扱われます。
 
 #### 範囲パーティショニングによる NULL の処理 {#handling-of-null-with-range-partitioning}
 
-Range でパーティション化されたテーブルに行を挿入し、パーティションの決定に使用される列の値が`NULL`である場合、この行は最下位のパーティションに挿入されます。
+Range でパーティション分割されたテーブルに行を挿入し、パーティションの決定に使用される列の値が`NULL`である場合、この行は最下位のパーティションに挿入されます。
 
 {{< copyable "" >}}
 
@@ -790,7 +790,7 @@ Empty set (0.00 sec)
 
 挿入されたレコード`(NULL, 'mothra')` `(0, 'gigan')`と同じパーティションに分類されることがわかります。
 
-> **ノート：**
+> **注記：**
 >
 > TiDB のハッシュ パーティションによる`NULL`値は[MySQL パーティショニングによる NULL の処理方法](https://dev.mysql.com/doc/refman/8.0/en/partitioning-handling-nulls.html)で説明したのと同じ方法で処理されますが、これは MySQL の実際の動作と一致しません。言い換えれば、この場合の MySQL の実装はそのドキュメントと一致していません。
 >
@@ -1030,7 +1030,7 @@ ALTER TABLE example ADD PARTITION
 ALTER TABLE example COALESCE PARTITION 1;
 ```
 
-> **ノート：**
+> **注記：**
 >
 > ハッシュまたはキー パーティション テーブルのパーティション数を変更するプロセスでは、すべてのデータを新しいパーティション数にコピーすることでパーティションが再編成されます。したがって、ハッシュ パーティション テーブルまたはキーパーティションテーブルのパーティション数を変更すると、古い統計に関する次の警告が表示されます。この場合、 [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md)ステートメントを使用して統計を更新できます。
 >
@@ -1554,7 +1554,7 @@ CREATE TABLE t (a varchar(20), b blob,
 ERROR 1503 (HY000): A UNIQUE INDEX must include all columns in the table's partitioning function
 ```
 
-### 関数に関するパーティショニングの制限 {#partitioning-limitations-relating-to-functions}
+### 関数に関するパーティショニングの制限事項 {#partitioning-limitations-relating-to-functions}
 
 次のリストに示されている関数のみがパーティショニング式で使用できます。
 
@@ -1704,7 +1704,7 @@ set @@session.tidb_partition_prune_mode = 'dynamic'
 
 `static`モードでは、パーティション テーブルはパーティション レベルの統計を使用します。 `dynamic`モードでは、パーティション テーブルはテーブル レベルの GlobalStats を使用します。
 
-`static`モードから`dynamic`モードに切り替える場合は、統計を手動で確認して収集する必要があります。これは、 `dynamic`モードに切り替えた後、パーティション化されたテーブルにはパーティション レベルの統計のみが含まれ、テーブル レベルの統計が含まれないためです。 GlobalStats は、次の`auto-analyze`操作時にのみ収集されます。
+`static`モードから`dynamic`モードに切り替える場合は、統計を手動で確認して収集する必要があります。これは、 `dynamic`モードに切り替えた後、パーティション テーブルにはパーティション レベルの統計のみが含まれ、テーブル レベルの統計が含まれないためです。 GlobalStats は、次の`auto-analyze`操作時にのみ収集されます。
 
 {{< copyable "" >}}
 
@@ -1919,12 +1919,14 @@ mysql> explain select /*+ TIDB_INLJ(t1, t2) */ t1.* from t1, t2 where t2.code = 
 
 2.  すべてのパーティションテーブルの統計を更新するためのステートメントを生成します。
 
-    {{< copyable "" >}}
-
     ```sql
-    select distinct concat('ANALYZE TABLE ',TABLE_SCHEMA,'.',TABLE_NAME,' ALL COLUMNS;')
-        from information_schema.PARTITIONS
-        where TABLE_SCHEMA not in ('INFORMATION_SCHEMA','mysql','sys','PERFORMANCE_SCHEMA','METRICS_SCHEMA');
+    SELECT DISTINCT CONCAT('ANALYZE TABLE ',TABLE_SCHEMA,'.',TABLE_NAME,' ALL COLUMNS;')
+        FROM information_schema.PARTITIONS
+        WHERE TIDB_PARTITION_ID IS NOT NULL
+        AND TABLE_SCHEMA NOT IN ('INFORMATION_SCHEMA','mysql','sys','PERFORMANCE_SCHEMA','METRICS_SCHEMA');
+    ```
+
+    ```
     +----------------------------------------------------------------------+
     | concat('ANALYZE TABLE ',TABLE_SCHEMA,'.',TABLE_NAME,' ALL COLUMNS;') |
     +----------------------------------------------------------------------+
@@ -1937,12 +1939,11 @@ mysql> explain select /*+ TIDB_INLJ(t1, t2) */ t1.* from t1, t2 where t2.code = 
 
 3.  バッチ更新ステートメントをファイルにエクスポートします。
 
-    {{< copyable "" >}}
-
-    ```sql
-    mysql --host xxxx --port xxxx -u root -p -e "select distinct concat('ANALYZE TABLE ',TABLE_SCHEMA,'.',TABLE_NAME,' ALL COLUMNS;') \
-        from information_schema.PARTITIONS \
-        where TABLE_SCHEMA not in ('INFORMATION_SCHEMA','mysql','sys','PERFORMANCE_SCHEMA','METRICS_SCHEMA');" | tee gatherGlobalStats.sql
+    ```shell
+    mysql --host xxxx --port xxxx -u root -p -e "SELECT DISTINCT CONCAT('ANALYZE TABLE ',TABLE_SCHEMA,'.',TABLE_NAME,' ALL COLUMNS;') \
+        FROM information_schema.PARTITIONS \
+        WHERE TIDB_PARTITION_ID IS NOT NULL \
+        AND TABLE_SCHEMA NOT IN ('INFORMATION_SCHEMA','mysql','sys','PERFORMANCE_SCHEMA','METRICS_SCHEMA');" | tee gatherGlobalStats.sql
     ```
 
 4.  バッチ更新を実行します。
