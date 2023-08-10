@@ -353,6 +353,7 @@ Create a user `user1`, create two resource groups `rg1` and `rg2`, and bind the 
 ```sql
 CREATE USER 'user1';
 CREATE RESOURCE GROUP 'rg1' RU_PER_SEC = 1000;
+CREATE RESOURCE GROUP 'rg2' RU_PER_SEC = 2000;
 ALTER USER 'user1' RESOURCE GROUP `rg1`;
 ```
 
