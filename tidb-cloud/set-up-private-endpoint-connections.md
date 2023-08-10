@@ -18,7 +18,7 @@ Powered by AWS PrivateLink, the endpoint connection is secure and private, and d
 
 The architecture of the private endpoint is as follows:
 
-![Private endpoint architecture](/media/tidb-cloud/google-cloud-psc-endpoint-overview.png)
+![Private endpoint architecture](/media/tidb-cloud/aws-private-endpoint-arch.png)
 
 For more detailed definitions of the private endpoint and endpoint service, see the following AWS documents:
 
