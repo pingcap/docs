@@ -8,6 +8,8 @@ aliases: ['/docs/dev/sql-statements/sql-statement-add-index/','/docs/dev/referen
 
 The `ALTER TABLE.. ADD INDEX` statement adds an index to an existing table. This operation is online in TiDB, which means that neither reads or writes to the table are blocked by adding an index.
 
+<CustomContent platform="tidb">
+
 > **Warning:**
 >
 > - **DO NOT** upgrade a TiDB cluster when a DDL statement is being executed in the cluster (usually for the time-consuming DDL statements such as `ADD INDEX` and the column type changes).
@@ -15,6 +17,8 @@ The `ALTER TABLE.. ADD INDEX` statement adds an index to an existing table. This
 > - In addition, during the cluster upgrade, **DO NOT** execute any DDL statement. Otherwise, the issue of undefined behavior might occur.
 >
 > When you upgrade TiDB from v7.1.0 to a later version, you can ignore the preceding limiations. For details, see [the limitations of TiDB smooth upgrade](/smooth-upgrade-tidb.md).
+
+</CustomContent>
 
 ## Synopsis
 
