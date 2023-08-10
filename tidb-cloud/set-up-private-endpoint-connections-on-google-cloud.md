@@ -23,7 +23,7 @@ The architecture of the private endpoint is as follows:
 For more detailed definitions of the private endpoint and endpoint service, see the following Google Cloud documents:
 
 - [Private Service Connect](https://cloud.google.com/vpc/docs/private-service-connect)
-- [Using Private Service Connect to publish and consume services](https://codelabs.developers.google.com/cloudnet-psc-ilb#0)
+- [Access published services through endpoints](https://cloud.google.com/vpc/docs/configure-private-service-connect-services)
 
 ## Restrictions
 
@@ -32,9 +32,10 @@ For more detailed definitions of the private endpoint and endpoint service, see 
 - If your VPC has already established a peering connection with the VPC where the TiDB cluster is located, the Private Service Connect Endpoint created under the VPC will not be able to connect to that TiDB cluster.
 - If you create multiple Private Service Connect endpoints (for example, **Endpoint 1** and **Endpoint 2**) under the same Google Project A to connect to the same TiDB Cluster, when the endpoints are rejected, the existing endpoints already established under that project can still connect to the TiDB Cluster. But any new endpoints created under that project will be rejected.
 - Before you begin to create an endpoint
-    - You must [enable](https://console.cloud.google.com/apis/library/compute.googleapis.com) the [Compute Engine API](https://cloud.google.com/compute/docs/reference/rest/v1) in your project.
-    - You must [enable](https://console.cloud.google.com/apis/library/servicedirectory.googleapis.com) the [Service Directory API](https://cloud.google.com/service-directory/docs/reference/rest) in your project.
-    - You must [enable](https://console.cloud.google.com/apis/library/dns.googleapis.com) the [Cloud DNS API](https://cloud.google.com/dns/docs/reference/v1) in your project.
+    - You must [enable](https://console.cloud.google.com/apis/library/compute.googleapis.com) the following APIs in your project:
+        - [Compute Engine API](https://cloud.google.com/compute/docs/reference/rest/v1) 
+        - [Service Directory API](https://cloud.google.com/service-directory/docs/reference/rest)
+        - [Cloud DNS API](https://cloud.google.com/dns/docs/reference/v1)
     - The following [IAM roles](https://cloud.google.com/iam/docs/understanding-roles) provide the permissions needed to create an endpoint.
     | Task | IAM Roles |
     |---|---|
@@ -54,7 +55,7 @@ In most scenarios, it is recommended that you use private endpoint connection ov
 To connect to your TiDB Dedicated cluster via a private endpoint, complete the [prerequisites](#prerequisites) and follow these steps:
 
 1. [Choose a TiDB cluster](#step-1-choose-a-tidb-cluster)
-2. [Proivde the information for creating an endpoint](#step-2-proivde-the-information-for-creating-an-endpoint)
+2. [Provivde the information for creating an endpoint](#step-2-provide-the-information-for-creating-an-endpoint)
 3. [Accept the endpoint connection](#step-3-accept-the-endpoint-connection)
 4. [Connect to your TiDB cluster](#step-4-connect-to-your-tidb-cluster)
 
@@ -71,30 +72,30 @@ If you have multiple clusters, you need to repeat these steps for each cluster t
 
 Click the drop-down list and choose an available TiDB Dedicated cluster. You can select a cluster with any of the following statuses: **Available**, **Restoring**, **Modifying**, or **Importing**.
 
-### Step 2. Proivde the information for creating an endpoint
+### Step 2. Provide the information for creating an endpoint
 
 1. Provide the following information to generate the command to create a Google Cloud Private Service Connect endpoint:
-    - **Google Cloud Project ID**: the Project ID associated with your Google Cloud account. You can find the ID on the Google Cloud **Dashboard** page.
-    - **Google Cloud VPC Name**: the name of the VPC in your specified project. You can find it on the Google Cloud **VPC Networks** page.
-    - **Google Cloud Subnet Name**: the name of the subnet in the specified VPC. You can find it on the **VPC Network details** page.
+    - **Google Cloud Project ID**: the Project ID associated with your Google Cloud account. You can find the ID on the [Google Cloud **Dashboard** page](https://console.cloud.google.com/home/dashboard).
+    - **Google Cloud VPC Name**: the name of the VPC in your specified project. You can find it on the [Google Cloud **VPC networks** page](https://console.cloud.google.com/networking/networks/list).
+    - **Google Cloud Subnet Name**: the name of the subnet in the specified VPC. You can find it on the **VPC network details** page.
     - **Private Service Connect Endpoint Name**: enter a unique name for the Private Endpoint that will be created.
 2. After entering the information, click **Generate Command**.
 3. Copy the command and go to the [Google Cloud Shell](https://console.cloud.google.com/home/dashboard) to execute it.
 
 ### Step 3. Accept the endpoint connection
 
-After execute the command, click **Accept endpoint access**.
+After executing the command in the Google Cloud Shell, go back to the TiDB Cloud console and then click **Accept endpoint access**.
 
 If you see an error "No connection request received from the endpoint.", make sure that you have copied the command correctly and successfully executed it in your Google Cloud Shell.
 
 ### Step 4: Connect to your TiDB cluster
 
-After you have enabled the private DNS, go back to the TiDB Cloud console and take the following steps:
+After you have accepted the endpoint connection, take the following steps to connect to your TiDB cluster:
 
 1. On the [**Clusters**](https://tidbcloud.com/console/clusters) page, click the name of your target cluster to go to its overview page.
 2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
-3. Select the **Private Endpoint** tab. The private endpoint you just created is displayed under **Step 1: Create Private Endpoint**.
-4. Under **Step 2: Connect your application**, click the tab of your preferred connection method, and then connect to your cluster with the connection string. The placeholders `<cluster_endpoint_name>:<port>` in the connection string are automatically replaced with the real values.
+3. Select the **Private Endpoint** tab, and then select the **Google Cloud** tab. The private endpoint you just created is displayed.
+4. In the **Action** column, click **Connect**, click the tab of your preferred connection method, and then connect to your cluster with the connection string. The placeholders `<cluster_endpoint_name>:<port>` in the connection string are automatically replaced with the real values.
 
 ### Private endpoint status reference
 
@@ -102,36 +103,36 @@ When you use private endpoint connections, the statuses of private endpoints or 
 
 The possible statuses of a private endpoint are explained as follows:
 
-- **Not Configured**: The endpoint service is created but the private endpoint is not created yet.
-- **Pending**: Waiting for processing.
-- **Active**: Your private endpoint is ready to use. You cannot edit the private endpoint of this status.
-- **Deleting**: The private endpoint is being deleted.
-- **Failed**: The private endpoint creation fails. You can click **Edit** of that row to retry the creation.
+- **Not Configured**: the endpoint service is created but the private endpoint is not created yet.
+- **Pending**: waiting for processing.
+- **Active**: your private endpoint is ready to use. You cannot edit the private endpoint of this status.
+- **Deleting**: the private endpoint is being deleted.
+- **Failed**: the private endpoint creation fails. You can click **Edit** of that row to retry the creation.
 
 The possible statuses of a private endpoint service are explained as follows:
 
-- **Creating**: The endpoint service is being created, which takes 3 to 5 minutes.
-- **Active**: The endpoint service is created, no matter whether the private endpoint is created or not.
-- **Deleting**: The endpoint service or the cluster is being deleted, which takes 3 to 5 minutes.
+- **Creating**: the endpoint service is being created, which takes 3 to 5 minutes.
+- **Active**: the endpoint service is created, no matter whether the private endpoint is created or not.
+- **Deleting**: the endpoint service or the cluster is being deleted, which takes 3 to 5 minutes.
 
 ## Troubleshooting
 
-### TiDB Cloud fails to create an endpoint sertice, what should I do?
+### TiDB Cloud fails to create an endpoint service, what should I do?
 
-Usually the endpoint service is created when the cluster is created and rarely fails. If it shows as failed or remains in a "creating" state, submit a support ticket for assistance.
+Usually the endpoint service is created automatically when the cluster is created and rarely fails. If it shows as failed or remains in a **Creating** state, submit a [support ticket](/tidb-cloud/tidb-cloud-support.md) for assistance.
 
 ### TiDB Cloud fails to create an endpoint, what should I do?
 
-You need to review the error message generated during execution on Google Cloud Shell to troubleshoot the issue. If it is a permission-related error, you must grant the necessary permissions before reattempting the command.
+You need to review the error message generated during execution in Google Cloud Shell to troubleshoot the issue. If it is a permission-related error, you must grant the necessary permissions before reattempting the command.
 
 ### I cancelled some actions. What should I do to handle cancellation before accepting endpoint access?
 
 Unsaved drafts of cancelled actions will not be retained or displayed. You need to reconfigure each step when creating a new private endpoint in the TiDB Cloud console next time.
 
-If you have already executed the command to create a private endpoint on Google Cloud Shell, you need to manually delete the corresponding endpoint on the Google Cloud console.
+If you have already executed the command to create a private endpoint in Google Cloud Shell, you need to manually delete the corresponding endpoint in the Google Cloud console.
 
 ### Why can't I see the endpoints generated by directly copying the service attachment in the TiDB Cloud console?
 
-You can view endpoints created through the TiDB Cloud console within the TiDB console, allowing you to see all the created endpoints within the same Google Cloud project ID.
+You can view endpoints created through the command generated in the TiDB Cloud console, allowing you to see all the created endpoints within the same Google Cloud project ID.
 
-Endpoints generated by directly copying the service attachment (that is, not created through the TiDB Cloud console command) are not displayed in the TiDB Cloud console.
+Endpoints generated by directly copying the service attachment (that is, not created through the command generated in the TiDB Cloud console) are not displayed in the TiDB Cloud console.
