@@ -12,7 +12,7 @@ This document describes how to connect to your TiDB Dedicated cluster via Privat
 > - To learn how to connect to a TiDB Dedicated cluster via private endpoint with AWS, see [Connect to TiDB Dedicated via Private Endpoint with AWS](/tidb-cloud/set-up-private-endpoint-connections.md)
 > - To learn how to connect to a TiDB Serverless cluster via private endpoint, see [Connect to TiDB Serverless via Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections-serverless.md).
 
-TiDB Cloud supports highly secure and one-way access to the TiDB Cloud service hosted in an Google Cloud VPC via the [Private Service Connect](https://cloud.google.com/vpc/docs/private-service-connect), as if the service were in your own VPC. A private endpoint is exposed in your VPC and you can create a connection to the TiDB Cloud service via the endpoint with permission.
+TiDB Cloud supports highly secure and one-way access to the TiDB Cloud service hosted in a Google Cloud VPC via the [Private Service Connect](https://cloud.google.com/vpc/docs/private-service-connect), as if the service were in your own VPC. A private endpoint is exposed in your VPC and you can create a connection to the TiDB Cloud service via the endpoint with permission.
 
 Powered by Google Cloud Private Service Connect, the endpoint connection is secure and private, and does not expose your data to the public internet. In addition, the endpoint connection supports CIDR overlap and is easier for network management.
 
@@ -29,19 +29,19 @@ For more detailed definitions of the private endpoint and endpoint service, see 
 
 - You can create up to 12 endpoints for each TiDB Dedicated cluster.
 - Private endpoint connection across regions is not supported.
-- If your VPC has already established a peering connection with the VPC where the TiDB cluster is located, the Private Service Connect Endpoint created under the VPC will not be able to connect to that TiDB cluster.
-- If you create multiple Private Service Connect endpoints (for example, **Endpoint 1** and **Endpoint 2**) under the same Google Project A to connect to the same TiDB Cluster, when the endpoints are rejected, the existing endpoints already established under that project can still connect to the TiDB Cluster. But any new endpoints created under that project will be rejected.
-- Before you begin to create an endpoint
-    - You must [enable](https://console.cloud.google.com/apis/library/compute.googleapis.com) the following APIs in your project:
-        - [Compute Engine API](https://cloud.google.com/compute/docs/reference/rest/v1) 
+- If your VPC has already established a peering connection with the VPC where the TiDB cluster is located, the Private Service Connect endpoint created under the VPC cannot connect to that TiDB cluster.
+- If you create multiple Private Service Connect endpoints (for example, **Endpoint 1** and **Endpoint 2**) under the same Google project to connect to the same TiDB cluster, when the endpoints are rejected, the existing endpoints already established under that project can still connect to the TiDB cluster. But any new endpoints created under that project will be rejected.
+- Before you begin to create an endpoint:
+    - [Enable](https://console.cloud.google.com/apis/library/compute.googleapis.com) the following APIs in your project:
+        - [Compute Engine API](https://cloud.google.com/compute/docs/reference/rest/v1)
         - [Service Directory API](https://cloud.google.com/service-directory/docs/reference/rest)
         - [Cloud DNS API](https://cloud.google.com/dns/docs/reference/v1)
-    - The following [IAM roles](https://cloud.google.com/iam/docs/understanding-roles) provide the permissions needed to create an endpoint.
+    - Prepare the following [IAM roles](https://cloud.google.com/iam/docs/understanding-roles) with the permissions needed to create an endpoint.
 
-        | Task | IAM Roles |
+        | Task | Required IAM Roles |
         |---|---|
-        | Create an endpoint | Both of these roles: [Compute Network Admin](https://cloud.google.com/iam/docs/understanding-roles#compute.networkAdmin) (roles/compute.networkAdmin) and [Service Directory Editor](https://cloud.google.com/iam/docs/understanding-roles#servicedirectory.editor) (roles/servicedirectory.editor) |
-        | Automatically or manually configure [DNS entries](https://cloud.google.com/vpc/docs/configure-private-service-connect-services#dns-endpoint) for an endpoint | Both of these roles: [Compute Network Admin](https://cloud.google.com/iam/docs/understanding-roles#compute.networkAdmin) (roles/compute.networkAdmin) and [Service Directory Editor](https://cloud.google.com/iam/docs/understanding-roles#servicedirectory.editor) (roles/servicedirectory.editor) |
+        | Create an endpoint | [Compute Network Admin](https://cloud.google.com/iam/docs/understanding-roles#compute.networkAdmin) (roles/compute.networkAdmin) and [Service Directory Editor](https://cloud.google.com/iam/docs/understanding-roles#servicedirectory.editor) (roles/servicedirectory.editor) |
+        | Automatically or manually configure [DNS entries](https://cloud.google.com/vpc/docs/configure-private-service-connect-services#dns-endpoint) for an endpoint | [Compute Network Admin](https://cloud.google.com/iam/docs/understanding-roles#compute.networkAdmin) (roles/compute.networkAdmin) and [Service Directory Editor](https://cloud.google.com/iam/docs/understanding-roles#servicedirectory.editor) (roles/servicedirectory.editor) |
 
 - Egress firewall rules must permit traffic to the internal IP address of the endpoint. The implied allow egress firewall rule permits egress to any destination IP address.
 - If you have created egress deny firewall rules in your VPC network, or if you have created hierarchical firewall policies that modify the implied allowed egress behavior, access to the endpoint might be affected. You need to create a specific egress allow firewall rule or policy to permit traffic to internal IP address destination of the service endpoint.
@@ -90,11 +90,11 @@ You can select a cluster with any of the following statuses:
     - **Private Service Connect Endpoint Name**: enter a unique name for the Private Endpoint that will be created.
 2. After entering the information, click **Generate Command**.
 3. Copy the command.
-4. Go to the [Google Cloud Shell](https://console.cloud.google.com/home/dashboard) to execute the command.
+4. Go to [Google Cloud Shell](https://console.cloud.google.com/home/dashboard) to execute the command.
 
 ### Step 3. Accept endpoint access
 
-After executing the command in the Google Cloud Shell, go back to the TiDB Cloud console and then click **Accept endpoint access**.
+After executing the command in Google Cloud Shell, go back to the TiDB Cloud console and then click **Accept endpoint access**.
 
 If you see an error "No connection request received from the endpoint.", make sure that you have copied the command correctly and successfully executed it in your Google Cloud Shell.
 
@@ -133,16 +133,16 @@ Usually the endpoint service is created automatically when the cluster is create
 
 ### TiDB Cloud fails to create an endpoint, what should I do?
 
-You need to review the error message generated during execution in Google Cloud Shell to troubleshoot the issue. If it is a permission-related error, you must grant the necessary permissions before reattempting the command.
+You need to review the error message generated during execution in Google Cloud Shell to troubleshoot the issue. If it is a permission-related error, you must grant the necessary permissions before retry.
 
 ### I cancelled some actions. What should I do to handle cancellation before accepting endpoint access?
 
 Unsaved drafts of cancelled actions will not be retained or displayed. You need to reconfigure each step when creating a new private endpoint in the TiDB Cloud console next time.
 
-If you have already executed the command to create a private endpoint in Google Cloud Shell, you need to manually delete the corresponding endpoint in the Google Cloud console.
+If you have already executed the command to create a private endpoint in Google Cloud Shell, you need to manually [delete the corresponding endpoint](https://cloud.google.com/vpc/docs/configure-private-service-connect-services#delete-endpoint) in the Google Cloud console.
 
 ### Why can't I see the endpoints generated by directly copying the service attachment in the TiDB Cloud console?
 
 You can view endpoints created through the command generated in the TiDB Cloud console, allowing you to see all the created endpoints within the same Google Cloud project ID.
 
-Endpoints generated by directly copying the service attachment (that is, not created through the command generated in the TiDB Cloud console) are not displayed in the TiDB Cloud console.
+However, endpoints generated by directly copying the service attachment (that is, not created through the command generated in the TiDB Cloud console) are not displayed in the TiDB Cloud console.
