@@ -212,6 +212,13 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.3/quick-start-with-
 
 - Add a new system table `mysql.tidb_timers` to store the metadata of internal timers.
 
+## Deprecated features
+
+* TiDB
+
+    - The [`Fast Analyze`](/system-variables.md#tidb_enable_fast_analyze) feature (experimental) for statistics will be deprecated in v7.5.0.
+    - The [incremental collection](/statistics.md#incremental-collection) feature for statistics will be deprecated in v7.5.0.
+
 ## Improvements
 
 + TiDB
@@ -220,6 +227,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.3/quick-start-with-
     - When [Global Kill](/tidb-configuration-file.md#enable-global-kill-new-in-v610) is enabled, you can terminate the current session by pressing <kbd>Control+C</kbd> [#8854](https://github.com/pingcap/tidb/issues/8854) @[pingyu](https://github.com/pingyu)
     - Support the `IS_FREE_LOCK()` and `IS_USED_LOCK()` locking functions [#44493](https://github.com/pingcap/tidb/issues/44493) @[dveeden](https://github.com/dveeden)
     - Optimize the performance of reading the dumped chunks from disk [#45125](https://github.com/pingcap/tidb/issues/45125) @[YangKeao](https://github.com/YangKeao)
+    - Optimize the overestimation issue of the inner table of Index Join by using Optimizer Fix Controls [#44855](https://github.com/pingcap/tidb/issues/44855) @[time-and-fate](https://github.com/time-and-fate)
 
 + TiKV
 
@@ -273,6 +281,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.3/quick-start-with-
     - Fix the issue that upgrading TiDB gets stuck when reading metadata takes longer than one DDL lease [#45176](https://github.com/pingcap/tidb/issues/45176) @[zimulala](https://github.com/zimulala)
     - Fix the issue that the query result of the `SELECT CAST(n AS CHAR)` statement is incorrect when `n` in the statement is a negative number [#44786](https://github.com/pingcap/tidb/issues/44786) @[xhebox](https://github.com/xhebox)
     - Fix the issue that queries might return incorrect results when `tidb_opt_agg_push_down` is enabled [#44795](https://github.com/pingcap/tidb/issues/44795) @[AilinKid](https://github.com/AilinKid)
+    - Fix the issue of wrong results that occurs when a query with `current_date()` uses plan cache [#45086](https://github.com/pingcap/tidb/issues/45086) @[qw4990](https://github.com/qw4990)
 
 + TiKV
 
