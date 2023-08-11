@@ -1,6 +1,6 @@
 ---
-title: Connect to TiDB Dedicated via Private Service Connect on Google Cloud
-summary: Learn how to connect to your TiDB Cloud cluster via Private Service Connect on Google Cloud.
+title: Connect to TiDB Dedicated via Private Service Connect with Google Cloud
+summary: Learn how to connect to your TiDB Cloud cluster via Private Service Connect with Google Cloud.
 ---
 
 # Connect to TiDB Dedicated via Private Service Connect on Google Cloud
