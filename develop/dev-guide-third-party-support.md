@@ -187,7 +187,7 @@ If you encounter problems when connecting to TiDB using the tools listed in this
          <td>v3.5.10</td>
          <td>Full</td>
          <td>N/A</td>
-         <td><a href="/tidb/v7.0/dev-guide-sample-application-java">Build a Simple CRUD App with TiDB and Java</a></td>
+         <td><a href="/tidb/v7.0/dev-guide-sample-application-java-mybatis">Build a Simple CRUD App with TiDB and MyBatis</a></td>
       </tr>
       <tr>
          <td><a href="https://spring.io/projects/spring-data-jpa/" target="_blank" referrerpolicy="no-referrer-when-downgrade">Spring Data JPA</a></td>
