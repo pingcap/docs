@@ -163,7 +163,11 @@ implementation 'org.mybatis:mybatis:3.5.9'
 implementation 'mysql:mysql-connector-java:5.1.49'
 ```
 
+<<<<<<< HEAD
 For an example of using MyBatis to build a TiDB application, see [Build a Simple CRUD App with TiDB and Java](/develop/dev-guide-sample-application-java.md).
+=======
+For an example of using MyBatis to build a TiDB application, see [Build a simple CRUD app with TiDB and MyBatis](/develop/dev-guide-sample-application-java-mybatis.md).
+>>>>>>> 003f645fec (Fix the Errors that was founded by dividing CN examples document (#14373))
 
 </div>
 
