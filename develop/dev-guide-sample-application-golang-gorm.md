@@ -13,7 +13,7 @@ summary: Learn how to build a simple CRUD application with TiDB and GORM.
 
 このドキュメントでは、TiDB と GORM を使用して単純な CRUD アプリケーションを構築する方法について説明します。
 
-> **ノート：**
+> **注記：**
 >
 > Golang 1.20 以降のバージョンを使用することをお勧めします。
 
@@ -45,8 +45,6 @@ TiDB クラスターの起動方法を紹介します。
 git clone https://github.com/pingcap-inc/tidb-example-golang.git
 ```
 
-GORM と比較すると、go-sql-driver/mysql 実装はベスト プラクティスではない可能性があります。エラー処理ロジックを作成し、手動で`*sql.Rows`を閉じる必要があり、コードを簡単に再利用できないため、コードが若干冗長になります。
-
 次の手順では`v1.23.5`を例として説明します。
 
 TiDB トランザクションを適応させるには、次のコードに従ってツールキット[ユーティリティ](https://github.com/pingcap-inc/tidb-example-golang/tree/main/util)を作成します。
@@ -55,49 +53,26 @@ TiDB トランザクションを適応させるには、次のコードに従っ
 package util
 
 import (
-    "context"
-    "database/sql"
+    "gorm.io/gorm"
 )
 
-type TiDBSqlTx struct {
-    *sql.Tx
-    conn        *sql.Conn
-    pessimistic bool
-}
-
-func TiDBSqlBegin(db *sql.DB, pessimistic bool) (*TiDBSqlTx, error) {
-    ctx := context.Background()
-    conn, err := db.Conn(ctx)
-    if err != nil {
-        return nil, err
+// TiDBGormBegin start a TiDB and Gorm transaction as a block. If no error is returned, the transaction will be committed. Otherwise, the transaction will be rolled back.
+func TiDBGormBegin(db *gorm.DB, pessimistic bool, fc func(tx *gorm.DB) error) (err error) {
+    session := db.Session(&gorm.Session{})
+    if session.Error != nil {
+        return session.Error
     }
+
     if pessimistic {
-        _, err = conn.ExecContext(ctx, "set @@tidb_txn_mode=?", "pessimistic")
+        session = session.Exec("set @@tidb_txn_mode=pessimistic")
     } else {
-        _, err = conn.ExecContext(ctx, "set @@tidb_txn_mode=?", "optimistic")
+        session = session.Exec("set @@tidb_txn_mode=optimistic")
     }
-    if err != nil {
-        return nil, err
-    }
-    tx, err := conn.BeginTx(ctx, nil)
-    if err != nil {
-        return nil, err
-    }
-    return &TiDBSqlTx{
-        conn:        conn,
-        Tx:          tx,
-        pessimistic: pessimistic,
-    }, nil
-}
 
-func (tx *TiDBSqlTx) Commit() error {
-    defer tx.conn.Close()
-    return tx.Tx.Commit()
-}
-
-func (tx *TiDBSqlTx) Rollback() error {
-    defer tx.conn.Close()
-    return tx.Tx.Rollback()
+    if session.Error != nil {
+        return session.Error
+    }
+    return session.Transaction(fc)
 }
 ```
 
@@ -281,7 +256,7 @@ func buyGoods(db *gorm.DB, sellID, buyID string, amount, price int) error {
 
 ### ステップ 3.1 TiDB Cloudのパラメータを変更する {#step-3-1-modify-parameters-for-tidb-cloud}
 
-TiDB サーバーレス クラスターを使用している場合は、 `gorm.go`の`dsn`の値を変更します。
+TiDB サーバーレス クラスターを使用している場合は、 `dsn` in `gorm.go`の値を変更します。
 
 ```go
 dsn := "root:@tcp(127.0.0.1:4000)/test?charset=utf8mb4"

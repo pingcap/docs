@@ -13,7 +13,7 @@ summary: Learn how to build a simple CRUD application with TiDB and peewee.
 
 このドキュメントでは、TiDB と peewee を使用して単純な CRUD アプリケーションを構築する方法について説明します。
 
-> **ノート：**
+> **注記：**
 >
 > Python 3.10 以降の Python バージョンを使用することをお勧めします。
 
@@ -167,9 +167,9 @@ simple_example()
 trade_example()
 ```
 
-ドライバーを直接使用する場合と比較して、peewee は、データベース接続を作成するときにさまざまなデータベースの特定の詳細を抽象化します。さらに、peewee はセッション管理や基本オブジェクトの CRUD などの一部の操作をカプセル化するため、コードが大幅に簡素化されます。
+ドライバーを直接使用する場合と比較して、peewee は、データベース接続を作成するときに、さまざまなデータベースの特定の詳細を抽象化します。さらに、peewee はセッション管理や基本オブジェクトの CRUD などの一部の操作をカプセル化するため、コードが大幅に簡素化されます。
 
-`Player`のクラスは、アプリケーション内のテーブルの属性へのマッピングです。 `Player`の各属性は、 `player`テーブルのフィールドに対応します。 SQLAlchemy に詳細情報を提供するために、フィールド タイプとその追加属性を示す属性は`id = Column(String(36), primary_key=True)`として定義されています。たとえば、 `id = Column(String(36), primary_key=True)` 、 `id`属性が`String`タイプ、データベース内の対応するフィールドが`VARCHAR`タイプ、長さが`36`で、主キーであることを示します。
+`Player`のクラスは、アプリケーション内のテーブルの属性へのマッピングです。 `Player`の各属性は、 `player`テーブルのフィールドに対応します。 peeweee に詳細情報を提供するために、属性は`id = CharField(max_length=36, primary_key=True)`として定義され、フィールド タイプとその追加属性を示します。たとえば、 `id = CharField(max_length=36, primary_key=True)` 、 `id`属性が`String`タイプ、データベース内の対応するフィールドが`VARCHAR`タイプ、長さが`36`で、主キーであることを示します。
 
 peeweee の使用方法の詳細については、 [ピーウィーのドキュメント](http://docs.peewee-orm.com/en/latest/)を参照してください。
 

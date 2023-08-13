@@ -11,7 +11,7 @@ summary: Learn how to build a simple CRUD application with TiDB and Go-MySQL-Dri
 
 このドキュメントでは、TiDB と[Go-MySQL-ドライバー](https://github.com/go-sql-driver/mysql)を使用して単純な CRUD アプリケーションを構築する方法について説明します。
 
-> **ノート：**
+> **注記：**
 >
 > Golang 1.20 以降のバージョンを使用することをお勧めします。
 
@@ -77,7 +77,7 @@ CREATE TABLE player (
 );
 ```
 
-`sqldriver.go`は`sqldriver`の本体です。 TiDB は MySQL プロトコルと高い互換性があるため、TiDB に接続するには MySQL ソース インスタンス`db, err := sql.Open("mysql", dsn)`を初期化する必要があります。次に、 `dao.go`を使用して、データの読み取り、編集、追加、削除を行うことができます。
+`sqldriver.go`は`sqldriver`の本体です。 GORM と比較すると、go-sql-driver/mysql 実装はベスト プラクティスではない可能性があります。エラー処理ロジックを作成し、手動で`*sql.Rows`閉じる必要があり、コードを簡単に再利用できないため、コードが若干冗長になります。 TiDB は MySQL プロトコルと高い互換性があるため、TiDB に接続するには MySQL ソース インスタンス`db, err := sql.Open("mysql", dsn)`を初期化する必要があります。次に、 `dao.go`を使用してデータの読み取り、編集、追加、削除を行うことができます。
 
 ```go
 package main
@@ -509,7 +509,7 @@ go-sql-driver/mysql を使用する場合は、クラスターに接続し、 `s
 
 ### ステップ 3.2 TiDB Cloudのパラメータを変更する {#step-3-2-modify-parameters-for-tidb-cloud}
 
-TiDB サーバーレス クラスターを使用している場合は、 `sqldriver.go`の`dsn`の値を変更します。
+TiDB サーバーレス クラスターを使用している場合は、 `dsn` in `sqldriver.go`の値を変更します。
 
 ```go
 dsn := "root:@tcp(127.0.0.1:4000)/test?charset=utf8mb4"

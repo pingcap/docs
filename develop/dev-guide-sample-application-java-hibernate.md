@@ -9,9 +9,11 @@ summary: Learn how to build a simple CRUD application with TiDB and Hibernate.
 
 # TiDB と Hibernate を使用してシンプルな CRUD アプリを構築する {#build-a-simple-crud-app-with-tidb-and-hibernate}
 
+[休止状態](https://hibernate.org/)は人気のあるオープンソースJava ORM で、TiDB 機能によく適合する`v6.0.0.Beta2`から始まる TiDB 方言をサポートしています。
+
 このドキュメントでは、TiDB と Hibernate を使用して単純な CRUD アプリケーションを構築する方法について説明します。
 
-> **ノート：**
+> **注記：**
 >
 > Java 8 以降のJavaバージョンを使用することをお勧めします。
 
@@ -45,7 +47,7 @@ git clone https://github.com/pingcap-inc/tidb-example-java.git
 
 Hibernate と比較すると、JDBC 実装はベスト プラクティスではない可能性があります。エラー処理ロジックを手動で記述する必要があり、コードを簡単に再利用できないため、コードが若干冗長になります。
 
-Hibernate は人気のあるオープンソースJava ORM であり、TiDB 機能によく適合する`v6.0.0.Beta2`から始まる TiDB 方言をサポートしています。次の手順では例として`v6.0.0.Beta2`を取り上げます。
+次の手順では`v6.0.0.Beta2`を例として説明します。
 
 `plain-java-hibernate`ディレクトリに移動します。
 
@@ -100,7 +102,7 @@ cd plain-java-hibernate
 
 `HibernateExample.java`は`plain-java-hibernate`の本体です。 JDBC と比較して、Hibernate を使用する場合は、異なるデータベース間でのデータベース作成の差異が回避されるため、構成ファイルのパスを記述するだけで済みます。
 
-`PlayerDAO`はデータを管理するために使用されるクラスで、 `DAO` [データアクセスオブジェクト](https://en.wikipedia.org/wiki/Data_access_object)を意味します。このクラスは、データを書き込むための一連のデータ操作メソッドを定義します。 JDBC と比較して、Hibernate はオブジェクト マッピングや基本オブジェクトの CRUD などの多数の操作をカプセル化するため、コードが大幅に簡素化されます。
+`PlayerDAO`はデータを管理するためのクラスで、 `DAO` [データアクセスオブジェクト](https://en.wikipedia.org/wiki/Data_access_object)を意味します。このクラスは、データを書き込むための一連のデータ操作メソッドを定義します。 JDBC と比較して、Hibernate はオブジェクト マッピングや基本オブジェクトの CRUD などの多数の操作をカプセル化するため、コードが大幅に簡素化されます。
 
 `PlayerBean`は、テーブルのマッピングであるデータ エンティティ クラスです。 `PlayerBean`の各プロパティは、 `player`テーブルのフィールドに対応します。 JDBC と比較すると、Hibernate `PlayerBean`では、詳細情報のマッピング関係を示す注釈が追加されています。
 
@@ -336,11 +338,7 @@ public class HibernateExample
 
 次のコンテンツでは、コードを実行する方法をステップごとに紹介します。
 
-### ステップ 3.1 テーブルの初期化 {#step-3-1-table-initialization}
-
-テーブルを手動で初期化する必要はありません。
-
-### ステップ 3.2 TiDB Cloudのパラメータを変更する {#step-3-2-modify-parameters-for-tidb-cloud}
+### ステップ 3.1 TiDB Cloudのパラメータを変更する {#step-3-1-modify-parameters-for-tidb-cloud}
 
 TiDB サーバーレス クラスターを使用している場合は、 `hibernate.cfg.xml`の`hibernate.connection.url` 、 `hibernate.connection.username` 、 `hibernate.connection.password`を変更します。
 
@@ -404,20 +402,20 @@ TiDB サーバーレス クラスターを使用している場合は、 `hibern
 </hibernate-configuration>
 ```
 
-### ステップ 3.3 実行 {#step-3-3-run}
+### ステップ 3.2 実行 {#step-3-2-run}
 
 コードを実行するには、 `make build`と`make run`をそれぞれ実行します。
 
 ```shell
 make build # this command executes `mvn clean package`
-make run # this command executes `java -jar target/plain-java-jdbc-0.0.1-jar-with-dependencies.jar`
+make run # this command executes `java -jar target/plain-java-hibernate-0.0.1-jar-with-dependencies.jar`
 ```
 
 または、ネイティブ コマンドを使用することもできます。
 
 ```shell
 mvn clean package
-java -jar target/plain-java-jdbc-0.0.1-jar-with-dependencies.jar
+java -jar target/plain-java-hibernate-0.0.1-jar-with-dependencies.jar
 ```
 
 または、 `make build`と`make run`を組み合わせた`make`コマンドを直接実行します。

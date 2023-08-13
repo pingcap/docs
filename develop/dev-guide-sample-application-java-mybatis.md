@@ -1,17 +1,19 @@
 ---
-title: Build a Simple CRUD App with TiDB and Mybatis
-summary: Learn how to build a simple CRUD application with TiDB and Mybatis.
+title: Build a Simple CRUD App with TiDB and MyBatis
+summary: Learn how to build a simple CRUD application with TiDB and MyBatis.
 ---
 
 <!-- markdownlint-disable MD024 -->
 
 <!-- markdownlint-disable MD029 -->
 
-# TiDB と Mybatis を使用してシンプルな CRUD アプリを構築する {#build-a-simple-crud-app-with-tidb-and-mybatis}
+# TiDB と MyBatis を使用してシンプルな CRUD アプリを構築する {#build-a-simple-crud-app-with-tidb-and-mybatis}
 
-このドキュメントでは、TiDB と Mybatis を使用して単純な CRUD アプリケーションを構築する方法について説明します。
+[マイバティス](https://mybatis.org/mybatis-3/index.html)は、人気のあるオープンソースのJavaクラス永続性フレームワークです。
 
-> **ノート：**
+このドキュメントでは、TiDB と MyBatis を使用して単純な CRUD アプリケーションを構築する方法について説明します。
+
+> **注記：**
 >
 > Java 8 以降のJavaバージョンを使用することをお勧めします。
 
@@ -43,9 +45,9 @@ TiDB クラスターの起動方法を紹介します。
 git clone https://github.com/pingcap-inc/tidb-example-java.git
 ```
 
-[マイバティス](https://mybatis.org/mybatis-3/index.html)と比較すると、JDBC 実装はベスト プラクティスではない可能性があります。これは、エラー処理ロジックを手動で記述する必要があり、コードを簡単に再利用できないため、コードが若干冗長になるためです。
+[マイバティス](https://mybatis.org/mybatis-3/index.html)と比較すると、JDBC 実装はベスト プラクティスではない可能性があります。エラー処理ロジックを手動で記述する必要があり、コードを簡単に再利用できないため、コードが若干冗長になります。
 
-Mybatis は、人気のあるオープンソースのJavaクラス永続フレームワークです。以下では[MyBatis ジェネレーター](https://mybatis.org/generator/quickstart.html) Maven プラグインとして使用して永続化レイヤーコードを生成します。
+以下では[MyBatis ジェネレーター](https://mybatis.org/generator/quickstart.html) Maven プラグインとして使用して永続化レイヤーコードを生成します。
 
 `plain-java-mybatis`ディレクトリに移動します。
 
@@ -85,9 +87,9 @@ cd plain-java-mybatis
 
 -   `src/main/java/com/pingcap/model/Player.java` : `Player`エンティティ クラス。
 -   `src/main/java/com/pingcap/model/PlayerMapper.java` : `PlayerMapper`のインターフェース。
--   `src/main/resources/mapper/PlayerMapper.xml` : `Player`の XML マッピング。 Mybatis はこの構成を使用して、 `PlayerMapper`インターフェースの実装クラスを自動的に生成します。
+-   `src/main/resources/mapper/PlayerMapper.xml` : `Player`の XML マッピング。 MyBatis はこの構成を使用して、 `PlayerMapper`インターフェースの実装クラスを自動的に生成します。
 
-これらのファイルを生成するための戦略は、 [マイバティスジェネレーター](https://mybatis.org/generator/quickstart.html)の構成ファイルである`mybatis-generator.xml`に書かれています。次の設定ファイルには、その使用方法を説明するコメントがあります。
+これらのファイルを生成するための戦略は、 [MyBatis ジェネレーター](https://mybatis.org/generator/quickstart.html)の構成ファイルである`mybatis-generator.xml`に書かれています。次の設定ファイルには、その使用方法を説明するコメントがあります。
 
 ```xml
 <!DOCTYPE generatorConfiguration PUBLIC
@@ -147,7 +149,7 @@ cd plain-java-mybatis
             Java code mapper interface file will be generated at ${targetProject}/${targetPackage}
 
             javaClientGenerator.type (context.targetRuntime is MyBatis3):
-                This attribute indicated Mybatis how to implement interface.
+                This attribute indicated MyBatis how to implement interface.
                 It has ANNOTATEDMAPPER / MIXEDMAPPER / XMLMAPPER 3 selection to choice.
         -->
         <javaClientGenerator type="XMLMAPPER" targetPackage="com.pingcap.model" targetProject="src/main/java"/>
@@ -195,13 +197,13 @@ cd plain-java-mybatis
 </plugin>
 ```
 
-Maven プラグインに組み込むと、古い生成ファイルを削除し、 `mvn mybatis-generate`使用して新しいファイルを作成できます。または、 `make gen`使用して古いファイルを削除し、同時に新しいファイルを生成することもできます。
+Maven プラグインに組み込むと、古い生成ファイルを削除し、 `mvn mybatis-generate`を使用して新しいファイルを作成できます。または、 `make gen`使用して古いファイルを削除し、同時に新しいファイルを生成することもできます。
 
-> **ノート：**
+> **注記：**
 >
 > プロパティ`configuration.overwrite` `mybatis-generator.xml` 、生成されたJavaコード ファイルが上書きされることを保証するだけです。ただし、XML マッピング ファイルは追加されたまま書き込まれます。したがって、Mybaits Generator が新しいファイルを生成する前に、古いファイルを削除することをお勧めします。
 
-`Player.java`は、Mybatis Generator を使用して生成されたデータ エンティティ クラス ファイルであり、アプリケーション内のデータベース テーブルのマッピングです。 `Player`クラスの各プロパティは、 `player`テーブルのフィールドに対応します。
+`Player.java`は、MyBatis Generator を使用して生成されたデータ エンティティ クラス ファイルであり、アプリケーション内のデータベース テーブルのマッピングです。 `Player`クラスの各プロパティは、 `player`テーブルのフィールドに対応します。
 
 ```java
 package com.pingcap.model;
@@ -249,7 +251,7 @@ public class Player {
 }
 ```
 
-`PlayerMapper.java`は、Mybatis Generator を使用して生成されたマッピング インターフェイス ファイルです。このファイルはインターフェースのみを定義しており、インターフェースの実装クラスはXMLやアノテーションを利用して自動生成されます。
+`PlayerMapper.java`は、MyBatis Generator を使用して生成されたマッピング インターフェイス ファイルです。このファイルはインターフェースのみを定義しており、インターフェースの実装クラスはXMLやアノテーションを利用して自動生成されます。
 
 ```java
 package com.pingcap.model;
@@ -271,7 +273,7 @@ public interface PlayerMapper {
 }
 ```
 
-`PlayerMapper.xml`は、Mybatis Generator を使用して生成されたマッピング XML ファイルです。 Mybatis はこれを使用して`PlayerMapper`インターフェースの実装クラスを自動生成します。
+`PlayerMapper.xml`は、MyBatis Generator を使用して生成されたマッピング XML ファイルです。 MyBatis はこれを利用して`PlayerMapper`インターフェースの実装クラスを自動生成します。
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -349,7 +351,7 @@ public interface PlayerMapper {
 </mapper>
 ```
 
-Mybatis Generator はテーブル定義からソースコードを生成する必要があるため、最初にテーブルを作成する必要があります。テーブルを作成するには、 `dbinit.sql`を使用できます。
+MyBatis Generator はテーブル定義からソースコードを生成する必要があるため、最初にテーブルを作成する必要があります。テーブルを作成するには、 `dbinit.sql`を使用できます。
 
 ```sql
 USE test;
@@ -363,7 +365,7 @@ CREATE TABLE player (
 );
 ```
 
-インターフェイス`PlayerMapperEx`さらに分割して`PlayerMapper`を拡張し、一致する`PlayerMapperEx.xml`ファイルを書き込みます。 `PlayerMapper.java`と`PlayerMapper.xml`を直接変更することは避けてください。これは、Mybatis Generator による上書きを避けるためです。
+インターフェイス`PlayerMapperEx`さらに分割して`PlayerMapper`を拡張し、一致する`PlayerMapperEx.xml`ファイルを書き込みます。 `PlayerMapper.java`と`PlayerMapper.xml`を直接変更することは避けてください。これは、MyBatis Generator による上書きを避けるためです。
 
 `PlayerMapperEx.java`で追加したインターフェースを定義します。
 
@@ -420,7 +422,7 @@ public interface PlayerMapperEx extends PlayerMapper {
 </mapper>
 ```
 
-`PlayerDAO.java`はデータを管理するために使用されるクラスで、 `DAO` [データアクセスオブジェクト](https://en.wikipedia.org/wiki/Data_access_object)を意味します。このクラスは、データを書き込むための一連のデータ操作メソッドを定義します。 Mybatis はその中で、オブジェクト マッピングや基本オブジェクトの CRUD などの多数の操作をカプセル化し、コードを大幅に簡素化します。
+`PlayerDAO.java`はデータを管理するために使用されるクラスで、 `DAO` [データアクセスオブジェクト](https://en.wikipedia.org/wiki/Data_access_object)を意味します。このクラスは、データを書き込むための一連のデータ操作メソッドを定義します。その中で、MyBatis はオブジェクト マッピングや基本オブジェクトの CRUD などの多数の操作をカプセル化し、コードを大幅に簡素化します。
 
 ```java
 package com.pingcap.dao;
@@ -614,7 +616,7 @@ public class MybatisExample {
 
 ### ステップ 3.1 テーブルの初期化 {#step-3-1-table-initialization}
 
-Mybatis を使用する場合、データベース テーブルを手動で初期化する必要があります。ローカル クラスターを使用していて、MySQL クライアントがローカルにインストールされている場合は、 `plain-java-mybatis`ディレクトリで直接実行できます。
+MyBatis を使用する場合、データベース テーブルを手動で初期化する必要があります。ローカル クラスターを使用していて、MySQL クライアントがローカルにインストールされている場合は、 `plain-java-mybatis`ディレクトリで直接実行できます。
 
 ```shell
 make prepare
@@ -739,4 +741,4 @@ java -jar target/plain-java-mybatis-0.0.1-jar-with-dependencies.jar
 
 ## ステップ 4. 期待される出力 {#step-4-expected-output}
 
-[Mybatis の期待される出力](https://github.com/pingcap-inc/tidb-example-java/blob/main/Expected-Output.md#plain-java-mybatis)
+[MyBatis の期待される出力](https://github.com/pingcap-inc/tidb-example-java/blob/main/Expected-Output.md#plain-java-mybatis)

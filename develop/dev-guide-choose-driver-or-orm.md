@@ -5,7 +5,7 @@ summary: Learn how to choose a driver or ORM framework to connect to TiDB.
 
 # Driverまたは ORM を選択してください {#choose-driver-or-orm}
 
-> **ノート：**
+> **注記：**
 >
 > TiDB は、ドライバーと ORM に対して次の 2 つのサポート レベルを提供します。
 >
@@ -40,7 +40,7 @@ TiDB は MySQL プロトコルと高い互換性がありますが、一部の�
 
 サポートレベル:**フル**
 
-[TiDB-JDBC](https://github.com/pingcap/mysql-connector-j)は、MySQL 8.0.29 に基づいてカスタマイズされたJavaドライバーです。 MySQL 正式バージョン 8.0.29 に基づいてコンパイルされた TiDB-JDBC は、元の JDBC の準備モードでのマルチパラメータおよびマルチフィールド EOF のバグを修正し、自動 TiCDC スナップショット メンテナンスや SM3 認証プラグインなどの機能を追加します。
+[TiDB-JDBC](https://github.com/pingcap/mysql-connector-j) MySQL 8.0.29 に基づいてカスタマイズされたJavaドライバーです。 MySQL 正式バージョン 8.0.29 に基づいてコンパイルされた TiDB-JDBC は、オリジナルの JDBC の準備モードにおけるマルチパラメータおよびマルチフィールド EOF のバグを修正し、自動 TiCDC スナップショット メンテナンスや SM3 認証プラグインなどの機能を追加します。
 
 SM3 ベースの認証の使用は、MySQL Connector/J の TiDB バージョンでのみサポートされています。
 
@@ -87,7 +87,7 @@ implementation group: 'org.bouncycastle', name: 'bcpkix-jdk15on', version: '1.67
 
 ### Java ORM フレームワーク {#java-orm-frameworks}
 
-> **ノート：**
+> **注記：**
 >
 > -   現在、Hibernate は[ネストされたトランザクションはサポートされていません](https://stackoverflow.com/questions/37927208/nested-transaction-in-spring-app-with-jpa-postgres)を実行します。
 >
@@ -100,7 +100,7 @@ implementation group: 'org.bouncycastle', name: 'bcpkix-jdk15on', version: '1.67
 
 アプリケーションのさまざまな依存関係間の複雑な関係を手動で管理することを避けるために、 [グラドル](https://gradle.org/install)または[メイビン](https://maven.apache.org/install.html)を使用して、間接的な依存関係を含むアプリケーションのすべての依存関係を取得できます。 Hibernate `6.0.0.Beta2`以降のみが TiDB ダイアレクトをサポートしていることに注意してください。
 
-**Maven を**使用している場合は、以下を`<dependencies></dependencies>`に追加します。
+**Maven を**使用している場合は、次の行を`<dependencies></dependencies>`に追加します。
 
 ```xml
 <dependency>
@@ -126,9 +126,9 @@ implementation 'mysql:mysql-connector-java:5.1.49'
 -   Hibernate を使用してネイティブJavaによって TiDB アプリケーションを構築する例については、 [TiDB と Hibernate を使用してシンプルな CRUD アプリを構築する](/develop/dev-guide-sample-application-java-hibernate.md)を参照してください。
 -   Spring Data JPA または Hibernate を使用して Spring で TiDB アプリケーションを構築する例については、 [Spring Boot を使用して TiDB アプリを構築する](/develop/dev-guide-sample-application-java-spring-boot.md)を参照してください。
 
-さらに、 TiDB ダイアレクトを[Hibernate 構成ファイル](https://www.tutorialspoint.com/hibernate/hibernate_configuration.htm) : `org.hibernate.dialect.TiDBDialect`で指定する必要があります。これは Hibernate `6.0.0.Beta2`以降でのみサポートされます。 `Hibernate`バージョンが`6.0.0.Beta2`より前の場合は、まずそれをアップグレードしてください。
+さらに、 TiDB ダイアレクトを[Hibernate 設定ファイル](https://www.tutorialspoint.com/hibernate/hibernate_configuration.htm) : `org.hibernate.dialect.TiDBDialect`で指定する必要があります。これは Hibernate `6.0.0.Beta2`以降でのみサポートされます。 `Hibernate`バージョンが`6.0.0.Beta2`より前の場合は、まずそれをアップグレードしてください。
 
-> **ノート：**
+> **注記：**
 >
 > バージョン`Hibernate`をアップグレードできない場合は、代わりにMySQL 5.7ダイアレクト`org.hibernate.dialect.MySQL57Dialect`を使用してください。ただし、この設定により、予期しない結果が発生したり、 TiDB 固有の機能 ( [シーケンス](/sql-statements/sql-statement-create-sequence.md)など) が欠如したりする可能性があります。
 
@@ -163,7 +163,7 @@ implementation 'org.mybatis:mybatis:3.5.9'
 implementation 'mysql:mysql-connector-java:5.1.49'
 ```
 
-MyBatis を使用して TiDB アプリケーションを構築する例については、 [TiDB と Mybatis を使用してシンプルな CRUD アプリを構築する](/develop/dev-guide-sample-application-java-mybatis.md)を参照してください。
+MyBatis を使用して TiDB アプリケーションを構築する例については、 [TiDB と MyBatis を使用してシンプルな CRUD アプリを構築する](/develop/dev-guide-sample-application-java-mybatis.md)を参照してください。
 
 </div>
 
@@ -179,7 +179,7 @@ MyBatis を使用して TiDB アプリケーションを構築する例につい
 
 現在、 tidb-loadbalance は、ラウンドロビン、ランダム、および重みのポリシーをサポートしています。
 
-> **ノート：**
+> **注記：**
 >
 > tidb-loadbalance は[mysql-コネクタ-j](https://github.com/pingcap/mysql-connector-j)とともに使用する必要があります。
 
