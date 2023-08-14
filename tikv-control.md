@@ -648,3 +648,42 @@ From the output above, you can see that the information of the damaged SST file 
 + In the `sst meta` part, `14` means the SST file number; `552997` means the file size, followed by the smallest and largest sequence numbers and other meta-information.
 + The `overlap region` part shows the information of the Region involved. This information is obtained through the PD server.
 + The `suggested operations` part provides you suggestion to clean up the damaged SST file. You can take the suggestion to clean up files and restart the TiKV instance.
+
+### Get the state of a region's RegionReadProgress
+
+The `get-region-read-progress` subcommand can provide up-to-date details of the resolver and `RegionReadProgress`. You need to specify a region id and a TiKV, which can be obtained from Grafana ("Min resolved-ts region" and "Min safe-ts region") or DataIsNotReady logs.
+
+`--log` is optional, if specified, locks in the resolver of this region in this TiKV with the smallest start_ts will be printed in logs (INFO level). Using this option can help you identify if locks are blocking resolved-ts from advancing.
+
+`--min-start-ts` is optional, it filters out all locks with smaller start_ts than this value when logging. Using this, you can specify a specific transaction of interest to log. By default it's 0, which sets no filters.
+
+An example usage
+
+```
+./tikv-ctl --host 127.0.0.1:20160 get-region-read-progress -r 14 --log --min-start-ts 0
+```
+
+The output of this command might look like:
+
+```
+Region read progress:
+    exist: true,
+    safe_ts: 0,
+    applied_index: 92,
+    pending front item (oldest) ts: 0,
+    pending front item (oldest) applied index: 0,
+    pending back item (latest) ts: 0,
+    pending back item (latest) applied index: 0,
+    paused: false,
+Resolver:
+    exist: true,
+    resolved_ts: 0,
+    tracked index: 92,
+    number of locks: 0,
+    number of transactions: 0,
+    stopped: false,
+```
+
+The subcommand is useful in diagnosing issues related to stale read and safe-ts. For details, see [A User's Guide to Stale Read and Safe-ts in TiKV](/stale_read_user_guide.md).
+
+The tool is available in TiKV [6.5.4, 6.6), [7.1.2, 7.2) and [7.3.0, inf).
