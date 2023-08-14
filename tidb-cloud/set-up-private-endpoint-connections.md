@@ -1,9 +1,9 @@
 ---
-title: Connect to TiDB Dedicated via Private Endpoint with AWS
+title: Connect to a TiDB Dedicated Cluster via Private Endpoint with AWS
 summary: Learn how to connect to your TiDB Cloud cluster via private endpoint with AWS.
 ---
 
-# Connect to TiDB Dedicated via Private Endpoint with AWS
+# Connect to a TiDB Dedicated Cluster via Private Endpoint with AWS
 
 This document describes how to connect to your TiDB Dedicated cluster via private endpoint with AWS.
 
@@ -27,7 +27,8 @@ For more detailed definitions of the private endpoint and endpoint service, see 
 
 ## Restrictions
 
-- Private endpoint connection across regions is not supported.
+- You can create up to 12 endpoints for each TiDB Dedicated cluster.
+- The private endpoint and the TiDB cluster must be located in the same region.
 
 In most scenarios, you are recommended to use private endpoint connection over VPC peering. However, in the following scenarios, you should use VPC peering instead of private endpoint connection:
 
