@@ -16,7 +16,7 @@ The `ALTER TABLE.. ADD INDEX` statement adds an index to an existing table. This
 > - Before the upgrade, it is recommended to use the [`ADMIN SHOW DDL`](/sql-statements/sql-statement-admin-show-ddl.md) command to check whether the TiDB cluster has an ongoing DDL job. If the cluster has a DDL job, to upgrade the cluster, wait until the DDL execution is finished or use the [`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md) command to cancel the DDL job before you upgrade the cluster.
 > - In addition, during the cluster upgrade, **DO NOT** execute any DDL statement. Otherwise, the issue of undefined behavior might occur.
 >
-> When you upgrade TiDB from v7.1.0 to a later version, you can ignore the preceding limiations. For details, see [the limitations of TiDB smooth upgrade](/smooth-upgrade-tidb.md).
+> When you upgrade TiDB from v7.1.0 to a later version, you can ignore the preceding limitations. For details, see [the limitations of TiDB smooth upgrade](/smooth-upgrade-tidb.md).
 
 </CustomContent>
 
