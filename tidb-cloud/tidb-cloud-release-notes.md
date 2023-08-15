@@ -8,25 +8,6 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2023.
 
-## xx xx, 2023
-
-**General changes**
-
-- [Data Service (beta)](https://tidbcloud.com/console/data-service) supports pagination for `GET` requests.
-
-    This feature improves the efficiency of handling large datasets and enhances the development experience.
-
-    For `GET` requests, you can paginate results by specifying `page` and `page_size` as query parameters when calling the endpoint. For example, to get the second page with 10 items per page, you can use the following command:
-
-    ```bash
-    curl --digest --user '<Public Key>:<Private Key>' \
-      --request GET 'https://<region>.data.tidbcloud.com/api/v1beta/app/<App ID>/endpoint/<Endpoint Path>?page=2&page_size=10'
-    ```
-
-    Note that this feature is available only for `GET` requests where the last query is a `SELECT` statement.
-
-    For more information, see [Call an endpoint](/tidb-cloud/data-service-manage-endpoint.md#call-an-endpoint).
-
 ## August 8, 2023
 
 **General changes**
