@@ -40,6 +40,8 @@ In Grafana - TiDB dashboard - KV request row, there are panels showing the hit r
 
 ![img](/media/stale-read/traffic.png)
 
+The detailed explanation of these metrics can be found in [TiDB Monitoring Metrics](/grafana-tidb-dashboard.md#kv-request)
+
 When stale read encounters problems, changes in these p may be noticeable. The most direct evidence is the WARN log from TiDB, which reports 'DataIsNotReady' along with the region id and `safe-ts` it encounters.
 
 ### Commonly Seen Causes
@@ -119,7 +121,7 @@ On a Friday night you noticed the miss rate of stale read requests increases fro
 
 ![img](/media/stale-read/example-ops.png)
 
-So you checked the tikv-details - resolved-ts row,
+So you checked the tikv-details - resolved-ts row (explanation of the metrics can be found in [Key Monitoring Metrics of TiKV](/grafana-tikv-dashboard.md#resolved-ts)),
 
 ![img](/media/stale-read/example-ts-gap.png)
 
