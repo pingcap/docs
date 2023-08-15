@@ -8,11 +8,43 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2023.
 
+## August 15, 2023
+
+**General changes**
+
+- [Data Service (beta)](https://tidbcloud.com/console/data-service) supports pagination for `GET` requests to improve the development experience.
+
+    For `GET` requests, you can paginate results by enabling **Pagination** in **Advance Properties** and specifying `page` and `page_size` as query parameters when calling the endpoint. For example, to get the second page with 10 items per page, you can use the following command:
+
+    ```bash
+    curl --digest --user '<Public Key>:<Private Key>' \
+      --request GET 'https://<region>.data.tidbcloud.com/api/v1beta/app/<App ID>/endpoint/<Endpoint Path>?page=2&page_size=10'
+    ```
+
+    Note that this feature is available only for `GET` requests where the last query is a `SELECT` statement.
+
+    For more information, see [Call an endpoint](/tidb-cloud/data-service-manage-endpoint.md#call-an-endpoint).
+
+- [Data Service (beta)](https://tidbcloud.com/console/data-service) supports caching endpoint response of `GET` requests for a specified time-to-live (TTL) period.
+
+    This feature decreases database load and optimizes endpoint latency.
+
+    For an endpoint using the `GET` request method, you can enable **Cache Response** and configure the TTL period for the cache in **Advance Properties**.
+
+    For more information, see [Advanced properties](/tidb-cloud/data-service-manage-endpoint.md#advanced-properties).
+
+- Disable the load balancing improvement for [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) clusters that are hosted on AWS and created after August 15, 2023, including:
+
+    - Disable automatically migrating existing connections to new TiDB nodes when you scale out TiDB nodes hosted on AWS.
+    - Disable automatically migrating existing connections to available TiDB nodes when you scale in TiDB nodes hosted on AWS.
+
+  This change avoids resource contention of hybrid deployments and does not affect existing clusters with this improvement enabled. If you want to enable the load balancing improvement for your new clusters, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
+
 ## August 8, 2023
 
 **General changes**
 
-- [Data Service](https://tidbcloud.com/console/data-service) now supports Basic Authentication.
+- [Data Service (beta)](https://tidbcloud.com/console/data-service) now supports Basic Authentication.
 
     You can provide your public key as the username and private key as the password in requests using [the 'Basic' HTTP Authentication](https://datatracker.ietf.org/doc/html/rfc7617). Compared with Digest Authentication, the Basic Authentication is simpler, enabling more straightforward usage when calling Data Service endpoints.
 
