@@ -25,7 +25,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
     For more information, see [Call an endpoint](/tidb-cloud/data-service-manage-endpoint.md#call-an-endpoint).
 
-- [Data Service (beta)](https://tidbcloud.com/console/data-service) supports caching endpoint response of your `GET` requests within a specified time-to-live (TTL) period.
+- [Data Service (beta)](https://tidbcloud.com/console/data-service) supports caching endpoint response of `GET` requests for a specified time-to-live (TTL) period.
 
     This feature decreases database load and optimizes endpoint latency.
 
