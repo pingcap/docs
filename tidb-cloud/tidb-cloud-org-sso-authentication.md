@@ -47,7 +47,7 @@ TiDB Cloud provides the following authentication methods for Organization SSO.
 - GitHub
 - Microsoft
 - OIDC
-- Security Assertion Markup Language (SAML)
+- SAML
 
 When you enable Cloud Organization SSO, the first three methods are enabled by default.
 
