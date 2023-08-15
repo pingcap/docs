@@ -179,7 +179,7 @@ In TiDB Cloud, the SAML authentication method is disabled by default. After enab
 
         Paste the entire signing certificate from your IdP, including the starting line `---begin certificate---` and the end line `---end certificate---`.
 
-    - - [**Auto-provision Accounts**](#decide-whether-to-enable-auto-provision)
+    - [**Auto-provision Accounts**](#decide-whether-to-enable-auto-provision)
 
         It is disabled by default. You can enable it according to your need. For security considerations, if you choose to enable auto-provision, it is recommended to limit the allowed email domains for authentication.
 
