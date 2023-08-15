@@ -14,7 +14,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 - [Data Service (beta)](https://tidbcloud.com/console/data-service) supports pagination for `GET` requests to improve the development experience.
 
-    For an endpoint using the `GET` request method, you can enable **Pagination** and paginate results by specifying `page` and `page_size` as query parameters when calling the endpoint. For example, to get the second page with 10 items per page, you can use the following command:
+    For `GET` requests, you can paginate results by enabling **Batch Operation** in **Advance Properties** and specifying `page` and `page_size` as query parameters when calling the endpoint. For example, to get the second page with 10 items per page, you can use the following command:
 
     ```bash
     curl --digest --user '<Public Key>:<Private Key>' \
