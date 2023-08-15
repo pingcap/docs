@@ -33,7 +33,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
     For more information, see [Advanced properties](/tidb-cloud/data-service-manage-endpoint.md#advanced-properties).
 
-- Disable the load balancing improvement for TiDB Dedicated clusters that are hosted on AWS and created after August 15, 2023, including:
+- Disable the load balancing improvement for [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) clusters that are hosted on AWS and created after August 15, 2023, including:
 
     - Disable automatically migrating existing connections to new TiDB nodes when you scale out TiDB nodes hosted on AWS.
     - Disable automatically migrating existing connections to available TiDB nodes when you scale in TiDB nodes hosted on AWS.
