@@ -18,46 +18,35 @@ This document describes how to create a changefeed to stream data from TiDB Clou
 - Because TiDB Cloud uses TiCDC to establish changefeeds, it has the same [restrictions as TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview#unsupported-scenarios).
 - If the table to be replicated does not have a primary key or a non-null unique index, the absence of a unique constraint during replication could result in duplicated data being inserted downstream in some retry scenarios.
 
-## Step 1. Create a changefeed
+## Step 1. Configure destination
 
-1. Navigate to the cluster overview page of the target TiDB cluster, and then click **Changefeed** in the left navigation pane.
-
-2. Click **Create Changefeed**, and select **Amazon S3** or **GCS** as the destination.
-
-## Step 2. Connect to cloud storage
-
-You can choose either Amazon S3 or GCS as a cloud storage.
+Navigate to the cluster overview page of the target TiDB cluster. Click **Changefeed** in the left navigation pane,click **Create Changefeed**, and select **Amazon S3** or **GCS** as the destination. The configuration process varies depend on the destination you choose.
 
 <SimpleTab>
 <div label="Amazon S3">
 
-For **Amazon S3**, fill the **S3 Endpoint** area: `S3 URI`, `Access Key ID`, and `Secret Access Key`. Make the S3 bucket at the same region with your TiDB Cluster.
+For **Amazon S3**, fill the **S3 Endpoint** area: `S3 URI`, `Access Key ID`, and `Secret Access Key`. Make the S3 bucket in the same region with your TiDB cluster.
 
 ![s3_endpoint](/media/tidb-cloud/changefeed/sink-to-cloud-storage-s3-endpoint.jpg)
 
 </div>
 <div label="GCS">
 
-For **GCS**, please fill the **GCS Endpoint** area.
+For **GCS**, before filling **GCS Endpoint**, you need to first grant the GCS bucket access. Take the following steps:
 
-![gcs_endpoint](/media/tidb-cloud/changefeed/sink-to-cloud-storage-gcs-endpoint.png)
+1. In the TiDB Cloud console, record the **Service Account ID**, which will be used to grant TiDB Cloud access to your GCS bucket.
 
-For **GCS**, before filling **GCS Endpoint**, you need to first grant the GCS bucket access and make the GCS bucket at the same region with your TiDB cluster. Take the following steps:
-
-1. In the TiDB Cloud console, record the **Service Account ID** field's value, which will be used to grant TiDB Cloud access to your GCS bucket.
-
-   ![gcs_endpoint](/media/tidb-cloud/changefeed/sink-to-cloud-storage-gcs-endpoint.png)
+    ![gcs_endpoint](/media/tidb-cloud/changefeed/sink-to-cloud-storage-gcs-endpoint.png)
 
 2. In the Google Cloud Platform (GCP) Management Console, create an IAM role for your GCS bucket.
 
     1. Sign in to the [GCP Management Console](https://console.cloud.google.com/).
     2. Go to the [Roles](https://console.cloud.google.com/iam-admin/roles) page, and then click **Create role**.
 
-       ![Create a role](/media/tidb-cloud/changefeed/sink-to-cloud-storage-gcs-create-role.png)
+        ![Create a role](/media/tidb-cloud/changefeed/sink-to-cloud-storage-gcs-create-role.png)
 
-    3. Enter a name, description, ID, and role launch stage for the role. The role name cannot be changed after the role is created.
-    4. Click **Add permissions**.
-    5. Add the following read-only permissions to the role, and then click **Add**.
+    3. Enter a name, description, ID, and role launch stage for the role. The role name cannot be changed after the role is created. 
+    4. Click **Add permissions**. Add the following read-only permissions to the role, and then click **Add**.
 
         - storage.buckets.get
         - storage.objects.create
@@ -66,37 +55,38 @@ For **GCS**, before filling **GCS Endpoint**, you need to first grant the GCS bu
         - storage.objects.list
         - storage.objects.delete
 
-       ![Add permissions](/media/tidb-cloud/changefeed/sink-to-cloud-storage-gcs-assign-permission.png)
+    ![Add permissions](/media/tidb-cloud/changefeed/sink-to-cloud-storage-gcs-assign-permission.png)
 
-3. Go to the [Bucket](https://console.cloud.google.com/storage/browser) page, and click the name of the GCS bucket you want TiDB Cloud to access.
+3. Go to the [Bucket](https://console.cloud.google.com/storage/browser) page, and click the name of the GCS bucket you want TiDB Cloud to access. Note that the GCS bucket must be in the same region with your TiDB cluster.
+
 4. On the **Bucket details** page, click the **Permissions** tab, and then click **Grant access**.
 
-   ![Grant Access to the bucket ](/media/tidb-cloud/changefeed/sink-to-cloud-storage-gcs-grant-access-1.png)
+    ![Grant Access to the bucket ](/media/tidb-cloud/changefeed/sink-to-cloud-storage-gcs-grant-access-1.png)
 
-5. Fill in the following information to grant access to your bucket, and then click **SAVE**.
+5. Fill in the following information to grant access to your bucket, and then click **Save**.
 
     - In the **New Principals** field, paste the **Service Account ID** of the target TiDB cluster you recorded before.
     - In the **Select a role** drop-down list, type the name of the IAM role you just created, and then choose the name from the filter result.
 
-   > **Note:**
-   >
-   > To remove the access to TiDB Cloud, you can simply remove the access that you have granted.
+    > **Note:**
+    >
+    > To remove the access to TiDB Cloud, simply remove the access that you have granted.
 
-5. On the **Bucket details** page, click the **Objects** tab.
+6. On the **Bucket details** page, click the **Objects** tab.
 
-   If you want to copy a bucket's gsutil URI, click the copy button and add `gs://` as prefix.
+    If you want to copy a bucket's gsutil URI, click the copy button and add `gs://` as prefix.
 
-   ![Get bucket URI](/media/tidb-cloud/changefeed/sink-to-cloud-storage-gcs-uri01.png)
+    ![Get bucket URI](/media/tidb-cloud/changefeed/sink-to-cloud-storage-gcs-uri01.png)
 
-   For example, if the folder name is `test-sink-gcs`, then the URI would be `gs://test-sink-gcs/`.
+    For example, if the folder name is `test-sink-gcs`, then the URI would be `gs://test-sink-gcs/`.
 
-   If you want to use a folder's gsutil URI, open the folder, and then click the copy button add `gs://` as prefix..
+    If you want to use a folder's gsutil URI, open the folder, and then click the copy button add `gs://` as prefix..
 
-   ![Get bucket URI](/media/tidb-cloud/changefeed/sink-to-cloud-storage-gcs-uri02.png)
+    ![Get bucket URI](/media/tidb-cloud/changefeed/sink-to-cloud-storage-gcs-uri02.png)
 
-   For example, if the folder name is `changefeed-xxx`, then the URI would be `gs://test-sink-gcs/changefeed-xxx` as the URI.
+    For example, if the folder name is `changefeed-xxx`, then the URI would be `gs://test-sink-gcs/changefeed-xxx` as the URI.
 
-6. In the TiDB Cloud console, go to the Changefeed's "Configure Destination" page, paste the GCS bucket gsutil URI to the **Bucket gsutil** URI field.
+7. In the TiDB Cloud console, go to the Changefeed's "Configure Destination" page, paste the GCS bucket gsutil URI to the **Bucket gsutil** URI field.
 
 </div>
 </SimpleTab>
@@ -106,7 +96,7 @@ Click **Next** to establish the connection from the TiDB Dedicated cluster to Am
 - If yes, you are directed to the next step of configuration.
 - If not, a connectivity error is displayed, and you need to handle the error. After the error is resolved, click **Next** to retry the connection.
 
-## Step 3. Configure the changefeed
+## Step 2. Configure replication
 
 1. Customize **Table Filter** to filter the tables that you want to replicate. For the rule syntax, refer to [table filter rules](https://docs.pingcap.com/tidb/stable/ticdc-filter#changefeed-log-filters).
 
@@ -158,16 +148,19 @@ Click **Next** to establish the connection from the TiDB Dedicated cluster to Am
    > **Note:**
    > These two parameters will affect the quantity of objects generated in cloud storage, and they apply to each individual database table. If there are a large number of database tables, the same configuration will result in a corresponding increase in the number of objects generated, leading to an associated rise in the cost of invoking the cloud storage API. Therefore, it is advisable to configure the parameters appropriately based on your RPO (Recovery Point Objective) and cost requirements.
 
-5. Click **Next** to configure your changefeed specification.
+## Step 3. Configure specification
 
-    - In the **Changefeed Specification** area, specify the number of Replication Capacity Units (RCUs) to be used by the changefeed.
-    - In the **Changefeed Name** area, specify a name for the changefeed.
+Click **Next** to configure your changefeed specification.
 
-6. Click **Next** to review the changefeed configuration.
+- In the **Changefeed Specification** area, specify the number of Replication Capacity Units (RCUs) to be used by the changefeed.
+- In the **Changefeed Name** area, specify a name for the changefeed.
 
-    - If you have verified that all configurations are correct, click **Create** to proceed with the creation of the changefeed.
+## Step 4. Review the configuration and start replication
 
-    - If you need to modify any configurations, click **Previous** to go back and make the necessary changes.
+Click **Next** to review the changefeed configuration.
+
+- If you have verified that all configurations are correct, click **Create** to proceed with the creation of the changefeed.
+- If you need to modify any configurations, click **Previous** to go back and make the necessary changes.
 
 The sink will start shortly, and you will observe the status of the sink changing from **Creating** to **Running**.
 
