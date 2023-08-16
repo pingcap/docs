@@ -37,34 +37,34 @@ With the following metrics, you can get an overview of TiCDC data replication:
 - Changefeed resolved ts lag: the progress difference between the internal replication status of a TiCDC node and the upstream, measured in seconds. If this metric is high, it indicates that the data processing capability of the TiCDC Puller or Sorter module might be insufficient, or there might be network latency or slow disk read/write speed issues. In such cases, to ensure the efficient and stable operation of TiCDC, you need to take appropriate measures, such as increasing the number of TiCDC instances or optimizing the network configuration.
 - The status of changefeeds: for status explanations of changefeeds, see [Changefeed state transfer](/ticdc/ticdc-changefeed-overview.md).
 
-Example 1: high upstream QPS causes high checkpoint lag when a single TiCDC node is used
+Example 1: high checkpoint lag due to high upstream QPS in the case of a single TiCDC node
 
-As shown in the following diagram, because the upstream QPS is excessively high and there is only one TiCDC node in the cluster, the TiCDC node is overloaded. The CPU usage is high, and both Changefeed checkpoint lag and Changefeed resolved ts lag keep increasing. The status of changefeeds intermittently transitions from 0 to 1, indicating ongoing changefeed errors. You can attempt to resolve this issue by:
+As shown in the following diagram, because the upstream QPS is excessively high and there is only a single TiCDC node in the cluster, the TiCDC node is overloaded, the CPU usage is high, and both `Changefeed checkpoint lag` and `Changefeed resolved ts lag` keep increasing. The changefeed status intermittently transitions from `0` to `1`, indicating that the changefeed keeps getting errors. You can try resolving this issue by adding more resources as follows:
 
-- Adding TiCDC nodes: Expand the TiCDC cluster to multiple nodes to increase processing capacity.
-- Optimizing resources for TiCDC nodes: Enhance CPU and memory configurations of TiCDC nodes to improve performance.
+- Add more TiCDC nodes: scale out the TiCDC cluster to multiple nodes to increase processing capacity.
+- Optimize TiCDC node resources: increase CPU and memory configurations of the TiCDC node to improve performance.
 
 ![TiCDC overview](/media/performance/cdc/cdc-slow.png)
 
-### Data Flow Throughput Metrics and Downstream Latency Information
+### Data flow throughput metrics and downstream latency
 
-Using the following metrics, you can understand data flow throughput and downstream latency information:
+With the following metrics, you can learn the data flow throughput and downstream latency of TiCDC:
 
-- Puller output events/s: The rate at which the Puller module in TiCDC nodes outputs data change rows to the Sorter module per second.
-- Sorter output events/s: The rate at which the Sorter module in TiCDC nodes outputs rows to the Mounter module per second.
-- Mounter output events/s: The rate at which the Mounter module in TiCDC nodes outputs rows to the Sink module per second.
-- Table sink output events/s: The rate at which the Table Sorter module in TiCDC nodes outputs rows to the Sink module per second.
-- SinkV2 - Sink flush rows/s: The rate at which the Sink module in TiCDC nodes outputs rows to the downstream per second.
-- Transaction Sink Full Flush Duration: The average and p999 latency of writing downstream transactions in the MySQL Sink module of TiCDC nodes.
-- MQ Worker Send Message Duration Percentile: The latency of MQ worker sending messages to Kafka downstream.
-- Kafka Outgoing Bytes: The workload of MQ writing downstream transactions.
+- Puller output events/s: the number of rows that the Puller module of TiCDC nodes sends to the Sorter module per second.
+- Sorter output events/s: the number of rows that the Sorter module of TiCDC nodes sends to the Mounter module per second.
+- Mounter output events/s: the number of rows that the Mounter module of TiCDC nodes sends to the Sink module per second.
+- Table sink output events/s: the number of rows that the Table Sorter module of the TiCDC nodes sends to the Sink module per second.
+- SinkV2 - Sink flush rows/s: the number of rows that the Sink module in the TiCDC node sends to the downstream per second.
+- Transaction Sink Full Flush Duration: the average latency and p999 latency of writing downstream transactions by the MySQL Sink of TiCDC nodes.
+- MQ Worker Send Message Duration Percentile: the latency of sending messages by MQ worker when the downstream is Kafka.
+- Kafka Outgoing Bytes: the traffic of writing downstream transactions in MQ Workload.
 
-Example 2: Impact of Downstream Database Write Speed on TiCDC Data Replication Performance
+Example 2: Impact of downstream database write speed on TiCDC data replication performance
 
-As shown in the figure below, both upstream and downstream in this environment are TiDB clusters. The value of `TiCDC Puller output events/s` confirms the QPS value of the upstream database. The `Transaction Sink Full Flush Duration` indicates that the average write latency of the downstream database is high during the first load period, whereas it is low during the second load period.
+In this example, both upstream and downstream are TiDB clusters. As shown in the following diagram, the TiCDC `Puller output events/s` indicates the QPS of the upstream database. The `Transaction Sink Full Flush Duration` indicates the average write latency of the downstream database, which is high during the first workload and low during the second workload.
 
-- During the first load period, slow data writing in the downstream TiDB cluster causes TiCDC's data consumption rate to fall behind the upstream QPS, leading to a continuous increase in Changefeed checkpoint lag. However, Changefeed resolved ts lag remains within 300 milliseconds, indicating that replication latency and throughput bottlenecks are not in the puller and sorter modules, but in the downstream sink module.
-- During the second load period, due to the fast data writing speed in the downstream TiDB cluster, TiCDC's data replication rate fully catches up with the upstream speed, resulting in Changefeed checkpoint lag and Changefeed resolved ts lag staying within 500 milliseconds. At this point, TiCDC's replication speed is relatively ideal.
+- During the first workload, because the downstream TiDB cluster writes data slowly, TiCDC consumes data at a speed that falls behind the upstream QPS, leading to a continuous increase in `Changefeed checkpoint lag`. However, `Changefeed resolved ts lag` remains within 300 milliseconds, indicating that replication lag and throughput bottlenecks are not caused by the puller and sorter modules but caused by the downstream sink module.
+- During the second workload, because the downstream TiDB cluster writes data faster, TiCDC replicates data at a speed that completely catches up with the upstream, so the `Changefeed checkpoint lag` and `Changefeed resolved ts lag` remain within 500 milliseconds, which is a relatively ideal replication speed for TiCDC.
 
 ![TiCDC overview](/media/performance/cdc/cdc-fast-1.png)
 
