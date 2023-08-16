@@ -1,11 +1,11 @@
 ---
 title: TiCDC Performance Analysis and Optimization Methods
-summary: Introduces the TiCDC metrics on the Performance Overview dashboard, helping you understand and monitor the workload of TiCDC.
+summary: Introduces the TiCDC metrics on the Performance Overview dashboard to help you better understand and monitor TiCDC workloads.
 ---
 
 # TiCDC Performance Analysis and Optimization Methods
 
-This document introduces resource utilization and key performance metrics of TiCDC. You can monitor and evaluate TiCDC performance on data replication through the [CDC panel](/grafana-performance-overview-dashboard.md#cdc) on the Performance Overview dashboard.
+This document introduces TiCDC resource utilization and key performance metrics. You can monitor and evaluate TiCDC performance on data replication through the [CDC panel](/grafana-performance-overview-dashboard.md#cdc) on the Performance Overview dashboard.
 
 ## Resource utilization of a TiCDC cluster
 
