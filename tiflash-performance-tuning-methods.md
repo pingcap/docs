@@ -1,44 +1,44 @@
 ---
 title: TiFlash Performance Analysis and Optimization Methods
-summary: Introduces the TiFlash section in the Performance Overview dashboard, helping you understand and monitor TiFlash workload.
+summary: Introduces the TiFlash metrics on the Performance Overview dashboard to help you better understand and monitor TiFlash workloads.
 ---
 
 # TiFlash Performance Analysis and Optimization Methods
 
-This document introduces TiFlash resource utilization and key performance metrics. You can monitor and evaluate the performance of the TiFlash cluster using the [TiFlash panel](/grafana-performance-overview-dashboard.md#tiflash) in the Performance Overview dashboard.
+This document introduces TiFlash resource utilization and key performance metrics. You can monitor and evaluate the TiFlash cluster performance through the [TiFlash panel](/grafana-performance-overview-dashboard.md#tiflash) on the Performance Overview dashboard.
 
-## TiFlash cluster resource utilization
+## Resource utilization of a TiFlash cluster
 
-Using the following three metrics, you can quickly determine the resource utilization of the TiFlash cluster:
+With the following three metrics, you can quickly get the resource utilization of a TiFlash cluster:
 
-- CPU: CPU utilization of each TiFlash instance.
-- Memory: Memory usage of each TiFlash instance.
-- IO utilization: IO utilization of each TiFlash instance.
+- CPU: the CPU utilization per TiFlash instance.
+- Memory: the memory usage per TiFlash instance.
+- IO utilization: the IO utilization per TiFlash instance.
 
-Example: Resource Utilization during [CH-benCHmark Load](/benchmark/benchmark-tidb-using-ch.md)
+Example: Resource utilization during [CH-benCHmark workload](/benchmark/benchmark-tidb-using-ch.md)
 
-This TiFlash cluster consists of two nodes, each configured with 16 cores and 48GB of memory. During the CH-benCHmark load, CPU utilization can reach up to 1500%, memory usage can peak at 20GB, and IO utilization reaches 91%. This indicates that TiFlash node resources are approaching saturation.
+This TiFlash cluster consists of two nodes, each configured with 16 cores and 48 GB of memory. During the CH-benCHmark workload, CPU utilization can reach up to 1500%, memory usage can reach up to 20 GB, and IO utilization can reach up to 91%. This indicates that TiFlash node resources are approaching saturation.
 
 ![CH-TiFlash-MPP](/media/performance/tiflash/ch-2tiflash-op.png)
 
-## Key performance metrics for TiFlash
+## Key metrics for TiFlash performance
 
 ### Throughput metrics
 
-Using the following metrics, you can understand the throughput of TiFlash:
+With the following metrics, you can learn the throughput of TiFlash:
 
-- MPP Query count: Instant value of MPP query count for each TiFlash instance, representing the current number of MPP queries that need to be processed by the TiFlash instance (including those being processed and those not yet scheduled).
+- MPP Query count: Instant value of MPP query count for each TiFlash instance, reflecting the current number of MPP queries that need to be processed by the TiFlash instance (including those being processed and those awaiting scheduling).
 - Request QPS: The number of coprocessor requests received by all TiFlash instances.
     - `run_mpp_task`, `dispatch_mpp_task`, and `mpp_establish_conn` are MPP requests.
-    - `batch`: Number of batch requests.
-    - `cop`: Number of coprocessor requests directly sent through the coprocessor interface.
-    - `cop_execution`: Number of coprocessor requests currently being executed.
-    - `remote_read`, `remote_read_constructed`, and `remote_read_sent` are remote read-related metrics; an increase in remote reads generally indicates a problem in the system.
-- Executor QPS: For all TiFlash instances, the count of each DAG operator in received requests, where `table_scan` is the table scan operator, `selection` is the filter operator, `aggregation` is the aggregation operator, `top_n` is the TopN operator, `limit` is the limit operator, and `join` represents join operators. `exchange_sender` and `exchange_receiver` are data sending and receiving operators.
+    - `batch`: the number of batch requests.
+    - `cop`: the number of coprocessor requests that are sent directly via the coprocessor interface.
+    - `cop_execution`: the number of coprocessor requests currently being executed.
+    - `remote_read`, `remote_read_constructed`, and `remote_read_sent` are remote read-related metrics. An increase in remote reads usually indicates that a problem occurs in the system.
+- Executor QPS: the number of each type of dag executors in the requests received by all TiFlash instances, where `table_scan` is the table scan operator, `selection` is the selection operator, `aggregation` is the aggregation operator, `top_n` is the TopN operator, `limit` is the limit operator, `join` is a join operator, `exchange_sender` is a data sending operator, and `exchange_receiver` is a data receiving operator.
 
 ### Latency metrics
 
-Using the following metrics, you can understand the latency handling of TiFlash:
+With the following metrics, you can learn how TiFlash deals with latency:
 
 - Request Duration Overview: Stacked chart of the total duration of all request types processed by all TiFlash instances per second.
 
