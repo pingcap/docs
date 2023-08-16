@@ -9,7 +9,7 @@ summary: Learn the TiDB configuration file options that are not involved in comm
 
 # TiDBコンフィグレーションファイル {#tidb-configuration-file}
 
-TiDB 構成ファイルは、コマンドライン パラメーターよりも多くのオプションをサポートしています。デフォルトの構成ファイル[`config.toml.example`](https://github.com/pingcap/tidb/blob/master/config/config.toml.example)ダウンロードし、その名前を`config.toml`に変更できます。このドキュメントでは、 [コマンドラインオプション](/command-line-flags-for-tidb-configuration.md)に関係しないオプションのみについて説明します。
+TiDB 構成ファイルは、コマンドライン パラメーターよりも多くのオプションをサポートしています。デフォルトの構成ファイル[`config.toml.example`](https://github.com/pingcap/tidb/blob/master/config/config.toml.example)ダウンロードし、その名前を`config.toml`に変更できます。このドキュメントでは、 [コマンドラインオプション](/command-line-flags-for-tidb-configuration.md)に関係しないオプションのみを説明します。
 
 > **ヒント：**
 >
@@ -50,7 +50,7 @@ TiDB 構成ファイルは、コマンドライン パラメーターよりも�
 -   インデックスの作成時に[`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630)が有効な場合、新しく作成されたインデックスに対してバックフィルする必要があるデータは、最初に TiDB ローカル一時ディレクトリに保存され、次にバッチで TiKV にインポートされるため、インデックスの作成が高速化されます。
 -   デフォルト値: `"/tmp/tidb"`
 
-> **ノート：**
+> **注記：**
 >
 > ディレクトリが存在しない場合、TiDB は起動時に自動的に作成します。ディレクトリの作成が失敗した場合、または TiDB にそのディレクトリに対する読み取りおよび書き込み権限がない場合、予期しない問題が発生する可能[`Fast Online DDL`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630)があります。
 
@@ -72,7 +72,7 @@ TiDB 構成ファイルは、コマンドライン パラメーターよりも�
 ### <code>tmp-storage-quota</code> {#code-tmp-storage-quota-code}
 
 -   `tmp-storage-path`でstorageのクォータを指定します。単位はバイトです。
--   単一の SQL ステートメントが一時ディスクを使用し、TiDBサーバーの一時ディスクの合計ボリュームがこの構成値を超えると、現在の SQL 操作がキャンセルされ、 `Out of Global Storage Quota!`エラーが返されます。
+-   単一の SQL ステートメントが一時ディスクを使用し、TiDBサーバーの一時ディスクの合計ボリュームがこの設定値を超えると、現在の SQL 操作がキャンセルされ、 `Out of Global Storage Quota!`エラーが返されます。
 -   この構成の値が`0`より小さい場合、上記のチェックと制限は適用されません。
 -   デフォルト値: `-1`
 -   `tmp-storage-path`で使用可能な残りのstorageが`tmp-storage-quota`で定義された値よりも少ない場合、TiDBサーバーは起動時にエラーを報告し、終了します。
@@ -111,7 +111,7 @@ TiDB 構成ファイルは、コマンドライン パラメーターよりも�
 -   デフォルト値: `false`
 -   このデフォルト設定では、主キー制約の追加または削除はサポートされていません。 `alter-primary-key` ～ `true`を設定することでこの機能を有効にできます。ただし、スイッチをオンにする前にテーブルがすでに存在しており、その主キー列のデータ型が整数の場合は、この構成項目を`true`に設定しても、列から主キーを削除することはできません。
 
-> **ノート：**
+> **注記：**
 >
 > この構成項目は非推奨になり、現在は`@tidb_enable_clustered_index`の値が`INT_ONLY`の場合にのみ有効になります。主キーを追加または削除する必要がある場合は、テーブルの作成時に代わりに`NONCLUSTERED`キーワードを使用します。 `CLUSTERED`タイプの主キーの詳細については、 [クラスター化インデックス](/clustered-indexes.md)を参照してください。
 
@@ -122,6 +122,10 @@ TiDB 構成ファイルは、コマンドライン パラメーターよりも�
     -   TiDB がクライアントへの最初の接続を確立し、サーバーのバージョン文字列を含む最初のハンドシェイク パケットを返すとき。詳細は[MySQL 初期ハンドシェイク パケット](https://dev.mysql.com/doc/dev/mysql-server/latest/page_protocol_connection_phase.html#sect_protocol_connection_phase_initial_handshake)を参照してください。
 -   デフォルト値: &quot;&quot;
 -   デフォルトでは、TiDB バージョン文字列の形式は`5.7.${mysql_latest_minor_version}-TiDB-${tidb_version}`です。
+
+> **注記：**
+>
+> TiDB ノードは、値`server-version`を使用して現在の TiDB バージョンを確認します。したがって、予期しない動作を回避するには、TiDB クラスターをアップグレードする前に、値`server-version`を空、または現在の TiDB クラスターの実際のバージョンに設定する必要があります。
 
 ### <code>repair-mode</code> {#code-repair-mode-code}
 
@@ -210,7 +214,7 @@ TiDB 構成ファイルは、コマンドライン パラメーターよりも�
 -   ネットワーク分離の可能性がある場合に、TiDB の PD クライアントと TiKV クライアントがフォロワー経由でリーダーにリクエストを転送するかどうかを制御します。
 -   デフォルト値: `false`
 -   環境でネットワークが分離されている可能性がある場合、このパラメータを有効にすると、サービスが利用できなくなる期間を短縮できます。
--   分離、ネットワークの中断、またはダウンタイムが発生したかどうかを正確に判断できない場合、このメカニズムを使用すると判断を誤るリスクがあり、可用性とパフォーマンスの低下が発生します。ネットワーク障害が発生したことがない場合は、このパラメータを有効にすることはお勧めできません。
+-   分離、ネットワークの中断、ダウンタイムが発生したかどうかを正確に判断できない場合、このメカニズムを使用すると判断を誤るリスクがあり、可用性とパフォーマンスの低下を引き起こします。ネットワーク障害が発生したことがない場合は、このパラメータを有効にすることはお勧めできません。
 
 ### <code>enable-table-lock</code> <span class="version-mark">v4.0.0 の新機能</span> {#code-enable-table-lock-code-span-class-version-mark-new-in-v4-0-0-span}
 
@@ -227,7 +231,7 @@ TiDB 構成ファイルは、コマンドライン パラメーターよりも�
 -   サーバーラベルを指定します。たとえば、 `{ zone = "us-west-1", dc = "dc1", rack = "rack1", host = "tidb1" }` 。
 -   デフォルト値: `{}`
 
-> **ノート：**
+> **注記：**
 >
 > -   TiDB では、 `zone`ラベルはサーバーが配置されているゾーンを指定するために特別に使用されます。 `zone`が null 以外の値に設定されている場合、対応する値が[`txn-score`](/system-variables.md#txn_scope)や[`Follower read`](/follower-read.md)などの機能によって自動的に使用されます。
 > -   `group`ラベルはTiDB Operatorで特別な用途があります。 [TiDB Operator](/tidb-operator-overview.md)使用してデプロイされたクラスターの場合、 `group`ラベルを手動で指定することは**お**勧めできません。
@@ -254,9 +258,9 @@ TiDB 構成ファイルは、コマンドライン パラメーターよりも�
 -   デフォルト値: `null`
 -   値を`false`に設定すると、ログにはタイムスタンプが出力されません。
 
-> **ノート：**
+> **注記：**
 >
-> -   下位互換性を保つために、最初の`disable-timestamp`構成項目は引き続き有効です。ただし、 `disable-timestamp`の値が`enable-timestamp`の値と意味的に競合する場合 (たとえば、 `enable-timestamp`と`disable-timestamp`の両方が`true`に設定されている場合)、TiDB は`disable-timestamp`の値を無視します。
+> -   下位互換性を保つために、最初の`disable-timestamp`構成項目は引き続き有効です。ただし、 `disable-timestamp`値が`enable-timestamp`の値と意味的に競合する場合 (たとえば、 `enable-timestamp`と`disable-timestamp`の両方が`true`に設定されている場合)、TiDB は`disable-timestamp`の値を無視します。
 > -   現在、TiDB はログにタイムスタンプを出力するかどうかを決定するために`disable-timestamp`を使用します。この状況では、 `enable-timestamp`の値は`null`になります。
 > -   以降のバージョンでは、 `disable-timestamp`構成は削除されます。 `disable-timestamp`破棄し、意味的に理解しやすい`enable-timestamp`を使用します。
 
@@ -587,7 +591,7 @@ TiDB 構成ファイルは、コマンドライン パラメーターよりも�
 -   TiDB の起動時にサービスを提供する前に、統計の初期化が完了するまで待機するかどうかを制御します。
 -   デフォルト値: false
 -   `force-init-stats`の値が`true`の場合、TiDB は起動時にサービスを提供する前に、統計の初期化が完了するまで待つ必要があります。多数のテーブルとパーティションがある場合、 `force-init-stats`から`true`に設定すると、TiDB がサービスの提供を開始するまでにかかる時間が長くなる可能性があります。
--   `force-init-stats`の値が`false`の場合、TiDB は統計の初期化が完了する前でもサービスを提供できますが、オプティマイザは疑似統計を使用して決定を行うため、最適ではない実行計画が生じる可能性があります。
+-   `force-init-stats`の値が`false`の場合、TiDB は統計の初期化が完了する前でもサービスを提供できますが、オプティマイザは擬似統計を使用して決定を行うため、最適とは言えない実行計画が生じる可能性があります。
 
 ## オープントレース {#opentracing}
 
@@ -770,7 +774,7 @@ TiDB Binlogに関連する構成。
 -   binlogをエクスポートするときのPump選択の戦略。現在、 `hash`と`range`方法のみがサポートされています。
 -   デフォルト値: `range`
 
-## スターテス {#status}
+## 状態 {#status}
 
 TiDB サービスのステータスに関連するコンフィグレーション。
 
@@ -900,7 +904,7 @@ TiDB サービスのステータスに関連するコンフィグレーション
 
 -   ステートメントの概要の永続性を有効にするかどうかを制御します。
 -   デフォルト値: `false`
--   詳細については、 [永続化ステートメントの概要](/statement-summary-tables.md#persist-statements-summary)を参照してください。
+-   詳細については、 [Persist ステートメントの概要](/statement-summary-tables.md#persist-statements-summary)を参照してください。
 
 ### <code>tidb_stmt_summary_filename</code> <span class="version-mark">v6.6.0 の新機能</span> {#code-tidb-stmt-summary-filename-code-span-class-version-mark-new-in-v6-6-0-span}
 
@@ -939,7 +943,7 @@ TiDB サービスのステータスに関連するコンフィグレーション
 >
 > ステートメントの概要の永続化は実験的機能です。本番環境で使用することはお勧めできません。この機能は予告なく変更または削除される場合があります。バグを見つけた場合は、GitHub で[問題](https://github.com/pingcap/tidb/issues)を報告できます。
 
--   ステートメント概要の永続化が有効になっている場合、この構成では、永続化できるデータ ファイルの最大数を指定します。 `0`ファイル数に制限がないことを意味します。
+-   ステートメントの概要の永続性が有効になっている場合、この構成は永続化できるデータ ファイルの最大数を指定します。 `0`ファイル数に制限がないことを意味します。
 -   デフォルト値: `0`
 -   データ保持要件とディスク領域の使用量に基づいて値を調整できます。
 

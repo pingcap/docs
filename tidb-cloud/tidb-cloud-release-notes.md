@@ -8,11 +8,43 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 このページには 2023 年[TiDB Cloud](https://www.pingcap.com/tidb-cloud/)のリリースノートが記載されています。
 
+## 2023 年 8 月 15 日 {#august-15-2023}
+
+**一般的な変更点**
+
+-   [データサービス（ベータ版）](https://tidbcloud.com/console/data-service)開発エクスペリエンスを向上させるために`GET`リクエストのページネーションをサポートします。
+
+    `GET`リクエストの場合、**事前プロパティ**で**ページネーションを**有効にし、エンドポイントを呼び出すときにクエリ パラメーターとして`page`と`page_size`を指定することで、結果をページネーションできます。たとえば、1 ページあたり 10 個のアイテムを含む 2 ページ目を取得するには、次のコマンドを使用できます。
+
+    ```bash
+    curl --digest --user '<Public Key>:<Private Key>' \
+      --request GET 'https://<region>.data.tidbcloud.com/api/v1beta/app/<App ID>/endpoint/<Endpoint Path>?page=2&page_size=10'
+    ```
+
+    この機能は、最後のクエリが`SELECT`ステートメントである`GET`リクエストに対してのみ使用できることに注意してください。
+
+    詳細については、 [エンドポイントを呼び出す](/tidb-cloud/data-service-manage-endpoint.md#call-an-endpoint)を参照してください。
+
+-   [データサービス（ベータ版）](https://tidbcloud.com/console/data-service)指定された存続時間 (TTL) 期間にわたる`GET`のリクエストのエンドポイント応答のキャッシュをサポートします。
+
+    この機能により、データベースの負荷が軽減され、エンドポイントのレイテンシーが最適化されます。
+
+    `GET`リクエスト メソッドを使用するエンドポイントの場合、**キャッシュ レスポンス**を有効にし、 **[詳細プロパティ]**でキャッシュの TTL 期間を構成できます。
+
+    詳細については、 [高度なプロパティ](/tidb-cloud/data-service-manage-endpoint.md#advanced-properties)を参照してください。
+
+-   AWS でホストされ、2023 年 8 月 15 日以降に作成された次の[TiDB専用](/tidb-cloud/select-cluster-tier.md#tidb-dedicated)クラスターの負荷分散の改善を無効にします。
+
+    -   AWS でホストされている TiDB ノードをスケールアウトするときに、既存の接続を新しい TiDB ノードに自動的に移行することを無効にします。
+    -   AWS でホストされている TiDB ノードをスケールインするときに、既存の接続を利用可能な TiDB ノードに自動的に移行することを無効にします。
+
+    この変更により、ハイブリッド展開のリソース競合が回避され、この改善が有効になっている既存のクラスターには影響しません。新しいクラスターの負荷分散の改善を有効にしたい場合は、 [TiDB Cloudのサポート](/tidb-cloud/tidb-cloud-support.md)にお問い合わせください。
+
 ## 2023 年 8 月 8 日 {#august-8-2023}
 
 **一般的な変更点**
 
--   [データサービス](https://tidbcloud.com/console/data-service)では Basic 認証がサポートされるようになりました。
+-   [データサービス（ベータ版）](https://tidbcloud.com/console/data-service)では Basic 認証がサポートされるようになりました。
 
     [「基本」HTTP 認証](https://datatracker.ietf.org/doc/html/rfc7617)を使用して、リクエストで公開キーをユーザー名として、秘密キーをパスワードとして指定できます。ダイジェスト認証と比較して、基本認証はシンプルであり、データ サービス エンドポイントを呼び出すときにより簡単に使用できます。
 
@@ -433,11 +465,11 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 **コンソールの変更**
 
--   [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-dedicated)クラスターの[監視](/tidb-cloud/built-in-monitoring.md#view-the-metrics-page)ページを更新して、 [ノードレベルのリソースメトリック](/tidb-cloud/built-in-monitoring.md#server)を使用します。
+-   [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-dedicated)クラスターの[監視](/tidb-cloud/built-in-monitoring.md#view-the-metrics-page)ページを[ノードレベルのリソースメトリック](/tidb-cloud/built-in-monitoring.md#server)を使用するように更新します。
 
     ノードレベルのリソースメトリクスを使用すると、リソース消費をより正確に表示して、購入したサービスの実際の使用状況をより深く理解できます。
 
-    これらのメトリックにアクセスするには、クラスターの[監視](/tidb-cloud/built-in-monitoring.md#view-the-metrics-page)ページに移動し、 **[メトリック]**タブの [**サーバー]**カテゴリを確認します。
+    これらのメトリックにアクセスするには、クラスターの[監視](/tidb-cloud/built-in-monitoring.md#view-the-metrics-page)ページに移動し、 **[メトリック]**タブの**[サーバー]**カテゴリを確認します。
 
 -   **「プロジェクト別集計」**と**「サービス別集計」**の請求項目を再整理し、請求内容をよりわかりやすく[請求する](/tidb-cloud/tidb-cloud-billing.md#billing-details)ページを最適化しました。
 

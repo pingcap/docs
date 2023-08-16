@@ -7,11 +7,17 @@ summary: An overview of the usage of ADD INDEX for the TiDB database.
 
 `ALTER TABLE.. ADD INDEX`ステートメントは、既存のテーブルにインデックスを追加します。この操作は TiDB でオンラインです。つまり、インデックスの追加によってテーブルへの読み取りも書き込みもブロックされません。
 
+<CustomContent platform="tidb">
+
 > **警告：**
 >
 > -   DDL ステートメントがクラスター内で実行されているときは、TiDB クラスターをアップグレードし**ないでください**(通常は、 `ADD INDEX`や列タイプの変更などの時間のかかる DDL ステートメントの場合)。
 > -   アップグレードの前に、 [`ADMIN SHOW DDL`](/sql-statements/sql-statement-admin-show-ddl.md)コマンドを使用して、TiDB クラスターに進行中の DDL ジョブがあるかどうかを確認することをお勧めします。クラスターに DDL ジョブがある場合、クラスターをアップグレードするには、DDL の実行が完了するまで待つか、クラスターをアップグレードする前に[`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md)コマンドを使用して DDL ジョブをキャンセルします。
 > -   また、クラスターのアップグレード中は、DDL ステートメントを実行し**ないでください**。そうしないと、未定義の動作の問題が発生する可能性があります。
+>
+> TiDB を v7.1.0 から以降のバージョンにアップグレードする場合は、前述の制限を無視できます。詳細は[TiDB スムーズ アップグレードの制限](/smooth-upgrade-tidb.md)を参照してください。
+
+</CustomContent>
 
 ## あらすじ {#synopsis}
 
