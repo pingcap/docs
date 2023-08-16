@@ -13,7 +13,7 @@ TiDB Cloud supports the following two types of SSO authentication:
 
 - Cloud Organization SSO: members can log in to a custom login page of TiDB Cloud using the authentication methods specified by your organization. The Cloud Organization SSO is disabled by default.
 
-Compared with basic SSO, Cloud Organization SSO provides more flexibility and customization so you can better meet your organization's security and compliance requirements. For example, you can specify which authentication methods are displayed on the login page, limit which email address domains are allowed for login, and let your members log in to TiDB Cloud with your identity provider (IdP) that uses the [OpenID Connect (OIDC)](https://openid.net/connect/) identity protocol.
+Compared with basic SSO, Cloud Organization SSO provides more flexibility and customization so you can better meet your organization's security and compliance requirements. For example, you can specify which authentication methods are displayed on the login page, limit which email address domains are allowed for login, and let your members log in to TiDB Cloud with your identity provider (IdP) that uses the [OpenID Connect (OIDC)](https://openid.net/connect/) or [Security Assertion Markup Language (SAML)](https://en.wikipedia.org/wiki/Security_Assertion_Markup_Language) identity protocol.
 
 In this document, you will learn how to migrate the authentication scheme of your organization from basic SSO to Cloud Organization SSO.
 
@@ -47,6 +47,7 @@ TiDB Cloud provides the following authentication methods for Organization SSO.
 - GitHub
 - Microsoft
 - OIDC
+- SAML
 
 When you enable Cloud Organization SSO, the first three methods are enabled by default.
 
@@ -127,9 +128,8 @@ In TiDB Cloud, the OIDC authentication method is disabled by default. After enab
     - Client ID
     - Client secret
 
-2. On the **Organization Settings** page, enable the OIDC authentication method.
-3. In the row of OIDC, click <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 20H21M3.00003 20H4.67457C5.16376 20 5.40835 20 5.63852 19.9447C5.84259 19.8957 6.03768 19.8149 6.21663 19.7053C6.41846 19.5816 6.59141 19.4086 6.93732 19.0627L19.5001 6.49998C20.3285 5.67156 20.3285 4.32841 19.5001 3.49998C18.6716 2.67156 17.3285 2.67156 16.5001 3.49998L3.93729 16.0627C3.59139 16.4086 3.41843 16.5816 3.29475 16.7834C3.18509 16.9624 3.10428 17.1574 3.05529 17.3615C3.00003 17.5917 3.00003 17.8363 3.00003 18.3255V20Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg> to configure the method details.
-4. In the method details, you can configure the following:
+2. On the **Organization Settings** page, click the **Authentication** tab, locate the row of OIDC in the **Authentication Methods** area, and then click <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 20H21M3.00003 20H4.67457C5.16376 20 5.40835 20 5.63852 19.9447C5.84259 19.8957 6.03768 19.8149 6.21663 19.7053C6.41846 19.5816 6.59141 19.4086 6.93732 19.0627L19.5001 6.49998C20.3285 5.67156 20.3285 4.32841 19.5001 3.49998C18.6716 2.67156 17.3285 2.67156 16.5001 3.49998L3.93729 16.0627C3.59139 16.4086 3.41843 16.5816 3.29475 16.7834C3.18509 16.9624 3.10428 17.1574 3.05529 17.3615C3.00003 17.5917 3.00003 17.8363 3.00003 18.3255V20Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg> to show the OIDC method details.
+3. In the method details, you can configure the following:
 
     - **Name**
 
@@ -151,4 +151,44 @@ In TiDB Cloud, the OIDC authentication method is disabled by default. After enab
         >
         > If you have configured email domains, before saving the settings, make sure that you add the email domain that you currently use for login, to avoid that you are locked out by TiDB Cloud.
 
-5. Click **Save**.
+4. Click **Save**.
+
+### Configure the SAML authentication method
+
+If you have an identity provider that uses the SAML identity protocol, you can enable the SAML authentication method for TiDB Cloud login.
+
+In TiDB Cloud, the SAML authentication method is disabled by default. After enabling Cloud Organization Cloud, you can enable and configure the SAML authentication method as follows:
+
+1. Get the following information from your identity provider for TiDB Cloud Organization SSO:
+
+    - Sign on URL
+    - Signing Certificate
+
+2. On the **Organization Settings** page, click the **Authentication** tab, locate the row of SAML in the **Authentication Methods** area, and then click <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 20H21M3.00003 20H4.67457C5.16376 20 5.40835 20 5.63852 19.9447C5.84259 19.8957 6.03768 19.8149 6.21663 19.7053C6.41846 19.5816 6.59141 19.4086 6.93732 19.0627L19.5001 6.49998C20.3285 5.67156 20.3285 4.32841 19.5001 3.49998C18.6716 2.67156 17.3285 2.67156 16.5001 3.49998L3.93729 16.0627C3.59139 16.4086 3.41843 16.5816 3.29475 16.7834C3.18509 16.9624 3.10428 17.1574 3.05529 17.3615C3.00003 17.5917 3.00003 17.8363 3.00003 18.3255V20Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg> to show the SAML method details.
+3. In the method details, you can configure the following:
+
+    - **Name**
+
+        Specify a name for the SAML authentication method to be displayed on your custom login page.
+
+    - **Sign on URL**
+
+        Paste the URL that you get from your IdP.
+
+    - **Signing Certificate**
+
+        Paste the entire signing certificate from your IdP, including the starting line `---begin certificate---` and the end line `---end certificate---`.
+
+    - [**Auto-provision Accounts**](#decide-whether-to-enable-auto-provision)
+
+        It is disabled by default. You can enable it according to your need. For security considerations, if you choose to enable auto-provision, it is recommended to limit the allowed email domains for authentication.
+
+    - **Allowed Email Domains**
+
+        After this field is configured, only the specified email domains of this authentication method can log in to TiDB Cloud using the custom URL. When filling in domain names, you need to exclude the `@` symbol and separate them with commas. For example, `company1.com,company2.com`.
+
+        > **Note:**
+        >
+        > If you have configured email domains, before saving the settings, make sure that you add the email domain that you currently use for login, to avoid that you are locked out by TiDB Cloud.
+
+4. Click **Save**.
