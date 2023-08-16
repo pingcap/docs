@@ -100,7 +100,7 @@ Click **Next** to establish the connection from the TiDB Dedicated cluster to Am
 
 1. Customize **Table Filter** to filter the tables that you want to replicate. For the rule syntax, refer to [table filter rules](https://docs.pingcap.com/tidb/stable/ticdc-filter#changefeed-log-filters).
 
-   ![the table filter of changefeed](/media/tidb-cloud/changefeed/sink-to-s3-02-table-filter.jpg)
+    ![the table filter of changefeed](/media/tidb-cloud/changefeed/sink-to-s3-02-table-filter.jpg)
 
     - **Filter Rules**: you can set filter rules in this column. By default, there is a rule `*.*`, which stands for replicating all tables. When you add a new rule, TiDB Cloud queries all the tables in TiDB and displays only the tables that match the rules in the box on the right.
     - **Tables with valid keys**: this column displays the tables that have valid keys, including primary keys or unique indexes.
@@ -117,9 +117,9 @@ Click **Next** to establish the connection from the TiDB Dedicated cluster to Am
     <SimpleTab>
     <div label="Configure CSV format">
 
-   To configure the **CSV** format, fill in the following fields:
+    To configure the **CSV** format, fill in the following fields:
 
-   ![the data format of CSV](/media/tidb-cloud/changefeed/sink-to-s3-02-data-format-csv-conf.jpg)
+    ![the data format of CSV](/media/tidb-cloud/changefeed/sink-to-s3-02-data-format-csv-conf.jpg)
 
     - **Date Separator**: To rotate data based on the year, month, and day, or choose not to rotate at all.
     - **Delimiter**: Specify the character used to separate values in the CSV file. The comma (`,`) is the most commonly used delimiter.
@@ -130,9 +130,9 @@ Click **Next** to establish the connection from the TiDB Dedicated cluster to Am
     </div>
     <div label="Configure Canal-JSON format">
 
-   Canal-JSON is a plain JSON text format. To configure it, fill in the following fields:
+    Canal-JSON is a plain JSON text format. To configure it, fill in the following fields:
 
-   ![the data format of Canal-JSON](/media/tidb-cloud/changefeed/sink-to-s3-02-data-format-canal-json.jpg)
+    ![the data format of Canal-JSON](/media/tidb-cloud/changefeed/sink-to-s3-02-data-format-canal-json.jpg)
 
     - **Date Separator**: To rotate data based on the year, month, and day, or choose not to rotate at all.
     - **Enable TiDB Extension**: When you enable this option, TiCDC sends [WATERMARK events](https://docs.pingcap.com/tidb/stable/ticdc-canal-json#watermark-event) and adds the [TiDB extension field](https://docs.pingcap.com/tidb/stable/ticdc-canal-json#tidb-extension-field) to Canal-JSON messages.
@@ -142,7 +142,7 @@ Click **Next** to establish the connection from the TiDB Dedicated cluster to Am
 
 4. In the **Flush Parameters** area, you can configure two items:
 
-   ![Flush Parameters](/media/tidb-cloud/changefeed/sink-to-cloud-storage-flush-parameters.jpg)
+    ![Flush Parameters](/media/tidb-cloud/changefeed/sink-to-cloud-storage-flush-parameters.jpg)
 
     - **Flush Interval**: set to 60 seconds by default, adjustable within a range of 2 seconds to 10 minutes;
     - **File Size**: set to 64 MB by default, adjustable within a range of 1 MB to 512 MB.
