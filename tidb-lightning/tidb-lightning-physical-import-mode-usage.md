@@ -155,9 +155,9 @@ store-write-bwlimit = "128MiB"
 [tidb]
 # Use smaller concurrency to reduce the impact of Checksum and Analyze on the transaction latency.
 distsql-scan-concurrency = 3
-
 ```
-If your TiDB cluster has a latency-sensitive application and a low concurrency, it is strongly recommended **not** to use TiDB Lightning physical import mode (local backend) to import data into the cluster. This may cause a significant impact on the online application.
+
+If your TiDB cluster has a latency-sensitive application and a low concurrency, it is strongly recommended that you **do not** use TiDB Lightning physical import mode (local backend) to import data into the cluster. This mode might have significant impact on the online application.
 
 ## Performance tuning
 
