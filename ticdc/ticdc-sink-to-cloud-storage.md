@@ -160,7 +160,7 @@ Metadata is a JSON-formatted file, for example:
 When a DDL event of an upstream table causes a table version change, TiCDC automatically does the following:
 
 - Changes to a new path to write data change records. For example, when the version of `test.table1` changes to `441349361156227074`, TiCDC changes to the `s3://bucket/bbb/ccc/test/table1/441349361156227074/2022-01-02/` the path to write data change records.
-- Generate a schema file in the following path to store the table schema information:
+- Generates a schema file in the following path to store the table schema information:
 
     ```shell
     {scheme}://{prefix}/{schema}/{table}/meta/schema_{table-version}_{hash}.json
