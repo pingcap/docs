@@ -117,7 +117,7 @@ Data change records are saved to the following path:
 
 > **Note:**
 >
-> The table version changes only after a DDL operation is performed for the upstream table: the table version is the TSO when the upstream TiDB completes the execution of the DDL. However, the change of the table version does not mean the change of the table schema. For example, adding a comment to a column does not cause the schema file content to changed.
+> The table version changes only after a DDL operation is performed on the upstream table, and the new table version is the TSO when the upstream TiDB completes the execution of the DDL. However, the change of the table version does not mean the change of the table schema. For example, adding a comment to a column does not cause the schema file content to change.
 
 ### Index files
 
@@ -166,7 +166,7 @@ When a DDL event of an upstream table causes a table version change, TiCDC autom
     {scheme}://{prefix}/{schema}/{table}/meta/schema_{table-version}_{hash}.json
     ```
 
-Taking `schema_441349361156227074_3131721815.json` as an example, the content in the table schema information file is as follows:
+Taking the `schema_441349361156227074_3131721815.json` schema file as an example, the table schema information in this file is as follows:
 
 ```json
 {
@@ -231,7 +231,7 @@ When a database-level DDL event is performed in the upstream database, TiCDC aut
 {scheme}://{prefix}/{schema}/meta/schema_{table-version}_{hash}.json
 ```
 
-Taking `schema_441349361156227000_3131721815.json` as an example, the content of the database schema information file is as follows:
+Taking the `schema_441349361156227000_3131721815.json` schema file as an example, the database schema information in this file is as follows:
 
 ```json
 {
@@ -248,7 +248,7 @@ Taking `schema_441349361156227000_3131721815.json` as an example, the content of
 
 ### Data type
 
-This section describes the data types used in the `schema_{table-version}_{hash}.json` file (shorten as schema file). The data types are defined as `T(M[, D])`. For details, see [Data Types](/data-type-overview.md).
+This section describes the data types used in the `schema_{table-version}_{hash}.json` file (shorten as schema file in the following sections). The data types are defined as `T(M[, D])`. For details, see [Data Types](/data-type-overview.md).
 
 #### Integer types
 
