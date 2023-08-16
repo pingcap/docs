@@ -57,7 +57,7 @@ For **GCS**, before filling **GCS Endpoint**, you need to first grant the GCS bu
 
     ![Add permissions](/media/tidb-cloud/changefeed/sink-to-cloud-storage-gcs-assign-permission.png)
 
-3. Go to the [Bucket](https://console.cloud.google.com/storage/browser) page, and click the name of the GCS bucket you want TiDB Cloud to access. Note that the GCS bucket must be in the same region with your TiDB cluster.
+3. Go to the [Bucket](https://console.cloud.google.com/storage/browser) page, and choose a GCS bucket you want TiDB Cloud to access. Note that the GCS bucket must be in the same region as your TiDB cluster.
 
 4. On the **Bucket details** page, click the **Permissions** tab, and then click **Grant access**.
 
@@ -143,17 +143,22 @@ Click **Next** to establish the connection from the TiDB Dedicated cluster to Am
 4. In the **Flush Parameters** area, you can configure two items:
 
    ![Flush Parameters](/media/tidb-cloud/changefeed/sink-to-cloud-storage-flush-parameters.jpg)
-    - **Flush Interval**, with a default setting of 60 seconds, adjustable within a range of 2 seconds to 10 minutes;
-    - **File Size**, with a default setting of 64 MB, adjustable within a range of 1 MB to 512 MB.
-   > **Note:**
-   > These two parameters will affect the quantity of objects generated in cloud storage, and they apply to each individual database table. If there are a large number of database tables, the same configuration will result in a corresponding increase in the number of objects generated, leading to an associated rise in the cost of invoking the cloud storage API. Therefore, it is advisable to configure the parameters appropriately based on your RPO (Recovery Point Objective) and cost requirements.
+
+    - **Flush Interval**: set to 60 seconds by default, adjustable within a range of 2 seconds to 10 minutes;
+    - **File Size**: set to 64 MB by default, adjustable within a range of 1 MB to 512 MB.
+
+    > **Note:**
+    >
+    > These two parameters will affect the quantity of objects generated in cloud storage for each individual database table. If there are a large number of tables, using the same configuration will increase the number of objects generated and subsequently raise the cost of invoking the cloud storage API. 
+    >
+    > Therefore, it is recommended to configure these parameters appropriately based on your Recovery Point Objective (RPO) and cost requirements.
 
 ## Step 3. Configure specification
 
 Click **Next** to configure your changefeed specification.
 
-- In the **Changefeed Specification** area, specify the number of Replication Capacity Units (RCUs) to be used by the changefeed.
-- In the **Changefeed Name** area, specify a name for the changefeed.
+1. In the **Changefeed Specification** area, specify the number of Replication Capacity Units (RCUs) to be used by the changefeed.
+2. In the **Changefeed Name** area, specify a name for the changefeed.
 
 ## Step 4. Review the configuration and start replication
 
