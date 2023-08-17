@@ -21,10 +21,10 @@ This document shows you how to use TiDB and mysql2 to build a simple CRUD applic
 - [Node.js **18**](https://nodejs.org/en/download/) or later.
 - [Git](https://git-scm.com/downloads).
 - TiDB cluster. If you don't have a TiDB cluster, you can create one by following the steps below:
-  - (Recommended) Refer to [Create a TiDB Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-tidb-serverless-cluster) to create your own TiDB Cloud cluster.
-  - Refer to [Deploy a local test TiDB cluster](/quick-start-with-tidb.md#deploy-a-local-test-cluster) or [Deploy a formal TiDB cluster](/production-deployment-using-tiup.md) to create a local cluster.
+    - (Recommended) Refer to [Create a TiDB Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-tidb-serverless-cluster) to create your own TiDB Cloud cluster.
+    - Refer to [Deploy a local test TiDB cluster](/quick-start-with-tidb.md#deploy-a-local-test-cluster) or [Deploy a formal TiDB cluster](/production-deployment-using-tiup.md) to create a local cluster.
 - AWS account. If you don't have an AWS account, you can create one by following the steps below:
-  - Refer to [Create an AWS Lambda Function](https://docs.aws.amazon.com/lambda/latest/dg/getting-started.html) to create an AWS Lambda Function.
+    - Refer to [Create an AWS Lambda Function](https://docs.aws.amazon.com/lambda/latest/dg/getting-started.html) to create an AWS Lambda Function.
 
 ## Run the sample application
 
@@ -111,13 +111,13 @@ Depending on the way you deploy TiDB, use different methods to connect to the Ti
 
 1. Install the [AWS SAM CLI](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/install-sam-cli.html).
 
-2.  Run the following command to start the application:
+2. Run the following command to start the application:
 
     ```bash
     sam local invoke --env-vars env.json -e event.json "tidbHelloWorldFunction"
     ```
 
-3.  Check the output in the terminal. If the output is similar to the following, the connection is successful:
+3. Check the output in the terminal. If the output is similar to the following, the connection is successful:
 
     ```bash
     {"statusCode":200,"body":"{\"results\":[{\"Hello World\":\"Hello World\"}]}"}
