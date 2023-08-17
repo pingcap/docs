@@ -74,19 +74,15 @@ For **GCS**, before filling **GCS Endpoint**, you need to first grant the GCS bu
 
 6. On the **Bucket details** page, click the **Objects** tab.
 
-    If you want to copy a bucket's gsutil URI, click the copy button and add `gs://` as prefix.
+    - To get a bucket's gsutil URI, click the copy button and add `gs://` as a prefix. For example, if the folder name is `test-sink-gcs`, the URI would be `gs://test-sink-gcs/`.
 
-    ![Get bucket URI](/media/tidb-cloud/changefeed/sink-to-cloud-storage-gcs-uri01.png)
+        ![Get bucket URI](/media/tidb-cloud/changefeed/sink-to-cloud-storage-gcs-uri01.png)
 
-    For example, if the folder name is `test-sink-gcs`, then the URI would be `gs://test-sink-gcs/`.
+    - To get a folder's gsutil URI, open the folder, and then click the copy button add `gs://` as a prefix. For example, if the folder name is `changefeed-xxx`, the URI would be `gs://test-sink-gcs/changefeed-xxx`.
 
-    If you want to use a folder's gsutil URI, open the folder, and then click the copy button add `gs://` as prefix..
+        ![Get bucket URI](/media/tidb-cloud/changefeed/sink-to-cloud-storage-gcs-uri02.png)
 
-    ![Get bucket URI](/media/tidb-cloud/changefeed/sink-to-cloud-storage-gcs-uri02.png)
-
-    For example, if the folder name is `changefeed-xxx`, then the URI would be `gs://test-sink-gcs/changefeed-xxx` as the URI.
-
-7. In the TiDB Cloud console, go to the Changefeed's "Configure Destination" page, paste the GCS bucket gsutil URI to the **Bucket gsutil** URI field.
+7. In the TiDB Cloud console, go to the Changefeed's **Configure Destination** page, and fill in the **bucket gsutil URI** field.
 
 </div>
 </SimpleTab>
@@ -142,16 +138,14 @@ Click **Next** to establish the connection from the TiDB Dedicated cluster to Am
 
 4. In the **Flush Parameters** area, you can configure two items:
 
-    ![Flush Parameters](/media/tidb-cloud/changefeed/sink-to-cloud-storage-flush-parameters.jpg)
-
     - **Flush Interval**: set to 60 seconds by default, adjustable within a range of 2 seconds to 10 minutes;
     - **File Size**: set to 64 MB by default, adjustable within a range of 1 MB to 512 MB.
 
+    ![Flush Parameters](/media/tidb-cloud/changefeed/sink-to-cloud-storage-flush-parameters.jpg)
+
     > **Note:**
     >
-    > These two parameters will affect the quantity of objects generated in cloud storage for each individual database table. If there are a large number of tables, using the same configuration will increase the number of objects generated and subsequently raise the cost of invoking the cloud storage API. 
-    >
-    > Therefore, it is recommended to configure these parameters appropriately based on your Recovery Point Objective (RPO) and cost requirements.
+    > These two parameters will affect the quantity of objects generated in cloud storage for each individual database table. If there are a large number of tables, using the same configuration will increase the number of objects generated and subsequently raise the cost of invoking the cloud storage API. Therefore, it is recommended to configure these parameters appropriately based on your Recovery Point Objective (RPO) and cost requirements.
 
 ## Step 3. Configure specification
 
