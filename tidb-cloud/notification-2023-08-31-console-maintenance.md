@@ -16,7 +16,7 @@ This notification describes the details that you need to know about the [TiDB Cl
 
 > **Note:**
 >
-> Currently, the maintenance timing for the TiDB Cloud console maintenance does not support user modifications, so you need to plan accordingly in advance.
+> Currently, users cannot modify the maintenance timing for the TiDB Cloud console, so you need to plan accordingly in advance.
 
 ## Reason for maintenance
 
@@ -24,7 +24,7 @@ We are upgrading the meta database services of the TiDB Cloud console to enhance
 
 ## Impact
 
-During the maintenance window, you might experience intermittent disruptions in functionalities related to creating and updating within the TiDB Cloud console UI and Open API. However, your TiDB cluster will maintain its regular operations for data read and write, ensuring no adverse effects on your online business.
+During the maintenance window, you might experience intermittent disruptions in functionalities related to creating and updating within the TiDB Cloud console UI and API. However, your TiDB cluster will maintain its regular operations for data read and write, ensuring no adverse effects on your online business.
 
 ### Affected features of TiDB Cloud console UI
 
