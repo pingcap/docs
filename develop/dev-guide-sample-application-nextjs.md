@@ -107,7 +107,7 @@ Depending on the way you deploy TiDB, use different methods to connect to the Ti
 
 </SimpleTab>
 
-### Step 4: Run the sample application
+### Step 4: Run the sample application locally
 
 1. Run the following command to start the application:
 
@@ -133,7 +133,7 @@ Depending on the way you deploy TiDB, use different methods to connect to the Ti
 
 ## Key Code Snippets
 
-Complete code snippets are available in the [tidb-example-nodejs](
+Complete code snippets are available in the [tidb-example-nodejs](TODO) GitHub repository.
 
 You can refer to the following key code snippets to complete your application development.
 
