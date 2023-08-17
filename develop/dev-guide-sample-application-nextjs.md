@@ -206,6 +206,7 @@ Refer to [Delete data](/develop/dev-guide-delete-data.md) for more information.
 - Complete code snippets and how to run them, see [tidb-nextjs-vercel-quickstart](https://github.com/tidb-samples/tidb-nextjs-vercel-quickstart) GitHub repository.
 - The driver is not highly encapsulated, so you will see a lot of SQL statements in the program. Unlike ORM, because there is no data object, the query object of `mysql2` is represented by a object. Although the Node.js driver is convenient, it still requires manual control of the transaction characteristics because it cannot shield the underlying implementation. If there are no scenarios that must use SQL, it is still recommended to use ORM to write programs. This can reduce the coupling of the program.
 - For more information about how to use mysql2, see [mysql2 official documentation](https://github.com/sidorares/node-mysql2).
+- For more details about how to build a complex application with ORM and Next.js, see [our Bookshop Demo](https://github.com/pingcap/tidb-prisma-vercel-demo).
 
 ## What's next
 
