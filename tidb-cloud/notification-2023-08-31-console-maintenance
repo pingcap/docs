@@ -24,7 +24,7 @@ We're upgrading the meta database services of the TiDB Cloud Console to enhance 
 
 During the maintenance window, you might experience intermittent disruptions for functionalities involving the creation and updating within the TiDB Cloud Console UI and Open API. However, your TiDB cluster will maintain its regular operations for data read and write, ensuring no adverse effects on your online business.
 
-### affected features on Console UI  
+### affected features on Console UI
 
 - Cluster level
     - Cluster management
@@ -62,7 +62,7 @@ During the maintenance window, you might experience intermittent disruptions for
     - Recycle Bin
         - Delete clusters
         - Delete backups
-        - Restore clusters        
+        - Restore clusters
 
 ### Affected features on Console Open API
 
