@@ -1,9 +1,11 @@
 ---
 title: [2023-08-31] TiDB Cloud Console Maintenance Notification
-summary: Disruptions for functionalities involving the creation and updating within the TiDB Cloud Console UI and Open API due to update the meta database services.
+summary: Learn about the details of the TiDB Cloud Console maintenance on August 31, 2023, such as the maintenance window, reason, and impact.
 ---
 
 # [2023-08-31] TiDB Cloud Console Maintenance Notification
+
+This notification describes the details that you need to know about the [TiDB Cloud console](https://tidbcloud.com/) maintenance on August 31, 2023.
 
 ## Maintenance window
 
@@ -14,17 +16,17 @@ summary: Disruptions for functionalities involving the creation and updating wit
 
 > **Note:**
 >
-> Currently, the overall maintenance schedule for the TiDB Cloud Console does not support user modifications to the maintenance timing.
+> Currently, the maintenance timing for the TiDB Cloud console maintenance does not support user modifications, so you need to plan accordingly in advance.
 
 ## Reason for maintenance
 
-We're upgrading the meta database services of the TiDB Cloud Console to enhance performance and efficiency, delivering a better experience for all users. This is part of our ongoing commitment to providing high-quality services.
+We are upgrading the meta database services of the TiDB Cloud console to enhance performance and efficiency. This improvement aims to provide a better experience for all users as part of our ongoing commitment to delivering high-quality services.
 
 ## Impact
 
-During the maintenance window, you might experience intermittent disruptions for functionalities involving the creation and updating within the TiDB Cloud Console UI and Open API. However, your TiDB cluster will maintain its regular operations for data read and write, ensuring no adverse effects on your online business.
+During the maintenance window, you might experience intermittent disruptions in functionalities related to creating and updating within the TiDB Cloud console UI and Open API. However, your TiDB cluster will maintain its regular operations for data read and write, ensuring no adverse effects on your online business.
 
-### affected features on Console UI
+### Affected features of TiDB Cloud console UI
 
 - Cluster level
     - Cluster management
@@ -64,7 +66,7 @@ During the maintenance window, you might experience intermittent disruptions for
         - Delete backups
         - Restore clusters
 
-### Affected features on Console Open API
+### Affected features of TiDB Cloud API
 
 - Cluster management
     - [CreateCluster](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/CreateCluster)
