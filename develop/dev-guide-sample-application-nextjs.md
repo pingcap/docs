@@ -45,17 +45,17 @@ Depending on the way you deploy TiDB, use different methods to connect to the Ti
 
 <div label="TiDB Serverless">
 
-1. In the TiDB Cloud web console, select your TiDB Serverless cluster and go to the **Overview** page. Click **Connect** in the upper right corner.
+1. In the TiDB Cloud Clusters page, select your TiDB Serverless cluster and go to the **Overview** page. Click **Connect** in the upper right corner.
 
 2. In the pop-up window, confirm that the configuration is consistent with your runtime environment.
 
-   - Endpoint is **Public**.
+   - Endpoint Type is **Public**.
    - Connect With is **General**.
    - Operating System is your runtime environment.
 
    <Tip>If you are running in Windows Subsystem for Linux (WSL), switch to the corresponding Linux distribution.</Tip>
 
-3. Click **Generate Password** to generate a password.
+3. Click **Create Password** to generate a password.
 
    <Tip>If you have generated a password before, you can use the original password directly, or click **Reset Password** to generate a new password.</Tip>
 
@@ -81,7 +81,7 @@ Depending on the way you deploy TiDB, use different methods to connect to the Ti
 
 </div>
 
-<div label="自建 TiDB">
+<div label="Self-hosted TiDB">
 
 1. Run the following command to copy and rename `.env.example` to `.env`:
 
@@ -92,9 +92,9 @@ Depending on the way you deploy TiDB, use different methods to connect to the Ti
 2. Copy and paste the corresponding connection string to `.env`. The following is an example:
 
    ```bash
-   TIDB_HOST='{gateway-region}.aws.tidbcloud.com'
+   TIDB_HOST='{tidb_server_host}'
    TIDB_PORT='4000'
-   TIDB_USER='{prefix}.root'
+   TIDB_USER='root'
    TIDB_PASSWORD='{password}'
    TIDB_DB_NAME='test'
    ```
