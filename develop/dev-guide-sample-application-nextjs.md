@@ -27,13 +27,13 @@ This section shows you how to run the sample application code and connect to TiD
 ### Step 1: Clone the sample application repository to your local machine
 
 ```bash
-git clone TODO
+git clone git@github.com:tidb-samples/tidb-nextjs-vercel-quickstart.git
 ```
 
 ### Step 2: Install dependencies
 
 ```bash
-cd TODO
+cd tidb-nextjs-vercel-quickstart
 yarn
 ```
 
@@ -133,7 +133,7 @@ Depending on the way you deploy TiDB, use different methods to connect to the Ti
 
 ## Key Code Snippets
 
-Complete code snippets are available in the [tidb-example-nodejs](TODO) GitHub repository.
+Complete code snippets are available in the [tidb-nextjs-vercel-quickstart](https://github.com/tidb-samples/tidb-nextjs-vercel-quickstart) GitHub repository.
 
 You can refer to the following key code snippets to complete your application development.
 
@@ -203,7 +203,7 @@ Refer to [Delete data](/develop/dev-guide-delete-data.md) for more information.
 
 ## Considerations
 
-- Complete code snippets and how to run them, see [tidb-example-nodejs](TODO) GitHub repository.
+- Complete code snippets and how to run them, see [tidb-nextjs-vercel-quickstart](https://github.com/tidb-samples/tidb-nextjs-vercel-quickstart) GitHub repository.
 - The driver is not highly encapsulated, so you will see a lot of SQL statements in the program. Unlike ORM, because there is no data object, the query object of `mysql2` is represented by a object. Although the Node.js driver is convenient, it still requires manual control of the transaction characteristics because it cannot shield the underlying implementation. If there are no scenarios that must use SQL, it is still recommended to use ORM to write programs. This can reduce the coupling of the program.
 - For more information about how to use mysql2, see [mysql2 official documentation](https://github.com/sidorares/node-mysql2).
 
