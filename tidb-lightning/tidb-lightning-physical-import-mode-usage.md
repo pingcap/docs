@@ -7,6 +7,8 @@ summary: Learn how to use the physical import mode in TiDB Lightning.
 
 This document introduces how to use the [physical import mode](/tidb-lightning/tidb-lightning-physical-import-mode.md) in TiDB Lightning, including writing the configuration file, tuning performance, and configuring disk quota.
 
+There are limitations on the physical import mode. Before using the physical import mode, make sure to read [Limitations](/tidb-lightning/tidb-lightning-physical-import-mode.md#limitations).
+
 ## Configure and use the physical import mode
 
 You can use the following configuration file to execute data import using the physical import mode:
@@ -201,8 +203,6 @@ store-write-bwlimit = "128MiB"
 # Use smaller concurrency to reduce the impact of Checksum and Analyze on the transaction latency.
 distsql-scan-concurrency = 3
 ```
-
-If your TiDB cluster has a latency-sensitive application and a low concurrency, it is strongly recommended that you **do not** use TiDB Lightning physical import mode (local backend) to import data into the cluster. This mode might have significant impact on the online application.
 
 ## Performance tuning
 
