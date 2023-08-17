@@ -88,4 +88,4 @@ Once the maintenance is successfully completed, the affected functionalities wil
 
 ## Get support
 
-If you have any questions or need assistance, contact our [support team](https://docs.pingcap.com/tidbcloud/tidb-cloud-support#tidb-cloud-support). We are here to address your concerns and provide any necessary guidance.
+If you have any questions or need assistance, contact our [support team](/tidb-cloud/tidb-cloud-support.md). We are here to address your concerns and provide any necessary guidance.
