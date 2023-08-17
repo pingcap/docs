@@ -1,5 +1,5 @@
 ---
-title: [2023-08-31] TiDB Cloud Console Maintenance Notification
+title: 2023-08-31 TiDB Cloud Console Maintenance Notification
 summary: Learn about the details of the TiDB Cloud Console maintenance on August 31, 2023, such as the maintenance window, reason, and impact.
 ---
 
