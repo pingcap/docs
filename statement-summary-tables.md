@@ -140,7 +140,7 @@ After the preceding configuration takes effect, the `statements_summary` table i
 
 > **Note:**
 >
-> - If a SQL type appears every minute, the `statements_summary_history` stores data for the recent 12 hours. If a SQL type only appears from 00:00 to 00:30 every day, the `statements_summary_history` stores data for the recent 24 periods, with each period being 1 day. Therefore, the `statements_summary_history` stores the recent 24 days of data for this SQL type.
+> - If a SQL type appears every minute, the `statements_summary_history` stores data for the most recent 12 hours. If a SQL type only appears from 00:00 to 00:30 every day, the `statements_summary_history` stores data for the most recent 24 periods, with each period being 1 day. Therefore, the `statements_summary_history` stores the most recent 24 days of data for this SQL type.
 > - The `tidb_stmt_summary_history_size`, `tidb_stmt_summary_max_stmt_count`, and `tidb_stmt_summary_max_sql_length` configuration items affect memory usage. It is recommended that you adjust these configurations based on your needs, the SQL size, SQL count, and machine configuration. It is not recommended to set them too large values. You can calculate the memory usage using `tidb_stmt_summary_history_size` \* `tidb_stmt_summary_max_stmt_count` \* `tidb_stmt_summary_max_sql_length` \* `3`.
 
 ### Set a proper size for statement summary
