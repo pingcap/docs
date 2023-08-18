@@ -38,76 +38,76 @@ With the following metrics, you can learn the throughput of TiFlash:
 
 ### Latency metrics
 
-With the following metrics, you can learn how TiFlash deals with latency:
+With the following metrics, you can learn the latency of TiFlash:
 
-- Request Duration Overview: Stacked chart of the total duration of all request types processed by all TiFlash instances per second.
+- Request Duration Overview: provides a stacked chart of the total processing duration for all request types in all TiFlash instances per second.
 
-    - If the request type is `run_mpp_task`, `dispatch_mpp_task`, or `mpp_establish_conn`, it indicates that the execution of SQL statements has been partially or fully pushed down to TiFlash, typically involving join and data distribution operations. This is the most common service type in TiFlash.
-    - If the request type is `cop`, it indicates that the entire statement has not been fully pushed down to TiFlash. Typically, TiDB will push down full table scan operators to TiFlash for data access and filtering. In the stacked chart, if `cop` dominates, careful consideration is needed.
+    - If the type of a request is `run_mpp_task`, `dispatch_mpp_task`, or `mpp_establish_conn`, it indicates that the SQL statement execution has been partially or fully pushed down to TiFlash, typically involving join and data distribution operations. This is the most common type in TiFlash.
+    - If the type of a request is `cop`, it indicates that the statement related to this request has not been fully pushed down to TiFlash. Typically, TiDB pushes down the table full scan operator to TiFlash for data access and filtering. If `cop` becomes the most common type in the stacked chart, you need to check if it is reasonable.
 
-        - If the amount of data accessed by the SQL query is large, the optimizer might estimate a lower cost for TiFlash full table scans based on the cost model.
-        - If the table structure lacks appropriate indexes, even if the amount of data accessed is small, the optimizer can only push the query down to TiFlash for a full table scan. In such cases, creating suitable indexes makes accessing data through TiKV more efficient.
+        - If the amount of data queried by a SQL statement is large, the optimizer might estimate that TiFlash full table scans are more cost-effective according to the cost model.
+        - If the schema of a queried table lacks suitable indexes, the optimizer can only push the query down to TiFlash for a full table scan, even if the amount of data to be queried is small. In this case, it is more efficient to create proper indexes and access the data through TiKV.
 
-- Request Duration: Total processing time of each MPP and coprocessor request type for all TiFlash instances, including average and P99 processing latency.
-- Request Handle Duration: Time from the start of execution to the end of execution for `cop` and `batch cop` requests, excluding waiting time. This includes only the `cop` and `batch cop` types, with average and P99 latency.
+- Request Duration: the total processing duration for each MPP and coprocessor request type in all TiFlash instances, which includes the average latency and p99 latency.
+- Request Handle Duration: the time from the start of executing the `cop` and `batch cop` requests to the completion of the execution, excluding waiting time. This metric is only for the `cop` and `batch cop` types, including average and P99 latency.
 
-Example 1: Overview of TiFlash MPP Request Processing Time
+Example 1: Processing duration overview of TiFlash MPP requests
 
-As shown in the following chart, in this workload, the processing time of `run_mpp_task` and `mpp_establish_conn` requests is the highest, indicating that most requests are fully pushed down to TiFlash for MPP tasks.
+In the workload of the following diagram, `run_mpp_task` and `mpp_establish_conn` requests constitute the majority of the total processing duration, indicating that most of the requests are MPP tasks that are fully pushed down to TiFlash for execution.
 
-The processing time of `cop` requests is relatively small, indicating that some requests are pushed down to TiFlash for data access and filtering through the coprocessor.
+The processing duration of `cop` requests is relatively small, indicating that some of the requests are pushed down to TiFlash for data access and filtering through the coprocessor.
 
 ![CH-TiFlash-MPP](/media/performance/tiflash/ch-2tiflash-op.png)
 
-Example 2: High Processing Time for TiFlash `cop` Requests
+Example 2: TiFlash `cop` requests constitute the majority of the total processing duration
 
-As shown in the following chart, in this workload, the processing time of `cop` requests is the highest. You can check the SQL execution plan to confirm the reasons for the generation of `cop` requests.
+In the workload of the following diagram, `cop` requests constitute the majority of the total processing duration. In this case, you can check the SQL execution plan to see why these `cop` requests are generated.
 
 ![Cop](/media/performance/tiflash/tiflash_request_duration_by_type.png)
 
 ### Raft-related metrics
 
-Using the following metrics, you can understand the Raft synchronization status of TiFlash:
+With the following metrics, you can learn the Raft replication status of TiFlash:
 
-- Raft Wait Index Duration: Time spent by all TiFlash instances waiting for the local Region index >= read_index, which represents the delay of wait_index operation. If the Wait Index latency is too high, it indicates significant synchronization delay between TiKV and TiFlash. Possible reasons include:
+- Raft Wait Index Duration: the duration waiting until the local Region index >= `read_index` for all TiFlash instances, which represents the latency of the `wait_index` operation. If this metric is too high, it indicates that data replication from TiKV to TiFlash has a significant latency. Possible reasons include the following:
 
-    - TiKV resource overload
-    - TiFlash resource overload, especially IO resources
-    - Network bottleneck between TiKV and TiFlash
+    - TiKV resource is overloaded.
+    - TiFlash resource is overloaded, especially IO resources.
+    - There is a network bottleneck between TiKV and TiFlash.
 
-- Raft Batch Read Index Duration: Delay of Read Index for all TiFlash instances. If this metric is too high, it indicates slow interaction between TiFlash and TiKV. Possible reasons include:
+- Raft Batch Read Index Duration: the latency of `read_index` for all TiFlash instances. If this metric is too high, it indicates that the interaction between TiFlash and TiKV is slow. Possible reasons include the following:
 
-    - TiFlash resource overload
-    - TiKV resource overload
-    - Network bottleneck between TiFlash and TiKV
+    - TiKV resource is overloaded.
+    - TiFlash resource is overloaded, especially IO resources.
+    - There is a network bottleneck between TiKV and TiFlash.
 
 ### IO throughput metrics
 
-Using the following metrics, you can understand the IO throughput situation of TiFlash:
+With the following metrics, you can learn the IO throughput of TiFlash:
 
-- Write Throughput By Instance: Throughput of data written by each TiFlash instance, including the apply of Raft data logs and the throughput of Raft snapshots.
-- Write flow: Traffic of disk write operations for all TiFlash instances.
+- Write Throughput By Instance: the throughput of data written by each TiFlash instance. It includes the throughput by applying the Raft data logs and Raft snapshots.
+- Write flow: the traffic of disk writes by all TiFlash instances.
 
-    - File Descriptor: Stable layer of DeltaTree storage engine used by TiFlash.
-    - Page: Refers to Pagestore, the Delta change layer of the DeltaTree storage engine used by TiFlash.
+    - File Descriptor: the stable layer of the DeltaTree storage engine used by TiFlash.
+    - Page: refers to Pagestore, the Delta change layer of the DeltaTree storage engine used by TiFlash.
 
 - Read flow: Traffic of disk read operations for all TiFlash instances.
 
-    - File Descriptor: Stable layer of DeltaTree storage engine used by TiFlash.
+    - File Descriptor: the stable layer of the DeltaTree storage engine used by TiFlash.
     - Page: Refers to Pagestore, the Delta change layer of the DeltaTree storage engine used by TiFlash.
 
-You can calculate the write amplification factor of the entire TiFlash cluster by `(Read flow + Write flow) ÷ Total Write Throughput By Instance`.
+You can calculate the write amplification factor of the entire TiFlash cluster using the `(Read flow + Write flow) ÷ total Write Throughput By Instance` formula.
 
-Example 1: Raft and IO Metrics for Local Deployment of [CH-benCHmark Load](/benchmark/benchmark-tidb-using-ch.md)
+Example 1: Raft and IO metrics of the [CH-benCHmark workload](/benchmark/benchmark-tidb-using-ch.md) in a self-hosted environment
 
-As shown in the figure below, the TiFlash cluster exhibits high Raft Wait Index and Raft Batch Read Index 99th percentile values, at 3.24 seconds and 753 milliseconds, respectively. This is due to the high load on the TiFlash cluster, resulting in data synchronization delays.
+As shown in the following diagram, the `Raft Wait Index Duration` and the 99th percentile of `Raft Batch Read Index Duration` for this TiFlash cluster are relatively high, at 3.24 seconds and 753 milliseconds respectively. This is because the TiFlash workload in this cluster is high and latency occurs in data replication.
 
-The cluster consists of two TiFlash nodes, and the incremental data synchronized from TiKV to TiFlash is approximately 28 MB per second. The maximum write throughput of the stable layer (File Descriptor) is 939 MB/s, and the maximum read throughput is 1.1 GiB/s. Meanwhile, the maximum write throughput of the Delta layer (Page) is 74 MB/s, and the maximum read throughput is 111 MB/s. In this environment, TiFlash employs dedicated NVME disks, resulting in strong IO throughput capabilities.
+In this cluster, there are two TiFlash nodes. The incremental data replication speed from TiKV to TiFlash is approximately 28 MB per second. The maximum write throughput of the stable layer (File Descriptor) is 939 MB/s, and the maximum read throughput is 1.1 GiB/s. Meanwhile, the maximum write throughput of the Delta layer (Page) is 74 MB/s, and the maximum read throughput is 111 MB/s. In this environment, TiFlash uses dedicated NVME disks, which have strong IO throughput capabilities.
 
 ![CH-2TiFlash-OP](/media/performance/tiflash/ch-2tiflash-raft-io-flow.png)
 
-Example 2: Raft and IO Metrics for Public Cloud Deployment of [CH-benCHmark Load](/benchmark/benchmark-tidb-using-ch.md)
+Example 2: Raft and IO metrics of the [CH-benCHmark workload](/benchmark/benchmark-tidb-using-ch.md) in a public cloud deployment environment
 
-As illustrated below, the 99th percentile of Raft Wait Index wait time is highest at 438 milliseconds, and the 99th percentile of Raft Batch Read Index wait time is highest at 125 milliseconds. The cluster only comprises a single TiFlash node, and the incremental data synchronized from TiKV to TiFlash is approximately 5 MB per second. The maximum write throughput of the stable layer (File Descriptor) is 78 MB/s, and the maximum read throughput is 221 MB/s. Additionally, the maximum write throughput of the Delta layer (Page) is 8 MB/s, and the maximum read throughput is 18 MB/s. In this environment, TiFlash utilizes AWS EBS cloud disks, which exhibit relatively weaker IO throughput capabilities.
+As shown in the following diagram, the 99th percentile of `Raft Wait Index Duration` is up to 438 milliseconds, and 99th percentile of the `Raft Batch Read Index Duration` is up to 125 milliseconds. This cluster has only one TiFlash node. TiKV replicates about 5 MB of incremental data to TiFlash per second. The maximum write traffic to the stable layer (File Descriptor) is 78 MB/s and the maximum read traffic is 221 MB/s. In the meantime, the maximum write traffic to the Delta layer (Page) is 8 MB/s and the maximum read traffic is 18 MB/s. In this environment, TiFlash uses an AWS EBS cloud drive, which has relatively weak IO throughput.
 
 ![CH-TiFlash-MPP](/media/performance/tiflash/ch-1tiflash-raft-io-flow-cloud.png)
