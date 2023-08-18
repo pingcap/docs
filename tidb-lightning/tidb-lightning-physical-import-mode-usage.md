@@ -127,33 +127,6 @@ mysql> select table_name,index_name,key_data,row_data from conflict_error_v1 lim
 
 You can manually identify the records that need to be retained and insert these records into the table.
 
-<<<<<<< HEAD
-=======
-## Scope of pausing scheduling during import
-
-Starting from v6.2.0, TiDB Lightning implements a mechanism to limit the impact of data import on online applications. With the new mechanism, TiDB Lightning does not pause the global scheduling, but only pauses scheduling for the Region that stores the target table data. This significantly reduces the impact of the import on online applications.
-
-Starting from v7.1.0, you can control the scope of pausing scheduling by using the TiDB Lightning parameter [`pause-pd-scheduler-scope`](/tidb-lightning/tidb-lightning-configuration.md). The default value is `"table"`, which means that the scheduling is paused only for the Region that stores the target table data. When there is no business traffic in the cluster, it is recommended to set this parameter to `"global"` to avoid interference from other scheduling during the import.
-
-<Note>
-TiDB Lightning does not support importing data into a table that already contains data.
-
-The TiDB cluster must be v6.1.0 or later versions. For earlier versions, TiDB Lightning keeps the old behavior, which pauses scheduling globally and severely impacts the online application during the import.
-</Note>
-
-By default, TiDB Lightning pauses the cluster scheduling for the minimum range possible. However, under the default configuration, the cluster performance still might be affected by fast import. To avoid this, you can configure the following options to control the import speed and other factors that might impact the cluster performance:
-
-```toml
-[tikv-importer]
-# Limits the bandwidth in which TiDB Lightning writes data into each TiKV node in the physical import mode.
-store-write-bwlimit = "128MiB"
-
-[tidb]
-# Use smaller concurrency to reduce the impact of Checksum and Analyze on the transaction latency.
-distsql-scan-concurrency = 3
-```
-
->>>>>>> 1fc627472a (lightning: delete content about tpcc (#14531))
 ## Performance tuning
 
 **The most direct and effective ways to improve import performance of the physical import mode are as follows:**
