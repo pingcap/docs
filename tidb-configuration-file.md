@@ -816,8 +816,8 @@ Configuration items related to read isolation.
 ### `engines`
 
 - Controls from which engine TiDB allows to read data.
-- Default value: ["tikv", "tiflash"], indicating that the engine is automatically selected by the optimizer.
-- Value options: Any combinations of "tikv", and "tiflash", for example, ["tikv", "tiflash"]
+- Default value: ["tikv", "tiflash", "tidb"], indicating that the engine is automatically selected by the optimizer.
+- Value options: Any combinations of "tikv", "tiflash", and "tidb", for example, ["tikv", "tidb"] or ["tiflash", "tidb"]
 
 ## instance
 
