@@ -7,6 +7,8 @@ summary: Learn how to use the physical import mode in TiDB Lightning.
 
 This document introduces how to use the [physical import mode](/tidb-lightning/tidb-lightning-physical-import-mode.md) in TiDB Lightning, including writing the configuration file and tuning performance.
 
+There are limitations on the physical import mode. Before using the physical import mode, make sure to read [Limitations](/tidb-lightning/tidb-lightning-physical-import-mode.md#limitations).
+
 ## Configure and use the physical import mode
 
 You can use the following configuration file to execute data import using the physical import mode:
