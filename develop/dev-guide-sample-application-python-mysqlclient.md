@@ -1,292 +1,238 @@
 ---
-title: Build a Simple CRUD App with TiDB and mysqlclient
-summary: Learn how to build a simple CRUD application with TiDB and mysqlclient.
+title: Connect TiDB with mysqlclient
+summary: Learn how to connect TiDB using mysqlclient. And you can find sample code snippets that works with TiDB with mysqlclient.
 ---
 
 <!-- markdownlint-disable MD024 -->
 <!-- markdownlint-disable MD029 -->
 
-# Build a Simple CRUD App with TiDB and mysqlclient
+# Connect TiDB with mysqlclient
 
-[mysqlclient](https://pypi.org/project/mysqlclient/) is a popular open-source driver for Python.
+TiDB is a MySQL compatible database. And [mysqlclient](https://pypi.org/project/mysqlclient/) is a popular open-source driver for Python.
 
-This document describes how to use TiDB and mysqlclient to build a simple CRUD application.
+In this tutorial, use TiDB and mysqlclient to complete the following tasks:
+
+- Prepare your environment. 
+- Connect to TiDB Serverless, TiDB Dedicated or TiDB Self-hosted using mysqlclient.
+- Build and run your app. Optionally, you can find sample code snippets for basic CRUD operations. 
 
 > **Note:**
->
-> It is recommended to use Python 3.10 or a later Python version.
+> This tutorial works with TiDB Serverless, TiDB Dedicated and TiDB Self-hosted.
 
-## Step 1. Launch your TiDB cluster
+## Prerequisites
 
-<CustomContent platform="tidb">
+- [Python **3.10** or higher](https://www.python.org/downloads/).
+- [Git](https://git-scm.com/downloads).
+- A TiDB cluster. If you don't have a TiDB cluster, you can create one as follows:
+    - (Recommended) Follow [Creating a TiDB Serverless Cluster](/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
+    - Follow [Deploy a Local Test TiDB Cluster](../quick-start-with-tidb.md#deploy-a-local-test-cluster) or [Deploy a Production TiDB Cluster](../production-deployment-using-tiup.md) to create a local cluster.
 
-The following introduces how to start a TiDB cluster.
+## Run sample app to connect to TiDB
 
-**Use a TiDB Serverless cluster**
+This section demonstrates how to run the sample application code and connect to TiDB.
 
-For detailed steps, see [Create a TiDB Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-tidb-serverless-cluster).
+### Step 1: Clone the sample app repository
 
-**Use a local cluster**
+Run the following command in your terminal window to clone the sample code repository.
 
-For detailed steps, see [Deploy a local test cluster](/quick-start-with-tidb.md#deploy-a-local-test-cluster) or [Deploy a TiDB cluster using TiUP](/production-deployment-using-tiup.md).
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-See [Create a TiDB Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-tidb-serverless-cluster).
-
-</CustomContent>
-
-## Step 2. Get the code
-
-```shell
+```bash
 git clone https://github.com/pingcap-inc/tidb-example-python.git
 ```
 
-The following uses mysqlclient 2.1.1 as an example. Drivers for Python are more convenient to use than other languages, but they do not shield the underlying implementation and require manual management of transactions. If there are not a lot of scenarios where SQL is required, it is recommended to use ORM, which can help reduce the coupling of your program.
+### Step 2: Install dependencies (including mysqlclient)
 
-```python
-import uuid
-from typing import List
+Run the following commands to install required packages for the sample app.
 
-import MySQLdb
-from MySQLdb import Connection
-from MySQLdb.cursors import Cursor
-
-def get_connection(autocommit: bool = True) -> MySQLdb.Connection:
-    return MySQLdb.connect(
-        host="127.0.0.1",
-        port=4000,
-        user="root",
-        password="",
-        database="test",
-        autocommit=autocommit
-    )
-
-
-def create_player(cursor: Cursor, player: tuple) -> None:
-    cursor.execute("INSERT INTO player (id, coins, goods) VALUES (%s, %s, %s)", player)
-
-
-def get_player(cursor: Cursor, player_id: str) -> tuple:
-    cursor.execute("SELECT id, coins, goods FROM player WHERE id = %s", (player_id,))
-    return cursor.fetchone()
-
-
-def get_players_with_limit(cursor: Cursor, limit: int) -> List[tuple]:
-    cursor.execute("SELECT id, coins, goods FROM player LIMIT %s", (limit,))
-    return cursor.fetchall()
-
-
-def random_player(amount: int) -> List[tuple]:
-    players = []
-    for _ in range(amount):
-        players.append((uuid.uuid4(), 10000, 10000))
-
-    return players
-
-
-def bulk_create_player(cursor: Cursor, players: List[tuple]) -> None:
-    cursor.executemany("INSERT INTO player (id, coins, goods) VALUES (%s, %s, %s)", players)
-
-
-def get_count(cursor: Cursor) -> None:
-    cursor.execute("SELECT count(*) FROM player")
-    return cursor.fetchone()[0]
-
-
-def trade_check(cursor: Cursor, sell_id: str, buy_id: str, amount: int, price: int) -> bool:
-    get_player_with_lock_sql = "SELECT coins, goods FROM player WHERE id = %s FOR UPDATE"
-
-    # sell player goods check
-    cursor.execute(get_player_with_lock_sql, (sell_id,))
-    _, sell_goods = cursor.fetchone()
-    if sell_goods < amount:
-        print(f'sell player {sell_id} goods not enough')
-        return False
-
-    # buy player coins check
-    cursor.execute(get_player_with_lock_sql, (buy_id,))
-    buy_coins, _ = cursor.fetchone()
-    if buy_coins < price:
-        print(f'buy player {buy_id} coins not enough')
-        return False
-
-
-def trade_update(cursor: Cursor, sell_id: str, buy_id: str, amount: int, price: int) -> None:
-    update_player_sql = "UPDATE player set goods = goods + %s, coins = coins + %s WHERE id = %s"
-
-    # deduct the goods of seller, and raise his/her the coins
-    cursor.execute(update_player_sql, (-amount, price, sell_id))
-    # deduct the coins of buyer, and raise his/her the goods
-    cursor.execute(update_player_sql, (amount, -price, buy_id))
-
-
-def trade(connection: Connection, sell_id: str, buy_id: str, amount: int, price: int) -> None:
-    with connection.cursor() as cursor:
-        if trade_check(cursor, sell_id, buy_id, amount, price) is False:
-            connection.rollback()
-            return
-
-        try:
-            trade_update(cursor, sell_id, buy_id, amount, price)
-        except Exception as err:
-            connection.rollback()
-            print(f'something went wrong: {err}')
-        else:
-            connection.commit()
-            print("trade success")
-
-
-def simple_example() -> None:
-    with get_connection(autocommit=True) as conn:
-        with conn.cursor() as cur:
-            # create a player, who has a coin and a goods.
-            create_player(cur, ("test", 1, 1))
-
-            # get this player, and print it.
-            test_player = get_player(cur, "test")
-            print(f'id:{test_player[0]}, coins:{test_player[1]}, goods:{test_player[2]}')
-
-            # create players with bulk inserts.
-            # insert 1919 players totally, with 114 players per batch.
-            # each player has a random UUID
-            player_list = random_player(1919)
-            for idx in range(0, len(player_list), 114):
-                bulk_create_player(cur, player_list[idx:idx + 114])
-
-            # print the number of players
-            count = get_count(cur)
-            print(f'number of players: {count}')
-
-            # print 3 players.
-            three_players = get_players_with_limit(cur, 3)
-            for player in three_players:
-                print(f'id:{player[0]}, coins:{player[1]}, goods:{player[2]}')
-
-
-def trade_example() -> None:
-    with get_connection(autocommit=False) as conn:
-        with conn.cursor() as cur:
-            # create two players
-            # player 1: id is "1", has only 100 coins.
-            # player 2: id is "2", has 114514 coins, and 20 goods.
-            create_player(cur, ("1", 100, 0))
-            create_player(cur, ("2", 114514, 20))
-            conn.commit()
-
-        # player 1 wants to buy 10 goods from player 2.
-        # it will cost 500 coins, but player 1 cannot afford it.
-        # so this trade will fail, and nobody will lose their coins or goods
-        trade(conn, sell_id="2", buy_id="1", amount=10, price=500)
-
-        # then player 1 has to reduce the incoming quantity to 2.
-        # this trade will be successful
-        trade(conn, sell_id="2", buy_id="1", amount=2, price=100)
-
-        # let's take a look for player 1 and player 2 currently
-        with conn.cursor() as cur:
-            _, player1_coin, player1_goods = get_player(cur, "1")
-            print(f'id:1, coins:{player1_coin}, goods:{player1_goods}')
-            _, player2_coin, player2_goods = get_player(cur, "2")
-            print(f'id:2, coins:{player2_coin}, goods:{player2_goods}')
-
-
-simple_example()
-trade_example()
+```bash
+cd tidb-example-python;
+pip install -r requirement.txt
 ```
 
-The driver has a lower level of encapsulation than ORM, so there are a lot of SQL statements in the program. Unlike ORM, there is no data object in drivers, so the `Player` queried by the driver is represented as a tuple.
+<Tip> If you encounter installation issues, please refer to the [mysqlclient official documentation](https://github.com/PyMySQL/mysqlclient#install). </Tip>
 
-For more information about how to use mysqlclient, refer to [mysqlclient documentation](https://mysqlclient.readthedocs.io/).
+### Step 3: Configure Connection Information
 
-## Step 3. Run the code
+Connect to your TiDB cluster depending on the TiDB deployment option you've selected.
 
-The following content introduces how to run the code step by step.
+<SimpleTab>
+<div label="TiDB Serverless">
 
-### Step 3.1 Initialize table
+1. In the TiDB Cloud, select your TiDB Serverless cluster. Go to the **Overview** page, and click the **Connect** button in the upper right corner.
 
-Before running the code, you need to initialize the table manually. If you are using a local TiDB cluster, you can run the following command:
+2. Ensure the configurations in the confirmation window match your operating environment.
 
-<SimpleTab groupId="cli">
+    - Endpoint is set to **Public Endpoint**
+    - Connect With is set to **General**
+    - Operating System matches your environment.
 
-<div label="MySQL CLI" value="mysql-client">
+    <Tip>If you are running in Windows Subsystem for Linux (WSL), switch to the corresponding Linux distribution.</Tip>
 
-```shell
-mysql --host 127.0.0.1 --port 4000 -u root < player_init.sql
-```
+3. Click **Create Password** to create a password.
+
+    <Tip>If you have created a password before, you can either use the original password or click **Reset Password** to generate a new one.</Tip>
+
+4. Run the following command to copy `.env.example` and rename it to `.env`:
+
+    ```bash
+    cp .env.example .env
+    ```
+
+5. Copy and paste the corresponding connection string into the `.env` file. Example result is as follows:
+
+    ```python
+    TIDB_HOST='{gateway-region}.aws.tidbcloud.com'
+    TIDB_PORT='4000'
+    TIDB_USER='{prefix}.root'
+    TIDB_PASSWORD='{password}'
+    TIDB_DB_NAME='test'
+    CA_PATH=''
+    ```
+
+    Be sure to replace the placeholders `{}` with the values obtained from the **Connect** window.
+
+    TiDB Serverless requires a secure connection. Since the `ssl_mode` of mysqlclient defaults to `PREFERRED`, you don't need to manually specify `CA_PATH`. Just leave it empty. But if you have a special reason to specify `CA_PATH` manually, you can refer to the [TLS Connections to TiDB Serverless](../tidb-cloud/secure-connections-to-serverless-tier-clusters.md) to get the certificate paths for different operating systems.
+
+6. Save the `.env` file.
+
 
 </div>
+<div label="TiDB Dedicated">
 
-<div label="MyCLI" value="mycli">
+1. In the TiDB Cloud, select your TiDB Dedicated cluster. Go to the **Overview** page, and click the **Connect** button in the upper right corner. Click **Allow Access from Anywhere** and then click **Download TiDB cluster CA** to download the certificate.
+     <Tip> For more configuration details, refer to [TiDB Dedicated Standard Connection](../tidb-cloud/connect-via-standard-connection.md).</Tip>
 
-```shell
-mycli --host 127.0.0.1 --port 4000 -u root --no-warn < player_init.sql
-```
+2. Run the following command to copy `.env.example` and rename it to `.env`:
+
+    ```bash
+    cp .env.example .env
+    ```
+
+3. Copy and paste the corresponding connection string into the `.env` file. Example result is as follows:
+
+    ```python
+    TIDB_HOST='{host}.clusters.tidb-cloud.com'
+    TIDB_PORT='4000'
+    TIDB_USER='{username}'
+    TIDB_PASSWORD='{password}'
+    TIDB_DB_NAME='test'
+    CA_PATH='{your-downloaded-ca-path}'
+    ```
+
+    Be sure to replace the placeholders `{}` with the values obtained from the **Connect** window, and configure `CA_PATH` with the certificate path downloaded in the previous step.
+
+4. Save the `.env` file.
+
 
 </div>
+<div label="TiDB Self-hosted">
 
+1. Run the following command to copy `.env.example` and rename it to `.env`:
+
+    ```bash
+    cp .env.example .env
+    ```
+
+2. Copy and paste the corresponding connection string into the `.env` file. Example result is as follows:
+
+    ```python
+    TIDB_HOST='{tidb_server_host}'
+    TIDB_PORT='4000'
+    TIDB_USER='root'
+    TIDB_PASSWORD='{password}'
+    TIDB_DB_NAME='test'
+
+    ```
+
+    Be sure to replace the placeholders `{}` with the values, and remove the `CA_PATH` line. If you are running TiDB locally, the default host address is `127.0.0.1`, and the password is empty.
+
+3. Save the `.env` file.
+
+
+</div>
 </SimpleTab>
 
-If you are not using a local cluster, or have not installed a MySQL client, connect to your cluster using your preferred method (such as Navicat, DBeaver, or other GUI tools) and run the SQL statements in the `player_init.sql` file.
 
-### Step 3.2 Modify parameters for TiDB Cloud
+## Sample Code Snippets
 
-If you are using a TiDB Serverless cluster, you need to provide your CA root path and replace `<ca_path>` in the following examples with your CA path. To get the CA root path on your system, refer to [Where is the CA root path on my system?](https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-tier-clusters#where-is-the-ca-root-path-on-my-system).
+You can refer to the following sample code snippets to complete your own application development.
 
-If you are using a TiDB Serverless cluster, change the `get_connection` function in `mysqlclient_example.py`:
-
-```python
-def get_connection(autocommit: bool = True) -> MySQLdb.Connection:
-    return MySQLdb.connect(
-        host="127.0.0.1",
-        port=4000,
-        user="root",
-        password="",
-        database="test",
-        autocommit=autocommit
-    )
-```
-
-Suppose that the password you set is `123456`, and the connection parameters you get from the cluster details page are the following:
-
-- Endpoint: `xxx.tidbcloud.com`
-- Port: `4000`
-- User: `2aEp24QWEDLqRFs.root`
-
-In this case, you can modify the `get_connection` as follows:
+### Connect to TiDB
 
 ```python
-def get_connection(autocommit: bool = True) -> MySQLdb.Connection:
-    return MySQLdb.connect(
-        host="xxx.tidbcloud.com",
-        port=4000,
-        user="2aEp24QWEDLqRFs.root",
-        password="123456",
-        database="test",
-        autocommit=autocommit,
-        ssl_mode="VERIFY_IDENTITY",
-        ssl={
-            "ca": "<ca_path>"
-        }
-    )
+def get_mysqlclient_connection(autocommit:bool=True) -> MySQLdb.Connection:
+    db_conf = {
+        "host": ${tidb_host},
+        "port": ${tidb_port},
+        "user": ${tidb_user},
+        "password": ${tidb_password},
+        "database": ${tidb_db_name},
+        "autocommit": autocommit
+    }
+
+    if ${ca_path}:
+        db_conf["ssl_mode"] = "VERIFY_IDENTITY"
+        db_conf["ssl"] = {"ca": ${ca_path}}
+
+    return MySQLdb.connect(**db_conf)
 ```
 
-### Step 3.3 Run the code
+When using this function, you need to replace `${tidb_host}`, `${tidb_port}`, `${tidb_user}`, `${tidb_password}`, `${tidb_db_name}` etc. with the actual values of your TiDB cluster.
 
-Before running the code, use the following command to install dependencies:
+### Insert Data
 
-```bash
-pip3 install -r requirement.txt
+```python
+with get_mysqlclient_connection(autocommit=True) as conn:
+    with conn.cursor() as cur:
+        player = ("1", 1, 1)
+        cursor.execute("INSERT INTO player (id, coins, goods) VALUES (%s, %s, %s)", player)
 ```
 
-If you need to run the script multiple times, follow the [Table initialization](#step-31-initialize-table) section to initialize the table again before each run.
+For more information, refer to [Insert Data](./dev-guide-insert-data.md).
 
-```bash
-python3 mysqlclient_example.py
+
+### Query Data
+
+```python
+with get_mysqlclient_connection(autocommit=True) as conn:
+    with conn.cursor() as cur:
+        cur.execute("SELECT count(*) FROM player")
+        print(cur.fetchone()[0])
 ```
 
-## Step 4. Expected output
+For more information, refer to [Query Data](./dev-guide-get-data-from-single-table.md).
 
-[mysqlclient Expected Output](https://github.com/pingcap-inc/tidb-example-python/blob/main/Expected-Output.md#mysqlclient)
+
+### Update Data
+
+```python
+with get_mysqlclient_connection(autocommit=True) as conn:
+    with conn.cursor() as cur:
+        player_id, amount, price="1", 10, 500
+        cursor.execute("UPDATE player SET goods = goods + %s, coins = coins + %s WHERE id = %s", (-amount, price, player_id))
+```
+
+For more information, refer to [Update Data](./dev-guide-update-data.md).
+
+### Delete Data
+
+```python
+with get_mysqlclient_connection(autocommit=True) as conn:
+    with conn.cursor() as cur:
+        player_id = "1"
+        cursor.execute("DELETE FROM player WHERE id = %s", (player_id,))
+```
+
+For more information, refer to [Update Data](./dev-guide-delete-data.md).
+
+
+## Useful Notes
+
+- For complete code and how to run it, see the [tidb-example-python GitHub repository](https://github.com/pingcap-inc/tidb-example-python/tree/main).
+- This Python driver is relatively low-level, so you will see a lot of SQL statements in the sample app. Unlike ORMs, there is no data object, and `mysqlclient` represents query objects with tuples. Although Python's driver is more convenient to use than those in other languages, due to its exposure to underlying implementations and the manual transaction management required, it is still recommended to use ORMs for programming unless there is a significant need for SQL. This can reduce the coupling of your app.
+- For more on how to use `mysqlclient`, refer to the [mysqlclient official documentation](https://mysqlclient.readthedocs.io/).
+
+
+## Next Steps
+
+- You can continue reading the developer documentation to get more knowledge about TiDB development, such as: [Insert Data](./dev-guide-insert-data.md), [Update Data](./dev-guide-update-data.md), [Delete Data](./dev-guide-delete-data.md), [Single Table Reading](./dev-guide-get-data-from-single-table.md), [Transactions](./dev-guide-transaction-overview.md), [SQL Performance Optimization](./dev-guide-optimize-sql-overview.md), etc.
+- If you prefer to learn through courses, we also offer professional [TiDB Developer Courses](https://www.pingcap.com/education/), and provide [TiDB certifications](https://learn.pingcap.com/learner/certification-center) after the exam.
