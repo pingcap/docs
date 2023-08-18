@@ -235,7 +235,7 @@ mysql> EXPLAIN SELECT /*+ use_index_merge(t2, idx) */ * FROM t2 WHERE a=1 AND JS
 6 rows in set, 1 warning (0.00 sec)
 ```
 
-For `OR` conditions composed of multiple `member of` expressions, and these expressions can be used to access the same multi-valued index, IndexMerge can be used to access the multi-valued index:
+For `OR` conditions composed of multiple `member of` expressions, and these expressions can be used to access the same multi-valued index, then IndexMerge can be used:
 
 ```sql
 mysql> CREATE TABLE t3 (a INT, j JSON, INDEX idx(a, (CAST(j AS SIGNED ARRAY))));
