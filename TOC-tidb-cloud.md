@@ -68,7 +68,7 @@
             -   [楽観的なトランザクションと悲観的なトランザクション](/develop/dev-guide-optimistic-and-pessimistic-transaction.md)
             -   [トランザクションの制限](/develop/dev-guide-transaction-restraints.md)
             -   [トランザクションエラーの処理](/develop/dev-guide-transaction-troubleshoot.md)
-        -   最適化
+        -   最適化する
             -   [概要](/develop/dev-guide-optimize-sql-overview.md)
             -   [SQL性能チューニング](/develop/dev-guide-optimize-sql.md)
             -   [性能チューニングのベストプラクティス](/develop/dev-guide-optimize-sql-best-practices.md)
@@ -281,7 +281,7 @@
 -   参照
     -   TiDBクラスタのアーキテクチャ
         -   [概要](/tidb-architecture.md)
-        -   [保管所](/tidb-storage.md)
+        -   [ストレージ](/tidb-storage.md)
         -   [コンピューティング](/tidb-computing.md)
         -   [スケジュール設定](/tidb-scheduling.md)
     -   [TiDB 専用の制限と割り当て](/tidb-cloud/limitations-and-quotas.md)
@@ -549,35 +549,35 @@
     -   CLI
         -   [概要](/tidb-cloud/cli-reference.md)
         -   集まる
-            -   [作成](/tidb-cloud/ticloud-cluster-create.md)
+            -   [作成する](/tidb-cloud/ticloud-cluster-create.md)
             -   [消去](/tidb-cloud/ticloud-cluster-delete.md)
-            -   [説明](/tidb-cloud/ticloud-cluster-describe.md)
+            -   [説明する](/tidb-cloud/ticloud-cluster-describe.md)
             -   [リスト](/tidb-cloud/ticloud-cluster-list.md)
             -   [接続情報](/tidb-cloud/ticloud-cluster-connect-info.md)
-        -   ブランチ
-            -   [作成](/tidb-cloud/ticloud-branch-create.md)
+        -   支店
+            -   [作成する](/tidb-cloud/ticloud-branch-create.md)
             -   [消去](/tidb-cloud/ticloud-branch-delete.md)
-            -   [説明](/tidb-cloud/ticloud-branch-describe.md)
+            -   [説明する](/tidb-cloud/ticloud-branch-describe.md)
             -   [リスト](/tidb-cloud/ticloud-branch-list.md)
             -   [接続情報](/tidb-cloud/ticloud-branch-connect-info.md)
         -   構成
-            -   [作成](/tidb-cloud/ticloud-config-create.md)
+            -   [作成する](/tidb-cloud/ticloud-config-create.md)
             -   [消去](/tidb-cloud/ticloud-config-delete.md)
-            -   [説明](/tidb-cloud/ticloud-config-describe.md)
+            -   [説明する](/tidb-cloud/ticloud-config-describe.md)
             -   [編集](/tidb-cloud/ticloud-config-edit.md)
             -   [リスト](/tidb-cloud/ticloud-config-list.md)
-            -   [設定](/tidb-cloud/ticloud-config-set.md)
+            -   [セット](/tidb-cloud/ticloud-config-set.md)
             -   [使用](/tidb-cloud/ticloud-config-use.md)
-        -   [接続](/tidb-cloud/ticloud-connect.md)
+        -   [接続する](/tidb-cloud/ticloud-connect.md)
         -   輸入
             -   [キャンセル](/tidb-cloud/ticloud-import-cancel.md)
-            -   [説明](/tidb-cloud/ticloud-import-describe.md)
+            -   [説明する](/tidb-cloud/ticloud-import-describe.md)
             -   [リスト](/tidb-cloud/ticloud-import-list.md)
             -   始める
                 -   [地元](/tidb-cloud/ticloud-import-start-local.md)
                 -   [s3](/tidb-cloud/ticloud-import-start-s3.md)
                 -   [mysql](/tidb-cloud/ticloud-import-start-mysql.md)
-        -   計画
+        -   プロジェクト
             -   [リスト](/tidb-cloud/ticloud-project-list.md)
         -   [アップデート](/tidb-cloud/ticloud-update.md)
     -   [テーブルフィルター](/table-filter.md)
@@ -595,3 +595,5 @@
     -   [2022年](/tidb-cloud/release-notes-2022.md)
     -   [2021年](/tidb-cloud/release-notes-2021.md)
     -   [2020年](/tidb-cloud/release-notes-2020.md)
+-   メンテナンスのお知らせ
+    -   [[2023-08-31] TiDB Cloudコンソール メンテナンスのお知らせ](/tidb-cloud/notification-2023-08-31-console-maintenance.md)

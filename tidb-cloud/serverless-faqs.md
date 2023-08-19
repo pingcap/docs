@@ -34,7 +34,7 @@ TiDB Cloud機能の一部は、TiDB サーバーレスで部分的にサポー�
 
 ### TiDB サーバーレスが利用可能になる前に、Developer Tierクラスターを作成しました。クラスターを引き続き使用できますか? {#i-created-a-developer-tier-cluster-before-tidb-serverless-was-available-can-i-still-use-my-cluster}
 
-はい、Developer Tierクラスターは TiDB サーバーレス クラスターに自動的に移行され、以前の使用状況を中断することなくユーザー エクスペリエンスが向上しました。
+はい、Developer Tierクラスターは自動的に TiDB サーバーレス クラスターに移行され、以前の使用状況を中断することなくユーザー エクスペリエンスが向上しました。
 
 ## 請求と計測に関するよくある質問 {#billing-and-metering-faqs}
 
@@ -53,15 +53,23 @@ TiDB サーバーレスは従量課金制モデルを採用しています。つ
 
 詳細については、 [TiDB サーバーレスの使用量割り当て](/tidb-cloud/select-cluster-tier.md#usage-quota)を参照してください。
 
+### 無料プランの制限は何ですか? {#what-are-the-limitations-of-the-free-plan}
+
+無料プランでは、クラスターのパフォーマンスは、実際のワークロードに基づいて 1 秒あたり最大 10,000 RU に制限されます。さらに、クエリごとのメモリ割り当ては 256 MiB に制限されています。クラスターのパフォーマンスを最大化するには、商用製品を[利用限度額を増やす](/tidb-cloud/manage-serverless-spend-limit.md#update-spending-limit)で有効にすることを選択できます。
+
 ### ワークロードに必要な RU の数を見積もり、毎月の予算を計画するにはどうすればよいですか? {#how-can-i-estimate-the-number-of-rus-required-by-my-workloads-and-plan-my-monthly-budget}
 
-個々の SQL ステートメントの RU 消費量を取得するには、 [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md) SQL ステートメントを使用できます。
+個々の SQL ステートメントの RU 消費量を取得するには、 [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md#ru-request-unit-consumption) SQL ステートメントを使用できます。ただし、出力使用量はゲートウェイで個別に測定され、TiDBサーバーには認識されないため、 `EXPLAIN ANALYZE`で返される RU 使用量には出力 RU が含まれていないことに注意することが重要です。
 
 クラスターで使用されている RU とstorageを取得するには、クラスターの概要ページの**[今月の使用量]**ペインを表示します。このペインに過去のリソース使用量データとリアルタイムのリソース使用量を表示することで、クラスターのリソース消費を追跡し、適切な使用制限を見積もることができます。無料割り当てが要件を満たせない場合は、支出制限を簡単に編集できます。詳細については、 [TiDB サーバーレス クラスターの支出制限を管理する](/tidb-cloud/manage-serverless-spend-limit.md)を参照してください。
 
+### 消費される RU の数を最小限に抑えるためにワークロードを最適化するにはどうすればよいですか? {#how-can-i-optimize-my-workload-to-minimize-the-number-of-rus-consumed}
+
+[SQLパフォーマンスの最適化](/develop/dev-guide-optimize-sql-overview.md)のガイドラインに従って、最適なパフォーマンスが得られるようにクエリが慎重に最適化されていることを確認します。さらに、送信トラフィックの量を最小限に抑えることも、RU の消費量を削減するために重要です。これを実現するには、クエリで必要な列と行のみを返すことをお勧めします。これにより、ネットワーク下りトラフィックが削減されます。これは、返される列と行を慎重に選択してフィルタリングすることで実現でき、それによってネットワークの使用率が最適化されます。
+
 ### TiDB サーバーレスのstorageはどのように計測されますか? {#how-storage-is-metered-for-tidb-serverless}
 
-storageは、TiDB サーバーレス クラスターに保存されているデータ量に基づいて測定され、月あたりの GiB 単位で測定されます。これは、すべてのテーブルとインデックス (データ圧縮またはレプリカを除く) の合計サイズに、その月にデータが保存されている時間数を乗算して計算されます。
+storageは、TiDB サーバーレス クラスターに保存されているデータ量に基づいて測定され、月あたりの GiB 単位で測定されます。これは、すべてのテーブルとインデックス (データ圧縮またはレプリカを除く) の合計サイズと、その月にデータが保存されている時間数を乗算して計算されます。
 
 ### テーブルまたはデータベースをすぐに削除した後、storage使用量のサイズが変わらないのはなぜですか? {#why-does-the-storage-usage-size-remain-unchanged-after-dropping-a-table-or-database-immediately}
 
