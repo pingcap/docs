@@ -1,9 +1,9 @@
 ---
-title: TiCDC Performance Analysis and Optimization Methods
+title: TiCDC Performance Analysis and Tuning Methods
 summary: Introduces the TiCDC metrics on the Performance Overview dashboard to help you better understand and monitor TiCDC workloads.
 ---
 
-# TiCDC Performance Analysis and Optimization Methods
+# TiCDC Performance Analysis and Tuning Methods
 
 This document introduces TiCDC resource utilization and key performance metrics. You can monitor and evaluate TiCDC performance on data replication through the [CDC panel](/grafana-performance-overview-dashboard.md#cdc) on the Performance Overview dashboard.
 
@@ -64,7 +64,7 @@ Example 2: Impact of downstream database write speed on TiCDC data replication p
 As shown in the following diagram, both upstream and downstream are TiDB clusters. The TiCDC `Puller output events/s` metric indicates the QPS of the upstream database. The `Transaction Sink Full Flush Duration` metric indicates the average write latency of the downstream database, which is high during the first workload and low during the second workload.
 
 - During the first workload, because the downstream TiDB cluster writes data slowly, TiCDC consumes data at a speed that falls behind the upstream QPS, leading to a continuous increase in `Changefeed checkpoint lag`. However, `Changefeed resolved ts lag` remains within 300 milliseconds, indicating that replication lag and throughput bottlenecks are not caused by the puller and sorter modules but caused by the downstream sink module.
-- During the second workload, because the downstream TiDB cluster writes data faster, TiCDC replicates data at a speed that completely catches up with the upstream, so the `Changefeed checkpoint lag` and `Changefeed resolved ts lag` remain within 500 milliseconds, which is a relatively ideal replication speed for TiCDC.
+- During the second workload, because the downstream TiDB cluster writes data faster, TiCDC replicates data at a speed that completely catches up with the upstream, the `Changefeed checkpoint lag` and `Changefeed resolved ts lag` remain within 500 milliseconds, which is a relatively ideal replication speed for TiCDC.
 
 ![TiCDC overview](/media/performance/cdc/cdc-fast-1.png)
 
