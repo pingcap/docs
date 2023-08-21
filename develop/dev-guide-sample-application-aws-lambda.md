@@ -34,16 +34,16 @@ This section shows you how to run the sample application code and connect to TiD
 
 ```bash
 git clone git@github.com:tidb-samples/tidb-aws-lambda-quickstart.git
+cd tidb-aws-lambda-quickstart
 ```
 
 ### Step 2: Install dependencies
 
 ```bash
-cd tidb-aws-lambda-quickstart
-yarn
+npm
 ```
 
-### step 3: Configure the connection string
+### Step 3: Configure the connection string
 
 Depending on the way you deploy TiDB, use different methods to connect to the TiDB cluster.
 
@@ -51,9 +51,9 @@ Depending on the way you deploy TiDB, use different methods to connect to the Ti
 
 <div label="TiDB Serverless">
 
-1. In the TiDB Cloud Clusters page, select your TiDB Serverless cluster and go to the **Overview** page. Click **Connect** in the upper right corner.
+1. In the TiDB Cloud [Clusters](https://tidbcloud.com/console/clusters) page, select your TiDB Serverless cluster and go to the **Overview** page. Click **Connect** in the upper right corner.
 
-2. In the pop-up window, confirm that the configuration is consistent with your runtime environment.
+2. In the connection dialog confirm that the configuration is consistent with your runtime environment.
 
    - Endpoint Type is **Public**.
    - Connect With is **General**.
@@ -61,9 +61,9 @@ Depending on the way you deploy TiDB, use different methods to connect to the Ti
 
    <Tip>If you are running in Windows Subsystem for Linux (WSL), switch to the corresponding Linux distribution.</Tip>
 
-3. Click **Create Password** to generate a password.
+3. If you have not set a password yet, click **Create password** to generate a random password.
 
-   <Tip>If you have generated a password before, you can use the original password directly, or click **Reset Password** to generate a new password.</Tip>
+   <Tip>If you have generated a password before, you can use the original password directly, or click **Reset password** to generate a new password.</Tip>
 
 4. Copy and paste the corresponding connection string to `env.json`. The following is an example:
 
@@ -78,13 +78,13 @@ Depending on the way you deploy TiDB, use different methods to connect to the Ti
    }
    ```
 
-   Replace the placeholders in `{}` with the values obtained in the **Connect** window.
+   Replace the placeholders in `{}` with the values obtained in the connection dialog.
 
 5. [Configure Step.4 environment variables](https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html) in Lambda Function.
 
 </div>
 
-<div label="Self-hosted TiDB">
+<div label="TiDB Self-Hosted">
 
 1. Copy and paste the corresponding connection string. The following is an example:
 
@@ -111,7 +111,7 @@ Depending on the way you deploy TiDB, use different methods to connect to the Ti
 
 1. Install the [AWS SAM CLI](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/install-sam-cli.html).
 
-2. Run the following command to start the application:
+2. Run the following command to invoke the sample Lambda function:
 
     ```bash
     sam local invoke --env-vars env.json -e event.json "tidbHelloWorldFunction"
@@ -123,7 +123,7 @@ Depending on the way you deploy TiDB, use different methods to connect to the Ti
     {"statusCode":200,"body":"{\"results\":[{\"Hello World\":\"Hello World\"}]}"}
     ```
 
-## Key Code Snippets
+## Example codes
 
 Complete code snippets are available in the [tidb-aws-lambda-quickstart](https://github.com/tidb-samples/tidb-aws-lambda-quickstart) GitHub repository.
 
@@ -144,13 +144,9 @@ const pool = mysql.createPool({
     minVersion: 'TLSv1.2',
     rejectUnauthorized: true,
   },
-  waitForConnections: true,
   connectionLimit: 1,
   maxIdle: 1, // max idle connections, the default value is the same as `connectionLimit`
-  idleTimeout: 60000, // idle connections timeout, in milliseconds, the default value 60000
-  queueLimit: 0,
-  enableKeepAlive: true,
-  keepAliveInitialDelay: 0,
+  enableKeepAlive: true
 });
 ```
 
@@ -197,8 +193,6 @@ Refer to [Delete data](/develop/dev-guide-delete-data.md) for more information.
 
 - Complete code snippets and how to run them, see [tidb-aws-lambda-quickstart](https://github.com/tidb-samples/tidb-aws-lambda-quickstart) GitHub repository.
 - The driver is not highly encapsulated, so you will see a lot of SQL statements in the program. Unlike ORM, because there is no data object, the query object of `mysql2` is represented by a object. Although the Node.js driver is convenient, it still requires manual control of the transaction characteristics because it cannot shield the underlying implementation. If there are no scenarios that must use SQL, it is still recommended to use ORM to write programs. This can reduce the coupling of the program.
-- For more information about how to use mysql2, see [mysql2 official documentation](https://github.com/sidorares/node-mysql2).
-- For more information about how to use AWS Lambda Function with TiDB Cloud, see [Designing High-Performance Applications Using Serverless TiDB Cloud and AWS Lambda](https://aws.amazon.com/blogs/apn/designing-high-performance-applications-using-serverless-tidb-cloud-and-aws-lambda/).
 
 ## What's next
 
