@@ -8,7 +8,9 @@ summary: This article describes how to connect TiDB using mysql2 in Next.js and 
 
 # Connect to TiDB by using mysql2 in Next.js
 
-TiDB is a MySQL-compatible database. [mysql2](https://www.npmjs.com/package/mysql2) is one of the most popular open-source Node.js drivers.
+TiDB is a MySQL-compatible database.
+
+[mysql2](https://www.npmjs.com/package/mysql2) is one of the most popular open-source Node.js drivers.
 
 This document shows you how to use TiDB and mysql2 to build a simple CRUD application.
 
@@ -16,25 +18,30 @@ This document shows you how to use TiDB and mysql2 to build a simple CRUD applic
 
 - [Node.js **18**](https://nodejs.org/en/download/) or later.
 - [Git](https://git-scm.com/downloads).
-- TiDB cluster. If you don't have a TiDB cluster, you can create one by following the steps below:
-    - (Recommended) Refer to [Create a TiDB Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-tidb-serverless-cluster) to create your own TiDB Cloud cluster.
-    - Refer to [Deploy a local test TiDB cluster](/quick-start-with-tidb.md#deploy-a-local-test-cluster) or [Deploy a formal TiDB cluster](/production-deployment-using-tiup.md) to create a local cluster.
+- A TiDB cluster running
+
+**If you don't have a TiDB cluster yet, please create one with one of the following methods:**
+
+- (Recommended) Refer to [Create a TiDB Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
+- Refer to [Deploy a local test TiDB cluster](/quick-start-with-tidb.md) or [Deploy a formal TiDB cluster](/production-deployment-using-tiup.md) to create a local cluster.
 
 ## Run the sample application
 
 This section shows you how to run the sample application code and connect to TiDB.
 
+> **Note:** Complete code snippets and how to run them, see [tidb-nextjs-vercel-quickstart](https://github.com/tidb-samples/tidb-nextjs-vercel-quickstart) GitHub repository.
+
 ### Step 1: Clone the sample application repository to your local machine
 
 ```bash
 git clone git@github.com:tidb-samples/tidb-nextjs-vercel-quickstart.git
+cd tidb-nextjs-vercel-quickstart
 ```
 
 ### Step 2: Install dependencies
 
 ```bash
-cd tidb-nextjs-vercel-quickstart
-yarn
+npm install
 ```
 
 ### step 3: Configure the connection string
@@ -45,24 +52,26 @@ Depending on the way you deploy TiDB, use different methods to connect to the Ti
 
 <div label="TiDB Serverless">
 
-1. In the TiDB Cloud Clusters page, select your TiDB Serverless cluster and go to the **Overview** page. Click **Connect** in the upper right corner.
+1. In the TiDB Cloud [Clusters](https://tidbcloud.com/console/clusters) page, select your TiDB Serverless cluster and go to the **Overview** page. Click **Connect** in the upper right corner.
 
-2. In the pop-up window, confirm that the configuration is consistent with your runtime environment.
+2. In the connection dialog, select `General` from the **Connect With** dropdown and keep the default setting of the **Endpoint Type** as `Public`.
 
-   - Endpoint Type is **Public**.
-   - Connect With is **General**.
-   - Operating System is your runtime environment.
+  > **Note**: In Node.js applications, you don't have to provide an SSL CA certificate, because Node.js uses the built-in [Mozilla CA certificate](https://wiki.mozilla.org/CA/Included_Certificates) by default when establishing the TLS (SSL) connection.
 
-   <Tip>If you are running in Windows Subsystem for Linux (WSL), switch to the corresponding Linux distribution.</Tip>
+3. If you have not set a password yet, click **Create password** to generate a random password.
 
-3. Click **Create Password** to generate a password.
-
-   <Tip>If you have generated a password before, you can use the original password directly, or click **Reset Password** to generate a new password.</Tip>
+   <Tip>If you have generated a password before, you can use the original password directly, or click **Reset password** to generate a new password.</Tip>
 
 4. Run the following command to copy and rename `.env.example` to `.env`:
 
    ```bash
+   # Linux
    cp .env.example .env
+   ```
+
+   ```powershell
+   # Windows
+   Copy-Item ".env.example" -Destination ".env"
    ```
 
 5. Copy and paste the corresponding connection string to `.env`. The following is an example:
@@ -86,7 +95,13 @@ Depending on the way you deploy TiDB, use different methods to connect to the Ti
 1. Run the following command to copy and rename `.env.example` to `.env`:
 
    ```bash
+   # Linux
    cp .env.example .env
+   ```
+
+   ```powershell
+   # Windows
+   Copy-Item ".env.example" -Destination ".env"
    ```
 
 2. Copy and paste the corresponding connection string to `.env`. The following is an example:
@@ -112,7 +127,7 @@ Depending on the way you deploy TiDB, use different methods to connect to the Ti
 1. Run the following command to start the application:
 
    ```bash
-   yarn dev
+   npm run dev
    ```
 
 2. Open your browser and visit `http://localhost:3000`.(Check your terminal for the actual port number, default is `3000`)
@@ -143,22 +158,18 @@ You can refer to the following key code snippets to complete your application de
 import mysql from 'mysql2';
 
 const pool = mysql.createPool({
-  host,
-  port,
-  user,
-  password,
-  database,
+  host, // TiDB host, for example: {gateway-region}.aws.tidbcloud.com
+  port, // TiDB port, default: 4000
+  user, // TiDB user, for example: {prefix}.root
+  password, // TiDB password
+  database, // TiDB database name, default: test
   ssl: {
     minVersion: 'TLSv1.2',
     rejectUnauthorized: true,
   },
-  waitForConnections: true,
   connectionLimit: 1,
   maxIdle: 1, // max idle connections, the default value is the same as `connectionLimit`
-  idleTimeout: 60000, // idle connections timeout, in milliseconds, the default value 60000
-  queueLimit: 0,
-  enableKeepAlive: true,
-  keepAliveInitialDelay: 0,
+  enableKeepAlive: true
 });
 ```
 
@@ -167,7 +178,7 @@ const pool = mysql.createPool({
 ```javascript
 const player = ['1', 1, 1];
 await pool.execute(
-  `INSERT INTO player (id, coins, goods) VALUES (${player.join(', ')})`
+  `INSERT INTO player (id, goods, coins) VALUES (${player[0]}, ${player[1]}, ${player[2]})`
 );
 ```
 
@@ -203,11 +214,20 @@ Refer to [Delete data](/develop/dev-guide-delete-data.md) for more information.
 
 ## Considerations
 
-- Complete code snippets and how to run them, see [tidb-nextjs-vercel-quickstart](https://github.com/tidb-samples/tidb-nextjs-vercel-quickstart) GitHub repository.
-- The driver is not highly encapsulated, so you will see a lot of SQL statements in the program. Unlike ORM, because there is no data object, the query object of `mysql2` is represented by a object. Although the Node.js driver is convenient, it still requires manual control of the transaction characteristics because it cannot shield the underlying implementation. If there are no scenarios that must use SQL, it is still recommended to use ORM to write programs. This can reduce the coupling of the program.
+- The driver lacks high encapsulation, resulting in visible SQL statements throughout the program.
+- Unlike ORM, `mysql2` represents the query object with a separate object instead of a data object.
+- While the Node.js driver is convenient, it requires manual control of transaction characteristics due to the absence of shielding the underlying implementation.
+- If SQL usage is not mandatory, it is advisable to utilize ORM for program development.
+- This approach(ORM) can reduce program coupling and enhance code maintainability.
 - For more information about how to use mysql2, see [mysql2 official documentation](https://github.com/sidorares/node-mysql2).
 - For more details about how to build a complex application with ORM and Next.js, see [our Bookshop Demo](https://github.com/pingcap/tidb-prisma-vercel-demo).
 
 ## What's next
 
-- You can continue to read the developer documentation to learn more about TiDB. For example: [Insert data](/develop/dev-guide-insert-data.md), [Update data](/develop/dev-guide-update-data.md), [Delete data](/develop/dev-guide-delete-data.md), [Get data from single table](/develop/dev-guide-get-data-from-single-table.md), [Transaction](/develop/dev-guide-transaction-overview.md), [SQL performance optimization](/develop/dev-guide-optimize-sql-overview.md), etc.
+To deepen your understanding of TiDB, you can explore the developer documentation, which covers various topics such as:
+- [Insert data](/develop/dev-guide-insert-data.md)
+- [Update data](/develop/dev-guide-update-data.md)
+- [Delete data](/develop/dev-guide-delete-data.md)
+- [Get data from single table](/develop/dev-guide-get-data-from-single-table.md)
+- [Transaction](/develop/dev-guide-transaction-overview.md)
+- [SQL performance optimization](/develop/dev-guide-optimize-sql-overview.md)
