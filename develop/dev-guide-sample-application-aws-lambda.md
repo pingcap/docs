@@ -207,6 +207,7 @@ Refer to [Delete data](/develop/dev-guide-delete-data.md) for more information.
 ## What's next
 
 To deepen your understanding of TiDB, you can explore the developer documentation, which covers various topics such as:
+
 - [Insert data](/develop/dev-guide-insert-data.md)
 - [Update data](/develop/dev-guide-update-data.md)
 - [Delete data](/develop/dev-guide-delete-data.md)
