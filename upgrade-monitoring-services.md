@@ -109,3 +109,5 @@ Execute the following command to upgrade AlertManager:
 ```bash
 tiup cluster patch <cluster-name> alertmanager-v{new-version}-linux-amd64.tar.gz -R alertmanager
 ```
+
+After the upgrade, you can go to the home page of the AlertManager server (usually at `http://<Alertmanager-server-host-name>:9093`), click **Status** in the top navigation menu, and then check the AlertManager version to confirm whether the upgrade is successful.
