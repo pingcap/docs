@@ -50,10 +50,10 @@ For **GCS**, before filling **GCS Endpoint**, you need to first grant the GCS bu
 
         - storage.buckets.get
         - storage.objects.create
-        - storage.objects.update
+        - storage.objects.delete
         - storage.objects.get
         - storage.objects.list
-        - storage.objects.delete
+        - storage.objects.update
 
     ![Add permissions](/media/tidb-cloud/changefeed/sink-to-cloud-storage-gcs-assign-permission.png)
 
