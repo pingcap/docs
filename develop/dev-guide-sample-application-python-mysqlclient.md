@@ -8,7 +8,7 @@ summary: Learn how to connect TiDB using mysqlclient. And you can find sample co
 
 # Connect TiDB with mysqlclient
 
-TiDB is a MySQL compatible database. And [mysqlclient](https://pypi.org/project/mysqlclient/) is a popular open-source driver for Python.
+TiDB is a MySQL compatible database. And [mysqlclient](https://github.com/PyMySQL/mysqlclient) is a popular open-source driver for Python.
 
 In this tutorial, use TiDB and mysqlclient to complete the following tasks:
 
@@ -17,15 +17,15 @@ In this tutorial, use TiDB and mysqlclient to complete the following tasks:
 - Build and run your app. Optionally, you can find sample code snippets for basic CRUD operations. 
 
 > **Note:**
-> This tutorial works with TiDB Serverless, TiDB Dedicated and TiDB Self-hosted.
+> This tutorial works with TiDB Serverless, TiDB Dedicated and TiDB Self-Hosted.
 
 ## Prerequisites
 
 - [Python **3.10** or higher](https://www.python.org/downloads/).
 - [Git](https://git-scm.com/downloads).
 - A TiDB cluster. If you don't have a TiDB cluster, you can create one as follows:
-    - (Recommended) Follow [Creating a TiDB Serverless Cluster](/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
-    - Follow [Deploy a Local Test TiDB Cluster](../quick-start-with-tidb.md#deploy-a-local-test-cluster) or [Deploy a Production TiDB Cluster](../production-deployment-using-tiup.md) to create a local cluster.
+    - (Recommended) Follow [Creating a TiDB Serverless Cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
+    - Follow [Deploy a Local Test TiDB Cluster](/quick-start-with-tidb.md#deploy-a-local-test-cluster.md) or [Deploy a Production TiDB Cluster](/production-deployment-using-tiup.md) to create a local cluster.
 
 ## Run sample app to connect to TiDB
 
@@ -36,7 +36,7 @@ This section demonstrates how to run the sample application code and connect to 
 Run the following command in your terminal window to clone the sample code repository.
 
 ```bash
-git clone https://github.com/pingcap-inc/tidb-example-python.git
+git clone https://github.com/tidb-samples/tidb-python-mysqlclient-quickstart.git
 ```
 
 ### Step 2: Install dependencies (including mysqlclient)
@@ -44,8 +44,8 @@ git clone https://github.com/pingcap-inc/tidb-example-python.git
 Run the following commands to install required packages for the sample app.
 
 ```bash
-cd tidb-example-python;
-pip install -r requirement.txt
+cd tidb-python-mysqlclient-quickstart;
+pip install -r requirements.txt
 ```
 
 <Tip> If you encounter installation issues, please refer to the [mysqlclient official documentation](https://github.com/PyMySQL/mysqlclient#install). </Tip>
@@ -90,16 +90,15 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 
     Be sure to replace the placeholders `{}` with the values obtained from the **Connect** window.
 
-    TiDB Serverless requires a secure connection. Since the `ssl_mode` of mysqlclient defaults to `PREFERRED`, you don't need to manually specify `CA_PATH`. Just leave it empty. But if you have a special reason to specify `CA_PATH` manually, you can refer to the [TLS Connections to TiDB Serverless](../tidb-cloud/secure-connections-to-serverless-tier-clusters.md) to get the certificate paths for different operating systems.
+    TiDB Serverless requires a secure connection. Since the `ssl_mode` of mysqlclient defaults to `PREFERRED`, you don't need to manually specify `CA_PATH`. Just leave it empty. But if you have a special reason to specify `CA_PATH` manually, you can refer to the [TLS Connections to TiDB Serverless](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md) to get the certificate paths for different operating systems.
 
 6. Save the `.env` file.
-
 
 </div>
 <div label="TiDB Dedicated">
 
 1. In the TiDB Cloud, select your TiDB Dedicated cluster. Go to the **Overview** page, and click the **Connect** button in the upper right corner. Click **Allow Access from Anywhere** and then click **Download TiDB cluster CA** to download the certificate.
-     <Tip> For more configuration details, refer to [TiDB Dedicated Standard Connection](../tidb-cloud/connect-via-standard-connection.md).</Tip>
+     <Tip> For more configuration details, refer to [TiDB Dedicated Standard Connection](/tidb-cloud/connect-via-standard-connection.md).</Tip>
 
 2. Run the following command to copy `.env.example` and rename it to `.env`:
 
@@ -122,9 +121,8 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 
 4. Save the `.env` file.
 
-
 </div>
-<div label="TiDB Self-hosted">
+<div label="TiDB Self-Hosted">
 
 1. Run the following command to copy `.env.example` and rename it to `.env`:
 
@@ -147,10 +145,8 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 
 3. Save the `.env` file.
 
-
 </div>
 </SimpleTab>
-
 
 ## Sample Code Snippets
 
@@ -176,7 +172,7 @@ def get_mysqlclient_connection(autocommit:bool=True) -> MySQLdb.Connection:
     return MySQLdb.connect(**db_conf)
 ```
 
-When using this function, you need to replace `${tidb_host}`, `${tidb_port}`, `${tidb_user}`, `${tidb_password}`, `${tidb_db_name}` etc. with the actual values of your TiDB cluster.
+When using this function, you need to replace `${tidb_host}`, `${tidb_port}`, `${tidb_user}`, `${tidb_password}`, `${tidb_db_name}` and `${ca_path}` with the actual values of your TiDB cluster.
 
 ### Insert Data
 
@@ -184,23 +180,21 @@ When using this function, you need to replace `${tidb_host}`, `${tidb_port}`, `$
 with get_mysqlclient_connection(autocommit=True) as conn:
     with conn.cursor() as cur:
         player = ("1", 1, 1)
-        cursor.execute("INSERT INTO player (id, coins, goods) VALUES (%s, %s, %s)", player)
+        cursor.execute("INSERT INTO players (id, coins, goods) VALUES (%s, %s, %s)", player)
 ```
 
-For more information, refer to [Insert Data](./dev-guide-insert-data.md).
-
+For more information, refer to [Insert Data](/develop/dev-guide-insert-data.md).
 
 ### Query Data
 
 ```python
 with get_mysqlclient_connection(autocommit=True) as conn:
     with conn.cursor() as cur:
-        cur.execute("SELECT count(*) FROM player")
+        cur.execute("SELECT count(*) FROM players")
         print(cur.fetchone()[0])
 ```
 
 For more information, refer to [Query Data](./dev-guide-get-data-from-single-table.md).
-
 
 ### Update Data
 
@@ -208,10 +202,10 @@ For more information, refer to [Query Data](./dev-guide-get-data-from-single-tab
 with get_mysqlclient_connection(autocommit=True) as conn:
     with conn.cursor() as cur:
         player_id, amount, price="1", 10, 500
-        cursor.execute("UPDATE player SET goods = goods + %s, coins = coins + %s WHERE id = %s", (-amount, price, player_id))
+        cursor.execute("UPDATE players SET goods = goods + %s, coins = coins + %s WHERE id = %s", (-amount, price, player_id))
 ```
 
-For more information, refer to [Update Data](./dev-guide-update-data.md).
+For more information, refer to [Update Data](/develop/dev-guide-update-data.md).
 
 ### Delete Data
 
@@ -219,20 +213,18 @@ For more information, refer to [Update Data](./dev-guide-update-data.md).
 with get_mysqlclient_connection(autocommit=True) as conn:
     with conn.cursor() as cur:
         player_id = "1"
-        cursor.execute("DELETE FROM player WHERE id = %s", (player_id,))
+        cursor.execute("DELETE FROM players WHERE id = %s", (player_id,))
 ```
 
-For more information, refer to [Update Data](./dev-guide-delete-data.md).
-
+For more information, refer to [Update Data](/develop/dev-guide-delete-data.md).
 
 ## Useful Notes
 
-- For complete code and how to run it, see the [tidb-example-python GitHub repository](https://github.com/pingcap-inc/tidb-example-python/tree/main).
+- For complete code and how to run it, see the [tidb-python-mysqlclient-quickstart GitHub repository](https://github.com/tidb-samples/tidb-python-mysqlclient-quickstart).
 - This Python driver is relatively low-level, so you will see a lot of SQL statements in the sample app. Unlike ORMs, there is no data object, and `mysqlclient` represents query objects with tuples. Although Python's driver is more convenient to use than those in other languages, due to its exposure to underlying implementations and the manual transaction management required, it is still recommended to use ORMs for programming unless there is a significant need for SQL. This can reduce the coupling of your app.
 - For more on how to use `mysqlclient`, refer to the [mysqlclient official documentation](https://mysqlclient.readthedocs.io/).
 
-
 ## Next Steps
 
-- You can continue reading the developer documentation to get more knowledge about TiDB development, such as: [Insert Data](./dev-guide-insert-data.md), [Update Data](./dev-guide-update-data.md), [Delete Data](./dev-guide-delete-data.md), [Single Table Reading](./dev-guide-get-data-from-single-table.md), [Transactions](./dev-guide-transaction-overview.md), [SQL Performance Optimization](./dev-guide-optimize-sql-overview.md), etc.
-- If you prefer to learn through courses, we also offer professional [TiDB Developer Courses](https://www.pingcap.com/education/), and provide [TiDB certifications](https://learn.pingcap.com/learner/certification-center) after the exam.
+- You can continue reading the developer documentation to get more knowledge about TiDB development, such as: [Insert Data](/develop/dev-guide-insert-data.md), [Update Data](/develop/dev-guide-update-data.md), [Delete Data](/develop/dev-guide-delete-data.md), [Single Table Reading](/develop/dev-guide-get-data-from-single-table.md), [Transactions](/develop/dev-guide-transaction-overview.md), [SQL Performance Optimization](/develop/dev-guide-optimize-sql-overview.md), etc.
+- If you prefer to learn through courses, we also offer professional [TiDB Developer Courses](https://www.pingcap.com/education/), and provide [TiDB certifications](https://www.pingcap.com/education/certification/) after the exam.
