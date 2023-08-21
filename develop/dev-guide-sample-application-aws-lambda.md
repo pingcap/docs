@@ -47,7 +47,7 @@ cd tidb-aws-lambda-quickstart
 ### Step 2: Install dependencies
 
 ```bash
-npm
+npm install
 ```
 
 ### Step 3: Configure the connection string
