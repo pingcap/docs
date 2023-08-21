@@ -141,20 +141,35 @@ You can refer to the following key code snippets to complete your application de
 ```typescript
 import mysql from 'mysql2';
 
-const pool = mysql.createPool({
-  host, // TiDB host, for example: {gateway-region}.aws.tidbcloud.com
-  port, // TiDB port, default: 4000
-  user, // TiDB user, for example: {prefix}.root
-  password, // TiDB password
-  database, // TiDB database name, default: test
-  ssl: {
-    minVersion: 'TLSv1.2',
-    rejectUnauthorized: true,
-  },
-  connectionLimit: 1,
-  maxIdle: 1, // max idle connections, the default value is the same as `connectionLimit`
-  enableKeepAlive: true
-});
+let pool: mysql.Pool;
+
+function connect() {
+  pool = mysql.createPool({
+    host: process.env.TIDB_HOST, // TiDB host, for example: {gateway-region}.aws.tidbcloud.com
+    port: process.env.TIDB_PORT || 4000, // TiDB port, default: 4000
+    user: process.env.TIDB_USER, // TiDB user, for example: {prefix}.root
+    password: process.env.TIDB_PASSWORD, // TiDB password
+    database: process.env.TIDB_DATABASE || 'test', // TiDB database name, default: test
+    ssl: {
+      minVersion: 'TLSv1.2',
+      rejectUnauthorized: true,
+    },
+    connectionLimit: 1, // Setting connectionLimit to "1" in a serverless function environment optimizes resource usage, reduces costs, ensures connection stability, and enables seamless scalability.
+    maxIdle: 1, // max idle connections, the default value is the same as `connectionLimit`
+    enableKeepAlive: true
+  });
+}
+
+export async function handler(event: any) {
+  if (!pool) {
+    connect();
+  }
+  const results = await pool.execute('SELECT "Hello World"');
+  return {
+    statusCode: 200,
+    body: JSON.stringify({ results }),
+  };
+}
 ```
 
 ### Insert data
@@ -171,8 +186,8 @@ Refer to [Insert data](/develop/dev-guide-insert-data.md) for more information.
 ### Query data
 
 ```typescript
-const results = await pool.execute('SELECT count(*) FROM player');
-console.log(results);
+const [rows] = await pool.execute('SELECT count(*) AS cnt FROM player');
+console.log(rows[0]['cnt']);
 ```
 
 Refer to [Query data](/develop/dev-guide-get-data-from-single-table.md) for more information.
@@ -198,11 +213,7 @@ Refer to [Delete data](/develop/dev-guide-delete-data.md) for more information.
 
 ## Considerations
 
-- The driver lacks high encapsulation, resulting in visible SQL statements throughout the program.
-- Unlike ORM, `mysql2` represents the query object with a separate object instead of a data object.
-- While the Node.js driver is convenient, it requires manual control of transaction characteristics due to the absence of shielding the underlying implementation.
-- If SQL usage is not mandatory, it is advisable to utilize ORM for program development.
-- This approach(ORM) can reduce program coupling and enhance code maintainability.
+- It's recommended that using ORM frameworks to improve development efficiency in scenarios without a lot of complex SQL, such as [Sequelize](https://sequelize.org/), [Prisma](https://www.prisma.io/) and [TypeORM](https://typeorm.io/).
 
 ## What's next
 
