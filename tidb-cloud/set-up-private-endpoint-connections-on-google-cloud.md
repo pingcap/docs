@@ -80,6 +80,7 @@ You can select a cluster with any of the following statuses:
 - **Restoring**
 - **Modifying**
 - **Importing**
+
 ### Step 2. Provide the information for creating an endpoint
 
 1. Provide the following information to generate the command to create a Google Cloud Private Service Connect endpoint:
