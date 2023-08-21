@@ -27,8 +27,10 @@ For more detailed definitions of the private endpoint and endpoint service, see 
 
 ## Restrictions
 
- - Only the organization owner and the project owner can create Google Cloud Private Service Connect endpoints.
-- You can create up to 12 endpoints for each TiDB Dedicated cluster.
+- This feature is applicable to TiDB Dedicated clusters created after April 13th, 2023. For older clusters, contact support for assistance.
+- Only the organization owner and the project owner can create Google Cloud Private Service Connect endpoints.
+- You can create up to 10 endpoints for each TiDB Dedicated cluster.
+- You can create up to 8 Google Cloud clusters in a project with the endpoint service configured.
 - The private endpoint and the TiDB cluster must be located in the same region.
 - Before you begin to create an endpoint:
     - [Enable](https://console.cloud.google.com/apis/library/compute.googleapis.com) the following APIs in your project:
@@ -78,7 +80,6 @@ You can select a cluster with any of the following statuses:
 - **Restoring**
 - **Modifying**
 - **Importing**
-- This feature is applicable to TiDB Dedicated clusters created after April 13th, 2023. For older clusters, contact support for assistance.
 ### Step 2. Provide the information for creating an endpoint
 
 1. Provide the following information to generate the command to create a Google Cloud Private Service Connect endpoint:
@@ -111,7 +112,6 @@ When you use private endpoint connections, the statuses of private endpoints or 
 
 The possible statuses of a private endpoint are explained as follows:
 
-- **Not Configured**: the endpoint service is created but the private endpoint is not created yet.
 - **Pending**: waiting for processing.
 - **Active**: your private endpoint is ready to use. You cannot edit the private endpoint of this status.
 - **Deleting**: the private endpoint is being deleted.
@@ -121,13 +121,12 @@ The possible statuses of a private endpoint service are explained as follows:
 
 - **Creating**: the endpoint service is being created, which takes 3 to 5 minutes.
 - **Active**: the endpoint service is created, no matter whether the private endpoint is created or not.
-- **Deleting**: the endpoint service or the cluster is being deleted, which takes 3 to 5 minutes.
 
 ## Troubleshooting
 
 ### TiDB Cloud fails to create an endpoint service, what should I do?
 
-Usually the endpoint service is created automatically when the cluster is created and rarely fails. If it shows as failed or remains in a **Creating** state, submit a [support ticket](/tidb-cloud/tidb-cloud-support.md) for assistance.
+The endpoint service is created automatically when you open the **Create Google Cloud Private Endpoint** page. If it shows as failed or remains in the **Creating** state for a long time, submit a [support ticket](/tidb-cloud/tidb-cloud-support.md) for assistance.
 
 ### TiDB Cloud fails to create an endpoint, what should I do?
 
