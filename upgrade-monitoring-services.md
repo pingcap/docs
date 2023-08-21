@@ -5,9 +5,9 @@ summary: Learn how to upgrade the Prometheus, Grafana, and Alertmanager monitori
 
 # Upgrade TiDB Cluster Monitoring Services
 
-When you deploy a TiDB cluster using TiUP, TiUP automatically deploys monitoring services (such as Prometheus, Grafana, and Alertmanager) for the cluster. If you scale out this cluster, TiUP also automatically adds monitoring configurations for newly added nodes during the scaling.
+When deploying a TiDB cluster, TiUP automatically deploys monitoring services (such as Prometheus, Grafana, and Alertmanager) for the cluster. If you scale out this cluster, TiUP also automatically adds monitoring configurations for newly added nodes during the scaling.
 
-Pay attention that TiUP uses its own configurations to override the configurations of the monitoring services. If you directly upgrade the monitoring services by replacing their configuration files, any subsequent operations such as `deploy`, `scale-out`, `scale-in`, or `reload` on the cluster might overwrite your upgrade, leading to errors. To upgrade Prometheus, Grafana, and Alertmanager, you can follow the upgrade steps in this document.
+Pay attention as TiUP uses its own configurations to override the configurations of the monitoring services. If you directly upgrade the monitoring services by replacing their configuration files, any subsequent operations such as `deploy`, `scale-out`, `scale-in`, or `reload` on the cluster might overwrite your upgrade, leading to errors. To upgrade Prometheus, Grafana, and Alertmanager, you can follow the upgrade steps in this document.
 
 > **Note:**
 >
