@@ -1,15 +1,15 @@
 ---
-title: Connect to a TiDB Dedicated Cluster via Private Service Connect with Google Cloud
+title: Connect to a TiDB Dedicated Cluster via Google Cloud Private Service Connect
 summary: Learn how to connect to your TiDB Cloud cluster via Private Service Connect with Google Cloud.
 ---
 
-# Connect to a TiDB Dedicated Cluster via Private Service Connect on Google Cloud
+# Connect to a TiDB Dedicated Cluster via Google Cloud Private Service Connect
 
-This document describes how to connect to your TiDB Dedicated cluster via Private Service Connect on Google Cloud.
+This document describes how to connect to your TiDB Dedicated cluster via Google Cloud Private Service Connect.
 
 > **Tip:**
 >
-> - To learn how to connect to a TiDB Dedicated cluster via private endpoint with AWS, see [Connect to TiDB Dedicated via Private Endpoint with AWS](/tidb-cloud/set-up-private-endpoint-connections.md)
+> - To learn how to connect to a TiDB Dedicated cluster via private endpoint with AWS, see [Connect to TiDB Dedicated via Private Endpoint with AWS](/tidb-cloud/set-up-private-endpoint-connections.md).
 > - To learn how to connect to a TiDB Serverless cluster via private endpoint, see [Connect to TiDB Serverless via Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections-serverless.md).
 
 TiDB Cloud supports highly secure and one-way access to the TiDB Cloud service hosted in a Google Cloud VPC via the [Private Service Connect](https://cloud.google.com/vpc/docs/private-service-connect). You can create an endpoint to connect to the TiDB Cloud service via the endpoint with permission.
@@ -27,18 +27,18 @@ For more detailed definitions of the private endpoint and endpoint service, see 
 
 ## Restrictions
 
-- This feature is applicable to TiDB Dedicated clusters created after April 13th, 2023. For older clusters, contact [support](/tidb-cloud/tidb-cloud-support.md) for assistance for assistance.
-- Only the organization owner and the project owner can create Google Cloud Private Service Connect endpoints.
+- This feature is applicable to TiDB Dedicated clusters created after April 13, 2023. For older clusters, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) for assistance.
+- Only the `Organization Owner` and `Project Owner` roles can create Google Cloud Private Service Connect endpoints.
 - You can create up to 10 endpoints for each TiDB Dedicated cluster.
-- You can create up to 8 Google Cloud clusters in a project with the endpoint service configured.
+- You can create up to 8 TiDB Dedicated clusters hosted on Google Cloud in a project with the endpoint service configured.
 - The private endpoint and the TiDB cluster must be located in the same region.
-- Egress firewall rules must permit traffic to the internal IP address of the endpoint. The implied allow egress firewall rule permits egress to any destination IP address.
-- If you have created egress deny firewall rules in your VPC network, or if you have created hierarchical firewall policies that modify the implied allowed egress behavior, access to the endpoint might be affected. You need to create a specific egress allow firewall rule or policy to permit traffic to internal IP address destination of the service endpoint.
+- Egress firewall rules must permit traffic to the internal IP address of the endpoint. The [implied allow egress firewall rule](https://cloud.google.com/firewall/docs/firewalls#default_firewall_rules) permits egress to any destination IP address.
+- If you have created egress deny firewall rules in your VPC network, or if you have created hierarchical firewall policies that modify the implied allowed egress behavior, access to the endpoint might be affected. In this case, you need to create a specific egress allow firewall rule or policy to permit traffic to the internal destination IP address of the endpoint.
 
 In most scenarios, it is recommended that you use private endpoint connection over VPC peering. However, in the following scenarios, you should use VPC peering instead of private endpoint connection:
 
 - You are using a [TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview) cluster to replicate data from a source TiDB cluster to a target TiDB cluster across regions, to get high availability. Currently, private endpoint does not support cross-region connection.
-- You are using a TiCDC cluster to replicate data to a downstream cluster (such as Amazon Aurora, MySQL, and Kafka) but you cannot maintain the endpoint service on your own.
+- You are using a TiCDC cluster to replicate data to a downstream cluster (such as Amazon Aurora, MySQL, and Kafka) but you cannot maintain the endpoint service of the downstream on your own.
 
 ### Prerequisites
 
