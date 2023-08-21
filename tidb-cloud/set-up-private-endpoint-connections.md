@@ -27,7 +27,7 @@ For more detailed definitions of the private endpoint and endpoint service, see 
 
 ## Restrictions
 
-- Only the organization owner and the project owner can create Google Cloud Private Service Connect endpoints.
+- Only the `Organization Owner` and the `Project Owner` roles can create private endpoints.
 - The private endpoint and the TiDB cluster must be located in the same region.
 
 In most scenarios, you are recommended to use private endpoint connection over VPC peering. However, in the following scenarios, you should use VPC peering instead of private endpoint connection:
