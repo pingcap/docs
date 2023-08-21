@@ -6,63 +6,73 @@ summary: This article describes how to connect TiDB using mysql2 in Next.js and 
 <!-- markdownlint-disable MD024 -->
 <!-- markdownlint-disable MD029 -->
 
-# Connect to TiDB by using mysql2 in Next.js
+# Build a CRUD Application with TiDB and mysql2 in Next.js
 
-TiDB is a MySQL-compatible database.
-
-[mysql2](https://www.npmjs.com/package/mysql2) is one of the most popular open-source Node.js drivers.
-
-This document shows you how to use TiDB and mysql2 to build a simple CRUD application.
+This guide demonstrates how to use TiDB and mysql2, a popular open-source Node.js driver, to build a simple CRUD application.
 
 ## Prerequisites
 
+Ensure you have the following installed:
+
 - [Node.js **18**](https://nodejs.org/en/download/) or later.
 - [Git](https://git-scm.com/downloads).
-- A TiDB cluster running
+- A running TiDB cluster. 
 
-**If you don't have a TiDB cluster yet, please create one with one of the following methods:**
+If you don't have a TiDB cluster yet, you can create one using one of the following methods:
 
 - (Recommended) Refer to [Create a TiDB Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
-- Refer to [Deploy a local test TiDB cluster](/quick-start-with-tidb.md) or [Deploy a formal TiDB cluster](/production-deployment-using-tiup.md) to create a local cluster.
+- Refer to [Deploy a local test TiDB cluster](/quick-start-with-tidb.md) or [Deploy a production TiDB cluster](/production-deployment-using-tiup.md) to create a local cluster.
 
 ## Run the sample application
 
-This section shows you how to run the sample application code and connect to TiDB.
+This section illustrates how to run the sample application code and connect to TiDB. 
 
-> **Note:** Complete code snippets and how to run them, see [tidb-nextjs-vercel-quickstart](https://github.com/tidb-samples/tidb-nextjs-vercel-quickstart) GitHub repository.
+> **Note:**
+>
+> For complete code snippets and running instructions, refer to the [tidb-nextjs-vercel-quickstart](https://github.com/tidb-samples/tidb-nextjs-vercel-quickstart) GitHub repository.
 
-### Step 1: Clone the sample application repository to your local machine
+### Step 1. Clone the sample application repository
+
+Clone the repository to your local machine:
 
 ```bash
 git clone git@github.com:tidb-samples/tidb-nextjs-vercel-quickstart.git
 cd tidb-nextjs-vercel-quickstart
 ```
 
-### Step 2: Install dependencies
+### Step 2. Install dependencies
+
+Install the necessary dependencies:
 
 ```bash
 npm install
 ```
 
-### step 3: Configure the connection string
+### Step 3. Configure the connection string
 
-Depending on the way you deploy TiDB, use different methods to connect to the TiDB cluster.
+The method to connect to the TiDB cluster varies based on your deployment method.
 
 <SimpleTab>
 
 <div label="TiDB Serverless">
 
-1. In the TiDB Cloud [Clusters](https://tidbcloud.com/console/clusters) page, select your TiDB Serverless cluster and go to the **Overview** page. Click **Connect** in the upper right corner.
+1. In the TiDB Cloud [Clusters page](https://tidbcloud.com/console/clusters), select your TiDB Serverless cluster and go to the **Overview** page. Click **Connect** in the upper right corner.
 
 2. In the connection dialog, select `General` from the **Connect With** dropdown and keep the default setting of the **Endpoint Type** as `Public`.
 
-  > **Note**: In Node.js applications, you don't have to provide an SSL CA certificate, because Node.js uses the built-in [Mozilla CA certificate](https://wiki.mozilla.org/CA/Included_Certificates) by default when establishing the TLS (SSL) connection.
+  > **Note**:
+  >
+  > In Node.js applications, you do not have to provide an SSL CA certificate, because Node.js uses the built-in [Mozilla CA certificate](https://wiki.mozilla.org/CA/Included_Certificates) by default when establishing the TLS (SSL) connection.
 
 3. If you have not set a password yet, click **Create password** to generate a random password.
 
-   <Tip>If you have generated a password before, you can use the original password directly, or click **Reset password** to generate a new password.</Tip>
+   <Tip>
+   
+   If you have generated a password before, you can use the original password directly, or click **Reset password** to generate a new password.
+   
+   </Tip>
 
-4. Run the following command to copy and rename `.env.example` to `.env`:
+4. Copy and rename `.env.example` to `.env`:
 
    ```bash
    # Linux
@@ -74,7 +84,7 @@ Depending on the way you deploy TiDB, use different methods to connect to the Ti
    Copy-Item ".env.example" -Destination ".env"
    ```
 
-5. Copy and paste the corresponding connection string to `.env`. The following is an example:
+5. Copy and paste the corresponding connection string into `.env`. The following is an example:
 
    ```bash
    TIDB_HOST='{gateway-region}.aws.tidbcloud.com'
@@ -92,7 +102,7 @@ Depending on the way you deploy TiDB, use different methods to connect to the Ti
 
 <div label="TiDB Self-Hosted">
 
-1. Run the following command to copy and rename `.env.example` to `.env`:
+1. Copy and rename `.env.example` to `.env`:
 
    ```bash
    # Linux
@@ -104,7 +114,7 @@ Depending on the way you deploy TiDB, use different methods to connect to the Ti
    Copy-Item ".env.example" -Destination ".env"
    ```
 
-2. Copy and paste the corresponding connection string to `.env`. The following is an example:
+2. Copy and paste the corresponding connection string into `.env`. The following is an example:
 
    ```bash
    TIDB_HOST='{tidb_server_host}'
@@ -122,15 +132,15 @@ Depending on the way you deploy TiDB, use different methods to connect to the Ti
 
 </SimpleTab>
 
-### Step 4: Run the sample application locally
+### Step 4. Run the sample application locally
 
-1. Run the following command to start the application:
+1. Start the application:
 
    ```bash
    npm run dev
    ```
 
-2. Open your browser and visit `http://localhost:3000`.(Check your terminal for the actual port number, default is `3000`)
+2. Open your browser and visit `http://localhost:3000`. (Check your terminal for the actual port number, and the default is `3000`.)
 
 3. Click the `run SQL` button to execute the sample code.
 
@@ -146,7 +156,7 @@ Depending on the way you deploy TiDB, use different methods to connect to the Ti
    }
    ```
 
-## Key Code Snippets
+## Key code snippets
 
 Complete code snippets are available in the [tidb-nextjs-vercel-quickstart](https://github.com/tidb-samples/tidb-nextjs-vercel-quickstart) GitHub repository.
 
