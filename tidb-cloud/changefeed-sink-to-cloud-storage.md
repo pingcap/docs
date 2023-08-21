@@ -1,11 +1,11 @@
 ---
 title: Sink to Cloud Storage
-Summary: Learn how to create a changefeed to stream data from a TiDB Dedicated cluster to cloud storage, such as Amazon S3, GCS.
+Summary: Learn how to create a changefeed to stream data from a TiDB Dedicated cluster to cloud storage, such as Amazon S3 and GCS.
 ---
 
 # Sink to Cloud Storage
 
-This document describes how to create a changefeed to stream data from TiDB Cloud to cloud storage. Currently, only Amazon S3 and GCS are supported.
+This document describes how to create a changefeed to stream data from TiDB Cloud to cloud storage. Currently, Amazon S3 and GCS are supported.
 
 > **Note:**
 >
@@ -38,9 +38,9 @@ For **GCS**, before filling **GCS Endpoint**, you need to first grant the GCS bu
 
     ![gcs_endpoint](/media/tidb-cloud/changefeed/sink-to-cloud-storage-gcs-endpoint.png)
 
-2. In the Google Cloud Platform (GCP) Management Console, create an IAM role for your GCS bucket.
+2. In the Google Cloud Management Console, create an IAM role for your GCS bucket.
 
-    1. Sign in to the [GCP Management Console](https://console.cloud.google.com/).
+    1. Sign in to the [Google Cloud Management Console](https://console.cloud.google.com/).
     2. Go to the [Roles](https://console.cloud.google.com/iam-admin/roles) page, and then click **Create role**.
 
         ![Create a role](/media/tidb-cloud/changefeed/sink-to-cloud-storage-gcs-create-role.png)
