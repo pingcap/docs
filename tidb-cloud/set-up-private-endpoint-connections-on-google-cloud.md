@@ -27,7 +27,7 @@ For more detailed definitions of the private endpoint and endpoint service, see 
 
 ## Restrictions
 
-- This feature is applicable to TiDB Dedicated clusters created after April 13th, 2023. For older clusters, contact support for assistance.
+- This feature is applicable to TiDB Dedicated clusters created after April 13th, 2023. For older clusters, contact [support](/tidb-cloud/tidb-cloud-support.md) for assistance for assistance.
 - Only the organization owner and the project owner can create Google Cloud Private Service Connect endpoints.
 - You can create up to 10 endpoints for each TiDB Dedicated cluster.
 - You can create up to 8 Google Cloud clusters in a project with the endpoint service configured.
