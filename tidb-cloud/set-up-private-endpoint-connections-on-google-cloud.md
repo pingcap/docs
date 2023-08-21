@@ -32,18 +32,6 @@ For more detailed definitions of the private endpoint and endpoint service, see 
 - You can create up to 10 endpoints for each TiDB Dedicated cluster.
 - You can create up to 8 Google Cloud clusters in a project with the endpoint service configured.
 - The private endpoint and the TiDB cluster must be located in the same region.
-- Before you begin to create an endpoint:
-    - [Enable](https://console.cloud.google.com/apis/library/compute.googleapis.com) the following APIs in your project:
-        - [Compute Engine API](https://cloud.google.com/compute/docs/reference/rest/v1)
-        - [Service Directory API](https://cloud.google.com/service-directory/docs/reference/rest)
-        - [Cloud DNS API](https://cloud.google.com/dns/docs/reference/v1)
-    - Prepare the following [IAM roles](https://cloud.google.com/iam/docs/understanding-roles) with the permissions needed to create an endpoint.
-
-        | Task | Required IAM Roles |
-        |---|---|
-        | Create an endpoint | [Compute Network Admin](https://cloud.google.com/iam/docs/understanding-roles#compute.networkAdmin) (roles/compute.networkAdmin) and [Service Directory Editor](https://cloud.google.com/iam/docs/understanding-roles#servicedirectory.editor) (roles/servicedirectory.editor) |
-        | Automatically or manually configure [DNS entries](https://cloud.google.com/vpc/docs/configure-private-service-connect-services#dns-endpoint) for an endpoint | [Compute Network Admin](https://cloud.google.com/iam/docs/understanding-roles#compute.networkAdmin) (roles/compute.networkAdmin) and [Service Directory Editor](https://cloud.google.com/iam/docs/understanding-roles#servicedirectory.editor) (roles/servicedirectory.editor) |
-
 - Egress firewall rules must permit traffic to the internal IP address of the endpoint. The implied allow egress firewall rule permits egress to any destination IP address.
 - If you have created egress deny firewall rules in your VPC network, or if you have created hierarchical firewall policies that modify the implied allowed egress behavior, access to the endpoint might be affected. You need to create a specific egress allow firewall rule or policy to permit traffic to internal IP address destination of the service endpoint.
 
@@ -51,6 +39,22 @@ In most scenarios, it is recommended that you use private endpoint connection ov
 
 - You are using a [TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview) cluster to replicate data from a source TiDB cluster to a target TiDB cluster across regions, to get high availability. Currently, private endpoint does not support cross-region connection.
 - You are using a TiCDC cluster to replicate data to a downstream cluster (such as Amazon Aurora, MySQL, and Kafka) but you cannot maintain the endpoint service on your own.
+
+### Prerequisites
+
+Before you begin to create an endpoint:
+
+- [Enable](https://console.cloud.google.com/apis/library/compute.googleapis.com) the following APIs in your project:
+    - [Compute Engine API](https://cloud.google.com/compute/docs/reference/rest/v1)
+    - [Service Directory API](https://cloud.google.com/service-directory/docs/reference/rest)
+    - [Cloud DNS API](https://cloud.google.com/dns/docs/reference/v1)
+
+- Prepare the following [IAM roles](https://cloud.google.com/iam/docs/understanding-roles) with the permissions needed to create an endpoint.
+
+    | Task | Required IAM Roles |
+    |---|---|
+    | Create an endpoint | [Compute Network Admin](https://cloud.google.com/iam/docs/understanding-roles#compute.networkAdmin) (roles/compute.networkAdmin) and [Service Directory Editor](https://cloud.google.com/iam/docs/understanding-roles#servicedirectory.editor) (roles/servicedirectory.editor) |
+    | Automatically or manually configure [DNS entries](https://cloud.google.com/vpc/docs/configure-private-service-connect-services#dns-endpoint) for an endpoint | [Compute Network Admin](https://cloud.google.com/iam/docs/understanding-roles#compute.networkAdmin) (roles/compute.networkAdmin) and [Service Directory Editor](https://cloud.google.com/iam/docs/understanding-roles#servicedirectory.editor) (roles/servicedirectory.editor) |
 
 ## Set up a private endpoint with Google Cloud Private Service Connect
 
