@@ -76,7 +76,7 @@ Full backup occupies much storage space and contains only cluster data at a spec
 
 #### Backup performance and impact on TiDB clusters
 
-- The impact of backup on a TiDB cluster is kept below 20%, and this value can be reduced to 10% or less with the proper configuration of the TiDB cluster. The backup speed of a TiKV node is scalable and ranges from 50 MB/s to 100 MB/s. For more information, see [Backup performance and impact](/br/br-snapshot-guide.md#performance-and-impact-of-snapshot-backup).
+- When there are sufficient cluster CPU and I/O resources, the impact of backup on a TiDB cluster is kept below 20%, and this value can be reduced to 10% or less with the proper configuration of the TiDB cluster. When the cluster CPU and I/O resources are insufficient, you can adjust the TiKV configuration item [`backup.num-threads`](/tikv-configuration-file.md#num-threads-1) to adjust the number of worker threads used by the backup task to reduce the impact of the backup task on the TiDB cluster. The backup speed of a TiKV node is scalable and ranges from 50 MB/s to 100 MB/s. For more information, see [Backup performance and impact](/br/br-snapshot-guide.md#performance-and-impact-of-snapshot-backup).
 - When there are only log backup tasks, the impact on the cluster is about 5%. Log backup flushes all the changes generated after the last refresh every 3-5 minutes to the backup storage, which can **achieve a Recovery Point Objective (RPO) as short as five minutes**.
 
 ### Restore backup data
