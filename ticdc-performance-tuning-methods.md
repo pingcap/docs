@@ -23,18 +23,18 @@ With the following metrics, you can get an overview of TiCDC data replication:
 
 - Changefeed checkpoint lag: the progress lag of data replication between the upstream and the downstream, measured in seconds.
 
-    If the speed at which TiCDC consumes data and writes downstream can keep up with upstream data changes, this metric remains within a small latency range, typically within 10 seconds. Otherwise, this metric will continue to increase.
+    If the speed at which TiCDC consumes data and writes downstream keeps up with upstream data changes, this metric remains within a small latency range, typically within 10 seconds. Otherwise, this metric will continue to increase.
 
-    When this metric (that is, TiCDC checkpoint lag) increases, common reasons are as follows:
+    When this metric (that is, `Changefeed checkpoint lag`) increases, common reasons are as follows:
 
     - Insufficient system resources: if the CPU, memory, or disk space of TiCDC is insufficient, it might cause data processing to be too slow, which results in a long checkpoint of the TiCDC changefeed.
     - Network issues: if network interruptions, lags, or insufficient bandwidth occur in TiCDC, it might affect data transfer speed, which results in a long checkpoint of the TiCDC changefeed.
     - High QPS in the upstream: if the data to be processed by TiCDC is excessively large, it might cause data processing timeouts, which results in an increased checkpoint of the TiCDC changefeed. Typically, a single TiCDC node can handle a maximum QPS of around 60K.
     - Database issues:
-        - The gap between the `min resolved ts` of the upstream TiKV cluster and the latest PD TSO is significant. This is usually due to that TiKV fails to advance the resolved ts in time when the write load of the upstream is excessively heavy.
-        - The write latency in downstream databases is high, blocking TiCDC from replicating data to the downstream in a timely manner.
+        - The gap between the `min resolved ts` of the upstream TiKV cluster and the latest PD TSO is significant. This issue usually occurs because TiKV fails to advance the resolved ts in time when the write workload of the upstream is excessively heavy.
+        - The write latency in downstream databases is high, blocking TiCDC from replicating data to the downstream timely.
 
-- Changefeed resolved ts lag: the progress difference between the internal replication status of a TiCDC node and the upstream, measured in seconds. If this metric is high, it indicates that the data processing capability of the TiCDC Puller or Sorter module might be insufficient, or there might be network latency or slow disk read/write speed issues. In such cases, to ensure the efficient and stable operation of TiCDC, you need to take appropriate measures, such as increasing the number of TiCDC instances or optimizing the network configuration.
+- Changefeed resolved ts lag: the progress lag between the internal replication status of a TiCDC node and the upstream, measured in seconds. If this metric is high, it indicates that the data processing capability of the TiCDC Puller or Sorter module might be insufficient, or there might be network latency or slow disk read/write speed issues. In such cases, to ensure the efficient and stable operation of TiCDC, you need to take appropriate measures, such as increasing the number of TiCDC nodes or optimizing the network configuration.
 - The status of changefeeds: for status explanations of changefeeds, see [Changefeed state transfer](/ticdc/ticdc-changefeed-overview.md).
 
 Example 1: high checkpoint lag due to high upstream QPS in the case of a single TiCDC node
@@ -61,7 +61,7 @@ With the following metrics, you can learn the data flow throughput and downstrea
 
 Example 2: Impact of downstream database write speed on TiCDC data replication performance
 
-In this example, both upstream and downstream are TiDB clusters. As shown in the following diagram, the TiCDC `Puller output events/s` indicates the QPS of the upstream database. The `Transaction Sink Full Flush Duration` indicates the average write latency of the downstream database, which is high during the first workload and low during the second workload.
+As shown in the following diagram, both upstream and downstream are TiDB clusters. The TiCDC `Puller output events/s` metric indicates the QPS of the upstream database. The `Transaction Sink Full Flush Duration` metric indicates the average write latency of the downstream database, which is high during the first workload and low during the second workload.
 
 - During the first workload, because the downstream TiDB cluster writes data slowly, TiCDC consumes data at a speed that falls behind the upstream QPS, leading to a continuous increase in `Changefeed checkpoint lag`. However, `Changefeed resolved ts lag` remains within 300 milliseconds, indicating that replication lag and throughput bottlenecks are not caused by the puller and sorter modules but caused by the downstream sink module.
 - During the second workload, because the downstream TiDB cluster writes data faster, TiCDC replicates data at a speed that completely catches up with the upstream, so the `Changefeed checkpoint lag` and `Changefeed resolved ts lag` remain within 500 milliseconds, which is a relatively ideal replication speed for TiCDC.
