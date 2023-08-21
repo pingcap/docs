@@ -20,15 +20,22 @@ This document shows you how to use TiDB and mysql2 to build a simple CRUD applic
 
 - [Node.js **18**](https://nodejs.org/en/download/) or later.
 - [Git](https://git-scm.com/downloads).
-- TiDB cluster. If you don't have a TiDB cluster, you can create one by following the steps below:
-    - (Recommended) Refer to [Create a TiDB Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-tidb-serverless-cluster) to create your own TiDB Cloud cluster.
-    - Refer to [Deploy a local test TiDB cluster](/quick-start-with-tidb.md#deploy-a-local-test-cluster) or [Deploy a formal TiDB cluster](/production-deployment-using-tiup.md) to create a local cluster.
-- AWS account. If you don't have an AWS account, you can create one by following the steps below:
-    - Refer to [Create an AWS Lambda Function](https://docs.aws.amazon.com/lambda/latest/dg/getting-started.html) to create an AWS Lambda Function.
+- A TiDB cluster running
+- An [AWS account](https://repost.aws/knowledge-center/create-and-activate-aws-account).
+- An AWS user can access the Lambda function.
+
+**If you don't have a TiDB cluster yet, please create one with one of the following methods:**
+
+- (Recommended) Refer to [Create a TiDB Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
+- Refer to [Deploy a local test TiDB cluster](/quick-start-with-tidb.md) or [Deploy a formal TiDB cluster](/production-deployment-using-tiup.md) to create a local cluster.
+
+**If you don't have an AWS account and user, you can create them by following the steps in the [Getting started with Lambda](https://docs.aws.amazon.com/lambda/latest/dg/getting-started.html) guide.**
 
 ## Run the sample application
 
 This section shows you how to run the sample application code and connect to TiDB.
+
+> **Note:** Complete code snippets and how to run them, see [tidb-aws-lambda-quickstart](https://github.com/tidb-samples/tidb-aws-lambda-quickstart) GitHub repository.
 
 ### Step 1: Clone the sample application repository to your local machine
 
@@ -53,13 +60,9 @@ Depending on the way you deploy TiDB, use different methods to connect to the Ti
 
 1. In the TiDB Cloud [Clusters](https://tidbcloud.com/console/clusters) page, select your TiDB Serverless cluster and go to the **Overview** page. Click **Connect** in the upper right corner.
 
-2. In the connection dialog confirm that the configuration is consistent with your runtime environment.
+2. In the connection dialog, select `General` from the **Connect With** dropdown and keep the default setting of the **Endpoint Type** as `Public`.
 
-   - Endpoint Type is **Public**.
-   - Connect With is **General**.
-   - Operating System is your runtime environment.
-
-   <Tip>If you are running in Windows Subsystem for Linux (WSL), switch to the corresponding Linux distribution.</Tip>
+  > **Note**: In Node.js applications, you don't have to provide an SSL CA certificate, because Node.js uses the built-in [Mozilla CA certificate](https://wiki.mozilla.org/CA/Included_Certificates) by default when establishing the TLS (SSL) connection.
 
 3. If you have not set a password yet, click **Create password** to generate a random password.
 
@@ -80,13 +83,15 @@ Depending on the way you deploy TiDB, use different methods to connect to the Ti
 
    Replace the placeholders in `{}` with the values obtained in the connection dialog.
 
-5. [Configure Step.4 environment variables](https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html) in Lambda Function.
+5. [Copy and configure the corresponding connection string](https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html) in Lambda Function.
+
+  ![quickstart-lambda-env](/media/develop/quickstart-lambda-env.png)
 
 </div>
 
 <div label="TiDB Self-Hosted">
 
-1. Copy and paste the corresponding connection string. The following is an example:
+1. Copy and paste the corresponding connection string to `env.json`. The following is an example:
 
    ```json
    {
@@ -101,7 +106,9 @@ Depending on the way you deploy TiDB, use different methods to connect to the Ti
 
    Replace the placeholders in `{}` with the values obtained in the **Connect** window.
 
-2. [Configure Step.1 environment variables](https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html) in Lambda Function..
+2. [Copy and configure the corresponding connection string](https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html) in Lambda Function.
+
+  ![quickstart-lambda-env](/media/develop/quickstart-lambda-env.png)
 
 </div>
 
@@ -135,11 +142,11 @@ You can refer to the following key code snippets to complete your application de
 import mysql from 'mysql2';
 
 const pool = mysql.createPool({
-  host,
-  port,
-  user,
-  password,
-  database,
+  host, // TiDB host, for example: {gateway-region}.aws.tidbcloud.com
+  port, // TiDB port, default: 4000
+  user, // TiDB user, for example: {prefix}.root
+  password, // TiDB password
+  database, // TiDB database name, default: test
   ssl: {
     minVersion: 'TLSv1.2',
     rejectUnauthorized: true,
@@ -191,9 +198,18 @@ Refer to [Delete data](/develop/dev-guide-delete-data.md) for more information.
 
 ## Considerations
 
-- Complete code snippets and how to run them, see [tidb-aws-lambda-quickstart](https://github.com/tidb-samples/tidb-aws-lambda-quickstart) GitHub repository.
-- The driver is not highly encapsulated, so you will see a lot of SQL statements in the program. Unlike ORM, because there is no data object, the query object of `mysql2` is represented by a object. Although the Node.js driver is convenient, it still requires manual control of the transaction characteristics because it cannot shield the underlying implementation. If there are no scenarios that must use SQL, it is still recommended to use ORM to write programs. This can reduce the coupling of the program.
+- The driver lacks high encapsulation, resulting in visible SQL statements throughout the program.
+- Unlike ORM, `mysql2` represents the query object with a separate object instead of a data object.
+- While the Node.js driver is convenient, it requires manual control of transaction characteristics due to the absence of shielding the underlying implementation.
+- If SQL usage is not mandatory, it is advisable to utilize ORM for program development.
+- This approach(ORM) can reduce program coupling and enhance code maintainability.
 
 ## What's next
 
-- You can continue to read the developer documentation to learn more about TiDB. For example: [Insert data](/develop/dev-guide-insert-data.md), [Update data](/develop/dev-guide-update-data.md), [Delete data](/develop/dev-guide-delete-data.md), [Get data from single table](/develop/dev-guide-get-data-from-single-table.md), [Transaction](/develop/dev-guide-transaction-overview.md), [SQL performance optimization](/develop/dev-guide-optimize-sql-overview.md), etc.
+To deepen your understanding of TiDB, you can explore the developer documentation, which covers various topics such as:
+- [Insert data](/develop/dev-guide-insert-data.md)
+- [Update data](/develop/dev-guide-update-data.md)
+- [Delete data](/develop/dev-guide-delete-data.md)
+- [Get data from single table](/develop/dev-guide-get-data-from-single-table.md)
+- [Transaction](/develop/dev-guide-transaction-overview.md)
+- [SQL performance optimization](/develop/dev-guide-optimize-sql-overview.md)
