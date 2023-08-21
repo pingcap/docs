@@ -1,6 +1,6 @@
 ---
 title: Connect to a TiDB Dedicated Cluster via Google Cloud Private Service Connect
-summary: Learn how to connect to your TiDB Cloud cluster via Private Service Connect with Google Cloud.
+summary: Learn how to connect to your TiDB Cloud cluster via Google Cloud Private Service Connect.
 ---
 
 # Connect to a TiDB Dedicated Cluster via Google Cloud Private Service Connect
@@ -40,22 +40,6 @@ In most scenarios, it is recommended that you use private endpoint connection ov
 - You are using a [TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview) cluster to replicate data from a source TiDB cluster to a target TiDB cluster across regions, to get high availability. Currently, private endpoint does not support cross-region connection.
 - You are using a TiCDC cluster to replicate data to a downstream cluster (such as Amazon Aurora, MySQL, and Kafka) but you cannot maintain the endpoint service of the downstream on your own.
 
-### Prerequisites
-
-Before you begin to create an endpoint:
-
-- [Enable](https://console.cloud.google.com/apis/library/compute.googleapis.com) the following APIs in your project:
-    - [Compute Engine API](https://cloud.google.com/compute/docs/reference/rest/v1)
-    - [Service Directory API](https://cloud.google.com/service-directory/docs/reference/rest)
-    - [Cloud DNS API](https://cloud.google.com/dns/docs/reference/v1)
-
-- Prepare the following [IAM roles](https://cloud.google.com/iam/docs/understanding-roles) with the permissions needed to create an endpoint.
-
-    | Task | Required IAM Roles |
-    |---|---|
-    | Create an endpoint | [Compute Network Admin](https://cloud.google.com/iam/docs/understanding-roles#compute.networkAdmin) (roles/compute.networkAdmin) and [Service Directory Editor](https://cloud.google.com/iam/docs/understanding-roles#servicedirectory.editor) (roles/servicedirectory.editor) |
-    | Automatically or manually configure [DNS entries](https://cloud.google.com/vpc/docs/configure-private-service-connect-services#dns-endpoint) for an endpoint | [Compute Network Admin](https://cloud.google.com/iam/docs/understanding-roles#compute.networkAdmin) (roles/compute.networkAdmin) and [Service Directory Editor](https://cloud.google.com/iam/docs/understanding-roles#servicedirectory.editor) (roles/servicedirectory.editor) |
-
 ## Set up a private endpoint with Google Cloud Private Service Connect
 
 To connect to your TiDB Dedicated cluster via a private endpoint, complete the [prerequisites](#prerequisites) and follow these steps:
@@ -68,6 +52,21 @@ To connect to your TiDB Dedicated cluster via a private endpoint, complete the [
 If you have multiple clusters, you need to repeat these steps for each cluster that you want to connect to using Google Cloud Private Service Connect.
 
 ### Prerequisites
+
+Before you begin to create an endpoint:
+
+- [Enable](https://console.cloud.google.com/apis/library/compute.googleapis.com) the following APIs in your project:
+    - [Compute Engine API](https://cloud.google.com/compute/docs/reference/rest/v1)
+    - [Service Directory API](https://cloud.google.com/service-directory/docs/reference/rest)
+    - [Cloud DNS API](https://cloud.google.com/dns/docs/reference/v1)
+
+- Prepare the following [IAM roles](https://cloud.google.com/iam/docs/understanding-roles) with the permissions needed to create an endpoint.
+
+    | Tasks | Required IAM Roles |
+    |---|---|
+    | <ul><li>Create an endpoint</li><li>Automatically or manually configure [DNS entries](https://cloud.google.com/vpc/docs/configure-private-service-connect-services#dns-endpoint) for an endpoint</li></ul> | [Compute Network Admin](https://cloud.google.com/iam/docs/understanding-roles#compute.networkAdmin) (roles/compute.networkAdmin) and [Service Directory Editor](https://cloud.google.com/iam/docs/understanding-roles#servicedirectory.editor) (roles/servicedirectory.editor) |
+
+Perform the following steps to go to the **Google Cloud Private Endpoint** page:
 
 1. Log in to the [TiDB Cloud console](https://tidbcloud.com).
 2. Click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner, switch to the target project if you have multiple projects, and then click **Project Settings**.

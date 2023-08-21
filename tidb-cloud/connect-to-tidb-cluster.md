@@ -19,7 +19,7 @@ After your TiDB Dedicated cluster is created on TiDB Cloud, you can connect to i
 
 - [Connect via private endpoint](/tidb-cloud/set-up-private-endpoint-connections.md) (recommended)
 
-    Private endpoint connection provides a private endpoint to allow SQL clients in your VPC to securely access services over AWS PrivateLink, which provides highly secure and one-way access to database services with simplified network management.
+    Private endpoint connection provides a private endpoint to allow SQL clients in your VPC to securely access services over AWS PrivateLink and Google Cloud Private Service Connect, which provides highly secure and one-way access to database services with simplified network management.
 
 - [Connect via VPC peering](/tidb-cloud/set-up-vpc-peering-connections.md)
 
