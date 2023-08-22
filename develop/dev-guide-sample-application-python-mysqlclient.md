@@ -88,7 +88,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
     CA_PATH=''
     ```
 
-    Be sure to replace the placeholders `{}` with the values obtained from the **Connect** window.
+    Be sure to replace the placeholders `{}` with the values obtained from the connection dialog.
 
     TiDB Serverless requires a secure connection. Since the `ssl_mode` of mysqlclient defaults to `PREFERRED`, you don't need to manually specify `CA_PATH`. Just leave it empty. But if you have a special reason to specify `CA_PATH` manually, you can refer to the [TLS Connections to TiDB Serverless](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md) to get the certificate paths for different operating systems.
 
