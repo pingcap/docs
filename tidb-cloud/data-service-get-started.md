@@ -21,7 +21,7 @@ Before creating a Data App, make sure that you have created a [TiDB Serverless](
 
 ## Step 1. Create a Data App
 
-A Data App is a group of endpoints that you can use to access data for a specific application. To create a Data App, perform the following steps:
+A Data App is a collection of endpoints that you can use to access data for a specific application. To create a Data App, perform the following steps:
 
 1. In the [TiDB Cloud console](https://tidbcloud.com), click <MDSvgIcon name="icon-left-data-service" /> **Data Service** in the left navigation pane.
 
