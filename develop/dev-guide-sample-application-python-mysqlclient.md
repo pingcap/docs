@@ -224,7 +224,7 @@ For more information, refer to [Update Data](/develop/dev-guide-delete-data.md).
 - This Python driver is relatively low-level, so you will see a lot of SQL statements in the sample app. Unlike ORMs, there is no data object, and `mysqlclient` represents query objects with tuples. Although Python's driver is more convenient to use than those in other languages, due to its exposure to underlying implementations and the manual transaction management required, it is still recommended to use ORMs for programming unless there is a significant need for SQL. This can reduce the coupling of your app.
 - For more on how to use `mysqlclient`, refer to the [mysqlclient official documentation](https://mysqlclient.readthedocs.io/).
 
-## Next Steps
+## Next steps
 
 - You can continue reading the developer documentation to get more knowledge about TiDB development, such as: [Insert Data](/develop/dev-guide-insert-data.md), [Update Data](/develop/dev-guide-update-data.md), [Delete Data](/develop/dev-guide-delete-data.md), [Single Table Reading](/develop/dev-guide-get-data-from-single-table.md), [Transactions](/develop/dev-guide-transaction-overview.md), [SQL Performance Optimization](/develop/dev-guide-optimize-sql-overview.md), etc.
 - If you prefer to learn through courses, we also offer professional [TiDB Developer Courses](https://www.pingcap.com/education/), and provide [TiDB certifications](https://www.pingcap.com/education/certification/) after the exam.
