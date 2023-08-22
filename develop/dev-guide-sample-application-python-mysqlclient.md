@@ -148,7 +148,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 </div>
 </SimpleTab>
 
-## Sample Code Snippets
+## Sample code snippets
 
 You can refer to the following sample code snippets to complete your own application development.
 
