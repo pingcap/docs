@@ -224,8 +224,8 @@ Refer to [Delete data](/develop/dev-guide-delete-data.md) for more information.
 
 ## Considerations
 
-- It's recommended that using ORM frameworks to improve development efficiency in scenarios without a lot of complex SQL, such as [Sequelize](https://sequelize.org/), [Prisma](https://www.prisma.io/) and [TypeORM](https://typeorm.io/).
-- For more details about how to build a complex application with ORM and Next.js, see [our Bookshop Demo](https://github.com/pingcap/tidb-prisma-vercel-demo).
+- It is recommended to use ORM frameworks like [Sequelize](https://sequelize.org/), [Prisma](https://www.prisma.io/), and [TypeORM](https://typeorm.io/) to improve development efficiency in scenarios that do not involve a lot of complex SQL.
+- For more details on how to build a complex application with ORM and Next.js, see [our Bookshop Demo](https://github.com/pingcap/tidb-prisma-vercel-demo).
 
 ## What's next
 
