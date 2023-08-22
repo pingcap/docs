@@ -181,7 +181,8 @@ Currently, tidb-loadbalance supports the following policies: roundrobin, random,
 
 > **Note:**
 >
-> tidb-loadbalance must be used with [mysql-connector-j](https://github.com/pingcap/mysql-connector-j).
+> - tidb-loadbalance must be used with [mysql-connector-j](https://github.com/pingcap/mysql-connector-j).
+> - Do not use tidb-loadbalance in your production environment.
 
 If you use Maven, add the following content to the element body of `<dependencies></dependencies>` in the `pom.xml` file:
 
