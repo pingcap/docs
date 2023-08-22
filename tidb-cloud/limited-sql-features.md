@@ -245,4 +245,4 @@ TiDB Cloud works with almost all workloads that TiDB supports, but there are som
 
 [^11]: The variable is read-only on TiDB Serverless.
 
-[^12]: Customizing cache size using [`AUTO_ID_CACHE`](/auto-increment.md#cache-size-control) is temorarily unavailable on TiDB Serverless.
+[^12]: Customizing cache size using [`AUTO_ID_CACHE`](/auto-increment.md#cache-size-control) is temporarily unavailable on TiDB Serverless.
