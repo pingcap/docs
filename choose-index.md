@@ -274,21 +274,21 @@ mysql> explain select /*+ use_index_merge(t, k1, k2, ka) */ * from t where (1 me
 5 rows in set, 6 warnings (0.01 sec)
 ```
 
-Currently only one index can be used, instead of generating a plan like below that can use multiple indexes to access at the same time:
+Currently, TiDB only supports using one index to access instead of generating the following plan that uses multiple indexes to access at the same time:
 
 ```
-  Selection
-  └─IndexMerge
-    ├─IndexRangeScan(k1)
-    ├─IndexRangeScan(k2)
-    ├─IndexRangeScan(ka)
-    └─Selection
-      └─TableRowIDScan
+Selection
+└─IndexMerge
+  ├─IndexRangeScan(k1)
+  ├─IndexRangeScan(k2)
+  ├─IndexRangeScan(ka)
+  └─Selection
+    └─TableRowIDScan
 ```
 
-### Scenarios that multi-valued indexes cannot support
+### Unsupported scenarios
 
-For `OR` conditions composed of multiple expressions, and these expressions are corresponding to multiple different indexes, then multi-valued indexes cannot be used:
+For `OR` conditions composed of multiple expressions that correspond to multiple different indexes, multi-valued indexes cannot be used:
 
 ```sql
 mysql> create table t(j1 json, j2 json, a int, INDEX k1((CAST(j1->'$.path' AS SIGNED ARRAY))), INDEX k2((CAST(j2->'$.path' AS SIGNED ARRAY))), INDEX ka(a));
