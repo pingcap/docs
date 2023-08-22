@@ -29,7 +29,8 @@ For more detailed definitions of the private endpoint and endpoint service, see 
 
 - This feature is applicable to TiDB Dedicated clusters created after April 13, 2023. For older clusters, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) for assistance.
 - Only the `Organization Owner` and `Project Owner` roles can create Google Cloud Private Service Connect endpoints.
-- You can create up to 10 endpoints for each TiDB Dedicated cluster.
+- Each TiDB cluster can handle connections from up to 10 endpoints.
+- Each Google Cloud project can have up to 10 endpoints connecting to a TiDB Cluster.
 - You can create up to 8 TiDB Dedicated clusters hosted on Google Cloud in a project with the endpoint service configured.
 - The private endpoint and the TiDB cluster to be connected must be located in the same region.
 - Egress firewall rules must permit traffic to the internal IP address of the endpoint. The [implied allow egress firewall rule](https://cloud.google.com/firewall/docs/firewalls#default_firewall_rules) permits egress to any destination IP address.
