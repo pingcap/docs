@@ -1,6 +1,6 @@
 ---
 title: Connect to TiDB by using mysql2 in Next.js
-summary: This article describes how to connect TiDB using mysql2 in Next.js and provides a simple example code snippet.
+summary: This article describes how to build a CRUD application using TiDB and mysql2 in Next.js and provides a simple example code snippet.
 ---
 
 <!-- markdownlint-disable MD024 -->
