@@ -57,7 +57,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 <SimpleTab>
 <div label="TiDB Serverless">
 
-1. In the TiDB Cloud, select your TiDB Serverless cluster. Go to the **Overview** page, and click the **Connect** button in the upper right corner.
+1. In the TiDB Cloud, navigate to the [Clusters](https://tidbcloud.com/console/clusters) page, select your TiDB Serverless cluster. Go to the **Overview** page, and click the **Connect** button in the upper right corner.
 
 2. Ensure the configurations in the confirmation window match your operating environment.
 
