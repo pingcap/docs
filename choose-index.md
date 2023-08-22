@@ -253,9 +253,9 @@ mysql> EXPLAIN SELECT /*+ use_index_merge(t3, idx) */ * FROM t3 WHERE ((a=1 AND 
 +---------------------------------+---------+-----------+---------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------+
 ```
 
-### Scenarios that multi-valued indexes cannot support completely
+### Partially supported scenarios
 
-For `AND` conditions composed of multiple expressions, and these expressions are corresponding to multiple different indexes, then only one multi-valued index can be used:
+For `AND` conditions composed of multiple expressions that correspond to multiple different indexes, only one multi-valued index can be used to access:
 
 ```sql
 mysql> create table t(j1 json, j2 json, a int, INDEX k1((CAST(j1->'$.path' AS SIGNED ARRAY))), INDEX k2((CAST(j2->'$.path' AS SIGNED ARRAY))), INDEX ka(a));
