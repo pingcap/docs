@@ -60,6 +60,7 @@ TiDB Cloud works with almost all workloads that TiDB supports, but there are som
 | `SHOW PLUGINS` | Supported | Not supported [^8] |
 | `SHOW PUMP STATUS` | Not supported [^7] | Not supported [^7] |
 | `SHUTDOWN` | Not supported [^4] | Not supported [^4] |
+| `CREATE TABLE ... AUTO_ID_CACHE` | Supported | Not supported [^12] |
 
 ## Functions and operators
 
@@ -243,3 +244,5 @@ TiDB Cloud works with almost all workloads that TiDB supports, but there are som
 [^10]: TiDB Serverless enforces strong password policy.
 
 [^11]: The variable is read-only on TiDB Serverless.
+
+[^12]: Customizing cache size using [`AUTO_ID_CACHE`](/auto-increment.md#cache-size-control) is temporarily unavailable on TiDB Serverless.
