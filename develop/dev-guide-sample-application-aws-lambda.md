@@ -25,7 +25,7 @@ If you don't have a TiDB cluster yet, you can create one using one of the follow
 - (Recommended) Refer to [Create a TiDB Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
 - Refer to [Deploy a local test TiDB cluster](/quick-start-with-tidb.md) or [Deploy a formal TiDB cluster](/production-deployment-using-tiup.md) to create a local cluster.
 
-If you don't have an AWS account and user, you can create them by following the steps in the [Getting started with Lambda](https://docs.aws.amazon.com/lambda/latest/dg/getting-started.html) guide.
+If you don't have an AWS account or a user, you can create them by following the steps in the [Getting Started with Lambda](https://docs.aws.amazon.com/lambda/latest/dg/getting-started.html) guide.
 
 ## Run the sample application
 
@@ -221,7 +221,7 @@ Refer to [Delete data](/develop/dev-guide-delete-data.md) for more information.
 
 ## Considerations
 
-- It's recommended that using ORM frameworks to improve development efficiency in scenarios without a lot of complex SQL, such as [Sequelize](https://sequelize.org/), [Prisma](https://www.prisma.io/) and [TypeORM](https://typeorm.io/).
+- It is recommended to use ORM frameworks like [Sequelize](https://sequelize.org/), [Prisma](https://www.prisma.io/), and [TypeORM](https://typeorm.io/) to improve development efficiency in scenarios that do not involve a lot of complex SQL.
 
 ## What's next
 
