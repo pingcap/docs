@@ -97,7 +97,7 @@ You can select a cluster with any of the following statuses:
 
 ### Step 3. Accept endpoint access
 
-After executing the command in Google Cloud Shell, go back to the TiDB Cloud console and then click **Accept Endpoint Access**.
+After executing the command in Google Cloud Shell successfully, go back to the TiDB Cloud console and then click **Accept Endpoint Access**.
 
 If you see an error `No connection request received from the endpoint.`, make sure that you have copied the command correctly and successfully executed it in your Google Cloud Shell.
 
@@ -105,10 +105,9 @@ If you see an error `No connection request received from the endpoint.`, make su
 
 After you have accepted the endpoint connection, take the following steps to connect to your TiDB cluster:
 
-1. On the [**Clusters**](https://tidbcloud.com/console/clusters) page, click the name of your target cluster to go to its overview page.
-2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
-3. Select the **Private Endpoint** tab, and then select the **Google Cloud** tab. The private endpoint you just created is displayed.
-4. In the **Action** column, click **Connect**, click the tab of your preferred connection method, and then connect to your cluster with the connection string. The placeholders `<cluster_endpoint_name>:<port>` in the connection string are automatically replaced with the real values.
+1. On the [**Clusters**](https://tidbcloud.com/console/clusters) page, click **...** in the **Action** column.
+2. Click **Connect**. A connection dialog is displayed.
+3. Select the **Private Endpoint** tab. The private endpoint you just created is displayed. Copy the command to connect to the TiDB cluster.
 
 ### Private endpoint status reference
 
@@ -132,7 +131,7 @@ The possible statuses of a private endpoint service are explained as follows:
 
 The endpoint service is created automatically after you open the **Create Google Cloud Private Endpoint** page and choose the TiDB cluster. If it shows as failed or remains in the **Creating** state for a long time, submit a [support ticket](/tidb-cloud/tidb-cloud-support.md) for assistance.
 
-### TiDB Cloud fails to create an endpoint. What should I do?
+### Fail to create an endpoint in Google Cloud. What should I do?
 
 To troubleshoot the issue, you need to review the error message returned by Google Cloud Shell after you execute the private endpoint creation command. If it is a permission-related error, you must grant the necessary permissions before retrying.
 
