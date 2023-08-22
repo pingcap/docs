@@ -22,7 +22,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
     - Enhanced security: establish a secure connection to protect your data.
     - Improved performance: provide low-latency and high-bandwidth connectivity.
 
-    For more information, see [Connect via Private Endpoint with Google Cloud](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md).
+  For more information, see [Connect via Private Endpoint with Google Cloud](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md).
 
 - Support using a changefeed to stream data from a [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) cluster to [Google Cloud Storage (GCS)](https://cloud.google.com/storage).
 
