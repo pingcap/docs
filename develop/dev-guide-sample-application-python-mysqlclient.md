@@ -174,7 +174,7 @@ def get_mysqlclient_connection(autocommit:bool=True) -> MySQLdb.Connection:
 
 When using this function, you need to replace `${tidb_host}`, `${tidb_port}`, `${tidb_user}`, `${tidb_password}`, `${tidb_db_name}` and `${ca_path}` with the actual values of your TiDB cluster.
 
-### Insert Data
+### Insert data
 
 ```python
 with get_mysqlclient_connection(autocommit=True) as conn:
@@ -185,7 +185,7 @@ with get_mysqlclient_connection(autocommit=True) as conn:
 
 For more information, refer to [Insert Data](/develop/dev-guide-insert-data.md).
 
-### Query Data
+### Query data
 
 ```python
 with get_mysqlclient_connection(autocommit=True) as conn:
@@ -196,7 +196,7 @@ with get_mysqlclient_connection(autocommit=True) as conn:
 
 For more information, refer to [Query Data](./dev-guide-get-data-from-single-table.md).
 
-### Update Data
+### Update data
 
 ```python
 with get_mysqlclient_connection(autocommit=True) as conn:
@@ -207,7 +207,7 @@ with get_mysqlclient_connection(autocommit=True) as conn:
 
 For more information, refer to [Update Data](/develop/dev-guide-update-data.md).
 
-### Delete Data
+### Delete data
 
 ```python
 with get_mysqlclient_connection(autocommit=True) as conn:
@@ -218,7 +218,7 @@ with get_mysqlclient_connection(autocommit=True) as conn:
 
 For more information, refer to [Update Data](/develop/dev-guide-delete-data.md).
 
-## Useful Notes
+## Useful notes
 
 - For complete code and how to run it, see the [tidb-python-mysqlclient-quickstart GitHub repository](https://github.com/tidb-samples/tidb-python-mysqlclient-quickstart).
 - This Python driver is relatively low-level, so you will see a lot of SQL statements in the sample app. Unlike ORMs, there is no data object, and `mysqlclient` represents query objects with tuples. Although Python's driver is more convenient to use than those in other languages, due to its exposure to underlying implementations and the manual transaction management required, it is still recommended to use ORMs for programming unless there is a significant need for SQL. This can reduce the coupling of your app.
