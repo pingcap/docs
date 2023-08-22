@@ -1,6 +1,6 @@
 ---
 title: Build a CRUD Application with TiDB and AWS Lambda Function
-summary: This article describes how to connect TiDB using mysql2 in AWS Lambda Function and provides a simple example code snippet.
+summary: This article describes how to build a CRUD application using TiDB and mysql2 in AWS Lambda Function and provides a simple example code snippet.
 ---
 
 <!-- markdownlint-disable MD024 -->
