@@ -320,7 +320,7 @@ Use the `compact` command to manually compact data of each TiKV.
 
 ### Compact data of the whole TiKV cluster manually
 
-Use the `compact-cluster` command to manually compact data of the whole TiKV cluster. The flags of this command have the same meanings and usage as those of the `compact` command. Note the following difference:
+Use the `compact-cluster` command to manually compact data of the whole TiKV cluster. The flags of this command have the same meanings and usage as those of the `compact` command. The only difference is as follows:
 
 - For the `compact-cluster` command, you use `--pd` to specify the address of the PD as the compact target.
 - For the `compact` command, you use `--data-dir` or `--host` to specify a single TiKV.
