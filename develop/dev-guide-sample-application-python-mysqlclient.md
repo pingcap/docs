@@ -50,7 +50,7 @@ pip install -r requirements.txt
 
 <Tip> If you encounter installation issues, please refer to the [mysqlclient official documentation](https://github.com/PyMySQL/mysqlclient#install). </Tip>
 
-### Step 3: Configure Connection Information
+### Step 3: Configure connection information
 
 Connect to your TiDB cluster depending on the TiDB deployment option you've selected.
 
