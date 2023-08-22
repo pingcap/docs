@@ -170,7 +170,7 @@ Click **Create** in the TiDB Cloud console to finalize the creation of the priva
 
 Then you can connect to the endpoint service.
 
-### Step 6: Connect to your TiDB cluster
+### Step 6. Connect to your TiDB cluster
 
 After you have enabled the private DNS, go back to the TiDB Cloud console and take the following steps:
 
