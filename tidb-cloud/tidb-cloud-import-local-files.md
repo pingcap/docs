@@ -15,7 +15,7 @@ Currently, this method supports importing one CSV file for one task into either 
 - Importing local files is supported only for TiDB Serverless clusters, not for TiDB Dedicated clusters.
 - You cannot run more than one import task at the same time.
 - If you import a CSV file into an existing table in TiDB Cloud, make sure that the first line of the CSV file contains the column names, and the order of the columns in the CSV file must be the same as that in the target table.
-- If a column name is a reserved [keyword](/keywords.md) in TiDB, TiDB Cloud automatically adds backticks `` ` `` to enclose the column name. For example, if the column name is `order`, TiDB Cloud automatically adds backticks `` ` `` to the column name and imports the data into the target table.
+- If a column name is a reserved [keyword](/keywords.md) in TiDB, TiDB Cloud automatically adds backticks `` ` `` to enclose the column name. For example, if the column name is `order`, TiDB Cloud automatically adds backticks `` ` `` to change it to `` `order` `` and imports the data into the target table.
 
 ## Import local files
 
