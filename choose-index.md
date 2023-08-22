@@ -315,7 +315,7 @@ mysql> explain select /*+ use_index_merge(t, k1, k2, ka) */ * from t where (1 me
 3 rows in set, 3 warnings (0.00 sec)
 ```
 
-An workaround for the above scenario is to use `Union All` to rewrite your queries.
+A workaround for the preceding scenario is to rewrite the query using `Union All`:
 
 The following are some more complex scenarios that are not yet supported.
 
