@@ -177,7 +177,7 @@ After you have enabled the private DNS, go back to the TiDB Cloud console and ta
 1. On the [**Clusters**](https://tidbcloud.com/console/clusters) page, click **...** in the **Action** column.
 2. Click **Connect**. A connection dialog is displayed.
 3. Select the **Private Endpoint** tab. The private endpoint you just created is displayed under **Step 1: Create Private Endpoint**.
-4. Under **Step 2: Connect your application**, click **Connect**, click the tab of your preferred connection method, and then connect to your cluster with the connection string. The placeholders `<cluster_endpoint_name>:<port>` in the connection string are automatically replaced with the real values.
+4. Under **Step 2: Connect your connection**, click **Connect**, click the tab of your preferred connection method, and then connect to your cluster with the connection string. The placeholders `<cluster_endpoint_name>:<port>` in the connection string are automatically replaced with the real values.
 
 > **Tip:**
 >
