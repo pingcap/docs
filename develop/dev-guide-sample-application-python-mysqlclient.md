@@ -67,7 +67,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 
     <Tip>If you are running in Windows Subsystem for Linux (WSL), switch to the corresponding Linux distribution.</Tip>
 
-3. Click **Create Password** to create a password.
+3. Click **Create password** to create a password.
 
     <Tip>If you have created a password before, you can either use the original password or click **Reset Password** to generate a new one.</Tip>
 
