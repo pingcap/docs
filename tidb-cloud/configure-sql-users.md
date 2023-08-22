@@ -25,9 +25,9 @@ In TiDB Cloud, you can grant both a built-in role and multiple custom roles (if 
 
 - Custom roles
 
-    If your cluster has custom roles that are created using the [`CREATE ROLE`](/sql-statements/sql-statement-create-role.md) statement, you can grant custom roles to a SQL user when you create or edit SQL users in the TiDB Cloud console.
+    In addition to a built-in role, if your cluster has custom roles that are created using the [`CREATE ROLE`](/sql-statements/sql-statement-create-role.md) statement, you can also grant custom roles to a SQL user when you create or edit SQL users in the TiDB Cloud console.
 
-After granting a SQL user a combination of a built-in role and multiple custom roles, the user's permissions are the union of all the permissions from these roles.
+After a SQL user is granted both a built-in role and multiple custom roles, the user's permissions will be the union of all the permissions from these roles.
 
 ## Prerequisites
 
