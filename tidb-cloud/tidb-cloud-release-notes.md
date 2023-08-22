@@ -18,9 +18,9 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
     Key benefits:
 
-    - Intuitive operations: help you create a private endpoint with only several steps.
-    - Enhanced security: establish a secure connection to protect your data.
-    - Improved performance: provide low-latency and high-bandwidth connectivity.
+    - Intuitive operations: helps you create a private endpoint with only several steps.
+    - Enhanced security: establishes a secure connection to protect your data.
+    - Improved performance: provides low-latency and high-bandwidth connectivity.
 
   For more information, see [Connect via Private Endpoint with Google Cloud](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md).
 
