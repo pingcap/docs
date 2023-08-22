@@ -62,7 +62,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 2. Ensure the configurations in the confirmation window match your operating environment.
 
     - **Endpoint Type** is set to **Public**
-    - Connect With is set to **General**
+    - **Connect With** is set to **General**
     - Operating System matches your environment.
 
     <Tip>If you are running in Windows Subsystem for Linux (WSL), switch to the corresponding Linux distribution.</Tip>
