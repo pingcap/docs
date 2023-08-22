@@ -36,7 +36,7 @@ After a SQL user is granted both a built-in role and multiple custom roles, the 
 
 ## Create a SQL user
 
-To create a SQL use, take the following steps:
+To create a SQL user, take the following steps:
 
 1. In the [TiDB Cloud console](https://tidbcloud.com/), go to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
 
