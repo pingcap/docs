@@ -98,4 +98,4 @@ If you use `mysql` and encounter `ERROR 2068 (HY000): LOAD DATA LOCAL INFILE fil
 
 ### Why can't I query a column with a reserved keyword after importing data into TiDB Cloud?
 
-If a column name is a reserved [keyword](/keywords.md) in TiDB, TiDB Cloud automatically adds backticks `` ` `` to enclose the column name and then imports the data into the target table. When you query the column, you need to add backticks `` ` `` to the column name. For example, if the column name is `order`, you need to query the column with `` `order` ``.
+If a column name is a reserved [keyword](/keywords.md) in TiDB, TiDB Cloud automatically adds backticks `` ` `` to enclose the column name and then imports the data into the target table. When you query the column, you need to add backticks `` ` `` to enclose the column name. For example, if the column name is `order`, you need to query the column with `` `order` ``.
