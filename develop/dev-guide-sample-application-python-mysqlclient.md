@@ -8,7 +8,7 @@ summary: Learn how to connect TiDB using mysqlclient. This tutorial gives Python
 
 # Connect TiDB with mysqlclient
 
-TiDB is a MySQL compatible database. And [mysqlclient](https://github.com/PyMySQL/mysqlclient) is a popular open-source driver for Python.
+TiDB is a MySQL-compatible database. And [mysqlclient](https://github.com/PyMySQL/mysqlclient) is a popular open-source driver for Python.
 
 In this tutorial, use TiDB and mysqlclient to complete the following tasks:
 
@@ -53,7 +53,7 @@ This section demonstrates how to run the sample application code and connect to 
 
 Run the following command in your terminal window to clone the sample code repository.
 
-```bash
+```shell
 git clone https://github.com/tidb-samples/tidb-python-mysqlclient-quickstart.git
 cd tidb-python-mysqlclient-quickstart;
 ```
@@ -62,7 +62,7 @@ cd tidb-python-mysqlclient-quickstart;
 
 Run the following commands to install required packages for the sample app.
 
-```bash
+```shell
 pip install -r requirements.txt
 ```
 
@@ -97,7 +97,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 
 5. Run the following command to copy `.env.example` and rename it to `.env`:
 
-    ```bash
+    ```shell
     cp .env.example .env
     ```
 
@@ -131,7 +131,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 
 4. Run the following command to copy `.env.example` and rename it to `.env`:
 
-    ```bash
+    ```shell
     cp .env.example .env
     ```
 
@@ -146,7 +146,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
     CA_PATH='{your-downloaded-ca-path}'
     ```
 
-    Be sure to replace the placeholders `{}` with the values obtained from the **Connect** window, and configure `CA_PATH` with the certificate path downloaded in the previous step.
+    Be sure to replace the placeholders `{}` with the values obtained from the connection dialog, and configure `CA_PATH` with the certificate path downloaded in the previous step.
 
 6. Save the `.env` file.
 
@@ -155,7 +155,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 
 1. Run the following command to copy `.env.example` and rename it to `.env`:
 
-    ```bash
+    ```shell
     cp .env.example .env
     ```
 
@@ -180,7 +180,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 
 You can refer to the following sample code snippets to complete your own application development.
 
-For complete code and how to run it, see the [tidb-python-mysqlclient-quickstart GitHub repository](https://github.com/tidb-samples/tidb-python-mysqlclient-quickstart).
+For complete sample code and how to run it, check out the [tidb-samples/tidb-python-mysqlclient-quickstart](https://github.com/tidb-samples/tidb-python-mysqlclient-quickstart) repository.
 
 ### Connect to TiDB
 
@@ -232,7 +232,10 @@ For more information, refer to [Query Data](/develop/dev-guide-get-data-from-sin
 with get_mysqlclient_connection(autocommit=True) as conn:
     with conn.cursor() as cur:
         player_id, amount, price="1", 10, 500
-        cursor.execute("UPDATE players SET goods = goods + %s, coins = coins + %s WHERE id = %s", (-amount, price, player_id))
+        cursor.execute(
+            "UPDATE players SET goods = goods + %s, coins = coins + %s WHERE id = %s",
+            (-amount, price, player_id),
+        )
 ```
 
 For more information, refer to [Update Data](/develop/dev-guide-update-data.md).
@@ -250,12 +253,22 @@ For more information, refer to [Update Data](/develop/dev-guide-delete-data.md).
 
 ## Useful notes
 
-### Using Driver or ORM?
+### Using driver or ORM framework?
 
-This Python driver is relatively low-level, so you will see a lot of SQL statements in the sample app. Unlike ORMs, there is no data object, and `mysqlclient` represents query objects with tuples. Although Python's driver is more convenient to use than those in other languages, due to its exposure to underlying implementations and the manual transaction management required, it is still recommended to use ORMs for programming unless there is a significant need for SQL. This can reduce the coupling of your app.
+The Python driver provides low-level access to the database, but it also requires the developers to:
+
+- Establish and release database connections manually.
+- Manage database transactions manually.
+- Map data rows (represented as tuples in the `mysqlclient`) to data objects manually.
+
+Unless you need to write complex SQL statements, it is recommended that you use [ORMs](https://en.wikipedia.org/w/index.php?title=Object%E2%80%93relational_mapping) for developing. They can help you:
+
+- Reduce [boilerplate code](https://en.wikipedia.org/wiki/Boilerplate_code) for managing connections and transactions.
+- Manipulate data with data objects instead of an amount of SQL statements.
 
 ## Next steps
 
-- If you want to learn more on how to use `mysqlclient`, refer to the [mysqlclient official documentation](https://mysqlclient.readthedocs.io/).
-- You can continue reading the developer documentation to get more knowledge about TiDB development, such as: [Insert Data](/develop/dev-guide-insert-data.md), [Update Data](/develop/dev-guide-update-data.md), [Delete Data](/develop/dev-guide-delete-data.md), [Single Table Reading](/develop/dev-guide-get-data-from-single-table.md), [Transactions](/develop/dev-guide-transaction-overview.md), [SQL Performance Optimization](/develop/dev-guide-optimize-sql-overview.md), etc.
-- If you prefer to learn through courses, we also offer professional [TiDB Developer Courses](https://www.pingcap.com/education/), and provide [TiDB certifications](https://www.pingcap.com/education/certification/) after the exam.
+- Learn more usage of `mysqlclient` from [the documentation of mysqlclient](https://mysqlclient.readthedocs.io/)
+- Learn more the best practices about TiDB application development through reading the chapters in the [Developer Guide](/develop/dev-guide-overview.md), such as: [Insert Data](/develop/dev-guide-insert-data.md), [Update Data](/develop/dev-guide-update-data.md), [Delete Data](/develop/dev-guide-delete-data.md), [Single Table Reading](/develop/dev-guide-get-data-from-single-table.md), [Transactions](/develop/dev-guide-transaction-overview.md), [SQL Performance Optimization](/develop/dev-guide-optimize-sql-overview.md), etc.
+- Learn through the professional [TiDB Developer Courses](https://www.pingcap.com/education/) and earn [TiDB certifications](https://www.pingcap.com/education/certification/) after passing the exam.
+
