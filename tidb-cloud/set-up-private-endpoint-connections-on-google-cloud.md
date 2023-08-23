@@ -100,7 +100,7 @@ You can select a cluster with any of the following statuses:
 
 After executing the command in Google Cloud Shell successfully, go back to the TiDB Cloud console and then click **Accept Endpoint Access**.
 
-If you see an error `No connection request received from the endpoint.`, make sure that you have copied the command correctly and successfully executed it in your Google Cloud Shell.
+If you see an error `not received connection request from endpoint`, make sure that you have copied the command correctly and successfully executed it in your Google Cloud Shell.
 
 ### Step 4. Connect to your TiDB cluster
 
