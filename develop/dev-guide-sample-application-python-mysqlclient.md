@@ -27,10 +27,22 @@ To complete this tutorial, you need:
 - [Git](https://git-scm.com/downloads).
 - A TiDB cluster.
 
+<CustomContent platform="tidb">
+
 **If you don't have a TiDB cluster, you can create one as follows:**
 
 - (Recommended) Follow [Creating a TiDB Serverless Cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
-- Follow [Deploy a Local Test TiDB Cluster](/quick-start-with-tidb.md#deploy-a-local-test-cluster.md) or [Deploy a Production TiDB Cluster](/production-deployment-using-tiup.md) to create a local cluster.
+- Follow [Deploy a Local Test TiDB Cluster](/quick-start-with-tidb.md#deploy-a-local-test-cluster) or [Deploy a Production TiDB Cluster](/production-deployment-using-tiup.md) to create a local cluster.
+
+</CustomContent>
+<CustomContent platform="tidb-cloud">
+
+**If you don't have a TiDB cluster, you can create one as follows:**
+
+- (Recommended) Follow [Creating a TiDB Serverless Cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
+- Follow [Deploy a Local Test TiDB Cluster](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb#deploy-a-local-test-cluster) or [Deploy a Production TiDB Cluster](https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup) to create a local cluster.
+
+</CustomContent>
 
 ## Run sample app to connect to TiDB
 
@@ -95,7 +107,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 
     Be sure to replace the placeholders `{}` with the values obtained from the connection dialog.
 
-    TiDB Serverless requires a secure connection. Since the `ssl_mode` of mysqlclient defaults to `PREFERRED`, you don't need to manually specify `CA_PATH`. Just leave it empty. But if you have a special reason to specify `CA_PATH` manually, you can refer to the [TLS Connections to TiDB Serverless](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md) to get the certificate paths for different operating systems.
+    TiDB Serverless requires a secure connection. Since the `ssl_mode` of mysqlclient defaults to `PREFERRED`, you don't need to manually specify `CA_PATH`. Just leave it empty. But if you have a special reason to specify `CA_PATH` manually, you can refer to the [TLS Connections to TiDB Serverless](https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-clusters) to get the certificate paths for different operating systems.
 
 6. Save the `.env` file.
 
@@ -103,7 +115,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 <div label="TiDB Dedicated">
 
 1. In the TiDB Cloud, select your TiDB Dedicated cluster. Go to the **Overview** page, and click the **Connect** button in the upper right corner. Click **Allow Access from Anywhere** and then click **Download TiDB cluster CA** to download the certificate.
-     <Tip> For more configuration details, refer to [TiDB Dedicated Standard Connection](/tidb-cloud/connect-via-standard-connection.md).</Tip>
+     <Tip> For more configuration details, refer to [TiDB Dedicated Standard Connection](https://docs.pingcap.com/tidbcloud/connect-via-standard-connection).</Tip>
 
 2. Run the following command to copy `.env.example` and rename it to `.env`:
 
