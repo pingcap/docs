@@ -3663,6 +3663,16 @@ mysql> desc select count(distinct a) from test.t;
 - Default value: `1.0`
 - Indicates the net cost of transferring 1 byte of data through the network. This variable is internally used in the [Cost Model](/cost-model.md), and it is **NOT** recommended to modify its value.
 
+### tidb_opt_objective <span class="version-mark">New in v7.4.0</span>
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Type: Enumeration
+- Default value: `moderate`
+- Possible values: `moderate`, `determined`
+- Indicates if the optimizer should be more conservative and stable, or should make use of more information to try to generate better execution plans.
+- Now this variable only controls if the optimizer should use the real-time statistics to generate execution plans. The real-time statistics are the total number of rows and the number of modified rows that are automatically updated according to DML statements. By default, TiDB will use the real-time statistics to generate execution plans. When the variable is set to `determined`, TiDB won't use this information when generating execution plans.
+
 ### tidb_opt_ordering_index_selectivity_threshold <span class="version-mark">New in v7.0.0</span>
 
 - Scope: SESSION | GLOBAL
