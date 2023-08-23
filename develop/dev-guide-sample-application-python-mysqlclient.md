@@ -65,7 +65,7 @@ Run the following commands to install required packages for the sample app.
 pip install -r requirements.txt
 ```
 
-<Tip> If you encounter installation issues, please refer to the [mysqlclient official documentation](https://github.com/PyMySQL/mysqlclient#install). </Tip>
+If you encounter installation issues, please refer to the [mysqlclient official documentation](https://github.com/PyMySQL/mysqlclient#install).
 
 ### Step 3: Configure connection information
 
@@ -86,7 +86,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 
 3. Click **Create password** to create a random password.
 
-    <Tip>If you have created a password before, you can either use the original password or click **Reset password** to generate a new one.</Tip>
+    <Tip>If you have created a password before, you can either use the original password or click "Reset password" to generate a new one.</Tip>
 
 4. Run the following command to copy `.env.example` and rename it to `.env`:
 
@@ -115,7 +115,8 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 <div label="TiDB Dedicated">
 
 1. In the TiDB Cloud, select your TiDB Dedicated cluster. Go to the **Overview** page, and click the **Connect** button in the upper right corner. Click **Allow Access from Anywhere** and then click **Download TiDB cluster CA** to download the certificate.
-     <Tip> For more configuration details, refer to [TiDB Dedicated Standard Connection](https://docs.pingcap.com/tidbcloud/connect-via-standard-connection).</Tip>
+
+    For more configuration details, refer to [TiDB Dedicated Standard Connection](https://docs.pingcap.com/tidbcloud/connect-via-standard-connection).
 
 2. Run the following command to copy `.env.example` and rename it to `.env`:
 
@@ -168,7 +169,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 
 You can refer to the following sample code snippets to complete your own application development.
 
-<Tip>For complete code and how to run it, see the [tidb-python-mysqlclient-quickstart GitHub repository](https://github.com/tidb-samples/tidb-python-mysqlclient-quickstart).</Tip>
+For complete code and how to run it, see the [tidb-python-mysqlclient-quickstart GitHub repository](https://github.com/tidb-samples/tidb-python-mysqlclient-quickstart).
 
 ### Connect to TiDB
 
