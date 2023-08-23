@@ -1,15 +1,16 @@
 ---
-title: Connect to TiDB Dedicated via Private Endpoint
-summary: Learn how to connect to your TiDB Cloud cluster via private endpoint.
+title: Connect to a TiDB Dedicated Cluster via Private Endpoint with AWS
+summary: Learn how to connect to your TiDB Cloud cluster via private endpoint with AWS.
 ---
 
-# Connect to TiDB Dedicated via Private Endpoint
+# Connect to a TiDB Dedicated Cluster via Private Endpoint with AWS
 
-This document describes how to connect to your TiDB Dedicated cluster via private endpoint.
+This document describes how to connect to your TiDB Dedicated cluster via private endpoint with AWS.
 
 > **Tip:**
 >
 > To learn how to connect to a TiDB Serverless cluster via private endpoint, see [Connect to TiDB Serverless via Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections-serverless.md).
+> To learn how to connect to a TiDB Dedicated cluster via private endpoint with Google Cloud, see [Connect to TiDB Dedicated via Private Service Connect with Google Cloud](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md).
 
 TiDB Cloud supports highly secure and one-way access to the TiDB Cloud service hosted in an AWS VPC via the [AWS PrivateLink](https://aws.amazon.com/privatelink/?privatelink-blogs.sort-by=item.additionalFields.createdDate&privatelink-blogs.sort-order=desc), as if the service were in your own VPC. A private endpoint is exposed in your VPC and you can create a connection to the TiDB Cloud service via the endpoint with permission.
 
@@ -26,8 +27,8 @@ For more detailed definitions of the private endpoint and endpoint service, see 
 
 ## Restrictions
 
-- Currently, TiDB Cloud supports private endpoint connection only when the endpoint service is hosted in AWS. If the service is hosted in Google Cloud Platform (GCP), the private endpoint is not applicable.
-- Private endpoint connection across regions is not supported.
+- Only the `Organization Owner` and the `Project Owner` roles can create private endpoints.
+- The private endpoint and the TiDB cluster to be connected must be located in the same region.
 
 In most scenarios, you are recommended to use private endpoint connection over VPC peering. However, in the following scenarios, you should use VPC peering instead of private endpoint connection:
 
@@ -53,7 +54,7 @@ If you have multiple clusters, you need to repeat these steps for each cluster t
 1. Log in to the [TiDB Cloud console](https://tidbcloud.com).
 2. Click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner, switch to the target project if you have multiple projects, and then click **Project Settings**.
 3. On the **Project Settings** page of your project, click **Network Access** in the left navigation pane, and click the **Private Endpoint** tab.
-4. Click **Add** in the upper-right corner.
+4. Click **Create Private Endpoint** in the upper-right corner, and then select **AWS Private Endpoint**.
 
 ### Step 1. Choose a TiDB cluster
 
@@ -169,14 +170,14 @@ Click **Create** in the TiDB Cloud console to finalize the creation of the priva
 
 Then you can connect to the endpoint service.
 
-### Step 6: Connect to your TiDB cluster
+### Step 6. Connect to your TiDB cluster
 
 After you have enabled the private DNS, go back to the TiDB Cloud console and take the following steps:
 
-1. On the [**Clusters**](https://tidbcloud.com/console/clusters) page, click the name of your target cluster to go to its overview page.
-2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
+1. On the [**Clusters**](https://tidbcloud.com/console/clusters) page, click **...** in the **Action** column.
+2. Click **Connect**. A connection dialog is displayed.
 3. Select the **Private Endpoint** tab. The private endpoint you just created is displayed under **Step 1: Create Private Endpoint**.
-4. Under **Step 2: Connect your application**, click the tab of your preferred connection method, and then connect to your cluster with the connection string. The placeholders `<cluster_endpoint_name>:<port>` in the connection string are automatically replaced with the real values.
+4. Under **Step 2: Connect your connection**, click **Connect**, click the tab of your preferred connection method, and then connect to your cluster with the connection string. The placeholders `<cluster_endpoint_name>:<port>` in the connection string are automatically replaced with the real values.
 
 > **Tip:**
 >
