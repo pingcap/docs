@@ -13,7 +13,7 @@ TiDB is a MySQL compatible database. And [mysqlclient](https://github.com/PyMySQ
 In this tutorial, use TiDB and mysqlclient to complete the following tasks:
 
 - Prepare your environment.
-- Connect to TiDB Serverless, TiDB Dedicated or TiDB Self-hosted using mysqlclient.
+- Connect to TiDB Serverless, TiDB Dedicated or TiDB Self-Hosted using mysqlclient.
 - Build and run your app. Optionally, you can find sample code snippets for basic CRUD operations.
 
 > **Note:**
