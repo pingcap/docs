@@ -200,7 +200,7 @@ with get_mysqlclient_connection(autocommit=True) as conn:
         print(cur.fetchone()[0])
 ```
 
-For more information, refer to [Query Data](./dev-guide-get-data-from-single-table.md).
+For more information, refer to [Query Data](/develop/dev-guide-get-data-from-single-table.md).
 
 ### Update data
 
