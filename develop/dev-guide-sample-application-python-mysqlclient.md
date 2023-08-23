@@ -10,15 +10,15 @@ summary: Learn how to connect TiDB using mysqlclient. This tutorial gives Python
 
 TiDB is a MySQL-compatible database. And [mysqlclient](https://github.com/PyMySQL/mysqlclient) is a popular open-source driver for Python.
 
-In this tutorial, use TiDB and mysqlclient to complete the following tasks:
+In this tutorial, you can learn how to use TiDB and mysqlclient to accomplish the following tasks:
 
-- Prepare your environment.
-- Connect to TiDB Serverless, TiDB Dedicated or TiDB Self-Hosted using mysqlclient.
-- Build and run your app. Optionally, you can find sample code snippets for basic CRUD operations.
+- Set up your environment.
+- Connect to TiDB Serverless, TiDB Dedicated, or TiDB Self-Hosted using mysqlclient.
+- Build and run your application. Optionally, you can find sample code snippets for basic CRUD operations.
 
 > **Note:**
 >
-> This tutorial works with TiDB Serverless, TiDB Dedicated and TiDB Self-Hosted.
+> This tutorial works with TiDB Serverless, TiDB Dedicated, and TiDB Self-Hosted.
 
 ## Prerequisites
 
@@ -51,7 +51,7 @@ This section demonstrates how to run the sample application code and connect to 
 
 ### Step 1: Clone the sample app repository
 
-Run the following command in your terminal window to clone the sample code repository.
+Run the following command in your terminal window to clone the sample code repository:
 
 ```shell
 git clone https://github.com/tidb-samples/tidb-python-mysqlclient-quickstart.git
@@ -60,13 +60,13 @@ cd tidb-python-mysqlclient-quickstart;
 
 ### Step 2: Install dependencies (including mysqlclient)
 
-Run the following commands to install required packages for the sample app.
+Run the following commands to install the required packages for the sample app:
 
 ```shell
 pip install -r requirements.txt
 ```
 
-If you encounter installation issues, please refer to the [mysqlclient official documentation](https://github.com/PyMySQL/mysqlclient#install).
+If you encounter installation issues, refer to the [mysqlclient official documentation](https://github.com/PyMySQL/mysqlclient#install).
 
 ### Step 3: Configure connection information
 
@@ -75,7 +75,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 <SimpleTab>
 <div label="TiDB Serverless">
 
-1. Navigate to the [Clusters](https://tidbcloud.com/console/clusters) page on TiDB Cloud's Web Console, and then click the name of your target cluster to go to its **Overview** page. 
+1. Navigate to the [Clusters](https://tidbcloud.com/console/clusters) page on the TiDB Cloud console, and then click the name of your target cluster to go to its **Overview** page. 
 
 2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
 
@@ -101,7 +101,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
     cp .env.example .env
     ```
 
-6. Copy and paste the corresponding connection string into the `.env` file. Example result is as follows:
+6. Copy and paste the corresponding connection string into the `.env` file. The example result is as follows:
 
     ```dotenv
     TIDB_HOST='{gateway-region}.aws.tidbcloud.com'
@@ -121,13 +121,13 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 </div>
 <div label="TiDB Dedicated">
 
-1. Navigate to the [Clusters](https://tidbcloud.com/console/clusters) page on TiDB Cloud's Web Console, and then click the name of your target cluster to go to its **Overview** page.
+1. Navigate to the [Clusters](https://tidbcloud.com/console/clusters) page on the TiDB Cloud console, and then click the name of your target cluster to go to its **Overview** page.
 
 2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
 
 3. Click **Allow Access from Anywhere** and then click **Download TiDB cluster CA** to download the CA certificate.
 
-   > For more details about how to obtain the connection string, refer to [TiDB Dedicated Standard Connection](https://docs.pingcap.com/tidbcloud/connect-via-standard-connection).
+    For more details about how to obtain the connection string, refer to [TiDB Dedicated Standard Connection](https://docs.pingcap.com/tidbcloud/connect-via-standard-connection).
 
 4. Run the following command to copy `.env.example` and rename it to `.env`:
 
@@ -135,7 +135,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
     cp .env.example .env
     ```
 
-5. Copy and paste the corresponding connection string into the `.env` file. Example result is as follows:
+5. Copy and paste the corresponding connection string into the `.env` file. The example result is as follows:
 
     ```dotenv
     TIDB_HOST='{host}.clusters.tidb-cloud.com'
@@ -159,7 +159,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
     cp .env.example .env
     ```
 
-2. Copy and paste the corresponding connection string into the `.env` file. Example result is as follows:
+2. Copy and paste the corresponding connection string into the `.env` file. The example result is as follows:
 
     ```dotenv
     TIDB_HOST='{tidb_server_host}'
