@@ -8,7 +8,7 @@ summary: Learn how to connect TiDB using mysqlclient. This tutorial gives Python
 
 # Connect TiDB with mysqlclient
 
-TiDB is a MySQL-compatible database. And [mysqlclient](https://github.com/PyMySQL/mysqlclient) is a popular open-source driver for Python.
+TiDB is a MySQL-compatible database, and [mysqlclient](https://github.com/PyMySQL/mysqlclient) is a popular open-source driver for Python.
 
 In this tutorial, you can learn how to use TiDB and mysqlclient to accomplish the following tasks:
 
@@ -271,4 +271,3 @@ Unless you need to write complex SQL statements, it is recommended that you use 
 - Learn more usage of `mysqlclient` from [the documentation of mysqlclient](https://mysqlclient.readthedocs.io/)
 - Learn more the best practices about TiDB application development through reading the chapters in the [Developer Guide](/develop/dev-guide-overview.md), such as: [Insert Data](/develop/dev-guide-insert-data.md), [Update Data](/develop/dev-guide-update-data.md), [Delete Data](/develop/dev-guide-delete-data.md), [Single Table Reading](/develop/dev-guide-get-data-from-single-table.md), [Transactions](/develop/dev-guide-transaction-overview.md), [SQL Performance Optimization](/develop/dev-guide-optimize-sql-overview.md), etc.
 - Learn through the professional [TiDB Developer Courses](https://www.pingcap.com/education/) and earn [TiDB certifications](https://www.pingcap.com/education/certification/) after passing the exam.
-
