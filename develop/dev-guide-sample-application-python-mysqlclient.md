@@ -75,27 +75,33 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 <SimpleTab>
 <div label="TiDB Serverless">
 
-1. In the TiDB Cloud, navigate to the [Clusters](https://tidbcloud.com/console/clusters) page, select your TiDB Serverless cluster. Go to the **Overview** page, and click the **Connect** button in the upper right corner.
+1. Navigate to the [Clusters](https://tidbcloud.com/console/clusters) page on TiDB Cloud's Web Console, and then click the name of your target cluster to go to its **Overview** page. 
 
-2. Ensure the configurations in the confirmation window match your operating environment.
+2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
 
-    - **Endpoint Type** is set to **Public**
-    - **Connect With** is set to **General**
-    - Operating System matches your environment.
+3. Ensure the configurations in the connection dialog match your operating environment.
 
-    <Tip>If you are running in Windows Subsystem for Linux (WSL), switch to the corresponding Linux distribution.</Tip>
+    - **Endpoint Type** is set to `Public`
+    - **Connect With** is set to `General`
+    - **Operating System** matches your environment.
 
-3. Click **Create password** to create a random password.
+   > **Tip:**
+   >
+   > If your program is running in Windows Subsystem for Linux (WSL), switch to the corresponding Linux distribution.
 
-    <Tip>If you have created a password before, you can either use the original password or click "Reset password" to generate a new one.</Tip>
+4. Click **Create password** to create a random password.
 
-4. Run the following command to copy `.env.example` and rename it to `.env`:
+   > **Tip:**
+   > 
+   > If you have created a password before, you can either use the original password or click **Reset password** to generate a new one.
+
+5. Run the following command to copy `.env.example` and rename it to `.env`:
 
     ```bash
     cp .env.example .env
     ```
 
-5. Copy and paste the corresponding connection string into the `.env` file. Example result is as follows:
+6. Copy and paste the corresponding connection string into the `.env` file. Example result is as follows:
 
     ```dotenv
     TIDB_HOST='{gateway-region}.aws.tidbcloud.com'
@@ -110,22 +116,26 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 
     TiDB Serverless requires a secure connection. Since the `ssl_mode` of mysqlclient defaults to `PREFERRED`, you don't need to manually specify `CA_PATH`. Just leave it empty. But if you have a special reason to specify `CA_PATH` manually, you can refer to the [TLS Connections to TiDB Serverless](https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-clusters) to get the certificate paths for different operating systems.
 
-6. Save the `.env` file.
+7. Save the `.env` file.
 
 </div>
 <div label="TiDB Dedicated">
 
-1. In the TiDB Cloud, select your TiDB Dedicated cluster. Go to the **Overview** page, and click the **Connect** button in the upper right corner. Click **Allow Access from Anywhere** and then click **Download TiDB cluster CA** to download the certificate.
+1. Navigate to the [Clusters](https://tidbcloud.com/console/clusters) page on TiDB Cloud's Web Console, and then click the name of your target cluster to go to its **Overview** page.
 
-    For more configuration details, refer to [TiDB Dedicated Standard Connection](https://docs.pingcap.com/tidbcloud/connect-via-standard-connection).
+2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
 
-2. Run the following command to copy `.env.example` and rename it to `.env`:
+3. Click **Allow Access from Anywhere** and then click **Download TiDB cluster CA** to download the CA certificate.
+
+   > For more details about how to obtain the connection string, refer to [TiDB Dedicated Standard Connection](https://docs.pingcap.com/tidbcloud/connect-via-standard-connection).
+
+4. Run the following command to copy `.env.example` and rename it to `.env`:
 
     ```bash
     cp .env.example .env
     ```
 
-3. Copy and paste the corresponding connection string into the `.env` file. Example result is as follows:
+5. Copy and paste the corresponding connection string into the `.env` file. Example result is as follows:
 
     ```dotenv
     TIDB_HOST='{host}.clusters.tidb-cloud.com'
@@ -138,7 +148,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 
     Be sure to replace the placeholders `{}` with the values obtained from the **Connect** window, and configure `CA_PATH` with the certificate path downloaded in the previous step.
 
-4. Save the `.env` file.
+6. Save the `.env` file.
 
 </div>
 <div label="TiDB Self-Hosted">
