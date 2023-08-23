@@ -17,6 +17,7 @@ In this tutorial, use TiDB and mysqlclient to complete the following tasks:
 - Build and run your app. Optionally, you can find sample code snippets for basic CRUD operations.
 
 > **Note:**
+>
 > This tutorial works with TiDB Serverless, TiDB Dedicated and TiDB Self-Hosted.
 
 ## Prerequisites
