@@ -177,13 +177,9 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 
 1. Execute the following command to run the sample code:
 
-<<<<<<< HEAD
-If you are using a TiDB Serverless cluster, you need to provide your CA root path and replace `<ca_path>` in the following examples with your CA path. To get the CA root path on your system, refer to [Root certificate management](https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-clusters#root-certificate-management).
-=======
     ```shell
     python mysqlclient_example.py
     ```
->>>>>>> 2de955cc86 (develop: refactor Python mysqlclient tutorial (#14544))
 
 2. Check the [Expected-Output.txt](https://github.com/tidb-samples/tidb-python-mysqlclient-quickstart/blob/main/Expected-Output.txt) to see if the output matches.
 
