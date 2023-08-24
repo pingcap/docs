@@ -1,12 +1,9 @@
 ---
-title: Connect TiDB with mysqlclient
+title: Connect to TiDB with mysqlclient
 summary: Learn how to connect TiDB using mysqlclient. This tutorial gives Python sample code snippets that work with TiDB using mysqlclient.
 ---
 
-<!-- markdownlint-disable MD024 -->
-<!-- markdownlint-disable MD029 -->
-
-# Connect TiDB with mysqlclient
+# Connect to TiDB with mysqlclient
 
 TiDB is a MySQL-compatible database, and [mysqlclient](https://github.com/PyMySQL/mysqlclient) is a popular open-source driver for Python.
 
@@ -265,16 +262,16 @@ For more information, refer to [Update Data](/develop/dev-guide-delete-data.md).
 
 ### Using driver or ORM framework?
 
-The Python driver provides low-level access to the database, but it also requires the developers to:
+The Python driver provides low-level access to the database, but it requires the developers to:
 
-- Establish and release database connections manually.
-- Manage database transactions manually.
-- Map data rows (represented as tuples in the `mysqlclient`) to data objects manually.
+- Manually establish and release database connections.
+- Manually manage database transactions.
+- Manually map data rows (represented as tuples in `mysqlclient`) to data objects.
 
-Unless you need to write complex SQL statements, it is recommended to use [ORMs](https://en.wikipedia.org/w/index.php?title=Object%E2%80%93relational_mapping) for developing. They can help you:
+Unless you need to write complex SQL statements, it is recommended to use [ORMs](https://en.wikipedia.org/w/index.php?title=Object%E2%80%93relational_mapping) for development. They can help you:
 
 - Reduce [boilerplate code](https://en.wikipedia.org/wiki/Boilerplate_code) for managing connections and transactions.
-- Manipulate data with data objects instead of an amount of SQL statements.
+- Manipulate data with data objects instead of a number of SQL statements.
 
 ## Next steps
 

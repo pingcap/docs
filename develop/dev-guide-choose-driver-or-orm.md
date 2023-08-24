@@ -256,7 +256,7 @@ Support level: **Compatible**
 
 You can follow the [mysqlclient documentation](https://pypi.org/project/mysqlclient/) to download and configure the driver. It is recommended to use mysqlclient 2.1.1 or later versions.
 
-For an example of using mysqlclient to build a TiDB application, see [Connect TiDB with mysqlclient](/develop/dev-guide-sample-application-python-mysqlclient.md).
+For an example of using mysqlclient to build a TiDB application, see [Connect to TiDB with mysqlclient](/develop/dev-guide-sample-application-python-mysqlclient.md).
 
 </div>
 <div label="MySQL Connector/Python">
