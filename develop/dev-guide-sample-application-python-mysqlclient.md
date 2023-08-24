@@ -176,6 +176,16 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 </div>
 </SimpleTab>
 
+### Step 4: Run the code and check the result
+
+1. Execute the following command to run the sample code:
+
+    ```shell
+    python mysqlclient_example.py
+    ```
+
+2. Check the [Expected output.txt](https://github.com/tidb-samples/tidb-python-mysqlclient-quickstart/blob/main/Expected-Output.txt) to see if the output matches.
+
 ## Sample code snippets
 
 You can refer to the following sample code snippets to complete your own application development.
