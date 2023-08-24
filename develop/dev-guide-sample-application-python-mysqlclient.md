@@ -256,7 +256,7 @@ with get_mysqlclient_connection(autocommit=True) as conn:
         cursor.execute("DELETE FROM players WHERE id = %s", (player_id,))
 ```
 
-For more information, refer to [Update Data](/develop/dev-guide-delete-data.md).
+For more information, refer to [Delete Data](/develop/dev-guide-delete-data.md).
 
 ## Useful notes
 
@@ -268,7 +268,7 @@ The Python driver provides low-level access to the database, but it requires the
 - Manually manage database transactions.
 - Manually map data rows (represented as tuples in `mysqlclient`) to data objects.
 
-Unless you need to write complex SQL statements, it is recommended to use [ORMs](https://en.wikipedia.org/w/index.php?title=Object%E2%80%93relational_mapping) for development. They can help you:
+Unless you need to write complex SQL statements, it is recommended to use [ORMs](https://en.wikipedia.org/w/index.php?title=Object-relational_mapping) for development. They can help you:
 
 - Reduce [boilerplate code](https://en.wikipedia.org/wiki/Boilerplate_code) for managing connections and transactions.
 - Manipulate data with data objects instead of a number of SQL statements.
@@ -281,4 +281,4 @@ Unless you need to write complex SQL statements, it is recommended to use [ORMs]
 
 ## Need help?
 
-Ask questions on the TiDB [Forum](https://ask.pingcap.com/) or [Discord](https://discord.com/channels/1083300679386406923/channel-browser), or get help from the [TiDB Cloud support team](https://tidbcloud.com/console/support).
+Ask questions on the [Discord](https://discord.gg/vYU9h56kAX), or request a ticket to [TiDB support](https://support.pingcap.com/hc/en-us).
