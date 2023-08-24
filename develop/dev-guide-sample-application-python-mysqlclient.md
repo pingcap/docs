@@ -1,6 +1,6 @@
 ---
 title: Connect to TiDB with mysqlclient
-summary: Learn how to connect TiDB using mysqlclient. This tutorial gives Python sample code snippets that work with TiDB using mysqlclient.
+summary: Learn how to connect to TiDB using mysqlclient. This tutorial gives Python sample code snippets that work with TiDB using mysqlclient.
 ---
 
 # Connect to TiDB with mysqlclient
@@ -29,20 +29,20 @@ To complete this tutorial, you need:
 
 **If you don't have a TiDB cluster, you can create one as follows:**
 
-- (Recommended) Follow [Creating a TiDB Serverless Cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
-- Follow [Deploy a Local Test TiDB Cluster](/quick-start-with-tidb.md#deploy-a-local-test-cluster) or [Deploy a Production TiDB Cluster](/production-deployment-using-tiup.md) to create a local cluster.
+- (Recommended) Follow [Creating a TiDB Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
+- Follow [Deploy a local test TiDB cluster](/quick-start-with-tidb.md#deploy-a-local-test-cluster) or [Deploy a production TiDB cluster](/production-deployment-using-tiup.md) to create a local cluster.
 
 </CustomContent>
 <CustomContent platform="tidb-cloud">
 
 **If you don't have a TiDB cluster, you can create one as follows:**
 
-- (Recommended) Follow [Creating a TiDB Serverless Cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
-- Follow [Deploy a Local Test TiDB Cluster](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb#deploy-a-local-test-cluster) or [Deploy a Production TiDB Cluster](https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup) to create a local cluster.
+- (Recommended) Follow [Creating a TiDB Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
+- Follow [Deploy a local test TiDB cluster](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb#deploy-a-local-test-cluster) or [Deploy a production TiDB cluster](https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup) to create a local cluster.
 
 </CustomContent>
 
-## Run sample app to connect to TiDB
+## Run the sample app to connect to TiDB
 
 This section demonstrates how to run the sample application code and connect to TiDB.
 
@@ -57,7 +57,7 @@ cd tidb-python-mysqlclient-quickstart;
 
 ### Step 2: Install dependencies
 
-Run the following commands to install the required packages (including `mysqlclient`) for the sample app:
+Run the following command to install the required packages (including `mysqlclient`) for the sample app:
 
 ```shell
 pip install -r requirements.txt
@@ -72,7 +72,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 <SimpleTab>
 <div label="TiDB Serverless">
 
-1. Navigate to the [Clusters](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page. 
+1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
 
 2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
 
@@ -82,15 +82,15 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
     - **Connect With** is set to `General`
     - **Operating System** matches your environment.
 
-   > **Tip:**
-   >
-   > If your program is running in Windows Subsystem for Linux (WSL), switch to the corresponding Linux distribution.
+    > **Tip:**
+    >
+    > If your program is running in Windows Subsystem for Linux (WSL), switch to the corresponding Linux distribution.
 
 4. Click **Create password** to create a random password.
 
-   > **Tip:**
-   > 
-   > If you have created a password before, you can either use the original password or click **Reset password** to generate a new one.
+    > **Tip:**
+    > 
+    > If you have created a password before, you can either use the original password or click **Reset password** to generate a new one.
 
 5. Run the following command to copy `.env.example` and rename it to `.env`:
 
@@ -111,20 +111,20 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 
     Be sure to replace the placeholders `{}` with the connection parameters obtained from the connection dialog.
 
-    TiDB Serverless requires a secure connection. Since the `ssl_mode` of mysqlclient defaults to `PREFERRED`, you don't need to manually specify `CA_PATH`. Just leave it empty. But if you have a special reason to specify `CA_PATH` manually, you can refer to the [TLS Connections to TiDB Serverless](https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-clusters) to get the certificate paths for different operating systems.
+    TiDB Serverless requires a secure connection. Since the `ssl_mode` of mysqlclient defaults to `PREFERRED`, you don't need to manually specify `CA_PATH`. Just leave it empty. But if you have a special reason to specify `CA_PATH` manually, you can refer to the [TLS connections to TiDB Serverless](https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-clusters) to get the certificate paths for different operating systems.
 
 7. Save the `.env` file.
 
 </div>
 <div label="TiDB Dedicated">
 
-1. Navigate to the [Clusters](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
+1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
 
 2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
 
 3. Click **Allow Access from Anywhere** and then click **Download TiDB cluster CA** to download the CA certificate.
 
-    For more details about how to obtain the connection string, refer to [TiDB Dedicated Standard Connection](https://docs.pingcap.com/tidbcloud/connect-via-standard-connection).
+    For more details about how to obtain the connection string, refer to [TiDB Dedicated standard connection](https://docs.pingcap.com/tidbcloud/connect-via-standard-connection).
 
 4. Run the following command to copy `.env.example` and rename it to `.env`:
 
@@ -220,7 +220,7 @@ with get_mysqlclient_connection(autocommit=True) as conn:
         cursor.execute("INSERT INTO players (id, coins, goods) VALUES (%s, %s, %s)", player)
 ```
 
-For more information, refer to [Insert Data](/develop/dev-guide-insert-data.md).
+For more information, refer to [Insert data](/develop/dev-guide-insert-data.md).
 
 ### Query data
 
@@ -231,7 +231,7 @@ with get_mysqlclient_connection(autocommit=True) as conn:
         print(cur.fetchone()[0])
 ```
 
-For more information, refer to [Query Data](/develop/dev-guide-get-data-from-single-table.md).
+For more information, refer to [Query data](/develop/dev-guide-get-data-from-single-table.md).
 
 ### Update data
 
@@ -245,7 +245,7 @@ with get_mysqlclient_connection(autocommit=True) as conn:
         )
 ```
 
-For more information, refer to [Update Data](/develop/dev-guide-update-data.md).
+For more information, refer to [Update data](/develop/dev-guide-update-data.md).
 
 ### Delete data
 
@@ -256,7 +256,7 @@ with get_mysqlclient_connection(autocommit=True) as conn:
         cursor.execute("DELETE FROM players WHERE id = %s", (player_id,))
 ```
 
-For more information, refer to [Delete Data](/develop/dev-guide-delete-data.md).
+For more information, refer to [Delete data](/develop/dev-guide-delete-data.md).
 
 ## Useful notes
 
@@ -268,16 +268,16 @@ The Python driver provides low-level access to the database, but it requires the
 - Manually manage database transactions.
 - Manually map data rows (represented as tuples in `mysqlclient`) to data objects.
 
-Unless you need to write complex SQL statements, it is recommended to use [ORM](https://en.wikipedia.org/w/index.php?title=Object-relational_mapping) framework (like [SQLAlchemy](/develop/dev-guide-sample-application-python-sqlalchemy.md), [Peewee](/develop/dev-guide-sample-application-python-peewee.md) and Django ORM) for development. It can help you:
+Unless you need to write complex SQL statements, it is recommended to use [ORM](https://en.wikipedia.org/w/index.php?title=Object-relational_mapping) framework for development, such as [SQLAlchemy](/develop/dev-guide-sample-application-python-sqlalchemy.md), [Peewee](/develop/dev-guide-sample-application-python-peewee.md), and Django ORM. It can help you:
 
 - Reduce [boilerplate code](https://en.wikipedia.org/wiki/Boilerplate_code) for managing connections and transactions.
 - Manipulate data with data objects instead of a number of SQL statements.
 
 ## Next steps
 
-- Learn more usage of `mysqlclient` from [the documentation of mysqlclient](https://mysqlclient.readthedocs.io/)
-- Learn the best practices for TiDB application development with the chapters in the [Developer Guide](/develop/dev-guide-overview.md), such as: [Insert Data](/develop/dev-guide-insert-data.md), [Update Data](/develop/dev-guide-update-data.md), [Delete Data](/develop/dev-guide-delete-data.md), [Single Table Reading](/develop/dev-guide-get-data-from-single-table.md), [Transactions](/develop/dev-guide-transaction-overview.md), [SQL Performance Optimization](/develop/dev-guide-optimize-sql-overview.md), etc.
-- Learn through the professional [TiDB Developer Courses](https://www.pingcap.com/education/) and earn [TiDB certifications](https://www.pingcap.com/education/certification/) after passing the exam.
+- Learn more usage of `mysqlclient` from [the documentation of mysqlclient](https://mysqlclient.readthedocs.io/).
+- Learn the best practices for TiDB application development with the chapters in the [Developer guide](/develop/dev-guide-overview.md), such as [Insert data](/develop/dev-guide-insert-data.md), [Update data](/develop/dev-guide-update-data.md), [Delete data](/develop/dev-guide-delete-data.md), [Single table reading](/develop/dev-guide-get-data-from-single-table.md), [Transactions](/develop/dev-guide-transaction-overview.md), and [SQL performance optimization](/develop/dev-guide-optimize-sql-overview.md).
+- Learn through the professional [TiDB developer courses](https://www.pingcap.com/education/) and earn [TiDB certifications](https://www.pingcap.com/education/certification/) after passing the exam.
 
 ## Need help?
 
