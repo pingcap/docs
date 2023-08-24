@@ -281,4 +281,4 @@ Unless you need to write complex SQL statements, it is recommended to use [ORMs]
 
 ## Need help?
 
-Ask questions on the [Discord](https://discord.gg/vYU9h56kAX), or request a ticket to [TiDB support](https://support.pingcap.com/).
+Ask questions on the [Discord](https://discord.gg/vYU9h56kAX), or [create a support ticket](https://tidbcloud.com/console/support).
