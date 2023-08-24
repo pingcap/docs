@@ -55,21 +55,21 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.5/quick-start-with-
 
     + TiDB Data Migration (DM) <!-- tw: hfxsd 1-->
     
-        - 对不兼容的 DDL 支持严格的乐观模式 [#9112](https://github.com/pingcap/tiflow/issues/9112) @[GMHDBJD](https://github.com/GMHDBJD)
+        - Support strict optimistic mode for incompatible DDLs [#9112](https://github.com/pingcap/tiflow/issues/9112) @[GMHDBJD](https://github.com/GMHDBJD)
 
     + Dumpling <!-- tw: hfxsd 1-->
 
-        - 当使用 `--sql` 参数导出数据时跳过查询所有数据库和表，减少导出开销 [#45239](https://github.com/pingcap/tidb/issues/45239) @[lance6716](https://github.com/lance6716)
+        - Reduce export overhead by skipping querying all databases and tables when exporting data with the `-sql` parameter [#45239](https://github.com/pingcap/tidb/issues/45239) @[lance6716](https://github.com/lance6716)
 
 ## Bug fixes
 
 + TiDB <!-- tw: qiancai 7-->
 
-    - 修复下推 `STREAM_AGG()` 算子时，可能报错 `index out of range` 的问题 [#40857](https://github.com/pingcap/tidb/issues/40857) @[Dousir9](https://github.com/Dousir9)
-    - 修复 `CREATE TABLE` 语句包含子分区定义时，TiDB 会忽略所有分区信息创建出普通表的问题 [#41198](https://github.com/pingcap/tidb/issues/41198) [#41200](https://github.com/pingcap/tidb/issues/41200) @[mjonss](https://github.com/mjonss)
-    - 修复 `stale_read_ts` 设置不正确可能导致 `PREPARE stmt` 读数据不正确的问题 [#43044](https://github.com/pingcap/tidb/issues/43044) @[you06](https://github.com/you06) 
-    - 修复 ActivateTxn 可能出现数据竞争的问题 [#42092](https://github.com/pingcap/tidb/issues/42092) @[hawkingrei](https://github.com/hawkingrei)
-    - 修复 batch client 重连不及时的问题 [#44431](https://github.com/pingcap/tidb/issues/44431) @[crazycs520](https://github.com/crazycs520)
+    - Fix the issue that `index out of range` error might be reported when pushing down the `STREAM_AGG()` operator. [#40857](https://github.com/pingcap/tidb/issues/40857) @[Dousir9](https://github.com/Dousir9)
+    - Fix the issue that TiDB ignores all partition information and creates a normal table when the `CREATE TABLE` statement contains sub-partition definitions [#41198](https://github.com/pingcap/tidb/issues/41198) [#41200](https://github.com/pingcap/tidb/issues/41200) @[mjonss](https://github.com/mjonss)
+    - Fix the issue that incorrect `stale_read_ts` setting might cause `PREPARE stmt` to read data incorrectly [#43044](https://github.com/pingcap/tidb/issues/43044) @[you06](https://github.com/you06) 
+    - Fix the issue of possible data race in ActivateTxn [#42092](https://github.com/pingcap/tidb/issues/42092) @[hawkingrei](https://github.com/hawkingrei)
+    - Fix the issue that a batch client does not reconnect in a timely manner [#44431](https://github.com/pingcap/tidb/issues/44431) @[crazycs520](https://github.com/crazycs520)
     - (dup): release-6.1.7.md > 错误修复> TiDB - 修复 SQL compile 报错的日志未脱敏的问题 [#41831](https://github.com/pingcap/tidb/issues/41831) @[lance6716](https://github.com/lance6716)
     - (dup): release-7.1.1.md > 错误修复> TiDB - 修复同时使用 CTE 和关联子查询可能导致查询结果出错或者 panic 的问题 [#44649](https://github.com/pingcap/tidb/issues/44649) [#38170](https://github.com/pingcap/tidb/issues/38170) [#44774](https://github.com/pingcap/tidb/issues/44774) @[winoros](https://github.com/winoros) @[guo-shaoge](https://github.com/guo-shaoge)
     - (dup): release-6.6.0.md > 错误修复> TiDB - 修复了 TTL 任务不能及时触发统计信息更新的问题 [#40109](https://github.com/pingcap/tidb/issues/40109) @[YangKeao](https://github.com/YangKeao)
@@ -100,19 +100,19 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.5/quick-start-with-
     - (dup): release-7.1.1.md > 错误修复> TiDB - 修复对于过长的 SQL 输入，`FormatSQL()` 方法无法正常截断的问题 [#44542](https://github.com/pingcap/tidb/issues/44542) @[hawkingrei](https://github.com/hawkingrei)
     - (dup): release-7.1.1.md > 错误修复> TiDB - 修复即使用户没有权限，也能查看 `INFORMATION_SCHEMA.TIFLASH_REPLICA` 表信息的问题 [#45320](https://github.com/pingcap/tidb/issues/45320) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
 <!-- tw: hfxsd 6-->
-    - 修复 `DATETIME` 或 `TIMESTAMP` 列与数字值比较时，行为与 MySQL 不一致的问题 [#38361](https://github.com/pingcap/tidb/issues/38361) @[yibin87](https://github.com/yibin87)
-    - 修复 Index Join 出错可能导致查询卡住的问题 [#45716](https://github.com/pingcap/tidb/issues/45716) @[wshwsh12](https://github.com/wshwsh12)
-    - 修复 kill 连接之后可能会出现 go coroutine 泄露的问题 [#46034](https://github.com/pingcap/tidb/issues/46034) @[pingyu](https://github.com/pingyu)
-    - 修复 `tmp-storage-quota` 配置无法生效的问题 [#45161](https://github.com/pingcap/tidb/issues/45161) [#26806](https://github.com/pingcap/tidb/issues/26806) @[wshwsh12](https://github.com/wshwsh12)
-    - 修复集群中有 TiFlash 节点宕机时，TiFlash 副本可能不可用的问题 [#38484](https://github.com/pingcap/tidb/issues/38484) @[hehechen](https://github.com/hehechen)
-    - 修复并发读写 `Config.Lables` 时可能出现数据竞争导致 TiDB crash 的问题 [#45561] (https://github.com/pingcap/tidb/issues/45561) @[genliqi](https://github.com/gengliqi)
+    - Fix behavior inconsistency with MySQL when comparing `DATETIME` or `TIMESTAMP` columns to a number constant [#38361](https://github.com/pingcap/tidb/issues/38361) @[yibin87](https://github.com/yibin87)
+    - Fix the issue that an error in Index Join might cause the query to get stuck. [#45716](https://github.com/pingcap/tidb/issues/45716) @[wshwsh12](https://github.com/wshwsh12)
+    - Fix the issue that might cause go coroutine leaks after killing a connection [#46034](https://github.com/pingcap/tidb/issues/46034) @[pingyu](https://github.com/pingyu)
+    - Fix the issue that `tmp-storage-quota` configuration does not take effect [#45161](https://github.com/pingcap/tidb/issues/45161) [#26806](https://github.com/pingcap/tidb/issues/26806) @[wshwsh12](https://github.com/wshwsh12)
+    - Fix the issue that TiFlash a replica might be unavailable when a TiFlash node is down in the cluster [#38484](https://github.com/pingcap/tidb/issues/38484) @[hehechen](https://github.com/hehechen)
+    - Fix the issue of TiDB crash due to possible data race when reading and writing `Config.Lables` concurrently. [#45561] (https://github.com/pingcap/tidb/issues/45561) @[genliqi](https://github.com/gengliqi)
 
 + TiKV <!-- tw: qiancai 9-->
 
-    - 修复 `ttl-check-poll-interval` 配置项对 RawKV API V2 不生效的问题 [#15142](https://github.com/tikv/tikv/issues/15142) @[pingyu](https://github.com/pingyu)
-    - 修复 Online Unsafe Recovery 超时未中止的问题 [#15346](https://github.com/tikv/tikv/issues/15346) @[Connor1996](https://github.com/Connor1996)
-    - 修复在执行 `FLASHBACK` 后 Region Merge 可能被阻塞的问题 [#15258](https://github.com/tikv/tikv/issues/15258) @[overvenus](https://github.com/overvenus)
-    - 修复当一个 TiKV 节点被隔离而另一个节点重启时，可能导致读取不一致的问题 [#15035](https://github.com/tikv/tikv/issues/15035) @[overvenus](https://github.com/overvenus)
+    - Fix the issue that `ttl-check-poll-interval` configuration item does not work for RawKV API V2 [#15142](https://github.com/tikv/tikv/issues/15142) @[pingyu](https://github.com/pingyu)
+    - Fix the issue that Online Unsafe Recovery timeout is not terminated [#15346](https://github.com/tikv/tikv/issues/15346) @[Connor1996](https://github.com/Connor1996)
+    - Fix the issue that Region Merge might be blocked after executing `FLASHBACK` [#15258](https://github.com/tikv/tikv/issues/15258) @[overvenus](https://github.com/overvenus)
+    - Fix the issue that might lead to inconsistent reads when one TiKV node is quarantined and another is restarted [#15035](https://github.com/tikv/tikv/issues/15035) @[overvenus](https://github.com/overvenus)
     - 修复自适应同步模式下 sync-recover 阶段 QPS 下降到 0 的问题 [#14975](https://github.com/tikv/tikv/issues/14975) @[nolouch](https://github.com/nolouch)
     - 修复部分写入时加密可能导致数据损坏的问题 [#15080](https://github.com/tikv/tikv/issues/15080) @[tabokie](https://github.com/tabokie)
     - 减少 Store 心跳重试次数，修复心跳风暴的问题 [#15184](https://github.com/tikv/tikv/issues/15184) @[nolouch](https://github.com/nolouch)
