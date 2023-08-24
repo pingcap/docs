@@ -13,7 +13,7 @@ TiDB is a MySQL-compatible database, and [mysqlclient](https://github.com/PyMySQ
 In this tutorial, you can learn how to use TiDB and mysqlclient to accomplish the following tasks:
 
 - Set up your environment.
-- Connect to TiDB Serverless, TiDB Dedicated, or TiDB Self-Hosted using mysqlclient.
+- Connect to your TiDB cluster using mysqlclient.
 - Build and run your application. Optionally, you can find sample code snippets for basic CRUD operations.
 
 > **Note:**
@@ -271,7 +271,7 @@ The Python driver provides low-level access to the database, but it also require
 - Manage database transactions manually.
 - Map data rows (represented as tuples in the `mysqlclient`) to data objects manually.
 
-Unless you need to write complex SQL statements, it is recommended that you use [ORMs](https://en.wikipedia.org/w/index.php?title=Object%E2%80%93relational_mapping) for developing. They can help you:
+Unless you need to write complex SQL statements, it is recommended to use [ORMs](https://en.wikipedia.org/w/index.php?title=Object%E2%80%93relational_mapping) for developing. They can help you:
 
 - Reduce [boilerplate code](https://en.wikipedia.org/wiki/Boilerplate_code) for managing connections and transactions.
 - Manipulate data with data objects instead of an amount of SQL statements.
@@ -279,5 +279,9 @@ Unless you need to write complex SQL statements, it is recommended that you use 
 ## Next steps
 
 - Learn more usage of `mysqlclient` from [the documentation of mysqlclient](https://mysqlclient.readthedocs.io/)
-- Learn more the best practices about TiDB application development through reading the chapters in the [Developer Guide](/develop/dev-guide-overview.md), such as: [Insert Data](/develop/dev-guide-insert-data.md), [Update Data](/develop/dev-guide-update-data.md), [Delete Data](/develop/dev-guide-delete-data.md), [Single Table Reading](/develop/dev-guide-get-data-from-single-table.md), [Transactions](/develop/dev-guide-transaction-overview.md), [SQL Performance Optimization](/develop/dev-guide-optimize-sql-overview.md), etc.
+- Learn the best practices for TiDB application development with the chapters in the [Developer Guide](/develop/dev-guide-overview.md), such as: [Insert Data](/develop/dev-guide-insert-data.md), [Update Data](/develop/dev-guide-update-data.md), [Delete Data](/develop/dev-guide-delete-data.md), [Single Table Reading](/develop/dev-guide-get-data-from-single-table.md), [Transactions](/develop/dev-guide-transaction-overview.md), [SQL Performance Optimization](/develop/dev-guide-optimize-sql-overview.md), etc.
 - Learn through the professional [TiDB Developer Courses](https://www.pingcap.com/education/) and earn [TiDB certifications](https://www.pingcap.com/education/certification/) after passing the exam.
+
+## Need help?
+
+Ask questions on the TiDB [Forum](https://ask.pingcap.com/) or [Discord](https://discord.com/channels/1083300679386406923/channel-browser), or get help from the [TiDB Cloud support team](https://tidbcloud.com/console/support).
