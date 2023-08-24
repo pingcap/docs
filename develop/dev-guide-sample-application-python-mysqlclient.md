@@ -268,7 +268,7 @@ The Python driver provides low-level access to the database, but it requires the
 - Manually manage database transactions.
 - Manually map data rows (represented as tuples in `mysqlclient`) to data objects.
 
-Unless you need to write complex SQL statements, it is recommended to use [ORM]((https://en.wikipedia.org/w/index.php?title=Object-relational_mapping)) framework (like [SQLAlchemy](/develop/dev-guide-sample-application-python-sqlalchemy.md), [Peewee](/develop/dev-guide-sample-application-python-peewee.md) and Django ORM) for development. It can help you:
+Unless you need to write complex SQL statements, it is recommended to use [ORM](https://en.wikipedia.org/w/index.php?title=Object-relational_mapping) framework (like [SQLAlchemy](/develop/dev-guide-sample-application-python-sqlalchemy.md), [Peewee](/develop/dev-guide-sample-application-python-peewee.md) and Django ORM) for development. It can help you:
 
 - Reduce [boilerplate code](https://en.wikipedia.org/wiki/Boilerplate_code) for managing connections and transactions.
 - Manipulate data with data objects instead of a number of SQL statements.
