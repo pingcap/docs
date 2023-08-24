@@ -60,6 +60,20 @@ With TiDB Cloud, you can get the following key features:
 
     Get world-class support through our support portal, <a href="mailto:tidbcloud-support@pingcap.com">email</a>, chat, or video conferencing.
 
+## Deployment options
+
+TiDB Cloud provides the following two deployment options:
+
+- TiDB Serverless
+
+    TiDB Serverless is a fully managed, multi-tenant TiDB offering. It delivers an instant, autoscaling MySQL-compatible database and offers a generous free tier and consumption based billing once free limits are exceeded.
+
+- TiDB Dedicated
+
+    TiDB Dedicated is for production use with the benefits of cross-zone high availability, horizontal scaling, and [HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing).
+
+For a feature comparison list between TiDB Serverless and TiDB Cloud, see [TiDB: An advanced, open source, distributed SQL database](https://www.pingcap.com/get-started-tidb).
+
 ## Architecture
 
 ![TiDB Cloud architecture](/media/tidb-cloud/tidb-cloud-architecture.png)
