@@ -184,7 +184,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
     python mysqlclient_example.py
     ```
 
-2. Check the [Expected output.txt](https://github.com/tidb-samples/tidb-python-mysqlclient-quickstart/blob/main/Expected-Output.txt) to see if the output matches.
+2. Check the [Expected-Output.txt](https://github.com/tidb-samples/tidb-python-mysqlclient-quickstart/blob/main/Expected-Output.txt) to see if the output matches.
 
 ## Sample code snippets
 
