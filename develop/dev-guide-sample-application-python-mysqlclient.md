@@ -48,7 +48,7 @@ This section demonstrates how to run the sample application code and connect to 
 
 ### Step 1: Clone the sample app repository
 
-Run the following command in your terminal window to clone the sample code repository:
+Run the following commands in your terminal window to clone the sample code repository:
 
 ```shell
 git clone https://github.com/tidb-samples/tidb-python-mysqlclient-quickstart.git
