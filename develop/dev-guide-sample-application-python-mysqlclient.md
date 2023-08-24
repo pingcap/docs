@@ -55,9 +55,9 @@ git clone https://github.com/tidb-samples/tidb-python-mysqlclient-quickstart.git
 cd tidb-python-mysqlclient-quickstart;
 ```
 
-### Step 2: Install dependencies (including mysqlclient)
+### Step 2: Install dependencies
 
-Run the following commands to install the required packages for the sample app:
+Run the following commands to install the required packages (including `mysqlclient`) for the sample app:
 
 ```shell
 pip install -r requirements.txt
@@ -72,7 +72,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 <SimpleTab>
 <div label="TiDB Serverless">
 
-1. Navigate to the [Clusters](https://tidbcloud.com/console/clusters) page on the TiDB Cloud console, and then click the name of your target cluster to go to its **Overview** page. 
+1. Navigate to the [Clusters](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page. 
 
 2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
 
@@ -109,7 +109,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
     CA_PATH=''
     ```
 
-    Be sure to replace the placeholders `{}` with the values obtained from the connection dialog.
+    Be sure to replace the placeholders `{}` with the connection parameters obtained from the connection dialog.
 
     TiDB Serverless requires a secure connection. Since the `ssl_mode` of mysqlclient defaults to `PREFERRED`, you don't need to manually specify `CA_PATH`. Just leave it empty. But if you have a special reason to specify `CA_PATH` manually, you can refer to the [TLS Connections to TiDB Serverless](https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-clusters) to get the certificate paths for different operating systems.
 
@@ -118,7 +118,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 </div>
 <div label="TiDB Dedicated">
 
-1. Navigate to the [Clusters](https://tidbcloud.com/console/clusters) page on the TiDB Cloud console, and then click the name of your target cluster to go to its **Overview** page.
+1. Navigate to the [Clusters](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
 
 2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
 
@@ -143,7 +143,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
     CA_PATH='{your-downloaded-ca-path}'
     ```
 
-    Be sure to replace the placeholders `{}` with the values obtained from the connection dialog, and configure `CA_PATH` with the certificate path downloaded in the previous step.
+    Be sure to replace the placeholders `{}` with the connection parameters obtained from the connection dialog, and configure `CA_PATH` with the certificate path downloaded in the previous step.
 
 6. Save the `.env` file.
 
@@ -166,7 +166,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
     TIDB_DB_NAME='test'
     ```
 
-    Be sure to replace the placeholders `{}` with the values, and remove the `CA_PATH` line. If you are running TiDB locally, the default host address is `127.0.0.1`, and the password is empty.
+    Be sure to replace the placeholders `{}` with the connection parameters, and remove the `CA_PATH` line. If you are running TiDB locally, the default host address is `127.0.0.1`, and the password is empty.
 
 3. Save the `.env` file.
 
