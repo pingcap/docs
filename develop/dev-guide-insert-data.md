@@ -218,11 +218,19 @@ with get_connection(autocommit=True) as connection:
 
 For complete examples in Python, see:
 
+<<<<<<< HEAD
 - [Use PyMySQL to build a simple CRUD application with TiDB and Python](/develop/dev-guide-sample-application-python.md#step-2-get-the-code)
 - [Use mysqlclient to build a simple CRUD application with TiDB and Python](/develop/dev-guide-sample-application-python.md#step-2-get-the-code)
 - [Use mysql-connector-python to build a simple CRUD application with TiDB and Python](/develop/dev-guide-sample-application-python.md#step-2-get-the-code)
 - [Use SQLAlchemy to build a simple CRUD application with TiDB and Python](/develop/dev-guide-sample-application-python.md#step-2-get-the-code)
 - [Use peewee to build a simple CRUD application with TiDB and Python](/develop/dev-guide-sample-application-python.md#step-2-get-the-code)
+=======
+- [Use PyMySQL to build a simple CRUD app with TiDB and Python](/develop/dev-guide-sample-application-python-pymysql.md#step-2-get-the-code)
+- [Connect to TiDB with mysqlclient](https://github.com/tidb-samples/tidb-python-mysqlclient-quickstart)
+- [Use MySQL Connector/Python to build a simple CRUD app with TiDB and Python](/develop/dev-guide-sample-application-python-mysql-connector.md#step-2-get-the-code)
+- [Use SQLAlchemy to build a simple CRUD app with TiDB and Python](/develop/dev-guide-sample-application-python-sqlalchemy.md#step-2-get-the-code)
+- [Use peewee to build a simple CRUD app with TiDB and Python](/develop/dev-guide-sample-application-python-peewee.md#step-2-get-the-code)
+>>>>>>> 2de955cc86 (develop: refactor Python mysqlclient tutorial (#14544))
 
 </div>
 
