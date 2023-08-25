@@ -36,6 +36,7 @@
       - [PyMySQL](/develop/dev-guide-sample-application-python-pymysql.md)
       - [SQLAlchemy](/develop/dev-guide-sample-application-python-sqlalchemy.md)
       - [peewee](/develop/dev-guide-sample-application-python-peewee.md)
+      - [Django](/develop/dev-guide-sample-application-python-django.md)
   - Connect to TiDB
     - [Choose Driver or ORM](/develop/dev-guide-choose-driver-or-orm.md)
     - [Connect to TiDB](/develop/dev-guide-connect-to-tidb.md)
