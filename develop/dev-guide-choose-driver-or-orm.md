@@ -42,7 +42,7 @@ Support level: **Full**
 
 [TiDB-JDBC](https://github.com/pingcap/mysql-connector-j) is a customized Java driver based on MySQL 8.0.29. Compiled based on MySQL official version 8.0.29, TiDB-JDBC fixes the bug of multi-parameter and multi-field EOF in the prepare mode in the original JDBC, and adds features such as automatic TiCDC snapshot maintenance and the SM3 authentication plugin.
 
-Using SM3-based authentication is only supported with the TiDB version of MySQL Connector/J.
+The authentication based on SM3 is only supported in TiDB's TiDB-JDBC.
 
 If you use Maven, add the following content to the `<dependencies></dependencies>` section in the `pom.xml` file:
 
@@ -181,8 +181,7 @@ Currently, tidb-loadbalance supports the following policies: roundrobin, random,
 
 > **Note:**
 >
-> - **DO NOT** use tidb-loadbalance in your production environment.
-> - tidb-loadbalance must be used with [mysql-connector-j](https://github.com/pingcap/mysql-connector-j).
+> tidb-loadbalance must be used with [mysql-connector-j](https://github.com/pingcap/mysql-connector-j).
 
 If you use Maven, add the following content to the element body of `<dependencies></dependencies>` in the `pom.xml` file:
 
@@ -257,7 +256,7 @@ Support level: **Compatible**
 
 You can follow the [mysqlclient documentation](https://pypi.org/project/mysqlclient/) to download and configure the driver. It is recommended to use mysqlclient 2.1.1 or later versions.
 
-For an example of using mysqlclient to build a TiDB application, see [Build a simple CRUD app with TiDB and mysqlclient](/develop/dev-guide-sample-application-python-mysqlclient.md#step-2-get-the-code).
+For an example of using mysqlclient to build a TiDB application, see [Connect to TiDB with mysqlclient](/develop/dev-guide-sample-application-python-mysqlclient.md).
 
 </div>
 <div label="MySQL Connector/Python">
