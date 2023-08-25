@@ -11,7 +11,7 @@ In this tutorial, you can learn how to use TiDB and Prisma to accomplish the fol
 
 - Set up your environment.
 - Connect to your TiDB cluster using Prisma.
-- Build and run your application. Optionally, you can find sample code snippets for basic CRUD operations.
+- Build and run your application. Optionally, you can find [sample code snippets](#sample-code-snippets) for basic CRUD operations.
 
 > **Note:**
 >
@@ -85,9 +85,9 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 
 3. Ensure the configurations in the connection dialog match your operating environment.
 
-    - **Endpoint Type** is set to `Public`
-    - **Connect With** is set to `General`
-    - **Operating System** matches your environment.
+    - **Endpoint Type** is set to `Public`.
+    - **Connect With** is set to `General`.
+   - **Operating System** matches the operating system where you run the application.
 
 4. If you have not set a password yet, click **Create password** to generate a random password.
 
@@ -139,7 +139,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 5. Edit the `.env` file, set up the environment variable `DATABASE_URL` as follows, replace the corresponding placeholders `{}` with connection parameters on the connection dialog:
 
     ```dotenv
-    DATABASE_URL=mysql://{host}:{password}@{host}:4000/test?sslaccept=strict&sslcert={ssl_ca_file_path}
+    DATABASE_URL=mysql://{host}:{password}@{host}:4000/test?sslaccept=strict&sslcert={downloaded_ssl_ca_path}
     ```
 
     > For TiDB Serverless, TLS connection is **RECOMMENDED** be enabled when using public endpoint. When you set up `sslaccept=strict` to enable TLS connection, you **MUST** specify the file path of the CA certificate downloaded from connection dialog via `sslcert=/path/to/ca.pem`.  
@@ -204,7 +204,7 @@ npx prisma migrate
 **Data models defined in `prisma.schema`:**
 
 ```prisma
-// Define a Player model, which represents the `players` table in the database.
+// Define a Player model, which represents the `players` table.
 model Player {
   id        Int      @id @default(autoincrement())
   name      String   @unique(map: "uk_player_on_name") @db.VarChar(50)
@@ -216,12 +216,12 @@ model Player {
   @@map("players")
 }
 
-// Define a Profile model, which represents the `profiles` table in the database.
+// Define a Profile model, which represents the `profiles` table.
 model Profile {
   playerId  Int    @id @map("player_id")
   biography String @db.Text
 
-  // Define a 1:1 relation between the `Player` and `Profile` models with Foreign Key constraints.
+  // Define a 1:1 relation between the `Player` and `Profile` models with foreign key.
   player    Player @relation(fields: [playerId], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_profile_on_player_id")
 
   @@map("profiles")

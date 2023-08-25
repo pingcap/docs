@@ -11,7 +11,7 @@ In this tutorial, you can learn how to use TiDB and mysql.js driver to accomplis
 
 - Set up your environment.
 - Connect to your TiDB cluster using mysql.js driver.
-- Build and run your application. Optionally, you can find sample code snippets for basic CRUD operations.
+- Build and run your application. Optionally, you can find [sample code snippets](#sample-code-snippets) for basic CRUD operations.
 
 > **Note:**
 >
@@ -84,19 +84,11 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 
 3. Ensure the configurations in the connection dialog match your operating environment.
 
-   - **Endpoint Type** is set to `Public`
-   - **Connect With** is set to `General`
-   - **Operating System** matches your environment.
-
-   > **Tip:**
-   >
-   > If your program is running in Windows Subsystem for Linux (WSL), switch to the corresponding Linux distribution.
+   - **Endpoint Type** is set to `Public`.
+   - **Connect With** is set to `General`.
+   - **Operating System** matches the operating system where you run the application.
 
 4. If you have not set a password yet, click **Create password** to generate a random password.
-
-   > **Tip:**
-   >
-   > If you have created a password before, you can either use the original password or click **Reset password** to generate a new one.
 
 5. Run the following command to copy `.env.example` and rename it to `.env`:
 
@@ -104,7 +96,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
     cp .env.example .env
     ```
 
-6. Edit the `.env` file, copy the connection parameters on the connection dialog, and replace the corresponding placeholders `{}`. The example configuration is as follows:
+6. Edit the `.env` file, set up the environment variables as follows, replace the corresponding placeholders `{}` with connection parameters on the connection dialog:
 
     ```dotenv
     TIDB_HOST={host}
@@ -136,7 +128,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
     cp .env.example .env
     ```
 
-5. Edit the `.env` file, copy the connection parameters on the connection dialog, and replace the corresponding placeholders `{}`. The example configuration is as follows:
+5. Edit the `.env` file, set up the environment variables as follows, replace the corresponding placeholders `{}` with connection parameters on the connection dialog:
 
     ```dotenv
     TIDB_HOST={host}
@@ -144,8 +136,8 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
     TIDB_USER={username}
     TIDB_PASSWORD={password}
     TIDB_DATABASE=test
-    # TIDB_ENABLE_SSL=true
-    # TIDB_CA_PATH=/path/to/ca.pem
+    TIDB_ENABLE_SSL=true
+    TIDB_CA_PATH={downloaded_ssl_ca_path}
     ```
 
    > To enable TLS connection, modify `TIDB_ENABLE_SSL` to `true` and using `TIDB_CA_PATH` to specify the file path of CA certificate downloaded from the connection dialog.
@@ -224,9 +216,7 @@ const options = {
 const conn = await createConnection(options);
 ```
 
-To enable TLS connection, please set up the environment variable `TIDB_ENABLE_SSL` to `true`. (Required for TiDB Serverless public endpoint)
-
-> For TiDB Serverless, you **don't** have to specify an SSL CA certificate, because Node.js uses the built-in [Mozilla CA certificate](https://wiki.mozilla.org/CA/Included_Certificates) by default, which is trusted by TiDB Serverless.
+> For TiDB Serverless, TLS connection **MUST** be enabled via `TIDB_ENABLE_SSL` when using public endpoint, but you **don't** have to specify an SSL CA certificate via `TIDB_CA_PATH`, because Node.js uses the built-in [Mozilla CA certificate](https://wiki.mozilla.org/CA/Included_Certificates) by default, which is trusted by TiDB Serverless.
 
 ### Insert data
 
