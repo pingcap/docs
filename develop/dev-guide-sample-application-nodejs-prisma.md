@@ -274,6 +274,7 @@ void main();
 **Expected execution output:**
 
 If the connection is successful, the terminal will output the version of the TiDB cluster as follows:
+
 ```
 🔌 Connected to TiDB cluster! (TiDB version: 5.7.25-TiDB-v6.6.0-serverless)
 🆕 Created a new player with ID 1.
