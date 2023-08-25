@@ -139,7 +139,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
     TIDB_PASSWORD={password}
     TIDB_DATABASE=test
     TIDB_ENABLE_SSL=true
-    TIDB_CA_PATH={ssl_ca_file_path}
+    TIDB_CA_PATH={downloaded_ssl_ca_path}
     ```
 
    > To enable TLS connection, modify `TIDB_ENABLE_SSL` to `true` and using `TIDB_CA_PATH` to specify the file path of CA certificate downloaded from the connection dialog.
