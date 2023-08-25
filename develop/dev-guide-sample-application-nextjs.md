@@ -52,7 +52,7 @@ cd tidb-nextjs-vercel-quickstart
 
 ### Step 2. Install dependencies
 
-Install the necessary dependencies:
+Run the following command to install the required packages (including `mysql2`) for the sample app:
 
 ```bash
 npm install
@@ -234,18 +234,9 @@ Refer to [Delete data](/develop/dev-guide-delete-data.md) for more information.
 
 ## Useful notes
 
-### Using driver or ORM framework?
-
-The Node.js driver provides low-level access to the database, but it requires the developers to:
-
-- Manually establish and release database connections.
-- Manually manage database transactions.
-- Manually map data rows to data objects.
-
-Unless you need to write complex SQL statements, it is recommended to use [ORM](https://en.wikipedia.org/w/index.php?title=Object-relational_mapping) framework for development, such as [Sequelize](https://sequelize.org/), [Prisma](https://www.prisma.io/), and [TypeORM](https://typeorm.io/). It can help you:
-
-- Reduce [boilerplate code](https://en.wikipedia.org/wiki/Boilerplate_code) for managing connections and transactions.
-- Manipulate data with data objects instead of a number of SQL statements.
+- Using [connection pools](https://github.com/sidorares/node-mysql2#using-connection-pools) to manage database connections, which can reduce the performance overhead caused by frequently establishing/destroying connections.
+- Using [prepared statements](https://github.com/sidorares/node-mysql2#using-prepared-statements) to avoid SQL injection.
+- Using ORM frameworks to improve development efficiency in scenarios without a number of complex SQL statements, such as: [Sequelize](https://sequelize.org/), [TypeORM](https://typeorm.io/), and [Prisma](/develop/dev-guide-sample-application-nodejs-prisma.md).
 
 ## Next steps
 
