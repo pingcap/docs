@@ -154,7 +154,7 @@ The console audit logs record various user activities on the TiDB Cloud console 
 | DeleteBranch                   | Delete a TiDB Serverless branch                                                |
 | SetBranchRootPassword          | Set root password for a TiDB Serverless branch                                 |
 | ConnectBranchGitHub            | Connect to the cluster (this is, the main branch) and a GitHub repository      |
-| DisconnectBranchGitHub         | Disconnect from the cluster (this is, the main branch) and a Github repository |
+| DisconnectBranchGitHub         | Disconnect from the cluster (this is, the main branch) and a GitHub repository |
 
 ## Console audit log fields
 
