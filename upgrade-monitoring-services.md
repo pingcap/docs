@@ -11,10 +11,10 @@ When managing a cluster, TiUP uses its own configurations to override the config
 
 > **Note:**
 >
-> - If your monitoring services are not deployed and managed by TiUP, you can directly upgrade them without referring to this document.
+> - If your monitoring services are [deployed manually](deploy-monitoring-services.md) instead of using TiUP, you can directly upgrade them without referring to this document.
 > - The TiDB compatibility with newer versions of monitoring services has not been not tested, so it is possible that some features might not work as expected after the upgrade. For any issues, you can create an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
 > - The upgrade steps in this document are applicable for TiUP version 1.9.0 and later. Therefore, check your TiUP version before the upgrade.
-
+> - When you use TiUP to upgrade the TiDB cluster, TiUP will redeploy the monitoring services to the default version. You need to redo the upgrade for monitoring services after the TiDB upgrade. 
 ## Upgrade Prometheus
 
 For better compatibility with TiDB, it is recommended to use the Prometheus installation package provided in the TiDB installation package. The version of Prometheus in the TiDB installation package is fixed. If you want to use a newer Prometheus version, refer to [Prometheus Release Notes](https://github.com/prometheus/prometheus/releases) for new features of each version and choose a suitable version for your production environment. You can also consult with PingCAP technical staff for a recommended version.
@@ -27,7 +27,7 @@ Download a new installation package from the [Prometheus download page](https://
 
 ### Step 2. Download the Prometheus installation package provided by TiDB
 
-1. Download the `TiDB-community-server` package from the [TiDB download page](https://pingcap.com/product/#SelectProduct) and extract it.
+1. Download the TiDB **Server Package** from the [TiDB download page](https://www.pingcap.com/download/) and extract it.
 2. In the extracted files, locate `prometheus-v{version}-linux-amd64.tar.gz` and extract it.
 
     ```bash
@@ -49,7 +49,7 @@ Download a new installation package from the [Prometheus download page](https://
 Execute the following command to upgrade Prometheus:
 
 ```bash
-tiup cluster patch <cluster-name> prometheus-{new-version}.tar.gz -R prometheus
+tiup cluster patch <cluster-name> prometheus-v{new-version}.tar.gz -R prometheus
 ```
 
 After the upgrade, you can go to the home page of the Prometheus server (usually at `http://<Prometheus-server-host-name>:9090`), click **Status** in the top navigation menu, and then open the **Runtime & Build Information** page to check the Prometheus version and confirm whether the upgrade is successful.
@@ -62,7 +62,8 @@ In the following upgrade steps, you need to download the Grafana installation pa
 
 ### Step 1. Download a new Grafana installation package from the Grafana website
 
-Download a new installation package from the [Grafana download page](https://grafana.com/grafana/download?pg=get&plcmt=selfmanaged-box1-cta1) and extract it.
+1. Download a new installation package from the [Grafana download page](https://grafana.com/grafana/download?pg=get&plcmt=selfmanaged-box1-cta1). You can choose either the `OSS` or `Enterprise` edition according to your needs.
+2. Extract the downloaded package. 
 
 ### Step 2. Download the Grafana installation package provided by TiDB
 
