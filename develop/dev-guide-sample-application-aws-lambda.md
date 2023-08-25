@@ -8,8 +8,6 @@ summary: This article describes how to build a CRUD application using TiDB and m
 
 # Connect to TiDB by using mysql2 in AWS Lambda Function
 
-This guide demonstrates how to use TiDB, a MySQL-compatible database, and [mysql2](https://www.npmjs.com/package/mysql2), a popular open-source Node.js driver, in an [AWS Lambda Function](https://aws.amazon.com/lambda/) to build a simple CRUD application.
-
 TiDB is a MySQL-compatible database, [AWS Lambda Function](https://aws.amazon.com/lambda/) is a compute service, and [mysql2](https://github.com/sidorares/node-mysql2) is a popular open-source driver for Node.js.
 
 In this tutorial, you can learn how to use TiDB and mysql2 in AWS Lambda Function to accomplish the following tasks:
@@ -31,6 +29,7 @@ Ensure you have the following installed and set up:
 - A running TiDB cluster.
 - An [AWS account](https://repost.aws/knowledge-center/create-and-activate-aws-account).
 - An AWS user with access to the Lambda function.
+- [AWS SAM CLI](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/install-sam-cli.html)
 
 If you don't have a TiDB cluster yet, you can create one using one of the following methods:
 
@@ -58,7 +57,7 @@ cd tidb-aws-lambda-quickstart
 
 ### Step 2: Install dependencies
 
-Install the necessary dependencies:
+Run the following command to install the required packages (including `mysql2`) for the sample app:
 
 ```bash
 npm install
@@ -136,12 +135,12 @@ The method to connect to the TiDB cluster varies based on your deployment method
 
 ### Step 4: Run the sample application locally
 
-1. Install the [AWS SAM CLI](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/install-sam-cli.html).
+1. (Prerequisite) Install the [AWS SAM CLI](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/install-sam-cli.html).
 
 2. Invoke the sample Lambda function:
 
     ```bash
-    sam local invoke --env-vars env.json -e event.json "tidbHelloWorldFunction"
+    sam local invoke --env-vars env.json -e events/event.json "tidbHelloWorldFunction"
     ```
 
 3. Check the output in the terminal. If the output is similar to the following, the connection is successful:
@@ -159,6 +158,10 @@ You can refer to the following key code snippets to complete your application de
 ### Connect to TiDB
 
 ```typescript
+/** It's different from the sample code in the repository, which is for local development and learning purposes only.
+ * Which is not recommended in production environment.
+ * Please refer to the code in [tidb-aws-lambda-quickstart](https://github.com/tidb-samples/tidb-aws-lambda-quickstart) GitHub repository for production environment.
+ */
 import mysql from 'mysql2';
 
 let pool: mysql.Pool;
@@ -233,21 +236,14 @@ Refer to [Delete data](/develop/dev-guide-delete-data.md) for more information.
 
 ## Useful notes
 
-### Using driver or ORM framework?
-
-The Node.js driver provides low-level access to the database, but it requires the developers to:
-
-- Manually establish and release database connections.
-- Manually manage database transactions.
-- Manually map data rows to data objects.
-
-Unless you need to write complex SQL statements, it is recommended to use [ORM](https://en.wikipedia.org/w/index.php?title=Object-relational_mapping) framework for development, such as [Sequelize](https://sequelize.org/), [Prisma](https://www.prisma.io/), and [TypeORM](https://typeorm.io/). It can help you:
-
-- Reduce [boilerplate code](https://en.wikipedia.org/wiki/Boilerplate_code) for managing connections and transactions.
-- Manipulate data with data objects instead of a number of SQL statements.
+- Using [connection pools](https://github.com/sidorares/node-mysql2#using-connection-pools) to manage database connections, which can reduce the performance overhead caused by frequently establishing/destroying connections.
+- Using [prepared statements](https://github.com/sidorares/node-mysql2#using-prepared-statements) to avoid SQL injection.
+- Using ORM frameworks to improve development efficiency in scenarios without a number of complex SQL statements, such as: [Sequelize](https://sequelize.org/), [TypeORM](https://typeorm.io/), and [Prisma](/develop/dev-guide-sample-application-nodejs-prisma.md).
+- It's recommended to [use AWS Lambda with API Gateway](https://docs.aws.amazon.com/lambda/latest/dg/services-apigateway.html) to build a RESTful API for your application.
 
 ## Next steps
 
+- For more details on how to use TiDB in AWS Lambda Function, see our [TiDB-Lambda-integration/aws-lambda-bookstore Demo](https://github.com/pingcap/TiDB-Lambda-integration/blob/main/aws-lambda-bookstore/README.md). And you can use AWS API Gateway to build a RESTful API for your application.
 - Learn more usage of `mysql2` from [the documentation of `mysql2`](https://github.com/sidorares/node-mysql2/tree/master/documentation/en).
 - Learn more usage of `AWS Lambda` from [the AWS developer guide of `Lambda`](https://docs.aws.amazon.com/lambda/latest/dg/welcome.html).
 - Learn the best practices for TiDB application development with the chapters in the [Developer guide](/develop/dev-guide-overview.md), such as [Insert data](/develop/dev-guide-insert-data.md), [Update data](/develop/dev-guide-update-data.md), [Delete data](/develop/dev-guide-delete-data.md), [Single table reading](/develop/dev-guide-get-data-from-single-table.md), [Transactions](/develop/dev-guide-transaction-overview.md), and [SQL performance optimization](/develop/dev-guide-optimize-sql-overview.md).
