@@ -55,7 +55,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.5/quick-start-with-
 
     + TiDB Data Migration (DM) <!-- tw: hfxsd 1-->
     
-        - Support strict optimistic mode for incompatible DDLs [#9112](https://github.com/pingcap/tiflow/issues/9112) @[GMHDBJD](https://github.com/GMHDBJD)
+        - Support strict optimistic mode for incompatible DDL statements [#9112](https://github.com/pingcap/tiflow/issues/9112) @[GMHDBJD](https://github.com/GMHDBJD)
 
     + Dumpling <!-- tw: hfxsd 1-->
 
@@ -65,7 +65,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.5/quick-start-with-
 
 + TiDB <!-- tw: qiancai 7-->
 
-    - Fix the issue that `index out of range` error might be reported when pushing down the `STREAM_AGG()` operator. [#40857](https://github.com/pingcap/tidb/issues/40857) @[Dousir9](https://github.com/Dousir9)
+    - Fix the issue that the `index out of range` error might be reported when pushing down the `STREAM_AGG()` operator. [#40857](https://github.com/pingcap/tidb/issues/40857) @[Dousir9](https://github.com/Dousir9)
     - Fix the issue that TiDB ignores all partition information and creates a normal table when the `CREATE TABLE` statement contains sub-partition definitions [#41198](https://github.com/pingcap/tidb/issues/41198) [#41200](https://github.com/pingcap/tidb/issues/41200) @[mjonss](https://github.com/mjonss)
     - Fix the issue that incorrect `stale_read_ts` setting might cause `PREPARE stmt` to read data incorrectly [#43044](https://github.com/pingcap/tidb/issues/43044) @[you06](https://github.com/you06) 
     - Fix the issue of possible data race in ActivateTxn [#42092](https://github.com/pingcap/tidb/issues/42092) @[hawkingrei](https://github.com/hawkingrei)
@@ -100,12 +100,12 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.5/quick-start-with-
     - (dup): Fix the issue that the `FormatSQL()` method cannot properly truncate extremely long SQL statements in input [#44542](https://github.com/pingcap/tidb/issues/44542) @[hawkingrei](https://github.com/hawkingrei)
     - (dup): Fix the issue that users can view information in the `INFORMATION_SCHEMA.TIFLASH_REPLICA` table even without permissions [#45320](https://github.com/pingcap/tidb/issues/45320) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
 <!-- tw: hfxsd 6-->
-    - Fix behavior inconsistency with MySQL when comparing `DATETIME` or `TIMESTAMP` columns to a number constant [#38361](https://github.com/pingcap/tidb/issues/38361) @[yibin87](https://github.com/yibin87)
-    - Fix the issue that an error in Index Join might cause the query to get stuck. [#45716](https://github.com/pingcap/tidb/issues/45716) @[wshwsh12](https://github.com/wshwsh12)
-    - Fix the issue that might cause go coroutine leaks after killing a connection [#46034](https://github.com/pingcap/tidb/issues/46034) @[pingyu](https://github.com/pingyu)
-    - Fix the issue that `tmp-storage-quota` configuration does not take effect [#45161](https://github.com/pingcap/tidb/issues/45161) [#26806](https://github.com/pingcap/tidb/issues/26806) @[wshwsh12](https://github.com/wshwsh12)
-    - Fix the issue that TiFlash a replica might be unavailable when a TiFlash node is down in the cluster [#38484](https://github.com/pingcap/tidb/issues/38484) @[hehechen](https://github.com/hehechen)
-    - Fix the issue that TiDB crashes due to possible data race when reading and writing `Config.Lables` concurrently. [#45561] (https://github.com/pingcap/tidb/issues/45561) @[genliqi](https://github.com/gengliqi)
+    - Fix the issue that the behavior is inconsistent with MySQL when comparing `DATETIME` or `TIMESTAMP` columns to a number constant [#38361](https://github.com/pingcap/tidb/issues/38361) @[yibin87](https://github.com/yibin87)
+    - Fix the issue that an error in Index Join might cause the query to get stuck [#45716](https://github.com/pingcap/tidb/issues/45716) @[wshwsh12](https://github.com/wshwsh12)
+    - Fix the issue that killing a connection might cause go coroutine leaks [#46034](https://github.com/pingcap/tidb/issues/46034) @[pingyu](https://github.com/pingyu)
+    - Fix the issue that the `tmp-storage-quota` configuration does not take effect [#45161](https://github.com/pingcap/tidb/issues/45161) [#26806](https://github.com/pingcap/tidb/issues/26806) @[wshwsh12](https://github.com/wshwsh12)
+    - Fix the issue that TiFlash replicas might be unavailable when a TiFlash node is down in the cluster [#38484](https://github.com/pingcap/tidb/issues/38484) @[hehechen](https://github.com/hehechen)
+    - Fix the issue that TiDB crashes due to possible data race when reading and writing `Config.Lables` concurrently [#45561] (https://github.com/pingcap/tidb/issues/45561) @[genliqi](https://github.com/gengliqi)
 
 + TiKV
 
@@ -128,7 +128,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.5/quick-start-with-
     - Fix the issue that calling a client causes a PD panic when etcd is already launched but the client is not yet connected to etcd [#6860](https://github.com/tikv/pd/issues/6860) @[HuSharp](https://github.com/HuSharp)
     - Fix the issue that unhealthy peers cannot be removed when the peer is selected by the rule checker [#6559](https://github.com/tikv/pd/issues/6559) @[nolouch](https://github.com/nolouch)
     - Fix the issue that a leader cannot exit for a long time [#6918](https://github.com/tikv/pd/issues/6918) @[bufferflies](https://github.com/bufferflies)
-    - Fix the issue that the placement rule is not compatible with SQL and Rule Checker when using `LOCATION_LABLES` [#38605](https://github.com/pingcap/tidb/issues/38605) @[nolouch](https://github.com/nolouch)
+    - Fix the issue that the placement rule is not compatible with SQL and the Rule Checker when using `LOCATION_LABLES` [#38605](https://github.com/pingcap/tidb/issues/38605) @[nolouch](https://github.com/nolouch)
     - (dup): Fix the issue that PD might unexpectedly add multiple Learners to a Region [#5786](https://github.com/tikv/pd/issues/5786) @[HunDunDM](https://github.com/HunDunDM)
     - (dup): Fix the issue that unhealthy peers cannot be removed when rule checker selects peers [#6559](https://github.com/tikv/pd/issues/6559) @[nolouch](https://github.com/nolouch)
     - (dup): Fix the issue that failed learner peers in `unsafe recovery` are ignored in `auto-detect` mode [#6690](https://github.com/tikv/pd/issues/6690) @[v01dstar](https://github.com/v01dstar)
@@ -136,7 +136,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.5/quick-start-with-
 + TiFlash <!-- tw: hfxsd-->
 
     - Fix the issue that queries fail after changing `fsp` for `DATETIME`, `TIMESTAMP`, `TIME` data types [#7809](https://github.com/pingcap/tiflash/issues/7809) @[JaySon-Huang](https://github.com/JaySon-Huang)
-    - Fix the issue that TiFlash data is inconsistent due to invalid key on the boundary of a region [#7762](https://github.com/pingcap/tiflash/issues/7762) @[lidezhu](https://github.com/lidezhu)
+    - Fix the issue that TiFlash data is inconsistent due to invalid keys in the range of a region [#7762](https://github.com/pingcap/tiflash/issues/7762) @[lidezhu](https://github.com/lidezhu)
     - (dup): Fix the issue that when there are multiple HashAgg operators within the same MPP task, the compilation of the MPP task might take an excessively long time, severely affecting query performance [#7810](https://github.com/pingcap/tiflash/issues/7810) @[SeaRise](https://github.com/SeaRise)
     - (dup): Fix the issue that TiFlash takes too long to restart after using Online Unsafe Recovery [#7671](https://github.com/pingcap/tiflash/issues/7671) @[hongyunyan](https://github.com/hongyunyan)
     - Fix the issue that TiFlash rounds the `DECIMAL` result incorrectly when doing division [#6462](https://github.com/pingcap/tiflash/issues/6462) @[LittleFall](https://github.com/LittleFall)
