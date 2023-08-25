@@ -102,8 +102,8 @@ The console audit logs record various user activities on the TiDB Cloud console 
 | CreateProjectCIDR              | Create a new project CIDR                                        |
 | CreateAWSVPCPeering            | Create an AWS VPC Peering                                        |
 | DeleteAWSVPCPeering            | Delete an AWS VPC Peering                                        |
-| CreateGCPVPCPeering            | Create a GCP VPC Peering                                         |
-| DeleteGCPVPCPeering            | Delete a GCP VPC Peering                                         |
+| CreateGCPVPCPeering            | Create a Google Cloud VPC Peering                                         |
+| DeleteGCPVPCPeering            | Delete a Google Cloud VPC Peering                                         |
 | CreatePrivateEndpointService   | Create private endpoint service                                  |
 | DeletePrivateEndpointService   | Delete private endpoint service                                  |
 | CreateAWSPrivateEndPoint       | Create an AWS private endpoint                                   |
@@ -132,7 +132,7 @@ The console audit logs record various user activities on the TiDB Cloud console 
 | RestoreFromBackup              | Restore to a TiDB cluster based on the backup files              |
 | RestoreFromTrash               | Restore to a TiDB cluster based on the backup files in the trash |
 | ImportDataFromAWS              | Import data from AWS                                             |
-| ImportDataFromGCP              | Import data from GCP                                             |
+| ImportDataFromGCP              | Import data from Google Cloud                                             |
 | ImportDataFromLocal            | Import data from local disks                                     |
 | CreateMigrationJob             | Create a migration job                                           |
 | SuspendMigrationJob            | Suspend a migration job                                          |
