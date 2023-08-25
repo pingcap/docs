@@ -15,6 +15,7 @@ When managing a cluster, TiUP uses its own configurations to override the config
 > - The TiDB compatibility with newer versions of monitoring services has not been not tested, so it is possible that some features might not work as expected after the upgrade. For any issues, you can create an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
 > - The upgrade steps in this document are applicable for TiUP version 1.9.0 and later. Therefore, check your TiUP version before the upgrade.
 > - When you use TiUP to upgrade the TiDB cluster, TiUP will redeploy the monitoring services to the default version. You need to redo the upgrade for monitoring services after the TiDB upgrade. 
+
 ## Upgrade Prometheus
 
 For better compatibility with TiDB, it is recommended to use the Prometheus installation package provided in the TiDB installation package. The version of Prometheus in the TiDB installation package is fixed. If you want to use a newer Prometheus version, refer to [Prometheus Release Notes](https://github.com/prometheus/prometheus/releases) for new features of each version and choose a suitable version for your production environment. You can also consult with PingCAP technical staff for a recommended version.
