@@ -6,9 +6,19 @@ summary: This article describes how to build a CRUD application using TiDB and m
 <!-- markdownlint-disable MD024 -->
 <!-- markdownlint-disable MD029 -->
 
-# Build a CRUD Application with TiDB and mysql2 in Next.js
+# Connect to TiDB by using mysql2 in Next.js
 
-This guide demonstrates how to use TiDB and mysql2, a popular open-source Node.js driver, to build a simple CRUD application.
+TiDB is a MySQL-compatible database, and [mysql2](https://github.com/sidorares/node-mysql2) is a popular open-source driver for Node.js.
+
+In this tutorial, you can learn how to use TiDB and mysql2 in Next.js to accomplish the following tasks:
+
+- Set up your environment.
+- Connect to your TiDB cluster using mysql2.
+- Build and run your application. Optionally, you can find sample code snippets for basic CRUD operations.
+
+> **Note:**
+>
+> This tutorial works with TiDB Serverless and TiDB Self-Hosted.
 
 ## Prerequisites
 
@@ -222,18 +232,28 @@ await pool.execute('DELETE FROM player WHERE id = 1');
 
 Refer to [Delete data](/develop/dev-guide-delete-data.md) for more information.
 
-## Considerations
+## Useful notes
 
-- It is recommended to use ORM frameworks like [Sequelize](https://sequelize.org/), [Prisma](https://www.prisma.io/), and [TypeORM](https://typeorm.io/) to improve development efficiency in scenarios that do not involve a lot of complex SQL.
+### Using driver or ORM framework?
+
+The Node.js driver provides low-level access to the database, but it requires the developers to:
+
+- Manually establish and release database connections.
+- Manually manage database transactions.
+- Manually map data rows to data objects.
+
+Unless you need to write complex SQL statements, it is recommended to use [ORM](https://en.wikipedia.org/w/index.php?title=Object-relational_mapping) framework for development, such as [Sequelize](https://sequelize.org/), [Prisma](https://www.prisma.io/), and [TypeORM](https://typeorm.io/). It can help you:
+
+- Reduce [boilerplate code](https://en.wikipedia.org/wiki/Boilerplate_code) for managing connections and transactions.
+- Manipulate data with data objects instead of a number of SQL statements.
+
+## Next steps
+
 - For more details on how to build a complex application with ORM and Next.js, see [our Bookshop Demo](https://github.com/pingcap/tidb-prisma-vercel-demo).
+- Learn more usage of `mysql2` from [the documentation of `mysql2`](https://github.com/sidorares/node-mysql2/tree/master/documentation/en).
+- Learn the best practices for TiDB application development with the chapters in the [Developer guide](/develop/dev-guide-overview.md), such as [Insert data](/develop/dev-guide-insert-data.md), [Update data](/develop/dev-guide-update-data.md), [Delete data](/develop/dev-guide-delete-data.md), [Single table reading](/develop/dev-guide-get-data-from-single-table.md), [Transactions](/develop/dev-guide-transaction-overview.md), and [SQL performance optimization](/develop/dev-guide-optimize-sql-overview.md).
+- Learn through the professional [TiDB developer courses](https://www.pingcap.com/education/) and earn [TiDB certifications](https://www.pingcap.com/education/certification/) after passing the exam.
 
-## What's next
+## Need help?
 
-To deepen your understanding of TiDB, you can explore the developer documentation, which covers various topics such as:
-
-- [Insert data](/develop/dev-guide-insert-data.md)
-- [Update data](/develop/dev-guide-update-data.md)
-- [Delete data](/develop/dev-guide-delete-data.md)
-- [Get data from single table](/develop/dev-guide-get-data-from-single-table.md)
-- [Transaction](/develop/dev-guide-transaction-overview.md)
-- [SQL performance optimization](/develop/dev-guide-optimize-sql-overview.md)
+Ask questions on the [Discord](https://discord.gg/vYU9h56kAX), or [create a support ticket](https://support.pingcap.com/).
