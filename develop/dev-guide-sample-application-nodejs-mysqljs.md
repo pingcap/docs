@@ -5,12 +5,12 @@ summary: Learn how to connect to TiDB using mysql.js. This tutorial gives Node.j
 
 # Connect to TiDB with mysql.js
 
-TiDB is a MySQL-compatible database, and [mysql.js](https://github.com/mysql.js/mysql) is a pure Node.js JavaScript client implementing the MySQL protocol.
+TiDB is a MySQL-compatible database, and [mysql.js](https://github.com/mysqljs/mysql) driver is a pure Node.js JavaScript client implementing the MySQL protocol.
 
-In this tutorial, you can learn how to use TiDB and mysql.js to accomplish the following tasks:
+In this tutorial, you can learn how to use TiDB and mysql.js driver to accomplish the following tasks:
 
 - Set up your environment.
-- Connect to your TiDB cluster using mysql.js.
+- Connect to your TiDB cluster using mysql.js driver.
 - Build and run your application. Optionally, you can find sample code snippets for basic CRUD operations.
 
 > **Note:**
@@ -316,7 +316,7 @@ For more information, refer to [Delete data](/develop/dev-guide-delete-data.md).
 
 ## Next steps
 
-- Learn more usage of mysql.js driver from [the documentation of mysql.js](https://github.com/sidorares/mysql.js#readme).
+- Learn more usage of mysql.js driver from [the documentation of mysql.js](https://github.com/mysqljs/mysql#readme).
 - Learn the best practices for TiDB application development with the chapters in the [Developer guide](/develop/dev-guide-overview.md), such as: [Insert data](/develop/dev-guide-insert-data.md), [Update data](/develop/dev-guide-update-data.md), [Delete data](/develop/dev-guide-delete-data.md), [Query data](/develop/dev-guide-get-data-from-single-table.md), [Transactions](/develop/dev-guide-transaction-overview.md), [SQL performance optimization](/develop/dev-guide-optimize-sql-overview.md).
 - Learn through the professional [TiDB developer courses](https://www.pingcap.com/education/) and earn [TiDB certifications](https://www.pingcap.com/education/certification/) after passing the exam.
 

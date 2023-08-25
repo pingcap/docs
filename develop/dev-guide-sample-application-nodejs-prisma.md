@@ -3,7 +3,7 @@ title: Connect to TiDB with Prisma
 summary: Learn how to connect to TiDB using Prisma. This tutorial gives Node.js sample code snippets that work with TiDB using Prisma.
 ---
 
-# Connect to TiDB with mysql.js
+# Connect to TiDB with Prisma
 
 TiDB is a MySQL-compatible database, and [Prisma](https://github.com/prisma/prisma) is a popular open-source ORM framework for Node.js.
 
@@ -286,7 +286,7 @@ If the connection is successful, the terminal will output the version of the TiD
 
 You can refer to the following sample code snippets to complete your own application development.
 
-For complete sample code and how to run it, check out the [tidb-samples/tidb-nodejs-mysqljs-quickstart](https://github.com/tidb-samples/tidb-nodejs-mysqljs-quickstart) repository.
+For complete sample code and how to run it, check out the [tidb-samples/tidb-nodejs-prisma-quickstart](https://github.com/tidb-samples/tidb-nodejs-prisma-quickstart) repository.
 
 ### Insert data
 
@@ -374,7 +374,7 @@ Relation mode is the emulation of referential integrity in Prisma Client side. T
 
 ## Next steps
 
-- Learn more usage of mysql.js driver from [the documentation of mysql.js](https://github.com/sidorares/mysql.js#readme).
+- Learn more usage of the ORM framework Prisma driver from [the documentation of Prisma](https://www.prisma.io/docs).
 - Learn the best practices for TiDB application development with the chapters in the [Developer guide](/develop/dev-guide-overview.md), such as: [Insert data](/develop/dev-guide-insert-data.md), [Update data](/develop/dev-guide-update-data.md), [Delete data](/develop/dev-guide-delete-data.md), [Query data](/develop/dev-guide-get-data-from-single-table.md), [Transactions](/develop/dev-guide-transaction-overview.md), [SQL performance optimization](/develop/dev-guide-optimize-sql-overview.md).
 - Learn through the professional [TiDB developer courses](https://www.pingcap.com/education/) and earn [TiDB certifications](https://www.pingcap.com/education/certification/) after passing the exam.
 
