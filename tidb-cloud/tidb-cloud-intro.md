@@ -72,7 +72,7 @@ TiDB Cloud provides the following two deployment options:
 
     TiDB Dedicated is for production use with the benefits of cross-zone high availability, horizontal scaling, and [HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing).
 
-For a feature comparison list between TiDB Serverless and TiDB Cloud, see [TiDB: An advanced, open source, distributed SQL database](https://www.pingcap.com/get-started-tidb).
+For feature comparison between TiDB Serverless and TiDB Dedicated, see [TiDB: An advanced, open source, distributed SQL database](https://www.pingcap.com/get-started-tidb).
 
 ## Architecture
 
