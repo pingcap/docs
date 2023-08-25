@@ -158,7 +158,7 @@ You can refer to the following key code snippets to complete your application de
 ### Connect to TiDB
 
 ```typescript
-/** It's different from the sample code in the repository, which is for local development and learning purposes only.
+/** It's different from the sample code in the repository, which is for learning purposes only.
  * Which is not recommended in production environment.
  * Please refer to the code in [tidb-aws-lambda-quickstart](https://github.com/tidb-samples/tidb-aws-lambda-quickstart) GitHub repository for production environment.
  */
@@ -238,7 +238,7 @@ Refer to [Delete data](/develop/dev-guide-delete-data.md) for more information.
 
 - Using [connection pools](https://github.com/sidorares/node-mysql2#using-connection-pools) to manage database connections, which can reduce the performance overhead caused by frequently establishing/destroying connections.
 - Using [prepared statements](https://github.com/sidorares/node-mysql2#using-prepared-statements) to avoid SQL injection.
-- Using ORM frameworks to improve development efficiency in scenarios without a number of complex SQL statements, such as: [Sequelize](https://sequelize.org/), [TypeORM](https://typeorm.io/), and [Prisma](/develop/dev-guide-sample-application-nodejs-prisma.md).
+- Using ORM frameworks to improve development efficiency in scenarios without a number of complex SQL statements, such as: [Sequelize](https://sequelize.org/), [TypeORM](https://typeorm.io/), and [Prisma](https://www.prisma.io/).
 - It's recommended to [use AWS Lambda with API Gateway](https://docs.aws.amazon.com/lambda/latest/dg/services-apigateway.html) to build a RESTful API for your application.
 
 ## Next steps
