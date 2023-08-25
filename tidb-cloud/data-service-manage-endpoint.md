@@ -102,7 +102,7 @@ On the right pane of the endpoint details page, you can click the **Properties**
     - `PUT`: use this method to update or modify data, such as an `UPDATE` statement.
     - `DELETE`: use this method to delete data, such as a `DELETE` statement.
 
-- **Timeout(ms)**: the timeout for the endpoint.
+- **Timeout(ms)**: the timeout for the endpoint, in milliseconds.
 
 - **Max Rows**: the maximum number of rows that the endpoint can operate or return.
 
