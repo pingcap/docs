@@ -107,19 +107,6 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.5/quick-start-with-
     - Fix the issue that TiFlash a replica might be unavailable when a TiFlash node is down in the cluster [#38484](https://github.com/pingcap/tidb/issues/38484) @[hehechen](https://github.com/hehechen)
     - Fix the issue that TiDB crashes due to possible data race when reading and writing `Config.Lables` concurrently. [#45561] (https://github.com/pingcap/tidb/issues/45561) @[genliqi](https://github.com/gengliqi)
 
-+ TiKV <!-- tw: qiancai 9-->
-
-    - Fix the issue that `ttl-check-poll-interval` configuration item does not work for RawKV API V2 [#15142](https://github.com/tikv/tikv/issues/15142) @[pingyu](https://github.com/pingyu)
-    - Fix the issue that Online Unsafe Recovery timeout is not terminated [#15346](https://github.com/tikv/tikv/issues/15346) @[Connor1996](https://github.com/Connor1996)
-    - Fix the issue that Region Merge might be blocked after executing `FLASHBACK` [#15258](https://github.com/tikv/tikv/issues/15258) @[overvenus](https://github.com/overvenus)
-    - Fix the issue that might lead to inconsistent reads when one TiKV node is quarantined and another is restarted [#15035](https://github.com/tikv/tikv/issues/15035) @[overvenus](https://github.com/overvenus)
-    - Fix the issue that the QPS drops to 0 during sync-recover phase in async mode [#14975](https://github.com/tikv/tikv/issues/14975) @[nolouch](https://github.com/nolouch)
-    - Fix the issue that encryption on partial write might cause data corruption [#15080](https://github.com/tikv/tikv/issues/15080) @[tabokie](https://github.com/tabokie)
-    - Fix heartbeat storms by reducing the number of store heartbeat retries [#15184](https://github.com/tikv/tikv/issues/15184) @[nolouch](https://github.com/nolouch)
-    - Fix the issue that flow controller does not throttle when the compaction pending bytes is high [#14392](https://github.com/tikv/tikv/issues/14392) @[Connor1996](https://github.com/Connor1996)
-    - Fix the issue that network outages between PD and TiKV can cause PITR to get stuck [#15279](https://github.com/tikv/tikv/issues/15279) @[YuJuncen](https://github.com/YuJuncen)
-    - Fix the issue that TiKV might consume more memory when the Old Value feature of TiCDC is enabled [#14815](https://github.com/tikv/tikv/issues/14815) @[YuJuncen](https://github.com/YuJuncen)
-
 + TiKV
 
     <!-- tw: Oreoxmt 6-->
