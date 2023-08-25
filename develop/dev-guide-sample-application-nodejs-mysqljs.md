@@ -202,6 +202,15 @@ For complete sample code and how to run it, check out the [tidb-samples/tidb-nod
 The following code establish a connection to TiDB with options defined in the environment variables:
 
 ```javascript
+// Step 1. Import the 'mysql' and 'dotenv' packages.
+import { createConnection } from "mysql";
+import dotenv from "dotenv";
+import * as fs from "fs";
+
+// Step 2. Load environment variables from .env file to process.env.
+dotenv.config();
+
+// Step 3. Create a connection with the TiDB cluster.
 const options = {
     host: process.env.TIDB_HOST || '127.0.0.1',
     port: process.env.TIDB_PORT || 4000,
@@ -213,7 +222,12 @@ const options = {
         ca: process.env.TIDB_CA_PATH ? fs.readFileSync(process.env.TIDB_CA_PATH) : undefined
     } : null,
 }
-const conn = await createConnection(options);
+const conn = createConnection(options);
+
+// Step 4. Perform some SQL operations...
+
+// Step 5. Close the connection.
+conn.end();
 ```
 
 > For TiDB Serverless, TLS connection **MUST** be enabled via `TIDB_ENABLE_SSL` when using public endpoint, but you **don't** have to specify an SSL CA certificate via `TIDB_CA_PATH`, because Node.js uses the built-in [Mozilla CA certificate](https://wiki.mozilla.org/CA/Included_Certificates) by default, which is trusted by TiDB Serverless.
