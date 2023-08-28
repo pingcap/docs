@@ -13,7 +13,7 @@ In this tutorial, you can learn how to use TiDB and mysql2 in AWS Lambda Functio
 - Connect to your TiDB cluster using mysql2.
 - Build and run your application. Optionally, you can find sample code snippets for basic CRUD operations.
 
-> **Note:**
+> **Note**
 >
 > This tutorial works with TiDB Serverless and TiDB Self-Hosted.
 
@@ -51,7 +51,7 @@ If you don't have an AWS account or a user, you can create them by following the
 
 This section demonstrates how to run the sample application code and connect to TiDB.
 
-> **Note:**
+> **Note**
 >
 > For complete code snippets and running instructions, refer to the[tidb-aws-lambda-quickstart](https://github.com/tidb-samples/tidb-aws-lambda-quickstart) GitHub repository.
 
@@ -84,7 +84,7 @@ The method to connect to the TiDB cluster varies based on your deployment method
 
 2. In the connection dialog, select `General` from the **Connect With** dropdown and keep the default setting of the **Endpoint Type** as `Public`.
 
-    > **Note:**
+    > **Note**
     >
     > In Node.js applications, you don't have to provide an SSL CA certificate, because Node.js uses the built-in [Mozilla CA certificate](https://wiki.mozilla.org/CA/Included_Certificates) by default when establishing the TLS (SSL) connection.
 

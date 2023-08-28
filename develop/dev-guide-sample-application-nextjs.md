@@ -3,9 +3,6 @@ title: Connect to TiDB by using mysql2 in Next.js
 summary: This article describes how to build a CRUD application using TiDB and mysql2 in Next.js and provides a simple example code snippet.
 ---
 
-<!-- markdownlint-disable MD024 -->
-<!-- markdownlint-disable MD029 -->
-
 # Connect to TiDB by using mysql2 in Next.js
 
 TiDB is a MySQL-compatible database, and [mysql2](https://github.com/sidorares/node-mysql2) is a popular open-source driver for Node.js.
@@ -16,13 +13,13 @@ In this tutorial, you can learn how to use TiDB and mysql2 in Next.js to accompl
 - Connect to your TiDB cluster using mysql2.
 - Build and run your application. Optionally, you can find sample code snippets for basic CRUD operations.
 
-> **Note:**
+> **Note**
 >
 > This tutorial works with TiDB Serverless and TiDB Self-Hosted.
 
 ## Prerequisites
 
-Ensure you have the following installed:
+To complete this tutorial, you need:
 
 - [Node.js **18**](https://nodejs.org/en/download/) or later.
 - [Git](https://git-scm.com/downloads).
@@ -47,22 +44,22 @@ Ensure you have the following installed:
 
 ## Run the sample application
 
-This section illustrates how to run the sample application code and connect to TiDB. 
+This section demonstrates how to run the sample application code and connect to TiDB.
 
-> **Note:**
+> **Note**
 >
 > For complete code snippets and running instructions, refer to the [tidb-nextjs-vercel-quickstart](https://github.com/tidb-samples/tidb-nextjs-vercel-quickstart) GitHub repository.
 
-### Step 1. Clone the sample application repository
+### Step 1: Clone the sample application repository
 
-Clone the repository to your local machine:
+Run the following commands in your terminal window to clone the sample code repository:
 
 ```bash
 git clone git@github.com:tidb-samples/tidb-nextjs-vercel-quickstart.git
 cd tidb-nextjs-vercel-quickstart
 ```
 
-### Step 2. Install dependencies
+### Step 2: Install dependencies
 
 Run the following command to install the required packages (including `mysql2`) for the sample app:
 
@@ -70,7 +67,7 @@ Run the following command to install the required packages (including `mysql2`) 
 npm install
 ```
 
-### Step 3. Configure the connection string
+### Step 3: Configure connection information
 
 The method to connect to the TiDB cluster varies based on your deployment method.
 
@@ -82,7 +79,7 @@ The method to connect to the TiDB cluster varies based on your deployment method
 
 2. In the connection dialog, select `General` from the **Connect With** dropdown and keep the default setting of the **Endpoint Type** as `Public`.
 
-  > **Note**:
+  > **Note**
   >
   > In Node.js applications, you do not have to provide an SSL CA certificate, because Node.js uses the built-in [Mozilla CA certificate](https://wiki.mozilla.org/CA/Included_Certificates) by default when establishing the TLS (SSL) connection.
 
@@ -154,7 +151,7 @@ The method to connect to the TiDB cluster varies based on your deployment method
 
 </SimpleTab>
 
-### Step 4. Run the sample application locally
+### Step 4: Run the sample application locally
 
 1. Start the application:
 
@@ -178,11 +175,11 @@ The method to connect to the TiDB cluster varies based on your deployment method
    }
    ```
 
-## Key code snippets
+## Sample code snippets
 
-Complete code snippets are available in the [tidb-nextjs-vercel-quickstart](https://github.com/tidb-samples/tidb-nextjs-vercel-quickstart) GitHub repository.
+You can refer to the following sample code snippets to complete your own application development.
 
-You can refer to the following key code snippets to complete your application development.
+For complete sample code and how to run it, check out the [tidb-nextjs-vercel-quickstart](https://github.com/tidb-samples/tidb-nextjs-vercel-quickstart) repository.
 
 ### Connect to TiDB
 
@@ -218,7 +215,7 @@ await pool.execute(
 );
 ```
 
-Refer to [Insert data](/develop/dev-guide-insert-data.md) for more information.
+For more information, refer to [Insert data](/develop/dev-guide-insert-data.md).
 
 ### Query data
 
@@ -227,7 +224,7 @@ const [rows] = await pool.execute('SELECT count(*) AS cnt FROM player');
 console.log(rows[0]['cnt']);
 ```
 
-Refer to [Query data](/develop/dev-guide-get-data-from-single-table.md) for more information.
+For more information, refer to [Query data](/develop/dev-guide-get-data-from-single-table.md).
 
 ### Update data
 
@@ -238,7 +235,7 @@ await pool.execute(
 );
 ```
 
-Refer to [Update data](/develop/dev-guide-update-data.md) for more information.
+For more information, refer to [Update data](/develop/dev-guide-update-data.md).
 
 ### Delete data
 
@@ -246,13 +243,13 @@ Refer to [Update data](/develop/dev-guide-update-data.md) for more information.
 await pool.execute('DELETE FROM player WHERE id = 1');
 ```
 
-Refer to [Delete data](/develop/dev-guide-delete-data.md) for more information.
+For more information, refer to [Delete data](/develop/dev-guide-delete-data.md).
 
 ## Useful notes
 
-- Using [connection pools](https://github.com/sidorares/node-mysql2#using-connection-pools) to manage database connections, which can reduce the performance overhead caused by frequently establishing/destroying connections.
-- Using [prepared statements](https://github.com/sidorares/node-mysql2#using-prepared-statements) to avoid SQL injection.
-- Using ORM frameworks to improve development efficiency in scenarios without a number of complex SQL statements, such as: [Sequelize](https://sequelize.org/), [TypeORM](https://typeorm.io/), and [Prisma](https://www.prisma.io/).
+- Using [connection pools](https://github.com/sidorares/node-mysql2#using-connection-pools) to manage database connections can reduce the performance overhead caused by frequently establishing and destroying connections.
+- To avoid SQL injection, it is recommended to use [prepared statements](https://github.com/sidorares/node-mysql2#using-prepared-statements).
+- In scenarios where there are not many complex SQL statements involved, using ORM frameworks like [Sequelize](https://sequelize.org/), [TypeORM](https://typeorm.io/), or [Prisma](https://www.prisma.io/) can greatly improve development efficiency.
 
 ## Next steps
 
