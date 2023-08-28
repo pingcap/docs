@@ -243,10 +243,10 @@ conn.end();
 
 ### Insert data
 
-The following query creates a single `Player` record and returns a `ResultSetHeader` object:
+The following query creates a single `Player` record and returns the ID of the newly created record:
 
 ```javascript
-conn.query('INSERT INTO players (coins, goods) VALUES (?, ?);', [coins, goods], (err, ok) => {
+conn.query('INSERT INTO players (coins, goods) VALUES (?, ?);', [100, 100], (err, ok) => {
    if (err) {
        console.error(err);
    } else {
@@ -262,7 +262,7 @@ For more information, refer to [Insert data](/develop/dev-guide-insert-data.md).
 The following query returns a single `Player` record by ID `1`:
 
 ```javascript
-conn.query('SELECT id, coins, goods FROM players WHERE id = ?;', [id], (err, rows) => {
+conn.query('SELECT id, coins, goods FROM players WHERE id = ?;', [1], (err, rows) => {
    if (err) {
       console.error(err);
    } else {
@@ -280,7 +280,7 @@ The following query adds `50` coins and `50` goods to the `Player` with ID `1`:
 ```javascript
 conn.query(
    'UPDATE players SET coins = coins + ?, goods = goods + ? WHERE id = ?;',
-   [incCoins, incGoods, playerID],
+   [50, 50, 1],
    (err, ok) => {
       if (err) {
          console.error(err);
@@ -298,17 +298,13 @@ For more information, refer to [Update data](/develop/dev-guide-update-data.md).
 The following query deletes the `Player` record with ID `1`:
 
 ```javascript
-async function deletePlayerByID(conn, id) {
-    return new Promise((resolve, reject) => {
-        conn.query('DELETE FROM players WHERE id = ?;', [id], (err, ok) => {
-            if (err) {
-                reject(err);
-            } else {
-                resolve(ok.affectedRows);
-            }
-        });
-    });
-}
+conn.query('DELETE FROM players WHERE id = ?;', [1], (err, ok) => {
+    if (err) {
+        reject(err);
+    } else {
+        resolve(ok.affectedRows);
+    }
+});
 ```
 
 For more information, refer to [Delete data](/develop/dev-guide-delete-data.md).
