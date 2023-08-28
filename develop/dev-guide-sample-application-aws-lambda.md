@@ -90,11 +90,9 @@ The method to connect to the TiDB cluster varies based on your deployment method
 
 3. If you have not set a password yet, click **Create password** to generate a random password.
 
-    <Tip>
-    
-    If you have generated a password before, you can use the original password directly, or click **Reset password** to generate a new password.
-    
-    </Tip>
+    > **Tip**
+    >
+    > If you have generated a password before, you can use the original password directly, or click **Reset password** to generate a new password.
 
 4. Copy and paste the corresponding connection string into `env.json`. The following is an example:
 
