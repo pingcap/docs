@@ -45,6 +45,7 @@ Let's now dive a bit deeper into what a TSO timestamp looks like:
 ```
 
 There are two parts to the TSO timestamp:
+
 - The *Physical timestamp*: This is a UNIX timestamp in milliseconds since 1 January 1970.
 - The *Logical timestamp*: This is an increasing counter. This is used when there are multiple timestamps needed within the same millisecond or if there is a change that makes the clock go backwards, in that case the physical timestamp is kept the same while the logical timestamp increases. This is done as the TSO timestamp is guaranteed to never go back.
 
