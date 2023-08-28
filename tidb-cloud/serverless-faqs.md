@@ -87,6 +87,10 @@ A spike in RU usage can occur due to necessary background jobs in TiDB. These jo
 
 Once a cluster reaches its free quota or spending limit, the cluster will enforce throttling measures on its read and write operations. These operations will be limited until the quota is increased or the usage is reset at the start of a new month. For more information, see [TiDB Serverless Limitations and Quotas](/tidb-cloud/serverless-limitations.md#usage-quota).
 
+### Why are there spikes in RU usage when I'm importing data?
+
+When importing data on TiDB serverless, RU consumption occurs only when the data of a table is successfully imported. As a result, there are spikes in RU usage during the data import process.
+
 ## Security FAQs
 
 ### Is my TiDB Serverless shared or dedicated?
