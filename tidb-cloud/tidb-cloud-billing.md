@@ -256,9 +256,9 @@ To link your TiDB Cloud account to a Google Cloud billing account, take the foll
 
 4. Check the notification in the upper part of the sign-up page and click **Sign in**.
 
-5. Sign in with your TiDB Cloud account. The **Link to Your Google Cloud Billing Account** page is displayed.
+5. Sign in with your TiDB Cloud account. The page for linking to your Google Cloud billing account is displayed.
 
-6. On the **Link to Your Google Cloud Billing Account** page, select the target organization and click **Link** to link to your Google Cloud billing account.
+6. On the page, select the target organization and click **Link** to link to your Google Cloud billing account.
 
     > **Note:**
     >
