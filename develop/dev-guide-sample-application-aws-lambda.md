@@ -22,7 +22,7 @@ In this tutorial, you can learn how to use TiDB and mysql2 in AWS Lambda Functio
 
 ## Prerequisites
 
-Ensure you have the following installed and set up:
+To complete this tutorial, you need:
 
 - [Node.js **18**](https://nodejs.org/en/download/) or later.
 - [Git](https://git-scm.com/downloads).
@@ -40,7 +40,7 @@ If you don't have an AWS account or a user, you can create them by following the
 
 ## Run the sample application
 
-This section shows you how to run the sample application code and connect to TiDB.
+This section demonstrates how to run the sample application code and connect to TiDB.
 
 > **Note:**
 >
@@ -48,7 +48,7 @@ This section shows you how to run the sample application code and connect to TiD
 
 ### Step 1: Clone the sample application repository
 
-Clone the repository to your local machine:
+Run the following commands in your terminal window to clone the sample code repository:
 
 ```bash
 git clone git@github.com:tidb-samples/tidb-aws-lambda-quickstart.git
@@ -63,7 +63,7 @@ Run the following command to install the required packages (including `mysql2`) 
 npm install
 ```
 
-### Step 3: Configure the connection string
+### Step 3: Configure connection information
 
 The method to connect to the TiDB cluster varies based on your deployment method.
 
@@ -149,7 +149,7 @@ The method to connect to the TiDB cluster varies based on your deployment method
     {"statusCode":200,"body":"{\"results\":[{\"Hello World\":\"Hello World\"}]}"}
     ```
 
-## Example code
+## Sample code snippets
 
 Complete code snippets are available in the [tidb-aws-lambda-quickstart](https://github.com/tidb-samples/tidb-aws-lambda-quickstart) GitHub repository.
 
@@ -204,7 +204,7 @@ await pool.execute(
 );
 ```
 
-Refer to [Insert data](/develop/dev-guide-insert-data.md) for more information.
+For more information, refer to [Insert data](/develop/dev-guide-insert-data.md).
 
 ### Query data
 
@@ -213,7 +213,7 @@ const [rows] = await pool.execute('SELECT count(*) AS cnt FROM player');
 console.log(rows[0]['cnt']);
 ```
 
-Refer to [Query data](/develop/dev-guide-get-data-from-single-table.md) for more information.
+For more information, refer to [Query data](/develop/dev-guide-get-data-from-single-table.md).
 
 ### Update data
 
@@ -224,7 +224,7 @@ await pool.execute(
 );
 ```
 
-Refer to [Update data](/develop/dev-guide-update-data.md) for more information.
+For more information, refer to [Update data](/develop/dev-guide-update-data.md).
 
 ### Delete data
 
@@ -232,20 +232,20 @@ Refer to [Update data](/develop/dev-guide-update-data.md) for more information.
 await pool.execute('DELETE FROM player WHERE id = 1');
 ```
 
-Refer to [Delete data](/develop/dev-guide-delete-data.md) for more information.
+For more information, refer to [Delete data](/develop/dev-guide-delete-data.md).
 
 ## Useful notes
 
-- Using [connection pools](https://github.com/sidorares/node-mysql2#using-connection-pools) to manage database connections, which can reduce the performance overhead caused by frequently establishing/destroying connections.
-- Using [prepared statements](https://github.com/sidorares/node-mysql2#using-prepared-statements) to avoid SQL injection.
-- Using ORM frameworks to improve development efficiency in scenarios without a number of complex SQL statements, such as: [Sequelize](https://sequelize.org/), [TypeORM](https://typeorm.io/), and [Prisma](https://www.prisma.io/).
-- It's recommended to [use AWS Lambda with API Gateway](https://docs.aws.amazon.com/lambda/latest/dg/services-apigateway.html) to build a RESTful API for your application.
+- Using [connection pools](https://github.com/sidorares/node-mysql2#using-connection-pools) to manage database connections can reduce the performance overhead caused by frequently establishing and destroying connections.
+- To avoid SQL injection, it is recommended to use [prepared statements](https://github.com/sidorares/node-mysql2#using-prepared-statements).
+- In scenarios where there are not many complex SQL statements involved, using ORM frameworks like [Sequelize](https://sequelize.org/), [TypeORM](https://typeorm.io/), or [Prisma](https://www.prisma.io/) can greatly improve development efficiency. 
+- For building a RESTful API for your application, it is recommended to [use AWS Lambda with API Gateway](https://docs.aws.amazon.com/lambda/latest/dg/services-apigateway.html).
 
 ## Next steps
 
-- For more details on how to use TiDB in AWS Lambda Function, see our [TiDB-Lambda-integration/aws-lambda-bookstore Demo](https://github.com/pingcap/TiDB-Lambda-integration/blob/main/aws-lambda-bookstore/README.md). And you can use AWS API Gateway to build a RESTful API for your application.
+- For more details on how to use TiDB in AWS Lambda Function, see our [TiDB-Lambda-integration/aws-lambda-bookstore Demo](https://github.com/pingcap/TiDB-Lambda-integration/blob/main/aws-lambda-bookstore/README.md). You can also use AWS API Gateway to build a RESTful API for your application.
 - Learn more usage of `mysql2` from [the documentation of `mysql2`](https://github.com/sidorares/node-mysql2/tree/master/documentation/en).
-- Learn more usage of `AWS Lambda` from [the AWS developer guide of `Lambda`](https://docs.aws.amazon.com/lambda/latest/dg/welcome.html).
+- Learn more usage of AWS Lambda from [the AWS developer guide of `Lambda`](https://docs.aws.amazon.com/lambda/latest/dg/welcome.html).
 - Learn the best practices for TiDB application development with the chapters in the [Developer guide](/develop/dev-guide-overview.md), such as [Insert data](/develop/dev-guide-insert-data.md), [Update data](/develop/dev-guide-update-data.md), [Delete data](/develop/dev-guide-delete-data.md), [Single table reading](/develop/dev-guide-get-data-from-single-table.md), [Transactions](/develop/dev-guide-transaction-overview.md), and [SQL performance optimization](/develop/dev-guide-optimize-sql-overview.md).
 - Learn through the professional [TiDB developer courses](https://www.pingcap.com/education/) and earn [TiDB certifications](https://www.pingcap.com/education/certification/) after passing the exam.
 
