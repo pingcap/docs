@@ -11,7 +11,7 @@ When managing a cluster, TiUP uses its own configurations to override the config
 
 > **Note:**
 >
-> - If your monitoring services are [deployed manually](deploy-monitoring-services.md) instead of using TiUP, you can directly upgrade them without referring to this document.
+> - If your monitoring services are [deployed manually](/deploy-monitoring-services.md) instead of using TiUP, you can directly upgrade them without referring to this document.
 > - The TiDB compatibility with newer versions of monitoring services has not been not tested, so it is possible that some features might not work as expected after the upgrade. For any issues, you can create an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
 > - The upgrade steps in this document are applicable for TiUP version 1.9.0 and later. Therefore, check your TiUP version before the upgrade.
 > - When you use TiUP to upgrade the TiDB cluster, TiUP will redeploy the monitoring services to the default version. You need to redo the upgrade for monitoring services after the TiDB upgrade. 
