@@ -5,7 +5,6 @@ summary: Learn the `SESSION_CONNECT_ATTRS` performance_schema table.
 
 # SESSION\_CONNECT\_ATTRS
 
-
 The `SESSION_CONNECT_ATTRS` table provides information about connection attributes. Session attributes are key-value pairs that are sent by the client when establishing a connection.
 
 Common attributes:
@@ -18,6 +17,8 @@ Common attributes:
 | `_pid`            | `712927`      | Process ID                 |
 | `_platform`       | `x86_64`      | CPU Architecture           |
 | `program_name`    | `mysqlsh`     | Program name               |
+
+You can view the columns of the `SESSION_CONNECT_ATTRS` table as follows:
 
 {{< copyable "sql" >}}
 
@@ -36,6 +37,8 @@ DESCRIBE session_connect_attrs;
 | ORDINAL_POSITION | int(11)             | YES  |     | NULL    |       |
 +------------------+---------------------+------+-----+---------+-------+
 ```
+
+You can view the information on session attributes stored in the `SESSION_CONNECT_ATTRS` table as follows:
 
 {{< copyable "sql" >}}
 
