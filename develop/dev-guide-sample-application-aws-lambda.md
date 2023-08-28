@@ -167,18 +167,15 @@ For complete sample code and how to run it, check out the [tidb-samples/tidb-aws
 ### Connect to TiDB
 
 ```typescript
-/** It's different from the sample code in the repository, which is for learning purposes only.
- * Which is not recommended in production environment.
- * Please refer to the code in [tidb-aws-lambda-quickstart](https://github.com/tidb-samples/tidb-aws-lambda-quickstart) GitHub repository for production environment.
- */
+// lib/tidb.ts
 import mysql from 'mysql2';
 
-let pool: mysql.Pool;
+let pool: mysql.Pool | null = null;
 
 function connect() {
   pool = mysql.createPool({
     host: process.env.TIDB_HOST, // TiDB host, for example: {gateway-region}.aws.tidbcloud.com
-    port: process.env.TIDB_PORT || 4000, // TiDB port, default: 4000
+    port: process.env.TIDB_PORT ? Number(process.env.TIDB_PORT) : 4000, // TiDB port, default: 4000
     user: process.env.TIDB_USER, // TiDB user, for example: {prefix}.root
     password: process.env.TIDB_PASSWORD, // TiDB password
     database: process.env.TIDB_DATABASE || 'test', // TiDB database name, default: test
@@ -188,19 +185,15 @@ function connect() {
     },
     connectionLimit: 1, // Setting connectionLimit to "1" in a serverless function environment optimizes resource usage, reduces costs, ensures connection stability, and enables seamless scalability.
     maxIdle: 1, // max idle connections, the default value is the same as `connectionLimit`
-    enableKeepAlive: true
+    enableKeepAlive: true,
   });
 }
 
-export async function handler(event: any) {
+export function getConnection(): mysql.Pool {
   if (!pool) {
     connect();
   }
-  const results = await pool.execute('SELECT "Hello World"');
-  return {
-    statusCode: 200,
-    body: JSON.stringify({ results }),
-  };
+  return pool as mysql.Pool;
 }
 ```
 
