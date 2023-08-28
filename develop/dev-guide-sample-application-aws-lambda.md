@@ -53,7 +53,7 @@ This section demonstrates how to run the sample application code and connect to 
 
 > **Note**
 >
-> For complete code snippets and running instructions, refer to the[tidb-aws-lambda-quickstart](https://github.com/tidb-samples/tidb-aws-lambda-quickstart) GitHub repository.
+> For complete code snippets and running instructions, refer to the [tidb-samples/tidb-aws-lambda-quickstart](https://github.com/tidb-samples/tidb-aws-lambda-quickstart) GitHub repository.
 
 ### Step 1: Clone the sample application repository
 
@@ -162,7 +162,7 @@ The method to connect to the TiDB cluster varies based on your deployment method
 
 You can refer to the following sample code snippets to complete your own application development.
 
-For complete sample code and how to run it, check out the [tidb-aws-lambda-quickstart](https://github.com/tidb-samples/tidb-aws-lambda-quickstart) repository.
+For complete sample code and how to run it, check out the [tidb-samples/tidb-aws-lambda-quickstart](https://github.com/tidb-samples/tidb-aws-lambda-quickstart) repository.
 
 ### Connect to TiDB
 

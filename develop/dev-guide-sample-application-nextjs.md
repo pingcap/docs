@@ -163,7 +163,7 @@ The method to connect to the TiDB cluster varies based on your deployment method
 
 2. Open your browser and visit `http://localhost:3000`. (Check your terminal for the actual port number, and the default is `3000`.)
 
-3. Click the `run SQL` button to execute the sample code.
+3. Click **RUN SQL** to execute the sample code.
 
 4. Check the output in the terminal. If the output is similar to the following, the connection is successful:
 
@@ -256,7 +256,7 @@ For more information, refer to [Delete data](/develop/dev-guide-delete-data.md).
 ## Next steps
 
 - For more details on how to build a complex application with ORM and Next.js, see [our Bookshop Demo](https://github.com/pingcap/tidb-prisma-vercel-demo).
-- Learn more usage of `mysql2` from [the documentation of `mysql2`](https://github.com/sidorares/node-mysql2/tree/master/documentation/en).
+- Learn more usage of node-mysql2 driver from [the documentation of node-mysql2](https://github.com/sidorares/node-mysql2/tree/master/documentation/en).
 - Learn the best practices for TiDB application development with the chapters in the [Developer guide](/develop/dev-guide-overview.md), such as [Insert data](/develop/dev-guide-insert-data.md), [Update data](/develop/dev-guide-update-data.md), [Delete data](/develop/dev-guide-delete-data.md), [Single table reading](/develop/dev-guide-get-data-from-single-table.md), [Transactions](/develop/dev-guide-transaction-overview.md), and [SQL performance optimization](/develop/dev-guide-optimize-sql-overview.md).
 - Learn through the professional [TiDB developer courses](https://www.pingcap.com/education/) and earn [TiDB certifications](https://www.pingcap.com/education/certification/) after passing the exam.
 
