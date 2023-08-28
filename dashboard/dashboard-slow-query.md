@@ -8,7 +8,7 @@ aliases: ['/docs/dev/dashboard/dashboard-slow-query/']
 
 On the Slow Queries page of TiDB Dashboard, you can search and view all slow queries in the cluster.
 
-By default, SQL queries with an execution time of more than 300 milliseconds are considered as slow queries. These queries are recorded in the [slow query logs](/identify-slow-queries.md) and can be searched via TiDB Dashboard. You can adjust the threshold of slow queries through the [`tidb_slow_log_threshold`](/system-variables.md#tidb_slow_log_threshold) session variable or the [`slow-threshold`](/tidb-configuration-file.md#slow-threshold) TiDB parameter.
+By default, SQL queries with an execution time of more than 300 milliseconds are considered as slow queries. These queries are recorded in the [slow query logs](/identify-slow-queries.md) and can be searched via TiDB Dashboard. You can adjust the threshold of slow queries through the [`tidb_slow_log_threshold`](/system-variables.md#tidb_slow_log_threshold) session variable or the [`instance.tidb_slow_log_threshold`](/tidb-configuration-file.md#tidb_slow_log_threshold) TiDB parameter.
 
 > **Note:**
 >
@@ -18,9 +18,7 @@ By default, SQL queries with an execution time of more than 300 milliseconds are
 
 You can use one of the following two methods to access the slow query page:
 
-* After logging into TiDB Dashboard, click **Slow Queries** on the left navigation menu:
-
-![Access slow query page](/media/dashboard/dashboard-slow-queries-access-v620.png)
+* After logging in to TiDB Dashboard, click **Slow Queries** in the left navigation menu.
 
 * Visit <http://127.0.0.1:2379/dashboard/#/slow_query> in your browser. Replace `127.0.0.1:2379` with the actual PD address and port.
 
@@ -37,6 +35,12 @@ You can filter slow queries based on the time range, the related database, SQL k
 Click **Columns** on the page and you can choose to see more columns. You can move your mouse to the **(i)** icon at the right side of a column name to view the description of this column:
 
 ![Show more columns](/media/dashboard/dashboard-slow-queries-list2-v620.png)
+
+### Export slow queries locally
+
+Click ☰ (**More**) in the upper-right corner of the page to display the **Export** option. After you click **Export**, TiDB Dashboard exports slow queries in the current list as a CSV file.
+
+![Export slow queries locally](/media/dashboard/dashboard-slow-queries-export-v651.png)
 
 ### Sort by column
 

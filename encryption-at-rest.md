@@ -22,7 +22,7 @@ When a TiDB cluster is deployed, the majority of user data is stored on TiKV and
 
 TiKV supports encryption at rest. This feature allows TiKV to transparently encrypt data files using [AES](https://en.wikipedia.org/wiki/Advanced_Encryption_Standard) or [SM4](https://en.wikipedia.org/wiki/SM4_(cipher)) in [CTR](https://en.wikipedia.org/wiki/Block_cipher_mode_of_operation) mode. To enable encryption at rest, an encryption key must be provided by the user and this key is called master key. TiKV automatically rotates data keys that it used to encrypt actual data files. Manually rotating the master key can be done occasionally. Note that encryption at rest only encrypts data at rest (namely, on disk) and not while data is transferred over network. It is advised to use TLS together with encryption at rest.
 
-Optionally, you can use AWS KMS for both cloud and on-premises deployments. You can also supply the plaintext master key in a file.
+Optionally, you can use AWS KMS for both cloud and self-hosted deployments. You can also supply the plaintext master key in a file.
 
 TiKV currently does not exclude encryption keys and user data from core dumps. It is advised to disable core dumps for the TiKV process when using encryption at rest. This is not currently handled by TiKV itself.
 
@@ -310,3 +310,77 @@ When restoring the backup, both `--s3.sse` and `--s3.sse-kms-key-id` should NOT 
 ```
 ./br restore full --pd <pd-address> --storage "s3://<bucket>/<prefix>"
 ```
+
+## BR Azure Blob Storage server-side encryption
+
+When backing up data to Azure Blob Storage using BR, you can specify either an encryption scope or an encryption key for server-side encryption.
+
+### Method 1: use an encryption scope
+
+To specify an encryption scope for the backup data, you can use one of the following two ways:
+
+- Include the `--azblob.encryption-scope` option in the `backup` command and set it to the scope name:
+
+    ```shell
+    ./br backup full --pd <pd-address> --storage "azure://<bucket>/<prefix>" --azblob.encryption-scope scope1
+    ```
+
+- Include `encryption-scope` in the URI and set it to the scope name:
+
+    ```shell
+    ./br backup full --pd <pd-address> --storage "azure://<bucket>/<prefix>?encryption-scope=scope1"
+    ```
+
+For more information, see the Azure documentation: [Upload a blob with an encryption scope](https://learn.microsoft.com/en-us/azure/storage/blobs/encryption-scope-manage?tabs=powershell#upload-a-blob-with-an-encryption-scope).
+
+When restoring the backup, you do not need to specify the encryption scope. Azure Blob Storage automatically decrypts the data. For example:
+
+```shell
+./br restore full --pd <pd-address> --storage "azure://<bucket>/<prefix>"
+```
+
+### Method 2: use an encryption key
+
+To specify an encryption key for the backup data, you can use one of the following three ways:
+
+- Include the `--azblob.encryption-key` option in the `backup` command and set it to an AES256 encryption key:
+
+    ```shell
+    ./br backup full --pd <pd-address> --storage "azure://<bucket>/<prefix>" --azblob.encryption-key <aes256-key>
+    ```
+
+- Include `encryption-key` in the URI and set it to an AES256 encryption key. If the key contains URI reserved characters such as `&` and `%`, you need to percent-encode it first:
+
+    ```shell
+    ./br backup full --pd <pd-address> --storage "azure://<bucket>/<prefix>?encryption-key=<aes256-key>"
+    ```
+
+- Set the `AZURE_ENCRYPTION_KEY` environment variable to an AES256 encryption key. Before running, make sure that you remember the encryption key in the environment variable to avoid forgetting it.
+
+    ```shell
+    export AZURE_ENCRYPTION_KEY=<aes256-key>
+    ./br backup full --pd <pd-address> --storage "azure://<bucket>/<prefix>"
+    ```
+
+For more information, see the Azure documentation: [Provide an encryption key on a request to Blob storage](https://learn.microsoft.com/en-us/azure/storage/blobs/encryption-customer-provided-keys).
+
+When restoring the backup, you need to specify the encryption key. For example:
+
+- Include the `--azblob.encryption-key` option in the `restore` command:
+
+    ```shell
+    ./br restore full --pd <pd-address> --storage "azure://<bucket>/<prefix>" --azblob.encryption-key <aes256-key>
+    ```
+
+- Include `encryption-key` in the URI:
+
+    ```shell
+    ./br restore full --pd <pd-address> --storage "azure://<bucket>/<prefix>?encryption-key=<aes256-key>"
+    ```
+
+- Set the `AZURE_ENCRYPTION_KEY` environment variable:
+
+    ```shell
+    export AZURE_ENCRYPTION_KEY=<aes256-key>
+    ./br restore full --pd <pd-address> --storage "azure://<bucket>/<prefix>"
+    ```

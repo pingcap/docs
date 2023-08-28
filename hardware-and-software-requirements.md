@@ -24,15 +24,16 @@ As an open-source distributed SQL database with high performance, TiDB can be de
 | <ul><li>Red Hat Enterprise Linux 7.3 or a later 7.x version</li><li>CentOS 7.3 or a later 7.x version</li></ul>  |  <ul><li>x86_64</li><li>ARM 64</li></ul>   |
 | Amazon Linux 2 | <ul><li>x86_64</li><li>ARM 64</li></ul> |
 | Kylin Euler V10 SP1/SP2   |   <ul><li>x86_64</li><li>ARM 64</li></ul>   |
-| UOS V20                 |   <ul><li>x86_64</li><li>ARM 64</li></ul>   |
-|   macOS Catalina or later   |  <ul><li>x86_64</li><li>ARM 64</li></ul>  |
-|  Oracle Enterprise Linux 7.3 or a later 7.x version  |  x86_64           |
-|   Ubuntu LTS 18.04 or later   |  x86_64           |
+| UOS V20 |   <ul><li>x86_64</li><li>ARM 64</li></ul>   |
+| openEuler 22.03 LTS SP1 |   x86_64   |
+| macOS 12 (Monterey) or later |  <ul><li>x86_64</li><li>ARM 64</li></ul>  |
+| Oracle Enterprise Linux 7.3 or a later 7.x version  |  x86_64           |
+| Ubuntu LTS 18.04 or later   |  x86_64           |
 | CentOS 8 Stream | <ul><li>x86_64</li><li>ARM 64</li></ul> |
-|  Debian 9 (Stretch) or later |  x86_64           |
-|  Fedora 35 or later   |  x86_64           |
-|  openSUSE Leap later than v15.3 (not including Tumbleweed) |  x86_64           |
-|  SUSE Linux Enterprise Server 15  |  x86_64                        |
+| Debian 9 (Stretch) or later |  x86_64           |
+| Fedora 35 or later   |  x86_64           |
+| openSUSE Leap later than v15.3 (not including Tumbleweed) |  x86_64           |
+| SUSE Linux Enterprise Server 15  |  x86_64                        |
 
 > **Note:**
 >
@@ -46,12 +47,12 @@ As an open-source distributed SQL database with high performance, TiDB can be de
 
 |  Libraries required for compiling and running TiDB |  Version   |
 |   :---   |   :---   |
-|   Golang  |  1.18.5 or later  |
+|   Golang  |  1.20 or later |
 |   Rust    |   nightly-2022-07-31 or later  |
 |  GCC      |   7.x      |
 |  LLVM     |  13.0 or later  |
 
-Library for running TiDB：glibc（2.28-151.el8 version）
+Library required for running TiDB: glibc (2.28-151.el8 version)
 
 ### Docker image dependencies
 
@@ -170,7 +171,7 @@ As an open-source distributed SQL database, TiDB requires the following network 
 
 | Component | Disk space requirement | Healthy disk usage |
 | :-- | :-- | :-- |
-| TiDB | At least 30 GB for the log disk | Lower than 90% |
+| TiDB | <ul><li>At least 30 GB for the log disk</li> <li> Starting from v6.5.0, `Fast Online DDL` (controlled by the [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) variable) is enabled by default to accelerate DDL operations, such as adding indexes. If DDL operations involving large objects exist in your application, it is highly recommended to prepare additional SSD disk space for TiDB (100 GB or more). For detailed configuration instructions, see [Set a temporary space for a TiDB instance](/check-before-deployment.md#set-temporary-spaces-for-tidb-instances-recommended) </li></ul> | Lower than 90% |
 | PD | At least 20 GB for the data disk and for the log disk, respectively | Lower than 90% |
 | TiKV | At least 100 GB for the data disk and for the log disk, respectively | Lower than 80% |
 | TiFlash | At least 100 GB for the data disk and at least 30 GB for the log disk, respectively | Lower than 80% |

@@ -60,7 +60,7 @@ The method of scaling out a TiCDC cluster is similar to that of deploying one. I
       - host: 10.1.1.2
         gc-ttl: 86400
         data_dir: /tidb-data/cdc-8300
-      - host: 10.0.1.4:8300
+      - host: 10.0.1.4
         gc-ttl: 86400
         data_dir: /tidb-data/cdc-8300
     ```
@@ -95,7 +95,7 @@ tiup cluster upgrade <cluster-name> <version> --transfer-timeout 600
 
 > **Note:**
 >
-> In the preceding command, you need to replace `<cluster-name>` and `<version>` with the actual cluster name and cluster version. For example, the version can be v7.0.0.
+> In the preceding command, you need to replace `<cluster-name>` and `<version>` with the actual cluster name and cluster version. For example, the version can be v7.3.0.
 
 ### Upgrade cautions
 
@@ -115,7 +115,7 @@ This section describes how to use the [`tiup cluster edit-config`](/tiup/tiup-co
 
 1. Run the `tiup cluster edit-config` command. Replace `<cluster-name>` with the actual cluster name:
 
-   ```shell
+    ```shell
     tiup cluster edit-config <cluster-name>
     ```
 
@@ -152,7 +152,7 @@ See [Enable TLS Between TiDB Components](/enable-tls-between-components.md).
 
 ## View TiCDC status using the command-line tool
 
-Run the following command to view the TiCDC cluster status. Note that you need to replace `v<CLUSTER_VERSION>` with the TiCDC cluster version, such as `v6.5.0`:
+Run the following command to view the TiCDC cluster status. Note that you need to replace `v<CLUSTER_VERSION>` with the TiCDC cluster version, such as `v7.3.0`:
 
 ```shell
 tiup ctl:v<CLUSTER_VERSION> cdc capture list --server=http://10.0.10.25:8300

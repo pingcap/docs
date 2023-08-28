@@ -9,7 +9,7 @@ summary: Learn the usage of DROP RESOURCE GROUP in TiDB.
 
 > **Note:**
 >
-> This feature is not available on [Serverless Tier clusters](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta).
+> This feature is not available on [TiDB Serverless clusters](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless).
 
 </CustomContent>
 
@@ -18,14 +18,15 @@ You can use the `DROP RESOURCE GROUP` statement to drop a resource group.
 ## Synopsis
 
 ```ebnf+diagram
-DropResourceGroupStmt:
+DropResourceGroupStmt ::=
     "DROP" "RESOURCE" "GROUP" IfExists ResourceGroupName
 
 IfExists ::=
     ('IF' 'EXISTS')?
 
-ResourceGroupName:
+ResourceGroupName ::=
     Identifier
+|   "DEFAULT"
 ```
 
 > **Note:**
@@ -58,11 +59,11 @@ SELECT * FROM information_schema.resource_groups WHERE NAME ='rg1';
 ```
 
 ```sql
-+------+------------+----------+-----------+
-| NAME | RU_PER_SEC | PRIORITY | BURSTABLE |
-+------+------------+----------+-----------+
-| rg1  |       500  | MEDIUM   | YES       |
-+------+------------+----------+-----------+
++------+------------+----------+-----------+-------------+
+| NAME | RU_PER_SEC | PRIORITY | BURSTABLE | QUERY_LIMIT |
++------+------------+----------+-----------+-------------+
+| rg1  | 500        | MEDIUM   | YES       | NULL        |
++------+------------+----------+-----------+-------------+
 1 row in set (0.01 sec)
 ```
 

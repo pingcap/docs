@@ -362,71 +362,63 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 
     Currently `LOAD DATA` does not support importing data locally from TiDB server. You can specify `LOCAL` to import from client, or upload data to S3 or GCS and then import it. See [`LOAD DATA`](/sql-statements/sql-statement-load-data.md).
 
-* Error Number: 8155
-
-    Currently, `LOAD DATA` only supports importing Parquet files from S3 or GCS. You can upload Parquet files to S3 or GCS and then import them. See [`LOAD DATA`](/sql-statements/sql-statement-load-data.md).
-
 * Error Number: 8156
 
-    The file path of the `LOAD DATA` statement cannot be empty. You need to set the correct path before importing. See [`LOAD DATA`](/sql-statements/sql-statement-load-data.md).
+    The provided path cannot be empty. You need to set a correct path before the import.
 
 * Error Number: 8157
 
-    Unsupported data format. See [`LOAD DATA`](/sql-statements/sql-statement-load-data.md) to check the supported data formats.
+    The provided file format is unsupported. For the supported formats, see [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md#format).
 
 * Error Number: 8158
 
-    The S3 or GCS path is invalid. See [external storage](/br/backup-and-restore-storages.md) to set a valid path.
+    The provided path is invalid. Refer to the specific error message for actions. For Amazon S3 or GCS path settings, see [External storage](/br/backup-and-restore-storages.md#uri-format).
 
 * Error Number: 8159
 
-    TiDB cannot access the S3 or GCS path provided in the `LOAD DATA` statement. Make sure that the S3 or GCS bucket exists, and that you have used the correct access key and secret access key to let TiDB access the bucket.
+    TiDB cannot access the provided Amazon S3 or GCS path. Make sure that the specified S3 or GCS bucket exists and that you have provided the correct Access Key and Secret Access Key for TiDB to access the corresponding bucket.
 
 * Error Number: 8160
 
-    `LOAD DATA` fails to read the data file. Refer to the specific error message for action.
+    Failed to read the data files. Refer to the specific error message for actions.
 
 * Error Number: 8162
 
-    There is an error in the `LOAD DATA` statement. See [`LOAD DATA`](/sql-statements/sql-statement-load-data.md) for supported features.
+    There is an error in the statement. Refer to the specific error message for actions.
 
 * Error Number: 8163
 
-    Unknown `LOAD DATA...WITH...` option. See [`LOAD DATA`](/sql-statements/sql-statement-load-data.md) for supported options.
+    The provided option is unknown. For supported options, see [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md#parameter-description).
 
 * Error Number: 8164
 
-    The `LOAD DATA...WITH...` option takes an invalid value. See [`LOAD DATA`](/sql-statements/sql-statement-load-data.md) for valid values.
+    The provided option value is invalid. For valid values, see [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md#parameter-description).
 
 * Error Number: 8165
 
-    Specify duplicated `LOAD DATA...WITH...` options. Each option can be specified only once.
+    Duplicate options are specified. Each option can only be specified once.
 
 * Error Number: 8166
 
-    Some `LOAD DATA...WITH...` options can only be used in certain import modes. See [`LOAD DATA`](/sql-statements/sql-statement-load-data.md) to see the supported options.
+    Certain options can only be used in specific conditions. Refer to the specific error message for actions. For supported options, see [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md#parameter-description).
 
 * Error Number: 8170
 
-    The specified `LOAD DATA` job does not exist or is not created by the current user. Currently you can only view jobs that you created.
+    The specified job does not exist.
 
 * Error Number: 8171
 
-    You cannot perform operation and maintenance for unsupported `LOAD DATA` task status. Refer to the specific error message for action.
-
-* Error Number: 8172
-
-    If you have specified `LOCAL`, you cannot specify specific options, such as `DETACHED` or `import_mode='PHYSICAL'`. See [`LOAD DATA`](/sql-statements/sql-statement-load-data.md) to change the SQL statement.
+    The current operation cannot be performed for the current job status. Refer to the specific error message for actions.
 
 * Error Number: 8173
 
-    In Physical Import Mode, TiDB checks the current environment, such as checking if the downstream table is empty. Follow the prompts to resolve the issue.
+    When executing `IMPORT INTO`, TiDB checks the current environment, such as checking if the downstream table is empty. Refer to the specific error message for actions.
 
 * Error Number: 8200
 
     The DDL syntax is not yet supported.
 
-    See [compatibility of MySQL DDL](/mysql-compatibility.md#ddl) for reference.
+    See [compatibility of MySQL DDL](/mysql-compatibility.md#ddl-operations) for reference.
 
 * Error Number: 8214
 
@@ -508,11 +500,31 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 
 * Error Number: 8252
 
-    The complete error message is as follows: 
-    
+    The complete error message is as follows:
+
     `ERROR 8252 (HY000) : Exceeded resource group quota limitation`
 
     This error is returned when the attempted consumption exceeds the resource group limit. This error is usually caused by a single transaction that is too large or too many concurrent transactions. You need to adjust the transaction size or reduce the number of concurrent clients.
+
+* Error Number: 8253
+
+    The query stops because it meets the condition of a runaway query. See [Runaway Queries](/tidb-resource-control.md#manage-queries-that-consume-more-resources-than-expected-runaway-queries).
+
+* Error Number: 8254
+
+    The query stops because it meets the quarantined watch condition of a runaway query. See [Runaway Queries](/tidb-resource-control.md#manage-queries-that-consume-more-resources-than-expected-runaway-queries).
+
+* Error Number: 8260
+
+    DDL operations cannot be paused by `ADMIN PAUSE`.
+
+* Error Number: 8261
+
+    DDL operations cannot be resumed by `ADMIN RESUME`.
+
+* Error Number: 8262
+
+    DDL is paused by `ADMIN PAUSE` and cannot be paused again.
 
 * Error Number: 9001
 

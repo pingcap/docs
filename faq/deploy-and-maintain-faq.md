@@ -77,7 +77,7 @@ Check the time difference between the machine time of the monitor and the time w
 
 ### How to separately record the slow query log in TiDB? How to locate the slow query SQL statement?
 
-1. The slow query definition for TiDB is in the TiDB configuration file. The `slow-threshold: 300` parameter is used to configure the threshold value of the slow query (unit: millisecond).
+1. The slow query definition for TiDB is in the TiDB configuration file. The `tidb_slow_log_threshold: 300` parameter is used to configure the threshold value of the slow query (unit: millisecond).
 
 2. If a slow query occurs, you can locate the `tidb-server` instance where the slow query is and the slow query time point using Grafana and find the SQL statement information recorded in the log on the corresponding node.
 
@@ -113,6 +113,6 @@ The Direct mode wraps the Write request into the I/O command and sends this comm
 
 ## What public cloud vendors are currently supported by TiDB?
 
-TiDB supports deployment on [Google GKE](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-on-gcp-gke), [AWS EKS](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-on-aws-eks), and [Alibaba Cloud ACK](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-on-alibaba-cloud).
+TiDB supports deployment on [Google Cloud GKE](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-on-gcp-gke), [AWS EKS](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-on-aws-eks), and [Alibaba Cloud ACK](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-on-alibaba-cloud).
 
 In addition, TiDB is currently available on JD Cloud and UCloud.

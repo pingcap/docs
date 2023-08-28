@@ -64,11 +64,11 @@ If you encounter problems when connecting to TiDB using the tools listed in this
       </tr>
       <tr>
          <td>Go</td>
-         <td><a href="https://github.com/go-sql-driver/mysql" target="_blank" referrerpolicy="no-referrer-when-downgrade">go-sql-driver/mysql</a></td>
+         <td><a href="https://github.com/go-sql-driver/mysql" target="_blank" referrerpolicy="no-referrer-when-downgrade">Go-MySQL-Driver</a></td>
          <td>v1.6.0</td>
          <td>Full</td>
          <td>N/A</td>
-         <td><a href="/tidb/dev/dev-guide-sample-application-golang">Build a Simple CRUD App with TiDB and Golang</a></td>
+         <td><a href="/tidb/dev/dev-guide-sample-application-golang-sql-driver">Build a Simple CRUD App with TiDB and Go-MySQL-Driver</a></td>
       </tr>
       <tr>
          <td>Java</td>
@@ -81,7 +81,7 @@ If you encounter problems when connecting to TiDB using the tools listed in this
                <li><a href="/tidb/dev/dev-guide-choose-driver-or-orm#tidb-loadbalance" data-href="/tidb/dev/dev-guide-choose-driver-or-orm#tidb-loadbalance">pingcap/tidb-loadbalance</a></li>
             </ul>
          </td>
-         <td><a href="/tidb/dev/dev-guide-sample-application-java">Build a Simple CRUD App with TiDB and Java</a></td>
+         <td><a href="/tidb/dev/dev-guide-sample-application-java-jdbc">Build a Simple CRUD App with TiDB and JDBC</a></td>
       </tr>
       <tr>
          <td>JavaScript</td>
@@ -101,25 +101,25 @@ If you encounter problems when connecting to TiDB using the tools listed in this
       </tr>
       <tr>
          <td rowspan="3">Python</td>
-         <td><a href="https://dev.mysql.com/doc/connector-python/en/" target="_blank" referrerpolicy="no-referrer-when-downgrade">mysql-connector-python</a></td>
+         <td><a href="https://dev.mysql.com/doc/connector-python/en/" target="_blank" referrerpolicy="no-referrer-when-downgrade">MySQL Connector/Python</a></td>
          <td>8.0</td>
          <td>Compatible</td>
          <td>N/A</td>
-         <td><a href="/tidb/dev/dev-guide-sample-application-python">Build a Simple CRUD App with TiDB and Python</a></td>
+         <td><a href="/tidb/dev/dev-guide-sample-application-python-mysql-connector">Build a Simple CRUD App with TiDB and MySQL Connector/Python</a></td>
       </tr>
       <tr>
          <td><a href="https://mysqlclient.readthedocs.io/" target="_blank" referrerpolicy="no-referrer-when-downgrade">mysqlclient</a></td>
          <td>2.1.1</td>
          <td>Compatible</td>
          <td>N/A</td>
-         <td><a href="/tidb/dev/dev-guide-sample-application-python">Build a Simple CRUD App with TiDB and Python</a></td>
+         <td><a href="/tidb/dev/dev-guide-sample-application-python-mysqlclient">Build a Simple CRUD App with TiDB and mysqlclient</a></td>
       </tr>
       <tr>
          <td><a href="https://pypi.org/project/PyMySQL/" target="_blank" referrerpolicy="no-referrer-when-downgrade">PyMySQL</a></td>
          <td>1.0.2</td>
          <td>Compatible</td>
          <td>N/A</td>
-         <td><a href="/tidb/dev/dev-guide-sample-application-python">Build a Simple CRUD App with TiDB and Python</a></td>
+         <td><a href="/tidb/dev/dev-guide-sample-application-python-pymysql">Build a Simple CRUD App with TiDB and PyMySQL</a></td>
       </tr>
    </tbody>
 </table>
@@ -144,7 +144,7 @@ If you encounter problems when connecting to TiDB using the tools listed in this
          <td>v1.23.5</td>
          <td>Full</td>
          <td>N/A</td>
-         <td><a href="/tidb/dev/dev-guide-sample-application-golang">Build a Simple CRUD App with TiDB and Golang</a></td>
+         <td><a href="/tidb/dev/dev-guide-sample-application-golang-gorm">Build a Simple CRUD App with TiDB and GORM</a></td>
       </tr>
       <tr>
          <td><a href="https://github.com/beego/beego" target="_blank" referrerpolicy="no-referrer-when-downgrade">beego</a></td>
@@ -180,21 +180,21 @@ If you encounter problems when connecting to TiDB using the tools listed in this
          <td>6.1.0.Final</td>
          <td>Full</td>
          <td>N/A</td>
-         <td><a href="/tidb/dev/dev-guide-sample-application-java">Build a Simple CRUD App with TiDB and Java</a></td>
+         <td><a href="/tidb/dev/dev-guide-sample-application-java-hibernate">Build a Simple CRUD App with TiDB and Hibernate</a></td>
       </tr>
       <tr>
          <td><a href="https://mybatis.org/mybatis-3/" target="_blank" referrerpolicy="no-referrer-when-downgrade">MyBatis</a></td>
          <td>v3.5.10</td>
          <td>Full</td>
          <td>N/A</td>
-         <td><a href="/tidb/dev/dev-guide-sample-application-java">Build a Simple CRUD App with TiDB and Java</a></td>
+         <td><a href="/tidb/dev/dev-guide-sample-application-java-mybatis">Build a Simple CRUD App with TiDB and MyBatis</a></td>
       </tr>
       <tr>
          <td><a href="https://spring.io/projects/spring-data-jpa/" target="_blank" referrerpolicy="no-referrer-when-downgrade">Spring Data JPA</a></td>
          <td>2.7.2</td>
          <td>Full</td>
          <td>N/A</td>
-         <td><a href="/tidb/dev/dev-guide-sample-application-spring-boot">Build a Simple CRUD App with TiDB and Spring Boot</a></td>
+         <td><a href="/tidb/dev/dev-guide-sample-application-java-spring-boot">Build a Simple CRUD App with TiDB and Spring Boot</a></td>
       </tr>
       <tr>
          <td><a href="https://github.com/jOOQ/jOOQ" target="_blank" referrerpolicy="no-referrer-when-downgrade">jOOQ</a></td>
@@ -215,7 +215,7 @@ If you encounter problems when connecting to TiDB using the tools listed in this
          <td rowspan="4">JavaScript / TypeScript</td>
          <td><a href="https://www.npmjs.com/package/sequelize" target="_blank" referrerpolicy="no-referrer-when-downgrade">sequelize</a></td>
          <td>v6.20.1</td>
-         <td>Compatible</td>
+         <td>Full</td>
          <td>N/A</td>
          <td>N/A</td>
       </tr>
@@ -228,8 +228,8 @@ If you encounter problems when connecting to TiDB using the tools listed in this
       </tr>
       <tr>
          <td><a href="https://www.prisma.io/" target="_blank" referrerpolicy="no-referrer-when-downgrade">Prisma Client</a></td>
-         <td>3.15.1</td>
-         <td>Compatible</td>
+         <td>4.16.2</td>
+         <td>Full</td>
          <td>N/A</td>
          <td>N/A</td>
       </tr>
@@ -251,24 +251,24 @@ If you encounter problems when connecting to TiDB using the tools listed in this
       <tr>
          <td rowspan="4">Python</td>
          <td><a href="https://pypi.org/project/Django/" target="_blank" referrerpolicy="no-referrer-when-downgrade">Django</a></td>
-         <td>v4.0.5</td>
-         <td>Compatible</td>
+         <td>v4.1</td>
+         <td>Full</td>
          <td><a href="https://github.com/pingcap/django-tidb" target="_blank" referrerpolicy="no-referrer-when-downgrade">django-tidb</a></td>
          <td>N/A</td>
+      </tr>
+      <tr>
+         <td><a href="https://www.sqlalchemy.org/" target="_blank" referrerpolicy="no-referrer-when-downgrade">SQLAlchemy</a></td>
+         <td>v1.4.37</td>
+         <td>Full</td>
+         <td>N/A</td>
+         <td><a href="/tidb/dev/dev-guide-sample-application-python-sqlalchemy">Build a Simple CRUD App with TiDB and SQLAlchemy</a></td>
       </tr>
       <tr>
          <td><a href="https://github.com/coleifer/peewee/" target="_blank" referrerpolicy="no-referrer-when-downgrade">peewee</a></td>
          <td>v3.14.10</td>
          <td>Compatible</td>
          <td>N/A</td>
-         <td><a href="/tidb/dev/dev-guide-sample-application-python">Build a Simple CRUD App with TiDB and Python</a></td>
-      </tr>
-      <tr>
-         <td><a href="https://www.sqlalchemy.org/" target="_blank" referrerpolicy="no-referrer-when-downgrade">SQLAlchemy</a></td>
-         <td>v1.4.37</td>
-         <td>Compatible</td>
-         <td>N/A</td>
-         <td><a href="/tidb/dev/dev-guide-sample-application-python">Build a Simple CRUD App with TiDB and Python</a></td>
+         <td><a href="/tidb/dev/dev-guide-sample-application-python-peewee">Build a Simple CRUD App with TiDB and peewee</a></td>
       </tr>
    </tbody>
 </table>

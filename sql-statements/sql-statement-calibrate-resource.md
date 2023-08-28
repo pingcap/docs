@@ -11,7 +11,7 @@ The `CALIBRATE RESOURCE` statement is used to estimate and output the ['Request 
 
 > **Note:**
 >
-> This feature is not available on [Serverless Tier clusters](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta).
+> This feature is not available on [TiDB Serverless clusters](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless).
 
 </CustomContent>
 
@@ -34,7 +34,7 @@ To execute this command, make sure that the following requirements are met:
 - The user has `SUPER` or `RESOURCE_GROUP_ADMIN` privilege.
 - The user has the `SELECT` privilege for all tables in the `METRICS_SCHEMA` schema.
 
-## Methods for estimating capacity 
+## Methods for estimating capacity
 
 TiDB provides two methods for estimation:
 
@@ -46,6 +46,10 @@ If your application is already running in a production environment, or you can r
 - After specifying the `START_TIME` parameter, you can use the `END_TIME` parameter to specify the estimation end time, or use the `DURATION` parameter to specify the estimation time window from `START_TIME`.
 - The time window ranges from 10 minutes to 24 hours.
 - In the specified time window, if the CPU utilization of TiDB and TiKV is too low, you cannot estimate the capacity.
+
+> **Note:**
+>
+> TiKV does not monitor CPU usage metrics on macOS. It does not support capacity estimation based on the actual workload on macOS.
 
 ### Estimate capacity based on hardware deployment
 
@@ -95,7 +99,14 @@ CALIBRATE RESOURCE START_TIME '2023-04-18 08:00:00' DURATION '9m';
 ERROR 1105 (HY000): the duration of calibration is too short, which could lead to inaccurate output. Please make the duration between 10m0s and 24h0m0s
 ```
 
-When the workload within the time window is too low, an error occurs.
+The monitoring metrics for the [capacity estimation based on the actual workload](#estimate-capacity-based-on-actual-workload) feature include `tikv_cpu_quota`, `tidb_server_maxprocs`, `resource_manager_resource_unit`, and `process_cpu_usage`. If the CPU quota monitoring data is empty, there will be an error with the corresponding monitoring metric name, as shown in the following example:
+
+```sql
+CALIBRATE RESOURCE START_TIME '2023-04-18 08:00:00' DURATION '60m';
+Error 1105 (HY000): There is no CPU quota metrics, metrics 'tikv_cpu_quota' is empty
+```
+
+If the workload in the time window is too low, or the `resource_manager_resource_unit` and `process_cpu_usage` monitoring data is missing, the following error will be reported. In addition, because TiKV does not monitor CPU utilization on macOS, it does not support capacity estimation based on the actual workload, and will also report this error.
 
 ```sql
 CALIBRATE RESOURCE START_TIME '2023-04-18 08:00:00' DURATION '60m';

@@ -34,13 +34,18 @@ You can adjust the PD scheduling parameters using [pd-ctl](/pd-control.md). Note
 
 This section introduces the configuration parameters of TiFlash.
 
+> **Tip:**
+>
+> If you need to adjust the value of a configuration item, refer to [Modify the configuration](/maintain-tidb-using-tiup.md#modify-the-configuration).
+
 ### Configure the `tiflash.toml` file
 
 ```toml
 ## The listening host for supporting services such as TPC/HTTP. It is recommended to configure it as "0.0.0.0", which means to listen on all IP addresses of this machine.
 listen_host = "0.0.0.0"
-## The TiFlash TCP service port.
-tcp_port = 9000
+## The TiFlash TCP service port. This port is used for internal testing and is set to 9000 by default. Before TiFlash v7.1.0, this port is enabled by default with a security risk. To enhance security, it is recommended to apply access control on this port to only allow access from whitelisted IP addresses. Starting from TiFlash v7.1.0, you can avoid the security risk by commenting out the configuration of this port. When the TiFlash configuration file does not specify this port, it will be disabled. 
+## It is **NOT** recommended to configure this port in any TiFlash deployment. (Note: Starting from TiFlash v7.1.0, TiFlash deployed by TiUP >= v1.12.5 or TiDB Operator >= v1.5.0 disables the port by default and is more secure.)
+# tcp_port = 9000
 ## The cache size limit of the metadata of a data block. Generally, you do not need to change this value.
 mark_cache_size = 5368709120
 ## The cache size limit of the min-max index of a data block. Generally, you do not need to change this value.
@@ -72,6 +77,7 @@ delta_index_cache_size = 0
     ## * format_version = 2, the default format for versions < v6.0.0.
     ## * format_version = 3, the default format for v6.0.0 and v6.1.x, which provides more data validation features.
     ## * format_version = 4, the default format for v6.2.0 and later versions, which reduces write amplification and background task resource consumption
+    ## * format_version = 5, a new format introduced in v7.3.0 (not the default format for v7.3.0) that reduces the number of physical files by merging smaller files. Note that this format is experimental and not recommended to be used in a production environment.
     # format_version = 4
 
     [storage.main]
@@ -105,7 +111,7 @@ delta_index_cache_size = 0
     ## The total I/O bandwidth for disk reads and writes. The unit is bytes and the default value is 0, which means the I/O traffic is not limited by default.
     # max_bytes_per_sec = 0
     ## max_read_bytes_per_sec and max_write_bytes_per_sec have similar meanings to max_bytes_per_sec. max_read_bytes_per_sec means the total I/O bandwidth for disk reads, and max_write_bytes_per_sec means the total I/O bandwidth for disk writes.
-    ## These configuration items limit I/O bandwidth for disk reads and writes separately. You can use them for cloud storage that calculates the limit of I/O bandwidth for disk reads and writes separately, such as the Persistent Disk provided by Google Cloud Platform.
+    ## These configuration items limit I/O bandwidth for disk reads and writes separately. You can use them for cloud storage that calculates the limit of I/O bandwidth for disk reads and writes separately, such as the Persistent Disk provided by Google Cloud.
     ## When the value of max_bytes_per_sec is not 0, max_bytes_per_sec is prioritized.
     # max_read_bytes_per_sec = 0
     # max_write_bytes_per_sec = 0
