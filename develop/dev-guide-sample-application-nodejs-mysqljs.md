@@ -107,8 +107,10 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
     TIDB_DATABASE=test
     TIDB_ENABLE_SSL=true
     ```
-
-    > Modify `DATABASE_ENABLE_SSL` to `true` to enable a TLS connection. (Required for public endpoint)
+    
+    > **Note**
+    > 
+    > For TiDB Serverless, TLS connection **MUST** be enabled via `TIDB_ENABLE_SSL` when using public endpoint.
 
 7. Save the `.env` file.
 
@@ -141,6 +143,10 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
     TIDB_CA_PATH={downloaded_ssl_ca_path}
     ```
 
+   > **Note**
+   > 
+   > It is recommended to enable TLS connection when using the public endpoint to connect to TiDB Dedicated.
+   > 
    > To enable TLS connection, modify `TIDB_ENABLE_SSL` to `true` and using `TIDB_CA_PATH` to specify the file path of CA certificate downloaded from the connection dialog.
 
 6. Save the `.env` file.
@@ -307,10 +313,10 @@ For more information, refer to [Delete data](/develop/dev-guide-delete-data.md).
 
 ## Useful notes
 
-- Using [connection pools](https://github.com/mysqljs/mysql#pooling-connections) to manage database connections, which can reduce the performance overhead caused by frequently establishing/destroying connections.
-- [Escaping query values](https://github.com/mysqljs/mysql#escaping-query-values) before executing SQL statements to prevent SQL injection attacks.
+- Using [connection pools](https://github.com/mysqljs/mysql#pooling-connections) to manage database connections can reduce the performance overhead caused by frequently establishing and destroying connections.
+- To avoid SQL injection attacks, it is recommended to use [Escaping query values](https://github.com/mysqljs/mysql#escaping-query-values) before executing SQL.
 
-  > **Note:**
+  > **Note**
   > 
   > The `mysqljs/mysql` package does not yet support prepared statements, it only escapes values on the client side (related issue: [mysqljs/mysql#274](https://github.com/mysqljs/mysql/issues/274)).
   > 

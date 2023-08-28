@@ -108,9 +108,9 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
     TIDB_ENABLE_SSL=true
     ```
 
-    > **Note:**
-    >
-    > Modify `DATABASE_ENABLE_SSL` to `true` to enable a TLS connection. (Required for public endpoint)
+   > **Note**
+   >
+   > For TiDB Serverless, TLS connection **MUST** be enabled via `TIDB_ENABLE_SSL` when using public endpoint.
 
 7. Save the `.env` file.
 
@@ -143,6 +143,10 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
     TIDB_CA_PATH={downloaded_ssl_ca_path}
     ```
 
+   > **Note**
+   >
+   > It is recommended to enable TLS connection when using the public endpoint to connect to TiDB Dedicated.
+   >
    > To enable TLS connection, modify `TIDB_ENABLE_SSL` to `true` and using `TIDB_CA_PATH` to specify the file path of CA certificate downloaded from the connection dialog.
 
 6. Save the `.env` file.
@@ -288,9 +292,9 @@ For more information, refer to [Delete data](/develop/dev-guide-delete-data.md).
 
 ## Useful notes
 
-- Using [connection pools](https://github.com/sidorares/node-mysql2#using-connection-pools) to manage database connections, which can reduce the performance overhead caused by frequently establishing/destroying connections.
-- Using [prepared statements](https://github.com/sidorares/node-mysql2#using-prepared-statements) to avoid SQL injection.
-- Using ORM frameworks to improve development efficiency in scenarios without a number of complex SQL statements, such as: [Sequelize](https://sequelize.org/), [TypeORM](https://typeorm.io/), and [Prisma](/develop/dev-guide-sample-application-nodejs-prisma.md).
+- Using [connection pools](https://github.com/sidorares/node-mysql2#using-connection-pools) to manage database connections can reduce the performance overhead caused by frequently establishing and destroying connections.
+- To avoid SQL injection, it is recommended to use [prepared statements](https://github.com/sidorares/node-mysql2#using-prepared-statements).
+- In scenarios where there are not many complex SQL statements involved, using ORM frameworks like [Sequelize](https://sequelize.org/), [TypeORM](https://typeorm.io/), or [Prisma](https://www.prisma.io/) can greatly improve development efficiency.
 - Enable the `supportBigNumbers: true` option when dealing with big numbers (`BIGINT` and `DECIMAL` columns) in the database.
 - Enable the `enableKeepAlive: true` option to avoid socket error `read ECONNRESET` due to network problems. (Related issue: [sidorares/node-mysql2#683](https://github.com/sidorares/node-mysql2/issues/683))
 
