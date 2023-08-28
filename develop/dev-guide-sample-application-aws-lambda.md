@@ -3,9 +3,6 @@ title: Connect to TiDB by using mysql2 in AWS Lambda Function
 summary: This article describes how to build a CRUD application using TiDB and mysql2 in AWS Lambda Function and provides a simple example code snippet.
 ---
 
-<!-- markdownlint-disable MD024 -->
-<!-- markdownlint-disable MD029 -->
-
 # Connect to TiDB by using mysql2 in AWS Lambda Function
 
 TiDB is a MySQL-compatible database, [AWS Lambda Function](https://aws.amazon.com/lambda/) is a compute service, and [mysql2](https://github.com/sidorares/node-mysql2) is a popular open-source driver for Node.js.
