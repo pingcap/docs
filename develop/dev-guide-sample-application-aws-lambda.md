@@ -148,9 +148,9 @@ The method to connect to the TiDB cluster varies based on your deployment method
 
 ## Sample code snippets
 
-Complete code snippets are available in the [tidb-aws-lambda-quickstart](https://github.com/tidb-samples/tidb-aws-lambda-quickstart) GitHub repository.
+You can refer to the following sample code snippets to complete your own application development.
 
-You can refer to the following key code snippets to complete your application development.
+For complete sample code and how to run it, check out the [tidb-aws-lambda-quickstart](https://github.com/tidb-samples/tidb-aws-lambda-quickstart) repository.
 
 ### Connect to TiDB
 
