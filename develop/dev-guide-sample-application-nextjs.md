@@ -3,6 +3,8 @@ title: Connect to TiDB by using mysql2 in Next.js
 summary: This article describes how to build a CRUD application using TiDB and mysql2 in Next.js and provides a simple example code snippet.
 ---
 
+<!-- markdownlint-disable MD029 -->
+
 # Connect to TiDB by using mysql2 in Next.js
 
 TiDB is a MySQL-compatible database, and [mysql2](https://github.com/sidorares/node-mysql2) is a popular open-source driver for Node.js.
