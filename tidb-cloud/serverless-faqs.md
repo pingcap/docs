@@ -89,7 +89,7 @@ Once a cluster reaches its free quota or spending limit, the cluster will enforc
 
 ### Why do I observe spikes in RU usage while importing data?
 
-When importing data on TiDB serverless, RU consumption occurs only when the data of a table is successfully imported. As a result, there are spikes in RU usage during the data import process.
+During the data import process of a TiDB Serverless cluster, RU consumption increases only when the data is successfully imported, which leads to spikes in RU usage.
 
 ## Security FAQs
 
