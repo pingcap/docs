@@ -27,6 +27,7 @@ If you want to migrate incremental data only, see [Migrate Incremental Data from
     - GCP Oregon (us-west1)
     - GCP Singapore (asia-southeast1)
     - GCP Tokyo (asia-northeast1)
+    - GCP Virginia (us-east4)
 
 - Amazon Aurora MySQL writer instances support both existing data and incremental data migration. Amazon Aurora MySQL reader instances only support existing data migration and do not support incremental data migration.
 
