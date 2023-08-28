@@ -103,6 +103,8 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
     DATABASE_URL=mysql://{user}:{password}@{host}:4000/test?sslaccept=strict
     ```
 
+   > **Note**
+   >
    > For TiDB Serverless, TLS connection **MUST** be enabled when using public endpoint, but you **don't** have to specify an SSL CA certificate via `sslcert=/path/to/ca.pem`, because Node.js uses the built-in [Mozilla CA certificate](https://wiki.mozilla.org/CA/Included_Certificates) by default, which is trusted by TiDB Serverless.
 
 7. Save the `.env` file.
@@ -142,6 +144,8 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
     DATABASE_URL=mysql://{host}:{password}@{host}:4000/test?sslaccept=strict&sslcert={downloaded_ssl_ca_path}
     ```
 
+   > **Note**
+   >
    > For TiDB Serverless, TLS connection is **RECOMMENDED** be enabled when using public endpoint. When you set up `sslaccept=strict` to enable TLS connection, you **MUST** specify the file path of the CA certificate downloaded from connection dialog via `sslcert=/path/to/ca.pem`.
 
 6. Save the `.env` file.
