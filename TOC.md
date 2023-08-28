@@ -616,6 +616,7 @@
 - Reference
   - Cluster Architecture
     - [Overview](/tidb-architecture.md)
+    - [TSO](/tso.md)
     - [Storage](/tidb-storage.md)
     - [Computing](/tidb-computing.md)
     - [Scheduling](/tidb-scheduling.md)
