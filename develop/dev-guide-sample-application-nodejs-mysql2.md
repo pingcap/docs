@@ -69,6 +69,7 @@ For your existing project, run the following command to install the packages:
 ```shell
 npm install mysql2 dotenv --save
 ```
+
 </details>
 
 ### Step 3: Configure connection information

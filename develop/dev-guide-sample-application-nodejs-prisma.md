@@ -87,7 +87,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 
     - **Endpoint Type** is set to `Public`.
     - **Connect With** is set to `General`.
-   - **Operating System** matches the operating system where you run the application.
+    - **Operating System** matches the operating system where you run the application.
 
 4. If you have not set a password yet, click **Create password** to generate a random password.
 
@@ -102,8 +102,8 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
     ```dotenv
     DATABASE_URL=mysql://{user}:{password}@{host}:4000/test?sslaccept=strict
     ```
-    
-    > For TiDB Serverless, TLS connection **MUST** be enabled when using public endpoint, but you **don't** have to specify an SSL CA certificate via `sslcert=/path/to/ca.pem`, because Node.js uses the built-in [Mozilla CA certificate](https://wiki.mozilla.org/CA/Included_Certificates) by default, which is trusted by TiDB Serverless.
+
+   > For TiDB Serverless, TLS connection **MUST** be enabled when using public endpoint, but you **don't** have to specify an SSL CA certificate via `sslcert=/path/to/ca.pem`, because Node.js uses the built-in [Mozilla CA certificate](https://wiki.mozilla.org/CA/Included_Certificates) by default, which is trusted by TiDB Serverless.
 
 7. Save the `.env` file.
 8. In the `prisma/schema.prisma`, set up `mysql` as the connection provider and `env("DATABASE_URL")` as the connection URL:
@@ -142,7 +142,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
     DATABASE_URL=mysql://{host}:{password}@{host}:4000/test?sslaccept=strict&sslcert={downloaded_ssl_ca_path}
     ```
 
-    > For TiDB Serverless, TLS connection is **RECOMMENDED** be enabled when using public endpoint. When you set up `sslaccept=strict` to enable TLS connection, you **MUST** specify the file path of the CA certificate downloaded from connection dialog via `sslcert=/path/to/ca.pem`.  
+   > For TiDB Serverless, TLS connection is **RECOMMENDED** be enabled when using public endpoint. When you set up `sslaccept=strict` to enable TLS connection, you **MUST** specify the file path of the CA certificate downloaded from connection dialog via `sslcert=/path/to/ca.pem`.
 
 6. Save the `.env` file.
 7. In the `prisma/schema.prisma`, set up `mysql` as the connection provider and `env("DATABASE_URL")` as the connection URL:
@@ -239,7 +239,6 @@ Your database is now in sync with your schema.
 ```
 
 This command will also generate [Prisma Client](https://www.prisma.io/docs/concepts/components/prisma-client) for TiDB database accessing based on the `prisma/prisma.schema`.
-
 
 ### Step 5: Run the code
 
