@@ -1,11 +1,9 @@
 ---
-title: Connect to TiDB by using mysql2 in Next.js
+title: Connect to TiDB with mysql2 in Next.js
 summary: This article describes how to build a CRUD application using TiDB and mysql2 in Next.js and provides a simple example code snippet.
 ---
 
-<!-- markdownlint-disable MD029 -->
-
-# Connect to TiDB by using mysql2 in Next.js
+# Connect to TiDB with mysql2 in Next.js
 
 TiDB is a MySQL-compatible database, and [mysql2](https://github.com/sidorares/node-mysql2) is a popular open-source driver for Node.js.
 
@@ -25,7 +23,7 @@ To complete this tutorial, you need:
 
 - [Node.js **18**](https://nodejs.org/en/download/) or later.
 - [Git](https://git-scm.com/downloads).
-- A running TiDB cluster. 
+- A TiDB cluster. 
 
 <CustomContent platform="tidb">
 
@@ -44,7 +42,7 @@ To complete this tutorial, you need:
 
 </CustomContent>
 
-## Run the sample application
+## Run the sample app to connect to TiDB
 
 This section demonstrates how to run the sample application code and connect to TiDB.
 
@@ -52,7 +50,7 @@ This section demonstrates how to run the sample application code and connect to 
 >
 > For complete code snippets and running instructions, refer to the [tidb-nextjs-vercel-quickstart](https://github.com/tidb-samples/tidb-nextjs-vercel-quickstart) GitHub repository.
 
-### Step 1: Clone the sample application repository
+### Step 1: Clone the sample app repository
 
 Run the following commands in your terminal window to clone the sample code repository:
 
@@ -71,87 +69,93 @@ npm install
 
 ### Step 3: Configure connection information
 
-The method to connect to the TiDB cluster varies based on your deployment method.
+Connect to your TiDB cluster depending on the TiDB deployment option you've selected.
 
 <SimpleTab>
 
 <div label="TiDB Serverless">
 
-1. In the TiDB Cloud [Clusters page](https://tidbcloud.com/console/clusters), select your TiDB Serverless cluster and go to the **Overview** page. Click **Connect** in the upper right corner.
+1. Navigate to the [**Clusters** page](https://tidbcloud.com/console/clusters), and then click the name of your target cluster to go to its overview page.
 
-2. In the connection dialog, select `General` from the **Connect With** dropdown and keep the default setting of the **Endpoint Type** as `Public`.
+2. Click **Connect** in the upper right corner. A connection dialog is displayed.
 
-  > **Note**
-  >
-  > In Node.js applications, you do not have to provide an SSL CA certificate, because Node.js uses the built-in [Mozilla CA certificate](https://wiki.mozilla.org/CA/Included_Certificates) by default when establishing the TLS (SSL) connection.
+3. Ensure the configurations in the connection dialog match your operating environment.
 
-3. If you have not set a password yet, click **Create password** to generate a random password.
+    - **Endpoint Type** is set to `Public`
+    - **Connect With** is set to `General`
+    - **Operating System** matches your environment.
 
-  > **Tip**
-  >
-  > If you have generated a password before, you can use the original password directly, or click **Reset password** to generate a new password.   
+    > **Note**
+    >
+    > In Node.js applications, you do not have to provide an SSL CA certificate, because Node.js uses the built-in [Mozilla CA certificate](https://wiki.mozilla.org/CA/Included_Certificates) by default when establishing the TLS (SSL) connection.
 
-4. Copy and rename `.env.example` to `.env`:
+4. Click **Create password** to create a random password.
 
-   ```bash
-   # Linux
-   cp .env.example .env
-   ```
+    > **Tip**
+    >
+    > If you have created a password before, you can either use the original password or click **Reset password** to generate a new one.
 
-   ```powershell
-   # Windows
-   Copy-Item ".env.example" -Destination ".env"
-   ```
+5. Run the following command to copy `.env.example` and rename it to `.env`:
 
-5. Copy and paste the corresponding connection string into `.env`. The following is an example:
+    ```bash
+    # Linux
+    cp .env.example .env
+    ```
 
-   ```bash
-   TIDB_HOST='{gateway-region}.aws.tidbcloud.com'
-   TIDB_PORT='4000'
-   TIDB_USER='{prefix}.root'
-   TIDB_PASSWORD='{password}'
-   TIDB_DB_NAME='test'
-   ```
+    ```powershell
+    # Windows
+    Copy-Item ".env.example" -Destination ".env"
+    ```
 
-   Replace the placeholders in `{}` with the values obtained in the connection dialog.
+6. Copy and paste the corresponding connection string into the `.env` file. The example result is as follows:
 
-6. Save the file.
+    ```bash
+    TIDB_HOST='{gateway-region}.aws.tidbcloud.com'
+    TIDB_PORT='4000'
+    TIDB_USER='{prefix}.root'
+    TIDB_PASSWORD='{password}'
+    TIDB_DB_NAME='test'
+    ```
+
+    Replace the placeholders in `{}` with the values obtained in the connection dialog.
+
+7. Save the `.env` file.
 
 </div>
 
 <div label="TiDB Self-Hosted">
 
-1. Copy and rename `.env.example` to `.env`:
+1. Run the following command to copy `.env.example` and rename it to `.env`:
 
-   ```bash
-   # Linux
-   cp .env.example .env
-   ```
+    ```bash
+    # Linux
+    cp .env.example .env
+    ```
 
-   ```powershell
-   # Windows
-   Copy-Item ".env.example" -Destination ".env"
-   ```
+    ```powershell
+    # Windows
+    Copy-Item ".env.example" -Destination ".env"
+    ```
 
-2. Copy and paste the corresponding connection string into `.env`. The following is an example:
+2. Copy and paste the corresponding connection string into the `.env` file. The example result is as follows:
 
-   ```bash
-   TIDB_HOST='{tidb_server_host}'
-   TIDB_PORT='4000'
-   TIDB_USER='root'
-   TIDB_PASSWORD='{password}'
-   TIDB_DB_NAME='test'
-   ```
+    ```bash
+    TIDB_HOST='{tidb_server_host}'
+    TIDB_PORT='4000'
+    TIDB_USER='root'
+    TIDB_PASSWORD='{password}'
+    TIDB_DB_NAME='test'
+    ```
 
-   Replace the placeholders in `{}` with the values obtained in the **Connect** window. If you are running TiDB on your local machine, the default Host address is `127.0.0.1` and the password is empty.
+    Replace the placeholders in `{}` with the values obtained in the **Connect** window. If you are running TiDB locally, the default host address is `127.0.0.1`, and the password is empty.
 
-3. Save the file.
+3. Save the `.env` file.
 
 </div>
 
 </SimpleTab>
 
-### Step 4: Run the sample application locally
+### Step 4: Run the code and check the result
 
 1. Start the application:
 
