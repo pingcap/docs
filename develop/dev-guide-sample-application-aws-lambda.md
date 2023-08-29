@@ -1,9 +1,9 @@
 ---
-title: Connect to TiDB by using mysql2 in AWS Lambda Function
+title: Connect to TiDB with mysql2 in AWS Lambda Function
 summary: This article describes how to build a CRUD application using TiDB and mysql2 in AWS Lambda Function and provides a simple example code snippet.
 ---
 
-# Connect to TiDB by using mysql2 in AWS Lambda Function
+# Connect to TiDB with mysql2 in AWS Lambda Function
 
 TiDB is a MySQL-compatible database, [AWS Lambda Function](https://aws.amazon.com/lambda/) is a compute service, and [mysql2](https://github.com/sidorares/node-mysql2) is a popular open-source driver for Node.js.
 
@@ -23,7 +23,7 @@ To complete this tutorial, you need:
 
 - [Node.js **18**](https://nodejs.org/en/download/) or later.
 - [Git](https://git-scm.com/downloads).
-- A running TiDB cluster.
+- A TiDB cluster.
 - An [AWS account](https://repost.aws/knowledge-center/create-and-activate-aws-account).
 - An AWS user with access to the Lambda function.
 - [AWS SAM CLI](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/install-sam-cli.html)
@@ -47,7 +47,7 @@ To complete this tutorial, you need:
 
 If you don't have an AWS account or a user, you can create them by following the steps in the [Getting Started with Lambda](https://docs.aws.amazon.com/lambda/latest/dg/getting-started.html) guide.
 
-## Run the sample application
+## Run the sample app to connect to TiDB
 
 This section demonstrates how to run the sample application code and connect to TiDB.
 
@@ -55,7 +55,7 @@ This section demonstrates how to run the sample application code and connect to 
 >
 > For complete code snippets and running instructions, refer to the [tidb-samples/tidb-aws-lambda-quickstart](https://github.com/tidb-samples/tidb-aws-lambda-quickstart) GitHub repository.
 
-### Step 1: Clone the sample application repository
+### Step 1: Clone the sample app repository
 
 Run the following commands in your terminal window to clone the sample code repository:
 
@@ -74,27 +74,33 @@ npm install
 
 ### Step 3: Configure connection information
 
-The method to connect to the TiDB cluster varies based on your deployment method.
+Connect to your TiDB cluster depending on the TiDB deployment option you've selected.
 
 <SimpleTab>
 
 <div label="TiDB Serverless">
 
-1. In the TiDB Cloud [Clusters](https://tidbcloud.com/console/clusters) page, select your TiDB Serverless cluster and go to the **Overview** page. Click **Connect** in the upper right corner.
+1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
 
-2. In the connection dialog, select `General` from the **Connect With** dropdown and keep the default setting of the **Endpoint Type** as `Public`.
+2. Click **Connect** in the upper right corner. A connection dialog is displayed.
+
+3. Ensure the configurations in the connection dialog match your operating environment.
+
+    - **Endpoint Type** is set to `Public`
+    - **Connect With** is set to `General`
+    - **Operating System** matches your environment.
 
     > **Note**
     >
     > In Node.js applications, you don't have to provide an SSL CA certificate, because Node.js uses the built-in [Mozilla CA certificate](https://wiki.mozilla.org/CA/Included_Certificates) by default when establishing the TLS (SSL) connection.
 
-3. If you have not set a password yet, click **Create password** to generate a random password.
+4. Click **Create password** to create a random password.
 
     > **Tip**
     >
-    > If you have generated a password before, you can use the original password directly, or click **Reset password** to generate a new password.
+    > If you have generated a password before, you can either use the original password or click **Reset password** to generate a new one.
 
-4. Copy and paste the corresponding connection string into `env.json`. The following is an example:
+5. Copy and paste the corresponding connection string into `env.json`. The following is an example:
 
     ```json
     {
@@ -109,7 +115,7 @@ The method to connect to the TiDB cluster varies based on your deployment method
 
     Replace the placeholders in `{}` with the values obtained in the connection dialog.
 
-5. [Copy and configure the corresponding connection string](https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html) in Lambda Function.
+6. [Copy and configure the corresponding connection string](https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html) in Lambda Function.
 
     ![quickstart-lambda-env](/media/develop/quickstart-lambda-env.png)
 
@@ -119,28 +125,28 @@ The method to connect to the TiDB cluster varies based on your deployment method
 
 1. Copy and paste the corresponding connection string into `env.json`. The following is an example:
 
-   ```json
-   {
-     "Parameters": {
-       "TIDB_HOST": "{tidb_server_host}",
-       "TIDB_PORT": "4000",
-       "TIDB_USER": "root",
-       "TIDB_PASSWORD": "{password}"
-     }
-   }
-   ```
+    ```json
+    {
+      "Parameters": {
+        "TIDB_HOST": "{tidb_server_host}",
+        "TIDB_PORT": "4000",
+        "TIDB_USER": "root",
+        "TIDB_PASSWORD": "{password}"
+      }
+    }
+    ```
 
-   Replace the placeholders in `{}` with the values obtained in the **Connect** window.
+    Replace the placeholders in `{}` with the values obtained in the **Connect** window.
 
 2. [Copy and configure the corresponding connection string](https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html) in Lambda Function.
 
-  ![quickstart-lambda-env](/media/develop/quickstart-lambda-env.png)
+    ![quickstart-lambda-env](/media/develop/quickstart-lambda-env.png)
 
 </div>
 
 </SimpleTab>
 
-### Step 4: Run the sample application locally
+### Step 4: Run the code and check the result
 
 1. (Prerequisite) Install the [AWS SAM CLI](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/install-sam-cli.html).
 
