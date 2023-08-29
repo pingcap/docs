@@ -16,7 +16,7 @@ Currently, this method supports importing one CSV file for one task into either 
 - You cannot run more than one import task at the same time.
 - When you import a CSV file into an existing table in TiDB Cloud and the target table has more columns than the source file, the extra columns are handled differently depending on the situation:
     - If the extra columns are not the primary keys or the unique keys, no error will be reported, but the extra columns will be populated with the default values.
-    - If the extra columns are the primary keys or the unique keys, and does not have the `auto_increment` or `auto_random` attribute，an error will be reported. In that case, it is recommended that you choose one of the following strategies:
+    - If the extra columns are the primary keys or the unique keys, and do not have the `auto_increment` or `auto_random` attribute，an error will be reported. In that case, it is recommended that you choose one of the following strategies:
         - Provide a source file that includes these the primary keys or the unique keys columns.
         - Set the attributes of the the primary key or the unique key columns to `auto_increment` or `auto_random`.
 - If a column name is a reserved [keyword](/keywords.md) in TiDB, TiDB Cloud automatically adds backticks `` ` `` to enclose the column name. For example, if the column name is `order`, TiDB Cloud automatically adds backticks `` ` `` to change it to `` `order` `` and imports the data into the target table.
