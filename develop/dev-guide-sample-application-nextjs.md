@@ -113,7 +113,7 @@ The method to connect to the TiDB cluster varies based on your deployment method
    TIDB_DB_NAME='test'
    ```
 
-   Replace the placeholders in `{}` with the values obtained in the **Connect** window.
+   Replace the placeholders in `{}` with the values obtained in the connection dialog.
 
 6. Save the file.
 
@@ -190,11 +190,11 @@ import mysql from 'mysql2';
 let pool = null;
 
 export function connect() {
-  pool = mysql.createPool({
+  return mysql.createPool({
     host: process.env.TIDB_HOST, // TiDB host, for example: {gateway-region}.aws.tidbcloud.com
     port: process.env.TIDB_PORT || 4000, // TiDB port, default: 4000
     user: process.env.TIDB_USER, // TiDB user, for example: {prefix}.root
-    password: process.env.TIDB_PASSWORD, // TiDB password
+    password: process.env.TIDB_PASSWORD, // The password of TiDB user.
     database: process.env.TIDB_DATABASE || 'test', // TiDB database name, default: test
     ssl: {
       minVersion: 'TLSv1.2',

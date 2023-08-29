@@ -220,7 +220,7 @@ For more information, refer to [Query data](/develop/dev-guide-get-data-from-sin
 ```typescript
 const player = ['1', 10, 500];
 await pool.execute(
-  `UPDATE player SET goods = goods + ${play[0]}, coins = coins + ${play[1]} WHERE id = ${play[2]}`
+  `UPDATE player SET goods = goods + ${player[0]}, coins = coins + ${player[1]} WHERE id = ${player[2]}`
 );
 ```
 
@@ -229,7 +229,7 @@ For more information, refer to [Update data](/develop/dev-guide-update-data.md).
 ### Delete data
 
 ```typescript
-await pool.execute('DELETE FROM player WHERE id = 1');
+await pool.execute('DELETE FROM player WHERE id = ?', [1]);
 ```
 
 For more information, refer to [Delete data](/develop/dev-guide-delete-data.md).
