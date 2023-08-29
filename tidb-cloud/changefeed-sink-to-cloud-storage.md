@@ -9,7 +9,7 @@ This document describes how to create a changefeed to stream data from TiDB Clou
 
 > **Note:**
 >
-> - To stream data to cloud storage, make sure that your TiDB cluster version is v7.1.0 or later. To upgrade your TiDB Dedicated cluster to v7.1.0 or later, [contact TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
+> - To stream data to cloud storage, make sure that your TiDB cluster version is v7.1.1 or later. To upgrade your TiDB Dedicated cluster to v7.1.1 or later, [contact TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
 > - For [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) clusters, the changefeed feature is unavailable.
 
 ## Restrictions
@@ -115,8 +115,7 @@ Click **Next** to establish the connection from the TiDB Dedicated cluster to Am
 
     To configure the **CSV** format, fill in the following fields:
 
-    ![the data format of CSV](/media/tidb-cloud/changefeed/sink-to-s3-02-data-format-csv-conf.jpg)
-
+    - **Binary Encode Method**: The encoding method for binary data. You can choose **base64** (default) or **hex**. If you want to integrate with AWS DMS, use **hex**.
     - **Date Separator**: To rotate data based on the year, month, and day, or choose not to rotate at all.
     - **Delimiter**: Specify the character used to separate values in the CSV file. The comma (`,`) is the most commonly used delimiter.
     - **Quote**: Specify the character used to enclose values that contain the delimiter character or special characters. Typically, double quotes (`"`) are used as the quote character.
@@ -127,8 +126,6 @@ Click **Next** to establish the connection from the TiDB Dedicated cluster to Am
     <div label="Configure Canal-JSON format">
 
     Canal-JSON is a plain JSON text format. To configure it, fill in the following fields:
-
-    ![the data format of Canal-JSON](/media/tidb-cloud/changefeed/sink-to-s3-02-data-format-canal-json.jpg)
 
     - **Date Separator**: To rotate data based on the year, month, and day, or choose not to rotate at all.
     - **Enable TiDB Extension**: When you enable this option, TiCDC sends [WATERMARK events](https://docs.pingcap.com/tidb/stable/ticdc-canal-json#watermark-event) and adds the [TiDB extension field](https://docs.pingcap.com/tidb/stable/ticdc-canal-json#tidb-extension-field) to Canal-JSON messages.
