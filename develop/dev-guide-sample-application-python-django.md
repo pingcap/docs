@@ -1,6 +1,6 @@
 ---
 title: Connect to TiDB with Django
-summary: Learn how to build a Django application with TiDB. This tutorial gives Python sample code snippets that work with TiDB using Django.
+summary: Learn how to build a Django application with TiDB. This tutorial shows Python sample code snippets that work with TiDB using Django.
 ---
 
 # Build a Django App with TiDB
