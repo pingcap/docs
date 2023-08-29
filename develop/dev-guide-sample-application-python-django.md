@@ -105,12 +105,12 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 6. Copy and paste the corresponding connection string into the `.env` file. The example result is as follows:
 
     ```dotenv
-    TIDB_HOST='{gateway-region}.aws.tidbcloud.com'
+    TIDB_HOST='{host}'  # e.g. gateway01.ap-northeast-1.prod.aws.tidbcloud.com
     TIDB_PORT='4000'
-    TIDB_USER='{prefix}.root'
+    TIDB_USER='{user}'  # e.g. xxxxxx.root
     TIDB_PASSWORD='{password}'
     TIDB_DB_NAME='test'
-    CA_PATH=''
+    CA_PATH='{ssl_ca}'  # e.g. /etc/ssl/cert.pem (mac)
     ```
 
     Be sure to replace the placeholders `{}` with the connection parameters obtained from the connection dialog.
@@ -141,7 +141,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
     ```dotenv
     TIDB_HOST='{host}.clusters.tidb-cloud.com'
     TIDB_PORT='4000'
-    TIDB_USER='{username}'
+    TIDB_USER='{user}'
     TIDB_PASSWORD='{password}'
     TIDB_DB_NAME='test'
     CA_PATH='{your-downloaded-ca-path}'
