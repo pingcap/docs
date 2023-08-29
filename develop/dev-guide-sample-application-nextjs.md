@@ -187,6 +187,8 @@ For complete sample code and how to run it, check out the [tidb-nextjs-vercel-qu
 
 ### Connect to TiDB
 
+The following code establish a connection to TiDB with options defined in the environment variables:
+
 ```javascript
 // src/lib/tidb.js
 import mysql from 'mysql2';
@@ -210,7 +212,7 @@ export function connect() {
   });
 }
 
-export function getConnection() {
+export function getPool() {
   if (!pool) {
     pool = createPool();
   }
@@ -219,6 +221,8 @@ export function getConnection() {
 ```
 
 ### Insert data
+
+The following query creates a single `Player` record and returns a `ResultSetHeader` object:
 
 ```javascript
 const [rsh] = await pool.query('INSERT INTO players (coins, goods) VALUES (?, ?);', [100, 100]);
@@ -229,6 +233,8 @@ For more information, refer to [Insert data](/develop/dev-guide-insert-data.md).
 
 ### Query data
 
+The following query returns a single `Player` record by ID `1`:
+
 ```javascript
 const [rows] = await pool.query('SELECT id, coins, goods FROM players WHERE id = ?;', [1]);
 console.log(rows[0]);
@@ -237,6 +243,8 @@ console.log(rows[0]);
 For more information, refer to [Query data](/develop/dev-guide-get-data-from-single-table.md).
 
 ### Update data
+
+The following query adds `50` coins and `50` goods to the `Player` with ID `1`:
 
 ```javascript
 const [rsh] = await pool.query(
@@ -249,6 +257,8 @@ console.log(rsh.affectedRows);
 For more information, refer to [Update data](/develop/dev-guide-update-data.md).
 
 ### Delete data
+
+The following query deletes the `Player` record with ID `1`:
 
 ```javascript
 const [rsh] = await pool.query('DELETE FROM players WHERE id = ?;', [1]);
