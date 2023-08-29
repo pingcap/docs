@@ -15,30 +15,6 @@ To allow TiDB Cloud to access the source data in your Amazon S3 bucket, you need
 - Use a Role ARN: use a Role ARN to access your Amazon S3 bucket.
 
 <SimpleTab>
-<div label="Access Key">
-
-It is recommended that you use an IAM user (instead of the AWS account root user) to create an access key.
-
-Take the following steps to configure an access key:
-
-1. Create an IAM user with the following policies:
-
-   - `AmazonS3ReadOnlyAccess`
-   - [`CreateOwnAccessKeys` (required) and `ManageOwnAccessKeys` (optional)](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#access-keys_required-permissions)
-
-   It is recommended that these policies only work for your bucket that stores the source data.
-
-   For more information, see [Creating an IAM user](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html#id_users_create_console).
-
-2. Use your AWS account ID or account alias, and your IAM user name and password to sign in to [the IAM console](https://console.aws.amazon.com/iam).
-
-3. Create an access key. For more details, see [Creating an access key for an IAM user](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey).
-
-> **Note:**
->
-> TiDB Cloud does not store your access keys. It is recommended that you [delete the access key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey) after the import is complete.
-
-</div>
 <div label="Role ARN">
 
 Configure the bucket access for TiDB Cloud and get the Role ARN as follows:
@@ -130,6 +106,30 @@ Configure the bucket access for TiDB Cloud and get the Role ARN as follows:
         ![Copy AWS role ARN](/media/tidb-cloud/aws-role-arn.png)
 
 4. In the TiDB Cloud console, go to the **Data Import** page where you get the TiDB Cloud account ID and external ID, and then paste the role ARN to the **Role ARN** field.
+
+</div>
+<div label="Access Key">
+
+It is recommended that you use an IAM user (instead of the AWS account root user) to create an access key.
+
+Take the following steps to configure an access key:
+
+1. Create an IAM user with the following policies:
+
+   - `AmazonS3ReadOnlyAccess`
+   - [`CreateOwnAccessKeys` (required) and `ManageOwnAccessKeys` (optional)](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#access-keys_required-permissions)
+
+   It is recommended that these policies only work for your bucket that stores the source data.
+
+   For more information, see [Creating an IAM user](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html#id_users_create_console).
+
+2. Use your AWS account ID or account alias, and your IAM user name and password to sign in to [the IAM console](https://console.aws.amazon.com/iam).
+
+3. Create an access key. For more details, see [Creating an access key for an IAM user](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey).
+
+> **Note:**
+>
+> TiDB Cloud does not store your access keys. It is recommended that you [delete the access key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey) after the import is complete.
 
 </div>
 </SimpleTab>
