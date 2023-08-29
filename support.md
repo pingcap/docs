@@ -15,6 +15,7 @@ If you encounter a problem when you use TiDB, you can reach out for support from
 
     - The [TiDB Forum](https://ask.pingcap.com/)
     - Slack channels: [#everyone](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=docs) (English), [#tidb-japan](https://slack.tidb.io/invite?team=tidb-community&channel=tidb-japan&ref=docs) (Japanese)
+    - [Discord channels](https://discord.gg/KVRZBR2DrG?utm_source=doc)
     - [Stack Overflow](https://stackoverflow.com/questions/tagged/tidb) (questions tagged with #tidb)
 
 + Learn TiDB's implementation and design
