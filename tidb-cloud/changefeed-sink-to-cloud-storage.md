@@ -38,9 +38,9 @@ For **GCS**, before filling **GCS Endpoint**, you need to first grant the GCS bu
 
     ![gcs_endpoint](/media/tidb-cloud/changefeed/sink-to-cloud-storage-gcs-endpoint.png)
 
-2. In the Google Cloud Management Console, create an IAM role for your GCS bucket.
+2. In the Google Cloud console, create an IAM role for your GCS bucket.
 
-    1. Sign in to the [Google Cloud Management Console](https://console.cloud.google.com/).
+    1. Sign in to the [Google Cloud console](https://console.cloud.google.com/).
     2. Go to the [Roles](https://console.cloud.google.com/iam-admin/roles) page, and then click **Create role**.
 
         ![Create a role](/media/tidb-cloud/changefeed/sink-to-cloud-storage-gcs-create-role.png)
