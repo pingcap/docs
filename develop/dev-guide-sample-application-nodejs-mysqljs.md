@@ -136,7 +136,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
     ```dotenv
     TIDB_HOST={host}
     TIDB_PORT=4000
-    TIDB_USER={username}
+    TIDB_USER={user}
     TIDB_PASSWORD={password}
     TIDB_DATABASE=test
     TIDB_ENABLE_SSL=true

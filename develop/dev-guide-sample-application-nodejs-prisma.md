@@ -137,7 +137,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 5. Edit the `.env` file, set up the environment variable `DATABASE_URL` as follows, replace the corresponding placeholders `{}` with connection parameters on the connection dialog:
 
     ```dotenv
-    DATABASE_URL=mysql://{host}:{password}@{host}:4000/test?sslaccept=strict&sslcert={downloaded_ssl_ca_path}
+    DATABASE_URL=mysql://{user}:{password}@{host}:4000/test?sslaccept=strict&sslcert={downloaded_ssl_ca_path}
     ```
 
    > **Note**
