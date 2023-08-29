@@ -114,7 +114,7 @@ Before creating a migration job, set up the network connection according to your
 
 - If you use Google Cloud Private Service Connect, set it up according to [Connect to TiDB Dedicated via Private Endpoint with Google Cloud](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md).
 
-- If you use AWS VPC Peering or GCP VPC Network Peering, see the following instructions to configure the network.
+- If you use AWS VPC Peering or Google Cloud VPC Network Peering, see the following instructions to configure the network.
 
 <details>
 <summary> Set up AWS VPC Peering</summary>
@@ -135,9 +135,9 @@ If your MySQL service is in an AWS VPC, take the following steps:
 </details>
 
 <details>
-<summary> Set up GCP VPC Network Peering </summary>
+<summary> Set up Google Cloud VPC Network Peering </summary>
 
-If your MySQL service is in an GCP VPC, take the following steps:
+If your MySQL service is in an Google Cloud VPC, take the following steps:
 
 1. If it is a self-hosted MySQL, you can skip this step and proceed to the next step. If your MySQL service is Google Cloud SQL, you must expose a MySQL endpoint in the associated VPC of the Google Cloud SQL instance. You might need to use the [Cloud SQL Auth proxy](https://cloud.google.com/sql/docs/mysql/sql-proxy) developed by Google.
 
