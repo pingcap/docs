@@ -68,18 +68,9 @@ In the left pane of the [**Data Service**](https://tidbcloud.com/console/data-se
 
 - **Request Method**: (read-only) the HTTP method of the Chat2Data endpoint, which is `POST`.
 
-- **Timeout(ms)**: the timeout for the Chat2Data endpoint.
-
-    - Default value: `30000`
-    - Maximum value: `120000`
-    - Minimum value: `1`
-    - Unit: millisecond
+- **Timeout(ms)**: the timeout for the Chat2Data endpoint, in milliseconds.
 
 - **Max Rows**: the maximum number of rows that the Chat2Data endpoint returns.
-
-    - Default value: `50`
-    - Maximum value: `2000`
-    - Minimum value: `1`
 
 TiDB Cloud generates code examples to help you call an endpoint. To get the examples and run the code, perform the following steps:
 

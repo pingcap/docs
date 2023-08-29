@@ -102,18 +102,9 @@ On the right pane of the endpoint details page, you can click the **Properties**
     - `PUT`: use this method to update or modify data, such as an `UPDATE` statement.
     - `DELETE`: use this method to delete data, such as a `DELETE` statement.
 
-- **Timeout(ms)**: the timeout for the endpoint.
-
-    - Default value: `5000`
-    - Maximum value: `30000`
-    - Minimum value: `1`
-    - Unit: millisecond
+- **Timeout(ms)**: the timeout for the endpoint, in milliseconds.
 
 - **Max Rows**: the maximum number of rows that the endpoint can operate or return.
-
-    - Default value: `50`
-    - Maximum value: `2000` when **Batch Operation** is disabled and `100` when **Batch Operation** is enabled for an endpoint
-    - Minimum value: `1`
 
 - **Description** (Optional): the description of the endpoint.
 

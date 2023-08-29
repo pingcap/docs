@@ -8,6 +8,28 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2023.
 
+## August 23, 2023
+
+**General changes**
+
+- Support Google Cloud [Private Service Connect](https://cloud.google.com/vpc/docs/private-service-connect) for [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) clusters.
+
+    You can now create a private endpoint and establish a secure connection to a TiDB Dedicated cluster hosted on Google Cloud.
+
+    Key benefits:
+
+    - Intuitive operations: helps you create a private endpoint with only several steps.
+    - Enhanced security: establishes a secure connection to protect your data.
+    - Improved performance: provides low-latency and high-bandwidth connectivity.
+
+  For more information, see [Connect via Private Endpoint with Google Cloud](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md).
+
+- Support using a changefeed to stream data from a [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) cluster to [Google Cloud Storage (GCS)](https://cloud.google.com/storage).
+
+    You can now stream data from TiDB Cloud to GCS by using your own account's bucket and providing precisely tailored permissions. After replicating data to GCS, you can analyze the changes in your data as you wish.
+
+    For more information, see [Sink to Cloud Storage](/tidb-cloud/changefeed-sink-to-cloud-storage.md).
+
 ## August 15, 2023
 
 **General changes**
@@ -46,7 +68,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 - [Data Service (beta)](https://tidbcloud.com/console/data-service) now supports Basic Authentication.
 
-    You can provide your public key as the username and private key as the password in requests using [the 'Basic' HTTP Authentication](https://datatracker.ietf.org/doc/html/rfc7617). Compared with Digest Authentication, the Basic Authentication is simpler, enabling more straightforward usage when calling Data Service endpoints.
+    You can provide your public key as the username and private key as the password in requests using the ['Basic' HTTP Authentication](https://datatracker.ietf.org/doc/html/rfc7617). Compared with Digest Authentication, the Basic Authentication is simpler, enabling more straightforward usage when calling Data Service endpoints.
 
     For more information, see [Call an endpoint](/tidb-cloud/data-service-manage-endpoint.md#call-an-endpoint).
 
@@ -62,7 +84,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
     For more information, see [Use the OpenAPI Specification](/tidb-cloud/data-service-manage-data-app.md#use-the-openapi-specification) and [Use the OpenAPI Specification with Next.js](/tidb-cloud/data-service-oas-with-nextjs.md).
 
-- Support running Data App in Postman.
+- Support running Data App in [Postman](https://www.postman.com/).
 
     The Postman integration empowers you to import a Data App's endpoints as a collection into your preferred workspace. Then you can benefit from enhanced collaboration and seamless API testing with support for both Postman web and desktop apps.
 
