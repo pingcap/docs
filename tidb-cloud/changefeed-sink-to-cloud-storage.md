@@ -115,7 +115,7 @@ Click **Next** to establish the connection from the TiDB Dedicated cluster to Am
 
     To configure the **CSV** format, fill in the following fields:
 
-    - **Binary Encode Method**: The encoding method for binary data. You can choose between "base64" (default) or "hex". If you want to integrate with AWS DMS, use "hex".
+    - **Binary Encode Method**: The encoding method for binary data. You can choose **base64** (default) or **hex**. If you want to integrate with AWS DMS, use **hex**.
     - **Date Separator**: To rotate data based on the year, month, and day, or choose not to rotate at all.
     - **Delimiter**: Specify the character used to separate values in the CSV file. The comma (`,`) is the most commonly used delimiter.
     - **Quote**: Specify the character used to enclose values that contain the delimiter character or special characters. Typically, double quotes (`"`) are used as the quote character.
