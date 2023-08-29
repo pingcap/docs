@@ -217,10 +217,8 @@ export function getConnection() {
 ### Insert data
 
 ```javascript
-const player = ['1', 1, 1];
-await pool.execute(
-  `INSERT INTO player (id, goods, coins) VALUES (${player[0]}, ${player[1]}, ${player[2]})`
-);
+const [rsh] = await pool.query('INSERT INTO players (coins, goods) VALUES (?, ?);', [100, 100]);
+console.log(rsh.insertId);
 ```
 
 For more information, refer to [Insert data](/develop/dev-guide-insert-data.md).
@@ -228,8 +226,8 @@ For more information, refer to [Insert data](/develop/dev-guide-insert-data.md).
 ### Query data
 
 ```javascript
-const [rows] = await pool.execute('SELECT count(*) AS cnt FROM player');
-console.log(rows[0]['cnt']);
+const [rows] = await pool.query('SELECT id, coins, goods FROM players WHERE id = ?;', [1]);
+console.log(rows[0]);
 ```
 
 For more information, refer to [Query data](/develop/dev-guide-get-data-from-single-table.md).
@@ -237,10 +235,11 @@ For more information, refer to [Query data](/develop/dev-guide-get-data-from-sin
 ### Update data
 
 ```javascript
-const player = ['1', 10, 500];
-await pool.execute(
-  `UPDATE player SET goods = goods + ${play[0]}, coins = coins + ${play[1]} WHERE id = ${play[2]}`
+const [rsh] = await pool.query(
+    'UPDATE players SET coins = coins + ?, goods = goods + ? WHERE id = ?;',
+    [50, 50, 1]
 );
+console.log(rsh.affectedRows);
 ```
 
 For more information, refer to [Update data](/develop/dev-guide-update-data.md).
@@ -248,7 +247,8 @@ For more information, refer to [Update data](/develop/dev-guide-update-data.md).
 ### Delete data
 
 ```javascript
-await pool.execute('DELETE FROM player WHERE id = 1');
+const [rsh] = await pool.query('DELETE FROM players WHERE id = ?;', [1]);
+console.log(rsh.affectedRows);
 ```
 
 For more information, refer to [Delete data](/develop/dev-guide-delete-data.md).
