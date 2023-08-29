@@ -15,7 +15,7 @@ In this tutorial, you can learn how to use TiDB and Django to accomplish the fol
 
 > **Note:**
 >
-> This tutorial works with TiDB Serverless, TiDB Dedicated, and TiDB Self-Hosted.
+> This tutorial works with TiDB Serverless, TiDB Dedicated, and TiDB Self-Hosted clusters.
 
 ## Prerequisites
 
