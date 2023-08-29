@@ -171,7 +171,7 @@ import mysql from 'mysql2';
 let pool: mysql.Pool | null = null;
 
 function connect() {
-  pool = mysql.createPool({
+  return mysql.createPool({
     host: process.env.TIDB_HOST, // TiDB host, for example: {gateway-region}.aws.tidbcloud.com
     port: process.env.TIDB_PORT ? Number(process.env.TIDB_PORT) : 4000, // TiDB port, default: 4000
     user: process.env.TIDB_USER, // TiDB user, for example: {prefix}.root
@@ -189,19 +189,17 @@ function connect() {
 
 export function getConnection(): mysql.Pool {
   if (!pool) {
-    connect();
+    pool = connect();
   }
-  return pool as mysql.Pool;
+  return pool;
 }
 ```
 
 ### Insert data
 
 ```typescript
-const player = ['1', 10, 500];
-await pool.execute(
-  `INSERT INTO player (id, goods, coins) VALUES (${player[0]}, ${player[1]}, ${player[2]})`
-);
+const [rsh] = await pool.query('INSERT INTO players (coins, goods) VALUES (?, ?);', [100, 100]);
+console.log(rsh.insertId);
 ```
 
 For more information, refer to [Insert data](/develop/dev-guide-insert-data.md).
@@ -209,8 +207,8 @@ For more information, refer to [Insert data](/develop/dev-guide-insert-data.md).
 ### Query data
 
 ```typescript
-const [rows] = await pool.execute('SELECT count(*) AS cnt FROM player');
-console.log(rows[0]['cnt']);
+const [rows] = await pool.query('SELECT id, coins, goods FROM players WHERE id = ?;', [1]);
+console.log(rows[0]);
 ```
 
 For more information, refer to [Query data](/develop/dev-guide-get-data-from-single-table.md).
@@ -218,10 +216,11 @@ For more information, refer to [Query data](/develop/dev-guide-get-data-from-sin
 ### Update data
 
 ```typescript
-const player = ['1', 10, 500];
-await pool.execute(
-  `UPDATE player SET goods = goods + ${player[0]}, coins = coins + ${player[1]} WHERE id = ${player[2]}`
+const [rsh] = await pool.query(
+    'UPDATE players SET coins = coins + ?, goods = goods + ? WHERE id = ?;',
+    [50, 50, 1]
 );
+console.log(rsh.affectedRows);
 ```
 
 For more information, refer to [Update data](/develop/dev-guide-update-data.md).
@@ -229,7 +228,8 @@ For more information, refer to [Update data](/develop/dev-guide-update-data.md).
 ### Delete data
 
 ```typescript
-await pool.execute('DELETE FROM player WHERE id = ?', [1]);
+const [rsh] = await pool.query('DELETE FROM players WHERE id = ?;', [1]);
+console.log(rsh.affectedRows);
 ```
 
 For more information, refer to [Delete data](/develop/dev-guide-delete-data.md).
