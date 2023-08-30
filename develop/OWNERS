@@ -1,11 +1,9 @@
 # See the OWNERS docs at https://go.k8s.io/owners
 approvers:
-  - Oreoxmt
-  - qiancai
-  - ran-huang
+  - sig-develop-docs-approvers
 
 reviewers:
-  - sig-develop-reviewers # define a alias in `/OWNERS_ALIASES` file.
+  - sig-develop-docs-reviewers
   
 labels:
   - area/develop  
