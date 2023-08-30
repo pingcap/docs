@@ -73,7 +73,7 @@ mysql> SELECT * FROM t1;
 
 ## MySQL compatibility
 
-The `DROP VIEW` statement in TiDB is fully compatible with MySQL. If you find any compatibility differences, report them via [an issue on GitHub](https://github.com/pingcap/tidb/issues/new/choose).
+The `DROP VIEW` statement in TiDB is fully compatible with MySQL. If you find any compatibility differences, [report a bug](/support.md).
 
 ## See also
 
