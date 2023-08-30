@@ -11,7 +11,8 @@ In this tutorial, you can learn how to use TiDB and mysql2 in AWS Lambda Functio
 
 - Set up your environment.
 - Connect to your TiDB cluster using mysql2.
-- Build and run your application. Optionally, you can find sample code snippets for basic CRUD operations.
+- Build and run your application. Optionally, you can find [sample code snippets](#sample-code-snippets) for basic CRUD operations.
+- Deploy your AWS Lambda Function.
 
 > **Note**
 >
@@ -24,8 +25,8 @@ To complete this tutorial, you need:
 - [Node.js **18**](https://nodejs.org/en/download/) or later.
 - [Git](https://git-scm.com/downloads).
 - A TiDB cluster.
-- An [AWS account](https://repost.aws/knowledge-center/create-and-activate-aws-account).
-- An AWS user with access to the Lambda function.
+- An [AWS user](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users.html) with administrator permissions.
+- [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
 - [AWS SAM CLI](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/install-sam-cli.html)
 
 <CustomContent platform="tidb">
@@ -115,32 +116,24 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 
     Replace the placeholders in `{}` with the values obtained in the connection dialog.
 
-6. [Copy and configure the corresponding connection string](https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html) in Lambda Function.
-
-    ![quickstart-lambda-env](/media/develop/quickstart-lambda-env.png)
-
 </div>
 
 <div label="TiDB Self-Hosted">
 
-1. Copy and paste the corresponding connection string into `env.json`. The following is an example:
+Copy and paste the corresponding connection string into `env.json`. The following is an example:
 
-    ```json
-    {
-      "Parameters": {
-        "TIDB_HOST": "{tidb_server_host}",
-        "TIDB_PORT": "4000",
-        "TIDB_USER": "root",
-        "TIDB_PASSWORD": "{password}"
-      }
-    }
-    ```
+```json
+{
+  "Parameters": {
+    "TIDB_HOST": "{tidb_server_host}",
+    "TIDB_PORT": "4000",
+    "TIDB_USER": "root",
+    "TIDB_PASSWORD": "{password}"
+  }
+}
+```
 
-    Replace the placeholders in `{}` with the values obtained in the **Connect** window.
-
-2. [Copy and configure the corresponding connection string](https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html) in Lambda Function.
-
-    ![quickstart-lambda-env](/media/develop/quickstart-lambda-env.png)
+Replace the placeholders in `{}` with the values obtained in the **Connect** window.
 
 </div>
 
@@ -150,13 +143,19 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 
 1. (Prerequisite) Install the [AWS SAM CLI](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/install-sam-cli.html).
 
-2. Invoke the sample Lambda function:
+2. Build the bundle:
+
+    ```bash
+    npm run build
+    ```
+
+3. Invoke the sample Lambda function:
 
     ```bash
     sam local invoke --env-vars env.json -e events/event.json "tidbHelloWorldFunction"
     ```
 
-3. Check the output in the terminal. If the output is similar to the following, the connection is successful:
+4. Check the output in the terminal. If the output is similar to the following, the connection is successful:
 
     ```bash
     {"statusCode":200,"body":"{\"results\":[{\"Hello World\":\"Hello World\"}]}"}
@@ -249,6 +248,103 @@ console.log(rsh.affectedRows);
 ```
 
 For more information, refer to [Delete data](/develop/dev-guide-delete-data.md).
+
+## Deploy the AWS Lambda Function
+
+You can deploy the AWS Lambda Function using either the [SAM CLI](#sam-cli-deploymentrecommended) or the [AWS Lambda console](#web-console-deployment).
+
+### SAM CLI deployment(Recommended)
+
+1. ([Prerequisite](#prerequisites)) Install the [AWS SAM CLI](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/install-sam-cli.html).
+
+2. Build the bundle:
+
+    ```bash
+    npm run build
+    ```
+
+3. Update Environment Variables in [`template.yml`](https://github.com/tidb-samples/tidb-aws-lambda-quickstart/blob/main/template.yml)
+
+    ```yaml
+    Environment:
+      Variables:
+        TIDB_HOST: {tidb_server_host}
+        TIDB_PORT: 4000
+        TIDB_USER: {prefix}.root
+        TIDB_PASSWORD: {password}
+    ```
+
+4. Set AWS environment variables ([Short-term credentials](https://docs.aws.amazon.com/cli/latest/userguide/cli-authentication-short-term.html))
+
+    ```bash
+    export AWS_ACCESS_KEY_ID={your_access_key_id}
+    export AWS_SECRET_ACCESS_KEY={your_secret_access_key}
+    export AWS_SESSION_TOKEN={your_session_token}
+    ```
+
+5. Deploy the AWS Lambda Function
+
+    ```bash
+    sam deploy --guided
+
+    # Example:
+
+    # Configuring SAM deploy
+    # ======================
+
+    #        Looking for config file [samconfig.toml] :  Not found
+
+    #        Setting default arguments for 'sam deploy'
+    #        =========================================
+    #        Stack Name [sam-app]: tidb-aws-lambda-quickstart
+    #        AWS Region [us-east-1]: 
+    #        #Shows you resources changes to be deployed and require a 'Y' to initiate deploy
+    #        Confirm changes before deploy [y/N]: 
+    #        #SAM needs permission to be able to create roles to connect to the resources in your template
+    #        Allow SAM CLI IAM role creation [Y/n]: 
+    #        #Preserves the state of previously provisioned resources when an operation fails
+    #        Disable rollback [y/N]: 
+    #        tidbHelloWorldFunction may not have authorization defined, Is this okay? [y/N]: y
+    #        tidbHelloWorldFunction may not have authorization defined, Is this okay? [y/N]: y
+    #        tidbHelloWorldFunction may not have authorization defined, Is this okay? [y/N]: y
+    #        tidbHelloWorldFunction may not have authorization defined, Is this okay? [y/N]: y
+    #        Save arguments to configuration file [Y/n]: 
+    #        SAM configuration file [samconfig.toml]: 
+    #        SAM configuration environment [default]: 
+
+    #        Looking for resources needed for deployment:
+    #        Creating the required resources...
+    #        Successfully created!
+    ```
+
+### Web console deployment
+
+1. Build the bundle:
+
+    ```bash
+    npm run build
+
+    # Bundle for AWS Lambda
+    # =====================
+    # dist/index.zip
+    ```
+
+2. Visit the [AWS Lambda console](https://console.aws.amazon.com/lambda/home#/functions).
+
+3. Follow the steps in [Creating a Lambda function](https://docs.aws.amazon.com/lambda/latest/dg/lambda-nodejs.html) to create a Node.js Lambda function.
+
+4. Follow the steps in [Lambda deployment packages](https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-package.html#gettingstarted-package-zip) and upload the `dist/index.zip` file.
+
+5. [Copy and configure the corresponding connection string](https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html) in Lambda Function.
+
+    - In the [Functions](https://console.aws.amazon.com/lambda/home#/functions) page of the Lambda console, select the **Configuration** tab, then choose **Environment variables**.
+    - Choose **Edit**.
+    - To add your database access credentials, do the following:
+        - Choose **Add environment variable**, then for **Key** enter TIDB_HOST and for **Value** enter the host name.
+        - Choose **Add environment variable**, then for **Key** enter TIDB_PORT and for **Value** enter the port(4000 is default).
+        - Choose **Add environment variable**, then for **Key** enter TIDB_USER and for **Value** enter the user name.
+        - Choose **Add environment variable**, then for **Key** enter TIDB_PASSWORD and for **Value** enter the password you chose when you created your database.
+        - Choose **Save**.
 
 ## Useful notes
 
