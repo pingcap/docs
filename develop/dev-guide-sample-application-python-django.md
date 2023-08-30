@@ -110,7 +110,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
     TIDB_USER='{user}'  # e.g. xxxxxx.root
     TIDB_PASSWORD='{password}'
     TIDB_DB_NAME='test'
-    CA_PATH='{ssl_ca}'  # e.g. /etc/ssl/cert.pem (mac)
+    CA_PATH='{ssl_ca}'  # e.g. /etc/ssl/certs/ca-certificates.crt (Debian / Ubuntu / Arch)
     ```
 
     Be sure to replace the placeholders `{}` with the connection parameters obtained from the connection dialog.
@@ -139,9 +139,9 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 5. Copy and paste the corresponding connection string into the `.env` file. The example result is as follows:
 
     ```dotenv
-    TIDB_HOST='{host}'
+    TIDB_HOST='{host}'  # e.g. tidb.xxxx.clusters.tidb-cloud.com
     TIDB_PORT='4000'
-    TIDB_USER='{user}'
+    TIDB_USER='{user}'  # e.g. root
     TIDB_PASSWORD='{password}'
     TIDB_DB_NAME='test'
     CA_PATH='{your-downloaded-ca-path}'
