@@ -5,7 +5,7 @@ summary: Learn how to build a Django application with TiDB. This tutorial shows 
 
 # Build a Django App with TiDB
 
-TiDB is a MySQL-compatible database, and [Django](https://www.djangoproject.com/) is a popular web framework for Python.
+TiDB is a MySQL-compatible database, and [Django](https://www.djangoproject.com/) is a popular web framework for Python, including a powerful ORM library.
 
 In this tutorial, you can learn how to use TiDB and Django to accomplish the following tasks:
 
