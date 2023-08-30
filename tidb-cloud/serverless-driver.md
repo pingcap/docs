@@ -155,6 +155,7 @@ The type mapping between TiDB Serverless and Javascript are as follows:
 ### Limitations
 
 - Up to 10,000 rows can be fetched in a single query.
+- You can execute only one SQL at a time, multiple SQLs in one query are not supported yet.
 
 ## Pricing
 
