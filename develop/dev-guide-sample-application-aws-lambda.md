@@ -340,10 +340,10 @@ You can deploy the AWS Lambda Function using either the [SAM CLI](#sam-cli-deplo
     - In the [Functions](https://console.aws.amazon.com/lambda/home#/functions) page of the Lambda console, select the **Configuration** tab, then choose **Environment variables**.
     - Choose **Edit**.
     - To add your database access credentials, do the following:
-        - Choose **Add environment variable**, then for **Key** enter TIDB_HOST and for **Value** enter the host name.
-        - Choose **Add environment variable**, then for **Key** enter TIDB_PORT and for **Value** enter the port(4000 is default).
-        - Choose **Add environment variable**, then for **Key** enter TIDB_USER and for **Value** enter the user name.
-        - Choose **Add environment variable**, then for **Key** enter TIDB_PASSWORD and for **Value** enter the password you chose when you created your database.
+        - Choose **Add environment variable**, then for **Key** enter `TIDB_HOST` and for **Value** enter the host name.
+        - Choose **Add environment variable**, then for **Key** enter `TIDB_PORT` and for **Value** enter the port (4000 is default).
+        - Choose **Add environment variable**, then for **Key** enter `TIDB_USER` and for **Value** enter the user name.
+        - Choose **Add environment variable**, then for **Key** enter `TIDB_PASSWORD` and for **Value** enter the password you chose when you created your database.
         - Choose **Save**.
 
 ## Useful notes
