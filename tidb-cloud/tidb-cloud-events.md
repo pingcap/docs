@@ -9,10 +9,6 @@ TiDB Cloud logs the historical events at the cluster level. An *event* indicates
 
 This document describes how to view the events for TiDB Cloud clusters using the **Events** page and lists the supported event types.
 
-> **Note:**
->
-> Currently, the Events page is only available for [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) clusters.
-
 ## View the Events page
 
 To view the events on the Events page, take the following steps:
