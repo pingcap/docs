@@ -1,0 +1,16 @@
+# See the OWNERS docs at https://go.k8s.io/owners
+approvers:
+  - Oreoxmt
+  - qiancai
+  - ran-huang
+  - Icemap
+  - sykp241095
+
+reviewers:
+  - shizn
+  - winkyao
+  - shczhen
+  - hooopo
+  - Mini256
+  - wd0517
+  - it2911
