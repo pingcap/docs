@@ -7,9 +7,14 @@ summary: Find support resources if you encounter a problem using TiDB.
 
 If you encounter a problem when you use TiDB, you can reach out for support from PingCAP or the TiDB community via the following methods:
 
-+ Get support from PingCAP (requires subscription to [TiDB Enterprise Edition](https://www.pingcap.com/tidb-enterprise/)):
++ Get support from PingCAP for [TiDB Enterprise Edition](https://www.pingcap.com/tidb-enterprise/):
 
-    - [Submit a request](https://support.pingcap.com/hc/en-us)
+    - [Submit a request](https://tidb.support.pingcap.com).
+
++ Get support from PingCAP for TiDB Cloud:
+
+    - Report an issue directly from the TiDB Cloud web interface.
+    - [Documentation for TiDB Cloud support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support)
 
 + Seek help from the TiDB community:
 
@@ -17,7 +22,9 @@ If you encounter a problem when you use TiDB, you can reach out for support from
     - [Discord channels](https://discord.gg/DQZ2dy3cuc?utm_source=doc)
     - Slack channels: [#everyone](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=docs) (English), [#tidb-japan](https://slack.tidb.io/invite?team=tidb-community&channel=tidb-japan&ref=docs) (Japanese)
     - [Stack Overflow](https://stackoverflow.com/questions/tagged/tidb) (questions tagged with #tidb)
+    - [GitHub](https://github.com/pingcap/tidb/)
 
 + Learn TiDB's implementation and design
 
+    - [TiDB Development Guide](https://pingcap.github.io/tidb-dev-guide/)
     - [TiDB Internals forum](https://internals.tidb.io/)
