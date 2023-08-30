@@ -53,10 +53,6 @@ For each event, the following information is logged:
 - Time
 - Triggered By
 
-> **Note:**
->
-> Cluster events started before 2023-03-22 are not visible on the Events page.
-
 ## Event retention policy
 
-For TiDB Dedicated clusters, the event data is kept for 7 days.
+Event data are kept for 7 days.
