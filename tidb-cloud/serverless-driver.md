@@ -25,13 +25,7 @@ To query from TiDB serverless, you need to create a connection first. Then you c
 ```ts
 import { connect } from '@tidbcloud/serverless'
 
-const config = {
-  host: '<host>',
-  username: '<user>',
-  password: '<password>'
-}
-
-const conn = connect(config)
+const conn = connect({url: 'mysql://username:password@host/database'})
 const results = await conn.execute('select * from test where id = ?',[1])
 ```
 
@@ -42,12 +36,7 @@ You can also perform interactive transactions with the TiDB serverless driver. F
 ```ts
 import { connect } from '@tidbcloud/serverless'
 
-const config = {
-  host: '<host>',
-  username: '<user>',
-  password: '<password>'
-}
-const conn = connect(config)
+const conn = connect({url: 'mysql://username:password@host/database'})
 const tx = await conn.begin()
 
 try {
@@ -59,6 +48,60 @@ try {
   throw err
 }
 ```
+
+## Edge Examples
+
+Here are some examples of using the TiDB serverless driver.
+
+<SimpleTab>
+
+<div label="Vercel Edge Function">
+
+```ts
+import { NextResponse } from 'next/server';
+import type { NextRequest } from 'next/server';
+import { connect } from '@tidbcloud/serverless'
+export const runtime = 'edge'
+
+export async function GET(request: NextRequest) {
+  const conn = connect({url: process.env.DATABASE_URL})
+  const result = await conn.execute('select * from test.test')
+  return NextResponse.json({result});
+}
+```
+
+</div>
+
+<div label="Cloudflare Workers">
+
+```ts
+import { connect } from '@tidbcloud/serverless'
+export interface Env {
+  DATABASE_URL: string;
+}
+export default {
+  async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
+    const conn = connect({url: env.DATABASE_URL})
+    const result = await conn.execute('select * from test.test')
+    return new Response(JSON.stringify(result));
+  },
+};
+```
+
+</div>
+
+<div label="Deno">
+
+```ts
+import { connect } from "npm:@shiyuhang0/serverless-js"
+
+const conn = connect({url: Deno.env.get('DATABASE_URL')})
+const result = await conn.execute('select * from test.test')
+```
+
+</div>
+
+</SimpleTab>
 
 ## Features
 
@@ -113,59 +156,9 @@ The type mapping between TiDB Serverless and Javascript are as follows:
 
 - Up to 10,000 rows can be fetched in a single query.
 
-## Examples
+## Pricing
 
-Here are some examples of using the TiDB serverless driver.
-
-<SimpleTab>
-
-<div label="Vercel Edge Function">
-
-```ts
-import { NextResponse } from 'next/server';
-import type { NextRequest } from 'next/server';
-import { connect } from '@tidbcloud/serverless'
-export const runtime = 'edge'
-
-export async function GET(request: NextRequest) {
-  const conn = connect({url: process.env.DATABASE_URL})
-  const result = await conn.execute('select * from test.test')
-  return NextResponse.json({result});
-}
-```
-
-</div>
-
-<div label="Cloudflare Workers">
-
-```ts
-import { connect } from '@tidbcloud/serverless'
-export interface Env {
-  DATABASE_URL: string;
-}
-export default {
-  async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
-    const conn = connect({url: env.DATABASE_URL})
-    const result = await conn.execute('select * from test.test')
-    return new Response(JSON.stringify(result));
-  },
-};
-```
-
-</div>
-
-<div label="Deno">
-
-```ts
-import { connect } from "npm:@shiyuhang0/serverless-js"
-
-const conn = connect({url: Deno.env.get('DATABASE_URL')})
-const result = await conn.execute('select * from test.test')
-```
-
-</div>
-
-</SimpleTab>
+TiDB serverless driver generates the same costs as you use the TiDB serverless. Check the [TiDB serverless pricing](https://www.pingcap.com/tidb-serverless-pricing-details) for more details. 
 
 ## What's next
 

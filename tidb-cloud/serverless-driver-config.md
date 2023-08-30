@@ -35,6 +35,7 @@ const config = {
 
 const conn = connect(config)
 ```
+
 ```ts
 const conn = connect({url: process.env['DATABASE_URL'] || 'mysql://username:password@host/database'})
 ```
@@ -63,7 +64,6 @@ The following options are supported in SQL level:
 |------------|------|---------|-----------------------------------------------------------|
 | arrayMode  | bool | false   | whether to return results as arrays instead of objects    |
 | fullResult | bool | false   | whether to return full result object instead of just rows |
-
 
 ```ts
 const conn = connect({url: process.env['DATABASE_URL'] || 'mysql://username:password@host/database'})
