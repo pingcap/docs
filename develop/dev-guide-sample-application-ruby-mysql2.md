@@ -141,7 +141,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
     DATABASE_PASSWORD=<password>
     DATABASE_NAME=test
     DATABASE_ENABLE_SSL=true
-    DATABASE_SSL_CA={downloaded_ssl_ca_path}
+    DATABASE_SSL_CA=<downloaded_ssl_ca_path>
     ```
 
    > **Note**
