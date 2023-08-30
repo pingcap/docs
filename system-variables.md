@@ -3669,10 +3669,10 @@ mysql> desc select count(distinct a) from test.t;
 - Persists to cluster: Yes
 - Type: Enumeration
 - Default value: `moderate`
-- Possible values: `moderate`, `determined`
-- This variable controls the objective of the optimizer. `moderate` maintains the default behavior from previous versions, which means the optimizer tries to make use of more information to generate better execution plans. While `determined` mode tends to be more conservative and makes the execution plan more stable.
-- The real-time statistics are the total number of rows and the number of modified rows that are automatically updated according to DML statements. When this variable is set to `moderate`, the default value, TiDB will generate the execution plan based on the real-time statistics. When this variable is set to `determined`, TiDB won't use the real-time statistics when generating the execution plan, which will make it more stable.
-- For long-term and stable OLTP workload, or the user is affirmative on the existing execution plans, the `determined` mode is recommended to reduce the possibility of unexpected execution plan changes. The [`LOCK STATS`](/sql-statements/sql-statement-lock-stats.md) can also be used to prevent the statistics from being modified to further stabilize the execution plan.
+- Possible values: `moderate`, `determinate`
+- This variable controls the objective of the optimizer. `moderate` maintains the default behavior from previous versions, which means the optimizer tries to make use of more information to generate better execution plans. While `determinate` mode tends to be more conservative and makes the execution plan more stable.
+- The real-time statistics are the total number of rows and the number of modified rows that are automatically updated according to DML statements. When this variable is set to `moderate`, the default value, TiDB will generate the execution plan based on the real-time statistics. When this variable is set to `determinate`, TiDB won't use the real-time statistics when generating the execution plan, which will make it more stable.
+- For long-term and stable OLTP workload, or the user is affirmative on the existing execution plans, the `determinate` mode is recommended to reduce the possibility of unexpected execution plan changes. The [`LOCK STATS`](/sql-statements/sql-statement-lock-stats.md) can also be used to prevent the statistics from being modified to further stabilize the execution plan.
 
 ### tidb_opt_ordering_index_selectivity_threshold <span class="version-mark">New in v7.0.0</span>
 
