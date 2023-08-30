@@ -221,7 +221,7 @@ DATABASES = {
         "HOST": ${tidb_host},
         "PORT": ${tidb_port},
         "USER": ${tidb_user},
-        "PASSWORD": ${tidb_password}},
+        "PASSWORD": ${tidb_password},
         "NAME": ${tidb_db_name},
         "OPTIONS": {
             "charset": "utf8mb4",
