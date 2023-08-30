@@ -65,7 +65,7 @@ pip install -r requirements.txt
 
 #### Why do we need PyMySQL?
 
-SQLAlchemy is an ORM library that supports multiple databases. It is a high-level abstraction of the database, which can help us write SQL statements in a more object-oriented way. However, it does not provide a database driver. We need to install a database driver to connect to the database. In this sample project, we use PyMySQL as the database driver, which is a pure Python MySQL client library that is compatible with MySQL and TiDB, can be easily installed in all platforms.
+SQLAlchemy is an ORM library that supports multiple databases. It is a high-level abstraction of the database, which can help us write SQL statements in a more object-oriented way. However, it does not provide a database driver. We need to install a database driver to connect to the database. In this sample project, we use PyMySQL as the database driver, which is a pure Python MySQL client library that is compatible with TiDB, can be easily installed in all platforms.
 
 You can also use other database drivers, such as [mysqlclient](https://github.com/PyMySQL/mysqlclient) and [mysql-connector-python](https://dev.mysql.com/doc/connector-python/en/), but they are not pure Python libraries, so you need to install the corresponding C/C++ compiler and MySQL client library to compile them. For more information, refer to [SQLAlchemy's official documentation](https://docs.sqlalchemy.org/en/20/core/engines.html#mysql).
 
@@ -226,6 +226,7 @@ When using this function, you need to replace `${tidb_host}`, `${tidb_port}`, `$
 ### Define a table
 
 ```python
+from sqlalchemy import Column, Integer, String
 from sqlalchemy.orm import declarative_base
 
 Base = declarative_base()
