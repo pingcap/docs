@@ -5,11 +5,9 @@ summary: Learn about the principle, usage, and examples of the SQL non-prepared 
 
 # SQL Non-Prepared Execution Plan Cache
 
-> **Warning:**
->
-> The non-prepared execution plan cache is an experimental feature. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
-
 TiDB supports execution plan caching for some non-`PREPARE` statements, similar to the [`Prepare`/`Execute` statements](/sql-prepared-plan-cache.md). This feature allows these statements to skip the optimization phase and improve performance.
+
+Enabling this feature may incur some additional memory usage, so decide whether to enable this feature according to your specific usage scenarios.
 
 ## Principle
 

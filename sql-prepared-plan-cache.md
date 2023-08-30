@@ -34,6 +34,8 @@ In the current version of TiDB, if a `Prepare` statement meets any of the follow
 - The plan attempts to access `TiFlash`.
 - In most cases, the plan that contains `TableDual` is not cached, unless the current `Prepare` statement does not have parameters.
 
+TiDB has a limitation on the number of `?`, if a query has more than 65535 `?`, the error `Prepared statement contains too many placeholders` will be returned.
+
 The LRU linked list is designed as a session-level cache because `Prepare`/`Execute` cannot be executed across sessions. Each element of the LRU list is a key-value pair. The value is the execution plan, and the key is composed of the following parts:
 
 - The name of the database where `Execute` is executed
