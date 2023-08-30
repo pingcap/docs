@@ -75,7 +75,7 @@ mysql> SELECT * FROM t1;
 
 ## MySQL compatibility
 
-The `SHOW WARNINGS` statement in TiDB is fully compatible with MySQL. If you find any compatibility differences, report them via [an issue on GitHub](https://github.com/pingcap/tidb/issues/new/choose).
+The `SHOW WARNINGS` statement in TiDB is fully compatible with MySQL. If you find any compatibility differences, [report a bug](/support.md).
 
 ## See also
 
