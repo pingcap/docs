@@ -206,7 +206,7 @@ For complete sample code and how to run it, check out the [tidb-samples/tidb-nod
 
 ### Connect with connection options
 
-The following code establish a connection to TiDB with options defined in the environment variables:
+The following code establishes a connection to TiDB with options defined in the environment variables:
 
 ```javascript
 // Step 1. Import the 'mysql' and 'dotenv' packages.
@@ -218,7 +218,7 @@ import * as fs from "fs";
 dotenv.config();
 
 async function main() {
-   // Step 3. Create a connection with the TiDB cluster.
+   // Step 3. Create a connection to the TiDB cluster.
    const options = {
       host: process.env.TIDB_HOST || '127.0.0.1',
       port: process.env.TIDB_PORT || 4000,
@@ -243,7 +243,7 @@ void main();
 
 > **Note**
 >
-> For TiDB Serverless, TLS connection **MUST** be enabled via `TIDB_ENABLE_SSL` when using public endpoint, but you **don't** have to specify an SSL CA certificate via `TIDB_CA_PATH`, because Node.js uses the built-in [Mozilla CA certificate](https://wiki.mozilla.org/CA/Included_Certificates) by default, which is trusted by TiDB Serverless.
+> For TiDB Serverless, you **MUST** enable TLS connection via `TIDB_ENABLE_SSL` when using public endpoint. However, you **don't** have to specify an SSL CA certificate via `TIDB_CA_PATH`, because Node.js uses the built-in [Mozilla CA certificate](https://wiki.mozilla.org/CA/Included_Certificates) by default, which is trusted by TiDB Serverless.
 
 ### Insert data
 
@@ -297,8 +297,8 @@ For more information, refer to [Delete data](/develop/dev-guide-delete-data.md).
 - Using [connection pools](https://github.com/sidorares/node-mysql2#using-connection-pools) to manage database connections can reduce the performance overhead caused by frequently establishing and destroying connections.
 - To avoid SQL injection, it is recommended to use [prepared statements](https://github.com/sidorares/node-mysql2#using-prepared-statements).
 - In scenarios where there are not many complex SQL statements involved, using ORM frameworks like [Sequelize](https://sequelize.org/), [TypeORM](https://typeorm.io/), or [Prisma](https://www.prisma.io/) can greatly improve development efficiency.
-- Enable the `supportBigNumbers: true` option when dealing with big numbers (`BIGINT` and `DECIMAL` columns) in the database.
-- Enable the `enableKeepAlive: true` option to avoid socket error `read ECONNRESET` due to network problems. (Related issue: [sidorares/node-mysql2#683](https://github.com/sidorares/node-mysql2/issues/683))
+- It is recommended to enable the `supportBigNumbers: true` option when dealing with big numbers (`BIGINT` and `DECIMAL` columns) in the database.
+- It is recommended to enable the `enableKeepAlive: true` option to avoid socket error `read ECONNRESET` due to network problems. (Related issue: [sidorares/node-mysql2#683](https://github.com/sidorares/node-mysql2/issues/683))
 
 ## Next steps
 

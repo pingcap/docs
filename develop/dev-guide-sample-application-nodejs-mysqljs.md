@@ -217,7 +217,7 @@ import * as fs from "fs";
 // Step 2. Load environment variables from .env file to process.env.
 dotenv.config();
 
-// Step 3. Create a connection with the TiDB cluster.
+// Step 3. Create a connection to the TiDB cluster.
 const options = {
     host: process.env.TIDB_HOST || '127.0.0.1',
     port: process.env.TIDB_PORT || 4000,
@@ -239,7 +239,7 @@ conn.end();
 
 > **Note**
 >
-> For TiDB Serverless, TLS connection **MUST** be enabled via `TIDB_ENABLE_SSL` when using public endpoint, but you **don't** have to specify an SSL CA certificate via `TIDB_CA_PATH`, because Node.js uses the built-in [Mozilla CA certificate](https://wiki.mozilla.org/CA/Included_Certificates) by default, which is trusted by TiDB Serverless.
+> For TiDB Serverless, you **MUST** enable TLS connection via `TIDB_ENABLE_SSL` when using public endpoint. However, you **don't** have to specify an SSL CA certificate via `TIDB_CA_PATH`, because Node.js uses the built-in [Mozilla CA certificate](https://wiki.mozilla.org/CA/Included_Certificates) by default, which is trusted by TiDB Serverless.
 
 ### Insert data
 
@@ -321,7 +321,7 @@ For more information, refer to [Delete data](/develop/dev-guide-delete-data.md).
   > If you want to use this feature to avoid SQL injection or improve efficiency of batch insert/update, it is recommended to use [mysql2](https://github.com/sidorares/node-mysql2) package instead.
 
 - Using ORM frameworks to improve development efficiency in scenarios without a number of complex SQL statements, such as: [Sequelize](https://sequelize.org/), [TypeORM](https://typeorm.io/), and [Prisma](/develop/dev-guide-sample-application-nodejs-prisma.md).
-- Enable the `supportBigNumbers: true` option when dealing with big numbers (`BIGINT` and `DECIMAL` columns) in the database.
+- It is recommended to enable the `supportBigNumbers: true` option when dealing with big numbers (`BIGINT` and `DECIMAL` columns) in the database.
 
 ## Next steps
 

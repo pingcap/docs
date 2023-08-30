@@ -105,7 +105,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 
    > **Note**
    >
-   > For TiDB Serverless, TLS connection **MUST** be enabled when using public endpoint by setting `sslaccept=strict`. 
+   > For TiDB Serverless, you **MUST** enable TLS connection by setting `sslaccept=strict` when using public endpoint. 
 
 7. Save the `.env` file.
 8. In the `prisma/schema.prisma`, set up `mysql` as the connection provider and `env("DATABASE_URL")` as the connection URL:
@@ -142,7 +142,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 
    > **Note**
    >
-   > For TiDB Serverless, TLS connection is **RECOMMENDED** be enabled when using public endpoint. When you set up `sslaccept=strict` to enable TLS connection, you **MUST** specify the file path of the CA certificate downloaded from connection dialog via `sslcert=/path/to/ca.pem`.
+   > For TiDB Serverless, It is **RECOMMENDED** to enable TLS connection by setting `sslaccept=strict` when using public endpoint. When you set up `sslaccept=strict` to enable TLS connection, you **MUST** specify the file path of the CA certificate downloaded from connection dialog via `sslcert=/path/to/ca.pem`.
 
 6. Save the `.env` file.
 7. In the `prisma/schema.prisma`, set up `mysql` as the connection provider and `env("DATABASE_URL")` as the connection URL:
