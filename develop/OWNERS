@@ -5,12 +5,7 @@ approvers:
   - ran-huang
 
 reviewers:
-  - Icemap
-  - sykp241095
-  - shizn
-  - winkyao
-  - shczhen
-  - hooopo
-  - Mini256
-  - wd0517
-  - it2911
+  - sig-develop-reviewers # define a alias in `/OWNERS_ALIASES` file.
+  
+labels:
+  - area/develop  
