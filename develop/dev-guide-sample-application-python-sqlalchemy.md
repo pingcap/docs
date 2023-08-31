@@ -240,6 +240,8 @@ class Player(Base):
     __tablename__ = "players"
 ```
 
+For more information, refer to [SQLAlchemy Declarative](https://docs.sqlalchemy.org/en/13/orm/extensions/declarative/index.html).
+
 ### Insert data
 
 ```python
