@@ -287,4 +287,4 @@ While it is possible to specify the CA certificate path manually, this approach 
 
 ## Need help?
 
-Ask questions on the [Discord](https://discord.gg/vYU9h56kAX), or [create a support ticket](https://support.pingcap.com/).
+Ask questions on the [Discord](https://discord.gg/vYU9h56kAX) channel.
