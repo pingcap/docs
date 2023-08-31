@@ -52,22 +52,22 @@ Run the following commands in your terminal window to clone the sample code repo
 
 ```shell
 git clone https://github.com/tidb-samples/tidb-python-sqlalchemy-quickstart.git
-cd tidb-python-sqlalchemy-quickstart;
+cd tidb-python-sqlalchemy-quickstart
 ```
 
 ### Step 2: Install dependencies
 
-Run the following command to install the required packages (including `SQLAlchemy` and `PyMySQL`) for the sample app:
+Run the following command to install the required packages (including SQLAlchemy and PyMySQL) for the sample app:
 
 ```shell
 pip install -r requirements.txt
 ```
 
-#### Why do we need PyMySQL?
+#### Why use PyMySQL?
 
-SQLAlchemy is an ORM library that supports multiple databases. It is a high-level abstraction of the database, which can help us write SQL statements in a more object-oriented way. However, it does not provide a database driver. We need to install a database driver to connect to the database. In this sample project, we use PyMySQL as the database driver, which is a pure Python MySQL client library that is compatible with TiDB, can be easily installed in all platforms.
+SQLAlchemy is an ORM library that works with multiple databases. It provides a high-level abstraction of the database, which helps developers write SQL statements in a more object-oriented way. However, SQLAlchemy does not include a database driver. To connect to a database, you need to install a database driver. This sample application uses PyMySQL as the database driver, which is a pure Python MySQL client library that is compatible with TiDB and can be installed on all platforms.
 
-You can also use other database drivers, such as [mysqlclient](https://github.com/PyMySQL/mysqlclient) and [mysql-connector-python](https://dev.mysql.com/doc/connector-python/en/), but they are not pure Python libraries, so you need to install the corresponding C/C++ compiler and MySQL client library to compile them. For more information, refer to [SQLAlchemy's official documentation](https://docs.sqlalchemy.org/en/20/core/engines.html#mysql).
+You can also use other database drivers, such as [mysqlclient](https://github.com/PyMySQL/mysqlclient) and [mysql-connector-python](https://dev.mysql.com/doc/connector-python/en/). But they are not pure Python libraries and require the corresponding C/C++ compiler and MySQL client library to compile them. For more information, refer to [SQLAlchemy official documentation](https://docs.sqlalchemy.org/en/20/core/engines.html#mysql).
 
 ### Step 3: Configure connection information
 
