@@ -163,22 +163,22 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 
 1. Create the database and table:
 
-  ```shell
-  bundle exec rails db:create
-  bundle exec rails db:migrate
-  ```
+    ```shell
+    bundle exec rails db:create
+    bundle exec rails db:migrate
+    ```
 
 2. Seed the sample data:
 
-  ```shell
-  bundle exec rails db:seed
-  ```
+    ```shell
+    bundle exec rails db:seed
+    ```
 
 3. Run the following command to execute the sample code:
 
-  ```shell
-  bundle exec rails runner ./quickstart.rb
-  ```
+    ```shell
+    bundle exec rails runner ./quickstart.rb
+    ```
 
 If the connection is successful, the console will output the version of the TiDB cluster as follows:
 
