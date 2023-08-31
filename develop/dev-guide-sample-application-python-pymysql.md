@@ -52,12 +52,12 @@ Run the following commands in your terminal window to clone the sample code repo
 
 ```shell
 git clone https://github.com/tidb-samples/tidb-python-pymysql-quickstart.git
-cd tidb-python-pymysql-quickstart;
+cd tidb-python-pymysql-quickstart
 ```
 
 ### Step 2: Install dependencies
 
-Run the following command to install the required packages (including `pymysql`) for the sample app:
+Run the following command to install the required packages (including PyMySQL) for the sample app:
 
 ```shell
 pip install -r requirements.txt
