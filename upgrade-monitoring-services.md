@@ -7,12 +7,12 @@ summary: Learn how to upgrade the Prometheus, Grafana, and Alertmanager monitori
 
 When deploying a TiDB cluster, TiUP automatically deploys monitoring services (such as Prometheus, Grafana, and Alertmanager) for the cluster. If you scale out this cluster, TiUP also automatically adds monitoring configurations for newly added nodes during the scaling. The monitoring services automatically deployed by TiUP are usually not the latest versions of these third-party monitoring services. To use the latest versions, you can follow this document to upgrade the monitoring services.
 
-When managing a cluster, TiUP uses its own configurations to override the configurations of the monitoring services. If you directly upgrade the monitoring services by replacing their configuration files, any subsequent TiUP operations such as `deploy`, `scale-out`, `scale-in`, or `reload` on the cluster might overwrite your upgrade, leading to errors. To upgrade Prometheus, Grafana, and Alertmanager, follow the steps in this document rather than directly replacing configuration files.
+When managing a cluster, TiUP uses its own configurations to override the configurations of the monitoring services. If you directly upgrade the monitoring services by replacing their configuration files, any subsequent TiUP operations such as `deploy`, `scale-out`, `scale-in`, and `reload` on the cluster might overwrite your upgrade, leading to errors. To upgrade Prometheus, Grafana, and Alertmanager, follow the steps in this document rather than directly replacing configuration files.
 
 > **Note:**
 >
 > - If your monitoring services are [deployed manually](/deploy-monitoring-services.md) instead of using TiUP, you can directly upgrade them without referring to this document.
-> - The TiDB compatibility with newer versions of monitoring services has not been not tested, so it is possible that some features might not work as expected after the upgrade. For any issues, you can create an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+> - The TiDB compatibility with newer versions of monitoring services has not been tested, so some features might not work as expected after the upgrade. For any issues, create an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
 > - The upgrade steps in this document are applicable for TiUP version 1.9.0 and later. Therefore, check your TiUP version before the upgrade.
 > - When you use TiUP to upgrade the TiDB cluster, TiUP will redeploy the monitoring services to the default version. You need to redo the upgrade for monitoring services after the TiDB upgrade. 
 
@@ -96,20 +96,20 @@ tiup cluster patch <cluster-name> grafana-v{new-version}.tar.gz -R grafana
 
 After the upgrade, you can go to the home page of the Grafana server (usually at `http://<Grafana-server-host-name>:3000`), and then check the Grafana version on the page to confirm whether the upgrade is successful.
 
-## Upgrade AlertManager
+## Upgrade Alertmanager
 
-The AlertManager package in the TiDB installation package is directly from the Prometheus website. Therefore, when upgrading AlertManager, you only need to download and install a new version of AlertManager from the Prometheus website.
+The Alertmanager package in the TiDB installation package is directly from the Prometheus website. Therefore, when upgrading Alertmanager, you only need to download and install a new version of Alertmanager from the Prometheus website.
 
-### Step 1. Download a new AlertManager installation package from the Prometheus website
+### Step 1. Download a new Alertmanager installation package from the Prometheus website
 
 Download the `alertmanager` installation package from the [Prometheus download page](https://prometheus.io/download/#alertmanager).
 
-### Step 2. Upgrade AlertManager using the downloaded installation package
+### Step 2. Upgrade Alertmanager using the downloaded installation package
 
-Execute the following command to upgrade AlertManager:
+Execute the following command to upgrade Alertmanager:
 
 ```bash
 tiup cluster patch <cluster-name> alertmanager-v{new-version}-linux-amd64.tar.gz -R alertmanager
 ```
 
-After the upgrade, you can go to the home page of the AlertManager server (usually at `http://<Alertmanager-server-host-name>:9093`), click **Status** in the top navigation menu, and then check the AlertManager version to confirm whether the upgrade is successful.
+After the upgrade, you can go to the home page of the Alertmanager server (usually at `http://<Alertmanager-server-host-name>:9093`), click **Status** in the top navigation menu, and then check the Alertmanager version to confirm whether the upgrade is successful.
