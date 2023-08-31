@@ -37,7 +37,7 @@ With the following metrics, you can get an overview of TiCDC data replication:
 - Changefeed resolved ts lag: the progress lag between the internal replication status of a TiCDC node and the upstream, measured in seconds. If this metric is high, it indicates that the data processing capability of the TiCDC Puller or Sorter module might be insufficient, or there might be network latency or slow disk read/write speed issues. In such cases, to ensure the efficient and stable operation of TiCDC, you need to take appropriate measures, such as increasing the number of TiCDC nodes or optimizing the network configuration.
 - The status of changefeeds: for status explanations of changefeeds, see [Changefeed state transfer](/ticdc/ticdc-changefeed-overview.md).
 
-Example 1: high checkpoint lag due to high upstream QPS in the case of a single TiCDC node
+Example 1: High checkpoint lag due to high upstream QPS in the case of a single TiCDC node
 
 As shown in the following diagram, because the upstream QPS is excessively high and there is only a single TiCDC node in the cluster, the TiCDC node is overloaded, the CPU usage is high, and both `Changefeed checkpoint lag` and `Changefeed resolved ts lag` keep increasing. The changefeed status intermittently transitions from `0` to `1`, indicating that the changefeed keeps getting errors. You can try resolving this issue by adding more resources as follows:
 
