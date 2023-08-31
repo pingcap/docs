@@ -55,4 +55,4 @@ For each event, the following information is logged:
 
 ## Event retention policy
 
-Event data are kept for 7 days.
+Event data is kept for 7 days.
