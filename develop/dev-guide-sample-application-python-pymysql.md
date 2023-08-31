@@ -269,7 +269,7 @@ The Python driver provides low-level access to the database, but it requires the
 
 - Manually establish and release database connections.
 - Manually manage database transactions.
-- Manually map data rows (represented as tuple/dict in `pymysql`) to data objects.
+- Manually map data rows (represented as a tuple or dict in `pymysql`) to data objects.
 
 Unless you need to write complex SQL statements, it is recommended to use [ORM](https://en.wikipedia.org/w/index.php?title=Object-relational_mapping) framework for development, such as [SQLAlchemy](/develop/dev-guide-sample-application-python-sqlalchemy.md), [Peewee](/develop/dev-guide-sample-application-python-peewee.md), and Django ORM. It can help you:
 
