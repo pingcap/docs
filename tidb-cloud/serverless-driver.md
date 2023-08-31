@@ -93,7 +93,7 @@ export default {
 <div label="Netlify Edge Function">
 
 ```ts
-import { connect } from 'https://esm.sh/@shiyuhang0/serverless'
+import { connect } from 'https://esm.sh/@tidbcloud/serverless'
 
 export default async () => {
   const conn = connect({url: Netlify.env.get('DATABASE_URL')})
@@ -126,7 +126,7 @@ serve(async (req) => {
 <div label="Deno">
 
 ```ts
-import { connect } from "npm:@shiyuhang0/serverless-js"
+import { connect } from "npm:@tidbcloud/serverless-js"
 
 const conn = connect({url: Deno.env.get('DATABASE_URL')})
 const result = await conn.execute('show tables')
