@@ -49,7 +49,7 @@ With the following metrics, you can get the latency of TiFlash:
         - If the schema of a queried table lacks suitable indexes, the optimizer can only push the query down to TiFlash for a full table scan, even if the amount of data to be queried is small. In this case, it is more efficient to create proper indexes and access the data through TiKV.
 
 - Request Duration: the total processing duration for each MPP and coprocessor request type in all TiFlash instances, which includes the average latency and p99 latency.
-- Request Handle Duration: the time from the start of executing the `cop` and `batch cop` requests to the completion of the execution, excluding waiting time. This metric is only for the `cop` and `batch cop` types, including average and P99 latency.
+- Request Handle Duration: the time from the start of executing the `cop` and `batch cop` requests to the completion of the execution, excluding waiting time. This metric is only applicable to the `cop` and `batch cop` types of requests, including average and P99 latency.
 
 Example 1: Processing duration overview of TiFlash MPP requests
 
@@ -108,6 +108,6 @@ In this cluster, there are two TiFlash nodes. The incremental data replication s
 
 Example 2: Raft and IO metrics of the [CH-benCHmark workload](/benchmark/benchmark-tidb-using-ch.md) in a public cloud deployment environment
 
-As shown in the following diagram, the 99th percentile of `Raft Wait Index Duration` is up to 438 milliseconds, and 99th percentile of the `Raft Batch Read Index Duration` is up to 125 milliseconds. This cluster has only one TiFlash node. TiKV replicates about 5 MB of incremental data to TiFlash per second. The maximum write traffic of the stable layer (File Descriptor) is 78 MB/s and the maximum read traffic is 221 MB/s. In the meantime, the maximum write traffic of the Delta layer (Page) is 8 MB/s and the maximum read traffic is 18 MB/s. In this environment, TiFlash uses an AWS EBS cloud drive, which has relatively weak IO throughput.
+As shown in the following diagram, the 99th percentile of `Raft Wait Index Duration` is up to 438 milliseconds, and 99th percentile of the `Raft Batch Read Index Duration` is up to 125 milliseconds. This cluster has only one TiFlash node. TiKV replicates about 5 MB of incremental data to TiFlash per second. The maximum write traffic of the stable layer (File Descriptor) is 78 MB/s and the maximum read traffic is 221 MB/s. In the meantime, the maximum write traffic of the Delta layer (Page) is 8 MB/s and the maximum read traffic is 18 MB/s. In this environment, TiFlash uses an AWS EBS cloud disk, which has relatively weak IO throughput.
 
 ![CH-TiFlash-MPP](/media/performance/tiflash/ch-1tiflash-raft-io-flow-cloud.png)
