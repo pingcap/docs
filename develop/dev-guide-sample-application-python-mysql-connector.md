@@ -1,6 +1,7 @@
 ---
 title: Connect to TiDB with MySQL Connector/Python
 summary: Learn how to connect to TiDB using MySQL Connector/Python. This tutorial gives Python sample code snippets that work with TiDB using MySQL Connector/Python.
+aliases: ['/tidb/dev/dev-guide-sample-application-python','/tidb/dev/dev-guide-outdated-for-python-mysql-connector']
 ---
 
 # Connect to TiDB with MySQL Connector/Python
@@ -264,7 +265,7 @@ The Python driver provides low-level access to the database, but it requires the
 
 - Manually establish and release database connections.
 - Manually manage database transactions.
-- Manually map data rows (represented as tuple/dict in `mysql-connector-python`) to data objects.
+- Manually map data rows (represented as a tuple or dict in `mysql-connector-python`) to data objects.
 
 Unless you need to write complex SQL statements, it is recommended to use [ORM](https://en.wikipedia.org/w/index.php?title=Object-relational_mapping) framework for development, such as [SQLAlchemy](/develop/dev-guide-sample-application-python-sqlalchemy.md), [Peewee](/develop/dev-guide-sample-application-python-peewee.md), and Django ORM. It can help you:
 
