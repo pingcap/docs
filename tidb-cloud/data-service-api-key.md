@@ -5,7 +5,10 @@ summary: Learn how to create, edit, and delete an API key for a Data App.
 
 # API Keys in Data Service
 
-The TiDB Cloud Data API uses [HTTP Digest Authentication](https://en.wikipedia.org/wiki/Digest_access_authentication). It protects your private key from being sent over the network. For more details about HTTP Digest Authentication, refer to the [IETF RFC](https://datatracker.ietf.org/doc/html/rfc7616).
+The TiDB Cloud Data API supports both [Basic Authentication](https://en.wikipedia.org/wiki/Basic_access_authentication) and [Digest Authentication](https://en.wikipedia.org/wiki/Digest_access_authentication).
+
+- [Basic Authentication](https://en.wikipedia.org/wiki/Basic_access_authentication) uses non-encrypted base64 encoding to transmit your public key and private key. HTTPS ensures the transmission security. For more information, see [RFC 7617 - The 'Basic' HTTP Authentication Scheme](https://datatracker.ietf.org/doc/html/rfc7617).
+- [Digest Authentication](https://en.wikipedia.org/wiki/Digest_access_authentication) offers an additional security layer by hashing your public key, private key, a server-supplied nonce value, the HTTP method, and the requested URI before network transmission. This encrypts the private key to prevent it from being transmitted in plain text. For more information, see [RFC 7616 - HTTP Digest Access Authentication](https://datatracker.ietf.org/doc/html/rfc7616).
 
 > **Note:**
 >
@@ -13,13 +16,18 @@ The TiDB Cloud Data API uses [HTTP Digest Authentication](https://en.wikipedia.o
 
 ## API key overview
 
-- An API key contains a public key and a private key, which act as the username and password required in the HTTP Digest Authentication. The private key is only displayed upon the key creation.
+- An API key contains a public key and a private key, which act as the username and password required in the authentication. The private key is only displayed upon the key creation.
 - Each API key belongs to one Data App only and is used to access the data in the TiDB Cloud clusters.
 - You must provide the correct API key in every request. Otherwise, TiDB Cloud responds with a `401` error.
 
 ## Rate limiting
 
-Each Chat2Query Data App has a rate limit of 100 requests per day. Other Data Apps have a rate limit of 100 requests per minute per API key. If you exceed the rate limit, the API returns a `429` error. For more quota, you can [submit a request](https://support.pingcap.com/hc/en-us/requests/new?ticket_form_id=7800003722519) to our support team.
+Request quotas are rate-limited as follows:
+
+- 100 requests per minute (rpm) per API key
+- 100 requests per day for each Chat2Query Data App
+
+If you exceed the rate limit, the API returns a `429` error. To increase your quota, you can [submit a request](https://support.pingcap.com/hc/en-us/requests/new?ticket_form_id=7800003722519) to our support team.
 
 ## Manage API keys
 

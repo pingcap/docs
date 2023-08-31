@@ -41,7 +41,7 @@ No.
 
 ### What versions of TiDB are supported on TiDB Cloud?
 
-- Starting from June 20, 2023, the default TiDB version for new TiDB Dedicated clusters is v6.5.3. 
+- Starting from July 25, 2023, the default TiDB version for new TiDB Dedicated clusters is v7.1.1.
 - Starting from March 7, 2023, the default TiDB version for new TiDB Serverless clusters is v6.6.0.
 
 For more information, see [TiDB Cloud Release Notes](/tidb-cloud/tidb-cloud-release-notes.md).
@@ -98,7 +98,7 @@ As a Software as a Service (SaaS) provider, we take data security seriously. We 
 
 ### Is there an easy migration path from another RDBMS to TiDB Cloud?
 
-TiDB is highly compatible with MySQL. You can migrate data from any MySQL-compatible databases to TiDB smoothly, whether the data is from a self-hosted MySQL instance or RDS service provided by the public cloud. For more information, see [Migrate Data from MySQL-Compatible Databases](/tidb-cloud/migrate-data-into-tidb.md).
+TiDB is highly compatible with MySQL. You can migrate data from any MySQL-compatible databases to TiDB smoothly, whether the data is from a self-hosted MySQL instance or RDS service provided by the public cloud. For more information, see [Migrate MySQL-Compatible Databases to TiDB Cloud Using Data Migration](/tidb-cloud/migrate-from-mysql-using-data-migration.md).
 
 ## Backup and restore FAQ
 

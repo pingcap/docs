@@ -64,7 +64,7 @@ After the deployment operation, check your specified GitHub directory. You will 
 ├── <Your Data App directory on GitHub>
 │   ├── data_sources
 │   │   └── cluster.json  # specifies the linked clusters.
-│   ├── dataapp_config.json # specifies the Data APP ID, name, and type.
+│   ├── dataapp_config.json # specifies the Data APP ID, name, type, version, and description.
 │   ├── http_endpoints
 │   │   ├── config.json # specifies the endpoints.
 │   │   └── sql # contains SQL files of the endpoints.

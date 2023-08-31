@@ -1,11 +1,6 @@
 ---
-<<<<<<< HEAD
-title: Back Up and Restore TiDB Cluster Data
-summary: Learn how to back up and restore your TiDB Cloud cluster.
-=======
 title: Back Up and Restore TiDB Dedicated Data
 summary: Learn how to back up and restore your TiDB Dedicated cluster.
->>>>>>> 7b7d9e3537 (replace the files in the tidb-cloud folder with the latest ones in v6.5 (#14315))
 aliases: ['/tidbcloud/restore-deleted-tidb-cluster']
 ---
 
@@ -79,7 +74,7 @@ Currently, you cannot select an arbitrary remote region for backup data storage.
 
 | Cloud provider | Cluster region                      | Remote region support   |
 |----------------|-----------------------------|--------------------------|
-| GCP            | Tokyo (asia-northeast1)     | Osaka (asia-northeast2)  |
+| Google Cloud            | Tokyo (asia-northeast1)     | Osaka (asia-northeast2)  |
 
 > **Note:**
 >

@@ -1,10 +1,6 @@
 ---
 title: TiDB Cloud Documentation
-<<<<<<< HEAD
-aliases: ['/tidbcloud/beta/privacy-policy', '/tidbcloud/beta/terms-of-service', '/tidbcloud/beta/service-level-agreement']
-=======
 aliases: ['/tidbcloud/privacy-policy', '/tidbcloud/terms-of-service', '/tidbcloud/service-level-agreement']
->>>>>>> 7b7d9e3537 (replace the files in the tidb-cloud folder with the latest ones in v6.5 (#14315))
 hide_sidebar: true
 hide_commit: true
 ---

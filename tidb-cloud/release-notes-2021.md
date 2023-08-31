@@ -53,7 +53,7 @@ Bug fixes:
 ## October 21, 2021
 
 * Open user registration to personal email accounts
-* Support [importing or migrating from Amazon S3 or GCS to TiDB Cloud](/tidb-cloud/migrate-from-amazon-s3-or-gcs.md)
+* Support [importing or migrating from Amazon S3 or GCS to TiDB Cloud](/tidb-cloud/import-csv-files.md)
 
 ## October 11, 2021
 

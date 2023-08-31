@@ -14,7 +14,12 @@ Currently, this method supports importing one CSV file for one task into either 
 - Currently, TiDB Cloud only supports importing a local file in CSV format within 50 MiB for one task.
 - Importing local files is supported only for TiDB Serverless clusters, not for TiDB Dedicated clusters.
 - You cannot run more than one import task at the same time.
-- If you import a CSV file into an existing table in TiDB Cloud, make sure that the first line of the CSV file contains the column names, and the order of the columns in the CSV file must be the same as that in the target table.
+- When you import a CSV file into an existing table in TiDB Cloud and the target table has more columns than the source file, the extra columns are handled differently depending on the situation:
+    - If the extra columns are not the primary keys or the unique keys, no error will be reported. Instead, these extra columns will be populated with their [default values](/data-type-default-values.md).
+    - If the extra columns are the primary keys or the unique keys and do not have the `auto_increment` or `auto_random` attribute, an error will be reported. In that case, it is recommended that you choose one of the following strategies:
+        - Provide a source file that includes these the primary keys or the unique keys columns.
+        - Set the attributes of the the primary key or the unique key columns to `auto_increment` or `auto_random`.
+- If a column name is a reserved [keyword](/keywords.md) in TiDB, TiDB Cloud automatically adds backticks `` ` `` to enclose the column name. For example, if the column name is `order`, TiDB Cloud automatically adds backticks `` ` `` to change it to `` `order` `` and imports the data into the target table.
 
 ## Import local files
 
@@ -74,3 +79,27 @@ Currently, this method supports importing one CSV file for one task into either 
 9. After the import task is completed, you can click **Explore your data by Chat2Query** to query your imported data. For more information about how to use Chat2Qury, see [Explore Your Data with AI-Powered Chat2Query](/tidb-cloud/explore-data-with-chat2query.md).
 
 10. On the **Import** page, you can click **View** in the **Action** column to check the import task detail.
+
+## FAQ
+
+### Can I only import some specified columns by the Import feature in TiDB Cloud?
+
+No. Currently, you can only import all columns of a CSV file into an existing table when using the Import feature.
+
+To import only some specified columns, you can use the MySQL client to connect your TiDB cluster, and then use [`LOAD DATA`](https://docs.pingcap.com/tidb/stable/sql-statement-load-data) to specify the columns to be imported. For example:
+
+```sql
+CREATE TABLE `import_test` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(64) NOT NULL,
+  `address` varchar(64) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB;
+LOAD DATA LOCAL INFILE 'load.txt' INTO TABLE import_test FIELDS TERMINATED BY ',' (name, address);
+```
+
+If you use `mysql` and encounter `ERROR 2068 (HY000): LOAD DATA LOCAL INFILE file request rejected due to restrictions on access.`, you can add `--local-infile=true` in the connection string.
+
+### Why can't I query a column with a reserved keyword after importing data into TiDB Cloud?
+
+If a column name is a reserved [keyword](/keywords.md) in TiDB, TiDB Cloud automatically adds backticks `` ` `` to enclose the column name and then imports the data into the target table. When you query the column, you need to add backticks `` ` `` to enclose the column name. For example, if the column name is `order`, you need to query the column with `` `order` ``.

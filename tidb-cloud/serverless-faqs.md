@@ -28,9 +28,9 @@ For each organization in TiDB Cloud, you can create a maximum of five TiDB Serve
 
 Some of TiDB Cloud features are partially supported or not supported on TiDB Serverless. For more information, see [TiDB Serverless Limitations and Quotas](/tidb-cloud/serverless-limitations.md).
 
-### When will TiDB serverless be available on cloud platforms other than AWS, such as GCP or Azure?
+### When will TiDB serverless be available on cloud platforms other than AWS, such as Google Cloud or Azure?
 
-We are actively working on expanding TiDB Serverless to other cloud platforms, including GCP and Azure. However, we do not have an exact timeline for now as we currently focus on filling gaps and ensuring seamless functionality across all environments. Rest assured, we are working hard to make TiDB Serverless available on more cloud platforms, and we will keep our community updated as we progress.
+We are actively working on expanding TiDB Serverless to other cloud platforms, including Google Cloud and Azure. However, we do not have an exact timeline for now as we currently focus on filling gaps and ensuring seamless functionality across all environments. Rest assured, we are working hard to make TiDB Serverless available on more cloud platforms, and we will keep our community updated as we progress.
 
 ### I created a Developer Tier cluster before TiDB Serverless was available. Can I still use my cluster?
 
@@ -53,11 +53,19 @@ Usage beyond the free quota will be charged. Once the free quota of a cluster is
 
 For more information, see [TiDB Serverless usage quota](/tidb-cloud/select-cluster-tier.md#usage-quota).
 
+### What are the limitations of the free plan?
+
+Under the free plan, cluster performance is capped at a maximum of 10,000 RUs per second based on actual workload. Additionally, memory allocation per query is limited to 256 MiB. To maximize cluster performance, you can choose to enable the commercial offering by [increasing your spending limit](/tidb-cloud/manage-serverless-spend-limit.md#update-spending-limit).
+
 ### How can I estimate the number of RUs required by my workloads and plan my monthly budget?
 
-To get the RU consumption of individual SQL statements, you can use the [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md) SQL statement. 
+To get the RU consumption of individual SQL statements, you can use the [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md#ru-request-unit-consumption) SQL statement. However, it is important to note that the RUs usage returned in `EXPLAIN ANALYZE` does not incorporate egress RUs, as egress usage is measured separately in the gateway, which is unknown to the TiDB server.
 
 To get the RUs and storage used by your cluster, view the **Usage this month** pane on your cluster overview page. With your past resource usage data and real-time resource usage in this pane, you can track your cluster's resource consumption and estimate a reasonable spending limit. If the free quota cannot meet your requirement, you can edit the spending limit easily. For more information, see [Manage Spending Limit for TiDB Serverless clusters](/tidb-cloud/manage-serverless-spend-limit.md).
+
+### How can I optimize my workload to minimize the number of RUs consumed?
+
+Ensure that your queries have been carefully optimized for optimal performance by following the guidelines in [Optimizing SQL Performance](/develop/dev-guide-optimize-sql-overview.md). In addition, minimizing the amount of egress traffic is also crucial for reducing RUs consumption. To achieve this, it is recommended to return only the necessary columns and rows in your query, which in turn helps reduce network egress traffic. This can be achieved by carefully selecting and filtering the columns and rows to be returned, thereby optimizing network utilization.
 
 ### How storage is metered for TiDB Serverless？
 

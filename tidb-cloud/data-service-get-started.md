@@ -21,13 +21,13 @@ Before creating a Data App, make sure that you have created a [TiDB Serverless](
 
 ## Step 1. Create a Data App
 
-A Data App is a group of endpoints that you can use to access data for a specific application. To create a Data App, perform the following steps:
+A Data App is a collection of endpoints that you can use to access data for a specific application. To create a Data App, perform the following steps:
 
 1. In the [TiDB Cloud console](https://tidbcloud.com), click <MDSvgIcon name="icon-left-data-service" /> **Data Service** in the left navigation pane.
 
 2. On the **Data Service** page, click **Create Data App**.
 
-3. In the **Create Data App** dialog, enter a name and select clusters that you want the Data App to access.
+3. In the **Create Data App** dialog, enter a name, a description, and select clusters that you want the Data App to access.
 
 4. (Optional) To automatically deploy endpoints of the Data App to your preferred GitHub repository and branch, enable **Connect to GitHub**, and then do the following:
 
@@ -58,22 +58,13 @@ If you want to create a new endpoint, locate the newly created Data App and clic
 
 On the right pane, click the **Properties** tab and set properties for the endpoint, such as:
 
-- **Endpoint Path**: the unique path of the endpoint that users use to access it.
-
-    - The path must be unique within a Data App.
-    - Only letters, numbers, underscores (`_`), and slashes (`/`) are allowed in the path, which must start with a slash (`/`) and end with a letter, number, or underscore (`_`). For example, `/my_endpoint/get_id`.
-    - The length of the path must be less than 64 characters.
+- **Path**: the path that users use to access the endpoint. The combination of the request method and the path must be unique within a Data App.
 
 - **Endpoint URL**: (read-only) the URL is automatically generated based on the region where the corresponding cluster is located, the service URL of the Data App, and the path of the endpoint. For example, if the path of the endpoint is `/my_endpoint/get_id`, the endpoint URL is `https://<region>.data.tidbcloud.com/api/v1beta/app/<App ID>/endpoint/my_endpoint/get_id`.
 
-- **Request Method**: the HTTP method of the endpoint. The following methods are supported:
+- **Request Method**: the HTTP method of the endpoint. You can use `GET` to retrieve data, use `POST` to create or insert data, use `PUT` to update or modify data, and use `DELETE` to delete data.
 
-    - `GET`: use this method to query data, such as a `SELECT` statement.
-    - `POST`: use this method to insert data, such as an `INSERT` statement.
-
-- **Timeout(ms)**: the timeout for the endpoint. It ranges from `1` to `30000`. The default value is `5000` milliseconds. For more details, see [Configure properties](/tidb-cloud/data-service-manage-endpoint.md#configure-properties).
-
-- **Max Rows**: the maximum number of rows that the endpoint returns. It ranges from `1` to `2000`. The default value is `50` rows. For more details, see [Configure properties](/tidb-cloud/data-service-manage-endpoint.md#configure-properties).
+For more information about endpoint properties, see [Configure properties](/tidb-cloud/data-service-manage-endpoint.md#configure-properties).
 
 ### Write SQL statements
 
@@ -100,7 +91,7 @@ You can customize SQL statements for the endpoint in the SQL editor, which is th
     > - The parameter name is case-sensitive.
     > - The parameter cannot be used as a table name or column name.
 
-    - In the **Definition** section, you can specify whether the parameter is required when a client calls the endpoint, the data type (`STRING`, `NUMBER`, or `BOOLEAN`), and the default value of the parameter. When using a `STRING` type parameter, you do not need to add quotation marks (`'` or `"`). For example, `foo` is valid for the `STRING` type and is processed as `"foo"`, whereas `"foo"` is processed as `"\"foo\""`.
+    - In the **Definition** section, you can specify whether the parameter is required when a client calls the endpoint, the data type (`STRING`, `NUMBER`, `INTEGER`, or `BOOLEAN`), and the default value of the parameter. When using a `STRING` type parameter, you do not need to add quotation marks (`'` or `"`). For example, `foo` is valid for the `STRING` type and is processed as `"foo"`, whereas `"foo"` is processed as `"\"foo\""`.
     - In the **Test Values** section, you can set the test value for a parameter. The test values are used when you run the SQL statements or test the endpoint. If you do not set the test values, the default values are used.
     - For more information, see [Configure parameters](/tidb-cloud/data-service-manage-endpoint.md#configure-parameters).
 

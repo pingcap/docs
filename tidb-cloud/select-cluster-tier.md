@@ -1,11 +1,7 @@
 ---
 title: Select Your Cluster Tier
 summary: Learn how to select your cluster tier on TiDB Cloud.
-<<<<<<< HEAD
-aliases: ['/tidbcloud/public-preview/developer-tier-cluster']
-=======
 aliases: ['/tidbcloud/developer-tier-cluster']
->>>>>>> 7b7d9e3537 (replace the files in the tidb-cloud folder with the latest ones in v6.5 (#14315))
 ---
 
 # Select Your Cluster Tier

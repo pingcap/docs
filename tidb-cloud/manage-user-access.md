@@ -84,7 +84,7 @@ At the organization level, TiDB Cloud defines four roles, in which `Organization
 
 > **Note:**
 >
-> The `Organization Console Audit Admin` role is only visible upon request. It is recommended that you use the `Organization Owner` role for [console audit logging](/tidb-cloud/tidb-cloud-console-auditing.md). If you need to use the `Organization Console Audit Admin` role, click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com) and click **Chat with Us**. Then, fill in "Apply for the Organization Console Audit Admin role" in the **Description** field and click **Send**.
+> The `Organization Console Audit Admin` role is only visible upon request. It is recommended that you use the `Organization Owner` role for [console audit logging](/tidb-cloud/tidb-cloud-console-auditing.md). If you need to use the `Organization Console Audit Admin` role, click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com) and click **Request Support**. Then, fill in "Apply for the Organization Console Audit Admin role" in the **Description** field and click **Send**.
 
 ### Project roles
 
@@ -290,7 +290,7 @@ To invite a member to a project, take the following steps:
 
 7. After receiving this email, the user needs to click the link in the email to verify the identity, and a new page shows.
 
-8. On the new page, the user needs to view and agree with our license, and then click **Submit** to create the account in TiDB Cloud. After that, the user is redirected to the login page.
+8. If the invited email address has not been signed up for a TiDB Cloud account, the user is directed to the sign-up page to create an account. If the email address has been signed up for a TiDB Cloud account, the user is directed to the sign-in page. After sign-in, the account joins the project automatically.
 
 > **Note:**
 >

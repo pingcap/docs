@@ -28,7 +28,7 @@ TiDB Cloud works with almost all workloads that TiDB supports, but there are som
 | Statement | TiDB Dedicated | TiDB Serverless |
 |:-|:-|:-|
 | `ALTER RESOURCE GROUP` | Supported | Not supported [^2] |
-| `CALIBRATE RESOURCE` | Supported | Not supported [^2] |
+| `CALIBRATE RESOURCE` | Not supported | Not supported [^2] |
 | `CREATE RESOURCE GROUP` | Supported | Not supported [^2] |
 | `DROP RESOURCE GROUP` | Supported | Not supported [^2] |
 | `SET RESOURCE GROUP` | Supported | Not supported [^2] |
@@ -53,12 +53,14 @@ TiDB Cloud works with almost all workloads that TiDB supports, but there are som
 | `CHANGE PUMP` | Not supported [^7] | Not supported [^7] |
 | `FLASHBACK CLUSTER TO TIMESTAMP` | Supported | Not supported [^3] |
 | `LOAD STATS` | Supported | Not supported |
+| `SELECT ... INTO OUTFILE` | Not supported [^4] | Not supported [^4] |
 | `SET CONFIG` | Not supported [^4] | Not supported [^4] |
 | `SHOW CONFIG` | Not supported [^4] | Not supported [^4] |
 | `SHOW DRAINER STATUS` | Not supported [^7] | Not supported [^7] |
 | `SHOW PLUGINS` | Supported | Not supported [^8] |
 | `SHOW PUMP STATUS` | Not supported [^7] | Not supported [^7] |
 | `SHUTDOWN` | Not supported [^4] | Not supported [^4] |
+| `CREATE TABLE ... AUTO_ID_CACHE` | Supported | Not supported [^12] |
 
 ## Functions and operators
 
@@ -191,11 +193,6 @@ TiDB Cloud works with almost all workloads that TiDB supports, but there are som
 | `tidb_slow_log_threshold` | Not supported [^4] | Not supported [^4] |
 | `tidb_slow_txn_log_threshold` | Not supported [^4] | Not supported [^4] |
 | `tidb_stats_load_sync_wait` | No limitation | Read-only [^11] |
-| `tidb_stmt_summary_enable_persistent` | No limitation | Read-only [^11] |
-| `tidb_stmt_summary_file_max_backups` | No limitation | Read-only [^11] |
-| `tidb_stmt_summary_file_max_days` | No limitation | Read-only [^11] |
-| `tidb_stmt_summary_file_max_size` | No limitation | Read-only [^11] |
-| `tidb_stmt_summary_filename` | No limitation | Read-only [^11] |
 | `tidb_stmt_summary_history_size` | No limitation | Read-only [^11] |
 | `tidb_stmt_summary_internal_query` | No limitation | Read-only [^11] |
 | `tidb_stmt_summary_max_sql_length` | No limitation | Read-only [^11] |
@@ -247,3 +244,5 @@ TiDB Cloud works with almost all workloads that TiDB supports, but there are som
 [^10]: TiDB Serverless enforces strong password policy.
 
 [^11]: The variable is read-only on TiDB Serverless.
+
+[^12]: Customizing cache size using [`AUTO_ID_CACHE`](/auto-increment.md#cache-size-control) is temporarily unavailable on TiDB Serverless.
