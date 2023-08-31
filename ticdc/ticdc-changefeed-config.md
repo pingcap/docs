@@ -136,6 +136,7 @@ write-key-threshold = 0
 # protocol = "canal-json"
 
 # Starting from v7.2.0, the `delete-only-output-handle-key-columns` parameter specifies the output of DELETE events. This parameter is valid only for canal-json and open-protocol protocols.
+# This parameter is incompatible with `force-replicate`. If both this parameter and `force-replicate` is set to `true`, TiCDC reports an error when creating a changefeed.
 # The default value is false, which means outputting all columns. When you set it to true, only primary key columns or unique index columns are output.
 # The Avro protocol is not controlled by this parameter and always outputs only the primary key columns or unique index columns.
 # The CSV protocol is not controlled by this parameter and always outputs all columns.
@@ -180,6 +181,8 @@ enable-partition-separator = true
 # null = '\N'
 # Whether to include commit-ts in CSV rows. The default value is false.
 # include-commit-ts = false
+# The encoding method of binary data, which can be 'base64' or 'hex'. The default value is 'base64'.
+# binary-encoding-method = 'base64'
 
 # Specifies the replication consistency configurations for a changefeed when using the redo log. For more information, see https://docs.pingcap.com/tidb/stable/ticdc-sink-to-mysql#eventually-consistent-replication-in-disaster-scenarios.
 # Note: The consistency-related configuration items only take effect when the downstream is a database and the redo log feature is enabled.
