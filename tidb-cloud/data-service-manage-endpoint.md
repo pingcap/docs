@@ -102,14 +102,12 @@ On the right pane of the endpoint details page, you can click the **Properties**
     - `PUT`: use this method to update or modify data, such as an `UPDATE` statement.
     - `DELETE`: use this method to delete data, such as a `DELETE` statement.
 
-- **Timeout(ms)**: the timeout for the endpoint, in milliseconds.
-
-- **Max Rows**: the maximum number of rows that the endpoint can operate or return.
-
 - **Description** (Optional): the description of the endpoint.
 
 #### Advanced properties
 
+- **Timeout(ms)**: the timeout for the endpoint, in milliseconds.
+- **Max Rows**: the maximum number of rows that the endpoint can operate or return.
 - **Tag**: the tag used for identifying a group of endpoints.
 - **Pagination**: this property is available only when the request method is `GET` and the last SQL statement of the endpoint is a `SELECT` operation. When **Pagination** is enabled, you can paginate the results by specifying `page` and `page_size` as query parameters when calling the endpoint, such as `https://<region>.data.tidbcloud.com/api/v1beta/app/<App ID>/endpoint/my_endpoint/get_id?page=<Page Number>&page_size=<Page Size>`. For more information, see [Call an endpoint](#call-an-endpoint).
 
