@@ -290,7 +290,6 @@ end
 
 For more information, refer to [Delete data](/develop/dev-guide-delete-data.md).
 
-
 ## Best practices
 
 By default, the mysql2 gem will search for existing CA certificates in a particular order until a file is discovered.
@@ -301,7 +300,6 @@ By default, the mysql2 gem will search for existing CA certificates in a particu
 4. /etc/ssl/cert.pem # MacOS / Alpine (docker container)
 
 While it is possible to specify the CA certificate path manually, this approach may cause significant inconvenience in multi-environment deployment scenarios, as different machines and environments may store the CA certificate in varying locations. Therefore, setting `sslca` to `nil` is recommended for flexibility and ease of deployment across different environments.
-
 
 ## Next steps
 

@@ -86,7 +86,6 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 
 3. In the connection dialog, select `Rails` from the **Connect With** dropdown and keep the default setting of the **Endpoint Type** as `Public`.
 
-
 4. If you have not set a password yet, click **Create password** to generate a random password.
 
 5. Run the following command to copy `.env.example` and rename it to `.env`:
@@ -164,22 +163,22 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 
 1. Create the database and table:
 
-```shell
-bundle exec rails db:create
-bundle exec rails db:migrate
-```
+  ```shell
+  bundle exec rails db:create
+  bundle exec rails db:migrate
+  ```
 
 2. Seed the sample data:
 
-```shell
-bundle exec rails db:seed
-```
+  ```shell
+  bundle exec rails db:seed
+  ```
 
 3. Run the following command to execute the sample code:
 
-```shell
-bundle exec rails runner ./quickstart.rb
-```
+  ```shell
+  bundle exec rails runner ./quickstart.rb
+  ```
 
 If the connection is successful, the console will output the version of the TiDB cluster as follows:
 
@@ -266,7 +265,6 @@ player.destroy
 
 For more information, refer to [Delete data](/develop/dev-guide-delete-data.md).
 
-
 ## Best practices
 
 By default, the mysql2 gem (used by ActiveRecord ORM to connect TiDB) will search for existing CA certificates in a particular order until a file is discovered.
@@ -277,7 +275,6 @@ By default, the mysql2 gem (used by ActiveRecord ORM to connect TiDB) will searc
 4. /etc/ssl/cert.pem # MacOS / Alpine (docker container)
 
 While it is possible to specify the CA certificate path manually, this approach may cause significant inconvenience in multi-environment deployment scenarios, as different machines and environments may store the CA certificate in varying locations. Therefore, setting `sslca` to `nil` is recommended for flexibility and ease of deployment across different environments.
-
 
 ## Next steps
 
