@@ -7,6 +7,11 @@ summary: Learn the overview of the `ALTER INSTANCE` usage in TiDB.
 
 The `ALTER INSTANCE` statement is used to make changes to a single TiDB instance. Currently, TiDB only supports the `RELOAD TLS` clause.
 
+> **Note:**
+>
+> TiDB Serverless can automatically refresh the TLS certificate, so this feature is not applicable to [TiDB Serverless clusters](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless).
+
+
 ## RELOAD TLS
 
 You can execute the `ALTER INSTANCE RELOAD TLS` statement to reload the certificate ([`ssl-cert`](/tidb-configuration-file.md#ssl-cert)), the key ([`ssl-key`](/tidb-configuration-file.md#ssl-key)), and the CA ([`ssl-ca`](/tidb-configuration-file.md#ssl-ca)) from the original configuration path.
