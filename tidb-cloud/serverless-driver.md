@@ -51,7 +51,7 @@ try {
 
 ## Edge Examples
 
-Here are some examples of using the TiDB serverless driver.
+Here are some examples of using the TiDB serverless driver at the edge.
 
 <SimpleTab>
 
@@ -65,7 +65,7 @@ export const runtime = 'edge'
 
 export async function GET(request: NextRequest) {
   const conn = connect({url: process.env.DATABASE_URL})
-  const result = await conn.execute('select * from test.test')
+  const result = await conn.execute('show tables')
   return NextResponse.json({result});
 }
 ```
@@ -82,10 +82,43 @@ export interface Env {
 export default {
   async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
     const conn = connect({url: env.DATABASE_URL})
-    const result = await conn.execute('select * from test.test')
+    const result = await conn.execute('show tables')
     return new Response(JSON.stringify(result));
   },
 };
+```
+
+</div>
+
+<div label="Netlify Edge Function">
+
+```ts
+import { connect } from 'https://esm.sh/@shiyuhang0/serverless'
+
+export default async () => {
+  const conn = connect({url: Netlify.env.get('DATABASE_URL')})
+  const result = await conn.execute('show tables')
+  return new Response(JSON.stringify(result));
+}
+```
+
+</div>
+
+<div label="Supabase Edge Function">
+
+```ts
+import { serve } from "https://deno.land/std@0.168.0/http/server.ts"
+import { connect } from 'https://esm.sh/@tidbcloud/serverless'
+
+serve(async (req) => {
+
+  const conn = connect({url: Deno.env.get('DATABASE_URL')})
+  const result = await conn.execute('show tables')
+  return new Response(
+      JSON.stringify(result),
+      { headers: { "Content-Type": "application/json" } },
+  )
+})
 ```
 
 </div>
@@ -96,7 +129,7 @@ export default {
 import { connect } from "npm:@shiyuhang0/serverless-js"
 
 const conn = connect({url: Deno.env.get('DATABASE_URL')})
-const result = await conn.execute('select * from test.test')
+const result = await conn.execute('show tables')
 ```
 
 </div>
