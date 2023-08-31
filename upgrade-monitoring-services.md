@@ -68,7 +68,7 @@ In the following upgrade steps, you need to download the Grafana installation pa
 
 ### Step 2. Download the Grafana installation package provided by TiDB
 
-1. Download the `TiDB-community-server` package from the [TiDB download page](https://www.pingcap.com/download) and extract it.
+1. Download the TiDB **Server Package** package from the [TiDB download page](https://www.pingcap.com/download) and extract it.
 2. In the extracted files, locate `grafana-v{version}-linux-amd64.tar.gz` and extract it.
 
     ```bash
