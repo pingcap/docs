@@ -240,7 +240,7 @@ class Player(Base):
     __tablename__ = "players"
 ```
 
-For more information, refer to [SQLAlchemy Declarative](https://docs.sqlalchemy.org/en/13/orm/extensions/declarative/index.html).
+For more information, refer to [SQLAlchemy Mapping Classes with Declarative](https://docs.sqlalchemy.org/en/20/orm/declarative_mapping.html).
 
 ### Insert data
 
