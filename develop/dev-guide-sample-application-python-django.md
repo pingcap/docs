@@ -52,12 +52,12 @@ Run the following commands in your terminal window to clone the sample code repo
 
 ```shell
 git clone https://github.com/tidb-samples/tidb-python-django-quickstart.git
-cd tidb-python-django-quickstart;
+cd tidb-python-django-quickstart
 ```
 
 ### Step 2: Install dependencies
 
-Run the following command to install the required packages (including `django`, `django-tidb` and `mysqlclient`) for the sample app:
+Run the following command to install the required packages (including Django, django-tidb and mysqlclient) for the sample app:
 
 ```shell
 pip install -r requirements.txt
@@ -244,14 +244,15 @@ You need to replace `${tidb_host}`, `${tidb_port}`, `${tidb_user}`, `${tidb_pass
 ```python
 from django.db import models
 
-
 class Player(models.Model):
-    name = models.CharField(max_length=32, blank=False, null=False, unique=True)
+    name = models.CharField(max_length=32, blank=False, null=False)
     coins = models.IntegerField(default=100)
     goods = models.IntegerField(default=1)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 ```
+
+For more information, refer to [Django Models](https://docs.djangoproject.com/en/dev/topics/db/models/).
 
 ### Insert data
 
@@ -313,7 +314,7 @@ For more information, refer to [Delete data](/develop/dev-guide-delete-data.md).
 
 ## Next steps
 
-- Learn more usage of `django` from [the documentation of django](https://www.djangoproject.com/).
+- Learn more usage of Django from [the documentation of django](https://www.djangoproject.com/).
 - Learn the best practices for TiDB application development with the chapters in the [Developer guide](/develop/dev-guide-overview.md), such as [Insert data](/develop/dev-guide-insert-data.md), [Update data](/develop/dev-guide-update-data.md), [Delete data](/develop/dev-guide-delete-data.md), [Single table reading](/develop/dev-guide-get-data-from-single-table.md), [Transactions](/develop/dev-guide-transaction-overview.md), and [SQL performance optimization](/develop/dev-guide-optimize-sql-overview.md).
 - Learn through the professional [TiDB developer courses](https://www.pingcap.com/education/) and earn [TiDB certifications](https://www.pingcap.com/education/certification/) after passing the exam.
 
