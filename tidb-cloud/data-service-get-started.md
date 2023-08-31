@@ -64,10 +64,6 @@ On the right pane, click the **Properties** tab and set properties for the endpo
 
 - **Request Method**: the HTTP method of the endpoint. You can use `GET` to retrieve data, use `POST` to create or insert data, use `PUT` to update or modify data, and use `DELETE` to delete data.
 
-- **Timeout(ms)**: the timeout for the endpoint.
-
-- **Max Rows**: the maximum number of rows that the endpoint can operate or return.
-
 For more information about endpoint properties, see [Configure properties](/tidb-cloud/data-service-manage-endpoint.md#configure-properties).
 
 ### Write SQL statements
