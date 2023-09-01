@@ -161,6 +161,8 @@ Replace the placeholders in `{}` with the values obtained in the **Connect** win
     {"statusCode":200,"body":"{\"results\":[{\"Hello World\":\"Hello World\"}]}"}
     ```
 
+After you confirm that the connection is successful, you can follow the [next section](#deploy-the-aws-lambda-function) to deploy the AWS Lambda Function.
+
 ## Deploy the AWS Lambda Function
 
 You can deploy the AWS Lambda Function using either the [SAM CLI](#sam-cli-deployment-recommended) or the [AWS Lambda console](#web-console-deployment).
