@@ -53,7 +53,7 @@ Query OK, 0 rows affected (2.50 sec)
 
 ## MySQL compatibility
 
-The `DO` statement in TiDB is fully compatible with MySQL. If you find any compatibility differences, [report a bug](/support.md).
+The `DO` statement in TiDB is fully compatible with MySQL. If you find any compatibility differences, [report a bug](https://docs.pingcap.com/tidb/stable/support).
 
 ## See also
 

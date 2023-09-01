@@ -75,7 +75,7 @@ mysql> show privileges;
 
 ## MySQL compatibility
 
-The `SHOW PRIVILEGES` statement in TiDB is fully compatible with MySQL. If you find any compatibility differences, [report a bug](/support.md).
+The `SHOW PRIVILEGES` statement in TiDB is fully compatible with MySQL. If you find any compatibility differences, [report a bug](https://docs.pingcap.com/tidb/stable/support).
 
 ## See also
 

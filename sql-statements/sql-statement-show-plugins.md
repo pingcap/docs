@@ -51,4 +51,4 @@ SHOW PLUGINS LIKE 'a%';
 
 ## MySQL compatibility
 
-The `SHOW PLUGINS` statement in TiDB is fully compatible with MySQL. If you find any compatibility differences, [report a bug](/support.md).
+The `SHOW PLUGINS` statement in TiDB is fully compatible with MySQL. If you find any compatibility differences, [report a bug](https://docs.pingcap.com/tidb/stable/support).
