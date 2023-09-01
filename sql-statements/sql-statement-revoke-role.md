@@ -160,7 +160,7 @@ SHOW GRANTS;
 
 ## MySQL compatibility
 
-The `REVOKE <role>` statement in TiDB is fully compatible with the roles feature in MySQL 8.0. If you find any compatibility differences, [report a bug](/support.md).
+The `REVOKE <role>` statement in TiDB is fully compatible with the roles feature in MySQL 8.0. If you find any compatibility differences, [report a bug](https://docs.pingcap.com/tidb/stable/support).
 
 ## See also
 

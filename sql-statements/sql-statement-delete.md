@@ -53,7 +53,7 @@ mysql> SELECT * FROM t1;
 
 ## MySQL compatibility
 
-The `DELETE` statement in TiDB is fully compatible with MySQL. If you find any compatibility differences, [report a bug](/support.md).
+The `DELETE` statement in TiDB is fully compatible with MySQL. If you find any compatibility differences, [report a bug](https://docs.pingcap.com/tidb/stable/support).
 
 ## See also
 

@@ -59,7 +59,7 @@ If the table to be copied is defined with the `PRE_SPLIT_REGIONS` attribute, the
 
 ## MySQL compatibility
 
-The `CREATE TABLE LIKE` statement in TiDB is fully compatible with MySQL. If you find any compatibility differences, [report a bug](/support.md).
+The `CREATE TABLE LIKE` statement in TiDB is fully compatible with MySQL. If you find any compatibility differences, [report a bug](https://docs.pingcap.com/tidb/stable/support).
 
 ## See also
 
