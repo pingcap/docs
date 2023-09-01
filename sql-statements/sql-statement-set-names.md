@@ -94,7 +94,7 @@ mysql> SHOW VARIABLES LIKE 'character_set%';
 
 ## MySQL compatibility
 
-The `SET [NAMES|CHARACTER SET]` statement in TiDB is fully compatible with MySQL. If you find any compatibility differences, [report a bug](/support.md).
+The `SET [NAMES|CHARACTER SET]` statement in TiDB is fully compatible with MySQL. If you find any compatibility differences, [report a bug](https://docs.pingcap.com/tidb/stable/support).
 
 ## See also
 

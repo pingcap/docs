@@ -35,7 +35,7 @@ Currently, TiDB only supports some character sets and collations. See [Character
 
 ## MySQL compatibility
 
-The `ALTER DATABASE` statement in TiDB is fully compatible with MySQL. If you find any compatibility differences, [report a bug](/support.md).
+The `ALTER DATABASE` statement in TiDB is fully compatible with MySQL. If you find any compatibility differences, [report a bug](https://docs.pingcap.com/tidb/stable/support).
 
 ## See also
 
