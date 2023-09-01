@@ -161,94 +161,6 @@ Replace the placeholders in `{}` with the values obtained in the **Connect** win
     {"statusCode":200,"body":"{\"results\":[{\"Hello World\":\"Hello World\"}]}"}
     ```
 
-## Sample code snippets
-
-You can refer to the following sample code snippets to complete your own application development.
-
-For complete sample code and how to run it, check out the [tidb-samples/tidb-aws-lambda-quickstart](https://github.com/tidb-samples/tidb-aws-lambda-quickstart) repository.
-
-### Connect to TiDB
-
-The following code establish a connection to TiDB with options defined in the environment variables:
-
-```typescript
-// lib/tidb.ts
-import mysql from 'mysql2';
-
-let pool: mysql.Pool | null = null;
-
-function connect() {
-  return mysql.createPool({
-    host: process.env.TIDB_HOST, // TiDB host, for example: {gateway-region}.aws.tidbcloud.com
-    port: process.env.TIDB_PORT ? Number(process.env.TIDB_PORT) : 4000, // TiDB port, default: 4000
-    user: process.env.TIDB_USER, // TiDB user, for example: {prefix}.root
-    password: process.env.TIDB_PASSWORD, // TiDB password
-    database: process.env.TIDB_DATABASE || 'test', // TiDB database name, default: test
-    ssl: {
-      minVersion: 'TLSv1.2',
-      rejectUnauthorized: true,
-    },
-    connectionLimit: 1, // Setting connectionLimit to "1" in a serverless function environment optimizes resource usage, reduces costs, ensures connection stability, and enables seamless scalability.
-    maxIdle: 1, // max idle connections, the default value is the same as `connectionLimit`
-    enableKeepAlive: true,
-  });
-}
-
-export function getPool(): mysql.Pool {
-  if (!pool) {
-    pool = connect();
-  }
-  return pool;
-}
-```
-
-### Insert data
-
-The following query creates a single `Player` record and returns a `ResultSetHeader` object:
-
-```typescript
-const [rsh] = await pool.query('INSERT INTO players (coins, goods) VALUES (?, ?);', [100, 100]);
-console.log(rsh.insertId);
-```
-
-For more information, refer to [Insert data](/develop/dev-guide-insert-data.md).
-
-### Query data
-
-The following query returns a single `Player` record by ID `1`:
-
-```typescript
-const [rows] = await pool.query('SELECT id, coins, goods FROM players WHERE id = ?;', [1]);
-console.log(rows[0]);
-```
-
-For more information, refer to [Query data](/develop/dev-guide-get-data-from-single-table.md).
-
-### Update data
-
-The following query adds `50` coins and `50` goods to the `Player` with ID `1`:
-
-```typescript
-const [rsh] = await pool.query(
-    'UPDATE players SET coins = coins + ?, goods = goods + ? WHERE id = ?;',
-    [50, 50, 1]
-);
-console.log(rsh.affectedRows);
-```
-
-For more information, refer to [Update data](/develop/dev-guide-update-data.md).
-
-### Delete data
-
-The following query deletes the `Player` record with ID `1`:
-
-```typescript
-const [rsh] = await pool.query('DELETE FROM players WHERE id = ?;', [1]);
-console.log(rsh.affectedRows);
-```
-
-For more information, refer to [Delete data](/develop/dev-guide-delete-data.md).
-
 ## Deploy the AWS Lambda Function
 
 You can deploy the AWS Lambda Function using either the [SAM CLI](#sam-cli-deploymentrecommended) or the [AWS Lambda console](#web-console-deployment).
@@ -345,6 +257,94 @@ You can deploy the AWS Lambda Function using either the [SAM CLI](#sam-cli-deplo
         - Choose **Add environment variable**, then for **Key** enter `TIDB_USER` and for **Value** enter the user name.
         - Choose **Add environment variable**, then for **Key** enter `TIDB_PASSWORD` and for **Value** enter the password you chose when you created your database.
         - Choose **Save**.
+
+## Sample code snippets
+
+You can refer to the following sample code snippets to complete your own application development.
+
+For complete sample code and how to run it, check out the [tidb-samples/tidb-aws-lambda-quickstart](https://github.com/tidb-samples/tidb-aws-lambda-quickstart) repository.
+
+### Connect to TiDB
+
+The following code establish a connection to TiDB with options defined in the environment variables:
+
+```typescript
+// lib/tidb.ts
+import mysql from 'mysql2';
+
+let pool: mysql.Pool | null = null;
+
+function connect() {
+  return mysql.createPool({
+    host: process.env.TIDB_HOST, // TiDB host, for example: {gateway-region}.aws.tidbcloud.com
+    port: process.env.TIDB_PORT ? Number(process.env.TIDB_PORT) : 4000, // TiDB port, default: 4000
+    user: process.env.TIDB_USER, // TiDB user, for example: {prefix}.root
+    password: process.env.TIDB_PASSWORD, // TiDB password
+    database: process.env.TIDB_DATABASE || 'test', // TiDB database name, default: test
+    ssl: {
+      minVersion: 'TLSv1.2',
+      rejectUnauthorized: true,
+    },
+    connectionLimit: 1, // Setting connectionLimit to "1" in a serverless function environment optimizes resource usage, reduces costs, ensures connection stability, and enables seamless scalability.
+    maxIdle: 1, // max idle connections, the default value is the same as `connectionLimit`
+    enableKeepAlive: true,
+  });
+}
+
+export function getPool(): mysql.Pool {
+  if (!pool) {
+    pool = connect();
+  }
+  return pool;
+}
+```
+
+### Insert data
+
+The following query creates a single `Player` record and returns a `ResultSetHeader` object:
+
+```typescript
+const [rsh] = await pool.query('INSERT INTO players (coins, goods) VALUES (?, ?);', [100, 100]);
+console.log(rsh.insertId);
+```
+
+For more information, refer to [Insert data](/develop/dev-guide-insert-data.md).
+
+### Query data
+
+The following query returns a single `Player` record by ID `1`:
+
+```typescript
+const [rows] = await pool.query('SELECT id, coins, goods FROM players WHERE id = ?;', [1]);
+console.log(rows[0]);
+```
+
+For more information, refer to [Query data](/develop/dev-guide-get-data-from-single-table.md).
+
+### Update data
+
+The following query adds `50` coins and `50` goods to the `Player` with ID `1`:
+
+```typescript
+const [rsh] = await pool.query(
+    'UPDATE players SET coins = coins + ?, goods = goods + ? WHERE id = ?;',
+    [50, 50, 1]
+);
+console.log(rsh.affectedRows);
+```
+
+For more information, refer to [Update data](/develop/dev-guide-update-data.md).
+
+### Delete data
+
+The following query deletes the `Player` record with ID `1`:
+
+```typescript
+const [rsh] = await pool.query('DELETE FROM players WHERE id = ?;', [1]);
+console.log(rsh.affectedRows);
+```
+
+For more information, refer to [Delete data](/develop/dev-guide-delete-data.md).
 
 ## Useful notes
 
