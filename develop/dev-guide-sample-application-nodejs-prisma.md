@@ -103,9 +103,9 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
     DATABASE_URL=mysql://{user}:{password}@{host}:4000/test?sslaccept=strict
     ```
 
-   > **Note**
-   >
-   > For TiDB Serverless, you **MUST** enable TLS connection by setting `sslaccept=strict` when using public endpoint. 
+    > **Note**
+    >
+    > For TiDB Serverless, you **MUST** enable TLS connection by setting `sslaccept=strict` when using public endpoint.
 
 7. Save the `.env` file.
 8. In the `prisma/schema.prisma`, set up `mysql` as the connection provider and `env("DATABASE_URL")` as the connection URL:
@@ -126,7 +126,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 
 3. Click **Allow Access from Anywhere** and then click **Download TiDB cluster CA** to download the CA certificate.
 
-   For more details about how to obtain the connection string, refer to [TiDB Dedicated standard connection](https://docs.pingcap.com/tidbcloud/connect-via-standard-connection).
+    For more details about how to obtain the connection string, refer to [TiDB Dedicated standard connection](https://docs.pingcap.com/tidbcloud/connect-via-standard-connection).
 
 4. Run the following command to copy `.env.example` and rename it to `.env`:
 
@@ -140,9 +140,9 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
     DATABASE_URL=mysql://{user}:{password}@{host}:4000/test?sslaccept=strict&sslcert={downloaded_ssl_ca_path}
     ```
 
-   > **Note**
-   >
-   > For TiDB Serverless, It is **RECOMMENDED** to enable TLS connection by setting `sslaccept=strict` when using public endpoint. When you set up `sslaccept=strict` to enable TLS connection, you **MUST** specify the file path of the CA certificate downloaded from connection dialog via `sslcert=/path/to/ca.pem`.
+    > **Note**
+    >
+    > For TiDB Serverless, It is **RECOMMENDED** to enable TLS connection by setting `sslaccept=strict` when using public endpoint. When you set up `sslaccept=strict` to enable TLS connection, you **MUST** specify the file path of the CA certificate downloaded from connection dialog via `sslcert=/path/to/ca.pem`.
 
 6. Save the `.env` file.
 7. In the `prisma/schema.prisma`, set up `mysql` as the connection provider and `env("DATABASE_URL")` as the connection URL:
@@ -351,11 +351,11 @@ For more information, refer to [Delete data](/develop/dev-guide-delete-data.md).
 
 ### Foreign key constraints vs Prisma relation mode
 
-For TiDB v6.6.0 or later, it's recommended that using [Foreign key constraints](https://docs.pingcap.com/tidb/stable/foreign-key) instead of [Prisma relation mode](https://www.prisma.io/docs/concepts/components/prisma-schema/relations/relation-mode) for [referential integrity](https://en.wikipedia.org/wiki/Referential_integrity?useskin=vector) checking.
+For TiDB v6.6.0 or later, it's recommended to use [Foreign key constraints](https://docs.pingcap.com/tidb/stable/foreign-key) instead of [Prisma relation mode](https://www.prisma.io/docs/concepts/components/prisma-schema/relations/relation-mode) for [referential integrity](https://en.wikipedia.org/wiki/Referential_integrity?useskin=vector) checking.
 
-Relation mode is the emulation of referential integrity in Prisma Client side. There are performance implications as it requires additional database queries to maintain referential integrity.
+Relation mode is the emulation of referential integrity in Prisma Client side. However, it should be noted that there are performance implications, as it requires additional database queries to maintain referential integrity.
 
-> **Notice:**
+> **Note**
 >
 > **Foreign keys are suitable for small and medium-volumes data scenarios.** Using foreign keys in large data volumes might lead to serious performance issues and could have unpredictable effects on the system. If you plan to use foreign keys, conduct thorough validation first and use them with caution.
 

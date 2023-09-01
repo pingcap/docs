@@ -85,9 +85,9 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 
 3. Ensure the configurations in the connection dialog match your operating environment.
 
-   - **Endpoint Type** is set to `Public`.
-   - **Connect With** is set to `General`.
-   - **Operating System** matches the operating system where you run the application.
+    - **Endpoint Type** is set to `Public`.
+    - **Connect With** is set to `General`.
+    - **Operating System** matches the operating system where you run the application.
 
 4. If you have not set a password yet, click **Create password** to generate a random password.
 
@@ -108,9 +108,9 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
     TIDB_ENABLE_SSL=true
     ```
 
-   > **Note**
-   >
-   > For TiDB Serverless, TLS connection **MUST** be enabled via `TIDB_ENABLE_SSL` when using public endpoint.
+    > **Note**
+    >
+    > For TiDB Serverless, TLS connection **MUST** be enabled via `TIDB_ENABLE_SSL` when using public endpoint.
 
 7. Save the `.env` file.
 
@@ -123,7 +123,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 
 3. Click **Allow Access from Anywhere** and then click **Download TiDB cluster CA** to download the CA certificate.
 
-   For more details about how to obtain the connection string, refer to [TiDB Dedicated standard connection](https://docs.pingcap.com/tidbcloud/connect-via-standard-connection).
+    For more details about how to obtain the connection string, refer to [TiDB Dedicated standard connection](https://docs.pingcap.com/tidbcloud/connect-via-standard-connection).
 
 4. Run the following command to copy `.env.example` and rename it to `.env`:
 
@@ -143,11 +143,11 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
     TIDB_CA_PATH={downloaded_ssl_ca_path}
     ```
 
-   > **Note**
-   >
-   > It is recommended to enable TLS connection when using the public endpoint to connect to TiDB Dedicated.
-   >
-   > To enable TLS connection, modify `TIDB_ENABLE_SSL` to `true` and using `TIDB_CA_PATH` to specify the file path of CA certificate downloaded from the connection dialog.
+    > **Note**
+    >
+    > It is recommended to enable TLS connection when using the public endpoint to connect to TiDB Dedicated.
+    >
+    > To enable TLS connection, modify `TIDB_ENABLE_SSL` to `true` and using `TIDB_CA_PATH` to specify the file path of CA certificate downloaded from the connection dialog.
 
 6. Save the `.env` file.
 

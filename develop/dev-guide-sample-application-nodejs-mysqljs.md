@@ -85,9 +85,9 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 
 3. Ensure the configurations in the connection dialog match your operating environment.
 
-   - **Endpoint Type** is set to `Public`.
-   - **Connect With** is set to `General`.
-   - **Operating System** matches the operating system where you run the application.
+    - **Endpoint Type** is set to `Public`.
+    - **Connect With** is set to `General`.
+    - **Operating System** matches the operating system where you run the application.
 
 4. If you have not set a password yet, click **Create password** to generate a random password.
 
@@ -107,9 +107,9 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
     TIDB_DATABASE=test
     TIDB_ENABLE_SSL=true
     ```
-    
+
     > **Note**
-    > 
+    >
     > For TiDB Serverless, TLS connection **MUST** be enabled via `TIDB_ENABLE_SSL` when using public endpoint.
 
 7. Save the `.env` file.
@@ -123,7 +123,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 
 3. Click **Allow Access from Anywhere** and then click **Download TiDB cluster CA** to download the CA certificate.
 
-   For more details about how to obtain the connection string, refer to [TiDB Dedicated standard connection](https://docs.pingcap.com/tidbcloud/connect-via-standard-connection).
+    For more details about how to obtain the connection string, refer to [TiDB Dedicated standard connection](https://docs.pingcap.com/tidbcloud/connect-via-standard-connection).
 
 4. Run the following command to copy `.env.example` and rename it to `.env`:
 
@@ -143,11 +143,11 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
     TIDB_CA_PATH={downloaded_ssl_ca_path}
     ```
 
-   > **Note**
-   > 
-   > It is recommended to enable TLS connection when using the public endpoint to connect to TiDB Dedicated.
-   > 
-   > To enable TLS connection, modify `TIDB_ENABLE_SSL` to `true` and using `TIDB_CA_PATH` to specify the file path of CA certificate downloaded from the connection dialog.
+    > **Note**
+    >
+    > It is recommended to enable TLS connection when using the public endpoint to connect to TiDB Dedicated.
+    >
+    > To enable TLS connection, modify `TIDB_ENABLE_SSL` to `true` and using `TIDB_CA_PATH` to specify the file path of CA certificate downloaded from the connection dialog.
 
 6. Save the `.env` file.
 
@@ -170,7 +170,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
     TIDB_DATABASE=test
     ```
 
-   If you are running TiDB locally, the default host address is `127.0.0.1`, and the password is empty.
+    If you are running TiDB locally, the default host address is `127.0.0.1`, and the password is empty.
 
 3. Save the `.env` file.
 
@@ -314,11 +314,11 @@ For more information, refer to [Delete data](/develop/dev-guide-delete-data.md).
 - Using [connection pools](https://github.com/mysqljs/mysql#pooling-connections) to manage database connections can reduce the performance overhead caused by frequently establishing and destroying connections.
 - To avoid SQL injection attacks, it is recommended to use [Escaping query values](https://github.com/mysqljs/mysql#escaping-query-values) before executing SQL.
 
-  > **Note**
-  > 
-  > The `mysqljs/mysql` package does not yet support prepared statements, it only escapes values on the client side (related issue: [mysqljs/mysql#274](https://github.com/mysqljs/mysql/issues/274)).
-  > 
-  > If you want to use this feature to avoid SQL injection or improve efficiency of batch insert/update, it is recommended to use [mysql2](https://github.com/sidorares/node-mysql2) package instead.
+    > **Note**
+    >
+    > The `mysqljs/mysql` package does not yet support prepared statements, it only escapes values on the client side (related issue: [mysqljs/mysql#274](https://github.com/mysqljs/mysql/issues/274)).
+    >
+    > If you want to use this feature to avoid SQL injection or improve efficiency of batch insert/update, it is recommended to use [mysql2](https://github.com/sidorares/node-mysql2) package instead.
 
 - Using ORM frameworks to improve development efficiency in scenarios without a number of complex SQL statements, such as: [Sequelize](https://sequelize.org/), [TypeORM](https://typeorm.io/), and [Prisma](/develop/dev-guide-sample-application-nodejs-prisma.md).
 - It is recommended to enable the `supportBigNumbers: true` option when dealing with big numbers (`BIGINT` and `DECIMAL` columns) in the database.
