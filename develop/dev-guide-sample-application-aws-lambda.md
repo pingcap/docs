@@ -253,7 +253,7 @@ For more information, refer to [Delete data](/develop/dev-guide-delete-data.md).
 
 You can deploy the AWS Lambda Function using either the [SAM CLI](#sam-cli-deploymentrecommended) or the [AWS Lambda console](#web-console-deployment).
 
-### SAM CLI deployment(Recommended)
+### SAM CLI deployment (Recommended)
 
 1. ([Prerequisite](#prerequisites)) Install the [AWS SAM CLI](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/install-sam-cli.html).
 
@@ -263,7 +263,7 @@ You can deploy the AWS Lambda Function using either the [SAM CLI](#sam-cli-deplo
     npm run build
     ```
 
-3. Update Environment Variables in [`template.yml`](https://github.com/tidb-samples/tidb-aws-lambda-quickstart/blob/main/template.yml)
+3. Update the environment variables in [`template.yml`](https://github.com/tidb-samples/tidb-aws-lambda-quickstart/blob/main/template.yml):
 
     ```yaml
     Environment:
@@ -274,7 +274,7 @@ You can deploy the AWS Lambda Function using either the [SAM CLI](#sam-cli-deplo
         TIDB_PASSWORD: {password}
     ```
 
-4. Set AWS environment variables ([Short-term credentials](https://docs.aws.amazon.com/cli/latest/userguide/cli-authentication-short-term.html))
+4. Set AWS environment variables (refer to [Short-term credentials](https://docs.aws.amazon.com/cli/latest/userguide/cli-authentication-short-term.html)):
 
     ```bash
     export AWS_ACCESS_KEY_ID={your_access_key_id}
@@ -282,7 +282,7 @@ You can deploy the AWS Lambda Function using either the [SAM CLI](#sam-cli-deplo
     export AWS_SESSION_TOKEN={your_session_token}
     ```
 
-5. Deploy the AWS Lambda Function
+5. Deploy the AWS Lambda Function:
 
     ```bash
     sam deploy --guided
@@ -337,9 +337,9 @@ You can deploy the AWS Lambda Function using either the [SAM CLI](#sam-cli-deplo
 
 5. [Copy and configure the corresponding connection string](https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html) in Lambda Function.
 
-    - In the [Functions](https://console.aws.amazon.com/lambda/home#/functions) page of the Lambda console, select the **Configuration** tab, then choose **Environment variables**.
-    - Choose **Edit**.
-    - To add your database access credentials, do the following:
+    1. In the [Functions](https://console.aws.amazon.com/lambda/home#/functions) page of the Lambda console, select the **Configuration** tab, and then choose **Environment variables**.
+    2. Choose **Edit**.
+    3. To add your database access credentials, do the following:
         - Choose **Add environment variable**, then for **Key** enter `TIDB_HOST` and for **Value** enter the host name.
         - Choose **Add environment variable**, then for **Key** enter `TIDB_PORT` and for **Value** enter the port (4000 is default).
         - Choose **Add environment variable**, then for **Key** enter `TIDB_USER` and for **Value** enter the user name.
@@ -352,7 +352,7 @@ You can deploy the AWS Lambda Function using either the [SAM CLI](#sam-cli-deplo
 - To avoid SQL injection, it is recommended to use [prepared statements](https://github.com/sidorares/node-mysql2#using-prepared-statements).
 - In scenarios where there are not many complex SQL statements involved, using ORM frameworks like [Sequelize](https://sequelize.org/), [TypeORM](https://typeorm.io/), or [Prisma](https://www.prisma.io/) can greatly improve development efficiency. 
 - For building a RESTful API for your application, it is recommended to [use AWS Lambda with API Gateway](https://docs.aws.amazon.com/lambda/latest/dg/services-apigateway.html).
-- For designing high-performance applications using Serverless TiDB Cloud and AWS Lambda, refer to [this blog](https://aws.amazon.com/blogs/apn/designing-high-performance-applications-using-serverless-tidb-cloud-and-aws-lambda/).
+- For designing high-performance applications using TiDB Serverless and AWS Lambda, refer to [this blog](https://aws.amazon.com/blogs/apn/designing-high-performance-applications-using-serverless-tidb-cloud-and-aws-lambda/).
 
 ## Next steps
 
