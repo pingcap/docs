@@ -1,11 +1,11 @@
 ---
 title: Connect to TiDB with Django
-summary: Learn how to build a Django application with TiDB. This tutorial shows Python sample code snippets that work with TiDB using Django.
+summary: Learn how to connect to TiDB using Django. This tutorial gives Python sample code snippets that work with TiDB using Django.
 ---
 
-# Build a Django App with TiDB
+# Connect to TiDB with Django
 
-TiDB is a MySQL-compatible database, and [Django](https://www.djangoproject.com/) is a popular web framework for Python, including a powerful ORM library.
+TiDB is a MySQL-compatible database, and [Django](https://www.djangoproject.com) is a popular web framework for Python, which includes a powerful Object Relational Mapper (ORM) library.
 
 In this tutorial, you can learn how to use TiDB and Django to accomplish the following tasks:
 
@@ -57,7 +57,7 @@ cd tidb-python-django-quickstart
 
 ### Step 2: Install dependencies
 
-Run the following command to install the required packages (including Django, django-tidb and mysqlclient) for the sample app:
+Run the following command to install the required packages (including Django, django-tidb, and mysqlclient) for the sample app:
 
 ```shell
 pip install -r requirements.txt
@@ -67,7 +67,11 @@ If you encounter installation issues with mysqlclient, refer to the [mysqlclient
 
 #### What is `django-tidb`?
 
-django-tidb is a TiDB dialect for Django that addresses compatibility issues between TiDB and Django, to install it, you need to select the version that corresponds with your Django version, for example, if you are using `django==4.2.*`, you need to install `django-tidb==4.2.*`, the minor release number do not need to be the same, use the latest minor release of each, for more information, refer to [django-tidb repository](https://github.com/pingcap/django-tidb).
+`django-tidb` is a TiDB dialect for Django that resolves compatibility issues between TiDB and Django.
+
+To install `django-tidb`, choose a version that matches your Django version. For example, if you are using `django==4.2.*`, install `django-tidb==4.2.*`. The minor version does not need to be the same. It is recommended to use the latest minor version.
+
+For more information, refer to [django-tidb repository](https://github.com/pingcap/django-tidb).
 
 ### Step 3: Configure connection information
 
@@ -179,7 +183,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 
 ### Step 4: Initialize the database
 
-Navigate to the project root directory and run the following command to initialize the database:
+In the root directory of the project, run the following command to initialize the database:
 
 ```shell
 python manage.py migrate
@@ -187,15 +191,19 @@ python manage.py migrate
 
 ### Step 5: Run the sample application
 
-1. Start the app in the development mode:
+1. Run the application in the development mode:
 
     ```shell
     python manage.py runserver
     ```
 
-    The default port is 8000. If you want to change the port, you can add the port number after the command, for example: `python manage.py runserver 8080`
+    The application runs on port `8000` by default. To use a different port, you can append the port number to the command. The following is an example:
 
-2. Open your browser and go to `http://localhost:8000/` to see the sample app in action, within the app, you can:
+    ```shell
+    python manage.py runserver 8080
+    ```
+
+2. To access the application, open your browser and go to `http://localhost:8000/`. In the sample application, you can:
 
     - Create a new player.
     - Bulk create players.
@@ -208,11 +216,11 @@ python manage.py migrate
 
 You can refer to the following sample code snippets to complete your own application development.
 
-For complete sample code and how to run it, check out the [tidb-samples/tidb-python-django-quickstart](https://github.com/tidb-samples/tidb-python-django-quickstart.git) repository.
+For complete sample code and how to run it, check out the [tidb-samples/tidb-python-django-quickstart](https://github.com/tidb-samples/tidb-python-django-quickstart) repository.
 
-### Configure the database connection
+### Connect to TiDB
 
-In the file `sample_project/settings.py` add the following code:
+In the file `sample_project/settings.py`, add the following configurations:
 
 ```python
 DATABASES = {
@@ -237,7 +245,7 @@ if TIDB_CA_PATH:
     }
 ```
 
-You need to replace `${tidb_host}`, `${tidb_port}`, `${tidb_user}`, `${tidb_password}`, `${tidb_db_name}` and `${ca_path}` with the actual values of your TiDB cluster.
+You need to replace `${tidb_host}`, `${tidb_port}`, `${tidb_user}`, `${tidb_password}`, `${tidb_db_name}`, and `${ca_path}` with the actual values of your TiDB cluster.
 
 ### Define the data model
 
@@ -252,7 +260,7 @@ class Player(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 ```
 
-For more information, refer to [Django Models](https://docs.djangoproject.com/en/dev/topics/db/models/).
+For more information, refer to [Django models](https://docs.djangoproject.com/en/dev/topics/db/models/).
 
 ### Insert data
 
