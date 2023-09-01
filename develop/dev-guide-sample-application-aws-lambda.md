@@ -163,7 +163,7 @@ Replace the placeholders in `{}` with the values obtained in the **Connect** win
 
 ## Deploy the AWS Lambda Function
 
-You can deploy the AWS Lambda Function using either the [SAM CLI](#sam-cli-deploymentrecommended) or the [AWS Lambda console](#web-console-deployment).
+You can deploy the AWS Lambda Function using either the [SAM CLI](#sam-cli-deployment-recommended) or the [AWS Lambda console](#web-console-deployment).
 
 ### SAM CLI deployment (Recommended)
 
