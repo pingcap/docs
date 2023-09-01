@@ -60,7 +60,7 @@ The above statement is used to reload the blocklist of logic optimization rules.
 
 > **Note:**
 >
-> This feature is not available on [TiDB Serverless clusters](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless).
+> This feature is not available on [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless) clusters.
 
 ```sql
 ADMIN PLUGINS ENABLE plugin_name [, plugin_name] ...;
@@ -136,7 +136,7 @@ Here "untrusted" means that you need to manually ensure that the metadata of the
 
 > **Note:**
 >
-> This feature is not available on [TiDB Serverless clusters](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless).
+> This feature is not available on [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless) clusters.
 
 ```sql
 ADMIN SHOW SLOW RECENT N;

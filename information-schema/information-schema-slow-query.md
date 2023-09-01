@@ -11,7 +11,7 @@ The `SLOW_QUERY` table provides the slow query information of the current node, 
 
 > **Note:**
 >
-> The `SLOW_QUERY` table is unavailable for [TiDB Serverless clusters](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless).
+> The `SLOW_QUERY` table is unavailable for [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless) clusters.
 
 </CustomContent>
 

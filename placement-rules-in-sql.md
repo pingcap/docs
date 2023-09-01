@@ -9,7 +9,7 @@ Placement Rules in SQL is a feature that enables you to specify where data is st
 
 > **Note:**
 >
-> - This feature is not available on [TiDB Serverless clusters](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless).
+> - This feature is not available on [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless) clusters.
 > - The implementation of *Placement Rules in SQL* relies on the *placement rules feature* of PD. For details, refer to [Configure Placement Rules](https://docs.pingcap.com/zh/tidb/stable/configure-placement-rules). In the context of Placement Rules in SQL, *placement rules* might refer to *placement policies* attached to other objects, or to rules that are sent from TiDB to PD.
 
 The detailed user scenarios are as follows:

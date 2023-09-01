@@ -13,7 +13,7 @@ Use `SHOW BACKUPS` to query `BACKUP` tasks and use `SHOW RESTORES` to query `RES
 
 > **Note:**
 >
-> This feature is not available on [TiDB Serverless clusters](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless).
+> This feature is not available on [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless) clusters.
 
 Backups and restores that were started with the `br` commandline tool are not shown.
 

@@ -9,7 +9,7 @@ You can use the `CREATE RESOURCE GROUP` statement to create a resource group.
 
 > **Note:**
 >
-> This feature is not available on [TiDB Serverless clusters](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless).
+> This feature is not available on [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless) clusters.
 
 ## Synopsis
 
