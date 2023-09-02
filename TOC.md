@@ -36,6 +36,12 @@
       - [PyMySQL](/develop/dev-guide-sample-application-python-pymysql.md)
       - [SQLAlchemy](/develop/dev-guide-sample-application-python-sqlalchemy.md)
       - [peewee](/develop/dev-guide-sample-application-python-peewee.md)
+    - Node.js
+      - [node-mysql2](/develop/dev-guide-sample-application-nodejs-mysql2.md)
+      - [mysql.js](/develop/dev-guide-sample-application-nodejs-mysqljs.md)
+      - [Prisma](/develop/dev-guide-sample-application-nodejs-prisma.md)
+      - [Next.js](/develop/dev-guide-sample-application-nextjs.md)
+      - [AWS Lambda](/develop/dev-guide-sample-application-aws-lambda.md)
     - Ruby
       - [mysql2](/develop/dev-guide-sample-application-ruby-mysql2.md)
       - [Rails](/develop/dev-guide-sample-application-ruby-rails.md)
@@ -192,6 +198,7 @@
   - [Monitoring Framework Overview](/tidb-monitoring-framework.md)
   - [Monitoring API](/tidb-monitoring-api.md)
   - [Deploy Monitoring Services](/deploy-monitoring-services.md)
+  - [Upgrade Monitoring Services](/upgrade-monitoring-services.md)
   - [Export Grafana Snapshots](/exporting-grafana-snapshots.md)
   - [TiDB Cluster Alert Rules](/alert-rules.md)
   - [TiFlash Alert Rules](/tiflash/tiflash-alert-rules.md)
@@ -225,6 +232,8 @@
     - [Performance Tuning Overview](/performance-tuning-overview.md)
     - [Performance Analysis and Tuning](/performance-tuning-methods.md)
     - [Performance Tuning Practices for OLTP Scenarios](/performance-tuning-practices.md)
+    - [TiFlash Performance Analysis Methods](/tiflash-performance-tuning-methods.md)
+    - [TiCDC Performance Analysis Methods](/ticdc-performance-tuning-methods.md)
     - [Latency Breakdown](/latency-breakdown.md)
     - [TiDB Best Practices on Public Cloud](/best-practices-on-public-cloud.md)
   - Configuration Tuning
