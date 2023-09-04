@@ -1,6 +1,6 @@
 ---
-title: xxx (The same as L1 heading)
-summary: xxx (summarize this doc in one sentence)
+title: (The same as L1 heading) such as "Garbage Collection Configuration" in 59 chars or less. Include the keywords of this document. Test title here https://moz.com/learn/seo/title-tag
+summary: summarize this doc in 115 to 145 characters. Start with a verb that tells the users what they can get from this doc, for example, "Learn all the configuration options that you can use in garbage collection". If your intro paragraph describes your article's intent, you can use it here, edited for length.
 ---
 
 # L1 heading (the same as title in the metadata)

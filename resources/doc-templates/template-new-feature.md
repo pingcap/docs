@@ -1,6 +1,6 @@
 ---
-title: New Feature Name (The same as L1 heading)
-summary: xxx (summarize this doc in one sentence)
+title: (The same as L1 heading) Feature name such as "Clustered Indexes" in 59 chars or less. Include the keywords of this document. Test title here https://moz.com/learn/seo/title-tag
+summary: summarize this doc in 115 to 145 characters. Start with a verb that tells the users what they can get from this doc, for example, "Learn what is clustered indexes and how to use clustered index to help you...". If your intro paragraph describes your article's intent, you can use it here, edited for length.
 ---
 
 # New Feature Name (the same as title in the metadata)
