@@ -37,21 +37,21 @@ Request quotas are rate-limited as follows:
   If you exceed the rate limit, an error response returns like this.
 
     ```bash
-    > HTTP/2 429
-    > date: Fri, 5 Sep 2023 05:28:37 GMT
-    > content-type: application/json
-    > content-length: 66
-    > x-ratelimit-reset: 23
-    > x-ratelimit-remaining-minute: 0
-    > x-ratelimit-limit-minute: 100
-    > x-kong-response-latency: 2
-    > server: kong/2.8.1
+    HTTP/2 429
+    date: Mon, 05 Sep 2023 02:50:52 GMT
+    content-type: application/json
+    content-length: 420
+    x-debug-trace-id: 202309040250529dcdf2055e7b2ae5e9
+    x-ratelimit-reset: 8
+    x-ratelimit-remaining-minute: 0
+    x-ratelimit-limit-minute: 10
+    x-kong-response-latency: 1
+    server: kong/2.8.1
 
-    > {"details":[],"code":49900007,"message":"The request exceeded the limit of 100 times per apikey per minute. For more quota, please contact us: https://support.pingcap.com/hc/en-us/requests/new?ticket_form_id=7800003722519"}
+    {"type":"","data":{"columns":[],"rows":[],"result":{"latency":"","row_affect":0,"code":49900007,"row_count":0,"end_ms":0,"limit":0,"message":"API key rate limit exceeded. The limit can be increased up to 1000 requests per minute per API key in TiDB Cloud console. For an increase in quota beyond 1000 rpm, please contact us: https://support.pingcap.com/hc/en-us/requests/new?ticket_form_id=7800003722519","start_ms":0}}}
     ```
 
 - TiDB Cloud Data Service allows up to 100 requests per day for each Chat2Query Data App.
-
 
 ## Manage API keys
 
