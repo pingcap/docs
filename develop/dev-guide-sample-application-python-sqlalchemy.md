@@ -1,6 +1,7 @@
 ---
 title: Connect to TiDB with SQLAlchemy
 summary: Learn how to connect to TiDB using SQLAlchemy. This tutorial gives Python sample code snippets that work with TiDB using SQLAlchemy.
+aliases: ['/tidb/dev/dev-guide-outdated-for-sqlalchemy']
 ---
 
 # Connect to TiDB with SQLAlchemy
@@ -67,7 +68,7 @@ pip install -r requirements.txt
 
 SQLAlchemy is an ORM library that works with multiple databases. It provides a high-level abstraction of the database, which helps developers write SQL statements in a more object-oriented way. However, SQLAlchemy does not include a database driver. To connect to a database, you need to install a database driver. This sample application uses PyMySQL as the database driver, which is a pure Python MySQL client library that is compatible with TiDB and can be installed on all platforms.
 
-You can also use other database drivers, such as [mysqlclient](https://github.com/PyMySQL/mysqlclient) and [mysql-connector-python](https://dev.mysql.com/doc/connector-python/en/). But they are not pure Python libraries and require the corresponding C/C++ compiler and MySQL client library to compile them. For more information, refer to [SQLAlchemy official documentation](https://docs.sqlalchemy.org/en/20/core/engines.html#mysql).
+You can also use other database drivers, such as [mysqlclient](https://github.com/PyMySQL/mysqlclient) and [mysql-connector-python](https://dev.mysql.com/doc/connector-python/en/). But they are not pure Python libraries and require the corresponding C/C++ compiler and MySQL client for compiling. For more information, refer to [SQLAlchemy official documentation](https://docs.sqlalchemy.org/en/20/core/engines.html#mysql).
 
 ### Step 3: Configure connection information
 
@@ -240,7 +241,7 @@ class Player(Base):
     __tablename__ = "players"
 ```
 
-For more information, refer to [SQLAlchemy Mapping Classes with Declarative](https://docs.sqlalchemy.org/en/20/orm/declarative_mapping.html).
+For more information, refer to [SQLAlchemy documentation: Mapping classes with declarative](https://docs.sqlalchemy.org/en/20/orm/declarative_mapping.html).
 
 ### Insert data
 
