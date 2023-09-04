@@ -214,47 +214,7 @@ def get_connection(autocommit: bool = True) -> Connection:
 
 When using this function, you need to replace `${tidb_host}`, `${tidb_port}`, `${tidb_user}`, `${tidb_password}`, `${tidb_db_name}` and `${ca_path}` with the actual values of your TiDB cluster.
 
-<<<<<<< HEAD
-For more information about how to use PyMySQL, refer to [PyMySQL documentation](https://pymysql.readthedocs.io/en/latest/).
-
-## Step 3. Run the code
-
-The following content introduces how to run the code step by step.
-
-### Step 3.1 Initialize table
-
-Before running the code, you need to initialize the table manually. If you are using a local TiDB cluster, you can run the following command:
-
-<SimpleTab groupId="cli">
-
-<div label="MySQL CLI" value="mysql-client">
-
-```shell
-mysql --host 127.0.0.1 --port 4000 -u root < player_init.sql
-```
-
-</div>
-
-<div label="MyCLI" value="mycli">
-
-```shell
-mycli --host 127.0.0.1 --port 4000 -u root --no-warn < player_init.sql
-```
-
-</div>
-
-</SimpleTab>
-
-If you are not using a local cluster, or have not installed a MySQL client, connect to your cluster using your preferred method (such as Navicat, DBeaver, or other GUI tools) and run the SQL statements in the `player_init.sql` file.
-
-### Step 3.2 Modify parameters for TiDB Cloud
-
-If you are using a TiDB Serverless cluster, you need to provide your CA root path and replace `<ca_path>` in the following examples with your CA path. To get the CA root path on your system, refer to [Root certificate management](https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-clusters#root-certificate-management).
-
-If you are using a TiDB Serverless cluster, change the `get_connection` function in `pymysql_example.py`:
-=======
 ### Insert data
->>>>>>> 48a396ba6f (develop: refactor PyMySQL dev guide (#14622))
 
 ```python
 with get_connection(autocommit=True) as conn:
