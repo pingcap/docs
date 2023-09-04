@@ -172,9 +172,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 
 </SimpleTab>
 
-## Step 4: Run the sample app to connect to TiDB
-
-This section demonstrates how to run the sample application code and connect to TiDB.
+### Step 4: Run the sample app
 
 Run the following command to execute the sample code:
 
@@ -182,10 +180,25 @@ Run the following command to execute the sample code:
 npm start
 ```
 
-> **Note**
->
-> For complete code snippets and running instructions, refer to the [tidb-samples/tidb-nodejs-sequelize-quickstart](https://github.com/tidb-samples/tidb-nodejs-sequelize-quickstart) GitHub repository.
+**Expected output(partial):**
 
+```shell
+INFO (app/10117): Getting sequelize instance...
+Executing (default): SELECT 1+1 AS result
+Executing (default): DROP TABLE IF EXISTS `players`;
+Executing (default): CREATE TABLE IF NOT EXISTS `players` (`id` INTEGER NOT NULL auto_increment  COMMENT 'The unique ID of the player.', `coins` INTEGER NOT NULL COMMENT 'The number of coins that the player had.', `goods` INTEGER NOT NULL COMMENT 'The number of goods that the player had.', `createdAt` DATETIME NOT NULL, `updatedAt` DATETIME NOT NULL, PRIMARY KEY (`id`)) ENGINE=InnoDB;
+Executing (default): SHOW INDEX FROM `players`
+Executing (default): INSERT INTO `players` (`id`,`coins`,`goods`,`createdAt`,`updatedAt`) VALUES (1,100,100,'2023-08-31 09:10:11','2023-08-31 09:10:11'),(2,200,200,'2023-08-31 09:10:11','2023-08-31 09:10:11'),(3,300,300,'2023-08-31 09:10:11','2023-08-31 09:10:11'),(4,400,400,'2023-08-31 09:10:11','2023-08-31 09:10:11'),(5,500,500,'2023-08-31 09:10:11','2023-08-31 09:10:11');
+Executing (default): SELECT `id`, `coins`, `goods`, `createdAt`, `updatedAt` FROM `players` AS `players` WHERE `players`.`coins` > 300;
+Executing (default): UPDATE `players` SET `coins`=?,`goods`=?,`updatedAt`=? WHERE `id` = ?
+Executing (default): DELETE FROM `players` WHERE `id` = 6
+```
+
+## Sample code snippets
+
+You can refer to the following sample code snippets to complete your own application development.
+
+For complete sample code and how to run it, check out the [tidb-samples/tidb-nodejs-sequelize-quickstart](https://github.com/tidb-samples/tidb-nodejs-sequelize-quickstart) repository.
 
 ### Connect to TiDB
 
