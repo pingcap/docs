@@ -15,13 +15,13 @@ You can use one of the following two methods to access the SQL statement summary
 
 * After logging in to TiDB Dashboard, click **SQL Statements** in the left navigation menu.
 
-* Visit <http://127.0.0.1:2379/dashboard/#/statement> in your browser. Replace `127.0.0.1:2379` with the actual PD instance address and port.
+* Visit [http://127.0.0.1:2379/dashboard/#/statement](http://127.0.0.1:2379/dashboard/#/statement) in your browser. Replace `127.0.0.1:2379` with the actual PD instance address and port.
 
 All the data shown on the SQL statement summary page are from the TiDB statement summary tables. For more details about the tables, see [TiDB Statement Summary Tables](/statement-summary-tables.md).
 
 > **Note:**
 >
-> In the **Mean Latency** column of the SQL statement summary page, the blue bar indicates the average execution time. If there is a yellow line on the blue bar for an SQL statement, the left and right sides of the yellow line respectively represent the minimum and maximum execution time of the SQL statement during the recent data collection cycle. 
+> In the **Mean Latency** column of the SQL statement summary page, the blue bar indicates the average execution time. If there is a yellow line on the blue bar for an SQL statement, the left and right sides of the yellow line respectively represent the minimum and maximum execution time of the SQL statement during the recent data collection cycle.
 
 ### Change Filters
 

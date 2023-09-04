@@ -121,11 +121,11 @@ As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB in
         mysql --host 127.0.0.1 --port 4000 -u root
         ```
 
-5. Access the Prometheus dashboard of TiDB at <http://127.0.0.1:9090>.
+5. Access the Prometheus dashboard of TiDB at [http://127.0.0.1:9090](http://127.0.0.1:9090).
 
-6. Access the [TiDB Dashboard](/dashboard/dashboard-intro.md) at <http://127.0.0.1:2379/dashboard>. The default username is `root`, and the password is empty.
+6. Access the [TiDB Dashboard](/dashboard/dashboard-intro.md) at [http://127.0.0.1:2379/dashboard](http://127.0.0.1:2379/dashboard). The default username is `root`, and the password is empty.
 
-7. Access the Grafana dashboard of TiDB through <http://127.0.0.1:3000>. Both the default username and password are `admin`.
+7. Access the Grafana dashboard of TiDB through [http://127.0.0.1:3000](http://127.0.0.1:3000). Both the default username and password are `admin`.
 
 8. (Optional) [Load data to TiFlash](/tiflash/tiflash-overview.md#use-tiflash) for analysis.
 
@@ -240,11 +240,11 @@ As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB in
         mysql --host 127.0.0.1 --port 4000 -u root
         ```
 
-5. Access the Prometheus dashboard of TiDB at <http://127.0.0.1:9090>.
+5. Access the Prometheus dashboard of TiDB at [http://127.0.0.1:9090](http://127.0.0.1:9090).
 
-6. Access the [TiDB Dashboard](/dashboard/dashboard-intro.md) at <http://127.0.0.1:2379/dashboard>. The default username is `root`, and the password is empty.
+6. Access the [TiDB Dashboard](/dashboard/dashboard-intro.md) at [http://127.0.0.1:2379/dashboard](http://127.0.0.1:2379/dashboard). The default username is `root`, and the password is empty.
 
-7. Access the Grafana dashboard of TiDB through <http://127.0.0.1:3000>. Both the default username and password are `admin`.
+7. Access the Grafana dashboard of TiDB through [http://127.0.0.1:3000](http://127.0.0.1:3000). Both the default username and password are `admin`.
 
 8. (Optional) [Load data to TiFlash](/tiflash/tiflash-overview.md#use-tiflash) for analysis.
 
@@ -476,9 +476,9 @@ Other requirements for the target machine include:
         mysql -h 10.0.1.1 -P 4000 -u root
         ```
 
-    - Access the Grafana monitoring dashboard at <http://{grafana-ip}:3000>. The default username and password are both `admin`.
+    - Access the Grafana monitoring dashboard at [http://{grafana-ip}:3000](http://{grafana-ip}:3000). The default username and password are both `admin`.
 
-    - Access the [TiDB Dashboard](/dashboard/dashboard-intro.md) at <http://{pd-ip}:2379/dashboard>. The default username is `root`, and the password is empty.
+    - Access the [TiDB Dashboard](/dashboard/dashboard-intro.md) at [http://{pd-ip}:2379/dashboard](http://{pd-ip}:2379/dashboard). The default username is `root`, and the password is empty.
 
     - To view the currently deployed cluster list:
 
