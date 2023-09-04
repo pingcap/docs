@@ -14,7 +14,7 @@ summary: Learn how to export snapshots of Grafana Dashboard, and how to visualiz
 
 ## 使用法 {#usage}
 
-MetricsTool には[https://metricstool.pingcap.net/](https://metricstool.pingcap.net/)からアクセスできます。これは 3 つのツール セットで構成されます。
+MetricsTool には[https://metricstool.pingcap.net/](https://metricstool.pingcap.net/)からアクセスできます。これは、次の 3 つのツール セットで構成されます。
 
 -   **エクスポート**: ブラウザの開発者ツールで実行されるユーザー スクリプト。これにより、任意の Grafana v6.xxサーバー上の現在のダッシュボードに表示されているすべてのパネルのスナップショットをダウンロードできます。
 
@@ -38,7 +38,7 @@ MetricsTool によってエクスポートされたスナップショット フ�
 
 ### Visualizer はアップロードされたスナップショット ファイルを PingCAP のサーバーに保存しますか? {#will-the-visualizer-save-the-uploaded-snapshot-files-in-pingcap-s-servers}
 
-いいえ、ビジュアライザーはブラウザー内でスナップショット ファイルを完全に解析します。 PingCAP には何も送信されません。機密ソースから受信したスナップショット ファイルを自由に表示でき、Visualizer を通じてこれらが第三者に漏洩することを心配する必要はありません。
+いいえ、ビジュアライザーはブラウザー内でスナップショット ファイルを完全に解析します。 PingCAP には何も送信されません。機密ソースから受信したスナップショット ファイルを自由に表示でき、Visualizer を通じてこれらのファイルが第三者に漏洩することを心配する必要はありません。
 
 ### Grafana 以外のメトリクスをエクスポートできますか? {#can-it-export-metrics-besides-grafana}
 
@@ -50,4 +50,4 @@ MetricsTool によってエクスポートされたスナップショット フ�
 
 ### 視覚化されたスナップショットへのリンクを共有できますか? {#can-we-share-a-link-to-a-visualized-snapshot}
 
-いいえ、ただし、ビジュアライザーを使用して表示する方法を説明したスナップショット ファイルを共有することはできます。世界中で読み取り可能な URL が本当に必要な場合は、Grafana に組み込まれているパブリック`snapshot.raintank.io`サービスを試すこともできますが、その前にプライバシーに関する懸念がすべて解消されていることを確認してください。
+いいえ、ただし、ビジュアライザーを使用して表示する方法を説明したスナップショット ファイルを共有することはできます。世界中で読み取り可能な URL が本当に必要な場合は、Grafana に組み込まれている public `snapshot.raintank.io`サービスを試すこともできますが、その前にプライバシーに関する懸念がすべて解消されていることを確認してください。

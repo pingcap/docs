@@ -9,7 +9,7 @@ TiDB Cloud は、指示を提供することで AI を使用して SQL ステー
 
 Chat2Query API には HTTPS 経由でのみアクセスできるため、ネットワーク上で送信されるすべてのデータは TLS を使用して暗号化されます。
 
-> **ノート：**
+> **注記：**
 >
 > Chat2Query APIは[TiDB サーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-serverless)クラスタで利用可能です。 [TiDB専用](/tidb-cloud/select-cluster-tier.md#tidb-dedicated)クラスターで Chat2Query API を使用するには、 [TiDB Cloudのサポート](/tidb-cloud/tidb-cloud-support.md)にお問い合わせください。
 
@@ -33,7 +33,7 @@ Chat2Query API を有効にするには、次の手順を実行します。
 
 4.  **DataAPI を**有効にすると、Chat2Query データ アプリが作成されます。
 
-    > **ノート：**
+    > **注記：**
     >
     > 1 つの TiDB クラスターで DataAPI を有効にすると、同じプロジェクト内のすべての TiDB クラスターで Chat2Query API を使用できるようになります。
 
@@ -45,7 +45,7 @@ Chat2Query API を有効にするには、次の手順を実行します。
 
 エンドポイントを呼び出す前に、API キーを作成する必要があります。 Chat2Query データ アプリの API キーを作成するには、次の手順を実行します。
 
-1.  [**データサービス**](https://tidbcloud.com/console/data-service)の左側のペインで、 **Chat2Query システム**の名前をクリックして詳細を表示します。
+1.  [**データサービス**](https://tidbcloud.com/console/data-service)の左側のペインで、 **Chat2Query System**の名前をクリックして詳細を表示します。
 
 2.  **「認証」**領域で、 **「API キーの作成」を**クリックします。
 
@@ -72,18 +72,9 @@ Chat2Query API を有効にするには、次の手順を実行します。
 
 -   **Request Method** : (読み取り専用) Chat2Data エンドポイントの HTTP メソッド`POST` 。
 
--   **Timeout(ms)** : Chat2Data エンドポイントのタイムアウト。
-
-    -   デフォルト値: `30000`
-    -   最大値： `120000`
-    -   最小値: `1`
-    -   単位：ミリ秒
+-   **Timeout(ms)** : Chat2Data エンドポイントのタイムアウト (ミリ秒単位)。
 
 -   **Max Rows** : Chat2Data エンドポイントが返す最大行数。
-
-    -   デフォルト値: `50`
-    -   最大値： `2000`
-    -   最小値: `1`
 
 TiDB Cloudは、エンドポイントの呼び出しに役立つコード サンプルを生成します。例を取得してコードを実行するには、次の手順を実行します。
 
@@ -95,7 +86,7 @@ TiDB Cloudは、エンドポイントの呼び出しに役立つコード サン
     -   `<your instruction>`プレースホルダーを、AI に SQL ステートメントを生成して実行させる命令に置き換えます。
     -   `<your table name, optional>`プレースホルダーを、クエリするテーブル名に置き換えます。テーブル名を指定しない場合、AI はデータベース内のすべてのテーブルをクエリします。
 
-> **ノート：**
+> **注記：**
 >
 > 各 Chat2Query データ アプリには、1 日あたり 100 リクエストのレート制限があります。レート制限を超えると、API は`429`エラーを返します。さらに割り当てが必要な場合は、サポート チームに[リクエストを送信する](https://support.pingcap.com/hc/en-us/requests/new?ticket_form_id=7800003722519)お問い合わせください。
 

@@ -1,293 +1,277 @@
 ---
-title: Build a Simple CRUD App with TiDB and MySQL Connector/Python
-summary: Learn how to build a simple CRUD application with TiDB and MySQL Connector/Python.
+title: Connect to TiDB with MySQL Connector/Python
+summary: Learn how to connect to TiDB using MySQL Connector/Python. This tutorial gives Python sample code snippets that work with TiDB using MySQL Connector/Python.
 ---
 
-<!-- markdownlint-disable MD024 -->
+# MySQL コネクタ/Python を使用して TiDB に接続する {#connect-to-tidb-with-mysql-connector-python}
 
-<!-- markdownlint-disable MD029 -->
+TiDB は MySQL 互換データベースであり、 [MySQL コネクタ/Python](https://dev.mysql.com/doc/connector-python/en/)は Python 用の公式 MySQL ドライバーです。
 
-# TiDB と MySQL Connector/Python を使用してシンプルな CRUD アプリを構築する {#build-a-simple-crud-app-with-tidb-and-mysql-connector-python}
+このチュートリアルでは、TiDB と MySQL Connector/Python を使用して次のタスクを実行する方法を学習できます。
 
-[MySQL コネクタ/Python](https://dev.mysql.com/doc/connector-python/en/)は、Python 用の人気のあるオープンソース ドライバーです。
+-   環境をセットアップします。
+-   MySQL コネクタ/Python を使用して TiDB クラスターに接続します。
+-   アプリケーションをビルドして実行します。オプションで、基本的な CRUD 操作のサンプル コード スニペットを見つけることができます。
 
-このドキュメントでは、TiDB と MySQL Connector/Python を使用して単純な CRUD アプリケーションを構築する方法について説明します。
-
-> **ノート：**
+> **注記：**
 >
-> Python 3.10 以降の Python バージョンを使用することをお勧めします。
+> このチュートリアルは、TiDB サーバーレス、TiDB 専用、および TiDB セルフホスト クラスターで動作します。
 
-## ステップ 1. TiDB クラスターを起動する {#step-1-launch-your-tidb-cluster}
+## 前提条件 {#prerequisites}
+
+このチュートリアルを完了するには、次のものが必要です。
+
+-   [Python 3.8以降](https://www.python.org/downloads/) 。
+-   [ギット](https://git-scm.com/downloads) 。
+-   TiDB クラスター。
 
 <CustomContent platform="tidb">
+  **TiDB クラスターがない場合は、次のように作成できます。**
 
-TiDB クラスターの起動方法を紹介します。
-
-**TiDB サーバーレス クラスターを使用する**
-
-詳細な手順については、 [TiDB サーバーレスクラスターを作成する](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-tidb-serverless-cluster)を参照してください。
-
-**ローカルクラスターを使用する**
-
-詳細な手順については、 [ローカルテストクラスターをデプロイ](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[TiUPを使用して TiDB クラスターをデプロイ](/production-deployment-using-tiup.md)を参照してください。
-
+  -   (推奨) [TiDB サーバーレスクラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って、独自のTiDB Cloudクラスターを作成します。
+  -   [ローカル テスト TiDB クラスターをデプロイ](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番TiDB クラスターをデプロイ](/production-deployment-using-tiup.md)に従ってローカル クラスターを作成します。
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
+  **TiDB クラスターがない場合は、次のように作成できます。**
 
-[TiDB サーバーレスクラスターを作成する](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-tidb-serverless-cluster)を参照してください。
-
+  -   (推奨) [TiDB サーバーレスクラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って、独自のTiDB Cloudクラスターを作成します。
+  -   [ローカル テスト TiDB クラスターをデプロイ](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb#deploy-a-local-test-cluster)または[本番TiDB クラスターをデプロイ](https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup)に従ってローカル クラスターを作成します。
 </CustomContent>
 
-## ステップ 2. コードを取得する {#step-2-get-the-code}
+## サンプル アプリを実行して TiDB に接続する {#run-the-sample-app-to-connect-to-tidb}
+
+このセクションでは、サンプル アプリケーション コードを実行して TiDB に接続する方法を説明します。
+
+### ステップ 1: サンプル アプリ リポジトリのクローンを作成する {#step-1-clone-the-sample-app-repository}
+
+ターミナル ウィンドウで次のコマンドを実行して、サンプル コード リポジトリのクローンを作成します。
 
 ```shell
-git clone https://github.com/pingcap-inc/tidb-example-python.git
+git clone https://github.com/tidb-samples/tidb-python-mysqlconnector-quickstart.git
+cd tidb-python-mysqlconnector-quickstart
 ```
 
-以下では、例として MySQL Connector/Python 8.0.31 を使用します。 Python のドライバーは他の言語よりも使いやすいですが、基礎となる実装を保護せず、トランザクションを手動で管理する必要があります。 SQL が必要なシナリオがそれほど多くない場合は、プログラムの結合を減らすのに役立つ ORM を使用することをお勧めします。
+### ステップ 2: 依存関係をインストールする {#step-2-install-dependencies}
 
-```python
-import uuid
-from typing import List
-
-from mysql.connector import connect, MySQLConnection
-from mysql.connector.cursor import MySQLCursor
-
-
-def get_connection(autocommit: bool = True) -> MySQLConnection:
-    connection = connect(host='127.0.0.1',
-                         port=4000,
-                         user='root',
-                         password='',
-                         database='test')
-    connection.autocommit = autocommit
-    return connection
-
-
-def create_player(cursor: MySQLCursor, player: tuple) -> None:
-    cursor.execute("INSERT INTO player (id, coins, goods) VALUES (%s, %s, %s)", player)
-
-
-def get_player(cursor: MySQLCursor, player_id: str) -> tuple:
-    cursor.execute("SELECT id, coins, goods FROM player WHERE id = %s", (player_id,))
-    return cursor.fetchone()
-
-
-def get_players_with_limit(cursor: MySQLCursor, limit: int) -> List[tuple]:
-    cursor.execute("SELECT id, coins, goods FROM player LIMIT %s", (limit,))
-    return cursor.fetchall()
-
-
-def random_player(amount: int) -> List[tuple]:
-    players = []
-    for _ in range(amount):
-        players.append((str(uuid.uuid4()), 10000, 10000))
-
-    return players
-
-
-def bulk_create_player(cursor: MySQLCursor, players: List[tuple]) -> None:
-    cursor.executemany("INSERT INTO player (id, coins, goods) VALUES (%s, %s, %s)", players)
-
-
-def get_count(cursor: MySQLCursor) -> int:
-    cursor.execute("SELECT count(*) FROM player")
-    return cursor.fetchone()[0]
-
-
-def trade_check(cursor: MySQLCursor, sell_id: str, buy_id: str, amount: int, price: int) -> bool:
-    get_player_with_lock_sql = "SELECT coins, goods FROM player WHERE id = %s FOR UPDATE"
-
-    # sell player goods check
-    cursor.execute(get_player_with_lock_sql, (sell_id,))
-    _, sell_goods = cursor.fetchone()
-    if sell_goods < amount:
-        print(f'sell player {sell_id} goods not enough')
-        return False
-
-    # buy player coins check
-    cursor.execute(get_player_with_lock_sql, (buy_id,))
-    buy_coins, _ = cursor.fetchone()
-    if buy_coins < price:
-        print(f'buy player {buy_id} coins not enough')
-        return False
-
-
-def trade_update(cursor: MySQLCursor, sell_id: str, buy_id: str, amount: int, price: int) -> None:
-    update_player_sql = "UPDATE player set goods = goods + %s, coins = coins + %s WHERE id = %s"
-
-    # deduct the goods of seller, and raise his/her the coins
-    cursor.execute(update_player_sql, (-amount, price, sell_id))
-    # deduct the coins of buyer, and raise his/her the goods
-    cursor.execute(update_player_sql, (amount, -price, buy_id))
-
-
-def trade(connection: MySQLConnection, sell_id: str, buy_id: str, amount: int, price: int) -> None:
-    with connection.cursor() as cursor:
-        if trade_check(cursor, sell_id, buy_id, amount, price) is False:
-            connection.rollback()
-            return
-
-        try:
-            trade_update(cursor, sell_id, buy_id, amount, price)
-        except Exception as err:
-            connection.rollback()
-            print(f'something went wrong: {err}')
-        else:
-            connection.commit()
-            print("trade success")
-
-
-def simple_example() -> None:
-    with get_connection(autocommit=True) as connection:
-        with connection.cursor() as cur:
-            # create a player, who has a coin and a goods.
-            create_player(cur, ("test", 1, 1))
-
-            # get this player, and print it.
-            test_player = get_player(cur, "test")
-            print(f'id:{test_player[0]}, coins:{test_player[1]}, goods:{test_player[2]}')
-
-            # create players with bulk inserts.
-            # insert 1919 players totally, with 114 players per batch.
-            # all players have random uuid
-            print(f'start to insert one by one, it will take a long time')
-            player_list = random_player(1919)
-            for idx in range(0, len(player_list), 114):
-                print(f'inserted {idx} players')
-                bulk_create_player(cur, player_list[idx:idx + 114])
-
-            # print the number of players
-            count = get_count(cur)
-            print(f'number of players: {count}')
-
-            # print 3 players.
-            three_players = get_players_with_limit(cur, 3)
-            for player in three_players:
-                print(f'id:{player[0]}, coins:{player[1]}, goods:{player[2]}')
-
-
-def trade_example() -> None:
-    with get_connection(autocommit=False) as conn:
-        with conn.cursor() as cur:
-            # create two players
-            # player 1: id is "1", has only 100 coins.
-            # player 2: id is "2", has 114514 coins, and 20 goods.
-            create_player(cur, ("1", 100, 0))
-            create_player(cur, ("2", 114514, 20))
-            conn.commit()
-
-        # player 1 wants to buy 10 goods from player 2.
-        # it will cost 500 coins, but player 1 cannot afford it.
-        # so this trade will fail, and nobody will lose their coins or goods
-        trade(conn, sell_id="2", buy_id="1", amount=10, price=500)
-
-        # then player 1 has to reduce the incoming quantity to 2.
-        # this trade will be successful
-        trade(conn, sell_id="2", buy_id="1", amount=2, price=100)
-
-        # let's take a look for player 1 and player 2 currently
-        with conn.cursor() as cur:
-            _, player1_coin, player1_goods = get_player(cur, "1")
-            print(f'id:1, coins:{player1_coin}, goods:{player1_goods}')
-            _, player2_coin, player2_goods = get_player(cur, "2")
-            print(f'id:2, coins:{player2_coin}, goods:{player2_goods}')
-
-
-simple_example()
-trade_example()
-```
-
-ドライバーのカプセル化レベルは ORM よりも低いため、プログラム内に多数の SQL ステートメントが含まれます。 ORM とは異なり、ドライバーにはデータ オブジェクトがないため、ドライバーによってクエリされる`Player`はタプルとして表されます。
-
-MySQL Connector/Python の使用方法の詳細については、 [MySQL コネクタ/Python ドキュメント](https://dev.mysql.com/doc/connector-python/en/)を参照してください。
-
-## ステップ 3. コードを実行する {#step-3-run-the-code}
-
-次のコンテンツでは、コードを実行する方法をステップごとに紹介します。
-
-### ステップ 3.1 テーブルの初期化 {#step-3-1-initialize-table}
-
-コードを実行する前に、テーブルを手動で初期化する必要があります。ローカル TiDB クラスターを使用している場合は、次のコマンドを実行できます。
-
-<SimpleTab groupId="cli">
-
-<div label="MySQL CLI" value="mysql-client">
+次のコマンドを実行して、サンプル アプリに必要なパッケージ (mysql-connector-python を含む) をインストールします。
 
 ```shell
-mysql --host 127.0.0.1 --port 4000 -u root < player_init.sql
+pip install -r requirements.txt
 ```
 
-</div>
+### ステップ 3: 接続情報を構成する {#step-3-configure-connection-information}
 
-<div label="MyCLI" value="mycli">
+選択した TiDB デプロイメント オプションに応じて、TiDB クラスターに接続します。
 
-```shell
-mycli --host 127.0.0.1 --port 4000 -u root --no-warn < player_init.sql
-```
+<SimpleTab>
+  <div label="TiDB Serverless">
+    1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット クラスターの名前をクリックして、その概要ページに移動します。
 
-</div>
+    2.  右上隅にある**「接続」**をクリックします。接続ダイアログが表示されます。
 
+    3.  接続ダイアログの設定が動作環境と一致していることを確認してください。
+
+        -   **エンドポイント タイプは**`Public`に設定されます
+
+        -   **[接続先] は**`General`に設定されています
+
+        -   **オペレーティング システムが**環境に一致します。
+
+        > **ヒント：**
+        >
+        > プログラムが Windows Subsystem for Linux (WSL) で実行されている場合は、対応する Linux ディストリビューションに切り替えます。
+
+    4.  **「パスワードの作成」**をクリックしてランダムなパスワードを作成します。
+
+        > **ヒント：**
+        >
+        > 以前にパスワードを作成したことがある場合は、元のパスワードを使用するか、 **「パスワードのリセット」**をクリックして新しいパスワードを生成できます。
+
+    5.  次のコマンドを実行して`.env.example`をコピーし、名前を`.env`に変更します。
+
+        ```shell
+        cp .env.example .env
+        ```
+
+    6.  対応する接続​​文字列をコピーして`.env`ファイルに貼り付けます。結果の例は次のとおりです。
+
+        ```dotenv
+        TIDB_HOST='{host}'  # e.g. gateway01.ap-northeast-1.prod.aws.tidbcloud.com
+        TIDB_PORT='4000'
+        TIDB_USER='{user}'  # e.g. xxxxxx.root
+        TIDB_PASSWORD='{password}'
+        TIDB_DB_NAME='test'
+        CA_PATH='{ssl_ca}'  # e.g. /etc/ssl/certs/ca-certificates.crt (Debian / Ubuntu / Arch)
+        ```
+
+        プレースホルダー`{}` 、接続ダイアログから取得した接続パラメーターに必ず置き換えてください。
+
+    7.  `.env`ファイルを保存します。
+  </div>
+
+  <div label="TiDB Dedicated">
+    1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット クラスターの名前をクリックして、その概要ページに移動します。
+
+    2.  右上隅にある**「接続」**をクリックします。接続ダイアログが表示されます。
+
+    3.  **「どこからでもアクセスを許可」**をクリックし、 **「TiDB クラスター CA のダウンロード」**をクリックして CA 証明書をダウンロードします。
+
+        接続文字列の取得方法の詳細については、 [TiDB専用標準接続](https://docs.pingcap.com/tidbcloud/connect-via-standard-connection)を参照してください。
+
+    4.  次のコマンドを実行して`.env.example`をコピーし、名前を`.env`に変更します。
+
+        ```shell
+        cp .env.example .env
+        ```
+
+    5.  対応する接続​​文字列をコピーして`.env`ファイルに貼り付けます。結果の例は次のとおりです。
+
+        ```dotenv
+        TIDB_HOST='{host}'  # e.g. tidb.xxxx.clusters.tidb-cloud.com
+        TIDB_PORT='4000'
+        TIDB_USER='{user}'  # e.g. root
+        TIDB_PASSWORD='{password}'
+        TIDB_DB_NAME='test'
+        CA_PATH='{your-downloaded-ca-path}'
+        ```
+
+        必ずプレースホルダー`{}`接続ダイアログから取得した接続パラメーターに置き換え、 `CA_PATH`前の手順でダウンロードした証明書パスで構成してください。
+
+    6.  `.env`ファイルを保存します。
+  </div>
+
+  <div label="TiDB Self-Hosted">
+    1.  次のコマンドを実行して`.env.example`をコピーし、名前を`.env`に変更します。
+
+        ```shell
+        cp .env.example .env
+        ```
+
+    2.  対応する接続​​文字列をコピーして`.env`ファイルに貼り付けます。結果の例は次のとおりです。
+
+        ```dotenv
+        TIDB_HOST='{tidb_server_host}'
+        TIDB_PORT='4000'
+        TIDB_USER='root'
+        TIDB_PASSWORD='{password}'
+        TIDB_DB_NAME='test'
+        ```
+
+        必ずプレースホルダー`{}`接続パラメーターに置き換えて、 `CA_PATH`行を削除してください。 TiDB をローカルで実行している場合、デフォルトのホスト アドレスは`127.0.0.1`で、パスワードは空です。
+
+    3.  `.env`ファイルを保存します。
+  </div>
 </SimpleTab>
 
-ローカル クラスターを使用していない場合、または MySQL クライアントをインストールしていない場合は、好みの方法 (Navicat、DBeaver、またはその他の GUI ツールなど) を使用してクラスターに接続し、 `player_init.sql`ファイル内の SQL ステートメントを実行します。
+### ステップ 4: コードを実行して結果を確認する {#step-4-run-the-code-and-check-the-result}
 
-### ステップ 3.2 TiDB Cloudのパラメータを変更する {#step-3-2-modify-parameters-for-tidb-cloud}
+1.  次のコマンドを実行してサンプル コードを実行します。
 
-TiDB サーバーレス クラスターを使用している場合は、CA ルート パスを指定し、次の例の`<ca_path>`を CA パスに置き換える必要があります。システム上の CA ルート パスを取得するには、 [私のシステム上の CA ルート パスはどこにありますか?](https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-tier-clusters#where-is-the-ca-root-path-on-my-system)を参照してください。&gt;
+    ```shell
+    python mysql_connector_example.py
+    ```
 
-TiDB サーバーレス クラスターを使用している場合は、 `mysql_connector_python_example.py`の`get_connection`関数を変更します。
+2.  [予想される出力.txt](https://github.com/tidb-samples/tidb-python-mysqlconnector-quickstart/blob/main/Expected-Output.txt)チェックして、出力が一致するかどうかを確認します。
 
-```python
-def get_connection(autocommit: bool = True) -> MySQLConnection:
-    connection = connect(host='127.0.0.1',
-                         port=4000,
-                         user='root',
-                         password='',
-                         database='test')
-    connection.autocommit = autocommit
-    return connection
-```
+## サンプルコードスニペット {#sample-code-snippets}
 
-設定したパスワードが`123456`で、クラスターの詳細ページから取得した接続パラメーターが次であるとします。
+次のサンプル コード スニペットを参照して、独自のアプリケーション開発を完了できます。
 
--   エンドポイント: `xxx.tidbcloud.com`
--   ポート: `4000`
--   ユーザー: `2aEp24QWEDLqRFs.root`
+完全なサンプル コードとその実行方法については、 [tidb-samples/tidb-python-mysqlconnector-quickstart](https://github.com/tidb-samples/tidb-python-mysqlconnector-quickstart)リポジトリを確認してください。
 
-この場合、 `get_connection`を次のように変更できます。
+### TiDB に接続する {#connect-to-tidb}
 
 ```python
 def get_connection(autocommit: bool = True) -> MySQLConnection:
-    connection = connect(
-        host="xxx.tidbcloud.com",
-        port=4000,
-        user="2aEp24QWEDLqRFs.root",
-        password="123456",
-        database="test",
-        autocommit=autocommit,
-        ssl_ca='<ca_path>',
-        ssl_verify_identity=True
-    )
-    connection.autocommit = autocommit
-    return connection
+    config = Config()
+    db_conf = {
+        "host": ${tidb_host},
+        "port": ${tidb_port},
+        "user": ${tidb_user},
+        "password": ${tidb_password},
+        "database": ${tidb_db_name},
+        "autocommit": autocommit,
+        "use_pure": True,
+    }
+
+    if ${ca_path}:
+        db_conf["ssl_verify_cert"] = True
+        db_conf["ssl_verify_identity"] = True
+        db_conf["ssl_ca"] = ${ca_path}
+    return mysql.connector.connect(**db_conf)
 ```
 
-### ステップ 3.3 コードを実行する {#step-3-3-run-the-code}
+この関数を使用する場合、 `${tidb_host}` 、 `${tidb_port}` 、 `${tidb_user}` 、 `${tidb_password}` 、 `${tidb_db_name}`および`${ca_path}`を TiDB クラスターの実際の値に置き換える必要があります。
 
-コードを実行する前に、次のコマンドを使用して依存関係をインストールします。
+### データの挿入 {#insert-data}
 
-```bash
-pip3 install -r requirement.txt
+```python
+with get_connection(autocommit=True) as conn:
+    with conn.cursor() as cur:
+        player = ("1", 1, 1)
+        cursor.execute("INSERT INTO players (id, coins, goods) VALUES (%s, %s, %s)", player)
 ```
 
-スクリプトを複数回実行する必要がある場合は、各実行前に[テーブルの初期化](#step-31-initialize-table)セクションに従ってテーブルを再度初期化します。
+詳細については、 [データの挿入](/develop/dev-guide-insert-data.md)を参照してください。
 
-```bash
-python3 mysql_connector_python_example.py
+### クエリデータ {#query-data}
+
+```python
+with get_connection(autocommit=True) as conn:
+    with conn.cursor() as cur:
+        cur.execute("SELECT count(*) FROM players")
+        print(cur.fetchone()[0])
 ```
 
-## ステップ 4. 期待される出力 {#step-4-expected-output}
+詳細については、 [クエリデータ](/develop/dev-guide-get-data-from-single-table.md)を参照してください。
 
-[MySQL コネクタ/Python の予想される出力](https://github.com/pingcap-inc/tidb-example-python/blob/main/Expected-Output.md#mysql-connector-python)
+### データを更新する {#update-data}
+
+```python
+with get_connection(autocommit=True) as conn:
+    with conn.cursor() as cur:
+        player_id, amount, price="1", 10, 500
+        cursor.execute(
+            "UPDATE players SET goods = goods + %s, coins = coins + %s WHERE id = %s",
+            (-amount, price, player_id),
+        )
+```
+
+詳細については、 [データを更新する](/develop/dev-guide-update-data.md)を参照してください。
+
+### データの削除 {#delete-data}
+
+```python
+with get_connection(autocommit=True) as conn:
+    with conn.cursor() as cur:
+        player_id = "1"
+        cursor.execute("DELETE FROM players WHERE id = %s", (player_id,))
+```
+
+詳細については、 [データの削除](/develop/dev-guide-delete-data.md)を参照してください。
+
+## 便利なメモ {#useful-notes}
+
+### ドライバーまたは ORM フレームワークを使用していますか? {#using-driver-or-orm-framework}
+
+Python ドライバーはデータベースへの低レベルのアクセスを提供しますが、開発者は次のことを行う必要があります。
+
+-   データベース接続を手動で確立および解放します。
+-   データベーストランザクションを手動で管理します。
+-   データ行 ( `mysql-connector-python`ではタプルまたは辞書として表されます) をデータ オブジェクトに手動でマップします。
+
+複雑な SQL ステートメントを作成する必要がない限り、開発には[SQLアルケミー](/develop/dev-guide-sample-application-python-sqlalchemy.md) 、 [ピーウィー](/develop/dev-guide-sample-application-python-peewee.md) 、Django ORM などの[ORM](https://en.wikipedia.org/w/index.php?title=Object-relational_mapping)フレームワークを使用することをお勧めします。それはあなたに役立ちます:
+
+-   接続とトランザクションの管理のために[定型コード](https://en.wikipedia.org/wiki/Boilerplate_code)を減らします。
+-   多数の SQL ステートメントの代わりにデータ オブジェクトを使用してデータを操作します。
+
+## 次のステップ {#next-steps}
+
+-   mysql-connector-python の使用法については[MySQL コネクタ/Python のドキュメント](https://dev.mysql.com/doc/connector-python/en/)から学びましょう。
+-   TiDB アプリケーション[データの削除](/develop/dev-guide-delete-data.md) [単一テーブルの読み取り](/develop/dev-guide-get-data-from-single-table.md)ベスト プラクティス[SQLパフォーマンスの最適化](/develop/dev-guide-optimize-sql-overview.md)は、 [開発者ガイド](/develop/dev-guide-overview.md)の章 ( [データの挿入](/develop/dev-guide-insert-data.md)など) [データを更新する](/develop/dev-guide-update-data.md)参照[トランザクション](/develop/dev-guide-transaction-overview.md)てください。
+-   プロフェッショナルとして[TiDB 開発者コース](https://www.pingcap.com/education/)を学び、試験合格後に[TiDB 認定](https://www.pingcap.com/education/certification/)獲得します。
+
+## 助けが必要？ {#need-help}
+
+[不和](https://discord.gg/vYU9h56kAX)または[サポートチケットを作成する](https://support.pingcap.com/)について質問してください。

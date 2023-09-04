@@ -1,7 +1,3 @@
-<!-- markdownlint-disable MD007 -->
-
-<!-- markdownlint-disable MD041 -->
-
 -   [ドキュメントホーム](https://docs.pingcap.com/)
 -   TiDB Cloudについて
     -   [TiDB Cloudを選ぶ理由](/tidb-cloud/tidb-cloud-intro.md)
@@ -36,6 +32,13 @@
             -   [PyMySQL](/develop/dev-guide-sample-application-python-pymysql.md)
             -   [SQLアルケミー](/develop/dev-guide-sample-application-python-sqlalchemy.md)
             -   [ピーピー](/develop/dev-guide-sample-application-python-peewee.md)
+            -   [ジャンゴ](/develop/dev-guide-sample-application-python-django.md)
+        -   Node.js
+            -   [ノードmysql2](/develop/dev-guide-sample-application-nodejs-mysql2.md)
+            -   [mysql.js](/develop/dev-guide-sample-application-nodejs-mysqljs.md)
+            -   [プリズマ](/develop/dev-guide-sample-application-nodejs-prisma.md)
+            -   [Next.js](/develop/dev-guide-sample-application-nextjs.md)
+            -   [AWSラムダ](/develop/dev-guide-sample-application-aws-lambda.md)
     -   サードパーティのサポート
         -   [TiDB がサポートするサードパーティ ツール](/develop/dev-guide-third-party-support.md)
         -   [サードパーティツールとの既知の非互換性の問題](/develop/dev-guide-third-party-tools-compatibility.md)
@@ -106,7 +109,8 @@
         -   TiDB 専用クラスタに接続する
             -   [接続方法の概要](/tidb-cloud/connect-to-tidb-cluster.md)
             -   [標準接続で接続する](/tidb-cloud/connect-via-standard-connection.md)
-            -   [プライベートエンドポイント経由で接続する](/tidb-cloud/set-up-private-endpoint-connections.md)
+            -   [プライベートエンドポイント経由でAWSに接続する](/tidb-cloud/set-up-private-endpoint-connections.md)
+            -   [プライベート エンドポイント (Private Service Connect) 経由で Google Cloud に接続する](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)
             -   [VPC ピアリング経由で接続する](/tidb-cloud/set-up-vpc-peering-connections.md)
             -   [SQL シェル経由で接続する](/tidb-cloud/connect-via-sql-shell.md)
         -   [TiDB 専用クラスタを拡張する](/tidb-cloud/scale-tidb-cluster.md)
@@ -253,7 +257,7 @@
     -   [支払い方法の設定](/tidb-cloud/tidb-cloud-billing.md#payment-method)
     -   [AWS または GCP Marketplace からの請求](/tidb-cloud/tidb-cloud-billing.md#billing-from-aws-marketplace-or-google-cloud-marketplace)
     -   [チェンジフィードの請求](/tidb-cloud/tidb-cloud-billing-ticdc-rcu.md)
-    -   [データ移行の請求](/tidb-cloud/tidb-cloud-billing-dm.md)
+    -   [データ移行の料金請求](/tidb-cloud/tidb-cloud-billing-dm.md)
 -   API
     -   [APIの概要](/tidb-cloud/api-overview.md)
     -   [APIリファレンス](https://docs.pingcap.com/tidbcloud/api/v1beta)

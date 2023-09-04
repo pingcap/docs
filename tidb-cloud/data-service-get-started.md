@@ -21,7 +21,7 @@ summary: Learn how to use TiDB Cloud Data Service to access your data with HTTPS
 
 ## ステップ 1. データ アプリを作成する {#step-1-create-a-data-app}
 
-データ アプリは、特定のアプリケーションのデータにアクセスするために使用できるエンドポイントのグループです。データ アプリを作成するには、次の手順を実行します。
+データ アプリは、特定のアプリケーションのデータにアクセスするために使用できるエンドポイントのコレクションです。データ アプリを作成するには、次の手順を実行します。
 
 1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、 をクリックします。<mdsvgicon name="icon-left-data-service">左側のナビゲーション ペインの**データ サービス**。</mdsvgicon>
 
@@ -37,7 +37,7 @@ summary: Learn how to use TiDB Cloud Data Service to access your data with HTTPS
 
     3.  データ アプリの構成ファイルを保存するターゲット リポジトリ、ブランチ、ディレクトリを指定します。
 
-    > **ノート：**
+    > **注記：**
     >
     > -   ディレクトリはスラッシュ ( `/` ) で始まる必要があります。たとえば、 `/mydata` 。指定したディレクトリがターゲット リポジトリおよびブランチに存在しない場合は、自動的に作成されます。
     > -   リポジトリ、ブランチ、ディレクトリの組み合わせによって構成ファイルのパスが識別されます。このパスはデータ アプリ間で一意である必要があります。指定したパスがすでに別のデータ アプリで使用されている場合は、代わりに新しいパスを指定する必要があります。そうしないと、現在のデータ アプリのTiDB Cloudコンソールで構成されたエンドポイントによって、指定したパス内のファイルが上書きされます。
@@ -46,7 +46,7 @@ summary: Learn how to use TiDB Cloud Data Service to access your data with HTTPS
 
 6.  データ アプリを GitHub に接続するように構成している場合は、指定した GitHub ディレクトリを確認してください。 [データアプリ構成ファイル](/tidb-cloud/data-service-app-config-files.md) `tidb-cloud-data-service`までにディレクトリにコミットされていることがわかります。これは、データ アプリが GitHub に正常に接続されていることを意味します。
 
-    新しいデータ アプリでは、**自動同期とデプロイメント**および**ドラフトのレビュー**がデフォルトで有効になっているため、 TiDB Cloudコンソールと GitHub の間でデータ アプリの変更を簡単に同期し、デプロイ前に変更をレビューできます。 GitHub 統合の詳細については、 [データ アプリの変更を GitHub で自動的にデプロイ](/tidb-cloud/data-service-manage-github-connection.md)を参照してください。
+    新しいデータ アプリでは、**自動同期とデプロイメント**および**ドラフトのレビュー**がデフォルトで有効になっているため、 TiDB Cloudコンソールと GitHub の間でデータ アプリの変更を簡単に同期し、デプロイメント前に変更をレビューできます。 GitHub 統合の詳細については、 [データ アプリの変更を GitHub で自動的にデプロイ](/tidb-cloud/data-service-manage-github-connection.md)を参照してください。
 
 ## ステップ 2. エンドポイントを開発する {#step-2-develop-an-endpoint}
 
@@ -66,10 +66,6 @@ summary: Learn how to use TiDB Cloud Data Service to access your data with HTTPS
 
 -   **リクエストメソッド**: エンドポイントの HTTP メソッド。 `GET`を使用してデータを取得し、 `POST`を使用してデータを作成または挿入し、 `PUT`使用してデータを更新または変更し、 `DELETE`を使用してデータを削除できます。
 
--   **Timeout(ms)** : エンドポイントのタイムアウト。
-
--   **Max Rows** : エンドポイントが操作または返すことができる最大行数。
-
 エンドポイントのプロパティの詳細については、 [プロパティの構成](/tidb-cloud/data-service-manage-endpoint.md#configure-properties)を参照してください。
 
 ### SQL ステートメントを作成する {#write-sql-statements}
@@ -78,7 +74,7 @@ SQL エディター (**データ サービス**ページの中央のペイン) �
 
 1.  クラスターを選択します。
 
-    > **ノート：**
+    > **注記：**
     >
     > データ アプリにリンクされているクラスターのみがドロップダウン リストに表示されます。リンクされたクラスターを管理するには、 [リンクされたクラスターを管理する](/tidb-cloud/data-service-manage-data-app.md#manage-linked-data-sources)を参照してください。
 
@@ -92,7 +88,7 @@ SQL エディター (**データ サービス**ページの中央のペイン) �
 
     パラメーターを定義するには、SQL ステートメントに`${ID}`のような変数プレースホルダーとして挿入します。たとえば、 `SELECT * FROM table_name WHERE id = ${ID}` 。次に、右側のペインの**「Params」**タブをクリックして、パラメータ定義とテスト値を変更できます。
 
-    > **ノート：**
+    > **注記：**
     >
     > -   パラメータ名では大文字と小文字が区別されます。
     > -   このパラメーターをテーブル名または列名として使用することはできません。
@@ -163,33 +159,29 @@ TiDB Cloudは、エンドポイントの呼び出しに役立つコード サン
     Curl コード例の例は次のとおりです。
 
     <SimpleTab>
-     <div label="Test Environment">
+      <div label="Test Environment">
+        エンドポイントのドラフト バージョンを呼び出すには、 `endpoint-type: draft`ヘッダーを追加する必要があります。
 
-    エンドポイントのドラフト バージョンを呼び出すには、 `endpoint-type: draft`ヘッダーを追加する必要があります。
+        ```bash
+        curl --digest --user '<Public Key>:<Private Key>' \
+          --request GET 'https://<region>.data.tidbcloud.com/api/v1beta/app/<App ID>/endpoint/<Endpoint Path>' \
+          --header 'endpoint-type: draft'
+        ```
+      </div>
 
-    ```bash
-    curl --digest --user '<Public Key>:<Private Key>' \
-      --request GET 'https://<region>.data.tidbcloud.com/api/v1beta/app/<App ID>/endpoint/<Endpoint Path>' \
-      --header 'endpoint-type: draft'
-    ```
+      <div label="Online Environment">
+        オンライン環境でコード例を確認する前に、まずエンドポイントをデプロイする必要があります。
 
-    </div>
+        現在のオンライン バージョンのエンドポイントを呼び出すには、次のコマンドを使用します。
 
-    <div label="Online Environment">
+        ```bash
+        curl --digest --user '<Public Key>:<Private Key>' \
+          --request GET 'https://<region>.data.tidbcloud.com/api/v1beta/app/<App ID>/endpoint/<Endpoint Path>'
+        ```
+      </div>
+    </SimpleTab>
 
-    オンライン環境でコード例を確認する前に、まずエンドポイントをデプロイする必要があります。
-
-    現在のオンライン バージョンのエンドポイントを呼び出すには、次のコマンドを使用します。
-
-    ```bash
-    curl --digest --user '<Public Key>:<Private Key>' \
-      --request GET 'https://<region>.data.tidbcloud.com/api/v1beta/app/<App ID>/endpoint/<Endpoint Path>'
-    ```
-
-    </div>
-     </SimpleTab>
-
-    > **ノート：**
+    > **注記：**
     >
     > -   リージョン ドメイン`<region>.data.tidbcloud.com`をリクエストすると、TiDB クラスターが配置されているリージョンのエンドポイントに直接アクセスできます。
     > -   あるいは、リージョンを指定せずにグローバル ドメイン`data.tidbcloud.com`をリクエストすることもできます。この方法で、 TiDB Cloudはリクエストを内部的にターゲット リージョンにリダイレクトしますが、これにより追加のレイテンシーが発生する可能性があります。この方法を選択した場合は、エンドポイントを呼び出すときに必ず`--location-trusted`オプションをcurl コマンドに追加してください。

@@ -12,7 +12,7 @@ summary: Learn how to quickly get started with the TiDB platform and see if TiDB
 
 さらに、TiDB の機能を[TiDB プレイグラウンド](https://play.tidbcloud.com/?utm_source=docs&#x26;utm_medium=tidb_quick_start)で試すことができます。
 
-> **ノート：**
+> **注記：**
 >
 > このガイドで提供されるデプロイメント方法は、クイック スタート**のみを目的として**おり、本番**向けではありません**。
 >
@@ -25,245 +25,214 @@ summary: Learn how to quickly get started with the TiDB platform and see if TiDB
 -   シナリオ: 単一の macOS または Linuxサーバーを使用して、テスト用にローカル TiDB クラスターを迅速にデプロイします。このようなクラスターをデプロイすることで、TiDB の基本的なアーキテクチャと、TiDB、TiKV、PD、モニタリング コンポーネントなどのそのコンポーネントの操作を学ぶことができます。
 
 <SimpleTab>
-<div label="macOS">
+  <div label="macOS">
+    分散システムとして、基本的な TiDB テスト クラスターは通常、2 つの TiDB インスタンス、3 つの TiKV インスタンス、3 つの PD インスタンス、およびオプションのTiFlashインスタンスで構成されます。 TiUP Playground を使用すると、次の手順に従ってテスト クラスターを迅速に構築できます。
 
-分散システムとして、基本的な TiDB テスト クラスターは通常、2 つの TiDB インスタンス、3 つの TiKV インスタンス、3 つの PD インスタンス、およびオプションのTiFlashインスタンスで構成されます。 TiUP Playground を使用すると、次の手順に従ってテスト クラスターを迅速に構築できます。
-
-1.  TiUPをダウンロードしてインストールします。
-
-    {{< copyable "" >}}
-
-    ```shell
-    curl --proto '=https' --tlsv1.2 -sSf https://tiup-mirrors.pingcap.com/install.sh | sh
-    ```
-
-    次のメッセージが表示されたら、 TiUP は正常にインストールされています。
-
-    ```log
-    Successfully set mirror to https://tiup-mirrors.pingcap.com
-    Detected shell: zsh
-    Shell profile:  /Users/user/.zshrc
-    /Users/user/.zshrc has been modified to add tiup to PATH
-    open a new terminal or source /Users/user/.zshrc to use it
-    Installed path: /Users/user/.tiup/bin/tiup
-    ===============================================
-    Have a try:     tiup playground
-    ===============================================
-    ```
-
-    上記の出力のシェル プロファイル パスに注目してください。次のステップでそのパスを使用する必要があります。
-
-2.  グローバル環境変数を宣言します。
-
-    > **ノート：**
-    >
-    > インストール後、 TiUP は対応するシェル プロファイル ファイルの絶対パスを表示します。以下の`source`コマンドの`${your_shell_profile}`パスに合わせて変更する必要があります。この場合、 `${your_shell_profile}`ステップ 1 の出力からの`/Users/user/.zshrc`です。
-
-    {{< copyable "" >}}
-
-    ```shell
-    source ${your_shell_profile}
-    ```
-
-3.  現在のセッションでクラスターを開始します。
-
-    -   1 つの TiDB インスタンス、1 つの TiKV インスタンス、1 つの PD インスタンス、および 1 つのTiFlashインスタンスを含む最新バージョンの TiDB クラスターを起動するには、次のコマンドを実行します。
-
-        {{< copyable "" >}}
+    1.  TiUPをダウンロードしてインストールします。
 
         ```shell
-        tiup playground
+        curl --proto '=https' --tlsv1.2 -sSf https://tiup-mirrors.pingcap.com/install.sh | sh
         ```
 
-    -   TiDB バージョンと各コンポーネントのインスタンス数を指定するには、次のようなコマンドを実行します。
-
-        {{< copyable "" >}}
-
-        ```shell
-        tiup playground v7.1.1 --db 2 --pd 3 --kv 3
-        ```
-
-        このコマンドは、v7.1.1 などのバージョン クラスターをローカル マシンにダウンロードして起動します。最新バージョンを表示するには、 `tiup list tidb`を実行します。
-
-        このコマンドは、クラスターのアクセス方法を返します。
+        次のメッセージが表示されたら、 TiUP は正常にインストールされています。
 
         ```log
-        CLUSTER START SUCCESSFULLY, Enjoy it ^-^
-        To connect TiDB: mysql --comments --host 127.0.0.1 --port 4001 -u root -p (no password)
-        To connect TiDB: mysql --comments --host 127.0.0.1 --port 4000 -u root -p (no password)
-        To view the dashboard: http://127.0.0.1:2379/dashboard
-        PD client endpoints: [127.0.0.1:2379 127.0.0.1:2382 127.0.0.1:2384]
-        To view Prometheus: http://127.0.0.1:9090
-        To view Grafana: http://127.0.0.1:3000
+        Successfully set mirror to https://tiup-mirrors.pingcap.com
+        Detected shell: zsh
+        Shell profile:  /Users/user/.zshrc
+        /Users/user/.zshrc has been modified to add tiup to PATH
+        open a new terminal or source /Users/user/.zshrc to use it
+        Installed path: /Users/user/.tiup/bin/tiup
+        ===============================================
+        Have a try:     tiup playground
+        ===============================================
         ```
 
-        > **ノート：**
+        上記の出力のシェル プロファイル パスに注目してください。次のステップでそのパスを使用する必要があります。
+
+    2.  グローバル環境変数を宣言します。
+
+        > **注記：**
         >
-        > -   v5.2.0 以降、TiDB は Apple M1 チップを使用するマシンでの`tiup playground`の実行をサポートします。
-        > -   この方法で操作されたプレイグラウンドの場合、テスト デプロイメントが完了した後、 TiUP は元のクラスター データをクリーンアップします。コマンドを再実行すると、新しいクラスターが取得されます。
-        > -   データをstorage上に保持したい場合は、 `tiup --tag <your-tag> playground ...`を実行します。詳細については、 [TiUPリファレンス](/tiup/tiup-reference.md#-t---tag)ガイドを参照してください。
-
-4.  新しいセッションを開始して TiDB にアクセスします。
-
-    -   TiUPクライアントを使用して TiDB に接続します。
-
-        {{< copyable "" >}}
+        > インストール後、 TiUP は対応するシェル プロファイル ファイルの絶対パスを表示します。以下の`source`コマンドの`${your_shell_profile}`パスに合わせて変更する必要があります。この場合、 `${your_shell_profile}`ステップ 1 の出力からの`/Users/user/.zshrc`です。
 
         ```shell
-        tiup client
+        source ${your_shell_profile}
         ```
 
-    -   あるいは、MySQL クライアントを使用して TiDB に接続することもできます。
+    3.  現在のセッションでクラスターを開始します。
 
-        {{< copyable "" >}}
+        -   1 つの TiDB インスタンス、1 つの TiKV インスタンス、1 つの PD インスタンス、および 1 つのTiFlashインスタンスを含む最新バージョンの TiDB クラスターを起動するには、次のコマンドを実行します。
 
-        ```shell
-        mysql --host 127.0.0.1 --port 4000 -u root
-        ```
+            ```shell
+            tiup playground
+            ```
 
-5.  [http://127.0.0.1:9090](http://127.0.0.1:9090)で TiDB の Prometheus ダッシュボードにアクセスします。
+        -   TiDB バージョンと各コンポーネントのインスタンス数を指定するには、次のようなコマンドを実行します。
 
-6.  [http://127.0.0.1:2379/ダッシュボード](http://127.0.0.1:2379/dashboard)で[TiDB ダッシュボード](/dashboard/dashboard-intro.md)にアクセスします。デフォルトのユーザー名は`root`で、パスワードは空です。
+            ```shell
+            tiup playground v7.1.1 --db 2 --pd 3 --kv 3
+            ```
 
-7.  [http://127.0.0.1:3000](http://127.0.0.1:3000)を通じて TiDB の Grafana ダッシュボードにアクセスします。デフォルトのユーザー名とパスワードは両方とも`admin`です。
+            このコマンドは、v7.1.1 などのバージョン クラスターをローカル マシンにダウンロードして起動します。最新バージョンを表示するには、 `tiup list tidb`を実行します。
 
-8.  (オプション) 分析用に[データをTiFlashにロードする](/tiflash/tiflash-overview.md#use-tiflash) 。
+            このコマンドは、クラスターのアクセス方法を返します。
 
-9.  テスト展開後にクラスターをクリーンアップします。
+            ```log
+            CLUSTER START SUCCESSFULLY, Enjoy it ^-^
+            To connect TiDB: mysql --comments --host 127.0.0.1 --port 4001 -u root -p (no password)
+            To connect TiDB: mysql --comments --host 127.0.0.1 --port 4000 -u root -p (no password)
+            To view the dashboard: http://127.0.0.1:2379/dashboard
+            PD client endpoints: [127.0.0.1:2379 127.0.0.1:2382 127.0.0.1:2384]
+            To view Prometheus: http://127.0.0.1:9090
+            To view Grafana: http://127.0.0.1:3000
+            ```
 
-    1.  <kbd>Control+C</kbd>を押して、上記の TiDB サービスを停止します。
+            > **注記：**
+            >
+            > -   v5.2.0 以降、TiDB は Apple M1 チップを使用するマシンでの`tiup playground`の実行をサポートします。
+            > -   この方法で操作されたプレイグラウンドの場合、テスト デプロイメントが完了した後、 TiUP は元のクラスター データをクリーンアップします。コマンドを再実行すると、新しいクラスターが取得されます。
+            > -   データをstorage上に保持したい場合は、 `tiup --tag <your-tag> playground ...`を実行します。詳細については、 [TiUPリファレンス](/tiup/tiup-reference.md#-t---tag)ガイドを参照してください。
 
-    2.  サービスを停止した後、次のコマンドを実行します。
+    4.  新しいセッションを開始して TiDB にアクセスします。
 
-        {{< copyable "" >}}
+        -   TiUPクライアントを使用して TiDB に接続します。
 
-        ```shell
-        tiup clean --all
-        ```
+            ```shell
+            tiup client
+            ```
 
-> **ノート：**
->
-> TiUP Playground はデフォルトで`127.0.0.1`をリッスンし、サービスはローカルでのみアクセス可能です。サービスに外部からアクセスできるようにする場合は、 `--host`パラメータを使用してリスニング アドレスを指定し、ネットワーク インターフェイス カード (NIC) を外部からアクセス可能な IP アドレスにバインドします。
+        -   あるいは、MySQL クライアントを使用して TiDB に接続することもできます。
 
-</div>
-<div label="Linux">
+            ```shell
+            mysql --host 127.0.0.1 --port 4000 -u root
+            ```
 
-分散システムとして、基本的な TiDB テスト クラスターは通常、2 つの TiDB インスタンス、3 つの TiKV インスタンス、3 つの PD インスタンス、およびオプションのTiFlashインスタンスで構成されます。 TiUP Playground を使用すると、次の手順に従ってテスト クラスターを迅速に構築できます。
+    5.  [http://127.0.0.1:9090](http://127.0.0.1:9090)で TiDB の Prometheus ダッシュボードにアクセスします。
 
-1.  TiUPをダウンロードしてインストールします。
+    6.  [http://127.0.0.1:2379/ダッシュボード](http://127.0.0.1:2379/dashboard)で[TiDB ダッシュボード](/dashboard/dashboard-intro.md)にアクセスします。デフォルトのユーザー名は`root`で、パスワードは空です。
 
-    {{< copyable "" >}}
+    7.  [http://127.0.0.1:3000](http://127.0.0.1:3000)を通じて TiDB の Grafana ダッシュボードにアクセスします。デフォルトのユーザー名とパスワードは両方とも`admin`です。
 
-    ```shell
-    curl --proto '=https' --tlsv1.2 -sSf https://tiup-mirrors.pingcap.com/install.sh | sh
-    ```
+    8.  (オプション) 分析用に[データをTiFlashにロードする](/tiflash/tiflash-overview.md#use-tiflash) 。
 
-    次のメッセージが表示されたら、 TiUP は正常にインストールされています。
+    9.  テスト展開後にクラスターをクリーンアップします。
 
-    ```log
-    Successfully set mirror to https://tiup-mirrors.pingcap.com
-    Detected shell: zsh
-    Shell profile:  /Users/user/.zshrc
-    /Users/user/.zshrc has been modified to add tiup to PATH
-    open a new terminal or source /Users/user/.zshrc to use it
-    Installed path: /Users/user/.tiup/bin/tiup
-    ===============================================
-    Have a try:     tiup playground
-    ===============================================
-    ```
+        1.  <kbd>Control+C</kbd>を押して、上記の TiDB サービスを停止します。
 
-    上記の出力のシェル プロファイル パスに注目してください。次のステップでそのパスを使用する必要があります。
+        2.  サービスを停止した後、次のコマンドを実行します。
 
-2.  グローバル環境変数を宣言します。
+            ```shell
+            tiup clean --all
+            ```
 
-    > **ノート：**
+    > **注記：**
     >
-    > インストール後、 TiUP は対応するシェル プロファイル ファイルの絶対パスを表示します。以下の`source`コマンドの`${your_shell_profile}`パスに合わせて変更する必要があります。
+    > TiUP Playground はデフォルトで`127.0.0.1`をリッスンし、サービスはローカルでのみアクセス可能です。サービスに外部からアクセスできるようにする場合は、 `--host`パラメータを使用してリスニング アドレスを指定し、ネットワーク インターフェイス カード (NIC) を外部からアクセス可能な IP アドレスにバインドします。
+  </div>
 
-    {{< copyable "" >}}
+  <div label="Linux">
+    分散システムとして、基本的な TiDB テスト クラスターは通常、2 つの TiDB インスタンス、3 つの TiKV インスタンス、3 つの PD インスタンス、およびオプションのTiFlashインスタンスで構成されます。 TiUP Playground を使用すると、次の手順に従ってテスト クラスターを迅速に構築できます。
 
-    ```shell
-    source ${your_shell_profile}
-    ```
-
-3.  現在のセッションでクラスターを開始します。
-
-    -   1 つの TiDB インスタンス、1 つの TiKV インスタンス、1 つの PD インスタンス、および 1 つのTiFlashインスタンスを含む最新バージョンの TiDB クラスターを起動するには、次のコマンドを実行します。
-
-        {{< copyable "" >}}
+    1.  TiUPをダウンロードしてインストールします。
 
         ```shell
-        tiup playground
+        curl --proto '=https' --tlsv1.2 -sSf https://tiup-mirrors.pingcap.com/install.sh | sh
         ```
 
-    -   TiDB バージョンと各コンポーネントのインスタンス数を指定するには、次のようなコマンドを実行します。
-
-        {{< copyable "" >}}
-
-        ```shell
-        tiup playground v7.1.1 --db 2 --pd 3 --kv 3
-        ```
-
-        このコマンドは、v7.1.1 などのバージョン クラスターをローカル マシンにダウンロードして起動します。最新バージョンを表示するには、 `tiup list tidb`を実行します。
-
-        このコマンドは、クラスターのアクセス方法を返します。
+        次のメッセージが表示されたら、 TiUP は正常にインストールされています。
 
         ```log
-        CLUSTER START SUCCESSFULLY, Enjoy it ^-^
-        To connect TiDB: mysql --host 127.0.0.1 --port 4000 -u root -p (no password) --comments
-        To view the dashboard: http://127.0.0.1:2379/dashboard
-        PD client endpoints: [127.0.0.1:2379]
-        To view the Prometheus: http://127.0.0.1:9090
-        To view the Grafana: http://127.0.0.1:3000
+        Successfully set mirror to https://tiup-mirrors.pingcap.com
+        Detected shell: zsh
+        Shell profile:  /Users/user/.zshrc
+        /Users/user/.zshrc has been modified to add tiup to PATH
+        open a new terminal or source /Users/user/.zshrc to use it
+        Installed path: /Users/user/.tiup/bin/tiup
+        ===============================================
+        Have a try:     tiup playground
+        ===============================================
         ```
 
-        > **ノート：**
+        上記の出力のシェル プロファイル パスに注目してください。次のステップでそのパスを使用する必要があります。
+
+    2.  グローバル環境変数を宣言します。
+
+        > **注記：**
         >
-        > この方法で操作されたプレイグラウンドの場合、テスト デプロイメントが完了した後、 TiUP は元のクラスター データをクリーンアップします。コマンドを再実行すると、新しいクラスターが取得されます。データをstorage上に保持したい場合は、 `tiup --tag <your-tag> playground ...`を実行します。詳細については、 [TiUPリファレンス](/tiup/tiup-reference.md#-t---tag)ガイドを参照してください。
-
-4.  新しいセッションを開始して TiDB にアクセスします。
-
-    -   TiUPクライアントを使用して TiDB に接続します。
-
-        {{< copyable "" >}}
+        > インストール後、 TiUP は対応するシェル プロファイル ファイルの絶対パスを表示します。以下の`source`コマンドの`${your_shell_profile}`パスに合わせて変更する必要があります。
 
         ```shell
-        tiup client
+        source ${your_shell_profile}
         ```
 
-    -   あるいは、MySQL クライアントを使用して TiDB に接続することもできます。
+    3.  現在のセッションでクラスターを開始します。
 
-        {{< copyable "" >}}
+        -   1 つの TiDB インスタンス、1 つの TiKV インスタンス、1 つの PD インスタンス、および 1 つのTiFlashインスタンスを含む最新バージョンの TiDB クラスターを起動するには、次のコマンドを実行します。
 
-        ```shell
-        mysql --host 127.0.0.1 --port 4000 -u root
-        ```
+            ```shell
+            tiup playground
+            ```
 
-5.  [http://127.0.0.1:9090](http://127.0.0.1:9090)で TiDB の Prometheus ダッシュボードにアクセスします。
+        -   TiDB バージョンと各コンポーネントのインスタンス数を指定するには、次のようなコマンドを実行します。
 
-6.  [http://127.0.0.1:2379/ダッシュボード](http://127.0.0.1:2379/dashboard)で[TiDB ダッシュボード](/dashboard/dashboard-intro.md)にアクセスします。デフォルトのユーザー名は`root`で、パスワードは空です。
+            ```shell
+            tiup playground v7.1.1 --db 2 --pd 3 --kv 3
+            ```
 
-7.  [http://127.0.0.1:3000](http://127.0.0.1:3000)を通じて TiDB の Grafana ダッシュボードにアクセスします。デフォルトのユーザー名とパスワードは両方とも`admin`です。
+            このコマンドは、v7.1.1 などのバージョン クラスターをローカル マシンにダウンロードして起動します。最新バージョンを表示するには、 `tiup list tidb`を実行します。
 
-8.  (オプション) 分析用に[データをTiFlashにロードする](/tiflash/tiflash-overview.md#use-tiflash) 。
+            このコマンドは、クラスターのアクセス方法を返します。
 
-9.  テスト展開後にクラスターをクリーンアップします。
+            ```log
+            CLUSTER START SUCCESSFULLY, Enjoy it ^-^
+            To connect TiDB: mysql --host 127.0.0.1 --port 4000 -u root -p (no password) --comments
+            To view the dashboard: http://127.0.0.1:2379/dashboard
+            PD client endpoints: [127.0.0.1:2379]
+            To view the Prometheus: http://127.0.0.1:9090
+            To view the Grafana: http://127.0.0.1:3000
+            ```
 
-    1.  <kbd>Control+C</kbd>を押してプロセスを停止します。
+            > **注記：**
+            >
+            > この方法で操作されたプレイグラウンドの場合、テスト デプロイメントが完了した後、 TiUP は元のクラスター データをクリーンアップします。コマンドを再実行すると、新しいクラスターが取得されます。データをstorage上に保持したい場合は、 `tiup --tag <your-tag> playground ...`を実行します。詳細については、 [TiUPリファレンス](/tiup/tiup-reference.md#-t---tag)ガイドを参照してください。
 
-    2.  サービスを停止した後、次のコマンドを実行します。
+    4.  新しいセッションを開始して TiDB にアクセスします。
 
-        {{< copyable "" >}}
+        -   TiUPクライアントを使用して TiDB に接続します。
 
-        ```shell
-        tiup clean --all
-        ```
+            ```shell
+            tiup client
+            ```
 
-> **ノート：**
->
-> TiUP Playground はデフォルトで`127.0.0.1`をリッスンし、サービスはローカルでのみアクセス可能です。サービスに外部からアクセスできるようにする場合は、 `--host`パラメータを使用してリスニング アドレスを指定し、ネットワーク インターフェイス カード (NIC) を外部からアクセス可能な IP アドレスにバインドします。
+        -   あるいは、MySQL クライアントを使用して TiDB に接続することもできます。
 
-</div>
+            ```shell
+            mysql --host 127.0.0.1 --port 4000 -u root
+            ```
+
+    5.  [http://127.0.0.1:9090](http://127.0.0.1:9090)で TiDB の Prometheus ダッシュボードにアクセスします。
+
+    6.  [http://127.0.0.1:2379/ダッシュボード](http://127.0.0.1:2379/dashboard)で[TiDB ダッシュボード](/dashboard/dashboard-intro.md)にアクセスします。デフォルトのユーザー名は`root`で、パスワードは空です。
+
+    7.  [http://127.0.0.1:3000](http://127.0.0.1:3000)を通じて TiDB の Grafana ダッシュボードにアクセスします。デフォルトのユーザー名とパスワードは両方とも`admin`です。
+
+    8.  (オプション) 分析用に[データをTiFlashにロードする](/tiflash/tiflash-overview.md#use-tiflash) 。
+
+    9.  テスト展開後にクラスターをクリーンアップします。
+
+        1.  <kbd>Control+C</kbd>を押してプロセスを停止します。
+
+        2.  サービスを停止した後、次のコマンドを実行します。
+
+            ```shell
+            tiup clean --all
+            ```
+
+    > **注記：**
+    >
+    > TiUP Playground はデフォルトで`127.0.0.1`をリッスンし、サービスはローカルでのみアクセス可能です。サービスに外部からアクセスできるようにする場合は、 `--host`パラメータを使用してリスニング アドレスを指定し、ネットワーク インターフェイス カード (NIC) を外部からアクセス可能な IP アドレスにバインドします。
+  </div>
 </SimpleTab>
 
 ## 単一マシン上で本番デプロイメントをシミュレートする {#simulate-production-deployment-on-a-single-machine}
@@ -272,7 +241,7 @@ summary: Learn how to quickly get started with the TiDB platform and see if TiDB
 
 このセクションでは、 TiUPで最小のトポロジの YAML ファイルを使用して TiDB クラスターをデプロイする方法について説明します。
 
-### 準備 {#prepare}
+### 準備する {#prepare}
 
 TiDB クラスターをデプロイする前に、ターゲット マシンが次の要件を満たしていることを確認してください。
 
@@ -281,7 +250,7 @@ TiDB クラスターをデプロイする前に、ターゲット マシンが�
 
 最小の TiDB クラスター トポロジは、次のインスタンスで構成されます。
 
-> **ノート：**
+> **注記：**
 >
 > インスタンスの IP アドレスは例としてのみ示されています。実際の展開では、IP アドレスを実際の IP アドレスに置き換えます。
 
@@ -304,13 +273,11 @@ TiDB クラスターをデプロイする前に、ターゲット マシンが�
 
 ### デプロイ {#deploy}
 
-> **ノート：**
+> **注記：**
 >
 > 対象マシンには通常ユーザーまたは`root`ユーザーとしてログインできます。次の手順では、例として`root`ユーザーを使用します。
 
 1.  TiUPをダウンロードしてインストールします。
-
-    {{< copyable "" >}}
 
     ```shell
     curl --proto '=https' --tlsv1.2 -sSf https://tiup-mirrors.pingcap.com/install.sh | sh
@@ -318,11 +285,9 @@ TiDB クラスターをデプロイする前に、ターゲット マシンが�
 
 2.  グローバル環境変数を宣言します。
 
-    > **ノート：**
+    > **注記：**
     >
     > インストール後、 TiUP は対応するシェル プロファイル ファイルの絶対パスを表示します。以下の`source`コマンドの`${your_shell_profile}`パスに合わせて変更する必要があります。
-
-    {{< copyable "" >}}
 
     ```shell
     source ${your_shell_profile}
@@ -330,15 +295,11 @@ TiDB クラスターをデプロイする前に、ターゲット マシンが�
 
 3.  TiUPのクラスターコンポーネントをインストールします。
 
-    {{< copyable "" >}}
-
     ```shell
     tiup cluster
     ```
 
 4.  TiUPクラスターが既にマシンにインストールされている場合は、ソフトウェア バージョンを更新します。
-
-    {{< copyable "" >}}
 
     ```shell
     tiup update --self && tiup update cluster
@@ -349,8 +310,6 @@ TiDB クラスターをデプロイする前に、ターゲット マシンが�
     1.  `/etc/ssh/sshd_config`を変更し、 `MaxSessions` ～ `20`を設定します。
     2.  `sshd`サービスを再起動します。
 
-        {{< copyable "" >}}
-
         ```shell
         service sshd restart
         ```
@@ -358,8 +317,6 @@ TiDB クラスターをデプロイする前に、ターゲット マシンが�
 6.  クラスターを作成して起動します。
 
     次のテンプレートに従って構成ファイルを編集し、 `topo.yaml`という名前を付けます。
-
-    {{< copyable "" >}}
 
     ```yaml
     # # Global variables are applied to all deployments and used as the default value of
@@ -428,8 +385,6 @@ TiDB クラスターをデプロイする前に、ターゲット マシンが�
 
 7.  クラスター展開コマンドを実行します。
 
-    {{< copyable "" >}}
-
     ```shell
     tiup cluster deploy <cluster-name> <version> ./topo.yaml --user root -p
     ```
@@ -438,7 +393,7 @@ TiDB クラスターをデプロイする前に、ターゲット マシンが�
     -   `<version>` : TiDB クラスターのバージョンを設定します ( `v7.1.1`など)。 `tiup list tidb`コマンドを実行すると、サポートされているすべての TiDB バージョンを確認できます。
     -   `-p` : ターゲットマシンへの接続に使用するパスワードを指定します。
 
-        > **ノート：**
+        > **注記：**
         >
         > 秘密キーを使用する場合は、 `-i`までのキーのパスを指定できます。 `-i`と`-p`を同時に使用しないでください。
 
@@ -451,8 +406,6 @@ TiDB クラスターをデプロイする前に、ターゲット マシンが�
 
 8.  クラスターを開始します。
 
-    {{< copyable "" >}}
-
     ```shell
     tiup cluster start <cluster-name>
     ```
@@ -461,15 +414,11 @@ TiDB クラスターをデプロイする前に、ターゲット マシンが�
 
     -   MySQL クライアントをインストールします。すでにインストールされている場合は、この手順をスキップしてください。
 
-        {{< copyable "" >}}
-
         ```shell
         yum -y install mysql
         ```
 
     -   TiDB にアクセスします。パスワードが空です:
-
-        {{< copyable "" >}}
 
         ```shell
         mysql -h 10.0.1.1 -P 4000 -u root
@@ -481,15 +430,11 @@ TiDB クラスターをデプロイする前に、ターゲット マシンが�
 
     -   現在デプロイされているクラスターのリストを表示するには、次の手順を実行します。
 
-        {{< copyable "" >}}
-
         ```shell
         tiup cluster list
         ```
 
     -   クラスターのトポロジーとステータスを表示するには、次の手順を実行します。
-
-        {{< copyable "" >}}
 
         ```shell
         tiup cluster display <cluster-name>

@@ -8,6 +8,28 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 このページには 2023 年[TiDB Cloud](https://www.pingcap.com/tidb-cloud/)のリリースノートが記載されています。
 
+## 2023 年 8 月 23 日 {#august-23-2023}
+
+**一般的な変更点**
+
+-   [TiDB専用](/tidb-cloud/select-cluster-tier.md#tidb-dedicated)クラスターの Google Cloud [プライベートサービス接続](https://cloud.google.com/vpc/docs/private-service-connect)をサポートします。
+
+    プライベート エンドポイントを作成し、Google Cloud でホストされている TiDB 専用クラスタへの安全な接続を確立できるようになりました。
+
+    主な利点：
+
+    -   直感的な操作: わずか数ステップでプライベート エンドポイントを作成できます。
+    -   セキュリティの強化: 安全な接続を確立してデータを保護します。
+    -   パフォーマンスの向上: 低遅延で高帯域幅の接続を提供します。
+
+    詳細については、 [プライベート エンドポイント経由で Google Cloud に接続する](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)を参照してください。
+
+-   チェンジフィードを使用した[TiDB専用](/tidb-cloud/select-cluster-tier.md#tidb-dedicated)クラスターから[Google クラウド ストレージ (GCS)](https://cloud.google.com/storage)へのデータのストリーミングをサポートします。
+
+    自分のアカウントのバケットを使用し、正確に調整された権限を提供することで、 TiDB Cloudから GCS にデータをストリーミングできるようになりました。データを GCS にレプリケートした後、必要に応じてデータの変更を分析できます。
+
+    詳細については、 [クラウドストレージにシンクする](/tidb-cloud/changefeed-sink-to-cloud-storage.md)を参照してください。
+
 ## 2023 年 8 月 15 日 {#august-15-2023}
 
 **一般的な変更点**
@@ -62,7 +84,7 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
     詳細については、 [OpenAPI仕様を使用する](/tidb-cloud/data-service-manage-data-app.md#use-the-openapi-specification)および[Next.js で OpenAPI 仕様を使用する](/tidb-cloud/data-service-oas-with-nextjs.md)を参照してください。
 
--   Postman でのデータ アプリの実行をサポートします。
+-   [郵便屋さん](https://www.postman.com/)でデータ アプリの実行をサポートします。
 
     Postman の統合により、データ アプリのエンドポイントをコレクションとして好みのワークスペースにインポートできるようになります。これにより、Postman Web アプリとデスクトップ アプリの両方をサポートする強化されたコラボレーションとシームレスな API テストの恩恵を受けることができます。
 
@@ -147,7 +169,7 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 -   [TiDB サーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-serverless)が一般提供になりました。
 
--   TiDB Bot (ベータ版) は、多言語サポート、年中無休のリアルタイム応答、統合されたドキュメント アクセスを提供する OpenAI 搭載チャットボットです。
+-   TiDB Bot (ベータ) は、多言語サポート、24 時間年中無休のリアルタイム応答、統合されたドキュメント アクセスを提供する OpenAI 搭載チャットボットです。
 
     TiDB ボットには次の利点があります。
 
@@ -163,7 +185,7 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
     [TiDB Cloudコンソール](/tidb-cloud/branch-manage.md)または[TiDB CloudCLI](/tidb-cloud/ticloud-branch-create.md)のいずれかを使用して、2023 年 7 月 5 日以降に作成された TiDB サーバーレス クラスターのブランチを作成できます。
 
-    アプリケーション開発に GitHub を使用する場合、TiDB サーバーレス ブランチを GitHub CI/CD パイプラインに統合できます。これにより、本番データベースに影響を与えることなく、ブランチを使用してプル リクエストを自動的にテストできます。詳細については、 [TiDB サーバーレス ブランチング (ベータ版) を GitHub と統合する](/tidb-cloud/branch-github-integration.md)を参照してください。
+    アプリケーション開発に GitHub を使用する場合は、TiDB サーバーレス ブランチを GitHub CI/CD パイプラインに統合できます。これにより、本番データベースに影響を与えることなく、ブランチを使用してプル リクエストを自動的にテストできます。詳細については、 [TiDB サーバーレス ブランチング (ベータ版) を GitHub と統合する](/tidb-cloud/branch-github-integration.md)を参照してください。
 
 -   [TiDB専用](/tidb-cloud/select-cluster-tier.md#tidb-dedicated)クラスターの毎週のバックアップをサポートします。詳細については、 [TiDB 専用データのバックアップと復元](/tidb-cloud/backup-and-restore.md#automatic-backup)を参照してください。
 
@@ -289,7 +311,7 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 -   TiDB Cloudのデータ移行機能の増分データ移行のサポートを強化します。
 
-    binlog位置またはグローバル トランザクション識別子 (GTID) を指定して、指定された位置の後に生成された増分データのみをTiDB Cloudに複製できるようになりました。この機能強化により、特定の要件に合わせて、必要なデータをより柔軟に選択して複製できるようになります。
+    binlog位置またはグローバル トランザクション識別子 (GTID) を指定して、指定された位置以降に生成された増分データのみをTiDB Cloudに複製できるようになりました。この機能強化により、特定の要件に合わせて、必要なデータをより柔軟に選択して複製できるようになります。
 
     詳細は[データ移行を使用して、MySQL 互換データベースからTiDB Cloudに増分データのみを移行する](/tidb-cloud/migrate-incremental-data-from-mysql-using-data-migration.md)を参照してください。
 
@@ -465,11 +487,11 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 **コンソールの変更**
 
--   [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-dedicated)クラスターの[監視](/tidb-cloud/built-in-monitoring.md#view-the-metrics-page)ページを[ノードレベルのリソースメトリック](/tidb-cloud/built-in-monitoring.md#server)を使用するように更新します。
+-   [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-dedicated)クラスターの[監視](/tidb-cloud/built-in-monitoring.md#view-the-metrics-page)ページを更新して、 [ノードレベルのリソースメトリック](/tidb-cloud/built-in-monitoring.md#server)を使用します。
 
     ノードレベルのリソースメトリクスを使用すると、リソース消費をより正確に表示して、購入したサービスの実際の使用状況をより深く理解できます。
 
-    これらのメトリックにアクセスするには、クラスターの[監視](/tidb-cloud/built-in-monitoring.md#view-the-metrics-page)ページに移動し、 **[メトリック]**タブの**[サーバー]**カテゴリを確認します。
+    これらのメトリックにアクセスするには、クラスターの[監視](/tidb-cloud/built-in-monitoring.md#view-the-metrics-page)ページに移動し、 **[メトリック]**タブの [**サーバー]**カテゴリを確認します。
 
 -   **「プロジェクト別集計」**と**「サービス別集計」**の請求項目を再整理し、請求内容をよりわかりやすく[請求する](/tidb-cloud/tidb-cloud-billing.md#billing-details)ページを最適化しました。
 
@@ -486,7 +508,7 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 -   [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-dedicated)クラスターの[アラート](/tidb-cloud/monitor-built-in-alerting.md)ページを導入します。このページには、各Dedicated Tierクラスターのアクティブなアラートとクローズされたアラートの両方がリストされます。
 
-    **[アラート]**ページには次の情報が表示されます。
+    **[アラート]**ページには次の内容が表示されます。
 
     -   直感的でユーザーフレンドリーなユーザーインターフェイス。アラート通知メールを購読していない場合でも、このページでクラスターのアラートを表示できます。
     -   高度なフィルタリング オプションにより、重大度、ステータス、その他の属性に基づいてアラートを迅速に検索して並べ替えることができます。また、過去 7 日間の履歴データを表示できるため、アラート履歴の追跡が容易になります。
@@ -542,7 +564,7 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 -   [Serverless Tier](/tidb-cloud/select-cluster-tier.md#tidb-serverless)クラスターの[遅いクエリ](/tidb-cloud/tune-performance.md#slow-query)ページ用の新しいネイティブ Web インフラストラクチャをリリースします。
 
-    この新しいインフラストラクチャを使用すると、 [遅いクエリ](/tidb-cloud/tune-performance.md#slow-query)ページ内を簡単に移動し、より直感的かつ効率的な方法で必要な情報にアクセスできます。新しいインフラストラクチャは UX に関する多くの問題も解決し、SQL 診断プロセスをより使いやすくしています。
+    この新しいインフラストラクチャを使用すると、 [遅いクエリ](/tidb-cloud/tune-performance.md#slow-query)ページ内を簡単に移動し、より直観的かつ効率的な方法で必要な情報にアクセスできます。新しいインフラストラクチャは UX に関する多くの問題も解決し、SQL 診断プロセスをより使いやすくしています。
 
 ## 2023 年 3 月 21 日 {#march-21-2023}
 

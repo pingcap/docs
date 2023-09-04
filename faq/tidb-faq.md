@@ -5,27 +5,17 @@ summary: Learn about the most frequently asked questions (FAQs) relating to TiDB
 
 # TiDBアーキテクチャよくある質問 {#tidb-architecture-faqs}
 
-<!-- markdownlint-disable MD026 -->
-
 このドキュメントには、TiDB に関するよくある質問がリストされています。
 
 ## TiDB の概要とアーキテクチャ {#tidb-introduction-and-architecture}
 
 ### TiDBとは何ですか？ {#what-is-tidb}
 
-<!-- Localization note for TiDB:
-
-- English: use distributed SQL, and start to emphasize HTAP
-- Chinese: can keep "NewSQL" and emphasize one-stop real-time HTAP ("一栈式实时 HTAP")
-- Japanese: use NewSQL because it is well-recognized
-
--->
-
 [TiDB](https://github.com/pingcap/tidb)は、ハイブリッド トランザクションおよび分析処理 (HTAP) ワークロードをサポートするオープンソースの分散 SQL データベースです。 MySQL と互換性があり、水平スケーラビリティ、強力な一貫性、高可用性を備えています。 TiDB の目標は、OLTP (オンライン トランザクション処理)、OLAP (オンライン分析処理)、および HTAP サービスをカバーするワンストップ データベース ソリューションをユーザーに提供することです。 TiDB は、高可用性と大規模データの強力な一貫性を必要とするさまざまなユースケースに適しています。
 
 ### TiDB のアーキテクチャとは何ですか? {#what-is-tidb-s-architecture}
 
-TiDB クラスターには、TiDBサーバー、PD (配置Driver)サーバー、および TiKVサーバーの3 つのコンポーネントがあります。詳細については、 [TiDBアーキテクチャ](/tidb-architecture.md) 、 [TiDBstorage](/tidb-storage.md) 、 [TiDB コンピューティング](/tidb-computing.md) 、および[TiDB のスケジューリング](/tidb-scheduling.md)を参照してください。
+TiDB クラスターには、TiDBサーバー、PD (配置Driver)サーバー、および TiKVサーバー の3 つのコンポーネントがあります。詳細については、 [TiDBアーキテクチャ](/tidb-architecture.md) 、 [TiDBstorage](/tidb-storage.md) 、 [TiDB コンピューティング](/tidb-computing.md) 、および[TiDB スケジューリング](/tidb-scheduling.md)を参照してください。
 
 ### TiDB は MySQL に基づいていますか? {#is-tidb-based-on-mysql}
 
@@ -37,7 +27,7 @@ TiDB クラスターには、TiDBサーバー、PD (配置Driver)サーバー、
 -   TiKV は、実際のデータを保存するために使用される分散 Key-Valuestorageエンジンとして機能します。つまり、TiKV は TiDB のstorageエンジンです。
 -   PD は TiDB のクラスター マネージャーとして機能し、TiKV メタデータを管理し、タイムスタンプを割り当て、データの配置と負荷分散に関する決定を行います。
 
-### TiDBの使い方は簡単ですか? {#is-it-easy-to-use-tidb}
+### TiDBの使い方は簡単ですか？ {#is-it-easy-to-use-tidb}
 
 はい、そうです。必要なサービスがすべて開始されると、MySQLサーバーと同じように簡単に TiDB を使用できるようになります。 MySQL を TiDB に置き換えることで、ほとんどの場合、コードを 1 行も変更することなくアプリケーションを強化できます。一般的な MySQL 管理ツールを使用して TiDB を管理することもできます。
 
@@ -60,8 +50,6 @@ MySQL クライアントまたはドライバーでサポートされている�
 はい。 TiKV に加えて、TiDB は UniStore や MockTiKV などのスタンドアロンstorageエンジンをサポートします。今後の TiDB リリースでは、MockTiKV はサポートされなくなる可能性があることに注意してください。
 
 TiDB がサポートするすべてのstorageエンジンを確認するには、次のコマンドを使用します。
-
-{{< copyable "" >}}
 
 ```shell
 ./bin/tidb-server -h
@@ -112,9 +100,9 @@ Atomikos の 2 つのデータ ソースを構成したら、JDBC ドライブ�
 -   [TiFlash](/tiflash/tiflash-overview.md)柱状エンジンの変更を処理するために、DeltaTree という特別な構造が導入されています。
 -   TiFlash はRaftグループの学習者ロールとして機能するため、ログのコミットや書き込みに投票しません。これは、DML 操作がTiFlashの確認応答を待つ必要がないことを意味します。そのため、 TiFlashが OLTP のパフォーマンスを低下させません。さらに、 TiFlashと TiKV は別のインスタンスで動作するため、相互に影響しません。
 
-### TiFlash は最終的に一貫性がありますか? {#is-tiflash-eventually-consistent}
+### TiFlash はどのような一貫性を提供しますか? {#what-kind-of-consistency-does-tiflash-provide}
 
-はい。 TiFlash はデフォルトで強力なデータ一貫性を維持します。
+TiFlash はデフォルトで強力なデータ一貫性を維持します。 Raft 学習プロセスはデータを更新します。クエリ内のデータがトランザクションと完全に一致していることを確認するための TSO チェックもあります。詳細については、 [非同期レプリケーション](/tiflash/tiflash-overview.md#asynchronous-replication)および[一貫性](/tiflash/tiflash-overview.md#consistency)を参照してください。
 
 ## TiDB テクニック {#tidb-techniques}
 

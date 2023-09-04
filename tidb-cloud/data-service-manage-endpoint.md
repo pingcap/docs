@@ -107,22 +107,13 @@ TiDB Cloud Data Service では、次のように 1 つまたは複数のエン�
     -   `PUT` : このメソッドは、 `UPDATE`ステートメントなどのデータを更新または変更するために使用します。
     -   `DELETE` : このメソッドは、 `DELETE`ステートメントなどのデータを削除するために使用します。
 
--   **Timeout(ms)** : エンドポイントのタイムアウト。
-
-    -   デフォルト値: `5000`
-    -   最大値： `30000`
-    -   最小値: `1`
-    -   単位：ミリ秒
-
--   **Max Rows** : エンドポイントが操作または返すことができる最大行数。
-
-    -   デフォルト値: `50`
-    -   最大値: エンドポイントに対して**バッチ操作が**無効な場合は`2000` 、**バッチ操作**が有効な場合は`100`
-    -   最小値: `1`
-
 -   **説明**(オプション): エンドポイントの説明。
 
 #### 高度なプロパティ {#advanced-properties}
+
+-   **Timeout(ms)** : エンドポイントのタイムアウト (ミリ秒単位)。
+
+-   **Max Rows** : エンドポイントが操作または返すことができる最大行数。
 
 -   **タグ**: エンドポイントのグループを識別するために使用されるタグ。
 
@@ -182,7 +173,7 @@ TiDB Cloud Data Service では、次のように 1 つまたは複数のエン�
 
 -   パラメータ名: 名前には文字、数字、アンダースコア ( `_` ) のみを含めることができ、文字またはアンダースコア ( `_` ) で始める必要があります。 `page`と`page_size`はパラメータ名として使用し**ないでください**。これらはリクエスト結果のページネーション用に予約されています。
 -   **Required** : リクエストでパラメータが必須かどうかを指定します。デフォルトの構成は不要に設定されています。
--   **Type** : パラメータのデータ型を指定します。サポートされている値は`STRING` 、 `NUMBER` 、 `INTEGER` 、および`BOOLEAN`です。 `STRING`型パラメータを使用する場合は、引用符 ( `'`または`"` ) を追加する必要はありません。たとえば、 `foo` `STRING`タイプに対して有効であり、 `"foo"`として処理されますが、 `"foo"`は`"\"foo\""`として処理されます。
+-   **Type** : パラメーターのデータ型を指定します。サポートされている値は`STRING` 、 `NUMBER` 、 `INTEGER` 、および`BOOLEAN`です。 `STRING`型パラメータを使用する場合は、引用符 ( `'`または`"` ) を追加する必要はありません。たとえば、 `foo` `STRING`タイプに対して有効であり、 `"foo"`として処理されますが、 `"foo"`は`"\"foo\""`として処理されます。
 -   **デフォルト値**: パラメータのデフォルト値を指定します。
 
     -   値がパラメータの型に変換できることを確認してください。それ以外の場合、エンドポイントはエラーを返します。
@@ -293,41 +284,37 @@ TiDB Cloudデータ サービスは、エンドポイントの呼び出しに役
     以下は、**バッチ操作**を有効にし、**ダイジェスト認証を**使用する`POST`リクエストのカール コード スニペットの例です。
 
     <SimpleTab>
-     <div label="Test Environment">
+      <div label="Test Environment">
+        エンドポイントのドラフト バージョンを呼び出すには、 `endpoint-type: draft`ヘッダーを追加する必要があります。
 
-    エンドポイントのドラフト バージョンを呼び出すには、 `endpoint-type: draft`ヘッダーを追加する必要があります。
+        ```bash
+        curl --digest --user '<Public Key>:<Private Key>' \
+          --request POST 'https://<region>.data.tidbcloud.com/api/v1beta/app/<App ID>/endpoint/<Endpoint Path>' \
+          --header 'content-type: application/json'\
+          --header 'endpoint-type: draft'
+          --data-raw '[{
+            "age": "${age}",
+            "career": "${career}"
+        }]'
+        ```
+      </div>
 
-    ```bash
-    curl --digest --user '<Public Key>:<Private Key>' \
-      --request POST 'https://<region>.data.tidbcloud.com/api/v1beta/app/<App ID>/endpoint/<Endpoint Path>' \
-      --header 'content-type: application/json'\
-      --header 'endpoint-type: draft'
-      --data-raw '[{
-        "age": "${age}",
-        "career": "${career}"
-    }]'
-    ```
+      <div label="Online Environment">
+        オンライン環境でコード例を確認する前に、まずエンドポイントをデプロイする必要があります。
 
-    </div>
+        現在のオンライン バージョンのエンドポイントを呼び出すには、次のコマンドを使用します。
 
-    <div label="Online Environment">
-
-    オンライン環境でコード例を確認する前に、まずエンドポイントをデプロイする必要があります。
-
-    現在のオンライン バージョンのエンドポイントを呼び出すには、次のコマンドを使用します。
-
-    ```bash
-    curl --digest --user '<Public Key>:<Private Key>' \
-      --request POST 'https://<region>.data.tidbcloud.com/api/v1beta/app/<App ID>/endpoint/<Endpoint Path>'
-      --header 'content-type: application/json'\
-      --data-raw '[{
-        "age": "${age}",
-        "career": "${career}"
-    }]'
-    ```
-
-    </div>
-     </SimpleTab>
+        ```bash
+        curl --digest --user '<Public Key>:<Private Key>' \
+          --request POST 'https://<region>.data.tidbcloud.com/api/v1beta/app/<App ID>/endpoint/<Endpoint Path>'
+          --header 'content-type: application/json'\
+          --data-raw '[{
+            "age": "${age}",
+            "career": "${career}"
+        }]'
+        ```
+      </div>
+    </SimpleTab>
 
     > **注記：**
     >

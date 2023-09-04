@@ -5,8 +5,6 @@ summary: Learn about the most frequently asked questions (FAQs) relating to TiDB
 
 # TiDB Cloudよくある質問 {#tidb-cloud-faqs}
 
-<!-- markdownlint-disable MD026 -->
-
 このドキュメントには、 TiDB Cloudに関してよくある質問がリストされています。
 
 ## 一般的な FAQ {#general-faqs}
@@ -25,7 +23,7 @@ TiDB Cloud は、TiDB のサービスとしてのフルマネージド クラウ
 
 ### TiDB Cloud はMySQL と互換性がありますか? {#is-tidb-cloud-compatible-with-mysql}
 
-現在、 TiDB Cloud は、トリガー、ストアド プロシージャ、ユーザー定義関数、外部キーを除く、 MySQL 5.7構文の大部分をサポートしています。詳細については、 [MySQLとの互換性](https://docs.pingcap.com/tidb/stable/mysql-compatibility)を参照してください。
+現在、 TiDB Cloud は、トリガー、ストアド プロシージャ、ユーザー定義関数、および外部キーを除く、 MySQL 5.7構文の大部分をサポートしています。詳細については、 [MySQLとの互換性](https://docs.pingcap.com/tidb/stable/mysql-compatibility)を参照してください。
 
 ### TiDB Cloudを操作するにはどのようなプログラミング言語を使用できますか? {#what-programming-languages-can-i-use-to-work-with-tidb-cloud}
 
@@ -41,14 +39,14 @@ TiDB Cloudは現在、アマゾン ウェブ サービスと Google Cloud で利
 
 ### TiDB Cloudではどのバージョンの TiDB がサポートされていますか? {#what-versions-of-tidb-are-supported-on-tidb-cloud}
 
--   2023 年 6 月 20 日以降、新しい TiDB 専用クラスターのデフォルトの TiDB バージョンは v6.5.3 になります。
+-   2023 年 7 月 25 日以降、新しい TiDB 専用クラスターのデフォルトの TiDB バージョンは v7.1.1 になります。
 -   2023 年 3 月 7 日以降、新しい TiDB サーバーレス クラスターのデフォルトの TiDB バージョンは v6.6.0 になります。
 
 詳細については、 [TiDB Cloudリリースノート](/tidb-cloud/tidb-cloud-release-notes.md)を参照してください。
 
 ### TiDB またはTiDB Cloud を本番で使用しているのはどの企業ですか? {#what-companies-are-using-tidb-or-tidb-cloud-in-production}
 
-TiDB は、金融サービス、ゲーム、電子商取引など、さまざまな業界の 1,500 社以上のグローバル企業から信頼されています。当社のユーザーには、Square (米国)、Shopee (シンガポール)、および China UnionPay (中国) が含まれます。具体的な詳細については[ケーススタディ](https://en.pingcap.com/customers/)参照してください。
+TiDB は、金融サービス、ゲーム、電子商取引など、さまざまな業界の 1,500 社を超えるグローバル企業から信頼されています。当社のユーザーには、Square (米国)、Shopee (シンガポール)、および China UnionPay (中国) が含まれます。具体的な詳細については[ケーススタディ](https://en.pingcap.com/customers/)参照してください。
 
 ### SLA はどのようなものですか? {#what-does-the-sla-look-like}
 
@@ -56,7 +54,7 @@ TiDB Cloudは99.99% の SLA を提供します。詳細は[TiDB Cloudサービ�
 
 ### TiDB Cloudについてさらに詳しく知るにはどうすればよいですか? {#how-can-i-learn-more-about-tidb-cloud}
 
-TiDB Cloudについて学ぶ最善の方法は、ステップバイステップのチュートリアルに従うことです。開始するには、次のトピックを確認してください。
+TiDB Cloudについて学ぶ最良の方法は、ステップバイステップのチュートリアルに従うことです。開始するには、次のトピックを確認してください。
 
 -   [TiDB Cloudの紹介](/tidb-cloud/tidb-cloud-intro.md)
 -   [始めましょう](/tidb-cloud/tidb-cloud-quickstart.md)
@@ -167,29 +165,25 @@ TiDB サーバーレス クラスターの場合、 TiDB Cloudは次の手段で
 ### TiDB クラスター内のデータベースに接続するにはどうすればよいですか? {#how-do-i-connect-to-my-database-in-a-tidb-cluster}
 
 <SimpleTab>
-<div label="TiDB Dedicated">
+  <div label="TiDB Dedicated">
+    TiDB 専用クラスターの場合、クラスターに接続する手順は次のように簡略化されます。
 
-TiDB 専用クラスターの場合、クラスターに接続する手順は次のように簡略化されます。
+    1.  ネットワークを認証します。
+    2.  データベース ユーザーとログイン資格情報を設定します。
+    3.  クラスタサーバー用に TLS をダウンロードして構成します。
+    4.  SQL クライアントを選択し、 TiDB CloudUI に表示される自動生成された接続文字列を取得し、その文字列を使用して SQL クライアント経由でクラスターに接続します。
 
-1.  ネットワークを認証します。
-2.  データベース ユーザーとログイン資格情報を設定します。
-3.  クラスタサーバー用に TLS をダウンロードして構成します。
-4.  SQL クライアントを選択し、 TiDB CloudUI に表示される自動生成された接続文字列を取得し、その文字列を使用して SQL クライアント経由でクラスターに接続します。
+    詳細については、 [TiDB 専用クラスタに接続する](/tidb-cloud/connect-to-tidb-cluster.md)を参照してください。
+  </div>
 
-詳細については、 [TiDB 専用クラスタに接続する](/tidb-cloud/connect-to-tidb-cluster.md)を参照してください。
+  <div label="TiDB Serverless">
+    TiDB サーバーレス クラスターの場合、クラスターに接続する手順は次のように簡略化されます。
 
-</div>
+    1.  データベース ユーザーとログイン資格情報を設定します。
+    2.  SQL クライアントを選択し、 TiDB CloudUI に表示される自動生成された接続文字列を取得し、その文字列を使用して SQL クライアント経由でクラスターに接続します。
 
-<div label="TiDB Serverless">
-
-TiDB サーバーレス クラスターの場合、クラスターに接続する手順は次のように簡略化されます。
-
-1.  データベース ユーザーとログイン資格情報を設定します。
-2.  SQL クライアントを選択し、 TiDB CloudUI に表示される自動生成された接続文字列を取得し、その文字列を使用して SQL クライアント経由でクラスターに接続します。
-
-詳細については、 [TiDB サーバーレスクラスタに接続する](/tidb-cloud/connect-to-tidb-cluster-serverless.md)を参照してください。
-
-</div>
+    詳細については、 [TiDB サーバーレスクラスタに接続する](/tidb-cloud/connect-to-tidb-cluster-serverless.md)を参照してください。
+  </div>
 </SimpleTab>
 
 ## サポートに関するFAQ {#support-faq}

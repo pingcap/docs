@@ -4,8 +4,6 @@ summary: Learn an example of how to build a TiDB application using Spring Boot.
 aliases: ['/tidb/v7.1/dev-guide-sample-application-spring-boot']
 ---
 
-<!-- markdownlint-disable MD029 -->
-
 # Spring Boot を使用して TiDB アプリを構築する {#build-a-tidb-app-using-spring-boot}
 
 このチュートリアルでは、TiDB を使用して[スプリングブーツ](https://spring.io/projects/spring-boot) Web アプリケーションを構築する方法を示します。 [Spring Data JPA](https://spring.io/projects/spring-data-jpa)モジュールは、データ アクセス機能のフレームワークとして使用されます。このサンプル アプリケーションのコードは[GitHub](https://github.com/pingcap-inc/tidb-example-java)からダウンロードできます。
@@ -19,23 +17,19 @@ aliases: ['/tidb/v7.1/dev-guide-sample-application-spring-boot']
 ## ステップ 1: TiDB クラスターを起動する {#step-1-launch-your-tidb-cluster}
 
 <CustomContent platform="tidb">
+  TiDB クラスターの起動方法を紹介します。
 
-TiDB クラスターの起動方法を紹介します。
+  **TiDB サーバーレス クラスターを使用する**
 
-**TiDB サーバーレス クラスターを使用する**
+  詳細な手順については、 [TiDB サーバーレスクラスターを作成する](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-tidb-serverless-cluster)を参照してください。
 
-詳細な手順については、 [TiDB サーバーレスクラスターを作成する](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-tidb-serverless-cluster)を参照してください。
+  **ローカルクラスターを使用する**
 
-**ローカルクラスターを使用する**
-
-詳細な手順については、 [ローカルテストクラスターをデプロイ](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[TiUPを使用した TiDBクラスタのデプロイ](/production-deployment-using-tiup.md)を参照してください。
-
+  詳細な手順については、 [ローカルテストクラスターをデプロイ](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[TiUPを使用した TiDBクラスタのデプロイ](/production-deployment-using-tiup.md)を参照してください。
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
-
-[TiDB サーバーレスクラスターを作成する](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-tidb-serverless-cluster)を参照してください。
-
+  [TiDB サーバーレスクラスターを作成する](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-tidb-serverless-cluster)を参照してください。
 </CustomContent>
 
 ## ステップ 2: JDK をインストールする {#step-2-install-jdk}
@@ -52,15 +46,11 @@ TiDB クラスターの起動方法を紹介します。
 
 -   マックOS：
 
-    {{< copyable "" >}}
-
     ```shell
     brew install maven
     ```
 
 -   Debian ベースの Linux ディストリビューション (Ubuntu など):
-
-    {{< copyable "" >}}
 
     ```shell
     apt-get install maven
@@ -70,15 +60,11 @@ TiDB クラスターの起動方法を紹介します。
 
     -   DNF:
 
-        {{< copyable "" >}}
-
         ```shell
         dnf install maven
         ```
 
     -   うーん：
-
-        {{< copyable "" >}}
 
         ```shell
         yum install maven
@@ -156,15 +142,11 @@ make
 
 1.  キャッシュとパッケージをクリアします。
 
-    {{< copyable "" >}}
-
     ```shell
     mvn clean package
     ```
 
 2.  JAR ファイルを使用してアプリケーションを実行します。
-
-    {{< copyable "" >}}
 
     ```shell
     java -jar target/spring-jpa-hibernate-0.0.1.jar
@@ -576,7 +558,7 @@ spring:
 
 -   `spring.datasource.url` : データベース接続の URL。
 -   `spring.datasource.username` : データベースのユーザー名。
--   `spring.datasource.password` : データベースのパスワード。空。このフィールドをコメントアウトするか削除する必要があります。
+-   `spring.datasource.password` : データベースのパスワード。空の。このフィールドをコメントアウトするか削除する必要があります。
 -   `spring.datasource.driver-class-name` : データベースドライバー。 TiDB は MySQL と互換性があるため、 mysql-connector-java ドライバー クラス`com.mysql.cj.jdbc`を使用します。
 -   `jpa.show-sql` : このフィールドが`true`に設定されている場合、JPA によって実行される SQL ステートメントが出力されます。
 -   `jpa.database-platform` : 選択されたデータベース言語。アプリケーションは TiDB に接続するため、 **TiDB 方言**を選択します。このダイアレクトは Hibernate `6.0.0.Beta2`以降のバージョンでのみ使用できるため、該当する依存関係のバージョンを選択してください。
@@ -677,7 +659,7 @@ public class PlayerBean {
 -   `@Table`アノテーション属性`name`を使用して、このエンティティ クラスを`player_jpa`テーブルに関連付けます。
 -   `@Id` 、このプロパティがテーブルの主キー列に関連していることを宣言します。
 -   `@GeneratedValue` 、この列の値が自動的に生成され、手動で設定しないことを示します。属性`generator`ジェネレーターの名前を`player_id`として指定するために使用されます。
--   `@SequenceGenerator` [順序](/sql-statements/sql-statement-create-sequence.md)を使用するジェネレータを宣言し、アノテーション属性`name`を使用してジェネレータの名前を`player_id`として宣言します ( `@GeneratedValue`で指定された名前と一致します)。注釈属性`sequenceName` 、データベース内の配列の名前を指定するために使用されます。最後に、アノテーション属性`allocationSize`使用して、シーケンスのステップ サイズが 1 であると宣言します。
+-   `@SequenceGenerator` [順序](/sql-statements/sql-statement-create-sequence.md)を使用するジェネレータを宣言し、アノテーション属性`name`を使用してジェネレータの名前を`player_id` ( `@GeneratedValue`で指定された名前と一致する) として宣言します。注釈属性`sequenceName` 、データベース内の配列の名前を指定するために使用されます。最後に、アノテーション属性`allocationSize`使用して、シーケンスのステップ サイズが 1 であると宣言します。
 -   `@Column` 、各プライベート属性をテーブル`player_jpa`の列として宣言し、注釈属性`name`を使用して属性に対応する列の名前を決定します。
 
 #### リポジトリ {#repository}
@@ -980,7 +962,7 @@ public class PlayerController {
 
 このアプリケーションは[スプリング初期化](https://start.spring.io/)を使用して構築されています。次のオプションをクリックしていくつかの構成項目を変更すると、このサンプル アプリケーションと同じ依存関係を持つ空のアプリケーションをすぐに取得できます。
 
-**計画**
+**プロジェクト**
 
 -   Maven プロジェクト
 
@@ -1011,7 +993,7 @@ public class PlayerController {
 
 ![Spring Initializr Configuration](/media/develop/develop-spring-initializr-configuration.png)
 
-> **ノート：**
+> **注記：**
 >
 > SQL は比較的標準化されていますが、各データベース ベンダーは ANSI SQL で定義された構文のサブセットとスーパーセットを使用しています。これはデータベースの方言と呼ばれます。 Hibernate は、その`org.hibernate.dialect.Dialect`クラスと各データベース ベンダーのさまざまなサブクラスを通じて、これらの方言間のバリエーションを処理します。
 >

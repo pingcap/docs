@@ -7,7 +7,7 @@ Summary: Learn how to create a changefeed to stream data from TiDB Cloud to MySQ
 
 このドキュメントでは、 **Sink to MySQL**変更フィードを使用してTiDB Cloudから MySQL にデータをストリーミングする方法について説明します。
 
-> **ノート：**
+> **注記：**
 >
 > -   チェンジフィード機能を使用するには、TiDB 専用クラスターのバージョンが v6.4.0 以降であることを確認してください。
 > -   [TiDB サーバーレスクラスター](/tidb-cloud/select-cluster-tier.md#tidb-serverless)の場合、チェンジフィード機能は使用できません。
@@ -43,7 +43,7 @@ MySQL サービスがパブリック インターネット アクセスのない
     1.  [VPC ピアリング接続の DNS 解決を有効にする](https://docs.aws.amazon.com/vpc/latest/peering/modify-peering-connections.html#vpc-peering-dns)の手順に従います。
     2.  **アクセプター DNS 解決**オプションを有効にします。
 
-MySQL サービスがパブリック インターネット アクセスを持たない GCP VPC 内にある場合は、次の手順を実行します。
+MySQL サービスがパブリック インターネット アクセスのない Google Cloud VPC 内にある場合は、次の手順を実行します。
 
 1.  MySQL サービスが Google Cloud SQL の場合は、Google Cloud SQL インスタンスの関連する VPC で MySQL エンドポイントを公開する必要があります。 Google が開発した[**Cloud SQL 認証プロキシ**](https://cloud.google.com/sql/docs/mysql/sql-proxy)を使用する必要がある場合があります。
 2.  MySQL サービスの VPC と TiDB クラスターの間は[VPC ピアリング接続をセットアップする](/tidb-cloud/set-up-vpc-peering-connections.md) 。
@@ -63,8 +63,6 @@ MySQL サービスがパブリック インターネット アクセスを持た
     -   **Sink to MySQL を**作成する時期が来ました
 
     例えば：
-
-    {{< copyable "" >}}
 
     ```sql
     SET GLOBAL tidb_gc_life_time = '720h';
@@ -131,8 +129,6 @@ MySQL サービスがパブリック インターネット アクセスを持た
     変更フィード名をクリックすると、チェックポイント、レプリケーションレイテンシー、その他のメトリックなど、変更フィードに関する詳細が表示されます。
 
 10. Dumplingを使用して[既存のデータをロードしました](#load-existing-data-optional)ある場合は、シンクの作成後に GC 時間を元の値 (デフォルト値は`10m` ) に戻す必要があります。
-
-{{< copyable "" >}}
 
 ```sql
 SET GLOBAL tidb_gc_life_time = '10m';

@@ -24,9 +24,9 @@ aliases: ['/tidbcloud/migrate-data-into-tidb','/tidbcloud/migrate-incremental-da
     -   AWS 東京 (ap-northeast-1)
     -   AWS フランクフルト (eu-central-1)
     -   AWS ソウル (ap-northeast-2)
-    -   GCP オレゴン (us-west1)
-    -   GCP シンガポール (asia-southeast1)
-    -   GCP 東京 (アジア北東 1)
+    -   Google Cloud オレゴン (us-west1)
+    -   Google Cloud シンガポール (asia-southeast1)
+    -   Google Cloud 東京 (asia-northeast1)
 
 -   Amazon Aurora MySQL ライター インスタンスは、既存のデータと増分データ移行の両方をサポートします。 Amazon Aurora MySQL リーダー インスタンスは、既存のデータ移行のみをサポートし、増分データ移行はサポートしません。
 
@@ -109,39 +109,41 @@ GRANT CREATE,SELECT,INSERT,UPDATE,DELETE,ALTER,TRUNCATE,DROP,INDEX ON *.* TO 'yo
 
 -   ネットワーク接続にパブリック IP (標準接続) を使用する場合は、上流のデータベースがパブリック ネットワーク経由で接続できることを確認してください。
 
--   AWS PrivateLink を使用する場合は、 [プライベートエンドポイント経由で TiDB 専用に接続する](/tidb-cloud/set-up-private-endpoint-connections.md)に従って設定します。
+-   AWS PrivateLink を使用する場合は、 [AWS のプライベート エンドポイント経由で専用 TiDB に接続する](/tidb-cloud/set-up-private-endpoint-connections.md)に従って設定します。
 
--   AWS VPC ピアリングまたは GCP VPC ネットワーク ピアリングを使用する場合は、次の手順を参照してネットワークを構成してください。
+-   Google Cloud Private Service Connect を使用する場合は、 [Google Cloud のプライベート エンドポイント経由で専用 TiDB に接続する](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)に従って設定します。
 
-<details><summary>AWS VPC ピアリングを設定する</summary>
+-   AWS VPC ピアリングまたは Google Cloud VPC ネットワーク ピアリングを使用する場合は、次の手順を参照してネットワークを構成してください。
 
-MySQL サービスが AWS VPC 内にある場合は、次の手順を実行します。
+<details>
+  AWS VPC ピアリングを設定する
 
-1.  MySQL サービスの VPC と TiDB クラスターの間は[VPC ピアリング接続をセットアップする](/tidb-cloud/set-up-vpc-peering-connections.md) 。
+  MySQL サービスが AWS VPC 内にある場合は、次の手順を実行します。
 
-2.  MySQL サービスが関連付けられているセキュリティ グループの受信ルールを変更します。
+  1.  MySQL サービスの VPC と TiDB クラスターの間は[VPC ピアリング接続をセットアップする](/tidb-cloud/set-up-vpc-peering-connections.md) 。
 
-    受信ルールに[TiDB Cloudクラスターが配置されているリージョンの CIDR](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-project-cidr)を追加する必要があります。これにより、トラフィックが TiDB クラスターから MySQL インスタンスに流れるようになります。
+  2.  MySQL サービスが関連付けられているセキュリティ グループの受信ルールを変更します。
 
-3.  MySQL URL に DNS ホスト名が含まれている場合は、 TiDB Cloud がMySQL サービスのホスト名を解決できるようにする必要があります。
+      受信ルールに[TiDB Cloudクラスターが配置されているリージョンの CIDR](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-project-cidr)を追加する必要があります。これにより、トラフィックが TiDB クラスターから MySQL インスタンスに流れるようになります。
 
-    1.  [VPC ピアリング接続の DNS 解決を有効にする](https://docs.aws.amazon.com/vpc/latest/peering/modify-peering-connections.html#vpc-peering-dns)の手順に従います。
-    2.  **アクセプター DNS 解決**オプションを有効にします。
+  3.  MySQL URL に DNS ホスト名が含まれている場合は、 TiDB Cloud がMySQL サービスのホスト名を解決できるようにする必要があります。
 
+      1.  [VPC ピアリング接続の DNS 解決を有効にする](https://docs.aws.amazon.com/vpc/latest/peering/modify-peering-connections.html#vpc-peering-dns)の手順に従います。
+      2.  **アクセプター DNS 解決**オプションを有効にします。
 </details>
 
-<details><summary>GCP VPC ネットワーク ピアリングを設定する</summary>
+<details>
+  Google Cloud VPC ネットワーク ピアリングを設定する
 
-MySQL サービスが GCP VPC 内にある場合は、次の手順を実行します。
+  MySQL サービスが Google Cloud VPC 内にある場合は、次の手順を実行します。
 
-1.  セルフホスト型 MySQL の場合は、この手順をスキップして次の手順に進むことができます。 MySQL サービスが Google Cloud SQL の場合は、Google Cloud SQL インスタンスの関連する VPC で MySQL エンドポイントを公開する必要があります。 Google が開発した[Cloud SQL 認証プロキシ](https://cloud.google.com/sql/docs/mysql/sql-proxy)使用する必要がある場合があります。
+  1.  セルフホスト型 MySQL の場合は、この手順をスキップして次の手順に進むことができます。 MySQL サービスが Google Cloud SQL の場合は、Google Cloud SQL インスタンスの関連する VPC で MySQL エンドポイントを公開する必要があります。 Google が開発した[Cloud SQL 認証プロキシ](https://cloud.google.com/sql/docs/mysql/sql-proxy)使用する必要がある場合があります。
 
-2.  MySQL サービスの VPC と TiDB クラスターの間の[VPC ピアリング接続をセットアップする](/tidb-cloud/set-up-vpc-peering-connections.md) 。
+  2.  MySQL サービスの VPC と TiDB クラスターの間の[VPC ピアリング接続をセットアップする](/tidb-cloud/set-up-vpc-peering-connections.md) 。
 
-3.  MySQL が配置されている VPC のイングレス ファイアウォール ルールを変更します。
+  3.  MySQL が配置されている VPC のイングレス ファイアウォール ルールを変更します。
 
-    受信ファイアウォール ルールに[TiDB Cloudクラスターが配置されているリージョンの CIDR](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-project-cidr)を追加する必要があります。これにより、トラフィックが TiDB クラスターから MySQL エンドポイントに流れることが可能になります。
-
+      受信ファイアウォール ルールに[TiDB Cloudクラスターが配置されているリージョンの CIDR](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-project-cidr)を追加する必要があります。これにより、トラフィックが TiDB クラスターから MySQL エンドポイントに流れることが可能になります。
 </details>
 
 ### バイナリログを有効にする {#enable-binary-logs}
@@ -226,12 +228,6 @@ TiDB Cloudにデータを一度に移行するには、 **[既存のデータ移
     -   **[カスタマイズ]**をクリックし、データセット名の下でいくつかのテーブルを選択すると、移行ジョブは既存のデータのみを移行し、選択したテーブルの進行中の変更を移行します。同じデータベース内に後で作成されたテーブルは移行されません。
 
         <img src="https://download.pingcap.com/images/docs/tidb-cloud/migration-job-select-tables.png" width="60%" />
-
-    <!--
-     - If you click **Customize** and select some databases, and then select some tables in the **Selected Objects** area to move them back to the **Source Database** area, (for example the `username` table in the following screenshots), then the tables will be treated as in a blocklist. The migration job will migrate the existing data but filter out the excluded tables (such as the `username` table in the screenshots), and will migrate ongoing changes of the selected databases to TiDB Cloud except the filtered-out tables.
-         ![Select Databases and Deselect Some Tables](/media/tidb-cloud/migration-job-select-db-blacklist1.png)
-         ![Select Databases and Deselect Some Tables](/media/tidb-cloud/migration-job-select-db-blacklist2.png)
-     -->
 
 2.  **「次へ」**をクリックします。
 

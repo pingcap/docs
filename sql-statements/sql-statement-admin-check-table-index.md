@@ -6,7 +6,24 @@ category: reference
 
 # 管理者チェック [表|索引] {#admin-check-table-index}
 
-`ADMIN CHECK [TABLE|INDEX]`ステートメントは、テーブルとインデックスのデータの整合性をチェックします。 [FOREIGN KEY 制約](/foreign-key.md)チェックには対応していません。
+`ADMIN CHECK [TABLE|INDEX]`ステートメントは、テーブルとインデックスのデータの整合性をチェックします。
+
+次のものはサポートされていません。
+
+-   確認[FOREIGN KEY 制約](/foreign-key.md) ．
+-   PRIMARY KEY インデックスに[クラスター化された主キー](/clustered-indexes.md)が使用されているかどうかを確認します。
+
+`ADMIN CHECK [TABLE|INDEX]`で問題が見つかった場合は、インデックスを削除して再作成することで問題を解決できます。問題が解決しない場合は、GitHub で[問題](https://github.com/pingcap/tidb/issues/new/choose)を報告できます。
+
+## 原則 {#principles}
+
+`ADMIN CHECK TABLE`ステートメントは、テーブルをチェックするために次の手順を実行します。
+
+1.  インデックスごとに、インデックス内のレコードの数がテーブル内のレコードの数と同じかどうかを確認します。
+
+2.  インデックスごとに、各行の値をループし、その値をテーブル内の値と比較します。
+
+`ADMIN CHECK INDEX`ステートメントを使用すると、指定されたインデックスのみがチェックされます。
 
 ## あらすじ {#synopsis}
 
@@ -22,15 +39,11 @@ TableNameList ::=
 
 `tbl_name`テーブル内のすべてのデータと対応するインデックスの一貫性をチェックするには、 `ADMIN CHECK TABLE`使用します。
 
-{{< copyable "" >}}
-
 ```sql
 ADMIN CHECK TABLE tbl_name [, tbl_name] ...;
 ```
 
 整合性チェックに合格すると、空の結果が返されます。それ以外の場合は、データに一貫性がないことを示すエラー メッセージが返されます。
-
-{{< copyable "" >}}
 
 ```sql
 ADMIN CHECK INDEX tbl_name idx_name;
@@ -38,13 +51,11 @@ ADMIN CHECK INDEX tbl_name idx_name;
 
 上記のステートメントは、 `tbl_name`テーブルの`idx_name`インデックスに対応する列データとインデックス データの整合性をチェックするために使用されます。整合性チェックに合格すると、空の結果が返されます。それ以外の場合は、データに一貫性がないことを示すエラー メッセージが返されます。
 
-{{< copyable "" >}}
-
 ```sql
 ADMIN CHECK INDEX tbl_name idx_name (lower_val, upper_val) [, (lower_val, upper_val)] ...;
 ```
 
-上記文は、 `tbl_name`テーブルの`idx_name`インデックスに対応する列データとインデックスデータの整合性を、データ範囲（チェック対象）を指定してチェックするために使用します。整合性チェックに合格すると、空の結果が返されます。それ以外の場合は、データに一貫性がないことを示すエラー メッセージが返されます。
+上記のステートメントは、 `tbl_name`テーブルの`idx_name`インデックスに対応する列データとインデックス データの整合性を、データ範囲 (チェック対象) を指定してチェックするために使用されます。整合性チェックに合格すると、空の結果が返されます。それ以外の場合は、データに一貫性がないことを示すエラー メッセージが返されます。
 
 ## MySQLの互換性 {#mysql-compatibility}
 

@@ -42,7 +42,7 @@ summary: View the running status of TiDB, TiKV, PD, TiFlash components in the en
 -   終了: インスタンス上のデータは移行中であり、スケールインが進行中です。このステータスは、TiKV またはTiFlashインスタンスにのみ存在します。
 -   不明: インスタンスの実行状態は不明です。
 
-> **ノート：**
+> **注記：**
 >
 > -   TiDB ダッシュボードの`Leaving` 、PD API によって返される`Offline` 、 TiUPの`Pending Offline`は同じステータスを示します。
 > -   テーブル内の一部の列は、インスタンスが起動している場合にのみ表示できます。
@@ -65,7 +65,7 @@ summary: View the running status of TiDB, TiKV, PD, TiFlash components in the en
 -   メモリ: ホストの物理メモリの合計サイズ。
 -   メモリ使用量: ホストの現在のメモリ使用量。
 
-> **ノート：**
+> **注記：**
 >
 > ホスト一覧情報はインスタンスプロセスごとに提供されるため、ホスト上のすべてのインスタンスが停止している場合、ホスト情報は表示されません。
 

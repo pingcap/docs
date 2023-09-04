@@ -3,7 +3,7 @@ title: Limited SQL Features on TiDB Cloud
 summary: Learn about the limited SQL features on TiDB Cloud.
 ---
 
-# TiDB Cloud上の限られた SQL 機能 {#limited-sql-features-on-tidb-cloud}
+# TiDB Cloud上の制限された SQL 機能 {#limited-sql-features-on-tidb-cloud}
 
 TiDB Cloud は、 TiDB がサポートするほぼすべてのワークロードで動作しますが、TiDB セルフホストと TiDB 専用/サーバーレスの間には機能の違いがいくつかあります。このドキュメントでは、 TiDB Cloud上の SQL 機能の制限について説明します。私たちは常に、TiDB セルフホスト型と TiDB 専用/サーバーレス間の機能ギャップを埋めています。これらの機能またはギャップ内の機能が必要な場合は、機能リクエストの場合は[お問い合わせ](/tidb-cloud/tidb-cloud-support.md) 。
 
@@ -60,6 +60,7 @@ TiDB Cloud は、 TiDB がサポートするほぼすべてのワークロード
 | `SHOW PLUGINS`                   | サポートされています                     | サポートされていません[^8]                  |
 | `SHOW PUMP STATUS`               | サポートされていません[^7]                | サポートされていません[^7]                  |
 | `SHUTDOWN`                       | サポートされていません[^4]                | サポートされていません[^4]                  |
+| `CREATE TABLE ... AUTO_ID_CACHE` | サポートされています                     | サポートされていません[^12]                 |
 
 ## 関数と演算子 {#functions-and-operators}
 
@@ -243,3 +244,5 @@ TiDB Cloud は、 TiDB がサポートするほぼすべてのワークロード
 [^10]: TiDB サーバーレスは強力なパスワード ポリシーを適用します。
 
 [^11]: この変数は、TiDB サーバーレスでは読み取り専用です。
+
+[^12]: [`AUTO_ID_CACHE`](/auto-increment.md#cache-size-control)を使用したキャッシュ サイズのカスタマイズは、TiDB サーバーレスでは一時的に利用できません。

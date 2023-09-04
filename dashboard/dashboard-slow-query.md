@@ -9,7 +9,7 @@ TiDB ダッシュボードの「スロー クエリ」ページでは、クラ�
 
 デフォルトでは、実行時間が 300 ミリ秒を超える SQL クエリは低速クエリとみなされます。これらのクエリは[遅いクエリログ](/identify-slow-queries.md)に記録され、TiDB ダッシュボード経由で検索できます。低速クエリのしきい値は、 [`tidb_slow_log_threshold`](/system-variables.md#tidb_slow_log_threshold)セッション変数または[`instance.tidb_slow_log_threshold`](/tidb-configuration-file.md#tidb_slow_log_threshold) TiDB パラメータを通じて調整できます。
 
-> **ノート：**
+> **注記：**
 >
 > スロークエリログが無効になっている場合、この機能は使用できません。スロー クエリ ログはデフォルトで有効になっており、システム変数[`tidb_enable_slow_log`](/system-variables.md#tidb_enable_slow_log)を使用して有効または無効にできます。
 
@@ -63,7 +63,7 @@ TiDB ダッシュボードの「スロー クエリ」ページでは、クラ�
 
 ### 実行計画 {#execution-plans}
 
-TiDB ダッシュボードでは、グラフとテキストの 2 つの方法で実行計画を表示できます。視覚的な実行計画により、ステートメントの各演算子と詳細情報をより直感的に学ぶことができます。実行計画の見方については、 [クエリ実行計画を理解する](/explain-overview.md)を参照してください。
+TiDB ダッシュボードでは、グラフとテキストの 2 つの方法で実行計画を表示できます。視覚的な実行計画により、ステートメントの各演算子と詳細情報をより直感的に学習できます。実行計画の見方については、 [クエリ実行計画を理解する](/explain-overview.md)を参照してください。
 
 #### 視覚的な実行計画 {#visual-execution-plans}
 

@@ -7,15 +7,15 @@ summary: Learn how to access TiDB Dashboard.
 
 TiDB ダッシュボードにアクセスするには、ブラウザから[http://127.0.0.1:2379/ダッシュボード](http://127.0.0.1:2379/dashboard)にアクセスしてください。 `127.0.0.1:2379`を実際の PD インスタンスのアドレスとポートに置き換えます。
 
-> **ノート：**
+> **注記：**
 >
-> TiDB v6.5.0 (以降) およびTiDB Operator v1.4.0 (以降) は、Kubernetes 上の独立したポッドとして TiDB ダッシュボードをデプロイすることをサポートしています。 TiDB Operatorを使用すると、このポッドの IP アドレスにアクセスして TiDB ダッシュボードを起動できます。詳細は[TiDB Operatorで TiDB ダッシュボードを独立してデプロイ](https://docs.pingcap.com/tidb-in-kubernetes/dev/get-started#deploy-tidb-dashboard-independently)を参照してください。
+> TiDB v6.5.0 (以降) およびTiDB Operator v1.4.0 (以降) は、TiDB ダッシュボードを Kubernetes 上の独立したポッドとしてデプロイすることをサポートしています。 TiDB Operatorを使用すると、このポッドの IP アドレスにアクセスして TiDB ダッシュボードを起動できます。詳細は[TiDB Operatorで TiDB ダッシュボードを独立してデプロイ](https://docs.pingcap.com/tidb-in-kubernetes/dev/get-started#deploy-tidb-dashboard-independently)を参照してください。
 
 ## 複数の PD インスタンスがデプロイされている場合に TiDB ダッシュボードにアクセスする {#access-tidb-dashboard-when-multiple-pd-instances-are-deployed}
 
 クラスターに複数の PD インスタンスがデプロイされており、**すべての**PD インスタンスとポートに直接アクセスできる場合は、 [http://127.0.0.1:2379/ダッシュボード/](http://127.0.0.1:2379/dashboard/)アドレスの`127.0.0.1:2379`任意**の**PD インスタンスのアドレスとポートに置き換えるだけで済みます。
 
-> **ノート：**
+> **注記：**
 >
 > ファイアウォールまたはリバース プロキシが構成されており、すべての PD インスタンスに直接アクセスできない場合は、TiDB ダッシュボードにアクセスできない可能性があります。通常、これはファイアウォールまたはリバース プロキシが正しく構成されていないことが原因です。複数の PD インスタンスがデプロイされている場合にファイアウォールまたはリバース プロキシを正しく構成する方法については、 [リバース プロキシの背後で TiDB ダッシュボードを使用する](/dashboard/dashboard-ops-reverse-proxy.md)と[セキュリティTiDB ダッシュボード](/dashboard/dashboard-ops-security.md)を参照してください。
 
@@ -27,11 +27,11 @@ TiDB ダッシュボードは、次の比較的新しいバージョンの一般
 -   Firefox &gt;= 68
 -   エッジ &gt;= 17
 
-> **ノート：**
+> **注記：**
 >
 > 上記の以前のバージョンのブラウザまたは他のブラウザを使用して TiDB ダッシュボードにアクセスすると、一部の関数が正しく動作しない可能性があります。
 
-## ログイン {#sign-in}
+## サインイン {#sign-in}
 
 TiDB ダッシュボードにアクセスすると、以下の図に示すように、ユーザー ログイン インターフェイスが表示されます。
 

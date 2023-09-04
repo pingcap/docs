@@ -2,8 +2,6 @@
 title: Gitpod
 ---
 
-<!-- markdownlint-disable MD029 -->
-
 # Gitpod {#gitpod}
 
 [Gitpod](https://www.gitpod.io/)を使用すると、ボタンまたはリンクをクリックするだけでブラウザで完全な開発環境を取得でき、すぐにコードを作成できます。

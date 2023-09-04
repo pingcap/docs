@@ -16,11 +16,9 @@ SQL パフォーマンスの問題をより適切に処理するために、MySQ
 -   [`statements_summary_evicted`](#statements_summary_evicted)
 
 <CustomContent platform="tidb-cloud">
-
-> **ノート：**
->
-> 次のテーブルは[TiDB サーバーレスクラスター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless)では使用できませ`cluster_statements_summary_history` : `statements_summary` 、および`cluster_statements_summary` `statements_summary_history`
-
+  > **注記：**
+  >
+  > 次のテーブルは[TiDB サーバーレスクラスター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless)では使用できませ`cluster_statements_summary_history` : `statements_summary` 、および`cluster_statements_summary` `statements_summary_history`
 </CustomContent>
 
 このドキュメントでは、これらのテーブルについて詳しく説明し、それらを使用して SQL パフォーマンスの問題をトラブルシューティングする方法を紹介します。
@@ -31,16 +29,12 @@ SQL パフォーマンスの問題をより適切に処理するために、MySQ
 
 ここでの「SQL ダイジェスト」は、スロー ログで使用されるものと同じものを意味し、正規化された SQL ステートメントによって計算される一意の識別子です。正規化プロセスでは、定数の空白文字は無視され、大文字と小文字は区別されません。したがって、一貫した構文を持つステートメントは同じダイジェストを持ちます。例えば：
 
-{{< copyable "" >}}
-
 ```sql
 SELECT * FROM employee WHERE id IN (1, 2, 3) AND salary BETWEEN 1000 AND 2000;
 select * from EMPLOYEE where ID in (4, 5) and SALARY between 3000 and 4000;
 ```
 
 正規化後は、両方とも次のカテゴリに分類されます。
-
-{{< copyable "" >}}
 
 ```sql
 select * from employee where id in (...) and salary between ? and ?;
@@ -87,7 +81,7 @@ select * from employee where id in (...) and salary between ? and ?;
                  PLAN:  Point_Get_1     root    1       table:employee, handle:3100
 ```
 
-> **ノート：**
+> **注記：**
 >
 > TiDB では、ステートメント概要テーブルのフィールドの時間単位はナノ秒 (ns) ですが、MySQL では時間単位はピコ秒 (ps) です。
 
@@ -120,27 +114,25 @@ select * from employee where id in (...) and salary between ? and ?;
 -   `tidb_stmt_summary_max_sql_length` : `DIGEST_TEXT`と`QUERY_SAMPLE_TEXT`の最長の表示長を指定します。デフォルト値は`4096`です。
 -   `tidb_stmt_summary_internal_query` : TiDB SQLステートメントをカウントするかどうかを決定します。 `1`カウントすることを意味し、 `0`カウントしないことを意味します。デフォルト値は`0`です。
 
-> **ノート：**
+> **注記：**
 >
 > `tidb_stmt_summary_max_stmt_count`制限を超えたために SQL ステートメントのカテゴリを削除する必要がある場合、TiDB はすべての時間範囲のその SQL ステートメント カテゴリのデータを`statement_summary_history`テーブルから削除します。そのため、一定の時間範囲におけるSQL文カテゴリ数が制限値に達していなくても、テーブル`statement_summary_history`に格納されるSQL文数は実際のSQL文数よりも少なくなります。この状況が発生してパフォーマンスに影響を与える場合は、 `tidb_stmt_summary_max_stmt_count`の値を増やすことをお勧めします。
 
 ステートメント要約構成の例を以下に示します。
 
-{{< copyable "" >}}
-
 ```sql
+set global tidb_stmt_summary_max_stmt_count = 3000;
 set global tidb_enable_stmt_summary = true;
 set global tidb_stmt_summary_refresh_interval = 1800;
 set global tidb_stmt_summary_history_size = 24;
 ```
 
-上記の設定が有効になると、30 分ごとに`statements_summary`テーブルがクリアされます。 `statements_summary_history`テーブルには、最近 12 時間にわたって生成されたデータが保存されます。
+前述の構成が有効になると、 `statements_summary`テーブルは 30 分ごとにクリアされ、 `statements_summary_history`テーブルには最大 3000 種類の SQL ステートメントが保存されます。タイプごとに、 `statements_summary_history`テーブルに最近の 24 期間のデータが保存されます。 `statements_summary_evicted`表には、SQL ステートメントがステートメントの概要から削除された最近の 24 期間が記録されます。 `statements_summary_evicted`テーブルは 30 分ごとに更新されます。
 
-`statements_summary_evicted`テーブルには、SQL ステートメントがステートメントの概要から削除された最近の 24 期間が記録されます。 `statements_summary_evicted`テーブルは 30 分ごとに更新されます。
-
-> **ノート：**
+> **注記：**
 >
-> `tidb_stmt_summary_history_size` 、 `tidb_stmt_summary_max_stmt_count` 、および`tidb_stmt_summary_max_sql_length`構成項目はメモリ使用量に影響します。ニーズ、SQL サイズ、SQL 数、マシン構成に基づいてこれらの構成を調整することをお勧めします。あまり大きな値を設定することはお勧めできません。メモリ使用量は`tidb_stmt_summary_history_size` * `tidb_stmt_summary_max_stmt_count` * `tidb_stmt_summary_max_sql_length` * `3`を使用して計算できます。
+> -   SQL タイプが 1 分ごとに表示される場合、 `statements_summary_history`は最新 12 時間のデータが保存されます。 SQL タイプが毎日 00:00 から 00:30 までにのみ表示される場合、 `statements_summary_history`は、各期間を 1 日として、最新の 24 期間のデータが保存されます。したがって、 `statements_summary_history`は、この SQL タイプの最新 24 日間のデータが保存されます。
+> -   `tidb_stmt_summary_history_size` 、 `tidb_stmt_summary_max_stmt_count` 、および`tidb_stmt_summary_max_sql_length`構成項目はメモリ使用量に影響します。ニーズ、SQL サイズ、SQL 数、マシン構成に基づいてこれらの構成を調整することをお勧めします。あまり大きな値を設定することはお勧めできません。メモリ使用量は`tidb_stmt_summary_history_size` * `tidb_stmt_summary_max_stmt_count` * `tidb_stmt_summary_max_sql_length` * `3`を使用して計算できます。
 
 ### ステートメントの要約に適切なサイズを設定する {#set-a-proper-size-for-statement-summary}
 
@@ -191,17 +183,13 @@ select * from information_schema.statements_summary_evicted;
 デフォルトでは、ステートメント概要テーブルはメモリに保存されます。 TiDBサーバーが再起動すると、すべてのデータが失われます。
 
 <CustomContent platform="tidb">
-
-この問題に対処するために、TiDB v6.6.0 では実験的に[ステートメントの概要の永続化](#persist-statements-summary)機能が導入されていますが、この機能はデフォルトでは無効になっています。この機能を有効にすると、履歴データはメモリに保存されなくなり、ディスクに直接書き込まれます。このようにして、TiDBサーバーが再起動しても履歴データは引き続き使用できます。
-
+  この問題に対処するために、TiDB v6.6.0 では実験的に[ステートメントの概要の永続性](#persist-statements-summary)機能が導入されていますが、この機能はデフォルトでは無効になっています。この機能を有効にすると、履歴データはメモリに保存されなくなり、ディスクに直接書き込まれます。このようにして、TiDBサーバーが再起動しても履歴データは引き続き使用できます。
 </CustomContent>
 
 ## 永続化ステートメントの概要 {#persist-statements-summary}
 
 <CustomContent platform="tidb-cloud">
-
-このセクションは、TiDB セルフホスト型にのみ適用されます。 TiDB Cloudの場合、 `tidb_stmt_summary_enable_persistent`パラメーターの値はデフォルトで`false`であり、動的変更はサポートされていません。
-
+  このセクションは、TiDB セルフホスト型にのみ適用されます。 TiDB Cloudの場合、 `tidb_stmt_summary_enable_persistent`パラメーターの値はデフォルトで`false`であり、動的変更はサポートされていません。
 </CustomContent>
 
 > **警告：**
@@ -209,15 +197,11 @@ select * from information_schema.statements_summary_evicted;
 > ステートメントの概要の永続化は実験的機能です。本番環境で使用することはお勧めできません。この機能は予告なく変更または削除される場合があります。バグを見つけた場合は、GitHub で[問題](https://github.com/pingcap/tidb/issues)を報告できます。
 
 <CustomContent platform="tidb">
-
-[制限](#limitation)セクションで説明したように、ステートメント概要テーブルはデフォルトでメモリに保存されます。 TiDBサーバーが再起動すると、すべてのステートメントの概要が失われます。 v6.6.0 以降、TiDB は実験的に構成項目[`tidb_stmt_summary_enable_persistent`](/tidb-configuration-file.md#tidb_stmt_summary_enable_persistent-new-in-v660)を提供し、ユーザーがステートメントの概要の永続性を有効または無効にできるようにします。
-
+  [制限](#limitation)セクションで説明したように、ステートメント概要テーブルはデフォルトでメモリに保存されます。 TiDBサーバーが再起動すると、すべてのステートメントの概要が失われます。 v6.6.0 以降、TiDB は実験的に構成項目[`tidb_stmt_summary_enable_persistent`](/tidb-configuration-file.md#tidb_stmt_summary_enable_persistent-new-in-v660)を提供し、ユーザーがステートメントの概要の永続性を有効または無効にできるようにします。
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
-
-[制限](#limitation)セクションで説明したように、ステートメント概要テーブルはデフォルトでメモリに保存されます。 TiDBサーバーが再起動すると、すべてのステートメントの概要が失われます。 v6.6.0 以降、TiDB は実験的に構成項目`tidb_stmt_summary_enable_persistent`を提供し、ユーザーがステートメントの概要の永続性を有効または無効にできるようにします。
-
+  [制限](#limitation)セクションで説明したように、ステートメント概要テーブルはデフォルトでメモリに保存されます。 TiDBサーバーが再起動すると、すべてのステートメントの概要が失われます。 v6.6.0 以降、TiDB は実験的に構成項目`tidb_stmt_summary_enable_persistent`を提供し、ユーザーがステートメントの概要の永続性を有効または無効にできるようにします。
 </CustomContent>
 
 ステートメントの概要の永続性を有効にするには、次の構成項目を TiDB 構成ファイルに追加できます。
@@ -235,12 +219,10 @@ tidb_stmt_summary_enable_persistent = true
 ステートメントの概要の永続性が有効になった後、メモリには現在のリアルタイム データのみが保持され、履歴データは保持されません。リアルタイム データが履歴データとして更新されると、履歴データは[パラメータ設定](#parameter-configuration)セクションで説明した`tidb_stmt_summary_refresh_interval`の間隔でディスクに書き込まれます。 `statements_summary_history`または`cluster_statements_summary_history`テーブルに対するクエリは、メモリ内データとディスク上のデータの両方を組み合わせた結果を返します。
 
 <CustomContent platform="tidb">
-
-> **ノート：**
->
-> -   ステートメントの概要の永続性が有効になっている場合、メモリに履歴データが保持されないため、 [パラメータ設定](#parameter-configuration)セクションで説明されている`tidb_stmt_summary_history_size`設定は有効になりません。代わりに、永続化のための履歴データの保持期間とサイズを制御するために、 [`tidb_stmt_summary_file_max_days`](/tidb-configuration-file.md#tidb_stmt_summary_file_max_days-new-in-v660) 、 [`tidb_stmt_summary_file_max_size`](/tidb-configuration-file.md#tidb_stmt_summary_file_max_size-new-in-v660) 、および[`tidb_stmt_summary_file_max_backups`](/tidb-configuration-file.md#tidb_stmt_summary_file_max_backups-new-in-v660)の 3 つの構成が使用されます。
-> -   `tidb_stmt_summary_refresh_interval`の値が小さいほど、より多くの即時データがディスクに書き込まれます。ただし、これは、より多くの冗長データがディスクに書き込まれることも意味します。
-
+  > **注記：**
+  >
+  > -   ステートメントの概要の永続化が有効になっている場合、メモリに履歴データが保持されないため、 [パラメータ設定](#parameter-configuration)セクションで説明されている`tidb_stmt_summary_history_size`設定は有効になりません。代わりに、永続化のための履歴データの保持期間とサイズを制御するために、 [`tidb_stmt_summary_file_max_days`](/tidb-configuration-file.md#tidb_stmt_summary_file_max_days-new-in-v660) 、 [`tidb_stmt_summary_file_max_size`](/tidb-configuration-file.md#tidb_stmt_summary_file_max_size-new-in-v660) 、および[`tidb_stmt_summary_file_max_backups`](/tidb-configuration-file.md#tidb_stmt_summary_file_max_backups-new-in-v660)の 3 つの構成が使用されます。
+  > -   `tidb_stmt_summary_refresh_interval`の値が小さいほど、より多くの即時データがディスクに書き込まれます。ただし、これは、より多くの冗長データがディスクに書き込まれることも意味します。
 </CustomContent>
 
 ## トラブルシューティングの例 {#troubleshooting-examples}
@@ -251,8 +233,6 @@ tidb_stmt_summary_enable_persistent = true
 
 この例では、クライアントは`employee`テーブルに対するポイント クエリでパフォーマンスの低下を示しています。 SQL テキストに対してあいまい検索を実行できます。
 
-{{< copyable "" >}}
-
 ```sql
 SELECT avg_latency, exec_count, query_sample_text
     FROM information_schema.statements_summary
@@ -260,8 +240,6 @@ SELECT avg_latency, exec_count, query_sample_text
 ```
 
 `1ms`と`0.3ms` 、正常範囲の`avg_latency`内とみなされます。したがって、サーバー側が原因ではないと結論付けることができます。クライアントまたはネットワークのトラブルシューティングを行うことができます。
-
-{{< copyable "" >}}
 
 ```sql
 +-------------+------------+------------------------------------------+
@@ -277,8 +255,6 @@ SELECT avg_latency, exec_count, query_sample_text
 
 QPS が 10:00 から 10:30 に大幅に減少した場合、履歴テーブルから最も長い時間を消費した SQL ステートメントの 3 つのカテゴリを見つけることができます。
 
-{{< copyable "" >}}
-
 ```sql
 SELECT sum_latency, avg_latency, exec_count, query_sample_text
     FROM information_schema.statements_summary_history
@@ -287,8 +263,6 @@ SELECT sum_latency, avg_latency, exec_count, query_sample_text
 ```
 
 結果は、次の 3 つのカテゴリの SQL ステートメントが合計で最も長い時間を費やしており、高い優先度で最適化する必要があることを示しています。
-
-{{< copyable "" >}}
 
 ```sql
 +-------------+-------------+------------+-----------------------------------------------------------------------+
@@ -314,7 +288,7 @@ SELECT sum_latency, avg_latency, exec_count, query_sample_text
 -   `DIGEST` : このカテゴリの SQL ステートメントのダイジェスト。
 -   `DIGEST_TEXT` : 正規化された SQL ステートメント。
 -   `QUERY_SAMPLE_TEXT` : SQL カテゴリの元の SQL ステートメント。元のステートメントは 1 つだけ採用されます。
--   `TABLE_NAMES` : SQL ステートメントに関係するすべてのテーブル。複数のテーブルがある場合は、それぞれをカンマで区切ります。
+-   `TABLE_NAMES` : SQL ステートメントに含まれるすべてのテーブル。複数のテーブルがある場合は、それぞれをカンマで区切ります。
 -   `INDEX_NAMES` : SQL ステートメントで使用されるすべての SQL インデックス。複数のインデックスがある場合は、それぞれをカンマで区切ります。
 -   `SAMPLE_USER` : このカテゴリの SQL ステートメントを実行するユーザー。 1 人のユーザーのみが取得されます。
 -   `PLAN_DIGEST` : 実行計画のダイジェスト。

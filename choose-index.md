@@ -24,7 +24,7 @@ storageエンジンからのデータの読み取りは、SQL 実行中に最も
 | IndexLookupReader    | テーブルには 1 つ以上のインデックスがあり、計算に必要な列がインデックスに完全には含まれていません。 | IndexReader と同じです。                           | インデックスは計算列を完全にはカバーしていないため、TiDB はインデックスを読み取った後にテーブルから行を取得する必要があります。 IndexReader オペレーターと比較して追加のコストがかかります。                                                                 |
 | インデックスマージ            | テーブルには複数のインデックスまたは複数値のインデックスがあります。                  | 多値インデックスまたは複数のインデックスが使用される場合。                | 演算子を使用するには、 [オプティマイザーのヒント](/optimizer-hints.md)指定するか、コスト見積もりに基づいてオプティマイザにこの演算子を自動的に選択させることができます。詳細は[インデックス マージを使用した Explain ステートメント](/explain-index-merge.md)を参照してください。 |
 
-> **ノート：**
+> **注記：**
 >
 > TableReader 演算子は`_tidb_rowid`列インデックスに基づいており、 TiFlash は列storageインデックスを使用するため、インデックスの選択はテーブルにアクセスするための演算子の選択となります。
 
@@ -147,6 +147,8 @@ mysql> SHOW WARNINGS;
 
 複数値インデックスの制限については、 [`CREATE INDEX`](/sql-statements/sql-statement-create-index.md#limitations)を参照してください。
 
+### サポートされているシナリオ {#supported-scenarios}
+
 現在、TiDB は、 `json_member_of` 、 `json_contains` 、および`json_overlaps`条件から自動的に変換される IndexMerge を使用した複数値インデックスへのアクセスをサポートしています。オプティマイザを利用してコストに基づいて IndexMerge を自動的に選択することも、オプティマイザのヒント[`use_index_merge`](/optimizer-hints.md#use_index_merget1_name-idx1_name--idx2_name-)または[`use_index`](/optimizer-hints.md#use_indext1_name-idx1_name--idx2_name-)を使用して複数値インデックスの選択を指定することもできます。次の例を参照してください。
 
 ```sql
@@ -233,7 +235,7 @@ mysql> EXPLAIN SELECT /*+ use_index_merge(t2, idx) */ * FROM t2 WHERE a=1 AND JS
 6 rows in set, 1 warning (0.00 sec)
 ```
 
-複数の`member of`式で構成される`OR`条件の場合、IndexMerge を使用して複数値インデックスにアクセスできます。
+同じ多値インデックスにアクセスできる複数の`member of`式で構成される`OR`条件の場合、IndexMerge を使用して多値インデックスにアクセスできます。
 
 ```sql
 mysql> CREATE TABLE t3 (a INT, j JSON, INDEX idx(a, (CAST(j AS SIGNED ARRAY))));
@@ -251,7 +253,71 @@ mysql> EXPLAIN SELECT /*+ use_index_merge(t3, idx) */ * FROM t3 WHERE ((a=1 AND 
 +---------------------------------+---------+-----------+---------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------+
 ```
 
-以下は、まだサポートされていないいくつかのシナリオです。
+### 部分的にサポートされるシナリオ {#partially-supported-scenarios}
+
+複数の異なるインデックスに対応する複数の式で構成される`AND`条件の場合、アクセスに使用できる複数値インデックスは 1 つだけです。
+
+```sql
+mysql> create table t(j1 json, j2 json, a int, INDEX k1((CAST(j1->'$.path' AS SIGNED ARRAY))), INDEX k2((CAST(j2->'$.path' AS SIGNED ARRAY))), INDEX ka(a));
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> explain select /*+ use_index_merge(t, k1, k2, ka) */ * from t where (1 member of (j1->'$.path')) and (2 member of (j2->'$.path')) and (a = 3);
++---------------------------------+---------+-----------+----------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------+
+| id                              | estRows | task      | access object                                                              | operator info                                                                                                                                  |
++---------------------------------+---------+-----------+----------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------+
+| Selection_5                     | 8.00    | root      |                                                                            | json_memberof(cast(1, json BINARY), json_extract(test.t.j1, "$.path")), json_memberof(cast(2, json BINARY), json_extract(test.t.j2, "$.path")) |
+| └─IndexMerge_9                  | 0.01    | root      |                                                                            | type: union                                                                                                                                    |
+|   ├─IndexRangeScan_6(Build)     | 10.00   | cop[tikv] | table:t, index:k1(cast(json_extract(`j1`, _utf8'$.path') as signed array)) | range:[1,1], keep order:false, stats:pseudo                                                                                                    |
+|   └─Selection_8(Probe)          | 0.01    | cop[tikv] |                                                                            | eq(test.t.a, 3)                                                                                                                                |
+|     └─TableRowIDScan_7          | 10.00   | cop[tikv] | table:t                                                                    | keep order:false, stats:pseudo                                                                                                                 |
++---------------------------------+---------+-----------+----------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------+
+5 rows in set, 6 warnings (0.01 sec)
+```
+
+現在、TiDB は、複数のインデックスを使用して同時にアクセスする次のプランを生成するのではなく、1 つのインデックスを使用したアクセスのみをサポートしています。
+
+```
+Selection
+└─IndexMerge
+  ├─IndexRangeScan(k1)
+  ├─IndexRangeScan(k2)
+  ├─IndexRangeScan(ka)
+  └─Selection
+    └─TableRowIDScan
+```
+
+### サポートされていないシナリオ {#unsupported-scenarios}
+
+複数の異なるインデックスに対応する複数の式で構成される`OR`条件の場合、複数値インデックスは使用できません。
+
+```sql
+mysql> create table t(j1 json, j2 json, a int, INDEX k1((CAST(j1->'$.path' AS SIGNED ARRAY))), INDEX k2((CAST(j2->'$.path' AS SIGNED ARRAY))), INDEX ka(a));
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> explain select /*+ use_index_merge(t, k1, k2, ka) */ * from t where (1 member of (j1->'$.path')) or (2 member of (j2->'$.path'));
++-------------------------+----------+-----------+---------------+----------------------------------------------------------------------------------------------------------------------------------------------------+
+| id                      | estRows  | task      | access object | operator info                                                                                                                                      |
++-------------------------+----------+-----------+---------------+----------------------------------------------------------------------------------------------------------------------------------------------------+
+| Selection_5             | 8000.00  | root      |               | or(json_memberof(cast(1, json BINARY), json_extract(test.t.j1, "$.path")), json_memberof(cast(2, json BINARY), json_extract(test.t.j2, "$.path"))) |
+| └─TableReader_7         | 10000.00 | root      |               | data:TableFullScan_6                                                                                                                               |
+|   └─TableFullScan_6     | 10000.00 | cop[tikv] | table:t       | keep order:false, stats:pseudo                                                                                                                     |
++-------------------------+----------+-----------+---------------+----------------------------------------------------------------------------------------------------------------------------------------------------+
+3 rows in set, 3 warnings (0.00 sec)
+
+mysql> explain select /*+ use_index_merge(t, k1, k2, ka) */ * from t where (1 member of (j1->'$.path')) or (a = 3);
++-------------------------+----------+-----------+---------------+---------------------------------------------------------------------------------------------+
+| id                      | estRows  | task      | access object | operator info                                                                               |
++-------------------------+----------+-----------+---------------+---------------------------------------------------------------------------------------------+
+| Selection_5             | 8000.00  | root      |               | or(json_memberof(cast(1, json BINARY), json_extract(test.t.j1, "$.path")), eq(test.t.a, 3)) |
+| └─TableReader_7         | 10000.00 | root      |               | data:TableFullScan_6                                                                        |
+|   └─TableFullScan_6     | 10000.00 | cop[tikv] | table:t       | keep order:false, stats:pseudo                                                              |
++-------------------------+----------+-----------+---------------+---------------------------------------------------------------------------------------------+
+3 rows in set, 3 warnings (0.00 sec)
+```
+
+前述のシナリオの回避策は、 `Union All`を使用してクエリを書き直すことです。
+
+以下は、まだサポートされていない、より複雑なシナリオです。
 
 ```sql
 mysql> CREATE TABLE t4 (j JSON, INDEX idx((CAST(j AS SIGNED ARRAY))));
@@ -298,7 +364,7 @@ mysql> EXPLAIN SELECT /*+ use_index_merge(t3, idx) */ * FROM t3 WHERE ((1 member
 3 rows in set, 2 warnings (0.00 sec)
 ```
 
-多値インデックスの現在の実装による制限により、 [`use_index`](/optimizer-hints.md#use_indext1_name-idx1_name--idx2_name-)を使用すると`Can't find a proper physical plan for this query`エラーが返される可能性がありますが、 [`use_index_merge`](/optimizer-hints.md#use_index_merget1_name-idx1_name--idx2_name-)使用するとそのようなエラーは返されません。したがって、複数値のインデックスを使用する場合は`use_index_merge`を使用することをお勧めします。
+複数値インデックスの現在の実装による制限により、 [`use_index`](/optimizer-hints.md#use_indext1_name-idx1_name--idx2_name-)を使用すると`Can't find a proper physical plan for this query`エラーが返される可能性がありますが、 [`use_index_merge`](/optimizer-hints.md#use_index_merget1_name-idx1_name--idx2_name-)使用するとそのようなエラーは返されません。したがって、複数値のインデックスを使用する場合は`use_index_merge`を使用することをお勧めします。
 
 ```sql
 mysql> EXPLAIN SELECT /*+ use_index(t3, idx) */ * FROM t3 WHERE ((1 member of (j)) AND (2 member of (j))) OR ((3 member of (j)) AND (4 member of (j)));

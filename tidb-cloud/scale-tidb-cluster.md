@@ -5,7 +5,7 @@ summary: Learn how to scale your TiDB Cloud cluster.
 
 # TiDBクラスタを拡張する {#scale-your-tidb-cluster}
 
-> **ノート：**
+> **注記：**
 >
 > -   [TiDB サーバーレスクラスター](/tidb-cloud/select-cluster-tier.md#tidb-serverless)をスケールすることはできません。
 > -   クラスターが**MODIFYING**ステータスにある場合、クラスターに対して新しいスケーリング操作を実行することはできません。
@@ -18,9 +18,9 @@ TiDB クラスターは次の次元でスケールできます。
 
 TiDB クラスターのサイズを決定する方法については、 [TiDB サイズを決定する](/tidb-cloud/size-your-cluster.md)を参照してください。
 
-> **ノート：**
+> **注記：**
 >
-> TiDB または TiKV の vCPU および RAM サイズが**2 vCPU、8 GiB (ベータ)**または**4 vCPU、16 GiB**に設定されている場合は、次の制限事項に注意してください。これらの制限を回避するには、まず[vCPU と RAM を増やす](#change-vcpu-and-ram)を実行します。
+> TiDB または TiKV の vCPU および RAM サイズが**2 vCPU、8 GiB (ベータ)**または**4 vCPU、16 GiB**に設定されている場合は、次の制限に注意してください。これらの制限を回避するには、まず[vCPU と RAM を増やす](#change-vcpu-and-ram)を実行します。
 >
 > -   TiDB のノード番号は 1 または 2 のみに設定でき、TiKV のノード番号は 3 に固定されます。
 > -   2 vCPU TiDB は 2 vCPU TiKV でのみ使用でき、2 vCPU TiKV は 2 vCPU TiDB でのみ使用できます。
@@ -57,11 +57,11 @@ TiDB、TiKV、またはTiFlashノードの数を変更するには、次の手�
 
 TiDB、TiKV、またはTiFlashノードの vCPU と RAM を増減できます。
 
-> **ノート：**
+> **注記：**
 >
 > -   vCPU と RAM の変更は、次のクラスターでのみ使用できます。
 >     -   AWS でホストされ、2022/12/31 以降に作成されました。
->     -   GCP でホストされ、2023/04/26 以降に作成されました。
+>     -   Google Cloud でホストされ、2023/04/26 以降に作成されました。
 > -   AWS には、vCPU と RAM の変更に関するクールダウン期間があります。 TiDB クラスターが AWS でホストされている場合、 TiKV またはTiFlashのstorage、vCPU、RAM を変更した後、再度変更できるようになるまで少なくとも 6 時間待つ必要があります。
 
 TiDB、TiKV、またはTiFlashノードの vCPU と RAM を変更するには、次の手順を実行します。

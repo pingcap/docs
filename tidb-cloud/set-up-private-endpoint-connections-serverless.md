@@ -9,7 +9,7 @@ summary: Learn how to connect to your TiDB Cloud cluster via private endpoint.
 
 > **ヒント：**
 >
-> プライベート エンドポイント経由で TiDB 専用クラスターに接続する方法については、 [プライベートエンドポイント経由で TiDB 専用に接続する](/tidb-cloud/set-up-private-endpoint-connections.md)を参照してください。
+> AWS のプライベート エンドポイント経由で TiDB 専用クラスターに接続する方法については、 [AWS のプライベート エンドポイント経由で専用 TiDB に接続する](/tidb-cloud/set-up-private-endpoint-connections.md)を参照してください。 Google Cloud のプライベート エンドポイントを介して TiDB 専用クラスターに接続する方法については、 [プライベート サービス経由で専用 TiDB に接続 Google Cloud に接続](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)参照してください。
 
 TiDB Cloud は、 AWS VPC でホストされているTiDB Cloudサービスへの[AWS プライベートリンク](https://aws.amazon.com/privatelink/?privatelink-blogs.sort-by=item.additionalFields.createdDate&#x26;privatelink-blogs.sort-order=desc)経由の、あたかもそのサービスが独自の VPC 内にあるかのように、安全性の高い一方向のアクセスをサポートします。プライベート エンドポイントが VPC で公開され、許可を得てエンドポイント経由でTiDB Cloudサービスへの接続を作成できます。
 
@@ -26,7 +26,7 @@ AWS PrivateLink を利用したエンドポイント接続は安全かつプラ�
 
 ## 制限 {#restrictions}
 
--   現在、 TiDB Cloud は、エンドポイント サービスが AWS でホストされている場合にのみプライベート エンドポイント接続をサポートします。サービスが Google Cloud Platform (GCP) でホストされている場合、プライベート エンドポイントは適用されません。
+-   現在、 TiDB Cloud は、エンドポイント サービスが AWS でホストされている場合にのみ、TiDB Serverless へのプライベート エンドポイント接続をサポートしています。サービスが Google Cloud でホストされている場合、プライベート エンドポイントは適用されません。
 -   リージョン間のプライベート エンドポイント接続はサポートされていません。
 
 ## AWS でプライベート エンドポイントをセットアップする {#set-up-a-private-endpoint-with-aws}
@@ -44,60 +44,57 @@ AWS PrivateLink を利用したエンドポイント接続は安全かつプラ�
 3.  **[エンドポイント タイプ]**ドロップダウン リストで、 **[プライベート]**を選択します。
 4.  **サービス名**、**アベイラビリティーゾーン ID** 、および**リージョンID**をメモします。
 
-    > **ノート：**
+    > **注記：**
     >
     > AWS リージョンごとにプライベート エンドポイントを 1 つ作成するだけで済み、同じリージョンにあるすべての TiDB サーバーレス クラスターで共有できます。
 
 ### ステップ 2. AWS インターフェースエンドポイントを作成する {#step-2-create-an-aws-interface-endpoint}
 
 <SimpleTab>
-<div label="Use AWS Console">
+  <div label="Use AWS Console">
+    AWS マネジメントコンソールを使用して VPC インターフェイスエンドポイントを作成するには、次の手順を実行します。
 
-AWS マネジメントコンソールを使用して VPC インターフェイスエンドポイントを作成するには、次の手順を実行します。
+    1.  [AWS マネジメントコンソール](https://aws.amazon.com/console/)にサインインし、 [https://console.aws.amazon.com/vpc/](https://console.aws.amazon.com/vpc/)で Amazon VPC コンソールを開きます。
 
-1.  [AWS マネジメントコンソール](https://aws.amazon.com/console/)にサインインし、 [https://console.aws.amazon.com/vpc/](https://console.aws.amazon.com/vpc/)で Amazon VPC コンソールを開きます。
+    2.  ナビゲーション ペインで**[エンドポイント]**をクリックし、右上隅の**[エンドポイントの作成]**をクリックします。
 
-2.  ナビゲーション ペインで**[エンドポイント]**をクリックし、右上隅の**[エンドポイントの作成]**をクリックします。
+        **[エンドポイントの作成]**ページが表示されます。
 
-    **[エンドポイントの作成]**ページが表示されます。
+        ![Verify endpoint service](/media/tidb-cloud/private-endpoint/create-endpoint-2.png)
 
-    ![Verify endpoint service](/media/tidb-cloud/private-endpoint/create-endpoint-2.png)
+    3.  **[その他のエンドポイント サービス]**を選択します。
 
-3.  **[その他のエンドポイント サービス]**を選択します。
+    4.  [ステップ1](#step-1-choose-a-tidb-cluster)で見つけたサービス名を入力します。
 
-4.  [ステップ1](#step-1-choose-a-tidb-cluster)で見つけたサービス名を入力します。
+    5.  **[サービスの確認]**をクリックします。
 
-5.  **[サービスの確認]**をクリックします。
+    6.  ドロップダウン リストから VPC を選択します。 **[追加設定]**を展開し、 **[DNS 名を有効にする]**チェックボックスを選択します。
 
-6.  ドロップダウン リストから VPC を選択します。 **[追加設定]**を展開し、 **[DNS 名を有効にする**] チェックボックスを選択します。
+    7.  **[サブネット]**領域で、TiDB クラスターが配置されているアベイラビリティ ゾーンを選択し、サブネット ID を選択します。
 
-7.  **[サブネット]**領域で、TiDB クラスターが配置されているアベイラビリティ ゾーンを選択し、サブネット ID を選択します。
+    8.  **[Securityグループ]**領域でセキュリティ グループを適切に選択します。
 
-8.  **[Securityグループ]**領域でセキュリティ グループを適切に選択します。
+        > **注記：**
+        >
+        > 選択したセキュリティ グループがポート 4000 での EC2 インスタンスからの受信アクセスを許可していることを確認してください。
 
-    > **ノート：**
+    9.  **「エンドポイントの作成」**をクリックします。
+  </div>
+
+  <div label="Use AWS CLI">
+    AWS CLI を使用して VPC インターフェイスエンドポイントを作成するには、次の手順を実行します。
+
+    1.  **VPC ID**と**サブネット ID**を取得するには、AWS マネジメントコンソールに移動し、関連するセクションでそれらを見つけます。 [ステップ1](#step-1-choose-a-tidb-cluster)で見つけた**アベイラビリティーゾーン ID を**必ず入力してください。
+    2.  以下に提供されているコマンドをコピーし、関連する引数を取得した情報に置き換えて、ターミナルで実行します。
+
+    ```bash
+    aws ec2 create-vpc-endpoint --vpc-id ${your_vpc_id} --region ${region_id} --service-name ${service_name} --vpc-endpoint-type Interface --subnet-ids ${your_subnet_id}
+    ```
+
+    > **ヒント：**
     >
-    > 選択したセキュリティ グループがポート 4000 での EC2 インスタンスからの受信アクセスを許可していることを確認してください。
-
-9.  **「エンドポイントの作成」**をクリックします。
-
-</div>
-<div label="Use AWS CLI">
-
-AWS CLI を使用して VPC インターフェイスエンドポイントを作成するには、次の手順を実行します。
-
-1.  **VPC ID**と**サブネット ID**を取得するには、AWS マネジメントコンソールに移動し、関連するセクションでそれらを見つけます。 [ステップ1](#step-1-choose-a-tidb-cluster)で見つけた**アベイラビリティーゾーン ID を**必ず入力してください。
-2.  以下に提供されているコマンドをコピーし、関連する引数を取得した情報に置き換えて、ターミナルで実行します。
-
-```bash
-aws ec2 create-vpc-endpoint --vpc-id ${your_vpc_id} --region ${region_id} --service-name ${service_name} --vpc-endpoint-type Interface --subnet-ids ${your_subnet_id}
-```
-
-> **ヒント：**
->
-> コマンドを実行する前に、AWS CLI をインストールして設定する必要があります。詳細については[AWS CLI 設定の基本](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html)を参照してください。
-
-</div>
+    > コマンドを実行する前に、AWS CLI をインストールして設定する必要があります。詳細については[AWS CLI 設定の基本](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html)を参照してください。
+  </div>
 </SimpleTab>
 
 その後、プライベート DNS 名を使用してエンドポイント サービスに接続できます。

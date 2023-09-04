@@ -43,7 +43,7 @@ Top SQL機能はまだ初期段階にあり、継続的に強化されていま�
 
 ## Top SQLを有効にする {#enable-top-sql}
 
-> **ノート：**
+> **注記：**
 >
 > Top SQLを使用するには、最新バージョンのTiUP (v1.9.0 以降) またはTiDB Operator (v1.3.0 以降) を使用してクラスターをデプロイまたはアップグレードする必要があります。クラスターが以前のバージョンのTiUPまたはTiDB Operatorを使用してアップグレードされた場合、手順については[FAQ](/dashboard/dashboard-faq.md#a-required-component-ngmonitoring-is-not-started-error-is-shown)を参照してください。
 
@@ -56,8 +56,6 @@ Top SQL は、有効にするとクラスターのパフォーマンスにわず
 機能を有効にした後、 Top SQL がデータをロードするまで最大 1 分間待ちます。次に、CPU 負荷の詳細を確認できます。
 
 UI に加えて、TiDB システム変数[`tidb_enable_top_sql`](/system-variables.md#tidb_enable_top_sql-new-in-v540)を設定してTop SQL機能を有効にすることもできます。
-
-{{< copyable "" >}}
 
 ```sql
 SET GLOBAL tidb_enable_top_sql = 1;
@@ -107,8 +105,6 @@ SET GLOBAL tidb_enable_top_sql = 1;
 4.  ポップアップダイアログボックスで、 **「無効にする」**をクリックします。
 
 UI に加えて、TiDB システム変数[`tidb_enable_top_sql`](/system-variables.md#tidb_enable_top_sql-new-in-v540)を設定してTop SQL機能を無効にすることもできます。
-
-{{< copyable "" >}}
 
 ```sql
 SET GLOBAL tidb_enable_top_sql = 0;

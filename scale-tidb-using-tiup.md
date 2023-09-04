@@ -25,13 +25,13 @@ TiDB クラスターの容量は、オンライン サービスを中断する�
 
 このセクションでは、TiDB ノードを`10.0.1.5`ホストに追加する方法を例に説明します。
 
-> **ノート：**
+> **注記：**
 >
 > 同様の手順を実行して PD ノードを追加できます。 TiKV ノードを追加する前に、クラスターの負荷に応じて PD スケジューリング パラメーターを事前に調整することをお勧めします。
 
 1.  スケールアウト トポロジを構成します。
 
-    > **ノート：**
+    > **注記：**
     >
     > -   デフォルトでは、ポートとディレクトリの情報は必要ありません。
     > -   複数のインスタンスが 1 台のマシンにデプロイされている場合は、それらに異なるポートとディレクトリを割り当てる必要があります。ポートまたはディレクトリに競合がある場合は、展開またはスケーリング中に通知を受け取ります。
@@ -39,13 +39,9 @@ TiDB クラスターの容量は、オンライン サービスを中断する�
 
     スケールアウト トポロジ構成を`scale-out.yml`ファイルに追加します。
 
-    {{< copyable "" >}}
-
     ```shell
     vi scale-out.yml
     ```
-
-    {{< copyable "" >}}
 
     ```ini
     tidb_servers:
@@ -59,8 +55,6 @@ TiDB クラスターの容量は、オンライン サービスを中断する�
 
     TiKV 構成ファイルのテンプレートは次のとおりです。
 
-    {{< copyable "" >}}
-
     ```ini
     tikv_servers:
     - host: 10.0.1.5
@@ -73,8 +67,6 @@ TiDB クラスターの容量は、オンライン サービスを中断する�
     ```
 
     PD 構成ファイルのテンプレートは次のとおりです。
-
-    {{< copyable "" >}}
 
     ```ini
     pd_servers:
@@ -96,23 +88,17 @@ TiDB クラスターの容量は、オンライン サービスを中断する�
 
     1.  潜在的なリスクを確認します。
 
-        {{< copyable "" >}}
-
         ```shell
         tiup cluster check <cluster-name> scale-out.yml --cluster --user root [-p] [-i /home/root/.ssh/gcp_rsa]
         ```
 
     2.  自動修復を有効にする:
 
-        {{< copyable "" >}}
-
         ```shell
         tiup cluster check <cluster-name> scale-out.yml --cluster --apply --user root [-p] [-i /home/root/.ssh/gcp_rsa]
         ```
 
     3.  `scale-out`コマンドを実行します。
-
-        {{< copyable "" >}}
 
         ```shell
         tiup cluster scale-out <cluster-name> scale-out.yml [-p] [-i /home/root/.ssh/gcp_rsa]
@@ -127,8 +113,6 @@ TiDB クラスターの容量は、オンライン サービスを中断する�
     `Scaled cluster <cluster-name> out successfully`が表示されれば、スケールアウト操作は成功しています。
 
 3.  クラスターのステータスを確認します。
-
-    {{< copyable "" >}}
 
     ```shell
     tiup cluster display <cluster-name>
@@ -150,7 +134,7 @@ TiDB クラスターの容量は、オンライン サービスを中断する�
 
 このセクションでは、 TiFlashノードを`10.0.1.4`ホストに追加する方法を例に説明します。
 
-> **ノート：**
+> **注記：**
 >
 > TiFlashノードを既存の TiDB クラスターに追加する場合は、次の点に注意してください。
 >
@@ -161,8 +145,6 @@ TiDB クラスターの容量は、オンライン サービスを中断する�
 
     TiFlashノード情報を追加する`scale-out.yml`ファイルを作成します。
 
-    {{< copyable "" >}}
-
     ```ini
     tiflash_servers:
     - host: 10.0.1.4
@@ -172,19 +154,15 @@ TiDB クラスターの容量は、オンライン サービスを中断する�
 
 2.  スケールアウト コマンドを実行します。
 
-    {{< copyable "" >}}
-
     ```shell
     tiup cluster scale-out <cluster-name> scale-out.yml
     ```
 
-    > **ノート：**
+    > **注記：**
     >
     > 前述のコマンドは、ユーザーがコマンドと新しいマシンを実行できるように相互信頼が構成されているという前提に基づいています。相互信頼を構成できない場合は、 `-p`オプションを使用して新しいマシンのパスワードを入力するか、 `-i`オプションを使用して秘密キー ファイルを指定します。
 
 3.  クラスターのステータスをビュー。
-
-    {{< copyable "" >}}
 
     ```shell
     tiup cluster display <cluster-name>
@@ -210,8 +188,6 @@ TiDB クラスターの容量は、オンライン サービスを中断する�
 
     TiCDC ノード情報を追加する`scale-out.yml`ファイルを作成します。
 
-    {{< copyable "" >}}
-
     ```ini
     cdc_servers:
       - host: 10.0.1.3
@@ -224,19 +200,15 @@ TiDB クラスターの容量は、オンライン サービスを中断する�
 
 2.  スケールアウト コマンドを実行します。
 
-    {{< copyable "" >}}
-
     ```shell
     tiup cluster scale-out <cluster-name> scale-out.yml
     ```
 
-    > **ノート：**
+    > **注記：**
     >
     > 前述のコマンドは、ユーザーがコマンドと新しいマシンを実行できるように相互信頼が構成されているという前提に基づいています。相互信頼を構成できない場合は、 `-p`オプションを使用して新しいマシンのパスワードを入力するか、 `-i`オプションを使用して秘密キー ファイルを指定します。
 
 3.  クラスターのステータスをビュー。
-
-    {{< copyable "" >}}
 
     ```shell
     tiup cluster display <cluster-name>
@@ -250,7 +222,7 @@ TiDB クラスターの容量は、オンライン サービスを中断する�
 | :------- | :------------------------------ |
 | 10.0.1.3 | TiDB + TiFlash + **TiCDC**      |
 | 10.0.1.4 | TiDB + PD + TiFlash + **TiCDC** |
-| 10.0.1.5 | TiDB+ TiKV+ モニター                |
+| 10.0.1.5 | TiDB+ TiKV + モニター               |
 | 10.0.1.1 | TiKV                            |
 | 10.0.1.2 | TiKV                            |
 
@@ -258,15 +230,13 @@ TiDB クラスターの容量は、オンライン サービスを中断する�
 
 このセクションでは、 `10.0.1.5`ホストから TiKV ノードを削除する方法を例に示します。
 
-> **ノート：**
+> **注記：**
 >
 > -   同様の手順を実行して、TiDB または PD ノードを削除できます。
 > -   TiKV、 TiFlash、および TiDB Binlogコンポーネントは非同期でオフラインになり、停止プロセスに時間がかかるため、 TiUPはさまざまな方法でこれらをオフラインにします。詳細は[コンポーネントのオフラインプロセスの特別な処理](/tiup/tiup-component-cluster-scale-in.md#particular-handling-of-components-offline-process)を参照してください。
-> -   TiKV の PD クライアントは、PD ノードのリストをキャッシュします。 TiKV の現在のバージョンには、PD ノードを自動的かつ定期的に更新するメカニズムがあり、TiKV によってキャッシュされた PD ノードの期限切れリストの問題を軽減するのに役立ちます。ただし、PD をスケールアウトした後は、スケーリング前に存在していたすべての PD ノードを一度に直接削除しないようにする必要があります。必要に応じて、既存のすべての PD ノードをオフラインにする前に、必ず PD リーダーを新しく追加した PD ノードに切り替えてください。
+> -   TiKV の PD クライアントは、PD ノードのリストをキャッシュします。 TiKV の現在のバージョンには、PD ノードを自動的かつ定期的に更新するメカニズムがあり、TiKV によってキャッシュされた PD ノードの期限切れリストの問題を軽減できます。ただし、PD をスケールアウトした後は、スケーリング前に存在していたすべての PD ノードを一度に直接削除しないようにする必要があります。必要に応じて、既存のすべての PD ノードをオフラインにする前に、必ず PD リーダーを新しく追加した PD ノードに切り替えてください。
 
 1.  ノード ID 情報をビュー。
-
-    {{< copyable "" >}}
 
     ```shell
     tiup cluster display <cluster-name>
@@ -296,8 +266,6 @@ TiDB クラスターの容量は、オンライン サービスを中断する�
 
 2.  スケールイン コマンドを実行します。
 
-    {{< copyable "" >}}
-
     ```shell
     tiup cluster scale-in <cluster-name> --node 10.0.1.5:20160
     ```
@@ -309,8 +277,6 @@ TiDB クラスターの容量は、オンライン サービスを中断する�
 3.  クラスターのステータスを確認します。
 
     スケールインプロセスには時間がかかります。次のコマンドを実行して、スケールインのステータスを確認できます。
-
-    {{< copyable "" >}}
 
     ```shell
     tiup cluster display <cluster-name>
@@ -342,7 +308,7 @@ TiDB クラスターの容量は、オンライン サービスを中断する�
     SELECT * FROM information_schema.tiflash_replica WHERE REPLICA_COUNT >  'tobe_left_nodes';
     ```
 
-2.  スケールイン後に、 TiFlashノードの数を超えるTiFlashレプリカを持つすべてのテーブルに対して次のステートメントを実行します。 `new_replica_num` `tobe_left_nodes`以下でなければなりません。
+2.  スケールイン後、 TiFlashノードの数を超えるTiFlashレプリカを持つすべてのテーブルに対して次のステートメントを実行します。 `new_replica_num` `tobe_left_nodes`以下でなければなりません。
 
     ```sql
     ALTER TABLE <db-name>.<table-name> SET tiflash replica 'new_replica_num';
@@ -358,15 +324,11 @@ TiDB クラスターの容量は、オンライン サービスを中断する�
 
 1.  削除するノードの名前を確認します。
 
-    {{< copyable "" >}}
-
     ```shell
     tiup cluster display <cluster-name>
     ```
 
 2.  TiFlashノードを削除します (ステップ 1 のノード名が`10.0.1.4:9000`であると仮定します)。
-
-    {{< copyable "" >}}
 
     ```shell
     tiup cluster scale-in <cluster-name> --node 10.0.1.4:9000
@@ -382,13 +344,11 @@ TiDB クラスターの容量は、オンライン サービスを中断する�
 
     -   TiUPデプロイメントを使用する場合は、 `pd-ctl` `tiup ctl:v<CLUSTER_VERSION> pd`に置き換えます。
 
-    {{< copyable "" >}}
-
     ```shell
     tiup ctl:v<CLUSTER_VERSION> pd -u http://<pd_ip>:<pd_port> store
     ```
 
-    > **ノート：**
+    > **注記：**
     >
     > クラスター内に複数の PD インスタンスが存在する場合、上記のコマンドでアクティブな PD インスタンスの IP アドレス:ポートを指定するだけで済みます。
 
@@ -398,13 +358,11 @@ TiDB クラスターの容量は、オンライン サービスを中断する�
 
     -   TiUPデプロイメントを使用する場合は、 `pd-ctl` `tiup ctl:v<CLUSTER_VERSION> pd`に置き換えます。
 
-        {{< copyable "" >}}
-
         ```shell
         tiup ctl:v<CLUSTER_VERSION> pd -u http://<pd_ip>:<pd_port> store delete <store_id>
         ```
 
-    > **ノート：**
+    > **注記：**
     >
     > クラスター内に複数の PD インスタンスが存在する場合、上記のコマンドでアクティブな PD インスタンスの IP アドレス:ポートを指定するだけで済みます。
 
@@ -414,21 +372,17 @@ TiDB クラスターの容量は、オンライン サービスを中断する�
 
 5.  次のコマンドを使用して、クラスター トポロジからダウンしたTiFlashノードに関する情報を削除します。
 
-    {{< copyable "" >}}
-
     ```shell
     tiup cluster scale-in <cluster-name> --node <pd_ip>:<pd_port> --force
     ```
 
-> **ノート：**
+> **注記：**
 >
 > クラスター内のすべてのTiFlashノードの実行が停止する前に、 TiFlashにレプリケートされたすべてのテーブルがキャンセルされていない場合は、PD のレプリケーション ルールを手動でクリーンアップする必要があります。そうしないと、 TiFlashノードは正常にダウンできません。
 
 PD のレプリケーション ルールを手動でクリーンアップする手順は次のとおりです。
 
 1.  現在の PD インスタンスのTiFlashに関連するすべてのデータ レプリケーション ルールをビュー。
-
-    {{< copyable "" >}}
 
     ```shell
     curl http://<pd_ip>:<pd_port>/pd/api/v1/config/rules/group/tiflash
@@ -459,15 +413,11 @@ PD のレプリケーション ルールを手動でクリーンアップする�
 
 2.  TiFlashに関連するすべてのデータ複製ルールを削除します。例として、 `id`が`table-45-r`であるルールを考えてみましょう。次のコマンドで削除します。
 
-    {{< copyable "" >}}
-
     ```shell
     curl -v -X DELETE http://<pd_ip>:<pd_port>/pd/api/v1/config/rule/tiflash/table-45-r
     ```
 
 3.  クラスターのステータスをビュー。
-
-    {{< copyable "" >}}
 
     ```shell
     tiup cluster display <cluster-name>
@@ -491,15 +441,11 @@ PD のレプリケーション ルールを手動でクリーンアップする�
 
 1.  ノードをオフラインにします。
 
-    {{< copyable "" >}}
-
     ```shell
     tiup cluster scale-in <cluster-name> --node 10.0.1.4:8300
     ```
 
 2.  クラスターのステータスをビュー。
-
-    {{< copyable "" >}}
 
     ```shell
     tiup cluster display <cluster-name>

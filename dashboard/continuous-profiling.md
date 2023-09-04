@@ -5,7 +5,7 @@ summary: Learn how to collect performance data from TiDB, TiKV and PD continuous
 
 # TiDB ダッシュボード インスタンス プロファイリング - 継続的プロファイリング {#tidb-dashboard-instance-profiling-continuous-profiling}
 
-> **ノート：**
+> **注記：**
 >
 > この機能はデータベースの専門家向けに設計されています。専門家以外のユーザーの場合は、PingCAP テクニカル サポートの指導の下でこの機能を使用することをお勧めします。
 
@@ -17,7 +17,7 @@ summary: Learn how to collect performance data from TiDB, TiKV and PD continuous
 
 継続的プロファイリングは[手動プロファイリング](/dashboard/dashboard-profiling.md)の拡張機能です。どちらも、インスタンスごとにさまざまな種類のパフォーマンス データを収集および分析するために使用できます。それらの違いは次のとおりです。
 
--   手動プロファイリングはプロファイリングを開始した瞬間の短期間 (たとえば 30 秒) のみパフォーマンス データを収集しますが、継続プロファイリングは有効にすると継続的にデータを収集します。
+-   手動プロファイリングは、プロファイリングを開始した瞬間の短期間 (たとえば、30 秒) のパフォーマンス データのみを収集しますが、継続的プロファイリングは、有効にすると継続的にデータを収集します。
 -   手動プロファイリングは現在発生している問題の分析にのみ使用できますが、継続プロファイリングは現在の問題と過去の問題の両方を分析するために使用できます。
 -   手動プロファイリングでは特定のインスタンスの特定のパフォーマンス データを収集できますが、継続的プロファイリングではすべてのインスタンスのすべてのパフォーマンス データが収集されます。
 -   継続的プロファイリングはより多くのパフォーマンス データを保存するため、より多くのディスク領域を消費します。
@@ -46,9 +46,9 @@ summary: Learn how to collect performance data from TiDB, TiKV and PD continuous
 
 ## 継続的プロファイリングを有効にする {#enable-continuous-profiling}
 
-> **ノート：**
+> **注記：**
 >
-> 継続的プロファイリングを使用するには、最新バージョンのTiUP (v1.9.0 以降) またはTiDB Operator (v1.3.0 以降) を使用してクラスターをデプロイまたはアップグレードする必要があります。クラスターが以前のバージョンのTiUPまたはTiDB Operatorを使用してアップグレードされた場合、手順については[FAQ](/dashboard/dashboard-faq.md#a-required-component-ngmonitoring-is-not-started-error-is-shown)を参照してください。
+> 継続的プロファイリングを使用するには、クラスターを最新バージョンのTiUP (v1.9.0 以降) またはTiDB Operator (v1.3.0 以降) でデプロイまたはアップグレードする必要があります。クラスターが以前のバージョンのTiUPまたはTiDB Operatorを使用してアップグレードされた場合、手順については[FAQ](/dashboard/dashboard-faq.md#a-required-component-ngmonitoring-is-not-started-error-is-shown)を参照してください。
 
 継続的プロファイリングを有効にすると、Web ページを常にアクティブにしておくことなく、バックグラウンドでパフォーマンス データを継続的に収集できます。収集されたデータは一定期間保存でき、期限切れのデータは自動的に消去されます。
 

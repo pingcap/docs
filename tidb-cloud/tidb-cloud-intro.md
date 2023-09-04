@@ -4,9 +4,9 @@ summary: Learn about TiDB Cloud and its architecture.
 category: intro
 ---
 
-# TiDB Cloudの概要 {#tidb-cloud-introduction}
+# TiDB Cloudの紹介 {#tidb-cloud-introduction}
 
-[TiDB Cloud](https://www.pingcap.com/tidb-cloud/)は、オープンソースのハイブリッド トランザクションおよび分析処理 (HTAP) データベースである[TiDB](https://docs.pingcap.com/tidb/stable/overview)クラウドに提供する、フルマネージドの Database-as-a-Service (DBaaS) です。 TiDB Cloudは、データベースの導入と管理を簡単に行う方法を提供し、データベースの複雑さではなく、アプリケーションに集中できるようにします。 TiDB Cloudクラスターを作成して、Google Cloud Platform (GCP) およびアマゾン ウェブ サービス (AWS) 上でミッションクリティカルなアプリケーションを迅速に構築できます。
+[TiDB Cloud](https://www.pingcap.com/tidb-cloud/)は、オープンソースのハイブリッド トランザクションおよび分析処理 (HTAP) データベースである[TiDB](https://docs.pingcap.com/tidb/stable/overview)クラウドに提供する、フルマネージドの Database-as-a-Service (DBaaS) です。 TiDB Cloudは、データベースの導入と管理を簡単に行う方法を提供し、データベースの複雑さではなく、アプリケーションに集中できるようにします。 TiDB Cloudクラスターを作成して、Google Cloud およびアマゾン ウェブ サービス (AWS) 上にミッションクリティカルなアプリケーションを迅速に構築できます。
 
 ![TiDB Cloud Overview](/media/tidb-cloud/tidb-cloud-overview.png)
 
@@ -20,7 +20,7 @@ TiDB Cloud を使用すると、トレーニングをほとんど、またはま
 
 TiDB Cloudの詳細については、次のビデオをご覧ください。
 
-<iframe width="600" height="450" src="https://www.youtube.com/embed/skCV9BEmjbo?enablejsapi=1" title="TiDB クラウドを選ぶ理由" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="600" height="450" src="https://www.youtube.com/embed/skCV9BEmjbo?enablejsapi=1" title="Why TiDB Cloud?" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen />
 
 TiDB Cloudを使用すると、次の主要な機能を利用できます。
 
@@ -34,7 +34,7 @@ TiDB Cloudを使用すると、次の主要な機能を利用できます。
 
 -   **高可用性と信頼性**
 
-    当然のことながら、設計により可用性が高くなります。複数のアベイラビリティーゾーンにわたるデータのレプリケーション、毎日のバックアップ、自動フェイルオーバーにより、ハードウェア障害、ネットワークの分断、データセンターの損失に関係なく、ビジネスの継続性が保証されます。
+    当然のことながら、設計により可用性が高くなります。複数のアベイラビリティーゾーンにわたるデータのレプリケーション、毎日のバックアップ、および自動フェイルオーバーにより、ハードウェア障害、ネットワークの分断、またはデータセンターの損失に関係なく、ビジネスの継続性が確保されます。
 
 -   **リアルタイム分析**
 
@@ -50,7 +50,7 @@ TiDB Cloudを使用すると、次の主要な機能を利用できます。
 
 -   **マルチクラウドのサポート**
 
-    クラウド ベンダーにロックインされることなく、柔軟性を維持します。 TiDB Cloudは現在、AWS と GCP で利用できます。
+    クラウド ベンダーにロックインされることなく、柔軟性を維持します。 TiDB Cloudは現在、AWS と Google Cloud で利用できます。
 
 -   **シンプルな料金プラン**
 
@@ -59,6 +59,20 @@ TiDB Cloudを使用すると、次の主要な機能を利用できます。
 -   **ワールドクラスのサポート**
 
     弊社のサポート ポータル、<a href="mailto:tidbcloud-support@pingcap.com">電子メール</a>、チャット、またはビデオ会議を通じて、世界クラスのサポートを受けてください。
+
+## 導入オプション {#deployment-options}
+
+TiDB Cloud には、次の 2 つの展開オプションが用意されています。
+
+-   [TiDB サーバーレス](https://www.pingcap.com/tidb-serverless)
+
+    TiDB Serverless は、フルマネージドのマルチテナント TiDB 製品です。即時自動スケーリングの MySQL 互換データベースを提供し、豊富な無料枠と、無料制限を超えた場合の従量制課金を提供します。
+
+-   [TiDB専用](https://www.pingcap.com/tidb-dedicated)
+
+    TiDB D dedicated は、クロスゾーンの高可用性、水平スケーリング、および[HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing)利点を備えた本番環境向けです。
+
+TiDB サーバーレスと TiDB 専用の機能の比較については、 [TiDB: 高度なオープンソースの分散 SQL データベース](https://www.pingcap.com/get-started-tidb)を参照してください。
 
 ## アーキテクチャ {#architecture}
 

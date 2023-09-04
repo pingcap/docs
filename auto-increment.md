@@ -8,19 +8,15 @@ summary: Learn the `AUTO_INCREMENT` column attribute of TiDB.
 このドキュメントでは、 `AUTO_INCREMENT`列属性について、その概念、実装原則、自動インクリメント関連の機能、および制限事項を含めて紹介します。
 
 <CustomContent platform="tidb">
-
-> **ノート：**
->
-> `AUTO_INCREMENT`属性は、本番環境でホットスポットを引き起こす可能性があります。詳細は[ホットスポットの問題のトラブルシューティング](/troubleshoot-hot-spot-issues.md)参照してください。代わりに[`AUTO_RANDOM`](/auto-random.md)を使用することをお勧めします。
-
+  > **注記：**
+  >
+  > `AUTO_INCREMENT`属性は、本番環境でホットスポットを引き起こす可能性があります。詳細は[ホットスポットの問題のトラブルシューティング](/troubleshoot-hot-spot-issues.md)参照してください。代わりに[`AUTO_RANDOM`](/auto-random.md)を使用することをお勧めします。
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
-
-> **ノート：**
->
-> `AUTO_INCREMENT`属性は、本番環境でホットスポットを引き起こす可能性があります。詳細は[ホットスポットの問題のトラブルシューティング](https://docs.pingcap.com/tidb/stable/troubleshoot-hot-spot-issues#handle-auto-increment-primary-key-hotspot-tables-using-auto_random)参照してください。代わりに[`AUTO_RANDOM`](/auto-random.md)を使用することをお勧めします。
-
+  > **注記：**
+  >
+  > `AUTO_INCREMENT`属性は、本番環境でホットスポットを引き起こす可能性があります。詳細は[ホットスポットの問題のトラブルシューティング](https://docs.pingcap.com/tidb/stable/troubleshoot-hot-spot-issues#handle-auto-increment-primary-key-hotspot-tables-using-auto_random)参照してください。代わりに[`AUTO_RANDOM`](/auto-random.md)を使用することをお勧めします。
 </CustomContent>
 
 [`CREATE TABLE`](/sql-statements/sql-statement-create-table.md)ステートメントの`AUTO_INCREMENT`パラメータを使用して、増分フィールドの初期値を指定することもできます。
@@ -31,19 +27,15 @@ summary: Learn the `AUTO_INCREMENT` column attribute of TiDB.
 
 パフォーマンス上の理由から、値のバッチ (デフォルトでは 30,000) で`AUTO_INCREMENT`番号が各 TiDBサーバーに割り当てられます。これは、 `AUTO_INCREMENT`数値が一意であることが保証されている一方で、 `INSERT`のステートメントに割り当てられた値は、TiDBサーバーごとに単調であることを意味します。
 
-> **ノート：**
+> **注記：**
 >
 > すべての TiDB サーバーで`AUTO_INCREMENT`数値を単調にしたい場合、および TiDB バージョンが v6.5.0 以降の場合は、 [MySQL互換モード](#mysql-compatibility-mode)を有効にすることをお勧めします。
 
 以下は`AUTO_INCREMENT`の基本的な例です。
 
-{{< copyable "" >}}
-
 ```sql
 CREATE TABLE t(id int PRIMARY KEY AUTO_INCREMENT, c int);
 ```
-
-{{< copyable "" >}}
 
 ```sql
 INSERT INTO t(c) VALUES (1);
@@ -66,8 +58,6 @@ mysql> SELECT * FROM t;
 ```
 
 さらに、 `AUTO_INCREMENT`列値を明示的に指定する`INSERT`ステートメントもサポートします。このような場合、TiDB は明示的に指定された値を保存します。
-
-{{< copyable "" >}}
 
 ```sql
 INSERT INTO t(id, c) VALUES (6, 6);
@@ -126,8 +116,6 @@ INSERT INTO t (c) VALUES (1)
 
 TiDB は、サーバーごとに`AUTO_INCREMENT`値が単調 (常に増加) であることを保証します。 1 ～ 3 の連続する`AUTO_INCREMENT`値が生成される次の例を考えてみましょう。
 
-{{< copyable "" >}}
-
 ```sql
 CREATE TABLE t (a int PRIMARY KEY AUTO_INCREMENT, b timestamp NOT NULL DEFAULT NOW());
 INSERT INTO t (a) VALUES (NULL), (NULL), (NULL);
@@ -151,8 +139,6 @@ Records: 3  Duplicates: 0  Warnings: 0
 ```
 
 単調性は連続性と同じ保証ではありません。次の例を考えてみましょう。
-
-{{< copyable "" >}}
 
 ```sql
 CREATE TABLE t (id INT NOT NULL PRIMARY KEY auto_increment, a VARCHAR(10), cnt INT NOT NULL DEFAULT 1, UNIQUE KEY (a));
@@ -194,8 +180,6 @@ Records: 2  Duplicates: 1  Warnings: 0
 ## AUTO_ID_CACHE {#auto-id-cache}
 
 `INSERT`操作が別の TiDBサーバーに対して実行されると、 `AUTO_INCREMENT`シーケンスが大幅に*ジャンプしている*ように見える場合があります。これは、各サーバーが`AUTO_INCREMENT`値の独自のキャッシュを持っていることが原因で発生します。
-
-{{< copyable "" >}}
 
 ```sql
 CREATE TABLE t (a int PRIMARY KEY AUTO_INCREMENT, b timestamp NOT NULL DEFAULT NOW());
@@ -257,7 +241,7 @@ mysql> SELECT * FROM t ORDER BY b;
 6 rows in set (0.00 sec)
 ```
 
-TiDBサーバーの再起動の頻度が高いと、 `AUTO_INCREMENT`値が枯渇する可能性があります。上記の例では、最初の TiDBサーバーのキャッシュにはまだ空き値`[5-30000]`あります。これらの値は失われ、再割り当てされません。
+TiDBサーバーの再起動の頻度が高いと、 `AUTO_INCREMENT`値が枯渇する可能性があります。上記の例では、最初の TiDBサーバーのキャッシュにはまだ空き値`[5-30000]`があります。これらの値は失われ、再割り当てされません。
 
 `AUTO_INCREMENT`値が連続していることに依存することはお勧めできません。 TiDBサーバーに値`[2000001-2030000]`のキャッシュがある次の例を考えてみましょう。値`2029998`手動で挿入すると、新しいキャッシュ範囲が取得されるときの動作を確認できます。
 
@@ -364,7 +348,7 @@ MySQL 互換モードを使用するには、テーブルの作成時に`AUTO_ID
 CREATE TABLE t(a int AUTO_INCREMENT key) AUTO_ID_CACHE 1;
 ```
 
-> **ノート：**
+> **注記：**
 >
 > TiDB では、 `AUTO_ID_CACHE`から`1`に設定すると、TiDB が ID をキャッシュしなくなることを意味します。ただし、実装は TiDB のバージョンによって異なります。
 >
@@ -381,7 +365,7 @@ MySQL 互換モードを有効にすると、割り当てられた ID は**一�
 -   TiDB v6.6.0 以前のバージョンの場合、定義された列は主キーまたはインデックス接頭辞のいずれかである必要があります。
 -   `INTEGER` 、 `FLOAT` 、または`DOUBLE`タイプの列に定義する必要があります。
 -   `DEFAULT`列の値と同じ列には指定できません。
--   `ALTER TABLE`を使用して`AUTO_INCREMENT`属性を追加することはできません。
+-   `ALTER TABLE`を使用して`AUTO_INCREMENT`属性の列を追加または変更することはできません。これには、 `ALTER TABLE ... MODIFY/CHANGE COLUMN`を使用して`AUTO_INCREMENT`属性を既存の列に追加することや、 `ALTER TABLE ... ADD COLUMN`を使用して`AUTO_INCREMENT`属性の列を追加することも含まれます。
 -   `ALTER TABLE`を使用すると、 `AUTO_INCREMENT`属性を削除できます。ただし、v2.1.18 および v3.0.4 以降、TiDB はセッション変数`@@tidb_allow_remove_auto_inc`を使用して、列の`AUTO_INCREMENT`属性を削除するために`ALTER TABLE MODIFY`または`ALTER TABLE CHANGE`を使用できるかどうかを制御します。デフォルトでは、 `ALTER TABLE MODIFY`または`ALTER TABLE CHANGE`を使用して`AUTO_INCREMENT`属性を削除することはできません。
 -   `ALTER TABLE`は、 `AUTO_INCREMENT`値をより小さい値に設定するための`FORCE`オプションが必要です。
 -   `AUTO_INCREMENT`を`MAX(<auto_increment_column>)`より小さい値に設定すると、既存の値がスキップされないため、キーが重複します。

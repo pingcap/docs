@@ -6,8 +6,6 @@ aliases: ['/tidbcloud/serverless-tier-faqs']
 
 # TiDB サーバーレスに関するよくある質問 {#tidb-serverless-faqs}
 
-<!-- markdownlint-disable MD026 -->
-
 このドキュメントには、TiDB サーバーレスに関して最もよくある質問がリストされています。
 
 ## 一般的な FAQ {#general-faqs}
@@ -28,13 +26,13 @@ TiDB Cloudの組織ごとに、デフォルトで最大 5 つの TiDB サーバ�
 
 TiDB Cloud機能の一部は、TiDB サーバーレスで部分的にサポートされているか、サポートされていません。詳細については、 [TiDB サーバーレスの制限とクォータ](/tidb-cloud/serverless-limitations.md)を参照してください。
 
-### TiDB サーバーレスはいつから AWS 以外のクラウド プラットフォーム (GCP や Azure など) で利用できるようになりますか? {#when-will-tidb-serverless-be-available-on-cloud-platforms-other-than-aws-such-as-gcp-or-azure}
+### TiDB サーバーレスはいつ Google Cloud や Azure などの AWS 以外のクラウド プラットフォームで利用できるようになりますか? {#when-will-tidb-serverless-be-available-on-cloud-platforms-other-than-aws-such-as-google-cloud-or-azure}
 
-私たちは、TiDB Serverless を GCP や Azure などの他のクラウド プラットフォームに拡張することに積極的に取り組んでいます。ただし、現時点ではギャップを埋め、すべての環境でシームレスな機能を確保することに重点を置いているため、正確なスケジュールはありません。ご安心ください。私たちは TiDB Serverless をより多くのクラウド プラットフォームで利用できるようにするために懸命に取り組んでおり、進捗に合わせてコミュニティに常に最新の情報を提供していきます。
+私たちは、TiDB Serverless を Google Cloud や Azure などの他のクラウド プラットフォームに拡張することに積極的に取り組んでいます。ただし、現時点ではギャップを埋め、すべての環境でシームレスな機能を確保することに重点を置いているため、正確なスケジュールはありません。ご安心ください。私たちは TiDB Serverless をより多くのクラウド プラットフォームで利用できるようにするために懸命に取り組んでおり、進捗に合わせてコミュニティに常に最新の情報を提供していきます。
 
 ### TiDB サーバーレスが利用可能になる前に、Developer Tierクラスターを作成しました。クラスターを引き続き使用できますか? {#i-created-a-developer-tier-cluster-before-tidb-serverless-was-available-can-i-still-use-my-cluster}
 
-はい、Developer Tierクラスターは自動的に TiDB サーバーレス クラスターに移行され、以前の使用状況を中断することなくユーザー エクスペリエンスが向上しました。
+はい、Developer Tierクラスターは TiDB サーバーレス クラスターに自動的に移行され、以前の使用状況を中断することなくユーザー エクスペリエンスが向上しました。
 
 ## 請求と計測に関するよくある質問 {#billing-and-metering-faqs}
 
@@ -69,7 +67,7 @@ TiDB サーバーレスは従量課金制モデルを採用しています。つ
 
 ### TiDB サーバーレスのstorageはどのように計測されますか? {#how-storage-is-metered-for-tidb-serverless}
 
-storageは、TiDB サーバーレス クラスターに保存されているデータ量に基づいて測定され、月あたりの GiB 単位で測定されます。これは、すべてのテーブルとインデックス (データ圧縮またはレプリカを除く) の合計サイズと、その月にデータが保存されている時間数を乗算して計算されます。
+storageは、TiDB サーバーレス クラスターに保存されているデータ量に基づいて測定され、月あたりの GiB 単位で測定されます。これは、すべてのテーブルとインデックス (データ圧縮またはレプリカを除く) の合計サイズに、その月にデータが保存されている時間数を乗算して計算されます。
 
 ### テーブルまたはデータベースをすぐに削除した後、storage使用量のサイズが変わらないのはなぜですか? {#why-does-the-storage-usage-size-remain-unchanged-after-dropping-a-table-or-database-immediately}
 

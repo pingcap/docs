@@ -141,7 +141,7 @@ cd jaffle_shop
 
 ## ステップ 4: (オプション) CSV ファイルをロードする {#step-4-optional-load-csv-files}
 
-> **ノート：**
+> **注記：**
 >
 > このステップはオプションです。処理対象のデータがターゲット データベースにすでに存在する場合は、この手順をスキップできます。
 
@@ -319,14 +319,14 @@ dbt を使用すると、プロジェクトの全体的な構造を表示し、�
 
 ## プロフィールフィールドの説明 {#description-of-profile-fields}
 
-| オプション      | 説明                                      | 必要？   | 例                                                 |
+| オプション      | 説明                                      | 必須？   | 例                                                 |
 | ---------- | --------------------------------------- | ----- | ------------------------------------------------- |
-| `type`     | 使用する特定のアダプター                            | 必要    | `tidb`                                            |
-| `server`   | 接続先のTiDB Cloudクラスターのエンドポイント             | 必要    | `gateway01.ap-southeast-1.prod.aws.tidbcloud.com` |
-| `port`     | 使用するポート                                 | 必要    | `4000`                                            |
-| `schema`   | データを正規化するためのスキーマ (データベース)               | 必要    | `analytics`                                       |
-| `username` | TiDB Cloudクラスターへの接続に使用するユーザー名           | 必要    | `xxxxxxxxxxx.root`                                |
-| `password` | TiDB Cloudクラスターへの認証に使用するパスワード           | 必要    | `"your_password"`                                 |
+| `type`     | 使用する特定のアダプター                            | 必須    | `tidb`                                            |
+| `server`   | 接続先のTiDB Cloudクラスターのエンドポイント             | 必須    | `gateway01.ap-southeast-1.prod.aws.tidbcloud.com` |
+| `port`     | 使用するポート                                 | 必須    | `4000`                                            |
+| `schema`   | データを正規化するためのスキーマ (データベース)               | 必須    | `analytics`                                       |
+| `username` | TiDB Cloudクラスターへの接続に使用するユーザー名           | 必須    | `xxxxxxxxxxx.root`                                |
+| `password` | TiDB Cloudクラスターへの認証に使用するパスワード           | 必須    | `"your_password"`                                 |
 | `retries`  | TiDB Cloudクラスターへの接続の再試行回数 (デフォルトでは 1 回) | オプション | `2`                                               |
 
 ## サポートされている関数 {#supported-functions}

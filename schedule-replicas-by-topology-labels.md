@@ -5,7 +5,7 @@ summary: Learn how to schedule replicas by topology labels.
 
 # トポロジーラベルごとにレプリカをスケジュールする {#schedule-replicas-by-topology-labels}
 
-> **ノート：**
+> **注記：**
 >
 > TiDB v5.3.0 では[SQL の配置ルール](/placement-rules-in-sql.md)が導入されています。これにより、テーブルとパーティションの配置を構成するためのより便利な方法が提供されます。将来のリリースでは、SQL の配置ルールによって配置構成が PD に置き換えられる可能性があります。
 
@@ -63,9 +63,9 @@ rack = "<rack>"
 host = "<host>"
 ```
 
-> **ノート：**
+> **注記：**
 >
-> 現在、TiDB は、同じリージョン内にあるレプリカの照合と選択を`zone`ラベルに依存しています。この機能を使用するには、 [PD の`location-labels`の設定](#configure-location-labels-for-pd)の場合は`zone`を含める必要があり、 TiDB、TiKV、およびTiFlashに対して`labels`構成する場合は`zone`を構成する必要があります。詳細については、 [TiKV およびTiFlashの`labels`を構成する](#configure-labels-for-tikv-and-tiflash)を参照してください。
+> 現在、TiDB は`zone`ラベルに依存して、同じリージョン内にあるレプリカを照合して選択します。この機能を使用するには、 [PD の`location-labels`の設定](#configure-location-labels-for-pd)の場合は`zone`を含める必要があり、 TiDB、TiKV、およびTiFlashに対して`labels`構成する場合は`zone`を構成する必要があります。詳細については、 [TiKV およびTiFlashの`labels`を構成する](#configure-labels-for-tikv-and-tiflash)を参照してください。
 
 ### PD の<code>location-labels</code>を構成する {#configure-code-location-labels-code-for-pd}
 
@@ -75,7 +75,7 @@ host = "<host>"
 
 構成にはデフォルト値がないため、 `location-labels`の値を`zone` 、 `rack` 、または`host`などにカスタマイズできます。また、この構成では、TiKVサーバーのラベルと一致する限り、ラベル レベルの数に制限はありませ**ん**(3 レベルは必須ではありません)。
 
-> **ノート：**
+> **注記：**
 >
 > -   構成を有効にするには、PD に`location-labels` 、TiKV に`labels`同時に構成する必要があります。それ以外の場合、PD はトポロジに従ってスケジューリングを実行しません。
 > -   SQL で配置ルールを使用する場合、TiKV に`labels`を設定するだけで済みます。現在、SQL の配置ルールは PD の`location-labels`構成と互換性がなく、この構成は無視されます。 SQL で`location-labels`と配置ルールを同時に使用することはお勧めできません。そうしないと、予期しない結果が発生する可能性があります。
@@ -84,16 +84,12 @@ host = "<host>"
 
 -   PD クラスターが初期化されていない場合は、PD 構成ファイルで`location-labels`を構成します。
 
-    {{< copyable "" >}}
-
     ```toml
     [replication]
     location-labels = ["zone", "rack", "host"]
     ```
 
 -   PD クラスターがすでに初期化されている場合は、pd-ctl ツールを使用してオンラインで変更を加えます。
-
-    {{< copyable "" >}}
 
     ```bash
     pd-ctl config set location-labels zone,rack,host
@@ -105,8 +101,6 @@ host = "<host>"
 
 上記の手順に従って`location-labels`構成して 3 層クラスター トポロジ`zone` `isolation-level`次のように構成できます。
 
-{{< copyable "" >}}
-
 ```toml
 [replication]
 isolation-level = "zone"
@@ -114,15 +108,13 @@ isolation-level = "zone"
 
 PD クラスターがすでに初期化されている場合は、pd-ctl ツールを使用してオンラインで変更を行う必要があります。
 
-{{< copyable "" >}}
-
 ```bash
 pd-ctl config set isolation-level zone
 ```
 
 `location-level`構成は文字列の配列であり、キー`location-labels`に対応する必要があります。このパラメータは、TiKV トポロジ クラスタの最小および必須の分離レベル要件を制限します。
 
-> **ノート：**
+> **注記：**
 >
 > デフォルトでは`isolation-level`は空です。これは、分離レベルに必須の制限がないことを意味します。これを設定するには、PD に`location-labels`設定し、 `isolation-level`の値が`location-labels`の名前のいずれかであることを確認する必要があります。
 
@@ -140,21 +132,25 @@ server_configs:
 tikv_servers:
 # z1
   - host: tikv-1
+    port：20160
     config:
       server.labels:
         zone: z1
         host: h1
-   - host: tikv-2
+   - host: tikv-1
+     port：20161
     config:
       server.labels:
         zone: z1
         host: h1
-  - host: tikv-3
+  - host: tikv-2
+    port：20160
     config:
       server.labels:
         zone: z1
         host: h2
-  - host: tikv-4
+  - host: tikv-2
+    port：20161
     config:
       server.labels:
         zone: z1
@@ -219,7 +215,7 @@ tiflash_servers:
 
 詳細は[地理的に分散された導入トポロジ](/geo-distributed-deployment-topology.md)を参照してください。
 
-> **ノート：**
+> **注記：**
 >
 > 構成ファイルで`replication.location-labels`構成していない場合、このトポロジ ファイルを使用してクラスターをデプロイすると、エラーが発生する可能性があります。クラスターをデプロイする前に、構成ファイルで`replication.location-labels`が構成されていることを確認することをお勧めします。
 
@@ -235,7 +231,7 @@ PD は、同じデータの異なるレプリカが可能な限り分散され�
 
 5 レプリカ構成の場合、z3 に障害が発生するか全体として分離され、一定期間 ( `max-store-down-time`で制御) が経過しても回復できない場合、PD はスケジューリングを通じて 5 つのレプリカを構成します。現時点では、使用可能なホストは 4 つだけです。これは、ホスト レベルの分離が保証されず、複数のレプリカが同じホストにスケジュールされる可能性があることを意味します。ただし、 `isolation-level`値を空のままではなく`zone`に設定すると、リージョンレプリカの物理的分離の最小要件が指定されます。つまり、PD は、同じリージョンのレプリカが異なるゾーンに分散していることを保証します。この分離制限に従うことが複数のレプリカの`max-replicas`の要件を満たさない場合でも、PD は対応するスケジューリングを実行しません。
 
-たとえば、TiKV クラスターは 3 つのデータ ゾーン z1、z2、z3 に分散されています。各リージョンには必要に応じて 3 つのレプリカがあり、PD は同じリージョンの 3 つのレプリカをこれら 3 つのデータ ゾーンにそれぞれ分散します。 z1 で停電が発生し、一定期間 (デフォルトでは[`max-store-down-time`](/pd-configuration-file.md#max-store-down-time)分と 30 分で制御) が経過しても回復できない場合、PD は z1 上のリージョンレプリカが使用できなくなったと判断します。ただし、 `isolation-level`が`zone`に設定されているため、PD は、同じリージョンの異なるレプリカが同じデータ ゾーンにスケジュールされないことを厳密に保証する必要があります。 z2 と z3 の両方にはすでにレプリカがあるため、現時点でレプリカが 2 つしかない場合でも、PD は最小分離レベル制限`isolation-level`の下ではスケジューリングを実行しません。
+たとえば、TiKV クラスターは 3 つのデータ ゾーン z1、z2、z3 に分散されています。各リージョンには必要に応じて 3 つのレプリカがあり、PD は同じリージョンの 3 つのレプリカをこれら 3 つのデータ ゾーンにそれぞれ分散します。 z1 で停電が発生し、一定時間 (デフォルトでは[`max-store-down-time`](/pd-configuration-file.md#max-store-down-time)分と 30 分で制御) 経過しても回復できない場合、PD は z1 上のリージョンレプリカが使用できなくなったと判断します。ただし、 `isolation-level`が`zone`に設定されているため、PD は、同じリージョンの異なるレプリカが同じデータ ゾーンにスケジュールされないことを厳密に保証する必要があります。 z2 と z3 の両方にはすでにレプリカがあるため、現時点でレプリカが 2 つしかない場合でも、PD は最小分離レベル制限`isolation-level`の下ではスケジューリングを実行しません。
 
 同様に、 `isolation-level`を`rack`に設定すると、最小分離レベルが同じデータセンター内の異なるラックに適用されます。この構成では、可能であれば、ゾーンレイヤーでの分離が最初に保証されます。ゾーン レベルでの分離が保証できない場合、PD は、同じゾーン内の同じラックに異なるレプリカをスケジュールすることを回避しようとします。 `isolation-level`を`host`に設定すると、スケジューリングは同様に機能します。この場合、PD は最初にラックの分離レベルを保証し、次にホストのレベルを保証します。
 

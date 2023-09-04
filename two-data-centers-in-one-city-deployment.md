@@ -9,7 +9,7 @@ summary: Learn the deployment solution of two availability zones in one region.
 
 このドキュメントの「リージョン」という用語は地理的エリアを指しますが、大文字の「リージョン」は TiKV のデータstorageの基本単位を指します。 「AZ」はリージョン内の孤立した場所を指し、各リージョンには複数の AZ があります。このドキュメントで説明されているソリューションは、複数のデータ センターが 1 つの都市にあるシナリオにも当てはまります。
 
-## 序章 {#introduction}
+## 導入 {#introduction}
 
 TiDB は通常、高可用性と災害復旧機能を確保するためにマルチ AZ 展開ソリューションを採用しています。マルチ AZ デプロイメント ソリューションには、1 つのリージョンに複数の AZ、2 つのリージョンに複数の AZ など、複数のデプロイメント モードが含まれています。このドキュメントでは、1 つのリージョンに 2 つの AZ のデプロイメント モードを紹介します。このモードで導入すると、TiDB は低コストで高可用性と災害復旧の要件を満たすこともできます。この展開ソリューションは、データ レプリケーション自動同期モード、つまり DR 自動同期モードを採用しています。
 
@@ -89,7 +89,7 @@ alertmanager_servers:
 
 ### 配置ルール {#placement-rules}
 
-計画されたトポロジに基づいてクラスターをデプロイするには、 [配置ルール](/configure-placement-rules.md)を使用してクラスターのレプリカの場所を決定する必要があります。例として 4 つのレプリカ (2 つの投票者レプリカがプライマリ AZ にあり、1 つの投票者レプリカと 1 つのLearnerレプリカがディザスター リカバリー AZ にあります) の展開を例にとると、配置ルールを使用してレプリカを次のように構成できます。
+計画されたトポロジに基づいてクラスターをデプロイするには、 [配置ルール](/configure-placement-rules.md)を使用してクラスターのレプリカの場所を決定する必要があります。例として 4 つのレプリカの展開 (2 つの投票者レプリカがプライマリ AZ にあり、1 つの投票者レプリカと 1 つのLearnerレプリカがディザスター リカバリー AZ にあります) を例にとると、配置ルールを使用してレプリカを次のように構成できます。
 
 ```
 cat rule.json
@@ -123,7 +123,7 @@ cat rule.json
       },
       {
         "group_id": "pd",
-        "id": "az-west",
+        "id": "az-west-1",
         "start_key": "",
         "end_key": "",
         "role": "follower",
@@ -145,7 +145,7 @@ cat rule.json
       },
       {
         "group_id": "pd",
-        "id": "az-west",
+        "id": "az-west-2",
         "start_key": "",
         "end_key": "",
         "role": "learner",
@@ -171,8 +171,6 @@ cat rule.json
 ```
 
 `rule.json`の構成を使用するには、次のコマンドを実行して既存の構成を`default.json`ファイルにバックアップし、既存の構成を`rule.json`で上書きします。
-
-{{< copyable "" >}}
 
 ```bash
 pd-ctl config placement-rules rule-bundle load --out="default.json"
@@ -208,8 +206,6 @@ cat default.json
 
 -   方法 1: PD 構成ファイルを構成し、クラスターをデプロイします。
 
-    {{< copyable "" >}}
-
     ```toml
     [replication-mode]
     replication-mode = "dr-auto-sync"
@@ -223,8 +219,6 @@ cat default.json
     ```
 
 -   方法 2: クラスターを展開している場合は、pd-ctl コマンドを使用して PD の構成を変更します。
-
-    {{< copyable "" >}}
 
     ```shell
     config set replication-mode dr-auto-sync
@@ -245,13 +239,9 @@ cat default.json
 
 クラスターの現在のレプリケーション ステータスを確認するには、次の API を使用します。
 
-{{< copyable "" >}}
-
 ```bash
 curl http://pd_ip:pd_port/pd/api/v1/replication_mode/status
 ```
-
-{{< copyable "" >}}
 
 ```bash
 {

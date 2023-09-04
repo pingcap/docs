@@ -1,7 +1,3 @@
-<!-- markdownlint-disable MD007 -->
-
-<!-- markdownlint-disable MD041 -->
-
 -   [ドキュメントホーム](https://docs.pingcap.com/)
 -   TiDBについて
     -   [TiDB の紹介](/overview.md)
@@ -17,7 +13,7 @@
     -   [TiDB SQLを学ぶ](/basic-sql-operations.md)
     -   [HTAPを学ぶ](/explore-htap.md)
     -   [サンプルデータベースのインポート](/import-example-data.md)
--   発展
+-   開発する
     -   [概要](/develop/dev-guide-overview.md)
     -   クイックスタート
         -   [TiDB サーバーレスクラスタを構築する](/develop/dev-guide-build-cluster-in-cloud.md)
@@ -37,6 +33,13 @@
             -   [PyMySQL](/develop/dev-guide-sample-application-python-pymysql.md)
             -   [SQLアルケミー](/develop/dev-guide-sample-application-python-sqlalchemy.md)
             -   [ピーピー](/develop/dev-guide-sample-application-python-peewee.md)
+            -   [ジャンゴ](/develop/dev-guide-sample-application-python-django.md)
+        -   Node.js
+            -   [ノードmysql2](/develop/dev-guide-sample-application-nodejs-mysql2.md)
+            -   [mysql.js](/develop/dev-guide-sample-application-nodejs-mysqljs.md)
+            -   [プリズマ](/develop/dev-guide-sample-application-nodejs-prisma.md)
+            -   [Next.js](/develop/dev-guide-sample-application-nextjs.md)
+            -   [AWSラムダ](/develop/dev-guide-sample-application-aws-lambda.md)
     -   TiDB に接続する
         -   [Driverまたは ORM を選択してください](/develop/dev-guide-choose-driver-or-orm.md)
         -   [TiDB に接続する](/develop/dev-guide-connect-to-tidb.md)
@@ -69,7 +72,7 @@
         -   [楽観的なトランザクションと悲観的なトランザクション](/develop/dev-guide-optimistic-and-pessimistic-transaction.md)
         -   [トランザクションの制限](/develop/dev-guide-transaction-restraints.md)
         -   [トランザクションエラーの処理](/develop/dev-guide-transaction-troubleshoot.md)
-    -   最適化
+    -   最適化する
         -   [概要](/develop/dev-guide-optimize-sql-overview.md)
         -   [SQL性能チューニング](/develop/dev-guide-optimize-sql.md)
         -   [性能チューニングのベストプラクティス](/develop/dev-guide-optimize-sql-best-practices.md)
@@ -86,8 +89,6 @@
         -   ガイドライン
             -   [オブジェクトの命名規則](/develop/dev-guide-object-naming-guidelines.md)
             -   [SQL開発仕様](/develop/dev-guide-sql-development-specification.md)
-        -   レガシードキュメント
-            -   [ジャンゴの場合](/develop/dev-guide-outdated-for-django.md)
     -   クラウドネイティブ開発環境
         -   [Gitpod](/develop/dev-guide-playground-gitpod.md)
     -   サードパーティのサポート
@@ -99,8 +100,8 @@
     -   [ソフトウェアとハ​​ードウェアの要件](/hardware-and-software-requirements.md)
     -   [環境コンフィグレーションチェックリスト](/check-before-deployment.md)
     -   クラスタトポロジの計画
-        -   [最小限のトポロジー](/minimal-deployment-topology.md)
-        -   [TiFlashトポロジ](/tiflash-deployment-topology.md)
+        -   [最小限のトポロジ](/minimal-deployment-topology.md)
+        -   [TiFlashトポロジー](/tiflash-deployment-topology.md)
         -   [TiCDC トポロジー](/ticdc-deployment-topology.md)
         -   [TiDBBinlogトポロジ](/tidb-binlog-deployment-topology.md)
         -   [TiSpark トポロジ](/tispark-deployment-topology.md)
@@ -134,7 +135,7 @@
         -   [より多くの列を含むダウンストリーム テーブルに移行する](/migrate-with-more-columns-downstream.md)
         -   [Binlogイベントのフィルタリング](/filter-binlog-event.md)
         -   [SQL式を使用したDMLイベントのフィルタリング](/filter-dml-event.md)
--   統合
+-   統合する
     -   [概要](/integration-overview.md)
     -   統合シナリオ
         -   [Confluent および Snowflake との統合](/ticdc/integrate-confluent-using-ticdc.md)
@@ -190,6 +191,7 @@
     -   [監視フレームワークの概要](/tidb-monitoring-framework.md)
     -   [モニタリングAPI](/tidb-monitoring-api.md)
     -   [監視サービスのデプロイ](/deploy-monitoring-services.md)
+    -   [アップグレード監視サービス](/upgrade-monitoring-services.md)
     -   [Grafana スナップショットのエクスポート](/exporting-grafana-snapshots.md)
     -   [TiDBクラスタのアラート ルール](/alert-rules.md)
     -   [TiFlashアラート ルール](/tiflash/tiflash-alert-rules.md)
@@ -223,6 +225,8 @@
         -   [性能チューニングの概要](/performance-tuning-overview.md)
         -   [パフォーマンスの分析とチューニング](/performance-tuning-methods.md)
         -   [OLTP シナリオの性能チューニングの実践](/performance-tuning-practices.md)
+        -   [TiFlash のパフォーマンス分析方法](/tiflash-performance-tuning-methods.md)
+        -   [TiCDC のパフォーマンス分析方法](/ticdc-performance-tuning-methods.md)
         -   [レイテンシの内訳](/latency-breakdown.md)
         -   [パブリック クラウドにおける TiDB のベスト プラクティス](/best-practices-on-public-cloud.md)
     -   コンフィグレーションのチューニング
@@ -490,7 +494,7 @@
             -   例
                 -   [DMを使用してデータを移行する](/dm/migrate-data-using-dm.md)
                 -   [データ移行タスクの作成](/dm/quick-start-create-task.md)
-                -   [シャード結合シナリオにおけるデータ移行のベスト プラクティス](/dm/shard-merge-best-practices.md)
+                -   [シャードマージシナリオにおけるデータ移行のベストプラクティス](/dm/shard-merge-best-practices.md)
             -   トラブルシューティング
                 -   [FAQ](/dm/dm-faq.md)
                 -   [エラーの処理](/dm/dm-error-handling.md)
@@ -521,7 +525,7 @@
         -   参照
             -   [コンフィグレーションファイル](/tidb-lightning/tidb-lightning-configuration.md)
             -   [コマンドラインフラグ](/tidb-lightning/tidb-lightning-command-line-full.md)
-            -   [モニタリング](/tidb-lightning/monitor-tidb-lightning.md)
+            -   [監視](/tidb-lightning/monitor-tidb-lightning.md)
             -   [ウェブインターフェース](/tidb-lightning/tidb-lightning-web-interface.md)
             -   [FAQ](/tidb-lightning/tidb-lightning-faq.md)
             -   [用語集](/tidb-lightning/tidb-lightning-glossary.md)
@@ -597,7 +601,7 @@
 -   参照
     -   クラスタアーキテクチャ
         -   [概要](/tidb-architecture.md)
-        -   [保管所](/tidb-storage.md)
+        -   [ストレージ](/tidb-storage.md)
         -   [コンピューティング](/tidb-computing.md)
         -   [スケジュール設定](/tidb-scheduling.md)
     -   ストレージ エンジン - TiKV
@@ -990,6 +994,7 @@
     -   v6.6
         -   [6.6.0-DMR](/releases/release-6.6.0.md)
     -   v6.5
+        -   [6.5.4](/releases/release-6.5.4.md)
         -   [6.5.3](/releases/release-6.5.3.md)
         -   [6.5.2](/releases/release-6.5.2.md)
         -   [6.5.1](/releases/release-6.5.1.md)
@@ -1145,7 +1150,7 @@
         -   [2.0](/releases/release-2.0-ga.md)
         -   [2.0 RC5](/releases/release-2.0-rc.5.md)
         -   [2.0 RC4](/releases/release-2.0-rc.4.md)
-        -   [2.0 RC3](/releases/release-2.0-rc.3.md)
+        -   [2.0RC3](/releases/release-2.0-rc.3.md)
         -   [2.0 RC1](/releases/release-2.0-rc.1.md)
         -   [1.1 ベータ版](/releases/release-1.1-beta.md)
         -   [1.1 アルファ](/releases/release-1.1-alpha.md)

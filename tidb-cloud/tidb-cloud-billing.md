@@ -5,7 +5,7 @@ summary: Learn about TiDB Cloud billing.
 
 # TiDB Cloudの請求 {#tidb-cloud-billing}
 
-> **ノート：**
+> **注記：**
 >
 > [TiDB サーバーレスクラスター](/tidb-cloud/select-cluster-tier.md#tidb-serverless) 2023 年 5 月 31 日まで無料で、100% 割引になります。それ以降は[無料割り当て](/tidb-cloud/select-cluster-tier.md#usage-quota)目以降のご利用は有料となります。
 
@@ -20,9 +20,9 @@ TiDB Cloud は、消費したリソースに応じて料金が発生します。
 
 支払い方法を設定した後、コストが割り当て (デフォルトでは 500 ドル) に達すると、 TiDB Cloud は請求書を生成します。割り当てを引き上げたい場合、または月に 1 つの請求書を受け取りたい場合は、 [弊社営業担当までお問い合わせください](https://www.pingcap.com/contact-us/)を実行できます。
 
-> **ノート：**
+> **注記：**
 >
-> [AWSマーケットプレイス](https://aws.amazon.com/marketplace)または[Google Cloud マーケットプレイス](https://console.cloud.google.com/marketplace)を通じてTiDB Cloudにサインアップした場合、AWS アカウントまたは Google Cloud アカウントを通じて直接支払うことができますが、 TiDB Cloudコンソールで支払い方法を追加したり、請求書をダウンロードしたりすることはできません。
+> [AWSマーケットプレイス](https://aws.amazon.com/marketplace)または[Google Cloud マーケットプレイス](https://console.cloud.google.com/marketplace)でTiDB Cloudにサインアップした場合、AWS アカウントまたは Google Cloud アカウントを通じて直接支払うことができますが、 TiDB Cloudコンソールで支払い方法を追加したり、請求書をダウンロードしたりすることはできません。
 
 毎月の請求書を受け取るために当社の営業にご連絡いただくと、 TiDB Cloud は毎月初めに前月の請求書を生成します。
 
@@ -34,7 +34,7 @@ TiDB Cloud は、消費したリソースに応じて料金が発生します。
 -   請求書の支払いのデフォルトの方法はクレジット カード引き落としです。他の支払い方法を使用したい場合は、チケットリクエストを送信してお知らせください。
 -   当月と前月の料金の概要と詳細を確認できます。
 
-> **ノート：**
+> **注記：**
 >
 > すべての請求額の控除は、サードパーティのプラットフォームである Stripe を通じて完了します。
 
@@ -42,7 +42,7 @@ TiDB Cloud は、消費したリソースに応じて料金が発生します。
 
 1.  クリック<mdsvgicon name="icon-top-organization">TiDB Cloudコンソールの左下隅にあります。</mdsvgicon>
 
-    > **ノート：**
+    > **注記：**
     >
     > 複数の組織に所属している場合は、その名前をクリックして対象の組織に切り替えます。
 
@@ -54,7 +54,7 @@ TiDB Cloud は、消費したリソースに応じて料金が発生します。
 
 支払い方法を設定すると、 TiDB Cloud は過去の月の請求書と請求の詳細を生成し、各月の初めに当月の請求の詳細を生成します。請求の詳細には、組織の TiDB クラスター使用量、割引、バックアップstorageコスト、データ転送コスト、サポート サービス コスト、クレジット消費量、およびプロジェクト分割情報が含まれます。
 
-> **ノート：**
+> **注記：**
 >
 > 遅延やその他の理由により、当月の請求詳細は参照のみを目的としており、正確であることは保証されません。 TiDB Cloudは、請求履歴の正確性を保証するため、原価計算を実行し、その他のニーズを満たすことができます。
 
@@ -62,7 +62,7 @@ TiDB Cloud は、消費したリソースに応じて料金が発生します。
 
 1.  クリック<mdsvgicon name="icon-top-organization">TiDB Cloudコンソールの左下隅にあります。</mdsvgicon>
 
-    > **ノート：**
+    > **注記：**
     >
     > 複数の組織に所属している場合は、その名前をクリックして対象の組織に切り替えます。
 
@@ -72,7 +72,7 @@ TiDB Cloud は、消費したリソースに応じて料金が発生します。
 
 請求の詳細ページには、プロジェクト別およびサービス別の請求概要が表示されます。利用明細の確認やCSV形式でのダウンロードも可能です。
 
-> **ノート：**
+> **注記：**
 >
 > 月々の請求書の合計金額は、精度の違いにより、毎日の使用量の詳細の合計金額と異なる場合があります。
 >
@@ -93,7 +93,7 @@ TiDB Cloud は、概念実証 (PoC) ユーザーに一定数のクレジット�
 
 1.  クリック<mdsvgicon name="icon-top-organization">TiDB Cloudコンソールの左下隅にあります。</mdsvgicon>
 
-    > **ノート：**
+    > **注記：**
     >
     > 複数の組織に所属している場合は、その名前をクリックして対象の組織に切り替えます。
 
@@ -101,7 +101,7 @@ TiDB Cloud は、概念実証 (PoC) ユーザーに一定数のクレジット�
 
 3.  **[クレジット]**をクリックします。クレジットの詳細ページが表示されます。
 
-> **ノート：**
+> **注記：**
 >
 > -   支払い方法を設定した後、クラスター料金はまず未使用のクレジットから差し引かれ、次に支払い方法から差し引かれます。
 > -   サポート プラン料金の支払いにクレジットを使用することはできません。
@@ -123,7 +123,7 @@ TiDB Cloud は、概念実証 (PoC) ユーザーに一定数のクレジット�
 
 1.  クリック<mdsvgicon name="icon-top-organization">TiDB Cloudコンソールの左下隅にあります。</mdsvgicon>
 
-    > **ノート：**
+    > **注記：**
     >
     > 複数の組織に所属している場合は、その名前をクリックして対象の組織に切り替えます。
 
@@ -135,9 +135,9 @@ TiDB Cloud は、概念実証 (PoC) ユーザーに一定数のクレジット�
 
 組織の`Organization Owner`または`Organization Billing Admin`役割に属している場合は、 TiDB Cloudの支払い情報を管理できます。それ以外の場合は、このセクションをスキップしてください。
 
-> **ノート：**
+> **注記：**
 >
-> [AWSマーケットプレイス](https://aws.amazon.com/marketplace)または[Google Cloud マーケットプレイス](https://console.cloud.google.com/marketplace)を通じてTiDB Cloudにサインアップした場合、AWS アカウントまたは Google Cloud アカウントを通じて直接支払うことができますが、 TiDB Cloudコンソールで支払い方法を追加したり、請求書をダウンロードしたりすることはできません。
+> [AWSマーケットプレイス](https://aws.amazon.com/marketplace)または[Google Cloud マーケットプレイス](https://console.cloud.google.com/marketplace)でTiDB Cloudにサインアップした場合、AWS アカウントまたは Google Cloud アカウントを通じて直接支払うことができますが、 TiDB Cloudコンソールで支払い方法を追加したり、請求書をダウンロードしたりすることはできません。
 
 ### クレジットカードを追加する {#add-a-credit-card}
 
@@ -153,7 +153,7 @@ TiDB Cloud は、概念実証 (PoC) ユーザーに一定数のクレジット�
 
     1.  クリック<mdsvgicon name="icon-top-organization">TiDB Cloudコンソールの左下隅にあります。</mdsvgicon>
 
-        > **ノート：**
+        > **注記：**
         >
         > 複数の組織に所属している場合は、その名前をクリックして対象の組織に切り替えます。
 
@@ -163,7 +163,7 @@ TiDB Cloud は、概念実証 (PoC) ユーザーに一定数のクレジット�
 
     4.  請求先住所とカード情報を入力し、 **[保存]**をクリックします。
 
-> **ノート：**
+> **注記：**
 >
 > クレジット カードの機密データのセキュリティを確保するために、 TiDB Cloud は顧客のクレジット カード情報を一切保存せず、サードパーティの支払いプラットフォーム Stripe に保存します。すべての請求額控除は Stripe を通じて完了します。
 
@@ -173,7 +173,7 @@ TiDB Cloud は、概念実証 (PoC) ユーザーに一定数のクレジット�
 
 1.  クリック<mdsvgicon name="icon-top-organization">TiDB Cloudコンソールの左下隅にあります。</mdsvgicon>
 
-    > **ノート：**
+    > **注記：**
     >
     > 複数の組織に所属している場合は、その名前をクリックして対象の組織に切り替えます。
 
@@ -191,7 +191,7 @@ TiDB Cloud は、概念実証 (PoC) ユーザーに一定数のクレジット�
 
 1.  クリック<mdsvgicon name="icon-top-organization">TiDB Cloudコンソールの左下隅にあります。</mdsvgicon>
 
-    > **ノート：**
+    > **注記：**
     >
     > 複数の組織に所属している場合は、その名前をクリックして対象の組織に切り替えます。
 
@@ -209,7 +209,7 @@ TiDB Cloud は、概念実証 (PoC) ユーザーに一定数のクレジット�
 
 1.  クリック<mdsvgicon name="icon-top-organization">TiDB Cloudコンソールの左下隅にあります。</mdsvgicon>
 
-    > **ノート：**
+    > **注記：**
     >
     > 複数の組織に所属している場合は、その名前をクリックして対象の組織に切り替えます。
 
@@ -225,55 +225,51 @@ TiDB Cloud は、概念実証 (PoC) ユーザーに一定数のクレジット�
 
 組織の`Organization Owner`または`Organization Billing Admin`役割に属している場合は、 TiDB Cloudアカウントを AWS 請求先アカウントまたは Google Cloud 請求先アカウントにリンクできます。それ以外の場合は、このセクションをスキップしてください。
 
-TiDB Cloudを初めて使用し、 TiDB Cloudアカウントをお持ちでない場合は、 [AWSマーケットプレイス](https://aws.amazon.com/marketplace)または[Google Cloud マーケットプレイス](https://console.cloud.google.com/marketplace)を通じてTiDB Cloudアカウントにサインアップし、AWS または GCP 請求先アカウントを介して使用料金を支払うことができます。
+TiDB Cloudを初めて使用し、 TiDB Cloudアカウントをお持ちでない場合は、 [AWSマーケットプレイス](https://aws.amazon.com/marketplace)または[Google Cloud マーケットプレイス](https://console.cloud.google.com/marketplace)を通じてTiDB Cloudアカウントにサインアップし、AWS または Google Cloud 請求先アカウント経由で使用料金を支払うことができます。
 
 -   AWS Marketplace を通じてサインアップするには、 `TiDB Cloud` in [AWSマーケットプレイス](https://aws.amazon.com/marketplace)を検索し、 TiDB Cloudにサブスクライブし、画面上の指示に従ってTiDB Cloudアカウントを設定します。
 -   Google Cloud Marketplace を通じてサインアップするには、 `TiDB Cloud` in [Google Cloud マーケットプレイス](https://console.cloud.google.com/marketplace)を検索し、 TiDB Cloudに登録し、画面上の指示に従ってTiDB Cloudアカウントを設定します。
 
-すでにTiDB Cloudアカウントをお持ちで、AWS または GCP 請求先アカウント経由で使用料金を支払いたい場合は、 TiDB Cloudアカウントを AWS または GCP 請求先アカウントにリンクできます。
+すでにTiDB Cloudアカウントをお持ちで、AWS または Google Cloud 請求先アカウント経由で使用料金を支払いたい場合は、 TiDB Cloudアカウントを AWS または Google Cloud 請求先アカウントにリンクできます。
 
 <SimpleTab>
-<div label="AWS Marketplace">
+  <div label="AWS Marketplace">
+    TiDB Cloudアカウントを AWS 請求先アカウントにリンクするには、次の手順を実行します。
 
-TiDB Cloudアカウントを AWS 請求先アカウントにリンクするには、次の手順を実行します。
+    1.  [AWSマーケットプレイスページ](https://aws.amazon.com/marketplace)を開いて`TiDB Cloud`を検索し、検索結果で**TiDB Cloud**を選択します。 TiDB Cloudの製品ページが表示されます。
 
-1.  [AWSマーケットプレイスページ](https://aws.amazon.com/marketplace)を開いて`TiDB Cloud`を検索し、検索結果で**TiDB Cloud**を選択します。 TiDB Cloudの製品ページが表示されます。
+    2.  TiDB Cloud製品ページで、 **「購読を続ける」を**クリックします。注文ページが表示されます。
 
-2.  TiDB Cloud製品ページで、 **「購読を続ける」を**クリックします。注文ページが表示されます。
+    3.  注文ページで、 **[購読]**をクリックし、 **[アカウントの設定]**をクリックします。 TiDB Cloudのサインアップ ページに移動します。
 
-3.  注文ページで、 **[購読]**をクリックし、 **[アカウントの設定]**をクリックします。 TiDB Cloudのサインアップ ページに移動します。
+    4.  サインアップ ページの上部にある通知を確認し、 **[サインイン]**をクリックします。
 
-4.  サインアップ ページの上部にある通知を確認し、 **[サインイン]**をクリックします。
+    5.  TiDB Cloudアカウントでサインインします。 **[AWS 請求先アカウントへのリンク]**ページが表示されます。
 
-5.  TiDB Cloudアカウントでサインインします。 **[AWS 請求先アカウントへのリンク]**ページが表示されます。
+    6.  **[AWS 請求先アカウントへのリンク]**ページで、対象の組織を選択し、 **[リンク]**をクリックして AWS 請求先アカウントにリンクします。
 
-6.  **[AWS 請求先アカウントへのリンク]**ページで、対象の組織を選択し、 **[リンク]**をクリックして AWS 請求先アカウントにリンクします。
+        > **注記：**
+        >
+        > 組織がすでにTiDB Cloudに支払い方法を持っている場合、この組織の既存の支払い方法は、新しく追加された AWS 請求先アカウントに置き換えられます。
+  </div>
 
-    > **ノート：**
-    >
-    > 組織がすでにTiDB Cloudに支払い方法を持っている場合、この組織の既存の支払い方法は、新しく追加された AWS 請求先アカウントに置き換えられます。
+  <div label="Google Cloud Marketplace">
+    TiDB Cloudアカウントを Google Cloud 請求先アカウントにリンクするには、次の手順を実行します。
 
-</div>
+    1.  [Google Cloud マーケットプレイスのページ](https://console.cloud.google.com/marketplace)を開いて`TiDB Cloud`を検索し、検索結果で**TiDB Cloud**を選択します。 TiDB Cloudの製品ページが表示されます。
 
-<div label="Google Cloud Marketplace">
+    2.  TiDB Cloud製品ページで、 **[購読]**をクリックします。購読ページが表示されます。
 
-TiDB Cloudアカウントを Google Cloud 請求先アカウントにリンクするには、次の手順を実行します。
+    3.  購読ページで、 **[購読]**をクリックし、 **[製品ページに移動]**をクリックします。 TiDB Cloudのサインアップ ページに移動します。
 
-1.  [Google Cloud マーケットプレイスのページ](https://console.cloud.google.com/marketplace)を開いて`TiDB Cloud`を検索し、検索結果で**TiDB Cloud**を選択します。 TiDB Cloudの製品ページが表示されます。
+    4.  サインアップ ページの上部にある通知を確認し、 **[サインイン]**をクリックします。
 
-2.  TiDB Cloud製品ページで、 **[購読]**をクリックします。購読ページが表示されます。
+    5.  TiDB Cloudアカウントでサインインします。 Google Cloud 請求先アカウントにリンクするページが表示されます。
 
-3.  購読ページで、 **[購読]**をクリックし、 **[製品ページに移動]**をクリックします。 TiDB Cloudのサインアップ ページに移動します。
+    6.  このページで、対象の組織を選択し、 **[リンク]**をクリックして Google Cloud 請求先アカウントにリンクします。
 
-4.  サインアップ ページの上部にある通知を確認し、 **[サインイン]**をクリックします。
-
-5.  TiDB Cloudアカウントでサインインします。 **[GCP 請求先アカウントへのリンク]**ページが表示されます。
-
-6.  **[GCP 請求先アカウントへのリンク]**ページで、対象の組織を選択し、 **[リンク]**をクリックして Google Cloud 請求先アカウントにリンクします。
-
-    > **ノート：**
-    >
-    > 組織がすでにTiDB Cloudにお支払い方法を持っている場合、この組織の既存のお支払い方法は、新しく追加された Google Cloud 請求先アカウントに置き換えられます。
-
-</div>
+        > **注記：**
+        >
+        > 組織がすでにTiDB Cloudにお支払い方法を持っている場合、この組織の既存のお支払い方法は、新しく追加された Google Cloud 請求先アカウントに置き換えられます。
+  </div>
 </SimpleTab>

@@ -7,7 +7,7 @@ Summary: Learn how to create a changefeed to stream data from TiDB Cloud to Apac
 
 このドキュメントでは、 TiDB Cloudから Apache Kafka にデータをストリーミングするためのチェンジフィードを作成する方法について説明します。
 
-> **ノート：**
+> **注記：**
 >
 > -   現在、Kafka シンクは**ベータ版**です。チェンジフィード機能を使用するには、TiDB 専用クラスターのバージョンが v6.4.0 以降であることを確認してください。
 > -   [TiDB サーバーレスクラスター](/tidb-cloud/select-cluster-tier.md#tidb-serverless)の場合、チェンジフィード機能は使用できません。
@@ -43,7 +43,7 @@ Apache Kafka サービスがインターネットにアクセスできない AWS
     1.  [VPC ピアリング接続の DNS 解決を有効にする](https://docs.aws.amazon.com/vpc/latest/peering/modify-peering-connections.html#vpc-peering-dns)の手順に従います。
     2.  **アクセプター DNS 解決**オプションを有効にします。
 
-Apache Kafka サービスがインターネットにアクセスできない GCP VPC にある場合は、次の手順を実行します。
+Apache Kafka サービスがインターネットにアクセスできない Google Cloud VPC にある場合は、次の手順を実行します。
 
 1.  Apache Kafka サービスの VPC と TiDB クラスターの間の[VPC ピアリング接続をセットアップする](/tidb-cloud/set-up-vpc-peering-connections.md) 。
 2.  Apache Kafka が配置されている VPC のイングレス ファイアウォール ルールを変更します。
@@ -57,7 +57,7 @@ TiDB Cloud変更フィードがデータを Apache Kafka にストリーミン�
 -   Kafka のトピック リソース タイプに`Create`および`Write`権限が追加されます。
 -   Kafka のクラスター リソース タイプに`DescribeConfigs`権限が追加されます。
 
-たとえば、Kafka クラスターが Confluent Cloud にある場合、詳細については Confluent ドキュメントの[資力](https://docs.confluent.io/platform/current/kafka/authorization.html#resources)と[ACLの追加](https://docs.confluent.io/platform/current/kafka/authorization.html#adding-acls)を参照してください。
+たとえば、Kafka クラスターが Confluent Cloud にある場合、詳細については Confluent ドキュメントの[リソース](https://docs.confluent.io/platform/current/kafka/authorization.html#resources)と[ACLの追加](https://docs.confluent.io/platform/current/kafka/authorization.html#adding-acls)を参照してください。
 
 ## ステップ 1. Apache Kafka のチェンジフィード ページを開く {#step-1-open-the-changefeed-page-for-apache-kafka}
 

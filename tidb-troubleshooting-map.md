@@ -40,7 +40,7 @@ summary: Learn how to troubleshoot common errors in TiDB.
 
     -   TiKV インスタンス内のリージョンが多すぎると、単一の gRPC スレッドがボトルネックになります ( **Grafana** -&gt; **TiKV の詳細**-&gt;**スレッド CPU/スレッドあたりの gRPC CPU**メトリックを確認してください)。 v3.x 以降のバージョンでは、 `Hibernate Region`有効にすることで問題を解決できます。中国語の[ケース-612](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case612.md)を参照してください。
 
-    -   v3.0 より前のバージョンでは、raftstore スレッドまたは適用スレッドがボトルネックになる場合 ( **Grafana** -&gt; **TiKV-details** -&gt;**スレッド CPU/raft ストア CPU**および**非同期適用 CPU**メトリックが`80%`を超える)、TiKV (v2) をスケールアウトできます。 .x) インスタンスを使用するか、マルチスレッドを使用して v3.x にアップグレードします。 <!-- See [case-517](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case517.md) in Chinese. -->
+    -   v3.0 より前のバージョンでは、raftstore スレッドまたは適用スレッドがボトルネックになる場合 ( **Grafana** -&gt; **TiKV-details** -&gt;**スレッド CPU/raft ストア CPU**および**非同期適用 CPU**メトリックが`80%`を超える)、TiKV (v2) をスケールアウトできます。 .x) インスタンスを使用するか、マルチスレッドを使用して v3.x にアップグレードします。
 
 -   2.2.2 CPU負荷が増加します。
 
@@ -54,7 +54,7 @@ summary: Learn how to troubleshoot common errors in TiDB.
 
 ### 3.1 DDL {#3-1-ddl}
 
--   3.1.1 `decimal`フィールドの長さを変更すると、エラー`ERROR 1105 (HY000): unsupported modify decimal column precision`が報告されます。 <!--See [case-1004](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case517.md) in Chinese.--> TiDB は`decimal`フィールドの長さの変更をサポートしていません。
+-   3.1.1 `decimal`フィールドの長さを変更すると、エラー`ERROR 1105 (HY000): unsupported modify decimal column precision`が報告されます。 TiDB は`decimal`フィールドの長さの変更をサポートしていません。
 
 -   3.1.2 TiDB DDL ジョブがハングする、または実行が遅い (DDL の進行状況を確認するには`admin show ddl jobs`を使用します)
 
@@ -121,7 +121,7 @@ summary: Learn how to troubleshoot common errors in TiDB.
 
     -   v3.0.0 より前のバージョンの場合は、 `tidb.log`で grep &quot;メモリ がクォータを超えています&quot; を実行して、メモリクォータを超えている SQL クエリを見つけます。
 
-    > **ノート：**
+    > **注記：**
     >
     > 単一の SQLメモリ使用量のデフォルトのしきい値は`1GB`です。このパラメータは、システム変数[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)を構成することで設定できます。
 
@@ -159,7 +159,7 @@ OOM のトラブルシューティングの詳細については、 [TiDB OOM �
 
     -   v3.0 以降のバージョンの場合は、 `SQL Bind`機能を使用して実行プランをバインドします。
 
-    -   統計を更新します。問題の原因が統計にあることが大まかに確信できる場合は、 [統計をダンプする](/statistics.md#export-statistics) 。原因が古い統計 ( `show stats_meta`の`modify count/row count`特定の値 (0.3 など) より大きい場合、またはテーブルに時間のインデックス列がある場合) である場合は、 `analyze table`使用して回復を試みることができます。 `auto analyze`が設定されている場合は、システム変数`tidb_auto_analyze_ratio`が大きすぎるかどうか (たとえば、0.3 より大きいかどうか)、および現在時刻が`tidb_auto_analyze_start_time`から`tidb_auto_analyze_end_time`の間にあるかどうかを確認してください。
+    -   統計を更新します。問題の原因が統計にあることが大まかに確信できる場合は、 [統計をダンプする](/statistics.md#export-statistics) 。原因が古い統計 ( `show stats_meta`の`modify count/row count`特定の値 (0.3 など) より大きい場合、またはテーブルに時刻列のインデックスがある場合) である場合は、 `analyze table`使用して回復を試みることができます。 `auto analyze`が設定されている場合は、システム変数`tidb_auto_analyze_ratio`が大きすぎるかどうか (たとえば、0.3 より大きいかどうか)、および現在時刻が`tidb_auto_analyze_start_time`から`tidb_auto_analyze_end_time`の間にあるかどうかを確認してください。
 
     -   その他の状況の場合は、 [バグを報告](https://github.com/pingcap/tidb/issues/new?labels=type%2Fbug&#x26;template=bug-report.md) 。
 
@@ -243,15 +243,15 @@ TiDB は、トランザクション[`ADMIN CHECK [TABLE|INDEX]`](/sql-statements
 
     TiKV インスタンスには 2 つの RocksDB インスタンスがあり、 `data/raft`つはRaftログを保存するため、もう 1 つは`data/db`で実際のデータを保存します。ログで`grep "Stalling" RocksDB`を実行すると、ストールの具体的な原因を確認できます。 RocksDB ログは`LOG`で始まるファイルで、 `LOG`が現在のログです。
 
-    -   `level0 sst`が多すぎるとストールの原因になります。 `[rocksdb] max-sub-compactions = 2` (または 3) パラメータを追加すると、 `level0 sst`圧縮を高速化できます。 level0 から level1 までの圧縮タスクは、同時に実行されるいくつかのサブタスク (サブタスクの最大数は`max-sub-compactions` ) に分割されます。中国語の[ケース-815](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case815.md)を参照してください。
+    -   `level0 sst`が多すぎるとストールの原因になります。 `[rocksdb] max-sub-compactions = 2` (または 3) パラメータを追加すると、 `level0 sst`圧縮を高速化できます。 level0 から level1 までの圧縮タスクは、複数のサブタスク (サブタスクの最大数は`max-sub-compactions` ) に分割され、同時に実行されます。中国語の[ケース-815](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case815.md)を参照してください。
 
     -   `pending compaction bytes`が多すぎるとストールの原因になります。ビジネスのピーク時には、ディスク I/O が書き込み操作に追いつけなくなります。対応する CF の`soft-pending-compaction-bytes-limit`と`hard-pending-compaction-bytes-limit`を増やすことで、この問題を軽減できます。
 
         -   デフォルト値の`[rocksdb.defaultcf] soft-pending-compaction-bytes-limit`は`64GB`です。保留中の圧縮バイトがしきい値に達すると、RocksDB は書き込み速度を遅くします。 `[rocksdb.defaultcf] soft-pending-compaction-bytes-limit` ～ `128GB`まで設定できます。
 
-        -   デフォルト値の`hard-pending-compaction-bytes-limit`は`256GB`です。保留中の圧縮バイトがしきい値に達すると (保留中の圧縮バイトが`soft-pending-compaction-bytes-limit`に達すると、RocksDB は書き込み速度を低下させるため、このようなことは起こりそうにありません)、RocksDB は書き込み操作を停止します。 `hard-pending-compaction-bytes-limit` ～ `512GB`まで設定できます。 <!-- See [case-275](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case275.md) in Chinese.-->
+        -   デフォルト値の`hard-pending-compaction-bytes-limit`は`256GB`です。保留中の圧縮バイトがしきい値に達すると (保留中の圧縮バイトが`soft-pending-compaction-bytes-limit`に達すると、RocksDB は書き込み速度を低下させるため、これは起こりそうにありません)、RocksDB は書き込み操作を停止します。 `hard-pending-compaction-bytes-limit` ～ `512GB`まで設定できます。
 
-        -   ディスク I/O 容量が長時間書き込みに追いつかない場合は、ディスクをスケールアップすることをお勧めします。 CPU リソースが十分であるにもかかわらず、ディスク スループットが上限に達して書き込み停止が発生する場合 (たとえば、SATA SSD が NVME SSD よりも大幅に低い場合)、より高い圧縮率の圧縮アルゴリズムを適用することができます。このようにして、CPU リソースがディスク リソースと交換され、ディスクへの負荷が軽減されます。
+        -   ディスク I/O 容量が長時間書き込みに追いつかない場合は、ディスクをスケールアップすることをお勧めします。 CPU リソースが十分であるにもかかわらず、ディスク スループットが上限に達して書き込み停止が発生する場合 (たとえば、SATA SSD が NVME SSD よりも大幅に低い場合)、より高い圧縮率の圧縮アルゴリズムを適用できます。このようにして、CPU リソースがディスク リソースと交換され、ディスクへの負荷が軽減されます。
 
         -   デフォルトの CF 圧縮で高圧が発生した場合は、 `[rocksdb.defaultcf] compression-per-level`パラメーターを`["no", "no", "lz4", "lz4", "lz4", "zstd", "zstd"]`から`["no", "no", "zstd", "zstd", "zstd", "zstd", "zstd"]`に変更します。
 
@@ -350,7 +350,7 @@ TiDB は、トランザクション[`ADMIN CHECK [TABLE|INDEX]`](/sql-statements
 
 -   5.1.3 バランス
 
-    -   Leader/リージョンの数は均等に分散されていません。中国語の[ケース-394](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case394.md)と[ケース-759](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case759.md)を参照してください。主な原因は、天びんがリージョン/Leaderのサイズに基づいてスケジューリングを実行するため、カウントが不均一に分散される可能性があることです。 TiDB 4.0 では、 `[leader-schedule-policy]`パラメータが導入され、Leaderのスケジューリング ポリシーを`count`ベースまたは`size`ベースに設定できるようになります。
+    -   Leader/リージョンの数は均等に分散されていません。中国語の[ケース-394](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case394.md)と[ケース-759](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case759.md)を参照してください。主な原因は、天びんがリージョン/Leaderのサイズに基づいてスケジューリングを実行するため、カウントが不均一に分散される可能性があることです。 TiDB 4.0 では、 `[leader-schedule-policy]`パラメーターが導入され、Leaderのスケジューリング ポリシーを`count`ベースまたは`size`ベースに設定できるようになります。
 
 ### 5.2 PDの選出 {#5-2-pd-election}
 
@@ -390,7 +390,7 @@ TiDB は、トランザクション[`ADMIN CHECK [TABLE|INDEX]`](/sql-statements
 
 -   5.3.1 `/api/v1/regions`インターフェイスを使用する場合、リージョンが多すぎると PD OOM が発生する可能性があります。この問題は v3.0.8 ( [#1986](https://github.com/pingcap/pd/pull/1986) ) で修正されました。
 
--   5.3.2 ローリング アップグレード中の PD OOM。 gRPC メッセージのサイズは制限されておらず、モニターには TCP InSegs が比較的大きいことが示されています。この問題は v3.0.6 ( [#1952](https://github.com/pingcap/pd/pull/1952) ) で修正されました。 <!--For details, see [case-852](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case852.md).-->
+-   5.3.2 ローリング アップグレード中の PD OOM。 gRPC メッセージのサイズは制限されておらず、モニターには TCP InSegs が比較的大きいことが示されています。この問題は v3.0.6 ( [#1952](https://github.com/pingcap/pd/pull/1952) ) で修正されました。
 
 ### 5.4 グラファナ表示 {#5-4-grafana-display}
 
@@ -510,7 +510,7 @@ TiDB は、トランザクション[`ADMIN CHECK [TABLE|INDEX]`](/sql-statements
 
         -   `relay.meta`には空の GTID 情報が記録されています。 DM-worker は、終了時または 30 秒ごとに、メモリ内の GTID 情報を`relay.meta`に保存します。 DM-worker は上流の GTID 情報を取得できなかった場合、空の GTID 情報を`relay.meta`に保存します。中国語の[ケース-772](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case772.md)を参照してください。
 
-        -   `relay.meta`で記録されたbinlogイベントにより、不完全なリカバリ プロセスがトリガーされ、間違った GTID 情報が記録されます。この問題は v1.0.2 で修正されており、それ以前のバージョンでも発生する可能性があります。 <!--See [case-764](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case764.md).-->
+        -   `relay.meta`で記録されたbinlogイベントにより、不完全なリカバリ プロセスがトリガーされ、間違った GTID 情報が記録されます。この問題は v1.0.2 で修正されており、それ以前のバージョンでも発生する可能性があります。
 
 -   6.2.7 DM レプリケーション プロセスがエラー`Error 1366: incorrect utf8 value eda0bdedb29d(\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd)`を返します。
 

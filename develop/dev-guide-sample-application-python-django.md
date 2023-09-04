@@ -1,27 +1,28 @@
 ---
-title: Connect to TiDB with mysqlclient
-summary: Learn how to connect to TiDB using mysqlclient. This tutorial gives Python sample code snippets that work with TiDB using mysqlclient.
+title: Connect to TiDB with Django
+summary: Learn how to connect to TiDB using Django. This tutorial gives Python sample code snippets that work with TiDB using Django.
+aliases: ['/tidb/v7.1/dev-guide-outdated-for-django','/tidb/stable/dev-guide-outdated-for-django']
 ---
 
-# mysqlclient を使用して TiDB に接続する {#connect-to-tidb-with-mysqlclient}
+# Django を使用して TiDB に接続する {#connect-to-tidb-with-django}
 
-TiDB は MySQL 互換データベースであり、 [mysqlクライアント](https://github.com/PyMySQL/mysqlclient)は Python 用の人気のあるオープンソース ドライバーです。
+TiDB は MySQL 互換データベースであり、 [ジャンゴ](https://www.djangoproject.com)は Python の人気のある Web フレームワークであり、強力なオブジェクト リレーショナル マッパー (ORM) ライブラリが含まれています。
 
-このチュートリアルでは、TiDB と mysqlclient を使用して次のタスクを実行する方法を学習できます。
+このチュートリアルでは、TiDB と Django を使用して次のタスクを実行する方法を学習できます。
 
 -   環境をセットアップします。
--   mysqlclient を使用して TiDB クラスターに接続します。
+-   Django を使用して TiDB クラスターに接続します。
 -   アプリケーションをビルドして実行します。オプションで、基本的な CRUD 操作のサンプル コード スニペットを見つけることができます。
 
 > **注記：**
 >
-> このチュートリアルは、TiDB サーバーレス、TiDB 専用、および TiDB セルフホストで動作します。
+> このチュートリアルは、TiDB サーバーレス、TiDB 専用、および TiDB セルフホスト クラスターで動作します。
 
 ## 前提条件 {#prerequisites}
 
 このチュートリアルを完了するには、次のものが必要です。
 
--   [Python **3.10**以降](https://www.python.org/downloads/) 。
+-   [Python 3.8以降](https://www.python.org/downloads/) 。
 -   [ギット](https://git-scm.com/downloads) 。
 -   TiDB クラスター。
 
@@ -48,19 +49,27 @@ TiDB は MySQL 互換データベースであり、 [mysqlクライアント](ht
 ターミナル ウィンドウで次のコマンドを実行して、サンプル コード リポジトリのクローンを作成します。
 
 ```shell
-git clone https://github.com/tidb-samples/tidb-python-mysqlclient-quickstart.git
-cd tidb-python-mysqlclient-quickstart;
+git clone https://github.com/tidb-samples/tidb-python-django-quickstart.git
+cd tidb-python-django-quickstart
 ```
 
 ### ステップ 2: 依存関係をインストールする {#step-2-install-dependencies}
 
-次のコマンドを実行して、サンプル アプリに必要なパッケージ ( `mysqlclient`を含む) をインストールします。
+次のコマンドを実行して、サンプル アプリに必要なパッケージ (Django、django-tidb、mysqlclient など) をインストールします。
 
 ```shell
 pip install -r requirements.txt
 ```
 
-インストールの問題が発生した場合は、 [mysqlclientの公式ドキュメント](https://github.com/PyMySQL/mysqlclient#install)を参照してください。
+mysqlclient でインストールの問題が発生した場合は、 [mysqlclientの公式ドキュメント](https://github.com/PyMySQL/mysqlclient#install)を参照してください。
+
+#### <code>django-tidb</code>とは何ですか? {#what-is-code-django-tidb-code}
+
+`django-tidb`は、TiDB と Django の間の互換性の問題を解決する Django 用の TiDB 方言です。
+
+`django-tidb`をインストールするには、Django のバージョンと一致するバージョンを選択します。たとえば、 `django==4.2.*`使用している場合は、 `django-tidb==4.2.*`をインストールします。マイナー バージョンは同じである必要はありません。最新のマイナー バージョンを使用することをお勧めします。
+
+詳細については、 [django-tidb リポジトリ](https://github.com/pingcap/django-tidb)を参照してください。
 
 ### ステップ 3: 接続情報を構成する {#step-3-configure-connection-information}
 
@@ -99,12 +108,12 @@ pip install -r requirements.txt
     6.  対応する接続​​文字列をコピーして`.env`ファイルに貼り付けます。結果の例は次のとおりです。
 
         ```dotenv
-        TIDB_HOST='{gateway-region}.aws.tidbcloud.com'
+        TIDB_HOST='{host}'  # e.g. gateway01.ap-northeast-1.prod.aws.tidbcloud.com
         TIDB_PORT='4000'
-        TIDB_USER='{prefix}.root'
+        TIDB_USER='{user}'  # e.g. xxxxxx.root
         TIDB_PASSWORD='{password}'
         TIDB_DB_NAME='test'
-        CA_PATH=''
+        CA_PATH='{ssl_ca}'  # e.g. /etc/ssl/certs/ca-certificates.crt (Debian / Ubuntu / Arch)
         ```
 
         プレースホルダー`{}` 、接続ダイアログから取得した接続パラメーターに必ず置き換えてください。
@@ -132,9 +141,9 @@ pip install -r requirements.txt
     5.  対応する接続​​文字列をコピーして`.env`ファイルに貼り付けます。結果の例は次のとおりです。
 
         ```dotenv
-        TIDB_HOST='{host}.clusters.tidb-cloud.com'
+        TIDB_HOST='{host}'  # e.g. tidb.xxxx.clusters.tidb-cloud.com
         TIDB_PORT='4000'
-        TIDB_USER='{username}'
+        TIDB_USER='{user}'  # e.g. root
         TIDB_PASSWORD='{password}'
         TIDB_DB_NAME='test'
         CA_PATH='{your-downloaded-ca-path}'
@@ -168,51 +177,99 @@ pip install -r requirements.txt
   </div>
 </SimpleTab>
 
-### ステップ 4: コードを実行して結果を確認する {#step-4-run-the-code-and-check-the-result}
+### ステップ 4: データベースを初期化する {#step-4-initialize-the-database}
 
-1.  次のコマンドを実行してサンプル コードを実行します。
+プロジェクトのルート ディレクトリで次のコマンドを実行してデータベースを初期化します。
+
+```shell
+python manage.py migrate
+```
+
+### ステップ 5: サンプル アプリケーションを実行する {#step-5-run-the-sample-application}
+
+1.  アプリケーションを開発モードで実行します。
 
     ```shell
-    python mysqlclient_example.py
+    python manage.py runserver
     ```
 
-2.  [予想される出力.txt](https://github.com/tidb-samples/tidb-python-mysqlclient-quickstart/blob/main/Expected-Output.txt)チェックして、出力が一致するかどうかを確認します。
+    アプリケーションはデフォルトでポート`8000`で実行されます。別のポートを使用するには、コマンドにポート番号を追加します。以下は例です。
+
+    ```shell
+    python manage.py runserver 8080
+    ```
+
+2.  アプリケーションにアクセスするには、ブラウザを開いて`http://localhost:8000/`に進みます。サンプル アプリケーションでは、次のことができます。
+
+    -   新しいプレーヤーを作成します。
+    -   プレーヤーを一括作成します。
+    -   すべてのプレーヤーをビュー。
+    -   プレーヤーを更新します。
+    -   プレーヤーを削除します。
+    -   2 人のプレイヤー間で商品を交換します。
 
 ## サンプルコードスニペット {#sample-code-snippets}
 
 次のサンプル コード スニペットを参照して、独自のアプリケーション開発を完了できます。
 
-完全なサンプル コードとその実行方法については、 [tidb-samples/tidb-python-mysqlclient-quickstart](https://github.com/tidb-samples/tidb-python-mysqlclient-quickstart)リポジトリを確認してください。
+完全なサンプル コードとその実行方法については、 [tidb-samples/tidb-python-django-quickstart](https://github.com/tidb-samples/tidb-python-django-quickstart)リポジトリを確認してください。
 
 ### TiDB に接続する {#connect-to-tidb}
 
+ファイル`sample_project/settings.py`に、次の構成を追加します。
+
 ```python
-def get_mysqlclient_connection(autocommit:bool=True) -> MySQLdb.Connection:
-    db_conf = {
-        "host": ${tidb_host},
-        "port": ${tidb_port},
-        "user": ${tidb_user},
-        "password": ${tidb_password},
-        "database": ${tidb_db_name},
-        "autocommit": autocommit
+DATABASES = {
+    "default": {
+        "ENGINE": "django_tidb",
+        "HOST": ${tidb_host},
+        "PORT": ${tidb_port},
+        "USER": ${tidb_user},
+        "PASSWORD": ${tidb_password},
+        "NAME": ${tidb_db_name},
+        "OPTIONS": {
+            "charset": "utf8mb4",
+        },
     }
+}
 
-    if ${ca_path}:
-        db_conf["ssl_mode"] = "VERIFY_IDENTITY"
-        db_conf["ssl"] = {"ca": ${ca_path}}
-
-    return MySQLdb.connect(**db_conf)
+TIDB_CA_PATH = ${ca_path}
+if TIDB_CA_PATH:
+    DATABASES["default"]["OPTIONS"]["ssl_mode"] = "VERIFY_IDENTITY"
+    DATABASES["default"]["OPTIONS"]["ssl"] = {
+        "ca": TIDB_CA_PATH,
+    }
 ```
 
-この関数を使用する場合、 `${tidb_host}` 、 `${tidb_port}` 、 `${tidb_user}` 、 `${tidb_password}` 、 `${tidb_db_name}`および`${ca_path}`を TiDB クラスターの実際の値に置き換える必要があります。
+`${tidb_host}` 、 `${tidb_port}` 、 `${tidb_user}` 、 `${tidb_password}` 、 `${tidb_db_name}` 、および`${ca_path}`を TiDB クラスターの実際の値に置き換える必要があります。
+
+### データモデルを定義する {#define-the-data-model}
+
+```python
+from django.db import models
+
+class Player(models.Model):
+    name = models.CharField(max_length=32, blank=False, null=False)
+    coins = models.IntegerField(default=100)
+    goods = models.IntegerField(default=1)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+```
+
+詳細については、 [ジャンゴモデル](https://docs.djangoproject.com/en/dev/topics/db/models/)を参照してください。
 
 ### データの挿入 {#insert-data}
 
 ```python
-with get_mysqlclient_connection(autocommit=True) as conn:
-    with conn.cursor() as cur:
-        player = ("1", 1, 1)
-        cursor.execute("INSERT INTO players (id, coins, goods) VALUES (%s, %s, %s)", player)
+# insert a single object
+player = Player.objects.create(name="player1", coins=100, goods=1)
+
+# bulk insert multiple objects
+Player.objects.bulk_create([
+    Player(name="player1", coins=100, goods=1),
+    Player(name="player2", coins=200, goods=2),
+    Player(name="player3", coins=300, goods=3),
+])
 ```
 
 詳細については、 [データの挿入](/develop/dev-guide-insert-data.md)を参照してください。
@@ -220,10 +277,14 @@ with get_mysqlclient_connection(autocommit=True) as conn:
 ### クエリデータ {#query-data}
 
 ```python
-with get_mysqlclient_connection(autocommit=True) as conn:
-    with conn.cursor() as cur:
-        cur.execute("SELECT count(*) FROM players")
-        print(cur.fetchone()[0])
+# get a single object
+player = Player.objects.get(name="player1")
+
+# get multiple objects
+filtered_players = Player.objects.filter(name="player1")
+
+# get all objects
+all_players = Player.objects.all()
 ```
 
 詳細については、 [クエリデータ](/develop/dev-guide-get-data-from-single-table.md)を参照してください。
@@ -231,13 +292,13 @@ with get_mysqlclient_connection(autocommit=True) as conn:
 ### データを更新する {#update-data}
 
 ```python
-with get_mysqlclient_connection(autocommit=True) as conn:
-    with conn.cursor() as cur:
-        player_id, amount, price="1", 10, 500
-        cursor.execute(
-            "UPDATE players SET goods = goods + %s, coins = coins + %s WHERE id = %s",
-            (-amount, price, player_id),
-        )
+# update a single object
+player = Player.objects.get(name="player1")
+player.coins = 200
+player.save()
+
+# update multiple objects
+Player.objects.filter(coins=100).update(coins=200)
 ```
 
 詳細については、 [データを更新する](/develop/dev-guide-update-data.md)を参照してください。
@@ -245,33 +306,20 @@ with get_mysqlclient_connection(autocommit=True) as conn:
 ### データの削除 {#delete-data}
 
 ```python
-with get_mysqlclient_connection(autocommit=True) as conn:
-    with conn.cursor() as cur:
-        player_id = "1"
-        cursor.execute("DELETE FROM players WHERE id = %s", (player_id,))
+# delete a single object
+player = Player.objects.get(name="player1")
+player.delete()
+
+# delete multiple objects
+Player.objects.filter(coins=100).delete()
 ```
 
 詳細については、 [データの削除](/develop/dev-guide-delete-data.md)を参照してください。
 
-## 便利なメモ {#useful-notes}
-
-### ドライバーまたは ORM フレームワークを使用していますか? {#using-driver-or-orm-framework}
-
-Python ドライバーはデータベースへの低レベルのアクセスを提供しますが、開発者は次のことを行う必要があります。
-
--   データベース接続を手動で確立および解放します。
--   データベーストランザクションを手動で管理します。
--   データ行 ( `mysqlclient`ではタプルとして表されます) をデータ オブジェクトに手動でマップします。
-
-複雑な SQL ステートメントを作成する必要がない限り、開発には[SQLアルケミー](/develop/dev-guide-sample-application-python-sqlalchemy.md) 、 [ピーウィー](/develop/dev-guide-sample-application-python-peewee.md) 、Django ORM などの[ORM](https://en.wikipedia.org/w/index.php?title=Object-relational_mapping)フレームワークを使用することをお勧めします。それはあなたに役立ちます:
-
--   接続とトランザクションの管理のために[定型コード](https://en.wikipedia.org/wiki/Boilerplate_code)を減らします。
--   多数の SQL ステートメントの代わりにデータ オブジェクトを使用してデータを操作します。
-
 ## 次のステップ {#next-steps}
 
--   `mysqlclient`から[mysqlclientのドキュメント](https://mysqlclient.readthedocs.io/)の使用法をさらに学習します。
--   TiDB アプリケーション[データの削除](/develop/dev-guide-delete-data.md) [単一テーブルの読み取り](/develop/dev-guide-get-data-from-single-table.md)ベスト プラクティス[SQLパフォーマンスの最適化](/develop/dev-guide-optimize-sql-overview.md)は、 [開発者ガイド](/develop/dev-guide-overview.md)の章 ( [データの挿入](/develop/dev-guide-insert-data.md)など) [データを更新する](/develop/dev-guide-update-data.md)参照[取引](/develop/dev-guide-transaction-overview.md)てください。
+-   Django の詳しい使い方を[Django のドキュメント](https://www.djangoproject.com/)から学びましょう。
+-   TiDB アプリケーション[データの削除](/develop/dev-guide-delete-data.md) [単一テーブルの読み取り](/develop/dev-guide-get-data-from-single-table.md)ベスト プラクティス[SQLパフォーマンスの最適化](/develop/dev-guide-optimize-sql-overview.md)は、 [開発者ガイド](/develop/dev-guide-overview.md)の章 ( [データの挿入](/develop/dev-guide-insert-data.md)など) [データを更新する](/develop/dev-guide-update-data.md)参照[トランザクション](/develop/dev-guide-transaction-overview.md)てください。
 -   プロフェッショナルとして[TiDB 開発者コース](https://www.pingcap.com/education/)を学び、試験合格後に[TiDB 認定](https://www.pingcap.com/education/certification/)獲得します。
 
 ## 助けが必要？ {#need-help}

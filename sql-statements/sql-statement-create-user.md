@@ -152,15 +152,12 @@ SELECT USER, HOST, USER_ATTRIBUTES FROM MYSQL.USER WHERE USER='newuser7';
 
 -   TiDB は、 `WITH MAX_QUERIES_PER_HOUR` 、 `WITH MAX_UPDATES_PER_HOUR` 、および`WITH MAX_USER_CONNECTIONS`オプションをサポートしません。
 -   TiDB は`DEFAULT ROLE`オプションをサポートしていません。
--   TiDB は、パスワードに関連する`PASSWORD EXPIRE` 、 `PASSWORD HISTORY`またはその他のオプションをサポートしません。
 
 ## こちらも参照 {#see-also}
 
 <CustomContent platform="tidb">
-
--   [MySQL とのSecurity互換性](/security-compatibility-with-mysql.md)
--   [権限管理](/privilege-management.md)
-
+  -   [MySQL とのSecurity互換性](/security-compatibility-with-mysql.md)
+  -   [権限管理](/privilege-management.md)
 </CustomContent>
 
 -   [ユーザーを削除する](/sql-statements/sql-statement-drop-user.md)

@@ -5,7 +5,7 @@ summary: Learn about how to perform a Proof of Concept (PoC) with TiDB Cloud.
 
 # TiDB Cloudを使用して概念実証 (PoC) を実行する {#perform-a-proof-of-concept-poc-with-tidb-cloud}
 
-TiDB Cloud は、フルマネージドのクラウド データベースで TiDB の優れた機能をすべて提供する Database-as-a-Service (DBaaS) 製品です。これにより、データベースの複雑さではなく、アプリケーションに集中することができます。 TiDB Cloudは現在、アマゾン ウェブ サービス (AWS) と Google Cloud Platform (GCP) の両方で利用できます。
+TiDB Cloud は、フルマネージドのクラウド データベースで TiDB の優れた機能をすべて提供する Database-as-a-Service (DBaaS) 製品です。これにより、データベースの複雑さではなく、アプリケーションに集中することができます。 TiDB Cloudは現在、アマゾン ウェブ サービス (AWS) と Google Cloud の両方で利用できます。
 
 TiDB Cloud がビジネス ニーズに最適であるかどうかを判断するには、概念実証 (PoC) を開始することが最善の方法です。また、 TiDB Cloudの主要な機能を短時間で理解できるようになります。パフォーマンス テストを実行すると、ワークロードがTiDB Cloud上で効率的に実行できるかどうかを確認できます。データの移行と構成の適応に必要な作業を評価することもできます。
 
@@ -13,7 +13,7 @@ TiDB Cloud がビジネス ニーズに最適であるかどうかを判断す�
 
 PoC の実施に興味がある場合は、開始する前にお気軽に<a href="mailto:tidbcloud-support@pingcap.com">PingCAP</a>にお問い合わせください。サポート チームは、テスト計画の作成を支援し、PoC 手順をスムーズに進めることができます。
 
-あるいは、簡単な評価のためにTiDB Cloudに慣れること[TiDB サーバーレスを作成する](/tidb-cloud/tidb-cloud-quickstart.md#step-1-create-a-tidb-cluster)できます。 TiDB Serverless にはいくつかの[特別な利用規約](/tidb-cloud/select-cluster-tier.md#tidb-serverless-special-terms-and-conditions)あることに注意してください。
+あるいは、 TiDB Cloudに慣れて簡単に評価すること[TiDB サーバーレスを作成する](/tidb-cloud/tidb-cloud-quickstart.md#step-1-create-a-tidb-cluster)できます。 TiDB Serverless にはいくつかの[特別な利用規約](/tidb-cloud/select-cluster-tier.md#tidb-serverless-special-terms-and-conditions)あることに注意してください。
 
 ## PoC手順の概要 {#overview-of-the-poc-procedures}
 
@@ -32,7 +32,7 @@ PoC の目的は、 TiDB Cloud がビジネス要件を満たしているかど�
 
 ## ステップ 1. 成功基準を定義し、テスト計画を作成する {#step-1-define-success-criteria-and-create-a-test-plan}
 
-PoC を通じてTiDB Cloudを評価する場合は、ビジネス ニーズに基づいて関心のある点とそれに対応する技術的な評価基準を決定し、PoC に対する期待と目標を明確にすることをお勧めします。詳細なテスト計画を備えた明確で測定可能な技術基準は、主要な側面に焦点を当て、ビジネス レベルの要件をカバーし、最終的に PoC 手順を通じて回答を得るのに役立ちます。
+PoC を通じてTiDB Cloudを評価する場合は、ビジネス ニーズに基づいて関心のある点とそれに対応する技術的な評価基準を決定し、PoC に対する期待と目標を明確にすることをお勧めします。詳細なテスト計画を伴う明確で測定可能な技術基準は、主要な側面に焦点を当て、ビジネス レベルの要件をカバーし、最終的に PoC 手順を通じて回答を得るのに役立ちます。
 
 PoC の目標を特定するには、次の質問を使用してください。
 
@@ -65,13 +65,13 @@ PoC 用に[TiDB専用](/tidb-cloud/select-cluster-tier.md#tidb-dedicated)クラ�
     -   PingCAP Web サイトの[PoC に応募する](https://pingcap.com/apply-for-poc/)ページに移動して、申請フォームに記入します。
     -   [TiDB Cloudコンソール](https://tidbcloud.com/)で、 **「?」**をクリックします。右下隅にある**[Contact Sales]**をクリックし、 **[PoC に申請] を**選択して申請フォームに記入します。
 
-    フォームを送信すると、 TiDB Cloudサポート チームが申請を審査し、連絡し、申請が承認されたらアカウントにクレジットを転送します。 PingCAP サポート エンジニアに連絡して、PoC 手順を支援して、PoC ができるだけスムーズに実行されるようにすることもできます。
+    フォームを送信すると、 TiDB Cloudサポート チームが申請を審査して連絡し、申請が承認されたらクレジットをアカウントに転送します。 PingCAP サポート エンジニアに連絡して、PoC 手順を支援して、PoC ができるだけスムーズに実行されるようにすることもできます。
 
 2.  PoC 用の TiDB 専用クラスターを作成するには、 [TiDB 専用クラスタの作成](/tidb-cloud/create-tidb-cluster.md)を参照してください。
 
 クラスターを作成する前に、クラスターのサイジングについてキャパシティ プランニングを行うことをお勧めします。 TiDB、TiKV、またはTiFlashノードの推定数から開始し、パフォーマンス要件を満たすために後でクラスターをスケールアウトできます。詳細については、次のドキュメントを参照するか、サポート チームにお問い合わせください。
 
--   推定方法の詳細については、 [TiDB のサイズを調整する](/tidb-cloud/size-your-cluster.md)を参照してください。
+-   推定方法の詳細については、 [TiDB のサイズを設定する](/tidb-cloud/size-your-cluster.md)を参照してください。
 -   TiDB 専用クラスターの構成については、 [TiDB 専用クラスタの作成](/tidb-cloud/create-tidb-cluster.md)を参照してください。 TiDB、TiKV、 TiFlash (オプション) のクラスター サイズをそれぞれ構成します。
 -   PoC クレジットの消費を効果的に計画および最適化する方法については、このドキュメントの[FAQ](#faq)を参照してください。
 -   スケーリングの詳細については、 [TiDBクラスタを拡張する](/tidb-cloud/scale-tidb-cluster.md)を参照してください。
@@ -122,7 +122,7 @@ SQL ステートメントの場合は、データ ソースの TiDB との互換
 -   [Amazon S3 または GCS から CSV ファイルをインポートする](/tidb-cloud/import-csv-files.md)
 -   [Apache Parquet ファイルをインポートする](/tidb-cloud/import-parquet-files.md)
 
-> **ノート：**
+> **注記：**
 >
 > **[インポート]**ページでのデータのインポートでは、追加の請求料金は発生しません。
 
