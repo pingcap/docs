@@ -1,13 +1,7 @@
 ---
-<<<<<<< HEAD
-title: Build a Simple CRUD App with TiDB and MySQL Connector/Python
-summary: Learn how to build a simple CRUD application with TiDB and MySQL Connector/Python.
-aliases: ['/tidb/v6.5/dev-guide-sample-application-python','/tidb/stable/dev-guide-sample-application-python','/tidbcloud/dev-guide-sample-application-python','/tidb/v6.5/dev-guide-outdated-for-python-mysql-connector']
-=======
 title: Connect to TiDB with MySQL Connector/Python
 summary: Learn how to connect to TiDB using MySQL Connector/Python. This tutorial gives Python sample code snippets that work with TiDB using MySQL Connector/Python.
-aliases: ['/tidb/dev/dev-guide-sample-application-python','/tidb/dev/dev-guide-outdated-for-python-mysql-connector']
->>>>>>> 9865499657 (develop: refactor MySQL Connector/Python dev guide (#14632))
+aliases: ['/tidb/v6.5/dev-guide-sample-application-python','/tidb/stable/dev-guide-sample-application-python','/tidbcloud/dev-guide-sample-application-python','/tidb/v6.5/dev-guide-outdated-for-python-mysql-connector']
 ---
 
 # Connect to TiDB with MySQL Connector/Python
