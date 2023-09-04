@@ -33,6 +33,7 @@ In the current version of TiDB, if a `Prepare` statement meets any of the follow
 - The query contains parameters for comparing `int` and `string`, such as `c_int >= ?` or `c_int in (?, ?)`, in which `?` indicates the string type, such as `set @x='123'`. To ensure that the query result is compatible with MySQL, parameters need to be adjusted in each query, so such queries are not cached.
 - The plan attempts to access `TiFlash`.
 - In most cases, the plan that contains `TableDual` is not cached, unless the current `Prepare` statement does not have parameters.
+- The query accessing TiDB system views, such as `information_schema.columns`, and it is not recommended to use `Prepare` and `Execute` statements to access system views. 
 
 TiDB has a limitation on the number of `?`, if a query has more than 65535 `?`, the error `Prepared statement contains too many placeholders` will be returned.
 
