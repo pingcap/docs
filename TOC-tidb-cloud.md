@@ -41,6 +41,7 @@
       - [Prisma](/develop/dev-guide-sample-application-nodejs-prisma.md)
       - [Next.js](/develop/dev-guide-sample-application-nextjs.md)
       - [AWS Lambda](/develop/dev-guide-sample-application-aws-lambda.md)
+      - [Sequelize](/develop/dev-guide-sample-application-nodejs-sequelize.md)
   - Third-Party Support
     - [Third-Party Tools Supported by TiDB](/develop/dev-guide-third-party-support.md)
     - [Known Incompatibility Issues with Third-Party Tools](/develop/dev-guide-third-party-tools-compatibility.md)

@@ -42,6 +42,7 @@
       - [Prisma](/develop/dev-guide-sample-application-nodejs-prisma.md)
       - [Next.js](/develop/dev-guide-sample-application-nextjs.md)
       - [AWS Lambda](/develop/dev-guide-sample-application-aws-lambda.md)
+      - [Sequelize](/develop/dev-guide-sample-application-nodejs-sequelize.md)
   - Connect to TiDB
     - [Choose Driver or ORM](/develop/dev-guide-choose-driver-or-orm.md)
     - [Connect to TiDB](/develop/dev-guide-connect-to-tidb.md)
