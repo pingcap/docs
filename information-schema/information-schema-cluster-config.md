@@ -5,7 +5,11 @@ summary: Learn the `CLUSTER_CONFIG` information_schema table.
 
 # CLUSTER_CONFIG
 
-You can use the `CLUSTER_CONFIG` cluster configuration table to get the current configuration of all server components in the cluster. This simplifies the usage over earlier releases of TiDB, where obtaining similar information would require accessing the HTTP API end points of each instance.
+You can use the `CLUSTER_CONFIG` cluster configuration table to get the current configuration of all server components in the cluster. This simplifies the usage over earlier releases of TiDB, where obtaining similar information would require accessing the HTTP API endpoints of each instance.
+
+> **Note:**
+>
+> This table is only applicable to TiDB Self-Hosted and not available on [TiDB Cloud](https://docs.pingcap.com/tidbcloud/).
 
 {{< copyable "sql" >}}
 

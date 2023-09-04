@@ -46,7 +46,11 @@ Currently, the `help_topic` is NULL.
 
 ## GC worker system tables
 
-- `gc_delete_range`: the KV range to be deleted
+> **Note:**
+>
+> The GC worker system tables are not applicable to TiDB Cloud.
+
+- `gc_delete_range`: the KV range to be deleted.
 - `gc_delete_range_done`: the deleted KV range
 
 ## System tables related to cached tables
@@ -55,19 +59,22 @@ Currently, the `help_topic` is NULL.
 
 ## TTL related system tables
 
+> **Note:**
+>
+> This TTL related system tables are not available on [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless) clusters.
+
 * `mysql.tidb_ttl_table_status` the previously executed TTL job and ongoing TTL job for all TTL tables
 * `mysql.tidb_ttl_task` the current ongoing TTL subtasks
 * `mysql.tidb_ttl_job_history` the execution history of TTL tasks in the last 90 days
 
 ## Miscellaneous system tables
 
+> **Note:**
+>
+> The `tidb`, `expr_pushdown_blacklist`, `opt_rule_blacklist`, and `table_cache_meta` system tables are not applicable to TiDB Cloud.
+
 - `GLOBAL_VARIABLES`: global system variable table
-
-<CustomContent platform="tidb">
-
 - `tidb`: to record the version information when TiDB executes `bootstrap`
 - `expr_pushdown_blacklist`: the blocklist for expression pushdown
 - `opt_rule_blacklist`: the blocklist for logical optimization rules
 - `table_cache_meta`: the metadata of cached tables
-
-</CustomContent>
