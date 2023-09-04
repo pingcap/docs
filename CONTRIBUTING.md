@@ -88,7 +88,7 @@ Your Pull Requests can only be merged after you sign the [Contributor License Ag
 
 ### Step 1: Fork the repository
 
-1. Visit the project: <https://github.com/pingcap/docs>
+1. Visit the project: [https://github.com/pingcap/docs](https://github.com/pingcap/docs)
 2. Click the **Fork** button on the top right and wait it to finish.
 
 ### Step 2: Clone the forked repository to local storage
@@ -149,7 +149,7 @@ git push -u origin new-branch-name # "-u" is used to track the remote branch fro
 
 ### Step 8: Create a pull request
 
-1. Visit your fork at <https://github.com/$user/docs> (replace `$user` with your GitHub ID)
+1. Visit your fork at [https://github.com/$user/docs](https://github.com/$user/docs) (replace `$user` with your GitHub ID)
 2. Click the `Compare & pull request` button next to your `new-branch-name` branch to create your PR. See [Pull Request Title Style](https://github.com/pingcap/community/blob/master/contributors/commit-message-pr-style.md#pull-request-title-style).
 
 Now, your PR is successfully submitted! After this PR is merged, you will automatically become a contributor to TiDB documentation.

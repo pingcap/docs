@@ -5,7 +5,7 @@ summary: Learn how to monitor the cluster version of TiDB Binlog.
 
 # TiDB Binlog Monitoring
 
-After you have deployed TiDB Binlog successfully, you can go to the Grafana Web (default address: <http://grafana_ip:3000>, default account: admin, password: admin) to check the state of Pump and Drainer.
+After you have deployed TiDB Binlog successfully, you can go to the Grafana Web (default address: [http://grafana_ip:3000](http://grafana_ip:3000), default account: admin, password: admin) to check the state of Pump and Drainer.
 
 ## Monitoring metrics
 

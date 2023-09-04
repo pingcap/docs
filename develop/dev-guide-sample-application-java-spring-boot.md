@@ -216,7 +216,7 @@ If you want to learn more about the code of this application, refer to [implemen
 
 ## Step 6: HTTP requests
 
-After the service is up and running, you can send the HTTP requests to the backend application. <http://localhost:8080> is the base URL that provides services. This tutorial uses a series of HTTP requests to show how to use the service.
+After the service is up and running, you can send the HTTP requests to the backend application. [http://localhost:8080](http://localhost:8080) is the base URL that provides services. This tutorial uses a series of HTTP requests to show how to use the service.
 
 ### Step 6.1 Use Postman requests (recommended)
 

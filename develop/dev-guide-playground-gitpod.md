@@ -8,7 +8,7 @@ title: Gitpod
 
 With [Gitpod](https://www.gitpod.io/), you can get a full development environment in your browser with the click of a button or link, and you can write code right away.
 
-Gitpod is an open-source Kubernetes application (GitHub repository address: <https://github.com/gitpod-io/gitpod>) for direct-to-code development environments, which spins up fresh, automated development environments for each task, in the cloud, in seconds. It enables you to describe your development environment as code and start instant, remote and cloud-based development environments directly from your browser or your Desktop IDE.
+Gitpod is an open-source Kubernetes application (GitHub repository address: [https://github.com/gitpod-io/gitpod](https://github.com/gitpod-io/gitpod)) for direct-to-code development environments, which spins up fresh, automated development environments for each task, in the cloud, in seconds. It enables you to describe your development environment as code and start instant, remote and cloud-based development environments directly from your browser or your Desktop IDE.
 
 ## Quick start
 

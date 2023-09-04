@@ -35,12 +35,12 @@ Configure the bucket access for TiDB Cloud and get the Role ARN as follows:
 
 2. In the AWS Management Console, create a managed policy for your Amazon S3 bucket.
 
-    1. Sign in to the AWS Management Console and open the Amazon S3 console at <https://console.aws.amazon.com/s3/>.
+    1. Sign in to the AWS Management Console and open the Amazon S3 console at [https://console.aws.amazon.com/s3/](https://console.aws.amazon.com/s3/).
     2. In the **Buckets** list, choose the name of your bucket with the source data, and then click **Copy ARN** to get your S3 bucket ARN (for example, `arn:aws:s3:::tidb-cloud-source-data`). Take a note of the bucket ARN for later use.
 
         ![Copy bucket ARN](/media/tidb-cloud/copy-bucket-arn.png)
 
-    3. Open the IAM console at <https://console.aws.amazon.com/iam/>, click **Policies** in the navigation pane on the left, and then click **Create Policy**.
+    3. Open the IAM console at [https://console.aws.amazon.com/iam/](https://console.aws.amazon.com/iam/), click **Policies** in the navigation pane on the left, and then click **Create Policy**.
 
         ![Create a policy](/media/tidb-cloud/aws-create-policy.png)
 
@@ -89,7 +89,7 @@ Configure the bucket access for TiDB Cloud and get the Role ARN as follows:
 
 3. In the AWS Management Console, create an access role for TiDB Cloud and get the role ARN.
 
-    1. In the IAM console at <https://console.aws.amazon.com/iam/>, click **Roles** in the navigation pane on the left, and then click **Create role**.
+    1. In the IAM console at [https://console.aws.amazon.com/iam/](https://console.aws.amazon.com/iam/), click **Roles** in the navigation pane on the left, and then click **Create role**.
 
         ![Create a role](/media/tidb-cloud/aws-create-role.png)
 
