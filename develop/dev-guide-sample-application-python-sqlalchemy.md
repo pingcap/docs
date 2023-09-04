@@ -1,13 +1,7 @@
 ---
-<<<<<<< HEAD
-title: Build a Simple CRUD App with TiDB and SQLAlchemy
-summary: Learn how to build a simple CRUD application with TiDB and SQLAlchemy.
-aliases: ['/tidb/v6.5/dev-guide-outdated-for-sqlalchemy']
-=======
 title: Connect to TiDB with SQLAlchemy
 summary: Learn how to connect to TiDB using SQLAlchemy. This tutorial gives Python sample code snippets that work with TiDB using SQLAlchemy.
-aliases: ['/tidb/dev/dev-guide-outdated-for-sqlalchemy']
->>>>>>> 08af194ac6 (develop: refactor SQLAlchemy dev guide (#14638))
+aliases: ['/tidb/v6.5/dev-guide-outdated-for-sqlalchemy']
 ---
 
 # Connect to TiDB with SQLAlchemy
