@@ -33,11 +33,11 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 - Release several TiDB Cloud API endpoints for managing the [AWS PrivateLink](https://aws.amazon.com/privatelink/?privatelink-blogs.sort-by=item.additionalFields.createdDate&privatelink-blogs.sort-order=desc) or [Google Cloud Private Service Connect](https://cloud.google.com/vpc/docs/private-service-connect) for [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) clusters:
 
     - Create a private endpoint service for a cluster
-    - Retrieve the private endpoint service information for a cluster
+    - Retrieve the private endpoint service information of a cluster
     - Create a private endpoint for a cluster
-    - List all private endpoints for a cluster
+    - List all private endpoints of a cluster
     - List all private endpoints in a project
-    - Delete a private endpoint for a cluster
+    - Delete a private endpoint of a cluster
 
   For more information, refer to the [API documentation](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster).
 
