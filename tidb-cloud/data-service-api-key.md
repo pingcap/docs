@@ -22,11 +22,11 @@ The TiDB Cloud Data API supports both [Basic Authentication](https://en.wikipedi
 
 ## Rate limiting
 
-Request quotas are rate-limited as follows:
+Request quotas are subject to rate limits as follows:
 
-- TiDB Cloud Data Service allows up to 100 requests per minute (rpm)  per API key by default.
+- TiDB Cloud Data Service allows up to 100 requests per minute (rpm) per API key by default.
 
-    You can edit the rate limit of an API key when you [create](#create-an-api-key) or [edit](#edit-an-api-key) the key. The supported value range is from `1` to `1000`. If your requests per minute exceed the rate limit, the API returns a `429` error. To get a quota more than 1000 requests per minute (rpm) per API key, you can [submit a request](https://support.pingcap.com/hc/en-us/requests/new?ticket_form_id=7800003722519) to our support team.
+    You can edit the rate limit of an API key when you [create](#create-an-api-key) or [edit](#edit-an-api-key) the key. The supported value range is from `1` to `1000`. If your requests per minute exceed the rate limit, the API returns a `429` error. To get a quota of more than 1000 rpm per API key, you can [submit a request](https://support.pingcap.com/hc/en-us/requests/new?ticket_form_id=7800003722519) to our support team.
 
     Each API request returns the following headers about the limit.
 
@@ -34,7 +34,7 @@ Request quotas are rate-limited as follows:
     - `X-Ratelimit-Remaining-Minute`: The number of remaining requests in the current minute. When it reaches `0`, the API returns a `429` error and indicates that you exceed the rate limit.
     - `X-Ratelimit-Reset`: The time in seconds at which the current rate limit resets.
 
-  If you exceed the rate limit, an error response returns like this.
+  If you exceed the rate limit, an error response returns like this:
 
     ```bash
     HTTP/2 429
