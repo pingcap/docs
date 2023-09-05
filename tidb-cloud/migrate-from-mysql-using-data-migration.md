@@ -16,21 +16,7 @@ If you want to migrate incremental data only, see [Migrate Incremental Data from
 
 - The Data Migration feature is available only for **TiDB Dedicated** clusters.
 
-<<<<<<< HEAD
-- The Data Migration feature is only available to clusters in the projects that are created in the following regions after November 9, 2022. If your **project** was created before the date or if your cluster is in another region, this feature is not available to your cluster and the **Data Migration** tab will not be displayed on the cluster overview page in the TiDB Cloud console.
-
-    - AWS Oregon (us-west-2)
-    - AWS N. Virginia (us-east-1)
-    - AWS Singapore (ap-southeast-1)
-    - AWS Tokyo (ap-northeast-1)
-    - AWS Frankfurt (eu-central-1)
-    - AWS Seoul (ap-northeast-2)
-    - Google Cloud Oregon (us-west1)
-    - Google Cloud Singapore (asia-southeast1)
-    - Google Cloud Tokyo (asia-northeast1)
-=======
 - The Data Migration feature is only available to clusters that are created in [certain regions](https://www.pingcap.com/tidb-cloud-pricing-details/#dm-cost) after November 9, 2022. If your **project** was created before the date or if your cluster is in another region, this feature is not available to your cluster and the **Data Migration** tab will not be displayed on the cluster overview page in the TiDB Cloud console.
->>>>>>> c9072feadc (cloud: replace the DM supported region list with a link (#13813))
 
 - Amazon Aurora MySQL writer instances support both existing data and incremental data migration. Amazon Aurora MySQL reader instances only support existing data migration and do not support incremental data migration.
 
