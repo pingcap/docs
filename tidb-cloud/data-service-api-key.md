@@ -76,7 +76,7 @@ To create an API key for a Data App, perform the following steps:
 
     3. (Optional) Set a desired rate limit for your API key.
 
-       If your requests per minute exceed the rate limit, the API returns a `429` error. To get a quota more than 1000 requests per minute (rpm) per API key, you can [submit a request](https://support.pingcap.com/hc/en-us/requests/new?ticket_form_id=7800003722519) to our support team.
+       If your requests per minute exceed the rate limit, the API returns a `429` error. To get a quota of more than 1000 requests per minute (rpm) per API key, you can [submit a request](https://support.pingcap.com/hc/en-us/requests/new?ticket_form_id=7800003722519) to our support team.
 
 5. Click **Next**. The public key and private key are displayed.
 
