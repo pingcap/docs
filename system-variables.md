@@ -4383,6 +4383,13 @@ SHOW WARNINGS;
 - Range: `[128, 9223372036854775807]`, in bytes. The memory format with the units "KB|MB|GB|TB" is also supported.
 - After you enable the memory limit, TiDB will terminate the SQL statement with the highest memory usage on the current instance. This variable specifies the minimum memory usage of the SQL statement to be terminated. If the memory usage of a TiDB instance that exceeds the limit is caused by too many sessions with low memory usage, you can properly lower the value of this variable to allow more sessions to be canceled.
 
+### `tidb_session_alias` <span class="version-mark">New in v7.4.0</span>
+
+- Scope: SESSION
+- Persists to cluster: No
+- Default value: ""
+- Used to customize the value of the session_alias column in the logs related to the current session. This setting will affect the logs of multiple nodes during the execution of the statement (including TiKV). The maximum length of this variable is limited to 64 characters, and it cannot end with a space.
+
 ### `tidb_session_plan_cache_size` <span class="version-mark">New in v7.1.0</span>
 
 - Scope: SESSION | GLOBAL
