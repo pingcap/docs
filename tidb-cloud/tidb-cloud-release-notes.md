@@ -20,6 +20,10 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 - Support a new AWS region for [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) clusters: São Paulo (sa-east-1).
 
+- Support adding up to 100 IP addresses to the IP access list for each [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) cluster.
+
+    For more information, see [Configure an IP Access List](/tidb-cloud/configure-ip-access-list.md).
+
 **Console changes**
 
 - Introduce the **Events** page for [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) clusters, which provides the records of main changes to your cluster.
