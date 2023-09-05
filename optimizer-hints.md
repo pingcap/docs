@@ -736,6 +736,16 @@ select /*+ MAX_EXECUTION_TIME(1000) */ * from t1 inner join t2 where t1.id = t2.
 
 In addition to this hint, the `global.max_execution_time` system variable can also limit the execution time of a statement.
 
+### TIDB_KV_READ_TIMEOUT(N)
+
+You can use `TIDB_KV_READ_TIMEOUT(N)` to set the timeout for TiDB to send a TiKV RPC read request in a query statement. It is not recommended that you set the value for this variable. When the TiDB cluster is in an environment with unstable network or serious I/O latency jitter, and your business is sensitive to the latency of the query SQL, you can set `TIDB_KV_READ_TIMEOUT(N)` to reduce the timeout time of the TiKV RPC read request. In this case, when a TiKV has I/O latency jitter, the TiDB side can time out quickly and re-send the TiKV RPC request to the next TiKV where the TiKV Region Peer is located. If all TiKV Region Peers requests time out, they will retry with the default timeout.
+
+```sql
+SELECT /*+ TIDB_KV_READ_TIMEOUT(1000) */ * FROM t1 WHERE id = 1;
+```
+
+In addition to the hint, you can also set the timeout for TiDB to send TiKV RPC read requests in a query statement via the system variable [`tidb_kv_read_timeout`](/system-variables.md#tidb_kv_read_timeout-new-in-v740).
+
 ### MEMORY_QUOTA(N)
 
 The `MEMORY_QUOTA(N)` hint places a limit `N` (a threshold value in MB or GB) on how much memory a statement is permitted to use. When a statement's memory usage exceeds this limit, TiDB produces a log message based on the statement's over-limit behavior or just terminates it.

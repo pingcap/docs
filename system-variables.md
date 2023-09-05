@@ -2878,6 +2878,18 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Default value: `tikv,tiflash,tidb`
 - This variable is used to set the storage engine list that TiDB can use when reading data.
 
+### `tidb_kv_read_timeout` <span class="version-mark">New in v7.4.0</span>
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Type: Integer
+- Default value: `0`
+- Range: `[0, 2147483647]`
+- Unit: Millisecond
+- You can use `TIDB_KV_READ_TIMEOUT(N)` to set the timeout for TiDB to send a TiKV RPC read request in a query statement. It is not recommended that you set the value for this variable. When the TiDB cluster is in an environment with unstable network or serious I/O latency jitter, and your business is sensitive to the latency of the query SQL, you can set `TIDB_KV_READ_TIMEOUT(N)` to reduce the timeout time of the TiKV RPC read request. In this case, when a TiKV has I/O latency jitter, the TiDB side can time out quickly and re-send the TiKV RPC request to the next TiKV where the TiKV Region Peer is located. If all TiKV Region Peers requests time out, they will retry with the default timeout.
+- You can also use the hint [`TIDB_KV_READ_TIMEOUT(N)`](/optimizer-hints.md#tidb_kv_read_timeoutn) to set the timeout for TiDB to send a TiKV RPC read request in a query statement.
+- The default value `0` indicates that the default timeout time (usually 40 seconds) is used.
+
 ### tidb_last_ddl_info <span class="version-mark">New in v6.0.0</span>
 
 - Scope: SESSION
