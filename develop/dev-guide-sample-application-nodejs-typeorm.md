@@ -190,7 +190,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 
 ### Step 4. Initialize the database schema
 
-Run following command to invoke TypeORM CLI to initialize the database with the SQL statements written in the [migration files](src/migrations):
+Run following command to invoke TypeORM CLI to initialize the database with the SQL statements written in the migration files under the `src/migrations` folder:
 
 ```shell
 npm run migration:run
@@ -220,7 +220,7 @@ query: COMMIT
 
 </details>
 
-The migration files are generated based on the entities defined in [`src/entities`](src/entities) folder. To learn how to define entities in TypeORM, please check the [Entities](https://typeorm.io/entities) documentation.
+The migration files are generated based on the entities defined in `src/entities` folder. To learn how to define entities in TypeORM, please check the [Entities](https://typeorm.io/entities) documentation.
 
 ### Step 5: Run the code
 
