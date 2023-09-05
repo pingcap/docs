@@ -22,7 +22,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 - Support adding up to 100 IP addresses to the IP access list for each [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) cluster.
 
-    For more information, see [Configure an IP Access List](/tidb-cloud/configure-ip-access-list.md).
+    For more information, see [Configure an IP access list](/tidb-cloud/configure-ip-access-list.md).
 
 **Console changes**
 
