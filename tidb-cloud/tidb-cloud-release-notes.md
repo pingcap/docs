@@ -12,7 +12,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **General changes**
 
-- Introduce the **Events** page for TiDB Serverless clusters, which provides the records of main changes to your cluster.
+- Introduce the **Events** page for [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) clusters, which provides the records of main changes to your cluster.
 
     On this page, you can view the event history for the last 7 days and track important details such as the trigger time and the user who initiated an action.
 
