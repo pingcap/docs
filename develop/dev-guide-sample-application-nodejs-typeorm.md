@@ -13,7 +13,7 @@ In this tutorial, you can learn how to use TiDB and TypeORM to accomplish the fo
 - Connect to your TiDB cluster using TypeORM.
 - Build and run your application. Optionally, you can find [sample code snippets](#sample-code-snippets) for basic CRUD operations.
 
-> **Note:**
+> **Note**
 >
 > This tutorial works with TiDB Serverless, TiDB Dedicated, and TiDB Self-Hosted.
 
