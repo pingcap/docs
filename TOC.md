@@ -40,9 +40,9 @@
       - [node-mysql2](/develop/dev-guide-sample-application-nodejs-mysql2.md)
       - [mysql.js](/develop/dev-guide-sample-application-nodejs-mysqljs.md)
       - [Prisma](/develop/dev-guide-sample-application-nodejs-prisma.md)
+      - [Sequelize](/develop/dev-guide-sample-application-nodejs-sequelize.md)
       - [Next.js](/develop/dev-guide-sample-application-nextjs.md)
       - [AWS Lambda](/develop/dev-guide-sample-application-aws-lambda.md)
-      - [Sequelize](/develop/dev-guide-sample-application-nodejs-sequelize.md)
   - Connect to TiDB
     - [Choose Driver or ORM](/develop/dev-guide-choose-driver-or-orm.md)
     - [Connect to TiDB](/develop/dev-guide-connect-to-tidb.md)
