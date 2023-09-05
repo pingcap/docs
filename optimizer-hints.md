@@ -744,7 +744,7 @@ You can use `TIDB_KV_READ_TIMEOUT(N)` to set the timeout as `N` milliseconds for
 SELECT /*+ TIDB_KV_READ_TIMEOUT(1000) */ * FROM t1 WHERE id = 1;
 ```
 
-In addition to the hint, you can also set the timeout for TiDB to send TiKV RPC read requests in a query statement via the system variable [`tidb_kv_read_timeout`](/system-variables.md#tidb_kv_read_timeout-new-in-v740).
+In addition to the hint, you can also set the timeout for TiDB to send TiKV RPC read requests in a query statement via the system variable [`tidb_kv_read_timeout`](/system-variables.md#tidb_kv_read_timeout-new-in-v740). If both the hint and the system variable are set, the hint takes higher priority.
 
 ### MEMORY_QUOTA(N)
 
