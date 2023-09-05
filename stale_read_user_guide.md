@@ -1,4 +1,4 @@
-# A User's Guide to Stale Read and safe-ts in TiKV
+# Understanding Stale Read and safe-ts in TiKV
 
 ## Introduction
 

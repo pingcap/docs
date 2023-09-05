@@ -649,21 +649,21 @@ From the output above, you can see that the information of the damaged SST file 
 + The `overlap region` part shows the information of the Region involved. This information is obtained through the PD server.
 + The `suggested operations` part provides you suggestion to clean up the damaged SST file. You can take the suggestion to clean up files and restart the TiKV instance.
 
-### Get the state of a region's RegionReadProgress
+### Get the state of a Region's `RegionReadProgress`
 
-The `get-region-read-progress` subcommand can provide up-to-date details of the resolver and `RegionReadProgress`. You need to specify a region id and a TiKV, which can be obtained from Grafana ("Min resolved-ts region" and "Min safe-ts region") or DataIsNotReady logs.
+Starting from v6.5.4 and v7.3.0, TiKV introduces the `get-region-read-progress` subcommand to get up-to-date details of the resolver and `RegionReadProgress`. You need to specify a Region ID and a TiKV, which can be obtained from Grafana (`Min Resolved TS Region` and `Min Safe TS Region`) or `DataIsNotReady` logs.
 
-`--log` is optional, if specified, locks in the resolver of this region in this TiKV with the smallest start_ts will be printed in logs (INFO level). Using this option can help you identify if locks are blocking resolved-ts from advancing.
+- `--log` (optional): If specified, TiKV logs the smallest `start_ts` of locks in the Region's resolver in this TiKV at `INFO` level. This option helps you identify locks that might block resolved-ts in advance.
 
-`--min-start-ts` is optional, it filters out all locks with smaller start_ts than this value when logging. Using this, you can specify a specific transaction of interest to log. By default it's 0, which sets no filters.
+- `--min-start-ts` (optional): If specified, TiKV filters out locks with smaller `start_ts` than this value in logs. You can use this to specify a transaction of interest for logging. It defaults to `0`, which means no filter.
 
-An example usage
+The following is an example:
 
 ```
 ./tikv-ctl --host 127.0.0.1:20160 get-region-read-progress -r 14 --log --min-start-ts 0
 ```
 
-The output of this command might look like:
+The output is as follows:
 
 ```
 Region read progress:
@@ -684,6 +684,4 @@ Resolver:
     stopped: false,
 ```
 
-The subcommand is useful in diagnosing issues related to stale read and safe-ts. For details, see [A User's Guide to Stale Read and Safe-ts in TiKV](/stale_read_user_guide.md).
-
-The tool is available in TiKV [6.5.4, 6.6), [7.1.2, 7.2) and [7.3.0, inf).
+The subcommand is useful in diagnosing issues related to Stale Read and safe-ts. For details, see [Understanding Stale Read and safe-ts in TiKV](/stale_read_user_guide.md).
