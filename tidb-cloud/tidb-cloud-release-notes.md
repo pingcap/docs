@@ -8,6 +8,39 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2023.
 
+## September 5, 2023
+
+**General changes**
+
+- [Data Service (beta)](https://tidbcloud.com/console/data-service) supports customizing the rate limit for each API key to meet specific rate-limiting requirements in different situations.
+
+    You can adjust the rate limit of an API key when you [create](/tidb-cloud/data-service-api-key.md#create-an-api-key) or [edit](/tidb-cloud/data-service-api-key.md#edit-an-api-key) the key.
+
+    For more information, see [Rate limiting](/tidb-cloud/data-service-api-key.md#rate-limiting).
+
+- Support a new AWS region for [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) clusters: São Paulo (sa-east-1).
+
+**Console changes**
+
+- Introduce the **Events** page for [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) clusters, which provides the records of main changes to your cluster.
+
+    On this page, you can view the event history for the last 7 days and track important details such as the trigger time and the user who initiated an action.
+
+    For more information, see [TiDB Cloud cluster events](/tidb-cloud/tidb-cloud-events.md).
+
+**API changes**
+
+- Release several TiDB Cloud API endpoints for managing the [AWS PrivateLink](https://aws.amazon.com/privatelink/?privatelink-blogs.sort-by=item.additionalFields.createdDate&privatelink-blogs.sort-order=desc) or [Google Cloud Private Service Connect](https://cloud.google.com/vpc/docs/private-service-connect) for [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) clusters:
+
+    - Create a private endpoint service for a cluster
+    - Retrieve the private endpoint service information of a cluster
+    - Create a private endpoint for a cluster
+    - List all private endpoints of a cluster
+    - List all private endpoints in a project
+    - Delete a private endpoint of a cluster
+
+  For more information, refer to the [API documentation](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster).
+
 ## August 23, 2023
 
 **General changes**
@@ -144,14 +177,14 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
     - The organization roles include `Organization Owner`, `Organization Billing Admin`, `Organization Console Audit Admin`, and `Organization Member`.
     - The project roles include `Project Owner`, `Project Data Access Read-Write`, and `Project Data Access Read-Only`.
-    - To manage clusters in a project (such as cluster creation, modification, and deletion), you need to be in the `Organization Owner` or `Project Owner` role. 
-  
+    - To manage clusters in a project (such as cluster creation, modification, and deletion), you need to be in the `Organization Owner` or `Project Owner` role.
+
   For more information about permissions of different roles, see [User roles](/tidb-cloud/manage-user-access.md#user-roles).
 
 - Support the Customer-Managed Encryption Key (CMEK) feature (beta) for [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) clusters hosted on AWS.
-  
+
     You can create CMEK based on AWS KMS to encrypt data stored in EBS and S3 directly from the TiDB Cloud console. This ensures that customer data is encrypted with a key managed by the customer, which enhances security.
-  
+
     Note that this feature still has restrictions and is only available upon request. To apply for this feature, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
 
 - Optimize the Import feature in TiDB Cloud, aimed at enhancing the data import experience. The following improvements have been made:
