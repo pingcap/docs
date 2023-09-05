@@ -111,22 +111,22 @@ To understand the key metrics displayed on the TiDB dashboard, check the followi
 
 ### KV Request
 
-These metrics pertain to requests sending to TiKV. Retrying requests can be counted multiple times.
+The following metrics relate to requests sent to TiKV. Retry requests are counted multiple times.
 
 - KV Request OPS: the execution times of a KV request, displayed according to TiKV
 - KV Request Duration 99 by store: the execution time of a KV request, displayed according to TiKV
 - KV Request Duration 99 by type: the execution time of a KV request, displayed according to the request type
 - Stale Read Hit/Miss Ops
-    - **hit**: Represents the number of requests per second that successfully execute a stale read.
-    - **miss**: Represents the number of requests per second that attempt a stale read but fail.
+    - **hit**: the number of requests per second that successfully execute a stale read
+    - **miss**: the number of requests per second that attempt a stale read but fail
 - Stale Read Req Ops:
-    - **cross-zone**: Represents the number of requests per second that attempt a stale read in a remote zone.
-    - **local**: Represents the number of requests per second that attempt a stale read in the local zone.
+    - **cross-zone**: the number of requests per second that attempt a stale read in a remote zone
+    - **local**: the number of requests per second that attempt a stale read in the local zone
 - Stale Read Req Traffic:
-    - **cross-zone-in**: Represents the incoming traffic of responses of requests that attempt a stale read in a remote zone.
-    - **cross-zone-out**: Represents the outgoing traffic of requests that attempt a stale read in a remote zone.
-    - **local-in**: Represents the incoming traffic of responses of requests that attempt a stale read in the local zone.
-    - **local-out**: Represents the outgoing traffic of requests that attempt a stale read in the local zone.
+    - **cross-zone-in**: the incoming traffic of responses to requests that attempt a stale read in a remote zone
+    - **cross-zone-out**: the outgoing traffic of requests that attempt a stale read in a remote zone
+    - **local-in**: the incoming traffic of responses to requests that attempt a stale read in the local zone
+    - **local-out**: the outgoing traffic of requests that attempt a stale read in the local zone
 
 ### PD Client
 

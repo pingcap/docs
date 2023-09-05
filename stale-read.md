@@ -52,7 +52,7 @@ advance-ts-interval = "20s" # The default value is "20s". You can set it to a sm
 >
 > Decreasing the preceding TiKV configuration item will lead to an increase in TiKV CPU usage and traffic between nodes.
 
-To learn more about the internals of Resolved TS and diagnostic techniques, check out [A User's Guide to Stale Read and Safe-ts in TiKV](/stale_read_user_guide.md).
+For more information about the internals of Resolved TS and diagnostic techniques, see [Understanding Stale Read and safe-ts in TiKV](/stale_read_user_guide.md).
 
 ## Restrictions
 

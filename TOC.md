@@ -216,7 +216,7 @@
     - [Identify Expensive Queries Using Top SQL](/dashboard/top-sql.md)
     - [Identify Expensive Queries Using Logs](/identify-expensive-queries.md)
     - [Save and Restore the On-Site Information of a Cluster](/sql-plan-replayer.md)
-    - [A User's Guide to Stale Read and Safe-ts in TiKV](/stale_read_user_guide.md)
+    - [Understanding Stale Read and safe-ts in TiKV](/stale_read_user_guide.md)
   - [Support Resources](/support.md)
 - Performance Tuning
   - Tuning Guide
