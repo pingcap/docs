@@ -1,16 +1,17 @@
 ---
-title: Connect to TiDB with PyMySQL
-summary: Learn how to connect to TiDB using PyMySQL. This tutorial gives Python sample code snippets that work with TiDB using PyMySQL.
+title: Connect to TiDB with Django
+summary: Learn how to connect to TiDB using Django. This tutorial gives Python sample code snippets that work with TiDB using Django.
+aliases: ['/tidb/dev/dev-guide-outdated-for-django']
 ---
 
-# Connect to TiDB with PyMySQL
+# Connect to TiDB with Django
 
-TiDB is a MySQL-compatible database, and [PyMySQL](https://github.com/PyMySQL/PyMySQL) is a popular open-source driver for Python.
+TiDB is a MySQL-compatible database, and [Django](https://www.djangoproject.com) is a popular web framework for Python, which includes a powerful Object Relational Mapper (ORM) library.
 
-In this tutorial, you can learn how to use TiDB and PyMySQL to accomplish the following tasks:
+In this tutorial, you can learn how to use TiDB and Django to accomplish the following tasks:
 
 - Set up your environment.
-- Connect to your TiDB cluster using PyMySQL.
+- Connect to your TiDB cluster using Django.
 - Build and run your application. Optionally, you can find sample code snippets for basic CRUD operations.
 
 > **Note:**
@@ -51,17 +52,27 @@ This section demonstrates how to run the sample application code and connect to 
 Run the following commands in your terminal window to clone the sample code repository:
 
 ```shell
-git clone https://github.com/tidb-samples/tidb-python-pymysql-quickstart.git
-cd tidb-python-pymysql-quickstart
+git clone https://github.com/tidb-samples/tidb-python-django-quickstart.git
+cd tidb-python-django-quickstart
 ```
 
 ### Step 2: Install dependencies
 
-Run the following command to install the required packages (including PyMySQL) for the sample app:
+Run the following command to install the required packages (including Django, django-tidb, and mysqlclient) for the sample app:
 
 ```shell
 pip install -r requirements.txt
 ```
+
+If you encounter installation issues with mysqlclient, refer to the [mysqlclient official documentation](https://github.com/PyMySQL/mysqlclient#install).
+
+#### What is `django-tidb`?
+
+`django-tidb` is a TiDB dialect for Django that resolves compatibility issues between TiDB and Django.
+
+To install `django-tidb`, choose a version that matches your Django version. For example, if you are using `django==4.2.*`, install `django-tidb==4.2.*`. The minor version does not need to be the same. It is recommended to use the latest minor version.
+
+For more information, refer to [django-tidb repository](https://github.com/pingcap/django-tidb).
 
 ### Step 3: Configure connection information
 
@@ -108,6 +119,8 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
     ```
 
     Be sure to replace the placeholders `{}` with the connection parameters obtained from the connection dialog.
+
+    TiDB Serverless requires a secure connection. Since the `ssl_mode` of mysqlclient defaults to `PREFERRED`, you don't need to manually specify `CA_PATH`. Just leave it empty. But if you have a special reason to specify `CA_PATH` manually, you can refer to the [TLS connections to TiDB Serverless](https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-clusters) to get the certificate paths for different operating systems.
 
 7. Save the `.env` file.
 
@@ -169,58 +182,99 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 </div>
 </SimpleTab>
 
-### Step 4: Run the code and check the result
+### Step 4: Initialize the database
 
-1. Execute the following command to run the sample code:
+In the root directory of the project, run the following command to initialize the database:
+
+```shell
+python manage.py migrate
+```
+
+### Step 5: Run the sample application
+
+1. Run the application in the development mode:
 
     ```shell
-    python pymysql_example.py
+    python manage.py runserver
     ```
 
-2. Check the [Expected-Output.txt](https://github.com/tidb-samples/tidb-python-pymysql-quickstart/blob/main/Expected-Output.txt) to see if the output matches.
+    The application runs on port `8000` by default. To use a different port, you can append the port number to the command. The following is an example:
+
+    ```shell
+    python manage.py runserver 8080
+    ```
+
+2. To access the application, open your browser and go to `http://localhost:8000/`. In the sample application, you can:
+
+    - Create a new player.
+    - Bulk create players.
+    - View all players.
+    - Update a player.
+    - Delete a player.
+    - Trade goods between two players.
 
 ## Sample code snippets
 
 You can refer to the following sample code snippets to complete your own application development.
 
-For complete sample code and how to run it, check out the [tidb-samples/tidb-python-pymysql-quickstart](https://github.com/tidb-samples/tidb-python-pymysql-quickstart) repository.
+For complete sample code and how to run it, check out the [tidb-samples/tidb-python-django-quickstart](https://github.com/tidb-samples/tidb-python-django-quickstart) repository.
 
 ### Connect to TiDB
 
+In the file `sample_project/settings.py`, add the following configurations:
+
 ```python
-from pymysql import Connection
-from pymysql.cursors import DictCursor
-
-
-def get_connection(autocommit: bool = True) -> Connection:
-    config = Config()
-    db_conf = {
-        "host": ${tidb_host},
-        "port": ${tidb_port},
-        "user": ${tidb_user},
-        "password": ${tidb_password},
-        "database": ${tidb_db_name},
-        "autocommit": autocommit,
-        "cursorclass": DictCursor,
+DATABASES = {
+    "default": {
+        "ENGINE": "django_tidb",
+        "HOST": ${tidb_host},
+        "PORT": ${tidb_port},
+        "USER": ${tidb_user},
+        "PASSWORD": ${tidb_password},
+        "NAME": ${tidb_db_name},
+        "OPTIONS": {
+            "charset": "utf8mb4",
+        },
     }
+}
 
-    if ${ca_path}:
-        db_conf["ssl_verify_cert"] = True
-        db_conf["ssl_verify_identity"] = True
-        db_conf["ssl_ca"] = ${ca_path}
-
-    return pymysql.connect(**db_conf)
+TIDB_CA_PATH = ${ca_path}
+if TIDB_CA_PATH:
+    DATABASES["default"]["OPTIONS"]["ssl_mode"] = "VERIFY_IDENTITY"
+    DATABASES["default"]["OPTIONS"]["ssl"] = {
+        "ca": TIDB_CA_PATH,
+    }
 ```
 
-When using this function, you need to replace `${tidb_host}`, `${tidb_port}`, `${tidb_user}`, `${tidb_password}`, `${tidb_db_name}` and `${ca_path}` with the actual values of your TiDB cluster.
+You need to replace `${tidb_host}`, `${tidb_port}`, `${tidb_user}`, `${tidb_password}`, `${tidb_db_name}`, and `${ca_path}` with the actual values of your TiDB cluster.
+
+### Define the data model
+
+```python
+from django.db import models
+
+class Player(models.Model):
+    name = models.CharField(max_length=32, blank=False, null=False)
+    coins = models.IntegerField(default=100)
+    goods = models.IntegerField(default=1)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+```
+
+For more information, refer to [Django models](https://docs.djangoproject.com/en/dev/topics/db/models/).
 
 ### Insert data
 
 ```python
-with get_connection(autocommit=True) as conn:
-    with conn.cursor() as cur:
-        player = ("1", 1, 1)
-        cursor.execute("INSERT INTO players (id, coins, goods) VALUES (%s, %s, %s)", player)
+# insert a single object
+player = Player.objects.create(name="player1", coins=100, goods=1)
+
+# bulk insert multiple objects
+Player.objects.bulk_create([
+    Player(name="player1", coins=100, goods=1),
+    Player(name="player2", coins=200, goods=2),
+    Player(name="player3", coins=300, goods=3),
+])
 ```
 
 For more information, refer to [Insert data](/develop/dev-guide-insert-data.md).
@@ -228,10 +282,14 @@ For more information, refer to [Insert data](/develop/dev-guide-insert-data.md).
 ### Query data
 
 ```python
-with get_connection(autocommit=True) as conn:
-    with conn.cursor() as cur:
-        cur.execute("SELECT count(*) FROM players")
-        print(cursor.fetchone()["count(*)"])
+# get a single object
+player = Player.objects.get(name="player1")
+
+# get multiple objects
+filtered_players = Player.objects.filter(name="player1")
+
+# get all objects
+all_players = Player.objects.all()
 ```
 
 For more information, refer to [Query data](/develop/dev-guide-get-data-from-single-table.md).
@@ -239,13 +297,13 @@ For more information, refer to [Query data](/develop/dev-guide-get-data-from-sin
 ### Update data
 
 ```python
-with get_connection(autocommit=True) as conn:
-    with conn.cursor() as cur:
-        player_id, amount, price="1", 10, 500
-        cursor.execute(
-            "UPDATE players SET goods = goods + %s, coins = coins + %s WHERE id = %s",
-            (-amount, price, player_id),
-        )
+# update a single object
+player = Player.objects.get(name="player1")
+player.coins = 200
+player.save()
+
+# update multiple objects
+Player.objects.filter(coins=100).update(coins=200)
 ```
 
 For more information, refer to [Update data](/develop/dev-guide-update-data.md).
@@ -253,32 +311,19 @@ For more information, refer to [Update data](/develop/dev-guide-update-data.md).
 ### Delete data
 
 ```python
-with get_connection(autocommit=True) as conn:
-    with conn.cursor() as cur:
-        player_id = "1"
-        cursor.execute("DELETE FROM players WHERE id = %s", (player_id,))
+# delete a single object
+player = Player.objects.get(name="player1")
+player.delete()
+
+# delete multiple objects
+Player.objects.filter(coins=100).delete()
 ```
 
 For more information, refer to [Delete data](/develop/dev-guide-delete-data.md).
 
-## Useful notes
-
-### Using driver or ORM framework?
-
-The Python driver provides low-level access to the database, but it requires the developers to:
-
-- Manually establish and release database connections.
-- Manually manage database transactions.
-- Manually map data rows (represented as a tuple or dict in `pymysql`) to data objects.
-
-Unless you need to write complex SQL statements, it is recommended to use [ORM](https://en.wikipedia.org/w/index.php?title=Object-relational_mapping) framework for development, such as [SQLAlchemy](/develop/dev-guide-sample-application-python-sqlalchemy.md), [Peewee](/develop/dev-guide-sample-application-python-peewee.md), and Django ORM. It can help you:
-
-- Reduce [boilerplate code](https://en.wikipedia.org/wiki/Boilerplate_code) for managing connections and transactions.
-- Manipulate data with data objects instead of a number of SQL statements.
-
 ## Next steps
 
-- Learn more usage of PyMySQL from [the documentation of PyMySQL](https://pymysql.readthedocs.io).
+- Learn more usage of Django from [the documentation of Django](https://www.djangoproject.com/).
 - Learn the best practices for TiDB application development with the chapters in the [Developer guide](/develop/dev-guide-overview.md), such as [Insert data](/develop/dev-guide-insert-data.md), [Update data](/develop/dev-guide-update-data.md), [Delete data](/develop/dev-guide-delete-data.md), [Single table reading](/develop/dev-guide-get-data-from-single-table.md), [Transactions](/develop/dev-guide-transaction-overview.md), and [SQL performance optimization](/develop/dev-guide-optimize-sql-overview.md).
 - Learn through the professional [TiDB developer courses](https://www.pingcap.com/education/) and earn [TiDB certifications](https://www.pingcap.com/education/certification/) after passing the exam.
 
