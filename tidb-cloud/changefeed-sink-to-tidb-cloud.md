@@ -22,6 +22,7 @@ This document describes how to stream data from a TiDB Dedicated cluster to a Ti
     - AWS Frankfurt (eu-central-1)
     - AWS Singapore (ap-southeast-1)
     - AWS Tokyo (ap-northeast-1)
+    - AWS São Paulo (sa-east-1)
 
 - The source TiDB Dedicated cluster and the destination TiDB Serverless cluster must be in the same project and the same region.
 - The **Sink to TiDB Cloud** feature only supports network connection via private endpoints. When you create a changefeed to stream data from a TiDB Dedicated cluster to a TiDB Serverless cluster, TiDB Cloud will automatically set up the private endpoint connection between the two clusters.
