@@ -12,12 +12,6 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **General changes**
 
-- Introduce the **Events** page for [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) clusters, which provides the records of main changes to your cluster.
-
-    On this page, you can view the event history for the last 7 days and track important details such as the trigger time and the user who initiated an action.
-
-    For more information, see [TiDB Cloud cluster events](/tidb-cloud/tidb-cloud-events.md).
-
 - [Data Service (beta)](https://tidbcloud.com/console/data-service) supports customizing the rate limit for each API key to meet specific rate-limiting requirements in different situations.
 
     You can adjust the rate limit of an API key when you [create](/tidb-cloud/data-service-api-key.md#create-an-api-key) or [edit](/tidb-cloud/data-service-api-key.md#edit-an-api-key) the key.
@@ -25,6 +19,14 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
     For more information, see [Rate limiting](/tidb-cloud/data-service-api-key.md#rate-limiting).
 
 - Support a new AWS region for [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) clusters: São Paulo (sa-east-1).
+
+**Console changes**
+
+- Introduce the **Events** page for [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) clusters, which provides the records of main changes to your cluster.
+
+    On this page, you can view the event history for the last 7 days and track important details such as the trigger time and the user who initiated an action.
+
+    For more information, see [TiDB Cloud cluster events](/tidb-cloud/tidb-cloud-events.md).
 
 **API changes**
 
