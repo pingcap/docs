@@ -63,7 +63,7 @@ bundle install
 ```
 
 <details>
-<summary><b>Install dependencies to existing project</b></summary>
+<summary><b>Install dependencies for existing projects</b></summary>
 
 For your existing project, run the following command to install the packages:
 
