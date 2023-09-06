@@ -148,7 +148,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
    >
    > It is recommended to enable TLS connection when using the public endpoint to connect to a TiDB Dedicated cluster.
    >
-   > To enable TLS connection, modify `DATABASE_ENABLE_SSL` to `true` and using `DATABASE_SSL_CA` to specify the file path of CA certificate downloaded from the connection dialog.
+   > To enable TLS connection, modify `DATABASE_ENABLE_SSL` to `true` and use `DATABASE_SSL_CA` to specify the file path of CA certificate downloaded from the connection dialog.
 
 6. Save the `.env` file.
 
