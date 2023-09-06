@@ -262,7 +262,7 @@ For more information, refer to [Query data](/develop/dev-guide-get-data-from-sin
 
 ### Update data
 
-The following query updated a single `Player` record by ID:
+The following query updated the record of a specific player by ID:
 
 ```ruby
 def update_player(client, player_id, inc_coins, inc_goods)
