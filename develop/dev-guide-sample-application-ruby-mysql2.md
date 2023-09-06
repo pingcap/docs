@@ -5,7 +5,7 @@ summary: Learn how to connect to TiDB using Ruby mysql2. This tutorial gives Rub
 
 # Connect to TiDB with mysql2
 
-TiDB is a MySQL-compatible database, and [mysql2](https://github.com/brianmario/mysql2) is most used ruby mysql driver.
+TiDB is a MySQL-compatible database, and [mysql2](https://github.com/brianmario/mysql2) is one of the most popular MySQL drivers for Ruby.
 
 In this tutorial, you can learn how to use TiDB and mysql2 to accomplish the following tasks:
 
