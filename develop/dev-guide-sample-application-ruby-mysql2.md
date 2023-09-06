@@ -132,7 +132,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
     cp .env.example .env
     ```
 
-5. Edit the `.env` file, set up the environment variables as follows, replace the corresponding placeholders `<>` with connection parameters on the connection dialog:
+5. Edit the `.env` file, set up the environment variables as follows, and replace the corresponding placeholders `<>` with connection parameters in the connection dialog:
 
     ```dotenv
     DATABASE_HOST=<host>
