@@ -292,7 +292,7 @@ For more information, refer to [Delete data](/develop/dev-guide-delete-data.md).
 
 ## Best practices
 
-By default, the mysql2 gem will search for existing CA certificates in a particular order until a file is discovered.
+By default, the mysql2 gem can search for existing CA certificates in a particular order until a file is discovered.
 
 1. `/etc/ssl/certs/ca-certificates.crt` # Debian / Ubuntu / Gentoo / Arch / Slackware
 2. `/etc/pki/tls/certs/ca-bundle.crt` # RedHat / Fedora / CentOS / Mageia / Vercel / Netlify
