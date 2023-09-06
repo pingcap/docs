@@ -232,7 +232,7 @@ client = Mysql2::Client.new(options)
 
 ### Insert data
 
-The following query creates a single Player with two fields and return the last_insert_id:
+The following query creates a single player with two fields and returns the `last_insert_id`:
 
 ```ruby
 def create_player(client, coins, goods)
