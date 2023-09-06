@@ -1,5 +1,5 @@
 ---
-title: Connect to TiDB with ruby mysql2
+title: Connect to TiDB with mysql2
 summary: Learn how to connect to TiDB using Ruby mysql2. This tutorial gives Ruby sample code snippets that work with TiDB using mysql2 gem.
 ---
 
