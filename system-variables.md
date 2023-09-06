@@ -2265,7 +2265,7 @@ Query OK, 0 rows affected (0.09 sec)
 
 <CustomContent platform="tidb">
 
-- Scope: SESSION | GLOBAL
+- Scope: GLOBAL
 - Persists to cluster: Yes
 - Type: Boolean
 - Default value: `ON`
