@@ -9,11 +9,11 @@ If you encounter a problem when you use TiDB, you can reach out for support from
 
 + Get support from PingCAP for [TiDB Enterprise Edition](https://www.pingcap.com/tidb-enterprise/):
 
-    - [Submit a request](https://tidb.support.pingcap.com).
+    - [Submit a request](https://tidb.support.pingcap.com)
 
 + Get support from PingCAP for TiDB Cloud:
 
-    - Report an issue directly from the [TiDB Cloud console](https://tidbcloud.com/).
+    - Report an issue directly from the [TiDB Cloud console](https://tidbcloud.com/)
     - [Documentation for TiDB Cloud support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support)
 
 + Seek help from the TiDB community:
