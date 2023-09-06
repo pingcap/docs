@@ -13,19 +13,7 @@ Inspired by the paper [Morsel-Driven Parallelism: A NUMA-Aware Query Evaluation 
 
 ## Enable and disable the pipeline execution model
 
-To enable or disable the pipeline execution model, you can use the [`tidb_enable_tiflash_pipeline_model`](/system-variables.md#tidb_enable_tiflash_pipeline_model-new-in-v720) system variable. This variable can take effect at the global level. By default, `tidb_enable_tiflash_pipeline_model` is set to `ON`, which means that the TiFlash pipeline execution model is disabled. You can use the following statement to view the variable value:
-
-```sql
-SHOW VARIABLES LIKE 'tidb_enable_tiflash_pipeline_model';
-```
-
-```
-+------------------------------------+-------+
-| Variable_name                      | Value |
-+------------------------------------+-------+
-| tidb_enable_tiflash_pipeline_model | ON    |
-+------------------------------------+-------+
-```
+To enable or disable the pipeline execution model, you can use the [`tidb_enable_tiflash_pipeline_model`](/system-variables.md#tidb_enable_tiflash_pipeline_model-new-in-v720) system variable. This variable can take effect at the global level. By default, `tidb_enable_tiflash_pipeline_model` is set to `ON`, which means that the TiFlash pipeline execution model is enabled. You can use the following statement to view the variable value:
 
 ```sql
 SHOW GLOBAL VARIABLES LIKE 'tidb_enable_tiflash_pipeline_model';
@@ -47,7 +35,7 @@ You can modify the `tidb_enable_tiflash_pipeline_model` variable at the global l
     SET GLOBAL tidb_enable_tiflash_pipeline_model=ON;
     ```
 
-    If you set `tidb_enable_tiflash_pipeline_model` to `ON` at the global level, the `tidb_enable_tiflash_pipeline_model` variable at the global level in the new session will be enabled by default.
+    If you set `tidb_enable_tiflash_pipeline_model` to `ON` at the global level, the `tidb_enable_tiflash_pipeline_model` variable in the new session will be enabled by default.
 
 To disable the pipeline execution model, use the following statement:
 
