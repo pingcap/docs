@@ -205,7 +205,7 @@ You can refer to the following sample code snippets to complete your own applica
 
 For complete sample code and how to run it, check out the [tidb-samples/tidb-ruby-mysql2-quickstart](https://github.com/tidb-samples/tidb-ruby-mysql2-quickstart) repository.
 
-### Connect with connection options
+### Connect to TiDB with connection options
 
 The following code establish a connection to TiDB with options defined in the environment variables:
 
