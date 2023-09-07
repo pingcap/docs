@@ -181,7 +181,7 @@ The TiDB configuration file supports more options than command-line parameters. 
 
 ### `deprecate-integer-display-length`
 
-- Deprecates displaying display width for integer types when enabled.
+- Deprecates the display width for integer types when this configuration item is set to `true`.
 - Default value: `false`
 
 ### `enable-tcp4-only` <span class="version-mark">New in v5.0</span>
