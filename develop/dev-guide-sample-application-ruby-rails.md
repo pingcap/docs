@@ -11,7 +11,7 @@ In this tutorial, you can learn how to use TiDB and Rails to accomplish the foll
 
 - Set up your environment.
 - Connect to your TiDB cluster using Rails.
-- Build and run your application. Optionally, you can find [sample code snippets](#sample-code-snippets) for basic CRUD operations.
+- Build and run your application. Optionally, you can find [sample code snippets](#sample-code-snippets) for basic CRUD operations using ActiveRecord ORM.
 
 > **Note:**
 >
