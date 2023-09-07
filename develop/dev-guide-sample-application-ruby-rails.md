@@ -201,7 +201,7 @@ For complete sample code and how to run it, check out the [tidb-samples/tidb-rub
 
 ### Connect to TiDB with connection options
 
-The following code in `config/database.yml` establish a connection to TiDB with options defined in the environment variables:
+The following code in `config/database.yml` establishes a connection to TiDB with options defined in the environment variables:
 
 ```yml
 default: &default
