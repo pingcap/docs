@@ -29,7 +29,7 @@ const conn = connect({url: 'mysql://username:password@host/database'})
 const results = await conn.execute('select * from test where id = ?',[1])
 ```
 
-**Transaction**
+**Transaction (Experimental)**
 
 You can also perform interactive transactions with the TiDB serverless driver. For example:
 
@@ -51,7 +51,7 @@ try {
 
 ## Edge Examples
 
-Here are some examples of using the TiDB serverless driver at the edge.
+Here are some examples of using the TiDB serverless driver at the edge. You can also try this [live demo](https://github.com/tidbcloud/car-sales-insight).
 
 <SimpleTab>
 
