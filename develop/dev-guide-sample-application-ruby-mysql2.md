@@ -299,7 +299,7 @@ By default, the mysql2 gem can search for existing CA certificates in a particul
 3. `/etc/ssl/ca-bundle.pem` # OpenSUSE
 4. `/etc/ssl/cert.pem` # MacOS / Alpine (docker container)
 
-While it is possible to specify the CA certificate path manually, this approach may cause significant inconvenience in multi-environment deployment scenarios, as different machines and environments may store the CA certificate in varying locations. Therefore, setting `sslca` to `nil` is recommended for flexibility and ease of deployment across different environments.
+While it is possible to specify the CA certificate path manually, doing so might cause significant inconvenience in multi-environment deployment scenarios, because different machines and environments might store the CA certificate in different locations. Therefore, setting `sslca` to `nil` is recommended for flexibility and ease of deployment across different environments.
 
 ## Next steps
 
