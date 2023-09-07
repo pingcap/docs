@@ -247,7 +247,7 @@ For more information, refer to [Query data](/develop/dev-guide-get-data-from-sin
 
 ### Update data
 
-The following query updated a single `Player` object:
+The following query updates a `Player` object:
 
 ```ruby
 player.update(coins: 50, goods: 50)
