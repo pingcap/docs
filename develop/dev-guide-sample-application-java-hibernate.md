@@ -5,7 +5,7 @@ summary: Learn how to connect to TiDB using Hibernate. This tutorial gives Java 
 
 # Connect to TiDB with Hibernate
 
-TiDB is a MySQL-compatible database. [Hibernate](https://hibernate.org/orm/) is a prominent open-source Java application persistence framework, and starting from version `6.0.0.Beta2`, Hibernate provides support for the TiDB dialect, seamlessly aligning with TiDB's features.
+TiDB is a MySQL-compatible database, and [Hibernate](https://hibernate.org/orm/) is a popular open-source Java ORM. Starting from version `6.0.0.Beta2`, Hibernate supports TiDB dialect, which fits TiDB features well.
 
 In this tutorial, you can learn how to use TiDB and Hibernate to accomplish the following tasks:
 
@@ -21,8 +21,8 @@ In this tutorial, you can learn how to use TiDB and Hibernate to accomplish the 
 
 To complete this tutorial, you need:
 
-- It is recommended to use **Java Development Kit** (JDK) **17** or higher. You can choose between [OpenJDK](https://openjdk.org/) and [Oracle JDK](https://www.oracle.com/hk/java/technologies/downloads/) based on your company's or personal preferences.
-- [Maven](https://maven.apache.org/install.html) **3.8** or higher is required.
+- **Java Development Kit (JDK) 17** or higher. You can choose [OpenJDK](https://openjdk.org/) or [Oracle JDK](https://www.oracle.com/hk/java/technologies/downloads/) based on your business and personal requirements.
+- [Maven](https://maven.apache.org/install.html) **3.8** or higher.
 - [Git](https://git-scm.com/downloads).
 - A TiDB cluster.
 
@@ -100,9 +100,9 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
     export USE_SSL='true'
     ```
 
-    Please make sure to replace the placeholders in `{}` with the values obtained from your connection dialog.
+    Be sure to replace the placeholders `{}` with the connection parameters obtained from the connection dialog.
 
-    TiDB Serverless requires a TLS (SSL) connection, so the value of `USE_SSL` should be set to `true`.
+    TiDB Serverless requires a secure connection. Therefore, you need to set the value of `USE_SSL` to `true`.
 
 7. Save the `env.sh` file.
 
@@ -158,7 +158,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
     export USE_SSL='false'
     ```
 
-    Be sure to replace the placeholders `{}` with the connection parameters, and set the `USE_SSL` is `false`. If you are running TiDB locally, the default host address is `127.0.0.1`, and the password is empty.
+    Be sure to replace the placeholders `{}` with the connection parameters, and set `USE_SSL` to `false`. If you are running TiDB locally, the default host address is `127.0.0.1`, and the password is empty.
 
 3. Save the `env.sh` file.
 
@@ -183,7 +183,7 @@ For complete sample code and how to run it, check out the [tidb-samples/tidb-jav
 
 ### Connect to TiDB
 
-Write config file `hibernate.cfg.xml`:
+Edit the Hibernate configuration file `hibernate.cfg.xml`:
 
 ```xml
 <?xml version='1.0' encoding='utf-8'?>
@@ -211,7 +211,7 @@ Write config file `hibernate.cfg.xml`:
 </hibernate-configuration>
 ```
 
-Please replace `${tidb_jdbc_url}`, `${tidb_user}`, `${tidb_password}`, and so on with the actual values for your TiDB cluster. Next, write the following function:
+Be sure to replace `${tidb_jdbc_url}`, `${tidb_user}`, and `${tidb_password}` with the actual values of your TiDB cluster. Then, define the following function:
 
 ```java
 public SessionFactory getSessionFactory() {
@@ -222,9 +222,9 @@ public SessionFactory getSessionFactory() {
 }
 ```
 
-When using this function, you will need to replace `${your_entity_class}` with your own data entity class. If you have multiple entity classes, you should add multiple `.addAnnotatedClass(${your_entity_class})` statements. Additionally, this is just one way to configure Hibernate. If you encounter any issues with the configuration or want to learn more about Hibernate, you can refer to the [Hibernate official documentation](https://hibernate.org/orm/documentation).
+When using this function, you need to replace `${your_entity_class}` with your own data entity class. For multiple entity classes, you need to add a `.addAnnotatedClass(${your_entity_class})` statement for each. The preceding function is just one way to configure Hibernate. If you encounter any issues in the configuration or want to learn more about Hibernate, refer to the [Hibernate official documentation](https://hibernate.org/orm/documentation).
 
-### Insert or Update data
+### Insert or update data
 
 ```java
 try (Session session = sessionFactory.openSession()) {
@@ -254,12 +254,9 @@ try (Session session = sessionFactory.openSession()) {
 ```
 
 For more information, refer to [Delete data](/develop/dev-guide-delete-data.md).
-
-## Useful notes
-
 ## Next steps
 
-- Learn more usage of `Hibernate` from [the documentation of Hibernate](https://hibernate.org/orm/documentation).
+- Learn more usage of Hibernate from [the documentation of Hibernate](https://hibernate.org/orm/documentation).
 - Learn the best practices for TiDB application development with the chapters in the [Developer guide](/develop/dev-guide-overview.md), such as [Insert data](/develop/dev-guide-insert-data.md), [Update data](/develop/dev-guide-update-data.md), [Delete data](/develop/dev-guide-delete-data.md), [Single table reading](/develop/dev-guide-get-data-from-single-table.md), [Transactions](/develop/dev-guide-transaction-overview.md), and [SQL performance optimization](/develop/dev-guide-optimize-sql-overview.md).
 - Learn through the professional [TiDB developer courses](https://www.pingcap.com/education/) and earn [TiDB certifications](https://www.pingcap.com/education/certification/) after passing the exam.
 - Additionally, we offer courses tailored for Java developers: [Working with TiDB from Java](https://eng.edu.pingcap.com/catalog/info/id:212).

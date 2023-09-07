@@ -21,8 +21,8 @@ In this tutorial, you can learn how to use TiDB and JDBC to accomplish the follo
 
 To complete this tutorial, you need:
 
-- It is recommended to use **Java Development Kit** (JDK) **17** or higher. You can choose between [OpenJDK](https://openjdk.org/) and [Oracle JDK](https://www.oracle.com/hk/java/technologies/downloads/) based on your company's or personal preferences.
-- [Maven](https://maven.apache.org/install.html) **3.8** or higher is required.
+- **Java Development Kit (JDK) 17** or higher. You can choose [OpenJDK](https://openjdk.org/) or [Oracle JDK](https://www.oracle.com/hk/java/technologies/downloads/) based on your business and personal requirements.
+- [Maven](https://maven.apache.org/install.html) **3.8** or higher.
 - [Git](https://git-scm.com/downloads).
 - A TiDB cluster.
 
@@ -100,9 +100,9 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
     export USE_SSL='true'
     ```
 
-    Please make sure to replace the placeholders in `{}` with the values obtained from your connection dialog.
+    Be sure to replace the placeholders `{}` with the connection parameters obtained from the connection dialog.
 
-    TiDB Serverless requires a TLS (SSL) connection, so the value of `USE_SSL` should be set to `true`.
+    TiDB Serverless requires a secure connection. Therefore, you need to set the value of `USE_SSL` to `true`.
 
 7. Save the `env.sh` file.
 
@@ -158,7 +158,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
     export USE_SSL='false'
     ```
 
-    Be sure to replace the placeholders `{}` with the connection parameters, and set the `USE_SSL` is `false`. If you are running TiDB locally, the default host address is `127.0.0.1`, and the password is empty.
+    Be sure to replace the placeholders `{}` with the connection parameters, and set `USE_SSL` to `false`. If you are running TiDB locally, the default host address is `127.0.0.1`, and the password is empty.
 
 3. Save the `env.sh` file.
 
@@ -201,7 +201,7 @@ public MysqlDataSource getMysqlDataSource() throws SQLException {
 }
 ```
 
-When using this function, you need to replace `${tidb_host}`, `${tidb_port}`, `${tidb_user}`, `${tidb_password}`, and `${tidb_db_name}`  with the actual values of your TiDB cluster.
+When using this function, you need to replace `${tidb_host}`, `${tidb_port}`, `${tidb_user}`, `${tidb_password}`, and `${tidb_db_name}` with the actual values of your TiDB cluster.
 
 ### Insert data
 
@@ -291,10 +291,10 @@ Unless you need to write complex SQL statements, it is recommended to use [ORM](
 
 ## Next steps
 
-- Learn more usage of `MySQL Connector/J` from [the documentation of MySQL Connector/J](https://dev.mysql.com/doc/connector-j/8.1/en/).
+- Learn more usage of MySQL Connector/J from [the documentation of MySQL Connector/J](https://dev.mysql.com/doc/connector-j/8.1/en/).
 - Learn the best practices for TiDB application development with the chapters in the [Developer guide](/develop/dev-guide-overview.md), such as [Insert data](/develop/dev-guide-insert-data.md), [Update data](/develop/dev-guide-update-data.md), [Delete data](/develop/dev-guide-delete-data.md), [Single table reading](/develop/dev-guide-get-data-from-single-table.md), [Transactions](/develop/dev-guide-transaction-overview.md), and [SQL performance optimization](/develop/dev-guide-optimize-sql-overview.md).
 - Learn through the professional [TiDB developer courses](https://www.pingcap.com/education/) and earn [TiDB certifications](https://www.pingcap.com/education/certification/) after passing the exam.
-- Additionally, we offer courses tailored for Java developers: [Working with TiDB from Java](https://eng.edu.pingcap.com/catalog/info/id:212).
+- Learn through the course for Java developers: [Working with TiDB from Java](https://eng.edu.pingcap.com/catalog/info/id:212).
 
 ## Need help?
 

@@ -5,7 +5,7 @@ summary: Learn how to connect to TiDB using MyBatis. This tutorial gives Java sa
 
 # Connect to TiDB with MyBatis
 
-TiDB is a MySQL-compatible database. [MyBatis](https://mybatis.org/mybatis-3/index.html) is a popular open-source Java application persistence framework.
+TiDB is a MySQL-compatible database, and [MyBatis](https://mybatis.org/mybatis-3/index.html) is a popular open-source Java ORM.
 
 In this tutorial, you can learn how to use TiDB and MyBatis to accomplish the following tasks:
 
@@ -21,8 +21,8 @@ In this tutorial, you can learn how to use TiDB and MyBatis to accomplish the fo
 
 To complete this tutorial, you need:
 
-- It is recommended to use **Java Development Kit** (JDK) **17** or higher. You can choose between [OpenJDK](https://openjdk.org/) and [Oracle JDK](https://www.oracle.com/hk/java/technologies/downloads/) based on your company's or personal preferences.
-- [Maven](https://maven.apache.org/install.html) **3.8** or higher is required.
+- **Java Development Kit (JDK) 17** or higher. You can choose [OpenJDK](https://openjdk.org/) or [Oracle JDK](https://www.oracle.com/hk/java/technologies/downloads/) based on your business and personal requirements.
+- [Maven](https://maven.apache.org/install.html) **3.8** or higher.
 - [Git](https://git-scm.com/downloads).
 - A TiDB cluster.
 
@@ -100,9 +100,9 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
     export USE_SSL='true'
     ```
 
-    Please make sure to replace the placeholders in `{}` with the values obtained from your connection dialog.
+    Be sure to replace the placeholders `{}` with the connection parameters obtained from the connection dialog.
 
-    TiDB Serverless requires a TLS (SSL) connection, so the value of `USE_SSL` should be set to `true`.
+    TiDB Serverless requires a secure connection. Therefore, you need to set the value of `USE_SSL` to `true`.
 
 7. Save the `env.sh` file.
 
@@ -134,7 +134,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
     export USE_SSL='false'
     ```
 
-    Be sure to replace the placeholders `{}` with the connection parameters obtained from the connection dialog.
+    Be sure to replace the placeholders `{}` with the connection parameters, and set `USE_SSL` to `false`. If you are running TiDB locally, the default host address is `127.0.0.1`, and the password is empty.
 
 6. Save the `env.sh` file.
 
@@ -183,7 +183,7 @@ For complete sample code and how to run it, check out the [tidb-samples/tidb-jav
 
 ### Connect to TiDB
 
-Write config file `mybatis-config.xml`:
+Edit the MyBatis configuration file `mybatis-config.xml`:
 
 ```xml
 <?xml version="1.0" encoding="UTF-8" ?>
@@ -217,7 +217,7 @@ Write config file `mybatis-config.xml`:
 </configuration>
 ```
 
-Please replace `${tidb_jdbc_url}`, `${tidb_user}`, `${tidb_password}`, etc., with the actual values of your TiDB cluster. Also, replace the value of `${mapper_location}` with the location of your mapper XML configuration file. If you have multiple mapper XML configuration files, you need to add multiple `<mapper/>` tags. Afterward, write the following function:
+Be sure to replace `${tidb_jdbc_url}`, `${tidb_user}`, and `${tidb_password}` with the actual values of your TiDB cluster. Also, replace `${mapper_location}` with the path of your mapper XML configuration file. For multiple mapper XML configuration files, you need to add a `<mapper/>` tag for each. Then, define the following function:
 
 ```java
 public SqlSessionFactory getSessionFactory() {
@@ -245,7 +245,7 @@ For more information, refer to [Insert data](/develop/dev-guide-insert-data.md).
 
 ### Query data
 
-Add a node in the mapper XML and add a function with the same name in the interface class configured in the `mapper.namespace` attribute of the XML configuration file. Specifically, if you use `resultMap` as the return type in MyBatis query functions, make sure to pay extra attention to the correctness of the `<resultMap/>` node configuration in the file.
+Add a node in the mapper XML and add a function with the same name in the interface class configured in the `mapper.namespace` attribute of the XML configuration file. Specifically, if you use `resultMap` as the return type for MyBatis query functions, make sure that the `<resultMap/>` node is configured correctly.
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -305,14 +305,12 @@ Add a node in the mapper XML and add a function with the same name in the interf
 
 For more information, refer to [Delete data](/develop/dev-guide-delete-data.md).
 
-## Useful notes
-
 ## Next steps
 
-- Learn more usage of `MySQL Connector/J` from [the documentation of MySQL Connector/J](https://dev.mysql.com/doc/connector-j/8.1/en/).
+- Learn more usage of MyBatis from [the documentation of MyBatis](http://www.mybatis.org/mybatis-3/).
 - Learn the best practices for TiDB application development with the chapters in the [Developer guide](/develop/dev-guide-overview.md), such as [Insert data](/develop/dev-guide-insert-data.md), [Update data](/develop/dev-guide-update-data.md), [Delete data](/develop/dev-guide-delete-data.md), [Single table reading](/develop/dev-guide-get-data-from-single-table.md), [Transactions](/develop/dev-guide-transaction-overview.md), and [SQL performance optimization](/develop/dev-guide-optimize-sql-overview.md).
 - Learn through the professional [TiDB developer courses](https://www.pingcap.com/education/) and earn [TiDB certifications](https://www.pingcap.com/education/certification/) after passing the exam.
-- Additionally, we offer courses tailored for Java developers: [Working with TiDB from Java](https://eng.edu.pingcap.com/catalog/info/id:212).
+- Learn through the course for Java developers: [Working with TiDB from Java](https://eng.edu.pingcap.com/catalog/info/id:212).
 
 ## Need help?
 

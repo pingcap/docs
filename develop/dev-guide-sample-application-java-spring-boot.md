@@ -1,13 +1,14 @@
 ---
 title: Connect to TiDB with Spring Boot
 summary: Learn how to connect to TiDB using Spring Boot. This tutorial gives Java sample code snippets that work with TiDB using Spring Boot.
+aliases: ['/tidbcloud/dev-guide-sample-application-spring-boot','/tidb/dev/dev-guide-sample-application-spring-boot']
 ---
 
 # Connect to TiDB with Spring Boot
 
-TiDB is a MySQL-compatible database. [Spring](https://spring.io/) is a popular open-source Java container framework, and in this document, we choose [Spring Boot](https://spring.io/projects/spring-boot) as the way to use Spring.
+TiDB is a MySQL-compatible database, and [Spring](https://spring.io/) is a popular open-source container framework for Java. This document uses [Spring Boot](https://spring.io/projects/spring-boot) as the way to use Spring.
 
-This document will demonstrate how to use TiDB along with [Spring Data JPA](https://spring.io/projects/spring-data-jpa) and [Hibernate](https://hibernate.org/orm/) as the JPA provider to accomplish the following tasks:
+In this tutorial, you can learn how to use TiDB along with [Spring Data JPA](https://spring.io/projects/spring-data-jpa) and [Hibernate](https://hibernate.org/orm/) as the JPA provider to accomplish the following tasks:
 
 - Set up your environment.
 - Connect to your TiDB cluster using Hibernate and Spring Data JPA.
@@ -21,8 +22,8 @@ This document will demonstrate how to use TiDB along with [Spring Data JPA](http
 
 To complete this tutorial, you need:
 
-- It is recommended to use **Java Development Kit** (JDK) **17** or higher. You can choose between [OpenJDK](https://openjdk.org/) and [Oracle JDK](https://www.oracle.com/hk/java/technologies/downloads/) based on your company's or personal preferences.
-- [Maven](https://maven.apache.org/install.html) **3.8** or higher is required.
+- **Java Development Kit (JDK) 17** or higher. You can choose [OpenJDK](https://openjdk.org/) or [Oracle JDK](https://www.oracle.com/hk/java/technologies/downloads/) based on your business and personal requirements.
+- [Maven](https://maven.apache.org/install.html) **3.8** or higher.
 - [Git](https://git-scm.com/downloads).
 - A TiDB cluster.
 
@@ -100,9 +101,9 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
     export USE_SSL='true'
     ```
 
-    Please make sure to replace the placeholders in `{}` with the values obtained from your connection dialog.
+    Be sure to replace the placeholders `{}` with the connection parameters obtained from the connection dialog.
 
-    TiDB Serverless requires a TLS (SSL) connection, so the value of `USE_SSL` should be set to `true`.
+    TiDB Serverless requires a secure connection. Therefore, you need to set the value of `USE_SSL` to `true`.
 
 7. Save the `env.sh` file.
 
@@ -158,7 +159,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
     export USE_SSL='false'
     ```
 
-    Be sure to replace the placeholders `{}` with the connection parameters, and set the `USE_SSL` is `false`. If you are running TiDB locally, the default host address is `127.0.0.1`, and the password is empty.
+    Be sure to replace the placeholders `{}` with the connection parameters, and set `USE_SSL` to `false`. If you are running TiDB locally, the default host address is `127.0.0.1`, and the password is empty.
 
 3. Save the `env.sh` file.
 
@@ -173,7 +174,13 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
     make
     ```
 
-2. Check the [Expected-Output.txt](https://github.com/tidb-samples/tidb-java-springboot-jpa-quickstart/blob/main/Expected-Output.txt) to see if the output matches.
+2. Run the request script in another terminal session:
+
+    ```shell
+    make request
+    ```
+
+3. Check the [Expected-Output.txt](https://github.com/tidb-samples/tidb-java-springboot-jpa-quickstart/blob/main/Expected-Output.txt) to see if the output matches.
 
 ## Sample code snippets
 
@@ -183,7 +190,7 @@ For complete sample code and how to run it, check out the [tidb-samples/tidb-jav
 
 ### Connect to TiDB
 
-Write config file `application.yml`:
+Edit the configuration file `application.yml`:
 
 ```yaml
 spring:
@@ -199,15 +206,15 @@ spring:
       ddl-auto: create-drop
 ```
 
-After configuration, please set the environment variables `TIDB_JDBC_URL`, `TIDB_USER`, and `TIDB_PASSWORD` to the actual values of your TiDB cluster. This configuration file comes with default environment variable settings. In cases where these environment variables are not configured, the values will be as follows:
+After configuration, set the environment variables `TIDB_JDBC_URL`, `TIDB_USER`, and `TIDB_PASSWORD` to the actual values of your TiDB cluster. The configuration file provides default settings for these environment variables. If you do not configure the environment variables, the default values are as follows:
 
 - `TIDB_JDBC_URL`: `"jdbc:mysql://localhost:4000/test"`
 - `TIDB_USER`: `"root"`
 - `TIDB_PASSWORD`: `""`
 
-### Data Management: `@Repository`
+### Data management: `@Repository`
 
-Spring Data JPA manages data through the `@Repository` interface. You need to extend the `JpaRepository` interface to utilize its provided functions for CRUD operations.
+Spring Data JPA manages data through the `@Repository` interface. To use the CRUD operations provided by `JpaRepository`, you need to extend the `JpaRepository` interface:
 
 ```java
 @Repository
@@ -215,14 +222,14 @@ public interface PlayerRepository extends JpaRepository<PlayerBean, Long> {
 }
 ```
 
-Afterward, in the class where you need to use `PlayerRepository`, you can use `@Autowired` for automatic dependency injection, enabling you to directly use CRUD functions. Here's an example code snippet:
+Then, you can use `@Autowired` for automatic dependency injection in any class that requires the `PlayerRepository`. This enables you to directly use CRUD functions. The following is an example:
 
 ```java
 @Autowired
 private PlayerRepository playerRepository;
 ```
 
-### Insert or Update data
+### Insert or update data
 
 ```java
 playerRepository.save(player);
@@ -246,21 +253,19 @@ playerRepository.deleteById(id);
 
 For more information, refer to [Delete data](/develop/dev-guide-delete-data.md).
 
-## Useful notes
-
 ## Next steps
 
-- Learn more usage of `Hibernate` from [the documentation of Hibernate](https://hibernate.org/orm/documentation).
-- Learn more usage about the third-party libraries and frameworks used in this document, please refer to their respective official documentation:
+- Learn more usage of Hibernate from [the documentation of Hibernate](https://hibernate.org/orm/documentation).
+- Learn more usage about the third-party libraries and frameworks used in this document, refer to their official documentation:
 
-    - [The Document of Spring Framework](https://spring.io/projects/spring-framework)
-    - [The Document of Spring Boot](https://spring.io/projects/spring-boot)
-    - [The Document of Spring Data JPA](https://spring.io/projects/spring-data-jpa)
-    - [The Document of Hibernate](https://hibernate.org/orm/documentation)
+    - [The documentation of Spring Framework](https://spring.io/projects/spring-framework)
+    - [The documentation of Spring Boot](https://spring.io/projects/spring-boot)
+    - [The documentation of Spring Data JPA](https://spring.io/projects/spring-data-jpa)
+    - [The documentation of Hibernate](https://hibernate.org/orm/documentation)
 
 - Learn the best practices for TiDB application development with the chapters in the [Developer guide](/develop/dev-guide-overview.md), such as [Insert data](/develop/dev-guide-insert-data.md), [Update data](/develop/dev-guide-update-data.md), [Delete data](/develop/dev-guide-delete-data.md), [Single table reading](/develop/dev-guide-get-data-from-single-table.md), [Transactions](/develop/dev-guide-transaction-overview.md), and [SQL performance optimization](/develop/dev-guide-optimize-sql-overview.md).
 - Learn through the professional [TiDB developer courses](https://www.pingcap.com/education/) and earn [TiDB certifications](https://www.pingcap.com/education/certification/) after passing the exam.
-- Additionally, we offer courses tailored for Java developers: [Working with TiDB from Java](https://eng.edu.pingcap.com/catalog/info/id:212).
+- Learn through the course for Java developers: [Working with TiDB from Java](https://eng.edu.pingcap.com/catalog/info/id:212).
 
 ## Need help?
 
