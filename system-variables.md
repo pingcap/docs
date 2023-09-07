@@ -2125,6 +2125,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 ### tidb_enable_rate_limit_action
 
 - Scope: SESSION | GLOBAL
+
 - Persists to cluster: Yes
 - Type: Boolean
 - Default value: `OFF`
@@ -2270,8 +2271,8 @@ Query OK, 0 rows affected (0.09 sec)
 - Type: Boolean
 - Default value: `ON`
 - This variable controls whether to enable the new [Pipeline Execution Model](/tiflash/tiflash-pipeline-model.md) in TiFlash.
-- When this variable is set to `OFF` to disable the pipeline execution model, the query pushed down to TiFlash will be executed using the original stream model.
 - When this variable is set to `ON` to enable the pipeline execution model, the query pushed down to TiFlash will be executed using the new pipeline execution model.
+- When this variable is set to `OFF` to disable the pipeline execution model, the query pushed down to TiFlash will be executed using the original stream model.
 
 </CustomContent>
 
