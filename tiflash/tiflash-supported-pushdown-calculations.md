@@ -57,6 +57,6 @@ TiFlash supports the following push-down expressions:
     * MINUTE
     * SECOND
 
-* All window functions can not be pushed down to TiFlash when rows or range type frame is contained.
+* All window functions can not be pushed down to TiFlash when [rows](https://dev.mysql.com/doc/refman/8.0/en/window-functions-frames.html#:~:text=ROWS%3A%20The%20frame%20is%20defined%20by%20beginning%20and%20ending%20row%20positions.%20Offsets%20are%20differences%20in%20row%20numbers%20from%20the%20current%20row%20number.) or [range](https://dev.mysql.com/doc/refman/8.0/en/window-functions-frames.html#:~:text=RANGE%3A%20The%20frame%20is%20defined%20by%20rows%20within%20a%20value%20range.%20Offsets%20are%20differences%20in%20row%20values%20from%20the%20current%20row%20value.) type frame is contained.
 
 If a query encounters unsupported push-down calculations, TiDB needs to complete the remaining calculations, which might greatly affect the TiFlash acceleration effect. The currently unsupported operators and expressions might be supported in future versions.
