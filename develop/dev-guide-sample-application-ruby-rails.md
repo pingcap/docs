@@ -133,7 +133,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
    >
    > It is recommended to enable TLS connection when using the public endpoint to connect to TiDB Dedicated.
    >
-   > To enable TLS connection, modify `ssl_mode` query parameter value to `verify_identity` and `sslca` to the file path of CA certificate downloaded from the connection dialog.
+   > To enable TLS connection, modify the value of the `ssl_mode` query parameter to `verify_identity` and the value of  `sslca` to the file path of CA certificate downloaded from the connection dialog.
 
 6. Save the `.env` file.
 
