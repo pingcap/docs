@@ -2125,7 +2125,6 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 ### tidb_enable_rate_limit_action
 
 - Scope: SESSION | GLOBAL
-
 - Persists to cluster: Yes
 - Type: Boolean
 - Default value: `OFF`
