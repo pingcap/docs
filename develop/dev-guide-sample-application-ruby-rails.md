@@ -5,7 +5,7 @@ summary: Learn how to connect to TiDB using Rails framework. This tutorial gives
 
 # Connect to TiDB with Rails framework and ActiveRecord ORM
 
-TiDB is a MySQL-compatible database, and [Rails](https://github.com/rails/rails) is popular web application framework written in Ruby. This tutorial gives ruby sample code snippets that work with TiDB using Rails framework and ActiveRecord ORM.
+TiDB is a MySQL-compatible database, and [Rails](https://github.com/rails/rails) is a popular web application framework written in Ruby. 
 
 In this tutorial, you can learn how to use TiDB and Rails to accomplish the following tasks:
 
