@@ -273,6 +273,15 @@ For an example of using MySQL Connector/Python to build a TiDB application, see 
 ### Python ORM frameworks
 
 <SimpleTab>
+<div label="Django">
+
+Support level: **Full**
+
+[Django](https://docs.djangoproject.com/) is a popular Python web framework. We have developed an adapter `django-tidb` for Django to solve compatibility issues. For installation instructions, please refer to the [documentation](https://github.com/pingcap/django-tidb#installation-guide).
+
+For an example of using Django to build a TiDB application, see [Connect to TiDB with Django](/develop/dev-guide-sample-application-python-django.md).
+
+</div>
 <div label="SQLAlchemy">
 
 Support level: **Full**
