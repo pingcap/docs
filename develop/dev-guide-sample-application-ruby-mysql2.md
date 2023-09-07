@@ -294,10 +294,10 @@ For more information, refer to [Delete data](/develop/dev-guide-delete-data.md).
 
 By default, the mysql2 gem can search for existing CA certificates in a particular order until a file is discovered.
 
-1. `/etc/ssl/certs/ca-certificates.crt` # Debian / Ubuntu / Gentoo / Arch / Slackware
-2. `/etc/pki/tls/certs/ca-bundle.crt` # RedHat / Fedora / CentOS / Mageia / Vercel / Netlify
-3. `/etc/ssl/ca-bundle.pem` # OpenSUSE
-4. `/etc/ssl/cert.pem` # MacOS / Alpine (docker container)
+1. `/etc/ssl/certs/ca-certificates.crt` for Debian, Ubuntu, Gentoo, Arch, or Slackware
+2. `/etc/pki/tls/certs/ca-bundle.crt` for RedHat, Fedora, CentOS, Mageia, Vercel, or Netlify
+3. `/etc/ssl/ca-bundle.pem` for OpenSUSE
+4. `/etc/ssl/cert.pem` for macOS or Alpine (docker container)
 
 While it is possible to specify the CA certificate path manually, doing so might cause significant inconvenience in multi-environment deployment scenarios, because different machines and environments might store the CA certificate in different locations. Therefore, setting `sslca` to `nil` is recommended for flexibility and ease of deployment across different environments.
 
