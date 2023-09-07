@@ -207,6 +207,19 @@ If you still encounter an error above, it is recommended to use BR to restore th
 4. Create a new changefeed and start the replication task from `BackupTS`.
 5. Delete the old changefeed.
 
+## Does TiCDC replicate data changes caused by lossy DDL operations to the downstream?
+
+Lossy DDL refers to DDL that might cause data changes when executed in TiDB. Some common lossy DDL operations include:
+
+- Modifying the type of a column, for example, INT -> VARCHAR
+- Modifying the length of a column, for example, VARCHAR(20) -> VARCHAR(10)
+- Modifying the precision of a column, for example, DECIMAL(10, 3) -> DECIMAL(10, 2)
+- Modifying the UNSIGNED or SIGNED attribute of a column, for example, INT UNSIGNED -> INT SIGNED
+
+Before TiDB v7.1.0, TiCDC replicates DML events with identical old and new data to the downstream. When the downstream is MySQL, these DML events do not cause any data changes until the downstream receives and executes the DDL statement. However, when the downstream is Kafka or a cloud storage service, TiCDC writes a row of redundant data to the downstream.
+
+Starting from TiDB v7.1.0, TiCDC eliminates these redundant DML events and no longer replicates them to downstream.
+
 ## The default value of the time type field is inconsistent when replicating a DDL statement to the downstream MySQL 5.7. What can I do?
 
 Suppose that the `create table test (id int primary key, ts timestamp)` statement is executed in the upstream TiDB. When TiCDC replicates this statement to the downstream MySQL 5.7, MySQL uses the default configuration. The table schema after the replication is as follows. The default value of the `timestamp` field becomes `CURRENT_TIMESTAMP`:
@@ -231,7 +244,7 @@ From the result, you can see that the table schema before and after the replicat
 
 Since v5.0.1 or v4.0.13, for each replication to MySQL, TiCDC automatically sets `explicit_defaults_for_timestamp = ON` to ensure that the time type is consistent between the upstream and downstream. For versions earlier than v5.0.1 or v4.0.13, pay attention to the compatibility issue caused by the inconsistent `explicit_defaults_for_timestamp` value when using TiCDC to replicate the time type data.
 
-## Why do `INSERT`/`UPDATE` statements from the upstream become `REPLACE INTO` after being replicated to the downstream if I set `enable-old-value` to `true` when I create a TiCDC replication task?
+## Why do `INSERT`/`UPDATE` statements from the upstream become `REPLACE INTO` after being replicated to the downstream if I set `safe-mode` to `true` when I create a TiCDC replication task?
 
 TiCDC guarantees that all data is replicated at least once. When there is duplicate data in the downstream, write conflicts occur. To avoid this problem, TiCDC converts `INSERT` and `UPDATE` statements into `REPLACE INTO` statements. This behavior is controlled by the `safe-mode` parameter.
 
@@ -267,7 +280,7 @@ When a changefeed is resumed, TiCDC needs to scan the historical versions of dat
 
 ## How should I deploy TiCDC to replicate data between two TiDB cluster located in different regions?
 
-It is recommended that you deploy TiCDC in the downstream TiDB cluster. If the network latency between the upstream and downstream is high, for example, more than 100 ms, the latency produced when TiCDC executes SQL statements to the downstream might increase dramatically due to the MySQL transmission protocol issues. This results in a decrease in system throughput. However, deploying TiCDC in the downstream can greatly ease this problem.
+For TiCDC versions earlier than v6.5.2, it is recommended that you deploy TiCDC in the downstream TiDB cluster. If the network latency between the upstream and downstream is high, for example, more than 100 ms, the latency produced when TiCDC executes SQL statements to the downstream might increase dramatically due to the MySQL transmission protocol issues. This results in a decrease in system throughput. However, deploying TiCDC in the downstream can greatly ease this problem. After optimization, starting from TiCDC v6.5.2, it is recommended that you deploy TiCDC in the upstream TiDB cluster.
 
 ## What is the order of executing DML and DDL statements?
 
@@ -284,3 +297,99 @@ This feature is currently not supported, which might be supported in a future re
 ## Does TiCDC replication get stuck if the upstream has long-running uncommitted transactions?
 
 TiDB has a transaction timeout mechanism. When a transaction runs for a period longer than [`max-txn-ttl`](/tidb-configuration-file.md#max-txn-ttl), TiDB forcibly rolls it back. TiCDC waits for the transaction to be committed before proceeding with the replication, which causes replication delay.
+
+## What changes occur to the change event format when TiCDC enables the Old Value feature?
+
+In the following description, the definition of a valid index is as follows:
+
+- A primary key (`PRIMARY KEY`) is a valid index.
+- A unique index (`UNIQUE INDEX`) is valid if every column of the index is explicitly defined as non-nullable (`NOT NULL`) and the index does not have a virtual generated column (`VIRTUAL GENERATED COLUMNS`).
+
+TiDB supports the clustered index feature starting from v5.0. This feature controls how data is stored in tables containing primary keys. For more information, see [Clustered indexes](/clustered-indexes.md).
+
+After you enable the [Old Value feature](/ticdc/ticdc-manage-changefeed.md#output-the-historical-value-of-a-row-changed-event), TiCDC behaves as follows:
+
+- For change events on invalid index columns, the output contains both new and old values.
+- For change events on valid index columns, the output varies based on certain conditions:
+    - If a unique index column (`UNIQUE INDEX`) is updated and the table has no primary key, the output contains both new and old values.
+    - If the clustered index is disabled in the upstream TiDB cluster, and a non-INT type primary key column is updated, the output contains both new and old values.
+    - Otherwise, the change event is split into a delete event for the old value and an insert event for the new value.
+
+The preceding behavior change might lead to the following issues.
+
+### When change events on a valid index column contains both new and old values, the distribution behavior of Kafka Sink might not guarantee that change events with the same index columns are distributed to the same partition
+
+The index-value mode of Kafka Sink distributes events according to the value of the index column. When change events contain both new and old values, the value of the index column changes, which might cause change events with the same index column to be distributed to different partitions. The following is an example:
+
+Create table `t` when the TiDB clustered index feature is disabled:
+
+```sql
+CREATE TABLE t (a VARCHAR(255) PRIMARY KEY NONCLUSTERED);
+```
+
+Execute the following DML statements:
+
+```sql
+INSERT INTO t VALUES ("2");
+UPDATE t SET a="1" WHERE a="2";
+INSERT INTO t VALUES ("2");
+UPDATE t SET a="3" WHERE a="2";
+```
+
+- When the Old Value feature is disabled, the change event is split into a delete event for the old value and an insert event for the new value. The index-value dispatcher of Kafka Sink calculates the corresponding partition for each event. The preceding DML events will be distributed to the following partitions:
+
+    | partition-1  | partition-2  | partition-3  |
+    | ------------ | ------------ | ------------ |
+    | INSERT a = 2 | INSERT a = 1 | INSERT a = 3 |
+    | DELETE a = 2 |              |              |
+    | INSERT a = 2 |              |              |
+    | DELETE a = 2 |              |              |
+
+    Because Kafka guarantees message order in each partition, consumers can independently process data in each partition, and get the same result as the DML execution order.
+
+- When the Old Value feature is enabled, the index-value dispatcher of Kafka Sink distributes change events with the same index columns to different partitions. Therefore, the preceding DML will be distributed to the following partitions (change events contain both new and old values):
+
+    | partition-1  | partition-2              | partition-3              |
+    | ------------ | ------------------------ | ------------------------ |
+    | INSERT a = 2 | UPDATE a = 1 WHERE a = 2 | UPDATE a = 3 WHERE a = 2 |
+    | INSERT a = 2 |                          |                          |
+
+    Because Kafka does not guarantee message order between partitions, the preceding DML might not preserve the update order of the index column during consumption. To maintain the order of index column updates when the output contains both new and old values, you can use the default dispatcher when enabling the Old Value feature.
+
+### When change events on an invalid index column and change events on a valid index column both contain new and old values, the Avro format of Kafka Sink cannot correctly output the old value
+
+In the Avro implementation, Kafka message values only contain the current column values. Therefore, old values cannot be output correctly when an event contains both new and old values. To output the old value, you can disable the Old Value feature to get the split delete and insert events.
+
+### When change events on an invalid index column and change events on a valid index column both contain new and old values, the CSV format of Cloud Storage Sink cannot correctly output the old value
+
+Because a CSV file has a fixed number of columns, old values cannot be output correctly when an event contains both new and old values. To output the old value, you can use the Canal-JSON format.
+
+## Why can't I use the `cdc cli` command to operate a TiCDC cluster deployed by TiDB Operator?
+
+This is because the default port number of the TiCDC cluster deployed by TiDB Operator is `8301`, while the default port number of the `cdc cli` command to connect to the TiCDC server is `8300`. When using the `cdc cli` command to operate the TiCDC cluster deployed by TiDB Operator, you need to explicitly specify the `--server` parameter, as follows:
+
+```shell
+./cdc cli changefeed list --server "127.0.0.1:8301"
+[
+  {
+    "id": "4k-table",
+    "namespace": "default",
+    "summary": {
+      "state": "stopped",
+      "tso": 441832628003799353,
+      "checkpoint": "2023-05-30 22:41:57.910",
+      "error": null
+    }
+  },
+  {
+    "id": "big-table",
+    "namespace": "default",
+    "summary": {
+      "state": "normal",
+      "tso": 441872834546892882,
+      "checkpoint": "2023-06-01 17:18:13.700",
+      "error": null
+    }
+  }
+]
+```

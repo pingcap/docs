@@ -7,6 +7,8 @@ summary: Learn about the usage of TiDB specific functions.
 
 The following functions are TiDB extensions, and are not present in MySQL:
 
+<CustomContent platform="tidb">
+
 | Function name | Function description |
 | :-------------- | :------------------------------------- |
 | `TIDB_BOUNDED_STALENESS()` | The `TIDB_BOUNDED_STALENESS` function instructs TiDB to read the data as new as possible within the time range. See also: [Read Historical Data Using the `AS OF TIMESTAMP` Clause](/as-of-timestamp.md) |
@@ -18,6 +20,28 @@ The following functions are TiDB extensions, and are not present in MySQL:
 | [`TIDB_DECODE_SQL_DIGESTS(digests, stmtTruncateLength)`](#tidb_decode_sql_digests) | The `TIDB_DECODE_SQL_DIGESTS()` function is used to query the normalized SQL statements (a form without formats and arguments) corresponding to the set of SQL digests in the cluster. |
 | `VITESS_HASH(str)` | The `VITESS_HASH` function returns the hash of a string that is compatible with Vitess' `HASH` function. This is intended to help the data migration from Vitess. |
 | `TIDB_SHARD()` | The `TIDB_SHARD` function can be used to create a shard index to scatter the index hotspot. A shard index is an expression index with a `TIDB_SHARD` function as the prefix.|
+| `TIDB_ROW_CHECKSUM()` | The `TIDB_ROW_CHECKSUM` function is used to query the checksum value of a row. This function can only be used in `SELECT` statements within the FastPlan process. That is, you can query through statements like `SELECT TIDB_ROW_CHECKSUM() FROM t WHERE id = ?` or `SELECT TIDB_ROW_CHECKSUM() FROM t WHERE id IN (?, ?, ...)`. See also: [Data integrity validation for single-row data](/ticdc/ticdc-integrity-check.md). |
+| `CURRENT_RESOURCE_GROUP()`  | The `CURRENT_RESOURCE_GROUP` function is used to return the resource group name that the current session is bound to. See also: [Use Resource Control to Achieve Resource Isolation](/tidb-resource-control.md). |
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+| Function name | Function description |
+| :-------------- | :------------------------------------- |
+| `TIDB_BOUNDED_STALENESS()` | The `TIDB_BOUNDED_STALENESS` function instructs TiDB to read the data as new as possible within the time range. See also: [Read Historical Data Using the `AS OF TIMESTAMP` Clause](/as-of-timestamp.md) |
+| [`TIDB_DECODE_KEY(str)`](#tidb_decode_key) | The `TIDB_DECODE_KEY` function can be used to decode a TiDB-encoded key entry into a JSON structure containing `_tidb_rowid` and `table_id`. These encoded keys can be found in some system tables and in logging outputs. |
+| [`TIDB_DECODE_PLAN(str)`](#tidb_decode_plan) | The `TIDB_DECODE_PLAN` function can be used to decode a TiDB execution plan. |
+| `TIDB_IS_DDL_OWNER()` | The `TIDB_IS_DDL_OWNER` function can be used to check whether or not the TiDB instance you are connected to is the one that is the DDL Owner. The DDL Owner is the TiDB instance that is tasked with executing DDL statements on behalf of all other nodes in the cluster. |
+| [`TIDB_PARSE_TSO(num)`](#tidb_parse_tso) | The `TIDB_PARSE_TSO` function can be used to extract the physical timestamp from a TiDB TSO timestamp. See also: [`tidb_current_ts`](/system-variables.md#tidb_current_ts). |
+| [`TIDB_VERSION()`](#tidb_version) | The `TIDB_VERSION` function returns the TiDB version with additional build information. |
+| [`TIDB_DECODE_SQL_DIGESTS(digests, stmtTruncateLength)`](#tidb_decode_sql_digests) | The `TIDB_DECODE_SQL_DIGESTS()` function is used to query the normalized SQL statements (a form without formats and arguments) corresponding to the set of SQL digests in the cluster. |
+| `VITESS_HASH(str)` | The `VITESS_HASH` function returns the hash of a string that is compatible with Vitess' `HASH` function. This is intended to help the data migration from Vitess. |
+| `TIDB_SHARD()` | The `TIDB_SHARD` function can be used to create a shard index to scatter the index hotspot. A shard index is an expression index with a `TIDB_SHARD` function as the prefix.|
+| `TIDB_ROW_CHECKSUM()` | The `TIDB_ROW_CHECKSUM` function is used to query the checksum value of a row. This function can only be used in `SELECT` statements within the FastPlan process. That is, you can query through statements like `SELECT TIDB_ROW_CHECKSUM() FROM t WHERE id = ?` or `SELECT TIDB_ROW_CHECKSUM() FROM t WHERE id IN (?, ?, ...)`. See also: [Data integrity validation for single-row data](https://docs.pingcap.com/tidb/stable/ticdc-integrity-check). |
+| `CURRENT_RESOURCE_GROUP()`  | The `CURRENT_RESOURCE_GROUP` function is used to return the resource group name that the current session is bound to. See also: [Use Resource Control to Achieve Resource Isolation](/tidb-resource-control.md). |
+
+</CustomContent>
 
 ## Examples
 
@@ -109,8 +133,6 @@ You can find TiDB execution plans in encoded form in the slow query log. The `TI
 
 This function is useful because a plan is captured at the time the statement is executed. Re-executing the statement in `EXPLAIN` might produce different results as data distribution and statistics evolves over time.
 
-{{< copyable "sql" >}}
-
 ```sql
 SELECT tidb_decode_plan('8QIYMAkzMV83CQEH8E85LjA0CWRhdGE6U2VsZWN0aW9uXzYJOTYwCXRpbWU6NzEzLjHCtXMsIGxvb3BzOjIsIGNvcF90YXNrOiB7bnVtOiAxLCBtYXg6IDU2OC41wgErRHByb2Nfa2V5czogMCwgcnBjXxEpAQwFWBAgNTQ5LglZyGNvcHJfY2FjaGVfaGl0X3JhdGlvOiAwLjAwfQkzLjk5IEtCCU4vQQoxCTFfNgkxXzAJMwm2SGx0KHRlc3QudC5hLCAxMDAwMCkNuQRrdgmiAHsFbBQzMTMuOMIBmQnEDDk2MH0BUgEEGAoyCTQzXzUFVwX1oGFibGU6dCwga2VlcCBvcmRlcjpmYWxzZSwgc3RhdHM6cHNldWRvCTk2ISE2aAAIMTUzXmYA')\G
 ```
@@ -132,8 +154,6 @@ A TSO is a number that consists of two parts:
 - A physical timestamp
 - A logical counter
 
-{{< copyable "sql" >}}
-
 ```sql
 BEGIN;
 SELECT TIDB_PARSE_TSO(@@tidb_current_ts);
@@ -154,8 +174,6 @@ Here `TIDB_PARSE_TSO` is used to extract the physical timestamp from the timesta
 ### TIDB_VERSION
 
 The `TIDB_VERSION` function can be used to get the version and build details of the TiDB server that you are connected to. You can use this function when reporting issues on GitHub.
-
-{{< copyable "sql" >}}
 
 ```sql
 SELECT TIDB_VERSION()\G
@@ -210,8 +228,6 @@ select tidb_decode_sql_digests(@digests);
 
 In the above example, the parameter is a JSON array containing 3 SQL digests, and the corresponding SQL statements are the three items in the query results. But the SQL statement corresponding to the second SQL digest cannot be found from the cluster, so the second item in the result is `null`.
 
-{{< copyable "sql" >}}
-
 ```sql
 select tidb_decode_sql_digests(@digests, 10);
 ```
@@ -236,8 +252,6 @@ See also:
 
 The `TIDB_SHARD` function can be used to create a shard index to scatter the index hotspot. A shard index is an expression index prefixed with a `TIDB_SHARD` function.
 
-#### Shard index
-
 - Creation:
 
     To create a shard index for the index field `a`, you can use `uk((tidb_shard(a)), a))`. When there is a hotspot caused by monotonically increasing or decreasing data on the index field `a` in the unique secondary index `uk((tidb_shard(a)), a))`, the index's prefix `tidb_shard(a)` can scatter the hotspot to improve the scalability of the cluster.
@@ -260,14 +274,7 @@ The `TIDB_SHARD` function can be used to create a shard index to scatter the ind
     - Cannot go through FastPlan process, which affects optimizer performance.
     - Cannot be used to prepare the execution plan cache.
 
-#### Synopsis
-
-```ebnf+diagram
-TIDBShardExpr ::=
-    "TIDB_SHARD" "(" expr ")"
-```
-
-#### Example
+The following example shows how to use the `TIDB_SHARD` function.
 
 - Use the `TIDB_SHARD` function to calculate the SHARD value.
 
@@ -297,3 +304,86 @@ TIDBShardExpr ::=
     ```sql
     CREATE TABLE test(id INT PRIMARY KEY CLUSTERED, a INT, b INT, UNIQUE KEY uk((tidb_shard(a)), a));
     ```
+
+### TIDB_ROW_CHECKSUM
+
+The `TIDB_ROW_CHECKSUM` function is used to query the checksum value of a row. This function can only be used in `SELECT` statements within the FastPlan process. That is, you can query through statements like `SELECT TIDB_ROW_CHECKSUM() FROM t WHERE id = ?` or `SELECT TIDB_ROW_CHECKSUM() FROM t WHERE id IN (?, ?, ...)`.
+
+To enable the checksum feature of single-row data in TiDB (controlled by the system variable [`tidb_enable_row_level_checksum`](/system-variables.md#tidb_enable_row_level_checksum-new-in-v710)), run the following statement:
+
+```sql
+SET GLOBAL tidb_enable_row_level_checksum = ON;
+```
+
+Create table `t` and insert data:
+
+```sql
+USE test;
+CREATE TABLE t (id INT PRIMARY KEY, k INT, c int);
+INSERT INTO TABLE t values (1, 10, a);
+```
+
+The following statement shows how to query the checksum value of the row where `id = 1` in table `t`:
+
+```sql
+SELECT *, TIDB_ROW_CHECKSUM() FROM t WHERE id = 1;
+```
+
+The output is as follows:
+
+```sql
++----+------+------+---------------------+
+| id | k    | c    | TIDB_ROW_CHECKSUM() |
++----+------+------+---------------------+
+|  1 |   10 | a    | 3813955661          |
++----+------+------+---------------------+
+1 row in set (0.000 sec)
+```
+
+### CURRENT_RESOURCE_GROUP
+
+The `CURRENT_RESOURCE_GROUP` function is used to show the resource group name that the current session is bound to. When the [Resource control](/tidb-resource-control.md) feature is enabled, the available resources that can be used by SQL statements are restricted by the resource quota of the bound resource group.
+
+When a session is established, TiDB binds the session to the resource group that the login user is bound to by default. If the user is not bound to any resource groups, the session is bound to the `default` resource group. Once the session is established, the bound resource group will not change by default, even if the bound resource group of the user is changed via [modifying the resource group bound to the user](/sql-statements/sql-statement-alter-user.md#modify-basic-user-information). To change the bound resource group of the current session, you can use [`SET RESOURCE GROUP`](/sql-statements/sql-statement-set-resource-group.md).
+
+#### Example
+
+Create a user `user1`, create two resource groups `rg1` and `rg2`, and bind the user `user1` to the resource group `rg1`:
+
+```sql
+CREATE USER 'user1';
+CREATE RESOURCE GROUP 'rg1' RU_PER_SEC = 1000;
+CREATE RESOURCE GROUP 'rg2' RU_PER_SEC = 2000;
+ALTER USER 'user1' RESOURCE GROUP `rg1`;
+```
+
+Use `user1` to log in and view the resource group bound to the current user:
+
+```sql
+SELECT CURRENT_RESOURCE_GROUP();
+```
+
+```
++--------------------------+
+| CURRENT_RESOURCE_GROUP() |
++--------------------------+
+| rg1                      |
++--------------------------+
+1 row in set (0.00 sec)
+```
+
+Execute `SET RESOURCE GROUP` to set the resource group for the current session to `rg2`, and then view the resource group bound to the current user:
+
+```sql
+SET RESOURCE GROUP `rg2`;
+SELECT CURRENT_RESOURCE_GROUP();
+```
+
+```
++--------------------------+
+| CURRENT_RESOURCE_GROUP() |
++--------------------------+
+| rg2                      |
++--------------------------+
+1 row in set (0.00 sec)
+```

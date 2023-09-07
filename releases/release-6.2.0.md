@@ -22,7 +22,7 @@ In v6.2.0-DMR, the key new features and improvements are as follows:
 * A new concurrent DDL framework: Less DDL statements blocked and higher execution efficiency.
 * TiKV supports [automatically tuning the CPU usage](/tikv-configuration-file.md#background-quota-limiter), thus ensuring stable and efficient database operations.
 * [Point-in-time recovery (PITR)](/br/backup-and-restore-overview.md) is introduced to restore a snapshot of a TiDB cluster to a new cluster from any given time point in the past.
-* TiDB Lightning supports [pausing the scheduling on the table level](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#pause-scheduling-on-the-table-level) in the physical import mode, instead of on the cluster level.
+* TiDB Lightning supports [pausing the scheduling on the table level](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#scope-of-pausing-scheduling-during-import) in the physical import mode, instead of on the cluster level.
 * BR supports [restoring user and privilege data](/br/br-snapshot-guide.md#restore-tables-in-the-mysql-schema), making backup and restore smoother.
 * TiCDC unlocks more data replication scenarios by supporting [filtering specific types of DDL events](/ticdc/ticdc-filter.md).
 * The [`SAVEPOINT` mechanism](/sql-statements/sql-statement-savepoint.md) is supported, with which you can flexibly control the rollback points within a transaction.
@@ -121,7 +121,7 @@ In v6.2.0-DMR, the key new features and improvements are as follows:
 
     In TiDB v6.2.0, data is stored in the new storage format by default. Note that if TiFlash is upgraded from earlier versions to v6.2.0, you cannot perform in-place downgrade on TiFlash, because earlier TiFlash versions cannot recognize the new storage format.
 
-    For more information about upgrading TiFlash, see [TiFlash v6.2.0 Upgrade Guide](/tiflash-620-upgrade-guide.md).
+    For more information about upgrading TiFlash, see [TiFlash Upgrade Guide](/tiflash-upgrade-guide.md).
 
     [User document](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file) [#3594](https://github.com/pingcap/tiflash/issues/3594) @[JaySon-Huang](https://github.com/JaySon-Huang) @[lidezhu](https://github.com/lidezhu) @[jiaqizho](https://github.com/jiaqizho)
 
@@ -137,7 +137,7 @@ In v6.2.0-DMR, the key new features and improvements are as follows:
 
     When you upgrade from an earlier version to TiDB v6.2.0, FastScan is not enabled by default for all tables, which ensures data consistency. You can enable FastScan for each table independently. If the table is set to FastScan in TiDB v6.2.0, it will be disabled when you downgrade to a lower version, but this does not affect the normal data read. In this case, it is equivalent to strong consistency read.
 
-    [User document](/develop/dev-guide-use-fastscan.md) [#5252](https://github.com/pingcap/tiflash/issues/5252) @[hongyunyan](https://github.com/hongyunyan)
+    [User document](/tiflash/use-fastscan.md) [#5252](https://github.com/pingcap/tiflash/issues/5252) @[hongyunyan](https://github.com/hongyunyan)
 
 ### Stability
 
@@ -221,7 +221,7 @@ In v6.2.0-DMR, the key new features and improvements are as follows:
 
     This feature does not need manual configuration. If your TiDB cluster is v6.1.0 or later versions and TiDB Lightning is v6.2.0 or later versions, the new physical import mode takes effect automatically.
 
-    [User document](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#pause-scheduling-on-the-table-level) [#35148](https://github.com/pingcap/tidb/issues/35148) @[gozssky](https://github.com/gozssky)
+    [User document](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#scope-of-pausing-scheduling-during-import) [#35148](https://github.com/pingcap/tidb/issues/35148) @[gozssky](https://github.com/gozssky)
 
 * Refactor the [user documentation of TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md) to make its structure more reasonable and clear. The terms for "backend" is also modified to lower the understanding barrier for new users:
 
@@ -283,6 +283,9 @@ In v6.2.0-DMR, the key new features and improvements are as follows:
 | TiKV | [log-backup.initial-scan-rate-limit](/tikv-configuration-file.md#initial-scan-rate-limit-new-in-v620) | Newly added | This configuration specifies the rate limit on throughput in an incremental data scan in log backup. |
 | TiKV | [log-backup.num-threads](/tikv-configuration-file.md#num-threads-new-in-v620) | Newly added | This configuration specifies the number of threads used in log backup. |
 | TiKV | [log-backup.temp-path](/tikv-configuration-file.md#temp-path-new-in-v620) | Newly added | This configuration specifies temporary path to which log files are written before being flushed to external storage. |
+| TiKV | [rocksdb.defaultcf.format-version](/tikv-configuration-file.md#format-version-new-in-v620) | Newly added | The format version of SST files. |
+| TiKV | [rocksdb.writecf.format-version](/tikv-configuration-file.md#format-version-new-in-v620) | Newly added | The format version of SST files. |
+| TiKV | [rocksdb.lockcf.format-version](/tikv-configuration-file.md#format-version-new-in-v620) | Newly added | The format version of SST files. |
 | PD | replication-mode.dr-auto-sync.wait-async-timeout | Deleted | This configuration does not take effect and is deleted. |
 | PD | replication-mode.dr-auto-sync.wait-sync-timeout | Deleted | This configuration does not take effect and is deleted. |
 | TiFlash | [`storage.format_version`](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file) | Modified | The default value of `format_version` changes to `4`, the default format for v6.2.0 and later versions, which reduces write amplification and background task resource consumption. |
@@ -298,7 +301,7 @@ In v6.2.0-DMR, the key new features and improvements are as follows:
 
 ### Others
 
-- TiFlash `format_version` cannot be downgraded from `4` to `3`. For details, see [TiFlash v6.2.0 Upgrade Guide](/tiflash-620-upgrade-guide.md).
+- TiFlash `format_version` cannot be downgraded from `4` to `3`. For details, see [TiFlash Upgrade Guide](/tiflash-upgrade-guide.md).
 - In v6.2.0 and later versions, it is strongly recommended to keep the default value `false` of `dt_enable_logical_split` and not to change it to `true`. For details, see known issue [#5576](https://github.com/pingcap/tiflash/issues/5576).
 - If the backup cluster has a TiFlash replica, after you perform PITR, the restoration cluster does not contain the data in the TiFlash replica. To restore data from the TiFlash replica, you need to manually configure TiFlash replicas. Executing the `exchange partition` DDL statement might result in a failure of PITR. If the upstream database uses TiDB Lightning's physical import mode to import data, the data cannot be backed up in log backup. It is recommended to perform a full backup after the data import. For other compatibility issues of PITR, see [PITR limitations](/br/backup-and-restore-overview.md#before-you-use).
 - Since TiDB v6.2.0, you can restore table in `mysql` schema by specifying the parameter `--with-sys-table=true` when restoring data.

@@ -12,6 +12,10 @@ The PD configuration file supports more options than command-line parameters. Yo
 
 This document only describes parameters that are not included in command-line parameters. Check [here](/command-line-flags-for-pd-configuration.md) for the command line parameters.
 
+> **Tip:**
+>
+> If you need to adjust the value of a configuration item, refer to [Modify the configuration](/maintain-tidb-using-tiup.md#modify-the-configuration).
+
 ### `name`
 
 - The unique name of a PD node
@@ -161,6 +165,17 @@ Configuration items related to pd-server
 >
 > If you have upgraded your cluster from a TiDB 4.0 version to the current version, the behavior of `flow-round-by-digit` after the upgrading and the behavior of `trace-region-flow` before the upgrading are consistent by default. This means that if the value of `trace-region-flow` is false before the upgrading, the value of `flow-round-by-digit` after the upgrading is 127; if the value of `trace-region-flow` is `true` before the upgrading, the value of `flow-round-by-digit` after the upgrading is `3`.
 
+### `min-resolved-ts-persistence-interval` <span class="version-mark">New in v6.0.0</span>
+
++ Determines the interval at which the minimum resolved timestamp is persistent to the PD. If this value is set to `0`, it means that the persistence is disabled.
++ Default value: Before v6.3.0, the default value is `"0s"`. Starting from v6.3.0, the default value is `"1s"`, which is the smallest positive value.
++ Minimum value: `0`
++ Unit: second
+
+> **Note:**
+>
+> For clusters upgraded from v6.0.0~v6.2.0, the default value of `min-resolved-ts-persistence-interval` does not change after the upgrade, which means that it will remain `"0s"`. To enable this feature, you need to manually change the value of this configuration item.
+
 ## security
 
 Configuration items related to security
@@ -297,7 +312,7 @@ Configuration items related to scheduling
 ### `enable-diagnostic` <span class="version-mark">New in v6.3.0</span>
 
 + Controls whether to enable the diagnostic feature. When it is enabled, PD records the state during scheduling to help diagnose. If enabled, it might slightly affect the scheduling speed and consume more memory when there are many stores.
-+ Default value: false
++ Default value: Starting from v7.1.0, the default value is changed from `false` to `true`. If your cluster is upgraded from a version earlier than v7.1.0 to v7.1.0 or later, the default value does not change.
 
 ### `hot-region-schedule-limit`
 
@@ -353,6 +368,18 @@ Configuration items related to scheduling
 > **Note:**
 >
 > If you have upgraded your cluster from a TiDB 4.0 version to the current version, the new formula version is automatically disabled by default to ensure consistent PD behavior before and after the upgrading. If you want to change the formula version, you need to manually switch through the `pd-ctl` setting. For details, refer to [PD Control](/pd-control.md#config-show--set-option-value--placement-rules).
+
+### `store-limit-version` <span class="version-mark">New in v7.1.0</span>
+
+> **Warning:**
+>
+> Setting this configuration item to `"v2"` is an experimental feature. It is not recommended to use it in production environments.
+
++ Controls the version of the store limit formula
++ Default value: `v1`
++ Value options:
+    + `v1`: In v1 mode, you can manually modify the `store limit` to limit the scheduling speed of a single TiKV.
+    + `v2`: (experimental feature) In v2 mode, you do not need to manually set the `store limit` value, as PD dynamically adjusts it based on the capability of TiKV snapshots. For more details, refer to [Principles of store limit v2](/configure-store-limit.md#principles-of-store-limit-v2).
 
 ### `enable-joint-consensus` <span class="version-mark">New in v5.0</span>
 
@@ -453,3 +480,45 @@ Configuration items related to the [TiDB Dashboard](/dashboard/dashboard-intro.m
 ## `replication-mode`
 
 Configuration items related to the replication mode of all Regions. See [Enable the DR Auto-Sync mode](/two-data-centers-in-one-city-deployment.md#enable-the-dr-auto-sync-mode) for details.
+
+## Controllor
+
+This section describes the configuration items that are built into PD for [Resource Control](/tidb-resource-control.md).
+
+### `degraded-mode-wait-duration`
+
++ Time to wait to trigger the degradation mode. Degradation mode means that when the Local Token Bucket (LTB) and Global Token Bucket (GTB) are lost, the LTB falls back to the default resource group configuration and no longer has a GTB authorization token, thus ensuring that the service is not affected in the event of network isolation or anomalies.
++ Default value: 0s
++ The degradation mode is disabled by default.
+
+### `request-unit`
+
+The following are the configuration items about the [Request Unit (RU)](/tidb-resource-control.md#what-is-request-unit-ru).
+
+#### `read-base-cost`
+
++ Basis factor for conversion from a read request to RU
++ Default value: 0.25
+
+#### `write-base-cost`
+
++ Basis factor for conversion from a write request to RU
++ Default value: 1
+
+#### `read-cost-per-byte`
+
++ Basis factor for conversion from read flow to RU
++ Default value: 1/(64 * 1024)
++ 1 RU = 64 KiB read bytes
+
+#### `write-cost-per-byte`
+
++ Basis factor for conversion from write flow to RU
++ Default value: 1/1024
++ 1 RU = 1 KiB write bytes
+
+#### `read-cpu-ms-cost`
+
++ Basis factor for conversion from CPU to RU
++ Default value: 1/3
++ 1 RU = 3 millisecond CPU time

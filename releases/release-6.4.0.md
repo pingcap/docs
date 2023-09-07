@@ -8,6 +8,10 @@ Release date: November 17, 2022
 
 TiDB version: 6.4.0-DMR
 
+> **Note:**
+>
+> The TiDB 6.4.0-DMR documentation has been [archived](https://docs-archive.pingcap.com/tidb/v6.4/). PingCAP encourages you to use [the latest LTS version](https://docs.pingcap.com/tidb/stable) of the TiDB database.
+
 Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.4/quick-start-with-tidb) | [Installation packages](https://www.pingcap.com/download/?version=v6.4.0#version-list)
 
 In v6.4.0-DMR, the key new features and improvements are as follows:
@@ -131,6 +135,10 @@ In v6.4.0-DMR, the key new features and improvements are as follows:
     TiDB v6.4.0 enables the synchronously loading statistics feature by default. This feature allows TiDB to synchronously load large-sized statistics (such as histograms, TopN, and Count-Min Sketch statistics) into memory when you execute SQL statements, which improves the completeness of statistics for SQL optimization.
 
     For more information, see [User document](/system-variables.md#tidb_stats_load_sync_wait-new-in-v540).
+
+* Reduce the impact of batch write requests on the response time of lightweight transactional writes [#13313](https://github.com/tikv/tikv/issues/13313) @[glorv](https://github.com/glorv)
+
+    The business logic of some systems requires periodic batch DML tasks, but processing these batch write tasks increases the latency of online transactions. In v6.3.0, TiKV optimizes the scheduling of read requests in hybrid workload scenarios, so you can enable the [`readpool.unified.auto-adjust-pool-size`](/tikv-configuration-file.md#auto-adjust-pool-size-new-in-v630) configuration item to have TiKV automatically adjust the size of the UnifyReadPool thread pool for all read requests. In v6.4.0, TiKV can dynamically identify and prioritize write requests as well, and control the maximum bytes that the Apply thread can write for one FSM (Finite-state Machine) in one round of poll, thus reducing the impact of batch write requests on the response time of transactional writes.
 
 ### Ease of use
 

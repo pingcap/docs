@@ -74,11 +74,10 @@ Compared to Mydumper, Dumpling has the following improvements:
 
 ### Required privileges
 
-- SELECT
-- RELOAD
-- LOCK TABLES
-- REPLICATION CLIENT
-- PROCESS
+- SELECT: Required when exporting tables.
+- RELOAD: Required when using `consistency flush`. Note that only TiDB supports this privilege. When the upstream is an RDS database or a managed service, you can ignore this privilege.
+- LOCK TABLES: Required when using `consistency lock`. This privilege must be granted for all the databases and tables to be exported.
+- REPLICATION CLIENT: Required when exporting metadata to record data snapshot. This privilege is optional and you can ignore it if you do not need to export metadata.
 
 ### Export to SQL files
 
@@ -89,15 +88,7 @@ Dumpling exports data to SQL files by default. You can also export data to SQL f
 {{< copyable "shell-regular" >}}
 
 ```shell
-dumpling \
-  -u root \
-  -P 4000 \
-  -h 127.0.0.1 \
-  --filetype sql \
-  -t 8 \
-  -o /tmp/test \
-  -r 200000 \
-  -F 256MiB
+dumpling -u root -P 4000 -h 127.0.0.1 --filetype sql -t 8 -o /tmp/test -r 200000 -F 256MiB
 ```
 
 In the command above:
@@ -106,18 +97,18 @@ In the command above:
 
 <CustomContent platform="tidb">
 
-+ The `-o` (or `--output`) option specifies the export directory of the storage, which supports a local file path or an [external storage URI](/br/backup-and-restore-storages.md#uri-format).
++ The `-o` (or `--output`) option specifies the export directory of the storage, which supports an absolute local file path or an [external storage URI](/br/backup-and-restore-storages.md#uri-format).
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-+ The `-o` (or `--output`) option specifies the export directory of the storage, which supports a local file path or an [external storage URI](https://docs.pingcap.com/tidb/stable/backup-and-restore-storages#uri-format).
++ The `-o` (or `--output`) option specifies the export directory of the storage, which supports an absolute local file path or an [external storage URI](https://docs.pingcap.com/tidb/stable/backup-and-restore-storages#uri-format).
 
 </CustomContent>
 
 + The `-t` option specifies the number of threads for the export. Increasing the number of threads improves the concurrency of Dumpling and the export speed, and also increases the database's memory consumption. Therefore, it is not recommended to set the number too large. Usually, it's less than 64.
-+ The `-r` option specifies the maximum number of rows in a single file. With this option specified, Dumpling enables the in-table concurrency to speed up the export and reduce the memory usage. When the upstream database is TiDB v3.0 or later versions, a value of this parameter greater than 0 indicates that the TiDB region information is used for splitting and the value specified here will no longer take effect.
++ The `-r` option enables the in-table concurrency to speed up the export. The default value is `0`, which means disabled. A value greater than 0 means it is enabled, and the value is of `INT` type. When the source database is TiDB, a `-r` value greater than 0 indicates that the TiDB region information is used for splitting, and reduces the memory usage. The specific `-r` value does not affect the split algorithm. When the source database is MySQL and the primary key is of the `INT` type, specifying `-r` can also enable the in-table concurrency.
 + The `-F` option is used to specify the maximum size of a single file (the unit here is `MiB`; inputs like `5GiB` or `8KB` are also acceptable). It is recommended to keep its value to 256 MiB or less if you plan to use TiDB Lightning to load this file into a TiDB instance.
 
 > **Note:**
@@ -133,15 +124,7 @@ When you export data to CSV files, you can use `--sql <SQL>` to filter the recor
 {{< copyable "shell-regular" >}}
 
 ```shell
-./dumpling \
-  -u root \
-  -P 4000 \
-  -h 127.0.0.1 \
-  -o /tmp/test \
-  --filetype csv \
-  --sql 'select * from `test`.`sbtest1` where id < 100' \
-  -F 100MiB \
-  --output-filename-template 'test.sbtest1.{{.Index}}'
+./dumpling -u root -P 4000 -h 127.0.0.1 -o /tmp/test --filetype csv --sql 'select * from `test`.`sbtest1` where id < 100' -F 100MiB --output-filename-template 'test.sbtest1.{{.Index}}'
 ```
 
 In the command above:
@@ -218,7 +201,7 @@ You can use the `--compress <format>` option to compress the CSV and SQL data an
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
     ```
 
-- `{schema}.{table}.{0001}.{sql|csv`}: The date source file
+- `{schema}.{table}.{0001}.{sql|csv}`: The date source file
 
     {{< copyable "shell-regular" >}}
 
@@ -232,7 +215,7 @@ You can use the `--compress <format>` option to compress the CSV and SQL data an
     (1);
     ```
 
-- `*-schema-view.sql`、`*-schema-trigger.sql`、`*-schema-post.sql`: Other exported files
+- `*-schema-view.sql`, `*-schema-trigger.sql`, `*-schema-post.sql`: Other exported files
 
 ### Export data to Amazon S3 cloud storage
 
@@ -264,12 +247,7 @@ Dumpling also supports reading credential files from `~/.aws/credentials`. Param
 {{< copyable "shell-regular" >}}
 
 ```shell
-./dumpling \
-  -u root \
-  -P 4000 \
-  -h 127.0.0.1 \
-  -r 200000 \
-  -o "s3://${Bucket}/${Folder}"
+./dumpling -u root -P 4000 -h 127.0.0.1 -r 200000 -o "s3://${Bucket}/${Folder}"
 ```
 
 ### Filter the exported data
@@ -281,12 +259,7 @@ By default, Dumpling exports all databases except system databases (including `m
 {{< copyable "shell-regular" >}}
 
 ```shell
-./dumpling \
-  -u root \
-  -P 4000 \
-  -h 127.0.0.1 \
-  -o /tmp/test \
-  --where "id < 100"
+./dumpling -u root -P 4000 -h 127.0.0.1 -o /tmp/test --where "id < 100"
 ```
 
 The above command exports the data that matches `id < 100` from each table. Note that you cannot use the `--where` parameter together with `--sql`.
@@ -298,14 +271,7 @@ Dumpling can filter specific databases or tables by specifying the table filter 
 {{< copyable "shell-regular" >}}
 
 ```shell
-./dumpling \
-  -u root \
-  -P 4000 \
-  -h 127.0.0.1 \
-  -o /tmp/test \
-  -r 200000 \
-  --filter "employees.*" \
-  --filter "*.WorkOrder"
+./dumpling -u root -P 4000 -h 127.0.0.1 -o /tmp/test -r 200000 --filter "employees.*" --filter "*.WorkOrder"
 ```
 
 The above command exports all the tables in the `employees` database and the `WorkOrder` tables in all databases.
@@ -329,7 +295,7 @@ Examples:
 The exported file is stored in the `./export-<current local time>` directory by default. Commonly used options are as follows:
 
 - The `-t` option specifies the number of threads for the export. Increasing the number of threads improves the concurrency of Dumpling and the export speed, and also increases the database's memory consumption. Therefore, it is not recommended to set the number too large.
-- The `-r` option specifies the maximum number of records (or the number of rows in the database) for a single file. When it is enabled, Dumpling enables concurrency in the table to improve the speed of exporting large tables. When the upstream database is TiDB v3.0 or later versions, a value of this parameter greater than 0 indicates that the TiDB region information is used for splitting and the value specified here will no longer take effect.
+- The `-r` option enables the in-table concurrency to speed up the export. The default value is `0`, which means disabled. A value greater than 0 means it is enabled, and the value is of `INT` type. When the source database is TiDB, a `-r` value greater than 0 indicates that the TiDB region information is used for splitting, and reduces the memory usage. The specific `-r` value does not affect the split algorithm. When the source database is MySQL and the primary key is of the `INT` type, specifying `-r` can also enable the in-table concurrency.
 - The `--compress <format>` option specifies the compression format of the dump. It supports the following compression algorithms: `gzip`, `snappy`, and `zstd`. This option can speed up dumping of data if storage is the bottleneck or if storage capacity is a concern. The drawback is an increase in CPU usage. Each file is compressed individually.
 
 With the above options specified, Dumpling can have a quicker speed of data export.
@@ -386,7 +352,7 @@ The TiDB historical data snapshots when the TSO is `417773951312461825` and the 
 
 When Dumpling is exporting a large single table from TiDB, Out of Memory (OOM) might occur because the exported data size is too large, which causes connection abort and export failure. You can use the following parameters to reduce the memory usage of TiDB:
 
-+ Setting `-r` to split the data to be exported into chunks. This reduces the memory overhead of TiDB's data scan and enables concurrent table data dump to improve export efficiency. When the upstream database is TiDB v3.0 or later versions, a value of this parameter greater than 0 indicates that the TiDB region information is used for splitting and the value specified here will no longer take effect.
++ Setting `-r` to split the data to be exported into chunks. This reduces the memory overhead of TiDB's data scan and enables concurrent table data dump to improve export efficiency. When the upstream database is TiDB v3.0 or later versions, a `-r` value greater than 0 indicates that the TiDB region information is used for splitting and the specific `-r` value does not affect the split algorithm.
 + Reduce the value of `--tidb-mem-quota-query` to `8589934592` (8 GB) or lower. `--tidb-mem-quota-query` controls the memory usage of a single query statement in TiDB.
 + Adjust the `--params "tidb_distsql_scan_concurrency=5"` parameter. [`tidb_distsql_scan_concurrency`](/system-variables.md#tidb_distsql_scan_concurrency) is a session variable which controls the concurrency of the scan operations in TiDB.
 
@@ -424,7 +390,7 @@ SET GLOBAL tidb_gc_life_time = '10m';
 | `--case-sensitive`           | whether table-filter is case-sensitive                                                                                                                                                                                                                                                                                             | false (case-insensitive)                   |
 | `-h` or `--host`             | The IP address of the connected database host                                                                                                                                                                                                                                                                                      | "127.0.0.1"                                |
 | `-t` or `--threads`          | The number of concurrent backup threads                                                                                                                                                                                                                                                                                            | 4                                          |
-| `-r` or `--rows`             | Split the table into rows with a specified number of rows (generally applicable for concurrent operations of splitting a large table into multiple files. When the upstream database is TiDB v3.0 or later versions, a value of this parameter greater than 0 indicates that the TiDB region information is used for splitting and the value specified here will no longer take effect.                                                                                                                                                                                 |
+| `-r` or `--rows`             | Enable the in-table concurrency to speed up the export. The default value is `0`, which means disabled. A value greater than 0 means it is enabled, and the value is of `INT` type. When the source database is TiDB, a `-r` value greater than 0 indicates that the TiDB region information is used for splitting, and reduces the memory usage. The specific `-r` value does not affect the split algorithm. When the source database is MySQL and the primary key is of the `INT` type, specifying `-r` can also enable the in-table concurrency.                                                                                                                                                                               |
 | `-L` or `--logfile`          | Log output address. If it is empty, the log will be output to the console                                                                                                                                                                                                                                                          | ""                                         |
 | `--loglevel`                 | Log level {debug,info,warn,error,dpanic,panic,fatal}                                                                                                                                                                                                                                                                               | "info"                                     |
 | `--logfmt`                   | Log output format {text,json}                                                                                                                                                                                                                                                                                                      | "text"                                     |
@@ -435,7 +401,7 @@ SET GLOBAL tidb_gc_life_time = '10m';
 | `-s` or `--statement-size`   | Control the size of the `INSERT` statements; the unit is bytes                                                                                                                                                                                                                                                                     |
 | `-F` or `--filesize`         | The file size of the divided tables. The unit must be specified such as `128B`, `64KiB`, `32MiB`, and `1.5GiB`.                                                                                                                                                                                                                    |
 | `--filetype`                 | Exported file type (csv/sql)                                                                                                                                                                                                                                                                                                       | "sql"                                      |
-| `-o` or `--output`           | The path of exported local files or [external storage URI](https://docs.pingcap.com/tidb/stable/backup-and-restore-storages#uri-format)                                                                                                                                                                                                                                                                                                    | "./export-${time}"                         |
+| `-o` or `--output`           | Specify the absolute local file path or [external storage URI](https://docs.pingcap.com/tidb/stable/backup-and-restore-storages#uri-format) for exporting the data.                                                                                                                                                                                                                                                                                                   | "./export-${time}"                         |
 | `-S` or `--sql`              | Export data according to the specified SQL statement. This command does not support concurrent export.                                                                                                                                                                                                                             |
 | `--consistency`              | flush: use FTWRL before the dump <br/> snapshot: dump the TiDB data of a specific snapshot of a TSO <br/> lock: execute `lock tables read` on all tables to be dumped <br/> none: dump without adding locks, which cannot guarantee consistency <br/> auto: use --consistency flush for MySQL; use --consistency snapshot for TiDB | "auto"                                     |
 | `--snapshot`                 | Snapshot TSO; valid only when `consistency=snapshot`                                                                                                                                                                                                                                                                               |

@@ -41,7 +41,7 @@ Starting from TiDB v6.0.0, TiDB provides two types of releases:
 
 - Development Milestone Releases
 
-    Development Milestone Releases (DMR) are released approximately every two months. A DMR introduces new features and improvements, but does not accept patch releases. It is not recommended for on-premises users to use DMR in production environments. For example, v6.0.0-DMR is a DMR.
+    Development Milestone Releases (DMR) are released approximately every two months. A DMR introduces new features and improvements, but does not accept patch releases. It is not recommended for users to use DMR in production environments. For example, v6.0.0-DMR is a DMR.
 
 TiDB v6.0.0 is a DMR, and its version is 6.0.0-DMR.
 
@@ -113,7 +113,7 @@ TiDB v6.0.0 is a DMR, and its version is 6.0.0-DMR.
 
     With its native architecture of separating computing from storage, TiDB supports filtering out invalid data by pushing down operators, which greatly reduces the data transmission between TiDB and TiKV and thereby improves the query efficiency. In v6.0.0, TiDB supports pushing down more expressions and the `BIT` data type to TiKV, improving the query efficiency when computing the expressions and data type.
 
-    [User document](/functions-and-operators/expressions-pushed-down.md#add-to-the-blocklist), [#30738](https://github.com/pingcap/tidb/issues/30738)
+    [User document](/functions-and-operators/expressions-pushed-down.md), [#30738](https://github.com/pingcap/tidb/issues/30738)
 
 - Optimization of hotspot index
 
@@ -266,7 +266,7 @@ TiDB v6.0.0 is a DMR, and its version is 6.0.0-DMR.
 
 - An enterprise-level database management platform, TiDB Enterprise Manager
 
-    TiDB Enterprise Manager (TiEM) is an enterprise-level database management platform based on the TiDB database, which aims to help users manage TiDB clusters in on-premises or public cloud environments.
+    TiDB Enterprise Manager (TiEM) is an enterprise-level database management platform based on the TiDB database, which aims to help users manage TiDB clusters in self-hosted or public cloud environments.
 
     TiEM not only provides full lifecycle visual management for TiDB clusters, but also provides one-stop services: parameter management, version upgrades, cluster clone, active-standby cluster switching, data import and export, data replication, and data backup and restore services. TiEM can improve the efficiency of DevOps on TiDB and reduce the DevOps cost for enterprises.
 

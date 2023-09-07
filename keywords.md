@@ -79,9 +79,12 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 - ANALYZE (R)
 - AND (R)
 - ANY
+- ARRAY (R)
 - AS (R)
 - ASC (R)
 - ASCII
+- ATTRIBUTE
+- ATTRIBUTES
 - AUTO_ID_CACHE
 - AUTO_INCREMENT
 - AUTO_RANDOM
@@ -95,11 +98,13 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 - BACKUP
 - BACKUPS
 - BEGIN
+- BERNOULLI
 - BETWEEN (R)
 - BIGINT (R)
 - BINARY (R)
 - BINDING
 - BINDINGS
+- BINDING_CACHE
 - BINLOG
 - BIT
 - BLOB (R)
@@ -116,11 +121,14 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 <a id="C" class="letter" href="#C">C</a>
 
 - CACHE
+- CALIBRATE
+- CALL (R)
 - CANCEL (R)
 - CAPTURE
 - CASCADE (R)
 - CASCADED
 - CASE (R)
+- CAUSAL
 - CHAIN
 - CHANGE (R)
 - CHAR (R)
@@ -132,13 +140,17 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 - CIPHER
 - CLEANUP
 - CLIENT
+- CLIENT_ERRORS_SUMMARY
+- CLOSE
+- CLUSTER
+- CLUSTERED
 - CMSKETCH (R)
 - COALESCE
 - COLLATE (R)
 - COLLATION
 - COLUMN (R)
-- COLUMNS
 - COLUMN_FORMAT
+- COLUMNS
 - COMMENT
 - COMMIT
 - COMMITTED
@@ -148,9 +160,11 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 - CONCURRENCY
 - CONFIG
 - CONNECTION
+- CONSISTENCY
 - CONSISTENT
 - CONSTRAINT (R)
 - CONTEXT
+- CONTINUE (R)
 - CONVERT (R)
 - CPU
 - CREATE (R)
@@ -169,6 +183,7 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 - CURRENT_TIME (R)
 - CURRENT_TIMESTAMP (R)
 - CURRENT_USER (R)
+- CURSOR (R)
 - CYCLE
 
 <a id="D" class="letter" href="#D">D</a>
@@ -186,17 +201,20 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 - DDL (R)
 - DEALLOCATE
 - DECIMAL (R)
+- DECLARE
 - DEFAULT (R)
 - DEFINER
-- DELAYED (R)
 - DELAY_KEY_WRITE
+- DELAYED (R)
 - DELETE (R)
 - DENSE_RANK (R-Window)
 - DEPTH (R)
 - DESC (R)
 - DESCRIBE (R)
+- DIGEST
 - DIRECTORY
 - DISABLE
+- DISABLED
 - DISCARD
 - DISK
 - DISTINCT (R)
@@ -213,7 +231,9 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 <a id="E" class="letter" href="#E">E</a>
 
 - ELSE (R)
+- ELSEIF (R)
 - ENABLE
+- ENABLED
 - ENCLOSED (R)
 - ENCRYPTION
 - END
@@ -233,6 +253,7 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 - EXCLUSIVE
 - EXECUTE
 - EXISTS (R)
+- EXIT (R)
 - EXPANSION
 - EXPIRE
 - EXPLAIN (R)
@@ -240,8 +261,10 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 
 <a id="F" class="letter" href="#F">F</a>
 
+- FAILED_LOGIN_ATTEMPTS
 - FALSE (R)
 - FAULTS
+- FETCH (R)
 - FIELDS
 - FILE
 - FIRST
@@ -254,6 +277,7 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 - FORCE (R)
 - FOREIGN (R)
 - FORMAT
+- FOUND
 - FROM (R)
 - FULL
 - FULLTEXT (R)
@@ -271,9 +295,12 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 
 <a id="H" class="letter" href="#H">H</a>
 
+- HANDLER
 - HASH
 - HAVING (R)
+- HELP
 - HIGH_PRIORITY (R)
+- HISTOGRAM
 - HISTORY
 - HOSTS
 - HOUR
@@ -286,6 +313,7 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 - IDENTIFIED
 - IF (R)
 - IGNORE (R)
+- ILIKE (R)
 - IMPORT
 - IMPORTS
 - IN (R)
@@ -295,6 +323,7 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 - INDEXES
 - INFILE (R)
 - INNER (R)
+- INOUT (R)
 - INSERT (R)
 - INSERT_METHOD
 - INSTANCE
@@ -305,6 +334,7 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 - INT4 (R)
 - INT8 (R)
 - INTEGER (R)
+- INTERSECT (R)
 - INTERVAL (R)
 - INTO (R)
 - INVISIBLE
@@ -314,6 +344,7 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 - IS (R)
 - ISOLATION
 - ISSUER
+- ITERATE (R)
 
 <a id="J" class="letter" href="#J">J</a>
 
@@ -335,11 +366,12 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 - LAG (R-Window)
 - LANGUAGE
 - LAST
-- LASTVAL
 - LAST_BACKUP
 - LAST_VALUE (R-Window)
+- LASTVAL
 - LEAD (R-Window)
 - LEADING (R)
+- LEAVE (R)
 - LEFT (R)
 - LESS
 - LEVEL
@@ -354,6 +386,7 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 - LOCALTIMESTAMP (R)
 - LOCATION
 - LOCK (R)
+- LOCKED
 - LOGS
 - LONG (R)
 - LONGBLOB (R)
@@ -376,6 +409,7 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 - MEDIUMBLOB (R)
 - MEDIUMINT (R)
 - MEDIUMTEXT (R)
+- MEMBER
 - MEMORY
 - MERGE
 - MICROSECOND
@@ -406,6 +440,7 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 - NODE_STATE (R)
 - NOMAXVALUE
 - NOMINVALUE
+- NONCLUSTERED
 - NONE
 - NOT (R)
 - NOWAIT
@@ -419,18 +454,25 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 
 <a id="O" class="letter" href="#O">O</a>
 
+- OF (R)
+- OFF
 - OFFSET
+- OLTP_READ_ONLY
+- OLTP_READ_WRITE
+- OLTP_WRITE_ONLY
 - ON (R)
+- ON_DUPLICATE
 - ONLINE
 - ONLY
-- ON_DUPLICATE
 - OPEN
 - OPTIMISTIC (R)
 - OPTIMIZE (R)
 - OPTION (R)
+- OPTIONAL
 - OPTIONALLY (R)
 - OR (R)
 - ORDER (R)
+- OUT (R)
 - OUTER (R)
 - OUTFILE (R)
 - OVER (R-Window)
@@ -445,15 +487,21 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 - PARTITIONING
 - PARTITIONS
 - PASSWORD
+- PASSWORD_LOCK_TIME
+- PAUSE
+- PERCENT
 - PERCENT_RANK (R-Window)
 - PER_DB
 - PER_TABLE
 - PESSIMISTIC (R)
 - PLACEMENT (S)
 - PLUGINS
+- POINT
+- POLICY
 - PRECEDING
 - PRECISION (R)
 - PREPARE
+- PRESERVE
 - PRE_SPLIT_REGIONS
 - PRIMARY (R)
 - PRIVILEGES
@@ -462,7 +510,9 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 - PROCESSLIST
 - PROFILE
 - PROFILES
+- PROXY
 - PUMP (R)
+- PURGE
 
 <a id="Q" class="letter" href="#Q">Q</a>
 
@@ -480,6 +530,7 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 - REAL (R)
 - REBUILD
 - RECOVER
+- RECURSIVE (R)
 - REDUNDANT
 - REFERENCES (R)
 - REGEXP (R)
@@ -495,12 +546,18 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 - REPEATABLE
 - REPLACE (R)
 - REPLICA
+- REPLICAS
 - REPLICATION
 - REQUIRE (R)
+- REQUIRED
+- RESOURCE
 - RESPECT
+- RESTART
 - RESTORE
 - RESTORES
 - RESTRICT (R)
+- RESUME
+- REUSE
 - REVERSE
 - REVOKE (R)
 - RIGHT (R)
@@ -509,20 +566,22 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 - ROLLBACK
 - ROUTINE
 - ROW (R)
-- ROWS (R-Window)
 - ROW_COUNT
 - ROW_FORMAT
 - ROW_NUMBER (R-Window)
+- ROWS (R-Window)
 - RTREE
 
 <a id="S" class="letter" href="#S">S</a>
 
 - SAMPLES (R)
+- SAN
+- SAVEPOINT
 - SECOND
+- SECOND_MICROSECOND (R)
 - SECONDARY_ENGINE
 - SECONDARY_LOAD
 - SECONDARY_UNLOAD
-- SECOND_MICROSECOND (R)
 - SECURITY
 - SELECT (R)
 - SEND_CREDENTIALS_TO_TIKV
@@ -540,6 +599,7 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 - SHUTDOWN
 - SIGNED
 - SIMPLE
+- SKIP
 - SKIP_SCHEMA_FILES
 - SLAVE
 - SLOW
@@ -564,17 +624,25 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 - SQL_TSI_SECOND
 - SQL_TSI_WEEK
 - SQL_TSI_YEAR
+- SQLEXCEPTION (R)
+- SQLSTATE (R)
+- SQLWARNING (R)
 - SSL (R)
 - START
 - STARTING (R)
 - STATS (R)
 - STATS_AUTO_RECALC
 - STATS_BUCKETS (R)
+- STATS_COL_CHOICE
+- STATS_COL_LIST
+- STATS_EXTENDED (R)
 - STATS_HEALTHY (R)
 - STATS_HISTOGRAMS (R)
 - STATS_META (R)
+- STATS_OPTIONS
 - STATS_PERSISTENT
 - STATS_SAMPLE_PAGES
+- STATS_SAMPLE_RATE
 - STATUS
 - STORAGE
 - STORED (R)
@@ -586,12 +654,14 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 - SUPER
 - SWAPS
 - SWITCHES
+- SYSTEM
 - SYSTEM_TIME
 
 <a id="T" class="letter" href="#T">T</a>
 
 - TABLE (R)
 - TABLES
+- TABLESAMPLE (R)
 - TABLESPACE
 - TABLE_CHECKSUM
 - TEMPORARY
@@ -601,6 +671,7 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 - THAN
 - THEN (R)
 - TIDB (R)
+- TiDB_CURRENT_TSO (R)
 - TIFLASH (R)
 - TIKV_IMPORTER
 - TIME
@@ -611,6 +682,7 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 - TO (R)
 - TOKEN_ISSUER
 - TOPN (R)
+- TPCC
 - TRACE
 - TRADITIONAL
 - TRAILING (R)
@@ -619,6 +691,9 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 - TRIGGERS
 - TRUE (R)
 - TRUNCATE
+- TTL
+- TTL_ENABLE
+- TTL_JOB_INTERVAL
 - TYPE
 
 <a id="U" class="letter" href="#U">U</a>
@@ -632,6 +707,7 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 - UNKNOWN
 - UNLOCK (R)
 - UNSIGNED (R)
+- UNTIL (R)
 - UPDATE (R)
 - USAGE (R)
 - USE (R)
@@ -657,15 +733,18 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 
 <a id="W" class="letter" href="#W">W</a>
 
+- WAIT
 - WARNINGS
 - WEEK
 - WEIGHT_STRING
 - WHEN (R)
 - WHERE (R)
+- WHILE (R)
 - WIDTH (R)
 - WINDOW (R-Window)
 - WITH (R)
 - WITHOUT
+- WORKLOAD
 - WRITE (R)
 
 <a id="X" class="letter" href="#X">X</a>

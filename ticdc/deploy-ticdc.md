@@ -50,25 +50,25 @@ More references:
 
 The method of scaling out a TiCDC cluster is similar to that of deploying one. It is recommended to use TiUP to perform the scale-out.
 
-1. Create a `scale-out.yaml` file to add the TiCDC node information. The following is an example:
+1. Create a `scale-out.yml` file to add the TiCDC node information. The following is an example:
 
     ```shell
     cdc_servers:
       - host: 10.1.1.1
         gc-ttl: 86400
-        data_dir: /data/deploy/install/data/cdc-8300
+        data_dir: /tidb-data/cdc-8300
       - host: 10.1.1.2
         gc-ttl: 86400
-        data_dir: /data/deploy/install/data/cdc-8300
-      - host: 10.0.1.4:8300
+        data_dir: /tidb-data/cdc-8300
+      - host: 10.0.1.4
         gc-ttl: 86400
-        data_dir: /data/deploy/install/data/cdc-8300
+        data_dir: /tidb-data/cdc-8300
     ```
 
 2. Run the scale-out command on the TiUP control machine:
 
     ```shell
-    tiup cluster scale-out <cluster-name> scale-out.yaml
+    tiup cluster scale-out <cluster-name> scale-out.yml
     ```
 
 For more use cases, see [Scale out a TiCDC cluster](/scale-tidb-using-tiup.md#scale-out-a-ticdc-cluster).
@@ -95,7 +95,7 @@ tiup cluster upgrade <cluster-name> <version> --transfer-timeout 600
 
 > **Note:**
 >
-> In the preceding command, you need to replace `<cluster-name>` and `<version>` with the actual cluster name and cluster version. For example, the version can be v6.6.0.
+> In the preceding command, you need to replace `<cluster-name>` and `<version>` with the actual cluster name and cluster version. For example, the version can be v7.3.0.
 
 ### Upgrade cautions
 
@@ -115,7 +115,7 @@ This section describes how to use the [`tiup cluster edit-config`](/tiup/tiup-co
 
 1. Run the `tiup cluster edit-config` command. Replace `<cluster-name>` with the actual cluster name:
 
-   ```shell
+    ```shell
     tiup cluster edit-config <cluster-name>
     ```
 
@@ -152,7 +152,7 @@ See [Enable TLS Between TiDB Components](/enable-tls-between-components.md).
 
 ## View TiCDC status using the command-line tool
 
-Run the following command to view the TiCDC cluster status. Note that you need to replace `v<CLUSTER_VERSION>` with the TiCDC cluster version, such as `v6.5.0`:
+Run the following command to view the TiCDC cluster status. Note that you need to replace `v<CLUSTER_VERSION>` with the TiCDC cluster version, such as `v7.3.0`:
 
 ```shell
 tiup ctl:v<CLUSTER_VERSION> cdc capture list --server=http://10.0.10.25:8300

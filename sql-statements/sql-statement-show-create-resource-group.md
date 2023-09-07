@@ -9,7 +9,7 @@ summary: Learn the usage of SHOW CREATE RESOURCE GROUP in TiDB.
 
 > **Note:**
 >
-> This feature is not available on [Serverless Tier clusters](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta).
+> This feature is not available on [TiDB Serverless clusters](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless).
 
 </CustomContent>
 
@@ -23,6 +23,7 @@ ShowCreateResourceGroupStmt ::=
 
 ResourceGroupName ::=
     Identifier
+|   "DEFAULT"
 ```
 
 ## Examples
@@ -39,11 +40,11 @@ View the definition of `rg1`.
 ```sql
 SHOW CREATE RESOURCE GROUP rg1;
 ***************************[ 1. row ]***************************
-+----------------+--------------------------------------------+
-| Resource_Group | Create Resource Group                      |
-+----------------+--------------------------------------------+
-| rg1            | CREATE RESOURCE GROUP `rg1` RU_PER_SEC=100 |
-+----------------+--------------------------------------------+
++----------------+------------------------------------------------------------+
+| Resource_Group | Create Resource Group                                      |
++----------------+------------------------------------------------------------+
+| rg1            | CREATE RESOURCE GROUP `rg1` RU_PER_SEC=100 PRIORITY=MEDIUM |
++----------------+------------------------------------------------------------+
 1 row in set (0.01 sec)
 ```
 

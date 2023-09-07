@@ -64,7 +64,13 @@ Slow query basics:
 * `Txn_start_ts`: The start timestamp and the unique ID of a transaction. You can use this value to search for the transaction-related logs.
 * `Is_internal`: Whether a SQL statement is TiDB internal. `true` indicates that a SQL statement is executed internally in TiDB and `false` indicates that a SQL statement is executed by the user.
 * `Index_names`: The index names used by the statement.
-* `Stats`: The health state of the involved tables. `pseudo` indicates that the state is unhealthy.
+* `Stats`: The health state, internal version, total row count, modified row count, and load state of statistics that are used during this query. `pseudo` indicates that the statistics information is unhealthy. If the optimizer attempts to use some statistics that are not fully loaded, the internal state is also printed. For example, the meaning of `t1:439478225786634241[105000;5000][col1:allEvicted][idx1:allEvicted]` can be understood as follows:
+    - `t1`: statistics on table `t1` are used during query optimization.
+    - `439478225786634241`: the internal version.
+    - `105000`: the total row count in the statistics.
+    - `5000`: the number of rows modified since the last statistics collection.
+    - `col1:allEvicted`: statistics on the column `col1` are not fully loaded.
+    - `idx1:allEvicted`: statistics on the index `idx1` are not fully loaded.
 * `Succ`: Whether a statement is executed successfully.
 * `Backoff_time`: The waiting time before retry when a statement encounters errors that require a retry. The common errors as such include: `lock occurs`, `Region split`, and `tikv server is busy`.
 * `Plan`: The execution plan of a statement. Execute the `SELECT tidb_decode_plan('xxx...')` statement to parse the specific execution plan.
@@ -95,6 +101,8 @@ The following fields are related to transaction execution:
 * `Write_keys`: The count of keys that the transaction writes to the Write CF in TiKV.
 * `Write_size`: The total size of the keys or values to be written when the transaction commits.
 * `Prewrite_region`: The number of TiKV Regions involved in the first phase (prewrite) of the two-phase transaction commit. Each Region triggers a remote procedure call.
+* `Wait_prewrite_binlog_time`: The time used to write binlogs when a transaction is committed.
+* `Resolve_lock_time`: The time to resolve or wait for the lock to be expired after a lock is encountered during a transaction commit.
 
 Memory usage fields:
 
@@ -127,12 +135,31 @@ TiKV Coprocessor Task fields:
 * `Cop_wait_p90`: The P90 waiting time of cop-tasks.
 * `Cop_wait_max`: The maximum waiting time of cop-tasks.
 * `Cop_wait_addr`: The address of the cop-task whose waiting time is the longest.
+* `Rocksdb_delete_skipped_count`: The number of scans on deleted keys during RocksDB reads.
+* `Rocksdb_key_skipped_count`: The number of deleted (tombstone) keys that RocksDB encounters when scanning data.
+* `Rocksdb_block_cache_hit_count`: The number of times RocksDB reads data from the block cache.
+* `Rocksdb_block_read_count`: The number of times RocksDB reads data from the file system.
+* `Rocksdb_block_read_byte`: The amount of data RocksDB reads from the file system.
+* `Rocksdb_block_read_time`: The time RocksDB takes to read data from the file system.
 * `Cop_backoff_{backoff-type}_total_times`: The total times of backoff caused by an error.
 * `Cop_backoff_{backoff-type}_total_time`: The total time of backoff caused by an error.
 * `Cop_backoff_{backoff-type}_max_time`: The longest time of backoff caused by an error.
 * `Cop_backoff_{backoff-type}_max_addr`: The address of the cop-task that has the longest backoff time caused by an error.
 * `Cop_backoff_{backoff-type}_avg_time`: The average time of backoff caused by an error.
 * `Cop_backoff_{backoff-type}_p90_time`: The P90 percentile backoff time caused by an error.
+
+`backoff-type` generally includes the following types:
+
+* `tikvRPC`: The backoff caused by failing to send RPC requests to TiKV.
+* `tiflashRPC`: The backoff caused by failing to send RPC requests to TiFlash.
+* `pdRPC`: The backoff caused by failing to send RPC requests to PD.
+* `txnLock`: The backoff caused by lock conflicts.
+* `regionMiss`: The backoff caused by that processing requests fails when the TiDB Region cache information is outdated after Regions are split or merged.
+* `regionScheduling`: The backoff caused by that TiDB cannot process requests when Regions are being scheduled and the Leader is not selected.
+* `tikvServerBusy`: The backoff caused by that the TiKV load is too high to handle new requests.
+* `tiflashServerBusy`: The backoff caused by that the TiFlash load is too high to handle new requests.
+* `tikvDiskFull`: The backoff caused by that the TiKV disk is full.
+* `txnLockFast`: The backoff caused by that locks are encountered during data reads.
 
 ## Related system variables
 

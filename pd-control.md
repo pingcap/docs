@@ -24,16 +24,16 @@ To obtain `pd-ctl` of the latest version, download the TiDB server installation 
 
 | Installation package                                                                    | OS | Architecture | SHA256 checksum                                                    |
 | :------------------------------------------------------------------------ | :------- | :---- | :--------------------------------------------------------------- |
-| `https://download.pingcap.org/tidb-community-server-{version}-linux-amd64.tar.gz` (pd-ctl) | Linux | amd64 | `https://download.pingcap.org/tidb-community-server-{version}-linux-amd64.sha256` |
-| `https://download.pingcap.org/tidb-community-server-{version}-linux-arm64.tar.gz` (pd-ctl) | Linux | arm64 | `https://download.pingcap.org/tidb-community-server-{version}-linux-arm64.sha256` |
+| `https://download.pingcap.org/tidb-community-server-{version}-linux-amd64.tar.gz` (pd-ctl) | Linux | amd64 | `https://download.pingcap.org/tidb-community-server-{version}-linux-amd64.tar.gz.sha256` |
+| `https://download.pingcap.org/tidb-community-server-{version}-linux-arm64.tar.gz` (pd-ctl) | Linux | arm64 | `https://download.pingcap.org/tidb-community-server-{version}-linux-arm64.tar.gz.sha256` |
 
 > **Note:**
 >
-> `{version}` in the link indicates the version number of TiDB. For example, the download link for `v6.6.0` in the `amd64` architecture is `https://download.pingcap.org/tidb-community-server-v6.6.0-linux-amd64.tar.gz`.
+> `{version}` in the link indicates the version number of TiDB. For example, the download link for `v7.3.0` in the `amd64` architecture is `https://download.pingcap.org/tidb-community-server-v7.3.0-linux-amd64.tar.gz`.
 
 ### Compile from source code
 
-1. [Go](https://golang.org/) Version 1.19 or later because the Go modules are used.
+1. [Go](https://golang.org/) 1.20 or later is required because the Go modules are used.
 2. In the root directory of the [PD project](https://github.com/pingcap/pd), use the `make` or `make pd-ctl` command to compile and generate `bin/pd-ctl`.
 
 ## Usage
@@ -196,7 +196,7 @@ Usage:
 - `max-merge-region-keys` controls the upper limit on the key count of Region Merge. When `regionKeyCount` exceeds the specified value, PD does not merge it with the adjacent Region.
 
     ```bash
-    config set max-merge-region-keys 50000 // Set the the upper limit on keyCount to 50000
+    config set max-merge-region-keys 50000 // Set the upper limit on keyCount to 50000
     ```
 
 - `split-merge-interval` controls the interval between the `split` and `merge` operations on a same Region. This means the newly split Region won't be merged within a period of time.
@@ -331,7 +331,13 @@ Usage:
 
 - `enable-placement-rules` is used to enable placement rules, which is enabled by default in v5.0 and later versions.
 
-- `store-limit-mode` is used to control the mode of limiting the store speed. The optional modes are `auto` and `manual`. In `auto` mode, the stores are automatically balanced according to the load (experimental).
+- `store-limit-mode` is used to control the mode of limiting the store speed. The optional modes are `auto` and `manual`. In `auto` mode, the stores are automatically balanced according to the load (deprecated).
+
+- `store-limit-version` controls the version of the store limit formula. In v1 mode, you can manually modify the `store limit` to limit the scheduling speed of a single TiKV. The v2 mode is an experimental feature. In v2 mode, you do not need to manually set the `store limit` value, as PD dynamically adjusts it based on the capability of TiKV snapshots. For more details, refer to [Principles of store limit v2](/configure-store-limit.md#principles-of-store-limit-v2).
+
+    ```bash
+    config set store-limit-version v2       // using store limit v2
+    ```
 
 - PD rounds the lowest digits of the flow number, which reduces the update of statistics caused by the changes of the Region flow information. This configuration item is used to specify the number of lowest digits to round for the Region flow information. For example, the flow `100512` will be rounded to `101000` because the default value is `3`. This configuration replaces `trace-region-flow`.
 
@@ -730,9 +736,9 @@ Usage:
 
 ```
 
-### `region check [miss-peer | extra-peer | down-peer | pending-peer | offline-peer | empty-region | hist-size | hist-keys]`
+### `region check [miss-peer | extra-peer | down-peer | pending-peer | offline-peer | empty-region | hist-size | hist-keys] [--jq="<query string>"]`
 
-Use this command to check the Regions in abnormal conditions.
+Use this command to check the Regions in abnormal conditions. For a jq formatted output, see [jq formatted JSON output usage](#jq-formatted-json-output-usage).
 
 Description of various types:
 
@@ -916,6 +922,23 @@ Usage:
     ```bash
     scheduler config balance-hot-region-scheduler set enable-for-tiflash true
     ```
+
+### `service-gc-safepoint`
+
+Use this command to query the current GC safepoint and service GC safepoint. The output is as follows:
+
+```bash
+{
+  "service_gc_safe_points": [
+    {
+      "service_id": "gc_worker",
+      "expired_at": 9223372036854775807,
+      "safe_point": 439923410637160448
+    }
+  ],
+  "gc_safe_point": 0
+}
+```
 
 ### `store [delete | cancel-delete | label | weight | remove-tombstone | limit ] <store_id> [--jq="<query string>"]`
 

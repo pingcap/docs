@@ -12,6 +12,22 @@ SQL Plan Management is a set of functions that execute SQL bindings to manually 
 
 An SQL binding is the basis of SPM. The [Optimizer Hints](/optimizer-hints.md) document introduces how to select a specific execution plan using hints. However, sometimes you need to interfere with execution selection without modifying SQL statements. With SQL bindings, you can select a specified execution plan without modifying SQL statements.
 
+<CustomContent platform="tidb">
+
+> **Note:**
+>
+> To use SQL bindings, you need to have the `SUPER` privilege. If TiDB prompts that you do not have sufficient privileges, see [Privilege Management](/privilege-management.md) to add the required privileges.
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+> **Note:**
+>
+> To use SQL bindings, you need to have the `SUPER` privilege. If TiDB prompts that you do not have sufficient privileges, see [Privilege Management](https://docs.pingcap.com/tidb/stable/privilege-management) to add the required privileges.
+
+</CustomContent>
+
 ### Create a binding
 
 You can create a binding for a SQL statement according to a SQL statement or a historical execution plan.
@@ -117,6 +133,70 @@ SELECT * FROM test . t WHERE a > ?
 > ```
 >
 > When bindings are created, TiDB treats SQL statements that contain a single constant and SQL statements that contain multiple constants joined by commas differently. Therefore, you need to create bindings for the two SQL types separately.
+>
+> For example:
+>
+> ```sql
+> CREATE TABLE t(a INT, b INT, KEY idx(a));
+> CREATE SESSION BINDING for SELECT * FROM t WHERE a IN (?) USING SELECT /*+ use_index(t, idx) */ * FROM t WHERE a in (?);
+> SHOW BINDINGS;
+> +-----------------------------------------------+----------------------------------------------------------------------+------------+---------+-------------------------+-------------------------+---------+--------------------+--------+------------------------------------------------------------------+-------------+
+> | Original_sql                                  | Bind_sql                                                             | Default_db | Status  | Create_time             | Update_time             | Charset | Collation          | Source | Sql_digest                                                       | Plan_digest |
+> +-----------------------------------------------+----------------------------------------------------------------------+------------+---------+-------------------------+-------------------------+---------+--------------------+--------+------------------------------------------------------------------+-------------+
+> | SELECT * FROM `test` . `t` WHERE `a` IN ( ? ) | SELECT /*+ use_index(`t` `idx`)*/ * FROM `test`.`t` WHERE `a` IN (?) | test       | enabled | 2023-08-23 14:15:31.472 | 2023-08-23 14:15:31.472 | utf8mb4 | utf8mb4_general_ci | manual | 8b9c4e6ab8fad5ba29b034311dcbfc8a8ce57dde2e2d5d5b65313b90ebcdebf7 |             |
+> +-----------------------------------------------+----------------------------------------------------------------------+------------+---------+-------------------------+-------------------------+---------+--------------------+--------+------------------------------------------------------------------+-------------+
+> SELECT * FROM t WHERE a IN (1);
+> SELECT @@LAST_PLAN_FROM_BINDING;
+> +--------------------------+
+> | @@LAST_PLAN_FROM_BINDING |
+> +--------------------------+
+> |                        1 |
+> +--------------------------+
+> SELECT * FROM t WHERE a IN (1,2);
+> SELECT @@LAST_PLAN_FROM_BINDING;
+> +--------------------------+
+> | @@LAST_PLAN_FROM_BINDING |
+> +--------------------------+
+> |                        0 |
+> +--------------------------+
+> CREATE SESSION BINDING for SELECT * FROM t WHERE a IN (?,?) USING SELECT /*+ use_index(t, idx) */ * FROM t WHERE a IN (?,?);
+> show bindings;
+> +-------------------------------------------------+------------------------------------------------------------------------+------------+---------+-------------------------+-------------------------+---------+--------------------+--------+------------------------------------------------------------------+-------------+
+> | Original_sql                                    | Bind_sql                                                               | Default_db | Status  | Create_time             | Update_time             | Charset | Collation          | Source | Sql_digest                                                       | Plan_digest |
+> +-------------------------------------------------+------------------------------------------------------------------------+------------+---------+-------------------------+-------------------------+---------+--------------------+--------+------------------------------------------------------------------+-------------+
+> | SELECT * FROM `test` . `t` WHERE `a` IN ( ... ) | SELECT /*+ use_index(`t` `idx`)*/ * FROM `test`.`t` WHERE `a` IN (?,?) | test       | enabled | 2023-08-23 14:16:30.762 | 2023-08-23 14:16:30.762 | utf8mb4 | utf8mb4_general_ci | manual | da38bf216db4a53e1a1e01c79ffa42306419442ad7238480bb7ac510723c8bdf |             |
+> | SELECT * FROM `test` . `t` WHERE `a` IN ( ? )   | SELECT /*+ use_index(`t` `idx`)*/ * FROM `test`.`t` WHERE `a` IN (?)   | test       | enabled | 2023-08-23 14:15:31.472 | 2023-08-23 14:15:31.472 | utf8mb4 | utf8mb4_general_ci | manual | 8b9c4e6ab8fad5ba29b034311dcbfc8a8ce57dde2e2d5d5b65313b90ebcdebf7 |             |
+> +-------------------------------------------------+------------------------------------------------------------------------+------------+---------+-------------------------+-------------------------+---------+--------------------+--------+------------------------------------------------------------------+-------------+
+> SELECT * FROM t WHERE a IN (1,2);
+> SELECT @@LAST_PLAN_FROM_BINDING;
+> +--------------------------+
+> | @@LAST_PLAN_FROM_BINDING |
+> +--------------------------+
+> |                        1 |
+> +--------------------------+
+> SELECT * FROM t WHERE a IN (1,2,3);
+> SELECT @@LAST_PLAN_FROM_BINDING;
+> +--------------------------+
+> | @@LAST_PLAN_FROM_BINDING |
+> +--------------------------+
+> |                        1 |
+> +--------------------------+
+> DROP SESSION BINDING for SELECT * FROM t WHERE a IN (?);
+> SHOW BINDINGS;
+> +-------------------------------------------------+------------------------------------------------------------------------+------------+---------+-------------------------+-------------------------+---------+--------------------+--------+------------------------------------------------------------------+-------------+
+> | Original_sql                                    | Bind_sql                                                               | Default_db | Status  | Create_time             | Update_time             | Charset | Collation          | Source | Sql_digest                                                       | Plan_digest |
+> +-------------------------------------------------+------------------------------------------------------------------------+------------+---------+-------------------------+-------------------------+---------+--------------------+--------+------------------------------------------------------------------+-------------+
+> | SELECT * FROM `test` . `t` WHERE `a` IN ( ... ) | SELECT /*+ use_index(`t` `idx`)*/ * FROM `test`.`t` WHERE `a` IN (?,?) | test       | enabled | 2023-08-23 14:16:30.762 | 2023-08-23 14:16:30.762 | utf8mb4 | utf8mb4_general_ci | manual | da38bf216db4a53e1a1e01c79ffa42306419442ad7238480bb7ac510723c8bdf |             |
+> +-------------------------------------------------+------------------------------------------------------------------------+------------+---------+-------------------------+-------------------------+---------+--------------------+--------+------------------------------------------------------------------+-------------+
+> SELECT * FROM t WHERE a IN (1);
+> SELECT @@LAST_PLAN_FROM_BINDING;
+> +--------------------------+
+> | @@LAST_PLAN_FROM_BINDING |
+> +--------------------------+
+> |                        0 |
+> +--------------------------+
+> ```
+>
 
 When a SQL statement has bound execution plans in both GLOBAL and SESSION scopes, because the optimizer ignores the bound execution plan in the GLOBAL scope when it encounters the SESSION binding, the bound execution plan of this statement in the SESSION scope shields the execution plan in the GLOBAL scope.
 
@@ -152,15 +232,15 @@ The original SQL statement and the bound statement must have the same text after
 
 - This binding can be created successfully because the texts before and after parameterization and hint removal are the same: `SELECT * FROM test . t WHERE a > ?`
 
-     ```sql
-     CREATE BINDING FOR SELECT * FROM t WHERE a > 1 USING SELECT * FROM t use index  (idx) WHERE a > 2
-     ```
+    ```sql
+    CREATE BINDING FOR SELECT * FROM t WHERE a > 1 USING SELECT * FROM t use index  (idx) WHERE a > 2
+    ```
 
 - This binding will fail because the original SQL statement is processed as `SELECT * FROM test . t WHERE a > ?`, while the bound SQL statement is processed differently as `SELECT * FROM test . t WHERE b > ?`.
 
-     ```sql
-     CREATE BINDING FOR SELECT * FROM t WHERE a > 1 USING SELECT * FROM t use index(idx) WHERE b > 2
-     ```
+    ```sql
+    CREATE BINDING FOR SELECT * FROM t WHERE a > 1 USING SELECT * FROM t use index(idx) WHERE b > 2
+    ```
 
 > **Note:**
 >
@@ -170,10 +250,11 @@ The original SQL statement and the bound statement must have the same text after
 
 To make the execution plan of a SQL statement fixed to a historical execution plan, you can use `plan_digest` to bind that historical execution plan to the SQL statement, which is more convenient than binding it according to a SQL statement.
 
-Currently, this feature has the following limitations:
+When using this feature, note the following:
 
 - The feature generates hints according to historical execution plans and uses the generated hints for binding. Because historical execution plans are stored in [Statement Summary Tables](/statement-summary-tables.md), before using this feature, you need to enable the [`tidb_enable_stmt_summary`](/system-variables.md#tidb_enable_stmt_summary-new-in-v304) system variable first.
-- Currently, this feature only supports binding historical execution plans in the `statements_summary` and `statements_summary_history` tables of the current TiDB node. If you get a `can't find any plans` error, you can connect to another TiDB node in the cluster and retry the binding.
+- This feature does not support TiFlash queries, Join queries with three or more tables, and queries that contain subqueries.
+- If a historical execution plan is for a SQL statement with hints, the hints will be added to the binding. For example, after executing `SELECT /*+ max_execution_time(1000) */ * FROM t`, the binding created with its `plan_digest` will include `max_execution_time(1000)`.
 
 The SQL statement of this binding method is as follows:
 
@@ -423,6 +504,8 @@ SHOW binding_cache status;
 ## Baseline capturing
 
 Used for [preventing regression of execution plans during an upgrade](#prevent-regression-of-execution-plans-during-an-upgrade), this feature captures queries that meet capturing conditions and creates bindings for these queries.
+
+A plan baseline refers to a collection of accepted plans that the optimizer can use for executing a SQL statement. Generally, TiDB adds a plan into the plan baseline only after confirming that the plan performs well. A plan in this context encompasses all the necessary plan-related details (such as SQL plan identifier, hint set, bind values, and optimizer environment) that the optimizer requires to reproduce an execution plan.
 
 ### Enable capturing
 

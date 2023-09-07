@@ -21,8 +21,8 @@ TiFlash supports the push-down of the following operators:
 * HashJoin: Performs the join calculation using the [Hash Join](/explain-joins.md#hash-join) algorithm, but with the following conditions:
     * The operator can be pushed down only in the [MPP mode](/tiflash/use-tiflash-mpp-mode.md).
     * Supported joins are Inner Join, Left Join, Semi Join, Anti Semi Join, Left Semi Join, and Anti Left Semi Join.
-    * The preceding joins support both Equi Join and Non-Equi Join (Cartesian Join). When calculating Cartesian Join, the Broadcast algorithm, instead of the Shuffle Hash Join algorithm, is used.
-* [Window functions](/functions-and-operators/window-functions.md): Currently, TiFlash supports `ROW_NUMBER()`, `RANK()`, `DENSE_RANK()`, `LEAD()`, and `LAG()`.
+    * The preceding joins support both Equi Join and Non-Equi Join (Cartesian Join or Null-aware Semi Join). When calculating Cartesian Join or Null-aware Semi Join, the Broadcast algorithm, instead of the Shuffle Hash Join algorithm, is used.
+* [Window functions](/functions-and-operators/window-functions.md): Currently, TiFlash supports `ROW_NUMBER()`, `RANK()`, `DENSE_RANK()`, `LEAD()`, `LAG()`, `FIRST_VALUE()`, and `LAST_VALUE()`.
 
 In TiDB, operators are organized in a tree structure. For an operator to be pushed down to TiFlash, all of the following prerequisites must be met:
 
@@ -36,7 +36,7 @@ TiFlash supports the following push-down expressions:
 | Expression Type | Operations |
 | :-------------- | :------------------------------------- |
 | [Numeric functions and operators](/functions-and-operators/numeric-functions-and-operators.md) | `+`, `-`, `/`, `*`, `%`, `>=`, `<=`, `=`, `!=`, `<`, `>`, `ROUND()`, `ABS()`, `FLOOR(int)`, `CEIL(int)`, `CEILING(int)`, `SQRT()`, `LOG()`, `LOG2()`, `LOG10()`, `LN()`, `EXP()`, `POW()`, `SIGN()`, `RADIANS()`, `DEGREES()`, `CONV()`, `CRC32()`, `GREATEST(int/real)`, `LEAST(int/real)` |
-| [Logical functions](/functions-and-operators/control-flow-functions.md) and [operators](/functions-and-operators/operators.md) | `AND`, `OR`, `NOT`, `CASE WHEN`, `IF()`, `IFNULL()`, `ISNULL()`, `IN`, `LIKE`, `COALESCE`, `IS` |
+| [Logical functions](/functions-and-operators/control-flow-functions.md) and [operators](/functions-and-operators/operators.md) | `AND`, `OR`, `NOT`, `CASE WHEN`, `IF()`, `IFNULL()`, `ISNULL()`, `IN`, `LIKE`, `ILIKE`, `COALESCE`, `IS` |
 | [Bitwise operations](/functions-and-operators/bit-functions-and-operators.md) | `&` (bitand), <code>\|</code> (bitor), `~` (bitneg), `^` (bitxor) |
 | [String functions](/functions-and-operators/string-functions.md) | `SUBSTR()`, `CHAR_LENGTH()`, `REPLACE()`, `CONCAT()`, `CONCAT_WS()`, `LEFT()`, `RIGHT()`, `ASCII()`, `LENGTH()`, `TRIM()`, `LTRIM()`, `RTRIM()`, `POSITION()`, `FORMAT()`, `LOWER()`, `UCASE()`, `UPPER()`, `SUBSTRING_INDEX()`, `LPAD()`, `RPAD()`, `STRCMP()` |
 | [Regular expression functions and operators](/functions-and-operators/string-functions.md) | `REGEXP`, `REGEXP_LIKE()`, `REGEXP_INSTR()`, `REGEXP_SUBSTR()`, `REGEXP_REPLACE()` |

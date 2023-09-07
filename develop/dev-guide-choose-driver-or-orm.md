@@ -9,8 +9,8 @@ summary: Learn how to choose a driver or ORM framework to connect to TiDB.
 >
 > TiDB provides the following two support levels for drivers and ORMs:
 >
-> - **Full**: indicates that using this driver or ORM does not have any known issues.
-> - **Verified**: indicates that using this driver or ORM might get errors because of compatibility differences between TiDB and MySQL.
+> - **Full**: indicates that TiDB is compatible with most features of the tool and maintains compatibility with its newer versions. PingCAP will periodically conduct compatibility tests with the latest version of [Third-party tools supported by TiDB](/develop/dev-guide-third-party-support.md).
+> - **Compatible**: indicates that because the corresponding third-party tool is adapted to MySQL and TiDB is highly compatible with the MySQL protocol, so TiDB can use most features of the tool. However, PingCAP has not completed a full test on all features of the tool, which might lead to some unexpected behaviors.
 >
 > For more information, refer to [Third-Party Tools Supported by TiDB](/develop/dev-guide-third-party-support.md).
 
@@ -27,13 +27,13 @@ This section describes how to use drivers and ORM frameworks in Java.
 
 Support level: **Full**
 
-You can follow the [MySQL documentation](https://dev.mysql.com/doc/connector-j/8.0/en/) to download and configure a Java JDBC driver. It is recommended to use MySQL Connector/J 8.0.29 or later with TiDB v6.3.0 and newer.
+You can follow the [MySQL documentation](https://dev.mysql.com/doc/connector-j/8.0/en/) to download and configure a Java JDBC driver. It is recommended to use MySQL Connector/J 8.0.33 or later with TiDB v6.3.0 and newer.
 
 > **Tip:**
 >
 > There is a [bug](https://bugs.mysql.com/bug.php?id=106252) in the Connector/J 8.0 versions before 8.0.32, which might cause threads to hang when using TiDB versions earlier than v6.3.0. To avoid this issue, it is recommended that you use either MySQL Connector/J 8.0.32 or a later version, or the TiDB JDBC (see the *TiDB-JDBC* tab).
 
-For an example of how to build a complete application, see [Build a Simple CRUD App with TiDB and JDBC](/develop/dev-guide-sample-application-java.md).
+For an example of how to build a complete application, see [Build a simple CRUD app with TiDB and JDBC](/develop/dev-guide-sample-application-java-jdbc.md).
 
 </div>
 <div label="TiDB-JDBC">
@@ -42,7 +42,7 @@ Support level: **Full**
 
 [TiDB-JDBC](https://github.com/pingcap/mysql-connector-j) is a customized Java driver based on MySQL 8.0.29. Compiled based on MySQL official version 8.0.29, TiDB-JDBC fixes the bug of multi-parameter and multi-field EOF in the prepare mode in the original JDBC, and adds features such as automatic TiCDC snapshot maintenance and the SM3 authentication plugin.
 
-Using SM3-based authentication is only supported with the TiDB version of MySQL Connector/J.
+The authentication based on SM3 is only supported in TiDB's TiDB-JDBC.
 
 If you use Maven, add the following content to the `<dependencies></dependencies>` section in the `pom.xml` file:
 
@@ -123,8 +123,8 @@ implementation 'org.hibernate:hibernate-core:6.0.0.CR2'
 implementation 'mysql:mysql-connector-java:5.1.49'
 ```
 
-- For an example of using Hibernate to build a TiDB application by native Java, see [Build a Simple CRUD App with TiDB and Java](/develop/dev-guide-sample-application-java.md).
-- For an example of using Spring Data JPA or Hibernate to build a TiDB application by Spring, see [Build a TiDB Application using Spring Boot](/develop/dev-guide-sample-application-spring-boot.md).
+- For an example of using Hibernate to build a TiDB application by native Java, see [Build a simple CRUD app with TiDB and Hibernate](/develop/dev-guide-sample-application-java-hibernate.md).
+- For an example of using Spring Data JPA or Hibernate to build a TiDB application by Spring, see [Build a TiDB app using Spring Boot](/develop/dev-guide-sample-application-java-spring-boot.md).
 
 In addition, you need to specify the TiDB dialect in your [Hibernate configuration file](https://www.tutorialspoint.com/hibernate/hibernate_configuration.htm): `org.hibernate.dialect.TiDBDialect`, which is only supported by Hibernate `6.0.0.Beta2` or above. If your `Hibernate` version is earlier than `6.0.0.Beta2`, upgrade it first.
 
@@ -163,7 +163,7 @@ implementation 'org.mybatis:mybatis:3.5.9'
 implementation 'mysql:mysql-connector-java:5.1.49'
 ```
 
-For an example of using MyBatis to build a TiDB application, see [Build a Simple CRUD App with TiDB and Java](/develop/dev-guide-sample-application-java.md).
+For an example of using MyBatis to build a TiDB application, see [Build a simple CRUD app with TiDB and MyBatis](/develop/dev-guide-sample-application-java-mybatis.md).
 
 </div>
 
@@ -217,7 +217,7 @@ Support level: **Full**
 
 To download and configure a Golang driver, refer to the [go-sql-driver/mysql documentation](https://github.com/go-sql-driver/mysql).
 
-For an example of how to build a complete application, see [Build a Simple CRUD App with TiDB and Golang](/develop/dev-guide-sample-application-golang.md).
+For an example of how to build a complete application, see [Build a simple CRUD app with TiDB and Go-MySQL-Driver](/develop/dev-guide-sample-application-golang-sql-driver.md).
 
 ### Golang ORM frameworks
 
@@ -232,7 +232,66 @@ go get -u gorm.io/gorm
 go get -u gorm.io/driver/mysql
 ```
 
-For an example of using GORM to build a TiDB application, see [Build a Simple CRUD App with TiDB and Golang](/develop/dev-guide-sample-application-golang.md).
+For an example of using GORM to build a TiDB application, see [Build a simple CRUD app with TiDB and GORM](/develop/dev-guide-sample-application-golang-gorm.md).
+
+## Python
+
+This section describes how to use drivers and ORM frameworks in Python.
+
+### Python drivers
+
+<SimpleTab>
+<div label="PyMySQL">
+
+Support level: **Compatible**
+
+You can follow the [PyMySQL documentation](https://pypi.org/project/PyMySQL/) to download and configure the driver. It is recommended to use PyMySQL 1.0.2 or later versions.
+
+For an example of using PyMySQL to build a TiDB application, see [Connect to TiDB with PyMySQL](/develop/dev-guide-sample-application-python-pymysql.md).
+
+</div>
+<div label="mysqlclient">
+
+Support level: **Compatible**
+
+You can follow the [mysqlclient documentation](https://pypi.org/project/mysqlclient/) to download and configure the driver. It is recommended to use mysqlclient 2.1.1 or later versions.
+
+For an example of using mysqlclient to build a TiDB application, see [Connect to TiDB with mysqlclient](/develop/dev-guide-sample-application-python-mysqlclient.md).
+
+</div>
+<div label="MySQL Connector/Python">
+
+Support level: **Compatible**
+
+You can follow the [MySQL Connector/Python documentation](https://dev.mysql.com/doc/connector-python/en/connector-python-installation-binary.html) to download and configure the driver. It is recommended to use Connector/Python 8.0.31 or later versions.
+
+For an example of using MySQL Connector/Python to build a TiDB application, see [Connect to TiDB with MySQL Connector/Python](/develop/dev-guide-sample-application-python-mysql-connector.md).
+
+</div>
+</SimpleTab>
+
+### Python ORM frameworks
+
+<SimpleTab>
+<div label="SQLAlchemy">
+
+Support level: **Full**
+
+[SQLAlchemy](https://www.sqlalchemy.org/) is a popular ORM framework for Python. To get all dependencies in your application, you can use the `pip install SQLAlchemy==1.4.44` command. It is recommended to use SQLAlchemy 1.4.44 or later versions.
+
+For an example of using SQLAlchemy to build a TiDB application, see [Connect to TiDB with SQLAlchemy](/develop/dev-guide-sample-application-python-sqlalchemy.md).
+
+</div>
+<div label="peewee">
+
+Support level: **Compatible**
+
+[peewee](http://docs.peewee-orm.com/en/latest/) is a popular ORM framework for Python. To get all dependencies in your application, you can use the `pip install peewee==3.15.4` command. It is recommended to use peewee 3.15.4 or later versions.
+
+For an example of using peewee to build a TiDB application, see [Build a simple CRUD app with TiDB and peewee](/develop/dev-guide-sample-application-python-peewee.md#step-2-get-the-code).
+
+</div>
+</SimpleTab>
 
 <CustomContent platform="tidb-cloud">
 

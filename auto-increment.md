@@ -24,6 +24,8 @@ This document introduces the `AUTO_INCREMENT` column attribute, including its co
 
 </CustomContent>
 
+You can also use the `AUTO_INCREMENT` parameter in the [`CREATE TABLE`](/sql-statements/sql-statement-create-table.md) statement to specify the initial value of the increment field.
+
 ## Concept
 
 `AUTO_INCREMENT` is a column attribute that is used to automatically fill in default column values. When the `INSERT` statement does not specify values for the `AUTO_INCREMENT` column, the system automatically assigns values to this column.
@@ -369,6 +371,7 @@ CREATE TABLE t(a int AUTO_INCREMENT key) AUTO_ID_CACHE 1;
 >
 > - Before TiDB v6.4.0, since allocating ID requires a TiKV transaction to persist the `AUTO_INCREMENT` value for each request, setting `AUTO_ID_CACHE` to `1` causes performance degradation.
 > - Since TiDB v6.4.0, the modification of the `AUTO_INCREMENT` value is faster because it is only an in-memory operation in the TiDB process as the centralized allocating service is introduced.
+> - Setting `AUTO_ID_CACHE` to `0` means that TiDB uses the default cache size `30000`.
 
 After you enable the MySQL compatibility mode, the allocated IDs are **unique** and **monotonically increasing**, and the behavior is almost the same as MySQL. Even if you access across TiDB instances, the IDs will keep monotonic. Only when the primary instance of the centralized service crashes, there might be a few IDs that are not continuous. This is because the secondary instance discards some IDs that are supposed to have been allocated by the primary instance during the failover to ensure ID uniqueness.
 
@@ -376,10 +379,10 @@ After you enable the MySQL compatibility mode, the allocated IDs are **unique** 
 
 Currently, `AUTO_INCREMENT` has the following restrictions when used in TiDB:
 
-- It must be defined on the first column of the primary key or the first column of an index.
+- For TiDB v6.6.0 and earlier versions, the defined column must be either primary key or index prefixes.
 - It must be defined on the column of `INTEGER`, `FLOAT`, or `DOUBLE` type.
 - It cannot be specified on the same column with the `DEFAULT` column value.
-- `ALTER TABLE` cannot be used to add the `AUTO_INCREMENT` attribute.
+- `ALTER TABLE` cannot be used to add or modify columns with the `AUTO_INCREMENT` attribute, including using `ALTER TABLE ... MODIFY/CHANGE COLUMN` to add the `AUTO_INCREMENT` attribute to an existing column, or using `ALTER TABLE ... ADD COLUMN` to add a column with the `AUTO_INCREMENT` attribute.
 - `ALTER TABLE` can be used to remove the `AUTO_INCREMENT` attribute. However, starting from v2.1.18 and v3.0.4, TiDB uses the session variable `@@tidb_allow_remove_auto_inc` to control whether `ALTER TABLE MODIFY` or `ALTER TABLE CHANGE` can be used to remove the `AUTO_INCREMENT` attribute of a column. By default, you cannot use `ALTER TABLE MODIFY` or `ALTER TABLE CHANGE` to remove the `AUTO_INCREMENT` attribute.
 - `ALTER TABLE` requires the `FORCE` option to set the `AUTO_INCREMENT` value to a smaller value.
 - Setting the `AUTO_INCREMENT` to a value smaller than `MAX(<auto_increment_column>)` leads to duplicate keys because pre-existing values are not skipped.

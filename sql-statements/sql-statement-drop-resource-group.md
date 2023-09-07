@@ -9,7 +9,7 @@ summary: Learn the usage of DROP RESOURCE GROUP in TiDB.
 
 > **Note:**
 >
-> This feature is not available on [Serverless Tier clusters](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta).
+> This feature is not available on [TiDB Serverless clusters](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless).
 
 </CustomContent>
 
@@ -18,41 +18,68 @@ You can use the `DROP RESOURCE GROUP` statement to drop a resource group.
 ## Synopsis
 
 ```ebnf+diagram
-DropResourceGroupStmt:
+DropResourceGroupStmt ::=
     "DROP" "RESOURCE" "GROUP" IfExists ResourceGroupName
 
 IfExists ::=
     ('IF' 'EXISTS')?
 
-ResourceGroupName:
+ResourceGroupName ::=
     Identifier
+|   "DEFAULT"
 ```
 
 > **Note:**
 >
-> The `DROP RESOURCE GROUP` statement can only be executed when the global variable [`tidb_enable_resource_control`](/system-variables.md#tidb_enable_resource_control-new-in-v660) is set to `ON`.
+> - The `DROP RESOURCE GROUP` statement can only be executed when the global variable [`tidb_enable_resource_control`](/system-variables.md#tidb_enable_resource_control-new-in-v660) is set to `ON`.
+> - The `default` resource group is reserved and cannot be dropped.
 
 ## Examples
 
 Drop a resource group named `rg1`.
 
 ```sql
-mysql> DROP RESOURCE GROUP IF EXISTS rg1;
+DROP RESOURCE GROUP IF EXISTS rg1;
+```
+
+```sql
 Query OK, 0 rows affected (0.22 sec)
-mysql> CREATE RESOURCE GROUP IF NOT EXISTS rg1 RU_PER_SEC = 500 BURSTABLE;
+```
+
+```sql
+CREATE RESOURCE GROUP IF NOT EXISTS rg1 RU_PER_SEC = 500 BURSTABLE;
+```
+
+```sql
 Query OK, 0 rows affected (0.08 sec)
-mysql> SELECT * FROM information_schema.resource_groups WHERE NAME ='rg1';
-+------+------------+-----------+
-| NAME | RU_PER_SEC | BURSTABLE |
-+------+------------+-----------+
-| rg1  |        500 | YES       |
-+------+------------+-----------+
+```
+
+```sql
+SELECT * FROM information_schema.resource_groups WHERE NAME ='rg1';
+```
+
+```sql
++------+------------+----------+-----------+-------------+
+| NAME | RU_PER_SEC | PRIORITY | BURSTABLE | QUERY_LIMIT |
++------+------------+----------+-----------+-------------+
+| rg1  | 500        | MEDIUM   | YES       | NULL        |
++------+------------+----------+-----------+-------------+
 1 row in set (0.01 sec)
+```
 
-mysql> DROP RESOURCE GROUP IF EXISTS rg1;
+```sql
+DROP RESOURCE GROUP IF EXISTS rg1;
+```
+
+```sql
 Query OK, 1 rows affected (0.09 sec)
+```
 
-mysql> SELECT * FROM information_schema.resource_groups WHERE NAME ='rg1';
+```
+SELECT * FROM information_schema.resource_groups WHERE NAME ='rg1';
+```
+
+```sql
 Empty set (0.00 sec)
 ```
 

@@ -1,11 +1,15 @@
 ---
-title: TiCDC OpenAPI
+title: TiCDC OpenAPI v1
 summary: Learn how to use the OpenAPI interface to manage the cluster status and data replication.
 ---
 
-# TiCDC OpenAPI
+# TiCDC OpenAPI v1
 
 <!-- markdownlint-disable MD024 -->
+
+> **Note**
+>
+> TiCDC OpenAPI v1 is deprecated and will be deleted in the future. It is recommended to use [TiCDC OpenAPI v2](/ticdc/ticdc-open-api-v2.md).
 
 TiCDC provides the OpenAPI feature for querying and operating the TiCDC cluster, which is similar to the feature of [`cdc cli` tool](/ticdc/ticdc-manage-changefeed.md).
 
@@ -163,7 +167,7 @@ The configuration parameters of sink are as follows:
 
 ### Example
 
-The following request creates a replication task with an ID of `test5` and a `sink_uri` of `blackhome://`.
+The following request creates a replication task with an ID of `test5` and a `sink_uri` of `blackhole://`.
 
 {{< copyable "shell-regular" >}}
 

@@ -13,7 +13,7 @@ tiup cluster upgrade <cluster-name> <version> [flags]
 ```
 
 - `<cluster-name>`: the cluster name to operate on. If you forget the cluster name, you can check it with the [cluster list](/tiup/tiup-component-cluster-list.md) command.
-- `<version>`: the target version to upgrade to, such as `v6.5.0`. Currently, it is only allowed to upgrade to a version higher than the current cluster, that is, no downgrade is allowed. It is also not allowed to upgrade to the nightly version.
+- `<version>`: the target version to upgrade to, such as `v7.3.0`. Currently, it is only allowed to upgrade to a version higher than the current cluster, that is, no downgrade is allowed. It is also not allowed to upgrade to the nightly version.
 
 ## Options
 
@@ -31,7 +31,7 @@ tiup cluster upgrade <cluster-name> <version> [flags]
 
 - When upgrading PD or TiKV, the leader of the upgraded node is migrated to other nodes first. The migration process takes some time, and you can set the maximum wait time (in seconds) by the `-transfer-timeout` option. After the timeout, the wait is skipped and the service is upgraded directly.
 - Data type: `uint`
-- Default: 300
+- Default: 600
 
 > **Note:**
 >

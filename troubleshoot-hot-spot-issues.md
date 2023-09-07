@@ -87,9 +87,9 @@ Hover over the bright block, you can see what table or index has a heavy load. F
 
 ## Use `SHARD_ROW_ID_BITS` to process hotspots
 
-For a non-integer primary key or a table without a primary key or a joint primary key, TiDB uses an implicit auto-increment RowID. When a large number of `INSERT` operations exist, the data is written into a single Region, resulting in a write hotspot.
+For a non-clustered primary key or a table without a primary key, TiDB uses an implicit auto-increment RowID. When a large number of `INSERT` operations exist, the data is written into a single Region, resulting in a write hotspot.
 
-By setting `SHARD_ROW_ID_BITS`, row IDs are scattered and written into multiple Regions, which can alleviate the write hotspot issue.
+By setting [`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md), row IDs are scattered and written into multiple Regions, which can alleviate the write hotspot issue.
 
 ```
 SHARD_ROW_ID_BITS = 4 # Represents 16 shards.
@@ -180,3 +180,7 @@ For more details, see [Coprocessor Cache](/coprocessor-cache.md).
 
 - [Highly Concurrent Write Best Practices](/best-practices/high-concurrency-best-practices.md)
 - [Split Region](/sql-statements/sql-statement-split-region.md)
+
+## Scatter read hotspots
+
+In a read hotspot scenario, the hotspot TiKV node cannot process read requests in time, resulting in the read requests queuing. However, not all TiKV resources are exhausted at this time. To reduce latency, TiDB v7.1.0 introduces the load-based replica read feature, which allows TiDB to read data from other TiKV nodes without queuing on the hotspot TiKV node. You can control the queue length of read requests using the [`tidb_load_based_replica_read_threshold`](/system-variables.md#tidb_load_based_replica_read_threshold-new-in-v700) system variable. When the estimated queue time of the leader node exceeds this threshold, TiDB prioritizes reading data from follower nodes. This feature can improve read throughput by 70% to 200% in a read hotspot scenario compared to not scattering read hotspots.

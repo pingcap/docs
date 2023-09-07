@@ -18,12 +18,13 @@ The following is the task configuration file template which allows you to perfor
 ```yaml
 ---
 
-# ----------- Global setting -----------
+# ----------- Global configuration -----------
 ## ********* Basic configuration *********
 name: test                      # The name of the task. Should be globally unique.
 task-mode: all                  # The task mode. Can be set to `full`(only migrates full data)/`incremental`(replicates binlogs synchronously)/`all` (replicates both full data and incremental binlogs).
 shard-mode: "pessimistic"       # The shard merge mode. Optional modes are ""/"pessimistic"/"optimistic". The "" mode is used by default which means sharding DDL merge is disabled. If the task is a shard merge task, set it to the "pessimistic" mode.
                                 # After understanding the principles and restrictions of the "optimistic" mode, you can set it to the "optimistic" mode.
+strict-optimistic-shard-mode: false # Only takes effect in the optimistic mode. This configuration restricts the behavior of the optimistic mode. The default value is false. Introduced in v7.2.0. For details, see https://docs.pingcap.com/tidb/v7.2/feature-shard-merge-optimistic
 meta-schema: "dm_meta"          # The downstream database that stores the `meta` information.
 timezone: "Asia/Shanghai"       # The timezone used in SQL Session. By default, DM uses the global timezone setting in the target cluster, which ensures the correctness automatically. A customized timezone does not affect data migration but is unnecessary.
 case-sensitive: false           # Determines whether the schema/table is case-sensitive.
@@ -160,6 +161,18 @@ loaders:
     # If checksum fails, the import is abnormal, which means the data is inconsistent or lost.
     # Therefore, it is recommended to always enable checksum.
     checksum-physical: "required"
+    # Only available for physical import. Determines whether to perform the `ANALYZE TABLE <table>` operation for each table after the CHECKSUM process is completed.
+    # - "required" (default). Indicates that the Analyze operation will be performed after the import is complete. If the analysis fails, the task will pause and require manual processing by the user.
+    # - "optional". Indicates that the data will be analyzed after the import is complete. If the analysis fails, a warning log will be printed and the task will not be paused.
+    # - "off". Indicates that no data analysis will be performed after the import is complete.
+    # Analyze only affects statistics data and it is recommended that Analyze is set to off in most scenarios.
+    analyze: "off"
+    # Only available for physical import. The concurrency of sending KV data to TiKV. This can be increased when the direct network transfer speed between dm-worker and TiKV exceeds 10,000 Mb/s.
+    # range-concurrency: 16
+    # Only available for physical import mode. Whether to enable compression when sending KV data to TiKV. Currently, only Gzip compression is supported and can be specified using either "gzip" or "gz". Compression is not enabled by default.
+    # compress-kv-pairs: ""
+    # One or more PD server addresses. If no address is specified, use the PD address information from the TiDB query by default.
+    # pd-addr: "192.168.0.1:2379"
 
 # Configuration arguments of the sync processing unit.
 syncers:
@@ -226,6 +239,8 @@ mysql-instances:
 ```
 
 ## Configuration order
+
+From the sample configuration file, you can see that the configuration file contains two parts: `Global configuration` and `Instance configuration`, where the `Global configuration` contains `Basic configuration` and `Feature configuration set`. The configuration order is as follows:
 
 1. Edit the [global configuration](#global-configuration).
 2. Edit the [instance configuration](#instance-configuration) based on the global configuration.
