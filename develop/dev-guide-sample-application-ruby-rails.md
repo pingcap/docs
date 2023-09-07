@@ -146,7 +146,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
     cp .env.example .env
     ```
 
-2. Edit the `.env` file, set up the environment variables as follows, replace the `<user>`, `<password>`, `<host>`, `<port>`, and `<database>` with your own TiDB connection information:
+2. Edit the `.env` file, set up the `DATABASE_URL` environment variable as follows, and replace the `<user>`, `<password>`, `<host>`, `<port>`, and `<database>` with your own TiDB connection information:
 
     ```dotenv
     DATABASE_URL=mysql2://<user>:<password>@<host>:<port>/<database>
