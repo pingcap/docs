@@ -227,7 +227,7 @@ production:
 
 ### Insert data
 
-The following query creates a single Player with two fields and return the Player object:
+The following query creates a single Player with two fields and returns the created `Player` object:
 
 ```ruby
 new_player = Player.create!(coins: 100, goods: 100)
