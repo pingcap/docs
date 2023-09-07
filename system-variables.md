@@ -2278,10 +2278,10 @@ Query OK, 0 rows affected (0.09 sec)
 
 <CustomContent platform="tidb-cloud">
 
-- Scope: SESSION | GLOBAL
+- Scope: GLOBAL
 - Persists to cluster: Yes
 - Type: Boolean
-- Default value: `OFF`
+- Default value: `ON`
 - This variable controls whether to enable the new [Pipeline Execution Model](https://docs.pingcap.com/tidb/v7.2/tiflash-pipeline-model) in TiFlash.
 - When this variable is set to `ON` to enable the pipeline execution model, the query pushed down to TiFlash will be executed using the new pipeline execution model.
 - When this variable is set to `OFF` to disable the pipeline execution model, the query pushed down to TiFlash will be executed using the original stream model.
