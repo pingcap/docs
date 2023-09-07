@@ -223,7 +223,7 @@ production:
 
 > **Note**
 >
-> For TiDB Serverless, TLS connection **MUST** be enabled via `ssl_mode` parameter value to `verify_identity` in `DATABASE_URL` when using public endpoint, but you **don't** have to specify an SSL CA certificate via `DATABASE_URL`, because mysql2 gem will search for existing CA certificates in a particular order until a file is discovered.
+> For TiDB Serverless, TLS connection **MUST** be enabled via setting the `ssl_mode` query parameter to `verify_identity` in `DATABASE_URL` when using public endpoint, but you **don't** have to specify an SSL CA certificate via `DATABASE_URL`, because mysql2 gem will search for existing CA certificates in a particular order until a file is discovered.
 
 ### Insert data
 
