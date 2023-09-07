@@ -60,6 +60,8 @@ TiFlash supports the following push-down expressions:
     * MINUTE
     * SECOND
 
+* All window functions can not be pushed down to TiFlash when rows or range type frame is contained.
+
 If a query encounters unsupported push-down calculations, TiDB needs to complete the remaining calculations, which might greatly affect the TiFlash acceleration effect. The currently unsupported operators and expressions might be supported in future versions.
 
 Functions like `MAX()` are supported for push-down when used as aggregate functions, but not as window functions.
