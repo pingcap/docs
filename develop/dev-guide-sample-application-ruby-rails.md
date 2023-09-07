@@ -102,7 +102,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 
    > **Note**
    >
-   > For TiDB Serverless, TLS connection **MUST** be enabled with `ssl_mode=verify_identity` query parameter when using public endpoint.
+   > For TiDB Serverless, TLS connection **MUST** be enabled with the `ssl_mode=verify_identity` query parameter when using public endpoint.
 
 7. Save the `.env` file.
 
