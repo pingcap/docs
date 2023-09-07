@@ -1,6 +1,6 @@
 ---
 title: Connect to TiDB with Rails framework and ActiveRecord ORM
-summary: Learn how to connect to TiDB using Rails framework. This tutorial gives ruby sample code snippets that work with TiDB using Rails framework and ActiveRecord ORM.
+summary: Learn how to connect to TiDB using the Rails framework. This tutorial gives Ruby sample code snippets that work with TiDB using the Rails framework and ActiveRecord ORM.
 ---
 
 # Connect to TiDB with Rails Framework and ActiveRecord ORM
