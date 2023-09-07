@@ -84,7 +84,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 
 2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
 
-3. In the connection dialog, select `Rails` from the **Connect With** dropdown and keep the default setting of the **Endpoint Type** as `Public`.
+3. In the connection dialog, select `Rails` from the **Connect With** drop-down list and keep the default setting of the **Endpoint Type** as `Public`.
 
 4. If you have not set a password yet, click **Create password** to generate a random password.
 
