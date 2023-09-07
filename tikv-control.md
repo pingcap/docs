@@ -685,4 +685,4 @@ Resolver:
     stopped: false,
 ```
 
-The subcommand is useful in diagnosing issues related to Stale Read and safe-ts. For details, see [Understanding Stale Read and safe-ts in TiKV](/stale_read_user_guide.md).
+The subcommand is useful in diagnosing issues related to Stale Read and safe-ts. For details, see [Understanding Stale Read and safe-ts in TiKV](/troubleshoot-stale-read.md).
