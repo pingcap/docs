@@ -277,7 +277,7 @@ For an example of using MySQL Connector/Python to build a TiDB application, see 
 
 Support level: **Full**
 
-[Django](https://docs.djangoproject.com/) is a popular Python web framework. We have developed an adapter `django-tidb` for Django to solve compatibility issues. For installation instructions, please refer to the [documentation](https://github.com/pingcap/django-tidb#installation-guide).
+[Django](https://docs.djangoproject.com/) is a popular Python web framework. To solve the compatibility issue between TiDB and Django, PingCAP has developed an adapter `django-tidb`. Installation instructions can be found in the [`django-tidb` documentation](https://github.com/pingcap/django-tidb#installation-guide).
 
 For an example of using Django to build a TiDB application, see [Connect to TiDB with Django](/develop/dev-guide-sample-application-python-django.md).
 
