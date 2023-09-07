@@ -38,7 +38,7 @@ TiDB は MySQL プロトコルと高い互換性がありますが、一部の�
   <div label="TiDB-JDBC">
     サポートレベル:**フル**
 
-    [TiDB-JDBC](https://github.com/pingcap/mysql-connector-j)は、MySQL 8.0.29 に基づいてカスタマイズされたJavaドライバーです。 MySQL 正式バージョン 8.0.29 に基づいてコンパイルされた TiDB-JDBC は、オリジナルの JDBC の準備モードにおけるマルチパラメータおよびマルチフィールド EOF のバグを修正し、自動 TiCDC スナップショット メンテナンスや SM3 認証プラグインなどの機能を追加します。
+    [TiDB-JDBC](https://github.com/pingcap/mysql-connector-j) MySQL 8.0.29 に基づいてカスタマイズされたJavaドライバーです。 MySQL 正式バージョン 8.0.29 に基づいてコンパイルされた TiDB-JDBC は、オリジナルの JDBC の準備モードにおけるマルチパラメータおよびマルチフィールド EOF のバグを修正し、自動 TiCDC スナップショット メンテナンスや SM3 認証プラグインなどの機能を追加します。
 
     SM3 に基づく認証は、TiDB の TiDB-JDBC でのみサポートされています。
 
@@ -122,7 +122,7 @@ TiDB は MySQL プロトコルと高い互換性がありますが、一部の�
     -   Hibernate を使用してネイティブJavaによって TiDB アプリケーションを構築する例については、 [TiDB と Hibernate を使用してシンプルな CRUD アプリを構築する](/develop/dev-guide-sample-application-java-hibernate.md)を参照してください。
     -   Spring Data JPA または Hibernate を使用して Spring で TiDB アプリケーションを構築する例については、 [Spring Boot を使用して TiDB アプリを構築する](/develop/dev-guide-sample-application-java-spring-boot.md)を参照してください。
 
-    さらに、 TiDB ダイアレクトを[Hibernate 設定ファイル](https://www.tutorialspoint.com/hibernate/hibernate_configuration.htm) : `org.hibernate.dialect.TiDBDialect`で指定する必要があります。これは Hibernate `6.0.0.Beta2`以降でのみサポートされます。 `Hibernate`バージョンが`6.0.0.Beta2`より前の場合は、まずそれをアップグレードしてください。
+    さらに、 TiDB ダイアレクトを[Hibernate 構成ファイル](https://www.tutorialspoint.com/hibernate/hibernate_configuration.htm) : `org.hibernate.dialect.TiDBDialect`で指定する必要があります。これは Hibernate `6.0.0.Beta2`以降でのみサポートされます。 `Hibernate`バージョンが`6.0.0.Beta2`より前の場合は、まずそれをアップグレードしてください。
 
     > **注記：**
     >
@@ -236,7 +236,7 @@ GORM を使用して TiDB アプリケーションを構築する例について
   <div label="PyMySQL">
     サポートレベル:**互換性あり**
 
-    [PyMySQL ドキュメント](https://pypi.org/project/PyMySQL/)に従ってドライバーをダウンロードして設定できます。 PyMySQL 1.0.2 以降のバージョンを使用することをお勧めします。
+    [PyMySQL ドキュメント](https://pypi.org/project/PyMySQL/)に従ってドライバーをダウンロードして構成できます。 PyMySQL 1.0.2 以降のバージョンを使用することをお勧めします。
 
     PyMySQL を使用して TiDB アプリケーションを構築する例については、 [PyMySQL を使用して TiDB に接続する](/develop/dev-guide-sample-application-python-pymysql.md)を参照してください。
   </div>
@@ -261,6 +261,14 @@ GORM を使用して TiDB アプリケーションを構築する例について
 ### Python ORM フレームワーク {#python-orm-frameworks}
 
 <SimpleTab>
+  <div label="Django">
+    サポートレベル:**フル**
+
+    [ジャンゴ](https://docs.djangoproject.com/)は人気のある Python Web フレームワークです。 TiDB と Django の間の互換性の問題を解決するために、PingCAP は TiDB 方言`django-tidb`を提供します。インストールするには、 [`django-tidb`ドキュメント](https://github.com/pingcap/django-tidb#installation-guide)が表示されます。
+
+    Django を使用して TiDB アプリケーションを構築する例については、 [Django を使用して TiDB に接続する](/develop/dev-guide-sample-application-python-django.md)を参照してください。
+  </div>
+
   <div label="SQLAlchemy">
     サポートレベル:**フル**
 
@@ -274,7 +282,7 @@ GORM を使用して TiDB アプリケーションを構築する例について
 
     [ピーピー](http://docs.peewee-orm.com/en/latest/)は、Python の人気のある ORM フレームワークです。アプリケーション内のすべての依存関係を取得するには、 `pip install peewee==3.15.4`コマンドを使用します。 peewee 3.15.4 以降のバージョンを使用することをお勧めします。
 
-    peewee を使用して TiDB アプリケーションを構築する例については、 [TiDB と peewee を使用してシンプルな CRUD アプリを構築する](/develop/dev-guide-sample-application-python-peewee.md#step-2-get-the-code)を参照してください。
+    peewee を使用して TiDB アプリケーションを構築する例については、 [peewee で TiDB に接続する](/develop/dev-guide-sample-application-python-peewee.md#step-2-get-the-code)を参照してください。
   </div>
 </SimpleTab>
 

@@ -6,8 +6,6 @@ aliases: ['/tidbcloud/serverless-tier-limitations']
 
 # TiDB サーバーレスの制限とクォータ {#tidb-serverless-limitations-and-quotas}
 
-<!-- markdownlint-disable MD026 -->
-
 TiDB サーバーレスは、TiDB がサポートするほぼすべてのワークロードで動作しますが、TiDB セルフホストまたは TiDB 専用クラスターと TiDB サーバーレス クラスターの間には機能の違いがいくつかあります。このドキュメントでは、TiDB サーバーレスの制限について説明します。
 
 私たちは常に、TiDB Serverless と TiDB Dended の間の機能のギャップを埋めています。これらの機能またはギャップ内の機能が必要な場合は、機能リクエストに[TiDB専用](/tidb-cloud/select-cluster-tier.md#tidb-dedicated)または[お問い合わせ](https://www.pingcap.com/contact-us/?from=en)を使用してください。
@@ -38,7 +36,6 @@ TiDB サーバーレスは、TiDB がサポートするほぼすべてのワー�
 -   [組み込みのアラート](/tidb-cloud/monitor-built-in-alerting.md)は現在利用できません。
 -   [キービジュアライザー](/tidb-cloud/tune-performance.md#key-visualizer)は現在利用できません。
 -   [インデックスの洞察](/tidb-cloud/tune-performance.md#index-insight-beta)は現在利用できません。
--   [クラスタイベント](/tidb-cloud/tidb-cloud-events.md)は現在利用できません。
 
 ### セルフサービスアップグレード {#self-service-upgrades}
 
@@ -59,7 +56,7 @@ TiDB サーバーレスは、TiDB がサポートするほぼすべてのワー�
 
 TiDB Cloudの組織ごとに、デフォルトで最大 5 つの TiDB サーバーレス クラスターを作成できます。さらに TiDB サーバーレス クラスターを作成するには、クレジット カードを追加し、使用量を[支出制限](/tidb-cloud/tidb-cloud-glossary.md#spending-limit)に設定する必要があります。
 
-組織内の最初の 5 つの TiDB サーバーレス クラスターに対して、 TiDB Cloud は各クラスターに次のように無料の使用量割り当てを提供します。
+組織内の最初の 5 つの TiDB サーバーレス クラスターに対して、 TiDB Cloud は各クラスターに次のように無料の使用量クォータを提供します。
 
 -   行ベースのstorage: 5 GiB
 -   [リクエストユニット (RU)](/tidb-cloud/tidb-cloud-glossary.md#request-unit) : 月あたり 5,000 万 RU

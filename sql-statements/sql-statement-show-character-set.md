@@ -35,7 +35,7 @@ mysql> SHOW CHARACTER SET;
 
 ## MySQLの互換性 {#mysql-compatibility}
 
-TiDB での`SHOW CHARACTER SET`ステートメントの使用は、MySQL と完全に互換性があります。ただし、TiDB の文字セットには、MySQL と比較してデフォルトの照合順序が異なる場合があります。詳細は[MySQLとの互換性](/mysql-compatibility.md)を参照してください。互換性の違いを見つけた場合は、 [GitHub の問題](https://github.com/pingcap/tidb/issues/new/choose)を通じて報告してください。
+TiDB での`SHOW CHARACTER SET`ステートメントの使用は、MySQL と完全に互換性があります。ただし、TiDB の文字セットには、MySQL と比較してデフォルトの照合順序が異なる場合があります。詳細は[MySQLとの互換性](/mysql-compatibility.md)を参照してください。互換性の違いが見つかった場合は、 [バグを報告](https://docs.pingcap.com/tidb/stable/support) .
 
 ## こちらも参照 {#see-also}
 

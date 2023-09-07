@@ -5,7 +5,7 @@ summary: An overview of the usage of RENAME INDEX for the TiDB database.
 
 # インデックスの名前を変更 {#rename-index}
 
-ステートメント`ALTER TABLE .. RENAME INDEX`は、既存のインデックスの名前を新しい名前に変更します。 TiDB ではこの操作は瞬時に行われ、メタデータの変更のみが必要です。
+ステートメント`ALTER TABLE .. RENAME INDEX`は、既存のインデックスの名前を新しい名前に変更します。 TiDB ではこの操作は即座に行われ、メタデータの変更のみが必要です。
 
 ## あらすじ {#synopsis}
 
@@ -51,7 +51,7 @@ Create Table: CREATE TABLE `t1` (
 
 ## MySQLの互換性 {#mysql-compatibility}
 
-TiDB の`RENAME INDEX`ステートメントは MySQL と完全な互換性があります。互換性の違いを見つけた場合は、 [GitHub の問題](https://github.com/pingcap/tidb/issues/new/choose)を介して報告してください。
+TiDB の`RENAME INDEX`ステートメントは MySQL と完全な互換性があります。互換性の違いが見つかった場合は、 [バグを報告](https://docs.pingcap.com/tidb/stable/support) .
 
 ## こちらも参照 {#see-also}
 

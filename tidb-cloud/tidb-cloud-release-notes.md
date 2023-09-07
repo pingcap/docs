@@ -8,6 +8,43 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 このページには 2023 年[TiDB Cloud](https://www.pingcap.com/tidb-cloud/)のリリースノートが記載されています。
 
+## 2023 年 9 月 5 日 {#september-5-2023}
+
+**一般的な変更点**
+
+-   [データサービス（ベータ版）](https://tidbcloud.com/console/data-service) 、さまざまな状況での特定のレート制限要件を満たすために、各 API キーのレート制限をカスタマイズすることをサポートします。
+
+    API キーを[作成する](/tidb-cloud/data-service-api-key.md#create-an-api-key)または[編集](/tidb-cloud/data-service-api-key.md#edit-an-api-key)にすると、そのレート制限を調整できます。
+
+    詳細については、 [レート制限](/tidb-cloud/data-service-api-key.md#rate-limiting)を参照してください。
+
+-   [TiDB専用](/tidb-cloud/select-cluster-tier.md#tidb-dedicated)クラスターの新しい AWS リージョンをサポートします: サンパウロ (sa-east-1)。
+
+-   [TiDB専用](/tidb-cloud/select-cluster-tier.md#tidb-dedicated)つのクラスターごとに、IP アクセス リストへの最大 100 個の IP アドレスの追加をサポートします。
+
+    詳細については、 [IPアクセスリストを設定する](/tidb-cloud/configure-ip-access-list.md)を参照してください。
+
+**コンソールの変更**
+
+-   [TiDB サーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-serverless)クラスターの**「イベント」**ページを導入します。このページには、クラスターに対する主な変更の記録が表示されます。
+
+    このページでは、過去 7 日間のイベント履歴を表示し、トリガー時間やアクションを開始したユーザーなどの重要な詳細を追跡できます。
+
+    詳細については、 [TiDB Cloudクラスター イベント](/tidb-cloud/tidb-cloud-events.md)を参照してください。
+
+**APIの変更**
+
+-   [AWS プライベートリンク](https://aws.amazon.com/privatelink/?privatelink-blogs.sort-by=item.additionalFields.createdDate&#x26;privatelink-blogs.sort-order=desc)または[Google Cloud プライベート サービス コネクト](https://cloud.google.com/vpc/docs/private-service-connect) for [TiDB専用](/tidb-cloud/select-cluster-tier.md#tidb-dedicated)クラスターを管理するためのいくつかのTiDB CloudAPI エンドポイントをリリースします。
+
+    -   クラスターのプライベート エンドポイント サービスを作成する
+    -   クラスターのプライベート エンドポイント サービス情報を取得する
+    -   クラスターのプライベート エンドポイントを作成する
+    -   クラスターのすべてのプライベート エンドポイントを一覧表示する
+    -   プロジェクト内のすべてのプライベート エンドポイントを一覧表示する
+    -   クラスターのプライベート エンドポイントを削除する
+
+    詳細については、 [APIドキュメント](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster)を参照してください。
+
 ## 2023 年 8 月 23 日 {#august-23-2023}
 
 **一般的な変更点**
@@ -169,7 +206,7 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 -   [TiDB サーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-serverless)が一般提供になりました。
 
--   TiDB Bot (ベータ) は、多言語サポート、24 時間年中無休のリアルタイム応答、統合されたドキュメント アクセスを提供する OpenAI 搭載チャットボットです。
+-   TiDB Bot (ベータ版) は、多言語サポート、年中無休のリアルタイム応答、統合されたドキュメント アクセスを提供する OpenAI 搭載チャットボットです。
 
     TiDB ボットには次の利点があります。
 
@@ -185,7 +222,7 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
     [TiDB Cloudコンソール](/tidb-cloud/branch-manage.md)または[TiDB CloudCLI](/tidb-cloud/ticloud-branch-create.md)のいずれかを使用して、2023 年 7 月 5 日以降に作成された TiDB サーバーレス クラスターのブランチを作成できます。
 
-    アプリケーション開発に GitHub を使用する場合は、TiDB サーバーレス ブランチを GitHub CI/CD パイプラインに統合できます。これにより、本番データベースに影響を与えることなく、ブランチを使用してプル リクエストを自動的にテストできます。詳細については、 [TiDB サーバーレス ブランチング (ベータ版) を GitHub と統合する](/tidb-cloud/branch-github-integration.md)を参照してください。
+    アプリケーション開発に GitHub を使用する場合、TiDB サーバーレス ブランチを GitHub CI/CD パイプラインに統合できます。これにより、本番データベースに影響を与えることなく、ブランチを使用してプル リクエストを自動的にテストできます。詳細については、 [TiDB サーバーレス ブランチング (ベータ版) を GitHub と統合する](/tidb-cloud/branch-github-integration.md)を参照してください。
 
 -   [TiDB専用](/tidb-cloud/select-cluster-tier.md#tidb-dedicated)クラスターの毎週のバックアップをサポートします。詳細については、 [TiDB 専用データのバックアップと復元](/tidb-cloud/backup-and-restore.md#automatic-backup)を参照してください。
 
@@ -237,7 +274,7 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
     この機能強化により、TiDB 専用クラスターのデータstorage容量が増加し、ワークロードのスケーリング効率が向上し、増大するデータ要件に対応できます。
 
-    詳細については、 [クラスターのサイズを設定する](/tidb-cloud/size-your-cluster.md)を参照してください。
+    詳細については、 [クラスターのサイズを調整する](/tidb-cloud/size-your-cluster.md)を参照してください。
 
 -   [モニタリングメトリクスの保持期間](/tidb-cloud/built-in-monitoring.md#metrics-retention-policy) for [TiDB サーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-serverless)クラスターを 3 日間から 7 日間に延長します。
 
@@ -508,7 +545,7 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 -   [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-dedicated)クラスターの[アラート](/tidb-cloud/monitor-built-in-alerting.md)ページを導入します。このページには、各Dedicated Tierクラスターのアクティブなアラートとクローズされたアラートの両方がリストされます。
 
-    **[アラート]**ページには次の内容が表示されます。
+    **[アラート]**ページには次の情報が表示されます。
 
     -   直感的でユーザーフレンドリーなユーザーインターフェイス。アラート通知メールを購読していない場合でも、このページでクラスターのアラートを表示できます。
     -   高度なフィルタリング オプションにより、重大度、ステータス、その他の属性に基づいてアラートを迅速に検索して並べ替えることができます。また、過去 7 日間の履歴データを表示できるため、アラート履歴の追跡が容易になります。
@@ -564,7 +601,7 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 -   [Serverless Tier](/tidb-cloud/select-cluster-tier.md#tidb-serverless)クラスターの[遅いクエリ](/tidb-cloud/tune-performance.md#slow-query)ページ用の新しいネイティブ Web インフラストラクチャをリリースします。
 
-    この新しいインフラストラクチャを使用すると、 [遅いクエリ](/tidb-cloud/tune-performance.md#slow-query)ページ内を簡単に移動し、より直観的かつ効率的な方法で必要な情報にアクセスできます。新しいインフラストラクチャは UX に関する多くの問題も解決し、SQL 診断プロセスをより使いやすくしています。
+    この新しいインフラストラクチャを使用すると、 [遅いクエリ](/tidb-cloud/tune-performance.md#slow-query)ページ内を簡単に移動し、より直感的かつ効率的な方法で必要な情報にアクセスできます。新しいインフラストラクチャは UX に関する多くの問題も解決し、SQL 診断プロセスをより使いやすくしています。
 
 ## 2023 年 3 月 21 日 {#march-21-2023}
 

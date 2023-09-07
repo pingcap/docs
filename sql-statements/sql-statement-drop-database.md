@@ -46,7 +46,7 @@ mysql> SHOW DATABASES;
 
 ## MySQLの互換性 {#mysql-compatibility}
 
-TiDB の`DROP DATABASE`ステートメントは MySQL と完全な互換性があります。互換性の違いを見つけた場合は、 [GitHub の問題](https://github.com/pingcap/tidb/issues/new/choose)を介して報告してください。
+TiDB の`DROP DATABASE`ステートメントは MySQL と完全な互換性があります。互換性の違いが見つかった場合は、 [バグを報告](https://docs.pingcap.com/tidb/stable/support) .
 
 ## こちらも参照 {#see-also}
 

@@ -72,7 +72,7 @@ ERROR 1141 (42000): There is no such grant defined for user 'newuser' on host '%
 
 ## MySQLの互換性 {#mysql-compatibility}
 
-`RENAME USER`は MySQL と完全な互換性があることが期待されています。互換性の違いを見つけた場合は、 GitHub [問題](https://github.com/pingcap/tidb/issues/new/choose)を送信してください。
+`RENAME USER`は MySQL と完全な互換性があることが期待されています。互換性の違いが見つかった場合は、 [バグを報告](https://docs.pingcap.com/tidb/stable/support)を行うことができます。
 
 ## こちらも参照 {#see-also}
 

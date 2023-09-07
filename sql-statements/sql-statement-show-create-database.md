@@ -54,7 +54,7 @@ SHOW CREATE SCHEMA IF NOT EXISTS test;
 
 ## MySQLの互換性 {#mysql-compatibility}
 
-`SHOW CREATE DATABASE`は MySQL と完全な互換性があることが期待されています。互換性の違いを見つけた場合は、 GitHub [問題](https://github.com/pingcap/tidb/issues/new/choose)を送信してください。
+`SHOW CREATE DATABASE`は MySQL と完全な互換性があることが期待されています。互換性の違いが見つかった場合は、 [バグを報告](https://docs.pingcap.com/tidb/stable/support)を実行できます。
 
 ## こちらも参照 {#see-also}
 

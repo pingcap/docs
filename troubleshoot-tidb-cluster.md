@@ -5,7 +5,7 @@ summary: Learn how to diagnose and resolve issues when you use TiDB.
 
 # TiDBクラスタのトラブルシューティング ガイド {#tidb-cluster-troubleshooting-guide}
 
-このガイドは、TiDB の使用中に基本的な問題を診断して解決するのに役立ちます。問題が解決しない場合は、次の情報と[問題を作成する](https://github.com/pingcap/tidb/issues/new/choose)を収集してください。
+このガイドは、TiDB の使用中に発生する基本的な問題の診断と解決に役立ちます。問題が解決しない場合は、次の情報を収集してください[バグを報告](/support.md) :
 
 -   正確なエラーメッセージとエラー発生時の操作
 -   すべてのコンポーネントの状態
@@ -27,7 +27,7 @@ summary: Learn how to diagnose and resolve issues when you use TiDB.
 
     -   すべてのプロセスが実行されている場合は、 `tidb-server`ログをチェックして、次のメッセージが表示されるかどうかを確認します。
         -   InformationSchema is out of date: このメッセージは、 `tikv-server`に接続できない場合に表示されます。 `pd-server`と`tikv-server`の状態とログを確認します。
-        -   panic: このメッセージは、プログラムに問題がある場合に表示されます。詳細なpanicログと[問題を作成する](https://github.com/pingcap/tidb/issues/new/choose)を提供してください。
+        -   panic: このメッセージは、プログラムに問題がある場合に表示されます。詳細なpanicログを提供してください[バグを報告](/support.md) 。
 
 3.  データがクリアされ、サービスが再デプロイされた場合は、次のことを確認してください。
 
@@ -40,7 +40,7 @@ summary: Learn how to diagnose and resolve issues when you use TiDB.
 
 -   起動パラメータにエラーがあります。
 
-    [TiDB の構成とオプション](/command-line-flags-for-tidb-configuration.md)参照してください。
+    [TiDB の構成とオプション](/command-line-flags-for-tidb-configuration.md)を参照してください。
 
 -   港が占領されています。
 
@@ -95,7 +95,7 @@ summary: Learn how to diagnose and resolve issues when you use TiDB.
 
 ## TiDBpanic {#tidb-panic}
 
-panicログと[問題を作成する](https://github.com/pingcap/tidb/issues/new/choose)を提供してください。
+panicログを提供してください[バグを報告](/support.md) 。
 
 ## 接続が拒否されました {#the-connection-is-rejected}
 

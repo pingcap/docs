@@ -21,8 +21,6 @@ DatabaseOption ::=
 
 utf8mb4 文字セットを使用するようにテスト データベース スキーマを変更します。
 
-{{< copyable "" >}}
-
 ```sql
 ALTER DATABASE test DEFAULT CHARACTER SET = utf8mb4;
 ```
@@ -35,7 +33,7 @@ Query OK, 0 rows affected (0.00 sec)
 
 ## MySQLの互換性 {#mysql-compatibility}
 
-TiDB の`ALTER DATABASE`ステートメントは MySQL と完全な互換性があります。互換性の違いを見つけた場合は、 [GitHub の問題](https://github.com/pingcap/tidb/issues/new/choose)を介して報告してください。
+TiDB の`ALTER DATABASE`ステートメントは MySQL と完全な互換性があります。互換性の違いが見つかった場合は、 [バグを報告](https://docs.pingcap.com/tidb/stable/support) .
 
 ## こちらも参照 {#see-also}
 

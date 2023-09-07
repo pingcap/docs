@@ -16,17 +16,7 @@ aliases: ['/tidbcloud/migrate-data-into-tidb','/tidbcloud/migrate-incremental-da
 
 -   データ移行機能は、 **TiDB 専用**クラスターでのみ使用できます。
 
--   データ移行機能は、2022 年 11 月 9 日以降に次のリージョンで作成されたプロジェクトのクラスターでのみ使用できます。**プロジェクトが**その日より前に作成された場合、またはクラスターが別のリージョンにある場合、この機能はクラスターでは使用できません。また、 **[データ移行]**タブは、 TiDB Cloudコンソールのクラスター概要ページに表示されません。
-
-    -   AWS オレゴン州 (us-west-2)
-    -   AWS 北バージニア (us-east-1)
-    -   AWS シンガポール (ap-southeast-1)
-    -   AWS 東京 (ap-northeast-1)
-    -   AWS フランクフルト (eu-central-1)
-    -   AWS ソウル (ap-northeast-2)
-    -   Google Cloud オレゴン (us-west1)
-    -   Google Cloud シンガポール (asia-southeast1)
-    -   Google Cloud 東京 (asia-northeast1)
+-   データ移行機能は、2022 年 11 月 9 日以降に[特定の地域](https://www.pingcap.com/tidb-cloud-pricing-details/#dm-cost)で作成されたクラスターでのみ使用できます。**プロジェクト**がその日より前に作成された場合、またはクラスターが別のリージョンにある場合、この機能はクラスターおよび [**データ移行]**タブでは使用できません。 TiDB Cloudコンソールのクラスター概要ページには表示されません。
 
 -   Amazon Aurora MySQL ライター インスタンスは、既存のデータと増分データ移行の両方をサポートします。 Amazon Aurora MySQL リーダー インスタンスは、既存のデータ移行のみをサポートし、増分データ移行はサポートしません。
 

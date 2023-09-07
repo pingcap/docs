@@ -129,7 +129,7 @@ SHOW TABLES IN test;
 
 ## MySQLの互換性 {#mysql-compatibility}
 
-TiDB の`GRANT <role>`ステートメントは、MySQL 8.0 のロール機能と完全な互換性があります。互換性の違いを見つけた場合は、 [GitHub の問題](https://github.com/pingcap/tidb/issues/new/choose)を介して報告してください。
+TiDB の`GRANT <role>`ステートメントは、MySQL 8.0 のロール機能と完全な互換性があります。互換性の違いが見つかった場合は、 [バグを報告](https://docs.pingcap.com/tidb/stable/support) .
 
 ## こちらも参照 {#see-also}
 
@@ -141,7 +141,5 @@ TiDB の`GRANT <role>`ステートメントは、MySQL 8.0 のロール機能と
 -   [`SET DEFAULT ROLE`](/sql-statements/sql-statement-set-default-role.md)
 
 <CustomContent platform="tidb">
-
--   [役割ベースのアクセス制御](/role-based-access-control.md)
-
+  -   [役割ベースのアクセス制御](/role-based-access-control.md)
 </CustomContent>

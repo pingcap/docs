@@ -100,9 +100,9 @@
     -   [ソフトウェアとハ​​ードウェアの要件](/hardware-and-software-requirements.md)
     -   [環境コンフィグレーションチェックリスト](/check-before-deployment.md)
     -   クラスタトポロジの計画
-        -   [最小限のトポロジ](/minimal-deployment-topology.md)
-        -   [TiFlashトポロジー](/tiflash-deployment-topology.md)
-        -   [TiCDC トポロジー](/ticdc-deployment-topology.md)
+        -   [最小限のトポロジー](/minimal-deployment-topology.md)
+        -   [TiFlashトポロジ](/tiflash-deployment-topology.md)
+        -   [TiCDC トポロジ](/ticdc-deployment-topology.md)
         -   [TiDBBinlogトポロジ](/tidb-binlog-deployment-topology.md)
         -   [TiSpark トポロジ](/tispark-deployment-topology.md)
         -   [クロス DC トポロジ](/geo-distributed-deployment-topology.md)

@@ -9,7 +9,7 @@ summary: An overview of the usage of SHOW [FULL] COLUMNS FROM for the TiDB datab
 
 ステートメント`SHOW [FULL] FIELDS FROM <table_name>` 、 `DESC <table_name>` 、 `DESCRIBE <table_name>` 、および`EXPLAIN <table_name>` 、このステートメントの別名です。
 
-> **ノート：**
+> **注記：**
 >
 > `DESC TABLE <table_name>` 、 `DESCRIBE TABLE <table_name>` 、および`EXPLAIN TABLE <table_name>` 、上記のステートメントと同等ではありません。これらは[`DESC SELECT * FROM &#x3C;table_name>`](/sql-statements/sql-statement-explain.md)の別名です。
 
@@ -157,7 +157,7 @@ mysql> show full columns from mysql.user;
 
 ## MySQLの互換性 {#mysql-compatibility}
 
-TiDB の`SHOW [FULL] COLUMNS FROM`ステートメントは MySQL と完全な互換性があります。互換性の違いを見つけた場合は、 [GitHub の問題](https://github.com/pingcap/tidb/issues/new/choose)を介して報告してください。
+TiDB の`SHOW [FULL] COLUMNS FROM`ステートメントは MySQL と完全な互換性があります。互換性の違いが見つかった場合は、 [バグを報告](https://docs.pingcap.com/tidb/stable/support) .
 
 ## こちらも参照 {#see-also}
 

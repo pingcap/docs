@@ -85,6 +85,10 @@ TiDB で必要なバックグラウンド ジョブが原因で、RU 使用量�
 
 クラスターが無料クォータまたは使用制限に達すると、クラスターは読み取りおよび書き込み操作にスロットル措置を適用します。これらの操作は、クォータが増加するか、新しい月の初めに使用量がリセットされるまで制限されます。詳細については、 [TiDB サーバーレスの制限とクォータ](/tidb-cloud/serverless-limitations.md#usage-quota)を参照してください。
 
+### データのインポート中に RU 使用量の急増が観察されるのはなぜですか? {#why-do-i-observe-spikes-in-ru-usage-while-importing-data}
+
+TiDB サーバーレス クラスターのデータ インポート プロセス中、RU の消費はデータが正常にインポートされた場合にのみ発生するため、RU 使用量の急増につながります。
+
 ## Securityよくある質問 {#security-faqs}
 
 ### 私の TiDB サーバーレスは共有ですか、それとも専用ですか? {#is-my-tidb-serverless-shared-or-dedicated}

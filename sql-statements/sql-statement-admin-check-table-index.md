@@ -13,7 +13,7 @@ category: reference
 -   確認[FOREIGN KEY 制約](/foreign-key.md) ．
 -   PRIMARY KEY インデックスに[クラスター化された主キー](/clustered-indexes.md)が使用されているかどうかを確認します。
 
-`ADMIN CHECK [TABLE|INDEX]`で問題が見つかった場合は、インデックスを削除して再作成することで問題を解決できます。問題が解決しない場合は、GitHub で[問題](https://github.com/pingcap/tidb/issues/new/choose)を報告できます。
+`ADMIN CHECK [TABLE|INDEX]`で問題が見つかった場合は、インデックスを削除して再作成することで問題を解決できます。問題が解決しない場合は、 [バグを報告](https://docs.pingcap.com/tidb/stable/support)を実行できます。
 
 ## 原則 {#principles}
 

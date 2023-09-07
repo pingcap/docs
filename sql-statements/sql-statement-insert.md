@@ -97,11 +97,11 @@ mysql> SELECT * FROM t2;
 
 ## MySQLの互換性 {#mysql-compatibility}
 
-TiDB の`INSERT`ステートメントは MySQL と完全な互換性があります。互換性の違いを見つけた場合は、 [GitHub の問題](https://github.com/pingcap/tidb/issues/new/choose)を介して報告してください。
+TiDB の`INSERT`ステートメントは MySQL と完全な互換性があります。互換性の違いが見つかった場合は、 [バグを報告](https://docs.pingcap.com/tidb/stable/support) .
 
 ## こちらも参照 {#see-also}
 
 -   [消去](/sql-statements/sql-statement-delete.md)
 -   [選択する](/sql-statements/sql-statement-select.md)
 -   [アップデート](/sql-statements/sql-statement-update.md)
--   [交換](/sql-statements/sql-statement-replace.md)
+-   [交換する](/sql-statements/sql-statement-replace.md)

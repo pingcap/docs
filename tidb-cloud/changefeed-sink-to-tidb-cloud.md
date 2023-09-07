@@ -7,7 +7,7 @@ Summary: Learn how to create a changefeed to stream data from a TiDB Dedicated c
 
 このドキュメントでは、TiDB 専用クラスターから TiDB サーバーレス クラスターにデータをストリーミングする方法について説明します。
 
-> **ノート：**
+> **注記：**
 >
 > Changefeed 機能を使用するには、TiDB 専用クラスターのバージョンが v6.4.0 以降であることを確認してください。
 
@@ -25,6 +25,7 @@ Summary: Learn how to create a changefeed to stream data from a TiDB Dedicated c
     -   AWS フランクフルト (eu-central-1)
     -   AWS シンガポール (ap-southeast-1)
     -   AWS 東京 (ap-northeast-1)
+    -   AWS サンパウロ (sa-east-1)
 
 -   ソース TiDB 専用クラスターと宛先 TiDB サーバーレス クラスターは、同じプロジェクトおよび同じリージョン内に存在する必要があります。
 
@@ -47,7 +48,7 @@ Summary: Learn how to create a changefeed to stream data from a TiDB Dedicated c
     SET GLOBAL tidb_gc_life_time = '720h';
     ```
 
-2.  [バックアップデータ](/tidb-cloud/backup-and-restore.md#backup)を TiDB 専用クラスターからロードし、 [マイダンパー/マイローダー](https://centminmod.com/mydumper.html)などのコミュニティ ツールを使用して宛先 TiDB サーバーレス クラスターにデータをロードします。
+2.  [バックアップデータ](/tidb-cloud/backup-and-restore.md#backup)を TiDB 専用クラスターからロードし、次に[マイダンパー/マイローダー](https://centminmod.com/mydumper.html)などのコミュニティ ツールを使用して、宛先 TiDB サーバーレス クラスターにデータをロードします。
 
 3.  [Dumplingのエクスポートされたファイル](https://docs.pingcap.com/tidb/stable/dumpling-overview#format-of-exported-files)から、メタデータ ファイルからTiDB Cloudシンクの開始位置を取得します。
 

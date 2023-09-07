@@ -3,7 +3,7 @@ title: PREPARE | TiDB SQL Statement Reference
 summary: An overview of the usage of PREPARE for the TiDB database.
 ---
 
-# 準備 {#prepare}
+# 準備する {#prepare}
 
 `PREPARE`ステートメントは、サーバー側のプリペアド ステートメントへの SQL インターフェイスを提供します。
 
@@ -41,7 +41,7 @@ Query OK, 0 rows affected (0.00 sec)
 
 ## MySQLの互換性 {#mysql-compatibility}
 
-TiDB の`PREPARE`ステートメントは MySQL と完全な互換性があります。互換性の違いを見つけた場合は、 [GitHub の問題](https://github.com/pingcap/tidb/issues/new/choose)を介して報告してください。
+TiDB の`PREPARE`ステートメントは MySQL と完全な互換性があります。互換性の違いが見つかった場合は、 [バグを報告](https://docs.pingcap.com/tidb/stable/support) .
 
 ## こちらも参照 {#see-also}
 

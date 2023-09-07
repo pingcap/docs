@@ -131,8 +131,6 @@ TiDB Lightning は、 10 ギガビット ネットワーク カードと併用�
 
 1.  チェックポイントファイルを削除します。
 
-    {{< copyable "" >}}
-
     ```sh
     tidb-lightning-ctl --config conf/tidb-lightning.toml --checkpoint-remove=all
     ```
@@ -150,8 +148,6 @@ TiDB Lightning は、 10 ギガビット ネットワーク カードと併用�
 
     次のコマンドを使用してメタデータをクリーンアップします。
 
-    {{< copyable "" >}}
-
     ```sql
     DROP DATABASE IF EXISTS `lightning_metadata`;
     ```
@@ -161,8 +157,6 @@ TiDB Lightning は、 10 ギガビット ネットワーク カードと併用�
 1.  TiDB Lightningの設定ファイルで[`status-port`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-configuration)が指定されている場合は、この手順をスキップしてください。それ以外の場合は、USR1 信号をTiDB Lightningに送信して`status-port`を有効にする必要があります。
 
     `ps`などのコマンドを使用してTiDB Lightningのプロセス ID (PID) を取得し、次のコマンドを実行します。
-
-    {{< copyable "" >}}
 
     ```sh
     kill -USR1 <lightning-pid>
@@ -200,7 +194,7 @@ CREATE PLACEMENT POLICY p1 PRIMARY_REGION="us-east" REGIONS="us-east,us-west";
 
 **回避策:**
 
-TiDB Lightningを使用して SQL で配置ルールを使用するには、ターゲット テーブルにデータをインポートする**前に、**関連するラベルとオブジェクトがターゲット TiDB クラスターに作成されていることを確認する必要があります。 SQL の配置ルールは PD および TiKVレイヤーで機能するため、 TiDB Lightning は、インポートされたデータを保存するためにどの TiKV を使用する必要があるかを判断するために必要な情報を取得できます。このように、SQL のこの配置ルールはTiDB Lightningに対して透過的です。
+TiDB Lightningを使用して SQL で配置ルールを使用するには、ターゲット テーブルにデータをインポートする**前に、**関連するラベルとオブジェクトがターゲット TiDB クラスターに作成されていることを確認する必要があります。 SQL の配置ルールは PD および TiKVレイヤーで機能するため、 TiDB Lightning は、インポートされたデータを保存するためにどの TiKV を使用するかを判断するために必要な情報を取得できます。このように、SQL のこの配置ルールはTiDB Lightningに対して透過的です。
 
 手順は次のとおりです。
 
@@ -208,3 +202,48 @@ TiDB Lightningを使用して SQL で配置ルールを使用するには、タ�
 2.  TiKV と PD に必要なラベルを構成します。
 3.  配置ルールポリシーを作成し、作成したポリシーを対象テーブルに適用します。
 4.  TiDB Lightning を使用して、データをターゲットテーブルにインポートします。
+
+## TiDB LightningとDumpling を使用してスキーマをコピーするにはどうすればよいですか? {#how-can-i-use-tidb-lightning-and-dumpling-to-copy-a-schema}
+
+スキーマ定義とテーブル データの両方を 1 つのスキーマから新しいスキーマにコピーする場合は、このセクションの手順に従います。この例では、 `test`スキーマのコピーを`test2`という新しいスキーマに作成する方法を学びます。
+
+1.  `-B test`を使用して元のスキーマのバックアップを作成し、必要なスキーマのみを選択します。
+
+    ```
+    tiup dumpling -B test -o /tmp/bck1
+    ```
+
+2.  次の内容を含む`/tmp/tidb-lightning.toml`ファイルを作成します。
+
+    ```toml
+    [tidb]
+    host = "127.0.0.1"
+    port = 4000
+    user = "root"
+
+    [tikv-importer]
+    backend = "tidb"
+
+    [mydumper]
+    data-source-dir = "/tmp/bck1"
+
+    [[mydumper.files]]
+    pattern = '^[a-z]*\.(.*)\.[0-9]*\.sql$'
+    schema = 'test2'
+    table = '$1'
+    type = 'sql'
+
+    [[mydumper.files]]
+    pattern = '^[a-z]*\.(.*)\-schema\.sql$'
+    schema = 'test2'
+    table = '$1'
+    type = 'table-schema'
+    ```
+
+    この構成ファイルでは、元のダンプで使用されたものとは異なるスキーマ名を使用するため、 `schema = 'test2'`を設定します。ファイル名はテーブルの名前を決定するために使用されます。
+
+3.  この構成ファイルを使用してインポートを実行します。
+
+    ```
+    tiup tidb-lightning -config /tmp/tidb-lightning.toml
+    ```
