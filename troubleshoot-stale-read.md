@@ -56,6 +56,7 @@ When Stale Read issues occur, you might notice changes in the preceding metrics.
 The most common causes that can impact the effectiveness of Stale Read are as follows:
 
 - Transactions that take long time to commit.
+- Transactions live too long before they commits.
 - Delays in pushing the information of CheckLeader from the leader to the follower.
 
 ### Use Grafana to diagnose
@@ -122,6 +123,18 @@ The following list some actions you can take:
 If the locks exist due to ongoing large transactions, consider modifying your application logic as these locks can hinder the progress of resolve-ts.
 
 If the locks do not belong to any ongoing transactions, it might be due to a coordinator (TiDB) crashing after it prewrites the locks. In this case, TiDB will automatically resolve the locks. No action is required unless the problem persists.
+
+### Handle long-lived transactions
+
+Transactions that remain active for a long time could possibly block the advance of resolved-ts, even if they eventually commit quickly. This is because it's the start-ts of these long-lived transactions that are used to calculate the resolved-ts.
+
+To address this:
+
+Identify the Transaction: Begin by pinpointing the transaction associated with the locks. Understanding the reason behind their existence can be crucial. Leveraging logs can be particularly helpful.
+
+Examine Application Logic: If the prolonged transaction duration is a result of your application's logic, consider revising it to prevent such occurrences.
+
+Address Slow Queries: If the transaction's duration is extended due to slow queries, prioritize resolving these queries to alleviate the issue.
 
 ### Address CheckLeader issues
 
