@@ -5,7 +5,7 @@ summary: Learn how to connect to TiDB using JDBC. This tutorial gives Java sampl
 
 # Connect to TiDB with JDBC
 
-TiDB is a MySQL-compatible database. JDBC, or Java Database Connectivity, is Java's data access API. [MySQL Connector/J](https://dev.mysql.com/downloads/connector/j/) is MySQL's implementation of JDBC.
+TiDB is a MySQL-compatible database, and JDBC (Java Database Connectivity) is the data access API for Java. [MySQL Connector/J](https://dev.mysql.com/downloads/connector/j/) is MySQL's implementation of JDBC.
 
 In this tutorial, you can learn how to use TiDB and JDBC to accomplish the following tasks:
 
