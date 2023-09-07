@@ -237,7 +237,7 @@ For more information, refer to [Insert data](/develop/dev-guide-insert-data.md).
 
 ### Query data
 
-The following query returns a single `Player` record by ID:
+The following query returns the record of a specific player by ID:
 
 ```ruby
 player = Player.find_by(id: new_player.id)
