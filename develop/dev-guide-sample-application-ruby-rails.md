@@ -123,7 +123,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
     cp .env.example .env
     ```
 
-5. Edit the `.env` file, set up the environment variables as follows, set `DATABASE_URL` to the connection string copied from the connection dialog, and set `sslca` query parameter to the file path of the CA certificate downloaded from the connection dialog:
+5. Edit the `.env` file, set up the `DATABASE_URL` environment variable as follows, copy the connection string from the connection dialog as the variable value, and set the `sslca` query parameter to the file path of the CA certificate downloaded from the connection dialog:
 
     ```dotenv
     DATABASE_URL=mysql2://<user>:<password>@<host>:<port>/<database>?ssl_mode=verify_identity&sslca=/path/to/ca.pem
