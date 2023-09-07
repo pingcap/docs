@@ -99,11 +99,11 @@ The preceding output helps you determine:
 - Whether the apply index is too small to update safe-ts.
 - Whether the leader is sending a sufficiently updated resolved-ts when a follower peer exists.
 
-## Troubleshooting Tips
+## Troubleshooting tips
 
-### Handling Slowly Committing Transactions
+### Handle slow transaction commit
 
-Slowly committing transactions are often large transactions. Their prewrite phases leave some locks, but it takes too long before commit phases clean the locks. Try to identify the transactions to which the locks belong and determine why they exist (through logs, etc.)
+A transaction that takes a long time to commit is often a large transaction. The prewrite phase of this slow transaction leaves some locks, but it takes too long before the commit phase clean the locks. To troubleshoot, you can try to identify the transaction to which the locks belong and try to know the reason they exist, such as using logs.
 
 The following list some actions you can take:
 
