@@ -257,7 +257,7 @@ For more information, refer to [Update data](/develop/dev-guide-update-data.md).
 
 ### Delete data
 
-The following query deletes a single `Player` record:
+The following query deletes a `Player` object:
 
 ```ruby
 player.destroy
