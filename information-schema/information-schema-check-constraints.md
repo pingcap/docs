@@ -5,7 +5,7 @@ summary: Learn the `CHECK_CONSTRAINTS` INFORMATION_SCHEMA table.
 
 # CHECK\_CONSTRAINTS
 
-The `CHECK_CONSTRAINTS` table provides information about [`CHECK` constraints](/constraints.md#CHECK) on tables.
+The `CHECK_CONSTRAINTS` table provides information about [`CHECK` constraints](/constraints.md#check) on tables.
 
 ```sql
 USE INFORMATION_SCHEMA;
