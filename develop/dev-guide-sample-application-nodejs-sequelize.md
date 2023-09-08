@@ -180,7 +180,8 @@ Run the following command to execute the sample code:
 npm start
 ```
 
-**Expected output(partial):**
+<details>
+<summary>**Expected output(partial):**</summary>
 
 ```shell
 INFO (app/10117): Getting sequelize instance...
@@ -193,6 +194,8 @@ Executing (default): SELECT `id`, `coins`, `goods`, `createdAt`, `updatedAt` FRO
 Executing (default): UPDATE `players` SET `coins`=?,`goods`=?,`updatedAt`=? WHERE `id` = ?
 Executing (default): DELETE FROM `players` WHERE `id` = 6
 ```
+
+</details>
 
 ## Sample code snippets
 
