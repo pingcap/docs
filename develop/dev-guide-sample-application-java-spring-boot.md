@@ -1,13 +1,6 @@
 ---
-<<<<<<< HEAD
-title: Build a TiDB App Using Spring Boot
-summary: Learn an example of how to build a TiDB application using Spring Boot.
-aliases: ['/tidb/v7.1/dev-guide-sample-application-spring-boot']
-=======
 title: Connect to TiDB with Spring Boot
 summary: Learn how to connect to TiDB using Spring Boot. This tutorial gives Java sample code snippets that work with TiDB using Spring Boot.
-aliases: ['/tidbcloud/dev-guide-sample-application-spring-boot','/tidb/dev/dev-guide-sample-application-spring-boot']
->>>>>>> 8b572d11a6 (translate: simplify examples for java documents from the docs-cn (#14716))
 ---
 
 # Connect to TiDB with Spring Boot
