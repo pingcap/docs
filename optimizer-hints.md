@@ -83,6 +83,16 @@ This hint specifies the outer `SELECT` query block's name to `QB1`, which makes 
 >
 > In the above example, if the hint specifies the `QB_NAME` to `sel_2` and does not specify a new `QB_NAME` for the original second `SELECT` query block, then `sel_2` becomes an invalid name for the second `SELECT` query block.
 
+### SET_VAR(VAR_NAME=VAR_VALUE)
+
+`SET_VAR(VAR_NAME=VAR_VALUE)` can change the value of the specified system variable. This hint can control most variables related with optimizer and executor. Refer to Chapter [System Variables](/system-variables.md) too see which variables is controlled by this hint.
+
+```sql
+SELECT /*+ SET_VAR(MAX_EXECUTION_TIME=1234) */ @@MAX_EXECUTION_TIME;
+```
+
+Executing the above SQL. The returned value is `1234` which is set by the hint, not the default value of the variable `MAX_EXECUTION_TIME`.
+
 ### MERGE_JOIN(t1_name [, tl_name ...])
 
 The `MERGE_JOIN(t1_name [, tl_name ...])` hint tells the optimizer to use the sort-merge join algorithm for the given table(s). Generally, this algorithm consumes less memory but takes longer processing time. If there is a very large data volume or insufficient system memory, it is recommended to use this hint. For example:
