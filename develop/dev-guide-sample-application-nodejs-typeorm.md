@@ -339,7 +339,7 @@ For more information, refer to [TypeORM: DataSource API](https://typeorm.io/data
 
 ## Useful notes
 
-### Foreign key constraint
+### Foreign key constraints
 
 Using foreign key constraints ensures the [referential integrity](https://en.wikipedia.org/wiki/Referential_integrity) of data by adding checks on the database side. However, this might lead to serious performance issues in scenarios with large data volumes.
 
