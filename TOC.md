@@ -942,6 +942,9 @@
         - [`VARIABLES_INFO`](/information-schema/information-schema-variables-info.md)
         - [`VIEWS`](/information-schema/information-schema-views.md)
       - [`METRICS_SCHEMA`](/metrics-schema.md)
+      - PERFORMANCE_SCHEMA
+        - [Overview](/performance-schema/performance-schema.md)
+        - [`SESSION_CONNECT_ATTRS`](/performance-schema/performance-schema-session-connect-attrs.md)
     - [Metadata Lock](/metadata-lock.md)
   - UI
     - TiDB Dashboard
@@ -976,7 +979,7 @@
         - [Configure SSO](/dashboard/dashboard-session-sso.md)
       - [FAQ](/dashboard/dashboard-faq.md)
   - [Telemetry](/telemetry.md)
-  - [Errors Codes](/error-codes.md)
+  - [Error Codes](/error-codes.md)
   - [Table Filter](/table-filter.md)
   - [Schedule Replicas by Topology Labels](/schedule-replicas-by-topology-labels.md)
   - Internal Components
