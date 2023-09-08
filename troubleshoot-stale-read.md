@@ -212,4 +212,4 @@ Then, you can basically locate the statement that caused the problem. To further
 
 The output shows that someone is executing an unexpected `UPDATE` statement (`update t set b = b + 1`), which results in a large transaction and hinders Stale Read.
 
-To resolve this issue, you can stop the application running this `UPDATE` statement.
+To resolve this issue, you can stop the application that is running this `UPDATE` statement.
