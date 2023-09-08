@@ -36,7 +36,7 @@ block-allow-list:             # Use black-white-list if the DM version is earlie
 
 In simple scenarios, it is recommended that you use the wildcard for matching schemas and tables. However, note the following version differences:
 
-- Wildcards including `*`, `?` and `[]` are supported. There can only be one `*` symbol in a wildcard match, and it must be at the end. For example, in `tbl-name: "t*"`, `"t*"` indicates all tables starting with `t`. See [wildcard matching](https://en.wikipedia.org/wiki/Glob_(programming)#Syntax) for details.
+- Wildcards including `*`, `?`, and `[]` are supported. There can only be one `*` symbol in a wildcard match, and it must be at the end. For example, in `tbl-name: "t*"`, `"t*"` indicates all tables starting with `t`. See [wildcard matching](https://en.wikipedia.org/wiki/Glob_(programming)#Syntax) for details.
 
 - A regular expression must begin with the `~` character.
 
