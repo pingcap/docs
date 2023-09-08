@@ -42,7 +42,7 @@ Support level: **Full**
 
 [TiDB-JDBC](https://github.com/pingcap/mysql-connector-j) is a customized Java driver based on MySQL 8.0.29. Compiled based on MySQL official version 8.0.29, TiDB-JDBC fixes the bug of multi-parameter and multi-field EOF in the prepare mode in the original JDBC, and adds features such as automatic TiCDC snapshot maintenance and the SM3 authentication plugin.
 
-Using SM3-based authentication is only supported with the TiDB version of MySQL Connector/J.
+The authentication based on SM3 is only supported in TiDB's TiDB-JDBC.
 
 If you use Maven, add the following content to the `<dependencies></dependencies>` section in the `pom.xml` file:
 
@@ -247,7 +247,7 @@ Support level: **Compatible**
 
 You can follow the [PyMySQL documentation](https://pypi.org/project/PyMySQL/) to download and configure the driver. It is recommended to use PyMySQL 1.0.2 or later versions.
 
-For an example of using PyMySQL to build a TiDB application, see [Build a simple CRUD app with TiDB and PyMySQL](/develop/dev-guide-sample-application-python-pymysql.md#step-2-get-the-code).
+For an example of using PyMySQL to build a TiDB application, see [Connect to TiDB with PyMySQL](/develop/dev-guide-sample-application-python-pymysql.md).
 
 </div>
 <div label="mysqlclient">
@@ -256,7 +256,7 @@ Support level: **Compatible**
 
 You can follow the [mysqlclient documentation](https://pypi.org/project/mysqlclient/) to download and configure the driver. It is recommended to use mysqlclient 2.1.1 or later versions.
 
-For an example of using mysqlclient to build a TiDB application, see [Build a simple CRUD app with TiDB and mysqlclient](/develop/dev-guide-sample-application-python-mysqlclient.md#step-2-get-the-code).
+For an example of using mysqlclient to build a TiDB application, see [Connect to TiDB with mysqlclient](/develop/dev-guide-sample-application-python-mysqlclient.md).
 
 </div>
 <div label="MySQL Connector/Python">
@@ -265,7 +265,7 @@ Support level: **Compatible**
 
 You can follow the [MySQL Connector/Python documentation](https://dev.mysql.com/doc/connector-python/en/connector-python-installation-binary.html) to download and configure the driver. It is recommended to use Connector/Python 8.0.31 or later versions.
 
-For an example of using MySQL Connector/Python to build a TiDB application, see [Build a simple CRUD app with TiDB and MySQL Connector/Python](/develop/dev-guide-sample-application-python-mysql-connector.md#step-2-get-the-code).
+For an example of using MySQL Connector/Python to build a TiDB application, see [Connect to TiDB with MySQL Connector/Python](/develop/dev-guide-sample-application-python-mysql-connector.md).
 
 </div>
 </SimpleTab>
@@ -279,7 +279,7 @@ Support level: **Full**
 
 [SQLAlchemy](https://www.sqlalchemy.org/) is a popular ORM framework for Python. To get all dependencies in your application, you can use the `pip install SQLAlchemy==1.4.44` command. It is recommended to use SQLAlchemy 1.4.44 or later versions.
 
-For an example of using SQLAlchemy to build a TiDB application, see [Build a simple CRUD app with TiDB and SQLAlchemy](/develop/dev-guide-sample-application-python-sqlalchemy.md#step-2-get-the-code).
+For an example of using SQLAlchemy to build a TiDB application, see [Connect to TiDB with SQLAlchemy](/develop/dev-guide-sample-application-python-sqlalchemy.md).
 
 </div>
 <div label="peewee">
