@@ -56,7 +56,7 @@ When Stale Read issues occur, you might notice changes in the preceding metrics.
 The most common causes that can impact the effectiveness of Stale Read are as follows:
 
 - Transactions that take long time to commit.
-- Transactions live too long before they commits.
+- Transactions live too long before they commit.
 - Delays in pushing the information of CheckLeader from the leader to the follower.
 
 ### Use Grafana to diagnose
@@ -104,11 +104,11 @@ The preceding output helps you determine:
 
 ### Handle slow transaction commit
 
-A transaction that takes a long time to commit is often a large transaction. The prewrite phase of this slow transaction leaves some locks, but it takes too long before the commit phase clean the locks. To troubleshoot, you can try to identify the transaction to which the locks belong and try to know the reason they exist, such as using logs.
+A transaction that takes a long time to commit is often a large transaction. The prewrite phase of this slow transaction leaves some locks, but it takes too long before the commit phase clean the locks. To troubleshoot this issue, you can try to identify the transaction to which the locks belong and try to pinpoint the reason they exist, such as using logs.
 
 The following list some actions you can take:
 
-- Specify `--log` option in the `tikv-ctl` command and check TiKV logs to find the specific locks with their start_ts.
+- Specify the `--log` option in the `tikv-ctl` command and check TiKV logs to find the specific locks with their start_ts.
 - Search the start_ts in both TiDB and TiKV logs to identify issues with the transaction.
 
     If a query takes over 60 seconds, an `expensive_query` log is printed with the SQL statement. You can use the start_ts value to match the log. The following is an example:
@@ -118,7 +118,7 @@ The following list some actions you can take:
     ```
 
 - Use the [`CLUSTER_TIDB_TRX`](/information-schema/information-schema-tidb-trx.md#cluster_tidb_trx) table to find active transactions if you cannot get enough information about the locks from logs.
-- Execute [`SHOW PROCESSLIST`](/sql-statements/sql-statement-show-processlist.md) to view the current sessions connected to the same TiDB server and their time spent on current statement. But it does not show start_ts.
+- Execute [`SHOW PROCESSLIST`](/sql-statements/sql-statement-show-processlist.md) to view the current sessions connected to the same TiDB server and their time spent on the current statement. But it does not show start_ts.
 
 If the locks exist due to ongoing large transactions, consider modifying your application logic as these locks can hinder the progress of resolve-ts.
 
@@ -126,15 +126,15 @@ If the locks do not belong to any ongoing transactions, it might be due to a coo
 
 ### Handle long-lived transactions
 
-Transactions that remain active for a long time could possibly block the advance of resolved-ts, even if they eventually commit quickly. This is because it's the start-ts of these long-lived transactions that are used to calculate the resolved-ts.
+Transactions that remain active for a long time could possibly block the advance of resolved-ts, even if they eventually commit quickly. This is because it is the start-ts of these long-lived transactions that are used to calculate the resolved-ts.
 
-To address this:
+To address this issue:
 
-Identify the Transaction: Begin by pinpointing the transaction associated with the locks. Understanding the reason behind their existence can be crucial. Leveraging logs can be particularly helpful.
+- Identify the Transaction: Begin by pinpointing the transaction associated with the locks. It is crucial to understand the reason behind their existence. Leveraging logs can be particularly helpful.
 
-Examine Application Logic: If the prolonged transaction duration is a result of your application's logic, consider revising it to prevent such occurrences.
+- Examine Application Logic: If the prolonged transaction duration is a result of your application's logic, consider revising it to prevent such occurrences.
 
-Address Slow Queries: If the transaction's duration is extended due to slow queries, prioritize resolving these queries to alleviate the issue.
+- Address Slow Queries: If the transaction's duration is extended due to slow queries, prioritize resolving these queries to alleviate the issue.
 
 ### Address CheckLeader issues
 
