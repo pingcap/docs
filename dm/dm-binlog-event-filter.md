@@ -25,7 +25,7 @@ Starting from DM v2.0.2, you can configure the binlog event filter in the source
 
 When you use the wildcard for matching schemas and tables, note the following:
 
-- `schema-pattern` and `table-pattern` only support wildcards including `*`, `?` and `[]`. There can only be one `*` symbol in a wildcard match, and it must be at the end. For example, in `table-pattern: "t_*"`, `"t_*"` indicates all tables starting with `t_`. See [wildcard matching](https://en.wikipedia.org/wiki/Glob_(programming)#Syntax) for details.
+- `schema-pattern` and `table-pattern` only support wildcards, including `*`, `?`, and `[]`. There can only be one `*` symbol in a wildcard match, and it must be at the end. For example, in `table-pattern: "t_*"`, `"t_*"` indicates all tables starting with `t_`. See [wildcard matching](https://en.wikipedia.org/wiki/Glob_(programming)#Syntax) for details.
 
 - `sql-pattern` only supports regular expressions.
 
