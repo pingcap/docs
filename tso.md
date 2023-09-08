@@ -24,7 +24,7 @@ sql> SELECT @ts;
 
 Note that this is done in a transction with (`BEGIN; ...; ROLLBACK`) as TSO timestamps are assigned to transactions.
 
-There is a SQL function which helps us to inspect the number that we got back: [`TIDB_PARSE_TSO()`](/functions-and-operators/tidb-functions.md#tidb_parse_tso).
+There are two SQL function which helps us to inspect the number that we got back: [`TIDB_PARSE_TSO()`](/functions-and-operators/tidb-functions.md#tidb_parse_tso) and [`TIDB_PARSE_TSO_LOGICAL()`]((/functions-and-operators/tidb-functions.md#tidb_parse_tso_logical).
 
 ```
 mysql> SELECT TIDB_PARSE_TSO(443852055297916932);
@@ -33,6 +33,14 @@ mysql> SELECT TIDB_PARSE_TSO(443852055297916932);
 +------------------------------------+
 | 2023-08-27 20:33:41.687000         |
 +------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT TIDB_PARSE_TSO_LOGICAL(443852055297916932);
++--------------------------------------------+
+| TIDB_PARSE_TSO_LOGICAL(443852055297916932) |
++--------------------------------------------+
+|                                          4 |
++--------------------------------------------+
 1 row in set (0.00 sec)
 ```
 
