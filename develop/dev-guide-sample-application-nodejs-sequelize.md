@@ -81,19 +81,19 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 
 3. Ensure the configurations in the connection dialog match your operating environment.
 
-   - **Endpoint Type** is set to `Public`
-   - **Connect With** is set to `General`
-   - **Operating System** matches your environment.
+    - **Endpoint Type** is set to `Public`
+    - **Connect With** is set to `General`
+    - **Operating System** matches your environment.
 
-   > **Note**
-   >
-   > In Node.js applications, you don't have to provide an SSL CA certificate, because Node.js uses the built-in [Mozilla CA certificate](https://wiki.mozilla.org/CA/Included_Certificates) by default when establishing the TLS (SSL) connection.
+    > **Note**
+    >
+    > In Node.js applications, you don't have to provide an SSL CA certificate, because Node.js uses the built-in [Mozilla CA certificate](https://wiki.mozilla.org/CA/Included_Certificates) by default when establishing the TLS (SSL) connection.
 
 4. Click **Create password** to create a random password.
 
-   > **Tip**
-   >
-   > If you have generated a password before, you can either use the original password or click **Reset password** to generate a new one.
+    > **Tip**
+    >
+    > If you have generated a password before, you can either use the original password or click **Reset password** to generate a new one.
 
 5. Run the following command to copy `.env.example` and rename it to `.env`:
 
@@ -104,9 +104,9 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 6. Edit the `.env` file, set up the environment variable `DATABASE_URL` as follows, replace the corresponding placeholders `{}` with connection parameters on the connection dialog:
   
     ```shell
-    TIDB_HOST='{gateway-region}.aws.tidbcloud.com'
+    TIDB_HOST='{host}'
     TIDB_PORT='4000'
-    TIDB_USER='{prefix}.root'
+    TIDB_USER='{user}'
     TIDB_PASSWORD='{password}'
     TIDB_DB_NAME='test'
     ```
@@ -134,9 +134,9 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 5. Edit the `.env` file, set up the environment variable `DATABASE_URL` as follows, replace the corresponding placeholders `{}` with connection parameters on the connection dialog:
 
     ```shell
-    TIDB_HOST='{gateway-region}.aws.tidbcloud.com'
+    TIDB_HOST='{host}'
     TIDB_PORT='4000'
-    TIDB_USER='{prefix}.root'
+    TIDB_USER='{user}'
     TIDB_PASSWORD='{password}'
     TIDB_DB_NAME='test'
     TIDB_CA_PATH='{path/to/ca}'
@@ -282,7 +282,7 @@ For more information, refer to [Query data](/develop/dev-guide-get-data-from-sin
 
 ### Update data
 
-The following query set `700` coins and `700` goods to the `Players` with ID `6` that created in the [Insert data](#insert-data) section:
+The following query set `700` coins and `700` goods to the `Players` with ID `6` that was created in the [Insert data](#insert-data) section:
 
 ```typescript
 logger.info('Updating the new player...');
@@ -306,8 +306,6 @@ logger.info(deletedNewPlayer?.toJSON());
 ```
 
 For more information, refer to [Delete data](/develop/dev-guide-delete-data.md).
-
-## Useful notes
 
 ## Next steps
 
