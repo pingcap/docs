@@ -55,7 +55,7 @@ cd tidb-nodejs-typeorm-quickstart
 
 ### Step 2: Install dependencies
 
-Run the following command to install the dependencies (including the `typeorm` and `mysql2` package) required by the sample code：
+Run the following command to install the required packages (including `typeorm` and `mysql2`) for the sample app:
 
 ```shell
 npm install
