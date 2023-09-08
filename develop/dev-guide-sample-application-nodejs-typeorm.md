@@ -46,14 +46,14 @@ This section demonstrates how to run the sample application code and connect to 
 
 ### Step 1: Clone the sample app repository
 
-Run the following commands in your terminal window to clone the sample code repository locally:
+Run the following commands in your terminal window to clone the sample code repository:
 
 ```shell
 git clone https://github.com/tidb-samples/tidb-nodejs-typeorm-quickstart.git
 cd tidb-nodejs-typeorm-quickstart
 ```
 
-### Step 2. Install dependencies
+### Step 2: Install dependencies
 
 Run the following command to install the dependencies (including the `typeorm` and `mysql2` package) required by the sample code：
 
@@ -62,22 +62,19 @@ npm install
 ```
 
 <details>
-<summary><b>Install dependencies to existing project</b></summary>
+<summary><b>Install dependencies to an existing project</b></summary>
 
-For your existing project, run the following command to install the following packages:
+For your existing project, run the following command to install the packages:
 
-- `typeorm`: The ORM framework for Node.js.
-- `mysql2`: The MySQL driver for Node.js. (You can use the `mysql` driver as well.)
-- `dotenv`: The package to load environment variables from `.env` file.
-- `typescript`: The package to compile TypeScript code to JavaScript.
-- `ts-node`: The package to execute TypeScript code directly without compiling.
-- `@types/node`: The package to provide TypeScript type definitions for Node.js.
+- `typeorm`: the ORM framework for Node.js.
+- `mysql2`: the MySQL driver for Node.js. You can also use the `mysql` driver.
+- `dotenv`: loads environment variables from the `.env` file.
+- `typescript`: compiles TypeScript code to JavaScript.
+- `ts-node`: runs TypeScript code directly without compiling.
+- `@types/node`: provides TypeScript type definitions for Node.js.
 
 ```shell
 npm install typeorm mysql2 dotenv --save
-```
-
-```shell
 npm install @types/node ts-node typescript --save-dev
 ```
 
@@ -118,10 +115,10 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
     TIDB_DATABASE=test
     TIDB_ENABLE_SSL=true
     ```
-    
+
     > **Note**
     >
-    > For TiDB Serverless, TLS connection **MUST** be enabled via `TIDB_ENABLE_SSL` when using public endpoint.
+    > For TiDB Serverless, you **MUST** enable TLS connection via `TIDB_ENABLE_SSL` when using public endpoint.
 
 7. Save the `.env` file.
 
@@ -134,7 +131,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 
 3. Click **Allow Access from Anywhere** and then click **Download TiDB cluster CA** to download the CA certificate.
 
-   For more details about how to obtain the connection string, refer to [TiDB Dedicated standard connection](https://docs.pingcap.com/tidbcloud/connect-via-standard-connection).
+    For more details about how to obtain the connection string, refer to [TiDB Dedicated standard connection](https://docs.pingcap.com/tidbcloud/connect-via-standard-connection).
 
 4. Run the following command to copy `.env.example` and rename it to `.env`:
 
@@ -153,12 +150,10 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
     TIDB_ENABLE_SSL=true
     TIDB_CA_PATH={downloaded_ssl_ca_path}
     ```
-    
+
     > **Note**
     >
-    > It is recommended to enable TLS connection when using the public endpoint to connect to TiDB Dedicated.
-    >
-    > To enable TLS connection, modify `TIDB_ENABLE_SSL` to `true` and using `TIDB_CA_PATH` to specify the file path of CA certificate downloaded from the connection dialog.
+    > For TiDB Dedicated, it is **RECOMMENDED** to enable TLS connection via `TIDB_ENABLE_SSL` when using public endpoint. When you set up `TIDB_ENABLE_SSL=true`, you **MUST** specify the path of the CA certificate downloaded from connection dialog via `TIDB_CA_PATH=/path/to/ca.pem`.
 
 6. Save the `.env` file.
 
@@ -171,7 +166,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
     cp .env.example .env
     ```
 
-2. Edit the `.env` file, set up the environment variables as follows, replace the corresponding placeholders `{}` with connection parameters on the connection dialog:
+2. Edit the `.env` file, set up the environment variables as follows, replace the corresponding placeholders `{}` with connection parameters of your TiDB cluster:
 
     ```dotenv
     TIDB_HOST={host}
@@ -181,16 +176,16 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
     TIDB_DATABASE=test
     ```
 
-   If you are running TiDB locally, the default host address is `127.0.0.1`, and the password is empty.
+    If you are running TiDB locally, the default host address is `127.0.0.1`, and the password is empty.
 
 3. Save the `.env` file.
 
 </div>
 </SimpleTab>
 
-### Step 4. Initialize the database schema
+### Step 4: Initialize the database schema
 
-Run following command to invoke TypeORM CLI to initialize the database with the SQL statements written in the migration files under the `src/migrations` folder:
+Run the following command to invoke TypeORM CLI to initialize the database with the SQL statements written in the migration files in the `src/migrations` folder:
 
 ```shell
 npm run migration:run
@@ -220,9 +215,9 @@ query: COMMIT
 
 </details>
 
-The migration files are generated based on the entities defined in `src/entities` folder. To learn how to define entities in TypeORM, please check the [Entities](https://typeorm.io/entities) documentation.
+Migration files are generated from the entities defined in the `src/entities` folder. To learn how to define entities in TypeORM, refer to [TypeORM: Entities](https://typeorm.io/entities).
 
-### Step 5: Run the code
+### Step 5: Run the code and check the result
 
 Run the following command to execute the sample code:
 
@@ -230,7 +225,7 @@ Run the following command to execute the sample code:
 npm start
 ```
 
-**Expected execution output**
+**Expected execution output:**
 
 If the connection is successful, the terminal will output the version of the TiDB cluster as follows:
 
@@ -250,7 +245,7 @@ For complete sample code and how to run it, check out the [tidb-samples/tidb-nod
 
 ### Connect with connection options
 
-The following code establish a connection to TiDB with options defined in environment variables:
+The following code establishes a connection to TiDB with options defined in the environment variables:
 
 ```typescript
 // src/dataSource.ts
@@ -284,7 +279,7 @@ export const AppDataSource = new DataSource({
 
 ### Insert data
 
-The following query creates a single `Player` record, and returns the created `player` object, which contains the `id` field that is automatically generated by TiDB:
+The following query creates a single `Player` record, and returns the created `Player` object, which contains the `id` field generated by TiDB:
 
 ```typescript
 const player = new Player('Alice', 100, 100);
@@ -307,7 +302,7 @@ For more information, refer to [Query data](/develop/dev-guide-get-data-from-sin
 
 ### Update data
 
-The following query adds 50 goods to the `Player` with ID 101:
+The following query adds `50` goods to the `Player` with ID `101`:
 
 ```typescript
 const player = await this.dataSource.manager.findOneBy(Player, {
@@ -321,7 +316,7 @@ For more information, refer to [Update data](/develop/dev-guide-update-data.md).
 
 ### Delete data
 
-The following query deletes the `Player` with ID 101:
+The following query deletes the `Player` with ID `101`:
 
 ```typescript
 await this.dataSource.manager.delete(Player, {
@@ -331,24 +326,24 @@ await this.dataSource.manager.delete(Player, {
 
 For more information, refer to [Delete data](/develop/dev-guide-delete-data.md).
 
-### Execute raw queries
+### Execute raw SQL queries
 
-The following query executes a raw SQL query and returns the version of the TiDB cluster:
+The following query executes a raw SQL statement (`SELECT VERSION() AS tidb_version;`) and returns the version of the TiDB cluster:
 
 ```typescript
 const rows = await dataSource.query('SELECT VERSION() AS tidb_version;');
 console.log(rows[0]['tidb_version']);
 ```
 
-For more information, refer to the documentation of TypeORM [DataSource API](https://typeorm.io/data-source-api).
+For more information, refer to [TypeORM: DataSource API](https://typeorm.io/data-source-api).
 
 ## Useful notes
 
 ### Foreign key constraint
 
-Using foreign key constraints can add checks on the database side to ensure the [referential integrity](https://en.wikipedia.org/wiki/Referential_integrity) of data, but they might lead to serious performance issues when there is a large amount of data.
+Using foreign key constraints ensures the [referential integrity](https://en.wikipedia.org/wiki/Referential_integrity) of data by adding checks on the database side. However, this might lead to serious performance issues in scenarios with large data volumes.
 
-You can control whether foreign key constraints are created when constructing relationships between entities by using the `createForeignKeyConstraints` option (default `true`).
+You can control whether foreign key constraints are created when constructing relationships between entities by using the `createForeignKeyConstraints` option (default value is `true`).
 
 ```typescript
 @Entity()
@@ -367,7 +362,7 @@ For more information, refer to the [TypeORM FAQ](https://typeorm.io/relations-fa
 
 ## Next steps
 
-- Learn more about TypeORM from the [documentation](https://typeorm.io/#/).
+- Learn more usage of TypeORM from the [documentation of TypeORM](https://typeorm.io/).
 - Learn the best practices for TiDB application development with the chapters in the [Developer guide](/develop/dev-guide-overview.md), such as: [Insert data](/develop/dev-guide-insert-data.md), [Update data](/develop/dev-guide-update-data.md), [Delete data](/develop/dev-guide-delete-data.md), [Query data](/develop/dev-guide-get-data-from-single-table.md), [Transactions](/develop/dev-guide-transaction-overview.md), [SQL performance optimization](/develop/dev-guide-optimize-sql-overview.md).
 - Learn through the professional [TiDB developer courses](https://www.pingcap.com/education/) and earn [TiDB certifications](https://www.pingcap.com/education/certification/) after passing the exam.
 
