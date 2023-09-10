@@ -28,7 +28,7 @@ block-allow-list:             # Use black-white-list if the DM version is earlie
     - db-name: "~^test.*"
       tbl-name: "~^t.*"
     - db-name: "test"
-      tbl-name: "t"
+      tbl-name: "t*"
     ignore-tables:
     - db-name: "test"
       tbl-name: "log"
@@ -36,9 +36,9 @@ block-allow-list:             # Use black-white-list if the DM version is earlie
 
 単純なシナリオでは、スキーマとテーブルを一致させるためにワイルドカードを使用することをお勧めします。ただし、次のバージョンの違いに注意してください。
 
--   DM v1.0.5 以降のバージョンでは、ブロック リストと許可リストは[ワイルドカードマッチ](https://en.wikipedia.org/wiki/Glob_(programming)#Syntax)サポートしますが、ワイルドカード式には`*` **1 つだけ**使用でき、**最後に**`*`を置く必要があります。
+-   `*` 、 `?` 、および`[]`を含むワイルドカードがサポートされています。ワイルドカード一致では`*`シンボルは 1 つだけ使用でき、最後になければなりません。たとえば、 `tbl-name: "t*"`では、 `"t*"` `t`で始まるすべてのテーブルを示します。詳細は[ワイルドカードマッチング](https://en.wikipedia.org/wiki/Glob_(programming)#Syntax)参照してください。
 
--   v1.0.5 より前の DM バージョンの場合、ブロック リストと許可リストは正規表現の一致のみをサポートします。
+-   正規表現は`~`文字で始まる必要があります。
 
 ## パラメータの説明 {#parameter-descriptions}
 
@@ -54,7 +54,7 @@ block-allow-list:             # Use black-white-list if the DM version is earlie
 -   `do-dbs`と`ignore-dbs`に対応するフィルタリング ルールは、MySQL の[データベースレベルのレプリケーションとバイナリログオプションの評価](https://dev.mysql.com/doc/refman/5.7/en/replication-rules-db-options.html)に似ています。
 -   `do-tables`と`ignore-tables`に対応するフィルタリング ルールは、MySQL の[テーブルレベルのレプリケーション オプションの評価](https://dev.mysql.com/doc/refman/5.7/en/replication-rules-table-options.html)に似ています。
 
-> **ノート：**
+> **注記：**
 >
 > DM と MySQL では、ブロック リストと許可リストのフィルタリング ルールが次の点で異なります。
 >
@@ -64,7 +64,7 @@ block-allow-list:             # Use black-white-list if the DM version is earlie
 
 a `test`のフィルタリング プロセス。 `t`表は以下の通りです。
 
-1.  **スキーマ**レベルでフィルタリングします。
+1.  **スキーマ**レベルでフィルターします。
 
     -   `do-dbs`が空でない場合は、一致するスキーマが`do-dbs`に存在するかどうかを確認します。
 
@@ -92,7 +92,7 @@ a `test`のフィルタリング プロセス。 `t`表は以下の通りです�
 
     3.  `do-tables`と`ignore-tables`両方が空の場合は、 `test`を移行します。 `t` ．
 
-> **ノート：**
+> **注記：**
 >
 > スキーマ`test`フィルタリングする必要があるかどうかを確認するには、スキーマ レベルでフィルタリングするだけで済みます。
 

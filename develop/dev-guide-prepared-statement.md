@@ -67,70 +67,64 @@ DEALLOCATE PREPARE {prepared_statement_name};
 たとえば、 [`bookshop`アプリケーション](/develop/dev-guide-bookshop-schema-design.md#books-table)のうち`id = 1`を含む書籍をクエリする必要があります。
 
 <SimpleTab groupId="language">
+  <div label="SQL" value="sql">
+    ```sql
+    PREPARE `books_query` FROM 'SELECT * FROM `books` WHERE `id` = ?';
+    ```
 
-<div label="SQL" value="sql">
+    実行結果:
 
-```sql
-PREPARE `books_query` FROM 'SELECT * FROM `books` WHERE `id` = ?';
-```
+    ```
+    Query OK, 0 rows affected (0.01 sec)
+    ```
 
-実行結果:
+    ```sql
+    SET @id = 1;
+    ```
 
-```
-Query OK, 0 rows affected (0.01 sec)
-```
+    実行結果:
 
-```sql
-SET @id = 1;
-```
+    ```
+    Query OK, 0 rows affected (0.04 sec)
+    ```
 
-実行結果:
+    ```sql
+    EXECUTE `books_query` USING @id;
+    ```
 
-```
-Query OK, 0 rows affected (0.04 sec)
-```
+    実行結果:
 
-```sql
-EXECUTE `books_query` USING @id;
-```
+    ```
+    +---------+---------------------------------+--------+---------------------+-------+--------+
+    | id      | title                           | type   | published_at        | stock | price  |
+    +---------+---------------------------------+--------+---------------------+-------+--------+
+    | 1       | The Adventures of Pierce Wehner | Comics | 1904-06-06 20:46:25 |   586 | 411.66 |
+    +---------+---------------------------------+--------+---------------------+-------+--------+
+    1 row in set (0.05 sec)
+    ```
+  </div>
 
-実行結果:
+  <div label="Java" value="java">
+    ```java
+    // ds is an entity of com.mysql.cj.jdbc.MysqlDataSource
+    try (Connection connection = ds.getConnection()) {
+        PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM `books` WHERE `id` = ?");
+        preparedStatement.setLong(1, 1);
 
-```
-+---------+---------------------------------+--------+---------------------+-------+--------+
-| id      | title                           | type   | published_at        | stock | price  |
-+---------+---------------------------------+--------+---------------------+-------+--------+
-| 1       | The Adventures of Pierce Wehner | Comics | 1904-06-06 20:46:25 |   586 | 411.66 |
-+---------+---------------------------------+--------+---------------------+-------+--------+
-1 row in set (0.05 sec)
-```
-
-</div>
-
-<div label="Java" value="java">
-
-```java
-// ds is an entity of com.mysql.cj.jdbc.MysqlDataSource
-try (Connection connection = ds.getConnection()) {
-    PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM `books` WHERE `id` = ?");
-    preparedStatement.setLong(1, 1);
-
-    ResultSet res = preparedStatement.executeQuery();
-    if(!res.next()) {
-        System.out.println("No books in the table with id 1");
-    } else {
-        // got book's info, which id is 1
-        System.out.println(res.getLong("id"));
-        System.out.println(res.getString("title"));
-        System.out.println(res.getString("type"));
+        ResultSet res = preparedStatement.executeQuery();
+        if(!res.next()) {
+            System.out.println("No books in the table with id 1");
+        } else {
+            // got book's info, which id is 1
+            System.out.println(res.getLong("id"));
+            System.out.println(res.getString("title"));
+            System.out.println(res.getString("type"));
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
     }
-} catch (SQLException e) {
-    e.printStackTrace();
-}
-```
-
-</div>
-
+    ```
+  </div>
 </SimpleTab>
 
 ### <code>INSERT</code>例 {#code-insert-code-example}
@@ -138,89 +132,83 @@ try (Connection connection = ds.getConnection()) {
 例として[`books`テーブル](/develop/dev-guide-bookshop-schema-design.md#books-table)を使用すると、 `title = TiDB Developer Guide` 、 `type = Science & Technology` 、 `stock = 100` 、 `price = 0.0` 、および`published_at = NOW()` (挿入の現在の時刻) を持つ本を挿入する必要があります。 `books`テーブルの**主キー**に`AUTO_RANDOM`属性を指定する必要がないことに注意してください。データの挿入の詳細については、 [データの挿入](/develop/dev-guide-insert-data.md)を参照してください。
 
 <SimpleTab groupId="language">
+  <div label="SQL" value="sql">
+    ```sql
+    PREPARE `books_insert` FROM 'INSERT INTO `books` (`title`, `type`, `stock`, `price`, `published_at`) VALUES (?, ?, ?, ?, ?);';
+    ```
 
-<div label="SQL" value="sql">
+    実行結果:
 
-```sql
-PREPARE `books_insert` FROM 'INSERT INTO `books` (`title`, `type`, `stock`, `price`, `published_at`) VALUES (?, ?, ?, ?, ?);';
-```
+    ```
+    Query OK, 0 rows affected (0.03 sec)
+    ```
 
-実行結果:
+    ```sql
+    SET @title = 'TiDB Developer Guide';
+    SET @type = 'Science & Technology';
+    SET @stock = 100;
+    SET @price = 0.0;
+    SET @published_at = NOW();
+    ```
 
-```
-Query OK, 0 rows affected (0.03 sec)
-```
+    実行結果:
 
-```sql
-SET @title = 'TiDB Developer Guide';
-SET @type = 'Science & Technology';
-SET @stock = 100;
-SET @price = 0.0;
-SET @published_at = NOW();
-```
+    ```
+    Query OK, 0 rows affected (0.04 sec)
+    ```
 
-実行結果:
+    ```sql
+    EXECUTE `books_insert` USING @title, @type, @stock, @price, @published_at;
+    ```
 
-```
-Query OK, 0 rows affected (0.04 sec)
-```
+    実行結果:
 
-```sql
-EXECUTE `books_insert` USING @title, @type, @stock, @price, @published_at;
-```
+    ```
+    Query OK, 1 row affected (0.03 sec)
+    ```
+  </div>
 
-実行結果:
+  <div label="Java" value="java">
+    ```java
+    try (Connection connection = ds.getConnection()) {
+        String sql = "INSERT INTO `books` (`title`, `type`, `stock`, `price`, `published_at`) VALUES (?, ?, ?, ?, ?);";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
 
-```
-Query OK, 1 row affected (0.03 sec)
-```
+        preparedStatement.setString(1, "TiDB Developer Guide");
+        preparedStatement.setString(2, "Science & Technology");
+        preparedStatement.setInt(3, 100);
+        preparedStatement.setBigDecimal(4, new BigDecimal("0.0"));
+        preparedStatement.setTimestamp(5, new Timestamp(Calendar.getInstance().getTimeInMillis()));
 
-</div>
+        preparedStatement.executeUpdate();
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    ```
 
-<div label="Java" value="java">
+    ご覧のとおり、JDBC はプリペアド ステートメントのライフ サイクルの制御に役立ち、アプリケーションでプリペアド ステートメントを手動で作成、使用、または削除する必要はありません。ただし、TiDB は MySQL と互換性があるため、クライアント側で MySQL JDBC Driverを使用するためのデフォルト設定では、***サーバー側の***プリペアドステートメントオプションが有効ではなく、クライアント側のプリペアドステートメントが使用されることに注意してください。
 
-```java
-try (Connection connection = ds.getConnection()) {
-    String sql = "INSERT INTO `books` (`title`, `type`, `stock`, `price`, `published_at`) VALUES (?, ?, ?, ?, ?);";
-    PreparedStatement preparedStatement = connection.prepareStatement(sql);
+    次の構成は、JDBC で TiDB サーバー側のプリペアド ステートメントを使用するのに役立ちます。
 
-    preparedStatement.setString(1, "TiDB Developer Guide");
-    preparedStatement.setString(2, "Science & Technology");
-    preparedStatement.setInt(3, 100);
-    preparedStatement.setBigDecimal(4, new BigDecimal("0.0"));
-    preparedStatement.setTimestamp(5, new Timestamp(Calendar.getInstance().getTimeInMillis()));
+    |          パラメータ          |                  手段                 |            推奨シナリオ           |        推奨されるコンフィグレーション        |
+    | :---------------------: | :---------------------------------: | :-------------------------: | :---------------------------: |
+    |   `useServerPrepStmts`  |   サーバー側を使用してプリペアドステートメントを有効にするかどうか  | プリペアドステートメントを複数回使用する必要がある場合 |             `true`            |
+    |     `cachePrepStmts`    |   クライアントが準備されたステートメントをキャッシュするかどうか   |  `useServerPrepStmts=true`時 |             `true`            |
+    | `prepStmtCacheSqlLimit` | プリペアドステートメントの最大サイズ (デフォルトでは 256 文字) |  プリペアドステートメントが 256 文字を超える場合 | プリペアドステートメントの実際のサイズに応じて構成されます |
+    |   `prepStmtCacheSize`   |    準備されたステートメントの最大数 (デフォルトでは 25)    |  準備されたステートメントの数が 25 を超える場合  |   実際の準備済みステートメントの数に応じて構成されます  |
 
-    preparedStatement.executeUpdate();
-} catch (SQLException e) {
-    e.printStackTrace();
-}
-```
+    以下は、JDBC 接続文字列構成の一般的なシナリオです。ホスト: `127.0.0.1` 、ポート: `4000` 、ユーザー名: `root` 、パスワード: null、デフォルトのデータベース: `test` :
 
-ご覧のとおり、JDBC はプリペアド ステートメントのライフ サイクルの制御に役立ち、アプリケーションでプリペアド ステートメントを手動で作成、使用、または削除する必要はありません。ただし、TiDB は MySQL と互換性があるため、クライアント側で MySQL JDBCDriverを使用するためのデフォルト設定では、***サーバー側の***プリペアドステートメントオプションが有効ではなく、クライアント側のプリペアドステートメントが使用されることに注意してください。
+    ```
+    jdbc:mysql://127.0.0.1:4000/test?user=root&useConfigs=maxPerformance&useServerPrepStmts=true&prepStmtCacheSqlLimit=2048&prepStmtCacheSize=256&rewriteBatchedStatements=true&allowMultiQueries=true
+    ```
 
-次の構成は、JDBC で TiDB サーバー側のプリペアド ステートメントを使用するのに役立ちます。
+    データの挿入時に他の JDBC パラメータを変更する必要がある場合は、第[行を挿入する](/develop/dev-guide-insert-data.md#insert-rows)章を参照してください。
 
-|          パラメータ          |                  意味                 |            推奨シナリオ           |        推奨されるコンフィグレーション        |
-| :---------------------: | :---------------------------------: | :-------------------------: | :---------------------------: |
-|   `useServerPrepStmts`  |   サーバー側を使用してプリペアドステートメントを有効にするかどうか  | プリペアドステートメントを複数回使用する必要がある場合 |             `true`            |
-|     `cachePrepStmts`    |   クライアントが準備されたステートメントをキャッシュするかどうか   |  `useServerPrepStmts=true`時 |             `true`            |
-| `prepStmtCacheSqlLimit` | プリペアドステートメントの最大サイズ (デフォルトでは 256 文字) |  プリペアドステートメントが 256 文字を超える場合 | プリペアドステートメントの実際のサイズに応じて構成されます |
-|   `prepStmtCacheSize`   |    準備されたステートメントの最大数 (デフォルトでは 25)    |  準備されたステートメントの数が 25 を超える場合  |   実際の準備済みステートメントの数に応じて構成されます  |
+    Javaの完全な例については、以下を参照してください。
 
-以下は、JDBC 接続文字列構成の一般的なシナリオです。ホスト: `127.0.0.1` 、ポート: `4000` 、ユーザー名: `root` 、パスワード: null、デフォルトのデータベース: `test` :
-
-```
-jdbc:mysql://127.0.0.1:4000/test?user=root&useConfigs=maxPerformance&useServerPrepStmts=true&prepStmtCacheSqlLimit=2048&prepStmtCacheSize=256&rewriteBatchedStatements=true&allowMultiQueries=true
-```
-
-データの挿入時に他の JDBC パラメータを変更する必要がある場合は、第[行を挿入する](/develop/dev-guide-insert-data.md#insert-rows)章を参照してください。
-
-Javaの完全な例については、以下を参照してください。
-
--   [TiDB と JDBC を使用してシンプルな CRUD アプリを構築する](/develop/dev-guide-sample-application-java-jdbc.md#step-2-get-the-code)
--   [TiDB と Hibernate を使用してシンプルな CRUD アプリを構築する](/develop/dev-guide-sample-application-java-hibernate.md#step-2-get-the-code)
--   [Spring Boot を使用して TiDB アプリを構築する](/develop/dev-guide-sample-application-java-spring-boot.md)
-
-</div>
-
+    -   [JDBC を使用して TiDB に接続する](/develop/dev-guide-sample-application-java-jdbc.md)
+    -   [Hibernate で TiDB に接続する](/develop/dev-guide-sample-application-java-hibernate.md)
+    -   [Spring Boot を使用して TiDB に接続する](/develop/dev-guide-sample-application-java-spring-boot.md)
+  </div>
 </SimpleTab>
