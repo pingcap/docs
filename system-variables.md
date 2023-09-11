@@ -2261,7 +2261,7 @@ Query OK, 0 rows affected (0.09 sec)
 
 </CustomContent>
 
-### tidb_enable_tiflash_pipeline_model <span class="version-mark">New in v7.2.0</span>
+### tiflash_enable_pipeline_model <span class="version-mark">New in v7.2.0</span>
 
 <CustomContent platform="tidb">
 

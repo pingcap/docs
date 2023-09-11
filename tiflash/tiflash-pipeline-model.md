@@ -7,40 +7,40 @@ summary: Learn about the TiFlash Pipeline Execution Model.
 
 This document introduces the TiFlash pipeline execution model.
 
-Starting from v7.2.0, TiFlash supports a new execution model, the pipeline execution model. You can control whether to enable the TiFlash pipeline execution model by modifying the system variable [`tidb_enable_tiflash_pipeline_model`](/system-variables.md#tidb_enable_tiflash_pipeline_model-new-in-v720).
+Starting from v7.2.0, TiFlash supports a new execution model, the pipeline execution model. You can control whether to enable the TiFlash pipeline execution model by modifying the system variable [`tiflash_enable_pipeline_model`](/system-variables.md#tiflash_enable_pipeline_model-new-in-v720).
 
 Inspired by the paper [Morsel-Driven Parallelism: A NUMA-Aware Query Evaluation Framework for the Many-Core Age](https://dl.acm.org/doi/10.1145/2588555.2610507), the TiFlash pipeline execution model provides a fine-grained task scheduling model, which is different from the traditional thread scheduling model. It reduces the overhead of operating system thread scheduling and provides a fine-grained scheduling mechanism.
 
 ## Enable and disable the pipeline execution model
 
-To enable or disable the pipeline execution model, you can use the [`tidb_enable_tiflash_pipeline_model`](/system-variables.md#tidb_enable_tiflash_pipeline_model-new-in-v720) system variable. This variable can take effect at the global level. By default, `tidb_enable_tiflash_pipeline_model` is set to `ON`, which means that the TiFlash pipeline execution model is enabled. You can use the following statement to view the variable value:
+To enable or disable the pipeline execution model, you can use the [`tiflash_enable_pipeline_model`](/system-variables.md#tiflash_enable_pipeline_model-new-in-v720) system variable. This variable can take effect at the global level. By default, `tiflash_enable_pipeline_model` is set to `ON`, which means that the TiFlash pipeline execution model is enabled. You can use the following statement to view the variable value:
 
 ```sql
-SHOW GLOBAL VARIABLES LIKE 'tidb_enable_tiflash_pipeline_model';
+SHOW GLOBAL VARIABLES LIKE 'tiflash_enable_pipeline_model';
 ```
 
 ```
-+------------------------------------+-------+
-| Variable_name                      | Value |
-+------------------------------------+-------+
-| tidb_enable_tiflash_pipeline_model | ON    |
-+------------------------------------+-------+
++-------------------------------+-------+
+| Variable_name                 | Value |
++-------------------------------+-------+
+| tiflash_enable_pipeline_model | ON    |
++-------------------------------+-------+
 ```
 
-You can modify the `tidb_enable_tiflash_pipeline_model` variable at the global level.
+You can modify the `tiflash_enable_pipeline_model` variable at the global level.
 
 To enable the pipeline execution model at the global level, use the following statement:
 
 ```sql
-SET GLOBAL tidb_enable_tiflash_pipeline_model=ON;
+SET GLOBAL tiflash_enable_pipeline_model=ON;
 ```
 
-If you set `tidb_enable_tiflash_pipeline_model` to `ON` at the global level, the `tidb_enable_tiflash_pipeline_model` variable in the new session will be enabled by default.
+If you set `tiflash_enable_pipeline_model` to `ON` at the global level, the `tiflash_enable_pipeline_model` variable in the new session will be enabled by default.
 
 To disable the pipeline execution model, use the following statement:
 
 ```sql
-SET GLOBAL tidb_enable_tiflash_pipeline_model=OFF;
+SET GLOBAL tiflash_enable_pipeline_model=OFF;
 ```
 
 ## Design and implementation
