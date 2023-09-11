@@ -100,13 +100,13 @@ Adjust the following system variables related to Fast Online DDL:
 
     <CustomContent platform="tidb">
 
-    When backend tasks are running, the statements supported by the framework (such as such as [`ADD INDEX`](/sql-statements/sql-statement-add-index.md) and [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md)) are executed in a distributed manner. All TiDB nodes will run backend tasks by default.
+    When backend tasks are running, the statements supported by the framework (such as [`ADD INDEX`](/sql-statements/sql-statement-add-index.md) and [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md)) are executed in a distributed manner. All TiDB nodes will run backend tasks by default.
 
     </CustomContent>
 
     <CustomContent platform="tidb-cloud">
 
-    When backend tasks are running, the statements supported by the framework (such as such as [`ADD INDEX`](/sql-statements/sql-statement-add-index.md) and [`IMPORT INTO`](https://docs.pingcap.com/tidb/dev/sql-statement-import-into)) are executed in a distributed manner. All TiDB nodes will run backend tasks by default.
+    When backend tasks are running, the statements supported by the framework (such as [`ADD INDEX`](/sql-statements/sql-statement-add-index.md) and [`IMPORT INTO`](https://docs.pingcap.com/tidb/dev/sql-statement-import-into)) are executed in a distributed manner. All TiDB nodes will run backend tasks by default.
 
     </CustomContent>
 
