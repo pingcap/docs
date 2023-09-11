@@ -98,7 +98,7 @@ Adjust the following system variables related to Fast Online DDL:
     SET GLOBAL tidb_enable_dist_task = ON;
     ```
 
-    When backend tasks are running, the statements supported by the framework(Add index and `IMPORT INTO`) are executed in a distributed manner. All TiDB nodes will run backend tasks by default.
+    When backend tasks are running, the statements supported by the framework ( such as Add index and `IMPORT INTO`) are executed in a distributed manner. All TiDB nodes will run backend tasks by default.
 
 2. Adjust the following system variables that might affect the distributed execution of DDL tasks according to your needs:
 
