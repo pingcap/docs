@@ -5,7 +5,7 @@ summary: Learn how to connect to TiDB using GORM. This tutorial gives Golang sam
 
 # Connect to TiDB with GORM
 
-TiDB is a MySQL-compatible database. [GORM](https://gorm.io/index.html) is a currently popular open-source Golang ORM framework that also supports TiDB's features such as `AUTO_RANDOM`. Additionally, TiDB is the default supported database for [GORM](https://gorm.io/docs/connecting_to_the_database.html#TiDB).
+TiDB is a MySQL-compatible database, and [GORM](https://gorm.io/index.html) is a popular open-source ORM framework for Golang. GORM adapts to TiDB features such as `AUTO_RANDOM` and [supports TiDB as a default database option](https://gorm.io/docs/connecting_to_the_database.html#TiDB).
 
 In this tutorial, you can learn how to use TiDB and GORM to accomplish the following tasks:
 
@@ -90,7 +90,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 
 6. Copy and paste the corresponding connection string into the `.env` file. The example result is as follows:
 
-     ```dotenv
+    ```dotenv
     TIDB_HOST='{host}'  # e.g. gateway01.ap-northeast-1.prod.aws.tidbcloud.com
     TIDB_PORT='4000'
     TIDB_USER='{user}'  # e.g. xxxxxx.root
@@ -198,7 +198,7 @@ func createDB() *gorm.DB {
 }
 ```
 
-When using this function, you should replace `${tidb_host}`, `${tidb_port}`, `${tidb_user}`, `${tidb_password}`, `${tidb_db_name}`, and other placeholders with the actual values of your TiDB cluster. TiDB Serverless requires a secure connection. Therefore, you need to set the value of `${use_ssl}` to `true`.
+When using this function, you need to replace `${tidb_host}`, `${tidb_port}`, `${tidb_user}`, `${tidb_password}`, and `${tidb_db_name}` with the actual values of your TiDB cluster. TiDB Serverless requires a secure connection. Therefore, you need to set the value of `${use_ssl}` to `true`.
 
 ### Insert data
 
@@ -233,10 +233,9 @@ db.Delete(&Player{ID: "id"})
 
 For more information, refer to [Delete data](/develop/dev-guide-delete-data.md).
 
-## Useful notes
-
 ## Next steps
 
+- Learn more usage of GORM from [the documentation of GORM](https://gorm.io/docs/index.html) and the [TiDB section in the documentation of GORM](https://gorm.io/docs/connecting_to_the_database.html#TiDB).
 - Learn the best practices for TiDB application development with the chapters in the [Developer guide](/develop/dev-guide-overview.md), such as [Insert data](/develop/dev-guide-insert-data.md), [Update data](/develop/dev-guide-update-data.md), [Delete data](/develop/dev-guide-delete-data.md), [Single table reading](/develop/dev-guide-get-data-from-single-table.md), [Transactions](/develop/dev-guide-transaction-overview.md), and [SQL performance optimization](/develop/dev-guide-optimize-sql-overview.md).
 - Learn through the professional [TiDB developer courses](https://www.pingcap.com/education/) and earn [TiDB certifications](https://www.pingcap.com/education/certification/) after passing the exam.
 
