@@ -1201,24 +1201,6 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - This variable is used to set the scan index concurrency of executing the [`ADMIN CHECKSUM TABLE`](/sql-statements/sql-statement-admin-checksum-table.md) statement.
 - When the variable is set to a larger value, the execution performance of other queries is affected.
 
-### `tikv_client_read_timeout` <span class="version-mark">New in v7.4.0</span>
-
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Integer
-- Default value: `0`
-- Range: `[0, 2147483647]`
-- Unit: Millisecond
-- You can use `tikv_client_read_timeout` to set the timeout for TiDB to send a TiKV RPC read request in a query statement. When the TiDB cluster is in an environment with unstable network or serious TiKV I/O latency jitter, and your business is sensitive to the latency of the query SQL, you can set `tikv_client_read_timeout` to reduce the timeout time of the TiKV RPC read request. In this case, when a TiKV has I/O latency jitter, the TiDB side can time out quickly and re-send the TiKV RPC request to the next TiKV where the TiKV Region Peer is located. If the requests of all TiKV Region Peers time out, they will retry with the default timeout (usually 40 seconds).
-- You can also use the optimizer hint `/*+ SET_VAR(TIKV_CLIENT_READ_TIMEOUT=N) */` to set the timeout for TiDB to send a TiKV RPC read request in a query statement. If both the optimizer hint and the system variable are set, the hint takes higher priority.
-- The default value `0` indicates that the default timeout time (usually 40 seconds) is used.
-
-> **Note:**
->
-> - Normally a regular query takes a few milliseconds, but occasionally when a TiKV has unstable network or I/O jitter, the query can take more than 1 second or even 10 seconds. In this case, you can try to set the TiKV RPC read request timeout to 100 milliseconds for the query statement by using the optimizer hint `/*+ SET_VAR(TIKV_CLIENT_READ_TIMEOUT=100) */`. In this way, even if a TiKV query is slow, it can quickly time out and then re-send the RPC request to the next TiKV Region Peer where the TiKV is located. Because the probability of two TiKVs having I/O jitter at the same time is low, the query statement usually takes from a few milliseconds to 110 milliseconds.
-> - It is not recommended to set the value of `tikv_client_read_timeout` too small. Otherwise the requests might time out when the TiDB cluster wordload pressure is high, and the retry will further increase the pressure on the TiDB cluster.
-> - It is recommended to use optimizer hint to set different timeout values for different types of query statements.
-
 ### tidb_committer_concurrency <span class="version-mark">New in v6.1.0</span>
 
 - Scope: GLOBAL
@@ -5139,6 +5121,24 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 > - If TiFlash nodes do not have [zone attributes](/schedule-replicas-by-topology-labels.md#configure-labels-for-tikv-and-tiflash) configured, they are treated as nodes not belonging to any zone.
 
 </CustomContent>
+
+### `tikv_client_read_timeout` <span class="version-mark">New in v7.4.0</span>
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Type: Integer
+- Default value: `0`
+- Range: `[0, 2147483647]`
+- Unit: Millisecond
+- You can use `tikv_client_read_timeout` to set the timeout for TiDB to send a TiKV RPC read request in a query statement. When the TiDB cluster is in an environment with unstable network or serious TiKV I/O latency jitter, and your business is sensitive to the latency of the query SQL, you can set `tikv_client_read_timeout` to reduce the timeout time of the TiKV RPC read request. In this case, when a TiKV has I/O latency jitter, the TiDB side can time out quickly and re-send the TiKV RPC request to the next TiKV where the TiKV Region Peer is located. If the requests of all TiKV Region Peers time out, they will retry with the default timeout (usually 40 seconds).
+- You can also use the optimizer hint `/*+ SET_VAR(TIKV_CLIENT_READ_TIMEOUT=N) */` to set the timeout for TiDB to send a TiKV RPC read request in a query statement. If both the optimizer hint and the system variable are set, the hint takes higher priority.
+- The default value `0` indicates that the default timeout time (usually 40 seconds) is used.
+
+> **Note:**
+>
+> - Normally a regular query takes a few milliseconds, but occasionally when a TiKV has unstable network or I/O jitter, the query can take more than 1 second or even 10 seconds. In this case, you can try to set the TiKV RPC read request timeout to 100 milliseconds for the query statement by using the optimizer hint `/*+ SET_VAR(TIKV_CLIENT_READ_TIMEOUT=100) */`. In this way, even if a TiKV query is slow, it can quickly time out and then re-send the RPC request to the next TiKV Region Peer where the TiKV is located. Because the probability of two TiKVs having I/O jitter at the same time is low, the query statement usually takes from a few milliseconds to 110 milliseconds.
+> - It is not recommended to set the value of `tikv_client_read_timeout` too small. Otherwise the requests might time out when the TiDB cluster wordload pressure is high, and the retry will further increase the pressure on the TiDB cluster.
+> - It is recommended to use optimizer hint to set different timeout values for different types of query statements.
 
 ### time_zone
 
