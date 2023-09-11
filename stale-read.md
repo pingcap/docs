@@ -57,4 +57,3 @@ advance-ts-interval = "20s" # The default value is "20s". You can set it to a sm
 For more information about the internals of Resolved TS and diagnostic techniques, see [Understanding Stale Read and safe-ts in TiKV](/troubleshoot-stale-read.md).
 
 </CustomContent>
-
