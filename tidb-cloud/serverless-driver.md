@@ -192,7 +192,7 @@ The type mapping between TiDB Serverless and Javascript are as follows:
 
 ## Pricing
 
-TiDB serverless driver generates the same costs as you use the TiDB serverless. Check the [TiDB serverless pricing](https://www.pingcap.com/tidb-serverless-pricing-details) for more details. 
+TiDB serverless driver following the [TiDB serverless pricing](https://www.pingcap.com/tidb-serverless-pricing-details) model. The driver itself is free but RU and storage will also be generated.
 
 ## What's next
 
