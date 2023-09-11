@@ -6,7 +6,7 @@ aliases: ['/tidbcloud/serverless-driver']
 
 # TiDB serverless driver (Beta)
 
-The [TiDB serverless driver (Beta)](https://github.com/tidbcloud/serverless-js) for JavaScript allows you to connect to TiDB serverless over HTTPS. It is particularly useful in serverless and edge environments where there is limited TCP support.
+The [TiDB serverless driver (Beta)](https://github.com/tidbcloud/serverless-js) for JavaScript allows you to connect to TiDB serverless over HTTPS. It is particularly useful in edge environments where there is limited TCP support.
 
 ## Use the TiDB serverless driver
 
@@ -189,6 +189,7 @@ The type mapping between TiDB Serverless and Javascript are as follows:
 
 - Up to 10,000 rows can be fetched in a single query.
 - You can execute only one SQL at a time, multiple SQLs in one query are not supported yet.
+- Connect with [private endpoints](/tidb-cloud/set-up-private-endpoint-connections-serverless.md) is not supported yet.
 
 ## Pricing
 
