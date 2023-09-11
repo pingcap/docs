@@ -9,7 +9,7 @@ In this guide, you can learn about Stale Read and safe-ts in TiKV and how to dia
 
 ## Overview of Stale Read and safe-ts
 
-[Stale Read](/stale-read.md)  is a mechanism that TiDB applies to read historical versions of data stored in TiDB. In TiKV, Stale Read relies on [safe-ts](/#what-is-safe-ts). If a read request on a Region peer has a timestamp (ts) that is less than or equal to the Region's safe-ts, TiDB can safely read the data from the peer. TiKV implements this safety guarantee by ensuring that safe-ts is always less than or equal to [resolved-ts](#what-is-resolved-ts).
+[Stale Read](/stale-read.md) is a mechanism that TiDB applies to read historical versions of data stored in TiDB. In TiKV, Stale Read relies on [safe-ts](/#what-is-safe-ts). If a read request on a Region peer has a timestamp (ts) that is less than or equal to the Region's safe-ts, TiDB can safely read the data from the peer. TiKV implements this safety guarantee by ensuring that safe-ts is always less than or equal to [resolved-ts](#what-is-resolved-ts).
 
 ## Understand safe-ts and resolved-ts
 
