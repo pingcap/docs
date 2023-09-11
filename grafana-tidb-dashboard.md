@@ -115,8 +115,6 @@ The following metrics relate to requests sent to TiKV. Retry requests are counte
 - KV Request OPS: the execution times of a KV request, displayed according to TiKV
 - KV Request Duration 99 by store: the execution time of a KV request, displayed according to TiKV
 - KV Request Duration 99 by type: the execution time of a KV request, displayed according to the request type
-<<<<<<< HEAD
-=======
 - Stale Read Hit/Miss Ops
     - **hit**: the number of requests per second that successfully execute a stale read
     - **miss**: the number of requests per second that attempt a stale read but fail
@@ -128,7 +126,6 @@ The following metrics relate to requests sent to TiKV. Retry requests are counte
     - **cross-zone-out**: the outgoing traffic of requests that attempt a stale read in a remote zone
     - **local-in**: the incoming traffic of responses to requests that attempt a stale read in the local zone
     - **local-out**: the outgoing traffic of requests that attempt a stale read in the local zone
->>>>>>> bfb0e987c7 (tikv: add the user's guide of stale read and safe ts (#14524))
 
 ### PD Client
 
