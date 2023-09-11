@@ -5,11 +5,11 @@ summary: Learn how to connect to TiDB serverless from serverless and edge enviro
 
 # TiDB serverless driver (Beta)
 
-The [TiDB serverless driver (Beta)](https://github.com/tidbcloud/serverless-js) for JavaScript allows you to connect to TiDB serverless over HTTPS. It is particularly useful in edge environments where there is limited TCP support.
+The [TiDB serverless driver (Beta)](https://github.com/tidbcloud/serverless-js) for JavaScript allows you to connect to TiDB serverless over HTTPS. It is particularly useful in edge environments where TCP connection is limited.
 
 ## Use the TiDB serverless driver
 
-**Install**
+### Install
 
 You can install the driver with npm:
 
@@ -17,7 +17,7 @@ You can install the driver with npm:
 npm install @tidbcloud/serverless
 ```
 
-**Query**
+### Query
 
 To query from TiDB serverless, you need to create a connection first. Then you can use the connection to execute raw SQL queries. For example:
 
@@ -28,7 +28,7 @@ const conn = connect({url: 'mysql://username:password@host/database'})
 const results = await conn.execute('select * from test where id = ?',[1])
 ```
 
-**Transaction (Experimental)**
+### Transaction (Experimental)
 
 You can also perform interactive transactions with the TiDB serverless driver. For example:
 
@@ -137,9 +137,9 @@ const result = await conn.execute('show tables')
 
 ## Features
 
-### Supported SQL
+### Supported SQL Statements
 
-The following SQL statements are supported:  `Select`, `Show`, `Explain`, `Use`, `Insert`, `Update`, `Delete`, `Begin`, `Commit`, `Rollback`. Most of the DDL are supported.
+The following SQL statements are supported:  `SELECT`, `SHOW`, `EXPLAIN`, `USE`, `INSERT`, `UPDATE`, `DELETE`, `BEGIN`, `COMMIT`, `ROLLBACK`. Most of the DDL are supported.
 
 ### Data Type Mapping
 
@@ -184,15 +184,15 @@ The type mapping between TiDB Serverless and Javascript are as follows:
 | NULL                 | null            |
 | Others               | string          |
 
-### Limitations
-
-- Up to 10,000 rows can be fetched in a single query.
-- You can execute only one SQL at a time, multiple SQLs in one query are not supported yet.
-- Connect with [private endpoints](/tidb-cloud/set-up-private-endpoint-connections-serverless.md) is not supported yet.
-
 ## Pricing
 
 TiDB serverless driver following the [TiDB serverless pricing](https://www.pingcap.com/tidb-serverless-pricing-details) model. The driver itself is free but RU and storage will also be generated.
+
+## Limitations
+
+- Up to 10,000 rows can be fetched in a single query.
+- You can execute only one SQL statement at a time, multiple SQLs in one query are not supported yet.
+- Connect with [private endpoints](/tidb-cloud/set-up-private-endpoint-connections-serverless.md) is not supported yet.
 
 ## What's next
 
