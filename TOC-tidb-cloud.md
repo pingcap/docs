@@ -39,9 +39,6 @@
             -   [プリズマ](/develop/dev-guide-sample-application-nodejs-prisma.md)
             -   [Next.js](/develop/dev-guide-sample-application-nextjs.md)
             -   [AWSラムダ](/develop/dev-guide-sample-application-aws-lambda.md)
-        -   ルビー
-            -   [mysql2](/develop/dev-guide-sample-application-ruby-mysql2.md)
-            -   [レール](/develop/dev-guide-sample-application-ruby-rails.md)
     -   サードパーティのサポート
         -   [TiDB がサポートするサードパーティ ツール](/develop/dev-guide-third-party-support.md)
         -   [サードパーティツールとの既知の非互換性の問題](/develop/dev-guide-third-party-tools-compatibility.md)

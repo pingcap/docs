@@ -40,9 +40,6 @@
             -   [プリズマ](/develop/dev-guide-sample-application-nodejs-prisma.md)
             -   [Next.js](/develop/dev-guide-sample-application-nextjs.md)
             -   [AWSラムダ](/develop/dev-guide-sample-application-aws-lambda.md)
-        -   ルビー
-            -   [mysql2](/develop/dev-guide-sample-application-ruby-mysql2.md)
-            -   [レール](/develop/dev-guide-sample-application-ruby-rails.md)
     -   TiDB に接続する
         -   [Driverまたは ORM を選択してください](/develop/dev-guide-choose-driver-or-orm.md)
         -   [TiDB に接続する](/develop/dev-guide-connect-to-tidb.md)
@@ -59,7 +56,7 @@
         -   [Time to Live を使用してデータを定期的に削除する](/time-to-live.md)
         -   [準備されたステートメント](/develop/dev-guide-prepared-statement.md)
     -   データの読み取り
-        -   [単一テーブルからのデータのクエリ](/develop/dev-guide-get-data-from-single-table.md)
+        -   [単一のテーブルからデータをクエリする](/develop/dev-guide-get-data-from-single-table.md)
         -   [複数テーブル結合クエリ](/develop/dev-guide-join-tables.md)
         -   [サブクエリ](/develop/dev-guide-use-subqueries.md)
         -   [結果のページ付け](/develop/dev-guide-paginate-results.md)
@@ -103,11 +100,11 @@
     -   [ソフトウェアとハ​​ードウェアの要件](/hardware-and-software-requirements.md)
     -   [環境コンフィグレーションチェックリスト](/check-before-deployment.md)
     -   クラスタトポロジの計画
-        -   [最小限のトポロジ](/minimal-deployment-topology.md)
-        -   [TiFlashトポロジー](/tiflash-deployment-topology.md)
+        -   [最小限のトポロジー](/minimal-deployment-topology.md)
+        -   [TiFlashトポロジ](/tiflash-deployment-topology.md)
         -   [TiCDC トポロジ](/ticdc-deployment-topology.md)
         -   [TiDBBinlogトポロジ](/tidb-binlog-deployment-topology.md)
-        -   [TiSpark トポロジー](/tispark-deployment-topology.md)
+        -   [TiSpark トポロジ](/tispark-deployment-topology.md)
         -   [クロス DC トポロジ](/geo-distributed-deployment-topology.md)
         -   [ハイブリッド トポロジ](/hybrid-deployment-topology.md)
     -   インストールして開始する

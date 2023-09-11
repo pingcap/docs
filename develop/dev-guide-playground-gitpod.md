@@ -38,6 +38,8 @@ TiDB プレイグラウンドの準備が完了すると、別の`Spring JPA Hib
 
 ![playground gitpod workspace ready](/media/develop/playground-gitpod-workspace-ready.png)
 
+[HTTPリクエストの送信](/develop/dev-guide-sample-application-java-spring-boot.md#step-6-http-requests)で API をテストできます。必ず`http://localhost:8080` URL を`REMOTE EXPLORER`領域で見つかった URL に置き換えてください。
+
 ## カスタム Gitpod 構成と Docker イメージの使用 {#using-custom-gitpod-configuration-and-docker-image}
 
 ### Gitpod 構成をカスタマイズする {#customize-gitpod-configurations}
