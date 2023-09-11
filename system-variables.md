@@ -4124,20 +4124,6 @@ SHOW WARNINGS;
 - The threshold at which the prepared plan cache triggers a memory protection mechanism. For details, see [Memory management of Prepared Plan Cache](/sql-prepared-plan-cache.md).
 - This setting was previously a `tidb.toml` option (`prepared-plan-cache.memory-guard-ratio`), but changed to a system variable starting from TiDB v6.1.0.
 
-### `tidb_service_scope` <span class="version-mark">New in v7.4.0</span>
-
-> **Warning:**
->
-> This feature is an experimental feature. It is not recommended to use it in production environments. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
-
-- Scope: GLOBAL
-- Persists to cluster: No
-- Type: String
-- Default value: ``
-- Optional Value: ``, `background`
-- This variable is an instance level system variable. You can use it to control the service scope of nodes under the [TiDB distributed execution framework](/tidb-distributed-execution-framework.md). When you set `tidb_service_scope` of a TiDB node to `background`, the TiDB distributed execution framework will schedule that TiDB server to execute background tasks (such as [`ADD INDEX`](/sql-statements/sql-statement-add-index.md) and [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md)).
-- If all nodes in the cluster do not set their own `tidb_service_scope`, TiDB distributed execution framework will schedule all TiDB servers to execute backend tasks by default.
-
 ### tidb_prepared_plan_cache_size <span class="version-mark">New in v6.1.0</span>
 
 > **Warning:**
@@ -4396,6 +4382,36 @@ SHOW WARNINGS;
 - Default value: `134217728` (which is 128 MB)
 - Range: `[128, 9223372036854775807]`, in bytes. The memory format with the units "KB|MB|GB|TB" is also supported.
 - After you enable the memory limit, TiDB will terminate the SQL statement with the highest memory usage on the current instance. This variable specifies the minimum memory usage of the SQL statement to be terminated. If the memory usage of a TiDB instance that exceeds the limit is caused by too many sessions with low memory usage, you can properly lower the value of this variable to allow more sessions to be canceled.
+
+### `tidb_service_scope` <span class="version-mark">New in v7.4.0</span>
+
+> **Warning:**
+>
+> This feature is an experimental feature. It is not recommended to use it in production environments. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+
+<CustomContent platform="tidb">
+
+- Scope: GLOBAL
+- Persists to cluster: No
+- Type: String
+- Default value: ``
+- Optional Value: ``, `background`
+- This variable is an instance level system variable. You can use it to control the service scope of nodes under the [TiDB distributed execution framework](/tidb-distributed-execution-framework.md). When you set `tidb_service_scope` of a TiDB node to `background`, the TiDB distributed execution framework will schedule that TiDB server to execute background tasks (such as [`ADD INDEX`](/sql-statements/sql-statement-add-index.md) and [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md)).
+- If all nodes in the cluster do not set their own `tidb_service_scope`, TiDB distributed execution framework will schedule all TiDB servers to execute backend tasks by default.
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+- Scope: GLOBAL
+- Persists to cluster: No
+- Type: String
+- Default value: ``
+- Optional Value: ``, `background`
+- This variable is an instance level system variable. You can use it to control the service scope of nodes under the [TiDB distributed execution framework](/tidb-distributed-execution-framework.md). When you set `tidb_service_scope` of a TiDB node to `background`, the TiDB distributed execution framework will schedule that TiDB server to execute background tasks (such as [`ADD INDEX`](/sql-statements/sql-statement-add-index.md) and [`IMPORT INTO`](https://docs.pingcap.com/tidb/dev/sql-statement-import-into)).
+- If all nodes in the cluster do not set their own `tidb_service_scope`, TiDB distributed execution framework will schedule all TiDB servers to execute backend tasks by default.
+
+</CustomContent>
 
 ### `tidb_session_plan_cache_size` <span class="version-mark">New in v7.1.0</span>
 
