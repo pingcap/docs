@@ -4124,6 +4124,21 @@ SHOW WARNINGS;
 - The threshold at which the prepared plan cache triggers a memory protection mechanism. For details, see [Memory management of Prepared Plan Cache](/sql-prepared-plan-cache.md).
 - This setting was previously a `tidb.toml` option (`prepared-plan-cache.memory-guard-ratio`), but changed to a system variable starting from TiDB v6.1.0.
 
+
+### `tidb_service_scope` <span class="version-mark">New in v7.4.0</span>
+
+> **Warning:**
+>
+> This feature is an experimental feature. It is not recommended to use it in production environments.
+
+- Scope: GLOBAL
+- Persists to cluster: No
+- Type: String
+- Default value: ``
+- Optional Value: ``, `background`
+- This variable is an instance level system variable which is used to control the service scope of nodes under [TiDB distributed execution framework](/tidb-distributed-execution-framework.md). When one TiDB server set `tidb_service_scope` to `background`,  TiDB distributed execution framework will schedule that TiDB server to execute background tasks(Add Index and `IMPORT INTO`）。
+- If all nodes in the cluster don't set their own `tidb_service_scope`, TiDB distributed execution framework will schedule all TiDB servers to execute backend tasks by default.
+
 ### tidb_prepared_plan_cache_size <span class="version-mark">New in v6.1.0</span>
 
 > **Warning:**

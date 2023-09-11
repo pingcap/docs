@@ -98,7 +98,7 @@ Adjust the following system variables related to Fast Online DDL:
     SET GLOBAL tidb_enable_dist_task = ON;
     ```
 
-    When backend tasks are running, the DDL statements supported by the framework are executed in a distributed manner.
+    When backend tasks are running, the statements supported by the framework(Add index and `IMPORT INTO`) are executed in a distributed manner. All TiDB nodes will run backend tasks by default.
 
 2. Adjust the following system variables that might affect the distributed execution of DDL tasks according to your needs:
 
@@ -106,7 +106,10 @@ Adjust the following system variables related to Fast Online DDL:
     * [`tidb_ddl_reorg_priority`](/system-variables.md#tidb_ddl_reorg_priority)
     * [`tidb_ddl_error_count_limit`](/system-variables.md#tidb_ddl_error_count_limit)
     * [`tidb_ddl_reorg_batch_size`](/system-variables.md#tidb_ddl_reorg_batch_size): use the default value. The recommended maximum value is `1024`.
-
+3. After upgrading to v7.4.0, you can adjust the number of nodes that perform backend tasks according to actual needs. After deploying the TiDB server, set the instance-level system variable [`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740). Set `tidb_service_scope` to `background` to execute backend tasks. When `tidb_service_scope` is set to the default value ``, the TiDB node can't execute backend tasks. If all nodes in the cluster don't set their own `tidb_service_scope`, TiDB distributed execution framework will schedule all TiDB servers to execute backend tasks by default.
+    > **Warning:**
+    >
+    > This feature is an experimental feature. It is not recommended to use it in production environments.
 > **Tip:**
 >
 > For distributed execution of `ADD INDEX` statements, you only need to set `tidb_ddl_reorg_worker_cnt`.
