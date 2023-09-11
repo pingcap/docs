@@ -1,7 +1,6 @@
 ---
 title: Configure TiDB serverless driver (Beta)
 summary: Learn how to configure TiDB serverless driver
-aliases: ['/tidbcloud/serverless-driver-config']
 ---
 
 # Configure TiDB serverless driver (Beta)
