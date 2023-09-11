@@ -101,7 +101,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 
     Be sure to replace the placeholders `{}` with the connection parameters obtained from the connection dialog.
 
-    TiDB Serverless requires a TLS (SSL) connection, so the value of `USE_SSL` should be set to `true`.
+    TiDB Serverless requires a secure connection. Therefore, you need to set the value of `USE_SSL` to `true`.
 
 7. Save the `.env` file.
 
@@ -157,7 +157,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
     USE_SSL='false'
     ```
 
-    Be sure to replace the placeholders `{}` with the connection parameters, and set the `USE_SSL` is `false`. If you are running TiDB locally, the default host address is `127.0.0.1`, and the password is empty.
+    Be sure to replace the placeholders `{}` with the connection parameters, and set `USE_SSL` to `false`. If you are running TiDB locally, the default host address is `127.0.0.1`, and the password is empty.
 
 3. Save the `.env` file.
 
@@ -198,7 +198,7 @@ func createDB() *gorm.DB {
 }
 ```
 
-When using this function, you should replace `${tidb_host}`, `${tidb_port}`, `${tidb_user}`, `${tidb_password}`, `${tidb_db_name}`, and other placeholders with the actual values of your TiDB cluster. Since TiDB Serverless requires a TLS (SSL) connection, when connecting to TiDB Serverless, the value of `${use_ssl}` should be set to `true`.
+When using this function, you should replace `${tidb_host}`, `${tidb_port}`, `${tidb_user}`, `${tidb_password}`, `${tidb_db_name}`, and other placeholders with the actual values of your TiDB cluster. TiDB Serverless requires a secure connection. Therefore, you need to set the value of `${use_ssl}` to `true`.
 
 ### Insert data
 
@@ -237,7 +237,6 @@ For more information, refer to [Delete data](/develop/dev-guide-delete-data.md).
 
 ## Next steps
 
-- Learn more usage of `MySQL Connector/J` from [the documentation of MySQL Connector/J](https://dev.mysql.com/doc/connector-j/8.1/en/).
 - Learn the best practices for TiDB application development with the chapters in the [Developer guide](/develop/dev-guide-overview.md), such as [Insert data](/develop/dev-guide-insert-data.md), [Update data](/develop/dev-guide-update-data.md), [Delete data](/develop/dev-guide-delete-data.md), [Single table reading](/develop/dev-guide-get-data-from-single-table.md), [Transactions](/develop/dev-guide-transaction-overview.md), and [SQL performance optimization](/develop/dev-guide-optimize-sql-overview.md).
 - Learn through the professional [TiDB developer courses](https://www.pingcap.com/education/) and earn [TiDB certifications](https://www.pingcap.com/education/certification/) after passing the exam.
 
