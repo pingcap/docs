@@ -12,14 +12,16 @@ TiDB serverless driver provides connection level configurations and SQL level op
 
 The following configurations are supported in connection level:
 
-| name     | type     | default      | comment                                                                                                                 |
-|----------|----------|--------------|-------------------------------------------------------------------------------------------------------------------------|
-| username | string   | /            | Username of TiDB Severless                                                                                              |
-| password | string   | /            | Password of TiDB Severless                                                                                              |
-| host     | string   | /            | Host of TiDB Severless                                                                                                  |
-| database | string   | test         | Database of TiDB Severless                                                                                              |
-| url      | string   | /            | A single url format as `mysql://username:password@host/database`. The `database` can be skipped to use the default one. |
-| fetch    | function | global fetch | Custom fetch function                                                                                                   |
+| name       | type       | default      | comment                                                                                                                 |
+|------------|------------|--------------|-------------------------------------------------------------------------------------------------------------------------|
+| username   | string     | /            | Username of TiDB Severless                                                                                              |
+| password   | string     | /            | Password of TiDB Severless                                                                                              |
+| host       | string     | /            | Host of TiDB Severless                                                                                                  |
+| database   | string     | test         | Database of TiDB Severless                                                                                              |
+| url        | string     | /            | A single url format as `mysql://username:password@host/database`. The `database` can be skipped to use the default one. |
+| fetch      | function   | global fetch | Custom fetch function                                                                                                   |
+| arrayMode  | bool       | false        | whether to return results as arrays instead of objects                                                                  |
+| fullResult | bool       | false        | whether to return full result object instead of just rows                                                               |
 
 ### Database URL
 
@@ -29,7 +31,7 @@ A single database URL value can be used to configure the `host`, `username`, `pa
 const config = {
   host: '<host>',
   username: '<user>',
-  password: '<password>'
+  password: '<password>',
   database: '<database>'
 }
 
@@ -40,23 +42,9 @@ const conn = connect(config)
 const conn = connect({url: process.env['DATABASE_URL'] || 'mysql://username:password@host/database'})
 ```
 
-### Custom fetch function
-
-You can custom fetch function instead of using the global one. It's useful when you run in the environment without a built-in global `fetch` function.
-
-```ts
-import { connect } from '@tidbcloud/serverless'
-import { fetch } from 'undici'
-
-const config = {
-  fetch,
-  url: process.env['DATABASE_URL'] || 'mysql://username:password@host/database'
-}
-
-const conn = connect(config)
-```
-
 ## SQL level Options
+
+> Note: SQL level options priority is higher than connection level configurations.
 
 The following options are supported in SQL level:
 
