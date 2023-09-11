@@ -54,4 +54,4 @@ Step 1: scan and prepare data
 Step 2: From the first step, we got a list of sorted blocks and it correlated statistics file, whick gives us the number of locally sorted blocks. Also, we have a real data scope that could be used by PD to split and scatter. 
   1. Sort statistics file records to cut an almost even range to be subtasks of step2 sort and ingest regions.
   2. Distribute subtasks to TiDB nodes for execution.
-  3. All TiDB nodes will independently sort subtask's data into ranges and ingest them into TiKV without overlap
+  3. All TiDB nodes will independently sort subtask's data into ranges and ingest them into TiKV without overlap.
