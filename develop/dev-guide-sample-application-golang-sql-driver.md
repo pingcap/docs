@@ -6,7 +6,7 @@ aliases: ['/tidb/dev/dev-guide-outdated-for-go-sql-driver-mysql','/tidb/dev/dev-
 
 # Connect to TiDB with Go-MySQL-Driver
 
-TiDB is a MySQL-compatible database. [Go-MySQL-Driver](https://github.com/go-sql-driver/mysql) is a MySQL implementation for the [database/sql](https://pkg.go.dev/database/sql) interface.
+TiDB is a MySQL-compatible database, and [Go-MySQL-Driver](https://github.com/go-sql-driver/mysql) is a MySQL implementation for the [database/sql](https://pkg.go.dev/database/sql) interface.
 
 In this tutorial, you can learn how to use TiDB and Go-MySQL-Driver to accomplish the following tasks:
 
@@ -91,7 +91,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 
 6. Copy and paste the corresponding connection string into the `.env` file. The example result is as follows:
 
-     ```dotenv
+    ```dotenv
     TIDB_HOST='{host}'  # e.g. gateway01.ap-northeast-1.prod.aws.tidbcloud.com
     TIDB_PORT='4000'
     TIDB_USER='{user}'  # e.g. xxxxxx.root
@@ -197,7 +197,7 @@ func openDB(driverName string, runnable func(db *sql.DB)) {
 }
 ```
 
-When using this function, you should replace `${tidb_host}`, `${tidb_port}`, `${tidb_user}`, `${tidb_password}`, `${tidb_db_name}`, and other placeholders with the actual values of your TiDB cluster. TiDB Serverless requires a secure connection. Therefore, you need to set the value of `${use_ssl}` to `true`.
+When using this function, you need to replace `${tidb_host}`, `${tidb_port}`, `${tidb_user}`, `${tidb_password}`, and `${tidb_db_name}` with the actual values of your TiDB cluster. TiDB Serverless requires a secure connection. Therefore, you need to set the value of `${use_ssl}` to `true`.
 
 ### Insert data
 
@@ -286,6 +286,7 @@ Unless you need to write complex SQL statements, it is recommended to use [ORM](
 
 ## Next steps
 
+- Learn more usage of Go-MySQL-Driver from [the documentation of Go-MySQL-Driver](https://github.com/go-sql-driver/mysql/blob/master/README.md).
 - Learn the best practices for TiDB application development with the chapters in the [Developer guide](/develop/dev-guide-overview.md), such as [Insert data](/develop/dev-guide-insert-data.md), [Update data](/develop/dev-guide-update-data.md), [Delete data](/develop/dev-guide-delete-data.md), [Single table reading](/develop/dev-guide-get-data-from-single-table.md), [Transactions](/develop/dev-guide-transaction-overview.md), and [SQL performance optimization](/develop/dev-guide-optimize-sql-overview.md).
 - Learn through the professional [TiDB developer courses](https://www.pingcap.com/education/) and earn [TiDB certifications](https://www.pingcap.com/education/certification/) after passing the exam.
 
