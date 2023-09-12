@@ -159,7 +159,7 @@ Metadata is a JSON-formatted file, for example:
 
 When a DDL event of an upstream table causes a table version change, TiCDC automatically does the following:
 
-- Changes to a new path to write data change records. For example, when the version of `test.table1` changes to `441349361156227074`, TiCDC changes to the `s3://bucket/bbb/ccc/test/table1/441349361156227074/2022-01-02/` the path to write data change records.
+- Switches to a new path to write data change records. For example, when the version of `test.table1` changes to `441349361156227074`, TiCDC changes to the `s3://bucket/bbb/ccc/test/table1/441349361156227074/2022-01-02/` path to write data change records.
 - Generates a schema file in the following path to store the table schema information:
 
     ```shell
@@ -248,7 +248,7 @@ Taking the `schema_441349361156227000_3131721815.json` schema file as an example
 
 ### Data type
 
-This section describes the data types used in the `schema_{table-version}_{hash}.json` file (shorten as schema file in the following sections). The data types are defined as `T(M[, D])`. For details, see [Data Types](/data-type-overview.md).
+This section describes the data types used in the `schema_{table-version}_{hash}.json` file (hereafter referred to as "schema file" in the following sections). The data types are defined as `T(M[, D])`. For details, see [Data Types](/data-type-overview.md).
 
 #### Integer types
 
