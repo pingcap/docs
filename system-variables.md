@@ -4394,10 +4394,10 @@ SHOW WARNINGS;
 - Scope: GLOBAL
 - Persists to cluster: No
 - Type: String
-- Default value: ``
-- Optional Value: ``, `background`
+- Default value: ""
+- Optional Value: "", `background`
 - This variable is an instance-level system variable. You can use it to control the service scope of TiDB nodes under the [TiDB distributed execution framework](/tidb-distributed-execution-framework.md). When you set `tidb_service_scope` of a TiDB node to `background`, the TiDB distributed execution framework schedules that TiDB node to execute background tasks, such as [`ADD INDEX`](/sql-statements/sql-statement-add-index.md) and [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md).
-- If `tidb_service_scope` of all TiDB nodes in the cluster are not set, the TiDB distributed execution framework schedules all TiDB nodes to execute background tasks by default.
+- If `tidb_service_scope` is not set for any TiDB node in a cluster, the TiDB distributed execution framework schedules all TiDB nodes to execute background tasks by default.
 
 </CustomContent>
 
@@ -4406,10 +4406,10 @@ SHOW WARNINGS;
 - Scope: GLOBAL
 - Persists to cluster: No
 - Type: String
-- Default value: ``
-- Optional Value: ``, `background`
-- This variable is an instance-level system variable. You can use it to control the service scope of TiDB nodes under the [TiDB distributed execution framework](/tidb-distributed-execution-framework.md). When you set `tidb_service_scope` of a TiDB node to `background`, the TiDB distributed execution framework schedules that TiDB node to execute background tasks, such as [`ADD INDEX`](/sql-statements/sql-statement-add-index.md) and [`IMPORT INTO`](https://docs.pingcap.com/tidb/dev/sql-statement-import-into).
-- If `tidb_service_scope` of all TiDB nodes in the cluster are not set, the TiDB distributed execution framework schedules all TiDB nodes to execute background tasks by default.
+- Default value: ""
+- Optional Value: "", `background`
+- This variable is an instance-level system variable. You can use it to control the service scope of TiDB nodes under the [TiDB distributed execution framework](/tidb-distributed-execution-framework.md). When you set `tidb_service_scope` of a TiDB node to `background`, the TiDB distributed execution framework schedules that TiDB node to execute background tasks, such as [`ADD INDEX`](/sql-statements/sql-statement-add-index.md).
+- If `tidb_service_scope` is not set for any TiDB node in a cluster, the TiDB distributed execution framework schedules all TiDB nodes to execute background tasks by default.
 
 </CustomContent>
 
