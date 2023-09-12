@@ -125,7 +125,7 @@ Backup and restore might go wrong when some TiDB features are enabled or disable
 
 Before performing backup and restore, BR compares the TiDB cluster version with its own and checks their compatibility. If the versions are incompatible, BR reports an error and exits. To forcibly skip the version check, you can set `--check-requirements=false`. Note that skipping the version check might introduce incompatibility in data.
 
-Starting from v7.0.0, TiDB gradually supports performing backup and restore operations through SQL statements. Therefore, it is strongly recommended to use the BR tool of the same major version as the TiDB cluster when backing up and restoring clusters, and avoid performing data backup and restore operations across major versions. This helps ensure smooth execution of restore operations and data consistency.
+Starting from v7.0.0, TiDB gradually supports performing backup and restore operations through SQL statements. Therefore, it is strongly recommended to use the BR tool of the same major version as the TiDB cluster when backing up and restoring cluster data, and avoid performing data backup and restore operations across major versions. This helps ensure smooth execution of restore operations and data consistency.
 
 The compatibility information for BR before TiDB v6.6.0 is as follows:
 
