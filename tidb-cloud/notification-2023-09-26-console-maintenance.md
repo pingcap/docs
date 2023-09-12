@@ -5,6 +5,8 @@ summary: Learn about the details of the TiDB Cloud Console maintenance on Sep 26
 
 # [2023-09-26] TiDB Cloud Console Maintenance Notification
 
+This notification describes the details that you need to know about the [TiDB Cloud console](https://tidbcloud.com/) maintenance on September 26, 2023.
+
 ## Maintenance window
 
 - Date: 2023-09-26
@@ -22,9 +24,9 @@ We're upgrading the management infrastucture of the TiDB Cloud Serverless to enh
 
 ## Impact
 
-During the maintenance window, you might experience intermittent disruptions for functionalities involving the creation and updating within the TiDB Cloud Console UI and Open API. However, your TiDB clusters will maintain their regular operations for data read and write, ensuring no adverse effects on your online business.
+During the maintenance window, you might experience intermittent disruptions in functionalities related to creating and updating within the TiDB Cloud console UI and API. However, your TiDB cluster will maintain its regular operations for data read and write, ensuring no adverse effects on your online business.
 
-### affected features on Console UI  
+### Affected features of TiDB Cloud console UI
 
 - Cluster level
     - Cluster management
@@ -65,9 +67,9 @@ During the maintenance window, you might experience intermittent disruptions for
         - Delete backups
         - Restore clusters        
 
-### Affected features on Console Open API
+### Affected features of TiDB Cloud API
 
-- All [API requests](https://docs.pingcap.com/tidbcloud/api/v1beta)  will be responsed with 500.
+- All [API requests](https://docs.pingcap.com/tidbcloud/api/v1beta) will be responded with 500.
 - [Data Service API](https://docs.pingcap.com/tidbcloud/data-service-overview) will not be affected.
 
 ## Completion and resumption
@@ -76,4 +78,4 @@ Once the maintenance is successfully completed, the affected functionalities wil
 
 ## Get support
 
-If you have any questions or need assistance, contact our [support team](https://docs.pingcap.com/tidbcloud/tidb-cloud-support#tidb-cloud-support). We are here to address your concerns and provide any necessary guidance.
+If you have any questions or need assistance, contact our [support team](/tidb-cloud/tidb-cloud-support.md). We are here to address your concerns and provide any necessary guidance.
