@@ -4388,7 +4388,7 @@ SHOW WARNINGS;
 - Scope: SESSION
 - Persists to cluster: No
 - Default value: ""
-- You can use this variable to customize the value of the `session_alias` column in the logs related to the current session. This setting affects the logs of multiple nodes during the execution of the statement (including TiKV). The maximum length of this variable is limited to 64 characters, and any exceeding length will be truncated automatically. Spaces at the end of the variable value will also be removed automatically.
+- You can use this variable to customize the value of the `session_alias` column in the logs related to the current session. This setting affects the logs of multiple nodes during the execution of the statement (including TiKV). The maximum length of this variable is limited to 64 characters, and any exceeding length will be truncated automatically. Spaces at the end of the value will also be removed automatically.
 
 ### `tidb_session_plan_cache_size` <span class="version-mark">New in v7.1.0</span>
 
