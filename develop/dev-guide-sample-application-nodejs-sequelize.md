@@ -222,15 +222,17 @@ export function initSequelize() {
     password: process.env.TIDB_PASSWORD || 'root',  // TiDB password
     database: process.env.TIDB_DB_NAME || 'test',   // TiDB database name, default: test
     dialectOptions: {
-      ssl: {
-        minVersion: 'TLSv1.2',
-        rejectUnauthorized: true,
-        ca: process.env.TIDB_CA_PATH
-          ? readFileSync(process.env.TIDB_CA_PATH)
-          : undefined,
-      },
+      ssl:
+        process.env?.TIDB_ENABLE_SSL === 'true'     // (Optional) Enable SSL
+          ? {
+              minVersion: 'TLSv1.2',
+              rejectUnauthorized: true,
+              ca: process.env.TIDB_CA_PATH          // (Optional) Path to the custom CA certificate
+                ? readFileSync(process.env.TIDB_CA_PATH)
+                : undefined,
+            }
+          : null,
     },
-  });
 }
 
 export async function getSequelize() {
