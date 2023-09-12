@@ -109,6 +109,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
     TIDB_USER='{user}'
     TIDB_PASSWORD='{password}'
     TIDB_DB_NAME='test'
+    TIDB_SSL_MODE='true'
     ```
 
 7. Save the `.env` file.
@@ -139,6 +140,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
     TIDB_USER='{user}'
     TIDB_PASSWORD='{password}'
     TIDB_DB_NAME='test'
+    TIDB_SSL_MODE='true'
     TIDB_CA_PATH='{path/to/ca}'
     ```
 
