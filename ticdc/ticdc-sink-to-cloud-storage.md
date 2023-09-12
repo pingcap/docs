@@ -124,8 +124,6 @@ Data change records are saved to the following path:
 >
 > The table version changes only after a DDL operation is performed on the upstream table, and the new table version is the TSO when the upstream TiDB completes the execution of the DDL. However, the change of the table version does not mean the change of the table schema. For example, adding a comment to a column does not cause the schema file content to change.
 
-<<<<<<< HEAD
-=======
 ### Index files
 
 An index file is used to prevent written data from being overwritten by mistake. It is stored in the same path as the data change records.
@@ -142,7 +140,6 @@ CDC000005.csv
 
 In this example, the files `CDC000001.csv` through `CDC000004.csv` in this directory are occupied. When a table scheduling or node restart occurs in the TiCDC cluster, the new node reads the index file and determines if `CDC000005.csv` is occupied. If it is not occupied, the new node writes the file starting from `CDC000005.csv`. If it is occupied, it starts writing from `CDC000006.csv`, which prevents overwriting data written by other nodes.
 
->>>>>>> fb8d43b752 (ticdc: update storage sink doc (#14510))
 ### Metadata
 
 Metadata is saved in the following path:
