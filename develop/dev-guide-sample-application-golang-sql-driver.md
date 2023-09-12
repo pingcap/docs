@@ -1,13 +1,7 @@
 ---
-<<<<<<< HEAD
-title: Build a Simple CRUD App with TiDB and Go-MySQL-Driver
-summary: Learn how to build a simple CRUD application with TiDB and Go-MySQL-Driver.
-aliases: ['/tidbcloud/dev-guide-sample-application-golang','/tidb/stable/dev-guide-sample-application-golang','/tidb/v6.5/dev-guide-sample-application-golang']
-=======
 title: Connect to TiDB with Go-MySQL-Driver
 summary: Learn how to connect to TiDB using Go-MySQL-Driver. This tutorial gives Golang sample code snippets that work with TiDB using Go-MySQL-Driver.
-aliases: ['/tidb/dev/dev-guide-outdated-for-go-sql-driver-mysql','/tidb/dev/dev-guide-outdated-for-gorm','/tidb/dev/dev-guide-sample-application-golang']
->>>>>>> 260a93f822 (translate: simplify examples for golang documents from the docs-cn (#14724))
+aliases: ['/tidbcloud/dev-guide-sample-application-golang','/tidb/stable/dev-guide-sample-application-golang','/tidb/v6.5/dev-guide-sample-application-golang']
 ---
 
 # Connect to TiDB with Go-MySQL-Driver
