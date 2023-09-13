@@ -220,7 +220,7 @@ br restore full \
 
 ### Restore execution plan bindings from the `mysql` schema
 
-To restore execution plan bindings of the original cluster, you can run the `br restore full` command, include `--with-sys-table`, and set the `mysql` schema to restore using `--filter` or `-f`.
+To restore execution plan bindings of a cluster, you can run the `br restore full` command, including the `--with-sys-table` option and also the `--filter` or `-f` option to specify the `mysql` schema to be restored.
 
 The following is an example of restoring the `mysql.bind_info` table:
 
@@ -240,10 +240,10 @@ After the restore is completed, you can confirm the execution plan binding infor
 SHOW GLOBAL BINDINGS;
 ```
 
-The dynamic loading of execution plan bindings after the restore is still under optimization (related issues are [#46527](https://github.com/pingcap/tidb/issues/46527) and [#46528](https://github.com/pingcap/tidb/issues/46528)). You need to manually reload the execution plan bindings.
+The dynamic loading of execution plan bindings after the restore is still undergoing optimization (related issues are [#46527](https://github.com/pingcap/tidb/issues/46527) and [#46528](https://github.com/pingcap/tidb/issues/46528)). You need to manually reload the execution plan bindings after the restore.
 
 ```sql
--- Ensure that the mysql.bind_info table has only one record for builtin_pseudo_sql_for_bind_lock. If there are more than one record, you need to manually delete them.
+-- Ensure that the mysql.bind_info table has only one record for builtin_pseudo_sql_for_bind_lock. If there are more records, you need to manually delete them.
 SELECT count(*) FROM mysql.bind_info WHERE original_sql = 'builtin_pseudo_sql_for_bind_lock';
 DELETE FROM bind_info WHERE original_sql = 'builtin_pseudo_sql_for_bind_lock' LIMIT 1;
 
