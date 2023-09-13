@@ -498,6 +498,7 @@
         - [Perform Stale Read Using `tidb_read_staleness`](/tidb-read-staleness.md)
         - [Perform Stale Read Using `tidb_external_ts`](/tidb-external-ts.md)
       - [Use the `tidb_snapshot` System Variable](/read-historical-data.md)
+    - [Placement Rules in SQL](/placement-rules-in-sql.md)
     - System Tables
       - [`mysql`](/mysql-schema.md)
       - INFORMATION_SCHEMA
