@@ -9,7 +9,7 @@ This document describes how to stream data from a TiDB Dedicated cluster to a Ti
 
 > **Note:**
 >
-> To use the Changefeed feature, make sure that your TiDB Dedicated cluster version is v6.4.0 or later.
+> To use the Changefeed feature, make sure that your TiDB Dedicated cluster version is v6.1.3 or later.
 
 ## Restrictions
 
