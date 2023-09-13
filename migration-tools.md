@@ -51,7 +51,7 @@ This document introduces the user scenarios, supported upstreams and downstreams
     - Support exporting data to Amazon S3
 - **Limitation**:
     - If you want to restore the exported data to a database other than TiDB, it is recommended to use Dumpling.
-    If you want to restore the exported data to another TiDB cluster, it is recommended to use Backup & Restore (BR).
+    - If you want to restore the exported data to another TiDB cluster, it is recommended to use Backup & Restore (BR).
 
 ## [TiCDC](/ticdc/ticdc-overview.md)
 
