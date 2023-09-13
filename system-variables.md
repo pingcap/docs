@@ -348,6 +348,10 @@ mysql> SELECT * FROM t1;
 
 ### datadir
 
+> **Note:**
+>
+> This variable is not supported on [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless).
+
 <CustomContent platform="tidb">
 
 - Scope: NONE
@@ -1141,13 +1145,9 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 
 ### tidb_check_mb4_value_in_utf8
 
-<CustomContent platform="tidb-cloud">
-
 > **Note:**
 >
 > This TiDB variable is not applicable to TiDB Cloud.
-
-</CustomContent>
 
 - Scope: GLOBAL
 - Persists to cluster: No, only applicable to the current TiDB instance that you are connecting to.
@@ -1179,13 +1179,9 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 
 ### tidb_config
 
-<CustomContent platform="tidb-cloud">
-
 > **Note:**
 >
 > This TiDB variable is not applicable to TiDB Cloud.
-
-</CustomContent>
 
 - Scope: GLOBAL
 - Persists to cluster: No, only applicable to the current TiDB instance that you are connecting to.
@@ -1638,13 +1634,9 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 
 ### tidb_enable_collect_execution_info
 
-<CustomContent platform="tidb-cloud">
-
 > **Note:**
 >
 > This TiDB variable is not applicable to TiDB Cloud.
-
-</CustomContent>
 
 - Scope: GLOBAL
 - Persists to cluster: No, only applicable to the current TiDB instance that you are connecting to.
@@ -2148,13 +2140,9 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 
 ### tidb_enable_slow_log
 
-<CustomContent platform="tidb-cloud">
-
 > **Note:**
 >
 > This TiDB variable is not applicable to TiDB Cloud.
-
-</CustomContent>
 
 - Scope: GLOBAL
 - Persists to cluster: No, only applicable to the current TiDB instance that you are connecting to.
@@ -2223,13 +2211,9 @@ Query OK, 0 rows affected (0.09 sec)
 
 ### tidb_enable_telemetry <span class="version-mark">New in v4.0.2</span>
 
-<CustomContent platform="tidb-cloud">
-
 > **Note:**
 >
 > This TiDB variable is not applicable to TiDB Cloud.
-
-</CustomContent>
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
@@ -2438,13 +2422,9 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 ### tidb_expensive_query_time_threshold
 
-<CustomContent platform="tidb-cloud">
-
 > **Note:**
 >
 > This TiDB variable is not applicable to TiDB Cloud.
-
-</CustomContent>
 
 - Scope: GLOBAL
 - Persists to cluster: No, only applicable to the current TiDB instance that you are connecting to.
@@ -2458,13 +2438,9 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 ### tidb_force_priority
 
-<CustomContent platform="tidb-cloud">
-
 > **Note:**
 >
 > This TiDB variable is not applicable to TiDB Cloud.
-
-</CustomContent>
 
 - Scope: GLOBAL
 - Persists to cluster: No, only applicable to the current TiDB instance that you are connecting to.
@@ -2579,13 +2555,9 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 ### tidb_general_log
 
-<CustomContent platform="tidb-cloud">
-
 > **Note:**
 >
 > This TiDB variable is not applicable to TiDB Cloud.
-
-</CustomContent>
 
 - Scope: GLOBAL
 - Persists to cluster: No, only applicable to the current TiDB instance that you are connecting to.
@@ -3186,13 +3158,9 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 ### tidb_memory_usage_alarm_ratio
 
-<CustomContent platform="tidb-cloud">
-
 > **Note:**
 >
 > This TiDB variable is not applicable to TiDB Cloud.
-
-</CustomContent>
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
@@ -3258,13 +3226,9 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 ### tidb_metric_query_range_duration <span class="version-mark">New in v4.0</span>
 
-<CustomContent platform="tidb-cloud">
-
 > **Note:**
 >
 > This TiDB variable is not applicable to TiDB Cloud.
-
-</CustomContent>
 
 - Scope: SESSION
 - Type: Integer
@@ -3275,13 +3239,9 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 ### tidb_metric_query_step <span class="version-mark">New in v4.0</span>
 
-<CustomContent platform="tidb-cloud">
-
 > **Note:**
 >
 > This TiDB variable is not applicable to TiDB Cloud.
-
-</CustomContent>
 
 - Scope: SESSION
 - Type: Integer
@@ -3937,13 +3897,9 @@ SHOW WARNINGS;
 
 ### tidb_opt_write_row_id
 
-<CustomContent platform="tidb-cloud">
-
 > **Note:**
 >
 > This TiDB variable is not applicable to TiDB Cloud.
-
-</CustomContent>
 
 - Scope: SESSION
 - Type: Boolean
@@ -4026,13 +3982,9 @@ SHOW WARNINGS;
 
 ### tidb_pprof_sql_cpu <span class="version-mark">New in v4.0</span>
 
-<CustomContent platform="tidb-cloud">
-
 > **Note:**
 >
 > This TiDB variable is not applicable to TiDB Cloud.
-
-</CustomContent>
 
 - Scope: GLOBAL
 - Persists to cluster: No, only applicable to the current TiDB instance that you are connecting to.
@@ -4146,13 +4098,9 @@ SHOW WARNINGS;
 
 ### tidb_record_plan_in_slow_log
 
-<CustomContent platform="tidb-cloud">
-
 > **Note:**
 >
 > This TiDB variable is not applicable to TiDB Cloud.
-
-</CustomContent>
 
 - Scope: GLOBAL
 - Persists to cluster: No, only applicable to the current TiDB instance that you are connecting to.
@@ -4162,13 +4110,9 @@ SHOW WARNINGS;
 
 ### tidb_redact_log
 
-<CustomContent platform="tidb-cloud">
-
 > **Note:**
 >
 > This TiDB variable is not applicable to TiDB Cloud.
-
-</CustomContent>
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
@@ -4206,13 +4150,9 @@ SHOW WARNINGS;
 
 ### tidb_restricted_read_only <span class="version-mark">New in v5.2.0</span>
 
-<CustomContent platform="tidb-cloud">
-
 > **Note:**
 >
 > This TiDB variable is not applicable to TiDB Cloud.
-
-</CustomContent>
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
@@ -4245,13 +4185,9 @@ SHOW WARNINGS;
 
 ### tidb_row_format_version
 
-<CustomContent platform="tidb-cloud">
-
 > **Note:**
 >
 > This TiDB variable is not applicable to TiDB Cloud.
-
-</CustomContent>
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
@@ -4389,13 +4325,9 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 
 ### tidb_slow_log_threshold
 
-<CustomContent platform="tidb-cloud">
-
 > **Note:**
 >
 > This TiDB variable is not applicable to TiDB Cloud.
-
-</CustomContent>
 
 - Scope: GLOBAL
 - Persists to cluster: No, only applicable to the current TiDB instance that you are connecting to.
@@ -4407,13 +4339,9 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 
 ### tidb_slow_query_file
 
-<CustomContent platform="tidb-cloud">
-
 > **Note:**
 >
 > This TiDB variable is not applicable to TiDB Cloud.
-
-</CustomContent>
 
 - Scope: SESSION
 - Default value: ""
@@ -4766,13 +4694,9 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 
 ### tidb_top_sql_max_meta_count <span class="version-mark">New in v6.0.0</span>
 
-<CustomContent platform="tidb-cloud">
-
 > **Note:**
 >
 > This TiDB variable is not applicable to TiDB Cloud.
-
-</CustomContent>
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
@@ -4794,13 +4718,9 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 
 ### tidb_top_sql_max_time_series_count <span class="version-mark">New in v6.0.0</span>
 
-<CustomContent platform="tidb-cloud">
-
 > **Note:**
 >
 > This TiDB variable is not applicable to TiDB Cloud.
-
-</CustomContent>
 
 > **Note:**
 >
@@ -5177,6 +5097,10 @@ Internally, the TiDB parser transforms the `SET TRANSACTION ISOLATION LEVEL [REA
 
 ### validate_password.enable <span class="version-mark">New in v6.5.0</span>
 
+> **Note:**
+>
+> This variable is always enabled for [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless).
+
 - Scope: GLOBAL
 - Persists to cluster: Yes
 - Default value: `OFF`
@@ -5189,7 +5113,7 @@ Internally, the TiDB parser transforms the `SET TRANSACTION ISOLATION LEVEL [REA
 - Persists to cluster: Yes
 - Type: Integer
 - Default value: `8`
-- Range: `[0, 2147483647]`
+- Range: `[0, 2147483647]` for TiDB Self-Hosted and TiDB Dedicated, `[8, 2147483647]` for TiDB Serverless
 - This variable is a check item in the password complexity check. It checks whether the password length is sufficient. By default, the minimum password length is `8`. This variable takes effect only when [`validate_password.enable`](#validate_passwordenable-new-in-v650) is enabled.
 - The value of this variable must not be smaller than the expression: `validate_password.number_count + validate_password.special_char_count + (2 * validate_password.mixed_case_count)`.
 - If you change the value of `validate_password.number_count`, `validate_password.special_char_count`, or `validate_password.mixed_case_count` such that the expression value is larger than `validate_password.length`, the value of `validate_password.length` is automatically changed to match the expression value.
@@ -5200,7 +5124,7 @@ Internally, the TiDB parser transforms the `SET TRANSACTION ISOLATION LEVEL [REA
 - Persists to cluster: Yes
 - Type: Integer
 - Default value: `1`
-- Range: `[0, 2147483647]`
+- Range: `[0, 2147483647]` for TiDB Self-Hosted and TiDB Dedicated, `[1, 2147483647]` for TiDB Serverless
 - This variable is a check item in the password complexity check. It checks whether the password contains sufficient uppercase and lowercase letters. This variable takes effect only when [`validate_password.enable`](#validate_passwordenable-new-in-v650) is enabled and [`validate_password.policy`](#validate_passwordpolicy-new-in-v650) is set to `1` (MEDIUM) or larger.
 - Neither the number of uppercase letters nor the number of lowercase letters in the password can be fewer than the value of `validate_password.mixed_case_count`. For example, when the variable is set to `1`, the password must contain at least one uppercase letter and one lowercase letter.
 
@@ -5210,7 +5134,7 @@ Internally, the TiDB parser transforms the `SET TRANSACTION ISOLATION LEVEL [REA
 - Persists to cluster: Yes
 - Type: Integer
 - Default value: `1`
-- Range: `[0, 2147483647]`
+- Range: `[0, 2147483647]` for TiDB Self-Hosted and TiDB Dedicated, `[1, 2147483647]` for TiDB Serverless
 - This variable is a check item in the password complexity check. It checks whether the password contains sufficient numbers. This variable takes effect only when [`validate_password.enable`](#password_reuse_interval-new-in-v650) is enabled and [`validate_password.policy`](#validate_passwordpolicy-new-in-v650) is set to `1` (MEDIUM) or larger.
 
 ### validate_password.policy <span class="version-mark">New in v6.5.0</span>
@@ -5219,7 +5143,7 @@ Internally, the TiDB parser transforms the `SET TRANSACTION ISOLATION LEVEL [REA
 - Persists to cluster: Yes
 - Type: Enumeration
 - Default value: `1`
-- Value options: `0`, `1`, `2`
+- Value options: `0`, `1`, and `2` for TiDB Self-Hosted and TiDB Dedicated; `1` and `2` for TiDB Serverless
 - This variable controls the policy for the password complexity check. This variable takes effect only when [`validate_password.enable`](#password_reuse_interval-new-in-v650) is enabled. The value of this variable determines whether other `validate-password` variables take effect in the password complexity check, except for `validate_password.check_user_name`.
 - This value of this variable can be `0`, `1`, or `2` (corresponds to LOW, MEDIUM, or STRONG). Different policy levels have different checks:
     - 0 or LOW: password length.
@@ -5232,7 +5156,7 @@ Internally, the TiDB parser transforms the `SET TRANSACTION ISOLATION LEVEL [REA
 - Persists to cluster: Yes
 - Type: Integer
 - Default value: `1`
-- Range: `[0, 2147483647]`
+- Range: `[0, 2147483647]` for TiDB Self-Hosted and TiDB Dedicated, `[1, 2147483647]` for TiDB Serverless
 - This variable is a check item in the password complexity check. It checks whether the password contains sufficient special characters. This variable takes effect only when [`validate_password.enable`](#password_reuse_interval-new-in-v650) is enabled and [`validate_password.policy`](#validate_passwordpolicy-new-in-v650) is set to `1` (MEDIUM) or larger.
 
 ### version
