@@ -7,7 +7,10 @@ summary: Learn about the TiFlash Pipeline Execution Model.
 
 This document introduces the TiFlash pipeline execution model.
 
-Starting from v7.2.0, TiFlash supports a new execution model, the pipeline execution model. You can control whether to enable the TiFlash pipeline execution model by modifying the system variable [`tiflash_enable_pipeline_model`](/system-variables.md#tiflash_enable_pipeline_model-new-in-v720).
+Starting from v7.2.0, TiFlash supports a new execution model, the pipeline execution model. You can control whether to enable the TiFlash pipeline execution model by modifying the system variable:
+
+- For v7.2.0 and v7.3.0: use [`tidb_enable_tiflash_pipeline_model`](https://docs.pingcap.com/tidb/v7.2/system-variables#tidb_enable_tiflash_pipeline_model-new-in-v720) to control.
+- For v7.4.0 and later versions: `tidb_enable_tiflash_pipeline_model` is renamed to `tiflash_enable_pipeline_model`. You can use [`tiflash_enable_pipeline_model`](/system-variables.md#tiflash_enable_pipeline_model-new-in-v740) to control.
 
 Inspired by the paper [Morsel-Driven Parallelism: A NUMA-Aware Query Evaluation Framework for the Many-Core Age](https://dl.acm.org/doi/10.1145/2588555.2610507), the TiFlash pipeline execution model provides a fine-grained task scheduling model, which is different from the traditional thread scheduling model. It reduces the overhead of operating system thread scheduling and provides a fine-grained scheduling mechanism.
 

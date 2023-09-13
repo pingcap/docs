@@ -2261,7 +2261,7 @@ Query OK, 0 rows affected (0.09 sec)
 
 </CustomContent>
 
-### tiflash_enable_pipeline_model <span class="version-mark">New in v7.2.0</span>
+### tiflash_enable_pipeline_model <span class="version-mark">New in v7.4.0</span>
 
 <CustomContent platform="tidb">
 
@@ -2272,6 +2272,7 @@ Query OK, 0 rows affected (0.09 sec)
 - This variable controls whether to enable the new [Pipeline Execution Model](/tiflash/tiflash-pipeline-model.md) in TiFlash.
 - When this variable is set to `ON` to enable the pipeline execution model, the query pushed down to TiFlash will be executed using the new pipeline execution model.
 - When this variable is set to `OFF` to disable the pipeline execution model, the query pushed down to TiFlash will be executed using the original stream model.
+- This variable is renamed from `tidb_enable_tiflash_pipeline_model`.
 
 </CustomContent>
 
@@ -2284,6 +2285,7 @@ Query OK, 0 rows affected (0.09 sec)
 - This variable controls whether to enable the new [Pipeline Execution Model](https://docs.pingcap.com/tidb/v7.2/tiflash-pipeline-model) in TiFlash.
 - When this variable is set to `ON` to enable the pipeline execution model, the query pushed down to TiFlash will be executed using the new pipeline execution model.
 - When this variable is set to `OFF` to disable the pipeline execution model, the query pushed down to TiFlash will be executed using the original stream model.
+- This variable is renamed from `tidb_enable_tiflash_pipeline_model`.
 
 </CustomContent>
 
