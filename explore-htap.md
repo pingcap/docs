@@ -47,7 +47,7 @@ To enhance the overall performance of TiDB, it is recommended to use HTAP in the
 
 - Strongly consistent analysis
 
-    To achieve real-time, strongly consistent data analysis and calculation, and ensure the analysis results to be completely consistent with the data, you need to avoid data latency and inconsistency issues.
+    To achieve real-time, strongly consistent data analysis and calculation, and ensure the analysis results to be completely consistent with the transactional data, you need to avoid data latency and inconsistency issues.
 
 ## Architecture
 
