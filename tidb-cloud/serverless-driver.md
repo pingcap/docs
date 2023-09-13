@@ -197,3 +197,4 @@ TiDB serverless driver following the [TiDB serverless pricing](https://www.pingc
 ## What's next
 
 - [Learn how to configure TiDB serverless driver](/tidb-cloud/serverless-driver-config.md).
+- [Learn how to use Kysely ORM with TiDB serverless driver dialect](https://github.com/tidbcloud/kysely).
