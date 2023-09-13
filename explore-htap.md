@@ -31,7 +31,7 @@ The following are the typical use cases of HTAP:
 
 For more information about use cases of TiDB HTAP, see [blogs about HTAP on the PingCAP website](https://en.pingcap.com/blog/?tag=htap).
 
-To enhance the overall performance of the TiDB database, it is recommended to use HTAP in the following technical scenarios:
+To enhance the overall performance of TiDB, it is recommended to use HTAP in the following technical scenarios:
 
 - Improve analytical processing performance
 
@@ -39,11 +39,11 @@ To enhance the overall performance of the TiDB database, it is recommended to us
 
 - Hybrid workload isolation
 
-    In high-concurrency Online Transactional Processing (OLTP) scenarios, you might also have to handle OLAP workloads. To ensure the overall system stability, you need to avoid the impact of OLAP queries on OLTP performance.
+   While dealing with high-concurrency Online Transactional Processing (OLTP) workloads, your system might also need to handle some OLAP workloads. To ensure the overall system stability, you expect to avoid the impact of OLAP queries on OLTP performance.
 
 - Simplify the ETL technology stack
 
-    When the amount of data to be processed is of medium scale (less than 100 TB), the data processing and scheduling processes are relatively simple, and the concurrency is not high (less than 10), you might want to simplify the technology stack. By replacing multiple different technology stacks used in OLTP, ETL, and OLAP systems with a single database, you can meet the requirements of both transactional systems and analytical systems. This reduces technical complexity and the need for maintenance personnel.
+    When the amount of data to be processed is of medium scale (less than 100 TB), the data processing and scheduling processes are relatively simple, and the concurrency is not high (less than 10), you might want to simplify the technology stack of your system. By replacing multiple different technology stacks used in OLTP, ETL, and OLAP systems with a single database, you can meet the requirements of both transactional systems and analytical systems. This reduces technical complexity and the need for maintenance personnel.
 
 - Strongly consistent analysis
 
