@@ -422,7 +422,7 @@ TiDB v6.0.0 is a DMR, and its version is 6.0.0-DMR.
     <td>TiKV</td>
     <td><a href="https://docs.pingcap.com/tidb/dev/tikv-configuration-file#raft-max-size-per-msg"><code>raftstore.raft-max-size-per-msg</code></a></td>
     <td>Modified</td>
-    <td>The minimum value is changed from 0 to larger than 0.<br/>The maximum value is set to <code>3GB</code>.<br/>The unit is changed from <code>MB</code> to <code>KB|MB|GB</code>.</td>
+    <td>The minimum value is changed from <code>0</code> to larger than <code>0</code>.<br/>The maximum value is set to <code>3GB</code>.<br/>The unit is changed from <code>MB</code> to <code>KB|MB|GB</code>.</td>
   </tr>
   <tr>
     <td>TiKV</td>
