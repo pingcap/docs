@@ -66,7 +66,7 @@ Before you begin to create an endpoint:
     - Tasks:
         - Create an endpoint
         - Automatically or manually configure [DNS entries](https://cloud.google.com/vpc/docs/configure-private-service-connect-services#dns-endpoint) for an endpoint
-    - Required IAM Roles:
+    - Required IAM roles:
         - [Compute Network Admin](https://cloud.google.com/iam/docs/understanding-roles#compute.networkAdmin) (roles/compute.networkAdmin)
         - [Service Directory Editor](https://cloud.google.com/iam/docs/understanding-roles#servicedirectory.editor) (roles/servicedirectory.editor)
 
