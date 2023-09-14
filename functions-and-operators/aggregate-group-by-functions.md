@@ -66,8 +66,7 @@ In addition, TiDB also provides the following aggregate functions:
 Except for the `GROUP_CONCAT()` and `APPROX_PERCENTILE()` functions, all the preceding functions can serve as [Window functions](/functions-and-operators/window-functions.md).
 
 ## GROUP BY modifiers
-
-TiDB does not currently support `GROUP BY` modifiers such as `WITH ROLLUP`. We plan to add support in the future. See [TiDB #4250](https://github.com/pingcap/tidb/issues/4250).
+[GROUP BY modifiers](/functions-and-operators/group-by-modifiers.md)
 
 ## SQL mode support
 
