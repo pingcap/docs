@@ -11,7 +11,7 @@ TiDB Serverless driver provides connection level configurations and SQL level op
 
 At the connection level, you can make the following configurations:
 
-| name       | type       | default      | comment                                                                                                                 |
+| Name       | Type       | Default value     | Description                                                                                                    |
 |------------|------------|--------------|-------------------------------------------------------------------------------------------------------------------------|
 | username   | string     | /            | Username of TiDB Serverless                                                                                             |
 | password   | string     | /            | Password of TiDB Serverless                                                                                             |
