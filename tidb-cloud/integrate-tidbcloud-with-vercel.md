@@ -84,8 +84,10 @@ The detailed steps are as follows:
     2. Select your target TiDB Cloud organization and project.
     3. Select **Cluster** as your connection type.
     4. Select your target TiDB Cloud cluster. If the **Cluster** drop-down list is empty or you want to select a new TiDB Serverless cluster, click **+ Create Cluster** in the list to create one.
-    5. Select the framework that your Vercel projects are using. If the target framework is not listed, select **General**. Different frameworks determine different environment variables.
-    6. Click **Add Integration and Return to Vercel**.
+    5. Select the database that you want to connect to. If the **Database** drop-down list is empty or you want to select a new Database, click **+ Create Database** in the list to create one.
+    6. Select the framework that your Vercel projects are using. If the target framework is not listed, select **General**. Different frameworks determine different environment variables.
+    7. Choose whether to create new branches for development environment.
+    8. Click **Add Integration and Return to Vercel**.
 
 ![Vercel Integration Page](/media/tidb-cloud/vercel/integration-link-cluster-page.png)
 
@@ -102,17 +104,15 @@ The detailed steps are as follows:
     TIDB_PASSWORD
     ```
 
-    For TiDB Dedicated clusters, the root CA is set in this variable:
-
-    ```
-    TIDB_SSL_CA
-    ```
-
     **Prisma**
 
     ```
     DATABASE_URL
     ```
+
+> **Note:**
+>
+> This method is only available for TiDB Serverless clusters. If you want to use a TiDB Dedicated cluster, please use the [manual method](#connect-via-manually-setting-environment-variables). 
 
 </div>
 
@@ -213,3 +213,32 @@ If you have installed [TiDB Cloud Vercel integration](https://vercel.com/integra
     ![Vercel Integration Configuration Page](/media/tidb-cloud/vercel/integration-vercel-configuration-page.png)
 
     When you remove a connection, environment variables set by the integration workflow are removed from the Vercel project either. The traffic filter and the data of the TiDB Cloud cluster are not affected.
+
+## Connect with TiDB Serverless branching
+
+Vercel [Preview Deployments](https://vercel.com/docs/deployments/preview-deployments) allow you to preview changes to your app in a live deployment without merging those changes to your Git project's production branch. [TiDB Serverless Branching](/tidb-cloud/branch-overview.md) allows you to create a new instance for each branch of your Vercel project. This allows you to preview changes to your app in a live deployment without affecting your production data.
+
+To enable TiDB Serverless Branching, you need to:
+
+1. Select **Cluster** as your connection type. 
+2. Enable TiDB Serverless Branching in the TiDB Cloud Vercel integration workflow.
+
+After you push changes to GitHub repository, Vercel will trigger a preview deployment. And then TiDB Cloud integration will automatically create a TiDB Serverless branch for the branch and set environment variables. The detailed steps are as follows:
+
+1. Create a new branch in your Git repository.
+
+```shell
+cd tidb-prisma-vercel-demo1
+git checkout -b new-branch
+```
+
+2. Add some changes and push the changes to the remote repository.
+3. Vercel will trigger a preview deployment for the new branch.
+    a. During the deployment, TiDB Cloud integration will automatically create a TiDB Serverless branch, of which the name is the same as the git branch name. If the TiDB Serverless branch already exists, TiDB Cloud integration will skip this step.
+    b. After the TiDB Serverless branch is ready, TiDB Cloud integration will set environment variables in the preview deployment for the Vercel project.
+    c. TiDB Cloud integration will also register a blocking check to wait for the TiDB Serverless branch to be ready. You can rerun the check manually.
+4. After the check is passed, you can visit the preview deployment to see the changes.
+
+> **Note:**
+>
+> For each organization in TiDB Cloud, you can create a maximum of five TiDB Serverless branches by default. To avoid exceeding the limit, you can delete the TiDB Serverless branches that are no longer needed. For more information, see [Manage TiDB Serverless branches](/tidb-cloud/branch-manage.md).
