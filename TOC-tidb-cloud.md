@@ -46,7 +46,7 @@
     - Ruby
       - [mysql2](/develop/dev-guide-sample-application-ruby-mysql2.md)
       - [Rails](/develop/dev-guide-sample-application-ruby-rails.md)
-    - Serverless Driver
+    - Serverless JavaScript Driver (Beta)
       - [TiDB Serverless Driver](/tidb-cloud/serverless-driver.md)
       - [Configure TiDB Serverless Driver](/tidb-cloud/serverless-driver-config.md)
   - Third-Party Support
