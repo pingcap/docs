@@ -98,6 +98,7 @@ TiDB [test]> SELECT year, country, product, SUM(profit) AS profit
 +------+---------+---------+--------+
 8 rows in set (0.029 sec)
 ```
+
 Now the output includes summary information at four levels of analysis, not just one:
 - Following each set of product rows for a given year and country, an extra super-aggregate summary row appears showing the total for all products. These rows have the product column set to `NULL`.
 
