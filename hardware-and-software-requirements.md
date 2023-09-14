@@ -21,7 +21,7 @@ As an open-source distributed SQL database with high performance, TiDB can be de
 <table>
 <thead>
   <tr>
-    <th></th>
+    <th>Operating systems</th>
     <th>Supported CPU architectures</th>
   </tr>
 </thead>
@@ -250,7 +250,7 @@ As an open-source distributed SQL database, TiDB requires the following network 
   </tr>
   <tr>
     <td>TiUP</td>
-    <td><ul><li>Control machine: No more than 1 GB space is required for deploying a TiDB cluster of a single version. The space required increases if TiDB clusters of multiple versions are deployed.</li><li>Deployment servers (machines where the TiDB components run): TiFlash occupies about 700 MB space and other components (such as PD, TiDB, and TiKV) occupy about 200 MB space respectively. During the cluster deployment process, the TiUP cluster requires less than 1 MB of temporary space (/tmp directory) to store temporary files.</li></ul></td>
+    <td><ul><li>Control machine: No more than 1 GB space is required for deploying a TiDB cluster of a single version. The space required increases if TiDB clusters of multiple versions are deployed.</li><li>Deployment servers (machines where the TiDB components run): TiFlash occupies about 700 MB space and other components (such as PD, TiDB, and TiKV) occupy about 200 MB space respectively. During the cluster deployment process, the TiUP cluster requires less than 1 MB of temporary space (<code>/tmp</code> directory) to store temporary files.</li></ul></td>
     <td>N/A</td>
   </tr>
   <tr>

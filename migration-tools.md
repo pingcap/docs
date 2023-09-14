@@ -17,7 +17,7 @@ This document introduces the user scenarios, supported upstreams and downstreams
 
 - **User scenario**: Data migration from MySQL-compatible databases to TiDB
 - **Upstream**: MySQL, MariaDB, Aurora
-- **Downstream**: TiDB |
+- **Downstream**: TiDB
 - **Advantages**:
     - A convenient and unified data migration task management tool that supports full data migration and incremental replication
     - Support filtering tables and operations
@@ -65,7 +65,7 @@ This document introduces the user scenarios, supported upstreams and downstreams
 
 ## [Backup & Restore (BR)](/br/backup-and-restore-overview.md)
 
-- **User scenario**: Migrate a large amount of TiDB cluster data by backing up and restoring data</span> |
+- **User scenario**: Migrate a large amount of TiDB cluster data by backing up and restoring data
 - **Upstream**: TiDB
 - **Downstream (the output file)**: SST, backup.meta files, backup.lock files
 - **Advantages**:

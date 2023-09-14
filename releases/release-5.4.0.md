@@ -47,7 +47,7 @@ In v5.4, the key new features or improvements are as follows:
   <tr>
     <td><a href="https://docs.pingcap.com/tidb/dev/system-variables#tidb_enable_paging-new-in-v540"><code>tidb_enable_paging</code></a></td>
     <td>Newly added</td>
-    <td>Controls whether to use the method of paging to send coprocessor requests in <code>IndexLookUp</code> operator. The default value is <code>OFF</code>.<br/>For read queries that use <code>IndexLookup</code> and <code>Limit</code> and that Limit cannot be pushed down to <code>IndexScan</code>, there might be high latency for the read queries and high CPU usage for TiKV's <code>unified read pool</code>. In such cases, because the <code>Limit</code> operator only requires a small set of data, if you set <code>tidb_enable_paging</code> to <code>ON</code>, TiDB processes less data, which reduces query latency and resource consumption.</td>
+    <td>Controls whether to use the method of paging to send coprocessor requests in <code>IndexLookUp</code> operator. The default value is <code>OFF</code>.<br/>For read queries that use <code>IndexLookup</code> and <code>Limit</code> and that <code>Limit</code> cannot be pushed down to <code>IndexScan</code>, there might be high latency for the read queries and high CPU usage for TiKV's <code>unified read pool</code>. In such cases, because the <code>Limit</code> operator only requires a small set of data, if you set <code>tidb_enable_paging</code> to <code>ON</code>, TiDB processes less data, which reduces query latency and resource consumption.</td>
   </tr>
   <tr>
     <td><a href="https://docs.pingcap.com/tidb/dev/system-variables#tidb_enable_top_sql-new-in-v540"><code>tidb_enable_top_sql</code></a></td>
@@ -87,7 +87,7 @@ In v5.4, the key new features or improvements are as follows:
   <tr>
     <td><a href="https://docs.pingcap.com/tidb/dev/system-variables#tidb_enable_index_merge-new-in-v40"><code>tidb_enable_index_merge</code></a></td>
     <td>Modified</td>
-    <td>The default value is changed from <code>OFF</code> to <code>ON</code>.<ul><li>If you upgrade a TiDB cluster from versions earlier than v4.0.0 to v5.4.0 or later, this variable is OFF by default.</li><li>If you upgrade a TiDB cluster from v4.0.0 or later to v5.4.0 or later, this variable remains the same as before the upgrade.</li><li>For the newly created TiDB clusters of v5.4.0 and later, this variable is <code>ON</code> by default.</li></ul></td>
+    <td>The default value is changed from <code>OFF</code> to <code>ON</code>.<ul><li>If you upgrade a TiDB cluster from versions earlier than v4.0.0 to v5.4.0 or later, this variable is <code>OFF</code> by default.</li><li>If you upgrade a TiDB cluster from v4.0.0 or later to v5.4.0 or later, this variable remains the same as before the upgrade.</li><li>For the newly created TiDB clusters of v5.4.0 and later, this variable is <code>ON</code> by default.</li></ul></td>
   </tr>
   <tr>
     <td><a href="https://docs.pingcap.com/tidb/dev/system-variables#tidb_store_limit-new-in-v304-and-v40"><code>tidb_store_limit</code></a></td>

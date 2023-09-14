@@ -342,7 +342,7 @@ TiDB v6.0.0 is a DMR, and its version is 6.0.0-DMR.
     <td>Newly added</td>
     <td>
       <ul>
-        <li>Optimizes read statement latency within a transaction. If read/write conflicts are more severe, turning this variable on will add additional overhead and latency, causing regressions in performance. The default value is off.</li>
+        <li>Optimizes read statement latency within a transaction. If read/write conflicts are more severe, turning this variable on will add additional overhead and latency, causing regressions in performance. The default value is <code>off</code>.</li>
         <li>This variable is not yet compatible with <a href="https://docs.pingcap.com/tidb/dev/system-variables#tidb_replica_read-new-in-v40">replica-read</a>. If a read request has <code>tidb_rc_read_check_ts</code> on, it might not be able to use replica-read. Do not turn on both variables at the same time.</li>
       </ul>
     </td>
@@ -355,7 +355,7 @@ TiDB v6.0.0 is a DMR, and its version is 6.0.0-DMR.
   <tr>
     <td><a href="https://docs.pingcap.com/tidb/dev/system-variables#tidb_table_cache_lease-new-in-v600"><code>tidb_table_cache_lease</code></a></td>
     <td>Newly added</td>
-    <td>Controls the lease time of <a href="https://docs.pingcap.com/tidb/dev/cached-tables">table cache</a>, in seconds. The default value is 3.</td>
+    <td>Controls the lease time of <a href="https://docs.pingcap.com/tidb/dev/cached-tables">table cache</a>, in seconds. The default value is <code>3</code>.</td>
   </tr>
   <tr>
     <td><a href="https://docs.pingcap.com/tidb/dev/system-variables#tidb_top_sql_max_meta_count-new-in-v600"><code>tidb_top_sql_max_meta_count</code></a></td>
@@ -404,7 +404,7 @@ TiDB v6.0.0 is a DMR, and its version is 6.0.0-DMR.
     <td>TiDB</td>
     <td><a href="https://docs.pingcap.com/tidb/dev/tidb-configuration-file#new_collations_enabled_on_first_bootstrap"><code>new_collations_enabled_on_first_bootstrap</code></a></td>
     <td>Modified</td>
-    <td>Controls whether to enable support for the new collation. Since v6.0, the default value is changed from false to true. This configuration item only takes effect when the cluster is initialized for the first time. After the first bootstrap, you cannot enable or disable the new collation framework using this configuration item.</td>
+    <td>Controls whether to enable support for the new collation. Since v6.0, the default value is changed from <code>false</code> to <code>true</code>. This configuration item only takes effect when the cluster is initialized for the first time. After the first bootstrap, you cannot enable or disable the new collation framework using this configuration item.</td>
   </tr>
   <tr>
     <td>TiKV</td>
