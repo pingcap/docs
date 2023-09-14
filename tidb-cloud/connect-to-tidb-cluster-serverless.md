@@ -27,13 +27,11 @@ After your TiDB Serverless cluster is created on TiDB Cloud, you can connect to 
 
   TiDB Serverless provides Serverless driver, a javascript driver that allows you to connect to your TiDB Serverless cluster in edge environments over HTTP.
 
-- [Chat2Query (beta)](/tidb-cloud/explore-data-with-chat2query.md)
+## Choose a connection method
 
-  TiDB Cloud is powered by artificial intelligence (AI). You can use Chat2Query (beta), an AI-powered SQL editor in the [TiDB Cloud console](https://tidbcloud.com/), to maximize your data value.
-
-  In Chat2Query, you can either simply type `--` followed by your instructions to let AI generate SQL queries automatically or write SQL queries manually, and then run SQL queries against databases without a terminal. You can find the query results in tables intuitively and check the query logs easily.
-
-Direct connections are recommended for most scenarios. Data Service provides restful HTTP API for you to access your data. Serverless driver is useful when you in edge environments such as Vercel Edge Function and Cloudflare Workers. Chat2Query is a convenient way to explore your data in the TiDB Cloud console.
+- The direct connection means the MySQL native connection system over TCP. You can use it in any long-running environment, like Java, Node.js, Python, etc.
+- The Data Service provides restful HTTP API for you. You can use it for all browser and application interactions.
+- The serverless driver is useful in edge environments such as Vercel Edge Function and Cloudflare Workers.
 
 ## Network
 

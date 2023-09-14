@@ -1,13 +1,13 @@
 ---
-title: TiDB Serverless Driver (Beta)
+title: TiDB Cloud Serverless Driver (Beta)
 summary: Learn how to connect to TiDB Serverless from serverless and edge environments over HTTP.
 ---
 
-# TiDB Serverless driver (Beta)
+# TiDB Cloud Serverless Driver (Beta)
 
-[TiDB Serverless Driver (Beta)](https://github.com/tidbcloud/serverless-js) for JavaScript allows you to connect to your TiDB Serverless cluster over HTTPS. It is particularly useful in edge environments where TCP connections are limited, such as Vercel Edge Functions and Cloudflare Workers.
+[TiDB Cloud serverless driver (Beta)](https://github.com/tidbcloud/serverless-js) for JavaScript allows you to connect to your TiDB Serverless cluster over HTTPS. It is particularly useful in edge environments where TCP connections are limited, such as Vercel Edge Functions and Cloudflare Workers.
 
-## Install the TiDB Serverless driver
+## Install the serverless driver
 
 You can install the driver with npm:
 
@@ -15,9 +15,9 @@ You can install the driver with npm:
 npm install @tidbcloud/serverless
 ```
 
-## Use the TiDB Serverless driver
+## Use the serverless driver
 
-You can use TiDB Serverless Driver to query data of a TiDB Serverless cluster or perform interactive transactions.
+You can use the driver to query data of a TiDB Serverless cluster or perform interactive transactions.
 
 ### Query
 
@@ -32,7 +32,7 @@ const results = await conn.execute('select * from test where id = ?',[1])
 
 ### Transaction (Experimental)
 
-You can also perform interactive transactions with the TiDB Serverless driver. For example:
+You can also perform interactive transactions with the serverless driver. For example:
 
 ```ts
 import { connect } from '@tidbcloud/serverless'
@@ -52,7 +52,7 @@ try {
 
 ## Edge Examples
 
-Here are some examples of using the TiDB Serverless driver in edge environments. For a complete example, you can also try this [live demo](https://github.com/tidbcloud/car-sales-insight).
+Here are some examples of using the serverless driver in edge environments. For a complete example, you can also try this [live demo](https://github.com/tidbcloud/car-sales-insight).
 
 <SimpleTab>
 
@@ -141,7 +141,7 @@ const result = await conn.execute('show tables')
 
 ### Supported SQL statements
 
-The following SQL statements are supported:  `SELECT`, `SHOW`, `EXPLAIN`, `USE`, `INSERT`, `UPDATE`, `DELETE`, `BEGIN`, `COMMIT`, `ROLLBACK`. DDL is supported.
+DDL is supported and the following SQL statements are supported:  `SELECT`, `SHOW`, `EXPLAIN`, `USE`, `INSERT`, `UPDATE`, `DELETE`, `BEGIN`, `COMMIT`, `ROLLBACK`.
 
 ### Data type mapping
 
@@ -188,11 +188,11 @@ The type mapping between TiDB Serverless and Javascript is as follows:
 
 ## Pricing
 
-TiDB Serverless Driver follows the [TiDB Serverless pricing](https://www.pingcap.com/tidb-serverless-pricing-details/) model. The driver itself is free but using the driver to access data generates Request Units (RUs) and storage usage.
+The serverless driver itself is free but using the driver to access data generates Request Units (RUs) and storage usage. The pricing follows the [TiDB Serverless pricing](https://www.pingcap.com/tidb-serverless-pricing-details/) model.
 
 ## Limitations
 
-Currently, using TiDB Serverless Driver has the following limitations:
+Currently, using serverless driver has the following limitations:
 
 - Up to 10,000 rows can be fetched in a single query.
 - You can execute only a single SQL statement at a time, multiple SQL statements in one query are not supported yet.
@@ -200,5 +200,5 @@ Currently, using TiDB Serverless Driver has the following limitations:
 
 ## What's next
 
-- [Learn how to configure TiDB Serverless driver](/tidb-cloud/serverless-driver-config.md).
-- [Learn how to use Kysely ORM with TiDB Serverless driver dialect](https://github.com/tidbcloud/kysely).
+- [Learn how to configure TiDB Cloud serverless driver](/tidb-cloud/serverless-driver-config.md).
+- [Learn how to use Kysely ORM with TiDB Cloud serverless driver dialect](https://github.com/tidbcloud/kysely).
