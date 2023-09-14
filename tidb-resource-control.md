@@ -371,7 +371,7 @@ You can get more information about runaway queries from the following system tab
 
 > **Warning:**
 >
-> This feature is experimental. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+> This feature is experimental. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues/new/choose) on GitHub.
 
 Background tasks, such as data backup and automatic statistics collection, are low-priority but consume many resources. These tasks are usually triggered periodically or irregularly. During execution, they consume a lot of resources, thus affecting the performance of online high-priority tasks.
 
@@ -401,7 +401,7 @@ TiDB supports the following types of background tasks:
 
 </CustomContent>
 
-By default, the task types that are marked as background tasks are empty, and the management of background tasks is disabled. This default behavior is the same as that of TiDB v7.4.0 earlier versions. To manage background tasks, you need to manually modify the background task types of the `default` resource group.
+By default, the task types that are marked as background tasks are empty, and the management of background tasks is disabled. This default behavior is the same as that of versions prior to TiDB v7.4.0. To manage background tasks, you need to manually modify the background task types of the `default` resource group.
 
 #### Examples
 
@@ -417,7 +417,7 @@ By default, the task types that are marked as background tasks are empty, and th
     ALTER RESOURCE GROUP rg1 BACKGROUND=(TASK_TYPES='br,ddl');
     ```
 
-3. Reset the background tasks of `rg1` resource group to default. In this case, the background task types follow the configuration of the `default` resource group.
+3. Restore the background tasks of `rg1` resource group to the default value. In this case, the background task types follow the configuration of the `default` resource group.
 
     ```sql
     ALTER RESOURCE GROUP rg1 BACKGROUND=NULL;
