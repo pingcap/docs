@@ -17,7 +17,7 @@ After your TiDB Serverless cluster is created on TiDB Cloud, you can connect to 
 
 - Direct connections
 
-TiDB Serverless is MySQL-compatible. You can connect to your TiDB Serverless cluster using any tool that supports MySQL connections, such as [MySQL client](https://dev.mysql.com/downloads/shell/).
+  TiDB Serverless is MySQL-compatible. You can connect to your TiDB Serverless cluster using any tool that supports MySQL connections, such as [MySQL client](https://dev.mysql.com/downloads/shell/).
 
 - [Data Service (beta)](/tidb-cloud/data-service-overview.md)
 
@@ -49,12 +49,12 @@ There are two network connection types for TiDB Serverless:
 
 The following table shows the network you can use in different connection methods:
 
-| Connection method  | Network                     | Description                                                                   |
-|--------------------|-----------------------------|-------------------------------------------------------------------------------|
-| Direct connections | Public or private endpoint | Direct connections can be made via both public and private endpoints. |
-| Data Service (beta)       | /                           |  Accessing TiDB Serverless via Data Service (beta) is through  HTTPS request so there is no need to specify the network.                                             |
-| Serverless Driver (beta)  | Public endpoint             | Serverless Driver only supports connections via public endpoint.                                |
-| Chat2Query (beta)         | /                           | Chat2Query does not need to specify the network.                                       |
+| Connection method  | Network                     | Description                                                                                                             |
+|--------------------|-----------------------------|-------------------------------------------------------------------------------------------------------------------------|
+| Direct connections | Public or private endpoint | Direct connections can be made via both public and private endpoints.                                                   |
+| Data Service (beta)       | /                           | Accessing TiDB Serverless via Data Service (beta) is through API Key so there is no need to specify the network. |
+| Serverless Driver (beta)  | Public endpoint             | Serverless Driver only supports connections via public endpoint.                                                        |
+| Chat2Query (beta)         | /                           | Chat2Query does not need to specify the network.                                                                        |
 
 ## What's next
 
