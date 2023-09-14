@@ -26,7 +26,9 @@ alter table sales set tiflash replica 1;
 
 insert into sales values(2000,"China","apple",1),(2001,"Japan","banana",2),(2000,"China","lemon",3)
 ```
+
 To summarize table contents per year, use a simple GROUP BY like this:
+
 ```sql
 TiDB [test]> SELECT year, SUM(profit) AS profit
                   ->        FROM sales
@@ -39,7 +41,9 @@ TiDB [test]> SELECT year, SUM(profit) AS profit
 +------+--------+
 2 rows in set (0.057 sec)
 ```
+
 The output shows the total (aggregate) profit for each year. To also determine the total profit summed over all years, you must add up the individual values yourself or run an additional query. Or you can use ROLLUP, which provides both levels of analysis with a single query. Adding a WITH ROLLUP modifier to the GROUP BY clause causes the query to produce another (super-aggregate) row that shows the grand total over all year values:
+
 ```sql
 TiDB [test]> SELECT year, SUM(profit) AS profit
     ->        FROM sales
@@ -53,11 +57,13 @@ TiDB [test]> SELECT year, SUM(profit) AS profit
 +------+--------+
 3 rows in set (0.029 sec)
 ```
+
 The `NULL` value in the year column identifies the grand total super-aggregate line.
 
 ROLLUP has a more complex effect when there are multiple GROUP BY columns. In this case, each time there is a change in value in any but the last grouping column, the query produces an extra super-aggregate summary row.
 
 For example, without ROLLUP, a summary of the sales table based on year, country, and product might look like this, where the output indicates summary values only at the year/country/product level of analysis:
+
 ```sql
 TiDB [test]> SELECT year, country, product, SUM(profit) AS profit
     ->        FROM sales
@@ -71,7 +77,9 @@ TiDB [test]> SELECT year, country, product, SUM(profit) AS profit
 +------+---------+---------+--------+
 3 rows in set (0.002 sec)
 ```
+
 With ROLLUP added, the query produces several extra rows:
+
 ```sql
 TiDB [test]> SELECT year, country, product, SUM(profit) AS profit
     ->        FROM sales
@@ -106,6 +114,7 @@ Because the `NULL` values in the super-aggregate rows are placed into the result
 The `NULL` values do appear as `NULL` on the client side and can be tested as such using any MySQL client programming interface. However, at this point, you **cannot** distinguish whether a `NULL` represents a regular grouped value or a super-aggregate value. To distinguish the distinction, use the GROUPING() function, described later.
 
 For `GROUP BY ... WITH ROLLUP` queries, to test whether `NULL` values in the result represent super-aggregate values, the `GROUPING()` function is available for use in the select list, `HAVING` clause, and ORDER BY clause. For example, `GROUPING(year)` returns 1 when `NULL` in the year column occurs in a super-aggregate row, and 0 otherwise. Similarly, `GROUPING(country)` and `GROUPING(product)` return 1 for super-aggregate `NULL` values in the country and product columns, respectively:
+
 ```sql
 TiDB [test]> SELECT
     ->          year, country, product, SUM(profit) AS profit,
@@ -165,6 +174,7 @@ With multiple expression arguments (64 at the maximum), `GROUPING()` returns a r
 And bitmap combination indicates the column-type-info of `GROUPING()` is about `UNSIGNED LONGLONG` rather than `LONGLONG` as MySQL does.
 
 The result of such a `GROUPING()` is nonzero if any of the expressions represents a super-aggregate `NULL`, so you can return only the super-aggregate rows and filter out the regular grouped rows like this:
+
 ```sql
 TiDB [test]> SELECT year, country, product, SUM(profit) AS profit
     ->        FROM sales
@@ -181,7 +191,9 @@ TiDB [test]> SELECT year, country, product, SUM(profit) AS profit
 +------+---------+---------+--------+
 5 rows in set (0.027 sec)
 ```
+
 The sales table contains no `NULL` values, so all `NULL` values in a ROLLUP result represent super-aggregate values. When the data set contains `NULL` values, ROLLUP summaries may contain `NULL` values not only in super-aggregate rows, but also in regular grouped rows. `GROUPING()` enables these to be distinguished. Suppose that table t1 contains a simple data set with two grouping factors for a set of quantity values, where `NULL` indicates something like “other” or “unknown”:
+
 ```sql
 TiDB [test]> select * from t1;
 +------+-------+----------+
@@ -196,7 +208,9 @@ TiDB [test]> select * from t1;
 +------+-------+----------+
 6 rows in set (0.003 sec)
 ```
+
 A simple ROLLUP operation produces these results, in which it is not so easy to distinguish `NULL` values in super-aggregate rows from `NULL` values in regular grouped rows:
+
 ```sql
 TiDB [test]> SELECT name, size, SUM(quantity) AS quantity
     ->        FROM t1
@@ -217,6 +231,7 @@ TiDB [test]> SELECT name, size, SUM(quantity) AS quantity
 9 rows in set (0.111 sec)
 ```
 Using `GROUPING()` to substitute labels for the super-aggregate `NULL` values makes the result easier to interpret:
+
 ```sql
 TiDB [test]> SELECT
     ->          IF(GROUPING(name) = 1, 'All items', name) AS name,
@@ -263,6 +278,7 @@ type LogicalProjection struct {
 ```
 
 This means for every one single row, `Projection` operator will produce corresponding single projected row out, while `Expand` operator will produce N (let's say len(`LevelExprs`) = N) rows with each row of them strictly projected from corresponding same position from first dimension of `LevelExprs`. Let's take the second sql above as an example.
+
 ```sql
 TiDB [test]> explain SELECT year, GROUPING(year), SUM(profit) AS profit
     ->        FROM sales
@@ -285,10 +301,12 @@ TiDB [test]> explain SELECT year, GROUPING(year), SUM(profit) AS profit
 11 rows in set (0.034 sec)
 
 ```
+
 `Expand_20` operator info shows the generated level-projection expression: `[test.sales.profit, <nil>->Column#6, 0->gid],[test.sales.profit, Column#6, 1->gid]` composed as two-level expression slice, with suffix with `Expand` schema out as `[test.sales.profit,Column#6,gid]`.
 
 As you see, additional column `gid` will be added in the schema, whose value will also be generated in its projection logic inside. `gid` generation rule has several mode:
-```sql
+
+```go
 type GroupingMode int32
 
 const (
@@ -297,6 +315,7 @@ const (
 	GroupingMode_ModeNumericSet GroupingMode = 3
 )
 ```
+
 The most common usage is the first grouping mode `GroupingMode_ModeBitAnd`, which indicates that `gid` is generated from current grouping set formation. Take this case for explanation, all the group-by column will be seen as a series of bits according their orders in group-by clause, one column [year] here. 
 
 From rollup semantic, two grouping set will be converted as {year},{}. For the grouping set {year}, column year is needed in current grouping set, so we should keep its value rather than projecting it as `NULL` value. So the projection expression generation for grouping set {year} is obvious, it should be [test.sales.profit, Column#6, 1->gid].
