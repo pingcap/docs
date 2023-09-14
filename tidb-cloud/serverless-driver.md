@@ -193,6 +193,7 @@ TiDB Serverless Driver follows the [TiDB Serverless pricing](https://www.pingcap
 ## Limitations
 
 Currently, using TiDB Serverless Driver has the following limitations:
+
 - Up to 10,000 rows can be fetched in a single query.
 - You can execute only a single SQL statement at a time, multiple SQL statements in one query are not supported yet.
 - Connection with [private endpoints](/tidb-cloud/set-up-private-endpoint-connections-serverless.md) is not supported yet.
