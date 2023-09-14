@@ -365,7 +365,7 @@ TiDB v6.0.0 is a DMR, and its version is 6.0.0-DMR.
   <tr>
     <td><a href="https://docs.pingcap.com/tidb/dev/system-variables#tidb_top_sql_max_time_series_count-new-in-v600"><code>tidb_top_sql_max_time_series_count</code></a></td>
     <td>Newly added</td>
-    <td>Controls how many SQL statements that contribute the most to the load (that is, top N) can be recorded by <a href="https://docs.pingcap.com/tidb/dev/dashboard/top-sql">Top SQL</a> per minute. The default value is <code>100</code>.</td>
+    <td>Controls how many SQL statements that contribute the most to the load (that is, top N) can be recorded by <a href="https://docs.pingcap.com/tidb/dev/top-sql">Top SQL</a> per minute. The default value is <code>100</code>.</td>
   </tr>
   <tr>
     <td><a href="https://docs.pingcap.com/tidb/dev/system-variables#tidb_txn_assertion_level-new-in-v600"><code>tidb_txn_assertion_level</code></a></td>
