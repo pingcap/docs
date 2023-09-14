@@ -87,7 +87,45 @@ For the complete configuration file, refer to [the configuration file and comman
 
 Conflicting data refers to two or more records with the same PK/UK column data. When the data source contains conflicting data, the actual number of rows in the table is different from the total number of rows returned by the query using unique index.
 
+<<<<<<< HEAD
 TiDB Lightning offers three strategies for detecting conflicting data:
+=======
+There are two versions for conflict detection:
+
+- The new version of conflict detection, controlled by the `conflict` configuration item.
+- The old version of conflict detection, controlled by the `tikv-importer.duplicate-resolution` configuration item.
+
+### The new version of conflict detection
+
+The meaning of configuration values are as follows:
+
+| Strategy | Default behavior of conflicting data | The corresponding SQL statement |
+| :-- | :-- | :-- |
+| `"replace"` | Replacing existing data with new data. | `REPLACE INTO ...` |
+| `"ignore"` | Keeping existing data and ignoring new data. | `INSERT IGNORE INTO ...` |
+| `"error"` | Pausing the import and reporting an error. | `INSERT INTO ...` |
+| `""` | TiDB Lightning does not detect or handle conflicting data. If data with primary and unique key conflicts exists, the subsequent step reports an error. |  None   |
+
+> **Note:**
+>
+> The conflict detection result in the physical import mode might differ from SQL-based import due to internal implementation and limitation of TiDB Lightning.
+
+When the strategy is `"replace"` or `"ignore"`, conflicting data is treated as [conflict errors](/tidb-lightning/tidb-lightning-error-resolution.md#conflict-errors). If the [`conflict.threshold`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task) value is greater than `0`, TiDB Lightning tolerates the specified number of conflict errors. The default value is `9223372036854775807`, which means that almost all errors are tolerant. For more information, see [error resolution](/tidb-lightning/tidb-lightning-error-resolution.md).
+
+The new version of conflict detection has the following limitations:
+
+- Before importing, TiDB Lightning prechecks potential conflicting data by reading all data and encoding it. During the detection process, TiDB Lightning uses `tikv-importer.sorted-kv-dir` to store temporary files. After the detection is complete, TiDB Lightning retains the results for import phase. This introduces additional overhead for time consumption, disk space usage, and API requests to read the data.
+- The new version of conflict detection only works in a single node, and does not apply to parallel imports and scenarios where the `disk-quota` parameter is enabled.
+- The new version (`conflict`) and old version (`tikv-importer.duplicate-resolution`) conflict detection cannot be used at the same time. The new version of conflict detection is enabled when the configuration [`conflict.strategy`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task) is set.
+
+Compared with the old version of conflict detection, the new version takes less time when the imported data contains a large amount of conflicting data. It is recommended that you use the new version of conflict detection in non-parallel import tasks when the data contains conflicting data and there is sufficient local disk space.
+
+### The old version of conflict detection
+
+The old version of conflict detection is enabled when `tikv-importer.duplicate-resolution` is not an empty string. In v7.2.0 and earlier versions, TiDB Lightning only supports this conflict detection method.
+
+In the old version of conflict detection, TiDB Lightning offers two strategies:
+>>>>>>> 504f5ab776 (Add blank lines to mdx tags (#14818))
 
 - `remove` (recommended): records and removes all conflicting records from the target table to ensure a consistent state in the target TiDB.
 - `none`: does not detect duplicate records. `none` has the best performance in the two strategies, but might lead to inconsistent data in the target TiDB.
@@ -142,9 +180,11 @@ Starting from v6.2.0, TiDB Lightning implements a mechanism to limit the impact 
 Starting from v7.1.0, you can control the scope of pausing scheduling by using the TiDB Lightning parameter [`pause-pd-scheduler-scope`](/tidb-lightning/tidb-lightning-configuration.md). The default value is `"table"`, which means that the scheduling is paused only for the Region that stores the target table data. When there is no business traffic in the cluster, it is recommended to set this parameter to `"global"` to avoid interference from other scheduling during the import.
 
 <Note>
+
 TiDB Lightning does not support importing data into a table that already contains data.
 
 The TiDB cluster must be v6.1.0 or later versions. For earlier versions, TiDB Lightning keeps the old behavior, which pauses scheduling globally and severely impacts the online application during the import.
+
 </Note>
 
 By default, TiDB Lightning pauses the cluster scheduling for the minimum range possible. However, under the default configuration, the cluster performance still might be affected by fast import. To avoid this, you can configure the following options to control the import speed and other factors that might impact the cluster performance:
