@@ -69,7 +69,7 @@ This document summarizes frequently asked questions (FAQs) about TiDB.
   </tr>
   <tr>
     <td>Common error codes</td>
-    <td><a href="https://docs.pingcap.com/tidb/dev/error-codes">Error Codes and Troubleshooting</a></li></ul></td>
+    <td><a href="https://docs.pingcap.com/tidb/dev/error-codes">Error Codes and Troubleshooting</a></td>
   </tr>
 </tbody>
 </table>
