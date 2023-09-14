@@ -49,9 +49,9 @@ const conn = connect({url: process.env['DATABASE_URL'] || 'mysql://username:pass
 
 At the SQL level, you can configure the following options:
 
-| Option     | Type | Default value | Description                                              |
-|------------|------|---------|-----------------------------------------------------------|
-| `arrayMode`  | bool | false   | whether to return results as arrays instead of objects    |
+| Option     | Type | Default value | Description                                             |
+|------------|------|---------|---------------------------------------------------------|
+| `arrayMode`  | bool | false   | whether to return results as arrays instead of objects  |
 | `fullResult` | bool | false   | whether to return full result object instead of rows only |
 
 ```ts

@@ -5,11 +5,11 @@ summary: Learn how to connect to TiDB Serverless from serverless and edge enviro
 
 # TiDB Serverless driver (Beta)
 
-The [TiDB Serverless driver (Beta)](https://github.com/tidbcloud/serverless-js) for JavaScript allows you to connect to TiDB Serverless over HTTPS. It is particularly useful in edge environments where TCP connection is limited.
+[TiDB Serverless Driver (Beta)](https://github.com/tidbcloud/serverless-js) for JavaScript allows you to connect to your TiDB Serverless cluster over HTTPS. It is particularly useful in edge environments where TCP connections are limited.
 
 ## Use the TiDB Serverless driver
 
-### Install
+### Install the TiDB Serverless driver
 
 You can install the driver with npm:
 
@@ -23,7 +23,7 @@ You can use TiDB Serverless Driver to query data of a TiDB Serverless cluster or
 
 ### Query
 
-To query from TiDB Serverless, you need to create a connection first. Then you can use the connection to execute raw SQL queries. For example:
+To query data from a TiDB Serverless cluster, you need to create a connection first. Then you can use the connection to execute raw SQL queries. For example:
 
 ```ts
 import { connect } from '@tidbcloud/serverless'
@@ -54,7 +54,7 @@ try {
 
 ## Edge Examples
 
-Here are some examples of using the TiDB Serverless driver at the edge. You can also try this [live demo](https://github.com/tidbcloud/car-sales-insight).
+Here are some examples of using the TiDB Serverless driver in edge environments. For a complete example, you can also try this [live demo](https://github.com/tidbcloud/car-sales-insight).
 
 <SimpleTab>
 
@@ -143,11 +143,11 @@ const result = await conn.execute('show tables')
 
 ### Supported SQL statements
 
-The following SQL statements are supported:  `SELECT`, `SHOW`, `EXPLAIN`, `USE`, `INSERT`, `UPDATE`, `DELETE`, `BEGIN`, `COMMIT`, `ROLLBACK`. Most of the DDL are supported.
+The following SQL statements are supported:  `SELECT`, `SHOW`, `EXPLAIN`, `USE`, `INSERT`, `UPDATE`, `DELETE`, `BEGIN`, `COMMIT`, `ROLLBACK`. DDL is supported.
 
 ### Data type mapping
 
-The type mapping between TiDB Serverless and Javascript are as follows:
+The type mapping between TiDB Serverless and Javascript is as follows:
 
 | TiDB Serverless type | Javascript type |
 |----------------------|-----------------|
@@ -190,7 +190,7 @@ The type mapping between TiDB Serverless and Javascript are as follows:
 
 ## Pricing
 
-TiDB Serverless driver following the [TiDB Serverless pricing](https://www.pingcap.com/tidb-serverless-pricing-details) model. The driver itself is free but RU and storage will also be generated.
+TiDB Serverless Driver follows the [TiDB Serverless pricing](https://www.pingcap.com/tidb-serverless-pricing-details/) model. The driver itself is free but using the driver to access data generates Request Units (RUs) and storage usage.
 
 ## Limitations
 
