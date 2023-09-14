@@ -360,7 +360,7 @@ TiDB v6.0.0 is a DMR, and its version is 6.0.0-DMR.
   <tr>
     <td><a href="https://docs.pingcap.com/tidb/dev/system-variables#tidb_top_sql_max_meta_count-new-in-v600"><code>tidb_top_sql_max_meta_count</code></a></td>
     <td>Newly added</td>
-    <td>Controls the maximum number of SQL statement types collected by <a href="https://docs.pingcap.com/tidb/dev/dashboard/top-sql">Top SQL</a> per minute. The default value is <code>5000</code>.</td>
+    <td>Controls the maximum number of SQL statement types collected by <a href="https://docs.pingcap.com/tidb/dev/top-sql">Top SQL</a> per minute. The default value is <code>5000</code>.</td>
   </tr>
   <tr>
     <td><a href="https://docs.pingcap.com/tidb/dev/system-variables#tidb_top_sql_max_time_series_count-new-in-v600"><code>tidb_top_sql_max_time_series_count</code></a></td>
