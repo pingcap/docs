@@ -7,9 +7,7 @@ summary: Learn how to connect to TiDB Serverless from serverless and edge enviro
 
 [TiDB Serverless Driver (Beta)](https://github.com/tidbcloud/serverless-js) for JavaScript allows you to connect to your TiDB Serverless cluster over HTTPS. It is particularly useful in edge environments where TCP connections are limited.
 
-## Use the TiDB Serverless driver
-
-### Install the TiDB Serverless driver
+## Install the TiDB Serverless driver
 
 You can install the driver with npm:
 
@@ -17,7 +15,7 @@ You can install the driver with npm:
 npm install @tidbcloud/serverless
 ```
 
-## Use the TiDB Serverless Driver
+## Use the TiDB Serverless driver
 
 You can use TiDB Serverless Driver to query data of a TiDB Serverless cluster or perform interactive transactions.
 
