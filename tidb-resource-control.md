@@ -383,10 +383,23 @@ Starting from v7.4.0, the TiDB resource control feature supports managing backgr
 
 TiDB supports the following types of background tasks:
 
+<CustomContent platform="tidb">
+
 - `lightning`: perform import tasks using [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md). Both physical and logical import modes of TiDB Lightning are supported.
 - `br`: perform backup and restore tasks using [BR](/br/backup-and-restore-overview.md). PITR is not supported.
 - `ddl`: control the resource usage during the batch data write back phase of Reorg DDLs.
 - `analyze`: the [collect statistics](/statistics.md#collect-statistics) tasks that are manually executed or automatically triggered by TiDB.
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+- `lightning`: perform import tasks using [TiDB Lightning](https://docs.pingcap.com/tidb/stable/tidb-lightning-overview). Both physical and logical import modes of TiDB Lightning are supported.
+- `br`: perform backup and restore tasks using [BR](https://docs.pingcap.com/tidb/stable/backup-and-restore-overview). PITR is not supported.
+- `ddl`: control the resource usage during the batch data write back phase of Reorg DDLs.
+- `analyze`: the [collect statistics](/statistics.md#collect-statistics) tasks that are manually executed or automatically triggered by TiDB.
+
+</CustomContent>
 
 By default, the task types that are marked as background tasks are empty, and the management of background tasks is disabled. This default behavior is the same as that of TiDB v7.4.0 earlier versions. To manage background tasks, you need to manually modify the background task types of the `default` resource group.
 
