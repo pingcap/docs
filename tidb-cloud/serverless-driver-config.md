@@ -1,11 +1,11 @@
 ---
 title: Configure TiDB Serverless Driver (Beta)
-summary: Learn how to configure TiDB serverless driver
+summary: Learn how to configure TiDB Serverless driver
 ---
 
-# Configure TiDB serverless driver (Beta)
+# Configure TiDB Serverless driver (Beta)
 
-TiDB serverless driver provides connection level configurations and SQL level options. Learn how to configure TiDB serverless driver.
+TiDB Serverless driver provides connection level configurations and SQL level options. Learn how to configure TiDB Serverless driver.
 
 ## Connection level Configurations
 

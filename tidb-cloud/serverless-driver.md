@@ -1,13 +1,13 @@
 ---
 title: TiDB Serverless Driver (Beta)
-summary: Learn how to connect to TiDB serverless from serverless and edge environments over HTTP.
+summary: Learn how to connect to TiDB Serverless from serverless and edge environments over HTTP.
 ---
 
-# TiDB serverless driver (Beta)
+# TiDB Serverless driver (Beta)
 
-The [TiDB serverless driver (Beta)](https://github.com/tidbcloud/serverless-js) for JavaScript allows you to connect to TiDB serverless over HTTPS. It is particularly useful in edge environments where TCP connection is limited.
+The [TiDB Serverless driver (Beta)](https://github.com/tidbcloud/serverless-js) for JavaScript allows you to connect to TiDB Serverless over HTTPS. It is particularly useful in edge environments where TCP connection is limited.
 
-## Use the TiDB serverless driver
+## Use the TiDB Serverless driver
 
 ### Install
 
@@ -19,7 +19,7 @@ npm install @tidbcloud/serverless
 
 ### Query
 
-To query from TiDB serverless, you need to create a connection first. Then you can use the connection to execute raw SQL queries. For example:
+To query from TiDB Serverless, you need to create a connection first. Then you can use the connection to execute raw SQL queries. For example:
 
 ```ts
 import { connect } from '@tidbcloud/serverless'
@@ -30,7 +30,7 @@ const results = await conn.execute('select * from test where id = ?',[1])
 
 ### Transaction (Experimental)
 
-You can also perform interactive transactions with the TiDB serverless driver. For example:
+You can also perform interactive transactions with the TiDB Serverless driver. For example:
 
 ```ts
 import { connect } from '@tidbcloud/serverless'
@@ -50,7 +50,7 @@ try {
 
 ## Edge Examples
 
-Here are some examples of using the TiDB serverless driver at the edge. You can also try this [live demo](https://github.com/tidbcloud/car-sales-insight).
+Here are some examples of using the TiDB Serverless driver at the edge. You can also try this [live demo](https://github.com/tidbcloud/car-sales-insight).
 
 <SimpleTab>
 
@@ -186,7 +186,7 @@ The type mapping between TiDB Serverless and Javascript are as follows:
 
 ## Pricing
 
-TiDB serverless driver following the [TiDB serverless pricing](https://www.pingcap.com/tidb-serverless-pricing-details) model. The driver itself is free but RU and storage will also be generated.
+TiDB Serverless driver following the [TiDB Serverless pricing](https://www.pingcap.com/tidb-serverless-pricing-details) model. The driver itself is free but RU and storage will also be generated.
 
 ## Limitations
 
@@ -196,5 +196,5 @@ TiDB serverless driver following the [TiDB serverless pricing](https://www.pingc
 
 ## What's next
 
-- [Learn how to configure TiDB serverless driver](/tidb-cloud/serverless-driver-config.md).
-- [Learn how to use Kysely ORM with TiDB serverless driver dialect](https://github.com/tidbcloud/kysely).
+- [Learn how to configure TiDB Serverless driver](/tidb-cloud/serverless-driver-config.md).
+- [Learn how to use Kysely ORM with TiDB Serverless driver dialect](https://github.com/tidbcloud/kysely).
