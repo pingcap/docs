@@ -1,5 +1,5 @@
 ---
-title: Configure TiDB serverless driver (Beta)
+title: Configure TiDB Serverless Driver (Beta)
 summary: Learn how to configure TiDB serverless driver
 ---
 

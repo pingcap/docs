@@ -1,5 +1,5 @@
 ---
-title: TiDB serverless driver (Beta)
+title: TiDB Serverless Driver (Beta)
 summary: Learn how to connect to TiDB serverless from serverless and edge environments over HTTP.
 ---
 
