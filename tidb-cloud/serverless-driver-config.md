@@ -11,16 +11,16 @@ TiDB Serverless driver provides connection level configurations and SQL level op
 
 The following configurations are supported in connection level:
 
-| name       | type       | default      | comment                                                                                                                 |
-|------------|------------|--------------|-------------------------------------------------------------------------------------------------------------------------|
-| username   | string     | /            | Username of TiDB Severless                                                                                              |
-| password   | string     | /            | Password of TiDB Severless                                                                                              |
-| host       | string     | /            | Host of TiDB Severless                                                                                                  |
-| database   | string     | test         | Database of TiDB Severless                                                                                              |
-| url        | string     | /            | A single url format as `mysql://username:password@host/database`. The `database` can be skipped to use the default one. |
-| fetch      | function   | global fetch | Custom fetch function                                                                                                   |
-| arrayMode  | bool       | false        | whether to return results as arrays instead of objects                                                                  |
-| fullResult | bool       | false        | whether to return full result object instead of just rows                                                               |
+| name       | type       | default      | comment                                                                                                                  |
+|------------|------------|--------------|--------------------------------------------------------------------------------------------------------------------------|
+| username   | string     | /            | Username of TiDB Serverless                                                                                              |
+| password   | string     | /            | Password of TiDB Serverless                                                                                              |
+| host       | string     | /            | Host of TiDB Serverless                                                                                                  |
+| database   | string     | test         | Database of TiDB Serverless                                                                                              |
+| url        | string     | /            | A single url format as `mysql://username:password@host/database`. The `database` can be skipped to use the default one.  |
+| fetch      | function   | global fetch | Custom fetch function                                                                                                    |
+| arrayMode  | bool       | false        | whether to return results as arrays instead of objects                                                                   |
+| fullResult | bool       | false        | whether to return full result object instead of just rows                                                                |
 
 ### Database URL
 
