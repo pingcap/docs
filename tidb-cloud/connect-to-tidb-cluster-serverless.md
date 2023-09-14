@@ -55,7 +55,6 @@ The following table shows the network you can use in different connection method
 | Data Service (beta)        | /                            | Accessing TiDB Serverless via Data Service (beta) is through API Key so there is no need to specify the network.     |
 | Serverless Driver (beta)   | Public endpoint              | Serverless Driver only supports connections via public endpoint.                                                     |
 
-
 ## Choose a connection method
 
 - The direct connection means the MySQL native connection system over TCP. You can use it in any long-running environment, like Java, Node.js, Python, etc.
