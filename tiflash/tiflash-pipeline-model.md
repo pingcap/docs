@@ -16,7 +16,7 @@ Inspired by the paper [Morsel-Driven Parallelism: A NUMA-Aware Query Evaluation 
 
 ## Enable and disable the pipeline execution model
 
-To enable or disable the pipeline execution model, you can use the [`tiflash_enable_pipeline_model`](/system-variables.md#tiflash_enable_pipeline_model-new-in-v720) system variable. This variable can take effect at the global level. By default, `tiflash_enable_pipeline_model` is set to `ON`, which means that the TiFlash pipeline execution model is enabled. You can use the following statement to view the variable value:
+To enable or disable the pipeline execution model, you can use the [`tiflash_enable_pipeline_model`](/system-variables.md#tiflash_enable_pipeline_model-new-in-v740) system variable. This variable can take effect at the global level. By default, `tiflash_enable_pipeline_model` is set to `ON`, which means that the TiFlash pipeline execution model is enabled. You can use the following statement to view the variable value:
 
 ```sql
 SHOW GLOBAL VARIABLES LIKE 'tiflash_enable_pipeline_model';

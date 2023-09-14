@@ -2261,34 +2261,6 @@ Query OK, 0 rows affected (0.09 sec)
 
 </CustomContent>
 
-### tiflash_enable_pipeline_model <span class="version-mark">New in v7.4.0</span>
-
-<CustomContent platform="tidb">
-
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Type: Boolean
-- Default value: `ON`
-- This variable controls whether to enable the new [Pipeline Execution Model](/tiflash/tiflash-pipeline-model.md) in TiFlash.
-- When this variable is set to `ON` to enable the pipeline execution model, the query pushed down to TiFlash will be executed using the new pipeline execution model.
-- When this variable is set to `OFF` to disable the pipeline execution model, the query pushed down to TiFlash will be executed using the original stream model.
-- This variable is renamed from `tidb_enable_tiflash_pipeline_model`.
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Type: Boolean
-- Default value: `ON`
-- This variable controls whether to enable the new [Pipeline Execution Model](https://docs.pingcap.com/tidb/v7.2/tiflash-pipeline-model) in TiFlash.
-- When this variable is set to `ON` to enable the pipeline execution model, the query pushed down to TiFlash will be executed using the new pipeline execution model.
-- When this variable is set to `OFF` to disable the pipeline execution model, the query pushed down to TiFlash will be executed using the original stream model.
-- This variable is renamed from `tidb_enable_tiflash_pipeline_model`.
-
-</CustomContent>
-
 ### tidb_enable_tiflash_read_for_write_stmt <span class="version-mark">New in v6.3.0</span>
 
 - Scope: SESSION | GLOBAL
@@ -5053,6 +5025,34 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - Unit: Threads
 - This variable is used to set the concurrency degree of the window operator.
 - A value of `-1` means that the value of `tidb_executor_concurrency` will be used instead.
+
+### tiflash_enable_pipeline_model <span class="version-mark">New in v7.4.0</span>
+
+<CustomContent platform="tidb">
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Type: Boolean
+- Default value: `ON`
+- This variable controls whether to enable the new [Pipeline Execution Model](/tiflash/tiflash-pipeline-model.md) in TiFlash.
+- When this variable is set to `ON` to enable the pipeline execution model, the query pushed down to TiFlash will be executed using the new pipeline execution model.
+- When this variable is set to `OFF` to disable the pipeline execution model, the query pushed down to TiFlash will be executed using the original stream model.
+- This variable is renamed from `tidb_enable_tiflash_pipeline_model`.
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Type: Boolean
+- Default value: `ON`
+- This variable controls whether to enable the new [Pipeline Execution Model](https://docs.pingcap.com/tidb/v7.2/tiflash-pipeline-model) in TiFlash.
+- When this variable is set to `ON` to enable the pipeline execution model, the query pushed down to TiFlash will be executed using the new pipeline execution model.
+- When this variable is set to `OFF` to disable the pipeline execution model, the query pushed down to TiFlash will be executed using the original stream model.
+- This variable is renamed from `tidb_enable_tiflash_pipeline_model`.
+
+</CustomContent>
 
 ### tiflash_fastscan <span class="version-mark">New in v6.3.0</span>
 
