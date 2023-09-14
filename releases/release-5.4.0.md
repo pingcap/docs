@@ -57,7 +57,7 @@ In v5.4, the key new features or improvements are as follows:
   <tr>
     <td><a href="https://docs.pingcap.com/tidb/dev/system-variables#tidb_persist_analyze_options-new-in-v540"><code>tidb_persist_analyze_options</code></a></td>
     <td>Newly added</td>
-    <td>Controls whether to enable the <a href="https://file+.vscode-resource.vscode-cdn.net/statistics.md#persist-analyze-configurations">ANALYZE configuration persistence</a> feature. The default value is <code>ON</code>.</td>
+    <td>Controls whether to enable the <a href="https://docs.pingcap.com/tidb/dev/statistics#persist-analyze-configurations">ANALYZE configuration persistence</a> feature. The default value is <code>ON</code>.</td>
   </tr>
   <tr>
     <td><a href="https://docs.pingcap.com/tidb/dev/system-variables#tidb_read_staleness-new-in-v540"><code>tidb_read_staleness</code></a></td>
