@@ -17,6 +17,10 @@ You can install the driver with npm:
 npm install @tidbcloud/serverless
 ```
 
+## Use the TiDB Serverless Driver
+
+You can use TiDB Serverless Driver to query data of a TiDB Serverless cluster or perform interactive transactions.
+
 ### Query
 
 To query from TiDB Serverless, you need to create a connection first. Then you can use the connection to execute raw SQL queries. For example:
@@ -137,15 +141,15 @@ const result = await conn.execute('show tables')
 
 ## Features
 
-### Supported SQL Statements
+### Supported SQL statements
 
 The following SQL statements are supported:  `SELECT`, `SHOW`, `EXPLAIN`, `USE`, `INSERT`, `UPDATE`, `DELETE`, `BEGIN`, `COMMIT`, `ROLLBACK`. Most of the DDL are supported.
 
-### Data Type Mapping
+### Data type mapping
 
 The type mapping between TiDB Serverless and Javascript are as follows:
 
-| TiDB Serverless Type | Javascript Type |
+| TiDB Serverless type | Javascript type |
 |----------------------|-----------------|
 | TINYINT              | number          |
 | UNSIGNED TINYINT     | number          |
@@ -190,9 +194,10 @@ TiDB Serverless driver following the [TiDB Serverless pricing](https://www.pingc
 
 ## Limitations
 
+Currently, using TiDB Serverless Driver has the following limitations:
 - Up to 10,000 rows can be fetched in a single query.
-- You can execute only one SQL statement at a time, multiple SQLs in one query are not supported yet.
-- Connect with [private endpoints](/tidb-cloud/set-up-private-endpoint-connections-serverless.md) is not supported yet.
+- You can execute only a single SQL statement at a time, multiple SQL statements in one query are not supported yet.
+- Connection with [private endpoints](/tidb-cloud/set-up-private-endpoint-connections-serverless.md) is not supported yet.
 
 ## What's next
 

@@ -7,9 +7,9 @@ summary: Learn how to configure TiDB Serverless driver
 
 TiDB Serverless driver provides connection level configurations and SQL level options. Learn how to configure TiDB Serverless driver.
 
-## Connection level Configurations
+## Connection level configurations
 
-The following configurations are supported in connection level:
+At the connection level, you can make the following configurations:
 
 | name       | type       | default      | comment                                                                                                                  |
 |------------|------------|--------------|--------------------------------------------------------------------------------------------------------------------------|
@@ -24,7 +24,7 @@ The following configurations are supported in connection level:
 
 ### Database URL
 
-A single database URL value can be used to configure the `host`, `username`, `password` and `database` values. The following codes are equivalent:
+For the URL of a single database, you can configure values for `host`, `username`, `password`, and `database`. The following codes are equivalent:
 
 ```ts
 const config = {
@@ -43,14 +43,16 @@ const conn = connect({url: process.env['DATABASE_URL'] || 'mysql://username:pass
 
 ## SQL level Options
 
-> Note: SQL level options priority is higher than connection level configurations.
+> **Note:**
+>
+> The SQL level options have a higher priority over connection level configurations.
 
-The following options are supported in SQL level:
+At the SQL level, you can configure the following options:
 
-| option     | type | default | comment                                                   |
+| Option     | Type | Default value | Description                                              |
 |------------|------|---------|-----------------------------------------------------------|
-| arrayMode  | bool | false   | whether to return results as arrays instead of objects    |
-| fullResult | bool | false   | whether to return full result object instead of just rows |
+| `arrayMode`  | bool | false   | whether to return results as arrays instead of objects    |
+| `fullResult` | bool | false   | whether to return full result object instead of rows only |
 
 ```ts
 const conn = connect({url: process.env['DATABASE_URL'] || 'mysql://username:password@host/database'})

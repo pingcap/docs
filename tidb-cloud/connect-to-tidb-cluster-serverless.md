@@ -5,19 +5,19 @@ summary: Learn how to connect to your TiDB Serverless cluster via different meth
 
 # Connect to Your TiDB Serverless Cluster
 
-## Connection Methods
-
-This document introduces the methods to connect to your TiDB Serverless cluster.
+This document describes how to connect to your TiDB Serverless cluster.
 
 > **Tip:**
 >
 > To learn how to connect to a TiDB Dedicated cluster, see [Connect to Your TiDB Dedicated Cluster](/tidb-cloud/connect-to-tidb-cluster.md).
 
+## Connection methods
+
 After your TiDB Serverless cluster is created on TiDB Cloud, you can connect to it via one of the following methods:
 
-- Direct Connections
+- Direct connections
 
-  TiDB Serverless provides MySQL-compatible database for you. You can connect to your TiDB Serverless using any tool which supports MySQL, such as [MySQL client](https://dev.mysql.com/downloads/shell/).
+TiDB Serverless is MySQL-compatible. You can connect to your TiDB Serverless cluster using any tool that supports MySQL connections, such as [MySQL client](https://dev.mysql.com/downloads/shell/).
 
 - [Data Service (beta)](/tidb-cloud/data-service-overview.md)
 
@@ -25,7 +25,7 @@ After your TiDB Serverless cluster is created on TiDB Cloud, you can connect to 
 
 - [Serverless Driver (beta)](/tidb-cloud/serverless-driver.md)
 
-  TiDB Serverless provides Serverless Driver, a javascript driver that allows you to connect to your TiDB Serverless in the edge environment over HTTP.
+  TiDB Serverless provides Serverless Driver, a javascript driver that allows you to connect to your TiDB Serverless cluster in edge environments over HTTP.
 
 - [Chat2Query (beta)](/tidb-cloud/explore-data-with-chat2query.md)
 
@@ -35,7 +35,7 @@ After your TiDB Serverless cluster is created on TiDB Cloud, you can connect to 
 
 ## Network
 
-There are two types of network of TiDB Serverless:
+There are two network connection types for TiDB Serverless:
 
 - [Private endpoint](/tidb-cloud/set-up-private-endpoint-connections-serverless.md) (recommended)
 
@@ -51,10 +51,10 @@ The following table shows the network you can use in different connection method
 
 | Connection method  | Network                     | Description                                                                   |
 |--------------------|-----------------------------|-------------------------------------------------------------------------------|
-| Direct Connections | Public and Private endpoint | Both public endpoint and private endpoint are supported in direct connections |
-| Data Service       | /                           | Data Service needn't specify network                                          |
-| Serverless Driver  | Public endpoint             | Serverless driver only support public endpoint                                |
-| Chat2Query         | /                           | Chat2Query needn't specify network                                            |
+| Direct connections | Public or private endpoint | Direct connections can be made via both public and private endpoints. |
+| Data Service (beta)       | /                           |  Accessing TiDB Serverless via Data Service (beta) is through  HTTPS request so there is no need to specify the network.                                             |
+| Serverless Driver (beta)  | Public endpoint             | Serverless Driver only supports connections via public endpoint.                                |
+| Chat2Query (beta)         | /                           | Chat2Query does not need to specify the network.                                       |
 
 ## What's next
 

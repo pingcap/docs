@@ -105,7 +105,7 @@
   - Manage TiDB Serverless Clusters
     - [Create a TiDB Serverless Cluster](/tidb-cloud/create-tidb-cluster-serverless.md)
     - Connect to Your TiDB Serverless Cluster
-      - [Connection overview](/tidb-cloud/connect-to-tidb-cluster-serverless.md)
+      - [Connection Overview](/tidb-cloud/connect-to-tidb-cluster-serverless.md)
       - Network
         - [Public Endpoint](/tidb-cloud/connect-via-standard-connection-serverless.md)
         - [Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)
