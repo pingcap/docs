@@ -55,6 +55,7 @@ At the SQL level, you can configure the following options:
 | `fullResult` | bool | `false`   | Whether to return full result object instead of just rows. To get more detailed results, set it to `true`.                                         |
 
 For example:
+
 ```ts
 const conn = connect({url: process.env['DATABASE_URL'] || 'mysql://username:password@host/database'})
 const results = await conn.execute('select * from test',null,{arrayMode:true,fullResult:true})
