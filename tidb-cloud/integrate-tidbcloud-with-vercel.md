@@ -65,7 +65,7 @@ If you want to connect to your TiDB Cloud cluster via a [Data App](/tidb-cloud/d
 
 One Vercel project can only connect to one TiDB Cloud Data App. To change the Data App for your Vercel project, you need to first disconnect the current App and then connect to a new App.
 
-## Connect via the TiDB Cloud Vercel integration
+# Connect via the TiDB Cloud Vercel integration
 
 To connect via the TiDB Cloud Vercel integration, go to the [TiDB Cloud integration](https://vercel.com/integrations/tidb-cloud) page from the [Vercel's Integrations Marketplace](https://vercel.com/integrations). Using this method, you can choose which cluster to connect to, and TiDB Cloud will automatically generate all the necessary environment variables for your Vercel projects.
 
@@ -86,7 +86,7 @@ The detailed steps are as follows:
     4. Select your target TiDB Cloud cluster. If the **Cluster** drop-down list is empty or you want to select a new TiDB Serverless cluster, click **+ Create Cluster** in the list to create one.
     5. Select the database that you want to connect to. If the **Database** drop-down list is empty or you want to select a new Database, click **+ Create Database** in the list to create one.
     6. Select the framework that your Vercel projects are using. If the target framework is not listed, select **General**. Different frameworks determine different environment variables.
-    7. Choose whether to create new branches for development environment.
+    7. Choose whether to create new branches for preview environments.
     8. Click **Add Integration and Return to Vercel**.
 
 ![Vercel Integration Page](/media/tidb-cloud/vercel/integration-link-cluster-page.png)
@@ -151,58 +151,6 @@ The detailed steps are as follows:
 </div>
 </SimpleTab>
 
-## Connect via manually setting environment variables
-
-<SimpleTab>
-<div label="Cluster">
-
-1. Get the connection information of your TiDB cluster.
-
-    You can get the connection information from the connection dialog of your cluster. To open the dialog, go to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project, click the name of your target cluster to go to its overview page, and then click **Connect** in the upper-right corner.
-
-2. Go to your Vercel dashboard > Vercel project > **Settings** > **Environment Variables**, and then [declare each environment variable value](https://vercel.com/docs/concepts/projects/environment-variables#declare-an-environment-variable) according to the connection information of your TiDB cluster.
-
-    ![Vercel Environment Variables](/media/tidb-cloud/vercel/integration-vercel-environment-variables.png)
-
-Here we use a Prisma application as an example. The following is a datasource setting in the Prisma schema file for a TiDB Serverless cluster:
-
-```
-datasource db {
-    provider = "mysql"
-    url      = env("DATABASE_URL")
-}
-```
-
-In Vercel, you can declare the environment variables as follows:
-
-- **Key** = `DATABASE_URL`
-- **Value** = `mysql://<User>:<Password>@<Endpoint>:<Port>/<Database>?sslaccept=strict`
-
-You can get the information of `<User>`, `<Password>`, `<Endpoint>`, `<Port>`, and `<Database>` in the TiDB Cloud console.
-
-</div>
-<div label="Data App">
-
-1. Follow the steps in [Manage a Data APP](/tidb-cloud/data-service-manage-data-app.md) and [Manage an Endpoint](/tidb-cloud/data-service-manage-endpoint.md) to create a Data App and its endpoints if you have not done that.
-
-2. Go to your Vercel dashboard > Vercel project > **Settings** > **Environment Variables**, and then [declare each environment variable value](https://vercel.com/docs/concepts/projects/environment-variables#declare-an-environment-variable) according to the connection information of your Data App.
-
-    ![Vercel Environment Variables](/media/tidb-cloud/vercel/integration-vercel-environment-variables.png)
-
-    In Vercel, you can declare the environment variables as follows.
-
-    - **Key** = `DATA_APP_BASE_URL`
-    - **Value** = `<DATA_APP_BASE_URL>`
-    - **Key** = `DATA_APP_PUBLIC_KEY`
-    - **Value** = `<DATA_APP_PUBLIC_KEY>`
-    - **Key** = `DATA_APP_PRIVATE_KEY`
-    - **Value** = `<DATA_APP_PRIVATE_KEY>`
-
-    You can get the information of `<DATA_APP_BASE_URL>`, `<DATA_APP_PUBLIC_KEY>`, `<DATA_APP_PRIVATE_KEY>` from your [Data Service](https://tidbcloud.com/console/data-service) page of the TiDB Cloud console.
-
-</div>
-</SimpleTab>
-
 ## Configure connections
 
 If you have installed [TiDB Cloud Vercel integration](https://vercel.com/integrations/tidb-cloud), you can add or remove connections inside the integration.
@@ -257,3 +205,55 @@ After you push changes to GitHub repository, Vercel will trigger a preview deplo
 > **Note:**
 >
 > For each organization in TiDB Cloud, you can create a maximum of five TiDB Serverless branches by default. To avoid exceeding the limit, you can delete the TiDB Serverless branches that are no longer needed. For more information, see [Manage TiDB Serverless branches](/tidb-cloud/branch-manage.md).
+
+# Connect via manually setting environment variables
+
+<SimpleTab>
+<div label="Cluster">
+
+1. Get the connection information of your TiDB cluster.
+
+   You can get the connection information from the connection dialog of your cluster. To open the dialog, go to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project, click the name of your target cluster to go to its overview page, and then click **Connect** in the upper-right corner.
+
+2. Go to your Vercel dashboard > Vercel project > **Settings** > **Environment Variables**, and then [declare each environment variable value](https://vercel.com/docs/concepts/projects/environment-variables#declare-an-environment-variable) according to the connection information of your TiDB cluster.
+
+   ![Vercel Environment Variables](/media/tidb-cloud/vercel/integration-vercel-environment-variables.png)
+
+Here we use a Prisma application as an example. The following is a datasource setting in the Prisma schema file for a TiDB Serverless cluster:
+
+```
+datasource db {
+    provider = "mysql"
+    url      = env("DATABASE_URL")
+}
+```
+
+In Vercel, you can declare the environment variables as follows:
+
+- **Key** = `DATABASE_URL`
+- **Value** = `mysql://<User>:<Password>@<Endpoint>:<Port>/<Database>?sslaccept=strict`
+
+You can get the information of `<User>`, `<Password>`, `<Endpoint>`, `<Port>`, and `<Database>` in the TiDB Cloud console.
+
+</div>
+<div label="Data App">
+
+1. Follow the steps in [Manage a Data APP](/tidb-cloud/data-service-manage-data-app.md) and [Manage an Endpoint](/tidb-cloud/data-service-manage-endpoint.md) to create a Data App and its endpoints if you have not done that.
+
+2. Go to your Vercel dashboard > Vercel project > **Settings** > **Environment Variables**, and then [declare each environment variable value](https://vercel.com/docs/concepts/projects/environment-variables#declare-an-environment-variable) according to the connection information of your Data App.
+
+   ![Vercel Environment Variables](/media/tidb-cloud/vercel/integration-vercel-environment-variables.png)
+
+   In Vercel, you can declare the environment variables as follows.
+
+   - **Key** = `DATA_APP_BASE_URL`
+   - **Value** = `<DATA_APP_BASE_URL>`
+   - **Key** = `DATA_APP_PUBLIC_KEY`
+   - **Value** = `<DATA_APP_PUBLIC_KEY>`
+   - **Key** = `DATA_APP_PRIVATE_KEY`
+   - **Value** = `<DATA_APP_PRIVATE_KEY>`
+
+   You can get the information of `<DATA_APP_BASE_URL>`, `<DATA_APP_PUBLIC_KEY>`, `<DATA_APP_PRIVATE_KEY>` from your [Data Service](https://tidbcloud.com/console/data-service) page of the TiDB Cloud console.
+
+</div>
+</SimpleTab>
