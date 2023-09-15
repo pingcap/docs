@@ -47,7 +47,7 @@ There are two network connection types for TiDB Serverless:
 
   The standard connection exposes a public endpoint, so you can connect to your TiDB cluster via a SQL client from your laptop.
 
-  TiDB Serverless supports [TLS connections](/tidb-cloud/secure-connections-to-serverless-clusters.md), which ensures the security of data transmission from your applications to TiDB clusters.
+  TiDB Serverless requires [TLS connections](/tidb-cloud/secure-connections-to-serverless-clusters.md), which ensures the security of data transmission from your applications to TiDB clusters.
 
 The following table shows the network you can use in different connection methods:
 
