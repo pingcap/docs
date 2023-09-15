@@ -13,11 +13,11 @@ This document describes how to connect to your TiDB Serverless cluster.
 
 ## Connection methods
 
-After your TiDB Serverless cluster is created on TiDB Cloud, you can connect to it via one of the following methods:
+This section describes the connection methods you can use to connect to a TiDB Serverless cluster.
 
 - Direct connections
 
-  TiDB Serverless is MySQL-compatible. You can connect to your TiDB Serverless cluster using any tool that supports MySQL connections, such as [MySQL client](https://dev.mysql.com/doc/refman/8.0/en/mysql.html).
+  Direct connections mean the MySQL native connection system over TCP, You can connect to your TiDB Serverless cluster using any tool that supports MySQL connections, such as [MySQL client](https://dev.mysql.com/doc/refman/8.0/en/mysql.html).
 
 - [Data Service (beta)](/tidb-cloud/data-service-overview.md)
 
@@ -26,6 +26,14 @@ After your TiDB Serverless cluster is created on TiDB Cloud, you can connect to 
 - [Serverless Driver (beta)](/tidb-cloud/serverless-driver.md)
 
   TiDB Serverless provides Serverless driver, a javascript driver that allows you to connect to your TiDB Serverless cluster in edge environments over HTTP.
+
+The following table shows the usage scenarios for various connection method:
+
+| Connection method  | Protocal | Scenario                                                               |
+| ------------------ | -------- | ---------------------------------------------------------------------- |
+| Direct connections | TCP      | Long-running environment, like Java, Node.js, Python, etc.             |
+| Data Service       | HTTP     | All browser and application interactions.                              |
+| Serverless Driver  | HTTP     | Edge environments such as Vercel Edge Function and Cloudflare Workers. |                                                                                              |
 
 **Choose a connection method**
 
@@ -53,21 +61,7 @@ The following table shows the network you can use in different connection method
 |----------------------------|------------------------------|----------------------------------------------------------------------------------------------------------------------|
 | Direct connections         | Public or private endpoint   | Direct connections can be made via both public and private endpoints.                                                |
 | Data Service (beta)        | /                            | Accessing TiDB Serverless via Data Service (beta) is through API Key so there is no need to specify the network.     |
-| Serverless Driver (beta)   | Public endpoint              | Serverless Driver only supports connections via public endpoint.                                                     |
-
-## Choose a connection method
-
-- The direct connection means the MySQL native connection system over TCP. You can use it in any long-running environment, like Java, Node.js, Python, etc.
-- The Data Service provides restful HTTP API for you. You can use it for all browser and application interactions.
-- The serverless driver is useful in edge environments such as Vercel Edge Function and Cloudflare Workers.
-
-You also need to consider the network type if safety is important to you. The following table shows the network you can use in different connection methods:
-
-| Connection method          | Network                      | Description                                                                                                          |
-|----------------------------|------------------------------|----------------------------------------------------------------------------------------------------------------------|
-| Direct connections         | Public or private endpoint   | Direct connections can be made via both public and private endpoints.                                                |
-| Data Service (beta)        | /                            | Accessing TiDB Serverless via Data Service (beta) is through API Key so there is no need to specify the network.     |
-| Serverless Driver (beta)   | Public endpoint              | Serverless Driver only supports connections via public endpoint.                                                     |
+| Serverless Driver (beta)   | Public endpoint              | Serverless Driver only supports connections via public endpoint.                                                     ||
 
 ## What's next
 
