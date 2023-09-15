@@ -31,14 +31,20 @@ const config = {
   host: '<host>',
   username: '<user>',
   password: '<password>',
-  database: '<database>'
+  database: '<database>',
+  arrayMode: true,
 }
 
 const conn = connect(config)
 ```
 
 ```ts
-const conn = connect({url: process.env['DATABASE_URL'] || 'mysql://username:password@host/database'})
+const config = {
+  url: process.env['DATABASE_URL'] || 'mysql://username:password@host/database',
+  arrayMode: true
+}
+
+const conn = connect(config)
 ```
 
 ## SQL level options
