@@ -121,7 +121,7 @@ const result = await conn.execute('show tables')
 ```ts
 import { connect } from "@tidbcloud/serverless-js"
 
-const conn = connect({url: process.env.DATABASE_URL})
+const conn = connect({url: Bun.env.DATABASE_URL})
 const result = await conn.execute('show tables')
 ```
 
