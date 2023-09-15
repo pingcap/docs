@@ -1,6 +1,6 @@
 ---
 title: Configure TiDB Cloud Serverless Driver (Beta)
-summary: Learn how to configure TiDB Cloud Serverless Driver
+summary: Learn how to configure TiDB Cloud Serverless Driver.
 ---
 
 # Configure TiDB Cloud Serverless Driver (Beta)
