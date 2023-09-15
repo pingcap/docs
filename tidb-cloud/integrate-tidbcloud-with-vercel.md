@@ -18,7 +18,7 @@ This guide describes how to connect your TiDB Cloud clusters to Vercel projects 
 
 For both of the preceding methods, TiDB Cloud provides the following options for programmatically connecting to your database:
 
-- Direct connection: connect your TiDB Cloud cluster to your Vercel project directly using MySQL's standard connection system.
+- Cluster: connect your TiDB Cloud cluster to your Vercel project with direct connections or serverless driver.
 - [Data App](/tidb-cloud/data-service-manage-data-app.md): access data of your TiDB Cloud cluster through a collection of HTTP endpoints.
 
 ## Prerequisites
@@ -72,7 +72,7 @@ To connect via the TiDB Cloud Vercel integration, go to the [TiDB Cloud integrat
 The detailed steps are as follows:
 
 <SimpleTab>
-<div label="Direct connection">
+<div label="Cluster">
 
 1. Click **Add Integration** in the upper-right area of the [TiDB Cloud Vercel integration](https://vercel.com/integrations/tidb-cloud) page. The **Add TiDB Cloud** dialog is displayed.
 2. Select the scope of your integration in the drop-down list and click **Continue**.
@@ -154,7 +154,7 @@ The detailed steps are as follows:
 ## Connect via manually setting environment variables
 
 <SimpleTab>
-<div label="Direct connection">
+<div label="Cluster">
 
 1. Get the connection information of your TiDB cluster.
 
