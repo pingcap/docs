@@ -27,7 +27,7 @@ This section describes the connection methods you can use to connect to a TiDB S
 
   TiDB Serverless provides Serverless driver, a javascript driver that allows you to connect to your TiDB Serverless cluster in edge environments over HTTP.
 
-The following table shows the usage scenarios for various connection method:
+In the preceding connection methods, you can choose your desired one based on your needs:
 
 | Connection method  | Protocal | Scenario                                                               |
 | ------------------ | -------- | ---------------------------------------------------------------------- |
