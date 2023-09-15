@@ -54,7 +54,7 @@ The following table shows the network you can use in different connection method
 | Connection method          | Network                      | Description                                                                                                       |
 |----------------------------|------------------------------|-------------------------------------------------------------------------------------------------------------------|
 | Direct connections         | Public or private endpoint   | Direct connections can be made via both public and private endpoints.                                             |
-| Data Service (beta)        | /                            | Accessing TiDB Serverless via Data Service (beta) is no need to specify the network.     |
+| Data Service (beta)        | /                            | Accessing TiDB Serverless via Data Service (beta) does not need to specify the network type.     |
 | Serverless Driver (beta)   | Public endpoint              | Serverless Driver only supports connections via public endpoint.                                                  ||
 
 ## What's next
