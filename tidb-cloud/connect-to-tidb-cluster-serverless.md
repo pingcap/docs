@@ -21,7 +21,7 @@ After your TiDB Serverless cluster is created on TiDB Cloud, you can connect to 
 
 - [Data Service (beta)](/tidb-cloud/data-service-overview.md)
 
-  TiDB Serverless provides a Data Service feature that enables you to connect to your TiDB Serverless cluster via an HTTPS request using a custom API endpoint. Unlike direct connections, Data Service accesses TiDB Serverless data via restful API rather than the raw SQL.
+  TiDB Serverless provides a Data Service feature that enables you to connect to your TiDB Serverless cluster via an HTTPS request using a custom API endpoint. Unlike direct connections, Data Service accesses TiDB Serverless data via a RESTful API rather than raw SQL.
 
 - [Serverless Driver (beta)](/tidb-cloud/serverless-driver.md)
 
