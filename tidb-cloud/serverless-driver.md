@@ -105,21 +105,24 @@ export default async () => {
 
 </div>
 
-<div label="Supabase Edge Function">
+<div label="Deno">
 
 ```ts
-import { serve } from "https://deno.land/std@0.168.0/http/server.ts"
-import { connect } from 'https://esm.sh/@tidbcloud/serverless'
+import { connect } from "npm:@tidbcloud/serverless-js"
 
-serve(async (req) => {
+const conn = connect({url: Deno.env.get('DATABASE_URL')})
+const result = await conn.execute('show tables')
+```
 
-  const conn = connect({url: Deno.env.get('DATABASE_URL')})
-  const result = await conn.execute('show tables')
-  return new Response(
-      JSON.stringify(result),
-      { headers: { "Content-Type": "application/json" } },
-  )
-})
+</div>
+
+<div label="Bun">
+
+```ts
+import { connect } from "@tidbcloud/serverless-js"
+
+const conn = connect({url: process.env.DATABASE_URL})
+const result = await conn.execute('show tables')
 ```
 
 </div>
