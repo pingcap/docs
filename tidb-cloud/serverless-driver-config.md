@@ -17,14 +17,14 @@ At the connection level, you can make the following configurations:
 | `password`   | string     | N/A            | Password of TiDB Serverless                                                                                             |
 | `host`       | string     | N/A           | Hostname of TiDB Serverless                                                                                             |
 | `database`   | string     | `test`         | Database of TiDB Serverless                                                                                             |
-| `url`        | string     | N/A            | A single url format as `mysql://username:password@host/database`. The `database` can be skipped to use the default one. |
+| `url`        | string     | N/A            | The URL for the database, in the `mysql://username:password@host/database` format, where `database` can be skipped if you intend to connect to the default database.   |
 | `fetch`      | function   | global fetch | Custom fetch function. For example, you can use the `undici` fetch in node.js.                                          |
 | `arrayMode`  | bool       | `false`        | Whether to return results as arrays instead of objects. To get better performance, set it to `true`.                    |
 | `fullResult` | bool       | `false`        | Whether to return full result object instead of just rows. To get more detailed results, set it to `true`.              |
 
 ### Database URL
 
-An url can be used to replace the `host`, `username`, `password`, and `database`. The following codes are equivalent:
+When `url` is configured, there is no need to configure `host`, `username`, `password`, and `database` separately. The following codes are equivalent:
 
 ```ts
 const config = {
