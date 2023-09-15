@@ -35,12 +35,6 @@ The following table shows the usage scenarios for various connection method:
 | Data Service       | HTTP     | All browser and application interactions.                              |
 | Serverless Driver  | HTTP     | Edge environments such as Vercel Edge Function and Cloudflare Workers. |                                                                                              |
 
-**Choose a connection method**
-
-- The direct connection means the MySQL native connection system over TCP. You can use it in any long-running environment, like Java, Node.js, Python, etc.
-- The Data Service provides restful HTTP API for you. You can use it for all browser and application interactions.
-- The serverless driver is useful in edge environments such as Vercel Edge Function and Cloudflare Workers.
-
 ## Network
 
 There are two network connection types for TiDB Serverless:
