@@ -124,17 +124,6 @@ serve(async (req) => {
 
 </div>
 
-<div label="Deno">
-
-```ts
-import { connect } from "npm:@tidbcloud/serverless-js"
-
-const conn = connect({url: Deno.env.get('DATABASE_URL')})
-const result = await conn.execute('show tables')
-```
-
-</div>
-
 </SimpleTab>
 
 ## Features
