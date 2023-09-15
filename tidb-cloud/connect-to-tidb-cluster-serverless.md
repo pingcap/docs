@@ -17,23 +17,23 @@ This section describes the connection methods you can use to connect to a TiDB S
 
 - Direct connections
 
-  Direct connections mean the MySQL native connection system over TCP, You can connect to your TiDB Serverless cluster using any tool that supports MySQL connections, such as [MySQL client](https://dev.mysql.com/doc/refman/8.0/en/mysql.html).
+  Direct connections mean the MySQL native connection system over TCP, You can connect to your TiDB Serverless cluster using any tool that supports MySQL connection, such as [MySQL client](https://dev.mysql.com/doc/refman/8.0/en/mysql.html).
 
 - [Data Service (beta)](/tidb-cloud/data-service-overview.md)
 
-  TiDB Serverless provides a Data Service feature that enables you to access TiDB Serverless data via an HTTPS request using a custom API endpoint.
+  TiDB Serverless provides a Data Service feature that enables you to connect to your TiDB Serverless cluster via an HTTPS request using a custom API endpoint. Different from direct connections, Data Service access TiDB Serverless data via restful api rather than the raw SQL.
 
 - [Serverless Driver (beta)](/tidb-cloud/serverless-driver.md)
 
-  TiDB Serverless provides Serverless driver, a javascript driver that allows you to connect to your TiDB Serverless cluster in edge environments over HTTP.
+  TiDB Serverless provides serverless driver, a javascript driver that allows you to connect to your TiDB Serverless cluster in edge environment with the same experience as direct connection.
 
 In the preceding connection methods, you can choose your desired one based on your needs:
 
-| Connection method  | Protocal | Scenario                                                               |
-| ------------------ | -------- | ---------------------------------------------------------------------- |
+| Connection method  | Protocol | Scenario                                                               |
+|--------------------|----------|------------------------------------------------------------------------|
 | Direct connections | TCP      | Long-running environment, like Java, Node.js, Python, etc.             |
 | Data Service       | HTTP     | All browser and application interactions.                              |
-| Serverless Driver  | HTTP     | Edge environments such as Vercel Edge Function and Cloudflare Workers. |                                                                                              |
+| Serverless driver  | HTTP     | Edge environments such as Vercel Edge Function and Cloudflare Workers. |
 
 ## Network
 
