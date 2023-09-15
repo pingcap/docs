@@ -69,6 +69,10 @@ One Vercel project can only connect to one TiDB Cloud Data App. To change the Da
 
 To connect via the TiDB Cloud Vercel integration, go to the [TiDB Cloud integration](https://vercel.com/integrations/tidb-cloud) page from the [Vercel's Integrations Marketplace](https://vercel.com/integrations). Using this method, you can choose which cluster to connect to, and TiDB Cloud will automatically generate all the necessary environment variables for your Vercel projects.
 
+> **Note:**
+>
+> This method is only available for TiDB Serverless clusters. If you want to use a TiDB Dedicated cluster, please use the [manual method](#connect-via-manually-setting-environment-variables).
+
 The detailed steps are as follows:
 
 <SimpleTab>
@@ -115,10 +119,6 @@ The detailed steps are as follows:
     ```
     DATABASE_URL
     ```
-
-> **Note:**
->
-> This method is only available for TiDB Serverless clusters. If you want to use a TiDB Dedicated cluster, please use the [manual method](#connect-via-manually-setting-environment-variables). 
 
 </div>
 
