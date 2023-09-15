@@ -48,7 +48,7 @@ You are expected to have an account and a cluster in TiDB Cloud. If you do not h
 
     > **Note:**
     >
-    > For TiDB Dedicated clusters, make sure that the traffic filter of the cluster allows all IP addresses (set to `0.0.0.0/0`) for connection, because Vercel deployments use [dynamic IP addresses](https://vercel.com/guides/how-to-allowlist-deployment-ip-address). If you use the TiDB Cloud Vercel integration, TiDB Cloud automatically adds a `0.0.0.0/0` traffic filter to your cluster in the integration workflow if there is none.
+    > For TiDB Dedicated clusters, make sure that the traffic filter of the cluster allows all IP addresses (set to `0.0.0.0/0`) for connection, because Vercel deployments use [dynamic IP addresses](https://vercel.com/guides/how-to-allowlist-deployment-ip-address).
 
 To [integrate with Vercel via the TiDB Cloud Vercel Integration](#connect-via-the-tidb-cloud-vercel-integration), you are expected to be in the `Organization Owner` role of your organization or the `Project Owner` role of the target project in TiDB Cloud. For more information, see [User roles](/tidb-cloud/manage-user-access.md#user-roles).
 
@@ -109,6 +109,12 @@ The detailed steps are as follows:
     ```
     DATABASE_URL
     ```
+   
+    **TiDB Cloud Serverless Driver**
+
+    ```
+    DATABASE_URL
+    ```
 
 > **Note:**
 >
@@ -153,10 +159,6 @@ The detailed steps are as follows:
 1. Get the connection information of your TiDB cluster.
 
     You can get the connection information from the connection dialog of your cluster. To open the dialog, go to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project, click the name of your target cluster to go to its overview page, and then click **Connect** in the upper-right corner.
-
-    > **Note:**
-    >
-    > For TiDB Dedicated clusters, make sure that you have set the **Allow Access from Anywhere** traffic filter in this step.
 
 2. Go to your Vercel dashboard > Vercel project > **Settings** > **Environment Variables**, and then [declare each environment variable value](https://vercel.com/docs/concepts/projects/environment-variables#declare-an-environment-variable) according to the connection information of your TiDB cluster.
 
@@ -217,6 +219,10 @@ If you have installed [TiDB Cloud Vercel integration](https://vercel.com/integra
 ## Connect with TiDB Serverless branching
 
 Vercel [Preview Deployments](https://vercel.com/docs/deployments/preview-deployments) allow you to preview changes to your app in a live deployment without merging those changes to your Git project's production branch. [TiDB Serverless Branching](/tidb-cloud/branch-overview.md) allows you to create a new instance for each branch of your Vercel project. This allows you to preview changes to your app in a live deployment without affecting your production data.
+
+> **Note:**
+>
+> Only [Vercel projects associated with GitHub repositories](https://vercel.com/docs/deployments/git/vercel-for-github) are supported for now.
 
 To enable TiDB Serverless Branching, you need to:
 
