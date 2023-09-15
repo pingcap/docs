@@ -25,7 +25,7 @@ After your TiDB Serverless cluster is created on TiDB Cloud, you can connect to 
 
 - [Serverless Driver (beta)](/tidb-cloud/serverless-driver.md)
 
-  TiDB Cloud provides a serverless driver, a javascript driver that allows you to connect to your TiDB Serverless cluster in edge environment with the same experience as direct connection.
+  TiDB Cloud provides a serverless driver for Javascript, which allows you to connect to your TiDB Serverless cluster in edge environments with the same experience as direct connections.
 
 In the preceding connection methods, you can choose your desired one based on your needs:
 
