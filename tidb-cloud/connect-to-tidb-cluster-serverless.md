@@ -17,15 +17,15 @@ After your TiDB Serverless cluster is created on TiDB Cloud, you can connect to 
 
 - Direct connections
 
-  Direct connections mean the MySQL native connection system over TCP, You can connect to your TiDB Serverless cluster using any tool that supports MySQL connection, such as [MySQL client](https://dev.mysql.com/doc/refman/8.0/en/mysql.html).
+  Direct connections mean the MySQL native connection system over TCP. You can connect to your TiDB Serverless cluster using any tool that supports MySQL connection, such as [MySQL client](https://dev.mysql.com/doc/refman/8.0/en/mysql.html).
 
 - [Data Service (beta)](/tidb-cloud/data-service-overview.md)
 
-  TiDB Serverless provides a Data Service feature that enables you to connect to your TiDB Serverless cluster via an HTTPS request using a custom API endpoint. Different from direct connections, Data Service access TiDB Serverless data via restful api rather than the raw SQL.
+  TiDB Serverless provides a Data Service feature that enables you to connect to your TiDB Serverless cluster via an HTTPS request using a custom API endpoint. Unlike direct connections, Data Service accesses TiDB Serverless data via restful API rather than the raw SQL.
 
 - [Serverless Driver (beta)](/tidb-cloud/serverless-driver.md)
 
-  TiDB Serverless provides serverless driver, a javascript driver that allows you to connect to your TiDB Serverless cluster in edge environment with the same experience as direct connection.
+  TiDB Cloud provides a serverless driver, a javascript driver that allows you to connect to your TiDB Serverless cluster in edge environment with the same experience as direct connection.
 
 In the preceding connection methods, you can choose your desired one based on your needs:
 
