@@ -5,7 +5,7 @@ summary: Learn how to configure TiDB Cloud Serverless Driver
 
 # Configure TiDB Cloud Serverless Driver (Beta)
 
-TiDB Cloud serverless driver provides connection level configurations and SQL level options. Learn how to configure the serverless driver.
+You can configure TiDB Cloud serverless driver at both the connection level and the SQL level.
 
 ## Connection level configurations
 
@@ -13,14 +13,14 @@ At the connection level, you can make the following configurations:
 
 | Name       | Type       | Default value     | Description                                                                                                    |
 |------------|------------|--------------|-------------------------------------------------------------------------------------------------------------------------|
-| username   | string     | /            | Username of TiDB Serverless                                                                                             |
-| password   | string     | /            | Password of TiDB Serverless                                                                                             |
-| host       | string     | /            | Host of TiDB Serverless                                                                                                 |
-| database   | string     | test         | Database of TiDB Serverless                                                                                             |
-| url        | string     | /            | A single url format as `mysql://username:password@host/database`. The `database` can be skipped to use the default one. |
-| fetch      | function   | global fetch | Custom fetch function                                                                                                   |
-| arrayMode  | bool       | false        | whether to return results as arrays instead of objects. Set it to `true` to get better performance.                     |
-| fullResult | bool       | false        | whether to return full result object instead of just rows. Set it to `true` to get more details.                        |
+| `username`   | string     | N/A          | Username of TiDB Serverless                                                                                             |
+| `password`   | string     | N/A            | Password of TiDB Serverless                                                                                             |
+| `host`       | string     | N/A           | Hostname of TiDB Serverless                                                                                                 |
+| `database`   | string     | `test`         | Database of TiDB Serverless                                                                                             |
+| `url`        | string     | N/A            | A single url format as `mysql://username:password@host/database`. The `database` can be skipped to use the default one. |
+| `fetch`      | function   | global fetch | Custom fetch function                                                                                                   |
+| `arrayMode`  | bool       | `false`        | Whether to return results as arrays instead of objects. To get better performance, set it to `true`.                   |
+| `fullResult` | bool       | `false`        | Whether to return full result object instead of just rows. To get more detailed results, set it to `true`.                        |
 
 ### Database URL
 
@@ -41,7 +41,7 @@ const conn = connect(config)
 const conn = connect({url: process.env['DATABASE_URL'] || 'mysql://username:password@host/database'})
 ```
 
-## SQL level Options
+## SQL level options
 
 > **Note:**
 >
@@ -51,9 +51,10 @@ At the SQL level, you can configure the following options:
 
 | Option     | Type | Default value | Description                                                                                         |
 |------------|------|---------|-----------------------------------------------------------------------------------------------------|
-| `arrayMode`  | bool | false   | whether to return results as arrays instead of objects. Set it to `true` to get better performance. |
-| `fullResult` | bool | false   | whether to return full result object instead of rows only. Set it to `true` to get more details.                                         |
+| `arrayMode`  | bool | `false`   | Whether to return results as arrays instead of objects. To get better performance, set it to `true`.  |
+| `fullResult` | bool | `false`   | Whether to return full result object instead of just rows. To get more detailed results, set it to `true`.                                         |
 
+For example:
 ```ts
 const conn = connect({url: process.env['DATABASE_URL'] || 'mysql://username:password@host/database'})
 const results = await conn.execute('select * from test',null,{arrayMode:true,fullResult:true})

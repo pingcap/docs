@@ -13,7 +13,7 @@ This document describes how to connect to your TiDB Serverless cluster.
 
 ## Connection methods
 
-This section describes the connection methods you can use to connect to a TiDB Serverless cluster.
+After your TiDB Serverless cluster is created on TiDB Cloud, you can connect to it via one of the following methods:
 
 - Direct connections
 
@@ -31,7 +31,7 @@ In the preceding connection methods, you can choose your desired one based on yo
 
 | Connection method  | Protocol | Scenario                                                               |
 |--------------------|----------|------------------------------------------------------------------------|
-| Direct connections | TCP      | Long-running environment, like Java, Node.js, Python, etc.             |
+| Direct connections | TCP      | Long-running environment, such as Java, Node.js, and Python.             |
 | Data Service       | HTTP     | All browser and application interactions.                              |
 | Serverless driver  | HTTP     | Edge environments such as Vercel Edge Function and Cloudflare Workers. |
 
@@ -54,7 +54,7 @@ The following table shows the network you can use in different connection method
 | Connection method          | Network                      | Description                                                                                                          |
 |----------------------------|------------------------------|----------------------------------------------------------------------------------------------------------------------|
 | Direct connections         | Public or private endpoint   | Direct connections can be made via both public and private endpoints.                                                |
-| Data Service (beta)        | /                            | Accessing TiDB Serverless via Data Service (beta) is through API Key so there is no need to specify the network.     |
+| Data Service (beta)        | /                            | Accessing TiDB Serverless via Data Service (beta) is through an API key so there is no need to specify the network.     |
 | Serverless Driver (beta)   | Public endpoint              | Serverless Driver only supports connections via public endpoint.                                                     ||
 
 ## What's next

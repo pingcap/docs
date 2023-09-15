@@ -5,7 +5,7 @@ summary: Learn how to connect to TiDB Serverless from serverless and edge enviro
 
 # TiDB Cloud Serverless Driver (Beta)
 
-[TiDB Cloud serverless driver (Beta)](https://github.com/tidbcloud/serverless-js) for JavaScript allows you to connect to your TiDB Serverless cluster over HTTPS. It is particularly useful in edge environments where TCP connections are limited, such as Vercel Edge Functions and Cloudflare Workers.
+[TiDB Cloud serverless driver (Beta)](https://github.com/tidbcloud/serverless-js) for JavaScript allows you to connect to your TiDB Serverless cluster over HTTPS. It is particularly useful in edge environments where TCP connections are limited, such as [Vercel Edge Functions](https://vercel.com/docs/functions/edge-functions) and [Cloudflare Workers](https://workers.cloudflare.com/).
 
 ## Install the serverless driver
 
@@ -17,7 +17,7 @@ npm install @tidbcloud/serverless
 
 ## Use the serverless driver
 
-You can use the driver to query data of a TiDB Serverless cluster or perform interactive transactions.
+You can use the serverless driver to query data of a TiDB Serverless cluster or perform interactive transactions.
 
 ### Query
 
@@ -30,7 +30,7 @@ const conn = connect({url: 'mysql://username:password@host/database'})
 const results = await conn.execute('select * from test where id = ?',[1])
 ```
 
-### Transaction (Experimental)
+### Transaction (experimental)
 
 You can also perform interactive transactions with the serverless driver. For example:
 
@@ -195,7 +195,7 @@ The serverless driver itself is free but using the driver to access data generat
 Currently, using serverless driver has the following limitations:
 
 - Up to 10,000 rows can be fetched in a single query.
-- You can execute only a single SQL statement at a time, multiple SQL statements in one query are not supported yet.
+- You can execute only a single SQL statement at a time. Multiple SQL statements in one query are not supported yet.
 - Connection with [private endpoints](/tidb-cloud/set-up-private-endpoint-connections-serverless.md) is not supported yet.
 
 ## What's next
