@@ -114,7 +114,7 @@ To delete a running backup job, it is similar as [**Delete backup files**](#dele
 
 - It is recommended that you perform backup operations at cluster idle time to minimize the impact on business.
 - Do not run the manual backup while importing data, or during cluster scaling.
-- After you delete a cluster, the existing manual backup files will be retained until you manually delete them, or your account is closed. Automatic backup files will be retained for 31 days from the date of cluster deletion. You need to delete the backup files accordingly.
+- After you delete a cluster, the existing manual backup files will be retained until you manually delete them, or your account is closed. Automatic backup files will be retained for a specified period (you can configure the retention period in **Backup Settings**) from the date of cluster deletion. You need to delete the backup files accordingly.
 
 ## Restore
 
