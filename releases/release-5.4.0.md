@@ -40,57 +40,57 @@ In v5.4, the key new features or improvements are as follows:
 </thead>
 <tbody>
   <tr>
-    <td><a href="https://docs.pingcap.com/tidb/dev/system-variables#tidb_enable_column_tracking-new-in-v540"><code>tidb_enable_column_tracking</code></a></td>
+    <td><a href="https://docs.pingcap.com/tidb/v7.1/system-variables#tidb_enable_column_tracking-new-in-v540"><code>tidb_enable_column_tracking</code></a></td>
     <td>Newly added</td>
     <td>Controls whether to allow TiDB to collect <code>PREDICATE COLUMNS</code>. The default value is <code>OFF.</code></td>
   </tr>
   <tr>
-    <td><a href="https://docs.pingcap.com/tidb/dev/system-variables#tidb_enable_paging-new-in-v540"><code>tidb_enable_paging</code></a></td>
+    <td><a href="https://docs.pingcap.com/tidb/v7.1/system-variables#tidb_enable_paging-new-in-v540"><code>tidb_enable_paging</code></a></td>
     <td>Newly added</td>
     <td>Controls whether to use the method of paging to send coprocessor requests in <code>IndexLookUp</code> operator. The default value is <code>OFF</code>.<br/>For read queries that use <code>IndexLookup</code> and <code>Limit</code> and that <code>Limit</code> cannot be pushed down to <code>IndexScan</code>, there might be high latency for the read queries and high CPU usage for TiKV's <code>unified read pool</code>. In such cases, because the <code>Limit</code> operator only requires a small set of data, if you set <code>tidb_enable_paging</code> to <code>ON</code>, TiDB processes less data, which reduces query latency and resource consumption.</td>
   </tr>
   <tr>
-    <td><a href="https://docs.pingcap.com/tidb/dev/system-variables#tidb_enable_top_sql-new-in-v540"><code>tidb_enable_top_sql</code></a></td>
+    <td><a href="https://docs.pingcap.com/tidb/v7.1/system-variables#tidb_enable_top_sql-new-in-v540"><code>tidb_enable_top_sql</code></a></td>
     <td>Newly added</td>
     <td>Controls whether to enable the Top SQL feature. The default value is <code>OFF</code>.</td>
   </tr>
   <tr>
-    <td><a href="https://docs.pingcap.com/tidb/dev/system-variables#tidb_persist_analyze_options-new-in-v540"><code>tidb_persist_analyze_options</code></a></td>
+    <td><a href="https://docs.pingcap.com/tidb/v7.1/system-variables#tidb_persist_analyze_options-new-in-v540"><code>tidb_persist_analyze_options</code></a></td>
     <td>Newly added</td>
-    <td>Controls whether to enable the <a href="https://docs.pingcap.com/tidb/dev/statistics#persist-analyze-configurations">ANALYZE configuration persistence</a> feature. The default value is <code>ON</code>.</td>
+    <td>Controls whether to enable the <a href="https://docs.pingcap.com/tidb/v7.1/statistics#persist-analyze-configurations">ANALYZE configuration persistence</a> feature. The default value is <code>ON</code>.</td>
   </tr>
   <tr>
-    <td><a href="https://docs.pingcap.com/tidb/dev/system-variables#tidb_read_staleness-new-in-v540"><code>tidb_read_staleness</code></a></td>
+    <td><a href="https://docs.pingcap.com/tidb/v7.1/system-variables#tidb_read_staleness-new-in-v540"><code>tidb_read_staleness</code></a></td>
     <td>Newly added</td>
     <td>Controls the range of historical data that can be read in the current session. The default value is <code>0</code>.</td>
   </tr>
   <tr>
-    <td><a href="https://docs.pingcap.com/tidb/dev/system-variables#tidb_regard_null_as_point-new-in-v540"><code>tidb_regard_null_as_point</code></a></td>
+    <td><a href="https://docs.pingcap.com/tidb/v7.1/system-variables#tidb_regard_null_as_point-new-in-v540"><code>tidb_regard_null_as_point</code></a></td>
     <td>Newly added</td>
     <td>Controls whether the optimizer can use a query condition including null equivalence as a prefix condition for index access.</td>
   </tr>
   <tr>
-    <td><a href="https://docs.pingcap.com/tidb/dev/system-variables#tidb_stats_load_sync_wait-new-in-v540"><code>tidb_stats_load_sync_wait</code></a></td>
+    <td><a href="https://docs.pingcap.com/tidb/v7.1/system-variables#tidb_stats_load_sync_wait-new-in-v540"><code>tidb_stats_load_sync_wait</code></a></td>
     <td>Newly added</td>
     <td>Controls whether to enable the synchronously loading statistics feature. The default value <code>0</code> means that the feature is disabled and that the statistics is asynchronously loaded. When the feature is enabled, this variable controls the maximum time that SQL optimization can wait for synchronously loading statistics before timeout.</td>
   </tr>
   <tr>
-    <td><a href="https://docs.pingcap.com/tidb/dev/system-variables#tidb_stats_load_pseudo_timeout-new-in-v540"><code>tidb_stats_load_pseudo_timeout</code></a></td>
+    <td><a href="https://docs.pingcap.com/tidb/v7.1/system-variables#tidb_stats_load_pseudo_timeout-new-in-v540"><code>tidb_stats_load_pseudo_timeout</code></a></td>
     <td>Newly added</td>
     <td>Controls when synchronously loading statistics reaches timeout, whether SQL fails (<code>OFF</code>) or falls back to using pseudo statistics (<code>ON</code>). The default value is <code>OFF</code>.</td>
   </tr>
   <tr>
-    <td><a href="https://docs.pingcap.com/tidb/dev/system-variables#tidb_backoff_lock_fast"><code>tidb_backoff_lock_fast</code></a></td>
+    <td><a href="https://docs.pingcap.com/tidb/v7.1/system-variables#tidb_backoff_lock_fast"><code>tidb_backoff_lock_fast</code></a></td>
     <td>Modified</td>
     <td>The default value is changed from <code>100</code> to <code>10</code>.</td>
   </tr>
   <tr>
-    <td><a href="https://docs.pingcap.com/tidb/dev/system-variables#tidb_enable_index_merge-new-in-v40"><code>tidb_enable_index_merge</code></a></td>
+    <td><a href="https://docs.pingcap.com/tidb/v7.1/system-variables#tidb_enable_index_merge-new-in-v40"><code>tidb_enable_index_merge</code></a></td>
     <td>Modified</td>
     <td>The default value is changed from <code>OFF</code> to <code>ON</code>.<ul><li>If you upgrade a TiDB cluster from versions earlier than v4.0.0 to v5.4.0 or later, this variable is <code>OFF</code> by default.</li><li>If you upgrade a TiDB cluster from v4.0.0 or later to v5.4.0 or later, this variable remains the same as before the upgrade.</li><li>For the newly created TiDB clusters of v5.4.0 and later, this variable is <code>ON</code> by default.</li></ul></td>
   </tr>
   <tr>
-    <td><a href="https://docs.pingcap.com/tidb/dev/system-variables#tidb_store_limit-new-in-v304-and-v40"><code>tidb_store_limit</code></a></td>
+    <td><a href="https://docs.pingcap.com/tidb/v7.1/system-variables#tidb_store_limit-new-in-v304-and-v40"><code>tidb_store_limit</code></a></td>
     <td>Modified</td>
     <td>Before v5.4.0, this variable can be configured at instance level and globally. Starting from v5.4.0, this variable only supports global configuration.</td>
   </tr>
