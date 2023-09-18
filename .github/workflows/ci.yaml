@@ -3,7 +3,7 @@ name: ci-bosn-test
 on: [pull_request]
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}-${{ github.event_name }}
+  group: ${{ github.workflow }}-${{ github.ref }}-${{ github.event_name }}-bosn-test
   cancel-in-progress: true
 
 jobs:
