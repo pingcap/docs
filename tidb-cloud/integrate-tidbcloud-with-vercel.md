@@ -162,7 +162,7 @@ If you have installed [TiDB Cloud Vercel integration](https://vercel.com/integra
 
     ![Vercel Integration Configuration Page](/media/tidb-cloud/vercel/integration-vercel-configuration-page.png)
 
-    When you remove a connection, the environment variables set by the integration workflow are removed from the Vercel project, too. However, this action does not affect the traffic filter or the data of the TiDB Cloud cluster.
+    When you remove a connection, the environment variables set by the integration workflow are removed from the Vercel project, too. However, this action does not affect the data of the TiDB Serverless cluster.
 
 ### Connect with TiDB Serverless branching
 
