@@ -180,7 +180,7 @@ The type mapping between TiDB Serverless and Javascript is as follows:
 
 ## Pricing
 
-The serverless driver itself is free but using the driver to access data generates Request Units (RUs) and storage usage. The pricing follows the [TiDB Serverless pricing](https://www.pingcap.com/tidb-serverless-pricing-details/) model.
+The serverless driver itself is free, but accessing data with the driver generates [Request Units (RUs)](/tidb-cloud/tidb-cloud-glossary.md#request-unit) and storage usage. The pricing follows the [TiDB Serverless pricing](https://www.pingcap.com/tidb-serverless-pricing-details/) model.
 
 ## Limitations
 

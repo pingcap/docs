@@ -25,7 +25,7 @@ After your TiDB Serverless cluster is created on TiDB Cloud, you can connect to 
 
 - [Serverless Driver (beta)](/tidb-cloud/serverless-driver.md)
 
-  TiDB Cloud provides a serverless driver for Javascript, which allows you to connect to your TiDB Serverless cluster in edge environments with the same experience as direct connections.
+  TiDB Cloud provides a serverless driver for JavaScript, which allows you to connect to your TiDB Serverless cluster in edge environments with the same experience as direct connections.
 
 In the preceding connection methods, you can choose your desired one based on your needs:
 
@@ -41,7 +41,7 @@ There are two network connection types for TiDB Serverless:
 
 - [Private endpoint](/tidb-cloud/set-up-private-endpoint-connections-serverless.md) (recommended)
 
-  Private endpoint connection provides a private endpoint to allow SQL clients in your VPC to securely access services over AWS PrivateLink, which provides highly secure and one-way access to database services with simplified network management.
+    Private endpoint connection provides a private endpoint to allow SQL clients in your VPC to securely access services over AWS PrivateLink, which provides highly secure and one-way access to database services with simplified network management.
 
 - [Public endpoint](/tidb-cloud/connect-via-standard-connection-serverless.md)
 
@@ -55,7 +55,7 @@ The following table shows the network you can use in different connection method
 |----------------------------|------------------------------|-------------------------------------------------------------------------------------------------------------------|
 | Direct connections         | Public or private endpoint   | Direct connections can be made via both public and private endpoints.                                             |
 | Data Service (beta)        | /                            | Accessing TiDB Serverless via Data Service (beta) does not need to specify the network type.     |
-| Serverless Driver (beta)   | Public endpoint              | Serverless Driver only supports connections via public endpoint.                                                  ||
+| Serverless Driver (beta)   | Public endpoint              | Serverless Driver only supports connections via public endpoint.                                                  |
 
 ## What's next
 
