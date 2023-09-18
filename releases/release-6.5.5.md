@@ -15,7 +15,7 @@ TiDB version: 6.5.5
 
 + TiDB **tw@qiancai**
 
-    - 支持从高版本回退到 6.5 [#45570](https://github.com/pingcap/tidb/issues/45570) @[wjhuang2016](https://github.com/wjhuang2016)
+    - Support downgrading TiDB from a later version to v6.5 [#45570](https://github.com/pingcap/tidb/issues/45570) @[wjhuang2016](https://github.com/wjhuang2016)
     - (dup): release-7.3.0.md > # Reliability - Add new optimizer hints, including [`NO_MERGE_JOIN()`], [`NO_INDEX_JOIN()`](/optimizer-hints.md#no_index_joint1_name--tl_name-), [`NO_INDEX_MERGE_JOIN()`](/optimizer-hints.md#no_index_merge_joint1_name--tl_name-), [`NO_HASH_JOIN()`](/optimizer-hints.md#no_hash_joint1_name--tl_name-), and [`NO_INDEX_HASH_JOIN()`](/optimizer-hints.md#no_index_hash_joint1_name--tl_name-) [#45520](https://github.com/pingcap/tidb/issues/45520) @[qw4990](https://github.com/qw4990)
     - Add request source information related to the coprocessor [#46514](https://github.com/pingcap/tidb/issues/46514) @[you06](https://github.com/you06)
 
