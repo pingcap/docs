@@ -16,19 +16,19 @@ TiDB version: 6.5.5
 + TiDB **tw@qiancai**
 
     - 支持从高版本回退到 6.5 [#45570](https://github.com/pingcap/tidb/issues/45570) @[wjhuang2016](https://github.com/wjhuang2016)
-    - (dup): release-7.3.0.md > # 稳定性 * 新增部分优化器提示 [#45520](https://github.com/pingcap/tidb/issues/45520) @[qw4990](https://github.com/qw4990)
-    - 添加 coprocessor 相关 request source 信息 [#46514](https://github.com/pingcap/tidb/issues/46514) @[you06](https://github.com/you06)
+    - (dup): release-7.3.0.md > # Reliability - Add new optimizer hints, including [`NO_MERGE_JOIN()`], [`NO_INDEX_JOIN()`](/optimizer-hints.md#no_index_joint1_name--tl_name-), [`NO_INDEX_MERGE_JOIN()`](/optimizer-hints.md#no_index_merge_joint1_name--tl_name-), [`NO_HASH_JOIN()`](/optimizer-hints.md#no_hash_joint1_name--tl_name-), and [`NO_INDEX_HASH_JOIN()`](/optimizer-hints.md#no_index_hash_joint1_name--tl_name-) [#45520](https://github.com/pingcap/tidb/issues/45520) @[qw4990](https://github.com/qw4990)
+    - Add request source information related to the coprocessor [#46514](https://github.com/pingcap/tidb/issues/46514) @[you06](https://github.com/you06)
 
 + TiKV **tw@qiancai**
 
-    - 增加 pd-client中连接重试过程中backoff的功能，减小PD压力 [#15428](https://github.com/tikv/tikv/issues/15428) @[nolouch](https://github.com/nolouch)
-    - Titan：避免写Titan manifest文件时持有锁 [#15351](https://github.com/tikv/tikv/issues/15351) @[Connor1996](https://github.com/Connor1996)
-    - 压缩check_leader请求. [#14839](https://github.com/tikv/tikv/issues/14839) @[you06](https://github.com/you06)
-    - 增加snapshot相关的监控 [#15401](https://github.com/tikv/tikv/issues/15401) @[SpadeA-Tang](https://github.com/SpadeA-Tang)
-    - 当leader转移时提高PiTR checkpoint lag的稳定性. [#13638](https://github.com/tikv/tikv/issues/13638) @[YuJuncen](https://github.com/YuJuncen)
-    - 增加safe-ts相关的日志和监控 [#15082](https://github.com/tikv/tikv/issues/15082) @[ekexium](https://github.com/ekexium)
-    - 更多resolved-ts相关的日志和监控. [#15082](https://github.com/tikv/tikv/issues/15082) @[ekexium](https://github.com/ekexium)
-    - (dup): release-7.3.0.md > 改进提升> TiKV - 添加 `Max gap of safe-ts` 和 `Min safe ts region` 监控项以及 `tikv-ctl get_region_read_progress` 命令，用于更好地观测和诊断 resolved-ts 和 safe-ts 的状态 [#15082](https://github.com/tikv/tikv/issues/15082) @[ekexium](https://github.com/ekexium)
+    - Add the backoff mechanism for the PD client in the process of connection retries, which gradually increases retry intervals during error retries to reduce PD pressure [#15428](https://github.com/tikv/tikv/issues/15428) @[nolouch](https://github.com/nolouch)
+    - Avoid holding mutex when writing Titan manifest files to prevent affecting other threads [#15351](https://github.com/tikv/tikv/issues/15351) @[Connor1996](https://github.com/Connor1996)
+    - Compress check_leader requests to save request traffic [#14839](https://github.com/tikv/tikv/issues/14839) @[you06](https://github.com/you06)
+    - Add monitoring metrics for snapshots [#15401](https://github.com/tikv/tikv/issues/15401) @[SpadeA-Tang](https://github.com/SpadeA-Tang)
+    -  Improve stability of PiTR checkpoint lag during leader transfers [#13638](https://github.com/tikv/tikv/issues/13638) @[YuJuncen](https://github.com/YuJuncen)
+    -  Add logs and monitoring metrics related to `safe-ts` [#15082](https://github.com/tikv/tikv/issues/15082) @[ekexium](https://github.com/ekexium)
+    - Provide more logs and monitoring metrics for `resolved-ts` [#15082](https://github.com/tikv/tikv/issues/15082) @[ekexium](https://github.com/ekexium)
+    - (dup): release-7.3.0.md > Improvements> TiKV - Add the `Max gap of safe-ts` and `Min safe ts region` metrics and introduce the `tikv-ctl get-region-read-progress` command to better observe and diagnose the status of `resolved-ts` and `safe-ts` [#15082](https://github.com/tikv/tikv/issues/15082) @[ekexium](https://github.com/ekexium)
 
 + Tools **tw@Oreoxmt**
 
