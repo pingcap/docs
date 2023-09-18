@@ -1,4 +1,4 @@
-name: ci
+name: ci-bosn-test
 
 on: [pull_request]
 
