@@ -242,18 +242,18 @@ You can get the information of `<User>`, `<Password>`, `<Endpoint>`, `<Port>`, a
 
 2. Go to your Vercel dashboard > Vercel project > **Settings** > **Environment Variables**, and then [declare each environment variable value](https://vercel.com/docs/concepts/projects/environment-variables#declare-an-environment-variable) according to the connection information of your Data App.
 
-   ![Vercel Environment Variables](/media/tidb-cloud/vercel/integration-vercel-environment-variables.png)
+    ![Vercel Environment Variables](/media/tidb-cloud/vercel/integration-vercel-environment-variables.png)
 
-   In Vercel, you can declare the environment variables as follows.
+    In Vercel, you can declare the environment variables as follows.
 
-   - **Key** = `DATA_APP_BASE_URL`
-   - **Value** = `<DATA_APP_BASE_URL>`
-   - **Key** = `DATA_APP_PUBLIC_KEY`
-   - **Value** = `<DATA_APP_PUBLIC_KEY>`
-   - **Key** = `DATA_APP_PRIVATE_KEY`
-   - **Value** = `<DATA_APP_PRIVATE_KEY>`
+    - **Key** = `DATA_APP_BASE_URL`
+    - **Value** = `<DATA_APP_BASE_URL>`
+    - **Key** = `DATA_APP_PUBLIC_KEY`
+    - **Value** = `<DATA_APP_PUBLIC_KEY>`
+    - **Key** = `DATA_APP_PRIVATE_KEY`
+    - **Value** = `<DATA_APP_PRIVATE_KEY>`
 
-   You can get the information of `<DATA_APP_BASE_URL>`, `<DATA_APP_PUBLIC_KEY>`, `<DATA_APP_PRIVATE_KEY>` from your [Data Service](https://tidbcloud.com/console/data-service) page of the TiDB Cloud console.
+    You can get the information of `<DATA_APP_BASE_URL>`, `<DATA_APP_PUBLIC_KEY>`, `<DATA_APP_PRIVATE_KEY>` from your [Data Service](https://tidbcloud.com/console/data-service) page of the TiDB Cloud console.
 
 </div>
 </SimpleTab>
