@@ -204,6 +204,10 @@ After you push changes to GitHub repository, Vercel will trigger a preview deplo
 
 > **Note:**
 >
+> Due to the limitation of Vercel deployment workflow, the environment variable can't be ensured to be set in the deployment. Please redeploy if facing this issue.
+
+> **Note:**
+>
 > For each organization in TiDB Cloud, you can create a maximum of five TiDB Serverless branches by default. To avoid exceeding the limit, you can delete the TiDB Serverless branches that are no longer needed. For more information, see [Manage TiDB Serverless branches](/tidb-cloud/branch-manage.md).
 
 ## Connect via manually setting environment variables
