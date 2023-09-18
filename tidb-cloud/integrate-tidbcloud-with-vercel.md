@@ -18,7 +18,7 @@ This guide describes how to connect your TiDB Cloud clusters to Vercel projects 
 
 For both of the preceding methods, TiDB Cloud provides the following options for programmatically connecting to your database:
 
-- Cluster: connect your TiDB Cloud cluster to your Vercel project with direct connections or serverless driver.
+- Cluster: connect your TiDB Cloud cluster to your Vercel project with direct connections or [serverless driver](/tidb-cloud/serverless-driver.md).
 - [Data App](/tidb-cloud/data-service-manage-data-app.md): access data of your TiDB Cloud cluster through a collection of HTTP endpoints.
 
 ## Prerequisites
@@ -170,7 +170,7 @@ Vercel's [Preview Deployments](https://vercel.com/docs/deployments/preview-deplo
 
 > **Note:**
 >
-> Only [Vercel projects associated with GitHub repositories](https://vercel.com/docs/deployments/git/vercel-for-github) are supported for now.
+> Currently, TiDB Serverless branching only supports [Vercel projects associated with GitHub repositories](https://vercel.com/docs/deployments/git/vercel-for-github).
 
 To enable TiDB Serverless Branching, you need to:
 
@@ -191,15 +191,15 @@ After you push changes to GitHub repository, Vercel will trigger a preview deplo
 
     ![Vercel Preview_Deployment](/media/tidb-cloud/vercel/vercel-preview-deployment.png)
 
-    a. During the deployment, TiDB Cloud integration will automatically create a TiDB Serverless branch with the same name as the git branch. If the TiDB Serverless branch already exists, TiDB Cloud integration will skip this step.
+    1. During the deployment, TiDB Cloud integration will automatically create a TiDB Serverless branch with the same name as the git branch. If the TiDB Serverless branch already exists, TiDB Cloud integration will skip this step.
 
-    ![TiDB_Cloud_Branch_Check](/media/tidb-cloud/vercel/tidbcloud-branch-check.png)
+        ![TiDB_Cloud_Branch_Check](/media/tidb-cloud/vercel/tidbcloud-branch-check.png)
 
-    b. After the TiDB Serverless branch is ready, TiDB Cloud integration will set environment variables in the preview deployment for the Vercel project.
+    2. After the TiDB Serverless branch is ready, TiDB Cloud integration will set environment variables in the preview deployment for the Vercel project.
 
-    ![Preview_Envs](/media/tidb-cloud/vercel/preview-envs.png)
+        ![Preview_Envs](/media/tidb-cloud/vercel/preview-envs.png)
 
-    c. TiDB Cloud integration will also register a blocking check to wait for the TiDB Serverless branch to be ready. You can rerun the check manually.
+    3. TiDB Cloud integration will also register a blocking check to wait for the TiDB Serverless branch to be ready. You can rerun the check manually.
 4. After the check is passed, you can visit the preview deployment to see the changes.
 
 > **Note:**
