@@ -333,7 +333,7 @@ CREATE TABLE t1(a int) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 Query OK, 0 rows affected (0.08 sec)
 ```
 
-If the table character set and collation are not specified, the database character set and collation are used as their default values. When only the character set is specified as `utf8mb4` but the collation is not set, the collation is specified by the value of the system variable [default_collation_for_utf8mb4](/system-variables.md#default_collation_for_utf8mb4-new-in-v740).
+If the table character set and collation are not specified, the database character set and collation are used as their default values. If you only specify the character set as `utf8mb4` without specifying the collation, the collation is determined by the value of the system variable [`default_collation_for_utf8mb4`](/system-variables.md#default_collation_for_utf8mb4-new-in-v740).
 
 ### Column character set and collation
 
@@ -349,7 +349,7 @@ col_name {ENUM | SET} (val_list)
     [COLLATE collation_name]
 ```
 
-If the column character set and collation are not specified, the table character set and collation are used as their default values. When only the character set is specified as `utf8mb4` but the collation is not set, the collation is specified by the value of the system variable [default_collation_for_utf8mb4](/system-variables.md#default_collation_for_utf8mb4-new-in-v740).
+If the column character set and collation are not specified, the table character set and collation are used as their default values. If you only specify the character set as `utf8mb4` without specifying the collation, the collation is determined by the value of the system variable [`default_collation_for_utf8mb4`](/system-variables.md#default_collation_for_utf8mb4-new-in-v740).
 
 ### String character sets and collation
 
