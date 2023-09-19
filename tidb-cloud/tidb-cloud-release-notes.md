@@ -8,6 +8,28 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2023.
 
+## September 19, 2023
+
+**General changes**
+
+- Remove 2 vCPU TiDB and TiKV nodes from TiDB Dedicated clusters.
+
+    The 2 vCPU option is no longer available on the **Create Cluster** page or the **Modify Cluster** page.
+
+- Support using TiDB Serverless branching in Vercel preview deployments, with the TiDB Cloud Vercel integration.
+
+    For details, refer to [Integrate TiDB Cloud with Vercel](/tidb-cloud/integrate-tidbcloud-with-vercel.md).
+
+- Release [TiDB Cloud serverless driver (beta)](tidb-cloud/serverless-driver.md) for JavaScript.
+
+    TiDB Cloud serverless driver for JavaScript allows you to connect to your TiDB Serverless cluster over HTTPS. It is particularly useful in edge environments where TCP connections are limited, such as [Vercel Edge Function](https://vercel.com/docs/functions/edge-functions) and [Cloudflare Workers](https://workers.cloudflare.com/).
+
+    For more information, see [TiDB Cloud serverless driver (beta)](/tidb-cloud/serverless-driver.md).
+
+**Console changes**
+
+- Users can get an estimation of cost in the **Usage This Month** panel or while setting up the spending limit.
+
 ## September 5, 2023
 
 **General changes**
