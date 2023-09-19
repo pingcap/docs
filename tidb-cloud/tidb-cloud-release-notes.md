@@ -24,7 +24,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **Console changes**
 
-- Users can get an estimation of cost in the **Usage This Month** panel or while setting up the spending limit.
+- For [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) clusters, you can get an estimation of cost in the **Usage This Month** panel or while setting up the spending limit.
 
 ## September 5, 2023
 
