@@ -967,6 +967,7 @@
   - [TiDB Versioning](/releases/versioning.md)
   - [TiDB Installation Packages](/binary-package.md)
   - v6.5
+    - [6.5.5](/releases/release-6.5.5.md)
     - [6.5.4](/releases/release-6.5.4.md)
     - [6.5.3](/releases/release-6.5.3.md)
     - [6.5.2](/releases/release-6.5.2.md)
