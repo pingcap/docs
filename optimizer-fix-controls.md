@@ -62,5 +62,5 @@ SET SESSION tidb_opt_fix_control = '44262:ON,44389:ON';
 
 - Default value: `1000`
 - Possible values: `[0, 2147483647]`
-- This variable controls whether to use the heuristic strategy to select access paths, where the heuristic strategy is that if the estimated rows of an access path like `Index_A` is much less than others' (default `1000` times), then skip their cost comparison and select `Index_A` directly.
+- This variable sets the threshold for the optimizer's heuristic strategy to select access paths. If the estimated rows for an access path (such as `Index_A`) is much smaller than that of other access paths (default `1000` times), the optimizer skips the cost comparison and directly selects `Index_A`.
 - `0` means to disable this heuristic strategy.
