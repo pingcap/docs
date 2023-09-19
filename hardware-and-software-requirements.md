@@ -107,7 +107,7 @@ You can deploy and run TiDB on the 64-bit generic hardware server platform in th
 
 ### Production environment
 
-| Component | CPU | Memory | Hard Disk Type | Network | Number of Instances(Minimum Requirement) |
+| Component | CPU | Memory | Hard Disk Type | Network | Number of Instances (Minimum Requirement) |
 | :-----: | :------: | :------: | :------: | :------: | :-----: |
 | TiDB  | 16 core+ | 48 GB+ | SSD | 10 Gigabit network card (2 preferred) | 2 |
 | PD | 8 core+ | 16 GB+ | SSD | 10 Gigabit network card (2 preferred) | 3 |
