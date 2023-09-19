@@ -179,7 +179,7 @@ To enable TiDB Serverless Branching, you need to ensure the following in the [Ti
 1. Select **Cluster** as your connection type. 
 2. Enable **Branching** to create new branches for preview environments.
 
-After you push changes to GitHub repository, Vercel will trigger a preview deployment. And then TiDB Cloud integration will automatically create a TiDB Serverless branch for the branch and set environment variables. The detailed steps are as follows:
+After you push changes to the Git repository, Vercel will trigger a preview deployment. TiDB Cloud integration will automatically create a TiDB Serverless branch for the branch and set environment variables. The detailed steps are as follows:
 
 1. Create a new branch in your Git repository.
 
@@ -193,7 +193,7 @@ After you push changes to GitHub repository, Vercel will trigger a preview deplo
 
     ![Vercel Preview_Deployment](/media/tidb-cloud/vercel/vercel-preview-deployment.png)
 
-    1. During the deployment, TiDB Cloud integration will automatically create a TiDB Serverless branch with the same name as the git branch. If the TiDB Serverless branch already exists, TiDB Cloud integration will skip this step.
+    1. During the deployment, TiDB Cloud integration will automatically create a TiDB Serverless branch with the same name as the Git branch. If the TiDB Serverless branch already exists, TiDB Cloud integration will skip this step.
 
         ![TiDB_Cloud_Branch_Check](/media/tidb-cloud/vercel/tidbcloud-branch-check.png)
 
@@ -206,7 +206,7 @@ After you push changes to GitHub repository, Vercel will trigger a preview deplo
 
 > **Note:**
 >
-> Due to the limitation of Vercel deployment workflow, the environment variable can't be ensured to be set in the deployment. Please redeploy if facing this issue.
+> Due to a limitation of Vercel deployment workflow, the environment variable can't be ensured to be set in the deployment. In this case, you need to redeploy the deployment.
 
 > **Note:**
 >
