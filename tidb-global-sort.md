@@ -17,7 +17,8 @@ summary: Learn the use cases, limitations, usage, and implementation principles 
 
 </CustomContent>
 
-# Feature Overview
+## Feature Overview
+
 The global sort feature we introduce enhances the stability and efficiency of the Import and DDL (Data Definition Language) functionality. It serves as a general operator within our distributed parallel execution framework and can also be deployed as a cloud service. Moreover, it supports various shared storage interfaces (e.g., S3, POSIX usage ), facilitating seamless integration with different storage systems. This versatility enables efficient and flexible data sorting operations across diverse use cases.
 
 # Goals and non-goals
