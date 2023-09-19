@@ -7,7 +7,7 @@ summary: Learn about the principle, usage, and examples of the SQL non-prepared 
 
 TiDB supports execution plan caching for some non-`PREPARE` statements, similar to the [`Prepare`/`Execute` statements](/sql-prepared-plan-cache.md). This feature allows these statements to skip the optimization phase and improve performance.
 
-Enabling this feature may incur some additional memory and CPU overhead, so it's not appropriate for all scenarios and decide whether to enable this feature according to your specific usage scenarios. See [Performance benefits](#performance-benefits) and [Memory monitoring](#monitoring) for more details.
+Enabling the non-prepared plan cache might incur additional memory and CPU overhead and might not be suitable for all situations. To determine whether to enable this feature in your scenario, refer to the [Performance benefits](#performance-benefits) and [Memory monitoring](#monitoring) sections.
 
 ## Principle
 
