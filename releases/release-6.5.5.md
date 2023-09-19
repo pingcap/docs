@@ -68,7 +68,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.5/quick-start-with-
         - Fix the issue that user passwords are recorded in some logs [#9690](https://github.com/pingcap/tiflow/issues/9690)
         - Fix the issue that using the SASL authentication might cause TiCDC to panic [#9669](https://github.com/pingcap/tiflow/issues/9669)
         - Fix the issue that TiCDC replication tasks might fail in some corner cases [#9685](https://github.com/pingcap/tiflow/issues/9685)[#9697](https://github.com/pingcap/tiflow/issues/9697)[#9695](https://github.com/pingcap/tiflow/issues/9695)[#9736](https://github.com/pingcap/tiflow/issues/9736)
-        - Fix the issue that TiCDC cannot replicate tasks and recover quickly from TiKV node failures when there are a lot of Regions upstream [#9741](https://github.com/pingcap/tiflow/issues/9741)
+        - Fix the issue that TiCDC cannot recover quickly from TiKV node failures when there are a lot of Regions upstream [#9741](https://github.com/pingcap/tiflow/issues/9741)
     
     + TiDB Lightning
 
