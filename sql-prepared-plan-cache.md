@@ -33,9 +33,9 @@ In the current version of TiDB, if a `Prepare` statement meets any of the follow
 - The query contains parameters for comparing `int` and `string`, such as `c_int >= ?` or `c_int in (?, ?)`, in which `?` indicates the string type, such as `set @x='123'`. To ensure that the query result is compatible with MySQL, parameters need to be adjusted in each query, so such queries are not cached.
 - The plan attempts to access `TiFlash`.
 - In most cases, the plan that contains `TableDual` is not cached, unless the current `Prepare` statement does not have parameters.
-- The query accessing TiDB system views, such as `information_schema.columns`, and it is not recommended to use `Prepare` and `Execute` statements to access system views. 
+- The query accesses TiDB system views, such as `information_schema.columns`. It is not recommended to use `Prepare` and `Execute` statements to access system views.
 
-TiDB has a limitation on the number of `?`, if a query has more than 65535 `?`, the error `Prepared statement contains too many placeholders` will be returned.
+TiDB has a limitation on the number of `?` in a query. If a query contains more than 65535 `?`, an error `Prepared statement contains too many placeholders` is reported.
 
 The LRU linked list is designed as a session-level cache because `Prepare`/`Execute` cannot be executed across sessions. Each element of the LRU list is a key-value pair. The value is the execution plan, and the key is composed of the following parts:
 
