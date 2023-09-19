@@ -95,9 +95,9 @@ After you enable this feature, the optimizer quickly evaluates the query. If it 
 
 ## Performance benefits
 
-In internal tests, enabling the non-prepared plan cache feature can achieve significant performance benefits in most TP scenarios. For TPCC, it can bring aroung 4% improvements; For some banking workloads, it can bring 10+% improvements; For Sysbench RangeScan, it can bring 15% improvements.
+In internal tests, enabling the non-prepared plan cache feature can achieve significant performance benefits in most TP scenarios. For example, a performance improvement of about 4% in TPC-C tests, over 10% in some banking workloads, and 15% in Sysbench RangeScan.
 
-However, it also introduces some additional memory and CPU overhead, including determining whether the query is supported, parameterizing the query and looking up a plan in the Cache. If this feature cannot support the majority of queries in your workload, enabling it might actually adversely affect performance.
+However, this feature also introduces some additional memory and CPU overhead, including determining whether the query is supported, parameterizing the query, and searching for a plan in the cache. If this feature cannot support the majority of queries in your workload, enabling it might actually adversely affect performance.
 
 In this case, you need to observe the `non-prepared` metric in the **Queries Using Plan Cache OPS** panel and the `non-prepared-unsupported` metric in the **Plan Cache Miss OPS** panel on Grafana. If most queries are not supported and only a few can hit the plan cache, you can disable this feature.
 
