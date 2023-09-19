@@ -51,7 +51,8 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.5/quick-start-with-
 
     - Fix the issue that the scheduler takes a long time to start up [#6920](https://github.com/tikv/pd/issues/6920) @[HuSharp](https://github.com/HuSharp)
     - Fix the issue that the logic for handling Leaders and Peers in Scatter Region is inconsistent [#6962](https://github.com/tikv/pd/issues/6962) @[bufferflies](https://github.com/bufferflies)
-
+    - Fix the issue that the `empty-region-count` monitoring metric is abnormal when the cluster is restarted or the PD Leader is switched [#7008](https://github.com/tikv/pd/issues/7008) @[CabinfeverB](https://github.com/CabinfeverB)
+    
 + Tools
 
     + Backup & Restore (BR)
