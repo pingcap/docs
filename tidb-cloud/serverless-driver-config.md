@@ -26,7 +26,7 @@ At the connection level, you can make the following configurations:
 
 > **Note:**
 >
-> You must [percentage-encode](https://en.wikipedia.org/wiki/Percent-encoding) special characters for your username, password, and database if you pass them by the url. For example, password1@//? becomes password1%40%2F%2F%3F.
+> You must [percentage-encode](https://en.wikipedia.org/wiki/Percent-encoding) special characters for your username, password, and database if you pass them by the url. For example, `password1@//?` becomes `password1%40%2F%2F%3F`.
 
 When `url` is configured, there is no need to configure `host`, `username`, `password`, and `database` separately. The following codes are equivalent:
 
