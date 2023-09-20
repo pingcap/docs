@@ -25,6 +25,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.5/quick-start-with-
     - Improve stability of PITR checkpoint lag during leader transfers [#13638](https://github.com/tikv/tikv/issues/13638) @[YuJuncen](https://github.com/YuJuncen)
     - Add logs and monitoring metrics related to `safe-ts` [#15082](https://github.com/tikv/tikv/issues/15082) @[ekexium](https://github.com/ekexium)
     - Provide more logs and monitoring metrics for `resolved-ts` [#15082](https://github.com/tikv/tikv/issues/15082) @[ekexium](https://github.com/ekexium)
+    - Optimize the compaction mechanism: when a Region is split, if there is no key to split, a compaction is triggered to eliminate excessive MVCC versions [#15282](https://github.com/tikv/tikv/issues/15282) @[SpadeA-Tang](https://github.com/SpadeA-Tang)
 
 + Tools
 
@@ -43,7 +44,6 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.5/quick-start-with-
 
     - Fix the issue that the peers of the corresponding Region mistakenly hibernate when a TiKV node fails [#14547](https://github.com/tikv/tikv/issues/14547) @[hicqu](https://github.com/hicqu)
     - Fix the issue that TiKV fails to start when Titan is enabled and the `Blob file deleted twice` error occurs [#15454](https://github.com/tikv/tikv/issues/15454) @[Connor1996](https://github.com/Connor1996)
-    - Optimize the compaction mechanism: when a Region is split, if there is no key to split, a compaction is triggered to eliminate excessive MVCC versions [#15282](https://github.com/tikv/tikv/issues/15282) @[SpadeA-Tang](https://github.com/SpadeA-Tang)
     - Fix the issue that Online Unsafe Recovery cannot handle merge abort [#15580](https://github.com/tikv/tikv/issues/15580) @[v01dstar](https://github.com/v01dstar)
     - Fix the issue that network interruption between PD and TiKV might cause PITR to get stuck [#15279](https://github.com/tikv/tikv/issues/15279) @[YuJuncen](https://github.com/YuJuncen)
 
