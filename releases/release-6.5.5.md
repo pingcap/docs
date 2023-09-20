@@ -64,12 +64,12 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.5/quick-start-with-
 
     + TiCDC
 
-        - Fix the issue of high TiCDC replication latency caused by network isolation of PD nodes [#9565](https://github.com/pingcap/tiflow/issues/9565)
-        - Fix the issue that TiCDC incorrectly changes the `UPDATE` operation to `INSERT` when using the CSV format [#9658](https://github.com/pingcap/tiflow/issues/9658)
-        - Fix the issue that user passwords are recorded in some logs [#9690](https://github.com/pingcap/tiflow/issues/9690)
-        - Fix the issue that using the SASL authentication might cause TiCDC to panic [#9669](https://github.com/pingcap/tiflow/issues/9669)
-        - Fix the issue that TiCDC replication tasks might fail in some corner cases [#9685](https://github.com/pingcap/tiflow/issues/9685)[#9697](https://github.com/pingcap/tiflow/issues/9697)[#9695](https://github.com/pingcap/tiflow/issues/9695)[#9736](https://github.com/pingcap/tiflow/issues/9736)
-        - Fix the issue that TiCDC cannot recover quickly from TiKV node failures when there are a lot of Regions upstream [#9741](https://github.com/pingcap/tiflow/issues/9741)
+        - Fix the issue of high TiCDC replication latency caused by network isolation of PD nodes [#9565](https://github.com/pingcap/tiflow/issues/9565) @[asddongmen](https://github.com/asddongmen)
+        - Fix the issue that TiCDC incorrectly changes the `UPDATE` operation to `INSERT` when using the CSV format [#9658](https://github.com/pingcap/tiflow/issues/9658) @[3AceShowHand](https://github.com/3AceShowHand)
+        - Fix the issue that user passwords are recorded in some logs [#9690](https://github.com/pingcap/tiflow/issues/9690) @[sdojjy](https://github.com/sdojjy)
+        - Fix the issue that using the SASL authentication might cause TiCDC to panic [#9669](https://github.com/pingcap/tiflow/issues/9669) @[sdojjy](https://github.com/sdojjy)
+        - Fix the issue that TiCDC replication tasks might fail in some corner cases [#9685](https://github.com/pingcap/tiflow/issues/9685)[#9697](https://github.com/pingcap/tiflow/issues/9697)[#9695](https://github.com/pingcap/tiflow/issues/9695)[#9736](https://github.com/pingcap/tiflow/issues/9736) @[hicqu](https://github.com/hicqu) @[CharlesCheung96](https://github.com/CharlesCheung96)
+        - Fix the issue that TiCDC cannot recover quickly from TiKV node failures when there are a lot of Regions upstream [#9741](https://github.com/pingcap/tiflow/issues/9741) @[sdojjy](https://github.com/sdojjy)
     
     + TiDB Lightning
 
