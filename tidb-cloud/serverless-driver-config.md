@@ -24,6 +24,10 @@ At the connection level, you can make the following configurations:
 
 ### Database URL
 
+> **Note:**
+>
+> You must percentage-encode special characters for your username,password and database, whether it in url or not. For example, password1@//? becomes password1%40%2F%2F%3F.
+
 When `url` is configured, there is no need to configure `host`, `username`, `password`, and `database` separately. The following codes are equivalent:
 
 ```ts
@@ -46,10 +50,6 @@ const config = {
 
 const conn = connect(config)
 ```
-
-> **Note:**
->
-> You must percentage-encode special characters for your username,password and database, whether it in url or not. For example, password1@//? becomes password1%40%2F%2F%3F.
 
 ## SQL level options
 
