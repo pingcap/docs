@@ -26,12 +26,12 @@ ID: simple-replication-task
 Info: {"upstream_id":7277814241002263370,"namespace":"default","id":"simple-replication-task","sink_uri":"pulsar://127.0.0.1:6650/consumer-test?protocol=canal-json","create_time":"2023-09-12T14:42:32.000904+08:00","start_ts":444203257406423044,"config":{"memory_quota":1073741824,"case_sensitive":true,"force_replicate":false,"ignore_ineligible_table":false,"check_gc_safe_point":true,"enable_sync_point":false,"bdr_mode":false,"sync_point_interval":600000000000,"sync_point_retention":86400000000000,"filter":{"rules":["pulsar_test.*"]},"mounter":{"worker_num":16},"sink":{"protocol":"canal-json","csv":{"delimiter":",","quote":"\"","null":"\\N","include_commit_ts":false,"binary_encoding_method":"base64"},"dispatchers":[{"matcher":["pulsar_test.*"],"partition":"","topic":"test_{schema}_{table}"}],"encoder_concurrency":16,"terminator":"\r\n","date_separator":"day","enable_partition_separator":true,"enable_kafka_sink_v2":false,"only_output_updated_columns":false,"delete_only_output_handle_key_columns":false,"pulsar_config":{"connection-timeout":30,"operation-timeout":30,"batching-max-messages":1000,"batching-max-publish-delay":10,"send-timeout":30},"advance_timeout":150},"consistent":{"level":"none","max_log_size":64,"flush_interval":2000,"use_file_backend":false},"scheduler":{"enable_table_across_nodes":false,"region_threshold":100000,"write_key_threshold":0},"integrity":{"integrity_check_level":"none","corruption_handle_level":"warn"}},"state":"normal","creator_version":"v7.4.0-master-dirty","resolved_ts":444203257406423044,"checkpoint_ts":444203257406423044,"checkpoint_time":"2023-09-12 14:42:31.410"}
 ```
 
-- `--server`：the address of a TiCDC server in the TiCDC cluster.
-- `--changefeed-id`：the ID of the replication task. The format needs to match the regular expression `^[a-zA-Z0-9]+(\-[a-zA-Z0-9]+)*$`. If this ID is not specified, TiCDC automatically generates a UUID (version 4 format) as the ID.
-- `--sink-uri`：the address of the downstream replication task. See [Use Sink URI to configure Pulsar](#sink-uri).
-- `--start-ts`：the start TSO of the changefeed. The TiCDC cluster starts pulling data from this TSO. The default value is the current time.
-- `--target-ts`：the target TSO of the changefeed. The TiCDC cluster stops to pull data until this TSO. It is empty by default, that is, TiCDC does not stop automatically.
-- `--config`：the changefeed configuration file. See [CLI and Configuration Parameters of TiCDC Changefeeds](/ticdc/ticdc-changefeed-config.md).
+- `--server`: the address of a TiCDC server in the TiCDC cluster.
+- `--changefeed-id`: the ID of the replication task. The format needs to match the regular expression `^[a-zA-Z0-9]+(\-[a-zA-Z0-9]+)*$`. If this ID is not specified, TiCDC automatically generates a UUID (version 4 format) as the ID.
+- `--sink-uri`: the address of the downstream replication task. See [Use Sink URI to configure Pulsar](#sink-uri).
+- `--start-ts`: the start TSO of the changefeed. The TiCDC cluster starts pulling data from this TSO. The default value is the current time.
+- `--target-ts`: the target TSO of the changefeed. The TiCDC cluster stops to pull data until this TSO. It is empty by default, that is, TiCDC does not stop automatically.
+- `--config`: the changefeed configuration file. See [CLI and Configuration Parameters of TiCDC Changefeeds](/ticdc/ticdc-changefeed-config.md).
 
 ## Use Sink URI and changefeed config to configure Pulsar
 
@@ -140,13 +140,13 @@ The following is a sample configuration when you use token authentication with P
 
 - Token
 
-    Sink URI：
+    Sink URI: 
 
     ```shell
     --sink-uri="pulsar://127.0.0.1:6650/persistent://public/default/yktest?protocol=canal-json"
     ```
 
-    Config parameter：
+    Config parameter: 
 
     ```shell
     [sink.pulsar-config]
@@ -155,13 +155,13 @@ The following is a sample configuration when you use token authentication with P
 
 - Token from file
 
-    Sink URI：
+    Sink URI: 
 
     ```shell
     --sink-uri="pulsar://127.0.0.1:6650/persistent://public/default/yktest?protocol=canal-json"
     ```
 
-    Config parameter：
+    Config parameter: 
 
     ```toml
     [sink.pulsar-config]
@@ -171,13 +171,13 @@ The following is a sample configuration when you use token authentication with P
 
 - TLS encrypted authentication
 
-    Sink URI：
+    Sink URI: 
 
     ```shell
     --sink-uri="pulsar+ssl://127.0.0.1:6650/persistent://public/default/yktest?protocol=canal-json"
     ```
 
-    Config parameters：
+    Config parameters: 
 
     ```toml
     [sink.pulsar-config]
@@ -191,13 +191,13 @@ The following is a sample configuration when you use token authentication with P
 
 - OAuth2 authentication
 
-    Sink URI：
+    Sink URI: 
 
     ```shell
     --sink-uri="pulsar+ssl://127.0.0.1:6650/persistent://public/default/yktest?protocol=canal-json"
     ```
 
-    Config parameters：
+    Config parameters: 
 
     ```toml
     [sink.pulsar-config]
@@ -241,11 +241,11 @@ A topic dispatcher is specified with `topic = "xxx"` and uses topic expressions 
 
 The basic pattern of a topic expression is `[prefix]{schema}[middle][{table}][suffix]`. The following are the meanings of each part:
 
-- `prefix`：Optional. Represents the prefix of the topic name.
-- `{schema}`：Optional. Represents the database name.
-- `middle`：Optional. Represents the separator between a database and a table.
-- `{table}`：Optional. Represents the table name.
-- `suffix`：Optional. Represents the suffix of the topic name.
+- `prefix`: Optional. Represents the prefix of the topic name.
+- `{schema}`: Optional. Represents the database name.
+- `middle`: Optional. Represents the separator between a database and a table.
+- `{table}`: Optional. Represents the table name.
+- `suffix`: Optional. Represents the suffix of the topic name.
 
 `prefix`, `middle`, and `suffix` only support uppercase and lowercase letters (`a-z`, `A-Z`), numbers (`0-9`), dots (`.`), underscores (`_`), and hyphens (`-`). `{schema}` and `{table}` must be lowercase. Placeholders such as `{Schema}` and `{TABLE}` that contain uppercase letters are invalid.
 
@@ -289,8 +289,8 @@ You can specify a partition dispatcher with `partition = "xxx"`. The following p
 
 The dispatching rules are as follows:
 
-- `default`：By default, events are dispatched by the schema name and table name, which is the same as when `table` is specified.
-- `ts`：Use commitTs of row changes to perform hash calculation and dispatch events.
-- `index-value`：Use the value of the table primary key or unique index to perform hash calculation and dispatch events.
-- `table`：Use the schema name and table name to perform hash calculation and dispatch events.
-- Other self-defined values：This value will be used directly as the key for the Pulsar message, and the Pulsar producer uses this key value for dispatching.
+- `default`: By default, events are dispatched by the schema name and table name, which is the same as when `table` is specified.
+- `ts`: Use commitTs of row changes to perform hash calculation and dispatch events.
+- `index-value`: Use the value of the table primary key or unique index to perform hash calculation and dispatch events.
+- `table`: Use the schema name and table name to perform hash calculation and dispatch events.
+- Other self-defined values: This value will be used directly as the key for the Pulsar message, and the Pulsar producer uses this key value for dispatching.
