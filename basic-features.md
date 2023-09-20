@@ -50,7 +50,7 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 | ------------------------------------------------------------ | :--: | :--: | ------------ | :----------: | :----------: | :----------: | :----------: | :----------: |
 | [Expression indexes](/sql-statements/sql-statement-create-index.md#expression-index) [^2] | Y | E | E | E | E | E | E ||
 | [Columnar storage (TiFlash)](/tiflash/tiflash-overview.md)   | Y | Y | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
-| [Use FastScan to accelerate queries in OLAP scenarios](/develop/dev-guide-use-fastscan.md) | E | N | N | N | N | N | N | N |
+| [Use FastScan to accelerate queries in OLAP scenarios](/tiflash/use-fastscan.md) | E | N | N | N | N | N | N | N |
 | [RocksDB engine](/storage-engine/rocksdb-overview.md)        | Y | Y | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
 | [Titan plugin](/storage-engine/titan-overview.md)            | Y | Y | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
 | [Titan Level Merge](/storage-engine/titan-configuration.md#level-merge-experimental)   |  E   |  E    |    E     |    E     |    E     |    E     |    E     |    E     |
