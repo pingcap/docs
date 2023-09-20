@@ -144,6 +144,14 @@ delta_index_cache_size = 0
     tidb_status_addr = TiDB status port and address. # Multiple addresses are separated with commas.
     service_addr = The listening address of TiFlash Raft services and coprocessor services.
 
+    ## Introduced in v7.4.0, when the gap between the applied_index advanced by the current Raft state machine and the applied_index at the last disk flush exceeds compact_log_min_gap, TiFlash will execute the CompactLog command from TiKV and persist the data. Increasing this gap may reduce the disk flush frequency of TiFlash, thus reducing read latency in random write scenarios, but it will also increase memory overhead. Decreasing this gap may increase the disk flush frequency of TiFlash, thus alleviating memory pressure in TiFlash. However, at this stage, the disk flush frequency of TiFlash will not be higher than that of TiKV, even if this gap is set to 0.
+    ## It is recommended to keep the default value.
+    # compact_log_min_gap = 200
+    ## Introduced in v5.0, when the number or size of the Region rows cached by TiFlash exceeds either of the following thresholds, TiFlash will execute the CompactLog command from TiKV and perform disk flushing.
+    ## It is recommended to keep the default value.
+    # compact_log_min_rows = 40960 # 40k
+    # compact_log_min_bytes = 33554432 # 32MB
+
     ## The following configuration item only takes effect for the TiFlash disaggregated storage and compute architecture mode. For details, see documentation at https://docs.pingcap.com/tidb/dev/tiflash-disaggregated-and-s3.
     # disaggregated_mode = tiflash_write # The supported mode is `tiflash_write` or `tiflash_compute.
 
