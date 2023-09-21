@@ -46,7 +46,7 @@ TiFlash disaggregated storage and compute architecture is suitable for cost-effe
 
     You can also use other S3-compatible object storage, such as [MinIO](https://min.io/).
 
-    Make sure the access permissions of S3 APIs are granted. The S3 APIs used by TiFlash are as follows:
+    TiFlash will use the following S3 APIs for accessing data. Make sure that the nodes deployed with TiFlash have the necessary permissions for these APIs.
 
     - PutObject
     - GetObject
