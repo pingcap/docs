@@ -5104,7 +5104,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - Type: Integer
 - Default value: `0`
 - Range: `[-1, 9223372036854775807]`
-- This variable controls the memory usage limit for a query on a TiFlash node. When the memory usage of a query exceeds this limit, TiFlash returns an error and terminates the query. Setting this variable to `-1` or `0` means no limit. When this variable is set to a value greater than `0` and [`tiflash_query_spill_ratio`](/system-variables.md#tiflash_query_spill_ratio-new-in-v740) is set to a valid value, TiFlash enables [query-level spilling](/tiflash/tiflash-spill-disk.md#query-level-spilling).
+- This variable limits the maximum memory usage for a query on a TiFlash node. When the memory usage of a query exceeds this limit, TiFlash returns an error and terminates the query. Setting this variable to `-1` or `0` means no limit. When this variable is set to a value greater than `0` and [`tiflash_query_spill_ratio`](/system-variables.md#tiflash_query_spill_ratio-new-in-v740) is set to a valid value, TiFlash enables [query-level spilling](/tiflash/tiflash-spill-disk.md#query-level-spilling).
 
 ### tiflash_query_spill_ratio <span class="version-mark">New in v7.4.0</span>
 

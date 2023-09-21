@@ -81,7 +81,7 @@ This example constructs a SQL statement that consumes a lot of memory to demonst
 
 Starting from v7.4.0, TiFlash supports automatic spilling at the query level. You can control this feature using the following system variables:
 
-* [`tiflash_mem_quota_query_per_node`](/system-variables.md#tiflash_mem_quota_query_per_node-new-in-v740): controls the maximum memory usage of a query on a TiFlash node.
+* [`tiflash_mem_quota_query_per_node`](/system-variables.md#tiflash_mem_quota_query_per_node-new-in-v740): limits the maximum memory usage for a query on a TiFlash node.
 * [`tiflash_query_spill_ratio`](/system-variables.md#tiflash_query_spill_ratio-new-in-v740): controls the memory ratio that triggers data spilling.
 
 If both `tiflash_mem_quota_query_per_node` and `tiflash_query_spill_ratio` are set to values greater than 0, TiFlash automatically triggers spilling for supported operators in a query when the memory usage of a query exceeds `tiflash_mem_quota_query_per_node * tiflash_query_spill_ratio`.
