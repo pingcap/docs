@@ -26,11 +26,13 @@ ID: simple-replication-task
 Info: {"upstream_id":7277814241002263370,"namespace":"default","id":"simple-replication-task","sink_uri":"pulsar://127.0.0.1:6650/consumer-test?protocol=canal-json","create_time":"2023-09-12T14:42:32.000904+08:00","start_ts":444203257406423044,"config":{"memory_quota":1073741824,"case_sensitive":true,"force_replicate":false,"ignore_ineligible_table":false,"check_gc_safe_point":true,"enable_sync_point":false,"bdr_mode":false,"sync_point_interval":600000000000,"sync_point_retention":86400000000000,"filter":{"rules":["pulsar_test.*"]},"mounter":{"worker_num":16},"sink":{"protocol":"canal-json","csv":{"delimiter":",","quote":"\"","null":"\\N","include_commit_ts":false,"binary_encoding_method":"base64"},"dispatchers":[{"matcher":["pulsar_test.*"],"partition":"","topic":"test_{schema}_{table}"}],"encoder_concurrency":16,"terminator":"\r\n","date_separator":"day","enable_partition_separator":true,"enable_kafka_sink_v2":false,"only_output_updated_columns":false,"delete_only_output_handle_key_columns":false,"pulsar_config":{"connection-timeout":30,"operation-timeout":30,"batching-max-messages":1000,"batching-max-publish-delay":10,"send-timeout":30},"advance_timeout":150},"consistent":{"level":"none","max_log_size":64,"flush_interval":2000,"use_file_backend":false},"scheduler":{"enable_table_across_nodes":false,"region_threshold":100000,"write_key_threshold":0},"integrity":{"integrity_check_level":"none","corruption_handle_level":"warn"}},"state":"normal","creator_version":"v7.4.0-master-dirty","resolved_ts":444203257406423044,"checkpoint_ts":444203257406423044,"checkpoint_time":"2023-09-12 14:42:31.410"}
 ```
 
+The meaning of each parameter is as follows:
+
 - `--server`: the address of a TiCDC server in the TiCDC cluster.
-- `--changefeed-id`: the ID of the replication task. The format needs to match the regular expression `^[a-zA-Z0-9]+(\-[a-zA-Z0-9]+)*$`. If this ID is not specified, TiCDC automatically generates a UUID (version 4 format) as the ID.
+- `--changefeed-id`: the ID of the replication task. The format must match the regular expression `^[a-zA-Z0-9]+(\-[a-zA-Z0-9]+)*$`. If the ID is not specified, TiCDC automatically generates a UUID (version 4 format) as the ID.
 - `--sink-uri`: the address of the downstream replication task. See [Use Sink URI to configure Pulsar](#sink-uri).
 - `--start-ts`: the start TSO of the changefeed. The TiCDC cluster starts pulling data from this TSO. The default value is the current time.
-- `--target-ts`: the target TSO of the changefeed. The TiCDC cluster stops to pull data until this TSO. It is empty by default, that is, TiCDC does not stop automatically.
+- `--target-ts`: the target TSO of the changefeed. The TiCDC cluster stops to pull data until this TSO. It is empty by default, which means that TiCDC does not stop automatically.
 - `--config`: the changefeed configuration file. See [CLI and Configuration Parameters of TiCDC Changefeeds](/ticdc/ticdc-changefeed-config.md).
 
 ## Use Sink URI and changefeed config to configure Pulsar
@@ -76,9 +78,9 @@ The following are examples of changefeed config parameters:
 # Note: When the downstream MQ is Pulsar, if the routing rule for `partition` is not specified as any of `ts`, `index-value`, `table`, or `default`, it will be routed using the string you set as the key for each Pulsar message.
 # For example, if you specify a routing rule as the string `code`, then all Pulsar messages that match that matcher will be routed with `code` as the key.
 # dispatchers = [
-#    {matcher = ['test1.*', 'test2.*'], topic = "Topic 表达式 1", partition = "ts" },
-#    {matcher = ['test3.*', 'test4.*'], topic = "Topic 表达式 2", partition = "index-value" },
-#    {matcher = ['test1.*', 'test5.*'], topic = "Topic 表达式 3", partition = "table"},
+#    {matcher = ['test1.*', 'test2.*'], topic = "Topic expression 1", partition = "ts" },
+#    {matcher = ['test3.*', 'test4.*'], topic = "Topic expression 2", partition = "index-value" },
+#    {matcher = ['test1.*', 'test5.*'], topic = "Topic expression 3", partition = "table"},
 #    {matcher = ['test6.*'], partition = "default"},
 #    {matcher = ['test7.*'], partition = "test123"}
 # ]
@@ -213,11 +215,11 @@ The following is a sample configuration when you use token authentication with P
     oauth2.oauth2-scope="xxxx"
     ```
 
-## Customize the distribution rules for topics and partitions in Pulsar Sink
+## Customize the dispatching rules for topics and partitions in Pulsar Sink
 
 ### Matching rules for Matcher
 
-Take the `dispatchers` configuration item in the following sample configuration file:
+Take the `dispatchers` configuration item in the following sample configuration file as an example:
 
 ```toml
 [sink]
@@ -232,8 +234,8 @@ dispatchers = [
 
 - The tables that match the matcher rule are dispatched according to the policy specified by the corresponding topic expression. For example, the table `test3.aa` is dispatched according to `Topic expression 2`, and the table `test5.aa` is dispatched according to `Topic expression 3`.
 - For a table that matches more than one matcher rule, the topic expression corresponding to the top matcher will take precedence. For example, the table `test1.aa` is dispatched according to `Topic expression 1`.
-- For tables that do not match any matcher, send the corresponding data change events to the default topic specified in `-sink-uri`. For example, the table `test10.aa` is sent to the default topic.
-- For tables that match the matcher rule but do not specify a topic dispatched, the corresponding data changes are sent to the default topic specified in `-sink-uri`. For example, the table `test9.abc` is sent to the default topic.
+- For tables that do not match any matcher, the corresponding data change events are sent to the default topic specified in `-sink-uri`. For example, the table `test10.aa` is sent to the default topic.
+- For tables that match the matcher rule but do not have a topic dispatcher specified, the corresponding data changes are sent to the default topic specified in `-sink-uri`. For example, the table `test9.abc` is sent to the default topic.
 
 ### Topic dispatcher
 
@@ -252,31 +254,31 @@ The basic pattern of a topic expression is `[prefix]{schema}[middle][{table}][su
 The following are some examples:
 
 - `matcher = ['test1.table1', 'test2.table2'], topic = "hello_{schema}_{table}"`
-    - Data change events corresponding to the table `test1.table1` are sent to a topic named `hello_test1_table1`.
-    - Data change events corresponding to the table `test2.table2` are sent to a topic named `hello_test2_table2`.
+    - Data change events corresponding to the table `test1.table1` are despatched to a topic named `hello_test1_table1`.
+    - Data change events corresponding to the table `test2.table2` are despatched to a topic named `hello_test2_table2`.
 
 - `matcher = ['test3.*', 'test4.*'], topic = "hello_{schema}_world"`
-    - Data change events for all tables under `test3` are sent to a topic named `hello_test3_world`.
-    - Data change events for all tables under `test4` are sent to a topic named `hello_test4_world`.
+    - Data change events for all tables under `test3` are despatched to a topic named `hello_test3_world`.
+    - Data change events for all tables under `test4` are despatched to a topic named `hello_test4_world`.
 
 - `matcher = ['*.*'], topic = "{schema}_{table}"`
-    - For all tables that TiCDC listens on, they are dispatched to separate topics according to the `databaseName_tableName` rule. For example, for table `test.account`, TiCDC despatches its data change log to a topic named `test_account`.
+    - For all tables that TiCDC listens on, they are despatched to separate topics according to the `databaseName_tableName` rule. For example, for table `test.account`, TiCDC despatches its data change log to a topic named `test_account`.
 
 ### Dispatch DDL events
 
 #### Database-level DDL events
 
-DDLs such as `CREATE DATABASE` and `DROP DATABASE` that are not related to a specific table are called database-level DDLs. Events corresponding to database-level DDLs are dispatched to the default topic specified in `--sink-uri`.
+DDL statements such as `CREATE DATABASE` and `DROP DATABASE` that are not related to a specific table are called database-level DDL statements. Events corresponding to database-level DDL statements are dispatched to the default topic specified in `--sink-uri`.
 
 #### Table-level DDL events
 
-DDLs such as `ALTER TABLE` and `CREATE TABLE` that are related to a specific table are called table-level DDLs. Events corresponding to table-level DDLs are dispatched to the appropriate topic according to the configuration of `dispatchers`.
+DDL statements such as `ALTER TABLE` and `CREATE TABLE` that are related to a specific table are called table-level DDL statements. Events corresponding to table-level DDL statements are dispatched to an appropriate topic according to the configuration of `dispatchers`.
 
 For example, for a `dispatchers` configuration like `matcher = ['test.*'], topic = {schema}_{table}`, the DDL events are despatched as follows:
 
 - If a single table is involved in the DDL event, the DDL event is dispatched to the appropriate topic as is. For example, for the DDL event `DROP TABLE test.table1`, the event is dispatched to the topic named `test_table1`.
 
-- If the DDL event involves more than one table (`RENAME TABLE`, `DROP TABLE`, and `DROP VIEW` might all involve more than one table), the single DDL event is split into multiple ones and dispatched to the appropriate topic. For example, for the DDL event `RENAME TABLE test.table1 TO test.table10, test.table2 TO test.table20`, the processing is as follows:
+- If the DDL event involves more than one table (`RENAME TABLE`, `DROP TABLE`, and `DROP VIEW` might all involve more than one table), the single DDL event is split into multiple ones and dispatched to appropriate topics. For example, for the DDL event `RENAME TABLE test.table1 TO test.table10, test.table2 TO test.table20`, the processing is as follows:
 
     - Dispatch the DDL event for `RENAME TABLE test.table1 TO test.table10` to a topic named `test_table1`.
     - Dispatch the DDL event for `RENAME TABLE test.table2 TO test.table20` to a topic named `test_table2`.
@@ -285,7 +287,7 @@ For example, for a `dispatchers` configuration like `matcher = ['test.*'], topic
 
 Currently TiCDC only supports consumers to consume messages using the Exclusive subscription model, that is, each consumer can consume messages from all partitions in a topic.
 
-You can specify a partition dispatcher with `partition = "xxx"`. The following partition dispatches are supported: `default`, `ts`, `index-value`, and `table`. If you fill in any other field, it will be passed through to the `key` of the message in the message sent to the Pulsar server.
+You can specify a partition dispatcher with `partition = "xxx"`. The following partition dispatches are supported: `default`, `ts`, `index-value`, and `table`. If you fill in any other string, it will be passed through to the `key` of the message in the message sent to the Pulsar server.
 
 The dispatching rules are as follows:
 
@@ -293,4 +295,4 @@ The dispatching rules are as follows:
 - `ts`: Use commitTs of row changes to perform hash calculation and dispatch events.
 - `index-value`: Use the value of the table primary key or unique index to perform hash calculation and dispatch events.
 - `table`: Use the schema name and table name to perform hash calculation and dispatch events.
-- Other self-defined values: This value will be used directly as the key for the Pulsar message, and the Pulsar producer uses this key value for dispatching.
+- Other self-defined string: The self-defined string is used directly as the key for the Pulsar message, and the Pulsar producer uses this key value for dispatching.
