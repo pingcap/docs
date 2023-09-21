@@ -94,7 +94,9 @@ After upgrading TiFlash to v7.3 and configuring TiFlash to use V3 DTFiles, if yo
 
 ## From v6.x or v7.x to v7.4
 
-Starting from v7.4, some underlying file name of PageStorage V3 has changed. This prevents an in-place downgrade to the previous version after upgrading to v7.4.
+Starting from v7.4, in order to reduce the read and write amplification caused by data compaction, some underlying file name of PageStorage V3 has changed. This prevents an in-place downgrade to the previous version after upgrading to v7.4.
+
+Starting from v7.4, in order to reduce the read and write amplification caused by data compaction, the compaction logic PageStorage V3 has been optimized, resulting in changes in the underlying storage file names. This prevents an in-place downgrade to the previous version after upgrading to v7.4.
 
 **Workaround for downgrading TiFlash in testing or other special scenarios**
 
