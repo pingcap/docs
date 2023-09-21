@@ -15,7 +15,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.5/quick-start-with-
 
 + TiDB
 
-    - Add new optimizer hints, including [`NO_MERGE_JOIN()`](https://docs.pingcap.com/zh/tidb/v6.5/optimizer-hints#no_merge_joint1_name--tl_name-), [`NO_INDEX_JOIN()`]([/optimizer-hints.md](https://docs.pingcap.com/zh/tidb/v6.5/optimizer-hints)#no_index_joint1_name--tl_name-), [`NO_INDEX_MERGE_JOIN()`](https://docs.pingcap.com/zh/tidb/v6.5/optimizer-hints#no_index_merge_joint1_name--tl_name-), [`NO_HASH_JOIN()`](https://docs.pingcap.com/zh/tidb/v6.5/optimizer-hints#no_hash_joint1_name--tl_name-), and [`NO_INDEX_HASH_JOIN()`](https://docs.pingcap.com/zh/tidb/v6.5/optimizer-hints#no_index_hash_joint1_name--tl_name-) [#45520](https://github.com/pingcap/tidb/issues/45520) @[qw4990](https://github.com/qw4990)
+    - Add new optimizer hints, including [`NO_MERGE_JOIN()`](https://docs.pingcap.com/tidb/v6.5/optimizer-hints#no_merge_joint1_name--tl_name-), [`NO_INDEX_JOIN()`]([/optimizer-hints.md](https://docs.pingcap.com/tidb/v6.5/optimizer-hints)#no_index_joint1_name--tl_name-), [`NO_INDEX_MERGE_JOIN()`](https://docs.pingcap.com/tidb/v6.5/optimizer-hints#no_index_merge_joint1_name--tl_name-), [`NO_HASH_JOIN()`](https://docs.pingcap.com/tidb/v6.5/optimizer-hints#no_hash_joint1_name--tl_name-), and [`NO_INDEX_HASH_JOIN()`](https://docs.pingcap.com/tidb/v6.5/optimizer-hints#no_index_hash_joint1_name--tl_name-) [#45520](https://github.com/pingcap/tidb/issues/45520) @[qw4990](https://github.com/qw4990)
     - Add request source information related to the coprocessor [#46514](https://github.com/pingcap/tidb/issues/46514) @[you06](https://github.com/you06)
 
 + TiKV
