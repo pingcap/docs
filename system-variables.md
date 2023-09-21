@@ -1423,7 +1423,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Scope: GLOBAL
 - Persists to cluster: Yes
 - Default value: `""`
-- This variable is used to store cloud storage uri to enable [Global Sort](/tidb-global-sort.md). After enabling the distributed execution framework, you can enable the Global Sort feature by configuring the URI and pointing it to the appropriate cloud storage path with the necessary permissions to access the storage. See [an example](/br/backup-and-restore-storages.md).
+- This variable is used to store cloud storage uri to enable [Global Sort](/tidb-global-sort.md). After enabling the distributed execution framework, you can enable the Global Sort feature by configuring the URI and pointing it to the appropriate cloud storage path with the necessary permissions to access the storage. See [an example](/br/backup-and-restore-storages.md#uri-format).
 - The following statements can use the Global Sort feature.
 
     - The [`ADD INDEX`](/sql-statements/sql-statement-add-index.md) statement will use global sort.
