@@ -18,7 +18,7 @@ Starting from v7.0.0, TiFlash supports spilling intermediate data to disk to rel
 TiFlash provides two triggering mechanisms to spill data to disk.
 
 * Operator-level spilling: by specifing the data spilling threshold for each operator, you can control when TiFlash spills data of that operator to disk.
-* Query-level spilling: by specifing the maximum memory usage of a query on a TiFlash node and the spilling ratio, you can control when TiFlash spills data of supported operators in a query to disk as needed.
+* Query-level spilling: by specifing the maximum memory usage of a query on a TiFlash node and the memory ratio for spilling, you can control when TiFlash spills data of supported operators in a query to disk as needed.
 
 ### Operator-level spilling
 
