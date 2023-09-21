@@ -111,7 +111,7 @@ This example constructs a SQL statement that consumes a lot of memory to demonst
     HAVING SUM(l_quantity) > 314;
     ```
 
-3. From the log of TiFlash, you can see that the query needs to consume 29.55 GiB of memory on a single TiFlash node:
+3. From the log of TiFlash, you can see that the query consumes 29.55 GiB of memory on a single TiFlash node:
 
     ```
     [DEBUG] [MemoryTracker.cpp:69] ["Peak memory usage (total): 29.55 GiB."] [source=MemoryTracker] [thread_id=468]
@@ -143,7 +143,7 @@ This example constructs a SQL statement that consumes a lot of memory to demonst
 ## Notes
 
 * When the Hash Aggregation operator does not have a `GROUP BY` key, it does not support spilling. Even if the Hash Aggregation operator contains a distinct aggregation function, it does not support spilling.
-* Currently, the threshold for operator-level spilling is calculated for each operator. If the query-level spilling is not configured, a query contains two Hash Aggregation operators, and the threshold of the operator is set to 10 GiB, then the two Hash Aggregation operators will only spill data when their respective memory usage exceeds 10 GiB.
+* Currently, the threshold for operator-level spilling is calculated for each operator. When the query-level spilling is not configured, for a query containing two Hash Aggregation operators, if the threshold of the operator is set to 10 GiB, each of the two Hash Aggregation operators will only spill data when their respective memory usage exceeds 10 GiB.
 * Currently, the Hash Aggregation operators and TopN/Sort operators use the merge aggregation and merge sort algorithm during the restore phase. Therefore, these two operators only trigger a single round of spill. If the memory demand is very high and the memory usage during the restore phase still exceeds the threshold, the spill will not be triggered again.
 * Currently, the Hash Join operator uses the partition-based spill strategy. If the memory usage during the restore phase still exceeds the threshold, the spill will be triggered again. However, to control the scale of the spill, the number of rounds of spill is limited to three. If the memory usage during the restore phase still exceeds the threshold after the third round of spill, the spill will not be triggered again.
 * When query-level spilling is configured (that is, both [`tiflash_mem_quota_query_per_node`](/system-variables.md#tiflash_mem_quota_query_per_node-new-in-v740) and [`tiflash_query_spill_ratio`](/system-variables.md#tiflash_query_spill_ratio-new-in-v740) are greater than 0), TiFlash ignores spilling thresholds of individual operators and automatically triggers spilling for relevant operators in a query based on the query-level spilling thresholds.
