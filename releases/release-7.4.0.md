@@ -24,6 +24,15 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.4/quick-start-with-
     Executing `ADD INDEX` or `IMPORT INTO` tasks in parallel in a resource-intensive cluster can consume a large amount of TiDB node resources, which can lead to cluster performance degradation. TiDB v7.4.0 introduces the ability to set the TiDB Service Scope as an experimental feature. You can select a few existing TiDB nodes or set the TiDB Service Scope for new TiDB nodes, and all parallel `ADD INDEX` and `IMPORT INTO` tasks only run on these nodes. This mechanism can avoid performance impact on existing services.
     
     For details, see [user document](/system-variables.md#tidb_service_scope-new-in-v740).
+
+* Enhance the Partitioned Raft KV storage engine (experimental) [#issue号](链接) @[busyjay](https://github.com/busyjay) @[tonyxuqqi](https://github.com/tonyxuqqi) @[tabokie](https://github.com/tabokie) @[bufferflies](https://github.com/bufferflies) @[5kbpers](https://github.com/5kbpers) @[SpadeA-Tang](https://github.com/SpadeA-Tang) @[nolouch](https://github.com/nolouch)  **tw@Oreoxmt** <!--1292-->
+
+    TiDB v6.6.0 introduces the Partitioned Raft KV storage engine as an experimental feature, which uses multiple RocksDB instances to store TiKV Region data, and the data of each Region is independently stored in a separate RocksDB instance.
+
+    In v7.4.0, TiDB further improves the compatibility and stability of the Partitioned Raft KV storage engine. Through large-scale data testing, the compatibility with TiDB ecosystem tools and features such as DM, Dumpling, TiDB Lightning, TiCDC, BR, and PITR is ensured. Additionally, the Partitioned Raft KV storage engine provides more stable performance under mixed read and write workloads, making it especially suitable for write-heavy scenarios. Furthermore, each TiKV node now supports 8 core CPUs and can be configured with 8 TB data storage, and 64 GB memory.
+
+    For more information, see [documentation](/partitioned-raft-kv.md).
+
 ### Performance
 
 - note 1
@@ -42,6 +51,16 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.4/quick-start-with-
 
     For details, see [user document](链接)。
 
+* Support caching execution plans for non-prepared statements (GA) [#36598](https://github.com/pingcap/tidb/issues/36598) @[qw4990](https://github.com/qw4990) **tw@Oreoxmt** <!--1355-->
+
+    TiDB v7.0.0 introduces non-prepared plan cache as an experimental feature to improve the load capacity of concurrent OLTP. In v7.4.0, this feature becomes GA. The execution plan cache will be applied to more scenarios, thereby improving the concurrent processing capacity of TiDB.
+
+    Enabling the non-prepared plan cache might incur additional memory and CPU overhead and might not be suitable for all situations. Starting from v7.4.0, this feature is disabled by default. You can enable it using [`tidb_enable_non_prepared_plan_cache`](/system-variables.md#tidb_enable_non_prepared_plan_cache) and control the cache size using [`tidb_session_plan_cache_size`](/system-variables.md#tidb_session_plan_cache_size-new-in-v710).
+
+    Additionally, this feature does not support DML statements by default and has certain restrictions on SQL statements. For more details, see [Restrictions](/sql-non-prepared-plan-cache.md#restrictions).
+
+    For more information, see [documentation](/sql-non-prepared-plan-cache.md).
+
 ### Reliability
 
 * Introduce a configurable TiKV read timeout [#45380](https://github.com/pingcap/tidb/issues/45380) @[crazycs520](https://github.com/crazycs520) **tw@hfxsd** <!--1560-->
@@ -52,6 +71,28 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.4/quick-start-with-
 
     For details, see [user document](/system-variables.md#tidb_kv_read_timeout-new-in-v740).
 
+* Support temporarily modifying some system variable values using an optimizer hint [#issue号](链接) @[winoros](https://github.com/winoros) **tw@Oreoxmt** <!--923-->
+
+    TiDB v7.4.0 introduces the optimizer hint `SET_VAR()`, which is similar to that of MySQL 8.0. By including the hint `SET_VAR()` in SQL statements, you can temporarily modify some system variables during statement execution. This helps you set the environment for different statements. For example, you can actively increase the parallelism of resource-intensive SQL statements or alert the optimizer behavior through variables.
+
+    You can find the system variables that can be modified using the hint `SET_VAR()` in [System variables](/system-variables.md). It is strongly recommended not to modify variables that are not explicitly supported, as this might cause unpredictable behavior.
+
+    For more information, see [documentation](/optimizer-hints.md).
+
+* TiFlash supports resource control [#7660](https://github.com/pingcap/tiflash/issues/7660) @[guo-shaoge](https://github.com/guo-shaoge)  **tw@Oreoxmt** <!--1506-->
+
+    In TiDB v7.1.0, the resource control feature becomes generally available and provides resource management capabilities for TiDB and TiKV. In v7.4.0, TiFlash supports the resource control feature, improving the overall resource management capabilities of TiDB. The resource control of TiFlash is fully compatible with the existing TiDB resource control feature, and the existing resource groups will manage the resources of TiDB, TiKV, and TiFlash at the same time.
+
+    To control whether to enable the TiFlash resource control feature, you can configure the TiFlash parameter `enable_resource_control`. After enabling this feature, TiFlash performs resource scheduling and management based on the resource group configuration of TiDB, ensuring the reasonable allocation and use of overall resources.
+
+    For more information, see [documentation](/tidb-resource-control.md).
+
+* TiFlash supports the pipeline execution model (GA) [#6518](https://github.com/pingcap/tiflash/issues/6518) @[SeaRise](https://github.com/SeaRise) **tw@Oreoxmt** <!--1549-->
+
+    Starting from v7.2.0, TiFlash introduces a pipeline execution model. This model centrally manages all thread resources and schedules task execution uniformly, maximizing the utilization of thread resources while avoiding resource overuse. In v7.4.0, TiFlash improves the statistics of thread resource usage, and the pipeline execution model becomes a GA feature and is enabled by default. Since this feature is mutually dependent with the TiFlash resource control feature, TiDB v7.4.0 removes the variable `tidb_enable_tiflash_pipeline_model` used to control whether to enable the pipeline execution model in previous versions. Instead, you can enable or disable the pipeline execution model and the TiFlash resource control feature by configuring the TiFlash parameter `tidb_enable_resource_control`.
+
+    For more information, see [documentation](/tiflash/tiflash-pipeline-model.md).
+
 * Add the option of optimizer mode [#46080](https://github.com/pingcap/tidb/issues/46080) @[time-and-fate](https://github.com/time-and-fate) **tw@ran-huang** <!--1527-->
 
     In v7.4.0, TiDB introduces a new system variable [`tidb_opt_objective`](/system-variables.md#tidb_opt_objective-new-in-v740), which controls the estimation method used by the optimizer. The default value `moderate` maintains the previous behavior of the optimizer, where it uses runtime statistics to adjust estimations based on data modifications. If this variable is set to `determinate`, the optimizer generates execution plans solely based on statistics without considering runtime corrections.
@@ -60,7 +101,20 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.4/quick-start-with-
 
     For details, see [user document](/system-variables.md#tidb_opt_objective-new-in-v740)。
 
+* TiDB resource control supports managing background tasks (experimental) [#issue号](链接) @[glorv](https://github.com/glorv) **tw@Oreoxmt** <!--1448-->
 
+    Background tasks, such as data backup and automatic statistics collection, are low-priority but consume many resources. These tasks are usually triggered periodically or irregularly. During execution, they consume a lot of resources, thus affecting the performance of online high-priority tasks. Starting from v7.4.0, the TiDB resource control feature supports managing background tasks. This feature reduces the performance impact of low-priority tasks on online application, enabling rational resource allocation, and greatly improving cluster stability.
+
+    TiDB supports the following types of background tasks:
+
+    - `lightning`: perform import tasks using [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md). Both physical and logical import modes of TiDB Lightning are supported.
+    - `br`: perform backup and restore tasks using [BR](/br/backup-and-restore-overview.md). PITR is not supported.
+    - `ddl`: control the resource usage during the batch data write back phase of Reorg DDLs.
+    - `analyze`: the [collect statistics](/statistics.md#collect-statistics) tasks that are manually executed or automatically triggered by TiDB.
+
+    By default, the task types that are marked as background tasks are empty, and the management of background tasks is disabled. This default behavior is the same as that of versions prior to TiDB v7.4.0. To manage background tasks, you need to manually modify the background task types of the `default` resource group.
+
+    For more information, see [documentation](/tidb-resource-control.md).
 
 * Enhance the ability to lock statistics [#issue号](链接) @[hi-rustin](https://github.com/hi-rustin) **tw@ran-huang** <!--1557-->
 
@@ -79,7 +133,13 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.4/quick-start-with-
 
 - note 1
 
-- note 2
+* Support collation `utf8mb4_0900_ai_ci` and `utf8mb4_0900_bin` [#37566](https://github.com/pingcap/tidb/issues/37566) @[YangKeao](https://github.com/YangKeao) @[zimulala](https://github.com/zimulala) @[bb7133](https://github.com/bb7133) **tw@Oreoxmt** <!--1186-->
+
+    TiDB v7.4.0 enhances the support for migrating data from MySQL 8.0 and adds two collations: `utf8mb4_0900_ai_ci` and `utf8mb4_0900_bin`. `utf8mb4_0900_ai_ci` is the default collation in MySQL 8.0.
+
+    TiDB v7.4.0 also introduces the system variable `default_collation_for_utf8mb4` which is compatible with MySQL 8.0. This enables you to specify the default collation for the utf8mb4 character set and provides compatibility with migration or data replication from MySQL 5.7 or earlier versions.
+
+    For more information, see [documentation](/character-set-and-collation#character-sets-and-collations-supported-by-tidb).
 
 ### Observability
 
@@ -89,7 +149,11 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.4/quick-start-with-
 
      In addition, by setting the session-level system variable [`tidb_session_alias`](/system-variables.md#tidb_session_alias-new-in-v740), you can add custom identifiers to the logs mentioned above. With this ability to inject business identification information into the logs, you can correlate the contents of the logs with the business, build the link from the business to the logs, and reduce the difficulty of diagnostic work.     
 
-- note 2
+* TiDB Dashboard provides table view execution plans [#1589](https://github.com/pingcap/tidb-dashboard/issues/1589) @[baurine](https://github.com/baurine) **tw@Oreoxmt** <!--1434-->
+
+    In v7.4.0, TiDB Dashboard provides table view execution plans on the **Slow Query** and **SQL Statement** pages to improve the diagnosis experience.
+
+    For more information, see [documentation](链接).
 
 ### Data migration
 
