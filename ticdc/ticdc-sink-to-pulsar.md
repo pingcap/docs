@@ -97,11 +97,11 @@ token-from-file="/data/pulsar/token-file.txt"
 basic-user-name="root"
 # Pulsar uses the basic account and password to authenticate the identity. Specify the password.
 basic-password="password"
-# The authentication certificate path for Pulsar TLS encryption.
+# The certificate path for Pulsar TLS encrypted authentication.
 auth-tls-certificate-path="/data/pulsar/certificate"
-# The authentication private key path for Pulsar TLS encryption.
+# The private key path for Pulsar TLS encrypted authentication.
 auth-tls-private-key-path="/data/pulsar/certificate.key"
-# The credential file path for Pulsar TLS encryption.
+# The credential file path for Pulsar TLS encrypted authentication.
 tls-trust-certs-file-path="/data/pulsar/tls-trust-certs-file"
 # Pulsar oauth2 issuer-url. For more information, see the Pulsar website: https://pulsar.apache.org/docs/2.10.x/client-libraries-go/#tls-encryption-and-authentication
 oauth2.oauth2-issuer-url="https://xxxx.auth0.com"
