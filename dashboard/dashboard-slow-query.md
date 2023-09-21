@@ -98,7 +98,7 @@ Click the node area, and the detailed operator information is displayed on the r
 
 ### SQL execution details
 
-For basic information, execution time, Coprocessor read, transaction, and slow query of the SQL statement, you can click the corresponding tab titles to switch among different information.
+For basic information, execution time, Coprocessor read, transaction, and slow query of the SQL statement, you can click the corresponding tab labels to switch among different information.
 
 ![Show different execution information](/media/dashboard/dashboard-slow-queries-detail2-v620.png)
 
@@ -118,9 +118,9 @@ Click the **Time** tab, and you can see how long each stage of the execution pla
 
 ![Execution time](/media/dashboard/dashboard-slow-queries-detail-plans-time.png)
 
-#### Coprocessor Read tab
+#### Coprocessor tab
 
-Click the **Coprocessor Read** tab, and you can see information related to Coprocessor read.
+Click the **Coprocessor** tab, and you can see information related to Coprocessor read.
 
 ![Coprocessor read](/media/dashboard/dashboard-slow-queries-detail-plans-cop-read.png)
 
