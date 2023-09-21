@@ -17,7 +17,7 @@ summary: Learn the use cases, limitations, usage, and implementation principles 
 
 </CustomContent>
 
-## Feature Overview
+## Feature overview
 
 TiDB's Global Sort feature enhances the stability and efficiency of data import and DDL (Data Definition Language) operations. It serves as a general operator in the [distributed parallel execution framework](/tidb-distributed-execution-framework.md). Through the distributed parallel execution framework, it provides a global sort service on cloud.
 
