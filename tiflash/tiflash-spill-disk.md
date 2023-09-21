@@ -55,7 +55,7 @@ This example constructs a SQL statement that consumes a lot of memory to demonst
     [DEBUG] [MemoryTracker.cpp:69] ["Peak memory usage (total): 29.55 GiB."] [source=MemoryTracker] [thread_id=468]
     ```
 
-4. Execute the following statements. This statement limits the memory usage of the Hash Aggregation operator with `GROUP BY` keys to 10737418240 (10 GiB).
+4. Execute the following statement. This statement limits the memory usage of the Hash Aggregation operator with `GROUP BY` keys to 10737418240 (10 GiB).
 
     ```sql
     SET tidb_max_bytes_before_tiflash_external_group_by = 10737418240;
