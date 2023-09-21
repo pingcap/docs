@@ -148,6 +148,9 @@ Here are the main steps to create the workflow:
            echo "The user is ${{ steps.wait-for-branch.outputs.user }}"
            echo "The password is ${{ steps.wait-for-branch.outputs.password }}"
    ```
+   - token: GitHub will automatically create the [GITHUB_TOKEN](https://docs.github.com/en/actions/security-guides/automatic-token-authentication) secret, you can use it directly.
+   - public-key and private-key: The TiDB Cloud [API key](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication/API-Key-Management).
+   - 
 
 3. Modify your test code.
 
