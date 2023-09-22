@@ -262,7 +262,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.4/quick-start-with-
 
 | Configuration file | Configuration parameter | Change type | Description |
 | -------- | -------- | -------- | -------- |
-|          |          |          |          |
+| Dumpling  | [`--csv-line-terminator`](/dumpling-overview.md#option-list-of-dumpling) | Newly added | you can specify the desired terminator with this option. This option supports "\r\n" and "\n". The default value is "\r\n", which is consistent with the earlier versions. |
 |          |          |          |          |
 |    |   |    |  |
 
