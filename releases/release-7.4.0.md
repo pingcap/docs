@@ -89,7 +89,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.4/quick-start-with-
 
     For more information, see [documentation](/tiflash/tiflash-spill-disk.md).
 
-* Introduce a configurable TiKV read timeout [#45380](https://github.com/pingcap/tidb/issues/45380) @[crazycs520](https://github.com/crazycs520) **tw@hfxsd** <!--1560-->
+* Support configurable TiKV read timeout [#45380](https://github.com/pingcap/tidb/issues/45380) @[crazycs520](https://github.com/crazycs520) **tw@hfxsd** <!--1560-->
 
     Normally, TiKV processes requests very quickly, in a matter of milliseconds. However, when a TiKV node encounters disk I/O jitter or network latency, the request processing time can increase significantly. In versions earlier than v7.4.0, the timeout limit for TiKV requests was fixed and could not be adjusted, so TiDB had to wait for a timeout response when there was a problem with a TiKV node, which resulted in a noticeable impact on application query performance during jitter.
      
@@ -178,7 +178,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.4/quick-start-with-
 
 * Support adding session connection IDs and session aliases to logs [#46071](https://github.com/pingcap/tidb/issues/46071) @[lcwangchao](https://github.com/lcwangchao) **tw@hfxsd** <!--无 FD 及用户文档，只提供 release notes-->
    
-     When you're troubleshooting SQL execution problems, it's often necessary to correlate the contents of TiDB's component logs to pinpoint the root cause of the problem. Starting with v7.4.0, you can write session connection IDs (`CONNECTION_ID`) to session-related logs, including TiDB logs, slow query logs, and slow logs from the coprocessor on TiKV. You can correlate the contents of several types of logs based on session connection IDs to improve troubleshooting and diagnostic efficiency. 
+     When you troubleshoot SQL execution problems, it is often necessary to correlate the contents of TiDB component logs to pinpoint the root cause of the problem. Starting with v7.4.0, you can write session connection IDs (`CONNECTION_ID`) to session-related logs, including TiDB logs, slow query logs, and slow logs from the coprocessor on TiKV. You can correlate the contents of several types of logs based on session connection IDs to improve troubleshooting and diagnostic efficiency. 
 
      In addition, by setting the session-level system variable [`tidb_session_alias`](/system-variables.md#tidb_session_alias-new-in-v740), you can add custom identifiers to the logs mentioned above. With this ability to inject business identification information into the logs, you can correlate the contents of the logs with the business, build the link from the business to the logs, and reduce the difficulty of diagnostic work.     
 
@@ -219,18 +219,17 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.4/quick-start-with-
 
 * Dumpling supports the user-defined terminator when exporting data to CSV files [#46982](https://github.com/pingcap/tidb/issues/46982) @[GMHDBJD](https://github.com/GMHDBJD) **tw@hfxsd** <!--1571-->
 
-    Prior to v7.4.0, when Dumpling exported data to a CSV file, the default terminator is "\r\n", which could not be parsed by some downstream systems that could only parse the "\n" terminator , or had to be converted by a third-party tool to parse the CSV file. 
+    Prior to v7.4.0, when Dumpling exported data to a CSV file, the default terminator is "\r\n", which could not be parsed by some downstream systems that could only parse the "\n" terminator, or had to be converted by a third-party tool to parse the CSV file. 
     
-    Starting from v7.4.0, a new parameter `--csv-line-terminator` is introduced. This parameter allows you to pass in the required terminator when exporting data to a CSV file. This parameter supports `\r\n' and `\n'. The default terminator is `\r\n' to keep consistent with earlier versions.
+    Starting from v7.4.0, TiDB introduces a new parameter `--csv-line-terminator`. This parameter allows you to pass in the required terminator when exporting data to a CSV file. This parameter supports `\r\n' and `\n'. The default terminator is `\r\n' to keep consistent with earlier versions.
      
-    For details, see [documentation](待补充).
+    For details, see [documentation](/dumpling-overview.md#option-list-of-dumpling).
 
 * TiCDC supports replicating data to Pulsar [#9413](https://github.com/pingcap/tiflow/issues/9413) @[yumchina](https://github.com/yumchina) @[asddongmen](https://github.com/asddongmen) **tw@hfxsd** <!--1552-->
 
     TiCDC now supports seamless integration with Pulsar. Pulsar is a cloud-native and distributed message streaming platform that enhances your real-time data streaming experience. With this new capability, TiCDC provides you with the ability to easily capture and replicate TiDB changes to Pulsar, offering new possibilities for data processing and analytics capabilities. You can develop your own consumer applications that read and process newly generated change data from Pulsar to meet specific business needs. TiCDC currently supports replicating change data in the `canal-json` format.
 
     For details, see [documentation](/ticdc/ticdc-sink-to-pulsar.md).
-
 
 - TiCDC improves large message handling with claim check pattern [#9153](https://github.com/pingcap/tiflow/issues/9153) @[3AceShowHand](https://github.com/3AceShowHand) **tw@ran-huang** <!--1550 英文 comment 原文 https://internal.pingcap.net/jira/browse/FD-1550?focusedCommentId=149207&page=com.atlassian.jira.plugin.system.issuetabpanels:comment-tabpanel#comment-149207-->
 
