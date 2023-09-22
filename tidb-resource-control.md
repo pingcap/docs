@@ -21,6 +21,12 @@ The TiDB resource control feature provides two layers of resource management cap
 
 - TiKV scheduling: You can set the absolute priority [(`PRIORITY`)](/information-schema/information-schema-resource-groups.md#examples) as needed. Different resources are scheduled according to the `PRIORITY` setting. Tasks with high `PRIORITY` are scheduled first. If you do not set the absolute priority, TiKV uses the value of `RU_PER_SEC` of each resource group to determine the priority of the read and write requests for each resource group. Based on the priorities, the storage layer uses the priority queue to schedule and process requests.
 
+Starting from v7.4.0, TiDB's resource management feature extends its support to control TiFlash resources. The principles behind TiFlash resource control and TiDB flow control and TiKV scheduling are similar:
+
+- **TiFlash Resource Control:** Leveraging the [TiFlash Pipeline Model execution model](/tiflash/tiflash-pipeline-model.md), it can precisely monitor the CPU consumption for different queries and convert it into [Request Units (RU)](#what-is-request-unit-ru) for deduction. Traffic control is implemented using a token bucket algorithm.
+
+- **TiFlash Scheduling:** When system resources become scarce, it schedules pipeline tasks among multiple resource groups based on their priorities. The specific logic involves assessing the resource group's priority `PRIORITY`, then considering CPU usage, and combining it with `RU_PER_SEC`. The final outcome is that if `rg1` and `rg2` have the same `PRIORITY` but `rg2` has double the `RU_PER_SEC` of `rg1`, then `rg2` can use twice the CPU time compared to `rg1`.
+
 ## Scenarios for resource control
 
 The introduction of the resource control feature is a milestone for TiDB. It can divide a distributed database cluster into multiple logical units. Even if an individual unit overuses resources, it does not crowd out the resources needed by other units.
@@ -80,6 +86,8 @@ Request Unit (RU) is a unified abstraction unit in TiDB for system resources, wh
     </tbody>
 </table>
 
+Currently, TiFlash resource control only considers SQL CPU (i.e., the CPU time consumed by the execution of pipeline tasks for queries) and read request payload.
+
 > **Note:**
 >
 > - Each write operation is eventually replicated to all replicas (by default, TiKV has 3 replicas). Each replication operation is considered a different write operation.
@@ -92,7 +100,7 @@ You can use the [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyz
 
 ## Parameters for resource control
 
-The resource control feature introduces two new global variables.
+The resource control feature introduces the following system variables or parameters:
 
 * TiDB: you can use the [`tidb_enable_resource_control`](/system-variables.md#tidb_enable_resource_control-new-in-v660) system variable to control whether to enable flow control for resource groups.
 
@@ -108,6 +116,12 @@ The resource control feature introduces two new global variables.
 
 </CustomContent>
 
+<CustomContent platform="tidb-cloud">
+
+* TiFlash: Control the enabling of TiFlash resource control by configuring the global variable [`tidb_enable_resource_control`](/system-variables.md#tidb_enable_resource_control-introduced-since-v660) and the TiFlash configuration option [`enable_resource_control`](/tiflash/tiflash-configuration.md#configuration-file-tiflashtoml) (introduced since v7.4.0).
+
+</CustomContent>
+
 Starting from TiDB v7.0.0, both parameters are enabled by default. The results of the combinations of these two parameters are shown in the following table.
 
 | `resource-control.enabled`  | `tidb_enable_resource_control`= ON   | `tidb_enable_resource_control`= OFF  |
@@ -115,7 +129,9 @@ Starting from TiDB v7.0.0, both parameters are enabled by default. The results o
 | `resource-control.enabled`= true  |  Flow control and scheduling (recommended) | Invalid combination      |
 | `resource-control.enabled`= false |  Only flow control (not recommended)                 | The feature is disabled. |
 
-For more information about the resource control mechanism and parameters, see [RFC: Global Resource Control in TiDB](https://github.com/pingcap/tidb/blob/master/docs/design/2022-11-25-global-resource-control.md).
+Starting from v7.4.0, the TiFlash configuration option `enable_resource_control` is enabled by default, and it works in conjunction with `tidb_enable_resource_control` to control the TiFlash resource management feature. Only when both are enabled can TiFlash resource management perform flow control and priority scheduling. Additionally, when `enable_resource_control` is turned on, TiFlash utilizes the [Pipeline Model execution model](/tiflash/tiflash-pipeline-model.md).
+
+For detailed information on the resource control implementation mechanism and related parameters, please refer to [RFC: Global Resource Control in TiDB](https://github.com/pingcap/tidb/blob/master/docs/design/2022-11-25-global-resource-control.md) and [TiFlash Resource Control](https://github.com/pingcap/tiflash/blob/master/docs/design/2023-09-21-tiflash-resource-control.md).
 
 ## How to use resource control
 
@@ -390,6 +406,12 @@ You can get more information about runaway queries from the following system tab
     ```
 
 2. For TiDB Self-Hosted, you can use the `resource-control.enabled` parameter to control whether to use request scheduling based on resource group quotas. For TiDB Cloud, the value of the `resource-control.enabled` parameter is `true` by default and does not support dynamic modification. If you need to disable it for TiDB Dedicated clusters, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+To disable TiFlash resource control, set the TiFlash config [`enable_resource_control`](/tiflash/tiflash-configuration.md#配置文件-tiflashtoml) to false.
 
 </CustomContent>
 
