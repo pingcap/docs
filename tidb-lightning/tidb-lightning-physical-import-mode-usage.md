@@ -141,9 +141,13 @@ v6.2.0 以降、 TiDB Lightning は、オンライン アプリケーション�
 
 v7.1.0 以降、 TiDB Lightningパラメータ[`pause-pd-scheduler-scope`](/tidb-lightning/tidb-lightning-configuration.md)を使用して、スケジュールの一時停止の範囲を制御できます。デフォルト値は`"table"`です。これは、ターゲット テーブル データを保存するリージョンに対してのみスケジュールが一時停止されることを意味します。クラスター内にビジネス トラフィックがない場合は、インポート中の他のスケジュールによる干渉を避けるために、このパラメーターを`"global"`に設定することをお勧めします。
 
-<Note>TiDB Lightning は、既にデータが含まれているテーブルへのデータのインポートをサポートしていません。</Note>
+<Note>
+
+TiDB Lightning は、既にデータが含まれているテーブルへのデータのインポートをサポートしていません。
 
 TiDB クラスターは v6.1.0 以降のバージョンである必要があります。以前のバージョンの場合、 TiDB Lightning は古い動作を維持しており、これによりスケジュールがグローバルに一時停止され、インポート中にオンライン アプリケーションに重大な影響が与えられます。
+
+</Note>
 
 デフォルトでは、 TiDB Lightning はクラスターのスケジューリングを可能な限り最小限の範囲で一時停止します。ただし、デフォルト構成では、クラスターのパフォーマンスが高速インポートの影響を受ける可能性があります。これを回避するには、次のオプションを構成して、クラスターのパフォーマンスに影響を与える可能性のあるインポート速度やその他の要因を制御できます。
 
@@ -166,25 +170,23 @@ distsql-scan-concurrency = 3
 
 TiDB Lightning は、物理インポート モードでのインポート パフォーマンスに影響を与えるいくつかの同時実行関連の構成を提供します。ただし、長年の経験から、次の 4 つの設定項目はデフォルト値のままにすることをお勧めします。 4 つの構成項目を調整しても、パフォーマンスは大幅に向上しません。
 
-```
-[lightning]
-# The maximum concurrency of engine files.
-# Each table is split into one "index engine" to store indices, and multiple
-# "data engines" to store row data. These settings control the maximum
-# concurrent number for each type of engines.
-# The two settings controls the maximum concurrency of the two engine files.
-index-concurrency = 2
-table-concurrency = 6
+    [lightning]
+    # The maximum concurrency of engine files.
+    # Each table is split into one "index engine" to store indices, and multiple
+    # "data engines" to store row data. These settings control the maximum
+    # concurrent number for each type of engines.
+    # The two settings controls the maximum concurrency of the two engine files.
+    index-concurrency = 2
+    table-concurrency = 6
 
-# The concurrency of data. The default value is the number of logical CPUs.
-region-concurrency =
+    # The concurrency of data. The default value is the number of logical CPUs.
+    region-concurrency =
 
-# The maximum concurrency of I/O. When the concurrency is too high, the disk
-# cache may be frequently refreshed, causing the cache miss and read speed
-# to slow down. For different storage mediums, this parameter may need to be
-# adjusted to achieve the best performance.
-io-concurrency = 5
-```
+    # The maximum concurrency of I/O. When the concurrency is too high, the disk
+    # cache may be frequently refreshed, causing the cache miss and read speed
+    # to slow down. For different storage mediums, this parameter may need to be
+    # adjusted to achieve the best performance.
+    io-concurrency = 5
 
 インポート中、各テーブルはインデックスを格納する 1 つの「インデックス エンジン」と行データを格納する複数の「データ エンジン」に分割されます。
 

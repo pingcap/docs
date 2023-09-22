@@ -33,12 +33,12 @@ Google Cloud Private Service Connect を利用したエンドポイント接続�
 -   各 Google Cloud プロジェクトには、TiDBクラスタに接続する最大 10 個のエンドポイントを含めることができます。
 -   エンドポイント サービスが構成されたプロジェクトでは、Google Cloud でホストされる最大 8 つの TiDB 専用クラスタを作成できます。
 -   接続するプライベート エンドポイントと TiDB クラスターは同じリージョンに存在する必要があります。
--   送信ファイアウォール ルールでは、エンドポイントの内部 IP アドレスへのトラフィックを許可する必要があります。 [暗黙の下り許可ファイアウォール ルール](https://cloud.google.com/firewall/docs/firewalls#default_firewall_rules)任意の宛先 IP アドレスへの送信を許可します。
+-   送信ファイアウォール ルールでは、エンドポイントの内部 IP アドレスへのトラフィックを許可する必要があります。 [暗黙の下り許可ファイアウォール ルール](https://cloud.google.com/firewall/docs/firewalls#default_firewall_rules)任意の宛先 IP アドレスへの出力を許可します。
 -   VPC ネットワークで下り拒否ファイアウォール ルールを作成した場合、または暗黙的に許可された下り動作を変更する階層型ファイアウォール ポリシーを作成した場合、エンドポイントへのアクセスが影響を受ける可能性があります。この場合、エンドポイントの内部宛先 IP アドレスへのトラフィックを許可する特定の出力許可ファイアウォール ルールまたはポリシーを作成する必要があります。
 
 ほとんどのシナリオでは、VPC ピアリング経由でプライベート エンドポイント接続を使用することをお勧めします。ただし、次のシナリオでは、プライベート エンドポイント接続の代わりに VPC ピアリングを使用する必要があります。
 
--   高可用性を実現するために、 [TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview)クラスターを使用して、ソース TiDB クラスターからリージョンをまたがるターゲット TiDB クラスターにデータを複製しています。現在、プライベート エンドポイントはクロスリージョン接続をサポートしていません。
+-   高可用性を実現するために、 [TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview)クラスターを使用して、ソース TiDB クラスターからリージョンをまたがるターゲット TiDB クラスターにデータをレプリケートしています。現在、プライベート エンドポイントはクロスリージョン接続をサポートしていません。
 -   TiCDC クラスターを使用してデータをダウンストリームクラスター (Amazon Aurora、MySQL、Kafka など) にレプリケートしていますが、ダウンストリームのエンドポイント サービスを独自に維持することはできません。
 
 ## Google Cloud Private Service Connect を使用してプライベート エンドポイントをセットアップする {#set-up-a-private-endpoint-with-google-cloud-private-service-connect}
@@ -63,9 +63,12 @@ Google Cloud Private Service Connect を利用したエンドポイント接続�
 
 -   エンドポイントの作成に必要な権限を付与した以下の[IAMの役割](https://cloud.google.com/iam/docs/understanding-roles)準備します。
 
-    | タスク                                                                                                                                                         | 必要なIAMロール                                                                                                                                                                                                                                                                             |
-    | ----------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-    | <li>エンドポイントを作成する</li><li>エンドポイントの [DNS エントリ](https://cloud.google.com/vpc/docs/configure-private-service-connect-services#dns-endpoint) を自動または手動で構成します</li> | <li>[コンピューティング ネットワーク管理者](https://cloud.google.com/iam/docs/ Understanding-roles#compute.networkAdmin) (roles/compute.networkAdmin)</li><li> [サービス ディレクトリ エディター](https://cloud.google.com/iam/docs/ Understanding-roles#servicedirectory.editor) (roles/servicedirectory.editor)</li> |
+    -   タスク:
+        -   エンドポイントを作成する
+        -   エンドポイントに[DNS エントリ](https://cloud.google.com/vpc/docs/configure-private-service-connect-services#dns-endpoint)自動または手動で構成します
+    -   必要なIAMロール:
+        -   [コンピューティングネットワーク管理者](https://cloud.google.com/iam/docs/understanding-roles#compute.networkAdmin) (ロール/compute.networkAdmin)
+        -   [サービスディレクトリエディター](https://cloud.google.com/iam/docs/understanding-roles#servicedirectory.editor) (ロール/サービスディレクトリ.エディタ)
 
 次の手順を実行して、 **Google Cloud プライベート エンドポイント**ページに移動します。
 

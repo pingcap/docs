@@ -1,209 +1,194 @@
 ---
-title: Build a Simple CRUD App with TiDB and GORM
-summary: Learn how to build a simple CRUD application with TiDB and GORM.
+title: Connect to TiDB with GORM
+summary: Learn how to connect to TiDB using GORM. This tutorial gives Golang sample code snippets that work with TiDB using GORM.
 ---
 
-<!-- markdownlint-disable MD024 -->
+# GORM を使用して TiDB に接続する {#connect-to-tidb-with-gorm}
 
-<!-- markdownlint-disable MD029 -->
+TiDB は MySQL 互換データベースであり、 [ゴーム](https://gorm.io/index.html)はGolang用の人気のあるオープンソース ORM フレームワークです。 GORM は、 `AUTO_RANDOM`や[デフォルトのデータベース オプションとして TiDB をサポートします](https://gorm.io/docs/connecting_to_the_database.html#TiDB)などの TiDB 機能に適応します。
 
-# TiDB と GORM を使用してシンプルな CRUD アプリを構築する {#build-a-simple-crud-app-with-tidb-and-gorm}
+このチュートリアルでは、TiDB と GORM を使用して次のタスクを実行する方法を学習できます。
 
-[ゴーム](https://gorm.io/)は、 Golang用の人気のあるオープンソース ORM ライブラリです。
-
-このドキュメントでは、TiDB と GORM を使用して単純な CRUD アプリケーションを構築する方法について説明します。
+-   環境をセットアップします。
+-   GORM を使用して TiDB クラスターに接続します。
+-   アプリケーションをビルドして実行します。オプションで、基本的な CRUD 操作の[サンプルコードスニペット](#sample-code-snippets)を見つけることができます。
 
 > **注記：**
 >
-> Golang 1.20 以降のバージョンを使用することをお勧めします。
+> このチュートリアルは、TiDB サーバーレス、TiDB 専用、および TiDB セルフホストで動作します。
 
-## ステップ 1. TiDB クラスターを起動する {#step-1-launch-your-tidb-cluster}
+## 前提条件 {#prerequisites}
+
+このチュートリアルを完了するには、次のものが必要です。
+
+-   [行く](https://go.dev/) **1.20**以上。
+-   [ギット](https://git-scm.com/downloads) 。
+-   TiDB クラスター。
 
 <CustomContent platform="tidb">
 
-TiDB クラスターの起動方法を紹介します。
+**TiDB クラスターがない場合は、次のように作成できます。**
 
-**TiDB サーバーレス クラスターを使用する**
-
-詳細な手順については、 [TiDB サーバーレスクラスターを作成する](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-tidb-serverless-cluster)を参照してください。
-
-**ローカルクラスターを使用する**
-
-詳細な手順については、 [ローカルテストクラスターをデプロイ](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[TiUPを使用した TiDBクラスタのデプロイ](/production-deployment-using-tiup.md)を参照してください。
+-   (推奨) [TiDB サーバーレスクラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って、独自のTiDB Cloudクラスターを作成します。
+-   [ローカル テスト TiDB クラスターをデプロイ](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番TiDB クラスターをデプロイ](/production-deployment-using-tiup.md)に従ってローカル クラスターを作成します。
 
 </CustomContent>
-
 <CustomContent platform="tidb-cloud">
 
-[TiDB サーバーレスクラスターを作成する](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-tidb-serverless-cluster)を参照してください。
+**TiDB クラスターがない場合は、次のように作成できます。**
+
+-   (推奨) [TiDB サーバーレスクラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って、独自のTiDB Cloudクラスターを作成します。
+-   [ローカル テスト TiDB クラスターをデプロイ](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb#deploy-a-local-test-cluster)または[本番TiDB クラスターをデプロイ](https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup)に従ってローカル クラスターを作成します。
 
 </CustomContent>
 
-## ステップ 2. コードを取得する {#step-2-get-the-code}
+## サンプル アプリを実行して TiDB に接続する {#run-the-sample-app-to-connect-to-tidb}
+
+このセクションでは、サンプル アプリケーション コードを実行して TiDB に接続する方法を説明します。
+
+### ステップ 1: サンプル アプリ リポジトリのクローンを作成する {#step-1-clone-the-sample-app-repository}
+
+ターミナル ウィンドウで次のコマンドを実行して、サンプル コード リポジトリのクローンを作成します。
 
 ```shell
-git clone https://github.com/pingcap-inc/tidb-example-golang.git
+git clone https://github.com/tidb-samples/tidb-golang-gorm-quickstart.git
+cd tidb-golang-gorm-quickstart
 ```
 
-次の手順では`v1.23.5`を例として説明します。
+### ステップ 2: 接続情報を構成する {#step-2-configure-connection-information}
 
-TiDB トランザクションを適応させるには、次のコードに従ってツールキット[ユーティリティ](https://github.com/pingcap-inc/tidb-example-golang/tree/main/util)を作成します。
+選択した TiDB デプロイメント オプションに応じて、TiDB クラスターに接続します。
 
-```go
-package util
+<SimpleTab>
+<div label="TiDB Serverless">
 
-import (
-    "gorm.io/gorm"
-)
+1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット クラスターの名前をクリックして、その概要ページに移動します。
 
-// TiDBGormBegin start a TiDB and Gorm transaction as a block. If no error is returned, the transaction will be committed. Otherwise, the transaction will be rolled back.
-func TiDBGormBegin(db *gorm.DB, pessimistic bool, fc func(tx *gorm.DB) error) (err error) {
-    session := db.Session(&gorm.Session{})
-    if session.Error != nil {
-        return session.Error
-    }
+2.  右上隅にある**「接続」**をクリックします。接続ダイアログが表示されます。
 
-    if pessimistic {
-        session = session.Exec("set @@tidb_txn_mode=pessimistic")
-    } else {
-        session = session.Exec("set @@tidb_txn_mode=optimistic")
-    }
+3.  接続ダイアログの設定が動作環境と一致していることを確認してください。
 
-    if session.Error != nil {
-        return session.Error
-    }
-    return session.Transaction(fc)
-}
-```
+    -   **エンドポイント タイプは**`Public`に設定されます
 
-`gorm`ディレクトリに移動します。
+    -   **[接続先] は**`General`に設定されています
 
-```shell
-cd gorm
-```
+    -   **オペレーティング システムが**環境に一致します。
 
-このディレクトリの構造は次のとおりです。
+    > **ヒント：**
+    >
+    > プログラムが Windows Subsystem for Linux (WSL) で実行されている場合は、対応する Linux ディストリビューションに切り替えます。
 
-```
-.
-├── Makefile
-├── go.mod
-├── go.sum
-└── gorm.go
-```
+4.  **「パスワードの作成」**をクリックしてランダムなパスワードを作成します。
 
-`gorm.go`は`gorm`の本体です。 go-sql-driver/mysql と比較して、GORM は異なるデータベース間でのデータベース作成の差異を回避します。また、AutoMigrate やオブジェクトの CRUD などの多くの操作も実装されており、コードが大幅に簡素化されます。
+    > **ヒント：**
+    >
+    > 以前にパスワードを作成したことがある場合は、元のパスワードを使用するか、 **「パスワードのリセット」**をクリックして新しいパスワードを生成できます。
 
-`Player`は、テーブルのマッピングであるデータ エンティティ構造体です。 `Player`の各プロパティは、 `player`テーブルのフィールドに対応します。 go-sql-driver/mysql と比較すると、 GORM の`Player`では、詳細情報のマッピング関係を示す struct タグが追加されています ( `gorm:"primaryKey;type:VARCHAR(36);column:id"`など)。
+5.  次のコマンドを実行して`.env.example`をコピーし、名前を`.env`に変更します。
 
-```go
+    ```shell
+    cp .env.example .env
+    ```
 
-package main
+6.  対応する接続​​文字列をコピーして`.env`ファイルに貼り付けます。結果の例は次のとおりです。
 
-import (
-    "fmt"
-    "math/rand"
+    ```dotenv
+    TIDB_HOST='{host}'  # e.g. gateway01.ap-northeast-1.prod.aws.tidbcloud.com
+    TIDB_PORT='4000'
+    TIDB_USER='{user}'  # e.g. xxxxxx.root
+    TIDB_PASSWORD='{password}'
+    TIDB_DB_NAME='test'
+    USE_SSL='true'
+    ```
 
-    "github.com/google/uuid"
-    "github.com/pingcap-inc/tidb-example-golang/util"
+    プレースホルダー`{}` 、接続ダイアログから取得した接続パラメーターに必ず置き換えてください。
 
-    "gorm.io/driver/mysql"
-    "gorm.io/gorm"
-    "gorm.io/gorm/clause"
-    "gorm.io/gorm/logger"
-)
+    TiDB サーバーレスには安全な接続が必要です。したがって、 `USE_SSL` ～ `true`の値を設定する必要があります。
 
-type Player struct {
-    ID    string `gorm:"primaryKey;type:VARCHAR(36);column:id"`
-    Coins int    `gorm:"column:coins"`
-    Goods int    `gorm:"column:goods"`
-}
+7.  `.env`ファイルを保存します。
 
-func (*Player) TableName() string {
-    return "player"
-}
+</div>
+<div label="TiDB Dedicated">
 
-func main() {
-    // 1. Configure the example database connection.
-    db := createDB()
+1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット クラスターの名前をクリックして、その概要ページに移動します。
 
-    // AutoMigrate for player table
-    db.AutoMigrate(&Player{})
+2.  右上隅にある**「接続」**をクリックします。接続ダイアログが表示されます。
 
-    // 2. Run some simple examples.
-    simpleExample(db)
+3.  **「どこからでもアクセスを許可」**をクリックし、 **「TiDB クラスター CA のダウンロード」**をクリックして CA 証明書をダウンロードします。
 
-    // 3. Explore more.
-    tradeExample(db)
-}
+    接続文字列の取得方法の詳細については、 [TiDB専用標準接続](https://docs.pingcap.com/tidbcloud/connect-via-standard-connection)を参照してください。
 
-func tradeExample(db *gorm.DB) {
-    // Player 1: id is "1", has only 100 coins.
-    // Player 2: id is "2", has 114514 coins, and 20 goods.
-    player1 := &Player{ID: "1", Coins: 100}
-    player2 := &Player{ID: "2", Coins: 114514, Goods: 20}
+4.  次のコマンドを実行して`.env.example`をコピーし、名前を`.env`に変更します。
 
-    // Create two players "by hand", using the INSERT statement on the backend.
-    db.Clauses(clause.OnConflict{UpdateAll: true}).Create(player1)
-    db.Clauses(clause.OnConflict{UpdateAll: true}).Create(player2)
+    ```shell
+    cp .env.example .env
+    ```
 
-    // Player 1 wants to buy 10 goods from player 2.
-    // It will cost 500 coins, but player 1 cannot afford it.
-    fmt.Println("\nbuyGoods:\n    => this trade will fail")
-    if err := buyGoods(db, player2.ID, player1.ID, 10, 500); err == nil {
-        panic("there shouldn't be success")
-    }
+5.  対応する接続​​文字列をコピーして`.env`ファイルに貼り付けます。結果の例は次のとおりです。
 
-    // So player 1 has to reduce the incoming quantity to two.
-    fmt.Println("\nbuyGoods:\n    => this trade will success")
-    if err := buyGoods(db, player2.ID, player1.ID, 2, 100); err != nil {
-        panic(err)
-    }
-}
+    ```dotenv
+    TIDB_HOST='{host}'  # e.g. tidb.xxxx.clusters.tidb-cloud.com
+    TIDB_PORT='4000'
+    TIDB_USER='{user}'  # e.g. root
+    TIDB_PASSWORD='{password}'
+    TIDB_DB_NAME='test'
+    USE_SSL='false'
+    ```
 
-func simpleExample(db *gorm.DB) {
-    // Create a player, who has a coin and a goods.
-    if err := db.Clauses(clause.OnConflict{UpdateAll: true}).
-        Create(&Player{ID: "test", Coins: 1, Goods: 1}).Error; err != nil {
-        panic(err)
-    }
+    プレースホルダー`{}` 、接続ダイアログから取得した接続パラメーターに必ず置き換えてください。
 
-    // Get a player.
-    var testPlayer Player
-    db.Find(&testPlayer, "id = ?", "test")
-    fmt.Printf("getPlayer: %+v\n", testPlayer)
+6.  `.env`ファイルを保存します。
 
-    // Create players with bulk inserts. Insert 1919 players totally, with 114 players per batch.
-    bulkInsertPlayers := make([]Player, 1919, 1919)
-    total, batch := 1919, 114
-    for i := 0; i < total; i++ {
-        bulkInsertPlayers[i] = Player{
-            ID:    uuid.New().String(),
-            Coins: rand.Intn(10000),
-            Goods: rand.Intn(10000),
-        }
-    }
+</div>
+<div label="TiDB Self-Hosted">
 
-    if err := db.Session(&gorm.Session{Logger: db.Logger.LogMode(logger.Error)}).
-        CreateInBatches(bulkInsertPlayers, batch).Error; err != nil {
-        panic(err)
-    }
+1.  次のコマンドを実行して`.env.example`をコピーし、名前を`.env`に変更します。
 
-    // Count players amount.
-    playersCount := int64(0)
-    db.Model(&Player{}).Count(&playersCount)
-    fmt.Printf("countPlayers: %d\n", playersCount)
+    ```shell
+    cp .env.example .env
+    ```
 
-    // Print 3 players.
-    threePlayers := make([]Player, 3, 3)
-    db.Limit(3).Find(&threePlayers)
-    for index, player := range threePlayers {
-        fmt.Printf("print %d player: %+v\n", index+1, player)
-    }
-}
+2.  対応する接続​​文字列をコピーして`.env`ファイルに貼り付けます。結果の例は次のとおりです。
 
+    ```dotenv
+    TIDB_HOST='{host}'
+    TIDB_PORT='4000'
+    TIDB_USER='root'
+    TIDB_PASSWORD='{password}'
+    TIDB_DB_NAME='test'
+    USE_SSL='false'
+    ```
+
+    必ずプレースホルダー`{}`接続パラメーターに置き換えて、 `USE_SSL`を`false`に設定してください。 TiDB をローカルで実行している場合、デフォルトのホスト アドレスは`127.0.0.1`で、パスワードは空です。
+
+3.  `.env`ファイルを保存します。
+
+</div>
+</SimpleTab>
+
+### ステップ 3: コードを実行して結果を確認する {#step-3-run-the-code-and-check-the-result}
+
+1.  次のコマンドを実行してサンプル コードを実行します。
+
+    ```shell
+    make
+    ```
+
+2.  [予想される出力.txt](https://github.com/tidb-samples/tidb-golang-gorm-quickstart/blob/main/Expected-Output.txt)チェックして、出力が一致するかどうかを確認します。
+
+## サンプルコードスニペット {#sample-code-snippets}
+
+次のサンプル コード スニペットを参照して、独自のアプリケーション開発を完了できます。
+
+完全なサンプル コードとその実行方法については、 [tidb-samples/tidb-golang-gorm-quickstart](https://github.com/tidb-samples/tidb-golang-gorm-quickstart)リポジトリを確認してください。
+
+### TiDB に接続する {#connect-to-tidb}
+
+```golang
 func createDB() *gorm.DB {
-    dsn := "root:@tcp(127.0.0.1:4000)/test?charset=utf8mb4"
+    dsn := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=utf8mb4&tls=%s",
+        ${tidb_user}, ${tidb_password}, ${tidb_host}, ${tidb_port}, ${tidb_db_name}, ${use_ssl})
+
     db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{
         Logger: logger.Default.LogMode(logger.Info),
     })
@@ -213,85 +198,49 @@ func createDB() *gorm.DB {
 
     return db
 }
-
-func buyGoods(db *gorm.DB, sellID, buyID string, amount, price int) error {
-    return util.TiDBGormBegin(db, true, func(tx *gorm.DB) error {
-        var sellPlayer, buyPlayer Player
-        if err := tx.Clauses(clause.Locking{Strength: "UPDATE"}).
-            Find(&sellPlayer, "id = ?", sellID).Error; err != nil {
-            return err
-        }
-
-        if sellPlayer.ID != sellID || sellPlayer.Goods < amount {
-            return fmt.Errorf("sell player %s goods not enough", sellID)
-        }
-
-        if err := tx.Clauses(clause.Locking{Strength: "UPDATE"}).
-            Find(&buyPlayer, "id = ?", buyID).Error; err != nil {
-            return err
-        }
-
-        if buyPlayer.ID != buyID || buyPlayer.Coins < price {
-            return fmt.Errorf("buy player %s coins not enough", buyID)
-        }
-
-        updateSQL := "UPDATE player set goods = goods + ?, coins = coins + ? WHERE id = ?"
-        if err := tx.Exec(updateSQL, -amount, price, sellID).Error; err != nil {
-            return err
-        }
-
-        if err := tx.Exec(updateSQL, amount, -price, buyID).Error; err != nil {
-            return err
-        }
-
-        fmt.Println("\n[buyGoods]:\n    'trade success'")
-        return nil
-    })
-}
 ```
 
-## ステップ 3. コードを実行する {#step-3-run-the-code}
+この関数を使用する場合、 `${tidb_host}` 、 `${tidb_port}` 、 `${tidb_user}` 、 `${tidb_password}` 、および`${tidb_db_name}`を TiDB クラスターの実際の値に置き換える必要があります。 TiDB サーバーレスには安全な接続が必要です。したがって、 `${use_ssl}`の値を`true`に設定する必要があります。
 
-次のコンテンツでは、コードを実行する方法をステップごとに紹介します。
+### データの挿入 {#insert-data}
 
-### ステップ 3.1 TiDB Cloudのパラメータを変更する {#step-3-1-modify-parameters-for-tidb-cloud}
-
-TiDB サーバーレス クラスターを使用している場合は、 `dsn` in `gorm.go`の値を変更します。
-
-```go
-dsn := "root:@tcp(127.0.0.1:4000)/test?charset=utf8mb4"
+```golang
+db.Create(&Player{ID: "id", Coins: 1, Goods: 1})
 ```
 
-設定したパスワードが`123456`で、クラスターの詳細ページから取得した接続パラメーターが次であるとします。
+詳細については、 [データの挿入](/develop/dev-guide-insert-data.md)を参照してください。
 
--   エンドポイント: `xxx.tidbcloud.com`
--   ポート: `4000`
--   ユーザー: `2aEp24QWEDLqRFs.root`
+### クエリデータ {#query-data}
 
-この場合、 `dsn`を次のように変更できます。
-
-```go
-dsn := "2aEp24QWEDLqRFs.root:123456@tcp(xxx.tidbcloud.com:4000)/test?charset=utf8mb4&tls=true"
+```golang
+var queryPlayer Player
+db.Find(&queryPlayer, "id = ?", "id")
 ```
 
-### ステップ 3.2 コードを実行する {#step-3-2-run-the-code}
+詳細については、 [クエリデータ](/develop/dev-guide-get-data-from-single-table.md)を参照してください。
 
-コードを実行するには、 `make build`と`make run`をそれぞれ実行します。
+### データを更新する {#update-data}
 
-```shell
-make build # this command executes `go build -o bin/gorm-example`
-make run # this command executes `./bin/gorm-example`
+```golang
+db.Save(&Player{ID: "id", Coins: 100, Goods: 1})
 ```
 
-または、ネイティブ コマンドを使用することもできます。
+詳細については、 [データを更新する](/develop/dev-guide-update-data.md)を参照してください。
 
-```shell
-go build -o bin/gorm-example
-./bin/gorm-example
+### データの削除 {#delete-data}
+
+```golang
+db.Delete(&Player{ID: "id"})
 ```
 
-または、 `make build`と`make run`を組み合わせた`make`コマンドを直接実行します。
+詳細については、 [データの削除](/develop/dev-guide-delete-data.md)を参照してください。
 
-## ステップ 4. 期待される出力 {#step-4-expected-output}
+## 次のステップ {#next-steps}
 
-[GORM の期待される出力](https://github.com/pingcap-inc/tidb-example-golang/blob/main/Expected-Output.md#gorm)
+-   GORM の使い方については[GORM のドキュメント](https://gorm.io/docs/index.html)と[GORM のドキュメントの TiDB セクション](https://gorm.io/docs/connecting_to_the_database.html#TiDB)から学びましょう。
+-   TiDB アプリケーション[データの削除](/develop/dev-guide-delete-data.md) [単一テーブルの読み取り](/develop/dev-guide-get-data-from-single-table.md)ベスト プラクティス[SQLパフォーマンスの最適化](/develop/dev-guide-optimize-sql-overview.md)は、 [開発者ガイド](/develop/dev-guide-overview.md)の章 ( [データの挿入](/develop/dev-guide-insert-data.md)など) [データを更新する](/develop/dev-guide-update-data.md)参照[トランザクション](/develop/dev-guide-transaction-overview.md)てください。
+-   プロフェッショナルを通じて[TiDB 開発者コース](https://www.pingcap.com/education/)を学び、試験合格後に[TiDB 認定](https://www.pingcap.com/education/certification/)獲得します。
+
+## 助けが必要？ {#need-help}
+
+[不和](https://discord.gg/vYU9h56kAX)または[サポートチケットを作成する](https://support.pingcap.com/)について質問してください。

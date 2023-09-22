@@ -8,6 +8,24 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 このページには 2023 年[TiDB Cloud](https://www.pingcap.com/tidb-cloud/)のリリースノートが記載されています。
 
+## 2023 年 9 月 19 日 {#september-19-2023}
+
+**一般的な変更点**
+
+-   [TiDB専用](/tidb-cloud/select-cluster-tier.md#tidb-dedicated)クラスターから 2 つの vCPU TiDB ノードと TiKV ノードを削除します。
+
+    2 vCPU オプションは、 **[クラスタの作成]**ページまたは [**クラスタの変更]**ページでは使用できなくなりました。
+
+-   JavaScript のリリース[TiDB Cloudサーバーレス ドライバー (ベータ版)](/tidb-cloud/serverless-driver.md) 。
+
+    JavaScript 用TiDB Cloudサーバーレス ドライバーを使用すると、HTTPS 経由で[TiDB サーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-serverless)クラスターに接続できます。これは、TCP 接続が[バーセルエッジ機能](https://vercel.com/docs/functions/edge-functions)や[Cloudflare ワーカー](https://workers.cloudflare.com/)などに制限されているエッジ環境で特に役立ちます。
+
+    詳細については、 [TiDB Cloudサーバーレス ドライバー (ベータ版)](/tidb-cloud/serverless-driver.md)を参照してください。
+
+**コンソールの変更**
+
+-   [TiDB サーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-serverless)クラスターの場合、 **「今月の使用量」**パネルで、または支出制限の設定中にコストの見積もりを取得できます。
+
 ## 2023 年 9 月 5 日 {#september-5-2023}
 
 **一般的な変更点**
@@ -206,7 +224,7 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 -   [TiDB サーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-serverless)が一般提供になりました。
 
--   TiDB Bot (ベータ版) は、多言語サポート、年中無休のリアルタイム応答、統合されたドキュメント アクセスを提供する OpenAI 搭載チャットボットです。
+-   TiDB Bot (ベータ) は、多言語サポート、24 時間年中無休のリアルタイム応答、統合されたドキュメント アクセスを提供する OpenAI 搭載チャットボットです。
 
     TiDB ボットには次の利点があります。
 
@@ -274,7 +292,7 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
     この機能強化により、TiDB 専用クラスターのデータstorage容量が増加し、ワークロードのスケーリング効率が向上し、増大するデータ要件に対応できます。
 
-    詳細については、 [クラスターのサイズを調整する](/tidb-cloud/size-your-cluster.md)を参照してください。
+    詳細については、 [クラスターのサイズを設定する](/tidb-cloud/size-your-cluster.md)を参照してください。
 
 -   [モニタリングメトリクスの保持期間](/tidb-cloud/built-in-monitoring.md#metrics-retention-policy) for [TiDB サーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-serverless)クラスターを 3 日間から 7 日間に延長します。
 
@@ -545,7 +563,7 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 -   [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-dedicated)クラスターの[アラート](/tidb-cloud/monitor-built-in-alerting.md)ページを導入します。このページには、各Dedicated Tierクラスターのアクティブなアラートとクローズされたアラートの両方がリストされます。
 
-    **[アラート]**ページには次の情報が表示されます。
+    **[アラート]**ページには次の内容が表示されます。
 
     -   直感的でユーザーフレンドリーなユーザーインターフェイス。アラート通知メールを購読していない場合でも、このページでクラスターのアラートを表示できます。
     -   高度なフィルタリング オプションにより、重大度、ステータス、その他の属性に基づいてアラートを迅速に検索して並べ替えることができます。また、過去 7 日間の履歴データを表示できるため、アラート履歴の追跡が容易になります。
@@ -835,7 +853,7 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 -   AWS でホストされ、2022 年 12 月 31 日以降に作成された TiDB 専用クラスターの**ノード サイズ (vCPU + RAM)**を増やすことで、TiDB、TiKV、およびTiFlashノードのスケールアップをサポートします。
 
-    ノード サイズを[TiDB Cloudコンソールの使用](/tidb-cloud/scale-tidb-cluster.md#change-vcpu-and-ram)または[TiDB CloudAPI (ベータ版) を使用する](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/UpdateCluster)に増やすことができます。
+    ノード サイズを[TiDB Cloudコンソールを使用する](/tidb-cloud/scale-tidb-cluster.md#change-vcpu-and-ram)または[TiDB CloudAPI (ベータ版) を使用する](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/UpdateCluster)に増やすことができます。
 
 -   [**監視**](/tidb-cloud/built-in-monitoring.md)ページのメトリクスの保持期間を 2 日に延長します。
 

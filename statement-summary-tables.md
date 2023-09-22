@@ -16,9 +16,11 @@ SQL パフォーマンスの問題をより適切に処理するために、MySQ
 -   [`statements_summary_evicted`](#statements_summary_evicted)
 
 <CustomContent platform="tidb-cloud">
-  > **注記：**
-  >
-  > 次のテーブルは[TiDB サーバーレスクラスター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless)では使用できませ`cluster_statements_summary_history` : `statements_summary` 、および`cluster_statements_summary` `statements_summary_history`
+
+> **注記：**
+>
+> 次のテーブルは[TiDB サーバーレスクラスター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless)では使用できませ`cluster_statements_summary_history` : `statements_summary` 、および`cluster_statements_summary` `statements_summary_history`
+
 </CustomContent>
 
 このドキュメントでは、これらのテーブルについて詳しく説明し、それらを使用して SQL パフォーマンスの問題をトラブルシューティングする方法を紹介します。
@@ -48,38 +50,36 @@ select * from employee where id in (...) and salary between ? and ?;
 
 以下は、 `statements_summary`をクエリした場合の出力例です。
 
-```
-   SUMMARY_BEGIN_TIME: 2020-01-02 11:00:00
-     SUMMARY_END_TIME: 2020-01-02 11:30:00
-            STMT_TYPE: Select
-          SCHEMA_NAME: test
-               DIGEST: 0611cc2fe792f8c146cc97d39b31d9562014cf15f8d41f23a4938ca341f54182
-          DIGEST_TEXT: select * from employee where id = ?
-          TABLE_NAMES: test.employee
-          INDEX_NAMES: NULL
-          SAMPLE_USER: root
-           EXEC_COUNT: 3
-          SUM_LATENCY: 1035161
-          MAX_LATENCY: 399594
-          MIN_LATENCY: 301353
-          AVG_LATENCY: 345053
-    AVG_PARSE_LATENCY: 57000
-    MAX_PARSE_LATENCY: 57000
-  AVG_COMPILE_LATENCY: 175458
-  MAX_COMPILE_LATENCY: 175458
-  ...........
-              AVG_MEM: 103
-              MAX_MEM: 103
-              AVG_DISK: 65535
-              MAX_DISK: 65535
-    AVG_AFFECTED_ROWS: 0
-           FIRST_SEEN: 2020-01-02 11:12:54
-            LAST_SEEN: 2020-01-02 11:25:24
-    QUERY_SAMPLE_TEXT: select * from employee where id=3100
-     PREV_SAMPLE_TEXT:
-          PLAN_DIGEST: f415b8d52640b535b9b12a9c148a8630d2c6d59e419aad29397842e32e8e5de3
-                 PLAN:  Point_Get_1     root    1       table:employee, handle:3100
-```
+       SUMMARY_BEGIN_TIME: 2020-01-02 11:00:00
+         SUMMARY_END_TIME: 2020-01-02 11:30:00
+                STMT_TYPE: Select
+              SCHEMA_NAME: test
+                   DIGEST: 0611cc2fe792f8c146cc97d39b31d9562014cf15f8d41f23a4938ca341f54182
+              DIGEST_TEXT: select * from employee where id = ?
+              TABLE_NAMES: test.employee
+              INDEX_NAMES: NULL
+              SAMPLE_USER: root
+               EXEC_COUNT: 3
+              SUM_LATENCY: 1035161
+              MAX_LATENCY: 399594
+              MIN_LATENCY: 301353
+              AVG_LATENCY: 345053
+        AVG_PARSE_LATENCY: 57000
+        MAX_PARSE_LATENCY: 57000
+      AVG_COMPILE_LATENCY: 175458
+      MAX_COMPILE_LATENCY: 175458
+      ...........
+                  AVG_MEM: 103
+                  MAX_MEM: 103
+                  AVG_DISK: 65535
+                  MAX_DISK: 65535
+        AVG_AFFECTED_ROWS: 0
+               FIRST_SEEN: 2020-01-02 11:12:54
+                LAST_SEEN: 2020-01-02 11:25:24
+        QUERY_SAMPLE_TEXT: select * from employee where id=3100
+         PREV_SAMPLE_TEXT:
+              PLAN_DIGEST: f415b8d52640b535b9b12a9c148a8630d2c6d59e419aad29397842e32e8e5de3
+                     PLAN:  Point_Get_1     root    1       table:employee, handle:3100
 
 > **注記：**
 >
@@ -176,20 +176,24 @@ select * from information_schema.statements_summary_evicted;
 2 row in set (0.001 sec)
 ```
 
-上記の結果から、最大 59 個の SQL カテゴリが削除されていることがわかります。これは、ステートメント サマリーの適切なサイズが 59 レコードであることを示しています。
+前述の結果から、最大 59 の SQL カテゴリが削除されることがわかります。この場合、 `statement_summary`テーブルのサイズを少なくとも 59 レコード増やすことをお勧めします。これは、サイズを少なくとも 3059 レコードに増やすことを意味します。
 
 ## 制限 {#limitation}
 
 デフォルトでは、ステートメント概要テーブルはメモリに保存されます。 TiDBサーバーが再起動すると、すべてのデータが失われます。
 
 <CustomContent platform="tidb">
-  この問題に対処するために、TiDB v6.6.0 では実験的に[ステートメントの概要の永続性](#persist-statements-summary)機能が導入されていますが、この機能はデフォルトでは無効になっています。この機能を有効にすると、履歴データはメモリに保存されなくなり、ディスクに直接書き込まれます。このようにして、TiDBサーバーが再起動しても履歴データは引き続き使用できます。
+
+この問題に対処するために、TiDB v6.6.0 では実験的に[ステートメントの概要の永続性](#persist-statements-summary)機能が導入されていますが、この機能はデフォルトでは無効になっています。この機能を有効にすると、履歴データはメモリに保存されなくなり、ディスクに直接書き込まれます。このようにして、TiDBサーバーが再起動しても履歴データは引き続き使用できます。
+
 </CustomContent>
 
 ## 永続化ステートメントの概要 {#persist-statements-summary}
 
 <CustomContent platform="tidb-cloud">
-  このセクションは、TiDB セルフホスト型にのみ適用されます。 TiDB Cloudの場合、 `tidb_stmt_summary_enable_persistent`パラメーターの値はデフォルトで`false`であり、動的変更はサポートされていません。
+
+このセクションは、TiDB セルフホスト型にのみ適用されます。 TiDB Cloudの場合、 `tidb_stmt_summary_enable_persistent`パラメーターの値はデフォルトで`false`であり、動的変更はサポートされていません。
+
 </CustomContent>
 
 > **警告：**
@@ -197,11 +201,15 @@ select * from information_schema.statements_summary_evicted;
 > ステートメントの概要の永続化は実験的機能です。本番環境で使用することはお勧めできません。この機能は予告なく変更または削除される場合があります。バグを見つけた場合は、GitHub で[問題](https://github.com/pingcap/tidb/issues)を報告できます。
 
 <CustomContent platform="tidb">
-  [制限](#limitation)セクションで説明したように、ステートメント概要テーブルはデフォルトでメモリに保存されます。 TiDBサーバーが再起動すると、すべてのステートメントの概要が失われます。 v6.6.0 以降、TiDB は実験的に構成項目[`tidb_stmt_summary_enable_persistent`](/tidb-configuration-file.md#tidb_stmt_summary_enable_persistent-new-in-v660)を提供し、ユーザーがステートメントの概要の永続性を有効または無効にできるようにします。
+
+[制限](#limitation)セクションで説明したように、ステートメント概要テーブルはデフォルトでメモリに保存されます。 TiDBサーバーが再起動すると、すべてのステートメントの概要が失われます。 v6.6.0 以降、TiDB は実験的に構成項目[`tidb_stmt_summary_enable_persistent`](/tidb-configuration-file.md#tidb_stmt_summary_enable_persistent-new-in-v660)を提供し、ユーザーがステートメントの概要の永続性を有効または無効にできるようにします。
+
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
-  [制限](#limitation)セクションで説明したように、ステートメント概要テーブルはデフォルトでメモリに保存されます。 TiDBサーバーが再起動すると、すべてのステートメントの概要が失われます。 v6.6.0 以降、TiDB は実験的に構成項目`tidb_stmt_summary_enable_persistent`を提供し、ユーザーがステートメントの概要の永続性を有効または無効にできるようにします。
+
+[制限](#limitation)セクションで説明したように、ステートメント概要テーブルはデフォルトでメモリに保存されます。 TiDBサーバーが再起動すると、すべてのステートメントの概要が失われます。 v6.6.0 以降、TiDB は実験的に構成項目`tidb_stmt_summary_enable_persistent`を提供し、ユーザーがステートメントの概要の永続性を有効または無効にできるようにします。
+
 </CustomContent>
 
 ステートメントの概要の永続性を有効にするには、次の構成項目を TiDB 構成ファイルに追加できます。
@@ -219,10 +227,12 @@ tidb_stmt_summary_enable_persistent = true
 ステートメントの概要の永続性が有効になった後、メモリには現在のリアルタイム データのみが保持され、履歴データは保持されません。リアルタイム データが履歴データとして更新されると、履歴データは[パラメータ設定](#parameter-configuration)セクションで説明した`tidb_stmt_summary_refresh_interval`の間隔でディスクに書き込まれます。 `statements_summary_history`または`cluster_statements_summary_history`テーブルに対するクエリは、メモリ内データとディスク上のデータの両方を組み合わせた結果を返します。
 
 <CustomContent platform="tidb">
-  > **注記：**
-  >
-  > -   ステートメントの概要の永続化が有効になっている場合、メモリに履歴データが保持されないため、 [パラメータ設定](#parameter-configuration)セクションで説明されている`tidb_stmt_summary_history_size`設定は有効になりません。代わりに、永続化のための履歴データの保持期間とサイズを制御するために、 [`tidb_stmt_summary_file_max_days`](/tidb-configuration-file.md#tidb_stmt_summary_file_max_days-new-in-v660) 、 [`tidb_stmt_summary_file_max_size`](/tidb-configuration-file.md#tidb_stmt_summary_file_max_size-new-in-v660) 、および[`tidb_stmt_summary_file_max_backups`](/tidb-configuration-file.md#tidb_stmt_summary_file_max_backups-new-in-v660)の 3 つの構成が使用されます。
-  > -   `tidb_stmt_summary_refresh_interval`の値が小さいほど、より多くの即時データがディスクに書き込まれます。ただし、これは、より多くの冗長データがディスクに書き込まれることも意味します。
+
+> **注記：**
+>
+> -   ステートメントの概要の永続化が有効になっている場合、メモリに履歴データが保持されないため、 [パラメータ設定](#parameter-configuration)セクションで説明されている`tidb_stmt_summary_history_size`設定は有効になりません。代わりに、永続化のための履歴データの保持期間とサイズを制御するために、 [`tidb_stmt_summary_file_max_days`](/tidb-configuration-file.md#tidb_stmt_summary_file_max_days-new-in-v660) 、 [`tidb_stmt_summary_file_max_size`](/tidb-configuration-file.md#tidb_stmt_summary_file_max_size-new-in-v660) 、および[`tidb_stmt_summary_file_max_backups`](/tidb-configuration-file.md#tidb_stmt_summary_file_max_backups-new-in-v660)の 3 つの構成が使用されます。
+> -   `tidb_stmt_summary_refresh_interval`の値が小さいほど、より多くの即時データがディスクに書き込まれます。ただし、これは、より多くの冗長データがディスクに書き込まれることも意味します。
+
 </CustomContent>
 
 ## トラブルシューティングの例 {#troubleshooting-examples}
@@ -288,7 +298,7 @@ SELECT sum_latency, avg_latency, exec_count, query_sample_text
 -   `DIGEST` : このカテゴリの SQL ステートメントのダイジェスト。
 -   `DIGEST_TEXT` : 正規化された SQL ステートメント。
 -   `QUERY_SAMPLE_TEXT` : SQL カテゴリの元の SQL ステートメント。元のステートメントは 1 つだけ採用されます。
--   `TABLE_NAMES` : SQL ステートメントに含まれるすべてのテーブル。複数のテーブルがある場合は、それぞれをカンマで区切ります。
+-   `TABLE_NAMES` : SQL ステートメントに関係するすべてのテーブル。複数のテーブルがある場合は、それぞれをカンマで区切ります。
 -   `INDEX_NAMES` : SQL ステートメントで使用されるすべての SQL インデックス。複数のインデックスがある場合は、それぞれをカンマで区切ります。
 -   `SAMPLE_USER` : このカテゴリの SQL ステートメントを実行するユーザー。 1 人のユーザーのみが取得されます。
 -   `PLAN_DIGEST` : 実行計画のダイジェスト。

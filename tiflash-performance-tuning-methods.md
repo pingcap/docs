@@ -19,7 +19,7 @@ summary: Introduces the TiFlash metrics on the Performance Overview dashboard to
 
 このTiFlashクラスターは 2 つのノードで構成され、各ノードは 16 コアと 48 GB のメモリで構成されています。 CH-benCHmark ワークロード中、CPU 使用率は最大 1500%、メモリ使用率は最大 20 GB、IO 使用率は最大 91% に達する可能性があります。これらのメトリクスは、 TiFlashノードのリソースが飽和に近づいていることを示しています。
 
-![CH-TiFlash-MPP](/media/performance/tiflash/ch-2tiflash-op.png)
+![CH-TiFlash-MPP](/media/performance/tiflash/tiflash-resource-usage.png)
 
 ## TiFlashパフォーマンスの主要な指標 {#key-metrics-for-tiflash-performance}
 
