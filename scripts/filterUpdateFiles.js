@@ -80,7 +80,7 @@ const downloadFile = async (url, targetPath) => {
 };
 
 const deleteFile = (targetFile) => {
-  fs.rmSync(targetFile);
+  fs.rmSync(targetFile, { force: true });
 };
 
 const handleFiles = async (fileList = []) => {
