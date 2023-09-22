@@ -171,7 +171,7 @@ By default, TiUP deploys TiFlash in the coupled storage and computation architec
 
 ## Restrictions
 
-- TiFlash does not support in-place switching between the **disaggregated storage and compute architecture** and the **coupled storage and compute architecture**. Before switching architectures, you must remove all existing coupled architecture TiFlash nodes.
+- TiFlash does not support in-place switching between the **disaggregated storage and compute architecture** and the **coupled storage and compute architecture**. Before switching to the disaggregated architecture, you must remove all existing TiFlash nodes deployed using the coupled architecture.
 - After the migration from one architecture to another, all TiFlash data needs to be replicated again.
 - Only TiFlash nodes with the same architecture are allowed in the same TiDB cluster. Two architectures cannot coexist in one cluster.
 - The disaggregated storage and compute architecture only supports object storage using the S3 API, while the coupled storage and compute architecture only supports local storage.
