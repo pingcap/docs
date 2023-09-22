@@ -33,9 +33,27 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.4/quick-start-with-
 
     For more information, see [documentation](/partitioned-raft-kv.md).
 
+* TiFlash supports the disaggregated storage and compute architecture (GA) [#6882](https://github.com/pingcap/tiflash/issues/6882) @[JaySon-Huang](https://github.com/JaySon-Huang) @[JinheLin](https://github.com/JinheLin) @[breezewish](https://github.com/breezewish) @[lidezhu](https://github.com/lidezhu) @[CalvinNeo](https://github.com/CalvinNeo) **tw@qiancai** <!--1360-->
+
+    In v7.0.0, TiFlash introduces the disaggregated storage and compute architecture as an experimental feature. Following a series of improvements, the disaggregated storage and compute architecture for TiFlash becomes GA starting from v7.4.0.
+
+    In this architecture, TiFlash nodes are divided into two types (Compute Nodes and Write Nodes) and support object storage that is compatible with S3 API. Both types of nodes can be independently scaled for computing or storage capacities. In the disaggregated storage and compute architecture, you can use TiFlash in the same way as the coupled storage and compute architecture, such as creating TiFlash replicas, querying data, specifying optimizer hints.
+
+    Note that the TiFlash **disaggregated storage and compute architecture** and **coupled storage and compute architecture** cannot be used in the same cluster or converted to each other. You can configure which architecture to use when you deploy TiFlash.
+
+    For more information, see [documentation](/tiflash/tiflash-disaggregated-and-s3.md).
+
 ### Performance
 
-- note 1
+* Support pushing down the `MEMBER OF` JSON [operator](/functions-and-operators/expressions-pushed-down.md) to TiKV [#46307](https://github.com/pingcap/tidb/issues/46307) @[wshwsh12](https://github.com/wshwsh12)  **tw@qiancai** <!--1551-->
+
+    * `value MEMBER OF(json_array)`
+
+    For more information, see [documentation](/functions-and-operators/expressions-pushed-down.md).
+
+* Support pushing down window functions with any frame definition type to TiFlash [#7376](https://github.com/pingcap/tiflash/issues/7376) @[xzhangxian1008](https://github.com/xzhangxian1008)  **tw@qiancai** <!--1381-->
+
+    Before v7.4.0, TiFlash does not support window functions containing `PRECEDING` or `FOLLOWING`, and all window functions containing such frame definitions cannot not be pushed down to TiFlash. Starting from v7.4.0, TiFlash supports frame definitions of all window functions. This feature is enabled automatically, and window functions containing frame definitions will be automatically pushed down to TiFlash for execution when the related requirements are met.
 
 * Introduce cloud storage-based global sort capability to improve the performance and stability of `ADD INDEX` and `IMPORT INTO` tasks in parallel execution [#45719](https://github.com/pingcap/tidb/issues/45719) @[wjhuang2016](https://github.com/wjhuang2016) **tw@ran-huang** <!--1456-->
 
@@ -62,6 +80,14 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.4/quick-start-with-
     For more information, see [documentation](/sql-non-prepared-plan-cache.md).
 
 ### Reliability
+
+* TiFlash supports query-level data spilling [#7738](https://github.com/pingcap/tiflash/issues/7738) @[windtalker](https://github.com/windtalker)  **tw@qiancai** <!--1493-->
+
+    Starting from v7.0.0, TiFlash supports controlling data spilling for three operators: `GROUP BY`, `ORDER BY`, and `JOIN`. This feature prevents issues such as query termination or system crashes when the data size exceeds the available memory. However, managing spilling for each operator individually can be cumbersome and ineffective for overall resource control.
+
+    In v7.4.0, TiFlash introduces the query-level data spilling. By setting the memory limit for a query on a TiFlash node using [`tiflash_mem_quota_query_per_node`](/system-variables.md#tiflash_mem_quota_query_per_node-new-in-v740) and the memory ratio that triggers data spilling using [`tiflash_query_spill_ratio`](/system-variables.md#tiflash_query_spill_ratio-new-in-v740), you can conveniently manage the memory usage of a query and have better control over TiFlash memory resources.
+
+    For more information, see [documentation](/tiflash/tiflash-spill-disk.md).
 
 * Introduce a configurable TiKV read timeout [#45380](https://github.com/pingcap/tidb/issues/45380) @[crazycs520](https://github.com/crazycs520) **tw@hfxsd** <!--1560-->
 
@@ -122,12 +148,19 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.4/quick-start-with-
 
     For details, see [user document](/statistics.md#锁定统计信息)。
 
-
 ### SQL
 
-- note 1
+* TiDB fully supports partition type management [#42728](https://github.com/pingcap/tidb/issues/42728) @[mjonss](https://github.com/mjonss) **tw@qiancai** <!--1370-->
 
-- note 2
+    Before v7.4.0,  partition types of partitioned tables in TiDB cannot be modified. Starting from v7.4.0, TiDB supports modifing partitioned tables into non-partitioned tables or non-partitioned tables into partitioned tables, and supports changing partition types. Hence, now you can flexibly adjust the partition types and numbers in a partitioned table. For example, you can use the `ALTER TABLE t PARTITION BY ...` statement to modify the partition type.
+
+    For more information, see [documentation](/partitioned-table.md#convert-a-partitioned-table-to-a-non-partitioned-table).
+
+* TiDB supports using the `ROLLUP` modifier and the `GROUPING` function [#44487](https://github.com/pingcap/tidb/issues/44487) @[AilinKid](https://github.com/AilinKid) **tw@qiancai** <!--1287-->
+
+    The `WITH ROLLUP` modifier and `GROUPING` function are commonly used features in data analysis for multi-dimensional data summarization. Starting from v7.4.0, you can use the `WITH ROLLUP` modifier and `GROUPING` function in the `GROUP BY` clause. For example, you can use the `WITH ROLLUP` modifier in the `SELECT ... FROM ... GROUP BY ... WITH ROLLUP` syntax.
+
+   For more information, see [documentation](functions-and-operators/group-by-modifier.md).
 
 ### DB operations
 
@@ -172,7 +205,18 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.4/quick-start-with-
     With the introduction of real-time updating of checkpoint for continuous data validation, you can now provide the binlog position from the upstream database. Once the continuous validation program detects this binlog position in memory, it will immediately refresh the checkpoint instead of refreshing it every few minutes. Therefore, you can quickly perform cut-off operations based on this immediately updated checkpoint.
 
     For details, see [user document](链接)。
-    
+
+* Enhance the `IMPORT INTO` feature and support global sorting of imported data via cloud storage (experimental) [#46704](https://github.com/pingcap/tidb/issues/46704) @[D3Hunter](https://github.com/D3Hunter) **tw@qiancai** <!--1494-->
+
+    Starting from v7.4.0, you can add the `CLOUD_STORAGE_URI` option in the `IMPORT INTO` statement to enable the [global sorting](/tidb-global-sort.md) feature, which helps boost import performance and stability. In the `CLOUD_STORAGE_URI` option, you can specify a cloud storage address for the encoded data.
+
+    In addition, in v7.4.0, the `IMPORT INTO` feature introduces the following functionalities:
+
+    - Support configuring the `Split_File` option, which allows you to split a large CSV file into multiple 256 MiB small CSV files for parallel processing, improving import performance.
+    - Support importing compressed CSV and SQL files. The supported compression formats include `.gzip`, `.gz`, `.zstd`, `.zst`, and `.snappy`.
+
+    For more information, see [user document](sql-statements/sql-statement-import-into.md).
+
 * Dumpling supports the user-defined terminator when exporting data to CSV files [#issue](https:// ) @[GMHDBJD](https://github.com/GMHDBJD) **tw@hfxsd** <!--1571-->
 
     Prior to v7.4.0, when Dumpling exported data to a CSV file, the default terminator is "\r\n", which could not be parsed by some downstream systems that could only parse the "\n" terminator , or had to be converted by a third-party tool to parse the CSV file. 
