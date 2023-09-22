@@ -59,7 +59,7 @@ This method mainly estimates capacity based on the current cluster configuration
 - `OLTP_WRITE_ONLY`: applies to workloads with heavy data write. It is estimated based on a workload model similar to `sysbench oltp_write_only`.
 - `OLTP_READ_WRITE`: applies to workloads with even data read and write. It is estimated based on a workload model similar to `sysbench oltp_read_write`.
 - `OLTP_READ_ONLY`: applies to workloads with heavy data read. It is estimated based on a workload model similar to `sysbench oltp_read_only`.
-- `TPCH_10`: AP (Analytical Processing) queries for load forecasting based on 22 queries from `TPCH-10G`.
+- `TPCH_10`: AP queries for load forecasting based on 22 queries from `TPCH-10G`.
 
 > **Note:**
 >
