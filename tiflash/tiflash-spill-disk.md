@@ -151,4 +151,5 @@ This example constructs a SQL statement that consumes a lot of memory to demonst
 * Even when query-level spilling is configured and a query contains operators that support spilling, the query might still return an error due to exceeding memory thresholds in either of the following scenarios:
     - Other non-spilling operators in the query consume too much memory.
     - The spilling operators do not spill to disk timely.
+
   To address situations where spilling operators do not spill to disk in time, you can try reducing [`tiflash_query_spill_ratio`](/system-variables.md#tiflash_query_spill_ratio-introduced-in-v740) to avoid memory threshold errors.
