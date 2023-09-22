@@ -23,9 +23,9 @@ The TiDB resource control feature provides two layers of resource management cap
 
 Starting from v7.4.0, TiDB's resource management feature extends its support to control TiFlash resources. The principles behind TiFlash resource control and TiDB flow control and TiKV scheduling are similar:
 
-- **TiFlash Resource Control:** Leveraging the [TiFlash Pipeline Model execution model](/tiflash/tiflash-pipeline-model.md), it can precisely monitor the CPU consumption for different queries and convert it into [Request Units (RU)](#what-is-request-unit-ru) for deduction. Traffic control is implemented using a token bucket algorithm.
+- TiFlash Resource Control: Leveraging the [TiFlash Pipeline Model execution model](/tiflash/tiflash-pipeline-model.md), it can precisely monitor the CPU consumption for different queries and convert it into [Request Units (RU)](#What-is-Request-Unit-(RU)) for deduction. Traffic control is implemented using a token bucket algorithm.
 
-- **TiFlash Scheduling:** When system resources become scarce, it schedules pipeline tasks among multiple resource groups based on their priorities. The specific logic involves assessing the resource group's priority `PRIORITY`, then considering CPU usage, and combining it with `RU_PER_SEC`. The final outcome is that if `rg1` and `rg2` have the same `PRIORITY` but `rg2` has double the `RU_PER_SEC` of `rg1`, then `rg2` can use twice the CPU time compared to `rg1`.
+- TiFlash Scheduling: When system resources become scarce, it schedules pipeline tasks among multiple resource groups based on their priorities. The specific logic involves assessing the resource group's priority `PRIORITY`, then considering CPU usage, and combining it with `RU_PER_SEC`. The final outcome is that if `rg1` and `rg2` have the same `PRIORITY` but `rg2` has double the `RU_PER_SEC` of `rg1`, then `rg2` can use twice the CPU time compared to `rg1`.
 
 ## Scenarios for resource control
 
@@ -116,9 +116,9 @@ The resource control feature introduces the following system variables or parame
 
 </CustomContent>
 
-<CustomContent platform="tidb-cloud">
+<CustomContent platform="tiflash">
 
-* TiFlash: Control the enabling of TiFlash resource control by configuring the global variable [`tidb_enable_resource_control`](/system-variables.md#tidb_enable_resource_control-introduced-since-v660) and the TiFlash configuration option [`enable_resource_control`](/tiflash/tiflash-configuration.md#configuration-file-tiflashtoml) (introduced since v7.4.0).
+* TiFlash: Control the enabling of TiFlash resource control by configuring the global variable [`tidb_enable_resource_control`](/system-variables.md#tidb_enable_resource_control-introduced-since-v660) and the TiFlash configuration option [`enable_resource_control`](/tiflash/tiflash-configuration.md#configuration-the-tiflashtoml-file) (introduced since v7.4.0).
 
 </CustomContent>
 
@@ -411,7 +411,7 @@ You can get more information about runaway queries from the following system tab
 
 <CustomContent platform="tidb-cloud">
 
-To disable TiFlash resource control, set the TiFlash config [`enable_resource_control`](/tiflash/tiflash-configuration.md#配置文件-tiflashtoml) to false.
+To disable TiFlash resource control, set the TiFlash config [`enable_resource_control`](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file) to false.
 
 </CustomContent>
 
