@@ -4,15 +4,11 @@ title: tiup dm import
 
 # tiup dm import <span class="version-mark">DM v1.0 のアップグレード専用</span> {#tiup-dm-import-span-class-version-mark-only-for-upgrading-dm-v1-0-span}
 
-<Note>
-
-このコマンドは、DM クラスターを v1.0 から v2.0 以降のバージョンにアップグレードする場合にのみ使用されます。
-
-</Note>
+<Note>このコマンドは、DM クラスターを v1.0 から v2.0 以降のバージョンにアップグレードする場合にのみ使用されます。</Note>
 
 DM v1.0 では、クラスターは基本的に TiDB Ansible を使用してデプロイされます。 TiUP DM には、v1.0 クラスターをインポートし、クラスターを DM v2.0 に再デプロイするための`import`コマンドが用意されています。
 
-> **注記：**
+> **ノート：**
 >
 > -   このコマンドは、DM v1.0 クラスターからの DM Portal コンポーネントのインポートをサポートしていません。
 > -   クラスターをインポートする前に、まず元のクラスターの実行を停止します。

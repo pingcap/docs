@@ -46,7 +46,7 @@ BACKUP DATABASE * TO 's3://bucket-name/prefix' SEND_CREDENTIALS_TO_TIKV = FALSE;
 
     -   `access-key` : アクセスキーを指定します。
     -   `secret-access-key` : シークレットアクセスキーを指定します。
-    -   `session-token` : 一時セッショントークンを指定します。 BR はまだこのパラメータをサポートしていません。
+    -   `session-token` : セッショントークンを指定します。
     -   `use-accelerate-endpoint` : Amazon S3 で加速エンドポイントを使用するかどうかを指定します (デフォルトは`false` )。
     -   `endpoint` : S3 互換サービスのカスタム エンドポイントの URL を指定します (例: `<https://s3.example.com/>` )。
     -   `force-path-style` : 仮想ホスト型アクセスではなく、パス型アクセスを使用します (デフォルトは`true` )。
@@ -161,7 +161,7 @@ BACKUP DATABASE * TO 's3://bucket-name/prefix' SEND_CREDENTIALS_TO_TIKV = FALSE;
     URIにアクセスキーとシークレットアクセスキーを指定すると、指定したアクセスキーとシークレットアクセスキーを使用して認証が行われます。 URI でキーを指定する以外に、次のメソッドもサポートされています。
 
     -   BR は環境変数`$AWS_ACCESS_KEY_ID`と`$AWS_SECRET_ACCESS_KEY`を読み取ります。
-    -   BR は環境変数`$AWS_ACCESS_KEY`および`$AWS_SECRET_KEY`を読み取ります。
+    -   BR は環境変数`$AWS_ACCESS_KEY`と`$AWS_SECRET_KEY`を読み取ります。
     -   BR は、環境変数`$AWS_SHARED_CREDENTIALS_FILE`で指定されたパスにある共有資格情報ファイルを読み取ります。
     -   BR は、 `~/.aws/credentials`パスの共有資格情報ファイルを読み取ります。
 
@@ -196,9 +196,9 @@ BACKUP DATABASE * TO 's3://bucket-name/prefix' SEND_CREDENTIALS_TO_TIKV = FALSE;
 
     -   TiUPを使用してクラスターが起動されると、TiKV は systemd サービスを使用します。次の例は、TiKV 用に前述の 3 つの環境変数を構成する方法を示しています。
 
-        > **注記：**
+        > **ノート：**
         >
-        > この方法を使用する場合は、手順 3 で TiKV を再起動する必要があります。クラスターを再起動できない場合は、**方法 1: バックアップと復元のアクセス キーを指定するを**使用します。
+        > この方法を使用する場合は、手順 3 で TiKV を再起動する必要があります。クラスターを再起動できない場合は、**方法 1: バックアップと復元用のアクセス キーを指定するを**使用します。
 
         1.  このノードの TiKV ポートが`24000` 、つまり systemd サービスの名前が`tikv-24000`であるとします。
 
@@ -208,10 +208,12 @@ BACKUP DATABASE * TO 's3://bucket-name/prefix' SEND_CREDENTIALS_TO_TIKV = FALSE;
 
         2.  TiKV 構成ファイルを編集して、3 つの環境変数を構成します。
 
-                [Service]
-                Environment="AZURE_CLIENT_ID=aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
-                Environment="AZURE_TENANT_ID=aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
-                Environment="AZURE_CLIENT_SECRET=aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            ```
+            [Service]
+            Environment="AZURE_CLIENT_ID=aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+            Environment="AZURE_TENANT_ID=aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+            Environment="AZURE_CLIENT_SECRET=aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            ```
 
         3.  構成をリロードし、TiKV を再起動します。
 

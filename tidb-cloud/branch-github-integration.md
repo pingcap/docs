@@ -5,11 +5,11 @@ summary: Learn how to integrate the TiDB Serverless branching feature with GitHu
 
 # TiDB サーバーレス ブランチング (ベータ版) を GitHub と統合する {#integrate-tidb-serverless-branching-beta-with-github}
 
-> **注記：**
+> **ノート：**
 >
 > 統合は[TiDB サーバーレス分岐](/tidb-cloud/branch-overview.md)に基づいて構築されます。このドキュメントを読む前に、TiDB サーバーレス分岐について十分に理解してください。
 
-アプリケーション開発に GitHub を使用する場合、TiDB サーバーレス ブランチを GitHub CI/CD パイプラインに統合できます。これにより、本番データベースに影響を与えることなく、ブランチを使用してプル リクエストを自動的にテストできます。
+アプリケーション開発に GitHub を使用する場合は、TiDB サーバーレス ブランチを GitHub CI/CD パイプラインに統合できます。これにより、本番データベースに影響を与えることなく、ブランチを使用してプル リクエストを自動的にテストできます。
 
 統合プロセスでは、 [TiDB Cloudブランチング](https://github.com/apps/tidb-cloud-branching) GitHub アプリをインストールするように求められます。このアプリは、GitHub リポジトリ内のプル リクエストに従って TiDB サーバーレス ブランチを自動的に管理できます。たとえば、プル リクエストを作成すると、アプリは TiDB サーバーレス クラスターに対応するブランチを作成します。そこでは、本番データベースに影響を与えることなく、独立して新機能やバグ修正に取り組むことができます。
 
@@ -148,9 +148,6 @@ github:
             echo "The user is ${{ steps.wait-for-branch.outputs.user }}"
             echo "The password is ${{ steps.wait-for-branch.outputs.password }}"
     ```
-
-    -   `token` : GitHub は自動的に[GITHUB_TOKEN](https://docs.github.com/en/actions/security-guides/automatic-token-authentication)シークレットを作成します。直接使用できます。
-    -   `public-key`と`private-key` : TiDB Cloud[APIキー](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication/API-Key-Management) 。
 
 3.  テストコードを変更します。
 

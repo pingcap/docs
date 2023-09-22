@@ -1,7 +1,3 @@
-<!-- markdownlint-disable MD007 -->
-
-<!-- markdownlint-disable MD041 -->
-
 -   [ドキュメントホーム](https://docs.pingcap.com/)
 -   TiDBについて
     -   [TiDB の紹介](/overview.md)
@@ -42,12 +38,8 @@
             -   [ノードmysql2](/develop/dev-guide-sample-application-nodejs-mysql2.md)
             -   [mysql.js](/develop/dev-guide-sample-application-nodejs-mysqljs.md)
             -   [プリズマ](/develop/dev-guide-sample-application-nodejs-prisma.md)
-            -   [TypeORM](/develop/dev-guide-sample-application-nodejs-typeorm.md)
             -   [Next.js](/develop/dev-guide-sample-application-nextjs.md)
             -   [AWSラムダ](/develop/dev-guide-sample-application-aws-lambda.md)
-        -   ルビー
-            -   [mysql2](/develop/dev-guide-sample-application-ruby-mysql2.md)
-            -   [レール](/develop/dev-guide-sample-application-ruby-rails.md)
     -   TiDB に接続する
         -   [Driverまたは ORM を選択してください](/develop/dev-guide-choose-driver-or-orm.md)
         -   [TiDB に接続する](/develop/dev-guide-connect-to-tidb.md)
@@ -109,10 +101,10 @@
     -   [環境コンフィグレーションチェックリスト](/check-before-deployment.md)
     -   クラスタトポロジの計画
         -   [最小限のトポロジー](/minimal-deployment-topology.md)
-        -   [TiFlashトポロジー](/tiflash-deployment-topology.md)
+        -   [TiFlashトポロジ](/tiflash-deployment-topology.md)
         -   [TiCDC トポロジ](/ticdc-deployment-topology.md)
         -   [TiDBBinlogトポロジ](/tidb-binlog-deployment-topology.md)
-        -   [TiSpark トポロジー](/tispark-deployment-topology.md)
+        -   [TiSpark トポロジ](/tispark-deployment-topology.md)
         -   [クロス DC トポロジ](/geo-distributed-deployment-topology.md)
         -   [ハイブリッド トポロジ](/hybrid-deployment-topology.md)
     -   インストールして開始する
@@ -502,7 +494,7 @@
             -   例
                 -   [DMを使用してデータを移行する](/dm/migrate-data-using-dm.md)
                 -   [データ移行タスクの作成](/dm/quick-start-create-task.md)
-                -   [シャード結合シナリオにおけるデータ移行のベスト プラクティス](/dm/shard-merge-best-practices.md)
+                -   [シャードマージシナリオにおけるデータ移行のベストプラクティス](/dm/shard-merge-best-practices.md)
             -   トラブルシューティング
                 -   [FAQ](/dm/dm-faq.md)
                 -   [エラーの処理](/dm/dm-error-handling.md)
@@ -1002,7 +994,6 @@
     -   v6.6
         -   [6.6.0-DMR](/releases/release-6.6.0.md)
     -   v6.5
-        -   [6.5.5](/releases/release-6.5.5.md)
         -   [6.5.4](/releases/release-6.5.4.md)
         -   [6.5.3](/releases/release-6.5.3.md)
         -   [6.5.2](/releases/release-6.5.2.md)
@@ -1159,7 +1150,7 @@
         -   [2.0](/releases/release-2.0-ga.md)
         -   [2.0 RC5](/releases/release-2.0-rc.5.md)
         -   [2.0 RC4](/releases/release-2.0-rc.4.md)
-        -   [2.0 RC3](/releases/release-2.0-rc.3.md)
+        -   [2.0RC3](/releases/release-2.0-rc.3.md)
         -   [2.0 RC1](/releases/release-2.0-rc.1.md)
         -   [1.1 ベータ版](/releases/release-1.1-beta.md)
         -   [1.1 アルファ](/releases/release-1.1-alpha.md)

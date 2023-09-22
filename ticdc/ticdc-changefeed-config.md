@@ -23,7 +23,9 @@ Info: {"upstream_id":7178706266519722477,"namespace":"default","id":"simple-repl
 
 -   `--sink-uri` : レプリケーションタスクの下流アドレス。 `--sink-uri`を以下の形式で設定します。現在、このスキームは`mysql` 、 `tidb` 、および`kafka`をサポートしています。
 
-        [scheme]://[userinfo@][host]:[port][/path]?[query_parameters]
+    ```
+    [scheme]://[userinfo@][host]:[port][/path]?[query_parameters]
+    ```
 
     シンク URI に`! * ' ( ) ; : @ & = + $ , / ? % # [ ]`などの特殊文字が含まれている場合は、特殊文字をエスケープする必要があります (たとえば、 [URIエンコーダ](https://meyerweb.com/eric/tools/dencoder/) 。
 
@@ -139,9 +141,9 @@ write-key-threshold = 0
 # The following three configuration items are only used when you replicate data to storage sinks and can be ignored when replicating data to MQ or MySQL sinks.
 # Row terminator, used for separating two data change events. The default value is an empty string, which means "\r\n" is used.
 # terminator = ''
-# Date separator type used in the file directory. Value options are `none`, `year`, `month`, and `day`. `day` is the default value and means separating files by day. For more information, see <https://docs.pingcap.com/tidb/v7.1/ticdc-sink-to-cloud-storage#data-change-records>.
+# Date separator type used in the file directory. Value options are `none`, `year`, `month`, and `day`. `none` is the default value and means that the date is not separated. For more information, see <https://docs.pingcap.com/tidb/v7.1/ticdc-sink-to-cloud-storage#data-change-records>.
 # Note: This configuration item only takes effect if the downstream is a storage service.
-date-separator = 'day'
+date-separator = 'none'
 # Whether to use partitions as the separation string. The default value is true, which means that partitions in a table are stored in separate directories. It is recommended that you keep the value as `true` to avoid potential data loss in downstream partitioned tables <https://github.com/pingcap/tiflow/issues/8724>. For usage examples, see <https://docs.pingcap.com/tidb/v7.1/ticdc-sink-to-cloud-storage#data-change-records>.
 # Note: This configuration item only takes effect if the downstream is a storage service.
 enable-partition-separator = true

@@ -2,8 +2,6 @@
 title: Gitpod
 ---
 
-<!-- markdownlint-disable MD029 -->
-
 # Gitpod {#gitpod}
 
 [Gitpod](https://www.gitpod.io/)を使用すると、ボタンまたはリンクをクリックするだけでブラウザで完全な開発環境を取得でき、すぐにコードを作成できます。
@@ -39,6 +37,8 @@ TiDB プレイグラウンドの準備が完了すると、別の`Spring JPA Hib
 これらのタスクがすべて完了すると、次のようなページが表示されます。このページで、左側のナビゲーション ペインの`REMOTE EXPLORER`領域 (Gitpod は URL ベースのポート転送をサポートしています) を確認し、ポート`8080`の URL を見つけます。
 
 ![playground gitpod workspace ready](/media/develop/playground-gitpod-workspace-ready.png)
+
+[HTTPリクエストの送信](/develop/dev-guide-sample-application-java-spring-boot.md#step-6-http-requests)で API をテストできます。必ず`http://localhost:8080` URL を`REMOTE EXPLORER`領域で見つかった URL に置き換えてください。
 
 ## カスタム Gitpod 構成と Docker イメージの使用 {#using-custom-gitpod-configuration-and-docker-image}
 

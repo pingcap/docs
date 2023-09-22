@@ -1,7 +1,3 @@
-<!-- markdownlint-disable MD007 -->
-
-<!-- markdownlint-disable MD041 -->
-
 -   [ドキュメントホーム](https://docs.pingcap.com/)
 -   TiDB Cloudについて
     -   [TiDB Cloudを選ぶ理由](/tidb-cloud/tidb-cloud-intro.md)
@@ -41,15 +37,8 @@
             -   [ノードmysql2](/develop/dev-guide-sample-application-nodejs-mysql2.md)
             -   [mysql.js](/develop/dev-guide-sample-application-nodejs-mysqljs.md)
             -   [プリズマ](/develop/dev-guide-sample-application-nodejs-prisma.md)
-            -   [TypeORM](/develop/dev-guide-sample-application-nodejs-typeorm.md)
             -   [Next.js](/develop/dev-guide-sample-application-nextjs.md)
             -   [AWSラムダ](/develop/dev-guide-sample-application-aws-lambda.md)
-        -   ルビー
-            -   [mysql2](/develop/dev-guide-sample-application-ruby-mysql2.md)
-            -   [レール](/develop/dev-guide-sample-application-ruby-rails.md)
-        -   サーバーレスDriver(ベータ版)
-            -   [TiDB CloudサーバーレスDriver](/tidb-cloud/serverless-driver.md)
-            -   [TiDB CloudサーバーレスDriverの構成](/tidb-cloud/serverless-driver-config.md)
     -   サードパーティのサポート
         -   [TiDB がサポートするサードパーティ ツール](/develop/dev-guide-third-party-support.md)
         -   [サードパーティツールとの既知の非互換性の問題](/develop/dev-guide-third-party-tools-compatibility.md)
@@ -106,7 +95,7 @@
     -   TiDB サーバーレスクラスターの管理
         -   [TiDB サーバーレスクラスタの作成](/tidb-cloud/create-tidb-cluster-serverless.md)
         -   TiDB サーバーレスクラスタに接続する
-            -   [接続の概要](/tidb-cloud/connect-to-tidb-cluster-serverless.md)
+            -   [接続方法の概要](/tidb-cloud/connect-to-tidb-cluster-serverless.md)
             -   [パブリックエンドポイント経由で接続する](/tidb-cloud/connect-via-standard-connection-serverless.md)
             -   [プライベートエンドポイント経由で接続する](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)
         -   ブランチ (ベータ版)
@@ -268,7 +257,7 @@
     -   [支払い方法の設定](/tidb-cloud/tidb-cloud-billing.md#payment-method)
     -   [AWS または GCP Marketplace からの請求](/tidb-cloud/tidb-cloud-billing.md#billing-from-aws-marketplace-or-google-cloud-marketplace)
     -   [チェンジフィードの請求](/tidb-cloud/tidb-cloud-billing-ticdc-rcu.md)
-    -   [データ移行の請求](/tidb-cloud/tidb-cloud-billing-dm.md)
+    -   [データ移行の料金請求](/tidb-cloud/tidb-cloud-billing-dm.md)
 -   API
     -   [APIの概要](/tidb-cloud/api-overview.md)
     -   [APIリファレンス](https://docs.pingcap.com/tidbcloud/api/v1beta)
@@ -611,5 +600,4 @@
     -   [2021年](/tidb-cloud/release-notes-2021.md)
     -   [2020年](/tidb-cloud/release-notes-2020.md)
 -   メンテナンスのお知らせ
-    -   [[2023-09-26] TiDB Cloudコンソール メンテナンスのお知らせ](/tidb-cloud/notification-2023-09-26-console-maintenance.md)
     -   [[2023-08-31] TiDB Cloudコンソール メンテナンスのお知らせ](/tidb-cloud/notification-2023-08-31-console-maintenance.md)

@@ -14,15 +14,21 @@ summary: Learn how to configure the memory quota of a query and avoid OOM (out o
 
 システム変数[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)は、クエリの制限をバイト単位で設定します。いくつかの使用例:
 
+{{< copyable "" >}}
+
 ```sql
 -- Set the threshold value of memory quota for a single SQL query to 8GB:
 SET tidb_mem_quota_query = 8 << 30;
 ```
 
+{{< copyable "" >}}
+
 ```sql
 -- Set the threshold value of memory quota for a single SQL query to 8MB:
 SET tidb_mem_quota_query = 8 << 20;
 ```
+
+{{< copyable "" >}}
 
 ```sql
 -- Set the threshold value of memory quota for a single SQL query to 8KB:
@@ -44,6 +50,7 @@ SET GLOBAL tidb_server_memory_limit = "32GB";
 現在、 `tidb_server_memory_limit`に設定されたメモリ制限では、次の SQL 操作は終了し**ません**。
 
 -   DDL 操作
+-   INSERT、UPDATE、および DELETE 操作
 -   ウィンドウ関数と共通テーブル式を含む SQL 操作
 
 > **警告：**
@@ -54,7 +61,7 @@ SET GLOBAL tidb_server_memory_limit = "32GB";
 
 tidb-server インスタンスのメモリ使用量が総メモリの特定の割合に達すると (割合はシステム変数[`tidb_server_memory_limit_gc_trigger`](/system-variables.md#tidb_server_memory_limit_gc_trigger-new-in-v640)によって制御されます)、 tidb-server はメモリのストレスを軽減するためにGolang GC をトリガーしようとします。インスタンスメモリがしきい値付近で変動するためにパフォーマンスの問題を引き起こす頻繁な GC を回避するために、この GC メソッドは最大でも 1 分に 1 回 GC をトリガーします。
 
-> **注記：**
+> **ノート：**
 >
 > ハイブリッド デプロイメント シナリオでは、物理マシン全体の合計メモリしきい値ではなく、単一の tdb-server インスタンスのメモリ使用量しきい値が`tidb_server_memory_limit`になります。
 
@@ -96,6 +103,8 @@ tidb-server インスタンスのメモリ使用量がメモリしきい値 (デ
 
 1.  `tidb_memory_usage_alarm_ratio` ～ `0.85`を設定：
 
+    {{< copyable "" >}}
+
     ```sql
     SET GLOBAL tidb_memory_usage_alarm_ratio = 0.85;
     ```
@@ -106,7 +115,9 @@ tidb-server インスタンスのメモリ使用量がメモリしきい値 (デ
 
 4.  合計システムメモリ、現在のシステムメモリ使用量、tidb-server インスタンスのメモリ使用量、およびステータス ファイルのディレクトリを記録する`tidb.log`ファイルを確認します。
 
-        [2022/10/11 16:39:02.281 +08:00] [WARN] [memoryusagealarm.go:212] ["tidb-server has the risk of OOM because of memory usage exceeds alarm ratio. Running SQLs and heap profile will be recorded in record path"] ["is tidb_server_memory_limit set"=false] ["system memory total"=33682427904] ["system memory usage"=22120655360] ["tidb-server memory usage"=21468556992] [memory-usage-alarm-ratio=0.85] ["record path"=/tiup/deploy/tidb-4000/log/oom_record]
+    ```
+    [2022/10/11 16:39:02.281 +08:00] [WARN] [memoryusagealarm.go:212] ["tidb-server has the risk of OOM because of memory usage exceeds alarm ratio. Running SQLs and heap profile will be recorded in record path"] ["is tidb_server_memory_limit set"=false] ["system memory total"=33682427904] ["system memory usage"=22120655360] ["tidb-server memory usage"=21468556992] [memory-usage-alarm-ratio=0.85] ["record path"=/tiup/deploy/tidb-4000/log/oom_record]
+    ```
 
     上記のログ ファイルの例のフィールドは次のように説明されています。
 
@@ -117,7 +128,7 @@ tidb-server インスタンスのメモリ使用量がメモリしきい値 (デ
     -   `memory-usage-alarm-ratio`システム変数[`tidb_memory_usage_alarm_ratio`](/system-variables.md#tidb_memory_usage_alarm_ratio)の値を示します。
     -   `record path`ステータスファイルのディレクトリを示します。
 
-5.  ステータス ファイルのディレクトリ (前の例では、ディレクトリは`/tiup/deploy/tidb-4000/log/oom_record` ) を確認すると、対応するタイムスタンプ (たとえば、 `record2022-10-09T17:18:38+08:00` ) を持つレコード ディレクトリが表示されます。レコード ディレクトリには、 `goroutinue` 、 `heap` 、および`running_sql`の 3 つのファイルが含まれています。これら 3 つのファイルには、ステータス ファイルが記録される時刻が接尾辞として付けられます。それぞれ、ゴルーチンのスタック情報、ヒープメモリの使用状況、アラーム発生時の実行中のSQL情報を記録します。 `running_sql`の内容については、 [`expensive-queries`](/identify-expensive-queries.md)を参照してください。
+5.  ステータス ファイルのディレクトリ (前の例では、ディレクトリは`/tiup/deploy/tidb-4000/log/oom_record` ) を確認すると、対応するタイムスタンプ (たとえば、 `record2022-10-09T17:18:38+08:00` ) を持つレコード ディレクトリが表示されます。レコード ディレクトリには、 `goroutinue` 、 `heap` 、および`running_sql`の 3 つのファイルが含まれています。これら 3 つのファイルには、ステータス ファイルが記録される時刻が接尾辞として付けられます。それぞれ、ゴルーチンのスタック情報、ヒープメモリの使用状況、アラーム発生時の実行中のSQL情報を記録します。 `running_sql`の内容については[`expensive-queries`](/identify-expensive-queries.md)を参照してください。
 
 ## tidb-server のその他のメモリ制御動作 {#other-memory-control-behaviors-of-tidb-server}
 
@@ -138,13 +149,15 @@ TiDB は、実行オペレーターのディスク スピルをサポートし�
 -   Sort、MergeJoin、および HashJoin オペレーターのディスク スピルは v4.0.0 で導入されました。 HashAgg オペレーターのディスク スピルは v5.2.0 で導入されました。
 -   Sort、MergeJoin、または HashJoin を含む SQL 実行によって OOM が発生すると、TiDB はデフォルトでディスク スピルをトリガーします。 HashAgg を含む SQL 実行によって OOM が発生しても、TiDB はデフォルトでディスク スピルをトリガーしません。 HashAgg のディスク スピルをトリガーするようにシステム変数`tidb_executor_concurrency = 1`を構成できます。
 
-> **注記：**
+> **ノート：**
 >
 > HashAgg のディスク スピルでは、 `DISTINCT`集計関数を含む SQL の実行はサポートされていません。 `DISTINCT`集計関数を含む SQL 実行で使用されるメモリが多すぎる場合、ディスク スピルは適用されません。
 
 次の例では、メモリを消費する SQL ステートメントを使用して、HashAgg のディスク スピル機能を示します。
 
 1.  SQL ステートメントのメモリクォータを 1 GB (デフォルトでは 1 GB) に構成します。
+
+    {{< copyable "" >}}
 
     ```sql
     SET tidb_mem_quota_query = 1 << 30;
@@ -153,6 +166,8 @@ TiDB は、実行オペレーターのディスク スピルをサポートし�
 2.  単一のテーブル`CREATE TABLE t(a int);`を作成し、256 行の異なるデータを挿入します。
 
 3.  次の SQL ステートメントを実行します。
+
+    {{< copyable "" >}}
 
     ```sql
     [tidb]> explain analyze select /*+ HASH_AGG() */ count(*) from t t1 join t t2 join t t3 group by t1.a, t2.a, t3.a;
@@ -166,11 +181,15 @@ TiDB は、実行オペレーターのディスク スピルをサポートし�
 
 4.  システム変数を`tidb_executor_concurrency`から 1 に設定します。この設定では、メモリ不足の場合、HashAgg は自動的にディスク スピルをトリガーしようとします。
 
+    {{< copyable "" >}}
+
     ```sql
     SET tidb_executor_concurrency = 1;
     ```
 
 5.  同じSQL文を実行します。今回は、ステートメントが正常に実行され、エラー メッセージが返されないことがわかります。次の詳細な実行計画から、HashAgg が 600 MB のハード ディスク領域を使用していることがわかります。
+
+    {{< copyable "" >}}
 
     ```sql
     [tidb]> explain analyze select /*+ HASH_AGG() */ count(*) from t t1 join t t2 join t t3 group by t1.a, t2.a, t3.a;

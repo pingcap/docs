@@ -5,7 +5,7 @@ summary: Learn how to replicate data to storage services using TiCDC, and learn 
 
 # ストレージ サービスへのデータのレプリケーション {#replicate-data-to-storage-services}
 
-TiDB v6.5.0 以降、TiCDC は、Amazon S3、GCS、Azure Blob Storage、NFS などのstorageサービスへの行変更イベントの保存をサポートします。このドキュメントでは、TiCDC を使用して増分データをそのようなstorageサービスにレプリケートする変更フィードを作成する方法と、データがどのように保存されるかについて説明します。この文書の構成は次のとおりです。
+TiDB v6.5.0 以降、TiCDC は、Amazon S3、GCS、Azure Blob Storage、NFS などのstorageサービスへの行変更イベントの保存をサポートします。このドキュメントでは、TiCDC を使用して増分データをstorageサービスにレプリケートする変更フィードを作成する方法と、データがどのように保存されるかを説明します。この文書の構成は次のとおりです。
 
 -   [データをstorageサービスにレプリケートする方法](#replicate-change-data-to-storage-services) 。
 -   [データがstorageサービスに保存される仕組み](#storage-path-structure) 。
@@ -52,7 +52,7 @@ URI の`[query_parameters]`については、次のパラメータを設定で�
 | `protocol`              | ダウンストリームに送信されるメッセージのプロトコル形式。                                                                                                                                                                                                         | 該当なし       | `canal-json`と`csv`     |
 | `enable-tidb-extension` | `protocol`が`canal-json`に設定され、 `enable-tidb-extension` `true`に設定されている場合、TiCDC は[ウォーターマークイベント](/ticdc/ticdc-canal-json.md#watermark-event)送信し、 [TiDB 拡張フィールド](/ticdc/ticdc-canal-json.md#tidb-extension-field) Canal-JSON メッセージに追加します。 | `false`    | `false`と`true`         |
 
-> **注記：**
+> **ノート：**
 >
 > `flush-interval`または`file-size`いずれかが要件を満たす場合、データ変更ファイルはダウンストリームに保存されます。 `protocol`パラメータは必須です。変更フィードの作成時に TiCDC がこのパラメーターを受け取らない場合、 `CDC:ErrSinkUnknownProtocol`エラーが返されます。
 
@@ -106,7 +106,7 @@ URI の`[query_parameters]`については、次のパラメータを設定で�
 -   `table` : テーブル名を指定します (例: `s3://bucket/bbb/ccc/test/ **table1**` 。
 -   `table-version-separator` : テーブルのバージョンごとにパスを区切る区切り文字を指定します (例`s3://bucket/bbb/ccc/test/table1/ **9999**` )。
 -   `partition-separator` : テーブル パーティションごとにパスを区切る区切り文字を指定します (例`s3://bucket/bbb/ccc/test/table1/9999/ **20**` 。
--   `date-separator` : トランザクションのコミット日によってファイルを分類します。デフォルト値は`day`です。値のオプションは次のとおりです。
+-   `date-separator` : トランザクションのコミット日によってファイルを分類します。値のオプションは次のとおりです。
     -   `none` : いいえ`date-separator` 。たとえば、バージョン`test.table1`が`9999`であるすべてのファイルは`s3://bucket/bbb/ccc/test/table1/9999`に保存されます。
     -   `year` : 区切り文字はトランザクションのコミット日の年です (例`s3://bucket/bbb/ccc/test/table1/9999/ **2022**` 。
     -   `month` : 区切り文字はトランザクションのコミット日の年と月です (例`s3://bucket/bbb/ccc/test/table1/9999/ **2022-01**` 。
@@ -114,21 +114,27 @@ URI の`[query_parameters]`については、次のパラメータを設定で�
 -   `num` : データ変更を記録するファイルのシリアル番号を保存します (例`s3://bucket/bbb/ccc/test/table1/9999/2022-01-02/CDC **000005** .csv` 。
 -   `extension` : ファイルの拡張子を指定します。 TiDB v6.5.0 は、CSV および Canal-JSON 形式をサポートしています。
 
-> **注記：**
+> **ノート：**
 >
-> テーブル バージョンは、アップストリーム テーブルで DDL 操作が実行された後にのみ変更され、アップストリーム TiDB が DDL の実行を完了すると、新しいテーブル バージョンが TSO になります。ただし、テーブルのバージョンの変更はテーブルのスキーマの変更を意味しません。たとえば、列にコメントを追加しても、スキーマ ファイルの内容は変更されません。
+> テーブルのバージョンは、次の 3 つの場合に変更されます。
+>
+> -   DDL 操作の実行後、DDL がアップストリーム TiDB で実行されるときのテーブル バージョンは TSO になります。ただし、テーブルのバージョンの変更はテーブルのスキーマの変更を意味しません。たとえば、列にコメントを追加しても、 `schema.json`ファイルの内容は変更されません。
+> -   チェンジフィードプロセスが再起動されます。テーブルのバージョンは、プロセスの再起動時のチェックポイント TSO です。多数のテーブルがあり、プロセスが再起動されると、すべてのディレクトリを走査して、各テーブルが最後に書き込まれた位置を見つけるのに長い時間がかかります。したがって、データは、以前のディレクトリではなく、チェックポイント TSO のバージョンを持つ新しいディレクトリに書き込まれます。
+> -   テーブルのスケジュール設定が行われた後、テーブルが現在のノードにスケジュールされるとき、テーブルのバージョンは変更フィード チェックポイント TSO になります。
 
 ### インデックスファイル {#index-files}
 
 インデックスファイルは、書き込まれたデータが誤って上書きされることを防ぐために使用されます。データ変更レコードと同じパスに保存されます。
 
 ```shell
-{scheme}://{prefix}/{schema}/{table}/{table-version-separator}/{partition-separator}/{date-separator}/meta/CDC.index
+{scheme}://{prefix}/{schema}/{table}/{table-version-separator}/{partition-separator}/{date-separator}/CDC.index
 ```
 
 インデックス ファイルには、現在のディレクトリで使用されている最大のファイル名が記録されます。例えば：
 
-    CDC000005.csv
+```
+CDC000005.csv
+```
 
 この例では、このディレクトリ内のファイル`CDC000001.csv` ～ `CDC000004.csv`が占有されています。 TiCDC クラスターでテーブルのスケジューリングまたはノードの再起動が発生すると、新しいノードはインデックス ファイルを読み取り、 `CDC000005.csv`が占有されているかどうかを判断します。占有されていない場合、新しいノードは`CDC000005.csv`から始まるファイルを書き込みます。占有されている場合は`CDC000006.csv`から書き込みを開始するため、他のノードによって書き込まれたデータの上書きが防止されます。
 
@@ -152,27 +158,23 @@ URI の`[query_parameters]`については、次のパラメータを設定で�
 
 ### DDLイベント {#ddl-events}
 
-### テーブルレベルのDDLイベント {#ddl-events-at-the-table-level}
+DDL イベントによってテーブルのバージョンが変更されると、TiCDC は新しいパスに切り替えてデータ変更レコードを書き込みます。たとえば、 `test.table1`のバージョンが`9999`から`10000`に変更されると、データはパス`s3://bucket/bbb/ccc/test/table1/10000/2022-01-02/CDC000001.csv`に書き込まれます。さらに、DDL イベントが発生すると、TiCDC はテーブル スキーマ情報を保存する`schema.json`を生成します。
 
-アップストリーム テーブルの DDL イベントによってテーブル バージョンが変更されると、TiCDC は自動的に次の処理を実行します。
+テーブル スキーマ情報は次のパスに保存されます。
 
--   新しいパスに切り替えてデータ変更レコードを書き込みます。たとえば、バージョン`test.table1`が`441349361156227074`に変更されると、TiCDC はデータ変更レコードを書き込むためにパス`s3://bucket/bbb/ccc/test/table1/441349361156227074/2022-01-02/`に変更します。
--   次のパスにスキーマ ファイルを生成して、テーブル スキーマ情報を保存します。
+```shell
+{scheme}://{prefix}/{schema}/{table}/{table-version-separator}/schema.json
+```
 
-    ```shell
-    {scheme}://{prefix}/{schema}/{table}/meta/schema_{table-version}_{hash}.json
-    ```
-
-`schema_441349361156227074_3131721815.json`スキーマ ファイルを例に挙げると、このファイル内のテーブル スキーマ情報は次のとおりです。
+以下は`schema.json`ファイルです。
 
 ```json
 {
     "Table":"table1",
     "Schema":"test",
     "Version":1,
-    "TableVersion":441349361156227074,
-    "Query":"ALTER TABLE test.table1 ADD OfficeLocation blob(20)",
-    "Type":5,
+    "TableVersion":10000,
+    "Query": "ALTER TABLE test.table1 ADD OfficeLocation blob(20)",
     "TableColumns":[
         {
             "ColumnName":"Id",
@@ -208,8 +210,7 @@ URI の`[query_parameters]`については、次のパラメータを設定で�
 -   `Schema` : スキーマ名。
 -   `Version` :storageシンクのプロトコル バージョン。
 -   `TableVersion` : テーブルバージョン。
--   `Query` : DDL ステートメント。
--   `Type` : DDL タイプ。
+-   `Query` ：DDL文。
 -   `TableColumns` : 1 つ以上のマップの配列。各マップはソース テーブル内の列を記述します。
     -   `ColumnName` :カラム名。
     -   `ColumnType` :カラムのタイプ。詳細は[データ・タイプ](#data-type)を参照してください。
@@ -220,32 +221,9 @@ URI の`[query_parameters]`については、次のパラメータを設定で�
     -   `ColumnIsPk` : このオプションの値が`true`の場合、列は主キーの一部です。
 -   `TableColumnsTotal` : `TableColumns`配列のサイズ。
 
-### データベースレベルのDDLイベント {#ddl-events-at-the-database-level}
-
-データベース レベルの DDL イベントがアップストリーム データベースで実行されると、TiCDC はデータベース スキーマ情報を保存するために次のパスにスキーマ ファイルを自動的に生成します。
-
-```shell
-{scheme}://{prefix}/{schema}/meta/schema_{table-version}_{hash}.json
-```
-
-`schema_441349361156227000_3131721815.json`スキーマ ファイルを例に挙げると、このファイル内のデータベース スキーマ情報は次のとおりです。
-
-```json
-{
-  "Table": "",
-  "Schema": "schema1",
-  "Version": 1,
-  "TableVersion": 441349361156227000,
-  "Query": "CREATE DATABASE `schema1`",
-  "Type": 1,
-  "TableColumns": null,
-  "TableColumnsTotal": 0
-}
-```
-
 ### データ・タイプ {#data-type}
 
-このセクションでは、 `schema_{table-version}_{hash}.json`ファイル (以降のセクションでは「スキーマ ファイル」と呼びます) で使用されるデータ型について説明します。データ型は`T(M[, D])`として定義されています。詳細は[データ型](/data-type-overview.md)を参照してください。
+このセクションでは、 `schema.json`ファイルで使用されるデータ型について説明します。データ型は`T(M[, D])`として定義されています。詳細は[データ型](/data-type-overview.md)を参照してください。
 
 #### 整数型 {#integer-types}
 
@@ -254,7 +232,7 @@ TiDB の整数型は`IT[(M)] [UNSIGNED]`として定義されます。
 -   `IT`は整数型で、 `TINYINT` 、 `SMALLINT` 、 `MEDIUMINT` 、 `INT` 、 `BIGINT` 、または`BIT`のいずれかになります。
 -   `M`はタイプの表示幅です。
 
-整数型は、スキーマ ファイル内で次のように定義されます。
+整数型は`schema.json`で次のように定義されています。
 
 ```json
 {
@@ -268,11 +246,11 @@ TiDB の整数型は`IT[(M)] [UNSIGNED]`として定義されます。
 
 TiDB の 10 進数タイプは`DT[(M,D)][UNSIGNED]`として定義されます。
 
--   `DT`は浮動小数点型で、 `FLOAT` 、 `DOUBLE` 、 `DECIMAL` 、または`NUMERIC`のいずれかになります。
+-   `DT`は浮動小数点型で、 `FLOAT` 、 `DOUBLE` 、 `DECIMAL` 、または`NUMERIC`いずれかになります。
 -   `M`はデータ型の精度、または合計桁数です。
 -   `D`は小数点以下の桁数です。
 
-Decimal タイプは、スキーマ ファイル内で次のように定義されます。
+10 進数型は`schema.json`で次のように定義されます。
 
 ```json
 {
@@ -289,7 +267,7 @@ TiDB の日付タイプは`DT`として定義されます。
 
 -   `DT`は日付タイプで、 `DATE`または`YEAR`になります。
 
-日付タイプはスキーマ ファイル内で次のように定義されます。
+日付型は`schema.json`で次のように定義されています。
 
 ```json
 {
@@ -303,7 +281,7 @@ TiDB の時間タイプは`TT[(M)]`として定義されます。
 -   `TT`は時間のタイプで、 `TIME` 、 `DATETIME` 、または`TIMESTAMP`のいずれかになります。
 -   `M`は、0 ～ 6 の範囲の秒の精度です。
 
-時間タイプはスキーマ ファイル内で次のように定義されます。
+時間タイプは`schema.json`で次のように定義されています。
 
 ```json
 {
@@ -320,7 +298,7 @@ TiDB の文字列タイプは`ST[(M)]`として定義されます。
 -   `ST`は文字列タイプで、 `CHAR` 、 `VARCHAR` 、 `TEXT` 、 `BINARY` 、 `BLOB` 、または`JSON`のいずれかになります。
 -   `M`は文字列の最大長です。
 
-文字列タイプはスキーマ ファイル内で次のように定義されます。
+文字列型は`schema.json`で次のように定義されています。
 
 ```json
 {
@@ -332,7 +310,7 @@ TiDB の文字列タイプは`ST[(M)]`として定義されます。
 
 #### 列挙型とセット型 {#enum-and-set-types}
 
-Enum 型と Set 型は、スキーマ ファイル内で次のように定義されます。
+Enum 型と Set 型は、 `schema.json`で次のように定義されています。
 
 ```json
 {

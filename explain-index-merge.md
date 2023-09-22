@@ -48,9 +48,9 @@ EXPLAIN SELECT /*+ USE_INDEX_MERGE(t) */ * FROM t WHERE a > 1 OR b > 1;
 
 前述のクエリの場合、オプティマイザはテーブルにアクセスするために共用体タイプのインデックス マージを選択します。インデックスのマージにより、オプティマイザはテーブルごとに複数のインデックスを使用し、各インデックスから返された結果をマージし、前の出力で後の実行プランを生成できます。
 
-出力では、 `IndexMerge_8`演算子のうち`operator info`の`type: union`情報は、この演算子が共用体タイプのインデックス マージであることを示しています。 3 つの子ノードがあります。 `IndexRangeScan_5`と`IndexRangeScan_6` 、条件を満たす`RowID`秒を範囲に従ってスキャンし、オペレータ`TableRowIDScan_7`はこれら`RowID`秒に従って、条件を満たすすべてのデータを正確に読み取ります。
+出力では、 `IndexMerge_8`演算子のうち`operator info`の`type: union`情報は、この演算子が共用体タイプのインデックス マージであることを示しています。 3 つの子ノードがあります。 `IndexRangeScan_5`と`IndexRangeScan_6`範囲に従って条件を満たす`RowID`秒をスキャンし、 `TableRowIDScan_7`オペレーターはこれら`RowID`秒に従って条件を満たすすべてのデータを正確に読み取ります。
 
-`IndexRangeScan` / `TableRangeScan`などの特定のデータ範囲に対して実行されるスキャン操作の場合、結果の`operator info`列には、 `IndexFullScan` / `TableFullScan`などの他のスキャン操作と比較してスキャン範囲に関する追加情報が含まれます。上記の例では、 `IndexRangeScan_5`演算子の`range:(1,+inf]` 、演算子が 1 から正の無限大までデータをスキャンすることを示します。
+`IndexRangeScan` / `TableRangeScan`などの特定のデータ範囲に対して実行されるスキャン操作の場合、結果の`operator info`列には、 `IndexFullScan` / `TableFullScan`などの他のスキャン操作と比較して、スキャン範囲に関する追加情報が含まれます。上記の例では、 `IndexRangeScan_13`演算子の`range:(1,+inf]` 、演算子が 1 から正の無限大までデータをスキャンすることを示します。
 
 ```sql
 EXPLAIN SELECT /*+ NO_INDEX_MERGE() */ * FROM t WHERE a > 1 AND b > 1 AND c = 1;  -- Does not use index merge
@@ -84,9 +84,9 @@ EXPLAIN SELECT /*+ USE_INDEX_MERGE(t, idx_a, idx_b, idx_c) */ * FROM t WHERE a >
 -   3 つのフィルター条件のそれぞれについて、それぞれの選択性が非常に高いため、単一のインデックスを使用した`IndexLookUp`の実行効率は理想的ではありません。
 -   3 つのフィルター条件の全体的な選択性は低くなります。
 
-交差タイプのインデックス マージを使用してテーブルにアクセスする場合、オプティマイザはテーブルで複数のインデックスを使用することを選択し、各インデックスから返された結果をマージして、前の出力例の後者`IndexMerge`の実行プランを生成できます。 `operator info` of `IndexMerge_9`演算子の`type: intersection`情報は、この演算子が交差タイプのインデックス マージであることを示します。実行プランの他の部分は、前述の共用体タイプのインデックスのマージの例と似ています。
+交差タイプのインデックス マージを使用してテーブルにアクセスする場合、オプティマイザはテーブルで複数のインデックスを使用することを選択し、各インデックスから返された結果をマージして、前の出力例の後半`IndexMerge`の実行プランを生成できます。 `operator info` of `IndexMerge_9`演算子の`type: intersection`情報は、この演算子が交差タイプのインデックス マージであることを示します。実行プランの他の部分は、前述の共用体タイプのインデックスのマージの例と似ています。
 
-> **注記：**
+> **ノート：**
 >
 > -   インデックス マージ機能は、v5.4.0 からデフォルトで有効になっています。つまり、 [`tidb_enable_index_merge`](/system-variables.md#tidb_enable_index_merge-new-in-v40)は`ON`です。
 >

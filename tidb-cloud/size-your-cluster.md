@@ -7,7 +7,7 @@ summary: Learn how to determine the size of your TiDB Cloud cluster.
 
 このドキュメントでは、TiDB 専用クラスターのサイズを決定する方法について説明します。
 
-> **注記：**
+> **ノート：**
 >
 > [TiDB サーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-serverless)クラスターのサイズは変更できません。
 
@@ -23,16 +23,17 @@ TiDB のノード番号、vCPU、RAM を構成できます。
 
 サポートされている vCPU と RAM のサイズは次のとおりです。
 
+-   2 vCPU、8 GiB (ベータ版)
 -   4 vCPU、16 GiB
 -   8 vCPU、16 GiB
 -   16 vCPU、32 GiB
 
-> **注記：**
+> **ノート：**
 >
-> TiDB の vCPU および RAM サイズが**4 vCPU、16 GiB**に設定されている場合は、次の制限に注意してください。
+> TiDB の vCPU および RAM サイズが**2 vCPU、8 GiB (ベータ)**または**4 vCPU、16 GiB**に設定されている場合は、次の制限事項に注意してください。
 >
 > -   TiDB のノード番号は 1 または 2 のみに設定でき、TiKV のノード番号は 3 に固定されます。
-> -   4 vCPU TiDB は 4 vCPU TiKV でのみ使用できます。
+> -   2 vCPU TiDB は 2 vCPU TiKV でのみ使用できます。 4 vCPU TiDB は 4 vCPU TiKV でのみ使用できます。
 > -   TiFlashは使用できません。
 
 ### TiDB ノード番号 {#tidb-node-number}
@@ -84,17 +85,18 @@ TiKV のノード番号、vCPU と RAM、storageを構成できます。
 
 サポートされている vCPU と RAM のサイズは次のとおりです。
 
+-   2 vCPU、8 GiB (ベータ版)
 -   4 vCPU、16 GiB
 -   8 vCPU、32 GiB
 -   8 vCPU、64 GiB
 -   16 vCPU、64 GiB
 
-> **注記：**
+> **ノート：**
 >
-> TiKV の vCPU および RAM サイズが**4 vCPU、16 GiB**に設定されている場合は、次の制限に注意してください。
+> TiKV の vCPU および RAM サイズが**2 vCPU、8 GiB (ベータ)**または**4 vCPU、16 GiB**に設定されている場合は、次の制限事項に注意してください。
 >
 > -   TiDB のノード番号は 1 または 2 のみに設定でき、TiKV のノード番号は 3 に固定されます。
-> -   4 vCPU TiKV は 4 vCPU TiDB でのみ使用できます。
+> -   2 vCPU TiKV は 2 vCPU TiDB でのみ使用できます。 4 vCPU TiKV は 4 vCPU TiDB でのみ使用できます。
 > -   TiFlashは使用できません。
 
 ### TiKV ノード番号 {#tikv-node-number}
@@ -103,7 +105,7 @@ TiKV ノードの数**は少なくとも 1 セット (3 つの異なる利用可
 
 TiDB Cloud は、耐久性と高可用性を実現するために、選択したリージョン内のすべての可用性ゾーン (少なくとも 3 つ) に TiKV ノードを均等にデプロイします。一般的な 3 レプリカのセットアップでは、データはすべてのアベイラビリティ ゾーンの TiKV ノード間で均等に分散され、各 TiKV ノードのディスクに永続化されます。
 
-> **注記：**
+> **ノート：**
 >
 > TiDB クラスターをスケールすると、3 つのアベイラビリティ ゾーン内のノードが同時に増加または減少します。ニーズに基づいて TiDB クラスターをスケールインまたはスケールアウトする方法については、 [TiDBクラスタを拡張する](/tidb-cloud/scale-tidb-cluster.md)を参照してください。
 
@@ -166,11 +168,12 @@ TiKV ノードの数が 8 未満の場合、パフォーマンス偏差係数は
 
 | TiKV vCPU | 最小ノードstorage | 最大ノードstorage | デフォルトのノードstorage |
 | :-------: | :----------: | :----------: | :--------------: |
+|   2 vCPU  |    200 GiB   |    500 GiB   |      200 GiB     |
 |   4 vCPU  |    200 GiB   |   2048 GiB   |      500 GiB     |
 |   8 vCPU  |    200 GiB   |   4096 GiB   |      500 GiB     |
 |  16 vCPU  |    200 GiB   |   6144 GiB   |      500 GiB     |
 
-> **注記：**
+> **ノート：**
 >
 > クラスターの作成後に TiKV ノードのstorageを減らすことはできません。
 
@@ -187,7 +190,7 @@ TiFlashのノード番号、vCPU と RAM、storageを構成できます。
 -   8 vCPU、64 GiB
 -   16 vCPU、128 GiB
 
-TiDB または TiKV の vCPU および RAM サイズが**4 vCPU、16 GiB**に設定されている場合、 TiFlash は使用できないことに注意してください。
+TiDB または TiKV の vCPU および RAM サイズ**が 2 vCPU、8 GiB (ベータ)**または**4 vCPU、16 GiB**に設定されている場合、 TiFlash は利用できないことに注意してください。
 
 ### TiFlashノード番号 {#tiflash-node-number}
 
@@ -210,6 +213,6 @@ TiFlashノードの最小数: `min((800 GiB * 2 + 100 GiB * 1) / 1024 GiB, max(2
 |    8 vCPU    |    200 GiB   |   2048 GiB   |      500 GiB     |
 |    16 vCPU   |    200 GiB   |   2048 GiB   |      500 GiB     |
 
-> **注記：**
+> **ノート：**
 >
 > クラスターの作成後にTiFlashノードのstorageを減らすことはできません。

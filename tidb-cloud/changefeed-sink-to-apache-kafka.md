@@ -9,7 +9,7 @@ Summary: Learn how to create a changefeed to stream data from TiDB Cloud to Apac
 
 > **注記：**
 >
-> -   現在、Kafka シンクは**ベータ版**です。チェンジフィード機能を使用するには、TiDB 専用クラスターのバージョンが v6.1.3 以降であることを確認してください。
+> -   現在、Kafka シンクは**ベータ版**です。チェンジフィード機能を使用するには、TiDB 専用クラスターのバージョンが v6.4.0 以降であることを確認してください。
 > -   [TiDB サーバーレスクラスター](/tidb-cloud/select-cluster-tier.md#tidb-serverless)の場合、チェンジフィード機能は使用できません。
 
 ## 制限 {#restrictions}

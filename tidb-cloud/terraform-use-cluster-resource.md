@@ -27,27 +27,29 @@ summary: Learn how to use the cluster resource to create and modify a TiDB Cloud
 
 1.  [TiDB Cloud Terraform プロバイダーを入手する](/tidb-cloud/terraform-get-tidbcloud-provider.md)のときに作成される`main.tf`ファイルに、次のように`data`と`output`ブロックを追加します。
 
-        terraform {
-          required_providers {
-            tidbcloud = {
-              source = "tidbcloud/tidbcloud"
-            }
-          }
+    ```
+    terraform {
+      required_providers {
+        tidbcloud = {
+          source = "tidbcloud/tidbcloud"
         }
+      }
+    }
 
-        provider "tidbcloud" {
-          public_key = "your_public_key"
-          private_key = "your_private_key"
-        }
+    provider "tidbcloud" {
+      public_key = "your_public_key"
+      private_key = "your_private_key"
+    }
 
-        data "tidbcloud_projects" "example_project" {
-          page      = 1
-          page_size = 10
-        }
+    data "tidbcloud_projects" "example_project" {
+      page      = 1
+      page_size = 10
+    }
 
-        output "projects" {
-          value = data.tidbcloud_projects.example_project.items
-        }
+    output "projects" {
+      value = data.tidbcloud_projects.example_project.items
+    }
+    ```
 
     -   `data`ブロックを使用して、データ ソース タイプとデータ ソース名を含むTiDB Cloudのデータ ソースを定義します。
 
@@ -65,52 +67,54 @@ summary: Learn how to use the cluster resource to create and modify a TiDB Cloud
 
     プロンプトをスキップするには、 `terraform apply --auto-approve`を使用します。
 
-        $ terraform apply --auto-approve
+    ```
+    $ terraform apply --auto-approve
 
-        Changes to Outputs:
-          + projects = [
-              + {
-                  + cluster_count    = 0
-                  + create_timestamp = "1649154426"
-                  + id               = "1372813089191121286"
-                  + name             = "test1"
-                  + org_id           = "1372813089189921287"
-                  + user_count       = 1
-                },
-              + {
-                  + cluster_count    = 1
-                  + create_timestamp = "1640602740"
-                  + id               = "1372813089189561287"
-                  + name             = "default project"
-                  + org_id           = "1372813089189921287"
-                  + user_count       = 1
-                },
-            ]
+    Changes to Outputs:
+      + projects = [
+          + {
+              + cluster_count    = 0
+              + create_timestamp = "1649154426"
+              + id               = "1372813089191121286"
+              + name             = "test1"
+              + org_id           = "1372813089189921287"
+              + user_count       = 1
+            },
+          + {
+              + cluster_count    = 1
+              + create_timestamp = "1640602740"
+              + id               = "1372813089189561287"
+              + name             = "default project"
+              + org_id           = "1372813089189921287"
+              + user_count       = 1
+            },
+        ]
 
-        You can apply this plan to save these new output values to the Terraform state, without changing any real infrastructure.
+    You can apply this plan to save these new output values to the Terraform state, without changing any real infrastructure.
 
-        Apply complete! Resources: 0 added, 0 changed, 0 destroyed.
+    Apply complete! Resources: 0 added, 0 changed, 0 destroyed.
 
-        Outputs:
+    Outputs:
 
-        projects = tolist([
-          {
-            "cluster_count" = 0
-            "create_timestamp" = "1649154426"
-            "id" = "1372813089191121286"
-            "name" = "test1"
-            "org_id" = "1372813089189921287"
-            "user_count" = 1
-          },
-          {
-            "cluster_count" = 1
-            "create_timestamp" = "1640602740"
-            "id" = "1372813089189561287"
-            "name" = "default project"
-            "org_id" = "1372813089189921287"
-            "user_count" = 1
-          },
-        ])
+    projects = tolist([
+      {
+        "cluster_count" = 0
+        "create_timestamp" = "1649154426"
+        "id" = "1372813089191121286"
+        "name" = "test1"
+        "org_id" = "1372813089189921287"
+        "user_count" = 1
+      },
+      {
+        "cluster_count" = 1
+        "create_timestamp" = "1640602740"
+        "id" = "1372813089189561287"
+        "name" = "default project"
+        "org_id" = "1372813089189921287"
+        "user_count" = 1
+      },
+    ])
+    ```
 
 これで、利用可能なすべてのプロジェクトを出力から取得できるようになりました。必要なプロジェクト ID の 1 つをコピーします。
 
@@ -122,22 +126,24 @@ summary: Learn how to use the cluster resource to create and modify a TiDB Cloud
 
 1.  `main.tf`ファイルを次のように編集します。
 
-        terraform {
-          required_providers {
-            tidbcloud = {
-              source = "tidbcloud/tidbcloud"
-            }
-          }
+    ```
+    terraform {
+      required_providers {
+        tidbcloud = {
+          source = "tidbcloud/tidbcloud"
         }
-        provider "tidbcloud" {
-          public_key = "your_public_key"
-          private_key = "your_private_key"
-        }
-        data "tidbcloud_cluster_specs" "example_cluster_spec" {
-        }
-        output "cluster_spec" {
-          value = data.tidbcloud_cluster_specs.example_cluster_spec.items
-        }
+      }
+    }
+    provider "tidbcloud" {
+      public_key = "your_public_key"
+      private_key = "your_private_key"
+    }
+    data "tidbcloud_cluster_specs" "example_cluster_spec" {
+    }
+    output "cluster_spec" {
+      value = data.tidbcloud_cluster_specs.example_cluster_spec.items
+    }
+    ```
 
 2.  `terraform apply --auto-approve`コマンドを実行すると、クラスターの仕様情報が取得されます。
 
@@ -145,104 +151,124 @@ summary: Learn how to use the cluster resource to create and modify a TiDB Cloud
 
     <details><summary>クラスタ仕様</summary>
 
-        {
-            "cloud_provider" = "AWS"
-            "cluster_type" = "DEDICATED"
-            "region" = "eu-central-1"
-            "tidb" = tolist([
-              {
-                "node_quantity_range" = {
-                  "min" = 1
-                  "step" = 1
-                }
-                "node_size" = "4C16G"
-              },
-              {
-                "node_quantity_range" = {
-                  "min" = 1
-                  "step" = 1
-                }
-                "node_size" = "8C16G"
-              },
-              {
-                "node_quantity_range" = {
-                  "min" = 1
-                  "step" = 1
-                }
-                "node_size" = "16C32G"
-              },
-            ])
-            "tiflash" = tolist([
-              {
-                "node_quantity_range" = {
-                  "min" = 0
-                  "step" = 1
-                }
-                "node_size" = "8C64G"
-                "storage_size_gib_range" = {
-                  "max" = 2048
-                  "min" = 500
-                }
-              },
-              {
-                "node_quantity_range" = {
-                  "min" = 0
-                  "step" = 1
-                }
-                "node_size" = "16C128G"
-                "storage_size_gib_range" = {
-                  "max" = 2048
-                  "min" = 500
-                }
-              },
-            ])
-            "tikv" = tolist([
-              {
-                "node_quantity_range" = {
-                  "min" = 3
-                  "step" = 3
-                }
-                "node_size" = "4C16G"
-                "storage_size_gib_range" = {
-                  "max" = 2048
-                  "min" = 200
-                }
-              },
-              {
-                "node_quantity_range" = {
-                  "min" = 3
-                  "step" = 3
-                }
-                "node_size" = "8C32G"
-                "storage_size_gib_range" = {
-                  "max" = 4096
-                  "min" = 500
-                }
-              },
-              {
-                "node_quantity_range" = {
-                  "min" = 3
-                  "step" = 3
-                }
-                "node_size" = "8C64G"
-                "storage_size_gib_range" = {
-                  "max" = 4096
-                  "min" = 500
-                }
-              },
-              {
-                "node_quantity_range" = {
-                  "min" = 3
-                  "step" = 3
-                }
-                "node_size" = "16C64G"
-                "storage_size_gib_range" = {
-                  "max" = 4096
-                  "min" = 500
-                }
-              },
-            ])
-          }
+    ```
+    {
+        "cloud_provider" = "AWS"
+        "cluster_type" = "DEDICATED"
+        "region" = "eu-central-1"
+        "tidb" = tolist([
+          {
+            "node_quantity_range" = {
+              "min" = 1
+              "step" = 1
+            }
+            "node_size" = "2C8G"
+          },
+          {
+            "node_quantity_range" = {
+              "min" = 1
+              "step" = 1
+            }
+            "node_size" = "4C16G"
+          },
+          {
+            "node_quantity_range" = {
+              "min" = 1
+              "step" = 1
+            }
+            "node_size" = "8C16G"
+          },
+          {
+            "node_quantity_range" = {
+              "min" = 1
+              "step" = 1
+            }
+            "node_size" = "16C32G"
+          },
+        ])
+        "tiflash" = tolist([
+          {
+            "node_quantity_range" = {
+              "min" = 0
+              "step" = 1
+            }
+            "node_size" = "8C64G"
+            "storage_size_gib_range" = {
+              "max" = 2048
+              "min" = 500
+            }
+          },
+          {
+            "node_quantity_range" = {
+              "min" = 0
+              "step" = 1
+            }
+            "node_size" = "16C128G"
+            "storage_size_gib_range" = {
+              "max" = 2048
+              "min" = 500
+            }
+          },
+        ])
+        "tikv" = tolist([
+          {
+            "node_quantity_range" = {
+              "min" = 3
+              "step" = 3
+            }
+            "node_size" = "2C8G"
+            "storage_size_gib_range" = {
+              "max" = 500
+              "min" = 200
+            }
+          },
+          {
+            "node_quantity_range" = {
+              "min" = 3
+              "step" = 3
+            }
+            "node_size" = "4C16G"
+            "storage_size_gib_range" = {
+              "max" = 2048
+              "min" = 200
+            }
+          },
+          {
+            "node_quantity_range" = {
+              "min" = 3
+              "step" = 3
+            }
+            "node_size" = "8C32G"
+            "storage_size_gib_range" = {
+              "max" = 4096
+              "min" = 500
+            }
+          },
+          {
+            "node_quantity_range" = {
+              "min" = 3
+              "step" = 3
+            }
+            "node_size" = "8C64G"
+            "storage_size_gib_range" = {
+              "max" = 4096
+              "min" = 500
+            }
+          },
+          {
+            "node_quantity_range" = {
+              "min" = 3
+              "step" = 3
+            }
+            "node_size" = "16C64G"
+            "storage_size_gib_range" = {
+              "max" = 4096
+              "min" = 500
+            }
+          },
+        ])
+      }
+    ```
 
     </details>
 
@@ -256,7 +282,7 @@ summary: Learn how to use the cluster resource to create and modify a TiDB Cloud
 
 ## クラスターリソースを使用してクラスターを作成する {#create-a-cluster-using-the-cluster-resource}
 
-> **注記：**
+> **ノート：**
 >
 > 始める前に、 TiDB Cloudコンソールでプロジェクト CIDR を設定していることを確認してください。詳細については、 [プロジェクトCIDRを設定する](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-project-cidr)を参照してください。
 
@@ -268,41 +294,43 @@ summary: Learn how to use the cluster resource to create and modify a TiDB Cloud
 
 2.  `cluster.tf`ファイルを作成します。
 
-        terraform {
-         required_providers {
-           tidbcloud = {
-             source = "tidbcloud/tidbcloud"
-           }
-         }
-        }
+    ```
+    terraform {
+     required_providers {
+       tidbcloud = {
+         source = "tidbcloud/tidbcloud"
+       }
+     }
+    }
 
-        provider "tidbcloud" {
-         public_key = "your_public_key"
-         private_key = "your_private_key"
-        }
+    provider "tidbcloud" {
+     public_key = "your_public_key"
+     private_key = "your_private_key"
+    }
 
-        resource "tidbcloud_cluster" "example_cluster" {
-          project_id     = "1372813089189561287"
-          name           = "firstCluster"
-          cluster_type   = "DEDICATED"
-          cloud_provider = "AWS"
-          region         = "eu-central-1"
-          config = {
-            root_password = "Your_root_password1."
-            port = 4000
-            components = {
-              tidb = {
-                node_size : "8C16G"
-                node_quantity : 1
-              }
-              tikv = {
-                node_size : "8C32G"
-                storage_size_gib : 500,
-                node_quantity : 3
-              }
-            }
+    resource "tidbcloud_cluster" "example_cluster" {
+      project_id     = "1372813089189561287"
+      name           = "firstCluster"
+      cluster_type   = "DEDICATED"
+      cloud_provider = "AWS"
+      region         = "eu-central-1"
+      config = {
+        root_password = "Your_root_password1."
+        port = 4000
+        components = {
+          tidb = {
+            node_size : "8C16G"
+            node_quantity : 1
+          }
+          tikv = {
+            node_size : "8C32G"
+            storage_size_gib : 500,
+            node_quantity : 3
           }
         }
+      }
+    }
+    ```
 
     `resource`ブロックを使用して、リソース タイプ、リソース名、リソースの詳細を含むTiDB Cloudのリソースを定義します。
 
@@ -419,40 +447,42 @@ summary: Learn how to use the cluster resource to create and modify a TiDB Cloud
 
 6.  最新の状態を確認したい場合は、 `terraform refresh`コマンドを実行して状態を更新し、 `terraform state show tidbcloud_cluster.${resource-name}`コマンドを実行して状態を表示します。
 
-        $ terraform refresh
+    ```
+    $ terraform refresh
 
-        tidbcloud_cluster.example_cluster: Refreshing state... [id=1379661944630234067]
+    tidbcloud_cluster.example_cluster: Refreshing state... [id=1379661944630234067]
 
-        $ terraform state show tidbcloud_cluster.example_cluste
+    $ terraform state show tidbcloud_cluster.example_cluste
 
-        # tidbcloud_cluster.example_cluster:
-        resource "tidbcloud_cluster" "example_cluster" {
-            cloud_provider = "AWS"
-            cluster_type   = "DEDICATED"
-            config         = {
-                components     = {
-                    tidb = {
-                        node_quantity = 1
-                        node_size     = "8C16G"
-                    }
-                    tikv = {
-                        node_quantity    = 3
-                        node_size        = "8C32G"
-                        storage_size_gib = 500
-                    }
+    # tidbcloud_cluster.example_cluster:
+    resource "tidbcloud_cluster" "example_cluster" {
+        cloud_provider = "AWS"
+        cluster_type   = "DEDICATED"
+        config         = {
+            components     = {
+                tidb = {
+                    node_quantity = 1
+                    node_size     = "8C16G"
                 }
-                ip_access_list = [
-                    # (1 unchanged element hidden)
-                ]
-                port           = 4000
-                root_password  = "Your_root_password1."
+                tikv = {
+                    node_quantity    = 3
+                    node_size        = "8C32G"
+                    storage_size_gib = 500
+                }
             }
-            id             = "1379661944630234067"
-            name           = "firstCluster"
-            project_id     = "1372813089189561287"
-            region         = "eu-central-1"
-            status         = "AVAILABLE"
+            ip_access_list = [
+                # (1 unchanged element hidden)
+            ]
+            port           = 4000
+            root_password  = "Your_root_password1."
         }
+        id             = "1379661944630234067"
+        name           = "firstCluster"
+        project_id     = "1372813089189561287"
+        region         = "eu-central-1"
+        status         = "AVAILABLE"
+    }
+    ```
 
 ステータスが`AVAILABLE`の場合、TiDB クラスターが作成され、使用する準備ができていることを示します。
 
@@ -470,22 +500,24 @@ TiDB 専用クラスターの場合、Terraform を使用して次のように�
 
     例えば：
 
-            components = {
-              tidb = {
-                node_size : "8C16G"
-                node_quantity : 1
-              }
-              tikv = {
-                node_size : "8C32G"
-                storage_size_gib : 500
-                node_quantity : 3
-              }
-              tiflash = {
-                node_size : "8C64G"
-                storage_size_gib : 500
-                node_quantity : 1
-              }
-            }
+    ```
+        components = {
+          tidb = {
+            node_size : "8C16G"
+            node_quantity : 1
+          }
+          tikv = {
+            node_size : "8C32G"
+            storage_size_gib : 500
+            node_quantity : 3
+          }
+          tiflash = {
+            node_size : "8C64G"
+            storage_size_gib : 500
+            node_quantity : 1
+          }
+        }
+    ```
 
 2.  `terraform apply`コマンドを実行します。
 
@@ -532,50 +564,54 @@ TiDB 専用クラスターの場合、Terraform を使用して次のように�
 
 3.  計画にすべて問題がない場合は、 `yes`と入力して続行します。
 
-          Enter a value: yes
+    ```
+      Enter a value: yes
 
-        tidbcloud_cluster.example_cluster: Modifying... [id=1379661944630234067]
-        tidbcloud_cluster.example_cluster: Modifications complete after 2s [id=1379661944630234067]
+    tidbcloud_cluster.example_cluster: Modifying... [id=1379661944630234067]
+    tidbcloud_cluster.example_cluster: Modifications complete after 2s [id=1379661944630234067]
 
-        Apply complete! Resources: 0 added, 1 changed, 0 destroyed.
+    Apply complete! Resources: 0 added, 1 changed, 0 destroyed.
+    ```
 
 4.  ステータスを表示するには`terraform state show tidbcloud_cluster.${resource-name}`を使用します。
 
-        $ terraform state show tidbcloud_cluster.example_cluster
+    ```
+    $ terraform state show tidbcloud_cluster.example_cluster
 
-        # tidbcloud_cluster.example_cluster:
-        resource "tidbcloud_cluster" "example_cluster" {
-            cloud_provider = "AWS"
-            cluster_type   = "DEDICATED"
-            config         = {
-                components     = {
-                    tidb    = {
-                        node_quantity = 1
-                        node_size     = "8C16G"
-                    }
-                    tiflash = {
-                        node_quantity    = 1
-                        node_size        = "8C64G"
-                        storage_size_gib = 500
-                    }
-                    tikv    = {
-                        node_quantity    = 3
-                        node_size        = "8C32G"
-                        storage_size_gib = 500
-                    }
+    # tidbcloud_cluster.example_cluster:
+    resource "tidbcloud_cluster" "example_cluster" {
+        cloud_provider = "AWS"
+        cluster_type   = "DEDICATED"
+        config         = {
+            components     = {
+                tidb    = {
+                    node_quantity = 1
+                    node_size     = "8C16G"
                 }
-                ip_access_list = [
-                    # (1 unchanged element hidden)
-                ]
-                port           = 4000
-                root_password  = "Your_root_password1."
+                tiflash = {
+                    node_quantity    = 1
+                    node_size        = "8C64G"
+                    storage_size_gib = 500
+                }
+                tikv    = {
+                    node_quantity    = 3
+                    node_size        = "8C32G"
+                    storage_size_gib = 500
+                }
             }
-            id             = "1379661944630234067"
-            name           = "firstCluster"
-            project_id     = "1372813089189561287"
-            region         = "eu-central-1"
-            status         = "MODIFYING"
+            ip_access_list = [
+                # (1 unchanged element hidden)
+            ]
+            port           = 4000
+            root_password  = "Your_root_password1."
         }
+        id             = "1379661944630234067"
+        name           = "firstCluster"
+        project_id     = "1372813089189561287"
+        region         = "eu-central-1"
+        status         = "MODIFYING"
+    }
+    ```
 
 ステータス`MODIFYING`は、クラスターが現在変更中であることを示します。ちょっと待ってください。ステータスは`AVAILABLE`に変更されます。
 
@@ -585,73 +621,77 @@ TiDB クラスターのステータスが`AVAILABLE`の場合、TiDB クラス�
 
 1.  [クラスターを作成する](#create-a-cluster-using-the-cluster-resource)のときに使用する`cluster.tf`ファイルで、 `components`構成を編集します。
 
-    たとえば、TiDB にノードを 1 つ追加し、TiKV にノードを 3 つ追加するには (ステップが 3 であるため、TiKV ノードの数は 3 の倍数である必要があります。 [この情報はクラスター仕様から取得します。](#get-cluster-specification-information-using-the-tidbcloud_cluster_specs-data-source)することができます)、 TiFlashにノードをもう 1 つ追加するには、編集できます。構成は次のとおりです。
+    たとえば、TiDB にノードを 1 つ追加し、TiKV にノードを 3 つ追加するには (ステップが 3 であるため、TiKV ノードの数は 3 の倍数である必要があります[この情報はクラスター仕様から取得します。](#get-cluster-specification-information-using-the-tidbcloud_cluster_specs-data-source)にすることができます)、 TiFlashにノードをもう 1 つ追加するには、編集できます。構成は次のとおりです。
 
-            components = {
-              tidb = {
-                node_size : "8C16G"
-                node_quantity : 2
-              }
-              tikv = {
-                node_size : "8C32G"
-                storage_size_gib : 500
-                node_quantity : 6
-              }
-              tiflash = {
-                node_size : "8C64G"
-                storage_size_gib : 500
-                node_quantity : 2
-              }
-            }
+    ```
+        components = {
+          tidb = {
+            node_size : "8C16G"
+            node_quantity : 2
+          }
+          tikv = {
+            node_size : "8C32G"
+            storage_size_gib : 500
+            node_quantity : 6
+          }
+          tiflash = {
+            node_size : "8C64G"
+            storage_size_gib : 500
+            node_quantity : 2
+          }
+        }
+    ```
 
 2.  `terraform apply`コマンドを実行し、確認のために`yes`を入力します。
 
-        $ terraform apply
+    ```
+    $ terraform apply
 
-        tidbcloud_cluster.example_cluster: Refreshing state... [id=1379661944630234067]
+    tidbcloud_cluster.example_cluster: Refreshing state... [id=1379661944630234067]
 
-        Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
-          ~ update in-place
+    Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
+      ~ update in-place
 
-        Terraform will perform the following actions:
+    Terraform will perform the following actions:
 
-          # tidbcloud_cluster.example_cluster will be updated in-place
-          ~ resource "tidbcloud_cluster" "example_cluster" {
-              ~ config         = {
-                  ~ components     = {
-                      ~ tidb    = {
-                          ~ node_quantity = 1 -> 2
-                            # (1 unchanged attribute hidden)
-                        }
-                      ~ tiflash = {
-                          ~ node_quantity    = 1 -> 2
-                            # (2 unchanged attributes hidden)
-                        }
-                      ~ tikv    = {
-                          ~ node_quantity    = 3 -> 6
-                            # (2 unchanged attributes hidden)
-                        }
+      # tidbcloud_cluster.example_cluster will be updated in-place
+      ~ resource "tidbcloud_cluster" "example_cluster" {
+          ~ config         = {
+              ~ components     = {
+                  ~ tidb    = {
+                      ~ node_quantity = 1 -> 2
+                        # (1 unchanged attribute hidden)
                     }
-                    # (3 unchanged attributes hidden)
+                  ~ tiflash = {
+                      ~ node_quantity    = 1 -> 2
+                        # (2 unchanged attributes hidden)
+                    }
+                  ~ tikv    = {
+                      ~ node_quantity    = 3 -> 6
+                        # (2 unchanged attributes hidden)
+                    }
                 }
-                id             = "1379661944630234067"
-                name           = "firstCluster"
-              ~ status         = "AVAILABLE" -> (known after apply)
-                # (4 unchanged attributes hidden)
+                # (3 unchanged attributes hidden)
             }
+            id             = "1379661944630234067"
+            name           = "firstCluster"
+          ~ status         = "AVAILABLE" -> (known after apply)
+            # (4 unchanged attributes hidden)
+        }
 
-        Plan: 0 to add, 1 to change, 0 to destroy.
+    Plan: 0 to add, 1 to change, 0 to destroy.
 
-        Do you want to perform these actions?
-          Terraform will perform the actions described above.
-          Only 'yes' will be accepted to approve.
+    Do you want to perform these actions?
+      Terraform will perform the actions described above.
+      Only 'yes' will be accepted to approve.
 
-          Enter a value: yes
+      Enter a value: yes
 
-        tidbcloud_cluster.example_cluster: Modifying... [id=1379661944630234067]
-        tidbcloud_cluster.example_cluster: Modifications complete after 2s [id=1379661944630234067]
+    tidbcloud_cluster.example_cluster: Modifying... [id=1379661944630234067]
+    tidbcloud_cluster.example_cluster: Modifications complete after 2s [id=1379661944630234067]
 
-        Apply complete! Resources: 0 added, 1 changed, 0 destroyed.
+    Apply complete! Resources: 0 added, 1 changed, 0 destroyed.
+    ```
 
 ステータスが`MODIFYING`から`AVAILABLE`に変わるまで待ちます。
 
@@ -664,133 +704,143 @@ TiDB クラスターのステータスが`AVAILABLE`の場合、TiDB クラス�
 
 1.  [クラスターを作成する](#create-a-cluster-using-the-cluster-resource)のときに使用される`cluster.tf`ファイルで、 `config`構成に`pause = true`を追加します。
 
-        config = {
-            paused = true
-            root_password = "Your_root_password1."
-            port          = 4000
-            ...
-          }
+    ```
+    config = {
+        paused = true
+        root_password = "Your_root_password1."
+        port          = 4000
+        ...
+      }
+    ```
 
 2.  `terraform apply`コマンドを実行し、確認後に`yes`を入力します。
 
-        $ terraform apply
+    ```
+    $ terraform apply
 
-        tidbcloud_cluster.example_cluster: Refreshing state... [id=1379661944630234067]
+    tidbcloud_cluster.example_cluster: Refreshing state... [id=1379661944630234067]
 
-        Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
-          ~ update in-place
+    Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
+      ~ update in-place
 
-        Terraform will perform the following actions:
+    Terraform will perform the following actions:
 
-          # tidbcloud_cluster.example_cluster will be updated in-place
-          ~ resource "tidbcloud_cluster" "example_cluster" {
-              ~ config         = {
-                  + paused         = true
-                    # (4 unchanged attributes hidden)
-                }
-                id             = "1379661944630234067"
-                name           = "firstCluster"
-              ~ status         = "AVAILABLE" -> (known after apply)
+      # tidbcloud_cluster.example_cluster will be updated in-place
+      ~ resource "tidbcloud_cluster" "example_cluster" {
+          ~ config         = {
+              + paused         = true
                 # (4 unchanged attributes hidden)
             }
+            id             = "1379661944630234067"
+            name           = "firstCluster"
+          ~ status         = "AVAILABLE" -> (known after apply)
+            # (4 unchanged attributes hidden)
+        }
 
-        Plan: 0 to add, 1 to change, 0 to destroy.
+    Plan: 0 to add, 1 to change, 0 to destroy.
 
-        Do you want to perform these actions?
-          Terraform will perform the actions described above.
-          Only 'yes' will be accepted to approve.
+    Do you want to perform these actions?
+      Terraform will perform the actions described above.
+      Only 'yes' will be accepted to approve.
 
-          Enter a value: yes
+      Enter a value: yes
 
-        tidbcloud_cluster.example_cluster: Modifying... [id=1379661944630234067]
-        tidbcloud_cluster.example_cluster: Modifications complete after 2s [id=1379661944630234067]
+    tidbcloud_cluster.example_cluster: Modifying... [id=1379661944630234067]
+    tidbcloud_cluster.example_cluster: Modifications complete after 2s [id=1379661944630234067]
 
-        Apply complete! Resources: 0 added, 1 changed, 0 destroyed.
+    Apply complete! Resources: 0 added, 1 changed, 0 destroyed.
+    ```
 
 3.  `terraform state show tidbcloud_cluster.${resource-name}`コマンドを使用してステータスを確認します。
 
-        $ terraform state show tidbcloud_cluster.example_cluster
+    ```
+    $ terraform state show tidbcloud_cluster.example_cluster
 
-        # tidbcloud_cluster.example_cluster:
-        resource "tidbcloud_cluster" "example_cluster" {
-            cloud_provider = "AWS"
-            cluster_type   = "DEDICATED"
-            config         = {
-                components     = {
-                    tidb    = {
-                        node_quantity = 2
-                        node_size     = "8C16G"
-                    }
-                    tiflash = {
-                        node_quantity    = 2
-                        node_size        = "8C64G"
-                        storage_size_gib = 500
-                    }
-                    tikv    = {
-                        node_quantity    = 6
-                        node_size        = "8C32G"
-                        storage_size_gib = 500
-                    }
+    # tidbcloud_cluster.example_cluster:
+    resource "tidbcloud_cluster" "example_cluster" {
+        cloud_provider = "AWS"
+        cluster_type   = "DEDICATED"
+        config         = {
+            components     = {
+                tidb    = {
+                    node_quantity = 2
+                    node_size     = "8C16G"
                 }
-                ip_access_list = [
-                    # (1 unchanged element hidden)
-                ]
-                paused         = true
-                port           = 4000
-                root_password  = "Your_root_password1."
+                tiflash = {
+                    node_quantity    = 2
+                    node_size        = "8C64G"
+                    storage_size_gib = 500
+                }
+                tikv    = {
+                    node_quantity    = 6
+                    node_size        = "8C32G"
+                    storage_size_gib = 500
+                }
             }
-            id             = "1379661944630234067"
-            name           = "firstCluster"
-            project_id     = "1372813089189561287"
-            region         = "eu-central-1"
-            status         = "PAUSED"
+            ip_access_list = [
+                # (1 unchanged element hidden)
+            ]
+            paused         = true
+            port           = 4000
+            root_password  = "Your_root_password1."
         }
+        id             = "1379661944630234067"
+        name           = "firstCluster"
+        project_id     = "1372813089189561287"
+        region         = "eu-central-1"
+        status         = "PAUSED"
+    }
+    ```
 
 4.  クラスターを再開する必要がある場合は、 `paused = false`を設定します。
 
-        config = {
-            paused = false
-            root_password = "Your_root_password1."
-            port          = 4000
-            ...
-          }
+    ```
+    config = {
+        paused = false
+        root_password = "Your_root_password1."
+        port          = 4000
+        ...
+      }
+    ```
 
 5.  `terraform apply`コマンドを実行し、確認のために`yes`を入力します。 `terraform state show tidbcloud_cluster.${resource-name}`コマンドを使用してステータスを確認すると、ステータスが`RESUMING`に変わることがわかります。
 
-        # tidbcloud_cluster.example_cluster:
-        resource "tidbcloud_cluster" "example_cluster" {
-            cloud_provider = "AWS"
-            cluster_type   = "DEDICATED"
-            config         = {
-                components     = {
-                    tidb    = {
-                        node_quantity = 2
-                        node_size     = "8C16G"
-                    }
-                    tiflash = {
-                        node_quantity    = 2
-                        node_size        = "8C64G"
-                        storage_size_gib = 500
-                    }
-                    tikv    = {
-                        node_quantity    = 6
-                        node_size        = "8C32G"
-                        storage_size_gib = 500
-                    }
+    ```
+    # tidbcloud_cluster.example_cluster:
+    resource "tidbcloud_cluster" "example_cluster" {
+        cloud_provider = "AWS"
+        cluster_type   = "DEDICATED"
+        config         = {
+            components     = {
+                tidb    = {
+                    node_quantity = 2
+                    node_size     = "8C16G"
                 }
-                ip_access_list = [
-                    # (1 unchanged element hidden)
-                ]
-                paused         = false
-                port           = 4000
-                root_password  = "Your_root_password1."
+                tiflash = {
+                    node_quantity    = 2
+                    node_size        = "8C64G"
+                    storage_size_gib = 500
+                }
+                tikv    = {
+                    node_quantity    = 6
+                    node_size        = "8C32G"
+                    storage_size_gib = 500
+                }
             }
-            id             = "1379661944630234067"
-            name           = "firstCluster"
-            project_id     = "1372813089189561287"
-            region         = "eu-central-1"
-            status         = "RESUMING"
+            ip_access_list = [
+                # (1 unchanged element hidden)
+            ]
+            paused         = false
+            port           = 4000
+            root_password  = "Your_root_password1."
         }
+        id             = "1379661944630234067"
+        name           = "firstCluster"
+        project_id     = "1372813089189561287"
+        region         = "eu-central-1"
+        status         = "RESUMING"
+    }
+    ```
 
 6.  しばらく待ってから、 `terraform refersh`コマンドを使用して状態を更新します。最終的にステータスは`AVAILABLE`になります。
 
@@ -804,109 +854,121 @@ Terraform によって管理されていない TiDB クラスターの場合は�
 
 1.  次のように`import_cluster.tf`ファイルを作成します。
 
-        terraform {
-         required_providers {
-           tidbcloud = {
-             source = "tidbcloud/tidbcloud"
-           }
-         }
-        }
-        resource "tidbcloud_cluster" "import_cluster" {}
+    ```
+    terraform {
+     required_providers {
+       tidbcloud = {
+         source = "tidbcloud/tidbcloud"
+       }
+     }
+    }
+    resource "tidbcloud_cluster" "import_cluster" {}
+    ```
 
 2.  `terraform import tidbcloud_cluster.import_cluster projectId,clusterId`でクラスターをインポートします。
 
     例えば：
 
-        $ terraform import tidbcloud_cluster.import_cluster 1372813089189561287,1379661944630264072
+    ```
+    $ terraform import tidbcloud_cluster.import_cluster 1372813089189561287,1379661944630264072
 
-        tidbcloud_cluster.import_cluster: Importing from ID "1372813089189561287,1379661944630264072"...
-        tidbcloud_cluster.import_cluster: Import prepared!
-          Prepared tidbcloud_cluster for import
-        tidbcloud_cluster.import_cluster: Refreshing state... [id=1379661944630264072]
+    tidbcloud_cluster.import_cluster: Importing from ID "1372813089189561287,1379661944630264072"...
+    tidbcloud_cluster.import_cluster: Import prepared!
+      Prepared tidbcloud_cluster for import
+    tidbcloud_cluster.import_cluster: Refreshing state... [id=1379661944630264072]
 
-        Import successful!
+    Import successful!
 
-        The resources that were imported are shown above. These resources are now in
-        your Terraform state and will henceforth be managed by Terraform.
+    The resources that were imported are shown above. These resources are now in
+    your Terraform state and will henceforth be managed by Terraform.
+    ```
 
 3.  `terraform state show tidbcloud_cluster.import_cluster`コマンドを実行してクラスターのステータスを確認します。
 
-        $ terraform state show tidbcloud_cluster.import_cluster
+    ```
+    $ terraform state show tidbcloud_cluster.import_cluster
 
-        # tidbcloud_cluster.import_cluster:
-        resource "tidbcloud_cluster" "import_cluster" {
-            cloud_provider = "AWS"
-            cluster_type   = "DEDICATED"
-            config         = {
-                components = {
-                    tidb    = {
-                        node_quantity = 2
-                        node_size     = "8C16G"
-                    }
-                    tiflash = {
-                        node_quantity    = 2
-                        node_size        = "8C64G"
-                        storage_size_gib = 500
-                    }
-                    tikv    = {
-                        node_quantity    = 6
-                        node_size        = "8C32G"
-                        storage_size_gib = 500
-                    }
+    # tidbcloud_cluster.import_cluster:
+    resource "tidbcloud_cluster" "import_cluster" {
+        cloud_provider = "AWS"
+        cluster_type   = "DEDICATED"
+        config         = {
+            components = {
+                tidb    = {
+                    node_quantity = 2
+                    node_size     = "8C16G"
                 }
-                port       = 4000
+                tiflash = {
+                    node_quantity    = 2
+                    node_size        = "8C64G"
+                    storage_size_gib = 500
+                }
+                tikv    = {
+                    node_quantity    = 6
+                    node_size        = "8C32G"
+                    storage_size_gib = 500
+                }
             }
-            id             = "1379661944630264072"
-            name           = "restoreCluster"
-            project_id     = "1372813089189561287"
-            region         = "eu-central-1"
-            status         = "AVAILABLE"
+            port       = 4000
         }
+        id             = "1379661944630264072"
+        name           = "restoreCluster"
+        project_id     = "1372813089189561287"
+        region         = "eu-central-1"
+        status         = "AVAILABLE"
+    }
+    ```
 
 4.  Terraform を使用してクラスターを管理するには、前のステップの出力を構成ファイルにコピーします。 `id`と`status`の行は Terraform によって制御されるため、削除する必要があることに注意してください。
 
-        resource "tidbcloud_cluster" "import_cluster" {
-              cloud_provider = "AWS"
-              cluster_type   = "DEDICATED"
-              config         = {
-                  components = {
-                      tidb    = {
-                          node_quantity = 2
-                          node_size     = "8C16G"
-                      }
-                      tiflash = {
-                          node_quantity    = 2
-                          node_size        = "8C64G"
-                          storage_size_gib = 500
-                      }
-                      tikv    = {
-                          node_quantity    = 6
-                          node_size        = "8C32G"
-                          storage_size_gib = 500
-                      }
+    ```
+    resource "tidbcloud_cluster" "import_cluster" {
+          cloud_provider = "AWS"
+          cluster_type   = "DEDICATED"
+          config         = {
+              components = {
+                  tidb    = {
+                      node_quantity = 2
+                      node_size     = "8C16G"
                   }
-                  port       = 4000
+                  tiflash = {
+                      node_quantity    = 2
+                      node_size        = "8C64G"
+                      storage_size_gib = 500
+                  }
+                  tikv    = {
+                      node_quantity    = 6
+                      node_size        = "8C32G"
+                      storage_size_gib = 500
+                  }
               }
-              name           = "restoreCluster"
-              project_id     = "1372813089189561287"
-              region         = "eu-central-1"
-        }
+              port       = 4000
+          }
+          name           = "restoreCluster"
+          project_id     = "1372813089189561287"
+          region         = "eu-central-1"
+    }
+    ```
 
 5.  `terraform fmt`を使用して構成ファイルをフォーマットできます。
 
-        $ terraform fmt
+    ```
+    $ terraform fmt
+    ```
 
 6.  構成と状態の一貫性を確保するには、 `terraform plan`または`terraform apply`を実行します。 `No changes`が表示されれば、インポートは成功しています。
 
-        $ terraform apply
+    ```
+    $ terraform apply
 
-        tidbcloud_cluster.import_cluster: Refreshing state... [id=1379661944630264072]
+    tidbcloud_cluster.import_cluster: Refreshing state... [id=1379661944630264072]
 
-        No changes. Your infrastructure matches the configuration.
+    No changes. Your infrastructure matches the configuration.
 
-        Terraform has compared your real infrastructure against your configuration and found no differences, so no changes are needed.
+    Terraform has compared your real infrastructure against your configuration and found no differences, so no changes are needed.
 
-        Apply complete! Resources: 0 added, 0 changed, 0 destroyed.
+    Apply complete! Resources: 0 added, 0 changed, 0 destroyed.
+    ```
 
 これで、Terraform を使用してクラスターを管理できるようになりました。
 
@@ -914,16 +976,20 @@ Terraform によって管理されていない TiDB クラスターの場合は�
 
 クラスターを削除するには、対応する`cluster.tf`ファイルが存在するクラスター ディレクトリに移動し、 `terraform destroy`コマンドを実行してクラスター リソースを破棄します。
 
-    $ terraform destroy
+```
+$ terraform destroy
 
-    Plan: 0 to add, 0 to change, 1 to destroy.
+Plan: 0 to add, 0 to change, 1 to destroy.
 
-    Do you really want to destroy all resources?
-    Terraform will destroy all your managed infrastructure, as shown above.
-    There is no undo. Only 'yes' will be accepted to confirm.
+Do you really want to destroy all resources?
+Terraform will destroy all your managed infrastructure, as shown above.
+There is no undo. Only 'yes' will be accepted to confirm.
 
-    Enter a value: yes
+Enter a value: yes
+```
 
 ここで`terraform show`コマンドを実行しても、リソースがクリアされているため、何も得られません。
 
-    $ terraform show
+```
+$ terraform show
+```

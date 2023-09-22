@@ -43,7 +43,7 @@ TiDB は、必要に応じて使用できる他のツールも提供します。
 
 </CustomContent>
 
-> **注記：**
+> **ノート：**
 >
 > PingCAP は以前、TiDB に固有の拡張機能を備えた[マイダンパープロジェクト](https://github.com/maxbube/mydumper)のフォークを維持していました。その後、このフォークは Go で書き直された[Dumpling](/dumpling-overview.md)に置き換えられ、TiDB に固有のさらなる最適化をサポートしています。 mydumper の代わりにDumpling を使用することを強くお勧めします。
 >
@@ -60,7 +60,7 @@ Mydumper と比較して、 Dumplingには次の改良点があります。
     -   TiDB の非表示列`_tidb_rowid`を使用して、単一テーブルからの同時データ エクスポートのパフォーマンスを最適化します。
     -   TiDB の場合、値[`tidb_snapshot`](/read-historical-data.md#how-tidb-reads-data-from-history-versions)を設定してデータ バックアップの時点を指定できます。一貫性を確保するために`FLUSH TABLES WITH READ LOCK`を使用するのではなく、これによりバックアップの一貫性が確保されます。
 
-> **注記：**
+> **ノート：**
 >
 > 次のシナリオでは、Dumpling はPD に接続できません。
 >
@@ -73,7 +73,6 @@ Mydumper と比較して、 Dumplingには次の改良点があります。
 
 ### 必要な権限 {#required-privileges}
 
--   PROCESS: クラスター情報をクエリして PD アドレスを取得し、PD 経由で GC を制御するために必要です。
 -   SELECT: テーブルをエクスポートする場合に必要です。
 -   RELOAD: `consistency flush`を使用する場合は必須です。 TiDB のみがこの権限をサポートしていることに注意してください。アップストリームが RDS データベースまたはマネージド サービスである場合、この権限は無視できます。
 -   LOCK TABLES: `consistency lock`を使用する場合は必須です。この権限は、エクスポートするすべてのデータベースとテーブルに付与する必要があります。
@@ -84,6 +83,8 @@ Mydumper と比較して、 Dumplingには次の改良点があります。
 このドキュメントでは、127.0.0.1:4000 ホスト上に TiDB インスタンスが存在し、この TiDB インスタンスにはパスワードのない root ユーザーがいることを前提としています。
 
 Dumpling は、デフォルトでデータを SQL ファイルにエクスポートします。 `--filetype sql`フラグを追加して、データを SQL ファイルにエクスポートすることもできます。
+
+{{< copyable "" >}}
 
 ```shell
 dumpling -u root -P 4000 -h 127.0.0.1 --filetype sql -t 8 -o /tmp/test -r 200000 -F 256MiB
@@ -109,7 +110,7 @@ dumpling -u root -P 4000 -h 127.0.0.1 --filetype sql -t 8 -o /tmp/test -r 200000
 -   `-r`オプションを使用すると、テーブル内の同時実行が有効になり、エクスポートが高速化されます。デフォルト値は`0`で、これは無効を意味します。 0 より大きい値は有効であることを意味し、値は`INT`タイプです。ソース データベースが TiDB の場合、0 より大きい`-r`値は、TiDB リージョン情報が分割に使用され、メモリ使用量が削減されることを示します。特定の`-r`値は分割アルゴリズムには影響しません。ソース データベースが MySQL で、主キーが`INT`タイプの場合、 `-r`指定するとテーブル内の同時実行性も有効になります。
 -   `-F`オプションは、単一ファイルの最大サイズを指定するために使用されます (ここでの単位は`MiB`です`5GiB`や`8KB`などの入力も受け入れられます)。 TiDB Lightningを使用してこのファイルを TiDB インスタンスにロードする予定がある場合は、その値を 256 MiB 以下に保つことをお勧めします。
 
-> **注記：**
+> **ノート：**
 >
 > エクスポートされる 1 つのテーブルのサイズが 10 GB を超える場合は、 `-r`および`-F`オプション**を使用することを強くお勧めし**ます。
 
@@ -118,6 +119,8 @@ dumpling -u root -P 4000 -h 127.0.0.1 --filetype sql -t 8 -o /tmp/test -r 200000
 引数`--filetype csv`を追加すると、データを CSV ファイルにエクスポートできます。
 
 データを CSV ファイルにエクスポートする場合、 `--sql <SQL>`を使用して SQL ステートメントでレコードをフィルターできます。たとえば、次のコマンドを使用して、 `test.sbtest1`中`id < 100`に一致するすべてのレコードをエクスポートできます。
+
+{{< copyable "" >}}
 
 ```shell
 ./dumpling -u root -P 4000 -h 127.0.0.1 -o /tmp/test --filetype csv --sql 'select * from `test`.`sbtest1` where id < 100' -F 100MiB --output-filename-template 'test.sbtest1.{{.Index}}'
@@ -141,7 +144,7 @@ dumpling -u root -P 4000 -h 127.0.0.1 --filetype sql -t 8 -o /tmp/test -r 200000
 
 -   `--csv-separator`や`--csv-delimiter`のようなオプションを使用して、CSV ファイル形式を構成できます。詳細は[Dumplingオプション一覧](#option-list-of-dumpling)を参照してください。
 
-> **注記：**
+> **ノート：**
 >
 > Dumplingでは*文字列*と*キーワードは*区別されません。インポートされたデータが Boolean 型の場合、値`true`は`1`に変換され、値`false`は`0`に変換されます。
 
@@ -157,6 +160,8 @@ dumpling -u root -P 4000 -h 127.0.0.1 --filetype sql -t 8 -o /tmp/test -r 200000
 
 -   `metadata` : エクスポートされたファイルの開始時刻とマスター バイナリ ログの位置。
 
+    {{< copyable "" >}}
+
     ```shell
     cat metadata
     ```
@@ -171,6 +176,8 @@ dumpling -u root -P 4000 -h 127.0.0.1 --filetype sql -t 8 -o /tmp/test -r 200000
 
 -   `{schema}-schema-create.sql` : スキーマの作成に使用される SQL ファイル
 
+    {{< copyable "" >}}
+
     ```shell
     cat test-schema-create.sql
     ```
@@ -180,6 +187,8 @@ dumpling -u root -P 4000 -h 127.0.0.1 --filetype sql -t 8 -o /tmp/test -r 200000
     ```
 
 -   `{schema}.{table}-schema.sql` : テーブルの作成に使用される SQL ファイル
+
+    {{< copyable "" >}}
 
     ```shell
     cat test.t1-schema.sql
@@ -192,6 +201,8 @@ dumpling -u root -P 4000 -h 127.0.0.1 --filetype sql -t 8 -o /tmp/test -r 200000
     ```
 
 -   `{schema}.{table}.{0001}.{sql|csv}` : 日付ソースファイル
+
+    {{< copyable "" >}}
 
     ```shell
     cat test.t1.0.sql
@@ -213,6 +224,8 @@ v4.0.8 以降、 Dumpling はクラウド ストレージへのデータのエ�
 
 Amazon S3 バックエンドstorageにアクセスする権限を持つアカウントの`SecretKey`と`AccessKey`環境変数としてDumplingノードに渡します。
 
+{{< copyable "" >}}
+
 ```shell
 export AWS_ACCESS_KEY_ID=${AccessKey}
 export AWS_SECRET_ACCESS_KEY=${SecretKey}
@@ -230,6 +243,8 @@ Dumpling は、資格情報ファイルの`~/.aws/credentials`からの読み取
 
 </CustomContent>
 
+{{< copyable "" >}}
+
 ```shell
 ./dumpling -u root -P 4000 -h 127.0.0.1 -r 200000 -o "s3://${Bucket}/${Folder}"
 ```
@@ -239,6 +254,8 @@ Dumpling は、資格情報ファイルの`~/.aws/credentials`からの読み取
 #### <code>--where</code>オプションを使用してデータをフィルタリングします {#use-the-code-where-code-option-to-filter-data}
 
 デフォルトでは、 Dumpling はシステム データベース ( `mysql` 、 `sys` 、 `INFORMATION_SCHEMA` 、 `PERFORMANCE_SCHEMA` 、 `METRICS_SCHEMA` 、および`INSPECTION_SCHEMA`を含む) を除くすべてのデータベースをエクスポートします。 `--where <SQL where expression>`使用して、エクスポートするレコードを選択できます。
+
+{{< copyable "" >}}
 
 ```shell
 ./dumpling -u root -P 4000 -h 127.0.0.1 -o /tmp/test --where "id < 100"
@@ -250,6 +267,8 @@ Dumpling は、資格情報ファイルの`~/.aws/credentials`からの読み取
 
 Dumpling は、 `--filter`オプションでテーブル フィルターを指定することで、特定のデータベースまたはテーブルをフィルターできます。テーブル フィルターの構文は`.gitignore`の構文と似ています。詳細は[テーブルフィルター](/table-filter.md)を参照してください。
 
+{{< copyable "" >}}
+
 ```shell
 ./dumpling -u root -P 4000 -h 127.0.0.1 -o /tmp/test -r 200000 --filter "employees.*" --filter "*.WorkOrder"
 ```
@@ -260,7 +279,7 @@ Dumpling は、 `--filter`オプションでテーブル フィルターを指�
 
 Dumpling は、 `-B`オプションを使用して特定のデータベースをエクスポートしたり、 `-T`オプションを使用して特定のテーブルをエクスポートしたりすることもできます。
 
-> **注記：**
+> **ノート：**
 >
 > -   `--filter`オプションと`-T`オプションを同時に使用することはできません。
 > -   `-T`オプションは`database-name.table-name`のような完全な形式の入力のみを受け入れることができ、テーブル名のみの入力は受け入れられません。例:Dumplingは`-T WorkOrder`を認識できません。
@@ -282,7 +301,7 @@ Dumpling は、 `-B`オプションを使用して特定のデータベースを
 
 ### Dumpling のデータ整合性オプションを調整する {#adjust-dumpling-s-data-consistency-options}
 
-> **注記：**
+> **ノート：**
 >
 > データ整合性オプションのデフォルト値は`auto`です。ほとんどのシナリオでは、 Dumplingのデフォルトのデータ整合性オプションを調整する必要はありません。
 
@@ -296,24 +315,30 @@ Dumpling は`--consistency <consistency level>`オプションを使用して、
 
 すべてが完了すると、エクスポートされたファイルが`/tmp/test`で表示されます。
 
+{{< copyable "" >}}
+
 ```shell
 ls -lh /tmp/test | awk '{print $5 "\t" $9}'
 ```
 
-    140B  metadata
-    66B   test-schema-create.sql
-    300B  test.sbtest1-schema.sql
-    190K  test.sbtest1.0.sql
-    300B  test.sbtest2-schema.sql
-    190K  test.sbtest2.0.sql
-    300B  test.sbtest3-schema.sql
-    190K  test.sbtest3.0.sql
+```
+140B  metadata
+66B   test-schema-create.sql
+300B  test.sbtest1-schema.sql
+190K  test.sbtest1.0.sql
+300B  test.sbtest2-schema.sql
+190K  test.sbtest2.0.sql
+300B  test.sbtest3-schema.sql
+190K  test.sbtest3.0.sql
+```
 
 ### TiDB の履歴データのスナップショットをエクスポートする {#export-historical-data-snapshots-of-tidb}
 
 Dumpling は、 `--snapshot`オプションを指定して、ある[tidb_スナップショット](/read-historical-data.md#how-tidb-reads-data-from-history-versions)のデータをエクスポートできます。
 
 `--snapshot`オプションは、TSO ( `SHOW MASTER STATUS`コマンドによって出力される`Position`フィールド) または`datetime`データ型の有効時間 ( `YYYY-MM-DD hh:mm:ss`の形式) に設定できます。次に例を示します。
+
+{{< copyable "" >}}
 
 ```shell
 ./dumpling --snapshot 417773951312461825
@@ -391,7 +416,7 @@ SET GLOBAL tidb_gc_life_time = '10m';
 | `--csv-separator`            | CSV ファイル内の各値の区切り文字。デフォルトの「,」を使用することはお勧めできません。 「|+|」を使用することをお勧めします。またはその他の珍しい文字の組み合わせ                                                                                                                                                                               | 「、」                                                                                                                                                                 | 「、」 |
 | `--csv-null-value`           | CSV ファイル内の null 値の表現                                                                                                                                                                                                                                               | 「\N」                                                                                                                                                                |     |
 | `--escape-backslash`         | エクスポート ファイル内の特殊文字をエスケープするには、バックスラッシュ ( `\` ) を使用します。                                                                                                                                                                                                               | 真実                                                                                                                                                                  |     |
-| `--output-filename-template` | [golang テンプレート](https://golang.org/pkg/text/template/#hdr-Arguments)の形式で表されるファイル名テンプレート<br/>`{{.DB}}` 、 `{{.Table}}` 、および`{{.Index}}`引数をサポートします<br/>3 つの引数は、データ ファイルのデータベース名、テーブル名、チャンク ID を表します。                                                                  | `{{.DB}}.{{.Table}}.{{.Index}}`                                                                                                                                     |     |
+| `--output-filename-template` | [golang テンプレート](https://golang.org/pkg/text/template/#hdr-Arguments)の形式で表されるファイル名テンプレート<br/>`{{.DB}}` 、 `{{.Table}}` 、および`{{.Index}}`引数をサポートします<br/>3 つの引数は、データ ファイルのデータベース名、テーブル名、チャンク ID を表します。                                                                  | &#39;{{.DB}}.{{.Table}}.{{.Index}}&#39;                                                                                                                             |     |
 | `--status-addr`              | Dumpling のサービス アドレス (Prometheus がメトリクスと pprof デバッグを取得するためのアドレスを含む)                                                                                                                                                                                                 | &quot;:8281&quot;                                                                                                                                                   |     |
 | `--tidb-mem-quota-query`     | Dumplingコマンドの 1 行で SQL ステートメントをエクスポートする際のメモリ制限。単位はバイトです。 v4.0.10 以降のバージョンでは、このパラメーターを設定しない場合、TiDB はデフォルトで`mem-quota-query`構成項目の値をメモリ制限値として使用します。 v4.0.10 より前のバージョンの場合、パラメータ値のデフォルトは 32 GB です。                                                                      | 34359738368                                                                                                                                                         |     |
 | `--params`                   | エクスポートするデータベースの接続のセッション変数を指定します。必要な形式は`"character_set_client=latin1,character_set_connection=latin1"`です                                                                                                                                                            |                                                                                                                                                                     |     |

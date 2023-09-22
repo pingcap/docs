@@ -76,7 +76,9 @@ PREPARE `books_query` FROM 'SELECT * FROM `books` WHERE `id` = ?';
 
 実行結果:
 
-    Query OK, 0 rows affected (0.01 sec)
+```
+Query OK, 0 rows affected (0.01 sec)
+```
 
 ```sql
 SET @id = 1;
@@ -84,7 +86,9 @@ SET @id = 1;
 
 実行結果:
 
-    Query OK, 0 rows affected (0.04 sec)
+```
+Query OK, 0 rows affected (0.04 sec)
+```
 
 ```sql
 EXECUTE `books_query` USING @id;
@@ -92,12 +96,14 @@ EXECUTE `books_query` USING @id;
 
 実行結果:
 
-    +---------+---------------------------------+--------+---------------------+-------+--------+
-    | id      | title                           | type   | published_at        | stock | price  |
-    +---------+---------------------------------+--------+---------------------+-------+--------+
-    | 1       | The Adventures of Pierce Wehner | Comics | 1904-06-06 20:46:25 |   586 | 411.66 |
-    +---------+---------------------------------+--------+---------------------+-------+--------+
-    1 row in set (0.05 sec)
+```
++---------+---------------------------------+--------+---------------------+-------+--------+
+| id      | title                           | type   | published_at        | stock | price  |
++---------+---------------------------------+--------+---------------------+-------+--------+
+| 1       | The Adventures of Pierce Wehner | Comics | 1904-06-06 20:46:25 |   586 | 411.66 |
++---------+---------------------------------+--------+---------------------+-------+--------+
+1 row in set (0.05 sec)
+```
 
 </div>
 
@@ -141,7 +147,9 @@ PREPARE `books_insert` FROM 'INSERT INTO `books` (`title`, `type`, `stock`, `pri
 
 実行結果:
 
-    Query OK, 0 rows affected (0.03 sec)
+```
+Query OK, 0 rows affected (0.03 sec)
+```
 
 ```sql
 SET @title = 'TiDB Developer Guide';
@@ -153,7 +161,9 @@ SET @published_at = NOW();
 
 実行結果:
 
-    Query OK, 0 rows affected (0.04 sec)
+```
+Query OK, 0 rows affected (0.04 sec)
+```
 
 ```sql
 EXECUTE `books_insert` USING @title, @type, @stock, @price, @published_at;
@@ -161,7 +171,9 @@ EXECUTE `books_insert` USING @title, @type, @stock, @price, @published_at;
 
 実行結果:
 
-    Query OK, 1 row affected (0.03 sec)
+```
+Query OK, 1 row affected (0.03 sec)
+```
 
 </div>
 
@@ -184,11 +196,11 @@ try (Connection connection = ds.getConnection()) {
 }
 ```
 
-ご覧のとおり、JDBC はプリペアド ステートメントのライフ サイクルの制御に役立ち、アプリケーションでプリペアド ステートメントを手動で作成、使用、または削除する必要はありません。ただし、TiDB は MySQL と互換性があるため、クライアント側で MySQL JDBC Driverを使用するためのデフォルト設定では、***サーバー側の***プリペアドステートメントオプションが有効ではなく、クライアント側のプリペアドステートメントが使用されることに注意してください。
+ご覧のとおり、JDBC はプリペアド ステートメントのライフ サイクルの制御に役立ち、アプリケーションでプリペアド ステートメントを手動で作成、使用、または削除する必要はありません。ただし、TiDB は MySQL と互換性があるため、クライアント側で MySQL JDBCDriverを使用するためのデフォルト設定では、***サーバー側の***プリペアドステートメントオプションが有効ではなく、クライアント側のプリペアドステートメントが使用されることに注意してください。
 
 次の構成は、JDBC で TiDB サーバー側のプリペアド ステートメントを使用するのに役立ちます。
 
-|          パラメータ          |                  手段                 |            推奨シナリオ           |        推奨されるコンフィグレーション        |
+|          パラメータ          |                  意味                 |            推奨シナリオ           |        推奨されるコンフィグレーション        |
 | :---------------------: | :---------------------------------: | :-------------------------: | :---------------------------: |
 |   `useServerPrepStmts`  |   サーバー側を使用してプリペアドステートメントを有効にするかどうか  | プリペアドステートメントを複数回使用する必要がある場合 |             `true`            |
 |     `cachePrepStmts`    |   クライアントが準備されたステートメントをキャッシュするかどうか   |  `useServerPrepStmts=true`時 |             `true`            |
@@ -197,15 +209,17 @@ try (Connection connection = ds.getConnection()) {
 
 以下は、JDBC 接続文字列構成の一般的なシナリオです。ホスト: `127.0.0.1` 、ポート: `4000` 、ユーザー名: `root` 、パスワード: null、デフォルトのデータベース: `test` :
 
-    jdbc:mysql://127.0.0.1:4000/test?user=root&useConfigs=maxPerformance&useServerPrepStmts=true&prepStmtCacheSqlLimit=2048&prepStmtCacheSize=256&rewriteBatchedStatements=true&allowMultiQueries=true
+```
+jdbc:mysql://127.0.0.1:4000/test?user=root&useConfigs=maxPerformance&useServerPrepStmts=true&prepStmtCacheSqlLimit=2048&prepStmtCacheSize=256&rewriteBatchedStatements=true&allowMultiQueries=true
+```
 
 データの挿入時に他の JDBC パラメータを変更する必要がある場合は、第[行を挿入する](/develop/dev-guide-insert-data.md#insert-rows)章を参照してください。
 
 Javaの完全な例については、以下を参照してください。
 
--   [JDBC を使用して TiDB に接続する](/develop/dev-guide-sample-application-java-jdbc.md)
--   [Hibernate で TiDB に接続する](/develop/dev-guide-sample-application-java-hibernate.md)
--   [Spring Boot を使用して TiDB に接続する](/develop/dev-guide-sample-application-java-spring-boot.md)
+-   [TiDB と JDBC を使用してシンプルな CRUD アプリを構築する](/develop/dev-guide-sample-application-java-jdbc.md#step-2-get-the-code)
+-   [TiDB と Hibernate を使用してシンプルな CRUD アプリを構築する](/develop/dev-guide-sample-application-java-hibernate.md#step-2-get-the-code)
+-   [Spring Boot を使用して TiDB アプリを構築する](/develop/dev-guide-sample-application-java-spring-boot.md)
 
 </div>
 

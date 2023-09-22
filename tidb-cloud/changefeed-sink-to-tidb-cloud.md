@@ -9,7 +9,7 @@ Summary: Learn how to create a changefeed to stream data from a TiDB Dedicated c
 
 > **注記：**
 >
-> Changefeed 機能を使用するには、TiDB 専用クラスターのバージョンが v6.1.3 以降であることを確認してください。
+> Changefeed 機能を使用するには、TiDB 専用クラスターのバージョンが v6.4.0 以降であることを確認してください。
 
 ## 制限 {#restrictions}
 
@@ -48,17 +48,19 @@ Summary: Learn how to create a changefeed to stream data from a TiDB Dedicated c
     SET GLOBAL tidb_gc_life_time = '720h';
     ```
 
-2.  [バックアップデータ](/tidb-cloud/backup-and-restore.md#backup)を TiDB 専用クラスターからロードし、 [マイダンパー/マイローダー](https://centminmod.com/mydumper.html)などのコミュニティ ツールを使用して宛先 TiDB サーバーレス クラスターにデータをロードします。
+2.  [バックアップデータ](/tidb-cloud/backup-and-restore.md#backup)を TiDB 専用クラスターからロードし、次に[マイダンパー/マイローダー](https://centminmod.com/mydumper.html)などのコミュニティ ツールを使用して、宛先 TiDB サーバーレス クラスターにデータをロードします。
 
 3.  [Dumplingのエクスポートされたファイル](https://docs.pingcap.com/tidb/stable/dumpling-overview#format-of-exported-files)から、メタデータ ファイルからTiDB Cloudシンクの開始位置を取得します。
 
     以下は、メタデータ ファイルの例の一部です。 `SHOW MASTER STATUS`の`Pos`既存データの TSO であり、 TiDB Cloudシンクの開始位置でもあります。
 
-        Started dump at: 2023-03-28 10:40:19
-        SHOW MASTER STATUS:
-                Log: tidb-binlog
-                Pos: 420747102018863124
-        Finished dump at: 2023-03-28 10:40:20
+    ```
+    Started dump at: 2023-03-28 10:40:19
+    SHOW MASTER STATUS:
+            Log: tidb-binlog
+            Pos: 420747102018863124
+    Finished dump at: 2023-03-28 10:40:20
+    ```
 
 ## TiDB Cloudシンクを作成する {#create-a-tidb-cloud-sink}
 

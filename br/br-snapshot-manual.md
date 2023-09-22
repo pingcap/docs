@@ -8,17 +8,14 @@ summary: Learn about the commands of TiDB snapshot backup and restore.
 このドキュメントでは、次のようなアプリケーション シナリオに従って、TiDB スナップショットのバックアップと復元のコマンドについて説明します。
 
 -   [クラスターのスナップショットをバックアップする](#back-up-cluster-snapshots)
--   [データベースまたはテーブルをバックアップする](#back-up-a-database-or-a-table)
-    -   [データベースをバックアップする](#back-up-a-database)
-    -   [テーブルをバックアップする](#back-up-a-table)
-    -   [テーブルフィルターを使用して複数のテーブルをバックアップする](#back-up-multiple-tables-with-table-filter)
+-   [データベースをバックアップする](#back-up-a-database)
+-   [テーブルをバックアップする](#back-up-a-table)
+-   [テーブルフィルターを使用して複数のテーブルをバックアップする](#back-up-multiple-tables-with-table-filter)
 -   [バックアップデータを暗号化する](#encrypt-the-backup-data)
 -   [クラスターのスナップショットを復元する](#restore-cluster-snapshots)
--   [データベースまたはテーブルを復元する](#restore-a-database-or-a-table)
-    -   [データベースを復元する](#restore-a-database)
-    -   [テーブルを復元する](#restore-a-table)
-    -   [テーブルフィルターを使用して複数のテーブルを復元する](#restore-multiple-tables-with-table-filter)
-    -   [`mysql`スキーマから実行プランのバインディングを復元する](#restore-execution-plan-bindings-from-the-mysql-schema)
+-   [データベースを復元する](#restore-a-database)
+-   [テーブルを復元する](#restore-a-table)
+-   [テーブルフィルターを使用して複数のテーブルを復元する](#restore-multiple-tables-with-table-filter)
 -   [暗号化されたスナップショットを復元する](#restore-encrypted-snapshots)
 
 スナップショットのバックアップと復元の詳細については、以下を参照してください。
@@ -45,9 +42,9 @@ br backup full \
 -   `--ratelimit` : バックアップ タスクを実行する**TiKV ごとの**最大速度。単位は MiB/s です。
 -   `--log-file` : `br`ログが書き込まれる対象ファイル。
 
-> **注記：**
+> **ノート：**
 >
-> BRツールはすでに GC への自己適応をサポートしています。 PD の`safePoint`に`backupTS` (デフォルトでは最新の PD タイムスタンプ) を自動的に登録して、バックアップ中に TiDB の GC セーフ ポイントが先に進まないようにし、GC 構成を手動で設定する必要がなくなります。
+> BRツールはすでに GC への自己適応をサポートしています。 PD の`safePoint`に`backupTS` (デフォルトでは最新の PD タイムスタンプ) を自動的に登録して、バックアップ中に TiDB の GC セーフ ポイントが前に進まないようにするため、GC 構成を手動で設定する必要がなくなります。
 
 バックアップ中、以下に示すように、ターミナルに進行状況バーが表示されます。進行状況バーが 100% まで進むと、バックアップは完了です。
 
@@ -133,7 +130,7 @@ br backup full\
     --crypter.key 0123456789abcdef0123456789abcdef
 ```
 
-> **注記：**
+> **ノート：**
 >
 > -   キーを紛失すると、バックアップ データをクラスターに復元できなくなります。
 > -   暗号化機能は、 `br`および TiDB クラスター v5.3.0 以降のバージョンで使用する必要があります。暗号化されたバックアップ データは、v5.3.0 より前のクラスターでは復元できません。
@@ -182,7 +179,7 @@ br restore db \
 
 前述のコマンドでは、 `--db`​​復元するデータベースの名前を指定し、その他のパラメータは[TiDB クラスターのスナップショットを復元する](#restore-cluster-snapshots)と同じです。
 
-> **注記：**
+> **ノート：**
 >
 > バックアップデータをリストアする場合、バックアップコマンドの`--db`で指定したデータベース名と`-- db`で指定したデータベース名は同じである必要があります。そうしないと、復元は失敗します。これは、バックアップデータのメタファイル（ `backupmeta`ファイル）にデータベース名が記録されており、同じ名前のデータベースにしかデータをリストアできないためです。推奨される方法は、バックアップ データを別のクラスター内の同じ名前のデータベースに復元することです。
 
@@ -216,39 +213,6 @@ br restore full \
     --filter 'db*.tbl*' \
     --storage "s3://${backup_collection_addr}/snapshot-${date}?access-key=${access-key}&secret-access-key=${secret-access-key}" \
     --log-file restorefull.log
-```
-
-### <code>mysql</code>スキーマから実行プランのバインディングを復元する {#restore-execution-plan-bindings-from-the-code-mysql-code-schema}
-
-クラスターの実行プラン バインディングを復元するには、 `--with-sys-table`オプションと、復元するスキーマを指定する`--filter`オプションを含む`br restore full`コマンド`-f` `mysql`します。
-
-以下は`mysql.bind_info`テーブルを復元する例です。
-
-```shell
-br restore full \
-    --pd "${PD_IP}:2379" \
-    --filter 'mysql.bind_info' \
-    --with-sys-table \
-    --ratelimit 128 \
-    --storage "s3://${backup_collection_addr}/snapshot-${date}?access-key=${access-key}&secret-access-key=${secret-access-key}" \
-    --log-file restore_system_table.log
-```
-
-復元が完了したら、実行プランのバインド情報を[`SHOW GLOBAL BINDINGS`](/sql-statements/sql-statement-show-bindings.md)で確認できます。
-
-```sql
-SHOW GLOBAL BINDINGS;
-```
-
-復元後の実行プラン バインディングの動的読み込みはまだ最適化中です (関連する問題は[#46527](https://github.com/pingcap/tidb/issues/46527)と[#46528](https://github.com/pingcap/tidb/issues/46528)です)。復元後に実行計画バインディングを手動で再ロードする必要があります。
-
-```sql
--- Ensure that the mysql.bind_info table has only one record for builtin_pseudo_sql_for_bind_lock. If there are more records, you need to manually delete them.
-SELECT count(*) FROM mysql.bind_info WHERE original_sql = 'builtin_pseudo_sql_for_bind_lock';
-DELETE FROM bind_info WHERE original_sql = 'builtin_pseudo_sql_for_bind_lock' LIMIT 1;
-
--- Force to reload the binding information.
-ADMIN RELOAD BINDINGS;
 ```
 
 ## 暗号化されたスナップショットを復元する {#restore-encrypted-snapshots}
