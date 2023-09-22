@@ -217,7 +217,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.4/quick-start-with-
 
     For more information, see [documentation](sql-statements/sql-statement-import-into.md).
 
-* Dumpling supports the user-defined terminator when exporting data to CSV files [#issue](https:// ) @[GMHDBJD](https://github.com/GMHDBJD) **tw@hfxsd** <!--1571-->
+* Dumpling supports the user-defined terminator when exporting data to CSV files [#46982](https://github.com/pingcap/tidb/issues/46982) @[GMHDBJD](https://github.com/GMHDBJD) **tw@hfxsd** <!--1571-->
 
     Prior to v7.4.0, when Dumpling exported data to a CSV file, the default terminator is "\r\n", which could not be parsed by some downstream systems that could only parse the "\n" terminator , or had to be converted by a third-party tool to parse the CSV file. 
     
