@@ -74,17 +74,7 @@ Leader/Follower/Learner each corresponds to a role in a Raft group of [peers](#r
 
 ### MPP
 
-<CustomContent platform="tidb">
-
 Starting from v5.0, TiDB introduces Massively Parallel Processing (MPP) architecture through TiFlash nodes, which shares the execution workloads of large join queries among TiFlash nodes. When the MPP mode is enabled, TiDB, based on cost, determines whether to use the MPP framework to perform the calculation. In the MPP mode, the join keys are redistributed through the Exchange operation while being calculated, which distributes the calculation pressure to each TiFlash node and speeds up the calculation. For more information, see [Use TiFlash MPP Mode](/tiflash/use-tiflash-mpp-mode.md).
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-Starting from v5.0, TiDB introduces Massively Parallel Processing (MPP) architecture through TiFlash nodes, which shares the execution workloads of large join queries among TiFlash nodes. When the MPP mode is enabled, TiDB, based on cost, determines whether to use the MPP framework to perform the calculation. In the MPP mode, the join keys are redistributed through the Exchange operation while being calculated, which distributes the calculation pressure to each TiFlash node and speeds up the calculation. For more information, see [Use TiFlash MPP Mode](https://docs.pingcap.com/tidbcloud/use-tiflash-mpp-mode#use-tiflash-mpp-mode).
-
-</CustomContent>
 
 ## O
 
