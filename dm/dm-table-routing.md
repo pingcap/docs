@@ -7,7 +7,7 @@ summary: Learn the usage and precautions of table routing in DM.
 
 TiDB Data Migration (DM) を使用してデータを移行する場合、アップストリームの MySQL または MariaDB インスタンスの特定のテーブルをダウンストリームの指定されたテーブルに移行するようにテーブル ルーティングを構成できます。
 
-> **ノート：**
+> **注記：**
 >
 > -   1 つのテーブルに対して複数の異なるルーティング ルールを構成することはサポートされていません。
 > -   スキーマの一致ルールは個別に構成する必要があります。これは、セクション[テーブルルーティングを構成する](#configure-table-routing)の`rule-2`に示すように、 `CREATE/DROP SCHEMA xx`の移行に使用されます。
@@ -38,15 +38,17 @@ routes:
     target-schema: "test"
 ```
 
-単純なシナリオでは、スキーマとテーブルを一致させるためにワイルドカードを使用することをお勧めします。ただし、次のバージョンの違いに注意してください。
+データベース名とテーブル名を一致させるための正規表現とワイルドカードがサポートされています。単純なシナリオでは、スキーマとテーブルを一致させるためにワイルドカードを使用することをお勧めします。ただし、次の点に注意してください。
 
--   DM v1.0.5 以降のバージョンでは、テーブル ルーティングは[ワイルドカードマッチ](https://en.wikipedia.org/wiki/Glob_(programming)#Syntax)サポートしますが、ワイルドカード式には`*` **1 つだけ**使用でき、**最後に**`*`を配置する必要があります。
+-   `*` 、 `?` 、および`[]`を含むワイルドカードがサポートされています。ワイルドカード一致では`*`シンボルは 1 つだけ使用でき、最後になければなりません。たとえば、 `table-pattern: "t_*"`では、 `"t_*"` `t_`で始まるすべてのテーブルを示します。詳細は[ワイルドカードマッチング](https://en.wikipedia.org/wiki/Glob_(programming)#Syntax)参照してください。
 
--   v1.0.5 より前の DM バージョンの場合、テーブル ルーティングはワイルドカードをサポートしますが、 `[...]`および`[!...]`の式はサポートしません。
+-   `table-regexp` 、 `schema-regexp` 、および`source-regexp`正規表現のみをサポートしており、 `~`記号で始めることはできません。
+
+-   `schema-pattern`と`table-pattern` 、ワイルドカードと正規表現の両方をサポートします。正規表現は`~`記号で始まる必要があります。
 
 ## パラメータの説明 {#parameter-descriptions}
 
--   DM は、 [テーブル セレクターによって提供される`schema-pattern` / `table-pattern`ルール](/dm/table-selector.md)に一致するアップストリームの MySQL または MariaDB インスタンス テーブルをダウンストリーム`target-schema` `target-table`移行します。
+-   DM は、 [テーブル セレクターによって提供される`schema-pattern` / `table-pattern`ルール](/dm/table-selector.md)に一致するアップストリーム`target-table` MySQL または MariaDB インスタンス テーブルをダウンストリーム`target-schema`に移行します。
 -   `schema-pattern` / `table-pattern`ルールに一致するシャードテーブルの場合、DM は`extract-table`を使用してテーブル名を抽出します。 `table-regexp`正規表現、 `extract-schema`を使用したスキーマ名。 `schema-regexp`正規表現、および`extract-source`を使用したソース情報。 `source-regexp`の正規表現。次に、DM は抽出した情報を下流のマージされたテーブルの対応する`target-column`に書き込みます。
 
 ## 使用例 {#usage-examples}
@@ -64,7 +66,7 @@ routes:
 -   `rule-1` 、 `schema-pattern: "test_*"`および`table-pattern: "t_*"`に一致するテーブルの DML または DDL ステートメントをダウンストリーム`test`に移行するために使用されます。 `t` ．
 -   `rule-2` 、 `schema-pattern: "test_*"`一致するスキーマの DDL ステートメント ( `CREATE/DROP SCHEMA xx`など) を移行するために使用されます。
 
-> **ノート：**
+> **注記：**
 >
 > -   下流`schema: test`すでに存在し、削除しない場合は、 `rule-2`を省略できます。
 > -   ダウンストリーム`schema: test`存在せず、 `rule-1`のみが構成されている場合、移行中に`schema test doesn't exist`エラーが報告されます。
@@ -173,7 +175,7 @@ mysql> select * from test.t;
 
 #### マージされたテーブルを作成する間違った例 {#incorrect-examples-of-creating-merged-tables}
 
-> **ノート：**
+> **注記：**
 >
 > 次のいずれかのエラーが発生した場合、シャードされたテーブルおよびスキーマのソース情報がマージされたテーブルに書き込まれない可能性があります。
 

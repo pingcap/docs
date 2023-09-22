@@ -9,7 +9,7 @@ Summary: Learn how to create a changefeed to stream data from TiDB Cloud to MySQ
 
 > **注記：**
 >
-> -   チェンジフィード機能を使用するには、TiDB 専用クラスターのバージョンが v6.4.0 以降であることを確認してください。
+> -   チェンジフィード機能を使用するには、TiDB 専用クラスターのバージョンが v6.1.3 以降であることを確認してください。
 > -   [TiDB サーバーレスクラスター](/tidb-cloud/select-cluster-tier.md#tidb-serverless)の場合、チェンジフィード機能は使用できません。
 
 ## 制限 {#restrictions}
@@ -74,13 +74,11 @@ MySQL サービスがパブリック インターネット アクセスのない
 
     以下は、メタデータ ファイルの例の一部です。 `SHOW MASTER STATUS`の`Pos`既存データの TSO であり、MySQL シンクの開始位置でもあります。
 
-    ```
-    Started dump at: 2020-11-10 10:40:19
-    SHOW MASTER STATUS:
-            Log: tidb-binlog
-            Pos: 420747102018863124
-    Finished dump at: 2020-11-10 10:40:20
-    ```
+        Started dump at: 2020-11-10 10:40:19
+        SHOW MASTER STATUS:
+                Log: tidb-binlog
+                Pos: 420747102018863124
+        Finished dump at: 2020-11-10 10:40:20
 
 ### MySQLでターゲットテーブルを作成する {#create-target-tables-in-mysql}
 

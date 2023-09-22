@@ -24,25 +24,13 @@ v5.4 の主な新機能または改善点は次のとおりです。
 
 ## 互換性の変更 {#compatibility-changes}
 
-> **ノート：**
+> **注記：**
 >
-> 以前の TiDB バージョンから v5.4.0 にアップグレードする場合、すべての中間バージョンの互換性変更メモを知りたい場合は、対応するバージョンの[リリースノート](/releases/release-notes.md)を確認できます。
+> 以前の TiDB バージョンから v5.4.0 にアップグレードする場合、すべての中間バージョンの互換性変更ノートを知りたい場合は、対応するバージョンの[リリースノート](/releases/release-notes.md)を確認できます。
 
 ### システム変数 {#system-variables}
 
-| 変数名                                                                                                 | 種類の変更    | 説明                                                                                                                                                                                                                                                                                                                                              |
-| :-------------------------------------------------------------------------------------------------- | :------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [`tidb_enable_column_tracking`](/system-variables.md#tidb_enable_column_tracking-new-in-v540)       | 新しく追加された | TiDB が`PREDICATE COLUMNS`を収集できるようにするかどうかを制御します。デフォルト値は`OFF`です。                                                                                                                                                                                                                                                                                  |
-| [`tidb_enable_paging`](/system-variables.md#tidb_enable_paging-new-in-v540)                         | 新しく追加された | `IndexLookUp`オペレーターでコプロセッサー要求を送信するためにページングの方法を使用するかどうかを制御します。デフォルト値は`OFF`です。<br/> `IndexLookup`と`Limit`を使用し、 `Limit` `IndexScan`にプッシュダウンできない読み取りクエリの場合、読み取りクエリのレイテンシーが長くなり、TiKV の`unified read pool` CPU 使用率が高くなる可能性があります。このような場合、 `Limit`演算子は少量のデータ セットのみを必要とするため、 `tidb_enable_paging`を`ON`に設定すると、TiDB が処理するデータが減り、クエリのレイテンシーとリソースの消費が削減されます。 |
-| [`tidb_enable_top_sql`](/system-variables.md#tidb_enable_top_sql-new-in-v540)                       | 新しく追加された | Top SQL機能を有効にするかどうかを制御します。デフォルト値は`OFF`です。                                                                                                                                                                                                                                                                                                       |
-| [`tidb_persist_analyze_options`](/system-variables.md#tidb_persist_analyze_options-new-in-v540)     | 新しく追加された | [構成の永続性を分析する](/statistics.md#persist-analyze-configurations)機能を有効にするかどうかを制御します。デフォルト値は`ON`です。                                                                                                                                                                                                                                                   |
-| [`tidb_read_staleness`](/system-variables.md#tidb_read_staleness-new-in-v540)                       | 新しく追加された | 現在のセッションで読み取ることができる履歴データの範囲を制御します。デフォルト値は`0`です。                                                                                                                                                                                                                                                                                                 |
-| [`tidb_regard_null_as_point`](/system-variables.md#tidb_regard_null_as_point-new-in-v540)           | 新しく追加された | オプティマイザがインデックス アクセスの接頭辞条件として NULL 等価性を含むクエリ条件を使用できるかどうかを制御します。                                                                                                                                                                                                                                                                                  |
-| [`tidb_stats_load_sync_wait`](/system-variables.md#tidb_stats_load_sync_wait-new-in-v540)           | 新しく追加された | 統計の同期読み込み機能を有効にするかどうかを制御します。デフォルト値`0`は、機能が無効であり、統計が非同期でロードされることを意味します。この機能が有効な場合、この変数は、SQL 最適化が統計の同期読み込みをタイムアウトするまで待機できる最大時間を制御します。                                                                                                                                                                                                             |
-| [`tidb_stats_load_pseudo_timeout`](/system-variables.md#tidb_stats_load_pseudo_timeout-new-in-v540) | 新しく追加された | 統計の同期ロードがタイムアウトに達するタイミング、SQL が失敗するか ( `OFF` )、疑似統計の使用にフォールバックするか ( `ON` ) を制御します。デフォルト値は`OFF`です。                                                                                                                                                                                                                                                |
-| [`tidb_backoff_lock_fast`](/system-variables.md#tidb_backoff_lock_fast)                             | 修正済み     | デフォルト値が`100`から`10`に変更されました。                                                                                                                                                                                                                                                                                                                     |
-| [`tidb_enable_index_merge`](/system-variables.md#tidb_enable_index_merge-new-in-v40)                | 修正済み     | デフォルト値が`OFF`から`ON`に変更されました。<br/><ul><li> TiDB クラスターを v4.0.0 より前のバージョンから v5.4.0 以降にアップグレードする場合、この変数はデフォルトで`OFF`です。</li><li> TiDB クラスターを v4.0.0 以降から v5.4.0 以降にアップグレードする場合、この変数はアップグレード前と同じままになります。</li><li> v5.4.0 以降の新しく作成された TiDB クラスターの場合、この変数はデフォルトで`ON`です。</li></ul>                                                                        |
-| [`tidb_store_limit`](/system-variables.md#tidb_store_limit-new-in-v304-and-v40)                     | 修正済み     | v5.4.0 より前では、この変数はインスタンス レベルでグローバルに設定できます。 v5.4.0 以降、この変数はグローバル構成のみをサポートします。                                                                                                                                                                                                                                                                    |
+<table><thead><tr><th>変数名</th><th>種類の変更</th><th>説明</th></tr></thead><tbody><tr><td><a href="https://docs.pingcap.com/tidb/v7.1/system-variables#tidb_enable_column_tracking-new-in-v540"><code>tidb_enable_column_tracking</code></a></td><td>新しく追加された</td><td>TiDB が<code>PREDICATE COLUMNS</code>を収集できるようにするかどうかを制御します。デフォルト値は<code>OFF.</code></td></tr><tr><td> <a href="https://docs.pingcap.com/tidb/v7.1/system-variables#tidb_enable_paging-new-in-v540"><code>tidb_enable_paging</code></a></td><td>新しく追加された</td><td><code>IndexLookUp</code>オペレーターでコプロセッサー要求を送信するためにページングの方法を使用するかどうかを制御します。デフォルト値は<code>OFF</code>です。<br/> <code>IndexLookup</code>と<code>Limit</code>を使用し、その<code>Limit</code>を<code>IndexScan</code>にプッシュダウンできない読み取りクエリの場合、読み取りクエリのレイテンシーが長くなり、TiKV の<code>unified read pool</code>の CPU 使用率が高くなる可能性があります。このような場合、 <code>Limit</code>演算子は少量のデータセットのみを必要とするため、 <code>tidb_enable_paging</code> <code>ON</code>に設定すると、TiDB が処理するデータが減り、クエリのレイテンシーとリソースの消費が削減されます。</td></tr><tr><td><a href="https://docs.pingcap.com/tidb/v7.1/system-variables#tidb_enable_top_sql-new-in-v540"><code>tidb_enable_top_sql</code></a></td><td>新しく追加された</td><td>Top SQL機能を有効にするかどうかを制御します。デフォルト値は<code>OFF</code>です。</td></tr><tr><td> <a href="https://docs.pingcap.com/tidb/v7.1/system-variables#tidb_persist_analyze_options-new-in-v540"><code>tidb_persist_analyze_options</code></a></td><td>新しく追加された</td><td><a href="https://docs.pingcap.com/tidb/v7.1/statistics#persist-analyze-configurations">ANALYZE 構成永続化</a>機能を有効にするかどうかを制御します。デフォルト値は<code>ON</code>です。</td></tr><tr><td><a href="https://docs.pingcap.com/tidb/v7.1/system-variables#tidb_read_staleness-new-in-v540"><code>tidb_read_staleness</code></a></td><td>新しく追加された</td><td>現在のセッションで読み取ることができる履歴データの範囲を制御します。デフォルト値は<code>0</code>です。</td></tr><tr><td><a href="https://docs.pingcap.com/tidb/v7.1/system-variables#tidb_regard_null_as_point-new-in-v540"><code>tidb_regard_null_as_point</code></a></td><td>新しく追加された</td><td>オプティマイザがインデックス アクセスの接頭辞条件として NULL 等価性を含むクエリ条件を使用できるかどうかを制御します。</td></tr><tr><td><a href="https://docs.pingcap.com/tidb/v7.1/system-variables#tidb_stats_load_sync_wait-new-in-v540"><code>tidb_stats_load_sync_wait</code></a></td><td>新しく追加された</td><td>統計の同期読み込み機能を有効にするかどうかを制御します。デフォルト値<code>0</code>は、機能が無効であり、統計が非同期でロードされることを意味します。この機能が有効な場合、この変数は、SQL 最適化が統計の同期読み込みをタイムアウトするまで待機できる最大時間を制御します。</td></tr><tr><td> <a href="https://docs.pingcap.com/tidb/v7.1/system-variables#tidb_stats_load_pseudo_timeout-new-in-v540"><code>tidb_stats_load_pseudo_timeout</code></a></td><td>新しく追加された</td><td>統計の同期ロードがタイムアウトに達するタイミング、SQL が失敗するか ( <code>OFF</code> )、疑似統計の使用にフォールバックするか ( <code>ON</code> ) を制御します。デフォルト値は<code>OFF</code>です。</td></tr><tr><td> <a href="https://docs.pingcap.com/tidb/v7.1/system-variables#tidb_backoff_lock_fast"><code>tidb_backoff_lock_fast</code></a></td><td>修正済み</td><td>デフォルト値が<code>100</code>から<code>10</code>に変更されました。</td></tr><tr><td> <a href="https://docs.pingcap.com/tidb/v7.1/system-variables#tidb_enable_index_merge-new-in-v40"><code>tidb_enable_index_merge</code></a></td><td>修正済み</td><td>デフォルト値が<code>OFF</code>から<code>ON</code>に変更されます。<ul><li> TiDB クラスターを v4.0.0 より前のバージョンから v5.4.0 以降にアップグレードする場合、この変数はデフォルトで<code>OFF</code>になります。</li><li> TiDB クラスターを v4.0.0 以降から v5.4.0 以降にアップグレードする場合、この変数はアップグレード前と同じままになります。</li><li> v5.4.0 以降の新しく作成された TiDB クラスターの場合、この変数はデフォルトで<code>ON</code>です。</li></ul></td></tr><tr><td> <a href="https://docs.pingcap.com/tidb/v7.1/system-variables#tidb_store_limit-new-in-v304-and-v40"><code>tidb_store_limit</code></a></td><td>修正済み</td><td>v5.4.0 より前では、この変数はインスタンス レベルでグローバルに設定できます。 v5.4.0 以降、この変数はグローバル構成のみをサポートします。</td></tr></tbody></table>
 
 ### コンフィグレーションファイルのパラメータ {#configuration-file-parameters}
 
@@ -182,7 +170,7 @@ v5.4 の主な新機能または改善点は次のとおりです。
 
     v5.4.0 以降、 [`tidb_enable_column_tracking`](/system-variables.md#tidb_enable_column_tracking-new-in-v540)システム変数の値を`ON`に設定して、TiDB が`PREDICATE COLUMNS`を収集できるようにすることができます。
 
-    設定後、TiDB は 100 * [`stats-lease`](/tidb-configuration-file.md#stats-lease)ごとに`PREDICATE COLUMNS`情報を`mysql.column_stats_usage`システムテーブルに書き込みます。ビジネスのクエリ パターンが安定している場合は、 `ANALYZE TABLE TableName PREDICATE COLUMNS`構文を使用して`PREDICATE COLUMNS`列のみの統計を収集できます。これにより、統計収集のオーバーヘッドを大幅に削減できます。
+    設定後、TiDB は 100 * [`stats-lease`](/tidb-configuration-file.md#stats-lease)ごとに`PREDICATE COLUMNS`情報を`mysql.column_stats_usage`システムテーブルに書き込みます。ビジネスのクエリ パターンが安定している場合は、 `ANALYZE TABLE TableName PREDICATE COLUMNS`構文を使用して`PREDICATE COLUMNS`列のみの統計を収集でき、統計収集のオーバーヘッドを大幅に削減できます。
 
     [ユーザードキュメント](/statistics.md#collect-statistics-on-some-columns)
 
@@ -228,7 +216,7 @@ v5.4 の主な新機能または改善点は次のとおりです。
 
 -   **TiDB Lightning、並行インポート用のメタ情報を保存するスキーマ名が導入されています**
 
-    TiDB Lightning には`meta-schema-name`構成項目が導入されています。並列インポート モードでは、このパラメータは、ターゲット クラスタ内の各TiDB Lightningインスタンスのメタ情報を保存するスキーマ名を指定します。デフォルトでは、値は「lightning_metadata」です。このパラメータに設定された値は、同じ並行インポートに参加する各TiDB Lightningインスタンスで同じである必要があります。そうしないと、インポートされたデータの正確性が保証されません。
+    TiDB Lightning には`meta-schema-name`構成項目が導入されています。並列インポート モードでは、このパラメータは、ターゲット クラスタ内の各TiDB Lightningインスタンスのメタ情報を保存するスキーマ名を指定します。デフォルトでは、値は「lightning_metadata」です。このパラメータに設定される値は、同じ並行インポートに参加する各TiDB Lightningインスタンスで同じである必要があります。そうしないと、インポートされたデータの正確性が保証されません。
 
     [ユーザードキュメント](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task)
 
@@ -244,7 +232,7 @@ v5.4 の主な新機能または改善点は次のとおりです。
 
     -   `start-relay`および`stop-relay`コマンドを使用したリレー ログの動的有効化および無効化をサポートします。
 
-    -   リレーログのステータスを`source`にバインドします。 `source` DM ワーカーに移行された後も、有効または無効の元のステータスを維持します。
+    -   リレーログのステータスを`source`にバインドします。 `source` 、DM ワーカーに移行された後も、有効または無効の元のステータスを維持します。
 
     -   中継ログのstorageパスをDM-worker設定ファイルに移動します。
 
@@ -390,7 +378,7 @@ v5.4 の主な新機能または改善点は次のとおりです。
 
 -   TiFlash
 
-    -   MPP クエリが停止するとTiFlashがpanicになる問題を修正
+    -   MPP クエリが停止するとTiFlash がpanicになる問題を修正
     -   `where <string>`句を含むクエリが間違った結果を返す問題を修正
     -   整数の主キーの列タイプをより大きな範囲に設定するときに発生する可能性があるデータの不整合の潜在的な問題を修正します。
     -   入力時刻が 1970-01-01 00:00:01 UTC より前の場合、 `unix_timestamp`の動作が TiDB または MySQL の動作と一致しない問題を修正

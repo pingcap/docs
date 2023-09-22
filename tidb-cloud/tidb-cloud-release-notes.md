@@ -8,13 +8,31 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 このページには 2023 年[TiDB Cloud](https://www.pingcap.com/tidb-cloud/)のリリースノートが記載されています。
 
+## 2023 年 9 月 19 日 {#september-19-2023}
+
+**一般的な変更点**
+
+-   [TiDB専用](/tidb-cloud/select-cluster-tier.md#tidb-dedicated)クラスターから 2 つの vCPU TiDB ノードと TiKV ノードを削除します。
+
+    2 vCPU オプションは、 **[クラスタの作成]**ページまたは [**クラスタの変更]**ページでは使用できなくなりました。
+
+-   JavaScript のリリース[TiDB Cloudサーバーレス ドライバー (ベータ版)](/tidb-cloud/serverless-driver.md) 。
+
+    JavaScript 用TiDB Cloudサーバーレス ドライバーを使用すると、HTTPS 経由で[TiDB サーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-serverless)クラスターに接続できます。これは、TCP 接続が[バーセルエッジ機能](https://vercel.com/docs/functions/edge-functions)や[Cloudflare ワーカー](https://workers.cloudflare.com/)などに制限されているエッジ環境で特に役立ちます。
+
+    詳細については、 [TiDB Cloudサーバーレス ドライバー (ベータ版)](/tidb-cloud/serverless-driver.md)を参照してください。
+
+**コンソールの変更**
+
+-   [TiDB サーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-serverless)クラスターの場合、 **「今月の使用量」**パネルで、または支出制限の設定中にコストの見積もりを取得できます。
+
 ## 2023 年 9 月 5 日 {#september-5-2023}
 
 **一般的な変更点**
 
 -   [データサービス（ベータ版）](https://tidbcloud.com/console/data-service) 、さまざまな状況での特定のレート制限要件を満たすために、各 API キーのレート制限をカスタマイズすることをサポートします。
 
-    API キーを[作成する](/tidb-cloud/data-service-api-key.md#create-an-api-key)または[編集](/tidb-cloud/data-service-api-key.md#edit-an-api-key)にすると、そのレート制限を調整できます。
+    API キーを[作成する](/tidb-cloud/data-service-api-key.md#create-an-api-key)または[編集](/tidb-cloud/data-service-api-key.md#edit-an-api-key)にするときに、そのキーのレート制限を調整できます。
 
     詳細については、 [レート制限](/tidb-cloud/data-service-api-key.md#rate-limiting)を参照してください。
 
@@ -222,7 +240,7 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
     [TiDB Cloudコンソール](/tidb-cloud/branch-manage.md)または[TiDB CloudCLI](/tidb-cloud/ticloud-branch-create.md)のいずれかを使用して、2023 年 7 月 5 日以降に作成された TiDB サーバーレス クラスターのブランチを作成できます。
 
-    アプリケーション開発に GitHub を使用する場合、TiDB サーバーレス ブランチを GitHub CI/CD パイプラインに統合できます。これにより、本番データベースに影響を与えることなく、ブランチを使用してプル リクエストを自動的にテストできます。詳細については、 [TiDB サーバーレス ブランチング (ベータ版) を GitHub と統合する](/tidb-cloud/branch-github-integration.md)を参照してください。
+    アプリケーション開発に GitHub を使用する場合は、TiDB サーバーレス ブランチを GitHub CI/CD パイプラインに統合できます。これにより、本番データベースに影響を与えることなく、ブランチを使用してプル リクエストを自動的にテストできます。詳細については、 [TiDB サーバーレス ブランチング (ベータ版) を GitHub と統合する](/tidb-cloud/branch-github-integration.md)を参照してください。
 
 -   [TiDB専用](/tidb-cloud/select-cluster-tier.md#tidb-dedicated)クラスターの毎週のバックアップをサポートします。詳細については、 [TiDB 専用データのバックアップと復元](/tidb-cloud/backup-and-restore.md#automatic-backup)を参照してください。
 
@@ -274,7 +292,7 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
     この機能強化により、TiDB 専用クラスターのデータstorage容量が増加し、ワークロードのスケーリング効率が向上し、増大するデータ要件に対応できます。
 
-    詳細については、 [クラスターのサイズを調整する](/tidb-cloud/size-your-cluster.md)を参照してください。
+    詳細については、 [クラスターのサイズを設定する](/tidb-cloud/size-your-cluster.md)を参照してください。
 
 -   [モニタリングメトリクスの保持期間](/tidb-cloud/built-in-monitoring.md#metrics-retention-policy) for [TiDB サーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-serverless)クラスターを 3 日間から 7 日間に延長します。
 

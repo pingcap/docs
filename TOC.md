@@ -1,3 +1,7 @@
+<!-- markdownlint-disable MD007 -->
+
+<!-- markdownlint-disable MD041 -->
+
 -   [ドキュメントホーム](https://docs.pingcap.com/)
 -   TiDBについて
     -   [TiDB の紹介](/overview.md)
@@ -38,8 +42,12 @@
             -   [ノードmysql2](/develop/dev-guide-sample-application-nodejs-mysql2.md)
             -   [mysql.js](/develop/dev-guide-sample-application-nodejs-mysqljs.md)
             -   [プリズマ](/develop/dev-guide-sample-application-nodejs-prisma.md)
+            -   [TypeORM](/develop/dev-guide-sample-application-nodejs-typeorm.md)
             -   [Next.js](/develop/dev-guide-sample-application-nextjs.md)
             -   [AWSラムダ](/develop/dev-guide-sample-application-aws-lambda.md)
+        -   ルビー
+            -   [mysql2](/develop/dev-guide-sample-application-ruby-mysql2.md)
+            -   [レール](/develop/dev-guide-sample-application-ruby-rails.md)
     -   TiDB に接続する
         -   [Driverまたは ORM を選択してください](/develop/dev-guide-choose-driver-or-orm.md)
         -   [TiDB に接続する](/develop/dev-guide-connect-to-tidb.md)
@@ -100,8 +108,8 @@
     -   [ソフトウェアとハ​​ードウェアの要件](/hardware-and-software-requirements.md)
     -   [環境コンフィグレーションチェックリスト](/check-before-deployment.md)
     -   クラスタトポロジの計画
-        -   [最小限のトポロジー](/minimal-deployment-topology.md)
-        -   [TiFlashトポロジ](/tiflash-deployment-topology.md)
+        -   [最小限のトポロジ](/minimal-deployment-topology.md)
+        -   [TiFlashトポロジー](/tiflash-deployment-topology.md)
         -   [TiCDC トポロジ](/ticdc-deployment-topology.md)
         -   [TiDBBinlogトポロジ](/tidb-binlog-deployment-topology.md)
         -   [TiSpark トポロジ](/tispark-deployment-topology.md)
@@ -362,7 +370,7 @@
                 -   [tiup cluster import](/tiup/tiup-component-cluster-import.md)
                 -   [tiup cluster list](/tiup/tiup-component-cluster-list.md)
                 -   [tiup クラスターのメタバックアップ](/tiup/tiup-component-cluster-meta-backup.md)
-                -   [tiup クラスター メタ リストア](/tiup/tiup-component-cluster-meta-restore.md)
+                -   [tiup クラスターのメタ復元](/tiup/tiup-component-cluster-meta-restore.md)
                 -   [tiup cluster patch](/tiup/tiup-component-cluster-patch.md)
                 -   [tiup cluster prune](/tiup/tiup-component-cluster-prune.md)
                 -   [tiup cluster reload](/tiup/tiup-component-cluster-reload.md)
@@ -994,6 +1002,7 @@
     -   v6.6
         -   [6.6.0-DMR](/releases/release-6.6.0.md)
     -   v6.5
+        -   [6.5.5](/releases/release-6.5.5.md)
         -   [6.5.4](/releases/release-6.5.4.md)
         -   [6.5.3](/releases/release-6.5.3.md)
         -   [6.5.2](/releases/release-6.5.2.md)
@@ -1150,7 +1159,7 @@
         -   [2.0](/releases/release-2.0-ga.md)
         -   [2.0 RC5](/releases/release-2.0-rc.5.md)
         -   [2.0 RC4](/releases/release-2.0-rc.4.md)
-        -   [2.0RC3](/releases/release-2.0-rc.3.md)
+        -   [2.0 RC3](/releases/release-2.0-rc.3.md)
         -   [2.0 RC1](/releases/release-2.0-rc.1.md)
         -   [1.1 ベータ版](/releases/release-1.1-beta.md)
         -   [1.1 アルファ](/releases/release-1.1-alpha.md)

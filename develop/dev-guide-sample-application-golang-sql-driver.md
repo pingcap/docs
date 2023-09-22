@@ -1,174 +1,194 @@
 ---
-title: Build a Simple CRUD App with TiDB and Go-MySQL-Driver
-summary: Learn how to build a simple CRUD application with TiDB and Go-MySQL-Driver.
+title: Connect to TiDB with Go-MySQL-Driver
+summary: Learn how to connect to TiDB using Go-MySQL-Driver. This tutorial gives Golang sample code snippets that work with TiDB using Go-MySQL-Driver.
 ---
 
-<!-- markdownlint-disable MD024 -->
+# Go-MySQL-Driver を使用して TiDB に接続する {#connect-to-tidb-with-go-mysql-driver}
 
-<!-- markdownlint-disable MD029 -->
+TiDB は MySQL 互換データベースであり、 [Go-MySQL-ドライバー](https://github.com/go-sql-driver/mysql)は[データベース/SQL](https://pkg.go.dev/database/sql)インターフェイスの MySQL 実装です。
 
-# TiDB と Go-MySQL-Driver を使用してシンプルな CRUD アプリを構築する {#build-a-simple-crud-app-with-tidb-and-go-mysql-driver}
+このチュートリアルでは、TiDB と Go-MySQL-Driver を使用して次のタスクを実行する方法を学習できます。
 
-このドキュメントでは、TiDB と[Go-MySQL-ドライバー](https://github.com/go-sql-driver/mysql)を使用して単純な CRUD アプリケーションを構築する方法について説明します。
+-   環境をセットアップします。
+-   Go-MySQL-Driver を使用して TiDB クラスターに接続します。
+-   アプリケーションをビルドして実行します。オプションで、基本的な CRUD 操作の[サンプルコードスニペット](#sample-code-snippets)を見つけることができます。
 
 > **注記：**
 >
-> Golang 1.20 以降のバージョンを使用することをお勧めします。
+> このチュートリアルは、TiDB サーバーレス、TiDB 専用、および TiDB セルフホストで動作します。
 
-## ステップ 1. TiDB クラスターを起動する {#step-1-launch-your-tidb-cluster}
+## 前提条件 {#prerequisites}
+
+このチュートリアルを完了するには、次のものが必要です。
+
+-   [行く](https://go.dev/) **1.20**以上。
+-   [ギット](https://git-scm.com/downloads) 。
+-   TiDB クラスター。
 
 <CustomContent platform="tidb">
 
-TiDB クラスターの起動方法を紹介します。
+**TiDB クラスターがない場合は、次のように作成できます。**
 
-**TiDB サーバーレス クラスターを使用する**
-
-詳細な手順については、 [TiDB サーバーレスクラスターを作成する](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-tidb-serverless-cluster)を参照してください。
-
-**ローカルクラスターを使用する**
-
-詳細な手順については、 [ローカルテストクラスターをデプロイ](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[TiUPを使用した TiDBクラスタのデプロイ](/production-deployment-using-tiup.md)を参照してください。
+-   (推奨) [TiDB サーバーレスクラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って、独自のTiDB Cloudクラスターを作成します。
+-   [ローカル テスト TiDB クラスターをデプロイ](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番TiDB クラスターをデプロイ](/production-deployment-using-tiup.md)に従ってローカル クラスターを作成します。
 
 </CustomContent>
-
 <CustomContent platform="tidb-cloud">
 
-[TiDB サーバーレスクラスターを作成する](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-tidb-serverless-cluster)を参照してください。
+**TiDB クラスターがない場合は、次のように作成できます。**
+
+-   (推奨) [TiDB サーバーレスクラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って、独自のTiDB Cloudクラスターを作成します。
+-   [ローカル テスト TiDB クラスターをデプロイ](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb#deploy-a-local-test-cluster)または[本番TiDB クラスターをデプロイ](https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup)に従ってローカル クラスターを作成します。
 
 </CustomContent>
 
-## ステップ 2. コードを取得する {#step-2-get-the-code}
+## サンプル アプリを実行して TiDB に接続する {#run-the-sample-app-to-connect-to-tidb}
+
+このセクションでは、サンプル アプリケーション コードを実行して TiDB に接続する方法を説明します。
+
+### ステップ 1: サンプル アプリ リポジトリのクローンを作成する {#step-1-clone-the-sample-app-repository}
+
+ターミナル ウィンドウで次のコマンドを実行して、サンプル コード リポジトリのクローンを作成します。
 
 ```shell
-git clone https://github.com/pingcap-inc/tidb-example-golang.git
+git clone https://github.com/tidb-samples/tidb-golang-sql-driver-quickstart.git
+cd tidb-golang-sql-driver-quickstart
 ```
 
-`sqldriver`ディレクトリに移動します。
+### ステップ 2: 接続情報を構成する {#step-2-configure-connection-information}
 
-```shell
-cd sqldriver
-```
+選択した TiDB デプロイメント オプションに応じて、TiDB クラスターに接続します。
 
-このディレクトリの構造は次のとおりです。
+<SimpleTab>
+<div label="TiDB Serverless">
 
-```
-.
-├── Makefile
-├── dao.go
-├── go.mod
-├── go.sum
-├── sql
-│   └── dbinit.sql
-├── sql.go
-└── sqldriver.go
-```
+1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット クラスターの名前をクリックして、その概要ページに移動します。
 
-テーブル作成の初期化ステートメントは`dbinit.sql`にあります。
+2.  右上隅にある**「接続」**をクリックします。接続ダイアログが表示されます。
 
-```sql
-USE test;
-DROP TABLE IF EXISTS player;
+3.  接続ダイアログの設定が動作環境と一致していることを確認してください。
 
-CREATE TABLE player (
-    `id` VARCHAR(36),
-    `coins` INTEGER,
-    `goods` INTEGER,
-   PRIMARY KEY (`id`)
-);
-```
+    -   **エンドポイント タイプは**`Public`に設定されます
 
-`sqldriver.go`は`sqldriver`の本体です。 GORM と比較すると、go-sql-driver/mysql 実装はベスト プラクティスではない可能性があります。エラー処理ロジックを作成し、手動で`*sql.Rows`閉じる必要があり、コードを簡単に再利用できないため、コードが若干冗長になります。 TiDB は MySQL プロトコルと高い互換性があるため、TiDB に接続するには MySQL ソース インスタンス`db, err := sql.Open("mysql", dsn)`を初期化する必要があります。次に、 `dao.go`を使用してデータの読み取り、編集、追加、削除を行うことができます。
+    -   **[接続先] は**`General`に設定されています
 
-```go
-package main
+    -   **オペレーティング システムが**環境に一致します。
 
-import (
-    "database/sql"
-    "fmt"
+    > **ヒント：**
+    >
+    > プログラムが Windows Subsystem for Linux (WSL) で実行されている場合は、対応する Linux ディストリビューションに切り替えます。
 
-    _ "github.com/go-sql-driver/mysql"
-)
+4.  **「パスワードの作成」**をクリックしてランダムなパスワードを作成します。
 
-func main() {
-    // 1. Configure the example database connection.
-    dsn := "root:@tcp(127.0.0.1:4000)/test?charset=utf8mb4"
-    openDB("mysql", dsn, func(db *sql.DB) {
-        // 2. Run some simple examples.
-        simpleExample(db)
+    > **ヒント：**
+    >
+    > 以前にパスワードを作成したことがある場合は、元のパスワードを使用するか、 **「パスワードのリセット」**をクリックして新しいパスワードを生成できます。
 
-        // 3. Explore more.
-        tradeExample(db)
-    })
-}
+5.  次のコマンドを実行して`.env.example`をコピーし、名前を`.env`に変更します。
 
-func simpleExample(db *sql.DB) {
-    // Create a player, who has a coin and a goods.
-    err := createPlayer(db, Player{ID: "test", Coins: 1, Goods: 1})
-    if err != nil {
-        panic(err)
-    }
+    ```shell
+    cp .env.example .env
+    ```
 
-    // Get a player.
-    testPlayer, err := getPlayer(db, "test")
-    if err != nil {
-        panic(err)
-    }
-    fmt.Printf("getPlayer: %+v\n", testPlayer)
+6.  対応する接続​​文字列をコピーして`.env`ファイルに貼り付けます。結果の例は次のとおりです。
 
-    // Create players with bulk inserts. Insert 1919 players totally, with 114 players per batch.
+    ```dotenv
+    TIDB_HOST='{host}'  # e.g. gateway01.ap-northeast-1.prod.aws.tidbcloud.com
+    TIDB_PORT='4000'
+    TIDB_USER='{user}'  # e.g. xxxxxx.root
+    TIDB_PASSWORD='{password}'
+    TIDB_DB_NAME='test'
+    USE_SSL='true'
+    ```
 
-    err = bulkInsertPlayers(db, randomPlayers(1919), 114)
-    if err != nil {
-        panic(err)
-    }
+    プレースホルダー`{}` 、接続ダイアログから取得した接続パラメーターに必ず置き換えてください。
 
-    // Count players amount.
-    playersCount, err := getCount(db)
-    if err != nil {
-        panic(err)
-    }
-    fmt.Printf("countPlayers: %d\n", playersCount)
+    TiDB サーバーレスには安全な接続が必要です。したがって、 `USE_SSL` ～ `true`の値を設定する必要があります。
 
-    // Print 3 players.
-    threePlayers, err := getPlayerByLimit(db, 3)
-    if err != nil {
-        panic(err)
-    }
-    for index, player := range threePlayers {
-        fmt.Printf("print %d player: %+v\n", index+1, player)
-    }
-}
+7.  `.env`ファイルを保存します。
 
-func tradeExample(db *sql.DB) {
-    // Player 1: id is "1", has only 100 coins.
-    // Player 2: id is "2", has 114514 coins, and 20 goods.
-    player1 := Player{ID: "1", Coins: 100}
-    player2 := Player{ID: "2", Coins: 114514, Goods: 20}
+</div>
+<div label="TiDB Dedicated">
 
-    // Create two players "by hand", using the INSERT statement on the backend.
-    if err := createPlayer(db, player1); err != nil {
-        panic(err)
-    }
-    if err := createPlayer(db, player2); err != nil {
-        panic(err)
-    }
+1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット クラスターの名前をクリックして、その概要ページに移動します。
 
-    // Player 1 wants to buy 10 goods from player 2.
-    // It will cost 500 coins, but player 1 cannot afford it.
-    fmt.Println("\nbuyGoods:\n    => this trade will fail")
-    if err := buyGoods(db, player2.ID, player1.ID, 10, 500); err == nil {
-        panic("there shouldn't be success")
-    }
+2.  右上隅にある**「接続」**をクリックします。接続ダイアログが表示されます。
 
-    // So player 1 has to reduce the incoming quantity to two.
-    fmt.Println("\nbuyGoods:\n    => this trade will success")
-    if err := buyGoods(db, player2.ID, player1.ID, 2, 100); err != nil {
-        panic(err)
-    }
-}
+3.  **「どこからでもアクセスを許可」**をクリックし、 **「TiDB クラスター CA のダウンロード」**をクリックして CA 証明書をダウンロードします。
 
-func openDB(driverName, dataSourceName string, runnable func(db *sql.DB)) {
-    db, err := sql.Open(driverName, dataSourceName)
+    接続文字列の取得方法の詳細については、 [TiDB専用標準接続](https://docs.pingcap.com/tidbcloud/connect-via-standard-connection)を参照してください。
+
+4.  次のコマンドを実行して`.env.example`をコピーし、名前を`.env`に変更します。
+
+    ```shell
+    cp .env.example .env
+    ```
+
+5.  対応する接続​​文字列をコピーして`.env`ファイルに貼り付けます。結果の例は次のとおりです。
+
+    ```dotenv
+    TIDB_HOST='{host}'  # e.g. tidb.xxxx.clusters.tidb-cloud.com
+    TIDB_PORT='4000'
+    TIDB_USER='{user}'  # e.g. root
+    TIDB_PASSWORD='{password}'
+    TIDB_DB_NAME='test'
+    USE_SSL='false'
+    ```
+
+    プレースホルダー`{}` 、接続ダイアログから取得した接続パラメーターに必ず置き換えてください。
+
+6.  `.env`ファイルを保存します。
+
+</div>
+<div label="TiDB Self-Hosted">
+
+1.  次のコマンドを実行して`.env.example`をコピーし、名前を`.env`に変更します。
+
+    ```shell
+    cp .env.example .env
+    ```
+
+2.  対応する接続​​文字列をコピーして`.env`ファイルに貼り付けます。結果の例は次のとおりです。
+
+    ```dotenv
+    TIDB_HOST='{host}'
+    TIDB_PORT='4000'
+    TIDB_USER='root'
+    TIDB_PASSWORD='{password}'
+    TIDB_DB_NAME='test'
+    USE_SSL='false'
+    ```
+
+    必ずプレースホルダー`{}`接続パラメーターに置き換えて、 `USE_SSL`を`false`に設定してください。 TiDB をローカルで実行している場合、デフォルトのホスト アドレスは`127.0.0.1`で、パスワードは空です。
+
+3.  `.env`ファイルを保存します。
+
+</div>
+</SimpleTab>
+
+### ステップ 3: コードを実行して結果を確認する {#step-3-run-the-code-and-check-the-result}
+
+1.  次のコマンドを実行してサンプル コードを実行します。
+
+    ```shell
+    make
+    ```
+
+2.  [予想される出力.txt](https://github.com/tidb-samples/tidb-golang-sql-driver-quickstart/blob/main/Expected-Output.txt)チェックして、出力が一致するかどうかを確認します。
+
+## サンプルコードスニペット {#sample-code-snippets}
+
+次のサンプル コード スニペットを参照して、独自のアプリケーション開発を完了できます。
+
+完全なサンプル コードとその実行方法については、 [tidb-samples/tidb-golang-sql-driver-quickstart](https://github.com/tidb-samples/tidb-golang-sql-driver-quickstart)リポジトリを確認してください。
+
+### TiDB に接続する {#connect-to-tidb}
+
+```golang
+func openDB(driverName string, runnable func(db *sql.DB)) {
+    dsn := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=utf8mb4&tls=%s",
+        ${tidb_user}, ${tidb_password}, ${tidb_host}, ${tidb_port}, ${tidb_db_name}, ${use_ssl})
+    db, err := sql.Open(driverName, dsn)
     if err != nil {
         panic(err)
     }
@@ -178,380 +198,99 @@ func openDB(driverName, dataSourceName string, runnable func(db *sql.DB)) {
 }
 ```
 
-TiDB トランザクションを適応させるには、次のコードに従ってツールキット[ユーティリティ](https://github.com/pingcap-inc/tidb-example-golang/tree/main/util)を作成します。
+この関数を使用する場合、 `${tidb_host}` 、 `${tidb_port}` 、 `${tidb_user}` 、 `${tidb_password}` 、および`${tidb_db_name}`を TiDB クラスターの実際の値に置き換える必要があります。 TiDB サーバーレスには安全な接続が必要です。したがって、 `${use_ssl}`の値を`true`に設定する必要があります。
 
-```go
-package util
+### データの挿入 {#insert-data}
 
-import (
-    "context"
-    "database/sql"
-)
+```golang
+openDB("mysql", func(db *sql.DB) {
+    insertSQL = "INSERT INTO player (id, coins, goods) VALUES (?, ?, ?)"
+    _, err := db.Exec(insertSQL, "id", 1, 1)
 
-type TiDBSqlTx struct {
-    *sql.Tx
-    conn        *sql.Conn
-    pessimistic bool
-}
-
-func TiDBSqlBegin(db *sql.DB, pessimistic bool) (*TiDBSqlTx, error) {
-    ctx := context.Background()
-    conn, err := db.Conn(ctx)
     if err != nil {
-        return nil, err
+        panic(err)
     }
-    if pessimistic {
-        _, err = conn.ExecContext(ctx, "set @@tidb_txn_mode=?", "pessimistic")
-    } else {
-        _, err = conn.ExecContext(ctx, "set @@tidb_txn_mode=?", "optimistic")
-    }
-    if err != nil {
-        return nil, err
-    }
-    tx, err := conn.BeginTx(ctx, nil)
-    if err != nil {
-        return nil, err
-    }
-    return &TiDBSqlTx{
-        conn:        conn,
-        Tx:          tx,
-        pessimistic: pessimistic,
-    }, nil
-}
-
-func (tx *TiDBSqlTx) Commit() error {
-    defer tx.conn.Close()
-    return tx.Tx.Commit()
-}
-
-func (tx *TiDBSqlTx) Rollback() error {
-    defer tx.conn.Close()
-    return tx.Tx.Rollback()
-}
-```
-
-`dao.go`データを書き込む機能を提供する一連のデータ操作メソッドを定義します。これはこの例の核心部分でもあります。
-
-```go
-package main
-
-import (
-    "database/sql"
-    "fmt"
-    "math/rand"
-    "strings"
-
-    "github.com/google/uuid"
-    "github.com/pingcap-inc/tidb-example-golang/util"
-)
-
-type Player struct {
-    ID    string
-    Coins int
-    Goods int
-}
-
-// createPlayer create a player
-func createPlayer(db *sql.DB, player Player) error {
-    _, err := db.Exec(CreatePlayerSQL, player.ID, player.Coins, player.Goods)
-    return err
-}
-
-// getPlayer get a player
-func getPlayer(db *sql.DB, id string) (Player, error) {
-    var player Player
-
-    rows, err := db.Query(GetPlayerSQL, id)
-    if err != nil {
-        return player, err
-    }
-    defer rows.Close()
-
-    if rows.Next() {
-        err = rows.Scan(&player.ID, &player.Coins, &player.Goods)
-        if err == nil {
-            return player, nil
-        } else {
-            return player, err
-        }
-    }
-
-    return player, fmt.Errorf("can not found player")
-}
-
-// getPlayerByLimit get players by limit
-func getPlayerByLimit(db *sql.DB, limit int) ([]Player, error) {
-    var players []Player
-
-    rows, err := db.Query(GetPlayerByLimitSQL, limit)
-    if err != nil {
-        return players, err
-    }
-    defer rows.Close()
-
-    for rows.Next() {
-        player := Player{}
-        err = rows.Scan(&player.ID, &player.Coins, &player.Goods)
-        if err == nil {
-            players = append(players, player)
-        } else {
-            return players, err
-        }
-    }
-
-    return players, nil
-}
-
-// bulk-insert players
-func bulkInsertPlayers(db *sql.DB, players []Player, batchSize int) error {
-    tx, err := util.TiDBSqlBegin(db, true)
-    if err != nil {
-        return err
-    }
-
-    stmt, err := tx.Prepare(buildBulkInsertSQL(batchSize))
-    if err != nil {
-        return err
-    }
-
-    defer stmt.Close()
-
-    for len(players) > batchSize {
-        if _, err := stmt.Exec(playerToArgs(players[:batchSize])...); err != nil {
-            tx.Rollback()
-            return err
-        }
-
-        players = players[batchSize:]
-    }
-
-    if len(players) != 0 {
-        if _, err := tx.Exec(buildBulkInsertSQL(len(players)), playerToArgs(players)...); err != nil {
-            tx.Rollback()
-            return err
-        }
-    }
-
-    if err := tx.Commit(); err != nil {
-        tx.Rollback()
-        return err
-    }
-
-    return nil
-}
-
-func getCount(db *sql.DB) (int, error) {
-    count := 0
-
-    rows, err := db.Query(GetCountSQL)
-    if err != nil {
-        return count, err
-    }
-
-    defer rows.Close()
-
-    if rows.Next() {
-        if err := rows.Scan(&count); err != nil {
-            return count, err
-        }
-    }
-
-    return count, nil
-}
-
-func buyGoods(db *sql.DB, sellID, buyID string, amount, price int) error {
-    var sellPlayer, buyPlayer Player
-
-    tx, err := util.TiDBSqlBegin(db, true)
-    if err != nil {
-        return err
-    }
-
-    buyExec := func() error {
-        stmt, err := tx.Prepare(GetPlayerWithLockSQL)
-        if err != nil {
-            return err
-        }
-        defer stmt.Close()
-
-        sellRows, err := stmt.Query(sellID)
-        if err != nil {
-            return err
-        }
-        defer sellRows.Close()
-
-        if sellRows.Next() {
-            if err := sellRows.Scan(&sellPlayer.ID, &sellPlayer.Coins, &sellPlayer.Goods); err != nil {
-                return err
-            }
-        }
-        sellRows.Close()
-
-        if sellPlayer.ID != sellID || sellPlayer.Goods < amount {
-            return fmt.Errorf("sell player %s goods not enough", sellID)
-        }
-
-        buyRows, err := stmt.Query(buyID)
-        if err != nil {
-            return err
-        }
-        defer buyRows.Close()
-
-        if buyRows.Next() {
-            if err := buyRows.Scan(&buyPlayer.ID, &buyPlayer.Coins, &buyPlayer.Goods); err != nil {
-                return err
-            }
-        }
-        buyRows.Close()
-
-        if buyPlayer.ID != buyID || buyPlayer.Coins < price {
-            return fmt.Errorf("buy player %s coins not enough", buyID)
-        }
-
-        updateStmt, err := tx.Prepare(UpdatePlayerSQL)
-        if err != nil {
-            return err
-        }
-        defer updateStmt.Close()
-
-        if _, err := updateStmt.Exec(-amount, price, sellID); err != nil {
-            return err
-        }
-
-        if _, err := updateStmt.Exec(amount, -price, buyID); err != nil {
-            return err
-        }
-
-        return nil
-    }
-
-    err = buyExec()
-    if err == nil {
-        fmt.Println("\n[buyGoods]:\n    'trade success'")
-        tx.Commit()
-    } else {
-        tx.Rollback()
-    }
-
-    return err
-}
-
-func playerToArgs(players []Player) []interface{} {
-    var args []interface{}
-    for _, player := range players {
-        args = append(args, player.ID, player.Coins, player.Goods)
-    }
-    return args
-}
-
-func buildBulkInsertSQL(amount int) string {
-    return CreatePlayerSQL + strings.Repeat(",(?,?,?)", amount-1)
-}
-
-func randomPlayers(amount int) []Player {
-    players := make([]Player, amount, amount)
-    for i := 0; i < amount; i++ {
-        players[i] = Player{
-            ID:    uuid.New().String(),
-            Coins: rand.Intn(10000),
-            Goods: rand.Intn(10000),
-        }
-    }
-
-    return players
-}
-```
-
-`sql.go` SQL ステートメントを定数として定義します。
-
-```go
-package main
-
-const (
-    CreatePlayerSQL      = "INSERT INTO player (id, coins, goods) VALUES (?, ?, ?)"
-    GetPlayerSQL         = "SELECT id, coins, goods FROM player WHERE id = ?"
-    GetCountSQL          = "SELECT count(*) FROM player"
-    GetPlayerWithLockSQL = GetPlayerSQL + " FOR UPDATE"
-    UpdatePlayerSQL      = "UPDATE player set goods = goods + ?, coins = coins + ? WHERE id = ?"
-    GetPlayerByLimitSQL  = "SELECT id, coins, goods FROM player LIMIT ?"
-)
-```
-
-## ステップ 3. コードを実行する {#step-3-run-the-code}
-
-次のコンテンツでは、コードを実行する方法をステップごとに紹介します。
-
-### ステップ 3.1 テーブルの初期化 {#step-3-1-table-initialization}
-
-<CustomContent platform="tidb">
-
-go-sql-driver/mysql を使用する場合は、データベース テーブルを手動で初期化する必要があります。ローカル クラスターを使用していて、MySQL クライアントがローカルにインストールされている場合は、 `sqldriver`ディレクトリで直接実行できます。
-
-```shell
-make mysql
-```
-
-または、次のコマンドを実行することもできます。
-
-```shell
-mysql --host 127.0.0.1 --port 4000 -u root<sql/dbinit.sql
-```
-
-非ローカル クラスターを使用している場合、または MySQL クライアントがインストールされていない場合は、クラスターに接続し、 `sql/dbinit.sql`ファイル内のステートメントを実行します。
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-go-sql-driver/mysql を使用する場合は、クラスターに接続し、 `sql/dbinit.sql`ファイル内のステートメントを実行してデータベース テーブルを手動で初期化する必要があります。
-
-</CustomContent>
-
-### ステップ 3.2 TiDB Cloudのパラメータを変更する {#step-3-2-modify-parameters-for-tidb-cloud}
-
-TiDB サーバーレス クラスターを使用している場合は、 `dsn` in `sqldriver.go`の値を変更します。
-
-```go
-dsn := "root:@tcp(127.0.0.1:4000)/test?charset=utf8mb4"
-```
-
-設定したパスワードが`123456`で、クラスターの詳細ページから取得した接続パラメーターが次であるとします。
-
--   エンドポイント: `xxx.tidbcloud.com`
--   ポート: `4000`
--   ユーザー: `2aEp24QWEDLqRFs.root`
-
-この場合、 `mysql.RegisterTLSConfig`と`dsn`次のように変更できます。
-
-```go
-mysql.RegisterTLSConfig("register-tidb-tls", &tls.Config {
-    MinVersion: tls.VersionTLS12,
-    ServerName: "xxx.tidbcloud.com",
 })
-
-dsn := "2aEp24QWEDLqRFs.root:123456@tcp(xxx.tidbcloud.com:4000)/test?charset=utf8mb4&tls=register-tidb-tls"
 ```
 
-### ステップ 3.3 実行 {#step-3-3-run}
+詳細については、 [データの挿入](/develop/dev-guide-insert-data.md)を参照してください。
 
-コードを実行するには、 `make mysql` 、 `make build` 、 `make run`をそれぞれ実行します。
+### クエリデータ {#query-data}
 
-```shell
-make mysql # this command executes `mysql --host 127.0.0.1 --port 4000 -u root<sql/dbinit.sql`
-make build # this command executes `go build -o bin/sql-driver-example`
-make run # this command executes `./bin/sql-driver-example`
+```golang
+openDB("mysql", func(db *sql.DB) {
+    selectSQL = "SELECT id, coins, goods FROM player WHERE id = ?"
+    rows, err := db.Query(selectSQL, "id")
+    if err != nil {
+        panic(err)
+    }
+
+    // This line is extremely important!
+    defer rows.Close()
+
+    id, coins, goods := "", 0, 0
+    if rows.Next() {
+        err = rows.Scan(&id, &coins, &goods)
+        if err == nil {
+            fmt.Printf("player id: %s, coins: %d, goods: %d\n", id, coins, goods)
+        }
+    }
+})
 ```
 
-または、ネイティブ コマンドを使用することもできます。
+詳細については、 [クエリデータ](/develop/dev-guide-get-data-from-single-table.md)を参照してください。
 
-```shell
-mysql --host 127.0.0.1 --port 4000 -u root<sql/dbinit.sql
-go build -o bin/sql-driver-example
-./bin/sql-driver-example
+### データを更新する {#update-data}
+
+```golang
+openDB("mysql", func(db *sql.DB) {
+    updateSQL = "UPDATE player set goods = goods + ?, coins = coins + ? WHERE id = ?"
+    _, err := db.Exec(updateSQL, 1, -1, "id")
+
+    if err != nil {
+        panic(err)
+    }
+})
 ```
 
-または、 `make mysql` 、 `make build` 、 `make run`を組み合わせた`make all`コマンドを直接実行します。
+詳細については、 [データを更新する](/develop/dev-guide-update-data.md)を参照してください。
 
-## ステップ 4. 期待される出力 {#step-4-expected-output}
+### データの削除 {#delete-data}
 
-[go-sql-driver/mysql の予想される出力](https://github.com/pingcap-inc/tidb-example-golang/blob/main/Expected-Output.md#sqldriver)
+```golang
+openDB("mysql", func(db *sql.DB) {
+    deleteSQL = "DELETE FROM player WHERE id=?"
+    _, err := db.Exec(deleteSQL, "id")
+
+    if err != nil {
+        panic(err)
+    }
+})
+```
+
+詳細については、 [データの削除](/develop/dev-guide-delete-data.md)を参照してください。
+
+## 便利なメモ {#useful-notes}
+
+### ドライバーまたは ORM フレームワークを使用していますか? {#using-driver-or-orm-framework}
+
+Golangドライバーはデータベースへの低レベルのアクセスを提供しますが、開発者は次のことを行う必要があります。
+
+-   データベース接続を手動で確立および解放します。
+-   データベーストランザクションを手動で管理します。
+-   データ行をデータ オブジェクトに手動でマップします。
+
+複雑な SQL ステートメントを作成する必要がない限り、開発には[ORM](https://en.wikipedia.org/w/index.php?title=Object-relational_mapping)フレームワーク ( [ゴーム](/develop/dev-guide-sample-application-golang-gorm.md)など) を使用することをお勧めします。それはあなたに役立ちます:
+
+-   接続とトランザクションの管理のために[定型コード](https://en.wikipedia.org/wiki/Boilerplate_code)を減らします。
+-   多数の SQL ステートメントの代わりにデータ オブジェクトを使用してデータを操作します。
+
+## 次のステップ {#next-steps}
+
+-   Go-MySQL-Driver の使用法については[Go-MySQL-Driver のドキュメント](https://github.com/go-sql-driver/mysql/blob/master/README.md)からご覧ください。
+-   TiDB アプリケーション[データの削除](/develop/dev-guide-delete-data.md) [単一テーブルの読み取り](/develop/dev-guide-get-data-from-single-table.md)ベスト プラクティス[SQLパフォーマンスの最適化](/develop/dev-guide-optimize-sql-overview.md)は、 [開発者ガイド](/develop/dev-guide-overview.md)の章 ( [データの挿入](/develop/dev-guide-insert-data.md)など) [データを更新する](/develop/dev-guide-update-data.md)参照[トランザクション](/develop/dev-guide-transaction-overview.md)てください。
+-   プロフェッショナルとして[TiDB 開発者コース](https://www.pingcap.com/education/)を学び、試験合格後に[TiDB 認定](https://www.pingcap.com/education/certification/)獲得します。
+
+## 助けが必要？ {#need-help}
+
+[不和](https://discord.gg/vYU9h56kAX)または[サポートチケットを作成する](https://support.pingcap.com/)について質問してください。
