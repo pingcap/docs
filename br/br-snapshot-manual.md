@@ -74,7 +74,7 @@ br backup db \
     --log-file backuptable.log
 ```
 
-前述のコマンドでは、 `--db`​​データベース名を指定し、その他のパラメータは[TiDB クラスターのスナップショットをバックアップする](#back-up-cluster-snapshots)と同じです。
+前述のコマンドでは、 `--db`にデータベース名を指定し、その他のパラメータは[TiDB クラスターのスナップショットをバックアップする](#back-up-cluster-snapshots)と同じです。
 
 ### テーブルをバックアップする {#back-up-a-table}
 
@@ -96,7 +96,7 @@ br backup table \
 
 ### テーブルフィルターを使用して複数のテーブルをバックアップする {#back-up-multiple-tables-with-table-filter}
 
-より多くの条件を使用して複数のテーブルをバックアップするには、 `br backup full`コマンドを実行し、 `--filter`または`-f`で[テーブルフィルター](/table-filter.md)を指定します。
+より多くの条件を使用して複数のテーブルをバックアップするには、 `br backup full`コマンドを実行し、 [テーブルフィルター](/table-filter.md) `--filter`または`-f`で指定します。
 
 次の例では、 `db*.tbl*`フィルター ルールに一致するテーブルを Amazon S3 にバックアップします。
 
@@ -120,7 +120,7 @@ BR は、バックアップ[Amazon S3 にバックアップするときにstorag
 TiDB v5.3.0 以降、次のパラメータを構成することでバックアップ データを暗号化できます。
 
 -   `--crypter.method` : 暗号化アルゴリズム。 `aes128-ctr` 、 `aes192-ctr` 、または`aes256-ctr`のいずれかです。デフォルト値は`plaintext`で、データが暗号化されないことを示します。
--   `--crypter.key` : 16 進文字列形式の暗号化キー。アルゴリズム`aes128-ctr`の場合は 128 ビット (16 バイト) の鍵、アルゴリズム`aes192-ctr`の場合は 24 バイトの鍵、アルゴリズム`aes256-ctr`の場合は 32 バイトの鍵です。
+-   `--crypter.key` : 16 進文字列形式の暗号化キー。アルゴリズム`aes128-ctr`場合は 128 ビット (16 バイト) の鍵、アルゴリズム`aes192-ctr`の場合は 24 バイトの鍵、アルゴリズム`aes256-ctr`の場合は 32 バイトの鍵です。
 -   `--crypter.key-file` : キーファイル。 `crypter.key`を渡さずに、キーが保存されているファイル パスをパラメータとして直接渡すことができます。
 
 以下は例です。
@@ -202,7 +202,7 @@ br restore table \
     --log-file restore_table.log
 ```
 
-前述のコマンドでは、 `--table`に復元するテーブルの名前を指定し、その他のパラメータは[データベースを復元する](#restore-a-database)と同じです。
+前のコマンドでは、 `--table`に復元するテーブルの名前を指定し、その他のパラメータは[データベースを復元する](#restore-a-database)と同じです。
 
 ### テーブルフィルターを使用して複数のテーブルを復元する {#restore-multiple-tables-with-table-filter}
 

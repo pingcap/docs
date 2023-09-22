@@ -9,7 +9,7 @@ TiDB ダッシュボードにアクセスする前にサインインする必要
 
 ## TiDB ユーザーのセキュリティを強化する {#enhance-security-of-tidb-users}
 
-### TiDB <code>root</code>ユーザーに強力なパスワードを設定します。 {#set-a-strong-password-for-the-tidb-code-root-code-user}
+### TiDB <code>root</code>ユーザーに強力なパスワードを設定する {#set-a-strong-password-for-the-tidb-code-root-code-user}
 
 TiDB ダッシュボードのアカウント システムは、 TiDB SQLユーザーのアカウント システムと一致しています。デフォルトでは、TiDB の`root`ユーザーにはパスワードがないため、TiDB ダッシュボードへのアクセスにはパスワード認証が必要ありません。これにより、悪意のある訪問者に、特権付き SQL ステートメントの実行などの高い権限が与えられます。
 
@@ -17,7 +17,7 @@ TiDB `root`ユーザーには強力なパスワードを設定することをお
 
 ### TiDB ダッシュボード用に最小権限のユーザーを作成する {#create-a-least-privileged-user-for-tidb-dashboard}
 
-TiDB Dashboard のアカウント システムは、 TiDB SQLのアカウント システムと一致しています。 TiDB ダッシュボードにアクセスするユーザーは、 TiDB SQLユーザーの権限に基づいて認証および許可されます。したがって、TiDB ダッシュボードには、制限された権限、または単に読み取り専用の権限が必要です。最小特権の原則に基づいて TiDB ダッシュボードにアクセスするようにユーザーを構成できるため、高い特権を持つユーザーのアクセスを回避できます。
+TiDB Dashboard のアカウント システムは、 TiDB SQLのアカウント システムと一致しています。 TiDB ダッシュボードにアクセスするユーザーは、 TiDB SQLユーザーの権限に基づいて認証および許可されます。したがって、TiDB ダッシュボードには制限された権限、または読み取り専用権限が必要です。最小特権の原則に基づいて TiDB ダッシュボードにアクセスするようにユーザーを構成できるため、高い特権を持つユーザーのアクセスを回避できます。
 
 TiDB ダッシュボードにアクセスしてサインインするには、最小限の権限を持つ SQL ユーザーを作成することをお勧めします。これにより、高い権限を持つユーザーのアクセスが回避され、セキュリティが向上します。詳細については[TiDB ダッシュボードのユーザー管理](/dashboard/dashboard-user.md)を参照してください。
 
@@ -25,7 +25,7 @@ TiDB ダッシュボードにアクセスしてサインインするには、最
 
 > **注記：**
 >
-> TiDB v6.5.0 (以降) およびTiDB Operator v1.4.0 (以降) は、TiDB ダッシュボードを Kubernetes 上の独立したポッドとしてデプロイすることをサポートしています。 TiDB Operatorを使用すると、このポッドの IP アドレスにアクセスして TiDB ダッシュボードを起動できます。このポートは PD の他の特権インターフェイスとは通信せず、外部に提供される場合は追加のファイアウォールは必要ありません。詳細は[TiDB Operatorで TiDB ダッシュボードを独立してデプロイ](https://docs.pingcap.com/tidb-in-kubernetes/dev/get-started#deploy-tidb-dashboard-independently)を参照してください。
+> TiDB v6.5.0 (以降) およびTiDB Operator v1.4.0 (以降) は、Kubernetes 上の独立したポッドとして TiDB ダッシュボードをデプロイすることをサポートしています。 TiDB Operatorを使用すると、このポッドの IP アドレスにアクセスして TiDB ダッシュボードを起動できます。このポートは PD の他の特権インターフェイスとは通信せず、外部に提供される場合は追加のファイアウォールは必要ありません。詳細は[TiDB Operatorで TiDB ダッシュボードを独立してデプロイ](https://docs.pingcap.com/tidb-in-kubernetes/dev/get-started#deploy-tidb-dashboard-independently)を参照してください。
 
 TiDB ダッシュボードは、PD クライアント ポート (デフォルトは[http://IP:2379/ダッシュボード/](http://IP:2379/dashboard/)を通じてサービスを提供します。 TiDB ダッシュボードには ID 認証が必要ですが、PD クライアント ポートで伝送される PD の他の特権インターフェイス ( [http://IP:2379/pd/api/v1/members](http://IP:2379/pd/api/v1/members)など) は ID 認証を必要とせず、特権操作を実行できます。したがって、PD クライアント ポートを外部ネットワークに直接公開することは非常に危険です。
 
@@ -61,13 +61,13 @@ tiup cluster display CLUSTER_NAME --dashboard
 >
 > この機能は、 `tiup cluster`導入ツールの新しいバージョン (v1.0.3 以降) でのみ使用できます。
 >
-> <details>
->   TiUPクラスタのアップグレード
+> <details><summary>TiUPクラスタのアップグレード</summary>
 >
->   ```bash
->   tiup update --self
->   tiup update cluster --force
->   ```
+> ```bash
+> tiup update --self
+> tiup update cluster --force
+> ```
+>
 > </details>
 
 以下は出力例です。
@@ -80,7 +80,7 @@ http://192.168.0.123:2379/dashboard/
 
 ## TiDB ダッシュボード専用のリバース プロキシ {#reverse-proxy-only-for-tidb-dashboard}
 
-[ファイアウォールを使用して信頼できないアクセスをブロックする](#use-a-firewall-to-block-untrusted access) で説明したように、PD クライアント ポートで提供されるサービスには、TiDB ダッシュボード ( [http://IP:2379/ダッシュボード/](http://IP:2379/dashboard/)にあります) だけでなく、その他のサービスも含まれます。 PD の特権インターフェイス ( [http://IP:2379/pd/api/v1/members](http://IP:2379/pd/api/v1/members)など)。したがって**、**リバース プロキシを使用`/dashboard`て TiDB ダッシュボードを外部ネットワークに提供する場合は、外部**ネットワーク**がリバースプロキシ。
+[ファイアウォールを使用して信頼できないアクセスをブロックする](#use-a-firewall-to-block-untrusted access) で説明したように、PD クライアント ポートで提供されるサービスには、TiDB ダッシュボード ( [http://IP:2379/ダッシュボード/](http://IP:2379/dashboard/)にあります) だけでなく、その他のサービスも含まれます。 PD の特権インターフェイス ( [http://IP:2379/pd/api/v1/members](http://IP:2379/pd/api/v1/members)など)。したがって、リバース プロキシを使用`/dashboard`て TiDB ダッシュボードを外部ネットワークに提供する場合は**、**外部**ネットワーク**がリバースプロキシ。
 
 安全で推奨されるリバース プロキシ構成については、 [リバース プロキシの背後で TiDB ダッシュボードを使用する](/dashboard/dashboard-ops-reverse-proxy.md)を参照することをお勧めします。
 

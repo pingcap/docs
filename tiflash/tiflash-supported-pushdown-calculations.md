@@ -60,7 +60,7 @@ TiFlash は、次のプッシュダウン式をサポートしています。
     -   分
     -   2番
 
--   [`ROWS`または`RANGE`タイプのフレーム](https://dev.mysql.com/doc/refman/8.0/en/window-functions-frames.html)が付いたウィンドウ関数はTiFlashにプッシュダウンできません。
+-   [`ROWS`または`RANGE`タイプのフレーム](https://dev.mysql.com/doc/refman/8.0/en/window-functions-frames.html)が付いたウィンドウ関数をTiFlashにプッシュダウンすることはできません。
 
 クエリでサポートされていないプッシュダウン計算が発生した場合、TiDB は残りの計算を完了する必要があり、これはTiFlashアクセラレーション効果に大きな影響を与える可能性があります。現在サポートされていない演算子と式は、将来のバージョンでサポートされる可能性があります。
 
@@ -116,7 +116,7 @@ EXPLAIN SELECT MAX(id + a) FROM t GROUP BY a;
 8 rows in set (0.18 sec)
 ```
 
-前の例では、式`id + a`がTiFlashにプッシュダウンされて事前に計算されます。これにより、ネットワーク上で転送されるデータ量が削減され、ネットワーク送信のオーバーヘッドが削減され、全体的な計算パフォーマンスが向上します。これは、 `operator`列の値が`plus(test.t.id, test.t.a)`である行の`task`列の値`mpp[tiflash]`によって示されます。
+前の例では、事前に計算のために式`id + a`がTiFlashにプッシュダウンされています。これにより、ネットワーク上で転送されるデータ量が削減され、ネットワーク送信のオーバーヘッドが削減され、全体的な計算パフォーマンスが向上します。これは、 `operator`列の値が`plus(test.t.id, test.t.a)`である行の`task`列の値`mpp[tiflash]`によって示されます。
 
 ### 例 3: プッシュダウンの制限 {#example-3-restrictions-for-pushdown}
 

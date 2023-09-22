@@ -35,7 +35,7 @@ TiDB との互換性を高めるために、TiDB インストール パッケー
     tar -xzf prometheus-v{version}-linux-amd64.tar.gz
     ```
 
-### ステップ 3. TiUP が使用できる新しい Prometheus パッケージを作成する {#step-3-create-a-new-prometheus-package-that-tiup-can-use}
+### ステップ 3. TiUPが使用できる新しい Prometheus パッケージを作成する {#step-3-create-a-new-prometheus-package-that-tiup-can-use}
 
 1.  [ステップ1](#step-1-download-a-new-prometheus-installation-package-from-the-prometheus-website)で解凍したファイルをコピーし、 [ステップ2](#step-2-download-the-prometheus-installation-package-provided-by-tidb)で解凍した`./prometheus-v{version}-linux-amd64/prometheus`ディレクトリ内のファイルをコピーしたファイルで置き換えます。
 2.  `./prometheus-v{version}-linux-amd64`ディレクトリを再圧縮し、新しい圧縮パッケージに`prometheus-v{new-version}.tar.gz`という名前を付けます。必要に応じて`{new-version}`を指定できます。

@@ -6,6 +6,8 @@ aliases: ['/tidbcloud/serverless-tier-limitations']
 
 # TiDB サーバーレスの制限とクォータ {#tidb-serverless-limitations-and-quotas}
 
+<!-- markdownlint-disable MD026 -->
+
 TiDB サーバーレスは、TiDB がサポートするほぼすべてのワークロードで動作しますが、TiDB セルフホストまたは TiDB 専用クラスターと TiDB サーバーレス クラスターの間には機能の違いがいくつかあります。このドキュメントでは、TiDB サーバーレスの制限について説明します。
 
 私たちは常に、TiDB Serverless と TiDB Dended の間の機能のギャップを埋めています。これらの機能またはギャップ内の機能が必要な場合は、機能リクエストに[TiDB専用](/tidb-cloud/select-cluster-tier.md#tidb-dedicated)または[お問い合わせ](https://www.pingcap.com/contact-us/?from=en)を使用してください。
@@ -49,7 +51,7 @@ TiDB サーバーレスは、TiDB がサポートするほぼすべてのワー�
 ### その他 {#others}
 
 -   [生存時間 (TTL)](/time-to-live.md)は現在利用できません。
--   トランザクションは30 分を超えて継続することはできません。
+-   トランザクションは30 分を超えることはできません。
 -   SQL の制限の詳細については、 [制限された SQL 機能](/tidb-cloud/limited-sql-features.md)を参照してください。
 
 ## 使用量割り当て {#usage-quota}

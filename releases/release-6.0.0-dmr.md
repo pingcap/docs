@@ -381,7 +381,7 @@ TiDB v6.0.0 は DMR であり、そのバージョンは 6.0.0-DMR です。
 
 -   TiFlash
 
-    -   TiFlashファイルの論理分割を禁止し (デフォルト値の`profiles.default.dt_enable_logical_split`を`false`に調整します。詳細については[ユーザードキュメント](/tiflash/tiflash-configuration.md#tiflash-configuration-parameters)参照)、 TiFlashに同期されたテーブルのスペース占有率がスペースと同様になるように、 TiFlashカラムナ型storageのスペース使用効率を向上させます。 TiKV のテーブルの占有
+    -   TiFlashファイルの論理分割を禁止し (デフォルト値の`profiles.default.dt_enable_logical_split`を`false`に調整します。詳細については[ユーザードキュメント](/tiflash/tiflash-configuration.md#tiflash-configuration-parameters)参照)、 TiFlashに同期されたテーブルのスペース占有率が、 TiFlashカラムナstorageのスペース使用効率を向上させます。 TiKV のテーブルの占有
     -   以前のクラスター管理モジュールを TiDB に統合することで、 TiFlashのクラスター管理とレプリカ レプリケーション メカニズムを最適化し、小さなテーブルのレプリカ作成を高速化します[#29924](https://github.com/pingcap/tidb/issues/29924)
 
 -   ツール
@@ -430,7 +430,7 @@ TiDB v6.0.0 は DMR であり、そのバージョンは 6.0.0-DMR です。
     -   insert ステートメントを使用して仮想生成された列にデータを挿入するときに発生する可能性のあるpanicを修正しました[#31735](https://github.com/pingcap/tidb/issues/31735)
     -   作成したリストパーティション[#31784](https://github.com/pingcap/tidb/issues/31784)に重複カラムが存在してもエラーが報告されないバグを修正
     -   `select for update union select`間違ったスナップショットを使用した場合に返される間違った結果を修正[#31530](https://github.com/pingcap/tidb/issues/31530)
-    -   復元操作の完了後にリージョンが不均等に分散される可能性がある潜在的な問題を修正します[#31034](https://github.com/pingcap/tidb/issues/31034)
+    -   復元操作の終了後にリージョンが不均一に分散される可能性がある潜在的な問題を修正します[#31034](https://github.com/pingcap/tidb/issues/31034)
     -   `json`タイプ[#31541](https://github.com/pingcap/tidb/issues/31541)の COERCIBILITY が間違っているバグを修正
     -   この型が組み込み機能[#31320](https://github.com/pingcap/tidb/issues/31320)を使用して処理される場合、 `json`型の間違った照合順序を修正しました。
     -   TiFlashレプリカ数を 0 [#32190](https://github.com/pingcap/tidb/issues/32190)に設定すると PD ルールが削除されないバグを修正

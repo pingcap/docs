@@ -65,7 +65,7 @@ host = "<host>"
 
 > **注記：**
 >
-> 現在、TiDB は`zone`ラベルに依存して、同じリージョン内にあるレプリカを照合して選択します。この機能を使用するには、 [PD の`location-labels`の設定](#configure-location-labels-for-pd)の場合は`zone`を含める必要があり、 TiDB、TiKV、およびTiFlashに対して`labels`構成する場合は`zone`を構成する必要があります。詳細については、 [TiKV およびTiFlashの`labels`を構成する](#configure-labels-for-tikv-and-tiflash)を参照してください。
+> 現在、TiDB は、同じリージョン内にあるレプリカの照合と選択を`zone`ラベルに依存しています。この機能を使用するには、 [PD の`location-labels`の設定](#configure-location-labels-for-pd)の場合は`zone`を含める必要があり、 TiDB、TiKV、およびTiFlashに対して`labels`構成する場合は`zone`を構成する必要があります。詳細については、 [TiKV およびTiFlashの`labels`を構成する](#configure-labels-for-tikv-and-tiflash)を参照してください。
 
 ### PD の<code>location-labels</code>を構成する {#configure-code-location-labels-code-for-pd}
 
@@ -124,94 +124,92 @@ TiUPを使用してクラスターをデプロイする場合、 [初期化設�
 
 次の例では、2 層トポロジ`zone/host`が定義されています。クラスターの TiKV ノードは 3 つのゾーン z1、z2、および z3 に分散されており、各ゾーンには 4 つのホスト h1、h2、h3、および h4 があります。 z1 では、4 つの TiKV インスタンスが 2 つのホスト (h1 に`tikv-1`と`tikv-2` 、h2 に`tikv-3`と`tikv-4`にデプロイされます。 2 つのTiFlashインスタンスが他の 2 つのホスト (h3 に`tiflash-1` 、h4 に`tiflash-2` ) にデプロイされます。 z2 および z3 では、2 つの TiKV インスタンスが 2 つのホストにデプロイされ、2 つのTiFlashインスタンスが他の 2 つのホストにデプロイされます。次の例では、 `tikv-n` `n`番目の TiKV ノードの IP アドレスを表し、 `tiflash-n` `n`番目のTiFlashノードの IP アドレスを表します。
 
-```
-server_configs:
-  pd:
-    replication.location-labels: ["zone", "host"]
+    server_configs:
+      pd:
+        replication.location-labels: ["zone", "host"]
 
-tikv_servers:
-# z1
-  - host: tikv-1
-    port：20160
-    config:
-      server.labels:
-        zone: z1
-        host: h1
-   - host: tikv-1
-     port：20161
-    config:
-      server.labels:
-        zone: z1
-        host: h1
-  - host: tikv-2
-    port：20160
-    config:
-      server.labels:
-        zone: z1
-        host: h2
-  - host: tikv-2
-    port：20161
-    config:
-      server.labels:
-        zone: z1
-        host: h2
-# z2
-  - host: tikv-5
-    config:
-      server.labels:
-        zone: z2
-        host: h1
-   - host: tikv-6
-    config:
-      server.labels:
-        zone: z2
-        host: h2
-# z3
-  - host: tikv-7
-    config:
-      server.labels:
-        zone: z3
-        host: h1
-  - host: tikv-8
-    config:
-      server.labels:
-        zone: z3
-        host: h2s
-tiflash_servers:
-# z1
-  - host: tiflash-1
-    learner_config:
-      server.labels:
-        zone: z1
-        host: h3
-   - host: tiflash-2
-    learner_config:
-      server.labels:
-        zone: z1
-        host: h4
-# z2
-  - host: tiflash-3
-    learner_config:
-      server.labels:
-        zone: z2
-        host: h3
-   - host: tiflash-4
-    learner_config:
-      server.labels:
-        zone: z2
-        host: h4
-# z3
-  - host: tiflash-5
-    learner_config:
-      server.labels:
-        zone: z3
-        host: h3
-  - host: tiflash-6
-    learner_config:
-      server.labels:
-        zone: z3
-        host: h4
-```
+    tikv_servers:
+    # z1
+      - host: tikv-1
+        port：20160
+        config:
+          server.labels:
+            zone: z1
+            host: h1
+       - host: tikv-1
+         port：20161
+        config:
+          server.labels:
+            zone: z1
+            host: h1
+      - host: tikv-2
+        port：20160
+        config:
+          server.labels:
+            zone: z1
+            host: h2
+      - host: tikv-2
+        port：20161
+        config:
+          server.labels:
+            zone: z1
+            host: h2
+    # z2
+      - host: tikv-5
+        config:
+          server.labels:
+            zone: z2
+            host: h1
+       - host: tikv-6
+        config:
+          server.labels:
+            zone: z2
+            host: h2
+    # z3
+      - host: tikv-7
+        config:
+          server.labels:
+            zone: z3
+            host: h1
+      - host: tikv-8
+        config:
+          server.labels:
+            zone: z3
+            host: h2s
+    tiflash_servers:
+    # z1
+      - host: tiflash-1
+        learner_config:
+          server.labels:
+            zone: z1
+            host: h3
+       - host: tiflash-2
+        learner_config:
+          server.labels:
+            zone: z1
+            host: h4
+    # z2
+      - host: tiflash-3
+        learner_config:
+          server.labels:
+            zone: z2
+            host: h3
+       - host: tiflash-4
+        learner_config:
+          server.labels:
+            zone: z2
+            host: h4
+    # z3
+      - host: tiflash-5
+        learner_config:
+          server.labels:
+            zone: z3
+            host: h3
+      - host: tiflash-6
+        learner_config:
+          server.labels:
+            zone: z3
+            host: h4
 
 詳細は[地理的に分散された導入トポロジ](/geo-distributed-deployment-topology.md)を参照してください。
 

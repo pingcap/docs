@@ -39,8 +39,8 @@ TiDB バージョン: 6.5.4
 
 -   TiFlash
 
-    -   IO バッチ最適化[#7735](https://github.com/pingcap/tiflash/issues/7735) @ [リデジュ](https://github.com/lidezhu)によりTiFlash書き込みパフォーマンスを向上
-    -   不要な fsync 操作を削除することで、 TiFlash書き込みパフォーマンスを向上させます[#7736](https://github.com/pingcap/tiflash/issues/7736) @ [リデジュ](https://github.com/lidezhu)
+    -   IO バッチ最適化[#7735](https://github.com/pingcap/tiflash/issues/7735) @ [リデズ](https://github.com/lidezhu)によりTiFlash書き込みパフォーマンスを向上
+    -   不要な fsync 操作を削除することで、 TiFlash書き込みパフォーマンスを向上させます[#7736](https://github.com/pingcap/tiflash/issues/7736) @ [リデズ](https://github.com/lidezhu)
     -   TiFlashコプロセッサ タスク キューの最大長を制限して、TiFlash のサービス可用性に影響を与えるコプロセッサ タスクの過剰なキューイングを回避します[#7747](https://github.com/pingcap/tiflash/issues/7747) @ [リトルフォール](https://github.com/LittleFall)
 
 -   ツール
@@ -116,7 +116,7 @@ TiDB バージョン: 6.5.4
     -   1 つの TiKV ノードが分離され、別のノードが再起動されたときに発生する可能性があるデータの不整合の問題を修正します[#15035](https://github.com/tikv/tikv/issues/15035) @ [オーバーヴィーナス](https://github.com/overvenus)
     -   データ レプリケーション自動同期モード[#14975](https://github.com/tikv/tikv/issues/14975) @ [ノールーシュ](https://github.com/nolouch)の同期回復フェーズで QPS がゼロに低下する問題を修正します。
     -   暗号化により部分書き込み[#15080](https://github.com/tikv/tikv/issues/15080) @ [タボキー](https://github.com/tabokie)中にデータ破損が発生する可能性がある問題を修正
-    -   ストアハートビートビートの再試行数を[#15184](https://github.com/tikv/tikv/issues/15184) @ [ノールーシュ](https://github.com/nolouch)に減らすことで、ハートビートビート ストームの問題を修正します。
+    -   ストア ハートビートの再試行数を[#15184](https://github.com/tikv/tikv/issues/15184) @ [ノールーシュ](https://github.com/nolouch)に減らすことで、ハートビートハートビートストームの問題を修正します。
     -   保留中の圧縮バイト[#14392](https://github.com/tikv/tikv/issues/14392) @ [コナー1996](https://github.com/Connor1996)が大量にある場合、トラフィック制御が機能しない可能性がある問題を修正
     -   PD と TiKV の間のネットワークの中断により PITR がスタックする可能性がある問題を修正します[#15279](https://github.com/tikv/tikv/issues/15279) @ [ユジュンセン](https://github.com/YuJuncen)
     -   TiCDC の古い値機能が有効になっている場合、TiKV がより多くのメモリを消費する可能性がある問題を修正します[#14815](https://github.com/tikv/tikv/issues/14815) @ [ユジュンセン](https://github.com/YuJuncen)
@@ -133,7 +133,7 @@ TiDB バージョン: 6.5.4
 -   TiFlash
 
     -   `DATETIME` 、 `TIMESTAMP` 、または`TIME`データ型[#7809](https://github.com/pingcap/tiflash/issues/7809) @ [ジェイ・ソン・ファン](https://github.com/JaySon-Huang)の`fsp`が変更された後にクエリが失敗する問題を修正します。
-    -   リージョン[#7762](https://github.com/pingcap/tiflash/issues/7762) @ [リデジュ](https://github.com/lidezhu)の無効な範囲キーによりTiFlashデータが不整合になる問題を修正
+    -   リージョン[#7762](https://github.com/pingcap/tiflash/issues/7762) @ [リデズ](https://github.com/lidezhu)の無効な範囲キーによりTiFlashデータが不整合になる問題を修正
     -   同じ MPP タスク内に複数の HashAgg 演算子がある場合、MPP タスクのコンパイルに過度に時​​間がかかり、クエリのパフォーマンス[#7810](https://github.com/pingcap/tiflash/issues/7810) @ [シーライズ](https://github.com/SeaRise)に深刻な影響を与える可能性がある問題を修正します。
     -   Online Unsafe Recovery [#7671](https://github.com/pingcap/tiflash/issues/7671) @ [ホンユニャン](https://github.com/hongyunyan)を使用した後のTiFlash の再起動に時間がかかりすぎる問題を修正
     -   除算[#6462](https://github.com/pingcap/tiflash/issues/6462) @ [リトルフォール](https://github.com/LittleFall)を実行するときにTiFlash が`DECIMAL`結果を誤って丸める問題を修正
@@ -154,7 +154,7 @@ TiDB バージョン: 6.5.4
 
         -   ダウンストリームでエラーが発生し、 [#9450](https://github.com/pingcap/tiflow/issues/9450) @ [ひっくり返る](https://github.com/hicqu)を再試行すると、レプリケーション タスクが停止する可能性がある問題を修正します。
         -   Kafka [#9504](https://github.com/pingcap/tiflow/issues/9504) @ [3エースショーハンド](https://github.com/3AceShowHand)と同期するときに、再試行間隔が短いためにレプリケーション タスクが失敗する問題を修正します。
-        -   アップストリーム[#9430](https://github.com/pingcap/tiflow/issues/9430) @ [スドジ](https://github.com/sdojjy)の 1 つのトランザクションで複数の一意のキー行を変更すると、TiCDC が同期書き込みの競合を引き起こす可能性がある問題を修正します。
+        -   アップストリーム[#9430](https://github.com/pingcap/tiflow/issues/9430) @ [スドジ](https://github.com/sdojjy)の 1 つのトランザクションで複数の一意のキー行を変更するときに、TiCDC が同期書き込みの競合を引き起こす可能性がある問題を修正します。
         -   TiCDC が名前変更 DDL 操作を誤って同期する可能性がある問題を修正します[#9488](https://github.com/pingcap/tiflow/issues/9488) [#9378](https://github.com/pingcap/tiflow/issues/9378) [#9531](https://github.com/pingcap/tiflow/issues/9531) @ [東門](https://github.com/asddongmen)
         -   ダウンストリームで短期間の障害が発生したときにレプリケーション タスクが停止する可能性がある問題を修正します[#9542](https://github.com/pingcap/tiflow/issues/9542) [#9272](https://github.com/pingcap/tiflow/issues/9272) [#9582](https://github.com/pingcap/tiflow/issues/9582) [#9592](https://github.com/pingcap/tiflow/issues/9592) @ [ひっくり返る](https://github.com/hicqu)
         -   TiCDC ノードのステータスが[#9354](https://github.com/pingcap/tiflow/issues/9354) @ [スドジ](https://github.com/sdojjy)に変化したときに発生する可能性があるpanicの問題を修正しました。

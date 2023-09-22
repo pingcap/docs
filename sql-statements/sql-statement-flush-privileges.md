@@ -41,5 +41,7 @@ TiDB の`FLUSH PRIVILEGES`ステートメントは MySQL と完全な互換性�
 -   [助成金を表示する](/sql-statements/sql-statement-show-grants.md)
 
 <CustomContent platform="tidb">
-  -   [権限管理](/privilege-management.md)
+
+-   [権限管理](/privilege-management.md)
+
 </CustomContent>

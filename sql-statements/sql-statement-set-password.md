@@ -62,5 +62,7 @@ TiDB の`SET PASSWORD`ステートメントは MySQL と完全な互換性があ
 -   [ユーザーを作成](/sql-statements/sql-statement-create-user.md)
 
 <CustomContent platform="tidb">
-  -   [権限管理](/privilege-management.md)
+
+-   [権限管理](/privilege-management.md)
+
 </CustomContent>

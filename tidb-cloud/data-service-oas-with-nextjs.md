@@ -147,10 +147,8 @@ SELECT * FROM test.repository;
 
 1.  `hello-repos`プロジェクト ディレクトリで、次の変数を含む`.env.local`ファイルを作成し、変数値をデータ アプリの公開キーと秘密キーに設定します。
 
-    ```
-    TIDBCLOUD_DATA_SERVICE_PUBLIC_KEY=YOUR_PUBLIC_KEY
-    TIDBCLOUD_DATA_SERVICE_PRIVATE_KEY=YOUR_PRIVATE_KEY
-    ```
+        TIDBCLOUD_DATA_SERVICE_PUBLIC_KEY=YOUR_PUBLIC_KEY
+        TIDBCLOUD_DATA_SERVICE_PRIVATE_KEY=YOUR_PRIVATE_KEY
 
     データ アプリの API キーを作成するには、 [APIキーを作成する](/tidb-cloud/data-service-api-key.md#create-an-api-key)を参照してください。
 

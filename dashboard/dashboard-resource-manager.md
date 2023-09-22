@@ -5,7 +5,7 @@ summary: Introduce how to use the Resource Manager page in TiDB Dashboard to vie
 
 # TiDB ダッシュボードのリソース マネージャー ページ {#tidb-dashboard-resource-manager-page}
 
-[リソース制御](/tidb-resource-control.md)機能を使用してリソース分離を実装するには、クラスター管理者はリソース グループを作成し、各グループのクォータを設定できます。リソースを計画する前に、クラスターの全体的な容量を把握する必要があります。このドキュメントは、リソース制御に関する情報を表示するのに役立ちます。これにより、リソース計画の前にクラスターの容量を見積もり、より効果的にリソースを割り当てることができます。
+[リソース制御](/tidb-resource-control.md)機能を使用してリソース分離を実装するには、クラスター管理者がリソース グループを作成し、各グループのクォータを設定します。リソースを計画する前に、クラスターの全体的な容量を把握する必要があります。このドキュメントは、リソース制御に関する情報を表示するのに役立ちます。これにより、リソース計画の前にクラスターの容量を見積もり、より効果的にリソースを割り当てることができます。
 
 ## ページにアクセスする {#access-the-page}
 
@@ -34,7 +34,7 @@ summary: Introduce how to use the Resource Manager page in TiDB Dashboard to vie
 
 ## 容量の見積もり {#estimate-capacity}
 
-リソースを計画する前に、クラスターの全体的な容量を把握する必要があります。 TiDB は、現在のクラスター内の[リクエストユニット(RU)](/tidb-resource-control.md#what-is-request-unit-ru#what-is-request-unit-ru)の容量を見積もるための 2 つの方法を提供します。
+リソースを計画する前に、クラスターの全体的な容量を把握する必要があります。 TiDB は、現在のクラスター内の[リクエストユニット (RU)](/tidb-resource-control.md#what-is-request-unit-ru#what-is-request-unit-ru)の容量を見積もるための 2 つの方法を提供します。
 
 -   [ハードウェア導入に基づいて容量を見積もる](/sql-statements/sql-statement-calibrate-resource.md#estimate-capacity-based-on-hardware-deployment)
 
@@ -59,7 +59,7 @@ summary: Introduce how to use the Resource Manager page in TiDB Dashboard to vie
 
     -   時間枠内のワークロードが低すぎる場合、次のエラーが表示されます`ERROR 1105 (HY000): The workload in selected time window is too low, with which TiDB is unable to reach a capacity estimation; please select another time window with higher workload, or calibrate resource by hardware instead`が表示されます。
 
-    -   容量推定機能で`tidb_server_maxprocs` 、実際のワークロードに応じてメトリクス データ ( `resource_manager_resource_unit`など) `process_cpu_usage` `tikv_cpu_quota`する必要があります。対応するモニター データが空の場合は、対応するモニター項目名`Error 1105 (HY000): metrics 'resource_manager_resource_unit' is empty`など) でエラーが報告されます。ワークロードがなく、 `resource_manager_resource_unit`が空の場合も、このエラーが報告されます。さらに、TiKV は macOS 上の CPU 使用率を監視しないため、実際のワークロードに基づく容量の見積もりをサポートせず、レポートします`ERROR 1105 (HY000): metrics 'process_cpu_usage' is empty` 。
+    -   容量推定機能で`tidb_server_maxprocs` 、実際のワークロードに応じてメトリクス データ ( `resource_manager_resource_unit`など) `process_cpu_usage` `tikv_cpu_quota`する必要があります。対応するモニター データが空の場合は、対応するモニター項目名 ( `Error 1105 (HY000): metrics 'resource_manager_resource_unit' is empty`など) でエラーが報告されます。ワークロードがなく、 `resource_manager_resource_unit`が空の場合も、このエラーが報告されます。さらに、TiKV は macOS 上の CPU 使用率を監視しないため、実際のワークロードに基づく容量の見積もりをサポートせず、レポートします`ERROR 1105 (HY000): metrics 'process_cpu_usage' is empty` 。
 
     [メトリクス](#metrics)セクションの**CPU 使用率**を使用して、適切な時間範囲を選択できます。
 

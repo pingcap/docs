@@ -52,7 +52,7 @@ SET GLOBAL tidb_server_memory_limit = "32GB";
 > -   メモリ制御のプロセスで、TiDB の合計メモリ使用量が`tidb_server_memory_limit`で設定された制限をわずかに超える可能性があります。
 > -   v6.5.0 以降、構成項目`server-memory-quota`は非推奨になりました。互換性を確保するために、クラスターを v6.5.0 以降のバージョンにアップグレードすると、 `tidb_server_memory_limit` `server-memory-quota`の値を継承します。アップグレード前に`server-memory-quota`構成していない場合は、デフォルト値`tidb_server_memory_limit` ( `80%`が使用されます。
 
-tidb-server インスタンスのメモリ使用量が総メモリの特定の割合に達すると (割合はシステム変数[`tidb_server_memory_limit_gc_trigger`](/system-variables.md#tidb_server_memory_limit_gc_trigger-new-in-v640)によって制御されます)、 tidb-server はメモリのストレスを軽減するためにGolang GC をトリガーしようとします。インスタンスメモリがしきい値付近で変動するためにパフォーマンスの問題を引き起こす頻繁な GC を回避するために、この GC メソッドは最大で 1 分に 1 回 GC をトリガーします。
+tidb-server インスタンスのメモリ使用量が総メモリの特定の割合に達すると (割合はシステム変数[`tidb_server_memory_limit_gc_trigger`](/system-variables.md#tidb_server_memory_limit_gc_trigger-new-in-v640)によって制御されます)、 tidb-server はメモリのストレスを軽減するためにGolang GC をトリガーしようとします。インスタンスメモリがしきい値付近で変動するためにパフォーマンスの問題を引き起こす頻繁な GC を回避するために、この GC メソッドは最大でも 1 分に 1 回 GC をトリガーします。
 
 > **注記：**
 >
@@ -117,7 +117,7 @@ tidb-server インスタンスのメモリ使用量がメモリしきい値 (デ
     -   `memory-usage-alarm-ratio`システム変数[`tidb_memory_usage_alarm_ratio`](/system-variables.md#tidb_memory_usage_alarm_ratio)の値を示します。
     -   `record path`ステータスファイルのディレクトリを示します。
 
-5.  ステータス ファイルのディレクトリ (前の例では、ディレクトリは`/tiup/deploy/tidb-4000/log/oom_record` ) を確認すると、対応するタイムスタンプ (たとえば、 `record2022-10-09T17:18:38+08:00` ) を持つレコード ディレクトリが表示されます。レコード ディレクトリには、 `goroutinue` 、 `heap` 、および`running_sql`の 3 つのファイルが含まれています。これら 3 つのファイルには、ステータス ファイルが記録される時刻が接尾辞として付けられます。それぞれ、ゴルーチンのスタック情報、ヒープメモリの使用状況、アラーム発生時の実行中のSQL情報を記録します。 `running_sql`の内容については、 [`expensive-queries`](/identify-expensive-queries.md)を参照してください。
+5.  ステータス ファイルのディレクトリ (前の例では、ディレクトリは`/tiup/deploy/tidb-4000/log/oom_record` ) を確認すると、対応するタイムスタンプ (たとえば、 `record2022-10-09T17:18:38+08:00` ) を持つレコード ディレクトリが表示されます。レコード ディレクトリには、 `goroutinue` 、 `heap` 、および`running_sql`の 3 つのファイルが含まれています。これら 3 つのファイルには、ステータス ファイルが記録される時刻が接尾辞として付けられます。それぞれ、ゴルーチンのスタック情報、ヒープメモリの使用状況、アラーム発生時の実行中のSQL情報を記録します。 `running_sql`の内容については[`expensive-queries`](/identify-expensive-queries.md)を参照してください。
 
 ## tidb-server のその他のメモリ制御動作 {#other-memory-control-behaviors-of-tidb-server}
 

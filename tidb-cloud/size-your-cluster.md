@@ -197,7 +197,7 @@ TiFlashノードの最小数は、特定のテーブルのTiFlashレプリカ数
 
 TiFlashノードの最小数: `min((compressed size of table A * replicas for table A + compressed size of table B * replicas for table B) / size of each TiFlash capacity, max(replicas for table A, replicas for table B))`
 
-たとえば、AWS 上の各TiFlashノードのノードstorageを 1024 GiB に設定し、テーブル A に 2 つのレプリカ (圧縮サイズは 800 GiB)、テーブル B に 1 つのレプリカ (圧縮サイズは 100 GiB) を設定した場合、必要なTiFlashノードの数は次のとおりです。
+たとえば、AWS 上の各TiFlashノードのノードstorageを1024 GiB に設定し、テーブル A に 2 つのレプリカ (圧縮サイズは 800 GiB)、テーブル B に 1 つのレプリカ (圧縮サイズは 100 GiB) を設定した場合、必要なTiFlashノードの数は次のとおりです。
 
 TiFlashノードの最小数: `min((800 GiB * 2 + 100 GiB * 1) / 1024 GiB, max(2, 1)) ≈ 2`
 

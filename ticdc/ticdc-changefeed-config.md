@@ -5,7 +5,7 @@ summary: Learn the definitions of CLI and configuration parameters of TiCDC chan
 
 # TiCDC 変更フィードの CLI およびコンフィグレーションパラメーター {#cli-and-configuration-parameters-of-ticdc-changefeeds}
 
-## 変更フィード CLI パラメータ {#changefeed-cli-parameters}
+## 変更フィード CLI パラメーター {#changefeed-cli-parameters}
 
 このセクションでは、レプリケーション (変更フィード) タスクの作成方法を示して、TiCDC 変更フィードのコマンド ライン パラメーターを紹介します。
 

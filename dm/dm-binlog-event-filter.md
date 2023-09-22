@@ -133,7 +133,7 @@ filters:
 
 ### TiDB パーサーがサポートしていない SQL ステートメントをフィルターで除外します。 {#filter-out-the-sql-statements-that-the-tidb-parser-does-not-support}
 
-TiDB パーサーがサポートしていない SQL ステートメントの場合、DM はそれらを解析して`schema` / `table`の情報を取得できません。したがって、グローバル フィルタリング ルールを使用する必要があります: `schema-pattern: "*"` 。
+TiDB パーサーがサポートしていない SQL ステートメントの場合、DM はそれらを解析して`schema` / `table`の情報を取得できません。したがって、グローバル フィルタリング ルール`schema-pattern: "*"`を使用する必要があります。
 
 > **注記：**
 >

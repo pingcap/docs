@@ -5,6 +5,8 @@ summary: Learn about the most frequently asked questions (FAQs) relating to TiDB
 
 # TiDB Cloudよくある質問 {#tidb-cloud-faqs}
 
+<!-- markdownlint-disable MD026 -->
+
 このドキュメントには、 TiDB Cloudに関してよくある質問がリストされています。
 
 ## 一般的な FAQ {#general-faqs}
@@ -46,7 +48,7 @@ TiDB Cloudは現在、アマゾン ウェブ サービスと Google Cloud で利
 
 ### TiDB またはTiDB Cloud を本番で使用しているのはどの企業ですか? {#what-companies-are-using-tidb-or-tidb-cloud-in-production}
 
-TiDB は、金融サービス、ゲーム、電子商取引など、さまざまな業界の 1,500 社を超えるグローバル企業から信頼されています。当社のユーザーには、Square (米国)、Shopee (シンガポール)、および China UnionPay (中国) が含まれます。具体的な詳細については[ケーススタディ](https://en.pingcap.com/customers/)参照してください。
+TiDB は、金融サービス、ゲーム、電子商取引など、さまざまな業界の 1,500 社以上のグローバル企業から信頼されています。当社のユーザーには、Square (米国)、Shopee (シンガポール)、および China UnionPay (中国) が含まれます。具体的な詳細については[ケーススタディ](https://en.pingcap.com/customers/)参照してください。
 
 ### SLA はどのようなものですか? {#what-does-the-sla-look-like}
 
@@ -54,7 +56,7 @@ TiDB Cloudは99.99% の SLA を提供します。詳細は[TiDB Cloudサービ�
 
 ### TiDB Cloudについてさらに詳しく知るにはどうすればよいですか? {#how-can-i-learn-more-about-tidb-cloud}
 
-TiDB Cloudについて学ぶ最良の方法は、ステップバイステップのチュートリアルに従うことです。開始するには、次のトピックを確認してください。
+TiDB Cloudについて学ぶ最善の方法は、ステップバイステップのチュートリアルに従うことです。開始するには、次のトピックを確認してください。
 
 -   [TiDB Cloudの紹介](/tidb-cloud/tidb-cloud-intro.md)
 -   [始めましょう](/tidb-cloud/tidb-cloud-quickstart.md)
@@ -165,25 +167,29 @@ TiDB サーバーレス クラスターの場合、 TiDB Cloudは次の手段で
 ### TiDB クラスター内のデータベースに接続するにはどうすればよいですか? {#how-do-i-connect-to-my-database-in-a-tidb-cluster}
 
 <SimpleTab>
-  <div label="TiDB Dedicated">
-    TiDB 専用クラスターの場合、クラスターに接続する手順は次のように簡略化されます。
+<div label="TiDB Dedicated">
 
-    1.  ネットワークを認証します。
-    2.  データベース ユーザーとログイン資格情報を設定します。
-    3.  クラスタサーバー用に TLS をダウンロードして構成します。
-    4.  SQL クライアントを選択し、 TiDB CloudUI に表示される自動生成された接続文字列を取得し、その文字列を使用して SQL クライアント経由でクラスターに接続します。
+TiDB 専用クラスターの場合、クラスターに接続する手順は次のように簡略化されます。
 
-    詳細については、 [TiDB 専用クラスタに接続する](/tidb-cloud/connect-to-tidb-cluster.md)を参照してください。
-  </div>
+1.  ネットワークを認証します。
+2.  データベース ユーザーとログイン資格情報を設定します。
+3.  クラスタサーバー用に TLS をダウンロードして構成します。
+4.  SQL クライアントを選択し、 TiDB CloudUI に表示される自動生成された接続文字列を取得し、その文字列を使用して SQL クライアント経由でクラスターに接続します。
 
-  <div label="TiDB Serverless">
-    TiDB サーバーレス クラスターの場合、クラスターに接続する手順は次のように簡略化されます。
+詳細については、 [TiDB 専用クラスタに接続する](/tidb-cloud/connect-to-tidb-cluster.md)を参照してください。
 
-    1.  データベース ユーザーとログイン資格情報を設定します。
-    2.  SQL クライアントを選択し、 TiDB CloudUI に表示される自動生成された接続文字列を取得し、その文字列を使用して SQL クライアント経由でクラスターに接続します。
+</div>
 
-    詳細については、 [TiDB サーバーレスクラスタに接続する](/tidb-cloud/connect-to-tidb-cluster-serverless.md)を参照してください。
-  </div>
+<div label="TiDB Serverless">
+
+TiDB サーバーレス クラスターの場合、クラスターに接続する手順は次のように簡略化されます。
+
+1.  データベース ユーザーとログイン資格情報を設定します。
+2.  SQL クライアントを選択し、 TiDB CloudUI に表示される自動生成された接続文字列を取得し、その文字列を使用して SQL クライアント経由でクラスターに接続します。
+
+詳細については、 [TiDB サーバーレスクラスタに接続する](/tidb-cloud/connect-to-tidb-cluster-serverless.md)を参照してください。
+
+</div>
 </SimpleTab>
 
 ## サポートに関するFAQ {#support-faq}

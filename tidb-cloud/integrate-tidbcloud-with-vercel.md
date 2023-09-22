@@ -3,6 +3,8 @@ title: Integrate TiDB Cloud with Vercel
 summary: Learn how to connect your TiDB Cloud clusters to Vercel projects.
 ---
 
+<!-- markdownlint-disable MD029 -->
+
 # TiDB Cloudと Vercel を統合する {#integrate-tidb-cloud-with-vercel}
 
 [ヴェルセル](https://vercel.com/)はフロントエンド開発者向けのプラットフォームで、イノベーターがインスピレーションの瞬間に作成するために必要なスピードと信頼性を提供します。
@@ -70,126 +72,127 @@ TiDB Cloud Vercel 統合経由で接続するには、 [Vercel の統合マー�
 詳細な手順は次のとおりです。
 
 <SimpleTab>
-  <div label="Direct connection">
-    1.  [TiDB Cloud Vercel の統合](https://vercel.com/integrations/tidb-cloud)ページの右上領域にある**「統合の追加」**をクリックします。 **[TiDB Cloudの追加]**ダイアログが表示されます。
-    2.  ドロップダウン リストで統合の範囲を選択し、 **[続行]**をクリックします。
-    3.  統合を追加する Vercel プロジェクトを選択し、 **[続行]**をクリックします。
-    4.  統合に必要な権限を確認し、 **[統合の追加]**をクリックします。次に、 TiDB Cloudコンソールの統合ページに移動します。
-    5.  統合ページで次の操作を行います。
+<div label="Direct connection">
 
-        1.  ターゲットの Vercel プロジェクトを選択し、 **[次へ]**をクリックします。
-        2.  ターゲットのTiDB Cloud組織とプロジェクトを選択します。
-        3.  接続タイプとして**クラスタを**選択します。
-        4.  ターゲットのTiDB Cloudクラスターを選択します。 **[クラスタ]**ドロップダウン リストが空である場合、または新しい TiDB サーバーレス クラスターを選択する場合は、リスト内の**[+クラスタ**を作成します。
-        5.  Vercel プロジェクトが使用しているフレームワークを選択します。ターゲット フレームワークがリストにない場合は、 **[一般]**を選択します。フレームワークが異なれば、決定される環境変数も異なります。
-        6.  **[統合を追加して Vercel に戻る]**をクリックします。
+1.  [TiDB Cloud Vercel の統合](https://vercel.com/integrations/tidb-cloud)ページの右上領域にある**「統合の追加」**をクリックします。 **[TiDB Cloudの追加]**ダイアログが表示されます。
+2.  ドロップダウン リストで統合の範囲を選択し、 **[続行]**をクリックします。
+3.  統合を追加する Vercel プロジェクトを選択し、 **[続行]**をクリックします。
+4.  統合に必要な権限を確認し、 **[統合の追加]**をクリックします。次に、 TiDB Cloudコンソールの統合ページに移動します。
+5.  統合ページで次の操作を行います。
 
-    ![Vercel Integration Page](/media/tidb-cloud/vercel/integration-link-cluster-page.png)
+    1.  ターゲットの Vercel プロジェクトを選択し、 **[次へ]**をクリックします。
+    2.  ターゲットのTiDB Cloud組織とプロジェクトを選択します。
+    3.  接続タイプとして**クラスタを**選択します。
+    4.  ターゲットのTiDB Cloudクラスターを選択します。 **[クラスタ]**ドロップダウン リストが空である場合、または新しい TiDB サーバーレス クラスターを選択する場合は、リスト内の**[+クラスタ**を作成します。
+    5.  Vercel プロジェクトが使用しているフレームワークを選択します。ターゲット フレームワークがリストにない場合は、 **[一般]**を選択します。フレームワークが異なれば、決定される環境変数も異なります。
+    6.  **[統合を追加して Vercel に戻る]**をクリックします。
 
-    6.  Vercel ダッシュボードに戻り、Vercel プロジェクトに移動し、 **[設定]** &gt; **[環境変数]**をクリックして、ターゲット TiDB クラスターの環境変数が自動的に追加されているかどうかを確認します。
+![Vercel Integration Page](/media/tidb-cloud/vercel/integration-link-cluster-page.png)
 
-        以下の変数が追加されていれば統合は完了です。
+6.  Vercel ダッシュボードに戻り、Vercel プロジェクトに移動し、 **[設定]** &gt; **[環境変数]**をクリックして、ターゲット TiDB クラスターの環境変数が自動的に追加されているかどうかを確認します。
 
-        **一般的な**
+    以下の変数が追加されていれば統合は完了です。
 
-        ```shell
-        TIDB_HOST
-        TIDB_PORT
-        TIDB_USER
-        TIDB_PASSWORD
-        ```
+    **一般的な**
 
-        TiDB 専用クラスターの場合、ルート CA は次の変数に設定されます。
+    ```shell
+    TIDB_HOST
+    TIDB_PORT
+    TIDB_USER
+    TIDB_PASSWORD
+    ```
 
-        ```
+    TiDB 専用クラスターの場合、ルート CA は次の変数に設定されます。
+
         TIDB_SSL_CA
-        ```
 
-        **プリズマ**
+    **プリズマ**
 
-        ```
         DATABASE_URL
-        ```
-  </div>
 
-  <div label="Data App">
-    1.  [TiDB Cloud Vercel の統合](https://vercel.com/integrations/tidb-cloud)ページの右上領域にある**「統合の追加」**をクリックします。 **[TiDB Cloudの追加]**ダイアログが表示されます。
-    2.  ドロップダウン リストで統合の範囲を選択し、 **[続行]**をクリックします。
-    3.  統合を追加する Vercel プロジェクトを選択し、 **[続行]**をクリックします。
-    4.  統合に必要な権限を確認し、 **[統合の追加]**をクリックします。次に、 TiDB Cloudコンソールの統合ページに移動します。
-    5.  統合ページで次の操作を行います。
+</div>
 
-        1.  ターゲットの Vercel プロジェクトを選択し、 **[次へ]**をクリックします。
-        2.  ターゲットのTiDB Cloud組織とプロジェクトを選択します。
-        3.  接続タイプとして**データ アプリ**を選択します。
-        4.  ターゲットの TiDB データ アプリを選択します。
-        5.  **[統合を追加して Vercel に戻る]**をクリックします。
+<div label="Data App">
 
-    ![Vercel Integration Page](/media/tidb-cloud/vercel/integration-link-data-app-page.png)
+1.  [TiDB Cloud Vercel の統合](https://vercel.com/integrations/tidb-cloud)ページの右上領域にある**「統合の追加」**をクリックします。 **[TiDB Cloudの追加]**ダイアログが表示されます。
+2.  ドロップダウン リストで統合の範囲を選択し、 **[続行]**をクリックします。
+3.  統合を追加する Vercel プロジェクトを選択し、 **[続行]**をクリックします。
+4.  統合に必要な権限を確認し、 **[統合の追加]**をクリックします。次に、 TiDB Cloudコンソールの統合ページに移動します。
+5.  統合ページで次の操作を行います。
 
-    6.  Vercel ダッシュボードに戻り、Vercel プロジェクトに移動し、 **[設定]** &gt; **[環境変数]**をクリックして、ターゲット データ アプリの環境変数が自動的に追加されているかどうかを確認します。
+    1.  ターゲットの Vercel プロジェクトを選択し、 **[次へ]**をクリックします。
+    2.  ターゲットのTiDB Cloud組織とプロジェクトを選択します。
+    3.  接続タイプとして**データ アプリ**を選択します。
+    4.  ターゲットの TiDB データ アプリを選択します。
+    5.  **[統合を追加して Vercel に戻る]**をクリックします。
 
-        以下の変数が追加されていれば統合は完了です。
+![Vercel Integration Page](/media/tidb-cloud/vercel/integration-link-data-app-page.png)
 
-        ```shell
-        DATA_APP_BASE_URL
-        DATA_APP_PUBLIC_KEY
-        DATA_APP_PRIVATE_KEY
-        ```
-  </div>
+6.  Vercel ダッシュボードに戻り、Vercel プロジェクトに移動し、 **[設定]** &gt; **[環境変数]**をクリックして、ターゲット データ アプリの環境変数が自動的に追加されているかどうかを確認します。
+
+    以下の変数が追加されていれば統合は完了です。
+
+    ```shell
+    DATA_APP_BASE_URL
+    DATA_APP_PUBLIC_KEY
+    DATA_APP_PRIVATE_KEY
+    ```
+
+</div>
 </SimpleTab>
 
 ## 環境変数を手動で設定して接続する {#connect-via-manually-setting-environment-variables}
 
 <SimpleTab>
-  <div label="Direct connection">
-    1.  TiDB クラスターの接続情報を取得します。
+<div label="Direct connection">
 
-        クラスターの接続ダイアログから接続情報を取得できます。ダイアログを開くには、プロジェクトの[**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動し、右上隅の**[接続]**をクリックします。
+1.  TiDB クラスターの接続情報を取得します。
 
-        > **注記：**
-        >
-        > TiDB 専用クラスターの場合は、このステップで**「どこからでもアクセスを許可」**トラフィック フィルターを設定していることを確認してください。
+    クラスターの接続ダイアログから接続情報を取得できます。ダイアログを開くには、プロジェクトの[**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット クラスターの名前をクリックして概要ページに移動し、右上隅の**[接続]**をクリックします。
 
-    2.  Vercel ダッシュボード &gt; Vercel プロジェクト &gt;**設定**&gt;**環境変数**に移動し、TiDB クラスターの接続情報に従って[各環境変数の値を宣言する](https://vercel.com/docs/concepts/projects/environment-variables#declare-an-environment-variable)に移動します。
+    > **注記：**
+    >
+    > TiDB 専用クラスターの場合は、このステップで**「どこからでもアクセスを許可」**トラフィック フィルターを設定していることを確認してください。
 
-        ![Vercel Environment Variables](/media/tidb-cloud/vercel/integration-vercel-environment-variables.png)
+2.  Vercel ダッシュボード &gt; Vercel プロジェクト &gt;**設定**&gt;**環境変数**に移動し、TiDB クラスターの接続情報に従って[各環境変数の値を宣言する](https://vercel.com/docs/concepts/projects/environment-variables#declare-an-environment-variable)に移動します。
 
-    ここでは例として Prisma アプリケーションを使用します。以下は、TiDB サーバーレス クラスターの Prisma スキーマ ファイル内のデータソース設定です。
+    ![Vercel Environment Variables](/media/tidb-cloud/vercel/integration-vercel-environment-variables.png)
 
-    ```
+ここでは例として Prisma アプリケーションを使用します。以下は、TiDB サーバーレス クラスターの Prisma スキーマ ファイル内のデータソース設定です。
+
     datasource db {
         provider = "mysql"
         url      = env("DATABASE_URL")
     }
-    ```
+
+Vercel では、次のように環境変数を宣言できます。
+
+-   **キー**= `DATABASE_URL`
+-   **値**= `mysql://<User>:<Password>@<Endpoint>:<Port>/<Database>?sslaccept=strict`
+
+TiDB Cloudコンソールで`<User>` 、 `<Password>` 、 `<Endpoint>` 、 `<Port>` 、および`<Database>`の情報を取得できます。
+
+</div>
+<div label="Data App">
+
+1.  データ アプリとそのエンドポイントを作成していない場合は、 [データAPPを管理する](/tidb-cloud/data-service-manage-data-app.md)と[エンドポイントの管理](/tidb-cloud/data-service-manage-endpoint.md)の手順に従ってください。
+
+2.  Vercel ダッシュボード &gt; Vercel プロジェクト &gt;**設定**&gt;**環境変数**に移動し、データ アプリの接続情報に従って[各環境変数の値を宣言する](https://vercel.com/docs/concepts/projects/environment-variables#declare-an-environment-variable)に移動します。
+
+    ![Vercel Environment Variables](/media/tidb-cloud/vercel/integration-vercel-environment-variables.png)
 
     Vercel では、次のように環境変数を宣言できます。
 
-    -   **キー**= `DATABASE_URL`
-    -   **値**= `mysql://<User>:<Password>@<Endpoint>:<Port>/<Database>?sslaccept=strict`
+    -   **キー**= `DATA_APP_BASE_URL`
+    -   **値**= `<DATA_APP_BASE_URL>`
+    -   **キー**= `DATA_APP_PUBLIC_KEY`
+    -   **値**= `<DATA_APP_PUBLIC_KEY>`
+    -   **キー**= `DATA_APP_PRIVATE_KEY`
+    -   **値**= `<DATA_APP_PRIVATE_KEY>`
 
-    TiDB Cloudコンソールで`<User>` 、 `<Password>` 、 `<Endpoint>` 、 `<Port>` 、および`<Database>`の情報を取得できます。
-  </div>
+    TiDB Cloudコンソールの[データサービス](https://tidbcloud.com/console/data-service)ページから`<DATA_APP_BASE_URL>` 、 `<DATA_APP_PUBLIC_KEY>` 、 `<DATA_APP_PRIVATE_KEY>`の情報を取得できます。
 
-  <div label="Data App">
-    1.  データ アプリとそのエンドポイントを作成していない場合は、 [データAPPを管理する](/tidb-cloud/data-service-manage-data-app.md)と[エンドポイントの管理](/tidb-cloud/data-service-manage-endpoint.md)の手順に従ってください。
-
-    2.  Vercel ダッシュボード &gt; Vercel プロジェクト &gt;**設定**&gt;**環境変数**に移動し、データ アプリの接続情報に従って[各環境変数の値を宣言する](https://vercel.com/docs/concepts/projects/environment-variables#declare-an-environment-variable)に移動します。
-
-        ![Vercel Environment Variables](/media/tidb-cloud/vercel/integration-vercel-environment-variables.png)
-
-        Vercel では、次のように環境変数を宣言できます。
-
-        -   **キー**= `DATA_APP_BASE_URL`
-        -   **値**= `<DATA_APP_BASE_URL>`
-        -   **キー**= `DATA_APP_PUBLIC_KEY`
-        -   **値**= `<DATA_APP_PUBLIC_KEY>`
-        -   **キー**= `DATA_APP_PRIVATE_KEY`
-        -   **値**= `<DATA_APP_PRIVATE_KEY>`
-
-        TiDB Cloudコンソールの[データサービス](https://tidbcloud.com/console/data-service)ページから`<DATA_APP_BASE_URL>` 、 `<DATA_APP_PUBLIC_KEY>` 、 `<DATA_APP_PRIVATE_KEY>`の情報を取得できます。
-  </div>
+</div>
 </SimpleTab>
 
 ## 接続を構成する {#configure-connections}

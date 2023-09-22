@@ -48,7 +48,7 @@ routes:
 
 ## パラメータの説明 {#parameter-descriptions}
 
--   DM は、 [テーブル セレクターによって提供される`schema-pattern` / `table-pattern`ルール](/dm/table-selector.md)に一致するアップストリーム`target-table` MySQL または MariaDB インスタンス テーブルをダウンストリーム`target-schema`に移行します。
+-   DM は、 [テーブル セレクターによって提供される`schema-pattern` / `table-pattern`ルール](/dm/table-selector.md)に一致するアップストリームの MySQL または MariaDB インスタンス テーブルをダウンストリーム`target-schema` `target-table`移行します。
 -   `schema-pattern` / `table-pattern`ルールに一致するシャードテーブルの場合、DM は`extract-table`を使用してテーブル名を抽出します。 `table-regexp`正規表現、 `extract-schema`を使用したスキーマ名。 `schema-regexp`正規表現、および`extract-source`を使用したソース情報。 `source-regexp`の正規表現。次に、DM は抽出した情報を下流のマージされたテーブルの対応する`target-column`に書き込みます。
 
 ## 使用例 {#usage-examples}
@@ -88,7 +88,7 @@ routes:
 
 アップストリーム インスタンスをダウンストリームに移行するには、 `test`に従います。 `t`前のセクション[シャードされたスキーマとテーブルをマージする](#merge-sharded-schemas-and-tables)と同様のルーティング ルールを作成する必要があります。さらに、 `extract-table` 、 `extract-schema` 、および`extract-source`構成を追加する必要があります。
 
--   `extract-table` : `schema-pattern`および`table-pattern`に一致するシャード表の場合、DM は`table-regexp`を使用してシャード表名を抽出し、 `t_`の部分を除いた名前サフィックスをマージされた表の`target-column` 、つまり`c_table`列に書き込みます。
+-   `extract-table` : `schema-pattern`と`table-pattern`に一致するシャードテーブルの場合、DM は`table-regexp`を使用してシャードテーブル名を抽出し、 `t_`の部分を除いた名前サフィックスをマージされたテーブルの`target-column` 、つまり`c_table`列に書き込みます。
 -   `extract-schema` : `schema-pattern`と`table-pattern`に一致するシャード スキーマの場合、DM は`schema-regexp`を使用してシャード スキーマ名を抽出し、 `test_`の部分を除いた名前サフィックスをマージされたテーブルの`target-column` 、つまり`c_schema`列に書き込みます。
 -   `extract-source` : `schema-pattern`と`table-pattern`に一致するシャード テーブルの場合、DM はソース インスタンス情報をマージされたテーブルの`target-column` 、つまり`c_source`列に書き込みます。
 

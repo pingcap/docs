@@ -9,28 +9,24 @@ summary: This document describes the configuration files of Data App in TiDB Clo
 
 [データ アプリを GitHub に接続しました](/tidb-cloud/data-service-manage-github-connection.md)がある場合は、次のように GitHub 上の指定したディレクトリでデータ アプリの構成ファイルを見つけることができます。
 
-```
-├── <Your Data App directory>
-│   ├── data_sources
-│   │   └── cluster.json
-│   ├── dataapp_config.json
-│   ├── http_endpoints
-│   │   ├── config.json
-│   │   └── sql
-│   │       ├── <method>-<endpoint-path1>.sql
-│   │       ├── <method>-<endpoint-path2>.sql
-│   │       └── <method>-<endpoint-path3>.sql
-```
+    ├── <Your Data App directory>
+    │   ├── data_sources
+    │   │   └── cluster.json
+    │   ├── dataapp_config.json
+    │   ├── http_endpoints
+    │   │   ├── config.json
+    │   │   └── sql
+    │   │       ├── <method>-<endpoint-path1>.sql
+    │   │       ├── <method>-<endpoint-path2>.sql
+    │   │       └── <method>-<endpoint-path3>.sql
 
 ## データソース構成 {#data-source-configuration}
 
 データ アプリのデータ ソースは、リンクされた TiDB クラスターから取得されます。データ ソース構成は`data_sources/cluster.json`にあります。
 
-```
-├── <Your Data App directory>
-│   ├── data_sources
-│   │   └── cluster.json
-```
+    ├── <Your Data App directory>
+    │   ├── data_sources
+    │   │   └── cluster.json
 
 データ アプリごとに、1 つまたは複数の TiDB クラスターにリンクできます。
 
@@ -57,10 +53,8 @@ summary: This document describes the configuration files of Data App in TiDB Clo
 
 データ アプリのプロパティには、アプリ ID、名前、タイプが含まれます。プロパティは`dataapp_config.json`ファイルにあります。
 
-```
-├── <Your Data App directory>
-│   ├── dataapp_config.json
-```
+    ├── <Your Data App directory>
+    │   ├── dataapp_config.json
 
 以下は`dataapp_config.json`の構成例です。
 
@@ -88,15 +82,13 @@ summary: This document describes the configuration files of Data App in TiDB Clo
 
 Data App ディレクトリでは、エンドポイント構成が`http_endpoints/config.json`に、SQL ファイルが`http_endpoints/sql/<method>-<endpoint-name>.sql`にあります。
 
-```
-├── <Your Data App directory>
-│   ├── http_endpoints
-│   │   ├── config.json
-│   │   └── sql
-│   │       ├── <method>-<endpoint-path1>.sql
-│   │       ├── <method>-<endpoint-path2>.sql
-│   │       └── <method>-<endpoint-path3>.sql
-```
+    ├── <Your Data App directory>
+    │   ├── http_endpoints
+    │   │   ├── config.json
+    │   │   └── sql
+    │   │       ├── <method>-<endpoint-path1>.sql
+    │   │       ├── <method>-<endpoint-path2>.sql
+    │   │       └── <method>-<endpoint-path3>.sql
 
 ### エンドポイント構成 {#endpoint-configuration}
 

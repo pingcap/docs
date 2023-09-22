@@ -32,7 +32,7 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 -   [データサービス（ベータ版）](https://tidbcloud.com/console/data-service) 、さまざまな状況での特定のレート制限要件を満たすために、各 API キーのレート制限をカスタマイズすることをサポートします。
 
-    API キーを[作成する](/tidb-cloud/data-service-api-key.md#create-an-api-key)または[編集](/tidb-cloud/data-service-api-key.md#edit-an-api-key)にするときに、そのキーのレート制限を調整できます。
+    API キーを[作成する](/tidb-cloud/data-service-api-key.md#create-an-api-key)または[編集](/tidb-cloud/data-service-api-key.md#edit-an-api-key)にすると、そのレート制限を調整できます。
 
     詳細については、 [レート制限](/tidb-cloud/data-service-api-key.md#rate-limiting)を参照してください。
 
@@ -98,7 +98,7 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
       --request GET 'https://<region>.data.tidbcloud.com/api/v1beta/app/<App ID>/endpoint/<Endpoint Path>?page=2&page_size=10'
     ```
 
-    この機能は、最後のクエリが`SELECT`ステートメントである`GET`リクエストに対してのみ使用できることに注意してください。
+    この機能は、最後のクエリが`SELECT`ステートメントである`GET`リクエストでのみ使用できることに注意してください。
 
     詳細については、 [エンドポイントを呼び出す](/tidb-cloud/data-service-manage-endpoint.md#call-an-endpoint)を参照してください。
 
@@ -224,7 +224,7 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 -   [TiDB サーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-serverless)が一般提供になりました。
 
--   TiDB Bot (ベータ版) は、多言語サポート、年中無休のリアルタイム応答、統合されたドキュメント アクセスを提供する OpenAI 搭載チャットボットです。
+-   TiDB Bot (ベータ) は、多言語サポート、24 時間年中無休のリアルタイム応答、統合されたドキュメント アクセスを提供する OpenAI 搭載チャットボットです。
 
     TiDB ボットには次の利点があります。
 
@@ -240,7 +240,7 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
     [TiDB Cloudコンソール](/tidb-cloud/branch-manage.md)または[TiDB CloudCLI](/tidb-cloud/ticloud-branch-create.md)のいずれかを使用して、2023 年 7 月 5 日以降に作成された TiDB サーバーレス クラスターのブランチを作成できます。
 
-    アプリケーション開発に GitHub を使用する場合は、TiDB サーバーレス ブランチを GitHub CI/CD パイプラインに統合できます。これにより、本番データベースに影響を与えることなく、ブランチを使用してプル リクエストを自動的にテストできます。詳細については、 [TiDB サーバーレス ブランチング (ベータ版) を GitHub と統合する](/tidb-cloud/branch-github-integration.md)を参照してください。
+    アプリケーション開発に GitHub を使用する場合、TiDB サーバーレス ブランチを GitHub CI/CD パイプラインに統合できます。これにより、本番データベースに影響を与えることなく、ブランチを使用してプル リクエストを自動的にテストできます。詳細については、 [TiDB サーバーレス ブランチング (ベータ版) を GitHub と統合する](/tidb-cloud/branch-github-integration.md)を参照してください。
 
 -   [TiDB専用](/tidb-cloud/select-cluster-tier.md#tidb-dedicated)クラスターの毎週のバックアップをサポートします。詳細については、 [TiDB 専用データのバックアップと復元](/tidb-cloud/backup-and-restore.md#automatic-backup)を参照してください。
 

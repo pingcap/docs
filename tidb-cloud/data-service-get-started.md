@@ -167,27 +167,31 @@ TiDB Cloudは、エンドポイントの呼び出しに役立つコード サン
     Curl コード例の例は次のとおりです。
 
     <SimpleTab>
-      <div label="Test Environment">
-        エンドポイントのドラフト バージョンを呼び出すには、 `endpoint-type: draft`ヘッダーを追加する必要があります。
+     <div label="Test Environment">
 
-        ```bash
-        curl --digest --user '<Public Key>:<Private Key>' \
-          --request GET 'https://<region>.data.tidbcloud.com/api/v1beta/app/<App ID>/endpoint/<Endpoint Path>' \
-          --header 'endpoint-type: draft'
-        ```
-      </div>
+    エンドポイントのドラフト バージョンを呼び出すには、 `endpoint-type: draft`ヘッダーを追加する必要があります。
 
-      <div label="Online Environment">
-        オンライン環境でコード例を確認する前に、まずエンドポイントをデプロイする必要があります。
+    ```bash
+    curl --digest --user '<Public Key>:<Private Key>' \
+      --request GET 'https://<region>.data.tidbcloud.com/api/v1beta/app/<App ID>/endpoint/<Endpoint Path>' \
+      --header 'endpoint-type: draft'
+    ```
 
-        現在のオンライン バージョンのエンドポイントを呼び出すには、次のコマンドを使用します。
+    </div>
 
-        ```bash
-        curl --digest --user '<Public Key>:<Private Key>' \
-          --request GET 'https://<region>.data.tidbcloud.com/api/v1beta/app/<App ID>/endpoint/<Endpoint Path>'
-        ```
-      </div>
-    </SimpleTab>
+    <div label="Online Environment">
+
+    オンライン環境でコード例を確認する前に、まずエンドポイントをデプロイする必要があります。
+
+    現在のオンライン バージョンのエンドポイントを呼び出すには、次のコマンドを使用します。
+
+    ```bash
+    curl --digest --user '<Public Key>:<Private Key>' \
+      --request GET 'https://<region>.data.tidbcloud.com/api/v1beta/app/<App ID>/endpoint/<Endpoint Path>'
+    ```
+
+    </div>
+     </SimpleTab>
 
     > **注記：**
     >

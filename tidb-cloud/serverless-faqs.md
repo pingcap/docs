@@ -6,6 +6,8 @@ aliases: ['/tidbcloud/serverless-tier-faqs']
 
 # TiDB サーバーレスに関するよくある質問 {#tidb-serverless-faqs}
 
+<!-- markdownlint-disable MD026 -->
+
 このドキュメントには、TiDB サーバーレスに関して最もよくある質問がリストされています。
 
 ## 一般的な FAQ {#general-faqs}

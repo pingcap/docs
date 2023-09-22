@@ -300,9 +300,9 @@ CA 証明書のパスを手動で指定することは可能ですが、マシ�
 
 ## 次のステップ {#next-steps}
 
--   mysql2 ドライバーの使用法については[mysql2のドキュメント](https://github.com/brianmario/mysql2#readme)からご覧ください。
+-   mysql2 ドライバーの使用法については[mysql2のドキュメント](https://github.com/brianmario/mysql2#readme)から学びましょう。
 -   TiDB アプリケーション開発のベスト プラクティスについては、 [開発者ガイド](/develop/dev-guide-overview.md)の章 ( [データの挿入](/develop/dev-guide-insert-data.md) 、 [データを更新する](/develop/dev-guide-update-data.md) 、 [データの削除](/develop/dev-guide-delete-data.md) 、 [クエリデータ](/develop/dev-guide-get-data-from-single-table.md) 、 [トランザクション](/develop/dev-guide-transaction-overview.md) 、 [SQLパフォーマンスの最適化](/develop/dev-guide-optimize-sql-overview.md)など) で学習してください。
--   プロフェッショナルとして[TiDB 開発者コース](https://www.pingcap.com/education/)を学び、試験合格後に[TiDB 認定](https://www.pingcap.com/education/certification/)獲得します。
+-   プロフェッショナルを通じて[TiDB 開発者コース](https://www.pingcap.com/education/)を学び、試験合格後に[TiDB 認定](https://www.pingcap.com/education/certification/)獲得します。
 
 ## 助けが必要？ {#need-help}
 

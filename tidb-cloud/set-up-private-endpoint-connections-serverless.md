@@ -51,50 +51,53 @@ AWS PrivateLink を利用したエンドポイント接続は安全かつプラ�
 ### ステップ 2. AWS インターフェースエンドポイントを作成する {#step-2-create-an-aws-interface-endpoint}
 
 <SimpleTab>
-  <div label="Use AWS Console">
-    AWS マネジメントコンソールを使用して VPC インターフェイスエンドポイントを作成するには、次の手順を実行します。
+<div label="Use AWS Console">
 
-    1.  [AWS マネジメントコンソール](https://aws.amazon.com/console/)にサインインし、 [https://console.aws.amazon.com/vpc/](https://console.aws.amazon.com/vpc/)で Amazon VPC コンソールを開きます。
+AWS マネジメントコンソールを使用して VPC インターフェイスエンドポイントを作成するには、次の手順を実行します。
 
-    2.  ナビゲーション ペインで**[エンドポイント]**をクリックし、右上隅の**[エンドポイントの作成]**をクリックします。
+1.  [AWS マネジメントコンソール](https://aws.amazon.com/console/)にサインインし、 [https://console.aws.amazon.com/vpc/](https://console.aws.amazon.com/vpc/)で Amazon VPC コンソールを開きます。
 
-        **[エンドポイントの作成]**ページが表示されます。
+2.  ナビゲーション ペインで**[エンドポイント]**をクリックし、右上隅の**[エンドポイントの作成]**をクリックします。
 
-        ![Verify endpoint service](/media/tidb-cloud/private-endpoint/create-endpoint-2.png)
+    **[エンドポイントの作成]**ページが表示されます。
 
-    3.  **[その他のエンドポイント サービス]**を選択します。
+    ![Verify endpoint service](/media/tidb-cloud/private-endpoint/create-endpoint-2.png)
 
-    4.  [ステップ1](#step-1-choose-a-tidb-cluster)で見つけたサービス名を入力します。
+3.  **[その他のエンドポイント サービス]**を選択します。
 
-    5.  **[サービスの確認]**をクリックします。
+4.  [ステップ1](#step-1-choose-a-tidb-cluster)で見つけたサービス名を入力します。
 
-    6.  ドロップダウン リストから VPC を選択します。 **[追加設定]**を展開し、 **[DNS 名を有効にする]**チェックボックスを選択します。
+5.  **[サービスの確認]**をクリックします。
 
-    7.  **[サブネット]**領域で、TiDB クラスターが配置されているアベイラビリティ ゾーンを選択し、サブネット ID を選択します。
+6.  ドロップダウン リストから VPC を選択します。 **[追加設定]**を展開し、 **[DNS 名を有効にする**] チェックボックスを選択します。
 
-    8.  **[Securityグループ]**領域でセキュリティ グループを適切に選択します。
+7.  **[サブネット]**領域で、TiDB クラスターが配置されているアベイラビリティ ゾーンを選択し、サブネット ID を選択します。
 
-        > **注記：**
-        >
-        > 選択したセキュリティ グループがポート 4000 での EC2 インスタンスからの受信アクセスを許可していることを確認してください。
+8.  **[Securityグループ]**領域でセキュリティ グループを適切に選択します。
 
-    9.  **「エンドポイントの作成」**をクリックします。
-  </div>
-
-  <div label="Use AWS CLI">
-    AWS CLI を使用して VPC インターフェイスエンドポイントを作成するには、次の手順を実行します。
-
-    1.  **VPC ID**と**サブネット ID**を取得するには、AWS マネジメントコンソールに移動し、関連するセクションでそれらを見つけます。 [ステップ1](#step-1-choose-a-tidb-cluster)で見つけた**アベイラビリティーゾーン ID を**必ず入力してください。
-    2.  以下に提供されているコマンドをコピーし、関連する引数を取得した情報に置き換えて、ターミナルで実行します。
-
-    ```bash
-    aws ec2 create-vpc-endpoint --vpc-id ${your_vpc_id} --region ${region_id} --service-name ${service_name} --vpc-endpoint-type Interface --subnet-ids ${your_subnet_id}
-    ```
-
-    > **ヒント：**
+    > **注記：**
     >
-    > コマンドを実行する前に、AWS CLI をインストールして設定する必要があります。詳細については[AWS CLI 設定の基本](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html)を参照してください。
-  </div>
+    > 選択したセキュリティ グループがポート 4000 での EC2 インスタンスからの受信アクセスを許可していることを確認してください。
+
+9.  **「エンドポイントの作成」**をクリックします。
+
+</div>
+<div label="Use AWS CLI">
+
+AWS CLI を使用して VPC インターフェイスエンドポイントを作成するには、次の手順を実行します。
+
+1.  **VPC ID**と**サブネット ID**を取得するには、AWS マネジメントコンソールに移動し、関連するセクションでそれらを見つけます。 [ステップ1](#step-1-choose-a-tidb-cluster)で見つけた**アベイラビリティーゾーン ID を**必ず入力してください。
+2.  以下に提供されているコマンドをコピーし、関連する引数を取得した情報に置き換えて、ターミナルで実行します。
+
+```bash
+aws ec2 create-vpc-endpoint --vpc-id ${your_vpc_id} --region ${region_id} --service-name ${service_name} --vpc-endpoint-type Interface --subnet-ids ${your_subnet_id}
+```
+
+> **ヒント：**
+>
+> コマンドを実行する前に、AWS CLI をインストールして設定する必要があります。詳細については[AWS CLI 設定の基本](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html)を参照してください。
+
+</div>
 </SimpleTab>
 
 その後、プライベート DNS 名を使用してエンドポイント サービスに接続できます。

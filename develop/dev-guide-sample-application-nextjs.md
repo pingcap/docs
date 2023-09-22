@@ -26,17 +26,20 @@ TiDB は MySQL 互換データベースであり、 [mysql2](https://github.com/
 -   TiDB クラスター。
 
 <CustomContent platform="tidb">
-  **TiDB クラスターがない場合は、次のように作成できます。**
 
-  -   (推奨) [TiDB サーバーレスクラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って、独自のTiDB Cloudクラスターを作成します。
-  -   [ローカル テスト TiDB クラスターをデプロイ](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番TiDB クラスターをデプロイ](/production-deployment-using-tiup.md)に従ってローカル クラスターを作成します。
+**TiDB クラスターがない場合は、次のように作成できます。**
+
+-   (推奨) [TiDB サーバーレスクラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って、独自のTiDB Cloudクラスターを作成します。
+-   [ローカル テスト TiDB クラスターをデプロイ](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番TiDB クラスターをデプロイ](/production-deployment-using-tiup.md)に従ってローカル クラスターを作成します。
+
 </CustomContent>
-
 <CustomContent platform="tidb-cloud">
-  **TiDB クラスターがない場合は、次のように作成できます。**
 
-  -   (推奨) [TiDB サーバーレスクラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って、独自のTiDB Cloudクラスターを作成します。
-  -   [ローカル テスト TiDB クラスターをデプロイ](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb#deploy-a-local-test-cluster)または[本番TiDB クラスターをデプロイ](https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup)に従ってローカル クラスターを作成します。
+**TiDB クラスターがない場合は、次のように作成できます。**
+
+-   (推奨) [TiDB サーバーレスクラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って、独自のTiDB Cloudクラスターを作成します。
+-   [ローカル テスト TiDB クラスターをデプロイ](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb#deploy-a-local-test-cluster)または[本番TiDB クラスターをデプロイ](https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup)に従ってローカル クラスターを作成します。
+
 </CustomContent>
 
 ## サンプル アプリを実行して TiDB に接続する {#run-the-sample-app-to-connect-to-tidb}
@@ -69,83 +72,89 @@ npm install
 選択した TiDB デプロイメント オプションに応じて、TiDB クラスターに接続します。
 
 <SimpleTab>
-  <div label="TiDB Serverless">
-    1.  [**クラスター**ページ](https://tidbcloud.com/console/clusters)に移動し、ターゲット クラスターの名前をクリックして、その概要ページに移動します。
 
-    2.  右上隅にある**「接続」**をクリックします。接続ダイアログが表示されます。
+<div label="TiDB Serverless">
 
-    3.  接続ダイアログの設定が動作環境と一致していることを確認してください。
+1.  [**クラスター**ページ](https://tidbcloud.com/console/clusters)に移動し、ターゲット クラスターの名前をクリックして、その概要ページに移動します。
 
-        -   **エンドポイント タイプは**`Public`に設定されます
+2.  右上隅にある**「接続」**をクリックします。接続ダイアログが表示されます。
 
-        -   **[接続先] は**`General`に設定されています
+3.  接続ダイアログの設定が動作環境と一致していることを確認してください。
 
-        -   **オペレーティング システムが**環境に一致します。
+    -   **エンドポイント タイプは**`Public`に設定されます
 
-        > **注記**
-        >
-        > Node.js アプリケーションでは、TLS (SSL) 接続を確立するときにデフォルトで組み込みの[Mozilla CA 証明書](https://wiki.mozilla.org/CA/Included_Certificates)を使用するため、SSL CA 証明書を提供する必要はありません。
+    -   **[接続先] は**`General`に設定されています
 
-    4.  **「パスワードの作成」**をクリックしてランダムなパスワードを作成します。
+    -   **オペレーティング システムが**環境に一致します。
 
-        > **ヒント**
-        >
-        > 以前にパスワードを作成したことがある場合は、元のパスワードを使用するか、 **「パスワードのリセット」**をクリックして新しいパスワードを生成できます。
+    > **注記**
+    >
+    > Node.js アプリケーションでは、TLS (SSL) 接続を確立するときにデフォルトで組み込みの[Mozilla CA 証明書](https://wiki.mozilla.org/CA/Included_Certificates)を使用するため、SSL CA 証明書を提供する必要はありません。
 
-    5.  次のコマンドを実行して`.env.example`をコピーし、名前を`.env`に変更します。
+4.  **「パスワードの作成」**をクリックしてランダムなパスワードを作成します。
 
-        ```bash
-        # Linux
-        cp .env.example .env
-        ```
+    > **ヒント**
+    >
+    > 以前にパスワードを作成したことがある場合は、元のパスワードを使用するか、 **「パスワードのリセット」**をクリックして新しいパスワードを生成できます。
 
-        ```powershell
-        # Windows
-        Copy-Item ".env.example" -Destination ".env"
-        ```
+5.  次のコマンドを実行して`.env.example`をコピーし、名前を`.env`に変更します。
 
-    6.  対応する接続​​文字列をコピーして`.env`ファイルに貼り付けます。結果の例は次のとおりです。
+    ```bash
+    # Linux
+    cp .env.example .env
+    ```
 
-        ```bash
-        TIDB_HOST='{gateway-region}.aws.tidbcloud.com'
-        TIDB_PORT='4000'
-        TIDB_USER='{prefix}.root'
-        TIDB_PASSWORD='{password}'
-        TIDB_DB_NAME='test'
-        ```
+    ```powershell
+    # Windows
+    Copy-Item ".env.example" -Destination ".env"
+    ```
 
-        `{}`のプレースホルダーを、接続ダイアログで取得した値に置き換えます。
+6.  対応する接続​​文字列をコピーして`.env`ファイルに貼り付けます。結果の例は次のとおりです。
 
-    7.  `.env`ファイルを保存します。
-  </div>
+    ```bash
+    TIDB_HOST='{gateway-region}.aws.tidbcloud.com'
+    TIDB_PORT='4000'
+    TIDB_USER='{prefix}.root'
+    TIDB_PASSWORD='{password}'
+    TIDB_DB_NAME='test'
+    ```
 
-  <div label="TiDB Self-Hosted">
-    1.  次のコマンドを実行して`.env.example`をコピーし、名前を`.env`に変更します。
+    `{}`のプレースホルダーを、接続ダイアログで取得した値に置き換えます。
 
-        ```bash
-        # Linux
-        cp .env.example .env
-        ```
+7.  `.env`ファイルを保存します。
 
-        ```powershell
-        # Windows
-        Copy-Item ".env.example" -Destination ".env"
-        ```
+</div>
 
-    2.  対応する接続​​文字列をコピーして`.env`ファイルに貼り付けます。結果の例は次のとおりです。
+<div label="TiDB Self-Hosted">
 
-        ```bash
-        TIDB_HOST='{tidb_server_host}'
-        TIDB_PORT='4000'
-        TIDB_USER='root'
-        TIDB_PASSWORD='{password}'
-        TIDB_DB_NAME='test'
-        ```
+1.  次のコマンドを実行して`.env.example`をコピーし、名前を`.env`に変更します。
 
-        `{}`のプレースホルダーを、 **「接続」**ウィンドウで取得した値に置き換えます。 TiDB をローカルで実行している場合、デフォルトのホスト アドレスは`127.0.0.1`で、パスワードは空です。
+    ```bash
+    # Linux
+    cp .env.example .env
+    ```
 
-    3.  `.env`ファイルを保存します。
-  </div>
+    ```powershell
+    # Windows
+    Copy-Item ".env.example" -Destination ".env"
+    ```
+
+2.  対応する接続​​文字列をコピーして`.env`ファイルに貼り付けます。結果の例は次のとおりです。
+
+    ```bash
+    TIDB_HOST='{tidb_server_host}'
+    TIDB_PORT='4000'
+    TIDB_USER='root'
+    TIDB_PASSWORD='{password}'
+    TIDB_DB_NAME='test'
+    ```
+
+    `{}`のプレースホルダーを、 **「接続」**ウィンドウで取得した値に置き換えます。 TiDB をローカルで実行している場合、デフォルトのホスト アドレスは`127.0.0.1`で、パスワードは空です。
+
+3.  `.env`ファイルを保存します。
+
+</div>
+
 </SimpleTab>
 
 ### ステップ 4: コードを実行して結果を確認する {#step-4-run-the-code-and-check-the-result}

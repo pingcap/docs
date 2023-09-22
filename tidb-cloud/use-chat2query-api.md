@@ -45,7 +45,7 @@ Chat2Query API を有効にするには、次の手順を実行します。
 
 エンドポイントを呼び出す前に、API キーを作成する必要があります。 Chat2Query データ アプリの API キーを作成するには、次の手順を実行します。
 
-1.  [**データサービス**](https://tidbcloud.com/console/data-service)の左側のペインで、 **Chat2Query System**の名前をクリックして詳細を表示します。
+1.  [**データサービス**](https://tidbcloud.com/console/data-service)の左側のペインで、 **Chat2Query システム**の名前をクリックして詳細を表示します。
 
 2.  **「認証」**領域で、 **「API キーの作成」を**クリックします。
 

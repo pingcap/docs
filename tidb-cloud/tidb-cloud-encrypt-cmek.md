@@ -29,22 +29,25 @@ summary: Learn about how to use Customer-Managed Encryption Key (CMEK) in TiDB C
 組織の`Organization Owner`ロールに属している場合は、 TiDB Cloudコンソールまたは API を使用して CMEK 対応プロジェクトを作成できます。
 
 <SimpleTab groupId="method">
-  <div label="Use Console" value="console">
-    CMEK 対応プロジェクトを作成するには、次の手順を実行します。
+<div label="Use Console" value="console">
 
-    1.  クリック<mdsvgicon name="icon-top-organization">TiDB Cloudコンソールの左下隅にあります。</mdsvgicon>
-    2.  **[組織の設定]**をクリックします。
-    3.  **[組織の設定]**ページで、 **[新しいプロジェクトの作成]**をクリックしてプロジェクト作成ダイアログを開きます。
-    4.  プロジェクト名を入力します。
-    5.  プロジェクトの CMEK 機能を有効にすることを選択します。
-    6.  **「確認」**をクリックしてプロジェクトの作成を完了します。
-  </div>
+CMEK 対応プロジェクトを作成するには、次の手順を実行します。
 
-  <div label="Use API" value="api">
-    このステップは、 TiDB Cloud API を使用して[CMEK 対応プロジェクトを作成する](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Project/operation/CreateProject)エンドポイントを介して完了できます。 `aws_cmek_enabled`フィールドが`true`に設定されていることを確認してください。
+1.  クリック<mdsvgicon name="icon-top-organization">TiDB Cloudコンソールの左下隅にあります。</mdsvgicon>
+2.  **[組織の設定]**をクリックします。
+3.  **[組織の設定]**ページで、 **[新しいプロジェクトの作成]**をクリックしてプロジェクト作成ダイアログを開きます。
+4.  プロジェクト名を入力します。
+5.  プロジェクトの CMEK 機能を有効にすることを選択します。
+6.  **「確認」**をクリックしてプロジェクトの作成を完了します。
 
-    現在、 TiDB Cloud API はまだベータ版です。詳細については、 [TiDB CloudAPI ドキュメント](https://docs.pingcap.com/tidbcloud/api/v1beta)を参照してください。
-  </div>
+</div>
+<div label="Use API" value="api">
+
+このステップは、 TiDB Cloud API を使用して[CMEK 対応プロジェクトを作成する](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Project/operation/CreateProject)エンドポイントを介して完了できます。 `aws_cmek_enabled`フィールドが`true`に設定されていることを確認してください。
+
+現在、 TiDB Cloud API はまだベータ版です。詳細については、 [TiDB CloudAPI ドキュメント](https://docs.pingcap.com/tidbcloud/api/v1beta)を参照してください。
+
+</div>
 </SimpleTab>
 
 ### ステップ 2. プロジェクトの CMEK 構成を完了する {#step-2-complete-the-cmek-configuration-of-the-project}
@@ -56,77 +59,80 @@ TiDB Cloudコンソールまたは API を使用して、プロジェクトの C
 > キーのポリシーが要件を満たしていること、および不十分な権限やアカウントの問題などのエラーがないことを確認してください。これらのエラーにより、このキーを使用してクラスターが誤って作成される可能性があります。
 
 <SimpleTab groupId="method">
-  <div label="Use Console" value="console">
-    プロジェクトの CMEK 構成を完了するには、次の手順を実行します。
+<div label="Use Console" value="console">
 
-    1.  クリック<mdsvgicon name="icon-left-projects">複数のプロジェクトがある場合は、左下隅でターゲット プロジェクトに切り替え、 **[プロジェクト設定]**をクリックします。</mdsvgicon>
-    2.  **「暗号化アクセス」**をクリックして、プロジェクトの暗号化管理ページに入ります。
-    3.  **「暗号化キーの作成」**をクリックして、キー作成ページに入ります。
-    4.  キープロバイダーは AWS KMS のみをサポートします。暗号化キーを使用できる地域を選択できます。
-    5.  JSON ファイルをコピーして`ROLE-TRUST-POLICY.JSON`として保存します。このファイルには信頼関係が記述されています。
-    6.  この信頼関係を AWS KMS のキーポリシーに追加します。詳細については、 [AWS KMS の主要なポリシー](https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html)を参照してください。
-    7.  TiDB Cloudコンソールで、キー作成ページの一番下までスクロールし、AWS KMS から取得した**KMS キー ARN**を入力します。
-    8.  **「作成」を**クリックしてキーを作成します。
-  </div>
+プロジェクトの CMEK 構成を完了するには、次の手順を実行します。
 
-  <div label="Use API" value="api">
-    1.  AWS KMS でキー ポリシーを設定し、次の情報をキー ポリシーに追加します。
+1.  クリック<mdsvgicon name="icon-left-projects">複数のプロジェクトがある場合は、左下隅でターゲット プロジェクトに切り替え、 **[プロジェクト設定]**をクリックします。</mdsvgicon>
+2.  **「暗号化アクセス」**をクリックして、プロジェクトの暗号化管理ページに入ります。
+3.  **「暗号化キーの作成」**をクリックして、キー作成ページに入ります。
+4.  キープロバイダーは AWS KMS のみをサポートします。暗号化キーを使用できる地域を選択できます。
+5.  JSON ファイルをコピーして`ROLE-TRUST-POLICY.JSON`として保存します。このファイルには信頼関係が記述されています。
+6.  この信頼関係を AWS KMS のキーポリシーに追加します。詳細については、 [AWS KMS の主要なポリシー](https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html)を参照してください。
+7.  TiDB Cloudコンソールで、キー作成ページの一番下までスクロールし、AWS KMS から取得した**KMS キー ARN**を入力します。
+8.  **「作成」を**クリックしてキーを作成します。
 
-        ```json
-        {
-            "Version": "2012-10-17",
-            "Id": "cmek-policy",
-            "Statement": [
-                // EBS-related policy
-                {
-                    "Sid": "Allow access through EBS for all principals in the account that are authorized to use EBS",
-                    "Effect": "Allow",
-                    "Principal": {
-                        "AWS": "*"
-                    },
-                    "Action": [
-                        "kms:Encrypt",
-                        "kms:Decrypt",
-                        "kms:ReEncrypt*",
-                        "kms:GenerateDataKey*",
-                        "kms:CreateGrant",
-                        "kms:DescribeKey"
-                    ],
-                    "Resource": "*",
-                    "Condition": {
-                        "StringEquals": {
-                            "kms:CallerAccount": "<pingcap-account>",
-                            "kms:ViaService": "ec2.<region>.amazonaws.com"
-                        }
+</div>
+<div label="Use API" value="api">
+
+1.  AWS KMS でキー ポリシーを設定し、次の情報をキー ポリシーに追加します。
+
+    ```json
+    {
+        "Version": "2012-10-17",
+        "Id": "cmek-policy",
+        "Statement": [
+            // EBS-related policy
+            {
+                "Sid": "Allow access through EBS for all principals in the account that are authorized to use EBS",
+                "Effect": "Allow",
+                "Principal": {
+                    "AWS": "*"
+                },
+                "Action": [
+                    "kms:Encrypt",
+                    "kms:Decrypt",
+                    "kms:ReEncrypt*",
+                    "kms:GenerateDataKey*",
+                    "kms:CreateGrant",
+                    "kms:DescribeKey"
+                ],
+                "Resource": "*",
+                "Condition": {
+                    "StringEquals": {
+                        "kms:CallerAccount": "<pingcap-account>",
+                        "kms:ViaService": "ec2.<region>.amazonaws.com"
                     }
+                }
+            },
+            // S3-related policy
+            {
+                "Sid": "Allow TiDB cloud role to use KMS to store encrypted backup to S3",
+                "Effect": "Allow",
+                "Principal": {
+                    "AWS": "arn:aws:iam::<pingcap-account>:root"
                 },
-                // S3-related policy
-                {
-                    "Sid": "Allow TiDB cloud role to use KMS to store encrypted backup to S3",
-                    "Effect": "Allow",
-                    "Principal": {
-                        "AWS": "arn:aws:iam::<pingcap-account>:root"
-                    },
-                    "Action": [
-                        "kms:Decrypt",
-                        "kms:GenerateDataKey"
-                    ],
-                    "Resource": "*"
-                },
-                ... // user's own admin access to KMS
-            ]
-        }
-        ```
+                "Action": [
+                    "kms:Decrypt",
+                    "kms:GenerateDataKey"
+                ],
+                "Resource": "*"
+            },
+            ... // user's own admin access to KMS
+        ]
+    }
+    ```
 
-        -   `<pingcap-account>`は、クラスターが実行されるアカウントです。アカウントがわからない場合は、 [TiDB Cloudのサポート](/tidb-cloud/tidb-cloud-support.md)にお問い合わせください。
-        -   `<region>`はクラスターを作成するリージョンです (例: `us-west-2` )。地域を指定したくない場合は、 `<region>`ワイルドカード`*`に置き換えて、 `StringLike`ブロックに置きます。
-        -   前のブロックの EBS 関連のポリシーについては、 [AWS ドキュメント](https://docs.aws.amazon.com/kms/latest/developerguide/conditions-kms.html#conditions-kms-caller-account)を参照してください。
-        -   前のブロックの S3 関連のポリシーについては、 [AWS ブログ](https://repost.aws/knowledge-center/s3-bucket-access-default-encryption)を参照してください。
+    -   `<pingcap-account>`は、クラスターが実行されるアカウントです。アカウントがわからない場合は、 [TiDB Cloudのサポート](/tidb-cloud/tidb-cloud-support.md)にお問い合わせください。
+    -   `<region>`はクラスターを作成するリージョンです (例: `us-west-2` )。地域を指定したくない場合は、 `<region>`ワイルドカード`*`に置き換えて、 `StringLike`ブロックに置きます。
+    -   前のブロックの EBS 関連のポリシーについては、 [AWS ドキュメント](https://docs.aws.amazon.com/kms/latest/developerguide/conditions-kms.html#conditions-kms-caller-account)を参照してください。
+    -   前のブロックの S3 関連のポリシーについては、 [AWS ブログ](https://repost.aws/knowledge-center/s3-bucket-access-default-encryption)を参照してください。
 
-    2.  TiDB Cloud API の[AWS CMEK の構成](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/CreateAwsCmek)エンドポイントを呼び出します。
+2.  TiDB Cloud API の[AWS CMEK の構成](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/CreateAwsCmek)エンドポイントを呼び出します。
 
-        現在、 TiDB Cloud API はまだベータ版です。詳細については、 [TiDB CloudAPI ドキュメント](https://docs.pingcap.com/tidbcloud/api/v1beta)を参照してください。
-  </div>
+    現在、 TiDB Cloud API はまだベータ版です。詳細については、 [TiDB CloudAPI ドキュメント](https://docs.pingcap.com/tidbcloud/api/v1beta)を参照してください。
+
+</div>
 </SimpleTab>
 
 > **注記：**

@@ -12,15 +12,19 @@ SQL 計画管理は、SQL バインディングを実行して SQL 実行計画�
 SQL バインディングは SPM の基礎です。 [オプティマイザーのヒント](/optimizer-hints.md)ドキュメントでは、ヒントを使用して特定の実行プランを選択する方法が紹介されています。ただし、場合によっては、SQL ステートメントを変更せずに実行選択に干渉する必要がある場合があります。 SQL バインディングを使用すると、SQL ステートメントを変更せずに、指定した実行プランを選択できます。
 
 <CustomContent platform="tidb">
-  > **注記：**
-  >
-  > SQL バインディングを使用するには、 `SUPER`権限が必要です。 TiDB が十分な権限を持っていないことを示すプロンプトを表示した場合は、 [権限管理](/privilege-management.md)を参照して必要な権限を追加してください。
+
+> **注記：**
+>
+> SQL バインディングを使用するには、 `SUPER`権限が必要です。 TiDB が十分な権限を持っていないことを示すプロンプトを表示した場合は、 [権限管理](/privilege-management.md)を参照して必要な権限を追加してください。
+
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
-  > **注記：**
-  >
-  > SQL バインディングを使用するには、 `SUPER`権限が必要です。 TiDB が十分な権限を持っていないことを示すプロンプトを表示した場合は、 [権限管理](https://docs.pingcap.com/tidb/stable/privilege-management)を参照して必要な権限を追加してください。
+
+> **注記：**
+>
+> SQL バインディングを使用するには、 `SUPER`権限が必要です。 TiDB が十分な権限を持っていないことを示すプロンプトを表示した場合は、 [権限管理](https://docs.pingcap.com/tidb/stable/privilege-management)を参照して必要な権限を追加してください。
+
 </CustomContent>
 
 ### バインディングを作成する {#create-a-binding}
@@ -269,18 +273,16 @@ CREATE [GLOBAL | SESSION] BINDING FROM HISTORY USING PLAN DIGEST 'plan_digest';
 
     以下は、 `statements_summary`のクエリ結果の例の一部です。
 
-    ```
-    SUMMARY_BEGIN_TIME: 2022-12-01 19:00:00
-    ...........
-          DIGEST_TEXT: select * from `t` where `a` = ?
-    ...........
-          PLAN_DIGEST: 4e3159169cc63c14b139a4e7d72eae1759875c9a9581f94bb2079aae961189cb
-                 PLAN:  id                  task        estRows operator info                           actRows execution info                                                                                                                                             memory      disk
-                        TableReader_7       root        10      data:Selection_6                        0       time:4.05ms, loops:1, cop_task: {num: 1, max: 598.6µs, proc_keys: 0, rpc_num: 2, rpc_time: 609.8µs, copr_cache_hit_ratio: 0.00, distsql_concurrency: 15}   176 Bytes   N/A
-                        └─Selection_6       cop[tikv]   10      eq(test.t.a, 1)                         0       tikv_task:{time:560.8µs, loops:0}                                                                                                                          N/A         N/A
-                          └─TableFullScan_5 cop[tikv]   10000   table:t, keep order:false, stats:pseudo 0       tikv_task:{time:560.8µs, loops:0}                                                                                                                          N/A         N/A
-          BINARY_PLAN: 6QOYCuQDCg1UYWJsZVJlYWRlcl83Ev8BCgtTZWxlY3Rpb25fNhKOAQoPBSJQRnVsbFNjYW5fNSEBAAAAOA0/QSkAAQHwW4jDQDgCQAJKCwoJCgR0ZXN0EgF0Uh5rZWVwIG9yZGVyOmZhbHNlLCBzdGF0czpwc2V1ZG9qInRpa3ZfdGFzazp7dGltZTo1NjAuOMK1cywgbG9vcHM6MH1w////CQMEAXgJCBD///8BIQFzCDhVQw19BAAkBX0QUg9lcSgBfCAudC5hLCAxKWrmYQAYHOi0gc6hBB1hJAFAAVIQZGF0YTo9GgRaFAW4HDQuMDVtcywgCbYcMWKEAWNvcF8F2agge251bTogMSwgbWF4OiA1OTguNsK1cywgcHJvY19rZXlzOiAwLCBycGNfBSkAMgkMBVcQIDYwOS4pEPBDY29wcl9jYWNoZV9oaXRfcmF0aW86IDAuMDAsIGRpc3RzcWxfY29uY3VycmVuY3k6IDE1fXCwAXj///////////8BGAE=
-    ```
+        SUMMARY_BEGIN_TIME: 2022-12-01 19:00:00
+        ...........
+              DIGEST_TEXT: select * from `t` where `a` = ?
+        ...........
+              PLAN_DIGEST: 4e3159169cc63c14b139a4e7d72eae1759875c9a9581f94bb2079aae961189cb
+                     PLAN:  id                  task        estRows operator info                           actRows execution info                                                                                                                                             memory      disk
+                            TableReader_7       root        10      data:Selection_6                        0       time:4.05ms, loops:1, cop_task: {num: 1, max: 598.6µs, proc_keys: 0, rpc_num: 2, rpc_time: 609.8µs, copr_cache_hit_ratio: 0.00, distsql_concurrency: 15}   176 Bytes   N/A
+                            └─Selection_6       cop[tikv]   10      eq(test.t.a, 1)                         0       tikv_task:{time:560.8µs, loops:0}                                                                                                                          N/A         N/A
+                              └─TableFullScan_5 cop[tikv]   10000   table:t, keep order:false, stats:pseudo 0       tikv_task:{time:560.8µs, loops:0}                                                                                                                          N/A         N/A
+              BINARY_PLAN: 6QOYCuQDCg1UYWJsZVJlYWRlcl83Ev8BCgtTZWxlY3Rpb25fNhKOAQoPBSJQRnVsbFNjYW5fNSEBAAAAOA0/QSkAAQHwW4jDQDgCQAJKCwoJCgR0ZXN0EgF0Uh5rZWVwIG9yZGVyOmZhbHNlLCBzdGF0czpwc2V1ZG9qInRpa3ZfdGFzazp7dGltZTo1NjAuOMK1cywgbG9vcHM6MH1w////CQMEAXgJCBD///8BIQFzCDhVQw19BAAkBX0QUg9lcSgBfCAudC5hLCAxKWrmYQAYHOi0gc6hBB1hJAFAAVIQZGF0YTo9GgRaFAW4HDQuMDVtcywgCbYcMWKEAWNvcF8F2agge251bTogMSwgbWF4OiA1OTguNsK1cywgcHJvY19rZXlzOiAwLCBycGNfBSkAMgkMBVcQIDYwOS4pEPBDY29wcl9jYWNoZV9oaXRfcmF0aW86IDAuMDAsIGRpc3RzcWxfY29uY3VycmVuY3k6IDE1fXCwAXj///////////8BGAE=
 
     この例では、 `plan_digest`に対応する実行計画は`4e3159169cc63c14b139a4e7d72eae1759875c9a9581f94bb2079aae961189cb`であることがわかります。
 
@@ -296,32 +298,28 @@ CREATE [GLOBAL | SESSION] BINDING FROM HISTORY USING PLAN DIGEST 'plan_digest';
 SHOW BINDINGS\G;
 ```
 
-```
-*************************** 1. row ***************************
-Original_sql: select * from `test` . `t` where `a` = ?
-    Bind_sql: SELECT /*+ use_index(@`sel_1` `test`.`t` ) ignore_index(`t` `a`)*/ * FROM `test`.`t` WHERE `a` = 1
-       ...........
-  Sql_digest: 6909a1bbce5f64ade0a532d7058dd77b6ad5d5068aee22a531304280de48349f
- Plan_digest:
-1 row in set (0.01 sec)
+    *************************** 1. row ***************************
+    Original_sql: select * from `test` . `t` where `a` = ?
+        Bind_sql: SELECT /*+ use_index(@`sel_1` `test`.`t` ) ignore_index(`t` `a`)*/ * FROM `test`.`t` WHERE `a` = 1
+           ...........
+      Sql_digest: 6909a1bbce5f64ade0a532d7058dd77b6ad5d5068aee22a531304280de48349f
+     Plan_digest:
+    1 row in set (0.01 sec)
 
-ERROR:
-No query specified
-```
+    ERROR:
+    No query specified
 
 ```sql
 SELECT * FROM t WHERE a = 1;
 SELECT @@LAST_PLAN_FROM_BINDING;
 ```
 
-```
-+--------------------------+
-| @@LAST_PLAN_FROM_BINDING |
-+--------------------------+
-|                        1 |
-+--------------------------+
-1 row in set (0.00 sec)
-```
+    +--------------------------+
+    | @@LAST_PLAN_FROM_BINDING |
+    +--------------------------+
+    |                        1 |
+    +--------------------------+
+    1 row in set (0.00 sec)
 
 ### バインディングを削除する {#remove-a-binding}
 
@@ -361,7 +359,7 @@ DROP [GLOBAL | SESSION] BINDING FOR SQL DIGEST 'sql_digest';
 
 > **注記：**
 >
-> `DROP GLOBAL BINDING`を実行すると、現在の tidb-server インスタンス キャッシュ内のバインディングが削除され、システム テーブル内の対応する行のステータスが「削除」に変更されます。他の tidb-server インスタンスは、キャッシュ内の対応するバインディングを削除するために「削除済み」ステータスを読み取る必要があるため、このステートメントはシステム テーブル内のレコードを直接削除しません。これらのシステム テーブル内のステータスが「削除済み」のレコードについては、100 `bind-info-lease` (デフォルト値は`3s`で合計`300s` ) 間隔ごとに、バックグラウンド スレッドが 10 の前に`update_time`のバインディングの再利用とクリアの操作をトリガーします。 `bind-info-lease` (すべての tidb-server インスタンスが「削除済み」ステータスを読み取り、キャッシュを更新したことを確認するため)。
+> `DROP GLOBAL BINDING`を実行すると、現在の tidb-server インスタンス キャッシュ内のバインディングが削除され、システム テーブル内の対応する行のステータスが「削除」に変更されます。他の tidb-server インスタンスは、キャッシュ内の対応するバインディングを削除するために「削除済み」ステータスを読み取る必要があるため、このステートメントはシステム テーブル内のレコードを直接削除しません。これらのシステム テーブル内のステータスが「削除済み」のレコードについては、100 `bind-info-lease` (デフォルト値は`3s`で合計`300s` ) 間隔ごとに、バックグラウンド スレッドが 10 の前に`update_time`のバインディングを再利用およびクリアする操作をトリガーします。 `bind-info-lease` (すべての tidb-server インスタンスが「削除済み」ステータスを読み取り、キャッシュを更新したことを確認するため)。
 
 ### バインディングステータスの変更 {#change-binding-status}
 
@@ -570,15 +568,13 @@ TiDB クラスターをアップグレードする前に、次の手順を実行
 
     -   キャプチャされたバインディングを保持するかどうかを決定します。
 
-        ```
-        -- View the plan with the binding enabled
-        SET @@SESSION.TIDB_USE_PLAN_BASELINES = true;
-        EXPLAIN FORMAT='VERBOSE' SELECT * FROM t1 WHERE ...;
+            -- View the plan with the binding enabled
+            SET @@SESSION.TIDB_USE_PLAN_BASELINES = true;
+            EXPLAIN FORMAT='VERBOSE' SELECT * FROM t1 WHERE ...;
 
-        -- View the plan with the binding disabled
-        SET @@SESSION.TIDB_USE_PLAN_BASELINES = false;
-        EXPLAIN FORMAT='VERBOSE' SELECT * FROM t1 WHERE ...;
-        ```
+            -- View the plan with the binding disabled
+            SET @@SESSION.TIDB_USE_PLAN_BASELINES = false;
+            EXPLAIN FORMAT='VERBOSE' SELECT * FROM t1 WHERE ...;
 
         -   実行計画に一貫性がある場合は、バインディングを安全に削除できます。
 
@@ -603,17 +599,21 @@ SET GLOBAL tidb_evolve_plan_baselines = ON;
 デフォルト値の`tidb_evolve_plan_baselines`は`off`です。
 
 <CustomContent platform="tidb">
-  > **警告：**
-  >
-  > -   ベースライン進化は実験的機能です。未知のリスクが存在する可能性があります。本番環境で使用することは**お**勧めしません。
-  > -   この変数は、ベースライン進化機能が一般提供 (GA) されるまで、強制的に`off`に設定されます。この機能を有効にしようとすると、エラーが返されます。本番環境でこの機能をすでに使用している場合は、できるだけ早く無効にしてください。バインディング ステータスが期待どおりではない場合は、PingCAP またはコミュニティから[支持を得ます](/support.md) 。
+
+> **警告：**
+>
+> -   ベースライン進化は実験的機能です。未知のリスクが存在する可能性があります。本番環境で使用することは**お**勧めしません。
+> -   この変数は、ベースライン進化機能が一般提供 (GA) されるまで、強制的に`off`に設定されます。この機能を有効にしようとすると、エラーが返されます。本番環境でこの機能をすでに使用している場合は、できるだけ早く無効にしてください。バインディング ステータスが期待どおりではない場合は、PingCAP またはコミュニティから[支持を得ます](/support.md) 。
+
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
-  > **警告：**
-  >
-  > -   ベースライン進化は実験的機能です。未知のリスクが存在する可能性があります。本番環境で使用することは**お**勧めしません。
-  > -   この変数は、ベースライン進化機能が一般提供 (GA) されるまで、強制的に`off`に設定されます。この機能を有効にしようとすると、エラーが返されます。本番環境でこの機能をすでに使用している場合は、できるだけ早く無効にしてください。バインディングのステータスが期待どおりではない場合は、 [TiDB Cloudサポートにお問い合わせください](/tidb-cloud/tidb-cloud-support.md) .
+
+> **警告：**
+>
+> -   ベースライン進化は実験的機能です。未知のリスクが存在する可能性があります。本番環境で使用することは**お**勧めしません。
+> -   この変数は、ベースライン進化機能が一般提供 (GA) されるまで、強制的に`off`に設定されます。この機能を有効にしようとすると、エラーが返されます。本番環境でこの機能をすでに使用している場合は、できるだけ早く無効にしてください。バインディングのステータスが期待どおりではない場合は、 [TiDB Cloudサポートにお問い合わせください](/tidb-cloud/tidb-cloud-support.md) .
+
 </CustomContent>
 
 自動バインディング展開機能が有効になった後、オプティマイザーによって選択された最適な実行プランがバインディング実行プランの中にない場合、オプティマイザーはそのプランを検証を待機する実行プランとしてマークします。 `bind-info-lease` (デフォルト値は`3s` ) 間隔ごとに、検証対象の実行プランが選択され、実際の実行時間の観点からコストが最小のバインディング実行プランと比較されます。検証対象のプランの実行時間が短い場合 (現在の比較基準は、検証対象のプランの実行時間がバインディング実行プランの 2/3 を超えないことです)、このプランは使用可能としてマークされます。バインディング。次の例では、上記のプロセスを説明します。

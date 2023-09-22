@@ -19,9 +19,7 @@ summary: An overview of the usage of SHUTDOWN for the TiDB database.
 SHUTDOWN;
 ```
 
-```
-Query OK, 0 rows affected (0.00 sec)
-```
+    Query OK, 0 rows affected (0.00 sec)
 
 ## MySQLの互換性 {#mysql-compatibility}
 

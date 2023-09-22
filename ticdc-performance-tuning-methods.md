@@ -5,7 +5,7 @@ summary: Introduces the TiCDC metrics on the Performance Overview dashboard to h
 
 # TiCDC のパフォーマンス分析およびチューニング方法 {#ticdc-performance-analysis-and-tuning-methods}
 
-このドキュメントでは、TiCDC リソースの使用率と主要なパフォーマンス メトリクスを紹介します。パフォーマンス概要ダッシュボードの[CDCパネル](/grafana-performance-overview-dashboard.md#cdc)を通じて、データ レプリケーションにおける TiCDC パフォーマンスを監視および評価できます。
+このドキュメントでは、TiCDC リソースの使用率と主要なパフォーマンス メトリックについて紹介します。 [パフォーマンス概要] ダッシュボードの[CDCパネル](/grafana-performance-overview-dashboard.md#cdc)を通じて、データ レプリケーションにおける TiCDC パフォーマンスを監視および評価できます。
 
 ## TiCDC クラスターのリソース使用率 {#resource-utilization-of-a-ticdc-cluster}
 

@@ -198,7 +198,7 @@ BACKUP DATABASE * TO 's3://bucket-name/prefix' SEND_CREDENTIALS_TO_TIKV = FALSE;
 
         > **注記：**
         >
-        > この方法を使用する場合は、手順 3 で TiKV を再起動する必要があります。クラスターを再起動できない場合は、**方法 1: バックアップと復元用のアクセス キーを指定するを**使用します。
+        > この方法を使用する場合は、手順 3 で TiKV を再起動する必要があります。クラスターを再起動できない場合は、**方法 1: バックアップと復元のアクセス キーを指定するを**使用します。
 
         1.  このノードの TiKV ポートが`24000` 、つまり systemd サービスの名前が`tikv-24000`であるとします。
 
@@ -228,7 +228,7 @@ BACKUP DATABASE * TO 's3://bucket-name/prefix' SEND_CREDENTIALS_TO_TIKV = FALSE;
         echo $AZURE_CLIENT_SECRET
         ```
 
-    -   BR を使用してデータを Azure Blob Storage にバックアップします。
+    -   BRを使用してデータを Azure Blob Storage にバックアップします。
 
         ```shell
         ./br backup full -u "${PD_IP}:2379" \

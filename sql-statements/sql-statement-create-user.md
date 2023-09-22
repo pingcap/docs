@@ -74,9 +74,7 @@ Query OK, 1 row affected (0.02 sec)
 CREATE USER 'newuser5'@'%' ACCOUNT LOCK;
 ```
 
-```
-Query OK, 1 row affected (0.02 sec)
-```
+    Query OK, 1 row affected (0.02 sec)
 
 コメントを含むユーザーを作成します。
 
@@ -85,14 +83,12 @@ CREATE USER 'newuser6'@'%' COMMENT 'This user is created only for test';
 SELECT * FROM information_schema.user_attributes;
 ```
 
-```
-+-----------+------+---------------------------------------------------+
-| USER      | HOST | ATTRIBUTE                                         |
-+-----------+------+---------------------------------------------------+
-| newuser6  | %    | {"comment": "This user is created only for test"} |
-+-----------+------+---------------------------------------------------+
-1 rows in set (0.00 sec)
-```
+    +-----------+------+---------------------------------------------------+
+    | USER      | HOST | ATTRIBUTE                                         |
+    +-----------+------+---------------------------------------------------+
+    | newuser6  | %    | {"comment": "This user is created only for test"} |
+    +-----------+------+---------------------------------------------------+
+    1 rows in set (0.00 sec)
 
 `email`属性のユーザーを作成します。
 
@@ -116,9 +112,7 @@ SELECT * FROM information_schema.user_attributes;
 CREATE USER 'newuser8'@'%' PASSWORD HISTORY 5;
 ```
 
-```
-Query OK, 1 row affected (0.02 sec)
-```
+    Query OK, 1 row affected (0.02 sec)
 
 パスワードが手動で期限切れになったユーザーを作成します。
 
@@ -126,9 +120,7 @@ Query OK, 1 row affected (0.02 sec)
 CREATE USER 'newuser9'@'%' PASSWORD EXPIRE;
 ```
 
-```
-Query OK, 1 row affected (0.02 sec)
-```
+    Query OK, 1 row affected (0.02 sec)
 
 リソース グループ`rg1`を使用するユーザーを作成します。
 
@@ -156,8 +148,10 @@ SELECT USER, HOST, USER_ATTRIBUTES FROM MYSQL.USER WHERE USER='newuser7';
 ## こちらも参照 {#see-also}
 
 <CustomContent platform="tidb">
-  -   [MySQL とのSecurity互換性](/security-compatibility-with-mysql.md)
-  -   [権限管理](/privilege-management.md)
+
+-   [MySQL とのSecurity互換性](/security-compatibility-with-mysql.md)
+-   [権限管理](/privilege-management.md)
+
 </CustomContent>
 
 -   [ユーザーを削除する](/sql-statements/sql-statement-drop-user.md)

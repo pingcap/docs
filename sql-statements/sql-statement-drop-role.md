@@ -173,5 +173,7 @@ TiDB の`DROP ROLE`ステートメントは、MySQL 8.0 のロール機能と完
 -   [`SET DEFAULT ROLE`](/sql-statements/sql-statement-set-default-role.md)
 
 <CustomContent platform="tidb">
-  -   [役割ベースのアクセス制御](/role-based-access-control.md)
+
+-   [役割ベースのアクセス制御](/role-based-access-control.md)
+
 </CustomContent>

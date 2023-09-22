@@ -11,7 +11,7 @@ summary: Learn the version numbering system of TiDB.
 
 </Important>
 
-TiDB は 2 つのリリース シリーズを提供しています。
+TiDB は 2 つのリリース シリーズを提供します。
 
 -   長期サポートのリリース
 -   開発マイルストーン リリース (TiDB v6.0.0 で導入)

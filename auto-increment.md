@@ -8,15 +8,19 @@ summary: Learn the `AUTO_INCREMENT` column attribute of TiDB.
 このドキュメントでは、 `AUTO_INCREMENT`列属性について、その概念、実装原則、自動インクリメント関連の機能、および制限事項を含めて紹介します。
 
 <CustomContent platform="tidb">
-  > **注記：**
-  >
-  > `AUTO_INCREMENT`属性は、本番環境でホットスポットを引き起こす可能性があります。詳細は[ホットスポットの問題のトラブルシューティング](/troubleshoot-hot-spot-issues.md)参照してください。代わりに[`AUTO_RANDOM`](/auto-random.md)を使用することをお勧めします。
+
+> **注記：**
+>
+> `AUTO_INCREMENT`属性は、本番環境でホットスポットを引き起こす可能性があります。詳細は[ホットスポットの問題のトラブルシューティング](/troubleshoot-hot-spot-issues.md)参照してください。代わりに[`AUTO_RANDOM`](/auto-random.md)を使用することをお勧めします。
+
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
-  > **注記：**
-  >
-  > `AUTO_INCREMENT`属性は、本番環境でホットスポットを引き起こす可能性があります。詳細は[ホットスポットの問題のトラブルシューティング](https://docs.pingcap.com/tidb/stable/troubleshoot-hot-spot-issues#handle-auto-increment-primary-key-hotspot-tables-using-auto_random)参照してください。代わりに[`AUTO_RANDOM`](/auto-random.md)を使用することをお勧めします。
+
+> **注記：**
+>
+> `AUTO_INCREMENT`属性は、本番環境でホットスポットを引き起こす可能性があります。詳細は[ホットスポットの問題のトラブルシューティング](https://docs.pingcap.com/tidb/stable/troubleshoot-hot-spot-issues#handle-auto-increment-primary-key-hotspot-tables-using-auto_random)参照してください。代わりに[`AUTO_RANDOM`](/auto-random.md)を使用することをお勧めします。
+
 </CustomContent>
 
 [`CREATE TABLE`](/sql-statements/sql-statement-create-table.md)ステートメントの`AUTO_INCREMENT`パラメータを使用して、増分フィールドの初期値を指定することもできます。
@@ -241,7 +245,7 @@ mysql> SELECT * FROM t ORDER BY b;
 6 rows in set (0.00 sec)
 ```
 
-TiDBサーバーの再起動の頻度が高いと、 `AUTO_INCREMENT`値が枯渇する可能性があります。上記の例では、最初の TiDBサーバーのキャッシュにはまだ空き値`[5-30000]`があります。これらの値は失われ、再割り当てされません。
+TiDBサーバーの再起動の頻度が高いと、 `AUTO_INCREMENT`値が枯渇する可能性があります。上記の例では、最初の TiDBサーバーのキャッシュにはまだ空き値`[5-30000]`あります。これらの値は失われ、再割り当てされません。
 
 `AUTO_INCREMENT`値が連続していることに依存することはお勧めできません。 TiDBサーバーに値`[2000001-2030000]`のキャッシュがある次の例を考えてみましょう。値`2029998`手動で挿入すると、新しいキャッシュ範囲が取得されるときの動作を確認できます。
 

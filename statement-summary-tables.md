@@ -184,7 +184,7 @@ select * from information_schema.statements_summary_evicted;
 
 <CustomContent platform="tidb">
 
-この問題に対処するために、TiDB v6.6.0 では実験的に[ステートメントの概要の永続性](#persist-statements-summary)機能が導入されていますが、この機能はデフォルトでは無効になっています。この機能を有効にすると、履歴データはメモリに保存されなくなり、ディスクに直接書き込まれます。このようにして、TiDBサーバーが再起動しても履歴データは引き続き使用できます。
+この問題に対処するために、TiDB v6.6.0 では実験的に[ステートメントの概要の永続化](#persist-statements-summary)機能が導入されていますが、この機能はデフォルトでは無効になっています。この機能を有効にすると、履歴データはメモリに保存されなくなり、ディスクに直接書き込まれます。このようにして、TiDBサーバーが再起動しても履歴データは引き続き使用できます。
 
 </CustomContent>
 
@@ -298,7 +298,7 @@ SELECT sum_latency, avg_latency, exec_count, query_sample_text
 -   `DIGEST` : このカテゴリの SQL ステートメントのダイジェスト。
 -   `DIGEST_TEXT` : 正規化された SQL ステートメント。
 -   `QUERY_SAMPLE_TEXT` : SQL カテゴリの元の SQL ステートメント。元のステートメントは 1 つだけ採用されます。
--   `TABLE_NAMES` : SQL ステートメントに含まれるすべてのテーブル。複数のテーブルがある場合は、それぞれをカンマで区切ります。
+-   `TABLE_NAMES` : SQL ステートメントに関係するすべてのテーブル。複数のテーブルがある場合は、それぞれをカンマで区切ります。
 -   `INDEX_NAMES` : SQL ステートメントで使用されるすべての SQL インデックス。複数のインデックスがある場合は、それぞれをカンマで区切ります。
 -   `SAMPLE_USER` : このカテゴリの SQL ステートメントを実行するユーザー。 1 人のユーザーのみが取得されます。
 -   `PLAN_DIGEST` : 実行計画のダイジェスト。

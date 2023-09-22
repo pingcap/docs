@@ -131,7 +131,7 @@ tidb-lightning  pingcap  TiDB Lightning is a tool used for fast full import of l
 tiup            pingcap  TiUP is a command-line component management tool that can help to download and install TiDB platform components to the local system
 ```
 
-インストールするコンポーネントを選択します。
+インストールするコンポーネントを選択します:
 
 ```shell
 tiup install dumpling tidb-lightning

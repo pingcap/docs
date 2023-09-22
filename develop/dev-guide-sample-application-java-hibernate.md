@@ -261,7 +261,7 @@ try (Session session = sessionFactory.openSession()) {
 
 -   Hibernate の詳しい使い方を[Hibernate のドキュメント](https://hibernate.org/orm/documentation)から学びましょう。
 -   TiDB アプリケーション[データの削除](/develop/dev-guide-delete-data.md) [単一テーブルの読み取り](/develop/dev-guide-get-data-from-single-table.md)ベスト プラクティス[SQLパフォーマンスの最適化](/develop/dev-guide-optimize-sql-overview.md)は、 [開発者ガイド](/develop/dev-guide-overview.md)の章 ( [データの挿入](/develop/dev-guide-insert-data.md)など) [データを更新する](/develop/dev-guide-update-data.md)参照[トランザクション](/develop/dev-guide-transaction-overview.md)てください。
--   プロフェッショナルとして[TiDB 開発者コース](https://www.pingcap.com/education/)を学び、試験合格後に[TiDB 認定](https://www.pingcap.com/education/certification/)獲得します。
+-   プロフェッショナルを通じて[TiDB 開発者コース](https://www.pingcap.com/education/)を学び、試験合格後に[TiDB 認定](https://www.pingcap.com/education/certification/)獲得します。
 -   Java開発者向けのコースを通じて[Javaから TiDB を操作する](https://eng.edu.pingcap.com/catalog/info/id:212)を学びます。
 
 ## 助けが必要？ {#need-help}

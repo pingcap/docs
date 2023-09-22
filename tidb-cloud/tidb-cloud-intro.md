@@ -6,7 +6,7 @@ category: intro
 
 # TiDB Cloudの紹介 {#tidb-cloud-introduction}
 
-[TiDB Cloud](https://www.pingcap.com/tidb-cloud/)は、オープンソースのハイブリッド トランザクションおよび分析処理 (HTAP) データベースである[TiDB](https://docs.pingcap.com/tidb/stable/overview)クラウドに提供する、フルマネージドの Database-as-a-Service (DBaaS) です。 TiDB Cloudは、データベースの導入と管理を簡単に行う方法を提供し、データベースの複雑さではなく、アプリケーションに集中できるようにします。 TiDB Cloudクラスターを作成して、Google Cloud およびアマゾン ウェブ サービス (AWS) 上にミッションクリティカルなアプリケーションを迅速に構築できます。
+[TiDB Cloud](https://www.pingcap.com/tidb-cloud/)は、オープンソースのハイブリッド トランザクションおよび分析処理 (HTAP) データベースである[TiDB](https://docs.pingcap.com/tidb/stable/overview)クラウドに提供する、フルマネージドの Database-as-a-Service (DBaaS) です。 TiDB Cloudは、データベースの導入と管理を簡単に行う方法を提供し、データベースの複雑さではなく、アプリケーションに集中できるようにします。 TiDB Cloudクラスターを作成して、Google Cloud およびアマゾン ウェブ サービス (AWS) 上でミッションクリティカルなアプリケーションを迅速に構築できます。
 
 ![TiDB Cloud Overview](/media/tidb-cloud/tidb-cloud-overview.png)
 
@@ -20,7 +20,7 @@ TiDB Cloud を使用すると、トレーニングをほとんど、またはま
 
 TiDB Cloudの詳細については、次のビデオをご覧ください。
 
-<iframe width="600" height="450" src="https://www.youtube.com/embed/skCV9BEmjbo?enablejsapi=1" title="Why TiDB Cloud?" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen />
+<iframe width="600" height="450" src="https://www.youtube.com/embed/skCV9BEmjbo?enablejsapi=1" title="TiDB クラウドを選ぶ理由" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 TiDB Cloudを使用すると、次の主要な機能を利用できます。
 

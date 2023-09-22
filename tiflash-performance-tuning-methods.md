@@ -15,7 +15,7 @@ summary: Introduces the TiFlash metrics on the Performance Overview dashboard to
 -   メモリ: TiFlashインスタンスごとのメモリ使用量。
 -   IO 使用率: TiFlashインスタンスごとの IO 使用率。
 
-例: [CH-benCHmark のワークロード](/benchmark/benchmark-tidb-using-ch.md)の間のリソース使用率
+例: [CH-benCHmark のワークロード](/benchmark/benchmark-tidb-using-ch.md)時のリソース使用率
 
 このTiFlashクラスターは 2 つのノードで構成され、各ノードは 16 コアと 48 GB のメモリで構成されています。 CH-benCHmark ワークロード中、CPU 使用率は最大 1500%、メモリ使用率は最大 20 GB、IO 使用率は最大 91% に達する可能性があります。これらのメトリクスは、 TiFlashノードのリソースが飽和に近づいていることを示しています。
 

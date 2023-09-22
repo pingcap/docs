@@ -359,7 +359,7 @@ export class ActionLog {
 ## 次のステップ {#next-steps}
 
 -   TypeORM の詳しい使い方は[TypeORM のドキュメント](https://typeorm.io/)からご覧ください。
--   [開発者ガイド](/develop/dev-guide-overview.md)の章 ( [データの挿入](/develop/dev-guide-insert-data.md) [SQLパフォーマンスの最適化](/develop/dev-guide-optimize-sql-overview.md) ) で TiDB [トランザクション](/develop/dev-guide-transaction-overview.md)開発[データを更新する](/develop/dev-guide-update-data.md)ベスト プラクティス[データの削除](/develop/dev-guide-delete-data.md)学習[クエリデータ](/develop/dev-guide-get-data-from-single-table.md)ます。
+-   [開発者ガイド](/develop/dev-guide-overview.md) [トランザクション](/develop/dev-guide-transaction-overview.md)章 ( [データの挿入](/develop/dev-guide-insert-data.md) [SQLパフォーマンスの最適化](/develop/dev-guide-optimize-sql-overview.md) ) で TiDB アプリケーション開発[データを更新する](/develop/dev-guide-update-data.md)ベスト プラクティス[クエリデータ](/develop/dev-guide-get-data-from-single-table.md)学習[データの削除](/develop/dev-guide-delete-data.md)ます。
 -   プロフェッショナルとして[TiDB 開発者コース](https://www.pingcap.com/education/)を学び、試験合格後に[TiDB 認定](https://www.pingcap.com/education/certification/)獲得します。
 
 ## 助けが必要？ {#need-help}

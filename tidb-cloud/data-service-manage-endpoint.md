@@ -284,37 +284,41 @@ TiDB Cloudデータ サービスは、エンドポイントの呼び出しに役
     以下は、**バッチ操作**を有効にし、**ダイジェスト認証を**使用する`POST`リクエストのカール コード スニペットの例です。
 
     <SimpleTab>
-      <div label="Test Environment">
-        エンドポイントのドラフト バージョンを呼び出すには、 `endpoint-type: draft`ヘッダーを追加する必要があります。
+     <div label="Test Environment">
 
-        ```bash
-        curl --digest --user '<Public Key>:<Private Key>' \
-          --request POST 'https://<region>.data.tidbcloud.com/api/v1beta/app/<App ID>/endpoint/<Endpoint Path>' \
-          --header 'content-type: application/json'\
-          --header 'endpoint-type: draft'
-          --data-raw '[{
-            "age": "${age}",
-            "career": "${career}"
-        }]'
-        ```
-      </div>
+    エンドポイントのドラフト バージョンを呼び出すには、 `endpoint-type: draft`ヘッダーを追加する必要があります。
 
-      <div label="Online Environment">
-        オンライン環境でコード例を確認する前に、まずエンドポイントをデプロイする必要があります。
+    ```bash
+    curl --digest --user '<Public Key>:<Private Key>' \
+      --request POST 'https://<region>.data.tidbcloud.com/api/v1beta/app/<App ID>/endpoint/<Endpoint Path>' \
+      --header 'content-type: application/json'\
+      --header 'endpoint-type: draft'
+      --data-raw '[{
+        "age": "${age}",
+        "career": "${career}"
+    }]'
+    ```
 
-        現在のオンライン バージョンのエンドポイントを呼び出すには、次のコマンドを使用します。
+    </div>
 
-        ```bash
-        curl --digest --user '<Public Key>:<Private Key>' \
-          --request POST 'https://<region>.data.tidbcloud.com/api/v1beta/app/<App ID>/endpoint/<Endpoint Path>'
-          --header 'content-type: application/json'\
-          --data-raw '[{
-            "age": "${age}",
-            "career": "${career}"
-        }]'
-        ```
-      </div>
-    </SimpleTab>
+    <div label="Online Environment">
+
+    オンライン環境でコード例を確認する前に、まずエンドポイントをデプロイする必要があります。
+
+    現在のオンライン バージョンのエンドポイントを呼び出すには、次のコマンドを使用します。
+
+    ```bash
+    curl --digest --user '<Public Key>:<Private Key>' \
+      --request POST 'https://<region>.data.tidbcloud.com/api/v1beta/app/<App ID>/endpoint/<Endpoint Path>'
+      --header 'content-type: application/json'\
+      --data-raw '[{
+        "age": "${age}",
+        "career": "${career}"
+    }]'
+    ```
+
+    </div>
+     </SimpleTab>
 
     > **注記：**
     >

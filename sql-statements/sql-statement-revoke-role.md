@@ -105,7 +105,7 @@ Query OK, 0 rows affected (0.02 sec)
 mysql -h 127.0.0.1 -P 4000 -u jennifer
 ```
 
-この後、ユーザー`jennifer`はロール`analyticsteam`に関連付けられた権限を持ち、ユーザー`jennifer`はステートメント`SET ROLE`を実行する必要がなくなります。
+この後、ユーザー`jennifer`はロール`analyticsteam`に関連付けられた権限を持ち、ユーザー`jennifer`ステートメント`SET ROLE`を実行する必要がなくなります。
 
 ```sql
 SHOW GRANTS;
@@ -171,5 +171,7 @@ TiDB の`REVOKE <role>`ステートメントは、MySQL 8.0 のロール機能�
 -   [`SET DEFAULT ROLE`](/sql-statements/sql-statement-set-default-role.md)
 
 <CustomContent platform="tidb">
-  -   [役割ベースのアクセス制御](/role-based-access-control.md)
+
+-   [役割ベースのアクセス制御](/role-based-access-control.md)
+
 </CustomContent>

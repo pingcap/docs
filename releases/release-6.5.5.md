@@ -24,7 +24,7 @@ TiDB バージョン: 6.5.5
     -   スナップショット[#15401](https://github.com/tikv/tikv/issues/15401) @ [SpadeA-Tang](https://github.com/SpadeA-Tang)の監視メトリクスを追加
     -   リーダー転送中の PITR チェックポイント ラグの安定性を向上[#13638](https://github.com/tikv/tikv/issues/13638) @ [ユジュンセン](https://github.com/YuJuncen)
     -   `safe-ts` [#15082](https://github.com/tikv/tikv/issues/15082) @ [エキシウム](https://github.com/ekexium)に関連するログと監視メトリクスを追加します
-    -   `resolved-ts` [#15082](https://github.com/tikv/tikv/issues/15082) @ [エキシウム](https://github.com/ekexium)のログと監視メトリクスをさらに提供します
+    -   `resolved-ts` [#15082](https://github.com/tikv/tikv/issues/15082) @ [エキシウム](https://github.com/ekexium)のより多くのログと監視メトリクスを提供します
     -   圧縮メカニズムを最適化します。リージョンが分割されるときに、分割するキーがない場合、過剰な MVCC バージョン[#15282](https://github.com/tikv/tikv/issues/15282) @ [SpadeA-Tang](https://github.com/SpadeA-Tang)を排除するために圧縮がトリガーされます。
 
 -   ツール

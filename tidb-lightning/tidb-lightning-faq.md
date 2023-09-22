@@ -57,14 +57,12 @@ TiDB Lightning はデフォルトで、ローカル データ ソースとイン
 ADMIN CHECKSUM TABLE `schema`.`table`;
 ```
 
-```
-+---------+------------+---------------------+-----------+-------------+
-| Db_name | Table_name | Checksum_crc64_xor  | Total_kvs | Total_bytes |
-+---------+------------+---------------------+-----------+-------------+
-| schema  | table      | 5505282386844578743 |         3 |          96 |
-+---------+------------+---------------------+-----------+-------------+
-1 row in set (0.01 sec)
-```
+    +---------+------------+---------------------+-----------+-------------+
+    | Db_name | Table_name | Checksum_crc64_xor  | Total_kvs | Total_bytes |
+    +---------+------------+---------------------+-----------+-------------+
+    | schema  | table      | 5505282386844578743 |         3 |          96 |
+    +---------+------------+---------------------+-----------+-------------+
+    1 row in set (0.01 sec)
 
 ## TiDB Lightningではどのような種類のデータ ソース形式がサポートされていますか? {#what-kinds-of-data-source-formats-are-supported-by-tidb-lightning}
 
@@ -194,7 +192,7 @@ CREATE PLACEMENT POLICY p1 PRIMARY_REGION="us-east" REGIONS="us-east,us-west";
 
 **回避策:**
 
-TiDB Lightningを使用して SQL で配置ルールを使用するには、ターゲット テーブルにデータをインポートする**前に、**関連するラベルとオブジェクトがターゲット TiDB クラスターに作成されていることを確認する必要があります。 SQL の配置ルールは PD および TiKVレイヤーで機能するため、 TiDB Lightning は、インポートされたデータを保存するためにどの TiKV を使用するかを判断するために必要な情報を取得できます。このように、SQL のこの配置ルールはTiDB Lightningに対して透過的です。
+TiDB Lightningを使用して SQL で配置ルールを使用するには、ターゲット テーブルにデータをインポートする**前に、**関連するラベルとオブジェクトがターゲット TiDB クラスターに作成されていることを確認する必要があります。 SQL の配置ルールは PD および TiKVレイヤーで機能するため、 TiDB Lightning は、インポートされたデータを保存するためにどの TiKV を使用する必要があるかを判断するために必要な情報を取得できます。このように、SQL のこの配置ルールはTiDB Lightningに対して透過的です。
 
 手順は次のとおりです。
 
@@ -209,9 +207,7 @@ TiDB Lightningを使用して SQL で配置ルールを使用するには、タ�
 
 1.  `-B test`を使用して元のスキーマのバックアップを作成し、必要なスキーマのみを選択します。
 
-    ```
-    tiup dumpling -B test -o /tmp/bck1
-    ```
+        tiup dumpling -B test -o /tmp/bck1
 
 2.  次の内容を含む`/tmp/tidb-lightning.toml`ファイルを作成します。
 
@@ -244,6 +240,4 @@ TiDB Lightningを使用して SQL で配置ルールを使用するには、タ�
 
 3.  この構成ファイルを使用してインポートを実行します。
 
-    ```
-    tiup tidb-lightning -config /tmp/tidb-lightning.toml
-    ```
+        tiup tidb-lightning -config /tmp/tidb-lightning.toml

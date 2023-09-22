@@ -63,7 +63,7 @@ v5.4 の主な新機能または改善点は次のとおりです。
 ### その他 {#others}
 
 -   TiDB と PD の間にインターフェイスが追加されます。 `information_schema.TIDB_HOT_REGIONS_HISTORY`システム テーブルを使用する場合、TiDB は対応するバージョンの PD を使用する必要があります。
--   TiDB サーバー、PD サーバー、および TiKV サーバーは、ログ名、出力形式、ローテーションと有効期限のルールを管理するために、ログ関連パラメーターに統一された命名方法を使用し始めます。詳細は[TiKV 設定ファイル - ログ](/tikv-configuration-file.md#log-new-in-v540)を参照してください。
+-   TiDB サーバー、PD サーバー、および TiKV サーバーは、ログ名、出力形式、ローテーションと有効期限のルールを管理するために、ログ関連パラメーターに統一された命名方法を使用し始めます。詳細は[TiKV 構成ファイル - ログ](/tikv-configuration-file.md#log-new-in-v540)を参照してください。
 -   v5.4.0 以降、プラン キャッシュ経由でキャッシュされた実行プランの SQL バインディングを作成すると、バインディングにより、対応するクエリに対してすでにキャッシュされているプラ​​ンが無効になります。新しいバインディングは、v5.4.0 より前にキャッシュされた実行プランには影響しません。
 -   v5.3 以前のバージョンでは、 [TiDB データ移行 (DM)](https://docs.pingcap.com/tidb-data-migration/v5.3/)ドキュメントは TiDB ドキュメントから独立しています。 v5.4 以降、DM ドキュメントは同じバージョンの TiDB ドキュメントに統合されています。 [DMドキュメント](/dm/dm-overview.md) DM ドキュメント サイトにアクセスせずに直接読むことができます。
 -   cdclog とともにポイントインタイム リカバリ (PITR) の実験的機能を削除します。 v5.4.0 以降、cdclog ベースの PITR および cdclog はサポートされなくなりました。
@@ -188,7 +188,7 @@ v5.4 の主な新機能または改善点は次のとおりです。
 
     v5.4.0 以降、TiDB は一部の`ANALYZE`構成の永続化をサポートします。この機能を使用すると、既存の構成を将来の統計収集に簡単に再利用できます。
 
-    `ANALYZE`構成永続機能はデフォルトで有効`ON`なっています (デフォルトでは、システム変数`tidb_analyze_version`は`2`は[`tidb_persist_analyze_options`](/system-variables.md#tidb_persist_analyze_options-new-in-v540)です)。この機能を使用すると、ステートメントを手動で実行するときに`ANALYZE`ステートメントで指定された永続性構成を記録できます。一度記録されると、次回 TiDB が自動的に統計を更新するとき、またはこれらの構成を指定せずに統計を手動で収集するときに、TiDB は記録された構成に従って統計を収集します。
+    `ANALYZE`構成永続機能はデフォルトで有効になっています (デフォルトでは、システム変数`tidb_analyze_version`は`2` [`tidb_persist_analyze_options`](/system-variables.md#tidb_persist_analyze_options-new-in-v540) `ON`です)。この機能を使用すると、ステートメントを手動で実行するときに`ANALYZE`ステートメントで指定された永続性構成を記録できます。一度記録されると、次回 TiDB が自動的に統計を更新するとき、またはこれらの構成を指定せずに統計を手動で収集するときに、TiDB は記録された構成に従って統計を収集します。
 
     [ユーザードキュメント](/statistics.md#persist-analyze-configurations)
 
@@ -232,7 +232,7 @@ v5.4 の主な新機能または改善点は次のとおりです。
 
     -   `start-relay`および`stop-relay`コマンドを使用したリレー ログの動的有効化および無効化をサポートします。
 
-    -   リレーログのステータスを`source`にバインドします。 `source` 、DM ワーカーに移行された後も、有効または無効の元のステータスを維持します。
+    -   リレーログのステータスを`source`にバインドします。 `source` DM ワーカーに移行された後も、有効または無効の元のステータスを維持します。
 
     -   中継ログのstorageパスをDM-worker設定ファイルに移動します。
 
@@ -378,7 +378,7 @@ v5.4 の主な新機能または改善点は次のとおりです。
 
 -   TiFlash
 
-    -   MPP クエリが停止するとTiFlash がpanicになる問題を修正
+    -   MPP クエリが停止するとTiFlashがpanicになる問題を修正
     -   `where <string>`句を含むクエリが間違った結果を返す問題を修正
     -   整数の主キーの列タイプをより大きな範囲に設定するときに発生する可能性があるデータの不整合の潜在的な問題を修正します。
     -   入力時刻が 1970-01-01 00:00:01 UTC より前の場合、 `unix_timestamp`の動作が TiDB または MySQL の動作と一致しない問題を修正
@@ -411,7 +411,7 @@ v5.4 の主な新機能または改善点は次のとおりです。
         -   RHEL リリース[#3584](https://github.com/pingcap/tiflow/issues/3584)のタイムゾーンの問題によりサービスを開始できない問題を修正
         -   不正確なチェックポイント[#3545](https://github.com/pingcap/tiflow/issues/3545)によって引き起こされる潜在的なデータ損失の問題を修正します。
         -   コンテナ環境の OOM 問題を修正する[#1798](https://github.com/pingcap/tiflow/issues/1798)
-        -   `config.Metadata.Timeout` [#3352](https://github.com/pingcap/tiflow/issues/3352)の誤った構成によって引き起こされるレプリケーション停止の問題を修正します。
+        -   `config.Metadata.Timeout` [#3352](https://github.com/pingcap/tiflow/issues/3352)の誤った構成が原因でレプリケーションが停止する問題を修正
 
     -   TiDB データ移行 (DM)
 

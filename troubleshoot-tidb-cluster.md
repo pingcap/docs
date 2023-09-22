@@ -5,7 +5,7 @@ summary: Learn how to diagnose and resolve issues when you use TiDB.
 
 # TiDBクラスタのトラブルシューティング ガイド {#tidb-cluster-troubleshooting-guide}
 
-このガイドは、TiDB の使用中に発生する基本的な問題の診断と解決に役立ちます。問題が解決しない場合は、次の情報を収集してください[バグを報告](/support.md) :
+このガイドは、TiDB の使用中に基本的な問題を診断して解決するのに役立ちます。問題が解決しない場合は、次の情報を収集してください[バグを報告](/support.md) :
 
 -   正確なエラーメッセージとエラー発生時の操作
 -   すべてのコンポーネントの状態
@@ -40,7 +40,7 @@ summary: Learn how to diagnose and resolve issues when you use TiDB.
 
 -   起動パラメータにエラーがあります。
 
-    [TiDB の構成とオプション](/command-line-flags-for-tidb-configuration.md)を参照してください。
+    [TiDB の構成とオプション](/command-line-flags-for-tidb-configuration.md)参照してください。
 
 -   港が占領されています。
 
@@ -79,9 +79,9 @@ summary: Learn how to diagnose and resolve issues when you use TiDB.
 
 `pd-server`起動できない場合は、以下を参照してください。
 
--   起動パラメータにエラーがあります。
+-   起動パラメータに誤りがあります。
 
-    [PDの構成とオプション](/command-line-flags-for-pd-configuration.md)を参照してください。
+    [PDの構成とオプション](/command-line-flags-for-pd-configuration.md)参照してください。
 
 -   港が占領されています。
 

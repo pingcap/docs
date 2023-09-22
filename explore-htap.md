@@ -62,7 +62,7 @@ TiDB HTAPの機能を調べる前に、データ量に応じて TiDB と対応�
 -   TiFlash
 
     -   TiFlashノードのない TiDB クラスターをデプロイした場合は、現在の TiDB クラスターにTiFlashノードを追加します。詳細については、 [TiFlashクラスターをスケールアウトする](/scale-tidb-using-tiup.md#scale-out-a-tiflash-cluster)を参照してください。
-    -   TiDB クラスターをデプロイしていない場合は、 [TiUPを使用して TiDBクラスタをデプロイ](/production-deployment-using-tiup.md)を参照してください。最小限の TiDB トポロジに基づいて、 [TiFlashのトポロジ](/tiflash-deployment-topology.md)もデプロイする必要があります。
+    -   TiDB クラスターをデプロイしていない場合は、 [TiUPを使用して TiDBクラスタをデプロイ](/production-deployment-using-tiup.md)を参照してください。最小限の TiDB トポロジに基づいて、 [TiFlashのトポロジー](/tiflash-deployment-topology.md)もデプロイする必要があります。
     -   TiFlashノードの数を選択する方法を決定するときは、次のシナリオを考慮してください。
 
         -   ユースケースで小規模な分析処理とアドホック クエリを備えた OLTP が必要な場合は、1 つまたは複数のTiFlashノードをデプロイします。これらにより、分析クエリの速度が大幅に向上します。

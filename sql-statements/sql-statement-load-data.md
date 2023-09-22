@@ -41,24 +41,24 @@ TiDB Cloudを使用している場合、 `LOAD DATA`ステートメントを使�
 
 -   以下は、TiDB サーバーレスの接続文字列の例です。
 
-    ```
-    mysql --connect-timeout 15 -u '<user_name>' -h <host_name> -P 4000 -D test --ssl-mode=VERIFY_IDENTITY --ssl-ca=/etc/ssl/cert.pem -p<your_password> --local-infile
-    ```
+        mysql --connect-timeout 15 -u '<user_name>' -h <host_name> -P 4000 -D test --ssl-mode=VERIFY_IDENTITY --ssl-ca=/etc/ssl/cert.pem -p<your_password> --local-infile
 
 -   以下は、TiDB Dended の接続文字列の例です。
 
-    ```
-    mysql --connect-timeout 15 --ssl-mode=VERIFY_IDENTITY --ssl-ca=<CA_path> --tls-version="TLSv1.2" -u root -h <host_name> -P 4000 -D test -p<your_password> --local-infile
-    ```
+        mysql --connect-timeout 15 --ssl-mode=VERIFY_IDENTITY --ssl-ca=<CA_path> --tls-version="TLSv1.2" -u root -h <host_name> -P 4000 -D test -p<your_password> --local-infile
 
 ### S3 および GCSstorage {#s3-and-gcs-storage}
 
 <CustomContent platform="tidb">
-  `LOCAL`指定しない場合、 [外部storage](/br/backup-and-restore-storages.md)で詳しく説明されているように、 file パラメーターは有効な S3 または GCS パスである必要があります。
+
+`LOCAL`指定しない場合、 [外部storage](/br/backup-and-restore-storages.md)で詳しく説明されているように、 file パラメーターは有効な S3 または GCS パスである必要があります。
+
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
-  `LOCAL`指定しない場合、 [外部storage](https://docs.pingcap.com/tidb/stable/backup-and-restore-storages)で詳しく説明されているように、 file パラメーターは有効な S3 または GCS パスである必要があります。
+
+`LOCAL`指定しない場合、 [外部storage](https://docs.pingcap.com/tidb/stable/backup-and-restore-storages)で詳しく説明されているように、 file パラメーターは有効な S3 または GCS パスである必要があります。
+
 </CustomContent>
 
 データ ファイルが S3 または GCS に保存されている場合、個々のファイルをインポートすることも、ワイルドカード文字`*`を使用してインポートする複数のファイルに一致させることもできます。ワイルドカードはサブディレクトリ内のファイルを再帰的に処理しないことに注意してください。以下にいくつかの例を示します。
@@ -87,10 +87,8 @@ TiDB Cloudを使用している場合、 `LOAD DATA`ステートメントを使�
 
 次のデータ形式を例として取り上げます。
 
-```
-"bob","20","street 1"\r\n
-"alice","33","street 1"\r\n
-```
+    "bob","20","street 1"\r\n
+    "alice","33","street 1"\r\n
 
 `bob` 、および`street 1`を抽出する場合は、フィールド区切り文字を`','`に、囲み文字を`'\"'`に指定します`20`
 
@@ -112,11 +110,15 @@ LINES TERMINATED BY '\n' STARTING BY ''
 次の例では、 `LOAD DATA`を使用してデータをインポートします。フィールド区切り文字としてカンマを指定します。データを囲む二重引用符は無視されます。ファイルの最初の行は無視されます。
 
 <CustomContent platform="tidb">
-  `ERROR 1148 (42000): the used command is not allowed with this TiDB version`表示された場合は、トラブルシューティングについて[エラー 1148 (42000): 使用されたコマンドは、この TiDB バージョンでは許可されていません](/error-codes.md#mysql-native-error-messages)を参照してください。
+
+`ERROR 1148 (42000): the used command is not allowed with this TiDB version`表示された場合は、 [エラー 1148 (42000): 使用されたコマンドは、この TiDB バージョンでは許可されていません](/error-codes.md#mysql-native-error-messages)トラブルシューティングを参照してください。
+
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
-  `ERROR 1148 (42000): the used command is not allowed with this TiDB version`表示された場合は、トラブルシューティングについて[エラー 1148 (42000): 使用されたコマンドは、この TiDB バージョンでは許可されていません](https://docs.pingcap.com/tidb/stable/error-codes#mysql-native-error-messages)を参照してください。
+
+`ERROR 1148 (42000): the used command is not allowed with this TiDB version`表示された場合は、 [エラー 1148 (42000): 使用されたコマンドは、この TiDB バージョンでは許可されていません](https://docs.pingcap.com/tidb/stable/error-codes#mysql-native-error-messages)トラブルシューティングを参照してください。
+
 </CustomContent>
 
 ```sql
@@ -141,36 +143,44 @@ LOAD DATA LOCAL INFILE '/mnt/evo970/data-sets/bikeshare-data/2017Q4-capitalbikes
 `LOAD DATA`ステートメントの構文は、解析されても無視される文字セット オプションを除き、MySQL の構文と互換性があります。構文の互換性の違いが見つかった場合は、 [バグを報告](https://docs.pingcap.com/tidb/stable/support)を実行できます。
 
 <CustomContent platform="tidb">
-  > **注記：**
-  >
-  > -   TiDB v4.0.0 より前のバージョンでは、20000 行ごとに`LOAD DATA`コミットされます。
-  > -   TiDB v4.0.0 から v6.6.0 までのバージョンの場合、TiDB はデフォルトで 1 つのトランザクションですべての行をコミットします。
-  > -   TiDB v4.0.0 以前のバージョンからアップグレードした後、 `ERROR 8004 (HY000) at line 1: Transaction is too large, size: 100000058`が発生する可能性があります。このエラーを解決する推奨方法は、 `tidb.toml`ファイルの[`txn-total-size-limit`](/tidb-configuration-file.md#txn-total-size-limit)値を増やすことです。この制限を増やすことができない場合は、 [`tidb_dml_batch_size`](/system-variables.md#tidb_dml_batch_size)から`20000`に設定することで、アップグレード前の動作を復元することもできます。 v7.0.0 以降、 `tidb_dml_batch_size` `LOAD DATA`ステートメントに影響しなくなることに注意してください。
-  > -   トランザクションでコミットされた行の数に関係なく、明示的なトランザクションの[`ROLLBACK`](/sql-statements/sql-statement-rollback.md)ステートメントによって`LOAD DATA`ロールバックされません。
-  > -   `LOAD DATA`ステートメントは、TiDB トランザクション モードの構成に関係なく、常に楽観的トランザクション モードで実行されます。
+
+> **注記：**
+>
+> -   TiDB v4.0.0 より前のバージョンでは、20000 行ごとに`LOAD DATA`コミットされます。
+> -   TiDB v4.0.0 から v6.6.0 までのバージョンの場合、TiDB はデフォルトで 1 つのトランザクションですべての行をコミットします。
+> -   TiDB v4.0.0 以前のバージョンからアップグレードした後、 `ERROR 8004 (HY000) at line 1: Transaction is too large, size: 100000058`が発生する可能性があります。このエラーを解決する推奨方法は、 `tidb.toml`ファイルの[`txn-total-size-limit`](/tidb-configuration-file.md#txn-total-size-limit)値を増やすことです。この制限を増やすことができない場合は、 [`tidb_dml_batch_size`](/system-variables.md#tidb_dml_batch_size)から`20000`に設定することで、アップグレード前の動作を復元することもできます。 v7.0.0 以降、 `tidb_dml_batch_size` `LOAD DATA`ステートメントに影響しなくなることに注意してください。
+> -   トランザクションでコミットされた行の数に関係なく、明示的なトランザクションの[`ROLLBACK`](/sql-statements/sql-statement-rollback.md)ステートメントによって`LOAD DATA`ロールバックされません。
+> -   `LOAD DATA`ステートメントは、TiDB トランザクション モードの構成に関係なく、常に楽観的トランザクション モードで実行されます。
+
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
-  > **注記：**
-  >
-  > -   TiDB v4.0.0 より前のバージョンでは、20000 行ごとに`LOAD DATA`コミットされます。
-  > -   TiDB v4.0.0 から v6.6.0 までのバージョンの場合、TiDB はデフォルトで 1 つのトランザクションですべての行をコミットします。
-  > -   TiDB v7.0.0 以降、バッチでコミットされる行数は`LOAD DATA`ステートメントの`WITH batch_size=<number>`パラメーターによって制御され、デフォルトではコミットあたり 1000 行になります。
-  > -   TiDB v4.0.0 以前のバージョンからアップグレードした後、 `ERROR 8004 (HY000) at line 1: Transaction is too large, size: 100000058`が発生する可能性があります。このエラーを解決するには、 [`tidb_dml_batch_size`](/system-variables.md#tidb_dml_batch_size)を`20000`に設定することで、アップグレード前の動作を復元できます。
-  > -   トランザクションでコミットされた行の数に関係なく、明示的なトランザクションの[`ROLLBACK`](/sql-statements/sql-statement-rollback.md)ステートメントによって`LOAD DATA`ロールバックされません。
-  > -   `LOAD DATA`ステートメントは、TiDB トランザクション モードの構成に関係なく、常に楽観的トランザクション モードで実行されます。
+
+> **注記：**
+>
+> -   TiDB v4.0.0 より前のバージョンでは、20000 行ごとに`LOAD DATA`コミットされます。
+> -   TiDB v4.0.0 から v6.6.0 までのバージョンの場合、TiDB はデフォルトで 1 つのトランザクションですべての行をコミットします。
+> -   TiDB v7.0.0 以降、バッチでコミットされる行数は`LOAD DATA`ステートメントの`WITH batch_size=<number>`パラメーターによって制御され、デフォルトではコミットあたり 1000 行になります。
+> -   TiDB v4.0.0 以前のバージョンからアップグレードした後、 `ERROR 8004 (HY000) at line 1: Transaction is too large, size: 100000058`が発生する可能性があります。このエラーを解決するには、 [`tidb_dml_batch_size`](/system-variables.md#tidb_dml_batch_size)を`20000`に設定することで、アップグレード前の動作を復元できます。
+> -   トランザクションでコミットされた行の数に関係なく、明示的なトランザクションの[`ROLLBACK`](/sql-statements/sql-statement-rollback.md)ステートメントによって`LOAD DATA`ロールバックされません。
+> -   `LOAD DATA`ステートメントは、TiDB トランザクション モードの構成に関係なく、常に楽観的トランザクション モードで実行されます。
+
 </CustomContent>
 
 ## こちらも参照 {#see-also}
 
 <CustomContent platform="tidb">
-  -   [入れる](/sql-statements/sql-statement-insert.md)
-  -   [TiDB 楽観的トランザクションモデル](/optimistic-transaction.md)
-  -   [TiDB ペシミスティックトランザクションモード](/pessimistic-transaction.md)
+
+-   [入れる](/sql-statements/sql-statement-insert.md)
+-   [TiDB 楽観的トランザクションモデル](/optimistic-transaction.md)
+-   [TiDB ペシミスティックトランザクションモード](/pessimistic-transaction.md)
+
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
-  -   [入れる](/sql-statements/sql-statement-insert.md)
-  -   [TiDB 楽観的トランザクションモデル](/optimistic-transaction.md)
-  -   [TiDB ペシミスティックトランザクションモード](/pessimistic-transaction.md)
+
+-   [入れる](/sql-statements/sql-statement-insert.md)
+-   [TiDB 楽観的トランザクションモデル](/optimistic-transaction.md)
+-   [TiDB ペシミスティックトランザクションモード](/pessimistic-transaction.md)
+
 </CustomContent>

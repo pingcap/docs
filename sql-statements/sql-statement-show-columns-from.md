@@ -5,7 +5,7 @@ summary: An overview of the usage of SHOW [FULL] COLUMNS FROM for the TiDB datab
 
 # からの [完全な] 列を表示 {#show-full-columns-from}
 
-ステートメント`SHOW [FULL] COLUMNS FROM <table_name>`は、テーブルまたはビューの列を便利な表形式で記述します。オプションのキーワード`FULL`その列に対して現在のユーザーが持つ権限を表示し、テーブル定義の`comment`を表示します。
+ステートメント`SHOW [FULL] COLUMNS FROM <table_name>`は、テーブルまたはビューの列を便利な表形式で記述します。オプションのキーワード`FULL`現在のユーザーがその列に対して持つ権限を表示し、 `comment`はテーブル定義からの権限を表示します。
 
 ステートメント`SHOW [FULL] FIELDS FROM <table_name>` 、 `DESC <table_name>` 、 `DESCRIBE <table_name>` 、および`EXPLAIN <table_name>` 、このステートメントの別名です。
 

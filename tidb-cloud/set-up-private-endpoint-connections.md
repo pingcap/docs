@@ -31,7 +31,7 @@ AWS PrivateLink を利用したエンドポイント接続は安全かつプラ�
 
 ほとんどのシナリオでは、VPC ピアリング経由でプライベート エンドポイント接続を使用することをお勧めします。ただし、次のシナリオでは、プライベート エンドポイント接続の代わりに VPC ピアリングを使用する必要があります。
 
--   高可用性を実現するために、 [TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview)クラスターを使用して、ソース TiDB クラスターからリージョンをまたがるターゲット TiDB クラスターにデータを複製しています。現在、プライベート エンドポイントはクロスリージョン接続をサポートしていません。
+-   高可用性を実現するために、 [TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview)クラスターを使用して、ソース TiDB クラスターからリージョンをまたがるターゲット TiDB クラスターにデータをレプリケートしています。現在、プライベート エンドポイントはクロスリージョン接続をサポートしていません。
 -   TiCDC クラスターを使用してデータをダウンストリームクラスター (Amazon Aurora、MySQL、Kafka など) にレプリケートしていますが、エンドポイント サービスを独自に維持することはできません。
 -   PD または TiKV ノードに直接接続しています。
 
@@ -83,54 +83,57 @@ aws ec2 create-vpc-endpoint --vpc-id ${your_vpc_id} --region ${your_region} --se
 次に、AWS マネジメントコンソールまたは AWS CLI を使用して、AWS インターフェイスエンドポイントを作成します。
 
 <SimpleTab>
-  <div label="Use AWS Console">
-    AWS マネジメントコンソールを使用して VPC インターフェイスエンドポイントを作成するには、次の手順を実行します。
+<div label="Use AWS Console">
 
-    1.  [AWS マネジメントコンソール](https://aws.amazon.com/console/)にサインインし、 [https://console.aws.amazon.com/vpc/](https://console.aws.amazon.com/vpc/)で Amazon VPC コンソールを開きます。
+AWS マネジメントコンソールを使用して VPC インターフェイスエンドポイントを作成するには、次の手順を実行します。
 
-    2.  ナビゲーション ペインで**[エンドポイント]**をクリックし、右上隅の**[エンドポイントの作成]**をクリックします。
+1.  [AWS マネジメントコンソール](https://aws.amazon.com/console/)にサインインし、 [https://console.aws.amazon.com/vpc/](https://console.aws.amazon.com/vpc/)で Amazon VPC コンソールを開きます。
 
-        **[エンドポイントの作成]**ページが表示されます。
+2.  ナビゲーション ペインで**[エンドポイント]**をクリックし、右上隅の**[エンドポイントの作成]**をクリックします。
 
-        ![Verify endpoint service](/media/tidb-cloud/private-endpoint/create-endpoint-2.png)
+    **[エンドポイントの作成]**ページが表示されます。
 
-    3.  **[その他のエンドポイント サービス]**を選択します。
+    ![Verify endpoint service](/media/tidb-cloud/private-endpoint/create-endpoint-2.png)
 
-    4.  TiDB Cloudコンソールで見つけたサービス名を入力します。
+3.  **[その他のエンドポイント サービス]**を選択します。
 
-    5.  **[サービスの確認]**をクリックします。
+4.  TiDB Cloudコンソールで見つけたサービス名を入力します。
 
-    6.  ドロップダウン リストから VPC を選択します。
+5.  **[サービスの確認]**をクリックします。
 
-    7.  TiDB クラスターが配置されているアベイラビリティーゾーンを**「サブネット」**領域で選択します。
+6.  ドロップダウン リストから VPC を選択します。
 
-        > **ヒント：**
-        >
-        > サービスが 3 つ以上のアベイラビリティ ゾーン (AZ) にまたがっている場合、 **[サブネット]**領域で AZ を選択できない場合があります。この問題は、TiDB クラスターが配置されている AZ に加えて、選択したリージョンに追加の AZ がある場合に発生します。この場合は[PingCAP テクニカル サポート](https://docs.pingcap.com/tidbcloud/tidb-cloud-support)にご連絡ください。
-
-    8.  **[Securityグループ]**領域でセキュリティ グループを適切に選択します。
-
-        > **注記：**
-        >
-        > 選択したセキュリティ グループが、ポート 4000 または顧客定義のポートで EC2 インスタンスからの受信アクセスを許可していることを確認してください。
-
-    9.  **「エンドポイントの作成」**をクリックします。
-  </div>
-
-  <div label="Use AWS CLI">
-    AWS CLI を使用して VPC インターフェイスエンドポイントを作成するには、次の手順を実行します。
-
-    1.  プライベート エンドポイント作成ページの**[VPC ID]**フィールドと**[サブネット ID]**フィールドに入力します。 ID は AWS マネジメントコンソールから取得できます。
-    2.  ページの下部にあるコマンドをコピーし、ターミナルで実行します。次に、 **「次へ」**をクリックします。
+7.  TiDB クラスターが配置されているアベイラビリティーゾーンを**「サブネット」**領域で選択します。
 
     > **ヒント：**
     >
-    > -   コマンドを実行する前に、AWS CLI をインストールして設定する必要があります。詳細については[AWS CLI 設定の基本](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html)を参照してください。
+    > サービスが 3 つ以上のアベイラビリティ ゾーン (AZ) にまたがっている場合、 **[サブネット]**領域で AZ を選択できない場合があります。この問題は、TiDB クラスターが配置されている AZ に加えて、選択したリージョンに追加の AZ がある場合に発生します。この場合は[PingCAP テクニカル サポート](https://docs.pingcap.com/tidbcloud/tidb-cloud-support)にご連絡ください。
+
+8.  **[Securityグループ]**領域でセキュリティ グループを適切に選択します。
+
+    > **注記：**
     >
-    > -   サービスが 3 つを超えるアベイラビリティ ゾーン (AZ) にまたがっている場合は、VPC エンドポイント サービスがサブネットの AZ をサポートしていないことを示すエラー メッセージが表示されます。この問題は、TiDB クラスターが配置されている AZ に加えて、選択したリージョンに追加の AZ がある場合に発生します。この場合、 [PingCAP テクニカル サポート](https://docs.pingcap.com/tidbcloud/tidb-cloud-support)にご連絡ください。
-    >
-    > -   TiDB Cloud がバックグラウンドでエンドポイント サービスの作成を完了するまで、コマンドをコピーすることはできません。
-  </div>
+    > 選択したセキュリティ グループが、ポート 4000 または顧客定義のポートで EC2 インスタンスからの受信アクセスを許可していることを確認してください。
+
+9.  **「エンドポイントの作成」**をクリックします。
+
+</div>
+<div label="Use AWS CLI">
+
+AWS CLI を使用して VPC インターフェイスエンドポイントを作成するには、次の手順を実行します。
+
+1.  プライベート エンドポイント作成ページの**[VPC ID]**フィールドと**[サブネット ID]**フィールドに入力します。 ID は AWS マネジメントコンソールから取得できます。
+2.  ページの下部にあるコマンドをコピーし、ターミナルで実行します。次に、 **「次へ」**をクリックします。
+
+> **ヒント：**
+>
+> -   コマンドを実行する前に、AWS CLI をインストールして設定する必要があります。詳細については[AWS CLI 設定の基本](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html)を参照してください。
+>
+> -   サービスが 3 つを超えるアベイラビリティ ゾーン (AZ) にまたがっている場合は、VPC エンドポイント サービスがサブネットの AZ をサポートしていないことを示すエラー メッセージが表示されます。この問題は、TiDB クラスターが配置されている AZ に加えて、選択したリージョンに追加の AZ がある場合に発生します。この場合、 [PingCAP テクニカル サポート](https://docs.pingcap.com/tidbcloud/tidb-cloud-support)にご連絡ください。
+>
+> -   TiDB Cloud がバックグラウンドでエンドポイント サービスの作成を完了するまで、コマンドをコピーすることはできません。
+
+</div>
 </SimpleTab>
 
 ### ステップ 4. エンドポイント接続を受け入れる {#step-4-accept-the-endpoint-connection}
@@ -144,24 +147,27 @@ aws ec2 create-vpc-endpoint --vpc-id ${your_vpc_id} --region ${your_region} --se
 AWS でプライベート DNS を有効にします。 AWS マネジメントコンソールまたは AWS CLI のいずれかを使用できます。
 
 <SimpleTab>
-  <div label="Use AWS Console">
-    AWS マネジメントコンソールでプライベート DNS を有効にするには:
+<div label="Use AWS Console">
 
-    1.  **[VPC]** &gt; **[エンドポイント]**に移動します。
-    2.  エンドポイント ID を右クリックし、 **[プライベート DNS 名の変更]**を選択します。
-    3.  **「このエンドポイントに対して有効にする**」チェックボックスを選択します。
-    4.  **「変更を保存」**をクリックします。
+AWS マネジメントコンソールでプライベート DNS を有効にするには:
 
-        ![Enable private DNS](/media/tidb-cloud/private-endpoint/enable-private-dns.png)
-  </div>
+1.  **[VPC]** &gt; **[エンドポイント]**に移動します。
+2.  エンドポイント ID を右クリックし、 **[プライベート DNS 名の変更]**を選択します。
+3.  **「このエンドポイントに対して有効にする**」チェックボックスを選択します。
+4.  **「変更を保存」**をクリックします。
 
-  <div label="Use AWS CLI">
-    AWS CLI を使用してプライベート DNS を有効にするには、コマンドをコピーし、AWS CLI で実行します。
+    ![Enable private DNS](/media/tidb-cloud/private-endpoint/enable-private-dns.png)
 
-    ```bash
-    aws ec2 modify-vpc-endpoint --vpc-endpoint-id ${your_vpc_endpoint_id} --private-dns-enabled
-    ```
-  </div>
+</div>
+<div label="Use AWS CLI">
+
+AWS CLI を使用してプライベート DNS を有効にするには、コマンドをコピーし、AWS CLI で実行します。
+
+```bash
+aws ec2 modify-vpc-endpoint --vpc-endpoint-id ${your_vpc_endpoint_id} --private-dns-enabled
+```
+
+</div>
 </SimpleTab>
 
 TiDB Cloudコンソールで**[作成]**をクリックして、プライベート エンドポイントの作成を完了します。

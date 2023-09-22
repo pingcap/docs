@@ -23,68 +23,71 @@ Summary: Learn how to create a changefeed to stream data from a TiDB Dedicated c
 ターゲット TiDB クラスターのクラスター概要ページに移動します。左側のナビゲーションペインで**[Changefeed]**をクリックし、 **[Create Changefeed]**をクリックして、宛先として**Amazon S3**または**GCS**を選択します。設定プロセスは、選択した宛先によって異なります。
 
 <SimpleTab>
-  <div label="Amazon S3">
-    **Amazon S3**の場合、 **S3 エンドポイント**領域に`S3 URI` 、 `Access Key ID` 、および`Secret Access Key`を入力します。 TiDB クラスターと同じリージョンに S3 バケットを作成します。
+<div label="Amazon S3">
 
-    ![s3\_endpoint](/media/tidb-cloud/changefeed/sink-to-cloud-storage-s3-endpoint.jpg)
-  </div>
+**Amazon S3**の場合、 **S3 エンドポイント**領域に`S3 URI` 、 `Access Key ID` 、および`Secret Access Key`を入力します。 TiDB クラスターと同じリージョンに S3 バケットを作成します。
 
-  <div label="GCS">
-    **GCS**の場合、 **GCS Endpoint**を入力する前に、まず GCS バケットへのアクセスを許可する必要があります。次の手順を実行します。
+![s3\_endpoint](/media/tidb-cloud/changefeed/sink-to-cloud-storage-s3-endpoint.jpg)
 
-    1.  TiDB Cloudコンソールで、 TiDB Cloudに GCS バケットへのアクセスを許可するために使用される**サービス アカウント ID**を記録します。
+</div>
+<div label="GCS">
 
-        ![gcs\_endpoint](/media/tidb-cloud/changefeed/sink-to-cloud-storage-gcs-endpoint.png)
+**GCS**の場合、 **GCS Endpoint**を入力する前に、まず GCS バケットへのアクセスを許可する必要があります。次の手順を実行します。
 
-    2.  Google Cloud コンソールで、GCS バケットのIAMロールを作成します。
+1.  TiDB Cloudコンソールで、 TiDB Cloudに GCS バケットへのアクセスを許可するために使用される**サービス アカウント ID**を記録します。
 
-        1.  [Google Cloud コンソール](https://console.cloud.google.com/)にサインインします。
+    ![gcs\_endpoint](/media/tidb-cloud/changefeed/sink-to-cloud-storage-gcs-endpoint.png)
 
-        2.  [役割](https://console.cloud.google.com/iam-admin/roles)ページに移動し、 **[ロールの作成]**をクリックします。
+2.  Google Cloud コンソールで、GCS バケットのIAMロールを作成します。
 
-            ![Create a role](/media/tidb-cloud/changefeed/sink-to-cloud-storage-gcs-create-role.png)
+    1.  [Google Cloud コンソール](https://console.cloud.google.com/)にサインインします。
 
-        3.  ロールの名前、説明、ID、およびロール起動ステージを入力します。ロールの作成後にロール名を変更することはできません。
+    2.  [役割](https://console.cloud.google.com/iam-admin/roles)ページに移動し、 **[ロールの作成]**をクリックします。
 
-        4.  **[アクセス許可の追加]**をクリックします。次の読み取り専用権限をロールに追加し、 **[追加]**をクリックします。
+        ![Create a role](/media/tidb-cloud/changefeed/sink-to-cloud-storage-gcs-create-role.png)
 
-            -   storage.buckets.get
-            -   storage.objects.create
-            -   storage.オブジェクト.削除
-            -   storage.objects.get
-            -   storage.objects.list
-            -   storage.objects.update
+    3.  ロールの名前、説明、ID、およびロール起動ステージを入力します。ロールの作成後にロール名を変更することはできません。
 
-        ![Add permissions](/media/tidb-cloud/changefeed/sink-to-cloud-storage-gcs-assign-permission.png)
+    4.  **[アクセス許可の追加]**をクリックします。次の読み取り専用権限をロールに追加し、 **[追加]**をクリックします。
 
-    3.  [バケツ](https://console.cloud.google.com/storage/browser)ページに移動し、 TiDB Cloudがアクセスする GCS バケットを選択します。 GCS バケットは TiDB クラスターと同じリージョンに存在する必要があることに注意してください。
+        -   storage.buckets.get
+        -   storage.objects.create
+        -   storage.オブジェクト.削除
+        -   storage.objects.get
+        -   storage.objects.list
+        -   storage.objects.update
 
-    4.  **[バケットの詳細]**ページで、 **[アクセス許可]**タブをクリックし、 **[アクセスの許可]**をクリックします。
+    ![Add permissions](/media/tidb-cloud/changefeed/sink-to-cloud-storage-gcs-assign-permission.png)
 
-        ![Grant Access to the bucket ](/media/tidb-cloud/changefeed/sink-to-cloud-storage-gcs-grant-access-1.png)
+3.  [バケツ](https://console.cloud.google.com/storage/browser)ページに移動し、 TiDB Cloudがアクセスする GCS バケットを選択します。 GCS バケットは TiDB クラスターと同じリージョンに存在する必要があることに注意してください。
 
-    5.  次の情報を入力してバケットへのアクセスを許可し、 **[保存]**をクリックします。
+4.  **[バケットの詳細]**ページで、 **[アクセス許可]**タブをクリックし、 **[アクセスの許可]**をクリックします。
 
-        -   **[新しいプリンシパル]**フィールドに、前に記録したターゲット TiDB クラスターの**サービス アカウント ID を**貼り付けます。
+    ![Grant Access to the bucket ](/media/tidb-cloud/changefeed/sink-to-cloud-storage-gcs-grant-access-1.png)
 
-        -   **[ロールの選択]**ドロップダウン リストに、作成したIAMロールの名前を入力し、フィルター結果から名前を選択します。
+5.  次の情報を入力してバケットへのアクセスを許可し、 **[保存]**をクリックします。
 
-        > **注記：**
-        >
-        > TiDB Cloudへのアクセスを削除するには、付与したアクセスを削除するだけです。
+    -   **[新しいプリンシパル]**フィールドに、前に記録したターゲット TiDB クラスターの**サービス アカウント ID を**貼り付けます。
 
-    6.  **「バケットの詳細」**ページで、 **「オブジェクト」**タブをクリックします。
+    -   **[ロールの選択]**ドロップダウン リストに、作成したIAMロールの名前を入力し、フィルター結果から名前を選択します。
 
-        -   バケットの gsutil URI を取得するには、コピー ボタンをクリックし、プレフィックスとして`gs://`を追加します。たとえば、バケット名が`test-sink-gcs`の場合、URI は`gs://test-sink-gcs/`になります。
+    > **注記：**
+    >
+    > TiDB Cloudへのアクセスを削除するには、付与したアクセスを削除するだけです。
 
-            ![Get bucket URI](/media/tidb-cloud/changefeed/sink-to-cloud-storage-gcs-uri01.png)
+6.  **「バケットの詳細」**ページで、 **「オブジェクト」**タブをクリックします。
 
-        -   フォルダーの gsutil URI を取得するには、フォルダーを開いてコピー ボタンをクリックし、プレフィックスとして`gs://`を追加します。たとえば、バケット名が`test-sink-gcs` 、フォルダー名が`changefeed-xxx`の場合、URI は`gs://test-sink-gcs/changefeed-xxx`になります。
+    -   バケットの gsutil URI を取得するには、コピー ボタンをクリックし、プレフィックスとして`gs://`を追加します。たとえば、バケット名が`test-sink-gcs`の場合、URI は`gs://test-sink-gcs/`になります。
 
-            ![Get bucket URI](/media/tidb-cloud/changefeed/sink-to-cloud-storage-gcs-uri02.png)
+        ![Get bucket URI](/media/tidb-cloud/changefeed/sink-to-cloud-storage-gcs-uri01.png)
 
-    7.  TiDB Cloudコンソールで、Changefeed の**「宛先の構成」**ページに移動し、**バケットの gsutil URI**フィールドに入力します。
-  </div>
+    -   フォルダーの gsutil URI を取得するには、フォルダーを開いてコピー ボタンをクリックし、プレフィックスとして`gs://`を追加します。たとえば、バケット名が`test-sink-gcs` 、フォルダー名が`changefeed-xxx`の場合、URI は`gs://test-sink-gcs/changefeed-xxx`になります。
+
+        ![Get bucket URI](/media/tidb-cloud/changefeed/sink-to-cloud-storage-gcs-uri02.png)
+
+7.  TiDB Cloudコンソールで、Changefeed の**「宛先の構成」**ページに移動し、**バケットの gsutil URI**フィールドに入力します。
+
+</div>
 </SimpleTab>
 
 **[次へ]**をクリックして、TiDB 専用クラスターから Amazon S3 または GCS への接続を確立します。 TiDB Cloud は、接続が成功したかどうかを自動的にテストして検証します。
@@ -111,24 +114,27 @@ Summary: Learn how to create a changefeed to stream data from a TiDB Dedicated c
 3.  **[データ形式]**領域で、 **CSV 形式**または**Canal-JSON**形式のいずれかを選択します。
 
     <SimpleTab>
-      <div label="Configure CSV format">
-        **CSV**形式を設定するには、次のフィールドに入力します。
+     <div label="Configure CSV format">
 
-        -   **バイナリエンコード方式**: バイナリデータのエンコード方式です。 **Base64** (デフォルト) または**hex**を選択できます。 AWS DMS と統合する場合は、 **hex**を使用します。
-        -   **日付区切り文字**: 年、月、日に基づいてデータをローテーションするか、まったくローテーションしないことを選択します。
-        -   **区切り文字**: CSV ファイル内の値を区切るために使用する文字を指定します。カンマ ( `,` ) は最も一般的に使用される区切り文字です。
-        -   **引用符**: 区切り文字または特殊文字を含む値を囲むために使用する文字を指定します。通常、二重引用符 ( `"` ) が引用符文字として使用されます。
-        -   **Null/空の値**: CSV ファイル内で Null または空の値をどのように表現するかを指定します。これは、データを適切に処理および解釈するために重要です。
-        -   **Include Commit Ts** : CSV 行に[`commit-ts`](https://docs.pingcap.com/tidb/stable/ticdc-sink-to-cloud-storage#replicate-change-data-to-storage-services)を含めるかどうかを制御します。
-      </div>
+    **CSV**形式を設定するには、次のフィールドに入力します。
 
-      <div label="Configure Canal-JSON format">
-        Canal-JSON はプレーンな JSON テキスト形式です。設定するには、次のフィールドに入力します。
+    -   **バイナリエンコード方式**: バイナリデータのエンコード方式です。 **Base64** (デフォルト) または**hex**を選択できます。 AWS DMS と統合する場合は、 **hex**を使用します。
+    -   **日付区切り文字**: 年、月、日に基づいてデータをローテーションするか、まったくローテーションしないことを選択します。
+    -   **区切り文字**: CSV ファイル内の値を区切るために使用する文字を指定します。カンマ ( `,` ) は最も一般的に使用される区切り文字です。
+    -   **引用符**: 区切り文字または特殊文字を含む値を囲むために使用する文字を指定します。通常、二重引用符 ( `"` ) が引用符文字として使用されます。
+    -   **Null/空の値**: CSV ファイル内で Null または空の値をどのように表現するかを指定します。これは、データを適切に処理および解釈するために重要です。
+    -   **Include Commit Ts** : CSV 行に[`commit-ts`](https://docs.pingcap.com/tidb/stable/ticdc-sink-to-cloud-storage#replicate-change-data-to-storage-services)を含めるかどうかを制御します。
 
-        -   **日付区切り文字**: 年、月、日に基づいてデータをローテーションするか、まったくローテーションしないことを選択します。
-        -   **TiDB 拡張機能を有効にする**: このオプションを有効にすると、TiCDC は[ウォーターマークイベント](https://docs.pingcap.com/tidb/stable/ticdc-canal-json#watermark-event)を送信し、 [TiDB 拡張フィールド](https://docs.pingcap.com/tidb/stable/ticdc-canal-json#tidb-extension-field) Canal-JSON メッセージに追加します。
-      </div>
-    </SimpleTab>
+    </div>
+     <div label="Configure Canal-JSON format">
+
+    Canal-JSON はプレーンな JSON テキスト形式です。設定するには、次のフィールドに入力します。
+
+    -   **日付区切り文字**: 年、月、日に基づいてデータをローテーションするか、まったくローテーションしないことを選択します。
+    -   **TiDB 拡張機能を有効にする**: このオプションを有効にすると、TiCDC は[ウォーターマークイベント](https://docs.pingcap.com/tidb/stable/ticdc-canal-json#watermark-event)を送信し、 [TiDB 拡張フィールド](https://docs.pingcap.com/tidb/stable/ticdc-canal-json#tidb-extension-field) Canal-JSON メッセージに追加します。
+
+    </div>
+     </SimpleTab>
 
 4.  **「フラッシュパラメータ」**領域では、次の 2 つの項目を設定できます。
 

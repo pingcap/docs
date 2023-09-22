@@ -94,31 +94,25 @@
 
 ### ステップ 2: フォークされたリポジトリのクローンをローカルstorageに作成する {#step-2-clone-the-forked-repository-to-local-storage}
 
-```
-cd $working_dir # Comes to the directory that you want put the fork in, for example, "cd ~/Documents/GitHub"
-git clone git@github.com:$user/docs.git # Replace "$user" with your GitHub ID
+    cd $working_dir # Comes to the directory that you want put the fork in, for example, "cd ~/Documents/GitHub"
+    git clone git@github.com:$user/docs.git # Replace "$user" with your GitHub ID
 
-cd $working_dir/docs
-git remote add upstream git@github.com:pingcap/docs.git # Adds the upstream repo
-git remote -v # Confirms that your remote makes sense
-```
+    cd $working_dir/docs
+    git remote add upstream git@github.com:pingcap/docs.git # Adds the upstream repo
+    git remote -v # Confirms that your remote makes sense
 
 ### ステップ 3: 新しいブランチを作成する {#step-3-create-a-new-branch}
 
 1.  ローカルマスターをupstream/masterで最新の状態にします。
 
-    ```
-    cd $working_dir/docs
-    git fetch upstream
-    git checkout master
-    git rebase upstream/master
-    ```
+        cd $working_dir/docs
+        git fetch upstream
+        git checkout master
+        git rebase upstream/master
 
 2.  master ブランチに基づいて新しいブランチを作成します。
 
-    ```
-    git checkout -b new-branch-name
-    ```
+        git checkout -b new-branch-name
 
 ### ステップ 4: 何かをする {#step-4-do-something}
 
@@ -126,27 +120,21 @@ git remote -v # Confirms that your remote makes sense
 
 ### ステップ 5: 変更をコミットする {#step-5-commit-your-changes}
 
-```
-git status # Checks the local status
-git add <file> ... # Adds the file(s) you want to commit. If you want to commit all changes, you can directly use `git add.`
-git commit -m "commit-message: update the xx"
-```
+    git status # Checks the local status
+    git add <file> ... # Adds the file(s) you want to commit. If you want to commit all changes, you can directly use `git add.`
+    git commit -m "commit-message: update the xx"
 
 [コミットメッセージのスタイル](https://github.com/pingcap/community/blob/master/contributors/commit-message-pr-style.md#how-to-write-a-good-commit-message)を参照してください。
 
 ### ステップ 6: ブランチをアップストリーム/マスターと同期した状態に保つ {#step-6-keep-your-branch-in-sync-with-upstream-master}
 
-```
-# While on your new branch
-git fetch upstream
-git rebase upstream/master
-```
+    # While on your new branch
+    git fetch upstream
+    git rebase upstream/master
 
 ### ステップ 7: 変更をリモートにプッシュする {#step-7-push-your-changes-to-the-remote}
 
-```
-git push -u origin new-branch-name # "-u" is used to track the remote branch from origin
-```
+    git push -u origin new-branch-name # "-u" is used to track the remote branch from origin
 
 ### ステップ 8: プル リクエストを作成する {#step-8-create-a-pull-request}
 

@@ -71,7 +71,7 @@ TiDB Cloudアカウントをお持ちでない場合は、 [ここ](https://tidb
 
 4.  右側でクラスターと課金情報を確認します。
 
-5.  支払い方法を追加していない場合は、右下隅にある**「クレジット カードを追加」**をクリックします。
+5.  支払い方法を追加していない場合は、右下隅にある**「クレジット カードを追加」を**クリックします。
 
     > **注記：**
     >
@@ -91,4 +91,4 @@ TiDB Cloudアカウントをお持ちでない場合は、 [ここ](https://tidb
 
 ## 次は何ですか {#what-s-next}
 
-クラスターがTiDB Cloud上に作成されたら、 [TiDB 専用クラスタに接続する](/tidb-cloud/connect-via-standard-connection-serverless.md)で提供される方法を介してクラスターに接続できます。
+クラスターがTiDB Cloud上に作成されたら、 [TiDB 専用クラスタに接続する](/tidb-cloud/connect-via-standard-connection-serverless.md)で提供される方法でクラスターに接続できます。

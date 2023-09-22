@@ -235,7 +235,7 @@ mysql> EXPLAIN SELECT /*+ use_index_merge(t2, idx) */ * FROM t2 WHERE a=1 AND JS
 6 rows in set, 1 warning (0.00 sec)
 ```
 
-同じ多値インデックスにアクセスできる複数の`member of`式で構成される`OR`条件の場合、IndexMerge を使用して多値インデックスにアクセスできます。
+同じ複数値インデックスにアクセスできる複数の`member of`式で構成される`OR`条件の場合、IndexMerge を使用して複数値インデックスにアクセスできます。
 
 ```sql
 mysql> CREATE TABLE t3 (a INT, j JSON, INDEX idx(a, (CAST(j AS SIGNED ARRAY))));
@@ -276,15 +276,13 @@ mysql> explain select /*+ use_index_merge(t, k1, k2, ka) */ * from t where (1 me
 
 現在、TiDB は、複数のインデックスを使用して同時にアクセスする次のプランを生成するのではなく、1 つのインデックスを使用したアクセスのみをサポートしています。
 
-```
-Selection
-└─IndexMerge
-  ├─IndexRangeScan(k1)
-  ├─IndexRangeScan(k2)
-  ├─IndexRangeScan(ka)
-  └─Selection
-    └─TableRowIDScan
-```
+    Selection
+    └─IndexMerge
+      ├─IndexRangeScan(k1)
+      ├─IndexRangeScan(k2)
+      ├─IndexRangeScan(ka)
+      └─Selection
+        └─TableRowIDScan
 
 ### サポートされていないシナリオ {#unsupported-scenarios}
 

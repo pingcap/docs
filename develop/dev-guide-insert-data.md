@@ -85,7 +85,7 @@ try (Connection connection = ds.getConnection()) {
 |   `prepStmtCacheSqlLimit`  | プリペアドステートメントの最大サイズ (デフォルトでは 256 文字) |                                                      プリペアドステートメントが 256 文字を超える場合                                                      | プリペアドステートメントの実際のサイズに応じて構成されます |
 |     `prepStmtCacheSize`    |  プリペアドステートメントキャッシュの最大数 (デフォルトでは 25) |                                                       準備されたステートメントの数が 25 を超える場合                                                      |   実際の準備済みステートメントの数に応じて構成されます  |
 | `rewriteBatchedStatements` |     **Batched**ステートメントを書き換えるかどうか    |                                                              バッチ操作が必要な場合                                                             |             `true`            |
-|     `allowMultiQueries`    |              バッチ操作を開始する             | `rewriteBatchedStatements = true`と`useServerPrepStmts = true`の場合、 [クライアントのバグ](https://bugs.mysql.com/bug.php?id=96623)これを設定する必要があるため |             `true`            |
+|     `allowMultiQueries`    |              バッチ操作を開始する             | [クライアントのバグ](https://bugs.mysql.com/bug.php?id=96623)は`rewriteBatchedStatements = true`と`useServerPrepStmts = true`のときにこれを設定する必要があるため |             `true`            |
 
 MySQL JDBC Driver は、 `useConfigs`統合構成も提供します。 `maxPerformance`で構成すると、一連の構成を構成することと同じになります。 `mysql:mysql-connector-java:8.0.28`例にとると、 `useConfigs=maxPerformance`には次のものが含まれます。
 
@@ -224,7 +224,7 @@ Python の完全な例については、以下を参照してください。
 
 ## 一括挿入 {#bulk-insert}
 
-大量のデータを TiDB クラスターに迅速にインポートする必要がある場合は、 **PingCAP**が提供するデータ移行用のさまざまなツールを使用することをお勧めします。 `INSERT`ステートメントの使用は、効率的ではなく、例外やその他の問題を自分で処理する必要があるため、最良の方法ではありません。
+大量のデータを TiDB クラスターに迅速にインポートする必要がある場合は、データ移行用に**PingCAP**が提供するさまざまなツールを使用することをお勧めします。 `INSERT`ステートメントの使用は、効率的ではなく、例外やその他の問題を自分で処理する必要があるため、最良の方法ではありません。
 
 一括挿入に推奨されるツールは次のとおりです。
 
@@ -240,7 +240,7 @@ Python の完全な例については、以下を参照してください。
 
 <CustomContent platform="tidb-cloud">
 
--   データインポート: [TiDB Cloudコンソール](https://tidbcloud.com/)の[インポートの作成](/tidb-cloud/import-sample-data.md)ページ。 **Dumpling の**エクスポート データをインポートしたり、ローカルの**CSV**ファイルをインポートしたり、 [Amazon S3 または GCS からTiDB Cloudに CSV ファイルをインポート](/tidb-cloud/import-csv-files.md)実行したりできます。ローカル ディスク、Amazon S3 クラウド ディスク、または GCS クラウド ディスクからのデータの読み取りもサポートします。
+-   データインポート: [TiDB Cloudコンソール](https://tidbcloud.com/)の[インポートの作成](/tidb-cloud/import-sample-data.md)ページ。 **Dumpling の**エクスポート データをインポートしたり、ローカルの**CSV**ファイルをインポートしたり、 [Amazon S3 または GCS からTiDB Cloudに CSV ファイルをインポート](/tidb-cloud/import-csv-files.md)実行したりできます。ローカル ディスク、Amazon S3 クラウド ディスク、または GCS クラウド ディスクからのデータの読み取りもサポートしています。
 -   データ複製: [TiDB データ移行](https://docs.pingcap.com/tidb/stable/dm-overview) 。 MySQL、MariaDB、Amazon Auroraデータベースを TiDB にレプリケートできます。また、ソース データベースからのシャード化されたインスタンスとテーブルのマージと移行もサポートします。
 -   データのバックアップと復元: TiDB Cloudコンソールの[バックアップ](/tidb-cloud/backup-and-restore.md)ページ。 **Dumpling**と比較して、バックアップと復元は***ビッグ データの***シナリオにより適しています。
 

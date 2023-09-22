@@ -245,7 +245,7 @@ URI の`[query_parameters]`については、次のパラメータを設定で�
 
 ### データ・タイプ {#data-type}
 
-このセクションでは、 `schema_{table-version}_{hash}.json`ファイル (以下、次のセクションでは「スキーマ ファイル」と呼びます) で使用されるデータ型について説明します。データ型は`T(M[, D])`として定義されています。詳細は[データ型](/data-type-overview.md)を参照してください。
+このセクションでは、 `schema_{table-version}_{hash}.json`ファイル (以降のセクションでは「スキーマ ファイル」と呼びます) で使用されるデータ型について説明します。データ型は`T(M[, D])`として定義されています。詳細は[データ型](/data-type-overview.md)を参照してください。
 
 #### 整数型 {#integer-types}
 
@@ -268,7 +268,7 @@ TiDB の整数型は`IT[(M)] [UNSIGNED]`として定義されます。
 
 TiDB の 10 進数タイプは`DT[(M,D)][UNSIGNED]`として定義されます。
 
--   `DT`は浮動小数点型で、 `FLOAT` 、 `DOUBLE` 、 `DECIMAL` 、または`NUMERIC`いずれかになります。
+-   `DT`は浮動小数点型で、 `FLOAT` 、 `DOUBLE` 、 `DECIMAL` 、または`NUMERIC`のいずれかになります。
 -   `M`はデータ型の精度、または合計桁数です。
 -   `D`は小数点以下の桁数です。
 
@@ -317,7 +317,7 @@ TiDB の時間タイプは`TT[(M)]`として定義されます。
 
 TiDB の文字列タイプは`ST[(M)]`として定義されます。
 
--   `ST`は文字列タイプで、 `CHAR` 、 `VARCHAR` 、 `TEXT` 、 `BINARY` 、 `BLOB` 、または`JSON`のいずれかです。
+-   `ST`は文字列タイプで、 `CHAR` 、 `VARCHAR` 、 `TEXT` 、 `BINARY` 、 `BLOB` 、または`JSON`のいずれかになります。
 -   `M`は文字列の最大長です。
 
 文字列タイプはスキーマ ファイル内で次のように定義されます。

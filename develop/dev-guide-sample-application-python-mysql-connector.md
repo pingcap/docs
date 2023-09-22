@@ -26,17 +26,20 @@ TiDB は MySQL 互換データベースであり、 [MySQL コネクタ/Python](
 -   TiDB クラスター。
 
 <CustomContent platform="tidb">
-  **TiDB クラスターがない場合は、次のように作成できます。**
 
-  -   (推奨) [TiDB サーバーレスクラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って、独自のTiDB Cloudクラスターを作成します。
-  -   [ローカル テスト TiDB クラスターをデプロイ](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番TiDB クラスターをデプロイ](/production-deployment-using-tiup.md)に従ってローカル クラスターを作成します。
+**TiDB クラスターがない場合は、次のように作成できます。**
+
+-   (推奨) [TiDB サーバーレスクラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って、独自のTiDB Cloudクラスターを作成します。
+-   [ローカル テスト TiDB クラスターをデプロイ](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番TiDB クラスターをデプロイ](/production-deployment-using-tiup.md)に従ってローカル クラスターを作成します。
+
 </CustomContent>
-
 <CustomContent platform="tidb-cloud">
-  **TiDB クラスターがない場合は、次のように作成できます。**
 
-  -   (推奨) [TiDB サーバーレスクラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って、独自のTiDB Cloudクラスターを作成します。
-  -   [ローカル テスト TiDB クラスターをデプロイ](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb#deploy-a-local-test-cluster)または[本番TiDB クラスターをデプロイ](https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup)に従ってローカル クラスターを作成します。
+**TiDB クラスターがない場合は、次のように作成できます。**
+
+-   (推奨) [TiDB サーバーレスクラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って、独自のTiDB Cloudクラスターを作成します。
+-   [ローカル テスト TiDB クラスターをデプロイ](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb#deploy-a-local-test-cluster)または[本番TiDB クラスターをデプロイ](https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup)に従ってローカル クラスターを作成します。
+
 </CustomContent>
 
 ## サンプル アプリを実行して TiDB に接続する {#run-the-sample-app-to-connect-to-tidb}
@@ -65,103 +68,107 @@ pip install -r requirements.txt
 選択した TiDB デプロイメント オプションに応じて、TiDB クラスターに接続します。
 
 <SimpleTab>
-  <div label="TiDB Serverless">
-    1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット クラスターの名前をクリックして、その概要ページに移動します。
+<div label="TiDB Serverless">
 
-    2.  右上隅にある**「接続」**をクリックします。接続ダイアログが表示されます。
+1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット クラスターの名前をクリックして、その概要ページに移動します。
 
-    3.  接続ダイアログの設定が動作環境と一致していることを確認してください。
+2.  右上隅にある**「接続」**をクリックします。接続ダイアログが表示されます。
 
-        -   **エンドポイント タイプは**`Public`に設定されます
+3.  接続ダイアログの設定が動作環境と一致していることを確認してください。
 
-        -   **[接続先] は**`General`に設定されています
+    -   **エンドポイント タイプは**`Public`に設定されます
 
-        -   **オペレーティング システムが**環境に一致します。
+    -   **[接続先] は**`General`に設定されています
 
-        > **ヒント：**
-        >
-        > プログラムが Windows Subsystem for Linux (WSL) で実行されている場合は、対応する Linux ディストリビューションに切り替えます。
+    -   **オペレーティング システムが**環境に一致します。
 
-    4.  **「パスワードの作成」**をクリックしてランダムなパスワードを作成します。
+    > **ヒント：**
+    >
+    > プログラムが Windows Subsystem for Linux (WSL) で実行されている場合は、対応する Linux ディストリビューションに切り替えます。
 
-        > **ヒント：**
-        >
-        > 以前にパスワードを作成したことがある場合は、元のパスワードを使用するか、 **「パスワードのリセット」**をクリックして新しいパスワードを生成できます。
+4.  **「パスワードの作成」**をクリックしてランダムなパスワードを作成します。
 
-    5.  次のコマンドを実行して`.env.example`をコピーし、名前を`.env`に変更します。
+    > **ヒント：**
+    >
+    > 以前にパスワードを作成したことがある場合は、元のパスワードを使用するか、 **「パスワードのリセット」**をクリックして新しいパスワードを生成できます。
 
-        ```shell
-        cp .env.example .env
-        ```
+5.  次のコマンドを実行して`.env.example`をコピーし、名前を`.env`に変更します。
 
-    6.  対応する接続​​文字列をコピーして`.env`ファイルに貼り付けます。結果の例は次のとおりです。
+    ```shell
+    cp .env.example .env
+    ```
 
-        ```dotenv
-        TIDB_HOST='{host}'  # e.g. gateway01.ap-northeast-1.prod.aws.tidbcloud.com
-        TIDB_PORT='4000'
-        TIDB_USER='{user}'  # e.g. xxxxxx.root
-        TIDB_PASSWORD='{password}'
-        TIDB_DB_NAME='test'
-        CA_PATH='{ssl_ca}'  # e.g. /etc/ssl/certs/ca-certificates.crt (Debian / Ubuntu / Arch)
-        ```
+6.  対応する接続​​文字列をコピーして`.env`ファイルに貼り付けます。結果の例は次のとおりです。
 
-        プレースホルダー`{}` 、接続ダイアログから取得した接続パラメーターに必ず置き換えてください。
+    ```dotenv
+    TIDB_HOST='{host}'  # e.g. gateway01.ap-northeast-1.prod.aws.tidbcloud.com
+    TIDB_PORT='4000'
+    TIDB_USER='{user}'  # e.g. xxxxxx.root
+    TIDB_PASSWORD='{password}'
+    TIDB_DB_NAME='test'
+    CA_PATH='{ssl_ca}'  # e.g. /etc/ssl/certs/ca-certificates.crt (Debian / Ubuntu / Arch)
+    ```
 
-    7.  `.env`ファイルを保存します。
-  </div>
+    プレースホルダー`{}` 、接続ダイアログから取得した接続パラメーターに必ず置き換えてください。
 
-  <div label="TiDB Dedicated">
-    1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット クラスターの名前をクリックして、その概要ページに移動します。
+7.  `.env`ファイルを保存します。
 
-    2.  右上隅にある**「接続」**をクリックします。接続ダイアログが表示されます。
+</div>
+<div label="TiDB Dedicated">
 
-    3.  **「どこからでもアクセスを許可」**をクリックし、 **「TiDB クラスター CA のダウンロード」**をクリックして CA 証明書をダウンロードします。
+1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット クラスターの名前をクリックして、その概要ページに移動します。
 
-        接続文字列の取得方法の詳細については、 [TiDB専用標準接続](https://docs.pingcap.com/tidbcloud/connect-via-standard-connection)を参照してください。
+2.  右上隅にある**「接続」**をクリックします。接続ダイアログが表示されます。
 
-    4.  次のコマンドを実行して`.env.example`をコピーし、名前を`.env`に変更します。
+3.  **「どこからでもアクセスを許可」**をクリックし、 **「TiDB クラスター CA のダウンロード」**をクリックして CA 証明書をダウンロードします。
 
-        ```shell
-        cp .env.example .env
-        ```
+    接続文字列の取得方法の詳細については、 [TiDB専用標準接続](https://docs.pingcap.com/tidbcloud/connect-via-standard-connection)を参照してください。
 
-    5.  対応する接続​​文字列をコピーして`.env`ファイルに貼り付けます。結果の例は次のとおりです。
+4.  次のコマンドを実行して`.env.example`をコピーし、名前を`.env`に変更します。
 
-        ```dotenv
-        TIDB_HOST='{host}'  # e.g. tidb.xxxx.clusters.tidb-cloud.com
-        TIDB_PORT='4000'
-        TIDB_USER='{user}'  # e.g. root
-        TIDB_PASSWORD='{password}'
-        TIDB_DB_NAME='test'
-        CA_PATH='{your-downloaded-ca-path}'
-        ```
+    ```shell
+    cp .env.example .env
+    ```
 
-        必ずプレースホルダー`{}`接続ダイアログから取得した接続パラメーターに置き換え、 `CA_PATH`前の手順でダウンロードした証明書パスで構成してください。
+5.  対応する接続​​文字列をコピーして`.env`ファイルに貼り付けます。結果の例は次のとおりです。
 
-    6.  `.env`ファイルを保存します。
-  </div>
+    ```dotenv
+    TIDB_HOST='{host}'  # e.g. tidb.xxxx.clusters.tidb-cloud.com
+    TIDB_PORT='4000'
+    TIDB_USER='{user}'  # e.g. root
+    TIDB_PASSWORD='{password}'
+    TIDB_DB_NAME='test'
+    CA_PATH='{your-downloaded-ca-path}'
+    ```
 
-  <div label="TiDB Self-Hosted">
-    1.  次のコマンドを実行して`.env.example`をコピーし、名前を`.env`に変更します。
+    必ずプレースホルダー`{}`接続ダイアログから取得した接続パラメーターに置き換え、 `CA_PATH`前の手順でダウンロードした証明書パスで構成してください。
 
-        ```shell
-        cp .env.example .env
-        ```
+6.  `.env`ファイルを保存します。
 
-    2.  対応する接続​​文字列をコピーして`.env`ファイルに貼り付けます。結果の例は次のとおりです。
+</div>
+<div label="TiDB Self-Hosted">
 
-        ```dotenv
-        TIDB_HOST='{tidb_server_host}'
-        TIDB_PORT='4000'
-        TIDB_USER='root'
-        TIDB_PASSWORD='{password}'
-        TIDB_DB_NAME='test'
-        ```
+1.  次のコマンドを実行して`.env.example`をコピーし、名前を`.env`に変更します。
 
-        必ずプレースホルダー`{}`接続パラメーターに置き換えて、 `CA_PATH`行を削除してください。 TiDB をローカルで実行している場合、デフォルトのホスト アドレスは`127.0.0.1`で、パスワードは空です。
+    ```shell
+    cp .env.example .env
+    ```
 
-    3.  `.env`ファイルを保存します。
-  </div>
+2.  対応する接続​​文字列をコピーして`.env`ファイルに貼り付けます。結果の例は次のとおりです。
+
+    ```dotenv
+    TIDB_HOST='{tidb_server_host}'
+    TIDB_PORT='4000'
+    TIDB_USER='root'
+    TIDB_PASSWORD='{password}'
+    TIDB_DB_NAME='test'
+    ```
+
+    必ずプレースホルダー`{}`接続パラメーターに置き換えて、 `CA_PATH`行を削除してください。 TiDB をローカルで実行している場合、デフォルトのホスト アドレスは`127.0.0.1`で、パスワードは空です。
+
+3.  `.env`ファイルを保存します。
+
+</div>
 </SimpleTab>
 
 ### ステップ 4: コードを実行して結果を確認する {#step-4-run-the-code-and-check-the-result}

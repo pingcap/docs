@@ -116,13 +116,11 @@ VPC ピアリング リクエストをリージョンに追加する前に、プ
 
     例えば：
 
-    ```
-    # Sets up the related variables
-    pcx_tidb_to_app_id="pcx-069f41efddcff66c8"
-    app_region="us-west-2"
-    app_vpc_id="vpc-0039fb90bb5cf8698"
-    tidbcloud_project_cidr="10.250.0.0/16"
-    ```
+        # Sets up the related variables
+        pcx_tidb_to_app_id="pcx-069f41efddcff66c8"
+        app_region="us-west-2"
+        app_vpc_id="vpc-0039fb90bb5cf8698"
+        tidbcloud_project_cidr="10.250.0.0/16"
 
 4.  次のコマンドを実行します。
 
