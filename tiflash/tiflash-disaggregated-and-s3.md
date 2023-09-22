@@ -46,7 +46,7 @@ TiFlash disaggregated storage and compute architecture is suitable for cost-effe
 
     You can also use other S3-compatible object storage, such as [MinIO](https://min.io/).
 
-    TiFlash will use the following S3 APIs for accessing data. Make sure that the nodes deployed with TiFlash have the necessary permissions for these APIs.
+    TiFlash needs to use the following S3 APIs for accessing data. Make sure that TiFlash nodes in your TiDB cluster have the necessary permissions for these APIs.
 
     - PutObject
     - GetObject
@@ -56,7 +56,7 @@ TiFlash disaggregated storage and compute architecture is suitable for cost-effe
     - GetObjectTagging
     - PutBucketLifecycle
 
-2. Make sure that there are no TiFlash nodes is deployed using the coupled storage and compute architecture in the TiDB cluster. If any, set the TiFlash replica count of all tables to `0` and then remove all TiFlash nodes. For example:
+2. Make sure that your TiDB cluster has no TiFlash nodes deployed using the coupled storage and compute architecture. If any, set the TiFlash replica count of all tables to `0` and then remove all TiFlash nodes. For example:
 
     ```sql
     SELECT * FROM INFORMATION_SCHEMA.TIFLASH_REPLICA; # Query all tables with TiFlash replicas
