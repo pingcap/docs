@@ -235,7 +235,7 @@ dispatchers = [
 - The tables that match the matcher rule are dispatched according to the policy specified by the corresponding topic expression. For example, the table `test3.aa` is dispatched according to `Topic expression 2`, and the table `test5.aa` is dispatched according to `Topic expression 3`.
 - For a table that matches more than one matcher rule, the topic expression corresponding to the top matcher will take precedence. For example, the table `test1.aa` is dispatched according to `Topic expression 1`.
 - For tables that do not match any matcher, the corresponding data change events are sent to the default topic specified in `-sink-uri`. For example, the table `test10.aa` is sent to the default topic.
-- For tables that match the matcher rule but do not have a topic dispatcher specified, the corresponding data changes are sent to the default topic specified in `-sink-uri`. For example, the table `test9.abc` is sent to the default topic.
+- For tables that match the matcher rule but do not have a topic dispatcher specified, the corresponding data changes are sent to the default topic specified in `-sink-uri`. For example, the table `test6.abc` is sent to the default topic.
 
 ### Topic dispatcher
 
