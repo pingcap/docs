@@ -89,13 +89,13 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.4/quick-start-with-
 
     For more information, see [documentation](/tiflash/tiflash-spill-disk.md).
 
-* Introduce a configurable TiKV read timeout [#45380](https://github.com/pingcap/tidb/issues/45380) @[crazycs520](https://github.com/crazycs520) **tw@hfxsd** <!--1560-->
+* Support configurable TiKV read timeout [#45380](https://github.com/pingcap/tidb/issues/45380) @[crazycs520](https://github.com/crazycs520) **tw@hfxsd** <!--1560-->
 
     Normally, TiKV processes requests very quickly, in a matter of milliseconds. However, when a TiKV node encounters disk I/O jitter or network latency, the request processing time can increase significantly. In versions earlier than v7.4.0, the timeout limit for TiKV requests was fixed and could not be adjusted, so TiDB had to wait for a timeout response when there was a problem with a TiKV node, which resulted in a noticeable impact on application query performance during jitter.
      
-    TiDB v7.4.0 introduces a new system variable [`TIDB_KV_READ_TIMEOUT(N)`](/system-variables.md#tidb_kv_read_timeout-new-in-v740), which lets you customize the timeout for RPC read requests that TiDB sends to TiKV in a query statement. It means that when the request sent to a TiKV node is delayed due to disk or network issues, TiDB can time out faster and resend the request to other TiKV nodes, thus reducing query latency. If the requests time out for all TiKV nodes, TiDB will retry using the default timeout. This system variable also supports setting the timeout for TiDB to send TiKV RPC read requests in query statements via the hint [`TIDB_KV_READ_TIMEOUT(N)`](/optimizer-hints.md#tidb_kv_read_timeoutn) to set the timeout for TiDB to send TiKV RPC read requests in query statements. This enhancement gives TiDB the flexibility to adapt to unstable network or storage environments, improving query performance and enhancing the user experience.
+    TiDB v7.4.0 introduces a new system variable [`tikv_client_read_timeout`](/system-variables.md#tikv_client_read_timeout-new-in-v740), which lets you customize the timeout for RPC read requests that TiDB sends to TiKV in a query statement. It means that when the request sent to a TiKV node is delayed due to disk or network issues, TiDB can time out faster and resend the request to other TiKV nodes, thus reducing query latency. If the requests time out for all TiKV nodes, TiDB will retry using the default timeout. This system variable also supports setting the timeout for TiDB to send TiKV RPC read requests in query statements via the hint [`TIDB_KV_READ_TIMEOUT(N)`](/optimizer-hints.md#tidb_kv_read_timeoutn) to set the timeout for TiDB to send TiKV RPC read requests in query statements. This enhancement gives TiDB the flexibility to adapt to unstable network or storage environments, improving query performance and enhancing the user experience.
 
-    For details, see [documentation](/system-variables.md#tidb_kv_read_timeout-new-in-v740).
+    For details, see [documentation](/system-variables.md#tikv_client_read_timeout-new-in-v740).
 
 * Support temporarily modifying some system variable values using an optimizer hint [#issue号](链接) @[winoros](https://github.com/winoros) **tw@Oreoxmt** <!--923-->
 
@@ -178,13 +178,13 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.4/quick-start-with-
 
 * Support adding session connection IDs and session aliases to logs [#46071](https://github.com/pingcap/tidb/issues/46071) @[lcwangchao](https://github.com/lcwangchao) **tw@hfxsd** <!--无 FD 及用户文档，只提供 release notes-->
    
-     When you're troubleshooting SQL execution problems, it's often necessary to correlate the contents of TiDB's component logs to pinpoint the root cause of the problem. Starting with v7.4.0, you can write session connection IDs (`CONNECTION_ID`) to session-related logs, including TiDB logs, slow query logs, and slow logs from the coprocessor on TiKV. You can correlate the contents of several types of logs based on session connection IDs to improve troubleshooting and diagnostic efficiency. 
+     When you troubleshoot SQL execution problems, it is often necessary to correlate the contents of TiDB component logs to pinpoint the root cause of the problem. Starting with v7.4.0, you can write session connection IDs (`CONNECTION_ID`) to session-related logs, including TiDB logs, slow query logs, and slow logs from the coprocessor on TiKV. You can correlate the contents of several types of logs based on session connection IDs to improve troubleshooting and diagnostic efficiency. 
 
      In addition, by setting the session-level system variable [`tidb_session_alias`](/system-variables.md#tidb_session_alias-new-in-v740), you can add custom identifiers to the logs mentioned above. With this ability to inject business identification information into the logs, you can correlate the contents of the logs with the business, build the link from the business to the logs, and reduce the difficulty of diagnostic work.     
 
-* TiDB Dashboard provides table view execution plans [#1589](https://github.com/pingcap/tidb-dashboard/issues/1589) @[baurine](https://github.com/baurine) **tw@Oreoxmt** <!--1434-->
+* TiDB Dashboard supports displaying execution plans in a table view [#1589](https://github.com/pingcap/tidb-dashboard/issues/1589) @[baurine](https://github.com/baurine) **tw@Oreoxmt** <!--1434-->
 
-    In v7.4.0, TiDB Dashboard provides table view execution plans on the **Slow Query** and **SQL Statement** pages to improve the diagnosis experience.
+    In v7.4.0, TiDB Dashboard supports displaying execution plans on the **Slow Query** and **SQL Statement** pages in a table view to improve the diagnosis experience.
 
     For more information, see [documentation](链接).
 
@@ -217,20 +217,19 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.4/quick-start-with-
 
     For more information, see [documentation](sql-statements/sql-statement-import-into.md).
 
-* Dumpling supports the user-defined terminator when exporting data to CSV files [#issue](https:// ) @[GMHDBJD](https://github.com/GMHDBJD) **tw@hfxsd** <!--1571-->
+* Dumpling supports the user-defined terminator when exporting data to CSV files [#46982](https://github.com/pingcap/tidb/issues/46982) @[GMHDBJD](https://github.com/GMHDBJD) **tw@hfxsd** <!--1571-->
 
-    Prior to v7.4.0, when Dumpling exported data to a CSV file, the default terminator is "\r\n", which could not be parsed by some downstream systems that could only parse the "\n" terminator , or had to be converted by a third-party tool to parse the CSV file. 
+    Prior to v7.4.0, when Dumpling exported data to a CSV file, the default terminator is "\r\n", which could not be parsed by some downstream systems that could only parse the "\n" terminator, or had to be converted by a third-party tool to parse the CSV file. 
     
-    Starting from v7.4.0, a new parameter `--csv-line-terminator` is introduced. This parameter allows you to pass in the required terminator when exporting data to a CSV file. This parameter supports `\r\n' and `\n'. The default terminator is `\r\n' to keep consistent with earlier versions.
+    Starting from v7.4.0, TiDB introduces a new parameter `--csv-line-terminator`. This parameter allows you to pass in the required terminator when exporting data to a CSV file. This parameter supports `\r\n' and `\n'. The default terminator is `\r\n' to keep consistent with earlier versions.
      
-    For details, see [documentation](待补充).
+    For details, see [documentation](/dumpling-overview.md#option-list-of-dumpling).
 
 * TiCDC supports replicating data to Pulsar [#9413](https://github.com/pingcap/tiflow/issues/9413) @[yumchina](https://github.com/yumchina) @[asddongmen](https://github.com/asddongmen) **tw@hfxsd** <!--1552-->
 
     TiCDC now supports seamless integration with Pulsar. Pulsar is a cloud-native and distributed message streaming platform that enhances your real-time data streaming experience. With this new capability, TiCDC provides you with the ability to easily capture and replicate TiDB changes to Pulsar, offering new possibilities for data processing and analytics capabilities. You can develop your own consumer applications that read and process newly generated change data from Pulsar to meet specific business needs. TiCDC currently supports replicating change data in the `canal-json` format.
 
     For details, see [documentation](/ticdc/ticdc-sink-to-pulsar.md).
-
 
 - TiCDC improves large message handling with claim check pattern [#9153](https://github.com/pingcap/tiflow/issues/9153) @[3AceShowHand](https://github.com/3AceShowHand) **tw@ran-huang** <!--1550 英文 comment 原文 https://internal.pingcap.net/jira/browse/FD-1550?focusedCommentId=149207&page=com.atlassian.jira.plugin.system.issuetabpanels:comment-tabpanel#comment-149207-->
 
@@ -252,7 +251,9 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.4/quick-start-with-
 
 | Variable name | Change type | Description |
 |--------|------------------------------|------|
-|        |                              |      |
+| [`tidb_session_alias`](/system-variables.md#tidb_session_alias-new-in-v740) |  Newly added | You can use this variable to customize the value of the `session_alias` column in the logs related to the current session. |
+| [`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740) | Newly added | This variable is an instance-level system variable. You can use it to control the service scope of TiDB nodes under the [TiDB distributed execution framework](/tidb-distributed-execution-framework.md). When you set `tidb_service_scope` of a TiDB node to `background`, the TiDB distributed execution framework schedules that TiDB node to execute background tasks, such as [`ADD INDEX`](/sql-statements/sql-statement-add-index.md) and [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md). |
+| [`tikv_client_read_timeout`](/system-variables.md#tikv_client_read_timeout-new-in-v740) | Newly added | You can use `tikv_client_read_timeout` to set the timeout for TiDB to send a TiKV RPC read request in a query. When a TiDB cluster is in an environment with unstable network or serious TiKV I/O latency jitter, and your application is sensitive to the latency of the SQL queries, you can set `tikv_client_read_timeout` to reduce the timeout of the TiKV RPC read requests. In this case, when a TiKV node has I/O latency jitter, TiDB can time out quickly and re-send the RPC request to the TiKV node where the next TiKV Region Peer is located. If the requests of all TiKV Region Peers time out, TiDB will retry with the default timeout (usually 40 seconds). |
 |        |                              |      |
 | [`tiflash_mem_quota_query_per_node`](/system-variables.md#tiflash_mem_quota_query_per_node-new-in-v740) | Newly added | Limits the maximum memory usage for a query on a TiFlash node. When the memory usage of a query exceeds this limit, TiFlash returns an error and terminates the query. The default valus is `0`, which means no limit.|
 | [`tiflash_query_spill_ratio`](/system-variables.md#tiflash_query_spill_ratio-new-in-v740) | Newly added | Controls the threshold for TiFlash [query-level spilling](/tiflash/tiflash-spill-disk.md#query-level-spilling). The default value is `0.7`. |
@@ -262,7 +263,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.4/quick-start-with-
 
 | Configuration file | Configuration parameter | Change type | Description |
 | -------- | -------- | -------- | -------- |
-|          |          |          |          |
+| Dumpling  | [`--csv-line-terminator`](/dumpling-overview.md#option-list-of-dumpling) | Newly added | you can specify the desired terminator with this option. This option supports "\r\n" and "\n". The default value is "\r\n", which is consistent with the earlier versions. |
 |          |          |          |          |
 | TiFlash | [`compact_log_min_gap`](/tiflash/tiflash-configuration.md) | Newly added | When the gap between the `applied_index` advanced by the current Raft state machine and the `applied_index` at the last disk spilling exceeds `compact_log_min_gap`, TiFlash executes the `CompactLog` command from TiKV and spills data to disk. |
 | TiFlash | [`storage.format_version`](/tiflash/tiflash-configuration.md) | Modified | Change the default value from `4` to `5`. The new format can reduce the number of physical files by merging smaller files. |
