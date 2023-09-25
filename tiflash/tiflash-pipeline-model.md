@@ -9,11 +9,10 @@ This document introduces the TiFlash pipeline execution model.
 
 Starting from v7.2.0, TiFlash supports a new execution model, the pipeline execution model.
 
-- **v7.2.0 and v7.3.0:** The TiFlash Pipeline Model was an experimental feature controlled by [`tidb_enable_tiflash_pipeline_model`](https://docs.pingcap.com/zh/tidb/v7.2/system-variables#tidb_enable_tiflash_pipeline_model-introduced-since-v720).
+- For v7.2.0 and v7.3.0: The pipeline execution model is experimental and is controlled by [`tidb_enable_tiflash_pipeline_model`](https://docs.pingcap.com/tidb/v7.2/system-variables#tidb_enable_tiflash_pipeline_model-introduced-since-v720).
+- For v7.4.0 and later versions: The pipeline execution model becomes generally available. It is an internal feature of TiFlash and is tightly integrated with TiFlash resource control. When you enable TiFlash resource control, the pipeline execution model is automatically enabled. For more information about how to use TiFlash resource control, refer to [Use resource control to achieve resource isolation](/tidb-resource-control.md#parameters-for-resource-control). Additionally, starting from v7.4.0, the system variable `tidb_enable_tiflash_pipeline_model` is deprecated.
 
-- **v7.4.0 and later versions:** The Pipeline Model has become an official feature. It is an internal feature of TiFlash and is tightly integrated with TiFlash resource management. When you enable TiFlash resource management, the Pipeline Model is automatically enabled. For details on how to use TiFlash resource management, refer to [Using Resource Control to Achieve Resource Isolation](/tidb-resource-control.md#related-parameters). Additionally, starting from v7.4.0, the variable `tidb_enable_tiflash_pipeline_model` has been deprecated.
-
-The Pipeline Model primarily draws inspiration from the paper titled [Morsel-Driven Parallelism: A NUMA-Aware Query Evaluation Framework for the Many-Core Age](https://dl.acm.org/doi/10.1145/2588555.2610507). It provides a sophisticated task scheduling model, distinct from traditional thread scheduling models. This approach reduces the overhead of operating system thread creation and scheduling while offering precise scheduling mechanisms.
+Inspired by the paper [Morsel-Driven Parallelism: A NUMA-Aware Query Evaluation Framework for the Many-Core Age](https://dl.acm.org/doi/10.1145/2588555.2610507), the TiFlash pipeline execution model provides a fine-grained task scheduling model, which is different from the traditional thread scheduling model. It reduces the overhead of operating system thread scheduling and provides a fine-grained scheduling mechanism.
 
 ## Design and implementation
 
