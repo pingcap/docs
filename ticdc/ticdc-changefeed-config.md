@@ -260,9 +260,9 @@ pulsar-producer-cache-size=10240
 compression-type=""
 # The timeout for the Pulsar client to establish a TCP connection with the server. The value is 5 seconds by default.
 connection-timeout=5
-# The timeout for Pulsar clients to initiate operations such as create and subscribe. The value is 30 seconds by default.
+# The timeout for Pulsar clients to initiate operations such as creating and subscribing a topic. The value is 30 seconds by default.
 operation-timeout=30
-# The maximum number of messages in a single batch for a Pulsar producer to send. The value is 1000 seconds by default.
+# The maximum number of messages in a single batch for a Pulsar producer to send. The value is 1000 by default.
 batching-max-messages=1000
 # The interval at which Pulsar producer messages are saved for batching. The value is 10 milliseconds by default.
 batching-max-publish-delay=10
