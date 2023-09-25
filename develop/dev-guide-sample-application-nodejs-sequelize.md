@@ -77,7 +77,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 
 1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
 
-2. Click **Connect** in the upper right corner. A connection dialog is displayed.
+2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
 
 3. Ensure the configurations in the connection dialog match your operating environment.
 
