@@ -291,7 +291,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.4/quick-start-with-
 
 + TiFlash
 
-    - note [#issue](链接) @[贡献者 GitHub ID](链接)
+    - Improve write performance during random write workloads by optimizing the spilling policy of the TiFlash write process [#7564](https://github.com/pingcap/tiflash/issues/7564) @[CalvinNeo](https://github.com/CalvinNeo) **tw@qiancai** <!--1309-->
     - note [#issue](链接) @[贡献者 GitHub ID](链接)
 
 + Tools
