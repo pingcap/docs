@@ -407,7 +407,6 @@
       - [`SHOW CREATE TABLE`](/sql-statements/sql-statement-show-create-table.md)
       - [`SHOW CREATE USER`](/sql-statements/sql-statement-show-create-user.md)
       - [`SHOW DATABASES`](/sql-statements/sql-statement-show-databases.md)
-      - [`SHOW DRAINER STATUS`](/sql-statements/sql-statement-show-drainer-status.md)
       - [`SHOW ENGINES`](/sql-statements/sql-statement-show-engines.md)
       - [`SHOW ERRORS`](/sql-statements/sql-statement-show-errors.md)
       - [`SHOW [FULL] FIELDS FROM`](/sql-statements/sql-statement-show-fields-from.md)

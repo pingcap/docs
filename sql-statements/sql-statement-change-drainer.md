@@ -7,7 +7,6 @@ summary: An overview of the usage of CHANGE DRAINER for the TiDB database.
 
 The `CHANGE DRAINER` statement modifies the status information for Drainer in the cluster.
 
-
 > **Note:**
 >
 > This feature is only applicable to TiDB Self-hosted and not available on [TiDB Cloud](https://docs.pingcap.com/tidbcloud/).

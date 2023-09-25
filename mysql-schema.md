@@ -48,7 +48,7 @@ Currently, the `help_topic` is NULL.
 
 > **Note:**
 >
-> The GC worker system tables are not applicable to TiDB Cloud.
+> The GC worker system tables are only applicable to TiDB Self-Hosted and not available on [TiDB Cloud](https://docs.pingcap.com/tidbcloud/).
 
 - `gc_delete_range`: the KV range to be deleted.
 - `gc_delete_range_done`: the deleted KV range
@@ -71,7 +71,7 @@ Currently, the `help_topic` is NULL.
 
 > **Note:**
 >
-> The `tidb`, `expr_pushdown_blacklist`, `opt_rule_blacklist`, and `table_cache_meta` system tables are not applicable to TiDB Cloud.
+> The `tidb`, `expr_pushdown_blacklist`, `opt_rule_blacklist`, and `table_cache_meta` system tables are only applicable to TiDB Self-Hosted and not available on [TiDB Cloud](https://docs.pingcap.com/tidbcloud/).
 
 - `GLOBAL_VARIABLES`: global system variable table
 - `tidb`: to record the version information when TiDB executes `bootstrap`
