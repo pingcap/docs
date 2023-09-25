@@ -302,7 +302,7 @@ For more information, refer to [Update data](/develop/dev-guide-update-data.md).
 
 ### Delete data
 
-The following query deletes the `Player` record with ID `6` that created in the [Insert data](#insert-data) section:
+The following query deletes the `Player` record with ID `6` that was created in the [Insert data](#insert-data) section:
 
 ```typescript
 logger.info('Deleting the new player...');
