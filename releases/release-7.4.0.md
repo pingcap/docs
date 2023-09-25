@@ -190,14 +190,6 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.4/quick-start-with-
 
 ### Data migration
 
-* Data Migration (DM) supports blocking incompatible (data-consistency-corrupting) DDL changes (experimental) [#9692](https://github.com/pingcap/tiflow/issues/9692) @[GMHDBJD](https://github.com/GMHDBJD) **tw@hfxsd** <!--1523-->
-
-     Prior to v7.4.0, the [Binlog filter](/dm/dm-binlog-event-filter.md) function using DM has a coarse granularity. For example, it can only filter DDL events with a large granularity such as `ALTER`, which is limited in some business scenarios. For example, you can only increase the precision of the decimal field type, but cannot decrease it.
-     
-     TiDB v7.4.0 introduces a new event name `incompatible DDL changes`, which is used to intercept DDLs whose changes will lead to data loss, data truncation, or loss of precision. It also reports error alerts, so that you can intervene in time to deal with them to avoid the impact on downstream business data.
-     
-     For details, see [documentation](待补充).
-
 * Support real-time update of checkpoint for continuous data validation [#issue号](链接) @[lichunzhu](https://github.com/lichunzhu) **tw@ran-huang** <!--1496-->
 
     Before v7.4.0, the continuous data validation feature is used to ensure the consistency of data replication from DM to downstream with upstream. This serves as the basis for cutting over business traffic from the upstream database to TiDB. However, due to various factors such as replication delay and waiting for re-validation of inconsistent data, the continuous validation checkpoint must be refreshed every few minutes. This is unacceptable for some business scenarios where the cutover time is limited to a few tens of seconds.
