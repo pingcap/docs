@@ -80,7 +80,7 @@ In this version, TiDB partition management adds:
 
 ### Scalability
 
-* TiDB introduces the ability to set the TiDB Service Scope to select the applicable TiDB nodes to perform concurrent `ADD INDEX` or `IMPORT INTO` tasks (experimental) [#46453](https://github.com/pingcap/tidb/pull/46453) @[ywqzzy](https://github.com/ywqzzy) **tw@hfxsd** <!--1505-->
+* Support setting the TiDB Service Scope to select the applicable TiDB nodes to perform concurrent `ADD INDEX` or `IMPORT INTO` tasks (experimental) [#46453](https://github.com/pingcap/tidb/pull/46453) @[ywqzzy](https://github.com/ywqzzy) **tw@hfxsd** <!--1505-->
 
     Executing `ADD INDEX` or `IMPORT INTO` tasks in parallel in a resource-intensive cluster can consume a large amount of TiDB node resources, which can lead to cluster performance degradation. Starting from v7.4.0, you can use the system variable [`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740) to control the service scope of each TiDB node under the [TiDB Backend Task Distributed Execution Framework](/tidb-distributed-execution- framework.md) for each TiDB node. You can select a few existing TiDB nodes or set the TiDB Service Scope for new TiDB nodes, and all parallel `ADD INDEX` and `IMPORT INTO` tasks only run on these nodes. This mechanism can avoid performance impact on existing services.
     
