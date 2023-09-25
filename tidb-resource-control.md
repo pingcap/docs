@@ -388,7 +388,7 @@ TiDB supports the following types of background tasks:
 - `lightning`: perform import tasks using [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md). Both physical and logical import modes of TiDB Lightning are supported.
 - `br`: perform backup and restore tasks using [BR](/br/backup-and-restore-overview.md). PITR is not supported.
 - `ddl`: control the resource usage during the batch data write back phase of Reorg DDLs.
-- `analyze`: the [collect statistics](/statistics.md#collect-statistics) tasks that are manually executed or automatically triggered by TiDB.
+- `stats`: the [collect statistics](/statistics.md#collect-statistics) tasks that are manually executed or automatically triggered by TiDB.
 
 </CustomContent>
 
@@ -397,7 +397,7 @@ TiDB supports the following types of background tasks:
 - `lightning`: perform import tasks using [TiDB Lightning](https://docs.pingcap.com/tidb/stable/tidb-lightning-overview). Both physical and logical import modes of TiDB Lightning are supported.
 - `br`: perform backup and restore tasks using [BR](https://docs.pingcap.com/tidb/stable/backup-and-restore-overview). PITR is not supported.
 - `ddl`: control the resource usage during the batch data write back phase of Reorg DDLs.
-- `analyze`: the [collect statistics](/statistics.md#collect-statistics) tasks that are manually executed or automatically triggered by TiDB.
+- `stats`: the [collect statistics](/statistics.md#collect-statistics) tasks that are manually executed or automatically triggered by TiDB.
 
 </CustomContent>
 
@@ -405,10 +405,10 @@ By default, the task types that are marked as background tasks are empty, and th
 
 #### Examples
 
-1. Create the `rg1` resource group and set `br` and `analyze` as background tasks.
+1. Create the `rg1` resource group and set `br` and `stats` as background tasks.
 
     ```sql
-    CREATE RESOURCE GROUP IF NOT EXISTS rg1 RU_PER_SEC = 500 BACKGROUND=(TASK_TYPES='br,analyze');
+    CREATE RESOURCE GROUP IF NOT EXISTS rg1 RU_PER_SEC = 500 BACKGROUND=(TASK_TYPES='br,stats');
     ```
 
 2. Change the `rg1` resource group to set `br` and `ddl` as background tasks.

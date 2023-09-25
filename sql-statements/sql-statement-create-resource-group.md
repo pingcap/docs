@@ -72,14 +72,6 @@ ResourceGroupRunawayActionOption ::=
     DRYRUN
 |   COOLDOWN
 |   KILL
-
-BackgroundOptionList ::=
-    DirectBackgroundOption
-|   BackgroundOptionList DirectBackgroundOption
-|   BackgroundOptionList ',' DirectBackgroundOption
-
-DirectBackgroundOption ::=
-    "TASK_TYPES" EqOpt stringLit
 ```
 
 The resource group name parameter (`ResourceGroupName`) must be globally unique.

@@ -86,7 +86,7 @@ TiDB supports the following `DirectResourceGroupOption`, where [Request Unit (RU
 | `PRIORITY`    | The absolute priority of tasks to be processed on TiKV  | `PRIORITY = HIGH` indicates that the priority is high. If not specified, the default value is `MEDIUM`. |
 | `BURSTABLE`   | If the `BURSTABLE` attribute is set, TiDB allows the corresponding resource group to use the available system resources when the quota is exceeded. |
 | `QUERY_LIMIT` | When the query execution meets this condition, the query is identified as a runaway query and the corresponding action is executed. | `QUERY_LIMIT=(EXEC_ELAPSED='60s', ACTION=KILL, WATCH=EXACT DURATION='10m')` indicates that the query is identified as a runaway query when the execution time exceeds 60 seconds. The query is terminated. All SQL statements with the same SQL text will be terminated immediately in the coming 10 minutes. `QUERY_LIMIT=()` or `QUERY_LIMIT=NULL` means that runaway control is not enabled. See [Runaway Queries](/tidb-resource-control.md#manage-queries-that-consume-more-resources-than-expected-runaway-queries). |
-| `BACKGROUND`  | Configure the background tasks. For more details, see [Manage background tasks](/tidb-resource-control.md#manage-background-tasks). | `BACKGROUND=(TASK_TYPES="br,analyze")` indicates that the backup and restore and statistics collection related tasks are scheduled as background tasks. |
+| `BACKGROUND`  | Configure the background tasks. For more details, see [Manage background tasks](/tidb-resource-control.md#manage-background-tasks). | `BACKGROUND=(TASK_TYPES="br,stats")` indicates that the backup and restore and statistics collection related tasks are scheduled as background tasks. |
 
 > **Note:**
 >
