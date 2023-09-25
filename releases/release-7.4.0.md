@@ -21,7 +21,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.4/quick-start-with-
 
 * TiDB introduces the ability to set the TiDB Service Scope to select the applicable TiDB nodes to perform concurrent `ADD INDEX` or `IMPORT INTO` tasks (experimental) [#46453](https://github.com/pingcap/tidb/pull/46453) @[ywqzzy](https://github.com/ywqzzy) **tw@hfxsd** <!--1505-->
 
-    Executing `ADD INDEX` or `IMPORT INTO` tasks in parallel in a resource-intensive cluster can consume a large amount of TiDB node resources, which can lead to cluster performance degradation. TiDB v7.4.0 introduces the ability to set the TiDB Service Scope as an experimental feature. You can select a few existing TiDB nodes or set the TiDB Service Scope for new TiDB nodes, and all parallel `ADD INDEX` and `IMPORT INTO` tasks only run on these nodes. This mechanism can avoid performance impact on existing services.
+    Executing `ADD INDEX` or `IMPORT INTO` tasks in parallel in a resource-intensive cluster can consume a large amount of TiDB node resources, which can lead to cluster performance degradation. Starting from v7.4.0, you can use the system variable [`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740) to control the service scope of each TiDB node under the [TiDB Backend Task Distributed Execution Framework](/tidb-distributed-execution- framework.md) for each TiDB node. You can select a few existing TiDB nodes or set the TiDB Service Scope for new TiDB nodes, and all parallel `ADD INDEX` and `IMPORT INTO` tasks only run on these nodes. This mechanism can avoid performance impact on existing services.
     
     For details, see [documentation](/system-variables.md#tidb_service_scope-new-in-v740).
 
@@ -89,11 +89,11 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.4/quick-start-with-
 
     For more information, see [documentation](/tiflash/tiflash-spill-disk.md).
 
-* Support configurable TiKV read timeout [#45380](https://github.com/pingcap/tidb/issues/45380) @[crazycs520](https://github.com/crazycs520) **tw@hfxsd** <!--1560-->
+* Support user-defined TiKV read timeout [#45380](https://github.com/pingcap/tidb/issues/45380) @[crazycs520](https://github.com/crazycs520) **tw@hfxsd** <!--1560-->
 
     Normally, TiKV processes requests very quickly, in a matter of milliseconds. However, when a TiKV node encounters disk I/O jitter or network latency, the request processing time can increase significantly. In versions earlier than v7.4.0, the timeout limit for TiKV requests was fixed and could not be adjusted, so TiDB had to wait for a timeout response when there was a problem with a TiKV node, which resulted in a noticeable impact on application query performance during jitter.
      
-    TiDB v7.4.0 introduces a new system variable [`tikv_client_read_timeout`](/system-variables.md#tikv_client_read_timeout-new-in-v740), which lets you customize the timeout for RPC read requests that TiDB sends to TiKV in a query statement. It means that when the request sent to a TiKV node is delayed due to disk or network issues, TiDB can time out faster and resend the request to other TiKV nodes, thus reducing query latency. If the requests time out for all TiKV nodes, TiDB will retry using the default timeout. This system variable also supports setting the timeout for TiDB to send TiKV RPC read requests in query statements via the hint [`TIDB_KV_READ_TIMEOUT(N)`](/optimizer-hints.md#tidb_kv_read_timeoutn) to set the timeout for TiDB to send TiKV RPC read requests in query statements. This enhancement gives TiDB the flexibility to adapt to unstable network or storage environments, improving query performance and enhancing the user experience.
+    TiDB v7.4.0 introduces a new system variable [`tikv_client_read_timeout`](/system-variables.md#tikv_client_read_timeout-new-in-v740), which lets you customize the timeout for RPC read requests that TiDB sends to TiKV in a query statement. It means that when the request sent to a TiKV node is delayed due to disk or network issues, TiDB can time out faster and resend the request to other TiKV nodes, thus reducing query latency. If the requests time out for all TiKV nodes, TiDB will retry using the default timeout. Additionally, you can set the timeout for TiDB to send TiKV RPC read requests in query statements via the hint [`TIDB_KV_READ_TIMEOUT(N)`](/optimizer-hints.md#tidb_kv_read_timeoutn). This enhancement gives TiDB the flexibility to adapt to unstable network or storage environments, improving query performance and enhancing the user experience.
 
     For details, see [documentation](/system-variables.md#tikv_client_read_timeout-new-in-v740).
 
@@ -192,7 +192,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.4/quick-start-with-
 
 * Data Migration (DM) supports blocking incompatible (data-consistency-corrupting) DDL changes (experimental) [#9692](https://github.com/pingcap/tiflow/issues/9692) @[GMHDBJD](https://github.com/GMHDBJD) **tw@hfxsd** <!--1523-->
 
-     Prior to v7.4.0, the Binlog Filter function using DM has a coarse granularity. For example, it can only filter DDL events with a large granularity such as `ALTER`, which is limited in some business scenarios. For example, you can only increase the precision of the decimal field type, but cannot decrease it.
+     Prior to v7.4.0, the [Binlog filter](/dm/dm-binlog-event-filter.md) function using DM has a coarse granularity. For example, it can only filter DDL events with a large granularity such as `ALTER`, which is limited in some business scenarios. For example, you can only increase the precision of the decimal field type, but cannot decrease it.
      
      TiDB v7.4.0 introduces a new event name `incompatible DDL changes`, which is used to intercept DDLs whose changes will lead to data loss, data truncation, or loss of precision. It also reports error alerts, so that you can intervene in time to deal with them to avoid the impact on downstream business data.
      
@@ -219,15 +219,15 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.4/quick-start-with-
 
 * Dumpling supports the user-defined terminator when exporting data to CSV files [#46982](https://github.com/pingcap/tidb/issues/46982) @[GMHDBJD](https://github.com/GMHDBJD) **tw@hfxsd** <!--1571-->
 
-    Prior to v7.4.0, when Dumpling exported data to a CSV file, the default terminator is "\r\n", which could not be parsed by some downstream systems that could only parse the "\n" terminator, or had to be converted by a third-party tool to parse the CSV file. 
+    Prior to v7.4.0, when Dumpling exported data to a CSV file, the terminator is "\r\n", which could not be parsed by some downstream systems that could only parse the "\n" terminator, or had to be converted by a third-party tool to parse the CSV file. 
     
-    Starting from v7.4.0, TiDB introduces a new parameter `--csv-line-terminator`. This parameter allows you to pass in the required terminator when exporting data to a CSV file. This parameter supports `\r\n' and `\n'. The default terminator is `\r\n' to keep consistent with earlier versions.
+    Starting from v7.4.0, Dumpling introduces a new parameter `--csv-line-terminator`. This parameter allows you to pass in the required terminator when you export data to a CSV file. This parameter supports `\r\n' and `\n'. The default terminator is `\r\n' to keep consistent with earlier versions.
      
     For details, see [documentation](/dumpling-overview.md#option-list-of-dumpling).
 
 * TiCDC supports replicating data to Pulsar [#9413](https://github.com/pingcap/tiflow/issues/9413) @[yumchina](https://github.com/yumchina) @[asddongmen](https://github.com/asddongmen) **tw@hfxsd** <!--1552-->
 
-    TiCDC now supports seamless integration with Pulsar. Pulsar is a cloud-native and distributed message streaming platform that enhances your real-time data streaming experience. With this new capability, TiCDC provides you with the ability to easily capture and replicate TiDB changes to Pulsar, offering new possibilities for data processing and analytics capabilities. You can develop your own consumer applications that read and process newly generated change data from Pulsar to meet specific business needs. TiCDC currently supports replicating change data in the `canal-json` format.
+    Pulsar is a cloud-native and distributed message streaming platform that significantly enhances your real-time data streaming experience. Starting from v7.4.0, TiCDC supports replicating change data to Pulsar in `canal-json` format to achieve seamless integration with Pulsar. With this feature, TiCDC provides you with the ability to easily capture and replicate TiDB changes to Pulsar, offering new possibilities for data processing and analytics capabilities. You can develop your own consumer applications that read and process newly generated change data from Pulsar to meet specific business needs. TiCDC currently supports replicating change data in the `canal-json` format.
 
     For details, see [documentation](/ticdc/ticdc-sink-to-pulsar.md).
 
