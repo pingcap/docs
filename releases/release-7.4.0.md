@@ -13,7 +13,68 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.4/quick-start-with-
 
 7.4.0 introduces the following key features and improvements:
 
-<!-- key feature placeholder-->
+7.4.0 introduces the following major features. In addition to that, 7.4.0 also includes a series of enhancements (described in the [Feature details](#feature-details) section) to query stability in TiDB server and TiFlash. These enhancements are more miscellaneous in nature and not user-facing so they are not included in the following table.
+
+<table>
+<thead>
+  <tr>
+    <th>Category</th>
+    <th>Feature</th>
+    <th>Description</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>Scalability and Performance</td>
+    <td>Support for running multiple DDL statements in parallel (experimental) <!--Cathy--></td>
+    <td>Different from distributed and parallel DDL jobs, this feature allows for concurrent jobs to run where they were otherwise running syncrhonsously. Where running DDL statements x, y at the same time used to take x-time +y-time, they now take significantly less.</td>
+    </td>
+  </tr>
+  <tr>
+    <td rowspan="3">Reliability and Availability</td>
+    <td>Global sort optimization <!--Frank--></td>
+    <td>Laying the groundwork with the distributed framework in v7.2, TiDB introduces global sorting to eliminate the unnecessary I/O, CPU, and memory spikes caused from temporarily out out of order data during data re-organization tasks. The global sorting will take advantage of external shared object storage (S3 in this first iteration) to store intermediary files during the job, adding flexibility and cost savings. Operations like ADD INDEX and IMPORT INTO will be faster, more resilient, more stable, more flexible, and cost less to run.</td>
+  </tr>
+  <tr>
+    <td>Resource Control for background jobs (experimental) <!--Roger--></td>
+    <td>v7.1 introduced Resource Control to mitigate resource and storage access interference between workloads. v7.4 applies this contorl to background tasks as well. This should apply to all background tasks eventually. The first to realize this benefit are: Backup & Recovery, Load Data, and Online DDL.</td>
+  </tr>
+  <tr>
+    <td>TiFlash supports storage-computing separation and S3 <!--Zhang Ye--></td>
+    <td> <!--Description to be added--> </td>
+  </tr>
+  <tr>
+    <td rowspan="4">SQL</td>
+    <td>More complete partition management <!--Zhang Ye--></td>
+    <td>Prior to v7.4, TiDB supported truncate partition, exchange partition, and add/drop/reorganize partition on Range/List Partitioning
+In this version, TiDB partition management adds:
+      <ul>
+        <li>Add/Coalesce Partition on Hash/Key partitioning</li>
+        <li>Remove partition</li>
+        <li>Partitioning existing non-partitioned tables</li>
+        <li>Modifying existing partition types on tables</li>
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <td>MySQL 8.0 compatibility: Add utf8mb4 charset <!--Roger--></td>
+    <td> In MySQL 8.0, the default characterset is utf8mb4, while the default collation of utf8mb4 is utf8mb4_0900_ai_ci. If the database was created on MySQL 8.0, it's more than likely the collation is utf8mb4_0900_ai_ci. We'll be seeing more cases where customers are migrating from MySQL 8.0 with collation utf8mb4_0900_ai_ci. This was the last piece waiting to call TiDB generally MySQL 8.0 compatible.</td>
+  </tr>
+  <tr>
+    <td>TiDB&TiFlash support modifier ROLLUP and function GROUPING() <!--Zhang Ye--></td>
+    <td> <!--Description to be added--> </td>
+  </tr>
+  <tr>
+    <td>TiFlash pipeline execution model GA <!--Zhang Ye--></td>
+    <td> <!--Description to be added--> </td>
+  </tr>
+  <tr>
+    <td>DB Operations and Observability</td>
+    <td>DDL labels for TiDB nodes <!--Frank--></td>
+    <td><!--Description to be added--></td>
+  </tr>
+</tbody>
+</table>
 
 ## Feature details
 
