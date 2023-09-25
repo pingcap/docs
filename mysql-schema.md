@@ -61,7 +61,7 @@ Currently, the `help_topic` is NULL.
 
 > **Note:**
 >
-> This TTL related system tables are not available on [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless) clusters.
+> The TTL related system tables are not available on [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless) clusters.
 
 * `mysql.tidb_ttl_table_status` the previously executed TTL job and ongoing TTL job for all TTL tables
 * `mysql.tidb_ttl_task` the current ongoing TTL subtasks
