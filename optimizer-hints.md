@@ -85,13 +85,35 @@ This hint specifies the outer `SELECT` query block's name to `QB1`, which makes 
 
 ### SET_VAR(VAR_NAME=VAR_VALUE)
 
-`SET_VAR(VAR_NAME=VAR_VALUE)` can change the value of the specified system variable. This hint can control most variables related with optimizer and executor. Refer to Chapter [System Variables](/system-variables.md) too see which variables is controlled by this hint.
+You can use `SET_VAR(VAR_NAME=VAR_VALUE)` to temporarily modify the value of system variables during statement execution. After the statement is executed, the value of the system variable in the current session is automatically changed back to the original value. This hint can be used to modify some system variables related to the optimizer and executor. You can find the system variables that can be modified using the hint `SET_VAR()` in [System variables](/system-variables.md).
+
+> **Warning:**
+>
+> It is strongly recommended not to modify variables that are not explicitly supported, as this might cause unpredictable behavior.
+
+The following is an example:
 
 ```sql
 SELECT /*+ SET_VAR(MAX_EXECUTION_TIME=1234) */ @@MAX_EXECUTION_TIME;
+SELECT @@MAX_EXECUTION_TIME;
 ```
 
-Executing the above SQL. The returned value is `1234` which is set by the hint, not the default value of the variable `MAX_EXECUTION_TIME`.
+After executing the preceding SQL statements, the first query returns the value `1234` set in the hint, instead of the default value of `MAX_EXECUTION_TIME`. The second query returns the default value of the variable.
+
+```sql
++----------------------+
+| @@MAX_EXECUTION_TIME |
++----------------------+
+|                 1234 |
++----------------------+
+1 row in set (0.00 sec)
++----------------------+
+| @@MAX_EXECUTION_TIME |
++----------------------+
+|                    0 |
++----------------------+
+1 row in set (0.00 sec)
+```
 
 ### MERGE_JOIN(t1_name [, tl_name ...])
 
