@@ -2324,10 +2324,6 @@ Query OK, 0 rows affected (0.09 sec)
 
 </CustomContent>
 
-> **Warning:**
->
-> Currently, Top SQL is an experimental feature. It is not recommended that you use it for production environments.
-
 - Scope: GLOBAL
 - Persists to cluster: Yes
 - Type: Boolean
