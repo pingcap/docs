@@ -17,7 +17,7 @@ In this tutorial, you will learn how to use TiDB and DBeaver Community to establ
 
 To complete this tutorial, you will need:
 
-- [DBeaver Community **23.2.0** or higher](https://dbeaver.io/download/).
+- [DBeaver Community **23.2.1** or higher](https://dbeaver.io/download/).
 - A TiDB cluster.
 
 <CustomContent platform="tidb">
@@ -60,21 +60,25 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
     >
     > If you have created a password before, you can either use the original password or click **Reset password** to generate a new one.
 
-5. Click upper-left corner button to open the **Connect to database** dialog, and click **TiDB**.
+5. Click upper-left corner button to open the **Connect to database** dialog, and click **TiDB**, then click **Next**.
 
     ![DBeaver button that can open create connect dialog](/media/develop/dbeaver-create-connect-dialog-open-button.jpg)
 
-6. Copy the JDBC string from the TiDB Cloud connection dialog and replace the `<your_password>` placeholder with your actual password. Then, click **URL** in **Connect by**, and paste it into `URL`. The example result is as follows:
+6. Copy the JDBC string from the TiDB Cloud connection dialog. Then, click **URL** in **Connect by**, and paste it into `URL`. You don't need to replace the `<your_password>` placeholder with your actual password, because DBeaver will read **Username** and **Password** in the **Authentication (Database Native)** block. The example result is as follows:
+7. Copy and paste **Username** and **Password** in the **Authentication (Database Native)** block.
 
-    ![DBeaver URL paste](/media/develop/dbeaver-url-paste.jpg)
+    ![DBeaver TiDB serverless connection parameters](/media/develop/dbeaver-connection-param-serverless.jpg)
 
-8. Click **Download** missing driver files. If you have used DataGrip before, you can skip this step.
+8. Click **Test Connection** to establish a connection to TiDB Serverless Tier cluster.
+9. (Optional) If you are the first time to use this driver, click **Download** in the dialog to download the driver.
 
-9. Click **Test Connection** to establish a connection to TiDB Serverless Tier cluster.
+    ![DBeaver driver download](/media/develop/dbeaver-driver-download.jpg)
 
-    ![DataGrip test connection](/media/develop/datagrip-test-connection.jpg)
+10. If the connecton test is successful, you will get a dialog like this. Click **OK** to close the connecton test dialog.
 
-10. Click **OK** to save it.
+    ![DBeaver connection test](/media/develop/dbeaver-connect-test.jpg)
+
+11. Click **Finish** to save connection.
 
 </div>
 <div label="TiDB Dedicated">
@@ -87,53 +91,40 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 
     For more details about how to obtain the connection string, refer to [TiDB Dedicated standard connection](https://docs.pingcap.com/tidbcloud/connect-via-standard-connection).
 
-4. Create a project to manage your connections.
+4. Click upper-left corner button to open the **Connect to database** dialog, and click **TiDB**, then click **Next**.
 
-    ![DataGrip create a project](/media/develop/datagrip-create-project.jpg)
+    ![DBeaver button that can open create connect dialog](/media/develop/dbeaver-create-connect-dialog-open-button.jpg)
 
-5. Click **+** in the upper-left corner of the **Database Explorer** panel, and select **Data Source** > **Other** > **TiDB**.
+5. Copy and paste the corresponding connection string into the DBeaver connection panel. The correspoding relations are:
 
-    ![DataGrip select data source](/media/develop/datagrip-data-source-select.jpg)
-
-6. Copy and paste the corresponding connection string into the DataGrip connection panel. The correspoding relations are:
-
-    - Host: {host}
+    - Server Host: {host}
     - Port: {port}
-    - User: {user}
+    - Username: {user}
     - Password: {password}
 
     The example result is as follows:
 
-    ![DataGrip dedicated tier connect](/media/develop/datagrip-dedicated-connect.jpg)
+    ![DBeaver TiDB dedicated connection parameters](/media/develop/dbeaver-connection-param-dedicated.jpg)
 
-7. Navigate to **SSH/SSL**, check the **Use SSL** option, and input the CA certificate path into **CA file**.
+6. Click **Test Connection** to establish a connection to TiDB Serverless Tier cluster.
+7. (Optional) If you are the first time to use this driver, click **Download** in the dialog to download the driver.
 
-    ![DataGrip dedicated tier connect](/media/develop/datagrip-dedicated-ssl.jpg)
+    ![DBeaver driver download](/media/develop/dbeaver-driver-download.jpg)
 
-8. Click **Download** missing driver files. If you have used DataGrip before, you can skip this step.
+8. If the connecton test is successful, you will get a dialog like this. Click **OK** to close the connecton test dialog.
 
-9. Navigate to **Advanced**, scroll down to the **enabledTLSProtocols** parameter, and set the value to `TLSv1.2,TLSv1.3`.
+    ![DBeaver connection test](/media/develop/dbeaver-connect-test.jpg)
 
-    ![DataGrip dedicated tier advanced](/media/develop/datagrip-dedicated-advanced.jpg)
-
-10. Click **Test Connection** to establish a connection to TiDB Dedicated Tier cluster.
-
-    ![DataGrip dedicated test connection](/media/develop/datagrip-dedicated-test-connection.jpg)
-
-11. Click **OK** to save it.
+9. Click **Finish** to save connection.
 
 </div>
 <div label="TiDB Self-Hosted">
 
-1. Create a project to manage your connections.
+1. Click upper-left corner button to open the **Connect to database** dialog, and click **TiDB**, then click **Next**.
 
-    ![DataGrip create a project](/media/develop/datagrip-create-project.jpg)
+    ![DBeaver button that can open create connect dialog](/media/develop/dbeaver-create-connect-dialog-open-button.jpg)
 
-2. Click **+** in the upper-left corner of the **Database Explorer** panel, and select **Data Source** > **Other** > **TiDB**.
-
-    ![DataGrip select data source](/media/develop/datagrip-data-source-select.jpg)
-
-3. Copy and paste the corresponding connection string into the DataGrip connection panel. The correspoding relations are:
+2. Copy and paste the corresponding connection string into the DBeaver connection panel. The correspoding relations are:
 
     - Host: {host}
     - Port: {port}
@@ -142,22 +133,25 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 
     The example result is as follows:
 
-    ![DataGrip self-hosted connect](/media/develop/datagrip-self-hosted-connect.jpg)
+    ![DBeaver TiDB self-hosted connection parameters](/media/develop/dbeaver-connection-param-self-hosted.jpg)
 
-4. Click **Download** missing driver files. If you have used DataGrip before, you can skip this step.
+3. Click **Test Connection** to establish a connection to TiDB Serverless Tier cluster.
+4. (Optional) If you are the first time to use this driver, click **Download** in the dialog to download the driver.
 
-5. Click **Test Connection** to establish a connection to TiDB Self-hosted cluster.
+    ![DBeaver driver download](/media/develop/dbeaver-driver-download.jpg)
 
-    ![DataGrip self-hosted test connection](/media/develop/datagrip-self-hosted-test-connection.jpg)
+5. If the connecton test is successful, you will get a dialog like this. Click **OK** to close the connecton test dialog.
 
-6. Click **OK** to save it.
+    ![DBeaver connection test](/media/develop/dbeaver-connect-test.jpg)
+
+6. Click **Finish** to save connection.
 
 </div>
 </SimpleTab>
 
 ## Next steps
 
-- Learn more usage of `DataGrip` from [the documentation of DataGrip](https://www.jetbrains.com/help/datagrip/getting-started.html).
+- Learn more usage of `DBeaver` from [the documentation of DBeaver](https://github.com/dbeaver/dbeaver/wiki).
 - Learn the best practices for TiDB application development with the chapters in the [Developer guide](/develop/dev-guide-overview.md), such as [Insert data](/develop/dev-guide-insert-data.md), [Update data](/develop/dev-guide-update-data.md), [Delete data](/develop/dev-guide-delete-data.md), [Single table reading](/develop/dev-guide-get-data-from-single-table.md), [Transactions](/develop/dev-guide-transaction-overview.md), and [SQL performance optimization](/develop/dev-guide-optimize-sql-overview.md).
 - Learn through the professional [TiDB developer courses](https://www.pingcap.com/education/) and earn [TiDB certifications](https://www.pingcap.com/education/certification/) after passing the exam.
 
