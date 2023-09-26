@@ -11,8 +11,8 @@ This notification describes the details that you need to know about the [TiDB Cl
 
 - Date: 2023-09-26
 - Start time: 8:00 (UTC+0)
-- End time: 8:20 (UTC+0)
-- Duration: Approximately 20 minutes
+- End time: 8:30 (UTC+0)
+- Duration: Approximately 30 minutes
 
 > **Note:**
 >
