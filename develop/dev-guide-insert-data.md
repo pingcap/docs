@@ -115,9 +115,9 @@ jdbc:mysql://127.0.0.1:4000/test?user=root&useConfigs=maxPerformance&useServerPr
 
 For complete examples in Java, see:
 
-- [Build a simple CRUD app with TiDB and JDBC](/develop/dev-guide-sample-application-java-jdbc.md#step-2-get-the-code)
-- [Build a simple CRUD app with TiDB and Hibernate](/develop/dev-guide-sample-application-java-hibernate.md#step-2-get-the-code)
-- [Build the TiDB app using Spring Boot](/develop/dev-guide-sample-application-java-spring-boot.md)
+- [Connect to TiDB with JDBC](/develop/dev-guide-sample-application-java-jdbc.md)
+- [Connect to TiDB with Hibernate](/develop/dev-guide-sample-application-java-hibernate.md)
+- [Connect to TiDB with Spring Boot](/develop/dev-guide-sample-application-java-spring-boot.md)
 
 </div>
 
@@ -191,8 +191,8 @@ func buildBulkInsertSQL(amount int) string {
 
 For complete examples in Golang, see:
 
-- [Use Go-MySQL-Driver to build a simple CRUD app with TiDB and Golang](/develop/dev-guide-sample-application-golang-sql-driver.md#step-2-get-the-code)
-- [Use GORM to build a simple CRUD app with TiDB and Golang](/develop/dev-guide-sample-application-golang-gorm.md#step-2-get-the-code)
+- [Connect to TiDB with Go-MySQL-Driver](/develop/dev-guide-sample-application-golang-sql-driver.md)
+- [Connect to TiDB with GORM](/develop/dev-guide-sample-application-golang-gorm.md)
 
 </div>
 
