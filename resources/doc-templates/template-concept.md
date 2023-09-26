@@ -1,5 +1,5 @@
 ---
-title: (The same as L1 heading) Concept such as "Garbage Collection Overview" in 59 chars or less. Include the keywords of this document. Test title here https://moz.com/learn/seo/title-tag
+title: (The same as L1 heading) Concept such as "Garbage Collection Overview" in 59 characters or less. Include the keywords of this document. Test title here https://moz.com/learn/seo/title-tag
 summary: Summarize this doc in 115 to 145 characters. Start with an SEO-friendly verb that tells users what they can get from this doc. For example, "Learn how to quickly get started with the TiDB database". If your intro paragraph describes your article's intent, you can use it here, edited for length.
 ---
 
@@ -47,7 +47,7 @@ If you need to add notes or warnings, strictly follow the following format.
 
 > **Warning**
 >
-> If the information may bring risks to users, such as system availability, security, data loss, etc., use a warning. For example, the current feature is an experimental feature and is not recommended for production environments.
+> If the information might bring risks to users, such as system availability, security, data loss, etc., use a warning. For example, the current feature is an experimental feature and is not recommended for production environments.
 
 > **Note**
 >
@@ -59,12 +59,12 @@ To prevent incorrect display, all indentation on the PingCAP website must be 4 s
 
 ## What's next
 
-In this section, provide more related documents that users may want to read, such as:
+In this section, provide more related documents that users might want to read, such as:
 
 - To learn how to deploy and maintain TiCDC, see [Deploy and Maintain TiCDC](/ticdc/deploy-ticdc.md).
 - To learn changefeeds, see [Changefeed Overview](/ticdc/ticdc-changefeed-overview.md).
 
-You can also directly provide the documents that users may be interested in, such as:
+You can also directly provide the documents that users might be interested in, such as:
 
 - [Explore HTAP](/explore-htap.md)
 - [TiCDC FAQs](/ticdc/ticdc-faq.md)
