@@ -3521,6 +3521,7 @@ mysql> desc select count(distinct a) from test.t;
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `ON`
 - With tidb_opt_enable_hash_join=off, the optimizer ignores hash join when generating execution plans.
