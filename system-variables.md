@@ -408,6 +408,7 @@ For more possible values of this variable, see [Authentication plugin status](/s
 
 - Scope: GLOBAL | SESSION
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: String
 - Default value: `utf8mb4_bin`
 - Value options: `utf8mb4_bin`, `utf8mb4_general_ci`, `utf8mb4_0900_ai_ci`
