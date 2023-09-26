@@ -247,7 +247,8 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 | [Cross-cluster RawKV replication](/tikv-configuration-file.md#api-version-new-in-v610) | E | E | E | E | E | N | N | N | N | N | N | N |
 | [Green GC](/system-variables.md#tidb_gc_scan_lock_mode-new-in-v50) | E | E | E | E | E | E | E | E | E | E | E | N |
 | [Resource control](/tidb-resource-control.md) | Y | Y | Y | Y | N | N | N | N | N | N | N | N |
-| [Runaway Queries Management](/tidb-resource-control.md#manage-queries-that-consume-more-resources-than-expected-runaway-queries) | E | E | E | N | N | N | N | N | N | N | N | N |
+| [Runaway Queries management](/tidb-resource-control.md#manage-queries-that-consume-more-resources-than-expected-runaway-queries) | E | E | E | N | N | N | N | N | N | N | N | N |
+| [Background tasks management](/tidb-resource-control.md#manage-background-tasks) | E | N | N | N | N | N | N | N | N | N | N | N |
 | [TiFlash Disaggregated Storage and Compute Architecture and S3 Support](/tiflash/tiflash-disaggregated-and-s3.md) | Y | E | E | E | N | N | N | N | N | N | N | N |
 
 [^1]: TiDB incorrectly treats latin1 as a subset of utf8. See [TiDB #18955](https://github.com/pingcap/tidb/issues/18955) for more details.
