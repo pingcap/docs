@@ -7,7 +7,7 @@ summary: Learn the use cases, limitations, usage, and implementation principles 
 
 > **Warning:**
 >
-> This feature is an experimental feature. It is not recommended to use it in production environments.
+> This feature is experimental. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
 
 <CustomContent platform="tidb-cloud">
 
@@ -17,7 +17,7 @@ summary: Learn the use cases, limitations, usage, and implementation principles 
 
 </CustomContent>
 
-## Feature overview
+## Overview
 
 The TiDB Global Sort feature enhances the stability and efficiency of data import and DDL (Data Definition Language) operations. It serves as a general operator in the [distributed execution framework](/tidb-distributed-execution-framework.md). Through the distributed execution framework, it provides a global sort service on cloud.
 
@@ -49,7 +49,7 @@ Currently, the Global Sort feature is not used as a component of the query execu
 
 ## Implementation principles
 
-The algorithm of the TiDB backend task distributed execution framework is as follows:
+The algorithm of the Global Sort feature is as follows:
 
 ![Algorithm of Global Sort](/media/dist-task/global-sort.jpeg)
 
