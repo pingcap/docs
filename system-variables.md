@@ -393,6 +393,7 @@ mysql> SELECT * FROM t1;
 <CustomContent platform="tidb">
 
 - Scope: NONE
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: it depends on the component and the deployment method.
     - `/tmp/tidb`: when you set `"unistore"` for [`--store`](/command-line-flags-for-tidb-configuration.md#--store) or if you don't set `--store`.
     - `${pd-ip}:${pd-port}`: when you use TiKV, which is the default storage engine for TiUP and TiDB Operator for Kubernetes deployments.
@@ -403,6 +404,7 @@ mysql> SELECT * FROM t1;
 <CustomContent platform="tidb-cloud">
 
 - Scope: NONE
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: it depends on the component and the deployment method.
     - `/tmp/tidb`: when you set `"unistore"` for [`--store`](https://docs.pingcap.com/tidb/stable/command-line-flags-for-tidb-configuration#--store) or if you don't set `--store`.
     - `${pd-ip}:${pd-port}`: when you use TiKV, which is the default storage engine for TiUP and TiDB Operator for Kubernetes deployments.
@@ -533,6 +535,7 @@ For more possible values of this variable, see [Authentication plugin status](/s
 ### hostname
 
 - Scope: NONE
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: (system hostname)
 - The hostname of the TiDB server as a read-only variable.
 
@@ -599,12 +602,14 @@ This variable is an alias for [`last_insert_id`](#last_insert_id).
 ### last_sql_use_alloc <span class="version-mark">New in v6.4.0</span>
 
 - Scope: SESSION
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: `OFF`
 - This variable is read-only. It is used to show whether the previous statement uses a cached chunk object (chunk allocation).
 
 ### license
 
 - Scope: NONE
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: `Apache License 2.0`
 - This variable indicates the license of your TiDB server installation.
 
@@ -834,6 +839,7 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 ### socket
 
 - Scope: NONE
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: ""
 - The local unix socket file that the `tidb-server` is listening on when speaking the MySQL protocol.
 
@@ -885,6 +891,7 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 <CustomContent platform="tidb">
 
 - Scope: NONE
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: ""
 - The location of the certificate authority file (if there is one). The value of this variable is defined by the TiDB configuration item [`ssl-ca`](/tidb-configuration-file.md#ssl-ca).
 
@@ -893,6 +900,7 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 <CustomContent platform="tidb-cloud">
 
 - Scope: NONE
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: ""
 - The location of the certificate authority file (if there is one). The value of this variable is defined by the TiDB configuration item [`ssl-ca`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#ssl-ca).
 
@@ -903,6 +911,7 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 <CustomContent platform="tidb">
 
 - Scope: NONE
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: ""
 - The location of the certificate file (if there is a file) that is used for SSL/TLS connections. The value of this variable is defined by the TiDB configuration item [`ssl-cert`](/tidb-configuration-file.md#ssl-cert).
 
@@ -911,6 +920,7 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 <CustomContent platform="tidb-cloud">
 
 - Scope: NONE
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: ""
 - The location of the certificate file (if there is a file) that is used for SSL/TLS connections. The value of this variable is defined by the TiDB configuration item [`ssl-cert`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#ssl-cert).
 
@@ -921,6 +931,7 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 <CustomContent platform="tidb">
 
 - Scope: NONE
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: ""
 - The location of the private key file (if there is one) that is used for SSL/TLS connections. The value of this variable is defined by TiDB configuration item [`ssl-key`](/tidb-configuration-file.md#ssl-cert).
 
@@ -929,6 +940,7 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 <CustomContent platform="tidb-cloud">
 
 - Scope: NONE
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: ""
 - The location of the private key file (if there is one) that is used for SSL/TLS connections. The value of this variable is defined by TiDB configuration item [`ssl-key`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#ssl-key).
 
@@ -937,6 +949,7 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 ### system_time_zone
 
 - Scope: NONE
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: (system dependent)
 - This variable shows the system time zone from when TiDB was first bootstrapped. See also [`time_zone`](#time_zone).
 
@@ -975,6 +988,7 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 ### tidb_allow_function_for_expression_index <span class="version-mark">New in v5.2.0</span>
 
 - Scope: NONE
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: `json_array`, `json_array_append`, `json_array_insert`, `json_contains`, `json_contains_path`, `json_depth`, `json_extract`, `json_insert`, `json_keys`, `json_length`, `json_merge_patch`, `json_merge_preserve`, `json_object`, `json_pretty`, `json_quote`, `json_remove`, `json_replace`, `json_search`, `json_set`, `json_storage_size`, `json_type`, `json_unquote`, `json_valid`, `lower`, `md5`, `reverse`, `tidb_shard`, `upper`, `vitess_hash`
 - This variable is used to show the functions that are allowed to be used for creating expression indexes.
 
@@ -2224,6 +2238,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `ON`
 - This variable controls whether to enable the [`PLAN REPLAYER CAPTURE` feature](/sql-plan-replayer.md#use-plan-replayer-capture-to-capture-target-plans). The default value `ON` means to enable the `PLAN REPLAYER CAPTURE` feature.
@@ -2247,6 +2262,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `OFF`
 - This variable controls whether to enable the [`PLAN REPLAYER CONTINUOUS CAPTURE` feature](/sql-plan-replayer.md#use-plan-replayer-continuous-capture). The default value `OFF` means to disable the feature.
@@ -2470,6 +2486,7 @@ Query OK, 0 rows affected (0.09 sec)
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `OFF`
 - This variable controls whether to enable the new [Pipeline Execution Model](https://docs.pingcap.com/tidb/v7.2/tiflash-pipeline-model) in TiFlash.
@@ -3099,14 +3116,15 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 ### tidb_isolation_read_engines <span class="version-mark">New in v4.0</span>
 
 - Scope: SESSION
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: `tikv,tiflash,tidb`
 - This variable is used to set the storage engine list that TiDB can use when reading data.
 
 ### tidb_last_ddl_info <span class="version-mark">New in v6.0.0</span>
 
 - Scope: SESSION
-- Default value: ""
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
+- Default value: ""
 - Type: String
 - This is a read-only variable. It is internally used in TiDB to get the information of the last DDL operation within the current session.
     - "query": The last DDL query string.
@@ -3115,6 +3133,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 ### tidb_last_query_info <span class="version-mark">New in v4.0.14</span>
 
 - Scope: SESSION
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: ""
 - This is a read-only variable. It is internally used in TiDB to query the transaction information of the last DML statement. The information includes:
     - `txn_scope`: The scope of the transaction, which can be `global` or `local`.
@@ -3159,6 +3178,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: `"1s"`
 - Range: `[0s, 1h]`
 - Type: String
@@ -3836,6 +3856,7 @@ mysql> desc select count(distinct a) from test.t;
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Type: String
 - Default value: `""`
 - This variable is used to control some internal behaviors of the optimizer.
@@ -4820,6 +4841,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 </CustomContent>
 
 - Scope: SESSION
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: ""
 - When `INFORMATION_SCHEMA.SLOW_QUERY` is queried, only the slow query log name set by `slow-query-file` in the configuration file is parsed. The default slow query log name is "tidb-slow.log". To parse other logs, set the `tidb_slow_query_file` session variable to a specific file path, and then query `INFORMATION_SCHEMA.SLOW_QUERY` to parse the slow query log based on the set file path.
 
@@ -4832,6 +4854,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 ### tidb_snapshot
 
 - Scope: SESSION
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: ""
 - This variable is used to set the time point at which the data is read by the session. For example, when you set the variable to "2017-11-11 20:20:20" or a TSO number like "400036290571534337", the current session reads the data of this moment.
 
@@ -5443,14 +5466,15 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 ### tiflash_fastscan <span class="version-mark">New in v6.3.0</span>
 
 - Scope: SESSION | GLOBAL
-- Default value: `OFF`
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Default value: `OFF`
 - Type: Boolean
 - If [FastScan](/tiflash/use-fastscan.md) is enabled (set to `ON`), TiFlash provides more efficient query performance, but does not guarantee the accuracy of the query results or data consistency.
 
 ### tiflash_fine_grained_shuffle_batch_size <span class="version-mark">New in v6.2.0</span>
 
 - Scope: SESSION | GLOBAL
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: `8192`
 - Range: `[1, 18446744073709551615]`
 - When Fine Grained Shuffle is enabled, the window function pushed down to TiFlash can be executed in parallel. This variable controls the batch size of the data sent by the sender.
@@ -5540,6 +5564,7 @@ Internally, the TiDB parser transforms the `SET TRANSACTION ISOLATION LEVEL [REA
 ### tx_read_ts
 
 - Scope: SESSION
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: ""
 - In the Stale Read scenarios, this session variable is used to help record the Stable Read timestamp value.
 - This variable is used for the internal operation of TiDB. It is **NOT recommended** to set this variable.
@@ -5547,6 +5572,7 @@ Internally, the TiDB parser transforms the `SET TRANSACTION ISOLATION LEVEL [REA
 ### txn_scope
 
 - Scope: SESSION
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: `global`
 - Value options: `global` and `local`
 - This variable is used to set whether the current session transaction is a global transaction or a local transaction.
@@ -5643,24 +5669,28 @@ Internally, the TiDB parser transforms the `SET TRANSACTION ISOLATION LEVEL [REA
 ### version
 
 - Scope: NONE
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: `5.7.25-TiDB-`(tidb version)
 - This variable returns the MySQL version, followed by the TiDB version. For example '5.7.25-TiDB-v7.3.0'.
 
 ### version_comment
 
 - Scope: NONE
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: (string)
 - This variable returns additional details about the TiDB version. For example, 'TiDB Server (Apache License 2.0) Community Edition, MySQL 5.7 compatible'.
 
 ### version_compile_machine
 
 - Scope: NONE
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: (string)
 - This variable returns the name of the CPU architecture on which TiDB is running.
 
 ### version_compile_os
 
 - Scope: NONE
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: (string)
 - This variable returns the name of the OS on which TiDB is running.
 
@@ -5678,6 +5708,7 @@ Internally, the TiDB parser transforms the `SET TRANSACTION ISOLATION LEVEL [REA
 ### warning_count
 
 - Scope: SESSION
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: `0`
 - This read-only variable indicates the number of warnings that occurred in the statement that was previously executed.
 
