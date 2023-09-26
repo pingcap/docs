@@ -175,7 +175,7 @@ Query OK, 0 rows affected (0.28 sec)
 
 Starting from v7.4.0, the `GROUP BY` clause of TiDB supports the `WITH ROLLUP` modifier.
 
-In the `GROUP BY` clause, you can specify one or more columns as a group list, and then append the `WITH ROLLUP` modifier to the list. After that, TiDB will conduct multidimensional descending grouping based on the columns in the group list and provide you with summary results for each group in the output.
+In the `GROUP BY` clause, you can specify one or more columns as a group list and append the `WITH ROLLUP` modifier after the list. Then, TiDB will conduct multidimensional descending grouping based on the columns in the group list and provide you with summary results for each group in the output.
 
 > **Note:**
 >
@@ -200,6 +200,6 @@ explain SELECT year, month, grouping(year), grouping(month), SUM(profit) AS prof
 10 rows in set (0.05 sec)
 ```
 
-According to the `GROUP BY year, month WITH ROLLUP` syntax in the preceding statement, the SQL aggregation for this statement can be calculated and concatenated in three groups: `{year, month}`, `{year}`, and `{}` respectively.
+According to the `GROUP BY year, month WITH ROLLUP` syntax in the preceding statement, the SQL aggregation results for this statement can be calculated and concatenated in three groups: `{year, month}`, `{year}`, and `{}` respectively.
 
 For more information, see [GROUP BY modifiers](/functions-and-operators/group-by-modifier.md).
