@@ -160,6 +160,8 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 | [Dynamic pruning](/partitioned-table.md#dynamic-pruning-mode) | Y | Y | Y | Y | Y | Y | E | E | E | E | N | N |
 | [Range COLUMNS partitioning](/partitioned-table.md#range-columns-partitioning) | Y | Y | Y | Y | Y | N | N | N | N | N | N | N |
 | [Range INTERVAL partitioning](/partitioned-table.md#range-interval-partitioning) | Y | Y | Y | Y | E | N | N | N | N | N | N | N |
+| [Convert a partitioned table to a non-partitioned table](/partitioned-table.md#convert-a-partitioned-table-to-a-non-partitioned-table) | Y | N | N | N | N | N | N | N | N | N | N | N |
+| [Partition an existing table](/partitioned-table.md#partition-an-existing-table) | Y | N | N | N | N | N | N | N | N | N | N | N |
 
 ## Statistics
 
