@@ -5101,6 +5101,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `0`
 - Range: `[-1, 9223372036854775807]`
@@ -5110,6 +5111,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Float
 - Default value: `0.7`
 - Range: `[0, 0.85]`
