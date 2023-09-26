@@ -5689,4 +5689,3 @@ Internally, the TiDB parser transforms the `SET TRANSACTION ISOLATION LEVEL [REA
 - Type: Boolean
 - Default value: `ON`
 - This variable controls whether to use the high precision mode when computing the window functions.
-
