@@ -36,6 +36,17 @@
       - [PyMySQL](/develop/dev-guide-sample-application-python-pymysql.md)
       - [SQLAlchemy](/develop/dev-guide-sample-application-python-sqlalchemy.md)
       - [peewee](/develop/dev-guide-sample-application-python-peewee.md)
+      - [Django](/develop/dev-guide-sample-application-python-django.md)
+    - Node.js
+      - [node-mysql2](/develop/dev-guide-sample-application-nodejs-mysql2.md)
+      - [mysql.js](/develop/dev-guide-sample-application-nodejs-mysqljs.md)
+      - [Prisma](/develop/dev-guide-sample-application-nodejs-prisma.md)
+      - [TypeORM](/develop/dev-guide-sample-application-nodejs-typeorm.md)
+      - [Next.js](/develop/dev-guide-sample-application-nextjs.md)
+      - [AWS Lambda](/develop/dev-guide-sample-application-aws-lambda.md)
+    - Ruby
+      - [mysql2](/develop/dev-guide-sample-application-ruby-mysql2.md)
+      - [Rails](/develop/dev-guide-sample-application-ruby-rails.md)
   - Connect to TiDB
     - [JetBrains DataGrip](/develop/dev-guide-gui-datagrip.md)
     - [Choose Driver or ORM](/develop/dev-guide-choose-driver-or-orm.md)
@@ -86,8 +97,6 @@
     - Guidelines
       - [Object Naming Convention](/develop/dev-guide-object-naming-guidelines.md)
       - [SQL Development Specifications](/develop/dev-guide-sql-development-specification.md)
-    - Legacy Docs
-      - [For Django](/develop/dev-guide-outdated-for-django.md)
   - Cloud Native Development Environment
     - [Gitpod](/develop/dev-guide-playground-gitpod.md)
   - Third-Party Support
@@ -190,6 +199,7 @@
   - [Monitoring Framework Overview](/tidb-monitoring-framework.md)
   - [Monitoring API](/tidb-monitoring-api.md)
   - [Deploy Monitoring Services](/deploy-monitoring-services.md)
+  - [Upgrade Monitoring Services](/upgrade-monitoring-services.md)
   - [Export Grafana Snapshots](/exporting-grafana-snapshots.md)
   - [TiDB Cluster Alert Rules](/alert-rules.md)
   - [TiFlash Alert Rules](/tiflash/tiflash-alert-rules.md)
@@ -217,12 +227,15 @@
     - [Identify Expensive Queries Using Top SQL](/dashboard/top-sql.md)
     - [Identify Expensive Queries Using Logs](/identify-expensive-queries.md)
     - [Save and Restore the On-Site Information of a Cluster](/sql-plan-replayer.md)
+    - [Understanding Stale Read and safe-ts in TiKV](/troubleshoot-stale-read.md)
   - [Support Resources](/support.md)
 - Performance Tuning
   - Tuning Guide
     - [Performance Tuning Overview](/performance-tuning-overview.md)
     - [Performance Analysis and Tuning](/performance-tuning-methods.md)
     - [Performance Tuning Practices for OLTP Scenarios](/performance-tuning-practices.md)
+    - [TiFlash Performance Analysis Methods](/tiflash-performance-tuning-methods.md)
+    - [TiCDC Performance Analysis Methods](/ticdc-performance-tuning-methods.md)
     - [Latency Breakdown](/latency-breakdown.md)
     - [TiDB Best Practices on Public Cloud](/best-practices-on-public-cloud.md)
   - Configuration Tuning
@@ -935,6 +948,9 @@
         - [`VARIABLES_INFO`](/information-schema/information-schema-variables-info.md)
         - [`VIEWS`](/information-schema/information-schema-views.md)
       - [`METRICS_SCHEMA`](/metrics-schema.md)
+      - PERFORMANCE_SCHEMA
+        - [Overview](/performance-schema/performance-schema.md)
+        - [`SESSION_CONNECT_ATTRS`](/performance-schema/performance-schema-session-connect-attrs.md)
     - [Metadata Lock](/metadata-lock.md)
   - UI
     - TiDB Dashboard
@@ -969,7 +985,7 @@
         - [Configure SSO](/dashboard/dashboard-session-sso.md)
       - [FAQ](/dashboard/dashboard-faq.md)
   - [Telemetry](/telemetry.md)
-  - [Errors Codes](/error-codes.md)
+  - [Error Codes](/error-codes.md)
   - [Table Filter](/table-filter.md)
   - [Schedule Replicas by Topology Labels](/schedule-replicas-by-topology-labels.md)
   - Internal Components
@@ -1003,6 +1019,7 @@
   - v6.6
     - [6.6.0-DMR](/releases/release-6.6.0.md)
   - v6.5
+    - [6.5.5](/releases/release-6.5.5.md)
     - [6.5.4](/releases/release-6.5.4.md)
     - [6.5.3](/releases/release-6.5.3.md)
     - [6.5.2](/releases/release-6.5.2.md)
