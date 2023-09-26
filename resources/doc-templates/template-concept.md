@@ -1,14 +1,14 @@
 ---
-title: (The same as L1 heading) concept such as "Garbage Collection Overview" in 59 chars or less. Include the keywords of this document. Test title here https://moz.com/learn/seo/title-tag
-summary: summarize this doc in 115 to 145 characters. Start with a verb that tells the users what they can get from this doc, for example, "Learn the working principles of something". If your intro paragraph describes your article's intent, you can use it here, edited for length.
+title: (The same as L1 heading) Concept such as "Garbage Collection Overview" in 59 chars or less. Include the keywords of this document. Test title here https://moz.com/learn/seo/title-tag
+summary: Summarize this doc in 115 to 145 characters. Start with an SEO-friendly verb that tells users what they can get from this doc. For example, "Learn how to quickly get started with the TiDB database". If your intro paragraph describes your article's intent, you can use it here, edited for length.
 ---
 
 # L1 heading (the same as title in the metadata)
 
 > About this template:
 >
-> - This document is a template for concept topics, focusing on introducing concepts and explanatory information. You can directly copy and use this template and delete unnecessary annotations. An example of this type of document: [TiDB Binlog](/tidb-binlog/tidb-binlog-overview.md).
-> - For a new document, please add a link to the appropriate location in TOC.md (consider where users are most likely to look for this document in the table of contents).
+> - This document is a template for concept topics, focusing on introducing concepts and explanatory information. You can directly copy and use this template and delete unnecessary annotations. An example of this type of document: [TiCDC Overview](/ticdc/ticdc-overview.md).
+> - For a new document, please add a link to the appropriate location in the `TOC.md` file (consider where users are most likely to look for this document in the table of contents).
 > - The headings within the document cannot skip levels, and try to avoid using level 5 headings.
 
 **Required** In the first paragraph, summarize the content of this document in a few sentences.
@@ -20,9 +20,9 @@ You can clarify the important terms and definitions within one to three sentence
 Taking the overall architecture as an example, you can first introduce the core components in one or two sentences, and then provide the corresponding architecture diagram.
 
 <!--  ![Architecture](/path/to/image)  -->
-Keep image size <= 300 KB. Use .png or .jpg; do not use .gif/.svg.
+Keep image size <= 300 KB. Use `.png` or `.jpg`; do not use `.gif` or `.svg`.
 
-Write a more detailed description below the image. Use unordered lists (*/+/-) to introduce each component.
+Write a more detailed description below the image. Use unordered lists (`*`/`+`/`-`) to introduce each component.
 
 - Component 1: xxx
 - Component 2: xxx
@@ -61,11 +61,11 @@ To prevent incorrect display, all indentation on the PingCAP website must be 4 s
 
 In this section, provide more related documents that users may want to read, such as:
 
-- To view the TiFlash version, important logs, and system tables, see [Maintain a TiFlash Cluster](/tiflash/maintain-tiflash.md).
-- If you need to remove a TiFlash node, see [Scale in a TiFlash cluster](/scale-tidb-using-tiup.md#scale-in-a-tiflash-node).
+- To learn how to deploy and maintain TiCDC, see [Deploy and Maintain TiCDC](/ticdc/deploy-ticdc.md).
+- To learn changefeeds, see [Changefeed Overview](/ticdc/ticdc-changefeed-overview.md).
 
 You can also directly provide the documents that users may be interested in, such as:
 
-- [TiFlash Architecture](/tiflash/tiflash-overview.md#architecture)
 - [Explore HTAP](/explore-htap.md)
-- [Maintain a TiFlash cluster](/tiflash/maintain-tiflash.md).
+- [TiCDC FAQs](/ticdc/ticdc-faq.md)
+- [TiCDC Glossary](/ticdc/ticdc-glossary.md)
