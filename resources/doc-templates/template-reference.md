@@ -1,6 +1,6 @@
 ---
-title: (The same as L1 heading) such as "Garbage Collection Configuration" in 59 chars or less. Include the keywords of this document. Test title here https://moz.com/learn/seo/title-tag
-summary: summarize this doc in 115 to 145 characters. Start with a verb that tells the users what they can get from this doc, for example, "Learn all the configuration options that you can use in garbage collection". If your intro paragraph describes your article's intent, you can use it here, edited for length.
+title: (The same as L1 heading) Such as "Garbage Collection Configuration" in 59 characters or less. Include the keywords of this document. Test title here https://moz.com/learn/seo/title-tag
+summary: Summarize this doc in 115 to 145 characters. Start with an SEO-friendly verb that tells the users what they can get from this doc. For example, "Learn all the configuration options that you can use in garbage collection". If your intro paragraph describes your article's intent, you can use it here, edited for length.
 ---
 
 # L1 heading (the same as title in the metadata)
@@ -8,7 +8,7 @@ summary: summarize this doc in 115 to 145 characters. Start with a verb that tel
 > About this template:
 >
 > - This document is a template for reference topics, including commands, parameters, configuration options. You can directly copy and use this template and delete unnecessary annotations. An example of this type of document: [TiDB Cluster Alert Rules](/alert-rules.md)
-> - For a new document, please add a link to the appropriate location in TOC.md (consider where users are most likely to look for this document in the table of contents).
+> - For a new document, please add a link to the appropriate location in the `TOC.md` file (consider where users are most likely to look for this document in the table of contents).
 > - The headings within the document cannot skip levels, and try to avoid using level 5 headings.
 
 **Required** In the first paragraph, summarize the content of this document in a few sentences.
@@ -25,7 +25,7 @@ Introduce the category/parameter/configuration item described in this section, u
 
 ### L3 Heading (optional, a parameter or a configuration item)
 
-If you need to list multiple parameters, use unordered lists (*/+/-).
+If you need to list multiple parameters, use unordered lists (`*`/`+`/`-`).
 
 - xxx: xxx
 - xxx: xxx
@@ -41,7 +41,7 @@ If you need to add notes or warnings, strictly follow the following format.
 
 > **Warning**
 >
-> If the information may bring risks to users, such as system availability, security, data loss, etc., use a warning. For example, the current feature is an experimental feature and is not recommended for production environments.
+> If the information might bring risks to users, such as system availability, security, data loss, etc., use a warning. For example, the current feature is an experimental feature and is not recommended for production environments.
 
 > **Note**
 >

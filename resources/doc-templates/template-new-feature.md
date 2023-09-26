@@ -1,6 +1,6 @@
 ---
 title: (The same as L1 heading) Feature name such as "Clustered Indexes" in 59 characters or less. Include the keywords of this document. Test title here https://moz.com/learn/seo/title-tag
-summary: summarize this doc in 115 to 145 characters. Start with a verb that tells users what they can get from this doc. For example, "Learn what is clustered indexes and how to use clustered index to help you...". If your intro paragraph describes your article's intent, you can use it here, edited for length.
+summary: Summarize this doc in 115 to 145 characters. Start with an SEO-friendly verb that tells users what they can get from this doc. For example, "Learn what is clustered indexes and how to use clustered index to help you...". If your intro paragraph describes your article's intent, you can use it here, edited for length.
 ---
 
 # New Feature Name (the same as title in the metadata)
@@ -31,7 +31,7 @@ If you need to add notes or warnings, strictly follow the following format.
 
 If the notes or warnings are nested in a list, indent them with four spaces.
 
-To prevent incorrect display, all indentation on the PingCAP website must be 4 spaces.
+To prevent incorrect display, **all indentation on the PingCAP website must be 4 spaces.**
 
 ## Usage scenario(s)
 

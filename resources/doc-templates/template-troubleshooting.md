@@ -1,6 +1,6 @@
 ---
-title: (The same as L1 heading) such as "Troubleshoot Increased Read and Write Latency" in 59 chars or less. Include the keywords of this document. Test title here https://moz.com/learn/seo/title-tag
-summary: summarize this doc in 115 to 145 characters. Start with a verb that tells the users what they can get from this doc, for example, "Learn how to troubleshoot your cluster when you encounter xxx". If your intro paragraph describes your article's intent, you can use it here, edited for length.
+title: (The same as L1 heading) Such as "Troubleshoot Increased Read and Write Latency" in 59 characters or less. Include the keywords of this document. Test title here https://moz.com/learn/seo/title-tag
+summary: Summarize this doc in 115 to 145 characters. Start with an SEO-friendly verb that tells the users what they can get from this doc. For example, "Learn how to troubleshoot your cluster when you encounter xxx". If your intro paragraph describes your article's intent, you can use it here, edited for length.
 ---
 
 # L1 heading (the same as title in the metadata)
@@ -8,7 +8,7 @@ summary: summarize this doc in 115 to 145 characters. Start with a verb that tel
 > About this template:
 >
 > - This document is a template for troubleshooting topics, including how to diagnose and solve problems. You can directly copy and use this template and delete unnecessary annotations. An example of this type of document: [Troubleshoot Increased Read and Write Latency](/troubleshoot-cpu-issues.md).
-> - For a new document, please add a link to the appropriate location in TOC.md (consider where users are most likely to look for this document in the table of contents).
+> - For a new document, please add a link to the appropriate location in the `TOC.md` file (consider where users are most likely to look for this document in the table of contents).
 > - The headings within the document cannot skip levels, and try to avoid using level 5 headings.
 
 This document describes how to diagnose [xxx problems] and their possible causes and solutions.

@@ -1,6 +1,6 @@
 ---
-title: (The same as L1 heading) such as "Get Started with TiDB" in 59 chars or less. Include the keywords of this document. Test title here https://moz.com/learn/seo/title-tag
-summary: summarize this doc in 115 to 145 characters. Start with a verb that tells the users what they can get from this doc, for example, "Learn how to quickly get started with TiDB in 10 minutes". If your intro paragraph describes your article's intent, you can use it here, edited for length.
+title: (The same as L1 heading) Such as "Get Started with TiDB" in 59 characters or less. Include the keywords of this document. Test title here https://moz.com/learn/seo/title-tag
+summary: Summarize this doc in 115 to 145 characters. Start with an SEO-friendly verb that tells the users what they can get from this doc. For example, "Learn how to quickly get started with TiDB in 10 minutes". If your intro paragraph describes your article's intent, you can use it here, edited for length.
 ---
 
 # L1 heading (the same as title in the metadata)
@@ -8,7 +8,7 @@ summary: summarize this doc in 115 to 145 characters. Start with a verb that tel
 > About this template:
 >
 > - This document is a template for task topics, which tells users how to perform a specific task step by step. You can directly copy and use this template and delete unnecessary annotations. An example of this type of document: [Quick Start Guide for the TiDB Database Platform](/quick-start-with-tidb.md)
-> - For a new document, please add a link to the appropriate location in TOC.md (consider where users are most likely to look for this document in the table of contents).
+> - For a new document, please add a link to the appropriate location in the `TOC.md` file (consider where users are most likely to look for this document in the table of contents).
 > - The headings within the document cannot skip levels, and try to avoid using level 5 headings.
 
 **Required** In the first paragraph, summarize the content of this document in a few sentences.
@@ -122,6 +122,6 @@ In this section, provide more related documents that users may want to read, suc
 
 You can also directly provide the documents that users may be interested in, such as:
 
-- [TiFlash Architecture](/tiflash/tiflash-overview.md#architecture)
 - [Explore HTAP](/explore-htap.md)
-- [Maintain a TiFlash cluster](/tiflash/maintain-tiflash.md).
+- [TiFlash Architecture](/tiflash/tiflash-overview.md#architecture)
+- [Maintain a TiFlash cluster](/tiflash/maintain-tiflash.md)
