@@ -404,7 +404,7 @@ You can get more information about runaway queries from the following system tab
 
 2. For TiDB Self-Hosted, you can use the `resource-control.enabled` parameter to control whether to use request scheduling based on resource group quotas. For TiDB Cloud, the value of the `resource-control.enabled` parameter is `true` by default and does not support dynamic modification. If you need to disable it for TiDB Dedicated clusters, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
 
-3. For TiDB Self-Hosted, you can use the `enable_resource_control` configuration item to control whether to enable TiFlash resource control. For TiDB Cloud, <!--TODO: add the behavior of TiFlash resource control in TiDB Cloud-->.
+3. For TiDB Self-Hosted, you can use the `enable_resource_control` configuration item to control whether to enable TiFlash resource control. For TiDB Cloud, the value of the `enable_resource_control` parameter is `true` by default and does not support dynamic modification. If you need to disable it for TiDB Dedicated clusters, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
 
 </CustomContent>
 
