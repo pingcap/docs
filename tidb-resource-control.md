@@ -23,7 +23,7 @@ The TiDB resource control feature provides two layers of resource management cap
 
 Starting from v7.4.0, the resource control feature supports controlling TiFlash resources. Its principle is similar to that of TiDB flow control and TiKV scheduling:
 
-- TiFlash flow control: With the [TiFlash pipeline execution model](/tiflash/tiflash-pipeline-model.md), TiFlash can more accurately obtain the CPU consumption of different queries and convert it into [Request Units (RU)](#What-is-Request-Unit-(RU)) for deduction. Traffic control is implemented using a token bucket algorithm.
+- TiFlash flow control: With the [TiFlash pipeline execution model](/tiflash/tiflash-pipeline-model.md), TiFlash can more accurately obtain the CPU consumption of different queries and convert it into [Request Units (RU)](#what-is-request-unit-ru) for deduction. Traffic control is implemented using a token bucket algorithm.
 - TiFlash scheduling: When system resources are insufficient, TiFlash schedules pipeline tasks among multiple resource groups based on their priorities. The specific logic is: First, TiFlash assesses the `PRIORITY` of the resource group, then considers the CPU usage and `RU_PER_SEC`. As a result, if `rg1` and `rg2` have the same `PRIORITY` but the `RU_PER_SEC` of `rg2` is twice that of `rg1`, the CPU usage of `rg2` is twice that of `rg1`.
 
 ## Scenarios for resource control
@@ -404,7 +404,7 @@ You can get more information about runaway queries from the following system tab
 
 2. For TiDB Self-Hosted, you can use the `resource-control.enabled` parameter to control whether to use request scheduling based on resource group quotas. For TiDB Cloud, the value of the `resource-control.enabled` parameter is `true` by default and does not support dynamic modification. If you need to disable it for TiDB Dedicated clusters, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
 
-3. For TiDB Self-Hosted, you can use the [`enable_resource_control`](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file) TiFlash configuration item to control whether to enable TiFlash resource control. For TiDB Cloud, <!--TODO: add the behavior of TiFlash resource control in TiDB Cloud-->.
+3. For TiDB Self-Hosted, you can use the `enable_resource_control` configuration item to control whether to enable TiFlash resource control. For TiDB Cloud, <!--TODO: add the behavior of TiFlash resource control in TiDB Cloud-->.
 
 </CustomContent>
 
