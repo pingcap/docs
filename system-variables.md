@@ -50,11 +50,6 @@ Starting from v7.4.0, you can temporarily modify the value of some `SESSION` var
 
 For more information about the `SET_VAR` hint, see [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value).
 
-## Hint SET_VAR
-
-TiDB introduces the Opitmizer Hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value) to control the execution behavior of one SQL more flexiable. This hint can change the value of specified variables at SQL level.
-The following chapter will list which variables can be controlled by the hint.
-
 ## Variable Reference
 
 ### allow_auto_random_explicit_insert <span class="version-mark">New in v4.0.3</span>
