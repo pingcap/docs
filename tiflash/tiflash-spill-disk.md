@@ -94,7 +94,6 @@ This example constructs a SQL statement that consumes a lot of memory to demonst
 
 2. Execute the following statements. These statements do not limit the memory usage of the query or the memory usage of the Hash Aggregation operator with `GROUP BY` keys.
 
-
     ```sql
     SET tidb_max_bytes_before_tiflash_external_group_by = 0;
     SET tiflash_mem_quota_query_per_node = 0;
@@ -152,4 +151,4 @@ This example constructs a SQL statement that consumes a lot of memory to demonst
     - Other non-spilling operators in the query consume too much memory.
     - The spilling operators do not spill to disk timely.
 
-  To address situations where spilling operators do not spill to disk in time, you can try reducing [`tiflash_query_spill_ratio`](/system-variables.md#tiflash_query_spill_ratio-introduced-in-v740) to avoid memory threshold errors.
+  To address situations where spilling operators do not spill to disk in time, you can try reducing [`tiflash_query_spill_ratio`](/system-variables.md#tiflash_query_spill_ratio-new-in-v740) to avoid memory threshold errors.
