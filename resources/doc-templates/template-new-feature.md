@@ -110,7 +110,7 @@ Answer.
 In this section, provide more related documents that users might want to read, such as:
 
 - To view the TiFlash version, important logs, and system tables, see [Maintain a TiFlash Cluster](/tiflash/maintain-tiflash.md).
-- If you need to remove a TiFlash node, see [Scale in a TiFlash cluster](/scale-tidb-using-tiup.md#scale-in-a-tiflash-node).
+- If you need to remove a TiFlash node, see [Scale in a TiFlash cluster](/scale-tidb-using-tiup.md#scale-in-a-tiflash-cluster).
 
 You can also directly provide the documents that users might be interested in, such as:
 
