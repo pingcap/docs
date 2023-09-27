@@ -36,7 +36,7 @@ Aggregating and summarizing data from multiple columns is commonly used in OLAP 
 
 ## Prerequisites
 
-Currently, TiDB supports generating valid execution plans for the `WITH ROLLUP` syntax only in TiFlash MPP mode. Therefore, make sure that your TiDB cluster has TiFlash nodes and target tables to be analyzed are configured with TiFlash replicas properly.
+Currently, TiDB supports generating valid execution plans for the `WITH ROLLUP` syntax only in TiFlash MPP mode. Therefore, make sure that your TiDB cluster has been deployed with TiFlash nodes and that target fact tables are configured with TiFlash replicas properly.
 
 For more information, see [Scale out a TiFlash cluster](/scale-tidb-using-tiup.md#scale-out-a-tiflash-cluster).
 
@@ -96,7 +96,7 @@ Specifically:
 - The `profit` value in the second row comes from the 1-dimensional group `{year}`, representing the aggregation result for the mid-level `{2001}` group.
 - The `profit` value in the last row comes from the 0-dimensional grouping `{}`, representing the overall aggregation result.
 
-`NULL` values in the `WITH ROLLUP` results are generated before the Aggregate operator is applied. Therefore, you can use `NULL` values in `SELECT`, `HAVING`, and `ORDER BY` clauses to further filter the aggregated results.
+`NULL` values in the `WITH ROLLUP` results are generated just before the Aggregate operator is applied. Therefore, you can use `NULL` values in `SELECT`, `HAVING`, and `ORDER BY` clauses to further filter the aggregated results.
 
 For example, you can use `NULL` in the `HAVING` clause to filter and view the aggregated results of 2-dimensional groups only:
 
@@ -131,7 +131,7 @@ SELECT year, month, SUM(profit) AS profit, grouping(year) as grp_year, grouping(
 6 rows in set (0.028 sec)
 ```
 
-From this output, you can get the aggregation dimension of a row directly from the results of `grp_year` and `grp_month`, which prevents interference from native `NULL` values in the `year` and `month` grouping expressions.
+From this output, you can get an understanding of the aggregation dimension of a row directly from the results of `grp_year` and `grp_month`, which prevents interference from native `NULL` values in the `year` and `month` grouping expressions.
 
 The `GROUPING()` function can accept up to 64 grouping expressions as parameters. In the output of multiple parameters, each parameter generates a result of `0` or `1`, and these parameters collectively form a 64-bit `UNSIGNED LONGLONG` with each bit as `0` or `1`. You can use the following formula to get the bit position of each parameter as follows:
 
@@ -213,4 +213,4 @@ After the `Expand` operator is applied, you can get the following three rows of 
 +------------+------+-------+-----+
 ```
 
-Note that the `SELECT` clause in the query uses the `GROUPING` function. When the `GROUPING` function is used in the `SELECT`, `HAVING`, or `ORDER BY` clauses, TiDB rewrites it during the logical optimization phase, transforms the relationship between the `GROUPING` function and the `GROUP BY` items into a `GID` related to the logic of dimension group, and fills this `GID` as metadata into the new `GROUPING` function.
+Note that the `SELECT` clause in the query uses the `GROUPING` function. When the `GROUPING` function is used in the `SELECT`, `HAVING`, or `ORDER BY` clauses, TiDB rewrites it during the logical optimization phase, transforms the relationship between the `GROUPING` function and the `GROUP BY` items into a `GID` related to the logic of dimension group (or known as `grouping set`), and fills this `GID` as metadata into the new `GROUPING` function.
