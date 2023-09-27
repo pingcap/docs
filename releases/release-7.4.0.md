@@ -34,8 +34,8 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.4/quick-start-with-
     <td>Before v7.4.0, tasks such as <code>ADD INDEX</code> or <code>IMPORT INTO</code> in the distributed execution framework required TiDB nodes to allocate local disk space for sorting data before importing it into TiKV. This approach involves partial and localized sorting, and often results in data overlaps, leading to increased resource consumption and lower performance and stability of TiKV. With the introduction of the Global Sorting feature in v7.4.0, data is temporarily stored in S3 for global sorting before being imported into TiKV in an orderly manner. This eliminates the need for TiKV to consume extra resources on compactions and significantly improves the performance and stability of operations like <code>ADD INDEX</code> and <code>IMPORT INTO</code>.</td>
   </tr>
   <tr>
-    <td>Resource Control for background jobs (experimental) <!--Roger, tw@Oreoxmt--></td>
-    <td>v7.1 introduced Resource Control to mitigate resource and storage access interference between workloads. v7.4 applies this contorl to background tasks as well. Now the resource produced by background tasks can be identified and managed by resource control. The first to realize this benefit are: Auto-analyze, Backup & Recovery, Load Data, and Online DDL. This should apply to all background tasks eventually. </td>
+    <td>Resource control for background tasks (experimental) <!--Roger, tw@Oreoxmt--></td>
+    <td>In v7.1.0, the resource control feature becomes generally available and this feature helps mitigate resource and storage access interference between workloads. TiDB v7.4.0 applies this contorl to background tasks as well. Resource control identifies and manages the resources produced by background tasks, such as auto-analyze, Backup & Restore, load data, and online DDL. This will eventually apply to all background tasks.</td>
   </tr>
   <tr>
     <td>TiFlash supports <a href="https://docs.pingcap.com/tidb/v7.4/tiflash-disaggregated-and-s3" target="_blank">storage-computing separation and S3</a> (GA) <!--Zhang Ye, tw@qiancai--></td>
@@ -60,8 +60,8 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.4/quick-start-with-
     </td>
   </tr>
   <tr>
-    <td>MySQL 8.0 compatibility: Include collation utf8mb4_0900_ai_ci <!--Roger, tw@Oreoxmt--></td>
-    <td> One of remarkable change in MySQL 8.0: the default characterset is utf8mb4, while the default collation of utf8mb4 is utf8mb4_0900_ai_ci. If the database was created on MySQL 8.0 with default collection, it can be migrated or replicated to TiDB smoothly. This was the last piece waiting to call TiDB generally MySQL 8.0 compatible.</td>
+    <td>MySQL 8.0 compatibility: support collation <code>utf8mb4_0900_ai_ci</code> <!--Roger, tw@Oreoxmt--></td>
+    <td>One notable change in MySQL 8.0 is that the default character set is utf8mb4, and the default collation of utf8mb4 is <code>utf8mb4_0900_ai_ci</code>. TiDB v7.4.0 enhances the compatibility with MySQL 8.0. If you create a database in MySQL 8.0 with the default collation, you can smoothly migrate or replicate it to TiDB.</td>
   </tr>
   <tr>
     <td>TiDB and TiFlash support the <code>ROLLUP</code> modifier and the <code>GROUPING()</code> function <!--Zhang Ye, tw@qiancai--></td>
@@ -69,7 +69,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.4/quick-start-with-
   </tr>
   <tr>
     <td>TiFlash supports resource control <!--Zhang Ye, tw@Oreoxmt --></td>
-    <td> Prior to v7.4, TiDB resource control can not manage resource of TiFlash. In v7.4, TiFlash can manage resource better, and improving the overall resource management capabilities of TiDB. </td>
+    <td>Before v7.4.0, TiDB resource control cannot manage resource of TiFlash. In v7.4.0, TiFlash can manage resource better, improving the overall resource management capabilities of TiDB.</td>
   </tr>
   <tr>
     <td>DB Operations and Observability</td>
