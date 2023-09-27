@@ -3517,7 +3517,7 @@ mysql> desc select count(distinct a) from test.t;
 - Default value: `ON`
 - This variable is used to control whether the optimizer estimates the number of rows based on column order correlation
 
-### `tidb_opt_enable_hash_join` <span class="version-mark">New in v7.4.0</span>
+### tidb_opt_enable_hash_join <span class="version-mark">New in v7.4.0</span>
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
@@ -3527,7 +3527,7 @@ mysql> desc select count(distinct a) from test.t;
 - This variable is used to control whether the optimizer will select hash joins for tables. The value is `ON` by default. If it is set to `OFF`, the optimizer ignores hash join when generating execution plans.
 - The `HASH_JOIN` hint takes precedence even if `tidb_opt_enable_hash_join` is set to `off`. If a `HASH_JOIN` hint is specified in a query, the TiDB optimizer will still enforce a hash join plan.
 
-### `tidb_opt_enable_non_eval_scalar_subquery` <span class="version-mark">New in v7.3.0</span>
+### tidb_opt_enable_non_eval_scalar_subquery <span class="version-mark">New in v7.3.0</span>
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
