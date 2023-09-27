@@ -133,7 +133,7 @@ send-timeout=30
 
 ### Best practice
 
-* You need to specify the `protocol` parameter when creating a changefeed. Currently only the `canal-json` protocol is supported for replicating data to Pulsar.
+* You need to specify the `protocol` parameter when creating a changefeed. Currently, only the `canal-json` protocol is supported for replicating data to Pulsar.
 * The `pulsar-producer-cache-size` parameter indicates the number of producers cached in the Pulsar client. Because each producer in Pulsar can only correspond to one topic, TiCDC adopts the LRU method to cache producers, and the default limit is 10240. If the number of topics you need to replicate is larger than the default value, you need to increase the number.
 
 ### TiCDC authentication and authorization for Pulsar
