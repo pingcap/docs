@@ -3517,7 +3517,7 @@ mysql> desc select count(distinct a) from test.t;
 - Default value: `ON`
 - This variable is used to control whether the optimizer estimates the number of rows based on column order correlation
 
-### tidb_opt_enable_hash_join
+### `tidb_opt_enable_hash_join` <span class="version-mark">New in v7.4.0</span>
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
