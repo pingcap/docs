@@ -160,7 +160,7 @@ SELECT year, month, SUM(profit) AS profit, grouping(year) as grp_year, grouping(
 
 To meet the requirements of multidimensional grouping, multidimensional data aggregation uses the `Expand` operator to replicate data. Each replica corresponds to a group at a specific dimension. With the data shuffling capability of MPP, the `Expand` operator can rapidly reorganize and calculate a large volume of data between multiple TiFlash nodes, fully utilizing the computational power of each node.
 
-The implementation of the `Expand` operator is similar to that of the `Projection` operator. The difference is that `Expand` is a multi-level `Projection`, which contains multiple levels of projection operation expressions. For each row of the raw data, the `Projection` operator generates only one row in results, whereas the `Expand` operator generates multiple rows in results (the number of rows equals the number of levels in projection operation expressions).
+The implementation of the `Expand` operator is similar to that of the `Projection` operator. The difference is that `Expand` is a multi-level `Projection`, which contains multiple levels of projection operation expressions. For each row of the raw data, the `Projection` operator generates only one row in results, whereas the `Expand` operator generates multiple rows in results (the number of rows is equal to the number of levels in projection operation expressions).
 
 The following is an example of an execution plan:
 
