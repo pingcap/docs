@@ -12,7 +12,7 @@ In the `GROUP BY` clause, you can specify one or more columns as a group list an
 - Grouping method:
 
     - The first grouping dimension includes all columns in the group list.
-    - Subsequent grouping dimensions start from the right end of the grouping list and decrease one column at a time to form new groups.
+    - Subsequent grouping dimensions start from the right end of the grouping list and exclude one more column at a time to form new groups.
 
 - Aggregation summaries: for each dimension, the query performs aggregation operations, and then aggregates the results of this dimension with the results of all previous dimensions. This means that you can get aggregated data at different dimensions, from detailed to overall.
 
@@ -32,7 +32,7 @@ In this example, TiDB will aggregate the calculation results of `count(1)` on 4 
 
 ## Use cases
 
-Aggregating and summarizing data from multiple columns is commonly used in OLAP (Online Analytical Processing) scenarios. By using the `WITH ROLLUP` modifier, you can get additional rows in the aggregated results, which display summary information in different dimensions for advanced data analysis and report generation.
+Aggregating and summarizing data from multiple columns is commonly used in OLAP (Online Analytical Processing) scenarios. By using the `WITH ROLLUP` modifier, you can get additional rows that display super summary information from other high-level dimensions in your aggregated results. Then, you can use the super summary information for advanced data analysis and report generation.
 
 ## Prerequisites
 
@@ -71,7 +71,7 @@ SELECT year, SUM(profit) AS profit FROM bank GROUP BY year;
 2 rows in set (0.15 sec)
 ```
 
-In addition to yearly profits, bank reports usually also need to include the overall profit for all years and monthly profits for in-depth or more detailed profit analysis. Before v7.4.0, you have to use different `GROUP BY` clauses in multiple queries and join the results using UNION to obtain aggregated summaries. Starting from v7.4.0, you can simply achieve the desired results in a single query by appending the `WITH ROLLUP` modifier to the `GROUP BY` clause.
+In addition to yearly profits, bank reports usually also need to include the overall profit for all years or monthly divided profits for detailed profit analysis. Before v7.4.0, you have to use different `GROUP BY` clauses in multiple queries and join the results using UNION to obtain aggregated summaries. Starting from v7.4.0, you can simply achieve the desired results in a single query by appending the `WITH ROLLUP` modifier to the `GROUP BY` clause.
 
 ```sql
 SELECT year, month, SUM(profit) AS profit from bank GROUP BY year, month WITH ROLLUP ORDER BY year desc, month desc;
@@ -88,7 +88,7 @@ SELECT year, month, SUM(profit) AS profit from bank GROUP BY year, month WITH RO
 6 rows in set (0.025 sec)
 ```
 
-The preceding results include aggregated data at different dimensions: by year, by month, and overall. In the results, a row without `NULL` values indicates that the `profit` in that row is calculated by grouping both year and month. A row with a `NULL` value in the `month` column indicates that `profit` in that row is calculated by aggregating months, while a row with a `NULL` value in the `year` column indicates that `profit` in that row is calculated by aggregating years.
+The preceding results include aggregated data at different dimensions: by year, by both year and month, and overall. In the results, a row without `NULL` values indicates that the `profit` in that row is calculated by grouping both year and month. A row with a `NULL` value in the `month` column indicates that `profit` in that row is calculated by aggregating months, while a row with a `NULL` value in the `year` column indicates that `profit` in that row is calculated by aggregating years.
 
 Specifically:
 
@@ -185,7 +185,7 @@ explain SELECT year, month, grouping(year), grouping(month), SUM(profit) AS prof
 
 In this example execution plan, you can view the multiple-level expression of the `Expand` operator in the `operator info` column of the `Expand_20` row. It consists of 2-dimensional expressions, and you can view the schema information of the `Expand` operator at the end of the row, which is `schema: [test.bank.profit, Column#6, Column#7, gid]`.
 
-In the schema information of the `Expand` operator, `GID` is generated as an additional column. Its value is calculated by the `Expand` operator based on the grouping logic of different dimensions, and the value reflects the relationship between the current data replica and the grouping dimension. In most cases, the `Expand` operator uses a bitmask operation, which can represent 63 combinations of grouping items for ROLLUP, corresponding to 64 dimensions of grouping. In this mode, TiDB generates the `GID` value depending on whether the group of the required dimension contains grouping expressions when the current data replica is replicated, and it fills a 64-bit UINT64 value in the order of columns to be grouped.
+In the schema information of the `Expand` operator, `GID` is generated as an additional column. Its value is calculated by the `Expand` operator based on the grouping logic of different dimensions, and the value reflects the relationship between the current data replica and the `grouping set`. In most cases, the `Expand` operator uses a Bit-And operation, which can represent 63 combinations of grouping items for ROLLUP, corresponding to 64 dimensions of grouping. In this mode, TiDB generates the `GID` value depending on whether the group set of the required dimension contains grouping expressions when the current data replica is replicated, and it fills a 64-bit UINT64 value in the order of columns to be grouped.
 
 In the preceding example, the order of columns in the grouping list is `[year, month]`, and the dimension groups generated by the ROLLUP syntax are `{year, month}`, `{year}`, and `{}`. For the dimension group `{year, month}`, both `year` and `month` are required columns, so TiDB fills the bit positions for them with 1 and 1 correspondingly. This forms a UINT64 of `11...0`, which is 3 in decimal. Therefore, the projection expression is `[test.bank.profit, Column#6, Column#7, 3->gid]` (where `column#6` corresponds to `year`, and `column#7` corresponds to `month`).
 
