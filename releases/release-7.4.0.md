@@ -26,30 +26,34 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.4/quick-start-with-
 <tbody>
   <tr>
     <td>Scalability and Performance</td>
-    <td>Support for running multiple DDL statements in parallel (experimental) <!--Cathy--></td>
-    <td>Different from distributed and parallel DDL jobs, this feature allows for concurrent jobs to run where they were otherwise running syncrhonsously. Where running DDL statements x, y at the same time used to take x-time +y-time, they now take significantly less.</td>
+    <td>Enhance the performance for adding several indexes of a table in a single ALTER statement (experimental) <!--Frank, tw@ran-huang--></td>
+    <td>From v6.2 the user can add several indexes of a table in a single ALTER statement. However, the performance is the same as running two single add index DDL statements x, y, which used to take x-time +y-time, they now take significantly less.</td>
     </td>
   </tr>
   <tr>
     <td rowspan="3">Reliability and Availability</td>
-    <td>Global sort optimization <!--Frank--></td>
-    <td>Laying the groundwork with the distributed framework in v7.2, TiDB introduces global sorting to eliminate the unnecessary I/O, CPU, and memory spikes caused from temporarily out out of order data during data re-organization tasks. The global sorting will take advantage of external shared object storage (S3 in this first iteration) to store intermediary files during the job, adding flexibility and cost savings. Operations like ADD INDEX and IMPORT INTO will be faster, more resilient, more stable, more flexible, and cost less to run.</td>
+    <td>Improving the performance and stability of 'Import into' and 'Add Index' operations via `global sorting` <!--Frank, tw@ran-huang--></td>
+    <td>Before v7.4.0, tasks like ADD INDEX or IMPORT INTO in the distributed parallel execution framework required TiDB nodes to allocate local disk space for sorting data before importing it into TiKV. This approach, involving partial and localized sorting, often led to data overlaps, increasing TiKV's resource consumption and lower performance and stability. With the Global Sorting feature in v7.4.0, data is temporarily stored in S3 for global sorting. Then the data is imported into TiKV in an orderly, eliminating the need for TiKV to consume extra resources on compactions. This significantly enhances the performance and stability of operations like IMPORT INTO and ADD INDEX.</td>
   </tr>
   <tr>
-    <td>Resource Control for background jobs (experimental) <!--Roger--></td>
-    <td>v7.1 introduced Resource Control to mitigate resource and storage access interference between workloads. v7.4 applies this contorl to background tasks as well. This should apply to all background tasks eventually. The first to realize this benefit are: Backup & Recovery, Load Data, and Online DDL.</td>
+    <td>Resource Control for background jobs (experimental) <!--Roger, tw@Oreoxmt--></td>
+    <td>v7.1 introduced Resource Control to mitigate resource and storage access interference between workloads. v7.4 applies this contorl to background tasks as well. Now the resource produced by background tasks can be identified and managed by resource control. The first to realize this benefit are: Auto-analyze, Backup & Recovery, Load Data, and Online DDL. This should apply to all background tasks eventually. </td>
   </tr>
   <tr>
-    <td>TiFlash supports storage-computing separation and S3 <!--Zhang Ye--></td>
-    <td> <!--Description to be added--> </td>
+    <td>TiFlash supports storage-computing separation and S3 <!--Zhang Ye, tw@qiancai--></td>
+    <td>TiFlash introduces a cloud-native architecture as an option:
+      <ul>
+        <li>Disaggregates TiFlash's compute and storage, which is a milestone for elastic HTAP resource utilization.</li>
+        <li>Introduces S3-based storage engine, which can provide shared storage at a lower cost.</li>
+      </ul>
+    </td>
   </tr>
   <tr>
     <td rowspan="4">SQL</td>
-    <td>More complete partition management <!--Zhang Ye--></td>
-    <td>Prior to v7.4, TiDB supported truncate partition, exchange partition, and add/drop/reorganize partition on Range/List Partitioning
+    <td>More complete partition management <!--Zhang Ye, tw@qiancai--></td>
+    <td>Prior to v7.4, TiDB supported truncate partition, exchange partition, add/drop/reorganize partition on Range/List Partitioning, and add/coalesce partition on Hash/Key partitioning
 In this version, TiDB partition management adds:
       <ul>
-        <li>Add/Coalesce Partition on Hash/Key partitioning</li>
         <li>Remove partition</li>
         <li>Partitioning existing non-partitioned tables</li>
         <li>Modifying existing partition types on tables</li>
@@ -57,21 +61,21 @@ In this version, TiDB partition management adds:
     </td>
   </tr>
   <tr>
-    <td>MySQL 8.0 compatibility: Add utf8mb4 charset <!--Roger--></td>
-    <td> In MySQL 8.0, the default characterset is utf8mb4, while the default collation of utf8mb4 is utf8mb4_0900_ai_ci. If the database was created on MySQL 8.0, it's more than likely the collation is utf8mb4_0900_ai_ci. We'll be seeing more cases where customers are migrating from MySQL 8.0 with collation utf8mb4_0900_ai_ci. This was the last piece waiting to call TiDB generally MySQL 8.0 compatible.</td>
+    <td>MySQL 8.0 compatibility: Include collation utf8mb4_0900_ai_ci <!--Roger, tw@Oreoxmt--></td>
+    <td> One of remarkable change in MySQL 8.0: the default characterset is utf8mb4, while the default collation of utf8mb4 is utf8mb4_0900_ai_ci. If the database was created on MySQL 8.0 with default collection, it can be migrated or replicated to TiDB smoothly. This was the last piece waiting to call TiDB generally MySQL 8.0 compatible.</td>
   </tr>
   <tr>
-    <td>TiDB&TiFlash support modifier ROLLUP and function GROUPING() <!--Zhang Ye--></td>
-    <td> <!--Description to be added--> </td>
+    <td>TiDB&TiFlash support modifier ROLLUP and function GROUPING() <!--Zhang Ye, tw@qiancai--></td>
+    <td> ROLLUP modifier can cause summary output to include extra rows that represent higher-level summary operations, thus enables you to answer questions at multiple levels of analysis with a single query. ROLLUP modifier is commonly used in data analysis and is used to summarize data in multiple dimensions. </td>
   </tr>
   <tr>
-    <td>TiFlash pipeline execution model GA <!--Zhang Ye--></td>
-    <td> <!--Description to be added--> </td>
+    <td>TiFlash supports resource control <!--Zhang Ye, tw@Oreoxmt --></td>
+    <td> Prior to v7.4, TiDB resource control can not manage resource of TiFlash. In v7.4, TiFlash can manage resource better, and improving the overall resource management capabilities of TiDB. </td>
   </tr>
   <tr>
     <td>DB Operations and Observability</td>
-    <td>DDL labels for TiDB nodes <!--Frank--></td>
-    <td><!--Description to be added--></td>
+    <td>Specify the respective TiDB nodes to execute the 'IMPORT INTO' and 'ADD INDEX' SQL statements. <!--Frank, tw@hfxsd--></td>
+    <td>You have the flexibility to specify whether to execute 'IMPORT INTO' or 'ADD INDEX' SQL statements on some of the existing TiDB nodes or newly added TiDB nodes. This approach enables resource isolation from the rest of the TiDB nodes, preventing any impact on business operations while ensuring optimal performance for executing 'IMPORT INTO' or 'ADD INDEX' SQL statements.</td>
   </tr>
 </tbody>
 </table>
@@ -80,7 +84,7 @@ In this version, TiDB partition management adds:
 
 ### Scalability
 
-* Support setting the TiDB service scope to select the applicable TiDB nodes to execute `ADD INDEX` or `IMPORT INTO` tasks in parallel (experimental) [#46453](https://github.com/pingcap/tidb/pull/46453) @[ywqzzy](https://github.com/ywqzzy) **tw@hfxsd** <!--1505-->
+* Support selecting the TiDB nodes to parallelly execute the backend `ADD INDEX` or `IMPORT INTO` tasks of the distributed execution framework (experimental) [#46453](https://github.com/pingcap/tidb/pull/46453) @[ywqzzy](https://github.com/ywqzzy) **tw@hfxsd** <!--1505-->
 
     Executing `ADD INDEX` or `IMPORT INTO` tasks in parallel in a resource-intensive cluster can consume a large amount of TiDB node resources, which can lead to cluster performance degradation. Starting from v7.4.0, you can use the system variable [`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740) to control the service scope of each TiDB node under the [TiDB Backend Task Distributed Execution Framework](/tidb-distributed-execution- framework.md). You can select several existing TiDB nodes or set the TiDB service scope for new TiDB nodes, and all parallel `ADD INDEX` and `IMPORT INTO` tasks only run on these nodes. This mechanism can avoid performance impact on existing services.
     
@@ -305,6 +309,8 @@ In this version, TiDB partition management adds:
 | Variable name | Change type | Description |
 |--------|------------------------------|------|
 | [`default_collation_for_utf8mb4`](/system-variables.md#default_collation_for_utf8mb4-new-in-v740) | Newly added | Controls the default collation for the `utf8mb4` character set. The default value is `utf8mb4_bin`. |
+| [`tidb_opt_enable_hash_join`](/system-variables.md#tidb_opt_enable_hash_join-new-in-v740) | Newly added | Controls whether the optimizer will select hash joins for tables. The value is `ON` by default. If set to `OFF`, the optimizer avoids selecting a hash join of a table unless there is no execution plan available. |
+| [`tidb_opt_objective`](/system-variables.md#tidb_opt_objective-new-in-v740) | Newly added | 该变量用于设置优化器优化目标。`moderate` 维持旧版本的默认行为，优化器会利用更多信息尝试生成更优的计划；`determinate` 则倾向于保守，保持执行计划稳定。 |
 | [`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740) | Newly added | This variable is an instance-level system variable. You can use it to control the service scope of TiDB nodes under the [TiDB distributed execution framework](/tidb-distributed-execution-framework.md). When you set `tidb_service_scope` of a TiDB node to `background`, the TiDB distributed execution framework schedules that TiDB node to execute background tasks, such as [`ADD INDEX`](/sql-statements/sql-statement-add-index.md) and [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md). |
 | [`tidb_session_alias`](/system-variables.md#tidb_session_alias-new-in-v740) |  Newly added | Controls the value of the `session_alias` column in the logs related to the current session. |
 | [`tikv_client_read_timeout`](/system-variables.md#tikv_client_read_timeout-new-in-v740) | Newly added | Controls the timeout for TiDB to send a TiKV RPC read request in a query. The default value `0` indicates that the default timeout (usually 40 seconds) is used. |
