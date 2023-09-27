@@ -13,8 +13,6 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.4/quick-start-with-
 
 7.4.0 introduces the following key features and improvements:
 
-7.4.0 introduces the following major features. In addition to that, 7.4.0 also includes a series of enhancements (described in the [Feature details](#feature-details) section) to query stability in TiDB server and TiFlash. These enhancements are more miscellaneous in nature and not user-facing so they are not included in the following table.
-
 <table>
 <thead>
   <tr>
@@ -40,23 +38,24 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.4/quick-start-with-
     <td>v7.1 introduced Resource Control to mitigate resource and storage access interference between workloads. v7.4 applies this contorl to background tasks as well. Now the resource produced by background tasks can be identified and managed by resource control. The first to realize this benefit are: Auto-analyze, Backup & Recovery, Load Data, and Online DDL. This should apply to all background tasks eventually. </td>
   </tr>
   <tr>
-    <td>TiFlash supports storage-computing separation and S3 <!--Zhang Ye, tw@qiancai--></td>
-    <td>TiFlash introduces a cloud-native architecture as an option:
+    <td>TiFlash supports <a href="https://docs.pingcap.com/tidb/v7.4/tiflash-disaggregated-and-s3" target="_blank">storage-computing separation and S3</a> (GA) <!--Zhang Ye, tw@qiancai--></td>
+    <td>TiFlash disaggregated storage and compute architecture and S3 shared storage becomes generally available:
       <ul>
         <li>Disaggregates TiFlash's compute and storage, which is a milestone for elastic HTAP resource utilization.</li>
-        <li>Introduces S3-based storage engine, which can provide shared storage at a lower cost.</li>
+        <li>Supports using S3-based storage engine, which can provide shared storage at a lower cost.</li>
       </ul>
     </td>
   </tr>
   <tr>
     <td rowspan="4">SQL</td>
-    <td>More complete partition management <!--Zhang Ye, tw@qiancai--></td>
-    <td>Prior to v7.4, TiDB supported truncate partition, exchange partition, add/drop/reorganize partition on Range/List Partitioning, and add/coalesce partition on Hash/Key partitioning
-In this version, TiDB partition management adds:
+    <td>TiDB fully supports partition management <!--Zhang Ye, tw@qiancai--></td>
+    <td>Before v7.4.0, Range/List partitioned tables support partition management operations such as <code>TRUNCATE</code>, <code>EXCHANGE</code>, <code>ADD</code>, <code>DROP</code>, and <code>REORGANIZE</code>, and Hash/Key partitioned tables support partition management operations such as <code>ADD</code> and <code>COALESCE</code>.
+    
+    Now TiDB also supports the following partition management operations:
       <ul>
-        <li>Remove partition</li>
-        <li>Partitioning existing non-partitioned tables</li>
-        <li>Modifying existing partition types on tables</li>
+        <li>Convert partitioned tables to non-partitioned tables</li>
+        <li>Partition existing non-partitioned tables</li>
+        <li>Modify partition types for existing tables</li>
       </ul>
     </td>
   </tr>
@@ -65,8 +64,8 @@ In this version, TiDB partition management adds:
     <td> One of remarkable change in MySQL 8.0: the default characterset is utf8mb4, while the default collation of utf8mb4 is utf8mb4_0900_ai_ci. If the database was created on MySQL 8.0 with default collection, it can be migrated or replicated to TiDB smoothly. This was the last piece waiting to call TiDB generally MySQL 8.0 compatible.</td>
   </tr>
   <tr>
-    <td>TiDB&TiFlash support modifier ROLLUP and function GROUPING() <!--Zhang Ye, tw@qiancai--></td>
-    <td> ROLLUP modifier can cause summary output to include extra rows that represent higher-level summary operations, thus enables you to answer questions at multiple levels of analysis with a single query. ROLLUP modifier is commonly used in data analysis and is used to summarize data in multiple dimensions. </td>
+    <td>TiDB and TiFlash support the <code>ROLLUP</code> modifier and the <code>GROUPING()</code> function <!--Zhang Ye, tw@qiancai--></td>
+    <td>The <code>ROLLUP</code> modifier is commonly used in data analysis to summarize data in multiple dimensions. With the <code>ROLLUP</code>modifier, the output of the <code>GROUP BY</code> clause can include additional rows that represent higher-level summary operations, thus enabling you to answer questions at multiple levels of analysis with a single query.  </td>
   </tr>
   <tr>
     <td>TiFlash supports resource control <!--Zhang Ye, tw@Oreoxmt --></td>
@@ -74,8 +73,8 @@ In this version, TiDB partition management adds:
   </tr>
   <tr>
     <td>DB Operations and Observability</td>
-    <td>Specify the respective TiDB nodes to execute the 'IMPORT INTO' and 'ADD INDEX' SQL statements (experimental). <!--Frank, tw@hfxsd--></td>
-    <td>You have the flexibility to specify whether to execute 'IMPORT INTO' or 'ADD INDEX' SQL statements on some of the existing TiDB nodes or newly added TiDB nodes. This approach enables resource isolation from the rest of the TiDB nodes, preventing any impact on business operations while ensuring optimal performance for executing the preceding SQL statements.</td>
+    <td><a href="https://docs.pingcap.com/tidb/v7.4/system-variables#tidb_service_scope-new-in-v740" target="_blank">Specify the respective TiDB nodes to execute the <code>IMPORT INTO<code> and <code>ADD INDEX<code> SQL statements (experimental)</a> <!--Frank, tw@hfxsd--></td>
+    <td>You have the flexibility to specify whether to execute <code>IMPORT INTO</code> or <code>ADD INDEX</code> SQL statements on some of the existing TiDB nodes or newly added TiDB nodes. This approach enables resource isolation from the rest of the TiDB nodes, preventing any impact on business operations while ensuring optimal performance for executing the preceding SQL statements.</td>
   </tr>
 </tbody>
 </table>
