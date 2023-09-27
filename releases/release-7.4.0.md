@@ -75,7 +75,7 @@ In this version, TiDB partition management adds:
   <tr>
     <td>DB Operations and Observability</td>
     <td>Specify the respective TiDB nodes to execute the 'IMPORT INTO' and 'ADD INDEX' SQL statements (experimental). <!--Frank, tw@hfxsd--></td>
-    <td>You have the flexibility to specify whether to execute 'IMPORT INTO' or 'ADD INDEX' SQL statements on some of the existing TiDB nodes or newly added TiDB nodes. This approach enables resource isolation from the rest of the TiDB nodes, preventing any impact on business operations while ensuring optimal performance for executing 'IMPORT INTO' or 'ADD INDEX' SQL statements.</td>
+    <td>You have the flexibility to specify whether to execute 'IMPORT INTO' or 'ADD INDEX' SQL statements on some of the existing TiDB nodes or newly added TiDB nodes. This approach enables resource isolation from the rest of the TiDB nodes, preventing any impact on business operations while ensuring optimal performance for executing the preceding SQL statements.</td>
   </tr>
 </tbody>
 </table>
