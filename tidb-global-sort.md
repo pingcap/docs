@@ -19,15 +19,15 @@ summary: Learn the use cases, limitations, usage, and implementation principles 
 
 ## Overview
 
-The TiDB Global Sort feature enhances the stability and efficiency of data import and DDL (Data Definition Language) operations. It serves as a general operator in the [distributed execution framework](/tidb-distributed-execution-framework.md). Through the distributed execution framework, it provides a global sort service on cloud.
+The TiDB Global Sort feature enhances the stability and efficiency of data import and DDL (Data Definition Language) operations. It serves as a general operator in the [distributed execution framework](/tidb-distributed-execution-framework.md), providing a global sort service on cloud.
 
-Additionally, it can be easily extended to support multiple shared storage interfaces such as S3 and POSIX, enabling seamless integration with different storage systems. This flexibility enables efficient and adaptable data sorting for various use cases.
+It can be easily extended to support multiple shared storage interfaces such as S3 and POSIX, enabling seamless integration with different storage systems. This flexibility enables efficient and adaptable data sorting for various use cases.
 
 ## Use cases
 
-The Global Sort feature is designed to enhance the efficiency of `IMPORT INTO` and `CREATE INDEX`. By integrating Global Sort into backend tasks, you can improve stability, control, and scalability. As a result, TiDB offers an enhanced user experience and higher-quality service.
+The Global Sort feature enhances the efficiency of `IMPORT INTO` and `CREATE INDEX`. By integrating Global Sort into backend tasks, you can improve stability, control, and scalability, resulting in an enhanced user experience and higher-quality service.
 
-The Global Sort feature provides services for executing tasks within the unified distributed parallel execution framework and ensuring efficient and parallel sorting of data on a global scale.
+The Global Sort feature executes tasks within the unified distributed parallel execution framework, ensuring efficient and parallel sorting of data on a global scale.
 
 ## Limitations
 
@@ -35,7 +35,9 @@ Currently, the Global Sort feature is not used as a component of the query execu
 
 ## Usage
 
-1. Before enabling Global Sort, you need to enable the distributed execution framework. To do so, set the value of [`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710) to `ON`:
+To enable Global Sort, follow these steps:
+
+1. Enable the distributed execution framework by setting the value of [`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710) to `ON`:
 
     ```sql
     SET GLOBAL tidb_enable_dist_task = ON;
@@ -53,7 +55,7 @@ The algorithm of the Global Sort feature is as follows:
 
 ![Algorithm of Global Sort](/media/dist-task/global-sort.jpeg)
 
-The detailed implementation principles is as follows:
+The detailed implementation principles are as follows:
 
 ### Step 1: Scan and prepare data
 
