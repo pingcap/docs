@@ -26,14 +26,14 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.4/quick-start-with-
 <tbody>
   <tr>
     <td>Scalability and Performance</td>
-    <td>Enhance the performance for adding several indexes of a table in a single ALTER statement (experimental) <!--Frank, tw@ran-huang--></td>
-    <td>From v6.2 the user can add several indexes of a table in a single ALTER statement. However, the performance is the same as running two single add index DDL statements x, y, which used to take x-time +y-time, they now take significantly less.</td>
+    <td>Enhance the performance of adding multiple indexes for a table in a single <code>ADD INDEX</code> statement (experimental) <!--Frank, tw@ran-huang--></td>
+    <td>Since v6.2.0, you can add multiple indexes for a table in a single <code>ADD INDEX</code> statement. However, the performance is the same as running multiple <code>ADD INDEX</code> statements. After optimization in v7.4.0, the performance of adding multiple indexes in a single SQL statement has been greatly improved.</td>
     </td>
   </tr>
   <tr>
     <td rowspan="3">Reliability and Availability</td>
-    <td>Improving the performance and stability of 'Import into' and 'Add Index' operations via `global sorting` <!--Frank, tw@ran-huang--></td>
-    <td>Before v7.4.0, tasks like ADD INDEX or IMPORT INTO in the distributed parallel execution framework required TiDB nodes to allocate local disk space for sorting data before importing it into TiKV. This approach, involving partial and localized sorting, often led to data overlaps, increasing TiKV's resource consumption and lower performance and stability. With the Global Sorting feature in v7.4.0, data is temporarily stored in S3 for global sorting. Then the data is imported into TiKV in an orderly, eliminating the need for TiKV to consume extra resources on compactions. This significantly enhances the performance and stability of operations like IMPORT INTO and ADD INDEX.</td>
+    <td>Improve the performance and stability of <code>IMPORT INTO</code> and <code>ADD INDEX</code> operations via global sort <!--Frank, tw@ran-huang--></td>
+    <td>Before v7.4.0, tasks such as <code>ADD INDEX</code> or <code>IMPORT INTO</code> in the distributed execution framework required TiDB nodes to allocate local disk space for sorting data before importing it into TiKV. This approach involves partial and localized sorting, and often results in data overlaps, leading to increased resource consumption and lower performance and stability of TiKV. With the introduction of the Global Sorting feature in v7.4.0, data is temporarily stored in S3 for global sorting before being imported into TiKV in an orderly manner. This eliminates the need for TiKV to consume extra resources on compactions and significantly improves the performance and stability of operations like <code>ADD INDEX</code> and <code>IMPORT INTO</code>.</td>
   </tr>
   <tr>
     <td>Resource Control for background jobs (experimental) <!--Roger, tw@Oreoxmt--></td>
