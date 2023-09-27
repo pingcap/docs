@@ -60,9 +60,9 @@ The detailed implementation principles is as follows:
 1. After TiDB nodes scan a specific range of data:
 
     1. TiDB nodes encode them into Key-Value pairs.
-    2. TiDB nodes sort Key-Value pairs into several block data segments, where each segment is one file and is uploaded into S3.
+    2. TiDB nodes sort Key-Value pairs into several block data segments, where each segment is one file and is uploaded into the cloud storage.
 
-2. The TiDB node also records a serial actual Key-Value ranges for each segment (referred to as a statistics file), which is a key preparation for scalable sort implementation. These files are then uploaded into S3 along with the real data.
+2. The TiDB node also records a serial actual Key-Value ranges for each segment (referred to as a statistics file), which is a key preparation for scalable sort implementation. These files are then uploaded into the cloud storage along with the real data.
 
 ### Step 2: Sort and distribute data
 
