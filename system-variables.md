@@ -3524,7 +3524,7 @@ mysql> desc select count(distinct a) from test.t;
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `ON`
-- With tidb_opt_enable_hash_join=off, the optimizer ignores hash join when generating execution plans.
+- This variable is used to control whether the optimizer will select hash joins for tables. The value is `ON` by default. If it is set to `OFF`, the optimizer ignores hash join when generating execution plans.
 - The `HASH_JOIN` hint takes precedence even if `tidb_opt_enable_hash_join` is set to `off`. If a `HASH_JOIN` hint is specified in a query, the TiDB optimizer will still enforce a hash join plan.
 
 ### `tidb_opt_enable_non_eval_scalar_subquery` <span class="version-mark">New in v7.3.0</span>
