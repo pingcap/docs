@@ -69,7 +69,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.4/quick-start-with-
   </tr>
   <tr>
     <td>TiFlash supports resource control <!--Zhang Ye, tw@Oreoxmt --></td>
-    <td>Before v7.4.0, TiDB resource control cannot manage resource of TiFlash. In v7.4.0, TiFlash can manage resource better, improving the overall resource management capabilities of TiDB.</td>
+    <td>Before v7.4.0, TiDB resource control cannot manage resources of TiFlash. Starting from v7.4.0, TiFlash can manage resources better, improving the overall resource management capabilities of TiDB.</td>
   </tr>
   <tr>
     <td>DB Operations and Observability</td>
