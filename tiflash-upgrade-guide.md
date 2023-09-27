@@ -96,6 +96,6 @@ After upgrading TiFlash to v7.3 and configuring TiFlash to use V3 DTFiles, if yo
 
 Starting from v7.4, to reduce the read and write amplification generated during data compaction, TiFlash optimizes the data compaction logic of PageStorage V3, which leads to changes to some of the underlying storage file names. Therefore, after the upgrade to v7.4 or a later version, in-place downgrading to the original version is not supported.
 
-**Workaround for downgrade TiFlash in testing or other special scenarios**
+**Workaround for downgrading TiFlash in testing or other special scenarios**
 
 You can forcibly scale in the target TiFlash node and then replicate data from TiKV again. For detailed steps, see [Scale in a TiFlash cluster](/scale-tidb-using-tiup.md#scale-in-a-tiflash-cluster).
