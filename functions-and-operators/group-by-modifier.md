@@ -213,4 +213,4 @@ After the `Expand` operator is applied, you can get the following three rows of 
 +------------+------+-------+-----+
 ```
 
-Note that the `SELECT` clause in the query uses the `GROUPING` function. When the `GROUPING` function is used in the `SELECT`, `HAVING`, or `ORDER BY` clauses, TiDB rewrites it during the logical optimization phase, transforms the relationship between the `GROUPING` function and the `GROUP BY` items into a `GID` related to the logic of dimension group (or known as `grouping set`), and fills this `GID` as metadata into the new `GROUPING` function.
+Note that the `SELECT` clause in the query uses the `GROUPING` function. When the `GROUPING` function is used in the `SELECT`, `HAVING`, or `ORDER BY` clauses, TiDB rewrites it during the logical optimization phase, transforms the relationship between the `GROUPING` function and the `GROUP BY` items into a `GID` related to the logic of dimension group (also known as `grouping set`), and fills this `GID` as metadata into the new `GROUPING` function.
