@@ -9,7 +9,7 @@ The `SHOW CONFIG` statement is used to show the current configuration of various
 
 > **Note:**
 >
-> This feature is not available on [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless) clusters.
+> This feature is only applicable to TiDB Self-Hosted and not available on [TiDB Cloud](https://docs.pingcap.com/tidbcloud/). 
 
 ## Synopsis
 
