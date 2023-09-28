@@ -22,5 +22,7 @@ To start using TiDB Cloud API, refer to the following resources in [TiDB Cloud A
 - [Get Started](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Get-Started)
 - [Authentication](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication)
 - [Rate Limiting](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Rate-Limiting)
-- [API Full References](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Project)
+- API Full References
+    - [v1beta1](https://docs.pingcap.com/tidbcloud/api/v1beta1)
+    - [v1beta](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Project)
 - [Changelog](https://docs.pingcap.com/tidbcloud/api/v1beta#section/API-Changelog)
