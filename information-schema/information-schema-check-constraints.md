@@ -46,7 +46,7 @@ CONSTRAINT_CATALOG: def
 
 Fields in the `CHECK_CONSTRAINTS` table are described as follows:
 
-* `CONSTRAINT_CATALOG`: The catalog of the constraint, always `def`.
+* `CONSTRAINT_CATALOG`: The catalog of the constraint, which is always `def`.
 * `CONSTRAINT_SCHEMA`: The schema of the constraint.
 * `CONSTRAINT_NAME`: The name of the constraint.
 * `CHECK_CLAUSE`: The clause of the check constraint.
