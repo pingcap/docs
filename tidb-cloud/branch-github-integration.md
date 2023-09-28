@@ -158,4 +158,10 @@ Here are the main steps to create the workflow:
 
 ## What's next
 
+Learn how to use the branching GitHub integration with the following examples:
+
+- [branching-gorm-example](https://github.com/tidbcloud/branching-gorm-example)
+- [branching-django-example](https://github.com/tidbcloud/branching-django-example)
+- [branching-rails-example](https://github.com/tidbcloud/branching-rails-example)
+
 You can also build your branching CI/CD workflow without the branching GitHub integration. For example, you can use [`setup-tidbcloud-cli`](https://github.com/tidbcloud/setup-tidbcloud-cli) and GitHub Actions to customize your CI/CD workflows.
