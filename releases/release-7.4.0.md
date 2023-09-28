@@ -161,7 +161,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.4/quick-start-with-
 
     For more information, see [documentation](/system-variables.md#tikv_client_read_timeout-new-in-v740).
 
-* Support temporarily modifying some system variable values using an optimizer hint [#issue号](链接) @[winoros](https://github.com/winoros) **tw@Oreoxmt** <!--923-->
+* Support temporarily modifying some system variable values using an optimizer hint [#45892](https://github.com/pingcap/tidb/issues/45892) @[winoros](https://github.com/winoros) **tw@Oreoxmt** <!--923-->
 
     TiDB v7.4.0 introduces the optimizer hint `SET_VAR()`, which is similar to that of MySQL 8.0. By including the hint `SET_VAR()` in SQL statements, you can temporarily modify the value of system variables during statement execution. This helps you set the environment for different statements. For example, you can actively increase the parallelism of resource-intensive SQL statements or change the optimizer behavior through variables.
 
