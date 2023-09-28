@@ -165,7 +165,7 @@ delete-only-output-handle-key-columns = false
 # The default value is false.
 # only-output-updated-columns = false
 
-############ storage sink configuration items ############
+############ Storage sink configuration items ############
 # The following three configuration items are only used when you replicate data to storage sinks and can be ignored when replicating data to MQ or MySQL sinks.
 # Row terminator, used for separating two data change events. The default value is an empty string, which means "\r\n" is used.
 # terminator = ''
