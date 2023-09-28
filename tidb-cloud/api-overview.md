@@ -17,7 +17,7 @@ The API has the following features:
 - **HTTPS-only.** You can only access the API via HTTPS, ensuring all the data sent over the network is encrypted with TLS.
 - **Key-based access and digest authentication.** Before you access TiDB Cloud API, you must generate an API key. All requests are authenticated through [HTTP Digest Authentication](https://en.wikipedia.org/wiki/Digest_access_authentication), ensuring the API key is never sent over the network.
 
-To start using TiDB Cloud API, refer to the following resources in [TiDB Cloud API Documentation](https://docs.pingcap.com/tidbcloud/api/v1beta):
+To start using TiDB Cloud API, refer to the following resources in TiDB Cloud API Documentation:
 
 - [Get Started](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Get-Started)
 - [Authentication](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication)
