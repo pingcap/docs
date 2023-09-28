@@ -64,10 +64,6 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.4/quick-start-with-
     <td>One notable change in MySQL 8.0 is that the default character set is utf8mb4, and the default collation of utf8mb4 is <code>utf8mb4_0900_ai_ci</code>. TiDB v7.4.0 enhances the compatibility with MySQL 8.0. If you create a database in MySQL 8.0 with the default collation, you can smoothly migrate or replicate it to TiDB.</td>
   </tr>
   <tr>
-    <td>TiDB and TiFlash support the <code>ROLLUP</code> modifier and the <code>GROUPING()</code> function <!--Zhang Ye, tw@qiancai--></td>
-    <td>The <code>ROLLUP</code> modifier is commonly used in data analysis to summarize data in multiple dimensions. With the <code>ROLLUP</code>modifier, the output of the <code>GROUP BY</code> clause can include additional rows that represent higher-level summary operations, thus enabling you to answer questions at multiple levels of analysis with a single query.  </td>
-  </tr>
-  <tr>
     <td>TiFlash supports resource control <!--Zhang Ye, tw@Oreoxmt --></td>
     <td>Before v7.4.0, TiDB resource control cannot manage resources of TiFlash. Starting from v7.4.0, TiFlash can manage resources better, improving the overall resource management capabilities of TiDB.</td>
   </tr>
