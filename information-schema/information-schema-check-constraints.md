@@ -26,6 +26,8 @@ The output is as follows:
 4 rows in set (0.00 sec)
 ```
 
+The following example adds a `CHECK` constraint using the `CREATE TABLE` statement:
+
 ```sql
 CREATE TABLE test.t1 (id INT PRIMARY KEY, CHECK (id%2 = 0));
 SELECT * FROM CHECK_CONSTRAINTS\G
@@ -41,3 +43,10 @@ CONSTRAINT_CATALOG: def
       CHECK_CLAUSE: (`id` % 2 = 0)
 1 row in set (0.00 sec)
 ```
+
+Fields in the `CHECK_CONSTRAINTS` table are described as follows:
+
+* `CONSTRAINT_CATALOG`:
+* `CONSTRAINT_SCHEMA`:
+* `CONSTRAINT_NAME`:
+* `CHECK_CLAUSE`:
