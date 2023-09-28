@@ -12,7 +12,9 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **API changes**
 
-- Introduce a TiDB Cloud Billing API endpoint to retrieve the bill for the given month of a specific organization. For more information, refer to the [API documentation (v1beta1)](https://docs.pingcap.com/tidbcloud/api/v1beta1).
+- Introduce a TiDB Cloud Billing API endpoint to retrieve the bill for the given month of a specific organization. 
+
+    This Billing API endpoint is released in TiDB Cloud API v1beta1, which is the latest API version of TiDB Cloud. For more information, refer to the [API documentation (v1beta1)](https://docs.pingcap.com/tidbcloud/api/v1beta1#tag/Billing).
 
 ## September 19, 2023
 
