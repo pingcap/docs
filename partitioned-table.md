@@ -1084,7 +1084,7 @@ ALTER TABLE example TRUNCATE PARTITION p0;
 Query OK, 0 rows affected (0.03 sec)
 ```
 
-## Convert a partitioned table to a non-partitioned table
+### Convert a partitioned table to a non-partitioned table
 
 To convert a partitioned table to a non-partitioned table, you can use the following statement, which removes the partitioning, copies all rows of the table, and recreates the indexes online for the table:
 
@@ -1098,7 +1098,7 @@ For example, to convert the `members` partitioned table to the non-partitioned t
 ALTER TABLE members REMOVE PARTITIONING
 ```
 
-## Partition an existing table
+### Partition an existing table
 
 To partition an existing non-partitioned table or modify the partition type of an existing partitioned table, you can use the following statement, which copies all rows and recreates the indexes online according to the new partition definitions:
 
