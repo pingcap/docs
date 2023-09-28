@@ -270,7 +270,9 @@
   - [Billing for Data Migration](/tidb-cloud/tidb-cloud-billing-dm.md)
 - API
   - [API Overview](/tidb-cloud/api-overview.md)
-  - [API Reference](https://docs.pingcap.com/tidbcloud/api/v1beta)
+  - API Reference
+    - [v1beta1](https://docs.pingcap.com/tidbcloud/api/v1beta1)
+    - [v1beta](https://docs.pingcap.com/tidbcloud/api/v1beta)
 - Integrations
   - [Airbyte](/tidb-cloud/integrate-tidbcloud-with-airbyte.md)
   - [Amazon AppFlow](/develop/dev-guide-aws-appflow-integration.md)
