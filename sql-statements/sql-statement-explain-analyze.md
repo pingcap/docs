@@ -306,10 +306,9 @@ The RU count can be calculated from the other values in `EXPLAIN ANALYZE`; speci
                 'KB, read_time: 10.3µs}}}',
 ```
 
-The base costs are in [the pd source](https://github.com/tikv/pd/blob/aeb259335644d65a97285d7e62b38e7e43c6ddca/client/resource_group/controller/config.go#L58C19-L67) and the
-calculations are done in [model.go](https://github.com/tikv/pd/blob/54219d649fb4c8834cd94362a63988f3c074d33e/client/resource_group/controller/model.go#L107)
+The base costs are in [the pd source](https://github.com/tikv/pd/blob/aeb259335644d65a97285d7e62b38e7e43c6ddca/client/resource_group/controller/config.go#L58C19-L67) and the calculations are done in [model.go](https://github.com/tikv/pd/blob/54219d649fb4c8834cd94362a63988f3c074d33e/client/resource_group/controller/model.go#L107)
 
-If you are using 7.1.x, the calculation is sum `BeforeKVRequest() + AfterKVRequest()` in `pd/pd-client/model.go`, that is :
+If you are using 7.1.x, the calculation is sum `BeforeKVRequest() + AfterKVRequest()` in `pd/pd-client/model.go`, that is:
 
 ```
 before :
