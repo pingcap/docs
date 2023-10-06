@@ -296,13 +296,31 @@ RU:273.842670
 The RU count can be calculated from the other values in `EXPLAIN ANALYZE`; specifically, the `executeInfo` block. For example, given:
 
 ```
- 'executeInfo': 'time:2.55ms, loops:2, RU:0.329460, Get:{num_rpc:1, '
-                'total_time:2.13ms}, total_process_time: 231.5µs, '
-                'total_wait_time: 732.9µs, tikv_wall_time: 995.8µs, '
-                'scan_detail: {total_process_keys: 1, total_process_keys_size: '
-                '150, total_keys: 1, get_snapshot_time: 691.7µs, rocksdb: '
-                '{block: {cache_hit_count: 2, read_count: 1, read_byte: 8.19 '
-                'KB, read_time: 10.3µs}}}',
+ 'executeInfo':
+     time:2.55ms, 
+     loops:2, 
+     RU:0.329460, 
+     Get:{
+         num_rpc:1,
+         total_time:2.13ms
+     }, 
+     total_process_time: 231.5µs,
+     total_wait_time: 732.9µs, 
+     tikv_wall_time: 995.8µs,
+     scan_detail: {
+        total_process_keys: 1, 
+        total_process_keys_size: 150, 
+        total_keys: 1, 
+        get_snapshot_time: 691.7µs,
+        rocksdb: {
+            block: {
+                cache_hit_count: 2,
+                read_count: 1,
+                read_byte: 8.19 KB,
+                read_time: 10.3µs
+            }
+        }
+    },
 ```
 
 The base costs are in [the pd source](https://github.com/tikv/pd/blob/aeb259335644d65a97285d7e62b38e7e43c6ddca/client/resource_group/controller/config.go#L58C19-L67) and the calculations are done in [model.go](https://github.com/tikv/pd/blob/54219d649fb4c8834cd94362a63988f3c074d33e/client/resource_group/controller/model.go#L107)
