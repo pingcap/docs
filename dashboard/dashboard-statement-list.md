@@ -66,7 +66,7 @@ See [Configurations of Statement Summary Tables](/statement-summary-tables.md#pa
 
 ### Others
 
-[`tidb_stmt_summary_max_stmt_count`](/system-variables.md#tidb_stmt_summary_max_stmt_count-new-in-v40) limits the number of SQL statements that can be stored in statement summary tables. If the limit is exceeded, TiDB clears the SQL statements that recently remain unused. These cleared SQL statements are represented as rows with `DIGEST` set to `NULL`. On the SQL statement page of TiDB Dashboard, these rows are displayed as `Others`.
+[`tidb_stmt_summary_max_stmt_count`](/system-variables.md#tidb_stmt_summary_max_stmt_count-new-in-v40) limits the number of SQL statements that can be stored in statement summary tables. If the limit is exceeded, TiDB clears the SQL statements that recently remain unused. These cleared SQL statements are represented as rows with `DIGEST` set to `NULL`. On the SQL statement page of TiDB Dashboard, the information of these rows is displayed as `Others`.
 
 ![Others](/media/dashboard/dashboard-statement-other-row.png)
 
