@@ -7,9 +7,7 @@ summary: Learn how to deploy Cloudflare Workers with TiDB Cloud.
 
 [Cloudflare Workers](https://workers.cloudflare.com/) is a platform that allows you to run code in response to specific events, such as HTTP requests or changes to a database. Cloudflare Workers is easy to use and can be used to build a variety of applications, including custom APIs, serverless functions, and microservices. It is particularly useful for applications that require low-latency performance or need to scale quickly.
 
-However, you may find it hard to connect to TiDB Cloud from Cloudflare Workers because Cloudflare Workers runs on the V8 engine which cannot make direct TCP connections.
-
-Fortunately, [TiDB Cloud serverless driver](/tidb-cloud/serverless-driver.md) helps you connect to Cloudflare Workers over HTTP connection.
+You may find it hard to connect to TiDB Cloud from Cloudflare Workers because Cloudflare Workers runs on the V8 engine which cannot make direct TCP connections. You can use [TiDB Cloud serverless driver](/tidb-cloud/serverless-driver.md) helps you connect to Cloudflare Workers over HTTP connection.
 
 This document shows how to connect to Cloudflare Workers with TiDB Cloud serverless driver step by step.
 
@@ -23,25 +21,31 @@ Before you try the steps in this article, you need to prepare the following thin
 
 - A TiDB Cloud account and a TiDB Serverless cluster on TiDB Cloud. For more details, see [TiDB Cloud Quick Start](/tidb-cloud/tidb-cloud-quickstart.md#step-1-create-a-tidb-cluster).
 - A [Cloudflare Workers account](https://dash.cloudflare.com/login).
-- Node.js and npm installed.
+- wrangler and npm installed.
 
 ## Step 1: Set up Wrangler
 
 [Wrangler](https://developers.cloudflare.com/workers/wrangler/) is the official Cloudflare Worker CLI. You can use it to generate, build, preview, and publish your Workers.
 
-1. To authenticate Wrangler, run wrangler login:
+1. Install the wrangler
+
+   ```
+   npm install wrangler
+   ```
+
+2. To authenticate Wrangler, run wrangler login:
 
     ```
     wrangler login
     ```
 
-2. Use Wrangler to create a worker project:
+3. Use Wrangler to create a worker project:
 
     ```
     wrangler init tidb-cloud-cloudflare
     ```
 
-3. In your terminal, you will be asked a series of questions related to your project. Choose the default values for all questions.
+4. In your terminal, you will be asked a series of questions related to your project. Choose the default values for all questions.
 
 ## Step 2: Install the serverless driver
 
@@ -51,7 +55,7 @@ Before you try the steps in this article, you need to prepare the following thin
     cd tidb-cloud-cloudflare
     ```
 
-2. Install the serverless driver with NPM:
+2. Install the serverless driver with npm:
 
     ```
     npm install @tidbcloud/serverless
