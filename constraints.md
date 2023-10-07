@@ -51,7 +51,7 @@ Query OK, 1 row affected (0.03 sec)
 
 ## CHECK
 
-TiDB parses but ignores `CHECK` constraints. This is MySQL 5.7 compatible behavior.
+TiDB parses but ignores `CHECK` constraints. This behavior is only syntax-compatible with MySQL 5.7 and is not supported.
 
 For example:
 
