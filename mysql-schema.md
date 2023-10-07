@@ -50,7 +50,7 @@ Currently, the `help_topic` is NULL.
 >
 > The GC worker system tables are only applicable to TiDB Self-Hosted and not available on [TiDB Cloud](https://docs.pingcap.com/tidbcloud/).
 
-- `gc_delete_range`: the KV range to be deleted.
+- `gc_delete_range`: the KV range to be deleted
 - `gc_delete_range_done`: the deleted KV range
 
 ## System tables related to cached tables
