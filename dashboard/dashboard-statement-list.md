@@ -15,13 +15,13 @@ You can use one of the following two methods to access the SQL statement summary
 
 * After logging in to TiDB Dashboard, click **SQL Statements** in the left navigation menu.
 
-* Visit <http://127.0.0.1:2379/dashboard/#/statement> in your browser. Replace `127.0.0.1:2379` with the actual PD instance address and port.
+* Visit [http://127.0.0.1:2379/dashboard/#/statement](http://127.0.0.1:2379/dashboard/#/statement) in your browser. Replace `127.0.0.1:2379` with the actual PD instance address and port.
 
 All the data shown on the SQL statement summary page are from the TiDB statement summary tables. For more details about the tables, see [TiDB Statement Summary Tables](/statement-summary-tables.md).
 
 > **Note:**
 >
-> In the **Mean Latency** column of the SQL statement summary page, the blue bar indicates the average execution time. If there is a yellow line on the blue bar for an SQL statement, the left and right sides of the yellow line respectively represent the minimum and maximum execution time of the SQL statement during the recent data collection cycle. 
+> In the **Mean Latency** column of the SQL statement summary page, the blue bar indicates the average execution time. If there is a yellow line on the blue bar for an SQL statement, the left and right sides of the yellow line respectively represent the minimum and maximum execution time of the SQL statement during the recent data collection cycle.
 
 ### Change Filters
 
@@ -63,3 +63,13 @@ See [Configurations of Statement Summary Tables](/statement-summary-tables.md#pa
 > + Because the statement system table is only stored in memory, after the SQL Statements feature is disabled, the data in the system table will be cleared.
 >
 > + The values of `Collect interval` and `retain duration` affect the memory usage, so it is recommended to adjust these values according to the actual situation. The value of `retain duration` should not be set too large.
+
+### Others
+
+[`tidb_stmt_summary_max_stmt_count`](/system-variables.md#tidb_stmt_summary_max_stmt_count-new-in-v40) limits the number of SQL statements that can be stored in statement summary tables. If the limit is exceeded, TiDB clears the SQL statements that recently remain unused. These cleared SQL statements are represented as rows with `DIGEST` set to `NULL`. On the SQL statement page of TiDB Dashboard, the information of these rows is displayed as `Others`.
+
+![Others](/media/dashboard/dashboard-statement-other-row.png)
+
+## Next step
+
+For more information about how to view the execution details of SQL statements, see [Statement execution details of TiDB Dashboard](/dashboard/dashboard-statement-details.md).

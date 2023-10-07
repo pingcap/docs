@@ -56,7 +56,7 @@ By the automatic backup, you can back up the TiDB Dedicated cluster data every d
         - Resolve cases of data write errors by restoring point-in-time that is before the error event.
         - Audit the historical data of the business.
 
-        If you have one of the preceding needs and want to use the PITR feature, make sure that your TiDB Dedicated cluster version is at least v6.4.0 and the TiKV node is at least 8 vCPU and 16 GiB.
+        If you have one of the preceding needs and want to use the PITR feature, make sure that your TiDB Dedicated cluster version is at least v6.4.0.
 
     - In **Backup Storage Region**, select the regions where you want to store your backup data.
 
@@ -114,7 +114,7 @@ To delete a running backup job, it is similar as [**Delete backup files**](#dele
 
 - It is recommended that you perform backup operations at cluster idle time to minimize the impact on business.
 - Do not run the manual backup while importing data, or during cluster scaling.
-- After you delete a cluster, the existing manual backup files will be retained until you manually delete them, or your account is closed. Automatic backup files will be retained for 31 days from the date of cluster deletion. You need to delete the backup files accordingly.
+- After you delete a cluster, the existing manual backup files will be retained until you manually delete them, or your account is closed. Automatic backup files will be retained for a specified period (you can configure the retention period in **Backup Settings**) from the date of cluster deletion. You need to delete the backup files accordingly.
 
 ## Restore
 

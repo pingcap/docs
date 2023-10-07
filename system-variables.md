@@ -2259,10 +2259,6 @@ Query OK, 0 rows affected (0.09 sec)
 >
 > This TiDB variable is not applicable to TiDB Cloud.
 
-> **Warning:**
->
-> Currently, Top SQL is an experimental feature. It is not recommended that you use it for production environments.
-
 - Scope: GLOBAL
 - Persists to cluster: Yes
 - Type: Boolean

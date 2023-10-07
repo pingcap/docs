@@ -131,18 +131,25 @@ You can call the endpoint by sending an HTTPS request. Before calling an endpoin
 
 1. In the left pane of the [**Data Service**](https://tidbcloud.com/console/data-service) page, click the name of your Data App to view its details.
 2. In the **Authentication** area, click **Create API Key**.
-3. In the **Create API Key** dialog box, enter a description and select a role for your API key.
+3. In the **Create API Key** dialog box, do the following:
 
-    The role is used to control whether the API key can read or write data to the clusters linked to the Data App. You can select the `ReadOnly` or `ReadAndWrite` role:
+    1. (Optional) Enter a description for your API key.
+    2. Select a role for your API key.
 
-    - `ReadOnly`: only allows the API key to read data, such as `SELECT`, `SHOW`, `USE`, `DESC`, and `EXPLAIN` statements.
-    - `ReadAndWrite`: allows the API key to read and write data. You can use this API key to execute all SQL statements, such as DML and DDL statements.
+        The role is used to control whether the API key can read or write data to the clusters linked to the Data App. You can select the `ReadOnly` or `ReadAndWrite` role:
+
+        - `ReadOnly`: only allows the API key to read data, such as `SELECT`, `SHOW`, `USE`, `DESC`, and `EXPLAIN` statements.
+        - `ReadAndWrite`: allows the API key to read and write data. You can use this API key to execute all SQL statements, such as DML and DDL statements.
+
+    3. (Optional) Set a desired rate limit for your API key.
 
 4. Click **Next**. The public key and private key are displayed.
 
     Make sure that you have copied and saved the private key in a secure location. After leaving this page, you will not be able to get the full private key again.
 
 5. Click **Done**.
+
+For more information about API keys, see [API Keys in Data Service](/tidb-cloud/data-service-api-key.md).
 
 ### 2. Get the code example
 

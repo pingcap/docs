@@ -8,7 +8,7 @@ title: Gitpod
 
 With [Gitpod](https://www.gitpod.io/), you can get a full development environment in your browser with the click of a button or link, and you can write code right away.
 
-Gitpod is an open-source Kubernetes application (GitHub repository address: <https://github.com/gitpod-io/gitpod>) for direct-to-code development environments, which spins up fresh, automated development environments for each task, in the cloud, in seconds. It enables you to describe your development environment as code and start instant, remote and cloud-based development environments directly from your browser or your Desktop IDE.
+Gitpod is an open-source Kubernetes application (GitHub repository address: [https://github.com/gitpod-io/gitpod](https://github.com/gitpod-io/gitpod)) for direct-to-code development environments, which spins up fresh, automated development environments for each task, in the cloud, in seconds. It enables you to describe your development environment as code and start instant, remote and cloud-based development environments directly from your browser or your Desktop IDE.
 
 ## Quick start
 
@@ -39,8 +39,6 @@ Once the TiDB Playground is ready, another `Spring JPA Hibernate` task will run.
 After all these tasks are finished, you will see a page similar to the following. On this page, check the `REMOTE EXPLORER` area in the left navigation pane (Gitpod supports URL-based port forwarding) and find the URL of your port `8080`.
 
 ![playground gitpod workspace ready](/media/develop/playground-gitpod-workspace-ready.png)
-
-You can test the API by [sending an HTTP request](/develop/dev-guide-sample-application-java-spring-boot.md#step-6-http-requests). Make sure to replace the `http://localhost:8080` URL with the one you found in the `REMOTE EXPLORER` area.
 
 ## Using custom Gitpod configuration and Docker image
 
