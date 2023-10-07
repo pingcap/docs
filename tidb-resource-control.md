@@ -36,7 +36,7 @@ In addition, the rational use of the resource control feature can reduce the num
 
 ## Limitations
 
-Resource control incurs additional scheduling overhead (about 5%). Therefore, there might be a slight performance degradation when this feature is enabled.
+Resource control incurs additional scheduling overhead. Therefore, there might be a slight performance degradation (less than 5%) when this feature is enabled.
 
 ## What is Request Unit (RU)
 
