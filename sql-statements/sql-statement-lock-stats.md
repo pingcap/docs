@@ -64,7 +64,7 @@ mysql> SHOW STATS_LOCKED;
 mysql> ANALYZE TABLE t;
 Query OK, 0 rows affected, 2 warnings (0.00 sec)
 
-mysql> show warnings;
+mysql> SHOW WARNINGS;
 +---------+------+-----------------------------------------------------------------------------------------------------------------------------------------+
 | Level   | Code | Message                                                                                                                                 |
 +---------+------+-----------------------------------------------------------------------------------------------------------------------------------------+
@@ -76,7 +76,7 @@ mysql> show warnings;
 
 In addition, you can also lock the statistics of a partition using `LOCK STATS`. For example:
 
-Create partition table `t`, and insert data into it. When the statistics of partition `p1` are not locked, the `ANALYZE` statement can be successfully executed.
+Create a partition table `t`, and insert data into it. When the statistics of partition `p1` are not locked, the `ANALYZE` statement can be successfully executed.
 
 ```sql
 mysql> CREATE TABLE t(a INT, b INT) PARTITION BY RANGE (a) (PARTITION p0 VALUES LESS THAN (10), PARTITION p1 VALUES LESS THAN (20), PARTITION p2 VALUES LESS THAN (30));

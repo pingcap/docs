@@ -888,7 +888,7 @@ mysql> SHOW WARNINGS;
 
 In addition, you can also lock the statistics of a partition using `LOCK STATS`. For example:
 
-Create partition table `t`, and insert data into it. When the statistics of partition `p1` are not locked, the `ANALYZE` statement can be successfully executed.
+Create a partition table `t`, and insert data into it. When the statistics of partition `p1` are not locked, the `ANALYZE` statement can be successfully executed.
 
 ```sql
 mysql> CREATE TABLE t(a INT, b INT) PARTITION BY RANGE (a) (PARTITION p0 VALUES LESS THAN (10), PARTITION p1 VALUES LESS THAN (20), PARTITION p2 VALUES LESS THAN (30));
@@ -962,8 +962,8 @@ mysql> SHOW WARNINGS;
 
 ### Behaviors of locking statistics
 
-* If the statistics is locked on a partitioned table, the statistics of all partitions on the partitioned table are locked.
-* If the table or partition is truncated, the statistics lock on the table or partition will be released.
+* If you lock the statistics on a partitioned table, the statistics of all partitions on the partitioned table are locked.
+* If you truncate a table or partition, the statistics lock on the table or partition will be released.
 
 The following table describes the behaviors of locking statistics:
 
