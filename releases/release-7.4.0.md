@@ -31,11 +31,11 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.4/quick-start-with-
   <tr>
     <td rowspan="3">Reliability and Availability</td>
     <td>Improve the performance and stability of <code>IMPORT INTO</code> and <code>ADD INDEX</code> operations via global sort <!--Frank, tw@ran-huang--></td>
-    <td>Before v7.4.0, tasks such as <code>ADD INDEX</code> or <code>IMPORT INTO</code> in the distributed execution framework required TiDB nodes to allocate local disk space for sorting data before importing it into TiKV. This approach involves partial and localized sorting, and often results in data overlaps, leading to increased resource consumption and lower performance and stability of TiKV. With the introduction of the Global Sorting feature in v7.4.0, data is temporarily stored in S3 for global sorting before being imported into TiKV in an orderly manner. This eliminates the need for TiKV to consume extra resources on compactions and significantly improves the performance and stability of operations like <code>ADD INDEX</code> and <code>IMPORT INTO</code>.</td>
+    <td>Before v7.4.0, tasks such as <code>ADD INDEX</code> or <code>IMPORT INTO</code> in the <a href="https://docs.pingcap.com/tidb/v7.4/tidb-resource-control#use-resource-control-to-achieve-resource-isolation" target="_blank">distributed execution framework</a> required TiDB nodes to allocate local disk space for sorting data before importing it into TiKV. This approach involves partial and localized sorting, and often results in data overlaps, leading to increased resource consumption and lower performance and stability of TiKV. With the introduction of the Global Sorting feature in v7.4.0, data is temporarily stored in S3 for global sorting before being imported into TiKV in an orderly manner. This eliminates the need for TiKV to consume extra resources on compactions and significantly improves the performance and stability of operations like <code>ADD INDEX</code> and <code>IMPORT INTO</code>.</td>
   </tr>
   <tr>
     <td>Resource control for background tasks (experimental) <!--Roger, tw@Oreoxmt--></td>
-    <td>In v7.1.0, the resource control feature becomes generally available and this feature helps mitigate resource and storage access interference between workloads. TiDB v7.4.0 applies this contorl to background tasks as well. Resource control identifies and manages the resources produced by background tasks, such as auto-analyze, Backup & Restore, load data, and online DDL. This will eventually apply to all background tasks.</td>
+    <td>In v7.1.0, the <a href="https://docs.pingcap.com/tidb/stable/tidb-resource-control#use-resource-control-to-achieve-resource-isolation" target="_blank">Resource Control</a> feature was introduced to mitigate resource and storage access interference between workloads. TiDB v7.4.0 applies this control to background tasks as well. In v7.4.0, Resource Control now identifies and manages the resources produced by background tasks, such as auto-analyze, Backup & Restore, load data, and online DDL. This will eventually apply to all background tasks.</td>
   </tr>
   <tr>
     <td>TiFlash supports <a href="https://docs.pingcap.com/tidb/v7.4/tiflash-disaggregated-and-s3" target="_blank">storage-computing separation and S3</a> (GA) <!--Zhang Ye, tw@qiancai--></td>
@@ -47,8 +47,8 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.4/quick-start-with-
     </td>
   </tr>
   <tr>
-    <td rowspan="4">SQL</td>
-    <td>TiDB fully supports partition management <!--Zhang Ye, tw@qiancai--></td>
+    <td rowspan="3">SQL</td>
+    <td><a href="https://docs.pingcap.com/tidb/v7.4/partitioned-table/convert-a-partitioned-table-to-a-non-partitioned-table" target="_blank">TiDB fully supports partition management</a> <!--Zhang Ye, tw@qiancai--></td>
     <td>Before v7.4.0, Range/List partitioned tables support partition management operations such as <code>TRUNCATE</code>, <code>EXCHANGE</code>, <code>ADD</code>, <code>DROP</code>, and <code>REORGANIZE</code>, and Hash/Key partitioned tables support partition management operations such as <code>ADD</code> and <code>COALESCE</code>.
     
     Now TiDB also supports the following partition management operations:
@@ -60,7 +60,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.4/quick-start-with-
     </td>
   </tr>
   <tr>
-    <td>MySQL 8.0 compatibility: support collation <code>utf8mb4_0900_ai_ci</code> <!--Roger, tw@Oreoxmt--></td>
+    <td><a href="https://docs.pingcap.com/tidb/v7.4/character-set-and-collation#character-sets-and-collations-supported-by-tidb" target="_blank">MySQL 8.0 compatibility: support collation <code>utf8mb4_0900_ai_ci</code></a> <!--Roger, tw@Oreoxmt--></td>
     <td>One notable change in MySQL 8.0 is that the default character set is utf8mb4, and the default collation of utf8mb4 is <code>utf8mb4_0900_ai_ci</code>. TiDB v7.4.0 enhances the compatibility with MySQL 8.0. If you create a database in MySQL 8.0 with the default collation, you can smoothly migrate or replicate it to TiDB.</td>
   </tr>
   <tr>
@@ -208,9 +208,9 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.4/quick-start-with-
 
 * Introduce a system variable to control whether to select hash joins for tables [#46695](https://github.com/pingcap/tidb/issues/46695) @[coderplay](https://github.com/coderplay)
 
-     MySQL 8.0 introduces hash joins for tables as a new feature. This feature is primarily used to join two relatively large tables and result sets. However, for transactional workloads, or some applications running on MySQL 5.7, hash joins for tables might pose a performance risk. MySQL provides the [`optimizer_switch`](https://dev.mysql.com/doc/refman/8.0/en/switchable- optimizations.html#optflag_block-nested-loop) to control whether to select hash joins at the global or session level.
+     MySQL 8.0 introduces hash joins for tables as a new feature. This feature is primarily used to join two relatively large tables and result sets. However, for transactional workloads, or some applications running on MySQL 5.7, hash joins for tables might pose a performance risk. MySQL provides the [`optimizer_switch`](https://dev.mysql.com/doc/refman/8.0/en/switchable-optimizations.html#optflag_block-nested-loop) to control whether to select hash joins at the global or session level.
     
-    Starting from v7.4.0, TiDB introduces the system variable [`tidb_opt_enable_hash_join`](/system-variables.md#tidb_opt_enable_hash_join-introduced from the -v740- release) to have control over hash joins for tables. It is enabled by default (`ON`). If you are sure that you do not need to select hash joins between tables in your execution plan, you can modify the variable to `OFF` to reduce the possibility of execution plan rollbacks and improve system stability. 
+    Starting from v7.4.0, TiDB introduces the system variable [`tidb_opt_enable_hash_join`](/system-variables.md#tidb_opt_enable_hash_join-new-in-v740) to have control over hash joins for tables. It is enabled by default (`ON`). If you are sure that you do not need to select hash joins between tables in your execution plan, you can modify the variable to `OFF` to reduce the possibility of execution plan rollbacks and improve system stability. 
 
     For more information, see [documentation](/system-variables.md#tidb_opt_enable_hash_join-new-in-v740).
     
@@ -266,7 +266,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.4/quick-start-with-
     - Support configuring the `Split_File` option, which allows you to split a large CSV file into multiple 256 MiB small CSV files for parallel processing, improving import performance.
     - Support importing compressed CSV and SQL files. The supported compression formats include `.gzip`, `.gz`, `.zstd`, `.zst`, and `.snappy`.
 
-    For more information, see [documentation](sql-statements/sql-statement-import-into.md).
+    For more information, see [documentation](/sql-statements/sql-statement-import-into.md).
 
 * Dumpling supports the user-defined terminator when exporting data to CSV files [#46982](https://github.com/pingcap/tidb/issues/46982) @[GMHDBJD](https://github.com/GMHDBJD) **tw@hfxsd** <!--1571-->
 
