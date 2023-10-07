@@ -1,38 +1,35 @@
 ---
 title: Connect to TiDB with JetBrains DataGrip
-summary: Learn how to connect to TiDB using JetBrains DataGrip. This tutorial gives visual instructions that work with TiDB using JetBrains DataGrip.
+summary: Learn how to connect to TiDB using JetBrains DataGrip or Database Tools and SQL﻿ Plugin in any JetBrains IDE like IntelliJ, PhpStorm or PyCharm. 
 ---
 
 # Connect to TiDB with JetBrains DataGrip
 
-TiDB is a MySQL-compatible database, and [JetBrains DataGrip](https://www.jetbrains.com/help/datagrip/getting-started.html) is a powerful cross-platform IDE for working with SQL and NoSQL databases. You can use DataGrip in two distinct ways:
-
-- Standalone edition: [Download](https://www.jetbrains.com/datagrip/download) and use **DataGrip** in a standalone IDE.
-- Plugin edition: Use [JetBrains database tools and SQL plugin](https://www.jetbrains.com/help/idea/relational-databases.html) in JetBrains IDEs.
-
-> **Note:**
->
-> As per the documentation for the **JetBrains database tools and SQL plugin**, it offers support for all the features available in [DataGrip](https://www.jetbrains.com/help/datagrip/getting-started.html), the standalone database management environment for developers.
->
-> We will primarily focus on the standalone edition, although the procedures in both editions are quite similar. Therefore, if you are using the plugin edition, you can also refer to this document for sufficient instructions.
-
-In this tutorial, you will learn how to use TiDB and DataGrip to establish a connection to your TiDB cluster using DataGrip.
+TiDB is a MySQL-compatible database, and [DataGrip](https://www.jetbrains.com/help/datagrip/getting-started.html) is a powerful IDE from JetBrains for Database and SQL. This tutorial walks you through the process to connect DataGrip to your TiDB cluster.
 
 > **Note:**
 >
 > This tutorial is compatible with TiDB Serverless, TiDB Dedicated, and TiDB Self-Hosted.
+
+You can use DataGrip in two distinct ways:
+
+- [DataGrip IDE](https://www.jetbrains.com/datagrip/download) as a standalone tool.
+- [JetBrains database tools and SQL plugin](https://www.jetbrains.com/help/idea/relational-databases.html) in IntelliJ, PhpStorm, PyCharm or other JetBrains IDEs.
+
+Thi tutorial primarily focuses on the process in the standalone DataGrip IDE edition. The steps of connecting TiDB using JetBrains database tools and SQL plugin in JetBrains IDEs are similar, you can also refer to this tutorial for sufficient instructions.
+
 
 ## Prerequisites
 
 To complete this tutorial, you will need:
 
 - [DataGrip **2023.2.1** or higher](https://www.jetbrains.com/datagrip/download/).
-- A non-community edition [JetBrains](https://www.jetbrains.com/) IDE.
+- Or A non-community edition [JetBrains](https://www.jetbrains.com/) IDE.
 
 Additionally, ensure you have the following:
 
-- A TiDB cluster.
 - A paid account that allows the use of DataGrip.
+- A TiDB cluster.
 
 <CustomContent platform="tidb">
 
