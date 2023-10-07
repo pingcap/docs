@@ -15,7 +15,7 @@ The `SELECT` statement is used to read data from TiDB.
 
 > **Note:**
 >
-> The `SELECT ... INTO OUTFILE` statement is only applicable to TiDB Self-hosted and not available on [TiDB Cloud](https://docs.pingcap.com/tidbcloud/).
+> The `SELECT ... INTO OUTFILE` statement is only applicable to TiDB Self-Hosted and not available on [TiDB Cloud](https://docs.pingcap.com/tidbcloud/).
 
 **FromDual:**
 

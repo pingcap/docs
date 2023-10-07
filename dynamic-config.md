@@ -7,7 +7,7 @@ summary: Learn how to dynamically modify the cluster configuration.
 
 This document describes how to dynamically modify the cluster configuration.
 
-You can dynamically update the configuration of components (including TiDB, TiKV, and PD) using SQL statements, without restarting the cluster components. Currently, the method of changing TiDB instance configuration is different from that of changing configuration of other components (such TiKV and PD).
+You can dynamically update the configuration of components (including TiDB, TiKV, and PD) using SQL statements, without restarting the cluster components. Currently, the method of changing TiDB instance configuration is different from that of changing configuration of other components (such as TiKV and PD).
 
 > **Note:**
 >
