@@ -753,7 +753,7 @@ The default value of `lite-init-stats` is `false`, which means to disable lightw
 
 </CustomContent>
 
-<CustomContent platform="tidb">
+<CustomContent platform="tidb-cloud">
 
 After enabling the synchronously loading statistics feature, you can control how TiDB behaves when the waiting time of SQL optimization reaches the timeout by modifing the value of the [`tidb_stats_load_pseudo_timeout`](/system-variables.md#tidb_stats_load_pseudo_timeout-new-in-v540) system variable. The default value of this variable is `ON`, indicating that after the timeout, the SQL optimization process does not use any histogram, TopN, or CMSketch statistics on any columns. If this variable is set to `OFF`, after the timeout, SQL execution fails.
 
