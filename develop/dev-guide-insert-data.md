@@ -13,7 +13,7 @@ This document describes how to insert data into TiDB by using the SQL language w
 
 Before reading this document, you need to prepare the following:
 
-- [Build a TiDB Cluster in TiDB Cloud (Serverless Tier)](/develop/dev-guide-build-cluster-in-cloud.md).
+- [Build a TiDB Serverless Cluster](/develop/dev-guide-build-cluster-in-cloud.md).
 - Read [Schema Design Overview](/develop/dev-guide-schema-design-overview.md), [Create a Database](/develop/dev-guide-create-database.md), [Create a Table](/develop/dev-guide-create-table.md), and [Create Secondary Indexes](/develop/dev-guide-create-secondary-indexes.md)
 
 ## Insert rows
@@ -115,9 +115,9 @@ jdbc:mysql://127.0.0.1:4000/test?user=root&useConfigs=maxPerformance&useServerPr
 
 For complete examples in Java, see:
 
-- [Build a simple CRUD application with TiDB and Java - using JDBC](/develop/dev-guide-sample-application-java.md#step-2-get-the-code)
-- [Build a simple CRUD application with TiDB and Java - using Hibernate](/develop/dev-guide-sample-application-java.md#step-2-get-the-code)
-- [Build the TiDB application using Spring Boot](/develop/dev-guide-sample-application-spring-boot.md)
+- [Connect to TiDB with JDBC](/develop/dev-guide-sample-application-java-jdbc.md)
+- [Connect to TiDB with Hibernate](/develop/dev-guide-sample-application-java-hibernate.md)
+- [Connect to TiDB with Spring Boot](/develop/dev-guide-sample-application-java-spring-boot.md)
 
 </div>
 
@@ -191,8 +191,8 @@ func buildBulkInsertSQL(amount int) string {
 
 For complete examples in Golang, see:
 
-- [Use go-sql-driver/mysql to build a simple CRUD application with TiDB and Golang](/develop/dev-guide-sample-application-golang.md#step-2-get-the-code)
-- [Use GORM to build a simple CRUD application with TiDB and Golang](/develop/dev-guide-sample-application-java.md#step-2-get-the-code)
+- [Connect to TiDB with Go-MySQL-Driver](/develop/dev-guide-sample-application-golang-sql-driver.md)
+- [Connect to TiDB with GORM](/develop/dev-guide-sample-application-golang-gorm.md)
 
 </div>
 
@@ -218,11 +218,11 @@ with get_connection(autocommit=True) as connection:
 
 For complete examples in Python, see:
 
-- [Use PyMySQL to build a simple CRUD application with TiDB and Python](/develop/dev-guide-sample-application-python.md#step-2-get-the-code)
-- [Use mysqlclient to build a simple CRUD application with TiDB and Python](/develop/dev-guide-sample-application-python.md#step-2-get-the-code)
-- [Use mysql-connector-python to build a simple CRUD application with TiDB and Python](/develop/dev-guide-sample-application-python.md#step-2-get-the-code)
-- [Use SQLAlchemy to build a simple CRUD application with TiDB and Python](/develop/dev-guide-sample-application-python.md#step-2-get-the-code)
-- [Use peewee to build a simple CRUD application with TiDB and Python](/develop/dev-guide-sample-application-python.md#step-2-get-the-code)
+- [Connect to TiDB with PyMySQL](/develop/dev-guide-sample-application-python-pymysql.md)
+- [Connect to TiDB with mysqlclient](https://github.com/tidb-samples/tidb-python-mysqlclient-quickstart)
+- [Connect to TiDB with MySQL Connector/Python](/develop/dev-guide-sample-application-python-mysql-connector.md)
+- [Connect to TiDB with SQLAlchemy](/develop/dev-guide-sample-application-python-sqlalchemy.md)
+- [Use peewee to build a simple CRUD app with TiDB and Python](/develop/dev-guide-sample-application-python-peewee.md#step-2-get-the-code)
 
 </div>
 
@@ -234,7 +234,7 @@ If you need to quickly import a large amount of data into a TiDB cluster, it is 
 
 The following are the recommended tools for bulk-insert:
 
-- Data export: [Dumpling](/dumpling-overview.md). You can export MySQL or TiDB data to local or Amazon S3.
+- Data export: [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview). You can export MySQL or TiDB data to local or Amazon S3.
 
 <CustomContent platform="tidb">
 
@@ -246,7 +246,7 @@ The following are the recommended tools for bulk-insert:
 
 <CustomContent platform="tidb-cloud">
 
-- Data import: [Data Import Task](/tidb-cloud/import-sample-data.md) page in the TiDB Cloud console. You can import **Dumpling** exported data, a **CSV** file, or [Migrate Data from Amazon Aurora to TiDB](/tidb-cloud/migrate-from-aurora-bulk-import.md). It also supports reading data from a local disk, Amazon S3 cloud disk, or GCS cloud disk.
+- Data import: [Create Import](/tidb-cloud/import-sample-data.md) page in the [TiDB Cloud console](https://tidbcloud.com/). You can import **Dumpling** exported data, import a local **CSV** file, or [Import CSV Files from Amazon S3 or GCS into TiDB Cloud](/tidb-cloud/import-csv-files.md). It also supports reading data from a local disk, Amazon S3 cloud disk, or GCS cloud disk.
 - Data replication: [TiDB Data Migration](https://docs.pingcap.com/tidb/stable/dm-overview). You can replicate MySQL, MariaDB, and Amazon Aurora databases to TiDB. It also supports merging and migrating the sharded instances and tables from the source databases.
 - Data backup and restore: [Backup](/tidb-cloud/backup-and-restore.md) page in the TiDB Cloud console. Compared to **Dumpling**, backup and restore is more suitable for **_big data_** scenario.
 

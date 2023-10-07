@@ -217,9 +217,9 @@ You can also see the [insert rows](/develop/dev-guide-insert-data.md#insert-rows
 
 For a complete example in Java, see:
 
-- [Build a Simple CRUD App with TiDB and Java - Using JDBC](/develop/dev-guide-sample-application-java.md#step-2-get-the-code)
-- [Build a Simple CRUD App with TiDB and Java - Using Hibernate](/develop/dev-guide-sample-application-java.md#step-2-get-the-code)
-- [Build the TiDB Application using Spring Boot](/develop/dev-guide-sample-application-spring-boot.md)
+- [Connect to TiDB with JDBC](/develop/dev-guide-sample-application-java-jdbc.md)
+- [Connect to TiDB with Hibernate](/develop/dev-guide-sample-application-java-hibernate.md)
+- [Connect to TiDB with Spring Boot](/develop/dev-guide-sample-application-java-spring-boot.md)
 
 </div>
 

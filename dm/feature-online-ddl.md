@@ -8,13 +8,13 @@ aliases: ['/docs/tidb-data-migration/dev/online-ddl-scheme/','tidb-data-migratio
 
 In production scenarios, table locking during DDL execution can block the reads from or writes to the database to a certain extent. Therefore, online DDL tools are often used to execute DDLs to minimize the impact on reads and writes. Common DDL tools are [gh-ost](https://github.com/github/gh-ost) and [pt-osc](https://www.percona.com/doc/percona-toolkit/3.0/pt-online-schema-change.html).
 
-When using DM to migrate data from MySQL to TiDB, you can enbale online-ddl to allow collaboration of DM and gh-ost or pt-osc. For details about how to enable online-ddl and the workflow after enabling this option, see [Continuous Replication with gh-ost or pt-osc](/migrate-with-pt-ghost.md). This document focuses on the collaboration details of DM and online DDL tools.
+When using DM to migrate data from MySQL to TiDB, you can enable online-ddl to allow collaboration of DM and gh-ost or pt-osc. For details about how to enable online-ddl and the workflow after enabling this option, see [Continuous Replication with gh-ost or pt-osc](/migrate-with-pt-ghost.md). This document focuses on the collaboration details of DM and online DDL tools.
 
 ## Working details for DM with online DDL tools
 
 This section describes the working details for DM with the online DDL tools [gh-ost](https://github.com/github/gh-ost) and [pt-osc](https://www.percona.com/doc/percona-toolkit/3.0/pt-online-schema-change.html) when implementing online-schema-change.
 
-### online-schema-change: gh-ost
+## online-schema-change: gh-ost
 
 When gh-ost implements online-schema-change, 3 types of tables are created:
 
@@ -182,9 +182,9 @@ The SQL statements mostly used by pt-osc and the corresponding operation of DM a
     * DM splits the above `rename` operation into two SQL statements:
 
         ```sql
-         rename test.test4 to test._test4_old;
-         rename test._test4_new to test.test4;
-         ```
+        rename test.test4 to test._test4_old;
+        rename test._test4_new to test.test4;
+        ```
 
     * DM does not execute `rename to _test4_old`. When executing `rename ghost_table to origin table`, DM takes the following steps:
 

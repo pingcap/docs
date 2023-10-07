@@ -12,6 +12,10 @@ The TiKV configuration file supports more options than command-line parameters. 
 
 This document only describes the parameters that are not included in command-line parameters. For more details, see [command-line parameter](/command-line-flags-for-tikv-configuration.md).
 
+> **Tip:**
+>
+> If you need to adjust the value of a configuration item, refer to [Modify the configuration](/maintain-tidb-using-tiup.md#modify-the-configuration).
+
 ## Global configuration
 
 ### `abort-on-panic`
@@ -512,7 +516,11 @@ Configuration items related to the sharing of block cache among multiple RocksDB
 ### `capacity`
 
 + The size of the shared block cache.
-+ Default value: 45% of the size of total system memory
++ Default value:
+
+    + When `storage.engine="raft-kv"`, the default value is 45% of the size of total system memory.
+    + When `storage.engine="partitioned-raft-kv"`, the default value is 30% of the size of total system memory.
+
 + Unit: KB|MB|GB
 
 ## storage.flow-control
@@ -568,7 +576,7 @@ Configuration items related to the I/O rate limiter.
 
 ### `retry-interval`
 
-+ The interval for retrying to initialize the PD connection
++ The interval for retrying the PD connection.
 + Default value: `"300ms"`
 
 ### `retry-log-every`
@@ -756,7 +764,10 @@ Configuration items related to Raftstore.
 ### `region-compact-check-step`
 
 + The number of Regions checked at one time for each round of manual compaction
-+ Default value: `100`
++ Default value:
+
+    + When `storage.engine="raft-kv"`, the default value is `100`.
+    + When `storage.engine="partitioned-raft-kv"`, the default value is `5`.
 + Minimum value: `0`
 
 ### `region-compact-min-tombstones`
@@ -771,6 +782,28 @@ Configuration items related to Raftstore.
 + Default value: `30`
 + Minimum value: `1`
 + Maximum value: `100`
+
+### `region-compact-min-redundant-rows` <span class="version-mark">New in v7.1.0</span>
+
++ The number of redundant MVCC rows required to trigger RocksDB compaction. This configuration only takes effect for Partitioned Raft KV (`storage.engine="partitioned-raft-kv"`).
++ Default value: `50000`
++ Minimum value: `0`
+
+### `region-compact-redundant-rows-percent` <span class="version-mark">New in v7.1.0</span>
+
++ The percentage of redundant MVCC rows required to trigger RocksDB compaction. This configuration only takes effect for Partitioned Raft KV (`storage.engine="partitioned-raft-kv"`).
++ Default value: `20`
++ Minimum value: `1`
++ Maximum value: `100`
+
+### `report-region-buckets-tick-interval` <span class="version-mark">New in v6.1.0</span>
+
+> **Warning:**
+>
+> `report-region-buckets-tick-interval` is an experimental feature introduced in TiDB v6.1.0. It is not recommended that you use it in production environments.
+
++ The interval at which TiKV reports bucket information to PD when `enable-region-bucket` is true.
++ Default value: `10s`
 
 ### `pd-heartbeat-tick-interval`
 
@@ -984,10 +1017,10 @@ Configuration items related to Raftstore.
 + Default value: `1MB`
 + Minimum value: `0`
 
-### `report-min-resolved-ts-interval`
+### `report-min-resolved-ts-interval` <span class="version-mark">New in v6.0.0</span>
 
-+ Determines the minimum interval at which the resolved timestamp is reported to the PD leader. If this value is set to `0`, it means that the reporting is disabled.
-+ Default value: `"1s"`, which is the smallest positive value
++ Determines the interval at which the minimum resolved timestamp is reported to the PD leader. If this value is set to `0`, it means that the reporting is disabled.
++ Default value: Before v6.3.0, the default value is `"0s"`. Starting from v6.3.0, the default value is `"1s"`, which is the smallest positive value.
 + Minimum value: `0`
 + Unit: second
 
@@ -1056,20 +1089,11 @@ Configuration items related to Coprocessor.
 ### `region-bucket-size` <span class="version-mark">New in v6.1.0</span>
 
 + The size of a bucket when `enable-region-bucket` is true.
-+ Default value: `96MiB`
++ Default value: Starting from v7.3.0, the default value is changed from `96MiB` to `50MiB`.
 
 > **Warning:**
 >
 > `region-bucket-size` is an experimental feature introduced in TiDB v6.1.0. It is not recommended that you use it in production environments.
-
-### `report-region-buckets-tick-interval` <span class="version-mark">New in v6.1.0</span>
-
-> **Warning:**
->
-> `report-region-buckets-tick-interval` is an experimental feature introduced in TiDB v6.1.0. It is not recommended that you use it in production environments.
-
-+ The interval at which TiKV reports bucket information to PD when `enable-region-bucket` is true.
-+ Default value: `10s`
 
 ## rocksdb
 
@@ -1149,12 +1173,18 @@ Configuration items related to RocksDB
 ### `max-total-wal-size`
 
 + The maximum RocksDB WAL size in total, which is the size of `*.log` files in the `data-dir`.
-+ Default value: `"4GB"`
++ Default value:
+
+    + When `storage.engine="raft-kv"`, the default value is `"4GB"`.
+    + When `storage.engine="partitioned-raft-kv"`, the default value is `1`.
 
 ### `stats-dump-period`
 
 + The interval at which statistics are output to the log.
-+ Default value: `10m`
++ Default value:
+
+    + When `storage.engine="raft-kv"`, the default value is `"10m"`.
+    + When `storage.engine="partitioned-raft-kv"`, the default value is `"0"`.
 
 ### `compaction-readahead-size`
 
@@ -1264,8 +1294,12 @@ Configuration items related to RocksDB
 >
 > This feature is experimental. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
 
-+ Specifies the total memory limit of `memtable` for all RocksDB instances in a single TiKV. The default value is 25% of the memory of the machine. It is recommended to configure a memory of at least 5 GiB. This configuration only takes effect for Partitioned Raft KV (`storage.engine`=`"partitioned-raft-kv"`).
-+ Default value: 25%
++ Specifies the total memory limit of `memtable` for all RocksDB instances in a single TiKV. `0` means no limit.
++ Default value:
+
+    + When `storage.engine="raft-kv"`, the default value is `0`, which means no limit.
+    + When `storage.engine="partitioned-raft-kv"`, the default value is 20% of the size of total system memory.
+
 + Unit: KiB|MiB|GiB
 
 ## rocksdb.titan
@@ -1344,6 +1378,12 @@ Configuration items related to `rocksdb.defaultcf`, `rocksdb.writecf`, and `rock
 + Default value for `defaultcf`: `true`
 + Default value for `writecf` and `lockcf`: `false`
 
+### `optimize-filters-for-memory` <span class="version-mark">New in v7.2.0</span>
+
++ Determines whether to generate Bloom/Ribbon filters that minimize memory internal fragmentation.
++ Note that this configuration item takes effect only when [`format-version`](#format-version-new-in-v620) >= 5.
++ Default value: `false`
+
 ### `whole-key-filtering`
 
 + Determines whether to put the entire key to bloom filter
@@ -1359,6 +1399,12 @@ Configuration items related to `rocksdb.defaultcf`, `rocksdb.writecf`, and `rock
 ### `block-based-bloom-filter`
 
 + Determines whether each block creates a bloom filter
++ Default value: `false`
+
+### `ribbon-filter-above-level` <span class="version-mark">New in v7.2.0</span>
+
++ Determines whether to use Ribbon filters for levels greater than or equal to this value and use non-block-based bloom filters for levels less than this value. When this configuration item is set, [`block-based-bloom-filter`](#block-based-bloom-filter) will be ignored.
++ Note that this configuration item takes effect only when [`format-version`](#format-version-new-in-v620) >= 5.
 + Default value: `false`
 
 ### `read-amp-bytes-per-bit`
@@ -1386,7 +1432,9 @@ Configuration items related to `rocksdb.defaultcf`, `rocksdb.writecf`, and `rock
 
 + Memtable size
 + Default value for `defaultcf` and `writecf`: `"128MB"`
-+ Default value for `lockcf`: `"32MB"`
++ Default value for `lockcf`:
+    + When `storage.engine="raft-kv"`, the default value is `"32MB"`.
+    + When `storage.engine="partitioned-raft-kv"`, the default value is `"4MB"`.
 + Minimum value: `0`
 + Unit: KB|MB|GB
 
@@ -1510,6 +1558,33 @@ Configuration items related to `rocksdb.defaultcf`, `rocksdb.writecf`, and `rock
 + The maximum SST file size when the compaction guard is enabled. The configuration prevents SST files from being too large when the compaction guard is enabled. This configuration overrides `target-file-size-base` for the same column family.
 + Default value: `"128MB"`
 + Unit: KB|MB|GB
+
+### `format-version` <span class="version-mark">New in v6.2.0</span>
+
++ The format version of SST files. This configuration item only affects newly written tables. For existing tables, the version information is read from the footer.
++ Optional values:
+    - `0`: Can be read by all TiKV versions. The default checksum type is CRC32 and this version does not support changing the checksum type.
+    - `1`: Can be read by all TiKV versions. Supports non-default checksum types like xxHash. RocksDB only writes data when the checksum type is not CRC32. (version `0` is automatically upgraded)
+    - `2`: Can be read by all TiKV versions. Changes the encoding of compressed blocks using LZ4, BZip2 and Zlib compression.
+    - `3`: Can be read by TiKV v2.1 and later versions. Changes the encoding of the keys in index blocks.
+    - `4`: Can be read by TiKV v3.0 and later versions. Changes the encoding of the values in index blocks.
+    - `5`: Can be read by TiKV v6.1 and later versions. Full and partitioned filters use a faster and more accurate Bloom filter implementation with a different schema.
++ Default value:
+
+    + When `storage.engine="raft-kv"`, the default value is `2`.
+    + When `storage.engine="partitioned-raft-kv"`, the default value is `5`.
+
+### `ttl` <span class="version-mark">New in v7.2.0</span>
+
++ SST files with updates older than the TTL will be automatically selected for compaction. These SST files will go through the compaction in a cascading way so that they can be compacted to the bottommost level or file.
++ Default value: `"30d"`
++ Unit: s(second)|h(hour)|d(day)
+
+### `periodic-compaction-seconds` <span class="version-mark">New in v7.2.0</span>
+
++ The time interval for periodic compaction. SST files with updates older than this value will be selected for compaction and rewritten to the same level where these SST files originally reside.
++ Default value: `"30d"`
++ Unit: s(second)|h(hour)|d(day)
 
 ## rocksdb.defaultcf.titan
 
@@ -1648,6 +1723,8 @@ Configuration items related to `raftdb`
 
 + The maximum RocksDB WAL size in total
 + Default value: `"4GB"`
+    + When `storage.engine="raft-kv"`, the default value is `"4GB"`.
+    + When `storage.engine="partitioned-raft-kv"`, the default value is `1`.
 
 ### `compaction-readahead-size`
 
@@ -1802,7 +1879,9 @@ Configuration items related to Raft Engine.
 + Value Options:
     + `1`: Default log file version for TiKV earlier than v6.3.0. Can be read by TiKV >= v6.1.0.
     + `2`: Supports log recycling. Can be read by TiKV >= v6.3.0.
-+ Default value: `2`
++ Default value:
+    + When `storage.engine="raft-kv"`, the default value is `2`.
+    + When `storage.engine="partitioned-raft-kv"`, the default value is `5`.
 
 ### `enable-log-recycle` <span class="version-mark">New in v6.3.0</span>
 
@@ -2222,3 +2301,31 @@ Configuration items related to resource control of the TiKV storage layer.
 + Controls whether to enable scheduling for user foreground read/write requests according to [Request Unit (RU)](/tidb-resource-control.md#what-is-request-unit-ru) of the corresponding resource groups. For information about TiDB resource groups and resource control, see [TiDB resource control](/tidb-resource-control.md).
 + Enabling this configuration item only works when [`tidb_enable_resource_control](/system-variables.md#tidb_enable_resource_control-new-in-v660) is enabled on TiDB. When this configuration item is enabled, TiKV will use the priority queue to schedule the queued read/write requests from foreground users. The scheduling priority of a request is inversely related to the amount of resources already consumed by the resource group that receives this request, and positively related to the quota of the corresponding resource group.
 + Default value: `true`, which means scheduling based on the RU of the resource group is enabled.
+
+## split
+
+Configuration items related to [Load Base Split](/configure-load-base-split.md).
+
+### `byte-threshold` <span class="version-mark">New in v5.0</span>
+
++ Controls the traffic threshold at which a Region is identified as a hotspot.
++ Default value:
+
+    + `30MiB` per second when [`region-split-size`](#region-split-size) is less than 4 GB.
+    + `100MiB` per second when [`region-split-size`](#region-split-size) is greater than or equal to 4 GB.
+
+### `qps-threshold`
+
++ Controls the QPS threshold at which a Region is identified as a hotspot.
++ Default value:
+
+    + `3000` when [`region-split-size`](#region-split-size) is less than 4 GB.
+    + `7000` when  [`region-split-size`](#region-split-size) is greater than or equal to 4 GB.
+
+### `region-cpu-overload-threshold-ratio` <span class="version-mark">New in v6.2.0</span>
+
++ Controls the CPU usage threshold at which a Region is identified as a hotspot.
++ Default value:
+
+    + `0.25` when [`region-split-size`](#region-split-size) is less than 4 GB.
+    + `0.75` when  [`region-split-size`](#region-split-size) is greater than or equal to 4 GB.

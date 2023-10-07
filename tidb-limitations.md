@@ -21,7 +21,7 @@ This document describes the common usage limitations of TiDB, including the maxi
 
 ## Limitations on the total number of databases, tables, views, and connections
 
-| Identifier type  | Maximum number  |
+| Type  | Maximum number  |
 |:----------|:----------|
 | Databases | unlimited |
 | Tables    | unlimited |
@@ -52,18 +52,6 @@ This document describes the common usage limitations of TiDB, including the maxi
 </CustomContent>
 
 ## Limitation on a single row
-
-| Type       | Upper limit (default value)   |
-|:----------|:----------|
-| Size       | Defaults to 6 MiB and can be adjusted to 120 MiB  |
-
-<CustomContent platform="tidb">
-
-You can adjust the size limit via the [`txn-entry-size-limit`](/tidb-configuration-file.md#txn-entry-size-limit-new-in-v50) configuration item.
-
-</CustomContent>
-
-## Limitation on a single column
 
 | Type       | Upper limit (default value)   |
 |:----------|:----------|

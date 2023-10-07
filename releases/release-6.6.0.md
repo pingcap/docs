@@ -9,6 +9,10 @@ Release date: February 20, 2023
 
 TiDB version: 6.6.0-[DMR](/releases/versioning.md#development-milestone-releases)
 
+> **Note:**
+>
+> The TiDB 6.6.0-DMR documentation has been [archived](https://docs-archive.pingcap.com/tidb/v6.6/). PingCAP encourages you to use [the latest LTS version](https://docs.pingcap.com/tidb/stable) of the TiDB database.
+
 Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.6/quick-start-with-tidb) | [Installation package](https://www.pingcap.com/download/?version=v6.6.0#version-list)
 
 In v6.6.0-DMR, the key new features and improvements are as follows:
@@ -50,7 +54,7 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
     <td>Support MySQL-compatible foreign key constraints to maintain data consistency and improve data quality.</td>
   </tr>
   <tr>
-    <td><a href="https://docs.pingcap.com/tidb/v6.6/sql-statement-create-index/#multi-valued-index" target="_blank">Multi-valued index</a> (experimental)</td>
+    <td><a href="https://docs.pingcap.com/tidb/v6.6/sql-statement-create-index#multi-valued-indexes" target="_blank">Multi-valued indexes</a> (experimental)</td>
     <td>Introduce MySQL-compatible multi-valued indexes and enhance the JSON type to improve TiDB's compatibility with MySQL 8.0.</td>
   </tr>
   <tr>
@@ -172,19 +176,19 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
 
 ### SQL
 
-* Support MySQL-compatible foreign key constraints [#18209](https://github.com/pingcap/tidb/issues/18209) [@crazycs520](https://github.com/crazycs520)
+* Support MySQL-compatible foreign key constraints [#18209](https://github.com/pingcap/tidb/issues/18209) @[crazycs520](https://github.com/crazycs520)
 
     TiDB v6.6.0 introduces the foreign key constraints feature, which is compatible with MySQL. This feature supports referencing within a table or between tables, constraints validation, and cascade operations. This feature helps to migrate applications to TiDB, maintain data consistency, improve data quality, and facilitate data modeling.
 
     For more information, see [documentation](/foreign-key.md).
 
-* Support the MySQL-compatible multi-valued index (experimental) [#39592](https://github.com/pingcap/tidb/issues/39592) @[xiongjiwei](https://github.com/xiongjiwei) @[qw4990](https://github.com/qw4990)
+* Support MySQL-compatible multi-valued indexes (experimental) [#39592](https://github.com/pingcap/tidb/issues/39592) @[xiongjiwei](https://github.com/xiongjiwei) @[qw4990](https://github.com/qw4990)
 
-    TiDB introduces the MySQL-compatible multi-valued index in v6.6.0. Filtering the values of an array in a JSON column is a common operation, but normal indexes cannot help speed up such an operation. Creating a multi-valued index on an array can greatly improve filtering performance. If an array in the JSON column has a multi-valued index, you can use the multi-value index to filter the retrieval conditions with `MEMBER OF()`, `JSON_CONTAINS()`, `JSON_OVERLAPS()` functions, thereby reducing much I/O consumption and improving operation speed.
+    TiDB introduces MySQL-compatible multi-valued indexes in v6.6.0. Filtering the values of an array in a JSON column is a common operation, but normal indexes cannot help speed up such an operation. Creating a multi-valued index on an array can greatly improve filtering performance. If an array in the JSON column has a multi-valued index, you can use the multi-valued index to filter the retrieval conditions with `MEMBER OF()`, `JSON_CONTAINS()`, `JSON_OVERLAPS()` functions, thereby reducing much I/O consumption and improving operation speed.
 
     Introducing multi-valued indexes further enhances TiDB's support for the JSON data type and also improves TiDB's compatibility with MySQL 8.0.
 
-    For more information, see [documentation](/sql-statements/sql-statement-create-index.md#multi-valued-index).
+    For more information, see [documentation](/sql-statements/sql-statement-create-index.md#multi-valued-indexes).
 
 ### DB operations
 
@@ -337,9 +341,9 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
 
     For more information, see the [SQL](#sql) section in this document and [documentation](/foreign-key.md).
 
-* Support the MySQL-compatible multi-valued index (experimental) [#39592](https://github.com/pingcap/tidb/issues/39592) @[xiongjiwei](https://github.com/xiongjiwei) @[qw4990](https://github.com/qw4990)
+* Support the MySQL-compatible multi-valued indexes (experimental) [#39592](https://github.com/pingcap/tidb/issues/39592) @[xiongjiwei](https://github.com/xiongjiwei) @[qw4990](https://github.com/qw4990)
 
-    For more information, see the [SQL](#sql) section in this document and [documentation](/sql-statements/sql-statement-create-index.md#multi-valued-index).
+    For more information, see the [SQL](#sql) section in this document and [documentation](/sql-statements/sql-statement-create-index.md#multi-valued-indexes).
 
 ### System variables
 
@@ -561,6 +565,7 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
     - Fix the issue that querying TiFlash-related system tables might get stuck [#6745](https://github.com/pingcap/tiflash/pull/6745) @[lidezhu](https://github.com/lidezhu)
     - Fix the issue that semi-joins use excessive memory when calculating Cartesian products [#6730](https://github.com/pingcap/tiflash/issues/6730) @[gengliqi](https://github.com/gengliqi)
     - Fix the issue that the result of the division operation on the DECIMAL data type is not rounded [#6393](https://github.com/pingcap/tiflash/issues/6393) @[LittleFall](https://github.com/LittleFall)
+    - Fix the issue that `start_ts` cannot uniquely identify an MPP query in TiFlash queries, which might cause an MPP query to be incorrectly canceled [#43426](https://github.com/pingcap/tidb/issues/43426) @[hehechen](https://github.com/hehechen)
 
 + Tools
 
@@ -580,7 +585,7 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
 
         - Fix the issue that `transaction_atomicity` and `protocol` cannot be updated via the configuration file [#7935](https://github.com/pingcap/tiflow/issues/7935) @[CharlesCheung96](https://github.com/CharlesCheung96)
         - Fix the issue that precheck is not performed on the storage path of redo log [#6335](https://github.com/pingcap/tiflow/issues/6335) @[CharlesCheung96](https://github.com/CharlesCheung96)
-        - Fix the issue of insufficient duration that redo log can tolerate for S3 storage failure [#8089](https://github.com/pingcap/tiflow/issues/8089)  @[CharlesCheung96](https://github.com/CharlesCheung96)
+        - Fix the issue of insufficient duration that redo log can tolerate for S3 storage failure [#8089](https://github.com/pingcap/tiflow/issues/8089) @[CharlesCheung96](https://github.com/CharlesCheung96)
         - Fix the issue that changefeed might get stuck in special scenarios such as when scaling in or scaling out TiKV or TiCDC nodes [#8174](https://github.com/pingcap/tiflow/issues/8174) @[hicqu](https://github.com/hicqu)
         - Fix the issue of too high traffic among TiKV nodes [#14092](https://github.com/tikv/tikv/issues/14092) @[overvenus](https://github.com/overvenus)
         - Fix the performance issues of TiCDC in terms of CPU usage, memory control, and throughput when the pull-based sink is enabled [#8142](https://github.com/pingcap/tiflow/issues/8142) [#8157](https://github.com/pingcap/tiflow/issues/8157) [#8001](https://github.com/pingcap/tiflow/issues/8001) [#5928](https://github.com/pingcap/tiflow/issues/5928) @[hicqu](https://github.com/hicqu) @[hi-rustin](https://github.com/hi-rustin)

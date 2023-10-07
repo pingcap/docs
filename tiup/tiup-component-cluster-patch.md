@@ -28,7 +28,7 @@ Before running the `tiup cluster patch` command, you need to pack the binary pac
 1. Determine the following variables:
 
     - `${component}`: the name of the component to be replaced (such as `tidb`, `tikv`, or `pd`).
-    - `${version}`: the version of the component (such as `v7.0.0` or `v6.5.1`).
+    - `${version}`: the version of the component (such as `v7.3.0` or `v6.5.3`).
     - `${os}`: the operating system (`linux`).
     - `${arch}`: the platform on which the component runs (`amd64`, `arm64`).
 
@@ -77,7 +77,7 @@ After you have completed the preceding steps, you can use `/tmp/${component}-hot
 
 - When restarting the PD or TiKV service, TiKV/PD first transfers the leader of the node to be restarted to another node. Because the transfer process takes some time, you can use the option `--transfer-timeout` to set the maximum waiting time (in seconds). After the timeout, TiUP directly restarts the service.
 - Data type: `UINT`
-- If this option is not specified, TiUP directly restarts the service after waiting for `300` seconds.
+- If this option is not specified, TiUP directly restarts the service after waiting for `600` seconds.
 
 > **Note:**
 >

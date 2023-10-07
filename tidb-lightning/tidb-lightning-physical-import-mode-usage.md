@@ -7,6 +7,8 @@ summary: Learn how to use the physical import mode in TiDB Lightning.
 
 This document introduces how to use the [physical import mode](/tidb-lightning/tidb-lightning-physical-import-mode.md) in TiDB Lightning, including writing the configuration file, tuning performance, and configuring disk quota.
 
+There are limitations on the physical import mode. Before using the physical import mode, make sure to read [Limitations](/tidb-lightning/tidb-lightning-physical-import-mode.md#limitations).
+
 ## Configure and use the physical import mode
 
 You can use the following configuration file to execute data import using the physical import mode:
@@ -26,6 +28,17 @@ check-requirements = true
 [mydumper]
 # The local data source directory or the URI of the external storage. For more information about the URI of the external storage, see https://docs.pingcap.com/tidb/v6.6/backup-and-restore-storages#uri-format.
 data-source-dir = "/data/my_database"
+
+[conflict]
+# Starting from v7.3.0, a new version of strategy is introduced to handle conflicting data. The default value is "".
+# - "": TiDB Lightning does not detect or handle conflicting data. If the source file contains conflicting primary or unique key records, the subsequent step reports an error.
+# - "error": when detecting conflicting primary or unique key records in the imported data, TiDB Lightning terminates the import and reports an error.
+# - "replace": when encountering conflicting primary or unique key records, TiDB Lightning retains the new data and overwrites the old data.
+# - "ignore": when encountering conflicting primary or unique key records, TiDB Lightning retains the old data and ignores the new data.
+# The new version strategy cannot be used together with tikv-importer.duplicate-resolution (the old version of conflict detection).
+strategy = ""
+# threshold = 9223372036854775807
+# max-record-rows = 100
 
 [tikv-importer]
 # Import mode. "local" means using the physical import mode.
@@ -83,15 +96,48 @@ For the complete configuration file, refer to [the configuration file and comman
 
 ## Conflict detection
 
-Conflicting data refers to two or more records with the same PK/UK column data. When the data source contains conflicting data, the actual number of rows in the table is different from the total number of rows returned by the query using unique index.
+Conflicting data refers to two or more records with the same primary key or unique key column data. When the data source contains conflicting data and conflict detection feature is not turned on, the actual number of rows in the table is different from the total number of rows returned by the query using unique index.
 
-TiDB Lightning offers three strategies for detecting conflicting data:
+There are two versions for conflict detection:
 
-- `record`: only records conflicting records to the `lightning_task_info.conflict_error_v1` table on the target TiDB. Note that the required version of the target TiKV is v5.2.0 or later versions; otherwise, it falls back to 'none'.
-- `remove` (recommended): records all conflicting records, like the `record` strategy. But it removes all conflicting records from the target table to ensure a consistent state in the target TiDB.
-- `none`: does not detect duplicate records. `none` has the best performance in the three strategies, but might lead to inconsistent data in the target TiDB.
+- The new version of conflict detection, controlled by the `conflict` configuration item.
+- The old version of conflict detection, controlled by the `tikv-importer.duplicate-resolution` configuration item.
 
-Before v5.3, Lightning does not support conflict detection. If there is conflicting data, the import process fails at the checksum step. When conflict detection is enabled, regardless of the `record` or `remove` strategy, if there is conflicting data, Lightning skips the checksum step (because it always fails).
+### The new version of conflict detection
+
+The meaning of configuration values are as follows:
+
+| Strategy | Default behavior of conflicting data | The corresponding SQL statement |
+| :-- | :-- | :-- |
+| `"replace"` | Replacing existing data with new data. | `REPLACE INTO ...` |
+| `"ignore"` | Keeping existing data and ignoring new data. | `INSERT IGNORE INTO ...` |
+| `"error"` | Pausing the import and reporting an error. | `INSERT INTO ...` |
+| `""` | TiDB Lightning does not detect or handle conflicting data. If data with primary and unique key conflicts exists, the subsequent step reports an error. |  None   |
+
+> **Note:**
+>
+> The conflict detection result in the physical import mode might differ from SQL-based import due to internal implementation and limitation of TiDB Lightning.
+
+When the strategy is `"replace"` or `"ignore"`, conflicting data is treated as [conflict errors](/tidb-lightning/tidb-lightning-error-resolution.md#conflict-errors). If the [`conflict.threshold`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task) value is greater than `0`, TiDB Lightning tolerates the specified number of conflict errors. The default value is `9223372036854775807`, which means that almost all errors are tolerant. For more information, see [error resolution](/tidb-lightning/tidb-lightning-error-resolution.md).
+
+The new version of conflict detection has the following limitations:
+
+- Before importing, TiDB Lightning prechecks potential conflicting data by reading all data and encoding it. During the detection process, TiDB Lightning uses `tikv-importer.sorted-kv-dir` to store temporary files. After the detection is complete, TiDB Lightning retains the results for import phase. This introduces additional overhead for time consumption, disk space usage, and API requests to read the data.
+- The new version of conflict detection only works in a single node, and does not apply to parallel imports and scenarios where the `disk-quota` parameter is enabled.
+- The new version (`conflict`) and old version (`tikv-importer.duplicate-resolution`) conflict detection cannot be used at the same time. The new version of conflict detection is enabled when the configuration [`conflict.strategy`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task) is set.
+
+Compared with the old version of conflict detection, the new version takes less time when the imported data contains a large amount of conflicting data. It is recommended that you use the new version of conflict detection in non-parallel import tasks when the data contains conflicting data and there is sufficient local disk space.
+
+### The old version of conflict detection
+
+The old version of conflict detection is enabled when `tikv-importer.duplicate-resolution` is not an empty string. In v7.2.0 and earlier versions, TiDB Lightning only supports this conflict detection method.
+
+In the old version of conflict detection, TiDB Lightning offers two strategies:
+
+- `remove` (recommended): records and removes all conflicting records from the target table to ensure a consistent state in the target TiDB.
+- `none`: does not detect duplicate records. `none` has the best performance in the two strategies, but might lead to inconsistent data in the target TiDB.
+
+Before v5.3, TiDB Lightning does not support conflict detection. If there is conflicting data, the import process fails at the checksum step. When conflict detection is enabled, if there is conflicting data, TiDB Lightning skips the checksum step (because it always fails).
 
 Suppose an `order_line` table has the following schema:
 
@@ -134,14 +180,18 @@ mysql> select table_name,index_name,key_data,row_data from conflict_error_v1 lim
 
 You can manually identify the records that need to be retained and insert these records into the table.
 
-## Pause scheduling on the table level
+## Scope of pausing scheduling during import
 
-Starting from v6.2.0, TiDB Lightning implements a mechanism to limit the impact of data import on online applications. With the new mechanism, TiDB Lightning does not pause the global scheduling, but only pauses scheduling for the region that stores the target table data. This significantly reduces the impact of the import on online applications.
+Starting from v6.2.0, TiDB Lightning implements a mechanism to limit the impact of data import on online applications. With the new mechanism, TiDB Lightning does not pause the global scheduling, but only pauses scheduling for the Region that stores the target table data. This significantly reduces the impact of the import on online applications.
+
+Starting from v7.1.0, you can control the scope of pausing scheduling by using the TiDB Lightning parameter [`pause-pd-scheduler-scope`](/tidb-lightning/tidb-lightning-configuration.md). The default value is `"table"`, which means that the scheduling is paused only for the Region that stores the target table data. When there is no business traffic in the cluster, it is recommended to set this parameter to `"global"` to avoid interference from other scheduling during the import.
 
 <Note>
+
 TiDB Lightning does not support importing data into a table that already contains data.
 
 The TiDB cluster must be v6.1.0 or later versions. For earlier versions, TiDB Lightning keeps the old behavior, which pauses scheduling globally and severely impacts the online application during the import.
+
 </Note>
 
 By default, TiDB Lightning pauses the cluster scheduling for the minimum range possible. However, under the default configuration, the cluster performance still might be affected by fast import. To avoid this, you can configure the following options to control the import speed and other factors that might impact the cluster performance:
@@ -154,30 +204,7 @@ store-write-bwlimit = "128MiB"
 [tidb]
 # Use smaller concurrency to reduce the impact of Checksum and Analyze on the transaction latency.
 distsql-scan-concurrency = 3
-
-[cron]
-# Prevent TiKV from switching to import mode.
-switch-mode = '0'
 ```
-
-You can measure the impact of data import on TPCC results by simulating the online application using TPCC and importing data into a TiDB cluster using TiDB Lightning. The test result is as follows:
-
-| Concurrency | TPM | P99 | P90 | AVG |
-| ----- | --- | --- | --- | --- |
-| 1     | 20%~30% | 60%~80% | 30%~50% | 30%~40% |
-| 8     | 15%~25% | 70%~80% | 35%~45% | 20%~35% |
-| 16    | 20%~25% | 55%~85% | 35%~40% | 20%~30% |
-| 64    | No significant impact |
-| 256   | No significant impact |
-
-The percentage in the preceding table indicates the impact of data import on TPCC results.
-
-* For the TPM column, the number indicates the percentage of TPM decrease.
-* For the P99, P90, and AVG columns, the number indicates the percentage of latency increase.
-
-The test results show that the smaller the concurrency, the larger the impact of data import on TPCC results. When the concurrency is 64 or more, the impact of data import on TPCC results is negligible.
-
-Therefore, if your TiDB cluster has a latency-sensitive application and a low concurrency, it is strongly recommended **not** to use TiDB Lightning to import data into the cluster. This will cause a significant impact on the online application.
 
 ## Performance tuning
 

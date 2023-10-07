@@ -11,7 +11,7 @@ summary: An overview of the usage of SET RESOURCE GROUP in the TiDB database.
 
 > **Note:**
 >
-> This feature is not available on [Serverless Tier clusters](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta).
+> This feature is not available on [TiDB Serverless clusters](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless).
 
 </CustomContent>
 
@@ -20,11 +20,12 @@ summary: An overview of the usage of SET RESOURCE GROUP in the TiDB database.
 **SetResourceGroupStmt:**
 
 ```ebnf+diagram
-SetResourceGroupStmt:
-   "SET" "RESOURCE" "GROUP" ResourceGroupName
+SetResourceGroupStmt ::=
+    "SET" "RESOURCE" "GROUP" ResourceGroupName
 
-ResourceGroupName:
-   Identifier
+ResourceGroupName ::=
+    Identifier
+|   "DEFAULT"
 ```
 
 ## Examples
@@ -71,7 +72,7 @@ SELECT CURRENT_RESOURCE_GROUP();
 Execute `SET RESOURCE GROUP` to specify the current session to use the default resource group.
 
 ```sql
-SET RESOURCE GROUP ``;
+SET RESOURCE GROUP `default`;
 SELECT CURRENT_RESOURCE_GROUP();
 ```
 

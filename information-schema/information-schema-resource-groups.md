@@ -9,7 +9,7 @@ summary: Learn the `RESOURCE_GROUPS` information_schema table.
 
 > **Note:**
 >
-> This feature is not available on [Serverless Tier clusters](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta).
+> This feature is not available on [TiDB Serverless clusters](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless).
 
 </CustomContent>
 
@@ -72,11 +72,11 @@ SELECT * FROM information_schema.resource_groups WHERE NAME = 'rg1'; -- View the
 ```
 
 ```sql
-+------+------------+----------+-----------+
-| NAME | RU_PER_SEC | PRIORITY | BURSTABLE |
-+------+------------+----------+-----------+
-| rg1  |       1000 | MEDIUM   | NO        |
-+------+------------+----------+-----------+
++------+------------+----------+-----------+-------------+
+| NAME | RU_PER_SEC | PRIORITY | BURSTABLE | QUERY_LIMIT |
++------+------------+----------+-----------+-------------+
+| rg1  | 1000       | MEDIUM   | NO        | NULL        |
++------+------------+----------+-----------+-------------+
 1 row in set (0.00 sec)
 ```
 

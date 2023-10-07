@@ -76,7 +76,7 @@ Full backup occupies much storage space and contains only cluster data at a spec
 
 #### Backup performance and impact on TiDB clusters
 
-- The impact of backup on a TiDB cluster is kept below 20%, and this value can be reduced to 10% or less with the proper configuration of the TiDB cluster. The backup speed of a TiKV node is scalable and ranges from 50 MB/s to 100 MB/s. For more information, see [Backup performance and impact](/br/br-snapshot-guide.md#performance-and-impact-of-snapshot-backup).
+- When CPU and I/O resources are sufficient in the cluster, the snapshot backup has a limited impact on the TiDB cluster, generally staying below 20%. With appropriate configuration of the TiDB cluster, this impact can be further minimized to 10% or even less. When CPU and I/O resources are insufficient, you can adjust the TiKV configuration item [`backup.num-threads`](/tikv-configuration-file.md#num-threads-1) to change the number of worker threads used by the backup task to reduce the impact of the backup task on the TiDB cluster. The backup speed of a TiKV node is scalable and ranges from 50 MB/s to 100 MB/s. For more information, see [Backup performance and impact](/br/br-snapshot-guide.md#performance-and-impact-of-snapshot-backup).
 - When there are only log backup tasks, the impact on the cluster is about 5%. Log backup flushes all the changes generated after the last refresh every 3-5 minutes to the backup storage, which can **achieve a Recovery Point Objective (RPO) as short as five minutes**.
 
 ### Restore backup data
@@ -119,15 +119,19 @@ Backup and restore might go wrong when some TiDB features are enabled or disable
 
 ### Version compatibility
 
-Before performing backup and restore, BR compares and checks the TiDB cluster version with its own. If there is a major-version mismatch, BR prompts a reminder to exit. To forcibly skip the version check, you can set `--check-requirements=false`. Note that skipping the version check might introduce incompatibility.
-
 > **Note:**
 >
-> When performing backup and restore, it is recommended that the BR and TiDB cluster are of the same version.
+> It is recommended to use the BR of the same major version as your TiDB cluster for backup and restoration.
+
+Before performing backup and restore, BR compares the TiDB cluster version with its own and checks their compatibility. If the versions are incompatible, BR reports an error and exits. To forcibly skip the version check, you can set `--check-requirements=false`. Note that skipping the version check might introduce incompatibility in data.
+
+Starting from v7.0.0, TiDB gradually supports performing backup and restore operations through SQL statements. Therefore, it is strongly recommended to use the BR tool of the same major version as the TiDB cluster when backing up and restoring cluster data, and avoid performing data backup and restore operations across major versions. This helps ensure smooth execution of restore operations and data consistency.
+
+The compatibility information for BR before TiDB v6.6.0 is as follows:
 
 | Backup version (vertical) \ Restore version (horizontal)   | Restore to TiDB v6.0 | Restore to TiDB v6.1 | Restore to TiDB v6.2 | Restore to TiDB v6.3, v6.4, or v6.5 | Restore to TiDB v6.6 |
 |  ----  |  ----  | ---- | ---- | ---- | ---- |
-| TiDB v6.0, v6.1, v6.2, v6.3, v6.4, or v6.5 snapshot backup | Compatible (known issue [#36379](https://github.com/pingcap/tidb/issues/36379): if backup data contains an empty schema, BR might report an error.) | Compatible | Compatible | Compatible | Compatible (BR must be v6.6 or later) |
+| TiDB v6.0, v6.1, v6.2, v6.3, v6.4, or v6.5 snapshot backup | Compatible (known issue [#36379](https://github.com/pingcap/tidb/issues/36379): if backup data contains an empty schema, BR might report an error.) | Compatible | Compatible | Compatible | Compatible (BR must be v6.6) |
 | TiDB v6.3, v6.4, v6.5, or v6.6 log backup| Incompatible | Incompatible | Incompatible | Compatible | Compatible |
 
 ## See also

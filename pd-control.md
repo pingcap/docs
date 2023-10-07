@@ -24,16 +24,16 @@ To obtain `pd-ctl` of the latest version, download the TiDB server installation 
 
 | Installation package                                                                    | OS | Architecture | SHA256 checksum                                                    |
 | :------------------------------------------------------------------------ | :------- | :---- | :--------------------------------------------------------------- |
-| `https://download.pingcap.org/tidb-community-server-{version}-linux-amd64.tar.gz` (pd-ctl) | Linux | amd64 | `https://download.pingcap.org/tidb-community-server-{version}-linux-amd64.sha256` |
-| `https://download.pingcap.org/tidb-community-server-{version}-linux-arm64.tar.gz` (pd-ctl) | Linux | arm64 | `https://download.pingcap.org/tidb-community-server-{version}-linux-arm64.sha256` |
+| `https://download.pingcap.org/tidb-community-server-{version}-linux-amd64.tar.gz` (pd-ctl) | Linux | amd64 | `https://download.pingcap.org/tidb-community-server-{version}-linux-amd64.tar.gz.sha256` |
+| `https://download.pingcap.org/tidb-community-server-{version}-linux-arm64.tar.gz` (pd-ctl) | Linux | arm64 | `https://download.pingcap.org/tidb-community-server-{version}-linux-arm64.tar.gz.sha256` |
 
 > **Note:**
 >
-> `{version}` in the link indicates the version number of TiDB. For example, the download link for `v7.0.0` in the `amd64` architecture is `https://download.pingcap.org/tidb-community-server-v7.0.0-linux-amd64.tar.gz`.
+> `{version}` in the link indicates the version number of TiDB. For example, the download link for `v7.3.0` in the `amd64` architecture is `https://download.pingcap.org/tidb-community-server-v7.3.0-linux-amd64.tar.gz`.
 
 ### Compile from source code
 
-1. [Go](https://golang.org/) Version 1.19 or later because the Go modules are used.
+1. [Go](https://golang.org/) 1.21 or later is required because the Go modules are used.
 2. In the root directory of the [PD project](https://github.com/pingcap/pd), use the `make` or `make pd-ctl` command to compile and generate `bin/pd-ctl`.
 
 ## Usage
@@ -331,7 +331,13 @@ Usage:
 
 - `enable-placement-rules` is used to enable placement rules, which is enabled by default in v5.0 and later versions.
 
-- `store-limit-mode` is used to control the mode of limiting the store speed. The optional modes are `auto` and `manual`. In `auto` mode, the stores are automatically balanced according to the load (experimental).
+- `store-limit-mode` is used to control the mode of limiting the store speed. The optional modes are `auto` and `manual`. In `auto` mode, the stores are automatically balanced according to the load (deprecated).
+
+- `store-limit-version` controls the version of the store limit formula. In v1 mode, you can manually modify the `store limit` to limit the scheduling speed of a single TiKV. The v2 mode is an experimental feature. In v2 mode, you do not need to manually set the `store limit` value, as PD dynamically adjusts it based on the capability of TiKV snapshots. For more details, refer to [Principles of store limit v2](/configure-store-limit.md#principles-of-store-limit-v2).
+
+    ```bash
+    config set store-limit-version v2       // using store limit v2
+    ```
 
 - PD rounds the lowest digits of the flow number, which reduces the update of statistics caused by the changes of the Region flow information. This configuration item is used to specify the number of lowest digits to round for the Region flow information. For example, the flow `100512` will be rounded to `101000` because the default value is `3`. This configuration replaces `trace-region-flow`.
 

@@ -18,13 +18,13 @@ You can use TiDB Lightning to import data in parallel in the following scenarios
 >
 > - Parallel import only supports initialized empty tables in TiDB and does not support migrating data to tables with data written by existing services. Otherwise, data inconsistencies may occur.
 >
-> - Parallel import is usually used in the physical import mode.
+> - Parallel import is usually used in the physical import mode. You need to configure `parallel-import = true`.
 >
 > - Apply only one backend at a time when using multiple TiDB Lightning instances to import data to the same target. For example, you cannot import data to the same TiDB cluster in both the physical and logical import modes at the same time.
 
 ## Considerations
 
-No additional configuration is required for parallel import using TiDB Lightning. When TiDB Lightning is started, it registers meta data in the downstream TiDB cluster and automatically detects whether there are other instances migrating data to the target cluster at the same time. If there is, it automatically enters the parallel import mode.
+To use parallel import, you need to configure `parallel-import = true`. When TiDB Lightning is started, it registers meta data in the downstream TiDB cluster and automatically detects whether there are other instances migrating data to the target cluster at the same time. If there is, it automatically enters the parallel import mode.
 
 But when migrating data in parallel, you need to take the following into consideration:
 
@@ -93,9 +93,9 @@ status-addr = ":8289"
 data-source-dir = "/path/to/source-dir"
 
 [tikv-importer]
-# Whether to allow importing data to tables with data. The default value is `false`.
-# When you use parallel import mode, you must set it to `true`, because multiple TiDB Lightning instances are importing the same table at the same time.
-incremental-import = true
+# Whether to allow importing data into tables that already have data. The default value is `false`.
+# When using parallel import, because multiple TiDB Lightning instances import a table at the same time, this configuration item must be set to `true`.
+parallel-import = true
 # "local": The default mode. It applies to large dataset import, for example, greater than 1 TiB. However, during the import, downstream TiDB is not available to provide services.
 # "tidb": You can use this mode for small dataset import, for example, smaller than 1 TiB. During the import, downstream TiDB is available to provide services.
 backend = "local"
@@ -171,6 +171,11 @@ pattern = '(?i)^(?:[^/]*/)*my_db\.my_table\.(0[0-4][0-9][0-9][0-9]|05000)\.sql'
 schema = "my_db"
 table = "my_table"
 type = "sql"
+
+[tikv-importer]
+# Whether to allow importing data into tables that already have data. The default value is `false`.
+# When using parallel import, because multiple TiDB Lightning instances import a table at the same time, this configuration item must be set to `true`.
+parallel-import = true
 ```
 
 You can modify the configuration of the other instance to only import the `05001 ~ 10000` data files.
@@ -185,9 +190,19 @@ If one or more TiDB Lightning nodes exit abnormally during a parallel import, id
 
 - If the error shows normal exit (for example, exit in response to a kill command) or termination by the operating system due to OOM, adjust the configuration and then restart the TiDB Lightning nodes.
 
-- If the error has no impact on data accuracy, for example, network timeout, run `checkpoint-error-ignore` by using tidb-lightning-ctl on all failed nodes to clean errors in the checkpoint source data. Then restart these nodes to continue importing data from checkpoints. For details, see [checkpoint-error-ignore](/tidb-lightning/tidb-lightning-checkpoints.md#--checkpoint-error-ignore).
+- If the error has no impact on data accuracy, for example, network timeout, perform the following steps:
 
-- If the log reports errors resulting in data inaccuracy, for example, checksum mismatched, which indicates invalid data in the source file, run `checkpoint-error-destroy` by using tidb-lightning-ctl on all failed nodes to clean data imported to the failed tables as well as the checkpoint source data. For details, see [checkpoint-error-destroy](/tidb-lightning/tidb-lightning-checkpoints.md#--checkpoint-error-destroy). This command removes the data imported to the failed tables downstream. Therefore, you need to re-configure and import the data of the failed tables on all TiDB Lightning nodes (including those that exit normally) by using the `filters` parameter.
+    1. Run the [`checkpoint-error-ignore`](/tidb-lightning/tidb-lightning-checkpoints.md#--checkpoint-error-ignore) command with the setting `--checkpoint-error-ignore=all` on all failed nodes to clean errors in the checkpoint source data.
+
+    2. Restart these nodes to continue importing data from checkpoints.
+
+- If you see errors in the log that result in data inaccuracies, such as a checksum mismatch indicating invalid data in the source file, you can perform the following steps to resolve this issue:
+
+    1. Run the [`checkpoint-error-destroy`](/tidb-lightning/tidb-lightning-checkpoints.md#--checkpoint-error-destroy) command on all Lightning nodes, including successful nodes. This command removes the imported data from failed tables and resets the checkpoint status of these tables to "not yet started".
+
+    2. Reconfigure and import the data of failed tables by using the [`filter`](/table-filter.md) parameter on all TiDB Lightning nodes, including normally exiting nodes.
+
+        When you reconfigure the Lightning parallel import task, do not include the `checkpoint-error-destroy` command in the startup script of each Lightning node. Otherwise, this command deletes shared metadata used by multiple parallel import tasks, which might cause issues during data import. For example, if a second Lightning import task is started, it will delete the metadata written by the first task, leading to abnormal data import.
 
 ### During an import, an error "Target table is calculating checksum. Please wait until the checksum is finished and try again" is reported
 

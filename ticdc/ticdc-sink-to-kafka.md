@@ -24,6 +24,7 @@ ID: simple-replication-task
 Info: {"sink-uri":"kafka://127.0.0.1:9092/topic-name?protocol=canal-json&kafka-version=2.4.0&partition-num=6&max-message-bytes=67108864&replication-factor=1","opts":{},"create-time":"2020-03-12T22:04:08.103600025+08:00","start-ts":415241823337054209,"target-ts":0,"admin-job-type":0,"sort-engine":"unified","sort-dir":".","config":{"case-sensitive":true,"filter":{"rules":["*.*"],"ignore-txn-start-ts":null,"ddl-allow-list":null},"mounter":{"worker-num":16},"sink":{"dispatchers":null},"scheduler":{"type":"table-number","polling-time":-1}},"state":"normal","history":null,"error":null}
 ```
 
+- `--server`: The address of any TiCDC server in the TiCDC cluster.
 - `--changefeed-id`: The ID of the replication task. The format must match the `^[a-zA-Z0-9]+(\-[a-zA-Z0-9]+)*$` regular expression. If this ID is not specified, TiCDC automatically generates a UUID (the version 4 format) as the ID.
 - `--sink-uri`: The downstream address of the replication task. For details, see [Configure sink URI with `kafka`](#configure-sink-uri-for-kafka).
 - `--start-ts`: Specifies the starting TSO of the changefeed. From this TSO, the TiCDC cluster starts pulling data. The default value is the current time.
@@ -60,21 +61,22 @@ The following are descriptions of sink URI parameters and values that can be con
 | `compression` | The compression algorithm used when sending messages (value options are `none`, `lz4`, `gzip`, `snappy`, and `zstd`; `none` by default). |
 | `protocol` | The protocol with which messages are output to Kafka. The value options are `canal-json`, `open-protocol`, `canal`, `avro` and `maxwell`.   |
 | `auto-create-topic` | Determines whether TiCDC creates the topic automatically when the `topic-name` passed in does not exist in the Kafka cluster (optional, `true` by default). |
-| `enable-tidb-extension` | Optional. `false` by default. When the output protocol is `canal-json`, if the value is `true`, TiCDC sends Resolved events and adds the TiDB extension field to the Kafka message. From v6.1.0, this parameter is also applicable to the `avro` protocol. If the value is `true`, TiCDC adds [three TiDB extension fields](/ticdc/ticdc-avro-protocol.md#tidb-extension-fields) to the Kafka message. |
+| `enable-tidb-extension` | Optional. `false` by default. When the output protocol is `canal-json`, if the value is `true`, TiCDC sends [WATERMARK events](/ticdc/ticdc-canal-json.md#watermark-event) and adds the [TiDB extension field](/ticdc/ticdc-canal-json.md#tidb-extension-field) to Kafka messages. From v6.1.0, this parameter is also applicable to the `avro` protocol. If the value is `true`, TiCDC adds [three TiDB extension fields](/ticdc/ticdc-avro-protocol.md#tidb-extension-fields) to the Kafka message. |
 | `max-batch-size` | New in v4.0.9. If the message protocol supports outputting multiple data changes to one Kafka message, this parameter specifies the maximum number of data changes in one Kafka message. It currently takes effect only when Kafka's `protocol` is `open-protocol` (optional, `16` by default). |
 | `enable-tls` | Whether to use TLS to connect to the downstream Kafka instance (optional, `false` by default). |
 | `ca` | The path of the CA certificate file needed to connect to the downstream Kafka instance (optional).  |
 | `cert` | The path of the certificate file needed to connect to the downstream Kafka instance (optional). |
 | `key` | The path of the certificate key file needed to connect to the downstream Kafka instance (optional). |
+| `insecure-skip-verify` | Whether to skip certificate verification when connecting to the downstream Kafka instance (optional, `false` by default). |
 | `sasl-user` | The identity (authcid) of SASL/PLAIN or SASL/SCRAM authentication needed to connect to the downstream Kafka instance (optional). |
-| `sasl-password` | The password of SASL/PLAIN or SASL/SCRAM authentication needed to connect to the downstream Kafka instance (optional). |
+| `sasl-password` | The password of SASL/PLAIN or SASL/SCRAM authentication needed to connect to the downstream Kafka instance (optional). If it contains special characters, they need to be URL encoded. |
 | `sasl-mechanism` | The name of SASL authentication needed to connect to the downstream Kafka instance. The value can be `plain`, `scram-sha-256`, `scram-sha-512`, or `gssapi`. |
 | `sasl-gssapi-auth-type` | The gssapi authentication type. Values can be `user` or `keytab` (optional). |
 | `sasl-gssapi-keytab-path` | The gssapi keytab path (optional).|
 | `sasl-gssapi-kerberos-config-path` | The gssapi kerberos configuration path (optional). |
 | `sasl-gssapi-service-name` | The gssapi service name (optional). |
 | `sasl-gssapi-user` | The user name of gssapi authentication (optional). |
-| `sasl-gssapi-password` | The password of gssapi authentication (optional).  |
+| `sasl-gssapi-password` | The password of gssapi authentication (optional). If it contains special characters, they need to be URL encoded. |
 | `sasl-gssapi-realm` | The gssapi realm name (optional). |
 | `sasl-gssapi-disable-pafxfast` | Whether to disable the gssapi PA-FX-FAST (optional). |
 | `dial-timeout` | The timeout in establishing a connection with the downstream Kafka. The default value is `10s`. |
@@ -133,7 +135,7 @@ The following are examples when using Kafka SASL authentication:
 
     The minimum set of permissions required for TiCDC to function properly is as follows.
 
-    - The `Create` and `Write` permissions for the Topic [resource type](https://docs.confluent.io/platform/current/kafka/authorization.html#resources).
+    - The `Create`, `Write`, and `Describe` permissions for the Topic [resource type](https://docs.confluent.io/platform/current/kafka/authorization.html#resources).
     - The `DescribeConfigs` permission for the Cluster resource type.
 
 ### Integrate TiCDC with Kafka Connect (Confluent Platform)
@@ -159,7 +161,17 @@ For detailed integration guide, see [Quick Start Guide on Integrating TiDB with 
 
 ### Matcher rules
 
-In the example of the previous section:
+Take the following configuration of `dispatchers` as an example:
+
+```toml
+[sink]
+dispatchers = [
+  {matcher = ['test1.*', 'test2.*'], topic = "Topic expression 1", partition = "ts" },
+  {matcher = ['test3.*', 'test4.*'], topic = "Topic expression 2", partition = "index-value" },
+  {matcher = ['test1.*', 'test5.*'], topic = "Topic expression 3", partition = "table"},
+  {matcher = ['test6.*'], partition = "ts"}
+]
+```
 
 - For the tables that match the matcher rule, they are dispatched according to the policy specified by the corresponding topic expression. For example, the `test3.aa` table is dispatched according to "Topic expression 2"; the `test5.aa` table is dispatched according to "Topic expression 3".
 - For a table that matches multiple matcher rules, it is dispatched according to the first matching topic expression. For example, the `test1.aa` table is distributed according to "Topic expression 1".
@@ -234,9 +246,15 @@ You can use `partition = "xxx"` to specify a partition dispatcher. It supports f
 > {matcher = ['*.*'], dispatcher = "ts", partition = "table"},
 > ```
 
+> **Warning:**
+>
+> When the [Old Value feature](/ticdc/ticdc-manage-changefeed.md#output-the-historical-value-of-a-row-changed-event) is enabled (`enable-old-value = true`), using the index-value dispatcher might fail to ensure the order of row changes with the same index value. Therefore, it is recommended to use the default dispatcher.
+>
+> For more information, see [What changes occur to the change event format when TiCDC enables the Old Value feature?](/ticdc/ticdc-faq.md#what-changes-occur-to-the-change-event-format-when-ticdc-enables-the-old-value-feature).
+
 ## Scale out the load of a single large table to multiple TiCDC nodes
 
-This feature splits a single large table into multiple data ranges based on the number of Regions, and distributes these data ranges to multiple TiCDC nodes so that multiple TiCDC nodes can replicate the large single table at the same time. This feature can solve the following two problems:
+This feature splits the data replication range of a single large table into multiple ranges, according to the data volume and the number of modified rows per minute, and it makes the data volume and the number of modified rows replicated in each range approximately the same. This feature distributes these ranges to multiple TiCDC nodes for replication, so that multiple TiCDC nodes can replicate a large single table at the same time. This feature can solve the following two problems:
 
 - A single TiCDC node cannot replicate a large single table in time.
 - The resources (such as CPU and memory) consumed by TiCDC nodes are not evenly distributed.
@@ -249,10 +267,18 @@ Sample configuration:
 
 ```toml
 [scheduler]
-# Set it to "true" to enable this feature.
+# The default value is "false". You can set it to "true" to enable this feature.
 enable-table-across-nodes = true
 # When you enable this feature, it only takes effect for tables with the number of regions greater than the `region-threshold` value.
 region-threshold = 100000
+# When you enable this feature, it takes effect for tables with the number of rows modified per minute greater than the `write-key-threshold` value.
+# Note:
+# * The default value of `write-key-threshold` is 0, which means that the feature does not split the table replication range according to the number of rows modified in a table by default.
+# * You can configure this parameter according to your cluster workload. For example, if it is configured as 30000, it means that the feature will split the replication range of a table when the number of modified rows per minute in the table exceeds 30000.
+# * When `region-threshold` and `write-key-threshold` are configured at the same time:
+#   TiCDC will check whether the number of modified rows is greater than `write-key-threshold` first.
+#   If not, next check whether the number of Regions is greater than `region-threshold`.
+write-key-threshold = 30000
 ```
 
 You can query the number of Regions a table contains by the following SQL statement:
@@ -260,3 +286,160 @@ You can query the number of Regions a table contains by the following SQL statem
 ```sql
 SELECT COUNT(*) FROM INFORMATION_SCHEMA.TIKV_REGION_STATUS WHERE DB_NAME="database1" AND TABLE_NAME="table1" AND IS_INDEX=0;
 ```
+
+## Handle messages that exceed the Kafka topic limit
+
+Kafka topic sets a limit on the size of messages it can receive. This limit is controlled by the [`max.message.bytes`](https://kafka.apache.org/documentation/#topicconfigs_max.message.bytes) parameter. If TiCDC Kafka sink sends data that exceeds this limit, the changefeed reports an error and cannot proceed to replicate data. To solve this problem, TiCDC adds a new configuration `large-message-handle-option` and provides the following solution.
+
+Currently, this feature supports two encoding protocols: Canal-JSON and Open Protocol. When using the Canal-JSON protocol, you must specify `enable-tidb-extension=true` in `sink-uri`.
+
+### TiCDC data compression
+
+Starting from v7.4.0, TiCDC Kafka sink supports compressing data immediately after encoding and comparing the compressed data size with the message size limit. This feature can effectively reduce the occurrence of messages exceeding the size limit.
+
+An example configuration is as follows:
+
+```toml
+[sink.kafka-config.large-message-handle]
+# This configuration is introduced in v7.4.0.
+# "none" by default, which means that the compression feature is disabled.
+# Possible values are "none", "lz4", and "snappy". The default value is "none".
+large-message-handle-compression = "none"
+```
+
+This feature is different from the compression feature of the Kafka producer:
+
+* The compression algorithm specified in `large-message-handle-compression` compresses a single Kafka message. The compression is performed before comparing with the message size limit.
+* You can configure the compression algorithm in `sink-uri`. The compression is applied to the entire data sending request, which contains multiple Kafka messages. The compression is performed after comparing with the message size limit.
+
+When `large-message-handle-compression` is enabled, the message received by the consumer is encoded using a specific compression protocol, and the consumer application needs to use the specified compression protocol to decode the data.
+
+### Send handle keys only
+
+Starting from v7.3.0, TiCDC Kafka sink supports sending only the handle keys when the message size exceeds the limit. This can significantly reduce the message size and avoid changefeed errors and task failures caused by the message size exceeding the Kafka topic limit. Handle Key refers to the following:
+
+* If the table to be replicated has primary key, the primary key is the handle key.
+* If the table does not have primary key but has NOT NULL Unique Key, the NOT NULL Unique Key is the handle key.
+
+The sample configuration is as follows:
+
+```toml
+[sink.kafka-config.large-message-handle]
+# large-message-handle-option is introduced in v7.3.0.
+# Defaults to "none". When the message size exceeds the limit, the changefeed fails.
+# When set to "handle-key-only", if the message size exceeds the limit, only the handle key is sent in the data field. If the message size still exceeds the limit, the changefeed fails.
+large-message-handle-option = "claim-check"
+```
+
+### Consume messages with handle keys only
+
+The message format with handle keys only is as follows:
+
+```json
+{
+    "id": 0,
+    "database": "test",
+    "table": "tp_int",
+    "pkNames": [
+        "id"
+    ],
+    "isDdl": false,
+    "type": "INSERT",
+    "es": 1639633141221,
+    "ts": 1639633142960,
+    "sql": "",
+    "sqlType": {
+        "id": 4
+    },
+    "mysqlType": {
+        "id": "int"
+    },
+    "data": [
+        {
+          "id": "2"
+        }
+    ],
+    "old": null,
+    "_tidb": {     // TiDB extension fields
+        "commitTs": 163963314122145239,
+        "onlyHandleKey": true
+    }
+}
+```
+
+When a Kafka consumer receives a message, it first checks the `onlyHandleKey` field. If this field exists and is `true`, it means that the message only contains the handle key of the complete data. In this case, to get the complete data, you need to query the upstream TiDB and use [`tidb_snapshot` to read historical data](/read-historical-data.md).
+
+> **Warning:**
+>
+> When the Kafka consumer processes data and queries TiDB, the data might have been deleted by GC. You need to [modify the GC Lifetime of the TiDB cluster](/system-variables.md#tidb_gc_life_time-new-in-v50) to a larger value to avoid this situation.
+
+### Send large messages to external storage
+
+Starting from v7.4.0, TiCDC Kafka sink supports sending large messages to external storage when the message size exceeds the limit. Meanwhile, TiCDC sends a message to Kafka that contains the address of the large message in the external storage. This can avoid changefeed failures caused by the message size exceeding the Kafka topic limit.
+
+An example configuration is as follows:
+
+```toml
+[sink.kafka-config.large-message-handle]
+# large-message-handle-option is introduced in v7.3.0.
+# Defaults to "none". When the message size exceeds the limit, the changefeed fails.
+# When set to "handle-key-only", if the message size exceeds the limit, only the handle key is sent in the data field. If the message size still exceeds the limit, the changefeed fails.
+# When set to "claim-check", if the message size exceeds the limit, the message is sent to external storage.
+large-message-handle-option = "claim-check"
+claim-check-storage-uri = "s3://claim-check-bucket"
+```
+
+When `large-message-handle-option` is set to `"claim-check"`, `claim-check-storage-uri` must be set to a valid external storage address. Otherwise, creating the changefeed will fail.
+
+> **Tip**
+>
+> Currently, the external storage services supported by TiCDC are the same as BR. For detailed parameter descriptions, see [Backup storages URI format](/br/backup-and-restore-storages.md#uri-format-description).
+
+TiCDC does not clean up messages on external storage services. Data consumers need to manage external storage services on their own.
+
+### Consume large messages from external storage
+
+The Kafka consumer receives a message that contains the address of the large message in the external storage. The message format is as follows:
+
+```json
+{
+    "id": 0,
+    "database": "test",
+    "table": "tp_int",
+    "pkNames": [
+        "id"
+    ],
+    "isDdl": false,
+    "type": "INSERT",
+    "es": 1639633141221,
+    "ts": 1639633142960,
+    "sql": "",
+    "sqlType": {
+        "id": 4
+    },
+    "mysqlType": {
+        "id": "int"
+    },
+    "data": [
+        {
+          "id": "2"
+        }
+    ],
+    "old": null,
+    "_tidb": {     // TiDB extension fields
+        "commitTs": 163963314122145239,
+        "claimCheckLocation": "s3:/claim-check-bucket/${uuid}.json"
+    }
+}
+```
+
+If the message contains the `claimCheckLocation` field, the Kafka consumer reads the large message data stored in JSON format according to the address provided by the field. The message format is as follows:
+
+```json
+{
+  key: "xxx",
+  value: "xxx",
+}
+```
+
+The `key` and `value` fields contain the encoded large message, which should have been sent to the corresponding field in the Kafka message. Consumers can parse the data in these two parts to restore the content of the large message.

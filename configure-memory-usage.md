@@ -51,7 +51,6 @@ After you set this variable, when the memory usage of a tidb-server instance rea
 Currently, the memory limit set by `tidb_server_memory_limit` **DOES NOT** terminate the following SQL operations:
 
 - DDL operations
-- INSERT, UPDATE, and DELETE operations
 - SQL operations that contain window functions and common table expressions
 
 > **Warning:**
@@ -61,6 +60,10 @@ Currently, the memory limit set by `tidb_server_memory_limit` **DOES NOT** termi
 > + Since v6.5.0, the configruation item `server-memory-quota` is deprecated. To ensure compatibility, after you upgrade your cluster to v6.5.0 or a later version, `tidb_server_memory_limit` will inherit the value of `server-memory-quota`. If you have not configured `server-memory-quota` before the upgrade, the default value of `tidb_server_memory_limit` is used, which is `80%`.
 
 When the memory usage of a tidb-server instance reaches a certain proportion of the total memory (the proportion is controlled by the system variable [`tidb_server_memory_limit_gc_trigger`](/system-variables.md#tidb_server_memory_limit_gc_trigger-new-in-v640)), tidb-server will try to trigger a Golang GC to relieve memory stress. To avoid frequent GCs that cause performance issues due to the instance memory fluctuating around the threshold, this GC method will trigger GC at most once every minute.
+
+> **Note:**
+>
+> In a hybrid deployment scenario, `tidb_server_memory_limit` is the memory usage threshold for a single tidb-server instance, instead of the total memory threshold for the whole physical machine.
 
 ## View the memory usage of the current tidb-server instance using the INFORMATION_SCHEMA system table
 
