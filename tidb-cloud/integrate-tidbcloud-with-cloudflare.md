@@ -59,7 +59,6 @@ Before you try the steps in this article, you need to prepare the following thin
 
    This adds the serverless driver dependency in `package.json`.
 
-
 ## Step 3: Develop the Cloudflare Worker function
 
 You need to change the `src/index.ts` according to your needs.
@@ -112,4 +111,3 @@ npx wrangler publish
 ## Examples
 
 See the [Cloudflare Workers example](https://github.com/tidbcloud/car-sales-insight/tree/main/examples/cloudflare-workers).
-
