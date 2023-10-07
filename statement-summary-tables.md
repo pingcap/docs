@@ -120,13 +120,13 @@ The following system variables are used to control the statement summary:
 
 <CustomContent platform="tidb">
 
-- `tidb_stmt_summary_max_stmt_count`: Limits the number of SQL statements that can be stored in statement summary tables. The default value is `3000`. If the limit is exceeded, TiDB clears the SQL statements that recently remain unused. These cleared SQL statements are represented as rows with `DIGEST` set to `NULL` and recorded in the `statements_summary_evicted` table. On the [SQL statements page of TiDB Dashboard](/dashboard/dashboard-statement-list.md#others), these rows are displayed as `Others`.
+- `tidb_stmt_summary_max_stmt_count`: Limits the number of SQL statements that can be stored in statement summary tables. The default value is `3000`. If the limit is exceeded, TiDB clears the SQL statements that recently remain unused. These cleared SQL statements are represented as rows with `DIGEST` set to `NULL` and recorded in the `statements_summary_evicted` table. On the [SQL statements page of TiDB Dashboard](/dashboard/dashboard-statement-list.md#others), the information of these rows is displayed as `Others`.
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-- `tidb_stmt_summary_max_stmt_count`: Limits the number of SQL statements that can be stored in statement summary tables. The default value is `3000`. If the limit is exceeded, TiDB clears the SQL statements that recently remain unused. These cleared SQL statements are represented as rows with `DIGEST` set to `NULL` and recorded in the `statements_summary_evicted` table. On the [SQL statements page of TiDB Dashboard](https://docs.pingcap.com/tidb/stable/dashboard-statement-list#others), these rows are displayed as `Others`.
+- `tidb_stmt_summary_max_stmt_count`: Limits the number of SQL statements that can be stored in statement summary tables. The default value is `3000`. If the limit is exceeded, TiDB clears the SQL statements that recently remain unused. These cleared SQL statements are represented as rows with `DIGEST` set to `NULL` and recorded in the `statements_summary_evicted` table. On the [SQL statements page of TiDB Dashboard](https://docs.pingcap.com/tidb/stable/dashboard-statement-list#others), the information of these rows is displayed as `Others`.
 
 </CustomContent>
 
