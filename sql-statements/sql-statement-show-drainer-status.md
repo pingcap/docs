@@ -9,7 +9,7 @@ The `SHOW DRAINER STATUS` statement displays the status information for all Drai
 
 > **Note:**
 >
-> This feature is only applicable to TiDB Self-hosted and not available on [TiDB Cloud](https://docs.pingcap.com/tidbcloud/).
+> This feature is only applicable to TiDB Self-Hosted and not available on [TiDB Cloud](https://docs.pingcap.com/tidbcloud/).
 
 ## Examples
 

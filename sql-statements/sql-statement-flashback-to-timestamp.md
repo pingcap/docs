@@ -10,7 +10,7 @@ TiDB v6.4.0 introduces the `FLASHBACK CLUSTER TO TIMESTAMP` syntax. You can use 
 > **Warning:**
 >
 > - The `FLASHBACK CLUSTER TO TIMESTAMP` syntax is not applicable to [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless) clusters. Do not execute this statement on TiDB Serverless clusters to avoid unexpected results.
-> - When you use this feature in TiDB Self-hosted v7.1.0, some Regions might remain in the FLASHBACK process even after the completion of the FLASHBACK operation. It is recommended to avoid using this feature in v7.1.0. For more information, see issue [#44292](https://github.com/pingcap/tidb/issues/44292). If you have encountered this issue, you can use the [TiDB snapshot backup and restore](/br/br-snapshot-guide.md) feature to restore data.
+> - When you use this feature in TiDB Self-Hosted v7.1.0, some Regions might remain in the FLASHBACK process even after the completion of the FLASHBACK operation. It is recommended to avoid using this feature in v7.1.0. For more information, see issue [#44292](https://github.com/pingcap/tidb/issues/44292). If you have encountered this issue, you can use the [TiDB snapshot backup and restore](/br/br-snapshot-guide.md) feature to restore data.
 
 > **Note:**
 >

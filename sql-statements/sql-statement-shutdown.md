@@ -9,7 +9,7 @@ The `SHUTDOWN` statement is used to perform a shutdown operation in TiDB. Execut
 
 > **Note:**
 >
-> This feature is only applicable to TiDB Self-hosted and not available on [TiDB Cloud](https://docs.pingcap.com/tidbcloud/).
+> This feature is only applicable to TiDB Self-Hosted and not available on [TiDB Cloud](https://docs.pingcap.com/tidbcloud/).
 
 ## Synopsis
 
