@@ -302,7 +302,7 @@ An example configuration is as follows:
 ```toml
 [sink.kafka-config.large-message-handle]
 # This configuration is introduced in v7.4.0.
-# Empty by default, which means that the compression feature is disabled.
+# "none" by default, which means that the compression feature is disabled.
 # Possible values are "none", "lz4", and "snappy". The default value is "none".
 large-message-handle-compression = "none"
 ```
@@ -325,10 +325,12 @@ The sample configuration is as follows:
 
 ```toml
 [sink.kafka-config.large-message-handle]
-# This configuration is introduced in v7.3.0.
-# Empty by default, which means when the message size exceeds the limit, the changefeed fails.
-# If this configuration is set to "handle-key-only", when the message size exceeds the limit, only the handle key is sent in the data field. If the message size still exceeds the limit, the changefeed fails.
-large-message-handle-option = "handle-key-only"
+# large-message-handle-option is introduced in v7.3.0.
+# Defaults to "none". When the message size exceeds the limit, the changefeed fails.
+# When set to "handle-key-only", if the message size exceeds the limit, only the handle key is sent in the data field. If the message size still exceeds the limit, the changefeed fails.
+# When set to "claim-check", if the message size exceeds the limit, the message is sent to external storage.
+large-message-handle-option = "claim-check"
+claim-check-storage-uri = "s3://claim-check-bucket"
 ```
 
 ### Consume messages with handle keys only
@@ -381,15 +383,15 @@ An example configuration is as follows:
 
 ```toml
 [sink.kafka-config.large-message-handle]
-# This configuration is introduced in v7.3.0.
-# Default to empty. When the message size exceeds the limit, the changefeed fails.
+# large-message-handle-option is introduced in v7.3.0.
+# Defaults to "none". When the message size exceeds the limit, the changefeed fails.
 # When set to "handle-key-only", if the message size exceeds the limit, only the handle key is sent in the data field. If the message size still exceeds the limit, the changefeed fails.
-# When set to `claim-check`, if the message size exceeds the limit, the message is sent to external storage.
+# When set to "claim-check", if the message size exceeds the limit, the message is sent to external storage.
 large-message-handle-option = "claim-check"
 claim-check-storage-uri = "s3://claim-check-bucket"
 ```
 
-When `large-message-handle-option` is set to `claim-check`, `claim-check-storage-uri` must be set to a valid external storage address. Otherwise, creating the changefeed will fail.
+When `large-message-handle-option` is set to `"claim-check"`, `claim-check-storage-uri` must be set to a valid external storage address. Otherwise, creating the changefeed will fail.
 
 > **Tip**
 >
