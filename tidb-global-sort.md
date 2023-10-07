@@ -21,11 +21,11 @@ summary: Learn the use cases, limitations, usage, and implementation principles 
 
 The TiDB Global Sort feature enhances the stability and efficiency of data import and DDL (Data Definition Language) operations. It serves as a general operator in the [distributed execution framework](/tidb-distributed-execution-framework.md), providing a global sort service on cloud.
 
-It can be easily extended to support multiple shared storage interfaces such as S3 and POSIX, enabling seamless integration with different storage systems. This flexibility enables efficient and adaptable data sorting for various use cases.
+The Global Sort feature can be easily extended to support multiple shared storage interfaces such as S3 and POSIX, enabling seamless integration with different storage systems. This flexibility enables efficient and adaptable data sorting for various use cases.
 
 ## Use cases
 
-The Global Sort feature enhances the efficiency of `IMPORT INTO` and `CREATE INDEX`. By integrating Global Sort into backend tasks, you can improve stability, control, and scalability, resulting in an enhanced user experience and higher-quality service.
+The Global Sort feature enhances the stability and efficiency of `IMPORT INTO` and `CREATE INDEX`. By globally sorting the data that are processed by the tasks, it improves the stability, controllability, and scalability of writing data to TiKV. This provides an enhanced user experience for data import and DDL tasks, as well as higher-quality services.
 
 The Global Sort feature executes tasks within the unified distributed parallel execution framework, ensuring efficient and parallel sorting of data on a global scale.
 
@@ -59,10 +59,10 @@ The detailed implementation principles are as follows:
 
 ### Step 1: Scan and prepare data
 
-1. After TiDB nodes scan a specific range of data:
+1. After TiDB nodes scan a specific range of data (the data source can be either CSV data or table data in TiKV):
 
     1. TiDB nodes encode them into Key-Value pairs.
-    2. TiDB nodes sort Key-Value pairs into several block data segments, where each segment is one file and is uploaded into the cloud storage.
+    2. TiDB nodes sort Key-Value pairs into several block data segments (the data segments are locally sorted), where each segment is one file and is uploaded into the cloud storage.
 
 2. The TiDB node also records a serial actual Key-Value ranges for each segment (referred to as a statistics file), which is a key preparation for scalable sort implementation. These files are then uploaded into the cloud storage along with the real data.
 
