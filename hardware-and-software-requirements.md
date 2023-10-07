@@ -46,7 +46,7 @@ In v7.1 LTS, TiDB provides multi-level support for different quality standards o
         <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
       </tr>
       <tr>
-        <td>UOS V20</td>
+        <td>UnionTech OS (UOS) V20</td>
         <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
       </tr>
       <tr>
