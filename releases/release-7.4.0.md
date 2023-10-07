@@ -213,6 +213,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.4/quick-start-with-
     Starting from v7.4.0, TiDB introduces the system variable [`tidb_opt_enable_hash_join`](/system-variables.md#tidb_opt_enable_hash_join-introduced from the -v740- release) to have control over hash joins for tables. It is enabled by default (`ON`). If you are sure that you do not need to select hash joins between tables in your execution plan, you can modify the variable to `OFF` to reduce the possibility of execution plan rollbacks and improve system stability. 
 
     For more information, see [documentation](/system-variables.md#tidb_opt_enable_hash_join-new-in-v740).
+    
 ### SQL
 
 * TiDB fully supports partition type management [#42728](https://github.com/pingcap/tidb/issues/42728) @[mjonss](https://github.com/mjonss) **tw@qiancai** <!--1370-->
