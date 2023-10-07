@@ -223,3 +223,33 @@ For a TiDB Dedicated cluster, you can get the connection string only from the Ti
     ```
 
     Go to your Netlify console to check the deployment state. After the deployment is done, the site for the app will have a public IP address provided by Netlify so that everyone can access it.
+
+## Using the edge function
+
+The edge function is a feature provided by Netlify. It allows you to run serverless functions on the edge of the Netlify CDN. This section shows you how to use the edge function with [TiDB Cloud serverless driver](/tidb-cloud/serverless-driver.md).
+
+1. To use the edge function, create a directory named `netlify/edge-functions` in the root directory of your project. 
+
+2. Then, create a file named `hello.ts` in the directory and add the following code:
+
+    ```typescript
+    import { connect } from 'https://esm.sh/@tidbcloud/serverless'
+    
+    export default async () => {
+      const conn = connect({url: Netlify.env.get('TIDB_DATABASE_URL')})
+      const result = await conn.execute('show databases')
+      return new Response(JSON.stringify(result));
+    }
+    ```
+
+3. Set the `TIDB_DATABASE_URL` environment variables
+
+    ```shell
+    netlify env:set TIDB_DATABASE_URL 'mysql://<username>:<password>@<host>/<database>'
+    ```
+
+4. Deploy the edge function to Netlify.
+
+    ```shell
+    netlify deploy --prod --trigger
+    ```
