@@ -328,9 +328,7 @@ The sample configuration is as follows:
 # large-message-handle-option is introduced in v7.3.0.
 # Defaults to "none". When the message size exceeds the limit, the changefeed fails.
 # When set to "handle-key-only", if the message size exceeds the limit, only the handle key is sent in the data field. If the message size still exceeds the limit, the changefeed fails.
-# When set to "claim-check", if the message size exceeds the limit, the message is sent to external storage.
 large-message-handle-option = "claim-check"
-claim-check-storage-uri = "s3://claim-check-bucket"
 ```
 
 ### Consume messages with handle keys only
@@ -444,4 +442,4 @@ If the message contains the `claimCheckLocation` field, the Kafka consumer reads
 }
 ```
 
-key and value contain the encoded large message, which should have been sent to the corresponding field in the Kafka message. Consumers can parse the data in these two parts to restore the content of the large message.
+The `key` and `value` fields contain the encoded large message, which should have been sent to the corresponding field in the Kafka message. Consumers can parse the data in these two parts to restore the content of the large message.
