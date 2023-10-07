@@ -38,7 +38,11 @@ Aggregating and summarizing data from multiple columns is commonly used in OLAP 
 
 Currently, TiDB supports generating valid execution plans for the `WITH ROLLUP` syntax only in TiFlash MPP mode. Therefore, make sure that your TiDB cluster has been deployed with TiFlash nodes and that target fact tables are configured with TiFlash replicas properly.
 
+<CustomContent platform="tidb">
+
 For more information, see [Scale out a TiFlash cluster](/scale-tidb-using-tiup.md#scale-out-a-tiflash-cluster).
+
+</CustomContent>
 
 ## Examples
 
