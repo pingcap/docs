@@ -6,7 +6,7 @@ aliases: ['/docs/dev/statement-summary-tables/','/docs/dev/reference/performance
 
 # Statement Summary Tables
 
-To better handle SQL performance issues, MySQL has provided [statement summary tables](https://dev.mysql.com/doc/refman/5.7/en/performance-schema-statement-summary-tables.html) in `performance_schema` to monitor SQL with statistics. Among these tables, `events_statements_summary_by_digest` is very useful in locating SQL problems with its abundant fields such as latency, execution times, rows scanned, and full table scans.
+To better handle SQL performance issues, MySQL has provided [statement summary tables](https://dev.mysql.com/doc/refman/8.0/en/performance-schema-statement-summary-tables.html) in `performance_schema` to monitor SQL with statistics. Among these tables, `events_statements_summary_by_digest` is very useful in locating SQL problems with its abundant fields such as latency, execution times, rows scanned, and full table scans.
 
 Therefore, starting from v4.0.0-rc.1, TiDB provides system tables in `information_schema` (_not_ `performance_schema`) that are similar to `events_statements_summary_by_digest` in terms of features.
 
@@ -116,8 +116,20 @@ The following system variables are used to control the statement summary:
 
 - `tidb_enable_stmt_summary`: Determines whether to enable the statement summary feature. `1` represents `enable`, and `0` means `disable`. The feature is enabled by default. The statistics in the system table are cleared if this feature is disabled. The statistics are re-calculated next time this feature is enabled. Tests have shown that enabling this feature has little impact on performance.
 - `tidb_stmt_summary_refresh_interval`: The interval at which the `statements_summary` table is refreshed. The time unit is second (s). The default value is `1800`.
-- `tidb_stmt_summary_history_size`: The size of each SQL statement category stored in the `statements_summary_history` table, which is also the maximum number of records in the `statement_summary_evicted` table. The default value is `24`.
-- `tidb_stmt_summary_max_stmt_count`: Limits the number of SQL statements that can be stored in statement summary tables. The default value is `3000`. If the limit is exceeded, those SQL statements that recently remain unused are cleared. These cleared SQL statements are recorded in the `statement_summary_evicted` table.
+- `tidb_stmt_summary_history_size`: The size of each SQL statement category stored in the `statements_summary_history` table, which is also the maximum number of records in the `statements_summary_evicted` table. The default value is `24`.
+
+<CustomContent platform="tidb">
+
+- `tidb_stmt_summary_max_stmt_count`: Limits the number of SQL statements that can be stored in statement summary tables. The default value is `3000`. If the limit is exceeded, TiDB clears the SQL statements that recently remain unused. These cleared SQL statements are represented as rows with `DIGEST` set to `NULL` and recorded in the `statements_summary_evicted` table. On the [SQL statements page of TiDB Dashboard](/dashboard/dashboard-statement-list.md#others), the information of these rows is displayed as `Others`.
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+- `tidb_stmt_summary_max_stmt_count`: Limits the number of SQL statements that can be stored in statement summary tables. The default value is `3000`. If the limit is exceeded, TiDB clears the SQL statements that recently remain unused. These cleared SQL statements are represented as rows with `DIGEST` set to `NULL` and recorded in the `statements_summary_evicted` table. On the [SQL statements page of TiDB Dashboard](https://docs.pingcap.com/tidb/stable/dashboard-statement-list#others), the information of these rows is displayed as `Others`.
+
+</CustomContent>
+
 - `tidb_stmt_summary_max_sql_length`: Specifies the longest display length of `DIGEST_TEXT` and `QUERY_SAMPLE_TEXT`. The default value is `4096`.
 - `tidb_stmt_summary_internal_query`: Determines whether to count the TiDB SQL statements. `1` means to count, and `0` means not to count. The default value is `0`.
 
@@ -185,7 +197,7 @@ select * from information_schema.statements_summary_evicted;
 2 row in set (0.001 sec)
 ```
 
-From the result above, you can see that a maximum of 59 SQL categories are evicted, which indicates that the proper size of the statement summary is 59 records.
+From the preceding result, you can see that a maximum of 59 SQL categories are evicted. In this case, it is recommended that you increase the size of the `statement_summary` table by at least 59 records, which means increasing the size to at least 3059 records.
 
 ## Limitation
 

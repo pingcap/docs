@@ -36,6 +36,18 @@
       - [PyMySQL](/develop/dev-guide-sample-application-python-pymysql.md)
       - [SQLAlchemy](/develop/dev-guide-sample-application-python-sqlalchemy.md)
       - [peewee](/develop/dev-guide-sample-application-python-peewee.md)
+      - [Django](/develop/dev-guide-sample-application-python-django.md)
+    - Node.js
+      - [node-mysql2](/develop/dev-guide-sample-application-nodejs-mysql2.md)
+      - [mysql.js](/develop/dev-guide-sample-application-nodejs-mysqljs.md)
+      - [Prisma](/develop/dev-guide-sample-application-nodejs-prisma.md)
+      - [Sequelize](/develop/dev-guide-sample-application-nodejs-sequelize.md)
+      - [TypeORM](/develop/dev-guide-sample-application-nodejs-typeorm.md)
+      - [Next.js](/develop/dev-guide-sample-application-nextjs.md)
+      - [AWS Lambda](/develop/dev-guide-sample-application-aws-lambda.md)
+    - Ruby
+      - [mysql2](/develop/dev-guide-sample-application-ruby-mysql2.md)
+      - [Rails](/develop/dev-guide-sample-application-ruby-rails.md)
   - Connect to TiDB
     - [Choose Driver or ORM](/develop/dev-guide-choose-driver-or-orm.md)
     - [Connect to TiDB](/develop/dev-guide-connect-to-tidb.md)
@@ -85,8 +97,6 @@
     - Guidelines
       - [Object Naming Convention](/develop/dev-guide-object-naming-guidelines.md)
       - [SQL Development Specifications](/develop/dev-guide-sql-development-specification.md)
-    - Legacy Docs
-      - [For Django](/develop/dev-guide-outdated-for-django.md)
   - Cloud Native Development Environment
     - [Gitpod](/develop/dev-guide-playground-gitpod.md)
   - Third-Party Support
@@ -189,6 +199,7 @@
   - [Monitoring Framework Overview](/tidb-monitoring-framework.md)
   - [Monitoring API](/tidb-monitoring-api.md)
   - [Deploy Monitoring Services](/deploy-monitoring-services.md)
+  - [Upgrade Monitoring Services](/upgrade-monitoring-services.md)
   - [Export Grafana Snapshots](/exporting-grafana-snapshots.md)
   - [TiDB Cluster Alert Rules](/alert-rules.md)
   - [TiFlash Alert Rules](/tiflash/tiflash-alert-rules.md)
@@ -216,12 +227,15 @@
     - [Identify Expensive Queries Using Top SQL](/dashboard/top-sql.md)
     - [Identify Expensive Queries Using Logs](/identify-expensive-queries.md)
     - [Save and Restore the On-Site Information of a Cluster](/sql-plan-replayer.md)
+    - [Understanding Stale Read and safe-ts in TiKV](/troubleshoot-stale-read.md)
   - [Support Resources](/support.md)
 - Performance Tuning
   - Tuning Guide
     - [Performance Tuning Overview](/performance-tuning-overview.md)
     - [Performance Analysis and Tuning](/performance-tuning-methods.md)
     - [Performance Tuning Practices for OLTP Scenarios](/performance-tuning-practices.md)
+    - [TiFlash Performance Analysis Methods](/tiflash-performance-tuning-methods.md)
+    - [TiCDC Performance Analysis Methods](/ticdc-performance-tuning-methods.md)
     - [Latency Breakdown](/latency-breakdown.md)
     - [TiDB Best Practices on Public Cloud](/best-practices-on-public-cloud.md)
   - Configuration Tuning
@@ -534,6 +548,7 @@
       - Create Changefeeds
         - [Replicate Data to MySQL-compatible Databases](/ticdc/ticdc-sink-to-mysql.md)
         - [Replicate Data to Kafka](/ticdc/ticdc-sink-to-kafka.md)
+        - [Replicate Data to Pulsar](/ticdc/ticdc-sink-to-pulsar.md)
         - [Replicate Data to Storage Services](/ticdc/ticdc-sink-to-cloud-storage.md)
       - [Manage Changefeeds](/ticdc/ticdc-manage-changefeed.md)
       - [Log Filter](/ticdc/ticdc-filter.md)
@@ -847,6 +862,7 @@
       - [Information Functions](/functions-and-operators/information-functions.md)
       - [JSON Functions](/functions-and-operators/json-functions.md)
       - [Aggregate (GROUP BY) Functions](/functions-and-operators/aggregate-group-by-functions.md)
+      - [GROUP BY Modifiers](/functions-and-operators/group-by-modifier.md)
       - [Window Functions](/functions-and-operators/window-functions.md)
       - [Miscellaneous Functions](/functions-and-operators/miscellaneous-functions.md)
       - [Precision Math](/functions-and-operators/precision-math.md)
@@ -879,6 +895,7 @@
       - INFORMATION_SCHEMA
         - [Overview](/information-schema/information-schema.md)
         - [`ANALYZE_STATUS`](/information-schema/information-schema-analyze-status.md)
+        - [`CHECK_CONSTRAINTS`](/information-schema/information-schema-check-constraints.md)
         - [`CLIENT_ERRORS_SUMMARY_BY_HOST`](/information-schema/client-errors-summary-by-host.md)
         - [`CLIENT_ERRORS_SUMMARY_BY_USER`](/information-schema/client-errors-summary-by-user.md)
         - [`CLIENT_ERRORS_SUMMARY_GLOBAL`](/information-schema/client-errors-summary-global.md)
@@ -934,6 +951,9 @@
         - [`VARIABLES_INFO`](/information-schema/information-schema-variables-info.md)
         - [`VIEWS`](/information-schema/information-schema-views.md)
       - [`METRICS_SCHEMA`](/metrics-schema.md)
+      - PERFORMANCE_SCHEMA
+        - [Overview](/performance-schema/performance-schema.md)
+        - [`SESSION_CONNECT_ATTRS`](/performance-schema/performance-schema-session-connect-attrs.md)
     - [Metadata Lock](/metadata-lock.md)
   - UI
     - TiDB Dashboard
@@ -968,7 +988,7 @@
         - [Configure SSO](/dashboard/dashboard-session-sso.md)
       - [FAQ](/dashboard/dashboard-faq.md)
   - [Telemetry](/telemetry.md)
-  - [Errors Codes](/error-codes.md)
+  - [Error Codes](/error-codes.md)
   - [Table Filter](/table-filter.md)
   - [Schedule Replicas by Topology Labels](/schedule-replicas-by-topology-labels.md)
   - Internal Components
@@ -1002,6 +1022,7 @@
   - v6.6
     - [6.6.0-DMR](/releases/release-6.6.0.md)
   - v6.5
+    - [6.5.5](/releases/release-6.5.5.md)
     - [6.5.4](/releases/release-6.5.4.md)
     - [6.5.3](/releases/release-6.5.3.md)
     - [6.5.2](/releases/release-6.5.2.md)

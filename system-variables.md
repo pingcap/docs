@@ -43,12 +43,20 @@ SET GLOBAL tidb_distsql_scan_concurrency = 10;
 >
 > Variables using the same unit might compete for the same set of resources.
 
+Starting from v7.4.0, you can temporarily modify the value of some `SESSION` variables during statement execution using [`SET_VAR`](/optimizer-hints.md#set_varvar_namevar_value). After the statement is executed, the value of the system variable in the current session is automatically changed back to the original value. This hint can be used to modify some system variables related to the optimizer and executor. Variables in this document have a `Applies to hint SET_VAR` setting, which can be configured to `Yes` or `No`.
+
+- For variables with the `Applies to hint SET_VAR: Yes` setting, you can use the [`SET_VAR`](/optimizer-hints.md#set_varvar_namevar_value) hint to modify the value of the system variable in the current session during statement execution.
+- For variables with the `Applies to hint SET_VAR: No` setting, you cannot use the [`SET_VAR`](/optimizer-hints.md#set_varvar_namevar_value) hint to modify the value of the system variable in the current session during statement execution.
+
+For more information about the `SET_VAR` hint, see [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value).
+
 ## Variable Reference
 
 ### allow_auto_random_explicit_insert <span class="version-mark">New in v4.0.3</span>
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `OFF`
 - Determines whether to allow explicitly specifying the values of the column with the `AUTO_RANDOM` attribute in the `INSERT` statement.
@@ -57,6 +65,7 @@ SET GLOBAL tidb_distsql_scan_concurrency = 10;
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Enumeration
 - Default value: `SCRAM-SHA-1`
 - Possible values: `SCRAM-SHA-1`, `SCRAM-SHA-256`, and `GSSAPI`.
@@ -66,6 +75,7 @@ SET GLOBAL tidb_distsql_scan_concurrency = 10;
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: String
 - Default value: ""
 - For LDAP SASL authentication, this variable limits the search scope within the search tree. If a user is created without the `AS ...` clause, TiDB will automatically search the `dn` in LDAP server according to the user name.
@@ -74,6 +84,7 @@ SET GLOBAL tidb_distsql_scan_concurrency = 10;
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: String
 - Default value: ""
 - For LDAP SASL authentication, this variable specifies the `dn` used to log in to the LDAP server to search users.
@@ -82,6 +93,7 @@ SET GLOBAL tidb_distsql_scan_concurrency = 10;
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: String
 - Default value: ""
 - For LDAP SASL authentication, this variable specifies the password used to log in to the LDAP server to search users.
@@ -90,6 +102,7 @@ SET GLOBAL tidb_distsql_scan_concurrency = 10;
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: String
 - Default value: ""
 - For LDAP SASL authentication, this variable specifies the absolute path of the certificate authority file for StartTLS connections.
@@ -98,6 +111,7 @@ SET GLOBAL tidb_distsql_scan_concurrency = 10;
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `10`
 - Range: `[1, 32767]`
@@ -107,6 +121,7 @@ SET GLOBAL tidb_distsql_scan_concurrency = 10;
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `1000`
 - Range: `[1, 32767]`
@@ -116,6 +131,7 @@ SET GLOBAL tidb_distsql_scan_concurrency = 10;
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: String
 - Default value: ""
 - For LDAP SASL authentication, this variable specifies the LDAP server host name or IP address.
@@ -124,6 +140,7 @@ SET GLOBAL tidb_distsql_scan_concurrency = 10;
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `389`
 - Range: `[1, 65535]`
@@ -133,6 +150,7 @@ SET GLOBAL tidb_distsql_scan_concurrency = 10;
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `OFF`
 - For LDAP SASL authentication, this variable controls whether connections by the plugin to the LDAP server are protected with StartTLS.
@@ -141,6 +159,7 @@ SET GLOBAL tidb_distsql_scan_concurrency = 10;
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Enumeration
 - Default value: `SIMPLE`
 - Possible values: `SIMPLE`.
@@ -150,6 +169,7 @@ SET GLOBAL tidb_distsql_scan_concurrency = 10;
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: String
 - Default value: ""
 - For LDAP simple authentication, this variable limits the search scope within the search tree. If a user is created without the `AS ...` clause, TiDB will automatically search the `dn` in LDAP server according to the user name.
@@ -158,6 +178,7 @@ SET GLOBAL tidb_distsql_scan_concurrency = 10;
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: String
 - Default value: ""
 - For LDAP simple authentication, this variable specifies the `dn` used to log in to the LDAP server to search users.
@@ -166,6 +187,7 @@ SET GLOBAL tidb_distsql_scan_concurrency = 10;
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: String
 - Default value: ""
 - For LDAP simple authentication, this variable specifies the password used to log in to the LDAP server to search users.
@@ -174,6 +196,7 @@ SET GLOBAL tidb_distsql_scan_concurrency = 10;
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: String
 - Default value: ""
 - For LDAP simple authentication, this variable specifies the absolute path of the certificate authority file for StartTLS connections.
@@ -182,6 +205,7 @@ SET GLOBAL tidb_distsql_scan_concurrency = 10;
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `10`
 - Range: `[1, 32767]`
@@ -191,6 +215,7 @@ SET GLOBAL tidb_distsql_scan_concurrency = 10;
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `1000`
 - Range: `[1, 32767]`
@@ -200,6 +225,7 @@ SET GLOBAL tidb_distsql_scan_concurrency = 10;
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: String
 - Default value: ""
 - For LDAP simple authentication, this variable specifies the LDAP server host name or IP address.
@@ -208,6 +234,7 @@ SET GLOBAL tidb_distsql_scan_concurrency = 10;
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `389`
 - Range: `[1, 65535]`
@@ -217,6 +244,7 @@ SET GLOBAL tidb_distsql_scan_concurrency = 10;
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `OFF`
 - For LDAP simple authentication, this variable controls whether connections by the plugin to the LDAP server are protected with StartTLS.
@@ -225,6 +253,7 @@ SET GLOBAL tidb_distsql_scan_concurrency = 10;
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `1`
 - Range: `[1, 65535]`
@@ -234,6 +263,7 @@ SET GLOBAL tidb_distsql_scan_concurrency = 10;
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `1`
 - Range: `[1, 65535]`
@@ -269,6 +299,7 @@ mysql> SELECT * FROM t1;
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `ON`
 - Controls whether statements should automatically commit when not in an explicit transaction. See [Transaction Overview](/transaction-overview.md#autocommit) for more information.
@@ -277,6 +308,7 @@ mysql> SELECT * FROM t1;
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Enumeration
 - Default value: `aes-128-ecb`
 - Value options: `aes-128-ecb`, `aes-192-ecb`, `aes-256-ecb`, `aes-128-cbc`, `aes-192-cbc`, `aes-256-cbc`, `aes-128-ofb`, `aes-192-ofb`, `aes-256-ofb`, `aes-128-cfb`, `aes-192-cfb`, `aes-256-cfb`
@@ -286,6 +318,7 @@ mysql> SELECT * FROM t1;
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: `utf8mb4`
 - The character set for data sent from the client. See [Character Set and Collation](/character-set-and-collation.md) for details on the use of character sets and collations in TiDB. It is recommended to use [`SET NAMES`](/sql-statements/sql-statement-set-names.md) to change the character set when needed.
 
@@ -293,6 +326,7 @@ mysql> SELECT * FROM t1;
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: `utf8mb4`
 - The character set for string literals that do not have a specified character set.
 
@@ -300,6 +334,7 @@ mysql> SELECT * FROM t1;
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: `utf8mb4`
 - This variable indicates the character set of the default database in use. **It is NOT recommended to set this variable**. When a new default database is selected, the server changes the variable value.
 
@@ -307,6 +342,7 @@ mysql> SELECT * FROM t1;
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: `utf8mb4`
 - The character set that is used when data is sent to the client.
 
@@ -314,6 +350,7 @@ mysql> SELECT * FROM t1;
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: `utf8mb4`
 - The default character set for the server.
 
@@ -321,6 +358,7 @@ mysql> SELECT * FROM t1;
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: `utf8mb4_bin`
 - This variable indicates the collation used in the current connection. It is consistent with the MySQL variable `collation_connection`.
 
@@ -328,6 +366,7 @@ mysql> SELECT * FROM t1;
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: `utf8mb4_bin`
 - This variable indicates the default collation of the database in use. **It is NOT recommended to set this variable**. When a new database is selected, TiDB changes this variable value.
 
@@ -335,6 +374,7 @@ mysql> SELECT * FROM t1;
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: `utf8mb4_bin`
 - The default collation used when the database is created.
 
@@ -342,6 +382,7 @@ mysql> SELECT * FROM t1;
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Type: Integer
 - Default value: `1000`
 - Range: `[0, 4294967295]`
@@ -352,6 +393,7 @@ mysql> SELECT * FROM t1;
 <CustomContent platform="tidb">
 
 - Scope: NONE
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: it depends on the component and the deployment method.
     - `/tmp/tidb`: when you set `"unistore"` for [`--store`](/command-line-flags-for-tidb-configuration.md#--store) or if you don't set `--store`.
     - `${pd-ip}:${pd-port}`: when you use TiKV, which is the default storage engine for TiUP and TiDB Operator for Kubernetes deployments.
@@ -362,6 +404,7 @@ mysql> SELECT * FROM t1;
 <CustomContent platform="tidb-cloud">
 
 - Scope: NONE
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: it depends on the component and the deployment method.
     - `/tmp/tidb`: when you set `"unistore"` for [`--store`](https://docs.pingcap.com/tidb/stable/command-line-flags-for-tidb-configuration#--store) or if you don't set `--store`.
     - `${pd-ip}:${pd-port}`: when you use TiKV, which is the default storage engine for TiUP and TiDB Operator for Kubernetes deployments.
@@ -381,6 +424,7 @@ mysql> SELECT * FROM t1;
 
 - Scope: GLOBAL
 - Persists to cluster: No, only applicable to the current TiDB instance that you are connecting to.
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `300`
 - Range: `[0, 2147483647]`
@@ -391,6 +435,7 @@ mysql> SELECT * FROM t1;
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Enumeration
 - Default value: `mysql_native_password`
 - Possible values: `mysql_native_password`, `caching_sha2_password`, `tidb_sm3_password`, `tidb_auth_token`, `authentication_ldap_sasl`, and `authentication_ldap_simple`.
@@ -404,10 +449,25 @@ For more possible values of this variable, see [Authentication plugin status](/s
 
 </CustomContent>
 
+### default_collation_for_utf8mb4 <span class="version-mark">New in v7.4.0</span>
+
+- Scope: GLOBAL | SESSION
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: String
+- Default value: `utf8mb4_bin`
+- Value options: `utf8mb4_bin`, `utf8mb4_general_ci`, `utf8mb4_0900_ai_ci`
+- This variable is used to set the default [collation](/character-set-and-collation.md) for the `utf8mb4` character set. It affects the behavior of the following statements:
+    - The default collation displayed in the [`SHOW COLLATION`](/sql-statements/sql-statement-show-collation.md) and [`SHOW CHARACTER SET`](/sql-statements/sql-statement-show-character-set.md) statements.
+    - If [`CREATE TABLE`](/sql-statements/sql-statement-create-table.md) and [`ALTER TABLE`](/sql-statements/sql-statement-alter-table.md) statements contain the `CHARACTER SET utf8mb4` clause against a table or a column without specifying a collation, the collation specified by this variable is used. This does not affect the behavior when `CHARACTER SET` clause is not used.
+    - If [`CREATE DATABASE`](/sql-statements/sql-statement-create-database.md) and [`ALTER DATABASE`](/sql-statements/sql-statement-alter-database.md) statements contain `CHARACTER SET utf8mb4` clause without specifying a collation, the collation specified by this variable is used. This does not affect the behavior when `CHARACTER SET` clause is not used.
+    - If the `COLLATE` clause is not used, any literal string in the format of `_utf8mb4'string'` uses the collation specified by this variable.
+
 ### default_password_lifetime <span class="version-mark">New in v6.5.0</span>
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `0`
 - Range: `[0, 65535]`
@@ -417,6 +477,7 @@ For more possible values of this variable, see [Authentication plugin status](/s
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `0`
 - Range: `[0, 7]`
@@ -425,6 +486,7 @@ For more possible values of this variable, see [Authentication plugin status](/s
 ### disconnect_on_expired_password <span class="version-mark">New in v6.5.0</span>
 
 - Scope: GLOBAL
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `ON`
 - This variable is read-only. It indicates whether TiDB disconnects the client connection when the password is expired. If the variable is set to `ON`, the client connection is disconnected when the password is expired. If the variable is set to `OFF`, the client connection is restricted to the "sandbox mode" and the user can only execute the password reset operation.
@@ -444,6 +506,7 @@ For more possible values of this variable, see [Authentication plugin status](/s
 ### error_count
 
 - Scope: SESSION
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `0`
 - A read-only variable that indicates the number of errors that resulted from the last statement that generated messages.
@@ -452,6 +515,7 @@ For more possible values of this variable, see [Authentication plugin status](/s
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: Before v6.6.0, the default value is `OFF`. Starting from v6.6.0, the default value is `ON`.
 - This variable controls whether to enable foreign key constraint checking.
@@ -460,6 +524,7 @@ For more possible values of this variable, see [Authentication plugin status](/s
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `1024`
 - Range: `[4, 18446744073709551615]`
@@ -468,6 +533,7 @@ For more possible values of this variable, see [Authentication plugin status](/s
 ### have_openssl
 
 - Scope: NONE
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `DISABLED`
 - A read-only variable for MySQL compatibility. Set to `YES` by the server when the server has TLS enabled.
@@ -475,6 +541,7 @@ For more possible values of this variable, see [Authentication plugin status](/s
 ### have_ssl
 
 - Scope: NONE
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `DISABLED`
 - A read-only variable for MySQL compatibility. Set to `YES` by the server when the server has TLS enabled.
@@ -482,6 +549,7 @@ For more possible values of this variable, see [Authentication plugin status](/s
 ### hostname
 
 - Scope: NONE
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: (system hostname)
 - The hostname of the TiDB server as a read-only variable.
 
@@ -493,6 +561,7 @@ This variable is an alias for [`last_insert_id`](#last_insert_id).
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: ""
 - The `init_connect` feature permits a SQL statement to be automatically executed when you first connect to a TiDB server. If you have the `CONNECTION_ADMIN` or `SUPER` privileges, this `init_connect` statement will not be executed. If the `init_connect` statement results in an error, your user connection will be terminated.
 
@@ -500,6 +569,7 @@ This variable is an alias for [`last_insert_id`](#last_insert_id).
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `50`
 - Range: `[1, 3600]`
@@ -510,6 +580,7 @@ This variable is an alias for [`last_insert_id`](#last_insert_id).
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `28800`
 - Range: `[1, 31536000]`
@@ -519,6 +590,7 @@ This variable is an alias for [`last_insert_id`](#last_insert_id).
 ### last_insert_id
 
 - Scope: SESSION
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `0`
 - Range: `[0, 18446744073709551615]`
@@ -528,6 +600,7 @@ This variable is an alias for [`last_insert_id`](#last_insert_id).
 ### last_plan_from_binding <span class="version-mark">New in v4.0</span>
 
 - Scope: SESSION
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `OFF`
 - This variable is used to show whether the execution plan used in the previous statement was influenced by a [plan binding](/sql-plan-management.md)
@@ -535,6 +608,7 @@ This variable is an alias for [`last_insert_id`](#last_insert_id).
 ### last_plan_from_cache <span class="version-mark">New in v4.0</span>
 
 - Scope: SESSION
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `OFF`
 - This variable is used to show whether the execution plan used in the previous `execute` statement is taken directly from the plan cache.
@@ -542,18 +616,21 @@ This variable is an alias for [`last_insert_id`](#last_insert_id).
 ### last_sql_use_alloc <span class="version-mark">New in v6.4.0</span>
 
 - Scope: SESSION
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: `OFF`
 - This variable is read-only. It is used to show whether the previous statement uses a cached chunk object (chunk allocation).
 
 ### license
 
 - Scope: NONE
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: `Apache License 2.0`
 - This variable indicates the license of your TiDB server installation.
 
 ### log_bin
 
 - Scope: NONE
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `OFF`
 - This variable indicates whether [TiDB Binlog](https://docs.pingcap.com/tidb/stable/tidb-binlog-overview) is used.
@@ -562,6 +639,7 @@ This variable is an alias for [`last_insert_id`](#last_insert_id).
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: `67108864`
 - Range: `[1024, 1073741824]`
 - The value should be an integer multiple of 1024. If the value is not divisible by 1024, a warning will be prompted and the value will be rounded down. For example, when the value is set to 1025, the actual value in TiDB is 1024.
@@ -572,6 +650,7 @@ This variable is an alias for [`last_insert_id`](#last_insert_id).
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `0`
 - Range: `[0, 4294967295]`
@@ -581,6 +660,7 @@ This variable is an alias for [`last_insert_id`](#last_insert_id).
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: `UNSPECIFIED`
 - Value options: `NONE`, `FAST`, `HIGH_COMPRESSION`, `UNSPECIFIED`
 - This variable is used to specify the data compression mode of the MPP Exchange operator. This variable takes effect when TiDB selects the MPP execution plan with the version number `1`. The meanings of the variable values are as follows:
@@ -593,6 +673,7 @@ This variable is an alias for [`last_insert_id`](#last_insert_id).
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Default value: `UNSPECIFIED`
 - Value options: `UNSPECIFIED`, `0`, `1`
 - This variable is used to specify different versions of the MPP execution plan. After a version is specified, TiDB selects the specified version of the MPP execution plan. The meanings of the variable values are as follows:
@@ -604,6 +685,7 @@ This variable is an alias for [`last_insert_id`](#last_insert_id).
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `0`
 - Range: `[0, 4294967295]`
@@ -613,6 +695,7 @@ This variable is an alias for [`last_insert_id`](#last_insert_id).
 
 - Scope: GLOBAL
 - Persists to cluster: No, only applicable to the current TiDB instance that you are connecting to.
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `0`
 - Range: `[0, 100000]`
@@ -623,6 +706,7 @@ This variable is an alias for [`last_insert_id`](#last_insert_id).
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Type: Integer
 - Default value: `0`
 - Range: `[0, 2147483647]`
@@ -649,6 +733,7 @@ For a SQL statement with the [`MAX_EXECUTION_TIME`](/optimizer-hints.md#max_exec
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `-1`
 - Range: `[-1, 1048576]`
@@ -681,6 +766,7 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 
 - Scope: GLOBAL
 - Persists to cluster: No, only applicable to the current TiDB instance that you are connecting to.
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: ""
 - Indicates the directory to load plugins as specified by a command-line flag.
 
@@ -688,12 +774,14 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 
 - Scope: GLOBAL
 - Persists to cluster: No, only applicable to the current TiDB instance that you are connecting to.
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: ""
 - Indicates the plugins to load when TiDB is started. These plugins are specified by a command-line flag and separated by commas.
 
 ### port
 
 - Scope: NONE
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `4000`
 - Range: `[0, 65535]`
@@ -702,6 +790,7 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 ### rand_seed1
 
 - Scope: SESSION
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `0`
 - Range: `[0, 2147483647]`
@@ -711,6 +800,7 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 ### rand_seed2
 
 - Scope: SESSION
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `0`
 - Range: `[0, 2147483647]`
@@ -721,6 +811,7 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `OFF`
 
@@ -743,6 +834,7 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `OFF`
 - This variable controls whether the `tidb-server` instance resolves hostnames as a part of the connection handshake.
@@ -761,6 +853,7 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 ### socket
 
 - Scope: NONE
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: ""
 - The local unix socket file that the `tidb-server` is listening on when speaking the MySQL protocol.
 
@@ -768,6 +861,7 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `ON`
 - Indicates whether to write changes to [TiDB Binlog](https://docs.pingcap.com/tidb/stable/tidb-binlog-overview) or not.
@@ -780,6 +874,7 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Default value: `ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION`
 - This variable controls a number of MySQL compatibility behaviors. See [SQL Mode](/sql-mode.md) for more information.
 
@@ -787,6 +882,7 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `OFF`
 - This variable controls whether to enforce the requirement that a table has a primary key. After this variable is enabled, attempting to create or alter a table without a primary key will produce an error.
@@ -797,6 +893,7 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `18446744073709551615`
 - Range: `[0, 18446744073709551615]`
@@ -808,6 +905,7 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 <CustomContent platform="tidb">
 
 - Scope: NONE
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: ""
 - The location of the certificate authority file (if there is one). The value of this variable is defined by the TiDB configuration item [`ssl-ca`](/tidb-configuration-file.md#ssl-ca).
 
@@ -816,6 +914,7 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 <CustomContent platform="tidb-cloud">
 
 - Scope: NONE
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: ""
 - The location of the certificate authority file (if there is one). The value of this variable is defined by the TiDB configuration item [`ssl-ca`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#ssl-ca).
 
@@ -826,6 +925,7 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 <CustomContent platform="tidb">
 
 - Scope: NONE
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: ""
 - The location of the certificate file (if there is a file) that is used for SSL/TLS connections. The value of this variable is defined by the TiDB configuration item [`ssl-cert`](/tidb-configuration-file.md#ssl-cert).
 
@@ -834,6 +934,7 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 <CustomContent platform="tidb-cloud">
 
 - Scope: NONE
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: ""
 - The location of the certificate file (if there is a file) that is used for SSL/TLS connections. The value of this variable is defined by the TiDB configuration item [`ssl-cert`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#ssl-cert).
 
@@ -844,6 +945,7 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 <CustomContent platform="tidb">
 
 - Scope: NONE
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: ""
 - The location of the private key file (if there is one) that is used for SSL/TLS connections. The value of this variable is defined by TiDB configuration item [`ssl-key`](/tidb-configuration-file.md#ssl-cert).
 
@@ -852,6 +954,7 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 <CustomContent platform="tidb-cloud">
 
 - Scope: NONE
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: ""
 - The location of the private key file (if there is one) that is used for SSL/TLS connections. The value of this variable is defined by TiDB configuration item [`ssl-key`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#ssl-key).
 
@@ -860,6 +963,7 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 ### system_time_zone
 
 - Scope: NONE
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: (system dependent)
 - This variable shows the system time zone from when TiDB was first bootstrapped. See also [`time_zone`](#time_zone).
 
@@ -867,6 +971,7 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: `4096`
 - Range: `[0, 9223372036854775807]`
 - Unit: Bytes
@@ -876,6 +981,7 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Type: Integer
 - Default value: `1`
 - Range: `[0, 2]`
@@ -889,12 +995,14 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: ""
 - This variable is used to specify a list of storage engines that might fall back to TiKV. If the execution of a SQL statement fails due to a failure of the specified storage engine in the list, TiDB retries executing this SQL statement with TiKV. This variable can be set to "" or "tiflash". When this variable is set to "tiflash", if TiFlash returns a timeout error (error code: ErrTiFlashServerTimeout), TiDB retries executing this SQL statement with TiKV.
 
 ### tidb_allow_function_for_expression_index <span class="version-mark">New in v5.2.0</span>
 
 - Scope: NONE
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: `json_array`, `json_array_append`, `json_array_insert`, `json_contains`, `json_contains_path`, `json_depth`, `json_extract`, `json_insert`, `json_keys`, `json_length`, `json_merge_patch`, `json_merge_preserve`, `json_object`, `json_pretty`, `json_quote`, `json_remove`, `json_replace`, `json_search`, `json_set`, `json_storage_size`, `json_type`, `json_unquote`, `json_valid`, `lower`, `md5`, `reverse`, `tidb_shard`, `upper`, `vitess_hash`
 - This variable is used to show the functions that are allowed to be used for creating expression indexes.
 
@@ -902,6 +1010,7 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Type: Boolean
 - Default value: `ON`
 - Controls whether to use the MPP mode of TiFlash to execute queries. The value options are as follows:
@@ -921,6 +1030,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 </CustomContent>
 
 - Scope: SESSION
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `OFF`
 - This variable is used to set whether the `AUTO_INCREMENT` property of a column is allowed to be removed by executing `ALTER TABLE MODIFY` or `ALTER TABLE CHANGE` statements. It is not allowed by default.
@@ -933,6 +1043,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: `1`
 - This variable specifies the concurrency of reading and writing statistics for a partitioned table when TiDB analyzes the partitioned table.
 
@@ -940,6 +1051,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `2` for TiDB Self-Hosted and `1` for TiDB Cloud
 - Range: `[1, 2]`
@@ -961,6 +1073,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: "json,blob,mediumblob,longblob"
 - Possible values: "json,blob,mediumblob,longblob,text,mediumtext,longtext"
 - This variable controls which types of columns are skipped for statistics collection when executing the `ANALYZE` command to collect statistics. The variable is only applicable for `tidb_analyze_version = 2`. Even if you specify a column using `ANALYZE TABLE t COLUMNS c1, ... , cn`, no statistics will be collected for the specified column if its type is in `tidb_analyze_skip_column_types`.
@@ -1015,6 +1128,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Time
 - Default value: `23:59 +0000`
 - This variable is used to restrict the time window that the automatic update of statistics is permitted. For example, to only allow automatic statistics updates between 1 AM and 3 AM in UTC time, set `tidb_auto_analyze_start_time='01:00 +0000'` and `tidb_auto_analyze_end_time='03:00 +0000'`.
@@ -1023,6 +1137,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: `1`
 - Range: `[1, 1024]`
 - This variable specifies the number of partitions that TiDB [automatically analyzes](/statistics.md#automatic-update) when analyzing a partitioned table (which means automatically collecting statistics on a partitioned table).
@@ -1033,6 +1148,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Float
 - Default value: `0.5`
 - Range: `[0, 18446744073709551615]`
@@ -1046,6 +1162,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Time
 - Default value: `00:00 +0000`
 - This variable is used to restrict the time window that the automatic update of statistics is permitted. For example, to only allow automatic statistics updates between 1 AM and 3 AM in UTC time, set `tidb_auto_analyze_start_time='01:00 +0000'` and `tidb_auto_analyze_end_time='03:00 +0000'`.
@@ -1054,6 +1171,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `1`
 - Range: `[1, 256]`
@@ -1063,6 +1181,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `10`
 - Range: `[1, 2147483647]`
@@ -1072,6 +1191,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `2`
 - Range: `[0, 2147483647]`
@@ -1088,6 +1208,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 > It is **NOT** recommended to enable this variable.
 
 - Scope: SESSION
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `OFF`
 - The variable is used to control whether to enable the deprecated batch-commit feature. When this variable is enabled, a transaction might be split into multiple transactions by grouping a few statements and committed non-atomically, which is not recommended.
@@ -1099,6 +1220,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 > This variable is associated with the deprecated batch-dml feature, which might cause data corruption. Therefore, it is not recommended to enable this variable for batch-dml. Instead, use [non-transactional DML](/non-transactional-dml.md).
 
 - Scope: SESSION
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `OFF`
 - This variable is used to control whether to enable the batch-delete feature, which is a part of the deprecated batch-dml feature. When this variable is enabled, `DELETE` statements might be split into multiple transactions and committed non-atomically. To make it work, you also need to enable `tidb_enable_batch_dml` and set a positive value for `tidb_dml_batch_size`, which is not recommended.
@@ -1110,6 +1232,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 > This variable is associated with the deprecated batch-dml feature, which might cause data corruption. Therefore, it is not recommended to enable this variable for batch-dml. Instead, use [non-transactional DML](/non-transactional-dml.md).
 
 - Scope: SESSION
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `OFF`
 - This variable is used to control whether to enable the batch-insert feature, which is a part of the deprecated batch-dml feature. When this variable is enabled, `INSERT` statements might be split into multiple transactions and committed non-atomically. To make it work, you also need to enable `tidb_enable_batch_dml` and set a positive value for `tidb_dml_batch_size`, which is not recommended.
@@ -1118,6 +1241,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `4000`
 - Range: `[0, 4294967295]`
@@ -1127,6 +1251,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Type: Integer
 - Default value: `10240`
 - Range: `[0, 9223372036854775807]`
@@ -1138,6 +1263,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Type: Integer
 - Default value: `104857600` (100 MiB)
 - Range: `[0, 9223372036854775807]`
@@ -1149,6 +1275,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `4`
 - Range: `[1, 256]`
@@ -1160,6 +1287,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `OFF`
 - This variable is used to control whether to enable the [baseline capturing](/sql-plan-management.md#baseline-capturing) feature. This feature depends on the statement summary, so you need to enable the statement summary before you use baseline capturing.
@@ -1169,6 +1297,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 - Scope: SESSION
 - Persists to cluster: No
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `0`
 - Range: `[0, 15]`
@@ -1186,6 +1315,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 - Scope: GLOBAL
 - Persists to cluster: No, only applicable to the current TiDB instance that you are connecting to.
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `ON`
 - This variable is used to enforce that the `utf8` character set only stores values from the [Basic Multilingual Plane (BMP)](https://en.wikipedia.org/wiki/Plane_(Unicode)#Basic_Multilingual_Plane). To store characters outside the BMP, it is recommended to use the `utf8mb4` character set.
@@ -1194,6 +1324,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 ### tidb_checksum_table_concurrency
 
 - Scope: SESSION
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `4`
 - Range: `[1, 256]`
@@ -1205,6 +1336,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `128`
 - Range: `[1, 10000]`
@@ -1224,6 +1356,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 - Scope: GLOBAL
 - Persists to cluster: No, only applicable to the current TiDB instance that you are connecting to.
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: ""
 - This variable is read-only. It is used to obtain the configuration information of the current TiDB server.
 
@@ -1231,6 +1364,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `OFF`
 - This variable only applies to optimistic transactions. For pessimistic transactions, use [`tidb_constraint_check_in_place_pessimistic`](#tidb_constraint_check_in_place_pessimistic-new-in-v630) instead.
@@ -1260,6 +1394,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 ### tidb_constraint_check_in_place_pessimistic <span class="version-mark">New in v6.3.0</span>
 
 - Scope: SESSION
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 
 <CustomContent platform="tidb">
@@ -1325,6 +1460,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Type: Integer
 - Default value: `2`
 - Value options:
@@ -1335,6 +1471,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 ### tidb_current_ts
 
 - Scope: SESSION
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `0`
 - Range: `[0, 9223372036854775807]`
@@ -1352,6 +1489,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `107374182400` (100 GiB)
 - Range: `[107374182400, 1125899906842624]` ([100 GiB, 1 PiB])
@@ -1370,6 +1508,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `ON`
 - This variable controls whether to enable the acceleration of `ADD INDEX` and `CREATE INDEX` to improve the speed of backfilling for index creation. Setting this variable value to `ON` can bring performance improvement for index creation on tables with a large amount of data.
@@ -1408,6 +1547,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: `OFF`
 - This variable is used to control whether to enable the [TiDB backend task distributed execution framework](/tidb-distributed-execution-framework.md). After the framework is enabled, backend tasks such as DDL and import will be distributedly executed and completed by multiple TiDB nodes in the cluster.
 - Starting from TiDB v7.1.0, the framework supports distributedly executing the [`ADD INDEX`](/sql-statements/sql-statement-add-index.md) statement for partitioned tables.
@@ -1418,6 +1558,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `512`
 - Range: `[0, 9223372036854775807]`
@@ -1427,6 +1568,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `64`
 - Range: `[1, 256]`
@@ -1436,6 +1578,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `256`
 - Range: `[32, 10240]`
@@ -1447,6 +1590,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 ### tidb_ddl_reorg_priority
 
 - Scope: SESSION
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Enumeration
 - Default value: `PRIORITY_LOW`
 - Value options: `PRIORITY_LOW`, `PRIORITY_NORMAL`, `PRIORITY_HIGH`
@@ -1457,6 +1601,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `4`
 - Range: `[1, 256]`
@@ -1467,6 +1612,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Type: Float
 - Default value: `0.8`
 - Range: `[0, 1]`
@@ -1480,6 +1626,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `ON`
 - This variable is used to set whether to disable the automatic retry of explicit optimistic transactions. The default value of `ON` means that transactions will not automatically retry in TiDB and `COMMIT` statements might return errors that need to be handled in the application layer.
@@ -1506,6 +1653,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Type: Integer
 - Default value: `15`
 - Range: `[1, 256]`
@@ -1523,6 +1671,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `0`
 - Range: `[0, 2147483647]`
@@ -1539,6 +1688,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `ON`
 - This variable is used to specify whether to enable the one-phase commit feature for transactions that only affect one Region. Compared with the often-used two-phase commit, one-phase commit can greatly reduce the latency of transaction commit and increase the throughput.
@@ -1553,6 +1703,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `OFF`
 - This variable controls whether to read historical data or the latest data when performing `ANALYZE`. If this variable is set to `ON`, `ANALYZE` reads the historical data available at the time of `ANALYZE`. If this variable is set to `OFF`, `ANALYZE` reads the latest data.
@@ -1566,6 +1717,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `ON`
 - This variable controls whether to enable the async commit feature for the second phase of the two-phase transaction commit to perform asynchronously in the background. Enabling this feature can reduce the latency of transaction commit.
@@ -1580,6 +1732,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `ON`
 - Determines whether TiDB automatically updates table statistics as a background operation.
@@ -1589,6 +1742,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `OFF`
 - This variable is used to determine whether to include the `AUTO_INCREMENT` columns when creating a generated column or an expression index.
@@ -1601,6 +1755,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `OFF`
 - This variable controls whether to enable the deprecated batch-dml feature. When it is enabled, certain statements might be split into multiple transactions, which is non-atomic and should be used with care. When using batch-dml, you must ensure that there are no concurrent operations on the data you are operating on. To make it work, you must also specify a positive value for `tidb_batch_dml_size` and enable at least one of `tidb_batch_insert` and `tidb_batch_delete`.
@@ -1613,6 +1768,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Type: Boolean
 - Default value: `OFF`
 - This variable is used to control whether to enable the cascades planner.
@@ -1621,6 +1777,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `OFF`
 - This variable is used to control whether to enable the [`CHECK` constraint](/constraints.md#check) feature.
@@ -1628,6 +1785,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 ### tidb_enable_chunk_rpc <span class="version-mark">New in v4.0</span>
 
 - Scope: SESSION
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `ON`
 - This variable is used to control whether to enable the `Chunk` data encoding format in Coprocessor.
@@ -1636,6 +1794,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Enumeration
 - Default value: `ON`
 - Possible values: `OFF`, `ON`, `INT_ONLY`
@@ -1648,6 +1807,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 - Scope: GLOBAL
 - Persists to cluster: No, only applicable to the current TiDB instance that you are connecting to.
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: `ON`
 - Possible values: `OFF`, `ON`
 - This variable controls whether the corresponding TiDB instance can become a DDL owner or not. If there is only one TiDB instance in the current TiDB cluster, you cannot prevent it from becoming a DDL owner, which means you cannot set it to `OFF`.
@@ -1664,6 +1824,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 - Scope: GLOBAL
 - Persists to cluster: No, only applicable to the current TiDB instance that you are connecting to.
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `ON`
 - This variable controls whether to record the execution information of each operator in the slow query log.
@@ -1676,6 +1837,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `OFF`
 - This variable controls whether to enable TiDB to collect `PREDICATE COLUMNS`. After enabling the collection, if you disable it, the information of previously collected `PREDICATE COLUMNS` is cleared. For details, see [Collect statistics on some columns](/statistics.md#collect-statistics-on-some-columns).
@@ -1683,6 +1845,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 ### tidb_enable_enhanced_security
 
 - Scope: NONE
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 
 <CustomContent platform="tidb">
@@ -1709,6 +1872,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `ON`
 - This variable controls whether to enable the [`exchange partitions with tables`](/partitioned-table.md#partition-management) feature. The default value is `ON`, that is, `exchange partitions with tables` is enabled by default.
@@ -1718,6 +1882,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Type: Boolean
 - Default value: `OFF`
 - This variable indicates whether TiDB can collect the extended statistic to guide the optimizer. See [Introduction to Extended Statistics](/extended-statistics.md) for more information.
@@ -1726,6 +1891,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `OFF`
 - If this variable is set to `ON`, TiDB reads data with the timestamp specified by [`tidb_external_ts`](#tidb_external_ts-new-in-v640).
@@ -1734,6 +1900,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `0`
 - If [`tidb_enable_external_ts_read`](#tidb_enable_external_ts_read-new-in-v640) is set to `ON`, TiDB reads data with the timestamp specified by this variable.
@@ -1746,6 +1913,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `OFF`
 - This variable is used to set whether to enable the statistics `Fast Analyze` feature.
@@ -1759,6 +1927,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 - Scope: SESSION | GLOBAL
 - Persists to the cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `ON`
 - This variable is used to control whether to use a checksum-based approach to quickly check the integrity of data and indexes in a table. The default value `ON` means this feature is enabled by default.
@@ -1768,6 +1937,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: Before v6.6.0, the default value is `OFF`. Starting from v6.6.0, the default value is `ON`.
 - This variable controls whether to enable the `FOREIGN KEY` feature.
@@ -1780,30 +1950,30 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `OFF`
 - This variable controls whether to enable GC-Aware memory track.
 
 ### tidb_enable_non_prepared_plan_cache
 
-> **Warning:**
->
-> The non-prepared execution plan cache is an experimental feature. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
-
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Type: Boolean
-- Default value: `ON`
+- Default value: `OFF`
 - This variable controls whether to enable the [Non-prepared plan cache](/sql-non-prepared-plan-cache.md) feature.
+- Enabling this feature might incur additional memory and CPU overhead and might not be suitable for all situations. Please determine whether to enable this feature according to your actual scenario.
 
 ### tidb_enable_non_prepared_plan_cache_for_dml <span class="version-mark">New in v7.1.0</span>
 
 > **Warning:**
 >
-> The non-prepared execution plan cache is an experimental feature. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+> The non-prepared execution plan cache for DML statements is an experimental feature. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `OFF`.
 - This variable controls whether to enable the [Non-prepared plan cache](/sql-non-prepared-plan-cache.md) feature for DML statements.
@@ -1812,6 +1982,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `ON`
 - This variable controls whether to enable GOGC Tuner.
@@ -1820,6 +1991,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `ON`
 - This variable controls whether to enable historical statistics. The default value changes from `OFF` to `ON`, which means that historical statistics are enabled by default.
@@ -1832,6 +2004,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `OFF`
 - This variable controls whether the information captured by `PLAN REPLAYER CAPTURE` includes historical statistics by default. The default value `OFF` means that historical statistics are not included by default.
@@ -1848,6 +2021,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Type: Boolean
 - Default value: `ON`
 - This variable is used to control whether to enable the index merge feature.
@@ -1856,6 +2030,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Type: Boolean
 - Default value: `OFF`
 - Specifies whether to enable the `IndexMergeJoin` operator.
@@ -1865,6 +2040,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `ON`
 - This variable permits `INSTANCE` scoped variables to be set using the `SET SESSION` as well as `SET GLOBAL` syntax.
@@ -1874,6 +2050,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `ON`
 - This variable is used to set whether to enable the `LIST (COLUMNS) TABLE PARTITION` feature.
@@ -1882,6 +2059,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `OFF`
 - This variable is used for an unreleased feature. **Do not change the variable value**.
@@ -1890,6 +2068,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `ON`
 - This variable is used to set whether to enable the [Metadata lock](/metadata-lock.md) feature. Note that when setting this variable, you need to make sure that there are no running DDL statements in the cluster. Otherwise, the data might be incorrect or inconsistent.
@@ -1898,6 +2077,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `ON`
 - This variable is used to control whether to enable TiDB mutation checker, which is a tool used to check consistency between data and indexes during the execution of DML statements. If the checker returns an error for a statement, TiDB rolls back the execution of the statement. Enabling this variable causes a slight increase in CPU usage. For more information, see [Troubleshoot Inconsistency Between Data and Indexes](/troubleshoot-data-inconsistency-errors.md).
@@ -1907,6 +2087,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Type: Boolean
 - Default value: `ON`
 - TiDB v6.2.0 refactors the implementation of previous cost model. This variable controls whether to enable the refactored Cost Model implementation.
@@ -1917,6 +2098,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Type: Boolean
 - Default value: `OFF`
 - This variable controls the behavior when TiDB performs the `ONLY_FULL_GROUP_BY` check. For detailed information about `ONLY_FULL_GROUP_BY`, see the [MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/sql-mode.html#sqlmode_only_full_group_by). In v6.1.0, TiDB handles this check more strictly and correctly.
@@ -1926,6 +2108,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Enumeration
 - Default value: `OFF`
 - Possible values: `OFF`, `ON`, `WARN`
@@ -1945,6 +2128,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: `ON`
 - If you set the variable value to `OFF`, TiDB behaves as follows:
     * When you use `SET` to set a `noop` variable, TiDB returns the `"setting *variable_name* has no effect in TiDB"` warning.
@@ -1956,6 +2140,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Default value: Before v7.0.0, the default value is `OFF`. Starting from v7.0.0, the default value is `ON`.
 - Type: Boolean
 - This variable controls whether TiDB applies Null Aware Hash Join when ANTI JOIN is generated by subqueries led by special set operators `NOT IN` and `!= ALL`.
@@ -1965,6 +2150,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Type: Boolean
 - Default value: `ON`
 - Since v6.1.0, the [Join Reorder](/join-reorder.md) algorithm of TiDB supports Outer Join. This variable controls whether TiDB enables the Join Reorder's support for Outer Join.
@@ -1977,6 +2163,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Type: Boolean
 - Default value: `OFF`
 - This variable controls whether Index Join is supported when the inner table has `Selection` or `Projection` operators on it. The default value `OFF` means that Index Join is not supported in this scenario.
@@ -1985,6 +2172,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Type: Boolean
 - Default value: `OFF`
 - Specifies whether to sort the final output result automatically.
@@ -1994,6 +2182,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Type: Boolean
 - Default value: `ON`
 - This variable controls whether to use the method of paging to send coprocessor requests. For TiDB versions in [v5.4.0, v6.2.0), this variable only takes effect on the `IndexLookup` operator; for v6.2.0 and later, this variable takes effect globally. Starting from v6.4.0, the default value of this variable is changed from `OFF` to `ON`.
@@ -2001,7 +2190,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
     - In all OLTP scenarios, it is recommended to use the method of paging.
     - For read queries that use `IndexLookup` and `Limit` and that `Limit` cannot be pushed down to `IndexScan`, there might be high latency for the read queries and high usage for TiKV `Unified read pool CPU`. In such cases, because the `Limit` operator only requires a small set of data, if you set [`tidb_enable_paging`](#tidb_enable_paging-new-in-v540) to `ON`, TiDB processes less data, which reduces query latency and resource consumption.
-    - In scenarios such as data export using [Dumpling](/dumpling-overview.md) and full table scan, enabling paging can effectively reduce the memory consumption of TiDB processes.
+    - In scenarios such as data export using [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview) and full table scan, enabling paging can effectively reduce the memory consumption of TiDB processes.
 
 > **Note:**
 >
@@ -2011,6 +2200,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `OFF`
 - This variable controls whether to enable concurrency for the `Apply` operator. The number of concurrencies is controlled by the `tidb_executor_concurrency` variable. The `Apply` operator processes correlated subqueries and has no concurrency by default, so the execution speed is slow. Setting this variable value to `1` can increase concurrency and speed up execution. Currently, concurrency for `Apply` is disabled by default.
@@ -2019,6 +2209,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `ON`
 - This variable specifies whether to use the pipeline execution algorithm for window functions.
@@ -2027,6 +2218,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `ON`
 - This variable controls whether Prepared Plan Cache caches execution plans with a variable as the `LIMIT` parameter (`LIMIT ?`). The default value is `ON`, which means Prepared Plan Cache supports caching such execution plans. Note that Prepared Plan Cache does not support caching execution plans with a variable that is greater than 10000.
@@ -2035,6 +2227,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `ON`
 - This variable controls whether Prepared Plan Cache caches queries that contain subqueries.
@@ -2045,6 +2238,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `OFF`
 - This variable controls whether to enable the `PLAN REPLAYER CAPTURE` feature. The default value `OFF` means to disable the `PLAN REPLAYER CAPTURE` feature.
@@ -2055,6 +2249,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `ON`
 - This variable controls whether to enable the [`PLAN REPLAYER CAPTURE` feature](/sql-plan-replayer.md#use-plan-replayer-capture-to-capture-target-plans). The default value `ON` means to enable the `PLAN REPLAYER CAPTURE` feature.
@@ -2067,6 +2262,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `OFF`
 - This variable controls whether to enable the `PLAN REPLAYER CONTINUOUS CAPTURE` feature. The default value `OFF` means to disable the feature.
@@ -2077,6 +2273,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `OFF`
 - This variable controls whether to enable the [`PLAN REPLAYER CONTINUOUS CAPTURE` feature](/sql-plan-replayer.md#use-plan-replayer-continuous-capture). The default value `OFF` means to disable the feature.
@@ -2087,6 +2284,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Type: Boolean
 - Default value: `ON`
 - Determines whether to enable [Prepared Plan Cache](/sql-prepared-plan-cache.md). When it is enabled, the execution plans of `Prepare` and `Execute` are cached so that the subsequent executions skip optimizing the execution plans, which brings performance improvement.
@@ -2096,6 +2294,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: `ON`
 - This variable controls whether to count the memory consumed by the execution plans cached in the Prepared Plan Cache. For details, see [Memory management of Prepared Plan Cache](/sql-prepared-plan-cache.md#memory-management-of-prepared-plan-cache).
 
@@ -2103,6 +2302,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Type: Boolean
 - Default value: `OFF`
 - This variable controls the behavior of the optimizer on using statistics of a table when the statistics are outdated.
@@ -2126,6 +2326,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `OFF`
 - This variable controls whether to enable the dynamic memory control feature for the operator that reads data. By default, this operator enables the maximum number of threads that [`tidb_distsql_scan_concurrency`](/system-variables.md#tidb_distsql_scan_concurrency) allows to read data. When the memory usage of a single SQL statement exceeds [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query) each time, the operator that reads data stops one thread.
@@ -2151,6 +2352,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: `ON`
 - Type: Boolean
 - This variable is a switch for [the resource control feature](/tidb-resource-control.md). When this variable is set to `ON`, the TiDB cluster can isolate application resources based on resource groups.
@@ -2159,6 +2361,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: `ON`
 - Value options: `OFF`, `ON`
 - This variable controls whether TiDB enables chunk objects cache. If the value is `ON`, TiDB prefers to use the cached chunk object and only requests from the system if the requested object is not in the cache. If the value is `OFF`, TiDB requests chunk objects from the system directly.
@@ -2175,6 +2378,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 - Scope: GLOBAL
 - Persists to cluster: No, only applicable to the current TiDB instance that you are connecting to.
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `ON`
 - This variable is used to control whether to enable the slow log feature.
@@ -2183,6 +2387,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: `ON`
 - Value options: `OFF`, `ON`
 - Controls whether to enable the temporary storage for some operators when a single SQL statement exceeds the memory quota specified by the system variable [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query).
@@ -2192,6 +2397,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `ON`
 - This variable is used to control whether to enable the statement summary feature. If enabled, SQL execution information like time consumption is recorded to the `information_schema.STATEMENTS_SUMMARY` system table to identify and troubleshoot SQL performance issues.
@@ -2200,6 +2406,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `ON`
 - This variable is used to control if tables can be created with invalid definitions of type `DOUBLE`. This setting is intended to provide an upgrade path from earlier versions of TiDB, which were less strict in validating types.
@@ -2226,6 +2433,7 @@ Query OK, 0 rows affected (0.09 sec)
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Enumeration
 - Default value: `ON`
 - Possible values: `OFF`, `ON`, `AUTO`
@@ -2246,6 +2454,7 @@ Query OK, 0 rows affected (0.09 sec)
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `OFF`
 
@@ -2261,52 +2470,11 @@ Query OK, 0 rows affected (0.09 sec)
 
 </CustomContent>
 
-### tidb_enable_tiflash_pipeline_model <span class="version-mark">New in v7.2.0</span>
-
-<CustomContent platform="tidb">
-
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Boolean
-- Default value: `OFF`
-- This variable controls whether to enable the new [Pipeline Execution Model](/tiflash/tiflash-pipeline-model.md) in TiFlash.
-- When this variable is set to `OFF` to disable the pipeline execution model, the query pushed down to TiFlash will be executed using the original stream model.
-- When this variable is set to `ON` to enable the pipeline execution model, the query pushed down to TiFlash will be executed using the new pipeline execution model.
-
-> **Note:**
->
-> - The pipeline execution model is currently an experimental feature and is not recommended to use in production environments.
-> - The pipeline execution model does not support the following features. When the following features are enabled, even if `tidb_enable_tiflash_pipeline_model` is set to `ON`, the query pushed down to TiFlash will still be executed using the original stream model.
->
->     - [Join operator spill to disk](#tidb_max_bytes_before_tiflash_external_join-new-in-v700)
->     - [TiFlash Disaggregated Storage and Compute Architecture and S3 Support](/tiflash/tiflash-disaggregated-and-s3.md)
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Boolean
-- Default value: `OFF`
-- This variable controls whether to enable the new [Pipeline Execution Model](https://docs.pingcap.com/tidb/v7.2/tiflash-pipeline-model) in TiFlash.
-- When this variable is set to `OFF` to disable the pipeline execution model, the query pushed down to TiFlash will be executed using the original stream model.
-- When this variable is set to `ON` to enable the pipeline execution model, the query pushed down to TiFlash will be executed using the new pipeline execution model.
-
-> **Note:**
->
-> - The pipeline execution model is currently an experimental feature and is not recommended to use in production environments.
-> - The pipeline execution model does not support the following features. When the following features are enabled, even if `tidb_enable_tiflash_pipeline_model` is set to `ON`, the query pushed down to TiFlash will still be executed using the original stream model.
->
->     - [Join operator spill to disk](#tidb_max_bytes_before_tiflash_external_join-new-in-v700)
->     - [TiFlash Disaggregated Storage and Compute Architecture and S3 Support](https://docs.pingcap.com/tidb/v7.2/tiflash-disaggregated-and-s3)
-
-</CustomContent>
-
 ### tidb_enable_tiflash_read_for_write_stmt <span class="version-mark">New in v6.3.0</span>
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `ON`
 - This variable controls whether read operations in SQL statements containing `INSERT`, `DELETE`, and `UPDATE` can be pushed down to TiFlash. For example:
@@ -2325,12 +2493,9 @@ Query OK, 0 rows affected (0.09 sec)
 
 </CustomContent>
 
-> **Warning:**
->
-> Currently, Top SQL is an experimental feature. It is not recommended that you use it for production environments.
-
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `OFF`
 
@@ -2350,6 +2515,7 @@ Query OK, 0 rows affected (0.09 sec)
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `OFF`
 - This variable is used to enable the TSO Follower Proxy feature. When the value is `OFF`, TiDB only gets TSO from the PD leader. After this feature is enabled, TiDB gets TSO by evenly sending requests to all PD nodes and forwarding TSO requests through PD followers. This helps reduce the CPU pressure of PD leader.
@@ -2365,6 +2531,7 @@ Query OK, 0 rows affected (0.09 sec)
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `OFF`
 - This variable controls whether to replace expressions with generated columns in an unsafe way. The default value is `OFF`, which means that unsafe replacement is disabled by default. For more details, see [Generated Columns](/generated-columns.md).
@@ -2373,6 +2540,7 @@ Query OK, 0 rows affected (0.09 sec)
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Type: Boolean
 - Default value: `ON`
 - This variable is used to control whether to enable vectorized execution.
@@ -2381,6 +2549,7 @@ Query OK, 0 rows affected (0.09 sec)
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `ON`
 - This variable is used to control whether to enable the support for window functions. Note that window functions may use reserved keywords. This might cause SQL statements that could be executed normally cannot be parsed after upgrading TiDB. In this case, you can set `tidb_enable_window_function` to `OFF`.
@@ -2389,6 +2558,7 @@ Query OK, 0 rows affected (0.09 sec)
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `OFF`
 
@@ -2407,6 +2577,7 @@ Query OK, 0 rows affected (0.09 sec)
 ### tidb_enforce_mpp <span class="version-mark">New in v5.1</span>
 
 - Scope: SESSION
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Type: Boolean
 - Default value: `OFF`
 
@@ -2426,6 +2597,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `OFF`
 - This variable is used to control whether to enable the baseline evolution feature. For detailed introduction or usage , see [Baseline Evolution](/sql-plan-management.md#baseline-evolution).
@@ -2437,6 +2609,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Time
 - Default value: `23:59 +0000`
 - This variable is used to set the end time of baseline evolution in a day.
@@ -2445,6 +2618,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `600`
 - Range: `[-1, 9223372036854775807]`
@@ -2455,6 +2629,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Time
 - Default value: `00:00 +0000`
 - This variable is used to set the start time of baseline evolution in a day.
@@ -2463,6 +2638,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Type: Integer
 - Default value: `5`
 - Range: `[1, 256]`
@@ -2503,6 +2679,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 - Scope: GLOBAL
 - Persists to cluster: No, only applicable to the current TiDB instance that you are connecting to.
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `60`
 - Range: `[10, 2147483647]`
@@ -2523,6 +2700,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 - Scope: GLOBAL
 - Persists to cluster: No, only applicable to the current TiDB instance that you are connecting to.
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `600`
 - Range: `[60, 2147483647]`
@@ -2541,6 +2719,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 - Scope: GLOBAL
 - Persists to cluster: No, only applicable to the current TiDB instance that you are connecting to.
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Enumeration
 - Default value: `NO_PRIORITY`
 - Possible values: `NO_PRIORITY`, `LOW_PRIORITY`, `HIGH_PRIORITY`, `DELAYED`
@@ -2551,6 +2730,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `-1`
 - Range: `[1, 256]`
@@ -2561,6 +2741,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `ON`
 - Enables garbage collection for TiKV. Disabling garbage collection will reduce system performance, as old versions of rows will no longer be purged.
@@ -2569,6 +2750,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Duration
 - Default value: `10m0s`
 - Range: `[10m0s, 8760h0m0s]`
@@ -2585,6 +2767,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `86400`
 - Range: `[600, 31536000]`
@@ -2595,6 +2778,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Duration
 - Default value: `10m0s`
 - Range: `[10m0s, 8760h0m0s]`
@@ -2608,6 +2792,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Enumeration
 - Default value: `LEGACY`
 - Possible values: `PHYSICAL`, `LEGACY`
@@ -2638,6 +2823,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 - Scope: GLOBAL
 - Persists to cluster: No, only applicable to the current TiDB instance that you are connecting to.
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `OFF`
 
@@ -2672,6 +2858,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `100`
 - Range: `[1, 100000]`
@@ -2681,6 +2868,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `ON`
 - This variable controls whether to generate binary-encoded execution plans in slow logs and statement summaries.
@@ -2691,6 +2879,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: `0.6`
 - Range: `[0, 0.9)`
 - This variable specifies the maximum memory threshold for tuning GOGC. When the memory exceeds this threshold, GOGC Tuner stops working.
@@ -2699,6 +2888,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `ON`
 - This variable controls the way commit TS is calculated for async commit. By default (with the `ON` value), the two-phase commit requests a new TS from the PD server and uses the TS to calculate the final commit TS. In this situation, linearizability is guaranteed for all the concurrent transactions.
@@ -2709,6 +2899,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `ON`
 - This variable controls whether the MPP hash partition exchange operator is generated in a cluster with new collation enabled. `true` means to generate the operator, and `false` means not to generate it.
@@ -2722,6 +2913,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `-1`
 - Range: `[1, 256]`
@@ -2737,6 +2929,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `-1`
 - Range: `[1, 256]`
@@ -2753,6 +2946,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `-1`
 - Range: `[1, 256]`
@@ -2765,6 +2959,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Tyle: Duration
 - Default value: `168h`, which means 7 days
 - This variable controls the duration that the historical statistics are retained in the storage.
@@ -2773,6 +2968,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `OFF`
 - This variable is used to set whether to ignore the commands for closing prepared statement cache.
@@ -2782,6 +2978,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Type: Integer
 - Default value: `25000`
 - Range: `[1, 2147483647]`
@@ -2793,6 +2990,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Type: Float
 - Default value: `0`
 - Range: `[0, 18446744073709551615]`
@@ -2808,6 +3006,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `-1`
 - Range: `[1, 256]`
@@ -2824,6 +3023,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `-1`
 - Range: `[1, 256]`
@@ -2835,6 +3035,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Default value: `-1`
 - Range: `[1, 256]`
 - This variable sets the maximum concurrency for the intersection operations that index merge performs. It is effective only when TiDB accesses partitioned tables in the dynamic pruning mode. The actual concurrency is the smaller value of `tidb_index_merge_intersection_concurrency` and the number of partitions of the partitioned table.
@@ -2844,6 +3045,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Type: Integer
 - Default value: `20000`
 - Range: `[1, 2147483647]`
@@ -2855,6 +3057,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Type: Integer
 - Default value: `1`
 - Range: `[1, 256]`
@@ -2866,6 +3069,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `32`
 - Range: `[1, 32]`
@@ -2875,12 +3079,14 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 ### tidb_isolation_read_engines <span class="version-mark">New in v4.0</span>
 
 - Scope: SESSION
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: `tikv,tiflash,tidb`
 - This variable is used to set the storage engine list that TiDB can use when reading data.
 
 ### tidb_last_ddl_info <span class="version-mark">New in v6.0.0</span>
 
 - Scope: SESSION
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Default value: ""
 - Type: String
 - This is a read-only variable. It is internally used in TiDB to get the information of the last DDL operation within the current session.
@@ -2890,6 +3096,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 ### tidb_last_query_info <span class="version-mark">New in v4.0.14</span>
 
 - Scope: SESSION
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: ""
 - This is a read-only variable. It is internally used in TiDB to query the transaction information of the last DML statement. The information includes:
     - `txn_scope`: The scope of the transaction, which can be `global` or `local`.
@@ -2900,6 +3107,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 ### tidb_last_txn_info <span class="version-mark">New in v4.0.9</span>
 
 - Scope: SESSION
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: String
 - This variable is used to get the last transaction information within the current session. It is a read-only variable. The transaction information includes:
     - The transaction scope.
@@ -2911,6 +3119,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 ### tidb_last_plan_replayer_token <span class="version-mark">New in v6.3.0</span>
 
 - Scope: SESSION
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: String
 - This variable is read-only and is used to obtain the result of the last `PLAN REPLAYER DUMP` execution in the current session.
 
@@ -2920,6 +3129,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: `"1s"`
 - Range: `[0s, 1h]`
 - Type: String
@@ -2931,6 +3141,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: `"1s"`
 - Range: `[0s, 1h]`
 - Type: String
@@ -2942,6 +3153,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `ON`
 - This variable is used to control whether to lock specific keys in the following scenarios. When the value is set to `ON`, these keys are locked. When the value is set to `OFF`, these keys are not locked.
@@ -2953,6 +3165,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 - Scope: GLOBAL
 - Persists to cluster: No, only applicable to the current TiDB instance that you are connecting to.
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `0`
 - Range: `[0, 2147483647]`
@@ -2972,6 +3185,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 ### tidb_low_resolution_tso
 
 - Scope: SESSION
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `OFF`
 - This variable is used to set whether to enable the low precision TSO feature. After this feature is enabled, new transactions use a timestamp updated every 2 seconds to read data.
@@ -2981,6 +3195,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `43200`
 - Range: `[0, 2147483647]`
@@ -2991,6 +3206,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Type: Integer
 - Default value: `-1`
 - Range: `[-1, 9223372036854775807]`
@@ -3018,6 +3234,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Type: Integer
 - Default value: `-1`
 - Range: `[-1, 9223372036854775807]`
@@ -3045,6 +3262,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Type: Integer
 - Default value: `-1`
 - Range: `[-1, 9223372036854775807]`
@@ -3072,6 +3290,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `1024`
 - Range: `[32, 2147483647]`
@@ -3082,6 +3301,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `1024`
 - Range: `[100, 16384]`
@@ -3091,6 +3311,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Type: Integer
 - Default value: `50000`
 - Range: `[1, 9223372036854775807]`
@@ -3101,6 +3322,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `-1`
 - Range: `[-1, 256]`
@@ -3111,6 +3333,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Enumeration
 - Default value: `CANCEL`
 - Possible values: `CANCEL`, `LOG`
@@ -3138,6 +3361,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `-1`
 - Range: `[-1, 9223372036854775807]`
@@ -3152,6 +3376,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `33554432` (32 MiB)
 - Range: `[0, 9223372036854775807]`
@@ -3163,6 +3388,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `67108864`
 - Range: `[0, 2147483647]`
@@ -3174,6 +3400,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `1073741824` (1 GiB)
 - Range: `[-1, 9223372036854775807]`
@@ -3200,6 +3427,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 ### tidb_memory_debug_mode_alarm_ratio
 
 - Scope: SESSION
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Float
 - Default value: `0`
 - This variable represents the memory statistics error value allowed in the TiDB memory debug mode.
@@ -3208,6 +3436,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 ### tidb_memory_debug_mode_min_heap_inuse
 
 - Scope: SESSION
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `0`
 - This variable is used for the internal testing of TiDB. It is **NOT recommended** to set this variable. Enabling this variable will affect the performance of TiDB.
@@ -3225,6 +3454,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Float
 - Default value: `0.7`
 - Range: `[0.0, 1.0]`
@@ -3260,6 +3490,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: `5`
 - Range: `[1, 10000]`
 - When the tidb-server memory usage exceeds the memory alarm threshold and triggers an alarm, TiDB only retains the status files generated during the recent 5 alarms by default. You can adjust this number with this variable.
@@ -3268,6 +3499,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Type: Integer
 - Range: `[1, 256]`
 - Default value: `1`
@@ -3282,6 +3514,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: `1`
 - This variable specifies the concurrency of merging statistics for a partitioned table when TiDB analyzes the partitioned table.
 
@@ -3296,6 +3529,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 </CustomContent>
 
 - Scope: SESSION
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `60`
 - Range: `[10, 216000]`
@@ -3313,6 +3547,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 </CustomContent>
 
 - Scope: SESSION
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `60`
 - Range: `[10, 216000]`
@@ -3323,6 +3558,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Type: Integer
 - Default value: `128`
 - Range: `[1, 9223372036854775807]`
@@ -3337,6 +3573,7 @@ As shown in this diagram, when [`tidb_enable_paging`](#tidb_enable_paging-new-in
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Duration
 - Default value: `60s`
 - The newly started TiFlash node does not provide services. To prevent queries from failing, TiDB limits the tidb-server sending queries to the newly started TiFlash node. This variable indicates the time range in which the newly started TiFlash node is not sent requests.
@@ -3345,6 +3582,7 @@ As shown in this diagram, when [`tidb_enable_paging`](#tidb_enable_paging-new-in
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Enumeration
 - Default value: `OFF`
 - Possible values: `OFF`, `ON`, `WARN`
@@ -3372,6 +3610,7 @@ As shown in this diagram, when [`tidb_enable_paging`](#tidb_enable_paging-new-in
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `OFF`
 - This variable specifies whether to return an error immediately when the error occurs in a non-transactional DML statement.
@@ -3382,6 +3621,7 @@ As shown in this diagram, when [`tidb_enable_paging`](#tidb_enable_paging-new-in
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Type: Boolean
 - Default value: `OFF`
 - This variable is used to set whether the optimizer executes the optimization operation of pushing down the aggregate function to the position before Join, Projection, and UnionAll.
@@ -3391,6 +3631,7 @@ As shown in this diagram, when [`tidb_enable_paging`](#tidb_enable_paging-new-in
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Type: Integer
 - Default value: `1`
 - Range: `[0, 2]`
@@ -3402,6 +3643,7 @@ As shown in this diagram, when [`tidb_enable_paging`](#tidb_enable_paging-new-in
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Type: Float
 - Range: `[0, 18446744073709551615]`
 - Default value: `3.0`
@@ -3411,6 +3653,7 @@ As shown in this diagram, when [`tidb_enable_paging`](#tidb_enable_paging-new-in
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Type: Float
 - Range: `[0, 18446744073709551615]`
 - Default value: `3.0`
@@ -3420,6 +3663,7 @@ As shown in this diagram, when [`tidb_enable_paging`](#tidb_enable_paging-new-in
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Type: Integer
 - Default value: `1`
 - Range: `[0, 2147483647]`
@@ -3433,6 +3677,7 @@ As shown in this diagram, when [`tidb_enable_paging`](#tidb_enable_paging-new-in
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Type: Float
 - Default value: `0.9`
 - Range: `[0, 1]`
@@ -3442,6 +3687,7 @@ As shown in this diagram, when [`tidb_enable_paging`](#tidb_enable_paging-new-in
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Type: Float
 - Range: `[0, 2147483647]`
 - Default value: `3.0`
@@ -3451,6 +3697,7 @@ As shown in this diagram, when [`tidb_enable_paging`](#tidb_enable_paging-new-in
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Type: Boolean
 - Default value: `OFF`
 - Controls whether to enable the optimization rule of [Deriving TopN or Limit from window functions](/derive-topn-from-window.md).
@@ -3459,6 +3706,7 @@ As shown in this diagram, when [`tidb_enable_paging`](#tidb_enable_paging-new-in
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Type: Float
 - Range: `[0, 18446744073709551615]`
 - Default value: `3.0`
@@ -3468,6 +3716,7 @@ As shown in this diagram, when [`tidb_enable_paging`](#tidb_enable_paging-new-in
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Type: Float
 - Range: `[0, 18446744073709551615]`
 - Default value: `1.5`
@@ -3476,6 +3725,7 @@ As shown in this diagram, when [`tidb_enable_paging`](#tidb_enable_paging-new-in
 ### tidb_opt_distinct_agg_push_down
 
 - Scope: SESSION
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Type: Boolean
 - Default value: `OFF`
 - This variable is used to set whether the optimizer executes the optimization operation of pushing down the aggregate function with `distinct` (such as `select count(distinct a) from t`) to Coprocessor.
@@ -3513,14 +3763,26 @@ mysql> desc select count(distinct a) from test.t;
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Type: Boolean
 - Default value: `ON`
 - This variable is used to control whether the optimizer estimates the number of rows based on column order correlation
 
-### `tidb_opt_enable_non_eval_scalar_subquery` <span class="version-mark">New in v7.3.0</span>
+### tidb_opt_enable_hash_join <span class="version-mark">New in v7.4.0</span>
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Boolean
+- Default value: `ON`
+- This variable is used to control whether the optimizer selects hash joins for tables. The value is `ON` by default. If it is set to `OFF`, the optimizer avoids selecting hash joins when generating execution plans, unless no other join algorithm is available.
+- If both the system variable `tidb_opt_enable_hash_join` and the `HASH_JOIN` hint are configured, the `HASH_JOIN` hint takes precedence. Even if `tidb_opt_enable_hash_join` is set to `OFF`, when you specify a `HASH_JOIN` hint in a query, the TiDB optimizer still enforces a hash join plan.
+
+### tidb_opt_enable_non_eval_scalar_subquery <span class="version-mark">New in v7.3.0</span>
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `OFF`
 - This variable is used to control whether the `EXPLAIN` statement disables the execution of constant subqueries that can be expanded at the optimization stage. When this variable is set to `OFF`, the `EXPLAIN` statement expands the subquery in advance at the optimization stage. When this variable is set to `ON`, the `EXPLAIN` statement does not expand the subquery at the optimization stage. For more information, see [Disable subquery expansion](/explain-walkthrough.md#disable-the-early-execution-of-subqueries).
@@ -3529,6 +3791,7 @@ mysql> desc select count(distinct a) from test.t;
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Type: Boolean
 - Default value: `ON`
 - This variable is used to control whether to enable the [TiFlash late materialization](/tiflash/tiflash-late-materialization.md) feature. Note that TiFlash late materialization does not take effect in the [fast scan mode](/tiflash/use-fastscan.md).
@@ -3542,6 +3805,7 @@ mysql> desc select count(distinct a) from test.t;
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Type: Boolean
 - Default value: `OFF`
 - This variable controls whether the non-recursive [Common Table Expressions (CTE)](/sql-statements/sql-statement-with.md) can be executed on TiFlash MPP. By default, when this variable is disabled, CTE is executed on TiDB, which has a large performance gap compared with enabling this feature.
@@ -3552,6 +3816,7 @@ mysql> desc select count(distinct a) from test.t;
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Type: String
 - Default value: `""`
 - This variable is used to control some internal behaviors of the optimizer.
@@ -3564,6 +3829,7 @@ mysql> desc select count(distinct a) from test.t;
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Type: String
 - Default value: `""`
 - This variable is used to control some internal behaviors of the optimizer.
@@ -3576,6 +3842,7 @@ mysql> desc select count(distinct a) from test.t;
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Type: Boolean
 - Default value: `OFF`
 - This variable is used to control whether common table expressions (CTEs) in the entire session are inlined or not. The default value is `OFF`, which means that inlining CTE is not enforced by default. However, you can still inline CTE by specifying the `MERGE()` hint. If the variable is set to `ON`, all CTEs (except recursive CTE) in this session are forced to be inlined.
@@ -3584,6 +3851,7 @@ mysql> desc select count(distinct a) from test.t;
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Type: Boolean
 - Default value: `ON`
 - This variable is used to control whether the Join Method hint, such as [`HASH_JOIN()` hint](/optimizer-hints.md#hash_joint1_name--tl_name-) and [`MERGE_JOIN()` hint](/optimizer-hints.md#merge_joint1_name--tl_name-), affects the Join Reorder optimization process, including the use of [`LEADING()` hint](/optimizer-hints.md#leadingt1_name--tl_name-). The default value is `ON`, which means that it does not affect. If it is set to `OFF`, there might be conflicts in some scenarios where both Join Method hint and `LEADING()` hint are used at the same time.
@@ -3596,6 +3864,7 @@ mysql> desc select count(distinct a) from test.t;
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Type: Boolean
 - Default value: `ON`
 - This variable is used to set whether to enable the optimization rule that converts a subquery to join and aggregation.
@@ -3621,6 +3890,7 @@ mysql> desc select count(distinct a) from test.t;
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Type: Integer
 - Default value: `0`
 - Range: `[0, 2147483647]`
@@ -3631,6 +3901,7 @@ mysql> desc select count(distinct a) from test.t;
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Type: Integer
 - Default value: `100`
 - Range: `[0, 2147483647]`
@@ -3641,6 +3912,7 @@ mysql> desc select count(distinct a) from test.t;
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Type: Float
 - Range: `[0, 2147483647]`
 - Default value: `0.001`
@@ -3650,6 +3922,7 @@ mysql> desc select count(distinct a) from test.t;
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Type: Boolean
 - Default value: `OFF`
 - When the variable value is `ON`, the left join operator always uses inner table as the build side and the right join operator always uses outer table as the build side. If you set the value to `OFF`, the outer join operator can use either side of the tables as the build side.
@@ -3658,15 +3931,29 @@ mysql> desc select count(distinct a) from test.t;
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Type: Float
 - Range: `[0, 2147483647]`
 - Default value: `1.0`
 - Indicates the net cost of transferring 1 byte of data through the network. This variable is internally used in the [Cost Model](/cost-model.md), and it is **NOT** recommended to modify its value.
 
+### tidb_opt_objective <span class="version-mark">New in v7.4.0</span>
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
+- Type: Enumeration
+- Default value: `moderate`
+- Possible values: `moderate`, `determinate`
+- This variable controls the objective of the optimizer. `moderate` maintains the default behavior in versions prior to TiDB v7.4.0, where the optimizer tries to use more information to generate better execution plans. `determinate` mode tends to be more conservative and makes the execution plan more stable.
+- The real-time statistics are the total number of rows and the number of modified rows that are automatically updated based on DML statements. When this variable is set to `moderate` (default), TiDB generates the execution plan based on real-time statistics. When this variable is set to `determinate`, TiDB does not use real-time statistics for generating the execution plan, which will make execution plans more stable.
+- For long-term stable OLTP workload, or if the user is affirmative on the existing execution plans, it is recommended to use the `determinate` mode to reduce the possibility of unexpected execution plan changes. Additionally, you can use the [`LOCK STATS`](/sql-statements/sql-statement-lock-stats.md) to prevent the statistics from being modified and further stabilize the execution plan.
+
 ### tidb_opt_ordering_index_selectivity_threshold <span class="version-mark">New in v7.0.0</span>
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Type: Float
 - Default value: `0`
 - Range: `[0, 1]`
@@ -3707,6 +3994,7 @@ mysql> desc select count(distinct a) from test.t;
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Type: Boolean
 - Default value: `OFF`
 - After you set the value of this variable to `ON`, the optimizer always prefers range scans over full table scans.
@@ -3740,6 +4028,7 @@ explain select * from t where age=5;
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Default value: `ON`
 - This variable controls whether the TiDB optimizer pushes down some filter conditions to the prefix index to avoid unnecessary table lookup and to improve query performance.
 - When this variable value is set to `ON`, some filter conditions are pushed down to the prefix index. Suppose that the `col` column is the index prefix column in a table. The `col is null` or `col is not null` condition in the query is handled as a filter condition on the index instead of a filter condition for the table lookup, so that unnecessary table lookup is avoided.
@@ -3802,6 +4091,7 @@ EXPLAIN FORMAT='brief' SELECT COUNT(1) FROM t WHERE a = 1 AND b IS NOT NULL;
 ### tidb_opt_projection_push_down <span class="version-mark">New in v6.1.0</span>
 
 - Scope: SESSION
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Type: Boolean
 - Default value: `OFF`
 - Specifies whether to allow the optimizer to push `Projection` down to the TiKV or TiFlash coprocessor.
@@ -3810,6 +4100,7 @@ EXPLAIN FORMAT='brief' SELECT COUNT(1) FROM t WHERE a = 1 AND b IS NOT NULL;
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Default value: `67108864` (64 MiB)
 - Scope: `[0, 9223372036854775807]`
 - Unit: Bytes
@@ -3940,6 +4231,7 @@ SHOW WARNINGS;
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Type: Float
 - Range: `[0, 2147483647]`
 - Default value: `1.5`
@@ -3949,6 +4241,7 @@ SHOW WARNINGS;
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Type: Float
 - Range: `[0, 2147483647]`
 - Default value: `20`
@@ -3962,6 +4255,7 @@ SHOW WARNINGS;
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Type: Boolean
 - Default value: `OFF`
 - This variable sets whether the optimizer rewrites the aggregate functions with `DISTINCT` to the two-level aggregate functions, such as rewriting `SELECT b, COUNT(DISTINCT a) FROM t GROUP BY b` to `SELECT b, COUNT(a) FROM (SELECT b, a FROM t GROUP BY b, a) t GROUP BY b`. When the aggregation column has serious skew and the `DISTINCT` column has many different values, this rewriting can avoid the data skew in the query execution and improve the query performance.
@@ -3970,6 +4264,7 @@ SHOW WARNINGS;
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Type: Boolean
 - Default value: `ON`
 - This variable specifies whether to rewrite a `COUNT(DISTINCT)` aggregation into a three-stage aggregation in MPP mode.
@@ -3979,6 +4274,7 @@ SHOW WARNINGS;
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: YES
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Type: Float
 - Range: `[0, 2147483647]`
 - Default value: `24.0`
@@ -3995,6 +4291,7 @@ SHOW WARNINGS;
 </CustomContent>
 
 - Scope: SESSION
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Type: Boolean
 - Default value: `OFF`
 - This variable is used to control whether to allow `INSERT`, `REPLACE`, and `UPDATE` statements to operate on the `_tidb_rowid` column. This variable can be used only when you import data using TiDB tools.
@@ -4002,6 +4299,7 @@ SHOW WARNINGS;
 ### tidb_optimizer_selectivity_level
 
 - Scope: SESSION
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Type: Integer
 - Default value: `0`
 - Range: `[0, 2147483647]`
@@ -4011,6 +4309,7 @@ SHOW WARNINGS;
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Type: Enumeration
 - Default value: `dynamic`
 - Possible values: `static`, `dynamic`, `static-only`, `dynamic-only`
@@ -4020,6 +4319,7 @@ SHOW WARNINGS;
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `ON`
 - This variable controls whether to enable the [ANALYZE configuration persistence](/statistics.md#persist-analyze-configurations) feature.
@@ -4028,6 +4328,7 @@ SHOW WARNINGS;
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `ON`
 - Determines whether to use enhanced pessimistic locking wake-up model for pessimistic transactions. This model strictly controls the wake-up order of pessimistic transactions in the pessimistic locking single-point conflict scenarios to avoid unnecessary wake-ups. It greatly reduces the uncertainty brought by the randomness of the existing wake-up mechanism. If you encounter frequent single-point pessimistic locking conflicts in your business scenario (such as frequent updates to the same row of data), and thus cause frequent statement retries, high tail latency, or even occasional `pessimistic lock retry limit reached` errors, you can try to enable this variable to solve the problem.
@@ -4051,6 +4352,7 @@ SHOW WARNINGS;
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Enumeration
 - Default value: `STRICT`
 - Possible values: `STRICT`, `IGNORE`
@@ -4073,6 +4375,7 @@ SHOW WARNINGS;
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `ON`
 - This variable controls whether to invalidate the plan cache automatically when statistics on related tables are updated.
@@ -4085,6 +4388,7 @@ SHOW WARNINGS;
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Default value: `2097152` (which is 2 MB)
 - Range: `[0, 9223372036854775807]`, in bytes. The memory format with the units "KB|MB|GB|TB" is also supported. `0` means no limit.
 - This variable controls the maximum size of a plan that can be cached in prepared or non-prepared plan cache. If the size of a plan exceeds this value, the plan will not be cached. For more details, see [Memory management of prepared plan cache](/sql-prepared-plan-cache.md#memory-management-of-prepared-plan-cache) and [Non-prepared plan cache](/sql-plan-management.md#usage).
@@ -4101,6 +4405,7 @@ SHOW WARNINGS;
 
 - Scope: GLOBAL
 - Persists to cluster: No, only applicable to the current TiDB instance that you are connecting to.
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `0`
 - Range: `[0, 1]`
@@ -4110,6 +4415,7 @@ SHOW WARNINGS;
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Default value: `OFF`
 - This variable controls whether to use the algorithm with the minimum overhead of network transmission when TiDB selects the [MPP Hash Join algorithm](/tiflash/use-tiflash-mpp-mode.md#algorithm-support-for-the-mpp-mode). If this variable is enabled, TiDB estimates the size of the data to be exchanged in the network using `Broadcast Hash Join` and `Shuffled Hash Join` respectively, and then chooses the one with the smaller size.
 - [`tidb_broadcast_join_threshold_count`](/system-variables.md#tidb_broadcast_join_threshold_count-new-in-v50) and [`tidb_broadcast_join_threshold_size`](/system-variables.md#tidb_broadcast_join_threshold_size-new-in-v50) will not take effect after this variable is enabled.
@@ -4118,6 +4424,7 @@ SHOW WARNINGS;
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Float
 - Default value: `0.1`
 - Range: `[0, 1]`
@@ -4132,6 +4439,7 @@ SHOW WARNINGS;
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `100`
 - Range: `[1, 100000]`
@@ -4146,6 +4454,7 @@ SHOW WARNINGS;
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `-1`
 - Range: `[-1, 256]`
@@ -4157,6 +4466,7 @@ SHOW WARNINGS;
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `4096` (4 KiB)
 - Range: `[0, 1073741824]`
@@ -4174,6 +4484,7 @@ SHOW WARNINGS;
 
 - Scope: GLOBAL
 - Persists to cluster: No, only applicable to the current TiDB instance that you are connecting to.
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `OFF`
 - This variable is used to optimize the timestamp acquisition, which is suitable for scenarios with read-committed isolation level where read-write conflicts are rare. Enabling this variable can avoid the latency and cost of getting the global timestamp, and can optimize the transaction-level read latency.
@@ -4187,6 +4498,7 @@ SHOW WARNINGS;
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `OFF`
 - This variable is used to optimize the acquisition of timestamps and is suitable for scenarios with few point-write conflicts in `READ-COMMITTED` isolation level of pessimistic transactions. Enabling this variable can avoid the latency and overhead brought by obtaining the global timestamps during the execution of point-write statements. Currently, this variable is applicable to three types of point-write statements: `UPDATE`, `DELETE`, and `SELECT ...... FOR UPDATE`. A point-write statement refers to a write statement that uses the primary key or unique key as a filter condition and the final execution operator contains `POINT-GET`.
@@ -4195,6 +4507,7 @@ SHOW WARNINGS;
 ### tidb_read_consistency <span class="version-mark">New in v5.4.0</span>
 
 - Scope: SESSION
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Type: String
 - Default value: `strict`
 - This variable is used to control the read consistency for an auto-commit read statement.
@@ -4204,6 +4517,7 @@ SHOW WARNINGS;
 ### tidb_read_staleness <span class="version-mark">New in v5.4.0</span>
 
 - Scope: SESSION
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Type: Integer
 - Default value: `0`
 - Range: `[-2147483648, 0]`
@@ -4221,6 +4535,7 @@ SHOW WARNINGS;
 
 - Scope: GLOBAL
 - Persists to cluster: No, only applicable to the current TiDB instance that you are connecting to.
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `ON`
 - This variable is used to control whether to include the execution plan of slow queries in the slow log.
@@ -4237,6 +4552,7 @@ SHOW WARNINGS;
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `OFF`
 - This variable controls whether to hide user information in the SQL statement being recorded into the TiDB log and slow log.
@@ -4246,6 +4562,7 @@ SHOW WARNINGS;
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `ON`
 - This variable controls whether the optimizer can use a query condition including null equivalence as a prefix condition for index access.
@@ -4255,6 +4572,7 @@ SHOW WARNINGS;
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: Before v7.2.0, the default value is `OFF`. Starting from v7.2.0, the default value is `ON`.
 - Specifies whether to remove `ORDER BY` clause in a subquery.
@@ -4263,6 +4581,7 @@ SHOW WARNINGS;
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Type: Enumeration
 - Default value: `leader`
 - Possible values: `leader`, `follower`, `leader-and-follower`, `prefer-leader`, `closest-replicas`, `closest-adaptive`, and `learner`. The `learner` value is introduced in v6.6.0.
@@ -4281,6 +4600,7 @@ SHOW WARNINGS;
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `OFF`
 - `tidb_restricted_read_only` and [`tidb_super_read_only`](#tidb_super_read_only-new-in-v531) behave similarly. In most cases, you should use [`tidb_super_read_only`](#tidb_super_read_only-new-in-v531) only.
@@ -4303,6 +4623,7 @@ SHOW WARNINGS;
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `10`
 - Range: `[-1, 9223372036854775807]`
@@ -4320,6 +4641,7 @@ SHOW WARNINGS;
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `2`
 - Range: `[1, 2]`
@@ -4331,6 +4653,7 @@ SHOW WARNINGS;
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Type: Enumeration
 - Default value: `OFF`
 - Possible values: `OFF`, `LOCAL`
@@ -4340,6 +4663,7 @@ SHOW WARNINGS;
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Type: Enumeration
 - Default value: `IN`
 - Possible values: `IN`
@@ -4349,6 +4673,7 @@ SHOW WARNINGS;
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `OFF`
 - By default, Regions are split for a new table when it is being created in TiDB. After this variable is enabled, the newly split Regions are scattered immediately during the execution of the `CREATE TABLE` statement. This applies to the scenario where data need to be written in batches right after the tables are created in batches, because the newly split Regions can be scattered in TiKV beforehand and do not have to wait to be scheduled by PD. To ensure the continuous stability of writing data in batches, the `CREATE TABLE` statement returns success only after the Regions are successfully scattered. This makes the statement's execution time multiple times longer than that when you disable this variable.
@@ -4358,6 +4683,7 @@ SHOW WARNINGS;
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: `80%`
 - Range:
     - You can set the value in the percentage format, which means the percentage of the memory usage relative to the total memory. The value range is `[1%, 99%]`.
@@ -4371,6 +4697,7 @@ SHOW WARNINGS;
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: `70%`
 - Range: `[50%, 99%]`
 - The threshold at which TiDB tries to trigger GC. When the memory usage of TiDB reaches the value of `tidb_server_memory_limit` \* the value of `tidb_server_memory_limit_gc_trigger`, TiDB will actively trigger a Golang GC operation. Only one GC operation will be triggered in one minute.
@@ -4379,14 +4706,24 @@ SHOW WARNINGS;
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: `134217728` (which is 128 MB)
 - Range: `[128, 9223372036854775807]`, in bytes. The memory format with the units "KB|MB|GB|TB" is also supported.
 - After you enable the memory limit, TiDB will terminate the SQL statement with the highest memory usage on the current instance. This variable specifies the minimum memory usage of the SQL statement to be terminated. If the memory usage of a TiDB instance that exceeds the limit is caused by too many sessions with low memory usage, you can properly lower the value of this variable to allow more sessions to be canceled.
 
-### `tidb_session_plan_cache_size` <span class="version-mark">New in v7.1.0</span>
+### tidb_session_alias <span class="version-mark">New in v7.4.0</span>
+
+- Scope: SESSION
+- Persists to cluster: No
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
+- Default value: ""
+- You can use this variable to customize the value of the `session_alias` column in the logs related to the current session, which helps identify the session in troubleshooting. This setting affects the logs of multiple nodes involved in the statement execution (including TiKV). The maximum length of this variable is limited to 64 characters, and any characters exceeding the length will be truncated automatically. Spaces at the end of the value will also be removed automatically.
+
+### tidb_session_plan_cache_size <span class="version-mark">New in v7.1.0</span>
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `100`
 - Range: `[1, 100000]`
@@ -4397,6 +4734,7 @@ SHOW WARNINGS;
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `9223372036854775807`
 - Range: `[1, 9223372036854775807]`
@@ -4406,6 +4744,7 @@ SHOW WARNINGS;
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `OFF`
 - When this variable is enabled, TiDB does not collect or record the metrics that are not used in the Grafana panels.
@@ -4414,6 +4753,7 @@ SHOW WARNINGS;
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `OFF`
 - This variable is used to set whether to skip ASCII validation.
@@ -4423,6 +4763,7 @@ SHOW WARNINGS;
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `OFF`
 - After this switch is enabled, if an isolation level unsupported by TiDB is assigned to `tx_isolation`, no error is reported. This helps improve compatibility with applications that set (but do not depend on) a different isolation level.
@@ -4441,6 +4782,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `ON`
 - When accesing a partitioned table in [dynamic pruning mode](/partitioned-table.md#dynamic-pruning-mode), TiDB aggregates the statistics of each partition to generate GlobalStats. This variable controls the generation of GlobalStats when partition statistics are missing.
@@ -4452,6 +4794,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `OFF`
 - This variable is used to set whether to skip UTF-8 validation.
@@ -4473,6 +4816,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 
 - Scope: GLOBAL
 - Persists to cluster: No, only applicable to the current TiDB instance that you are connecting to.
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `300`
 - Range: `[-1, 9223372036854775807]`
@@ -4490,6 +4834,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 </CustomContent>
 
 - Scope: SESSION
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: ""
 - When `INFORMATION_SCHEMA.SLOW_QUERY` is queried, only the slow query log name set by `slow-query-file` in the configuration file is parsed. The default slow query log name is "tidb-slow.log". To parse other logs, set the `tidb_slow_query_file` session variable to a specific file path, and then query `INFORMATION_SCHEMA.SLOW_QUERY` to parse the slow query log based on the set file path.
 
@@ -4502,6 +4847,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 ### tidb_snapshot
 
 - Scope: SESSION
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: ""
 - This variable is used to set the time point at which the data is read by the session. For example, when you set the variable to "2017-11-11 20:20:20" or a TSO number like "400036290571534337", the current session reads the data of this moment.
 
@@ -4509,6 +4855,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `1`
 - Range: `[1, 15]`
@@ -4527,14 +4874,11 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 
 ### tidb_stats_cache_mem_quota <span class="version-mark">New in v6.1.0</span>
 
-> **Warning:**
->
-> This variable is an experimental feature. It is not recommended to use it in production environments.
-
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
-- Default value: `0`
+- Default value: `0`, which means that the memory quota is automatically set to half of the total memory size of the TiDB instance.
 - Range: `[0, 1099511627776]`
 - This variable sets the memory quota for the TiDB statistics cache.
 
@@ -4542,6 +4886,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `ON`
 - This variable controls how TiDB behaves when the waiting time of SQL optimization reaches the timeout to synchronously load complete column statistics. The default value `ON` means that the SQL optimization gets back to using pseudo statistics after the timeout. If this variable to `OFF`, SQL execution fails after the timeout.
@@ -4550,6 +4895,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Type: Integer
 - Default value: `100`
 - Range: `[0, 2147483647]`
@@ -4571,6 +4917,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 > Statements summary persistence is an experimental feature. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
 
 - Scope: GLOBAL
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `OFF`
 - This variable is read-only. It controls whether to enable [statements summary persistence](/statement-summary-tables.md#persist-statements-summary).
@@ -4596,6 +4943,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 > Statements summary persistence is an experimental feature. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
 
 - Scope: GLOBAL
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: String
 - Default value: `"tidb-statements.log"`
 - This variable is read-only. It specifies the file to which persistent data is written when [statements summary persistence](/statement-summary-tables.md#persist-statements-summary) is enabled.
@@ -4621,6 +4969,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 > Statements summary persistence is an experimental feature. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
 
 - Scope: GLOBAL
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `0`
 - This variable is read-only. It specifies the maximum number of data files that can be persisted when [statements summary persistence](/statement-summary-tables.md#persist-statements-summary) is enabled.
@@ -4646,6 +4995,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 > Statements summary persistence is an experimental feature. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
 
 - Scope: GLOBAL
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `3`
 - Unit: day
@@ -4672,6 +5022,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 > Statements summary persistence is an experimental feature. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
 
 - Scope: GLOBAL
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `64`
 - Unit: MiB
@@ -4687,6 +5038,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `24`
 - Range: `[0, 255]`
@@ -4696,6 +5048,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `OFF`
 - This variable is used to control whether to include the SQL information of TiDB in [statement summary tables](/statement-summary-tables.md).
@@ -4704,6 +5057,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `4096`
 - Range: `[0, 2147483647]`
@@ -4713,6 +5067,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `3000`
 - Range: `[1, 32767]`
@@ -4722,6 +5077,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `1800`
 - Range: `[1, 2147483647]`
@@ -4732,6 +5088,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Type: Integer
 - Default value: `4`
 - Range: `[0, 25000]`
@@ -4741,6 +5098,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `0`
 - Range: `[0, 9223372036854775807]`
@@ -4750,6 +5108,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `1`
 - This variable sets the concurrency of the `StreamAgg` operator when queries are executed.
@@ -4759,6 +5118,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `OFF`
 - `tidb_super_read_only` aims to be implemented as a replacement of the MySQL variable `super_read_only`. However, because TiDB is a distributed database, `tidb_super_read_only` does not make the database read-only immediately after execution, but eventually.
@@ -4777,6 +5137,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `OFF`
 - This variable is used to control whether the `SYSDATE` function can be replaced by the `NOW` function. This configuration item has the same effect as the MySQL option [`sysdate-is-now`](https://dev.mysql.com/doc/refman/8.0/en/server-options.html#option_mysqld_sysdate-is-now).
@@ -4785,6 +5146,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `1`
 - Range: `[1, 256]`
@@ -4794,6 +5156,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `3`
 - Range: `[1, 10]`
@@ -4804,6 +5167,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `67108864`
 - Range: `[1048576, 137438953472]`
@@ -4822,6 +5186,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `5000`
 - Range: `[1, 10000]`
@@ -4854,6 +5219,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `100`
 - Range: `[1, 5000]`
@@ -4874,6 +5240,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `ON`
 - This variable controls whether TiDB tracks the memory usage of aggregate functions.
@@ -4886,6 +5253,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Float
 - Default value: `0`
 - Range: `[0, 10]`
@@ -4906,6 +5274,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: `0`
 - Range: `[0, 9223372036854775807]`
 - This variable is used to limit the rate of `DELETE` statements in TTL jobs on each TiDB node. The value represents the maximum number of `DELETE` statements allowed per second in a single node in a TTL job. When this variable is set to `0`, no limit is applied. For more information, refer to [Time to Live](/time-to-live.md).
@@ -4914,6 +5283,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: `100`
 - Range: `[1, 10240]`
 - This variable is used to set the maximum number of rows that can be deleted in a single `DELETE` transaction in a TTL job. For more information, refer to [Time to Live](/time-to-live.md).
@@ -4922,6 +5292,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: `4`
 - Range: `[1, 256]`
 - This variable is used to set the maximum concurrency of TTL jobs on each TiDB node. For more information, refer to [Time to Live](/time-to-live.md).
@@ -4930,6 +5301,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: `ON`
 - Type: Boolean
 - This variable is used to control whether TTL jobs are enabled. If it is set to `OFF`, all tables with TTL attributes automatically stop cleaning up expired data. For more information, refer to [Time to Live](/time-to-live.md).
@@ -4938,6 +5310,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: `500`
 - Range: `[1, 10240]`
 - This variable is used to set the `LIMIT` value of each `SELECT` statement used to scan expired data in a TTL job. For more information, refer to [Time to Live](/time-to-live.md).
@@ -4946,6 +5319,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: `4`
 - Range: `[1, 256]`
 - This variable is used to set the maximum concurrency of TTL scan jobs on each TiDB node. For more information, refer to [Time to Live](/time-to-live.md).
@@ -4953,6 +5327,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 ### tidb_ttl_job_schedule_window_start_time <span class="version-mark">New in v6.5.0</span>
 
 - Scope: GLOBAL
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Time
 - Persists to cluster: Yes
 - Default value: `00:00 +0000`
@@ -4961,6 +5336,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 ### tidb_ttl_job_schedule_window_end_time <span class="version-mark">New in v6.5.0</span>
 
 - Scope: GLOBAL
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Time
 - Persists to cluster: Yes
 - Default value: `23:59 +0000`
@@ -4974,6 +5350,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `-1`
 - Range: `-1` and `[1, 256]`
@@ -4983,6 +5360,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Enumeration
 - Default value: `FAST`
 - Possible values: `OFF`, `FAST`, `STRICT`
@@ -4998,6 +5376,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `16384`
 - Range: `[1, 1073741824]`
@@ -5019,6 +5398,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Enumeration
 - Default value: `pessimistic`
 - Possible values: `pessimistic`, `optimistic`
@@ -5030,6 +5410,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `ON`
 - This variable is used to control whether to enable the execution plan binding feature. It is enabled by default, and can be disabled by assigning the `OFF` value. For the use of the execution plan binding, see [Execution Plan Binding](/sql-plan-management.md#create-a-binding).
@@ -5037,6 +5418,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 ### tidb_wait_split_region_finish
 
 - Scope: SESSION
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `ON`
 - It usually takes a long time to scatter Regions, which is determined by PD scheduling and TiKV loads. This variable is used to set whether to return the result to the client after all Regions are scattered completely when the `SPLIT REGION` statement is being executed:
@@ -5047,6 +5429,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 ### tidb_wait_split_region_timeout
 
 - Scope: SESSION
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `300`
 - Range: `[1, 2147483647]`
@@ -5061,6 +5444,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `-1`
 - Range: `[1, 256]`
@@ -5071,6 +5455,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 ### tiflash_fastscan <span class="version-mark">New in v6.3.0</span>
 
 - Scope: SESSION | GLOBAL
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: `OFF`
 - Type: Boolean
 - If [FastScan](/tiflash/use-fastscan.md) is enabled (set to `ON`), TiFlash provides more efficient query performance, but does not guarantee the accuracy of the query results or data consistency.
@@ -5078,6 +5463,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 ### tiflash_fine_grained_shuffle_batch_size <span class="version-mark">New in v6.2.0</span>
 
 - Scope: SESSION | GLOBAL
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: `8192`
 - Range: `[1, 18446744073709551615]`
 - When Fine Grained Shuffle is enabled, the window function pushed down to TiFlash can be executed in parallel. This variable controls the batch size of the data sent by the sender.
@@ -5087,6 +5473,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `0`
 - Range: `[-1, 1024]`
@@ -5097,6 +5484,31 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
     * Integer greater than 0: the Fine Grained Shuffle feature is enabled. The window function pushed down to TiFlash is executed in multiple threads. The concurrency level is: min(`tiflash_fine_grained_shuffle_stream_count`, the number of physical threads on TiFlash nodes).
 - Theoretically, the performance of the window function increases linearly with this value. However, if the value exceeds the actual number of physical threads, it instead leads to performance degradation.
 
+### tiflash_mem_quota_query_per_node <span class="version-mark">New in v7.4.0</span>
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Integer
+- Default value: `0`
+- Range: `[-1, 9223372036854775807]`
+- This variable limits the maximum memory usage for a query on a TiFlash node. When the memory usage of a query exceeds this limit, TiFlash returns an error and terminates the query. Setting this variable to `-1` or `0` means no limit. When this variable is set to a value greater than `0` and [`tiflash_query_spill_ratio`](/system-variables.md#tiflash_query_spill_ratio-new-in-v740) is set to a valid value, TiFlash enables [query-level spilling](/tiflash/tiflash-spill-disk.md#query-level-spilling).
+
+### tiflash_query_spill_ratio <span class="version-mark">New in v7.4.0</span>
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Float
+- Default value: `0.7`
+- Range: `[0, 0.85]`
+- This variable controls the threshold for TiFlash [query-level spilling](/tiflash/tiflash-spill-disk.md#query-level-spilling). `0` means disabling the automatic query-level spilling. When this variable is greater than `0` and the memory usage of a query exceeds [`tiflash_mem_quota_query_per_node`](/system-variables.md#tiflash_mem_quota_query_per_node-new-in-v740) * `tiflash_query_spill_ratio`, TiFlash triggers query-level spilling, which spills data of supported operators in the query as needed.
+
+> **Note:**
+>
+> - This variable only takes effect when [`tiflash_mem_quota_query_per_node`](/system-variables.md#tiflash_mem_quota_query_per_node-new-in-v740) is greater than `0`. In other words, if [tiflash_mem_quota_query_per_node](/system-variables.md#tiflash_mem_quota_query_per_node-new-in-v740) is `0` or `-1`, query-level spilling will not be enabled even if `tiflash_query_spill_ratio` is greater than `0`.
+> - When TiFlash query-level spilling is enabled, the spilling thresholds for individual TiFlash operators automatically become invalidated. In other words, if both [`tiflash_mem_quota_query_per_node`](/system-variables.md#tiflash_mem_quota_query_per_node-new-in-v740) and `tiflash_query_spill_ratio` are greater than 0, the three variables [tidb_max_bytes_before_tiflash_external_sort](/system-variables.md#tidb_max_bytes_before_tiflash_external_sort-new-in-v700), [tidb_max_bytes_before_tiflash_external_group_by](/system-variables.md#tidb_max_bytes_before_tiflash_external_group_by-new-in-v700), and [tidb_max_bytes_before_tiflash_external_join](/system-variables.md#tidb_max_bytes_before_tiflash_external_join-new-in-v700) become invalidated automatically, equivalent to setting them to `0`.
+
 ### tiflash_replica_read <span class="version-mark">New in v7.3.0</span>
 
 > **Note:**
@@ -5105,6 +5517,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Enumeration
 - Default value: `all_replicas`
 - Value options: `all_replicas`, `closest_adaptive`, or `closest_replicas`
@@ -5122,10 +5535,30 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 
 </CustomContent>
 
+### tikv_client_read_timeout <span class="version-mark">New in v7.4.0</span>
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Integer
+- Default value: `0`
+- Range: `[0, 2147483647]`
+- Unit: Millisecond
+- You can use `tikv_client_read_timeout` to set the timeout for TiDB to send a TiKV RPC read request in a query. When a TiDB cluster is in an environment with unstable network or serious TiKV I/O latency jitter, and your application is sensitive to the latency of the SQL queries, you can set `tikv_client_read_timeout` to reduce the timeout of the TiKV RPC read requests. In this case, when a TiKV node has I/O latency jitter, TiDB can time out quickly and re-send the RPC request to the TiKV node where the next TiKV Region Peer is located. If the requests of all TiKV Region Peers time out, TiDB will retry with the default timeout (usually 40 seconds).
+- You can also use the optimizer hint `/*+ SET_VAR(TIKV_CLIENT_READ_TIMEOUT=N) */` in a query to set the timeout for TiDB to send a TiKV RPC read request. If both the optimizer hint and this system variable are set, the optimizer hint takes higher priority.
+- The default value `0` indicates that the default timeout (usually 40 seconds) is used.
+
+> **Note:**
+>
+> - Normally, a regular query takes a few milliseconds, but occasionally when a TiKV node is in unstable network or gets I/O jitter, the query can take more than 1 second or even 10 seconds. In this case, you can set the TiKV RPC read request timeout to 100 milliseconds for a specific query by using the optimizer hint `/*+ SET_VAR(TIKV_CLIENT_READ_TIMEOUT=100) */`. In this way, even if the response of a TiKV node is slow, TiDB can quickly time out and then re-send the RPC request to the TiKV node where the next TiKV Region Peer is located. Because the probability of two TiKV nodes getting I/O jitter simultaneously is low, the query can be completed usually within a few milliseconds to 110 milliseconds.
+> - Do not set too small values (for example, 1 millisecond) for `tikv_client_read_timeout`. Otherwise, the requests might time out easily when the workload of a TiDB cluster is high, and subsequent retries will further increase the load on the TiDB cluster.
+> - If you need to set different timeout values for different types of queries, it is recommended to use optimizer hints.
+
 ### time_zone
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: `SYSTEM`
 - This variable returns the current time zone. Values can be specified as either an offset such as '-8:00' or a named zone 'America/Los_Angeles'.
 - The value `SYSTEM` means that the time zone should be the same as the system host, which is available via the [`system_time_zone`](#system_time_zone) variable.
@@ -5133,6 +5566,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 ### timestamp
 
 - Scope: SESSION
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Float
 - Default value: `0`
 - Range: `[0, 2147483647]`
@@ -5142,6 +5576,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Enumeration
 - Default value: `REPEATABLE-READ`
 - Possible values: `READ-UNCOMMITTED`, `READ-COMMITTED`, `REPEATABLE-READ`, `SERIALIZABLE`
@@ -5162,6 +5597,7 @@ Internally, the TiDB parser transforms the `SET TRANSACTION ISOLATION LEVEL [REA
 ### tx_read_ts
 
 - Scope: SESSION
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: ""
 - In the Stale Read scenarios, this session variable is used to help record the Stable Read timestamp value.
 - This variable is used for the internal operation of TiDB. It is **NOT recommended** to set this variable.
@@ -5169,6 +5605,7 @@ Internally, the TiDB parser transforms the `SET TRANSACTION ISOLATION LEVEL [REA
 ### txn_scope
 
 - Scope: SESSION
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: `global`
 - Value options: `global` and `local`
 - This variable is used to set whether the current session transaction is a global transaction or a local transaction.
@@ -5178,6 +5615,7 @@ Internally, the TiDB parser transforms the `SET TRANSACTION ISOLATION LEVEL [REA
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: `ON`
 - Type: Boolean
 - This variable is a check item in the password complexity check. It checks whether the password matches the username. This variable takes effect only when [`validate_password.enable`](#validate_passwordenable-new-in-v650) is enabled.
@@ -5188,6 +5626,7 @@ Internally, the TiDB parser transforms the `SET TRANSACTION ISOLATION LEVEL [REA
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: `""`
 - Type: String
 - This variable is a check item in the password complexity check. It checks whether the password matches the dictionary. This variable takes effect only when [`validate_password.enable`](#validate_passwordenable-new-in-v650) is enabled and [`validate_password.policy`](#validate_passwordpolicy-new-in-v650) is set to `2` (STRONG).
@@ -5198,6 +5637,7 @@ Internally, the TiDB parser transforms the `SET TRANSACTION ISOLATION LEVEL [REA
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: `OFF`
 - Type: Boolean
 - This variable controls whether to perform password complexity check. If this variable is set to `ON`, TiDB performs the password complexity check when you set a password.
@@ -5206,6 +5646,7 @@ Internally, the TiDB parser transforms the `SET TRANSACTION ISOLATION LEVEL [REA
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `8`
 - Range: `[0, 2147483647]`
@@ -5217,6 +5658,7 @@ Internally, the TiDB parser transforms the `SET TRANSACTION ISOLATION LEVEL [REA
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `1`
 - Range: `[0, 2147483647]`
@@ -5227,6 +5669,7 @@ Internally, the TiDB parser transforms the `SET TRANSACTION ISOLATION LEVEL [REA
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `1`
 - Range: `[0, 2147483647]`
@@ -5236,6 +5679,7 @@ Internally, the TiDB parser transforms the `SET TRANSACTION ISOLATION LEVEL [REA
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Enumeration
 - Default value: `1`
 - Value options: `0`, `1`, `2`
@@ -5249,6 +5693,7 @@ Internally, the TiDB parser transforms the `SET TRANSACTION ISOLATION LEVEL [REA
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `1`
 - Range: `[0, 2147483647]`
@@ -5257,24 +5702,28 @@ Internally, the TiDB parser transforms the `SET TRANSACTION ISOLATION LEVEL [REA
 ### version
 
 - Scope: NONE
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: `5.7.25-TiDB-`(tidb version)
 - This variable returns the MySQL version, followed by the TiDB version. For example '5.7.25-TiDB-v7.3.0'.
 
 ### version_comment
 
 - Scope: NONE
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: (string)
 - This variable returns additional details about the TiDB version. For example, 'TiDB Server (Apache License 2.0) Community Edition, MySQL 5.7 compatible'.
 
 ### version_compile_machine
 
 - Scope: NONE
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: (string)
 - This variable returns the name of the CPU architecture on which TiDB is running.
 
 ### version_compile_os
 
 - Scope: NONE
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: (string)
 - This variable returns the name of the OS on which TiDB is running.
 
@@ -5282,6 +5731,7 @@ Internally, the TiDB parser transforms the `SET TRANSACTION ISOLATION LEVEL [REA
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
 - Default value: `28800`
 - Range: `[0, 31536000]`
@@ -5291,6 +5741,7 @@ Internally, the TiDB parser transforms the `SET TRANSACTION ISOLATION LEVEL [REA
 ### warning_count
 
 - Scope: SESSION
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: `0`
 - This read-only variable indicates the number of warnings that occurred in the statement that was previously executed.
 
@@ -5298,6 +5749,7 @@ Internally, the TiDB parser transforms the `SET TRANSACTION ISOLATION LEVEL [REA
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `ON`
 - This variable controls whether to use the high precision mode when computing the window functions.
