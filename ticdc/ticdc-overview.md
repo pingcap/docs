@@ -24,6 +24,7 @@ TiCDC has the following key capabilities:
 - Bidirectional replication between TiDB clusters, allowing the creation of a multi-active TiDB solution using TiCDC.
 - Replicating incremental data from a TiDB cluster to a MySQL database or other MySQL-compatible databases with low latency.
 - Replicating incremental data from a TiDB cluster to a Kafka cluster. The recommended data format includes [Canal-JSON](/ticdc/ticdc-canal-json.md) and [Avro](/ticdc/ticdc-avro-protocol.md).
+- Replicating incremental data from a TiDB cluster to storage services, such as Amazon S3, GCS, Azure Blob Storage, and NFS.
 - Replicating tables with the ability to filter databases, tables, DMLs, and DDLs.
 - High availability with no single point of failure, supporting dynamically adding and deleting TiCDC nodes.
 - Cluster management through [Open API](/ticdc/ticdc-open-api.md), including querying task status, dynamically modifying task configuration, and creating or deleting tasks.
