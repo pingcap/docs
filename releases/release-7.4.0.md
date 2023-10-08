@@ -364,9 +364,10 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.4/quick-start-with-
         - Improve fault tolerance of BR when it fails to connect to PD or external S3 storage [#42909](https://github.com/pingcap/tidb/issues/42909) @[Leavrth](https://github.com/Leavrth)
         - Add a new restore parameter `WaitTiflashReady`. When this parameter is enabled, the restore operation will be completed after TiFlash replicas are successfully replicated [#43828](https://github.com/pingcap/tidb/issues/43828) [#46302](https://github.com/pingcap/tidb/issues/46302) @[3pointer](https://github.com/3pointer)
         - Reduce the CPU overhead of log backup `resolve lock` [#40759](https://github.com/pingcap/tidb/issues/40759) @[3pointer](https://github.com/3pointer)
+
     + TiCDC **tw@Oreoxmt 1**
 
-        - Optimize the execution logic of replicating the `ADD INDEX` DDL operations to avoid blocking subsequent DML statements [#9644](https://github.com/pingcap/tiflow/issues/9644)
+        - Optimize the execution logic of replicating the `ADD INDEX` DDL operations to avoid blocking subsequent DML statements [#9644](https://github.com/pingcap/tiflow/issues/9644) @[sdojjy](https://github.com/sdojjy)
 
     + TiDB Lightning **tw@Oreoxmt 4**
 
@@ -379,9 +380,9 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.4/quick-start-with-
 
 + TiDB
 
-    - Fix the issue that the `BatchPointGet` operator returns incorrect results for tables that are not hash partitioned [#45891](https://github.com/pingcap/tidb/pull/45891) @[Defined2014](https://github.com/Defined2014)
-    - Fix the issue that the `BatchPointGet` operator returns incorrect results for hash partitioned tables [#46779](https://github.com/pingcap/tidb/pull/46779) @[jiyfhust](https://github.com/jiyfhust)
-    - Fix the issue that the TiDB parser remains in a state and causes parsing failure [#45903](https://github.com/pingcap/tidb/pull/45903) @[qw4990](https://github.com/qw4990)
+    - Fix the issue that the `BatchPointGet` operator returns incorrect results for tables that are not hash partitioned [#45889](https://github.com/pingcap/tidb/issues/45889) @[Defined2014](https://github.com/Defined2014)
+    - Fix the issue that the `BatchPointGet` operator returns incorrect results for hash partitioned tables [#46779](https://github.com/pingcap/tidb/issues/46779) @[jiyfhust](https://github.com/jiyfhust)
+    - Fix the issue that the TiDB parser remains in a state and causes parsing failure [#45898](https://github.com/pingcap/tidb/issues/45898) @[qw4990](https://github.com/qw4990)
     - Fix the issue that the table disappears after executing `EXCHANGE PARTITION` [#45920](https://github.com/pingcap/tidb/issues/45920) @[mjonss](https://github.com/mjonss)
     - Fix the issue that `EXCHANGE PARTITION` does not check constraints [#45922](https://github.com/pingcap/tidb/issues/45920) @[mjonss](https://github.com/mjonss)
     - Fix the issue that `EXCHANGE PARTITION` mistakenly succeeds [#46492](https://github.com/pingcap/tidb/issues/46492) @[mjonss](https://github.com/mjonss)
