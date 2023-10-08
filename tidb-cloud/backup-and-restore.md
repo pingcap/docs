@@ -6,81 +6,110 @@ aliases: ['/tidbcloud/restore-deleted-tidb-cluster']
 
 # Back Up and Restore TiDB Dedicated Data
 
-This document describes how to back up and restore your TiDB Dedicated cluster data on TiDB Cloud.
+This document describes how to back up and restore your TiDB Dedicated cluster data on TiDB Cloud. TiDB Dedicated supports both automatic backup and manual backup. Meanwhile, TiDB Dedicated supports two types of data restoration: restore backup data to a new cluster and restore a deleted cluster from the recycle bin.
 
-> **Tip:**
+> **Tip**
 >
 > To learn how to back up and restore TiDB Serverless cluster data, see [Back Up and Restore TiDB Serverless Data](/tidb-cloud/backup-and-restore-serverless.md).
 
 ## Limitations
 
 - TiDB Cloud does not support restoring tables in the `mysql` schema, including user permissions and system variables.
-- If you turn on and off PITR (Point-in-time Recovery) multiple times, you can only choose a time point within the recoverable range after the most recent PITR is enabled. The earlier recoverable range is not accessible.
 
-## Backup
+- If you turn on and off Point-in-time Restore (Point-in-time Restore) multiple times, you can only choose a time point within the recoverable range after the most recent Point-in-time Restore is enabled. The earlier recoverable range is not accessible.
 
-TiDB Dedicated supports automatic backup and manual backup.
+## Turn on Auto Backup
 
-Automatic backups are scheduled for your TiDB Dedicated clusters according to the backup setting, which can reduce your loss in extreme disaster situations. You can also pick a backup snapshot and restore it into a new TiDB Dedicated cluster at any time.
+TiDB Dedicated supports both [snapshot backups](/br/br-snapshot-guide.md) and [log backups](/br/br-pitr-guide.md). Snapshot backup enables users to restore to the the backup point. By default, snapshot backups are taken automatically and stored according to your backup retention policy. 
 
-### Automatic backup
+You can disable auto backup at any time.
 
-By the automatic backup, you can back up the TiDB Dedicated cluster data every day at the backup time you have set. To set the backup time, perform the following steps:
+### Turn on Point-in-time Restore / Log Backup
+
+> **Note**
+>
+> Point-in-time Restore / Log Backup is supported from **TiDB v6.4.0**.
+
+This option enables users to restore to any point in time whithin the backup retention window to a new cluster. It could be used to reduce RPO in disaster recovery, undo mistaken DML, and audit historical business data. It's strongly recommended to turn on this feature. It's charged as same as snpashot backup. For more information, refer to: [Data Backup Cost](https://www.pingcap.com/tidb-dedicated-pricing-details/#backup-storage-cost).
+
+To turn on this feature:
 
 1. Navigate to the **Backup** page of a TiDB Dedicated cluster.
 
-2. Click **Backup Settings**. The setting window displays.
+2. Click **Backup Settings**.
 
-3. In the setting window, configure the automatic backup:
+3. Turn the **Auto Backup** switch to **ON**.
 
-    - Toggle the **Auto Backup** switch to **On**.
+4. Turn the **Point-in-time Restore** switch to **ON**.
 
-    - In **Backup Cycle**, select either the **Daily** or **Weekly** checkbox. If you select **Weekly**, you need to specify the days of the week for the backup.
+  > **Warning**
+  >
+  > - When weekly backup is enabled, point-in-time restore will be enabled by default and cannot be modified.
+  > - If the backup schedule is changed from weekly to daily, point-in-time restore remains its original settings. You can manually disable it if needed.
+  > - Once point-in-time restore configuration is enabled, **it will only become effective after the completion of the next backup task**. If you want point-in-time restore take effect immediately, you need to manually initiate a backup after configuring it.
+  > - 
 
-    - In **Backup Time**, schedule a start time for the daily or weekly cluster backup.
+5. Click **Confirm** to preview the configuration changes.
 
-        It is recommended to schedule automatic backup at a low workload period. If you do not specify a preferred backup time, TiDB Cloud assigns a default backup time, which is 2:00 AM in the time zone of the region where the cluster is located.
+6. Click **Confirm** again to save changes.
 
-    - In **Backup Retention**, configure the minimum backup data retention period.
+### Configure backup schedule
 
-    - Turn on or off the PITR (**Point-in-time Recovery**) feature.
+  > **Warning**
+  >
+  > - When weekly backup is enabled, point-in-time restore will be enabled by default and cannot be modified.
+  > - If the backup schedule is changed from weekly to daily, point-in-time restore remains its original settings. You can manually disable it if needed.
 
-        > **Note:**
-        >
-        > - The PITR feature is enabled by default and cannot be disabled when you enable weekly backup.
-        > - If you change the backup cycle from weekly to daily, the PITR feature remains enabled. You can manually disable it if needed.
+TiDB Dedicated supports two backup schedules: Daily and Weekly. By default, the backup schedule is set to Daily.You can choose a specific time of the day or week to start snapshot backup.
 
-        PITR supports restoring data of any point in time to a new cluster. You can use it to:
+To configure backup schedule:
 
-        - Reduce RPO in disaster recovery.
-        - Resolve cases of data write errors by restoring point-in-time that is before the error event.
-        - Audit the historical data of the business.
+1. Navigate to the **Backup** page of a TiDB Dedicated cluster.
 
-        If you have one of the preceding needs and want to use the PITR feature, make sure that your TiDB Dedicated cluster version is at least v6.4.0.
+2. Click **Backup Settings**.
 
-    - In **Backup Storage Region**, select the regions where you want to store your backup data.
+3. Under **Backup Schedule**, choose either the **Daily** or **Weekly** option. If you choose **Weekly**, specify the days of the week for the backup.
 
-        TiDB Cloud stores your backup data in the current region of your cluster by default. This behavior cannot be changed. In addition, you can add another remote region, and TiDB Cloud will copy all new backup data to the remote region, which facilitates data safety and faster recovery. After adding a remote region as a backup data storage, you cannot remove the region.
+4. In **Backup Time**, set a start time for the daily or weekly cluster backup. By default, it's a daily backup starting from 2:00 AM in the time zone of the cluster's region.
 
-4. Click **Confirm** to preview the configuration change.
+     > **Note**
+     >
+     > - Scheduling automatic backup jobs during periods of low workload is recommended to minimize the impact on business operations.
+     > - Backup jobs will be automatically delayed when importing data jobs are in progress. Do not run the manual backup during data import jobs or cluster scaling.
 
-    If you turn on PITR, you can select the **Perform a backup immediately and use it as recovery starting point in PITR.** checkbox. Otherwise, PITR will not be available until the next backup is completed.
 
-5. Click **Confirm**.
+5. In **Backup Retention**, configure the minimum backup data retention period. The default is 7 days.
 
-### Backup storage region support
+    > **Note**
+    >
+    > - The automatic backup files will be retained for 31 days from the date of cluster deletion. It is advisable to delete the backup files accordingly.
+    > - After you delete a cluster, the existing manual backup files will be retained until you manually delete them, or your account is closed.
 
-Currently, you cannot select an arbitrary remote region for backup data storage. The regions already supported are as follows:
+6. Click **Confirm** to preview the configuration change.
 
-| Cloud provider | Cluster region                      | Remote region support   |
-|----------------|-----------------------------|--------------------------|
-| Google Cloud            | Tokyo (asia-northeast1)     | Osaka (asia-northeast2)  |
+7. Click **Confirm** again to save changes.
 
-> **Note:**
->
-> If you select multiple backup storage regions, you will be charged for multiple backup storage and inter-region backup data replication out from the cluster region to each destination region. The cost is on a per-region basis and varies with the backup regions selected. For more information, see [Data Backup Cost](https://www.pingcap.com/tidb-cloud-pricing-details/#backup-storage-cost).
+## Turn on Dual Region Backup
 
-### Manual backup
+TiDB Dedicated supports dual region backup by copying backups to the new region as selected. After enabling it, all backups will be automatically copied to the specified region, providing an cross region data protection and disaster recovery capabilities. Approximately 99% of the data could be copied to the additional region within 1 hour.
+
+Dual region backup costs include both backup storage usage and cross region data transfer fees. For more information, refer to: [Data Backup Cost](https://www.pingcap.com/tidb-dedicated-pricing-details/#backup-storage-cost).
+
+To turn on dual region backup:
+
+1. Navigate to the **Backup** page of a TiDB Dedicated cluster.
+
+2. Click **Backup Settings**.
+
+3. Turn the **Dual Region Backup** switch to **ON**.
+
+4. Choose the additional region from the drop box where stores backup data.
+
+5. Click **Confirm** to preview the configuration changes.
+
+6. Click **Confirm** again to save changes.
+
+## Perform a Manual Backup
 
 Manual backups are user-initiated backups that enable you to back up your data to a known state as needed, and then restore to that state at any time.
 
@@ -93,6 +122,8 @@ To apply a manual backup to your TiDB Dedicated cluster, perform the following s
 3. Enter a **Name**.
 
 4. Click **Confirm**. Then your cluster data is backed up.
+
+## Delete backups
 
 ### Delete backup files
 
@@ -110,20 +141,7 @@ To delete a running backup job, it is similar as [**Delete backup files**](#dele
 
 2. Click **Delete** for the backup file that is in the **Pending** or **Running** state.
 
-### Best practices for backup
-
-- It is recommended that you perform backup operations at cluster idle time to minimize the impact on business.
-- Do not run the manual backup while importing data, or during cluster scaling.
-- After you delete a cluster, the existing manual backup files will be retained until you manually delete them, or your account is closed. Automatic backup files will be retained for a specified period (you can configure the retention period in **Backup Settings**) from the date of cluster deletion. You need to delete the backup files accordingly.
-
-## Restore
-
-TiDB Dedicated provides two types of data restoration:
-
-- Restore backup data to a new cluster
-- Restore a deleted cluster from the recycle bin
-
-### Restore data to a new cluster
+## Restore data to a new cluster
 
 To restore your TiDB Dedicated cluster data from a backup to a new cluster, take the following steps:
 
@@ -131,12 +149,18 @@ To restore your TiDB Dedicated cluster data from a backup to a new cluster, take
 
 2. Click **Restore**. The setting window displays.
 
-3. In **Restore Mode**, you can choose to restore data of any point in time or a selected backup to a new cluster.
+3. In **Restore Mode**, choose **Restore From Region**, indicating the region of backup stores.
+
+     > **Note**
+     >
+     > - The default value of the **Restore From Region** is the same as the backup cluster.
+
+4. In **Restore Mode**, choose to restore data of any point in time or a selected backup to a new cluster.
 
     <SimpleTab>
     <div label="Select Time Point">
 
-    To restore data of any point in time within the backup retention to a new cluster, make sure that **PITR** in **Backup Settings** is on and then take the following steps:
+    To restore data of any point in time within the backup retention to a new cluster, make sure that **Point-in-time restore** in **Backup Settings** is on and then take the following steps:
 
     1. Click **Select Time Point**.
     2. Select **Date** and **Time** you want to restore to.
@@ -147,27 +171,27 @@ To restore your TiDB Dedicated cluster data from a backup to a new cluster, take
 
     To restore a selected backup to the new cluster, take the following steps:
 
-    1. Click **Select Backup Name**.
-    2. Select a backup you want to restore to.
+    3. Click **Select Backup Name**.
+    4. Select a backup you want to restore to.
 
     </div>
     </SimpleTab>
 
-4. In **Restore to Region**, select the same region as the **Backup Storage Region** configured in the **Backup Settings**.
+5. In **Restore to Region**, select the same region as the **Backup Storage Region** configured in the **Backup Settings**.
 
-5. In the **Restore** window, you can also make the following changes if necessary:
+6. In the **Restore** window, you can also make the following changes if necessary:
 
     - Set the cluster name.
     - Update the port number of the cluster.
     - Increase node number, vCPU and RAM, and storage for the cluster.
 
-6. Click **Restore**.
+7. Click **Restore**.
 
    The cluster restore process starts and the **Security Settings** dialog box is displayed.
 
-7. In the **Security Settings** dialog box, set the root password and allowed IP addresses to connect to your cluster, and then click **Apply**.
+8. In the **Security Settings** dialog box, set the root password and allowed IP addresses to connect to your cluster, and then click **Apply**.
 
-### Restore a deleted cluster
+## Restore a deleted cluster
 
 To restore a deleted cluster from recycle bin, take the following steps:
 
@@ -189,3 +213,40 @@ To restore a deleted cluster from recycle bin, take the following steps:
 > **Note:**
 >
 > You cannot restore a deleted cluster to any point in time. You can only select an automatic or manual backup to restore.
+
+
+## Turn Off Auto Backup
+
+  > **Note**
+  >
+  > - Turning off auto backup will also turn off point-in-time restore by default.
+
+To turn off auto backup:
+
+1. Navigate to the **Backup** page of a TiDB Dedicated cluster.
+
+2. Click **Backup Settings**.
+
+3. Turn the **Auto Backup** switch to **OFF**.
+
+4. Click **Confirm** to preview the configuration changes.
+
+5. Click **Confirm** again to save changes.
+
+## Turn Off Dual Region Backup
+
+  > **Tip**
+  >
+  > - Disabling dual region backup does not immediately delete the backups in the additional region. They will be cleaned up later according to the backup retention schedule. However, if you want to remove them immediately, you can choose to manually delete the backups.
+
+To turn off dual region backup:
+
+1. Navigate to the **Backup** page of a TiDB Dedicated cluster.
+
+2. Click **Backup Settings**.
+
+3. Turn the **Dual Region Backup** switch to **OFF**.
+
+4. Click **Confirm** to preview the configuration changes.
+
+5. Click **Confirm** again to save changes.
