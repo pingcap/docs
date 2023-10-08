@@ -7,6 +7,10 @@ summary: An overview of the usage of SHOW PLUGINS for the TiDB database.
 
 `SHOW PLUGINS` shows all plugins installed in TiDB, including each plugin's status and version information.
 
+> **Note:**
+>
+> This feature is not available on [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless) clusters.
+
 ## Synopsis
 
 **ShowStmt:**

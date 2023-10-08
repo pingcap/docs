@@ -7,6 +7,10 @@ summary: An overview of the usage of SHUTDOWN for the TiDB database.
 
 The `SHUTDOWN` statement is used to perform a shutdown operation in TiDB. Execution of the `SHUTDOWN` statement requires the user to have `SHUTDOWN privilege`.
 
+> **Note:**
+>
+> This feature is only applicable to TiDB Self-Hosted and not available on [TiDB Cloud](https://docs.pingcap.com/tidbcloud/).
+
 ## Synopsis
 
 **Statement:**

@@ -7,6 +7,10 @@ summary: An overview of the usage of CHANGE PUMP for the TiDB database.
 
 The `CHANGE PUMP` statement modifies the status information for Pump in the cluster.
 
+> **Note:**
+>
+> This feature is only applicable to TiDB Self-Hosted and not available on [TiDB Cloud](https://docs.pingcap.com/tidbcloud/).
+
 > **Tip:**
 >
 > Pump's state is automatically reported to PD while running. Only when Pump is under abnormal circumstances and its state is inconsistent with the state information stored in PD, you can use the `CHANGE PUMP` statement to modify the state information stored in PD.
