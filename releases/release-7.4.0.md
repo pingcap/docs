@@ -410,7 +410,17 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.4/quick-start-with-
     (dup) - Fix the issue that the behavior is inconsistent with MySQL when comparing a `DATETIME` or `TIMESTAMP` column with a number constant [#38361](https://github.com/pingcap/tidb/issues/38361) @[yibin87](https://github.com/yibin87)
     - Fix the incorrect result that occurs when comparing unsigned types with `Duration` type constants [#45410](https://github.com/pingcap/tidb/issues/45410) @[wshwsh12](https://github.com/wshwsh12)
 <!-- tw@ran-huang 以上 10 条-->
-
+    - Fix the issue that `GROUP_CONCAT` can not parse the `ORDER BY` column [#41986] (https://github.com/pingcap/tidb/issues/41986) @[AilinKid](https://github.com/AilinKid)
+    - Fix the issue that HashCode is repeatedly calculated for deeply nested expressions, which causes high memory usage and OOM [#42788] (https://github.com/pingcap/tidb/issues/42788) @[AilinKid](https://github.com/AilinKid)
+    - Fix the issue that the `cast(col)=range` condition causes FullScan when CAST has no precision loss [#45199] (https://github.com/pingcap/tidb/issues/45199) @[AilinKid](https://github.com/AilinKid)
+    - Fix the issue that when Aggregation is pushed through Union in MPP execution plans, the results are incorrect [#45850] (https://github.com/pingcap/tidb/issues/45850) @[AilinKid](https://github.com/AilinKid)
+    - Fix the issue that bindings with `in (?)` can not match `in (?, ... ?)` [#44298] (https://github.com/pingcap/tidb/issues/44298) @[qw4990](https://github.com/qw4990)
+    - Fix the issue that occurs when connection collation is not considered when `non-prep plan cache` reuses the execution plan [#47008] (https://github.com/pingcap/tidb/issues/47008) @[qw4990](https://github.com/qw4990)
+    - Fix the issue that an executed plan does not hit the plan cache phase without reporting a warning [#46159] (https://github.com/pingcap/tidb/issues/46159) @[qw4990](https://github.com/qw4990)
+    - Fix the issue that `plan replayer dump explain` reports an error [#46197] (https://github.com/pingcap/tidb/issues/46197) @[time-and-fate](https://github.com/time-and-fate)
+    - Fix the issue that an DML operation with CTE can panic [#46083] (https://github.com/pingcap/tidb/issues/46083) @[winoros](https://github.com/winoros)
+    - Fix the issue that the `TIDB_INLJ` hint does not take effect when joining two sub-queries [#46160] (https://github.com/pingcap/tidb/issues/46160) @[qw4990](https://github.com/qw4990)
+<!-- tw@hfxsd 以上 10 条-->
 + TiKV **tw@ran-huang 9**
 
     (dup) - Fix the issue that TiKV fails to start when Titan is enabled and the `Blob file deleted twice` error occurs [#15454](https://github.com/tikv/tikv/issues/15454) @[Connor1996](https://github.com/Connor1996)
