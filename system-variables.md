@@ -4686,9 +4686,9 @@ SHOW WARNINGS;
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: `16`
 - Range: `[2, 255]`
-- This variable specifies the schema caches size in the TiDB instance. The default value is '16', which means TiDB caches 16 snapshot schemas default.
-- Generally, you don't need to modify this variable. When the [Stale Read](/stale-read.md) feature is used and the DDL is executed very frequently, it will cause the schema version to change very frequently, resulting in Stale Read taking a lot of time to rebuild the snapshot schema information due to schema cache misses when getting snapshot schema. At this point, you can increase the value of `tidb_schema_version_cache_limit` (for example, 32) to avoid the problem of schema cache misses.
-- Modifying this variable causes the memory usage of TiDB to increase slightly. You should pay attention to the memory usage of TiDB to avoid OOM problems. 
+- This variable specifies the schema caches size in the TiDB instance. The default value is `16`, which means TiDB caches 16 snapshots of the schema information.
+- Generally, you do not need to modify this variable. When the [Stale Read](/stale-read.md) feature is used and the DDL is executed very frequently, it will cause the schema version to change very frequently, resulting in Stale Read taking a lot of time to rebuild the snapshot schema information due to schema cache misses when getting snapshot schema. In this case, you can increase the value of `tidb_schema_version_cache_limit` (for example, `32`) to avoid the problem of schema cache misses.
+- Modifying this variable causes the memory usage of TiDB to increase slightly. Monitor the memory usage of TiDB to avoid OOM problems. 
 
 ### tidb_server_memory_limit <span class="version-mark">New in v6.4.0</span>
 
