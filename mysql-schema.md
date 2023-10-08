@@ -76,6 +76,8 @@ Currently, the `help_topic` is NULL.
 
 ## Miscellaneous system tables
 
+<CustomContent platform="tidb">
+
 > **Note:**
 >
 > The `tidb`, `expr_pushdown_blacklist`, `opt_rule_blacklist`, `table_cache_meta`, `tidb_import_jobs`, and `tidb_timers` system tables are only applicable to TiDB Self-Hosted and not available on [TiDB Cloud](https://docs.pingcap.com/tidbcloud/).
@@ -87,3 +89,11 @@ Currently, the `help_topic` is NULL.
 - `table_cache_meta`: the metadata of cached tables
 - `tidb_import_jobs`: the job information of [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md)
 - `tidb_timers`: the metadata of internal timers
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+- `GLOBAL_VARIABLES`: global system variable table
+
+</CustomContent>
