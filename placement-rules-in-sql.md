@@ -142,13 +142,22 @@ In addition to the placement options above, you can also use the advance configu
 
 ### Increase the number of replicas
 
+<CustomContent platform="tidb">
+
 The default configuration of [`max-replicas`](/pd-configuration-file.md#max-replicas) is `3`. To increase this for a specific set of tables, you can use a placement policy as follows:
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+The default configuration of [`max-replicas`](https://docs.pingcap.com/tidb/stable/pd-configuration-file#max-replicas) is `3`. To increase this for a specific set of tables, you can use a placement policy as follows:
+
+</CustomContent>
 
 ```sql
 CREATE PLACEMENT POLICY fivereplicas FOLLOWERS=4;
 CREATE TABLE t1 (a INT) PLACEMENT POLICY=fivereplicas;
 ```
-
 Note that the PD configuration includes the leader and follower count, thus 4 followers + 1 leader equals 5 replicas in total.
 
 To expand on this example, you can also use `PRIMARY_REGION` and `REGIONS` placement options to describe the placement for the followers:
@@ -266,11 +275,25 @@ After creating the placement policies, you can attach them to the corresponding 
 - For tables attached with the `multiaz` placement policy, data will be placed in 3 replicas in different availability zones, prioritizing survival goals of data isolation cross zones, followed by survival goals of data isolation cross hosts.
 - For tables attached with the `singleaz` placement policy, data will be placed in 3 replicas in the `zone1` availability zone first, and then meet survival goals of data isolation cross hosts.
 
+<CustomContent platform="tidb">
+
 > **Note:**
 >
 > `SURVIVAL_PREFERENCES` is equivalent to `location-labels` in PD. For more information, see [Schedule Replicas by Topology Labels](/schedule-replicas-by-topology-labels.md).
 
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+> **Note:**
+>
+> `SURVIVAL_PREFERENCES` is equivalent to `location-labels` in PD. For more information, see [Schedule Replicas by Topology Labels](https://docs.pingcap.com/tidb/stable/schedule-replicas-by-topology-labels).
+
+</CustomContent>
+
 ## Compatibility with tools
+
+<CustomContent platform="tidb">
 
 | Tool Name | Minimum supported version | Description |
 | --- | --- | --- |
@@ -278,6 +301,15 @@ After creating the placement policies, you can attach them to the corresponding 
 | TiDB Lightning | Not compatible yet | An error is reported when TiDB Lightning imports backup data that contains placement policies  |
 | TiCDC | 6.0 | Ignores placement rules, and does not replicate the rules to the downstream |
 | TiDB Binlog | 6.0 | Ignores placement rules, and does not replicate the rules to the downstream |
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+| TiDB Lightning | Not compatible yet | An error is reported when TiDB Lightning imports backup data that contains placement policies  |
+| TiCDC | 6.0 | Ignores placement rules, and does not replicate the rules to the downstream |
+
+</CustomContent>
 
 ## Known limitations
 
