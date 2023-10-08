@@ -82,7 +82,7 @@ To configure backup schedule:
 
     > **Note**
     >
-    > - The automatic backup files will be retained for 31 days from the date of cluster deletion. It is advisable to delete the backup files accordingly.
+    > - After you delete the cluster, the automatic backup files will be kept for a specific duration, as set in Backup Settings. Remember to delete these backup files as needed.
     > - After you delete a cluster, the existing manual backup files will be retained until you manually delete them, or your account is closed.
 
 6. Click **Confirm** to preview the configuration change.
@@ -171,8 +171,8 @@ To restore your TiDB Dedicated cluster data from a backup to a new cluster, take
 
     To restore a selected backup to the new cluster, take the following steps:
 
-    3. Click **Select Backup Name**.
-    4. Select a backup you want to restore to.
+    - Click **Select Backup Name**.
+    - Select a backup you want to restore to.
 
     </div>
     </SimpleTab>
