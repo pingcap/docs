@@ -18,13 +18,13 @@ This document describes how to back up and restore your TiDB Dedicated cluster d
 
 - If you turn on and off Point-in-time Restore (Point-in-time Restore) multiple times, you can only choose a time point within the recoverable range after the most recent Point-in-time Restore is enabled. The earlier recoverable range is not accessible.
 
-## Turn on Auto Backup
+## Turn on auto backup
 
 TiDB Dedicated supports both [snapshot backups](/br/br-snapshot-guide.md) and [log backups](/br/br-pitr-guide.md). Snapshot backup enables users to restore to the the backup point. By default, snapshot backups are taken automatically and stored according to your backup retention policy. 
 
 You can disable auto backup at any time.
 
-### Turn on Point-in-time Restore / Log Backup
+### Turn on point-in-time restore / log backup
 
 > **Note**
 >
@@ -89,7 +89,7 @@ To configure backup schedule:
 
 7. Click **Confirm** again to save changes.
 
-## Turn on Dual Region Backup
+## Turn on dual region backup
 
 TiDB Dedicated supports dual region backup by copying backups to the new region as selected. After enabling it, all backups will be automatically copied to the specified region, providing an cross region data protection and disaster recovery capabilities. Approximately 99% of the data could be copied to the additional region within 1 hour.
 
@@ -109,7 +109,7 @@ To turn on dual region backup:
 
 6. Click **Confirm** again to save changes.
 
-## Perform a Manual Backup
+## Perform a manual backup
 
 Manual backups are user-initiated backups that enable you to back up your data to a known state as needed, and then restore to that state at any time.
 
@@ -215,7 +215,7 @@ To restore a deleted cluster from recycle bin, take the following steps:
 > You cannot restore a deleted cluster to any point in time. You can only select an automatic or manual backup to restore.
 
 
-## Turn Off Auto Backup
+## Turn off auto backup
 
   > **Note**
   >
@@ -233,7 +233,7 @@ To turn off auto backup:
 
 5. Click **Confirm** again to save changes.
 
-## Turn Off Dual Region Backup
+## Turn off dual region backup
 
   > **Tip**
   >
