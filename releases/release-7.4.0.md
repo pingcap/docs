@@ -68,7 +68,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.4/quick-start-with-
   </tr>
   <tr>
     <td>DB Operations and Observability</td>
-    <td><a href="https://docs.pingcap.com/tidb/v7.4/system-variables#tidb_service_scope-new-in-v740" target="_blank">Specify the respective TiDB nodes to execute the <code>IMPORT INTO<code> and <code>ADD INDEX<code> SQL statements (experimental)</a></td>
+    <td><a href="https://docs.pingcap.com/tidb/v7.4/system-variables#tidb_service_scope-new-in-v740" target="_blank">Specify the respective TiDB nodes to execute the <code>IMPORT INTO</code> and <code>ADD INDEX</code> SQL statements (experimental)</a></td>
     <td>You have the flexibility to specify whether to execute <code>IMPORT INTO</code> or <code>ADD INDEX</code> SQL statements on some of the existing TiDB nodes or newly added TiDB nodes. This approach enables resource isolation from the rest of the TiDB nodes, preventing any impact on business operations while ensuring optimal performance for executing the preceding SQL statements.</td>
   </tr>
 </tbody>
