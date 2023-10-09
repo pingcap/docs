@@ -20,19 +20,19 @@ If you want to migrate incremental data only, see [Migrate Incremental Data from
 
 - The Data Migration feature is only available to clusters that are created in [certain regions](https://www.pingcap.com/tidb-cloud-pricing-details/#dm-cost) after November 9, 2022. If your **project** was created before the date or if your cluster is in another region, this feature is not available to your cluster and the **Data Migration** tab will not be displayed on the cluster overview page in the TiDB Cloud console.
 
+- Amazon Aurora MySQL writer instances support both existing data and incremental data migration. Amazon Aurora MySQL reader instances only support existing data migration and do not support incremental data migration.
+
+### Supported sizes
+
 - You can create up to 200 migration jobs for each organization. To create more migration jobs, you need to [file a support ticket](/tidb-cloud/tidb-cloud-support.md).
+
+- When you use Data Migration, it is recommended to keep the size of your dataset smaller than 1 TiB. If the dataset size is larger than 1 TiB, the existing data migration will take a long time due to limited specifications.
 
 ### Filtered out and deleted databases
 
 - The system databases will be filtered out and not migrated to TiDB Cloud even if you select all of the databases to migrate. That is, `mysql`, `information_schema`, `information_schema`, and `sys` will not be migrated using this feature.
 
 - When you delete a cluster in TiDB Cloud, all migration jobs in that cluster are automatically deleted and not recoverable.
-
-### Supported databases and size
-
-- Amazon Aurora MySQL writer instances support both existing data and incremental data migration. Amazon Aurora MySQL reader instances only support existing data migration and do not support incremental data migration.
-
-- When you use Data Migration, it is recommended to keep the size of your dataset smaller than 1 TiB. If the dataset size is larger than 1 TiB, the existing data migration will take a long time due to limited specifications.
 
 ### Limitations of existing data migration
 
