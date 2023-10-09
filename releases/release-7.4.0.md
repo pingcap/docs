@@ -62,10 +62,6 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.4/quick-start-with-
     <td>One notable change in MySQL 8.0 is that the default character set is utf8mb4, and the default collation of utf8mb4 is <code>utf8mb4_0900_ai_ci</code>. TiDB v7.4.0 enhances the compatibility with MySQL 8.0. If you create a database in MySQL 8.0 with the default collation, you can smoothly migrate or replicate it to TiDB.</td>
   </tr>
   <tr>
-    <td>TiFlash supports resource control </td>
-    <td>Before v7.4.0, TiDB resource control cannot manage resources of TiFlash. Starting from v7.4.0, TiFlash can manage resources better, improving the overall resource management capabilities of TiDB.</td>
-  </tr>
-  <tr>
     <td>DB Operations and Observability</td>
     <td><a href="https://docs.pingcap.com/tidb/v7.4/system-variables#tidb_service_scope-new-in-v740" target="_blank">Specify the respective TiDB nodes to execute the <code>IMPORT INTO</code> and <code>ADD INDEX</code> SQL statements (experimental)</a></td>
     <td>You have the flexibility to specify whether to execute <code>IMPORT INTO</code> or <code>ADD INDEX</code> SQL statements on some of the existing TiDB nodes or newly added TiDB nodes. This approach enables resource isolation from the rest of the TiDB nodes, preventing any impact on business operations while ensuring optimal performance for executing the preceding SQL statements.</td>
