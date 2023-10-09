@@ -3,6 +3,9 @@ title: TiDB Global Sort
 summary: Learn the use cases, limitations, usage, and implementation principles of the TiDB Global Sort.
 ---
 
+<!-- markdownlint-disable MD029 -->
+<!-- markdownlint-disable MD049 -->
+
 # TiDB Global Sort
 
 > **Warning:**
