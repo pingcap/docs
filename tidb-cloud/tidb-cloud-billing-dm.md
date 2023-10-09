@@ -26,18 +26,6 @@ The Data Migration job measures full data migration performance in MiB/s. This u
 
 The Data Migration job measures incremental data migration performance in rows/s. This unit indicates the number of rows that are migrated to the target database per second. For example, if the upstream database executes `INSERT`, `UPDATE`, or `DELETE` statements of 10,000 rows in about 1 second, the Data Migration job of the corresponding specification can replicate the 10,000 rows to the downstream in about 1 second.
 
-### Performance of physical mode
-
-[Physical mode](https://docs.pingcap.com/tidb/stable/tidb-lightning-physical-import-mode) exports the upstream data as fast as possible, so different specifications have different performance impacts on QPS and TPS of the upstream database. The following table shows the performance regression of each specification.
-
-| Migration specifications | Performance regression | Export speed (-t=2*rcu) |
-|-------|-------|----------|
-| Without DM    | /   |  / |
-| 2RCU  | 15.6% | 80.84M/s |
-| 4RCU  | 20.0% | 214.2M/s |
-| 8RCU  | 28.9% | 365.5M/s |
-| 16RCU | 46.7% | 424.6M/s |
-
 ## Price
 
 To learn about the supported regions and the price of TiDB Cloud for each Data Migration RCU, see [Data Migration Cost](https://www.pingcap.com/tidb-cloud-pricing-details/#dm-cost).
