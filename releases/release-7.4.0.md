@@ -103,7 +103,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.4/quick-start-with-
 
     * `value MEMBER OF(json_array)`
 
-    For more information, see [documentation](/functions-and-operators/expressions-pushed-down.md).
+  For more information, see [documentation](/functions-and-operators/expressions-pushed-down.md).
 
 * Support pushing down window functions with any frame definition type to TiFlash [#7376](https://github.com/pingcap/tiflash/issues/7376) @[xzhangxian1008](https://github.com/xzhangxian1008)
 
@@ -153,7 +153,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.4/quick-start-with-
 
     TiDB v7.4.0 introduces the optimizer hint `SET_VAR()`, which is similar to that of MySQL 8.0. By including the hint `SET_VAR()` in SQL statements, you can temporarily modify the value of system variables during statement execution. This helps you set the environment for different statements. For example, you can actively increase the parallelism of resource-intensive SQL statements or change the optimizer behavior through variables.
 
-    You can find the system variables that can be modified using the hint `SET_VAR()` in [System variables](/system-variables.md). It is strongly recommended not to modify variables that are not explicitly supported, as this might cause unpredictable behavior.
+    You can find the system variables that can be modified using the hint `SET_VAR()` in [system variables](/system-variables.md). It is strongly recommended not to modify variables that are not explicitly supported, as this might cause unpredictable behavior.
 
     For more information, see [documentation](/optimizer-hints.md).
 
