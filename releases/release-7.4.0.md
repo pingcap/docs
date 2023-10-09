@@ -26,7 +26,6 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.4/quick-start-with-
     <td>Scalability and Performance</td>
     <td>Enhance the performance of adding multiple indexes for a table in a single <code>ADD INDEX</code> statement (experimental) </td>
     <td>Since v6.2.0, you can add multiple indexes for a table in a single <code>ADD INDEX</code> statement. However, the performance is the same as running multiple <code>ADD INDEX</code> statements. After optimization in v7.4.0, the performance of adding multiple indexes in a single SQL statement has been greatly improved.</td>
-    </td>
   </tr>
   <tr>
     <td rowspan="3">Reliability and Availability</td>
