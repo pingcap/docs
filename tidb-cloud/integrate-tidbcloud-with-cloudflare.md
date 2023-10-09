@@ -21,7 +21,7 @@ Before you try the steps in this article, you need to prepare the following thin
 
 - A TiDB Cloud account and a TiDB Serverless cluster on TiDB Cloud. For more details, see [TiDB Cloud Quick Start](/tidb-cloud/tidb-cloud-quickstart.md#step-1-create-a-tidb-cluster).
 - A [Cloudflare Workers account](https://dash.cloudflare.com/login).
-- wrangler and npm installed.
+- [Npm](https://docs.npmjs.com/about-npm) installed.
 
 ## Step 1: Set up Wrangler
 
