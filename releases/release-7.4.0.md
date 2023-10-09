@@ -418,13 +418,13 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.4/quick-start-with-
 + TiKV **tw@ran-huang 9**
 
     (dup) - Fix the issue that TiKV fails to start when Titan is enabled and the `Blob file deleted twice` error occurs [#15454](https://github.com/tikv/tikv/issues/15454) @[Connor1996](https://github.com/Connor1996)
-    - Fix the issue of no data in the Thread Voluntary/Nonvoluntary monitoring panels [#15413](https://github.com/tikv/tikv/issues/15413) @[SpadeA-Tang](https://github.com/SpadeA-Tang)
-    - Fix the data error of continuously increasing raftstore-applys [#15371](https://github.com/tikv/tikv/issues/15371) @[Connor1996] (https://github.com/Connor1996)
-    - Fix the TiKV panic issue caused by incorrect meta information of Region [#13311] (https://github.com/tikv/tikv/issues/13311) @[zyguan](https://github.com/zyguan)
-    - Fix the issue of QPS dropping to 0 after switching from `sync_recovery` to `sync` [#15366] (https://github.com/tikv/tikv/issues/15366) @[nolouch](https://github.com/nolouch)
+    - Fix the issue of no data in the Thread Voluntary and Thread Nonvoluntary monitoring panels [#15413](https://github.com/tikv/tikv/issues/15413) @[SpadeA-Tang](https://github.com/SpadeA-Tang)
+    - Fix the data error of continuously increasing raftstore-applys [#15371](https://github.com/tikv/tikv/issues/15371) @[Connor1996](https://github.com/Connor1996)
+    - Fix the TiKV panic issue caused by incorrect metadata of Region [#13311](https://github.com/tikv/tikv/issues/13311) @[zyguan](https://github.com/zyguan)
+    - Fix the issue of QPS dropping to 0 after switching from `sync_recovery` to `sync` [#15366](https://github.com/tikv/tikv/issues/15366) @[nolouch](https://github.com/nolouch)
     (dup) - Fix the issue that Online Unsafe Recovery does not abort on timeout [#15346](https://github.com/tikv/tikv/issues/15346) @[Connor1996](https://github.com/Connor1996)
-    - Fix the possible memory leak caused by CpuRecord [#15304](https://github.com/tikv/tikv/issues/15304) @[overvenus](https://github.com/overvenus)
-    - Fix the error of "Error 9002: TiKV server timeout" when the backup cluster is down and the primary cluster is queried [#12914](https://github.com/tikv/tikv/issues/12914) @[Connor1996](https://github.com/Connor1996)
+    - Fix the potential memory leak issue caused by CpuRecord [#15304](https://github.com/tikv/tikv/issues/15304) @[overvenus](https://github.com/overvenus)
+    - Fix the issue that `"Error 9002: TiKV server timeout"` occurs when the backup cluster is down and the primary cluster is queried [#12914](https://github.com/tikv/tikv/issues/12914) @[Connor1996](https://github.com/Connor1996)
     - Fix the issue that the backup TiKV gets stuck when TiKV restarts after the primary cluster recovers [#12320](https://github.com/tikv/tikv/issues/12320) @[disksing](https://github.com/disksing)
 
 + PD
