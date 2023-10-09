@@ -27,7 +27,17 @@ This document describes the use cases, limitations, usage, and implementation pr
 
 ## Use cases and limitations
 
-In a database management system, in addition to the core transactional processing (TP) and analytical processing (AP) workloads, there are other important tasks, such as DDL operations, Load Data, TTL, Analyze, and Backup/Restore, which are called **backend tasks**. These backend tasks need to process a large amount of data in database objects (tables), so they typically have the following characteristics:
+<CustomContent platform="tidb">
+
+In a database management system, in addition to the core transactional processing (TP) and analytical processing (AP) workloads, there are other important tasks, such as DDL operations, IMPORT INTO, TTL, Analyze, and Backup/Restore, which are called **backend tasks**. These backend tasks need to process a large amount of data in database objects (tables), so they typically have the following characteristics:
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+In a database management system, in addition to the core transactional processing (TP) and analytical processing (AP) workloads, there are other important tasks, such as DDL operations, TTL, Analyze, and Backup/Restore, which are called **backend tasks**. These backend tasks need to process a large amount of data in database objects (tables), so they typically have the following characteristics:
+
+</CustomContent>
 
 - Need to process all data in a schema or a database object (table).
 - Might need to be executed periodically, but at a low frequency.
@@ -39,12 +49,16 @@ Enabling the TiDB backend task distributed execution framework can solve the abo
 - The framework supports distributed execution of backend tasks, which can flexibly schedule the available computing resources of the entire TiDB cluster, thereby better utilizing the computing resources in a TiDB cluster.
 - The framework provides unified resource usage and management capabilities for both overall and individual backend tasks.
 
-Currently, the TiDB backend task distributed execution framework only supports the distributed execution of `ADD INDEX` statements, that is, the DDL statements for creating indexes. For example, the following SQL statements are supported:
+Currently, for TiDB Self-Hosted, the TiDB backend task distributed execution framework supports the distributed execution of the `ADD INDEX` and `IMPORT INTO` statements. For TiDB Cloud, the `IMPORT INTO` statement is not applicable.
 
-```sql
-ALTER TABLE t1 ADD INDEX idx1(c1);
-CREATE INDEX idx1 ON table t1(c1);
-```
+- `ADD INDEX` is a DDL statement used to create indexes. For example:
+
+    ```sql
+    ALTER TABLE t1 ADD INDEX idx1(c1);
+    CREATE INDEX idx1 ON table t1(c1);
+    ```
+
+- `IMPORT INTO` is used to import data in formats such as `CSV`, `SQL`, and `PARQUET` into an empty table. For more information, see [`IMPORT INTO`](https://docs.pingcap.com/tidb/v7.2/sql-statement-import-into).
 
 ## Prerequisites
 
@@ -63,7 +77,7 @@ Before using the distributed framework, you need to enable the [Fast Online DDL]
 
 > **Note:**
 >
-> Before you upgrade TiDB to v6.5.0 or later, it is recommended that you check whether the [`temp-dir`](/tidb-configuration-file.md#temp-dir-new-in-v630) path of TiDB is correctly mounted to an SSD disk. This path is a TiDB configuration item, which takes effect after TiDB is restarted. Therefore, setting this configuration item in advance before upgrading can avoid another restart.
+> Before you upgrade TiDB to v6.5.0 or later, it is recommended that you check whether the [`temp-dir`](/tidb-configuration-file.md#temp-dir-new-in-v630) path of TiDB is correctly mounted to an SSD disk. Make sure that the operating system user that runs TiDB has the read and write permissions for this directory. Otherwise, The DDL operations might experience unpredictable issues. This path is a TiDB configuration item, which takes effect after TiDB is restarted. Therefore, setting this configuration item in advance before upgrading can avoid another restart.
 
 </CustomContent>
 
@@ -84,7 +98,17 @@ Adjust the following system variables related to Fast Online DDL:
     SET GLOBAL tidb_enable_dist_task = ON;
     ```
 
-    When backend tasks are running, the DDL statements supported by the framework are executed in a distributed manner.
+    <CustomContent platform="tidb">
+
+    When background tasks are running, the statements supported by the framework (such as [`ADD INDEX`](/sql-statements/sql-statement-add-index.md) and [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md)) are executed in a distributed manner. All TiDB nodes run background tasks by default.
+
+    </CustomContent>
+
+    <CustomContent platform="tidb-cloud">
+
+    When background tasks are running, the statements supported by the framework (such as [`ADD INDEX`](/sql-statements/sql-statement-add-index.md)) are executed in a distributed manner. All TiDB nodes run background tasks by default.
+
+    </CustomContent>
 
 2. Adjust the following system variables that might affect the distributed execution of DDL tasks according to your needs:
 
@@ -92,6 +116,12 @@ Adjust the following system variables related to Fast Online DDL:
     * [`tidb_ddl_reorg_priority`](/system-variables.md#tidb_ddl_reorg_priority)
     * [`tidb_ddl_error_count_limit`](/system-variables.md#tidb_ddl_error_count_limit)
     * [`tidb_ddl_reorg_batch_size`](/system-variables.md#tidb_ddl_reorg_batch_size): use the default value. The recommended maximum value is `1024`.
+
+3. Starting from v7.4.0, you can adjust the number of TiDB nodes that perform background tasks according to actual needs. After deploying a TiDB cluster, you can set the instance-level system variable [`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740) for each TiDB node in the cluster. When `tidb_service_scope` of a TiDB node is set to `background`, the TiDB node can execute background tasks. When `tidb_service_scope` of a TiDB node is set to the default value "", the TiDB node cannot execute background tasks. If `tidb_service_scope` is not set for any TiDB node in a cluster, the TiDB distributed execution framework schedules all TiDB nodes to execute background tasks by default.
+
+    > **Warning:**
+    >
+    > `tidb_service_scope` is an experimental feature. It is not recommended to use it in production environments. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
 
 > **Tip:**
 >

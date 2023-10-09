@@ -14,13 +14,9 @@ The `SELECT` statement is used to read data from TiDB.
 
 ![SelectStmt](/media/sqlgram/SelectStmt.png)
 
-<CustomContent platform="tidb-cloud">
-
 > **Note:**
 >
-> The `SELECT ... INTO OUTFILE` statement is not supported by TiDB Cloud.
-
-</CustomContent>
+> The `SELECT ... INTO OUTFILE` statement is only applicable to TiDB Self-Hosted and not available on [TiDB Cloud](https://docs.pingcap.com/tidbcloud/).
 
 **FromDual:**
 
@@ -116,7 +112,7 @@ TableSampleOpt ::=
 |`ORDER BY` | The `ORDER BY` clause is used to sort the data in ascending or descending order, based on columns, expressions or items in the `select_expr` list.|
 |`LIMIT` | The `LIMIT` clause can be used to constrain the number of rows. `LIMIT` takes one or two numeric arguments. With one argument, the argument specifies the maximum number of rows to return, the first row to return is the first row of the table by default; with two arguments, the first argument specifies the offset of the first row to return, and the second specifies the maximum number of rows to return. TiDB also supports the `FETCH FIRST/NEXT n ROW/ROWS ONLY` syntax, which has the same effect as `LIMIT n`. You can omit `n` in this syntax and its effect is the same as `LIMIT 1`. |
 |`Window window_definition`| This is the syntax for window function, which is usually used to do some analytical computation. For more information, refer to [Window Function](/functions-and-operators/window-functions.md). |
-| `FOR UPDATE`  | The `SELECT FOR UPDATE` clause locks all the data in the result sets to detect concurrent updates from other transactions. Data that match the query conditions but do not exist in the result sets are not read-locked, such as the row data written by other transactions after the current transaction is started. TiDB uses the [Optimistic Transaction Model](/optimistic-transaction.md). The transaction conflicts are not detected in the statement execution phase. Therefore, the current transaction does not block other transactions from executing `UPDATE`, `DELETE` or `SELECT FOR UPDATE` like other databases such as PostgreSQL. In the committing phase, the rows read by `SELECT FOR UPDATE` are committed in two phases, which means they can also join the conflict detection. If write conflicts occur, the commit fails for all transactions that include the `SELECT FOR UPDATE` clause. If no conflict is detected, the commit succeeds. And a new version is generated for the locked rows, so that write conflicts can be detected when other uncommitted transactions are being committed later. When using pessimistic transaction mode, the behavior is basically the same as other databases. Refer to [Difference with MySQL InnoDB](/pessimistic-transaction.md#difference-with-mysql-innodb) to see the details. TiDB supports the `NOWAIT` modifier for `FOR UPDATE`. See [TiDB Pessimistic Transaction Mode](/pessimistic-transaction.md) for details. |
+| `FOR UPDATE`  | The `SELECT FOR UPDATE` clause locks all the data in the result sets to detect concurrent updates from other transactions. Data that match the query conditions but do not exist in the result sets are not read-locked, such as the row data written by other transactions after the current transaction is started. When TiDB uses the [Optimistic Transaction Mode](/optimistic-transaction.md), the transaction conflicts are not detected in the statement execution phase. Therefore, the current transaction does not block other transactions from executing `UPDATE`, `DELETE` or `SELECT FOR UPDATE` like other databases such as PostgreSQL. In the committing phase, the rows read by `SELECT FOR UPDATE` are committed in two phases, which means they can also join the conflict detection. If write conflicts occur, the commit fails for all transactions that include the `SELECT FOR UPDATE` clause. If no conflict is detected, the commit succeeds. And a new version is generated for the locked rows, so that write conflicts can be detected when other uncommitted transactions are being committed later. When TiDB uses the [Pessimistic Transaction Mode](/pessimistic-transaction.md), the behavior is basically the same as other databases. Refer to [Difference with MySQL InnoDB](/pessimistic-transaction.md#difference-with-mysql-innodb) to see the details. TiDB supports the `NOWAIT` modifier for `FOR UPDATE`. See [TiDB Pessimistic Transaction Mode](/pessimistic-transaction.md#behaviors) for details. |
 |`LOCK IN SHARE MODE` | To guarantee compatibility, TiDB parses these three modifiers, but will ignore them. |
 | `TABLESAMPLE` | To get a sample of rows from the table. |
 
@@ -166,7 +162,6 @@ The above example uses data generated with `tiup bench tpcc prepare`. The first 
 ## MySQL compatibility
 
 - The syntax `SELECT ... INTO @variable` is not supported.
-- The syntax `SELECT ... GROUP BY ... WITH ROLLUP` is not supported.
 - The syntax `SELECT .. GROUP BY expr` does not imply `GROUP BY expr ORDER BY expr` as it does in MySQL 5.7. TiDB instead matches the behavior of MySQL 8.0 and does not imply a default order.
 - The syntax `SELECT ... TABLESAMPLE ...` is a TiDB extension and not supported by MySQL.
 

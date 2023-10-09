@@ -7,13 +7,9 @@ summary: An overview of the usage of CALIBRATE RESOURCE for the TiDB database.
 
 The `CALIBRATE RESOURCE` statement is used to estimate and output the ['Request Unit (RU)`](/tidb-resource-control#what-is-request-unit-ru) capacity of the current cluster.
 
-<CustomContent platform="tidb-cloud">
-
 > **Note:**
 >
-> This feature is not available on [TiDB Serverless clusters](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless-beta).
-
-</CustomContent>
+> This feature is only applicable to TiDB Self-Hosted and not available on [TiDB Cloud](https://docs.pingcap.com/tidbcloud/).
 
 ## Synopsis
 
@@ -34,7 +30,7 @@ To execute this command, make sure that the following requirements are met:
 - The user has `SUPER` or `RESOURCE_GROUP_ADMIN` privilege.
 - The user has the `SELECT` privilege for all tables in the `METRICS_SCHEMA` schema.
 
-## Methods for estimating capacity 
+## Methods for estimating capacity
 
 TiDB provides two methods for estimation:
 
@@ -47,6 +43,10 @@ If your application is already running in a production environment, or you can r
 - The time window ranges from 10 minutes to 24 hours.
 - In the specified time window, if the CPU utilization of TiDB and TiKV is too low, you cannot estimate the capacity.
 
+> **Note:**
+>
+> TiKV does not monitor CPU usage metrics on macOS. It does not support capacity estimation based on the actual workload on macOS.
+
 ### Estimate capacity based on hardware deployment
 
 This method mainly estimates capacity based on the current cluster configuration, combined with the empirical values observed for different workloads. Because different types of workloads require different ratios of hardware, the output capacity of the same configuration of hardware might be different. The `WORKLOAD` parameter here accepts the following different workload types. The default value is `TPCC`.
@@ -55,6 +55,7 @@ This method mainly estimates capacity based on the current cluster configuration
 - `OLTP_WRITE_ONLY`: applies to workloads with heavy data write. It is estimated based on a workload model similar to `sysbench oltp_write_only`.
 - `OLTP_READ_WRITE`: applies to workloads with even data read and write. It is estimated based on a workload model similar to `sysbench oltp_read_write`.
 - `OLTP_READ_ONLY`: applies to workloads with heavy data read. It is estimated based on a workload model similar to `sysbench oltp_read_only`.
+- `TPCH_10`: applies to AP queries. It is estimated based on 22 queries from `TPCH-10G`.
 
 > **Note:**
 >
@@ -95,7 +96,14 @@ CALIBRATE RESOURCE START_TIME '2023-04-18 08:00:00' DURATION '9m';
 ERROR 1105 (HY000): the duration of calibration is too short, which could lead to inaccurate output. Please make the duration between 10m0s and 24h0m0s
 ```
 
-When the workload within the time window is too low, an error occurs.
+The monitoring metrics for the [capacity estimation based on the actual workload](#estimate-capacity-based-on-actual-workload) feature include `tikv_cpu_quota`, `tidb_server_maxprocs`, `resource_manager_resource_unit`, `process_cpu_usage`, `tiflash_cpu_quota`, `tiflash_resource_manager_resource_unit`, and `tiflash_process_cpu_usage`. If the CPU quota monitoring data is empty, there will be an error with the corresponding monitoring metric name, as shown in the following example:
+
+```sql
+CALIBRATE RESOURCE START_TIME '2023-04-18 08:00:00' DURATION '60m';
+Error 1105 (HY000): There is no CPU quota metrics, metrics 'tikv_cpu_quota' is empty
+```
+
+If the workload in the time window is too low, or the `resource_manager_resource_unit` and `process_cpu_usage` monitoring data is missing, the following error will be reported. In addition, because TiKV does not monitor CPU utilization on macOS, it does not support capacity estimation based on the actual workload, and will also report this error.
 
 ```sql
 CALIBRATE RESOURCE START_TIME '2023-04-18 08:00:00' DURATION '60m';

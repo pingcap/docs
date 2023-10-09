@@ -127,13 +127,13 @@ Before TiFlash replicas are added, each TiKV instance performs a full table scan
 
 1. Temporarily increase the snapshot write speed limit for each TiKV and TiFlash instance by using the [Dynamic Config SQL statement](https://docs.pingcap.com/tidb/stable/dynamic-config):
 
-   ```sql
-   -- The default value for both configurations are 100MiB, i.e. the maximum disk bandwidth used for writing snapshots is no more than 100MiB/s.
-   SET CONFIG tikv `server.snap-io-max-bytes-per-sec` = '300MiB';
-   SET CONFIG tiflash `raftstore-proxy.server.snap-max-write-bytes-per-sec` = '300MiB';
-   ```
+    ```sql
+    -- The default value for both configurations are 100MiB, i.e. the maximum disk bandwidth used for writing snapshots is no more than 100MiB/s.
+    SET CONFIG tikv `server.snap-io-max-bytes-per-sec` = '300MiB';
+    SET CONFIG tiflash `raftstore-proxy.server.snap-max-write-bytes-per-sec` = '300MiB';
+    ```
 
-   After executing these SQL statements, the configuration changes take effect immediately without restarting the cluster. However, since the replication speed is still restricted by the PD limit globally, you cannot observe the acceleration for now.
+    After executing these SQL statements, the configuration changes take effect immediately without restarting the cluster. However, since the replication speed is still restricted by the PD limit globally, you cannot observe the acceleration for now.
 
 2. Use [PD Control](https://docs.pingcap.com/tidb/stable/pd-control) to progressively ease the new replica speed limit.
 
@@ -143,10 +143,10 @@ Before TiFlash replicas are added, each TiKV instance performs a full table scan
     tiup ctl:v<CLUSTER_VERSION> pd -u http://<PD_ADDRESS>:2379 store limit all engine tiflash 60 add-peer
     ```
 
-    > In the preceding command, you need to replace `v<CLUSTER_VERSION>` with the actual cluster version, such as `v7.1.0` and `<PD_ADDRESS>:2379` with the address of any PD node. For example:
+    > In the preceding command, you need to replace `v<CLUSTER_VERSION>` with the actual cluster version, such as `v7.3.0` and `<PD_ADDRESS>:2379` with the address of any PD node. For example:
     >
     > ```shell
-    > tiup ctl:v6.1.1 pd -u http://192.168.1.4:2379 store limit all engine tiflash 60 add-peer
+    > tiup ctl:v7.3.0 pd -u http://192.168.1.4:2379 store limit all engine tiflash 60 add-peer
     > ```
 
     Within a few minutes, you will observe a significant increase in CPU and disk IO resource usage of the TiFlash nodes, and TiFlash should create replicas faster. At the same time, the TiKV nodes' CPU and disk IO resource usage increases as well.
@@ -159,18 +159,18 @@ Before TiFlash replicas are added, each TiKV instance performs a full table scan
 
 3. After the TiFlash replication is complete, revert to the default configuration to reduce the impact on online services.
 
-   Execute the following PD Control command to restore the default new replica speed limit:
+    Execute the following PD Control command to restore the default new replica speed limit:
 
-   ```shell
-   tiup ctl:v<CLUSTER_VERSION> pd -u http://<PD_ADDRESS>:2379 store limit all engine tiflash 30 add-peer
-   ```
+    ```shell
+    tiup ctl:v<CLUSTER_VERSION> pd -u http://<PD_ADDRESS>:2379 store limit all engine tiflash 30 add-peer
+    ```
 
-   Execute the following SQL statements to restore the default snapshot write speed limit:
+    Execute the following SQL statements to restore the default snapshot write speed limit:
 
-   ```sql
-   SET CONFIG tikv `server.snap-io-max-bytes-per-sec` = '100MiB';
-   SET CONFIG tiflash `raftstore-proxy.server.snap-max-write-bytes-per-sec` = '100MiB';
-   ```
+    ```sql
+    SET CONFIG tikv `server.snap-io-max-bytes-per-sec` = '100MiB';
+    SET CONFIG tiflash `raftstore-proxy.server.snap-max-write-bytes-per-sec` = '100MiB';
+    ```
 
 ## Set available zones
 
@@ -255,5 +255,7 @@ When configuring replicas, if you need to distribute TiFlash replicas to multipl
 <CustomContent platform="tidb">
 
 For more information about scheduling replicas by using labels, see [Schedule Replicas by Topology Labels](/schedule-replicas-by-topology-labels.md), [Multiple Data Centers in One City Deployment](/multi-data-centers-in-one-city-deployment.md), and [Three Data Centers in Two Cities Deployment](/three-data-centers-in-two-cities-deployment.md).
+
+TiFlash supports configuring the replica selection strategy for different zones. For more information, see [`tiflash_replica_read`](/system-variables.md#tiflash_replica_read-new-in-v730).
 
 </CustomContent>

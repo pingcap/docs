@@ -7,6 +7,10 @@ summary: Learn the `TIDB_SERVERS_INFO` INFORMATION_SCHEMA table.
 
 The `TIDB_SERVERS_INFO` table provides information about TiDB servers in the TiDB Cluster (namely, tidb-server processes).
 
+> **Note:**
+>
+> This table is not available on [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless) clusters.
+
 ```sql
 USE INFORMATION_SCHEMA;
 DESC tidb_servers_info;
@@ -46,7 +50,7 @@ The output is as follows:
          PORT: 4000
   STATUS_PORT: 10080
         LEASE: 45s
-      VERSION: 5.7.25-TiDB-v7.1.0
+      VERSION: 5.7.25-TiDB-v7.3.0
      GIT_HASH: 827d8ff2d22ac4c93ae1b841b79d468211e1d393
 BINLOG_STATUS: Off
        LABELS:

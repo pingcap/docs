@@ -87,43 +87,9 @@ Warning: Unable to load '/usr/share/zoneinfo/zone.tab' as time zone. Skipping it
 Warning: Unable to load '/usr/share/zoneinfo/zone1970.tab' as time zone. Skipping it.
 ```
 
-If the downstream is a special MySQL environment (a public cloud RDS or some MySQL derivative versions) and importing the time zone using the above method fails, you need to specify the MySQL time zone of the downstream using the `time-zone` parameter in `sink-uri`. You can first query the time zone used by MySQL:
+If the downstream is a special MySQL environment (a public cloud RDS or some MySQL derivative versions) and importing the time zone using the preceding method fails, you can use the default time zone of the downstream by setting `time-zone` to an empty value, such as `time-zone=""`.
 
-1. Query the time zone used by MySQL:
-
-    {{< copyable "sql" >}}
-
-    ```sql
-    show variables like '%time_zone%';
-    ```
-
-    ```
-    +------------------+--------+
-    | Variable_name    | Value  |
-    +------------------+--------+
-    | system_time_zone | CST    |
-    | time_zone        | SYSTEM |
-    +------------------+--------+
-    ```
-
-2. Specify the time zone when you create the replication task and create the TiCDC service:
-
-    {{< copyable "shell-regular" >}}
-
-    ```shell
-    cdc cli changefeed create --sink-uri="mysql://root@127.0.0.1:3306/?time-zone=CST" --server=http://127.0.0.1:8300
-    ```
-
-    > **Note:**
-    >
-    > CST might be an abbreviation for the following four different time zones:
-    >
-    > - Central Standard Time (USA) UT-6:00
-    > - Central Standard Time (Australia) UT+9:30
-    > - China Standard Time UT+8:00
-    > - Cuba Standard Time UT-4:00
-    >
-    > In China, CST usually stands for China Standard Time.
+When using time zones in TiCDC, it is recommended to explicitly specify the time zone, such as `time-zone="Asia/Shanghai"`. Also, make sure that the `tz` specified in TiCDC server configurations and the `time-zone` specified in Sink URI are consistent with the time zone configuration of the downstream database. This prevents data inconsistency caused by inconsistent time zones.
 
 ## How do I handle the incompatibility issue of configuration files caused by TiCDC upgrade?
 
@@ -140,37 +106,6 @@ Since v4.0.9, you can try to enable the unified sorter feature in your replicati
 3. Manually execute the DDL statement in the downstream. After the execution finishes, go on performing the following operations.
 4. Modify the changefeed configuration and add the above `start-ts` to the `ignore-txn-start-ts` configuration item.
 5. Resume the paused changefeed.
-
-## After I upgrade the TiCDC cluster to v4.0.8, the `[CDC:ErrKafkaInvalidConfig]Canal requires old value to be enabled` error is reported when I execute a changefeed. What should I do?
-
-Since v4.0.8, if the `canal-json`, `canal` or `maxwell` protocol is used for output in a changefeed, TiCDC enables the old value feature automatically. However, if you have upgraded TiCDC from an earlier version to v4.0.8 or later, when the changefeed uses the `canal-json`, `canal` or `maxwell` protocol and the old value feature is disabled, this error is reported.
-
-To fix the error, take the following steps:
-
-1. Set the value of `enable-old-value` in the changefeed configuration file to `true`.
-2. Execute `cdc cli changefeed pause` to pause the replication task.
-
-    {{< copyable "shell-regular" >}}
-
-    ```shell
-    cdc cli changefeed pause -c test-cf --server=http://127.0.0.1:8300
-    ```
-
-3. Execute `cdc cli changefeed update` to update the original changefeed configuration.
-
-    {{< copyable "shell-regular" >}}
-
-    ```shell
-    cdc cli changefeed update -c test-cf --server=http://127.0.0.1:8300 --sink-uri="mysql://127.0.0.1:3306/?max-txn-row=20&worker-number=8" --config=changefeed.toml
-    ```
-
-4. Execute `cdc cli changfeed resume` to resume the replication task.
-
-    {{< copyable "shell-regular" >}}
-
-    ```shell
-    cdc cli changefeed resume -c test-cf --server=http://127.0.0.1:8300
-    ```
 
 ## The `[tikv:9006]GC life time is shorter than transaction duration, transaction starts at xx, GC safe point is yy` error is reported when I use TiCDC to create a changefeed. What should I do?
 

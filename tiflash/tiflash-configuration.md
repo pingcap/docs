@@ -43,8 +43,9 @@ This section introduces the configuration parameters of TiFlash.
 ```toml
 ## The listening host for supporting services such as TPC/HTTP. It is recommended to configure it as "0.0.0.0", which means to listen on all IP addresses of this machine.
 listen_host = "0.0.0.0"
-## The TiFlash TCP service port.
-tcp_port = 9000
+## The TiFlash TCP service port. This port is used for internal testing and is set to 9000 by default. Before TiFlash v7.1.0, this port is enabled by default with a security risk. To enhance security, it is recommended to apply access control on this port to only allow access from whitelisted IP addresses. Starting from TiFlash v7.1.0, you can avoid the security risk by commenting out the configuration of this port. When the TiFlash configuration file does not specify this port, it will be disabled. 
+## It is **NOT** recommended to configure this port in any TiFlash deployment. (Note: Starting from TiFlash v7.1.0, TiFlash deployed by TiUP >= v1.12.5 or TiDB Operator >= v1.5.0 disables the port by default and is more secure.)
+# tcp_port = 9000
 ## The cache size limit of the metadata of a data block. Generally, you do not need to change this value.
 mark_cache_size = 5368709120
 ## The cache size limit of the min-max index of a data block. Generally, you do not need to change this value.
@@ -75,8 +76,9 @@ delta_index_cache_size = 0
     ## DTFile format
     ## * format_version = 2, the default format for versions < v6.0.0.
     ## * format_version = 3, the default format for v6.0.0 and v6.1.x, which provides more data validation features.
-    ## * format_version = 4, the default format for v6.2.0 and later versions, which reduces write amplification and background task resource consumption
-    # format_version = 4
+    ## * format_version = 4, the default format for versions from v6.2.0 to v7.3.0, which reduces write amplification and background task resource consumption
+    ## * format_version = 5, the default format for v7.4.0 and later versions (introduced in v7.3.0), which reduces the number of physical files by merging smaller files. 
+    # format_version = 5
 
     [storage.main]
     ## The list of directories to store the main data. More than 90% of the total data is stored in
@@ -141,6 +143,14 @@ delta_index_cache_size = 0
 [flash]
     tidb_status_addr = TiDB status port and address. # Multiple addresses are separated with commas.
     service_addr = The listening address of TiFlash Raft services and coprocessor services.
+
+    ## Introduced in v7.4.0. When the gap between the `applied_index` advanced by the current Raft state machine and the `applied_index` at the last disk spilling exceeds `compact_log_min_gap`, TiFlash executes the `CompactLog` command from TiKV and spills data to disk. Increasing this gap might reduce the disk spilling frequency of TiFlash, thus reducing read latency in random write scenarios, but it might also increase memory overhead. Decreasing this gap might increase the disk spilling frequency of TiFlash, thus alleviating memory pressure in TiFlash. However, at this stage, the disk spilling frequency of TiFlash will not be higher than that of TiKV, even if this gap is set to 0.
+    ## It is recommended to keep the default value.
+    # compact_log_min_gap = 200
+    ## Introduced in v5.0. When the number or the size of rows in the Regions cached by TiFlash exceeds either of the following thresholds, TiFlash executes the `CompactLog` command from TiKV and spills data to disk.
+    ## It is recommended to keep the default value.
+    # compact_log_min_rows = 40960 # 40k
+    # compact_log_min_bytes = 33554432 # 32MB
 
     ## The following configuration item only takes effect for the TiFlash disaggregated storage and compute architecture mode. For details, see documentation at https://docs.pingcap.com/tidb/dev/tiflash-disaggregated-and-s3.
     # disaggregated_mode = tiflash_write # The supported mode is `tiflash_write` or `tiflash_compute.
@@ -236,6 +246,9 @@ delta_index_cache_size = 0
 
     ## New in v7.0.0. This item specifies the maximum memory available for the HashJoin operator with EquiJoin before a disk spill is triggered. When the memory usage exceeds the threshold, HashJoin reduces memory usage by spilling to disk. This item defaults to 0, which means that the memory usage is unlimited and spill to disk is never used for HashJoin with EquiJoin.
     max_bytes_before_external_join = 0
+
+    ## New in v7.4.0. This item controls whether to enable the TiFlash resource control feature. When it is set to true, TiFlash uses the pipeline execution model.
+    enable_resource_control = true
 
 ## Security settings take effect starting from v4.0.5.
 [security]

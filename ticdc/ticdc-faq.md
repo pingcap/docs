@@ -103,7 +103,6 @@ The Time-To-Live (TTL) that TiCDC sets for a service GC safepoint is 24 hours, w
 If you use the `cdc cli changefeed create` command without specifying the `-config` parameter, TiCDC creates the replication task in the following default behaviors:
 
 - Replicates all tables except system tables
-- Enables the Old Value feature
 - Only replicates tables that contain [valid indexes](/ticdc/ticdc-overview.md#best-practices)
 
 ## Does TiCDC support outputting data changes in the Canal format?
@@ -176,8 +175,6 @@ In TiCDC Open Protocol, the type code `6` represents `null`.
 For more information, refer to [TiCDC Open Protocol column type code](/ticdc/ticdc-open-protocol.md#column-type-code).
 
 ## How can I tell if a Row Changed Event of TiCDC Open Protocol is an `INSERT` event or an `UPDATE` event?
-
-If the Old Value feature is not enabled, you cannot tell whether a Row Changed Event of TiCDC Open Protocol is an `INSERT` event or an `UPDATE` event. If the feature is enabled, you can determine the event type by the fields it contains:
 
 * `UPDATE` event contains both `"p"` and `"u"` fields
 * `INSERT` event only contains the `"u"` field
@@ -280,7 +277,7 @@ When a changefeed is resumed, TiCDC needs to scan the historical versions of dat
 
 ## How should I deploy TiCDC to replicate data between two TiDB cluster located in different regions?
 
-It is recommended that you deploy TiCDC in the downstream TiDB cluster. If the network latency between the upstream and downstream is high, for example, more than 100 ms, the latency produced when TiCDC executes SQL statements to the downstream might increase dramatically due to the MySQL transmission protocol issues. This results in a decrease in system throughput. However, deploying TiCDC in the downstream can greatly ease this problem.
+For TiCDC versions earlier than v6.5.2, it is recommended that you deploy TiCDC in the downstream TiDB cluster. If the network latency between the upstream and downstream is high, for example, more than 100 ms, the latency produced when TiCDC executes SQL statements to the downstream might increase dramatically due to the MySQL transmission protocol issues. This results in a decrease in system throughput. However, deploying TiCDC in the downstream can greatly ease this problem. After optimization, starting from TiCDC v6.5.2, it is recommended that you deploy TiCDC in the upstream TiDB cluster.
 
 ## What is the order of executing DML and DDL statements?
 
@@ -297,3 +294,33 @@ This feature is currently not supported, which might be supported in a future re
 ## Does TiCDC replication get stuck if the upstream has long-running uncommitted transactions?
 
 TiDB has a transaction timeout mechanism. When a transaction runs for a period longer than [`max-txn-ttl`](/tidb-configuration-file.md#max-txn-ttl), TiDB forcibly rolls it back. TiCDC waits for the transaction to be committed before proceeding with the replication, which causes replication delay.
+
+## Why can't I use the `cdc cli` command to operate a TiCDC cluster deployed by TiDB Operator?
+
+This is because the default port number of the TiCDC cluster deployed by TiDB Operator is `8301`, while the default port number of the `cdc cli` command to connect to the TiCDC server is `8300`. When using the `cdc cli` command to operate the TiCDC cluster deployed by TiDB Operator, you need to explicitly specify the `--server` parameter, as follows:
+
+```shell
+./cdc cli changefeed list --server "127.0.0.1:8301"
+[
+  {
+    "id": "4k-table",
+    "namespace": "default",
+    "summary": {
+      "state": "stopped",
+      "tso": 441832628003799353,
+      "checkpoint": "2023-05-30 22:41:57.910",
+      "error": null
+    }
+  },
+  {
+    "id": "big-table",
+    "namespace": "default",
+    "summary": {
+      "state": "normal",
+      "tso": 441872834546892882,
+      "checkpoint": "2023-06-01 17:18:13.700",
+      "error": null
+    }
+  }
+]
+```

@@ -37,22 +37,22 @@ When `tidb_analyze_version = 2`, if memory overflow occurs after `ANALYZE` is ex
 
 - If the `ANALYZE` statement is executed manually, manually analyze every table to be analyzed.
 
-   ```sql
-   SELECT DISTINCT(CONCAT('ANALYZE TABLE ', table_schema, '.', table_name, ';')) FROM information_schema.tables, mysql.stats_histograms WHERE stats_ver = 2 AND table_id = tidb_table_id;
-   ```
+    ```sql
+    SELECT DISTINCT(CONCAT('ANALYZE TABLE ', table_schema, '.', table_name, ';')) FROM information_schema.tables, mysql.stats_histograms WHERE stats_ver = 2 AND table_id = tidb_table_id;
+    ```
 
 - If TiDB automatically executes the `ANALYZE` statement because the auto-analysis has been enabled, execute the following statement that generates the `DROP STATS` statement:
 
-   ```sql
-   SELECT DISTINCT(CONCAT('DROP STATS ', table_schema, '.', table_name, ';')) FROM information_schema.tables, mysql.stats_histograms WHERE stats_ver = 2 AND table_id = tidb_table_id;
-   ```
+    ```sql
+    SELECT DISTINCT(CONCAT('DROP STATS ', table_schema, '.', table_name, ';')) FROM information_schema.tables, mysql.stats_histograms WHERE stats_ver = 2 AND table_id = tidb_table_id;
+    ```
 
 - If the result of the preceding statement is too long to copy and paste, you can export the result to a temporary text file and then perform execution from the file like this:
 
-   ```sql
-   SELECT DISTINCT ... INTO OUTFILE '/tmp/sql.txt';
-   mysql -h ${TiDB_IP} -u user -P ${TIDB_PORT} ... < '/tmp/sql.txt'
-   ```
+    ```sql
+    SELECT DISTINCT ... INTO OUTFILE '/tmp/sql.txt';
+    mysql -h ${TiDB_IP} -u user -P ${TIDB_PORT} ... < '/tmp/sql.txt'
+    ```
 
 This document briefly introduces the histogram, Count-Min Sketch, and Top-N, and details the collection and maintenance of statistics.
 
@@ -147,7 +147,8 @@ If a table has many columns, collecting statistics on all the columns can cause 
 
 > **Note:**
 >
-> Collecting statistics on some columns is only applicable for `tidb_analyze_version = 2`.
+> - Collecting statistics on some columns is only applicable for [`tidb_analyze_version = 2`](/system-variables.md#tidb_analyze_version-new-in-v510).
+> - Starting from TiDB v7.2.0, TiDB introduces the [`tidb_analyze_skip_column_types`](/system-variables.md#tidb_analyze_skip_column_types-new-in-v720) system variable, indicating which types of columns are skipped for statistics collection when executing the `ANALYZE` command to collect statistics. The system variable is only applicable for `tidb_analyze_version = 2`.
 
 - To collect statistics on specific columns, use the following syntax:
 
@@ -322,10 +323,14 @@ When accessing partitioned tables in [dynamic pruning mode](/partitioned-table.m
 
 > **Note:**
 >
-> - When GlobalStats update is triggered:
+> - When GlobalStats update is triggered and [`tidb_skip_missing_partition_stats`](/system-variables.md#tidb_skip_missing_partition_stats-new-in-v730) is `OFF`:
 >
 >     - If some partitions have no statistics (such as a new partition that has never been analyzed), GlobalStats generation is interrupted and a warning message is displayed saying that no statistics are available on partitions.
 >     - If statistics of some columns are absent in specific partitions (different columns are specified for analyzing in these partitions), GlobalStats generation is interrupted when statistics of these columns are aggregated, and a warning message is displayed saying that statistics of some columns are absent in specific partitions.
+>
+> - When GlobalStats update is triggered and [`tidb_skip_missing_partition_stats`](/system-variables.md#tidb_skip_missing_partition_stats-new-in-v730) is `ON`:
+>
+>     If statistics of all or some columns are missing for some partitions, TiDB skips these missing partition statistics when generating GlobalStats so the generation of GlobalStats is not affected.
 >
 > - In dynamic pruning mode, the Analyze configurations of partitions and tables should be the same. Therefore, if you specify the `COLUMNS` configuration following the `ANALYZE TABLE TableName PARTITION PartitionNameList` statement or the `OPTIONS` configuration following `WITH`, TiDB will ignore them and return a warning.
 
@@ -718,13 +723,9 @@ The preceding statement only deletes GlobalStats generated in dynamic pruning mo
 
 ## Load statistics
 
-<CustomContent platform="tidb-cloud">
-
 > **Note:**
 >
-> This section is not applicable to TiDB Cloud.
-
-</CustomContent>
+> Loading statistics is not available on [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless) clusters.
 
 By default, depending on the size of column statistics, TiDB loads statistics differently as follows:
 
@@ -743,18 +744,20 @@ After enabling the synchronously loading statistics feature, you can further con
 - To specify the maximum number of columns that the synchronously loading statistics feature can process concurrently, modify the value of the [`stats-load-concurrency`](/tidb-configuration-file.md#stats-load-concurrency-new-in-v540) option in the TiDB configuration file. The default value is `5`.
 - To specify the maximum number of column requests that the synchronously loading statistics feature can cache, modify the value of the [`stats-load-queue-size`](/tidb-configuration-file.md#stats-load-queue-size-new-in-v540) option in the TiDB configuration file. The default value is `1000`.
 
-During TiDB startup, SQL statements executed before the initial statistics are fully loaded might have suboptimal execution plans, thus causing performance issues. To avoid such issues, TiDB v7.1.0 introduces the configuration parameter [`force-init-stats`](/tidb-configuration-file.md#force-init-stats-new-in-v710). With this option, you can control whether TiDB provides services only after statistics initialization has been finished during startup. This parameter is disabled by default.
-
-> **Warning:**
->
-> Lightweight statistics initialization is an experimental feature. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+During TiDB startup, SQL statements executed before the initial statistics are fully loaded might have suboptimal execution plans, thus causing performance issues. To avoid such issues, TiDB v7.1.0 introduces the configuration parameter [`force-init-stats`](/tidb-configuration-file.md#force-init-stats-new-in-v710). With this option, you can control whether TiDB provides services only after statistics initialization has been finished during startup. Starting from v7.2.0, this parameter is enabled by default.
 
 Starting from v7.1.0, TiDB introduces [`lite-init-stats`](/tidb-configuration-file.md#lite-init-stats-new-in-v710) for lightweight statistics initialization.
 
 - When the value of `lite-init-stats` is `true`, statistics initialization does not load any histogram, TopN, or Count-Min Sketch of indexes or columns into memory.
 - When the value of `lite-init-stats` is `false`, statistics initialization loads histograms, TopN, and Count-Min Sketch of indexes and primary keys into memory but does not load any histogram, TopN, or Count-Min Sketch of non-primary key columns into memory. When the optimizer needs the histogram, TopN, and Count-Min Sketch of a specific index or column, the necessary statistics are loaded into memory synchronously or asynchronously.
 
-The default value of `lite-init-stats` is `false`, which means to disable lightweight statistics initialization. Setting `lite-init-stats` to `true` speeds up statistics initialization and reduces TiDB memory usage by avoiding unnecessary statistics loading.
+The default value of `lite-init-stats` is `true`, which means to enable lightweight statistics initialization. Setting `lite-init-stats` to `true` speeds up statistics initialization and reduces TiDB memory usage by avoiding unnecessary statistics loading.
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+After enabling the synchronously loading statistics feature, you can control how TiDB behaves when the waiting time of SQL optimization reaches the timeout by modifing the value of the [`tidb_stats_load_pseudo_timeout`](/system-variables.md#tidb_stats_load_pseudo_timeout-new-in-v540) system variable. The default value of this variable is `ON`, indicating that after the timeout, the SQL optimization process does not use any histogram, TopN, or CMSketch statistics on any columns. If this variable is set to `OFF`, after the timeout, SQL execution fails.
 
 </CustomContent>
 
@@ -820,37 +823,37 @@ LOAD STATS 'file_name'
 >
 > Locking statistics is an experimental feature for the current version. It is not recommended to use it in the production environment.
 
-Since v6.5.0, TiDB supports locking statistics. After the statistics of a table are locked, the statistics of the table cannot be modified and the `ANALYZE` statement cannot be executed on the table. For example:
+Starting from v6.5.0, TiDB supports locking statistics. After the statistics of a table or a partition are locked, the statistics of the table cannot be modified and the `ANALYZE` statement cannot be executed on the table. For example:
 
 Create table `t`, and insert data into it. When the statistics of table `t` are not locked, the `ANALYZE` statement can be successfully executed.
 
 ```sql
-mysql> create table t(a int, b int);
+mysql> CREATE TABLE t(a INT, b INT);
 Query OK, 0 rows affected (0.03 sec)
 
-mysql> insert into t values (1,2), (3,4), (5,6), (7,8);
+mysql> INSERT INTO t VALUES (1,2), (3,4), (5,6), (7,8);
 Query OK, 4 rows affected (0.00 sec)
 Records: 4  Duplicates: 0  Warnings: 0
 
-mysql> analyze table t;
+mysql> ANALYZE TABLE t;
 Query OK, 0 rows affected, 1 warning (0.02 sec)
 
-mysql> show warnings;
-+-------+------+-----------------------------------------------------------------+
-| Level | Code | Message                                                         |
-+-------+------+-----------------------------------------------------------------+
-| Note  | 1105 | Analyze use auto adjusted sample rate 1.000000 for table test.t |
-+-------+------+-----------------------------------------------------------------+
+mysql> SHOW WARNINGS;
++-------+------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Level | Code | Message                                                                                                                                                                                                               |
++-------+------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Note  | 1105 | Analyze use auto adjusted sample rate 1.000000 for table test.t, reason to use this rate is "Row count in stats_meta is much smaller compared with the row count got by PD, use min(1, 15000/4) as the sample-rate=1" |
++-------+------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 1 row in set (0.00 sec)
 ```
 
-Lock the statistics of table `t` and execute `ANALYZE`. From the output of `SHOW STATS_LOCKED`, you can see that the statistics of table `t` have been locked. The warning message shows that the `ANALYZE` statement has skipped table `t`.
+Lock the statistics of table `t` and execute `ANALYZE`. The warning message shows that the `ANALYZE` statement has skipped table `t`.
 
 ```sql
-mysql> lock stats t;
+mysql> LOCK STATS t;
 Query OK, 0 rows affected (0.00 sec)
 
-mysql> show stats_locked;
+mysql> SHOW STATS_LOCKED;
 +---------+------------+----------------+--------+
 | Db_name | Table_name | Partition_name | Status |
 +---------+------------+----------------+--------+
@@ -858,36 +861,123 @@ mysql> show stats_locked;
 +---------+------------+----------------+--------+
 1 row in set (0.01 sec)
 
-mysql> analyze table t;
+mysql> ANALYZE TABLE t;
 Query OK, 0 rows affected, 2 warnings (0.00 sec)
 
-mysql> show warnings;
-+---------+------+-----------------------------------------------------------------+
-| Level   | Code | Message                                                         |
-+---------+------+-----------------------------------------------------------------+
-| Note    | 1105 | Analyze use auto adjusted sample rate 1.000000 for table test.t |
-| Warning | 1105 | skip analyze locked table: t                                    |
-+---------+------+-----------------------------------------------------------------+
+mysql> SHOW WARNINGS;
++---------+------+-----------------------------------------------------------------------------------------------------------------------------------------+
+| Level   | Code | Message                                                                                                                                 |
++---------+------+-----------------------------------------------------------------------------------------------------------------------------------------+
+| Note    | 1105 | Analyze use auto adjusted sample rate 1.000000 for table test.t, reason to use this rate is "use min(1, 110000/8) as the sample-rate=1" |
+| Warning | 1105 | skip analyze locked table: test.t                                                                                                       |
++---------+------+-----------------------------------------------------------------------------------------------------------------------------------------+
 2 rows in set (0.00 sec)
 ```
 
 Unlock the statistics of table `t` and `ANALYZE` can be successfully executed again.
 
 ```sql
-mysql> unlock stats t;
+mysql> UNLOCK STATS t;
 Query OK, 0 rows affected (0.01 sec)
 
-mysql> analyze table t;
+mysql> ANALYZE TABLE t;
 Query OK, 0 rows affected, 1 warning (0.03 sec)
 
-mysql> show warnings;
-+-------+------+-----------------------------------------------------------------+
-| Level | Code | Message                                                         |
-+-------+------+-----------------------------------------------------------------+
-| Note  | 1105 | Analyze use auto adjusted sample rate 1.000000 for table test.t |
-+-------+------+-----------------------------------------------------------------+
+mysql> SHOW WARNINGS;
++-------+------+-----------------------------------------------------------------------------------------------------------------------------------------+
+| Level | Code | Message                                                                                                                                 |
++-------+------+-----------------------------------------------------------------------------------------------------------------------------------------+
+| Note  | 1105 | Analyze use auto adjusted sample rate 1.000000 for table test.t, reason to use this rate is "use min(1, 110000/8) as the sample-rate=1" |
++-------+------+-----------------------------------------------------------------------------------------------------------------------------------------+
 1 row in set (0.00 sec)
 ```
+
+In addition, you can also lock the statistics of a partition using `LOCK STATS`. For example:
+
+Create a partition table `t`, and insert data into it. When the statistics of partition `p1` are not locked, the `ANALYZE` statement can be successfully executed.
+
+```sql
+mysql> CREATE TABLE t(a INT, b INT) PARTITION BY RANGE (a) (PARTITION p0 VALUES LESS THAN (10), PARTITION p1 VALUES LESS THAN (20), PARTITION p2 VALUES LESS THAN (30));
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> INSERT INTO t VALUES (1,2), (3,4), (5,6), (7,8);
+Query OK, 4 rows affected (0.00 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> ANALYZE TABLE t;
+Query OK, 0 rows affected, 6 warning (0.02 sec)
+
+mysql> SHOW WARNINGS;
++---------+------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Level   | Code | Message                                                                                                                                                                                                                              |
++---------+------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Warning | 1105 | disable dynamic pruning due to t has no global stats                                                                                                                                                                                 |
+| Note    | 1105 | Analyze use auto adjusted sample rate 1.000000 for table test.t's partition p0, reason to use this rate is "Row count in stats_meta is much smaller compared with the row count got by PD, use min(1, 15000/4) as the sample-rate=1" |
+| Warning | 1105 | disable dynamic pruning due to t has no global stats                                                                                                                                                                                 |
+| Note    | 1105 | Analyze use auto adjusted sample rate 1.000000 for table test.t's partition p1, reason to use this rate is "TiDB assumes that the table is empty, use sample-rate=1"                                                                 |
+| Warning | 1105 | disable dynamic pruning due to t has no global stats                                                                                                                                                                                 |
+| Note    | 1105 | Analyze use auto adjusted sample rate 1.000000 for table test.t's partition p2, reason to use this rate is "TiDB assumes that the table is empty, use sample-rate=1"                                                                 |
++---------+------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+6 rows in set (0.01 sec)
+```
+
+Lock the statistics of partition `p1` and execute `ANALYZE`. The warning message shows that the `ANALYZE` statement has skipped partition `p1`.
+
+```sql
+mysql> LOCK STATS t PARTITION p1;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> SHOW STATS_LOCKED;
++---------+------------+----------------+--------+
+| Db_name | Table_name | Partition_name | Status |
++---------+------------+----------------+--------+
+| test    | t          | p1             | locked |
++---------+------------+----------------+--------+
+1 row in set (0.00 sec)
+
+mysql> ANALYZE TABLE t PARTITION p1;
+Query OK, 0 rows affected, 2 warnings (0.01 sec)
+
+mysql> SHOW WARNINGS;
++---------+------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Level   | Code | Message                                                                                                                                                              |
++---------+------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Note    | 1105 | Analyze use auto adjusted sample rate 1.000000 for table test.t's partition p1, reason to use this rate is "TiDB assumes that the table is empty, use sample-rate=1" |
+| Warning | 1105 | skip analyze locked table: test.t partition (p1)                                                                                                                     |
++---------+------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+2 rows in set (0.00 sec)
+```
+
+Unlock the statistics of partition `p1` and `ANALYZE` can be successfully executed again.
+
+```sql
+mysql> UNLOCK STATS t PARTITION p1;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> ANALYZE TABLE t PARTITION p1;
+Query OK, 0 rows affected, 1 warning (0.01 sec)
+
+mysql> SHOW WARNINGS;
++-------+------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Level | Code | Message                                                                                                                                                              |
++-------+------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Note  | 1105 | Analyze use auto adjusted sample rate 1.000000 for table test.t's partition p1, reason to use this rate is "TiDB assumes that the table is empty, use sample-rate=1" |
++-------+------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+1 row in set (0.00 sec)
+```
+
+### Behaviors of locking statistics
+
+* If you lock the statistics on a partitioned table, the statistics of all partitions on the partitioned table are locked.
+* If you truncate a table or partition, the statistics lock on the table or partition will be released.
+
+The following table describes the behaviors of locking statistics:
+
+| | Delete the whole table | Truncate the whole table | Truncate a partition | Create a new partition | Delete a partition | Reorganize a partition | Exchange a partition |
+|----------------------------|------------|----------------------------------------------------------------|----------------------------------------------------------------|----------------|----------------------------------------------|----------------------------------------------|--------------------------|
+| A non-partitioned table is locked | The lock is invalid | The lock is invalid because TiDB deletes the old table, so the lock information is also deleted | / | / | / | / | / |
+| A partitioned table and the whole table is locked | The lock is invalid | The lock is invalid because TiDB deletes the old table, so the lock information is also deleted | The old partition lock information is invalid, and the new partition is automatically locked | The new partition is automatically locked | The lock information of the deleted partition is cleared, and the lock of the whole table continues to take effect | The lock information of the deleted partition is cleared, and the new partition is automatically locked | The lock information is transferred to the exchanged table, and the new partition is automatically locked |
+| A partitioned table and only some partitions are locked | The lock is invalid | The lock is invalid because TiDB deletes the old table, so the lock information is also deleted | The lock is invalid because TiDB deletes the old table, so the lock information is also deleted | / | The deleted partition lock information is cleared | The deleted partition lock information is cleared | The lock information is transferred to the exchanged table |
 
 ## See also
 
@@ -895,9 +985,17 @@ mysql> show warnings;
 
 * [LOAD STATS](/sql-statements/sql-statement-load-stats.md)
 * [DROP STATS](/sql-statements/sql-statement-drop-stats.md)
-
-</CustomContent>
-
 * [LOCK STATS](/sql-statements/sql-statement-lock-stats.md)
 * [UNLOCK STATS](/sql-statements/sql-statement-unlock-stats.md)
 * [SHOW STATS_LOCKED](/sql-statements/sql-statement-show-stats-locked.md)
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+* [LOAD STATS](/sql-statements/sql-statement-load-stats.md)
+* [LOCK STATS](/sql-statements/sql-statement-lock-stats.md)
+* [UNLOCK STATS](/sql-statements/sql-statement-unlock-stats.md)
+* [SHOW STATS_LOCKED](/sql-statements/sql-statement-show-stats-locked.md)
+
+</CustomContent>

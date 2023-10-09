@@ -47,6 +47,10 @@ Currently, the `help_topic` is NULL.
 
 ## GC worker system tables
 
+> **Note:**
+>
+> The GC worker system tables are only applicable to TiDB Self-Hosted and not available on [TiDB Cloud](https://docs.pingcap.com/tidbcloud/).
+
 - `gc_delete_range`: the KV range to be deleted
 - `gc_delete_range_done`: the deleted KV range
 
@@ -56,19 +60,40 @@ Currently, the `help_topic` is NULL.
 
 ## TTL related system tables
 
-* `mysql.tidb_ttl_table_status` the previously executed TTL job and ongoing TTL job for all TTL tables
-* `mysql.tidb_ttl_task` the current ongoing TTL subtasks
-* `mysql.tidb_ttl_job_history` the execution history of TTL tasks in the last 90 days
+> **Note:**
+
+> The TTL related system tables are not available on [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless) clusters.
+
+* `tidb_ttl_table_status`: the previously executed TTL job and ongoing TTL job for all TTL tables
+* `tidb_ttl_task`: the current ongoing TTL subtasks
+* `tidb_ttl_job_history`: the execution history of TTL tasks in the last 90 days
+
+## Runaway queries related system tables
+
+* `tidb_runaway_queries`: the history records of all identified runaway queries in the past 7 days
+* `tidb_runaway_watch`: the watch list of runaway queries
+* `tidb_runaway_watch_done`: a watch list of deleted or expired runaway queries
 
 ## Miscellaneous system tables
 
-- `GLOBAL_VARIABLES`: global system variable table
-
 <CustomContent platform="tidb">
 
+> **Note:**
+>
+> The `tidb`, `expr_pushdown_blacklist`, `opt_rule_blacklist`, `table_cache_meta`, `tidb_import_jobs`, and `tidb_timers` system tables are only applicable to TiDB Self-Hosted and not available on [TiDB Cloud](https://docs.pingcap.com/tidbcloud/).
+
+- `GLOBAL_VARIABLES`: global system variable table
 - `tidb`: to record the version information when TiDB executes `bootstrap`
 - `expr_pushdown_blacklist`: the blocklist for expression pushdown
 - `opt_rule_blacklist`: the blocklist for logical optimization rules
 - `table_cache_meta`: the metadata of cached tables
+- `tidb_import_jobs`: the job information of [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md)
+- `tidb_timers`: the metadata of internal timers
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+- `GLOBAL_VARIABLES`: global system variable table
 
 </CustomContent>

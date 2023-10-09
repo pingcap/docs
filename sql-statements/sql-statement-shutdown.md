@@ -8,6 +8,10 @@ aliases: ['/docs/dev/sql-statements/sql-statement-shutdown/']
 
 The `SHUTDOWN` statement is used to perform a shutdown operation in TiDB. Execution of the `SHUTDOWN` statement requires the user to have `SHUTDOWN privilege`.
 
+> **Note:**
+>
+> This feature is only applicable to TiDB Self-Hosted and not available on [TiDB Cloud](https://docs.pingcap.com/tidbcloud/).
+
 ## Synopsis
 
 **Statement:**
@@ -32,4 +36,4 @@ Query OK, 0 rows affected (0.00 sec)
 >
 > Because TiDB is a distributed database, the shutdown operation in TiDB stops the client-connected TiDB instance, not the entire TiDB cluster.
 
-The `SHUTDOWN` statement is partly compatible with MySQL. If you encounter any compatibility issues, you can report the issues [on GitHub](https://github.com/pingcap/tidb/issues/new/choose).
+The `SHUTDOWN` statement is partly compatible with MySQL. If you encounter any compatibility issues, you can [report a bug](https://docs.pingcap.com/tidb/stable/support).

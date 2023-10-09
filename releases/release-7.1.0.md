@@ -57,7 +57,7 @@ Compared with the previous LTS 6.5.0, 7.1.0 not only includes new features, impr
   </tr>
   <tr>
     <td rowspan="3">SQL</td>
-    <td><a href="https://docs.pingcap.com/tidb/v7.1/sql-statement-create-index#multi-valued-index" target="_blank">Multi-valued index</a> (GA)</td>
+    <td><a href="https://docs.pingcap.com/tidb/v7.1/sql-statement-create-index#multi-valued-indexes" target="_blank">Multi-valued indexes</a> (GA)</td>
     <td>Support MySQL-compatible multi-valued indexes and enhance the JSON type to improve compatibility with MySQL 8.0. This feature improves the efficiency of membership checks on multi-valued columns.</td>
   </tr>
   <tr>
@@ -88,7 +88,7 @@ Compared with the previous LTS 6.5.0, 7.1.0 not only includes new features, impr
 
     TiDB v6.6.0 introduces the Partitioned Raft KV storage engine as an experimental feature, which uses multiple RocksDB instances to store TiKV Region data, and the data of each Region is independently stored in a separate RocksDB instance. The new storage engine can better control the number and level of files in the RocksDB instance, achieve physical isolation of data operations between Regions, and support stably managing more data. Compared with the original TiKV storage engine, using the Partitioned Raft KV storage engine can achieve about twice the write throughput and reduce the elastic scaling time by about 4/5 under the same hardware conditions and mixed read and write scenarios.
 
-    In TiDB v7.1.0, the Partitioned Raft KV storage engine is compatible with TiFlash and supports tools such as TiDB Lightning, BR, and TiCDC.
+    In TiDB v7.1.0, the Partitioned Raft KV storage engine supports tools such as TiDB Lightning, BR, and TiCDC.
 
     Currently, this feature is experimental and not recommended for use in production environments. You can only use this engine in a newly created cluster and you cannot directly upgrade from the original TiKV storage engine.
 
@@ -213,9 +213,9 @@ Compared with the previous LTS 6.5.0, 7.1.0 not only includes new features, impr
 
     Filtering the values of an array in a JSON column is a common operation, but normal indexes cannot help speed up such an operation. Creating a multi-valued index on an array can greatly improve filtering performance. If an array in the JSON column has a multi-valued index, you can use the multi-valued index to filter retrieval conditions in `MEMBER OF()`, `JSON_CONTAINS()`, and `JSON_OVERLAPS()` functions, thereby reducing I/O consumption and improving operation speed.
 
-    In v7.1.0, the multi-valued index feature becomes generally available (GA). It supports more complete data types and is compatible with TiDB tools. You can use multi-valued indexes to speed up the search operations on JSON arrays in production environments.
+    In v7.1.0, the multi-valued indexes feature becomes generally available (GA). It supports more complete data types and is compatible with TiDB tools. You can use multi-valued indexes to speed up the search operations on JSON arrays in production environments.
 
-    For more information, see [documentation](/sql-statements/sql-statement-create-index.md#multi-valued-index).
+    For more information, see [documentation](/sql-statements/sql-statement-create-index.md#multi-valued-indexes).
 
 * Improve the partition management for Hash and Key partitioned tables [#42728](https://github.com/pingcap/tidb/issues/42728) @[mjonss](https://github.com/mjonss)
 
@@ -239,7 +239,7 @@ Compared with the previous LTS 6.5.0, 7.1.0 not only includes new features, impr
 
 ### DB operations
 
-* Support smooth cluster upgrade without manually canceling DDL operations [#39751](https://github.com/pingcap/tidb/issues/39751) @[zimulala](https://github.com/zimulala)
+* Support smooth cluster upgrade without manually canceling DDL operations (experimental) [#39751](https://github.com/pingcap/tidb/issues/39751) @[zimulala](https://github.com/zimulala)
 
     Before TiDB v7.1.0, to upgrade a cluster, you must manually cancel its running or queued DDL tasks before the upgrade and then add them back after the upgrade.
 
@@ -348,11 +348,12 @@ Compared with the previous LTS 6.5.0, 7.1.0 not only includes new features, impr
 | TiDB | [`performance.force-init-stats`](/tidb-configuration-file.md#force-init-stats-new-in-v710) | Newly added | Controls whether to wait for statistics initialization to finish before providing services during TiDB startup. |
 | TiDB | [`performance.lite-init-stats`](/tidb-configuration-file.md#lite-init-stats-new-in-v710) | Newly added | Controls whether to use lightweight statistics initialization during TiDB startup. |
 | TiDB | [`log.timeout`](/tidb-configuration-file.md#timeout-new-in-v710) | Newly added | Sets the timeout for log-writing operations in TiDB. In case of a disk failure that prevents logs from being written, this configuration item can trigger the TiDB process to panic instead of hang. The default value is `0`, which means no timeout is set. |
-| TiKV | [<code>rocksdb.\[defaultcf\|writecf\|lockcf\].optimize-filters-for-memory</code>](/tikv-configuration-file.md#optimize-filters-for-memory-new-in-v710) | Newly added | Controls whether to generate Bloom/Ribbon filters that minimize memory internal fragmentation. |
-| TiKV | [<code>rocksdb.\[defaultcf\|writecf\|lockcf\].ribbon-filter-above-level</code>](/tikv-configuration-file.md#ribbon-filter-above-level-new-in-v710) | Newly added | Controls whether to use Ribbon filters for levels greater than or equal to this value and use non-block-based bloom filters for levels less than this value. |
+| TiKV | [`region-compact-min-redundant-rows`](/tikv-configuration-file.md#region-compact-min-redundant-rows-new-in-v710) | Newly added | Sets the number of redundant MVCC rows required to trigger RocksDB compaction. The default value is `50000`. |
+| TiKV | [`region-compact-redundant-rows-percent`](/tikv-configuration-file.md#region-compact-redundant-rows-percent-new-in-v710) | Newly added | Sets the percentage of redundant MVCC rows required to trigger RocksDB compaction. The default value is `20`. |
 | TiKV | [`split.byte-threshold`](/tikv-configuration-file.md#byte-threshold-new-in-v50) | Modified | Changes the default value from `30MiB` to `100MiB` when [`region-split-size`](/tikv-configuration-file.md#region-split-size) is greater than or equal to 4 GB. |
 | TiKV | [`split.qps-threshold`](/tikv-configuration-file.md#qps-threshold) | Modified | Changes the default value from `3000` to `7000` when [`region-split-size`](/tikv-configuration-file.md#region-split-size) is greater than or equal to 4 GB. |
 | TiKV | [`split.region-cpu-overload-threshold-ratio`](/tikv-configuration-file.md#region-cpu-overload-threshold-ratio-new-in-v620) | Modified | Changes the default value from `0.25` to `0.75` when [`region-split-size`](/tikv-configuration-file.md#region-split-size) is greater than or equal to 4 GB. |
+| TiKV | [`region-compact-check-step`](/tikv-configuration-file.md#region-compact-check-step) | Modified | Changes the default value from `100` to `5` when Partitioned Raft KV is enabled (`storage.engine="partitioned-raft-kv"`). |
 | PD | [`store-limit-version`](/pd-configuration-file.md#store-limit-version-new-in-v710) | Newly added | Controls the mode of store limit. Value options are `"v1"` and `"v2"`. |
 | PD | [`schedule.enable-diagnostic`](/pd-configuration-file.md#enable-diagnostic-new-in-v630) | Modified | Changes the default value from `false` to `true`, meaning that the diagnostic feature of scheduler is enabled by default. |
 | TiFlash | `http_port` | Deleted | Deprecates the HTTP service port (default `8123`). |
@@ -363,6 +364,7 @@ Compared with the previous LTS 6.5.0, 7.1.0 not only includes new features, impr
 | TiCDC | [`insecure-skip-verify`](/ticdc/ticdc-sink-to-kafka.md) | Newly added | Controls whether the authentication algorithm is set when TLS is enabled in the scenario of replicating data to Kafka. |
 | TiCDC | [`integrity.corruption-handle-level`](/ticdc/ticdc-changefeed-config.md#cli-and-configuration-parameters-of-ticdc-changefeeds) | Newly added | Specifies the log level of the Changefeed when the checksum validation for single-row data fails. The default value is `"warn"`. Value options are `"warn"` and `"error"`. |
 | TiCDC | [`integrity.integrity-check-level`](/ticdc/ticdc-changefeed-config.md#cli-and-configuration-parameters-of-ticdc-changefeeds) | Newly added | Controls whether to enable the checksum validation for single-row data. The default value is `"none"`, which means to disable the feature. |
+| TiCDC | [`sink.only-output-updated-columns`](/ticdc/ticdc-changefeed-config.md#cli-and-configuration-parameters-of-ticdc-changefeeds) | Newly added | Controls whether to only output the updated columns. The default value is `false`. |
 | TiCDC | [`sink.enable-partition-separator`](/ticdc/ticdc-changefeed-config.md#cli-and-configuration-parameters-of-ticdc-changefeeds) | Modified | Changes the default value from `false` to `true` after further tests, meaning that partitions in a table are stored in separate directories by default. It is recommended that you keep the value as `true` to avoid the potential issue of data loss during replication of partitioned tables to storage services. |
 
 ## Improvements
@@ -444,7 +446,6 @@ Compared with the previous LTS 6.5.0, 7.1.0 not only includes new features, impr
     - Fix the wrong value returned when querying a partitioned table using `Limit` [#24636](https://github.com/pingcap/tidb/issues/24636)
     - Fix the issue of displaying the incorrect TiDB address in IPv6 environment [#43260](https://github.com/pingcap/tidb/issues/43260) @[nexustar](https://github.com/nexustar)
     - Fix the issue of displaying incorrect values for system variables `tidb_enable_tiflash_read_for_write_stmt` and `tidb_enable_exchange_partition` [#43281](https://github.com/pingcap/tidb/issues/43281) @[gengliqi](https://github.com/gengliqi)
-    - Fix the issue that the proxy protocol reports the `Header read timeout` error when processing certain erroneous data [#43205](https://github.com/pingcap/tidb/issues/43205) @[blacktear23](https://github.com/blacktear23)
     - Fix the issue that when `tidb_scatter_region` is enabled, Region does not automatically split after a partition is truncated [#43174](https://github.com/pingcap/tidb/issues/43174) [#43028](https://github.com/pingcap/tidb/issues/43028) @[jiyfhust](https://github.com/jiyfhust)
     - Add checks on the tables with generated columns and report errors for unsupported DDL operations on these columns [#38988](https://github.com/pingcap/tidb/issues/38988) [#24321](https://github.com/pingcap/tidb/issues/24321) @[tiancaiamao](https://github.com/tiancaiamao)
     - Fix the issue that the error message is incorrect in certain type conversion errors [#41730](https://github.com/pingcap/tidb/issues/41730) @[hawkingrei](https://github.com/hawkingrei)
@@ -533,7 +534,7 @@ Compared with the previous LTS 6.5.0, 7.1.0 not only includes new features, impr
 
 ## Performance test
 
-To learn about the performance of TiDB v7.1.0, you can refer to the [TPC-C performance test report](https://docs.pingcap.com/tidbcloud/v7.1.0-performance-benchmarking-with-tpcc) of the TiDB Dedicated cluster.
+To learn about the performance of TiDB v7.1.0, you can refer to the [TPC-C performance test report](https://docs.pingcap.com/tidbcloud/v7.1.0-performance-benchmarking-with-tpcc) and [Sysbench performance test report](https://docs.pingcap.com/tidbcloud/v7.1.0-performance-benchmarking-with-sysbench) of the TiDB Dedicated cluster.
 
 ## Contributors
 

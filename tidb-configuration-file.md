@@ -48,7 +48,12 @@ The TiDB configuration file supports more options than command-line parameters. 
 
 + File system location used by TiDB to store temporary data. If a feature requires local storage in TiDB nodes, TiDB stores the corresponding temporary data in this location.
 + When creating an index, if [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) is enabled, data that needs to be backfilled for a newly created index will be at first stored in the TiDB local temporary directory, and then imported into TiKV in batches, thus accelerating the index creation.
++ When [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md) is used to import data, the sorted data is first stored in the TiDB local temporary directory, and then imported into TiKV in batches.
 + Default value: `"/tmp/tidb"`
+
+> **Note:**
+>
+> If the directory does not exist, TiDB will automatically create it upon startup. If the directory creation fails or TiDB does not have the read and write permissions on that directory, [`Fast Online DDL`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) might experience unpredictable issues.
 
 ### `oom-use-tmp-storage`
 
@@ -119,6 +124,10 @@ The TiDB configuration file supports more options than command-line parameters. 
 + Default value: ""
 + By default, the format of the TiDB version string is `5.7.${mysql_latest_minor_version}-TiDB-${tidb_version}`.
 
+> **Note:**
+>
+> TiDB nodes use the value of `server-version` to verify the current TiDB version. Therefore, to avoid unexpected behaviors, before upgrading the TiDB cluster, you need to set the value of `server-version` to empty or the real version of the current TiDB cluster.
+
 ### `repair-mode`
 
 - Determines whether to enable the untrusted repair mode. When the `repair-mode` is set to `true`, bad tables in the `repair-table-list` cannot be loaded.
@@ -170,6 +179,11 @@ The TiDB configuration file supports more options than command-line parameters. 
 - When this configuration is set to `true` on a TiDB instance, the telemetry collection in this TiDB instance is enabled and the [`tidb_enable_telemetry`](/system-variables.md#tidb_enable_telemetry-new-in-v402) system variable takes effect.
 - When this configuration is set to `false` on all TiDB instances, the telemetry collection in TiDB is disabled and the [`tidb_enable_telemetry`](/system-variables.md#tidb_enable_telemetry-new-in-v402) system variable does not take effect. See [Telemetry](/telemetry.md) for details.
 
+### `deprecate-integer-display-length`
+
+- Deprecates the display width for integer types when this configuration item is set to `true`.
+- Default value: `false`
+
 ### `enable-tcp4-only` <span class="version-mark">New in v5.0</span>
 
 - Enables or disables listening on TCP4 only.
@@ -192,7 +206,18 @@ The TiDB configuration file supports more options than command-line parameters. 
 
 + Controls whether to enable the Global Kill (terminating queries or connections across instances) feature.
 + Default value: `true`
-+ When the value is `true`, both `KILL` and `KILL TIDB` statements can terminate queries or connections across instances so you do not need to worry about erroneously terminating queries or connections. When you use a client to connect to any TiDB instance and execute the `KILL` or `KILL TIDB` statement, the statement will be forwarded to the target TiDB instance. If there is a proxy between the client and the TiDB cluster, the `KILL` and `KILL TIDB` statements will also be forwarded to the target TiDB instance for execution. Currently, using the MySQL command line <kbd>ctrl</kbd>+<kbd>c</kbd> to terminate a query or connection in TiDB is not supported when `enable-global-kill` is `true`. For more information on the `KILL` statement, see [KILL](/sql-statements/sql-statement-kill.md).
++ When the value is `true`, both `KILL` and `KILL TIDB` statements can terminate queries or connections across instances so you do not need to worry about erroneously terminating queries or connections. When you use a client to connect to any TiDB instance and execute the `KILL` or `KILL TIDB` statement, the statement will be forwarded to the target TiDB instance. If there is a proxy between the client and the TiDB cluster, the `KILL` and `KILL TIDB` statements will also be forwarded to the target TiDB instance for execution.
++ Starting from v7.3.0, you can terminate a query or connection using the MySQL command line <kbd>Control+C</kbd> when both `enable-global-kill` and [`enable-32bits-connection-id`](#enable-32bits-connection-id-new-in-v730) are set to `true`. For more information, see [`KILL`](/sql-statements/sql-statement-kill.md).
+
+### `enable-32bits-connection-id` <span class="version-mark">New in v7.3.0</span>
+
++ Controls whether to enable the 32-bit connection ID feature.
++ Default value: `true`
++ When both this configuration item and [`enable-global-kill`](#enable-global-kill-new-in-v610) are set to `true`, TiDB generates 32-bit connection IDs. This enables you to terminate queries or connections by the MySQL command-line <kbd>Control+C</kbd>.
+
+> **Warning:**
+>
+> When the number of TiDB instances in the cluster exceeds 2048 or the concurrent connection count of a single TiDB instance exceeds 1048576, the 32-bit connection ID space becomes insufficient and is automatically upgraded to 64-bit connection IDs. During the upgrade process, existing business and established connections are unaffected. However, subsequent new connections cannot be terminated using <kbd>Control+C</kbd> in the MySQL command-line.
 
 ### `initialize-sql-file` <span class="version-mark">New in v6.6.0</span>
 
@@ -285,6 +310,10 @@ Configuration items related to log.
 - Since v6.1.0, whether to record execution plans in the slow log is determined by the TiDB configuration item [`instance.tidb_record_plan_in_slow_log`](/tidb-configuration-file.md#tidb_record_plan_in_slow_log) or the system variable [`tidb_record_plan_in_slow_log`](/system-variables.md#tidb_record_plan_in_slow_log). `record-plan-in-slow-log` still takes effect. But if `record-plan-in-slow-log` and `instance.tidb_record_plan_in_slow_log` are set at the same time, the latter takes effect.
 
 ### `expensive-threshold`
+
+> **Warning:**
+>
+> Starting from v5.4.0, the `expensive-threshold` configuration item is deprecated and replaced by the system variable [`tidb_expensive_query_time_threshold`](/system-variables.md#tidb_expensive_query_time_threshold).
 
 - Outputs the threshold value of the number of rows for the `expensive` operation.
 - Default value: `10000`
@@ -536,18 +565,10 @@ Configuration items related to performance.
 
 ### `enable-stats-cache-mem-quota` <span class="version-mark">New in v6.1.0</span>
 
-> **Warning:**
->
-> This variable is an experimental feature. It is not recommended to use it in production environments.
-
 + Controls whether to enable the memory quota for the statistics cache.
-+ Default value: `false`
++ Default value: `true`
 
 ### `stats-load-concurrency` <span class="version-mark">New in v5.4.0</span>
-
-> **Warning:**
->
-> Currently, synchronously loading statistics is an experimental feature. It is not recommended that you use it in production environments.
 
 + The maximum number of columns that the TiDB synchronously loading statistics feature can process concurrently.
 + Default value: `5`
@@ -555,30 +576,22 @@ Configuration items related to performance.
 
 ### `stats-load-queue-size` <span class="version-mark">New in v5.4.0</span>
 
-> **Warning:**
->
-> Currently, synchronously loading statistics is an experimental feature. It is not recommended that you use it in production environments.
-
 + The maximum number of column requests that the TiDB synchronously loading statistics feature can cache.
 + Default value: `1000`
 + Currently, the valid value range is `[1, 100000]`.
 
 ### `lite-init-stats` <span class="version-mark">New in v7.1.0</span>
 
-> **Warning:**
->
-> This variable is an experimental feature. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
-
 + Controls whether to use lightweight statistics initialization during TiDB startup.
-+ Default value: false
++ Default value: `false` for versions earlier than v7.2.0, `true` for v7.2.0 and later versions.
 + When the value of `lite-init-stats` is `true`, statistics initialization does not load any histogram, TopN, or Count-Min Sketch of indexes or columns into memory. When the value of `lite-init-stats` is `false`, statistics initialization loads histograms, TopN, and Count-Min Sketch of indexes and primary keys into memory but does not load any histogram, TopN, or Count-Min Sketch of non-primary key columns into memory. When the optimizer needs the histogram, TopN, and Count-Min Sketch of a specific index or column, the necessary statistics are loaded into memory synchronously or asynchronously (controlled by [`tidb_stats_load_sync_wait`](/system-variables.md#tidb_stats_load_sync_wait-new-in-v540)).
 + Setting `lite-init-stats` to `true` speeds up statistics initialization and reduces TiDB memory usage by avoiding unnecessary statistics loading. For details, see [Load statistics](/statistics.md#load-statistics).
 
 ### `force-init-stats` <span class="version-mark">New in v7.1.0</span>
 
 + Controls whether to wait for statistics initialization to finish before providing services during TiDB startup.
-+ Default value: false
-+ When the value of `force-init-stats` is `true`, TiDB needs to wait until statistics initialization is finished before providing services upon startup. If there are a large number of tables and partitions, setting `force-init-stats` to `true` might prolong the time it takes for TiDB to start providing services.
++ Default value: `false` for versions earlier than v7.2.0, `true` for v7.2.0 and later versions.
++ When the value of `force-init-stats` is `true`, TiDB needs to wait until statistics initialization is finished before providing services upon startup. Note that if there are a large number of tables and partitions and the value of [`lite-init-stats`](/tidb-configuration-file.md#lite-init-stats-new-in-v710) is `false`, setting `force-init-stats` to `true` might prolong the time it takes for TiDB to start providing services.
 + When the value of `force-init-stats` is `false`, TiDB can still provide services before statistics initialization is finished, but the optimizer uses pseudo statistics to make decisions, which might result in suboptimal execution plans.
 
 ## opentracing
@@ -842,6 +855,26 @@ Configuration items related to read isolation.
 - Unit: Milliseconds
 - Before v6.1.0, this configuration is set by `slow-threshold`.
 
+### `in-mem-slow-query-topn-num` <span class="version-mark">New in v7.3.0</span>
+
++ The configuration controls the number of slowest queries that are cached in memory.
++ Default value: 30
+
+### `in-mem-slow-query-recent-num` <span class="version-mark">New in v7.3.0</span>
+
++ The configuration controls the number of recently used slow queries that are cached in memory.
++ Default value: 500
+
+### `tidb_expensive_query_time_threshold`
+
+- This configuration is used to set the threshold value that determines whether to print expensive query logs. The difference between expensive query logs and slow query logs is:
+    - Slow logs are printed after the statement is executed.
+    - Expensive query logs print the statements that are being executed, with execution time exceeding the threshold value, and their related information.
+- Default value: `60`
+- Range: `[10, 2147483647]`
+- Unit: Seconds
+- Before v5.4.0, this configuration is set by `expensive-threshold`.
+
 ### `tidb_record_plan_in_slow_log`
 
 - This configuration is used to control whether to include the execution plan of slow queries in the slow log.
@@ -939,6 +972,11 @@ Configuration items related to the PROXY protocol.
 > **Warning:**
 >
 > Use `*` with caution because it might introduce security risks by allowing a client of any IP address to report its IP address. In addition, using `*` might also cause the internal component that directly connects to TiDB (such as TiDB Dashboard) to be unavailable.
+
+### `fallbackable` <span class="version-mark">New in v6.5.1</span>
+
++ Controls whether to enable the PROXY protocol fallback mode. If this configuration item is set to `true`, TiDB can accept clients that belong to `proxy-protocol.networks` to connect to TiDB without using the PROXY protocol specification or without sending the PROXY protocol header. By default, TiDB only accepts client connections that belong to `proxy-protocol.networks` and send a PROXY protocol header.
++ Default value: `false`
 
 ## experimental
 

@@ -5,15 +5,11 @@ summary: Learn the usage of SHOW CREATE RESOURCE GROUP in TiDB.
 
 # SHOW CREATE RESOURCE GROUP
 
-<CustomContent platform="tidb-cloud">
+You can use the `SHOW CREATE RESOURCE GROUP` statement to view the current definition of a resource group.
 
 > **Note:**
 >
-> This feature is not available on [TiDB Serverless clusters](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless-beta).
-
-</CustomContent>
-
-You can use the `SHOW CREATE RESOURCE GROUP` statement to view the current definition of a resource group.
+> This feature is not available on [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless) clusters.
 
 ## Synopsis
 
@@ -23,6 +19,7 @@ ShowCreateResourceGroupStmt ::=
 
 ResourceGroupName ::=
     Identifier
+|   "DEFAULT"
 ```
 
 ## Examples

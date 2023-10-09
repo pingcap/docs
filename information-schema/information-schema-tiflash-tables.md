@@ -9,6 +9,10 @@ summary: Learn the `TIFLASH_TABLES` information_schema table.
 >
 > Do not use this table in production environments, as the fields of the table are unstable, and subject to change in new releases of TiDB, without prior notice.
 
+> **Note:**
+>
+> This table is not available on [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless) clusters.
+
 The `TIFLASH_TABLES` table provides statistical information about data tables in TiFlash.
 
 ```sql

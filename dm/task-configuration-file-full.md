@@ -18,12 +18,13 @@ The following is the task configuration file template which allows you to perfor
 ```yaml
 ---
 
-# ----------- Global setting -----------
+# ----------- Global configuration -----------
 ## ********* Basic configuration *********
 name: test                      # The name of the task. Should be globally unique.
 task-mode: all                  # The task mode. Can be set to `full`(only migrates full data)/`incremental`(replicates binlogs synchronously)/`all` (replicates both full data and incremental binlogs).
 shard-mode: "pessimistic"       # The shard merge mode. Optional modes are ""/"pessimistic"/"optimistic". The "" mode is used by default which means sharding DDL merge is disabled. If the task is a shard merge task, set it to the "pessimistic" mode.
                                 # After understanding the principles and restrictions of the "optimistic" mode, you can set it to the "optimistic" mode.
+strict-optimistic-shard-mode: false # Only takes effect in the optimistic mode. This configuration restricts the behavior of the optimistic mode. The default value is false. Introduced in v7.2.0. For details, see https://docs.pingcap.com/tidb/v7.2/feature-shard-merge-optimistic
 meta-schema: "dm_meta"          # The downstream database that stores the `meta` information.
 timezone: "Asia/Shanghai"       # The timezone used in SQL Session. By default, DM uses the global timezone setting in the target cluster, which ensures the correctness automatically. A customized timezone does not affect data migration but is unnecessary.
 case-sensitive: false           # Determines whether the schema/table is case-sensitive.
@@ -238,6 +239,8 @@ mysql-instances:
 ```
 
 ## Configuration order
+
+From the sample configuration file, you can see that the configuration file contains two parts: `Global configuration` and `Instance configuration`, where the `Global configuration` contains `Basic configuration` and `Feature configuration set`. The configuration order is as follows:
 
 1. Edit the [global configuration](#global-configuration).
 2. Edit the [instance configuration](#instance-configuration) based on the global configuration.

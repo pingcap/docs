@@ -5,15 +5,11 @@ summary: Learn the `RESOURCE_GROUPS` information_schema table.
 
 # RESOURCE_GROUPS
 
-<CustomContent platform="tidb-cloud">
+The `RESOURCE_GROUPS` table shows the information about all resource groups. For more information, see [Use Resource Control to Achieve Resource Isolation](/tidb-resource-control.md).
 
 > **Note:**
 >
-> This feature is not available on [TiDB Serverless clusters](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless-beta).
-
-</CustomContent>
-
-The `RESOURCE_GROUPS` table shows the information about all resource groups. For more information, see [Use Resource Control to Achieve Resource Isolation](/tidb-resource-control.md).
+> This table is not available on [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless) clusters.
 
 ```sql
 USE information_schema;
@@ -72,11 +68,11 @@ SELECT * FROM information_schema.resource_groups WHERE NAME = 'rg1'; -- View the
 ```
 
 ```sql
-+------+------------+----------+-----------+
-| NAME | RU_PER_SEC | PRIORITY | BURSTABLE |
-+------+------------+----------+-----------+
-| rg1  |       1000 | MEDIUM   | NO        |
-+------+------------+----------+-----------+
++------+------------+----------+-----------+-------------+
+| NAME | RU_PER_SEC | PRIORITY | BURSTABLE | QUERY_LIMIT |
++------+------------+----------+-----------+-------------+
+| rg1  | 1000       | MEDIUM   | NO        | NULL        |
++------+------------+----------+-----------+-------------+
 1 row in set (0.00 sec)
 ```
 

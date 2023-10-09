@@ -118,7 +118,7 @@ If you encounter problems when connecting to TiDB using the tools listed in this
          <td>v3.5.10</td>
          <td>Full</td>
          <td>N/A</td>
-         <td><a href="/tidb/dev/dev-guide-sample-application-java-mybatis">Build a Simple CRUD App with TiDB and Mybatis</a></td>
+         <td><a href="/tidb/dev/dev-guide-sample-application-java-mybatis">Build a Simple CRUD App with TiDB and MyBatis</a></td>
       </tr>
       <tr>
          <td><a href="https://spring.io/projects/spring-data-jpa/" target="_blank" referrerpolicy="no-referrer-when-downgrade">Spring Data JPA</a></td>
@@ -141,6 +141,36 @@ If you encounter problems when connecting to TiDB using the tools listed in this
          <td>Full</td>
          <td>N/A</td>
          <td>N/A</td>
+      </tr>
+      <tr>
+         <td rowspan="4">JavaScript / TypeScript</td>
+         <td><a href="https://www.npmjs.com/package/sequelize" target="_blank" referrerpolicy="no-referrer-when-downgrade">sequelize</a></td>
+         <td>v6.20.1</td>
+         <td>Full</td>
+         <td>N/A</td>
+         <td>N/A</td>
+      </tr>
+      <tr>
+         <td><a href="https://www.prisma.io/" target="_blank" referrerpolicy="no-referrer-when-downgrade">Prisma Client</a></td>
+         <td>4.16.2</td>
+         <td>Full</td>
+         <td>N/A</td>
+         <td>N/A</td>
+      </tr>
+      <tr>
+         <td rowspan="4">Python</td>
+         <td><a href="https://pypi.org/project/Django/" target="_blank" referrerpolicy="no-referrer-when-downgrade">Django</a></td>
+         <td>v4.1</td>
+         <td>Full</td>
+         <td><a href="https://github.com/pingcap/django-tidb" target="_blank" referrerpolicy="no-referrer-when-downgrade">django-tidb</a></td>
+         <td>N/A</td>
+      </tr>
+      <tr>
+         <td><a href="https://www.sqlalchemy.org/" target="_blank" referrerpolicy="no-referrer-when-downgrade">SQLAlchemy</a></td>
+         <td>v1.4.37</td>
+         <td>Full</td>
+         <td>N/A</td>
+         <td><a href="/tidb/dev/dev-guide-sample-application-python-sqlalchemy">Build a Simple CRUD App with TiDB and SQLAlchemy</a></td>
       </tr>
    </tbody>
 </table>
