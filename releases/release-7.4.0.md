@@ -30,12 +30,12 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.4/quick-start-with-
   </tr>
   <tr>
     <td rowspan="3">Reliability and Availability</td>
-    <td>Improve the performance and stability of <code>IMPORT INTO</code> and <code>ADD INDEX</code> operations via global sort </td>
+    <td><a href="https://docs.pingcap.com/tidb/v7.4/tidb-global-sort" target="_blank">Improve the performance and stability of <code>IMPORT INTO</code> and <code>ADD INDEX</code> operations via global sort</a></td>
     <td>Before v7.4.0, tasks such as <code>ADD INDEX</code> or <code>IMPORT INTO</code> in the <a href="https://docs.pingcap.com/tidb/v7.4/tidb-resource-control#use-resource-control-to-achieve-resource-isolation" target="_blank">distributed execution framework</a> required TiDB nodes to allocate local disk space for sorting data before importing it into TiKV. This approach involves partial and localized sorting, and often results in data overlaps, leading to increased resource consumption and lower performance and stability of TiKV. With the introduction of the Global Sorting feature in v7.4.0, data is temporarily stored in S3 for global sorting before being imported into TiKV in an orderly manner. This eliminates the need for TiKV to consume extra resources on compactions and significantly improves the performance and stability of operations like <code>ADD INDEX</code> and <code>IMPORT INTO</code>.</td>
   </tr>
   <tr>
-    <td>Resource control for background tasks (experimental) </td>
-    <td>In v7.1.0, the <a href="https://docs.pingcap.com/tidb/stable/tidb-resource-control#use-resource-control-to-achieve-resource-isolation" target="_blank">Resource Control</a> feature was introduced to mitigate resource and storage access interference between workloads. TiDB v7.4.0 applies this control to background tasks as well. In v7.4.0, Resource Control now identifies and manages the resources produced by background tasks, such as auto-analyze, Backup & Restore, load data, and online DDL. This will eventually apply to all background tasks.</td>
+    <td><a href="https://docs.pingcap.com/tidb/v7.4/tidb-resource-control#manage-background-tasks" target="_blank">Resource control for background tasks (experimental)</a></td>
+    <td>In v7.1.0, the <a href="https://docs.pingcap.com/tidb/v7.4/tidb-resource-control#use-resource-control-to-achieve-resource-isolation" target="_blank">Resource Control</a> feature was introduced to mitigate resource and storage access interference between workloads. TiDB v7.4.0 applies this control to background tasks as well. In v7.4.0, Resource Control now identifies and manages the resources produced by background tasks, such as auto-analyze, Backup & Restore, load data, and online DDL. This will eventually apply to all background tasks.</td>
   </tr>
   <tr>
     <td>TiFlash supports <a href="https://docs.pingcap.com/tidb/v7.4/tiflash-disaggregated-and-s3" target="_blank">storage-computing separation and S3</a> (GA) </td>
@@ -47,7 +47,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.4/quick-start-with-
     </td>
   </tr>
   <tr>
-    <td rowspan="3">SQL</td>
+    <td rowspan="2">SQL</td>
     <td><a href="https://docs.pingcap.com/tidb/v7.4/partitioned-table/convert-a-partitioned-table-to-a-non-partitioned-table" target="_blank">TiDB fully supports partition management</a> </td>
     <td>Before v7.4.0, Range/List partitioned tables support partition management operations such as <code>TRUNCATE</code>, <code>EXCHANGE</code>, <code>ADD</code>, <code>DROP</code>, and <code>REORGANIZE</code>, and Hash/Key partitioned tables support partition management operations such as <code>ADD</code> and <code>COALESCE</code>.
     
@@ -405,6 +405,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.4/quick-start-with-
     (dup) - Fix the issue that the behavior is inconsistent with MySQL when comparing a `DATETIME` or `TIMESTAMP` column with a number constant [#38361](https://github.com/pingcap/tidb/issues/38361) @[yibin87](https://github.com/yibin87)
     - Fix the incorrect result that occurs when comparing unsigned types with `Duration` type constants [#45410](https://github.com/pingcap/tidb/issues/45410) @[wshwsh12](https://github.com/wshwsh12)
 <!-- tw@ran-huang 以上 10 条-->
+    - Fix the issue that access path pruning logic ignores the `READ_FROM_STORAGE(TIFLASH[...]) ` hint, which causes the `Can't find a proper physical plan` error [#40146](https://github.com/pingcap/tidb/issues/40146) @[AilinKid](https://github.com/AilinKid)
     - Fix the issue that `GROUP_CONCAT` cannot parse the `ORDER BY` column [#41986](https://github.com/pingcap/tidb/issues/41986) @[AilinKid](https://github.com/AilinKid)
     - Fix the issue that HashCode is repeatedly calculated for deeply nested expressions, which causes high memory usage and OOM [#42788](https://github.com/pingcap/tidb/issues/42788) @[AilinKid](https://github.com/AilinKid)
     - Fix the issue that the `cast(col)=range` condition causes FullScan when CAST has no precision loss [#45199](https://github.com/pingcap/tidb/issues/45199) @[AilinKid](https://github.com/AilinKid)
