@@ -335,15 +335,16 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.4/quick-start-with-
     - Optimize memory usage and performance for statistics garbage collection [#31778](https://github.com/pingcap/tidb/issues/31778) @[winoros](https://github.com/winoros)
     - Optimize the pushdown of `limit` for index merge intersections to improve query performance [#46863](https://github.com/pingcap/tidb/issues/46863) @[AilinKid](https://github.com/AilinKid)
     - Improve the cost model to minimize the chances of mistakenly choosing a full table scan when `IndexLookup` involves many table retrieval tasks [#45132](https://github.com/pingcap/tidb/issues/45132) @[qw4990](https://github.com/qw4990)
+    - Optimize the join elimination rule to improve the query performance of `join on unique keys` [#46248](https://github.com/pingcap/tidb/issues/46248) @[fixdb](https://github.com/fixdb)
 
 + TiKV **tw@qiancai 7**
 
     - Optimize memory usage of Resolver to prevent OOM [#15458](https://github.com/tikv/tikv/issues/15458) @[overvenus](https://github.com/overvenus)
-    - Eliminate LRUCache in Router objects to reduce memory usage and prevent OOM[#15430](https://github.com/tikv/tikv/issues/15430) @[Connor1996](https://github.com/Connor1996)
+    - Eliminate LRUCache in Router objects to reduce memory usage and prevent OOM [#15430](https://github.com/tikv/tikv/issues/15430) @[Connor1996](https://github.com/Connor1996)
     - Reduce memory usage of TiCDC Resolver [#15412](https://github.com/tikv/tikv/issues/15412) @[overvenus](https://github.com/overvenus)
     - Reduce memory fluctuations caused by RocksDB compaction [#15324](https://github.com/tikv/tikv/issues/15324) @[overvenus](https://github.com/overvenus)
     - Reduce memory consumption in the flow control module of Partitioned Raft KV [#15269](https://github.com/tikv/tikv/issues/15269) @[overvenus](https://github.com/overvenus)
-    - Reduce `MemberList` requests in PD and optimize PD calls [#15428](https://github.com/tikv/tikv/issues/15428) @[nolouch](https://github.com/nolouch)
+    - (dup) Add the backoff mechanism for the PD client in the process of connection retries, which gradually increases retry intervals during error retries to reduce PD pressure [#15428](https://github.com/tikv/tikv/issues/15428) @[nolouch](https://github.com/nolouch)
     - Support dynamically adjusting `background_compaction` of RocksDB [#15424](https://github.com/tikv/tikv/issues/15424) @[glorv](https://github.com/glorv)
 
 + PD **tw@qiancai 4**
@@ -357,7 +358,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.4/quick-start-with-
 
     - Improve write performance during random write workloads by optimizing the spilling policy of the TiFlash write process [#7564](https://github.com/pingcap/tiflash/issues/7564) @[CalvinNeo](https://github.com/CalvinNeo)
     - Add more metrics about the Raft replication process for TiFlash [#8068](https://github.com/pingcap/tiflash/issues/8068) @[CalvinNeo](https://github.com/CalvinNeo)
-    - Reduce the number of small files to avoid potential exhaustion of file system inodes  [#7595](https://github.com/pingcap/tiflash/issues/7595) @[hongyunyan](https://github.com/hongyunyan)
+    - Reduce the number of small files to avoid potential exhaustion of file system inodes [#7595](https://github.com/pingcap/tiflash/issues/7595) @[hongyunyan](https://github.com/hongyunyan)
 
 + Tools
 
@@ -404,16 +405,17 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.4/quick-start-with-
     (dup) - Fix the issue that the behavior is inconsistent with MySQL when comparing a `DATETIME` or `TIMESTAMP` column with a number constant [#38361](https://github.com/pingcap/tidb/issues/38361) @[yibin87](https://github.com/yibin87)
     - Fix the incorrect result that occurs when comparing unsigned types with `Duration` type constants [#45410](https://github.com/pingcap/tidb/issues/45410) @[wshwsh12](https://github.com/wshwsh12)
 <!-- tw@ran-huang 以上 10 条-->
-    - Fix the issue that `GROUP_CONCAT` can not parse the `ORDER BY` column [#41986] (https://github.com/pingcap/tidb/issues/41986) @[AilinKid](https://github.com/AilinKid)
-    - Fix the issue that HashCode is repeatedly calculated for deeply nested expressions, which causes high memory usage and OOM [#42788] (https://github.com/pingcap/tidb/issues/42788) @[AilinKid](https://github.com/AilinKid)
-    - Fix the issue that the `cast(col)=range` condition causes FullScan when CAST has no precision loss [#45199] (https://github.com/pingcap/tidb/issues/45199) @[AilinKid](https://github.com/AilinKid)
-    - Fix the issue that when Aggregation is pushed through Union in MPP execution plans, the results are incorrect [#45850] (https://github.com/pingcap/tidb/issues/45850) @[AilinKid](https://github.com/AilinKid)
-    - Fix the issue that bindings with `in (?)` can not match `in (?, ... ?)` [#44298] (https://github.com/pingcap/tidb/issues/44298) @[qw4990](https://github.com/qw4990)
-    - Fix the issue that occurs when connection collation is not considered when `non-prep plan cache` reuses the execution plan [#47008] (https://github.com/pingcap/tidb/issues/47008) @[qw4990](https://github.com/qw4990)
-    - Fix the issue that an executed plan does not hit the plan cache phase without reporting a warning [#46159] (https://github.com/pingcap/tidb/issues/46159) @[qw4990](https://github.com/qw4990)
-    - Fix the issue that `plan replayer dump explain` reports an error [#46197] (https://github.com/pingcap/tidb/issues/46197) @[time-and-fate](https://github.com/time-and-fate)
-    - Fix the issue that an DML operation with CTE can panic [#46083] (https://github.com/pingcap/tidb/issues/46083) @[winoros](https://github.com/winoros)
-    - Fix the issue that the `TIDB_INLJ` hint does not take effect when joining two sub-queries [#46160] (https://github.com/pingcap/tidb/issues/46160) @[qw4990](https://github.com/qw4990)
+    - Fix the issue that `GROUP_CONCAT` cannot parse the `ORDER BY` column [#41986](https://github.com/pingcap/tidb/issues/41986) @[AilinKid](https://github.com/AilinKid)
+    - Fix the issue that HashCode is repeatedly calculated for deeply nested expressions, which causes high memory usage and OOM [#42788](https://github.com/pingcap/tidb/issues/42788) @[AilinKid](https://github.com/AilinKid)
+    - Fix the issue that the `cast(col)=range` condition causes FullScan when CAST has no precision loss [#45199](https://github.com/pingcap/tidb/issues/45199) @[AilinKid](https://github.com/AilinKid)
+    - Fix the issue that when Aggregation is pushed down through Union in MPP execution plans, the results are incorrect [#45850](https://github.com/pingcap/tidb/issues/45850) @[AilinKid](https://github.com/AilinKid)
+    - Fix the issue that bindings with `in (?)` cannot match `in (?, ... ?)` [#44298](https://github.com/pingcap/tidb/issues/44298) @[qw4990](https://github.com/qw4990)
+    - Fix the error caused by not considering the connection collation when `non-prep plan cache` reuses the execution plan [#47008](https://github.com/pingcap/tidb/issues/47008) @[qw4990](https://github.com/qw4990)
+    - Fix the issue that no warning is reported when an executed plan does not hit the plan cache [#46159](https://github.com/pingcap/tidb/issues/46159) @[qw4990](https://github.com/qw4990)
+    - Fix the issue that `plan replayer dump explain` reports an error [#46197](https://github.com/pingcap/tidb/issues/46197) @[time-and-fate](https://github.com/time-and-fate)
+    - Fix the issue that executing DML statements with CTE can cause panic [#46083](https://github.com/pingcap/tidb/issues/46083) @[winoros](https://github.com/winoros)
+    - Fix the issue that the `TIDB_INLJ` hint does not take effect when joining two sub-queries [#46160](https://github.com/pingcap/tidb/issues/46160) @[qw4990](https://github.com/qw4990)
+    - Fix the issue that the results of `MERGE_JOIN` are incorrect [#46580] (https://github.com/pingcap/tidb/issues/46580) @[qw4990](https://github.com/qw4990)
 <!-- tw@hfxsd 以上 10 条-->
 + TiKV **tw@ran-huang 9**
 
@@ -433,22 +435,22 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.4/quick-start-with-
     - Fix the issue of slow switching of PD Leaders due to slow synchronization of store config [#6918](https://github.com/tikv/pd/issues/6918) @[bufferflies](https://github.com/bufferflies)
     - Fix the issue that the groups are not considered in Scatter Peers [#6962](https://github.com/tikv/pd/issues/6962) @[bufferflies](https://github.com/bufferflies)
     - Fix the issue that RU consumption less than 0 causes PD to crash [#6973](https://github.com/tikv/pd/issues/6973) @[CabinfeverB](https://github.com/CabinfeverB)
-    - Fix the issue that modified isolation levels were not synchronized to the default placement rules [#7121](https://github.com/tikv/pd/issues/7121) @[rleungx](https://github.com/rleungx)
+    - Fix the issue that modified isolation levels are not synchronized to the default placement rules [#7121](https://github.com/tikv/pd/issues/7121) @[rleungx](https://github.com/rleungx)
     - (dup) Fix the issue that the client-go regularly updating `min-resolved-ts` might cause PD OOM when the cluster is large [#46664](https://github.com/pingcap/tidb/issues/46664) @[HuSharp](https://github.com/HuSharp)
 
 + TiFlash
 
-    - Fix the issue that the longest time of non-ended requests can not displayed correctly on Grafana [#7713](https://github.com/pingcap/tiflash/issues/7713) @[JaySon-Huang](https://github.com/JaySon-Huang)
+    - Fix the issue that the `max_snapshot_lifetime` metric is displayed incorrectly on Grafana [#7713](https://github.com/pingcap/tiflash/issues/7713) @[JaySon-Huang](https://github.com/JaySon-Huang)
     - Fix the issue that some metrics about the maximum duration are not correct [#8076](https://github.com/pingcap/tiflash/issues/8076) @[CalvinNeo](https://github.com/CalvinNeo)
-    - Fix the issue that TiDB incorrectly assumes that an MPP task has failed [#7177](https://github.com/pingcap/tiflash/issues/7177) @[yibin87](https://github.com/yibin87)
+    - Fix the issue that TiDB incorrectly reports that an MPP task has failed [#7177](https://github.com/pingcap/tiflash/issues/7177) @[yibin87](https://github.com/yibin87)
 
 + Tools
 
     + Backup & Restore (BR)
 
         - Fix an issue that the misleading error message `resolve lock timeout` covers up the actual error when backup fails [#43236](https://github.com/pingcap/tidb/issues/43236) @[YuJuncen](https://github.com/YuJuncen)
-        - Fix the issue that implicit primary keys for restoring PITR might conflict [#46520](https://github.com/pingcap/tidb/issues/46520) @[3pointer](https://github.com/3pointer)
-        - Fix the issue that an error occurs when PITR restores meta-kv [#46578](https://github.com/pingcap/tidb/issues/46578) @[Leavrth](https://github.com/Leavrth)
+        - Fix the issue that recovering implicit primary keys using PITR might cause conflicts [#46520](https://github.com/pingcap/tidb/issues/46520) @[3pointer](https://github.com/3pointer)
+        - Fix the issue that recovering meta-kv using PITR might cause errors [#46578](https://github.com/pingcap/tidb/issues/46578) @[Leavrth](https://github.com/Leavrth)
         - Fix the errors in BR integration test cases [#45561](https://github.com/pingcap/tidb/issues/46561) @[purelind](https://github.com/purelind)
 
     + TiCDC
