@@ -1441,6 +1441,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
     - The [`IMPORT INTO`](https://docs.pingcap.com/tidb/stable/sql-statement-import-into) statement for import jobs of TiDB Self-Hosted. For TiDB Cloud, the `IMPORT INTO` statement is not applicable.
 
 </CustomContent>
+
 ### tidb_ddl_error_count_limit
 
 - Scope: GLOBAL
