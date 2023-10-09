@@ -220,7 +220,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.4/quick-start-with-
 
     The `WITH ROLLUP` modifier and `GROUPING` function are commonly used in data analysis for multi-dimensional data summarization. Starting from v7.4.0, you can use the `WITH ROLLUP` modifier and `GROUPING` function in the `GROUP BY` clause. For example, you can use the `WITH ROLLUP` modifier in the `SELECT ... FROM ... GROUP BY ... WITH ROLLUP` syntax.
 
-   For more information, see [documentation](functions-and-operators/group-by-modifier.md).
+   For more information, see [documentation](/functions-and-operators/group-by-modifier.md).
 
 ### DB operations
 
