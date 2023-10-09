@@ -47,10 +47,9 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.4/quick-start-with-
   </tr>
   <tr>
     <td rowspan="2">SQL</td>
-    <td><a href="https://docs.pingcap.com/tidb/v7.4/partitioned-table/convert-a-partitioned-table-to-a-non-partitioned-table" target="_blank">TiDB fully supports partition management</a> </td>
+    <td>TiDB fully supports <a href="https://docs.pingcap.com/tidb/v7.4/partitioned-table#convert-a-partitioned-table-to-a-non-partitioned-table" target="_blank">partition management</a> </td>
     <td>Before v7.4.0, Range/List partitioned tables support partition management operations such as <code>TRUNCATE</code>, <code>EXCHANGE</code>, <code>ADD</code>, <code>DROP</code>, and <code>REORGANIZE</code>, and Hash/Key partitioned tables support partition management operations such as <code>ADD</code> and <code>COALESCE</code>.
-    
-    Now TiDB also supports the following partition management operations:
+    <p>Now TiDB also supports the following partition management operations:</p>
       <ul>
         <li>Convert partitioned tables to non-partitioned tables</li>
         <li>Partition existing non-partitioned tables</li>
