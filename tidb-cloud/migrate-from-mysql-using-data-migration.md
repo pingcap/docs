@@ -209,7 +209,7 @@ You can use [physical mode](https://docs.pingcap.com/tidb/stable/tidb-lightning-
 
 - The default mode is **Logical mode**. This mode supports migrating data into a table with existing data. But the performance is slower than physical mode.
 
-- If you use **Physical mode**, the migration job uses [TiDB Lightning](https://docs.pingcap.com/tidb/stable/tidb-lightning-overview) in background to migrate the existing data. This mode is recommended for large datasets. When you use this mode, the target table must be empty. The performance is about 2.5 times faster than logical mode.
+- It is recommended to use **Physical mode** for large datasets. When you use this mode, the target table must be empty. The performance is about 2.5 times faster than logical mode.
 
 There are limitations for using physical mode:
 
@@ -218,9 +218,8 @@ There are limitations for using physical mode:
 
 Physical mode exports the upstream data as fast as possible, so [different specifications](/tidb-cloud/tidb-cloud-billing-dm.md#specifications-for-data-migration) have different performance impacts on QPS and TPS of the upstream database during data export. The following table shows the performance regression of each specification.
 
-| Migration specifications | Performance regression | Export speed (-t=2*rcu) |
+| Migration specifications | Performance regression of the upstream database | Maximum Export speed |
 |-------|-------|----------|
-| Without DM    | /   |  / |
 | 2RCU  | 15.6% | 80.84M/s |
 | 4RCU  | 20.0% | 214.2M/s |
 | 8RCU  | 28.9% | 365.5M/s |
