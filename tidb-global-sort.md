@@ -4,7 +4,7 @@ summary: Learn the use cases, limitations, usage, and implementation principles 
 ---
 
 <!-- markdownlint-disable MD029 -->
-<!-- markdownlint-disable MD049 -->
+<!-- markdownlint-disable MD046 -->
 
 # TiDB Global Sort
 
