@@ -20,7 +20,7 @@ This document describes how to back up and restore your TiDB Dedicated cluster d
 
 ## Turn on auto backup
 
-TiDB Dedicated supports both [snapshot backups](/br/br-snapshot-guide.md) and [log backups](/br/br-pitr-guide.md). Snapshot backup enables users to restore to the the backup point. By default, snapshot backups are taken automatically and stored according to your backup retention policy. 
+TiDB Dedicated supports both [snapshot backups](https://docs.pingcap.com/tidb/stable/br-snapshot-guide) and [log backups](https://docs.pingcap.com/tidb/stable/br-pitr-guide). Snapshot backup enables users to restore to the the backup point. By default, snapshot backups are taken automatically and stored according to your backup retention policy.
 
 You can disable auto backup at any time.
 
