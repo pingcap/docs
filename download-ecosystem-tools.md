@@ -1,7 +1,6 @@
 ---
 title: Download TiDB Tools
 summary: Download the most officially maintained versions of TiDB tools.
-aliases: ['/docs/dev/download-ecosystem-tools/','/docs/dev/reference/tools/download/']
 ---
 
 # Download TiDB Tools

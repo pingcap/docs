@@ -15,7 +15,7 @@
   - [Try Out HTAP](/quick-start-with-htap.md)
   - [Learn TiDB SQL](/basic-sql-operations.md)
   - [Learn HTAP](/explore-htap.md)
-  - [Import Example Database](/import-example-data.md)
+  - [Import Example Database](https://docs.pingcap.com/tidb/dev/tidb-roadmap)
 - Develop
   - [Overview](/develop/dev-guide-overview.md)
   - Quick Start
