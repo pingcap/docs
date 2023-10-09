@@ -67,7 +67,7 @@ TiCDC processes this type of DDL as follows:
 | `RENAME TABLE test.t1 TO ignore.t1` | Replicate | `test.t1` matches the filter rule |
 | `RENAME TABLE ignore.t1 TO ignore.t2` | Ignore | `ignore.t1` does not match the filter rule |
 | `RENAME TABLE test.n1 TO test.t1` | Report an error and exit the replication | `test.n1` does not match the filter rule, but `test.t1` matches the filter rule. This operation is illegal. In this case, refer to the error message for handling. |
-| rename table ignore.t1 to test.t1 | Report an error and exit the replication | Same reason as above. |
+| `RENAME TABLE ignore.t1 TO test.t1` | Report an error and exit the replication | Same reason as above. |
 
 ### Rename multiple tables in a DDL statement
 
@@ -89,4 +89,4 @@ TiCDC processes this type of DDL as follows:
 | `RENAME TABLE test.t1 TO test.t2, test.t3 TO test.t4` | Replicate | All database names and table names match the filter rule. |
 | `RENAME TABLE test.t1 TO test.ignore1, test.t3 TO test.ignore2` | Replicate | The old database name, the old table names, and the new database name match the filter rule. |
 | `RENAME TABLE test.t1 TO ignore.t1, test.t2 TO test.t22;` | Report an error | The new database name `ignore` does not match the filter rule. |
-| `RENAME TABLE test.t1 TO test1.t4, test.t3 TO test.t1, test.t4 TO test.t3;` | Report an error | The `RENAME TABLE` DDL swaps the names of `test.t1` and `test.t3` in one DDL statement, which TiCDC cannot handle correctly. Please refer to the error message for handling. |
+| `RENAME TABLE test.t1 TO test.t4, test.t3 TO test.t1, test.t4 TO test.t3;` | Report an error | The `RENAME TABLE` DDL swaps the names of `test.t1` and `test.t3` in one DDL statement, which TiCDC cannot handle correctly. In this case, refer to the error message for handling. |
