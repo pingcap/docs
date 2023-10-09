@@ -209,7 +209,7 @@ You can use [physical mode](https://docs.pingcap.com/tidb/stable/tidb-lightning-
 
 - The default mode is **Logical mode**. This mode supports migrating data into a table with existing data. But the performance is slower than physical mode.
 
-- If you use **Physical mode**, the migration job will use [TiDB Lightning](https://docs.pingcap.com/tidb/stable/tidb-lightning-overview) to migrate the existing data. This mode is recommended for large datasets. When you use this mode, the target table must be empty. The performance is about 2.5 times faster than the logical mode. 
+- If you use **Physical mode**, the migration job uses [TiDB Lightning](https://docs.pingcap.com/tidb/stable/tidb-lightning-overview) in background to migrate the existing data. This mode is recommended for large datasets. When you use this mode, the target table must be empty. The performance is about 2.5 times faster than logical mode.
 
 There are limitations for using physical mode:
 
