@@ -7,7 +7,7 @@ summary: Learn how to deploy Cloudflare Workers with TiDB Cloud.
 
 [Cloudflare Workers](https://workers.cloudflare.com/) is a platform that allows you to run code in response to specific events, such as HTTP requests or changes to a database. Cloudflare Workers is easy to use and can be used to build a variety of applications, including custom APIs, serverless functions, and microservices. It is particularly useful for applications that require low-latency performance or need to scale quickly.
 
-You may find it hard to connect to TiDB Cloud from Cloudflare Workers because Cloudflare Workers runs on the V8 engine which cannot make direct TCP connections. You can use [TiDB Cloud serverless driver](/tidb-cloud/serverless-driver.md) helps you connect to Cloudflare Workers over HTTP connection.
+You may find it hard to connect to TiDB Cloud from Cloudflare Workers because Cloudflare Workers runs on the V8 engine which cannot make direct TCP connections. You can use [TiDB Cloud serverless driver](/tidb-cloud/serverless-driver.md) to help you connect to Cloudflare Workers over HTTP connection.
 
 This document shows how to connect to Cloudflare Workers with TiDB Cloud serverless driver step by step.
 
