@@ -24,7 +24,7 @@ If you want to migrate incremental data only, see [Migrate Incremental Data from
 
 ### Maximum number of migration jobs
 
-- You can create up to 200 migration jobs for each organization. To create more migration jobs, you need to [file a support ticket](/tidb-cloud/tidb-cloud-support.md).
+You can create up to 200 migration jobs for each organization. To create more migration jobs, you need to [file a support ticket](/tidb-cloud/tidb-cloud-support.md).
 
 ### Filtered out and deleted databases
 
@@ -36,7 +36,7 @@ If you want to migrate incremental data only, see [Migrate Incremental Data from
 
 - During existing data migration, if the table to be migrated already exists in the target database with duplicated keys, the duplicate keys will be replaced.
 
-- If your dataset size is smaller than 1 TiB, it is recommended that you use logical mode (the default mode). If your dataset size is larger than 1 TiB, or you want to migrate existing data faster, you can use physical mode. For more information, see [Migrate existing data and incremental data](#migrate-existing-data-and-incremental-data).
+- If your dataset size is smaller than 1 TiB, it is recommended that you use [logical mode](https://docs.pingcap.com/tidb/stable/tidb-lightning-logical-import-mode) (the default mode). If your dataset size is larger than 1 TiB, or you want to migrate existing data faster, you can use [physical mode](https://docs.pingcap.com/tidb/stable/tidb-lightning-physical-import-mode). For more information, see [Migrate existing data and incremental data](#migrate-existing-data-and-incremental-data).
 
 ### Limitations of incremental data migration
 
@@ -207,23 +207,23 @@ To migrate data to TiDB Cloud once and for all, choose both **Existing data migr
 
 You can use [physical mode](https://docs.pingcap.com/tidb/stable/tidb-lightning-physical-import-mode) or [logical mode](https://docs.pingcap.com/tidb/stable/tidb-lightning-logical-import-mode) to migrate **existing data**.
 
-- The default mode is **Logical mode**. This mode supports migrating data into a table with existing data. But the performance is slower than physical mode.
+- The default mode is **logical mode**. This mode supports migrating data into a table with existing data. But the performance is slower than physical mode.
 
-- It is recommended to use **Physical mode** for large datasets. When you use this mode, the target table must be empty. For the specification of 16RCU, the performance is about 2.5 times faster than logical mode. The performance of other specifications can also increase by 20% to 50% compared with logical mode. Note that the performance data is for reference only and might vary in different scenarios.
+- It is recommended to use **physical mode** for large datasets. When you use this mode, the target table must be empty. For the specification of 16 RCUs (Replication Capacity Units), the performance is about 2.5 times faster than logical mode. The performance of other specifications can increase by 20% to 50% compared with logical mode. Note that the performance data is for reference only and might vary in different scenarios.
 
-There are limitations for using physical mode:
+Physical mode has the following limitations:
 
 - When you use physical mode, you cannot create a second migration job or import task for the TiDB cluster before the existing data migration is completed.
-- Physical mode is available only for TiDB clusters in AWS regions.
+- Physical mode is only available for TiDB clusters deployed on AWS.
 
 Physical mode exports the upstream data as fast as possible, so [different specifications](/tidb-cloud/tidb-cloud-billing-dm.md#specifications-for-data-migration) have different performance impacts on QPS and TPS of the upstream database during data export. The following table shows the performance regression of each specification.
 
-| Migration specifications |  Maximum Export speed | Performance regression of the upstream database |
+| Migration specification |  Maximum export speed | Performance regression of the upstream database |
 |---------|-------------|--------|
-| 2RCU   | 80.84 MiB/s  | 15.6% |
-| 4RCU   | 214.2 MiB/s  | 20.0% |
-| 8RCU   | 365.5 MiB/s  | 28.9% |
-| 16RCU | 424.6 MiB/s  | 46.7% |
+| 2 RCUs   | 80.84 MiB/s  | 15.6% |
+| 4 RCUs   | 214.2 MiB/s  | 20.0% |
+| 8 RCUs   | 365.5 MiB/s  | 28.9% |
+| 16 RCUs | 424.6 MiB/s  | 46.7% |
 
 ### Migrate only existing data
 
