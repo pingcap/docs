@@ -53,7 +53,7 @@ When the downstream is TiDB, TiCDC executes `ADD INDEX` and `CREATE INDEX` DDL o
 > **Note:**
 >
 > - If the execution of certain downstream DMLs relies on indexes that have not completed replication, these DMLs might be executed slowly, thereby affecting TiCDC replication latency.
-> - Before replicating DDLs to the downstream, if a TiCDC node crashes or if the downstream is performing other write operations, the DDL replication has an extremely low probability of failure. You can check the downtream to see whether that occurs.
+> - Before replicating DDLs to the downstream, if a TiCDC node crashes or if the downstream is performing other write operations, the DDL replication has an extremely low probability of failure. You can check the downstream to see whether that occurs.
 
 ### DDL replication considerations for renaming tables
 
