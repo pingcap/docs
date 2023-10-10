@@ -8,10 +8,10 @@ aliases: ['/docs/dev/upgrade-tidb-using-tiup/','/docs/dev/how-to/upgrade/using-t
 
 This document is targeted for the following upgrade paths:
 
-- Upgrade from TiDB 4.0 versions to TiDB 7.3.
-- Upgrade from TiDB 5.0-5.4 versions to TiDB 7.3.
-- Upgrade from TiDB 6.0-6.6 to TiDB 7.3.
-- Upgrade from TiDB 7.0-7.2 to TiDB 7.3.
+- Upgrade from TiDB 4.0 versions to TiDB 7.4.
+- Upgrade from TiDB 5.0-5.4 versions to TiDB 7.4.
+- Upgrade from TiDB 6.0-6.6 to TiDB 7.4.
+- Upgrade from TiDB 7.0-7.3 to TiDB 7.4.
 
 > **Warning:**
 >
