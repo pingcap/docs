@@ -16,7 +16,7 @@ This document describes how to back up and restore your TiDB Dedicated cluster d
 
 - TiDB Cloud does not support restoring tables in the `mysql` schema, including user permissions and system variables.
 - If you turn on and off Point-in-time Restore multiple times, you can only choose a time point within the recoverable range after the most recent Point-in-time Restore is enabled. The earlier recoverable range is not accessible.
-- DO NOT modify the switch of **Point-in-time Restore** and **Dual Region Backup** at the same time.
+- DO NOT modify the switches of **Point-in-time Restore** and **Dual Region Backup** at the same time.
 
 ## Backup
 
@@ -83,9 +83,9 @@ To configure the backup schedule, perform the following steps:
 
         > **Note**
         >
-        > - Backup jobs are automatically delayed when data import jobs are in progress. **DO NOT** run manual backups during data import, or during cluster scaling.
+        > - Backup jobs are automatically delayed when data import jobs are in progress. **DO NOT** run manual backups during data import or cluster scaling.
 
-    - In **Backup Retention**, configure the minimum backup data retention period. The default is 7 days. To minimize the impact on business, it is recommended to schedule automatic backup during periods of low workloads.
+    - In **Backup Retention**, configure the minimum backup data retention period. The default period is 7 days. To minimize the impact on business, it is recommended to schedule automatic backup during periods of low workloads.
 
         > **Note**
         >
@@ -122,7 +122,7 @@ To turn on dual region backup, perform the following steps:
 >
 > Turning off auto backup will also turn off point-in-time restore by default.
 
-To turn off auto backup:
+To turn off auto backup, perform the following steps:
 
 1. Navigate to the **Backup** page of a TiDB Dedicated cluster.
 
@@ -205,7 +205,7 @@ To restore your TiDB Dedicated cluster data from a backup to a new cluster, take
     <SimpleTab>
     <div label="Select Time Point">
 
-    To restore data of any point in time within the backup retention to a new cluster, make sure that **Point-in-time restore** in **Backup Settings** is on and then take the following steps:
+    To restore data of any point in time within the backup retention to a new cluster, make sure that **Point-in-time Restore** in **Backup Settings** is on and then take the following steps:
 
     - Click **Select Time Point**.
     - Select **Date** and **Time** you want to restore to.
