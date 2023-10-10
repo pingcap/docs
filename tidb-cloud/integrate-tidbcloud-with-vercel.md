@@ -108,6 +108,7 @@ The detailed steps are as follows:
     TIDB_PORT
     TIDB_USER
     TIDB_PASSWORD
+    TIDB_DATABASE
     ```
 
     **Prisma**
