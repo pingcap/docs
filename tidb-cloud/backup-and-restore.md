@@ -16,7 +16,7 @@ This document describes how to back up and restore your TiDB Dedicated cluster d
 
 - TiDB Cloud does not support restoring tables in the `mysql` schema, including user permissions and system variables.
 - If you turn on and off Point-in-time Restore multiple times, you can only choose a time point within the recoverable range after the most recent Point-in-time Restore is enabled. The earlier recoverable range is not accessible.
-- Do modify the switch of **Point-in-time Restore** and **Dual Region Backup** at the same time.
+- DO NOT modify the switch of **Point-in-time Restore** and **Dual Region Backup** at the same time.
 
 ## Backup
 
@@ -60,7 +60,7 @@ To turn on this feature, perform the following steps:
 
 TiDB Dedicated supports daily and weekly backup schedules. By default, the backup schedule is set to daily. You can choose a specific time of the day or week to start snapshot backup.
 
-To configure the backup schedule, toggle the **Auto Backup** switch to **On** and make the following settings:
+To configure the backup schedule, perform the following steps:
 
 1. Navigate to the **Backup** page of a TiDB Dedicated cluster.
 
