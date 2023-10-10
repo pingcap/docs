@@ -6,7 +6,7 @@ aliases: ['/tidbcloud/restore-deleted-tidb-cluster']
 
 # Back Up and Restore TiDB Dedicated Data
 
-This document describes how to back up and restore your TiDB Dedicated cluster data on TiDB Cloud. TiDB Dedicated supports both automatic backup and manual backup. You can also restore backup data to a new cluster or restore a deleted cluster from the recycle bin.
+This document describes how to back up and restore your TiDB Dedicated cluster data on TiDB Cloud. TiDB Dedicated supports automatic backup and manual backup. You can also restore backup data to a new cluster or restore a deleted cluster from the recycle bin.
 
 > **Tip**
 >
@@ -15,7 +15,7 @@ This document describes how to back up and restore your TiDB Dedicated cluster d
 ## Limitations
 
 - TiDB Cloud does not support restoring tables in the `mysql` schema, including user permissions and system variables.
-- If you turn on and off Point-in-time Restore (Point-in-time Restore) multiple times, you can only choose a time point within the recoverable range after the most recent Point-in-time Restore is enabled. The earlier recoverable range is not accessible.
+- If you turn on and off Point-in-time Restore multiple times, you can only choose a time point within the recoverable range after the most recent Point-in-time Restore is enabled. The earlier recoverable range is not accessible.
 
 ## Backup
 
@@ -199,8 +199,8 @@ To restore your TiDB Dedicated cluster data from a backup to a new cluster, take
 
     To restore data of any point in time within the backup retention to a new cluster, make sure that **Point-in-time restore** in **Backup Settings** is on and then take the following steps:
 
-    1. Click **Select Time Point**.
-    2. Select **Date** and **Time** you want to restore to.
+    - Click **Select Time Point**.
+    - Select **Date** and **Time** you want to restore to.
 
     </div>
 
