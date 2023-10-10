@@ -9,13 +9,13 @@
   - [MySQL Compatibility](/mysql-compatibility.md)
   - [TiDB Limitations](/tidb-limitations.md)
   - [Credits](/credits.md)
-  - [Roadmap](/tidb-roadmap.md)
+  - [Roadmap](https://docs.pingcap.com/tidb/dev/tidb-roadmap)
 - Quick Start
   - [Try Out TiDB](/quick-start-with-tidb.md)
   - [Try Out HTAP](/quick-start-with-htap.md)
   - [Learn TiDB SQL](/basic-sql-operations.md)
   - [Learn HTAP](/explore-htap.md)
-  - [Import Example Database](https://docs.pingcap.com/tidb/dev/tidb-roadmap)
+  - [Import Example Database](/import-example-data.md)
 - Develop
   - [Overview](/develop/dev-guide-overview.md)
   - Quick Start
