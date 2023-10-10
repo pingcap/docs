@@ -50,7 +50,7 @@ To turn on this feature, perform the following steps:
 
     > **Warning**
     >
-    > Point-in-Time Restore only takes effect after the next backup task is completed. To make it take effect earlier, you can [manually perform a backup](#perform-manual-backups) after enabling it.
+    > Point-in-Time Restore only takes effect after the next backup task is completed. To make it take effect earlier, you can [manually perform a backup](#perform-a-manual-backup) after enabling it.
 
 5. Click **Confirm** to preview the configuration changes.
 
@@ -68,9 +68,7 @@ To configure the backup schedule, perform the following steps:
 
 3. Toggle the **Auto Backup** switch to **On**.
 
-4. Toggle the **Point-in-time Restore** switch to **On**.
-
-5. Configure the backup schedule as follows:
+4. Configure the backup schedule as follows:
 
     - In **Backup Scheduler**, select either the **Daily** or **Weekly** checkbox. If you select **Weekly**, you need to specify the days of the week for the backup.
 
