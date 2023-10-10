@@ -6,7 +6,7 @@ aliases: ['/tidbcloud/restore-deleted-tidb-cluster']
 
 # Back Up and Restore TiDB Dedicated Data
 
-This document describes how to back up and restore your TiDB Dedicated cluster data on TiDB Cloud. TiDB Dedicated supports both automatic backup and manual backup. Meanwhile, TiDB Dedicated supports two types of data restoration: restore backup data to a new cluster and restore a deleted cluster from the recycle bin.
+This document describes how to back up and restore your TiDB Dedicated cluster data on TiDB Cloud. TiDB Dedicated supports both automatic backup and manual backup. You can also restore backup data to a new cluster or restore a deleted cluster from the recycle bin.
 
 > **Tip**
 >
@@ -88,7 +88,7 @@ To configure backup schedule:
 
 7. Click **Confirm** again to save changes.
 
-### Turn on dual region backup
+### Turn on dual region backup(Beta)
 
 TiDB Dedicated supports dual region backup by copying backups to the new region as selected. After enabling it, all backups will be automatically copied to the specified region, providing an cross region data protection and disaster recovery capabilities. Approximately 99% of the data could be copied to the additional region within 1 hour.
 
@@ -126,11 +126,12 @@ To turn off auto backup:
 
 5. Click **Confirm** again to save changes.
 
-### Turn off dual region backup
+### Turn off dual region backup(Beta)
 
   > **Tip**
   >
   > - Disabling dual region backup does not immediately delete the backups in the additional region. They will be cleaned up later according to the backup retention schedule. However, if you want to remove them immediately, you can choose to manually delete the backups.
+
 To turn off dual region backup:
 
 1. Navigate to the **Backup** page of a TiDB Dedicated cluster.
