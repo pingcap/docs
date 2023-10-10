@@ -79,7 +79,7 @@ For the complete configuration file, refer to [the configuration file and comman
 
 Conflicting data refers to two or more records with the same PK/UK column data. When the data source contains conflicting data, the actual number of rows in the table is different from the total number of rows returned by the query using unique index.
 
-TiDB Lightning offers three strategies for detecting conflicting data:
+TiDB Lightning offers the following strategies for detecting conflicting data:
 
 - `remove` (recommended): records and removes all conflicting records from the target table to ensure a consistent state in the target TiDB.
 - `none`: does not detect duplicate records. `none` has the best performance in the two strategies, but might lead to inconsistent data in the target TiDB.
