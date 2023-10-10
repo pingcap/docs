@@ -209,7 +209,7 @@ You can use [physical mode](https://docs.pingcap.com/tidb/stable/tidb-lightning-
 
 - The default mode is **Logical mode**. This mode supports migrating data into a table with existing data. But the performance is slower than physical mode.
 
-- It is recommended to use **Physical mode** for large datasets. When you use this mode, the target table must be empty. For the specification of 16RCU, the performance is about 2.5 times faster than logical mode. The performance of other specifications can also increase by 20% to 50% compared with logical mode.  Note that the performance data is for reference only and might vary in different scenarios.
+- It is recommended to use **Physical mode** for large datasets. When you use this mode, the target table must be empty. For the specification of 16RCU, the performance is about 2.5 times faster than logical mode. The performance of other specifications can also increase by 20% to 50% compared with logical mode. Note that the performance data is for reference only and might vary in different scenarios.
 
 There are limitations for using physical mode:
 
