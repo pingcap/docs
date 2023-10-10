@@ -220,10 +220,10 @@ Physical mode exports the upstream data as fast as possible, so [different speci
 
 | Migration specifications |  Maximum Export speed | Performance regression of the upstream database |
 |---------|-------------|--------|
-| 2RCU   | 80.84 MB/s  | 15.6% |
-| 4RCU   | 214.2 MB/s  | 20.0% |
-| 8RCU   | 365.5 MB/s  | 28.9% |
-| 16RCU | 424.6 MB/s  | 46.7% |
+| 2RCU   | 80.84 MiB/s  | 15.6% |
+| 4RCU   | 214.2 MiB/s  | 20.0% |
+| 8RCU   | 365.5 MiB/s  | 28.9% |
+| 16RCU | 424.6 MiB/s  | 46.7% |
 
 ### Migrate only existing data
 
