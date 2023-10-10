@@ -88,7 +88,7 @@ To configure the backup schedule, perform the following steps:
         > - To minimize the impact on business, it is recommended to schedule automatic backup during periods of low workloads.
         > - Backup jobs are automatically delayed when data import jobs are in progress. **DO NOT** run manual backups during data import, or during cluster scaling.
 
-    - In **Backup Retention**, configure the minimum backup data retention period. The default is seven days.
+    - In **Backup Retention**, configure the minimum backup data retention period. The default is 7 days. To minimize the impact on business, it is recommended to schedule automatic backup during periods of low workloads.
 
         > **Note**
         >
