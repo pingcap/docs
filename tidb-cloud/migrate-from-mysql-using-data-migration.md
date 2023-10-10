@@ -22,11 +22,9 @@ If you want to migrate incremental data only, see [Migrate Incremental Data from
 
 - Amazon Aurora MySQL writer instances support both existing data and incremental data migration. Amazon Aurora MySQL reader instances only support existing data migration and do not support incremental data migration.
 
-### Supported sizes
+### Maximum number of migration jobs
 
 - You can create up to 200 migration jobs for each organization. To create more migration jobs, you need to [file a support ticket](/tidb-cloud/tidb-cloud-support.md).
-
-- When you use Data Migration, it is recommended to keep the size of your dataset smaller than 1 TiB. If the dataset size is larger than 1 TiB, the existing data migration will take a long time due to limited specifications.
 
 ### Filtered out and deleted databases
 
@@ -37,6 +35,8 @@ If you want to migrate incremental data only, see [Migrate Incremental Data from
 ### Limitations of existing data migration
 
 - During existing data migration, if the table to be migrated already exists in the target database with duplicated keys, the duplicate keys will be replaced.
+
+- If your dataset size is smaller than 1 TiB, it is recommended that you use logical mode (the default mode). If your dataset size is larger than 1 TiB, you can use physical mode. For more information, see [Migrate existing data and incremental data](#migrate-existing-data-and-incremental-data).
 
 ### Limitations of incremental data migration
 
@@ -205,11 +205,11 @@ In the **Choose the objects to be migrated** step, you can choose existing data 
 
 To migrate data to TiDB Cloud once and for all, choose both **Existing data migration** and **Incremental data migration**, which ensures data consistency between the source and target databases.
 
-You can use [physical mode](https://docs.pingcap.com/tidb/stable/tidb-lightning-physical-import-mode) or [logical mode](https://docs.pingcap.com/tidb/stable/tidb-lightning-logical-import-mode) to migrate existing data.
+You can use [physical mode](https://docs.pingcap.com/tidb/stable/tidb-lightning-physical-import-mode) or [logical mode](https://docs.pingcap.com/tidb/stable/tidb-lightning-logical-import-mode) to migrate **existing data**.
 
 - The default mode is **Logical mode**. This mode supports migrating data into a table with existing data. But the performance is slower than physical mode.
 
-- It is recommended to use **Physical mode** for large datasets. When you use this mode, the target table must be empty. The performance is about 2.5 times faster than logical mode.
+- It is recommended to use **Physical mode** for large datasets. When you use this mode, the target table must be empty. For the specification of 16RCU, the performance is about 2.5 times faster than logical mode. The performance of other specifications can also increase by more than 100% compared with logcial mode.
 
 There are limitations for using physical mode:
 
