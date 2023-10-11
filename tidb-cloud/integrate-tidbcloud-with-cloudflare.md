@@ -21,13 +21,13 @@ Before you try the steps in this article, you need to prepare the following thin
 
 - A TiDB Cloud account and a TiDB Serverless cluster on TiDB Cloud. For more details, see [TiDB Cloud Quick Start](/tidb-cloud/tidb-cloud-quickstart.md#step-1-create-a-tidb-cluster).
 - A [Cloudflare Workers account](https://dash.cloudflare.com/login).
-- [Npm](https://docs.npmjs.com/about-npm) installed.
+- [npm](https://docs.npmjs.com/about-npm) is installed.
 
 ## Step 1: Set up Wrangler
 
 [Wrangler](https://developers.cloudflare.com/workers/wrangler/) is the official Cloudflare Worker CLI. You can use it to generate, build, preview, and publish your Workers.
 
-1. Install the wrangler
+1. Install Wrangler:
 
    ```
    npm install wrangler
@@ -65,7 +65,7 @@ Before you try the steps in this article, you need to prepare the following thin
 
 ## Step 3: Develop the Cloudflare Worker function
 
-You need to change the `src/index.ts` according to your needs.
+You need to modify the `src/index.ts` according to your needs.
 
 For example, if you want to show all the databases, you can use the following code:
 
@@ -91,7 +91,7 @@ export default {
 The `DATABASE_URL` follows the `mysql://username:password@host/database` format. You can set the environment variable with wrangler cli:
 
 ```
-wrangler secret put DATABASE_URL
+wrangler secret put <DATABASE_URL>
 ```
 
 You can also edit the `DATABASE_URL` secret via the Cloudflare Workers dashboard.
