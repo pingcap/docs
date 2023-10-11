@@ -70,7 +70,7 @@ The components in the architecture diagram are described as follows:
 - TiCDC: TiCDC nodes where TiCDC processes run. Each node runs a TiCDC process. Each process pulls data changes from one or more tables in TiKV nodes and replicates the changes to the downstream system through the sink component.
 - PD: The scheduling module in a TiDB cluster. This module is responsible for scheduling cluster data and usually consists of three PD nodes. PD provides high availability through the etcd cluster. In the etcd cluster, TiCDC stores its metadata, such as node status information and changefeed configurations.
 
-As shown in the architecture diagram, TiCDC supports replicating data to TiDB, MySQL, and Kafka databases.
+As shown in the architecture diagram, TiCDC supports replicating data to TiDB, MySQL, Kafka, and storage services.
 
 ## Best practices
 
