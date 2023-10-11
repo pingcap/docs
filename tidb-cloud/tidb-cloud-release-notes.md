@@ -8,6 +8,22 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2023.
 
+## October 11, 2023
+
+**General changes**
+
+- Support [dual region backup (beta)](/tidb-cloud/backup-and-restore.md#turn-on-dual-region-backup-beta) for [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) clusters.
+
+    You can now replicate backups across geographic regions within your cloud provider. This feature provides an additional layer of data protection and disaster recovery capabilities.
+
+    For more information, see [Back up and restore TiDB Dedicated data](/tidb-cloud/backup-and-restore.md).
+
+- Data Migration now supports both physical mode and logical mode for migrating existing data.
+
+    In physical mode, the migration speed can reach up to 110 MiB/s. Compared with 45 MiB/s in logical mode, the migration performance has improved significantly.
+
+    For more information, see [Migrate existing data and incremental data](/tidb-cloud/migrate-from-mysql-using-data-migration.md#migrate-existing-data-and-incremental-data).
+
 ## October 10, 2023
 
 **General changes**
