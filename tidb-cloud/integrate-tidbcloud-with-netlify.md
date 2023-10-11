@@ -242,9 +242,11 @@ To use the edge function, take the following steps:
       const result = await conn.execute('show databases')
       return new Response(JSON.stringify(result));
     }
+   
+    export const config = { path: "/api/hello" };
     ```
 
-3. Set the `TIDB_DATABASE_URL` environment variables:
+3. Set the `TIDB_DATABASE_URL` environment variables, you can get the connection information on the [TiDB Cloud console](https://tidbcloud.com/).
 
     ```shell
     netlify env:set TIDB_DATABASE_URL 'mysql://<username>:<password>@<host>/<database>'
@@ -255,3 +257,5 @@ To use the edge function, take the following steps:
     ```shell
     netlify deploy --prod --trigger
     ```
+
+Then you can go to your Netlify console to check the state of the deployment. After the deployment is done, you can access the edge function through the `https://<netlify-host>/api/hello` URL.
