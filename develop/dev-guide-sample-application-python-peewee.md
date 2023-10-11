@@ -65,7 +65,7 @@ pip install -r requirements.txt
 
 #### Why use PyMySQL?
 
-Peewee is an ORM library that works with multiple databases. It provides a high-level abstraction of the database, which helps developers write SQL statements in a more object-oriented way. However, peewee does not include a database driver. To connect to a database, you need to install a database driver. This sample application uses PyMySQL as the database driver, which is a pure Python MySQL client library that is compatible with TiDB and can be installed on all platforms. For more information, refer to [peewee official documentation](https://docs.peewee-orm.com/en/latest/peewee/database.html?highlight=mysql#using-mysql).
+peewee is an ORM library that works with multiple databases. It provides a high-level abstraction of the database, which helps developers write SQL statements in a more object-oriented way. However, peewee does not include a database driver. To connect to a database, you need to install a database driver. This sample application uses PyMySQL as the database driver, which is a pure Python MySQL client library that is compatible with TiDB and can be installed on all platforms. For more information, refer to [peewee official documentation](https://docs.peewee-orm.com/en/latest/peewee/database.html?highlight=mysql#using-mysql).
 
 ### Step 3: Configure connection information
 
@@ -177,13 +177,9 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 
 1. Execute the following command to run the sample code:
 
-<<<<<<< HEAD
-If you are using a TiDB Serverless cluster, you need to provide your CA root path and replace `<ca_path>` in the following examples with your CA path. To get the CA root path on your system, refer to [Root certificate management](https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-clusters#root-certificate-management).
-=======
     ```shell
     python peewee_example.py
     ```
->>>>>>> 1d2912594f (develop: update peewee guide (#14907))
 
 2. Check the [Expected-Output.txt](https://github.com/tidb-samples/tidb-python-peewee-quickstart/blob/main/Expected-Output.txt) to see if the output matches.
 
