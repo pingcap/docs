@@ -12,6 +12,12 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **General changes**
 
+- Support dual region backup (beta) for [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) clusters.
+
+    You can now replicate backups across geographic regions within your cloud provider. This feature provides an additional layer of data protection and disaster recovery capabilities.
+
+    For more information, see [Back up and restore TiDB Dedicated data](/tidb-cloud/backup-and-restore.md).
+
 - Data Migration now supports both physical mode and logical mode for migrating existing data.
 
     In physical mode, the migration speed can reach up to 110 MiB/s. Compared with 45 MiB/s in logical mode, the migration performance has improved significantly.
