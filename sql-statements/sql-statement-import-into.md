@@ -28,7 +28,7 @@ This TiDB statement is not applicable to TiDB Cloud.
 
 ## Restrictions
 
-- Currently, `IMPORT INTO` supports importing data within 100 TiB.
+- Currently, `IMPORT INTO` supports importing data within 1 TiB.
 - `IMPORT INTO` only supports importing data into existing empty tables in the database.
 - `IMPORT INTO` does not support transactions or rollback. Executing `IMPORT INTO` within an explicit transaction (`BEGIN`/`END`) will return an error.
 - The execution of `IMPORT INTO` blocks the current connection until the import is completed. To execute the statement asynchronously, you can add the `DETACHED` option.
