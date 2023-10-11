@@ -117,7 +117,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.4/quick-start-with-
 
     For more information, see [documentation](/tidb-global-sort.md).
 
-* Improve the performance of adding multiple indexes in a single SQL statement by optimizing parallel multi schema change [#41602](https://github.com/pingcap/tidb/issues/41602) @[Defined2014](https://github.com/Defined2014)
+* Improve the performance of adding multiple indexes in a single SQL statement by optimizing parallel multi schema change [#41602](https://github.com/pingcap/tidb/issues/41602) @[tangenta] (https://github.com/tangenta) @[Defined2014](https://github.com/Defined2014)
 
     Before v7.4.0, when you use parallel multi schema change to commit multiple `ADD INDEX` operations in a single SQL statement, the performance is the same as using multiple independent SQL statements for `ADD INDEX` operations. However, after optimization in v7.4.0, the performance of adding multiple indexes in a single SQL statement has been greatly improved.
 
