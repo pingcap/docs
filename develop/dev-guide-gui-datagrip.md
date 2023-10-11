@@ -1,28 +1,28 @@
 ---
 title: Connect to TiDB with JetBrains DataGrip
-summary: Learn how to connect to TiDB using JetBrains DataGrip or Database Tools and SQL﻿ Plugin in any JetBrains IDE like IntelliJ, PhpStorm or PyCharm. 
+summary: Learn how to connect to TiDB using JetBrains DataGrip. This tutorial also applies to the Database Tools and SQL plugin available in other JetBrains IDEs, such as IntelliJ, PhpStorm, and PyCharm.
 ---
 
 # Connect to TiDB with JetBrains DataGrip
 
-TiDB is a MySQL-compatible database, and [DataGrip](https://www.jetbrains.com/help/datagrip/getting-started.html) is a powerful IDE from JetBrains for Database and SQL. This tutorial walks you through the process to connect DataGrip to your TiDB cluster.
+TiDB is a MySQL-compatible database, and [JetBrains DataGrip](https://www.jetbrains.com/help/datagrip/getting-started.html) is a powerful integrated development environment (IDE) for database and SQL. This tutorial walks you through the process of connecting to your TiDB cluster using DataGrip.
 
 > **Note:**
 >
 > This tutorial is compatible with TiDB Serverless, TiDB Dedicated, and TiDB Self-Hosted.
 
-You can use DataGrip in two distinct ways:
+You can use DataGrip in two ways:
 
-- [DataGrip IDE](https://www.jetbrains.com/datagrip/download) as a standalone tool.
-- [JetBrains database tools and SQL plugin](https://www.jetbrains.com/help/idea/relational-databases.html) in IntelliJ, PhpStorm, PyCharm or other JetBrains IDEs.
+- As the [DataGrip IDE](https://www.jetbrains.com/datagrip/download) standalone tool.
+- As the [Database Tools and SQL plugin](https://www.jetbrains.com/help/idea/relational-databases.html) in JetBrains IDEs, such as IntelliJ, PhpStorm, and PyCharm.
 
-Thi tutorial primarily focuses on the process in the standalone DataGrip IDE edition. The steps of connecting TiDB using JetBrains database tools and SQL plugin in JetBrains IDEs are similar, you can also refer to this tutorial for sufficient instructions.
+This tutorial mainly focuses on the standalone DataGrip IDE. The steps of connecting to TiDB using the JetBrains Database Tools and SQL plugin in JetBrains IDEs are similar. You can also follow the steps in this document for reference when connecting to TiDB from any JetBrains IDE.
 
 ## Prerequisites
 
-To complete this tutorial, you will need:
+To complete this tutorial, you need:
 
-- [DataGrip **2023.2.1** or higher](https://www.jetbrains.com/datagrip/download/) or a non-community edition [JetBrains](https://www.jetbrains.com/) IDE.
+- [DataGrip **2023.2.1** or later](https://www.jetbrains.com/datagrip/download/) or a non-community edition [JetBrains](https://www.jetbrains.com/) IDE.
 - A TiDB cluster.
 
 <CustomContent platform="tidb">
@@ -65,25 +65,25 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
     >
     > If you have created a password before, you can either use the original password or click **Reset password** to generate a new one.
 
-5. Create a project to manage your connections.
+5. Launch DataGrip and create a project to manage your connections.
 
-    ![DataGrip create a project](/media/develop/datagrip-create-project.jpg)
+    ![Create a project in DataGrip](/media/develop/datagrip-create-project.jpg)
 
-6. Click **+** in the upper-left corner of the **Database Explorer** panel, and select **Data Source** > **Other** > **TiDB**.
+6. In the newly created project, click **+** in the upper-left corner of the **Database Explorer** panel, and select **Data Source** > **Other** > **TiDB**.
 
-    ![DataGrip select data source](/media/develop/datagrip-data-source-select.jpg)
+    ![Select a data source in DataGrip](/media/develop/datagrip-data-source-select.jpg)
 
-7. Copy the JDBC string from the TiDB Cloud connection dialog and replace the `<your_password>` placeholder with your actual password. Then, paste it into `URL`, and the remaining parameters will be auto-filled. The example result is as follows:
+7. Copy the JDBC string from the TiDB Cloud connection dialog and replace the `<your_password>` placeholder with your actual password. Then, paste it into the **URL** field, and the remaining parameters will be auto-populate. An example result is as follows:
 
-    ![DataGrip URL paste](/media/develop/datagrip-url-paste.jpg)
+    ![Configure the URL field for TiDB Serverless](/media/develop/datagrip-url-paste.jpg)
 
-8. Click **Download** missing driver files. If you have used DataGrip before, you can skip this step.
+    If a **Download missing driver files** warning displays, click **Download** to acquire the driver files.
 
-9. Click **Test Connection** to establish a connection to TiDB Serverless Tier cluster.
+8. Click **Test Connection** to validate the connection to the TiDB Serverless cluster.
 
-    ![DataGrip test connection](/media/develop/datagrip-test-connection.jpg)
+    ![Test the connection to a TiDB Serverless clustser](/media/develop/datagrip-test-connection.jpg)
 
-10. Click **OK** to save it.
+9. Click **OK** to save the connection configuration.
 
 </div>
 <div label="TiDB Dedicated">
@@ -96,77 +96,79 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 
     For more details about how to obtain the connection string, refer to [TiDB Dedicated standard connection](https://docs.pingcap.com/tidbcloud/connect-via-standard-connection).
 
-4. Create a project to manage your connections.
+4. Launch DataGrip and create a project to manage your connections.
 
-    ![DataGrip create a project](/media/develop/datagrip-create-project.jpg)
+    ![Create a project in DataGrip](/media/develop/datagrip-create-project.jpg)
 
-5. Click **+** in the upper-left corner of the **Database Explorer** panel, and select **Data Source** > **Other** > **TiDB**.
+5. In the newly created project, click **+** in the upper-left corner of the **Database Explorer** panel, and select **Data Source** > **Other** > **TiDB**.
 
-    ![DataGrip select data source](/media/develop/datagrip-data-source-select.jpg)
+    ![Select a data source in DataGrip](/media/develop/datagrip-data-source-select.jpg)
 
-6. Copy and paste the corresponding connection string into the DataGrip connection panel. The correspoding relations are:
+6. Copy and paste the appropriate connection string into the **Data Source and Drivers** window in DataGrip. The mappings between DataGrip fields and TiDB Dedicated connection string are as follows:
 
-    - Host: {host}
-    - Port: {port}
-    - User: {user}
-    - Password: {password}
+    | DataGrip field | TiDB Dedicated connection string |
+    | -------------- | ------------------------------- |
+    | Host           | `{host}`                        |
+    | Port           | `{port}`                        |
+    | User           | `{user}`                        |
+    | Password       | `{password}`                    |
 
-    The example result is as follows:
+    An example is as follows:
 
-    ![DataGrip dedicated tier connect](/media/develop/datagrip-dedicated-connect.jpg)
+    ![Configure the connection parameters for TiDB Dedicated](/media/develop/datagrip-dedicated-connect.jpg)
 
-7. Navigate to **SSH/SSL**, check the **Use SSL** option, and input the CA certificate path into **CA file**.
+7. Click the **SSH/SSL** tab, select the **Use SSL** checkbox, and input the CA certificate path into the **CA file** field.
 
-    ![DataGrip dedicated tier connect](/media/develop/datagrip-dedicated-ssl.jpg)
+    ![Configure the CA for TiDB Dedicated](/media/develop/datagrip-dedicated-ssl.jpg)
 
-8. Click **Download** missing driver files. If you have used DataGrip before, you can skip this step.
+    If a **Download missing driver files** warning displays, click **Download** to acquire the driver files.
 
-9. Navigate to **Advanced**, scroll down to the **enabledTLSProtocols** parameter, and set the value to `TLSv1.2,TLSv1.3`.
+8. Click the **Advanced** tab, scroll to find the **enabledTLSProtocols** parameter, and set its value to `TLSv1.2,TLSv1.3`.
 
-    ![DataGrip dedicated tier advanced](/media/develop/datagrip-dedicated-advanced.jpg)
+    ![Configure the TLS for TiDB Dedicated](/media/develop/datagrip-dedicated-advanced.jpg)
 
-10. Click **Test Connection** to establish a connection to TiDB Dedicated Tier cluster.
+9. Click **Test Connection** to validate the connection to the TiDB Dedicated cluster.
 
-    ![DataGrip dedicated test connection](/media/develop/datagrip-dedicated-test-connection.jpg)
+    ![Test the connection to a TiDB Dedicated cluster](/media/develop/datagrip-dedicated-test-connection.jpg)
 
-11. Click **OK** to save it.
+10. Click **OK** to save the connection configuration.
 
 </div>
 <div label="TiDB Self-Hosted">
 
-1. Create a project to manage your connections.
+1. Launch DataGrip and create a project to manage your connections.
 
-    ![DataGrip create a project](/media/develop/datagrip-create-project.jpg)
+    ![Create a project in DataGrip](/media/develop/datagrip-create-project.jpg)
 
-2. Click **+** in the upper-left corner of the **Database Explorer** panel, and select **Data Source** > **Other** > **TiDB**.
+2. In the newly created project, click **+** in the upper-left corner of the **Database Explorer** panel, and select **Data Source** > **Other** > **TiDB**.
 
-    ![DataGrip select data source](/media/develop/datagrip-data-source-select.jpg)
+    ![Select a data source in DataGrip](/media/develop/datagrip-data-source-select.jpg)
 
-3. Copy and paste the corresponding connection string into the DataGrip connection panel. The correspoding relations are:
+3. Configure the following connection parameters:
 
-    - Host: {host}
-    - Port: {port}
-    - User: {user}
-    - Password: {password}
+    - **Host**: The IP address or domain name of your TiDB Self-Hosted cluster.
+    - **Port**: The port number of your TiDB Self-Hosted cluster.
+    - **User**: The username to use to connect to your TiDB Self-Hosted cluster.
+    - **Password**: The password of the username.
 
-    The example result is as follows:
+    An example is as follows:
 
-    ![DataGrip self-hosted connect](/media/develop/datagrip-self-hosted-connect.jpg)
+    ![Configure the connection parameters for TiDB Self-Hosted](/media/develop/datagrip-self-hosted-connect.jpg)
 
-4. Click **Download** missing driver files. If you have used DataGrip before, you can skip this step.
+    If a **Download missing driver files** warning displays, click **Download** to acquire the driver files.
 
-5. Click **Test Connection** to establish a connection to TiDB Self-hosted cluster.
+4. Click **Test Connection** to validate the connection to the TiDB Self-Hosted cluster.
 
-    ![DataGrip self-hosted test connection](/media/develop/datagrip-self-hosted-test-connection.jpg)
+    ![Test the connection to a TiDB Self-Hosted cluster](/media/develop/datagrip-self-hosted-test-connection.jpg)
 
-6. Click **OK** to save it.
+5. Click **OK** to save the connection configuration.
 
 </div>
 </SimpleTab>
 
 ## Next steps
 
-- Learn more usage of `DataGrip` from [the documentation of DataGrip](https://www.jetbrains.com/help/datagrip/getting-started.html).
+- Learn more usage of DataGrip from [the documentation of DataGrip](https://www.jetbrains.com/help/datagrip/getting-started.html).
 - Learn the best practices for TiDB application development with the chapters in the [Developer guide](/develop/dev-guide-overview.md), such as [Insert data](/develop/dev-guide-insert-data.md), [Update data](/develop/dev-guide-update-data.md), [Delete data](/develop/dev-guide-delete-data.md), [Single table reading](/develop/dev-guide-get-data-from-single-table.md), [Transactions](/develop/dev-guide-transaction-overview.md), and [SQL performance optimization](/develop/dev-guide-optimize-sql-overview.md).
 - Learn through the professional [TiDB developer courses](https://www.pingcap.com/education/) and earn [TiDB certifications](https://www.pingcap.com/education/certification/) after passing the exam.
 
