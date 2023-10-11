@@ -12,12 +12,6 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **General changes**
 
-- Support dual region backup (beta) for [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) clusters.
-
-    You can now replicate backups across geographic regions within your cloud provider. This feature provides an additional layer of data protection and disaster recovery capabilities.
-
-    For more information, see [Back up and restore TiDB Dedicated data](/tidb-cloud/backup-and-restore.md).
-
 - Support using TiDB Serverless branches in [Vercel Preview Deployments](https://vercel.com/docs/deployments/preview-deployments), with TiDB Cloud Vercel integration.
 
     For more information, see [Connect with TiDB Serverless branching](/tidb-cloud/integrate-tidbcloud-with-vercel.md#connect-with-tidb-serverless-branching).
