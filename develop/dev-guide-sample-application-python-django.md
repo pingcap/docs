@@ -1,7 +1,6 @@
 ---
 title: Connect to TiDB with Django
 summary: Learn how to connect to TiDB using Django. This tutorial gives Python sample code snippets that work with TiDB using Django.
-aliases: ['/tidb/dev/dev-guide-outdated-for-django']
 ---
 
 # Connect to TiDB with Django
