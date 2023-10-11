@@ -18,17 +18,11 @@ You can use DataGrip in two distinct ways:
 
 Thi tutorial primarily focuses on the process in the standalone DataGrip IDE edition. The steps of connecting TiDB using JetBrains database tools and SQL plugin in JetBrains IDEs are similar, you can also refer to this tutorial for sufficient instructions.
 
-
 ## Prerequisites
 
 To complete this tutorial, you will need:
 
-- [DataGrip **2023.2.1** or higher](https://www.jetbrains.com/datagrip/download/).
-- Or A non-community edition [JetBrains](https://www.jetbrains.com/) IDE.
-
-Additionally, ensure you have the following:
-
-- A paid account that allows the use of DataGrip.
+- [DataGrip **2023.2.1** or higher](https://www.jetbrains.com/datagrip/download/) or a non-community edition [JetBrains](https://www.jetbrains.com/) IDE.
 - A TiDB cluster.
 
 <CustomContent platform="tidb">
