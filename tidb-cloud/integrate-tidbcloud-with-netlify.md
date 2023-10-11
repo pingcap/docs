@@ -224,13 +224,15 @@ For a TiDB Dedicated cluster, you can get the connection string only from the Ti
 
     Go to your Netlify console to check the deployment state. After the deployment is done, the site for the app will have a public IP address provided by Netlify so that everyone can access it.
 
-## Using the edge function
+## Use the edge function
 
-The example app above will run on the Netlify serverless function. This section shows you how to use the edge function with [TiDB Cloud serverless driver](/tidb-cloud/serverless-driver.md). The edge function is a feature provided by Netlify, it allows you to run serverless functions on the edge of the Netlify CDN.
+The example app mentioned in the section above runs on the Netlify serverless function. This section shows you how to use the edge function with [TiDB Cloud serverless driver](/tidb-cloud/serverless-driver.md). The edge function is a feature provided by Netlify, which allows you to run serverless functions on the edge of the Netlify CDN.
 
-1. To use the edge function, create a directory named `netlify/edge-functions` in the root directory of your project. 
+To use the edge function, take the following steps:
 
-2. Then, create a file named `hello.ts` in the directory and add the following code:
+1. Create a directory named `netlify/edge-functions` in the root directory of your project. 
+
+2. Create a file named `hello.ts` in the directory and add the following code:
 
     ```typescript
     import { connect } from 'https://esm.sh/@tidbcloud/serverless'
