@@ -14,25 +14,35 @@ If you want to migrate incremental data only, see [Migrate Incremental Data from
 
 ## Limitations
 
+### Availability
+
 - The Data Migration feature is available only for **TiDB Dedicated** clusters.
 
 - The Data Migration feature is only available to clusters that are created in [certain regions](https://www.pingcap.com/tidb-cloud-pricing-details/#dm-cost) after November 9, 2022. If your **project** was created before the date or if your cluster is in another region, this feature is not available to your cluster and the **Data Migration** tab will not be displayed on the cluster overview page in the TiDB Cloud console.
 
 - Amazon Aurora MySQL writer instances support both existing data and incremental data migration. Amazon Aurora MySQL reader instances only support existing data migration and do not support incremental data migration.
 
-- You can create up to 200 migration jobs for each organization. To create more migration jobs, you need to [file a support ticket](/tidb-cloud/tidb-cloud-support.md).
+### Maximum number of migration jobs
+
+You can create up to 200 migration jobs for each organization. To create more migration jobs, you need to [file a support ticket](/tidb-cloud/tidb-cloud-support.md).
+
+### Filtered out and deleted databases
 
 - The system databases will be filtered out and not migrated to TiDB Cloud even if you select all of the databases to migrate. That is, `mysql`, `information_schema`, `information_schema`, and `sys` will not be migrated using this feature.
 
+- When you delete a cluster in TiDB Cloud, all migration jobs in that cluster are automatically deleted and not recoverable.
+
+### Limitations of existing data migration
+
 - During existing data migration, if the table to be migrated already exists in the target database with duplicated keys, the duplicate keys will be replaced.
+
+- If your dataset size is smaller than 1 TiB, it is recommended that you use [logical mode](https://docs.pingcap.com/tidb/stable/tidb-lightning-logical-import-mode) (the default mode). If your dataset size is larger than 1 TiB, or you want to migrate existing data faster, you can use [physical mode](https://docs.pingcap.com/tidb/stable/tidb-lightning-physical-import-mode). For more information, see [Migrate existing data and incremental data](#migrate-existing-data-and-incremental-data).
+
+### Limitations of incremental data migration
 
 - During incremental data migration, if the table to be migrated already exists in the target database with duplicated keys, an error is reported and the migration is interrupted. In this situation, you need to make sure whether the upstream data is accurate. If yes, click the "Restart" button of the migration job and the migration job will replace the downstream conflicting records with the upstream records.
 
-- When you delete a cluster in TiDB Cloud, all migration jobs in that cluster are automatically deleted and not recoverable.
-
 - During incremental replication (migrating ongoing changes to your cluster), if the migration job recovers from an abrupt error, it might open the safe mode for 60 seconds. During the safe mode, `INSERT` statements are migrated as `REPLACE`, `UPDATE` statements as `DELETE` and `REPLACE`, and then these transactions are migrated to the downstream cluster to make sure that all the data during the abrupt error has been migrated smoothly to the downstream cluster. In this scenario, for upstream tables without primary keys or not-null unique indexes, some data might be duplicated in the downstream cluster because the data might be inserted repeatedly to the downstream.
-
-- When you use Data Migration, it is recommended to keep the size of your dataset smaller than 1 TiB. If the dataset size is larger than 1 TiB, the existing data migration will take a long time due to limited specifications.
 
 - In the following scenarios, if the migration job takes longer than 24 hours, do not purge binary logs in the source database to ensure that Data Migration can get consecutive binary logs for incremental replication:
 
@@ -195,9 +205,31 @@ In the **Choose the objects to be migrated** step, you can choose existing data 
 
 To migrate data to TiDB Cloud once and for all, choose both **Existing data migration** and **Incremental data migration**, which ensures data consistency between the source and target databases.
 
+You can use [physical mode](https://docs.pingcap.com/tidb/stable/tidb-lightning-physical-import-mode) or [logical mode](https://docs.pingcap.com/tidb/stable/tidb-lightning-logical-import-mode) to migrate **existing data**.
+
+- The default mode is **logical mode**. This mode supports migrating data into a table with existing data. But the performance is slower than physical mode.
+
+- It is recommended to use **physical mode** for large datasets. When you use this mode, the target table must be empty. For the specification of 16 RCUs (Replication Capacity Units), the performance is about 2.5 times faster than logical mode. The performance of other specifications can increase by 20% to 50% compared with logical mode. Note that the performance data is for reference only and might vary in different scenarios.
+
+Physical mode has the following limitations:
+
+- When you use physical mode, you cannot create a second migration job or import task for the TiDB cluster before the existing data migration is completed.
+- Physical mode is only available for TiDB clusters deployed on AWS.
+
+Physical mode exports the upstream data as fast as possible, so [different specifications](/tidb-cloud/tidb-cloud-billing-dm.md#specifications-for-data-migration) have different performance impacts on QPS and TPS of the upstream database during data export. The following table shows the performance regression of each specification.
+
+| Migration specification |  Maximum export speed | Performance regression of the upstream database |
+|---------|-------------|--------|
+| 2 RCUs   | 80.84 MiB/s  | 15.6% |
+| 4 RCUs   | 214.2 MiB/s  | 20.0% |
+| 8 RCUs   | 365.5 MiB/s  | 28.9% |
+| 16 RCUs | 424.6 MiB/s  | 46.7% |
+
 ### Migrate only existing data
 
 To migrate only existing data of the source database to TiDB Cloud, choose **Existing data migration**.
+
+You can choose to use [physical mode](https://docs.pingcap.com/tidb/stable/tidb-lightning-physical-import-mode) or [logical mode](https://docs.pingcap.com/tidb/stable/tidb-lightning-logical-import-mode) to migrate existing data. For more information, see [Migrate existing data and incremental data](#migrate-existing-data-and-incremental-data).
 
 ### Migrate only incremental data
 
