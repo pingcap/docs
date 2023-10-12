@@ -118,7 +118,7 @@ On the right pane of the endpoint details page, you can click the **Properties**
 
 - **Cache Response**: this property is available only when the request method is `GET`. When **Cache Response** is enabled, TiDB Cloud Data Service can cache the response returned by your `GET` requests within a specified time-to-live (TTL) period.
 - **Time-to-live (s)**: this property is available only when **Cache Response** is enabled. You can use it to specify the time-to-live (TTL) period in seconds for cached response. During the TTL period, if you make the same `GET` requests again, Data Service returns the cached response directly instead of fetching data from the target database again, which improves your query performance.
-- **Batch Operation**: this property is visible only when the request method is `POST`, `PUT`, or `DELETE`. When **Batch Operation** is enabled, you can operate on multiple rows in a single request. For example, you can insert multiple rows of data in a single `POST` request by adding an array of data objects in the `--data-raw` option of your curl command when calling the endpoint.
+- **Batch Operation**: this property is visible only when the request method is `POST` or `PUT`. When **Batch Operation** is enabled, you can operate on multiple rows in a single request. For example, you can insert multiple rows of data in a single `POST` request by adding an array of data objects in the `--data-raw` option of your curl command when calling the endpoint.
 
 ### Write SQL statements
 
@@ -318,7 +318,6 @@ TiDB Cloud Data Service generates code examples to help you call an endpoint. To
         - For endpoints with **Batch Operation** enabled, the `--data-raw` option accepts an array of data objects so you can operate on multiple rows of data using one endpoint.
         - For endpoints with **Batch Operation** not enabled, the `--data-raw` option only accepts one data object.
 
-    - If the request method of your endpoint is `DELETE` and **Batch Operation** is enabled for the endpoint, you can use comma (`,`) to separate multiple rows to be deleted in your curl command, such as `/endpoint/<Endpoint Path>?id=${id1},${id2},${id3}`.
     - If the endpoint contains parameters, specify the parameter values when calling the endpoint.
 
 ### Response

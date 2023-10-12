@@ -182,7 +182,7 @@ The description of each field is as follows:
 | `settings.cache_enabled`   | Integer  | Controls whether to cache the response returned by your `GET` requests within a specified time-to-live (TTL) period. Supported values are `0` (disabled) and `1` (enabled). The default value is `0`. |
 | `settings.cache_ttl`   | Integer  | The time-to-live (TTL) period in seconds for cached response when `settings.cache_enabled` is set to `1`. You can set it to an integer from 30 to 600. During the TTL period, if you make the same `GET` requests again, Data Service returns the cached response directly instead of fetching data from the target database again, which improves your query performance. |
 | `tag`    | String | The tag for the endpoint. The default value is `"Default"`. |
-| `batch_operation`    | Integer | Controls whether to enable the endpoint to operate in batch mode. Supported values are `0` (disabled) and `1` (enabled). When it is set to `1`, you can operate on multiple rows in a single request. To enable this option, make sure that the request method is `POST`, `PUT`, or `DELETE`. |
+| `batch_operation`    | Integer | Controls whether to enable the endpoint to operate in batch mode. Supported values are `0` (disabled) and `1` (enabled). When it is set to `1`, you can operate on multiple rows in a single request. To enable this option, make sure that the request method is `POST` or `PUT`. |
 | `sql_file`    | String | The SQL file directory for the endpoint. For example, `"sql/GET-v1.sql"`. |
 | `type`        | String | The type of the endpoint, which can only be `"sql_endpoint"`.          |
 | `return_type` | String | The response format of the endpoint, which can only be `"json"`.             |
