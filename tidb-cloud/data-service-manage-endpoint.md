@@ -163,9 +163,12 @@ In the **Definition** section, you can view and manage the following properties 
 
 - The parameter name: the name can only include letters, digits, and underscores (`_`) and must start with a letter or an underscore (`_`). **DO NOT** use `page` and `page_size` as parameter names, which are reserved for pagination of request results.
 - **Required**: specifies whether the parameter is required in the request. The default configuration is set to not required.
-- **Type**: specifies the data type of the parameter. Supported values are `STRING`, `NUMBER`, `INTEGER`, and `BOOLEAN`. When using a `STRING` type parameter, you do not need to add quotation marks (`'` or `"`). For example, `foo` is valid for the `STRING` type and is processed as `"foo"`, whereas `"foo"` is processed as `"\"foo\""`.
+- **Type**: specifies the data type of the parameter. Supported values are `STRING`, `NUMBER`, `INTEGER`, `BOOLEAN`, and `ARRAY`. When using a `STRING` type parameter, you do not need to add quotation marks (`'` or `"`). For example, `foo` is valid for the `STRING` type and is processed as `"foo"`, whereas `"foo"` is processed as `"\"foo\""`.
+- **Enum**: specifies the valid values for the parameter. For multiple values, separate them with a comma (`,`). This option is available only when the parameter type is `STRING`, `INTEGER`, or `NUMBER`. For example, if you set the parameter type to `STRING` and specify `foo, bar` as the enum values, the parameter value can only be `foo` or `bar`.
+- **ItemType**: specifies the item type of an `ARRAY` type parameter.
 - **Default Value**: specifies the default value of the parameter.
 
+    - For `ARRAY` type, you need to separate multiple values with a comma (`,`).
     - Make sure that the value can be converted to the type of parameter. Otherwise, the endpoint returns an error.
     - If you do not set a test value for a parameter, the default value is used when testing the endpoint.
 

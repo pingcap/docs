@@ -91,7 +91,7 @@ You can customize SQL statements for the endpoint in the SQL editor, which is th
     > - The parameter name is case-sensitive.
     > - The parameter cannot be used as a table name or column name.
 
-    - In the **Definition** section, you can specify whether the parameter is required when a client calls the endpoint, the data type (`STRING`, `NUMBER`, `INTEGER`, or `BOOLEAN`), and the default value of the parameter. When using a `STRING` type parameter, you do not need to add quotation marks (`'` or `"`). For example, `foo` is valid for the `STRING` type and is processed as `"foo"`, whereas `"foo"` is processed as `"\"foo\""`.
+    - In the **Definition** section, you can specify whether the parameter is required when a client calls the endpoint, the data type, and the default value of the parameter.
     - In the **Test Values** section, you can set the test value for a parameter. The test values are used when you run the SQL statements or test the endpoint. If you do not set the test values, the default values are used.
     - For more information, see [Configure parameters](/tidb-cloud/data-service-manage-endpoint.md#configure-parameters).
 
