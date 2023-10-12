@@ -738,6 +738,11 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 
 ### require_secure_transport <span class="version-mark">New in v6.1.0</span>
 
+> **Note:**
+>
+> This variable is not supported on [TiDB Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-dedicated).
+> If you open it, it may cause the SQL client to fail to connect to the cluster.
+
 - Scope: GLOBAL
 - Persists to cluster: Yes
 - Type: Boolean
