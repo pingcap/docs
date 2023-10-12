@@ -47,9 +47,6 @@ This section introduces the configuration of a replication task.
 # This configuration item affects configurations related to filter and sink.
 case-sensitive = true
 
-# Specifies whether to output the old value. New in v4.0.5. Since v5.0, the default value is `true`.
-enable-old-value = true
-
 # Specifies whether to enable the Syncpoint feature, which is supported since v6.3.0 and is disabled by default.
 # Since v6.4.0, only the changefeed with the SYSTEM_VARIABLES_ADMIN or SUPER privilege can use the TiCDC Syncpoint feature.
 # Note: This configuration item only takes effect if the downstream is Kafka or a storage service.
@@ -78,10 +75,6 @@ enable-old-value = true
 # Filter rules.
 # Filter syntax: <https://docs.pingcap.com/tidb/stable/table-filter#syntax>.
 rules = ['*.*', '!test.*']
-
-# Specifies the transaction that will be ignored with the specified start_ts.
-# The default value is an empty list.
-# IgnoreTxnStartTs = []
 
 # Event filter rules.
 # The detailed syntax is described in <https://docs.pingcap.com/tidb/stable/ticdc-filter>
