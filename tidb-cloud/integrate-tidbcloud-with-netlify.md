@@ -246,7 +246,7 @@ To use the edge function, take the following steps:
     export const config = { path: "/api/hello" };
     ```
 
-3. Set the `TIDB_DATABASE_URL` environment variables, you can get the connection information on the [TiDB Cloud console](https://tidbcloud.com/).
+3. Set the `TIDB_DATABASE_URL` environment variables. You can get the connection information from the [TiDB Cloud console](https://tidbcloud.com/).
 
     ```shell
     netlify env:set TIDB_DATABASE_URL 'mysql://<username>:<password>@<host>/<database>'
