@@ -20,6 +20,7 @@ summary: Learn what TiCDC is, what features TiCDC provides, and how to install a
 - Replicate data bidirectionally between TiDB clusters, based on which you can create a multi-active TiDB solution using TiCDC.
 - Replicate incremental data from a TiDB cluster to a MySQL database (or other MySQL-compatible databases) with low latency.
 - Replicate incremental data from a TiDB cluster to a Kafka cluster. The recommended data format includes [Canal-JSON](/ticdc/ticdc-canal-json.md) and [Avro](/ticdc/ticdc-avro-protocol.md).
+- Replicating incremental data from a TiDB cluster to storage services, such as Amazon S3, GCS, Azure Blob Storage, and NFS.
 - Replicate tables with the ability to filter databases, tables, DMLs, and DDLs.
 - Be highly available with no single point of failure. Supports dynamically adding and deleting TiCDC nodes.
 - Support cluster management through [Open API](/ticdc/ticdc-open-api.md), including querying task status, dynamically modifying task configuration, and creating or deleting tasks.
@@ -65,7 +66,7 @@ The components in the preceding architecture diagram are described as follows:
 - TiCDC: TiCDC nodes where the TiCDC processes run. Each node runs a TiCDC process. Each process pulls data changes from one or more tables in TiKV nodes, and replicates the changes to the downstream system through the sink component.
 - PD: The scheduling module in a TiDB cluster. This module is in charge of scheduling cluster data and usually consists of three PD nodes. PD provides high availability through the etcd cluster. In the etcd cluster, TiCDC stores its metadata, such as node status information and changefeed configurations.
 
-As shown in the preceding architecture diagram, TiCDC supports replicating data to TiDB, MySQL, and Kafka databases.
+As shown in the preceding architecture diagram, TiCDC supports replicating data to TiDB, MySQL, Kafka, and storage services.
 
 ## Best practices
 
