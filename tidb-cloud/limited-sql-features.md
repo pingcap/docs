@@ -248,4 +248,4 @@ TiDB Cloud works with almost all workloads that TiDB supports, but there are som
 
 [^12]: Customizing cache size using [`AUTO_ID_CACHE`](/auto-increment.md#cache-size-control) is temporarily unavailable on TiDB Serverless.
 
-[^13]: Not supported. Enabling it for TiDB Dedicated clusters will result in SQL client connection failures.
+[^13]: Not supported. Enabling `require_secure_transport` for TiDB Dedicated clusters will result in SQL client connection failures.
