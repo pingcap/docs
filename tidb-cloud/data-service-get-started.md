@@ -27,9 +27,13 @@ Creating a sample Data App is the best way to get started with Data Service. If 
 
 2. On the **Data Service** page, click **Create Sample Data App**. A dialog is displayed.
 
-3. In the dialog, read the introduction about the sample Data App, and then click **Create**.
+3. In the dialog, update the App name if necessary, select clusters that you want the Data App to access, and then click **Create**.
 
     The creation process takes a few seconds.
+
+    > **Note:**
+    >
+    > If there is no cluster in your current project, you can click **Create New Cluster** in the **Link Data Sources** drop-down list to create one first.
 
 4. After the sample Data App is automatically created, you can find the App name, a list of endpoints in the left pane, the SQL statements of the endpoints in the middle pane, and instructions about using the sample Data App on the right side.
 
