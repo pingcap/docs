@@ -84,7 +84,7 @@ At the organization level, TiDB Cloud defines four roles, in which `Organization
 
 > **Note:**
 >
-> The `Organization Console Audit Admin` role is used for audit management of various operations on the TiDB Cloud Console. The `Organization Console Audit Admin` role cannot manage auditing of operations on the database. Database auditing is managed by the Project Owner role at the Project level.
+> The `Organization Console Audit Admin` role is used to manage audit logging in the TiDB Cloud console, instead of database audit logging. To manage database auditing, use the `Project Owner` role at the project level.
 
 ### Project roles
 
