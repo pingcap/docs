@@ -381,7 +381,7 @@ Three system variables related to automatic update of statistics are as follows:
 
 |  System Variable | Default Value | Description |
 |---|---|---|
-| [`tidb_auto_analyze_ratio`](/system-variables.md#tidb_auto_analyze_ratio| 0.5 | The threshold value of automatic update |
+| [`tidb_auto_analyze_ratio`](/system-variables.md#tidb_auto_analyze_ratio) | 0.5 | The threshold value of automatic update |
 | [`tidb_auto_analyze_start_time`](/system-variables.md#tidb_auto_analyze_start_time) | `00:00 +0000` | The start time in a day when TiDB can perform automatic update |
 | [`tidb_auto_analyze_end_time`](/system-variables.md#tidb_auto_analyze_end_time)   | `23:59 +0000` | The end time in a day when TiDB can perform automatic update |
 | [`tidb_auto_analyze_partition_batch_size`](/system-variables.md#tidb_auto_analyze_partition_batch_size-new-in-v640) | `1` | The number of partitions that TiDB automatically analyzes when analyzing a partitioned table (that is, when automatically updating statistics on a partitioned table) |
