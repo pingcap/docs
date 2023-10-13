@@ -837,7 +837,7 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
-- Default value: `OFF` for TiDB Self-Hosted and TiDB Dedicated, `ON` for TiDB Serverless
+- Default value: `OFF` for TiDB Self-Hosted and [TiDB Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-dedicated), `ON` for [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless)
 
 <CustomContent platform="tidb">
 
