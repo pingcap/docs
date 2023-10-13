@@ -221,6 +221,213 @@ The following example binds the current statement to the resource group `rg1`.
 SELECT /*+ RESOURCE_GROUP(rg1) */ * FROM t limit 10;
 ```
 
+<<<<<<< HEAD
+=======
+### Manage queries that consume more resources than expected (Runaway Queries)
+
+> **Warning:**
+>
+> This feature is experimental. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+
+A runaway query is a query that consumes more time or resources than expected. The term **runaway queries** is used in the following to describe the feature of managing the runaway query.
+
+- Starting from v7.2.0, the resource control feature introduces the management of runaway queries. You can set criteria for a resource group to identify runaway queries and automatically take actions to prevent them from exhausting resources and affecting other queries. You can manage runaway queries for a resource group by including the `QUERY_LIMIT` field in [`CREATE RESOURCE GROUP`](/sql-statements/sql-statement-create-resource-group.md) or [`ALTER RESOURCE GROUP`](/sql-statements/sql-statement-alter-resource-group.md).
+- Starting from v7.3.0, the resource control feature introduces manual management of runaway watches, enabling quick identification of runaway queries for a given SQL statement or Digest. You can execute the statement [`QUERY WATCH`](/sql-statements/sql-statement-query-watch.md) to manually manage the runaway queries watch list in the resource group.
+
+#### `QUERY_LIMIT` parameters
+
+Supported condition setting:
+
+- `EXEC_ELAPSED`: a query is identified as a runaway query when the query execution time exceeds this limit.
+
+Supported operations (`ACTION`):
+
+- `DRYRUN`: no action is taken. The records are appended for the runaway queries. This is mainly used to observe whether the condition setting is reasonable.
+- `COOLDOWN`: the execution priority of the query is lowered to the lowest level. The query continues to execute with the lowest priority and does not occupy resources of other operations.
+- `KILL`: the identified query is automatically terminated and reports an error `Query execution was interrupted, identified as runaway query`.
+
+To avoid too many concurrent runaway queries that exhaust system resources, the resource control feature introduces a quick identification mechanism, which can quickly identify and isolate runaway queries. You can use this feature through the `WATCH` clause. When a query is identified as a runaway query, this mechanism extracts the matching feature (defined by the parameter after `WATCH`) of the query. In the next period of time (defined by `DURATION`), the matching feature of the runaway query is added to the watch list, and the TiDB instance matches queries with the watch list. The matching queries are directly marked as runaway queries and isolated according to the corresponding action, instead of waiting for them to be identified by conditions. The `KILL` operation terminates the query and reports an error `Quarantined and interrupted because of being in runaway watch list`.
+
+There are three methods for `WATCH` to match for quick identification:
+
+- `EXACT` indicates that only SQL statements with exactly the same SQL text are quickly identified.
+- `SIMILAR` indicates all SQL statements with the same pattern are matched by Plan Digest, and the literal values are ignored.
+- `PLAN` indicates all SQL statements with the same pattern are matched by Plan Digest.
+
+The `DURATION` option in `WATCH` indicates the duration of the identification item, which is infinite by default.
+
+After a watch item is added, neither the matching feature nor the `ACTION` is changed or deleted whenever the `QUERY_LIMIT` configuration is changed or deleted. You can use `QUERY WATCH REMOVE` to remove a watch item.
+
+The parameters of `QUERY_LIMIT` are as follows:
+
+| Parameter          | Description            | Note                                  |
+|---------------|--------------|--------------------------------------|
+| `EXEC_ELAPSED`  | When the query execution time exceeds this value, it is identified as a runaway query | EXEC_ELAPSED =`60s` means the query is identified as a runaway query if it takes more than 60 seconds to execute. |
+| `ACTION`    | Action taken when a runaway query is identified | The optional values are `DRYRUN`, `COOLDOWN`, and `KILL`. |
+| `WATCH`   | Quickly match the identified runaway query. If the same or similar query is encountered again within a certain period of time, the corresponding action is performed immediately. | Optional. For example, `WATCH=SIMILAR DURATION '60s'`, `WATCH=EXACT DURATION '1m'`, and `WATCH=PLAN`. |
+
+#### Examples
+
+1. Create a resource group `rg1` with a quota of 500 RUs per second, and define a runaway query as one that exceeds 60 seconds, and lower the priority of the runaway query.
+
+    ```sql
+    CREATE RESOURCE GROUP IF NOT EXISTS rg1 RU_PER_SEC = 500 QUERY_LIMIT=(EXEC_ELAPSED='60s', ACTION=COOLDOWN);
+    ```
+
+2. Change the `rg1` resource group to terminate the runaway queries, and mark the queries with the same pattern as runaway queries immediately in the next 10 minutes.
+
+    ```sql
+    ALTER RESOURCE GROUP rg1 QUERY_LIMIT=(EXEC_ELAPSED='60s', ACTION=KILL, WATCH=SIMILAR DURATION='10m');
+    ```
+
+3. Change the `rg1` resource group to cancel the runaway query check.
+
+    ```sql
+    ALTER RESOURCE GROUP rg1 QUERY_LIMIT=NULL;
+    ```
+
+#### `QUERY WATCH` parameters
+
+For more information about the synopsis of `QUERY WATCH`, see [`QUERY WATCH`](/sql-statements/sql-statement-query-watch.md).
+
+The parameters are as follows:
+
+- The `RESOURCE GROUP` specifies a resource group. The matching features of runaway queries added by this statement are added to the watch list of the resource group. This parameter can be omitted. If omitted, it applies to the `default` resource group.
+- The meaning of `ACTION` is the same as `QUERY LIMIT`. This parameter can be omitted. If omitted, the corresponding action after identification adopts the `ACTION` configured by `QUERY LIMIT` in the resource group, and the action does not change with the `QUERY LIMIT` configuration. If there is no `ACTION` configured in the resource group, an error is reported.
+- The `QueryWatchTextOption` parameter has three options: `SQL DIGEST`, `PLAN DIGEST`, and `SQL TEXT`.
+    - `SQL DIGEST` is the same as that of `SIMILAR`. The following parameters accept strings, user-defined variables, or other expressions that yield string result. The string length must be 64, which is the same as the Digest definition in TiDB.
+    - `PLAN DIGEST` is the same as `PLAN`. The following parameter is a Digest string.
+    - `SQL TEXT` matches the input SQL as a raw string (`EXACT`), or parses and compiles it into `SQL DIGEST` (`SIMILAR`) or `PLAN DIGEST` (`PLAN`), depending on the following parameter.
+
+- Add a matching feature to the runaway query watch list for the default resource group (you need to set `QUERY LIMIT` for the default resource group in advance).
+
+    ```sql
+    QUERY WATCH ADD ACTION KILL SQL TEXT EXACT TO 'select * from test.t2';
+    ```
+
+- Add a matching feature to the runaway query watch list for the `rg1` resource group by parsing the SQL into SQL Digest. When `ACTION` is not specified, the `ACTION` option already configured for the `rg1` resource group is used.
+
+    ```sql
+    QUERY WATCH ADD RESOURCE GROUP rg1 SQL TEXT SIMILAR TO 'select * from test.t2';
+    ```
+
+- Add a matching feature to the runaway query watch list for the `rg1` resource group using `PLAN DIGEST`.
+
+    ```sql
+    QUERY WATCH ADD RESOURCE GROUP rg1 ACTION KILL PLAN DIGEST 'd08bc323a934c39dc41948b0a073725be3398479b6fa4f6dd1db2a9b115f7f57';
+    ```
+
+- Get the watch item ID by querying `INFORMATION_SCHEMA.RUNAWAY_WATCHES` and delete the watch item.
+
+    ```sql
+    SELECT * from information_schema.runaway_watches ORDER BY id;
+    ```
+
+    ```sql
+    *************************** 1. row ***************************
+                    ID: 20003
+    RESOURCE_GROUP_NAME: rg2
+            START_TIME: 2023-07-28 13:06:08
+            END_TIME: UNLIMITED
+                WATCH: Similar
+            WATCH_TEXT: 5b7fd445c5756a16f910192ad449c02348656a5e9d2aa61615e6049afbc4a82e
+                SOURCE: 127.0.0.1:4000
+                ACTION: Kill
+    1 row in set (0.00 sec)
+    ```
+
+    ```sql
+    QUERY WATCH REMOVE 20003;
+    ```
+
+#### Observability
+
+You can get more information about runaway queries from the following system tables and `INFORMATION_SCHEMA`:
+
++ The `mysql.tidb_runaway_queries` table contains the history records of all runaway queries identified in the past 7 days. Take one of the rows as an example:
+
+    ```sql
+    MySQL [(none)]> SELECT * FROM mysql.tidb_runaway_queries LIMIT 1\G;
+    *************************** 1. row ***************************
+    resource_group_name: rg1
+                   time: 2023-06-16 17:40:22
+             match_type: identify
+                 action: kill
+           original_sql: select * from sbtest.sbtest1
+            plan_digest: 5b7d445c5756a16f910192ad449c02348656a5e9d2aa61615e6049afbc4a82e
+            tidb_server: 127.0.0.1:4000
+    ```
+
+    In the preceding output,`match_type` indicates how the runaway query is identified. The value can be one of the following:
+
+    - `identify` means that it matches the condition of the runaway query.
+    - `watch` means that it matches the quick identification rule in the watch list.
+
++ The `information_schema.runaway_watches` table contains records of quick identification rules for runaway queries. For more information, see [`RUNAWAY_WATCHES`](/information-schema/information-schema-runaway-watches.md).
+
+### Manage background tasks
+
+> **Warning:**
+>
+> This feature is experimental. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://docs.pingcap.com/tidb/stable/support) on GitHub.
+
+Background tasks, such as data backup and automatic statistics collection, are low-priority but consume many resources. These tasks are usually triggered periodically or irregularly. During execution, they consume a lot of resources, thus affecting the performance of online high-priority tasks.
+
+Starting from v7.4.0, the TiDB resource control feature supports managing background tasks. When a task is marked as a background task, TiKV dynamically limits the resources used by this type of task to avoid the impact on the performance of other foreground tasks. TiKV monitors the CPU and IO resources consumed by all foreground tasks in real time, and calculates the resource threshold that can be used by background tasks based on the total resource limit of the instance. All background tasks are restricted by this threshold during execution.
+
+#### `BACKGROUND` parameters
+
+`TASK_TYPES`: specifies the task types that need to be managed as background tasks. Use commas (`,`) to separate multiple task types.
+
+TiDB supports the following types of background tasks:
+
+<CustomContent platform="tidb">
+
+- `lightning`: perform import tasks using [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md). Both physical and logical import modes of TiDB Lightning are supported.
+- `br`: perform backup and restore tasks using [BR](/br/backup-and-restore-overview.md). PITR is not supported.
+- `ddl`: control the resource usage during the batch data write back phase of Reorg DDLs.
+- `stats`: the [collect statistics](/statistics.md#collect-statistics) tasks that are manually executed or automatically triggered by TiDB.
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+- `lightning`: perform import tasks using [TiDB Lightning](https://docs.pingcap.com/tidb/stable/tidb-lightning-overview). Both physical and logical import modes of TiDB Lightning are supported.
+- `br`: perform backup and restore tasks using [BR](https://docs.pingcap.com/tidb/stable/backup-and-restore-overview). PITR is not supported.
+- `ddl`: control the resource usage during the batch data write back phase of Reorg DDLs.
+- `stats`: the [collect statistics](/statistics.md#collect-statistics) tasks that are manually executed or automatically triggered by TiDB.
+
+</CustomContent>
+
+By default, the task types that are marked as background tasks are empty, and the management of background tasks is disabled. This default behavior is the same as that of versions prior to TiDB v7.4.0. To manage background tasks, you need to manually modify the background task types of the `default` resource group.
+
+#### Examples
+
+1. Create the `rg1` resource group and set `br` and `stats` as background tasks.
+
+    ```sql
+    CREATE RESOURCE GROUP IF NOT EXISTS rg1 RU_PER_SEC = 500 BACKGROUND=(TASK_TYPES='br,stats');
+    ```
+
+2. Change the `rg1` resource group to set `br` and `ddl` as background tasks.
+
+    ```sql
+    ALTER RESOURCE GROUP rg1 BACKGROUND=(TASK_TYPES='br,ddl');
+    ```
+
+3. Restore the background tasks of `rg1` resource group to the default value. In this case, the background task types follow the configuration of the `default` resource group.
+
+    ```sql
+    ALTER RESOURCE GROUP rg1 BACKGROUND=NULL;
+    ```
+
+4. Change the `rg1` resource group to set the background task types to empty. In this case, all tasks of this resource group are not treated as background tasks.
+
+    ```sql
+    ALTER RESOURCE GROUP rg1 BACKGROUND=(TASK_TYPES="");
+    ```
+
+>>>>>>> 89830959d4 (Update tidb-resource-control.md (#15057))
 ## Disable resource control
 
 <CustomContent platform="tidb">
