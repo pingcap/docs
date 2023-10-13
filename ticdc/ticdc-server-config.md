@@ -28,9 +28,9 @@ The following are descriptions of options available in a `cdc server` command:
 
 ## `cdc server` configuration file parameters
 
-The following are configurations in the configuration file of `cdc server`:
+The following describes the configuration file specified by the `config` option in the `cdc server` command:
 
-```yaml
+```toml
 # The configuration method of the following parameters is the same as that of CLI parameters, but the CLI parameters have higher priorities.
 addr = "127.0.0.1:8300"
 advertise-addr = ""
@@ -55,16 +55,16 @@ owner-flush-interval = 50000000 # 50 ms
 # The interval at which the Processor module in the TiCDC cluster attempts to push the replication progress. This parameter is optional and its default value is `50000000` nanoseconds (that is, 50 milliseconds). The configuration method of this parameter is the same as that of `owner-flush-interval`.
 processor-flush-interval = 50000000 # 50 ms
 
-#[log]
-# The output location for internal error logs of the zap log module. This parameter is optional and its default value is "stderr".
-# error-output = "stderr"
-# [log.file]
-#   The maximum size of a single log file, measured in MiB. This parameter is optional and its default value is 300.
-#   max-size = 300 # 300 MiB
-#   The maximum number of days to retain log files. This parameter is optional and its default value is `0`, indicating never to delete.
-#   max-days = 0
-#   The number of log files to retain. This parameter is optional and its default value is `0`, indicating to keep all log files.
-#   max-backups = 0
+# [log]
+# # The output location for internal error logs of the zap log module. This parameter is optional and its default value is "stderr".
+#   error-output = "stderr"
+#   [log.file]
+#     # The maximum size of a single log file, measured in MiB. This parameter is optional and its default value is 300.
+#     max-size = 300 # 300 MiB
+#     # The maximum number of days to retain log files. This parameter is optional and its default value is `0`, indicating never to delete.
+#     max-days = 0
+#     # The number of log files to retain. This parameter is optional and its default value is `0`, indicating to keep all log files.
+#     max-backups = 0
 
 #[sorter]
 # The size of the shared pebble block cache in the Sorter module for the 8 pebble DBs started by default, measured in MiB. The default value is 128.
