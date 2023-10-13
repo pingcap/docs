@@ -831,7 +831,7 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 > **Note:**
 >
 > This variable is not supported on [TiDB Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-dedicated).
-> If you open it, it may cause the SQL client to fail to connect to the cluster.
+> If you open it, it may cause the SQL client to fail to connect to the TiDB Dedicated cluster.
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
