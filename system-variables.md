@@ -740,7 +740,7 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 
 > **Note:**
 >
-> Currently, this variable is not supported on [TiDB Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-dedicated). DO **NOT** enable this variable for TiDB Dedicated clusters. Otherwise, you might get SQL client connection failures. This restriction is a temporary control measure and will be resolved in the future release.
+> Currently, this variable is not supported on [TiDB Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-dedicated). DO **NOT** enable this variable for TiDB Dedicated clusters. Otherwise, you might get SQL client connection failures. This restriction is a temporary control measure and will be resolved in a future release.
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
