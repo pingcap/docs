@@ -1,23 +1,30 @@
 ---
 title: Connect to TiDB with Visual Studio Code
-summary: Learn how to connect to TiDB using Visual Studio Code. This tutorial gives visual instructions that work with TiDB using Visual Studio Code.
+summary: Learn how to connect to TiDB using Visual Studio Code (VS Code) or Github Codespaces. This tutorial gives visual instructions that work with TiDB using Visual Studio Code or Github Codespaces.
 ---
 
 # Connect to TiDB with Visual Studio Code
 
-TiDB is a MySQL-compatible database, and [Visual Studio Code](https://code.visualstudio.com/)(or VS Code, VSC) is a lightweight but powerful source code editor. You can use extensions to boost its functions. In this document, we will use an extension called [vscode-sqltools](https://marketplace.visualstudio.com/items?itemName=mtxr.sqltools). We can use it to connect to your database. In this extension, they supported TiDB in [official driver](https://marketplace.visualstudio.com/items?itemName=mtxr.sqltools-driver-mysql).
+TiDB is a MySQL-compatible database, and [Visual Studio Code](https://code.visualstudio.com/)(or VS Code, VSC) is a lightweight but powerful source code editor. In this tutorial, we will use the [vscode-sqltools](https://marketplace.visualstudio.com/items?itemName=mtxr.sqltools) extension which supports TiDB as an [official driver](https://marketplace.visualstudio.com/items?itemName=mtxr.sqltools-driver-mysql).
 
-In this tutorial, you will learn how to use TiDB and DataGrip to establish a connection to your TiDB cluster using DataGrip.
+In this tutorial, you will learn how to use to connect to your TiDB cluster using Visual Studio Code.
 
 > **Note:**
 >
 > This tutorial is compatible with TiDB Serverless, TiDB Dedicated, and TiDB Self-Hosted.
 
+> **Note:**
+>
+> This tutorial also works with Visual Studio Code Remote Development enviorments including [Github Codespaces](https://github.com/features/codespaces), [Dev Containers](https://code.visualstudio.com/docs/devcontainers/containers), [Visual Studio Code WSL](https://code.visualstudio.com/docs/remote/wsl), etc.
+
 ## Prerequisites
 
 To complete this tutorial, you will need:
 
-- [VS Code](https://code.visualstudio.com/#alt-downloads) `1.79.2` or higher.
+- [Visual Studio Code](https://code.visualstudio.com/#alt-downloads) `1.72.0` or higher.
+- [SQLTools MySQL/MariaDB/TiDB](https://marketplace.visualstudio.com/items?itemName=mtxr.sqltools-driver-mysql) extension for Visual Studio Code. To install it,
+    - Just [click this link to launch VS Code and install it directly](vscode:extension/mtxr.sqltools-driver-mysql). 
+    - Or, visit [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=mtxr.sqltools-driver-mysql) and click Install. 
 - A TiDB cluster.
 
 <CustomContent platform="tidb">
@@ -36,18 +43,6 @@ To complete this tutorial, you will need:
 - Follow [Deploy a local test TiDB cluster](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb#deploy-a-local-test-cluster) or [Deploy a production TiDB cluster](https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup) to create a local cluster.
 
 </CustomContent>
-
-## Install Extensions
-
-1. Click **Extensions Marketplace** tab.
-2. Search **sqltools** keyword in search box.
-3. Install extensions which name are **SQLTools** and **SQLTools MySQL/MariaDB/TiDB**.
-
-    ![VS Code sqltools extenisons install](/media/develop/vsc-sqltools-install.jpg)
-
-4. After installration, there will be a new tab revealed.
-
-    ![VS Code sqltools extenisons after install](/media/develop/vsc-sqltools-after-install.jpg)
 
 ## Connect to TiDB
 
@@ -68,7 +63,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 
     > **Tip:**
     >
-    > If your program is running in Windows Subsystem for Linux (WSL), switch to the corresponding Linux distribution.
+    > If your VS Code is running against a remote development enviorment, select the remote OS from the list. For example, if you are using Windows Subsystem for Linux (WSL), switch to the corresponding Linux distribution. If you are using Github Codespaces, this doesn't matter.
 
 4. Click **Create password** to create a random password.
 
@@ -96,6 +91,10 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
         - SSL: Please select **Enabled**. TiDB Serverless requires a secure connection. In **SSL Options (node.TLSSocket)** scope:
 
             - Certificate Authority (CA) Certificate File: sername: The parameter `ssl_ca` from TiDB Cloud connection dialog.
+
+            > **Note:**
+            >
+            > If you are running on Windows or Github Codespaces, you can leave this blank. Default is to trust the well-known CAs curated by Mozilla. Learn more about [TiDB Serverless root certificate management](https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-clusters#root-certificate-management)
 
     ![VS Code sqltools serverless connection config](/media/develop/vsc-sqltools-connection-config-serverless.jpg)
 
