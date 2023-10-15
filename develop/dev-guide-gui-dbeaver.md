@@ -1,13 +1,13 @@
 ---
 title: Connect to TiDB with DBeaver
-summary: Learn how to connect to TiDB using DBeaver. This tutorial gives visual instructions that work with TiDB using DBeaver.
+summary: Learn how to connect to TiDB using DBeaver Community. This tutorial gives visual instructions that work with TiDB using DBeaver.
 ---
 
 # Connect to TiDB with DBeaver
 
-TiDB is a MySQL-compatible database, and [DBeaver](https://dbeaver.io/) community edition is a free cross-platform database tool for developers, database administrators, analysts, and everyone working with data. **DBeaver Community** already officially supported TiDB.
+TiDB is a MySQL-compatible database, and [DBeaver Community(https://dbeaver.io/download/) is a free cross-platform database tool for developers, database administrators, analysts, and everyone working with data.
 
-In this tutorial, you will learn how to use TiDB and DBeaver Community to establish a connection to your TiDB cluster using DBeaver Community.
+In this tutorial, you will learn how to connect to your TiDB cluster using DBeaver Community.
 
 > **Note:**
 >
@@ -17,7 +17,7 @@ In this tutorial, you will learn how to use TiDB and DBeaver Community to establ
 
 To complete this tutorial, you will need:
 
-- [DBeaver Community **23.2.1** or higher](https://dbeaver.io/download/).
+- [DBeaver Community **23.0.3** or higher](https://dbeaver.io/download/).
 - A TiDB cluster.
 
 <CustomContent platform="tidb">
