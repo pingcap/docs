@@ -35,7 +35,7 @@ Creating a sample Data App is the best way to get started with Data Service. If 
     >
     > If there is no cluster in your current project, you can click **Create New Cluster** in the **Link Data Sources** drop-down list to create one first.
 
-4. After the sample Data App is automatically created, you can find the App name, a list of endpoints in the left pane, the SQL statements of the endpoints in the middle pane, and instructions about using the sample Data App on the right side.
+4. After the sample Data App is automatically created, you can find the App name, a list of endpoints in the left pane, the SQL statements of an endpoint in the middle pane, and instructions about using the sample Data App on the right side.
 
 5. Follow the instructions on the right side to choose an endpoint and use the curl command to call the endpoint.
 
