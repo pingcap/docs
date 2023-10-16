@@ -264,7 +264,7 @@ The way that TiCDC implements the Canal-JSON data format, including the `Update`
 
 | Item            | TiCDC Canal-JSON                                                                                                                             | Canal                                |
 |:----------------|:---------------------------------------------------------------------------------------------------------------------------------------------|:-------------------------------------|
-| Event of `Update` Type  | The `old` field contains all the column data by default,  contains only the modified column data when `only_output_updated_columns` is `true` | The `old` field contains only the modified column data    |
+| Event of `Update` Type  | By default, the `old` field contains all the column data. When `only_output_updated_columns` is `true`, the `old` field contains only the modified column data.  | The `old` field contains only the modified column data    |
 | `mysqlType` field  | For types with parameters, it does not contain the information of the type parameter                                                         | For types with parameters, it contains the full information of the type parameter    |
 
 ### Event of `Update` Type
