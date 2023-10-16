@@ -687,6 +687,7 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 - TOKEN_ISSUER
 - TOPN (R)
 - TPCC
+- TPCH_10
 - TRACE
 - TRADITIONAL
 - TRAILING (R)
