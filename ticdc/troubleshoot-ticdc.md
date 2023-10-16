@@ -50,7 +50,7 @@ A replication task might be interrupted in the following known scenarios:
         1. Query the status information of the replication task using the `cdc cli changefeed query` command and record the value of `checkpoint-ts`.
         2. Use the new task configuration file and add the `ignore-txn-start-ts` parameter to skip the transaction corresponding to the specified `start-ts`.
         3. Pause the replication task by executing `cdc cli changefeed pause -c <changefeed-id>`.
-        4. Specify the new task configuration file with `cdc cli changefeed update -c <changefeed-id> --config <config-file-path>`.
+        4. Specify the new task configuration file by executing `cdc cli changefeed update -c <changefeed-id> --config <config-file-path>`.
         5. Resume the replication task by executing `cdc cli changefeed resume -c <changefeed-id>`.
 
 - In TiCDC v4.0.13 and earlier versions, when TiCDC replicates the partitioned table, it might encounter an error that leads to replication interruption.
