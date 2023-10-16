@@ -140,6 +140,8 @@ On the SQL editor of the endpoint details page, you can write and run the SQL st
 
     To define a parameter, you can insert it as a variable placeholder like `${ID}` in the SQL statement. For example, `SELECT * FROM table_name WHERE id = ${ID}`. Then, you can click the **Params** tab on the right pane to change the parameter definition and test values. For more information, see [Parameters](#configure-parameters).
 
+    When defining an array parameter, the parameter is automatically converted to multiple comma-separated values in the SQL statement. To make sure that the SQL statement is valid, you need to add parentheses (`()`) around the parameter in some SQL statements (such as `IN`).
+
     > **Note:**
     >
     > - The parameter name is case-sensitive.
