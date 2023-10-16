@@ -215,7 +215,6 @@ Query OK, 3 rows affected (0.00 sec)
 '3','c','3.30'<<<
 ```
 
-
 Now `SELECT ... INTO @variable`, `SELECT ... INTO DUMPFILE` or any [external storage](https://docs.pingcap.com/tidb/stable/backup-and-restore-storages) like S3 or GCS is not supported.
 
 ## MySQL compatibility
