@@ -293,7 +293,12 @@ If the downstream is a TiDB cluster or MySQL instance, it is recommended that yo
 
 ## Replication of a single table can only be run on a single TiCDC node. Will it be possible to use multiple TiCDC nodes to replicate data of multiple tables?
 
-This feature is currently not supported, which might be supported in a future release. By then, TiCDC might replicate data change logs by TiKV Region, which means scalable processing capability.
+Starting from v7.1.0, TiCDC supports the MQ sink to replicate data change logs at the granularity of TiKV Regions, which achieves scalable processing capability and allows TiCDC to replicate a single table with a large number of Regions. To enable this feature, you can configure the following parameters in the [TiCDC configuration file](/ticdc/ticdc-changefeed-config.md):
+
+```toml
+[scheduler]
+enable-table-across-nodes = true
+```
 
 ## Does TiCDC replication get stuck if the upstream has long-running uncommitted transactions?
 
