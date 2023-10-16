@@ -166,7 +166,7 @@ In the **Definition** section, you can view and manage the following properties 
 - **Type**: specifies the data type of the parameter. Supported values are `STRING`, `NUMBER`, `INTEGER`, `BOOLEAN`, and `ARRAY`. When using a `STRING` type parameter, you do not need to add quotation marks (`'` or `"`). For example, `foo` is valid for the `STRING` type and is processed as `"foo"`, whereas `"foo"` is processed as `"\"foo\""`.
 - **Enum**: (optional) specifies the valid values for the parameter and is available only when the parameter type is `STRING`, `INTEGER`, or `NUMBER`.
 
-    - If you leave the enum values empty, the parameter can be any value of the specified type.
+    - If you leave this field empty, the parameter can be any value of the specified type.
     - To specify multiple valid values, you can separate them with a comma (`,`). For example, if you set the parameter type to `STRING` and specify this field as `foo, bar`, the parameter value can only be `foo` or `bar`.
 
 - **ItemType**: specifies the item type of an `ARRAY` type parameter.
