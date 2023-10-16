@@ -118,6 +118,8 @@ TableSampleOpt ::=
 
 ## Examples
 
+### SELECT
+
 ```sql
 mysql> CREATE TABLE t1 (id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, c1 INT NOT NULL);
 Query OK, 0 rows affected (0.11 sec)
@@ -158,6 +160,64 @@ mysql> SELECT AVG(s_quantity), COUNT(s_quantity) FROM stock;
 ```
 
 The above example uses data generated with `tiup bench tpcc prepare`. The first query shows the use of `TABLESAMPLE`.
+
+### SELECT ... INTO OUTFILE
+
+`SELECT ... INTO OUTFILE` is used to write the result of a query to a file. Column and line terminators can be specified to produce a specific output format.
+
+You can use the `Fields` and `Lines` parameters to specify how to handle the data format.
+
+- `FIELDS TERMINATED BY`: specifies the data delimiter.
+- `FIELDS ENCLOSED BY`: specifies the enclosing character of the data.
+- `LINES TERMINATED BY`: specifies the line terminator, if you want to end a line with a certain character.
+
+Below are some examples, first create a table and prepare some data:
+
+```sql
+mysql> create table t (a int, b varchar(10), c decimal(10,2));
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> insert into t values (1, 'a', 1.1), (2, 'b', 2.2), (3, 'c', 3.3);
+Query OK, 3 rows affected (0.01 sec)
+```
+
+Then here are some `SELECT ... INTO OUTFILE` statements and their results.
+
+```sql
+mysql> select * from t into outfile '/tmp/tmp_file1';
+Query OK, 3 rows affected (0.00 sec)
+```
+
+```
+1       a       1.10
+2       b       2.20
+3       c       3.30
+```
+
+```sql
+mysql> select * from t into outfile '/tmp/tmp_file2' fields terminated by ',' enclosed by '"';
+Query OK, 3 rows affected (0.00 sec)
+```
+
+```
+"1","a","1.10"
+"2","b","2.20"
+"3","c","3.30"
+```
+
+```sql
+mysql> select * from t into outfile '/tmp/tmp_file3' fields terminated by ',' enclosed by '\'' lines terminated by '<<<\n';
+Query OK, 3 rows affected (0.00 sec)
+```
+
+```
+'1','a','1.10'<<<
+'2','b','2.20'<<<
+'3','c','3.30'<<<
+```
+
+
+Now `SELECT ... INTO @variable`, `SELECT ... INTO DUMPFILE` or any [external storage](https://docs.pingcap.com/tidb/stable/backup-and-restore-storages) like S3 or GCS is not supported.
 
 ## MySQL compatibility
 
