@@ -252,7 +252,7 @@ To make the execution plan of a SQL statement fixed to a historical execution pl
 Currently, this feature has the following limitations:
 
 - The feature generates hints according to historical execution plans and uses the generated hints for binding. Because historical execution plans are stored in [Statement Summary Tables](/statement-summary-tables.md), before using this feature, you need to enable the [`tidb_enable_stmt_summary`](/system-variables.md#tidb_enable_stmt_summary-new-in-v304) system variable first.
-- This feature does not support TiFlash queries, Join queries with three or more tables, and queries that contain subqueries.
+- This feature does not support TiFlash queries, Join queries with three or more tables, or queries that contain subqueries.
 
 The SQL statement of this binding method is as follows:
 
