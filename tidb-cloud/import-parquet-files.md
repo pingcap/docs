@@ -111,6 +111,11 @@ To import the Parquet files to TiDB Cloud, take the following steps:
 
 3. Provide the following information for the source Parquet files:
 
+    Depending on where you cluster is located, you can choose to import data from Amazon S3 or GCS.
+
+    <SimpleTab>
+    <div label="Amazon S3">
+
     - **Location**: select **Amazon S3**.
     - **Data format**: select **Parquet**.
     - **Bucket URI**: select the bucket URI where your Parquet files are located. Note that you must include `/` at the end of the URI, for example, `s3://sampledate/ingest/`.
@@ -118,10 +123,22 @@ To import the Parquet files to TiDB Cloud, take the following steps:
         - **AWS Access Keys**: enter the AWS access key ID and AWS secret access key.
         - **AWS Role ARN**: enter the Role ARN value.
 
-4. You can choose to **Import into Pre-created Tables**, or **Import Schema and Data from S3**.
+    </div>
+    <div label="GCS">
+
+    - **Location**:  use **Google Cloud**..
+    - **Data format**: select **Parquet**.
+    - **Bucket gsutil URI**: select the bucket URI where your Parquet files are located. Note that you must include `/` at the end of the URI, for example, `gs://sampledate/ingest/`.
+    - **Bucket Access**: you can use a GCS IAM Role to access your bucket. For more information, see [Configure GCS access](/tidb-cloud/config-s3-and-gcs-access.md#configure-gcs-access).
+
+    </div>
+    </SimpleTab>
+
+4. You can choose to import into pre-created tables, or import schema and data from the source.
 
     - **Import into Pre-created Tables** allows you to create tables in TiDB in advance and select the tables that you want to import data into. In this case, you can choose up to 1000 tables to import. You can click **Chat2Query** in the left navigation pane to create tables. For more information about how to use Chat2Query, see [Explore Your Data with AI-Powered Chat2Query](/tidb-cloud/explore-data-with-chat2query.md).
-    - **Import Schema and Data from S3** allows you to import SQL scripts for creating a table and import corresponding table data stored in S3 into TiDB.
+    - **Import Schema and Data from S3** (This field is visible only for AWS S3) allows you to import SQL scripts for creating a table and import corresponding table data stored in S3 into TiDB.
+    - **Import Schema and Data from GCS** (This field is visible only for GCS) allows you to import SQL scripts that creates a table along with its corresponding data stored in GCS directly into TiDB.
 
 5. If the source files do not meet the naming conventions, you can specify a custom mapping rule between a single target table and the CSV file. After that, the data source files will be re-scanned using the provided custom mapping rule. To modify the mapping, click **Advanced Settings** and then click **Mapping Settings**. Note that **Mapping Settings** is available only when you choose **Import into Pre-created Tables**.
 

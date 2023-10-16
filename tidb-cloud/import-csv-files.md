@@ -100,10 +100,16 @@ To import the CSV files to TiDB Cloud, take the following steps:
     2. Click the name of your target cluster to go to its overview page, and then click **Import** in the left navigation pane.
 
 2. On the **Import** page:
+
    - For a TiDB Dedicated cluster, click **Import Data** in the upper-right corner.
    - For a TiDB Serverless cluster, click the **import data from S3** link above the upload area.
 
 3. Provide the following information for the source CSV files:
+
+    Depending on where you cluster is located, you can choose to import data from Amazon S3 or GCS.
+
+    <SimpleTab>
+    <div label="Amazon S3">
 
     - **Location**: select **Amazon S3**.
     - **Data Format**: select **CSV**. If you need to edit the CSV configurations, click **Edit CSV configuration** to update the CSV-specific configurations. For more information, see [CSV Configurations for Importing Data](/tidb-cloud/csv-config-for-import-data.md).
@@ -117,10 +123,27 @@ To import the CSV files to TiDB Cloud, take the following steps:
         - **AWS Access Keys**: enter the AWS access key ID and AWS secret access key.
         - **AWS Role ARN**: enter the AWS Role ARN value.
 
-4. You can choose to **Import into Pre-created Tables**, or **Import Schema and Data from S3**.
+    </div>
+    <div label="GCS">
+
+    - **Location**: use **Google Cloud**.
+    - **Data Format**: select **CSV**. If you need to edit the CSV configurations, click **Edit CSV configuration** to update the CSV-specific configurations. For more information, see [CSV Configurations for Importing Data](/tidb-cloud/csv-config-for-import-data.md).
+
+        > **Note:**
+        >
+        > For the configurations of separator and delimiter, you can use both alphanumeric characters and certain special characters. The supported special characters include `\t`, `\b`, `\n`, `\r`, `\f`, and `\u0001`.
+
+    - **Bucket gsutil URI**: select the bucket gsutil URI where your CSV files are located. Note that you must include `/` at the end of the URI, for example, `gs://sampledate/ingest/`.
+    - **Bucket Access**: you can use a GCS IAM Role to access your bucket. For more information, see [Configure GCS access](/tidb-cloud/config-s3-and-gcs-access.md#configure-gcs-access).
+
+    </div>
+    </SimpleTab>
+
+4. You can choose to import into pre-created tables, or import schema and data from the source.
 
     - **Import into Pre-created Tables** allows you to create tables in TiDB in advance and select the tables that you want to import data into. In this case, you can choose up to 1000 tables to import. To create tables, click on **Chat2Query** in the left navigation pane. For more information about how to use Chat2Query, see [Explore Your Data with AI-Powered Chat2Query](/tidb-cloud/explore-data-with-chat2query.md).
-    - **Import Schema and Data from S3** allows you to import SQL scripts that creates a table along with its corresponding data stored in S3 directly into TiDB.
+    - **Import Schema and Data from S3** (This field is visible only for AWS S3) allows you to import SQL scripts that creates a table along with its corresponding data stored in S3 directly into TiDB.
+    - **Import Schema and Data from GCS** (This field is visible only for GCS) allows you to import SQL scripts that creates a table along with its corresponding data stored in GCS directly into TiDB.
 
 5. If the source files do not meet the naming conventions, you can define a custom mapping rule for each target table and its corresponding CSV file. After that, the data source files will be re-scanned using the provided custom mapping rule. To modify the mapping, go to **Advanced Settings** and then click **Mapping Settings**. Note that **Mapping Settings** is available only when you choose **Import into Pre-created Tables**.
 
