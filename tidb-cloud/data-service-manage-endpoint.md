@@ -167,7 +167,7 @@ In the **Definition** section, you can view and manage the following properties 
 - **Enum**: (optional) specifies the valid values for the parameter and is available only when the parameter type is `STRING`, `INTEGER`, or `NUMBER`.
 
     - If you leave the enum values empty, the parameter can be any value of the specified type.
-    - To specify multiple values, you can separate them with a comma (`,`). For example, if you set the parameter type to `STRING` and specify `foo, bar` as the enum values, the parameter value can only be `foo` or `bar`.
+    - To specify multiple valid values, you can separate them with a comma (`,`). For example, if you set the parameter type to `STRING` and specify this field as `foo, bar`, the parameter value can only be `foo` or `bar`.
 
 - **ItemType**: specifies the item type of an `ARRAY` type parameter.
 - **Default Value**: specifies the default value of the parameter.
