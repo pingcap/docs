@@ -252,7 +252,7 @@ To make the execution plan of a SQL statement fixed to a historical execution pl
 Currently, this feature has the following limitations:
 
 - The feature generates hints according to historical execution plans and uses the generated hints for binding. Because historical execution plans are stored in [Statement Summary Tables](/statement-summary-tables.md), before using this feature, you need to enable the [`tidb_enable_stmt_summary`](/system-variables.md#tidb_enable_stmt_summary-new-in-v304) system variable first.
-- Currently, this feature only supports binding historical execution plans in the `statements_summary` and `statements_summary_history` tables of the current TiDB node. If you get a `can't find any plans` error, you can connect to another TiDB node in the cluster and retry the binding.
+- This feature does not support TiFlash queries, Join queries with three or more tables, and queries that contain subqueries.
 
 The SQL statement of this binding method is as follows:
 
