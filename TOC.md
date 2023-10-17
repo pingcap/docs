@@ -544,6 +544,7 @@
       - [Log Filter](/ticdc/ticdc-filter.md)
       - [DDL Replication](/ticdc/ticdc-ddl.md)
       - [Bidirectional Replication](/ticdc/ticdc-bidirectional-replication.md)
+      - [Data Consistency Validation for TiDB Upstream/Downstream Clusters](/ticdc/ticdc-upstream-downstream-check.md)
     - Monitor and Alert
       - [Monitoring Metrics](/ticdc/monitor-ticdc.md)
       - [Alert Rules](/ticdc/ticdc-alert-rules.md)
@@ -594,7 +595,6 @@
     - [Overview](/sync-diff-inspector/sync-diff-inspector-overview.md)
     - [Data Check for Tables with Different Schema/Table Names](/sync-diff-inspector/route-diff.md)
     - [Data Check in the Sharding Scenario](/sync-diff-inspector/shard-diff.md)
-    - [Data Check for TiDB Upstream/Downstream Clusters](/sync-diff-inspector/upstream-downstream-diff.md)
     - [Data Check in the DM Replication Scenario](/sync-diff-inspector/dm-diff.md)
 - Reference
   - Cluster Architecture
