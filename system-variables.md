@@ -1816,7 +1816,17 @@ Usage example:
 SET tidb_query_log_max_len = 20
 ```
 
-### `tidb_read_staleness` <span class="version-mark">New in v5.4.0</span>
+### tidb_read_consistency <span class="version-mark">New in v5.4.0</span>
+
+- Scope: SESSION
+- Persists to cluster: No
+- Type: String
+- Default value: `strict`
+- This variable is used to control the read consistency for an auto-commit read statement.
+- If the variable value is set to `weak`, the locks encountered by the read statement are skipped directly and the read execution might be faster, which is the weak consistency read mode. However, the transaction semantics (such as atomicity) and distributed consistency (such as linearizability) are not guaranteed.
+- For user scenarios where the auto-commit read needs to return fast and weak consistency read results are acceptable, you can use the weak consistency read mode.
+
+### tidb_read_staleness <span class="version-mark">New in v5.4.0</span>
 
 - Scope: SESSION
 - Default value: `0`
