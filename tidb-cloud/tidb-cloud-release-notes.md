@@ -14,7 +14,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 - [Data Service (beta)](https://tidbcloud.com/console/data-service) provides a sample Data App to help you get started quickly.
 
-    If your project does not have any Data App yet, you can follow the on-screen instructions on the [Data Service](https://tidbcloud.com/console/data-service) page to create a sample Data App with a few clicks. This feature provides a smooth onboarding experience and helps you explore Data Service features.
+    If your project does not have any Data App yet, you can follow the on-screen instructions on the [**Data Service**](https://tidbcloud.com/console/data-service) page to create a sample Data App with a few clicks. This feature provides a smooth onboarding experience and helps you explore Data Service features.
 
     For more information, see [Get started with a sample Data App](/tidb-cloud/data-service-get-started.md#get-started-with-a-sample-data-app).
 
