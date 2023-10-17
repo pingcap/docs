@@ -1,10 +1,7 @@
 ---
 title: Upstream and Downstream Clusters Data Validation and Snapshot Read
 summary: Learn how to check data for TiDB upstream and downstream clusters.
-<<<<<<< HEAD:sync-diff-inspector/upstream-downstream-diff.md
-=======
-aliases: ['/docs/dev/sync-diff-inspector/upstream-downstream-diff/','/docs/dev/reference/tools/sync-diff-inspector/tidb-diff/', '/tidb/dev/upstream-downstream-diff']
->>>>>>> d3ba7ee387 (ticdc: refine changefeed scheduler configuration description (#15050)):ticdc/ticdc-upstream-downstream-check.md
+aliases: ['/tidb/v7.4/upstream-downstream-diff']
 ---
 
 # Upstream and Downstream Clusters Data Validation and Snapshot Read
