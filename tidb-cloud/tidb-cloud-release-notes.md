@@ -8,6 +8,25 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2023.
 
+## October 17, 2023
+
+**General changes**
+
+- [Data Service (beta)](https://tidbcloud.com/console/data-service) provides a sample Data App to help you get started quickly.
+
+    If your project does not have any Data App yet, you can follow the on-screen instructions on the [Data Service](https://tidbcloud.com/console/data-service) page to create a sample Data App with a few clicks. This feature provides a smooth onboarding experience and helps you explore Data Service features.
+
+    For more information, see [Get started with a sample Data App](/tidb-cloud/data-service-get-started.md#get-started-with-a-sample-data-app).
+
+- [Data Service (beta)](https://tidbcloud.com/console/data-service) supports array type parameters and introduces an **Enum** property for parameters.
+
+    - The array type parameters facilitate you to perform batch operations, such as using `IN` to match multiple records in a `WHERE` statement.
+    - The **Enum** property enables you to specify the valid values for a parameter and standardize parameter passing.
+
+  Data Service no longer supports batch `DELETE` operations. You can use array type parameters as an alternative. For example, `DELETE FROM table_name WHERE id IN (${id});`.
+
+    For more information, see [Configure parameters](/tidb-cloud/data-service-manage-endpoint.md#configure-parameters).
+
 ## October 11, 2023
 
 **General changes**
