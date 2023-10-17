@@ -336,7 +336,7 @@ after key/value request is processed:
       consumption.RRU += float64(kc.CPUMsCost) * kvCPUMs -> kc.CPUMsCost * total_process_time
 ```
 
-For writes & batch gets the calculation is similar with different base values.
+For writes and batch gets, the calculation is similar with different base values.
 
 ### Other common execution information
 
