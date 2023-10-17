@@ -938,8 +938,6 @@ EXPLAIN SELECT /*+ leading(t1, t3), inl_join(t3) */ * FROM t1, t2, t3 WHERE t1.i
 +---------------------------------+----------+-----------+---------------+---------------------------------------------------------------------------------------------------------------------+
 9 rows in set (0.01 sec)
 ```
-<<<<<<< HEAD
-=======
 
 ### Using hints causes the `Can't find a proper physical plan for this query` error
 
@@ -964,4 +962,3 @@ set tidb_opt_enable_hash_join=off;
 EXPLAIN SELECT /*+ NO_MERGE_JOIN(t1) */ * FROM t1, t2 WHERE t1.a=t2.a;
 ERROR 1815 (HY000): Internal : Can't find a proper physical plan for this query
 ```
->>>>>>> b80e0c70b6 (sysvar: add system variable `tidb_opt_enable_hash_join` (#14905))
