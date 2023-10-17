@@ -53,13 +53,6 @@ A replication task might be interrupted in the following known scenarios:
         4. Specify the new task configuration file by executing `cdc cli changefeed update -c <changefeed-id> --config <config-file-path>`.
         5. Resume the replication task by executing `cdc cli changefeed resume -c <changefeed-id>`.
 
-- In TiCDC v4.0.13 and earlier versions, when TiCDC replicates the partitioned table, it might encounter an error that leads to replication interruption.
-
-    - In this scenario, TiCDC saves the task information. Because TiCDC has set the service GC safepoint in PD, the data after the task checkpoint is not cleaned by TiKV GC within the valid period of `gc-ttl`.
-    - Handling procedures:
-        1. Pause the replication task by executing `cdc cli changefeed pause -c <changefeed-id>`.
-        2. Wait for about one munite, and then resume the replication task by executing `cdc cli changefeed resume -c <changefeed-id>`.
-
 ### What should I do to handle the OOM that occurs after TiCDC is restarted after a task interruption?
 
 - Update your TiDB cluster and TiCDC cluster to the latest versions. The OOM problem has already been resolved in **v4.0.14 and later v4.0 versions, v5.0.2 and later v5.0 versions, and the latest versions**.
