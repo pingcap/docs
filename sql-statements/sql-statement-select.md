@@ -162,9 +162,7 @@ The above example uses data generated with `tiup bench tpcc prepare`. The first 
 
 ### SELECT ... INTO OUTFILE
 
-`SELECT ... INTO OUTFILE` is used to write the result of a query to a file. Field and line terminators can be specified to produce a specific output format. Common output formats are comma separated (CSV) and tab separated (TSV).
-
-You can use the `Fields` and `Lines` parameters to specify how to handle the data format.
+`SELECT ... INTO OUTFILE` is used to write the result of a query to a file. You can use the `Fields` and `Lines` parameters to specify how to handle the data format. Common output formats are comma separated (CSV) and tab separated (TSV).
 
 - `FIELDS TERMINATED BY`: specifies the data delimiter.
 - `FIELDS ENCLOSED BY`: specifies the enclosing character of the data.
