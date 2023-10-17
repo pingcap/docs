@@ -20,7 +20,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 - [Data Service (beta)](https://tidbcloud.com/console/data-service) supports array type parameters and introduces an **Enum** property for parameters.
 
-    - The array type parameters facilitate you to perform batch operations, such as using `IN` to match multiple records in a `WHERE` statement.
+    - The array type parameters facilitate you to perform batch operations, such as using `IN` in a `WHERE` statement to match multiple records.
     - The **Enum** property enables you to specify the valid values for a parameter and standardize parameter passing.
 
   Data Service no longer supports batch `DELETE` operations. You can use array type parameters as an alternative. For example, `DELETE FROM table_name WHERE id IN (${id});`.
