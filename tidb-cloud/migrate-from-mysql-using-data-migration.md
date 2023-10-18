@@ -36,7 +36,7 @@ You can create up to 200 migration jobs for each organization. To create more mi
 
 - During existing data migration, if the table to be migrated already exists in the target database with duplicated keys, the duplicate keys will be replaced.
 
-- If your dataset size is smaller than 1 TiB, it is recommended that you use [logical mode](https://docs.pingcap.com/tidb/stable/tidb-lightning-logical-import-mode) (the default mode). If your dataset size is larger than 1 TiB, or you want to migrate existing data faster, you can use [physical mode](https://docs.pingcap.com/tidb/stable/tidb-lightning-physical-import-mode). For more information, see [Migrate existing data and incremental data](#migrate-existing-data-and-incremental-data).
+- If your dataset size is smaller than 1 TiB, it is recommended that you use logical mode (the default mode). If your dataset size is larger than 1 TiB, or you want to migrate existing data faster, you can use physical mode. For more information, see [Migrate existing data and incremental data](#migrate-existing-data-and-incremental-data).
 
 ### Limitations of incremental data migration
 
@@ -205,11 +205,11 @@ In the **Choose the objects to be migrated** step, you can choose existing data 
 
 To migrate data to TiDB Cloud once and for all, choose both **Existing data migration** and **Incremental data migration**, which ensures data consistency between the source and target databases.
 
-You can use [physical mode](https://docs.pingcap.com/tidb/stable/tidb-lightning-physical-import-mode) or [logical mode](https://docs.pingcap.com/tidb/stable/tidb-lightning-logical-import-mode) to migrate **existing data**.
+You can use **physical mode** or **logical mode** to migrate **existing data**.
 
-- The default mode is **logical mode**. This mode supports migrating data into a table with existing data. But the performance is slower than physical mode.
+- The default mode is **logical mode**. This mode exports data from upstream databases as SQL statements, and then executes them on TiDB. In this mode, the target tables before migration can be either empty or non-empty. But the performance is slower than physical mode.
 
-- It is recommended to use **physical mode** for large datasets. When you use this mode, the target table must be empty. For the specification of 16 RCUs (Replication Capacity Units), the performance is about 2.5 times faster than logical mode. The performance of other specifications can increase by 20% to 50% compared with logical mode. Note that the performance data is for reference only and might vary in different scenarios.
+- For large datasets, it is recommended to use **physical mode**. This mode exports data from upstream databases and encodes it as KV pairs, writing directly to TiKV to achieve faster performance. This mode requires the target tables to be empty before migration. For the specification of 16 RCUs (Replication Capacity Units), the performance is about 2.5 times faster than logical mode. The performance of other specifications can increase by 20% to 50% compared with logical mode. Note that the performance data is for reference only and might vary in different scenarios.
 
 Physical mode has the following limitations:
 
@@ -229,7 +229,7 @@ Physical mode exports the upstream data as fast as possible, so [different speci
 
 To migrate only existing data of the source database to TiDB Cloud, choose **Existing data migration**.
 
-You can choose to use [physical mode](https://docs.pingcap.com/tidb/stable/tidb-lightning-physical-import-mode) or [logical mode](https://docs.pingcap.com/tidb/stable/tidb-lightning-logical-import-mode) to migrate existing data. For more information, see [Migrate existing data and incremental data](#migrate-existing-data-and-incremental-data).
+You can choose to use physical mode or logical mode to migrate existing data. For more information, see [Migrate existing data and incremental data](#migrate-existing-data-and-incremental-data).
 
 ### Migrate only incremental data
 
