@@ -4,7 +4,7 @@
 - [Docs Home](https://docs.pingcap.com/)
 - About TiDB
   - [TiDB Introduction](/overview.md)
-  - [TiDB 7.3 Release Notes](/releases/release-7.3.0.md)
+  - [TiDB 7.4 Release Notes](/releases/release-7.4.0.md)
   - [Features](/basic-features.md)
   - [MySQL Compatibility](/mysql-compatibility.md)
   - [TiDB Limitations](/tidb-limitations.md)
@@ -49,7 +49,9 @@
       - [mysql2](/develop/dev-guide-sample-application-ruby-mysql2.md)
       - [Rails](/develop/dev-guide-sample-application-ruby-rails.md)
   - Connect to TiDB
-    - [DBeaver](/develop/dev-guide-gui-dbeaver.md)
+    - GUI
+      - [JetBrains DataGrip](/develop/dev-guide-gui-datagrip.md)
+      - [DBeaver](/develop/dev-guide-gui-dbeaver.md)
     - [Choose Driver or ORM](/develop/dev-guide-choose-driver-or-orm.md)
     - [Connect to TiDB](/develop/dev-guide-connect-to-tidb.md)
     - [Connection Pools and Connection Parameters](/develop/dev-guide-connection-parameters.md)
@@ -549,9 +551,11 @@
       - Create Changefeeds
         - [Replicate Data to MySQL-compatible Databases](/ticdc/ticdc-sink-to-mysql.md)
         - [Replicate Data to Kafka](/ticdc/ticdc-sink-to-kafka.md)
+        - [Replicate Data to Pulsar](/ticdc/ticdc-sink-to-pulsar.md)
         - [Replicate Data to Storage Services](/ticdc/ticdc-sink-to-cloud-storage.md)
       - [Manage Changefeeds](/ticdc/ticdc-manage-changefeed.md)
       - [Log Filter](/ticdc/ticdc-filter.md)
+      - [DDL Replication](/ticdc/ticdc-ddl.md)
       - [Bidirectional Replication](/ticdc/ticdc-bidirectional-replication.md)
       - [Data Integrity Validation for Single-Row Data](/ticdc/ticdc-integrity-check.md)
     - Monitor and Alert
@@ -862,6 +866,7 @@
       - [Information Functions](/functions-and-operators/information-functions.md)
       - [JSON Functions](/functions-and-operators/json-functions.md)
       - [Aggregate (GROUP BY) Functions](/functions-and-operators/aggregate-group-by-functions.md)
+      - [GROUP BY Modifiers](/functions-and-operators/group-by-modifier.md)
       - [Window Functions](/functions-and-operators/window-functions.md)
       - [Miscellaneous Functions](/functions-and-operators/miscellaneous-functions.md)
       - [Precision Math](/functions-and-operators/precision-math.md)
@@ -894,6 +899,7 @@
       - INFORMATION_SCHEMA
         - [Overview](/information-schema/information-schema.md)
         - [`ANALYZE_STATUS`](/information-schema/information-schema-analyze-status.md)
+        - [`CHECK_CONSTRAINTS`](/information-schema/information-schema-check-constraints.md)
         - [`CLIENT_ERRORS_SUMMARY_BY_HOST`](/information-schema/client-errors-summary-by-host.md)
         - [`CLIENT_ERRORS_SUMMARY_BY_USER`](/information-schema/client-errors-summary-by-user.md)
         - [`CLIENT_ERRORS_SUMMARY_GLOBAL`](/information-schema/client-errors-summary-global.md)
@@ -991,6 +997,7 @@
   - [Schedule Replicas by Topology Labels](/schedule-replicas-by-topology-labels.md)
   - Internal Components
     - [TiDB Backend Task Distributed Execution Framework](/tidb-distributed-execution-framework.md)
+    - [TiDB Global Sort](/tidb-global-sort.md)
 - FAQs
   - [FAQ Summary](/faq/faq-overview.md)
   - [TiDB FAQs](/faq/tidb-faq.md)
@@ -1008,6 +1015,8 @@
   - [Release Timeline](/releases/release-timeline.md)
   - [TiDB Versioning](/releases/versioning.md)
   - [TiDB Installation Packages](/binary-package.md)
+  - v7.4
+    - [7.4.0-DMR](/releases/release-7.4.0.md)
   - v7.3
     - [7.3.0-DMR](/releases/release-7.3.0.md)
   - v7.2

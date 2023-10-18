@@ -1,13 +1,13 @@
 ---
 title: Connect to TiDB with DBeaver
-summary: Learn how to connect to TiDB using DBeaver Community. This tutorial gives visual instructions that work with TiDB using DBeaver.
+summary: Learn how to connect to TiDB using DBeaver Community.
 ---
 
 # Connect to TiDB with DBeaver
 
-TiDB is a MySQL-compatible database, and [DBeaver Community(https://dbeaver.io/download/) is a free cross-platform database tool for developers, database administrators, analysts, and everyone working with data.
+TiDB is a MySQL-compatible database, and [DBeaver Community](https://dbeaver.io/download/) is a free cross-platform database tool for developers, database administrators, analysts, and everyone working with data.
 
-In this tutorial, you will learn how to connect to your TiDB cluster using DBeaver Community.
+In this tutorial, you can learn how to connect to your TiDB cluster using DBeaver Community.
 
 > **Note:**
 >
@@ -15,7 +15,7 @@ In this tutorial, you will learn how to connect to your TiDB cluster using DBeav
 
 ## Prerequisites
 
-To complete this tutorial, you will need:
+To complete this tutorial, you need:
 
 - [DBeaver Community **23.0.3** or higher](https://dbeaver.io/download/).
 - A TiDB cluster.
@@ -60,25 +60,27 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
     >
     > If you have created a password before, you can either use the original password or click **Reset password** to generate a new one.
 
-5. Click upper-left corner button to open the **Connect to database** dialog, and click **TiDB**, then click **Next**.
+5. Launch DBeaver and click **New Database Connection** in the upper-left corner. In the **Connect to a database** dialog, select **TiDB** from the list and then click **Next**.
 
-    ![DBeaver button that can open create connect dialog](/media/develop/dbeaver-create-connect-dialog-open-button.jpg)
+    ![Select TiDB as the database in DBeaver](/media/develop/dbeaver-select-database.jpg)
 
-6. Copy the JDBC string from the TiDB Cloud connection dialog. Then, click **URL** in **Connect by**, and paste it into `URL`. You don't need to replace the `<your_password>` placeholder with your actual password, because DBeaver will read **Username** and **Password** in the **Authentication (Database Native)** block. The example result is as follows:
-7. Copy and paste **Username** and **Password** in the **Authentication (Database Native)** block.
+6. Copy the JDBC string from the TiDB Cloud connection dialog. In DBeaver, select **URL** for **Connect by** and paste the JDBC string into the **URL** field. You don't need to replace the `<your_password>` placeholder with your actual password, because DBeaver reads username and password from the **Authentication (Database Native)** section.
 
-    ![DBeaver TiDB serverless connection parameters](/media/develop/dbeaver-connection-param-serverless.jpg)
+7. In the **Authentication (Database Native)** section, enter your **Username** and **Password**. An example result is as follows:
 
-8. Click **Test Connection** to establish a connection to TiDB Serverless Tier cluster.
-9. (Optional) If you are the first time to use this driver, click **Download** in the dialog to download the driver.
+    ![Configure connection settings for TiDB Serverless](/media/develop/dbeaver-connection-settings-serverless.jpg)
 
-    ![DBeaver driver download](/media/develop/dbeaver-driver-download.jpg)
+8. Click **Test Connection** to validate the connection to the TiDB Serverless cluster.
 
-10. If the connecton test is successful, you will get a dialog like this. Click **OK** to close the connecton test dialog.
+    If the **Download driver files** dialog displays, click **Download** to acquire the driver files.
 
-    ![DBeaver connection test](/media/develop/dbeaver-connect-test.jpg)
+    ![Download driver files](/media/develop/dbeaver-download-driver.jpg)
 
-11. Click **Finish** to save connection.
+    If the connection test is successful, the following dialog displays. Click **OK** to close the **Connection test** dialog.
+
+    ![Connection test result](/media/develop/dbeaver-connection-test.jpg)
+
+9. Click **Finish** to save the connection configuration.
 
 </div>
 <div label="TiDB Dedicated">
@@ -91,67 +93,71 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 
     For more details about how to obtain the connection string, refer to [TiDB Dedicated standard connection](https://docs.pingcap.com/tidbcloud/connect-via-standard-connection).
 
-4. Click upper-left corner button to open the **Connect to database** dialog, and click **TiDB**, then click **Next**.
+4. Launch DBeaver and click **New Database Connection** in the upper-left corner. In the **Connect to a database** dialog, select **TiDB** from the list and then click **Next**.
 
-    ![DBeaver button that can open create connect dialog](/media/develop/dbeaver-create-connect-dialog-open-button.jpg)
+    ![Select TiDB as the database in DBeaver](/media/develop/dbeaver-select-database.jpg)
 
-5. Copy and paste the corresponding connection string into the DBeaver connection panel. The correspoding relations are:
+5. Copy and paste the appropriate connection string into the DBeaver connection panel. The mappings between DBeaver fields and TiDB Dedicated connection string are as follows:
 
-    - Server Host: {host}
-    - Port: {port}
-    - Username: {user}
-    - Password: {password}
+    | DBeaver field | TiDB Dedicated connection string |
+    |---------------| ------------------------------- |
+    | Server Host   | `{host}`                        |
+    | Port          | `{port}`                        |
+    | Username      | `{user}`                        |
+    | Password      | `{password}`                    |
 
-    The example result is as follows:
+    An example is as follows:
 
-    ![DBeaver TiDB dedicated connection parameters](/media/develop/dbeaver-connection-param-dedicated.jpg)
+    ![Configure connection settings for TiDB Dedicated](/media/develop/dbeaver-connection-settings-dedicated.jpg)
 
-6. Click **Test Connection** to establish a connection to TiDB Serverless Tier cluster.
-7. (Optional) If you are the first time to use this driver, click **Download** in the dialog to download the driver.
+6. Click **Test Connection** to validate the connection to the TiDB Dedicated cluster.
 
-    ![DBeaver driver download](/media/develop/dbeaver-driver-download.jpg)
+    If the **Download driver files** dialog displays, click **Download** to acquire the driver files.
 
-8. If the connecton test is successful, you will get a dialog like this. Click **OK** to close the connecton test dialog.
+    ![Download driver files](/media/develop/dbeaver-download-driver.jpg)
 
-    ![DBeaver connection test](/media/develop/dbeaver-connect-test.jpg)
+    If the connection test is successful, the following dialog displays. Click **OK** to close the **Connection test** dialog.
 
-9. Click **Finish** to save connection.
+    ![Connection test result](/media/develop/dbeaver-connection-test.jpg)
+
+7. Click **Finish** to save the connection configuration.
 
 </div>
 <div label="TiDB Self-Hosted">
 
-1. Click upper-left corner button to open the **Connect to database** dialog, and click **TiDB**, then click **Next**.
+1. Launch DBeaver and click **New Database Connection** in the upper-left corner. In the **Connect to a database** dialog, select **TiDB** from the list and then click **Next**.
 
-    ![DBeaver button that can open create connect dialog](/media/develop/dbeaver-create-connect-dialog-open-button.jpg)
+    ![Select TiDB as the database in DBeaver](/media/develop/dbeaver-select-database.jpg)
 
-2. Copy and paste the corresponding connection string into the DBeaver connection panel. The correspoding relations are:
+2. Configure the following connection parameters:
 
-    - Host: {host}
-    - Port: {port}
-    - User: {user}
-    - Password: {password}
+    - **Server Host**: The IP address or domain name of your TiDB Self-Hosted cluster.
+    - **Port**: The port number of your TiDB Self-Hosted cluster.
+    - **Username**: The username to use to connect to your TiDB Self-Hosted cluster.
+    - **Password**: The password of the username.
 
-    The example result is as follows:
+    An example is as follows:
 
-    ![DBeaver TiDB self-hosted connection parameters](/media/develop/dbeaver-connection-param-self-hosted.jpg)
+    ![Configure connection settings for TiDB Self-Hosted](/media/develop/dbeaver-connection-settings-self-hosted.jpg)
 
-3. Click **Test Connection** to establish a connection to TiDB Serverless Tier cluster.
-4. (Optional) If you are the first time to use this driver, click **Download** in the dialog to download the driver.
+3. Click **Test Connection** to validate the connection to the TiDB Self-Hosted cluster.
 
-    ![DBeaver driver download](/media/develop/dbeaver-driver-download.jpg)
+    If the **Download driver files** dialog displays, click **Download** to acquire the driver files.
 
-5. If the connecton test is successful, you will get a dialog like this. Click **OK** to close the connecton test dialog.
+    ![Download driver files](/media/develop/dbeaver-download-driver.jpg)
 
-    ![DBeaver connection test](/media/develop/dbeaver-connect-test.jpg)
+    If the connection test is successful, the following dialog displays. Click **OK** to close the **Connection test** dialog.
 
-6. Click **Finish** to save connection.
+    ![Connection test result](/media/develop/dbeaver-connection-test.jpg)
+
+4. Click **Finish** to save the connection configuration.
 
 </div>
 </SimpleTab>
 
 ## Next steps
 
-- Learn more usage of `DBeaver` from [the documentation of DBeaver](https://github.com/dbeaver/dbeaver/wiki).
+- Learn more usage of DBeaver from [the documentation of DBeaver](https://github.com/dbeaver/dbeaver/wiki).
 - Learn the best practices for TiDB application development with the chapters in the [Developer guide](/develop/dev-guide-overview.md), such as [Insert data](/develop/dev-guide-insert-data.md), [Update data](/develop/dev-guide-update-data.md), [Delete data](/develop/dev-guide-delete-data.md), [Single table reading](/develop/dev-guide-get-data-from-single-table.md), [Transactions](/develop/dev-guide-transaction-overview.md), and [SQL performance optimization](/develop/dev-guide-optimize-sql-overview.md).
 - Learn through the professional [TiDB developer courses](https://www.pingcap.com/education/) and earn [TiDB certifications](https://www.pingcap.com/education/certification/) after passing the exam.
 
