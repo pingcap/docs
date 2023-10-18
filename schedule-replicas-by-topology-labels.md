@@ -131,7 +131,7 @@ The `location-level` configuration is an array of strings, which needs to corres
 
 When using TiUP to deploy a cluster, you can configure the TiKV location in the [initialization configuration file](/production-deployment-using-tiup.md#step-3-initialize-cluster-topology-file). TiUP will generate the corresponding configuration files for TiKV, PD, and TiFlash during deployment.
 
-In the following example, a two-layer topology of `zone/host` is defined. The TiKV nodes of the cluster are distributed among three zones, z1, z2, and z3, with each zone having four hosts, h1, h2, h3, and h4. In z1, four TiKV instances are deployed on two hosts, `tikv-1` and `tikv-2` on h1, and `tikv-3` and `tikv-4` on h2. Two TiFlash instances are deployed on the other two hosts, `tiflash-1` on h3 and `tiflash-2` on h4. In z2 and z3, two TiKV instances are deployed on two hosts, and two TiFlash instances are deployed on the other two hosts. In the following example, `tikv-n` represents the IP address of the `n`th TiKV node, and `tiflash-n` represents the IP address of the `n`th TiFlash node.
+In the following example, a two-layer topology of `zone/host` is defined. The TiKV nodes of the cluster are distributed among three zones, z1, z2, and z3, with each zone having two hosts that have TiKV deployed. In z1, two TiKV instances are deployed on each host. For z2 and z3, each zone has a separate TiKV instance deployed on one host. In each zone, TiFlash is deployed on two hosts, and TiFlash instances are deployed exclusively on each machine. In the following example, `tikv-host-machine-n` represents the IP address of the `n`th TiKV node, and `tiflash-host-machine-n` represents the IP address of the `n`th TiFlash node.
 
 ```
 server_configs:
@@ -140,86 +140,89 @@ server_configs:
 
 tikv_servers:
 # z1
-  - host: tikv-1
+  # machine-1 on z1
+  - host: tikv-host-machine-1
     port：20160
     config:
       server.labels:
         zone: z1
-        host: h1
-   - host: tikv-1
-     port：20161
-    config:
-      server.labels:
-        zone: z1
-        host: h1
-  - host: tikv-2
-    port：20160
-    config:
-      server.labels:
-        zone: z1
-        host: h2
-  - host: tikv-2
+        host: tikv-host-machine-1
+  - host: tikv-host-machine-1
     port：20161
     config:
       server.labels:
         zone: z1
-        host: h2
+        host: tikv-host-machine-1
+  # machine-2 on z1
+  - host: tikv-host-machine-2
+    port：20160
+    config:
+      server.labels:
+        zone: z1
+        host: tikv-host-machine-2
+  - host: tikv-host-machine-2
+    port：20161
+    config:
+      server.labels:
+        zone: z1
+        host: tikv-host-machine-2
 # z2
-  - host: tikv-5
+  - host: tikv-host-machine-3
     config:
       server.labels:
         zone: z2
-        host: h1
-   - host: tikv-6
+        host: tikv-host-machine-3
+  - host: tikv-host-machine-4
     config:
       server.labels:
         zone: z2
-        host: h2
+        host: tikv-host-machine-4
 # z3
-  - host: tikv-7
+  - host: tikv-host-machine-5
     config:
       server.labels:
         zone: z3
-        host: h1
-  - host: tikv-8
+        host: tikv-host-machine-5
+  - host: tikv-host-machine-6
     config:
       server.labels:
         zone: z3
-        host: h2s
+        host: tikv-host-machine-6
+
 tiflash_servers:
 # z1
-  - host: tiflash-1
+  - host: tiflash-host-machine-1
     learner_config:
       server.labels:
         zone: z1
-        host: h3
-   - host: tiflash-2
+        host: tiflash-host-machine-1
+  - host: tiflash-host-machine-2
     learner_config:
       server.labels:
         zone: z1
-        host: h4
+        host: tiflash-host-machine-2
 # z2
-  - host: tiflash-3
+  - host: tiflash-host-machine-3
     learner_config:
       server.labels:
         zone: z2
-        host: h3
-   - host: tiflash-4
+        host: tiflash-host-machine-3
+  - host: tiflash-host-machine-4
     learner_config:
       server.labels:
         zone: z2
-        host: h4
+        host: tiflash-host-machine-4
 # z3
-  - host: tiflash-5
+  - host: tiflash-host-machine-5
     learner_config:
       server.labels:
         zone: z3
-        host: h3
-  - host: tiflash-6
+        host: tiflash-host-machine-5
+  - host: tiflash-host-machine-6
     learner_config:
       server.labels:
         zone: z3
-        host: h4
+        host: tiflash-host-machine-6
 ```
 
 For details, see [Geo-distributed Deployment topology](/geo-distributed-deployment-topology.md).
