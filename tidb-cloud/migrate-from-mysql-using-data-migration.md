@@ -207,9 +207,9 @@ To migrate data to TiDB Cloud once and for all, choose both **Existing data migr
 
 You can use **physical mode** or **logical mode** to migrate **existing data**.
 
-- The default mode is **logical mode**. This mode exports data from upstream databases as SQL statements, and then executes them on TiDB. This mode supports migrating data into a table that contains data. But the performance is slower than physical mode.
+- The default mode is **logical mode**. This mode exports data from upstream databases as SQL statements, and then executes them on TiDB. In this mode, the target tables before migration can be either empty or non-empty. But the performance is slower than physical mode.
 
-- It is recommended to use **physical mode** for large datasets. This mode exports data from upstream databases and encodes it as KV pairs, writing directly to TiKV to achieve faster performance. This mode requires the target tables to be empty before migration. For the specification of 16 RCUs (Replication Capacity Units), the performance is about 2.5 times faster than logical mode. The performance of other specifications can increase by 20% to 50% compared with logical mode. Note that the performance data is for reference only and might vary in different scenarios.
+- For large datasets, it is recommended to use **physical mode**. This mode exports data from upstream databases and encodes it as KV pairs, writing directly to TiKV to achieve faster performance. This mode requires the target tables to be empty before migration. For the specification of 16 RCUs (Replication Capacity Units), the performance is about 2.5 times faster than logical mode. The performance of other specifications can increase by 20% to 50% compared with logical mode. Note that the performance data is for reference only and might vary in different scenarios.
 
 Physical mode has the following limitations:
 
