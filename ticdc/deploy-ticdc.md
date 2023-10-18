@@ -18,7 +18,7 @@ In production environments, the recommendations of software and hardware for TiC
 
 | CPU | Memory | Disk | Network | Number of TiCDC cluster instances (minimum requirements for production environment) |
 | :--- | :--- | :--- | :--- | :--- |
-| 16 core+ | 64 GB+ | 500 GB+ SSD disk | 10 Gigabit network card (2 preferred） | 2 |
+| 16 core+ | 64 GB+ | 500 GB+ SSD | 10 Gigabit network card (2 preferred） | 2 |
 
 For more information, see [Software and Hardware Recommendations](/hardware-and-software-requirements.md).
 
