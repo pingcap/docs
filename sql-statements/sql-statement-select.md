@@ -189,6 +189,8 @@ mysql> SELECT * FROM t INTO OUTFILE '/tmp/tmp_file1';
 Query OK, 3 rows affected (0.00 sec)
 ```
 
+In this example, you can find the query result in `/tmp/tmp_file1` as follows:
+
 ```
 1       a       1.10
 2       b       2.20
