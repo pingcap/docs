@@ -60,23 +60,23 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
     >
     > If you have created a password before, you can either use the original password or click **Reset password** to generate a new one.
 
-5. Launch DBeaver and click **New Database Connection** in the upper-left corner. In the **Connect to a database** dialog, select **TiDB** from the list and then click **Next**.
+5. Launch DBeaver and click **New Database Connection** in the upper-left corner. In the **Connect to a database** dialog, select **TiDB** from the list, and then click **Next**.
 
     ![Select TiDB as the database in DBeaver](/media/develop/dbeaver-select-database.jpg)
 
-6. Copy the JDBC string from the TiDB Cloud connection dialog. In DBeaver, select **URL** for **Connect by** and paste the JDBC string into the **URL** field. You don't need to replace the `<your_password>` placeholder with your actual password, because DBeaver reads username and password from the **Authentication (Database Native)** section.
+6. Copy the JDBC string from the TiDB Cloud connection dialog. In DBeaver, select **URL** for **Connect by** and paste the JDBC string into the **URL** field. You don't need to replace the `<your_password>` placeholder in the string with your actual password, because DBeaver reads username and password from the **Authentication (Database Native)** section.
 
-7. In the **Authentication (Database Native)** section, enter your **Username** and **Password**. An example result is as follows:
+7. In the **Authentication (Database Native)** section, enter your **Username** and **Password**. An example is as follows:
 
     ![Configure connection settings for TiDB Serverless](/media/develop/dbeaver-connection-settings-serverless.jpg)
 
 8. Click **Test Connection** to validate the connection to the TiDB Serverless cluster.
 
-    If the **Download driver files** dialog displays, click **Download** to acquire the driver files.
+    If the **Download driver files** dialog is displayed, click **Download** to get the driver files.
 
     ![Download driver files](/media/develop/dbeaver-download-driver.jpg)
 
-    If the connection test is successful, the following dialog displays. Click **OK** to close the **Connection test** dialog.
+    If the connection test is successful, the **Connection test** dialog is displayed as follows. Click **OK** to close it.
 
     ![Connection test result](/media/develop/dbeaver-connection-test.jpg)
 
@@ -89,11 +89,11 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 
 2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
 
-3. Click **Allow Access from Anywhere** and then click **Download TiDB cluster CA** to download the CA certificate.
+3. Click **Allow Access from Anywhere**, and then click **Download TiDB cluster CA** to download the CA certificate.
 
     For more details about how to obtain the connection string, refer to [TiDB Dedicated standard connection](https://docs.pingcap.com/tidbcloud/connect-via-standard-connection).
 
-4. Launch DBeaver and click **New Database Connection** in the upper-left corner. In the **Connect to a database** dialog, select **TiDB** from the list and then click **Next**.
+4. Launch DBeaver and click **New Database Connection** in the upper-left corner. In the **Connect to a database** dialog, select **TiDB** from the list, and then click **Next**.
 
     ![Select TiDB as the database in DBeaver](/media/develop/dbeaver-select-database.jpg)
 
@@ -112,11 +112,11 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 
 6. Click **Test Connection** to validate the connection to the TiDB Dedicated cluster.
 
-    If the **Download driver files** dialog displays, click **Download** to acquire the driver files.
+    If the **Download driver files** dialog is displayed, click **Download** to get the driver files.
 
     ![Download driver files](/media/develop/dbeaver-download-driver.jpg)
 
-    If the connection test is successful, the following dialog displays. Click **OK** to close the **Connection test** dialog.
+    If the connection test is successful, the **Connection test** dialog is displayed as follows. Click **OK** to close it.
 
     ![Connection test result](/media/develop/dbeaver-connection-test.jpg)
 
@@ -125,7 +125,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 </div>
 <div label="TiDB Self-Hosted">
 
-1. Launch DBeaver and click **New Database Connection** in the upper-left corner. In the **Connect to a database** dialog, select **TiDB** from the list and then click **Next**.
+1. Launch DBeaver and click **New Database Connection** in the upper-left corner. In the **Connect to a database** dialog, select **TiDB** from the list, and then click **Next**.
 
     ![Select TiDB as the database in DBeaver](/media/develop/dbeaver-select-database.jpg)
 
@@ -142,11 +142,11 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 
 3. Click **Test Connection** to validate the connection to the TiDB Self-Hosted cluster.
 
-    If the **Download driver files** dialog displays, click **Download** to acquire the driver files.
+    If the **Download driver files** dialog is displayed, click **Download** to get the driver files.
 
     ![Download driver files](/media/develop/dbeaver-download-driver.jpg)
 
-    If the connection test is successful, the following dialog displays. Click **OK** to close the **Connection test** dialog.
+    If the connection test is successful, the **Connection test** dialog is displayed as follows. Click **OK** to close it.
 
     ![Connection test result](/media/develop/dbeaver-connection-test.jpg)
 
