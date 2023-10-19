@@ -116,35 +116,25 @@ SELECT * FROM test . t WHERE a > ?
 
 > **Note:**
 >
-> Multiple constants joined by commas `,` are normalized as `...` instead of `?`.
+> Multiple constants joined by commas `,` in `IN` predicates are normalized as `...` instead of `?`.
 >
 > For example:
 >
 > ```sql
-> SELECT * FROM t limit 10
-> SELECT * FROM t limit 10, 20
 > SELECT * FROM t WHERE a IN (1)
 > SELECT * FROM t WHERE a IN (1,2,3)
 > -- After normalization, the above statements are as follows:
-> SELECT * FROM test . t limit ?
-> SELECT * FROM test . t limit ...
 > SELECT * FROM test . t WHERE a IN ( ? )
 > SELECT * FROM test . t WHERE a IN ( ... )
 > ```
 >
-> When bindings are created, TiDB treats SQL statements that contain a single constant and SQL statements that contain multiple constants joined by commas differently. Therefore, you need to create bindings for the two SQL types separately.
+> After normalization, `IN` predicates with different lengths are recognized as the same statement, so you just need to create one binding for them.
 >
 > For example:
->
 > ```sql
-> CREATE TABLE t(a INT, b INT, KEY idx(a));
-> CREATE SESSION BINDING for SELECT * FROM t WHERE a IN (?) USING SELECT /*+ use_index(t, idx) */ * FROM t WHERE a in (?);
-> SHOW BINDINGS;
-> +-----------------------------------------------+----------------------------------------------------------------------+------------+---------+-------------------------+-------------------------+---------+--------------------+--------+------------------------------------------------------------------+-------------+
-> | Original_sql                                  | Bind_sql                                                             | Default_db | Status  | Create_time             | Update_time             | Charset | Collation          | Source | Sql_digest                                                       | Plan_digest |
-> +-----------------------------------------------+----------------------------------------------------------------------+------------+---------+-------------------------+-------------------------+---------+--------------------+--------+------------------------------------------------------------------+-------------+
-> | SELECT * FROM `test` . `t` WHERE `a` IN ( ? ) | SELECT /*+ use_index(`t` `idx`)*/ * FROM `test`.`t` WHERE `a` IN (?) | test       | enabled | 2023-08-23 14:15:31.472 | 2023-08-23 14:15:31.472 | utf8mb4 | utf8mb4_general_ci | manual | 8b9c4e6ab8fad5ba29b034311dcbfc8a8ce57dde2e2d5d5b65313b90ebcdebf7 |             |
-> +-----------------------------------------------+----------------------------------------------------------------------+------------+---------+-------------------------+-------------------------+---------+--------------------+--------+------------------------------------------------------------------+-------------+
+> CREATE TABLE t (a INT, KEY(a));
+> CREATE BINDING FOR SELECT * FROM t WHERE a IN (?) USING SELECT /*+ use_index(t, a) */ * FROM t WHERE a in (?);
+> 
 > SELECT * FROM t WHERE a IN (1);
 > SELECT @@LAST_PLAN_FROM_BINDING;
 > +--------------------------+
@@ -152,48 +142,13 @@ SELECT * FROM test . t WHERE a > ?
 > +--------------------------+
 > |                        1 |
 > +--------------------------+
-> SELECT * FROM t WHERE a IN (1,2);
-> SELECT @@LAST_PLAN_FROM_BINDING;
-> +--------------------------+
-> | @@LAST_PLAN_FROM_BINDING |
-> +--------------------------+
-> |                        0 |
-> +--------------------------+
-> CREATE SESSION BINDING for SELECT * FROM t WHERE a IN (?,?) USING SELECT /*+ use_index(t, idx) */ * FROM t WHERE a IN (?,?);
-> show bindings;
-> +-------------------------------------------------+------------------------------------------------------------------------+------------+---------+-------------------------+-------------------------+---------+--------------------+--------+------------------------------------------------------------------+-------------+
-> | Original_sql                                    | Bind_sql                                                               | Default_db | Status  | Create_time             | Update_time             | Charset | Collation          | Source | Sql_digest                                                       | Plan_digest |
-> +-------------------------------------------------+------------------------------------------------------------------------+------------+---------+-------------------------+-------------------------+---------+--------------------+--------+------------------------------------------------------------------+-------------+
-> | SELECT * FROM `test` . `t` WHERE `a` IN ( ... ) | SELECT /*+ use_index(`t` `idx`)*/ * FROM `test`.`t` WHERE `a` IN (?,?) | test       | enabled | 2023-08-23 14:16:30.762 | 2023-08-23 14:16:30.762 | utf8mb4 | utf8mb4_general_ci | manual | da38bf216db4a53e1a1e01c79ffa42306419442ad7238480bb7ac510723c8bdf |             |
-> | SELECT * FROM `test` . `t` WHERE `a` IN ( ? )   | SELECT /*+ use_index(`t` `idx`)*/ * FROM `test`.`t` WHERE `a` IN (?)   | test       | enabled | 2023-08-23 14:15:31.472 | 2023-08-23 14:15:31.472 | utf8mb4 | utf8mb4_general_ci | manual | 8b9c4e6ab8fad5ba29b034311dcbfc8a8ce57dde2e2d5d5b65313b90ebcdebf7 |             |
-> +-------------------------------------------------+------------------------------------------------------------------------+------------+---------+-------------------------+-------------------------+---------+--------------------+--------+------------------------------------------------------------------+-------------+
-> SELECT * FROM t WHERE a IN (1,2);
+>
+> SELECT * FROM t WHERE a IN (1, 2, 3);
 > SELECT @@LAST_PLAN_FROM_BINDING;
 > +--------------------------+
 > | @@LAST_PLAN_FROM_BINDING |
 > +--------------------------+
 > |                        1 |
-> +--------------------------+
-> SELECT * FROM t WHERE a IN (1,2,3);
-> SELECT @@LAST_PLAN_FROM_BINDING;
-> +--------------------------+
-> | @@LAST_PLAN_FROM_BINDING |
-> +--------------------------+
-> |                        1 |
-> +--------------------------+
-> DROP SESSION BINDING for SELECT * FROM t WHERE a IN (?);
-> SHOW BINDINGS;
-> +-------------------------------------------------+------------------------------------------------------------------------+------------+---------+-------------------------+-------------------------+---------+--------------------+--------+------------------------------------------------------------------+-------------+
-> | Original_sql                                    | Bind_sql                                                               | Default_db | Status  | Create_time             | Update_time             | Charset | Collation          | Source | Sql_digest                                                       | Plan_digest |
-> +-------------------------------------------------+------------------------------------------------------------------------+------------+---------+-------------------------+-------------------------+---------+--------------------+--------+------------------------------------------------------------------+-------------+
-> | SELECT * FROM `test` . `t` WHERE `a` IN ( ... ) | SELECT /*+ use_index(`t` `idx`)*/ * FROM `test`.`t` WHERE `a` IN (?,?) | test       | enabled | 2023-08-23 14:16:30.762 | 2023-08-23 14:16:30.762 | utf8mb4 | utf8mb4_general_ci | manual | da38bf216db4a53e1a1e01c79ffa42306419442ad7238480bb7ac510723c8bdf |             |
-> +-------------------------------------------------+------------------------------------------------------------------------+------------+---------+-------------------------+-------------------------+---------+--------------------+--------+------------------------------------------------------------------+-------------+
-> SELECT * FROM t WHERE a IN (1);
-> SELECT @@LAST_PLAN_FROM_BINDING;
-> +--------------------------+
-> | @@LAST_PLAN_FROM_BINDING |
-> +--------------------------+
-> |                        0 |
 > +--------------------------+
 > ```
 >
