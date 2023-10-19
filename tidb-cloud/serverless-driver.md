@@ -19,7 +19,7 @@ To complete this tutorial, you need:
 - [NPM](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) or your preferred package manager.
 - A TiDB Serverless cluster.
 
-**If you don't have a TiDB Serverless cluster, you can [Creating a TiDB Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md)**
+**If you don't have a TiDB Serverless cluster, you can [create a TiDB Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md)**
 
 ## Install the serverless driver
 
