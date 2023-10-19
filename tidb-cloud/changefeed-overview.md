@@ -21,7 +21,7 @@ On the changefeed page, you can create a changefeed, view a list of existing cha
 
 To create a changefeed, refer to the tutorials:
 
-- [Sink to Apache Kafka](/tidb-cloud/changefeed-sink-to-apache-kafka.md) (Beta)
+- [Sink to Apache Kafka](/tidb-cloud/changefeed-sink-to-apache-kafka.md)
 - [Sink to MySQL](/tidb-cloud/changefeed-sink-to-mysql.md)
 - [Sink to TiDB Cloud](/tidb-cloud/changefeed-sink-to-tidb-cloud.md)
 - [Sink to cloud storage](/tidb-cloud/changefeed-sink-to-cloud-storage.md)

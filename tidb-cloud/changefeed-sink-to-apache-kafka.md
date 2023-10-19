@@ -1,15 +1,15 @@
 ---
-title: Sink to Apache Kafka (Beta)
+title: Sink to Apache Kafka
 Summary: Learn how to create a changefeed to stream data from TiDB Cloud to Apache Kafka.
 ---
 
-# Sink to Apache Kafka (Beta)
+# Sink to Apache Kafka
 
 This document describes how to create a changefeed to stream data from TiDB Cloud to Apache Kafka.
 
 > **Note:**
 >
-> - Currently, Kafka sink is in **beta**. To use the changefeed feature, make sure that your TiDB Dedicated cluster version is v6.4.0 or later.
+> - To use the changefeed feature, make sure that your TiDB Dedicated cluster version is v6.4.0 or later.
 > - For [TiDB Serverless clusters](/tidb-cloud/select-cluster-tier.md#tidb-serverless), the changefeed feature is unavailable.
 
 ## Restrictions
