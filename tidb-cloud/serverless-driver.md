@@ -5,11 +5,25 @@ summary: Learn how to connect to TiDB Serverless from serverless and edge enviro
 
 # TiDB Cloud Serverless Driver (Beta)
 
-[TiDB Cloud serverless driver (Beta)](https://github.com/tidbcloud/serverless-js) for JavaScript allows you to connect to your TiDB Serverless cluster over HTTPS. It is particularly useful in edge environments where TCP connections are limited, such as [Vercel Edge Functions](https://vercel.com/docs/functions/edge-functions) and [Cloudflare Workers](https://workers.cloudflare.com/).
+The [TiDB Cloud serverless driver (Beta)](https://github.com/tidbcloud/serverless-js) is a low-latency driver for JavaScript and Typescript that allows you to query data from serverless and edge environments over HTTP in place of TCP. It is particularly useful in edge environments where TCP connections are limited, such as [Vercel Edge Functions](https://vercel.com/docs/functions/edge-functions) and [Cloudflare Workers](https://workers.cloudflare.com/).
+
+> **Note:**
+>
+> This tutorial is compatible with TiDB Serverless only. Be sure to check out our [Insights into Automotive Sales](https://car-sales-insight.vercel.app/) and [sample repository](https://github.com/tidbcloud/car-sales-insight) to learn how to use it with Cloudflare Workers, Vercel Edge Functions, and Netlify Edge Functions.
+
+## Prerequisites
+
+To complete this tutorial, you need:
+
+- [Node.js](https://nodejs.org/en) 18.0.0 or higher.
+- [NPM](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) or your preferred package manager.
+- A TiDB Serverless cluster.
+
+** If you don't have a TiDB Serverless cluster, you can [Creating a TiDB Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md) **
 
 ## Install the serverless driver
 
-You can install the driver with npm:
+Run the following command to install the driver with your preferred package manager. For example:
 
 ```bash
 npm install @tidbcloud/serverless
@@ -17,17 +31,25 @@ npm install @tidbcloud/serverless
 
 ## Use the serverless driver
 
-You can use the serverless driver to query data of a TiDB Serverless cluster or perform interactive transactions.
+You can use the serverless driver to connect and query data of a TiDB Serverless cluster or perform interactive transactions.
 
-### Query
+### Configure your TiDB Serverless database connection
+
+You can obtain a connection string for your database from the **Connect window** on TiDB Cloud cluster overview page. Your TiDB Serverless connection string will look something like this:
+
+```ts
+DATABASE_URL = mysql://[username]:[password]@[host:port]/[database]
+```
+
+### Connect and excute queries
 
 To query data from a TiDB Serverless cluster, you need to create a connection first. Then you can use the connection to execute raw SQL queries. For example:
 
 ```ts
 import { connect } from '@tidbcloud/serverless'
 
-const conn = connect({url: 'mysql://username:password@host/database'})
-const results = await conn.execute('select * from test where id = ?',[1])
+const conn = connect({url: 'mysql://[username]:[password]@[host:port]/[database]'})
+const results = await conn.execute('show tables')
 ```
 
 ### Transaction (experimental)
@@ -37,7 +59,7 @@ You can also perform interactive transactions with the serverless driver. For ex
 ```ts
 import { connect } from '@tidbcloud/serverless'
 
-const conn = connect({url: 'mysql://username:password@host/database'})
+const conn = connect({url: 'mysql://[username]:[password]@[host:port]/[database]'})
 const tx = await conn.begin()
 
 try {
