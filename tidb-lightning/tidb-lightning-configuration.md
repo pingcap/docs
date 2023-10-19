@@ -54,9 +54,6 @@ enable-diagnose-logs = false
 # Each table is split into one "index engine" to store indices, and multiple
 # "data engines" to store row data. These settings control the maximum
 # concurrent number for each type of engines.
-# These values affect the memory and disk usage of tikv-importer.
-# The sum of these two values must not exceed the max-open-engines setting
-# for tikv-importer.
 index-concurrency = 2
 table-concurrency = 6
 
@@ -462,7 +459,6 @@ log-progress = "5m"
 | --backend *[backend](/tidb-lightning/tidb-lightning-overview.md)* | Select an import mode. `local` refers to the physical import mode; `tidb` refers to the logical import mode. | `local` |
 | --log-file *file* | Log file path. By default, it is `/tmp/lightning.log.{timestamp}`. If set to '-', it means that the log files will be output to stdout. | `lightning.log-file` |
 | --status-addr *ip:port* | Listening address of the TiDB Lightning server | `lightning.status-port` |
-| --importer *host:port* | Address of TiKV Importer | `tikv-importer.addr` |
 | --pd-urls *host:port* | PD endpoint address | `tidb.pd-addr` |
 | --tidb-host *host* | TiDB server host | `tidb.host` |
 | --tidb-port *port* | TiDB server port (default = 4000) | `tidb.port` |
