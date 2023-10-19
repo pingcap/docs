@@ -218,7 +218,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.3/quick-start-with-
 
 * TiDB
 
-    - The [`Fast Analyze`](/system-variables.md#tidb_enable_fast_analyze) feature (experimental) for statistics will be deprecated in v7.5.0.
+    - The [`Fast Analyze`](https://docs.pingcap.com/tidb/v7.3/system-variables#tidb_enable_fast_analyze) feature (experimental) for statistics will be deprecated in v7.5.0.
     - The [incremental collection](/statistics.md#incremental-collection) feature for statistics will be deprecated in v7.5.0.
 
 ## Improvements

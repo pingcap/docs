@@ -1978,20 +1978,6 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Default value: `0`
 - If [`tidb_enable_external_ts_read`](#tidb_enable_external_ts_read-new-in-v640) is set to `ON`, TiDB reads data with the timestamp specified by this variable.
 
-### tidb_enable_fast_analyze
-
-> **Warning:**
->
-> Currently, `Fast Analyze` is an experimental feature. It is not recommended that you use it in production environments.
-
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
-- Type: Boolean
-- Default value: `OFF`
-- This variable is used to set whether to enable the statistics `Fast Analyze` feature.
-- If the statistics `Fast Analyze` feature is enabled, TiDB randomly samples about 10,000 rows of data as statistics. When the data is distributed unevenly or the data size is small, the statistics accuracy is low. This might lead to a non-optimal execution plan, for example, selecting a wrong index. If the execution time of the regular `Analyze` statement is acceptable, it is recommended to disable the `Fast Analyze` feature.
-
 ### tidb_enable_fast_table_check <span class="version-mark">New in v7.2.0</span>
 
 > **Note:**
