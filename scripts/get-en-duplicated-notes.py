@@ -1,15 +1,15 @@
-# This script compares an on-going release notes file with published release notes files.
-# If the ongoing release notes file has a duplicate note with the published one, the script reports the note and replaces it with the published one.
+# This script helps you get duplicated release notes in English after duplicated release notes in Chinese are ready.
+# Before running this script, you need to first copy the duplicated release notes in Chinese to your target English release note file. Then this script can replace Chinese duplicated release notes with the corresponding English translation according to the release and issue number information of the duplicated release notes.
 
 import re, os
 from tempfile import mkstemp
 from shutil import move
 from os import remove
 
-ext_path = r'/Users/grcai/Documents/GitHub/qiancai/docs/releases'  # 已发布英文 release notes 文件夹
-main_path = r'/Users/grcai/Documents/GitHub/qiancai/docs/releases/release-7.1.2.md'  # 当前正在准备的 release notes 文档路径
+ext_path = r'/Users/grcai/Documents/GitHub/qiancai/docs/releases'  # Specify the directory of the English release notes folder
+main_path = r'/Users/grcai/Documents/GitHub/qiancai/docs/releases/release-7.1.2.md'  # Specify the directory of the English release note file that you are preparing
 
-# Get the issue info of the existing release notes
+# Get existing release notes from the English release notes folder
 def store_exst_rn(ext_path,main_path):
 
     exst_notes = []
@@ -50,6 +50,7 @@ def store_exst_rn(ext_path,main_path):
     else:
         return 0
 
+# Replace Chinese duplicated release notes with the corresponding English translation
 def replace_zh_dup_with_en_dup(note_pairs, main_path):
     DupNum = 0
     NoteNum = 0
@@ -59,6 +60,7 @@ def replace_zh_dup_with_en_dup(note_pairs, main_path):
         with open(source_file_path, 'r', encoding='utf-8') as source_file:
             LineNum = 0
             for line in source_file:
+                newline = line
                 LineNum += 1
                 original_release_file = re.search('release-\d+\.\d+\.\d+\.md', line)
                 issue_num = re.search('https://github.com/(pingcap|tikv)/\w+/(issues|pull)/\d+', line)
@@ -68,7 +70,7 @@ def replace_zh_dup_with_en_dup(note_pairs, main_path):
                         if issue_num.group() == note_pair[0] and "(dup)" in line and original_release_file.group() == note_pair[2]:
                             print('A duplicated note is found in line ' + str(LineNum) + " from " + note_pair[2] + note_pair[1])
                             dup_note = '- (dup): {} {} {}'.format(note_pair[2], note_pair[3], note_pair[1]).strip()
-                            newline = re.sub(r'- \(dup\): release-\d+\.\d+\.\d+\.md.*?\n',dup_note,line)
+                            newline = re.sub(r'- \(dup\): release-\d+\.\d+\.\d+\.md.*?\n',r'{}\n'.format(dup_note),line)
                             print('The duplicated note is replaced with ' + newline)
                             DupNum += 1
                         else:
