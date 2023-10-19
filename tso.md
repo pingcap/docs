@@ -60,14 +60,14 @@ There are two parts to the TSO timestamp:
 With this knowledge we can inspect the TSO timestamp a bit more in SQL:
 
 ```
-mysql> SELECT @ts, UNIX_TIMESTAMP(NOW(6)), (@ts >> 18)/1000, FROM_UNIXTIME((@ts >> 18)/1000), NOW(6), @ts-((@ts >> 18) << 18)\G
+mysql> SELECT @ts, UNIX_TIMESTAMP(NOW(6)), (@ts >> 18)/1000, FROM_UNIXTIME((@ts >> 18)/1000), NOW(6), @ts & 0x3FFFF\G
 *************************** 1. row ***************************
                             @ts: 443852055297916932
          UNIX_TIMESTAMP(NOW(6)): 1693161835.502954
                (@ts >> 18)/1000: 1693161221.6870
 FROM_UNIXTIME((@ts >> 18)/1000): 2023-08-27 20:33:41.6870
                          NOW(6): 2023-08-27 20:43:55.502954
-        @ts-((@ts >> 18) << 18): 4
+                  @ts & 0x3FFFF: 4
 1 row in set (0.00 sec)
 ```
 
@@ -79,7 +79,6 @@ And let's do the same via the CLI tools:
 
 ```
 $ tiup ctl:v7.3.0 pd tso 443852055297916932                                                              
-Starting component `ctl`: /home/dvaneeden/.tiup/components/ctl/v7.3.0/ctl pd tso 443852055297916932
 system:  2023-08-27 20:33:41.687 +0200 CEST
 logic:   4
 ```
