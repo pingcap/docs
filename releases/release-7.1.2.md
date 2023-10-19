@@ -38,8 +38,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.1/quick-start-with-
 
 + PD  <!--tw@Oreoxmt--2 条-->
 
-    - 优化 PD 调用方 backoff 机制，减少在调用失败时的 RPC 请求频率 [#6556](https://github.com/tikv/pd/issues/6556) @[nolouch](https://github.com/nolouch) @[rleungx](https://github.com/rleungx) @[HuSharp](https://github.com/HuSharp)
-    - 增加 Region 获取接口的 Cancel 机制，在调用方断连时及时释放 CPU、内存资源 [#6835](https://github.com/tikv/pd/issues/6835) @[lhy1024](https://github.com/lhy1024)
+    - Optimize the backoff mechanism in the PD caller to reduce the frequency of RPC requests when a call fails [#6556](https://github.com/tikv/pd/issues/6556) @[nolouch](https://github.com/nolouch) @[rleungx](https://github.com/rleungx) @[HuSharp](https://github.com/HuSharp)
     - (dup): release-7.3.0.md > Improvements> PD - Reduce the memory consumption of `GetRegions` requests [#6835](https://github.com/tikv/pd/issues/6835) @[lhy1024](https://github.com/lhy1024)
 
 + TiFlash  <!--tw@qiancai--1 条-->
@@ -127,18 +126,18 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.1/quick-start-with-
 
 + PD <!--tw@Oreoxmt--12 条-->
 
-    - 修复 Hot Region 在 V2 策略下可能不调度的问题 [#6645](https://github.com/tikv/pd/issues/6645) @[lhy1024](https://github.com/lhy1024)
-    - 修复空集群下 TLS 握手导致 CPU 资源消耗过高的问题 [#6913](https://github.com/tikv/pd/issues/6913) @[nolouch](https://github.com/nolouch)
-    - 修复 PD 节点间注入错误可能导致 PD Panic 的问题 [#6858](https://github.com/tikv/pd/issues/6858) @[HuSharp](https://github.com/HuSharp)
-    - 修复 Store 信息同步可能导致 PD Leader 退出卡住的问题 [#6918](https://github.com/tikv/pd/issues/6918) @[rleungx](https://github.com/rleungx)
-    - 修复 flashback 后 Region 信息没有更新的问题 [#6912](https://github.com/tikv/pd/issues/6912) @[overvenus](https://github.com/overvenus)
-    - 修复 PD 退出时可能 Panic 的问题 [#7053](https://github.com/tikv/pd/issues/7053) @[HuSharp](https://github.com/HuSharp)
-    - 修复 Context Timeout 可能导致 Lease Timeout 的问题 [#6926](https://github.com/tikv/pd/issues/6926) @[rleungx](https://github.com/rleungx)
-    - 修复 Peer 没有按照 Group 进行 Scatter 的问题，可能会导致 Scatter 不均衡 [#6962](https://github.com/tikv/pd/issues/6962) @[rleungx](https://github.com/rleungx)
-    - 修复 pd-ctl 更新 Isolation Level 标签不同步的问题 [#7121](https://github.com/tikv/pd/issues/7121) @[rleungx](https://github.com/rleungx)
-    - 修复 evict-leader-scheduler 丢失配置的问题 [#6897](https://github.com/tikv/pd/issues/6897) @[HuSharp](https://github.com/HuSharp)
-    - 修复 Plugin 目录、文件内容可能存在安全隐患的问题 [#7094](https://github.com/tikv/pd/issues/7094) @[HuSharp](https://github.com/HuSharp)
-    - 修复开启 Resource Control 后 DDL 可能不能保证原子性的问题 [#45050](https://github.com/pingcap/tidb/issues/45050) @[glorv](https://github.com/glorv)
+    - Fix the issue that hot Regions might not be scheduled in the v2 scheduler algorithm [#6645](https://github.com/tikv/pd/issues/6645) @[lhy1024](https://github.com/lhy1024)
+    - Fix the issue that the TLS handshake might cause high CPU usage in an empty cluster [#6913](https://github.com/tikv/pd/issues/6913) @[nolouch](https://github.com/nolouch)
+    - Fix the issue that injection errors between PD nodes might cause PD panic [#6858](https://github.com/tikv/pd/issues/6858) @[HuSharp](https://github.com/HuSharp)
+    - Fix the issue that store information synchronization might cause the PD leader to exit and get stuck [#6918](https://github.com/tikv/pd/issues/6918) @[rleungx](https://github.com/rleungx)
+    - Fix the issue that the Region information is not updated after Flashback [#6912](https://github.com/tikv/pd/issues/6912) @[overvenus](https://github.com/overvenus)
+    - Fix the issue that PD might panic during exiting [#7053](https://github.com/tikv/pd/issues/7053) @[HuSharp](https://github.com/HuSharp)
+    - Fix the issue that the context timeout might cause the `lease timeout` error [#6926](https://github.com/tikv/pd/issues/6926) @[rleungx](https://github.com/rleungx)
+    - Fix the issue that peers are not properly scattered by group, which might cause uneven distribution of leader [#6962](https://github.com/tikv/pd/issues/6962) @[rleungx](https://github.com/rleungx)
+    - Fix the issue that the isolation level label is not synchronized when updating using pd-ctl [#7121](https://github.com/tikv/pd/issues/7121) @[rleungx](https://github.com/rleungx)
+    - Fix the issue that `evict-leader-scheduler` might lose configuration [#6897](https://github.com/tikv/pd/issues/6897) @[HuSharp](https://github.com/HuSharp)
+    - Fix potential security risks of the plugin directory and files [#7094](https://github.com/tikv/pd/issues/7094) @[HuSharp](https://github.com/HuSharp)
+    - Fix the issue that DDL might not guarantee atomicity after enabling resource control [#45050](https://github.com/pingcap/tidb/issues/45050) @[glorv](https://github.com/glorv)
     - (dup): release-7.3.0.md > Bug fixes> PD - Fix the issue that unhealthy peers cannot be removed when rule checker selects peers [#6559](https://github.com/tikv/pd/issues/6559) @[nolouch](https://github.com/nolouch)
     - (dup): release-7.3.0.md > Bug fixes> PD - Fix the issue that when etcd is already started but the client has not yet connected to it, calling the client might cause PD to panic [#6860](https://github.com/tikv/pd/issues/6860) @[HuSharp](https://github.com/HuSharp)
     - (dup): release-7.4.0.md > Bug fixes> PD - Fix the issue that RU consumption less than 0 causes PD to crash [#6973](https://github.com/tikv/pd/issues/6973) @[CabinfeverB](https://github.com/CabinfeverB)
