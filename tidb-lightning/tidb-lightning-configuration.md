@@ -53,7 +53,7 @@ enable-diagnose-logs = false
 # The maximum number of engines to be opened concurrently.
 # Each table is split into one "index engine" to store indices, and multiple
 # "data engines" to store row data. These settings control the maximum
-# concurrent number for each type of engines.
+# concurrent number for each type of engines. Generally, you can use the following two default values.
 index-concurrency = 2
 table-concurrency = 6
 
