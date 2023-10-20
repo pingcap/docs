@@ -24,6 +24,11 @@ For details about the permissions, see [Prerequisites for using TiDB Lightning](
 
 If only one table has an error encountered, the rest will still be processed normally.
 
+## How to properly restart TiDB Lightning?
+
+1. [Stop the `tidb-lightning` process](#how-to-stop-the-tidb-lightning-process).
+2. Start a new `tidb-lightning` task: execute the previous start command, such as `nohup tiup tidb-lightning -config tidb-lightning.toml`.
+
 ## How to ensure the integrity of the imported data?
 
 TiDB Lightning by default performs checksum on the local data source and the imported tables. If there is checksum mismatch, the process would be aborted. These checksum information can be read from the log.
