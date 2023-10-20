@@ -83,5 +83,5 @@ The `isolation` option can only be used in the `begin` function. Here is an exam
 
 ```ts
 const conn = connect({url: 'mysql://[username]:[password]@[host]/[database]'})
-const tx = await con.begin({isolation:"READ COMMITTED"})
+const tx = await conn.begin({isolation:"READ COMMITTED"})
 ```
