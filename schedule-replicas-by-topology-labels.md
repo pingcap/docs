@@ -130,7 +130,12 @@ The `location-level` configuration is an array of strings, which needs to corres
 
 When using TiUP to deploy a cluster, you can configure the TiKV location in the [initialization configuration file](/production-deployment-using-tiup.md#step-3-initialize-cluster-topology-file). TiUP will generate the corresponding configuration files for TiKV, PD, and TiFlash during deployment.
 
-In the following example, a two-layer topology of `zone/host` is defined. The TiKV nodes of the cluster are distributed among three zones, z1, z2, and z3, with each zone having two hosts that have TiKV deployed. In z1, two TiKV instances are deployed on each host. For z2 and z3, each zone has a separate TiKV instance deployed on one host. In each zone, TiFlash is deployed on two hosts, and TiFlash instances are deployed exclusively on each machine. In the following example, `tikv-host-machine-n` represents the IP address of the `n`th TiKV node, and `tiflash-host-machine-n` represents the IP address of the `n`th TiFlash node.
+In the following example, a two-layer topology of `zone/host` is defined. The TiKV nodes and TiFlash nodes of the cluster are distributed among three zones, z1, z2, and z3. 
+
+- In each zone, there are two hosts that have TiKV instances deployed. In z1, each host has two TiKV instances deployed. In z2 and z3, each host has a separate TiKV instance deployed. 
+- In each zone, there are two hosts that have TiFlash instances deployed, and each host has a separate TiFlash instance deployed. 
+
+In the following example, `tikv-host-machine-n` represents the IP address of the `n`th TiKV node, and `tiflash-host-machine-n` represents the IP address of the `n`th TiFlash node.
 
 ```
 server_configs:
