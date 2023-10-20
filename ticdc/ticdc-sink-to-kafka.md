@@ -293,7 +293,7 @@ Kafka topic sets a limit on the size of messages it can receive. This limit is c
 
 ### Send handle keys only
 
-Starting from v7.3.0, TiCDC Kafka sink supports sending only the handle keys when the message size exceeds the limit. This can significantly reduce the message size and avoid changefeed errors and task failures caused by the message size exceeding the Kafka topic limit. Handle Key refers to the following:
+Starting from v7.1.2, TiCDC Kafka sink supports sending only the handle keys when the message size exceeds the limit. This can significantly reduce the message size and avoid changefeed errors and task failures caused by the message size exceeding the Kafka topic limit. Handle Key refers to the following:
 
 * If the table to be replicated has primary key, the primary key is the handle key.
 * If the table does not have primary key but has NOT NULL Unique Key, the NOT NULL Unique Key is the handle key.
