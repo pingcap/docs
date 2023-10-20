@@ -44,7 +44,7 @@ const conn = connect(config)
 
 ```ts
 const config = {
-  url: process.env['DATABASE_URL'] || 'mysql://username:password@host/database',
+  url: process.env['DATABASE_URL'] || 'mysql://[username]:[password]@[host]/[database]',
   arrayMode: true
 }
 
@@ -67,6 +67,22 @@ At the SQL level, you can configure the following options:
 For example:
 
 ```ts
-const conn = connect({url: process.env['DATABASE_URL'] || 'mysql://username:password@host/database'})
+const conn = connect({url: process.env['DATABASE_URL'] || 'mysql://[username]:[password]@[host]/[database]'})
 const results = await conn.execute('select * from test',null,{arrayMode:true,fullResult:true})
+```
+
+## Transaction options
+
+Transaction options is supported since v0.0.7.
+
+| Option       | Type   | Default value    | Description                                                                        |
+|--------------|--------|------------------|------------------------------------------------------------------------------------|
+| `isolation`  | string | `REPEATABLE READ` | The transaction isolation level. Support `READ COMMITTED` and `REPEATABLE READ`    |
+
+
+The `isolation` option can only be used in the `begin` function. Here is an example:
+
+```ts
+const conn = connect({url: 'mysql://[username]:[password]@[host]/[database]'})
+const tx = await con.begin({isolation:"READ COMMITTED"})
 ```
