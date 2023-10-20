@@ -66,6 +66,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.1/quick-start-with-
 
     + TiDB Lightning
 
+        - Change the default value of `checksum-via-sql` to `false` to improve the performance of import tasks [#45368](https://github.com/pingcap/tidb/issues/45368) [#45094](https://github.com/pingcap/tidb/issues/45094) @[GMHDBJD](https://github.com/GMHDBJD)
         - (dup): release-7.4.0.md > Improvements> Tools> TiDB Lightning - Optimize the retry logic of TiDB Lightning for the `no leader` error during the data import phase [#46253](https://github.com/pingcap/tidb/issues/46253) @[lance6716](https://github.com/lance6716)
 
 ## Bug fixes
@@ -120,9 +121,9 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.1/quick-start-with-
     - (dup): release-6.5.4.md > Bug fixes> TiKV - Fix the issue of heartbeat storms by reducing the number of store heartbeat retries [#15184](https://github.com/tikv/tikv/issues/15184) @[nolouch](https://github.com/nolouch)
     - (dup): release-7.4.0.md > Bug fixes> TiKV - Fix the issue that Online Unsafe Recovery does not abort on timeout [#15346](https://github.com/tikv/tikv/issues/15346) @[Connor1996](https://github.com/Connor1996)
     - (dup): release-6.5.4.md > Bug fixes> TiKV - Fix the issue that encryption might cause data corruption during partial write [#15080](https://github.com/tikv/tikv/issues/15080) @[tabokie](https://github.com/tabokie)
-    - 修复由于 Region 的元数据不正确造成 TiKV panic 的问题 [#13311](https://github.com/tikv/tikv/issues/13311)@[cfzjywxk](https://github.com/cfzjywxk))
-    - 使用请求中的deadline字段作为coprocessor请求的超时时间 [#15565](https://github.com/tikv/tikv/issues/15565) @[lance6716](https://github.com/lance6716)
-    - 修复一个可能在移动peer时使得follower read性能变差的缺陷. [#15468](https://github.com/tikv/tikv/issues/15468) @[YuJuncen](https://github.com/YuJuncen)
+    - Fix the issue that TiKV panics due to corrupted metadata [#13311](https://github.com/tikv/tikv/issues/13311) @[cfzjywxk](https://github.com/cfzjywxk)
+    - Fix the issue that requests of the TiDB Lightning checksum coprocessor time out when there is online workload [#15565](https://github.com/tikv/tikv/issues/15565) @[lance6716](https://github.com/lance6716)
+    - Fix the issue that moving a peer might cause the performance of the follower read to deteriorate [#15468](https://github.com/tikv/tikv/issues/15468) @[YuJuncen](https://github.com/YuJuncen)
 
 + PD <!--tw@Oreoxmt--12 条-->
 
@@ -145,7 +146,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.1/quick-start-with-
 
 + TiFlash <!--tw@hfxsd--1 条-->
 
-    - 修复内存使用跟踪不准确的问题 [#8128](https://github.com/pingcap/tiflash/issues/8128) @[JinheLin](https://github.com/JinheLin)
+    - Fix the issue that the memory usage reported by MemoryTracker is not accurate when read pool is enabled [#8128](https://github.com/pingcap/tiflash/issues/8128) @[JinheLin](https://github.com/JinheLin)
     - (dup): release-6.5.4.md > Bug fixes> TiFlash - Fix the issue that TiFlash data is inconsistent due to invalid range keys of a region [#7762](https://github.com/pingcap/tiflash/issues/7762) @[lidezhu](https://github.com/lidezhu)
     - (dup): release-6.5.4.md > Bug fixes> TiFlash - Fix the issue that queries fail after `fsp` is changed for `DATETIME`, `TIMESTAMP`, or `TIME` data type [#7809](https://github.com/pingcap/tiflash/issues/7809) @[JaySon-Huang](https://github.com/JaySon-Huang)
     - (dup): release-7.3.0.md > Bug fixes> TiFlash - Fix the issue that when there are multiple HashAgg operators within the same MPP task, the compilation of the MPP task might take an excessively long time, severely affecting query performance [#7810](https://github.com/pingcap/tiflash/issues/7810) @[SeaRise](https://github.com/SeaRise)
@@ -160,16 +161,16 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.1/quick-start-with-
         - (dup): release-7.4.0.md > Bug fixes> Tools> Backup & Restore (BR) - Fix the issue that recovering meta-kv using PITR might cause errors [#46578](https://github.com/pingcap/tidb/issues/46578) @[Leavrth](https://github.com/Leavrth)
         - (dup): release-7.4.0.md > Bug fixes> Tools> Backup & Restore (BR) - Fix the errors in BR integration test cases [#45561](https://github.com/pingcap/tidb/issues/46561) @[purelind](https://github.com/purelind)
         - (dup): release-6.5.4.md > Bug fixes> Tools> Backup & Restore (BR) - Fix the issue of restore failures by increasing the default values of the global parameters `TableColumnCountLimit` and `IndexLimit` used by BR to their maximum values [#45793](https://github.com/pingcap/tidb/issues/45793) @[Leavrth](https://github.com/Leavrth)
-        - 修复 cli 扫描恢复后数据卡住的问题 [#45476](https://github.com/pingcap/tidb/issues/45476) @[3pointer](https://github.com/3pointer)
-        - 修复 PiTR 可能跳过恢复 create index ddl 问题[#47482](https://github.com/pingcap/tidb/issues/47482) @[Leavrth](https://github.com/Leavrth)
-        - 修复1分钟之内多次做 PiTR 可能丢失数据问题[#15483](https://github.com/tikv/tikv/issues/15483) @[YuJuncen](https://github.com/YuJuncen)
+        - Fix the issue that the CLI client scan gets stuck after data restoration [#45476](https://github.com/pingcap/tidb/issues/45476) @[3pointer](https://github.com/3pointer)
+        - Fix the issue that PITR might skip restoring the `CREATE INDEX` DDL statement [#47482](https://github.com/pingcap/tidb/issues/47482) @[Leavrth](https://github.com/Leavrth)
+        - Fix the issue that running PITR multiple times within 1 minute might cause data loss [#15483](https://github.com/tikv/tikv/issues/15483) @[YuJuncen](https://github.com/YuJuncen)
 
     + TiCDC <!--tw@hfxsd--4 条-->
 
-        - 修复处于异常状态的同步任务阻塞上游 GC 的问题 [#9543](https://github.com/pingcap/tiflow/issues/9543)
-        - 修复同步到对象存储时，在某些特殊场景下可能导致数据不一致的问题[#9592](https://github.com/pingcap/tiflow/issues/9592)
-        - 修复开启 redo 时，在某些特殊场景下可能导致 changefeed 失败的问题 [#9769](https://github.com/pingcap/tiflow/issues/9769)
-        - 修复在某些特殊的操作系统下，获取内存信息不对可能会导致 TiCDC 节点 OOM 的问题  [#9762](https://github.com/pingcap/tiflow/issues/9762)
+        - Fix the issue that a replication task in an abnormal state blocks upstream GC [#9543](https://github.com/pingcap/tiflow/issues/9543) @[CharlesCheung96](https://github.com/CharlesCheung96)
+        - Fix the issue that replicating data to an object store might cause data inconsistency [#9592](https://github.com/pingcap/tiflow/issues/9592) @[CharlesCheung96](https://github.com/CharlesCheung96)
+        - Fix the issue that enabling `redo-resolved-ts` might cause changefeed to fail [#9769](https://github.com/pingcap/tiflow/issues/9769) @[CharlesCheung96](https://github.com/CharlesCheung96)
+        - Fix the issue that fetching wrong memory information might cause OOM issues in some operating systems [#9762](https://github.com/pingcap/tiflow/issues/9762) @[sdojjy](https://github.com/sdojjy)
         - (dup): release-7.4.0.md > Bug fixes> Tools> TiCDC - Fix the issue of uneven distribution of write keys among nodes when `scale-out` is enabled [#9665](https://github.com/pingcap/tiflow/issues/9665) @[sdojjy](https://github.com/sdojjy)
         - (dup): release-7.4.0.md > Bug fixes> Tools> TiCDC - Fix the issue that sensitive user information is recorded in the logs [#9690](https://github.com/pingcap/tiflow/issues/9690) @[sdojjy](https://github.com/sdojjy)
         - (dup): release-6.5.4.md > Bug fixes> Tools> TiCDC - Fix the issue that TiCDC might incorrectly synchronize rename DDL operations [#9488](https://github.com/pingcap/tiflow/issues/9488) [#9378](https://github.com/pingcap/tiflow/issues/9378) [#9531](https://github.com/pingcap/tiflow/issues/9531) @[asddongmen](https://github.com/asddongmen)
@@ -197,8 +198,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.1/quick-start-with-
 
     + TiDB Lightning <!--tw@hfxsd--2 条-->
 
-        - 将 checksum-via-sql 默认值设置为 false，提升导入任务执行性能。[#45368](https://github.com/pingcap/tidb/issues/45368) , [#45094](https://github.com/pingcap/tidb/issues/45094) @[GMHDBJD](https://github.com/GMHDBJD)
-        - 当导入表设置了 AUTO_ID_CACHE=1 会导致分配错误的 rowid [#46100](https://github.com/pingcap/tidb/issues/46100) @[D3Hunter](https://github.com/D3Hunter)
+        - Fix the issue that when importing a table with `AUTO_ID_CACHE=1`, a wrong `row_id` is assigned [#46100](https://github.com/pingcap/tidb/issues/46100) @[D3Hunter](https://github.com/D3Hunter)
         - (dup): release-6.5.4.md > Bug fixes> Tools> TiDB Lightning - Fix the issue that the data type is wrong when saving `NEXT_GLOBAL_ROW_ID` [#45427](https://github.com/pingcap/tidb/issues/45427) @[lyzx2001](https://github.com/lyzx2001)
         - (dup): release-7.4.0.md > Bug fixes> Tools> TiDB Lightning - Fix the issue that checksum still reports errors when `checksum = "optional"` [#45382](https://github.com/pingcap/tidb/issues/45382) @[lyzx2001](https://github.com/lyzx2001)
         - (dup): release-7.4.0.md > Bug fixes> Tools> TiDB Lightning - Fix the issue that data import fails when the PD cluster address changes [#43436](https://github.com/pingcap/tidb/issues/43436) @[lichunzhu](https://github.com/lichunzhu)
