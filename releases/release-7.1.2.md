@@ -134,7 +134,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.1/quick-start-with-
     - Fix the issue that the Region information is not updated after Flashback [#6912](https://github.com/tikv/pd/issues/6912) @[overvenus](https://github.com/overvenus)
     - Fix the issue that PD might panic during exiting [#7053](https://github.com/tikv/pd/issues/7053) @[HuSharp](https://github.com/HuSharp)
     - Fix the issue that the context timeout might cause the `lease timeout` error [#6926](https://github.com/tikv/pd/issues/6926) @[rleungx](https://github.com/rleungx)
-    - Fix the issue that peers are not properly scattered by group, which might cause uneven distribution of leader [#6962](https://github.com/tikv/pd/issues/6962) @[rleungx](https://github.com/rleungx)
+    - Fix the issue that peers are not properly scattered by group, which might cause uneven distribution of leaders [#6962](https://github.com/tikv/pd/issues/6962) @[rleungx](https://github.com/rleungx)
     - Fix the issue that the isolation level label is not synchronized when updating using pd-ctl [#7121](https://github.com/tikv/pd/issues/7121) @[rleungx](https://github.com/rleungx)
     - Fix the issue that `evict-leader-scheduler` might lose configuration [#6897](https://github.com/tikv/pd/issues/6897) @[HuSharp](https://github.com/HuSharp)
     - Fix potential security risks of the plugin directory and files [#7094](https://github.com/tikv/pd/issues/7094) @[HuSharp](https://github.com/HuSharp)
