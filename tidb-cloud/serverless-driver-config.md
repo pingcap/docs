@@ -75,10 +75,9 @@ const results = await conn.execute('select * from test',null,{arrayMode:true,ful
 
 Transaction options is supported since v0.0.7.
 
-| Option       | Type   | Default value    | Description                                                                        |
-|--------------|--------|------------------|------------------------------------------------------------------------------------|
+| Option       | Type   | Default value     | Description                                                                        |
+|--------------|--------|-------------------|------------------------------------------------------------------------------------|
 | `isolation`  | string | `REPEATABLE READ` | The transaction isolation level. Support `READ COMMITTED` and `REPEATABLE READ`    |
-
 
 The `isolation` option can only be used in the `begin` function. Here is an example:
 
