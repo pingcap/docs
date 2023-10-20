@@ -39,7 +39,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.1/quick-start-with-
 + PD  <!--tw@Oreoxmt--2 条-->
 
     - Optimize the backoff mechanism in the PD caller to reduce the frequency of RPC requests when a call fails [#6556](https://github.com/tikv/pd/issues/6556) @[nolouch](https://github.com/nolouch) @[rleungx](https://github.com/rleungx) @[HuSharp](https://github.com/HuSharp)
-    - (dup): release-7.3.0.md > Improvements> PD - Reduce the memory consumption of `GetRegions` requests [#6835](https://github.com/tikv/pd/issues/6835) @[lhy1024](https://github.com/lhy1024)
+    - Introduce the cancel mechanism for the `GetRegions` interface to release CPU and memory in time when the caller is disconnected [#6835](https://github.com/tikv/pd/issues/6835) @[lhy1024](https://github.com/lhy1024)
 
 + TiFlash  <!--tw@qiancai--1 条-->
 
