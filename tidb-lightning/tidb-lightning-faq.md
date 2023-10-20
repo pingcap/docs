@@ -24,7 +24,6 @@ For details about the permissions, see [Prerequisites for using TiDB Lightning](
 
 If only one table has an error encountered, the rest will still be processed normally.
 
-
 ## How to ensure the integrity of the imported data?
 
 TiDB Lightning by default performs checksum on the local data source and the imported tables. If there is checksum mismatch, the process would be aborted. These checksum information can be read from the log.
@@ -88,7 +87,6 @@ With the default settings of 3 replicas, the space requirement of the target TiK
 
 - The space occupied by indices
 - Space amplification in RocksDB
-
 
 ## How to completely destroy all intermediate data associated with TiDB Lightning?
 
