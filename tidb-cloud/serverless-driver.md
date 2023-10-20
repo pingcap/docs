@@ -194,3 +194,4 @@ Currently, using serverless driver has the following limitations:
 
 - [Learn how to configure TiDB Cloud serverless driver](/tidb-cloud/serverless-driver-config.md).
 - [Learn how to use Kysely ORM with TiDB Cloud serverless driver dialect](https://github.com/tidbcloud/kysely).
+- [Learn how to use Prisma ORM with TiDB Cloud serverless driver adapter](https://github.com/tidbcloud/prisma-adapter).
