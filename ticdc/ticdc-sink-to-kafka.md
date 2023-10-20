@@ -304,7 +304,7 @@ The sample configuration is as follows:
 
 ```toml
 [sink.kafka-config.large-message-handle]
-# This configuration is introduced in v7.3.0.
+# This configuration is introduced in v7.1.2.
 # Empty by default, which means when the message size exceeds the limit, the changefeed fails.
 # If this configuration is set to "handle-key-only", when the message size exceeds the limit, only the handle key is sent in the data field. If the message size still exceeds the limit, the changefeed fails.
 large-message-handle-option = "handle-key-only"
