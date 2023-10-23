@@ -31,6 +31,12 @@
     - [Java](/develop/dev-guide-sample-application-java.md)
     - [Python](/develop/dev-guide-sample-application-python.md)
   - Connect to TiDB
+<<<<<<< HEAD
+=======
+    - GUI Database Tools
+      - [JetBrains DataGrip](/develop/dev-guide-gui-datagrip.md)
+      - [DBeaver](/develop/dev-guide-gui-dbeaver.md)
+>>>>>>> 1acee2e926 (feat: Developer Guide - GUI - DBeaver (#14927))
     - [Choose Driver or ORM](/develop/dev-guide-choose-driver-or-orm.md)
     - [Connect to TiDB](/develop/dev-guide-connect-to-tidb.md)
     - [Connection Pools and Connection Parameters](/develop/dev-guide-connection-parameters.md)

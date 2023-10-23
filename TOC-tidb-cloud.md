@@ -17,12 +17,19 @@
   - Quick Start
     - [Build a TiDB Cluster in TiDB Cloud (Serverless Tier)](/develop/dev-guide-build-cluster-in-cloud.md)
     - [CRUD SQL in TiDB](/develop/dev-guide-tidb-crud-sql.md)
+<<<<<<< HEAD
   - Example Applications
     - [Golang](/develop/dev-guide-sample-application-golang.md)
     - [Java (Spring Boot)](/develop/dev-guide-sample-application-spring-boot.md)
     - [Java](/develop/dev-guide-sample-application-java.md)
     - [Python](/develop/dev-guide-sample-application-python.md)
   - Connect to TiDB
+=======
+  - Connect to TiDB Cloud
+    - GUI Database Tools
+      - [JetBrains DataGrip](/develop/dev-guide-gui-datagrip.md)
+      - [DBeaver](/develop/dev-guide-gui-dbeaver.md)
+>>>>>>> 1acee2e926 (feat: Developer Guide - GUI - DBeaver (#14927))
     - [Choose Driver or ORM](/develop/dev-guide-choose-driver-or-orm.md)
     - [Connection Pools and Connection Parameters](/develop/dev-guide-connection-parameters.md)
   - Design Database Schema
