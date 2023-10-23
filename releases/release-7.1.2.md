@@ -23,7 +23,6 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.1/quick-start-with-
 + TiDB <!--tw@ran-huang--2 条-->
 
     - (dup): release-6.5.5.md > Improvements> TiDB - Add new optimizer hints, including [`NO_MERGE_JOIN()`](/optimizer-hints.md#no_merge_joint1_name--tl_name-), [`NO_INDEX_JOIN()`](/optimizer-hints.md#no_index_joint1_name--tl_name-), [`NO_INDEX_MERGE_JOIN()`](/optimizer-hints.md#no_index_merge_joint1_name--tl_name-), [`NO_HASH_JOIN()`](/optimizer-hints.md#no_hash_joint1_name--tl_name-), and [`NO_INDEX_HASH_JOIN()`](/optimizer-hints.md#no_index_hash_joint1_name--tl_name-) [#45520](https://github.com/pingcap/tidb/issues/45520) @[qw4990](https://github.com/qw4990)
-
     - (dup): release-6.5.5.md > Improvements> TiDB - Add request source information related to the coprocessor [#46514](https://github.com/pingcap/tidb/issues/46514) @[you06](https://github.com/you06)
     - Add the `/upgrade/start` and `upgrade/finish` APIs to mark the start and end of the upgrade status for TiDB nodes [#47172](https://github.com/pingcap/tidb/issues/47172) @[zimulala](https://github.com/zimulala)
 
@@ -110,7 +109,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.1/quick-start-with-
     - Fix the issue that DDL operations get permanently blocked due to incorrect MDL handling [#46920](https://github.com/pingcap/tidb/issues/46920) @[wjhuang2016](https://github.com/wjhuang2016)
     - Fix the issue of duplicate columns in a table caused by `RENAME TABLE` operations [#47064](https://github.com/pingcap/tidb/issues/47064)@[jiyfhust](https://github.com/jiyfhust)
     - Fix the panic issue of `batch-client` in `client-go` [#47691](https://github.com/pingcap/tidb/issues/47691) @[crazycs520](https://github.com/crazycs520)
-    - Fix the issue that statistics collection on partitioned tables are not killed in time when its memory usage exceeds memory limits [#45706] (https://github.com/pingcap/tidb/issues/45706) @[hawkingrei](https://github.com/hawkingrei)
+    - Fix the issue that statistics collection on partitioned tables is not killed in time when its memory usage exceeds memory limits [#45706](https://github.com/pingcap/tidb/issues/45706) @[hawkingrei](https://github.com/hawkingrei)
     - Fix the issue that query results are inaccurate when queries contain `UNHEX` conditions [#45378](https://github.com/pingcap/tidb/issues/45378) @[qw4990](https://github.com/qw4990)
     - Fix the issue that TiDB returns `Can't find column` for queries with `GROUP_CONCAT` [#41957](https://github.com/pingcap/tidb/issues/41957) @[AilinKid](https://github.com/AilinKid)
 
