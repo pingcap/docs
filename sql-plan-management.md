@@ -116,7 +116,7 @@ SELECT * FROM test . t WHERE a > ?
 
 > **Note:**
 >
-> Multiple constants joined by commas `,` in `IN` predicates are normalized as `...` instead of `?`.
+> In the normalization process, `?` in the `IN` predicate is normalized as `...`.
 >
 > For example:
 >
