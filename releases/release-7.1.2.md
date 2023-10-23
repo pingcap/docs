@@ -126,9 +126,9 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.1/quick-start-with-
     - (dup): release-6.5.4.md > Bug fixes> TiKV - Fix the issue of heartbeat storms by reducing the number of store heartbeat retries [#15184](https://github.com/tikv/tikv/issues/15184) @[nolouch](https://github.com/nolouch)
     - (dup): release-7.4.0.md > Bug fixes> TiKV - Fix the issue that Online Unsafe Recovery does not abort on timeout [#15346](https://github.com/tikv/tikv/issues/15346) @[Connor1996](https://github.com/Connor1996)
     - (dup): release-6.5.4.md > Bug fixes> TiKV - Fix the issue that encryption might cause data corruption during partial write [#15080](https://github.com/tikv/tikv/issues/15080) @[tabokie](https://github.com/tabokie)
-    - Fix the issue that TiKV panics due to corrupted metadata [#13311](https://github.com/tikv/tikv/issues/13311) @[cfzjywxk](https://github.com/cfzjywxk)
+    - (dup): release-7.4.0.md > Bug fixes> TiKV - Fix the TiKV panic issue caused by incorrect metadata of Region [#13311](https://github.com/tikv/tikv/issues/13311) @[cfzjywxk](https://github.com/cfzjywxk)
     - Fix the issue that requests of the TiDB Lightning checksum coprocessor time out when there is online workload [#15565](https://github.com/tikv/tikv/issues/15565) @[lance6716](https://github.com/lance6716)
-    - Fix the issue that moving a peer might cause the performance of the follower read to deteriorate [#15468](https://github.com/tikv/tikv/issues/15468) @[YuJuncen](https://github.com/YuJuncen)
+    - Fix the issue that moving a peer might cause the performance of the Follower Read to deteriorate [#15468](https://github.com/tikv/tikv/issues/15468) @[YuJuncen](https://github.com/YuJuncen)
 
 + PD <!--tw@Oreoxmt--12 条-->
 
@@ -151,7 +151,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.1/quick-start-with-
 
 + TiFlash <!--tw@hfxsd--1 条-->
 
-    - Fix the issue that the memory usage reported by MemoryTracker is not accurate when read pool is enabled [#8128](https://github.com/pingcap/tiflash/issues/8128) @[JinheLin](https://github.com/JinheLin)
+    - Fix the issue that the memory usage reported by MemoryTracker is inaccurate [#8128](https://github.com/pingcap/tiflash/issues/8128) @[JinheLin](https://github.com/JinheLin)
     - (dup): release-6.5.4.md > Bug fixes> TiFlash - Fix the issue that TiFlash data is inconsistent due to invalid range keys of a region [#7762](https://github.com/pingcap/tiflash/issues/7762) @[lidezhu](https://github.com/lidezhu)
     - (dup): release-6.5.4.md > Bug fixes> TiFlash - Fix the issue that queries fail after `fsp` is changed for `DATETIME`, `TIMESTAMP`, or `TIME` data type [#7809](https://github.com/pingcap/tiflash/issues/7809) @[JaySon-Huang](https://github.com/JaySon-Huang)
     - (dup): release-7.3.0.md > Bug fixes> TiFlash - Fix the issue that when there are multiple HashAgg operators within the same MPP task, the compilation of the MPP task might take an excessively long time, severely affecting query performance [#7810](https://github.com/pingcap/tiflash/issues/7810) @[SeaRise](https://github.com/SeaRise)
@@ -166,14 +166,14 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.1/quick-start-with-
         - (dup): release-7.4.0.md > Bug fixes> Tools> Backup & Restore (BR) - Fix the issue that recovering meta-kv using PITR might cause errors [#46578](https://github.com/pingcap/tidb/issues/46578) @[Leavrth](https://github.com/Leavrth)
         - (dup): release-7.4.0.md > Bug fixes> Tools> Backup & Restore (BR) - Fix the errors in BR integration test cases [#45561](https://github.com/pingcap/tidb/issues/46561) @[purelind](https://github.com/purelind)
         - (dup): release-6.5.4.md > Bug fixes> Tools> Backup & Restore (BR) - Fix the issue of restore failures by increasing the default values of the global parameters `TableColumnCountLimit` and `IndexLimit` used by BR to their maximum values [#45793](https://github.com/pingcap/tidb/issues/45793) @[Leavrth](https://github.com/Leavrth)
-        - Fix the issue that the CLI client scan gets stuck after data restoration [#45476](https://github.com/pingcap/tidb/issues/45476) @[3pointer](https://github.com/3pointer)
+        - Fix the issue that the br CLI client gets stuck when scanning restored data [#45476](https://github.com/pingcap/tidb/issues/45476) @[3pointer](https://github.com/3pointer)
         - Fix the issue that PITR might skip restoring the `CREATE INDEX` DDL statement [#47482](https://github.com/pingcap/tidb/issues/47482) @[Leavrth](https://github.com/Leavrth)
         - Fix the issue that running PITR multiple times within 1 minute might cause data loss [#15483](https://github.com/tikv/tikv/issues/15483) @[YuJuncen](https://github.com/YuJuncen)
 
     + TiCDC <!--tw@hfxsd--4 条-->
 
         - Fix the issue that a replication task in an abnormal state blocks upstream GC [#9543](https://github.com/pingcap/tiflow/issues/9543) @[CharlesCheung96](https://github.com/CharlesCheung96)
-        - Fix the issue that replicating data to an object store might cause data inconsistency [#9592](https://github.com/pingcap/tiflow/issues/9592) @[CharlesCheung96](https://github.com/CharlesCheung96)
+        - Fix the issue that replicating data to an object storage might cause data inconsistency [#9592](https://github.com/pingcap/tiflow/issues/9592) @[CharlesCheung96](https://github.com/CharlesCheung96)
         - Fix the issue that enabling `redo-resolved-ts` might cause changefeed to fail [#9769](https://github.com/pingcap/tiflow/issues/9769) @[CharlesCheung96](https://github.com/CharlesCheung96)
         - Fix the issue that fetching wrong memory information might cause OOM issues in some operating systems [#9762](https://github.com/pingcap/tiflow/issues/9762) @[sdojjy](https://github.com/sdojjy)
         - (dup): release-7.4.0.md > Bug fixes> Tools> TiCDC - Fix the issue of uneven distribution of write keys among nodes when `scale-out` is enabled [#9665](https://github.com/pingcap/tiflow/issues/9665) @[sdojjy](https://github.com/sdojjy)
