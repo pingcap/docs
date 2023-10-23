@@ -152,7 +152,7 @@ SELECT * FROM test . t WHERE a > ?
 > +--------------------------+
 > ```
 >
-> Bindings created on old versions of TiDB (before v7.3) may contain `IN (?)`, when upgrading, they will be modified to `IN (...)`.
+> Bindings created in TiDB clusters earlier than v7.4.0 might contain `IN (?)`. After the upgrade to v7.4.0 or a later version, these bindings will be modified to `IN (...)`.
 >
 > For example:
 >
