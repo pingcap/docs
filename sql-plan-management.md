@@ -127,7 +127,7 @@ SELECT * FROM test . t WHERE a > ?
 > SELECT * FROM test . t WHERE a IN ( ... )
 > ```
 >
-> After normalization, `IN` predicates with different lengths are recognized as the same statement, so you just need to create one binding for them.
+> After normalization, `IN` predicates of different lengths are recognized as the same statement, so you only need to create one binding that applies to all these predicates.
 >
 > For example:
 > ```sql
