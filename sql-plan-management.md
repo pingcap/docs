@@ -156,7 +156,7 @@ SELECT * FROM test . t WHERE a > ?
 > For example:
 >
 > ```sql
-> -- create a binding on v7.3
+> -- create a binding on v7.3.0
 > mysql> CREATE GLOBAL BINDING FOR SELECT * FROM t WHERE a IN (1) USING SELECT /*+ use_index(t, a) */ * FROM t WHERE a IN (1);
 > mysql> SHOW GLOBAL BINDINGS;
 > +-----------------------------------------------+--------------------------------------------------------------------+------------+---------+-------------------------+-------------------------+---------+-----------------+--------+------------------------------------------------------------------+-------------+
