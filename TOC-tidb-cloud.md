@@ -18,7 +18,9 @@
     - [Build a TiDB Cluster in TiDB Cloud (Serverless Tier)](/develop/dev-guide-build-cluster-in-cloud.md)
     - [CRUD SQL in TiDB](/develop/dev-guide-tidb-crud-sql.md)
   - Connect to TiDB Cloud
-    - [JetBrains DataGrip](/develop/dev-guide-gui-datagrip.md)
+    - GUI Database Tools
+      - [JetBrains DataGrip](/develop/dev-guide-gui-datagrip.md)
+      - [DBeaver](/develop/dev-guide-gui-dbeaver.md)
     - [Choose Driver or ORM](/develop/dev-guide-choose-driver-or-orm.md)
     - Java
       - [JDBC](/develop/dev-guide-sample-application-java-jdbc.md)
