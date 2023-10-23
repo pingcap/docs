@@ -829,11 +829,15 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 
 ### require_secure_transport <span class="version-mark">New in v6.1.0</span>
 
+> **Note:**
+>
+> Currently, this variable is not supported on [TiDB Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-dedicated). DO **NOT** enable this variable for TiDB Dedicated clusters. Otherwise, you might get SQL client connection failures. This restriction is a temporary control measure and will be resolved in a future release.
+
 - Scope: GLOBAL
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
-- Default value: `OFF`
+- Default value: `OFF` for TiDB Self-Hosted and [TiDB Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-dedicated), `ON` for [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless)
 
 <CustomContent platform="tidb">
 
@@ -1081,21 +1085,13 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
-- Default value: `2` for TiDB Self-Hosted and `1` for TiDB Cloud
+- Default value: `2`
 - Range: `[1, 2]`
 - Controls how TiDB collects statistics.
-
-<CustomContent platform="tidb">
-
-- In v5.3.0 and later versions, the default value of this variable is `2`. If your cluster is upgraded from a version earlier than v5.3.0 to v5.3.0 or later, the default value of `tidb_analyze_version` does not change. For detailed introduction, see [Introduction to Statistics](/statistics.md).
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-- For detailed introduction of this variable, see [Introduction to Statistics](/statistics.md).
-
-</CustomContent>
+    - For TiDB Self-Hosted, the default value of this variable changes from `1` to `2` starting from v5.3.0.
+    - For TiDB Cloud, the default value of this variable changes from `1` to `2` starting from v6.5.0.
+    - If your cluster is upgraded from an earlier version, the default value of `tidb_analyze_version` does not change after the upgrade.
+- For detailed introduction about this variable, see [Introduction to Statistics](/statistics.md).
 
 ### tidb_analyze_skip_column_types <span class="version-mark">New in v7.2.0</span>
 
