@@ -7,6 +7,10 @@ summary: Learn how to use TiDB Cloud Serverless Driver in a local Node.js projec
 
 Learn how to use TiDB Cloud Serverless Driver in a local Node.js project.
 
+> **Note:**
+>
+> This tutorial is compatible with TiDB Serverless only. Be sure to check out our [Insights into Automotive Sales](https://car-sales-insight.vercel.app/) and [sample repository](https://github.com/tidbcloud/car-sales-insight) to learn how to use it with Cloudflare Workers, Vercel Edge Functions, and Netlify Edge Functions.
+
 ## Before you begin
 
 To complete this step-by-step tutorial, you need:
@@ -23,8 +27,8 @@ To complete this step-by-step tutorial, you need:
     mkdir node-example
     cd node-example
     ```
-   
-2. Install the serverless driver, here we use npm. This should create a `node_modules` directory and a `package-lock.json` file in your project directory.
+
+2. Run the following command to install the driver with your preferred package manager, here we use npm as an example. This should create a `node_modules` directory and a `package-lock.json` file in your project directory.
 
     ```
     npm install @tidbcloud/serverless
