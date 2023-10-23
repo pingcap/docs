@@ -154,6 +154,7 @@ SELECT * FROM test . t WHERE a > ?
 > Bindings created on old versions of TiDB (before v7.3) may contain `IN (?)`, when upgrading, they will be modified to `IN (...)`.
 >
 > For example:
+>
 > ```sql
 > -- create a binding on v7.3
 > mysql> CREATE GLOBAL BINDING FOR SELECT * FROM t WHERE a IN (1) USING SELECT /*+ use_index(t, a) */ * FROM t WHERE a IN (1);
