@@ -179,4 +179,8 @@ If you encounter problems when connecting to TiDB using the tools listed in this
 
 | GUI | Latest tested version | Support level | Tutorial |
 | - | - | - | - |
+<<<<<<< HEAD
 | [DBeaver](https://dbeaver.io/) | 23.0.1 | Full | N/A |
+=======
+| [DBeaver](https://dbeaver.io/) | 23.0.3 | Full | [Connect to TiDB with DBeaver](/develop/dev-guide-gui-dbeaver.md) |
+>>>>>>> 1acee2e926 (feat: Developer Guide - GUI - DBeaver (#14927))
