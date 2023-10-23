@@ -71,6 +71,8 @@ export async function GET(request: NextRequest) {
 }
 ```
 
+[Learn more about using TiDB Cloud serverless driver in Vercel](/tidb-cloud/integrate-tidbcloud-with-vercel.md#integrate-tidb-cloud-with-vercel).
+
 </div>
 
 <div label="Cloudflare Workers">
@@ -89,6 +91,8 @@ export default {
 };
 ```
 
+[Learn more about using TiDB Cloud serverless driver in Cloudflare Workers](/tidb-cloud/integrate-tidbcloud-with-cloudflare.md).
+
 </div>
 
 <div label="Netlify Edge Function">
@@ -102,6 +106,8 @@ export default async () => {
   return new Response(JSON.stringify(result));
 }
 ```
+
+[Learn more about using TiDB Cloud serverless driver in Netlify Workers](/tidb-cloud/integrate-tidbcloud-with-netlify.md#use-the-edge-function).
 
 </div>
 
@@ -282,6 +288,4 @@ Currently, using serverless driver has the following limitations:
 
 ## What's next
 
-- [Learn the tutorial to use TiDB Cloud serverless driver with Cloudflare Workers](/tidb-cloud/integrate-tidbcloud-with-cloudflare.md).
-- [Learn the tutorial to use TiDB Cloud serverless driver with Vercel](/tidb-cloud/integrate-tidbcloud-with-vercel.md#integrate-tidb-cloud-with-vercel).
-- [Learn the tutorial to use TiDB Cloud serverless driver with Node.js](/tidb-cloud/serverless-driver-node-example.md).
+- [Learn how to use TiDB Cloud serverless driver in a local Node.js project](/tidb-cloud/serverless-driver-node-example.md).
