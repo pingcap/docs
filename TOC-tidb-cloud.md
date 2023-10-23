@@ -48,8 +48,7 @@
       - [mysql2](/develop/dev-guide-sample-application-ruby-mysql2.md)
       - [Rails](/develop/dev-guide-sample-application-ruby-rails.md)
     - Serverless Driver (Beta)
-      - [TiDB Cloud Serverless Driver](/tidb-cloud/serverless-driver.md)
-      - [Configure TiDB Cloud Serverless Driver](/tidb-cloud/serverless-driver-config.md)
+      - [TiDB Cloud Serverless Driver Overview](/tidb-cloud/serverless-driver.md)
       - [Node.js example](/tidb-cloud/serverless-driver-node-example.md)
   - Third-Party Support
     - [Third-Party Tools Supported by TiDB](/develop/dev-guide-third-party-support.md)
