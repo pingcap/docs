@@ -211,4 +211,4 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.1/quick-start-with-
 
     + TiDB Binlog
 
-        - (dup): release-4.0.16.md > Bug fixes> Tools> TiDB Binlog - Fix the bug that Drainer exits when transporting a transaction greater than 1 GB [#28659](https://github.com/pingcap/tidb/issues/28659)
+        - (dup): release-4.0.16.md > Bug fixes> Tools> TiDB Binlog - Fix the issue that Drainer exits when transporting a transaction greater than 1 GB [#28659](https://github.com/pingcap/tidb/issues/28659)
