@@ -161,7 +161,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.1/quick-start-with-
     + Backup & Restore (BR) <!--tw@hfxsd--3 条-->
 
         - (dup): release-7.4.0.md > Bug fixes> Tools> Backup & Restore (BR) - Fix the issue that recovering implicit primary keys using PITR might cause conflicts [#46520](https://github.com/pingcap/tidb/issues/46520) @[3pointer](https://github.com/3pointer)
-        - (dup): release-6.5.5.md > 错误修复> Tools> Backup & Restore (BR) - 修复 GCS 上 PITR 恢复失败的问题 [#47022](https://github.com/pingcap/tidb/issues/47022) @[Leavrth](https://github.com/Leavrth)
+        - (dup): release-6.5.5.md > Bug fixes> Tools> Backup & Restore (BR) - Fix the issue that PITR fails to recover data from GCS [#47022](https://github.com/pingcap/tidb/issues/47022) @[Leavrth](https://github.com/Leavrth)
         - (dup): release-6.5.4.md > Bug fixes> Tools> Backup & Restore (BR) - Fix the potential error in fine-grained backup phase in RawKV mode [#37085](https://github.com/pingcap/tidb/issues/37085) @[pingyu](https://github.com/pingyu)
         - (dup): release-7.4.0.md > Bug fixes> Tools> Backup & Restore (BR) - Fix the issue that recovering meta-kv using PITR might cause errors [#46578](https://github.com/pingcap/tidb/issues/46578) @[Leavrth](https://github.com/Leavrth)
         - (dup): release-7.4.0.md > Bug fixes> Tools> Backup & Restore (BR) - Fix the errors in BR integration test cases [#45561](https://github.com/pingcap/tidb/issues/46561) @[purelind](https://github.com/purelind)
