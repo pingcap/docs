@@ -50,7 +50,7 @@ TiDB Cloud provides the following authentication methods for Organization SSO.
 - OIDC
 - SAML
 
-When you enable Cloud Organization SSO, the first four methods are enabled by default.
+When you enable Cloud Organization SSO, the first four methods are enabled by default. If you want to enforce the use of SSO for your organization, you can disable the username and password authentication method.
 
 All the enabled authentication methods will be displayed on your custom TiDB Cloud login page, so you need to decide which authentication methods to be enabled or disabled in advance.
 
