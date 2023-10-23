@@ -123,7 +123,7 @@ SELECT * FROM test . t WHERE a > ?
 > SELECT * FROM t WHERE a IN (1)
 > SELECT * FROM t WHERE a IN (1,2,3)
 > -- After normalization, the above statements are as follows:
-> SELECT * FROM test . t WHERE a IN ( ? )
+> SELECT * FROM test . t WHERE a IN ( ... )
 > SELECT * FROM test . t WHERE a IN ( ... )
 > ```
 >
