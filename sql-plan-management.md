@@ -131,6 +131,7 @@ SELECT * FROM test . t WHERE a > ?
 > After normalization, `IN` predicates of different lengths are recognized as the same statement, so you only need to create one binding that applies to all these predicates.
 >
 > For example:
+>
 > ```sql
 > CREATE TABLE t (a INT, KEY(a));
 > CREATE BINDING FOR SELECT * FROM t WHERE a IN (?) USING SELECT /*+ use_index(t, a) */ * FROM t WHERE a in (?);
