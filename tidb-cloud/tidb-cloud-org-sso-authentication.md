@@ -43,13 +43,14 @@ The format of the custom URL is `https://tidbcloud.com/enterprise/signin/your-co
 
 TiDB Cloud provides the following authentication methods for Organization SSO.
 
+- Username and password
 - Google
 - GitHub
 - Microsoft
 - OIDC
 - SAML
 
-When you enable Cloud Organization SSO, the first three methods are enabled by default.
+When you enable Cloud Organization SSO, the first four methods are enabled by default.
 
 All the enabled authentication methods will be displayed on your custom TiDB Cloud login page, so you need to decide which authentication methods to be enabled or disabled in advance.
 
@@ -94,9 +95,9 @@ To enable Cloud Organization SSO, take the following steps:
 
 Enabling an authentication method in TiDB Cloud allows members using that method to log in to TiDB Cloud using your custom URL.
 
-### Configure Google, GitHub, or Microsoft authentication methods
+### Configure username and password, Google, GitHub, or Microsoft authentication methods
 
-After enabling Cloud Organization Cloud, you can configure Google, GitHub, or Microsoft authentication methods as follows:
+After enabling Cloud Organization Cloud, you can configure username and password, Google, GitHub, or Microsoft authentication methods as follows:
 
 1. On the **Organization Settings** page, enable or disable the Google, GitHub, or Microsoft authentication methods according to your need.
 2. For an enabled authentication method, you can click <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 20H21M3.00003 20H4.67457C5.16376 20 5.40835 20 5.63852 19.9447C5.84259 19.8957 6.03768 19.8149 6.21663 19.7053C6.41846 19.5816 6.59141 19.4086 6.93732 19.0627L19.5001 6.49998C20.3285 5.67156 20.3285 4.32841 19.5001 3.49998C18.6716 2.67156 17.3285 2.67156 16.5001 3.49998L3.93729 16.0627C3.59139 16.4086 3.41843 16.5816 3.29475 16.7834C3.18509 16.9624 3.10428 17.1574 3.05529 17.3615C3.00003 17.5917 3.00003 17.8363 3.00003 18.3255V20Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg> to configure the method details.
