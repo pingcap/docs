@@ -33,6 +33,7 @@ delimiter = ','
 quote = '"'
 null = '\N'
 include-commit-ts = true
+binary-encoding-method = 'base64'
 ```
 
 ## Transactional constraints
