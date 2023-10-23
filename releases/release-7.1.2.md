@@ -103,7 +103,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.1/quick-start-with-
     - Fix the issue of encoding time fields with incorrect timezone information [#46044](https://github.com/pingcap/tidb/issues/46033) @[tangenta](https://github.com/tangenta)
     - Fix the issue that DDL statements that fast add indexes would get stuck when the `tmp` directory does not exist [#45456](https://github.com/pingcap/tidb/issues/45456) @[tangenta](https://github.com/tangenta)
     - Fix the issue that upgrading multiple TiDB instances simultaneously might block the upgrade process [#46288](https://github.com/pingcap/tidb/issues/46228) @[zimulala](https://github.com/zimulala)
-    - Fix the issue of uneven Region scattering caused by incorrect parameters used in splitting Regions [#46135](https://github.com/pingcap/tidb/issues/46135)@[zimulala](https://github.com/zimulala)
+    - Fix the issue of uneven Region scattering caused by incorrect parameters used in splitting Regions [#46135](https://github.com/pingcap/tidb/issues/46135) @[zimulala](https://github.com/zimulala)
     - Fix the issue that DDL operations might get stuck after TiDB is restarted [#46751](https://github.com/pingcap/tidb/issues/46751) @[wjhuang2016](https://github.com/wjhuang2016)
     - Prohibit split table operations on non-integer clustered indexes [#47350](https://github.com/pingcap/tidb/issues/47350) @[tangenta](https://github.com/tangenta)
     - Fix the issue that DDL operations might get permanently blocked due to incorrect MDL handling [#46920](https://github.com/pingcap/tidb/issues/46920) @[wjhuang2016](https://github.com/wjhuang2016)
