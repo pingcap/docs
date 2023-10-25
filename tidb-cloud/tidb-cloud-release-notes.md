@@ -8,6 +8,22 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2023.
 
+## October 25, 2023
+
+**General changes**
+
+- [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) supports dual region backup (beta) on Google Cloud.
+
+    TiDB Dedicated clusters hosted on Google Cloud work seamlessly with Google Cloud Storage. Similar to Google Cloud Storage, TiDB Dedicated supports dual-region pairing only within the same multi-region code as [Google dual-region storage](https://cloud.google.com/storage/docs/locations#location-dr). For example, in Asia, currently you must pair Tokyo and Osaka together for dual-region storage.
+
+    For more information, refer to [Back Up and Restore TiDB Dedicated Data](/tidb-cloud/backup-and-restore.md#turn-on-dual-region-backup-beta).
+
+- The feature of [streaming data change logs to Apache Kafka](/tidb-cloud/changefeed-sink-to-apache-kafka.md) is now in General Availability (GA).
+
+    After a successful 10-month beta trial, the feature of streaming data change logs to Apache Kafka becomes generally available. Streaming data from TiDB to a message queue is a common need for data integration scenarios. You can use Kafka sink to integrate with other data processing systems (such as Snowflake) or support business consumption.
+
+    For more information, refer to [Changefeed Overview](/tidb-cloud/changefeed-overview.md).
+
 ## October 11, 2023
 
 **General changes**
