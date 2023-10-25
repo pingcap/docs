@@ -7,6 +7,10 @@ summary: Learn how to use SHOW TABLE REGIONS in TiDB.
 
 The `SHOW TABLE REGIONS` statement is used to show the Region information of a table in TiDB.
 
+> **Note:**
+>
+> This feature is not available on [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless) clusters.
+
 ## Syntax
 
 ```sql
