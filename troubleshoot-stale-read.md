@@ -100,6 +100,27 @@ The preceding output helps you determine:
 - Whether the apply index is too small to update safe-ts.
 - Whether the leader is sending a sufficiently updated resolved-ts when a follower peer exists.
 
+### Use logs to diagnose
+
+Every 10 seconds, TiKV checks its
+- min leader resolved-ts
+- min follower safe-ts
+- min follower resolved-ts
+
+If any of these ts is abnormally small, a log is printed.
+
+These logs are especially useful when you want to diagnose a historical problem that has already vanished.
+
+Examples:
+
+```
+[2023/08/29 16:48:18.118 +08:00] [INFO] [endpoint.rs:505] ["the max gap of leader resolved-ts is large"] [last_resolve_attempt="Some(LastAttempt { success: false, ts: TimeStamp(443888082736381953), reason: \"lock\", lock: Some(7480000000000000625F728000000002512B5C) })"] [duration_to_last_update_safe_ts=10648ms] [min_memory_lock=None] [txn_num=0] [lock_num=0] [min_lock=None] [safe_ts=443888117326544897] [gap=110705ms] [region_id=291]
+
+[2023/08/29 16:48:18.118 +08:00] [INFO] [endpoint.rs:526] ["the max gap of follower safe-ts is large"] [oldest_candidate=None] [latest_candidate=None] [applied_index=3276] [duration_to_last_consume_leader=11460ms] [resolved_ts=443888117117353985] [safe_ts=443888117117353985] [gap=111503ms] [region_id=273]
+
+[2023/08/29 16:48:18.118 +08:00] [INFO] [endpoint.rs:547] ["the max gap of follower resolved-ts is large; it's the same region that has the min safe-ts"]
+```
+
 ## Troubleshooting tips
 
 ### Handle slow transaction commit
