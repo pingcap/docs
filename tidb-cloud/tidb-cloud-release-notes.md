@@ -14,15 +14,15 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 - [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) supports dual region backup (beta) on Google Cloud.
 
-    TiDB Dedicated clusters hosted on Google Cloud work seamlessly with Google Cloud Storage. Similar to Google Cloud Storage, TiDB Dedicated supports dual-region pairing only within the same multi-region code as [Google dual-region storage](https://cloud.google.com/storage/docs/locations#location-dr). For example, in Asia, currently you must pair Tokyo and Osaka together for dual-region storage.
+    TiDB Dedicated clusters hosted on Google Cloud work seamlessly with Google Cloud Storage. Similar to the [Dual-regions](https://cloud.google.com/storage/docs/locations#location-dr) feature of Google Cloud Storage, the pair of regions that you use for the dual-region in TiDB Dedicated must be within the same multi-region. For example, Tokyo and Osaka are in the same multi-region `ASIA` so they can be used together for dual-region storage.
 
-    For more information, refer to [Back Up and Restore TiDB Dedicated Data](/tidb-cloud/backup-and-restore.md#turn-on-dual-region-backup-beta).
+    For more information, see [Back Up and Restore TiDB Dedicated Data](/tidb-cloud/backup-and-restore.md#turn-on-dual-region-backup-beta).
 
 - The feature of [streaming data change logs to Apache Kafka](/tidb-cloud/changefeed-sink-to-apache-kafka.md) is now in General Availability (GA).
 
-    After a successful 10-month beta trial, the feature of streaming data change logs to Apache Kafka becomes generally available. Streaming data from TiDB to a message queue is a common need for data integration scenarios. You can use Kafka sink to integrate with other data processing systems (such as Snowflake) or support business consumption.
+    After a successful 10-month beta trial, the feature of streaming data change logs from TiDB Cloud to Apache Kafka becomes generally available. Streaming data from TiDB to a message queue is a common need in data integration scenarios. You can use Kafka sink to integrate with other data processing systems (such as Snowflake) or support business consumption.
 
-    For more information, refer to [Changefeed Overview](/tidb-cloud/changefeed-overview.md).
+    For more information, see [Changefeed overview](/tidb-cloud/changefeed-overview.md).
 
 ## October 11, 2023
 
