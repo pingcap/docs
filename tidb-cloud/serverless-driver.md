@@ -107,7 +107,7 @@ export default async () => {
 }
 ```
 
-[Learn more about using TiDB Cloud serverless driver in Netlify Workers](/tidb-cloud/integrate-tidbcloud-with-netlify.md#use-the-edge-function).
+[Learn more about using TiDB Cloud serverless driver in Netlify](/tidb-cloud/integrate-tidbcloud-with-netlify.md#use-the-edge-function).
 
 </div>
 
