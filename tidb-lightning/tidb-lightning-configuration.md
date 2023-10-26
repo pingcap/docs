@@ -273,18 +273,6 @@ checksum = "required"
 # Options available for this field are the same as `post-restore`. However, the default value for this field is "optional".
 analyze = "optional"
 
-<<<<<<< HEAD
-# If the value is set to `true`, a level-1 compaction is performed
-# every time a table is imported.
-# The default value is `false`.
-level-1-compact = false
-# If the value is set to `true`, a full compaction on the whole
-# TiKV cluster is performed at the end of the import.
-# The default value is `false`.
-compact = false
-
-=======
->>>>>>> a98cba9c8f (clarify lightning post-restore description (#9433))
 # Configures the background periodic actions.
 # Supported units: h (hour), m (minute), s (second).
 [cron]
