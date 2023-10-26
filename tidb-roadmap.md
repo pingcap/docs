@@ -28,29 +28,22 @@ In the course of development, this roadmap is subject to change based on user ne
       <td>
         <ul>
           <li>
-            <b>GA of Partitioned Raft KV storage engine</b><br /><i
-              >PB-scale clusters, increased write velocity, faster scaling operations, and improved compaction stability</i
-            >
+            <b>Distributed execution framework</b><br /><i>
+            Distributed execution framework v7.2 introduced the foundation for executing background tasks (i.e., DDL, analyze, etc.) parallelized across compute nodes.  v7.4 introduces global sorting in distributed re-organization tasks (i.e., DDL, import) removes a ton of extra resource consumption in storage. Optionally, external shared storage can be leveraged for simplicity and cost savings.</i>
           </li>
           <br />
-          <li>
-            <b>Augmented replica read</b><br /><i>
-              Reduced cross-AZ data transfer costs in TiKV
-            </i>
-          </li>
           <br />
         </ul>
       </td>
       <td>
         <ul>
           <li>
-            <b>Performance optimization framework for all applicable background tasks, like DDL, TTL, and cluster analysis</b><br />
-            <i>This distributes the workload of these operations throughout the cluster, leading to accelerated performance and reduced resource utilization on individual nodes. This framework already applies to the <code>ADD INDEX</code> operation</i>
+            <b>Enhancements to performance and generalizability of plan cache</b><br />
           </li>
           <br />
           <li>
-            <b>GA of disaggregated storage and compute architecture and S3 shared storage in TiFlash</b><br />
-            <i>Enable more cost-effective and elastic HTAP</i>
+            <b>Dynamic node scaling via Distributed Execution Framework</b><br />
+            <i>Automatically add and remove nodes to meet resource costs of background tasks, while maintaining stability and performance expectations</i>
           </li>
           <br />
           <br />
@@ -62,6 +55,10 @@ In the course of development, this roadmap is subject to change based on user ne
             <b>Unlimited transaction size</b>
           </li>
           <br />
+          <li>
+            <b>Federated query</b>
+            <i>TiDB query planner support for multiple storage engines in HTAP use cases.</i>
+          </li>
           <br />
         </ul>
       </td>
@@ -79,6 +76,22 @@ In the course of development, this roadmap is subject to change based on user ne
               Control over how background tasks, such as imports, DDL, TTL, auto-analyze, and compactions, can affect foreground traffic
             </i>
           </li>
+          <br>
+          </br>
+          <li>
+            <b>Runaway query control</b><br /><i>
+              An operator-controlled way to greatly add performance stability to workloads with unexpectedly expensive queries
+            </i>
+          </li>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          <li>
+            <b>Disaggregation of Placement Driver (PD)</b>
+            <br /><i>Greater cluster scalability and resiliency</i>
+          </li>
+          <br />
         </ul>
       </td>
       <td>
@@ -87,55 +100,12 @@ In the course of development, this roadmap is subject to change based on user ne
             <b>Multi-tenancy</b>
             <br /><i>Resource isolation on top of resource control</i>
           </li>
-          <br />
-        </ul>
-      </td>
-      <td>
-        <ul>
-          <li>
-            <b>Enhanced TiDB memory management</b>
-          </li>
-        </ul>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <b>SQL</b>
-        <br /><i>Enhance functionality and compatibility</i>
-      </td>
-      <td>
-        <ul>
-          <li>
-            <b>MySQL 8.0 compatibility</b>
-          </li>
-          <br />
-                    <li>
-            <b>Unified SQL interface for import, Backup & Restore, and PITR</b>
-          </li>
-        </ul>
-      </td>
-      <td>
-        <ul>
-          <li>
-            <b>Cascades framework for optimizer</b>
-            <br /><i>Improved framework for query optimization, and make the optimizer more extensible and future-proof</i>
-          </li>
-        </ul>
-      </td>
-      <td>
-        <ul>
+          <br>
+          </br>
           <li>
             <b>Federated query</b>
+            <br /><i>TiDB query planner support for multiple storage engines in HTAP use cases.</i>
           </li>
-          <br />
-          <li>
-            <b>Full text search & GIS support</b>
-          </li>
-          <br />
-          <li>
-            <b>User-defined functions</b>
-          </li>
-          <br />
         </ul>
       </td>
     </tr>
@@ -147,32 +117,14 @@ In the course of development, this roadmap is subject to change based on user ne
       <td>
         <ul>
           <li>
-            <b>Distributed TiCDC single table replication</b>
-            <br /><i>
-              Dramatically improve TiDB-TiDB replication throughput
-            </i>
+            <b>TiCDC integrations with data warehouse / data lake systems </b>
+            <br />
           </li>
           <br />
           <li>
-            <b
-              >Automatic pause/resume DDL during upgrade</b
-            >
-            <br /><i>Ensure a smooth upgrade experience</i>
-          </li>
-          <br />
-          <li>
-            <b>TiCDC native integrations with big data systems</b>
-            <br /><i
-              >Such as Snowflake and Iceburg</i
-            >
-          </li>
-        </ul>
-      </td>
-      <td>
-        <ul>
-          <li>
-            <b>Multiple upstreams for TiCDC</b>
-            <br /><i>Support N:1 TiDB to TiCDC</i>
+            <b>TiDB node labels</b>
+            <br /><i>TiDB node labels Designate existing or newly added TiDB nodes for DDL operations. This isolates DDL work from the rest of the compute being used by online traffic
+</i>
           </li>
           <br />
         </ul>
@@ -180,16 +132,27 @@ In the course of development, this roadmap is subject to change based on user ne
       <td>
         <ul>
           <li>
-            <b>AI-indexing</b>
+            <b>SQL plan management</b>
+            <br /><i>Mechanism for controlling SQL plan regression</i>
+          </li>
+          <br />
+          <li>
+            <b>Index Advisor</b>
+            <br /><i>Recommend indexes to users based on workload, statistics, and execution plans</i>
+          </li>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          <li>
+            <b>Materialized views</b>
+            </br><i>Pre-computed results stored as a persistent data view to boost query performance</i>
           </li>
           <br />
           <li>
             <b>Heterogeneous database migration support</b>
           </li>
           <br />
-          <li>
-            <b>Re-invented AI-SQL performance advisor</b>
-          </li>
         </ul>
       </td>
     </tr>
@@ -210,10 +173,6 @@ In the course of development, this roadmap is subject to change based on user ne
             <br /><i>Grant and restrict access to specific columns</i>
           </li>
           <br />
-          <li>
-            <b>Database-level encryption</b>
-            <br /><i>At-rest encryption configured at database level</i>
-          </li>
         </ul>
       </td>
       <td>
@@ -226,6 +185,11 @@ In the course of development, this roadmap is subject to change based on user ne
           <li>
             <b>Unified TLS CA/Key rotation policy</b>
             <br /><i>Unified certificate management mechanism for all TiDB components</i>
+          </li>
+          <br></br>
+          <li>
+            <b>AWS FIPS support</b>
+            <br /><i>Enable FedRAMP compliance</i>
           </li>
         </ul>
       </td>
@@ -244,9 +208,6 @@ In the course of development, this roadmap is subject to change based on user ne
             <b>Enhanced data masking</b>
           </li>
           <br />
-          <li>
-            <b>Enhanced data lifecycle management</b>
-          </li>
         </ul>
       </td>
     </tr>
