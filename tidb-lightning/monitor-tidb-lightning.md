@@ -124,9 +124,7 @@ If any of the duration is too high, it indicates that the disk used by TiDB Ligh
 
 ## Monitoring metrics
 
-This section explains the monitoring metrics of `tidb-lightning`, if you need to monitor other metrics not covered by the default Grafana dashboard.
-
-### `tidb-lightning`
+This section explains the monitoring metrics of `tidb-lightning`.
 
 Metrics provided by `tidb-lightning` are listed under the namespace `lightning_*`.
 
