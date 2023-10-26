@@ -10,7 +10,7 @@ This statement updates the statistics that TiDB builds on tables and indexes. It
 
 TiDB will also automatically update its statistics over time as it discovers that they are inconsistent with its own estimates.
 
-Currently, TiDB collects statistical information in two ways: full collection (implemented using the `ANALYZE TABLE` statement) and incremental collection (implemented using the `ANALYZE INCREMENTAL TABLE` statement). For detailed usage of these two statements, refer to [introduction to statistics](/statistics.md)
+Currently, TiDB collects statistical information as a full collection by using the `ANALYZE TABLE` statement. For more information, see [Introduction to statistics](/statistics.md).
 
 ## Synopsis
 
@@ -99,8 +99,6 @@ TiDB differs from MySQL in **both** the statistics it collects and how it makes 
 
 + TiDB might not include very recently committed changes when running `ANALYZE TABLE`. After a batch-update of rows, you might need to `sleep(1)` before executing `ANALYZE TABLE` in order for the statistics update to reflect these changes. [#16570](https://github.com/pingcap/tidb/issues/16570).
 + `ANALYZE TABLE` takes significantly longer to execute in TiDB than MySQL.
-
-MySQL does not support the `ANALYZE INCREMENTAL TABLE` statement. TiDB supports incremental collection of statistics. For detailed usage, refer to [incremental collection](/statistics.md#incremental-collection).
 
 ## See also
 

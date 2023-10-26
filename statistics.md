@@ -84,13 +84,12 @@ Top-N values are values with the top N occurrences in a column or index. TiDB re
 
 ### Manual collection
 
-You can run the `ANALYZE` statement to collect statistics.
+Currently, TiDB collects statistical information as a full collection. You can execute the `ANALYZE TABLE` statement to collect statistics.
 
 > **Note:**
 >
-> The execution time of `ANALYZE TABLE` in TiDB is longer than that in MySQL or InnoDB. In InnoDB, only a small number of pages are sampled, while in TiDB a comprehensive set of statistics is completely rebuilt. Scripts that were written for MySQL may naively expect `ANALYZE TABLE` will be a short-lived operation.
-
-#### Full collection
+> - The execution time of `ANALYZE TABLE` in TiDB is longer than that in MySQL or InnoDB. In InnoDB, only a small number of pages are sampled, while in TiDB a comprehensive set of statistics is completely rebuilt. Scripts that were written for MySQL may naively expect `ANALYZE TABLE` will be a short-lived operation.
+> - Starting from v7.5.0, the [Fast Analyze feature (`tidb_enable_fast_analyze`)](https://docs.pingcap.com/tidb/v7.4/system-variables#tidb_enable_fast_analyze) and the [incremental collection feature](https://docs.pingcap.com/tidb/v7.4/statistics#incremental-collection) for statistics are deprecated.
 
 You can perform full collection using the following syntax.
 
@@ -134,7 +133,7 @@ The current sampling rate is calculated based on an adaptive algorithm. When you
 
 </CustomContent>
 
-##### Collect statistics on some columns
+#### Collect statistics on some columns
 
 In most cases, when executing SQL statements, the optimizer only uses statistics on some columns (such as columns in the `WHERE`, `JOIN`, `ORDER BY`, and `GROUP BY` statements). These columns are called `PREDICATE COLUMNS`.
 
@@ -266,7 +265,7 @@ SHOW COLUMN_STATS_USAGE WHERE db_name = 'test' AND table_name = 't' AND last_ana
 3 rows in set (0.00 sec)
 ```
 
-##### Collect statistics on indexes
+#### Collect statistics on indexes
 
 To collect statistics on all indexes in `IndexNameList` in `TableName`, use the following syntax:
 
@@ -282,7 +281,7 @@ When `IndexNameList` is empty, this syntax collects statistics on all indexes in
 >
 > To ensure that the statistical information before and after the collection is consistent, when `tidb_analyze_version` is `2`, this syntax collects statistics on the entire table (including all columns and indexes), instead of only on indexes.
 
-##### Collect statistics on partitions
+#### Collect statistics on partitions
 
 - To collect statistics on all partitions in `PartitionNameList` in `TableName`, use the following syntax:
 
@@ -312,7 +311,7 @@ When `IndexNameList` is empty, this syntax collects statistics on all indexes in
     ANALYZE TABLE TableName PARTITION PartitionNameList [COLUMNS ColumnNameList|PREDICATE COLUMNS|ALL COLUMNS] [WITH NUM BUCKETS|TOPN|CMSKETCH DEPTH|CMSKETCH WIDTH]|[WITH NUM SAMPLES|WITH FLOATNUM SAMPLERATE];
     ```
 
-##### Collect statistics of partitioned tables in dynamic pruning mode
+#### Collect statistics of partitioned tables in dynamic pruning mode
 
 When accessing partitioned tables in [dynamic pruning mode](/partitioned-table.md#dynamic-pruning-mode), TiDB collects table-level statistics, which is called GlobalStats. Currently, GlobalStats is aggregated from statistics of all partitions. In dynamic pruning mode, a statistics update of any partitioned table can trigger the GlobalStats to be updated.
 
@@ -328,33 +327,6 @@ When accessing partitioned tables in [dynamic pruning mode](/partitioned-table.m
 >     If statistics of all or some columns are missing for some partitions, TiDB skips these missing partition statistics when generating GlobalStats so the generation of GlobalStats is not affected.
 >
 > - In dynamic pruning mode, the Analyze configurations of partitions and tables should be the same. Therefore, if you specify the `COLUMNS` configuration following the `ANALYZE TABLE TableName PARTITION PartitionNameList` statement or the `OPTIONS` configuration following `WITH`, TiDB will ignore them and return a warning.
-
-#### Incremental collection
-
-To improve the speed of analysis after full collection, incremental collection could be used to analyze the newly added sections in monotonically non-decreasing columns such as time columns.
-
-> **Note:**
->
-> + Currently, the incremental collection is only provided for index.
-> + When using the incremental collection, you must ensure that only `INSERT` operations exist on the table, and that the newly inserted value on the index column is monotonically non-decreasing. Otherwise, the statistical information might be inaccurate, affecting the TiDB optimizer to select an appropriate execution plan.
-
-You can perform incremental collection using the following syntax.
-
-+ To incrementally collect statistics on index columns in all `IndexNameLists` in `TableName`:
-
-    {{< copyable "sql" >}}
-
-    ```sql
-    ANALYZE INCREMENTAL TABLE TableName INDEX [IndexNameList] [WITH NUM BUCKETS|TOPN|CMSKETCH DEPTH|CMSKETCH WIDTH]|[WITH NUM SAMPLES|WITH FLOATNUM SAMPLERATE];
-    ```
-
-+ To incrementally collect statistics on index columns for partitions in all `PartitionNameLists` in `TableName`:
-
-    {{< copyable "sql" >}}
-
-    ```sql
-    ANALYZE INCREMENTAL TABLE TableName PARTITION PartitionNameList INDEX [IndexNameList] [WITH NUM BUCKETS|TOPN|CMSKETCH DEPTH|CMSKETCH WIDTH]|[WITH NUM SAMPLES|WITH FLOATNUM SAMPLERATE];
-    ```
 
 ### Automatic update
 
