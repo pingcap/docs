@@ -3,7 +3,7 @@ title: TiDB Cloud Serverless Driver (Beta)
 summary: Learn how to connect to TiDB Serverless from serverless and edge environments over HTTP.
 ---
 
-# TiDB Cloud Serverless Driver (Beta) Overview
+# TiDB Cloud Serverless Driver (Beta)
 
 [TiDB Cloud serverless driver (Beta)](https://github.com/tidbcloud/serverless-js) for JavaScript allows you to connect to your TiDB Serverless cluster over HTTPS. It is particularly useful in edge environments where TCP connections are limited, such as [Vercel Edge Functions](https://vercel.com/docs/functions/edge-functions) and [Cloudflare Workers](https://workers.cloudflare.com/).
 
