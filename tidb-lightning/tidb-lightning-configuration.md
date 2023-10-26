@@ -244,19 +244,12 @@ max-allowed-packet = 67_108_864
 # Private key of this service. Default to copy of `security.key-path`
 # key-path = "/path/to/lightning.key"
 
-<<<<<<< HEAD
-# When data importing is complete, tidb-lightning can automatically perform
-# the Checksum, Compact and Analyze operations. It is recommended to leave
-# these as true in the production environment.
-# The execution order: Checksum -> Analyze
-=======
-# In the physical import mode, when data importing is complete, TiDB Lightning can
+# In the local backend and importer backend, when data importing is complete, TiDB Lightning can
 # automatically perform the Checksum and Analyze operations. It is recommended
 # to leave these as true in the production environment.
 # The execution order: Checksum -> Analyze.
-# Note that in the logical import mode, Checksum and Analyze is not needed, and they are always
+# Note that for tidb backend, Checksum and Analyze are not needed, and they are always
 # skipped in the actual operation.
->>>>>>> a98cba9c8f (clarify lightning post-restore description (#9433))
 [post-restore]
 # Specifies whether to perform `ADMIN CHECKSUM TABLE <table>` for each table to verify data integrity after importing.
 # The following options are available:
