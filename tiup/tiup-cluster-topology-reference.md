@@ -38,7 +38,7 @@ The `global` section corresponds to the cluster's global configuration and has t
 
 - `ssh_port`: Specifies the SSH port to connect to the target machine for operations. The default value is `22`.
 
-- `enable_tls`: Specifies whether to enable TLS for the cluster. After TLS is enabled, the generated TLS certificate must be used for connections between components or between the client and the component. **Once it is enabled, it cannot be disabled**. The default value is `false`.
+- `enable_tls`: Specifies whether to enable TLS for the cluster. After TLS is enabled, the generated TLS certificate must be used for connections between components or between the client and the component. The default value is `false`.
 
 - `deploy_dir`: The deployment directory of each component. The default value is `"deployed"`. Its application rules are as follows:
 
@@ -142,10 +142,10 @@ A `server_configs` configuration example is as follows:
 ```yaml
 server_configs:
   tidb:
-    run-ddl: true
     lease: "45s"
     split-table: true
     token-limit: 1000
+    instance.tidb_enable_ddl: true
   tikv:
     log-level: "info"
     readpool.unified.min-thread-count: 1
@@ -324,8 +324,6 @@ tikv_servers:
 - `ssh_port`: Specifies the SSH port to connect to the target machine for operations. If it is not specified, the `ssh_port` of the `global` section is used.
 
 - `tcp_port`: The port of the TiFlash TCP service. The default value is `9000`.
-
-- `http_port`: The port of the TiFlash HTTP service. The default value is `8123`.
 
 - `flash_service_port`: The port via which TiFlash provides services. TiDB reads data from TiFlash via this port. The default value is `3930`.
 
@@ -513,6 +511,8 @@ drainer_servers:
 
 - `resource_control`: Resource control for the service. If this field is configured, the field content is merged with the `resource_control` content in `global` (if the two fields overlap, the content of this field takes effect). Then, a systemd configuration file is generated and sent to the machine specified in `host`. The configuration rules of `resource_control` are the same as the `resource_control` content in `global`.
 
+- `ticdc_cluster_id`: Specifies the TiCDC cluster ID corresponding to the service. If this field is not specified, the service joins the default TiCDC cluster. This field only takes effect in TiDB v6.3.0 or later versions.
+
 For the above fields, you cannot modify these configured fields after the deployment:
 
 - `host`
@@ -522,6 +522,7 @@ For the above fields, you cannot modify these configured fields after the deploy
 - `log_dir`
 - `arch`
 - `os`
+- `ticdc_cluster_id`
 
 A `cdc_servers` configuration example is as follows:
 
@@ -638,7 +639,7 @@ tispark_workers:
 
 - `host`: Specifies the machine to which the monitoring services are deployed. The field value is an IP address and is mandatory.
 
-- `ng_port`: Specifies the SSH port connecting to NGMonitoring. Introduced in TiUP v1.7.0, this field supports [Continuous Profiling](/dashboard/dashboard-profiling.md) and Top SQL in TiDB 5.3.0 and above.
+- `ng_port`: Specifies the port that NgMonitoring listens to. Introduced in TiUP v1.7.0, this field supports [Continuous Profiling](/dashboard/dashboard-profiling.md) and [Top SQL](/dashboard/top-sql.md). The default value is `12020`.
 
 - `ssh_port`: Specifies the SSH port to connect to the target machine for operations. If it is not specified, the `ssh_port` of the `global` section is used.
 

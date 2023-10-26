@@ -35,7 +35,7 @@ TiDB version: 5.2.2
     + TiCDC
 
         - Reduce the default value of the Kafka sink configuration item `MaxMessageBytes` from 64 MB to 1 MB to fix the issue that large messages are rejected by the Kafka Broker [#3104](https://github.com/pingcap/tiflow/pull/3104)
-        - Reduce memory usage in the relpication pipeline [#2553](https://github.com/pingcap/tiflow/issues/2553)[#3037](https://github.com/pingcap/tiflow/pull/3037) [#2726](https://github.com/pingcap/tiflow/pull/2726)
+        - Reduce memory usage in the relpication pipeline [#2553](https://github.com/pingcap/tiflow/issues/2553) [#3037](https://github.com/pingcap/tiflow/pull/3037) [#2726](https://github.com/pingcap/tiflow/pull/2726)
         - Optimize monitoring items and alert rules to improve observability of synchronous links, memory GC, and stock data scanning processes [#2735](https://github.com/pingcap/tiflow/pull/2735) [#1606](https://github.com/pingcap/tiflow/issues/1606) [#3000](https://github.com/pingcap/tiflow/pull/3000) [#2985](https://github.com/pingcap/tiflow/issues/2985) [#2156](https://github.com/pingcap/tiflow/issues/2156)
         - When the sync task status is normal, no more historical error messages are displayed to avoid misleading users [#2242](https://github.com/pingcap/tiflow/issues/2242)
 
@@ -55,7 +55,7 @@ TiDB version: 5.2.2
     - Fix the issue that auto analyze might be triggered out of the specified time when a new index is added [#28698](https://github.com/pingcap/tidb/issues/28698)
     - Fix a bug that setting any session variable invalidates `tidb_snapshot` [#28683](https://github.com/pingcap/tidb/pull/28683)
     - Fix a bug that BR is not working for clusters with many missing-peer regions [#27534](https://github.com/pingcap/tidb/issues/27534)
-    - Fix  the unexpected error like `tidb_cast to Int32 is not supported` when the unsupported `cast` is pushed down to TiFlash [#23907](https://github.com/pingcap/tidb/issues/23907)
+    - Fix the unexpected error like `tidb_cast to Int32 is not supported` when the unsupported `cast` is pushed down to TiFlash [#23907](https://github.com/pingcap/tidb/issues/23907)
     - Fix the issue that `DECIMAL overflow` is missing in the `%s value is out of range in '%s'`error message  [#27964](https://github.com/pingcap/tidb/issues/27964)
     - Fix a bug that the availability detection of MPP node does not work in some corner cases [#3118](https://github.com/pingcap/tics/issues/3118)
     - Fix the `DATA RACE` issue when assigning `MPP task ID` [#27952](https://github.com/pingcap/tidb/issues/27952)
@@ -94,7 +94,7 @@ TiDB version: 5.2.2
     - Fix the issue that the scatter range scheduler cannot schedule empty regions [#4118](https://github.com/tikv/pd/pull/4118)
     - Fix the issue that the key manager cost too much CPU [#4071](https://github.com/tikv/pd/issues/4071)
     - Fix the data race issue that might occur when setting configurations of hot region scheduler [#4159](https://github.com/tikv/pd/issues/4159)
-    - Fix slow leader election caused by stuck region syncer[#3936](https://github.com/tikv/pd/issues/3936)
+    - Fix slow leader election caused by stuck region syncer [#3936](https://github.com/tikv/pd/issues/3936)
 
 + TiFlash
 
@@ -115,4 +115,4 @@ TiDB version: 5.2.2
 
     + TiDB Binlog
 
-        - Fix the issue that when most tables are filtered out, checkpoint can not be updated under some special load [#1075](https://github.com/pingcap/tidb-binlog/pull/1075)
+        - Fix the issue that when most tables are filtered out, checkpoint cannot be updated under some special load [#1075](https://github.com/pingcap/tidb-binlog/pull/1075)

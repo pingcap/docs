@@ -10,7 +10,7 @@ This document introduces the common errors you might encounter when using TiCDC,
 
 > **Note:**
 >
-> In this document, the PD address specified in `cdc cli` commands is `--pd=http://10.0.10.25:2379`. When you use the command, replace the address with your actual PD address.
+> In this document, the server address specified in `cdc cli` commands is `server=http://127.0.0.1:8300`. When you use the command, replace the address with your actual PD address.
 
 ## TiCDC replication interruptions
 
@@ -28,7 +28,7 @@ You can know whether the replication task is stopped manually by executing `cdc 
 {{< copyable "shell-regular" >}}
 
 ```shell
-cdc cli changefeed query --pd=http://10.0.10.25:2379 --changefeed-id 28c43ffc-2316-4f4f-a70b-d1a7c59ba79f
+cdc cli changefeed query --server=http://127.0.0.1:8300 --changefeed-id 28c43ffc-2316-4f4f-a70b-d1a7c59ba79f
 ```
 
 In the output of the above command, `admin-job-type` shows the state of this replication task:
@@ -87,53 +87,19 @@ Warning: Unable to load '/usr/share/zoneinfo/zone.tab' as time zone. Skipping it
 Warning: Unable to load '/usr/share/zoneinfo/zone1970.tab' as time zone. Skipping it.
 ```
 
-If the downstream is a special MySQL environment (a public cloud RDS or some MySQL derivative versions) and importing the time zone using the above method fails, you need to specify the MySQL time zone of the downstream using the `time-zone` parameter in `sink-uri`. You can first query the time zone used by MySQL:
+If the downstream is a special MySQL environment (a public cloud RDS or some MySQL derivative versions) and importing the time zone using the preceding method fails, you can use the default time zone of the downstream by setting `time-zone` to an empty value, such as `time-zone=""`.
 
-1. Query the time zone used by MySQL:
-
-    {{< copyable "sql" >}}
-
-    ```sql
-    show variables like '%time_zone%';
-    ```
-
-    ```
-    +------------------+--------+
-    | Variable_name    | Value  |
-    +------------------+--------+
-    | system_time_zone | CST    |
-    | time_zone        | SYSTEM |
-    +------------------+--------+
-    ```
-
-2. Specify the time zone when you create the replication task and create the TiCDC service:
-
-    {{< copyable "shell-regular" >}}
-
-    ```shell
-    cdc cli changefeed create --sink-uri="mysql://root@127.0.0.1:3306/?time-zone=CST" --pd=http://10.0.10.25:2379
-    ```
-
-    > **Note:**
-    >
-    > CST might be an abbreviation for the following four different time zones:
-    >
-    > - Central Standard Time (USA) UT-6:00
-    > - Central Standard Time (Australia) UT+9:30
-    > - China Standard Time UT+8:00
-    > - Cuba Standard Time UT-4:00
-    >
-    > In China, CST usually stands for China Standard Time.
+When using time zones in TiCDC, it is recommended to explicitly specify the time zone, such as `time-zone="Asia/Shanghai"`. Also, make sure that the `tz` specified in TiCDC server configurations and the `time-zone` specified in Sink URI are consistent with the time zone configuration of the downstream database. This prevents data inconsistency caused by inconsistent time zones.
 
 ## How do I handle the incompatibility issue of configuration files caused by TiCDC upgrade?
 
-Refer to [Notes for compatibility](/ticdc/manage-ticdc.md#notes-for-compatibility).
+Refer to [Notes for compatibility](/ticdc/ticdc-compatibility.md).
 
-## The `start-ts` timestamp of the TiCDC task is quite different from the current time. During the execution of this task, replication is interrupted and an error `[CDC:ErrBufferReachLimit]` occurs
+## The `start-ts` timestamp of the TiCDC task is quite different from the current time. During the execution of this task, replication is interrupted and an error `[CDC:ErrBufferReachLimit]` occurs. What should I do?
 
 Since v4.0.9, you can try to enable the unified sorter feature in your replication task, or use the BR tool for an incremental backup and restore, and then start the TiCDC replication task from a new time.
 
-## When the downstream of a changefeed is a database similar to MySQL and TiCDC executes a time-consuming DDL statement, all other changefeeds are blocked. How should I handle the issue?
+## When the downstream of a changefeed is a database similar to MySQL and TiCDC executes a time-consuming DDL statement, all other changefeeds are blocked. What should I do?
 
 1. Pause the execution of the changefeed that contains the time-consuming DDL statement. Then you can see that other changefeeds are no longer blocked.
 2. Search for the `apply job` field in the TiCDC log and confirm the `start-ts` of the time-consuming DDL statement.
@@ -141,38 +107,7 @@ Since v4.0.9, you can try to enable the unified sorter feature in your replicati
 4. Modify the changefeed configuration and add the above `start-ts` to the `ignore-txn-start-ts` configuration item.
 5. Resume the paused changefeed.
 
-## After I upgrade the TiCDC cluster to v4.0.8, the `[CDC:ErrKafkaInvalidConfig]Canal requires old value to be enabled` error is reported when I execute a changefeed
-
-Since v4.0.8, if the `canal-json`, `canal` or `maxwell` protocol is used for output in a changefeed, TiCDC enables the old value feature automatically. However, if you have upgraded TiCDC from an earlier version to v4.0.8 or later, when the changefeed uses the `canal-json`, `canal` or `maxwell` protocol and the old value feature is disabled, this error is reported.
-
-To fix the error, take the following steps:
-
-1. Set the value of `enable-old-value` in the changefeed configuration file to `true`.
-2. Execute `cdc cli changefeed pause` to pause the replication task.
-
-    {{< copyable "shell-regular" >}}
-
-    ```shell
-    cdc cli changefeed pause -c test-cf --pd=http://10.0.10.25:2379
-    ```
-
-3. Execute `cdc cli changefeed update` to update the original changefeed configuration.
-
-    {{< copyable "shell-regular" >}}
-
-    ```shell
-    cdc cli changefeed update -c test-cf --pd=http://10.0.10.25:2379 --sink-uri="mysql://127.0.0.1:3306/?max-txn-row=20&worker-number=8" --config=changefeed.toml
-    ```
-
-4. Execute `cdc cli changfeed resume` to resume the replication task.
-
-    {{< copyable "shell-regular" >}}
-
-    ```shell
-    cdc cli changefeed resume -c test-cf --pd=http://10.0.10.25:2379
-    ```
-
-## The `[tikv:9006]GC life time is shorter than transaction duration, transaction starts at xx, GC safe point is yy` error is reported when I use TiCDC to create a changefeed
+## The `[tikv:9006]GC life time is shorter than transaction duration, transaction starts at xx, GC safe point is yy` error is reported when I use TiCDC to create a changefeed. What should I do?
 
 You need to run the `pd-ctl service-gc-safepoint --pd <pd-addrs>` command to query the current GC safepoint and service GC safepoint. If the GC safepoint is smaller than the `start-ts` of the TiCDC replication task (changefeed), you can directly add the `--disable-gc-check` option to the `cdc cli create changefeed` command to create a changefeed.
 
@@ -181,7 +116,7 @@ If the result of `pd-ctl service-gc-safepoint --pd <pd-addrs>` does not have `gc
 - If your PD version is v4.0.8 or earlier, refer to [PD issue #3128](https://github.com/tikv/pd/issues/3128) for details.
 - If your PD is upgraded from v4.0.8 or an earlier version to a later version, refer to [PD issue #3366](https://github.com/tikv/pd/issues/3366) for details.
 
-## When I use TiCDC to replicate messages to Kafka, Kafka returns the `Message was too large` error
+## When I use TiCDC to replicate messages to Kafka, Kafka returns the `Message was too large` error. Why?
 
 For TiCDC v4.0.8 or earlier versions, you cannot effectively control the size of the message output to Kafka only by configuring the `max-message-bytes` setting for Kafka in the Sink URI. To control the message size, you also need to increase the limit on the bytes of messages to be received by Kafka. To add such a limit, add the following configuration to the Kafka server configuration.
 
@@ -201,14 +136,14 @@ If a DDL statement fails to execute, the replication task (changefeed) automatic
 {{< copyable "shell-regular" >}}
 
 ```shell
-cdc cli changefeed resume -c test-cf --pd=http://10.0.10.25:2379
+cdc cli changefeed resume -c test-cf --server=http://127.0.0.1:8300
 ```
 
-If you want to skip this DDL statement that goes wrong, set the start-ts of the changefeed to the checkpoint-ts (the timestamp at which the DDL statement goes wrong) plus one. For example, if the checkpoint-ts at which the DDL statement goes wrong is `415241823337054209`, execute the following commands to skip this DDL statement:
+If you want to skip this DDL statement that goes wrong, set the start-ts of the changefeed to the checkpoint-ts (the timestamp at which the DDL statement goes wrong) plus one, and then run the `cdc cli changefeed create` command to create a new changefeed task. For example, if the checkpoint-ts at which the DDL statement goes wrong is `415241823337054209`, run the following commands to skip this DDL statement:
 
 {{< copyable "shell-regular" >}}
 
 ```shell
-cdc cli changefeed update -c test-cf --pd=http://10.0.10.25:2379 --start-ts 415241823337054210
-cdc cli changefeed resume -c test-cf --pd=http://10.0.10.25:2379
+cdc cli changefeed remove --server=http://127.0.0.1:8300 --changefeed-id simple-replication-task
+cdc cli changefeed create --server=http://127.0.0.1:8300 --sink-uri="mysql://root:123456@127.0.0.1:3306/" --changefeed-id="simple-replication-task" --sort-engine="unified" --start-ts 415241823337054210
 ```

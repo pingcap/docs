@@ -130,9 +130,9 @@ You can also specify the expression index when you create the table:
 CREATE TABLE t1(col1 char(10), col2 char(10), index((lower(col1))));
 ```
 
-> **Note**
+> **Note:**
 >
-> The expression in an expression index must be surrounded by '(' and ')'. Otherwise, a syntax error is reported.
+> The expression in an expression index must be surrounded by `(` and `)`. Otherwise, a syntax error is reported.
 
 You can drop an expression index in the same way as dropping an ordinary index:
 
@@ -142,29 +142,27 @@ You can drop an expression index in the same way as dropping an ordinary index:
 DROP INDEX idx1 ON t1;
 ```
 
+Expression index involves various kinds of expressions. To ensure correctness, only some fully tested functions are allowed for creating an expression index. This means that only these functions are allowed in expressions in a production environment. You can get these functions by querying the `tidb_allow_function_for_expression_index` variable. Currently, the allowed functions are as follows:
+
+```
+json_array, json_array_append, json_array_insert, json_contains, json_contains_path, json_depth, json_extract, json_insert, json_keys, json_length, json_merge_patch, json_merge_preserve, json_object, json_pretty, json_quote, json_remove, json_replace, json_search, json_set, json_storage_size, json_type, json_unquote, json_valid, lower, md5, reverse, tidb_shard, upper, vitess_hash
+```
+
+For the functions that are not included in the above list, those functions are not fully tested and not recommended for a production environment, which can be seen as experimental. Other expressions such as operators, `cast`, and `case when` are also seen as experimental and not recommended for production.
+
+<CustomContent platform="tidb">
+
+If you still want to use those expressions, you can make the following configuration in the [TiDB configuration file](/tidb-configuration-file.md#allow-expression-index-new-in-v400):
+
+{{< copyable "sql" >}}
+
+```sql
+allow-expression-index = true
+```
+
+</CustomContent>
+
 > **Note:**
->
-> Expression index involves various kinds of expressions. To ensure correctness, only some fully tested functions are allowed for creating an expression index. This means that only these functions are allowed in expressions in a production environment. You can get these functions by querying `tidb_allow_function_for_expression_index` variable. In future versions, more functions might be added to the list.
->
-> {{< copyable "sql" >}}
->
-> ```sql
-> mysql> select @@tidb_allow_function_for_expression_index;
-> +--------------------------------------------+
-> | @@tidb_allow_function_for_expression_index |
-> +--------------------------------------------+
-> | lower, md5, reverse, upper, vitess_hash    |
-> +--------------------------------------------+
-> 1 row in set (0.00 sec)
-> ```
->
-> For the functions that are not included in the returned result above, those functions are not fully tested and not recommended for a production environment, which can be seen as experimental. Other expressions such as operators, `cast`, and `case when` are also seen as experimental and not recommended for production. However, if you still want to use those expressions, you can make the following configuration in the [TiDB configuration file](/tidb-configuration-file.md#allow-expression-index-new-in-v400):
->
-> {{< copyable "sql" >}}
->
-> ```sql
-> allow-expression-index = true
-> ```
 >
 > An expression index cannot be created on a primary key.
 >
@@ -234,6 +232,119 @@ Therefore, when the query performance outweighs the insert and update performanc
 
 Expression indexes have the same syntax and limitations as in MySQL. They are implemented by creating indexes on generated virtual columns that are invisible, so the supported expressions inherit all [limitations of virtual generated columns](/generated-columns.md#limitations).
 
+## Multi-valued indexes
+
+Multi-valued indexes are a kind of secondary index defined on an array column. In a normal index, one index record corresponds to one data record (1:1). In a multi-valued index, multiple index records correspond to one data record (N:1). Multi-valued indexes are used to index JSON arrays. For example, a multi-valued index defined on the `zipcode` field will generate one index record for each element in the `zipcode` array.
+
+```json
+{
+    "user":"Bob",
+    "user_id":31,
+    "zipcode":[94477,94536]
+}
+```
+
+### Create multi-valued indexes
+
+You can create multi-valued indexes by using the `CAST(... AS ... ARRAY)` expression in the index definition, as creating an expression index.
+
+```sql
+mysql> CREATE TABLE customers (
+    id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    name CHAR(10),
+    custinfo JSON,
+    INDEX zips((CAST(custinfo->'$.zipcode' AS UNSIGNED ARRAY)))
+);
+```
+
+You can define a multi-valued index as a unique index.
+
+```sql
+mysql> CREATE TABLE customers (
+    id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    name CHAR(10),
+    custinfo JSON,
+    UNIQUE INDEX zips( (CAST(custinfo->'$.zipcode' AS UNSIGNED ARRAY)))
+);
+```
+
+When a multi-valued index is defined as a unique index, an error is reported if you try to insert duplicate data.
+
+```sql
+mysql> INSERT INTO customers VALUES (1, 'pingcap', '{"zipcode": [1,2]}');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO customers VALUES (1, 'pingcap', '{"zipcode": [2,3]}');
+ERROR 1062 (23000): Duplicate entry '2' for key 'customers.zips'
+```
+
+The same record can have duplicate values, but when different records have duplicate values, an error is reported.
+
+```sql
+-- Insert succeeded
+mysql> INSERT INTO t1 VALUES('[1,1,2]');
+mysql> INSERT INTO t1 VALUES('[3,3,3,4,4,4]');
+
+-- Insert failed
+mysql> INSERT INTO t1 VALUES('[1,2]');
+mysql> INSERT INTO t1 VALUES('[2,3]');
+```
+
+You can also define a multi-valued index as a composite index:
+
+```sql
+mysql> CREATE TABLE customers (
+    id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    name CHAR(10),
+    custinfo JSON,
+    INDEX zips(name, (CAST(custinfo->'$.zipcode' AS UNSIGNED ARRAY)))
+);
+```
+
+When a multi-valued index is defined as a composite index, the multi-valued part can appear in any position, but only once.
+
+```sql
+mysql> CREATE TABLE customers (
+    id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    name CHAR(10),
+    custinfo JSON,
+    INDEX zips(name, (CAST(custinfo->'$.zipcode' AS UNSIGNED ARRAY)), (CAST(custinfo->'$.zipcode' AS UNSIGNED ARRAY)))
+);
+ERROR 1235 (42000): This version of TiDB doesn't yet support 'more than one multi-valued key part per index'.
+```
+
+The written data must exactly match the type defined by the multi-valued index; otherwise, the data write fails:
+
+```sql
+-- All elements in the zipcode field must be the UNSIGNED type.
+mysql> INSERT INTO customers VALUES (1, 'pingcap', '{"zipcode": [-1]}');
+ERROR 3752 (HY000): Value is out of range for expression index 'zips' at row 1
+
+mysql> INSERT INTO customers VALUES (1, 'pingcap', '{"zipcode": ["1"]}'); -- Incompatible with MySQL
+ERROR 3903 (HY000): Invalid JSON value for CAST for expression index 'zips'
+
+mysql> INSERT INTO customers VALUES (1, 'pingcap', '{"zipcode": [1]}');
+Query OK, 1 row affected (0.00 sec)
+```
+
+### Use multi-valued indexes
+
+See [Index Selection - Use multi-valued indexes](/choose-index.md#use-multi-valued-indexes) for more details.
+
+### Limitations
+
+- For an empty JSON array, no corresponding index record is generated.
+- The target type in `CAST(... AS ... ARRAY)` cannot be any of `BINARY`, `JSON`, `YEAR`, `FLOAT`, and `DECIMAL`. The source type must be JSON.
+- You cannot use multi-valued indexes for sorting.
+- You can only create multi-valued indexes on a JSON array.
+- A multi-valued index cannot be a primary key or a foreign key.
+- The extra storage space used by a multi-valued index = the average number of array elements per row * the space used by a normal secondary index.
+- Compared with normal indexes, DML operations will modify more index records for multi-valued indexes, so multi-valued indexes will have a greater performance impact than normal indexes.
+- Because multi-valued indexes are a special type of expression index, multi-valued indexes have the same limitations as expression indexes.
+- If a table uses multi-valued indexes, you cannot back up, replicate, or import the table using BR, TiCDC, or TiDB Lightning to a TiDB cluster earlier than v6.6.0.
+- Due to the lack of collected statistics for multi-valued indexes, the selection rate of multi-valued indexes is currently based on fixed assumptions. When a query hits multiple multi-valued indexes, TiDB might not be able to select the optimal index. In such cases, it is recommended to use the [`use_index_merge`](/optimizer-hints.md#use_index_merget1_name-idx1_name--idx2_name-) optimizer hint to enforce a fixed execution plan.
+- For a query with complex conditions, TiDB might not be able to select multi-valued indexes. For information on the condition patterns supported by multi-valued indexes, refer to [Use multi-valued indexes](/choose-index.md#use-multi-valued-indexes).
+
 ## Invisible index
 
 Invisible indexes are indexes that are ignored by the query optimizer:
@@ -247,15 +358,16 @@ For details, see [`ALTER INDEX`](/sql-statements/sql-statement-alter-index.md).
 
 ## Associated system variables
 
-The system variables associated with the `CREATE INDEX` statement are `tidb_ddl_reorg_worker_cnt`, `tidb_ddl_reorg_batch_size`, `tidb_enable_auto_increment_in_generated`, and `tidb_ddl_reorg_priority`. Refer to [system variables](/system-variables.md#tidb_ddl_reorg_worker_cnt) for details.
+The system variables associated with the `CREATE INDEX` statement are `tidb_ddl_enable_fast_reorg`, `tidb_ddl_reorg_worker_cnt`, `tidb_ddl_reorg_batch_size`, `tidb_enable_auto_increment_in_generated`, and `tidb_ddl_reorg_priority`. Refer to [system variables](/system-variables.md#tidb_ddl_reorg_worker_cnt) for details.
 
 ## MySQL compatibility
 
-* `FULLTEXT`, `HASH` and `SPATIAL` indexes are not supported.
+* TiDB supports parsing the `FULLTEXT` and `SPATIAL` syntax but does not support using the `FULLTEXT`, `HASH`, and `SPATIAL` indexes.
 * Descending indexes are not supported (similar to MySQL 5.7).
 * Adding the primary key of the `CLUSTERED` type to a table is not supported. For more details about the primary key of the `CLUSTERED` type, refer to [clustered index](/clustered-indexes.md).
 * Expression indexes are incompatible with views. When a query is executed using a view, the expression index cannot be used at the same time.
-* Expression indexes have compatibility issues with bindings. When the expression of an expression index has a constant, the binding created for the corresponding query expands its scope. For example, suppose that the expression in the expression index is  `a+1`, and the corresponding query condition is  `a+1 > 2`. In this case, the created binding is `a+? > ?`, which means that the query with the condition such as `a+2 > 2` is also forced to use the expression index and results in a poor execution plan. In addition, this also affects the baseline capturing and baseline evolution in SQL Plan Management (SPM).
+* Expression indexes have compatibility issues with bindings. When the expression of an expression index has a constant, the binding created for the corresponding query expands its scope. For example, suppose that the expression in the expression index is `a+1`, and the corresponding query condition is `a+1 > 2`. In this case, the created binding is `a+? > ?`, which means that the query with the condition such as `a+2 > 2` is also forced to use the expression index and results in a poor execution plan. In addition, this also affects the baseline capturing and baseline evolution in SQL Plan Management (SPM).
+* The data written with multi-valued indexes must exactly match the defined data type. Otherwise, data writes fail. For details, see [create multi-valued indexes](/sql-statements/sql-statement-create-index.md#create-multi-valued-indexes).
 
 ## See also
 

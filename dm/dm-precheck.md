@@ -53,8 +53,13 @@ Regardless of the migration mode you choose, the precheck always includes the fo
 - Compatibility of the upstream MySQL table schema
 
     - Check whether the upstream tables have foreign keys, which are not supported by TiDB. A warning is returned if a foreign key is found in the precheck.
-    - (Mandatory) Check whether there are compatibility differences in character sets. For more information, see [TiDB Supported Character Sets](/character-set-and-collation.md).
-    - (Mandatory) Check whether the upstream tables have primary key constraints or unique key constraints (introduced from v1.0.7)
+    - Check whether the upstream tables use character sets that are incompatible with TiDB. For more information, see [TiDB Supported Character Sets](/character-set-and-collation.md).
+    - Check whether the upstream tables have primary key constraints or unique key constraints (introduced from v1.0.7).
+
+    > **Warning:**
+    >
+    > - When the upstream uses incompatible character sets, you can still continue the replication by creating tables with the utf8mb4 character set in the downstream. However, this practice is not recommended. You are advised to replace the incompatible character set used by the upstream with another character set that is supported in downstream.
+    > - When the upstream tables have no primary key constraints or unique key constraints, the same row of data might be replicated multiple times to the downstream, which might also affect the performance of replication. In a production environment, it is recommended that you specify primary key constraints or unique key constraints for the upstream table.
 
 ### Check items for full data migration
 
@@ -85,6 +90,30 @@ For the full data migration mode (`task-mode: full`), in addition to the [common
 
     - If sharded tables have auto-increment primary keys, the precheck returns a warning. If there are conflicts in auto-increment primary keys, see [Handle conflicts of auto-increment primary key](/dm/shard-merge-best-practices.md#handle-conflicts-of-auto-increment-primary-key) for solutions.
 
+#### Check items for physical import
+
+If you set `import-mode: "physical"` in the task configuration, the following check items are added to ensure that [Physical Import](/tidb-lightning/tidb-lightning-physical-import-mode.md) runs normally. After following the prompts, if you find it difficult to meet the requirements of these check items, you can try to use the [logical import mode](/tidb-lightning/tidb-lightning-logical-import-mode.md) to import data.
+
+* Empty Regions in the downstream database
+
+    - If the number of empty Regions is greater than `max(1000, 3 * the number of tables)` (the larger of "1000" and "3 times the number of tables"), the precheck returns a warning. You can adjust related PD parameters to speed up the merging of empty Regions and wait for the number of empty Regions to decrease. See [PD Scheduling Best Practices - Slow Region Merge](/best-practices/pd-scheduling-best-practices.md#region-merge-is-slow).
+
+* Region distribution in the downstream database
+
+    - Checks the number of Regions on different TiKV nodes. Assuming that the TiKV node with the lowest Region count has `a` Regions and the TiKV node with the highest Region count has `b` Regions, if `a / b` is less than 0.75, the precheck returns a warning. You can adjust related PD parameters to speed up the scheduling of Regions and wait for the number of Regions to change. See [PD Scheduling Best Practices - Leader/Region distribution is not balanced](/best-practices/pd-scheduling-best-practices.md#leadersregions-are-not-evenly-distributed).
+
+* The versions of TiDB, PD, and TiKV in the downstream database
+
+    - Physical import must call the interfaces of TiDB, PD, and TiKV. If the versions are not compatible, the precheck returns an error.
+
+* The free space of the downstream database
+
+    - Estimates the total sizes of all tables in the allow list in the upstream database (`source_size`). If the free space of the downstream database is less than `source_size`, the precheck returns an error. If the free space of the downstream database is less than the number of TiKV replicas \* `source_size` \* 2, the precheck returns a warning.
+
+* Whether the downstream database is running tasks that are incompatible with physical import
+
+    - Currently, physical import is incompatible with [TiCDC](/ticdc/ticdc-overview.md) and [PITR](/br/br-pitr-guide.md) tasks. If these tasks are running in the downstream database, the precheck returns an error.
+
 ### Check items for incremental data migration
 
 For the incremental data migration mode (`task-mode: incremental`), in addition to the [common check items](#common-check-items), the precheck also includes the following check items:
@@ -94,9 +123,9 @@ For the incremental data migration mode (`task-mode: incremental`), in addition 
     - REPLICATION CLIENT permission
     - REPLICATION SLAVE permission
 
-* (Mandatory) Database primary-secondary configuration
+* Database primary-secondary configuration
 
-    - The database ID `server_id` of the upstream database must be specified (GTID is recommended for non-AWS Aurora environments).
+    - To avoid primary-secondary replication failures, it is recommended that you specify the database ID `server_id` for the upstream database (GTID is recommended for non-AWS Aurora environments).
 
 * (Mandatory) MySQL binlog configuration
 
@@ -125,6 +154,12 @@ Prechecks can find potential risks in your environments. It is not recommended t
 | `table_schema`          | Checks the compatibility of the table schemas in the upstream MySQL tables. |
 | `schema_of_shard_tables`| Checks the consistency of the table schemas in the upstream MySQL multi-instance shards. |
 | `auto_increment_ID`     | Checks whether the auto-increment primary key conflicts in the upstream MySQL multi-instance shards. |
+|`online_ddl`| Checks whether the upstream is in the process of [online-DDL](/dm/feature-online-ddl.md). |
+| `empty_region` | Checks the number of empty Regions in the downstream database for physical import. |
+| `region_distribution` | Checks the distribution of Regions in the downstream database for physical import. |
+| `downstream_version` | Checks the versions of TiDB, PD, and TiKV in the downstream database. |
+| `free_space` | Checks the free space of the downstream database. |
+| `downstream_mutex_features` | Checks whether the downstream database is running tasks that are incompatible with physical import. |
 
 > **Note:**
 >

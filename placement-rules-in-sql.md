@@ -9,15 +9,17 @@ Placement Rules in SQL is a feature that enables you to specify where data is st
 
 > **Note:**
 >
-> The implementation of *Placement Rules in SQL* relies on the *placement rules feature* of PD. For details, refer to [Configure Placement Rules](/configure-placement-rules.md). In the context of Placement Rules in SQL, *placement rules* might refer to *placement policies* attached to other objects, or to rules that are sent from TiDB to PD.
+> - This feature is not available on [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless) clusters.
+> - The implementation of *Placement Rules in SQL* relies on the *placement rules feature* of PD. For details, refer to [Configure Placement Rules](https://docs.pingcap.com/zh/tidb/stable/configure-placement-rules). In the context of Placement Rules in SQL, *placement rules* might refer to *placement policies* attached to other objects, or to rules that are sent from TiDB to PD.
 
 The detailed user scenarios are as follows:
 
 - Merge multiple databases of different applications to reduce the cost on database maintenance
 - Increase replica count for important data to improve the application availability and data reliability
-- Store new data into SSDs and store old data into HHDs to lower the cost on data archiving and storage
+- Store new data into NVMe storage and store old data into SSDs to lower the cost on data archiving and storage
 - Schedule the leaders of hotspot data to high-performance TiKV instances
 - Separate cold data to lower-cost storage mediums to improve cost efficiency
+- Support the physical isolation of computing resources between different users, which meets the isolation requirements of different users in a cluster, and the isolation requirements of CPU, I/O, memory, and other resources with different mixed loads
 
 ## Specify placement rules
 
@@ -134,12 +136,23 @@ In addition to the placement options above, you can also use the advance configu
 | `FOLLOWER_CONSTRAINTS`     | A list of constraints that only apply to followers.                                   |
 | `LEARNER_CONSTRAINTS`      | A list of constraints that only apply to learners.                                     |
 | `LEARNERS`                 | The number of learners. |
+| `SURVIVAL_PREFERENCE`      | The replica placement priority according to the disaster tolerance level of the labels. For example, `SURVIVAL_PREFERENCE="[region, zone, host]"`. |
 
 ## Examples
 
 ### Increase the number of replicas
 
+<CustomContent platform="tidb">
+
 The default configuration of [`max-replicas`](/pd-configuration-file.md#max-replicas) is `3`. To increase this for a specific set of tables, you can use a placement policy as follows:
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+The default configuration of [`max-replicas`](https://docs.pingcap.com/tidb/stable/pd-configuration-file#max-replicas) is `3`. To increase this for a specific set of tables, you can use a placement policy as follows:
+
+</CustomContent>
 
 ```sql
 CREATE PLACEMENT POLICY fivereplicas FOLLOWERS=4;
@@ -222,32 +235,66 @@ The placement options `PRIMARY_REGION`, `REGIONS`, and `SCHEDULE` meet the basic
 For example, to set constraints that data must reside on a TiKV store where the label `disk` must match a value:
 
 ```sql
-CREATE PLACEMENT POLICY storeonfastssd CONSTRAINTS="[+disk=ssd]";
-CREATE PLACEMENT POLICY storeonhdd CONSTRAINTS="[+disk=hdd]";
+CREATE PLACEMENT POLICY storageonnvme CONSTRAINTS="[+disk=nvme]";
+CREATE PLACEMENT POLICY storageonssd CONSTRAINTS="[+disk=ssd]";
 CREATE PLACEMENT POLICY companystandardpolicy CONSTRAINTS="";
 
 CREATE TABLE t1 (id INT, name VARCHAR(50), purchased DATE)
 PLACEMENT POLICY=companystandardpolicy
 PARTITION BY RANGE( YEAR(purchased) ) (
-  PARTITION p0 VALUES LESS THAN (2000) PLACEMENT POLICY=storeonhdd,
+  PARTITION p0 VALUES LESS THAN (2000) PLACEMENT POLICY=storageonssd,
   PARTITION p1 VALUES LESS THAN (2005),
   PARTITION p2 VALUES LESS THAN (2010),
   PARTITION p3 VALUES LESS THAN (2015),
-  PARTITION p4 VALUES LESS THAN MAXVALUE PLACEMENT POLICY=storeonfastssd
+  PARTITION p4 VALUES LESS THAN MAXVALUE PLACEMENT POLICY=storageonnvme
 );
 ```
 
-You can either specify constraints in list format (`[+disk=ssd]`) or in dictionary format (`{+disk=ssd: 1,+disk=hdd: 2}`).
+You can either specify constraints in list format (`[+disk=ssd]`) or in dictionary format (`{+disk=ssd: 1,+disk=nvme: 2}`).
 
-In list format, constraints are specified as a list of key-value pairs. The key starts with either a `+` or a `-`. `+disk=ssd` indicates that the label `disk` must be set to `ssd`, and `-disk=hdd` indicates that the label `disk` must not be `hdd`.
+In list format, constraints are specified as a list of key-value pairs. The key starts with either a `+` or a `-`. `+disk=ssd` indicates that the label `disk` must be set to `ssd`, and `-disk=nvme` indicates that the label `disk` must not be `nvme`.
 
-In dictionary format, constraints also indicate a number of instances that apply to that rule. For example, `FOLLOWER_CONSTRAINTS="{+region=us-east-1: 1,+region=us-east-2: 1,+region=us-west-1: 1}";` indicates that 1 follower is in us-east-1, 1 follower is in us-east-2 and 1 follower is in us-west-1. For another example, `FOLLOWER_CONSTRAINTS='{"+region=us-east-1,+disk=hdd":1,"+region=us-west-1":1}';` indicates that 1 follower is in us-east-1 with an hdd disk, and 1 follower is in us-west-1.
+In dictionary format, constraints also indicate a number of instances that apply to that rule. For example, `FOLLOWER_CONSTRAINTS="{+region=us-east-1: 1,+region=us-east-2: 1,+region=us-west-1: 1}";` indicates that 1 follower is in us-east-1, 1 follower is in us-east-2 and 1 follower is in us-west-1. For another example, `FOLLOWER_CONSTRAINTS='{"+region=us-east-1,+disk=nvme":1,"+region=us-west-1":1}';` indicates that 1 follower is in us-east-1 with an nvme disk, and 1 follower is in us-west-1.
 
 > **Note:**
 >
-> Dictionary and list formats are based on the YAML parser, but the YAML syntax might be incorrectly parsed. For example, `"{+disk=ssd:1,+disk=hdd:2}"` is incorrectly parsed as `'{"+disk=ssd:1": null, "+disk=hdd:1": null}'`. But `"{+disk=ssd: 1,+disk=hdd: 1}"` is correctly parsed as `'{"+disk=ssd": 1, "+disk=hdd": 1}'`.
+> Dictionary and list formats are based on the YAML parser, but the YAML syntax might be incorrectly parsed. For example, `"{+disk=ssd:1,+disk=nvme:2}"` is incorrectly parsed as `'{"+disk=ssd:1": null, "+disk=nvme:1": null}'`. But `"{+disk=ssd: 1,+disk=nvme: 1}"` is correctly parsed as `'{"+disk=ssd": 1, "+disk=nvme": 1}'`.
+
+### Survival preferences
+
+When you create or modify a placement policy, you can use the `SURVIVAL_PREFERENCES` option to set the preferred survivability for your data.
+
+For example, assuming that you have a TiDB cluster across 3 availability zones, with multiple TiKV instances deployed on each host in each zone. And when creating placement policies for this cluster, you have set the `SURVIVAL_PREFERENCES` as follows:
+
+``` sql
+CREATE PLACEMENT POLICY multiaz SURVIVAL_PREFERENCES="[zone, host]";
+CREATE PLACEMENT POLICY singleaz CONSTRAINTS="[+zone=zone1]" SURVIVAL_PREFERENCES="[host]";
+```
+
+After creating the placement policies, you can attach them to the corresponding tables as needed:
+
+- For tables attached with the `multiaz` placement policy, data will be placed in 3 replicas in different availability zones, prioritizing survival goals of data isolation cross zones, followed by survival goals of data isolation cross hosts.
+- For tables attached with the `singleaz` placement policy, data will be placed in 3 replicas in the `zone1` availability zone first, and then meet survival goals of data isolation cross hosts.
+
+<CustomContent platform="tidb">
+
+> **Note:**
+>
+> `SURVIVAL_PREFERENCES` is equivalent to `location-labels` in PD. For more information, see [Schedule Replicas by Topology Labels](/schedule-replicas-by-topology-labels.md).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+> **Note:**
+>
+> `SURVIVAL_PREFERENCES` is equivalent to `location-labels` in PD. For more information, see [Schedule Replicas by Topology Labels](https://docs.pingcap.com/tidb/stable/schedule-replicas-by-topology-labels).
+
+</CustomContent>
 
 ## Compatibility with tools
+
+<CustomContent platform="tidb">
 
 | Tool Name | Minimum supported version | Description |
 | --- | --- | --- |
@@ -256,11 +303,19 @@ In dictionary format, constraints also indicate a number of instances that apply
 | TiCDC | 6.0 | Ignores placement rules, and does not replicate the rules to the downstream |
 | TiDB Binlog | 6.0 | Ignores placement rules, and does not replicate the rules to the downstream |
 
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+| TiDB Lightning | Not compatible yet | An error is reported when TiDB Lightning imports backup data that contains placement policies  |
+| TiCDC | 6.0 | Ignores placement rules, and does not replicate the rules to the downstream |
+
+</CustomContent>
+
 ## Known limitations
 
-The following known limitations exist in the experimental release of Placement Rules in SQL:
+The following known limitations are as follows:
 
 * Temporary tables do not support placement options.
 * Syntactic sugar rules are permitted for setting `PRIMARY_REGION` and `REGIONS`. In the future, we plan to add varieties for `PRIMARY_RACK`, `PRIMARY_ZONE`, and `PRIMARY_HOST`. See [issue #18030](https://github.com/pingcap/tidb/issues/18030).
-* TiFlash learners are not configurable through Placement Rules syntax.
 * Placement rules only ensure that data at rest resides on the correct TiKV store. The rules do not guarantee that data in transit (via either user queries or internal operations) only occurs in a specific region.

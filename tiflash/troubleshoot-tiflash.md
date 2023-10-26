@@ -12,27 +12,27 @@ This section describes some commonly encountered issues when using TiFlash, the 
 
 The issue might occur due to different reasons. It is recommended that you troubleshoot it following the steps below:
 
-1. Check whether your system is CentOS8.
+1. Check whether your system is RedHat Enterprise Linux 8.
 
-     CentOS8 does not have the `libnsl.so` system library. You can manually install it via the following command:
+    RedHat Enterprise Linux 8 does not have the `libnsl.so` system library. You can manually install it via the following command:
 
-     {{< copyable "shell-regular" >}}
+    {{< copyable "shell-regular" >}}
 
-     ```shell
-     dnf install libnsl
-     ```
+    ```shell
+    dnf install libnsl
+    ```
 
 2. Check your system's `ulimit` parameter setting.
 
-     {{< copyable "shell-regular" >}}
+    {{< copyable "shell-regular" >}}
 
-     ```shell
-     ulimit -n 1000000
-     ```
+    ```shell
+    ulimit -n 1000000
+    ```
 
 3. Use the PD Control tool to check whether there is any TiFlash instance that failed to go offline on the node (same IP and Port) and force the instance(s) to go offline. For detailed steps, refer to [Scale in a TiFlash cluster](/scale-tidb-using-tiup.md#scale-in-a-tiflash-cluster).
 
-If the above methods cannot resolve your issue, save the TiFlash log files and email to [info@pingcap.com](mailto:info@pingcap.com) for more information.
+If the above methods cannot resolve your issue, save the TiFlash log files and [get support](/support.md) from PingCAP or the community.
 
 ## TiFlash replica is always unavailable
 
@@ -78,12 +78,6 @@ This is because TiFlash is in an abnormal state caused by configuration errors o
     > After the [placement rules](/configure-placement-rules.md) feature is enabled, the previously configured `max-replicas` and `location-labels` no longer take effect. To adjust the replica policy, use the interface related to placement rules.
 
 6. Check whether the remaining disk space of the machine (where `store` of the TiFlash node is) is sufficient. By default, when the remaining disk space is less than 20% of the `store` capacity (which is controlled by the `low-space-ratio` parameter), PD cannot schedule data to this TiFlash node.
-
-## TiFlash query time is unstable, and the error log prints many `Lock Exception` messages
-
-This is because large amounts of data are written to the cluster, which causes that the TiFlash query encounters a lock and requires query retry.
-
-You can set the query timestamp to one second earlier in TiDB. For example, if the current time is '2020-04-08 20:15:01', you can execute `set @@tidb_snapshot='2020-04-08 20:15:00';` before you execute the query. This makes less TiFlash queries encounter a lock and mitigates the risk of unstable query time.
 
 ## Some queries return the `Region Unavailable` error
 
@@ -133,12 +127,12 @@ After deploying a TiFlash node and starting replication (by performing the ALTER
     - If there is output, go to the next step.
     - If there is no output, run the `SELECT * FROM information_schema.tiflash_replica` command to check whether TiFlash replicas have been created. If not, run the `ALTER table ${tbl_name} set tiflash replica ${num}` command again, check whether other statements (for example, `add index`) have been executed, or check whether DDL executions are successful.
 
-2. Check whether the TiFlash process runs correctly.
+2. Check whether TiFlash Region replication runs correctly.
 
-   Check whether there is any change in `progress`, the `flash_region_count` parameter in the `tiflash_cluster_manager.log` file, and the Grafana monitoring item `Uptime`:
+   Check whether there is any change in `progress`:
 
-   - If yes, the TiFlash process runs correctly.
-   - If no, the TiFlash process is abnormal. Check the `tiflash` log for further information.
+   - If yes, TiFlash replication runs correctly.
+   - If no, TiFlash replication is abnormal. In `tidb.log`, search the log saying `Tiflash replica is not available`. Check whether `progress` of the corresponding table is updated. If not, check the `tiflash log` for further information. For example, search `lag_region_info` in `tiflash log` to find out which Region lags behind.
 
 3. Check whether the [Placement Rules](/configure-placement-rules.md) function has been enabled by using pd-ctl:
 
@@ -176,40 +170,23 @@ After deploying a TiFlash node and starting replication (by performing the ALTER
         }' <http://172.16.x.xxx:2379/pd/api/v1/config/rule>
     ```
 
-5. Check whether the connection between TiDB or PD and TiFlash is normal.
+5. Check whether TiDB has created any placement rule for tables.
 
-    Search the `flash_cluster_manager.log` file for the `ERROR` keyword.
-
-    - If no `ERROR` is found, the connection is normal. Go to the next step.
-    - If `ERROR` is found, the connection is abnormal. Perform the following check.
-
-      - Check whether the log records PD keywords.
-
-          If PD keywords are found, check whether `raft.pd_addr` in the TiFlash configuration file is valid. Specifically, run the `curl '{pd-addr}/pd/api/v1/config/rules'` command and check whether there is any output in 5s.
-
-      - Check whether the log records TiDB-related keywords.
-
-          If TiDB keywords are found, check whether `flash.tidb_status_addr` in the TiFlash configuration file is valid. Specifically, run the `curl '{tidb-status-addr}/tiflash/replica'` command and check whether there is any output in 5s.
-
-      - Check whether the nodes can ping through each other.
-
-    > **Note:**
-    >
-    >  If the problem persists, collect logs of the corresponding component for troubleshooting.
-
-6. Check whether `placement-rule` is created for tables.
-
-    Search the `flash_cluster_manager.log` file for the `Set placement rule … table-<table_id>-r` keyword.
+    Search the logs of TiDB DDL Owner and check whether TiDB has notified PD to add placement rules. For non-partitioned tables, search `ConfigureTiFlashPDForTable`. For partitioned tables, search `ConfigureTiFlashPDForPartitions`.
 
     - If the keyword is found, go to the next step.
     - If not, collect logs of the corresponding component for troubleshooting.
+
+6. Check whether PD has configured any placement rule for tables.
+
+    Run the `curl http://<pd-ip>:<pd-port>/pd/api/v1/config/rules/group/tiflash` command to view  all TiFlash placement rules on the current PD. If a rule with the ID being `table-<table_id>-r` is found, the PD has configured a placement rule successfully.
 
 7. Check whether the PD schedules properly.
 
     Search the `pd.log` file for the `table-<table_id>-r` keyword and scheduling behaviors like `add operator`.
 
     - If the keyword is found, the PD schedules properly.
-    - If not, the PD does not schedule properly. Contact PingCAP technical support for help.
+    - If not, the PD does not schedule properly.
 
 ## Data replication gets stuck
 
@@ -222,33 +199,17 @@ If data replication on TiFlash starts normally but then all or some data fails t
     - If the disk usage ratio is greater than or equal to the value of `low-space-ratio`, the disk space is insufficient. To relieve the disk space, remove unnecessary files, such as `space_placeholder_file` (if necessary, set `reserve-space` to 0MB after removing the file) under the `${data}/flash/` folder.
     - If the disk usage ratio is less than the value of `low-space-ratio`, the disk space is sufficient. Go to the next step.
 
-2. Check the network connectivity between TiKV, TiFlash, and PD.
+2. Check whether there is any `down peer` (a `down peer` might cause the replication to get stuck).
 
-    In `flash_cluster_manager.log`, check whether there are any new updates to `flash_region_count` corresponding to the table that gets stuck.
-
-    - If no, go to the next step.
-    - If yes, search for `down peer` (replication gets stuck if there is a peer that is down).
-
-        - Run `pd-ctl region check-down-peer` to search for `down peer`.
-        - If `down peer` is found, run `pd-ctl operator add remove-peer\<region-id> \<tiflash-store-id>` to remove it.
-
-3. Check CPU usage.
-
-    On Grafana, choose **TiFlash-Proxy-Details** > **Thread CPU** > **Region task worker pre-handle/generate snapshot CPU**. Check the CPU usage of `<instance-ip>:<instance-port>-region-worker`.
-
-    If the curve is a straight line, the TiFlash node is stuck. Terminate the TiFlash process and restart it, or contact PingCAP technical support for help.
+    Run the `pd-ctl region check-down-peer` command to check whether there is any `down peer`. If any, run the `pd-ctl operator add remove-peer <region-id> <tiflash-store-id>` command to remove it.
 
 ## Data replication is slow
 
 The causes may vary. You can address the problem by performing the following steps.
 
-1. Adjust the value of the scheduling parameters.
+1. Increase [`store limit`](/configure-store-limit.md#usage) to accelerate replication.
 
-    - Increase [`store limit`](/configure-store-limit.md#usage) to accelerate replication.
-    - Decrease [`config set patrol-region-interval 10ms`](/pd-control.md#command) to make checker scan on Regions more frequent in TiKV.
-    - Increase [`region merge`](/pd-control.md#command) to reduce the number of Regions, which means fewer scans and higher check frequencies.
-
-2. Adjust the load on TiFlsh.
+2. Adjust the load on TiFlash.
 
     Excessively high load on TiFlash can also result in slow replication. You can check the load of TiFlash indicators on the **TiFlash-Summary** panel on Grafana:
 

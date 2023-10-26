@@ -6,9 +6,30 @@ aliases: ['/docs/dev/sql-statements/sql-statement-admin/','/docs/dev/reference/s
 
 # ADMIN
 
-This statement is a TiDB extension syntax, used to view the status of TiDB and check the data of tables in TiDB.
+This statement is a TiDB extension syntax, used to view the status of TiDB and check the data of tables in TiDB. This document introduces the following `ADMIN` related statements:
+
+- [`ADMIN RELOAD`](#admin-reload-statement)
+- [`ADMIN PLUGINS`](#admin-plugins-related-statement)
+- [`ADMIN ... BINDINGS`](#admin-bindings-related-statement)
+- [`ADMIN REPAIR`](#admin-repair-statement)
+- [`ADMIN SHOW SLOW`](#admin-show-slow-statement)
 
 ## DDL related statement
+
+<CustomContent platform="tidb-cloud">
+
+| Statement                                                                                | Description                 |
+|------------------------------------------------------------------------------------------|-----------------------------|
+| [`ADMIN CANCEL DDL JOBS`](/sql-statements/sql-statement-admin-cancel-ddl.md)             | Cancels the currently running DDL jobs. |
+| [`ADMIN PAUSE DDL JOBS`](/sql-statements/sql-statement-admin-pause-ddl.md)               | Pauses the currently running DDL jobs. |
+| [`ADMIN RESUME DDL JOBS`](/sql-statements/sql-statement-admin-resume-ddl.md)             | Resumes the paused DDL jobs. |
+| [`ADMIN CHECKSUM TABLE`](/sql-statements/sql-statement-admin-checksum-table.md)          | Calculates the CRC64 of all rows + indexes of a table. |
+| [<code>ADMIN CHECK [TABLE\|INDEX]</code>](/sql-statements/sql-statement-admin-check-table-index.md) | Checks for consistency of a table or index. |
+| [<code>ADMIN SHOW DDL [JOBS\|QUERIES]</code>](/sql-statements/sql-statement-admin-show-ddl.md)      | Shows details about currently running or recently completed DDL jobs. |
+
+</CustomContent>
+
+<CustomContent platform="tidb">
 
 | Statement                                                                                | Description                 |
 |------------------------------------------------------------------------------------------|-----------------------------|
@@ -16,6 +37,9 @@ This statement is a TiDB extension syntax, used to view the status of TiDB and c
 | [`ADMIN CHECKSUM TABLE`](/sql-statements/sql-statement-admin-checksum-table.md)          | Calculates the CRC64 of all rows + indexes of a table. |
 | [<code>ADMIN CHECK [TABLE\|INDEX]</code>](/sql-statements/sql-statement-admin-check-table-index.md) | Checks for consistency of a table or index. |
 | [<code>ADMIN SHOW DDL [JOBS\|QUERIES]</code>](/sql-statements/sql-statement-admin-show-ddl.md)      | Shows details about currently running or recently completed DDL jobs. |
+| [`ADMIN SHOW TELEMETRY`](/sql-statements/sql-statement-admin-show-telemetry.md)      | Shows information that will be reported back to PingCAP as part of the telemetry feature. |
+
+</CustomContent>
 
 ## `ADMIN RELOAD` statement
 
@@ -37,15 +61,15 @@ The above statement is used to reload the blocklist of logic optimization rules.
 
 ## `ADMIN PLUGINS` related statement
 
-{{< copyable "sql" >}}
+> **Note:**
+>
+> This feature is not available on [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless) clusters.
 
 ```sql
 ADMIN PLUGINS ENABLE plugin_name [, plugin_name] ...;
 ```
 
 The above statement is used to enable the `plugin_name` plugin.
-
-{{< copyable "sql" >}}
 
 ```sql
 ADMIN PLUGINS DISABLE plugin_name [, plugin_name] ...;
@@ -58,7 +82,7 @@ The above statement is used to disable the `plugin_name` plugin.
 {{< copyable "sql" >}}
 
 ```sql
-ADMIN FLUSH bindings;
+ADMIN FLUSH BINDINGS;
 ```
 
 The above statement is used to persist SQL Plan binding information.
@@ -66,7 +90,7 @@ The above statement is used to persist SQL Plan binding information.
 {{< copyable "sql" >}}
 
 ```sql
-ADMIN CAPTURE bindings;
+ADMIN CAPTURE BINDINGS;
 ```
 
 The above statement can generate the binding of SQL Plan from the `SELECT` statement that occurs more than once.
@@ -74,7 +98,7 @@ The above statement can generate the binding of SQL Plan from the `SELECT` state
 {{< copyable "sql" >}}
 
 ```sql
-ADMIN EVOLVE bindings;
+ADMIN EVOLVE BINDINGS;
 ```
 
 After the automatic binding feature is enabled, the evolution of SQL Plan binding information is triggered every `bind-info-leave` (the default value is `3s`). The above statement is used to proactively trigger this evolution.
@@ -82,12 +106,20 @@ After the automatic binding feature is enabled, the evolution of SQL Plan bindin
 {{< copyable "sql" >}}
 
 ```sql
-ADMIN RELOAD bindings;
+ADMIN RELOAD BINDINGS;
 ```
 
 The above statement is used to reload SQL Plan binding information.
 
 ## `ADMIN REPAIR` statement
+
+<CustomContent platform="tidb-cloud">
+
+> **Note:**
+>
+> This TiDB statement is not applicable to TiDB Cloud.
+
+</CustomContent>
 
 To overwrite the metadata of the stored table in an untrusted way in extreme cases, use `ADMIN REPAIR TABLE`:
 
@@ -97,23 +129,31 @@ To overwrite the metadata of the stored table in an untrusted way in extreme cas
 ADMIN REPAIR TABLE tbl_name CREATE TABLE STATEMENT;
 ```
 
+<CustomContent platform="tidb">
+
 Here "untrusted" means that you need to manually ensure that the metadata of the original table can be covered by the `CREATE TABLE STATEMENT` operation. To use this `REPAIR` statement, enable the [`repair-mode`](/tidb-configuration-file.md#repair-mode) configuration item, and make sure that the tables to be repaired are listed in the [`repair-table-list`](/tidb-configuration-file.md#repair-table-list).
+
+</CustomContent>
 
 ## `ADMIN SHOW SLOW` statement
 
-{{< copyable "sql" >}}
+> **Note:**
+>
+> This feature is not available on [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless) clusters.
 
 ```sql
 ADMIN SHOW SLOW RECENT N;
 ```
 
-{{< copyable "sql" >}}
-
 ```sql
 ADMIN SHOW SLOW TOP [INTERNAL | ALL] N;
 ```
 
-For details, refer to [admin show slow statement](/identify-slow-queries.md#admin-show-slow-command)
+<CustomContent platform="tidb">
+
+For details, refer to [`ADMIN SHOW SLOW` command](/identify-slow-queries.md#admin-show-slow-command).
+
+</CustomContent>
 
 ## Synopsis
 
@@ -129,7 +169,7 @@ Run the following command to view the last 10 completed DDL jobs in the currentl
 {{< copyable "sql" >}}
 
 ```sql
-admin show ddl jobs;
+ADMIN SHOW DDL JOBS;
 ```
 
 ```
@@ -155,7 +195,7 @@ Run the following command to view the last 5 completed DDL jobs in the currently
 {{< copyable "sql" >}}
 
 ```sql
-admin show ddl jobs 5;
+ADMIN SHOW DDL JOBS 5;
 ```
 
 ```
@@ -176,7 +216,7 @@ Run the following command to view the uncompleted DDL jobs in the test database.
 {{< copyable "sql" >}}
 
 ```sql
-admin show ddl jobs 5 where state!='synced' and db_name='test';
+ADMIN SHOW DDL JOBS 5 WHERE state != 'synced' AND db_name = 'test';
 ```
 
 ```
@@ -207,7 +247,8 @@ admin show ddl jobs 5 where state!='synced' and db_name='test';
     * `synced`: it indicates that the operation has been performed successfully and all TiDB instances have been synced to this state.
     * `rollback done`: it indicates that the operation has failed and has finished rolling back.
     * `rollingback`: it indicates that the operation has failed and is rolling back.
-    * `cancelling`: it indicates that the operation is being cancelled. This state only occurs when you cancel DDL jobs using the `ADMIN CANCEL DDL JOBS` command.
+    * `cancelling`: it indicates that the operation is being cancelled. This state only occurs when you cancel DDL jobs using the [`ADMIN CANCEL DDL JOBS`](/sql-statements/sql-statement-admin-cancel-ddl.md) command.
+    * `paused`: it indicates that the operation has been paused. This state only appears when you use the [`ADMIN PAUSED DDL JOBS`](/sql-statements/sql-statement-admin-pause-ddl.md) command to pause the DDL job. You can use the [`ADMIN RESUME DDL JOBS`](/sql-statements/sql-statement-admin-resume-ddl.md) command to resume the DDL job.
 
 ## MySQL compatibility
 

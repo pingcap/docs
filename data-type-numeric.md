@@ -14,7 +14,7 @@ TiDB supports all the MySQL numeric types, including:
 
 ## Integer types
 
-TiDB supports all the MySQL integer types, including `INTEGER`/`INT`, `TINYINT`, `SMALLINT`, `MEDIUMINT`, and `BIGINT`. For more information, see [Integer Data Type Syntax in MySQL](https://dev.mysql.com/doc/refman/5.7/en/integer-types.html).
+TiDB supports all the MySQL integer types, including `INTEGER`/`INT`, `TINYINT`, `SMALLINT`, `MEDIUMINT`, and `BIGINT`. For more information, see [Integer Data Type Syntax in MySQL](https://dev.mysql.com/doc/refman/8.0/en/integer-types.html).
 
 The following table summarizes field descriptions:
 
@@ -98,7 +98,7 @@ BIGINT[(M)] [UNSIGNED] [ZEROFILL]
 
 ## Floating-point types
 
-TiDB supports all the MySQL floating-point types, including `FLOAT`, and `DOUBLE`. For more information, see [Floating-Point Types (Approximate Value) - FLOAT, DOUBLE in MySQL](https://dev.mysql.com/doc/refman/5.7/en/floating-point-types.html).
+TiDB supports all the MySQL floating-point types, including `FLOAT`, and `DOUBLE`. For more information, see [Floating-Point Types (Approximate Value) - FLOAT, DOUBLE in MySQL](https://dev.mysql.com/doc/refman/8.0/en/floating-point-types.html).
 
 The following table summarizes field descriptions:
 
@@ -131,7 +131,8 @@ FLOAT(p) [UNSIGNED] [ZEROFILL]
 > **Note:**
 >
 > As in MySQL, the `FLOAT` data type stores approximate values. For values such as currency, it is recommended to use the `DECIMAL` type instead.
-> In TiDB, the default precision of the `FLOAT` data type is 8 bits, but in MySQL, the default precision is 6 bits. For example, assuming that you insert `123456789` and `1.23456789` into columns of the `FLOAT` type in both TiDB and MySQL, when you query the corresponding values in MySQL, you get `123457000` and `1.23457`, while in TiDB, you get `123456790` and `1.2345679`.
+>
+> In TiDB, the default precision of the `FLOAT` data type is 8 digits, but in MySQL, the default precision is 6 digits. For example, assuming that you insert `123456789` and `1.23456789` into columns of the `FLOAT` type in both TiDB and MySQL, when you query the corresponding values in MySQL, you get `123457000` and `1.23457`, while in TiDB, you get `123456790` and `1.2345679`.
 
 ### `DOUBLE` type
 
@@ -146,9 +147,13 @@ DOUBLE PRECISION [(M,D)] [UNSIGNED] [ZEROFILL], REAL[(M,D)] [UNSIGNED] [ZEROFILL
 >
 > As in MySQL, the `DOUBLE` data type stores approximate values. For values such as currency, it is recommended to use the `DECIMAL` type instead.
 
+> **Note:**
+>
+> When TiDB converts a double-precision floating-point number represented in scientific notation to the `CHAR` type, the result is displayed inconsistently with that in MySQL. See [Cast functions and operators](/functions-and-operators/cast-functions-and-operators.md) for details.
+
 ## Fixed-point types
 
-TiDB supports all the MySQL floating-point types, including DECIMAL, and NUMERIC. For more information, [Fixed-Point Types (Exact Value) - DECIMAL, NUMERIC in MySQL](https://dev.mysql.com/doc/refman/5.7/en/fixed-point-types.html).
+TiDB supports all the MySQL floating-point types, including DECIMAL, and NUMERIC. For more information, [Fixed-Point Types (Exact Value) - DECIMAL, NUMERIC in MySQL](https://dev.mysql.com/doc/refman/8.0/en/fixed-point-types.html).
 
 The meaning of the fields:
 

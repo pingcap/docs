@@ -19,11 +19,11 @@ Now consider about the following situations:
 * When a TiKV store fails, PD needs to consider:
     * Recovery time of the failed store.
         * If it's short (for example, the service is restarted), whether scheduling is necessary or not.
-        * If it's long (for example, disk fault, data is lost, etc.), how to do scheduling.
+        * If it's long (for example, disk fault and data is lost), how to do scheduling.
     * Replicas of all Regions.
         * If the number of replicas is not enough for some Regions, PD needs to complete them.
         * If the number of replicas is more than expected (for example, the failed store re-joins into the cluster after recovery), PD needs to delete them.
-* Read/Write operations are performed on leaders, which can not be distributed only on a few individual stores;
+* Read/Write operations are performed on leaders, which cannot be distributed only on a few individual stores;
 * Not all Regions are hot, so loads of all TiKV stores need to be balanced;
 * When Regions are in balancing, data transferring utilizes much network/disk traffic and CPU time, which can influence online services.
 
@@ -75,7 +75,7 @@ Scheduling is based on information collection. In short, the PD scheduling compo
     * Data read/write speed
     * The number of snapshots that are sent/received (The data might be replicated between replicas through snapshots)
     * Whether the store is overloaded
-    * Labels (See [Perception of Topology](/schedule-replicas-by-topology-labels.md))
+    * Labels (See [Perception of Topology](https://docs.pingcap.com/tidb/stable/schedule-replicas-by-topology-labels))
 
     You can use PD control to check the status of a TiKV store, which can be Up, Disconnect, Offline, Down, or Tombstone. The following is a description of all statuses and their relationship.
 

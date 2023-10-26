@@ -1,14 +1,14 @@
 ---
-title: Handle Failed DDL Statements
+title: Handle Failed DDL Statements in TiDB Data Migration
 summary: Learn how to handle failed DDL statements when you're using the TiDB Data Migration tool to migrate data.
 aliases: ['/docs/tidb-data-migration/dev/skip-or-replace-abnormal-sql-statements/']
 ---
 
-# Handle Failed DDL Statements
+# Handle Failed DDL Statements in TiDB Data Migration
 
 This document introduces how to handle failed DDL statements when you're using the TiDB Data Migration (DM) tool to migrate data.
 
-Currently, TiDB is not completely compatible with all MySQL syntax (see [the DDL statements supported by TiDB](/mysql-compatibility.md#ddl)). Therefore, when DM is migrating data from MySQL to TiDB and TiDB does not support the corresponding DDL statement, an error might occur and break the migration process. In this case, you can use the `binlog` command of DM to resume the migration.
+Currently, TiDB is not completely compatible with all MySQL syntax (see [the DDL statements supported by TiDB](/mysql-compatibility.md#ddl-operations)). Therefore, when DM is migrating data from MySQL to TiDB and TiDB does not support the corresponding DDL statement, an error might occur and break the migration process. In this case, you can use the `binlog` command of DM to resume the migration.
 
 ## Restrictions
 
@@ -83,7 +83,7 @@ Use "dmctl binlog [command] --help" for more information about a command.
     - Type: string.
     - Specifies a binlog position. When the position of the binlog event matches `binlog-pos`, the operation is executed. If it is not specified, DM automatically sets `binlog-pos` to the currently failed DDL statement.
     - Format: `binlog-filename:binlog-pos`, for example, `mysql-bin|000001.000003:3270`.
-    - After the migration returns an error, the binlog position can be obtained from `position` in `startLocation` returned by `query-status`. Before the migration returns an error, the binlog position can be obtained by using [`SHOW BINLOG EVENTS`](https://dev.mysql.com/doc/refman/5.7/en/show-binlog-events.html) in the upstream MySQL instance.
+    - After the migration returns an error, the binlog position can be obtained from `position` in `startLocation` returned by `query-status`. Before the migration returns an error, the binlog position can be obtained by using [`SHOW BINLOG EVENTS`](https://dev.mysql.com/doc/refman/8.0/en/show-binlog-events.html) in the upstream MySQL instance.
 
 + `-s, --source`:
     - Type: string.
@@ -206,9 +206,6 @@ Assume that it is acceptable in the actual production environment that this DDL 
                         "result": null,
                         "unresolvedDDLLockID": "",
                         "sync": {
-                            "totalEvents": "4",
-                            "totalTps": "0",
-                            "recentTps": "0",
                             "masterBinlog": "(DESKTOP-T561TSO-bin.000001, 2388)",
                             "masterBinlogGtid": "143bdef3-dd4a-11ea-8b00-00155de45f57:1-10",
                             "syncerBinlog": "(DESKTOP-T561TSO-bin.000001, 2388)",
@@ -218,7 +215,10 @@ Assume that it is acceptable in the actual production environment that this DDL 
                             "unresolvedGroups": [
                             ],
                             "synced": true,
-                            "binlogType": "remote"
+                            "binlogType": "remote",
+                            "totalRows": "4",
+                            "totalRps": "0",
+                            "recentRps": "0"
                         }
                     }
                 ]
@@ -389,9 +389,6 @@ Assume that it is acceptable in the actual production environment that this DDL 
                         "result": null,
                         "unresolvedDDLLockID": "",
                         "sync": {
-                            "totalEvents": "4",
-                            "totalTps": "0",
-                            "recentTps": "0",
                             "masterBinlog": "(DESKTOP-T561TSO-bin.000001, 2388)",
                             "masterBinlogGtid": "143bdef3-dd4a-11ea-8b00-00155de45f57:1-10",
                             "syncerBinlog": "(DESKTOP-T561TSO-bin.000001, 2388)",
@@ -401,7 +398,10 @@ Assume that it is acceptable in the actual production environment that this DDL 
                             "unresolvedGroups": [
                             ],
                             "synced": true,
-                            "binlogType": "remote"
+                            "binlogType": "remote",
+                            "totalRows": "4",
+                            "totalRps": "0",
+                            "recentRps": "0"
                         }
                     }
                 ]
@@ -423,9 +423,6 @@ Assume that it is acceptable in the actual production environment that this DDL 
                         "result": null,
                         "unresolvedDDLLockID": "",
                         "sync": {
-                            "totalEvents": "4",
-                            "totalTps": "0",
-                            "recentTps": "0",
                             "masterBinlog": "(DESKTOP-T561TSO-bin.000001, 2388)",
                             "masterBinlogGtid": "143bdef3-dd4a-11ea-8b00-00155de45f57:1-10",
                             "syncerBinlog": "(DESKTOP-T561TSO-bin.000001, 2388)",
@@ -435,7 +432,10 @@ Assume that it is acceptable in the actual production environment that this DDL 
                             "unresolvedGroups": [
                             ],
                             "synced": true,
-                            "binlogType": "remote"
+                            "binlogType": "remote",
+                            "totalRows": "4",
+                            "totalRps": "0",
+                            "recentRps": "0"
                         }
                     }
                 ]
@@ -565,9 +565,6 @@ You can replace this DDL statement with two equivalent DDL statements. The steps
                         "result": null,
                         "unresolvedDDLLockID": "",
                         "sync": {
-                            "totalEvents": "4",
-                            "totalTps": "0",
-                            "recentTps": "0",
                             "masterBinlog": "(DESKTOP-T561TSO-bin.000001, 2388)",
                             "masterBinlogGtid": "143bdef3-dd4a-11ea-8b00-00155de45f57:1-10",
                             "syncerBinlog": "(DESKTOP-T561TSO-bin.000001, 2388)",
@@ -577,7 +574,10 @@ You can replace this DDL statement with two equivalent DDL statements. The steps
                             "unresolvedGroups": [
                             ],
                             "synced": true,
-                            "binlogType": "remote"
+                            "binlogType": "remote",
+                            "totalRows": "4",
+                            "totalRps": "0",
+                            "recentRps": "0"
                         }
                     }
                 ]
@@ -776,9 +776,6 @@ You can replace this DDL statement with two equivalent DDL statements. The steps
                         "result": null,
                         "unresolvedDDLLockID": "",
                         "sync": {
-                            "totalEvents": "4",
-                            "totalTps": "0",
-                            "recentTps": "0",
                             "masterBinlog": "(DESKTOP-T561TSO-bin.000001, 2388)",
                             "masterBinlogGtid": "143bdef3-dd4a-11ea-8b00-00155de45f57:1-10",
                             "syncerBinlog": "(DESKTOP-T561TSO-bin.000001, 2388)",
@@ -790,7 +787,10 @@ You can replace this DDL statement with two equivalent DDL statements. The steps
                             "unresolvedGroups": [
                             ],
                             "synced": true,
-                            "binlogType": "remote"
+                            "binlogType": "remote",
+                            "totalRows": "4",
+                            "totalRps": "0",
+                            "recentRps": "0"
                         }
                     }
                 ]
@@ -812,9 +812,6 @@ You can replace this DDL statement with two equivalent DDL statements. The steps
                         "result": null,
                         "unresolvedDDLLockID": "",
                         "sync": {
-                            "totalEvents": "4",
-                            "totalTps": "0",
-                            "recentTps": "0",
                             "masterBinlog": "(DESKTOP-T561TSO-bin.000001, 2388)",
                             "masterBinlogGtid": "143bdef3-dd4a-11ea-8b00-00155de45f57:1-10",
                             "syncerBinlog": "(DESKTOP-T561TSO-bin.000001, 2388)",
@@ -826,7 +823,10 @@ You can replace this DDL statement with two equivalent DDL statements. The steps
                             "unresolvedGroups": [
                             ],
                             "synced": try,
-                            "binlogType": "remote"
+                            "binlogType": "remote",
+                            "totalRows": "4",
+                            "totalRps": "0",
+                            "recentRps": "0"
                         }
                     }
                 ]

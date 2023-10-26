@@ -10,10 +10,6 @@ aliases: ['/docs/dev/production-deployment-using-tiup/','/docs/dev/how-to/deploy
 
 TiUP supports deploying TiDB, TiFlash, TiDB Binlog, TiCDC, and the monitoring system. This document introduces how to deploy TiDB clusters of different topologies.
 
-> **Note:**
->
-> TiDB, TiUP and TiDB Dashboard share usage details with PingCAP to help understand how to improve the product. For details about what is shared and how to disable the sharing, see [Telemetry](/telemetry.md).
-
 ## Step 1. Prerequisites and precheck
 
 Make sure that you have read the following documents:
@@ -24,9 +20,6 @@ Make sure that you have read the following documents:
 ## Step 2. Deploy TiUP on the control machine
 
 You can deploy TiUP on the control machine in either of the two ways: online deployment and offline deployment.
-
-<SimpleTab>
-<div label="Deploy TiUP online">
 
 ### Deploy TiUP online
 
@@ -74,7 +67,7 @@ Log in to the control machine using a regular user account (take the `tidb` user
     tiup update --self && tiup update cluster
     ```
 
-    If `“Update successfully!”` is displayed, the TiUP cluster is updated successfully.
+    If `Update successfully!` is displayed, the TiUP cluster is updated successfully.
 
 5. Verify the current version of your TiUP cluster:
 
@@ -84,17 +77,15 @@ Log in to the control machine using a regular user account (take the `tidb` user
     tiup --binary cluster
     ```
 
-</div>
-
-<div label="Deploy TiUP offline">
-
 ### Deploy TiUP offline
 
 Perform the following steps in this section to deploy a TiDB cluster offline using TiUP:
 
 #### Prepare the TiUP offline component package
 
-To prepare the TiUP offline component package, you can manually pack an offline component package using `tiup mirror clone`.
+Method 1: On the [official download page](https://www.pingcap.com/download/), select the offline mirror package (TiUP offline package included) of the target TiDB version. Note that you need to download the server package and toolkit package at the same time.
+
+Method 2: Manually pack an offline component package using `tiup mirror clone`. The detailed steps are as follows:
 
 1. Install the TiUP package manager online.
 
@@ -144,19 +135,19 @@ To prepare the TiUP offline component package, you can manually pack an offline 
 
         `tidb-community-server-${version}-linux-amd64.tar.gz` is an independent offline environment package.
 
-3. Customize the offline mirror, or adjust the contents of an existing offline  mirror.
+3. Customize the offline mirror, or adjust the contents of an existing offline mirror.
 
     If you want to adjust an existing offline mirror (such as adding a new version of a component), take the following steps:
 
-    1. When pulling an offline mirror, you can get an incomplete offline mirror by specifying specific information via parameters, such as the component and version information. For example, you can pull an offline mirror that includes only the offline mirror of TiUP v1.10.0 and TiUP Cluster v1.10.0 by running the following command:
+    1. When pulling an offline mirror, you can get an incomplete offline mirror by specifying specific information via parameters, such as the component and version information. For example, you can pull an offline mirror that includes only the offline mirror of TiUP v1.12.3 and TiUP Cluster v1.12.3 by running the following command:
 
         {{< copyable "shell-regular" >}}
 
         ```bash
-        tiup mirror clone tiup-custom-mirror-v1.10.0 --tiup v1.10.0 --cluster v1.10.0
+        tiup mirror clone tiup-custom-mirror-v1.12.3 --tiup v1.12.3 --cluster v1.12.3
         ```
 
-        If you only need the components for a particular platform, you can specify them using the `--os`  or `--arch` parameters.
+        If you only need the components for a particular platform, you can specify them using the `--os` or `--arch` parameters.
 
     2. Refer to the step 2 of "Pull the mirror using TiUP", and send this incomplete offline mirror to the control machine in the isolated environment.
 
@@ -185,10 +176,10 @@ To prepare the TiUP offline component package, you can manually pack an offline 
         {{< copyable "shell-regular" >}}
 
         ```bash
-        tiup mirror merge tiup-custom-mirror-v1.10.0
+        tiup mirror merge tiup-custom-mirror-v1.12.3
         ```
 
-    5. When the above steps are completed, check the result by running the `tiup list` command. In this document's example, the outputs of both `tiup list tiup` and `tiup list cluster` show that the corresponding components of `v1.10.0` are available.
+    5. When the above steps are completed, check the result by running the `tiup list` command. In this document's example, the outputs of both `tiup list tiup` and `tiup list cluster` show that the corresponding components of `v1.12.3` are available.
 
 #### Deploy the offline TiUP component
 
@@ -204,10 +195,21 @@ source /home/tidb/.bash_profile
 
 The `local_install.sh` script automatically runs the `tiup mirror set tidb-community-server-${version}-linux-amd64` command to set the current mirror address to `tidb-community-server-${version}-linux-amd64`.
 
-To switch the mirror to another directory, run the `tiup mirror set <mirror-dir>` command. To switch the mirror to the online environment, run the `tiup mirror set https://tiup-mirrors.pingcap.com` command.
+#### Merge offline packages
 
-</div>
-</SimpleTab>
+If you download the offline packages from the [official download page](https://www.pingcap.com/download/), you need to merge the server package and the toolkit package into an offline mirror. If you manually package the offline component packages using the `tiup mirror clone` command, you can skip this step.
+
+Run the following commands to merge the offline toolkit package into the server package directory:
+
+```bash
+tar xf tidb-community-toolkit-${version}-linux-amd64.tar.gz
+ls -ld tidb-community-server-${version}-linux-amd64 tidb-community-toolkit-${version}-linux-amd64
+cd tidb-community-server-${version}-linux-amd64/
+cp -rp keys ~/.tiup/
+tiup mirror merge ../tidb-community-toolkit-${version}-linux-amd64
+```
+
+To switch the mirror to another directory, run the `tiup mirror set <mirror-dir>` command. To switch the mirror to the online environment, run the `tiup mirror set https://tiup-mirrors.pingcap.com` command.
 
 ## Step 3. Initialize cluster topology file
 
@@ -272,13 +274,13 @@ The following examples cover seven common scenarios. You need to modify the conf
 
 | Application | Configuration task | Configuration file template | Topology description |
 | :-- | :-- | :-- | :-- |
-| OLTP | [Deploy minimal topology](/minimal-deployment-topology.md) | [Simple minimal configuration template](/config-templates/simple-mini.yaml) <br/> [Full minimal configuration template](/config-templates/complex-mini.yaml) | This is the basic cluster topology, including tidb-server, tikv-server, and pd-server. |
-| HTAP | [Deploy the TiFlash topology](/tiflash-deployment-topology.md) | [Simple TiFlash configuration template](/config-templates/simple-tiflash.yaml) <br/> [Full TiFlash configuration template](/config-templates/complex-tiflash.yaml) | This is to deploy TiFlash along with the minimal cluster topology. TiFlash is a columnar storage engine, and gradually becomes a standard cluster topology. |
-| Replicate incremental data using [TiCDC](/ticdc/ticdc-overview.md) | [Deploy the TiCDC topology](/ticdc-deployment-topology.md) | [Simple TiCDC configuration template](/config-templates/simple-cdc.yaml) <br/> [Full TiCDC configuration template](/config-templates/complex-cdc.yaml) | This is to deploy TiCDC along with the minimal cluster topology. TiCDC supports multiple downstream platforms, such as TiDB, MySQL, and MQ. |
-| Replicate incremental data using [TiDB Binlog](/tidb-binlog/tidb-binlog-overview.md) | [Deploy the TiDB Binlog topology](/tidb-binlog-deployment-topology.md) | [Simple TiDB Binlog configuration template (MySQL as downstream)](/config-templates/simple-tidb-binlog.yaml) <br/> [Simple TiDB Binlog configuration template (Files as downstream)](/config-templates/simple-file-binlog.yaml) <br/> [Full TiDB Binlog configuration template](/config-templates/complex-tidb-binlog.yaml) | This is to deploy TiDB Binlog along with the minimal cluster topology. |
-| Use OLAP on Spark | [Deploy the TiSpark topology](/tispark-deployment-topology.md) | [Simple TiSpark configuration template](/config-templates/simple-tispark.yaml) <br/> [Full TiSpark configuration template](/config-templates/complex-tispark.yaml) |  This is to deploy TiSpark along with the minimal cluster topology. TiSpark is a component built for running Apache Spark on top of TiDB/TiKV to answer the OLAP queries.  Currently, TiUP cluster's support for TiSpark is still **experimental**. |
-| Deploy multiple instances on a single machine | [Deploy a hybrid topology](/hybrid-deployment-topology.md) | [Simple configuration template for hybrid deployment](/config-templates/simple-multi-instance.yaml) <br/> [Full configuration template for hybrid deployment](/config-templates/complex-multi-instance.yaml) | The deployment topologies also apply when you need to add extra configurations for the directory, port, resource ratio, and label. |
-| Deploy TiDB clusters across data centers | [Deploy a geo-distributed deployment topology](/geo-distributed-deployment-topology.md) | [Configuration template for geo-distributed deployment](/config-templates/geo-redundancy-deployment.yaml) | This topology takes the typical architecture of three data centers in two cities as an example. It introduces the geo-distributed deployment architecture and the key configuration that requires attention. |
+| OLTP | [Deploy minimal topology](/minimal-deployment-topology.md) | [Simple minimal configuration template](https://github.com/pingcap/docs/blob/master/config-templates/simple-mini.yaml) <br/> [Full minimal configuration template](https://github.com/pingcap/docs/blob/master/config-templates/complex-mini.yaml) | This is the basic cluster topology, including tidb-server, tikv-server, and pd-server. |
+| HTAP | [Deploy the TiFlash topology](/tiflash-deployment-topology.md) | [Simple TiFlash configuration template](https://github.com/pingcap/docs/blob/master/config-templates/simple-tiflash.yaml) <br/> [Full TiFlash configuration template](https://github.com/pingcap/docs/blob/master/config-templates/complex-tiflash.yaml) | This is to deploy TiFlash along with the minimal cluster topology. TiFlash is a columnar storage engine, and gradually becomes a standard cluster topology. |
+| Replicate incremental data using [TiCDC](/ticdc/ticdc-overview.md) | [Deploy the TiCDC topology](/ticdc-deployment-topology.md) | [Simple TiCDC configuration template](https://github.com/pingcap/docs/blob/master/config-templates/simple-cdc.yaml) <br/> [Full TiCDC configuration template](https://github.com/pingcap/docs/blob/master/config-templates/complex-cdc.yaml) | This is to deploy TiCDC along with the minimal cluster topology. TiCDC supports multiple downstream platforms, such as TiDB, MySQL, Kafka, MQ, and storage services. |
+| Replicate incremental data using [TiDB Binlog](/tidb-binlog/tidb-binlog-overview.md) | [Deploy the TiDB Binlog topology](/tidb-binlog-deployment-topology.md) | [Simple TiDB Binlog configuration template (MySQL as downstream)](https://github.com/pingcap/docs/blob/master/config-templates/simple-tidb-binlog.yaml) <br/> [Simple TiDB Binlog configuration template (Files as downstream)](https://github.com/pingcap/docs/blob/master/config-templates/simple-file-binlog.yaml) <br/> [Full TiDB Binlog configuration template](https://github.com/pingcap/docs/blob/master/config-templates/complex-tidb-binlog.yaml) | This is to deploy TiDB Binlog along with the minimal cluster topology. |
+| Use OLAP on Spark | [Deploy the TiSpark topology](/tispark-deployment-topology.md) | [Simple TiSpark configuration template](https://github.com/pingcap/docs/blob/master/config-templates/simple-tispark.yaml) <br/> [Full TiSpark configuration template](https://github.com/pingcap/docs/blob/master/config-templates/complex-tispark.yaml) |  This is to deploy TiSpark along with the minimal cluster topology. TiSpark is a component built for running Apache Spark on top of TiDB/TiKV to answer the OLAP queries. Currently, TiUP cluster's support for TiSpark is still **experimental**. |
+| Deploy multiple instances on a single machine | [Deploy a hybrid topology](/hybrid-deployment-topology.md) | [Simple configuration template for hybrid deployment](https://github.com/pingcap/docs/blob/master/config-templates/simple-multi-instance.yaml) <br/> [Full configuration template for hybrid deployment](https://github.com/pingcap/docs/blob/master/config-templates/complex-multi-instance.yaml) | The deployment topologies also apply when you need to add extra configurations for the directory, port, resource ratio, and label. |
+| Deploy TiDB clusters across data centers | [Deploy a geo-distributed deployment topology](/geo-distributed-deployment-topology.md) | [Configuration template for geo-distributed deployment](https://github.com/pingcap/docs/blob/master/config-templates/geo-redundancy-deployment.yaml) | This topology takes the typical architecture of three data centers in two cities as an example. It introduces the geo-distributed deployment architecture and the key configuration that requires attention. |
 
 > **Note:**
 >
@@ -289,7 +291,7 @@ The following examples cover seven common scenarios. You need to modify the conf
 
 For more configuration description, see the following configuration examples:
 
-- [TiDB `config.toml.example`](https://github.com/pingcap/tidb/blob/master/config/config.toml.example)
+- [TiDB `config.toml.example`](https://github.com/pingcap/tidb/blob/master/pkg/config/config.toml.example)
 - [TiKV `config.toml.example`](https://github.com/tikv/tikv/blob/master/etc/config-template.toml)
 - [PD `config.toml.example`](https://github.com/pingcap/pd/blob/master/conf/config.toml)
 - [TiFlash `config.toml.example`](https://github.com/pingcap/tiflash/blob/master/etc/config-template.toml)
@@ -332,13 +334,13 @@ Before you run the `deploy` command, use the `check` and `check --apply` command
     {{< copyable "shell-regular" >}}
 
     ```shell
-    tiup cluster deploy tidb-test v6.0.0 ./topology.yaml --user root [-p] [-i /home/root/.ssh/gcp_rsa]
+    tiup cluster deploy tidb-test v7.4.0 ./topology.yaml --user root [-p] [-i /home/root/.ssh/gcp_rsa]
     ```
 
 In the `tiup cluster deploy` command above:
 
 - `tidb-test` is the name of the TiDB cluster to be deployed.
-- `v6.1.0` is the version of the TiDB cluster to be deployed. You can see the latest supported versions by running `tiup list tidb`.
+- `v7.4.0` is the version of the TiDB cluster to be deployed. You can see the latest supported versions by running `tiup list tidb`.
 - `topology.yaml` is the initialization configuration file.
 - `--user root` indicates logging into the target machine as the `root` user to complete the cluster deployment. The `root` user is expected to have `ssh` and `sudo` privileges to the target machine. Alternatively, you can use other users with `ssh` and `sudo` privileges to complete the deployment.
 - `[-i]` and `[-p]` are optional. If you have configured login to the target machine without password, these parameters are not required. If not, choose one of the two parameters. `[-i]` is the private key of the root user (or other users specified by `--user`) that has access to the target machine. `[-p]` is used to input the user password interactively.
@@ -423,13 +425,14 @@ If the output log shows `Up` status, the cluster is running properly.
 
 If you have deployed [TiFlash](/tiflash/tiflash-overview.md) along with the TiDB cluster, see the following documents:
 
-- [Use TiFlash](/tiflash/use-tiflash.md)
+- [Use TiFlash](/tiflash/tiflash-overview.md#use-tiflash)
 - [Maintain a TiFlash Cluster](/tiflash/maintain-tiflash.md)
 - [TiFlash Alert Rules and Solutions](/tiflash/tiflash-alert-rules.md)
 - [Troubleshoot TiFlash](/tiflash/troubleshoot-tiflash.md)
 
 If you have deployed [TiCDC](/ticdc/ticdc-overview.md) along with the TiDB cluster, see the following documents:
 
-- [Manage TiCDC Cluster and Replication Tasks](/ticdc/manage-ticdc.md)
+- [Changefeed Overview](/ticdc/ticdc-changefeed-overview.md)
+- [Manage Changefeed](/ticdc/ticdc-manage-changefeed.md)
 - [Troubleshoot TiCDC](/ticdc/troubleshoot-ticdc.md)
 - [TiCDC FAQs](/ticdc/ticdc-faq.md)

@@ -9,11 +9,11 @@ TiDB Dashboard metrics relation graph is a feature introduced in v4.0.7. This fe
 
 ## Access graph
 
-Log into TiDB Dashboard, click **Cluster Diagnostics** on the left navigation menu, and you can see the page of generating the metrics relation graph.
+After logging in to TiDB Dashboard, click **Cluster Diagnostics** in the left navigation menu, and you can see the page of generating the metrics relation graph.
 
-![Metrics relation graph homepage](/media/dashboard/dashboard-metrics-relation-home.png)
+![Metrics relation graph homepage](/media/dashboard/dashboard-metrics-relation-home-v650.png)
 
-After setting **Range Start Time** and **Range Duration**, click the **Generate Metrics Relation** button and you will enter the page of metrics relation graph.
+After setting **Range Start Time** and **Range Duration**, click **Generate Metrics Relation** and you will enter the page of metrics relation graph.
 
 ## Understand graph
 

@@ -8,7 +8,7 @@ aliases: ['/docs/dev/grafana-pd-dashboard/','/docs/dev/reference/key-monitoring-
 
 If you use TiUP to deploy the TiDB cluster, the monitoring system (Prometheus & Grafana) is deployed at the same time. For more information, see [Overview of the Monitoring Framework](/tidb-monitoring-framework.md).
 
-The Grafana dashboard is divided into a series of sub dashboards which include Overview, PD, TiDB, TiKV, Node\_exporter, Disk Performance, Performance\_overview, and so on. A lot of metrics are there to help you diagnose.
+The Grafana dashboard is divided into a series of sub dashboards which include Overview, PD, TiDB, TiKV, Node\_exporter, Disk Performance, and Performance\_overview. A lot of metrics are there to help you diagnose.
 
 You can get an overview of the component PD status from the PD dashboard, where the key metrics are displayed. This document provides a detailed description of these key metrics.
 
@@ -35,6 +35,7 @@ The following is the description of PD Dashboard metrics items:
 - Current ID allocation: The maximum allocatable ID for new store/peer
 - Region label isolation level: The number of Regions in different label levels
 - Label distribution: The distribution status of the labels in the cluster
+- Store Limit: The flow control limitation of scheduling on the Store
 
 ![PD Dashboard - Cluster metrics](/media/pd-dashboard-cluster-v4.png)
 
@@ -107,7 +108,6 @@ The following is the description of PD Dashboard metrics items:
 - Filter target: The number of attempts that the store is selected as the scheduling target but failed to pass the filter
 - Filter source: The number of attempts that the store is selected as the scheduling source but failed to pass the filter
 - Balance Direction: The number of times that the Store is selected as the target or source of scheduling
-- Store Limit: The flow control limitation of scheduling on the Store
 
 ![PD Dashboard - Scheduler metrics](/media/pd-dashboard-scheduler-v4.png)
 

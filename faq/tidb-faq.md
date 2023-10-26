@@ -1,56 +1,62 @@
 ---
-title: TiDB FAQ
+title: TiDB Architecture FAQs
 summary: Learn about the most frequently asked questions (FAQs) relating to TiDB.
 aliases: ['/docs/dev/faq/tidb-faq/','/docs/dev/faq/tidb/','/docs/dev/tiflash/tiflash-faq/','/docs/dev/reference/tiflash/faq/','/tidb/dev/tiflash-faq']
 ---
 
-# TiDB FAQ
+# TiDB Architecture FAQs
 
 <!-- markdownlint-disable MD026 -->
 
 This document lists the Most Frequently Asked Questions about TiDB.
 
-## About TiDB
+## TiDB introduction and architecture
 
-### TiDB introduction and architecture
+### What is TiDB?
 
-#### What is TiDB?
+<!-- Localization note for TiDB:
 
-TiDB is a distributed SQL database that features in horizontal scalability, high availability and consistent distributed transactions. It also enables you to use MySQL's SQL syntax and protocol to manage and retrieve data.
+- English: use distributed SQL, and start to emphasize HTAP
+- Chinese: can keep "NewSQL" and emphasize one-stop real-time HTAP ("一栈式实时 HTAP")
+- Japanese: use NewSQL because it is well-recognized
 
-#### What is TiDB's architecture?
+-->
 
-The TiDB cluster has three components: the TiDB server, the PD (Placement Driver) server, and the TiKV server. For more details, see [TiDB architecture](/tidb-architecture.md).
+[TiDB](https://github.com/pingcap/tidb) is an open-source distributed SQL database that supports Hybrid Transactional and Analytical Processing (HTAP) workloads. It is MySQL compatible and features horizontal scalability, strong consistency, and high availability. The goal of TiDB is to provide users with a one-stop database solution that covers OLTP (Online Transactional Processing), OLAP (Online Analytical Processing), and HTAP services. TiDB is suitable for various use cases that require high availability and strong consistency with large-scale data.
 
-#### Is TiDB based on MySQL?
+### What is TiDB's architecture?
+
+The TiDB cluster has three components: the TiDB server, the PD (Placement Driver) server, and the TiKV server. For more details, see [TiDB architecture](/tidb-architecture.md), [TiDB storage](/tidb-storage.md), [TiDB computing](/tidb-computing.md), and [TiDB scheduling](/tidb-scheduling.md).
+
+### Is TiDB based on MySQL?
 
 No. TiDB supports MySQL syntax and protocol, but it is a new open source database that is developed and maintained by PingCAP, Inc.
 
-#### What is the respective responsibility of TiDB, TiKV and PD (Placement Driver)?
+### What is the respective responsibility of TiDB, TiKV and PD (Placement Driver)?
 
 - TiDB works as the SQL computing layer, mainly responsible for parsing SQL, specifying query plan, and generating executor.
 - TiKV works as a distributed Key-Value storage engine, used to store the real data. In short, TiKV is the storage engine of TiDB.
 - PD works as the cluster manager of TiDB, which manages TiKV metadata, allocates timestamps, and makes decisions for data placement and load balancing.
 
-#### Is it easy to use TiDB?
+### Is it easy to use TiDB?
 
 Yes, it is. When all the required services are started, you can use TiDB as easily as a MySQL server. You can replace MySQL with TiDB to power your applications without changing a single line of code in most cases. You can also manage TiDB using the popular MySQL management tools.
 
-#### How is TiDB compatible with MySQL?
+### How is TiDB compatible with MySQL?
 
-Currently, TiDB supports the majority of MySQL 5.7 syntax, but does not support triggers, stored procedures, user-defined functions, and foreign keys. For more details, see [Compatibility with MySQL](/mysql-compatibility.md).
+Currently, TiDB supports the majority of MySQL 5.7 syntax, but does not support triggers, stored procedures, and user-defined functions. For more details, see [Compatibility with MySQL](/mysql-compatibility.md).
 
-#### Does TiDB support distributed transactions?
+### Does TiDB support distributed transactions?
 
 Yes. TiDB distributes transactions across your cluster, whether it is a few nodes in a single location or many [nodes across multiple data centers](/multi-data-centers-in-one-city-deployment.md).
 
 Inspired by Google's Percolator, the transaction model in TiDB is mainly a two-phase commit protocol with some practical optimizations. This model relies on a timestamp allocator to assign the monotone increasing timestamp for each transaction, so conflicts can be detected. [PD](/tidb-architecture.md#placement-driver-pd-server) works as the timestamp allocator in a TiDB cluster.
 
-#### What programming language can I use to work with TiDB?
+### What programming language can I use to work with TiDB?
 
 Any language supported by MySQL client or driver.
 
-#### Can I use other Key-Value storage engines with TiDB?
+### Can I use other Key-Value storage engines with TiDB?
 
 Yes. In addition to TiKV, TiDB supports standalone storage engines such as UniStore and MockTiKV. Note that in later TiDB releases, MockTiKV might NO LONGER be supported.
 
@@ -77,122 +83,50 @@ Usage of ./bin/tidb-server:
   ......
 ```
 
-#### In addition to the TiDB documentation, are there any other ways to acquire TiDB knowledge?
+### In addition to the TiDB documentation, are there any other ways to acquire TiDB knowledge?
 
-Currently [TiDB documentation](/overview.md#tidb-introduction) is the most important and timely way to get TiDB related knowledge. In addition, we also have some technical communication groups. If you have any needs, contact [info@pingcap.com](mailto:info@pingcap.com).
+- [TiDB documentation](https://docs.pingcap.com/): the most important and timely way to get TiDB related knowledge.
+- [TiDB blogs](https://www.pingcap.com/blog/): learn technical articles, product insights, and case studies.
+- [PingCAP Education](https://www.pingcap.com/education/?from=en): take online courses and certification programs.
 
-#### What is the length limit for the TiDB user name?
+### What is the length limit for the TiDB user name?
 
 32 characters at most.
 
-#### Does TiDB support XA?
+### What are the limits on the number of columns and row size in TiDB?
 
-No. The JDBC driver of TiDB is MySQL JDBC (Connector/J). When using Atomikos, set the data source to `type="com.mysql.jdbc.jdbc2.optional.MysqlXADataSource"`. TiDB does not support the connection with MySQL JDBC XADataSource. MySQL JDBC XADataSource only works for MySQL (for example, using DML to modify the `redo` log).
+- The maximum number of columns in TiDB defaults to 1017. You can adjust the number up to 4096.
+- The maximum size of a single row defaults to 6 MB. You can increase the number up to 120 MB.
+
+For more information, see [TiDB Limitations](/tidb-limitations.md).
+
+### Does TiDB support XA?
+
+No. The JDBC driver of TiDB is MySQL Connector/J. When using Atomikos, set the data source to `type="com.mysql.jdbc.jdbc2.optional.MysqlXADataSource"`. TiDB does not support the connection with MySQL JDBC XADataSource. MySQL JDBC XADataSource only works for MySQL (for example, using DML to modify the `redo` log).
 
 After you configure the two data sources of Atomikos, set the JDBC drives to XA. When Atomikos operates TM and RM (DB), Atomikos sends the command including XA to the JDBC layer. Taking MySQL for an example, when XA is enabled in the JDBC layer, JDBC will send a series of XA logic operations to InnoDB, including using DML to change the `redo` log. This is the operation of the two-phase commit. The current TiDB version does not support the upper application layer JTA/XA and does not parse XA operations sent by Atomikos.
 
-As a standalone database, MySQL can only implement across-database transactions using XA; while TiDB supports distributed transactions using Google Percolator transaction model and its performance stability is higher than XA, so TiDB does not support XA and there is no need for TiDB to support XA.
+As a standalone database, MySQL can only implement across-database transactions using XA; while TiDB supports distributed transactions using Google Percolator transaction model and its performance stability is higher than XA, so TiDB does not support JTA/XA and there is no need for TiDB to support XA.
 
-### TiDB techniques
+### How could TiDB support high concurrent `INSERT` or `UPDATE` operations to the columnar storage engine (TiFlash) without hurting performance?
 
-#### TiKV for data storage
+- [TiFlash](/tiflash/tiflash-overview.md) introduces a special structure named DeltaTree to process the modification of the columnar engine.
+- TiFlash acts as the learner role in a Raft group, so it does not vote for the log commit or writes. This means that DML operations do not have to wait for the acknowledgment of TiFlash, which is why TiFlash does not slow down the OLTP performance. In addition, TiFlash and TiKV work in separate instances, so they do not affect each other.
 
-See [TiDB Internal (I) - Data Storage](https://en.pingcap.com/blog/tidb-internal-data-storage/).
+### What kind of consistency does TiFlash provide?
 
-#### TiDB for data computing
+TiFlash maintains strong data consistency by default. The raft learner process updates the data. There is also a TSO check to ensure the data in queries is fully consistent with the transaction. For more information, see [Asynchronous replication](/tiflash/tiflash-overview.md#asynchronous-replication) and [Consistency](/tiflash/tiflash-overview.md#consistency).
 
-See [TiDB Internal (II) - Computing](https://en.pingcap.com/blog/tidb-internal-computing/).
+## TiDB techniques
 
-#### PD for scheduling
+### TiKV for data storage
 
-See [TiDB Internal (III) - Scheduling](https://en.pingcap.com/blog/tidb-internal-scheduling/).
+See [TiDB Internal (I) - Data Storage](https://www.pingcap.com/blog/tidb-internal-data-storage/?from=en).
 
-## Deployment on the cloud
+### TiDB for data computing
 
-### Public cloud
+See [TiDB Internal (II) - Computing](https://www.pingcap.com/blog/tidb-internal-computing/?from=en).
 
-#### What cloud vendors are currently supported by TiDB?
+### PD for scheduling
 
-TiDB supports deployment on [Google GKE](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-on-gcp-gke), [AWS EKS](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-on-aws-eks) and [Alibaba Cloud ACK](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-on-alibaba-cloud).
-
-In addition, TiDB is currently available on JD Cloud and UCloud, and has the first-level database entries on them.
-
-## Troubleshoot
-
-### TiDB custom error messages
-
-#### ERROR 8005 (HY000): Write Conflict, txnStartTS is stale
-
-Check whether `tidb_disable_txn_auto_retry` is set to `on`. If so, set it to `off`; if it is already `off`, increase the value of `tidb_retry_limit` until the error no longer occurs.
-
-#### ERROR 9001 (HY000): PD Server Timeout
-
-A PD request timeout. Check the status, monitoring data and log of the PD server, and the network between the TiDB server and the PD server.
-
-#### ERROR 9002 (HY000): TiKV Server Timeout
-
-A TiKV request timeout. Check the status, monitoring data and log of the TiKV server, and the network between the TiDB server and the TiKV server.
-
-#### ERROR 9003 (HY000): TiKV Server is Busy
-
-The TiKV server is busy. This usually occurs when the database load is very high. Check the status, monitoring data and log of the TiKV server.
-
-#### ERROR 9004 (HY000): Resolve Lock Timeout
-
-A lock resolving timeout. This usually occurs when a large number of transaction conflicts exist. Check the application code to see whether lock contention exists in the database.
-
-#### ERROR 9005 (HY000): Region is unavailable
-
-The accessed Region is not available. A Raft Group is not available, with possible reasons like an inadequate number of replicas. This usually occurs when the TiKV server is busy or the TiKV node is shut down. Check the status, monitoring data and log of the TiKV server.
-
-#### ERROR 9006 (HY000): GC life time is shorter than transaction duration
-
-The interval of `GC Life Time` is too short. The data that should have been read by long transactions might be deleted. You can adjust [`tidb_gc_life_time`](/system-variables.md#tidb_gc_life_time-new-in-v50) using the following command:
-
-{{< copyable "sql" >}}
-
-```sql
-SET GLOBAL tidb_gc_life_time = '30m';
-```
-
-> **Note:**
->
-> "30m" means only cleaning up the data generated 30 minutes ago, which might consume some extra storage space.
-
-#### ERROR 9007 (HY000): Write Conflict
-
-Check whether `tidb_disable_txn_auto_retry` is set to `on`. If so, set it to `off`; if it is already `off`, increase the value of `tidb_retry_limit` until the error no longer occurs.
-
-#### ERROR 8130 (HY000): client has multi-statement capability disabled
-
-This error might occur after upgrading from an earlier version of TiDB. To reduce the impact of SQL injection attacks, TiDB now prevents multiple queries from being executed in the same `COM_QUERY` call by default.
-
-The system variable [`tidb_multi_statement_mode`](/system-variables.md#tidb_multi_statement_mode-new-in-v4011) can be used to control this behavior.
-
-### MySQL native error messages
-
-#### ERROR 2013 (HY000): Lost connection to MySQL server during query
-
-- Check whether panic is in the log.
-- Check whether OOM exists in dmesg using `dmesg -T | grep -i oom`.
-- A long time of no access might also lead to this error. It is usually caused by TCP timeout. If TCP is not used for a long time, the operating system kills it.
-
-#### ERROR 1105 (HY000): other error: unknown error Wire Error(InvalidEnumValue(4004))
-
-This error usually occurs when the version of TiDB does not match with the version of TiKV. To avoid version mismatch, upgrade all components when you upgrade the version.
-
-#### ERROR 1148 (42000): the used command is not allowed with this TiDB version
-
-When you execute the `LOAD DATA LOCAL` statement but the MySQL client does not allow executing this statement (the value of the `local_infile` option is 0), this error occurs.
-
-The solution is to use the `--local-infile=1` option when you start the MySQL client. For example, use command like `mysql --local-infile=1 -u root -h 127.0.0.1 -P 4000`. The default value of `local-infile` is different in different versions of MySQL client, therefore you need to configure it in some MySQL clients and do not need to configure it in some others.
-
-#### ERROR 9001 (HY000): PD server timeout start timestamp may fall behind safe point
-
-This error occurs when TiDB fails to access PD. A worker in the TiDB background continuously queries the safepoint from PD and this error occurs if it fails to query within 100s. Generally, it is because the disk on PD is slow and busy or the network failed between TiDB and PD. For the details of common errors, see [Error Number and Fault Diagnosis](/error-codes.md).
-
-### TiDB log error messages
-
-#### EOF error
-
-When the client or proxy disconnects from TiDB, TiDB does not immediately notice that the connection has been disconnected. Instead, TiDB can only notice the disconnection when it begins to return data to the connection. At this time, the log prints an EOF error.
+See [TiDB Internal (III) - Scheduling](https://www.pingcap.com/blog/tidb-internal-scheduling/?from=en).

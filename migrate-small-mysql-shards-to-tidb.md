@@ -10,11 +10,9 @@ If you want to migrate and merge multiple MySQL database instances upstream to o
 
 This document applies to migrating MySQL shards less than 1 TiB in total. If you want to migrate MySQL shards with a total of more than 1 TiB of data, it will take a long time to migrate only using DM. In this case, it is recommended that you follow the operation introduced in [Migrate and Merge MySQL Shards of Large Datasets to TiDB](/migrate-large-mysql-shards-to-tidb.md) to perform migration.
 
-This document takes a simple example to illustrate the migration procedure. The MySQL shards of the two data source MySQL instances in the example are migrated to the downstream TiDB cluster. The diagram is shown as follows.
+This document takes a simple example to illustrate the migration procedure. The MySQL shards of the two data source MySQL instances in the example are migrated to the downstream TiDB cluster.
 
-![Use DM to Migrate Sharded Tables](/media/migrate-shard-tables-within-1tb-en.png)
-
-Both MySQL Instance 1 and MySQL Instance 2 contain the following schemas and tables. In this example, you migrate and merge tables from `store_01` and `store_02` schemas with a `sale` prefix in both instances, into the downstream `sale` table in the `store` schema.
+In this example, both MySQL Instance 1 and MySQL Instance 2 contain the following schemas and tables. In this example, you migrate and merge tables from `store_01` and `store_02` schemas with a `sale` prefix in both instances, into the downstream `sale` table in the `store` schema.
 
 | Schema | Table |
 |:------|:------|
@@ -100,8 +98,8 @@ The parameters are described as follows.
 
 |Parameter      | Description |
 |-              |-            |
-|--master-addr         | {advertise-addr} of any DM-master node in the cluster that dmctl connects to. For example: 172.16.10.71:8261|
-|operate-source create | Load data sources to the DM clusters. |
+|`--master-addr`         | `{advertise-addr}` of any DM-master node in the cluster that dmctl connects to. For example: 172.16.10.71:8261|
+|`operate-source create` | Load data sources to the DM clusters. |
 
 Repeat the above steps until all data sources are added to the DM cluster.
 
@@ -144,18 +142,28 @@ mysql-instances:
     block-allow-list:  "log-bak-ignored"
 
 # Configurations for merging MySQL shards
-routes:                       # Table renaming rules ('routes') from upstream to downstream tables, in order to support merging different sharded tables into a single target table.
-  sale-route-rule:            # Rule name. Migrate and merge tables from upstream to the downstream.
-    schema-pattern: "store_*" # Rule for matching upstream schema names. It supports the wildcards "*" and "?".
-    table-pattern: "sale_*"   # Rule for matching upstream table names. It supports the wildcards "*" and "?".
-    target-schema: "store"    # Name of the target schema.
-    target-table:  "sale"     # Name of the target table.
+routes:
+  sale-route-rule:
+    schema-pattern: "store_*"                               # Merge schemas store_01 and store_02 to the store schema in the downstream
+    table-pattern: "sale_*"                                 # Merge tables sale_01 and sale_02 of schemas store_01 and store_02 to the sale table in the downstream
+    target-schema: "store"
+    target-table:  "sale"
+    # Optional. Used for extracting the source information of sharded schemas and tables and writing the information to the user-defined columns in the downstream. If these options are configured, you need to manually create a merged table in the downstream. For details, see the following table routing setting.
+    # extract-table:                                        # Extracts and writes the table name suffix without the sale_ part to the c-table column of the merged table. For example, 01 is extracted and written to the c-table column for the sharded table sale_01.
+    #   table-regexp: "sale_(.*)"
+    #   target-column: "c_table"
+    # extract-schema:                                       # Extracts and writes the schema name suffix without the store_ part to the c_schema column of the merged table. For example, 02 is extracted and written to the c_schema column for the sharded schema store_02.
+    #   schema-regexp: "store_(.*)"
+    #   target-column: "c_schema"
+    # extract-source:                                       # Extracts and writes the source instance information to the c_source column of the merged table. For example, mysql-01 is extracted and written to the c_source column for the data source mysql-01.
+    #   source-regexp: "(.*)"
+    #   target-column: "c_source"
 
 # Filters out some DDL events.
 filters:
   sale-filter-rule:           # Filter name.
-    schema-pattern: "store_*" # The binlog events or DDL SQL statements of upstream MySQL  instance schemas that match schema-pattern are filtered by the rules below.
-    table-pattern: "sale_*"   # The binlog events or DDL SQL statements of upstream MySQL  instance tables that match table-pattern are filtered by the rules below.
+    schema-pattern: "store_*" # The binlog events or DDL SQL statements of upstream MySQL instance schemas that match schema-pattern are filtered by the rules below.
+    table-pattern: "sale_*"   # The binlog events or DDL SQL statements of upstream MySQL instance tables that match table-pattern are filtered by the rules below.
     events: ["truncate table", "drop table", "delete"]   # The binlog event array.
     action: Ignore                                       # The string (`Do`/`Ignore`). `Do` is the allow list. `Ignore` is the block list.
   store-filter-rule:
@@ -173,8 +181,8 @@ The above example is the minimum configuration to perform the migration task. Fo
 
 For more information on `routes`, `filters` and other configurations in the task file, see the following documents:
 
-- [Table routing](/dm/dm-key-features.md#table-routing)
-- [Block & Allow Table Lists](/dm/dm-key-features.md#block-and-allow-table-lists)
+- [Table routing](/dm/dm-table-routing.md)
+- [Block & Allow Table Lists](/dm/dm-block-allow-table-lists.md)
 - [Binlog event filter](/filter-binlog-event.md)
 - [Filter Certain Row Changes Using SQL Expressions](/filter-dml-event.md)
 
@@ -198,8 +206,8 @@ tiup dmctl --master-addr ${advertise-addr} start-task task.yaml
 
 | Parameter | Description|
 |-|-|
-|--master-addr| {advertise-addr} of any DM-master node in the cluster that dmctl connects to. For example: 172.16.10.71:8261 |
-|start-task   | Starts the data migration task. |
+|`--master-addr`| `{advertise-addr}` of any DM-master node in the cluster that dmctl connects to. For example: 172.16.10.71:8261 |
+|`start-task`   | Starts the data migration task. |
 
 If the migration task fails to start, modify the configuration information according to the error information, and then run `start-task task.yaml` again to start the migration task. If you encounter problems, see [Handle Errors](/dm/dm-error-handling.md) and [FAQ](/dm/dm-faq.md).
 
@@ -213,7 +221,7 @@ After starting the migration task, you can use `dmtcl tiup` to run `query-status
 tiup dmctl --master-addr ${advertise-addr} query-status ${task-name}
 ```
 
-If you encounter errors, use `query-status <name of the error task>` to view more detailed information. For details about the query results, task status and sub task status of the `query-status` command, see [TiDB Data Migration Query Status](/dm/dm-query-status.md).
+If you encounter errors, use `query-status ${task-name}` to view more detailed information. For details about the query results, task status and sub task status of the `query-status` command, see [TiDB Data Migration Query Status](/dm/dm-query-status.md).
 
 ## Step 5. Monitor tasks and check logs (optional)
 

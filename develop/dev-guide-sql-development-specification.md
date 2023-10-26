@@ -3,7 +3,7 @@ title: SQL Development Specifications
 summary: Learn about the SQL development specifications for TiDB.
 ---
 
-# SQL Development Specification
+# SQL Development Specifications
 
 This document introduces some general development specifications for using SQL.
 
@@ -29,7 +29,7 @@ This document introduces some general development specifications for using SQL.
     ```sql
     SELECT gmt_create
     FROM ...
-    WHERE DATE_FORMAT(gmt_create, '%Y%m%d %H:%i:%s') = '20090101 00:00:0'
+    WHERE DATE_FORMAT(gmt_create, '%Y%m%d %H:%i:%s') = '20090101 00:00:00'
     ```
 
     Recommended:
@@ -38,8 +38,8 @@ This document introduces some general development specifications for using SQL.
 
     ```sql
     SELECT DATE_FORMAT(gmt_create, '%Y%m%d %H:%i:%s')
-    FROM .. .
-    WHERE gmt_create = str_to_date('20090101 00:00:00', '%Y%m%d %H:%i:s')
+    FROM ...
+    WHERE gmt_create = str_to_date('20090101 00:00:00', '%Y%m%d %H:%i:%s')
     ```
 
 ## Other specifications
@@ -49,6 +49,6 @@ This document introduces some general development specifications for using SQL.
 - Avoid using the `%` prefix for fuzzy prefix queries.
 - If the application uses **Multi Statements** to execute SQL, that is, multiple SQLs are joined with semicolons and sent to the client for execution at once, TiDB only returns the result of the first SQL execution.
 - When you use expressions, check if the expressions support computing push-down to the storage layer (TiKV or TiFlash). If not, you should expect more memory consumption and even OOM at the TiDB layer. Computing that can be pushe down the storage layer is as follows:
-    - [TiFlash supported push-down calculations](/tiflash/use-tiflash.md#supported-push-down-calculations).
+    - [TiFlash supported push-down calculations](/tiflash/tiflash-supported-pushdown-calculations.md).
     - [TiKV - List of Expressions for Pushdown](/functions-and-operators/expressions-pushed-down.md).
     - [Predicate push down](/predicate-push-down.md).

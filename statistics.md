@@ -6,27 +6,17 @@ aliases: ['/docs/dev/statistics/','/docs/dev/reference/performance/statistics/']
 
 # Introduction to Statistics
 
-TiDB uses statistics to decide [which index to choose](/choose-index.md). The `tidb_analyze_version` variable controls the statistics collected by TiDB. Currently, two versions of statistics are supported: `tidb_analyze_version = 1` and `tidb_analyze_version = 2`. In versions before v5.1.0, the default value of this variable is `1`. In v5.3.0 and later versions, the default value of this variable is `2`, which serves as an experimental feature. If your cluster is upgraded from a version earlier than v5.3.0 to v5.3.0 or later, the default value of `tidb_analyze_version` does not change.
+TiDB uses statistics to decide [which index to choose](/choose-index.md).
 
-> **Note:**
->
-> When `tidb_analyze_version = 2`, if memory overflow occurs after `ANALYZE` is executed, you need to set `tidb_analyze_version = 1` and perform one of the following operations:
->
-> - If the `ANALYZE` statement is executed manually, manually analyze every table to be analyzed.
->
->    {{< copyable "sql" >}}
->
->    ```sql
->    select distinct(concat('ANALYZE ',table_schema, '.', table_name,';')) from information_schema.tables, mysql.stats_histograms where stats_ver = 2 and table_id = tidb_table_id ;
->    ```
->
-> - If TiDB automatically executes the `ANALYZE` statement because the auto-analysis has been enabled, execute the following statement that generates the `DROP STATS` statement:
->
->    {{< copyable "sql" >}}
->
->    ```sql
->    select distinct(concat('DROP STATS ',table_schema, '.', table_name,';')) from information_schema.tables, mysql.stats_histograms where stats_ver = 2 and table_id = tidb_table_id ;
->    ```
+## Versions of statistics
+
+The `tidb_analyze_version` variable controls the statistics collected by TiDB. Currently, two versions of statistics are supported: `tidb_analyze_version = 1` and `tidb_analyze_version = 2`.
+
+- For TiDB Self-Hosted, the default value of this variable changes from `1` to `2` starting from v5.3.0.
+- For TiDB Cloud, the default value of this variable changes from `1` to `2` starting from v6.5.0.
+- If your cluster is upgraded from an earlier version, the default value of `tidb_analyze_version` does not change after the upgrade.
+
+Compared to Version 1, Version 2 statistics avoids the potential inaccuracy caused by hash collision when the data volume is huge. It also maintains the estimate precision in most scenarios.
 
 These two versions include different information in TiDB:
 
@@ -44,7 +34,26 @@ These two versions include different information in TiDB:
 | The average length of columns | √ | √ |
 | The average length of indexes | √ | √ |
 
-Compared to Version 1, Version 2 statistics avoids the potential inaccuracy caused by hash collision when the data volume is huge. It also maintains the estimate precision in most scenarios.
+When `tidb_analyze_version = 2`, if memory overflow occurs after `ANALYZE` is executed, you need to set `tidb_analyze_version = 1` to fall back to Version 1, and perform one of the following operations:
+
+- If the `ANALYZE` statement is executed manually, manually analyze every table to be analyzed.
+
+    ```sql
+    SELECT DISTINCT(CONCAT('ANALYZE TABLE ', table_schema, '.', table_name, ';')) FROM information_schema.tables, mysql.stats_histograms WHERE stats_ver = 2 AND table_id = tidb_table_id;
+    ```
+
+- If TiDB automatically executes the `ANALYZE` statement because the auto-analysis has been enabled, execute the following statement that generates the `DROP STATS` statement:
+
+    ```sql
+    SELECT DISTINCT(CONCAT('DROP STATS ', table_schema, '.', table_name, ';')) FROM information_schema.tables, mysql.stats_histograms WHERE stats_ver = 2 AND table_id = tidb_table_id;
+    ```
+
+- If the result of the preceding statement is too long to copy and paste, you can export the result to a temporary text file and then perform execution from the file like this:
+
+    ```sql
+    SELECT DISTINCT ... INTO OUTFILE '/tmp/sql.txt';
+    mysql -h ${TiDB_IP} -u user -P ${TIDB_PORT} ... < '/tmp/sql.txt'
+    ```
 
 This document briefly introduces the histogram, Count-Min Sketch, and Top-N, and details the collection and maintenance of statistics.
 
@@ -69,7 +78,7 @@ A hash collision might occur since Count-Min Sketch is a hash structure. In the 
 
 ## Top-N values
 
-Top-N values are values with the top N occurrences in a column or index. TiDB records the values and occurences of Top-N values.
+Top-N values are values with the top N occurrences in a column or index. TiDB records the values and occurrences of Top-N values.
 
 ## Collect statistics
 
@@ -113,11 +122,23 @@ You can perform full collection using the following syntax.
 
 Before v5.3.0, TiDB uses the reservoir sampling method to collect statistics. Since v5.3.0, the TiDB Version 2 statistics uses the Bernoulli sampling method to collect statistics by default. To re-use the reservoir sampling method, you can use the `WITH NUM SAMPLES` statement.
 
+The current sampling rate is calculated based on an adaptive algorithm. When you can observe the number of rows in a table using [`SHOW STATS_META`](/sql-statements/sql-statement-show-stats-meta.md), you can use this number of rows to calculate the sampling rate corresponding to 100,000 rows. If you cannot observe this number, you can use the `TABLE_KEYS` column in the [`TABLE_STORAGE_STATS`](/information-schema/information-schema-table-storage-stats.md) table as another reference to calculate the sampling rate.
+
+<CustomContent platform="tidb">
+
 > **Note:**
 >
-> The current sampling rate is calculated based on an adaptive algorithm. When you can observe the number of rows in a table using [`SHOW STATS_META`](/sql-statements/sql-statement-show-stats-meta.md), you can use this number of rows to calculate the sampling rate corresponding to 100,000 rows. If you cannot observe this number, you can use the `TABLE_KEYS` column in the [`TABLE_STORAGE_STATS`](/information-schema/information-schema-table-storage-stats.md) table as another reference to calculate the sampling rate.
+> Normally, `STATS_META` is more credible than `TABLE_KEYS`. However, after importing data through the methods like [TiDB Lightning](https://docs.pingcap.com/tidb/stable/tidb-lightning-overview), the result of `STATS_META` is `0`. To handle this situation, you can use `TABLE_KEYS` to calculate the sampling rate when the result of `STATS_META` is much smaller than the result of `TABLE_KEYS`.
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+> **Note:**
 >
-> Normally, `STATS_META` is more credible than `TABLE_KEYS`. However, after importing data through the methods like [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md), the result of `STATS_META` is `0`. To handle this situation, you can use `TABLE_KEYS` to calculate the sampling rate when the result of `STATS_META` is much smaller than the result of `TABLE_KEYS`.
+> Normally, `STATS_META` is more credible than `TABLE_KEYS`. However, after importing data through TiDB Cloud console (see [Import Sample Data](/tidb-cloud/import-sample-data.md)), the result of `STATS_META` is `0`. To handle this situation, you can use `TABLE_KEYS` to calculate the sampling rate when the result of `STATS_META` is much smaller than the result of `TABLE_KEYS`.
+
+</CustomContent>
 
 ##### Collect statistics on some columns
 
@@ -127,7 +148,8 @@ If a table has many columns, collecting statistics on all the columns can cause 
 
 > **Note:**
 >
-> Collecting statistics on some columns is only applicable for `tidb_analyze_version = 2`.
+> - Collecting statistics on some columns is only applicable for [`tidb_analyze_version = 2`](/system-variables.md#tidb_analyze_version-new-in-v510).
+> - Starting from TiDB v7.2.0, TiDB introduces the [`tidb_analyze_skip_column_types`](/system-variables.md#tidb_analyze_skip_column_types-new-in-v720) system variable, indicating which types of columns are skipped for statistics collection when executing the `ANALYZE` command to collect statistics. The system variable is only applicable for `tidb_analyze_version = 2`.
 
 - To collect statistics on specific columns, use the following syntax:
 
@@ -151,7 +173,17 @@ If a table has many columns, collecting statistics on all the columns can cause 
 
     1. Set the value of the [`tidb_enable_column_tracking`](/system-variables.md#tidb_enable_column_tracking-new-in-v540) system variable to `ON` to enable TiDB to collect `PREDICATE COLUMNS`.
 
+        <CustomContent platform="tidb">
+
         After the setting, TiDB writes the `PREDICATE COLUMNS` information to the `mysql.column_stats_usage` system table every 100 * [`stats-lease`](/tidb-configuration-file.md#stats-lease).
+
+        </CustomContent>
+
+        <CustomContent platform="tidb-cloud">
+
+        After the setting, TiDB writes the `PREDICATE COLUMNS` information to the `mysql.column_stats_usage` system table every 300 seconds.
+
+        </CustomContent>
 
     2. After the query pattern of your business is relatively stable, collect statistics on `PREDICATE COLUMNS` by using the following syntax:
 
@@ -292,10 +324,14 @@ When accessing partitioned tables in [dynamic pruning mode](/partitioned-table.m
 
 > **Note:**
 >
-> - When GlobalStats update is triggered:
+> - When GlobalStats update is triggered and [`tidb_skip_missing_partition_stats`](/system-variables.md#tidb_skip_missing_partition_stats-new-in-v730) is `OFF`:
 >
 >     - If some partitions have no statistics (such as a new partition that has never been analyzed), GlobalStats generation is interrupted and a warning message is displayed saying that no statistics are available on partitions.
 >     - If statistics of some columns are absent in specific partitions (different columns are specified for analyzing in these partitions), GlobalStats generation is interrupted when statistics of these columns are aggregated, and a warning message is displayed saying that statistics of some columns are absent in specific partitions.
+>
+> - When GlobalStats update is triggered and [`tidb_skip_missing_partition_stats`](/system-variables.md#tidb_skip_missing_partition_stats-new-in-v730) is `ON`:
+>
+>     If statistics of all or some columns are missing for some partitions, TiDB skips these missing partition statistics when generating GlobalStats so the generation of GlobalStats is not affected.
 >
 > - In dynamic pruning mode, the Analyze configurations of partitions and tables should be the same. Therefore, if you specify the `COLUMNS` configuration following the `ANALYZE TABLE TableName PARTITION PartitionNameList` statement or the `OPTIONS` configuration following `WITH`, TiDB will ignore them and return a warning.
 
@@ -328,23 +364,42 @@ You can perform incremental collection using the following syntax.
 
 ### Automatic update
 
-For the `INSERT`, `DELETE`, or `UPDATE` statements, TiDB automatically updates the number of rows and updated rows. TiDB persists this information regularly and the update cycle is 20 * `stats-lease`. The default value of `stats-lease` is `3s`. If you specify the value as `0`, it does not update automatically.
+<CustomContent platform="tidb">
+
+For the `INSERT`, `DELETE`, or `UPDATE` statements, TiDB automatically updates the number of rows and modified rows. TiDB persists this information regularly and the update cycle is 20 * [`stats-lease`](/tidb-configuration-file.md#stats-lease). The default value of `stats-lease` is `3s`. If you specify the value as `0`, TiDB stops updating statistics automatically.
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+For the `INSERT`, `DELETE`, or `UPDATE` statements, TiDB automatically updates the number of rows and modified rows. TiDB persists this information regularly and the update cycle is 20 * `stats-lease`. The default value of `stats-lease` is `3s`.
+
+</CustomContent>
+
+### Relevant system variables
 
 Three system variables related to automatic update of statistics are as follows:
 
 |  System Variable | Default Value | Description |
 |---|---|---|
-| `tidb_auto_analyze_ratio`| 0.5 | The threshold value of automatic update |
-| `tidb_auto_analyze_start_time` | `00:00 +0000` | The start time in a day when TiDB can perform automatic update |
-| `tidb_auto_analyze_end_time`   | `23:59 +0000` | The end time in a day when TiDB can perform automatic update |
+| [`tidb_auto_analyze_ratio`](/system-variables.md#tidb_auto_analyze_ratio) | 0.5 | The threshold value of automatic update |
+| [`tidb_auto_analyze_start_time`](/system-variables.md#tidb_auto_analyze_start_time) | `00:00 +0000` | The start time in a day when TiDB can perform automatic update |
+| [`tidb_auto_analyze_end_time`](/system-variables.md#tidb_auto_analyze_end_time)   | `23:59 +0000` | The end time in a day when TiDB can perform automatic update |
+| [`tidb_auto_analyze_partition_batch_size`](/system-variables.md#tidb_auto_analyze_partition_batch_size-new-in-v640) | `1` | The number of partitions that TiDB automatically analyzes when analyzing a partitioned table (that is, when automatically updating statistics on a partitioned table) |
 
 When the ratio of the number of modified rows to the total number of rows of `tbl` in a table is greater than `tidb_auto_analyze_ratio`, and the current time is between `tidb_auto_analyze_start_time` and `tidb_auto_analyze_end_time`, TiDB executes the `ANALYZE TABLE tbl` statement in the background to automatically update the statistics on this table.
+
+To avoid the situation that modifying a small amount of data on a small table frequently triggers the automatic update, when a table has less than 1000 rows, such data modifying does not trigger the automatic update in TiDB. You can use the `SHOW STATS_META` statement to view the number of rows in a table.
 
 > **Note:**
 >
 > Currently, the automatic update does not record the configuration items input at manual `ANALYZE`. Therefore, when you use the `WITH` syntax to control the collecting behavior of `ANALYZE`, you need to manually set scheduled tasks to collect statistics.
 
-Before TiDB v5.0, when you execute a query, TiDB collects feedback with `feedback-probability` and updates the histogram and Count-Min Sketch based on the feedback. **Since v5.0, this feature is disabled by default, and it is not recommended to enable this feature.**
+#### Disable automatic update
+
+If you find that automatic update of statistics consumes excessive resources and affects online application operations, you can disable it using the [`tidb_enable_auto_analyze`](/system-variables.md#tidb_enable_auto_analyze-new-in-v610) system variable.
+
+#### Terminate background `ANALYZE` tasks
 
 Since TiDB v6.0, TiDB supports using the `KILL` statement to terminate an `ANALYZE` task running in the background. If you find that an `ANALYZE` task running in the background consumes a lot of resources and affects your application, you can terminate the `ANALYZE` task by taking the following steps:
 
@@ -360,8 +415,18 @@ Since TiDB v6.0, TiDB supports using the `KILL` statement to terminate an `ANALY
 
 2. Terminate the `ANALYZE` task that is running in the background.
 
-   - If [`enable-global-kill`](/tidb-configuration-file.md#enable-global-kill-new-in-v610) is `true` (`true` by default), you can execute the `KILL TIDB ${id};` statement directly, where `${id}` is the `ID` of the background `ANALYZE` task obtained from the previous step.
-   - If `enable-global-kill` is `false`, you need to use a client to connect to the TiDB instance that is executing the backend `ANALYZE` task, and then execute the `KILL TIDB ${id};` statement. If you use a client to connect to another TiDB instance, or if there is a proxy between the client and the TiDB cluster, the `KILL` statement cannot terminate the background `ANALYZE` task.
+    <CustomContent platform="tidb">
+
+    - If [`enable-global-kill`](/tidb-configuration-file.md#enable-global-kill-new-in-v610) is `true` (`true` by default), you can execute the `KILL TIDB ${id};` statement directly, where `${id}` is the `ID` of the background `ANALYZE` task obtained from the previous step.
+    - If `enable-global-kill` is `false`, you need to use a client to connect to the TiDB instance that is executing the backend `ANALYZE` task, and then execute the `KILL TIDB ${id};` statement. If you use a client to connect to another TiDB instance, or if there is a proxy between the client and the TiDB cluster, the `KILL` statement cannot terminate the background `ANALYZE` task.
+
+    </CustomContent>
+
+    <CustomContent platform="tidb-cloud">
+
+    To terminate the `ANALYZE` task, you can execute the `KILL TIDB ${id};` statement, where `${id}` is the `ID` of the background `ANALYZE` task obtained from the previous step.
+
+    </CustomContent>
 
 For more information on the `KILL` statement, see [`KILL`](/sql-statements/sql-statement-kill.md).
 
@@ -398,7 +463,19 @@ The following are the `ANALYZE` configurations that support persistence:
 
 #### Enable ANALYZE configuration persistence
 
-The `ANALYZE` configuration persistence feature is enabled by default (the system variable `tidb_analyze_version` is `2` and `tidb_persist_analyze_options` is `ON` by default). You can use this feature to record the persistence configurations specified in the `ANALYZE` statement when executing the statement manually. Once recorded, the next time TiDB automatically updates statistics or you manually collect statistics without specifying these configuration, TiDB will collect statistics according to the recorded configurations.
+<CustomContent platform="tidb">
+
+The `ANALYZE` configuration persistence feature is enabled by default (the system variable `tidb_analyze_version` is `2` and `tidb_persist_analyze_options` is `ON` by default).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+The `ANALYZE` configuration persistence feature is disabled by default. To enable the feature, ensure that the system variable `tidb_persist_analyze_options` is `ON` and set the system variable `tidb_analyze_version` to `2`.
+
+</CustomContent>
+
+You can use this feature to record the persistence configurations specified in the `ANALYZE` statement when executing the statement manually. Once recorded, the next time TiDB automatically updates statistics or you manually collect statistics without specifying these configuration, TiDB will collect statistics according to the recorded configurations.
 
 When you manually execute the `ANALYZE` statement multiple times with persistence configurations specified, TiDB overwrites the previously recorded persistent configuration using the new configurations specified by the latest `ANALYZE` statement.
 
@@ -648,26 +725,53 @@ The preceding statement only deletes GlobalStats generated in dynamic pruning mo
 
 ## Load statistics
 
+> **Note:**
+>
+> Loading statistics is not available on [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless) clusters.
+
 By default, depending on the size of column statistics, TiDB loads statistics differently as follows:
 
-- For statistics that consume small space (such as count, distinctCount, and nullCount), as long as the column data is updated, TiDB automatically loads the corresponding statistics into memory for use in the SQL optimization stage.
-- For statistics that consume large space (such as histograms, TopN, and Count-Min Sketch), to ensure the performance of SQL execution, TiDB loads the statistics asynchronously on demand. Take histograms as an example. TiDB loads histogram statistics on a column into memory only when the optimizer uses the histogram statistics on that column. On-demand asynchronous statistics loading does not affect the performance of SQL execution but might provide incomplete statistics for SQL optimization.
+- For statistics that consume small amounts of memory (such as count, distinctCount, and nullCount), as long as the column data is updated, TiDB automatically loads the corresponding statistics into memory for use in the SQL optimization stage.
+- For statistics that consume large amounts of memory (such as histograms, TopN, and Count-Min Sketch), to ensure the performance of SQL execution, TiDB loads the statistics asynchronously on demand. Take histograms as an example. TiDB loads histogram statistics on a column into memory only when the optimizer uses the histogram statistics on that column. On-demand asynchronous statistics loading does not affect the performance of SQL execution but might provide incomplete statistics for SQL optimization.
 
 Since v5.4.0, TiDB introduces the synchronously loading statistics feature. This feature allows TiDB to synchronously load large-sized statistics (such as histograms, TopN, and Count-Min Sketch statistics) into memory when you execute SQL statements, which improves the completeness of statistics for SQL optimization.
 
-> **Warning:**
->
-> Currently, synchronously loading statistics is an experimental feature. It is not recommended that you use it in production environments.
+To enable this feature, set the value of the [`tidb_stats_load_sync_wait`](/system-variables.md#tidb_stats_load_sync_wait-new-in-v540) system variable to a timeout (in milliseconds) that SQL optimization can wait for at most to synchronously load complete column statistics. The default value of this variable is `100`, indicating that the feature is enabled.
 
-The synchronously loading statistics feature is disabled by default. To enable this feature, set the value of the [`tidb_stats_load_sync_wait`](/system-variables.md#tidb_stats_load_sync_wait-new-in-v540) system variable to a timeout (in milliseconds) that SQL optimization can wait for at most to synchronously load complete column statistics. The default value of this variable is `0`, indicating that the feature is disabled.
+<CustomContent platform="tidb">
 
 After enabling the synchronously loading statistics feature, you can further configure the feature as follows:
 
-- To control how TiDB behaves when the waiting time of SQL optimization reaches the timeout, modify the value of the [`tidb_stats_load_pseudo_timeout`](/system-variables.md#tidb_stats_load_pseudo_timeout-new-in-v540) system variable. The default value of this variable is `OFF`, indicating that the SQL execution fails after the timeout. If you set this variable to `ON`, after the timeout, the SQL optimization process does not use any histogram, TopN, or CMSketch statistics on any columns, but gets back to using pseudo statistics.
+- To control how TiDB behaves when the waiting time of SQL optimization reaches the timeout, modify the value of the [`tidb_stats_load_pseudo_timeout`](/system-variables.md#tidb_stats_load_pseudo_timeout-new-in-v540) system variable. The default value of this variable is `ON`, indicating that after the timeout, the SQL optimization process does not use any histogram, TopN, or CMSketch statistics on any columns. If this variable is set to `OFF`, after the timeout, SQL execution fails.
 - To specify the maximum number of columns that the synchronously loading statistics feature can process concurrently, modify the value of the [`stats-load-concurrency`](/tidb-configuration-file.md#stats-load-concurrency-new-in-v540) option in the TiDB configuration file. The default value is `5`.
 - To specify the maximum number of column requests that the synchronously loading statistics feature can cache, modify the value of the [`stats-load-queue-size`](/tidb-configuration-file.md#stats-load-queue-size-new-in-v540) option in the TiDB configuration file. The default value is `1000`.
 
+During TiDB startup, SQL statements executed before the initial statistics are fully loaded might have suboptimal execution plans, thus causing performance issues. To avoid such issues, TiDB v7.1.0 introduces the configuration parameter [`force-init-stats`](/tidb-configuration-file.md#force-init-stats-new-in-v710). With this option, you can control whether TiDB provides services only after statistics initialization has been finished during startup. Starting from v7.2.0, this parameter is enabled by default.
+
+Starting from v7.1.0, TiDB introduces [`lite-init-stats`](/tidb-configuration-file.md#lite-init-stats-new-in-v710) for lightweight statistics initialization.
+
+- When the value of `lite-init-stats` is `true`, statistics initialization does not load any histogram, TopN, or Count-Min Sketch of indexes or columns into memory.
+- When the value of `lite-init-stats` is `false`, statistics initialization loads histograms, TopN, and Count-Min Sketch of indexes and primary keys into memory but does not load any histogram, TopN, or Count-Min Sketch of non-primary key columns into memory. When the optimizer needs the histogram, TopN, and Count-Min Sketch of a specific index or column, the necessary statistics are loaded into memory synchronously or asynchronously.
+
+The default value of `lite-init-stats` is `true`, which means to enable lightweight statistics initialization. Setting `lite-init-stats` to `true` speeds up statistics initialization and reduces TiDB memory usage by avoiding unnecessary statistics loading.
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+After enabling the synchronously loading statistics feature, you can control how TiDB behaves when the waiting time of SQL optimization reaches the timeout by modifing the value of the [`tidb_stats_load_pseudo_timeout`](/system-variables.md#tidb_stats_load_pseudo_timeout-new-in-v540) system variable. The default value of this variable is `ON`, indicating that after the timeout, the SQL optimization process does not use any histogram, TopN, or CMSketch statistics on any columns. If this variable is set to `OFF`, after the timeout, SQL execution fails.
+
+</CustomContent>
+
 ## Import and export statistics
+
+<CustomContent platform="tidb-cloud">
+
+> **Note:**
+>
+> This section is not applicable to TiDB Cloud.
+
+</CustomContent>
 
 ### Export statistics
 
@@ -715,7 +819,185 @@ LOAD STATS 'file_name'
 
 `file_name` is the file name of the statistics to be imported.
 
+## Lock statistics
+
+> **Warning:**
+>
+> Locking statistics is an experimental feature for the current version. It is not recommended to use it in the production environment.
+
+Starting from v6.5.0, TiDB supports locking statistics. After the statistics of a table or a partition are locked, the statistics of the table cannot be modified and the `ANALYZE` statement cannot be executed on the table. For example:
+
+Create table `t`, and insert data into it. When the statistics of table `t` are not locked, the `ANALYZE` statement can be successfully executed.
+
+```sql
+mysql> CREATE TABLE t(a INT, b INT);
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> INSERT INTO t VALUES (1,2), (3,4), (5,6), (7,8);
+Query OK, 4 rows affected (0.00 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> ANALYZE TABLE t;
+Query OK, 0 rows affected, 1 warning (0.02 sec)
+
+mysql> SHOW WARNINGS;
++-------+------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Level | Code | Message                                                                                                                                                                                                               |
++-------+------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Note  | 1105 | Analyze use auto adjusted sample rate 1.000000 for table test.t, reason to use this rate is "Row count in stats_meta is much smaller compared with the row count got by PD, use min(1, 15000/4) as the sample-rate=1" |
++-------+------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+1 row in set (0.00 sec)
+```
+
+Lock the statistics of table `t` and execute `ANALYZE`. The warning message shows that the `ANALYZE` statement has skipped table `t`.
+
+```sql
+mysql> LOCK STATS t;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> SHOW STATS_LOCKED;
++---------+------------+----------------+--------+
+| Db_name | Table_name | Partition_name | Status |
++---------+------------+----------------+--------+
+| test    | t          |                | locked |
++---------+------------+----------------+--------+
+1 row in set (0.01 sec)
+
+mysql> ANALYZE TABLE t;
+Query OK, 0 rows affected, 2 warnings (0.00 sec)
+
+mysql> SHOW WARNINGS;
++---------+------+-----------------------------------------------------------------------------------------------------------------------------------------+
+| Level   | Code | Message                                                                                                                                 |
++---------+------+-----------------------------------------------------------------------------------------------------------------------------------------+
+| Note    | 1105 | Analyze use auto adjusted sample rate 1.000000 for table test.t, reason to use this rate is "use min(1, 110000/8) as the sample-rate=1" |
+| Warning | 1105 | skip analyze locked table: test.t                                                                                                       |
++---------+------+-----------------------------------------------------------------------------------------------------------------------------------------+
+2 rows in set (0.00 sec)
+```
+
+Unlock the statistics of table `t` and `ANALYZE` can be successfully executed again.
+
+```sql
+mysql> UNLOCK STATS t;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> ANALYZE TABLE t;
+Query OK, 0 rows affected, 1 warning (0.03 sec)
+
+mysql> SHOW WARNINGS;
++-------+------+-----------------------------------------------------------------------------------------------------------------------------------------+
+| Level | Code | Message                                                                                                                                 |
++-------+------+-----------------------------------------------------------------------------------------------------------------------------------------+
+| Note  | 1105 | Analyze use auto adjusted sample rate 1.000000 for table test.t, reason to use this rate is "use min(1, 110000/8) as the sample-rate=1" |
++-------+------+-----------------------------------------------------------------------------------------------------------------------------------------+
+1 row in set (0.00 sec)
+```
+
+In addition, you can also lock the statistics of a partition using `LOCK STATS`. For example:
+
+Create a partition table `t`, and insert data into it. When the statistics of partition `p1` are not locked, the `ANALYZE` statement can be successfully executed.
+
+```sql
+mysql> CREATE TABLE t(a INT, b INT) PARTITION BY RANGE (a) (PARTITION p0 VALUES LESS THAN (10), PARTITION p1 VALUES LESS THAN (20), PARTITION p2 VALUES LESS THAN (30));
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> INSERT INTO t VALUES (1,2), (3,4), (5,6), (7,8);
+Query OK, 4 rows affected (0.00 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> ANALYZE TABLE t;
+Query OK, 0 rows affected, 6 warning (0.02 sec)
+
+mysql> SHOW WARNINGS;
++---------+------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Level   | Code | Message                                                                                                                                                                                                                              |
++---------+------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Warning | 1105 | disable dynamic pruning due to t has no global stats                                                                                                                                                                                 |
+| Note    | 1105 | Analyze use auto adjusted sample rate 1.000000 for table test.t's partition p0, reason to use this rate is "Row count in stats_meta is much smaller compared with the row count got by PD, use min(1, 15000/4) as the sample-rate=1" |
+| Warning | 1105 | disable dynamic pruning due to t has no global stats                                                                                                                                                                                 |
+| Note    | 1105 | Analyze use auto adjusted sample rate 1.000000 for table test.t's partition p1, reason to use this rate is "TiDB assumes that the table is empty, use sample-rate=1"                                                                 |
+| Warning | 1105 | disable dynamic pruning due to t has no global stats                                                                                                                                                                                 |
+| Note    | 1105 | Analyze use auto adjusted sample rate 1.000000 for table test.t's partition p2, reason to use this rate is "TiDB assumes that the table is empty, use sample-rate=1"                                                                 |
++---------+------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+6 rows in set (0.01 sec)
+```
+
+Lock the statistics of partition `p1` and execute `ANALYZE`. The warning message shows that the `ANALYZE` statement has skipped partition `p1`.
+
+```sql
+mysql> LOCK STATS t PARTITION p1;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> SHOW STATS_LOCKED;
++---------+------------+----------------+--------+
+| Db_name | Table_name | Partition_name | Status |
++---------+------------+----------------+--------+
+| test    | t          | p1             | locked |
++---------+------------+----------------+--------+
+1 row in set (0.00 sec)
+
+mysql> ANALYZE TABLE t PARTITION p1;
+Query OK, 0 rows affected, 2 warnings (0.01 sec)
+
+mysql> SHOW WARNINGS;
++---------+------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Level   | Code | Message                                                                                                                                                              |
++---------+------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Note    | 1105 | Analyze use auto adjusted sample rate 1.000000 for table test.t's partition p1, reason to use this rate is "TiDB assumes that the table is empty, use sample-rate=1" |
+| Warning | 1105 | skip analyze locked table: test.t partition (p1)                                                                                                                     |
++---------+------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+2 rows in set (0.00 sec)
+```
+
+Unlock the statistics of partition `p1` and `ANALYZE` can be successfully executed again.
+
+```sql
+mysql> UNLOCK STATS t PARTITION p1;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> ANALYZE TABLE t PARTITION p1;
+Query OK, 0 rows affected, 1 warning (0.01 sec)
+
+mysql> SHOW WARNINGS;
++-------+------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Level | Code | Message                                                                                                                                                              |
++-------+------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Note  | 1105 | Analyze use auto adjusted sample rate 1.000000 for table test.t's partition p1, reason to use this rate is "TiDB assumes that the table is empty, use sample-rate=1" |
++-------+------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+1 row in set (0.00 sec)
+```
+
+### Behaviors of locking statistics
+
+* If you lock the statistics on a partitioned table, the statistics of all partitions on the partitioned table are locked.
+* If you truncate a table or partition, the statistics lock on the table or partition will be released.
+
+The following table describes the behaviors of locking statistics:
+
+| | Delete the whole table | Truncate the whole table | Truncate a partition | Create a new partition | Delete a partition | Reorganize a partition | Exchange a partition |
+|----------------------------|------------|----------------------------------------------------------------|----------------------------------------------------------------|----------------|----------------------------------------------|----------------------------------------------|--------------------------|
+| A non-partitioned table is locked | The lock is invalid | The lock is invalid because TiDB deletes the old table, so the lock information is also deleted | / | / | / | / | / |
+| A partitioned table and the whole table is locked | The lock is invalid | The lock is invalid because TiDB deletes the old table, so the lock information is also deleted | The old partition lock information is invalid, and the new partition is automatically locked | The new partition is automatically locked | The lock information of the deleted partition is cleared, and the lock of the whole table continues to take effect | The lock information of the deleted partition is cleared, and the new partition is automatically locked | The lock information is transferred to the exchanged table, and the new partition is automatically locked |
+| A partitioned table and only some partitions are locked | The lock is invalid | The lock is invalid because TiDB deletes the old table, so the lock information is also deleted | The lock is invalid because TiDB deletes the old table, so the lock information is also deleted | / | The deleted partition lock information is cleared | The deleted partition lock information is cleared | The lock information is transferred to the exchanged table |
+
 ## See also
+
+<CustomContent platform="tidb">
 
 * [LOAD STATS](/sql-statements/sql-statement-load-stats.md)
 * [DROP STATS](/sql-statements/sql-statement-drop-stats.md)
+* [LOCK STATS](/sql-statements/sql-statement-lock-stats.md)
+* [UNLOCK STATS](/sql-statements/sql-statement-unlock-stats.md)
+* [SHOW STATS_LOCKED](/sql-statements/sql-statement-show-stats-locked.md)
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+* [LOAD STATS](/sql-statements/sql-statement-load-stats.md)
+* [LOCK STATS](/sql-statements/sql-statement-lock-stats.md)
+* [UNLOCK STATS](/sql-statements/sql-statement-unlock-stats.md)
+* [SHOW STATS_LOCKED](/sql-statements/sql-statement-show-stats-locked.md)
+
+</CustomContent>

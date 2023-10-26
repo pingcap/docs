@@ -7,15 +7,6 @@ summary: Learn how to read historical data using the `AS OF TIMESTAMP` statement
 
 This document describes how to perform the [Stale Read](/stale-read.md) feature using the `AS OF TIMESTAMP` clause to read historical data in TiDB, including specific usage examples and strategies for saving historical data.
 
-> **Warning:**
->
-> Currently, you cannot use Stale Read together with TiFlash. If your SQL query contains the `AS OF TIMESTAMP` clause and TiDB might read data from TiFlash replicas, you might encounter an error with a message like `ERROR 1105 (HY000): stale requests require tikv backend`.
->
-> To fix the problem, disable TiFlash replicas for your Stale Read query. To do that, perform one of the following operations:
->
-> - Use the `set session tidb_isolation_read_engines='tidb,tikv'` variable.
-> - Use the [hint](/optimizer-hints.md#read_from_storagetiflasht1_name--tl_name--tikvt2_name--tl_name-) to enforce TiDB to read data from TiKV.
-
 TiDB supports reading historical data through a standard SQL interface, which is the `AS OF TIMESTAMP` SQL clause, without the need for special clients or drivers. After data is updated or deleted, you can read the historical data before the update or deletion using this SQL interface.
 
 > **Note:**
@@ -46,6 +37,8 @@ Here are some examples of the `AS OF TIMESTAMP` clause:
 > In addition to specifying a timestamp, the most common use of the `AS OF TIMESTAMP` clause is to read data that is several seconds old. If this approach is used, it is recommended to read historical data older than 5 seconds.
 >
 > You need to deploy the NTP service for your TiDB and PD nodes when you use Stale Read. This avoids the situation where the specified timestamp used by TiDB goes ahead of the latest TSO allocating progress (such as a timestamp several seconds ahead), or is later than the GC safe point timestamp. When the specified timestamp goes beyond the service scope, TiDB returns an error.
+>
+> To reduce the latency and improve the timeliness of the Stale Read data, you can modify the TiKV `advance-ts-interval` configuration item. See [Reduce Stale Read latency](/stale-read.md#reduce-stale-read-latency) for details.
 
 ## Usage examples
 

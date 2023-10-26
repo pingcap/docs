@@ -6,28 +6,110 @@ aliases: ['/docs/dev/hardware-and-software-requirements/','/docs/dev/how-to/depl
 
 # Software and Hardware Recommendations
 
-As an open source distributed NewSQL database with high performance, TiDB can be deployed in the Intel architecture server, ARM architecture server, and major virtualization environments and runs well. TiDB supports most of the major hardware networks and Linux operating systems.
+<!-- Localization note for TiDB:
 
-## Linux OS version requirements
+- English: use distributed SQL, and start to emphasize HTAP
+- Chinese: can keep "NewSQL" and emphasize one-stop real-time HTAP ("一栈式实时 HTAP")
+- Japanese: use NewSQL because it is well-recognized
 
-| Linux OS        | Version      |
-| :-----------------------:| :----------: |
-| Red Hat Enterprise Linux | 7.3 or later 7.x releases |
-| CentOS                   | 7.3 or later 7.x releases |
-| Oracle Enterprise Linux  | 7.3 or later 7.x releases |
-| Amazon Linux             | 2 |
-| Ubuntu LTS               | 16.04 or later |
+-->
+
+As an open-source distributed SQL database with high performance, TiDB can be deployed in the Intel architecture server, ARM architecture server, and major virtualization environments and runs well. TiDB supports most of the major hardware networks and Linux operating systems.
+
+## OS and platform requirements
+
+<table>
+<thead>
+  <tr>
+    <th>Operating systems</th>
+    <th>Supported CPU architectures</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>Red Hat Enterprise Linux 8.4 or a later 8.x version</td>
+    <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
+  </tr>
+  <tr>
+    <td><ul><li>Red Hat Enterprise Linux 7.3 or a later 7.x version</li><li>CentOS 7.3 or a later 7.x version</li></ul></td>
+    <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
+  </tr>
+  <tr>
+    <td>Amazon Linux 2</td>
+    <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
+  </tr>
+  <tr>
+    <td>Kylin Euler V10 SP1/SP2</td>
+    <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
+  </tr>
+  <tr>
+    <td>UnionTech OS (UOS) V20</td>
+    <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
+  </tr>
+  <tr>
+    <td>openEuler 22.03 LTS SP1</td>
+    <td>x86_64</td>
+  </tr>
+  <tr>
+    <td>macOS 12 (Monterey) or later</td>
+    <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
+  </tr>
+  <tr>
+    <td>Oracle Enterprise Linux 7.3 or a later 7.x version</td>
+    <td>x86_64</td>
+  </tr>
+  <tr>
+    <td>Ubuntu LTS 18.04 or later</td>
+    <td>x86_64</td>
+  </tr>
+  <tr>
+    <td>CentOS 8 Stream</td>
+    <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
+  </tr>
+  <tr>
+    <td>Debian 9 (Stretch) or later</td>
+    <td>x86_64</td>
+  </tr>
+  <tr>
+    <td>Fedora 35 or later</td>
+    <td>x86_64</td>
+  </tr>
+  <tr>
+    <td>openSUSE Leap later than v15.3 (not including Tumbleweed)</td>
+    <td>x86_64</td>
+  </tr>
+  <tr>
+    <td>SUSE Linux Enterprise Server 15</td>
+    <td>x86_64</td>
+  </tr>
+</tbody>
+</table>
 
 > **Note:**
 >
 > - For Oracle Enterprise Linux, TiDB supports the Red Hat Compatible Kernel (RHCK) and does not support the Unbreakable Enterprise Kernel provided by Oracle Enterprise Linux.
-> - A large number of TiDB tests have been run on the CentOS 7.3 system, and in our community there are a lot of best practices in which TiDB is deployed on the Linux operating system. Therefore, it is recommended to deploy TiDB on CentOS 7.3 or later.
-> - The support for the Linux operating systems above includes the deployment and operation in physical servers as well as in major virtualized environments like VMware, KVM and XEN.
-> - Red Hat Enterprise Linux 8.0, CentOS 8 Stream, and Oracle Enterprise Linux 8.0 are not supported yet as the testing of these platforms is in progress.
-> - Support for CentOS 8 Linux is not planned because its upstream support ends on December 31, 2021.
+> - According to [CentOS Linux EOL](https://www.centos.org/centos-linux-eol/), the upstream support for CentOS Linux 8 ended on December 31, 2021. CentOS Stream 8 continues to be supported by the CentOS organization.
 > - Support for Ubuntu 16.04 will be removed in future versions of TiDB. Upgrading to Ubuntu 18.04 or later is strongly recommended.
+> - If you are using the 32-bit version of an operating system listed in the preceding table, TiDB **is not guaranteed** to be compilable, buildable or deployable on the 32-bit operating system and the corresponding CPU architecture, or TiDB does not actively adapt to the 32-bit operating system.
+> - Other operating system versions not mentioned above might work but are not officially supported.
 
-Other Linux OS versions such as Debian Linux and Fedora Linux might work but are not officially supported.
+### Libraries required for compiling and running TiDB
+
+|  Libraries required for compiling and running TiDB |  Version   |
+|   :---   |   :---   |
+|   Golang  |  1.21 or later |
+|   Rust    |   nightly-2022-07-31 or later  |
+|  GCC      |   7.x      |
+|  LLVM     |  13.0 or later  |
+
+Library required for running TiDB: glibc (2.28-151.el8 version)
+
+### Docker image dependencies
+
+The following CPU architectures are supported:
+
+- x86_64. Starting from TiDB v6.6.0, the [x84-64-v2 instruction set](https://developers.redhat.com/blog/2021/01/05/building-red-hat-enterprise-linux-9-for-the-x86-64-v2-microarchitecture-level) is required.
+- ARM 64
 
 ## Software recommendations
 
@@ -56,7 +138,7 @@ You can deploy and run TiDB on the 64-bit generic hardware server platform in th
 
 ### Development and test environments
 
-| Component | CPU     | Memory | Local Storage  | Network  | Instance Number (Minimum Requirement) |
+| Component | CPU     | Memory | Local Storage  | Network  | Number of Instances (Minimum Requirement) |
 | :------: | :-----: | :-----: | :----------: | :------: | :----------------: |
 | TiDB    | 8 core+   | 16 GB+  | No special requirements | Gigabit network card | 1 (can be deployed on the same machine with PD)      |
 | PD      | 4 core+   | 8 GB+  | SAS, 200 GB+ | Gigabit network card | 1 (can be deployed on the same machine with TiDB)       |
@@ -71,12 +153,13 @@ You can deploy and run TiDB on the 64-bit generic hardware server platform in th
 > - For the TiKV server, it is recommended to use NVMe SSDs to ensure faster reads and writes.
 > - If you only want to test and verify the features, follow [Quick Start Guide for TiDB](/quick-start-with-tidb.md) to deploy TiDB on a single machine.
 > - The TiDB server uses the disk to store server logs, so there are no special requirements for the disk type and capacity in the test environment.
+> - Starting from v6.3.0, to deploy TiFlash under the Linux AMD64 architecture, the CPU must support the AVX2 instruction set. Ensure that `cat /proc/cpuinfo | grep avx2` has output. To deploy TiFlash under the Linux ARM64 architecture, the CPU must support the ARMv8 instruction set architecture. Ensure that `cat /proc/cpuinfo | grep 'crc32' | grep 'asimd'` has output. By using the instruction set extensions, TiFlash's vectorization engine can deliver better performance.
 
 ### Production environment
 
-| Component | CPU | Memory | Hard Disk Type | Network | Instance Number (Minimum Requirement) |
+| Component | CPU | Memory | Hard Disk Type | Network | Number of Instances (Minimum Requirement) |
 | :-----: | :------: | :------: | :------: | :------: | :-----: |
-|  TiDB  | 16 core+ | 48 GB+ | SAS | 10 Gigabit network card (2 preferred) | 2 |
+| TiDB  | 16 core+ | 48 GB+ | SSD | 10 Gigabit network card (2 preferred) | 2 |
 | PD | 8 core+ | 16 GB+ | SSD | 10 Gigabit network card (2 preferred) | 3 |
 | TiKV | 16 core+ | 64 GB+ | SSD | 10 Gigabit network card (2 preferred) | 3 |
 | TiFlash | 48 core+ | 128 GB+ | 1 or more SSDs | 10 Gigabit network card (2 preferred) | 2 |
@@ -100,7 +183,15 @@ Before you deploy TiCDC, note that it is recommended to deploy TiCDC on PCIe-SSD
 
 ## Network requirements
 
-As an open source distributed NewSQL database, TiDB requires the following network port configuration to run. Based on the TiDB deployment in actual environments, the administrator can open relevant ports in the network side and host side.
+<!-- Localization note for TiDB:
+
+- English: use distributed SQL, and start to emphasize HTAP
+- Chinese: can keep "NewSQL" and emphasize one-stop real-time HTAP ("一栈式实时 HTAP")
+- Japanese: use NewSQL because it is well-recognized
+
+-->
+
+As an open-source distributed SQL database, TiDB requires the following network port configuration to run. Based on the TiDB deployment in actual environments, the administrator can open relevant ports in the network side and host side.
 
 | Component | Default Port | Description |
 | :--:| :--: | :-- |
@@ -111,7 +202,6 @@ As an open source distributed NewSQL database, TiDB requires the following netwo
 | PD | 2379 | the communication port between TiDB and PD |
 | PD | 2380 | the inter-node communication port within the PD cluster |
 | TiFlash | 9000 | the TiFlash TCP service port |
-| TiFlash | 8123 | the TiFlash HTTP service port |
 | TiFlash | 3930 | the TiFlash RAFT and Coprocessor service port |
 | TiFlash | 20170 |the TiFlash Proxy service port |
 | TiFlash | 20292 | the port for Prometheus to pull TiFlash Proxy metrics |
@@ -120,7 +210,7 @@ As an open source distributed NewSQL database, TiDB requires the following netwo
 | Drainer | 8249 | the Drainer communication port |
 | TiCDC | 8300 | the TiCDC communication port |
 | Monitoring | 9090 | the communication port for the Prometheus service|
-| Monitoring | 20120 | the communication port for the NgMonitoring service|
+| Monitoring | 12020 | the communication port for the NgMonitoring service|
 | Node_exporter | 9100 | the communication port to report the system information of every TiDB cluster node |
 | Blackbox_exporter | 9115 | the Blackbox_exporter communication port, used to monitor the ports in the TiDB cluster |
 | Grafana | 3000 | the port for the external Web monitoring service and client (Browser) access|
@@ -129,14 +219,47 @@ As an open source distributed NewSQL database, TiDB requires the following netwo
 
 ## Disk space requirements
 
-| Component | Disk space requirement | Healthy disk usage |
-| :-- | :-- | :-- |
-| TiDB | At least 30 GB for the log disk | Lower than 90% |
-| PD | At least 20 GB for the data disk and for the log disk, respectively | Lower than 90% |
-| TiKV | At least 100 GB for the data disk and for the log disk, respectively | Lower than 80% |
-| TiFlash | At least 100 GB for the data disk and at least 30 GB for the log disk, respectively | Lower than 80% |
-| TiUP | <ul><li>Control machine: No more than 1 GB space is required for deploying a TiDB cluster of a single version. The space required increases if TiDB clusters of multiple versions are deployed. </li> <li> Deployment servers (machines where the TiDB components run): TiFlash occupies about 700 MB space and other components (such as PD, TiDB, and TiKV) occupy about 200 MB space respectively. During the cluster deployment process, the TiUP cluster requires less than 1 MB of temporary space (`/tmp` directory) to store temporary files.</li></ul>| N/A |
-| Ngmonitoring | <ul><li>Conprof: 3 x 1 GB x Number of components (each component occupies about 1 GB per day, 3 days in total) + 20 GB reserved space </li><li> Top SQL: 30 x 50 MB x Number of components (each component occupies about 50 MB per day, 30 days in total) </li><li> Conprof and Top SQL share the reserved space</li></ul> | N/A |
+<table>
+<thead>
+  <tr>
+    <th>Component</th>
+    <th>Disk space requirement</th>
+    <th>Healthy disk usage</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>TiDB</td>
+    <td><ul><li>At least 30 GB for the log disk</li><li>Starting from v6.5.0, Fast Online DDL (controlled by the <a href="https://docs.pingcap.com/tidb/dev/system-variables#tidb_ddl_enable_fast_reorg-new-in-v630">tidb_ddl_enable_fast_reorg</a> variable) is enabled by default to accelerate DDL operations, such as adding indexes. If DDL operations involving large objects exist in your application, it is highly recommended to prepare additional SSD disk space for TiDB (100 GB or more). For detailed configuration instructions, see <a href="https://docs.pingcap.com/tidb/dev/check-before-deployment#set-temporary-spaces-for-tidb-instances-recommended">Set a temporary space for a TiDB instance</a></li></ul></td>
+    <td>Lower than 90%</td>
+  </tr>
+  <tr>
+    <td>PD</td>
+    <td>At least 20 GB for the data disk and for the log disk, respectively</td>
+    <td>Lower than 90%</td>
+  </tr>
+  <tr>
+    <td>TiKV</td>
+    <td>At least 100 GB for the data disk and for the log disk, respectively</td>
+    <td>Lower than 80%</td>
+  </tr>
+  <tr>
+    <td>TiFlash</td>
+    <td>At least 100 GB for the data disk and at least 30 GB for the log disk, respectively</td>
+    <td>Lower than 80%</td>
+  </tr>
+  <tr>
+    <td>TiUP</td>
+    <td><ul><li>Control machine: No more than 1 GB space is required for deploying a TiDB cluster of a single version. The space required increases if TiDB clusters of multiple versions are deployed.</li><li>Deployment servers (machines where the TiDB components run): TiFlash occupies about 700 MB space and other components (such as PD, TiDB, and TiKV) occupy about 200 MB space respectively. During the cluster deployment process, the TiUP cluster requires less than 1 MB of temporary space (<code>/tmp</code> directory) to store temporary files.</li></ul></td>
+    <td>N/A</td>
+  </tr>
+  <tr>
+    <td>Ngmonitoring</td>
+    <td><ul><li>Conprof: 3 x 1 GB x Number of components (each component occupies about 1 GB per day, 3 days in total) + 20 GB reserved space</li><li>Top SQL: 30 x 50 MB x Number of components (each component occupies about 50 MB per day, 30 days in total)</li><li>Conprof and Top SQL share the reserved space</li></ul></td>
+    <td>N/A</td>
+  </tr>
+</tbody>
+</table>
 
 ## Web browser requirements
 

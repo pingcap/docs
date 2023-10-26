@@ -6,7 +6,7 @@ aliases: ['/docs/dev/sql-statements/sql-statement-show-indexes/','/docs/dev/refe
 
 # SHOW INDEXES [FROM|IN]
 
-The statement `SHOW INDEXES [FROM|IN]` lists the indexes on a specified table.  The statements `SHOW INDEX [FROM|IN]`, `SHOW KEYS [FROM|IN]` are aliases of this statement, and included for compatibility with MySQL.
+The statement `SHOW INDEXES [FROM|IN]` lists the indexes on a specified table. The statements `SHOW INDEX [FROM|IN]`, `SHOW KEYS [FROM|IN]` are aliases of this statement, and included for compatibility with MySQL.
 
 ## Synopsis
 
@@ -72,7 +72,7 @@ mysql> SHOW KEYS FROM t1;
 
 ## MySQL compatibility
 
-The `Cardinality` column in MySQL shows the number of different values on the index. In TiDB, the `Cardinality` column always shows `0`.
+The `SHOW INDEXES [FROM|IN]` statement in TiDB is fully compatible with MySQL. If you find any compatibility differences, [report a bug](https://docs.pingcap.com/tidb/stable/support).
 
 ## See also
 

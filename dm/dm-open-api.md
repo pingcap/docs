@@ -28,6 +28,8 @@ To enable OpenAPI, perform one of the following operations:
 > - DM provides the [specification document](https://github.com/pingcap/tiflow/blob/master/dm/openapi/spec/dm.yaml) that meets the OpenAPI 3.0.0 standard. This document contains all the request parameters and returned values. You can copy the document yaml and preview it in [Swagger Editor](https://editor.swagger.io/).
 >
 > - After you deploy the DM-master nodes, you can access `http://{master-addr}/api/v1/docs` to preview the documentation online.
+>
+> - Some features supported in the configuration file are not supported in OpenAPI. Their capabilities are not fully aligned. In a production environment, it is recommended to use the [configuration file](/dm/dm-config-overview.md).
 
 You can use the APIs to perform the following maintenance operations on the DM cluster:
 
@@ -358,7 +360,7 @@ curl -X 'DELETE' \
 
 This API is a synchronous interface. If the request is successful, the information of the corresponding data source is returned.
 
-> **NOTE:**
+> **Note:**
 >
 > When you use this API to update the data source configuration, make sure that there are no running tasks under the current data source.
 

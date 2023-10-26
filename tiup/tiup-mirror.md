@@ -44,7 +44,6 @@ Available Commands:
 
 Global Flags:
       --help                 Help for this command
-      --skip-version-check   Skip the strict version check, by default a version must be a valid SemVer string
 
 Use "tiup mirror [command] --help" for more information about a command.
 ```
@@ -88,9 +87,9 @@ The `tiup mirror clone` command provides many optional flags (might provide more
 
     If you want to clone only one version (not all versions) of a component, use `--<component>=<version>` to specify this version. For example:
 
-    - Execute the `tiup mirror clone <target-dir> --tidb v6.1.0` command to clone the v6.1.0 version of the TiDB component.
-    - Run the `tiup mirror clone <target-dir> --tidb v6.1.0 --tikv all` command to clone the v6.1.0 version of the TiDB component and all versions of the TiKV component.
-    - Run the `tiup mirror clone <target-dir> v6.1.0` command to clone the v6.1.0 version of all components in a cluster.
+    - Execute the `tiup mirror clone <target-dir> --tidb v7.4.0` command to clone the v7.4.0 version of the TiDB component.
+    - Run the `tiup mirror clone <target-dir> --tidb v7.4.0 --tikv all` command to clone the v7.4.0 version of the TiDB component and all versions of the TiKV component.
+    - Run the `tiup mirror clone <target-dir> v7.4.0` command to clone the v7.4.0 version of all components in a cluster.
 
 After cloning, signing keys are set up automatically.
 

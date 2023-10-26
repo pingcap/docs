@@ -22,6 +22,17 @@ DBName ::=
 
 DatabaseOptionListOpt ::=
     DatabaseOptionList?
+
+DatabaseOptionList ::=
+    DatabaseOption ( ','? DatabaseOption )*
+
+DatabaseOption ::=
+    DefaultKwdOpt ( CharsetKw '='? CharsetName | 'COLLATE' '='? CollationName | 'ENCRYPTION' '='? EncryptionOpt )
+|   DefaultKwdOpt PlacementPolicyOption
+
+PlacementPolicyOption ::=
+    "PLACEMENT" "POLICY" EqOpt PolicyName
+|   "PLACEMENT" "POLICY" (EqOpt | "SET") "DEFAULT"
 ```
 
 ## Syntax
@@ -63,7 +74,7 @@ mysql> SHOW TABLES;
 
 ## MySQL compatibility
 
-This statement is understood to be fully compatible with MySQL. Any compatibility differences should be [reported via an issue](https://github.com/pingcap/tidb/issues/new/choose) on GitHub.
+The `CREATE DATABASE` statement in TiDB is fully compatible with MySQL. If you find any compatibility differences, [report a bug](https://docs.pingcap.com/tidb/stable/support).
 
 ## See also
 

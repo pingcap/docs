@@ -6,7 +6,7 @@ aliases: ['/docs/dev/tune-tikv-performance/','/docs/dev/reference/performance/tu
 
 # Tune TiKV Memory Parameter Performance
 
-This document describes how to tune the TiKV parameters for optimal performance. You can find the default configuration file in [etc/config-template.toml](https://github.com/tikv/tikv/blob/master/etc/config-template.toml). To modify the configuration, you can [use TiUP](/maintain-tidb-using-tiup.md#modify-the-configuration) or [modify TiKV online](/dynamic-config.md#modify-tikv-configuration-online) for a limited set of configuration items. For the complete configuration, see [TiKV configuration file](/tikv-configuration-file.md).
+This document describes how to tune the TiKV parameters for optimal performance. You can find the default configuration file in [etc/config-template.toml](https://github.com/tikv/tikv/blob/master/etc/config-template.toml). To modify the configuration, you can [use TiUP](/maintain-tidb-using-tiup.md#modify-the-configuration) or [modify TiKV dynamically](/dynamic-config.md#modify-tikv-configuration-dynamically) for a limited set of configuration items. For the complete configuration, see [TiKV configuration file](/tikv-configuration-file.md).
 
 TiKV uses RocksDB for persistent storage at the bottom level of the TiKV architecture. Therefore, many of the performance parameters are related to RocksDB. TiKV uses two RocksDB instances: the default RocksDB instance stores KV data, the Raft RocksDB instance (RaftDB) stores Raft logs.
 
@@ -22,7 +22,7 @@ TiKV implements `Column Families` (CF) from RocksDB.
 
     - The `default` CF stores the Raft log. The corresponding parameters are in `[raftdb.defaultcf]`.
 
-After TiKV 3.0, by default, all CFs share one block cache instance. You can configure the size of the cache by setting the `capacity` parameter under `[storage.block-cache]`. The bigger the block cache, the more hot data can be cached, and the easier to read data, in the meantime, the more system memory is occupied. To use a separate block cache instance for each CF, set `shared=false` under `[storage.block-cache]`, and configure individual block cache size for each CF. For example, you can configure the size of `write` CF by setting the `block-cache-size` parameter under `[rocksdb.writecf]`.
+After TiKV 3.0, by default, all CFs share one block cache instance. You can configure the size of the cache by setting the `capacity` parameter under `[storage.block-cache]`. The bigger the block cache, the more hot data can be cached, and the easier to read data, in the meantime, the more system memory is occupied.
 
 Before TiKV 3.0, shared block cache is not supported, and you need to configure block cache for each CF individually.
 
@@ -73,6 +73,7 @@ log-level = "info"
 ##
 ## The rest of config in the storage.block-cache session is effective only when shared block cache
 ## is on.
+## Starting from v6.6.0, the `shared` option is always enabled and cannot be disabled.
 # shared = true
 
 ## Size of the shared block cache. Normally it should be tuned to 30%-50% of system's total memory.
@@ -138,9 +139,6 @@ max-manifest-file-size = "20MB"
 
 # In most cases, set the maximum total size of RocksDB WAL logs to the default value.
 # max-total-wal-size = "4GB"
-
-# Use this parameter to enable or disable the statistics of RocksDB.
-# enable-statistics = true
 
 # Use this parameter to enable the readahead feature during RocksDB compaction. If you are using mechanical disks, it is recommended to set the value to 2MB at least.
 # compaction-readahead-size = "2MB"
@@ -223,9 +221,6 @@ target-file-size-base = "32MB"
 [raftdb]
 # The maximum number of the file handles RaftDB can open
 # max-open-files = 40960
-
-# Configure this parameter to enable or disable the RaftDB statistics information.
-# enable-statistics = true
 
 # Enable the readahead feature in RaftDB compaction. If you are using mechanical disks, it is recommended to set
 # this value to 2MB at least.

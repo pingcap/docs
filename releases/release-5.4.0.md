@@ -30,19 +30,72 @@ In v5.4, the key new features or improvements are as follows:
 
 ### System variables
 
-| Variable name | Change type | Description |
-| :---------- | :----------- | :----------- |
-|  [`tidb_enable_column_tracking`](/system-variables.md#tidb_enable_column_tracking-new-in-v540) | Newly added | Controls whether to allow TiDB to collect `PREDICATE COLUMNS`. The default value is `OFF`. |
-| [`tidb_enable_paging`](/system-variables.md#tidb_enable_paging-new-in-v540)  | Newly added | Controls whether to use the method of paging to send coprocessor requests in `IndexLookUp` operator. The default value is `OFF`. <br/> For read queries that use `IndexLookup` and `Limit` and that `Limit` cannot be pushed down to `IndexScan`, there might be high latency for the read queries and high CPU usage for TiKV's `unified read pool`. In such cases, because the `Limit` operator only requires a small set of data, if you set `tidb_enable_paging` to `ON`, TiDB processes less data, which reduces query latency and resource consumption. |
-| [`tidb_enable_top_sql`](/system-variables.md#tidb_enable_top_sql-new-in-v540) | Newly added | Controls whether to enable the Top SQL feature. The default value is `OFF`. |
-| [`tidb_persist_analyze_options`](/system-variables.md#tidb_persist_analyze_options-new-in-v540) | Newly added | Controls whether to enable the [ANALYZE configuration persistence](/statistics.md#persist-analyze-configurations) feature. The default value is `ON`. |
-| [`tidb_read_staleness`](/system-variables.md#tidb_read_staleness-new-in-v540) | Newly added | Controls the range of historical data that can be read in the current session. The default value is `0`.|
-| [`tidb_regard_null_as_point`](/system-variables.md#tidb_regard_null_as_point-new-in-v540) | Newly added | Controls whether the optimizer can use a query condition including null equivalence as a prefix condition for index access. |
-| [`tidb_stats_load_sync_wait`](/system-variables.md#tidb_stats_load_sync_wait-new-in-v540) | Newly added | Controls whether to enable the synchronously loading statistics feature. The default value `0` means that the feature is disabled and that the statistics is asynchronously loaded. When the feature is enabled, this variable controls the maximum time that SQL optimization can wait for synchronously loading statistics before timeout. |
-| [`tidb_stats_load_pseudo_timeout`](/system-variables.md#tidb_stats_load_pseudo_timeout-new-in-v540) | Newly added | Controls when synchronously loading statistics reaches timeout, whether SQL fails (`OFF`) or falls back to using pseudo statistics (`ON`). The default value is `OFF`. |
-|  [`tidb_backoff_lock_fast`](/system-variables.md#tidb_backoff_lock_fast) | Modified | The default value is changed from `100` to `10`. |
-| [`tidb_enable_index_merge`](/system-variables.md#tidb_enable_index_merge-new-in-v40) | Modified | The default value is changed from `OFF` to `ON`. <br/><ul><li>If you upgrade a TiDB cluster from versions earlier than v4.0.0 to v5.4.0 or later, this variable is `OFF` by default. </li><li>If you upgrade a TiDB cluster from v4.0.0 or later to v5.4.0 or later, this variable remains the same as before the upgrade. </li><li>For the newly created TiDB clusters of v5.4.0 and later, this variable is `ON` by default.</li></ul> |
-| [`tidb_store_limit`](/system-variables.md#tidb_store_limit-new-in-v304-and-v40) | Modified | Before v5.4.0, this variable can be configured at instance level and globally. Starting from v5.4.0, this variable only supports global configuration. |
+<table>
+<thead>
+  <tr>
+    <th>Variable name</th>
+    <th>Change type</th>
+    <th>Description</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td><a href="https://docs.pingcap.com/tidb/dev/system-variables#tidb_enable_column_tracking-new-in-v540"><code>tidb_enable_column_tracking</code></a></td>
+    <td>Newly added</td>
+    <td>Controls whether to allow TiDB to collect <code>PREDICATE COLUMNS</code>. The default value is <code>OFF.</code></td>
+  </tr>
+  <tr>
+    <td><a href="https://docs.pingcap.com/tidb/dev/system-variables#tidb_enable_paging-new-in-v540"><code>tidb_enable_paging</code></a></td>
+    <td>Newly added</td>
+    <td>Controls whether to use the method of paging to send coprocessor requests in <code>IndexLookUp</code> operator. The default value is <code>OFF</code>.<br/>For read queries that use <code>IndexLookup</code> and <code>Limit</code> and that <code>Limit</code> cannot be pushed down to <code>IndexScan</code>, there might be high latency for the read queries and high CPU usage for TiKV's <code>unified read pool</code>. In such cases, because the <code>Limit</code> operator only requires a small set of data, if you set <code>tidb_enable_paging</code> to <code>ON</code>, TiDB processes less data, which reduces query latency and resource consumption.</td>
+  </tr>
+  <tr>
+    <td><a href="https://docs.pingcap.com/tidb/dev/system-variables#tidb_enable_top_sql-new-in-v540"><code>tidb_enable_top_sql</code></a></td>
+    <td>Newly added</td>
+    <td>Controls whether to enable the Top SQL feature. The default value is <code>OFF</code>.</td>
+  </tr>
+  <tr>
+    <td><a href="https://docs.pingcap.com/tidb/dev/system-variables#tidb_persist_analyze_options-new-in-v540"><code>tidb_persist_analyze_options</code></a></td>
+    <td>Newly added</td>
+    <td>Controls whether to enable the <a href="https://docs.pingcap.com/tidb/dev/statistics#persist-analyze-configurations">ANALYZE configuration persistence</a> feature. The default value is <code>ON</code>.</td>
+  </tr>
+  <tr>
+    <td><a href="https://docs.pingcap.com/tidb/dev/system-variables#tidb_read_staleness-new-in-v540"><code>tidb_read_staleness</code></a></td>
+    <td>Newly added</td>
+    <td>Controls the range of historical data that can be read in the current session. The default value is <code>0</code>.</td>
+  </tr>
+  <tr>
+    <td><a href="https://docs.pingcap.com/tidb/dev/system-variables#tidb_regard_null_as_point-new-in-v540"><code>tidb_regard_null_as_point</code></a></td>
+    <td>Newly added</td>
+    <td>Controls whether the optimizer can use a query condition including null equivalence as a prefix condition for index access.</td>
+  </tr>
+  <tr>
+    <td><a href="https://docs.pingcap.com/tidb/dev/system-variables#tidb_stats_load_sync_wait-new-in-v540"><code>tidb_stats_load_sync_wait</code></a></td>
+    <td>Newly added</td>
+    <td>Controls whether to enable the synchronously loading statistics feature. The default value <code>0</code> means that the feature is disabled and that the statistics is asynchronously loaded. When the feature is enabled, this variable controls the maximum time that SQL optimization can wait for synchronously loading statistics before timeout.</td>
+  </tr>
+  <tr>
+    <td><a href="https://docs.pingcap.com/tidb/dev/system-variables#tidb_stats_load_pseudo_timeout-new-in-v540"><code>tidb_stats_load_pseudo_timeout</code></a></td>
+    <td>Newly added</td>
+    <td>Controls when synchronously loading statistics reaches timeout, whether SQL fails (<code>OFF</code>) or falls back to using pseudo statistics (<code>ON</code>). The default value is <code>OFF</code>.</td>
+  </tr>
+  <tr>
+    <td><a href="https://docs.pingcap.com/tidb/dev/system-variables#tidb_backoff_lock_fast"><code>tidb_backoff_lock_fast</code></a></td>
+    <td>Modified</td>
+    <td>The default value is changed from <code>100</code> to <code>10</code>.</td>
+  </tr>
+  <tr>
+    <td><a href="https://docs.pingcap.com/tidb/dev/system-variables#tidb_enable_index_merge-new-in-v40"><code>tidb_enable_index_merge</code></a></td>
+    <td>Modified</td>
+    <td>The default value is changed from <code>OFF</code> to <code>ON</code>.<ul><li>If you upgrade a TiDB cluster from versions earlier than v4.0.0 to v5.4.0 or later, this variable is <code>OFF</code> by default.</li><li>If you upgrade a TiDB cluster from v4.0.0 or later to v5.4.0 or later, this variable remains the same as before the upgrade.</li><li>For the newly created TiDB clusters of v5.4.0 and later, this variable is <code>ON</code> by default.</li></ul></td>
+  </tr>
+  <tr>
+    <td><a href="https://docs.pingcap.com/tidb/dev/system-variables#tidb_store_limit-new-in-v304-and-v40"><code>tidb_store_limit</code></a></td>
+    <td>Modified</td>
+    <td>Before v5.4.0, this variable can be configured at instance level and globally. Starting from v5.4.0, this variable only supports global configuration.</td>
+  </tr>
+</tbody>
+</table>
 
 ### Configuration file parameters
 
@@ -57,7 +110,7 @@ In v5.4, the key new features or improvements are as follows:
 | TiKV | `log-level`, `log-format`, `log-file`, `log-rotation-size` | Modified | The names of TiKV log parameters are replaced with the names that are consistent with TiDB log parameters, which are `log.level`, `log.format`, `log.file.filename`, and `log.enable-timestamp`. If you only set the old parameters, and their values are set to non-default values, the old parameters remain compatible with the new parameters. If both old and new parameters are set, the new parameters take effect. For details, see [TiKV Configuration File - log](/tikv-configuration-file.md#log-new-in-v540). |
 | TiKV  |  `log-rotation-timespan`  | Deleted |  The timespan between log rotations. After this timespan passes, a log file is rotated, which means a timestamp is appended to the file name of the current log file, and a new log file is created. |
 | TiKV | `allow-remove-leader` | Deleted  | Determines whether to allow deleting the main switch. |
-| TiKV | `raft-msg-flush-interval` | Deleted | Determines the interval at which Raft messages are sent in batches. The Raft messages  are sent in batches at every interval specified by this configuration item. |
+| TiKV | `raft-msg-flush-interval` | Deleted | Determines the interval at which Raft messages are sent in batches. The Raft messages are sent in batches at every interval specified by this configuration item. |
 | PD | [`log.level`](/pd-configuration-file.md#level) | Modified | The default value is changed from "INFO" to "info", guaranteed to be case-insensitive. |
 | TiFlash | [`profile.default.enable_elastic_threadpool`](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file) | Newly added  |  Determines whether to enable or disable the elastic thread pool function. Enabling this configuration item can significantly improve TiFlash CPU utilization in high concurrency scenarios. The default value is `false`. |
 | TiFlash | [`storage.format_version`](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file) | Newly added | Specifies the version of DTFile. The default value is `2`, under which hashes are embedded in the data file. You can also set the value to `3`. When it is `3`, the data file contains metadata and token data checksum, and supports multiple hash algorithms. |
@@ -121,13 +174,13 @@ In v5.4, the key new features or improvements are as follows:
     - Support pusing down more functions to the MPP engine:
 
         - String functions: `LPAD()`, `RPAD()`, `STRCMP()`
-        - Date functions: `ADDDATE()`, `DATE_ADD()`, `DATE_SUB()`, `SUBDATE()`, `QUARTER()`
+        - Date functions: `ADDDATE(string, real)`, `DATE_ADD(string, real)`, `DATE_SUB(string, real)`, `SUBDATE(string, real)`, `QUARTER()`
 
     - Introduce the elastic thread pool feature to improve resource utilization (experimental)
     - Improve the efficiency of converting data from row-based storage format to column-based storage format when replicating data from TiKV, which brings 50% improvement in the overall performance of data replication
     - Improve TiFlash performance and stability by tuning the default values of some configuration items. In an HTAP hybrid load, the performance of simple queries on a single table improves up to 20%.
 
-    User documents: [Supported push-down calculations](/tiflash/use-tiflash.md#supported-push-down-calculations), [Configure the tiflash.toml file](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file)
+    User documents: [Supported push-down calculations](/tiflash/tiflash-supported-pushdown-calculations.md), [Configure the tiflash.toml file](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file)
 
 - **Read historical data within a specified time range through a session variable**
 
@@ -214,7 +267,7 @@ In v5.4, the key new features or improvements are as follows:
 
    Backup & Restore (BR) supports Azure Blob Storage as a remote backup storage. If you deploy TiDB in Azure Cloud, now you can back up the cluster data to the Azure Blob Storage service.
 
-    [User document](/br/backup-storage-azblob.md)
+    [User document](/br/backup-and-restore-storages.md)
 
 ### Data migration
 
@@ -226,7 +279,7 @@ In v5.4, the key new features or improvements are as follows:
 
 - **TiDB Lightning introduces the schema name that stores the meta information for parallel import**
 
-    TiDB Lightning introduces the `meta-schema-name` configuration item. In parallel import mode, this parameter specifies the schema name that stores the meta information for each TiDB Lightning instance in the target cluster. By default, the value is "lightning_metadata". The value set for this parameter must be the same for each TiDB Lightning instance that participates in the same parallel import; otherwise, the correctness of the imported data can not be ensured.
+    TiDB Lightning introduces the `meta-schema-name` configuration item. In parallel import mode, this parameter specifies the schema name that stores the meta information for each TiDB Lightning instance in the target cluster. By default, the value is "lightning_metadata". The value set for this parameter must be the same for each TiDB Lightning instance that participates in the same parallel import; otherwise, the correctness of the imported data cannot be ensured.
 
   [User document](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task)
 
@@ -434,7 +487,7 @@ In v5.4, the key new features or improvements are as follows:
 
         - Fix the issue of wrong import result that occurs when TiDB Lightning does not have the privilege to access the `mysql.tidb` table [#31088](https://github.com/pingcap/tidb/issues/31088)
         - Fix the issue that some checks are skipped when TiDB Lightning is restarted [#30772](https://github.com/pingcap/tidb/issues/30772)
-        - Fix the issue that TiDB Lighting fails to report the error when the S3 path does not exist [#30674](https://github.com/pingcap/tidb/pull/30674)
+        - Fix the issue that TiDB Lightning fails to report the error when the S3 path does not exist [#30674](https://github.com/pingcap/tidb/pull/30674)
 
     + TiDB Binlog
 

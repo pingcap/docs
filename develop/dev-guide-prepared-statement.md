@@ -18,8 +18,6 @@ This section describes the SQL syntax for creating, running and deleting a prepa
 
 ### Create a prepared statement
 
-{{< copyable "sql" >}}
-
 ```sql
 PREPARE {prepared_statement_name} FROM '{prepared_statement_sql}';
 ```
@@ -35,8 +33,6 @@ See [PREPARE statement](/sql-statements/sql-statement-prepare.md) for more infor
 
 A prepared statement can only use **user variables** as parameters, so use the [`SET` statement](/sql-statements/sql-statement-set-variable.md) to set the variables before the [`EXECUTE` statement](/sql-statements/sql-statement-execute.md) can call the prepared statement.
 
-{{< copyable "sql" >}}
-
 ```sql
 SET @{parameter_name} = {parameter_value};
 EXECUTE {prepared_statement_name} USING @{parameter_name};
@@ -51,8 +47,6 @@ EXECUTE {prepared_statement_name} USING @{parameter_name};
 See the [`EXECUTE` statement](/sql-statements/sql-statement-execute.md) for more information.
 
 ### Delete the prepared statement
-
-{{< copyable "sql" >}}
 
 ```sql
 DEALLOCATE PREPARE {prepared_statement_name};
@@ -72,11 +66,9 @@ This section describes two examples of prepared statements: `SELECT` data and `I
 
 For example, you need to query a book with `id = 1` in the [`bookshop` application](/develop/dev-guide-bookshop-schema-design.md#books-table).
 
-<SimpleTab>
+<SimpleTab groupId="language">
 
-<div label="SQL" href="read-sql">
-
-{{< copyable "sql" >}}
+<div label="SQL" value="sql">
 
 ```sql
 PREPARE `books_query` FROM 'SELECT * FROM `books` WHERE `id` = ?';
@@ -88,8 +80,6 @@ Running result:
 Query OK, 0 rows affected (0.01 sec)
 ```
 
-{{< copyable "sql" >}}
-
 ```sql
 SET @id = 1;
 ```
@@ -99,8 +89,6 @@ Running result:
 ```
 Query OK, 0 rows affected (0.04 sec)
 ```
-
-{{< copyable "sql" >}}
 
 ```sql
 EXECUTE `books_query` USING @id;
@@ -119,9 +107,7 @@ Running result:
 
 </div>
 
-<div label="Java" href="read-java">
-
-{{< copyable "" >}}
+<div label="Java" value="java">
 
 ```java
 // ds is an entity of com.mysql.cj.jdbc.MysqlDataSource
@@ -151,11 +137,9 @@ try (Connection connection = ds.getConnection()) {
 
 Using the [`books` table](/develop/dev-guide-bookshop-schema-design.md#books-table) as an example, you need to insert a book with `title = TiDB Developer Guide`, `type = Science & Technology`, `stock = 100`, `price = 0.0`, and `published_at = NOW()` (current time of insertion). Note that you don't need to specify the `AUTO_RANDOM` attribute in the **primary key** of the `books` table. For more information about inserting data, see [Insert Data](/develop/dev-guide-insert-data.md).
 
-<SimpleTab>
+<SimpleTab groupId="language">
 
-<div label="SQL" href="write-sql">
-
-{{< copyable "sql" >}}
+<div label="SQL" value="sql">
 
 ```sql
 PREPARE `books_insert` FROM 'INSERT INTO `books` (`title`, `type`, `stock`, `price`, `published_at`) VALUES (?, ?, ?, ?, ?);';
@@ -166,8 +150,6 @@ Running result:
 ```
 Query OK, 0 rows affected (0.03 sec)
 ```
-
-{{< copyable "sql" >}}
 
 ```sql
 SET @title = 'TiDB Developer Guide';
@@ -183,8 +165,6 @@ Running result:
 Query OK, 0 rows affected (0.04 sec)
 ```
 
-{{< copyable "sql" >}}
-
 ```sql
 EXECUTE `books_insert` USING @title, @type, @stock, @price, @published_at;
 ```
@@ -197,9 +177,7 @@ Query OK, 1 row affected (0.03 sec)
 
 </div>
 
-<div label="Java" href="write-java">
-
-{{< copyable "" >}}
+<div label="Java" value="java">
 
 ```java
 try (Connection connection = ds.getConnection()) {
@@ -239,9 +217,9 @@ You can also see the [insert rows](/develop/dev-guide-insert-data.md#insert-rows
 
 For a complete example in Java, see:
 
-- [Build a Simple CRUD App with TiDB and Java - Using JDBC](/develop/dev-guide-sample-application-java.md#step-2-get-the-code)
-- [Build a Simple CRUD App with TiDB and Java - Using Hibernate](/develop/dev-guide-sample-application-java.md#step-2-get-the-code)
-- [Build the TiDB Application using Spring Boot](/develop/dev-guide-sample-application-spring-boot.md)
+- [Connect to TiDB with JDBC](/develop/dev-guide-sample-application-java-jdbc.md)
+- [Connect to TiDB with Hibernate](/develop/dev-guide-sample-application-java-hibernate.md)
+- [Connect to TiDB with Spring Boot](/develop/dev-guide-sample-application-java-spring-boot.md)
 
 </div>
 

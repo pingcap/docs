@@ -7,10 +7,7 @@ summary: Learn how to migrate MySQL of large datasets to TiDB.
 
 When the data volume to be migrated is small, you can easily [use DM to migrate data](/migrate-small-mysql-to-tidb.md), both for full migration and incremental replication. However, because DM imports data at a slow speed (30~50 GiB/h), when the data volume is large, the migration might take a long time. "Large datasets" in this document usually mean data around one TiB or more.
 
-This document describes how to migrate large datasets from MySQL to TiDB. The whole migration has two processes:
-
-1. *Full migration*. Use Dumpling and TiDB Lightning to perform the full migration. TiDB Lightning's **local backend** mode can import data at a speed of up to 500 GiB/h.
-2. *Incremental replication*. After the full migration is completed, you can replicate the incremental data using DM.
+This document describes how to perform the full migration using Dumpling and TiDB Lightning. TiDB Lightning [Physical Import Mode](/tidb-lightning/tidb-lightning-physical-import-mode.md) can import data at a speed of up to 500 GiB/h. Note that this speed is affected by various factors such as hardware configuration, table schema, and the number of indexes. After the full migration is completed, you can replicate the incremental data using DM.
 
 ## Prerequisites
 
@@ -18,7 +15,7 @@ This document describes how to migrate large datasets from MySQL to TiDB. The wh
 - [Install Dumpling and TiDB Lightning](/migration-tools.md).
 - [Grant the source database and target database privileges required for DM](/dm/dm-worker-intro.md).
 - [Grant the target database privileges required for TiDB Lightning](/tidb-lightning/tidb-lightning-faq.md#what-are-the-privilege-requirements-for-the-target-database).
-- [Grant the source database privileges required for Dumpling](/dumpling-overview.md#export-data-from-tidbmysql).
+- [Grant the source database privileges required for Dumpling](/dumpling-overview.md#export-data-from-tidb-or-mysql).
 
 ## Resource requirements
 
@@ -28,7 +25,7 @@ This document describes how to migrate large datasets from MySQL to TiDB. The wh
 
 **Disk space**:
 
-- Dumpling requires a disk space that can store the whole data source (or to store all upstream tables to be exported). SSD is recommended. To calculate the required space, see [Downstream storage space requirements](/tidb-lightning/tidb-lightning-requirements.md#downstream-storage-space-requirements).
+- Dumpling requires a disk space that can store the whole data source (or to store all upstream tables to be exported). SSD is recommended. To calculate the required space, see [Downstream storage space requirements](/tidb-lightning/tidb-lightning-requirements.md#storage-space-of-the-target-database).
 - During the import, TiDB Lightning needs temporary space to store the sorted key-value pairs. The disk space should be enough to hold the largest single table from the data source.
 - If the full data volume is large, you can increase the binlog storage time in the upstream. This is to ensure that the binlogs are not lost during the incremental replication.
 
@@ -58,7 +55,7 @@ The target TiKV cluster must have enough disk space to store the imported data. 
     {{< copyable "shell-regular" >}}
 
     ```shell
-    tiup dumpling -h ${ip} -P 3306 -u root -t 16 -r 200000 -F 256MiB -B my_db1 -f 'my_db1.table[12]' -o 's3://my-bucket/sql-backup?region=us-west-2'
+    tiup dumpling -h ${ip} -P 3306 -u root -t 16 -r 200000 -F 256MiB -B my_db1 -f 'my_db1.table[12]' -o 's3://my-bucket/sql-backup'
     ```
 
     Dumpling exports data in SQL files by default. You can specify a different file format by adding the `--filetype` option.
@@ -72,13 +69,13 @@ The target TiKV cluster must have enough disk space to store the imported data. 
     |`-P` or `--port`       |MySQL port|
     |`-h` or `--host`       |MySQL IP address|
     |`-t` or `--thread`     |The number of threads used for export|
-    |`-o` or `--output`     |The directory that stores the exported file. Supports a local path or an [external storage URL](/br/backup-and-restore-storages.md)|
+    |`-o` or `--output`     |The directory that stores the exported file. Supports a local path or an [external storage URI](/br/backup-and-restore-storages.md#uri-format)|
     |`-r` or `--row`        |The maximum number of rows in a single file|
     |`-F`                   |The maximum size of a single file, in MiB. Recommended value: 256 MiB.|
     |-`B` or `--database`   |Specifies a database to be exported|
     |`-f` or `--filter`     |Exports tables that match the pattern. Refer to [table-filter](/table-filter.md) for the syntax.|
 
-    Make sure `${data-path}` has the space to store all exported upstream tables. To calculate the required space, see [Downstream storage space requirements](/tidb-lightning/tidb-lightning-requirements.md#downstream-storage-space-requirements). To prevent the export from being interrupted by a large table consuming all the spaces, it is strongly recommended to use the `-F` option to limit the size of a single file.
+    Make sure `${data-path}` has the space to store all exported upstream tables. To calculate the required space, see [Downstream storage space requirements](/tidb-lightning/tidb-lightning-requirements.md#storage-space-of-the-target-database). To prevent the export from being interrupted by a large table consuming all the spaces, it is strongly recommended to use the `-F` option to limit the size of a single file.
 
 2. View the `metadata` file in the `${data-path}` directory. This is a Dumpling-generated metadata file. Record the binlog position information, which is required for the incremental replication in Step 3.
 
@@ -110,7 +107,7 @@ The target TiKV cluster must have enough disk space to store the imported data. 
 
     [mydumper]
     # The data source directory. The same directory where Dumpling exports data in "Step 1. Export all data from MySQL".
-    data-source-dir = "${data-path}" # A local path or S3 path. For example, 's3://my-bucket/sql-backup?region=us-west-2'.
+    data-source-dir = "${data-path}" # A local path or S3 path. For example, 's3://my-bucket/sql-backup'.
 
     [tidb]
     # The target TiDB cluster information.
@@ -142,7 +139,7 @@ The target TiKV cluster must have enough disk space to store the imported data. 
     - Check progress in [the monitoring dashboard](/tidb-lightning/monitor-tidb-lightning.md).
     - Check progress in [the TiDB Lightning web interface](/tidb-lightning/tidb-lightning-web-interface.md).
 
-4. After TiDB Lightning completes the import, it exits automatically. If you find the last 5 lines of its log print `the whole procedure completed`, the import is successful.
+4. After TiDB Lightning completes the import, it exits automatically. Check whether `tidb-lightning.log` contains `the whole procedure completed` in the last lines. If yes, the import is successful. If no, the import encounters an error. Address the error as instructed in the error message.
 
 > **Note:**
 >
@@ -214,7 +211,7 @@ If the import fails, refer to [TiDB Lightning FAQ](/tidb-lightning/tidb-lightnin
       - source-id: "mysql-01"            # Data source ID, i.e., source-id in source1.yaml
         block-allow-list: "bw-rule-1"    # You can use the block-allow-list configuration above.
         # syncer-config-name: "global"    # You can use the syncers incremental data configuration below.
-        meta:                            # When task-mode is "incremental" and the target database does not have a checkpoint, DM uses the binlog position as the starting point. If the target database has a checkpoint, DM uses the checkpoint as the starting point.
+        meta:                            # The position where the binlog replication starts when `task-mode` is `incremental` and the downstream database checkpoint does not exist. If the checkpoint exists, the checkpoint is used. If neither the `meta` configuration item nor the downstream database checkpoint exists, the migration starts from the latest binlog position of the upstream.
           # binlog-name: "mysql-bin.000004"  # The binlog position recorded in "Step 1. Export all data from MySQL". If the upstream database service is configured to switch master between different nodes automatically, GTID mode is required.
           # binlog-pos: 109227
           binlog-gtid: "09bec856-ba95-11ea-850a-58f2b4af5188:1-9"
