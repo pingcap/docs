@@ -2800,7 +2800,7 @@ As shown in this diagram, when [`tidb_enable_paging`](#tidb_enable_paging-new-in
 - This variable controls whether to allow multiple queries to be executed in the same `COM_QUERY` call.
 - To reduce the impact of SQL injection attacks, TiDB now prevents multiple queries from being executed in the same `COM_QUERY` call by default. This variable is intended to be used as part of an upgrade path from earlier versions of TiDB. The following behaviors apply:
 
-| Client setting  https://dev.mysql.com/doc/connector-j/en/connector-j-reference-configuration-properties.html
+| Client setting | `tidb_multi_statement_mode` value | Multiple statements permitted? |
 | ------------------------- | --------------------------------- | ------------------------------ |
 | Multiple Statements = ON  | OFF                               | Yes                            |
 | Multiple Statements = ON  | ON                                | Yes                            |
