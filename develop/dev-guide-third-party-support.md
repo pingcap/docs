@@ -59,6 +59,51 @@ If you encounter problems when connecting to TiDB using the tools listed in this
          </td>
          <td><a href="/tidb/dev/dev-guide-sample-application-java-jdbc">Connect to TiDB with JDBC</a></td>
       </tr>
+      <tr>
+         <td rowspan="2">JavaScript / TypeScript</td>
+         <td><a href="https://github.com/sidorares/node-mysql2" target="_blank" referrerpolicy="no-referrer-when-downgrade">node-mysql2</a></td>
+         <td>v2.3.3</td>
+         <td>Compatible</td>
+         <td>N/A</td>
+         <td><a href="/tidb/dev/dev-guide-sample-application-nodejs-mysql2">Connect to TiDB with node-mysql2</a></td>
+      </tr>
+      <tr>
+         <td><a href="https://github.com/mysqljs/mysql" target="_blank" referrerpolicy="no-referrer-when-downgrade">mysql.js</a></td>
+         <td>v2.18.1</td>
+         <td>Compatible</td>
+         <td>N/A</td>
+         <td><a href="/tidb/dev/dev-guide-sample-application-nodejs-mysqljs">Connect to TiDB with mysql.js</a></td>
+      </tr>
+      <tr>
+         <td rowspan="1">Ruby</td>
+         <td><a href="https://github.com/brianmario/mysql2" target="_blank" referrerpolicy="no-referrer-when-downgrade">mysql2</a></td>
+         <td>0.5.4</td>
+         <td>Compatible</td>
+         <td>N/A</td>
+         <td><a href="/tidb/dev/dev-guide-sample-application-ruby-mysql2">Connect to TiDB with mysql2</a></td>
+      </tr>
+      <tr>
+         <td rowspan="3">Python</td>
+         <td><a href="https://dev.mysql.com/doc/connector-python/en/" target="_blank" referrerpolicy="no-referrer-when-downgrade">MySQL Connector/Python</a></td>
+         <td>N/A</td>
+         <td>Compatible</td>
+         <td>N/A</td>
+         <td><a href="/tidb/dev/dev-guide-sample-application-python-mysql-connector">Connect to TiDB with MySQL Connector/Python</a></td>
+      </tr>
+      <tr>
+         <td><a href="https://github.com/PyMySQL/mysqlclient" target="_blank" referrerpolicy="no-referrer-when-downgrade">mysqlclient</a></td>
+         <td>N/A</td>
+         <td>Compatible</td>
+         <td>N/A</td>
+         <td><a href="/tidb/dev/dev-guide-sample-application-python-mysqlclient">Connect to TiDB with mysqlclient</a></td>
+      </tr>
+      <tr>
+         <td><a href="https://github.com/PyMySQL/PyMySQL" target="_blank" referrerpolicy="no-referrer-when-downgrade">PyMySQL</a></td>
+         <td>N/A</td>
+         <td>Compatible</td>
+         <td>N/A</td>
+         <td><a href="/tidb/dev/dev-guide-sample-application-python-pymysql">Connect to TiDB with PyMySQL</a></td>
+      </tr>
    </tbody>
 </table>
 
@@ -140,22 +185,29 @@ If you encounter problems when connecting to TiDB using the tools listed in this
          <td>v7.0</td>
          <td>Full</td>
          <td>N/A</td>
-         <td>N/A</td>
+         <td><a href="/tidb/dev/dev-guide-sample-application-ruby-rails">Connect to TiDB with Rails Framework and ActiveRecord ORM</a></td>
       </tr>
       <tr>
-         <td rowspan="2">JavaScript / TypeScript</td>
-         <td><a href="https://www.npmjs.com/package/sequelize" target="_blank" referrerpolicy="no-referrer-when-downgrade">sequelize</a></td>
+         <td rowspan="3">JavaScript / TypeScript</td>
+         <td><a href="https://sequelize.org/" target="_blank" referrerpolicy="no-referrer-when-downgrade">Sequelize</a></td>
          <td>v6.20.1</td>
          <td>Full</td>
          <td>N/A</td>
-         <td>N/A</td>
+         <td><a href="/tidb/dev/dev-guide-sample-application-nodejs-sequelize">Connect to TiDB with Sequelize</a></td>
       </tr>
       <tr>
-         <td><a href="https://www.prisma.io/" target="_blank" referrerpolicy="no-referrer-when-downgrade">Prisma Client</a></td>
+         <td><a href="https://www.prisma.io/" target="_blank" referrerpolicy="no-referrer-when-downgrade">Prisma</a></td>
          <td>4.16.2</td>
          <td>Full</td>
          <td>N/A</td>
+         <td><a href="/tidb/dev/dev-guide-sample-application-nodejs-prisma">Connect to TiDB with Prisma</a></td>
+      </tr>
+      <tr>
+         <td><a href="https://typeorm.io/" target="_blank" referrerpolicy="no-referrer-when-downgrade">TypeORM</a></td>
+         <td>v0.3.17</td>
+         <td>Full</td>
          <td>N/A</td>
+         <td><a href="/tidb/dev/dev-guide-sample-application-nodejs-typeorm">Connect to TiDB with TypeORM</a></td>
       </tr>
       <tr>
          <td rowspan="2">Python</td>
@@ -163,7 +215,7 @@ If you encounter problems when connecting to TiDB using the tools listed in this
          <td>v4.1</td>
          <td>Full</td>
          <td><a href="https://github.com/pingcap/django-tidb" target="_blank" referrerpolicy="no-referrer-when-downgrade">django-tidb</a></td>
-         <td><a href="/tidb/dev/dev-guide-sample-application-django">Connect to TiDB with Django</a></td>
+         <td><a href="/tidb/dev/dev-guide-sample-application-python-django">Connect to TiDB with Django</a></td>
       </tr>
       <tr>
          <td><a href="https://www.sqlalchemy.org/" target="_blank" referrerpolicy="no-referrer-when-downgrade">SQLAlchemy</a></td>
@@ -177,6 +229,7 @@ If you encounter problems when connecting to TiDB using the tools listed in this
 
 ## GUI
 
-| GUI | Latest tested version | Support level | Tutorial |
-| - | - | - | - |
-| [DBeaver](https://dbeaver.io/) | 23.0.3 | Full | [Connect to TiDB with DBeaver](/develop/dev-guide-gui-dbeaver.md) |
+| GUI                                                       | Latest tested version | Support level | Tutorial                                                                      |
+|-----------------------------------------------------------|-----------------------|---------------|-------------------------------------------------------------------------------|
+| [JetBrains DataGrip](https://www.jetbrains.com/datagrip/) | 2023.2.1              | Full          | [Connect to TiDB with JetBrains DataGrip](/develop/dev-guide-gui-datagrip.md) |
+| [DBeaver](https://dbeaver.io/)                            | 23.0.3                | Full          | [Connect to TiDB with DBeaver](/develop/dev-guide-gui-dbeaver.md)             |
