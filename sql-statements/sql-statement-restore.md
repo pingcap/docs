@@ -98,8 +98,23 @@ BR supports restoring data from S3 or GCS:
 RESTORE DATABASE * FROM 's3://example-bucket-2020/backup-05/';
 ```
 
+<<<<<<< HEAD
 The URL syntax is further explained in [external storage URI](/br/backup-and-restore-storages.md#uri-format).
 
+=======
+<CustomContent platform="tidb">
+
+The URL syntax is further explained in [URI Formats of External Storage Services](/external-storage-uri.md).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+The URL syntax is further explained in [external storage URI](https://docs.pingcap.com/tidb/stable/external-storage-uri).
+
+</CustomContent>
+
+>>>>>>> 6e066679c2 (dumpling: add URI formats (#15165))
 When running on cloud environment where credentials should not be distributed, set the `SEND_CREDENTIALS_TO_TIKV` option to `FALSE`:
 
 {{< copyable "sql" >}}

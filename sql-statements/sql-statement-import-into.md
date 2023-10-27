@@ -19,7 +19,7 @@ This TiDB statement is not applicable to TiDB Cloud.
 
 `IMPORT INTO` supports importing data from files stored in Amazon S3, GCS, and the TiDB local storage.
 
-- For data files stored in Amazon S3 or GCS, `IMPORT INTO` supports running in the [TiDB backend task distributed execution framework](/tidb-distributed-execution-framework.md).
+- For data files stored in Amazon S3, GCS, or Azure Blob Storage, `IMPORT INTO` supports running in the [TiDB backend task distributed execution framework](/tidb-distributed-execution-framework.md).
 
     - When this framework is enabled ([tidb_enable_dist_task](/system-variables.md#tidb_enable_dist_task-new-in-v710) is `ON`), `IMPORT INTO` splits a data import job into multiple sub-jobs and distributes these sub-jobs to different TiDB nodes for execution to improve the import efficiency.
     - When this framework is disabled, `IMPORT INTO` only supports running on the TiDB node where the current user is connected.
@@ -97,9 +97,9 @@ In the left side of the `SET` expression, you can only reference a column name t
 
 ### fileLocation
 
-It specifies the storage location of the data file, which can be an Amazon S3 or GCS URI path, or a TiDB local file path.
+It specifies the storage location of the data file, which can be an Amazon S3, GCS, or Azure Blob Storage URI path, or a TiDB local file path.
 
-- Amazon S3 or GCS URI path: for URI configuration details, see [External storage](/br/backup-and-restore-storages.md#uri-format).
+- Amazon S3, GCS, or Azure Blob Storage URI path: for URI configuration details, see [URI Formats of External Storage Services](/external-storage-uri.md).
 - TiDB local file path: it must be an absolute path, and the file extension must be `.csv`, `.sql`, or `.parquet`. Make sure that the files corresponding to this path are stored on the TiDB node connected by the current user, and the user has the `FILE` privilege.
 
 > **Note:**
@@ -139,6 +139,37 @@ The supported options are described as follows:
 | `MAX_WRITE_SPEED='<string>'` | All formats | Controls the write speed to a TiKV node. By default, there is no speed limit. For example, you can specify this option as `1MiB` to limit the write speed to 1 MiB/s. |
 | `CHECKSUM_TABLE='<string>'` | All formats | Configures whether to perform a checksum check on the target table after the import to validate the import integrity. The supported values include `"required"` (default), `"optional"`, and `"off"`. `"required"` means performing a checksum check after the import. If the checksum check fails, TiDB will return an error and the import will exit. `"optional"` means performing a checksum check after the import. If an error occurs, TiDB will return a warning and ignore the error. `"off"` means not performing a checksum check after the import. |
 | `DETACHED` | All Formats | Controls whether to execute `IMPORT INTO` asynchronously. When this option is enabled, executing `IMPORT INTO` immediately returns the information of the import job (such as the `Job_ID`), and the job is executed asynchronously in the backend. |
+<<<<<<< HEAD
+=======
+| `CLOUD_STORAGE_URI` | All formats | Specifies the target address where encoded KV data for [global sorting](#global-sorting) is stored. When `CLOUD_STORAGE_URI` is not specified, `IMPORT INTO` determines whether to use global sorting based on the value of the system variable [`tidb_cloud_storage_uri`](/system-variables.md#tidb_cloud_storage_uri-new-in-v740). If this system variable specifies a target storage address, `IMPORT INTO` uses this address for global sorting. When `CLOUD_STORAGE_URI` is specified with a non-empty value, `IMPORT INTO` uses that value as the target storage address. When `CLOUD_STORAGE_URI` is specified with an empty value, local sorting is enforced. Currently, the target storage address only supports S3. For details about the URI configuration, see [Amazon S3 URI format](/external-storage-uri.md#amazon-s3-uri-format). When this feature is used, all TiDB nodes must have read and write access for the target S3 bucket. |
+
+## Compressed files
+
+`IMPORT INTO` supports importing compressed `CSV` and `SQL` files. It can automatically determine whether a file is compressed and the compression format based on the file extension:
+
+| Extension | Compression format |
+|:---|:---|
+| `.gz`, `.gzip` | gzip compression format |
+| `.zstd`, `.zst` | ZStd compression format |
+| `.snappy` | snappy compression format |
+
+## Global sorting
+
+`IMPORT INTO` splits the data import job of a source data file into multiple sub-jobs, each sub-job independently encoding and sorting data before importing. If the encoded KV ranges of these sub-jobs have significant overlap (to learn how TiDB encodes data to KV, see [TiDB computing](/tidb-computing.md)), TiKV needs to keep compaction during import, leading to a decrease in import performance and stability.
+
+In the following scenarios, there can be significant overlap in KV ranges:
+
+- If rows in the data file assigned to each sub-job have overlapping primary key ranges, the data KV generated by the encoding of each sub-job will also overlap.
+    - `IMPORT INTO` splits sub-jobs based on the traversal order of data files, usually sorted by file name in lexicographic order.
+- If the target table has many indexes, or the index column values are scattered in the data file, the index KV generated by the encoding of each sub-job will also overlap.
+
+When [Backend task distributed execution framework](/tidb-distributed-execution-framework.md) is enabled, you can enable global sorting by specifying the `CLOUD_STORAGE_URI` option in the `IMPORT INTO` statement or by specifying the target storage address for encoded KV data using the system variable [`tidb_cloud_storage_uri`](/system-variables.md#tidb_cloud_storage_uri-new-in-v740). Note that currently, only S3 is supported as the global sorting storage address. When global sorting is enabled, `IMPORT INTO` writes encoded KV data to the cloud storage, performs global sorting in the cloud storage, and then parallelly imports the globally sorted index and table data into TiKV. This prevents problems caused by KV overlap and enhances import stability.
+
+> **Note:**
+>
+> - If the KV range overlap in a source data file is low, enabling global sorting might decrease import performance. This is because when global sorting is enabled, TiDB needs to wait for the completion of local sorting in all sub-jobs before proceeding with the global sorting operations and subsequent import.
+> - After an import job using global sorting completes, the files stored in the cloud storage for global sorting are cleaned up asynchronously in a background thread.
+>>>>>>> 6e066679c2 (dumpling: add URI formats (#15165))
 
 ## Output
 
@@ -210,7 +241,7 @@ Assume that there are three files named `file-01.csv`, `file-02.csv`, and `file-
 IMPORT INTO t FROM '/path/to/file-*.csv'
 ```
 
-### Import data files from Amazon S3 or GCS
+### Import data files from Amazon S3, GCS, or Azure Blob Storage
 
 - Import data files from Amazon S3:
 
@@ -221,10 +252,16 @@ IMPORT INTO t FROM '/path/to/file-*.csv'
 - Import data files from GCS:
 
     ```sql
-    IMPORT INTO t FROM 'gs://bucket-name/test.csv';
+    IMPORT INTO t FROM 'gs://import/test.csv?credentials-file=${credentials-file-path}';
     ```
 
-For details about the URI path configuration for Amazon S3 or GCS, see [External storage](/br/backup-and-restore-storages.md#uri-format).
+- Import data files from Azure Blob Storage:
+
+    ```sql
+    IMPORT INTO t FROM 'azure://import/test.csv?credentials-file=${credentials-file-path}';
+    ```
+
+For details about the URI path configuration for Amazon S3, GCS, or Azure Blob Storage, see [URI Formats of External Storage Services](/external-storage-uri.md).
 
 ### Calculate column values using SetClause
 
