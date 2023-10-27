@@ -113,7 +113,7 @@ BACKUP DATABASE `test` TO 's3://example-bucket-2020/backup-05/?access-key={YOUR_
 
 <CustomContent platform="tidb">
 
-The URL syntax is further explained in [external storage URI](/br/backup-and-restore-storages.md#uri-format).
+The URL syntax is further explained in [URI Formats of External Storage Services](/external-storage-uri.md).
 
 </CustomContent>
 
