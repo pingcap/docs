@@ -135,7 +135,7 @@ const result = await conn.execute('show tables')
 
 </SimpleTab>
 
-## Configure TiDB Cloud serverless driver
+## Configure the serverless driver
 
 You can configure TiDB Cloud serverless driver at both the connection level and the SQL level.
 
@@ -203,7 +203,6 @@ const conn = connect({url: process.env['DATABASE_URL'] || 'mysql://[username]:[p
 const results = await conn.execute('select * from test',null,{arrayMode:true,fullResult:true})
 ```
 
-**Transaction options**
 
 Starting from TiDB Cloud serverless driver v0.0.7, you can also configure the following SQL level option when you use transactions:
 
