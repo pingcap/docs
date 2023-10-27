@@ -106,7 +106,7 @@ The URL syntax is further explained in [URI Formats of External Storage Services
 
 <CustomContent platform="tidb-cloud">
 
-The URL syntax is further explained in [external storage URI](https://docs.pingcap.com/tidb/stable/external-storage-uri).
+The URL syntax is further explained in [external storage URI](https://docs.pingcap.com/tidb/dev/external-storage-uri).
 
 </CustomContent>
 
