@@ -32,10 +32,16 @@ The basic format of the URI is as follows:
     - `role-arn`: When you need to access Amazon S3 data from a third party using a specified [IAM role](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html), you can specify the corresponding [Amazon Resource Name (ARN)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of the IAM role with the `role-arn` URL query parameter, such as `arn:aws:iam::888888888888:role/my-role`. For more information about using an IAM role to access Amazon S3 data from a third party, see [AWS documentation](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_common-scenarios_third-party.html).
     - `external-id`: When you access Amazon S3 data from a third party, you might need to specify a correct [external ID](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user_externalid.html) to assume [the IAM role](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html). In this case, you can use this `external-id` URL query parameter to specify the external ID and make sure that you can assume the IAM role. An external ID is an arbitrary string provided by the third party together with the IAM role ARN to access the Amazon S3 data. Providing an external ID is optional when assuming an IAM role, which means if the third party does not require an external ID for the IAM role, you can assume the IAM role and access the corresponding Amazon S3 data without providing this parameter.
 
-Example:
+The following is an example of an Amazon S3 URI for TiDB Lightning and BR. In this example, you need to specify a specific file path `testfolder`.
 
 ```shell
-s3://external/backup-20220915?access-key=${access-key}&secret-access-key=${secret-access-key}
+s3://external/testfolder?access-key=${access-key}&secret-access-key=${secret-access-key}
+```
+
+The following is an example of an Amazon S3 URI for [IMPORT INTO](/sql-statements/sql-statement-import-into.md). In this example, you need to specify a specific filename `test.csv`.
+
+```shell
+s3://external/test.csv?access-key=${access-key}&secret-access-key=${secret-access-key}"
 ```
 
 ## GCS URI format
@@ -48,10 +54,16 @@ s3://external/backup-20220915?access-key=${access-key}&secret-access-key=${secre
     - `storage-class`: Specifies the storage class of the uploaded objects (for example, `STANDARD` or `COLDLINE`)
     - `predefined-acl`: Specifies the predefined ACL of the uploaded objects (for example, `private` or `project-private`)
 
-Example:
+The following is an example of a GCS URI for TiDB Lightning and BR. In this example, you need to specify a specific file path `testfolder`.
 
 ```shell
-gcs://external/backup-20220915?credentials-file=${credentials-file-path}
+gcs://external/testfolder?credentials-file=${credentials-file-path}
+```
+
+The following is an example of a GCS URI for [IMPORT INTO](/sql-statements/sql-statement-import-into.md). In this example, you need to specify a specific filename `test.csv`.
+
+```shell
+gcs://external/test.csv?credentials-file=${credentials-file-path}
 ```
 
 ## Azure Blob Storage URI format
@@ -67,8 +79,14 @@ gcs://external/backup-20220915?credentials-file=${credentials-file-path}
     - `encryption-scope`: Specifies the [encryption scope](https://learn.microsoft.com/en-us/azure/storage/blobs/encryption-scope-manage?tabs=powershell#upload-a-blob-with-an-encryption-scope) for server-side encryption.
     - `encryption-key`: Specifies the [encryption key](https://learn.microsoft.com/en-us/azure/storage/blobs/encryption-customer-provided-keys) for server-side encryption, which uses the AES256 encryption algorithm.
 
-Example:
+The following is an example of an Azure Blob Storage URI for TiDB Lightning and BR. In this example, you need to specify a specific file path `testfolder`.
 
 ```shell
-azure://external/backup-20220915?account-name=${account-name}&account-key=${account-key}
+azure://external/testfolder?account-name=${account-name}&account-key=${account-key}
+```
+
+The following is an example of an Azure Blob Storage URI for [IMPORT INTO](/sql-statements/sql-statement-import-into.md). In this example, you need to specify a specific filename `test.csv`.
+
+```shell
+azure://external/test.csv?account-name=${account-name}&account-key=${account-key}
 ```
