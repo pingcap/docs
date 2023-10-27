@@ -1,6 +1,7 @@
 ---
 title: TiDB Cloud Serverless Driver Node.js Tutorial
 summary: Learn how to use TiDB Cloud serverless driver in a local Node.js project.
+aliases: ['/tidbcloud/serverless-driver-config']
 ---
 
 # TiDB Cloud Serverless Driver Node.js Tutorial
@@ -31,7 +32,7 @@ To complete this step-by-step tutorial, you need the following:
 
 2. Install the TiDB Cloud serverless driver using npm or your preferred package manager.
 
-    The following command takes installation with npm as an example. Executing this command will create a `node_modules` directory and a `package-lock.json` file in your project directory.
+    The following command takes installation with npm as an example. Executing this command will create a `node_modules` directory and a `package.json` file in your project directory.
 
     ```
     npm install @tidbcloud/serverless
@@ -50,7 +51,6 @@ The serverless driver supports both CommonJS and ESM modules. The following step
 2. In the `package.json` file, specify the ESM module by adding `type: "module"`. 
 
     For example:
-
 
    ```json
    {
