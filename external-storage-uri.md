@@ -19,7 +19,7 @@ This document describes the URI formats of the storage services. The basic forma
 
     - `access-key`: Specifies the access key.
     - `secret-access-key`: Specifies the secret access key.
-    - `session-token`: Specifies the temporary session token.
+    - `session-token`: Specifies the temporary session token. BR does not support this parameter yet.
     - `use-accelerate-endpoint`: Specifies whether to use the accelerate endpoint on Amazon S3 (defaults to `false`).
     - `endpoint`: Specifies the URL of custom endpoint for S3-compatible services (for example, `<https://s3.example.com/>`).
     - `force-path-style`: Use path style access rather than virtual hosted style access (defaults to `true`).
