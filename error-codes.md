@@ -367,11 +367,7 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 
 * Error Number: 8158
 
-<<<<<<< HEAD
-    The S3 or GCS path is invalid. See [external storage](/br/backup-and-restore-storages.md) to set a valid path.
-=======
     The provided path is invalid. Refer to the specific error message for actions. For Amazon S3 or GCS path settings, see [URI Formats of External Storage Services](/external-storage-uri.md).
->>>>>>> 6e066679c2 (dumpling: add URI formats (#15165))
 
 * Error Number: 8159
 
