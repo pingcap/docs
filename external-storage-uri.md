@@ -38,12 +38,6 @@ The following is an example of an Amazon S3 URI for TiDB Lightning and BR. In th
 s3://external/testfolder?access-key=${access-key}&secret-access-key=${secret-access-key}
 ```
 
-The following is an example of an Amazon S3 URI for [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md). In this example, you need to specify a specific filename `test.csv`.
-
-```shell
-s3://external/test.csv?access-key=${access-key}&secret-access-key=${secret-access-key}"
-```
-
 ## GCS URI format
 
 - `scheme`: `gcs` or `gs`
@@ -58,12 +52,6 @@ The following is an example of a GCS URI for TiDB Lightning and BR. In this exam
 
 ```shell
 gcs://external/testfolder?credentials-file=${credentials-file-path}
-```
-
-The following is an example of a GCS URI for [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md). In this example, you need to specify a specific filename `test.csv`.
-
-```shell
-gcs://external/test.csv?credentials-file=${credentials-file-path}
 ```
 
 ## Azure Blob Storage URI format
@@ -83,10 +71,4 @@ The following is an example of an Azure Blob Storage URI for TiDB Lightning and 
 
 ```shell
 azure://external/testfolder?account-name=${account-name}&account-key=${account-key}
-```
-
-The following is an example of an Azure Blob Storage URI for [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md). In this example, you need to specify a specific filename `test.csv`.
-
-```shell
-azure://external/test.csv?account-name=${account-name}&account-key=${account-key}
 ```
