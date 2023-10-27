@@ -211,7 +211,7 @@ ADMIN SHOW DDL JOBS 5;
 +--------+---------+------------+---------------------+----------------+-----------+----------+-----------+-----------------------------------+-----------------------------------+---------------+
 ```
 
-Run the following command to view the details of some special columns of a table. The output is similiar to [SHOW TABLE NEXT_ROW_ID](/sql-statements/sql-statement-show-table-next-rowid.md).
+Run the following command to view the details of some special columns of a table. The output is the same as [SHOW TABLE NEXT_ROW_ID](/sql-statements/sql-statement-show-table-next-rowid.md).
 
 ```sql
 ADMIN SHOW t NEXT_ROW_ID;
