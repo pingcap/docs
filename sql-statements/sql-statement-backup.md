@@ -107,10 +107,6 @@ BR supports backing up data to S3 or GCS:
 BACKUP DATABASE `test` TO 's3://example-bucket-2020/backup-05/?access-key={YOUR_ACCESS_KEY}&secret-access-key={YOUR_SECRET_KEY}';
 ```
 
-<<<<<<< HEAD
-The URL syntax is further explained in [external storage URI](/br/backup-and-restore-storages.md#uri-format).
-
-=======
 <CustomContent platform="tidb">
 
 The URL syntax is further explained in [URI Formats of External Storage Services](/external-storage-uri.md).
@@ -123,7 +119,6 @@ The URL syntax is further explained in [external storage URI](https://docs.pingc
 
 </CustomContent>
 
->>>>>>> 6e066679c2 (dumpling: add URI formats (#15165))
 When running on cloud environment where credentials should not be distributed, set the `SEND_CREDENTIALS_TO_TIKV` option to `FALSE`:
 
 {{< copyable "sql" >}}
