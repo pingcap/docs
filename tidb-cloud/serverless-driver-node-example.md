@@ -20,7 +20,7 @@ To complete this step-by-step tutorial, you need the following:
 - The [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) or your preferred package manager.
 - A TiDB Serverless cluster. If you don't have any, you can [create a TiDB Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md).
 
-## Create the project
+## Step 1. Create a local Node.js project
 
 1. Create a project named `node-example`:
 
