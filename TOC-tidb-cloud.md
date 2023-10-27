@@ -49,7 +49,7 @@
       - [Rails](/develop/dev-guide-sample-application-ruby-rails.md)
     - Serverless Driver (Beta)
       - [TiDB Cloud Serverless Driver](/tidb-cloud/serverless-driver.md)
-      - [Node.js example](/tidb-cloud/serverless-driver-node-example.md)
+      - [Node.js Example](/tidb-cloud/serverless-driver-node-example.md)
   - Third-Party Support
     - [Third-Party Tools Supported by TiDB](/develop/dev-guide-third-party-support.md)
     - [Known Incompatibility Issues with Third-Party Tools](/develop/dev-guide-third-party-tools-compatibility.md)

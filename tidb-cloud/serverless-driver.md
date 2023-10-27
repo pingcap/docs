@@ -71,7 +71,7 @@ export async function GET(request: NextRequest) {
 }
 ```
 
-[Learn more about using TiDB Cloud serverless driver in Vercel](/tidb-cloud/integrate-tidbcloud-with-vercel.md#integrate-tidb-cloud-with-vercel).
+[Learn more about using TiDB Cloud serverless driver in Vercel](/tidb-cloud/integrate-tidbcloud-with-vercel.md).
 
 </div>
 
@@ -135,7 +135,7 @@ const result = await conn.execute('show tables')
 
 </SimpleTab>
 
-## Configure TiDB Cloud Serverless Driver
+## Configure TiDB Cloud serverless driver
 
 You can configure TiDB Cloud serverless driver at both the connection level and the SQL level.
 
@@ -205,11 +205,11 @@ const results = await conn.execute('select * from test',null,{arrayMode:true,ful
 
 **Transaction options**
 
-Transaction options is supported since v0.0.7. You can configure the following options when you use transaction:
+Transaction options are supported since TiDB Cloud serverless driver v0.0.7. You can configure the following options when you use transactions:
 
 | Option       | Type   | Default value     | Description                                                                        |
 |--------------|--------|-------------------|------------------------------------------------------------------------------------|
-| `isolation`  | string | `REPEATABLE READ` | The transaction isolation level. Support `READ COMMITTED` and `REPEATABLE READ`    |
+| `isolation`  | string | `REPEATABLE READ` | The transaction isolation level, which can be set to `READ COMMITTED` or `REPEATABLE READ`.    |
 
 The `isolation` option can only be used in the `begin` function. Here is an example:
 
@@ -222,7 +222,7 @@ const tx = await conn.begin({isolation:"READ COMMITTED"})
 
 ### Supported SQL statements
 
-DDL is supported and the following SQL statements are supported:  `SELECT`, `SHOW`, `EXPLAIN`, `USE`, `INSERT`, `UPDATE`, `DELETE`, `BEGIN`, `COMMIT`, `ROLLBACK`, `SET`.
+DDL is supported and the following SQL statements are supported:  `SELECT`, `SHOW`, `EXPLAIN`, `USE`, `INSERT`, `UPDATE`, `DELETE`, `BEGIN`, `COMMIT`, `ROLLBACK`, and `SET`.
 
 ### Data type mapping
 

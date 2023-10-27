@@ -1,23 +1,24 @@
 ---
-title: TiDB Cloud Serverless Driver Node.js tutorial
-summary: Learn how to use TiDB Cloud Serverless Driver in a local Node.js project.
+title: TiDB Cloud Serverless Driver Node.js Tutorial
+summary: Learn how to use TiDB Cloud serverless driver in a local Node.js project.
 ---
 
-# TiDB Cloud Serverless Driver Node.js tutorial
+# TiDB Cloud Serverless Driver Node.js Tutorial
 
-Learn how to use TiDB Cloud Serverless Driver in a local Node.js project.
+Learn how to use TiDB Cloud serverless driver in a local Node.js project.
 
 > **Note:**
 >
-> This tutorial is compatible with TiDB Serverless only. Be sure to check out our [Insights into Automotive Sales](https://car-sales-insight.vercel.app/) and [sample repository](https://github.com/tidbcloud/car-sales-insight) to learn how to use it with Cloudflare Workers, Vercel Edge Functions, and Netlify Edge Functions.
+> - This tutorial is applicable to TiDB Serverless clusters only. 
+> - To learn how to use TiDB Cloud serverless driver with Cloudflare Workers, Vercel Edge Functions, and Netlify Edge Functions, check out our [Insights into Automotive Sales](https://car-sales-insight.vercel.app/) and the [sample repository](https://github.com/tidbcloud/car-sales-insight).
 
 ## Before you begin
 
-To complete this step-by-step tutorial, you need:
+To complete this step-by-step tutorial, you need the following:
 
 - The [Node.js](https://nodejs.org/en) >= 18.0.0.
 - The [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) or your preferred package manager.
-- A TiDB Serverless cluster. If you don't have any, you can [create a TiDB Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md)
+- A TiDB Serverless cluster. If you don't have any, you can [create a TiDB Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md).
 
 ## Create the project
 
@@ -28,25 +29,30 @@ To complete this step-by-step tutorial, you need:
     cd node-example
     ```
 
-2. Run the following command to install the driver with your preferred package manager, here we use npm as an example. This should create a `node_modules` directory and a `package-lock.json` file in your project directory.
+2. Install the TiDB Cloud serverless driver using npm or your preferred package manager.
+
+    The following command takes installation with npm as an example. Executing this command will create a `node_modules` directory and a `package-lock.json` file in your project directory.
 
     ```
     npm install @tidbcloud/serverless
     ```
 
-## Use the serverless driver
+## Step 2. Use the serverless driver
 
-> The serverless driver supports both the CommonJS and ESM module. We use ESM module as an example in this tutorial.
+The serverless driver supports both CommonJS and ESM modules. The following steps take the usage of the ESM module as an example.
 
-1. First you need to obtain the connection string for your database from the **Connect window** on TiDB Cloud cluster overview page. Your TiDB Serverless connection string will look something like this:
+1. On the overview page of your TiDB Cloud Serverless cluster, click **Connect** in the upper-right corner, and then get the connection string for your database from the displayed dialog. The connection string looks something like this:
 
     ```
    mysql://[username]:[password]@[host]/[database]
     ```
    
-2. Then add `type: "module"` to your `package.json` to specify ESM module. The `package.json` should look like this:
+2. In the `package.json` file, specify the ESM module by adding `type: "module"`. 
 
-   ```
+    For example:
+
+
+   ```json
    {
      "type": "module",
      "dependencies": {
@@ -55,7 +61,7 @@ To complete this step-by-step tutorial, you need:
    }
    ```
 
-3. Next, create a file named `index.js` in your project directory and add the following code:
+3. Create a file named `index.js` in your project directory and add the following code:
 
     ```js
     import { connect } from '@tidbcloud/serverless'
@@ -64,17 +70,17 @@ To complete this step-by-step tutorial, you need:
     console.log(await conn.execute("show tables"))
     ```
 
-4. Now, run your project with the following command:
+4. Run your project with the following command:
 
     ```
     node index.js
     ```
 
-## Compatability with older Node.js versions
+## Compatability with earlier Node.js versions
 
-If you are using Node.js < 18.0.0 which doesn't have a global `fetch`, you can:
+If you are using Node.js earlier than 18.0.0, which does not have a global `fetch`, you can take the following steps to get `fetch`:
 
-1. Install the package provides `fetch`, for example the `undici`:
+1. Install a package that provides `fetch`, such as `undici`:
 
     ```
     npm install undici
