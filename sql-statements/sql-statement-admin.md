@@ -211,6 +211,22 @@ ADMIN SHOW DDL JOBS 5;
 +--------+---------+------------+---------------------+----------------+-----------+----------+-----------+-----------------------------------+-----------------------------------+---------------+
 ```
 
+Run the following command to view the details of some special columns of a table. The output is similiar to [SHOW TABLE NEXT_ROW_ID](/sql-statements/sql-statement-show-table-next-rowid.md).
+
+```sql
+ADMIN SHOW t NEXT_ROW_ID;
+```
+
+```sql
++---------+------------+-------------+--------------------+----------------+
+| DB_NAME | TABLE_NAME | COLUMN_NAME | NEXT_GLOBAL_ROW_ID | ID_TYPE        |
++---------+------------+-------------+--------------------+----------------+
+| test    | t          | _tidb_rowid |                101 | _TIDB_ROWID    |
+| test    | t          | _tidb_rowid |                  1 | AUTO_INCREMENT |
++---------+------------+-------------+--------------------+----------------+
+2 rows in set (0.01 sec)
+```
+
 Run the following command to view the uncompleted DDL jobs in the test database. The results include the DDL jobs that are running and the last 5 DDL jobs that are completed but failed.
 
 {{< copyable "sql" >}}
