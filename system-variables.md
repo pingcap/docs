@@ -1371,6 +1371,37 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - In TiDB v7.1.0, the framework supports distributedly executing only the `ADD INDEX` statement for partitioned tables.
 - This variable is renamed from `tidb_ddl_distribute_reorg`.
 
+<<<<<<< HEAD
+=======
+### tidb_cloud_storage_uri <span class="version-mark">New in v7.4.0</span>
+
+> **Warning:**
+>
+> This feature is experimental. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Default value: `""`
+
+<CustomContent platform="tidb">
+
+- This variable is used to specify the Amazon S3 cloud storage URI to enable [Global Sort](/tidb-global-sort.md). After enabling the [distributed execution framework](/tidb-distributed-execution-framework.md), you can use the Global Sort feature by configuring the URI and pointing it to an appropriate cloud storage path with the necessary permissions to access the storage. For more details, see [Amazon S3 URI format](/external-storage-uri.md#amazon-s3-uri-format).
+- The following statements can use the Global Sort feature.
+    - The [`ADD INDEX`](/sql-statements/sql-statement-add-index.md) statement.
+    - The [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md) statement for import jobs of TiDB Self-Hosted. For TiDB Cloud, the `IMPORT INTO` statement is not applicable.
+
+</CustomContent>
+<CustomContent platform="tidb-cloud">
+
+- This variable is used to specify the cloud storage URI to enable [Global Sort](/tidb-global-sort.md). After enabling the [distributed execution framework](/tidb-distributed-execution-framework.md), you can use the Global Sort feature by configuring the URI and pointing it to an appropriate cloud storage path with the necessary permissions to access the storage. For more details, see [URI Formats of External Storage Services](https://docs.pingcap.com/tidb/stable/external-storage-uri).
+- The following statements can use the Global Sort feature.
+    - The [`ADD INDEX`](/sql-statements/sql-statement-add-index.md) statement.
+    - The [`IMPORT INTO`](https://docs.pingcap.com/tidb/dev/sql-statement-import-into) statement for import jobs of TiDB Self-Hosted. For TiDB Cloud, the `IMPORT INTO` statement is not applicable.
+
+</CustomContent>
+
+>>>>>>> 6e066679c2 (dumpling: add URI formats (#15165))
 ### tidb_ddl_error_count_limit
 
 > **Note:**

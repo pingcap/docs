@@ -351,3 +351,77 @@ When a Kafka consumer receives a message, it first checks the `onlyHandleKey` fi
 > **Warning:**
 >
 > When the Kafka consumer processes data and queries TiDB, the data might have been deleted by GC. You need to [modify the GC Lifetime of the TiDB cluster](/system-variables.md#tidb_gc_life_time-new-in-v50) to a larger value to avoid this situation.
+<<<<<<< HEAD
+=======
+
+### Send large messages to external storage
+
+Starting from v7.4.0, TiCDC Kafka sink supports sending large messages to external storage when the message size exceeds the limit. Meanwhile, TiCDC sends a message to Kafka that contains the address of the large message in the external storage. This can avoid changefeed failures caused by the message size exceeding the Kafka topic limit.
+
+An example configuration is as follows:
+
+```toml
+[sink.kafka-config.large-message-handle]
+# large-message-handle-option is introduced in v7.3.0.
+# Defaults to "none". When the message size exceeds the limit, the changefeed fails.
+# When set to "handle-key-only", if the message size exceeds the limit, only the handle key is sent in the data field. If the message size still exceeds the limit, the changefeed fails.
+# When set to "claim-check", if the message size exceeds the limit, the message is sent to external storage.
+large-message-handle-option = "claim-check"
+claim-check-storage-uri = "s3://claim-check-bucket"
+```
+
+When `large-message-handle-option` is set to `"claim-check"`, `claim-check-storage-uri` must be set to a valid external storage address. Otherwise, creating the changefeed will fail.
+
+> **Tip**
+>
+> For more information about the URI parameters of Amazon S3, GCS, and Azure Blob Storage in TiCDC, see [URI Formats of External Storage Services](/external-storage-uri.md).
+
+TiCDC does not clean up messages on external storage services. Data consumers need to manage external storage services on their own.
+
+### Consume large messages from external storage
+
+The Kafka consumer receives a message that contains the address of the large message in the external storage. The message format is as follows:
+
+```json
+{
+    "id": 0,
+    "database": "test",
+    "table": "tp_int",
+    "pkNames": [
+        "id"
+    ],
+    "isDdl": false,
+    "type": "INSERT",
+    "es": 1639633141221,
+    "ts": 1639633142960,
+    "sql": "",
+    "sqlType": {
+        "id": 4
+    },
+    "mysqlType": {
+        "id": "int"
+    },
+    "data": [
+        {
+          "id": "2"
+        }
+    ],
+    "old": null,
+    "_tidb": {     // TiDB extension fields
+        "commitTs": 163963314122145239,
+        "claimCheckLocation": "s3:/claim-check-bucket/${uuid}.json"
+    }
+}
+```
+
+If the message contains the `claimCheckLocation` field, the Kafka consumer reads the large message data stored in JSON format according to the address provided by the field. The message format is as follows:
+
+```json
+{
+  key: "xxx",
+  value: "xxx",
+}
+```
+
+The `key` and `value` fields contain the encoded large message, which should have been sent to the corresponding field in the Kafka message. Consumers can parse the data in these two parts to restore the content of the large message.
+>>>>>>> 6e066679c2 (dumpling: add URI formats (#15165))
