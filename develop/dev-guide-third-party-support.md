@@ -59,51 +59,6 @@ If you encounter problems when connecting to TiDB using the tools listed in this
          </td>
          <td><a href="/tidb/dev/dev-guide-sample-application-java-jdbc">Connect to TiDB with JDBC</a></td>
       </tr>
-      <tr>
-         <td rowspan="2">JavaScript / TypeScript</td>
-         <td><a href="https://github.com/sidorares/node-mysql2" target="_blank" referrerpolicy="no-referrer-when-downgrade">node-mysql2</a></td>
-         <td>v2.3.3</td>
-         <td>Compatible</td>
-         <td>N/A</td>
-         <td><a href="/tidb/dev/dev-guide-sample-application-nodejs-mysql2">Connect to TiDB with node-mysql2</a></td>
-      </tr>
-      <tr>
-         <td><a href="https://github.com/mysqljs/mysql" target="_blank" referrerpolicy="no-referrer-when-downgrade">mysql.js</a></td>
-         <td>v2.18.1</td>
-         <td>Compatible</td>
-         <td>N/A</td>
-         <td><a href="/tidb/dev/dev-guide-sample-application-nodejs-mysqljs">Connect to TiDB with mysql.js</a></td>
-      </tr>
-      <tr>
-         <td rowspan="1">Ruby</td>
-         <td><a href="https://github.com/brianmario/mysql2" target="_blank" referrerpolicy="no-referrer-when-downgrade">mysql2</a></td>
-         <td>0.5.4</td>
-         <td>Compatible</td>
-         <td>N/A</td>
-         <td><a href="/tidb/dev/dev-guide-sample-application-ruby-mysql2">Connect to TiDB with mysql2</a></td>
-      </tr>
-      <tr>
-         <td rowspan="3">Python</td>
-         <td><a href="https://dev.mysql.com/doc/connector-python/en/" target="_blank" referrerpolicy="no-referrer-when-downgrade">MySQL Connector/Python</a></td>
-         <td>N/A</td>
-         <td>Compatible</td>
-         <td>N/A</td>
-         <td><a href="/tidb/dev/dev-guide-sample-application-python-mysql-connector">Connect to TiDB with MySQL Connector/Python</a></td>
-      </tr>
-      <tr>
-         <td><a href="https://github.com/PyMySQL/mysqlclient" target="_blank" referrerpolicy="no-referrer-when-downgrade">mysqlclient</a></td>
-         <td>N/A</td>
-         <td>Compatible</td>
-         <td>N/A</td>
-         <td><a href="/tidb/dev/dev-guide-sample-application-python-mysqlclient">Connect to TiDB with mysqlclient</a></td>
-      </tr>
-      <tr>
-         <td><a href="https://github.com/PyMySQL/PyMySQL" target="_blank" referrerpolicy="no-referrer-when-downgrade">PyMySQL</a></td>
-         <td>N/A</td>
-         <td>Compatible</td>
-         <td>N/A</td>
-         <td><a href="/tidb/dev/dev-guide-sample-application-python-pymysql">Connect to TiDB with PyMySQL</a></td>
-      </tr>
    </tbody>
 </table>
 
