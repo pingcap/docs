@@ -205,7 +205,7 @@ const results = await conn.execute('select * from test',null,{arrayMode:true,ful
 
 **Transaction options**
 
-Transaction options are supported since TiDB Cloud serverless driver v0.0.7. You can configure the following options when you use transactions:
+Starting from TiDB Cloud serverless driver v0.0.7, you can also configure the following SQL level option when you use transactions:
 
 | Option       | Type   | Default value     | Description                                                                        |
 |--------------|--------|-------------------|------------------------------------------------------------------------------------|
