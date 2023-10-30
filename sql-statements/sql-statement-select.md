@@ -197,7 +197,7 @@ In this example, you can find the query result in `/tmp/tmp_file1` as follows:
 ```
 
 ```sql
-mysql> select * from t into outfile '/tmp/tmp_file2' fields terminated by ',' enclosed by '"';
+mysql> SELECT * FROM t INTO OUTFILE '/tmp/tmp_file2' FIELDS TERMINATED BY ',' ENCLOSED BY '"';
 Query OK, 3 rows affected (0.00 sec)
 ```
 
