@@ -522,6 +522,7 @@
     - TiFlash
         - [TiFlash Overview](/tiflash/tiflash-overview.md)
         - [Spill to Disk](/tiflash/tiflash-spill-disk.md)
+  - [Dumpling](/dumpling-overview.md)
   - [Table Filter](/table-filter.md)
   - [Serverless Tier Limitations](/tidb-cloud/serverless-tier-limitations.md)
   - [Resource Control](/tidb-resource-control.md)
