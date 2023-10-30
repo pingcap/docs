@@ -97,7 +97,7 @@ The statistics is now correctly updated and loaded.
 
 TiDB differs from MySQL in **both** the statistics it collects and how it makes use of statistics during query execution. While this statement is syntactically similar to MySQL, the following differences apply:
 
-+ TiDB might not include very recently committed changes when running `ANALYZE TABLE`. After a batch-update of rows, you might need to `sleep(1)` before executing `ANALYZE TABLE` in order for the statistics update to reflect these changes. [#16570](https://github.com/pingcap/tidb/issues/16570).
++ TiDB might not include very recently committed changes when running `ANALYZE TABLE`. After a batch update of rows, you might need to `sleep(1)` before executing `ANALYZE TABLE` in order for the statistics update to reflect these changes. See [#16570](https://github.com/pingcap/tidb/issues/16570).
 + `ANALYZE TABLE` takes significantly longer to execute in TiDB than MySQL.
 
 ## See also
