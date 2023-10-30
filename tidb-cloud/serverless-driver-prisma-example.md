@@ -5,7 +5,7 @@ summary: Learn how to use TiDB Cloud serverless driver with Prisma ORM.
 
 # TiDB Cloud Serverless Driver Prisma Tutorial
 
-[Prisma](https://www.prisma.io/docs) is an open source next-generation ORM (Object-Relational Mapping) that helps developers interact with their database in an intuitive, efficient, and safe way. TiDB Cloud offers [@tidbcloud/prisma-adapter](https://github.com/tidbcloud/prisma-adapter) that enables you use Prisma Client over HTTPS with our [TiDB Cloud serverless driver](./tidb-cloud/serverless-driver.md). Compared with the traditional TCP way, it brings the following benefits:
+[Prisma](https://www.prisma.io/docs) is an open source next-generation ORM (Object-Relational Mapping) that helps developers interact with their database in an intuitive, efficient, and safe way. TiDB Cloud offers [@tidbcloud/prisma-adapter](https://github.com/tidbcloud/prisma-adapter) that enables you use Prisma Client over HTTPS with our [TiDB Cloud serverless driver](/tidb-cloud/serverless-driver.md). Compared with the traditional TCP way, it brings the following benefits:
 
 - Better performance in serverless environment
 - [Possibility of using Prisma client in edge environment](https://github.com/prisma/prisma/issues/21394)
