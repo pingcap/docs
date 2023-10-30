@@ -162,13 +162,13 @@ The above example uses data generated with `tiup bench tpcc prepare`. The first 
 
 ### SELECT ... INTO OUTFILE
 
-`SELECT ... INTO OUTFILE` is used to write the result of a query to a file. You can use the `Fields` and `Lines` parameters to specify how to handle the data format. Common output formats are comma separated (CSV) and tab separated (TSV).
+The `SELECT ... INTO OUTFILE` statement is used to write the result of a query to a file. You can use the `Fields` and `Lines` parameters to specify the data format of the output file. Common output formats include comma-separated values (CSV) and tab-separated values (TSV).
 
 - `FIELDS TERMINATED BY`: specifies the data delimiter.
 - `FIELDS ENCLOSED BY`: specifies the enclosing character of the data.
 - `LINES TERMINATED BY`: specifies the line terminator, if you want to end a line with a certain character.
 
-Below are some examples, first create a table and prepare some data:
+Assume that there is a table `t` with three columns as follows:
 
 ```sql
 mysql> CREATE TABLE t (a INT, b VARCHAR(10), c DECIMAL(10,2));
@@ -195,10 +195,14 @@ In this example, you can find the query result in `/tmp/tmp_file1` as follows:
 3       c       3.30
 ```
 
+Example 2:
+
 ```sql
 mysql> SELECT * FROM t INTO OUTFILE '/tmp/tmp_file2' FIELDS TERMINATED BY ',' ENCLOSED BY '"';
 Query OK, 3 rows affected (0.00 sec)
 ```
+
+In this example, you can find the query result in `/tmp/tmp_file2` as follows:
 
 ```
 "1","a","1.10"
@@ -206,11 +210,15 @@ Query OK, 3 rows affected (0.00 sec)
 "3","c","3.30"
 ```
 
+Example 3:
+
 ```sql
 mysql> SELECT * FROM t INTO OUTFILE '/tmp/tmp_file3'
     -> FIELDS TERMINATED BY ',' ENCLOSED BY '\'' LINES TERMINATED BY '<<<\n';
 Query OK, 3 rows affected (0.00 sec)
 ```
+
+In this example, you can find the query result in `/tmp/tmp_file3` as follows:
 
 ```
 '1','a','1.10'<<<
