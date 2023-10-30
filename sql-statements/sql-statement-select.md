@@ -208,7 +208,8 @@ Query OK, 3 rows affected (0.00 sec)
 ```
 
 ```sql
-mysql> select * from t into outfile '/tmp/tmp_file3' fields terminated by ',' enclosed by '\'' lines terminated by '<<<\n';
+mysql> SELECT * FROM t INTO OUTFILE '/tmp/tmp_file3'
+    -> FIELDS TERMINATED BY ',' ENCLOSED BY '\'' LINES TERMINATED BY '<<<\n';
 Query OK, 3 rows affected (0.00 sec)
 ```
 
