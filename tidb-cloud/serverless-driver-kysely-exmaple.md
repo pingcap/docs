@@ -31,7 +31,7 @@ To complete this tutorial, you need the following:
     cd kysely-example
     ```
 
-2. Install `kysely` and `@tidbcloud/serverless` with `@tidbcloud/kysely`, as they are both required peer dependencies:
+2. Install the `@tidbcloud/kysely` with `kysely` and `@tidbcloud/serverless`, as they are both required peer dependencies:
 
    ```
    npm install kysely @tidbcloud/kysely @tidbcloud/serverless
@@ -85,7 +85,7 @@ To complete this tutorial, you need the following:
    
 ### Step 3. Use Kysely to query data
 
-1. Before you write your code. Create a table in your TiDB Serverless with the following DDL:
+1. Create a table in your TiDB Serverless cluster and insert some data. You can use the [Chat2Query on console](/tidb-cloud/explore-data-with-chat2query.md) to execute the SQL. Here is an example:
 
    ```
    CREATE TABLE `test`.`person`  (
@@ -94,11 +94,7 @@ To complete this tutorial, you need the following:
      `gender` enum('male','female') NULL DEFAULT NULL,
      PRIMARY KEY (`id`) USING BTREE
    );
-   ```
-
-   You can insert some data into the table in order to test the query later. Here is an example
-
-   ```
+   
    insert into test.person values (1,'pingcap','male')
    ```
 
@@ -177,11 +173,11 @@ This tutorial use Vercel Edge Function as an example. To complete this tutorial,
 2. Create a [Next](https://nextjs.org/) project called `kysely-example` with the following terminal commands:
 
    ```
-   npx create-next-app@latest # you need to type the project name `kysely-example`
+   npx create-next-app@latest kysely-example --ts --no-eslint --tailwind --no-src-dir --app --import-alias "@/*"
    cd kysely-example
    ```
    
-3. You should also install `kysely` and `@tidbcloud/serverless` with `@tidbcloud/kysely`, as they are both required peer dependencies.
+3. Install the `@tidbcloud/kysely` with `kysely` and `@tidbcloud/serverless`, as they are both required peer dependencies.
 
    ```
    npm install kysely @tidbcloud/kysely @tidbcloud/serverless
@@ -197,7 +193,7 @@ mysql://[username]:[password]@[host]/[database]
 
 ### Step 3. Create an Edge Function
 
-1. Before you create the edge function. Create a table in your TiDB Serverless cluster with the following DDL:
+1. Create a table in your TiDB Serverless cluster and insert some data. You can use the [Chat2Query on console](/tidb-cloud/explore-data-with-chat2query.md) to execute the SQL. Here is an example:
 
    ```
    CREATE TABLE `test`.`person`  (
@@ -206,11 +202,7 @@ mysql://[username]:[password]@[host]/[database]
      `gender` enum('male','female') NULL DEFAULT NULL,
      PRIMARY KEY (`id`) USING BTREE
    );
-   ```
    
-   You can insert some data into the table in order to test the query later. Here is an example
-
-   ```
    insert into test.person values (1,'pingcap','male')
    ```
 
