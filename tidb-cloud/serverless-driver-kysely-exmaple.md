@@ -160,7 +160,7 @@ To complete this tutorial, you need the following:
 
 ### Before you begin
 
-This tutorial use vercel Edge Function as an example. To complete this tutorial, you need the following:
+This tutorial use Vercel Edge Function as an example. To complete this tutorial, you need the following:
 
 - A TiDB Serverless cluster. If you don't have any, you can [create a TiDB Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md).
 - A [Vercel](https://vercel.com/docs) account that provides edge environment.
@@ -168,7 +168,7 @@ This tutorial use vercel Edge Function as an example. To complete this tutorial,
 
 ### Step 1. Create a project
 
-1. Install the vercel CLI:
+1. Install the Vercel CLI:
 
     ```
     npm i -g vercel@latest
@@ -189,7 +189,7 @@ This tutorial use vercel Edge Function as an example. To complete this tutorial,
 
 ### Step 2. Set the environment
 
-On the overview page of your TiDB Cloud Serverless cluster, click **Connect** in the upper-right corner, and then get the connection string for your database from the displayed dialog. The connection string looks something like this:
+On the overview page of your TiDB Serverless cluster, click **Connect** in the upper-right corner, and then get the connection string for your database from the displayed dialog. The connection string looks something like this:
 
 ```
 mysql://[username]:[password]@[host]/[database]
@@ -197,7 +197,7 @@ mysql://[username]:[password]@[host]/[database]
 
 ### Step 3. Create an Edge Function
 
-1. Before you create the edge function. Create a table in your TiDB Serverless with the following DDL:
+1. Before you create the edge function. Create a table in your TiDB Serverless cluster with the following DDL:
 
    ```
    CREATE TABLE `test`.`person`  (
