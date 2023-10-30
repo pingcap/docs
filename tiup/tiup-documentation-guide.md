@@ -16,4 +16,5 @@ summary: Guide you through TiUP documentation with links and introductions.
 
 ## TiUP resources
 
+- [TiUP Release Notes](https://github.com/pingcap/tiup/releases)
 - [TiUP Issues](https://github.com/pingcap/tiup/issues): Lists TiUP GitHub issues
