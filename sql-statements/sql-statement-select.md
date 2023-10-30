@@ -13,10 +13,6 @@ The `SELECT` statement is used to read data from TiDB.
 
 ![SelectStmt](/media/sqlgram/SelectStmt.png)
 
-> **Note:**
->
-> The `SELECT ... INTO OUTFILE` statement is only applicable to TiDB Self-Hosted and not available on [TiDB Cloud](https://docs.pingcap.com/tidbcloud/).
-
 **FromDual:**
 
 ![FromDual](/media/sqlgram/FromDual.png)
@@ -162,11 +158,19 @@ The above example uses data generated with `tiup bench tpcc prepare`. The first 
 
 ### SELECT ... INTO OUTFILE
 
-The `SELECT ... INTO OUTFILE` statement is used to write the result of a query to a file. You can use the `Fields` and `Lines` parameters to specify the data format of the output file. Common output formats include comma-separated values (CSV) and tab-separated values (TSV).
+The `SELECT ... INTO OUTFILE` statement is used to write the result of a query to a file.
 
-- `FIELDS TERMINATED BY`: specifies the data delimiter.
-- `FIELDS ENCLOSED BY`: specifies the enclosing character of the data.
-- `LINES TERMINATED BY`: specifies the line terminator, if you want to end a line with a certain character.
+> **Note:**
+>
+> - This statement is only applicable to TiDB Self-Hosted and not available on [TiDB Cloud](https://docs.pingcap.com/tidbcloud/).
+> - This statement does not support
+writing query results to any [external storages](https://docs.pingcap.com/tidb/stable/backup-and-restore-storages) such as Amazon S3 or GCS.
+
+In the statement, you can specify the format of the output file by using the following clauses:
+
+- `FIELDS TERMINATED BY`: specifies the field delimiter in the file. For example, you can specify it as `','` to output comma-separated values (CSV) or `'\t'` to output tab-separated values (TSV).
+- `FIELDS ENCLOSED BY`: specifies the enclosing character that wraps around each field in the file.
+- `LINES TERMINATED BY`: specifies the line terminator in the file, if you want to end a line with a certain character.
 
 Assume that there is a table `t` with three columns as follows:
 
@@ -178,9 +182,9 @@ mysql> INSERT INTO t VALUES (1, 'a', 1.1), (2, 'b', 2.2), (3, 'c', 3.3);
 Query OK, 3 rows affected (0.01 sec)
 ```
 
-Here are some `SELECT ... INTO OUTFILE` statements and their results.
+The following examples show how to use the `SELECT ... INTO OUTFILE` statement to write the query result to a file.
 
-Example 1:
+**Example 1:**
 
 ```sql
 mysql> SELECT * FROM t INTO OUTFILE '/tmp/tmp_file1';
@@ -195,7 +199,7 @@ In this example, you can find the query result in `/tmp/tmp_file1` as follows:
 3       c       3.30
 ```
 
-Example 2:
+**Example 2:**
 
 ```sql
 mysql> SELECT * FROM t INTO OUTFILE '/tmp/tmp_file2' FIELDS TERMINATED BY ',' ENCLOSED BY '"';
@@ -210,7 +214,7 @@ In this example, you can find the query result in `/tmp/tmp_file2` as follows:
 "3","c","3.30"
 ```
 
-Example 3:
+**Example 3:**
 
 ```sql
 mysql> SELECT * FROM t INTO OUTFILE '/tmp/tmp_file3'
@@ -226,11 +230,10 @@ In this example, you can find the query result in `/tmp/tmp_file3` as follows:
 '3','c','3.30'<<<
 ```
 
-Now `SELECT ... INTO @variable`, `SELECT ... INTO DUMPFILE` or any [external storage](https://docs.pingcap.com/tidb/stable/backup-and-restore-storages) like S3 or GCS is not supported.
-
 ## MySQL compatibility
 
 - The syntax `SELECT ... INTO @variable` is not supported.
+- The syntax `SELECT ... INTO DUMPFILE` is not supported.
 - The syntax `SELECT .. GROUP BY expr` does not imply `GROUP BY expr ORDER BY expr` as it does in MySQL 5.7. TiDB instead matches the behavior of MySQL 8.0 and does not imply a default order.
 - The syntax `SELECT ... TABLESAMPLE ...` is a TiDB extension and not supported by MySQL.
 
