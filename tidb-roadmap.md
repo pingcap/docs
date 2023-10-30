@@ -146,7 +146,7 @@ In the course of development, this roadmap is subject to change based on user ne
         <ul>
           <li>
             <b>Materialized views</b>
-            </br><i>Pre-computed results stored as a persistent data view to boost query performance</i>
+            <br /><i>Pre-computed results stored as a persistent data view to boost query performance</i>
           </li>
           <br />
           <li>
