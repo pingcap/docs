@@ -177,11 +177,11 @@ Query OK, 0 rows affected (0.02 sec)
 
 mysql> INSERT INTO t VALUES (1, 'a', 1.1), (2, 'b', 2.2), (3, 'c', 3.3);
 Query OK, 3 rows affected (0.01 sec)
+```
 
 Here are some `SELECT ... INTO OUTFILE` statements and their results.
 
 Example 1:
-
 
 ```sql
 mysql> SELECT * FROM t INTO OUTFILE '/tmp/tmp_file1';
