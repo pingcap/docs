@@ -171,12 +171,11 @@ The above example uses data generated with `tiup bench tpcc prepare`. The first 
 Below are some examples, first create a table and prepare some data:
 
 ```sql
-mysql> create table t (a int, b varchar(10), c decimal(10,2));
+mysql> CREATE TABLE t (a INT, b VARCHAR(10), c DECIMAL(10,2));
 Query OK, 0 rows affected (0.02 sec)
 
-mysql> insert into t values (1, 'a', 1.1), (2, 'b', 2.2), (3, 'c', 3.3);
+mysql> INSERT INTO t VALUES (1, 'a', 1.1), (2, 'b', 2.2), (3, 'c', 3.3);
 Query OK, 3 rows affected (0.01 sec)
-```
 
 Here are some `SELECT ... INTO OUTFILE` statements and their results.
 
