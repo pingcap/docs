@@ -103,7 +103,7 @@ In the command above:
 
 <CustomContent platform="tidb-cloud">
 
-+ The `-o` (or `--output`) option specifies the export directory of the storage, which supports an absolute local file path or an [external storage URI](https://docs.pingcap.com/tidb/dev/backup-and-restore-storages#uri-format).
++ The `-o` (or `--output`) option specifies the export directory of the storage, which supports an absolute local file path or an [external storage URI](https://docs.pingcap.com/tidb/stable/external-storage-uri).
 
 </CustomContent>
 + The `-t` option specifies the number of threads for the export. Increasing the number of threads improves the concurrency of Dumpling and the export speed, and also increases the database's memory consumption. Therefore, it is not recommended to set the number too large. Usually, it's less than 64.
