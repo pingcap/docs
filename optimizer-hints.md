@@ -571,9 +571,9 @@ The `LEADING` hint does not take effect in the following situations:
 + The optimizer cannot perform join operations according to the order as specified by the `LEADING` hint.
 + The `straight_join()` hint already exists.
 + The query contains an outer join together with the Cartesian product.
-+ Any of the `MERGE_JOIN`, `INL_JOIN`, `INL_HASH_JOIN`, and `HASH_JOIN` hints is used at the same time.
++ Any of the `MERGE_JOIN`, `INL_JOIN`, `INL_HASH_JOIN`, and `HASH_JOIN` hints is used at the same time and conflicts with the `LEADING` hint.
 
-In the above situations, a warning is generated.
+In the preceding situations, a warning is generated.
 
 ```sql
 -- Multiple `LEADING` hints are specified.
@@ -968,7 +968,7 @@ SHOW WARNINGS;
 
 ### `INL_JOIN` hint does not take effect because of join order
 
-The [`INL_JOIN(t1, t2)`](#inl_joint1_name--tl_name-) or `TIDB_INLJ(t1, t2)` hint semantically instructs `t1` and `t2` to act as inner tables in an `IndexJoin` operator to join with other tables, rather than directly joining them using an `IndexJoin`operator. For example:
+The [`INL_JOIN(t1, t2)`](#inl_joint1_name--tl_name-) or `TIDB_INLJ(t1, t2)` hint semantically instructs `t1` and `t2` to act as inner tables in an `IndexJoin` operator to join with other tables, rather than directly joining them using an `IndexJoin` operator. For example:
 
 ```sql
 EXPLAIN SELECT /*+ inl_join(t1, t3) */ * FROM t1, t2, t3 WHERE t1.id = t2.id AND t2.id = t3.id AND t1.id = t3.id;
