@@ -163,8 +163,7 @@ The `SELECT ... INTO OUTFILE` statement is used to write the result of a query t
 > **Note:**
 >
 > - This statement is only applicable to TiDB Self-Hosted and not available on [TiDB Cloud](https://docs.pingcap.com/tidbcloud/).
-> - This statement does not support
-writing query results to any [external storages](https://docs.pingcap.com/tidb/stable/backup-and-restore-storages) such as Amazon S3 or GCS.
+> - This statement does not support writing query results to any [external storages](https://docs.pingcap.com/tidb/stable/backup-and-restore-storages) such as Amazon S3 or GCS.
 
 In the statement, you can specify the format of the output file by using the following clauses:
 
