@@ -256,7 +256,7 @@ ADMIN RELOAD BINDINGS;
 
 ## Restore statistics
 
-Starting from TiDB v7.5.0, the `br` command-line tool introduces the `--ignore-stats` parameter. When you set this parameter to `false', the `br` command-line tool supports backing up and restoring statistics of column, index, and table levels. In this case, you do not need to manually run the statistics collection task for the TiDB database restored from the backup, or wait for the completion of the automatic collection task. This feature simplifies the database maintenance work and improves the query performance.
+Starting from TiDB v7.5.0, the `br` command-line tool introduces the `--ignore-stats` parameter. When you set this parameter to `false', the `br` command-line tool supports backing up and restoring statistics of columns, indexes, and tables. In this case, you do not need to manually run the statistics collection task for the TiDB database restored from the backup, or wait for the completion of the automatic collection task. This feature simplifies the database maintenance work and improves the query performance.
 
 If you do not set this parameter to `false`, the `br` command-line tool uses the default setting `--ignore-stats=true`, which means statistics are not backed up during data backup.
 
@@ -268,14 +268,14 @@ br backup full \
 --ignore-stats=false
 ```
 
-After completing the above configuration, when you restore data, if the table statistics are included in the backup, the `br` command-line tool automatically restores the table statistics during restoring data:
+After backing up data with the preceding configuration, when you restore data, the `br` command-line tool automatically restores table statistics if table statistics are included in the backup:
 
 ```shell
 br restore full \
 --storage local:///br_data/ --pd "${PD_IP}:2379" --log-file restore.log
 ```
 
-When the backup and restore feature backs up data, it stores the statistics in JSON format in the `backupmeta` file. When restoring data, it imports the statistics in JSON format into the cluster. For more information, see [LOAD STATS](/sql-statements/sql-statement-load-stats.md).
+When the backup and restore feature backs up data, it stores statistics in JSON format within the `backupmeta` file. When restoring data, it loads statistics in JSON format into the cluster. For more information, see [LOAD STATS](/sql-statements/sql-statement-load-stats.md).
 
 ## Restore encrypted snapshots
 
