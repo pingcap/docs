@@ -1076,7 +1076,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
-- Default value: `2` The default value is `1` for v7.4.0 and previous versions.
+- Default value: `2`. The default value is `1` for v7.4.0 and earlier versions.
 - This variable specifies the concurrency of reading and writing statistics for a partitioned table when TiDB analyzes the partitioned table.
 
 ### tidb_analyze_version <span class="version-mark">New in v5.1.0</span>
@@ -1301,7 +1301,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
-- Default value: `2`  The default value is `4` for v7.4.0 and previous versions.
+- Default value: `2`. The default value is `4` for v7.4.0 and earlier versions.
 - Range: `[1, 256]`
 - Unit: Threads
 - This variable is used to set the concurrency of executing the `ANALYZE` statement.
