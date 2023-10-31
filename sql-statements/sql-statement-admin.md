@@ -11,6 +11,7 @@ This statement is a TiDB extension syntax, used to view the status of TiDB and c
 - [`ADMIN RELOAD`](#admin-reload-statement)
 - [`ADMIN PLUGINS`](#admin-plugins-related-statement)
 - [`ADMIN ... BINDINGS`](#admin-bindings-related-statement)
+- [`ADMIN NEXT_ROW_ID`](#admin-next_row_id-statement)
 - [`ADMIN REPAIR`](#admin-repair-statement)
 - [`ADMIN SHOW SLOW`](#admin-show-slow-statement)
 
@@ -110,6 +111,14 @@ ADMIN RELOAD BINDINGS;
 ```
 
 The above statement is used to reload SQL Plan binding information.
+
+## `ADMIN NEXT_ROW_ID` statement
+
+```sql
+ADMIN SHOW t NEXT_ROW_ID;
+```
+
+The above statement is used to view the details of some special columns of a table. The output is the same as [SHOW TABLE NEXT_ROW_ID](/sql-statements/sql-statement-show-table-next-rowid.md).
 
 ## `ADMIN REPAIR` statement
 
