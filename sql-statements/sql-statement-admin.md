@@ -11,8 +11,8 @@ This statement is a TiDB extension syntax, used to view the status of TiDB and c
 - [`ADMIN RELOAD`](#admin-reload-statement)
 - [`ADMIN PLUGINS`](#admin-plugins-related-statement)
 - [`ADMIN ... BINDINGS`](#admin-bindings-related-statement)
-- [`ADMIN NEXT_ROW_ID`](#admin-next_row_id-statement)
 - [`ADMIN REPAIR`](#admin-repair-statement)
+- [`ADMIN SHOW NEXT_ROW_ID`](#admin-show-next_row_id-statement)
 - [`ADMIN SHOW SLOW`](#admin-show-slow-statement)
 
 ## DDL related statement
@@ -112,7 +112,7 @@ ADMIN RELOAD BINDINGS;
 
 The above statement is used to reload SQL Plan binding information.
 
-## `ADMIN NEXT_ROW_ID` statement
+## `ADMIN SHOW NEXT_ROW_ID` statement
 
 ```sql
 ADMIN SHOW t NEXT_ROW_ID;
