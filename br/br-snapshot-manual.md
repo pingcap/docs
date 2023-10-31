@@ -256,9 +256,9 @@ ADMIN RELOAD BINDINGS;
 
 ## Restore statistics
 
-Starting from TiDB v7.5.0, the `br` command-line tool introduces the `--ignore-stats` parameter. It supports backing up and restoring statistics of column, index, and table levels. After you enable this feature, you do not need to manually run the statistics collection task for the TiDB database restored from the backup, or wait for the completion of the automatic collection task. This feature simplifies the database maintenance work and improves the query performance.
+Starting from TiDB v7.5.0, the `br` command-line tool introduces the `--ignore-stats` parameter. When you set this parameter to `false', the `br` command-line tool supports backing up and restoring statistics of column, index, and table levels. In this case, you do not need to manually run the statistics collection task for the TiDB database restored from the backup, or wait for the completion of the automatic collection task. This feature simplifies the database maintenance work and improves the query performance.
 
-This parameter is enabled by default, and the configuration item is `--ignore-stats=true`, which means that table statistics are not backed up when the data is backed up.
+If you do not set this parameter to `false`, the `br` command-line tool uses the default setting `--ignore-stats=true`, which means statistics are not backed up during data backup.
 
 The following is an example of backing up cluster snapshot data and backing up table statistics with `--ignore-stats=false`:
 
@@ -268,7 +268,7 @@ br backup full \
 --ignore-stats=false
 ```
 
-After completing the above configuration, when you restore data, if the table statistics are included in the backup set, the `br` command line tool automatically restores the table statistics during restoring data:
+After completing the above configuration, when you restore data, if the table statistics are included in the backup, the `br` command-line tool automatically restores the table statistics during restoring data:
 
 ```shell
 br restore full \
