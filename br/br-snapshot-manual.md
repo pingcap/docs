@@ -12,6 +12,7 @@ This document describes the commands of TiDB snapshot backup and restore accordi
     - [Back up a database](#back-up-a-database)
     - [Back up a table](#back-up-a-table)
     - [Back up multiple tables with table filter](#back-up-multiple-tables-with-table-filter)
+- [Back up statistics](#back-up-statistics)
 - [Encrypt the backup data](#encrypt-the-backup-data)
 - [Restore cluster snapshots](#restore-cluster-snapshots)
 - [Restore a database or a table](#restore-a-database-or-a-table)
@@ -19,7 +20,6 @@ This document describes the commands of TiDB snapshot backup and restore accordi
     - [Restore a table](#restore-a-table)
     - [Restore multiple tables with table filter](#restore-multiple-tables-with-table-filter)
     - [Restore execution plan bindings from the `mysql` schema](#restore-execution-plan-bindings-from-the-mysql-schema)
-- [Restore statistics](#restore-statistics)
 - [Restore encrypted snapshots](#restore-encrypted-snapshots)
 
 For more information about snapshot backup and restore, refer to:
@@ -109,6 +109,29 @@ br backup full \
     --ratelimit 128 \
     --log-file backupfull.log
 ```
+
+## Back up statistics
+
+Starting from TiDB v7.5.0, the `br` command-line tool introduces the `--ignore-stats` parameter. When you set this parameter to `false', the `br` command-line tool supports backing up and restoring statistics of columns, indexes, and tables. In this case, you do not need to manually run the statistics collection task for the TiDB database restored from the backup, or wait for the completion of the automatic collection task. This feature simplifies the database maintenance work and improves the query performance.
+
+If you do not set this parameter to `false`, the `br` command-line tool uses the default setting `--ignore-stats=true`, which means statistics are not backed up during data backup.
+
+The following is an example of backing up cluster snapshot data and backing up table statistics with `--ignore-stats=false`:
+
+```shell
+br backup full \
+--storage local:///br_data/ --pd "${PD_IP}:2379" --log-file restore.log \
+--ignore-stats=false
+```
+
+After backing up data with the preceding configuration, when you restore data, the `br` command-line tool automatically restores table statistics if table statistics are included in the backup:
+
+```shell
+br restore full \
+--storage local:///br_data/ --pd "${PD_IP}:2379" --log-file restore.log
+```
+
+When the backup and restore feature backs up data, it stores statistics in JSON format within the `backupmeta` file. When restoring data, it loads statistics in JSON format into the cluster. For more information, see [LOAD STATS](/sql-statements/sql-statement-load-stats.md).
 
 ## Encrypt the backup data
 
@@ -253,29 +276,6 @@ DELETE FROM bind_info WHERE original_sql = 'builtin_pseudo_sql_for_bind_lock' LI
 -- Force to reload the binding information.
 ADMIN RELOAD BINDINGS;
 ```
-
-## Restore statistics
-
-Starting from TiDB v7.5.0, the `br` command-line tool introduces the `--ignore-stats` parameter. When you set this parameter to `false', the `br` command-line tool supports backing up and restoring statistics of columns, indexes, and tables. In this case, you do not need to manually run the statistics collection task for the TiDB database restored from the backup, or wait for the completion of the automatic collection task. This feature simplifies the database maintenance work and improves the query performance.
-
-If you do not set this parameter to `false`, the `br` command-line tool uses the default setting `--ignore-stats=true`, which means statistics are not backed up during data backup.
-
-The following is an example of backing up cluster snapshot data and backing up table statistics with `--ignore-stats=false`:
-
-```shell
-br backup full \
---storage local:///br_data/ --pd "${PD_IP}:2379" --log-file restore.log \
---ignore-stats=false
-```
-
-After backing up data with the preceding configuration, when you restore data, the `br` command-line tool automatically restores table statistics if table statistics are included in the backup:
-
-```shell
-br restore full \
---storage local:///br_data/ --pd "${PD_IP}:2379" --log-file restore.log
-```
-
-When the backup and restore feature backs up data, it stores statistics in JSON format within the `backupmeta` file. When restoring data, it loads statistics in JSON format into the cluster. For more information, see [LOAD STATS](/sql-statements/sql-statement-load-stats.md).
 
 ## Restore encrypted snapshots
 
