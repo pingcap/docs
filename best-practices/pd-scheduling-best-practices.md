@@ -299,6 +299,6 @@ Practically, if a node failure is considered unrecoverable, you can immediately 
 
 In TiDB v5.2.0, TiKV introduces the mechanism of slow TiKV node detection. By sampling the requests in TiKV, this mechanism works out a score ranging from 1 to 100. A TiKV node with a score higher than or equal to 80 is marked as slow. You can add [`evict-slow-store-scheduler`](/pd-control.md#scheduler-show--add--remove--pause--resume--config--describe) to detect and schedule slow nodes. If only one TiKV is detected as slow, and the slow score reaches the limit (80 by default), the leader in this node will be evicted (similar to the effect of `evict-leader-scheduler`).
 
- > **Note:**
+> **Note:**
 >
 > When the `evict-slow-store-scheduler` is enabled, there is a possibility that some leaders on slow nodes may have to wait for delayed requests to be processed before the leader eviction process can proceed. This can result in an overall extended duration for the leader eviction. It is recommended to synchronize the configuration with the [`store-io-pool-size`](/tikv-configuration-file.md#store-io-pool-size-new-in-v530)  to avoid this situation..
