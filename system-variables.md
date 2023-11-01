@@ -3630,7 +3630,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `ON`. When you upgrade from a version earlier than v7.5.0 to v7.5.0 or a later version, the default value is `OFF`. 
-- This variable is used for TiDB to merge global statistics in an async manner to avoid OOM issues.
+- This variable is used for TiDB to merge global statistics asynchronously to avoid OOM issues.
 
 ### tidb_metric_query_range_duration <span class="version-mark">New in v4.0</span>
 
