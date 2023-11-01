@@ -1,30 +1,27 @@
 ---
 title: Connect to TiDB with Visual Studio Code
-summary: Learn how to connect to TiDB using Visual Studio Code (VS Code) or Github Codespaces. This tutorial gives visual instructions that work with TiDB using Visual Studio Code or Github Codespaces.
+summary: Learn how to connect to TiDB using Visual Studio Code or GitHub Codespaces.
 ---
 
 # Connect to TiDB with Visual Studio Code
 
-TiDB is a MySQL-compatible database, and [Visual Studio Code](https://code.visualstudio.com/)(or VS Code, VSC) is a lightweight but powerful source code editor. In this tutorial, we will use the [vscode-sqltools](https://marketplace.visualstudio.com/items?itemName=mtxr.sqltools) extension which supports TiDB as an [official driver](https://marketplace.visualstudio.com/items?itemName=mtxr.sqltools-driver-mysql).
+TiDB is a MySQL-compatible database, and [Visual Studio Code (VS Code)](https://code.visualstudio.com/) is a lightweight but powerful source code editor. This tutorial uses the [SQLTools](https://marketplace.visualstudio.com/items?itemName=mtxr.sqltools) extension which supports TiDB as an [official driver](https://marketplace.visualstudio.com/items?itemName=mtxr.sqltools-driver-mysql).
 
-In this tutorial, you will learn how to use to connect to your TiDB cluster using Visual Studio Code.
-
-> **Note:**
->
-> This tutorial is compatible with TiDB Serverless, TiDB Dedicated, and TiDB Self-Hosted.
+In this tutorial, you can learn how to connect to your TiDB cluster using Visual Studio Code.
 
 > **Note:**
 >
-> This tutorial also works with Visual Studio Code Remote Development enviorments including [Github Codespaces](https://github.com/features/codespaces), [Dev Containers](https://code.visualstudio.com/docs/devcontainers/containers), [Visual Studio Code WSL](https://code.visualstudio.com/docs/remote/wsl), etc.
+> - This tutorial is compatible with TiDB Serverless, TiDB Dedicated, and TiDB Self-Hosted.
+> - This tutorial also works with Visual Studio Code Remote Development environments, such as [GitHub Codespaces](https://github.com/features/codespaces), [Visual Studio Code Dev Containers](https://code.visualstudio.com/docs/devcontainers/containers), and [Visual Studio Code WSL](https://code.visualstudio.com/docs/remote/wsl).
 
 ## Prerequisites
 
-To complete this tutorial, you will need:
+To complete this tutorial, you need:
 
-- [Visual Studio Code](https://code.visualstudio.com/#alt-downloads) `1.72.0` or higher.
-- [SQLTools MySQL/MariaDB/TiDB](https://marketplace.visualstudio.com/items?itemName=mtxr.sqltools-driver-mysql) extension for Visual Studio Code. To install it,
-    - Just [click this link to launch VS Code and install it directly](vscode:extension/mtxr.sqltools-driver-mysql). 
-    - Or, visit [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=mtxr.sqltools-driver-mysql) and click Install. 
+- [Visual Studio Code](https://code.visualstudio.com/#alt-downloads) **1.72.0** or higher.
+- [SQLTools MySQL/MariaDB/TiDB](https://marketplace.visualstudio.com/items?itemName=mtxr.sqltools-driver-mysql) extension for Visual Studio Code. To install it, you can use one of the following methods:
+    - Click [this link](vscode:extension/mtxr.sqltools-driver-mysql) to launch VS Code and install the extension directly.
+    - Navigate to [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=mtxr.sqltools-driver-mysql) and click **Install**.
 - A TiDB cluster.
 
 <CustomContent platform="tidb">
@@ -184,8 +181,8 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 
 ## Next steps
 
-- Learn more usage of `Visual Studio Code` from [the documentation of Visual Studio Code](https://code.visualstudio.com/docs).
-- Learn more usage of `VSCode SQLTools` extension from [the documentation](https://marketplace.visualstudio.com/items?itemName=mtxr.sqltools) and [GitHub repository](https://github.com/mtxr/vscode-sqltools) of SQLTools.
+- Learn more usage of Visual Studio Code from [the documentation of Visual Studio Code](https://code.visualstudio.com/docs).
+- Learn more usage of VS Code SQLTools extension from [the documentation](https://marketplace.visualstudio.com/items?itemName=mtxr.sqltools) and [GitHub repository](https://github.com/mtxr/vscode-sqltools) of SQLTools.
 - Learn the best practices for TiDB application development with the chapters in the [Developer guide](/develop/dev-guide-overview.md), such as [Insert data](/develop/dev-guide-insert-data.md), [Update data](/develop/dev-guide-update-data.md), [Delete data](/develop/dev-guide-delete-data.md), [Single table reading](/develop/dev-guide-get-data-from-single-table.md), [Transactions](/develop/dev-guide-transaction-overview.md), and [SQL performance optimization](/develop/dev-guide-optimize-sql-overview.md).
 - Learn through the professional [TiDB developer courses](https://www.pingcap.com/education/) and earn [TiDB certifications](https://www.pingcap.com/education/certification/) after passing the exam.
 
