@@ -1,11 +1,11 @@
 ---
 title: TimeStamp Oracle
-summary: Learn about TSO (TimeStamp Oracle) timestamps in TiDB.
+summary: Learn about TimeStamp Oracle (TSO) timestamps in TiDB.
 ---
 
 In TiDB, the Placement Driver (PD) plays a pivotal role in the allocation of timestamps to various cluster components. These timestamps are instrumental in the assignment of temporal markers to transactions and data, a mechanism crucial for enabling the [Percolator](https://research.google.com/pubs/pub36726.html) model within TiDB. The Percolator model is employed to support Multi-Version Concurrency Control (MVCC) and [transaction management](/transaction-overview.md).
 
-The following is a TSO (TimeStamp Oracle) timestamp example:
+The following is a TimeStamp Oracle (TSO) timestamp example:
 
 ```sql
 BEGIN; SET @ts := @@tidb_current_ts; ROLLBACK;
