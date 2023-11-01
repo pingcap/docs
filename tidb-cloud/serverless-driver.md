@@ -72,7 +72,7 @@ export async function GET(request: NextRequest) {
 }
 ```
 
-[Learn more about using TiDB Cloud serverless driver in Vercel](/tidb-cloud/integrate-tidbcloud-with-vercel.md).
+Learn more about [using TiDB Cloud serverless driver in Vercel](/tidb-cloud/integrate-tidbcloud-with-vercel.md).
 
 </div>
 
@@ -92,7 +92,7 @@ export default {
 };
 ```
 
-[Learn more about using TiDB Cloud serverless driver in Cloudflare Workers](/tidb-cloud/integrate-tidbcloud-with-cloudflare.md).
+Learn more about [using TiDB Cloud serverless driver in Cloudflare Workers](/tidb-cloud/integrate-tidbcloud-with-cloudflare.md).
 
 </div>
 
@@ -108,7 +108,7 @@ export default async () => {
 }
 ```
 
-[Learn more about using TiDB Cloud serverless driver in Netlify](/tidb-cloud/integrate-tidbcloud-with-netlify.md#use-the-edge-function).
+Learn more about [using TiDB Cloud serverless driver in Netlify](/tidb-cloud/integrate-tidbcloud-with-netlify.md#use-the-edge-function).
 
 </div>
 

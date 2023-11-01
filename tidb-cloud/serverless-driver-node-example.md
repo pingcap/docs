@@ -16,15 +16,15 @@ Learn how to use TiDB Cloud serverless driver in a local Node.js project.
 
 To complete this step-by-step tutorial, you need the following:
 
-- The [Node.js](https://nodejs.org/en) >= 18.0.0.
-- The [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) or your preferred package manager.
+- [Node.js](https://nodejs.org/en) >= 18.0.0.
+- [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) or your preferred package manager.
 - A TiDB Serverless cluster. If you don't have any, you can [create a TiDB Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md).
 
 ## Step 1. Create a local Node.js project
 
 1. Create a project named `node-example`:
 
-    ```
+    ```shell
     mkdir node-example
     cd node-example
     ```
@@ -41,7 +41,7 @@ To complete this step-by-step tutorial, you need the following:
 
 The serverless driver supports both CommonJS and ESM modules. The following steps take the usage of the ESM module as an example.
 
-1. On the overview page of your TiDB Cloud Serverless cluster, click **Connect** in the upper-right corner, and then get the connection string for your database from the displayed dialog. The connection string looks something like this:
+1. On the overview page of your TiDB Cloud Serverless cluster, click **Connect** in the upper-right corner, and then get the connection string for your database from the displayed dialog. The connection string looks like this:
 
     ```
    mysql://[username]:[password]@[host]/[database]
@@ -51,14 +51,14 @@ The serverless driver supports both CommonJS and ESM modules. The following step
 
     For example:
 
-   ```json
-   {
-     "type": "module",
-     "dependencies": {
-       "@tidbcloud/serverless": "^0.0.7",
-     }
-   }
-   ```
+    ```json
+    {
+      "type": "module",
+      "dependencies": {
+        "@tidbcloud/serverless": "^0.0.7",
+      }
+    }
+    ```
 
 3. Create a file named `index.js` in your project directory and add the following code:
 
@@ -75,9 +75,9 @@ The serverless driver supports both CommonJS and ESM modules. The following step
     node index.js
     ```
 
-## Compatability with Node.js earlier versions
+## Compatability with earlier versions of Node.js
 
-If you are using Node.js earlier than 18.0.0, which does not have a global `fetch`, you can take the following steps to get `fetch`:
+If you are using Node.js earlier than 18.0.0, which does not have a global `fetch` function, you can take the following steps to get `fetch`:
 
 1. Install a package that provides `fetch`, such as `undici`:
 
