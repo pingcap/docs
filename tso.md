@@ -1,19 +1,19 @@
 ---
 title: TimeStamp Oracle
-summary: Learn about TSO timestamps in TiDB.
+summary: Learn about TSO (TimeStamp Oracle) timestamps in TiDB.
 ---
 
-One of the tasks of the Placement Driver (PD) is to hand out timestamps to other components of the cluster. Transactions and data get timestamps assigned and this allows the [Percolator](https://research.google.com/pubs/pub36726.html) model in TiDB to work, which is used for MVCC and [transactions](/transaction-overview.md).
+In TiDB, the Placement Driver (PD) plays a pivotal role in the allocation of timestamps to various cluster components. These timestamps are instrumental in the assignment of temporal markers to transactions and data, a mechanism crucial for enabling the [Percolator](https://research.google.com/pubs/pub36726.html) model within TiDB. The Percolator model is employed to support Multi-Version Concurrency Control (MVCC) and [transaction management](/transaction-overview.md).
 
-Let's get a TSO timestamp:
+The following is a TSO (TimeStamp Oracle) timestamp example:
 
-```
-mysql> BEGIN; SET @ts := @@tidb_current_ts; ROLLBACK;
+```sql
+BEGIN; SET @ts := @@tidb_current_ts; ROLLBACK;
 Query OK, 0 rows affected (0.0007 sec)
 Query OK, 0 rows affected (0.0002 sec)
 Query OK, 0 rows affected (0.0001 sec)
 
-sql> SELECT @ts;
+SELECT @ts;
 +--------------------+
 | @ts                |
 +--------------------+
@@ -22,20 +22,25 @@ sql> SELECT @ts;
 1 row in set (0.00 sec)
 ```
 
-Note that this is done in a transction with (`BEGIN; ...; ROLLBACK`) as TSO timestamps are assigned to transactions.
+Note that this is done in a transaction with (`BEGIN; ...; ROLLBACK`) as TSO timestamps are assigned to transactions.
 
-There are two SQL function which helps us to inspect the number that we got back: [`TIDB_PARSE_TSO()`](/functions-and-operators/tidb-functions.md#tidb_parse_tso) and [`TIDB_PARSE_TSO_LOGICAL()`]((/functions-and-operators/tidb-functions.md#tidb_parse_tso_logical).
+You can use the following SQL functions to inspect the numbers that you get:
 
-```
-mysql> SELECT TIDB_PARSE_TSO(443852055297916932);
+- [`TIDB_PARSE_TSO()`](/functions-and-operators/tidb-functions.md#tidb_parse_tso)
+- [`TIDB_PARSE_TSO_LOGICAL()`](/functions-and-operators/tidb-functions.md#tidb_parse_tso_logical)
+
+```sql
+SELECT TIDB_PARSE_TSO(443852055297916932);
 +------------------------------------+
 | TIDB_PARSE_TSO(443852055297916932) |
 +------------------------------------+
 | 2023-08-27 20:33:41.687000         |
 +------------------------------------+
 1 row in set (0.00 sec)
+```
 
-mysql> SELECT TIDB_PARSE_TSO_LOGICAL(443852055297916932);
+```sql
+SELECT TIDB_PARSE_TSO_LOGICAL(443852055297916932);
 +--------------------------------------------+
 | TIDB_PARSE_TSO_LOGICAL(443852055297916932) |
 +--------------------------------------------+
@@ -44,7 +49,7 @@ mysql> SELECT TIDB_PARSE_TSO_LOGICAL(443852055297916932);
 1 row in set (0.00 sec)
 ```
 
-Let's now dive a bit deeper into what a TSO timestamp looks like:
+Now dive deeper into what a TSO timestamp looks like:
 
 ```
 0000011000101000111000010001011110111000110111000000000000000100  ← This is 443852055297916932, but in binary
@@ -52,15 +57,15 @@ Let's now dive a bit deeper into what a TSO timestamp looks like:
                                               000000000000000100  ← The last 18 bits are the logical timestamp
 ```
 
-There are two parts to the TSO timestamp:
+There are two parts in a TSO timestamp:
 
-- The *Physical timestamp*: This is a UNIX timestamp in milliseconds since 1 January 1970.
-- The *Logical timestamp*: This is an increasing counter. This is used when there are multiple timestamps needed within the same millisecond or if there is a change that makes the clock go backwards, in that case the physical timestamp is kept the same while the logical timestamp increases. This is done as the TSO timestamp is guaranteed to never go back.
+- The *Physical timestamp*: a UNIX timestamp in milliseconds since 1 January 1970.
+- The *Logical timestamp*: an incrementing counter, employed in scenarios where multiple timestamps are required within the same millisecond, or in cases where certain events might trigger a reversal of the clock's progression. In such instances, the physical timestamp remains unchanged while the logical timestamp steadily advances. This mechanism is implemented to ensure the integrity of the TSO timestamp, which is guaranteed to always move forward and never regress.
 
-With this knowledge we can inspect the TSO timestamp a bit more in SQL:
+With this knowledge, you can inspect the TSO timestamp a bit more in SQL:
 
-```
-mysql> SELECT @ts, UNIX_TIMESTAMP(NOW(6)), (@ts >> 18)/1000, FROM_UNIXTIME((@ts >> 18)/1000), NOW(6), @ts & 0x3FFFF\G
+```sql
+SELECT @ts, UNIX_TIMESTAMP(NOW(6)), (@ts >> 18)/1000, FROM_UNIXTIME((@ts >> 18)/1000), NOW(6), @ts & 0x3FFFF\G
 *************************** 1. row ***************************
                             @ts: 443852055297916932
          UNIX_TIMESTAMP(NOW(6)): 1693161835.502954
@@ -71,14 +76,14 @@ FROM_UNIXTIME((@ts >> 18)/1000): 2023-08-27 20:33:41.6870
 1 row in set (0.00 sec)
 ```
 
-The `>> 18` is to [shift right](/functions-and-operators/bit-functions-and-operators.md) by 18 bits, which is used to filter out the physical timestamp. As the physical timestamp is in milliseconds and not in seconds as is more usual for UNIX timestamps we need to divide by 1000 to get it in the format that [`FROM_UNIXTIME()`](/functions-and-operators/date-and-time-functions.md) understands. This is basically the same as what `TIDB_PARSE_TSO()` does for us.
+The `>> 18` operation signifies a bitwise [right shift](/functions-and-operators/bit-functions-and-operators.md) by 18 bits, which is used to filter out the physical timestamp. Because the physical timestamp is expressed in milliseconds, deviating from the more customary UNIX timestamp format measured in seconds, you need to divide by 1000 to convert it into a format compatible with [`FROM_UNIXTIME()`](/functions-and-operators/date-and-time-functions.md). Essentially, this process aligns with the functionality of `TIDB_PARSE_TSO()`.
 
-Then we also filter out the logical timestamp: `000000000000000100` in binary, which is 4 in decimals.
+You can also filter out the logical timestamp: `000000000000000100` in binary, which is 4 in decimals.
 
-And let's do the same via the CLI tools:
+You can do the same via the CLI tools as follows:
 
 ```
-$ tiup ctl:v7.3.0 pd tso 443852055297916932                                                              
+$ tiup ctl:v7.3.0 pd tso 443852055297916932
 system:  2023-08-27 20:33:41.687 +0200 CEST
 logic:   4
 ```
