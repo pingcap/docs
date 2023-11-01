@@ -193,7 +193,6 @@ For more information, refer to [`ANALYZE TABLE`](/sql-statements/sql-statement-a
 TiDB does not support the following `SELECT` syntax:
 
 - `SELECT ... INTO @variable`
-- `SELECT ... GROUP BY ... WITH ROLLUP`
 - `SELECT .. GROUP BY expr` does not imply `GROUP BY expr ORDER BY expr` as it does in MySQL 5.7.
 
 For more details, see the [`SELECT`](/sql-statements/sql-statement-select.md) statement reference.
@@ -270,7 +269,7 @@ TiDB has default differences when compared with MySQL 5.7 and MySQL 8.0:
 TiDB supports named timezones with the following considerations:
 
 + TiDB uses all the timezone rules presently installed in the system for calculation, typically the `tzdata` package. This makes it possible to use all timezone names without needing to import timezone table data. Importing timezone table data will not change the calculation rules.
-+ Currently, MySQL uses the local timezone by default, then relies on the current timezone rules built into the system (for example, when daylight savings time begins) for calculation. Without [importing timezone table data](https://dev.mysql.com/doc/refman/5.7/en/time-zone-support.html#time-zone-installation), MySQL cannot specify the timezone by name.
++ Currently, MySQL uses the local timezone by default, then relies on the current timezone rules built into the system (for example, when daylight savings time begins) for calculation. Without [importing timezone table data](https://dev.mysql.com/doc/refman/8.0/en/time-zone-support.html#time-zone-installation), MySQL cannot specify the timezone by name.
 
 ### Type system differences
 

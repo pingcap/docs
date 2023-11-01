@@ -27,7 +27,7 @@ This section describes how to use drivers and ORM frameworks in Java.
 
 Support level: **Full**
 
-You can follow the [MySQL documentation](https://dev.mysql.com/doc/connector-j/8.0/en/) to download and configure a Java JDBC driver. It is recommended to use MySQL Connector/J 8.0.33 or later with TiDB v6.3.0 and newer.
+You can follow the [MySQL documentation](https://dev.mysql.com/doc/connector-j/en/) to download and configure a Java JDBC driver. It is recommended to use MySQL Connector/J 8.0.33 or later with TiDB v6.3.0 and newer.
 
 > **Tip:**
 >
@@ -297,7 +297,7 @@ Support level: **Compatible**
 
 [peewee](http://docs.peewee-orm.com/en/latest/) is a popular ORM framework for Python. To get all dependencies in your application, you can use the `pip install peewee==3.15.4` command. It is recommended to use peewee 3.15.4 or later versions.
 
-For an example of using peewee to build a TiDB application, see [Connect to TiDB with peewee](/develop/dev-guide-sample-application-python-peewee.md#step-2-get-the-code).
+For an example of using peewee to build a TiDB application, see [Connect to TiDB with peewee](/develop/dev-guide-sample-application-python-peewee.md).
 
 </div>
 </SimpleTab>

@@ -43,12 +43,12 @@ As an open-source distributed SQL database with high performance, TiDB can be de
     <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
   </tr>
   <tr>
-    <td>UOS V20</td>
+    <td>UnionTech OS (UOS) V20</td>
     <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
   </tr>
   <tr>
     <td>openEuler 22.03 LTS SP1</td>
-    <td>x86_64</td>
+    <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
   </tr>
   <tr>
     <td>macOS 12 (Monterey) or later</td>
@@ -97,7 +97,7 @@ As an open-source distributed SQL database with high performance, TiDB can be de
 
 |  Libraries required for compiling and running TiDB |  Version   |
 |   :---   |   :---   |
-|   Golang  |  1.20 or later |
+|   Golang  |  1.21 or later |
 |   Rust    |   nightly-2022-07-31 or later  |
 |  GCC      |   7.x      |
 |  LLVM     |  13.0 or later  |
@@ -179,7 +179,7 @@ Before you deploy TiFlash, note the following items:
 - It is recommended to deploy TiFlash on different nodes from TiKV. If you must deploy TiFlash and TiKV on the same node, increase the number of CPU cores and memory, and try to deploy TiFlash and TiKV on different disks to avoid interfering each other.
 - The total capacity of the TiFlash disks is calculated in this way: `the data volume of the entire TiKV cluster to be replicated / the number of TiKV replicas * the number of TiFlash replicas`. For example, if the overall planned capacity of TiKV is 1 TB, the number of TiKV replicas is 3, and the number of TiFlash replicas is 2, then the recommended total capacity of TiFlash is `1024 GB / 3 * 2`. You can replicate only the data of some tables. In such case, determine the TiFlash capacity according to the data volume of the tables to be replicated.
 
-Before you deploy TiCDC, note that it is recommended to deploy TiCDC on PCIe-SSD disks larger than 1 TB.
+Before you deploy TiCDC, note that it is recommended to deploy TiCDC on PCIe-SSD disks larger than 500 GB.
 
 ## Network requirements
 

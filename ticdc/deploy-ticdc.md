@@ -16,9 +16,9 @@ In production environments, the recommendations of software and hardware for TiC
 | Red Hat Enterprise Linux | 7.3 or later versions   |
 | CentOS                   | 7.3 or later versions   |
 
-| CPU | Memory | Disk type | Network | Number of TiCDC cluster instances (minimum requirements for production environment) |
+| CPU | Memory | Disk | Network | Number of TiCDC cluster instances (minimum requirements for production environment) |
 | :--- | :--- | :--- | :--- | :--- |
-| 16 core+ | 64 GB+ | SSD | 10 Gigabit network card (2 preferred） | 2 |
+| 16 core+ | 64 GB+ | 500 GB+ SSD | 10 Gigabit network card (2 preferred） | 2 |
 
 For more information, see [Software and Hardware Recommendations](/hardware-and-software-requirements.md).
 
@@ -95,7 +95,7 @@ tiup cluster upgrade <cluster-name> <version> --transfer-timeout 600
 
 > **Note:**
 >
-> In the preceding command, you need to replace `<cluster-name>` and `<version>` with the actual cluster name and cluster version. For example, the version can be v7.3.0.
+> In the preceding command, you need to replace `<cluster-name>` and `<version>` with the actual cluster name and cluster version. For example, the version can be v7.4.0.
 
 ### Upgrade cautions
 
@@ -152,7 +152,7 @@ See [Enable TLS Between TiDB Components](/enable-tls-between-components.md).
 
 ## View TiCDC status using the command-line tool
 
-Run the following command to view the TiCDC cluster status. Note that you need to replace `v<CLUSTER_VERSION>` with the TiCDC cluster version, such as `v7.3.0`:
+Run the following command to view the TiCDC cluster status. Note that you need to replace `v<CLUSTER_VERSION>` with the TiCDC cluster version, such as `v7.4.0`:
 
 ```shell
 tiup ctl:v<CLUSTER_VERSION> cdc capture list --server=http://10.0.10.25:8300

@@ -5,7 +5,7 @@ summary: Learn how to connect to TiDB.
 
 # Connect to TiDB
 
-TiDB is highly compatible with the MySQL protocol. For a full list of client link parameters, see [MySQL Client Options](https://dev.mysql.com/doc/refman/5.7/en/mysql-command-options.html).
+TiDB is highly compatible with the MySQL protocol. For a full list of client link parameters, see [MySQL Client Options](https://dev.mysql.com/doc/refman/8.0/en/mysql-command-options.html).
 
 TiDB supports the [MySQL Client/Server Protocol](https://dev.mysql.com/doc/dev/mysql-server/latest/PAGE_PROTOCOL.html), which allows most client drivers and ORM frameworks to connect to TiDB just as they connect to MySQL.
 
@@ -45,7 +45,7 @@ mysqlsh --sql mysql://root@<tidb_server_host>:4000
 
 ## JDBC
 
-You can connect to TiDB using the [JDBC](https://dev.mysql.com/doc/connector-j/8.0/en/) driver. To do that, you need to create a `MysqlDataSource` or `MysqlConnectionPoolDataSource` object (both objects support the `DataSource` interface), and then set the connection string using the `setURL` function.
+You can connect to TiDB using the [JDBC](https://dev.mysql.com/doc/connector-j/en/) driver. To do that, you need to create a `MysqlDataSource` or `MysqlConnectionPoolDataSource` object (both objects support the `DataSource` interface), and then set the connection string using the `setURL` function.
 
 For example:
 
@@ -54,7 +54,7 @@ MysqlDataSource mysqlDataSource = new MysqlDataSource();
 mysqlDataSource.setURL("jdbc:mysql://{host}:{port}/{database}?user={username}&password={password}");
 ```
 
-For more information on JDBC connections, see the [JDBC documentation](https://dev.mysql.com/doc/connector-j/8.0/en/)
+For more information on JDBC connections, see the [JDBC documentation](https://dev.mysql.com/doc/connector-j/en/)
 
 ### Connection parameters
 
