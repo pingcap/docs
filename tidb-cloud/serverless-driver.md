@@ -287,4 +287,4 @@ Currently, using serverless driver has the following limitations:
 
 ## What's next
 
-- [Learn how to use TiDB Cloud serverless driver in a local Node.js project](/tidb-cloud/serverless-driver-node-example.md).
+- Learn how to [use TiDB Cloud serverless driver in a local Node.js project](/tidb-cloud/serverless-driver-node-example.md).
