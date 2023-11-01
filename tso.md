@@ -83,7 +83,7 @@ You can also filter out the logical timestamp `000000000000000100` in binary, wh
 You can also view do the timestamp via the CLI tool as follows:
 
 ```shell
-$ tiup ctl:v7.4.0 pd tso 443852055297916932
+$ tiup ctl:v7.1.0 pd tso 443852055297916932
 system:  2023-08-27 20:33:41.687 +0200 CEST
 logic:   4
 ```
