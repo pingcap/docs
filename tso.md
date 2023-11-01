@@ -24,7 +24,7 @@ SELECT @ts;
 
 Note that this is done in a transaction with (`BEGIN; ...; ROLLBACK`) as TSO timestamps are assigned to transactions.
 
-You can use the following SQL functions to inspect the numbers that you get:
+You can use the following SQL functions to inspect the timestamps that you get:
 
 - [`TIDB_PARSE_TSO()`](/functions-and-operators/tidb-functions.md#tidb_parse_tso)
 - [`TIDB_PARSE_TSO_LOGICAL()`](/functions-and-operators/tidb-functions.md)
@@ -49,7 +49,7 @@ SELECT TIDB_PARSE_TSO_LOGICAL(443852055297916932);
 1 row in set (0.00 sec)
 ```
 
-Now dive deeper into what a TSO timestamp looks like:
+The following example shows what a TSO timestamp looks like:
 
 ```
 0000011000101000111000010001011110111000110111000000000000000100  ← This is 443852055297916932, but in binary
