@@ -59,8 +59,8 @@ The following example shows what a TSO timestamp looks like:
 
 There are two parts in a TSO timestamp:
 
-- The *Physical timestamp*: a UNIX timestamp in milliseconds since 1 January 1970.
-- The *Logical timestamp*: an incrementing counter, employed in scenarios where multiple timestamps are required within the same millisecond, or in cases where certain events might trigger a reversal of the clock's progression. In such instances, the physical timestamp remains unchanged while the logical timestamp steadily advances. This mechanism is implemented to ensure the integrity of the TSO timestamp, which is guaranteed to always move forward and never regress.
+- The physical timestamp: a UNIX timestamp in milliseconds since 1 January 1970.
+- The logical timestamp: an incrementing counter, employed in scenarios where multiple timestamps are required within the same millisecond, or in cases where certain events might trigger a reversal of the clock's progression. In such instances, the physical timestamp remains unchanged while the logical timestamp steadily advances. This mechanism is implemented to ensure the integrity of the TSO timestamp, which is guaranteed to always move forward and never regress.
 
 With this knowledge, you can inspect the TSO timestamp a bit more in SQL:
 
