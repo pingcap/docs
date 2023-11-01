@@ -207,7 +207,7 @@ To unbind users from a resource group you, simply bind them to the `default` gro
 ALTER USER 'usr3'@'%' RESOURCE GROUP `default`;
 ```
 
-See [`ALTER USER ... RESOURCE GROUP`](//sql-statements/sql-statement-alter-user.md#modify-the-resource-group-bound-to-the-user) for more details.
+See [`ALTER USER ... RESOURCE GROUP`](/sql-statements/sql-statement-alter-user.md#modify-the-resource-group-bound-to-the-user) for more details.
 
 #### Bind the current session to a resource group
 
