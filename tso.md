@@ -80,7 +80,7 @@ The `>> 18` operation signifies a bitwise [right shift](/functions-and-operators
 
 You can also filter out the logical timestamp `000000000000000100` in binary, which is 4 in decimals.
 
-You can also view do the timestamp via the CLI tools as follows:
+You can also view do the timestamp via the CLI tool as follows:
 
 ```shell
 $ tiup ctl:v7.4.0 pd tso 443852055297916932
