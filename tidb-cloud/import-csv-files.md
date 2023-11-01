@@ -30,8 +30,8 @@ This document describes how to import CSV files from Amazon Simple Storage Servi
     >
     > - You only need to compress the data files, not the database or table schema files.
     > - To achieve better performance, it is recommended to limit the size of each compressed file to 100 MiB.
-    > - For uncompressed files, if you cannot update the CSV filenames according to the preceding rules in some cases (for example, the CSV file links are also used by your other programs), you can keep the filenames unchanged and use the **Mapping Settings** in [Step 4](#step-4-import-csv-files-to-tidb-cloud) to import your source data to a single target table.
     > - The Snappy compressed file must be in the [official Snappy format](https://github.com/google/snappy). Other variants of Snappy compression are not supported.
+    > - For uncompressed files, if you cannot update the CSV filenames according to the preceding rules in some cases (for example, the CSV file links are also used by your other programs), you can keep the filenames unchanged and use the **Mapping Settings** in [Step 4](#step-4-import-csv-files-to-tidb-cloud) to import your source data to a single target table.
 
 ## Step 2. Create the target table schemas
 
