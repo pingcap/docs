@@ -49,7 +49,7 @@ SELECT TIDB_PARSE_TSO_LOGICAL(443852055297916932);
 1 row in set (0.00 sec)
 ```
 
-Now dive deeper into what a TSO timestamp looks like:
+The following example shows what a TSO timestamp looks like:
 
 ```
 0000011000101000111000010001011110111000110111000000000000000100  ← This is 443852055297916932, but in binary
