@@ -52,7 +52,7 @@ SELECT TIDB_PARSE_TSO_LOGICAL(443852055297916932);
 The following example shows what a TSO timestamp looks like:
 
 ```shell
-0000011000101000111000010001011110111000110111000000000000000100  ← This is 443852055297916932, but in binary
+0000011000101000111000010001011110111000110111000000000000000100  ← This is 443852055297916932 in binary
 0000011000101000111000010001011110111000110111                    ← The first 46 bits are the physical timestamp
                                               000000000000000100  ← The last 18 bits are the logical timestamp
 ```
