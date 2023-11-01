@@ -22,7 +22,7 @@ SELECT @ts;
 1 row in set (0.00 sec)
 ```
 
-Note that this is done in a transaction with (`BEGIN; ...; ROLLBACK`) as TSO timestamps are assigned to transactions.
+Note that this is done in a transaction with `BEGIN; ...; ROLLBACK` as TSO timestamps are assigned to transactions.
 
 You can use the following SQL functions to inspect the timestamps that you get:
 
