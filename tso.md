@@ -78,7 +78,7 @@ FROM_UNIXTIME((@ts >> 18)/1000): 2023-08-27 20:33:41.6870
 
 The `>> 18` operation signifies a bitwise [right shift](/functions-and-operators/bit-functions-and-operators.md) by 18 bits, which is used to filter out the physical timestamp. Because the physical timestamp is expressed in milliseconds, deviating from the more customary UNIX timestamp format measured in seconds, you need to divide it by 1000 to convert it into a format compatible with [`FROM_UNIXTIME()`](/functions-and-operators/date-and-time-functions.md). Essentially, this process aligns with the functionality of `TIDB_PARSE_TSO()`.
 
-You can also filter out the logical timestamp `000000000000000100` in binary, which is `4` in decimals.
+You can also filter out the logical timestamp `000000000000000100` in binary, which is `4` in decimal.
 
 You can also view do the timestamp via the CLI tool as follows:
 
