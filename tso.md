@@ -51,7 +51,7 @@ SELECT TIDB_PARSE_TSO_LOGICAL(443852055297916932);
 
 The following example shows what a TSO timestamp looks like:
 
-```
+```shell
 0000011000101000111000010001011110111000110111000000000000000100  ← This is 443852055297916932, but in binary
 0000011000101000111000010001011110111000110111                    ← The first 46 bits are the physical timestamp
                                               000000000000000100  ← The last 18 bits are the logical timestamp
@@ -80,10 +80,10 @@ The `>> 18` operation signifies a bitwise [right shift](/functions-and-operators
 
 You can also filter out the logical timestamp `000000000000000100` in binary, which is 4 in decimals.
 
-You can do the same via the CLI tools as follows:
+You can also view do the timestamp via the CLI tools as follows:
 
-```
-$ tiup ctl:v7.3.0 pd tso 443852055297916932
+```shell
+$ tiup ctl:v7.4.0 pd tso 443852055297916932
 system:  2023-08-27 20:33:41.687 +0200 CEST
 logic:   4
 ```
