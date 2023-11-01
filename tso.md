@@ -27,7 +27,7 @@ Note that this is done in a transaction with (`BEGIN; ...; ROLLBACK`) as TSO tim
 You can use the following SQL functions to inspect the numbers that you get:
 
 - [`TIDB_PARSE_TSO()`](/functions-and-operators/tidb-functions.md#tidb_parse_tso)
-- [`TIDB_PARSE_TSO_LOGICAL()`](/functions-and-operators/tidb-functions.md#tidb_parse_tso_logical)
+- [`TIDB_PARSE_TSO_LOGICAL()`](/functions-and-operators/tidb-functions.md)
 
 ```sql
 SELECT TIDB_PARSE_TSO(443852055297916932);
