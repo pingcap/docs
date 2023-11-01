@@ -24,7 +24,7 @@ SELECT @ts;
 
 Note that this is done in a transaction with (`BEGIN; ...; ROLLBACK`) as TSO timestamps are assigned to transactions.
 
-You can use the following SQL functions to inspect the numbers that you get:
+You can use the following SQL functions to inspect the timestamps that you get:
 
 - [`TIDB_PARSE_TSO()`](/functions-and-operators/tidb-functions.md#tidb_parse_tso)
 - [`TIDB_PARSE_TSO_LOGICAL()`](/functions-and-operators/tidb-functions.md)
