@@ -47,7 +47,7 @@ The serverless driver supports both CommonJS and ESM modules. The following step
    mysql://[username]:[password]@[host]/[database]
     ```
    
-2. In the `package.json` file, specify the ESM module by adding `type: "module"`. 
+2. In the `package.json` file, specify the ES module by adding `type: "module"`. 
 
     For example:
 
