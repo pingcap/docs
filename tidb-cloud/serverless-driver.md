@@ -1,6 +1,7 @@
 ---
 title: TiDB Cloud Serverless Driver (Beta)
 summary: Learn how to connect to TiDB Serverless from serverless and edge environments over HTTP.
+aliases: ['/tidbcloud/serverless-driver-config']
 ---
 
 # TiDB Cloud Serverless Driver (Beta)
@@ -26,7 +27,7 @@ To query data from a TiDB Serverless cluster, you need to create a connection fi
 ```ts
 import { connect } from '@tidbcloud/serverless'
 
-const conn = connect({url: 'mysql://username:password@host/database'})
+const conn = connect({url: 'mysql://[username]:[password]@[host]/[database]'})
 const results = await conn.execute('select * from test where id = ?',[1])
 ```
 
@@ -37,7 +38,7 @@ You can also perform interactive transactions with the serverless driver. For ex
 ```ts
 import { connect } from '@tidbcloud/serverless'
 
-const conn = connect({url: 'mysql://username:password@host/database'})
+const conn = connect({url: 'mysql://[username]:[password]@[host]/[database]'})
 const tx = await conn.begin()
 
 try {
@@ -71,6 +72,8 @@ export async function GET(request: NextRequest) {
 }
 ```
 
+Learn more about [using TiDB Cloud serverless driver in Vercel](/tidb-cloud/integrate-tidbcloud-with-vercel.md).
+
 </div>
 
 <div label="Cloudflare Workers">
@@ -89,6 +92,8 @@ export default {
 };
 ```
 
+Learn more about [using TiDB Cloud serverless driver in Cloudflare Workers](/tidb-cloud/integrate-tidbcloud-with-cloudflare.md).
+
 </div>
 
 <div label="Netlify Edge Function">
@@ -102,6 +107,8 @@ export default async () => {
   return new Response(JSON.stringify(result));
 }
 ```
+
+Learn more about [using TiDB Cloud serverless driver in Netlify](/tidb-cloud/integrate-tidbcloud-with-netlify.md#use-the-edge-function).
 
 </div>
 
@@ -129,11 +136,92 @@ const result = await conn.execute('show tables')
 
 </SimpleTab>
 
+## Configure the serverless driver
+
+You can configure TiDB Cloud serverless driver at both the connection level and the SQL level.
+
+### Connection level configurations
+
+At the connection level, you can make the following configurations:
+
+| Name         | Type       | Default value | Description                                                                                                                                                                  |
+|--------------|------------|---------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `username`   | string     | N/A           | Username of TiDB Serverless                                                                                                                                                  |
+| `password`   | string     | N/A           | Password of TiDB Serverless                                                                                                                                                  |
+| `host`       | string     | N/A           | Hostname of TiDB Serverless                                                                                                                                                  |
+| `database`   | string     | `test`        | Database of TiDB Serverless                                                                                                                                                  |
+| `url`        | string     | N/A           | The URL for the database, in the `mysql://[username]:[password]@[host]/[database]` format, where `database` can be skipped if you intend to connect to the default database. |
+| `fetch`      | function   | global fetch  | Custom fetch function. For example, you can use the `undici` fetch in node.js.                                                                                               |
+| `arrayMode`  | bool       | `false`       | Whether to return results as arrays instead of objects. To get better performance, set it to `true`.                                                                         |
+| `fullResult` | bool       | `false`       | Whether to return full result object instead of just rows. To get more detailed results, set it to `true`.                                                                   |
+
+**Database URL**
+
+> **Note:**
+>
+> If your username, password, or database name contains special characters, you must [percentage-encode](https://en.wikipedia.org/wiki/Percent-encoding) these characters when passing them by the URL. For example, the password `password1@//?` needs to be encoded as `password1%40%2F%2F%3F` in the URL.
+
+When `url` is configured, there is no need to configure `host`, `username`, `password`, and `database` separately. The following codes are equivalent:
+
+```ts
+const config = {
+  host: '<host>',
+  username: '<user>',
+  password: '<password>',
+  database: '<database>',
+  arrayMode: true,
+}
+
+const conn = connect(config)
+```
+
+```ts
+const config = {
+  url: process.env['DATABASE_URL'] || 'mysql://[username]:[password]@[host]/[database]',
+  arrayMode: true
+}
+
+const conn = connect(config)
+```
+
+### SQL level options
+
+> **Note:**
+>
+> The SQL level options have a higher priority over connection level configurations.
+
+At the SQL level, you can configure the following options:
+
+| Option       | Type | Default value | Description                                                                                                |
+|--------------|------|---------------|------------------------------------------------------------------------------------------------------------|
+| `arrayMode`  | bool | `false`       | Whether to return results as arrays instead of objects. To get better performance, set it to `true`.       |
+| `fullResult` | bool | `false`       | Whether to return full result object instead of just rows. To get more detailed results, set it to `true`. |
+
+For example:
+
+```ts
+const conn = connect({url: process.env['DATABASE_URL'] || 'mysql://[username]:[password]@[host]/[database]'})
+const results = await conn.execute('select * from test',null,{arrayMode:true,fullResult:true})
+```
+
+Starting from TiDB Cloud serverless driver v0.0.7, you can also configure the following SQL level option when you use transactions:
+
+| Option       | Type   | Default value     | Description                                                                        |
+|--------------|--------|-------------------|------------------------------------------------------------------------------------|
+| `isolation`  | string | `REPEATABLE READ` | The transaction isolation level, which can be set to `READ COMMITTED` or `REPEATABLE READ`.    |
+
+The `isolation` option can only be used in the `begin` function. Here is an example:
+
+```ts
+const conn = connect({url: 'mysql://[username]:[password]@[host]/[database]'})
+const tx = await conn.begin({isolation:"READ COMMITTED"})
+```
+
 ## Features
 
 ### Supported SQL statements
 
-DDL is supported and the following SQL statements are supported:  `SELECT`, `SHOW`, `EXPLAIN`, `USE`, `INSERT`, `UPDATE`, `DELETE`, `BEGIN`, `COMMIT`, `ROLLBACK`.
+DDL is supported and the following SQL statements are supported:  `SELECT`, `SHOW`, `EXPLAIN`, `USE`, `INSERT`, `UPDATE`, `DELETE`, `BEGIN`, `COMMIT`, `ROLLBACK`, and `SET`.
 
 ### Data type mapping
 
@@ -178,6 +266,13 @@ The type mapping between TiDB Serverless and Javascript is as follows:
 | NULL                 | null            |
 | Others               | string          |
 
+### ORM integrations
+
+TiDB Cloud serverless driver has been integrated with the following ORMs:
+
+- [TiDB Cloud serverless driver Kysely dialect](https://github.com/tidbcloud/kysely).
+- [TiDB Cloud serverless driver Prisma adapter](https://github.com/tidbcloud/prisma-adapter).
+
 ## Pricing
 
 The serverless driver itself is free, but accessing data with the driver generates [Request Units (RUs)](/tidb-cloud/tidb-cloud-glossary.md#request-unit) and storage usage. The pricing follows the [TiDB Serverless pricing](https://www.pingcap.com/tidb-serverless-pricing-details/) model.
@@ -192,5 +287,4 @@ Currently, using serverless driver has the following limitations:
 
 ## What's next
 
-- [Learn how to configure TiDB Cloud serverless driver](/tidb-cloud/serverless-driver-config.md).
-- [Learn how to use Kysely ORM with TiDB Cloud serverless driver dialect](https://github.com/tidbcloud/kysely).
+- Learn how to [use TiDB Cloud serverless driver in a local Node.js project](/tidb-cloud/serverless-driver-node-example.md).
