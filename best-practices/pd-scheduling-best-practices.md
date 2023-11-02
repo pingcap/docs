@@ -301,4 +301,4 @@ In TiDB v5.2.0, TiKV introduces the mechanism of slow TiKV node detection. By sa
 
 > **Note:**
 >
-> When the `evict-slow-store-scheduler` is enabled, there is a possibility that some leaders on slow nodes may have to wait for delayed requests to be processed before the leader eviction process can proceed. This can result in an overall extended duration for the leader eviction. It is recommended to synchronize the configuration with the [`store-io-pool-size`](/tikv-configuration-file.md#store-io-pool-size-new-in-v530)  to avoid this situation..
+> When the `evict-slow-store-scheduler` is enabled, there is a possibility that some leaders on slow nodes may have to wait for delayed requests to be processed before the leader eviction process can proceed. This can result in an overall extended duration for the leader eviction. It is recommended to enable the configuration [`store-io-pool-size`](/tikv-configuration-file.md#store-io-pool-size-new-in-v530) to mitigate this situation.
