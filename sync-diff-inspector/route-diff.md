@@ -87,6 +87,7 @@ For the above rule, we can say that the rule matches `schema2.table_3 -> schema.
 schema-pattern = "schema_*"  # schema to match. Support wildcard characters * and ?.
 target-schema = "schema"     # target schema
 ```
+
 a. If there is a rule matches `schema -> schema`, do nothing.
 
 b. If there is not rule matches `schema -> schema`, we think the config wants to mask this match, so we add a new rule `schema -> _no__exists__db_` to the table router. After that, sync-diff-inspector will regard table `schema` as table `_no__exists__db_` instead of itself.
