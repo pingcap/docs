@@ -123,3 +123,14 @@ do
     mv $file_name.$i $file_name.$i.$file_extension
 done
 ```
+
+You can input `n` and a file name, and then run the script. The script will divide the file into `n` equal parts while keeping the original file extension. For example:
+
+```bash
+> sh ./split.sh 3 mytest.customer.csv
+> ls -h | grep mytest
+mytest.customer.0.csv
+mytest.customer.1.csv
+mytest.customer.2.csv
+mytest.customer.csv
+```
