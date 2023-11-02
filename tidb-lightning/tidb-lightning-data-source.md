@@ -296,6 +296,7 @@ TiDB Lightning currently supports compressed files exported by Dumpling or compr
 > - TiDB Lightning only imports individually compressed data files and does not support importing a single compressed file with multiple data files included.
 > - TiDB Lightning does not support `parquet` files compressed through another compression tool, such as `db.table.parquet.snappy`. If you want to compress `parquet` files, you can configure the compression format for the `parquet` file writer.
 > - TiDB Lightning v6.4.0 and later versions only support `.bak` files and the following compressed data files: `gzip`, `snappy`, and `zstd`. Other types of files cause errors. For those unsupported files, you need to modify the file names in advance, or move those files out of the import data directory to avoid such errors.
+> - The Snappy compressed file must be in the [official Snappy format](https://github.com/google/snappy). Other variants of Snappy compression are not supported.
 
 ## Match customized files
 
