@@ -710,7 +710,7 @@ mysql> SELECT * FROM T2;
 The basic principle is to limit the size of the transaction. At the KV level, TiDB has a restriction on the size of a single transaction. At the SQL level, one row of data is mapped to one KV entry, and each additional index will add one KV entry. The restriction is as follows at the SQL level:
 
 - The maximum single row record size is `120 MB`. You can configure it by `performance.txn-entry-size-limit` for TiDB v5.0 and later versions. The value is `6 MB` for earlier versions.
-- The maximum single transaction size supported is `10 GB`. You can configure it by `performance.txn-total-size-limit` for TiDB v4.0 and later versions. The value is `100 MB` for earlier versions.
+- The single transaction size supported at maximum is `1 TB`, with a default size of `100 MB`. You can configure it by `performance.txn-total-size-limit` for TiDB v4.0 and later versions. The value is `100 MB` for earlier versions.
 
 Note that for both the size restrictions and row restrictions, you should also consider the overhead of encoding and additional keys for the transaction during the transaction execution. To achieve optimal performance, it is recommended to write one transaction every 100 ~ 500 rows.
 
