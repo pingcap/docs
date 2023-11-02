@@ -33,7 +33,21 @@ Currently, this method supports importing one CSV file for one task into either 
 
     2. Click the name of your target cluster to go to its overview page, and then click **Import** in the left navigation pane.
 
-2. On the **Import** page, you can directly drag and drop your local file to the upload area, or click the upload area to select and upload the target local file. Note that you can upload only one CSV file of less than 50 MiB for one task. If the file is larger than 50 MiB, you can use the `split [-l ${line_count}]` utility to split it into multiple smaller files (for Linux or macOS only). For example, run `split -l 100000 tidb-01.csv pages` to split a file named `tidb-01.csv` by line length `100000`, and the split files are named `pages${suffix}`.
+2. On the **Import** page, you can directly drag and drop your local file to the upload area, or click the upload area to select and upload the target local file. Note that you can upload only one CSV file of less than 50 MiB for one task. If the file is larger than 50 MiB, you can use the `split [-l ${line_count}]` utility to split it into multiple smaller files (for Linux or macOS only). For example, run `split -l 100000 tidb-01.csv small_files` to split a file named `tidb-01.csv` by line length `100000`, and the split files are named `small_files${suffix}`. Refer to the following script:
+
+    ```bash
+    #!/bin/bash
+    n=$1
+    file_path=$2
+    file_extension="${file_path##*.}"
+    file_name="${file_path%.*}"
+    lines_per_file=$(( $(wc -l < $file_path) / $n ))
+    split -d -a 1 -l $lines_per_file $file_path $file_name.
+    for (( i=0; i<$n; i++ ))
+    do
+        mv $file_name.$i $file_name.$i.$file_extension
+    done
+    ```
 
 3. In the **Target** area, select the target database and the target table, or enter a name directly to create a new database or a new table. The name must start with letters (a-z and A-Z) or numbers (0-9), and can contain letters (a-z and A-Z), numbers (0-9), and the underscore (_) character. Click **Preview**.
 
