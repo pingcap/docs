@@ -39,7 +39,7 @@ To complete this step-by-step tutorial, you need the following:
 
 ## Step 2. Use the serverless driver
 
-The serverless driver supports both CommonJS and ESM modules. The following steps take the usage of the ESM module as an example.
+The serverless driver supports both CommonJS and ES modules. The following steps take the usage of the ES module as an example.
 
 1. On the overview page of your TiDB Cloud Serverless cluster, click **Connect** in the upper-right corner, and then get the connection string for your database from the displayed dialog. The connection string looks like this:
 
