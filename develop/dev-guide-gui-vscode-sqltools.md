@@ -60,7 +60,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 
     > **Tip:**
     >
-    > If your VS Code is running against a remote development enviorment, select the remote OS from the list. For example, if you are using Windows Subsystem for Linux (WSL), switch to the corresponding Linux distribution. If you are using Github Codespaces, this doesn't matter.
+    > If your VS Code is running against a remote development environment, select the remote operating system from the list. For example, if you are using Windows Subsystem for Linux (WSL), switch to the corresponding Linux distribution. This is not necessary if you are using GitHub Codespaces.
 
 4. Click **Create password** to create a random password.
 
@@ -68,39 +68,39 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
     >
     > If you have created a password before, you can either use the original password or click **Reset password** to generate a new one.
 
-5. Go back to VS Code, click **Add New Connection**, and select **TiDB** type.
+5. Launch VS Code and select the **SQLTools** extension on the navigation pane. Under the **CONNECTIONS** section, click **Add New Connection** and select **TiDB** as the database driver.
 
-    ![VS Code sqltools add bew connection](/media/develop/vsc-sqltools-add-new-connection.jpg)
+    ![VS Code SQLTools: add new connection](/media/develop/vsc-sqltools-add-new-connection.jpg)
 
-6. Fill in parameters in setting panal.
+6. In the setting pane, configure the following connection parameters:
 
-    - Connection name: Please give a meanful name for this connection.
-    - Connection group: (Optional) A meanful name for the group of this connection. And the connections which have the same group name will be gethered together.
-    - Connect using: Please select **Server and Port**.
-    - Server Address: The parameter `host` from TiDB Cloud connection dialog.
-    - Port: The parameter `port` from TiDB Cloud connection dialog.
-    - Database: The database that you want to connect.
-    - Username: The parameter `user` from TiDB Cloud connection dialog.
-    - Password mode: Please select **SQLTools Driver Credentials**.
-    - In **MySQL driver specific options** scope:
+    - **Connection name**: give this connection a meaningful name.
+    - **Connection group**: (optional) give this group of connections a meaningful name. Connections with the same group name will be grouped together.
+    - **Connect using**: select **Server and Port**.
+    - **Server Address**: enter the `host` parameter from the TiDB Cloud connection dialog.
+    - **Port**: enter the `port` parameter from the TiDB Cloud connection dialog.
+    - **Database**: enter the database that you want to connect to.
+    - **Username**: enter the `user` parameter from the TiDB Cloud connection dialog.
+    - **Password mode**: select **SQLTools Driver Credentials**.
+    - In the **MySQL driver specific options** area, configure the following parameters:
 
-        - Authentication Protocol: Please select **default**.
-        - SSL: Please select **Enabled**. TiDB Serverless requires a secure connection. In **SSL Options (node.TLSSocket)** scope:
-
-            - Certificate Authority (CA) Certificate File: sername: The parameter `ssl_ca` from TiDB Cloud connection dialog.
+        - **Authentication Protocol**: select **default**.
+        - **SSL**: select **Enabled**. TiDB Serverless requires a secure connection. In the **SSL Options (node.TLSSocket)** area, configure the **Certificate Authority (CA) Certificate File** field as the `ssl_ca` parameter from the TiDB Cloud connection dialog.
 
             > **Note:**
             >
-            > If you are running on Windows or Github Codespaces, you can leave this blank. Default is to trust the well-known CAs curated by Mozilla. Learn more about [TiDB Serverless root certificate management](https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-clusters#root-certificate-management)
+            > If you are running on Windows or GitHub Codespaces, you can leave **SSL** blank. By defaultm SQLTools trusts well-known CAs curated by Mozilla. For more information, see [TiDB Serverless root certificate management](https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-clusters#root-certificate-management).
 
-    ![VS Code sqltools serverless connection config](/media/develop/vsc-sqltools-connection-config-serverless.jpg)
+    ![VS Code SQLTools: configure connection settings for TiDB Serverless](/media/develop/vsc-sqltools-connection-config-serverless.jpg)
 
-7. Click **TEST CONNECTION**, then click **Allow** in the popupwindow.
-8. Enter `password` from TiDB Cloud.
+7. Click **TEST CONNECTION** to validate the connection to the TiDB Serverless cluster.
 
-    ![VS Code sqltools serverless password](/media/develop/vsc-sqltools-password.jpg)
+    1. In the pop-up window, click **Allow**.
+    2. In the **SQLTools Driver Credentials** dialog, enter the password you created in step 4.
 
-9. If you can see **Successfully connected!** text appared. Then click **SAVE CONNECTION**.
+        ![VS Code SQLTools: enter password to connect to TiDB Serverless](/media/develop/vsc-sqltools-password.jpg)
+
+8. If the connection test is successful, you can see the **Successfully connected!** message. Click **SAVE CONNECTION** to save the connection configuration.
 
 </div>
 <div label="TiDB Dedicated">
@@ -113,68 +113,71 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 
     For more details about how to obtain the connection string, refer to [TiDB Dedicated standard connection](https://docs.pingcap.com/tidbcloud/connect-via-standard-connection).
 
-4. Go back to VS Code, click **Add New Connection**, and select **TiDB** type.
+4. Launch VS Code and select the **SQLTools** extension on the navigation pane. Under the **CONNECTIONS** section, click **Add New Connection** and select **TiDB** as the database driver.
 
-    ![VS Code sqltools add bew connection](/media/develop/vsc-sqltools-add-new-connection.jpg)
+    ![VS Code SQLTools: add new connection](/media/develop/vsc-sqltools-add-new-connection.jpg)
 
-5. Fill in parameters in setting panal.
+5. In the setting pane, configure the following connection parameters:
 
-    - Connection name: Please give a meanful name for this connection.
-    - Connection group: (Optional) A meanful name for the group of this connection. And the connections which have the same group name will be gethered together.
-    - Connect using: Please select **Server and Port**.
-    - Server Address: The parameter `host` from TiDB Cloud connection dialog.
-    - Port: The parameter `port` from TiDB Cloud connection dialog.
-    - Database: The database that you want to connect.
-    - Username: The parameter `user` from TiDB Cloud connection dialog.
-    - Password mode: Please select **SQLTools Driver Credentials**.
-    - In **MySQL driver specific options** scope:
+    - **Connection name**: give this connection a meaningful name.
+    - **Connection group**: (optional) give this group of connections a meaningful name. Connections with the same group name will be grouped together.
+    - **Connect using**: select **Server and Port**.
+    - **Server Address**: enter the `host` parameter from the TiDB Cloud connection dialog.
+    - **Port**: enter the `port` parameter from the TiDB Cloud connection dialog.
+    - **Database**: enter the database that you want to connect to.
+    - **Username**: enter the `user` parameter from the TiDB Cloud connection dialog.
+    - **Password mode**: select **SQLTools Driver Credentials**.
+    - In the **MySQL driver specific options** area, configure the following parameters:
 
-        - Authentication Protocol: Please select **default**.
-        - SSL: Please select **Disabled**.
+        - **Authentication Protocol**: select **default**.
+        - **SSL**: select **Disabled**.
 
-    ![VS Code sqltools dedicated connection config](/media/develop/vsc-sqltools-connection-config-dedicated.jpg)
+    ![VS Code SQLTools: configure connection settings for TiDB Dedicated](/media/develop/vsc-sqltools-connection-config-dedicated.jpg)
 
-6. Click **TEST CONNECTION**, then click **Allow** in the popupwindow.
-7. Enter `password` from TiDB Cloud.
+6. Click **TEST CONNECTION** to validate the connection to the TiDB Dedicated cluster.
 
-    ![VS Code sqltools dedicated password](/media/develop/vsc-sqltools-password.jpg)
+    1. In the pop-up window, click **Allow**.
+    2. In the **SQLTools Driver Credentials** dialog, enter the password of the TiDB Dedicated cluster.
 
-8. If you can see **Successfully connected!** text appared. Then click **SAVE CONNECTION**.
+    ![VS Code SQLTools: enter password to connect to TiDB Dedicated](/media/develop/vsc-sqltools-password.jpg)
+
+7. If the connection test is successful, you can see the **Successfully connected!** message. Click **SAVE CONNECTION** to save the connection configuration.
 
 </div>
 <div label="TiDB Self-Hosted">
 
-1. Click **Add New Connection**, and select **TiDB** type.
+1. Launch VS Code and select the **SQLTools** extension on the navigation pane. Under the **CONNECTIONS** section, click **Add New Connection** and select **TiDB** as the database driver.
 
-    ![VS Code sqltools add bew connection](/media/develop/vsc-sqltools-add-new-connection.jpg)
+    ![VS Code SQLTools: add new connection](/media/develop/vsc-sqltools-add-new-connection.jpg)
 
-2. Fill in parameters in setting panal.
+2. In the setting pane, configure the following connection parameters:
 
-    - Connection name: Please give a meanful name for this connection.
-    - Connection group: (Optional) A meanful name for the group of this connection. And the connections which have the same group name will be gethered together.
-    - Connect using: Please select **Server and Port**.
-    - Server Address: TiDB cluster host.
-    - Port: TiDB cluster host.
-    - Database: The database that you want to connect.
-    - Username: TiDB cluster username.
-    - Password mode:
+    - **Connection name**: give this connection a meaningful name.
+    - **Connection group**: (optional) give this group of connections a meaningful name. Connections with the same group name will be grouped together.
+    - **Connect using**: select **Server and Port**.
+    - **Server Address**: enter the IP address or domain name of your TiDB Self-Hosted cluster.
+    - **Port**: enter the port number of your TiDB Self-Hosted cluster.
+    - **Database**: enter the database that you want to connect to.
+    - **Username**: enter the username to use to connect to your TiDB Self-Hosted cluster.
+    - **Password mode**:
 
-        - If the password is empty, please select **Use empty password**.
-        - Otherwise, please select **SQLTools Driver Credentials**.
+        - If the password is empty, select **Use empty password**.
+        - Otherwise, select **SQLTools Driver Credentials**.
 
-    - In **MySQL driver specific options** scope:
+    - In the **MySQL driver specific options** area, configure the following parameters:
 
-        - Authentication Protocol: Please select **default**.
-        - SSL: Please select **Disabled**.
+        - **Authentication Protocol**: select **default**.
+        - **SSL**: select **Disabled**.
 
-    ![VS Code sqltools self-hosted connection config](/media/develop/vsc-sqltools-connection-config-self-hosted.jpg)
+    ![VS Code SQLTools: configure connection settings for TiDB Self-Hosted](/media/develop/vsc-sqltools-connection-config-self-hosted.jpg)
 
-3. Click **TEST CONNECTION**.
-4. (Optional) If the password is not empty, click **Allow** in the popupwindow, then enter the password from TiDB cluster.
+3. Click **TEST CONNECTION** to validate the connection to the TiDB Self-Hosted cluster.
 
-    ![VS Code sqltools self-hosted password](/media/develop/vsc-sqltools-password.jpg)
+    If the password is not empty, click **Allow** in the pop-up window, and then enter the password of the TiDB Self-Hosted cluster.
 
-5. If you can see **Successfully connected!** text appared. Then click **SAVE CONNECTION**.
+    ![VS Code SQLTools: enter password to connect to TiDB Self-Hosted](/media/develop/vsc-sqltools-password.jpg)
+
+4. If the connection test is successful, you can see the **Successfully connected!** message. Click **SAVE CONNECTION** to save the connection configuration.
 
 </div>
 </SimpleTab>
