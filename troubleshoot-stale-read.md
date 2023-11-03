@@ -35,7 +35,7 @@ The Region leader uses a resolver to manage resolved-ts. This resolver tracks lo
 
 ## Diagnose Stale Read issues
 
-This section introduces how to diagnose Stale Read issues using Grafana and `tikv-ctl`.
+This section introduces how to diagnose Stale Read issues using Grafana, `tikv-ctl`, and logs.
 
 ### Identify issues
 
