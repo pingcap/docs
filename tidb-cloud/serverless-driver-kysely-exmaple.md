@@ -5,12 +5,12 @@ summary: Learn how to use TiDB Cloud serverless driver with Kysely.
 
 # TiDB Cloud Serverless Driver Kysely Tutorial
 
-[Kysely](https://www.prisma.io/docs) is a type-safe and autocompletion-friendly TypeScript SQL query builder. TiDB Cloud offers [@tidbcloud/kysely](https://github.com/tidbcloud/kysely) that enables you use Kysely over HTTPS with our [TiDB Cloud serverless driver](/tidb-cloud/serverless-driver.md). Compared with the traditional TCP way, it brings the following benefits:
+[Kysely](https://kysely.dev/docs/intro) is a type-safe and autocompletion-friendly TypeScript SQL query builder. TiDB Cloud offers [@tidbcloud/kysely](https://github.com/tidbcloud/kysely), enabling you to use Kysely over HTTPS with [TiDB Cloud serverless driver](/tidb-cloud/serverless-driver.md). Compared with the traditional TCP way, [@tidbcloud/kysely](https://github.com/tidbcloud/kysely) brings the following benefits:
 
 - Better performance in serverless environment.
 - Ability to use Kysely in edge environment.
 
-Learn how to use TiDB Cloud serverless driver with Kysely in this step-by-step tutorial.
+This tutorial describes how to use TiDB Cloud serverless driver with Kysely.
 
 ## Use TiDB Cloud Kysely dialect in Node.js environments
 
@@ -18,9 +18,9 @@ Learn how to use TiDB Cloud serverless driver with Kysely in this step-by-step t
 
 To complete this tutorial, you need the following:
 
+- [Node.js](https://nodejs.org/en) >= 18.0.0.
+- [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) or your preferred package manager.
 - A TiDB Serverless cluster. If you don't have any, you can [create a TiDB Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md).
-- The [Node.js](https://nodejs.org/en) >= 18.0.0.
-- The [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) or your preferred package manager.
 
 ### Step 1. Create a project
 
@@ -31,13 +31,13 @@ To complete this tutorial, you need the following:
     cd kysely-node-example
     ```
 
-2. Install the `@tidbcloud/kysely` with `kysely` and `@tidbcloud/serverless`, as they are both required peer dependencies:
+2. Install the `@tidbcloud/kysely` with `kysely` and `@tidbcloud/serverless` packages, as they are both required peer dependencies:
 
    ```
    npm install kysely @tidbcloud/kysely @tidbcloud/serverless
    ```
 
-3. In the `package.json` file, specify the ESM module by adding `type: "module"`:
+3. In the `package.json` file, specify the ES module by adding `type: "module"`:
 
    ```
    {
@@ -50,9 +50,9 @@ To complete this tutorial, you need the following:
    }
    ```
    
-4. Add a `tsconfig.json` file to the root of your project to define the TypeScript compiler options. Here is an example:
+4. In the root directory of your project, add a `tsconfig.json` file to define the TypeScript compiler options. Here is an example file:
 
-   ```
+   ```json
    {
      "compilerOptions": {
        "module": "ES2022",
@@ -71,7 +71,7 @@ To complete this tutorial, you need the following:
 
 ### Step 2. Set the environment
 
-1. On the overview page of your TiDB Cloud Serverless cluster, click **Connect** in the upper-right corner, and then get the connection string for your database from the displayed dialog. The connection string looks something like this:
+1. On the overview page of your TiDB Cloud Serverless cluster, click **Connect** in the upper-right corner, and then get the connection string for your database from the displayed dialog. The connection string looks like this:
 
     ```
     mysql://[username]:[password]@[host]/[database]
@@ -85,7 +85,9 @@ To complete this tutorial, you need the following:
    
 ### Step 3. Use Kysely to query data
 
-1. Create a table in your TiDB Serverless cluster and insert some data. You can use the [Chat2Query on console](/tidb-cloud/explore-data-with-chat2query.md) to execute the SQL. Here is an example:
+1. Create a table in your TiDB Serverless cluster and insert some data. 
+
+    You can use [Chat2Query in the TiDB Cloud console](/tidb-cloud/explore-data-with-chat2query.md) to execute the SQL statement. Here is an example:
 
    ```
    CREATE TABLE `test`.`person`  (
@@ -139,14 +141,14 @@ To complete this tutorial, you need the following:
 
 ### Step 4. Run the Typescript code
 
-1. Install the `ts-node` to transforms TypeScript into JavaScript and `@types/node` to install type definitions for node.
+1. Install `ts-node` to transform TypeScript into JavaScript, and then install `@types/node` to provide TypeScript type definitions for Node.js.
 
    ```
    npm install -g ts-node
    npm i --save-dev @types/node
    ```
    
-2. Run the code with the following command:
+2. Run the Typescript code with the following command:
 
    ```
    ts-node --esm hello-world.ts
