@@ -1307,7 +1307,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - This variable is used to set the concurrency of executing the `ANALYZE` statement.
 - When the variable is set to a larger value, the execution performance of other queries is affected.
 
-### `tidb_build_sampling_stats_concurrency` <span class="version-mark">New in v7.5</span>
+### tidb_build_sampling_stats_concurrency <span class="version-mark">New in v7.5.0</span>
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
