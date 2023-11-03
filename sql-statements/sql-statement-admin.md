@@ -118,7 +118,7 @@ The above statement is used to reload SQL Plan binding information.
 ADMIN SHOW t NEXT_ROW_ID;
 ```
 
-The above statement is used to view the details of some special columns of a table. The output is the same as [SHOW TABLE NEXT_ROW_ID](/sql-statements/sql-statement-show-table-next-rowid.md).
+The preceding statement is used to view the details of some special columns of a table. The output is the same as [SHOW TABLE NEXT_ROW_ID](/sql-statements/sql-statement-show-table-next-rowid.md).
 
 ## `ADMIN REPAIR` statement
 

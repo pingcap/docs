@@ -76,7 +76,7 @@ Currently, the `help_topic` is NULL.
 
 ## System tables related to metadata locks
 
-* `tidb_mdl_view`：a view of the metadata locks. You can use it to view information about the currently blocked DDL statements
+* `tidb_mdl_view`：a view of metadata locks. You can use it to view information about the currently blocked DDL statements
 * `tidb_mdl_info`：used internally to synchronize metadata locks across nodes
 
 ## Miscellaneous system tables
