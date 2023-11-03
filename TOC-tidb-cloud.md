@@ -258,14 +258,8 @@
     - [Storage](/tidb-storage.md)
     - [Computing](/tidb-computing.md)
     - [Scheduling](/tidb-scheduling.md)
-<<<<<<< HEAD
-  - [TiDB Cloud Cluster Limits and Quotas](/tidb-cloud/limitations-and-quotas.md)
-=======
     - [TSO](/tso.md)
-  - [TiDB Dedicated Limitations and Quotas](/tidb-cloud/limitations-and-quotas.md)
-  - [TiDB Serverless Limitations](/tidb-cloud/serverless-limitations.md)
-  - [Limited SQL Features on TiDB Cloud](/tidb-cloud/limited-sql-features.md)
->>>>>>> 09e435a1ce (Add a new doc about TSO (#14630))
+  - [TiDB Cloud Cluster Limits and Quotas](/tidb-cloud/limitations-and-quotas.md)
   - [TiDB Limitations](/tidb-limitations.md)
   - SQL
     - [Explore SQL with TiDB](/basic-sql-operations.md)
