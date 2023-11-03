@@ -20,7 +20,7 @@ To complete this tutorial, you need:
 
 - [Visual Studio Code](https://code.visualstudio.com/#alt-downloads) **1.72.0** or higher.
 - [SQLTools MySQL/MariaDB/TiDB](https://marketplace.visualstudio.com/items?itemName=mtxr.sqltools-driver-mysql) extension for Visual Studio Code. To install it, you can use one of the following methods:
-    - Click [this link](vscode:extension/mtxr.sqltools-driver-mysql) to launch VS Code and install the extension directly.
+    - Click <a href="vscode:extension/mtxr.sqltools-driver-mysql">this link</a>  to launch VS Code and install the extension directly.
     - Navigate to [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=mtxr.sqltools-driver-mysql) and click **Install**.
 - A TiDB cluster.
 
