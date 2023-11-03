@@ -112,14 +112,6 @@ ADMIN RELOAD BINDINGS;
 
 The above statement is used to reload SQL Plan binding information.
 
-## `ADMIN SHOW NEXT_ROW_ID` statement
-
-```sql
-ADMIN SHOW t NEXT_ROW_ID;
-```
-
-The above statement is used to view the details of some special columns of a table. The output is the same as [SHOW TABLE NEXT_ROW_ID](/sql-statements/sql-statement-show-table-next-rowid.md).
-
 ## `ADMIN REPAIR` statement
 
 <CustomContent platform="tidb-cloud">
@@ -143,6 +135,14 @@ ADMIN REPAIR TABLE tbl_name CREATE TABLE STATEMENT;
 Here "untrusted" means that you need to manually ensure that the metadata of the original table can be covered by the `CREATE TABLE STATEMENT` operation. To use this `REPAIR` statement, enable the [`repair-mode`](/tidb-configuration-file.md#repair-mode) configuration item, and make sure that the tables to be repaired are listed in the [`repair-table-list`](/tidb-configuration-file.md#repair-table-list).
 
 </CustomContent>
+
+## `ADMIN SHOW NEXT_ROW_ID` statement
+
+```sql
+ADMIN SHOW t NEXT_ROW_ID;
+```
+
+The above statement is used to view the details of some special columns of a table. The output is the same as [SHOW TABLE NEXT_ROW_ID](/sql-statements/sql-statement-show-table-next-rowid.md).
 
 ## `ADMIN SHOW SLOW` statement
 
