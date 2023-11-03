@@ -212,7 +212,7 @@ To get the exact transaction and the keys of some of the locks, you can check Ti
 [2023/07/17 21:16:44.257 +08:00] [INFO] [resolver.rs:213] ["locks with the minimum start_ts in resolver"] [keys="[74800000000000006A5F7280000000000405F6, ... , 74800000000000006A5F72800000000000EFF6, 74800000000000006A5F7280000000000721D9, 74800000000000006A5F72800000000002F691]"] [start_ts=442918429687808001] [region_id=3121]
 ```
 
-From the TiKV log, you can get the start_ts of the transaction, that is `442918429687808001`. To get more information about the statement and transaction, you can grep `start_ts` in TiDB logs. The output is as follows:
+From the TiKV log, you can get the start_ts of the transaction, that is `442918429687808001`. To get more information about the statement and transaction, you can grep this timestamp in TiDB logs. The output is as follows:
 
 ```log
 [2023/07/17 21:16:18.287 +08:00] [INFO] [2pc.go:685] ["[BIG_TXN]"] [session=2826881778407440457] ["key sample"=74800000000000006a5f728000000000000000] [size=319967171] [keys=10000000] [puts=10000000] [dels=0] [locks=0] [checks=0] [txnStartTS=442918429687808001]
