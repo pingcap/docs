@@ -67,6 +67,11 @@ Currently, the `help_topic` is NULL.
 * `mysql.tidb_ttl_task` the current ongoing TTL subtasks
 * `mysql.tidb_ttl_job_history` the execution history of TTL tasks in the last 90 days
 
+## System tables related to metadata locks
+
+* `tidb_mdl_view`：a view of metadata locks. You can use it to view information about the currently blocked DDL statements
+* `tidb_mdl_info`：used internally by TiDB to synchronize metadata locks across nodes
+
 ## Miscellaneous system tables
 
 > **Note:**
