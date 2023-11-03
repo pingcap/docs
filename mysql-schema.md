@@ -63,21 +63,9 @@ Currently, the `help_topic` is NULL.
 >
 > The TTL related system tables are not available on [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless) clusters.
 
-<<<<<<< HEAD
 * `mysql.tidb_ttl_table_status` the previously executed TTL job and ongoing TTL job for all TTL tables
 * `mysql.tidb_ttl_task` the current ongoing TTL subtasks
 * `mysql.tidb_ttl_job_history` the execution history of TTL tasks in the last 90 days
-=======
-* `tidb_ttl_table_status`: the previously executed TTL job and ongoing TTL job for all TTL tables
-* `tidb_ttl_task`: the current ongoing TTL subtasks
-* `tidb_ttl_job_history`: the execution history of TTL tasks in the last 90 days
-
-## System tables related to runaway queries
-
-* `tidb_runaway_queries`: the history records of all identified runaway queries in the past 7 days
-* `tidb_runaway_watch`: the watch list of runaway queries
-* `tidb_runaway_watch_done`: a watch list of deleted or expired runaway queries
->>>>>>> ba94975720 (sql: fix two oncall issues (#15195))
 
 ## System tables related to metadata locks
 
