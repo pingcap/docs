@@ -110,8 +110,8 @@ After completing the prerequisites, you can sink your data to MySQL.
 
 6. Customize **Event Filter** to filter the events that you want to replicate.
 
-    - **Tables matching**: you can set which tables the event filter will be applied to in this column. The rule syntax is the same as that used for the **Table Filter** area above.
-    - **Ignored events**: you can set which types of events this filter will exclude from the changefeed.
+    - **Tables matching**: you can set which tables the event filter will be applied to in this column. The rule syntax is the same as that used for the **Table Filter** area above. You can add up to 10 event filter rules per changefeed.
+    - **Ignored events**: you can set which types of events the event filter will exclude from the changefeed.
 
 7. In **Start Replication Position**, configure the starting position for your MySQL sink.
 
