@@ -81,7 +81,7 @@ After completing the prerequisites, you can sink your data to the destination Ti
 
 6. Customize **Event Filter** to filter the events that you want to replicate.
 
-    - **Tables matching**: you can set which tables the event filter will be applied to in this column. The rule syntax is the same as that used for the **Table Filter** area above. You can add up to 10 event filter rules per changefeed.
+    - **Tables matching**: you can set which tables the event filter will be applied to in this column. The rule syntax is the same as that used for the preceding **Table Filter** area. You can add up to 10 event filter rules per changefeed.
     - **Ignored events**: you can set which types of events the event filter will exclude from the changefeed.
 
 7. In the **Start Replication Position** area, fill in the TSO that you get from Dumpling exported metadata files.

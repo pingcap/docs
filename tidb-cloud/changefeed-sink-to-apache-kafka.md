@@ -86,7 +86,7 @@ For example, if your Kafka cluster is in Confluent Cloud, you can see [Resources
 
 2. Customize **Event Filter** to filter the events that you want to replicate.
 
-    - **Tables matching**: you can set which tables the event filter will be applied to in this column. The rule syntax is the same as that used for the **Table Filter** area above. You can add up to 10 event filter rules per changefeed.
+    - **Tables matching**: you can set which tables the event filter will be applied to in this column. The rule syntax is the same as that used for the preceding **Table Filter** area. You can add up to 10 event filter rules per changefeed.
     - **Ignored events**: you can set which types of events the event filter will exclude from the changefeed.
 
 3. In the **Data Format** area, select your desired format of Kafka messages.
