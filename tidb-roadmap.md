@@ -80,7 +80,7 @@ In the course of development, this roadmap is subject to change based on user ne
           </br>
           <li>
             <b>Runaway query control</b><br /><i>
-              An operator-controlled way to greatly add performance stability to workloads with unexpectedly expensive queries
+              An operator-controlled way to greatly enhance performance stability for workloads with unexpectedly expensive queries
             </i>
           </li>
         </ul>
@@ -89,7 +89,7 @@ In the course of development, this roadmap is subject to change based on user ne
         <ul>
           <li>
             <b>Disaggregation of Placement Driver (PD)</b>
-            <br /><i>Greater cluster scalability and resiliency</i>
+            <br /><i>Enhance cluster scalability and resilience</i>
           </li>
           <br />
         </ul>
@@ -104,7 +104,7 @@ In the course of development, this roadmap is subject to change based on user ne
           </br>
           <li>
             <b>Federated query</b>
-            <br /><i>TiDB query planner support for multiple storage engines in HTAP use cases.</i>
+            <br /><i>TiDB query planner supports multiple storage engines in HTAP use cases</i>
           </li>
         </ul>
       </td>
@@ -117,7 +117,7 @@ In the course of development, this roadmap is subject to change based on user ne
       <td>
         <ul>
           <li>
-            <b>TiCDC integrations with data warehouse / data lake systems </b>
+            <b>TiCDC integrations with data warehouse or data lake systems</b>
             <br />
           </li>
           <br />
@@ -138,7 +138,7 @@ In the course of development, this roadmap is subject to change based on user ne
           <br />
           <li>
             <b>Index Advisor</b>
-            <br /><i>Recommend indexes to users based on workload, statistics, and execution plans</i>
+            <br /><i>Offer index recommendations to users based on workload, statistics, and execution plans</i>
           </li>
         </ul>
       </td>
@@ -146,7 +146,7 @@ In the course of development, this roadmap is subject to change based on user ne
         <ul>
           <li>
             <b>Materialized views</b>
-            <br /><i>Pre-computed results stored as a persistent data view to boost query performance</i>
+            <br /><i>Store pre-computed results as a persistent data view to boost query performance</i>
           </li>
           <br />
           <li>
