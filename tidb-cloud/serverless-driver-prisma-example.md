@@ -67,7 +67,7 @@ To complete this tutorial, you need the following:
 
 2. In the root directory of your project, create a file named `.env`, define an environment variable named `DATABASE_URL` as follows, and then replace the placeholders `[]` in this variable with the corresponding parameters in the connection string.
 
-    ```dotenv  
+    ```dotenv
     DATABASE_URL="mysql://[username]:[password]@[host]:4000/[database]?sslaccept=strict"
     ```
 

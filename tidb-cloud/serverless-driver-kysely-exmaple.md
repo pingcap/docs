@@ -10,9 +10,11 @@ summary: Learn how to use TiDB Cloud serverless driver with Kysely.
 - Better performance in serverless environments.
 - Ability to use Kysely in edge environments.
 
-This tutorial describes how to use TiDB Cloud serverless driver with Kysely.
+This tutorial describes how to use TiDB Cloud serverless driver with Kysely in Node.js environments and edge environments.
 
 ## Use TiDB Cloud Kysely dialect in Node.js environments
+
+This section describes how to use TiDB Cloud serverless driver with Kysely in Node.js environments.
 
 ### Before you begin
 
@@ -79,7 +81,7 @@ To complete this tutorial, you need the following:
 
 2. Set the environment variable `DATABASE_URL` in your local environment. For example, in Linux or macOS, you can run the following command:
 
-    ```  
+    ```
     export DATABASE_URL=mysql://[username]:[password]@[host]/[database]
     ```
    
@@ -156,7 +158,7 @@ To complete this tutorial, you need the following:
 
 ## Use TiDB Cloud Kysely dialect in edge environments
 
-This section takes using TiDB Cloud Kysely dialect in Vercel Edge Function as an example.
+This section takes the TiDB Cloud Kysely dialect in Vercel Edge Function as an example.
 
 ### Before you begin
 
@@ -212,7 +214,7 @@ mysql://[username]:[password]@[host]/[database]
    insert into test.person values (1,'pingcap','male')
    ```
 
-2. In the app directory, create a file `/api/edge-function-example/route.ts` and add the following code:
+2. In the `app` directory of your project, create a file `/api/edge-function-example/route.ts` and add the following code:
 
    ```
    import { NextResponse } from 'next/server';
@@ -284,12 +286,12 @@ mysql://[username]:[password]@[host]/[database]
 1. Deploy your code to Vercel with the `DATABASE_URL` environment variable:
 
    ```
-   vercel -e DATABASE_URL=mysql://[username]:[password]@[host]/[database] --prod 
+   vercel -e DATABASE_URL=mysql://[username]:[password]@[host]/[database] --prod
    ```
 
     After the deployment is complete, you will get the URL of your project. 
 
-2. Navigate to the `${Your-URL}/api/edge-function-example` page  to get the response from your route.
+2. Navigate to the `${Your-URL}/api/edge-function-example` page to get the response from your route.
 
 ## What's next
 
