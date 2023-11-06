@@ -191,7 +191,7 @@ To delete a running backup job, it is similar as [**Delete backup files**](#dele
 
 > **Note**
 >
-> - When you restore a DB cluster from backups, the local time zone will retain its original settings and will not be overwritten by the restoration process.
+> - When you restore a DB cluster from backups, the time zone will not be overwritten by the restoration process and retain its original settings.
 >
 
 To restore your TiDB Dedicated cluster data from a backup to a new cluster, take the following steps:
