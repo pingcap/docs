@@ -31,6 +31,13 @@
     - [Java](/develop/dev-guide-sample-application-java.md)
     - [Python](/develop/dev-guide-sample-application-python.md)
   - Connect to TiDB
+<<<<<<< HEAD
+=======
+    - GUI Database Tools
+      - [JetBrains DataGrip](/develop/dev-guide-gui-datagrip.md)
+      - [DBeaver](/develop/dev-guide-gui-dbeaver.md)
+      - [VS Code](/develop/dev-guide-gui-vscode-sqltools.md)
+>>>>>>> 451d95c0d7 (feat: Developer Guide - GUI - VS Code SQLTools (#14926))
     - [Choose Driver or ORM](/develop/dev-guide-choose-driver-or-orm.md)
     - [Connect to TiDB](/develop/dev-guide-connect-to-tidb.md)
     - [Connection Pools and Connection Parameters](/develop/dev-guide-connection-parameters.md)
