@@ -119,7 +119,6 @@ tidb-lightning-ctl --config conf/tidb-lightning.toml --checkpoint-error-destroy=
 
 See the [Checkpoints control](/tidb-lightning/tidb-lightning-checkpoints.md#checkpoints-control) section for other options.
 
-
 ### `cannot guess encoding for input file, please convert to UTF-8 manually`
 
 **Cause**: TiDB Lightning only recognizes the UTF-8 and GB-18030 encodings for the table schemas. This error is emitted if the file isn't in any of these encodings. It is also possible that the file has mixed encoding, such as containing a string in UTF-8 and another string in GB-18030, due to historical `ALTER TABLE` executions.
