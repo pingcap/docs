@@ -110,9 +110,9 @@ In v7.4.0, TiDB introduces the [Global Sort](/tidb-global-sort.md) feature. Inst
 
 * Data Migration (DM) supports blocking incompatible (data-consistency-corrupting) DDL changes [#9692](https://github.com/pingcap/tiflow/issues/9692) @[GMHDBJD](https://github.com/GMHDBJD) <!--**tw@hfxsd** 1523-->
 
-    Before v7.5.0, the DM Binlog Filter feature can only migrate or filter specified events, and the granularity is relatively coarse. For example, it can only filter large granularity of DDL events such as `ALTER`. This method is limited in some scenarios. For example, the application allows `ADD COLUMN` but not `DROP COLUMN`, but they be filtered by `ALTER` events in the previous version.
+    Before v7.5.0, the DM Binlog Filter feature can only migrate or filter specified events, and the granularity is relatively coarse. For example, it can only filter large granularity of DDL events such as `ALTER`. This method is limited in some scenarios. For example, the application allows `ADD COLUMN` but not `DROP COLUMN`, but they are both filtered by `ALTER` events in the previous version.
 
-    Therefore, v7.5.0 has refined the supported DDL events, such as adding `MODIFY COLUMN` (modify the column data type), `DROP COLUMN`, and other fine-grained DDL events that will lead to data loss, truncation of data, and loss of precision. You can configure it as needed. It also supports interception of the DDL, and reports error alerts, so that you can intervene in time manually to avoid impacting downstream business data.
+    To address such issues, v7.5.0 refines the supported DDL events, such as adding `MODIFY COLUMN` (modify the column data type), `DROP COLUMN`, and other fine-grained DDL events that will lead to data loss, truncation of data, and loss of precision. You can configure it as needed. This feature also supports interception of the DDL, and reports error alerts, so that you can intervene manually in time to avoid impacting downstream business data.
 
     For more information, see [documentation](/dm/dm-binlog-event-filter.md#parameter-descriptions).
 
@@ -146,7 +146,7 @@ In v7.4.0, TiDB introduces the [Global Sort](/tidb-global-sort.md) feature. Inst
 
 | Variable name  | Change type    |  Description |
 |--------|------------------------------|------|
-|  [`tidb_build_sampling_stats_concurrency`](/system-variables.md#tidb_build_sampling_stats_concurrency-new-in-v750)      |   Newly added |  This variable is controls the sample concurrency of the `ANALYZE` process.    |
+|  [`tidb_build_sampling_stats_concurrency`](/system-variables.md#tidb_build_sampling_stats_concurrency-new-in-v750)      |   Newly added |  This variable controls the sample concurrency of the `ANALYZE` process.    |
 |  [`tidb_enable_async_merge_global_stats`](/system-variables.md#tidb_enable_async_merge_global_stats-ew-in-v750)      |   Newly added | This variable is used by TiDB to merge statistics asynchronously to avoid OOM issues.   |
 |        |                              |      |
 |        |                              |      |
@@ -154,9 +154,9 @@ In v7.4.0, TiDB introduces the [Global Sort](/tidb-global-sort.md) feature. Inst
 
 ### Configuration file parameters
 
-| 配置文件 | 配置项 | 修改类型 | 描述 |
+| Configuration file | Configuration parameter | Change type | Description |
 | -------- | -------- | -------- | -------- |
-|    BR      |   [`--ignore-stats`](/br/br-snapshot-manual.md#备份统计信息)       |   新增       |   用于备份和恢复数据库统计信息。当指定该参数值为 `false` 时，BR 备份工具支持备份和恢复数据库的列、索引、和表级别的统计信息。      |
+|    BR      |   [`--ignore-stats`](/br/br-snapshot-manual.md#back-up-statistics)       |   Newly added       |   Controls whether to back up and restore database statistics. When you set this parameter to `false`, the `br` command-line tool supports backing up and restoring statistics of columns, indexes, and tables.       |
 |          |          |          |          |
 |          |          |          |          |
 |          |          |          |          |
