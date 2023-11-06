@@ -170,7 +170,7 @@ To modify a placement policy, you can use the  [`ALTER PLACEMENT POLICY`](/sql-s
 ALTER PLACEMENT POLICY myplacementpolicy FOLLOWERS=5;
 ```
 
-In this statement, the `FOLLOWERS=5` option means that configuring 5 replicas for the data, including 4 followers and 1 leader. For more configurable placement options and their meanings, see [Placement Options](#Placement Options Reference).
+In this statement, the `FOLLOWERS=5` option means configuring 5 replicas for the data, including 4 followers and 1 leader. For more configurable placement options and their meanings, see [Placement Options](#Placement Options Reference).
 
 ### Drop placement policies
 
@@ -218,8 +218,8 @@ You can configure `CONSTRAINTS`, `FOLLOWER_CONSTRAINTS`, and `LEARNER_CONSTRAINT
 
 | CONSTRAINTS format | Description |
 |----------------------------|-----------------------------------------------------------------------------------------------------------|
-| List format  | If a constraint to be specified apply to all replicas, you can use a key-value list format. Each key starts with `+` or `-`. For example: <br/><ul><li>`[+region=us-east-1]` means placing data on nodes  that have a `region` label as `us-east-1`.</li><li>`[+region=us-east-1,-type=fault]` means placing data on nodes that have a `region` label as `us-east-1` but do not have a `type` label as `fault`.</li></ul><br/>  |
-| Dictionary format | If you need to specify different number of replicas for different constraints, you can use the dictionary format. For example: <br/><ul><li>`FOLLOWER_CONSTRAINTS="{+region=us-east-1: 1,+region=us-east-2: 1,+region=us-west-1: 1}";` means placing one follower in `us-east-1`, one follower in `us-east-2`, and one follower in `us-west-1`.</li><li>`FOLLOWER_CONSTRAINTS='{"+region=us-east-1,+type=scale-node": 1,"+region=us-west-1": 1}';` means placing one follower on a node that is located in the `us-east-1` region and has the `type` label as `scale-node`, and one follower in `us-west-1`.</li></ul>The dictionary format supports each key starting with `+` or `-` and allows you to configure the special `#reject-leader` property. For example, `FOLLOWER_CONSTRAINTS='{"+region=us-east-1":1, "+region=us-east-2": 2, "+region=us-west-1,#reject-leader": 1}'` means that the leaders elected in `us-west-1` will be evicted as much as possible during disaster recovery.|
+| List format  | If a constraint to be specified applies to all replicas, you can use a key-value list format. Each key starts with `+` or `-`. For example: <br/><ul><li>`[+region=us-east-1]` means placing data on nodes  that have a `region` label as `us-east-1`.</li><li>`[+region=us-east-1,-type=fault]` means placing data on nodes that have a `region` label as `us-east-1` but do not have a `type` label as `fault`.</li></ul><br/>  |
+| Dictionary format | If you need to specify a different number of replicas for different constraints, you can use the dictionary format. For example: <br/><ul><li>`FOLLOWER_CONSTRAINTS="{+region=us-east-1: 1,+region=us-east-2: 1,+region=us-west-1: 1}";` means placing one follower in `us-east-1`, one follower in `us-east-2`, and one follower in `us-west-1`.</li><li>`FOLLOWER_CONSTRAINTS='{"+region=us-east-1,+type=scale-node": 1,"+region=us-west-1": 1}';` means placing one follower on a node that is located in the `us-east-1` region and has the `type` label as `scale-node`, and one follower in `us-west-1`.</li></ul>The dictionary format supports each key starting with `+` or `-` and allows you to configure the special `#reject-leader` property. For example, `FOLLOWER_CONSTRAINTS='{"+region=us-east-1":1, "+region=us-east-2": 2, "+region=us-west-1,#reject-leader": 1}'` means that the leaders elected in `us-west-1` will be evicted as much as possible during disaster recovery.|
 
 > **Note:**
 >
@@ -424,7 +424,7 @@ CREATE TABLE t1 (a INT) PLACEMENT POLICY=eastandwest;
 
 ## Data isolation examples
 
-As in the following example, when creating placement policies, you can configure a constraint for each policy, which requires data to be placed on TiKV nodes with the specificed `app` label.
+As in the following example, when creating placement policies, you can configure a constraint for each policy, which requires data to be placed on TiKV nodes with the specified `app` label.
 
 ```sql
 CREATE PLACEMENT POLICY app_order CONSTRAINTS="[+app=order]";
