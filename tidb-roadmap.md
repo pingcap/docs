@@ -42,8 +42,8 @@ In the course of development, this roadmap is subject to change based on user ne
           </li>
           <br />
           <li>
-            <b>Dynamic node scaling via Distributed Execution Framework</b><br />
-            <i>Automatically add and remove nodes to meet resource costs of background tasks, while maintaining stability and performance expectations</i>
+            <b>Dynamic node scaling via distributed execution framework</b><br />
+            <i>Automatically adjust node allocation to meet resource costs of background tasks, while maintaining stability and performance expectations</i>
           </li>
           <br />
           <br />
