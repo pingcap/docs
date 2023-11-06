@@ -7,8 +7,8 @@ summary: Learn how to use TiDB Cloud serverless driver with Kysely.
 
 [Kysely](https://kysely.dev/docs/intro) is a type-safe and autocompletion-friendly TypeScript SQL query builder. TiDB Cloud offers [@tidbcloud/kysely](https://github.com/tidbcloud/kysely), enabling you to use Kysely over HTTPS with [TiDB Cloud serverless driver](/tidb-cloud/serverless-driver.md). Compared with the traditional TCP way, [@tidbcloud/kysely](https://github.com/tidbcloud/kysely) brings the following benefits:
 
-- Better performance in the serverless environment.
-- Ability to use Kysely in the edge environment.
+- Better performance in serverless environments.
+- Ability to use Kysely in edge environments.
 
 This tutorial describes how to use TiDB Cloud serverless driver with Kysely.
 
@@ -31,15 +31,15 @@ To complete this tutorial, you need the following:
     cd kysely-node-example
     ```
 
-2. Install the `@tidbcloud/kysely` with `kysely` and `@tidbcloud/serverless` packages, as they are both required peer dependencies:
+2. Install the `kysely`, `@tidbcloud/kysely`, and `@tidbcloud/serverless` packages:
 
    ```
    npm install kysely @tidbcloud/kysely @tidbcloud/serverless
    ```
 
-3. In the `package.json` file, specify the ES module by adding `type: "module"`:
+3. In the root directory of your project, locate the `package.json` file, and then specify the ES module by adding `type: "module"` to the file:
 
-   ```
+   ```json
    {
      "type": "module",
      "dependencies": {
@@ -87,7 +87,7 @@ To complete this tutorial, you need the following:
 
 1. Create a table in your TiDB Serverless cluster and insert some data. 
 
-    You can use [Chat2Query in the TiDB Cloud console](/tidb-cloud/explore-data-with-chat2query.md) to execute the SQL statement. Here is an example:
+    You can use [Chat2Query in the TiDB Cloud console](/tidb-cloud/explore-data-with-chat2query.md) to execute SQL statements. Here is an example:
 
    ```
    CREATE TABLE `test`.`person`  (
@@ -156,13 +156,15 @@ To complete this tutorial, you need the following:
 
 ## Use TiDB Cloud Kysely dialect in edge environments
 
+This section takes using TiDB Cloud Kysely dialect in Vercel Edge Function as an example.
+
 ### Before you begin
 
-This tutorial use Vercel Edge Function as an example. To complete this tutorial, you need the following:
+To complete this tutorial, you need the following:
 
-- A TiDB Serverless cluster. If you don't have any, you can [create a TiDB Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md).
 - A [Vercel](https://vercel.com/docs) account that provides edge environment.
-- The [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) or your preferred package manager.
+- [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) or your preferred package manager.
+- A TiDB Serverless cluster. If you don't have any, you can [create a TiDB Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md).
 
 ### Step 1. Create a project
 
@@ -172,14 +174,14 @@ This tutorial use Vercel Edge Function as an example. To complete this tutorial,
     npm i -g vercel@latest
     ```
 
-2. Create a [Next](https://nextjs.org/) project called `kysely-example` with the following terminal commands:
+2. Create a [Next.js](https://nextjs.org/) project called `kysely-example` using the following terminal commands:
 
    ```
    npx create-next-app@latest kysely-example --ts --no-eslint --tailwind --no-src-dir --app --import-alias "@/*"
    cd kysely-example
    ```
    
-3. Install the `@tidbcloud/kysely` with `kysely` and `@tidbcloud/serverless`, as they are both required peer dependencies.
+3. Install the `kysely`, `@tidbcloud/kysely`, and `@tidbcloud/serverless` packages:
 
    ```
    npm install kysely @tidbcloud/kysely @tidbcloud/serverless
@@ -187,15 +189,17 @@ This tutorial use Vercel Edge Function as an example. To complete this tutorial,
 
 ### Step 2. Set the environment
 
-On the overview page of your TiDB Serverless cluster, click **Connect** in the upper-right corner, and then get the connection string for your database from the displayed dialog. The connection string looks something like this:
+On the overview page of your TiDB Serverless cluster, click **Connect** in the upper-right corner, and then get the connection string for your database from the displayed dialog. The connection string looks like this:
 
 ```
 mysql://[username]:[password]@[host]/[database]
 ```
 
-### Step 3. Create an Edge Function
+### Step 3. Create an edge function
 
-1. Create a table in your TiDB Serverless cluster and insert some data. You can use the [Chat2Query on console](/tidb-cloud/explore-data-with-chat2query.md) to execute the SQL. Here is an example:
+1. Create a table in your TiDB Serverless cluster and insert some data.
+
+    You can use [Chat2Query in the TiDB Cloud console](/tidb-cloud/explore-data-with-chat2query.md) to execute SQL statements. Here is an example:
 
    ```
    CREATE TABLE `test`.`person`  (
@@ -208,7 +212,7 @@ mysql://[username]:[password]@[host]/[database]
    insert into test.person values (1,'pingcap','male')
    ```
 
-2. In the app directory, create /api/edge-function-example/route.ts with the following code:
+2. In the app directory, create a file `/api/edge-function-example/route.ts` and add the following code:
 
    ```
    import { NextResponse } from 'next/server';
@@ -264,16 +268,16 @@ mysql://[username]:[password]@[host]/[database]
    }
    ```
    
-   This code accepts a query parameter `query` and returns the result of the query. If the query parameter is not provided, it returns all the records in the `person` table.
+   The preceding code accepts a query parameter `query` and returns the result of the query. If the query parameter is not provided, it returns all records in the `person` table.
 
-3. Test your code locally
+3. Test your code locally：
 
    ```
    export DATABASE_URL=mysql://[username]:[password]@[host]/[database]
    next dev
    ```
    
-   Then navigate to `http://localhost:3000/api/edge-function-example` to see the response from your route.
+4. Navigate to `http://localhost:3000/api/edge-function-example` to get the response from your route.
 
 ### Step 4. Deploy your code to Vercel
 
@@ -283,9 +287,11 @@ mysql://[username]:[password]@[host]/[database]
    vercel -e DATABASE_URL=mysql://[username]:[password]@[host]/[database] --prod 
    ```
 
-2. After the deployment is complete, you will get the URL of your project. Navigate to the `${Your-URL}/api/edge-function-example` to see the response from your route.
+    After the deployment is complete, you will get the URL of your project. 
 
-## Going further
+2. Navigate to the `${Your-URL}/api/edge-function-example` page  to get the response from your route.
 
-- Learn more about [Kysely](https://www.prisma.io/docs) and [@tidbcloud/kysely](https://github.com/tidbcloud/kysely)
-- See how we [integrate with Vercel](/tidb-cloud/integrate-tidbcloud-with-vercel.md)
+## What's next
+
+- Learn more about [Kysely](https://kysely.dev/docs/intro) and [@tidbcloud/kysely](https://github.com/tidbcloud/kysely)
+- Learn how to [integrate TiDB Cloud with Vercel](/tidb-cloud/integrate-tidbcloud-with-vercel.md)
