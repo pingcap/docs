@@ -12,14 +12,14 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **General changes**
 
-Add the following resource usage alerts. The new alerts are disabled by default. You can enable them as needed.
+- Add the following resource usage alerts. The new alerts are disabled by default. You can enable them as needed.
 
-- Max memory utilization across TiDB nodes exceeded 70% for 10 minutes
-- Max memory utilization across TiKV nodes exceeded 70% for 10 minutes
-- Max CPU utilization across TiDB nodes exceeded 80% for 10 minutes
-- Max CPU utilization across TiKV nodes exceeded 80% for 10 minutes
+    - Max memory utilization across TiDB nodes exceeded 70% for 10 minutes
+    - Max memory utilization across TiKV nodes exceeded 70% for 10 minutes
+    - Max CPU utilization across TiDB nodes exceeded 80% for 10 minutes
+    - Max CPU utilization across TiKV nodes exceeded 80% for 10 minutes
 
-For more information, see [TiDB Cloud Built-in Alerting](/tidb-cloud/monitor-built-in-alerting.md#resource-usage-alerts).
+  For more information, see [TiDB Cloud Built-in Alerting](/tidb-cloud/monitor-built-in-alerting.md#resource-usage-alerts).
 
 ## October 31, 2023
 
