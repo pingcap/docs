@@ -2068,6 +2068,28 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Default value: `ON`
 - This variable controls whether to enable GOGC Tuner.
 
+### tidb_gogc_tuner_max_value <span class="version-mark">New in v7.5.0</span>
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Integer
+- Default value: `500`
+- Range: `[10, 2147483647]`
+- The variable is used to control the maximum value of GOGC that the GOGC Tuner can adjust.
+
+
+### tidb_gogc_tuner_min_value <span class="version-mark">New in v7.5.0</span>
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Integer
+- Default value: `100`
+- Range: `[10, 2147483647]`
+- The variable is used to control the minimum value of GOGC that the GOGC Tuner can adjust.
+
+
 ### tidb_enable_historical_stats
 
 - Scope: GLOBAL
