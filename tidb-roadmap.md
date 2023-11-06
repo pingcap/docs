@@ -123,7 +123,7 @@ In the course of development, this roadmap is subject to change based on user ne
           <br />
           <li>
             <b>TiDB node labels</b>
-            <br /><i>TiDB node labels Designate existing or newly added TiDB nodes for DDL operations. This isolates DDL work from the rest of the compute being used by online traffic
+            <br /><i>Assign existing or newly added TiDB nodes for DDL operations to isolate DDL tasks from the compute resources used by online traffic
 </i>
           </li>
           <br />
