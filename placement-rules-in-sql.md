@@ -10,7 +10,7 @@ Placement Rules in SQL is a feature that enables you to specify where data is st
 This feature can fulfill the following use cases:
 
 - Deploy data across multiple data centers and configure rules to optimize high availability strategies.
-- Merge multiple databases of different applications and isolate data of different users physically, which meets the isolation requirements of different users within an instance.
+- Merge multiple databases from different applications and isolate data of different users physically, which meets the isolation requirements of different users within an instance.
 - Increase the number of replicas for important data to improve application availability and data reliability.
 
 > **Note:**
@@ -32,17 +32,17 @@ With the Placement Rules in SQL feature, you can [create placement policies](#cr
 >
 > The implementation of *Placement Rules in SQL* relies on the *placement rules feature* of PD. For details, refer to [Configure Placement Rules](https://docs.pingcap.com/zh/tidb/stable/configure-placement-rules). In the context of Placement Rules in SQL, *placement rules* might refer to *placement policies* attached to other objects, or to rules that are sent from TiDB to PD.
 
-## Limitations
+## Constraints
 
-- To simplify maintenance, it is recommended to limit the number of placement policies for a cluster to 10 or fewer.
-- It is recommended to limit the total number of tables and partitions configured with placement policies to 10,000 or fewer. Attaching policies to too many tables and partitions can increase the computation workload on the PD, thereby affecting service performance.
+- To simplify maintenance, it is recommended to limit the number of placement policies within a cluster to 10 or fewer.
+- It is recommended to limit the total number of tables and partitions attached with placement policies to 10,000 or fewer. Attaching policies to too many tables and partitions can increase computation workloads on PD, thereby affecting service performance.
 - It is recommended to use the Placement Rules in SQL feature according to examples provided in this document rather than using other complex placement policies.
 
 ## Prerequisites
 
 Placement policies rely on the configuration of labels on TiKV nodes. For example, the `PRIMARY_REGION` placement option relies on the `region` label in TiKV.
 
-When you create a placement policy, TiDB does not check whether the labels specified in the policy exist. Instead, TiDB performs the check when you attach the policy to a table. Therefore, before attaching a placement policy, make sure that each TiKV node is configured with correct labels. The configuration method is as follows:
+When you create a placement policy, TiDB does not check whether the labels specified in the policy exist. Instead, TiDB performs the check when you attach the policy. Therefore, before attaching a placement policy, make sure that each TiKV node is configured with correct labels. The configuration method is as follows:
 
 ```
 tikv-server --labels region=<region>,zone=<zone>,host=<host>
@@ -84,8 +84,8 @@ This section describes how to create, attach, view, modify, and delete placement
 
     In this statement:
 
-    - The `PRIMARY_REGION="us-east-1"` option means that placing the Raft leaders on nodes with the `region` label as `us-east-1`.
-    - The `REGIONS="us-east-1,us-west-1"` option means that placing Raft followers on nodes with the `region` label as either `us-east-1` or `us-west-1`.
+    - The `PRIMARY_REGION="us-east-1"` option means placing Raft Leaders on nodes with the `region` label as `us-east-1`.
+    - The `REGIONS="us-east-1,us-west-1"` option means placing Raft Followers on nodes with the `region` label as `us-east-1` or `us-west-1`.
 
     For more configurable placement options and their meanings, see the [Placement options](#placement-options-reference).
 
@@ -163,14 +163,13 @@ This section describes how to create, attach, view, modify, and delete placement
 
 ### Modify placement policies
 
-
 To modify a placement policy, you can use the  [`ALTER PLACEMENT POLICY`](/sql-statements/sql-statement-alter-placement-policy.md) statement. The modification will apply to all objects that are attached with the corresponding policy.
 
 ```sql
 ALTER PLACEMENT POLICY myplacementpolicy FOLLOWERS=5;
 ```
 
-In this statement, the `FOLLOWERS=5` option means configuring 5 replicas for the data, including 4 followers and 1 leader. For more configurable placement options and their meanings, see [Placement Options](#Placement Options Reference).
+In this statement, the `FOLLOWERS=5` option means configuring 6 replicas for the data, including 5 Followers and 1 Leader. For more configurable placement options and their meanings, see [Placement option reference](#placement-option-reference).
 
 ### Drop placement policies
 
@@ -194,10 +193,10 @@ Regular placement options can meet the basic requirements of data placement.
 
 | Option name                | Description                                                                                    |
 |----------------------------|------------------------------------------------------------------------------------------------|
-| `PRIMARY_REGION`           | Specifies that placing Raft leaders on nodes with a `region` label that matches the value of this option.     |
-| `REGIONS`                  | Specifies that placing Raft followers on nodes with a `region` label that matches the value of this option. |
-| `SCHEDULE`                 | Specifies the strategy for scheduling the placement of followers. The value options are `EVEN` (default) or `MAJORITY_IN_PRIMARY`. |
-| `FOLLOWERS`                | Specifies the number of followers. For example, `FOLLOWERS=2` means there will be 3 replicas of the data (2 followers and 1 leader). |
+| `PRIMARY_REGION`           | Specifies that placing Raft Leaders on nodes with a `region` label that matches the value of this option.     |
+| `REGIONS`                  | Specifies that placing Raft Followers on nodes with a `region` label that matches the value of this option. |
+| `SCHEDULE`                 | Specifies the strategy for scheduling the placement of Followers. The value options are `EVEN` (default) or `MAJORITY_IN_PRIMARY`. |
+| `FOLLOWERS`                | Specifies the number of Followers. For example, `FOLLOWERS=2` means there will be 3 replicas of the data (2 Followers and 1 Leader). |
 
 ### Advanced placement options
 
@@ -206,8 +205,8 @@ Advanced configuration options provide more flexibility for data placement to me
 | Option name                | Description                                                                                    |
 | --------------| ------------ |
 | `CONSTRAINTS`              | A list of constraints that apply to all roles. For example, `CONSTRAINTS="[+disk=ssd]"`. |
-| `LEADER_CONSTRAINTS`       | A list of constraints that only apply to leader.                                      |
-| `FOLLOWER_CONSTRAINTS`     | A list of constraints that only apply to followers.                                   |
+| `LEADER_CONSTRAINTS`       | A list of constraints that only apply to Leader.                                      |
+| `FOLLOWER_CONSTRAINTS`     | A list of constraints that only apply to Followers.                                   |
 | `LEARNER_CONSTRAINTS`      | A list of constraints that only apply to learners.                                     |
 | `LEARNERS`                 | The number of learners. |
 | `SURVIVAL_PREFERENCE`      | The replica placement priority according to the disaster tolerance level of the labels. For example, `SURVIVAL_PREFERENCE="[region, zone, host]"`. |
@@ -219,7 +218,7 @@ You can configure `CONSTRAINTS`, `FOLLOWER_CONSTRAINTS`, and `LEARNER_CONSTRAINT
 | CONSTRAINTS format | Description |
 |----------------------------|-----------------------------------------------------------------------------------------------------------|
 | List format  | If a constraint to be specified applies to all replicas, you can use a key-value list format. Each key starts with `+` or `-`. For example: <br/><ul><li>`[+region=us-east-1]` means placing data on nodes  that have a `region` label as `us-east-1`.</li><li>`[+region=us-east-1,-type=fault]` means placing data on nodes that have a `region` label as `us-east-1` but do not have a `type` label as `fault`.</li></ul><br/>  |
-| Dictionary format | If you need to specify a different number of replicas for different constraints, you can use the dictionary format. For example: <br/><ul><li>`FOLLOWER_CONSTRAINTS="{+region=us-east-1: 1,+region=us-east-2: 1,+region=us-west-1: 1}";` means placing one follower in `us-east-1`, one follower in `us-east-2`, and one follower in `us-west-1`.</li><li>`FOLLOWER_CONSTRAINTS='{"+region=us-east-1,+type=scale-node": 1,"+region=us-west-1": 1}';` means placing one follower on a node that is located in the `us-east-1` region and has the `type` label as `scale-node`, and one follower in `us-west-1`.</li></ul>The dictionary format supports each key starting with `+` or `-` and allows you to configure the special `#reject-leader` property. For example, `FOLLOWER_CONSTRAINTS='{"+region=us-east-1":1, "+region=us-east-2": 2, "+region=us-west-1,#reject-leader": 1}'` means that the leaders elected in `us-west-1` will be evicted as much as possible during disaster recovery.|
+| Dictionary format | If you need to specify different numbers of replicas for different constraints, you can use the dictionary format. For example: <br/><ul><li>`FOLLOWER_CONSTRAINTS="{+region=us-east-1: 1,+region=us-east-2: 1,+region=us-west-1: 1}";` means placing one Follower in `us-east-1`, one Follower in `us-east-2`, and one Follower in `us-west-1`.</li><li>`FOLLOWER_CONSTRAINTS='{"+region=us-east-1,+type=scale-node": 1,"+region=us-west-1": 1}';` means placing one Follower on a node that is located in the `us-east-1` region and has the `type` label as `scale-node`, and one Follower in `us-west-1`.</li></ul>The dictionary format supports each key starting with `+` or `-` and allows you to configure the special `#reject-leader` attribute. For example, `FOLLOWER_CONSTRAINTS='{"+region=us-east-1":1, "+region=us-east-2": 2, "+region=us-west-1,#reject-leader": 1}'` means that the Leaders elected in `us-west-1` will be evicted as much as possible during disaster recovery.|
 
 > **Note:**
 >
@@ -237,14 +236,14 @@ CREATE PLACEMENT POLICY five_replicas FOLLOWERS=4;
 ALTER RANGE global PLACEMENT POLICY five_replicas;
 ```
 
-Note that because TiDB defaults the number of leaders to `1`, `five replicas` means `4` followers and `1` leader.
+Note that because TiDB defaults the number of Leaders to `1`, `five replicas` means `4` Followers and `1` Leader.
 
 ### Specify a default placement policy for a database
 
 You can specify a default placement policy for a database. This works similarly to setting a default character set or collation for a database. If no other placement policy is specified for a table or partition in the database, the placement policy for the database will apply to the table and partition. For example:
 
 ```sql
-CREATE PLACEMENT POLICY p1 PRIMARY_REGION="us-east-1" REGIONS="us-east-1,us-east-2";  -- Creates a placement. policy
+CREATE PLACEMENT POLICY p1 PRIMARY_REGION="us-east-1" REGIONS="us-east-1,us-east-2";  -- Creates a placement policy
 
 CREATE PLACEMENT POLICY p2 FOLLOWERS=4;
 
@@ -252,7 +251,7 @@ CREATE PLACEMENT POLICY p3 FOLLOWERS=2;
 
 CREATE TABLE t1 (a INT);  -- Creates a table t1 without specifying any placement policy.
 
-ALTER DATABASE test PLACEMENT POLICY=p2;  -- Changes the default placement policy of the database, which does not apply to the existing table t1.
+ALTER DATABASE test PLACEMENT POLICY=p2;  -- Changes the default placement policy of the database to p2, which does not apply to the existing table t1.
 
 CREATE TABLE t2 (a INT);  -- Creates a table t2. The default placement policy p2 applies to t2.
 
@@ -265,7 +264,7 @@ CREATE TABLE t4 (a INT);  -- Creates a table t4. The default placement policy p3
 ALTER PLACEMENT POLICY p3 FOLLOWERS=3; -- `FOLLOWERS=3` applies to the table attached with policy p3 (that is, table t4).
 ```
 
-Note that the policy inheritance from a table to its partitions differs from the policy inheritance in the preceding example. When you change the default policy of a table, the new policy also applies to partitions in that table. However, a table inherits the policy from its database only when it is created without any policy specified. Once a table inherits the policy from its database, modifying the default policy of the database does not apply to that table.
+Note that the policy inheritance from a table to its partitions differs from the policy inheritance in the preceding example. When you change the default policy of a table, the new policy also applies to partitions in that table. However, a table inherits the policy from the database only when it is created without any policy specified. Once a table inherits the policy from the database, modifying the default policy of the database does not apply to that table.
 
 ### Specify a placement policy for a table
 
@@ -274,7 +273,7 @@ You can specify a default placement policy for a table. For example:
 ```sql
 CREATE PLACEMENT POLICY five_replicas FOLLOWERS=4;
 
-CREATE TABLE t (a INT) PLACEMENT POLICY=five_replicas;  -- Creates a table t and attaches it with the placement policy 'five_replicas'.
+CREATE TABLE t (a INT) PLACEMENT POLICY=five_replicas;  -- Creates a table t and attaches the 'five_replicas' placement policy to it.
 
 ALTER TABLE t PLACEMENT POLICY=default; -- Removes the placement policy 'five_replicas' from the table t and resets the placement policy to the default one.
 ```
@@ -299,14 +298,14 @@ PARTITION BY RANGE( YEAR(purchased) ) (
 );
 ```
 
-If no placement policy is specified for a partition, the partition attempts to inherit the policy (if any) from the table. In the preceding example:
+If no placement policy is specified for a partition in a table, the partition attempts to inherit the policy (if any) from the table. In the preceding example:
 
-- The `p0` partition will use the `storageforhisotrydata` policy.
-- The `p4` partition will use the `storagefornewdata` policy.
-- The `p1`, `p2`, and `p3` partitions will use the `companystandardpolicy` placement policy inherited from the table `t1`.
-- If no placement policy is specified for `t1`, the `p1`, `p2`, and `p3` partitions will inherit the database default policy or the global default policy.
+- The `p0` partition will apply the `storageforhisotrydata` policy.
+- The `p4` partition will apply the `storagefornewdata` policy.
+- The `p1`, `p2`, and `p3` partitions will apply the `companystandardpolicy` placement policy inherited from the table `t1`.
+- If no placement policy is specified for the table `t1`, the `p1`, `p2`, and `p3` partitions will inherit the database default policy or the global default policy.
 
-After placement policies are attached to these partitions, you can change the placement policy for a specific partition as follows:
+After placement policies are attached to these partitions, you can change the placement policy for a specific partition as in the following example:
 
 ```sql
 ALTER TABLE t1 PARTITION p1 PLACEMENT POLICY=storageforhisotrydata;
@@ -314,9 +313,7 @@ ALTER TABLE t1 PARTITION p1 PLACEMENT POLICY=storageforhisotrydata;
 
 ## High availability examples
 
-Assume that there is a cluster with the following topology, where TiKV nodes are distributed across 3 regions, with each region containing 3 available zones
-
-
+Assume that there is a cluster with the following topology, where TiKV nodes are distributed across 3 regions, with each region containing 3 available zones:
 
 ```sql
 SELECT store_id,address,label from INFORMATION_SCHEMA.TIKV_STORE_STATUS;
@@ -350,7 +347,7 @@ CREATE PLACEMENT POLICY singleaz CONSTRAINTS="[+region=us-east-1]" SURVIVAL_PREF
 After creating the placement policies, you can attach them to the corresponding tables as needed:
 
 - For tables attached with the `multiaz` placement policy, data will be placed in 3 replicas in different regions, prioritizing to meet the cross-region survival goal of data isolation, followed by the cross-zone survival goal, and finally the cross-host survival goal.
-- For tables attached with the `singleaz` placement policy, data will be placed in 3 replicas in the `us-east-1` region first, and then meet the cross-zone survival goal.
+- For tables attached with the `singleaz` placement policy, data will be placed in 3 replicas in the `us-east-1` region first, and then meet the cross-zone survival goal of data isolation.
 
 <CustomContent platform="tidb">
 
@@ -370,7 +367,7 @@ After creating the placement policies, you can attach them to the corresponding 
 
 ### Specify a cluster with 5 replicas distributed 2:2:1 across multiple data centers
 
-If you need a specific data distribution, such as a 5-replica distribution in a 2:2:1 pattern, you can specify different numbers of replicas for different constraints by configuring these `CONSTRAINTS` in the [dictionary format](#constraints-format):
+If you need a specific data distribution, such as a 5-replica distribution in the proportion of 2:2:1, you can specify different numbers of replicas for different constraints by configuring these `CONSTRAINTS` in the [dictionary format](#constraints-format):
 
 ```sql
 CREATE PLACEMENT POLICY `deploy221` CONSTRAINTS='{"+region=us-east-1":2, "+region=us-east-2": 2, "+region=us-west-1": 1}';
@@ -402,7 +399,7 @@ CREATE PLACEMENT POLICY deploy221_primary_east1 LEADER_CONSTRAINTS="[+region=us-
 
 After this placement policy is created and attached to the desired data, the Raft Leader replicas of the data will be placed in the `us-east-1` region specified by the `LEADER_CONSTRAINTS` option, while other replicas of the data will be placed in regions specified by the `FOLLOWER_CONSTRAINTS` option. Note that if the cluster fails, such as a node outage in the `us-east-1` region, a new Leader will still be elected from other regions, even if these regions are specified in `FOLLOWER_CONSTRAINTS`. In other words, ensuring service availability takes the highest priority.
 
-In the event of a failure in the `us-east-1` region, if you do not want to place the new Leader in `us-west-1`, you can configure a special `reject-leader` attribute to evict the newly elected Leader in that region:
+In the event of a failure in the `us-east-1` region, if you do not want to place new Leaders in `us-west-1`, you can configure a special `reject-leader` attribute to evict the newly elected Leaders in that region:
 
 ```sql
 CREATE PLACEMENT POLICY deploy221_primary_east1 LEADER_CONSTRAINTS="[+region=us-east-1]" FOLLOWER_CONSTRAINTS='{"+region=us-east-1": 1, "+region=us-east-2": 2, "+region=us-west-1,#reject-leader": 1}';
@@ -410,17 +407,17 @@ CREATE PLACEMENT POLICY deploy221_primary_east1 LEADER_CONSTRAINTS="[+region=us-
 
 #### Use `PRIMARY_REGION`
 
-If the `region` label is configured in your cluster topology, you can also use the `PRIMARY_REGION` and `REGIONS` options to specify a placement policy for followers:
+If the `region` label is configured in your cluster topology, you can also use the `PRIMARY_REGION` and `REGIONS` options to specify a placement policy for Followers:
 
 ```sql
 CREATE PLACEMENT POLICY eastandwest PRIMARY_REGION="us-east-1" REGIONS="us-east-1,us-east-2,us-west-1" SCHEDULE="MAJORITY_IN_PRIMARY" FOLLOWERS=4;
 CREATE TABLE t1 (a INT) PLACEMENT POLICY=eastandwest;
 ```
 
-- `PRIMARY_REGION` specifies the distribution region of the leaders. You can only specify one region in this option.
-- The `SCHEDULE` option specifies how TiDB balances the distribution of followers.
-    - The default `EVEN` scheduling rule ensures a balanced distribution of followers across all regions.
-    - If you want to ensure a sufficient number of follower replicas are placed in the `PRIMARY_REGION` (that is, `us-east-1`), you can use the `MAJORITY_IN_PRIMARY` scheduling rule. This scheduling rule provides lower latency transactions at the expense of some availability. If the primary region fails, `MAJORITY_IN_PRIMARY` does not provide automatic failover.
+- `PRIMARY_REGION` specifies the distribution region of the Leaders. You can only specify one region in this option.
+- The `SCHEDULE` option specifies how TiDB balances the distribution of Followers.
+    - The default `EVEN` scheduling rule ensures a balanced distribution of Followers across all regions.
+    - If you want to ensure a sufficient number of Follower replicas are placed in the `PRIMARY_REGION` (that is, `us-east-1`), you can use the `MAJORITY_IN_PRIMARY` scheduling rule. This scheduling rule provides lower latency transactions at the expense of some availability. If the primary region fails, `MAJORITY_IN_PRIMARY` does not provide automatic failover.
 
 ## Data isolation examples
 
