@@ -87,7 +87,7 @@ This section describes how to create, attach, view, modify, and delete placement
     - The `PRIMARY_REGION="us-east-1"` option means placing Raft Leaders on nodes with the `region` label as `us-east-1`.
     - The `REGIONS="us-east-1,us-west-1"` option means placing Raft Followers on nodes with the `region` label as `us-east-1` or `us-west-1`.
 
-    For more configurable placement options and their meanings, see the [Placement options](#placement-options-reference).
+    For more configurable placement options and their meanings, see the [Placement options](#placement-option-reference).
 
 2. To attach a placement policy to a table or a partitioned table, use the `CREATE TABLE` or `ALTER TABLE` statement to specify the placement policy for that table or partitioned table:
 
