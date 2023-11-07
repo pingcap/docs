@@ -42,7 +42,9 @@ With the Placement Rules in SQL feature, you can [create placement policies](#cr
 
 Placement policies rely on the configuration of labels on TiKV nodes. For example, the `PRIMARY_REGION` placement option relies on the `region` label in TiKV.
 
-When you create a placement policy, TiDB does not check whether the labels specified in the policy exist. Instead, TiDB performs the check when you attach the policy. Therefore, before attaching a placement policy, make sure that each TiKV node is configured with correct labels. The configuration method is as follows:
+<CustomContent platform="tidb">
+
+When you create a placement policy, TiDB does not check whether the labels specified in the policy exist. Instead, TiDB performs the check when you attach the policy. Therefore, before attaching a placement policy, make sure that each TiKV node is configured with correct labels. The configuration method for a TiDB Self-Hosted cluster is as follows:
 
 ```
 tikv-server --labels region=<region>,zone=<zone>,host=<host>
@@ -55,6 +57,18 @@ For detailed configuration methods, see the following examples:
 | Manual deployment | [Schedule replicas by topology labels](/schedule-replicas-by-topology-labels.md) |
 | Deployment with TiUP | [Geo-distributed deployment topology](/geo-distributed-deployment-topology.md) |
 | Deployment with TiDB Operator | [Configure a TiDB cluster in Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/stable/configure-a-tidb-cluster#high-data-high-availability) |
+
+> **Note:**
+>
+> For TiDB Dedicated clusters, you can skip these label configuration steps because the lables on TiKV nodes in TiDB Dedicated clusters are configured automatically.
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+For TiDB Dedicated clusters, lables on TiKV nodes are configured automatically.
+
+</CustomContent>
 
 To view all available labels in the current TiKV cluster, you can use the [`SHOW PLACEMENT LABELS`](/sql-statements/sql-statement-show-placement-labels.md) statement:
 
