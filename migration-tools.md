@@ -29,7 +29,7 @@ This document introduces the user scenarios, supported upstreams and downstreams
 - **User scenario**: Full data import into TiDB
 - **Upstream (the imported source file)**:
     - Files exported from Dumpling
-    - Parquet files exported by Amazon Aurora or Apache Hive
+    - Parquet files exported by Amazon Aurora, Apache Hive, and Snowflake
     - CSV files
     - Data from local disks or Amazon S3
 - **Downstream**: TiDB
