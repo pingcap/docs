@@ -439,10 +439,12 @@ When you run the `ANALYZE` statement, you can adjust the concurrency using the f
 Currently, when you run the `ANALYZE` statement, the task is divided into multiple small tasks. Each task only works on one column or index. You can use the `tidb_build_stats_concurrency` parameter to control the number of simultaneous tasks. The default value is `2`.
 
 #### `tidb_build_sampling_stats_concurrency`
-When performing the task of analyzing ordinary columns, `tidb_build_sampling_stats_concurrency`` can be used to control the concurrency of executing sampling tasks, and its default value is 2.
 
-### `tidb_analyze_partition_concurrency`
-When performing analyze, `tidb_analyze_partition_concurrency`` can be used to control the concurrency of task writing, and its default value is 2.
+When analyzing ordinary columns, you can use [`tidb_build_sampling_stats_concurrency`](/system-variables.md#tidb_build_sampling_stats_concurrency-new-in-v750) to control the concurrency of executing sampling tasks. The default value is `2`.
+
+#### `tidb_analyze_partition_concurrency`
+
+When running the `ANALYZE` statement, you can use [`tidb_analyze_partition_concurrency`](/system-variables.md#tidb_analyze_partition_concurrency) to control the concurrency of task writing. The default value is `2`.
 
 #### `tidb_distsql_scan_concurrency`
 
@@ -454,10 +456,7 @@ When you analyze index columns, you can use the `tidb_index_serial_scan_concurre
 
 > **Note:**
 >
-> `tidb_build_stats_concurrency`, `tidb_build_sampling_stats_concurrency` and `tidb_analyze_partition_concurrency` are actually in a upstream-downstream relationship.
-> When changing these parameters, you need to consider the values of these three parameters at the same time. It is suggested to adjust
-> `tidb_analyze_partition_concurrency`, `tidb_build_sampling_stats_concurrency`, `tidb_build_stats_concurrency` one by one, and observe the impact on the system. The
-> larger the values of these three parameters, the greater the resource overhead on the system.
+> `tidb_build_stats_concurrency`, `tidb_build_sampling_stats_concurrency` and `tidb_analyze_partition_concurrency` are actually in a upstream-downstream relationship. When changing these parameters, you need to consider the values of these three parameters at the same time. It is suggested to adjust `tidb_analyze_partition_concurrency`, `tidb_build_sampling_stats_concurrency`, `tidb_build_stats_concurrency` one by one, and observe the impact on the system. The larger the values of these three parameters, the greater the resource overhead on the system.
 
 ### Persist ANALYZE configurations
 
