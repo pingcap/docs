@@ -156,8 +156,9 @@ In v7.4.0, TiDB introduces the [Global Sort](/tidb-global-sort.md) feature. Inst
 
 | Configuration file | Configuration parameter | Change type | Description |
 | -------- | -------- | -------- | -------- |
-|    BR      |   [`--ignore-stats`](/br/br-snapshot-manual.md#back-up-statistics)       |   Newly added       |   Controls whether to back up and restore database statistics. When you set this parameter to `false`, the `br` command-line tool supports backing up and restoring statistics of columns, indexes, and tables.       |
-|          |          |          |          |
+| BR | [`--ignore-stats`](/br/br-snapshot-manual.md#back-up-statistics) | Newly added | Controls whether to back up and restore database statistics. When you set this parameter to `false`, the `br` command-line tool supports backing up and restoring statistics of columns, indexes, and tables. |
+| TiCDC | [`sink.column-selectors`](/ticdc/ticdc-changefeed-config.md) | Newly added | Controls the specified columns of data change events that TiCDC sends to Kafka when dispatching incremental data. |
+| TiCDC | [`sink.dispatchers.partition`](/ticdc/ticdc-changefeed-config.md) | Modified | Controls how TiCDC dispatches incremental data to Kafka partitions. v7.5.0 introduces a new value option `columns`, which uses the explicitly specified column values to calculate the partition number. |
 |          |          |          |          |
 |          |          |          |          |
 
@@ -165,22 +166,22 @@ In v7.4.0, TiDB introduces the [Global Sort](/tidb-global-sort.md) feature. Inst
 
 ## Offline package changes
 
-从 v7.5.0 开始，`TiDB-community-toolkit` 二进制软件包中移除了以下内容：
+Starting from v7.5.0, the following contents are removed from the `TiDB-community-toolkit` binary package:<!--**tw@Oreoxmt** 1593+1594 -->
 
 - `tikv-importer-{version}-linux-{arch}.tar.gz`
 - `mydumper`
 
 ## Deprecated features
 
-* [Mydumper](https://docs.pingcap.com/zh/tidb/v4.0/mydumper-overview) 在 v7.5.0 中废弃，其绝大部分功能已经被 [Dumpling](/dumpling-overview.md) 取代，强烈建议切换到 Dumpling。<!--**tw@Oreoxmt** 1593-->
+* [Mydumper](https://docs.pingcap.com/tidb/v4.0/mydumper-overview) is deprecated in v7.5.0 and most of its features have been replaced by [Dumpling](/dumpling-overview.md). It is strongly recommended that you use Dumpling instead of mydumper.<!--**tw@Oreoxmt** 1593-->
 
-* TiKV-importer 组件在 v7.5.0 中废弃，建议使用 [TiDB Lightning 物理导入模式](/tidb-lightning/tidb-lightning-physical-import-mode.md)作为替代方案。<!--**tw@Oreoxmt** 1594-->
+* TiKV-importer is deprecated in v7.5.0. It is strongly recommended that you use the [Physical Import Mode of TiDB Lightning](/tidb-lightning/tidb-lightning-physical-import-mode.md) as an alternative.<!--**tw@Oreoxmt** 1594-->
 
-* [TiDB Binlog](/tidb-binlog/tidb-binlog-overview.md) 在 v7.5.0 废弃数据同步功能，强烈建议使用 [TiCDC](/ticdc/ticdc-overview.md) 来实现高效稳定的数据同步。尽管 TiDB Binlog 在 v7.5.0 仍支持 Point-in-Time Recovery (PITR) 场景，但是该组件在未来 LTS 版本中将被完全废弃，推荐使用 [PITR](/br/br-pitr-guide.md) 替代。<!--**tw@Oreoxmt** 1575-->
+* Starting from TiDB v7.5.0, technical support for the data replication feature of [TiDB Binlog](/tidb-binlog/tidb-binlog-overview.md) is no longer provided. It is strongly recommended to use [TiCDC](/ticdc/ticdc-overview.md) as an alternative solution for data replication. Although TiDB Binlog v7.5.0 still supports the Point-in-Time Recovery (PITR) scenario, this component will be completely deprecated in future versions. It is recommended to use [PITR](/br/br-pitr-guide.md) as an alternative solution for data recovery.<!--**tw@Oreoxmt** 1575-->
 
-* 统计信息的[快速分析](https://docs.pingcap.com/zh/tidb/v7.4/system-variables#tidb_enable_fast_analyze)（实验特性）在 v7.5.0 中废弃。<!--**tw@Oreoxmt** -->
+* The [`Fast Analyze`](https://docs.pingcap.com/tidb/v7.4/system-variables#tidb_enable_fast_analyze) feature (experimental) for statistics is deprecated in v7.5.0.<!--**tw@Oreoxmt** -->
 
-* 统计信息的[增量收集](https://docs.pingcap.com/zh/tidb/v7.4/statistics#增量收集)（实验特性）在 v7.5.0 中废弃。<!--**tw@Oreoxmt** -->
+* The [incremental collection](https://docs.pingcap.com/tidb/v7.4/statistics#incremental-collection) feature (experimental) for statistics is deprecated in v7.5.0.<!--**tw@Oreoxmt** -->
 
 ## Improvements
 
