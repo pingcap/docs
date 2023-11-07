@@ -180,10 +180,10 @@ This section describes how to create, attach, view, modify, and delete placement
 To modify a placement policy, you can use the  [`ALTER PLACEMENT POLICY`](/sql-statements/sql-statement-alter-placement-policy.md) statement. The modification will apply to all objects that are attached with the corresponding policy.
 
 ```sql
-ALTER PLACEMENT POLICY myplacementpolicy FOLLOWERS=5;
+ALTER PLACEMENT POLICY myplacementpolicy FOLLOWERS=4;
 ```
 
-In this statement, the `FOLLOWERS=5` option means configuring 6 replicas for the data, including 5 Followers and 1 Leader. For more configurable placement options and their meanings, see [Placement option reference](#placement-option-reference).
+In this statement, the `FOLLOWERS=4` option means configuring 5 replicas for the data, including 4 Followers and 1 Leader. For more configurable placement options and their meanings, see [Placement option reference](#placement-option-reference).
 
 ### Drop placement policies
 
