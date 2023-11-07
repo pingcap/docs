@@ -32,7 +32,7 @@ With the Placement Rules in SQL feature, you can [create placement policies](#cr
 >
 > The implementation of *Placement Rules in SQL* relies on the *placement rules feature* of PD. For details, refer to [Configure Placement Rules](https://docs.pingcap.com/zh/tidb/stable/configure-placement-rules). In the context of Placement Rules in SQL, *placement rules* might refer to *placement policies* attached to other objects, or to rules that are sent from TiDB to PD.
 
-## Constraints
+## Limitations
 
 - To simplify maintenance, it is recommended to limit the number of placement policies within a cluster to 10 or fewer.
 - It is recommended to limit the total number of tables and partitions attached with placement policies to 10,000 or fewer. Attaching policies to too many tables and partitions can increase computation workloads on PD, thereby affecting service performance.
