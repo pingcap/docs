@@ -436,7 +436,7 @@ When you run the `ANALYZE` statement, you can adjust the concurrency using the f
 
 #### `tidb_build_stats_concurrency`
 
-Currently, when you run the `ANALYZE` statement, the task is divided into multiple small tasks. Each task only works on one column or index. You can use the `tidb_build_stats_concurrency` parameter to control the number of simultaneous tasks. The default value is `2`.
+Currently, when you run the `ANALYZE` statement, the task is divided into multiple small tasks. Each task only works on one column or index. You can use the `tidb_build_stats_concurrency` parameter to control the number of simultaneous tasks. The default value is `2`. The default value is `4` for v7.4.0 and earlier versions.
 
 #### `tidb_build_sampling_stats_concurrency`
 
@@ -444,7 +444,7 @@ When analyzing ordinary columns, you can use [`tidb_build_sampling_stats_concurr
 
 #### `tidb_analyze_partition_concurrency`
 
-When running the `ANALYZE` statement, you can use [`tidb_analyze_partition_concurrency`](/system-variables.md#tidb_analyze_partition_concurrency) to control the concurrency of task writing. The default value is `2`.
+When running the `ANALYZE` statement, you can use [`tidb_analyze_partition_concurrency`](/system-variables.md#tidb_analyze_partition_concurrency) to control the concurrency of task writing. The default value is `2`. The default value is `1` for v7.4.0 and earlier versions.
 
 #### `tidb_distsql_scan_concurrency`
 
