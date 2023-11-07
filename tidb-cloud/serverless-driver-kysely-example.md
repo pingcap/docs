@@ -272,7 +272,7 @@ mysql://[username]:[password]@[host]/[database]
    
    The preceding code accepts a query parameter `query` and returns the result of the query. If the query parameter is not provided, it returns all records in the `person` table.
 
-3. Test your code locally：
+3. Test your code locally:
 
    ```
    export DATABASE_URL=mysql://[username]:[password]@[host]/[database]
