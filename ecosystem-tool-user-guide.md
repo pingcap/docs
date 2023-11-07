@@ -90,7 +90,7 @@ The following are the basics of TiDB Lightning:
 - Data source:
     - The output files of Dumpling
     - Other compatible CSV files
-    - Parquet files exported from Amazon Aurora or Apache Hive
+    - Parquet files exported from Amazon Aurora, Apache Hive, or Snowflake
 - Supported TiDB versions: v2.1 and later versions
 - Kubernetes support: Yes. See [Quickly restore data into a TiDB cluster on Kubernetes using TiDB Lightning](https://docs.pingcap.com/tidb-in-kubernetes/stable/restore-data-using-tidb-lightning) for details.
 
