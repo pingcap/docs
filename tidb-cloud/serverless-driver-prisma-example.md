@@ -72,6 +72,7 @@ To complete this tutorial, you need the following:
     ```
 
    > **Note:**
+   >
    > `@tidbcloud/prisma-adapter` only supports the use of Prisma Client over HTTPS. For [Prisma Migrate](https://www.prisma.io/docs/concepts/components/prisma-migrate) and [Prisma Introspection](https://www.prisma.io/docs/concepts/components/introspection), the traditional TCP connection is still used. If you only need to use Prisma Client, you can simplify `DATABASE_URL` to the `mysql://[username]:[password]@[host]/[database]` format.
 
 3. Install `dotenv` to load the environment variable from the `.env` file:
