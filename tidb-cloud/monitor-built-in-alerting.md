@@ -78,7 +78,8 @@ The following table provides the TiDB Cloud built-in alert conditions and the co
 >
 > Although these alert conditions do not necessarily mean there is a problem, they are often early warning indicators of emerging issues. Thus, taking the recommended action is advised.
 
-**Resource Usage Alerts**
+### Resource usage alerts
+
 | Condition | Recommended Action |
 |:--- |:--- |
 | Total TiDB node memory utilization across cluster exceeded 70% for 10 minutes | Consider increasing the node number or node size for TiDB to reduce the memory usage percentage of the current workload.|
@@ -89,12 +90,13 @@ The following table provides the TiDB Cloud built-in alert conditions and the co
 | Total TiFlash node CPU utilization exceeded 80% for 10 minutes | Consider increasing the node number or node size for TiFlash to reduce the CPU usage percentage of the current workload. |
 | TiKV storage utilization exceeds 80% | Consider increasing the node number or node storage size for TiKV to increase your storage capacity. |
 | TiFlash storage utilization exceeds 80% | Consider increasing the node number or node storage size for TiFlash to increase your storage capacity. |
-| Max memory utilization across TiDB Nodes exceeded 70% for 10 minutes | Consider checking if there is any [Hotspot](https://docs.pingcap.com/tidbcloud/tidb-cloud-sql-tuning-overview#hotspot-issues) in the cluster or increasing the node number or node size for TiDB to reduce the memory usage percentage of the current workload. |
-| Max memory utilization across TiKV nodes exceeded 70% for 10 minutes | Consider checking if there is any [Hotspot](https://docs.pingcap.com/tidbcloud/tidb-cloud-sql-tuning-overview#hotspot-issues) in the cluster or increasing the node number or node size for TiKV to reduce the memory usage percentage of the current workload. |
-| Max CPU utilization across TiDB nodes exceeded 80% for 10 minutes | Consider checking if there is any [Hotspot](https://docs.pingcap.com/tidbcloud/tidb-cloud-sql-tuning-overview#hotspot-issues) in the cluster or increasing the node number or node size for TiDB to reduce the CPU usage percentage of the current workload. |
-| Max CPU utilization across TiKV nodes exceeded 80% for 10 minutes | Consider checking if there is any [Hotspot](https://docs.pingcap.com/tidbcloud/tidb-cloud-sql-tuning-overview#hotspot-issues) in the cluster or increasing the node number or node size for TiKV to reduce the CPU usage percentage of the current workload. |
+| Max memory utilization across TiDB nodes exceeded 70% for 10 minutes | Consider checking if there is any [hotspot](/tidb-cloud/tidb-cloud-sql-tuning-overview.md#hotspot-issues) in the cluster or increasing the node number or node size for TiDB to reduce the memory usage percentage of the current workload. |
+| Max memory utilization across TiKV nodes exceeded 70% for 10 minutes | Consider checking if there is any [hotspot](/tidb-cloud/tidb-cloud-sql-tuning-overview.md#hotspot-issues) in the cluster or increasing the node number or node size for TiKV to reduce the memory usage percentage of the current workload. |
+| Max CPU utilization across TiDB nodes exceeded 80% for 10 minutes | Consider checking if there is any [hotspot](/tidb-cloud/tidb-cloud-sql-tuning-overview.md#hotspot-issues) in the cluster or increasing the node number or node size for TiDB to reduce the CPU usage percentage of the current workload. |
+| Max CPU utilization across TiKV nodes exceeded 80% for 10 minutes | Consider checking if there is any [hotspot](/tidb-cloud/tidb-cloud-sql-tuning-overview.md#hotspot-issues) in the cluster or increasing the node number or node size for TiKV to reduce the CPU usage percentage of the current workload. |
 
-**Data Migration Alerts**
+### Data migration alerts
+
 | Condition | Recommended Action |
 |:--- |:--- |
 | Data migration job met error during data export | Check the error and see [Troubleshoot data migration](/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshooting.md#migration-errors-and-solutions) for help. |
@@ -103,13 +105,14 @@ The following table provides the TiDB Cloud built-in alert conditions and the co
 | Data migration job has been paused for more than 6 hours during incremental migration | Data migration job has been paused for more than 6 hours during data incremental migration. The binlog in the upstream database might be purged (depending on your database binlog purge strategy) and might cause incremental migration to fail. See [Troubleshoot data migration](/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshooting.md#migration-errors-and-solutions) for help. |
 | Replication lag is larger than 10 minutes and still increasing for more than 20 minutes | See [Troubleshoot data migration](/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshooting.md#migration-errors-and-solutions) for help. |
 
-**Changefeed Alerts**
+### Changefeed alerts
+
 | Condition | Recommended Action |
 |:--- |:--- |
-| Changefeed processor checkpoint delay more than 600 seconds | Check if the downstream system and network configuration are normal, and also exclude the possibility of an indexed table.  |
+| Changefeed processor checkpoint delay more than 600 seconds | Check if the downstream system and network configuration are functioning normally, and rule out the possibility of an indexed table.  |
 
 > **Note:**
 >
 > - "cluster ABC" and "project XYZ" in the **Recommended Action** column are example names for reference.
-> - The thresholds of the alerts can be edited on TiDB Cloud Console. 
-> - Some alert rule is defualt disabled. User can enable them as needed. 
+> - You can edit the thresholds of the alerts on the TiDB Cloud console. 
+> - Some alert rules are disabled by default. You can enable them as needed. 
