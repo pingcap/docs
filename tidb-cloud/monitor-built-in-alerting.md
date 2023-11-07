@@ -76,7 +76,9 @@ The following table provides the TiDB Cloud built-in alert conditions and the co
 
 > **Note:**
 >
-> Although these alert conditions do not necessarily mean there is a problem, they are often early warning indicators of emerging issues. Thus, taking the recommended action is advised.
+> - Although these alert conditions do not necessarily mean there is a problem, they are often early warning indicators of emerging issues. Thus, taking the recommended action is advised.
+> - You can edit the thresholds of the alerts on the TiDB Cloud console. 
+> - Some alert rules are disabled by default. You can enable them as needed. 
 
 ### Resource usage alerts
 
@@ -111,8 +113,4 @@ The following table provides the TiDB Cloud built-in alert conditions and the co
 |:--- |:--- |
 | Changefeed processor checkpoint delay more than 600 seconds | Check if the downstream system and network configuration are functioning normally, and rule out the possibility of an indexed table.  |
 
-> **Note:**
->
-> - "cluster ABC" and "project XYZ" in the **Recommended Action** column are example names for reference.
-> - You can edit the thresholds of the alerts on the TiDB Cloud console. 
-> - Some alert rules are disabled by default. You can enable them as needed. 
+
