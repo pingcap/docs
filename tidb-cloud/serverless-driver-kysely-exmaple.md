@@ -73,7 +73,7 @@ To complete this tutorial, you need the following:
 
 ### Step 2. Set the environment
 
-1. On the overview page of your TiDB Cloud Serverless cluster, click **Connect** in the upper-right corner, and then get the connection string for your database from the displayed dialog. The connection string looks like this:
+1. On the overview page of your TiDB Serverless cluster, click **Connect** in the upper-right corner, and then get the connection string for your database from the displayed dialog. The connection string looks like this:
 
     ```
     mysql://[username]:[password]@[host]/[database]
