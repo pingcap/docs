@@ -61,6 +61,10 @@ To enable Global Sort, follow these steps:
     SET GLOBAL tidb_cloud_storage_uri = 's3://my-bucket/test-data?role-arn=arn:aws:iam::888888888888:role/my-role'
     ```
 
+> **Note:**
+>
+> For [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md), you can also specify the cloud storage path using the [`CLOUD_STORAGE_URI`](/sql-statements/sql-statement-import-into.md#withoptions) option. If both [`tidb_cloud_storage_uri`](/system-variables.md#tidb_cloud_storage_uri-introduced-from-v740-version) and `CLOUD_STORAGE_URI` are configured with a valid storage path, the configuration of `CLOUD_STORAGE_URI` takes affect for [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md).
+
 ## Implementation principles
 
 The algorithm of the Global Sort feature is as follows:
