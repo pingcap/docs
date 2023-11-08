@@ -23,7 +23,7 @@ With the Placement Rules in SQL feature, you can [create placement policies](#cr
 
 | Level            | Description                                                                          |
 |------------------|--------------------------------------------------------------------------------------|
-| Cluster          | By default, TiDB configures a policy of 3 replicas for a cluster. You can configure a global placement policy for your cluster. For more information, see [Cluster configuration](#specify-the-number-of-replicas-globally-for-a-cluster). |
+| Cluster          | By default, TiDB configures a policy of 3 replicas for a cluster. You can configure a global placement policy for your cluster. For more information, see [Specify the number of replicas globally for a cluster](#specify-the-number-of-replicas-globally-for-a-cluster). |
 | Database         | You can configure a placement policy for a specific database. For more information, see [Specify a default placement policy for a database](#specify-a-default-placement-policy-for-a-database). |
 | Table            | You can configure a placement policy for a specific table. For more information, see [Specify a placement policy for a table](#specify-a-placement-policy-for-a-table). |
 | Partition        | You can create partitions for different rows in a table and configure placement policies for partitions separately. For more information, see [Specify a placement policy for a partitioned table](#specify-a-placement-policy-for-a-partitioned-table). |
@@ -60,13 +60,13 @@ For detailed configuration methods, see the following examples:
 
 > **Note:**
 >
-> For TiDB Dedicated clusters, you can skip these label configuration steps because the lables on TiKV nodes in TiDB Dedicated clusters are configured automatically.
+> For TiDB Dedicated clusters, you can skip these label configuration steps because the labels on TiKV nodes in TiDB Dedicated clusters are configured automatically.
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-For TiDB Dedicated clusters, lables on TiKV nodes are configured automatically.
+For TiDB Dedicated clusters, labels on TiKV nodes are configured automatically.
 
 </CustomContent>
 
@@ -278,7 +278,7 @@ CREATE TABLE t4 (a INT);  -- Creates a table t4. The default placement policy p3
 ALTER PLACEMENT POLICY p3 FOLLOWERS=3; -- `FOLLOWERS=3` applies to the table attached with policy p3 (that is, table t4).
 ```
 
-Note that the policy inheritance from a table to its partitions differs from the policy inheritance in the preceding example. When you change the default policy of a table, the new policy also applies to partitions in that table. However, a table inherits the policy from the database only when it is created without any policy specified. Once a table inherits the policy from the database, modifying the default policy of the database does not apply to that table.
+Note that the policy inheritance from a table to its partitions differs from the policy inheritance in the preceding example. When you change the default policy of a table, the new policy also applies to partitions in that table. However, a table inherits the policy from the database only if it is created without any policy specified. Once a table inherits the policy from the database, modifying the default policy of the database does not apply to that table.
 
 ### Specify a placement policy for a table
 
