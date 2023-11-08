@@ -112,5 +112,3 @@ The following table provides the TiDB Cloud built-in alert conditions and the co
 | Condition | Recommended Action |
 |:--- |:--- |
 | Changefeed processor checkpoint delay more than 600 seconds | Check if the downstream system and network configuration are functioning normally, and rule out the possibility of an indexed table.  |
-
-
