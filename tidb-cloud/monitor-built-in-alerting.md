@@ -76,7 +76,7 @@ The following table provides the TiDB Cloud built-in alert conditions and the co
 
 > **Note:**
 >
-> - Although these alert conditions do not necessarily mean there is a problem, they are often early warning indicators of emerging issues. Thus, taking the recommended action is advised.
+> - While these alert conditions do not necessarily mean there is a problem, they are often early warning indicators of emerging issues. Therefore, taking the recommended action is advised.
 > - You can edit the thresholds of the alerts on the TiDB Cloud console. 
 > - Some alert rules are disabled by default. You can enable them as needed. 
 
