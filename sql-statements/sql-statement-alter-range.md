@@ -26,7 +26,7 @@ CREATE PLACEMENT POLICY `deploy111` CONSTRAINTS='{"+region=us-east-1":1, "+regio
 CREATE PLACEMENT POLICY `five_replicas` FOLLOWERS=4;
 
 ALTER RANGE global PLACEMENT POLICY = "deploy221";
-ALTER RANGE global PLACEMENT POLICY = "five_replicas";
+ALTER RANGE meta PLACEMENT POLICY = "five_replicas";
 ```
 
 The preceding example creates two placement policies (`deploy221` and `five_replicas`), specifies constraints for different regions, and then applies the `deploy111` placement policy to all data in the cluster range and the `five_replicas` placement policy to the metadata range.
