@@ -150,11 +150,13 @@ In v7.4.0, TiDB introduces the [Global Sort](/tidb-global-sort.md) feature. Inst
 
 ### Data migration
 
-* "IMPORT INTO" SQL 语句成为正式功能（GA） [#46704](https://github.com/pingcap/tidb/issues/46704) @[D3Hunter](https://github.com/D3Hunter)<!--**tw@qiancai** 1579-->
+* Support the `IMPORT INTO` SQL statement (GA) [#46704](https://github.com/pingcap/tidb/issues/46704) @[D3Hunter](https://github.com/D3Hunter)<!--**tw@qiancai** 1579-->
 
-    从 v7.4.0 起，你可以通过在 IMPORT INTO 的 CLOUD_STORAGE_URI 选项中指定编码后数据的云存储地址，开启[全局排序功能](https://github.com/pingcap/docs-cn/blob/master/tidb-global-sort.md)，提升性能和稳定性，该功能在 7.5 版本成为正式功能（GA）。
+   In v7.5.0, the `IMPORT INTO` SQL statement statement becomes generally available (GA). This statement integrates the [Physical Import Mode](/tidb-lightning/tidb-lightning-physical-import-mode.md) capability of TiDB Lightning and allows you to quickly import data in formats such as CSV, SQL, and PARQUET into an empty table in TiDB. This import method eliminates the need for a separate deployment and management of TiDB Lightning, thereby reducing the complexity of data import and greatly improving import efficiency.
 
-    For more information, see [documentation](https://github.com/pingcap/docs-cn/blob/master/sql-statements/sql-statement-import-into.md).
+  In addition, you can add the `CLOUD_STORAGE_URI` option in the `IMPORT INTO` statement to enable the [Global Sort](/tidb-global-sort.md) feature, which helps boost import performance and stability. In the `CLOUD_STORAGE_URI` option, you can specify a cloud storage address for the encoded data.
+
+    For more information, see [documentation](/sql-statements/sql-statement-import-into.md).
 
 * Data Migration (DM) supports blocking incompatible (data-consistency-corrupting) DDL changes [#9692](https://github.com/pingcap/tiflow/issues/9692) @[GMHDBJD](https://github.com/GMHDBJD) <!--**tw@hfxsd** 1523-->
 
