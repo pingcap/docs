@@ -337,7 +337,7 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
 
 ### MySQL compatibility
 
-* Support MySQL-compatible foreign key constraints [#18209](https://github.com/pingcap/tidb/issues/18209) @[crazycs520](https://github.com/crazycs520)
+* Support MySQL-compatible foreign key constraints (experimental) [#18209](https://github.com/pingcap/tidb/issues/18209) @[crazycs520](https://github.com/crazycs520)
 
     For more information, see the [SQL](#sql) section in this document and [documentation](/foreign-key.md).
 
