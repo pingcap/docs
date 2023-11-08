@@ -67,7 +67,7 @@ EXPLAIN SELECT * FROM t1 WHERE id IN (SELECT t1_id FROM t2);
 +--------------------------------+----------+-----------+------------------------------+---------------------------------------------------------------------------------------------------------------------------+
 ```
 
-From the query results above, you can see that TiDB uses the index join operation `| IndexJoin_15` to join and transform the subquery. In the execution plan, the execution process is as follows:
+From the query results above, you can see that TiDB uses the index join operation `IndexJoin_15` to join and transform the subquery. In the execution plan, the execution process is as follows:
 
 1. The index scanning operator `└─IndexFullScan_26` at the TiKV side reads the values of the `t2.t1_id` column.
 2. Some tasks of the `└─StreamAgg_34` operator deduplicate the values of `t1_id` in TiKV.
