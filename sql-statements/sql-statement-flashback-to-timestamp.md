@@ -30,6 +30,7 @@ From v7.5.0, you can also use TSO to specify the point of time.
 
 ```sql
 FLASHBACK CLUSTER TO TIMESTAMP '2022-09-21 16:02:50';
+FLASHBACK CLUSTER TO TIMESTAMP '445494955052105728'
 ```
 
 ### Synopsis
