@@ -37,7 +37,7 @@ The `IMPORT INTO` statement is used to import data in formats such as `CSV`, `SQ
 - The TiDB [temporary directory](/tidb-configuration-file.md#temp-dir-new-in-v630) is expected to have at least 90 GiB of available space. It is recommended to allocate storage space that is equal to or greater than the volume of data to be imported.
 - One import job supports importing data into one target table only. To import data into multiple target tables, after the import for a target table is completed, you need to create a new job for the next target table.
 - `IMPORT INTO` is not supported during TiDB cluster upgrades.
-- When the [Global Sort](/tidb-global-sort.md) feature is in use, the data size of a single row after encoding cannot exceed 32 MiB, and the data size of a single index key after encoding cannot exceed 16 MiB.
+- When the [Global Sort](/tidb-global-sort.md) feature is used, the data size of a single row after encoding cannot exceed 32 MiB, and the data size of a single index key after encoding cannot exceed 16 MiB.
 
 ## Prerequisites for import
 
