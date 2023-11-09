@@ -68,12 +68,12 @@ mysql --comments --connect-timeout 150 -u '<your_username>' -h <your_cluster_hos
     **product_data.csv:**
 
 {{< copyable "csv" >}}
-```csv
-product_id,product_name,price
-4,Laptop,999.99
-5,Smartphone,499.99
-6,Tablet,299.99
-```
+    ```csv
+    product_id,product_name,price
+    4,Laptop,999.99
+    5,Smartphone,499.99
+    6,Tablet,299.99
+    ```
 
 3. Use the following command to import data from the CSV file:
 
