@@ -50,7 +50,7 @@ Compared with the previous LTS 7.1.0, 7.5.0 not only includes new features, impr
   <tr>
     <td rowspan="3">DB Operations and Observability</td>
     <td>TiDB Lightning's physical import mode integrated into TiDB with <a href="https://docs.pingcap.com/tidb/v7.5/sql-statement-import-into">IMPORT INTO</a> {/* tw@qiancai */}</td>
-    <td>Prior to v7.2, file system level (backdoor) importing was done with <a href="https://docs.pingcap.com/tidb/v7.5/tidb-lightning-overview">TiDB Lightning</a>. The same functionality is now incorporated into TiDB server nodes and is operated by the SQL interface using the IMPORT INTO command. This feature also uses the new distributed execution framework and global sort feature, which speeds it up and allows for more stability during very large imports (i.e., 100TB tables).</td>
+    <td>Prior to v7.2, file system level (backdoor) importing was done with <a href="https://docs.pingcap.com/tidb/v7.5/tidb-lightning-overview">TiDB Lightning</a>. The same functionality is now incorporated into TiDB server nodes and is operated by the SQL interface using the IMPORT INTO command. This feature also uses the new distributed execution framework and global sort feature, which speeds it up and allows for more stability during very large imports.</td>
   </tr>
   <tr>
     <td>Specify<a href="https://docs.pingcap.com/tidb/v7.5/system-variables#tidb_service_scope-new-in-v740" target="_blank"> the respective TiDB nodes</a> to execute the <code>IMPORT INTO</code> and <code>ADD INDEX</code> SQL statements (experimental) {/* tw@hfxsd */}</td>
