@@ -36,7 +36,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you have se
     > **Tip:**
     >
     > If you have created a password before, you can either use the original password or click **Reset password** to generate a new one.
-    
+
 </div>
 <div label="TiDB Dedicated">
 
@@ -47,6 +47,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you have se
 3. Click **Allow Access from Anywhere**.
 
     For more details about how to obtain the connection string, refer to [TiDB Dedicated standard connection](https://docs.pingcap.com/tidbcloud/connect-via-standard-connection).
+    
 </div>
 </SimpleTab>
 
