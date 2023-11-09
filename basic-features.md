@@ -60,7 +60,7 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 | [Clustered index on integer `PRIMARY KEY`](/clustered-indexes.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | [Clustered index on composite or non-integer key](/clustered-indexes.md) | Y | Y | Y | Y | Y | Y | Y | Y | N |
 | [Multi-valued indexes](/sql-statements/sql-statement-create-index.md#multi-valued-indexes) | Y | N | N | N | N | N | N | N | N |
-| [Foreign key](/constraints.md#foreign-key) | Y | N | N | N | N | N | N | N | N |
+| [Foreign key](/constraints.md#foreign-key) | E | N | N | N | N | N | N | N | N |
 | [TiFlash late materialization](/tiflash/tiflash-late-materialization.md) | Y | N | N | N | N | N | N | N | N |
 
 ## SQL statements
