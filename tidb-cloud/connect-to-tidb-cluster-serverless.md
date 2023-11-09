@@ -29,7 +29,7 @@ After your TiDB Serverless cluster is created on TiDB Cloud, you can connect to 
 
 In the preceding connection methods, you can choose your desired one based on your needs:
 
-| Connection method  | Transport Protocol | User Interface | Scenario                                                               |
+| Connection method  | Transport protocol | User interface | Scenario                                                               |
 |--------------------|--------------------|------------------------------------------------------------------------|
 | Direct connections | TCP                | SQL            | Long-running environment, such as Java, Node.js, and Python.             |
 | Data Service       | HTTP               | RESTful API    | All browser and application interactions.                              |
