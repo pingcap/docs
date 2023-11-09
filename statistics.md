@@ -89,12 +89,6 @@ You can run the `ANALYZE` statement to collect statistics.
 > **Note:**
 >
 > The execution time of `ANALYZE TABLE` in TiDB is longer than that in MySQL or InnoDB. In InnoDB, only a small number of pages are sampled, while in TiDB a comprehensive set of statistics is completely rebuilt. Scripts that were written for MySQL may naively expect `ANALYZE TABLE` will be a short-lived operation.
->
-> For quicker analysis, you can set `tidb_enable_fast_analyze` to `1` to enable the Quick Analysis feature. The default value for this parameter is `0`.
->
-> After Quick Analysis is enabled, TiDB randomly samples approximately 10,000 rows of data to build statistics. Therefore, in the case of uneven data distribution or a relatively small amount of data, the accuracy of statistical information is relatively poor. It might lead to poor execution plans, such as choosing the wrong index. If the execution time of the normal `ANALYZE` statement is acceptable, it is recommended to disable the Quick Analysis feature.
->
-> `tidb_enable_fast_analyze` is an experimental feature, which currently **does not match exactly** with the statistical information of `tidb_analyze_version=2`. Therefore, you need to set the value of `tidb_analyze_version` to `1` when `tidb_enable_fast_analyze` is enabled.
 
 #### Full collection
 
@@ -456,7 +450,7 @@ When you analyze index columns, you can use the `tidb_index_serial_scan_concurre
 
 > **Note:**
 >
-> `tidb_build_stats_concurrency`, `tidb_build_sampling_stats_concurrency` and `tidb_analyze_partition_concurrency` are actually in a upstream-downstream relationship. When changing these parameters, you need to consider the values of these three parameters at the same time. It is suggested to adjust `tidb_analyze_partition_concurrency`, `tidb_build_sampling_stats_concurrency`, `tidb_build_stats_concurrency` one by one, and observe the impact on the system. The larger the values of these three parameters, the greater the resource overhead on the system.
+> `tidb_build_stats_concurrency`, `tidb_build_sampling_stats_concurrency` and `tidb_analyze_partition_concurrency` are actually in a upstream-downstream relationship. The actual total concurrency is: `tidb_build_stats_concurrency` * (`tidb_build_sampling_stats_concurrency` + `tidb_analyze_partition_concurrency`). When changing these parameters, you need to consider the values of these three parameters at the same time. It is suggested to adjust `tidb_analyze_partition_concurrency`, `tidb_build_sampling_stats_concurrency`, `tidb_build_stats_concurrency` one by one, and observe the impact on the system. The larger the values of these three parameters, the greater the resource overhead on the system.
 
 ### Persist ANALYZE configurations
 
