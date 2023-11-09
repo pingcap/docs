@@ -52,7 +52,6 @@ INSERT INTO products (product_id, product_name, price) VALUES
 
 2. Use the following command to import data from the SQL file:
 
-{{< copyable "bash" >}}
 ```bash
 mysql --comments --connect-timeout 150 -u '<your_username>' -h <your_cluster_host> -P 4000 -D test --ssl-mode=VERIFY_IDENTITY --ssl-ca=<your_ca_path> -p <your_password> < product_data.sql
 ```
