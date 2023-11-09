@@ -37,8 +37,8 @@ In the [TiDB Cloud console](https://tidbcloud.com/), you can get examples of dif
 
     > **Note:**
     >
-    > After downloading your CA Cert, you can store it in the default storage path of your operating system, or specify another storage path. You need to replace the CA Cert path in the code example with your own CA Cert path in the subsequent steps.  
-   > TiDB Dedicated does not force clients to use TLS connections, and user-defined configuration of the `require_secure_transport` variable is not supported on [TiDB Dedicated](https://docs.pingcap.com/tidbcloud/system-variables#require_secure_transport-new-in-v610) currently.
+    > - After downloading your CA Cert, you can store it in the default storage path of your operating system, or specify another storage path. You need to replace the CA Cert path in the code example with your own CA Cert path in the subsequent steps.  
+   > - TiDB Dedicated does not force clients to use TLS connections, and user-defined configuration of the [`require_secure_transport`](/system-variables.md#require_secure_transport-new-in-v610) variable is currently not supported on [TiDB Dedicated](https://docs.pingcap.com/tidbcloud/system-variables#require_secure_transport-new-in-v610).
 
 6. Under **Step 3: Connect with an SQL client** in the dialog, click the tab of your preferred connection method, and then refer to the connection string and sample code on the tab to connect to your cluster.
 
@@ -299,4 +299,4 @@ For security reasons, TiDB Dedicated only supports TLS 1.2 and TLS 1.3, and does
 
 No.
 
-TiDB Dedicated only supports one-way TLS authentication, and does not support two-way TLS authentication currently. Please do not make custom configurations of `ssl_cert` and `ssl_key` parameters on TiDB Dedicated. If you need two-way TLS authentication, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
+TiDB Dedicated only supports one-way TLS authentication, and does not support two-way TLS authentication currently. If you need two-way TLS authentication, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
