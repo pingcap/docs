@@ -77,7 +77,6 @@ mysql --comments --connect-timeout 150 -u '<your_username>' -h <your_cluster_hos
 
 3. Use the following command to import data from the CSV file:
 
-    {{< copyable "bash" >}}
     ```bash
     mysql --comments --connect-timeout 150 -u '<your_username>' -h <your_host> -P 4000 -D test --ssl-mode=VERIFY_IDENTITY --ssl-ca=<your_ca_path> -p<your_password> -e "LOAD DATA LOCAL INFILE '<your_csv_path>' INTO TABLE products 
     FIELDS TERMINATED BY ','
