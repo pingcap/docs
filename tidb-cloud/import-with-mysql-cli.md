@@ -30,7 +30,6 @@ You need to have MySQL Command Line Client installed on your local machine. You 
 
 Before importing data, you need to prepare the table structure and insert real sample data into it. Here's an example using a hypothetical "products" table:
 
-{{< copyable "sql" >}}
 ```sql
 -- Create a table in your TiDB database
 CREATE TABLE products (
