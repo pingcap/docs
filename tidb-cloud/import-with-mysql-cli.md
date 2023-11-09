@@ -67,7 +67,6 @@ mysql --comments --connect-timeout 150 -u '<your_username>' -h <your_cluster_hos
 
     **product_data.csv:**
 
-{{< copyable "csv" >}}
     ```csv
     product_id,product_name,price
     4,Laptop,999.99
