@@ -220,6 +220,8 @@ Starting from v7.5.0, the following contents are removed from the `TiDB-communit
 
 - `tikv-importer-{version}-linux-{arch}.tar.gz`
 - `mydumper`
+- `spark-{version}-any-any.tar.gz`
+- `tispark-{version}-any-any.tar.gz`
 
 ## Deprecated features
 
