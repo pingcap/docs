@@ -28,16 +28,17 @@ In the [TiDB Cloud console](https://tidbcloud.com/), you can get examples of dif
 
 3. On the **Standard Connection** tab of this dialog, follow the three steps to set up the TLS connection.
    - Step 1：Create traffic filter
-   - Step 2：Download TiDB cluster CA
+   - Step 2：Download CA Cert
    - Step 3：Connect with an SQL client
 
 4. Under **Step 1: Create traffic filter** in the dialog, configure the IP addresses that are allowed to access your cluster. For more information, see [Configure an IP access list in standard connection](/tidb-cloud/configure-ip-access-list.md#configure-an-ip-access-list-in-standard-connection).
 
-5. Under **Step 2: Download TiDB cluster CA**, click **Download TiDB cluster CA** to download it locally for client TLS configuration. The TiDB cluster CA ensures that the TLS connection is secure and reliable.
+5. Under **Step 2: Download CA Cert**, click **Download CA Cert** to download it locally for client TLS configuration. The CA Cert ensures that the TLS connection is secure and reliable.
 
     > **Note:**
     >
-    > After downloading your TiDB Dedicated cluster CA, you can store it in the default storage path of your operating system, or specify another storage path. You need to replace the CA path in the code example with your own cluster CA path in the subsequent steps.
+    > After downloading your CA Cert, you can store it in the default storage path of your operating system, or specify another storage path. You need to replace the CA Cert path in the code example with your own CA Cert path in the subsequent steps.  
+   > TiDB Dedicated does not force clients to use TLS connections, and user-defined configuration of the `require_secure_transport` variable is not supported on [TiDB Dedicated](https://docs.pingcap.com/tidbcloud/system-variables#require_secure_transport-new-in-v610) currently.
 
 6. Under **Step 3: Connect with an SQL client** in the dialog, click the tab of your preferred connection method, and then refer to the connection string and sample code on the tab to connect to your cluster.
 
@@ -298,4 +299,4 @@ For security reasons, TiDB Dedicated only supports TLS 1.2 and TLS 1.3, and does
 
 No.
 
-TiDB Dedicated only supports one-way TLS authentication, and does not support two-way TLS authentication currently. If you need two-way TLS authentication, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
+TiDB Dedicated only supports one-way TLS authentication, and does not support two-way TLS authentication currently. Please do not make custom configurations of `ssl_cert` and `ssl_key` parameters on TiDB Dedicated. If you need two-way TLS authentication, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
