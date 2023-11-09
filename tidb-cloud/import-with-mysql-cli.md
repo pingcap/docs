@@ -12,7 +12,7 @@ Before you can import data via MySQL CLI to TiDB Cloud, you should have the foll
 - Access to your TiDB Cloud Cluster. If you don't have a TiDB cluster, you can create one as [follows](/develop/dev-guide-build-cluster-in-cloud.md).
 - MySQL CLI installed on your local machine.
 
-## Steps:
+## Steps
 
 ### 1. Connect to your TiDB Cloud Cluster
 
@@ -36,6 +36,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you have se
     > **Tip:**
     >
     > If you have created a password before, you can either use the original password or click **Reset password** to generate a new one.
+    
 </div>
 <div label="TiDB Dedicated">
 
@@ -77,6 +78,7 @@ INSERT INTO products (product_id, product_name, price) VALUES
 ```bash
 mysql --comments --connect-timeout 150 -u '<your_username>' -h <your_cluster_host> -P 4000 -D test --ssl-mode=VERIFY_IDENTITY --ssl-ca=<your_ca_path> -p <your_password> < product_data.sql
 ```
+
 > **Note:**
 > The default database name used here is 'test', and you can either manually create your own database or use the 'create database' command in an SQL file.
 
