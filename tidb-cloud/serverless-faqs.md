@@ -49,7 +49,7 @@ For the first five TiDB Serverless clusters in your organization, TiDB Cloud pro
 - Row-based storage: 5 GiB
 - [Request Units (RUs)](/tidb-cloud/tidb-cloud-glossary.md#request-unit): 50 million RUs per month
 
-Usage beyond the free quota will be charged. Once the free quota of a cluster is reached, the read and write operations on this cluster will be throttled until you [increase the quota](/tidb-cloud/manage-serverless-spend-limit.md#update-spending-limit) or the usage is reset upon the start of a new month.
+Usage beyond the free quota will be charged. Once the cluster's free quota has been reached, reads and writes will be throttled and new connections to that cluster will be denied, until you [increase the quota](/tidb-cloud/manage-serverless-spend-limit.md#update-spending-limit) or the usage is reset upon the start of a new month.
 
 For more information, see [TiDB Serverless usage quota](/tidb-cloud/select-cluster-tier.md#usage-quota).
 
@@ -85,7 +85,7 @@ A spike in RU usage can occur due to necessary background jobs in TiDB. These jo
 
 ### What happens when my cluster exhausts its free quota or exceeds its spending limit?
 
-Once a cluster reaches its free quota or spending limit, the cluster will enforce throttling measures on its read and write operations. These operations will be limited until the quota is increased or the usage is reset at the start of a new month. For more information, see [TiDB Serverless Limitations and Quotas](/tidb-cloud/serverless-limitations.md#usage-quota).
+Once a cluster reaches its free quota or spending limit, the cluster will enforce throttling measures on its read and write operations, and new connections will be denied. These operations will be limited until the quota is increased or the usage is reset at the start of a new month. For more information, see [TiDB Serverless Limitations and Quotas](/tidb-cloud/serverless-limitations.md#usage-quota).
 
 ## Security FAQs
 
