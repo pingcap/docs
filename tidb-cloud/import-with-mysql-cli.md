@@ -65,7 +65,7 @@ mysql --comments --connect-timeout 150 -u '<your_username>' -h <your_cluster_hos
 
 2. Provide a sample CSV file (e.g., `product_data.csv`) that contains the data you want to import. Here's an example of what your sample CSV file might look like:
 
-**product_data.csv:**
+    **product_data.csv:**
 
 {{< copyable "csv" >}}
 ```csv
