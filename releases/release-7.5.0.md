@@ -113,18 +113,18 @@ In v7.4.0, TiDB introduces the [Global Sort](/tidb-global-sort.md) feature. Inst
 
 ### DB operations
 
-* DDL 任务支持暂停和恢复操作成为正式功能 (GA) [#issue](issue链接) @[contributor](https://github.com/xxx)
+* DDL jobs support pause and resume operations (GA) [#18015](https://github.com/pingcap/tidb/issues/18015) @[godouxm](https://github.com/godouxm)
 
-    在 v7.2.0 中引入的 DDL 任务的暂停和恢复功能成为正式功能 (GA)。该功能允许临时暂停资源密集型的 DDL 操作（如创建索引），以节省资源并最小化对在线流量的影响。当资源允许时，你可以无缝恢复 DDL 任务，而无需取消和重新开始。DDL 任务的暂停和恢复功能提高了资源利用率，改善了用户体验，并简化了 schema 变更过程。
+    The pause and resume operations for DDL jobs introduced in v7.2.0 become generally available (GA). These operations let you pause resource-intensive DDL jobs (such as creating indexes) to save resources and minimize the impact on online traffic. When resources permit, you can seamlessly resume DDL jobs without canceling and restarting them. This feature improves resource utilization, enhances user experience, and simplifies the schema change process.
 
-    你可以通过如下 `ADMIN PAUSE DDL JOBS` 或 `ADMIN RESUME DDL JOBS` 语句暂停或者恢复多个 DDL 任务：
+    You can pause and resume multiple DDL jobs using `ADMIN PAUSE DDL JOBS` or `ADMIN RESUME DDL JOBS`:
 
     ```sql
     ADMIN PAUSE DDL JOBS 1,2;
     ADMIN RESUME DDL JOBS 1,2;
     ```
 
-    For more information, see [documentation](/ddl-introduction.md#ddl-相关的命令介绍).
+    For more information, see [documentation](/ddl-introduction.md#ddl-related-commands).
 
 * BR supports backing up and restoring statistics [#48008](https://github.com/pingcap/tidb/issues/48008) @[Leavrth](https://github.com/Leavrth) <!--**tw@hfxsd** 1437-->
 
