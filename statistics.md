@@ -428,11 +428,11 @@ For more information on the `KILL` statement, see [`KILL`](/sql-statements/sql-s
 
 When you run the `ANALYZE` statement, you can adjust the concurrency using the following parameters, to control its effect on the system.
 
-> **Note:**
->  
-> ![analyze_concurrency](/media/analyze_concurrency.png)
->
-> `tidb_build_stats_concurrency`, `tidb_build_sampling_stats_concurrency` and `tidb_analyze_partition_concurrency` are actually in a upstream-downstream relationship, as shown in the diagram. The actual total concurrency is: `tidb_build_stats_concurrency` * (`tidb_build_sampling_stats_concurrency` + `tidb_analyze_partition_concurrency`). When changing these parameters, you need to consider the values of these three parameters at the same time. It is suggested to adjust `tidb_analyze_partition_concurrency`, `tidb_build_sampling_stats_concurrency`, `tidb_build_stats_concurrency` one by one, and observe the impact on the system. The larger the values of these three parameters, the greater the resource overhead on the system.
+The relationships of the relevant system variables are shown below:
+
+![analyze_concurrency](/media/analyze_concurrency.png)
+
+`tidb_build_stats_concurrency`, `tidb_build_sampling_stats_concurrency` and `tidb_analyze_partition_concurrency` are actually in a upstream-downstream relationship, as shown in the preceding diagram. The actual total concurrency is: `tidb_build_stats_concurrency` * (`tidb_build_sampling_stats_concurrency` + `tidb_analyze_partition_concurrency`). When changing these parameters, you need to consider the values of these three parameters at the same time. It is recommended to adjust `tidb_analyze_partition_concurrency`, `tidb_build_sampling_stats_concurrency`, `tidb_build_stats_concurrency` one by one, and observe the impact on the system. The larger the values of these three parameters, the greater the resource overhead on the system.
 
 #### `tidb_build_stats_concurrency`
 
