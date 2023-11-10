@@ -120,7 +120,7 @@ Adjust the following system variables related to Fast Online DDL:
 3. Starting from v7.4.0, you can adjust the number of TiDB nodes that perform background tasks according to actual needs. After deploying a TiDB cluster, you can set the instance-level system variable [`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740) for each TiDB node in the cluster. When `tidb_service_scope` of a TiDB node is set to `background`, the TiDB node can execute background tasks. When `tidb_service_scope` of a TiDB node is set to the default value "", the TiDB node cannot execute background tasks. If `tidb_service_scope` is not set for any TiDB node in a cluster, the TiDB distributed execution framework schedules all TiDB nodes to execute background tasks by default.
     > **Note:**
     >
-    > - During the execution of a distributed task, if some TiDB nodes are offline, the distributed task randomly assigns subtasks to available nodes. In this case, you cannot dynamically balance the assignment of subtasks through `tidb_service_scope`.
+    > - During the execution of a distributed task, if some TiDB nodes are offline, the distributed task randomly assigns subtasks to available nodes. In this case, you cannot dynamically assign subtasks through `tidb_service_scope`.
     > - During the execution of a distributed task, you cannot configure a new node to execute the task through `tidb_service_scope`.
 > **Tip:**
 >
