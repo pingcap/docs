@@ -144,9 +144,11 @@ Compared with the previous LTS 7.1.0, 7.5.0 not only includes new features, impr
 
 | Variable name  | Change type    |  Description |
 |--------|------------------------------|------|
-|  [`tidb_build_sampling_stats_concurrency`](/system-variables.md#tidb_build_sampling_stats_concurrency-new-in-v750)      |   Newly added |  This variable controls the sample concurrency of the `ANALYZE` process.    |
-|  [`tidb_enable_async_merge_global_stats`](/system-variables.md#tidb_enable_async_merge_global_stats-ew-in-v750)      |   Newly added | This variable is used by TiDB to merge statistics asynchronously to avoid OOM issues.   |
-|        |                              |      |
+| [`tidb_build_sampling_stats_concurrency`](/system-variables.md#tidb_build_sampling_stats_concurrency-new-in-v750) | Newly added | Controls the sample concurrency of the `ANALYZE` process. |
+| [`tidb_enable_async_merge_global_stats`](/system-variables.md#tidb_enable_async_merge_global_stats-new-in-v750) | Newly added | This variable is used by TiDB to merge statistics asynchronously to avoid OOM issues. |
+[`tidb_gogc_tuner_max_value`](/system-variables.md#tidb_gogc_tuner_max_value-new-in-v750) | Newly added | Controls the maximum value of GOGC that the GOGC Tuner can adjust. |
+| [`tidb_gogc_tuner_min_value`](/system-variables.md#tidb_gogc_tuner_min_value-new-in-v750) | Newly added | Controls the minimum value of GOGC that the GOGC Tuner can adjust.|
+| `tidb_enable_fast_analyze` | Deleted | Controls whether to enable the statistics `Fast Analyze` feature. This feature for statistics is deprecated in v7.5.0. |
 |        |                              |      |
 |        |                              |      |
 
@@ -158,6 +160,7 @@ Compared with the previous LTS 7.1.0, 7.5.0 not only includes new features, impr
 | TiCDC | [`sink.column-selectors`](/ticdc/ticdc-changefeed-config.md) | Newly added | Controls the specified columns of data change events that TiCDC sends to Kafka when dispatching incremental data. |
 | TiCDC | [`sink.dispatchers.partition`](/ticdc/ticdc-changefeed-config.md) | Modified | Controls how TiCDC dispatches incremental data to Kafka partitions. v7.5.0 introduces a new value option `columns`, which uses the explicitly specified column values to calculate the partition number. |
 | TiCDC | [`sql-mode`](/ticdc/ticdc-changefeed-config.md) | Newly added | Specifies the SQL mode used by TiCDC when parsing DDL statements. The default value is the same as the default SQL mode of TiDB. |
+| TiDB Lightning | Deleted | `--importer` | Specifies the address of TiKV-importer, which is deprecated in v7.5.0. |
 |          |          |          |          |
 
 ### Others
