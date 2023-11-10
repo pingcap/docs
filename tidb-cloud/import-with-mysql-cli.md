@@ -47,13 +47,13 @@ Connect to your TiDB cluster depending on the TiDB deployment option you have se
 3. Click **Allow Access from Anywhere**.
 
     For more details about how to obtain the connection string, refer to [TiDB Dedicated standard connection](https://docs.pingcap.com/tidbcloud/connect-via-standard-connection).
-    
+
 </div>
 </SimpleTab>
 
 ### 2. Define Table and Insert Sample Data
 
-Before importing data, you need to prepare the table structure and insert real sample data into it. Here's an example using a hypothetical "products" table:
+Before importing data, you need to prepare the table structure and insert real sample data into it. Here's an example SQL file(`product_data.sql`) that you can use to create a table and insert sample data:
 
 ```sql
 -- Create a table in your TiDB database
