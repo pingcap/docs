@@ -126,7 +126,7 @@ Compared with the previous LTS 7.1.0, 7.5.0 not only includes new features, impr
 
     For more information, see [documentation](/dm/dm-binlog-event-filter.md#parameter-descriptions).
 
-* Support real-time update of checkpoint for continuous data validation [issue号](链接) @[lichunzhu](https://github.com/lichunzhu) <!--**tw@ran-huang** 1496-->
+* Support real-time update of checkpoint for continuous data validation [#8463](https://github.com/pingcap/tiflow/issues/8463) @[lichunzhu](https://github.com/lichunzhu) <!--**tw@ran-huang** 1496-->
 
     Before v7.5.0, the [continuous data validation feature](/dm/dm-continuous-data-validation.md) ensures the data consistency during replication from DM to downstream. This serves as the basis for cutting over business traffic from the upstream database to TiDB. However, due to various factors such as replication delay and waiting for re-validation of inconsistent data, the continuous validation checkpoint must be refreshed every few minutes. This is unacceptable for some business scenarios where the cutover time is limited to a few tens of seconds.
 
