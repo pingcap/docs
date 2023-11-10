@@ -148,7 +148,7 @@ Compared with the previous LTS 7.1.0, 7.5.0 not only includes new features, impr
 | [`tidb_enable_async_merge_global_stats`](/system-variables.md#tidb_enable_async_merge_global_stats-new-in-v750) | Newly added | This variable is used by TiDB to merge statistics asynchronously to avoid OOM issues. |
 [`tidb_gogc_tuner_max_value`](/system-variables.md#tidb_gogc_tuner_max_value-new-in-v750) | Newly added | Controls the maximum value of GOGC that the GOGC Tuner can adjust. |
 | [`tidb_gogc_tuner_min_value`](/system-variables.md#tidb_gogc_tuner_min_value-new-in-v750) | Newly added | Controls the minimum value of GOGC that the GOGC Tuner can adjust.|
-| `tidb_enable_fast_analyze` | Deleted | Controls whether to enable the statistics `Fast Analyze` feature. This feature for statistics is deprecated in v7.5.0. |
+| `tidb_enable_fast_analyze` | Deprecated | Controls whether to enable the statistics `Fast Analyze` feature. This feature for statistics is deprecated in v7.5.0. |
 |        |                              |      |
 |        |                              |      |
 
