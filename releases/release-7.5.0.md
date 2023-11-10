@@ -27,7 +27,7 @@ Compared with the previous LTS 7.1.0, 7.5.0 not only includes new features, impr
   <tr>
     <td>Scalability and Performance</td>
     <td>Support for running multiple <code>ADD INDEX</code> statements in parallel {/* tw@ran-huang */}</td>
-    <td>Different from distributed and parallel DDL jobs, this feature allows for concurrent jobs to run where they were otherwise running syncrhonsously. Where running DDL statements x, y at the same time used to take x-time +y-time, they now take significantly less.</td>
+    <td>Different from distributed and parallel DDL jobs, this feature allows for concurrent jobs to run where they were otherwise running synchronously. Where running DDL statements x, y at the same time used to take x-time +y-time, they now take significantly less.</td>
   </tr>
   <tr>
     <td rowspan="3">Reliability and Availability</td>
@@ -40,7 +40,7 @@ Compared with the previous LTS 7.1.0, 7.5.0 not only includes new features, impr
   </tr>
   <tr>
     <td>Resource groups support <a href="https://docs.pingcap.com/tidb/v7.5/tidb-resource-control#manage-queries-that-consume-more-resources-than-expected-runaway-queries"> managing runaway queries</a> (experimental) {/* tw@hfxsd */}</td>
-    <td><a href="https://docs.pingcap.com/tidb/v7.5/tidb-resource-control#use-resource-control-to-achieve-resource-isolation" target="_blank">Resource Control</a> is a framework for resource-isolating workloads by Resource Groups, but it makes no calls on how individual queries affect work inside of each group. TiDB v7.2 introduced "runaway query conrol" to let operators control how TiDB identifies and treats these queries per Resource Group. Depending on need, long running queries may be terminated or throttled, and the queries can be identified by exact SQL text or their plan digests, for better generalization. In v7.4, TiDB allows operators to proactively watch for known bad queries, similar to a SQL blocklist at the database level. </td>
+    <td><a href="https://docs.pingcap.com/tidb/v7.5/tidb-resource-control#use-resource-control-to-achieve-resource-isolation" target="_blank">Resource Control</a> is a framework for resource-isolating workloads by Resource Groups, but it makes no calls on how individual queries affect work inside of each group. TiDB v7.2 introduced "runaway query conrol" to let operators control how TiDB identifies and treats these queries per Resource Group. Depending on need, long running queries may be terminated or throttled, and the queries can be identified by exact SQL text or their plan digests, for better generalization. In v7.4, TiDB allows operators to proactively watch for known bad queries, similar to a SQL blocklist at the database level.</td>
   </tr>
   <tr>
     <td>SQL</td>
@@ -58,7 +58,7 @@ Compared with the previous LTS 7.1.0, 7.5.0 not only includes new features, impr
   </tr>
   <tr>
     <td>DDL supports <a href="https://docs.pingcap.com/tidb/v7.5/ddl-introduction#ddl-related-commands">pause and resume operations</a> {/* tw@ran-huang */}</td>
-    <td>Adding indexes can be big resource consumers and can affect online traffic. Even when throttled in a Resource Group or isolated to labeled nodes, there may still be a need to suspend these jobs in emergencies. As of v7.2, TiDB now natively supports suspending any number of these background jobs at once, freeing up needed resources while avoiding have to cancel and restart the jobs.</td>
+    <td>Adding indexes can be big resource consumers and can affect online traffic. Even when throttled in a Resource Group or isolated to labeled nodes, there may still be a need to suspend these jobs in emergencies. As of v7.2, TiDB now natively supports suspending any number of these background jobs at once, freeing up needed resources while avoiding having to cancel and restart the jobs.</td>
   </tr>
 </tbody>
 </table>
@@ -216,7 +216,7 @@ In v7.4.0, TiDB introduces the [Global Sort](/tidb-global-sort.md) feature. Inst
 
 ## Offline package changes
 
-Starting from v7.5.0, the following contents are removed from the `TiDB-community-toolkit` binary package:<!--**tw@Oreoxmt** 1593+1594 -->
+Starting from v7.5.0, the following contents are removed from the `TiDB-community-toolkit` [binary package](/binary-package.md):<!--**tw@Oreoxmt** 1593+1594 -->
 
 - `tikv-importer-{version}-linux-{arch}.tar.gz`
 - `mydumper`
