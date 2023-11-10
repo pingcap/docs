@@ -121,7 +121,7 @@ Adjust the following system variables related to Fast Online DDL:
     > **Note:**
     >
     > - During the execution of a distributed task, if some TiDB nodes are offline, the distributed task randomly assigns subtasks to available nodes. In this case, you cannot dynamically balance the assignment of subtasks through `tidb_service_scope`.
-    > - During the execution of a distributed task, if the subtasks have all been completed, you cannot configure a new node to execute the task through `tidb_service_scope`.
+    > - During the execution of a distributed task, you cannot configure a new node to execute the task through `tidb_service_scope`.
 > **Tip:**
 >
 > For distributed execution of `ADD INDEX` statements, you only need to set `tidb_ddl_reorg_worker_cnt`.
