@@ -292,7 +292,7 @@ column-selectors = [
 
 > **Note:**
 >
-> After filtering by the `column-selectors` rules, the data in the table must have a primary key or unique key to be replicated. Otherwise, the changefeed reports an error when it is created or running.
+> After being filtered by the `column-selectors` rules, the data in the table must have a primary key or unique key to be replicated. Otherwise, the changefeed reports an error when it is created or running.
 
 ## Scale out the load of a single large table to multiple TiCDC nodes
 
