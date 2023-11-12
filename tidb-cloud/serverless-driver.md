@@ -1,12 +1,18 @@
 ---
 title: TiDB Cloud Serverless Driver (Beta)
-summary: Learn how to connect to TiDB Serverless from serverless and edge environments over HTTP.
+summary: Learn how to connect to TiDB Serverless from serverless and edge environments.
 aliases: ['/tidbcloud/serverless-driver-config']
 ---
 
-# TiDB Cloud Serverless Driver (Beta)
+# Why use TiDB Cloud Serverless Driver (Beta)
 
-[TiDB Cloud serverless driver (Beta)](https://github.com/tidbcloud/serverless-js) for JavaScript allows you to connect to your TiDB Serverless cluster over HTTPS. It is particularly useful in edge environments where TCP connections are limited, such as [Vercel Edge Functions](https://vercel.com/docs/functions/edge-functions) and [Cloudflare Workers](https://workers.cloudflare.com/).
+Traditional TCP-based MySQL drivers are not suitable for serverless functions due to their expectation of long-lived, persistent TCP connections, which contradict the short-lived nature of serverless functions. Moreover, in edge environments such as [Vercel Edge Functions](https://vercel.com/docs/functions/edge-functions) and [Cloudflare Workers](https://workers.cloudflare.com/), where comprehensive TCP support and full Node.js compatibility may be lacking, these drivers may not work at all.
+
+[TiDB Cloud serverless driver (Beta)](https://github.com/tidbcloud/serverless-js) for JavaScript allows you to connect to your TiDB Serverless cluster over HTTP, which is generally supported by serverless environments. With it, it is now possible to connect to TiDB Serverless clusters from edge environments and reduce connection overhead with TCP while keeping the similar development experience of traditional TCP-based MySQL drivers. 
+
+> **Note:**
+>
+> If you prefer programming with RESTful API rather than SQL or ORM, you could use [Data Service (beta)](/tidb-cloud/data-service-overview.md).
 
 ## Install the serverless driver
 
