@@ -17,13 +17,12 @@ You can configure the following parameters using `tidb-lightning`:
 | :---- | :---- | :---- |
 | `--config <file>` | Read the global configuration from the file. If this parameter is not specified, TiDB Lightning uses the default configuration. | |
 | `-V` | Print the program version. | |
-| `-d <directory>` | Local directory or [external storage URI](/br/backup-and-restore-storages.md#uri-format) of data files. | `mydumper.data-source-dir` |
+| `-d <directory>` | Local directory or [external storage URI](/external-storage-uri.md) of data files. | `mydumper.data-source-dir` |
 | `-L <level>` | Log level: `debug`, `info`, `warn`, `error`, or `fatal`. `info` by default.| `lightning.level` |
 | `-f <rule>` | [Table filter rules](/table-filter.md). Can be specified multiple times. | `mydumper.filter` |
 | `--backend <backend>` | Select an import mode. `local` refers to [physical import mode](/tidb-lightning/tidb-lightning-physical-import-mode.md); `tidb` refers to [logical import mode](/tidb-lightning/tidb-lightning-logical-import-mode.md). | `tikv-importer.backend` |
 | `--log-file <file>` | Log file path. By default, it is `/tmp/lightning.log.{timestamp}`. If set to '-', it means that the log files will be output to stdout. | `lightning.log-file` |
 | `--status-addr <ip:port>` | Listening address of the TiDB Lightning server | `lightning.status-port` |
-| `--importer <host:port>` | Address of TiKV Importer | `tikv-importer.addr` |
 | `--pd-urls <host:port>` | PD endpoint address | `tidb.pd-addr` |
 | `--tidb-host <host>` | TiDB server host | `tidb.host` |
 | `--tidb-port <port>` | TiDB server port (default = 4000) | `tidb.port` |

@@ -119,24 +119,6 @@ tidb-lightning-ctl --config conf/tidb-lightning.toml --checkpoint-error-destroy=
 
 See the [Checkpoints control](/tidb-lightning/tidb-lightning-checkpoints.md#checkpoints-control) section for other options.
 
-### `ResourceTemporarilyUnavailable("Too many open engines …: …")`
-
-**Cause**: The number of concurrent engine files exceeds the limit specified by `tikv-importer`. This could be caused by misconfiguration. Additionally, if `tidb-lightning` exited abnormally, an engine file might be left at a dangling open state, which could cause this error as well.
-
-**Solutions**:
-
-1. Increase the value of `max-open-engines` setting in `tikv-importer.toml`. This value is typically dictated by the available memory. This could be calculated by using:
-
-    Max Memory Usage ≈ `max-open-engines` × `write-buffer-size` × `max-write-buffer-number`
-
-2. Decrease the value of `table-concurrency` + `index-concurrency` so it is less than `max-open-engines`.
-
-3. Restart `tikv-importer` to forcefully remove all engine files (default to `./data.import/`). This also removes all partially imported tables, which requires TiDB Lightning to clear the outdated checkpoints.
-
-    ```sh
-    tidb-lightning-ctl --config conf/tidb-lightning.toml --checkpoint-error-destroy=all
-    ```
-
 ### `cannot guess encoding for input file, please convert to UTF-8 manually`
 
 **Cause**: TiDB Lightning only recognizes the UTF-8 and GB-18030 encodings for the table schemas. This error is emitted if the file isn't in any of these encodings. It is also possible that the file has mixed encoding, such as containing a string in UTF-8 and another string in GB-18030, due to historical `ALTER TABLE` executions.
@@ -164,9 +146,7 @@ See the [Checkpoints control](/tidb-lightning/tidb-lightning-checkpoints.md#chec
     TZ='Asia/Shanghai' bin/tidb-lightning -config tidb-lightning.toml
     ```
 
-2. When exporting data using Mydumper, make sure to include the `--skip-tz-utc` flag.
-
-3. Ensure the entire cluster is using the same and latest version of `tzdata` (version 2018i or above).
+2. Ensure the entire cluster is using the same and latest version of `tzdata` (version 2018i or above).
 
     On CentOS, run `yum info tzdata` to check the installed version and whether there is an update. Run `yum upgrade tzdata` to upgrade the package.
 
@@ -208,4 +188,8 @@ TiDB does not support all MySQL character sets. Therefore, TiDB Lightning report
 
 ### `invalid compression type ...`
 
-- TiDB Lightning v6.4.0 and later versions only support `.bak` files and the following compressed data files: `gzip`, `snappy`, and `zstd`. Other types of files cause errors. For those unsupported files, you need to modify the file names in advance, or move those files out of the import data directory to avoid such errors. For more details, see [Compressed files](/tidb-lightning/tidb-lightning-data-source.md#compressed-files).
+- TiDB Lightning v6.4.0 and later versions only support the following compressed data files: `gzip`, `snappy`, and `zstd`. Other types of compressed files cause errors. If an unsupported compressed file exists in the directory where the source data file is stored, this will cause the task to report an error. You can move those unsupported files out of the import data directory to avoid such errors. For more details, see [Compressed files](/tidb-lightning/tidb-lightning-data-source.md#compressed-files).
+
+> **Note:**
+>
+> The Snappy compressed file must be in the [official Snappy format](https://github.com/google/snappy). Other variants of Snappy compression are not supported.

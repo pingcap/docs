@@ -47,25 +47,26 @@ This section introduces the configuration of a replication task.
 # This configuration item affects configurations related to filter and sink.
 case-sensitive = true
 
-# Specifies whether to output the old value. New in v4.0.5. Since v5.0, the default value is `true`.
-enable-old-value = true
-
 # Specifies whether to enable the Syncpoint feature, which is supported since v6.3.0 and is disabled by default.
 # Since v6.4.0, only the changefeed with the SYSTEM_VARIABLES_ADMIN or SUPER privilege can use the TiCDC Syncpoint feature.
-# Note: This configuration item only takes effect if the downstream is Kafka or a storage service.
+# Note: This configuration item only takes effect if the downstream is TiDB.
 # enable-sync-point = false
 
 # Specifies the interval at which Syncpoint aligns the upstream and downstream snapshots.
 # The format is in h m s. For example, "1h30m30s".
 # The default value is "10m" and the minimum value is "30s".
-# Note: This configuration item only takes effect if the downstream is Kafka or a storage service.
+# Note: This configuration item only takes effect if the downstream is TiDB.
 # sync-point-interval = "5m"
 
 # Specifies how long the data is retained by Syncpoint in the downstream table. When this duration is exceeded, the data is cleaned up.
 # The format is in h m s. For example, "24h30m30s".
 # The default value is "24h".
-# Note: This configuration item only takes effect if the downstream is Kafka or a storage service.
+# Note: This configuration item only takes effect if the downstream is TiDB.
 # sync-point-retention = "1h"
+
+# Specifies the SQL mode used when parsing DDL statements. Multiple modes are separated by commas.
+# The default value is the same as the default SQL mode of TiDB.
+# sql-mode = "ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION"
 
 [mounter]
 # The number of threads with which the mounter decodes KV data. The default value is 16.
@@ -78,10 +79,6 @@ enable-old-value = true
 # Filter rules.
 # Filter syntax: <https://docs.pingcap.com/tidb/stable/table-filter#syntax>.
 rules = ['*.*', '!test.*']
-
-# Specifies the transaction that will be ignored with the specified start_ts.
-# The default value is an empty list.
-# IgnoreTxnStartTs = []
 
 # Event filter rules.
 # The detailed syntax is described in <https://docs.pingcap.com/tidb/stable/ticdc-filter>
@@ -102,26 +99,27 @@ rules = ['*.*', '!test.*']
 # ignore-insert-value-expr = "price > 1000 and origin = 'no where'" # Ignore insert DMLs that contain the conditions "price > 1000" and "origin = 'no where'".
 
 [scheduler]
-# Splits a table into multiple replication ranges based on the number of Regions, and these ranges can be replicated by multiple TiCDC nodes.
+# Allocate tables to multiple TiCDC nodes for replication on a per-Region basis.
 # Note: This configuration item only takes effect on Kafka changefeeds and is not supported on MySQL changefeeds.
 # The value is "false" by default. Set it to "true" to enable this feature.
 enable-table-across-nodes = false
-# When you enable this feature, it takes effect for tables with the number of Regions greater than the `region-threshold` value.
-region-threshold = 100000
-# When you enable this feature, it takes effect for tables with the number of rows modified per minute greater than the `write-key-threshold` value.
+# When `enable-table-across-nodes` is enabled, there are two allocation modes:
+# 1. Allocate tables based on the number of Regions, so that each TiCDC node handles roughly the same number of Regions. If the number of Regions for a table exceeds the value of `region-threshold`, the table will be allocated to multiple nodes for replication. The default value of `region-threshold` is 10000.
+# region-threshold = 10000
+# 2. Allocate tables based on the write traffic, so that each TiCDC node handles roughly the same number of modified rows. Only when the number of modified rows per minute in a table exceeds the value of `write-key-threshold`, will this allocation take effect.
+# write-key-threshold = 30000
 # Note:
-# * The default value of `write-key-threshold` is 0, which means that the feature does not split the table replication range according to the number of rows modified in a table by default.
-# * You can configure this parameter according to your cluster workload. For example, if it is configured as 30000, it means that the feature will split the replication range of a table when the number of modified rows per minute in the table exceeds 30000.
-# * When `region-threshold` and `write-key-threshold` are configured at the same time:
-#   TiCDC will check whether the number of modified rows is greater than `write-key-threshold` first.
-#   If not, next check whether the number of Regions is greater than `region-threshold`.
-write-key-threshold = 0
+# * The default value of `write-key-threshold` is 0, which means that the traffic allocation mode is not used by default.
+# * You only need to configure one of the two modes. If both `region-threshold` and `write-key-threshold` are configured, TiCDC prioritizes the traffic allocation mode, namely `write-key-threshold`.
 
 [sink]
+############ MQ sink configuration items ############
 # For the sink of MQ type, you can use dispatchers to configure the event dispatcher.
 # Since v6.1.0, TiDB supports two types of event dispatchers: partition and topic. For more information, see <partition and topic link>.
 # The matching syntax of matcher is the same as the filter rule syntax. For details about the matcher rules, see <>.
 # Note: This configuration item only takes effect if the downstream is MQ.
+# Note: When the downstream MQ is Pulsar, if the routing rule for `partition` is not specified as any of `ts`, `index-value`, `table`, or `default`, each Pulsar message will be routed using the string you set as the key.
+# For example, if you specify the routing rule for a matcher as the string `code`, then all Pulsar messages that match that matcher will be routed with `code` as the key.
 # dispatchers = [
 #     {matcher = ['test1.*', 'test2.*'], topic = "Topic expression 1", partition = "ts" },
 #     {matcher = ['test3.*', 'test4.*'], topic = "Topic expression 2", partition = "index-value" },
@@ -131,8 +129,9 @@ write-key-threshold = 0
 
 # The protocol configuration item specifies the protocol format used for encoding messages.
 # When the downstream is Kafka, the protocol can only be canal-json, avro, or open-protocol.
+# When the downstream is Pulsar, the protocol can only be canal-json.
 # When the downstream is a storage service, the protocol can only be canal-json or csv.
-# Note: This configuration item only takes effect if the downstream is Kafka or a storage service.
+# Note: This configuration item only takes effect if the downstream is Kafka, Pulsar, or a storage service.
 # protocol = "canal-json"
 
 # Starting from v7.2.0, the `delete-only-output-handle-key-columns` parameter specifies the output of DELETE events. This parameter is valid only for canal-json and open-protocol protocols.
@@ -142,24 +141,14 @@ write-key-threshold = 0
 # The CSV protocol is not controlled by this parameter and always outputs all columns.
 delete-only-output-handle-key-columns = false
 
-# The following three configuration items are only used when you replicate data to storage sinks and can be ignored when replicating data to MQ or MySQL sinks.
-# Row terminator, used for separating two data change events. The default value is an empty string, which means "\r\n" is used.
-# terminator = ''
-# Date separator type used in the file directory. Value options are `none`, `year`, `month`, and `day`. `day` is the default value and means separating files by day. For more information, see <https://docs.pingcap.com/tidb/stable/ticdc-sink-to-cloud-storage#data-change-records>.
-# Note: This configuration item only takes effect if the downstream is a storage service.
-date-separator = 'day'
-# Whether to use partitions as the separation string. The default value is true, which means that partitions in a table are stored in separate directories. It is recommended that you keep the value as `true` to avoid potential data loss in downstream partitioned tables <https://github.com/pingcap/tiflow/issues/8724>. For usage examples, see <https://docs.pingcap.com/tidb/dev/ticdc-sink-to-cloud-storage#data-change-records)>.
-# Note: This configuration item only takes effect if the downstream is a storage service.
-enable-partition-separator = true
-
 # Schema registry URL.
 # Note: This configuration item only takes effect if the downstream is MQ.
 # schema-registry = "http://localhost:80801/subjects/{subject-name}/versions/{version-number}/schema"
 
 # Specifies the number of encoder threads used when encoding data.
 # Note: This configuration item only takes effect if the downstream is MQ.
-# The default value is 16.
-# encoder-concurrency = 16
+# The default value is 32.
+# encoder-concurrency = 32
 
 # Specifies whether to enable kafka-sink-v2 that uses the kafka-go sink library.
 # Note: This configuration item only takes effect if the downstream is MQ.
@@ -170,6 +159,17 @@ enable-partition-separator = true
 # Note: This configuration item only applies to the MQ downstream using the open-protocol and canal-json.
 # The default value is false.
 # only-output-updated-columns = false
+
+############ Storage sink configuration items ############
+# The following three configuration items are only used when you replicate data to storage sinks and can be ignored when replicating data to MQ or MySQL sinks.
+# Row terminator, used for separating two data change events. The default value is an empty string, which means "\r\n" is used.
+# terminator = ''
+# Date separator type used in the file directory. Value options are `none`, `year`, `month`, and `day`. `day` is the default value and means separating files by day. For more information, see <https://docs.pingcap.com/tidb/stable/ticdc-sink-to-cloud-storage#data-change-records>.
+# Note: This configuration item only takes effect if the downstream is a storage service.
+date-separator = 'day'
+# Whether to use partitions as the separation string. The default value is true, which means that partitions in a table are stored in separate directories. It is recommended that you keep the value as `true` to avoid potential data loss in downstream partitioned tables <https://github.com/pingcap/tiflow/issues/8724>. For usage examples, see <https://docs.pingcap.com/tidb/dev/ticdc-sink-to-cloud-storage#data-change-records)>.
+# Note: This configuration item only takes effect if the downstream is a storage service.
+enable-partition-separator = true
 
 # Since v6.5.0, TiCDC supports saving data changes to storage services in CSV format. Ignore the following configurations if you replicate data to MQ or MySQL sinks.
 # [sink.csv]
@@ -224,4 +224,45 @@ sasl-oauth-scopes = ["producer.kafka", "consumer.kafka"]
 sasl-oauth-grant-type = "client_credentials"
 # The audience in the Kafka SASL OAUTHBEARER authentication. The default value is empty. This parameter is optional when the OAUTHBEARER authentication is used.
 sasl-oauth-audience = "kafka"
+
+# The following parameters take effect only when the downstream is Pulsar.
+[sink.pulsar-config]
+# Authentication on the Pulsar server is done using a token. Specify the value of the token.
+authentication-token = "xxxxxxxxxxxxx"
+# When you use a token for Pulsar server authentication, specify the path to the file where the token is located.
+token-from-file="/data/pulsar/token-file.txt"
+# Pulsar uses the basic account and password to authenticate the identity. Specify the account.
+basic-user-name="root"
+# Pulsar uses the basic account and password to authenticate the identity. Specify the password.
+basic-password="password"
+# The certificate path for Pulsar TLS encrypted authentication.
+auth-tls-certificate-path="/data/pulsar/certificate"
+# The private key path for Pulsar TLS encrypted authentication.
+auth-tls-private-key-path="/data/pulsar/certificate.key"
+# Path to trusted certificate file of the Pulsar TLS encrypted authentication.
+tls-trust-certs-file-path="/data/pulsar/tls-trust-certs-file"
+# Pulsar oauth2 issuer-url. For more information, see the Pulsar website: https://pulsar.apache.org/docs/2.10.x/client-libraries-go/#tls-encryption-and-authentication
+oauth2.oauth2-issuer-url="https://xxxx.auth0.com"
+# Pulsar oauth2 audience
+oauth2.oauth2-audience="https://xxxx.auth0.com/api/v2/"
+# Pulsar oauth2 private-key
+oauth2.oauth2-private-key="/data/pulsar/privateKey"
+# Pulsar oauth2 client-id
+oauth2.oauth2-client-id="0Xx...Yyxeny"
+# Pulsar oauth2 oauth2-scope
+oauth2.oauth2-scope="xxxx"
+# The number of cached Pulsar producers in TiCDC. The value is 10240 by default. Each Pulsar producer corresponds to one topic. If the number of topics you need to replicate is larger than the default value, you need to increase the number.
+pulsar-producer-cache-size=10240
+# Pulsar data compression method. No compression is used by default. Optional values are "lz4", "zlib", and "zstd".
+compression-type=""
+# The timeout for the Pulsar client to establish a TCP connection with the server. The value is 5 seconds by default.
+connection-timeout=5
+# The timeout for Pulsar clients to initiate operations such as creating and subscribing to a topic. The value is 30 seconds by default.
+operation-timeout=30
+# The maximum number of messages in a single batch for a Pulsar producer to send. The value is 1000 by default.
+batching-max-messages=1000
+# The interval at which Pulsar producer messages are saved for batching. The value is 10 milliseconds by default.
+batching-max-publish-delay=10
+# The timeout for a Pulsar producer to send a message. The value is 30 seconds by default.
+send-timeout=30
 ```

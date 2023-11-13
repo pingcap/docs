@@ -10,7 +10,7 @@ This document introduces the common errors you might encounter when using TiCDC,
 
 > **Note:**
 >
-> In this document, the server address specified in `cdc cli` commands is `server=http://127.0.0.1:8300`. When you use the command, replace the address with your actual PD address.
+> In this document, the server address specified in `cdc cli` commands is `server=http://127.0.0.1:8300`. When you use the command, replace the address with your actual TiCDC Server address.
 
 ## TiCDC replication interruptions
 
@@ -31,12 +31,7 @@ You can know whether the replication task is stopped manually by executing `cdc 
 cdc cli changefeed query --server=http://127.0.0.1:8300 --changefeed-id 28c43ffc-2316-4f4f-a70b-d1a7c59ba79f
 ```
 
-In the output of the above command, `admin-job-type` shows the state of this replication task:
-
-- `0`: In progress, which means that the task is not stopped manually.
-- `1`: Paused. When the task is paused, all replicated `processor`s exit. The configuration and the replication status of the task are retained, so you can resume the task from `checkpiont-ts`.
-- `2`: Resumed. The replication task resumes from `checkpoint-ts`.
-- `3`: Removed. When the task is removed, all replicated `processor`s are ended, and the configuration information of the replication task is cleared up. The replication status is retained only for later queries.
+In the output of the above command, `admin-job-type` shows the state of this replication task. For more information about each state and its meaning, see [Changefeed states](/ticdc/ticdc-changefeed-overview.md#changefeed-state-transfer).
 
 ### How do I handle replication interruptions?
 
@@ -46,7 +41,7 @@ A replication task might be interrupted in the following known scenarios:
 
     - In this scenario, TiCDC saves the task information. Because TiCDC has set the service GC safepoint in PD, the data after the task checkpoint is not cleaned by TiKV GC within the valid period of `gc-ttl`.
 
-    - Handling method: You can resume the replication task via the HTTP interface after the downstream is back to normal.
+    - Handling method: You can resume the replication task by executing `cdc cli changefeed resume` after the downstream is back to normal.
 
 - Replication cannot continue because of incompatible SQL statement(s) in the downstream.
 
@@ -54,14 +49,9 @@ A replication task might be interrupted in the following known scenarios:
     - Handling procedures:
         1. Query the status information of the replication task using the `cdc cli changefeed query` command and record the value of `checkpoint-ts`.
         2. Use the new task configuration file and add the `ignore-txn-start-ts` parameter to skip the transaction corresponding to the specified `start-ts`.
-        3. Stop the old replication task via HTTP API. Execute `cdc cli changefeed create` to create a new task and specify the new task configuration file. Specify `checkpoint-ts` recorded in step 1 as the `start-ts` and start a new task to resume the replication.
-
-- In TiCDC v4.0.13 and earlier versions, when TiCDC replicates the partitioned table, it might encounter an error that leads to replication interruption.
-
-    - In this scenario, TiCDC saves the task information. Because TiCDC has set the service GC safepoint in PD, the data after the task checkpoint is not cleaned by TiKV GC within the valid period of `gc-ttl`.
-    - Handling procedures:
-        1. Pause the replication task by executing `cdc cli changefeed pause -c <changefeed-id>`.
-        2. Wait for about one munite, and then resume the replication task by executing `cdc cli changefeed resume -c <changefeed-id>`.
+        3. Pause the replication task by executing `cdc cli changefeed pause -c <changefeed-id>`.
+        4. Specify the new task configuration file by executing `cdc cli changefeed update -c <changefeed-id> --config <config-file-path>`.
+        5. Resume the replication task by executing `cdc cli changefeed resume -c <changefeed-id>`.
 
 ### What should I do to handle the OOM that occurs after TiCDC is restarted after a task interruption?
 
@@ -106,37 +96,6 @@ Since v4.0.9, you can try to enable the unified sorter feature in your replicati
 3. Manually execute the DDL statement in the downstream. After the execution finishes, go on performing the following operations.
 4. Modify the changefeed configuration and add the above `start-ts` to the `ignore-txn-start-ts` configuration item.
 5. Resume the paused changefeed.
-
-## After I upgrade the TiCDC cluster to v4.0.8, the `[CDC:ErrKafkaInvalidConfig]Canal requires old value to be enabled` error is reported when I execute a changefeed. What should I do?
-
-Since v4.0.8, if the `canal-json`, `canal` or `maxwell` protocol is used for output in a changefeed, TiCDC enables the old value feature automatically. However, if you have upgraded TiCDC from an earlier version to v4.0.8 or later, when the changefeed uses the `canal-json`, `canal` or `maxwell` protocol and the old value feature is disabled, this error is reported.
-
-To fix the error, take the following steps:
-
-1. Set the value of `enable-old-value` in the changefeed configuration file to `true`.
-2. Execute `cdc cli changefeed pause` to pause the replication task.
-
-    {{< copyable "shell-regular" >}}
-
-    ```shell
-    cdc cli changefeed pause -c test-cf --server=http://127.0.0.1:8300
-    ```
-
-3. Execute `cdc cli changefeed update` to update the original changefeed configuration.
-
-    {{< copyable "shell-regular" >}}
-
-    ```shell
-    cdc cli changefeed update -c test-cf --server=http://127.0.0.1:8300 --sink-uri="mysql://127.0.0.1:3306/?max-txn-row=20&worker-number=8" --config=changefeed.toml
-    ```
-
-4. Execute `cdc cli changfeed resume` to resume the replication task.
-
-    {{< copyable "shell-regular" >}}
-
-    ```shell
-    cdc cli changefeed resume -c test-cf --server=http://127.0.0.1:8300
-    ```
 
 ## The `[tikv:9006]GC life time is shorter than transaction duration, transaction starts at xx, GC safe point is yy` error is reported when I use TiCDC to create a changefeed. What should I do?
 

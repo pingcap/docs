@@ -14,13 +14,9 @@ The `SELECT` statement is used to read data from TiDB.
 
 ![SelectStmt](/media/sqlgram/SelectStmt.png)
 
-<CustomContent platform="tidb-cloud">
-
 > **Note:**
 >
-> The `SELECT ... INTO OUTFILE` statement is not supported by TiDB Cloud.
-
-</CustomContent>
+> The `SELECT ... INTO OUTFILE` statement is only applicable to TiDB Self-Hosted and not available on [TiDB Cloud](https://docs.pingcap.com/tidbcloud/).
 
 **FromDual:**
 
@@ -166,7 +162,6 @@ The above example uses data generated with `tiup bench tpcc prepare`. The first 
 ## MySQL compatibility
 
 - The syntax `SELECT ... INTO @variable` is not supported.
-- The syntax `SELECT ... GROUP BY ... WITH ROLLUP` is not supported.
 - The syntax `SELECT .. GROUP BY expr` does not imply `GROUP BY expr ORDER BY expr` as it does in MySQL 5.7. TiDB instead matches the behavior of MySQL 8.0 and does not imply a default order.
 - The syntax `SELECT ... TABLESAMPLE ...` is a TiDB extension and not supported by MySQL.
 

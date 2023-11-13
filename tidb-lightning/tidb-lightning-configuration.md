@@ -53,10 +53,7 @@ enable-diagnose-logs = false
 # The maximum number of engines to be opened concurrently.
 # Each table is split into one "index engine" to store indices, and multiple
 # "data engines" to store row data. These settings control the maximum
-# concurrent number for each type of engines.
-# These values affect the memory and disk usage of tikv-importer.
-# The sum of these two values must not exceed the max-open-engines setting
-# for tikv-importer.
+# concurrent number for each type of engines. Generally, you can use the following two default values.
 index-concurrency = 2
 table-concurrency = 6
 
@@ -400,11 +397,11 @@ max-allowed-packet = 67_108_864
 # Private key of this service. Default to copy of `security.key-path`
 # key-path = "/path/to/lightning.key"
 
-# In the physical import mode, when data importing is complete, tidb-lightning can
+# In the physical import mode, when data importing is complete, TiDB Lightning can
 # automatically perform the Checksum and Analyze operations. It is recommended
 # to leave these as true in the production environment.
 # The execution order: Checksum -> Analyze.
-# In the logical import mode, Checksum and Analyze is not needed, and they are always
+# Note that in the logical import mode, Checksum and Analyze is not needed, and they are always
 # skipped in the actual operation.
 [post-restore]
 # Specifies whether to perform `ADMIN CHECKSUM TABLE <table>` for each table to verify data integrity after importing.
@@ -413,7 +410,9 @@ max-allowed-packet = 67_108_864
 # - "optional": Perform admin checksum. If checksum fails, TiDB Lightning will report a WARN log but ignore any error.
 # - "off": Do not perform checksum.
 # Note that since v4.0.8, the default value has changed from "true" to "required".
-# For backward compatibility, bool values "true" and "false" are also allowed for this field.
+# Note:
+# 1. Checksum failure usually means import exception (data loss or inconsistency). It is recommended to always enable checksum.
+# 2. For backward compatibility, bool values "true" and "false" are also allowed for this field.
 # "true" is equivalent to "required" and "false" is equivalent to "off".
 checksum = "required"
 # Specifies whether the ADMIN CHECKSUM TABLE <table> operation is executed via TiDB.
@@ -424,16 +423,6 @@ checksum-via-sql = "false"
 # Specifies whether to perform `ANALYZE TABLE <table>` for each table after checksum is done.
 # Options available for this field are the same as `checksum`. However, the default value for this field is "optional".
 analyze = "optional"
-
-# If the value is set to `true`, a level-1 compaction is performed
-# every time a table is imported.
-# The default value is `false`.
-level-1-compact = false
-
-# If the value is set to `true`, a full compaction on the whole
-# TiKV cluster is performed at the end of the import.
-# The default value is `false`.
-compact = false
 
 # Configures the background periodic actions.
 # Supported units: h (hour), m (minute), s (second).
@@ -456,13 +445,12 @@ log-progress = "5m"
 |:----|:----|:----|
 | --config *file* | Reads global configuration from *file*. If not specified, the default configuration would be used. | |
 | -V | Prints program version | |
-| -d *directory* | Directory or [external storage URI](/br/backup-and-restore-storages.md#uri-format) of the data dump to read from | `mydumper.data-source-dir` |
+| -d *directory* | Directory or [external storage URI](/external-storage-uri.md) of the data dump to read from | `mydumper.data-source-dir` |
 | -L *level* | Log level: debug, info, warn, error, fatal (default = info) | `lightning.log-level` |
 | -f *rule* | [Table filter rules](/table-filter.md) (can be specified multiple times) | `mydumper.filter` |
 | --backend *[backend](/tidb-lightning/tidb-lightning-overview.md)* | Select an import mode. `local` refers to the physical import mode; `tidb` refers to the logical import mode. | `local` |
 | --log-file *file* | Log file path. By default, it is `/tmp/lightning.log.{timestamp}`. If set to '-', it means that the log files will be output to stdout. | `lightning.log-file` |
 | --status-addr *ip:port* | Listening address of the TiDB Lightning server | `lightning.status-port` |
-| --importer *host:port* | Address of TiKV Importer | `tikv-importer.addr` |
 | --pd-urls *host:port* | PD endpoint address | `tidb.pd-addr` |
 | --tidb-host *host* | TiDB server host | `tidb.host` |
 | --tidb-port *port* | TiDB server port (default = 4000) | `tidb.port` |

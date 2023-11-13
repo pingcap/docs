@@ -230,7 +230,7 @@ npm start
 If the connection is successful, the terminal will output the version of the TiDB cluster as follows:
 
 ```
-🔌 Connected to TiDB cluster! (TiDB version: 5.7.25-TiDB-v7.1.0)
+🔌 Connected to TiDB cluster! (TiDB version: 8.0.11-TiDB-v7.4.0)
 🆕 Created a new player with ID 2.
 ℹ️ Got Player 2: Player { id: 2, coins: 100, goods: 100 }
 🔢 Added 50 coins and 50 goods to player 2, now player 2 has 100 coins and 150 goods.
@@ -341,7 +341,7 @@ For more information, refer to [TypeORM: DataSource API](https://typeorm.io/data
 
 ### Foreign key constraints
 
-Using foreign key constraints ensures the [referential integrity](https://en.wikipedia.org/wiki/Referential_integrity) of data by adding checks on the database side. However, this might lead to serious performance issues in scenarios with large data volumes.
+Using [foreign key constraints](https://docs.pingcap.com/tidb/stable/foreign-key) (experimental) ensures the [referential integrity](https://en.wikipedia.org/wiki/Referential_integrity) of data by adding checks on the database side. However, this might lead to serious performance issues in scenarios with large data volumes.
 
 You can control whether foreign key constraints are created when constructing relationships between entities by using the `createForeignKeyConstraints` option (default value is `true`).
 

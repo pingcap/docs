@@ -25,9 +25,10 @@ TiCDC has the following key capabilities:
 - Bidirectional replication between TiDB clusters, allowing the creation of a multi-active TiDB solution using TiCDC.
 - Replicating incremental data from a TiDB cluster to a MySQL database or other MySQL-compatible databases with low latency.
 - Replicating incremental data from a TiDB cluster to a Kafka cluster. The recommended data format includes [Canal-JSON](/ticdc/ticdc-canal-json.md) and [Avro](/ticdc/ticdc-avro-protocol.md).
+- Replicating incremental data from a TiDB cluster to storage services, such as Amazon S3, GCS, Azure Blob Storage, and NFS.
 - Replicating tables with the ability to filter databases, tables, DMLs, and DDLs.
 - High availability with no single point of failure, supporting dynamically adding and deleting TiCDC nodes.
-- Cluster management through [Open API](/ticdc/ticdc-open-api.md), including querying task status, dynamically modifying task configuration, and creating or deleting tasks.
+- Cluster management through [Open API](/ticdc/ticdc-open-api-v2.md), including querying task status, dynamically modifying task configuration, and creating or deleting tasks.
 
 ### Replication order
 
@@ -70,18 +71,21 @@ The components in the architecture diagram are described as follows:
 - TiCDC: TiCDC nodes where TiCDC processes run. Each node runs a TiCDC process. Each process pulls data changes from one or more tables in TiKV nodes and replicates the changes to the downstream system through the sink component.
 - PD: The scheduling module in a TiDB cluster. This module is responsible for scheduling cluster data and usually consists of three PD nodes. PD provides high availability through the etcd cluster. In the etcd cluster, TiCDC stores its metadata, such as node status information and changefeed configurations.
 
-As shown in the architecture diagram, TiCDC supports replicating data to TiDB, MySQL, and Kafka databases.
+As shown in the architecture diagram, TiCDC supports replicating data to TiDB, MySQL, Kafka, and storage services.
 
 ## Best practices
 
-- If the network latency between two TiDB clusters is higher than 100 ms, it is recommended to deploy TiCDC in the region (IDC) where the downstream TiDB cluster is located when replicating data between the two clusters.
+- When you use TiCDC to replicate data between two TiDB clusters, if the network latency between the two clusters is higher than 100 ms:
+
+    - For TiCDC versions earlier than v6.5.2, it is recommended to deploy TiCDC in the region (IDC) where the downstream TiDB cluster is located.
+    - With a series of improvements introduced starting from TiCDC v6.5.2, it is recommended to deploy TiCDC in the region (IDC) where the upstream TiDB cluster is located.
+
 - TiCDC only replicates tables that have at least one valid index. A valid index is defined as follows:
 
     - A primary key (`PRIMARY KEY`) is a valid index.
     - A unique index (`UNIQUE INDEX`) is valid if every column of the index is explicitly defined as non-nullable (`NOT NULL`) and the index does not have a virtual generated column (`VIRTUAL GENERATED COLUMNS`).
 
 - To use TiCDC in disaster recovery scenarios, you need to configure [redo log](/ticdc/ticdc-sink-to-mysql.md#eventually-consistent-replication-in-disaster-scenarios).
-- When you replicate a wide table with a large single row (greater than 1K), it is recommended to configure the [`per-table-memory-quota`](/ticdc/ticdc-server-config.md) so that `per-table-memory-quota` = `ticdcTotalMemory`/(`tableCount` * 2). `ticdcTotalMemory` is the memory of a TiCDC node, and `tableCount` is the number of target tables that a TiCDC node replicates.
 
 ## Unsupported scenarios
 
