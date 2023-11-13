@@ -144,27 +144,24 @@ Compared with the previous LTS 7.1.0, 7.5.0 includes new features, improvements,
 
 | Variable name  | Change type    |  Description |
 |--------|------------------------------|------|
-| [`tidb_analyze_partition_concurrency`](/system-variables.md#tidb_analyze_partition_concurrency)      |  Modified |  Changes the default value from `1` to `2` after further tests.    |
-| [`tidb_build_stats_concurrency`](/system-variables.md#tidb_build_stats_concurrency)      |  Modified |  Changes the default value from `4` to `2` after further tests.     |
-| [`tidb_merge_partition_stats_concurrency`](/system-variables.md#tidb_merge_partition_stats_concurrency)    |  Modified   |  This variable takes effect from v7.5.0. This variable is used for TiDB to merge global statistics asynchronously to avoid OOM issues.    |
+| [`tidb_enable_fast_analyze`](/system-variables.md#tidb_enable_fast_analyze) | Deprecated | Controls whether to enable the statistics `Fast Analyze` feature. This feature is deprecated in v7.5.0. |
+| [`tidb_analyze_partition_concurrency`](/system-variables.md#tidb_analyze_partition_concurrency) |  Modified | Changes the default value from `1` to `2` after further tests. |
+| [`tidb_build_stats_concurrency`](/system-variables.md#tidb_build_stats_concurrency) | Modified | Changes the default value from `4` to `2` after further tests. |
+| [`tidb_merge_partition_stats_concurrency`](/system-variables.md#tidb_merge_partition_stats_concurrency)    |  Modified | This system variable takes effect starting from v7.5.0. It specifies the concurrency of merging statistics for a partitioned table when TiDB analyzes the partitioned table. |
 | [`tidb_build_sampling_stats_concurrency`](/system-variables.md#tidb_build_sampling_stats_concurrency-new-in-v750) | Newly added | Controls the sample concurrency of the `ANALYZE` process. |
 | [`tidb_enable_async_merge_global_stats`](/system-variables.md#tidb_enable_async_merge_global_stats-new-in-v750) | Newly added | This variable is used by TiDB to merge statistics asynchronously to avoid OOM issues. |
 [`tidb_gogc_tuner_max_value`](/system-variables.md#tidb_gogc_tuner_max_value-new-in-v750) | Newly added | Controls the maximum value of GOGC that the GOGC Tuner can adjust. |
 | [`tidb_gogc_tuner_min_value`](/system-variables.md#tidb_gogc_tuner_min_value-new-in-v750) | Newly added | Controls the minimum value of GOGC that the GOGC Tuner can adjust.|
-| `tidb_enable_fast_analyze` | Deprecated | Controls whether to enable the statistics `Fast Analyze` feature. This feature for statistics is deprecated in v7.5.0. |
-|        |                              |      |
-|        |                              |      |
 
 ### Configuration file parameters
 
 | Configuration file | Configuration parameter | Change type | Description |
 | -------- | -------- | -------- | -------- |
-| BR | [`--ignore-stats`](/br/br-snapshot-manual.md#back-up-statistics) | Newly added | Controls whether to back up and restore database statistics. When you set this parameter to `false`, the `br` command-line tool supports backing up and restoring statistics of columns, indexes, and tables. |
+| BR | [`--ignore-stats`](/br/br-snapshot-manual.md#back-up-statistics) | Newly added | Controls whether to back up and restore database statistics. When you set this parameter to `false`, the br command-line tool supports backing up and restoring statistics of columns, indexes, and tables. |
 | TiCDC | [`sink.column-selectors`](/ticdc/ticdc-changefeed-config.md) | Newly added | Controls the specified columns of data change events that TiCDC sends to Kafka when dispatching incremental data. |
 | TiCDC | [`sink.dispatchers.partition`](/ticdc/ticdc-changefeed-config.md) | Modified | Controls how TiCDC dispatches incremental data to Kafka partitions. v7.5.0 introduces a new value option `columns`, which uses the explicitly specified column values to calculate the partition number. |
 | TiCDC | [`sql-mode`](/ticdc/ticdc-changefeed-config.md) | Newly added | Specifies the SQL mode used by TiCDC when parsing DDL statements. The default value is the same as the default SQL mode of TiDB. |
 | TiDB Lightning | Deleted | `--importer` | Specifies the address of TiKV-importer, which is deprecated in v7.5.0. |
-|          |          |          |          |
 
 ### Others
 
@@ -179,7 +176,7 @@ Starting from v7.5.0, the following contents are removed from the `TiDB-communit
 
 ## Deprecated features
 
-* [Mydumper](https://docs.pingcap.com/tidb/v4.0/mydumper-overview) is deprecated in v7.5.0 and most of its features have been replaced by [Dumpling](/dumpling-overview.md). It is strongly recommended that you use Dumpling instead of mydumper.<!--**tw@Oreoxmt** 1593-->
+* [Mydumper](https://docs.pingcap.com/tidb/v4.0/mydumper-overview) is deprecated in v7.5.0 and most of its features have been replaced by [Dumpling](/dumpling-overview.md). It is strongly recommended that you use Dumpling instead of Mydumper.<!--**tw@Oreoxmt** 1593-->
 
 * TiKV-importer is deprecated in v7.5.0. It is strongly recommended that you use the [Physical Import Mode of TiDB Lightning](/tidb-lightning/tidb-lightning-physical-import-mode.md) as an alternative.<!--**tw@Oreoxmt** 1594-->
 
@@ -295,3 +292,6 @@ To learn about the performance of TiDB v7.5.0, you can refer to the [TPC-C perfo
 ## Contributors
 
 We would like to thank the following contributors from the TiDB community:
+
+- [jgrande](https://github.com/jgrande) (First-time contributor)
+- [shawn0915](https://github.com/shawn0915)
