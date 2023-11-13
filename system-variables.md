@@ -1982,7 +1982,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 > **Warning:**
 >
-> Currently, `Fast Analyze` is an experimental feature. It is not recommended that you use it in production environments.
+> Starting from v7.5.0, this variable is deprecated.
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
@@ -2971,6 +2971,26 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - This variable controls whether to generate binary-encoded execution plans in slow logs and statement summaries.
 - When this variable is set to `ON`, you can view visual execution plans in TiDB Dashboard. Note that TiDB Dashboard only provides visual display for execution plans generated after this variable is enabled.
 - You can execute the `SELECT tidb_decode_binary_plan('xxx...')` statement to parse the specific plan from a binary plan.
+
+### tidb_gogc_tuner_max_value <span class="version-mark">New in v7.5.0</span>
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Integer
+- Default value: `500`
+- Range: `[10, 2147483647]`
+- The variable is used to control the maximum value of GOGC that the GOGC Tuner can adjust.
+
+### tidb_gogc_tuner_min_value <span class="version-mark">New in v7.5.0</span>
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Integer
+- Default value: `100`
+- Range: `[10, 2147483647]`
+- The variable is used to control the minimum value of GOGC that the GOGC Tuner can adjust.
 
 ### tidb_gogc_tuner_threshold <span class="version-mark">New in v6.4.0</span>
 
