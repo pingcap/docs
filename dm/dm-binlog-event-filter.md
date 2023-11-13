@@ -40,7 +40,7 @@ When you use the wildcard for matching schemas and tables, note the following:
     | `all`             |      | Includes all the events below |
     | `all dml`         |      | Includes all DML events below |
     | `all ddl`         |      | Includes all DDL events below |
-    | `incompatible ddl changes` |      | Includes all incompatible DDL events     |
+    | `incompatible ddl changes` |      | Includes all incompatible DDL events, i.e. DDLs that can cause data loss     |
     | `none`            |      | Includes none of the events below |
     | `none ddl`        |      | Includes none of the DDL events below |
     | `none dml`        |      | Includes none of the DML events below |
