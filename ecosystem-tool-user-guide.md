@@ -74,7 +74,11 @@ The following are the basics of Dumpling:
 
 > **Note:**
 >
+<<<<<<< HEAD
 > PingCAP previously maintained a fork of the [mydumper project](https://github.com/maxbube/mydumper) with enhancements specific to TiDB. This fork has since been replaced by [Dumpling](/dumpling-overview.md), which has been rewritten in Golang, and provides more optimizations specific to TiDB. It is strongly recommended that you use Dumpling instead of mydumper.
+=======
+> PingCAP previously maintained a fork of the [mydumper project](https://github.com/maxbube/mydumper) with enhancements specific to TiDB. Starting from v7.5.0, [Mydumper](https://docs.pingcap.com/tidb/v4.0/mydumper-overview) is deprecated and most of its features have been replaced by [Dumpling](/dumpling-overview.md). It is strongly recommended that you use Dumpling instead of Mydumper.
+>>>>>>> ed2d72b278 (deprecate Mydumper (#15196))
 
 ### Full data import - TiDB Lightning
 
