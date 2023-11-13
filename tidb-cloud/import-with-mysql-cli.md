@@ -122,7 +122,7 @@ Do the following to import data from a CSV file:
 
 > **Note:**
 >
-> For more syntax details about `LOAD DATA LOCAL INFILE`, see [MySQL Official Documentation](https://dev.mysql.com/doc/refman/8.0/en/load-data.html).
+> For more syntax details about `LOAD DATA LOCAL INFILE`, see [sql-statement-load-data](https://docs.pingcap.com/tidb/stable/sql-statement-load-data).
 
 </div>
 </SimpleTab>
