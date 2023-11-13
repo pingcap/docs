@@ -210,7 +210,7 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 | [Dumpling logical dumper](/dumpling-overview.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | [Transactional `LOAD DATA`](/sql-statements/sql-statement-load-data.md) [^5] | Y | Y | Y | Y | Y | Y | Y | Y | Y | N [^6] |
 | [Database migration toolkit (DM)](/migration-overview.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
-| [TiDB Binlog](/tidb-binlog/tidb-binlog-overview.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
+| [TiDB Binlog](/tidb-binlog/tidb-binlog-overview.md) [^7] | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | [Change data capture (CDC)](/ticdc/ticdc-overview.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | [Stream data to Amazon S3, GCS, Azure Blob Storage, and NFS through TiCDC](/ticdc/ticdc-sink-to-cloud-storage.md) | Y | Y | E | N | N | N | N | N | N | N |
 | [TiCDC supports bidirectional replication between two TiDB clusters](/ticdc/ticdc-bidirectional-replication.md) | Y | Y | Y | N | N | N | N | N | N | N |
@@ -263,3 +263,5 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 [^5]: Starting from [TiDB v7.0.0](/releases/release-7.0.0.md), the new parameter `FIELDS DEFINED NULL BY` and support for importing data from S3 and GCS are experimental features.
 
 [^6]: For TiDB v4.0, the `LOAD DATA` transaction does not guarantee atomicity.
+
+[^7]: Starting from TiDB v7.5.0, technical support for the data replication feature of [TiDB Binlog](/tidb-binlog/tidb-binlog-overview.md) is no longer provided. It is strongly recommended to use [TiCDC](/ticdc/ticdc-overview.md) as an alternative solution for data replication. Although TiDB Binlog v7.5.0 still supports the Point-in-Time Recovery (PITR) scenario, this component will be completely deprecated in future versions. It is recommended to use [PITR](/br/br-pitr-guide.md) as an alternative solution for data recovery.
