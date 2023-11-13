@@ -144,6 +144,9 @@ Compared with the previous LTS 7.1.0, 7.5.0 includes new features, improvements,
 
 | Variable name  | Change type    |  Description |
 |--------|------------------------------|------|
+| [`tidb_analyze_partition_concurrency`](/system-variables.md#tidb_analyze_partition_concurrency)      |  Modified |  Changes the default value from `1` to `2` after further tests.    |
+| [`tidb_build_stats_concurrency`](/system-variables.md#tidb_build_stats_concurrency)      |  Modified |  Changes the default value from `4` to `2` after further tests.     |
+| [`tidb_merge_partition_stats_concurrency`](/system-variables.md#tidb_merge_partition_stats_concurrency)    |  Modified   |  This variable takes effect from v7.5.0. This variable is used for TiDB to merge global statistics asynchronously to avoid OOM issues.    |
 | [`tidb_build_sampling_stats_concurrency`](/system-variables.md#tidb_build_sampling_stats_concurrency-new-in-v750) | Newly added | Controls the sample concurrency of the `ANALYZE` process. |
 | [`tidb_enable_async_merge_global_stats`](/system-variables.md#tidb_enable_async_merge_global_stats-new-in-v750) | Newly added | This variable is used by TiDB to merge statistics asynchronously to avoid OOM issues. |
 [`tidb_gogc_tuner_max_value`](/system-variables.md#tidb_gogc_tuner_max_value-new-in-v750) | Newly added | Controls the maximum value of GOGC that the GOGC Tuner can adjust. |
