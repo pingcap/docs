@@ -4,6 +4,8 @@ summary: Learn how to connect to TiDB Serverless from serverless and edge enviro
 aliases: ['/tidbcloud/serverless-driver-config']
 ---
 
+# TiDB Cloud Serverless Driver (Beta)
+
 ## Why use TiDB Cloud Serverless Driver (Beta)
 
 Traditional TCP-based MySQL drivers are not suitable for serverless functions due to their expectation of long-lived, persistent TCP connections, which contradict the short-lived nature of serverless functions. Moreover, in edge environments such as [Vercel Edge Functions](https://vercel.com/docs/functions/edge-functions) and [Cloudflare Workers](https://workers.cloudflare.com/), where comprehensive TCP support and full Node.js compatibility may be lacking, these drivers may not work at all.
