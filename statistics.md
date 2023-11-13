@@ -89,7 +89,7 @@ Currently, TiDB collects statistical information as a full collection. You can e
 > **Note:**
 >
 > - The execution time of `ANALYZE TABLE` in TiDB is longer than that in MySQL or InnoDB. In InnoDB, only a small number of pages are sampled, while in TiDB a comprehensive set of statistics is completely rebuilt. Scripts that were written for MySQL might mistakenly expect that `ANALYZE TABLE` will be a short-lived operation.
-> - Starting from v7.5.0, the [Fast Analyze feature (`tidb_enable_fast_analyze`)](https://docs.pingcap.com/tidb/v7.4/system-variables#tidb_enable_fast_analyze) and the [incremental collection feature](https://docs.pingcap.com/tidb/v7.4/statistics#incremental-collection) for statistics are deprecated.
+> - Starting from v7.5.0, the [Fast Analyze feature (`tidb_enable_fast_analyze`)](/system-variables.md#tidb_enable_fast_analyze) and the [incremental collection feature](https://docs.pingcap.com/tidb/v7.4/statistics#incremental-collection) for statistics are deprecated.
 
 You can perform full collection using the following syntax.
 
