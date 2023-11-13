@@ -81,7 +81,7 @@ To complete this tutorial, you need the following:
 
 2. Set the environment variable `DATABASE_URL` in your local environment. For example, in Linux or macOS, you can run the following command:
 
-    ```
+    ```bash
     export DATABASE_URL=mysql://[username]:[password]@[host]/[database]
     ```
    
@@ -91,7 +91,7 @@ To complete this tutorial, you need the following:
 
     You can use [Chat2Query in the TiDB Cloud console](/tidb-cloud/explore-data-with-chat2query.md) to execute SQL statements. Here is an example:
 
-   ```
+   ```sql
    CREATE TABLE `test`.`person`  (
      `id` int(11) NOT NULL AUTO_INCREMENT,
      `name` varchar(255) NULL DEFAULT NULL,
@@ -104,7 +104,7 @@ To complete this tutorial, you need the following:
 
 2. In the root directory of your project, create a file named `hello-word.ts` and add the following code:
 
-   ```
+   ```ts
    import { Kysely,GeneratedAlways,Selectable } from 'kysely'
    import { TiDBServerlessDialect } from '@tidbcloud/kysely'
    
@@ -203,7 +203,7 @@ mysql://[username]:[password]@[host]/[database]
 
     You can use [Chat2Query in the TiDB Cloud console](/tidb-cloud/explore-data-with-chat2query.md) to execute SQL statements. Here is an example:
 
-   ```
+   ```sql
    CREATE TABLE `test`.`person`  (
      `id` int(11) NOT NULL AUTO_INCREMENT,
      `name` varchar(255) NULL DEFAULT NULL,
@@ -216,7 +216,7 @@ mysql://[username]:[password]@[host]/[database]
 
 2. In the `app` directory of your project, create a file `/api/edge-function-example/route.ts` and add the following code:
 
-   ```
+   ```ts
    import { NextResponse } from 'next/server';
    import type { NextRequest } from 'next/server';
    import { Kysely,GeneratedAlways,Selectable } from 'kysely'

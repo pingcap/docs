@@ -33,7 +33,7 @@ To complete this tutorial, you need the following:
 
 2. Install the `@tidbcloud/prisma-adapter` driver adapter, the `@tidbcloud/serverless` serverless driver, and the Prisma CLI.
 
-   The following commands take installation with npm as an example. Executing `npm install @tidbcloud/serverless` will create a `node_modules` directory and a `package.json` file in your project directory.
+   The following commands use npm as the package manager. Executing `npm install @tidbcloud/serverless` will create a `node_modules` directory and a `package.json` file in your project directory.
 
     ```
     npm install @tidbcloud/prisma-adapter
@@ -43,7 +43,7 @@ To complete this tutorial, you need the following:
  
 3. In the `package.json` file, specify the ES module by adding `type: "module"`:
 
-   ```
+   ```json
    {
      "type": "module",
      "dependencies": {
