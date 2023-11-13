@@ -436,7 +436,7 @@ The relationships of the relevant system variables are shown below:
 
 #### `tidb_build_stats_concurrency`
 
-Currently, when you run the `ANALYZE` statement, the task is divided into multiple small tasks. Each task only works on one column or index. You can use the `tidb_build_stats_concurrency` parameter to control the number of simultaneous tasks. The default value is `2`. The default value is `4` for v7.4.0 and earlier versions.
+When you run the `ANALYZE` statement, the task is divided into multiple small tasks. Each task only works on statistics of one column or index. You can use the `tidb_build_stats_concurrency` parameter to control the number of simultaneous small tasks. The default value is `2`. The default value is `4` for v7.4.0 and earlier versions.
 
 #### `tidb_build_sampling_stats_concurrency`
 
