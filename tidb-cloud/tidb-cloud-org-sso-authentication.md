@@ -194,7 +194,7 @@ In TiDB Cloud, the SAML authentication method is disabled by default. After enab
 
     - **SCIM Provisioning Accounts**
 
-        It is disabled by default. You can enable it if you want to centralize and automate provisioning, deprovisioning, and identity management for TiDB Cloud Cloud organization users and groups from your identity provider. For detailed configuration steps, see [Configure SCIM Provisioning](#configure-scim-provisioning).
+        It is disabled by default. You can enable it if you want to centralize and automate provisioning, deprovisioning, and identity management for TiDB Cloud Cloud organization users and groups from your identity provider. For detailed configuration steps, see [Configure SCIM provisioning](#configure-scim-provisioning).
 
 4. Click **Save**.
 
