@@ -5,16 +5,16 @@ summary: Learn how to import Data into TiDB Cloud via MySQL CLI.
 
 # Import MySQL Data via MySQL Commands in Terminal
 
+This document describes how to import data into TiDB Cloud via MySQL CLI. You can import data from an SQL file or a CSV file. The following sections provide step-by-step instructions for importing data from each type of file.
+
 ## Prerequisites
 
-Before you can import data via MySQL CLI to TiDB Cloud, you should have the following prerequisites in place:
+Before you can import data via MySQL CLI to TiDB Cloud, you need the following prerequisites:
 
-- Access to your TiDB Cloud Cluster. If you don't have a TiDB cluster, you can create one as [follows](/develop/dev-guide-build-cluster-in-cloud.md).
-- MySQL CLI installed on your local machine.
+- You have access to your TiDB Cloud Cluster. If you do not have a TiDB cluster, create one following the instructions in [Build a TiDB Serverless Cluster](/develop/dev-guide-build-cluster-in-cloud.md).
+- Install MySQL CLI on your local computer.
 
-## Steps
-
-### 1. Connect to your TiDB Cloud Cluster
+## Step 1. Connect to your TiDB Cloud cluster
 
 Connect to your TiDB cluster depending on the TiDB deployment option you have selected.
 
@@ -35,7 +35,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you have se
 
     > **Tip:**
     >
-    > If you have created a password before, you can either use the original password or click **Reset password** to generate a new one.
+    > If you have created a password before, either use the original password or click **Reset password** to generate a new one.
 
 </div>
 <div label="TiDB Dedicated">
@@ -46,14 +46,14 @@ Connect to your TiDB cluster depending on the TiDB deployment option you have se
 
 3. Click **Allow Access from Anywhere**.
 
-    For more details about how to obtain the connection string, refer to [TiDB Dedicated standard connection](https://docs.pingcap.com/tidbcloud/connect-via-standard-connection).
+    For more details about how to obtain the connection string, see [Connect to TiDB Dedicated via Standard Connection](/tidb-cloud/connect-via-standard-connection.md).
 
 </div>
 </SimpleTab>
 
-### 2. Define Table and Insert Sample Data
+## Step 2. Define the table and insert sample data
 
-Before importing data, you need to prepare the table structure and insert real sample data into it. Here's an example SQL file(`product_data.sql`) that you can use to create a table and insert sample data:
+Before importing data, you need to prepare the table structure and insert real sample data into it. The following is an example SQL file (`product_data.sql`) that you can use to create a table and insert sample data:
 
 ```sql
 -- Create a table in your TiDB database
@@ -70,9 +70,16 @@ INSERT INTO products (product_id, product_name, price) VALUES
     (3, 'Tablet', 299.99);
 ```
 
-### 3. Import Data from SQL File
+## Step 3. Import data from a SQL or CSV file
 
-1. Provide a real SQL file (e.g., `product_data.sql`) that contains the data you want to import. This SQL file should contain INSERT statements with real data.
+You can import data from an SQL file or a CSV file. The following sections provide step-by-step instructions for importing data from each type.
+
+<SimpleTab>
+<div label="From an SQL file">
+
+Do the following to import data from an SQL file:
+
+1. Provide a real SQL file (for example, `product_data.sql`) that contains the data you want to import. This SQL file must contain `INSERT` statements with real data.
 
 2. Use the following command to import data from the SQL file:
 
@@ -81,13 +88,17 @@ mysql --comments --connect-timeout 150 -u '<your_username>' -h <your_cluster_hos
 ```
 
 > **Note:**
-> The default database name used here is 'test', and you can either manually create your own database or use the 'create database' command in an SQL file.
+>
+> The default database name used here is `test`, and you can either manually create your own database or use the `CREATE DATABASE` command in an SQL file.
 
-### 4. Import Data from CSV File
+</div>
+<div label="From a CSV file">
+
+Do the following to import data from a CSV file:
 
 1. Create a database and schema in TiDB to match your data import needs.
 
-2. Provide a sample CSV file (e.g., `product_data.csv`) that contains the data you want to import. Here's an example of what your sample CSV file might look like:
+2. Provide a sample CSV file (for example, `product_data.csv`) that contains the data you want to import. The following is an example of a CSV file:
 
     **product_data.csv:**
 
@@ -101,14 +112,17 @@ mysql --comments --connect-timeout 150 -u '<your_username>' -h <your_cluster_hos
 3. Use the following command to import data from the CSV file:
 
     ```bash
-    mysql --comments --connect-timeout 150 -u '<your_username>' -h <your_host> -P 4000 -D test --ssl-mode=VERIFY_IDENTITY --ssl-ca=<your_ca_path> -p<your_password> -e "LOAD DATA LOCAL INFILE '<your_csv_path>' INTO TABLE products 
+    mysql --comments --connect-timeout 150 -u '<your_username>' -h <your_host> -P 4000 -D test --ssl-mode=VERIFY_IDENTITY --ssl-ca=<your_ca_path> -p<your_password> -e "LOAD DATA LOCAL INFILE '<your_csv_path>' INTO TABLE products
     FIELDS TERMINATED BY ','
     LINES TERMINATED BY '\n'
     IGNORE 1 LINES (product_id, product_name, price);"
     ```
 
-4. Make sure to adjust the paths, table name ('products' in this example), and other specifics according to your actual data and setup.
+4. Make sure to replace the paths, table name (`products` in this example), `<your_username>`, `<your_host>`, `<your_password>`, `<your_csv_path>`, `<your_ca_path>`, and other placeholders with your actual information, and replace the sample CSV data with your real dataset as needed.
 
 > **Note:**
-> Replace `<your_username>`, `<your_host>`, `<your_password>`, `<your_csv_path>`, `<your_ca_path>`, and other placeholders with your actual information, and replace the sample CSV data with your real dataset as needed.
-> For more syntax details about `LOAD DATA LOCAL INFILE`, please refer to: [MySQL Official Documentation](https://dev.mysql.com/doc/refman/8.0/en/load-data.html)
+>
+> For more syntax details about `LOAD DATA LOCAL INFILE`, see [MySQL Official Documentation](https://dev.mysql.com/doc/refman/8.0/en/load-data.html).
+
+</div>
+</SimpleTab>
