@@ -420,11 +420,11 @@ When running the `ANALYZE` statement, you can use [`tidb_analyze_partition_concu
 
 #### `tidb_distsql_scan_concurrency`
 
-When you analyze regular columns, you can use the [`tidb_distsql_scan_concurrency`](/system-variables.md#tidb_distsql_scan_concurrency) parameter to control the number of Region to be read at one time. The default value is `15`. Meanwhile, it will also affect query performance, please adjust carefully.
+When you analyze regular columns, you can use the [`tidb_distsql_scan_concurrency`](/system-variables.md#tidb_distsql_scan_concurrency) parameter to control the number of Regions to be read at one time. The default value is `15`. Note that changing the value will affect query performance. Adjust the value carefully.
 
 #### `tidb_index_serial_scan_concurrency`
 
-When you analyze index columns, you can use the [`tidb_index_serial_scan_concurrency`](/system-variables.md#tidb_index_serial_scan_concurrency) parameter to control the number of Region to be read at one time. The default value is `1`. Meanwhile, it will also affect query performance, please adjust carefully.
+When you analyze index columns, you can use the [`tidb_index_serial_scan_concurrency`](/system-variables.md#tidb_index_serial_scan_concurrency) parameter to control the number of Regions to be read at one time. The default value is `1`. Note that changing the value will affect query performance. Adjust the value carefully.
 
 ### Persist ANALYZE configurations
 
