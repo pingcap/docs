@@ -37,13 +37,13 @@ To enable the Chat2Query API, perform the following steps:
 
 5. Click the **Data Service** link in the message to access the Chat2Query API.
 
-    You can find that the **Chat2Query System** [Data App](/tidb-cloud/tidb-cloud-glossary.md#data-app) and its **Chat2Data** [endpoint](/tidb-cloud/tidb-cloud-glossary.md#endpoint) are displayed in the left pane.
+    You can find that the **Chat2Query** [Data App](/tidb-cloud/tidb-cloud-glossary.md#data-app) and its chat2data [endpoints](/tidb-cloud/tidb-cloud-glossary.md#endpoint) are displayed in the left pane.
 
 ## Step 2. Create an API key
 
 Before calling an endpoint, you need to create an API key. To create an API key for the Chat2Query Data App, perform the following steps:
 
-1. In the left pane of [**Data Service**](https://tidbcloud.com/console/data-service), click the name of **Chat2Query System** to view its details.
+1. In the left pane of [**Data Service**](https://tidbcloud.com/console/data-service), click the name of **Chat2Query** to view its details.
 2. In the **Authentication** area, click **Create API Key**.
 3. In the **Create API Key** dialog box, enter a description and select a role for your API key.
 
