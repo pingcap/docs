@@ -18,7 +18,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 - Introduce event filters for changefeeds.
 
-    This enhancement empowers you to easily manage event filters for changefeeds directly through the TiDB Cloud console, streamlining the process of excluding specific events from changefeeds and providing better control over data replication downstream.
+    This enhancement empowers you to easily manage event filters for changefeeds directly through the [TiDB Cloud console](https://tidbcloud.com/), streamlining the process of excluding specific events from changefeeds and providing better control over data replication downstream.
 
     For more information, see [Changefeed](/tidb-cloud/changefeed-overview.md#edit-a-changefeed).
 
