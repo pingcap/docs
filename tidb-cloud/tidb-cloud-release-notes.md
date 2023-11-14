@@ -8,6 +8,20 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2023.
 
+## November 14, 2023
+
+**General changes**
+
+- When you restore data from TiDB Dedicated clusters, the default behavior is now modified from restoring without user accounts to restoring with all user accounts, including the `cloud_admin@'%'` account.
+
+    For more information, see [BackUp and Restore TiDB Dedicated Data](/tidb-cloud/backup-and-restore.md).
+
+- Introduce event filters for changefeeds.
+
+    This enhancement empowers you to easily manage event filters for changefeeds directly through the [TiDB Cloud console](https://tidbcloud.com/), streamlining the process of excluding specific events from changefeeds and providing better control over data replication downstream.
+
+    For more information, see [Changefeed](/tidb-cloud/changefeed-overview.md#edit-a-changefeed).
+
 ## November 7, 2023
 
 **General changes**
