@@ -40,7 +40,7 @@ When you use the wildcard for matching schemas and tables, note the following:
     | `all`             |      | Includes all the events below |
     | `all dml`         |      | Includes all DML events below |
     | `all ddl`         |      | Includes all DDL events below |
-    | `incompatible ddl changes` |      | Includes all incompatible DDL events, i.e. DDLs that can cause data loss     |
+    | `incompatible ddl changes` |      | Includes all incompatible DDL events, where "incompatible DDL" means DDL operations that might cause data loss   |
     | `none`            |      | Includes none of the events below |
     | `none ddl`        |      | Includes none of the DDL events below |
     | `none dml`        |      | Includes none of the DML events below |
@@ -59,24 +59,24 @@ When you use the wildcard for matching schemas and tables, note the following:
     | `value range decrease` | incompatible DDL  | A DDL statement that decreases the value range of a column field, such as the `ALTER TABLE MODIFY COLUMN` statement that changes `VARCHAR(20)` to `VARCHAR(10)`  |
     | `precision decrease` | incompatible DDL  | A DDL statement that decreases the precision of a column field, such as the `ALTER TABLE MODIFY COLUMN` statement that changes `Decimal(10, 2)` to `Decimal(10, 1)`  |
     | `modify column` | incompatible DDL  | A DDL statement that changes the type of a column field, such as the `ALTER TABLE MODIFY COLUMN` statement that changes `INT` to `VARCHAR` |
-    | `rename column` | incompatible DDL  | A DDL statement that changes the name of a column, such as the `ALTER TABLE RENAME COLUMN` statement|
+    | `rename column` | incompatible DDL  | A DDL statement that changes the name of a column, such as the `ALTER TABLE RENAME COLUMN` statement |
     | `rename index` | incompatible DDL  | A DDL statement that changes the index name, such as the `ALTER TABLE RENAME INDEX` statement |
     | `drop column` | incompatible DDL  | A DDL statement that drops a column from a table, such as the `ALTER TABLE DROP COLUMN` statement |
     | `drop index` | incompatible DDL  | A DDL statement that drops an index in a table, such as the `ALTER TABLE DROP INDEX` statement |
-    | `truncate table partition` | incompatible DDL  | A DDL statement that truncates a partition in a table, such as the `ALTER TABLE TRUNCATE PARTITION` statement |
+    | `truncate table partition` | incompatible DDL  | A DDL statement that removes all data from a specified partition, such as the `ALTER TABLE TRUNCATE PARTITION` statement |
     | `drop primary key` | incompatible DDL  | A DDL statement that drops the primary key, such as the `ALTER TABLE DROP PRIMARY KEY` statement |
-    | `drop unqiue key` | incompatible DDL  | A DDL statement that drops a unique key, such as the `ALTER TABLE DROP UNIQUE KEY` statement |
+    | `drop unique key` | incompatible DDL  | A DDL statement that drops a unique key, such as the `ALTER TABLE DROP UNIQUE KEY` statement |
     | `modify default value` | incompatible DDL  | A DDL statement that modifies a column's default value, such as the `ALTER TABLE CHANGE DEFAULT` statement |
     | `modify constraint` | incompatible DDL  | A DDL statement that modifies the constraint, such as the `ALTER TABLE ADD CONSTRAINT` statement |
     | `modify columns order` | incompatible DDL  | A DDL statement that modifies the order of the columns, such as the `ALTER TABLE CHANGE AFTER` statement |
     | `modify charset` | incompatible DDL  | A DDL statement that modifies the charset of a column, such as the `ALTER TABLE MODIFY CHARSET` statement |
     | `modify collation` | incompatible DDL  | A DDL statement that modifies a column collation, such as the `ALTER TABLE MODIFY COLLATE` statement |
-    | `remove auto increment` | incompatible DDL  | A DDL statement that removes a auto-incremental key |
+    | `remove auto increment` | incompatible DDL  | A DDL statement that removes an auto-incremental key |
     | `modify storage engine` | incompatible DDL  | A DDL statement that modifies the table storage engine, such as the `ALTER TABLE ENGINE = MyISAM` statement |
-    | `reorganize table partition` | incompatible DDL  | A DDL statement that reorganizes the table partition, such as the `ALTER TABLE REORGANIZE PARTITION` statement |
+    | `reorganize table partition` | incompatible DDL  | A DDL statement that reorganizes partitions in a table, such as the `ALTER TABLE REORGANIZE PARTITION` statement |
     | `rebuild table partition` | incompatible DDL  | A DDL statement that rebuilds the table partition, such as the `ALTER TABLE REBUILD PARTITION` statement |
-    | `exchange table partition` | incompatible DDL  | A DDL statement that exchanges the table partition, such as the `ALTER TABLE EXCHANGE PARTITION` statement |
-    | `coalesce table partition` | incompatible DDL  | A DDL statement that coalesces the table partition, such as the `ALTER COALESCE PARTITION` statement |
+    | `exchange table partition` | incompatible DDL  | A DDL statement that exchanges a partition between two tables, such as the `ALTER TABLE EXCHANGE PARTITION` statement |
+    | `coalesce table partition` | incompatible DDL  | A DDL statement that decreases the number of partitions in a table, such as the `ALTER COALESCE PARTITION` statement |
 
 - `sql-pattern`: it is used to filter specified DDL SQL statements. The matching rule supports using a regular expression. For example, `"^DROP\\s+PROCEDURE"`.
 
