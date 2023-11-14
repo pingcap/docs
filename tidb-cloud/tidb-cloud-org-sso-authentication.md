@@ -194,7 +194,7 @@ In TiDB Cloud, the SAML authentication method is disabled by default. After enab
 
     - **SCIM Provisioning Accounts**
 
-        It is disabled by default. You can enable it if you want to centralize and automate provisioning, deprovisioning, and identity management for TiDB Cloud Cloud organization users and groups from your identity provider. For detailed configuration steps, see [Configure SCIM provisioning](#configure-scim-provisioning).
+        It is disabled by default. You can enable it if you want to centralize and automate provisioning, deprovisioning, and identity management for TiDB Cloud organization users and groups from your identity provider. For detailed configuration steps, see [Configure SCIM provisioning](#configure-scim-provisioning).
 
 4. Click **Save**.
 
@@ -238,7 +238,7 @@ In TiDB Cloud, the SAML authentication method is disabled by default. After enab
     >
     > Granting a role to a group means all members in the group gain that role. If a group includes members already in your TiDB Cloud organization, these members also gain the new role of the group.
 
-    1. To grant organization roles to the groups, click **By organization**, and then configure the roles in the **Organization Role** column. To learn about permissions of organization roles, see [Organizatin roles](/tidb-cloud/manage-user-access.md#organization-roles).
+    1. To grant organization roles to the groups, click **By organization**, and then configure the roles in the **Organization Role** column. To learn about permissions of organization roles, see [Organization roles](/tidb-cloud/manage-user-access.md#organization-roles).
     2. To grant project roles to the groups, click **By project**, and then configure the roles in the **Project Role** column. To learn about permissions of the project roles, see [Project roles](/tidb-cloud/manage-user-access.md#project-roles).
 
 5. If you change the members of the pushed groups in your identity provider, these changes are dynamically synchronized to the corresponding groups in TiDB Cloud.
