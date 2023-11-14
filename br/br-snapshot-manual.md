@@ -177,7 +177,7 @@ br restore full \
 
 In the preceding command:
 
-- `--with-sys-table`: BR restores **data in some system tables**, including account permission data and SQL bindings. However, it does not restore statistics tables (`mysql.stat_*`) and system variable tables (`mysql.tidb` and `mysql.global_variables`). For more information, see [Restore tables in the `mysql` schema](/br/br-snapshot-guide.md#restore-tables-in-the-mysql-schema).
+- `--with-sys-table`: BR restores **data in some system tables**, including account permission data and SQL bindings, and statistics (see [Back up statistics](/br/br-snapshot-manual.md#back-up-statistics)). However, it does not restore statistics tables (`mysql.stat_*`) and system variable tables (`mysql.tidb` and `mysql.global_variables`). For more information, see [Restore tables in the `mysql` schema](/br/br-snapshot-guide.md#restore-tables-in-the-mysql-schema).
 - `--ratelimit`: The maximum speed **per TiKV** performing backup tasks. The unit is in MiB/s.
 - `--log-file`: The target file where the `br` log is written.
 
