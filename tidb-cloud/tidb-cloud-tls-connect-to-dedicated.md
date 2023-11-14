@@ -28,7 +28,7 @@ In the [TiDB Cloud console](https://tidbcloud.com/), you can get examples of dif
 
 3. On the **Standard Connection** tab of this dialog, follow the three steps to set up the TLS connection.
    - Step 1：Create traffic filter
-   - Step 2：Download CA Cert
+   - Step 2：Download CA cert
    - Step 3：Connect with an SQL client
 
 4. Under **Step 1: Create traffic filter** in the dialog, configure the IP addresses that are allowed to access your cluster. For more information, see [Configure an IP access list in standard connection](/tidb-cloud/configure-ip-access-list.md#configure-an-ip-access-list-in-standard-connection).
