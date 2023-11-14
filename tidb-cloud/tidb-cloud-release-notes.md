@@ -8,6 +8,18 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2023.
 
+## November 14, 2023
+
+**General changes**
+
+- When you restore TiDB Dedicated clusters, the default behavior has been modified from restoring without user accounts to restoring with all user accounts, including the cloud_admin@'%' account.
+
+    For more information, see [BackUp and Restore TiDB Dedicated Data](/tidb-cloud/backup-and-restore.md).
+
+**Console changes**
+
+- Change **Download TiDB cluster CA** to **Download CA Cert**.
+
 ## November 7, 2023
 
 **General changes**
