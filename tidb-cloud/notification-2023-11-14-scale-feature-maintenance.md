@@ -24,7 +24,6 @@ During the maintenance window, [change vCPU and RAM](https://docs.pingcap.com/ti
         - Modify clusters
             - Change the vCPU and RAM of TiDB, TiKV, or TiFlash nodes.
  
-
 ### Affected features of TiDB Cloud API
 
 - Cluster management
