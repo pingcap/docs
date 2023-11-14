@@ -23,21 +23,21 @@ To enable the Chat2Query API, perform the following steps:
 
 1. Go to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
 
-   > **Tip:**
-   >
-   > If you have multiple projects, you can click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner and switch to another project.
+    > **Tip:**
+    >
+    > If you have multiple projects, you can click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner and switch to another project.
 
 2. Click your cluster name, and then click **Chat2Query** in the left navigation pane.
 3. In the upper-right corner of Chat2Query, click **...** and select **Settings**.
 4. Enable **DataAPI** and the Chat2Query Data App is created.
 
-   > **Note:**
-   >
-   > After DataAPI is enabled for one TiDB cluster, all TiDB clusters in the same project can use the Chat2Query API.
+    > **Note:**
+    >
+    > After DataAPI is enabled for one TiDB cluster, all TiDB clusters in the same project can use the Chat2Query API.
 
 5. Click the **Data Service** link in the message to access the Chat2Query API.
 
-   You can find that the **Chat2Query System** [Data App](/tidb-cloud/tidb-cloud-glossary.md#data-app) and its **Chat2Data** [endpoint](/tidb-cloud/tidb-cloud-glossary.md#endpoint) are displayed in the left pane.
+    You can find that the **Chat2Query System** [Data App](/tidb-cloud/tidb-cloud-glossary.md#data-app) and its **Chat2Data** [endpoint](/tidb-cloud/tidb-cloud-glossary.md#endpoint) are displayed in the left pane.
 
 ## Step 2. Create an API key
 
@@ -54,7 +54,7 @@ Before calling an endpoint, you need to create an API key. To create an API key 
 
 4. Click **Next**. The public key and private key are displayed.
 
-   Make sure that you have copied and saved the private key in a secure location. After leaving this page, you will not be able to get the full private key again.
+    Make sure that you have copied and saved the private key in a secure location. After leaving this page, you will not be able to get the full private key again.
 
 5. Click **Done**.
 
