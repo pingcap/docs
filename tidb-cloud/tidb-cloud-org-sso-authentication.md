@@ -216,7 +216,7 @@ In TiDB Cloud, the SAML authentication method is disabled by default. After enab
 
     1. In your identity provider, add SCIM provisioning for your TiDB Cloud organization to your SAML app integration.
 
-        For example, if your identity provider is Okta, see [Add SCIM provisioning to app integrations](https://help.okta.com/en-us/content/topics/apps/apps_app_integration_wizard_scim.html).
+        For example, if your identity provider is Okta, see [Add SCIM provisioning to app integrations](https://help.okta.com/en-us/content/topics/apps/apps_app_integration_wizard_scim.htm).
 
     2. Assign your SAML app integration to the desired groups in your identity provider so members in the groups can access and use the app integration.
 
