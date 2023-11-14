@@ -76,28 +76,24 @@ Since TiDB is compatible with the MySQL protocol and MySQL syntax, most of the O
 
 Here you can find additional resources to connect, manage and develop with TiDB Cloud.
 
-### To explore your data
++ To explore your data
+    - [Quick Start](/develop/dev-guide-build-cluster-in-cloud.md)
+    - [Use AI-powered SQL Editor <sup>beta</sup>](/explore-data-with-chat2query)
+    - Connect with client tools such as [VSCode](/develop/dev-guide-gui-vscode-sqltools), [DBeaver](/develop/dev-guide-gui-dbeaver) or [DataGrip](/develop/dev-guide-gui-datagrip)
 
-- [Quick Start](/develop/dev-guide-build-cluster-in-cloud.md)
-- [Use AI-powered SQL Editor <sup>beta</sup>](/explore-data-with-chat2query)
-- Connect with client tools such as [VSCode](/develop/dev-guide-gui-vscode-sqltools), [DBeaver](/develop/dev-guide-gui-dbeaver) or [DataGrip](/develop/dev-guide-gui-datagrip)
++ To build your application
+    - [Choose Driver or ORM](/develop/dev-guide-choose-driver-or-orm.md)
+    - [Use TiDB Cloud Data API <sup>beta</sup>](/data-service-overview)
 
-### To build your application
++ To manage your cluster
+    - [TiDB Cloud Command Line Tools](/get-started-with-cli)
+    - [TiDB Cloud Administration API](https://docs.pingcap.com/tidbcloud/api/v1beta1)
 
-- [Choose Driver or ORM](/develop/dev-guide-choose-driver-or-orm.md)
-- [Use TiDB Cloud Data API <sup>beta</sup>](/data-service-overview)
-
-### To manage your cluster
-
-- [TiDB Cloud Command Line Tools](/get-started-with-cli)
-- [TiDB Cloud Administration API](https://docs.pingcap.com/tidbcloud/api/v1beta1)
-
-### To learn more about TiDB
-
-- [Database Schema Design](/develop/dev-guide-schema-design-overview.md)
-- [Write Data](/develop/dev-guide-insert-data.md)
-- [Read Data](/develop/dev-guide-get-data-from-single-table.md)
-- [Transaction](/develop/dev-guide-transaction-overview.md)
-- [Optimize](/develop/dev-guide-optimize-sql-overview.md)
++ To learn more about TiDB
+    - [Database Schema Design](/develop/dev-guide-schema-design-overview.md)
+    - [Write Data](/develop/dev-guide-insert-data.md)
+    - [Read Data](/develop/dev-guide-get-data-from-single-table.md)
+    - [Transaction](/develop/dev-guide-transaction-overview.md)
+    - [Optimize](/develop/dev-guide-optimize-sql-overview.md)
 
 </CustomContent>
