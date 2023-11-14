@@ -29,11 +29,11 @@ After your TiDB Serverless cluster is created on TiDB Cloud, you can connect to 
 
 In the preceding connection methods, you can choose your desired one based on your needs:
 
-| Connection method  | Transport protocol | User interface | Scenario                                                                                                                                                       |
-|--------------------|--------------------|----------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Direct connections | TCP                | SQL            | Long-running environment, such as Java, Node.js, and Python.                                                                                                   |
-| Data Service       | HTTP               | RESTful API    | All browser and application interactions.                                                                                                                      |
-| Serverless Driver  | HTTP               | SQL            | Edge environments such as [Vercel Edge Functions](https://vercel.com/docs/functions/edge-functions) and [Cloudflare Workers](https://workers.cloudflare.com/). |
+| Connection method  | User interface     | Scenario                                                                                                                                                       |
+|--------------------|--------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Direct connections | SQL/ORM            | Long-running environment, such as Java, Node.js, and Python.                                                                                                   |
+| Data Service       | RESTful API        | All browser and application interactions.                                                                                                                      |
+| Serverless Driver  | SQL/ORM            | Serverless and edge environments such as [Vercel Edge Functions](https://vercel.com/docs/functions/edge-functions) and [Cloudflare Workers](https://workers.cloudflare.com/). |
 
 ## Network
 
@@ -54,7 +54,7 @@ The following table shows the network you can use in different connection method
 | Connection method          | Network                      | Description                                                                                                       |
 |----------------------------|------------------------------|-------------------------------------------------------------------------------------------------------------------|
 | Direct connections         | Public or private endpoint   | Direct connections can be made via both public and private endpoints.                                             |
-| Data Service (beta)        | /                            | Accessing TiDB Serverless via Data Service (beta) does not need to specify the network type.     |
+| Data Service (beta)        | /                            | Accessing TiDB Serverless via Data Service (beta) does not need to specify the network type.                      |
 | Serverless Driver (beta)   | Public endpoint              | Serverless Driver only supports connections via public endpoint.                                                  |
 
 ## What's next
