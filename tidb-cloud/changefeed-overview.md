@@ -65,8 +65,10 @@ It takes about 10 minutes to complete the scaling process (during which the chan
 
     TiDB Cloud populates the changefeed configuration by default. You can modify the following configurations:
 
-    - MySQL sink: **MySQL Connection** and **Table Filter**.
-    - Kafka sink: all configurations.
+    - Apache Kafka sink: all configurations.
+    - MySQL sink: **MySQL Connection**, **Table Filter**, and **Event Filter**.
+    - TiDB Cloud sink: **TiDB Cloud Connection**, **Table Filter**, and **Event Filter**.
+    - Cloud storage sink: **Storage Endpoint**, **Table Filter**, and **Event Filter**.
 
 4. After editing the configuration, click **...** > **Resume** to resume the corresponding changefeed.
 
