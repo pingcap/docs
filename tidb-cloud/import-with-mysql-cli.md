@@ -122,7 +122,7 @@ Do the following to import data from a CSV file:
 
 > **Note:**
 >
-> For more syntax details about `LOAD DATA LOCAL INFILE`, see [sql-statement-load-data](https://docs.pingcap.com/tidb/stable/sql-statement-load-data).
+> For more syntax details about `LOAD DATA LOCAL INFILE`, see [`LOAD DATA`](/sql-statements/sql-statement-load-data.md).
 
 </div>
 </SimpleTab>
