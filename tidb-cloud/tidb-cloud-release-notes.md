@@ -16,10 +16,6 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
     For more information, see [BackUp and Restore TiDB Dedicated Data](/tidb-cloud/backup-and-restore.md).
 
-**Console changes**
-
-- Change **Download TiDB cluster CA** to **Download CA Cert**.
-
 ## November 7, 2023
 
 **General changes**
