@@ -38,7 +38,7 @@ In the [TiDB Cloud console](https://tidbcloud.com/), you can get examples of dif
     > **Note:**
     >
     > - After downloading your CA Cert, you can store it in the default storage path of your operating system, or specify another storage path. You need to replace the CA Cert path in the code example with your own CA Cert path in the subsequent steps.  
-   > - TiDB Dedicated does not force clients to use TLS connections, and user-defined configuration of the [`require_secure_transport`](/system-variables.md#require_secure_transport-new-in-v610) variable is currently not supported on [TiDB Dedicated](https://docs.pingcap.com/tidbcloud/system-variables#require_secure_transport-new-in-v610).
+   > - TiDB Dedicated does not force clients to use TLS connections, and user-defined configuration of the [`require_secure_transport`](/system-variables.md#require_secure_transport-new-in-v610) variable is currently not supported on TiDB Dedicated.
 
 6. Under **Step 3: Connect with an SQL client** in the dialog, click the tab of your preferred connection method, and then refer to the connection string and sample code on the tab to connect to your cluster.
 
