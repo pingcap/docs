@@ -89,7 +89,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 
 2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
 
-3. Click **Allow Access from Anywhere**, and then click **Download CA Cert** to download the CA certificate.
+3. Click **Allow Access from Anywhere**, and then click **Download TiDB cluster CA** to download the CA certificate.
 
     For more details about how to obtain the connection string, refer to [TiDB Dedicated standard connection](https://docs.pingcap.com/tidbcloud/connect-via-standard-connection).
 

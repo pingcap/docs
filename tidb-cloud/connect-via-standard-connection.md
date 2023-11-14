@@ -38,7 +38,7 @@ To connect to a TiDB Dedicated cluster via standard connection, take the followi
 
     3. Click **Create Filter** to confirm the changes.
 
-4. Under **Step 2: Download TiDB cluster CA** in the dialog, click **Download CA Cert** for TLS connection to TiDB clusters. The TiDB cluster CA supports TLS 1.2 version by default.
+4. Under **Step 2: Download TiDB cluster CA** in the dialog, click **Download TiDB cluster CA** for TLS connection to TiDB clusters. The TiDB cluster CA supports TLS 1.2 version by default.
 
     > **Note:**
     >
