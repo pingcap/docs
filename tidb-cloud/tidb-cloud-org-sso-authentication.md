@@ -244,4 +244,4 @@ In TiDB Cloud, the SAML authentication method is disabled by default. After enab
 5. If you change the members of the pushed groups in your identity provider, these changes are dynamically synchronized to the corresponding groups in TiDB Cloud.
 
     - If new members are added to the groups in your identity provider, these members gain the roles of the corresponding groups.
-    - If some members are removed from the groups in your identity provider, these members lose the roles of the corresponding groups.
+    - If some members are removed from the groups in your identity provider, these members are also removed from the corresponding groups in TiDB Cloud.
