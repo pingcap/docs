@@ -236,7 +236,7 @@ In TiDB Cloud, the SAML authentication method is disabled by default. After enab
 
     > **Note:**
     >
-    > Granting a role to a group means all members in the group gain that role. If a group includes members already in TiDB Cloud, these members also gain the new role of the group.
+    > Granting a role to a group means all members in the group gain that role. If a group includes members already in your TiDB Cloud organization, these members also gain the new role of the group.
 
     1. To grant organization roles to the groups, click **By organization**, and then configure the roles in the **Organization Role** column. To learn about permissions of organization roles, see [Organizatin roles](/tidb-cloud/manage-user-access.md#organization-roles).
     2. To grant project roles to the groups, click **By project**, and then configure the roles in the **Project Role** column. To learn about permissions of the project roles, see [Project roles](/tidb-cloud/manage-user-access.md#project-roles).
