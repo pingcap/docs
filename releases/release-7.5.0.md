@@ -40,7 +40,7 @@ Compared with the previous LTS 7.1.0, 7.5.0 includes new features, improvements,
   </tr>
   <tr>
     <td>Resource groups support <a href="https://docs.pingcap.com/tidb/v7.5/tidb-resource-control#manage-queries-that-consume-more-resources-than-expected-runaway-queries"> managing runaway queries</a> (experimental) {/* tw@hfxsd */}</td>
-    <td><a href="https://docs.pingcap.com/tidb/v7.5/tidb-resource-control#use-resource-control-to-achieve-resource-isolation" target="_blank">Resource Control</a> is a framework for resource-isolating workloads by Resource Groups, but it makes no calls on how individual queries affect work inside of each group. TiDB v7.2 introduced "runaway query conrol" to let operators control how TiDB identifies and treats these queries per Resource Group. Depending on need, long running queries may be terminated or throttled, and the queries can be identified by exact SQL text or their plan digests, for better generalization. In v7.4, TiDB allows operators to proactively watch for known bad queries, similar to a SQL blocklist at the database level.</td>
+    <td><a href="https://docs.pingcap.com/tidb/v7.5/tidb-resource-control" target="_blank">Resource Control</a> is a framework for resource-isolating workloads by Resource Groups, but it makes no calls on how individual queries affect work inside of each group. TiDB v7.2.0 introduces "runaway queries control" to let you control how TiDB identifies and treats these queries per Resource Group. Depending on needs, long running queries might be terminated or throttled, and the queries can be identified by exact SQL text, SQL digests or their plan digests, for better generalization. In v7.3.0, TiDB enables you to proactively watch for known bad queries, similar to a SQL blocklist at the database level.</td>
   </tr>
   <tr>
     <td>SQL</td>
@@ -67,7 +67,7 @@ Compared with the previous LTS 7.1.0, 7.5.0 includes new features, improvements,
 
 ### Scalability
 
-* Support selecting the TiDB nodes to parallelly execute the backend `ADD INDEX` or `IMPORT INTO` tasks of the distributed execution framework (GA) [#46258](https://github.com/pingcap/tidb/issues/46258) @[ywqzzy](https://github.com/ywqzzy)<!--**tw@hfxsd** 1581-->
+* Support designating and isolating TiDB nodes to execute `ADD INDEX` or `IMPORT INTO` tasks when the distributed execution framework is enabled [#46258](https://github.com/pingcap/tidb/issues/46258) @[ywqzzy](https://github.com/ywqzzy)<!--**tw@hfxsd** 1581-->
 
     Executing `ADD INDEX` or `IMPORT INTO` tasks in parallel in a resource-intensive cluster can consume a large amount of TiDB node resources, which can lead to cluster performance degradation. To avoid performance impact on existing services, v7.4.0 introduces the system variable [`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740) as an experimental feature to control the service scope of each TiDB node under the [TiDB Backend Task Distributed Execution Framework](/tidb-distributed-execution-framework.md). You can select several existing TiDB nodes or set the TiDB service scope for new TiDB nodes, and all parallel `ADD INDEX` and `IMPORT INTO` tasks only run on these nodes. In v7.5.0, this feature becomes generally available (GA).
 
@@ -104,7 +104,7 @@ Compared with the previous LTS 7.1.0, 7.5.0 includes new features, improvements,
 
 * BR supports backing up and restoring statistics [#48008](https://github.com/pingcap/tidb/issues/48008) @[Leavrth](https://github.com/Leavrth) <!--**tw@hfxsd** 1437-->
 
-    Starting from TiDB v7.5.0, the `br` command-line tool introduces the `--ignore-stats` parameter to back up and restore database statistics. When you set this parameter to `false`, the `br` command-line tool supports backing up and restoring statistics of columns, indexes, and tables. In this case, you do not need to manually run the statistics collection task for the TiDB database restored from the backup, or wait for the completion of the automatic collection task. This feature simplifies the database maintenance work and improves the query performance.
+    Starting from TiDB v7.5.0, the `br` command-line tool introduces the `--ignore-stats` parameter to back up and restore database statistics. When you set this parameter to `false`, the `br` command-line tool supports backing up and restoring statistics of columns, indexes, and tables. In this case, you do not need to manually run the statistics collection task for the TiDB database restored from the backup, or wait for the completion of automatic collection tasks. This feature simplifies database maintenance work and improves query performance.
 
     For more information, see [documentation](/br/br-snapshot-manual.md#back-up-statistics).
 
