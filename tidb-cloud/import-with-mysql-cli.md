@@ -1,11 +1,11 @@
 ---
-title: Import Data into TiDB Cloud via MySQL Commands in Terminal
-summary: Learn how to import Data into TiDB Cloud via MySQL CLI.
+title: Import Data into TiDB Cloud via MySQL CLI
+summary: Learn how to import Data into TiDB Cloud via Import Data into TiDB Cloud via MySQL CLI.
 ---
 
-# Import MySQL Data via MySQL Commands in Terminal
+# Import Data into TiDB Cloud via MySQL CLI
 
-This document describes how to import data into TiDB Cloud via MySQL CLI. You can import data from an SQL file or a CSV file. The following sections provide step-by-step instructions for importing data from each type of file.
+This document describes how to import data into TiDB Cloud via the [MySQL Command-Line Client](https://dev.mysql.com/doc/refman/8.0/en/mysql.html). You can import data from an SQL file or a CSV file. The following sections provide step-by-step instructions for importing data from each type of file.
 
 ## Prerequisites
 
