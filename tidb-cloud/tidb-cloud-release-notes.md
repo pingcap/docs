@@ -16,6 +16,12 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
     For more information, see [BackUp and Restore TiDB Dedicated Data](/tidb-cloud/backup-and-restore.md).
 
+- Introduce event filters for changefeeds.
+
+    This enhancement empowers you to easily manage event filters for changefeeds directly through the TiDB Cloud console, streamlining the process of excluding specific events from changefeeds and providing better control over data replication downstream.
+
+    For more information, see [Changefeed](/tidb-cloud/changefeed-overview.md#edit-a-changefeed).
+
 ## November 7, 2023
 
 **General changes**
