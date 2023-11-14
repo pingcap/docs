@@ -1,16 +1,16 @@
 ---
-title: 2023-11-15 TiDB Cloud Dedicated Scale Feature Maintenance Notification
-summary: Learn about the details of TiDB Cloud Dedicated Scale Feature Maintenance on November 15, 2023, such as the maintenance window and impact.
+title: 2023-11-14 TiDB Cloud Dedicated Scale Feature Maintenance Notification
+summary: Learn about the details of TiDB Cloud Dedicated Scale Feature Maintenance on November 14, 2023, such as the maintenance window and impact.
 ---
 
-# [2023-11-15] TiDB Cloud Dedicated Scale Feature Maintenance Notification
+# [2023-11-14] TiDB Cloud Dedicated Scale Feature Maintenance Notification
 
-This notification describes the details that you need to know about the maintenance for [Scale feature](https://docs.pingcap.com/tidbcloud/scale-tidb-cluster#scale-your-tidb-cluster) of TiDB Cloud Dedicated on November 15, 2023.
+This notification describes the details that you need to know about the maintenance for [Scale feature](https://docs.pingcap.com/tidbcloud/scale-tidb-cluster#scale-your-tidb-cluster) of TiDB Cloud Dedicated on November 14, 2023.
 
 ## Maintenance window
 
-- Start time: 2023-11-15 00:00 (UTC+0)
-- End time:  2023-11-17 00:00 (UTC+0)
+- Start time: 2023-11-14 16:00 (UTC+0)
+- End time:  2023-11-16 16:00 (UTC+0)
 - Duration: up to 48 hours
 
 ## Impact
