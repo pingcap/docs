@@ -112,7 +112,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you have se
     - **Username**: enter the `user` parameter from the TiDB Cloud connection dialog.
     - **Password**: enter the password of the TiDB Dedicated cluster.
 
-    ![Navicat: configure connection general panel for TiDB Dedicated](/media/develop/navicat-connection-config-serverless-general.png)
+    ![Navicat: configure connection general panel for TiDB Dedicated](/media/develop/navicat-connection-config-dedicated-general.png)
 
 6. **Test Connection** to validate the connection to the TiDB Dedicated cluster.
 
