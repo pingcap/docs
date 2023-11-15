@@ -381,7 +381,7 @@ After creating the placement policies, you can attach them to the corresponding 
 
 ### Specify a cluster with 5 replicas distributed 2:2:1 across multiple data centers
 
-If you need a specific data distribution, such as a 5-replica distribution in the proportion of 2:2:1, you can specify different numbers of replicas for different constraints by configuring these `CONSTRAINTS` in the [dictionary formats](#constraints-format):
+If you need a specific data distribution, such as a 5-replica distribution in the proportion of 2:2:1, you can specify different numbers of replicas for different constraints by configuring these `CONSTRAINTS` in the [dictionary formats](#constraints-formats):
 
 ```sql
 CREATE PLACEMENT POLICY `deploy221` CONSTRAINTS='{"+region=us-east-1":2, "+region=us-east-2": 2, "+region=us-west-1": 1}';
