@@ -78,7 +78,7 @@ For **GCS**, before filling **GCS Endpoint**, you need to first grant the GCS bu
 
         ![Get bucket URI](/media/tidb-cloud/changefeed/sink-to-cloud-storage-gcs-uri01.png)
 
-    - To get a folder's gsutil URI, open the folder, click the copy button, and add `gs://` as a prefix. For example, if the bucket name is `test-sink-gcs` and the folder name is `changefeed-xxx`, the URI would be `gs://test-sink-gcs/changefeed-xxx`.
+    - To get a folder's gsutil URI, open the folder, click the copy button, and add `gs://` as a prefix. For example, if the bucket name is `test-sink-gcs` and the folder name is `changefeed-xxx`, the URI would be `gs://test-sink-gcs/changefeed-xxx/`.
 
         ![Get bucket URI](/media/tidb-cloud/changefeed/sink-to-cloud-storage-gcs-uri02.png)
 
