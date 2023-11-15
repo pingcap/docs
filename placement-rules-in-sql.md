@@ -99,7 +99,7 @@ This section describes how to create, attach, view, modify, and delete placement
     In this statement:
 
     - The `PRIMARY_REGION="us-east-1"` option means placing Raft Leaders on nodes with the `region` label as `us-east-1`.
-    - The `REGIONS="us-east-1,us-west-1"` option means placing Raft Followers on nodes with the `region` label as `us-east-1` and nodes with the region` label as `us-west-1`.
+    - The `REGIONS="us-east-1,us-west-1"` option means placing Raft Followers on nodes with the `region` label as `us-east-1` and nodes with the `region` label as `us-west-1`.
 
     For more configurable placement options and their meanings, see the [Placement options](#placement-option-reference).
 
@@ -381,7 +381,7 @@ After creating the placement policies, you can attach them to the corresponding 
 
 ### Specify a cluster with 5 replicas distributed 2:2:1 across multiple data centers
 
-If you need a specific data distribution, such as a 5-replica distribution in the proportion of 2:2:1, you can specify different numbers of replicas for different constraints by configuring these `CONSTRAINTS` in the [dictionary format](#constraints-format):
+If you need a specific data distribution, such as a 5-replica distribution in the proportion of 2:2:1, you can specify different numbers of replicas for different constraints by configuring these `CONSTRAINTS` in the [dictionary formats](#constraints-format):
 
 ```sql
 CREATE PLACEMENT POLICY `deploy221` CONSTRAINTS='{"+region=us-east-1":2, "+region=us-east-2": 2, "+region=us-west-1": 1}';
@@ -465,7 +465,7 @@ After executing the statements in the example, TiDB will place the `app_order` d
 
 | Tool Name | Minimum supported version | Description |
 | --- | --- | --- |
-| Backup & Restore (BR) | 6.0 | Before v6.0, BR does not support backing up and restoring placement policies. For more information, see [Why does an error occur when I restore placement rules to a cluster](/faq/backup-and-restore-faq.md##why-does-an-error-occur-when-i-restore-placement-rules-to-a-cluster). |
+| Backup & Restore (BR) | 6.0 | Before v6.0, BR does not support backing up and restoring placement policies. For more information, see [Why does an error occur when I restore placement rules to a cluster](/faq/backup-and-restore-faq.md#why-does-an-error-occur-when-i-restore-placement-rules-to-a-cluster). |
 | TiDB Lightning | Not compatible yet | An error is reported when TiDB Lightning imports backup data that contains placement policies  |
 | TiCDC | 6.0 | Ignores placement policies, and does not replicate the policies to the downstream |
 | TiDB Binlog | 6.0 | Ignores placement policies, and does not replicate the policies to the downstream |
