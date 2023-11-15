@@ -109,9 +109,9 @@ Connect to your TiDB cluster depending on the TiDB deployment option you have se
     - **Username**: enter the `user` parameter from the TiDB Cloud connection dialog.
     - **Password**: click **Store in Keychain ...**, enter the password of the TiDB Dedicated cluster, then click **OK** to store the password.
 
-        ![MySQL Workbench: store password in keychain](/media/develop/mysql-workbench-store-password-in-keychain.png)
+        ![MySQL Workbench: store Dedicated Tier password in keychain](/media/develop/mysql-workbench-store-dedicated-password-in-keychain.png)
 
-    ![MySQL Workbench: configure connection parameters panel for TiDB Dedicated](/media/develop/mysql-workbench-connection-config-serverless-parameters.png)
+    ![MySQL Workbench: configure connection parameters panel for TiDB Dedicated](/media/develop/mysql-workbench-connection-config-dedicated-parameters.png)
 
 6. Click **Test Connection**, if the connection test is successful, you can see the **Successfully made the MySQL connection** message. Click **OK** to save the connection configuration.
 
