@@ -47,7 +47,7 @@ Configure the bucket access for TiDB Cloud and get the Role ARN as follows:
     4. On the **Create policy** page, click the **JSON** tab.
     5. Copy the following access policy template and paste it to the policy text field.
 
-        ```
+        ```json
         {
             "Version": "2012-10-17",
             "Statement": [
