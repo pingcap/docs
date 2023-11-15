@@ -53,6 +53,7 @@
       - [JetBrains DataGrip](/develop/dev-guide-gui-datagrip.md)
       - [DBeaver](/develop/dev-guide-gui-dbeaver.md)
       - [VS Code](/develop/dev-guide-gui-vscode-sqltools.md)
+      - [MySQL Workbench](/develop/dev-guide-gui-mysql-workbench.md)
     - [Choose Driver or ORM](/develop/dev-guide-choose-driver-or-orm.md)
     - [Connect to TiDB](/develop/dev-guide-connect-to-tidb.md)
     - [Connection Pools and Connection Parameters](/develop/dev-guide-connection-parameters.md)
