@@ -1,6 +1,6 @@
 ---
 title: Import Data into TiDB Cloud via MySQL CLI
-summary: Learn how to import Data into TiDB Cloud via Import Data into TiDB Cloud via MySQL CLI.
+summary: Learn how to import Data into TiDB Cloud via MySQL CLI.
 ---
 
 # Import Data into TiDB Cloud via MySQL CLI
