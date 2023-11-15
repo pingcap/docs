@@ -34,8 +34,6 @@ http://192.168.0.123:2379/dashboard/
 > <details>
 > <summary>Upgrade TiUP Cluster</summary>
 >
-> {{< copyable "shell-regular" >}}
->
 > ```bash
 > tiup update --self
 > tiup update cluster --force
@@ -197,9 +195,9 @@ For a deployed cluster:
 
     {{< copyable "shell-regular" >}}
 
-   ```shell
-   tiup cluster reload CLUSTER_NAME -R pd
-   ```
+    ```shell
+    tiup cluster reload CLUSTER_NAME -R pd
+    ```
 
 See [Common TiUP Operations - Modify the configuration](/maintain-tidb-using-tiup.md#modify-the-configuration) for details.
 

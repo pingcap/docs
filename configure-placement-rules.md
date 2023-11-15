@@ -6,15 +6,11 @@ aliases: ['/docs/dev/configure-placement-rules/','/docs/dev/how-to/configure/pla
 
 # Placement Rules
 
-> **Warning:**
->
-> In the scenario of using TiFlash, the Placement Rules feature has been extensively tested and can be used in the production environment. Except for the scenario where TiFlash is used, using Placement Rules alone has not been extensively tested, so it is not recommended to enable this feature separately in the production environment.
-
 > **Note:**
 >
-> TiDB v5.3.0 introduces an experimental support for [Placement Rules in SQL](/placement-rules-in-sql.md). This offers a more convenient way to configure the placement of tables and partitions. Placement Rules in SQL might replace placement configuration with PD in future releases.
+> This document introduces how to manually specify placement rules in Placement Driver (PD). It is now recommended to use [Placement Rules in SQL](/placement-rules-in-sql.md). This offers a more convenient way to configure the placement of tables and partitions.
 
-Placement Rules is an experimental feature of the Placement Driver (PD) introduced in v4.0. It is a replica rule system that guides PD to generate corresponding schedules for different types of data. By combining different scheduling rules, you can finely control the attributes of any continuous data range, such as the number of replicas, the storage location, the host type, whether to participate in Raft election, and whether to act as the Raft leader.
+Placement Rules, introduced in v5.0, is a replica rule system that guides PD to generate corresponding schedules for different types of data. By combining different scheduling rules, you can finely control the attributes of any continuous data range, such as the number of replicas, the storage location, the host type, whether to participate in Raft election, and whether to act as the Raft leader.
 
 The Placement Rules feature is enabled by default in v5.0 and later versions of TiDB. To disable it, refer to [Disable Placement Rules](#disable-placement-rules). 
 
@@ -40,9 +36,9 @@ The following table shows the meaning of each field in a rule:
 | `Override`        | `true`/`false`                     | Whether to overwrite rules with smaller index (in a group).  |
 | `StartKey`        | `string`, in hexadecimal form                |  Applies to the starting key of a range.                |
 | `EndKey`          | `string`, in hexadecimal form                |  Applies to the ending key of a range.                |
-| `Role`            | `string` | Replica roles, including leader/follower/learner.                           |
+| `Role`            | `string` | Replica roles, including voter/leader/follower/learner.                           |
 | `Count`           | `int`, positive integer                     |  The number of replicas.                            |
-| `LabelConstraint` | `[]Constraint`                    |  Filers nodes based on the label.               |
+| `LabelConstraint` | `[]Constraint`                    |  Filters nodes based on the label.               |
 | `LocationLabels`  | `[]string`                        |  Used for physical isolation.                       |
 | `IsolationLevel`  | `string`                          |  Used to set the minimum physical isolation level
 
@@ -99,7 +95,7 @@ In this way, PD enables this feature after the cluster is successfully bootstrap
 }
 ```
 
-For a bootstrapped cluster, you can also enable Placement Rules online through pd-ctl:
+For a bootstrapped cluster, you can also enable Placement Rules dynamically through pd-ctl:
 
 {{< copyable "shell-regular" >}}
 
@@ -279,12 +275,12 @@ The output of the above command:
 }
 ```
 
-To write the output to a file, add the `-out` argument to the `rule-bundle get` subcommand, which is convenient for subsequent modification and saving.
+To write the output to a file, add the `--out` argument to the `rule-bundle get` subcommand, which is convenient for subsequent modification and saving.
 
 {{< copyable "shell-regular" >}}
 
 ```bash
-pd-ctl config placement-rules rule-bundle get pd -out="group.json"
+pd-ctl config placement-rules rule-bundle get pd --out="group.json"
 ```
 
 After the modification is finished, you can use the `rule-bundle set` subcommand to save the configuration in the file to the PD server. Unlike the `save` command described in [Set rules using pd-ctl](#set-rules-using-pd-ctl), this command replaces all the rules of this group on the server side.
@@ -292,7 +288,7 @@ After the modification is finished, you can use the `rule-bundle set` subcommand
 {{< copyable "shell-regular" >}}
 
 ```bash
-pd-ctl config placement-rules rule-bundle set pd -in="group.json"
+pd-ctl config placement-rules rule-bundle set pd --in="group.json"
 ```
 
 ### Use pd-ctl to view and modify all configurations
@@ -361,7 +357,7 @@ You only need to add a rule that limits the key range to the range of metadata, 
   "start_key": "6d00000000000000f8",
   "end_key": "6e00000000000000f8",
   "role": "voter",
-  "count": "5",
+  "count": 5,
   "location_labels": ["zone", "rack", "host"]
 }
 ```
@@ -436,7 +432,7 @@ Add a separate rule for the row key of the table and limit `count` to `2`. Use `
 
 ### Scenario 4: Add two follower replicas for a table in the Beijing node with high-performance disks
 
-The following example shows a more complicated `label_constraints` configuration. In this rule, the replicas must be placed in the `bj1` or `bj2` machine room, and the disk type must not be `hdd`.
+The following example shows a more complicated `label_constraints` configuration. In this rule, the replicas must be placed in the `bj1` or `bj2` machine room, and the disk type must be `nvme`.
 
 {{< copyable "" >}}
 
@@ -450,13 +446,13 @@ The following example shows a more complicated `label_constraints` configuration
   "count": 2,
   "label_constraints": [
     {"key": "zone", "op": "in", "values": ["bj1", "bj2"]},
-    {"key": "disk", "op": "notIn", "values": ["hdd"]}
+    {"key": "disk", "op": "in", "values": ["nvme"]}
   ],
   "location_labels": ["host"]
 }
 ```
 
-### Scenario 5: Migrate a table to the TiFlash cluster
+### Scenario 5: Migrate a table to the nodes with SSD disks
 
 Different from scenario 3, this scenario is not to add new replica(s) on the basis of the existing configuration, but to forcibly override the other configuration of a data range. So you need to specify an `index` value large enough and set `override` to `true` in the rule group configuration to override the existing rule.
 
@@ -466,16 +462,16 @@ The rule:
 
 ```json
 {
-  "group_id": "tiflash-override",
-  "id": "learner-replica-table-ttt",
+  "group_id": "ssd-override",
+  "id": "ssd-table-45",
   "start_key": "7480000000000000ff2d5f720000000000fa",
   "end_key": "7480000000000000ff2e00000000000000f8",
   "role": "voter",
   "count": 3,
   "label_constraints": [
-    {"key": "engine", "op": "in", "values": ["tiflash"]}
+    {"key": "disk", "op": "in", "values": ["ssd"]}
   ],
-  "location_labels": ["host"]
+  "location_labels": ["rack", "host"]
 }
 ```
 
@@ -485,7 +481,7 @@ The rule group:
 
 ```json
 {
-  "id": "tiflash-override",
+  "id": "ssd-override",
   "index": 1024,
   "override": true,
 }

@@ -12,13 +12,13 @@ This document introduces the common use cases of TiDB tools and how to choose th
 
 If you need to deploy and operate TiDB on physical or virtual machines, you can install [TiUP](/tiup/tiup-overview.md), and then use TiUP to manage TiDB components such as TiDB, PD, and TiKV.
 
-## Deploy and operate TiDB in Kubernetes
+## Deploy and operate TiDB on Kubernetes
 
-If you need to deploy and operate TiDB in Kubernetes, you can deploy a Kubernetes cluster, and then deploy [TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/stable). After that, you can use TiDB Operator to deploy and operate a TiDB cluster.
+If you need to deploy and operate TiDB on Kubernetes, you can deploy a Kubernetes cluster, and then deploy [TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/stable). After that, you can use TiDB Operator to deploy and operate a TiDB cluster.
 
 ## Import data from CSV to TiDB
 
-If you need to import the compatible CSV files exported by other tools to TiDB, use [TiDB Lightning](/tidb-lightning/migrate-from-csv-using-tidb-lightning.md).
+If you need to import the compatible CSV files exported by other tools to TiDB, use [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md).
 
 ## Import full data from MySQL/Aurora
 
@@ -26,22 +26,22 @@ If you need to import full data from MySQL/Aurora, use [Dumpling](/dumpling-over
 
 ## Migrate data from MySQL/Aurora
 
-If you need to migrate both full data and incremental data from MySQL/Aurora, use [TiDB Data Migration](/dm/dm-overview.md) (DM) to perform the [full and incremental data migration](/dm/migrate-from-mysql-aurora.md).
+If you need to migrate both full data and incremental data from MySQL/Aurora, use [TiDB Data Migration](/dm/dm-overview.md) (DM) to perform the [Migrate Data from Amazon Aurora to TiDB](/migrate-aurora-to-tidb.md).
 
 If the full data volume is large (at the TB level), you can first use [Dumpling](/dumpling-overview.md) and [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md) to perform the full data migration, and then use DM to perform the incremental data migration.
 
 ## Back up and restore TiDB cluster
 
-If you need to back up a TiDB cluster or restore backed up data to the cluster, use [BR](/br/backup-and-restore-tool.md) (Backup & Restore).
+If you need to back up a TiDB cluster or restore backed up data to the cluster, use [BR](/br/backup-and-restore-overview.md) (Backup & Restore).
 
-In addition, BR can also be used to perform [incremental backup](/br/use-br-command-line-tool.md#back-up-incremental-data) and [incremental restore](/br/use-br-command-line-tool.md#restore-incremental-data) of TiDB cluster data.
+In addition, BR can also be used to perform [incremental backup](/br/br-incremental-guide.md#back-up-incremental-data) and [incremental restore](/br/br-incremental-guide.md#restore-incremental-data) of TiDB cluster data.
 
 ## Migrate data to TiDB
 
 If you need to migrate data from a TiDB cluster to another TiDB cluster, use [Dumpling](/dumpling-overview.md) to export full data from TiDB as SQL dump files, and then use [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md) to import data to another TiDB cluster.
 
-If you also need to migrate incremental data, use [TiDB Binlog](/tidb-binlog/tidb-binlog-overview.md).
+If you also need to migrate incremental data, you can use [TiCDC](/ticdc/ticdc-overview.md).
 
 ## TiDB incremental data subscription
 
-If you need to subscribe to TiDB's incremental changes, use [TiDB Binlog](/tidb-binlog/binlog-consumer-client.md).
+If you need to subscribe to TiDB's incremental changes, you can use [TiCDC](/ticdc/ticdc-overview.md).

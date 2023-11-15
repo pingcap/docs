@@ -5,13 +5,18 @@ summary: The usage of ALTER PLACEMENT POLICY in TiDB.
 
 # ALTER PLACEMENT POLICY
 
-> **Warning:**
->
-> Placement Rules in SQL is an experimental feature. The syntax might change before its GA, and there might also be bugs.
->
-> If you understand the risks, you can enable this experiment feature by executing `SET GLOBAL tidb_enable_alter_placement = 1;`.
-
 `ALTER PLACEMENT POLICY` is used to modify existing placement policies that have previously been created. All the tables and partitions which use the placement policy will automatically be updated.
+
+> **Note:**
+>
+> This feature is not available on [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless) clusters.
+
+`ALTER PLACEMENT POLICY` _replaces_ the previous policy with the new definition. It does not _merge_ the old policy with the new one. In the following example, `FOLLOWERS=4` is lost when the `ALTER PLACEMENT POLICY` is executed:
+
+```sql
+CREATE PLACEMENT POLICY p1 FOLLOWERS=4;
+ALTER PLACEMENT POLICY p1 PRIMARY_REGION="us-east-1" REGIONS="us-east-1,us-west-1";
+```
 
 ## Synopsis
 
@@ -23,22 +28,30 @@ PolicyName ::=
     Identifier
 
 PlacementOptionList ::=
-    DirectPlacementOption
-|   PlacementOptionList DirectPlacementOption
-|   PlacementOptionList ',' DirectPlacementOption
+    PlacementOption
+|   PlacementOptionList PlacementOption
+|   PlacementOptionList ',' PlacementOption
 
-DirectPlacementOption ::=
+PlacementOption ::=
+    CommonPlacementOption
+|   SugarPlacementOption
+|   AdvancedPlacementOption
+
+CommonPlacementOption ::=
+    "FOLLOWERS" EqOpt LengthNum
+
+SugarPlacementOption ::=
     "PRIMARY_REGION" EqOpt stringLit
 |   "REGIONS" EqOpt stringLit
-|   "FOLLOWERS" EqOpt LengthNum
-|   "VOTERS" EqOpt LengthNum
-|   "LEARNERS" EqOpt LengthNum
 |   "SCHEDULE" EqOpt stringLit
+
+AdvancedPlacementOption ::=
+    "LEARNERS" EqOpt LengthNum
 |   "CONSTRAINTS" EqOpt stringLit
 |   "LEADER_CONSTRAINTS" EqOpt stringLit
 |   "FOLLOWER_CONSTRAINTS" EqOpt stringLit
-|   "VOTER_CONSTRAINTS" EqOpt stringLit
 |   "LEARNER_CONSTRAINTS" EqOpt stringLit
+|   "SURVIVAL_PREFERENCES" EqOpt stringLit
 ```
 
 ## Examples
@@ -53,8 +66,9 @@ DirectPlacementOption ::=
 
 ```sql
 CREATE PLACEMENT POLICY p1 PRIMARY_REGION="us-east-1" REGIONS="us-east-1,us-west-1";
-ALTER PLACEMENT POLICY p1 PRIMARY_REGION="us-east-1" REGIONS="us-east-1,us-west-1,us-west-2" FOLLOWERS=4;
-SHOW CREATE PLACEMENT POLICY p1\G
+CREATE TABLE t1 (i INT) PLACEMENT POLICY=p1; -- Assign policy p1 to table t1
+ALTER PLACEMENT POLICY p1 PRIMARY_REGION="us-east-1" REGIONS="us-east-1,us-west-1,us-west-2" FOLLOWERS=4; -- The rules of t1 will be updated automatically.
+SHOW CREATE PLACEMENT POLICY p1\G;
 ```
 
 ```
@@ -62,9 +76,9 @@ Query OK, 0 rows affected (0.08 sec)
 
 Query OK, 0 rows affected (0.10 sec)
 
-*************************** 1. row ***************************
-       Policy: p1
-Create Policy: CREATE PLACEMENT POLICY `p1` PRIMARY_REGION="us-east-1" REGIONS="us-east-1,us-west-1,us-west-2" FOLLOWERS=4
+***************************[ 1. row ]***************************
+Policy        | p1
+Create Policy | CREATE PLACEMENT POLICY `p1` PRIMARY_REGION="us-east-1" REGIONS="us-east-1,us-west-1,us-west-2" FOLLOWERS=4
 1 row in set (0.00 sec)
 ```
 

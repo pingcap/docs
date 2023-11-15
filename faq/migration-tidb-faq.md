@@ -5,15 +5,15 @@ summary: Learn about the FAQs related to data migration.
 
 # Migration FAQs
 
-This document summarizes the frequently asked questions (FAQs) related to TiDB data migration. 
+This document summarizes the frequently asked questions (FAQs) related to TiDB data migration.
 
 For the frequently asked questions about migration-related tools, click the corresponding links in the list below:
 
-- [Backup & Restore FAQ](/br/backup-and-restore-faq.md)
+- [Backup & Restore FAQs](/faq/backup-and-restore-faq.md)
 - [TiDB Binlog FAQ](/tidb-binlog/tidb-binlog-faq.md)
 - [TiDB Lightning FAQs](/tidb-lightning/tidb-lightning-faq.md)
 - [TiDB Data Migration (DM) FAQs](/dm/dm-faq.md)
-- [Troubleshoot TiCDC](/ticdc/troubleshoot-ticdc.md)
+- [TiCDC FAQs](/ticdc/ticdc-faq.md)
 
 ## Full data export and import
 
@@ -68,7 +68,7 @@ iperf Done.
 
 If the output shows low network bandwidth and high bandwidth fluctuations, a large number of retries and EOF errors might appear in each component log. In this case, you need to consult your network service provider to improve the network quality.
 
-If the output of each metric looks good, try to update each component. If the problem persists after the updating, you can [contact us](https://tidbcommunity.slack.com/archives/CH7TTLL7P).
+If the output of each metric looks good, try to update each component. If the problem persists after the updating, [get support](/support.md) from PingCAP or the community.
 
 ### If I accidentally import the MySQL user table into TiDB, or forget the password and cannot log in, how to deal with it?
 
@@ -78,7 +78,7 @@ Restart the TiDB service, add the `-skip-grant-table=true` parameter in the conf
 
 You can use the following methods to export the data in TiDB:
 
-- See [MySQL uses mysqldump to export part of the table data](https://blog.csdn.net/xin_yu_xin/article/details/7574662) in Chinese and export data using mysqldump and the `WHERE` clause.
+- Export data using mysqldump and the `WHERE` clause.
 - Use the MySQL client to export the results of `select` to a file.
 
 ### How to migrate from DB2 or Oracle to TiDB?
@@ -122,7 +122,7 @@ This issue might have the following causes:
 + The database's primary keys are not evenly distributed (for example, when you enable [`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md)).
 + The upstream database is TiDB and the exported table is a partitioned table.
 
-For the above cases, Dumpling splits excessively large data chunk for the export and sends queries with excessively large results. To address the issue, you can [contact us](https://tidbcommunity.slack.com/archives/CH7TTLL7P) to get the nightly version of Dumpling.
+For the above cases, Dumpling splits excessively large data chunk for the export and sends queries with excessively large results. To address the issue, you can get the latest version of Dumpling.
 
 ### Does TiDB have a function like the Flashback Query in Oracle? Does it support DDL?
 
@@ -138,7 +138,7 @@ No. Currently, the data replication depends on the application itself.
 
 ### How to migrate the traffic quickly?
 
-It is recommended to migrate application data from MySQL to TiDB using [TiDB Data Migration](/dm/dm-overview.md) tool. You can migrate the read and write traffic in batches by editing the network configuration as needed. Deploy a stable network LB (HAproxy, LVS, F5, DNS, etc.) on the upper layer, in order to implement seamless migration by directly editing the network configuration.
+It is recommended to migrate application data from MySQL to TiDB using [TiDB Data Migration](/dm/dm-overview.md) tool. You can migrate the read and write traffic in batches by editing the network configuration as needed. Deploy a stable network LB (such as HAproxy, LVS, F5, and DNS) on the upper layer, in order to implement seamless migration by directly editing the network configuration.
 
 ### Is there a limit for the total write and read capacity in TiDB?
 
@@ -166,17 +166,17 @@ No. None of the DDL operations can be executed on the target table when you load
 
 ### Does TiDB support the `replace into` syntax?
 
-Yes. But the `load data` does not support the `replace into` syntax.
+Yes.
 
 ### Why does the query speed getting slow after deleting data?
 
-Deleting a large amount of data leaves a lot of useless keys, affecting the query efficiency. Currently the Region Merge feature is in development, which is expected to solve this problem. For details, see the [deleting data section in TiDB Best Practices](https://pingcap.com/blog/2017-07-24-tidbbestpractice/#write).
+Deleting a large amount of data leaves a lot of useless keys, affecting the query efficiency. Currently the Region Merge feature is in development, which is expected to solve this problem. For details, see the [deleting data section in TiDB Best Practices](https://en.pingcap.com/blog/tidb-best-practice/#write).
 
 ### What is the most efficient way of deleting data?
 
 When deleting a large amount of data, it is recommended to use `Delete from t where xx limit 5000;`. It deletes through the loop and uses `Affected Rows == 0` as a condition to end the loop, so as not to exceed the limit of transaction size. With the prerequisite of meeting business filtering logic, it is recommended to add a strong filter index column or directly use the primary key to select the range, such as `id >= 5000*n+m and id < 5000*(n+1)+m`.
 
-If the amount of data that needs to be deleted at a time is very large, this loop method will get slower and slower because each deletion traverses backward. After deleting the previous data, lots of deleted flags remain for a short period (then all will be processed by Garbage Collection) and influence the following Delete statement. If possible, it is recommended to refine the Where condition. See [details in TiDB Best Practices](https://pingcap.com/blog/2017-07-24-tidbbestpractice/#write).
+If the amount of data that needs to be deleted at a time is very large, this loop method will get slower and slower because each deletion traverses backward. After deleting the previous data, lots of deleted flags remain for a short period (then all will be processed by Garbage Collection) and influence the following Delete statement. If possible, it is recommended to refine the Where condition. See [details in TiDB Best Practices](https://en.pingcap.com/blog/tidb-best-practice/#write).
 
 ### How to improve the data loading speed in TiDB?
 

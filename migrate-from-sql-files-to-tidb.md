@@ -15,7 +15,7 @@ This document describes how to migrate data from MySQL SQL files to TiDB using T
 
 ## Step 1. Prepare SQL files
 
-Put all the SQL files in the same directory, like `/data/my_datasource/` or `s3://my-bucket/sql-backup?region=us-west-2`. TiDB Lighting recursively searches for all `.sql` files in this directory and its subdirectories.
+Put all the SQL files in the same directory, like `/data/my_datasource/` or `s3://my-bucket/sql-backup`. TiDB Lightning recursively searches for all `.sql` files in this directory and its subdirectories.
 
 ## Step 2. Define the target table schema
 
@@ -25,26 +25,12 @@ If you use Dumpling to export data, the table schema file is automatically expor
 
 + **Method 1**: Create the target table schema using TiDB Lightning.
 
-    1. Write SQL files that contain the required DDL statements.
+    Create SQL files that contain the required DDL statements:
 
-        - The format of the file name is `${db_name}-schema-create.sql`, and this file should have the `CREATE DATABASE` statements.
-        - The format of the file name is `${db_name}.${table_name}-schema.sql`, and this file should have the `CREATE TABLE` statements.
-
-    2. During the migration, add the following configuration in `tidb-lightning.toml`:
-
-        ```toml
-        [mydumper]
-        no-schema = false # To create the table schema in the target database using TiDB Lightning, set the value to false
-        ```
+    - Add `CREATE DATABASE` statements in the `${db_name}-schema-create.sql` files.
+    - Add `CREATE TABLE` statements in the `${db_name}.${table_name}-schema.sql` files.
 
 + **Method 2**: Create the target table schema manually.
-
-    Before the migration, add the following configuration in `tidb-lightning.toml`:
-
-    ```toml
-    [mydumper]
-    no-schema = true # If you have already created the target table schema, set the value to true, which means skipping the schema creation.
-    ```
 
 ## Step 3. Create the configuration file
 
@@ -59,19 +45,16 @@ level = "info"
 file = "tidb-lightning.log"
 
 [tikv-importer]
-# "local"：Default. The local backend is used to import large volumes of data (around or more than 1 TiB). During the import, the target TiDB cluster cannot provide any service.
-# "tidb"：The "tidb" backend can also be used to import small volumes of data (less than 1 TiB). During the import, the target TiDB cluster can provide service normally. For the information about backend mode, refer to https://docs.pingcap.com/tidb/stable/tidb-lightning-backends.
+# "local": Default. The local backend is used to import large volumes of data (around or more than 1 TiB). During the import, the target TiDB cluster cannot provide any service.
+# "tidb": The "tidb" backend can also be used to import small volumes of data (less than 1 TiB). During the import, the target TiDB cluster can provide service normally. For the information about backend mode, refer to https://docs.pingcap.com/tidb/stable/tidb-lightning-backends.
 
 backend = "local"
-# Sets the temporary storage directory for the sorted key-value files. The directory must be empty, and the storage space must be enough to store the largest single table from the data source. For better import performance, it is recommended to use a directory different from `data-source-dir` and use flash storage and exclusive I/O for the directory.
+# Sets the temporary storage directory for the sorted key-value files. The directory must be empty, and the storage space must be greater than the size of the dataset to be imported. For better import performance, it is recommended to use a directory different from `data-source-dir` and use flash storage and exclusive I/O for the directory.
 sorted-kv-dir = "${sorted-kv-dir}"
 
 [mydumper]
 # Directory of the data source
-data-source-dir = "${data-path}" # Local or S3 path, such as 's3://my-bucket/sql-backup?region=us-west-2'
-
-# If you have manually created the target table schema in #Step 2, set it to true; otherwise, it is false.
-# no-schema = true
+data-source-dir = "${data-path}" # Local or S3 path, such as 's3://my-bucket/sql-backup'
 
 [tidb]
 # The information of target cluster
@@ -96,7 +79,7 @@ If you import the data from S3, you need to pass in `SecretKey` and `AccessKey` 
 ```shell
 export AWS_ACCESS_KEY_ID=${access_key}
 export AWS_SECRET_ACCESS_KEY=${secret_key}
-nohup tiup tidb-lightning -config tidb-lightning.toml -no-schema=true > nohup.out 2>&1 &
+nohup tiup tidb-lightning -config tidb-lightning.toml > nohup.out 2>&1 &
 ```
 
 TiDB Lightning also supports reading credential files from `~/.aws/credentials`.
@@ -107,7 +90,7 @@ After the import is started, you can check the progress in one of the following 
 - Use the Grafana dashboard. For details, see [TiDB Lightning Monitoring](/tidb-lightning/monitor-tidb-lightning.md).
 - Use web interface. For details, see [TiDB Lightning Web Interface](/tidb-lightning/tidb-lightning-web-interface.md).
 
-After the import is completed, TiDB Lightning automatically exits. If `the whole procedure completed` is in the last 5 lines of the log, it means that the import is successfully completed.
+After the import is completed, TiDB Lightning automatically exits. Check whether `tidb-lightning.log` contains `the whole procedure completed` in the last lines. If yes, the import is successful. If no, the import encounters an error. Address the error as instructed in the error message.
 
 > **Note:**
 >

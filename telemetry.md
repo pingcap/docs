@@ -6,7 +6,12 @@ aliases: ['/docs/dev/telemetry/']
 
 # Telemetry
 
-By default, TiDB, TiUP and TiDB Dashboard collect usage information and share the information with PingCAP to help understand how to improve the product. For example, this usage information helps prioritize new features.
+When the telemetry is enabled, TiDB, TiUP and TiDB Dashboard collect usage information and share the information with PingCAP to help understand how to improve the product. For example, this usage information helps prioritize new features.
+
+> **Note:**
+>
+> - Starting from February 20, 2023, the telemetry feature is disabled by default in new versions of TiDB and TiDB Dashboard, including v6.6.0, and usage information is not collected and shared with PingCAP. Before upgrading to these versions, if the cluster uses the default telemetry configuration, the telemetry feature is disabled after the upgrade. See [TiDB Release Timeline](/releases/release-timeline.md) for the specific version.
+> - Starting from v1.11.3, the telemetry feature is disabled by default in newly deployed TiUP, and usage information is not collected. If you upgrade from a TiUP version earlier than v1.11.3 to v1.11.3 or a later version, the telemetry feature keeps the same status as before the upgrade.
 
 ## What is shared?
 
@@ -24,6 +29,7 @@ When the telemetry collection feature is enabled in TiDB, the TiDB cluster colle
 - Deployment characteristics, such as the size of hardware (CPU, memory, disk), TiDB components versions, OS name.
 - The status of query requests in the system, such as the number of query requests and the duration.
 - Component usage, for example, whether the Async Commit feature is in use or not.
+- Pseudonymized IP address of the TiDB telemetry data sender.
 
 To view the full content of the usage information shared to PingCAP, execute the following SQL statement:
 
@@ -35,7 +41,7 @@ ADMIN SHOW TELEMETRY;
 
 ### TiDB Dashboard
 
-When the telemetry collection feature is enabled for TiDB Dashboard, usage information on the TiDB Dashboard web UI will be shared, including (but not limited to):
+When the telemetry collection feature is enabled for TiDB Dashboard, usage details of the TiDB Dashboard web UI will be shared, including (but not limited to):
 
 - A randomly generated telemetry ID.
 - User operation information, such as the name of the TiDB Dashboard web page accessed by the user.
@@ -45,7 +51,7 @@ To view the full content of the usage information shared to PingCAP, use the [Ne
 
 ### TiUP
 
-When the telemetry collection feature is enabled in TiUP, user operations with TiUP will be shared, including (but not limited to):
+When the telemetry collection feature is enabled in TiUP, usage details of TiUP will be shared, including (but not limited to):
 
 - A randomly generated telemetry ID.
 - Execution status of TiUP commands, such as whether the execution is successful and the execution duration.
@@ -59,11 +65,29 @@ To view the full content of the usage information shared to PingCAP, set the `TI
 TIUP_CLUSTER_DEBUG=enable tiup cluster list
 ```
 
+### TiSpark
+
+> **Note:**
+>
+> Starting from v3.0.3, the telemetry collection is disabled by default in TiSpark, and usage information is not collected and shared with PingCAP.
+
+When the telemetry collection feature is enabled for TiSpark, the Spark module will share the usage details of TiSpark, including (but not limited to):
+
+- A randomly generated telemetry ID.
+- Some configuration information of TiSpark, such as the read engine and whether streaming read is enabled.
+- Cluster deployment information, such as the machine hardware information, OS information, and component version number of the node where TiSpark is located.
+
+You can view TiSpark usage information that is collected in Spark logs. You can set the Spark log level to INFO or lower, for example:
+
+```shell
+cat {spark.log} | grep Telemetry report | tail -n 1
+```
+
 ## Disable telemetry
 
 ### Disable TiDB telemetry at deployment
 
-When deploying TiDB clusters, configure [`enable-telemetry = false`](/tidb-configuration-file.md#enable-telemetry-new-in-v402) to disable the TiDB telemetry collection on all TiDB instances. You can also use this setting to disable telemetry in an existing TiDB cluster, which does not take effect until you restart the cluster.
+When the telemetry is enabled in existing TiDB clusters, you can configure [`enable-telemetry = false`](/tidb-configuration-file.md#enable-telemetry-new-in-v402) on each TiDB instance to disable the TiDB telemetry collection on that instance, which does not take effect until you restart the cluster.
 
 Detailed steps to disable telemetry in different deployment tools are listed below.
 
@@ -123,11 +147,11 @@ server_configs:
 </details>
 
 <details>
-  <summary>Deployment in Kubernetes via TiDB Operator</summary>
+  <summary>Deployment on Kubernetes via TiDB Operator</summary>
 
 Configure `spec.tidb.config.enable-telemetry: false` in `tidb-cluster.yaml` or TidbCluster Custom Resource.
 
-See [Deploy TiDB Operator in Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-tidb-operator) for details.
+See [Deploy TiDB Operator on Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-tidb-operator) for details.
 
 > **Note:**
 >
@@ -213,11 +237,11 @@ server_configs:
 </details>
 
 <details>
-  <summary>Deployment in Kubernetes via TiDB Operator</summary>
+  <summary>Deployment on Kubernetes via TiDB Operator</summary>
 
 Configure `spec.pd.config.dashboard.enable-telemetry: false` in `tidb-cluster.yaml` or TidbCluster Custom Resource.
 
-See [Deploy TiDB Operator in Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-tidb-operator) for details.
+See [Deploy TiDB Operator on Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-tidb-operator) for details.
 
 > **Note:**
 >
@@ -262,4 +286,4 @@ To meet compliance requirements in different countries or regions, the usage inf
 - For IP addresses from the Chinese mainland, usage information is sent to and stored on cloud servers in the Chinese mainland.
 - For IP addresses from outside of the Chinese mainland, usage information is sent to and stored on cloud servers in the US.
 
-See [PingCAP Privacy Policy](https://pingcap.com/privacy-policy) for details.
+See [PingCAP Privacy Policy](https://en.pingcap.com/privacy-policy/) for details.

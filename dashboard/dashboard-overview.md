@@ -17,9 +17,9 @@ This page shows the overview of the entire TiDB cluster, including the following
 
 ## Access the page
 
-After logging into TiDB Dashboard, the overview page is entered by default, or you can click **Overview** on the left navigation menu to enter this page:
+After logging in to TiDB Dashboard, the overview page is entered by default, or you can click **Overview** in the left navigation menu to enter this page:
 
-![Enter overview page](/media/dashboard/dashboard-overview-access.png)
+![Enter overview page](/media/dashboard/dashboard-overview-access-v650.png)
 
 ## QPS
 
@@ -59,7 +59,7 @@ By default, this area shows the latest 10 slow queries in the entire cluster ove
 
 ![Recent slow queries](/media/dashboard/dashboard-overview-slow-query.png)
 
-By default, the SQL query that is executed longer than 300 milliseconds is counted as a slow query and displayed on the table. You can change this threshold by modifying the [tidb_slow_log_threshold](/system-variables.md#tidb_slow_log_threshold) variable or the [slow-threshold](/tidb-configuration-file.md#slow-threshold) TiDB parameter.
+By default, the SQL query that is executed longer than 300 milliseconds is counted as a slow query and displayed on the table. You can change this threshold by modifying the [tidb_slow_log_threshold](/system-variables.md#tidb_slow_log_threshold) variable or the [instance.tidb_slow_log_threshold](/tidb-configuration-file.md#tidb_slow_log_threshold) TiDB parameter.
 
 The content displayed in this area is consistent with the more detailed [Slow Queries Page](/dashboard/dashboard-slow-query.md). You can click the **Recent Slow Queries** title to view the complete list. For details of the columns in this table, see this [Slow Queries Page](/dashboard/dashboard-slow-query.md).
 
@@ -73,10 +73,10 @@ This area summarizes the total number of instances and abnormal instances of TiD
 
 ![Instances](/media/dashboard/dashboard-overview-instances.png)
 
-The statuses in the image above are described as follows:
+The statuses in the preceding image are described as follows:
 
 - Up: The instance is running properly (including the offline storage instance).
-- Down: The instance is running abnormally, such as network disconnection, process crash, and so on.
+- Down: The instance is running abnormally, such as network disconnection and process crash.
 
 Click the **Instance** title to enter the [Cluster Info Page](/dashboard/dashboard-cluster-info.md) that shows the detailed running status of each instance.
 

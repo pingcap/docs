@@ -40,7 +40,7 @@ In v5.1, the key new features or improvements are as follows:
 | Configuration file | Configuration item | Change type   | Description   |
 |:----------|:-----------|:-----------|:-----------|
 | TiDB configuration file | [`security.enable-sem`](/tidb-configuration-file.md#enable-sem)  | Newly added  | Controls whether to enable the Security Enhanced Mode (SEM). The default value of this configuration item is `false`, which means the SEM is disabled. |
-| TiDB configuration file | [`performance.committer-concurrency`](/tidb-configuration-file.md#committer-concurrency)  | Modified  | Controls the concurrency number for requests related to commit operations in the commit phase of a single transaction. The default value is changed from `16` to `128`. |
+| TiDB configuration file | `performance.committer-concurrency`  | Modified  | Controls the concurrency number for requests related to commit operations in the commit phase of a single transaction. The default value is changed from `16` to `128`. |
 | TiDB configuration file | [`performance.tcp-no-delay`](/tidb-configuration-file.md#tcp-no-delay)  | Newly added  | Determines whether to enable TCP_NODELAY at the TCP layer. The default value is `true`, which means TCP_NODELAY is enabled. |
 | TiDB configuration file | [`performance.enforce-mpp`](/tidb-configuration-file.md#enforce-mpp)  | Newly added  | Controls whether TiDB ignores cost estimates of Optimizer at the instance level and enforces the MPP mode. The default value is `false`. This configuration item controls the initial value of the system variable [`tidb_enforce_mpp`](/system-variables.md#tidb_enforce_mpp-new-in-v51). |
 | TiDB configuration file | [`pessimistic-txn.deadlock-history-capacity`](/tidb-configuration-file.md#deadlock-history-capacity)  | Newly added  | Sets the maximum number of deadlock events that can be recorded in the [`INFORMATION_SCHEMA.DEADLOCKS`](/information-schema/information-schema-deadlocks.md) table of a single TiDB server. The default value is `10`. |
@@ -58,8 +58,8 @@ In v5.1, the key new features or improvements are as follows:
 
 ### Others
 
-- Before the upgrade, check the value of the TiDB configuration [`feedback-probability`](/tidb-configuration-file.md#feedback-probability). If the value is not 0, the "panic in the recoverable goroutine" error will occur after the upgrade, but this error does not affect the upgrade.
-- Upgrade the Go compiler version of TiDB from go1.13.7 to go1.16.4, which improves the TiDB performance. If you are a TiDB developer, upgrade your Go compiler version to ensure a smooth compilation. 
+- Before the upgrade, check the value of the TiDB configuration [`feedback-probability`](https://docs.pingcap.com/tidb/v5.1/tidb-configuration-file#feedback-probability). If the value is not 0, the "panic in the recoverable goroutine" error will occur after the upgrade, but this error does not affect the upgrade.
+- Upgrade the Go compiler version of TiDB from go1.13.7 to go1.16.4, which improves the TiDB performance. If you are a TiDB developer, upgrade your Go compiler version to ensure a smooth compilation.
 - Avoid creating tables with clustered indexes in the cluster that uses TiDB Binlog during the TiDB rolling upgrade.
 - Avoid executing statements like `alter table ... modify column` or `alter table ... change column` during the TiDB rolling upgrade.
 - Since v5.1, setting the replica of system tables, when building TiFlash replicas for each table, is no longer supported. Before upgrading the cluster, you need to clear the relevant system table replicas; otherwise, the upgrade will fail.
@@ -153,7 +153,7 @@ In v5.1, the key new features or improvements are as follows:
     - Improve TiCDC memory usage to avoid OOM in the following scenarios
     - If large amounts of data is accumulated during the replication interruption, exceeding 1TB, the re-replication causes OOM problems.
     - Large amounts of data writes cause OOM problems in TiCDC.
-    - Reduce the possibility of  TiCDC replication interruption in the following scenarios:
+    - Reduce the possibility of TiCDC replication interruption in the following scenarios:
         
         [project#11](https://github.com/pingcap/tiflow/projects/11)
 
@@ -174,7 +174,7 @@ In v5.1, the key new features or improvements are as follows:
 
 ### Telemetry
 
-TiDB adds the running status of TiDB cluster requests in telemetry, including execution status, failure status, etc.
+TiDB adds the running status of TiDB cluster requests in telemetry, including execution status and failure status.
 
 To learn more about the information and how to disable this behavior, refer to [Telemetry](/telemetry.md).
 
@@ -184,6 +184,7 @@ To learn more about the information and how to disable this behavior, refer to [
 
     - Support the built-in function `VITESS_HASH()` [#23915](https://github.com/pingcap/tidb/pull/23915)
     - Support pushing down data of the enumerated type to TiKV to improve performance when using enumerated types in `WHERE` clauses [#23619](https://github.com/pingcap/tidb/issues/23619)
+    - Support the `RENAME USER` syntax [#23648](https://github.com/pingcap/tidb/issues/23648)
     - Optimize the calculation of Window Function to solve TiDB OOM problems when paging data with ROW_NUMBER() [#23807](https://github.com/pingcap/tidb/issues/23807)
     - Optimize the calculation of `UNION ALL` to solve the TiDB OOM problems when using `UNION ALL` to join a large number of `SELECT` statements [#21441](https://github.com/pingcap/tidb/issues/21441)
     - Optimize the dynamic pruning mode of partitioned tables to improve performance and stability [#24150](https://github.com/pingcap/tidb/issues/24150)
@@ -248,7 +249,7 @@ To learn more about the information and how to disable this behavior, refer to [
 
         - Improve data importing speed. The optimization results show that the speed of importing TPC-C data is increased by 30%, and the speed of importing large tables (2TB+) with more indexes (5 indexes) is increased by more than 50%. [#753](https://github.com/pingcap/br/pull/753)
         - Add a pre-check on the data to be imported and also on the target cluster before importing, and report errors to reject the import process if it does not meet the import requirements [#999](https://github.com/pingcap/br/pull/999)
-        - Optimize the timing of checkpoint updates on the Local backend to improve performance of restarting from breakpoints[#1080](https://github.com/pingcap/br/pull/1080)
+        - Optimize the timing of checkpoint updates on the Local backend to improve performance of restarting from breakpoints [#1080](https://github.com/pingcap/br/pull/1080)
 
 ## Bug Fixes
 
@@ -267,7 +268,7 @@ To learn more about the information and how to disable this behavior, refer to [
     - Fix the wrong results of some string functions [#23759](https://github.com/pingcap/tidb/issues/23759)
     - Users now need both `INSERT` and `DELETE` privileges on a table to perform `REPLACE` operations [#23909](https://github.com/pingcap/tidb/issues/23909)
     - Users now need both `INSERT` and `DELETE` privileges on a table to perform `REPLACE` operations [#24070](https://github.com/pingcap/tidb/pull/24070)
-    - Fix the wrong `TableDual` plans caused by incorrectly comparing binaries and bytes[#23846](https://github.com/pingcap/tidb/issues/23846)
+    - Fix the wrong `TableDual` plans caused by incorrectly comparing binaries and bytes [#23846](https://github.com/pingcap/tidb/issues/23846)
     - Fix the panic issue caused by using the prefix index and index join in some cases [#24547](https://github.com/pingcap/tidb/issues/24547) [#24716](https://github.com/pingcap/tidb/issues/24716) [#24717](https://github.com/pingcap/tidb/issues/24717)
     - Fix the issue that the prepared plan cache of `point get` is incorrectly used by the `point get` statement in the transaction [#24741](https://github.com/pingcap/tidb/issues/24741)
     - Fix the issue of writing the wrong prefix index value when the collation is `ascii_bin` or `latin1_bin` [#24569](https://github.com/pingcap/tidb/issues/24569)

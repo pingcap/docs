@@ -6,96 +6,107 @@ aliases: ['/docs/dev/configure-memory-usage/','/docs/dev/how-to/configure/memory
 
 # TiDB Memory Control
 
-Currently, TiDB can track the memory quota of a single SQL query and take actions to prevent OOM (out of memory) or troubleshoot OOM when the memory usage exceeds a specific threshold value. In the TiDB configuration file, you can configure the options as below to control TiDB behaviors when the memory quota exceeds the threshold value:
+Currently, TiDB can track the memory quota of a single SQL query and take actions to prevent OOM (out of memory) or troubleshoot OOM when the memory usage exceeds a specific threshold value. The system variable [`tidb_mem_oom_action`](/system-variables.md#tidb_mem_oom_action-new-in-v610) specifies the action to take when a query reaches the memory limit:
 
-```
-# Valid options: ["log", "cancel"]
-oom-action = "cancel"
-```
-
-- If the configuration item above uses "log", when the memory quota of a single SQL query exceeds the threshold value which is controlled by the `tidb_mem_quota_query` variable, TiDB prints an entry of log. Then the SQL query continues to be executed. If OOM occurs, you can find the corresponding SQL query in the log.
-- If the configuration item above uses "cancel", when the memory quota of a single SQL query exceeds the threshold value, TiDB stops executing the SQL query immediately and returns an error to the client. The error information clearly shows the memory usage of each physical execution operator that consumes much memory in the SQL execution process.
+- A value of `LOG` means that queries will continue to execute when the [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query) limit is reached, but TiDB will print an entry to the log.
+- A value of `CANCEL` means TiDB stops executing the SQL query immediately after the [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query) limit is reached, and returns an error to the client. The error information clearly shows the memory usage of each physical execution operator that consumes memory in the SQL execution process.
 
 ## Configure the memory quota of a query
 
-In the configuration file, you can set the default Memory Quota for each Query. The following example sets it to 32GB:
-
-```
-mem-quota-query = 34359738368
-```
-
-In addition, you can control the memory quota of a query using the following session variables. Generally, you only need to configure `tidb_mem_quota_query`. Other variables are used for advanced configuration which most users do not need to care about.
-
-| Variable Name                    | Description                                       | Unit | Default Value |
-| -------------------------------- | ------------------------------------------------- | ---- | ------------- |
-| tidb_mem_quota_query             | Control the memory quota of a query               | Byte | 1 << 30 (1 GB)  |
-| tidb_mem_quota_hashjoin          | Control the memory quota of "HashJoinExec"        | Byte | 32 << 30      |
-| tidb_mem_quota_mergejoin         | Control the memory quota of "MergeJoinExec"       | Byte | 32 << 30      |
-| tidb_mem_quota_sort              | Control the memory quota of "SortExec"            | Byte | 32 << 30      |
-| tidb_mem_quota_topn              | Control the memory quota of "TopNExec"            | Byte | 32 << 30      |
-| tidb_mem_quota_indexlookupreader | Control the memory quota of "IndexLookUpExecutor" | Byte | 32 << 30      |
-| tidb_mem_quota_indexlookupjoin   | Control the memory quota of "IndexLookUpJoin"     | Byte | 32 << 30      |
-| tidb_mem_quota_nestedloopapply   | Control the memory quota of "NestedLoopApplyExec" | Byte | 32 << 30      |
-
-Some usage examples:
+The system variable [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query) sets the limit for a query in bytes. Some usage examples:
 
 {{< copyable "sql" >}}
 
 ```sql
 -- Set the threshold value of memory quota for a single SQL query to 8GB:
-set @@tidb_mem_quota_query = 8 << 30;
+SET tidb_mem_quota_query = 8 << 30;
 ```
 
 {{< copyable "sql" >}}
 
 ```sql
 -- Set the threshold value of memory quota for a single SQL query to 8MB:
-set @@tidb_mem_quota_query = 8 << 20;
+SET tidb_mem_quota_query = 8 << 20;
 ```
 
 {{< copyable "sql" >}}
 
 ```sql
 -- Set the threshold value of memory quota for a single SQL query to 8KB:
-set @@tidb_mem_quota_query = 8 << 10;
+SET tidb_mem_quota_query = 8 << 10;
 ```
 
 ## Configure the memory usage threshold of a tidb-server instance
 
-In the TiDB configuration file, you can set the memory usage threshold of a tidb-server instance by configuring [`server-memory-quota`](/tidb-configuration-file.md#server-memory-quota-new-in-v409).
+Since v6.5.0, you can use the system variable [`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-new-in-v640) to set the threshold for the memory usage of a tidb-server instance.
 
-The following example sets the total memory usage of a tidb-server instance to 32 GB:
+For example, set the total memory usage of a tidb-server instance to 32 GB:
 
-{{< copyable "" >}}
-
-```toml
-[performance]
-server-memory-quota = 34359738368
+```sql
+SET GLOBAL tidb_server_memory_limit = "32GB";
 ```
 
-In this configuration, when the memory usage of a tidb-server instance reaches 32 GB, the instance starts to kill running SQL statements randomly until the memory usage drops below 32 GB. SQL operations that are forced to terminate return an `Out Of Global Memory Limit!` error message to the client.
+After you set this variable, when the memory usage of a tidb-server instance reaches 32 GB, TiDB will terminate the SQL operation with the largest memory usage among all running SQL operations in order, until the memory usage of the instance drops below 32 GB. The forcibly terminated SQL operation will return the `Out Of Memory Quota!` error to the client.
+
+Currently, the memory limit set by `tidb_server_memory_limit` **DOES NOT** terminate the following SQL operations:
+
+- DDL operations
+- SQL operations that contain window functions and common table expressions
 
 > **Warning:**
 >
-> + `server-memory-quota` is still an experimental feature. It is **NOT** recommended that you use it in a production environment.
-> + The default value of `server-memory-quota` is `0`, which means no memory limit.
+> + During the startup process, TiDB does not guarantee that the [`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-new-in-v640) limit is enforced. If the free memory of the operating system is insufficient, TiDB might still encounter OOM. You need to ensure that the TiDB instance has enough available memory.
+> + In the process of memory control, the total memory usage of TiDB might slightly exceed the limit set by `tidb_server_memory_limit`.
+> + Since v6.5.0, the configruation item `server-memory-quota` is deprecated. To ensure compatibility, after you upgrade your cluster to v6.5.0 or a later version, `tidb_server_memory_limit` will inherit the value of `server-memory-quota`. If you have not configured `server-memory-quota` before the upgrade, the default value of `tidb_server_memory_limit` is used, which is `80%`.
+
+When the memory usage of a tidb-server instance reaches a certain proportion of the total memory (the proportion is controlled by the system variable [`tidb_server_memory_limit_gc_trigger`](/system-variables.md#tidb_server_memory_limit_gc_trigger-new-in-v640)), tidb-server will try to trigger a Golang GC to relieve memory stress. To avoid frequent GCs that cause performance issues due to the instance memory fluctuating around the threshold, this GC method will trigger GC at most once every minute.
+
+> **Note:**
+>
+> In a hybrid deployment scenario, `tidb_server_memory_limit` is the memory usage threshold for a single tidb-server instance, instead of the total memory threshold for the whole physical machine.
+
+## View the memory usage of the current tidb-server instance using the INFORMATION_SCHEMA system table
+
+To view the memory usage of the current instance or cluster, you can query the system table [`INFORMATION_SCHEMA.(CLUSTER_)MEMORY_USAGE`](/information-schema/information-schema-memory-usage.md).
+
+To view the memory-related operations and execution basis of the current instance or cluster, you can query the system table [`INFORMATION_SCHEMA.(CLUSTER_)MEMORY_USAGE_OPS_HISTORY`](/information-schema/information-schema-memory-usage-ops-history.md). For each instance, this table retains the latest 50 records.
 
 ## Trigger the alarm of excessive memory usage
 
-In the default configuration, a tidb-server instance prints an alarm log and records associated status files when the machine memory usage reaches 80% of its total memory. You can set the memory usage ratio threshold by configuring `memory-usage-alarm-ratio`. For detailed alarm rules, refer to the description of [`memory-usage-alarm-ratio`](/tidb-configuration-file.md#memory-usage-alarm-ratio-new-in-v409).
+When the memory usage of a tidb-server instance exceeds its memory threshold (70% of its total memory by default) and any of the following conditions is met, TiDB records the related status files and prints an alarm log.
 
-Note that after the alarm is triggered once, it will be triggered again only if the memory usage rate has been below the threshold for more than ten seconds and reaches the threshold again. In addition, to avoid storing excessive status files generated by alarms, currently, TiDB only retains the status files generated during the recent five alarms.
+- It is the first time the memory usage exceeds the memory threshold.
+- The memory usage exceeds the memory threshold and it has been more than 60 seconds since the last alarm.
+- The memory usage exceeds the memory threshold and `(Current memory usage - Memory usage at the last alarm) / Total memory > 10%`.
+
+You can control the memory threshold that triggers the alarm by modifying the memory usage ratio via the system variable [`tidb_memory_usage_alarm_ratio`](/system-variables.md#tidb_memory_usage_alarm_ratio).
+
+When the alarm of excessive memory usage is triggered, TiDB takes the following actions:
+
+- TiDB records the following information in the directory where the TiDB log file [`filename`](/tidb-configuration-file.md#filename) is located.
+
+    - The information about the top 10 SQL statements with the highest memory usage and the top 10 SQL statements with the longest running time among all SQL statements currently being executed
+    - The goroutine stack information
+    - The usage status of heap memory
+
+- TiDB prints an alarm log containing the keyword `tidb-server has the risk of OOM` and the values of the following memory-related system variables.
+
+    - [`tidb_mem_oom_action`](/system-variables.md#tidb_mem_oom_action-new-in-v610)
+    - [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)
+    - [`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-new-in-v640)
+    - [`tidb_analyze_version`](/system-variables.md#tidb_analyze_version-new-in-v510)
+    - [`tidb_enable_rate_limit_action`](/system-variables.md#tidb_enable_rate_limit_action)
+
+To avoid accumulating too many status files for alarms, TiDB only retains the status files generated during the recent five alarms by default. You can adjust this number by configuring the system variable [`tidb_memory_usage_alarm_keep_record_num`](/system-variables.md#tidb_memory_usage_alarm_keep_record_num-new-in-v640).
 
 The following example constructs a memory-intensive SQL statement that triggers the alarm:
 
-1. Set `memory-usage-alarm-ratio` to `0.8`:
+1. Set `tidb_memory_usage_alarm_ratio` to `0.85`:
 
     {{< copyable "" >}}
 
-    ```toml
-    mem-quota-query = 34359738368  // Increases the memory limit of each query to construct SQL statements that take up larger memory.
-    [performance]
-    memory-usage-alarm-ratio = 0.8
+    ```sql
+    SET GLOBAL tidb_memory_usage_alarm_ratio = 0.85;
     ```
 
 2. Execute `CREATE TABLE t(a int);` and insert 1000 rows of data.
@@ -105,25 +116,25 @@ The following example constructs a memory-intensive SQL statement that triggers 
 4. Check the `tidb.log` file which records the total system memory, current system memory usage, memory usage of the tidb-server instance, and the directory of status files.
 
     ```
-    [2020/11/30 15:25:17.252 +08:00] [WARN] [memory_usage_alarm.go:141] ["tidb-server has the risk of OOM. Running SQLs and heap profile will be recorded in record path"] ["is server-memory-quota set"=false] ["system memory total"=33682427904] ["system memory usage"=27142864896] ["tidb-server memory usage"=22417922896] [memory-usage-alarm-ratio=0.8] ["record path"="/tmp/1000_tidb/MC4wLjAuMDo0MDAwLzAuMC4wLjA6MTAwODA=/tmp-storage/record"]
+    [2022/10/11 16:39:02.281 +08:00] [WARN] [memoryusagealarm.go:212] ["tidb-server has the risk of OOM because of memory usage exceeds alarm ratio. Running SQLs and heap profile will be recorded in record path"] ["is tidb_server_memory_limit set"=false] ["system memory total"=33682427904] ["system memory usage"=22120655360] ["tidb-server memory usage"=21468556992] [memory-usage-alarm-ratio=0.85] ["record path"=/tiup/deploy/tidb-4000/log/oom_record]
     ```
 
     The fields of the example log file above are described as follows:
 
-    * `is server-memory-quota set` indicates whether [`server-memory-quota`](/tidb-configuration-file.md#server-memory-quota-new-in-v409) is set.
+    * `is tidb_server_memory_limit set` indicates whether [`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-new-in-v640) is set.
     * `system memory total` indicates the total memory of the current system.
     * `system memory usage` indicates the current system memory usage.
     * `tidb-server memory usage` indicates the memory usage of the tidb-server instance.
-    * `memory-usage-alarm-ratio` indicates the value of [`memory-usage-alarm-ratio`](/tidb-configuration-file.md#memory-usage-alarm-ratio-new-in-v409).
+    * `memory-usage-alarm-ratio` indicates the value of the system variable [`tidb_memory_usage_alarm_ratio`](/system-variables.md#tidb_memory_usage_alarm_ratio).
     * `record path` indicates the directory of status files.
 
-5. You can see a set of files in the directory of status files (In the above example, the directory is `/tmp/1000_tidb/MC4wLjAuMDo0MDAwLzAuMC4wLjA6MTAwODA=/tmp-storage/record`), including `goroutinue`, `heap`, and `running_sql`. These three files are suffixed with the time when status files are logged. They respectively record goroutine stack information, the usage status of heap memory, and the running SQL information when the alarm is triggered. For the format of log content in `running_sql`, refer to [`expensive-queries`](/identify-expensive-queries.md).
+5. By checking the directory of status files (In the preceding example, the directory is `/tiup/deploy/tidb-4000/log/oom_record`), you can see a record directory with the corresponding timestamp (for example, `record2022-10-09T17:18:38+08:00`). The record directory includes three files: `goroutinue`, `heap`, and `running_sql`. These three files are suffixed with the time when status files are logged. They respectively record goroutine stack information, the usage status of heap memory, and the running SQL information when the alarm is triggered. For the content in `running_sql`, refer to [`expensive-queries`](/identify-expensive-queries.md).
 
 ## Other memory control behaviors of tidb-server
 
 ### Flow control
 
-- TiDB supports dynamic memory control for the operator that reads data. By default, this operator uses the maximum number of threads that [`tidb_disql_scan_concurrency`](/system-variables.md#tidb_distsql_scan_concurrency) allows to read data. When the memory usage of a single SQL execution exceeds [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query) each time, the operator that reads data stops one thread.
+- TiDB supports dynamic memory control for the operator that reads data. By default, this operator uses the maximum number of threads that [`tidb_distsql_scan_concurrency`](/system-variables.md#tidb_distsql_scan_concurrency) allows to read data. When the memory usage of a single SQL execution exceeds [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query) each time, the operator that reads data stops one thread.
 
 - This flow control behavior is controlled by the system variable [`tidb_enable_rate_limit_action`](/system-variables.md#tidb_enable_rate_limit_action).
 - When the flow control behavior is triggered, TiDB outputs a log containing the keywords `memory exceeds quota, destroy one token now`.
@@ -132,7 +143,7 @@ The following example constructs a memory-intensive SQL statement that triggers 
 
 TiDB supports disk spill for execution operators. When the memory usage of a SQL execution exceeds the memory quota, tidb-server can spill the intermediate data of execution operators to the disk to relieve memory pressure. Operators supporting disk spill include Sort, MergeJoin, HashJoin, and HashAgg.
 
-- The disk spill behavior is jointly controlled by the [`mem-quota-query`](/tidb-configuration-file.md#mem-quota-query), [`oom-use-tmp-storage`](/tidb-configuration-file.md#oom-use-tmp-storage), [`tmp-storage-path`](/tidb-configuration-file.md#tmp-storage-path), and [`tmp-storage-quota`](/tidb-configuration-file.md#tmp-storage-quota) parameters.
+- The disk spill behavior is jointly controlled by the following parameters: [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query), [`tidb_enable_tmp_storage_on_oom`](/system-variables.md#tidb_enable_tmp_storage_on_oom), [`tmp-storage-path`](/tidb-configuration-file.md#tmp-storage-path), and [`tmp-storage-quota`](/tidb-configuration-file.md#tmp-storage-quota).
 - When the disk spill is triggered, TiDB outputs a log containing the keywords `memory exceeds quota, spill to disk now` or `memory exceeds quota, set aggregate mode to spill-mode`.
 - Disk spill for the Sort, MergeJoin, and HashJoin operator is introduced in v4.0.0; disk spill for the HashAgg operator is introduced in v5.2.0.
 - When the SQL executions containing Sort, MergeJoin, or HashJoin cause OOM, TiDB triggers disk spill by default. When SQL executions containing HashAgg cause OOM, TiDB does not trigger disk spill by default. You can configure the system variable `tidb_executor_concurrency = 1` to trigger disk spill for HashAgg.
@@ -148,7 +159,7 @@ The following example uses a memory-consuming SQL statement to demonstrate the d
     {{< copyable "sql" >}}
 
     ```sql
-    set tidb_mem_quota_query = 1 << 30;
+    SET tidb_mem_quota_query = 1 << 30;
     ```
 
 2. Create a single table `CREATE TABLE t(a int);` and insert 256 rows of different data.
@@ -172,7 +183,7 @@ The following example uses a memory-consuming SQL statement to demonstrate the d
     {{< copyable "sql" >}}
 
     ```sql
-    set tidb_executor_concurrency = 1;
+    SET tidb_executor_concurrency = 1;
     ```
 
 5. Execute the same SQL statement. You can find that this time, the statement is successfully executed and no error message is returned. From the following detailed execution plan, you can see that HashAgg has used 600 MB of hard disk space.
@@ -199,3 +210,23 @@ The following example uses a memory-consuming SQL statement to demonstrate the d
     +---------------------------------+-------------+----------+-----------+---------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------------+-----------+----------+
     9 rows in set (1 min 37.428 sec)
     ```
+
+## Others
+
+### Mitigate OOM issues by configuring `GOMEMLIMIT`
+
+GO 1.19 introduces an environment variable [`GOMEMLIMIT`](https://pkg.go.dev/runtime@go1.19#hdr-Environment_Variables) to set the memory limit that triggers GC.
+
+For v6.1.3 <= TiDB < v6.5.0, you can mitigate a typical category of OOM issues by manually setting `GOMEMLIMIT`. The typical category of OOM issues is: before OOM occurs, the estimated memory in use on Grafana occupies only half of the entire memory (TiDB-Runtime > Memory Usage > estimate-inuse), as shown in the following figure:
+
+![normal OOM case example](/media/configure-memory-usage-oom-example.png)
+
+To verify the performance of `GOMEMLIMIT`, a test is performed to compare the specific memory usage with and without `GOMEMLIMIT` configuration.
+
+- In TiDB v6.1.2, the TiDB server encounters OOM (system memory: about 48 GiB) after the simulated workload runs for several minutes:
+
+    ![v6.1.2 workload oom](/media/configure-memory-usage-612-oom.png)
+
+- In TiDB v6.1.3, `GOMEMLIMIT` is set to 40000 MiB. It is found that the simulated workload runs stably for a long time, OOM does not occur in the TiDB server, and the maximum memory usage of the process is stable at around 40.8 GiB:
+
+    ![v6.1.3 workload no oom with GOMEMLIMIT](/media/configure-memory-usage-613-no-oom.png)

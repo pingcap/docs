@@ -31,7 +31,7 @@ To support distributed transactions, TiDB adopts two-phase commit (2PC) in optim
 
 3. The client issues a write request.
 
-    TiDB checks whether the written data satisfies constraints (to ensure the data types are correct, the NOT NULL constraint is met, etc.). **Valid data is stored in the private memory of this transaction in TiDB**.
+    TiDB checks whether the written data satisfies constraints (to ensure the data types are correct, the NOT NULL constraint is met). **Valid data is stored in the private memory of this transaction in TiDB**.
 
 4. The client issues a commit request.
 
@@ -75,7 +75,7 @@ If a write-write conflict occurs during the transaction commit, TiDB automatical
 # Whether to disable automatic retry. ("on" by default)
 tidb_disable_txn_auto_retry = OFF
 # Set the maximum number of the retires. ("10" by default)
-# When “tidb_retry_limit = 0”, automatic retry is completely disabled.
+# When "tidb_retry_limit = 0", automatic retry is completely disabled.
 tidb_retry_limit = 10
 ```
 

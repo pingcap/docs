@@ -16,7 +16,7 @@ TiUP supports deploying DM v2.0 or later DM versions. This document introduces h
 
 ## Prerequisites
 
-When DM performs a full data replication task, the DM-worker is bound with only one upstream database. The DM-worker first exports the full amount of data locally, and then imports the data into the downstream database. Therefore, the worker's host needs sufficient storage space (The storage path is specified later when you create the task).
+When DM performs a full data replication task, the DM-worker is bound with only one upstream database. The DM-worker first exports the full amount of data locally, and then imports the data into the downstream database. Therefore, the worker's host space must be large enough to store all upstream tables to be exported. The storage path is specified later when you create the task.
 
 In addition, you need to meet the [hardware and software requirements](/dm/dm-hardware-and-software-requirements.md) when deploying a DM cluster.
 
@@ -188,7 +188,7 @@ TiUP supports managing multiple DM clusters. The command above outputs informati
 ```log
 Name  User  Version  Path                                  PrivateKey
 ----  ----  -------  ----                                  ----------
-dm-test  tidb  v2.0.3  /root/.tiup/storage/dm/clusters/dm-test  /root/.tiup/storage/dm/clusters/dm-test/ssh/id_rsa
+dm-test  tidb  ${version}  /root/.tiup/storage/dm/clusters/dm-test  /root/.tiup/storage/dm/clusters/dm-test/ssh/id_rsa
 ```
 
 ## Step 5: Check the status of the deployed DM cluster
@@ -203,7 +203,7 @@ tiup dm display dm-test
 
 Expected output includes the instance ID, role, host, listening port, and status (because the cluster is not started yet, so the status is `Down`/`inactive`), and directory information.
 
-## Step 6: Start the TiDB cluster
+## Step 6: Start the DM cluster
 
 {{< copyable "shell-regular" >}}
 
@@ -213,7 +213,7 @@ tiup dm start dm-test
 
 If the output log includes ```Started cluster `dm-test` successfully```, the start is successful.
 
-## Step 7: Verify the running status of the TiDB cluster
+## Step 7: Verify the running status of the DM cluster
 
 Check the DM cluster status using TiUP:
 

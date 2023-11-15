@@ -38,7 +38,7 @@ The `global` section corresponds to the cluster's global configuration and has t
 
 - `ssh_port`: Specifies the SSH port to connect to the target machine for operations. The default value is `22`.
 
-- `enable_tls`: Specifies whether to enable TLS for the cluster. After TLS is enabled, the generated TLS certificate must be used for connections between components or between the client and the component. **Once it is enabled, it cannot be disabled**. The default value is `false`.
+- `enable_tls`: Specifies whether to enable TLS for the cluster. After TLS is enabled, the generated TLS certificate must be used for connections between components or between the client and the component. The default value is `false`.
 
 - `deploy_dir`: The deployment directory of each component. The default value is `"deployed"`. Its application rules are as follows:
 
@@ -142,10 +142,10 @@ A `server_configs` configuration example is as follows:
 ```yaml
 server_configs:
   tidb:
-    run-ddl: true
     lease: "45s"
     split-table: true
     token-limit: 1000
+    instance.tidb_enable_ddl: true
   tikv:
     log-level: "info"
     readpool.unified.min-thread-count: 1
@@ -325,8 +325,6 @@ tikv_servers:
 
 - `tcp_port`: The port of the TiFlash TCP service. The default value is `9000`.
 
-- `http_port`: The port of the TiFlash HTTP service. The default value is `8123`.
-
 - `flash_service_port`: The port via which TiFlash provides services. TiDB reads data from TiFlash via this port. The default value is `3930`.
 
 - `metrics_port`: TiFlash's status port, which is used to output metric data. The default value is `8234`.
@@ -440,7 +438,7 @@ pump_servers:
 
 - `log_dir`: Specifies the log directory. If it is not specified or specified as a relative directory, the log is generated according to the `log_dir` directory configured in `global`.
 
-- `commit_ts`: When Drainer starts, it reads the checkpoint. If Drainer cannot read the checkpoint, it uses this field as the replication time point for the initial startup. This field defaults to `-1` (Drainer always gets the latest timestamp from the PD as the commit_ts).
+- `commit_ts` (deprecated): When Drainer starts, it reads the checkpoint. If Drainer gets no checkpoint, it uses this field as the replication time point for the initial startup. This field defaults to `-1` (Drainer always gets the latest timestamp from the PD as the commit_ts).
 
 - `numa_node`: Allocates the NUMA policy to the instance. Before specifying this field, you need to make sure that the target machine has [numactl](https://linux.die.net/man/8/numactl) installed. If this field is specified, cpubind and membind policies are allocated using [numactl](https://linux.die.net/man/8/numactl). This field is the string type. The field value is the ID of the NUMA node, such as "0,1".
 
@@ -459,9 +457,10 @@ For the above fields, you cannot modify these configured fields after the deploy
 - `deploy_dir`
 - `data_dir`
 - `log_dir`
-- `commit_ts`
 - `arch`
 - `os`
+
+The `commit_ts` field is deprecated since TiUP v1.9.2 and is not recorded in the starting script of Drainer. If you still need to use this field, refer to the following example to configure the `initial-commit-ts` field in `config`.
 
 A `drainer_servers` configuration example is as follows:
 
@@ -469,6 +468,7 @@ A `drainer_servers` configuration example is as follows:
 drainer_servers:
   - host: 10.0.1.21
     config:
+      initial-commit-ts: -1
       syncer.db-type: "mysql"
       syncer.to.host: "127.0.0.1"
       syncer.to.user: "root"
@@ -493,7 +493,7 @@ drainer_servers:
 
 - `deploy_dir`: Specifies the deployment directory. If it is not specified or specified as a relative directory, the directory is generated according to the `deploy_dir` directory configured in `global`.
 
-- `data_dir`：Specifies the data directory. If it is not specified or specified as a relative directory, the directory is generated according to the `data_dir` directory configured in `global`.
+- `data_dir`: Specifies the data directory. If it is not specified or specified as a relative directory, the directory is generated according to the `data_dir` directory configured in `global`.
 
 - `log_dir`: Specifies the log directory. If it is not specified or specified as a relative directory, the log is generated according to the `log_dir` directory configured in `global`.
 
@@ -511,6 +511,8 @@ drainer_servers:
 
 - `resource_control`: Resource control for the service. If this field is configured, the field content is merged with the `resource_control` content in `global` (if the two fields overlap, the content of this field takes effect). Then, a systemd configuration file is generated and sent to the machine specified in `host`. The configuration rules of `resource_control` are the same as the `resource_control` content in `global`.
 
+- `ticdc_cluster_id`: Specifies the TiCDC cluster ID corresponding to the service. If this field is not specified, the service joins the default TiCDC cluster. This field only takes effect in TiDB v6.3.0 or later versions.
+
 For the above fields, you cannot modify these configured fields after the deployment:
 
 - `host`
@@ -520,6 +522,7 @@ For the above fields, you cannot modify these configured fields after the deploy
 - `log_dir`
 - `arch`
 - `os`
+- `ticdc_cluster_id`
 
 A `cdc_servers` configuration example is as follows:
 
@@ -636,7 +639,7 @@ tispark_workers:
 
 - `host`: Specifies the machine to which the monitoring services are deployed. The field value is an IP address and is mandatory.
 
-- `ng_port`: Specifies the SSH port connecting to NGMonitoring. Introduced in TiUP v1.7.0, this field supports [Continuous Profiling](/dashboard/dashboard-profiling.md) and Top SQL in TiDB 5.3.0 and above.
+- `ng_port`: Specifies the port that NgMonitoring listens to. Introduced in TiUP v1.7.0, this field supports [Continuous Profiling](/dashboard/dashboard-profiling.md) and [Top SQL](/dashboard/top-sql.md). The default value is `12020`.
 
 - `ssh_port`: Specifies the SSH port to connect to the target machine for operations. If it is not specified, the `ssh_port` of the `global` section is used.
 
@@ -650,7 +653,7 @@ tispark_workers:
 
 - `numa_node`: Allocates the NUMA policy to the instance. Before specifying this field, you need to make sure that the target machine has [numactl](https://linux.die.net/man/8/numactl) installed. If this field is specified, cpubind and membind policies are allocated using [numactl](https://linux.die.net/man/8/numactl). This field is the string type. The field value is the ID of the NUMA node, such as "0,1".
 
-- `storage_retention`: The retention time of the Prometheus monitoring data. The default value is `"15d"`.
+- `storage_retention`: The retention time of the Prometheus monitoring data. The default value is `"30d"`.
 
 - `rule_dir`: Specifies a local directory that should contain complete `*.rules.yml` files. These files are transferred to the target machine during the initialization phase of the cluster configuration as the rules for Prometheus.
 - `remote_config`: Supports writing Prometheus data to the remote, or reading data from the remote. This field has two configurations:

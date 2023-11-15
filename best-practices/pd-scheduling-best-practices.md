@@ -90,7 +90,7 @@ For hot write regions, `hot-region-scheduler` attempts to redistribute both regi
 
 Cluster topology awareness enables PD to distribute replicas of a region as much as possible. This is how TiKV ensures high availability and disaster recovery capability. PD continuously scans all regions in the background. When PD finds that the distribution of regions is not optimal, it generates an operator to replace peers and redistribute regions.
 
-The component to check region distribution is `replicaChecker`, which is similar to a scheduler except that it cannot be disabled. `replicaChecker` schedules based on the the configuration of `location-labels`. For example, `[zone,rack,host]` defines a three-tier topology for a cluster. PD attempts to schedule region peers to different zones first, or to different racks when zones are insufficient (for example, 2 zones for 3 replicas), or to different hosts when racks are insufficient, and so on.
+The component to check region distribution is `replicaChecker`, which is similar to a scheduler except that it cannot be disabled. `replicaChecker` schedules based on the configuration of `location-labels`. For example, `[zone,rack,host]` defines a three-tier topology for a cluster. PD attempts to schedule region peers to different zones first, or to different racks when zones are insufficient (for example, 2 zones for 3 replicas), or to different hosts when racks are insufficient.
 
 ### Scale-down and failure recovery
 
@@ -102,7 +102,7 @@ The processes of scale-down and failure recovery are basically the same. `replic
 
 Region merge refers to the process of merging adjacent small regions. It serves to avoid unnecessary resource consumption by a large number of small or even empty regions after data deletion. Region merge is performed by `mergeChecker`, which processes in a similar way to `replicaChecker`: PD continuously scans all regions in the background, and generates an operator when contiguous small regions are found.
 
-Specifically, when a newly split Region exists for more than the value of [`split-merge-interval`](/pd-configuration-file.md#split-merge-interval) (`1h` by default), if any of the following conditions occurs, this Region triggers the Region merge scheduling:
+Specifically, when a newly split Region exists for more than the value of [`split-merge-interval`](/pd-configuration-file.md#split-merge-interval) (`1h` by default), if the following conditions occur at the same time, this Region triggers the Region merge scheduling:
 
 - The size of this Region is smaller than the value of the [`max-merge-region-size`](/pd-configuration-file.md#max-merge-region-size) (20 MiB by default)
 
@@ -139,8 +139,8 @@ You can use store commands of pd-ctl to query balance status of each store.
 
 The **Grafana PD/Statistics - hotspot** page shows the metrics about hot regions, among which:
 
-- Hot write region’s leader/peer distribution: the leader/peer distribution in hot write regions
-- Hot read region’s leader distribution: the leader distribution in hot read regions
+- Hot write region's leader/peer distribution: the leader/peer distribution in hot write regions
+- Hot read region's leader distribution: the leader distribution in hot read regions
 
 You can also query the status of hot regions using pd-ctl with the following commands:
 
@@ -188,8 +188,8 @@ You can check the scheduling configuration using the `config show` command in pd
 
 - `leader-schedule-limit`: Controls the concurrency of transferring leader scheduling
 - `region-schedule-limit`: Controls the concurrency of adding/deleting peer scheduling
-- `disable-replace-offline-replica`: Determines whether to disable the scheduling to take nodes offline
-- `disable-location-replacement`: Determines whether to disable the scheduling that handles the isolation level of regions
+- `enable-replace-offline-replica`: Determines whether to enable the scheduling to take nodes offline
+- `enable-location-replacement`: Determines whether to enable the scheduling that handles the isolation level of regions
 - `max-snapshot-count`: Controls the maximum concurrency of sending/receiving snapshots for each store
 
 ## PD scheduling in common scenarios
@@ -206,7 +206,7 @@ If the scores of different stores are close, it means PD mistakenly believes tha
 
 - There are hot regions that cause load imbalancing. In this case, you need to analyze further based on [hot regions scheduling](#hot-regions-are-not-evenly-distributed).
 - There are a large number of empty regions or small regions, which leads to a great difference in the number of leaders in different stores and high pressure on Raft store. This is the time for a [region merge](#region-merge-is-slow) scheduling.
-- Hardware and software environment varies among stores. You can adjust the values of `leader-weight` and `region-weight` accordingly to control the distribution of leader/region.
+- Hardware and software environment varies among stores. To control the distribution of leader/region, you can refer to [Load balancing](#load-balancing) and adjust the values of `leader-weight` and `region-weight`.
 - Other unknown reasons. Still you can adjust the values of `leader-weight` and `region-weight` to control the distribution of leader/region.
 
 If there is a big difference in the rating of different stores, you need to examine the operator-related metrics, with special focus on the generation and execution of operators. There are two main situations:
@@ -214,8 +214,8 @@ If there is a big difference in the rating of different stores, you need to exam
 - When operators are generated normally but the scheduling process is slow, it is possible that:
 
     - The scheduling speed is limited by default for load balancing purpose. You can adjust `leader-schedule-limit` or `region-schedule-limit` to larger values without significantly impacting regular services. In addition, you can also properly ease the restrictions specified by `max-pending-peer-count` and `max-snapshot-count`.
-    - Other scheduling tasks are running concurrently, which slows down the balancing. In this case, if the balancing takes precedence over other scheduling tasks, you can stop other tasks or limit their speeds. For example, if you take some nodes offline when balancing is in progress, both operations consume the quota of `region-schedule-limit`. In this case, you can limit the speed of scheduler to remove nodes, or simply set `disable-replace-offline-replica = true` to temporarily disable it.
-    - The scheduling process is too slow. You can check the **Operator step duration** metric to confirm the cause. Generally, steps that do not involve sending and receiving snapshots (such as `TransferLeader`, `RemovePeer`, `PromoteLearner`) should be completed in milliseconds, while steps that involve snapshots (such as `AddLearner` and `AddPeer`) are expected to be completed in tens of seconds. If the duration is obviously too long, it could be caused by high pressure on TiKV or bottleneck in network, etc., which needs specific analysis.
+    - Other scheduling tasks are running concurrently, which slows down the balancing. In this case, if the balancing takes precedence over other scheduling tasks, you can stop other tasks or limit their speeds. For example, if you take some nodes offline when balancing is in progress, both operations consume the quota of `region-schedule-limit`. In this case, you can limit the speed of scheduler to remove nodes, or simply set `enable-replace-offline-replica = false` to temporarily disable it.
+    - The scheduling process is too slow. You can check the **Operator step duration** metric to confirm the cause. Generally, steps that do not involve sending and receiving snapshots (such as `TransferLeader`, `RemovePeer`, `PromoteLearner`) should be completed in milliseconds, while steps that involve snapshots (such as `AddLearner` and `AddPeer`) are expected to be completed in tens of seconds. If the duration is obviously too long, it could be caused by high pressure on TiKV or bottleneck in network, which needs specific analysis.
 
 - PD fails to generate the corresponding balancing scheduler. Possible reasons include:
 
@@ -229,7 +229,7 @@ This scenario requires examining the generation and execution of operators throu
 
 If operators are successfully generated but the scheduling process is slow, possible reasons are:
 
-- The scheduling speed is limited by default. You can adjust `leader-schedule-limit` or `replica-schedule-limit` to larger value.s Similarly, you can consider loosening the limits on `max-pending-peer-count` and `max-snapshot-count`.
+- The scheduling speed is limited by default. You can adjust `leader-schedule-limit` or `replica-schedule-limit` to larger values. Similarly, you can consider loosening the limits on `max-pending-peer-count` and `max-snapshot-count`.
 - Other scheduling tasks are running concurrently and racing for resources in the system. You can refer to the solution in [Leaders/regions are not evenly distributed](#leadersregions-are-not-evenly-distributed).
 - When you take a single node offline, a number of region leaders to be processed (around 1/3 under the configuration of 3 replicas) are distributed on the node to remove. Therefore, the speed is limited by the speed at which snapshots are generated by this single node. You can speed it up by manually adding an `evict-leader-scheduler` to migrate leaders.
 
@@ -265,13 +265,29 @@ Similar to slow scheduling, the speed of region merge is most likely limited by 
 - A lot of tables have been created and then emptied (including truncated tables). These empty Regions cannot be merged if the split table attribute is enabled. You can disable this attribute by adjusting the following parameters:
 
     - TiKV: Set `split-region-on-table` to `false`. You cannot modify the parameter dynamically.
-    - PD
-        - Set `key-type` to `"txn"` or `"raw"`. You can modify the parameter dynamically.
-        - Or keep `key-type` as `table` and set `enable-cross-table-merge` to `true`. You can modify the parameter dynamically.
+    - PD: Use PD Control to set the parameters required by your cluster situation.
+
+        - Suppose that your cluster has no TiDB instance, and the value of [`key-type`](/pd-control.md#config-show--set-option-value--placement-rules) is set to `raw` or `txn`. In this case, PD can merge Regions across tables, regardless of the value of `enable-cross-table-merge setting`. You can modify the `key-type` parameter dynamically.
+
+        {{< copyable "shell-regular" >}}
+
+        ```bash
+        config set key-type txn
+        ```
+
+        - Suppose that your cluster has a TiDB instance, and the value of `key-type` is set to `table`. In this case, PD can merge Regions across tables only if the value of `enable-cross-table-merge` is set to `true`. You can modify the `key-type` parameter dynamically.
+
+        {{< copyable "shell-regular" >}}
+
+        ```bash
+        config set enable-cross-table-merge true
+        ```
+
+        If the modification does not take effect, refer to [FAQ - Why the modified `toml` configuration for TiKV/PD does not take effect?](/faq/deploy-and-maintain-faq.md#why-the-modified-toml-configuration-for-tikvpd-does-not-take-effect).
 
         > **Note:**
         >
-        > After placement rules are enabled, properly switch the value of `key-type` between `txn` and `raw` to avoid the failure of decoding.
+        > After enabling Placement Rules, properly switch the value of `key-type` to avoid the failure of decoding.
 
 For v3.0.4 and v2.1.16 or earlier, the `approximate_keys` of regions are inaccurate in specific circumstances (most of which occur after dropping tables), which makes the number of keys break the constraints of `max-merge-region-keys`. To avoid this problem, you can adjust `max-merge-region-keys` to a larger value.
 
@@ -281,4 +297,4 @@ If a TiKV node fails, PD defaults to setting the corresponding node to the **dow
 
 Practically, if a node failure is considered unrecoverable, you can immediately take it offline. This makes PD replenish replicas soon in another node and reduces the risk of data loss. In contrast, if a node is considered recoverable, but the recovery cannot be done in 30 minutes, you can temporarily adjust `max-store-down-time` to a larger value to avoid unnecessary replenishment of the replicas and resources waste after the timeout.
 
-In TiDB v5.2.0, TiKV introduces the mechanism of slow TiKV node detection. By sampling the requests in TiKV, it calculates a score ranging from 1 to 100. A TiKV node with a score greater than or equal to 80 is marked as slow. You can add [`evict-slow-store-scheduler`](/pd-control.md#scheduler-show--add--remove--pause--resume--config) to detect and schedule slow nodes. When one and only one slow node appears, and the slow score reaches the upper limit (100 by default), all leaders in the node will be evicted. 
+In TiDB v5.2.0, TiKV introduces the mechanism of slow TiKV node detection. By sampling the requests in TiKV, this mechanism works out a score ranging from 1 to 100. A TiKV node with a score higher than or equal to 80 is marked as slow. You can add [`evict-slow-store-scheduler`](/pd-control.md#scheduler-show--add--remove--pause--resume--config--describe) to detect and schedule slow nodes. If only one TiKV is detected as slow, and the slow score reaches the limit (80 by default), the leader in this node will be evicted (similar to the effect of `evict-leader-scheduler`).

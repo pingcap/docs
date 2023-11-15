@@ -12,6 +12,10 @@ The PD configuration file supports more options than command-line parameters. Yo
 
 This document only describes parameters that are not included in command-line parameters. Check [here](/command-line-flags-for-pd-configuration.md) for the command line parameters.
 
+> **Tip:**
+>
+> If you need to adjust the value of a configuration item, refer to [Modify the configuration](/maintain-tidb-using-tiup.md#modify-the-configuration).
+
 ### `name`
 
 - The unique name of a PD node
@@ -67,7 +71,7 @@ This document only describes parameters that are not included in command-line pa
 
 ### `initial-cluster-token`
 
-+ Identifies different clusters during the bootstrap phase.
++ Identifies different clusters during the bootstrap phase
 + Default value: `"pd-cluster"`
 + If multiple clusters that have nodes with same configurations are deployed successively, you must specify different tokens to isolate different cluster nodes.
 
@@ -98,6 +102,80 @@ This document only describes parameters that are not included in command-line pa
 + Determines whether to force PD to start as a new cluster and modify the number of Raft members to `1`
 + Default value: `false`
 
+### `tso-update-physical-interval`
+
++ The interval at which PD updates the physical time of TSO.
++ In a default update interval of TSO physical time, PD provides at most 262144 TSOs. To get more TSOs, you can reduce the value of this configuration item. The minimum value is `1ms`.
++ Decreasing this configuration item might increase the CPU usage of PD. According to the test, compared with the interval of `50ms`, the [CPU usage](https://man7.org/linux/man-pages/man1/top.1.html) of PD will increase by about 10% when the interval is `1ms`.
++ Default value: `50ms`
++ Minimum value: `1ms`
+
+## pd-server
+
+Configuration items related to pd-server
+
+### `server-memory-limit` <span class="version-mark">New in v6.6.0</span>
+
+> **Warning:**
+>
+> This configuration is an experimental feature. It is not recommended to use it in production environments.
+
++ The memory limit ratio for a PD instance. The value `0` means no memory limit.
++ Default value: `0`
++ Minimum value: `0`
++ Maximum value: `0.99`
+
+### `server-memory-limit-gc-trigger` <span class="version-mark">New in v6.6.0</span>
+
+> **Warning:**
+>
+> This configuration is an experimental feature. It is not recommended to use it in production environments.
+
++ The threshold ratio at which PD tries to trigger GC. When the memory usage of PD reaches the value of `server-memory-limit` * the value of `server-memory-limit-gc-trigger`, PD triggers a Golang GC. Only one GC is triggered in one minute.
++ Default value: `0.7`
++ Minimum value: `0.5`
++ Maximum value: `0.99`
+
+### `enable-gogc-tuner` <span class="version-mark">New in v6.6.0</span>
+
+> **Warning:**
+>
+> This configuration is an experimental feature. It is not recommended to use it in production environments.
+
++ Controls whether to enable the GOGC Tuner.
++ Default value: `false`
+
+### `gc-tuner-threshold` <span class="version-mark">New in v6.6.0</span>
+
+> **Warning:**
+>
+> This configuration is an experimental feature. It is not recommended to use it in production environments.
+
++ The maximum memory threshold ratio for tuning GOGC. When the memory exceeds this threshold, i.e. the value of `server-memory-limit` * the value of `gc-tuner-threshold`, GOGC Tuner stops working.
++ Default value: `0.6`
++ Minimum value: `0`
++ Maximum value: `0.9`
+
+### `flow-round-by-digit` <span class="version-mark">New in TiDB 5.1</span>
+
++ Default value: 3
++ PD rounds the lowest digits of the flow number, which reduces the update of statistics caused by the changes of the Region flow information. This configuration item is used to specify the number of lowest digits to round for the Region flow information. For example, the flow `100512` will be rounded to `101000` because the default value is `3`. This configuration replaces `trace-region-flow`.
+
+> **Note:**
+>
+> If you have upgraded your cluster from a TiDB 4.0 version to the current version, the behavior of `flow-round-by-digit` after the upgrading and the behavior of `trace-region-flow` before the upgrading are consistent by default. This means that if the value of `trace-region-flow` is false before the upgrading, the value of `flow-round-by-digit` after the upgrading is 127; if the value of `trace-region-flow` is `true` before the upgrading, the value of `flow-round-by-digit` after the upgrading is `3`.
+
+### `min-resolved-ts-persistence-interval` <span class="version-mark">New in v6.0.0</span>
+
++ Determines the interval at which the minimum resolved timestamp is persistent to the PD. If this value is set to `0`, it means that the persistence is disabled.
++ Default value: Before v6.3.0, the default value is `"0s"`. Starting from v6.3.0, the default value is `"1s"`, which is the smallest positive value.
++ Minimum value: `0`
++ Unit: second
+
+> **Note:**
+>
+> For clusters upgraded from v6.0.0~v6.2.0, the default value of `min-resolved-ts-persistence-interval` does not change after the upgrade, which means that it will remain `"0s"`. To enable this feature, you need to manually change the value of this configuration item.
+
 ## security
 
 Configuration items related to security
@@ -119,7 +197,7 @@ Configuration items related to security
 
 ### `redact-info-log` <span class="version-mark">New in v5.0</span>
 
-+ Controls whether to enable log redaction in the PD log.
++ Controls whether to enable log redaction in the PD log
 + When you set the configuration value to `true`, user data is redacted in the PD log.
 + Default value: `false`
 
@@ -129,13 +207,15 @@ Configuration items related to log
 
 ### `level`
 
-+ The log level, which can be specified as "DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL".
-+ Default value: "INFO"
++ Specifies the level of the output log
++ Optional value: `"debug"`, `"info"`, `"warn"`, `"error"`, `"fatal"`
++ Default value: `"info"`
 
 ### `format`
 
-+ The log format, which can be specified as "text", "json", or "console"
-+ Default value: "text"
++ The log format
++ Optional value: `"text"`, `"json"`
++ Default value: `"text"`
 
 ### `disable-timestamp`
 
@@ -156,11 +236,13 @@ Configuration items related to the log file
 ### `max-days`
 
 + The maximum number of days in which a log is kept
++ If the configuration item is not set, or the value of it is set to the default value 0, PD does not clean log files.
 + Default value: `0`
 
 ### `max-backups`
 
 + The maximum number of log files to keep
++ If the configuration item is not set, or the value of it is set to the default value 0, PD keeps all log files.
 + Default value: `0`
 
 ## `metric`
@@ -180,6 +262,7 @@ Configuration items related to scheduling
 
 + Controls the size limit of `Region Merge`. When the Region size is greater than the specified value, PD does not merge the Region with the adjacent Regions.
 + Default value: `20`
++ Unit: MiB
 
 ### `max-merge-region-keys`
 
@@ -208,8 +291,13 @@ Configuration items related to scheduling
 
 ### `max-store-down-time`
 
-+ The downtime after which PD judges that the disconnected store can not be recovered. When PD fails to receive the heartbeat from a store after the specified period of time, it adds replicas at other nodes.
++ The downtime after which PD judges that the disconnected store cannot be recovered. When PD fails to receive the heartbeat from a store after the specified period of time, it adds replicas at other nodes.
 + Default value: `30m`
+
+### `max-store-preparing-time` <span class="version-mark">New in v6.1.0</span>
+
++ Controls the maximum waiting time for the store to go online. During the online stage of a store, PD can query the online progress of the store. When the specified time is exceeded, PD assumes that the store has been online and cannot query the online progress of the store again. But this does not prevent Regions from transferring to the new online store. In most scenarios, you do not need to adjust this parameter.
++ Default value: `48h`
 
 ### `leader-schedule-limit`
 
@@ -220,6 +308,11 @@ Configuration items related to scheduling
 
 + The number of Region scheduling tasks performed at the same time
 + Default value: `2048`
+
+### `enable-diagnostic` <span class="version-mark">New in v6.3.0</span>
+
++ Controls whether to enable the diagnostic feature. When it is enabled, PD records the state during scheduling to help diagnose. If enabled, it might slightly affect the scheduling speed and consume more memory when there are many stores.
++ Default value: Starting from v7.1.0, the default value is changed from `false` to `true`. If your cluster is upgraded from a version earlier than v7.1.0 to v7.1.0 or later, the default value does not change.
 
 ### `hot-region-schedule-limit`
 
@@ -266,7 +359,7 @@ Configuration items related to scheduling
 + Determines whether to enable the merging of cross-table Regions
 + Default value: `true`
 
-### `region-score-formula-version` <span class="version-mark">New in v5.0</span> 
+### `region-score-formula-version` <span class="version-mark">New in v5.0</span>
 
 + Controls the version of the Region score formula
 + Default value: `v2`
@@ -276,10 +369,36 @@ Configuration items related to scheduling
 >
 > If you have upgraded your cluster from a TiDB 4.0 version to the current version, the new formula version is automatically disabled by default to ensure consistent PD behavior before and after the upgrading. If you want to change the formula version, you need to manually switch through the `pd-ctl` setting. For details, refer to [PD Control](/pd-control.md#config-show--set-option-value--placement-rules).
 
+### `store-limit-version` <span class="version-mark">New in v7.1.0</span>
+
+> **Warning:**
+>
+> Setting this configuration item to `"v2"` is an experimental feature. It is not recommended to use it in production environments.
+
++ Controls the version of the store limit formula
++ Default value: `v1`
++ Value options:
+    + `v1`: In v1 mode, you can manually modify the `store limit` to limit the scheduling speed of a single TiKV.
+    + `v2`: (experimental feature) In v2 mode, you do not need to manually set the `store limit` value, as PD dynamically adjusts it based on the capability of TiKV snapshots. For more details, refer to [Principles of store limit v2](/configure-store-limit.md#principles-of-store-limit-v2).
+
 ### `enable-joint-consensus` <span class="version-mark">New in v5.0</span>
 
 + Controls whether to use Joint Consensus for replica scheduling. If this configuration is disabled, PD schedules one replica at a time.
 + Default value: `true`
+
+### `hot-regions-write-interval` <span class="version-mark">New in v5.4.0</span>
+
++ The time interval at which PD stores hot Region information.
++ Default value: `10m`
+
+> **Note:**
+>
+> The information about hot Regions is updated every three minutes. If the interval is set to less than three minutes, updates during the interval might be meaningless.
+
+### `hot-regions-reserved-days` <span class="version-mark">New in v5.4.0</span>
+
++ Specifies how many days the hot Region information is retained.
++ Default value: `7`
 
 ## `replication`
 
@@ -287,7 +406,7 @@ Configuration items related to replicas
 
 ### `max-replicas`
 
-+ The number of replicas, that is, the sum of the number of leaders and followers. The default value `3` means 1 leader and 2 followers. When this configuration is modified online, PD will schedule Regions in the background so that the number of replicas matches this configuration.
++ The number of replicas, that is, the sum of the number of leaders and followers. The default value `3` means 1 leader and 2 followers. When this configuration is modified dynamically, PD will schedule Regions in the background so that the number of replicas matches this configuration.
 + Default value: `3`
 
 ### `location-labels`
@@ -310,18 +429,8 @@ Configuration items related to replicas
 ### `enable-placement-rules`
 
 + Enables `placement-rules`.
-+ Default value: `false`
++ Default value: `true`
 + See [Placement Rules](/configure-placement-rules.md).
-+ An experimental feature of TiDB 4.0.
-
-### `flow-round-by-digit` <span class="version-mark">New in TiDB 5.1</span>
-
-+ Default value: 3
-+ PD rounds the lowest digits of the flow number, which reduces the update of statistics caused by the changes of the Region flow information. This configuration item is used to specify the number of lowest digits to round for the Region flow information. For example, the flow `100512` will be rounded to `101000` because the default value is `3`. This configuration replaces `trace-region-flow`.
-
-> **Note:**
->
-> If you have upgraded your cluster from a TiDB 4.0 version to the current version, the behavior of `flow-round-by-digit` after the upgrading and the behavior of `trace-region-flow` before the upgrading are consistent by default. This means that if the value of  `trace-region-flow` is false before the upgrading, the value of `flow-round-by-digit` after the upgrading is 127; if the value of `trace-region-flow` is `true` before the upgrading, the value of `flow-round-by-digit` after the upgrading is `3`.
 
 ## `label-property`
 
@@ -365,9 +474,51 @@ Configuration items related to the [TiDB Dashboard](/dashboard/dashboard-intro.m
 ### `enable-telemetry`
 
 + Determines whether to enable the telemetry collection feature in TiDB Dashboard.
-+ Default value: `true`
++ Default value: `false`
 + See [Telemetry](/telemetry.md) for details.
 
 ## `replication-mode`
 
 Configuration items related to the replication mode of all Regions. See [Enable the DR Auto-Sync mode](/two-data-centers-in-one-city-deployment.md#enable-the-dr-auto-sync-mode) for details.
+
+## Controllor
+
+This section describes the configuration items that are built into PD for [Resource Control](/tidb-resource-control.md).
+
+### `degraded-mode-wait-duration`
+
++ Time to wait to trigger the degradation mode. Degradation mode means that when the Local Token Bucket (LTB) and Global Token Bucket (GTB) are lost, the LTB falls back to the default resource group configuration and no longer has a GTB authorization token, thus ensuring that the service is not affected in the event of network isolation or anomalies.
++ Default value: 0s
++ The degradation mode is disabled by default.
+
+### `request-unit`
+
+The following are the configuration items about the [Request Unit (RU)](/tidb-resource-control.md#what-is-request-unit-ru).
+
+#### `read-base-cost`
+
++ Basis factor for conversion from a read request to RU
++ Default value: 0.25
+
+#### `write-base-cost`
+
++ Basis factor for conversion from a write request to RU
++ Default value: 1
+
+#### `read-cost-per-byte`
+
++ Basis factor for conversion from read flow to RU
++ Default value: 1/(64 * 1024)
++ 1 RU = 64 KiB read bytes
+
+#### `write-cost-per-byte`
+
++ Basis factor for conversion from write flow to RU
++ Default value: 1/1024
++ 1 RU = 1 KiB write bytes
+
+#### `read-cpu-ms-cost`
+
++ Basis factor for conversion from CPU to RU
++ Default value: 1/3
++ 1 RU = 3 millisecond CPU time

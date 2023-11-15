@@ -6,9 +6,12 @@
 .idea/
 .vscode/
 *.iml
+uml/
 out
 gen
 .DS_Store
 *.swp
 
 /node_modules/
+
+tmp/

@@ -73,7 +73,7 @@ tiup dm list
 ```
 Name  User  Version  Path                                  PrivateKey
 ----  ----  -------  ----                                  ----------
-prod-cluster  tidb  v2.0.3  /root/.tiup/storage/dm/clusters/test  /root/.tiup/storage/dm/clusters/test/ssh/id_rsa
+prod-cluster  tidb  ${version}  /root/.tiup/storage/dm/clusters/test  /root/.tiup/storage/dm/clusters/test/ssh/id_rsa
 ```
 
 ## Start the cluster
@@ -100,7 +100,7 @@ tiup dm display prod-cluster
 
 ```
 dm Cluster: prod-cluster
-dm Version: v2.0.3
+dm Version: ${version}
 ID                 Role          Host          Ports      OS/Arch       Status     Data Dir                           Deploy Dir
 --                 ----          ----          -----      -------       ------     --------                           ----------
 172.19.0.101:9093  alertmanager  172.19.0.101  9093/9094  linux/x86_64  Up         /home/tidb/data/alertmanager-9093  /home/tidb/deploy/alertmanager-9093
@@ -185,18 +185,18 @@ For example, to scale out a DM-worker node in the `prod-cluster` cluster, take t
 >
 > For clusters earlier than v2.0.5, you can use dmctl v2.0.5 or later to export and import the data source and task configuration files.
 >
-> For clusters later than v2.0.2, currently, it is not supported to automatically import the configuration related to relay worker. You can use `start-relay` command to manually [start relay log](/dm/relay-log.md#start-and-stop-the-relay-log-feature).
+> For clusters later than v2.0.2, currently, it is not supported to automatically import the configuration related to relay worker. You can use `start-relay` command to manually [start relay log](/dm/relay-log.md#enable-and-disable-relay-log).
 
 The rolling upgrade process is made as transparent as possible to the application, and does not affect the business. The operations vary with different nodes.
 
 ### Upgrade command
 
-You can run the `tiup dm upgrade` command to upgrade a DM cluster. For example, the following command upgrades the cluster to v2.0.1:
+You can run the `tiup dm upgrade` command to upgrade a DM cluster. For example, the following command upgrades the cluster to `${version}`. Modify `${version}` to your needed version before running this command:
 
 {{< copyable "shell-regular" >}}
 
 ```bash
-tiup dm upgrade prod-cluster v2.0.1
+tiup dm upgrade prod-cluster ${version}
 ```
 
 ## Update configuration
@@ -240,7 +240,7 @@ Flags:
   -N, --node strings           Specify the nodes
       --overwrite              Use this package in the future scale-out operations
   -R, --role strings           Specify the role
-      --transfer-timeout int   Timeout in seconds when transferring dm-master leaders (default 300)
+      --transfer-timeout int   Timeout in seconds when transferring dm-master leaders (default 600)
 
 Global Flags:
       --native-ssh         Use the native SSH client installed on local system instead of the build-in one.
@@ -285,7 +285,7 @@ For example, to import a cluster deployed using DM Ansible:
 {{< copyable "shell-regular" >}}
 
 ```bash
-tiup dm import --dir=/path/to/dm-ansible --cluster-version v2.0.3
+tiup dm import --dir=/path/to/dm-ansible --cluster-version ${version}
 ```
 
 Execute `tiup list dm-master` to view the latest cluster version supported by TiUP.
@@ -322,7 +322,7 @@ ID      Time                  Command
 --      ----                  -------
 4D5kQY  2020-08-13T05:38:19Z  tiup dm display test
 4D5kNv  2020-08-13T05:36:13Z  tiup dm list
-4D5kNr  2020-08-13T05:36:10Z  tiup dm deploy -p prod-cluster v2.0.3 ./examples/dm/minimal.yaml
+4D5kNr  2020-08-13T05:36:10Z  tiup dm deploy -p prod-cluster ${version} ./examples/dm/minimal.yaml
 ```
 
 The first column is `audit-id`. To view the execution log of a certain command, pass the `audit-id` argument as follows:
@@ -367,10 +367,10 @@ Run the following command to use dmctl:
 tiup dmctl [args]
 ```
 
-Specify the version of dmctl:
+Specify the version of dmctl. Modify `${version}` to your needed version before running this command:
 
 ```
-tiup dmctl:v2.0.3 [args]
+tiup dmctl:${version} [args]
 ```
 
 The previous dmctl command to add a source is `dmctl --master-addr master1:8261 operate-source create /tmp/source1.yml`. After dmctl is integrated into TiUP, the command is:
@@ -390,8 +390,8 @@ All operations above performed on the cluster machine use the SSH client embedde
 
 Then you can use the `--native-ssh` command-line flag to enable the system-native command-line tool:
 
-- Deploy a cluster: `tiup dm deploy <cluster-name> <version> <topo> --native-ssh`
-- Start a cluster: `tiup dm start <cluster-name> --native-ssh`
+- Deploy a cluster: `tiup dm deploy <cluster-name> <version> <topo> --native-ssh`. Fill in the name of your cluster for `<cluster-name>`,  the DM version to be deployed (such as `v7.4.0`) for `<version>` , and the topology file name for `<topo>`.
+- Start a cluster: `tiup dm start <cluster-name> --native-ssh`.
 - Upgrade a cluster: `tiup dm upgrade ... --native-ssh`
 
 You can add `--native-ssh` in all cluster operation commands above to use the system's native SSH client.

@@ -1,13 +1,9 @@
 ---
-title: Deploy a DM Cluster Offline Using TiUP (Experimental)
+title: Deploy a DM Cluster Offline Using TiUP
 summary: Introduce how to deploy a DM cluster offline using TiUP.
 ---
 
-# Deploy a DM Cluster Offline Using TiUP (Experimental)
-
-> **Warning:**
->
-> Using TiUP to deploy a DM cluster offline is still an experimental feature. It is **NOT** recommended to use this feature in production.
+# Deploy a DM Cluster Offline Using TiUP
 
 This document describes how to deploy a DM cluster offline using TiUP.
 
@@ -46,7 +42,7 @@ This document describes how to deploy a DM cluster offline using TiUP.
         {{< copyable "shell-regular" >}}
 
         ```bash
-        export version=v2.0.3  # You can modify it to the needed version.
+        # You can modify ${version} to the needed version.
         tiup mirror clone tidb-dm-${version}-linux-amd64 --os=linux --arch=amd64 \
             --dm-master=${version} --dm-worker=${version} --dmctl=${version} \
             --alertmanager=v0.17.0 --grafana=v4.0.3 --prometheus=v4.0.3 \
@@ -72,7 +68,7 @@ After sending the package to the control machine of the target cluster, install 
 {{< copyable "shell-regular" >}}
 
 ```bash
-export version=v2.0.3 # You can modify it to the needed version.
+# You can modify ${version} to the needed version.
 tar xzvf tidb-dm-${version}-linux-amd64.tar.gz
 sh tidb-dm-${version}-linux-amd64/local_install.sh
 source /home/tidb/.bash_profile
@@ -180,7 +176,7 @@ TiUP supports managing multiple DM clusters. The command above outputs informati
 ```log
 Name  User  Version  Path                                  PrivateKey
 ----  ----  -------  ----                                  ----------
-dm-test  tidb  v2.0.3  /root/.tiup/storage/dm/clusters/dm-test  /root/.tiup/storage/dm/clusters/dm-test/ssh/id_rsa
+dm-test  tidb  ${version}  /root/.tiup/storage/dm/clusters/dm-test  /root/.tiup/storage/dm/clusters/dm-test/ssh/id_rsa
 ```
 
 ## Step 6: Check the status of the deployed DM cluster

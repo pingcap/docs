@@ -23,16 +23,47 @@ tiup cluster patch <cluster-name> <package-path> [flags]
 
 ### Preparation
 
-You need to pack the binary package required for this command in advance according to the following steps:
+Before running the `tiup cluster patch` command, you need to pack the binary package required. Take the following steps:
 
-- Determine the name `${component}` of the component to be replaced (tidb, tikv, pd...), the `${version}` of the component (v4.0.0, v4.0.1 ...), and the operating system `${os}` (`linux`) and platform `${arch}` on which the component runs.
-- Download the current component package using the command `wget https://tiup-mirrors.pingcap.com/${component}-${version}-${os}-${arch}.tar.gz -O /tmp/${component}-${version}-${os}-${arch}.tar.gz`.
-- Run `mkdir -p /tmp/package && cd /tmp/package` to create a temporary directory to pack files.
-- Run `tar xf /tmp/${component}-${version}-${os}-${arch}.tar.gz` to unpack the original binary package.
-- Run `find .` to view the file structure in the temporary package directory.
-- Copy the binary files or configuration files to the corresponding locations in the temporary directory.
-- Run `tar czf /tmp/${component}-hotfix-${os}-${arch}.tar.gz *` to pack the files in the temporary directory.
-- Finally, you can use `/tmp/${component}-hotfix-${os}-${arch}.tar.gz` as the `<package-path>` in the `tiup cluster patch` command.
+1. Determine the following variables:
+
+    - `${component}`: the name of the component to be replaced (such as `tidb`, `tikv`, or `pd`).
+    - `${version}`: the version of the component (such as `v7.4.0` or `v6.5.3`).
+    - `${os}`: the operating system (`linux`).
+    - `${arch}`: the platform on which the component runs (`amd64`, `arm64`).
+
+2. Download the current component package using the command:
+
+    ```shell
+    wget https://tiup-mirrors.pingcap.com/${component}-${version}-${os}-${arch}.tar.gz -O /tmp/${component}-${version}-${os}-${arch}.tar.gz
+    ```
+
+3. Create a temporary directory to pack files and change to it:
+
+    ```shell
+    mkdir -p /tmp/package && cd /tmp/package
+    ```
+
+4. Extract the original binary package:
+
+    ```shell
+    tar xf /tmp/${component}-${version}-${os}-${arch}.tar.gz
+    ```
+
+5. Check out the file structure in the temporary directory:
+
+    ```shell
+    find .
+    ```
+
+6. Copy the binary files or configuration files to their corresponding locations in the temporary directory.
+7. Pack all files in the temporary directory:
+
+    ```shell
+    tar czf /tmp/${component}-hotfix-${os}-${arch}.tar.gz *
+    ```
+
+After you have completed the preceding steps, you can use `/tmp/${component}-hotfix-${os}-${arch}.tar.gz` as the `<package-path>` in the `tiup cluster patch` command.
 
 ## Options
 
@@ -46,7 +77,7 @@ You need to pack the binary package required for this command in advance accordi
 
 - When restarting the PD or TiKV service, TiKV/PD first transfers the leader of the node to be restarted to another node. Because the transfer process takes some time, you can use the option `--transfer-timeout` to set the maximum waiting time (in seconds). After the timeout, TiUP directly restarts the service.
 - Data type: `UINT`
-- If this option is not specified, TiUP directly restarts the service after waiting for `300` seconds.
+- If this option is not specified, TiUP directly restarts the service after waiting for `600` seconds.
 
 > **Note:**
 >

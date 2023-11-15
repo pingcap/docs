@@ -5,13 +5,11 @@ summary: The usage of CREATE PLACEMENT POLICY in TiDB.
 
 # CREATE PLACEMENT POLICY
 
-> **Warning:**
->
-> Placement Rules in SQL is an experimental feature. The syntax might change before its GA, and there might also be bugs.
->
-> If you understand the risks, you can enable this experiment feature by executing `SET GLOBAL tidb_enable_alter_placement = 1;`.
-
 `CREATE PLACEMENT POLICY` is used to create a named placement policy that can later be assigned to tables, partitions, or database schemas.
+
+> **Note:**
+>
+> This feature is not available on [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless) clusters.
 
 ## Synopsis
 
@@ -23,22 +21,30 @@ PolicyName ::=
     Identifier
 
 PlacementOptionList ::=
-    DirectPlacementOption
-|   PlacementOptionList DirectPlacementOption
-|   PlacementOptionList ',' DirectPlacementOption
+    PlacementOption
+|   PlacementOptionList PlacementOption
+|   PlacementOptionList ',' PlacementOption
 
-DirectPlacementOption ::=
+PlacementOption ::=
+    CommonPlacementOption
+|   SugarPlacementOption
+|   AdvancedPlacementOption
+
+CommonPlacementOption ::=
+    "FOLLOWERS" EqOpt LengthNum
+
+SugarPlacementOption ::=
     "PRIMARY_REGION" EqOpt stringLit
 |   "REGIONS" EqOpt stringLit
-|   "FOLLOWERS" EqOpt LengthNum
-|   "VOTERS" EqOpt LengthNum
-|   "LEARNERS" EqOpt LengthNum
 |   "SCHEDULE" EqOpt stringLit
+
+AdvancedPlacementOption ::=
+    "LEARNERS" EqOpt LengthNum
 |   "CONSTRAINTS" EqOpt stringLit
 |   "LEADER_CONSTRAINTS" EqOpt stringLit
 |   "FOLLOWER_CONSTRAINTS" EqOpt stringLit
-|   "VOTER_CONSTRAINTS" EqOpt stringLit
 |   "LEARNER_CONSTRAINTS" EqOpt stringLit
+|   "SURVIVAL_PREFERENCES" EqOpt stringLit
 ```
 
 ## Examples

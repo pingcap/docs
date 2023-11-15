@@ -8,11 +8,33 @@ aliases: ['/docs/dev/auto-increment/']
 
 This document introduces the `AUTO_INCREMENT` column attribute, including its concept, implementation principles, auto-increment related features, and restrictions.
 
-## Concept 
+<CustomContent platform="tidb">
+
+> **Note:**
+>
+> The `AUTO_INCREMENT` attribute might cause hotspot in production environments. See [Troubleshoot HotSpot Issues](/troubleshoot-hot-spot-issues.md) for details. It is recommended to use [`AUTO_RANDOM`](/auto-random.md) instead.
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+> **Note:**
+>
+> The `AUTO_INCREMENT` attribute might cause hotspot in production environments. See [Troubleshoot HotSpot Issues](https://docs.pingcap.com/tidb/stable/troubleshoot-hot-spot-issues#handle-auto-increment-primary-key-hotspot-tables-using-auto_random) for details. It is recommended to use [`AUTO_RANDOM`](/auto-random.md) instead.
+
+</CustomContent>
+
+You can also use the `AUTO_INCREMENT` parameter in the [`CREATE TABLE`](/sql-statements/sql-statement-create-table.md) statement to specify the initial value of the increment field.
+
+## Concept
 
 `AUTO_INCREMENT` is a column attribute that is used to automatically fill in default column values. When the `INSERT` statement does not specify values for the `AUTO_INCREMENT` column, the system automatically assigns values to this column.
 
 For performance reasons, `AUTO_INCREMENT` numbers are allocated in a batch of values (30 thousand by default) to each TiDB server. This means that while `AUTO_INCREMENT` numbers are guaranteed to be unique, values assigned to an `INSERT` statement will only be monotonic on a per TiDB server basis.
+
+> **Note:**
+>
+> If you want the `AUTO_INCREMENT` numbers to be monotonic on all TiDB servers and your TiDB version is v6.5.0 or later, it is recommended to enable the [MySQL compatibility mode](#mysql-compatibility-mode).
 
 The following is a basic example of `AUTO_INCREMENT`:
 
@@ -327,16 +349,40 @@ In addition, when the length of consecutive IDs in a batch `INSERT` statement ex
 
 Starting from v3.0.9 and v4.0.0-rc.1, similar to the behavior of MySQL, the value implicitly assigned to the auto-increment column is controlled by the `@@auto_increment_increment` and `@@auto_increment_offset` session variables.
 
-The value (ID) implicitly assigned to auto-increment columns satisfies the following equation: 
+The value (ID) implicitly assigned to auto-increment columns satisfies the following equation:
 
 `(ID - auto_increment_offset) % auto_increment_increment == 0`
+
+## MySQL compatibility mode
+
+TiDB v6.4.0 introduces a centralized auto-increment ID allocating service. In each request, an auto-increment ID is allocated from this service instead of caching data in TiDB instances.
+
+Currently, the centralized allocating service is in the TiDB process and works like DDL Owner. One TiDB instance allocates IDs as the primary node and other TiDB instances work as secondary nodes. To ensure high availability, when the primary instance fails, TiDB starts automatic failover.
+
+To use the MySQL compatibility mode, you can set `AUTO_ID_CACHE` to `1` when creating a table:
+
+```sql
+CREATE TABLE t(a int AUTO_INCREMENT key) AUTO_ID_CACHE 1;
+```
+
+> **Note:**
+>
+> In TiDB, setting `AUTO_ID_CACHE` to `1` means that TiDB no longer caches IDs. But the implementation varies with TiDB versions:
+>
+> - Before TiDB v6.4.0, since allocating ID requires a TiKV transaction to persist the `AUTO_INCREMENT` value for each request, setting `AUTO_ID_CACHE` to `1` causes performance degradation.
+> - Since TiDB v6.4.0, the modification of the `AUTO_INCREMENT` value is faster because it is only an in-memory operation in the TiDB process as the centralized allocating service is introduced.
+> - Setting `AUTO_ID_CACHE` to `0` means that TiDB uses the default cache size `30000`.
+
+After you enable the MySQL compatibility mode, the allocated IDs are **unique** and **monotonically increasing**, and the behavior is almost the same as MySQL. Even if you access across TiDB instances, the IDs will keep monotonic. Only when the primary instance of the centralized service crashes, there might be a few IDs that are not continuous. This is because the secondary instance discards some IDs that are supposed to have been allocated by the primary instance during the failover to ensure ID uniqueness.
 
 ## Restrictions
 
 Currently, `AUTO_INCREMENT` has the following restrictions when used in TiDB:
 
-- It must be defined on the column of the primary key or unique index.
+- For TiDB v6.6.0 and earlier versions, the defined column must be either primary key or index prefixes.
 - It must be defined on the column of `INTEGER`, `FLOAT`, or `DOUBLE` type.
 - It cannot be specified on the same column with the `DEFAULT` column value.
-- `ALTER TABLE` cannot be used to add the `AUTO_INCREMENT` attribute.
+- `ALTER TABLE` cannot be used to add or modify columns with the `AUTO_INCREMENT` attribute, including using `ALTER TABLE ... MODIFY/CHANGE COLUMN` to add the `AUTO_INCREMENT` attribute to an existing column, or using `ALTER TABLE ... ADD COLUMN` to add a column with the `AUTO_INCREMENT` attribute.
 - `ALTER TABLE` can be used to remove the `AUTO_INCREMENT` attribute. However, starting from v2.1.18 and v3.0.4, TiDB uses the session variable `@@tidb_allow_remove_auto_inc` to control whether `ALTER TABLE MODIFY` or `ALTER TABLE CHANGE` can be used to remove the `AUTO_INCREMENT` attribute of a column. By default, you cannot use `ALTER TABLE MODIFY` or `ALTER TABLE CHANGE` to remove the `AUTO_INCREMENT` attribute.
+- `ALTER TABLE` requires the `FORCE` option to set the `AUTO_INCREMENT` value to a smaller value.
+- Setting the `AUTO_INCREMENT` to a value smaller than `MAX(<auto_increment_column>)` leads to duplicate keys because pre-existing values are not skipped.

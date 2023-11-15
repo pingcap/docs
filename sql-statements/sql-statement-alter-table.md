@@ -8,14 +8,19 @@ aliases: ['/docs/dev/sql-statements/sql-statement-alter-table/','/docs/dev/refer
 
 This statement modifies an existing table to conform to a new table structure. The statement `ALTER TABLE` can be used to:
 
-* [`ADD`](/sql-statements/sql-statement-add-index.md), [`DROP`](/sql-statements/sql-statement-drop-index.md), or [`RENAME`](/sql-statements/sql-statement-rename-index.md) indexes
-* [`ADD`](/sql-statements/sql-statement-add-column.md), [`DROP`](/sql-statements/sql-statement-drop-column.md), [`MODIFY`](/sql-statements/sql-statement-modify-column.md) or [`CHANGE`](/sql-statements/sql-statement-change-column.md) columns
+- [`ADD`](/sql-statements/sql-statement-add-index.md), [`DROP`](/sql-statements/sql-statement-drop-index.md), or [`RENAME`](/sql-statements/sql-statement-rename-index.md) indexes
+- [`ADD`](/sql-statements/sql-statement-add-column.md), [`DROP`](/sql-statements/sql-statement-drop-column.md), [`MODIFY`](/sql-statements/sql-statement-modify-column.md) or [`CHANGE`](/sql-statements/sql-statement-change-column.md) columns
+- [`COMPACT`](/sql-statements/sql-statement-alter-table-compact.md) table data
 
 ## Synopsis
 
 ```ebnf+diagram
 AlterTableStmt ::=
-    'ALTER' IgnoreOptional 'TABLE' TableName ( AlterTableSpecListOpt AlterTablePartitionOpt | 'ANALYZE' 'PARTITION' PartitionNameList ( 'INDEX' IndexNameList )? AnalyzeOptionListOpt )
+    'ALTER' IgnoreOptional 'TABLE' TableName (
+        AlterTableSpecListOpt AlterTablePartitionOpt |
+        'ANALYZE' 'PARTITION' PartitionNameList ( 'INDEX' IndexNameList )? AnalyzeOptionListOpt |
+        'COMPACT' ( 'PARTITION' PartitionNameList )? 'TIFLASH' 'REPLICA'
+    )
 
 TableName ::=
     Identifier ('.' Identifier)?
@@ -42,6 +47,19 @@ AlterTableSpec ::=
 |   ( 'WITH' | 'WITHOUT' ) 'VALIDATION'
 |   'SECONDARY_LOAD'
 |   'SECONDARY_UNLOAD'
+|   ( 'AUTO_INCREMENT' | 'AUTO_ID_CACHE' | 'AUTO_RANDOM_BASE' | 'SHARD_ROW_ID_BITS' ) EqOpt LengthNum
+|   ( 'CACHE' | 'NOCACHE' )
+|   (
+        'TTL' EqOpt TimeColumnName '+' 'INTERVAL' Expression TimeUnit (TTLEnable EqOpt ( 'ON' | 'OFF' ))?
+        | 'REMOVE' 'TTL'
+        | TTLEnable EqOpt ( 'ON' | 'OFF' )
+        | TTLJobInterval EqOpt stringLit
+    )
+|   PlacementPolicyOption
+
+PlacementPolicyOption ::=
+    "PLACEMENT" "POLICY" EqOpt PolicyName
+|   "PLACEMENT" "POLICY" (EqOpt | "SET") "DEFAULT"
 ```
 
 ## Examples
@@ -150,29 +168,35 @@ Query OK, 0 rows affected, 1 warning (0.25 sec)
 
 The following major restrictions apply to `ALTER TABLE` in TiDB:
 
-* Making multiple changes in a single `ALTER TABLE` statement is currently not supported. 
+- When altering multiple schema objects in a single `ALTER TABLE` statement:
 
-* Changes of the [Reorg-Data](/sql-statements/sql-statement-modify-column.md#reorg-data-change) types on primary key columns are not supported.
+    - Modifying the same object in multiple changes is not supported.
+    - TiDB validates statements according to the table schema **before execution**. For example, an error returns when `ALTER TABLE t ADD COLUMN c1 INT, ADD COLUMN c2 INT AFTER c1;` is executed because column `c1` does not exist in the table.
+    - For an `ALTER TABLE` statement, the order of execution in TiDB is one change after another from left to right, which is incompatible with MySQL in some cases.
 
-* Changes of column types on partitioned tables are not supported.
+- Changes of the [Reorg-Data](/sql-statements/sql-statement-modify-column.md#reorg-data-change) types on primary key columns are not supported.
 
-* Changes of column types on generated columns are not supported.
+- Changes of column types on partitioned tables are not supported.
 
-* Changes of some data types (for example, some TIME, Bit, Set, Enum, and JSON types) are not supported due to the compatibility issues of the `CAST` function's behavior between TiDB and MySQL.
+- Changes of column types on generated columns are not supported.
 
-* Spatial data types are not supported.
+- Changes of some data types (for example, some TIME, Bit, Set, Enum, and JSON types) are not supported due to the compatibility issues of the `CAST` function's behavior between TiDB and MySQL.
 
-For further restrictions, see [MySQL Compatibility](/mysql-compatibility.md#ddl).
+- Spatial data types are not supported.
+
+- `ALTER TABLE t CACHE | NOCACHE` is a TiDB extension to MySQL syntax. For details, see [Cached Tables](/cached-tables.md).
+
+For further restrictions, see [MySQL Compatibility](/mysql-compatibility.md#ddl-operations).
 
 ## See also
 
-* [MySQL Compatibility](/mysql-compatibility.md#ddl)
-* [ADD COLUMN](/sql-statements/sql-statement-add-column.md)
-* [DROP COLUMN](/sql-statements/sql-statement-drop-column.md)
-* [ADD INDEX](/sql-statements/sql-statement-add-index.md)
-* [DROP INDEX](/sql-statements/sql-statement-drop-index.md)
-* [RENAME INDEX](/sql-statements/sql-statement-rename-index.md)
-* [ALTER INDEX](/sql-statements/sql-statement-alter-index.md)
-* [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
-* [DROP TABLE](/sql-statements/sql-statement-drop-table.md)
-* [SHOW CREATE TABLE](/sql-statements/sql-statement-show-create-table.md)
+- [MySQL Compatibility](/mysql-compatibility.md#ddl-operations)
+- [ADD COLUMN](/sql-statements/sql-statement-add-column.md)
+- [DROP COLUMN](/sql-statements/sql-statement-drop-column.md)
+- [ADD INDEX](/sql-statements/sql-statement-add-index.md)
+- [DROP INDEX](/sql-statements/sql-statement-drop-index.md)
+- [RENAME INDEX](/sql-statements/sql-statement-rename-index.md)
+- [ALTER INDEX](/sql-statements/sql-statement-alter-index.md)
+- [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
+- [DROP TABLE](/sql-statements/sql-statement-drop-table.md)
+- [SHOW CREATE TABLE](/sql-statements/sql-statement-show-create-table.md)

@@ -24,6 +24,19 @@ Currently, we maintain the following versions of TiDB documentation in different
 | Branch name | TiDB docs version |
 | :---------|:----------|
 | [`master`](https://github.com/pingcap/docs/tree/master) | The latest development version |
+| [`release-7.4`](https://github.com/pingcap/docs/tree/release-7.4) | 7.4 Development Milestone Release |
+| [`release-7.3`](https://github.com/pingcap/docs/tree/release-7.3) | 7.3 Development Milestone Release |
+| [`release-7.2`](https://github.com/pingcap/docs/tree/release-7.2) | 7.2 Development Milestone Release |
+| [`release-7.1`](https://github.com/pingcap/docs/tree/release-7.1) | 7.1 LTS (Long-Term Support) version |
+| [`release-7.0`](https://github.com/pingcap/docs/tree/release-7.0) | 7.0 Development Milestone Release |
+| [`release-6.6`](https://github.com/pingcap/docs/tree/release-6.6) | 6.6 Development Milestone Release |
+| [`release-6.5`](https://github.com/pingcap/docs/tree/release-6.5) | 6.5 LTS (Long-Term Support) version |
+| [`release-6.4`](https://github.com/pingcap/docs/tree/release-6.4) | 6.4 Development Milestone Release |
+| [`release-6.3`](https://github.com/pingcap/docs/tree/release-6.3) | 6.3 Development Milestone Release |
+| [`release-6.2`](https://github.com/pingcap/docs/tree/release-6.2) | 6.2 Development Milestone Release |
+| [`release-6.1`](https://github.com/pingcap/docs/tree/release-6.1) | 6.1 LTS (Long-Term Support) version |
+| [`release-6.0`](https://github.com/pingcap/docs/tree/release-6.0) | 6.0 Development Milestone Release |
+| [`release-5.4`](https://github.com/pingcap/docs/tree/release-5.4) | 5.4 stable version |
 | [`release-5.3`](https://github.com/pingcap/docs/tree/release-5.3) | 5.3 stable version |
 | [`release-5.2`](https://github.com/pingcap/docs/tree/release-5.2) | 5.2 stable version |
 | [`release-5.1`](https://github.com/pingcap/docs/tree/release-5.1) | 5.1 stable version |
@@ -35,6 +48,10 @@ Currently, we maintain the following versions of TiDB documentation in different
 
 ## Contributing
 
-[<img src="media/contribution-map.png" alt="contribution-map" width="180"></img>](https://github.com/pingcap/community/tree/master/special-interest-groups/sig-docs)
+[<img src="media/contribution-map.png" alt="contribution-map" width="180"></img>](https://github.com/pingcap/docs/blob/master/credits.md)
 
 See [TiDB Documentation Contributing Guide](/CONTRIBUTING.md) to become a contributor! 🤓
+
+## License
+
+All documentation starting from TiDB v7.0 is available under the terms of [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/).

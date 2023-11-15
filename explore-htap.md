@@ -13,7 +13,7 @@ This guide describes how to explore and use the features of TiDB Hybrid Transact
 
 ## Use cases
 
-TiDB HTAP can handle the massive data that increases rapidly, reduce the cost of DevOps, and be deployed in either on-premises or cloud environments easily, which brings the value of data assets in real time.
+TiDB HTAP can handle the massive data that increases rapidly, reduce the cost of DevOps, and be deployed in either self-hosted or cloud environments easily, which brings the value of data assets in real time.
 
 The following are the typical use cases of HTAP:
 
@@ -29,22 +29,40 @@ The following are the typical use cases of HTAP:
 
     When using TiDB as a data hub, TiDB can meet specific business needs by seamlessly connecting the data for the application and the data warehouse.
 
-For more information about use cases of TiDB HTAP, see [blogs about HTAP on the PingCAP website](https://en.pingcap.com/blog/tag/HTAP).
+For more information about use cases of TiDB HTAP, see [blogs about HTAP on the PingCAP website](https://en.pingcap.com/blog/?tag=htap).
+
+To enhance the overall performance of TiDB, it is recommended to use HTAP in the following technical scenarios:
+
+- Improve analytical processing performance
+
+    If your application involves complex analytical queries, such as aggregation and join operations, and these queries are performed on a large amount of data (more than 10 million rows), the row-based storage engine [TiKV](/tikv-overview.md) might not meet your performance requirements if the tables in these queries cannot effectively use indexes or have low index selectivity.
+
+- Hybrid workload isolation
+
+   While dealing with high-concurrency Online Transactional Processing (OLTP) workloads, your system might also need to handle some OLAP workloads. To ensure the overall system stability, you expect to avoid the impact of OLAP queries on OLTP performance.
+
+- Simplify the ETL technology stack
+
+    When the amount of data to be processed is of medium scale (less than 100 TB), the data processing and scheduling processes are relatively simple, and the concurrency is not high (less than 10), you might want to simplify the technology stack of your system. By replacing multiple different technology stacks used in OLTP, ETL, and OLAP systems with a single database, you can meet the requirements of both transactional systems and analytical systems. This reduces technical complexity and the need for maintenance personnel.
+
+- Strongly consistent analysis
+
+    To achieve real-time, strongly consistent data analysis and calculation, and ensure the analysis results to be completely consistent with the transactional data, you need to avoid data latency and inconsistency issues.
 
 ## Architecture
 
-In TiDB, a row-based storage engine [TiKV](/tikv-overview.md) for Online Transactional Processing (OLTP) and a columnar storage engine [TiFlash](/tiflash/tiflash-overview.md) for Online Analytical Processing (OLAP) co-exist, replicate data automatically, and keep strong consistency. 
+In TiDB, a row-based storage engine [TiKV](/tikv-overview.md) for Online Transactional Processing (OLTP) and a columnar storage engine [TiFlash](/tiflash/tiflash-overview.md) for Online Analytical Processing (OLAP) co-exist, replicate data automatically, and keep strong consistency.
 
 For more information about the architecture, see [architecture of TiDB HTAP](/tiflash/tiflash-overview.md#architecture).
 
-## Environment preparation 
+## Environment preparation
 
 Before exploring the features of TiDB HTAP, you need to deploy TiDB and the corresponding storage engines according to the data volume. If the data volume is large (for example, 100 T), it is recommended to use TiFlash Massively Parallel Processing (MPP) as the primary solution and TiSpark as the supplementary solution.
 
 - TiFlash
 
     - If you have deployed a TiDB cluster with no TiFlash node, add the TiFlash nodes in the current TiDB cluster. For detailed information, see [Scale out a TiFlash cluster](/scale-tidb-using-tiup.md#scale-out-a-tiflash-cluster).
-    - If you have not deployed a TiDB cluster, see [Deploy a TiDB Cluster using TiUP](/production-deployment-using-tiup.md).  Based on the minimal TiDB topology, you also need to deploy the [topology of TiFlash](/tiflash-deployment-topology.md).
+    - If you have not deployed a TiDB cluster, see [Deploy a TiDB Cluster using TiUP](/production-deployment-using-tiup.md). Based on the minimal TiDB topology, you also need to deploy the [topology of TiFlash](/tiflash-deployment-topology.md).
     - When deciding how to choose the number of TiFlash nodes, consider the following scenarios:
 
         - If your use case requires OLTP with small-scale analytical processing and Ad-Hoc queries, deploy one or several TiFlash nodes. They can dramatically increase the speed of analytic queries.
@@ -53,24 +71,24 @@ Before exploring the features of TiDB HTAP, you need to deploy TiDB and the corr
 
 - TiSpark
 
-    - If your data needs to be analyzed with Spark, deploy TiSpark (Spark 3.x is not currently supported). For specific process, see [TiSpark User Guide](/tispark-overview.md).
+    - If your data needs to be analyzed with Spark, deploy TiSpark. For specific process, see [TiSpark User Guide](/tispark-overview.md).
 
 <!--    - Real-time stream processing
   - If you want to build an efficient and easy-to-use real-time data warehouse with TiDB and Flink, you are welcome to participate in Apache Flink x TiDB meetups.-->
 
-## Data preparation 
+## Data preparation
 
 After TiFlash is deployed, TiKV does not replicate data to TiFlash automatically. You need to manually specify which tables need to be replicated to TiFlash. After that, TiDB creates the corresponding TiFlash replicas.
 
 - If there is no data in the TiDB Cluster, migrate the data to TiDB first. For detailed information, see [data migration](/migration-overview.md).
-- If the TiDB cluster already has the replicated data from upstream, after TiFlash is deployed, data replication does not automatically begin. You need to manually specify the tables to be replicated to TiFlash. For detailed information, see [Use TiFlash](/tiflash/use-tiflash.md).
+- If the TiDB cluster already has the replicated data from upstream, after TiFlash is deployed, data replication does not automatically begin. You need to manually specify the tables to be replicated to TiFlash. For detailed information, see [Use TiFlash](/tiflash/tiflash-overview.md#use-tiflash).
 
 ## Data processing
 
 With TiDB, you can simply enter SQL statements for query or write requests. For the tables with TiFlash replicas, TiDB uses the front-end optimizer to automatically choose the optimal execution plan.
 
 > **Note:**
-> 
+>
 > The MPP mode of TiFlash is enabled by default. When an SQL statement is executed, TiDB automatically determines whether to run in the MPP mode through the optimizer.
 >
 > - To disable the MPP mode of TiFlash, set the value of the [tidb_allow_mpp](/system-variables.md#tidb_allow_mpp-new-in-v50) system variable to `OFF`.
@@ -82,7 +100,7 @@ With TiDB, you can simply enter SQL statements for query or write requests. For 
 When using TiDB, you can monitor the TiDB cluster status and performance metrics in either of the following ways:
 
 - [TiDB Dashboard](/dashboard/dashboard-intro.md): you can see the overall running status of the TiDB cluster, analyse distribution and trends of read and write traffic, and learn the detailed execution information of slow queries.
-- [Monitoring system (Prometheus & Grafana)](/grafana-overview-dashboard.md): you can see the monitoring parameters of TiDB cluster-related componants including PD, TiDB, TiKV, TiFlash,TiCDC, and Node_exporter.
+- [Monitoring system (Prometheus & Grafana)](/grafana-overview-dashboard.md): you can see the monitoring parameters of TiDB cluster-related components including PD, TiDB, TiKV, TiFlash, TiCDC, and Node_exporter.
 
 To see the alert rules of TiDB cluster and TiFlash cluster, see [TiDB cluster alert rules](/alert-rules.md) and [TiFlash alert rules](/tiflash/tiflash-alert-rules.md).
 
@@ -96,7 +114,7 @@ If any issue occurs during using TiDB, refer to the following documents:
 - [TiDB cluster troubleshooting guide](/troubleshoot-tidb-cluster.md)
 - [Troubleshoot a TiFlash Cluster](/tiflash/troubleshoot-tiflash.md)
 
-You are also welcome to create [Github Issues](https://github.com/pingcap/tiflash/issues) or submit your questions on [AskTUG](https://asktug.com/).
+You are also welcome to create [GitHub Issues](https://github.com/pingcap/tiflash/issues) or submit your questions on [AskTUG](https://asktug.com/).
 
 ## What's next
 

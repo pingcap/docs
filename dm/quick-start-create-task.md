@@ -74,7 +74,7 @@ To run a TiDB server, use the following command:
 {{< copyable "shell-regular" >}}
 
 ```bash
-wget https://download.pingcap.org/tidb-latest-linux-amd64.tar.gz
+wget https://download.pingcap.org/tidb-community-server-v7.4.0-linux-amd64.tar.gz
 tar -xzvf tidb-latest-linux-amd64.tar.gz
 mv tidb-latest-linux-amd64/bin/tidb-server ./
 ./tidb-server
@@ -100,7 +100,7 @@ For safety reasons, it is recommended to configure and use encrypted passwords. 
 {{< copyable "shell-regular" >}}
 
 ```bash
-./bin/dmctl encrypt "123456"
+./dmctl encrypt "123456"
 ```
 
 ```
@@ -137,14 +137,14 @@ To load the data source configurations of MySQL1 into the DM cluster using dmctl
 {{< copyable "shell-regular" >}}
 
 ```bash
-./bin/dmctl --master-addr=127.0.0.1:8261 operate-source create conf/source1.yaml
+./dmctl --master-addr=127.0.0.1:8261 operate-source create conf/source1.yaml
 ```
 
 For MySQL2, replace the configuration file in the above command with that of MySQL2.
 
 ## Create a data migration task
 
-After importing [prepared data](#prepare-data), there are several sharded tables on both MySQL1 and MySQL2 instances. These tables have identical structure and the same prefix “t” in the table names; the databases where these tables are located are all prefixed with "sharding"; and there is no conflict between the primary keys or the unique keys (in each sharded table, the primary keys or the unique keys are different from those of other tables).
+After importing [prepared data](#prepare-data), there are several sharded tables on both MySQL1 and MySQL2 instances. These tables have identical structure and the same prefix "t" in the table names; the databases where these tables are located are all prefixed with "sharding"; and there is no conflict between the primary keys or the unique keys (in each sharded table, the primary keys or the unique keys are different from those of other tables).
 
 Now, suppose that you need to migrate these sharded tables to the `db_target.t_target` table in TiDB. The steps are as follows.
 
@@ -198,7 +198,7 @@ Now, suppose that you need to migrate these sharded tables to the `db_target.t_t
     {{< copyable "shell-regular" >}}
 
     ```bash
-    ./bin/dmctl --master-addr 127.0.0.1:8261 start-task conf/task.yaml
+    ./dmctl --master-addr 127.0.0.1:8261 start-task conf/task.yaml
     ```
 
     ```

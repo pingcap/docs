@@ -9,7 +9,7 @@ This guide walks you through the quickest way to get started with TiDB's one-sto
 
 > **Note:**
 >
-> The steps provided in this guide is ONLY for quick start in the test environment. For production environments, [explore HTAP](/explore-htap.md) is recommended. 
+> The steps provided in this guide is ONLY for quick start in the test environment. For production environments, [explore HTAP](/explore-htap.md) is recommended.
 
 ## Basic concepts
 
@@ -18,13 +18,13 @@ Before using TiDB HTAP, you need to have some basic knowledge about [TiKV](/tikv
 - Storage engines of HTAP: The row-based storage engine and the columnar storage engine co-exist for HTAP. Both storage engines can replicate data automatically and keep strong consistency. The row-based storage engine optimizes OLTP performance, and the columnar storage engine optimizes OLAP performance.
 - Data consistency of HTAP: As a distributed and transactional key-value database, TiKV provides transactional interfaces with ACID compliance, and guarantees data consistency between multiple replicas and high availability with the implementation of the [Raft consensus algorithm](https://raft.github.io/raft.pdf). As a columnar storage extension of TiKV, TiFlash replicates data from TiKV in real time according to the Raft Learner consensus algorithm, which ensures that data is strongly consistent between TiKV and TiFlash.
 - Data isolation of HTAP: TiKV and TiFlash can be deployed on different machines as needed to solve the problem of HTAP resource isolation.
-- MPP computing engine: [MPP](/tiflash/use-tiflash.md#control-whether-to-select-the-mpp-mode) is a distributed computing framework provided by the TiFlash engine since TiDB 5.0, which allows data exchange between nodes and provides high-performance, high-throughput SQL algorithms. In the MPP mode, the run time of the analytic queries can be significantly reduced.
+- MPP computing engine: [MPP](/tiflash/use-tiflash-mpp-mode.md#control-whether-to-select-the-mpp-mode) is a distributed computing framework provided by the TiFlash engine since TiDB 5.0, which allows data exchange between nodes and provides high-performance, high-throughput SQL algorithms. In the MPP mode, the run time of the analytic queries can be significantly reduced.
 
 ## Steps
 
-In this document, you can experience the convenience and high performance of TiDB HTAP by querying an example table in a popular [TPC-H](http://www.tpc.org/tpch/) dataset.
+In this document, you can experience the convenience and high performance of TiDB HTAP by querying an example table in a [TPC-H](http://www.tpc.org/tpch/) dataset. TPC-H is a popular decision support benchmark that consists of a suite of business oriented ad-hoc queries with large volumes of data and a high degree of complexity. To experience 22 complete SQL queries using TPC-H, visit [tidb-bench repo](https://github.com/pingcap/tidb-bench/tree/master/tpch/queries) or [TPC-H](http://www.tpc.org/tpch/) for instructions on how to generate query statements and data.
 
-### Step 1. Deploy a local test environment 
+### Step 1. Deploy a local test environment
 
 Before using TiDB HTAP, follow the steps in the [Quick Start Guide for the TiDB Database Platform](/quick-start-with-tidb.md) to prepare a local test environment, and run the following command to deploy a TiDB cluster:
 
@@ -69,15 +69,15 @@ In the following steps, you can create a [TPC-H](http://www.tpc.org/tpch/) datas
     {{< copyable "sql" >}}
 
     ```sql
-    SELECT 
-      CONCAT(table_schema,'.',table_name) AS 'Table Name', 
-      table_rows AS 'Number of Rows', 
-      FORMAT_BYTES(data_length) AS 'Data Size', 
-      FORMAT_BYTES(index_length) AS 'Index Size', 
-      FORMAT_BYTES(data_length+index_length) AS'Total' 
-    FROM 
-      information_schema.TABLES 
-    WHERE 
+    SELECT
+      CONCAT(table_schema,'.',table_name) AS 'Table Name',
+      table_rows AS 'Number of Rows',
+      FORMAT_BYTES(data_length) AS 'Data Size',
+      FORMAT_BYTES(index_length) AS 'Index Size',
+      FORMAT_BYTES(data_length+index_length) AS'Total'
+    FROM
+      information_schema.TABLES
+    WHERE
       table_schema='test';
     ```
 
@@ -97,7 +97,7 @@ In the following steps, you can create a [TPC-H](http://www.tpc.org/tpch/) datas
     | test.lineitem |        6491711 | 849.07 MiB| 99.06 MiB  | 948.13 MiB|
     +---------------+----------------+-----------+------------+-----------+
     8 rows in set (0.06 sec)
-     ```
+    ```
 
     This is a database of a commercial ordering system. In which, the `test.nation` table indicates the information about countries, the `test.region` table indicates the information about regions, the `test.part` table indicates the information about parts, the `test.supplier` table indicates the information about suppliers, the `test.partsupp` table indicates the information about parts of suppliers, the `test.customer` table indicates the information about customers, the `test.customer` table indicates the information about orders, and the `test.lineitem` table indicates the information about online items.
 
@@ -139,7 +139,7 @@ This is a shipping priority query, which provides the priority and potential rev
 
 ### Step 4. Replicate the test data to the columnar storage engine
 
-After TiFlash is deployed, TiKV does not replicate data to TiFlash immediately. You need to execute the following DDL statements in a MySQL client of TiDB to specify which tables need to be replicated. After that, TiDB will create the specified replicas in TiFlash accordingly. 
+After TiFlash is deployed, TiKV does not replicate data to TiFlash immediately. You need to execute the following DDL statements in a MySQL client of TiDB to specify which tables need to be replicated. After that, TiDB will create the specified replicas in TiFlash accordingly.
 
 {{< copyable "sql" >}}
 
@@ -161,8 +161,8 @@ SELECT * FROM information_schema.tiflash_replica WHERE TABLE_SCHEMA = 'test' and
 
 In the result of the above statements:
 
-- `AVAILABLE` indicates whether the TiFlash replica of a specific table is available or not. `1` means available and `0` means unavailable. Once a replica becomes available, this status does not change any more. If you use DDL statements to modify the number of replicas, the replication status will be recalculated.
-- `PROGRESS` means the progress of the replication. The value is between 0.0 and 1.0. 1 means at least one replica is replicated.
+- `AVAILABLE` indicates whether the TiFlash replica of a specific table is available or not. `1` means available and `0` means unavailable. Once the `AVAILABLE` field becomes `1`, this status does not change anymore.
+- `PROGRESS` means the progress of the replication. The value is between 0.0 and 1.0. 1 means that the replication progress of the TiFlash replica is complete.
 
 ### Step 5. Analyze data faster using HTAP
 
@@ -202,7 +202,7 @@ limit 10;
 
 If the result of the `EXPLAIN` statement shows `ExchangeSender` and `ExchangeReceiver` operators, it indicates that the MPP mode has taken effect.
 
-In addition, you can specify that each part of the entire query is computed using only the TiFlash engine. For detailed information, see [Use TiDB to read TiFlash replicas](/tiflash/use-tiflash.md#use-tidb-to-read-tiflash-replicas).
+In addition, you can specify that each part of the entire query is computed using only the TiFlash engine. For detailed information, see [Use TiDB to read TiFlash replicas](/tiflash/use-tidb-to-read-tiflash.md).
 
 You can compare query results and query performance of these two methods.
 
@@ -210,4 +210,4 @@ You can compare query results and query performance of these two methods.
 
 - [Architecture of TiDB HTAP](/tiflash/tiflash-overview.md#architecture)
 - [Explore HTAP](/explore-htap.md)
-- [Use TiFlash](/tiflash/use-tiflash.md#use-tiflash)
+- [Use TiFlash](/tiflash/tiflash-overview.md#use-tiflash)

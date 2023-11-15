@@ -41,10 +41,9 @@ tikv:
     gc.max-write-bytes-per-sec: 300K
     rocksdb.max-background-jobs: 3
     rocksdb.max-sub-compactions: 1
-    rocksdb.rate-bytes-per-sec: “200M”
+    rocksdb.rate-bytes-per-sec: "200M"
 
   tidb:
-    performance.committer-concurrency: 4
     performance.max-procs: 8
 ```
 
@@ -110,7 +109,7 @@ In addition to setting this parameter value in the configuration file, you can a
 {{< copyable "shell-regular" >}}
 
 ```shell
-tiup ctl tikv --host=${ip:port} modify-tikv-config -n gc.max_write_bytes_per_sec -v ${limit}
+tiup ctl:v<CLUSTER_VERSION> tikv --host=${ip:port} modify-tikv-config -n gc.max_write_bytes_per_sec -v ${limit}
 ```
 
 > **Note:**

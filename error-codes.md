@@ -16,13 +16,13 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 >
 > Some error codes stand for internal errors. Normally, TiDB handles the error rather than return it to the user, so some error codes are not listed here.
 >
-> If you encounter an error code that is not listed here, [contact PingCAP](mailto:info@pingcap.com) for support.
+> If you encounter an error code that is not listed here, [get support](/support.md) from PingCAP or the community.
 
 * Error Number: 8001
 
     The memory used by the request exceeds the threshold limit for the TiDB memory usage.
 
-    Increase the memory limit for a single SQL statement by configuring `mem-quota-query`.
+    Increase the memory limit for a single SQL statement by configuring the system variable [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query).
 
 * Error Number: 8002
 
@@ -32,9 +32,9 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 
 * Error Number: 8003
 
-    If the data in a row is not consistent with the index when executing the `ADMIN CHECK TABLE` command, TiDB returns this error. This error is commonly seen when you check the data corruption in the table.
+    If the data in a row is not consistent with the index when executing the [`ADMIN CHECK TABLE`](/sql-statements/sql-statement-admin-check-table-index.md) command, TiDB returns this error. This error is commonly seen when you check the data corruption in the table.
 
-    You can [contact PingCAP](mailto:info@pingcap.com) for support.
+    You can [get support](/support.md) from PingCAP or the community.
 
 * Error Number: 8004
 
@@ -44,9 +44,9 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 
 * Error Number: 8005
 
-    Transactions in TiDB encounter write conflicts.
+    The complete error message: `ERROR 8005 (HY000): Write Conflict, txnStartTS is stale`
 
-    See [the Troubleshoot section](/faq/tidb-faq.md#troubleshoot) for the cause and solution.
+    Transactions in TiDB encounter write conflicts. Check your application logic and retry the write operation.
 
 * Error Number: 8018
 
@@ -84,7 +84,7 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 
     Invalid transactions. If TiDB finds that no transaction ID (Start Timestamp) is obtained for the transaction that is being executed, which means this transaction is invalid, this error is returned.
 
-    Usually this error does not occur. If you encounter this error, [contact PingCAP](mailto:info@pingcap.com) for support.
+    Usually this error does not occur. If you encounter this error, [get support](/support.md) from PingCAP or the community.
 
 * Error Number: 8025
 
@@ -104,11 +104,9 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 
 * Error Number: 8028
 
-    TiDB does not support table lock, which is called metadata lock in MySQL and might be called intention lock in other databases.
+    Since v6.3.0, TiDB introduces the [Metadata lock](/metadata-lock.md) feature. When the metadata lock is disabled and a transaction is executed, the transaction cannot recognize the table schema changes. Therefore, when the transaction is committed, TiDB checks the table schema related to the transaction. If the related table schema has been changed during the execution, the transaction commit fails with this error. At this time, the application can safely retry the whole transaction.
 
-    When a transaction is executed, the transaction cannot recognize the table schema changes. Therefore, when committing a transaction, TiDB checks the table schema related the transaction. If the related table schema has changed during the execution, the transaction commit will fail and this error is returned.
-
-    The application can safely retry the whole transaction.
+    When the metadata lock is enabled not in the Read Committed isolation level, if a lossy column type change occurs on a table (for example, changing from `INT` to `CHAR` is lossy, and changing from `TINYINT` to `INT` is not lossy because overwriting data is not required) from a transaction start to access the table for the first time, then the query fails while the transaction will not roll back automatically. You can continue to execute other statements and decide whether to roll back or commit the transaction.
 
 * Error Number: 8029
 
@@ -168,13 +166,13 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 
     Unknown data type is encountered when TiDB parses the Exec argument list sent by the client.
 
-    If you encounter this error, check the client. If the client is normal, [contact PingCAP](mailto:info@pingcap.com) for support.
+    If you encounter this error, check the client. If the client is normal, [get support](/support.md) from PingCAP or the community.
 
 * Error Number: 8052
 
     The serial number of the data packet from the client is incorrect.
 
-    If you encounter this error, check the client. If the client is normal, [contact PingCAP](mailto:info@pingcap.com) for support.
+    If you encounter this error, check the client. If the client is normal, [get support](/support.md) from PingCAP or the community.
 
 * Error Number: 8055
 
@@ -258,7 +256,7 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 
     The plugin defines a system variable whose name does not begin with the plugin name.
 
-    Contact the developer of the plugin to modify.
+    Contact the developer of the plugin to modify, or [get support](/support.md) from PingCAP or the community.
 
 * Error Number: 8107
 
@@ -270,7 +268,7 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 
     Unsupported execution plan type. This error is an internal error.
 
-    If you encounter this error, [contact PingCAP](mailto:info@pingcap.com) for support.
+    If you encounter this error, [get support](/support.md) from PingCAP or the community.
 
 * Error Number: 8109
 
@@ -328,11 +326,99 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 
     TiDB does not yet support JSON objects with the key length >= 65536.
 
+* Error Number: 8130
+
+    The complete error message: `ERROR 8130 (HY000): client has multi-statement capability disabled`
+
+    This error might occur after you upgrade from an earlier version of TiDB. To reduce the impact of SQL injection attacks, TiDB now prevents multiple queries from being executed in the same `COM_QUERY` call by default.
+
+    The system variable [`tidb_multi_statement_mode`](/system-variables.md#tidb_multi_statement_mode-new-in-v4011) can be used to control this behavior.
+
+* Error Number: 8138
+
+    The transaction attempts to write an incorrect row value. For more information, see [Troubleshoot Inconsistency Between Data and Indexes](/troubleshoot-data-inconsistency-errors.md#error-8138).
+
+* Error Number: 8139
+
+    The transaction attempts to write a row whose handle is inconsistent with that in the index. For more information, see [Troubleshoot Inconsistency Between Data and Indexes](/troubleshoot-data-inconsistency-errors.md#error-8139).
+
+* Error Number: 8140
+
+   The transaction attempts to write a row whose data is inconsistent with the index data. For more information, see [Troubleshoot Inconsistency Between Data and Indexes](/troubleshoot-data-inconsistency-errors.md#error-8140).
+
+* Error Number: 8141
+
+    When a transaction is being committed, the existence assertion of a key fails. For more information,see [Troubleshoot Inconsistency Between Data and Indexes](/troubleshoot-data-inconsistency-errors.md#error-8141).
+
+* Error Number: 8143
+
+    During the execution of a non-transactional DML statement, if a batch fails, the statement is stopped. For more information, see [Non-transactional DML statements](/non-transactional-dml.md).
+
+* Error Number: 8147
+
+    When [`tidb_constraint_check_in_place_pessimistic`](/system-variables.md#tidb_constraint_check_in_place_pessimistic-new-in-v630) is set to `OFF`, to ensure the correctness of transactions, any errors in the SQL statement execution might cause TiDB to return this `8147` error and abort the current transaction. For specific causes of the error, refer to the error message. For more information, see [Constraints](/constraints.md#pessimistic-transactions).
+
+* Error Number: 8154
+
+    Currently `LOAD DATA` does not support importing data locally from TiDB server. You can specify `LOCAL` to import from client, or upload data to S3 or GCS and then import it. See [`LOAD DATA`](/sql-statements/sql-statement-load-data.md).
+
+* Error Number: 8156
+
+    The provided path cannot be empty. You need to set a correct path before the import.
+
+* Error Number: 8157
+
+    The provided file format is unsupported. For the supported formats, see [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md#format).
+
+* Error Number: 8158
+
+    The provided path is invalid. Refer to the specific error message for actions. For Amazon S3 or GCS path settings, see [URI Formats of External Storage Services](/external-storage-uri.md).
+
+* Error Number: 8159
+
+    TiDB cannot access the provided Amazon S3 or GCS path. Make sure that the specified S3 or GCS bucket exists and that you have provided the correct Access Key and Secret Access Key for TiDB to access the corresponding bucket.
+
+* Error Number: 8160
+
+    Failed to read the data files. Refer to the specific error message for actions.
+
+* Error Number: 8162
+
+    There is an error in the statement. Refer to the specific error message for actions.
+
+* Error Number: 8163
+
+    The provided option is unknown. For supported options, see [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md#parameter-description).
+
+* Error Number: 8164
+
+    The provided option value is invalid. For valid values, see [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md#parameter-description).
+
+* Error Number: 8165
+
+    Duplicate options are specified. Each option can only be specified once.
+
+* Error Number: 8166
+
+    Certain options can only be used in specific conditions. Refer to the specific error message for actions. For supported options, see [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md#parameter-description).
+
+* Error Number: 8170
+
+    The specified job does not exist.
+
+* Error Number: 8171
+
+    The current operation cannot be performed for the current job status. Refer to the specific error message for actions.
+
+* Error Number: 8173
+
+    When executing `IMPORT INTO`, TiDB checks the current environment, such as checking if the downstream table is empty. Refer to the specific error message for actions.
+
 * Error Number: 8200
 
     The DDL syntax is not yet supported.
 
-    See [compatibility of MySQL DDL](/mysql-compatibility.md#ddl) for reference.
+    See [compatibility of MySQL DDL](/mysql-compatibility.md#ddl-operations) for reference.
 
 * Error Number: 8214
 
@@ -340,9 +426,9 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 
 * Error Number: 8215
 
-    `ADMIN REPAIR TABLE` fails.
+    [`ADMIN REPAIR TABLE`](/sql-statements/sql-statement-admin.md#admin-repair-statement) fails.
 
-    If you encounter this error, [contact PingCAP](mailto:info@pingcap.com) for support.
+    If you encounter this error, [get support](/support.md) from PingCAP or the community.
 
 * Error Number: 8216
 
@@ -354,7 +440,7 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 
     This error occurs when detecting that the data is not consistent with the index.
 
-    If you encounter this error, [contact PingCAP](mailto:info@pingcap.com) for support.
+    If you encounter this error, [get support](/support.md) from PingCAP or the community.
 
 * Error Number: 8224
 
@@ -392,41 +478,107 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 
     TiDB currently does not support using Sequence as the default value on newly added columns, and reports this error if you use it.
 
+* Error Number: 8248
+
+    The resource group already exists. This error is returned when a resource group is repeatedly created.
+
+* Error Number: 8249
+
+    The resource group does not exist. This error is returned when you modify or bind a resource group that does not exist. See [Create a resource group](/tidb-resource-control.md#create-a-resource-group).
+
+* Error Number: 8250
+
+    The complete error message is as follows:
+
+    `ERROR 8250 (HY000) : Resource control feature is disabled. Run "SET GLOBAL tidb_enable_resource_control='on'" to enable the feature`
+
+    This error is returned when you try to use the resource control feature but it is not enabled. You can turn on the global variable [`tidb_enable_resource_control`](/system-variables.md#tidb_enable_resource_control-new-in-v660) to enable resource control.
+
+* Error Number: 8251
+
+    The `Resource Control` component is initialized upon TiDB startup. The associated configuration is fetched from the `Resource Manager` on the server side of `Resource Control`. This error is returned if there is an error during this process.
+
+* Error Number: 8252
+
+    The complete error message is as follows:
+
+    `ERROR 8252 (HY000) : Exceeded resource group quota limitation`
+
+    This error is returned when the attempted consumption exceeds the resource group limit. This error is usually caused by a single transaction that is too large or too many concurrent transactions. You need to adjust the transaction size or reduce the number of concurrent clients.
+
+* Error Number: 8253
+
+    The query stops because it meets the condition of a runaway query. See [Runaway Queries](/tidb-resource-control.md#manage-queries-that-consume-more-resources-than-expected-runaway-queries).
+
+* Error Number: 8254
+
+    The query stops because it meets the quarantined watch condition of a runaway query. See [Runaway Queries](/tidb-resource-control.md#manage-queries-that-consume-more-resources-than-expected-runaway-queries).
+
+* Error Number: 8260
+
+    DDL operations cannot be paused by `ADMIN PAUSE`.
+
+* Error Number: 8261
+
+    DDL operations cannot be resumed by `ADMIN RESUME`.
+
+* Error Number: 8262
+
+    DDL is paused by `ADMIN PAUSE` and cannot be paused again.
+
 * Error Number: 9001
+
+    The complete error message: `ERROR 9001 (HY000): PD Server Timeout`
 
     The PD request timed out.
 
-    Check the state/monitor/log of the PD server and the network between the TiDB server and the PD server.
+    Check the status, monitoring data and log of the PD server, and the network between the TiDB server and the PD server.
 
 * Error Number: 9002
 
+    The complete error message: `ERROR 9002 (HY000): TiKV Server Timeout`
+
     The TiKV request timed out.
 
-    Check the state/monitor/log of the TiKV server and the network between the TiDB server and the TiKV server.
+    Check the status, monitoring data and log of the TiKV server, and the network between the TiDB server and the TiKV server.
 
 * Error Number: 9003
 
+    The complete error message: `ERROR 9003 (HY000): TiKV Server is Busy`
+
     The TiKV server is busy and this usually occurs when the workload is too high.
 
-    Check the state/monitor/log of the TiKV server.
+    Check the status, monitoring data, and log of the TiKV server.
 
 * Error Number: 9004
 
-    This error occurs when a large number of transactional conflicts exist in the database.
+    The complete error message: `ERROR 9004 (HY000): Resolve Lock Timeout`
 
-    Check the code of application.
+    A lock resolving timeout. This error occurs when a large number of transactional conflicts exist in the database.
+
+    Check the application code to see whether lock contention exists in the database.
 
 * Error Number: 9005
 
-    A certain Raft Group is not available, such as the number of replicas is not enough. This error usually occurs when the TiKV server is busy or the TiKV node is down.
+    The complete error message: `ERROR 9005 (HY000): Region is unavailable`
 
-    Check the state/monitor/log of the TiKV server.
+    The accessed Region or a certain Raft Group is not available, with possible reasons such as insufficient replicas. This error usually occurs when the TiKV server is busy or the TiKV node is down.
+
+    Check the status, monitoring data and log of the TiKV server.
 
 * Error Number: 9006
 
-    The interval of GC Life Time is too short and the data that should be read by the long transactions might be cleared.
+    The complete error message: `ERROR 9006 (HY000): GC life time is shorter than transaction duration`
 
-    Extend the interval of GC Life Time.
+    The interval of `GC Life Time` is too short. The data that should have been read by long transactions might be deleted. You can adjust [`tidb_gc_life_time`](/system-variables.md#tidb_gc_life_time-new-in-v50) using the following command:
+
+    ```sql
+    SET GLOBAL tidb_gc_life_time = '30m';
+    ```
+
+    > **Note:**
+    >
+    > "30m" means only cleaning up the data generated 30 minutes ago, which might consume some extra storage space.
 
 * Error Number: 9500
 
@@ -436,9 +588,9 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 
 * Error Number: 9007
 
-    Transactions in TiKV encounter write conflicts.
+    The error message starts with `ERROR 9007 (HY000): Write conflict`.
 
-    See [the Troubleshoot section](/faq/tidb-faq.md#troubleshoot) for the cause and solution.
+    If the error message contains `reason=LazyUniquenessCheck`, it means that the transaction is pessimistic, `@@tidb_constraint_check_in_place_pessimistic=OFF` is set, and a write conflict occurs on a unique index for the application. In this case, successful execution of the pessimistic transaction is not guaranteed. You can retry the transaction from the application, or set the variable to `ON` to avoid the error.
 
 * Error Number: 9008
 
@@ -463,6 +615,42 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
     The TiFlash server is busy and this usually occurs when the workload is too high.
 
     Check the state/monitor/log of the TiFlash server.
+
+### MySQL native error messages
+
+* Error Number: 2013 (HY000)
+
+    The complete error message: `ERROR 2013 (HY000): Lost connection to MySQL server during query`
+
+    You can handle this error as follows:
+
+    - Check whether panic is in the log.
+    - Check whether OOM exists in dmesg using `dmesg -T | grep -i oom`.
+    - A long time of no access might also lead to this error. It is usually caused by TCP timeout. If TCP is not used for a long time, the operating system kills it.
+
+* Error Number: 1105 (HY000)
+
+    The complete error message: `ERROR 1105 (HY000): other error: unknown error Wire Error(InvalidEnumValue(4004))`
+
+    This error usually occurs when the version of TiDB does not match with that of TiKV. To avoid version mismatch, upgrade all components when you upgrade the version.
+
+* Error Number: 1148 (42000)
+
+    The complete error message: `ERROR 1148 (42000): the used command is not allowed with this TiDB version`
+
+    When you execute the `LOAD DATA LOCAL` statement but the MySQL client does not allow executing this statement (the value of the `local_infile` option is 0), this error occurs.
+
+    The solution is to use the `--local-infile=1` option when you start the MySQL client. For example, run the command `mysql --local-infile=1 -u root -h 127.0.0.1 -P 4000`. The default value of `local-infile` varies in different versions of the MySQL client. Therefore, you need to configure it in specific MySQL clients.
+
+* Error Number: 9001 (HY000)
+
+    The complete error message: `ERROR 9001 (HY000): PD server timeout start timestamp may fall behind safe point`
+
+    This error occurs when TiDB fails to access PD. A worker in the TiDB background continuously queries the safepoint from PD and reports this error if it fails to query within 100s. Generally, it is because the disk on PD is slow and busy or the network failed between TiDB and PD. For the details of common errors, see [Error Number and Fault Diagnosis](/error-codes.md).
+
+* TiDB log error message: EOF error
+
+    When the client or proxy disconnects from TiDB, TiDB does not immediately notice the disconnection. Instead, TiDB notices the disconnection only when it begins to return data to the connection. At this time, the log prints an EOF error.
 
 ## Troubleshooting
 

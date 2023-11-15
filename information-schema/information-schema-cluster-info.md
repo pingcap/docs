@@ -8,6 +8,10 @@ aliases: ['/docs/dev/system-tables/system-table-cluster-info/','/docs/dev/refere
 
 The `CLUSTER_INFO` cluster topology table provides the current topology information of the cluster, the version information of each instance, the Git Hash corresponding to the instance version, the starting time of each instance, and the running time of each instance.
 
+> **Note:**
+>
+> This table is not available on [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless) clusters.
+
 {{< copyable "sql" >}}
 
 ```sql
@@ -26,8 +30,9 @@ desc cluster_info;
 | GIT_HASH       | varchar(64) | YES  |      | NULL    |       |
 | START_TIME     | varchar(32) | YES  |      | NULL    |       |
 | UPTIME         | varchar(32) | YES  |      | NULL    |       |
+| SERVER_ID      | bigint(21)  | YES  |      | NULL    |       |
 +----------------+-------------+------+------+---------+-------+
-7 rows in set (0.00 sec)
+8 rows in set (0.01 sec)
 ```
 
 Field description:
@@ -39,6 +44,7 @@ Field description:
 * `GIT_HASH`: The Git Commit Hash when compiling the instance version, which is used to identify whether two instances are of the absolutely consistent version.
 * `START_TIME`: The starting time of the corresponding instance.
 * `UPTIME`: The uptime of the corresponding instance.
+* `SERVER_ID`: The server ID of the corresponding instance.
 
 {{< copyable "sql" >}}
 

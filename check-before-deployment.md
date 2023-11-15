@@ -128,6 +128,36 @@ sysctl -p
 >
 > - `sysctl -p` is to make the configuration effective without restarting the system.
 
+## Set temporary spaces for TiDB instances (Recommended)
+
+Some operations in TiDB require writing temporary files to the server, so it is necessary to ensure that the operating system user that runs TiDB has sufficient permissions to read and write to the target directory. If you do not start the TiDB instance with the `root` privilege, you need to check the directory permissions and set them correctly.
+
+- TiDB work area
+
+    Operations that consume a significant amount of memory, such as hash table construction and sorting, might write temporary data to disk to reduce memory consumption and improve stability. The disk location for writing is defined by the configuration item [`tmp-storage-path`](/tidb-configuration-file.md#tmp-storage-path). With the default configuration, make sure that the user that runs TiDB has read and write permissions to the temporary folder (usually `/tmp`) of the operating system.
+
+- `Fast Online DDL` work area
+
+    When the variable [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) is set to `ON` (the default value in v6.5.0 and later versions), `Fast Online DDL` is enabled, and some DDL operations need to read and write temporary files in filesystems. The location is defined by the configuration item [`temp-dir`](/tidb-configuration-file.md#temp-dir-new-in-v630). You need to ensure that the user that runs TiDB has read and write permissions for that directory of the operating system. Taking the default directory `/tmp/tidb` as an example:
+
+    > **Note:**
+    > 
+    > If DDL operations on large objects exist in your application, it is highly recommended to configure an independent large file system for [`temp-dir`](/tidb-configuration-file.md#temp-dir-new-in-v630).
+
+    ```shell
+    sudo mkdir /tmp/tidb
+    ```
+
+    If the `/tmp/tidb` directory already exists, make sure the write permission is granted.
+
+    ```shell
+    sudo chmod -R 777 /tmp/tidb
+    ```
+
+    > **Note:**
+    >
+    > If the directory does not exist, TiDB will automatically create it upon startup. If the directory creation fails or TiDB does not have the read and write permissions for that directory, [`Fast Online DDL`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) might experience unpredictable issues during runtime.
+
 ## Check and stop the firewall service of target machines
 
 In TiDB clusters, the access ports between nodes must be open to ensure the transmission of information such as read and write requests and data heartbeats. In common online scenarios, the data interaction between the database and the application service and between the database nodes are all made within a secure network. Therefore, if there are no special security requirements, it is recommended to stop the firewall of the target machine. Otherwise, refer to [the port usage](/hardware-and-software-requirements.md#network-requirements) and add the needed port information to the allowlist of the firewall service.
@@ -305,7 +335,7 @@ sudo systemctl enable ntpd.service
 
 For TiDB in the production environment, it is recommended to optimize the operating system configuration in the following ways:
 
-1. Disable THP (Transparent Huge Pages). The memory access pattern of databases tends to be sparse rather than consecutive. If the high-level memory fragmentation is serious, higher latency will occur when THP pages are allocated. 
+1. Disable THP (Transparent Huge Pages). The memory access pattern of databases tends to be sparse rather than consecutive. If the high-level memory fragmentation is serious, higher latency will occur when THP pages are allocated.
 2. Set the I/O Scheduler of the storage media to `noop`. For the high-speed SSD storage media, the kernel's I/O scheduling operations can cause performance loss. After the Scheduler is set to `noop`, the performance is better because the kernel directly sends I/O requests to the hardware without other operations. Also, the noop Scheduler is better applicable.
 3. Choose the `performance` mode for the cpufrequ module which controls the CPU frequency. The performance is maximized when the CPU frequency is fixed at its highest supported operating frequency without dynamic adjustment.
 
@@ -683,36 +713,26 @@ This section describes how to install the NUMA tool. In online environments, bec
 > - Binding cores using NUMA is a method to isolate CPU resources and is suitable for deploying multiple instances on highly configured physical machines.
 > - After completing deployment using `tiup cluster deploy`, you can use the `exec` command to perform cluster level management operations.
 
-1. Log in to the target node to install. Take CentOS Linux release 7.7.1908 (Core) as an example.
+To install the NUMA tool, take either of the following two methods:
 
-    {{< copyable "shell-regular" >}}
+**Method 1**: Log in to the target node to install NUMA. Take CentOS Linux release 7.7.1908 (Core) as an example.
+
+```bash
+sudo yum -y install numactl
+```
+
+**Method 2**: Install NUMA on an existing cluster in batches by running the `tiup cluster exec` command.
+
+1. Follow [Deploy a TiDB Cluster Using TiUP](/production-deployment-using-tiup.md) to deploy a cluster `tidb-test`. If you have installed a TiDB cluster, you can skip this step.
 
     ```bash
-    sudo yum -y install numactl
+    tiup cluster deploy tidb-test v6.1.0 ./topology.yaml --user root [-p] [-i /home/root/.ssh/gcp_rsa]
     ```
 
-2. Run the `exec` command using `tiup cluster` to install in batches.
-
-    {{< copyable "shell-regular" >}}
-
-    ```bash
-    tiup cluster exec --help
-    ```
-
-    ```
-    Run shell command on host in the tidb cluster
-    Usage:
-    cluster exec <cluster-name> [flags]
-    Flags:
-        --command string   the command run on cluster host (default "ls")
-    -h, --help             help for exec
-        --sudo             use root permissions (default false)
-    ```
-
-    To use the sudo privilege to execute the installation command for all the target machines in the `tidb-test` cluster, run the following command:
-
-    {{< copyable "shell-regular" >}}
+2. Run the `tiup cluster exec` command using the `sudo` privilege to install NUMA on all the target machines in the `tidb-test` cluster:
 
     ```bash
     tiup cluster exec tidb-test --sudo --command "yum -y install numactl"
     ```
+
+    To get help information of the `tiup cluster exec` command, run the `tiup cluster exec --help` command.

@@ -8,87 +8,42 @@ aliases: ['/docs/dev/sql-statements/sql-statement-add-index/','/docs/dev/referen
 
 The `ALTER TABLE.. ADD INDEX` statement adds an index to an existing table. This operation is online in TiDB, which means that neither reads or writes to the table are blocked by adding an index.
 
+<CustomContent platform="tidb">
+
 > **Warning:**
 >
 > - **DO NOT** upgrade a TiDB cluster when a DDL statement is being executed in the cluster (usually for the time-consuming DDL statements such as `ADD INDEX` and the column type changes).
 > - Before the upgrade, it is recommended to use the [`ADMIN SHOW DDL`](/sql-statements/sql-statement-admin-show-ddl.md) command to check whether the TiDB cluster has an ongoing DDL job. If the cluster has a DDL job, to upgrade the cluster, wait until the DDL execution is finished or use the [`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md) command to cancel the DDL job before you upgrade the cluster.
 > - In addition, during the cluster upgrade, **DO NOT** execute any DDL statement. Otherwise, the issue of undefined behavior might occur.
+>
+> When you upgrade TiDB from v7.1.0 to a later version, you can ignore the preceding limitations. For details, see [the limitations of TiDB smooth upgrade](/smooth-upgrade-tidb.md).
+
+</CustomContent>
 
 ## Synopsis
 
 ```ebnf+diagram
-AlterTableStmt ::=
-    'ALTER' IgnoreOptional 'TABLE' TableName ( AlterTableSpecListOpt AlterTablePartitionOpt | 'ANALYZE' 'PARTITION' PartitionNameList ( 'INDEX' IndexNameList )? AnalyzeOptionListOpt )
+AlterTableStmt
+         ::= 'ALTER' 'IGNORE'? 'TABLE' TableName AddIndexSpec ( ',' AddIndexSpec )*
 
-AlterTableSpec ::=
-    TableOptionList
-|   'SET' 'TIFLASH' 'REPLICA' LengthNum LocationLabelList
-|   'CONVERT' 'TO' CharsetKw ( CharsetName | 'DEFAULT' ) OptCollate
-|   'ADD' ( ColumnKeywordOpt IfNotExists ( ColumnDef ColumnPosition | '(' TableElementList ')' ) | Constraint | 'PARTITION' IfNotExists NoWriteToBinLogAliasOpt ( PartitionDefinitionListOpt | 'PARTITIONS' NUM ) )
-|   ( ( 'CHECK' | 'TRUNCATE' ) 'PARTITION' | ( 'OPTIMIZE' | 'REPAIR' | 'REBUILD' ) 'PARTITION' NoWriteToBinLogAliasOpt ) AllOrPartitionNameList
-|   'COALESCE' 'PARTITION' NoWriteToBinLogAliasOpt NUM
-|   'DROP' ( ColumnKeywordOpt IfExists ColumnName RestrictOrCascadeOpt | 'PRIMARY' 'KEY' | 'PARTITION' IfExists PartitionNameList | ( KeyOrIndex IfExists | 'CHECK' ) Identifier | 'FOREIGN' 'KEY' IfExists Symbol )
-|   'EXCHANGE' 'PARTITION' Identifier 'WITH' 'TABLE' TableName WithValidationOpt
-|   ( 'IMPORT' | 'DISCARD' ) ( 'PARTITION' AllOrPartitionNameList )? 'TABLESPACE'
-|   'REORGANIZE' 'PARTITION' NoWriteToBinLogAliasOpt ReorganizePartitionRuleOpt
-|   'ORDER' 'BY' AlterOrderItem ( ',' AlterOrderItem )*
-|   ( 'DISABLE' | 'ENABLE' ) 'KEYS'
-|   ( 'MODIFY' ColumnKeywordOpt IfExists | 'CHANGE' ColumnKeywordOpt IfExists ColumnName ) ColumnDef ColumnPosition
-|   'ALTER' ( ColumnKeywordOpt ColumnName ( 'SET' 'DEFAULT' ( SignedLiteral | '(' Expression ')' ) | 'DROP' 'DEFAULT' ) | 'CHECK' Identifier EnforcedOrNot | 'INDEX' Identifier IndexInvisible )
-|   'RENAME' ( ( 'COLUMN' | KeyOrIndex ) Identifier 'TO' Identifier | ( 'TO' | '='? | 'AS' ) TableName )
-|   LockClause
-|   AlgorithmClause
-|   'FORCE'
-|   ( 'WITH' | 'WITHOUT' ) 'VALIDATION'
-|   'SECONDARY_LOAD'
-|   'SECONDARY_UNLOAD'
+AddIndexSpec
+         ::= 'ADD' ( ( 'PRIMARY' 'KEY' | ( 'KEY' | 'INDEX' ) 'IF NOT EXISTS'? | 'UNIQUE' ( 'KEY' | 'INDEX' )? ) ( ( Identifier? 'USING' | Identifier 'TYPE' ) IndexType )? | 'FULLTEXT' ( 'KEY' | 'INDEX' )? IndexName ) '(' IndexPartSpecification ( ',' IndexPartSpecification )* ')' IndexOption*
 
-Constraint ::=
-    ConstraintKeywordOpt ConstraintElem
+IndexPartSpecification
+         ::= ( ColumnName ( '(' LengthNum ')' )? | '(' Expression ')' ) ( 'ASC' | 'DESC' )
 
-ConstraintKeywordOpt ::=
-    ( 'CONSTRAINT' Symbol? )?
+IndexOption
+         ::= 'KEY_BLOCK_SIZE' '='? LengthNum
+           | IndexType
+           | 'WITH' 'PARSER' Identifier
+           | 'COMMENT' stringLit
+           | 'VISIBLE'
+           | 'INVISIBLE'
 
-ConstraintElem ::=
-    ( ( 'PRIMARY' 'KEY' | KeyOrIndex IfNotExists | 'UNIQUE' KeyOrIndexOpt ) IndexNameAndTypeOpt | 'FULLTEXT' KeyOrIndexOpt IndexName ) '(' IndexPartSpecificationList ')' IndexOptionList
-|   'FOREIGN' 'KEY' IfNotExists IndexName '(' IndexPartSpecificationList ')' ReferDef
-|   'CHECK' '(' Expression ')' EnforcedOrNotOpt
-
-IndexNameAndTypeOpt ::=
-    IndexName ( 'USING' IndexTypeName )?
-|   Identifier 'TYPE' IndexTypeName
-
-IndexPartSpecificationList ::=
-    IndexPartSpecification ( ',' IndexPartSpecification )*
-
-IndexPartSpecification ::=
-    ( ColumnName OptFieldLen | '(' Expression ')' ) Order
-
-IndexOptionList ::=
-    IndexOption*
-
-IndexOption ::=
-    'KEY_BLOCK_SIZE' '='? LengthNum
-|   IndexType
-|   'WITH' 'PARSER' Identifier
-|   'COMMENT' stringLit
-|   IndexInvisible
-
-KeyOrIndex ::=
-    'KEY'
-|   'INDEX'
-
-IndexKeyTypeOpt ::=
-    ( 'UNIQUE' | 'SPATIAL' | 'FULLTEXT' )?
-
-IndexInvisible ::=
-    'VISIBLE'
-|   'INVISIBLE'
-
-IndexTypeName ::=
-    'BTREE'
-|   'HASH'
-|   'RTREE'
+IndexType
+         ::= 'BTREE'
+           | 'HASH'
+           | 'RTREE'
 ```
 
 ## Examples
@@ -128,7 +83,6 @@ mysql> EXPLAIN SELECT * FROM t1 WHERE c1 = 3;
 
 * `FULLTEXT`, `HASH` and `SPATIAL` indexes are not supported.
 * Descending indexes are not supported (similar to MySQL 5.7).
-* Adding multiple indexes at the same time is currently not supported.
 * Adding the primary key of the `CLUSTERED` type to a table is not supported. For more details about the primary key of the `CLUSTERED` type, refer to [clustered index](/clustered-indexes.md).
 
 ## See also

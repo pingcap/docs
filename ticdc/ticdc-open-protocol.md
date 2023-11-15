@@ -1,5 +1,6 @@
 ---
 title: TiCDC Open Protocol
+summary: Learn the concept of TiCDC Open Protocol and how to use it.
 aliases: ['/docs/dev/ticdc/ticdc-open-protocol/','/docs/dev/reference/tools/ticdc/open-protocol/','/docs/dev/ticdc/column-ddl-type-codes/']
 ---
 
@@ -87,7 +88,7 @@ This section introduces the formats of Row Changed Event, DDL Event, and Resolve
     }
     ```
 
-    `Update` event. The newly added row data ("u") and the row data before the update ("p") are output. The latter ("p") is output only when the old value feature is enabled.
+    `Update` event. The newly added row data ("u") and the row data before the update ("p") are output.
 
     ```
     {
@@ -122,7 +123,7 @@ This section introduces the formats of Row Changed Event, DDL Event, and Resolve
     }
     ```
 
-    `Delete` event. The deleted row data is output. When the old value feature is enabled, the `Delete` event includes all the columns of the deleted row data; when this feature is disabled, the `Delete` event only includes the [HandleKey](#bit-flags-of-columns) column.
+    `Delete` event. The deleted row data is output.
 
     ```
     {
@@ -386,4 +387,4 @@ If the value of a column is `46`, the column is a composite index column, a prim
 > **Note:**
 >
 > + `BinaryFlag` is meaningful only when the column type is BLOB/TEXT (including TINYBLOB/TINYTEXT and BINARY/CHAR). When the upstream column is the BLOB type, the `BinaryFlag` value is set to `1`. When the upstream column is the TEXT type, the `BinaryFlag` value is set to `0`.
-> + To replicate a table from the upstream, TiCDC selects a [valid index](/ticdc/ticdc-overview.md#restrictions) as the Handle index. The `HandleKeyFlag` value of the Handle index column is set to `1`.
+> + To replicate a table from the upstream, TiCDC selects a [valid index](/ticdc/ticdc-overview.md#best-practices) as the Handle index. The `HandleKeyFlag` value of the Handle index column is set to `1`.

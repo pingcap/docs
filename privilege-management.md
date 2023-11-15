@@ -192,11 +192,25 @@ Dynamic privileges include:
 
 * `BACKUP_ADMIN`
 * `RESTORE_ADMIN`
+* `SYSTEM_USER`
+* `SYSTEM_VARIABLES_ADMIN`
 * `ROLE_ADMIN`
 * `CONNECTION_ADMIN`
-* `SYSTEM_VARIABLES_ADMIN`
+* `PLACEMENT_ADMIN` allows privilege owners to create, modify, and remove placement policies.
+* `DASHBOARD_CLIENT` allows privilege owners to log in to TiDB Dashboard.
+* `RESTRICTED_TABLES_ADMIN` allows privilege owners to view system tables when SEM is enabled.
+* `RESTRICTED_STATUS_ADMIN` allows privilege owners to view all status variables in [`SHOW [GLOBAL|SESSION] STATUS`](/sql-statements/sql-statement-show-status.md) when SEM is enabled.
+* `RESTRICTED_VARIABLES_ADMIN` allows privilege owners to view all system variables when SEM is enabled.
+* `RESTRICTED_USER_ADMIN` prohibits privilege owners to have their access revoked by SUPER users when SEM is enabled.
+* `RESTRICTED_CONNECTION_ADMIN` allows privilege owners to kill connections of `RESTRICTED_USER_ADMIN` users. This privilege affects `KILL` and `KILL TIDB` statements.
+* `RESTRICTED_REPLICA_WRITER_ADMIN` allows privilege owners to perform write or update operations without being affected when the read-only mode is enabled in the TiDB cluster. For details, see [`tidb_restricted_read_only`](/system-variables.md#tidb_restricted_read_only-new-in-v520).
 
 To see the full set of dynamic privileges, execute the `SHOW PRIVILEGES` statement. Because plugins are permitted to add new privileges, the list of privileges that are assignable might differ based on your TiDB installation.
+
+## `SUPER` privilege
+
+- The `SUPER` privilege allows the user to perform almost any operation. By default, only the `root` user is granted with this privilege. Be careful when granting this privilege to other users.
+- The `SUPER` privilege is considered [deprecated in MySQL 8.0](https://dev.mysql.com/doc/refman/8.0/en/privileges-provided.html#dynamic-privileges-migration-from-super) and can be replaced by [dynamic privileges](#dynamic-privileges) to provide more fine-grained access control.
 
 ## Privileges required for TiDB operations
 
@@ -257,6 +271,10 @@ mysql> SELECT * FROM INFORMATION_SCHEMA.USER_PRIVILEGES WHERE grantee = "'root'@
 
 Requires the `SUPER` or `BACKUP_ADMIN` privilege.
 
+### CANCEL IMPORT JOB
+
+Requires the `SUPER` privilege to cancel jobs created by other users. Otherwise, only jobs created by the current user can be canceled.
+
 ### CREATE DATABASE
 
 Requires the `CREATE` privilege for the database.
@@ -291,9 +309,13 @@ Requires the `INDEX` privilege for the table.
 
 Requires the `DROP` privilege for the table.
 
+### IMPORT INTO
+
+Requires the `SELECT`, `UPDATE`, `INSERT`, `DELETE`, and `ALTER` privileges for the target table. To import files stored locally in TiDB, the `FILE` privilege is also required.
+
 ### LOAD DATA
 
-Requires the `INSERT` privilege for the table.
+Requires the `INSERT` privilege for the table. When you use `REPLACE INTO`, the `DELETE` privilege is also required.
 
 ### TRUNCATE TABLE
 
@@ -307,6 +329,14 @@ Requires the `ALTER` and `DROP` privileges for the table before renaming and the
 
 Requires the `INSERT` and `SELECT` privileges for the table.
 
+### LOCK STATS
+
+Requires the `INSERT` and `SELECT` privileges for the table.
+
+### UNLOCK STATS
+
+Requires the `INSERT` and `SELECT` privileges for the table.
+
 ### SHOW
 
 `SHOW CREATE TABLE` requires any single privilege to the table.
@@ -315,7 +345,11 @@ Requires the `INSERT` and `SELECT` privileges for the table.
 
 `SHOW GRANTS` requires the `SELECT` privilege to the `mysql` database. If the target user is current user, `SHOW GRANTS` does not require any privilege.
 
-`SHOW PROCESSLIST` requires `SUPER` to show connections belonging to other users.
+`SHOW PROCESSLIST` requires the `SUPER` privilege to show connections belonging to other users.
+
+`SHOW IMPORT JOB` requires the `SUPER` privilege to show connections belonging to other users. Otherwise, it only shows jobs created by the current user.
+
+`SHOW STATS_LOCKED` requires the `SELECT` privilege to the `mysql.stats_table_locked` table.
 
 ### CREATE ROLE/USER
 
@@ -363,6 +397,22 @@ Requires `SUPER` privilege.
 
 Requires `SUPER` or `CONNECTION_ADMIN` privilege to kill other user sessions.
 
+### CREATE RESOURCE GROUP
+
+Requires `SUPER` or `RESOURCE_GROUP_ADMIN` privilege.
+
+### ALTER RESOURCE GROUP
+
+Requires `SUPER` or `RESOURCE_GROUP_ADMIN` privilege.
+
+### DROP RESOURCE GROUP
+
+Requires `SUPER` or `RESOURCE_GROUP_ADMIN` privilege.
+
+### CALIBRATE RESOURCE
+
+Requires `SUPER` or `RESOURCE_GROUP_ADMIN` privilege.
+
 ## Implementation of the privilege system
 
 ### Privilege table
@@ -406,7 +456,7 @@ User identity is based on two pieces of information: `Host`, the host that initi
 
 When the connection is successful, the request verification process checks whether the operation has the privilege.
 
-For database-related requests (`INSERT`, `UPDATE`), the request verification process first checks the user’s global privileges in the `mysql.user` table. If the privilege is granted, you can access directly. If not, check the `mysql.db` table.
+For database-related requests (`INSERT`, `UPDATE`), the request verification process first checks the user's global privileges in the `mysql.user` table. If the privilege is granted, you can access directly. If not, check the `mysql.db` table.
 
 The `user` table has global privileges regardless of the default database. For example, the `DELETE` privilege in `user` can apply to any row, table, or database.
 

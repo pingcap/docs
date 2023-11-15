@@ -6,86 +6,50 @@ aliases: ['/docs/dev/download-ecosystem-tools/','/docs/dev/reference/tools/downl
 
 # Download TiDB Tools
 
-This document collects the available downloads for most officially maintained versions of TiDB tools.
+This document describes how to download the TiDB Toolkit.
 
-## TiUP
+TiDB Toolkit contains frequently used TiDB tools, such as data export tool Dumpling, data import tool TiDB Lightning, and backup and restore tool BR.
 
-You can install TiUP with a single command in both Darwin and Linux operating systems. For more information, see [Install TiUP](/tiup/tiup-overview.md#install-tiup).
+> **Tip:**
+>
+> - If your deployment environment has internet access, you can deploy a TiDB tool using a single [TiUP command](/tiup/tiup-component-management.md), so there is no need to download the TiDB Toolkit separately.
+> - If you need to deploy and maintain TiDB on Kubernetes, instead of downloading the TiDB Toolkit, follow the steps in [TiDB Operator offline installation](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-tidb-operator#offline-installation).
 
-## TiDB Operator
+## Environment requirements
 
-TiDB Operator runs in Kubernetes. After deploying the Kubernetes cluster, you can choose to deploy TiDB Operator either online or offline. For more information, see [Deploying TiDB Operator in Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-tidb-operator/).
+- Operating system: Linux
+- Architecture: amd64 or arm64
 
-## TiDB Binlog
+## Download link
 
-If you want to download the latest version of [TiDB Binlog](/tidb-binlog/tidb-binlog-overview.md), directly download the TiDB package, because TiDB Binlog is included in the TiDB package.
+You can download TiDB Toolkit from the following link:
 
-| Package name | OS | Architecture | SHA256 checksum |
-|:---|:---|:---|:---|
-| `https://download.pingcap.org/tidb-{version}-linux-amd64.tar.gz` (TiDB Binlog) | Linux | amd64 | `https://download.pingcap.org/tidb-{version}-linux-amd64.sha256` |
+```
+https://download.pingcap.org/tidb-community-toolkit-{version}-linux-{arch}.tar.gz
+```
+
+`{version}` in the link indicates the version number of TiDB and `{arch}` indicates the architecture of the system, which can be `amd64` or `arm64`. For example, the download link for `v6.2.0` in the `amd64` architecture is `https://download.pingcap.org/tidb-community-toolkit-v6.2.0-linux-amd64.tar.gz`.
 
 > **Note:**
 >
-> `{version}` in the above download link indicates the version number of TiDB. For example, the download link for `v5.3.0` is `https://download.pingcap.org/tidb-v5.3.0-linux-amd64.tar.gz`.
+> If you need to download the [PD Control](/pd-control.md) tool `pd-ctl`, download the TiDB installation package separately from `https://download.pingcap.org/tidb-community-server-{version}-linux-{arch}.tar.gz`.
 
-## TiDB Lightning
+## TiDB Toolkit description
 
-Download [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md) by using the download link in the following table:
+Depending on which tools you want to use, you can install the corresponding offline packages as follows:
 
-| Package name | OS | Architecture |  SHA256 checksum |
-|:---|:---|:---|:---|
-| `https://download.pingcap.org/tidb-toolkit-{version}-linux-amd64.tar.gz` | Linux | amd64 | `https://download.pingcap.org/tidb-toolkit-{version}-linux-amd64.sha256` |
-
-> **Note:**
->
-> `{version}` in the above download link indicates the version number of TiDB Lightning. For example, the download link for `v5.3.0` is `https://download.pingcap.org/tidb-toolkit-v5.3.0-linux-amd64.tar.gz`.
-
-## BR (backup and restore)
-
-Download [BR](/br/backup-and-restore-tool.md) by using the download link in the following table:
-
-| Package name | OS | Architecture | SHA256 checksum |
-|:---|:---|:---|:---|
-| `http://download.pingcap.org/tidb-toolkit-{version}-linux-amd64.tar.gz` | Linux | amd64 | `http://download.pingcap.org/tidb-toolkit-{version}-linux-amd64.sha256` |
+| Tool | Offline package name |
+|:------|:----------|
+| [TiUP](/tiup/tiup-overview.md)  | `tiup-linux-{arch}.tar.gz` <br/>`tiup-{tiup-version}-linux-{arch}.tar.gz` <br/>`dm-{tiup-version}-linux-{arch}.tar.gz` <br/> `server-{version}-linux-{arch}.tar.gz` |
+| [Dumpling](/dumpling-overview.md)  | `dumpling-{version}-linux-{arch}.tar.gz`  |
+| [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)  | `tidb-lightning-ctl` <br/>`tidb-lightning-{version}-linux-{arch}.tar.gz`  |
+| [TiDB Data Migration (DM)](/dm/dm-overview.md)  | `dm-worker-{version}-linux-{arch}.tar.gz` <br/>`dm-master-{version}-linux-{arch}.tar.gz` <br/>`dmctl-{version}-linux-{arch}.tar.gz`  |
+| [TiCDC](/ticdc/ticdc-overview.md)  | `cdc-{version}-linux-{arch}.tar.gz`  |
+| [TiDB Binlog](/tidb-binlog/tidb-binlog-overview.md)  | `pump-{version}-linux-{arch}.tar.gz` <br/>`drainer-{version}-linux-{arch}.tar.gz` <br/>`binlogctl` <br/>`reparo`  |
+| [Backup & Restore (BR)](/br/backup-and-restore-overview.md)  | `br-{version}-linux-{arch}.tar.gz`  |
+| [sync-diff-inspector](/sync-diff-inspector/sync-diff-inspector-overview.md)  | `sync_diff_inspector`  |
+| [PD Recover](/pd-recover.md)  | `pd-recover-{version}-linux-{arch}.tar` |
 
 > **Note:**
 >
-> `{version}` in the above download link indicates the version number of BR. For example, the download link for `v5.3.0` is `https://download.pingcap.org/tidb-toolkit-v5.3.0-linux-amd64.tar.gz`.
-
-## TiDB DM (Data Migration)
-
-Download [DM](/dm/dm-overview.md) by using the download link in the following table:
-
-| Package name | OS | Architecture | SHA256 checksum |
-|:---|:---|:---|:---|
-| `https://download.pingcap.org/dm-{version}-linux-amd64.tar.gz` | Linux | amd64 | `https://download.pingcap.org/dm-{version}-linux-amd64.sha256` |
-
-> **Note:**
->
-> `{version}` in the above download link indicates the version number of DM. For example, the download link for `v5.3.0` is `https://download.pingcap.org/dm-v5.3.0-linux-amd64.tar.gz`. You can check the published DM versions in the [DM Release](https://github.com/pingcap/dm/releases) page.
-
-## Dumpling
-
-Download [Dumpling](/dumpling-overview.md) from the links below:
-
-| Installation package | Operating system | Architecture | SHA256 checksum |
-|:---|:---|:---|:---|
-| `https://download.pingcap.org/tidb-toolkit-{version}-linux-amd64.tar.gz` | Linux | amd64 | `https://download.pingcap.org/tidb-toolkit-{version}-linux-amd64.sha256` |
-
-> **Note:**
->
-> The `{version}` in the download link is the version number of Dumpling. For example, the link for downloading the `v5.3.0` version of Dumpling is `https://download.pingcap.org/tidb-toolkit-v5.3.0-linux-amd64.tar.gz`. You can view the currently released versions in [TiDB Releases](https://github.com/pingcap/tidb/releases).
->
-> Dumpling supports arm64 linux. You can replace `amd64` in the download link with `arm64`, which means the `arm64` version of Dumpling.
-
-## sync-diff-inspector
-
-Download [sync-diff-inspector](/sync-diff-inspector/sync-diff-inspector-overview.md) from the links below:
-
-| Package name | OS | Architecture | SHA256 checksum |
-|:---|:---|:---|:---|
-| [tidb-enterprise-tools-nightly-linux-amd64.tar.gz](https://download.pingcap.org/tidb-enterprise-tools-nightly-linux-amd64.tar.gz) | Linux | amd64 | [tidb-enterprise-tools-nightly-linux-amd64.sha256](https://download.pingcap.org/tidb-enterprise-tools-nightly-linux-amd64.sha256) |
-
-## TiCDC
-
-To download [TiCDC](/ticdc/ticdc-overview.md), refer to [Deploy TiCDC](/ticdc/deploy-ticdc.md).
+> `{version}` depends on the version of the tool you are installing. `{arch}` depends on the architecture of the system, which can be `amd64` or `arm64`.

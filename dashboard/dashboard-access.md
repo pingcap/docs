@@ -8,11 +8,17 @@ aliases: ['/docs/dev/dashboard/dashboard-access/']
 
 To access TiDB Dashboard, visit <http://127.0.0.1:2379/dashboard> via your browser. Replace `127.0.0.1:2379` with the actual PD instance address and port.
 
-If multiple PD instances are deployed in your cluster and you can directly access **every** PD instance and port, you can simply replace `127.0.0.1:2379` in the <http://127.0.0.1:2379/dashboard/> address with **any** PD instance address and port.
+> **Note:**
+>
+> TiDB v6.5.0 (and later) and TiDB Operator v1.4.0 (and later) support deploying TiDB Dashboard as an independent Pod on Kubernetes. Using TiDB Operator, you can access the IP address of this Pod to start TiDB Dashboard. For details, see [Deploy TiDB Dashboard independently in TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/dev/get-started#deploy-tidb-dashboard-independently).
+
+## Access TiDB Dashboard when multiple PD instances are deployed
+
+When multiple multiple PD instances are deployed in your cluster and you can directly access **every** PD instance and port, you can simply replace `127.0.0.1:2379` in the <http://127.0.0.1:2379/dashboard/> address with **any** PD instance address and port.
 
 > **Note:**
 >
-> If a firewall or reverse proxy is configured and you cannot directly access every PD instance, you might not be able to access TiDB Dashboard. Usually, this is because the firewall or reverse proxy is not correctly configured. See [Use TiDB Dashboard behind Reverse Proxy](/dashboard/dashboard-ops-reverse-proxy.md) and [Secure TiDB Dashboard](/dashboard/dashboard-ops-security.md) to learn correctly configure the firewall or reverse proxy when multiple PD instances are deployed.
+> If a firewall or reverse proxy is configured and you cannot directly access every PD instance, you might not be able to access TiDB Dashboard. Usually, this is because the firewall or reverse proxy is not correctly configured. See [Use TiDB Dashboard behind Reverse Proxy](/dashboard/dashboard-ops-reverse-proxy.md) and [Secure TiDB Dashboard](/dashboard/dashboard-ops-security.md) to learn how to correctly configure the firewall or reverse proxy when multiple PD instances are deployed.
 
 ## Browser compatibility
 
@@ -30,7 +36,7 @@ You can use TiDB Dashboard in the following common desktop browsers of a relativ
 
 After accessing TiDB Dashboard, you will be directed to the user login interface, as shown in the image below.
 
-- You can sign in with TiDB Dashboard using the TiDB `root` account. By default, the `root` password is empty.
+- You can sign in to TiDB Dashboard using the TiDB `root` account.
 - If you have created a [User-defined SQL User](/dashboard/dashboard-user.md), you can sign in using this account and the corresponding password.
 
 ![Login interface](/media/dashboard/dashboard-access-login.png)

@@ -10,9 +10,9 @@ This document summarizes the best practices of using TiDB, including the use of 
 
 Before you read this document, it is recommended that you read three blog posts that introduce the technical principles of TiDB:
 
-* [TiDB Internal (I) - Data Storage](https://pingcap.com/blog/2017-07-11-tidbinternal1/)
-* [TiDB Internal (II) - Computing](https://pingcap.com/blog/2017-07-11-tidbinternal2/)
-* [TiDB Internal (III) - Scheduling](https://pingcap.com/blog/2017-07-20-tidbinternal3/)
+* [TiDB Internal (I) - Data Storage](https://en.pingcap.com/blog/tidb-internal-data-storage/)
+* [TiDB Internal (II) - Computing](https://en.pingcap.com/blog/tidb-internal-computing/)
+* [TiDB Internal (III) - Scheduling](https://en.pingcap.com/blog/tidb-internal-scheduling/)
 
 ## Preface
 
@@ -68,7 +68,7 @@ Placement Driver (PD) balances the load of the cluster according to the status o
 
 ### SQL on KV
 
-TiDB automatically maps the SQL structure into Key-Value structure. For details, see [TiDB Internal (II) - Computing](https://pingcap.com/blog/2017-07-11-tidbinternal2/).
+TiDB automatically maps the SQL structure into Key-Value structure. For details, see [TiDB Internal (II) - Computing](https://en.pingcap.com/blog/tidb-internal-computing/).
 
 Simply put, TiDB performs the following operations:
 
@@ -87,7 +87,7 @@ Lots of MySQL experience is also applicable to TiDB. It is noted that TiDB has i
 
 * The more secondary indexes, the better?
 
-    Secondary indexes can speed up queries, but adding an index has side effects. The previous section introduces the storage model of indexes. For each additional index, there will be one more Key-Value when inserting a piece of data. Therefore, the more indexes, the slower the writing speed and the more space it takes up.
+    Secondary indexes can speed up queries, but adding an index has side effects. The previous section introduces the storage model of indexes. For each additional index, there will be one more Key-Value when inserting a row. Therefore, the more indexes, the slower the writing speed and the more space it takes up.
 
     In addition, too many indexes affects the runtime of the optimizer, and inappropriate indexes mislead the optimizer. Thus, more secondary indexes does not mean better performance.
 
@@ -203,7 +203,7 @@ The best way to learn about a system or solve the problem is to read its documen
 
 TiDB has a large number of official documents both in Chinese and English. If you have met an issue, you can start from [FAQ](/faq/tidb-faq.md) and [TiDB Cluster Troubleshooting Guide](/troubleshoot-tidb-cluster.md). You can also search the issue list or create an issue in [TiDB repository on GitHub](https://github.com/pingcap/tidb).
 
-TiDB also has many useful ecosystem tools. See [Ecosystem Tool Overview](/ecosystem-tool-user-guide.md) for details.
+TiDB also has many useful migration tools. See [Migration Tool Overview](/ecosystem-tool-user-guide.md) for details.
 
 For more articles on the technical details of TiDB, see the [PingCAP official blog site](https://pingcap.com/blog/).
 

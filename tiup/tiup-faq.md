@@ -1,10 +1,12 @@
 ---
-title: TiUP FAQ
+title: TiUP FAQs
 summary: Provide answers to common questions asked by TiUP users.
 aliases: ['/docs/dev/tiup/tiup-faq/']
 ---
 
-# TiUP FAQ
+# TiUP FAQs
+
+This document collects the frequently asked questions (FAQs) about TiUP.
 
 ## Can TiUP not use the official mirror source?
 
@@ -25,7 +27,7 @@ The TiUP playground component is mainly used to build a stand-alone development 
 
 ## How do I write the topology file for the TiUP cluster component?
 
-Refer to [these templates](https://github.com/pingcap/tiup/tree/master/examples) to write the topology file. The templates include:
+Refer to [these templates](https://github.com/pingcap/tiup/tree/master/embed/examples/cluster) to write the topology file. The templates include:
 
 - Multi-DC deployment topology
 - Minimal deployment topology

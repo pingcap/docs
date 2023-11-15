@@ -14,7 +14,7 @@ This document summarizes common issues in TiDB and other components. You can use
 
 - 1.1.1 The `Region is Unavailable` error is usually because a Region is not available for a period of time. You might encounter `TiKV server is busy`, or the request to TiKV fails due to `not leader` or `epoch not match`, or the request to TiKV time out. In such cases, TiDB performs a `backoff` retry mechanism. When the `backoff` exceeds a threshold (20s by default), the error will be sent to the client. Within the `backoff` threshold, this error is not visible to the client.
 
-- 1.1.2 Multiple TiKV instances are OOM at the same time, which causes no Leader in a Region for a period of time. See [case-991](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case991.md) in Chinese.
+- 1.1.2 Multiple TiKV instances are OOM at the same time, which causes no Leader during the OOM period. See [case-991](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case991.md) in Chinese.
 
 - 1.1.3 TiKV reports `TiKV server is busy`, and exceeds the `backoff` time. For more details, refer to [4.3](#43-the-client-reports-the-server-is-busy-error). `TiKV server is busy` is a result of the internal flow control mechanism and should not be counted in the `backoff` time. This issue will be fixed.
 
@@ -33,6 +33,7 @@ Refer to [5 PD issues](#5-pd-issues).
 - 2.1.1 Wrong TiDB execution plan causes latency increase. Refer to [3.3](#33-wrong-execution-plan).
 - 2.1.2 PD Leader election issue or OOM. Refer to [5.2](#52-pd-election) and [5.3](#53-pd-oom).
 - 2.1.3 A significant number of Leader drops in some TiKV instances. Refer to [4.4](#44-some-tikv-nodes-drop-leader-frequently).
+- 2.1.4 For other causes, see [Troubleshoot Increased Read and Write Latency](/troubleshoot-cpu-issues.md).
 
 ### 2.2 Persistent and significant increase
 
@@ -48,19 +49,21 @@ Refer to [5 PD issues](#5-pd-issues).
 
 - 2.2.4 TiDB wrong execution plan. Refer to [3.3](#33-wrong-execution-plan).
 
+- 2.2.5 For other causes, see [Troubleshoot Increased Read and Write Latency](/troubleshoot-cpu-issues.md).
+
 ## 3. TiDB issues
 
 ### 3.1 DDL
 
-- 3.1.1  An error `ERROR 1105 (HY000): unsupported modify decimal column precision` is reported when you modify the length of the `decimal` field.<!--See [case-1004](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case517.md) in Chinese.--> TiDB does not support changing the length of the `decimal` field.
+- 3.1.1 An error `ERROR 1105 (HY000): unsupported modify decimal column precision` is reported when you modify the length of the `decimal` field.<!--See [case-1004](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case517.md) in Chinese.--> TiDB does not support changing the length of the `decimal` field.
 
 - 3.1.2 TiDB DDL job hangs or executes slowly (use `admin show ddl jobs` to check DDL progress)
 
-    - Cause 1：Network issue with other components (PD/TiKV).
+    - Cause 1: Network issue with other components (PD/TiKV).
 
-    - Cause 2：Early versions of TiDB (earlier than v3.0.8) have heavy internal load because of a lot of goroutine at high concurrency.
+    - Cause 2: Early versions of TiDB (earlier than v3.0.8) have heavy internal load because of a lot of goroutine at high concurrency.
 
-    - Cause 3：In early versions (v2.1.15 & versions < v3.0.0-rc1), PD instances fail to delete TiDB keys, which causes every DDL change to wait for two leases.
+    - Cause 3: In early versions (v2.1.15 & versions < v3.0.0-rc1), PD instances fail to delete TiDB keys, which causes every DDL change to wait for two leases.
 
     - For other unknown causes, [report a bug](https://github.com/pingcap/tidb/issues/new?labels=type%2Fbug&template=bug-report.md).
 
@@ -77,24 +80,15 @@ Refer to [5 PD issues](#5-pd-issues).
 
 - 3.1.3 TiDB reports `information schema is changed` error in log
 
-    - Cause 1: The DML operation touches a table that is under DDL. You can use `admin show ddl job` to check the DDLs that are currently in progress.
-
-    - Cause 2: The current DML operation is executed too long. During the time, many DDL operations are executed, which causes `schema version` changes to be more than 1024. The new version `lock table` might also cause schema version changes.
-
-    - Cause 3: The TiDB instance that is currently executing DML statements cannot load the new `schema information` (maybe caused by network issues with PD or TiKV). During this time, many DDL statements are executed (including `lock table`), which causes `schema version` changes to be more than 1024.
-
-    - Solution：The first two causes do not impact the application, as the related DML operations retry after failure. For cause 3, you need to check the network between TiDB and TiKV/PD.
+    - For the detailed causes and solution, see [Why the `Information schema is changed` error is reported](/faq/sql-faq.md#what-triggers-the-information-schema-is-changed-error).
 
     - Background: The increased number of `schema version` is consistent with the number of `schema state` of each DDL change operation. For example, the `create table` operation has 1 version change, and the `add column` operation has 4 version changes. Therefore, too many column change operations might cause `schema version` to increase fast. For details, refer to [online schema change](https://static.googleusercontent.com/media/research.google.com/zh-CN//pubs/archive/41376.pdf).
 
 - 3.1.4 TiDB reports `information schema is out of date` in log
 
-    - Cause 1：The TiDB server that is executing the DML statement is stopped by `graceful kill` and prepares to exit. The execution time of the transaction that contains the DML statement exceeds one DDL lease. An error is reported when the transaction is committed.
+    - Cause 1: The TiDB server that is executing the DML statement is stopped by `graceful kill` and prepares to exit. The execution time of the transaction that contains the DML statement exceeds one DDL lease. An error is reported when the transaction is committed.
 
-    - Cause 2: The TiDB server cannot connect to PD or TiKV when it is executing the DML statement, which causes the following problems:
-
-        - The TiDB server did not load the new schema within one DDL lease (`45s` by default); or
-        - The TiDB server disconnects from PD with the `keep alive` setting.
+    - Cause 2: The TiDB server cannot connect to PD or TiKV when it is executing the DML statement. As a result, the TiDB server did not load the new schema within one DDL lease (`45s` by default), or the TiDB server disconnects from PD with the `keep alive` setting.
 
     - Cause 3: TiKV has high load or network timed out. Check the node loads in **Grafana** -> **TiDB** and **TiKV**.
 
@@ -120,16 +114,16 @@ Refer to [5 PD issues](#5-pd-issues).
 
         - In v2.1.8 or earlier versions, you can grep `fatal error: stack overflow` in the `tidb_stderr.log`.
 
-    - Monitor：The memory usage of tidb-server instances increases sharply in a short period of time.
+    - Monitor: The memory usage of tidb-server instances increases sharply in a short period of time.
 
 - 3.2.2 Locate the SQL statement that causes OOM. (Currently all versions of TiDB cannot locate SQL accurately. You still need to analyze whether OOM is caused by the SQL statement after you locate one.)
 
-    - For versions >= v3.0.0, grep “expensive_query” in `tidb.log`. That log message records SQL queries that timed out or exceed memory quota.
-    - For versions < v3.0.0, grep “memory exceeds quota” in `tidb.log` to locate SQL queries that exceed memory quota.
+    - For versions >= v3.0.0, grep "expensive_query" in `tidb.log`. That log message records SQL queries that timed out or exceed memory quota.
+    - For versions < v3.0.0, grep "memory exceeds quota" in `tidb.log` to locate SQL queries that exceed memory quota.
 
   > **Note:**
   >
-  > The default threshold for a single SQL memory usage is `1GB` (in bytes, scope:`SESSION`). You can set this parameter by configuring `tidb_mem_quota_query`. You can also modify the `mem-quota-query` item (in bytes) in the configuration file by hot loading the configuration items.
+  > The default threshold for a single SQL memory usage is `1GB`. You can set this parameter by configuring the system variable [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query).
 
 - 3.2.3 Mitigate OOM issues
 
@@ -142,6 +136,8 @@ Refer to [5 PD issues](#5-pd-issues).
     - The data volume of a single `UPDATE/DELETE` query is too large. See [case-882](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case882.md) in Chinese.
 
     - The SQL contains multiple sub-queries connected by `Union`. See [case-1828](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case1828.md) in Chinese.
+
+For more information about troubleshooting OOM, see [Troubleshoot TiDB OOM Issues](/troubleshoot-tidb-oom.md).
 
 ### 3.3 Wrong execution plan
 
@@ -185,6 +181,30 @@ Refer to [5 PD issues](#5-pd-issues).
 
     - Solution: You can bypass this issue by manually adding `Cast(xx as decimal(a, b))`, in which `a` and `b` are the target precisions.
 
+### 3.5 Slow query issues
+
+To identify slow queries, see [Identify slow queries](/identify-slow-queries.md). To analyze and handle slow queries, see [Analyze slow queries](/analyze-slow-queries.md).
+
+### 3.6 Hotspot issues
+
+As a distributed database, TiDB has a load balancing mechanism to distribute the application loads as evenly as possible to different computing or storage nodes, to make better use of server resources. However, in certain scenarios, some application loads cannot be well distributed, which can affect the performance and form a single point of high load, also known as a hotspot.
+
+TiDB provides a complete solution to troubleshooting, resolving or avoiding hotspots. By balancing load hotspots, overall performance can be improved, including improving QPS and reducing latency. For detailed solutions, see [Troubleshoot Hotspot Issues](/troubleshoot-hot-spot-issues.md).
+
+### 3.7 High disk I/O usage
+
+If TiDB's response slows down after you have troubleshot the CPU bottleneck and the bottleneck caused by transaction conflicts, you need to check I/O metrics to help determine the current system bottleneck. For how to locate and handle the issue of high I/O usage in TiDB, see [Troubleshoot High Disk I/O Usage](/troubleshoot-high-disk-io.md).
+
+### 3.8 Lock conflicts
+
+TiDB supports complete distributed transactions. Starting from v3.0, TiDB provides optimistic transaction mode and pessimistic transaction mode. To learn how to troubleshoot lock-related issues and how to handle optimistic and pessimistic lock conflicts, see [Troubleshoot Lock Conflicts](/troubleshoot-lock-conflicts.md).
+
+### 3.9 Inconsistency between data and indexes
+
+TiDB checks consistency between data and indexes when it executes transactions or the [`ADMIN CHECK [TABLE|INDEX]`](/sql-statements/sql-statement-admin-check-table-index.md) statement. If the check finds that a record key-value and the corresponding index key-value are inconsistent, that is, a key-value pair storing row data and the corresponding key-value pair storing its index are inconsistent (for example, more indexes or missing indexes), TiDB reports a data inconsistency error and prints the related errors in error logs.
+
+To learn more about the inconsistency error and how to bypass the check, see [Troubleshoot Inconsistency Between Data and Indexes](/troubleshoot-data-inconsistency-errors.md).
+
 ## 4. TiKV issues
 
 ### 4.1 TiKV panics and fails to start
@@ -193,7 +213,7 @@ Refer to [5 PD issues](#5-pd-issues).
 
     This issue is expected. You can restore the Region using `tikv-ctl`.
 
-- 4.1.2 If TiKV is deployed on a virtual machine, when the virtual machine is killed or the physical machine is powered off, the `entries[X, Y]  is unavailable from storage` error is reported.
+- 4.1.2 If TiKV is deployed on a virtual machine, when the virtual machine is killed or the physical machine is powered off, the `entries[X, Y] is unavailable from storage` error is reported.
 
     This issue is expected. The `fsync` of virtual machines is not reliable, so you need to restore the Region using `tikv-ctl`.
 
@@ -271,7 +291,7 @@ Check the specific cause for busy by viewing the monitor **Grafana** -> **TiKV**
 
 ### 4.5 TiKV write is slow
 
-- 4.5.1 Check whether the TiKV write is low by viewing the `prewrite/commit/raw-put` duration of TiKV gRPC (only for raw KV clusters). Generally, you can locate the slow phase according to the [performance-map](https://github.com/pingcap/tidb-map/blob/master/maps/performance-map.png). Some common situations are listed as follows.
+- 4.5.1 Check whether the TiKV write is low by viewing the `prewrite/commit/raw-put` duration of TiKV gRPC (only for RawKV clusters). Generally, you can locate the slow phase according to the [performance-map](https://github.com/pingcap/tidb-map/blob/master/maps/performance-map.png). Some common situations are listed as follows.
 
 - 4.5.2 The scheduler CPU is busy (only for transaction kv).
 
@@ -374,7 +394,7 @@ Check the specific cause for busy by viewing the monitor **Grafana** -> **TiKV**
 
 ### 5.4 Grafana display
 
-- 5.4.1 The monitor in **Grafana** -> **PD** -> **cluster** -> **role** displays follower. The Grafana expression issue has been fixed in v3.0.8 ([#1065](https://github.com/pingcap/tidb-ansible/pull/1065)). For details, see [case-1022](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case1022.md).
+- 5.4.1 The monitor in **Grafana** -> **PD** -> **cluster** -> **role** displays follower. The Grafana expression issue has been fixed in v3.0.8.
 
 ## 6. Ecosystem tools
 
@@ -460,14 +480,14 @@ Check the specific cause for busy by viewing the monitor **Grafana** -> **TiKV**
 
 - 6.2.3 A replication task is interrupted with the `driver: bad connection` error returned.
 
-    - The `driver: bad connection` error indicates that an anomaly has occurred in the connection between DM and the downstream TiDB database (such as network failure, TiDB restart and so on), and that the data of the current request has not yet been sent to TiDB.
+    - The `driver: bad connection` error indicates that an anomaly has occurred in the connection between DM and the downstream TiDB database (such as network failure and TiDB restart), and that the data of the current request has not yet been sent to TiDB.
 
         - For versions earlier than DM 1.0.0 GA, stop the task by running `stop-task` and then restart the task by running `start-task`.
         - For DM 1.0.0 GA or later versions, an automatic retry mechanism for this type of error is added. See [#265](https://github.com/pingcap/dm/pull/265).
 
 - 6.2.4 A replication task is interrupted with the `invalid connection` error.
 
-    - The `invalid connection` error indicates that an anomaly has occurred in the connection between DM and the downstream TiDB database (such as network failure, TiDB restart, TiKV busy and so on), and that a part of the data for the current request has been sent to TiDB. Because DM has the feature of concurrently replicating data to the downstream in replication tasks, several errors might occur when a task is interrupted. You can check these errors by running `query-status` or `query-error`.
+    - The `invalid connection` error indicates that an anomaly has occurred in the connection between DM and the downstream TiDB database (such as network failure, TiDB restart, and TiKV busy), and that a part of the data for the current request has been sent to TiDB. Because DM has the feature of concurrently replicating data to the downstream in replication tasks, several errors might occur when a task is interrupted. You can check these errors by running `query-status` or `query-error`.
 
         - If only the `invalid connection` error occurs during the incremental replication process, DM retries the task automatically.
         - If DM does not retry or fails to retry automatically because of version problems (automatic retry is introduced in v1.0.0-rc.1), use `stop-task` to stop the task and then use `start-task` to restart the task.
@@ -498,7 +518,7 @@ Check the specific cause for busy by viewing the monitor **Grafana** -> **TiKV**
 
 ### 6.3 TiDB Lightning
 
-- 6.3.1 TiDB Lightning is a tool for fast full import of large amounts of data into a TiDB cluster. See [TiDB Lightning on GitHub](https://github.com/pingcap/tidb-lightning).
+- 6.3.1 TiDB Lightning is a tool for fast full import of large amounts of data into a TiDB cluster. See [TiDB Lightning on GitHub](https://github.com/pingcap/tidb/tree/master/br/pkg/lightning).
 
 - 6.3.2 Import speed is too slow.
 
@@ -508,7 +528,7 @@ Check the specific cause for busy by viewing the monitor **Grafana** -> **TiKV**
         - If TiDB Lightning shares a server with other services (for example, Importer), you must manually set `region-concurrency` to 75% of the total number of CPU cores on that server.
         - If there is a quota on CPU (for example, limited by Kubernetes settings), TiDB Lightning might not be able to read this out. In this case, `region-concurrency` must also be manually reduced.
 
-    - Every additional index introduces a new KV pair for each row. If there are N indices, the actual size to be imported would be approximately (N+1) times the size of the [Mydumper](https://docs.pingcap.com/tidb/v4.0/mydumper-overview) output. If the indices are negligible, you may first remove them from the schema, and add them back via `CREATE INDEX` after the import is complete.
+    - Every additional index introduces a new KV pair for each row. If there are N indices, the actual size to be imported would be approximately (N+1) times the size of the [Dumpling](/dumpling-overview.md) output. If the indices are negligible, you may first remove them from the schema, and add them back via `CREATE INDEX` after the import is complete.
     - The version of TiDB Lightning is old. Try the latest version, which might improve the import speed.
 
 - 6.3.3 `checksum failed: checksum mismatched remote vs local`.
@@ -517,35 +537,30 @@ Check the specific cause for busy by viewing the monitor **Grafana** -> **TiKV**
 
     - Cause 2: If the checksum of the target database is 0, which means nothing is imported, it is possible that the cluster is too hot and fails to take in any data.
 
-    - Cause 3: If the data source is generated by the machine and not backed up by [Mydumper](https://docs.pingcap.com/tidb/v4.0/mydumper-overview), ensure it respects the constrains of the table. For example:
+    - Cause 3: If the data source is generated by the machine and not backed up by [Dumpling](/dumpling-overview.md), ensure it respects the constrains of the table. For example:
 
-        - `AUTO_INCREMENT` columns need to be positive, and do not contain the value “0”.
+        - `AUTO_INCREMENT` columns need to be positive, and do not contain the value "0".
         - UNIQUE and PRIMARY KEYs must not have duplicate entries.
 
-    - Solution: See [Troubleshooting Solution](/tidb-lightning/tidb-lightning-faq.md#checksum-failed-checksum-mismatched-remote-vs-local).
+    - Solution: See [Troubleshooting Solution](/tidb-lightning/troubleshoot-tidb-lightning.md#checksum-failed-checksum-mismatched-remote-vs-local).
 
 - 6.3.4 `Checkpoint for … has invalid status:(error code)`
 
     - Cause: Checkpoint is enabled, and Lightning/Importer has previously abnormally exited. To prevent accidental data corruption, TiDB Lightning will not start until the error is addressed. The error code is an integer less than 25, with possible values as `0, 3, 6, 9, 12, 14, 15, 17, 18, 20 and 21`. The integer indicates the step where the unexpected exit occurs in the import process. The larger the integer is, the later the exit occurs.
 
-    - Solution: See [Troubleshooting Solution](/tidb-lightning/tidb-lightning-faq.md#checkpoint-for--has-invalid-status-error-code).
+    - Solution: See [Troubleshooting Solution](/tidb-lightning/troubleshoot-tidb-lightning.md#checkpoint-for--has-invalid-status-error-code).
 
-- 6.3.5 `ResourceTemporarilyUnavailable("Too many open engines …: 8")`
-
-    - Cause: The number of concurrent engine files exceeds the limit specified by tikv-importer. This could be caused by misconfiguration. In addition, even when the configuration is correct, if tidb-lightning has exited abnormally before, an engine file might be left at a dangling open state, which could cause this error as well.
-    - Solution: See [Troubleshooting Solution](/tidb-lightning/tidb-lightning-faq.md#resourcetemporarilyunavailabletoo-many-open-engines--).
-
-- 6.3.6 `cannot guess encoding for input file, please convert to UTF-8 manually`
+- 6.3.5 `cannot guess encoding for input file, please convert to UTF-8 manually`
 
     - Cause: TiDB Lightning only supports the UTF-8 and GB-18030 encodings. This error means the file is not in any of these encodings. It is also possible that the file has mixed encoding, such as containing a string in UTF-8 and another string in GB-18030, due to historical ALTER TABLE executions.
 
-    - Solution: See [Troubleshooting Solution](/tidb-lightning/tidb-lightning-faq.md#cannot-guess-encoding-for-input-file-please-convert-to-utf-8-manually).
+    - Solution: See [Troubleshooting Solution](/tidb-lightning/troubleshoot-tidb-lightning.md#cannot-guess-encoding-for-input-file-please-convert-to-utf-8-manually).
 
-- 6.3.7 `[sql2kv] sql encode error = [types:1292]invalid time format: '{1970 1 1 0 45 0 0}'`
+- 6.3.6 `[sql2kv] sql encode error = [types:1292]invalid time format: '{1970 1 1 0 45 0 0}'`
 
     - Cause: A timestamp type entry has a time value that does not exist. This is either because of DST changes or because the time value has exceeded the supported range (from Jan 1, 1970 to Jan 19, 2038).
 
-    - Solution: See [Troubleshooting Solution](/tidb-lightning/tidb-lightning-faq.md#sql2kv-sql-encode-error--types1292invalid-time-format-1970-1-1-).
+    - Solution: See [Troubleshooting Solution](/tidb-lightning/troubleshoot-tidb-lightning.md#sql2kv-sql-encode-error--types1292invalid-time-format-1970-1-1-).
 
 ## 7. Common log analysis
 
@@ -600,13 +615,13 @@ Check the specific cause for busy by viewing the monitor **Grafana** -> **TiKV**
 
     This is the write-write conflict in optimistic transactions. If multiple transactions modify the same key, only one transaction succeed and other transactions automatically obtain the timestamp again and retry the operation, with no impact on the business.
 
-    If the conflict is severe, it might cause transaction failure after multiple retries. In this case, it is recommended to use the pessimistic lock.
+    If the conflict is severe, it might cause transaction failure after multiple retries. In this case, it is recommended to use the pessimistic lock. For more details about the error and the solution, see [Troubleshoot Write Conflicts in Optimistic Transactions](/troubleshoot-write-conflicts.md).
 
 - 7.2.3 `TxnLockNotFound`.
 
-    This transaction commit is too slow, which is rolled back by other transactions after TTL (3 seconds for a small transaction by default). This transaction will automatically retry, so the business is usually not affected.
+    This transaction commit is too slow, causing it to be rolled back by other transactions after Time To Live (TTL). This transaction will automatically retry, so the business is usually not affected. For a transaction with a size of 0.25 MB or smaller, the default TTL is 3 seconds. For more details, see the [`LockNotFound` error](/troubleshoot-lock-conflicts.md#locknotfound-error).
 
-- 7.2.4  `PessimisticLockNotFound`.
+- 7.2.4 `PessimisticLockNotFound`.
 
     Similar to `TxnLockNotFound`. The pessimistic transaction commit is too slow and thus rolled back by other transactions.
 

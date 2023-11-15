@@ -6,48 +6,59 @@ aliases: ['/docs/dev/tidb-lightning/tidb-lightning-table-filter/','/docs/dev/ref
 
 # Table Filter
 
-The TiDB ecosystem tools operate on all the databases by default, but oftentimes only a subset is needed. For example, you only want to work with the schemas in the form of `foo*` and `bar*` and nothing else.
+The TiDB migration tools operate on all the databases by default, but oftentimes only a subset is needed. For example, you only want to work with the schemas in the form of `foo*` and `bar*` and nothing else.
 
-Since TiDB 4.0, all TiDB ecosystem tools share a common filter syntax to define subsets. This document describes how to use the table filter feature.
+Since TiDB 4.0, all TiDB migration tools share a common filter syntax to define subsets. This document describes how to use the table filter feature.
 
 ## Usage
 
 ### CLI
 
-Table filters can be applied to the tools using multiple `-f` or `--filter` command line parameters. Each filter is in the form of `db.table`, where each part can be a wildcard (further explained in the [next section](#wildcards)). The following lists the example usage in each tool.
+Table filters can be applied to the tools using multiple `-f` or `--filter` command line parameters. Each filter is in the form of `db.table`, where each part can be a wildcard (further explained in the [next section](#wildcards)). The following lists the example usage.
 
-* [BR](/br/backup-and-restore-tool.md):
+<CustomContent platform="tidb">
 
-    {{< copyable "shell-regular" >}}
+* [BR](/br/backup-and-restore-overview.md):
 
     ```shell
     ./br backup full -f 'foo*.*' -f 'bar*.*' -s 'local:///tmp/backup'
-    #                ^~~~~~~~~~~~~~~~~~~~~~~
-    ./br restore full -f 'foo*.*' -f 'bar*.*' -s 'local:///tmp/backup'
-    #                 ^~~~~~~~~~~~~~~~~~~~~~~
     ```
 
-* [Dumpling](/dumpling-overview.md):
+    ```shell
+    ./br restore full -f 'foo*.*' -f 'bar*.*' -s 'local:///tmp/backup'
+    ```
 
-    {{< copyable "shell-regular" >}}
+</CustomContent>
+
+* [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview):
 
     ```shell
     ./dumpling -f 'foo*.*' -f 'bar*.*' -P 3306 -o /tmp/data/
-    #          ^~~~~~~~~~~~~~~~~~~~~~~
     ```
+
+<CustomContent platform="tidb">
 
 * [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md):
 
-    {{< copyable "shell-regular" >}}
+    ```shell
+    ./tidb-lightning -f 'foo*.*' -f 'bar*.*' -d /tmp/data/ --backend tidb
+    ```
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+* [TiDB Lightning](https://docs.pingcap.com/tidb/stable/tidb-lightning-overview):
 
     ```shell
     ./tidb-lightning -f 'foo*.*' -f 'bar*.*' -d /tmp/data/ --backend tidb
-    #                ^~~~~~~~~~~~~~~~~~~~~~~
     ```
+
+</CustomContent>
 
 ### TOML configuration files
 
-Table filters in TOML files are specified as [array of strings](https://toml.io/en/v1.0.0-rc.1#section-15). The following lists the example usage in each tool.
+Table filters in TOML files are specified as [array of strings](https://toml.io/en/v1.0.0-rc.1#section-15). The following lists the example usage.
 
 * TiDB Lightning:
 
@@ -55,6 +66,8 @@ Table filters in TOML files are specified as [array of strings](https://toml.io/
     [mydumper]
     filter = ['foo*.*', 'bar*.*']
     ```
+
+<CustomContent platform="tidb">
 
 * [TiCDC](/ticdc/ticdc-overview.md):
 
@@ -66,6 +79,8 @@ Table filters in TOML files are specified as [array of strings](https://toml.io/
     matcher = ['db1.*', 'db2.*', 'db3.*']
     dispatcher = 'ts'
     ```
+
+</CustomContent>
 
 ## Syntax
 
@@ -205,6 +220,14 @@ These regular expressions use the [Go dialect](https://pkg.go.dev/regexp/syntax?
 > Every `/` in the regular expression must be escaped as `\/`, including inside `[…]`. You cannot place an unescaped `/` between `\Q…\E`.
 
 ## Multiple rules
+
+<CustomContent platform="tidb-cloud">
+
+> **Note:**
+>
+> This section is not applicable to TiDB Cloud. Currently, TiDB Cloud only supports one table filter rule.
+
+</CustomContent>
 
 When a table name matches none of the rules in the filter list, the default behavior is to ignore such unmatched tables.
 

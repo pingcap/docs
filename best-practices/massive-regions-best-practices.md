@@ -6,7 +6,7 @@ aliases: ['/docs/dev/best-practices/massive-regions-best-practices/','/docs/dev/
 
 # Best Practices for TiKV Performance Tuning with Massive Regions
 
-In TiDB, data is split into Regions, each storing data for a specific key range. These Regions are distributed among multiple TiKV instances. As data is written into a cluster, millions of or even tens of millions of Regions are created. Too many Regions on a single TiKV instance can bring a heavy burden to the cluster and affect its performance.
+In TiDB, data is split into Regions, each storing data for a specific key range. These Regions are distributed among multiple TiKV instances. As data is written into a cluster, millions of Regions might be created. Too many Regions on a single TiKV instance can bring a heavy burden to the cluster and affect its performance.
 
 This document introduces the workflow of Raftstore (a core module of TiKV), explains why a massive amount of Regions affect the performance, and offers methods for tuning TiKV performance.
 
@@ -83,9 +83,9 @@ Enable `Region Merge` by configuring the following parameters:
 {{< copyable "" >}}
 
 ```
->> pd-ctl config set max-merge-region-size 20
->> pd-ctl config set max-merge-region-keys 200000
->> pd-ctl config set merge-schedule-limit 8
+config set max-merge-region-size 20
+config set max-merge-region-keys 200000
+config set merge-schedule-limit 8
 ```
 
 Refer to [Region Merge](https://tikv.org/docs/4.0/tasks/configure/region-merge/) and the following three configuration parameters in the [PD configuration file](/pd-configuration-file.md#schedule) for more details:
@@ -123,6 +123,18 @@ raft-heartbeat-interval = raft-base-tick-interval * raft-heartbeat-ticks
 ```
 
 If Region followers have not received the heartbeat from the leader within the `raft-election-timeout` interval, these followers determine that the leader has failed and start a new election. `raft-heartbeat-interval` is the interval at which a leader sends a heartbeat to followers. Therefore, increasing the value of `raft-base-tick-interval` can reduce the number of network messages sent from Raft state machines but also makes it longer for Raft state machines to detect the leader failure.
+
+### Method 6: Adjust Region size
+
+The default size of a Region is 96 MiB, and you can reduce the number of Regions by setting Regions to a larger size. For more information, see [Tune Region Performance](/tune-region-performance.md).
+
+> **Warning:**
+>
+> Currently, customized Region size is an experimental feature introduced in TiDB v6.1.0. It is not recommended that you use it in production environments. The risks are as follows:
+>
+> + Performance jitter might be caused.
+> + The query performance, especially for queries that deal with a large range of data, might decrease.
+> + The Region scheduling slows down.
 
 ## Other problems and solutions
 

@@ -6,7 +6,7 @@ aliases: ['/docs/dev/sql-statements/sql-statement-explain-analyze/','/docs/dev/r
 
 # EXPLAIN ANALYZE
 
-The `EXPLAIN ANALYZE` statement works similar to `EXPLAIN`, with the major difference being that it will actually execute the statement. This allows you to compare the estimates used as part of query planning to actual values encountered during execution.  If the estimates differ significantly from the actual values, you should consider running `ANALYZE TABLE` on the affected tables.
+The `EXPLAIN ANALYZE` statement works similar to `EXPLAIN`, with the major difference being that it will actually execute the statement. This allows you to compare the estimates used as part of query planning to actual values encountered during execution. If the estimates differ significantly from the actual values, you should consider running `ANALYZE TABLE` on the affected tables.
 
 > **Note:**
 >
@@ -88,12 +88,12 @@ EXPLAIN ANALYZE SELECT * FROM t1;
 ```
 
 ```sql
-+-------------------+---------+---------+-----------+---------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------+-----------+------+
-| id                | estRows | actRows | task      | access object | execution info                                                                                                                                                                                                  | operator info                  | memory    | disk |
-+-------------------+---------+---------+-----------+---------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------+-----------+------+
-| TableReader_5     | 13.00   | 13      | root      |               | time:923.459µs, loops:2, cop_task: {num: 4, max: 839.788µs, min: 779.374µs, avg: 810.926µs, p95: 839.788µs, max_proc_keys: 12, p95_proc_keys: 12, rpc_num: 4, rpc_time: 3.116964ms, copr_cache_hit_ratio: 0.00} | data:TableFullScan_4           | 632 Bytes | N/A  |
-| └─TableFullScan_4 | 13.00   | 13      | cop[tikv] | table:t1      | proc max:0s, min:0s, p80:0s, p95:0s, iters:4, tasks:4                                                                                                                                                           | keep order:false, stats:pseudo | N/A       | N/A  |
-+-------------------+---------+---------+-----------+---------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------+-----------+------+
++-------------------+----------+---------+-----------+---------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------+-----------+------+
+| id                | estRows  | actRows | task      | access object | execution info                                                                                                                                                                                                                            | operator info                  | memory    | disk |
++-------------------+----------+---------+-----------+---------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------+-----------+------+
+| TableReader_5     | 10000.00 | 3       | root      |               | time:278.2µs, loops:2, cop_task: {num: 1, max: 437.6µs, proc_keys: 3, rpc_num: 1, rpc_time: 423.9µs, copr_cache_hit_ratio: 0.00}                                                                                                          | data:TableFullScan_4           | 251 Bytes | N/A  |
+| └─TableFullScan_4 | 10000.00 | 3       | cop[tikv] | table:t1      | tikv_task:{time:0s, loops:1}, scan_detail: {total_process_keys: 3, total_process_keys_size: 111, total_keys: 4, rocksdb: {delete_skipped_count: 0, key_skipped_count: 3, block: {cache_hit_count: 0, read_count: 0, read_byte: 0 Bytes}}} | keep order:false, stats:pseudo | N/A       | N/A  |
++-------------------+----------+---------+-----------+---------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------+-----------+------+
 2 rows in set (0.00 sec)
 ```
 
@@ -128,7 +128,7 @@ cop_task: {num: 6, max: 1.07587ms, min: 844.312µs, avg: 919.601µs, p95: 1.0758
     - `max`, `min`, `avg`, `p95`: The maximum, minimum, average, and P95 values of the execution time consumed for executing cop tasks.
     - `max_proc_keys` and `p95_proc_keys`: The maximum and P95 key-values scanned by TiKV in all cop tasks. If the difference between the maximum value and the P95 value is large, the data distribution might be imbalanced.
     - `rpc_num`, `rpc_time`: The total number and total time consumed for `Cop` RPC requests sent to TiKV.
-    - `copr_cache_hit_ratio`: The hit rate of Coprocessor Cache for `cop` task requests. See [Coprocessor Cache Configuration](/tidb-configuration-file.md) for details.
+    - `copr_cache_hit_ratio`: The hit rate of Coprocessor Cache for `cop` task requests.
 - `backoff`: Contains different types of backoff and the total waiting time of backoff.
 
 ### Insert
@@ -155,7 +155,7 @@ The `IndexJoin` operator has 1 outer worker and N inner workers for concurrent e
 
 1. The outer worker reads N outer rows, then wraps it into a task, and sends it to the result channel and the inner worker channel.
 2. The inner worker receives the task, build key ranges from the task, and fetches inner rows according to the key ranges. It then builds the inner row hash table.
-3. The main `IndexJoin`  thread receives the task from the result channel and waits for the inner worker to finish handling the task.
+3. The main `IndexJoin` thread receives the task from the result channel and waits for the inner worker to finish handling the task.
 4. The main `IndexJoin` thread joins each outer row by looking up to the inner rows' hash table.
 
 The `IndexJoin` operator contains the following execution information:
@@ -226,6 +226,33 @@ build_hash_table:{total:146.071334ms, fetch:110.338509ms, build:35.732825ms}, pr
     - `probe`: The total time consumed for joining with outer table rows and the hash table.
     - `fetch`: The total time that the join worker waits to read the outer table rows data.
 
+### TableFullScan (TiFlash)
+
+The `TableFullScan` operator executed on a TiFlash node contains the following execution information:
+
+```sql
+tiflash_scan: {
+  dtfile: {
+    total_scanned_packs: 2, 
+    total_skipped_packs: 1, 
+    total_scanned_rows: 16000, 
+    total_skipped_rows: 8192, 
+    total_rough_set_index_load_time: 2ms, 
+    total_read_time: 20ms
+  }, 
+  total_create_snapshot_time: 1ms
+}
+```
+
++ `dtfile`: the DTFile (DeltaTree File) related information during the table scan, which reflects the data scan status of the TiFlash Stable layer.
+    - `total_scanned_packs`: the total number of packs that have been scanned in the DTFile. A pack is the minimum unit that can be read in the TiFlash DTFile. By default, every 8192 rows constitute a pack.
+    - `total_skipped_packs`: the total number of packs that have been skipped by the scan in the DTFile. When a `WHERE` clause hits rough set indexes or matches the range filtering of a primary key, the irrelevant packs are skipped.
+    - `total_scanned_rows`: the total number of rows that have been scanned in the DTFile. If there are multiple versions of updates or deletions because of MVCC, each version is counted independently.
+    - `total_skipped_rows`: the total number of rows that are skipped by the scan in the DTFile.
+    - `total_rs_index_load_time`: the total time used to read DTFile rough set indexes.
+    - `total_read_time`:  the total time used to read DTFile data.
++ `total_create_snapshot_time`: the total time used to create snapshots during the table scan.
+
 ### lock_keys execution information
 
 When a DML statement is executed in a pessimistic transaction, the execution information of the operator might also include the execution information of `lock_keys`. For example:
@@ -254,6 +281,67 @@ commit_txn: {prewrite:48.564544ms, wait_prewrite_binlog:47.821579, get_commit_ts
 - `commit`: The time consumed for the `commit` phase during the 2PC commit of the transaction.
 - `write_keys`: The total `keys` written in the transaction.
 - `write_byte`: The total bytes of `key-value` written in the transaction, and the unit is byte.
+
+### RU (Request Unit) consumption
+
+[Request Unit (RU)](/tidb-resource-control.md#what-is-request-unit-ru) is a unified abstraction unit of system resources, which is defined in TiDB resource control. The `execution info` of the top-level operator shows the overall RU consumption of this particular SQL statement.
+
+```
+RU:273.842670
+```
+
+> **Note:**
+>
+> This value shows the actual RUs consumed by this execution. The same SQL statement might consume different amounts of RUs each time it is executed due to the effects of caching (for example, [coprocessor cache](/coprocessor-cache.md)).
+
+You can calculate the RU from the other values in `EXPLAIN ANALYZE`, specifically the `execution info` column. For example:
+
+```json
+'executeInfo':
+   time:2.55ms, 
+   loops:2, 
+   RU:0.329460, 
+   Get:{
+       num_rpc:1,
+       total_time:2.13ms
+   }, 
+   total_process_time: 231.5µs,
+   total_wait_time: 732.9µs, 
+   tikv_wall_time: 995.8µs,
+   scan_detail: {
+      total_process_keys: 1, 
+      total_process_keys_size: 150, 
+      total_keys: 1, 
+      get_snapshot_time: 691.7µs,
+      rocksdb: {
+          block: {
+              cache_hit_count: 2,
+              read_count: 1,
+              read_byte: 8.19 KB,
+              read_time: 10.3µs
+          }
+      }
+  },
+```
+
+The base costs are defined in the [`tikv/pd` source code](https://github.com/tikv/pd/blob/aeb259335644d65a97285d7e62b38e7e43c6ddca/client/resource_group/controller/config.go#L58C19-L67) and the calculations are performed in the [`model.go`](https://github.com/tikv/pd/blob/54219d649fb4c8834cd94362a63988f3c074d33e/client/resource_group/controller/model.go#L107) file.
+
+If you are using TiDB v7.1, the calculation is the sum of `BeforeKVRequest()` and `AfterKVRequest()` in `pd/pd-client/model.go`, that is:
+
+```
+before key/value request is processed:
+      consumption.RRU += float64(kc.ReadBaseCost) -> kv.ReadBaseCost * rpc_nums
+
+after key/value request is processed:
+      consumption.RRU += float64(kc.ReadBytesCost) * readBytes -> kc.ReadBytesCost * total_process_keys_size
+      consumption.RRU += float64(kc.CPUMsCost) * kvCPUMs -> kc.CPUMsCost * total_process_time
+```
+
+For writes and batch gets, the calculation is similar with different base costs.
+
+### Other common execution information
+
+The Coprocessor operators usually contain two parts of execution time information: `cop_task` and `tikv_task`. `cop_task` is the time recorded by TiDB, and it is from the moment that the request is sent to the server to the moment that the response is received. `tikv_task` is the time recorded by TiKV Coprocessor itself. If there is much difference between the two, it might indicate that the time spent waiting for the response is too long, or the time spent on gRPC or network is too long.
 
 ## MySQL compatibility
 

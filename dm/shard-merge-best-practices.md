@@ -20,7 +20,7 @@ To mitigate the impact on data migration when an exception occurs, it is recomme
 
 You can easily conclude from [Merge and Migrate Data from Sharded Tables](/dm/feature-shard-merge-pessimistic.md#principles) that DM's sharding DDL lock is a mechanism for coordinating the execution of DDL operations to the downstream from multiple upstream sharded tables.
 
-Therefore, when you find any sharding DDL lock on `DM-master` through `show-ddl-locks` command, or any `unresolvedGroups` or `blockingDDLs` on some DM-workers through `query-status` command, do not rush to manually release the sharding DDL lock through `unlock-ddl-lock` commands.
+Therefore, when you find any sharding DDL lock on `DM-master` through `shard-ddl-lock` command, or any `unresolvedGroups` or `blockingDDLs` on some DM-workers through `query-status` command, do not rush to manually release the sharding DDL lock through `shard-ddl-lock unlock` commands.
 
 Instead, you can:
 
@@ -32,7 +32,7 @@ Instead, you can:
 Data from multiple sharded tables might cause conflicts between the primary keys or unique indexes. You need to check each primary key or unique index based on the sharding logic of these sharded tables. The following are three cases related to primary keys or unique indexes:
 
 - Shard key: Usually, the same shard key only exists in one sharded table, which means no data conflict is caused on shard key.
-- Auto-increment primary key：The auto-increment primary key of each sharded tables counts separately, so their range might overlap. In this case, you need to refer to the next section [Handle conflicts of auto-increment primary key](/dm/shard-merge-best-practices.md#handle-conflicts-of-auto-increment-primary-key) to solve it.
+- Auto-increment primary key: The auto-increment primary key of each sharded tables counts separately, so their range might overlap. In this case, you need to refer to the next section [Handle conflicts of auto-increment primary key](/dm/shard-merge-best-practices.md#handle-conflicts-of-auto-increment-primary-key) to solve it.
 - Other primary keys or unique indexes: you need to analyze them based on the business logic. If data conflict, you can also refer to the next section [Handle conflicts of auto-increment primary key](/dm/shard-merge-best-practices.md#handle-conflicts-of-auto-increment-primary-key) to solve it.
 
 ## Handle conflicts of auto-increment primary key
@@ -118,6 +118,10 @@ Then you can perform the following steps to fix the `ERROR 1062 (23000): Duplica
 
 3. Run `query-status` to verify whether the data migration task is successfully processed and whether the data from upstream has already been merged and migrated to the downstream database.
 
+## Special processing when the upstream RDS contains sharded tables
+
+If the upstream data source is an RDS and it contains sharded tables, the table names in MySQL binlog might be invisible when connecting to a SQL client. For example, if the upstream is a UCloud distributed database, the table name in the binlog might have an extra prefix `_0001`. Therefore, you need to configure [table routing](/dm/dm-table-routing.md) based on the table names in binlog, instead of those in the SQL client.
+
 ## Create/drop tables in the upstream
 
 In [Merge and Migrate Data from Sharded Tables](/dm/feature-shard-merge-pessimistic.md#principles), it is clear that the coordination of sharding DDL lock depends on whether the downstream database receives the DDL statements of all upstream sharded tables. In addition, DM currently **does not support** dynamically creating or dropping sharded tables in the upstream. Therefore, to create or drop sharded tables in the upstream, it is recommended to perform the following steps.
@@ -142,7 +146,7 @@ If you need to create a new sharded table in the upstream, perform the following
 
 If you need to drop a sharded table in the upstream, perform the following steps:
 
-1. Drop the sharded table, run [`SHOW BINLOG EVENTS`](https://dev.mysql.com/doc/refman/5.7/en/show-binlog-events.html) to fetch the `End_log_pos` corresponding to the `DROP TABLE` statement in the binlog events, and mark it as *Pos-M*.
+1. Drop the sharded table, run [`SHOW BINLOG EVENTS`](https://dev.mysql.com/doc/refman/8.0/en/show-binlog-events.html) to fetch the `End_log_pos` corresponding to the `DROP TABLE` statement in the binlog events, and mark it as *Pos-M*.
 
 2. Run `query-status` to fetch the position (`syncerBinlog`) corresponding to the binlog event that has been processed by DM, and mark it as *Pos-S*.
 

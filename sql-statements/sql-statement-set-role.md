@@ -109,7 +109,7 @@ SELECT CURRENT_ROLE();
 
 ## MySQL compatibility
 
-This statement is understood to be fully compatible with roles, which are a feature of MySQL 8.0. Any compatibility differences should be [reported via an issue](https://github.com/pingcap/tidb/issues/new/choose) on GitHub.
+The `SET ROLE` statement in TiDB is fully compatible with the roles feature in MySQL 8.0. If you find any compatibility differences, [report a bug](https://docs.pingcap.com/tidb/stable/support).
 
 ## See also
 
@@ -118,4 +118,9 @@ This statement is understood to be fully compatible with roles, which are a feat
 * [`GRANT <role>`](/sql-statements/sql-statement-grant-role.md)
 * [`REVOKE <role>`](/sql-statements/sql-statement-revoke-role.md)
 * [SET DEFAULT ROLE](/sql-statements/sql-statement-set-default-role.md)
+
+<CustomContent platform="tidb">
+
 * [Role-Based Access Control](/role-based-access-control.md)
+
+</CustomContent>

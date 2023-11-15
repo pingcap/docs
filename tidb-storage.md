@@ -7,7 +7,7 @@ summary: Understand the storage layer of a TiDB database.
 
 This document introduces some design ideas and key concepts of [TiKV](https://github.com/tikv/tikv).
 
-![storage-architecture](/media/tidb-storage-architecture.png)
+![storage-architecture](/media/tidb-storage-architecture-1.png)
 
 ## Key-Value pairs
 
@@ -33,7 +33,7 @@ A simple way is to replicate data to multiple machines, so that even if one mach
 Raft is a consensus algorithm. This document only briefly introduces Raft. For more details, you can see [In Search of an Understandable Consensus Algorithm](https://raft.github.io/raft.pdf). The Raft has several important features:
 
 - Leader election
-- Membership changes (such as adding replicas, deleting replicas, transferring leaders, and so on)
+- Membership changes (such as adding replicas, deleting replicas, and transferring leaders)
 - Log replication
 
 TiKV use Raft to perform data replication. Each data change will be recorded as a Raft log. Through Raft log replication, data is safely and reliably replicated to multiple nodes of the Raft group. However, according to Raft protocol, successful writes only need that data is replicated to the majority of nodes.
@@ -49,7 +49,7 @@ To make it easy to understand, let's assume that all data only has one replica. 
 * Hash: Create Hash by Key and select the corresponding storage node according to the Hash value.
 * Range: Divide ranges by Key, where a segment of serial Key is stored on a node.
 
-TiKV chooses the second solution that divides the whole Key-Value space into a series of consecutive Key segments. Each segment is called a Region. There is a size limit for each Region to store data (the default value is 96 MB and the size can be configured). Each Region can be described by `[StartKey, EndKey)`, a left-closed and right-open interval.
+TiKV chooses the second solution that divides the whole Key-Value space into a series of consecutive Key segments. Each segment is called a Region. Each Region can be described by `[StartKey, EndKey)`, a left-closed and right-open interval. The default size limit for each Region is 96 MiB and the size can be configured.
 
 ![Region in TiDB](/media/tidb-storage-2.png)
 
@@ -64,7 +64,7 @@ These two tasks are very important and will be introduced one by one.
 
     At the same time, in order to ensure that the upper client can access the needed data, there is a component (PD) in the system to record the distribution of Regions on the node, that is, the exact Region of a Key and the node of that Region placed through any Key.
 
-* For the second task, TiKV replicates data in Regions, which means that data in one Region will have multiple replicas with the name “Replica”. Multiple Replicas of a Region are stored on different nodes to form a Raft Group, which is kept consistent through the Raft algorithm.
+* For the second task, TiKV replicates data in Regions, which means that data in one Region will have multiple replicas with the name "Replica". Multiple Replicas of a Region are stored on different nodes to form a Raft Group, which is kept consistent through the Raft algorithm.
 
     One of the Replicas serves as the Leader of the Group and other as the Follower. By default, all reads and writes are processed through the Leader, where reads are done and write are replicated to followers. The following diagram shows the whole picture about Region and Raft group.
 

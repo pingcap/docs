@@ -1,9 +1,9 @@
 ---
-title: Manage Data Source Configurations
+title: Manage Data Source Configurations in TiDB Data Migration
 summary: Learn how to manage upstream MySQL instances in TiDB Data Migration.
 ---
 
-# Manage Data Source Configurations
+# Manage Data Source Configurations in TiDB Data Migration
 
 This document introduces how to manage data source configurations, including encrypting the MySQL password, operating the data source, and changing the bindings between upstream MySQL instances and DM-workers using [dmctl](/dm/dmctl-introduction.md).
 
@@ -32,7 +32,7 @@ help operate-source
 ```
 
 ```
-`create`/`update`/`stop`/`show` upstream MySQL/MariaDB source.
+`create`/`stop`/`show` upstream MySQL/MariaDB source.
 
 Usage:
   dmctl operate-source <operate-type> [config-file ...] [--print-sample-config] [flags]
@@ -47,11 +47,9 @@ Global Flags:
 
 ### Flags description
 
-+ `create`: Creates one or more upstream database source(s). When creating multiple data sources fails, DM rolls back to the state where the command was not executed.
++ `create`: Creates one or more upstream database sources. When creating multiple data sources fails, DM rolls back to the state where the command was not executed.
 
-+ `update`: Updates an upstream database source.
-
-+ `stop`: Stops one or more upstream database source(s). When stopping multiple data sources fails, some data sources might be stopped.
++ `stop`: Stops one or more upstream database sources. When stopping multiple data sources fails, some data sources might be stopped.
 
 + `show`: Shows the added data source and the corresponding DM-worker.
 
@@ -94,14 +92,14 @@ The following is an example of the returned result:
 
 > **Note:**
 >
-> The `get-config` command is only supported in DM v2.0.1 and later versions.
+> The `config` command is only supported in DM v6.0 and later versions. For earlier versions, you must use the `get-config` command.
 
-If you know the `source-id`, you can run `dmctl --master-addr <master-addr> get-config source <source-id>` to get the data source configuration.
+If you know the `source-id`, you can run `dmctl --master-addr <master-addr> config source <source-id>` to get the data source configuration.
 
 {{< copyable "" >}}
 
 ```bash
-get-config source mysql-replica-01
+config source mysql-replica-01
 ```
 
 ```

@@ -72,15 +72,6 @@ EXPLAIN SELECT * FROM t1 WHERE intkey >= 99 AND intkey <= 103;
 +-------------------------------+---------+-----------+--------------------------------+-----------------------------------+
 3 rows in set (0.00 sec)
 
-+-------------------------------+---------+-----------+--------------------------------+-----------------------------------+
-| id                            | estRows | task      | access object                  | operator info                     |
-+-------------------------------+---------+-----------+--------------------------------+-----------------------------------+
-| IndexLookUp_10                | 5.67    | root      |                                |                                   |
-| ├─IndexRangeScan_8(Build)     | 5.67    | cop[tikv] | table:t1, index:intkey(intkey) | range:[300,310], keep order:false |
-| └─TableRowIDScan_9(Probe)     | 5.67    | cop[tikv] | table:t1                       | keep order:false                  |
-+-------------------------------+---------+-----------+--------------------------------+-----------------------------------+
-3 rows in set (0.00 sec)
-
 +-------------------------------+---------+-----------+--------------------------------+-----------------------------------------------------+
 | id                            | estRows | task      | access object                  | operator info                                       |
 +-------------------------------+---------+-----------+--------------------------------+-----------------------------------------------------+
@@ -145,7 +136,7 @@ EXPLAIN SELECT * FROM t1 ORDER BY intkey DESC LIMIT 10;
 
 ```
 
-In the above example, the last 20 rows are read from the index `intkey`. These `RowID` values are then retrieved from the table data.
+In the above example, the last 10 rows are read from the index `intkey`. These `RowID` values are then retrieved from the table data.
 
 ## IndexReader
 

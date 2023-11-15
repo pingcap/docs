@@ -30,7 +30,7 @@ This test runs in a Kubernetes cluster deployed with 3 TiDB instances, 3 TiKV in
 | TiKV  | `4151dc8878985df191b47851d67ca21365396133` |
 |  PD   | `811ce0b9a1335d1b2a049fd97ef9e186f1c9efc1` |
 
-Sysbench version：1.0.17
+Sysbench version: 1.0.17
 
 ### TiDB parameter configuration
 
@@ -345,5 +345,5 @@ When the target column of the `ADD INDEX` statement is irrelevant to online work
 
 ## Summary
 
-- When you perform frequent write operations (including `INSERT`, `DELETE` and `UPDATE` operations) to the target column of the `ADD INDEX` statement, the default `ADD INDEX` configuration  causes relatively frequent write conflicts, which has a great impact on online workloads. At the same time, the `ADD INDEX` operation takes a long time to complete due to continuous retry attempts. In this test, you can modify the product of `tidb_ddl_reorg_worker_cnt` and `tidb_ddl_reorg_batch_size` to 1/32 of the default value. For example, you can set `tidb_ddl_reorg_worker_cnt` to `4` and `tidb_ddl_reorg_batch_size` to `256` for better performance.
+- When you perform frequent write operations (including `INSERT`, `DELETE` and `UPDATE` operations) to the target column of the `ADD INDEX` statement, the default `ADD INDEX` configuration causes relatively frequent write conflicts, which has a great impact on online workloads. At the same time, the `ADD INDEX` operation takes a long time to complete due to continuous retry attempts. In this test, you can modify the product of `tidb_ddl_reorg_worker_cnt` and `tidb_ddl_reorg_batch_size` to 1/32 of the default value. For example, you can set `tidb_ddl_reorg_worker_cnt` to `4` and `tidb_ddl_reorg_batch_size` to `256` for better performance.
 - When only performing query operations to the target column of the `ADD INDEX` statement or the target column is not directly related to online workloads, you can use the default `ADD INDEX` configuration.

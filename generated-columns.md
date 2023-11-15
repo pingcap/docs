@@ -6,10 +6,6 @@ aliases: ['/docs/dev/generated-columns/','/docs/dev/reference/sql/generated-colu
 
 # Generated Columns
 
-> **Warning:**
->
-> This is still an experimental feature. It is **NOT** recommended that you use it in the production environment.
-
 This document introduces the concept and usage of generated columns.
 
 ## Basic concepts
@@ -24,7 +20,7 @@ You can create an index on a generated column whether it is virtual or stored.
 
 One of the main usage of generated columns is to extract data from the JSON data type and indexing the data.
 
-In both MySQL 5.7 and TiDB, columns of type JSON can not be indexed directly. That is, the following table schema is **not supported**:
+In both MySQL 5.7 and TiDB, columns of type JSON cannot be indexed directly. That is, the following table schema is **not supported**:
 
 {{< copyable "sql" >}}
 
@@ -48,7 +44,9 @@ CREATE TABLE person (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     address_info JSON,
-    city VARCHAR(64) AS (JSON_UNQUOTE(JSON_EXTRACT(address_info, '$.city'))),
+    city VARCHAR(64) AS (JSON_UNQUOTE(JSON_EXTRACT(address_info, '$.city'))), -- virtual generated column
+    -- city VARCHAR(64) AS (JSON_UNQUOTE(JSON_EXTRACT(address_info, '$.city'))) VIRTUAL, -- virtual generated column
+    -- city VARCHAR(64) AS (JSON_UNQUOTE(JSON_EXTRACT(address_info, '$.city'))) STORED, -- stored generated column
     KEY (city)
 );
 ```
@@ -67,7 +65,7 @@ SELECT name, id FROM person WHERE city = 'Beijing';
 EXPLAIN SELECT name, id FROM person WHERE city = 'Beijing';
 ```
 
-```
+```sql
 +---------------------------------+---------+-----------+--------------------------------+-------------------------------------------------------------+
 | id                              | estRows | task      | access object                  | operator info                                               |
 +---------------------------------+---------+-----------+--------------------------------+-------------------------------------------------------------+
@@ -107,13 +105,16 @@ ERROR 1048 (23000): Column 'city' cannot be null
 
 ## Generated columns index replacement rule
 
-When an expression in a query is equivalent to a generated column with an index, TiDB replaces the expression with the corresponding generated column, so that the optimizer can take that index into account during execution plan construction.
+When an expression in a query is strictly equivalent to a generated column with an index, TiDB replaces the expression with the corresponding generated column, so that the optimizer can take that index into account during execution plan construction.
 
-For example, the following example creates a generated column for the expression `a+1` and adds an index:
+The following example creates a generated column for the expression `a+1` and adds an index. The column type of `a` is int and the column type of `a+1` is bigint. If the type of the generated column is set to int, the replacement will not occur. For type conversion rules, see [Type Conversion of Expression Evaluation](/functions-and-operators/type-conversion-in-expression-evaluation.md).
 
 ```sql
 create table t(a int);
 desc select a+1 from t where a+1=3;
+```
+
+```sql
 +---------------------------+----------+-----------+---------------+--------------------------------+
 | id                        | estRows  | task      | access object | operator info                  |
 +---------------------------+----------+-----------+---------------+--------------------------------+
@@ -123,10 +124,15 @@ desc select a+1 from t where a+1=3;
 |     └─TableFullScan_5     | 10000.00 | cop[tikv] | table:t       | keep order:false, stats:pseudo |
 +---------------------------+----------+-----------+---------------+--------------------------------+
 4 rows in set (0.00 sec)
+```
 
+```sql
 alter table t add column b bigint as (a+1) virtual;
 alter table t add index idx_b(b);
 desc select a+1 from t where a+1=3;
+```
+
+```sql
 +------------------------+---------+-----------+-------------------------+---------------------------------------------+
 | id                     | estRows | task      | access object           | operator info                               |
 +------------------------+---------+-----------+-------------------------+---------------------------------------------+
@@ -138,11 +144,7 @@ desc select a+1 from t where a+1=3;
 
 > **Note:**
 >
-> Only when the expression type and the generated column type are strictly equal, the replacement is performed.
->
-> In the above example, the column type of `a` is int and the column type of `a+1` is bigint. If the type of the generated column is set to int, the replacement will not occur.
->
-> For type conversion rules, see [Type Conversion of Expression Evaluation](/functions-and-operators/type-conversion-in-expression-evaluation.md).
+> If the expression to be replaced and the generated column are both the string type but with different lengths, you can still replace the expression by setting the system variable [`tidb_enable_unsafe_substitute`](/system-variables.md#tidb_enable_unsafe_substitute-new-in-v630) to `ON`. When configuring this system variable, ensure that the value calculated by the generated column strictly satisfies the definition of the generated column. Otherwise, the data might be truncated due to the difference in length, resulting in an incorrect result. See GitHub issue [#35490](https://github.com/pingcap/tidb/issues/35490#issuecomment-1211658886).
 
 ## Limitations
 

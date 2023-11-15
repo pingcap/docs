@@ -1,63 +1,43 @@
 ---
-title: TiDB Lightning Deployment
+title: Deploy TiDB Lightning
 summary: Deploy TiDB Lightning to quickly import large amounts of new data.
 aliases: ['/docs/dev/tidb-lightning/deploy-tidb-lightning/','/docs/dev/reference/tools/tidb-lightning/deployment/']
 ---
 
-# TiDB Lightning Deployment
+# Deploy TiDB Lightning
 
-This document describes the hardware requirements of TiDB Lightning using the Local-backend, and how to deploy it manually.
+This document describes the hardware requirements of using TiDB Lightning to import data, and how to deploy it manually. Requirements on hardware resources vary with the import modes. For details, refer to the following docs:
 
-If Local-backend is used for data import, during the import process, **the cluster cannot provide services**. If you do not want the TiDB services to be impacted, perform the data import according to [TiDB Lightning TiDB-backend](/tidb-lightning/tidb-lightning-backends.md#tidb-lightning-tidb-backend).
+- [Physical Import Mode Requirements and Limitations](/tidb-lightning/tidb-lightning-physical-import-mode.md#requirements-and-restrictions)
+- [Logical Import Mode Requirements and Limitations](/tidb-lightning/tidb-lightning-logical-import-mode.md)
 
-## Notes
+## Online deployment using TiUP (recommended)
 
-Before starting TiDB Lightning, note that:
+1. Install TiUP using the following command:
 
-- If `tidb-lightning` crashes, the cluster is left in "import mode". Forgetting to switch back to "normal mode" can lead to a high amount of uncompacted data on the TiKV cluster, and cause abnormally high CPU usage and stall. You can manually switch the cluster back to "normal mode" via the `tidb-lightning-ctl` tool:
-
-    ```sh
-    bin/tidb-lightning-ctl --switch-mode=normal
+    ```shell
+    curl --proto '=https' --tlsv1.2 -sSf https://tiup-mirrors.pingcap.com/install.sh | sh
     ```
 
-- TiDB Lightning is required to have the following privileges in the downstream TiDB:
+    This command automatically adds TiUP to the `PATH` environment variable. You need to start a new terminal session or run `source ~/.bashrc` before you can use TiUP. (According to your environment, you may need to run `source ~/.profile`. For the specific command, check the output of TiUP.)
 
-    | Privilege | Scope |
-    |----:|:------|
-    | SELECT | Tables |
-    | INSERT | Tables |
-    | UPDATE | Tables |
-    | DELETE | Tables |
-    | CREATE | Databases, tables |
-    | DROP | Databases, tables |
-    | ALTER | Tables |
+2. Install TiDB Lightning using TiUP:
 
-    If the `checksum` configuration item of TiDB Lightning is set to `true`, then the admin user privileges in the downstream TiDB need to be granted to TiDB Lightning.
+    ```shell
+    tiup install tidb-lightning
+    ```
 
-## Hardware requirements
+## Manual deployment
 
-`tidb-lightning` is a resource-intensive program. It is recommended to deploy it as follows.
+### Download TiDB Lightning binaries
 
-- 32+ logical cores CPU
-- 20GB+ memory
-- An SSD large enough to store the entire data source, preferring higher read speed
-- 10 Gigabit network card (capable of transferring at ≥1 GB/s)
-- `tidb-lightning` fully consumes all CPU cores when running, and deploying on a dedicated machine is highly recommended. If not possible, `tidb-lightning` could be deployed together with other components like `tidb-server`, and the CPU usage could be limited via the `region-concurrency` setting.
+Refer to [Download TiDB Tools](/download-ecosystem-tools.md) and download TiDB Lightning binaries. TiDB Lightning is completely compatible with early versions of TiDB. It is recommended to use the latest version of TiDB Lightning.
 
-> **Note:**
->
-> - `tidb-lightning` is a CPU intensive program. In an environment with mixed components, the resources allocated to `tidb-lightning` must be limited. Otherwise, other components might not be able to run. It is recommended to set the `region-concurrency` to 75% of CPU logical cores. For instance, if the CPU has 32 logical cores, you can set the `region-concurrency` to 24.
+Unzip the TiDB Lightning binary package to obtain the `tidb-lightning` executable file:
 
-Additionally, the target TiKV cluster should have enough space to absorb the new data. Besides [the standard requirements](/hardware-and-software-requirements.md), the total free space of the target TiKV cluster should be larger than **Size of data source × [Number of replicas](/faq/deploy-and-maintain-faq.md#is-the-number-of-replicas-in-each-region-configurable-if-yes-how-to-configure-it) × 2**.
-
-With the default replica count of 3, this means the total free space should be at least 6 times the size of data source.
-
-## Export data
-
-Use the [`dumpling` tool](/dumpling-overview.md) to export data from MySQL by using the following command:
-
-```sh
-./bin/dumpling -h 127.0.0.1 -P 3306 -u root -t 16 -F 256MB -B test -f 'test.t[12]' -o /data/my_database/
+```bash
+tar -zxvf tidb-lightning-${version}-linux-amd64.tar.gz
+chmod +x tidb-lightning
 ```
 
 In this command,
@@ -67,7 +47,7 @@ In this command,
 - `-t 16`: means 16 threads are used to export the data.
 - `-F 256MB`: means a table is partitioned into chunks and one chunk is 256 MB.
 
-If the data source consists of CSV files, see [CSV support](/tidb-lightning/migrate-from-csv-using-tidb-lightning.md) for configuration.
+If the data source consists of CSV files, see [CSV support](/tidb-lightning/tidb-lightning-data-source.md#csv) for configuration.
 
 ## Deploy TiDB Lightning
 
@@ -83,7 +63,7 @@ You can find deployment instructions in [TiDB Quick Start Guide](/quick-start-wi
 
 #### Step 2: Download the TiDB Lightning installation package
 
-Refer to the [TiDB enterprise tools download page](/download-ecosystem-tools.md#tidb-lightning) to download the TiDB Lightning package. 
+Refer to the [Download TiDB Tools](/download-ecosystem-tools.md) document to download the TiDB Lightning package.
 
 > **Note:**
 >
@@ -95,7 +75,9 @@ Refer to the [TiDB enterprise tools download page](/download-ecosystem-tools.md#
 
 2. Mount the data source onto the same machine.
 
-3. Configure `tidb-lightning.toml`. For configurations that do not appear in the template below, TiDB Lightning writes a configuration error to the log file and exits. `sorted-kv-dir` must be an empty directory and the disk where the directory is located must have a lot of free space.
+3. Configure `tidb-lightning.toml`. For configurations that do not appear in the template below, TiDB Lightning writes a configuration error to the log file and exits.
+
+    `sorted-kv-dir` sets the temporary storage directory for the sorted Key-Value files. The directory must be empty, and the storage space **must be greater than the size of the dataset to be imported**. See [Downstream storage space requirements](/tidb-lightning/tidb-lightning-requirements.md#storage-space-of-the-target-database) for details.
 
     ```toml
     [lightning]
@@ -138,8 +120,8 @@ Refer to the [TiDB enterprise tools download page](/download-ecosystem-tools.md#
     nohup ./tidb-lightning -config tidb-lightning.toml > nohup.out &
     ```
 
-## Upgrading TiDB Lightning
+## Upgrade TiDB Lightning
 
-You can upgrade TiDB Lightning by replacing the binaries alone. No further configuration is needed. See [FAQ](/tidb-lightning/tidb-lightning-faq.md#how-to-properly-restart-tidb-lightning) for the detailed instructions of restarting TiDB Lightning.
+You can upgrade TiDB Lightning by replacing the binaries alone without further configurations. After the upgrade, you need to restart TiDB Lightning. For details, see [How to properly restart TiDB Lightning](/tidb-lightning/tidb-lightning-faq.md#how-to-properly-restart-tidb-lightning).
 
 If an import task is running, we recommend you to wait until it finishes before upgrading TiDB Lightning. Otherwise, there might be chances that you need to reimport from scratch, because there is no guarantee that checkpoints work across versions.

@@ -1,9 +1,9 @@
 ---
-title: Create a Data Source
+title: Create a Data Source for TiDB Data Migration
 summary: Learn how to create a data source for Data Migration (DM).
 ---
 
-# Create a Data Source
+# Create a Data Source for TiDB Data Migration
 
 > **Note:**
 >
@@ -31,7 +31,7 @@ A data source contains the information for accessing the upstream migration task
 
 2. Write the configuration file of the data source
 
-    For each data source, you need an individual configuration file to create it. You can follow the example below to create a data source whose ID is "mysql-01". First create the configuration file `./source-mysql-01.yaml`：
+    For each data source, you need an individual configuration file to create it. You can follow the example below to create a data source whose ID is "mysql-01". First create the configuration file `./source-mysql-01.yaml`:
 
     ```yaml
     source-id: "mysql-01"    # The ID of the data source, you can refer this source-id in the task configuration and dmctl command to associate the corresponding data source.
@@ -82,12 +82,12 @@ The returned results are as follows:
 
 After creating a data source, you can use the following command to query the data source:
 
-- If you konw the `source-id` of the data source, you can use the `dmctl get-config source <source-id>` command to directly check the configuration of the data source:
+- If you konw the `source-id` of the data source, you can use the `dmctl config source <source-id>` command to directly check the configuration of the data source:
 
     {{< copyable "shell-regular" >}}
 
     ```bash
-    tiup dmctl --master-addr <master-addr> get-config source mysql-01
+    tiup dmctl --master-addr <master-addr> config source mysql-01
     ```
 
     ```

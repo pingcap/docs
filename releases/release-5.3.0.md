@@ -19,6 +19,7 @@ In v5.3, the key new features or improvements are as follows:
 + Support saving and restoring the on-site information of a cluster with a single SQL statement, which helps improve the efficiency of troubleshooting issues relating to execution plans
 + Support the continuous profiling experimental feature to improve the observability of database performance
 + Continue optimizing the storage and computing engines to improve the system performance and stability
++ Reduce the write latency of TiKV by separating I/O operations from Raftstore thread pool (disabled by default)
 
 ## Compatibility changes
 
@@ -45,7 +46,7 @@ In v5.3, the key new features or improvements are as follows:
 | TiKV | `memory-usage-limit` | Modified  | This configuration item is new in TiDB v5.3.0 and its value is calculated based on storage.block-cache.capacity. |
 | TiKV | [`raftstore.store-io-pool-size`](/tikv-configuration-file.md#store-io-pool-size-new-in-v530) | Newly added | The allowable number of threads that process Raft I/O tasks, which is the size of the StoreWriter thread pool. When you modify the size of this thread pool, refer to [Performance tuning for TiKV thread pools](/tune-tikv-thread-performance.md#performance-tuning-for-tikv-thread-pools). |
 | TiKV | [`raftstore.raft-write-size-limit`](/tikv-configuration-file.md#raft-write-size-limit-new-in-v530) | Newly added | Determines the threshold at which Raft data is written into the disk. If the data size is larger than the value of this configuration item, the data is written to the disk. When the value of `raftstore.store-io-pool-size` is `0`, this configuration item does not take effect. |
-| TiKV | [`raftstore.raft-msg-flush-interval`](/tikv-configuration-file.md#raft-msg-flush-interval-new-in-v530) | Newly added | Determines the interval at which Raft messages are sent in batches. The Raft messages in batches are sent at every interval specified by this configuration item. When the value of `raftstore.store-io-pool-size` is `0`, this configuration item does not take effect. |
+| TiKV | `raftstore.raft-msg-flush-interval` | Newly added | Determines the interval at which Raft messages are sent in batches. The Raft messages in batches are sent at every interval specified by this configuration item. When the value of `raftstore.store-io-pool-size` is `0`, this configuration item does not take effect. |
 | TiKV | `raftstore.raft-reject-transfer-leader-duration`  | Deleted | Determines the smallest duration that a Leader is transferred to a newly added node. |
 | PD | [`log.file.max-days`](/pd-configuration-file.md#max-days) | Modified | Controls the maximum number of days that logs are retained for. The default value is changed from `1` to `0`. |
 | PD | [`log.file.max-backups`](/pd-configuration-file.md#max-backups) | Modified | Controls the maximum number of logs that are retained for. The default value is changed from `7` to `0`.  |
@@ -62,9 +63,9 @@ In v5.3, the key new features or improvements are as follows:
     - Since v5.3.0, TiCDC and BR support [global temporary tables](/temporary-tables.md#global-temporary-tables). If you use TiCDC and BR of a version earlier than v5.3.0 to replicate global temporary tables to the downstream, a table definition error occurs.
     - The following clusters are expected to be v5.3.0 or later; otherwise, data error is reported when you create a global temporary table:
 
-        - the cluster to be imported using TiDB ecosystem tools
-        - the cluster restored using TiDB ecosystem tools
-        - the downstream cluster in a replication task using TiDB ecosystem tools
+        - the cluster to be imported using TiDB migration tools
+        - the cluster restored using TiDB migration tools
+        - the downstream cluster in a replication task using TiDB migration tools
     - For the compatibility information of temporary tables, refer to [Compatibility with MySQL temporary tables](/temporary-tables.md#compatibility-with-mysql-temporary-tables) and [Compatibility restrictions with other TiDB features](/temporary-tables.md#compatibility-restrictions-with-other-tidb-features).
 
 - For releases earlier than v5.3.0, TiDB reports an error when a system variable is set to an illegal value. For v5.3.0 and later releases, TiDB returns success with a warning such as "|Warning | 1292 | Truncated incorrect xxx: 'xx'" when a system variable is set to an illegal value.
@@ -72,8 +73,9 @@ In v5.3, the key new features or improvements are as follows:
 - The system variable `sql_auto_is_null` is added to the noop functions. When `tidb_enable_noop_functions = 0/OFF`, modifying this variable value causes an error.
 - The `GRANT ALL ON performance_schema.*` syntax is no longer permitted. If you execute this statement in TiDB, an error occurs.
 - Fix the issue that auto-analyze is unexpectedly triggered outside the specified time period when new indexes are added before v5.3.0. In v5.3.0, after you set the time period through the `tidb_auto_analyze_start_time` and `tidb_auto_analyze_end_time` variables, auto-analyze is triggered only during this time period.
-- The default storage directory for plugins is changed from "" to /data/deploy/plugin.
+- The default storage directory for plugins is changed from `""` to `/data/deploy/plugin`.
 - The DM code is migrated to [the folder "dm" in TiCDC code repository](https://github.com/pingcap/tiflow/tree/master/dm). Now DM follows TiDB in version numbers. Next to v2.0.x, the new DM version is v5.3.0, and you can upgrade from v2.0.x to v5.3.0 without any risk.
+- The default deployed version of Prometheus is upgraded from v2.8.1 to [v2.27.1](https://github.com/prometheus/prometheus/releases/tag/v2.27.1), which is released in May 2021. This version provides more features and fixes a security issue. Compared with Prometheus v2.8.1, alert time representation in v2.27.1 is changed from Unix timestamp to UTC. For details, refer to [Prometheus commit](https://github.com/prometheus/prometheus/commit/7646cbca328278585be15fa615e22f2a50b47d06) for more details.
 
 ## New features
 
@@ -115,7 +117,7 @@ In v5.3, the key new features or improvements are as follows:
 
     Support the `ALTER TABLE [PARTITION] ATTRIBUTES` statement that allows you to set attributes for a table or partition. Currently, TiDB only supports setting the `merge_option` attribute. By adding this attribute, you can explicitly control the Region merge behavior.
 
-    User scenarios: When you perform the `SPLIT TABLE` operation, if no data is inserted after a certain period of time, the empty Regions are automatically merged by default. In this case, you can set the table attribute to `merge_option=deny` to avoid the automatic merging of Regions.
+    User scenarios: When you perform the `SPLIT TABLE` operation, if no data is inserted after a certain period of time (controlled by the PD parameter [`split-merge-interval`](/pd-configuration-file.md#split-merge-interval)), the empty Regions are automatically merged by default. In this case, you can set the table attribute to `merge_option=deny` to avoid the automatic merging of Regions.
 
     [User document](/table-attributes.md), [#3839](https://github.com/tikv/pd/issues/3839)
 
@@ -135,7 +137,7 @@ In v5.3, the key new features or improvements are as follows:
 
     TiDB optimizes its timestamp processing flow and reduces the timestamp processing load of PD by enabling PD Follower Proxy and modifying the batch waiting time required when the PD client requests TSO in batches. This helps improve the overall scalability of the system.
 
-    - Support enabling or disabling PD Follower Proxy through the system variable [`tidb_enable_tso_follower_proxy`](/system-variables.md#tidb_enable_tso_follower_proxy-new-in-v530). Suppose that the TSO requests load of PD is too high. In this case, enabling PD follower proxy can batch forward the TSO requests collected during the request cycle on followers to the leader nodes. This solution can effectively reduce the number of direct interactions between clients and leaders, reduce the pressure of the load on leaders, and improve the overall performance of TiDB. 
+    - Support enabling or disabling PD Follower Proxy through the system variable [`tidb_enable_tso_follower_proxy`](/system-variables.md#tidb_enable_tso_follower_proxy-new-in-v530). Suppose that the TSO requests load of PD is too high. In this case, enabling PD follower proxy can batch forward the TSO requests collected during the request cycle on followers to the leader nodes. This solution can effectively reduce the number of direct interactions between clients and leaders, reduce the pressure of the load on leaders, and improve the overall performance of TiDB.
 
     > **Note:**
     >
@@ -153,7 +155,7 @@ In v5.3, the key new features or improvements are as follows:
 
 - **Support Online Unsafe Recovery after some stores are permanently damaged (experimental feature)**
 
-    Support the `unsafe remove-failed-stores` command that performs online data unsafe recovery. Suppose that the majority of data replicas encounter issues like permanent damage (such as disk damage), and these issues cause the data ranges in an application to be unreadable or unwritable. In this case, you can use the Online Unsafe Recovery feature implemented in PD to recover the data, so that the data is readable or writable again.
+    Support the `pd-ctl unsafe remove-failed-stores` command that performs online data unsafe recovery. Suppose that the majority of data replicas encounter issues like permanent damage (such as disk damage), and these issues cause the data ranges in an application to be unreadable or unwritable. In this case, you can use the Online Unsafe Recovery feature implemented in PD to recover the data, so that the data is readable or writable again.
 
     It is recommended to perform the feature-related operations with the support of the TiDB team.
 
@@ -208,7 +210,7 @@ In v5.3, the key new features or improvements are as follows:
 
 - **Save and restore the on-site information of a cluster**
 
-    When you locate and troubleshoot the issues of a TiDB cluster, you often need to provide information on the system and the query plan. To help you get the information and troubleshoot cluster issues in a more convenient and efficient way, the `PLAN REPLAY` command is introduced in TiDB v5.3.0. This command enables you to easily save and restore the on-site information of a cluster, improves the efficiency of troubleshooting, and helps you more easily archive the issues for management.
+    When you locate and troubleshoot the issues of a TiDB cluster, you often need to provide information on the system and the query plan. To help you get the information and troubleshoot cluster issues in a more convenient and efficient way, the `PLAN REPLAYER` command is introduced in TiDB v5.3.0. This command enables you to easily save and restore the on-site information of a cluster, improves the efficiency of troubleshooting, and helps you more easily archive the issues for management.
 
     The features of `PLAN REPLAYER` are as follows:
 
@@ -225,11 +227,11 @@ In v5.3, the key new features or improvements are as follows:
 
     This feature supports TiCDC to replicate incremental data from a TiDB cluster to the secondary relational database TiDB/Aurora/MySQL/MariaDB. In case the primary cluster crashes, TiCDC can recover the secondary cluster to a certain snapshot in the primary cluster within 5 minutes, given the condition that before disaster the replication status of TiCDC is normal and replication lag is small. It allows data loss of less than 30 minutes, that is, RTO <= 5min, and RPO <= 30min.
 
-    [User document](/ticdc/manage-ticdc.md)
+    [User document](/ticdc/ticdc-sink-to-mysql.md#eventually-consistent-replication-in-disaster-scenarios)
 
 - **TiCDC supports the HTTP protocol OpenAPI for managing TiCDC tasks**
 
-    Since TiDB v5.3.0, TiCDC OpenAPI becomes an General Availability (GA) feature. You can query and operate TiCDC clusters using OpenAPI in the production environment.
+    Since TiDB v5.3.0, TiCDC OpenAPI becomes a General Availability (GA) feature. You can query and operate TiCDC clusters using OpenAPI in the production environment.
 
 ### Deployment and maintenance
 
@@ -272,11 +274,12 @@ Starting from TiCDC v5.3.0, the cyclic replication feature between TiDB clusters
     - Improve the error log report in the raft client module [#10944](https://github.com/tikv/tikv/pull/10944)
     - Improve logging threads to avoid them becoming a performance bottleneck [#10841](https://github.com/tikv/tikv/issues/10841)
     - Add more statistics types of write queries [#10507](https://github.com/tikv/tikv/issues/10507)
+    - Reduce the write latency by separating I/O operations from Raftstore thread pool (disabled by default). For more information about tuning, see [Tune TiKV Thread Pool Performance](/tune-tikv-thread-performance.md) [#10540](https://github.com/tikv/tikv/issues/10540)
 
 + PD
 
     - Add more types of write queries to QPS dimensions in the hotspot scheduler [#3869](https://github.com/tikv/pd/issues/3869)
-    - Support dynamically adjusting the retry limit of the balance Region scheduler to improve the performance of the scheduler [#3744](https://github.com/tikv/pd/issues/3744)
+    - Support dynamically adjusting the retry limit of the Balance Region scheduler to improve the performance of the scheduler [#3744](https://github.com/tikv/pd/issues/3744)
     - Update TiDB Dashboard to v2021.10.08.1 [#4070](https://github.com/tikv/pd/pull/4070)
     - Support that the evict leader scheduler can schedule Regions with unhealthy peers [#4093](https://github.com/tikv/pd/issues/4093)
     - Speed up the exit process of schedulers [#4146](https://github.com/tikv/pd/issues/4146)
@@ -306,7 +309,7 @@ Starting from TiCDC v5.3.0, the cyclic replication feature between TiDB clusters
     + TiCDC
 
         - Reduce the default value of the Kafka sink configuration item `MaxMessageBytes` from 64 MB to 1 MB to fix the issue that large messages are rejected by the Kafka Broker [#3104](https://github.com/pingcap/tiflow/pull/3104)
-        - Reduce memory usage in the replication pipeline [#2553](https://github.com/pingcap/tiflow/issues/2553)[#3037](https://github.com/pingcap/tiflow/pull/3037) [#2726](https://github.com/pingcap/tiflow/pull/2726)
+        - Reduce memory usage in the replication pipeline [#2553](https://github.com/pingcap/tiflow/issues/2553) [#3037](https://github.com/pingcap/tiflow/pull/3037) [#2726](https://github.com/pingcap/tiflow/pull/2726)
         - Optimize monitoring items and alert rules to improve observability of synchronous links, memory GC, and stock data scanning processes [#2735](https://github.com/pingcap/tiflow/pull/2735) [#1606](https://github.com/pingcap/tiflow/issues/1606) [#3000](https://github.com/pingcap/tiflow/pull/3000) [#2985](https://github.com/pingcap/tiflow/issues/2985) [#2156](https://github.com/pingcap/tiflow/issues/2156)
         - When the sync task status is normal, no more historical error messages are displayed to avoid misleading users [#2242](https://github.com/pingcap/tiflow/issues/2242)
 
@@ -315,10 +318,10 @@ Starting from TiCDC v5.3.0, the cyclic replication feature between TiDB clusters
 + TiDB
 
     - Fix an error that occurs during execution caused by the wrong execution plan. The wrong execution plan is caused by the shallow copy of schema columns when pushing down the aggregation operators on partitioned tables [#27797](https://github.com/pingcap/tidb/issues/27797) [#26554](https://github.com/pingcap/tidb/issues/26554)
-    - Fix the issue that plan-cache cannot detect changes of unsigned flags [#28254](https://github.com/pingcap/tidb/issues/28254)
+    - Fix the issue that `plan cache` cannot detect changes of unsigned flags [#28254](https://github.com/pingcap/tidb/issues/28254)
     - Fix the wrong partition pruning when the partition function is out of range [#28233](https://github.com/pingcap/tidb/issues/28233)
     - Fix the issue that planner might cache invalid plans for `join` in some cases [#28087](https://github.com/pingcap/tidb/issues/28087)
-    - Fix wrong index hash join when hash column type is enum [#27893](https://github.com/pingcap/tidb/issues/27893)
+    - Fix wrong `IndexLookUpJoin` when hash column type is `enum` [#27893](https://github.com/pingcap/tidb/issues/27893)
     - Fix a batch client bug that recycling idle connection might block sending requests in some rare cases [#27688](https://github.com/pingcap/tidb/pull/27688)
     - Fix the TiDB Lightning panic issue when it fails to perform checksum on a target cluster [#27686](https://github.com/pingcap/tidb/pull/27686)
     - Fix wrong results of the `date_add` and `date_sub` functions in some cases [#27232](https://github.com/pingcap/tidb/issues/27232)
@@ -327,7 +330,7 @@ Starting from TiCDC v5.3.0, the cyclic replication feature between TiDB clusters
     - Fix the issue that auto analyze might be triggered out of the specified time when a new index is added [#28698](https://github.com/pingcap/tidb/issues/28698)
     - Fix a bug that setting any session variable invalidates `tidb_snapshot` [#28683](https://github.com/pingcap/tidb/pull/28683)
     - Fix a bug that BR is not working for clusters with many missing-peer Regions [#27534](https://github.com/pingcap/tidb/issues/27534)
-    - Fix  the unexpected error like `tidb_cast to Int32 is not supported` when the unsupported `cast` is pushed down to TiFlash [#23907](https://github.com/pingcap/tidb/issues/23907)
+    - Fix the unexpected error like `tidb_cast to Int32 is not supported` when the unsupported `cast` is pushed down to TiFlash [#23907](https://github.com/pingcap/tidb/issues/23907)
     - Fix the issue that `DECIMAL overflow` is missing in the `%s value is out of range in '%s'`error message  [#27964](https://github.com/pingcap/tidb/issues/27964)
     - Fix a bug that the availability detection of MPP node does not work in some corner cases [#3118](https://github.com/pingcap/tics/issues/3118)
     - Fix the `DATA RACE` issue when assigning `MPP task ID` [#27952](https://github.com/pingcap/tidb/issues/27952)
@@ -350,7 +353,7 @@ Starting from TiCDC v5.3.0, the cyclic replication feature between TiDB clusters
     - Fix the issue that the retried transactions' statements are not included in `TIDB_TRX` [#28670](https://github.com/pingcap/tidb/pull/28670)
     - Fix the wrong default value of the `plugin_dir` configuration [#28084](https://github.com/pingcap/tidb/issues/28084)
     - Fix the issue that the `CONVERT_TZ` function returns `NULL` when it is given a named timezone and a UTC offset [#8311](https://github.com/pingcap/tidb/issues/8311)
-    - Fix the issue that `CREATE SCHEMA` does not use the character set specified by `character_set_server` and `collation_server` for new schemas if none are provided as part of the statement [27216](https://github.com/pingcap/tidb/pull/27216)
+    - Fix the issue that `CREATE SCHEMA` does not use the character set specified by `character_set_server` and `collation_server` for new schemas if none are provided as part of the statement [#27214](https://github.com/pingcap/tidb/issues/27214)
 
 + TiKV
 
@@ -404,4 +407,4 @@ Starting from TiCDC v5.3.0, the cyclic replication feature between TiDB clusters
 
     + TiDB Binlog
 
-        - Fix the issue that when most tables are filtered out, checkpoint can not be updated under some special load [#1075](https://github.com/pingcap/tidb-binlog/pull/1075)
+        - Fix the issue that when most tables are filtered out, checkpoint cannot be updated under some special load [#1075](https://github.com/pingcap/tidb-binlog/pull/1075)

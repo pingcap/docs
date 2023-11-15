@@ -26,6 +26,7 @@ The blocklist of optimization rules is one way to tune optimization rules, mainl
 | Aggregation pushdown | aggregation_push_down | Tries to push aggregations down to their children. |
 | TopN pushdown | topn_push_down | Tries to push the TopN operator to the place closer to the data source. |
 | Join reorder | join_reorder | Decides the order of multi-table joins. |
+| Derive TopN or Limit from window functions | derive_topn_from_window | Derives the TopN or Limit operator from window functions. |
 
 ### Disable optimization rules
 
@@ -75,16 +76,9 @@ You can use the blocklist of optimization rules to disable some of them if some 
 
 The blocklist of expression pushdown is one way to tune the expression pushdown, mainly used to manually disable some expressions of some specific data types.
 
-### Expressions which are supported to be pushed down
+### Expressions that are supported to be pushed down
 
-| Expression Classification | Concrete Operations |
-| :-------------- | :------------------------------------- |
-| [Logical operations](/functions-and-operators/operators.md#logical-operators) | AND (&&), OR (&#124;&#124;), NOT (!) |
-| [Comparison functions and operators](/functions-and-operators/operators.md#comparison-functions-and-operators) | <, <=, =, != (`<>`), >, >=, [`<=>`](https://dev.mysql.com/doc/refman/5.7/en/comparison-operators.html#operator_equal-to), [`IN()`](https://dev.mysql.com/doc/refman/5.7/en/comparison-operators.html#function_in), IS NULL, LIKE, IS TRUE, IS FALSE, [`COALESCE()`](https://dev.mysql.com/doc/refman/5.7/en/comparison-operators.html#function_coalesce) |
-| [Numeric functions and operators](/functions-and-operators/numeric-functions-and-operators.md) | +, -, *, /, [`ABS()`](https://dev.mysql.com/doc/refman/5.7/en/mathematical-functions.html#function_abs), [`CEIL()`](https://dev.mysql.com/doc/refman/5.7/en/mathematical-functions.html#function_ceil), [`CEILING()`](https://dev.mysql.com/doc/refman/5.7/en/mathematical-functions.html#function_ceiling), [`FLOOR()`](https://dev.mysql.com/doc/refman/5.7/en/mathematical-functions.html#function_floor) |
-| [Control flow functions](/functions-and-operators/control-flow-functions.md) | [`CASE`](https://dev.mysql.com/doc/refman/5.7/en/flow-control-functions.html#operator_case), [`IF()`](https://dev.mysql.com/doc/refman/5.7/en/flow-control-functions.html#function_if), [`IFNULL()`](https://dev.mysql.com/doc/refman/5.7/en/flow-control-functions.html#function_ifnull) |
-| [JSON functions](/functions-and-operators/json-functions.md) | [JSON_TYPE(json_val)](https://dev.mysql.com/doc/refman/5.7/en/json-attribute-functions.html#function_json-type),<br/> [JSON_EXTRACT(json_doc, path[, path] ...)](https://dev.mysql.com/doc/refman/5.7/en/json-search-functions.html#function_json-extract),<br/> [JSON_UNQUOTE(json_val)](https://dev.mysql.com/doc/refman/5.7/en/json-modification-functions.html#function_json-unquote),<br/> [JSON_OBJECT(key, val[, key, val] ...)](https://dev.mysql.com/doc/refman/5.7/en/json-creation-functions.html#function_json-object),<br/> [JSON_ARRAY([val[, val] ...])](https://dev.mysql.com/doc/refman/5.7/en/json-creation-functions.html#function_json-array),<br/> [JSON_MERGE(json_doc, json_doc[, json_doc] ...)](https://dev.mysql.com/doc/refman/5.7/en/json-modification-functions.html#function_json-merge),<br/> [JSON_SET(json_doc, path, val[, path, val] ...)](https://dev.mysql.com/doc/refman/5.7/en/json-modification-functions.html#function_json-set),<br/> [JSON_INSERT(json_doc, path, val[, path, val] ...)](https://dev.mysql.com/doc/refman/5.7/en/json-modification-functions.html#function_json-insert),<br/> [JSON_REPLACE(json_doc, path, val[, path, val] ...)](https://dev.mysql.com/doc/refman/5.7/en/json-modification-functions.html#function_json-replace),<br/> [JSON_REMOVE(json_doc, path[, path] ...)](https://dev.mysql.com/doc/refman/5.7/en/json-modification-functions.html#function_json-remove) |
-| [Date and time functions](/functions-and-operators/date-and-time-functions.md) | [`DATE_FORMAT()`](https://dev.mysql.com/doc/refman/5.7/en/date-and-time-functions.html#function_date-format)  |
+For more information about the expressions that are supported to be pushed down, see [Supported expressions for pushdown to TiKV](/functions-and-operators/expressions-pushed-down.md#supported-expressions-for-pushdown-to-tikv).
 
 ### Disable the pushdown of specific expressions
 
@@ -146,7 +140,7 @@ To remove one or more expressions from the blocklist, perform the following step
 
 In the following example, the `<` and `>` operators are added to the blocklist, and then the `>` operator is removed from the blocklist.
 
-To judge whether the blocklist takes effect, observe the results of `EXPLAIN` (See [Optimize SQL statements using `EXPLAIN`](/explain-overview.md)).
+To judge whether the blocklist takes effect, observe the results of `EXPLAIN` (See [TiDB Query Execution Plan Overview](/explain-overview.md)).
 
 1. The predicates `a < 2` and `a > 2` in the `WHERE` clause of the following SQL statement can be pushed down to TiKV.
 

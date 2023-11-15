@@ -11,18 +11,14 @@ This document uses an example to walk through the whole procedure of such kind o
 
 If the data size of the MySQL shards is less than 1 TiB, you can follow the procedure described in [Migrate and Merge MySQL Shards of Small Datasets to TiDB](/migrate-small-mysql-shards-to-tidb.md), which supports both full and incremental migration and the steps are easier.
 
-The following diagram shows how to migrate and merge MySQL sharded tables to TiDB using Dumpling and TiDB Lightning.
-
-![Use Dumpling and TiDB Lightning to migrate and merge MySQL shards to TiDB](/media/shard-merge-using-lightning-en.png)
-
-This example assumes that you have two databases, `my_db1` and `my_db2`. You use Dumpling to export two tables `table1` and `table2` from `my_db1`, and two tables `table3` and `table4` from `my_db2`, respectively. After that, you use TiDB Lighting to import and merge the four exported tables into the same `table5` from `mydb` in the target TiDB.
+The example in this document assumes that you have two databases, `my_db1` and `my_db2`. You use Dumpling to export two tables `table1` and `table2` from `my_db1`, and two tables `table3` and `table4` from `my_db2`, respectively. After that, you use TiDB Lightning to import and merge the four exported tables into the same `table5` from `mydb` in the target TiDB.
 
 In this document, you can migrate data following this procedure:
 
 1. Use Dumpling to export full data. In this example, you export 2 tables respectively from 2 upstream databases:
 
-   - Export `table1` and `table2` from `my_db1`
-   - Export `table3` and `table4` from `my_db2`
+    - Export `table1` and `table2` from `my_db1`
+    - Export `table3` and `table4` from `my_db2`
 
 2. Start TiDB Lightning to migrate data to `mydb.table5` in TiDB.
 
@@ -32,48 +28,20 @@ In this document, you can migrate data following this procedure:
 
 Before getting started, see the following documents to prepare for the migration task.
 
-- [Deploy a DM Cluster Using TiUP](https://docs.pingcap.com/tidb-data-migration/stable/deploy-a-dm-cluster-using-tiup)
+- [Deploy a DM Cluster Using TiUP](/dm/deploy-a-dm-cluster-using-tiup.md)
 - [Use TiUP to Deploy Dumpling and Lightning](/migration-tools.md)
-- [Privileges required by DM-worker](https://docs.pingcap.com/tidb-data-migration/stable/dm-worker-intro#privileges-required-by-dm-worker)
-- [Upstream Permissions for Lightning](/tidb-lightning/tidb-lightning-faq.md#what-are-the-privilege-requirements-for-the-target-database)
-- [Downstream Permissions for Dumpling](/dumpling-overview.md#export-data-from-tidbmysql)
-
-### Resource requirements
-
-**Operating system**: Examples in this document use new, clean CentOS 7 instances. You can deploy a virtual machine on your own host locally, or on a vendor-provided cloud platform. TiDB Lightning consumes as much CPU resources as needed by default, so it is recommended to deploy TiDB Lightning on a dedicated machine. If you do not have a dedicated machine for TiDB Lightning, you can deploy TiDB Lightning on a shared machine with other components (such as `tikv-server`) and limit TiDB Lightning's CPU usage by configuring `region-concurrency` to 75% of the number of logical CPUs.
-
-**Memory and CPU**: TiDB Lightning consumes high resources, so it is recommended to allocate more than 64 GB of memory and 32-core CPU for TiDB Lightning. To get the best performance, make sure the CPU core to memory (GB) ratio is more than 1:2.
-
-**Disk space**:
-
-- Dumpling requires enough disk space to store the whole data source. SSD is recommended.
-- During the import, TiDB Lightning needs temporary space to store the sorted key-value pairs. The disk space should be enough to hold the largest single table from the data source.
-- If the full data volume is large, you can increase the binlog storage time in the upstream. This is to ensure that the binlogs are not lost during the incremental replication.
-
-**Note**: You cannot calculate the exact data volume exported by Dumpling from MySQL, but you can estimate the data volume by using the following SQL statement to summarize the `data-length` field in the `information_schema.tables` table:
-
-{{< copyable "" >}}
-
-```sql
-/* Calculate the size of all schemas, in MiB. Replace ${schema_name} with your schema name. */
-SELECT table_schema,SUM(data_length)/1024/1024 AS data_length,SUM(index_length)/1024/1024 AS index_length,SUM(data_length+index_length)/1024/1024 AS SUM FROM information_schema.tables WHERE table_schema = "${schema_name}" GROUP BY table_schema;
-
-/* Calculate the size of the largest table, in MiB. Replace ${schema_name} with your schema name. */
-SELECT table_name,table_schema,SUM(data_length)/1024/1024 AS data_length,SUM(index_length)/1024/1024 AS index_length,SUM(data_length+index_length)/1024/1024 AS SUM from information_schema.tables WHERE table_schema = "${schema_name}" GROUP BY table_name,table_schema ORDER BY SUM DESC LIMIT 5;
-```
-
-### Disk space for the target TiKV cluster
-
-The target TiKV cluster must have enough disk space to store the imported data. In addition to [the standard hardware requirements](/hardware-and-software-requirements.md), the storage space of the target TiKV cluster must be larger than **the size of the data source x [the number of replicas](/faq/deploy-and-maintain-faq.md#is-the-number-of-replicas-in-each-region-configurable-if-yes-how-to-configure-it) x 2**. For example, if the cluster uses 3 replicas by default, the target TiKV cluster must have a storage space larger than 6 times the size of the data source. The formula has `x 2` because:
-
-- Index might take extra space.
-- RocksDB has a space amplification effect.
+- [Downstream privilege requirements for Dumpling](/dumpling-overview.md#export-data-from-tidb-or-mysql)
+- [Downstream privilege requirements for TiDB Lightning](/tidb-lightning/tidb-lightning-requirements.md)
+- [Downstream storage space for TiDB Lightning](/tidb-lightning/tidb-lightning-requirements.md)
+- [Privileges required by DM-worker](/dm/dm-worker-intro.md)
 
 ### Check conflicts for Sharded Tables
 
-If the migration involves merging data from different sharded tables, primary key or unique index conflicts may occur during the merge. Therefore, before migration, you need to take a deep look at the current sharding scheme from the business point of view, and find a way to avoid the conflicts. For more details, see [Handle conflicts between primary keys or unique indexes across multiple sharded tables](https://docs.pingcap.com/tidb-data-migration/stable/shard-merge-best-practices#handle-conflicts-between-primary-keys-or-unique-indexes-across-multiple-sharded-tables). The following is a brief description.
+If the migration involves merging data from different sharded tables, primary key or unique index conflicts may occur during the merge. Therefore, before migration, you need to take a deep look at the current sharding scheme from the business point of view, and find a way to avoid conflicts. For more details, see [Handle conflicts between primary keys or unique indexes across multiple sharded tables](/dm/shard-merge-best-practices.md#handle-conflicts-between-primary-keys-or-unique-indexes-across-multiple-sharded-tables). The following is a brief description.
 
 Assume that tables 1~4 have the same table structure as follows.
+
+{{< copyable "sql" >}}
 
 ```sql
 CREATE TABLE `table1` (
@@ -87,6 +55,8 @@ CREATE TABLE `table1` (
 ```
 
 For those four tables, the `id` column is the primary key. It is auto-incremental, which will cause different sharded tables to generate duplicated `id` ranges and cause the primary key conflict on the target table during the migration. On the other hand, the `sid` column is the sharding key, which ensures that the index is unique globally. So you can remove the unique constraint of the `id` column in the target `table5` to avoid the data merge conflicts.
+
+{{< copyable "sql" >}}
 
 ```sql
 CREATE TABLE `table5` (
@@ -124,11 +94,11 @@ The following table describes parameters in the command above. For more informat
 | `-p` or `--port`       |   Specifies the port to be used.|
 | `-h` or `--host`       |   Specifies the IP address of the data source.  |
 | `-t` or `--thread`     |   Specifies the number of threads for the export. Increasing the number of threads improves the concurrency of Dumpling and the export speed, and increases the database's memory consumption. Therefore, it is not recommended to set the number too large. Usually, it's less than 64.|
-| `-o` or `--output`     |  Specifies the export directory of the storage, which supports a local file path or a [URL of an external storage](/br/backup-and-restore-storages.md).|
+| `-o` or `--output`     |  Specifies the export directory of the storage, which supports a local file path or an [external storage URI](/external-storage-uri.md).|
 | `-r` or `--row`        | Specifies the maximum number of rows in a single file. If you use this parameter, Dumpling enables the in-table concurrency to speed up the export and reduce the memory usage.|
 | `-F` |  Specifies the maximum size of a single file. The unit is `MiB`. It is recommended to keep the value to 256 MiB. |
 | `-B` or `--database`   | Specifies databases to be exported. |
-| `-f` or `--filter`     |  Sexport tables that match the filter pattern. For the filter syntax, see [table-filter](/table-filter.md) |
+| `-f` or `--filter`     |  Exports tables that match the filter pattern. For the filter syntax, see [table-filter](/table-filter.md). |
 
 Ensure that there is enough free space in `${data-path}`. It is strongly recommended to use the `-F` option to avoid interruptions in the backup process due to oversized single tables.
 
@@ -160,15 +130,23 @@ If the TiDB Lightning task crashes due to unrecoverable errors (for example, dat
 * --checkpoint-error-ignore: If migration has failed, this option clears the error status as if no errors ever happened.
 * --checkpoint-remove: This option simply clears all checkpoints, regardless of errors.
 
-For more information, see [TiDB Lightning Checkpoints](https://docs.pingcap.com/tidb/stable/tidb-lightning-checkpoints).
+For more information, see [TiDB Lightning Checkpoints](/tidb-lightning/tidb-lightning-checkpoints.md).
 
-### Create the target schema
+### Create a target schema
 
-After you make changes in the aforementioned [Check conflicts for sharded tables](/migrate-large-mysql-shards-to-tidb.md#check-conflicts-for-sharded-tables), you can now manually create the `my_db` schema and `table5` in downstream TiDB. After that, you need to configure `tidb-lightning.toml`.
+Create `mydb.table5` at downstream.
 
-```toml
-[mydumper]
-no-schema = true # If you have created the downstream schema and tables, setting `true` tells TiDB Lightning not to create the downstream schema.
+{{< copyable "sql" >}}
+
+```sql
+CREATE TABLE `table5` (
+  `id` bigint(20) NOT NULL,
+  `sid` bigint(20) NOT NULL,
+  `pid` bigint(20) NOT NULL,
+  `comment` varchar(255) DEFAULT NULL,
+  INDEX (`id`),
+  UNIQUE KEY `sid` (`sid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1
 ```
 
 ### Start the migration task
@@ -183,6 +161,9 @@ Follow these steps to start `tidb-lightning`:
     level = "info"
     file = "tidb-lightning.log"
 
+    [mydumper]
+    data-source-dir = ${data-path}
+
     [tikv-importer]
     # Choose a local backend.
     # "local": The default mode. It is used for large data volumes greater than 1 TiB. During migration, downstream TiDB cannot provide services.
@@ -190,29 +171,22 @@ Follow these steps to start `tidb-lightning`:
     # For more information, see [TiDB Lightning Backends](https://docs.pingcap.com/tidb/stable/tidb-lightning-backends)
     backend = "local"
     # Set the temporary directory for the sorted key value pairs. It must be empty.
-    # The free space must be greater than the largest single table of the data source.
+    # The free space must be greater than the size of the dataset to be imported.
     # It is recommended that you use a directory different from `data-source-dir` to get better migration performance by consuming I/O resources exclusively.
     sorted-kv-dir = "${sorted-kv-dir}"
 
     # Set the renaming rules ('routes') from source to target tables, in order to support merging different table shards into a single target table. Here you migrate `table1` and `table2` in `my_db1`, and `table3` and `table4` in `my_db2`, to the target `table5` in downstream `my_db`.
-    [[routes]]
-    schema-pattern = "my_db1"
-    table-pattern = "table[1-2]"
-    target-schema = "my_db"
-    target-table = "table5"
+    [[mydumper.files]]
+    pattern = '(^|/)my_db1\.table[1-2]\..*\.sql$'
+    schema = "my_db"
+    table = "table5"
+    type = "sql"
 
-    [[routes]]
-    schema-pattern = "my_db2"
-    table-pattern = "table[3-4]"
-    target-schema = "my_db"
-    target-table = "table5"
-
-    [mydumper]
-    # The source data directory. Set this to the path of the Dumpling exported data.
-    # If there are several Dumpling-exported data directories, you need to place all these directories in the same parent directory, and use the parent directory here.
-    data-source-dir = "${data-path}"        # The local or S3 path, for example, 's3://my-bucket/sql-backup?region=us-west-2'
-    # Because table1~table4 from source are merged into another table5 in the target, you should tell TiDB Lightning no need to create schemas, so that table1 ~ table4 won't be created automatically according to the exported schema information
-    no-schema = true
+    [[mydumper.files]]
+    pattern = '(^|/)my_db2\.table[3-4]\..*\.sql$'
+    schema = "my_db"
+    table = "table5"
+    type = "sql"
 
     # Information of the target TiDB cluster. For example purposes only. Replace the IP address with your IP address.
     [tidb]
@@ -236,7 +210,7 @@ Follow these steps to start `tidb-lightning`:
     ```shell
     export AWS_ACCESS_KEY_ID=${access_key}
     export AWS_SECRET_ACCESS_KEY=${secret_key}
-    nohup tiup tidb-lightning -config tidb-lightning.toml -no-schema=true > nohup.out 2>&1 &
+    nohup tiup tidb-lightning -config tidb-lightning.toml > nohup.out 2>&1 &
     ```
 
 3. After starting the migration task, you can check the progress by using either of the following methods:
@@ -245,7 +219,7 @@ Follow these steps to start `tidb-lightning`:
    - View progress via the monitoring dashboard. For more information, see [TiDB Lightning Monitoring]( /tidb-lightning/monitor-tidb-lightning.md).
    - View the progress via the Web page. See [Web Interface](/tidb-lightning/tidb-lightning-web-interface.md).
 
-After the importing finishes, TiDB Lightning will exit automatically. To make sure that the data is imported successfully, check for `the whole procedure completed` among the last 5 lines in the log.
+After TiDB Lightning completes the import, it exits automatically. Check whether `tidb-lightning.log` contains `the whole procedure completed` in the last lines. If yes, the import is successful. If no, the import encounters an error. Address the error as instructed in the error message.
 
 > **Note:**
 >
@@ -291,8 +265,8 @@ The parameters are described as follows.
 
 |Parameter      | Description |
 |-              |-            |
-|--master-addr         | {advertise-addr} of any DM-master node in the cluster that dmctl connects to. For example: 172.16.10.71:8261|
-| operate-source create | Load data sources to DM clusters. |
+|`--master-addr`         | {advertise-addr} of any DM-master node in the cluster that dmctl connects to. For example: 172.16.10.71:8261|
+| `operate-source create` | Load data sources to DM clusters. |
 
 Repeat the above steps until all MySQL upstream instances are added to the DM as data sources.
 
@@ -307,7 +281,7 @@ name: task-test               # The name of the task. Should be globally unique.
 task-mode: incremental        # The mode of the task. "incremental" means full data migration is skipped and only incremental replication is performed.
 # Required for incremental replication from sharded tables. By default, the "pessimistic" mode is used.
 # If you have a deep understanding of the principles and usage limitations of the optimistic mode, you can also use the "optimistic" mode.
-# For more information, see [Merge and Migrate Data from Sharded Tables](https://docs.pingcap.com/zh/tidb-data-migration/stable/feature-shard-merge).
+# For more information, see [Merge and Migrate Data from Sharded Tables](https://docs.pingcap.com/zh/tidb/dev/feature-shard-merge/).
 
 shard-mode: "pessimistic"
 
@@ -342,7 +316,7 @@ mysql-instances:
     block-allow-list: "bw-rule-1"     # Use the block and allow list configuration above. Replicate `my_db1` in instance 1.
     route-rules: ["route-rule-1"]     # Use the configured routing rule above to merge upstream tables.
 #       syncer-config-name: "global"  # Use the syncers configuration below.
-    meta:                             # The migration starting point of binlog when task-mode is incremental and there is no checkpoint in the downstream database. If there is a checkpoint, the checkpoint will be used.
+    meta:                             # The position where the binlog replication starts when `task-mode` is `incremental` and the downstream database checkpoint does not exist. If the checkpoint exists, the checkpoint is used. If neither the `meta` configuration item nor the downstream database checkpoint exists, the migration starts from the latest binlog position of the upstream.
       binlog-name: "${binlog-name}"   # The log location recorded in ${data-path}/my_db1/metadata in Step 1. You can either specify binlog-name + binlog-pos or binlog-gtid. When the upstream database service is configured to switch master between different nodes automatically, use binlog GTID here.
       binlog-pos: ${binlog-position}
       # binlog-gtid:                  " For example: 09bec856-ba95-11ea-850a-58f2b4af5188:1-9"
@@ -365,7 +339,7 @@ mysql-instances:
 #    safe-mode: true
 ```
 
-For more configurations, see [DM Advanced Task Configuration File](https://docs.pingcap.com/tidb-data-migration/stable/task-configuration-file-full/).
+For more configurations, see [DM Advanced Task Configuration File](/dm/task-configuration-file-full.md).
 
 Before you start the data migration task, it is recommended to use the `check-task` subcommand in `tiup dmctl` to check if the configuration meets the DM configuration requirements.
 
@@ -390,7 +364,7 @@ The parameters in this command are described as follows.
 |--master-addr| {advertise-addr} of any DM-master node in the cluster that dmctl connects to. For example: 172.16.10.71:8261 |
 |start-task   | Starts the data migration task. |
 
-If the task fails to start, first make configuration changes according to the prompt messages from the returned result, and then run the `start-task task.yaml` subcommand in `tiup dmctl` to restart the task. If you encounter problems, see [Handle Errors](https://docs.pingcap.com/tidb-data-migration/stable/error-handling) and [TiDB Data Migration FAQ](https://docs.pingcap.com/tidb-data-migration/stable/faq).
+If the task fails to start, first make configuration changes according to the prompt messages from the returned result, and then run the `start-task task.yaml` subcommand in `tiup dmctl` to restart the task. If you encounter problems, see [Handle Errors](/dm/dm-error-handling.md) and [TiDB Data Migration FAQ](/dm/dm-faq.md).
 
 ### Check the migration status
 
@@ -402,7 +376,7 @@ You can check if there are running migration tasks in the DM cluster and their s
 tiup dmctl --master-addr ${advertise-addr} query-status ${task-name}
 ```
 
-For more information, see [Query Status](https://docs.pingcap.com/zh/tidb-data-migration/stable/query-status).
+For more information, see [Query Status](/dm/dm-query-status.md).
 
 ### Monitor tasks and view logs
 
@@ -423,9 +397,10 @@ You can view the history of a migration task and internal operational metrics th
 
 - [Dumpling](/dumpling-overview.md)
 - [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)
-- [Pessimistic mode and optimistic mode](https://docs.pingcap.com/tidb-data-migration/stable/feature-shard-merge)
-- [Pause a Data Migration Task](https://docs.pingcap.com/tidb-data-migration/stable/pause-task)
-- [Resume a Data Migration Task](https://docs.pingcap.com/tidb-data-migration/stable/resume-task)
-- [Stop a Data Migration Task](https://docs.pingcap.com/tidb-data-migration/stable/stop-task)
-- [Export and Import Data Sources and Task Configuration of Clusters](https://docs.pingcap.com/tidb-data-migration/stable/export-import-config)
-- [Handle Failed DDL Statements](https://docs.pingcap.com/tidb-data-migration/stable/handle-failed-ddl-statements)
+- [Pessimistic mode and optimistic mode](/dm/feature-shard-merge.md)
+- [Pause a Data Migration Task](/dm/dm-pause-task.md)
+- [Resume a Data Migration Task](/dm/dm-resume-task.md)
+- [Stop a Data Migration Task](/dm/dm-stop-task.md)
+- [Export and Import Data Sources and Task Configuration of Clusters](/dm/dm-export-import-config.md)
+- [Handle Failed DDL Statements](/dm/handle-failed-ddl-statements.md)
+- [Handle Errors](/dm/dm-error-handling.md)

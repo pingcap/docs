@@ -1,13 +1,13 @@
 ---
-title: Handle Performance Issues
+title: Handle Performance Issues of TiDB Data Migration
 summary: Learn about common performance issues that might exist in DM and how to deal with them.
 ---
 
-# Handle Performance Issues
+# Handle Performance Issues of TiDB Data Migration
 
 This document introduces common performance issues that might exist in DM and how to deal with them.
 
-Before diagnosing an issue, you can refer to the [DM 2.0-GA Benchmark Report](/dm/dm-benchmark-v5.3.0.md).
+Before diagnosing an issue, you can refer to the [DM Benchmark Report](https://github.com/pingcap/docs-dm/blob/release-5.3/en/dm-benchmark-v5.3.0.md).
 
 When diagnosing and handling performance issues, make sure that:
 
@@ -72,7 +72,7 @@ The Binlog replication unit decides whether to read the binlog event from the up
 
 ### binlog event conversion
 
-The Binlog replication unit constructs DML, parses DDL, and performs [table router](/dm/dm-key-features.md#table-routing) conversion from binlog event data. The related metric is `transform binlog event duration`.
+The Binlog replication unit constructs DML, parses DDL, and performs [table router](/dm/dm-table-routing.md) conversion from binlog event data. The related metric is `transform binlog event duration`.
 
 The duration is mainly affected by the write operations upstream. Take the `INSERT INTO` statement as an example, the time consumed to convert a single `VALUES` greatly differs from that to convert a lot of `VALUES`. The time consumed might range from tens of microseconds to hundreds of microseconds. However, usually this is not a bottleneck of the system.
 

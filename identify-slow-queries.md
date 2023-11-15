@@ -6,9 +6,9 @@ aliases: ['/docs/dev/identify-slow-queries/','/docs/dev/how-to/maintain/identify
 
 # Identify Slow Queries
 
-To help users identify slow queries, analyze and improve the performance of SQL execution, TiDB outputs the statements whose execution time exceeds [slow-threshold](/tidb-configuration-file.md#slow-threshold) (The default value is 300 milliseconds) to [slow-query-file](/tidb-configuration-file.md#slow-query-file) (The default value is "tidb-slow.log").
+To help users identify slow queries, analyze and improve the performance of SQL execution, TiDB outputs the statements whose execution time exceeds [`tidb_slow_log_threshold`](/system-variables.md#tidb_slow_log_threshold) (The default value is 300 milliseconds) to [slow-query-file](/tidb-configuration-file.md#slow-query-file) (The default value is "tidb-slow.log").
 
-TiDB enables the slow query log by default. You can enable or disable the feature by modifying the configuration [`enable-slow-log`](/tidb-configuration-file.md#enable-slow-log).
+TiDB enables the slow query log by default. You can enable or disable the feature by modifying the system variable [`tidb_enable_slow_log`](/system-variables.md#tidb_enable_slow_log).
 
 ## Usage example
 
@@ -22,6 +22,8 @@ TiDB enables the slow query log by default. You can enable or disable the featur
 # Parse_time: 0.000054933
 # Compile_time: 0.000129729
 # Rewrite_time: 0.000000003 Preproc_subqueries: 2 Preproc_subqueries_time: 0.000000002
+# Optimize_time: 0.00000001
+# Wait_TS: 0.00001078
 # Process_time: 0.07 Request_count: 1 Total_keys: 131073 Process_keys: 131072 Prewrite_time: 0.335415029 Commit_time: 0.032175429 Get_commit_ts_time: 0.000177098 Local_latch_wait_time: 0.106869448 Write_keys: 131072 Write_size: 3538944 Prewrite_region: 1
 # DB: test
 # Is_internal: false
@@ -55,21 +57,40 @@ Slow query basics:
 * `Query_time`: The execution time of a statement.
 * `Parse_time`: The parsing time for the statement.
 * `Compile_time`: The duration of the query optimization.
+* `Optimize_time`: The time consumed for optimizing the execution plan.
+* `Wait_TS`: The waiting time of the statement to get transaction timestamps.
 * `Query`: A SQL statement. `Query` is not printed in the slow log, but the corresponding field is called `Query` after the slow log is mapped to the memory table.
 * `Digest`: The fingerprint of the SQL statement.
 * `Txn_start_ts`: The start timestamp and the unique ID of a transaction. You can use this value to search for the transaction-related logs.
 * `Is_internal`: Whether a SQL statement is TiDB internal. `true` indicates that a SQL statement is executed internally in TiDB and `false` indicates that a SQL statement is executed by the user.
-* `Index_ids`: The IDs of the indexes involved in a statement.
+* `Index_names`: The index names used by the statement.
+* `Stats`: The health state, internal version, total row count, modified row count, and load state of statistics that are used during this query. `pseudo` indicates that the statistics information is unhealthy. If the optimizer attempts to use some statistics that are not fully loaded, the internal state is also printed. For example, the meaning of `t1:439478225786634241[105000;5000][col1:allEvicted][idx1:allEvicted]` can be understood as follows:
+    - `t1`: statistics on table `t1` are used during query optimization.
+    - `439478225786634241`: the internal version.
+    - `105000`: the total row count in the statistics.
+    - `5000`: the number of rows modified since the last statistics collection.
+    - `col1:allEvicted`: statistics on the column `col1` are not fully loaded.
+    - `idx1:allEvicted`: statistics on the index `idx1` are not fully loaded.
 * `Succ`: Whether a statement is executed successfully.
 * `Backoff_time`: The waiting time before retry when a statement encounters errors that require a retry. The common errors as such include: `lock occurs`, `Region split`, and `tikv server is busy`.
-* `Plan`: The execution plan of the statement. Use the `select tidb_decode_plan('xxx...')` statement to parse the specific execution plan.
+* `Plan`: The execution plan of a statement. Execute the `SELECT tidb_decode_plan('xxx...')` statement to parse the specific execution plan.
+* `Binary_plan`: The execution plan of a binary-encoded statement. Execute the `SELECT tidb_decode_binary_plan('xxx...')` statement to parse the specific execution plan. The `Plan` and `Binary_plan` fields carry the same information. However, the format of execution plans parsed from the two fields are different.
 * `Prepared`: Whether this statement is a `Prepare` or `Execute` request or not.
 * `Plan_from_cache`: Whether this statement hits the execution plan cache.
+* `Plan_from_binding`: Whether this statement uses the bound execution plans.
+* `Has_more_results`: Whether this statement has more results to be fetched by users.
 * `Rewrite_time`: The time consumed for rewriting the query of this statement.
 * `Preproc_subqueries`: The number of subqueries (in the statement) that are executed in advance. For example, the `where id in (select if from t)` subquery might be executed in advance.
 * `Preproc_subqueries_time`: The time consumed for executing the subquery of this statement in advance.
 * `Exec_retry_count`: The retry times of this statement. This field is usually for pessimistic transactions in which the statement is retried when the lock is failed.
 * `Exec_retry_time`: The execution retry duration of this statement. For example, if a statement has been executed three times in total (failed for the first two times), `Exec_retry_time` means the total duration of the first two executions. The duration of the last execution is `Query_time` minus `Exec_retry_time`.
+* `KV_total`: The time spent on all the RPC requests on TiKV or TiFlash by this statement.
+* `PD_total`: The time spent on all the RPC requests on PD by this statement.
+* `Backoff_total`: The time spent on all the backoff during the execution of this statement.
+* `Write_sql_response_total`: The time consumed for sending the results back to the client by this statement.
+* `Result_rows`: The row count of the query results.
+* `IsExplicitTxn`: Whether this statement is in an explicit transaction. If the value is `false`, the transaction is `autocommit=1` and the statement is automatically committed after execution.
+* `Warnings`: The JSON-formatted warnings that are generated during the execution of this statement. These warnings are generally consistent with the output of the [`SHOW WARNINGS`](/sql-statements/sql-statement-show-warnings.md) statement, but might include extra warnings that provide more diagnostic information. These extra warnings are marked as `IsExtra: true`.
 
 The following fields are related to transaction execution:
 
@@ -80,6 +101,8 @@ The following fields are related to transaction execution:
 * `Write_keys`: The count of keys that the transaction writes to the Write CF in TiKV.
 * `Write_size`: The total size of the keys or values to be written when the transaction commits.
 * `Prewrite_region`: The number of TiKV Regions involved in the first phase (prewrite) of the two-phase transaction commit. Each Region triggers a remote procedure call.
+* `Wait_prewrite_binlog_time`: The time used to write binlogs when a transaction is committed.
+* `Resolve_lock_time`: The time to resolve or wait for the lock to be expired after a lock is encountered during a transaction commit.
 
 Memory usage fields:
 
@@ -92,6 +115,7 @@ Hard disk fields:
 User fields:
 
 * `User`: The name of the user who executes this statement.
+* `Host`: The host name of this statement.
 * `Conn_ID`: The Connection ID (session ID). For example, you can use the keyword `con:3` to search for the log whose session ID is `3`.
 * `DB`: The current database.
 
@@ -102,20 +126,40 @@ TiKV Coprocessor Task fields:
 * `Process_time`: The total processing time of a SQL statement in TiKV. Because data is sent to TiKV concurrently, this value might exceed `Query_time`.
 * `Wait_time`: The total waiting time of a statement in TiKV. Because the Coprocessor of TiKV runs a limited number of threads, requests might queue up when all threads of Coprocessor are working. When a request in the queue takes a long time to process, the waiting time of the subsequent requests increases.
 * `Process_keys`: The number of keys that Coprocessor has processed. Compared with `total_keys`, `processed_keys` does not include the old versions of MVCC. A great difference between `processed_keys` and `total_keys` indicates that many old versions exist.
-* `Cop_proc_avg`: The average execution time of cop-tasks.
+* `Num_cop_tasks`: The number of Coprocessor tasks sent by this statement.
+* `Cop_proc_avg`: The average execution time of cop-tasks, including some waiting time that cannot be counted, such as the mutex in RocksDB.
 * `Cop_proc_p90`: The P90 execution time of cop-tasks.
 * `Cop_proc_max`: The maximum execution time of cop-tasks.
 * `Cop_proc_addr`: The address of the cop-task with the longest execution time.
-* `Cop_wait_avg`: The average waiting time of cop-tasks.
+* `Cop_wait_avg`: The average waiting time of cop-tasks, including the time of request queueing and getting snapshots.
 * `Cop_wait_p90`: The P90 waiting time of cop-tasks.
 * `Cop_wait_max`: The maximum waiting time of cop-tasks.
 * `Cop_wait_addr`: The address of the cop-task whose waiting time is the longest.
+* `Rocksdb_delete_skipped_count`: The number of scans on deleted keys during RocksDB reads.
+* `Rocksdb_key_skipped_count`: The number of deleted (tombstone) keys that RocksDB encounters when scanning data.
+* `Rocksdb_block_cache_hit_count`: The number of times RocksDB reads data from the block cache.
+* `Rocksdb_block_read_count`: The number of times RocksDB reads data from the file system.
+* `Rocksdb_block_read_byte`: The amount of data RocksDB reads from the file system.
+* `Rocksdb_block_read_time`: The time RocksDB takes to read data from the file system.
 * `Cop_backoff_{backoff-type}_total_times`: The total times of backoff caused by an error.
 * `Cop_backoff_{backoff-type}_total_time`: The total time of backoff caused by an error.
 * `Cop_backoff_{backoff-type}_max_time`: The longest time of backoff caused by an error.
 * `Cop_backoff_{backoff-type}_max_addr`: The address of the cop-task that has the longest backoff time caused by an error.
 * `Cop_backoff_{backoff-type}_avg_time`: The average time of backoff caused by an error.
 * `Cop_backoff_{backoff-type}_p90_time`: The P90 percentile backoff time caused by an error.
+
+`backoff-type` generally includes the following types:
+
+* `tikvRPC`: The backoff caused by failing to send RPC requests to TiKV.
+* `tiflashRPC`: The backoff caused by failing to send RPC requests to TiFlash.
+* `pdRPC`: The backoff caused by failing to send RPC requests to PD.
+* `txnLock`: The backoff caused by lock conflicts.
+* `regionMiss`: The backoff caused by that processing requests fails when the TiDB Region cache information is outdated after Regions are split or merged.
+* `regionScheduling`: The backoff caused by that TiDB cannot process requests when Regions are being scheduled and the Leader is not selected.
+* `tikvServerBusy`: The backoff caused by that the TiKV load is too high to handle new requests.
+* `tiflashServerBusy`: The backoff caused by that the TiFlash load is too high to handle new requests.
+* `tikvDiskFull`: The backoff caused by that the TiKV disk is full.
+* `txnLockFast`: The backoff caused by that locks are encountered during data reads.
 
 ## Related system variables
 
@@ -523,15 +567,15 @@ Not all of the `SLOW_QUERY` statements are problematic. Only those whose `proces
 
 The statements whose `wait_time` is very large and `process_time` is very small are usually not problematic. This is because the statement is blocked by real problematic statements and it has to wait in the execution queue, which leads to a much longer response time.
 
-### `admin show slow` command
+### `ADMIN SHOW SLOW` command
 
-In addition to the TiDB log file, you can identify slow queries by running the `admin show slow` command:
+In addition to the TiDB log file, you can identify slow queries by running the `ADMIN SHOW SLOW` command:
 
 {{< copyable "sql" >}}
 
 ```sql
-admin show slow recent N
-admin show slow top [internal | all] N
+ADMIN SHOW SLOW recent N
+ADMIN SHOW SLOW TOP [internal | all] N
 ```
 
 `recent N` shows the recent N slow query records, for example:
@@ -539,7 +583,7 @@ admin show slow top [internal | all] N
 {{< copyable "sql" >}}
 
 ```sql
-admin show slow recent 10
+ADMIN SHOW SLOW recent 10
 ```
 
 `top N` shows the slowest N query records recently (within a few days). If the `internal` option is provided, the returned results would be the inner SQL executed by the system; If the `all` option is provided, the returned results would be the user's SQL combinated with inner SQL; Otherwise, this command would only return the slow query records from the user's SQL.
@@ -547,9 +591,9 @@ admin show slow recent 10
 {{< copyable "sql" >}}
 
 ```sql
-admin show slow top 3
-admin show slow top internal 3
-admin show slow top all 5
+ADMIN SHOW SLOW top 3
+ADMIN SHOW SLOW top internal 3
+ADMIN SHOW SLOW top all 5
 ```
 
 TiDB stores only a limited number of slow query records because of the limited memory. If the value of `N` in the query command is greater than the records count, the number of returned records is smaller than `N`.
@@ -563,7 +607,7 @@ The following table shows output details:
 | details | The details of the SQL execution |
 | succ | Whether the SQL statement is executed successfully. `1` means success and `0` means failure. |
 | conn_id | The connection ID for the session |
-| transcation_ts | The `commit ts` for a transaction commit |
+| transaction_ts | The `commit ts` for a transaction commit |
 | user | The user name for the execution of the statement |
 | db | The database involved when the statement is executed |
 | table_ids | The ID of the table involved when the SQL statement is executed |

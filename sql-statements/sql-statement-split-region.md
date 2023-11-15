@@ -12,6 +12,10 @@ In the above case, because there is only one Region at the beginning, all write 
 
 To solve the hotspot problem in the above scenario, TiDB introduces the pre-split function, which can pre-split multiple Regions for a certain table according to the specified parameters and scatter them to each TiKV node.
 
+> **Note:**
+>
+> This feature is not available on [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless) clusters.
+
 ## Synopsis
 
 **SplitRegionStmt:**
@@ -172,7 +176,7 @@ If the column of index idx1 is of varchar type, and you want to split index data
 SPLIT TABLE t INDEX idx1 BETWEEN ("a") AND ("z") REGIONS 25;
 ```
 
-This statement splits index idx1 into 25 Regions from a~z. The range of Region 1 is `[minIndexValue, b)`; the range of Region 2 is `[b, c)`; … the range of Region 25 is `[y, minIndexValue]`. For the `idx` index, data with the `a` prefix is written into Region 1, and data with the `b` prefix is written into Region 2, and so on.
+This statement splits index idx1 into 25 Regions from a~z. The range of Region 1 is `[minIndexValue, b)`; the range of Region 2 is `[b, c)`; … the range of Region 25 is `[y, minIndexValue]`. For the `idx` index, data with the `a` prefix is written into Region 1, and data with the `b` prefix is written into Region 2.
 
 In the split method above, both data with the `y` and `z` prefixes are written into Region 25, because the upper bound is not `z`, but `{` (the character next to `z` in ASCII). Therefore, a more accurate split method is as follows:
 
@@ -192,7 +196,7 @@ If the column of index `idx2` is of time type like timestamp/datetime, and you w
 SPLIT TABLE t INDEX idx2 BETWEEN ("2010-01-01 00:00:00") AND ("2020-01-01 00:00:00") REGIONS 10;
 ```
 
-This statement splits the Region of index `idx2` in table `t` into 10 Regions from  `2010-01-01 00:00:00` to  `2020-01-01 00:00:00`. The range of Region 1 is `[minIndexValue,  2011-01-01 00:00:00)`; the range of Region 2 is `[2011-01-01 00:00:00, 2012-01-01 00:00:00)` and so on.
+This statement splits the Region of index `idx2` in table `t` into 10 Regions from `2010-01-01 00:00:00` to `2020-01-01 00:00:00`. The range of Region 1 is `[minIndexValue, 2011-01-01 00:00:00)`; the range of Region 2 is `[2011-01-01 00:00:00, 2012-01-01 00:00:00)`.
 
 If you want to split the index Region by day, see the following example:
 
@@ -225,6 +229,12 @@ SPLIT TABLE t INDEX idx3 BETWEEN ("2010-01-01 00:00:00", "a") AND ("2010-01-01 0
 ```
 
 This statement splits 10 Regions in the range of a~z according to the value of column b, with the same time prefix as column a. If the value specified for column a is different, the value of column b might not be used in this case.
+
+If the primary key of the table is a [non-clustered index](/clustered-indexes.md), you need to use backticks ``` ` ``` to escape the `PRIMARY` keyword when splitting Regions. For example:
+
+```sql
+SPLIT TABLE t INDEX `PRIMARY` BETWEEN (-9223372036854775808) AND (9223372036854775807) REGIONS 16;
+```
 
 #### Uneven Split
 
@@ -429,9 +439,13 @@ region3:   [ 2<<61     ,  3<<61 )
 region4:   [ 3<<61     ,  +inf  )
 ```
 
-## Notes
+<CustomContent platform="tidb">
 
-The Region split by the Split Region statement is controlled by the [Region merge](/best-practices/pd-scheduling-best-practices.md#region-merge) scheduler in PD. To avoid PD re-merging the newly split Region soon after, you need to [dynamically modify](/pd-control.md) configuration items related to the Region merge feature.
+> **Note:**
+>
+> The Region split by the Split Region statement is controlled by the [Region merge](/best-practices/pd-scheduling-best-practices.md#region-merge) scheduler in PD. To avoid PD re-merging the newly split Region soon after, you need to [dynamically modify](/pd-control.md) configuration items related to the Region merge feature.
+
+</CustomContent>
 
 ## MySQL compatibility
 

@@ -23,7 +23,7 @@ The deployment machine has multiple CPU processors with sufficient memory. To im
 
 ### Topology templates
 
-- [The simple template for the hybrid deployment](https://github.com/pingcap/docs-cn/blob/master/config-templates/simple-multi-instance.yaml)
+- [The simple template for the hybrid deployment](https://github.com/pingcap/docs/blob/master/config-templates/simple-multi-instance.yaml)
 - [The complex template for the hybrid deployment](https://github.com/pingcap/docs/blob/master/config-templates/complex-multi-instance.yaml)
 
 For detailed descriptions of the configuration items in the above TiDB cluster topology file, see [Topology Configuration File for Deploying TiDB Using TiUP](/tiup/tiup-cluster-topology-reference.md).
@@ -48,15 +48,9 @@ This section introduces the key parameters when you deploy multiple instances on
             ```
             readpool.unified.max-thread-count = cores * 0.8 / the number of TiKV instances
             ```
-        
+
     - To configure the storage CF (all RocksDB column families) to be self-adaptive to memory. By configuring the `storage.block-cache.capacity` parameter, you can make CF automatically balance the memory usage.
 
-        - `storage.block-cache` enables the CF self-adaptation by default. You do not need to modify it.
-
-            ```yaml
-            storage.block-cache.shared: true
-            ```
-        
         - The calculation method:
 
             ```

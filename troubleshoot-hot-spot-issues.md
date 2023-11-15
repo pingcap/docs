@@ -37,7 +37,7 @@ Value: rowID
 
 Index data has two types: the unique index and the non-unique index.
 
-- For unique indexes, you can follow the coding rules above. 
+- For unique indexes, you can follow the coding rules above.
 - For non-unique indexes, a unique key cannot be constructed through this encoding, because the `tablePrefix{tableID}_indexPrefixSep{indexID}` of the same index is the same and the `ColumnsValue` of multiple rows might be the same. The encoding rule for non-unique indexes is as follows:
 
     ```
@@ -52,6 +52,8 @@ According to TiDB coding rules, the data of the same table is in a range prefixe
 The common auto-increment primary key is sequentially increasing. When the primary key is of the integer type, the value of the primary key is used as the RowID by default. At this time, the RowID is sequentially increasing, and a write hotspot of the table forms when a large number of `INSERT` operations exist.
 
 Meanwhile, the RowID in TiDB is also sequentially auto-incremental by default. When the primary key is not an integer type, you might also encounter the problem of write hotspots.
+
+In addition, when hotspots occur during the process of data writes (on a newly created table or partition) or data reads (periodic read hotspots in read-only scenarios), you can control the Region merge behavior using table attributes. For details, see [Control the Region merge behavior using table attributes](/table-attributes.md#control-the-region-merge-behavior-using-table-attributes).
 
 ### Index hotspots
 
@@ -85,9 +87,9 @@ Hover over the bright block, you can see what table or index has a heavy load. F
 
 ## Use `SHARD_ROW_ID_BITS` to process hotspots
 
-For a non-integer primary key or a table without a primary key or a joint primary key, TiDB uses an implicit auto-increment RowID. When a large number of `INSERT` operations exist, the data is written into a single Region, resulting in a write hotspot.
+For a non-clustered primary key or a table without a primary key, TiDB uses an implicit auto-increment RowID. When a large number of `INSERT` operations exist, the data is written into a single Region, resulting in a write hotspot.
 
-By setting `SHARD_ROW_ID_BITS`, RowID are scattered and written into multiple Regions, which can alleviates the write hotspot issue. However, if you set `SHARD_ROW_ID_BITS` to an over large value, the number of RPC requests will be enlarged, increasing CPU and network overhead.
+By setting [`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md), row IDs are scattered and written into multiple Regions, which can alleviate the write hotspot issue.
 
 ```
 SHARD_ROW_ID_BITS = 4 # Represents 16 shards.
@@ -100,8 +102,8 @@ Statement example:
 {{< copyable "sql" >}}
 
 ```sql
-CREATE TABLE：CREATE TABLE t (c int) SHARD_ROW_ID_BITS = 4;
-ALTER TABLE：ALTER TABLE t SHARD_ROW_ID_BITS = 4;
+CREATE TABLE: CREATE TABLE t (c int) SHARD_ROW_ID_BITS = 4;
+ALTER TABLE: ALTER TABLE t SHARD_ROW_ID_BITS = 4;
 ```
 
 The value of `SHARD_ROW_ID_BITS` can be dynamically modified. The modified value only takes effect for newly written data.
@@ -178,3 +180,7 @@ For more details, see [Coprocessor Cache](/coprocessor-cache.md).
 
 - [Highly Concurrent Write Best Practices](/best-practices/high-concurrency-best-practices.md)
 - [Split Region](/sql-statements/sql-statement-split-region.md)
+
+## Scatter read hotspots
+
+In a read hotspot scenario, the hotspot TiKV node cannot process read requests in time, resulting in the read requests queuing. However, not all TiKV resources are exhausted at this time. To reduce latency, TiDB v7.1.0 introduces the load-based replica read feature, which allows TiDB to read data from other TiKV nodes without queuing on the hotspot TiKV node. You can control the queue length of read requests using the [`tidb_load_based_replica_read_threshold`](/system-variables.md#tidb_load_based_replica_read_threshold-new-in-v700) system variable. When the estimated queue time of the leader node exceeds this threshold, TiDB prioritizes reading data from follower nodes. This feature can improve read throughput by 70% to 200% in a read hotspot scenario compared to not scattering read hotspots.

@@ -6,7 +6,7 @@ aliases: ['/docs/dev/tune-tikv-performance/','/docs/dev/reference/performance/tu
 
 # Tune TiKV Memory Parameter Performance
 
-This document describes how to tune the TiKV parameters for optimal performance.
+This document describes how to tune the TiKV parameters for optimal performance. You can find the default configuration file in [etc/config-template.toml](https://github.com/tikv/tikv/blob/master/etc/config-template.toml). To modify the configuration, you can [use TiUP](/maintain-tidb-using-tiup.md#modify-the-configuration) or [modify TiKV dynamically](/dynamic-config.md#modify-tikv-configuration-dynamically) for a limited set of configuration items. For the complete configuration, see [TiKV configuration file](/tikv-configuration-file.md).
 
 TiKV uses RocksDB for persistent storage at the bottom level of the TiKV architecture. Therefore, many of the performance parameters are related to RocksDB. TiKV uses two RocksDB instances: the default RocksDB instance stores KV data, the Raft RocksDB instance (RaftDB) stores Raft logs.
 
@@ -22,7 +22,7 @@ TiKV implements `Column Families` (CF) from RocksDB.
 
     - The `default` CF stores the Raft log. The corresponding parameters are in `[raftdb.defaultcf]`.
 
-After TiKV 3.0, by default, all CFs share one block cache instance. You can configure the size of the cache by setting the `capacity` parameter under `[storage.block-cache]`. The bigger the block cache, the more hot data can be cached, and the easier to read data, in the meantime, the more system memory is occupied. To use a separate block cache instance for each CF, set `shared=false` under `[storage.block-cache]`, and configure individual block cache size for each CF. For example, you can configure the size of `write` CF by setting the `block-cache-size` parameter under `[rocksdb.writecf]`.
+After TiKV 3.0, by default, all CFs share one block cache instance. You can configure the size of the cache by setting the `capacity` parameter under `[storage.block-cache]`. The bigger the block cache, the more hot data can be cached, and the easier to read data, in the meantime, the more system memory is occupied.
 
 Before TiKV 3.0, shared block cache is not supported, and you need to configure block cache for each CF individually.
 
@@ -73,6 +73,7 @@ log-level = "info"
 ##
 ## The rest of config in the storage.block-cache session is effective only when shared block cache
 ## is on.
+## Starting from v6.6.0, the `shared` option is always enabled and cannot be disabled.
 # shared = true
 
 ## Size of the shared block cache. Normally it should be tuned to 30%-50% of system's total memory.
@@ -103,13 +104,15 @@ job = "tikv"
 # If there are multiple disks on the machine, store the data of Raft RocksDB on different disks to improve TiKV performance.
 # raftdb-path = "/tmp/tikv/store/raft"
 
-region-max-size = "384MB"
-# The threshold value of Region split
-region-split-size = "256MB"
 # When the data size change in a Region is larger than the threshold value, TiKV checks whether this Region needs split.
-# To reduce the costs of scanning data in the checking process, set the value to 32MB during checking and set it to
-# the default value in normal operation.
+# To reduce the costs of scanning data in the checking process, set the value to 32 MB during the data import process. In the normal operation status, set it to the default value.
 region-split-check-diff = "32MB"
+
+[coprocessor]
+## If the size of a Region with the range of [a,e) is larger than the value of `region_max_size`, TiKV trys to split the Region to several Regions, for example, the Regions with the ranges of [a,b), [b,c), [c,d), and [d,e).
+## After the Region split, the size of the split Regions is equal to the value of `region_split_size` (or slightly larger than the value of `region_split_size`).
+# region-max-size = "144MB"
+# region-split-size = "96MB"
 
 [rocksdb]
 # The maximum number of threads of RocksDB background tasks. The background tasks include compaction and flush.
@@ -137,9 +140,6 @@ max-manifest-file-size = "20MB"
 # In most cases, set the maximum total size of RocksDB WAL logs to the default value.
 # max-total-wal-size = "4GB"
 
-# Use this parameter to enable or disable the statistics of RocksDB.
-# enable-statistics = true
-
 # Use this parameter to enable the readahead feature during RocksDB compaction. If you are using mechanical disks, it is recommended to set the value to 2MB at least.
 # compaction-readahead-size = "2MB"
 
@@ -149,7 +149,7 @@ max-manifest-file-size = "20MB"
 block-size = "64KB"
 
 # The compaction mode of each layer of RocksDB data. The optional values include no, snappy, zlib,
-# bzip2, lz4, lz4hc, and zstd.
+# bzip2, lz4, lz4hc, and zstd. Note that the Snappy compressed file must be in the [official Snappy format](https://github.com/google/snappy). Other variants of Snappy compression are not supported.
 # "no:no:lz4:lz4:lz4:zstd:zstd" indicates there is no compaction of level0 and level1; lz4 compaction algorithm is used
 # from level2 to level4; zstd compaction algorithm is used from level5 to level6.
 # "no" means no compaction. "lz4" is a compaction algorithm with moderate speed and compaction ratio. The
@@ -221,9 +221,6 @@ target-file-size-base = "32MB"
 [raftdb]
 # The maximum number of the file handles RaftDB can open
 # max-open-files = 40960
-
-# Configure this parameter to enable or disable the RaftDB statistics information.
-# enable-statistics = true
 
 # Enable the readahead feature in RaftDB compaction. If you are using mechanical disks, it is recommended to set
 # this value to 2MB at least.
