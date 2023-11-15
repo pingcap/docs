@@ -11,7 +11,7 @@ This document describes how to import data into TiDB Cloud via the [MySQL Comman
 
 Before you can import data via MySQL CLI to TiDB Cloud, you need the following prerequisites:
 
-- You have access to your TiDB Cloud Cluster. If you do not have a TiDB cluster, create one following the instructions in [Build a TiDB Serverless Cluster](/develop/dev-guide-build-cluster-in-cloud.md).
+- You have access to your TiDB Cloud cluster. If you do not have a TiDB cluster, create one following the instructions in [Build a TiDB Serverless Cluster](/develop/dev-guide-build-cluster-in-cloud.md).
 - Install MySQL CLI on your local computer.
 
 ## Step 1. Connect to your TiDB Cloud cluster
