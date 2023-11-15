@@ -179,7 +179,7 @@ To complete this tutorial, you need the following:
    })
    ```
    
-3. Execute some transaction operations with the Prisma Client. For example:
+3. Execute some transaction operations with Prisma Client. For example:
 
    ```js
    const createUser1 = prisma.user.create({
@@ -214,6 +214,6 @@ To complete this tutorial, you need the following:
    }
    ```
    
-## Use the Prisma adapter in Edge environments
+## Use the Prisma adapter in edge environments
 
 Currently, `@tidbcloud/prisma-adapter` is not compatible with edge environments such as Vercel Edge Function and Cloudflare Workers. However, there are plans to support these environments. For more information, see [#21394](https://github.com/prisma/prisma/issues/21394).
