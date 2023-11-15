@@ -37,7 +37,7 @@ To enable the Chat2Query API, perform the following steps:
 
 5. Click the **Data Service** link in the message to access the Chat2Query API.
 
-    You can find that the **Chat2Query** [Data App](/tidb-cloud/tidb-cloud-glossary.md#data-app) and its chat2data [endpoints](/tidb-cloud/tidb-cloud-glossary.md#endpoint) are displayed in the left pane.
+    You will be directed to the [Data Service](https://docs.pingcap.com/tidbcloud/data-service-overview) page. In the left pane of this page, you can find the **Chat2Query** [Data App](/tidb-cloud/tidb-cloud-glossary.md#data-app) and a list of endpoints under the App.
 
 ## Step 2. Create an API key
 
@@ -47,10 +47,10 @@ Before calling an endpoint, you need to create an API key. To create an API key 
 2. In the **Authentication** area, click **Create API Key**.
 3. In the **Create API Key** dialog box, enter a description and select a role for your API key.
 
-   - `Chat2Query Admin Role`: allows the API key to management data summary, generate sql from a question, execute any SQL statement
-   - `Chat2Query Data Context Management Role`: only allows the API key to generate, update and delete data summary
-   - `Chat2Query SQL Generate & Execute (ReadOnly) Role`: can generate sql from a question, but only allows the API key to execute SELECT SQL statement
-   - `Chat2Query SQL Generate & Execute (ReadWrite) Role`: can generate sql from a question, but only allows the API key to execute any SQL statement
+   - `Chat2Query Admin Role`: allows the API key to manage data summary, generate SQL statements based on provided instructions, and execute any SQL statements.
+   - `Chat2Query Data Context Management Role`: only allows the API key to generate and update data summary.
+   - `Chat2Query SQL Generate & Execute (ReadOnly) Role`: only allows the API key to generate SQL statements based on provided instructions and execute  `SELECT` SQL statements.
+   - `Chat2Query SQL Generate & Execute (ReadWrite) Role`: allows the API key to generate SQL statements based on provided instructions and execute any SQL statements.
 
 4. Click **Next**. The public key and private key are displayed.
 
