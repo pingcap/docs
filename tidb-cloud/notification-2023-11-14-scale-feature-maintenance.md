@@ -15,7 +15,7 @@ This notification describes the details that you need to know about the maintena
 
 > **Note:**
 >
-> Updated in 2023/11/16: The End time of the Maintenance Window is extended from 2023/11/16 to 2023/11/21.
+> Updated in 2023/11/16: The End time of the Maintenance Window is updated from 2023/11/16 to 2023/11/21.
 
 ## Impact
 
