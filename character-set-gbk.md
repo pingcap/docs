@@ -98,7 +98,7 @@ In the above table, the result of `SELECT HEX('a');` in the `utf8mb4` byte set i
 
 - Currently, for binary characters of the `ENUM` and `SET` types, TiDB deals with them as the `utf8mb4` character set.
 
-- > If the predicates include `LIKE` for string prefixes, such as `LIKE 'prefix%'`, and the target column is set to a gbk collation (either `gbk_bin` or `gbk_chinese_ci`), the optimizer cannot convert this predicate into a range scan for now. Instead, it goes to a full scan. Such SQL queries may result in unexpected resource consumption.
+- If the predicates include `LIKE` for string prefixes, such as `LIKE 'prefix%'`, and the target column is set to a GBK collation (either `gbk_bin` or `gbk_chinese_ci`), the optimizer currently cannot convert this predicate into a range scan. Instead, it performs a full scan. As a result, such SQL queries might lead to unexpected resource consumption.
 
 ## Component compatibility
 
