@@ -255,8 +255,8 @@ Starting from v7.5.0, the following contents are removed from the `TiDB-communit
 
 + TiFlash
 
-    - note [#issue](链接) @[贡献者 GitHub ID](链接)
-    - note [#issue](链接) @[贡献者 GitHub ID](链接)
+    - Fix the issue that executing queries on empty partitions causes query failure [#8220](https://github.com/pingcap/tiflash/issues/8220) @[JaySon-Huang](https://github.com/JaySon-Huang)
+    - Fix a panic issue when the tiflash replica of a table is created [#8217](https://github.com/pingcap/tiflash/issues/8217) @[hongyunyan](https://github.com/hongyunyan)
 
 + Tools
 
