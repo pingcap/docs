@@ -13,6 +13,10 @@ This notification describes the details that you need to know about the maintena
 - End time:  2023-11-21 16:00 (UTC+0)
 - Duration: 7 days
 
+> **Note:**
+>
+> Updated in 2023/11/16: The End time of the Maintenance Window is extended from 2023/11/16 to 2023/11/21.
+
 ## Impact
 
 During the maintenance window, [change vCPU and RAM](https://docs.pingcap.com/tidbcloud/scale-tidb-cluster#change-vcpu-and-ram) is disabled and you can not change vCPU and RAM for your Dedicated Clusters. However, you can still change the node number or storage in the Modify Cluster page. Your TiDB cluster will maintain its regular operations for data read and write, ensuring no adverse effects on your online business.
