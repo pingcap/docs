@@ -49,8 +49,8 @@ Compared with the previous LTS 7.1.0, 7.5.0 includes new features, improvements,
   </tr>
   <tr>
     <td rowspan="3">DB Operations and Observability</td>
-    <td>TiDB Lightning's physical import mode integrated into TiDB with <a href="https://docs.pingcap.com/tidb/v7.5/sql-statement-import-into"><code>IMPORT INTO</code></a> {/* tw@qiancai */}</td>
-    <td>Before v7.2, to import data based on the file system, you needed to install <a href="https://docs.pingcap.com/tidb/v7.5/tidb-lightning-overview">TiDB Lightning</a> and use its physical import mode. Now, the same functionality is integrated into the <code>IMPORT INTO</code> statement so you can use this statement to quickly import data without installing any additional tool. This statement also supports the new <a href="https://docs.pingcap.com/tidb/v7.5/tidb-distributed-execution-framework" target="_blank">distributed execution framework</a> and the <a href="https://docs.pingcap.com/tidb/v7.5/tidb-global-sort" target="_blank">Global sort</a> feature, which improves import efficiency and provides greater stability during large-scale imports.</td>
+    <td>TiDB Lightning's physical import mode integrated into TiDB with <a href="https://docs.pingcap.com/tidb/v7.5/sql-statement-import-into"><code>IMPORT INTO</code></a> (GA){/* tw@qiancai */}</td>
+    <td>Before v7.2, to import data based on the file system, you needed to install <a href="https://docs.pingcap.com/tidb/v7.5/tidb-lightning-overview">TiDB Lightning</a> and use its physical import mode. Now, the same functionality is integrated into the <code>IMPORT INTO</code> statement so you can use this statement to quickly import data without installing any additional tool. This statement also supports the <a href="https://docs.pingcap.com/tidb/v7.5/tidb-distributed-execution-framework" target="_blank">distributed execution framework</a> for parallel import, which improves import efficiency during large-scale imports.</td>
   </tr>
   <tr>
     <td>Specify<a href="https://docs.pingcap.com/tidb/v7.5/system-variables#tidb_service_scope-new-in-v740" target="_blank"> the respective TiDB nodes</a> to execute the <code>IMPORT INTO</code> and <code>ADD INDEX</code> SQL statements (GA) {/* tw@hfxsd */}</td>
@@ -113,8 +113,6 @@ Compared with the previous LTS 7.1.0, 7.5.0 includes new features, improvements,
 * Support the `IMPORT INTO` SQL statement (GA) [#46704](https://github.com/pingcap/tidb/issues/46704) @[D3Hunter](https://github.com/D3Hunter)<!--**tw@qiancai** 1579-->
 
     In v7.5.0, the `IMPORT INTO` SQL statement becomes generally available (GA). This statement integrates the [Physical Import Mode](/tidb-lightning/tidb-lightning-physical-import-mode.md) capability of TiDB Lightning and allows you to quickly import data in formats such as CSV, SQL, and PARQUET into an empty table in TiDB. This import method eliminates the need for a separate deployment and management of TiDB Lightning, thereby reducing the complexity of data import and greatly improving import efficiency.
-
-    In addition, you can add the `CLOUD_STORAGE_URI` option in the `IMPORT INTO` statement to enable the [Global Sort](/tidb-global-sort.md) feature, which helps boost import performance and stability. In the `CLOUD_STORAGE_URI` option, you can specify a cloud storage address for the encoded data.
 
     For more information, see [documentation](/sql-statements/sql-statement-import-into.md).
 
