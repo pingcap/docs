@@ -79,17 +79,17 @@ Here you can find additional resources to connect, manage and develop with TiDB 
 **To explore your data**
 
 - [Quick Start](/develop/dev-guide-build-cluster-in-cloud.md)
-- [Use AI-powered SQL Editor <sup>beta</sup>](/explore-data-with-chat2query)
-- Connect with client tools such as [VSCode](/develop/dev-guide-gui-vscode-sqltools), [DBeaver](/develop/dev-guide-gui-dbeaver) or [DataGrip](/develop/dev-guide-gui-datagrip)
+- [Use AI-powered SQL Editor <sup>beta</sup>](/tidb-cloud/explore-data-with-chat2query.md)
+- Connect with client tools such as [VSCode](/develop/dev-guide-gui-vscode-sqltools.md), [DBeaver](/develop/dev-guide-gui-dbeaver.md) or [DataGrip](/develop/dev-guide-gui-datagrip.md)
 
 **To build your application**
 
 - [Choose Driver or ORM](/develop/dev-guide-choose-driver-or-orm.md)
-- [Use TiDB Cloud Data API <sup>beta</sup>](/data-service-overview)
+- [Use TiDB Cloud Data API <sup>beta</sup>](/tidb-cloud/data-service-overview.md)
 
 **To manage your cluster**
 
-- [TiDB Cloud Command Line Tools](/get-started-with-cli)
+- [TiDB Cloud Command Line Tools](/tidb-cloud/get-started-with-cli.md)
 - [TiDB Cloud Administration API](https://docs.pingcap.com/tidbcloud/api/v1beta1)
 
 **To learn more about TiDB**
