@@ -43,9 +43,9 @@ This section introduces the configuration of a replication task.
 # memory-quota = 1073741824
 
 # Specifies whether the database names and tables in the configuration file are case-sensitive.
-# The default value is true.
+# Starting from v7.5.0, the default value changes from true to false.
 # This configuration item affects configurations related to filter and sink.
-case-sensitive = true
+case-sensitive = false
 
 # Specifies whether to enable the Syncpoint feature, which is supported since v6.3.0 and is disabled by default.
 # Since v6.4.0, only the changefeed with the SYSTEM_VARIABLES_ADMIN or SUPER privilege can use the TiCDC Syncpoint feature.
