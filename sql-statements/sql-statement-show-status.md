@@ -14,10 +14,14 @@ A full description of the variables can be found here: [status variables](/statu
 
 ```ebnf+diagram
 ShowStatusStmt ::=
-    'SHOW' GlobalScope STATUS
+    'SHOW' Scope? 'STATUS' ShowLikeOrWhere?
 
-GlobalScope ::=
-    ( 'GLOBAL' | 'SESSION' )?
+Scope ::=
+    ( 'GLOBAL' | 'SESSION' )
+
+ShowLikeOrWhere ::=
+    "LIKE" SimpleExpr
+|   "WHERE" Expression
 ```
 
 ## Examples
