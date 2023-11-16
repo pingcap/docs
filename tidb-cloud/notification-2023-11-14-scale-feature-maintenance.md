@@ -10,12 +10,12 @@ This notification describes the details that you need to know about the maintena
 ## Maintenance window
 
 - Start time: 2023-11-14 16:00 (UTC+0)
-- End time:  2023-11-21 16:00 (UTC+0)
+- End time: 2023-11-21 16:00 (UTC+0)
 - Duration: 7 days
 
 > **Note:**
 >
-> Updated in 2023/11/16: The End time of the Maintenance Window is updated from 2023/11/16 to 2023/11/21.
+> Updated on 2023-11-16: The end time of the maintenance window has been extended from 2023-11-16 to 2023-11-21.
 
 ## Impact
 
