@@ -58,7 +58,8 @@ The [FLUSH STATUS](/sql-statements/sql-statement-flush-status.md) command is als
 ### Ssl_verify_mode
 
 - Scope: SESSION | GLOBAL
-- Type: String
+- Type: Integer
+- The TLS verification mode bitmask.
 
 ### Ssl_version
 
