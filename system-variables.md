@@ -1076,7 +1076,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
-- Default value: `1`
+- Default value: `2`. The default value is `1` for v7.4.0 and earlier versions.
 - This variable specifies the concurrency of reading and writing statistics for a partitioned table when TiDB analyzes the partitioned table.
 
 ### tidb_analyze_version <span class="version-mark">New in v5.1.0</span>
@@ -1301,10 +1301,22 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Integer
-- Default value: `4`
+- Default value: `2`. The default value is `4` for v7.4.0 and earlier versions.
 - Range: `[1, 256]`
 - Unit: Threads
 - This variable is used to set the concurrency of executing the `ANALYZE` statement.
+- When the variable is set to a larger value, the execution performance of other queries is affected.
+
+### tidb_build_sampling_stats_concurrency <span class="version-mark">New in v7.5.0</span>
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Integer
+- Unit: Threads
+- Default value：`2`
+- Range: `[1, 256]`
+- This variable is used to set the sampling concurrency in the `ANALYZE` process.
 - When the variable is set to a larger value, the execution performance of other queries is affected.
 
 ### tidb_capture_plan_baselines <span class="version-mark">New in v4.0</span>
@@ -1982,7 +1994,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 > **Warning:**
 >
-> Currently, `Fast Analyze` is an experimental feature. It is not recommended that you use it in production environments.
+> Starting from v7.5.0, this variable is deprecated.
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
@@ -2972,6 +2984,26 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - When this variable is set to `ON`, you can view visual execution plans in TiDB Dashboard. Note that TiDB Dashboard only provides visual display for execution plans generated after this variable is enabled.
 - You can execute the `SELECT tidb_decode_binary_plan('xxx...')` statement to parse the specific plan from a binary plan.
 
+### tidb_gogc_tuner_max_value <span class="version-mark">New in v7.5.0</span>
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Integer
+- Default value: `500`
+- Range: `[10, 2147483647]`
+- The variable is used to control the maximum value of GOGC that the GOGC Tuner can adjust.
+
+### tidb_gogc_tuner_min_value <span class="version-mark">New in v7.5.0</span>
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Integer
+- Default value: `100`
+- Range: `[10, 2147483647]`
+- The variable is used to control the minimum value of GOGC that the GOGC Tuner can adjust.
+
 ### tidb_gogc_tuner_threshold <span class="version-mark">New in v6.4.0</span>
 
 > **Note:**
@@ -3617,15 +3649,20 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 ### tidb_merge_partition_stats_concurrency
 
-> **Warning:**
->
-> The feature controlled by this variable is not fully functional in the current TiDB version. Do not change the default value.
-
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: `1`
 - This variable specifies the concurrency of merging statistics for a partitioned table when TiDB analyzes the partitioned table.
+
+### tidb_enable_async_merge_global_stats <span class="version-mark">New in v7.5.0</span>
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Boolean
+- Default value: `ON`. When you upgrade TiDB from a version earlier than v7.5.0 to v7.5.0 or a later version, the default value is `OFF`. 
+- This variable is used for TiDB to merge global statistics asynchronously to avoid OOM issues.
 
 ### tidb_metric_query_range_duration <span class="version-mark">New in v4.0</span>
 
@@ -4800,10 +4837,6 @@ SHOW WARNINGS;
 - After you enable the memory limit, TiDB will terminate the SQL statement with the highest memory usage on the current instance. This variable specifies the minimum memory usage of the SQL statement to be terminated. If the memory usage of a TiDB instance that exceeds the limit is caused by too many sessions with low memory usage, you can properly lower the value of this variable to allow more sessions to be canceled.
 
 ### tidb_service_scope <span class="version-mark">New in v7.4.0</span>
-
-> **Warning:**
->
-> This feature is an experimental feature. It is not recommended to use it in production environments. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
 
 <CustomContent platform="tidb">
 

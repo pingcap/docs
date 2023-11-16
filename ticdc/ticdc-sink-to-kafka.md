@@ -58,7 +58,7 @@ The following are descriptions of sink URI parameters and values that can be con
 | `max-message-bytes`  | The maximum size of data that is sent to Kafka broker each time (optional, `10MB` by default). From v5.0.6 and v4.0.6, the default value has changed from `64MB` and `256MB` to `10MB`. |
 | `replication-factor` | The number of Kafka message replicas that can be saved (optional, `1` by default). This value must be greater than or equal to the value of [`min.insync.replicas`](https://kafka.apache.org/33/documentation.html#brokerconfigs_min.insync.replicas) in Kafka. |
 | `required-acks` | A parameter used in the `Produce` request, which notifies the broker of the number of replica acknowledgements it needs to receive before responding. Value options are `0` (`NoResponse`: no response, only `TCP ACK` is provided), `1` (`WaitForLocal`: responds only after local commits are submitted successfully), and `-1` (`WaitForAll`: responds after all replicated replicas are committed successfully. You can configure the minimum number of replicated replicas using the [`min.insync.replicas`](https://kafka.apache.org/33/documentation.html#brokerconfigs_min.insync.replicas) configuration item of the broker). (Optional, the default value is `-1`).    |
-| `compression` | The compression algorithm used when sending messages (value options are `none`, `lz4`, `gzip`, `snappy`, and `zstd`; `none` by default). |
+| `compression` | The compression algorithm used when sending messages (value options are `none`, `lz4`, `gzip`, `snappy`, and `zstd`; `none` by default). Note that the Snappy compressed file must be in the [official Snappy format](https://github.com/google/snappy). Other variants of Snappy compression are not supported.|
 | `protocol` | The protocol with which messages are output to Kafka. The value options are `canal-json`, `open-protocol`, `canal`, `avro` and `maxwell`.   |
 | `auto-create-topic` | Determines whether TiCDC creates the topic automatically when the `topic-name` passed in does not exist in the Kafka cluster (optional, `true` by default). |
 | `enable-tidb-extension` | Optional. `false` by default. When the output protocol is `canal-json`, if the value is `true`, TiCDC sends [WATERMARK events](/ticdc/ticdc-canal-json.md#watermark-event) and adds the [TiDB extension field](/ticdc/ticdc-canal-json.md#tidb-extension-field) to Kafka messages. From v6.1.0, this parameter is also applicable to the `avro` protocol. If the value is `true`, TiCDC adds [three TiDB extension fields](/ticdc/ticdc-avro-protocol.md#tidb-extension-fields) to the Kafka message. |
@@ -222,31 +222,77 @@ For example, for a dispatcher like `matcher = ['test.*'], topic = {schema}_{tabl
 
 ### Partition dispatchers
 
-You can use `partition = "xxx"` to specify a partition dispatcher. It supports four dispatchers: `default`, `ts`, `index-value`, and `table`. The dispatcher rules are as follows:
+You can use `partition = "xxx"` to specify a partition dispatcher. It supports five dispatchers: `default`, `index-value`, `columns`, `table`, and `ts`. The dispatcher rules are as follows:
 
-- `default`: dispatches events in the `table` mode.
-- `ts`: uses the commitTs of the row change to hash and dispatch events.
-- `index-value`: uses the value of the primary key or the unique index of the table to hash and dispatch events.
-- `table`: uses the schema name of the table and the table name to hash and dispatch events.
+- `default`: uses the `table` dispatcher rule by default. It calculates the partition number using the schema name and table name, ensuring data from a table is sent to the same partition. As a result, the data from a single table only exists in one partition and is guaranteed to be ordered. However, this dispatcher rule limits the send throughput, and the consumption speed cannot be improved by adding consumers.
+- `index-value`: calculates the partition number using either the primary key, a unique index, or an explicitly specified index, distributing table data across multiple partitions. The data from a single table is sent to multiple partitions, and the data in each partition is ordered. You can improve the consumption speed by adding consumers.
+- `columns`: calculates the partition number using the values of explicitly specified columns, distributing table data across multiple partitions. The data from a single table is sent to multiple partitions, and the data in each partition is ordered. You can improve the consumption speed by adding consumers.
+- `table`: calculates the partition number using the schema name and table name.
+- `ts`: calculates the partition number using the commitTs of the row change, distributing table data across multiple partitions. The data from a single table is sent to multiple partitions, and the data in each partition is ordered. You can improve the consumption speed by adding consumers. However, multiple changes of a data item might be sent to different partitions and the consumer progress of different consumers might be different, which might cause data inconsistency. Therefore, the consumer needs to sort the data from multiple partitions by commitTs before consuming.
+
+Take the following configuration of `dispatchers` as an example:
+
+```toml
+[sink]
+dispatchers = [
+    {matcher = ['test.*'], partition = "index-value"},
+    {matcher = ['test1.*'], partition = "index-value", index-name = "index1"},
+    {matcher = ['test2.*'], partition = "columns", columns = ["id", "a"]},
+    {matcher = ['test3.*'], partition = "table"},
+]
+```
+
+- Tables in the `test` database use the `index-value` dispatcher, which calculates the partition number using the value of the primary key or unique index. If a primary key exists, the primary key is used; otherwise, the shortest unique index is used.
+- Tables in the `test1` table use the `index-value` dispatcher and calculate the partition number using values of all columns in the index named `index1`. If the specified index does not exist, an error is reported. Note that the index specified by `index-name` must be a unique index.
+- Tables in the `test2` database use the `columns` dispatcher and calculate the partition number using the values of columns `id` and `a`. If any of the columns does not exist, an error is reported.
+- Tables in the `test3` database use the `table` dispatcher.
+- Tables in the `test4` database use the `default` dispatcher, that is the `table` dispatcher, as they do not match any of the preceding rules.
+
+If a table matches multiple dispatcher rules, the first matching rule takes precedence.
 
 > **Note:**
->
 >
 > Since v6.1.0, to clarify the meaning of the configuration, the configuration used to specify the partition dispatcher has been changed from `dispatcher` to `partition`, with `partition` being an alias for `dispatcher`. For example, the following two rules are exactly equivalent.
 >
 > ```
 > [sink]
 > dispatchers = [
->    {matcher = ['*.*'], dispatcher = "ts"},
->    {matcher = ['*.*'], partition = "ts"},
+>    {matcher = ['*.*'], dispatcher = "index-value"},
+>    {matcher = ['*.*'], partition = "index-value"},
 > ]
 > ```
 >
 > However, `dispatcher` and `partition` cannot appear in the same rule. For example, the following rule is invalid.
 >
 > ```
-> {matcher = ['*.*'], dispatcher = "ts", partition = "table"},
+> {matcher = ['*.*'], dispatcher = "index-value", partition = "table"},
 > ```
+
+## Column selectors
+
+The column selector feature supports selecting columns from events and sending only the data changes related to those columns to the downstream.
+
+Take the following configuration of `column-selectors` as an example:
+
+```toml
+[sink]
+column-selectors = [
+    {matcher = ['test.t1'], columns = ['a', 'b']},
+    {matcher = ['test.*'], columns = ["*", "!b"]},
+    {matcher = ['test1.t1'], columns = ['column*', '!column1']},
+    {matcher = ['test3.t'], columns = ["column?", "!column1"]},
+]
+```
+
+- For table `test.t1`, only columns `a` and `b` are sent.
+- For tables in the `test` database (excluding the `t1` table), all columns except `b` are sent.
+- For table `test1.t1`, any column starting with `column` is sent, except for `column1`.
+- For table `test3.t`, any 7-character column starting with `column` is sent, except for `column1`.
+- For tables that do not match any rule, all columns are sent.
+
+> **Note:**
+>
+> After being filtered by the `column-selectors` rules, the data in the table must have a primary key or unique key to be replicated. Otherwise, the changefeed reports an error when it is created or running.
 
 ## Scale out the load of a single large table to multiple TiCDC nodes
 
