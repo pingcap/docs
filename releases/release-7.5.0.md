@@ -196,30 +196,26 @@ Starting from v7.5.0, the following contents are removed from the `TiDB-communit
 
 + TiKV
 
-    - note [#issue](链接) @[贡献者 GitHub ID](链接)
-    - note [#issue](链接) @[贡献者 GitHub ID](链接)
+    - (dup): release-7.1.2.md > 改进提升> TiKV - Avoid holding mutex when writing Titan manifest files to prevent affecting other threads [#15351](https://github.com/tikv/tikv/issues/15351) @[Connor1996](https://github.com/Connor1996)
 
 + PD
 
-    - note [#issue](链接) @[贡献者 GitHub ID](链接)
-    - note [#issue](链接) @[贡献者 GitHub ID](链接)
+  <!--**tw@Oreoxmt**: 1-->
+    - 提升 evict-slow-trend 调度的稳定性和易用性 [#7156](https://github.com/tikv/pd/issues/7156) @[LykxSassinato](https://github.com/LykxSassinator)
 
 + TiFlash
-
-    - note [#issue](链接) @[贡献者 GitHub ID](链接)
-    - note [#issue](链接) @[贡献者 GitHub ID](链接)
 
 + Tools
 
     + Backup & Restore (BR)
 
-        - note [#issue](链接) @[贡献者 GitHub ID](链接)
-        - note [#issue](链接) @[贡献者 GitHub ID](链接)
+      <!--**tw@Oreoxmt**: 1-->
+        - 快照备份恢复支持通过 Session token 和 assume role 来设置权限 [#39832](https://github.com/pingcap/tidb/issues/39832) @[3pointer](https://github.com/3pointer)
 
     + TiCDC
 
-        - note [#issue](链接) @[贡献者 GitHub ID](链接)
-        - note [#issue](链接) @[贡献者 GitHub ID](链接)
+      <!--**tw@Oreoxmt**: 1-->
+        - 优化设置过滤规则时是否忽略大小写的默认值 [#10047](https://github.com/pingcap/tiflow/issues/10047)
 
     + TiDB Data Migration (DM)
 
@@ -240,21 +236,38 @@ Starting from v7.5.0, the following contents are removed from the `TiDB-communit
 
 + TiDB
 
-    - note [#issue](链接) @[贡献者 GitHub ID](链接)
-    - note [#issue](链接) @[贡献者 GitHub ID](链接)
+  <!--**tw@ran-huang**: 4-->
+    - (dup): release-7.1.2.md > 错误修复> TiDB - Prohibit split table operations on non-integer clustered indexes [#47350](https://github.com/pingcap/tidb/issues/47350) @[tangenta](https://github.com/tangenta)
+    - (dup): release-7.1.2.md > 错误修复> TiDB - Fix the issue of encoding time fields with incorrect timezone information [#46033](https://github.com/pingcap/tidb/issues/46033) @[tangenta](https://github.com/tangenta)
+    - (dup): release-7.1.2.md > 错误修复> TiDB - Fix the issue that the Sort operator might cause TiDB to crash during the spill process [#47538](https://github.com/pingcap/tidb/issues/47538) @[windtalker](https://github.com/windtalker)
+    - (dup): release-7.1.2.md > 错误修复> TiDB - Fix the issue that TiDB returns `Can't find column` for queries with `GROUP_CONCAT` [#41957](https://github.com/pingcap/tidb/issues/41957) @[AilinKid](https://github.com/AilinKid)
+    - (dup): release-7.1.2.md > 错误修复> TiDB - Fix the panic issue of `batch-client` in `client-go` [#47691](https://github.com/pingcap/tidb/issues/47691) @[crazycs520](https://github.com/crazycs520)
+    - 修复 INDEX_LOOKUP_HASH_JOIN 内存使用量估算错误的问题 [#47788](https://github.com/pingcap/tidb/issues/47788) @[SeaRise](https://github.com/SeaRise)
+    - 修复长时间下线的 TiFlash 节点重新加入集群后造成的负载不均衡的问题 [#35418](https://github.com/pingcap/tidb/issues/35418) @[windtalker](https://github.com/windtalker)
+    - 修复 HashJoin 算子 Probe 时 Chunk 无法复用的问题 [#48082](https://github.com/pingcap/tidb/issues/48082) @[wshwsh12](https://github.com/wshwsh12)
+    - 修复 COALESCE 函数对于 Date 类型参数返回结果类型不正确的问题 [#46475](https://github.com/pingcap/tidb/issues/46475) @[xzhangxian1008](https://github.com/xzhangxian1008)
 
 + TiKV
 
-    - note [#issue](链接) @[贡献者 GitHub ID](链接)
-    - note [#issue](链接) @[贡献者 GitHub ID](链接)
+    - (dup): release-5.4.0.md > Bug 修复> TiKV - Fix the issue that retrying prewrite requests in the pessimistic transaction mode might cause the risk of data inconsistency in rare cases [#11187](https://github.com/tikv/tikv/issues/11187)
 
 + PD
 
-    - note [#issue](链接) @[贡献者 GitHub ID](链接)
-    - note [#issue](链接) @[贡献者 GitHub ID](链接)
+  <!--**tw@qiancai**: 8-->
+    - (dup): release-7.1.2.md > 错误修复> PD - Fix the issue that `evict-leader-scheduler` might lose configuration [#6897](https://github.com/tikv/pd/issues/6897) @[HuSharp](https://github.com/HuSharp)
+    - 修复 store 下线后对应的打点统计数据未删除的问题 [#7180](https://github.com/tikv/pd/issues/7180) @[rleungx](https://github.com/rleungx)
+    - 修复 DR-AutoSync 在 Placement Rule 配置比较复杂时，canSync 和 hasMajority 可能计算错误的问题 [#7201](https://github.com/tikv/pd/issues/7201) @[disksing](https://github.com/disksing)
+    - 修复 rule checker 未按照设定的 Placement Rule 添加 Learner 的问题 [#7185](https://github.com/tikv/pd/issues/7185) @[nolouch](https://github.com/nolouch)
+    - 修复 TiDB Dashboard 不能正常抓取 PD Trace 数据的问题 [#7253](https://github.com/tikv/pd/issues/7253) @[nolouch](https://github.com/nolouch)
+    - 修复 PD 内部获取的 Region 可能为空导致 PD Panic 的问题 [#7261](https://github.com/tikv/pd/issues/7261) @[lhy1024](https://github.com/lhy1024)
+    - 修复 DR-AutoSync available_stores 计算错误的问题 [#7221](https://github.com/tikv/pd/issues/7221) @[disksing](https://github.com/disksing)
+    - 修复 TiKV 节点不可用时有一定几率删除正常 Peers 的问题 [#7249](https://github.com/tikv/pd/issues/7249) @[lhy1024](https://github.com/lhy1024)
+    - 修复在大集群中添加多个 TiKV 节点可能导致 TiKV 心跳上报变慢或卡住的问题 [#7248](https://github.com/tikv/pd/issues/7248) @[rleungx](https://github.com/rleungx)
 
 + TiFlash
 
+  <!--**tw@Oreoxmt**: 3-->
+    - 修复 UPPER/LOWER 函数在 TiDB 和 TiFlash 中计算结果不一致的问题 [#7695](https://github.com/pingcap/tiflash/issues/7695) @[windtalker](https://github.com/windtalker)
     - Fix the issue that executing queries on empty partitions causes query failure [#8220](https://github.com/pingcap/tiflash/issues/8220) @[JaySon-Huang](https://github.com/JaySon-Huang)
     - Fix a panic issue when the tiflash replica of a table is created [#8217](https://github.com/pingcap/tiflash/issues/8217) @[hongyunyan](https://github.com/hongyunyan)
 
@@ -262,13 +275,21 @@ Starting from v7.5.0, the following contents are removed from the `TiDB-communit
 
     + Backup & Restore (BR)
 
-        - note [#issue](链接) @[贡献者 GitHub ID](链接)
-        - note [#issue](链接) @[贡献者 GitHub ID](链接)
+      <!--**tw@Oreoxmt**: 1-->
+        - (dup): release-7.1.2.md > 错误修复> Tools> Backup & Restore (BR) - Fix the issue that PITR might skip restoring the `CREATE INDEX` DDL statement [#47482](https://github.com/pingcap/tidb/issues/47482) @[Leavrth](https://github.com/Leavrth)
+        - 修复大宽表场景下，日志备份在某些场景中可能卡住的问题 [#15714](https://github.com/tikv/tikv/issues/15714) @[YuJuncen](https://github.com/YuJuncen)
 
     + TiCDC
 
-        - note [#issue](链接) @[贡献者 GitHub ID](链接)
-        - note [#issue](链接) @[贡献者 GitHub ID](链接)
+      <!--**tw@hfxsd**: 8-->
+        - 修复同步到对象存储时访问 NFS 目录导致的性能问题 [#10041](https://github.com/pingcap/tiflow/issues/10041)
+        - 修复开启 claim-check 功能，存储路径拼写不对的问题 [#10036](https://github.com/pingcap/tiflow/issues/10036)
+        - 修复开启 column filter 功能时列设置不对的问题 [#10042](https://github.com/pingcap/tiflow/issues/10042)
+        - 修复 cdc 在某些情况下调度不均衡的问题 [#9845](https://github.com/pingcap/tiflow/issues/9845)
+        - 修复同步到 Kafka 时 callback 可能出现丢失的问题 [#9855](https://github.com/pingcap/tiflow/issues/9855)
+        - 修复某些特殊场景下 processor 可能 panic 的问题 [#9849](https://github.com/pingcap/tiflow/issues/9849)[#9917](https://github.com/pingcap/tiflow/issues/9917)
+        - 修复某些场景下，TiCDC 丢失了对 Region 错误的处理导致同步任务卡住的问题 [#9673](https://github.com/pingcap/tiflow/issues/9673)
+        - 修复开启 Redo log 时，NFS 出现故障导致 owner 节点卡住的问题 [#9886](https://github.com/pingcap/tiflow/issues/9886)
 
     + TiDB Data Migration (DM)
 
