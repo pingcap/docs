@@ -22,6 +22,12 @@ This document gives an overview of the data migration solutions that you can use
 
 You might choose different migration solutions according to the database type, deployment location, application data size, and application needs. The following sections introduce some common migration scenarios, and you can refer to these sections to determine the most suitable solution according to your needs.
 
+## Migrate from Vitess to TiDB
+
+To migrate data from Vitess to TiDB the follwing guid is available:
+
+- [Migrate from Vitess to TiDB](/migrate-from-vitess.md)
+
 ## Migrate data from Aurora MySQL to TiDB
 
 When you migrate data from Aurora to a TiDB cluster deployed on AWS, your data migration takes two operations: full data migration and incremental replication. You can choose the corresponding operation according to your application needs.
