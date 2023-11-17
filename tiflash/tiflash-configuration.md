@@ -129,7 +129,7 @@ delta_index_cache_size = 0
     ## auto_tune_sec indicates the interval of automatic tuning. The unit is seconds. If the value of auto_tune_sec is 0, the automatic tuning is disabled.
     # auto_tune_sec = 5
 
-    ## The following configuration items only take effect for the TiFlash disaggregated storage and compute architecture mode. For details, see documentation at https://docs.pingcap.com/tidb/dev/tiflash-disaggregated-and-s3.
+    ## The following configuration items only take effect for the TiFlash disaggregated storage and compute architecture mode. For details, see documentation at https://docs.pingcap.com/tidb/v7.5/tiflash-disaggregated-and-s3.
     # [storage.s3]
     # endpoint: http://s3.{region}.amazonaws.com # S3 endpoint address
     # bucket: mybucket                           # TiFlash stores all data in this bucket
@@ -152,7 +152,7 @@ delta_index_cache_size = 0
     # compact_log_min_rows = 40960 # 40k
     # compact_log_min_bytes = 33554432 # 32MB
 
-    ## The following configuration item only takes effect for the TiFlash disaggregated storage and compute architecture mode. For details, see documentation at https://docs.pingcap.com/tidb/dev/tiflash-disaggregated-and-s3.
+    ## The following configuration item only takes effect for the TiFlash disaggregated storage and compute architecture mode. For details, see documentation at https://docs.pingcap.com/tidb/v7.5/tiflash-disaggregated-and-s3.
     # disaggregated_mode = tiflash_write # The supported mode is `tiflash_write` or `tiflash_compute.
 
 ## Multiple TiFlash nodes elect a master to add or delete placement rules to PD,
@@ -303,10 +303,10 @@ delta_index_cache_size = 0
     data-key-rotation-period = "168h" # 7 days
 
 [security.encryption.master-key]
-    ## Specifies the master key if encryption is enabled. To learn how to configure a master key, see Configure encryption: https://docs.pingcap.com/tidb/dev/encryption-at-rest#configure-encryption .
+    ## Specifies the master key if encryption is enabled. To learn how to configure a master key, see Configure encryption: https://docs.pingcap.com/tidb/v7.5/encryption-at-rest#configure-encryption .
 
 [security.encryption.previous-master-key]
-    ## Specifies the old master key when rotating the new master key. The configuration format is the same as that of `master-key`. To learn how to configure a master key, see  Configure encryption: https://docs.pingcap.com/tidb/dev/encryption-at-rest#configure-encryption .
+    ## Specifies the old master key when rotating the new master key. The configuration format is the same as that of `master-key`. To learn how to configure a master key, see  Configure encryption: https://docs.pingcap.com/tidb/v7.5/encryption-at-rest#configure-encryption .
 ```
 
 In addition to the items above, other parameters are the same as those of TiKV. Note that the `label` whose key is `engine` is reserved and cannot be configured manually.
