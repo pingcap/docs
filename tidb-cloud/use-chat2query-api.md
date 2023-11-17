@@ -179,7 +179,7 @@ In the response, `DataSummaryObject` represents AI exploration information of th
                 "user_id",
             ],
             "primary_key": "id",
-            "status": "done", // generation status
+            "status": "done",
             "table_name": "users", // table name in database
         }
     },
