@@ -1,7 +1,6 @@
 ---
 title: Upstream Database Configuration File of TiDB Data Migration
 summary: Learn the configuration file of the upstream database
-aliases: ['/docs/tidb-data-migration/dev/source-configuration-file/']
 ---
 
 # Upstream Database Configuration File of TiDB Data Migration
