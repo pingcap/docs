@@ -23,7 +23,7 @@ summary: Learn what TiCDC is, what features TiCDC provides, and how to install a
 - Replicating incremental data from a TiDB cluster to storage services, such as Amazon S3, GCS, Azure Blob Storage, and NFS.
 - Replicate tables with the ability to filter databases, tables, DMLs, and DDLs.
 - Be highly available with no single point of failure. Supports dynamically adding and deleting TiCDC nodes.
-- Support cluster management through [Open API](/ticdc/ticdc-open-api.md), including querying task status, dynamically modifying task configuration, and creating or deleting tasks.
+- Support cluster management through [Open API](/ticdc/ticdc-open-api-v2.md), including querying task status, dynamically modifying task configuration, and creating or deleting tasks.
 
 ### Replication order
 
@@ -70,14 +70,17 @@ As shown in the preceding architecture diagram, TiCDC supports replicating data 
 
 ## Best practices
 
-- When you use TiCDC to replicate data between two TiDB clusters and the network latency between the clusters is higher than 100 ms, it is recommended that you deploy TiCDC in the region (IDC) where the downstream TiDB cluster is located.
+- When you use TiCDC to replicate data between two TiDB clusters, if the network latency between the two clusters is higher than 100 ms:
+
+    - For TiCDC versions earlier than v6.5.2, it is recommended to deploy TiCDC in the region (IDC) where the downstream TiDB cluster is located.
+    - With a series of improvements introduced starting from TiCDC v6.5.2, it is recommended to deploy TiCDC in the region (IDC) where the upstream TiDB cluster is located.
+
 - TiCDC only replicates the table that has at least one **valid index**. A **valid index** is defined as follows:
 
     - A primary key (`PRIMARY KEY`) is a valid index.
     - A unique index (`UNIQUE INDEX`) is valid if every column of the index is explicitly defined as non-nullable (`NOT NULL`) and the index does not have the virtual generated column (`VIRTUAL GENERATED COLUMNS`).
 
 - To use TiCDC in disaster recovery scenarios, you need to configure [redo log](/ticdc/ticdc-sink-to-mysql.md#eventually-consistent-replication-in-disaster-scenarios).
-- When you replicate a wide table with a large single row (greater than 1K), it is recommended that you configure [`per-table-memory-quota`](/ticdc/ticdc-server-config.md) so that `per-table-memory-quota` = `ticdcTotalMemory`/(`tableCount` * 2). `ticdcTotalMemory` is the memory of a TiCDC node, and `tableCount` is the number of target tables that a TiCDC node replicates.
 
 > **Note:**
 >

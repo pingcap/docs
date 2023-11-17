@@ -49,10 +49,7 @@ The expected output is as follows:
 ```
 
 * `checkpoint`: TiCDC has replicated all data before this timestamp to downstream.
-* `state`: The state of this replication task:
-    * `normal`: The task runs normally.
-    * `stopped`: The task is stopped manually or encounters an error.
-    * `removed`: The task is removed.
+* `state`: The state of this replication task. For more information about each state and its meaning, see [Changefeed states](/ticdc/ticdc-changefeed-overview.md#changefeed-state-transfer).
 
 > **Note:**
 >
@@ -271,7 +268,11 @@ For TiCDC versions earlier than v6.5.2, it is recommended that you deploy TiCDC 
 
 ## What is the order of executing DML and DDL statements?
 
-The execution order is: DML -> DDL -> DML. To ensure that the table schema is correct when DML events are executed downstream during data replication, it is necessary to coordinate the execution order of DDL and DML statements. Currently, TiCDC adopts a simple approach: it replicates all DML statements before the DDL ts to downstream first, and then replicates DDL statements.
+Currently, TiCDC adopts the following order:
+
+1. TiCDC blocks the replication progress of the tables affected by DDL statements until the DDL `CommiTs`. This ensures that DML statements executed before DDL `CommiTs` can be successfully replicated to the downstream first.
+2. TiCDC continues with the replication of DDL statements. If there are multiple DDL statements, TiCDC replicates them in a serial manner.
+3. After the DDL statements are executed in the downstream, TiCDC will continue with the replication of DML statements executed after DDL `CommiTs`.
 
 ## How should I check whether the upstream and downstream data is consistent?
 
