@@ -22,6 +22,7 @@
     - GUI Database Tools
       - [JetBrains DataGrip](/develop/dev-guide-gui-datagrip.md)
       - [DBeaver](/develop/dev-guide-gui-dbeaver.md)
+      - [VS Code](/develop/dev-guide-gui-vscode-sqltools.md)
     - [Choose Driver or ORM](/develop/dev-guide-choose-driver-or-orm.md)
     - Java
       - [JDBC](/develop/dev-guide-sample-application-java-jdbc.md)
@@ -52,7 +53,9 @@
       - [Rails](/develop/dev-guide-sample-application-ruby-rails.md)
     - Serverless Driver (Beta)
       - [TiDB Cloud Serverless Driver](/tidb-cloud/serverless-driver.md)
-      - [Configure TiDB Cloud Serverless Driver](/tidb-cloud/serverless-driver-config.md)
+      - [Node.js Example](/tidb-cloud/serverless-driver-node-example.md)
+      - [Prisma Example](/tidb-cloud/serverless-driver-prisma-example.md)
+      - [Kysely Example](/tidb-cloud/serverless-driver-kysely-example.md)
   - Third-Party Support
     - [Third-Party Tools Supported by TiDB](/develop/dev-guide-third-party-support.md)
     - [Known Incompatibility Issues with Third-Party Tools](/develop/dev-guide-third-party-tools-compatibility.md)
@@ -217,6 +220,7 @@
       - [Import Sample Data (SQL File)](/tidb-cloud/import-sample-data.md)
       - [Import CSV Files from Amazon S3 or GCS](/tidb-cloud/import-csv-files.md)
       - [Import Apache Parquet Files from Amazon S3 or GCS](/tidb-cloud/import-parquet-files.md)
+      - [Import with MySQL CLI](/tidb-cloud/import-with-mysql-cli.md)
   - Reference
       - [Configure Amazon S3 Access and GCS Access](/tidb-cloud/config-s3-and-gcs-access.md)
       - [Naming Conventions for Data Import](/tidb-cloud/naming-conventions-for-data-import.md)
@@ -240,7 +244,7 @@
 - Stream Data
   - [Changefeed Overview](/tidb-cloud/changefeed-overview.md)
   - [To MySQL Sink](/tidb-cloud/changefeed-sink-to-mysql.md)
-  - [To Kafka Sink (Beta)](/tidb-cloud/changefeed-sink-to-apache-kafka.md)
+  - [To Kafka Sink](/tidb-cloud/changefeed-sink-to-apache-kafka.md)
   - [To TiDB Cloud Sink](/tidb-cloud/changefeed-sink-to-tidb-cloud.md)
   - [To Cloud Storage](/tidb-cloud/changefeed-sink-to-cloud-storage.md)
 - Security
@@ -304,6 +308,7 @@
     - [Storage](/tidb-storage.md)
     - [Computing](/tidb-computing.md)
     - [Scheduling](/tidb-scheduling.md)
+    - [TSO](/tso.md)
   - [TiDB Dedicated Limitations and Quotas](/tidb-cloud/limitations-and-quotas.md)
   - [TiDB Serverless Limitations](/tidb-cloud/serverless-limitations.md)
   - [Limited SQL Features on TiDB Cloud](/tidb-cloud/limited-sql-features.md)
@@ -625,5 +630,6 @@
   - [2021](/tidb-cloud/release-notes-2021.md)
   - [2020](/tidb-cloud/release-notes-2020.md)
 - Maintenance Notification
+  - [[2023-11-14] TiDB Dedicated Scale Feature Maintenance Notification](/tidb-cloud/notification-2023-11-14-scale-feature-maintenance.md)
   - [[2023-09-26] TiDB Cloud Console Maintenance Notification](/tidb-cloud/notification-2023-09-26-console-maintenance.md)
   - [[2023-08-31] TiDB Cloud Console Maintenance Notification](/tidb-cloud/notification-2023-08-31-console-maintenance.md)

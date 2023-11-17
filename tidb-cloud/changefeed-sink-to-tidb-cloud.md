@@ -13,7 +13,7 @@ This document describes how to stream data from a TiDB Dedicated cluster to a Ti
 
 ## Restrictions
 
-- For each TiDB Cloud cluster, you can create up to 5 changefeeds.
+- For each TiDB Cloud cluster, you can create up to 100 changefeeds.
 - Because TiDB Cloud uses TiCDC to establish changefeeds, it has the same [restrictions as TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview#unsupported-scenarios).
 - If the table to be replicated does not have a primary key or a non-null unique index, the absence of a unique constraint during replication could result in duplicated data being inserted downstream in some retry scenarios.
 - The **Sink to TiDB Cloud** feature is only available to TiDB Dedicated clusters that are in the following AWS regions and created after November 9, 2022:
@@ -75,28 +75,33 @@ After completing the prerequisites, you can sink your data to the destination Ti
 
 5. Customize **Table Filter** to filter the tables that you want to replicate. For the rule syntax, refer to [table filter rules](/table-filter.md).
 
-    - **Filter rules**: you can set filter rules in this column. By default, there is a rule `*. *`, which stands for replicating all tables. When you add a new rule, TiDB Cloud queries all the tables in TiDB and displays only the tables that match the rules in the box on the right. You can add up to 20 filter rules.
-    - **Tables to be replicated**: this column shows the tables to be replicated. But it does not show the new tables to be replicated in the future or the schemas to be fully replicated.
-    - **Tables without valid keys**: this column shows tables without unique and primary keys. For these tables, because no unique identifier can be used by the downstream system to handle duplicate events, their data might be inconsistent during replication. To avoid such issues, it is recommended that you add unique keys or primary keys to these tables before the replication, or set filter rules to filter out these tables. For example, you can filter out the table `test.tbl1` using "!test.tbl1".
+    - **Filter Rules**: you can set filter rules in this column. By default, there is a rule `*.*`, which stands for replicating all tables. When you add a new rule, TiDB Cloud queries all the tables in TiDB and displays only the tables that match the rules in the box on the right. You can add up to 100 filter rules.
+    - **Tables with valid keys**: this column displays the tables that have valid keys, including primary keys or unique indexes.
+    - **Tables without valid keys**: this column shows tables that lack primary keys or unique keys. These tables present a challenge during replication because the absence of a unique identifier can result in inconsistent data when the downstream handles duplicate events. To ensure data consistency, it is recommended to add unique keys or primary keys to these tables before initiating the replication. Alternatively, you can add filter rules to exclude these tables. For example, you can exclude the table `test.tbl1` by using the rule `"!test.tbl1"`.
 
-6. In the **Start Replication Position** area, fill in the TSO that you get from Dumpling exported metadata files.
+6. Customize **Event Filter** to filter the events that you want to replicate.
 
-7. Click **Next** to configure your changefeed specification.
+    - **Tables matching**: you can set which tables the event filter will be applied to in this column. The rule syntax is the same as that used for the preceding **Table Filter** area. You can add up to 10 event filter rules per changefeed.
+    - **Ignored events**: you can set which types of events the event filter will exclude from the changefeed.
+
+7. In the **Start Replication Position** area, fill in the TSO that you get from Dumpling exported metadata files.
+
+8. Click **Next** to configure your changefeed specification.
 
     - In the **Changefeed Specification** area, specify the number of Replication Capacity Units (RCUs) to be used by the changefeed.
     - In the **Changefeed Name** area, specify a name for the changefeed.
 
-8. Click **Next** to review the Changefeed configuration.
+9. Click **Next** to review the changefeed configuration.
 
     If you confirm that all configurations are correct, check the compliance of cross-region replication, and click **Create**.
 
     If you want to modify some configurations, click **Previous** to go back to the previous configuration page.
 
-9. The sink starts soon, and you can see the status of the sink changes from **Creating** to **Running**.
+10. The sink starts soon, and you can see the status of the sink changes from **Creating** to **Running**.
 
     Click the changefeed name, and you can see more details about the changefeed, such as the checkpoint, replication latency, and other metrics.
 
-10. Restore [tidb_gc_life_time](https://docs.pingcap.com/tidb/stable/system-variables#tidb_gc_life_time-new-in-v50) to its original value (the default value is `10m`) after the sink is created:
+11. Restore [tidb_gc_life_time](https://docs.pingcap.com/tidb/stable/system-variables#tidb_gc_life_time-new-in-v50) to its original value (the default value is `10m`) after the sink is created:
 
     ```sql
     SET GLOBAL tidb_gc_life_time = '10m';

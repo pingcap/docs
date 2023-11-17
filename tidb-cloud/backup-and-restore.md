@@ -14,7 +14,7 @@ This document describes how to back up and restore your TiDB Dedicated cluster d
 
 ## Limitations
 
-- TiDB Cloud does not support restoring tables in the `mysql` schema, including user permissions and system variables.
+- Although TiDB Dedicated supports restoring user accounts from backups by default, it does not support restoring system variables stored in the `mysql` schema. 
 - If you turn on and off Point-in-time Restore multiple times, you can only choose a time point within the recoverable range after the most recent Point-in-time Restore is enabled. The earlier recoverable range is not accessible.
 - DO NOT modify the switches of **Point-in-time Restore** and **Dual Region Backup** at the same time.
 
@@ -188,6 +188,10 @@ To delete a running backup job, it is similar as [**Delete backup files**](#dele
 ## Restore
 
 ### Restore data to a new cluster
+
+> **Note**
+>
+> When you restore a TiDB cluster from backups, the restore process retains the original time zone setting without overwriting it.
 
 To restore your TiDB Dedicated cluster data from a backup to a new cluster, take the following steps:
 

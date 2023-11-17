@@ -8,6 +8,43 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2023.
 
+## November 14, 2023
+
+**General changes**
+
+- When you restore data from TiDB Dedicated clusters, the default behavior is now modified from restoring without user accounts to restoring with all user accounts, including the `cloud_admin@'%'` account.
+
+    For more information, see [BackUp and Restore TiDB Dedicated Data](/tidb-cloud/backup-and-restore.md).
+
+- Introduce event filters for changefeeds.
+
+    This enhancement empowers you to easily manage event filters for changefeeds directly through the [TiDB Cloud console](https://tidbcloud.com/), streamlining the process of excluding specific events from changefeeds and providing better control over data replication downstream.
+
+    For more information, see [Changefeed](/tidb-cloud/changefeed-overview.md#edit-a-changefeed).
+
+## November 7, 2023
+
+**General changes**
+
+- Add the following resource usage alerts. The new alerts are disabled by default. You can enable them as needed.
+
+    - Max memory utilization across TiDB nodes exceeded 70% for 10 minutes
+    - Max memory utilization across TiKV nodes exceeded 70% for 10 minutes
+    - Max CPU utilization across TiDB nodes exceeded 80% for 10 minutes
+    - Max CPU utilization across TiKV nodes exceeded 80% for 10 minutes
+
+  For more information, see [TiDB Cloud Built-in Alerting](/tidb-cloud/monitor-built-in-alerting.md#resource-usage-alerts).
+
+## October 31, 2023
+
+**General changes**
+
+- Upgrade the default TiDB version of new [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) clusters from [v7.1.1](https://docs.pingcap.com/tidb/v7.1/release-7.1.1) to [v7.1.2](https://docs.pingcap.com/tidb/v7.1/release-7.1.2).
+
+- Support directly upgrading to the Enterprise support plan in the TiDB Cloud console without contacting sales.
+
+    For more information, see [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
+
 ## October 25, 2023
 
 **General changes**

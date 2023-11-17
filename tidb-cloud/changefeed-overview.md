@@ -10,7 +10,7 @@ TiDB Cloud changefeed helps you stream data from TiDB Cloud to other data servic
 > **Note:**
 >
 > - Currently, TiDB Cloud only allows up to 100 changefeeds per cluster.
-> - Currently, TiDB Cloud only allows up to 50 table filter rules per changefeed.
+> - Currently, TiDB Cloud only allows up to 100 table filter rules per changefeed.
 > - For [TiDB Serverless clusters](/tidb-cloud/select-cluster-tier.md#tidb-serverless), the changefeed feature is unavailable.
 
 To access the changefeed feature, navigate to the cluster overview page of your TiDB cluster, and then click **Changefeed** in the left navigation pane. The changefeed page is displayed.
@@ -65,8 +65,10 @@ It takes about 10 minutes to complete the scaling process (during which the chan
 
     TiDB Cloud populates the changefeed configuration by default. You can modify the following configurations:
 
-    - MySQL sink: **MySQL Connection** and **Table Filter**.
-    - Kafka sink: all configurations.
+    - Apache Kafka sink: all configurations.
+    - MySQL sink: **MySQL Connection**, **Table Filter**, and **Event Filter**.
+    - TiDB Cloud sink: **TiDB Cloud Connection**, **Table Filter**, and **Event Filter**.
+    - Cloud storage sink: **Storage Endpoint**, **Table Filter**, and **Event Filter**.
 
 4. After editing the configuration, click **...** > **Resume** to resume the corresponding changefeed.
 

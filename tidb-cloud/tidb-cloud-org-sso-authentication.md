@@ -192,4 +192,56 @@ In TiDB Cloud, the SAML authentication method is disabled by default. After enab
         >
         > If you have configured email domains, before saving the settings, make sure that you add the email domain that you currently use for login, to avoid that you are locked out by TiDB Cloud.
 
+    - **SCIM Provisioning Accounts**
+
+        It is disabled by default. You can enable it if you want to centralize and automate provisioning, deprovisioning, and identity management for TiDB Cloud organization users and groups from your identity provider. For detailed configuration steps, see [Configure SCIM provisioning](#configure-scim-provisioning).
+
 4. Click **Save**.
+
+#### Configure SCIM provisioning
+
+[System for Cross-domain Identity Management (SCIM)](https://www.rfc-editor.org/rfc/rfc7644) is an open standard that automates the exchange of user identity information between identity domains and IT systems. By configuring SCIM provisioning, user groups from your identity provider can be automatically synchronized to TiDB Cloud, and you can centrally manage roles for these groups in TiDB Cloud.
+
+> **Note:**
+>
+> SCIM provisioning can be enabled only on the [SAML authentication method](#configure-the-saml-authentication-method).
+
+1. In TiDB Cloud, enable the **SCIM Provisioning Accounts** option of the [SAML authentication method](#configure-the-saml-authentication-method), and then record the following information for later use.
+
+    - SCIM connector base URL
+    - Unique identifier field for users
+    - Authentication Mode
+
+2. In your identity provider, configure SCIM provisioning for TiDB Cloud.
+
+    1. In your identity provider, add SCIM provisioning for your TiDB Cloud organization to your SAML app integration.
+
+        For example, if your identity provider is Okta, see [Add SCIM provisioning to app integrations](https://help.okta.com/en-us/content/topics/apps/apps_app_integration_wizard_scim.htm).
+
+    2. Assign your SAML app integration to the desired groups in your identity provider so members in the groups can access and use the app integration.
+
+        For example, if your identity provider is Okta, see [Assign an app integration to a group](https://help.okta.com/en-us/content/topics/provisioning/lcm/lcm-assign-app-groups.htm).
+
+   3. Push user groups from your identity provider to TiDB Cloud.
+
+        For example, if your identity provider is Okta, see [Manage group push](https://help.okta.com/en-us/content/topics/users-groups-profiles/usgp-group-push-main.htm).
+
+3. In TiDB Cloud, view groups pushed from your identity provider.
+
+    1. In the lower-left corner of the [TiDB Cloud console](https://tidbcloud.com), click <MDSvgIcon name="icon-top-organization" />, and then click **Organization Settings**.
+    2. On the **Organization Settings** page, click the **Groups** tab. The groups synchronized from your identity provider are displayed.
+    3. To view users in a group, click **View**.
+
+4. In TiDB Cloud, grant roles to the groups pushed from your identity provider.
+
+    > **Note:**
+    >
+    > Granting a role to a group means all members in the group gain that role. If a group includes members already in your TiDB Cloud organization, these members also gain the new role of the group.
+
+    1. To grant organization roles to the groups, click **By organization**, and then configure the roles in the **Organization Role** column. To learn about permissions of organization roles, see [Organization roles](/tidb-cloud/manage-user-access.md#organization-roles).
+    2. To grant project roles to the groups, click **By project**, and then configure the roles in the **Project Role** column. To learn about permissions of the project roles, see [Project roles](/tidb-cloud/manage-user-access.md#project-roles).
+
+5. If you change the members of the pushed groups in your identity provider, these changes are dynamically synchronized to the corresponding groups in TiDB Cloud.
+
+    - If new members are added to the groups in your identity provider, these members gain the roles of the corresponding groups.
+    - If some members are removed from the groups in your identity provider, these members are also removed from the corresponding groups in TiDB Cloud.
