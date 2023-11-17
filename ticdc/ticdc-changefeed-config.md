@@ -177,7 +177,7 @@ delete-only-output-handle-key-columns = false
 # Date separator type used in the file directory. Value options are `none`, `year`, `month`, and `day`. `day` is the default value and means separating files by day. For more information, see <https://docs.pingcap.com/tidb/stable/ticdc-sink-to-cloud-storage#data-change-records>.
 # Note: This configuration item only takes effect if the downstream is a storage service.
 date-separator = 'day'
-# Whether to use partitions as the separation string. The default value is true, which means that partitions in a table are stored in separate directories. It is recommended that you keep the value as `true` to avoid potential data loss in downstream partitioned tables <https://github.com/pingcap/tiflow/issues/8724>. For usage examples, see <https://docs.pingcap.com/tidb/dev/ticdc-sink-to-cloud-storage#data-change-records)>.
+# Whether to use partitions as the separation string. The default value is true, which means that partitions in a table are stored in separate directories. It is recommended that you keep the value as `true` to avoid potential data loss in downstream partitioned tables <https://github.com/pingcap/tiflow/issues/8724>. For usage examples, see <https://docs.pingcap.com/tidb/v7.5/ticdc-sink-to-cloud-storage#data-change-records)>.
 # Note: This configuration item only takes effect if the downstream is a storage service.
 enable-partition-separator = true
 

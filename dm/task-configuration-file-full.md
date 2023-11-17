@@ -58,7 +58,7 @@ routes:
     table-pattern: "t_*"        # The pattern of the upstream table name, wildcard characters (*?) are supported.
     target-schema: "test"       # The name of the downstream schema.
     target-table: "t"           # The name of the downstream table.
-    # Optional. Used for extracting the source information of sharded schemas and tables and writing the information to the user-defined columns in the downstream. If these options are configured, you need to manually create a merged table in the downstream. For details, see description of table routing in <https://docs.pingcap.com/tidb/dev/dm-table-routing>.
+    # Optional. Used for extracting the source information of sharded schemas and tables and writing the information to the user-defined columns in the downstream. If these options are configured, you need to manually create a merged table in the downstream. For details, see description of table routing in <https://docs.pingcap.com/tidb/v7.5/dm-table-routing>.
     # extract-table:                                        # Extracts and writes the table name suffix without the t_ part to the c-table column of the merged table. For example, 01 is extracted and written to the c-table column for the sharded table t_01.
     #   table-regexp: "t_(.*)"
     #   target-column: "c_table"

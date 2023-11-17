@@ -117,7 +117,7 @@ name: "shard_merge"               # The name of the task. Should be globally uni
 task-mode: all
 # Required for the MySQL shards. By default, the "pessimistic" mode is used.
 # If you have a deep understanding of the principles and usage limitations of the optimistic mode, you can also use the "optimistic" mode.
-# For more information, see [Merge and Migrate Data from Sharded Tables](https://docs.pingcap.com/tidb/dev/feature-shard-merge/)
+# For more information, see [Merge and Migrate Data from Sharded Tables](https://docs.pingcap.com/tidb/v7.5/feature-shard-merge/)
 shard-mode: "pessimistic"
 meta-schema: "dm_meta"                        # A schema will be created in the downstream database to store the metadata
 ignore-checking-items: ["auto_increment_ID"]  # In this example, there are auto-incremental primary keys upstream, so you do not need to check this item.
