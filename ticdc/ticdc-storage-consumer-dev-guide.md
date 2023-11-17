@@ -13,7 +13,7 @@ This document describes how to design and implement a TiDB data change consumer.
 
 TiCDC does not provide any standard way for implementing a consumer. This document provides a consumer example program written in Golang. This program can read data from the storage service and write the data to a MySQL-compatible database. You can refer to the data format and instructions provided in this example to implement a consumer on your own.
 
-[Consumer program written in Golang](https://github.com/pingcap/tiflow/tree/master/cmd/storage-consumer)
+[Consumer program written in Golang](https://github.com/pingcap/tiflow/tree/release-7.5/cmd/storage-consumer)
 
 ## Design a consumer
 

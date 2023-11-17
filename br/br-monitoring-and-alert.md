@@ -19,7 +19,7 @@ Log backup supports using [Prometheus](https://prometheus.io/) to collect monito
 ### Grafana configuration
 
 - For clusters deployed using TiUP, the [Grafana](https://grafana.com/) dashboard contains the point-in-time recovery (PITR) panel. The **Backup Log** panel in the TiKV-Details dashboard is the PITR panel.
-- For clusters deployed manually, refer to [Import a Grafana dashboard](/deploy-monitoring-services.md#step-2-import-a-grafana-dashboard) and upload the [tikv_details](https://github.com/tikv/tikv/blob/master/metrics/grafana/tikv_details.json) JSON file to Grafana. Then find the **Backup Log** panel in the TiKV-Details dashboard.
+- For clusters deployed manually, refer to [Import a Grafana dashboard](/deploy-monitoring-services.md#step-2-import-a-grafana-dashboard) and upload the [tikv_details](https://github.com/tikv/tikv/blob/release-7.5/metrics/grafana/tikv_details.json) JSON file to Grafana. Then find the **Backup Log** panel in the TiKV-Details dashboard.
 
 ### Monitoring metrics
 

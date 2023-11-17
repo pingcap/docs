@@ -14,7 +14,7 @@ TiFlash late materialization is an optimization method to accelerate queries in 
 - When it is disabled, to process a `SELECT` statement with filter conditions (`WHERE` clause), TiFlash reads all the data from the columns required by the query, and then filters and aggregates the data based on the query conditions.
 - When it is enabled, TiFlash supports pushing down part of the filter conditions to the TableScan operator. That is, TiFlash first scans the column data related to the filter conditions that are pushed down to the TableScan operator, filters the rows that meet the condition, and then scans the other column data of these rows for further calculation, thereby reducing IO scans and computations of data processing.
 
-To improve the performance of certain queries in OLAP scenarios, starting from v7.1.0, the TiFlash late materialization feature is enabled by default. The TiDB optimizer can determine which filter conditions to be pushed down based on statistics and filter conditions, and prioritize pushing down the filter conditions with high filtration rates. For detailed algorithms, see the [RFC document](https://github.com/pingcap/tidb/tree/master/docs/design/2022-12-06-support-late-materialization.md).
+To improve the performance of certain queries in OLAP scenarios, starting from v7.1.0, the TiFlash late materialization feature is enabled by default. The TiDB optimizer can determine which filter conditions to be pushed down based on statistics and filter conditions, and prioritize pushing down the filter conditions with high filtration rates. For detailed algorithms, see the [RFC document](https://github.com/pingcap/tidb/tree/release-7.5/docs/design/2022-12-06-support-late-materialization.md).
 
 For example:
 

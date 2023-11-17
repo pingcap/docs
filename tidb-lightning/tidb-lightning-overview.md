@@ -5,7 +5,7 @@ summary: Learn about Lightning and the whole architecture.
 
 # TiDB Lightning Overview
 
-[TiDB Lightning](https://github.com/pingcap/tidb/tree/master/br/pkg/lightning) is a tool used for importing data at TB scale to TiDB clusters. It is often used for initial data import to TiDB clusters.
+[TiDB Lightning](https://github.com/pingcap/tidb/tree/release-7.5/br/pkg/lightning) is a tool used for importing data at TB scale to TiDB clusters. It is often used for initial data import to TiDB clusters.
 
 TiDB Lightning supports the following file formats:
 

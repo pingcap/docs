@@ -11,7 +11,7 @@ summary: Learn about the Data Migration tool, the architecture, the key componen
 ![star](https://img.shields.io/github/stars/pingcap/tiflow?style=for-the-badge&logo=github) ![license](https://img.shields.io/github/license/pingcap/tiflow?style=for-the-badge) ![forks](https://img.shields.io/github/forks/pingcap/tiflow?style=for-the-badge)
 -->
 
-[TiDB Data Migration](https://github.com/pingcap/tiflow/tree/master/dm) (DM) is an integrated data migration task management platform, which supports the full data migration and the incremental data replication from MySQL-compatible databases (such as MySQL, MariaDB, and Aurora MySQL) into TiDB. It can help to reduce the operation cost of data migration and simplify the troubleshooting process.
+[TiDB Data Migration](https://github.com/pingcap/tiflow/tree/release-7.5/dm) (DM) is an integrated data migration task management platform, which supports the full data migration and the incremental data replication from MySQL-compatible databases (such as MySQL, MariaDB, and Aurora MySQL) into TiDB. It can help to reduce the operation cost of data migration and simplify the troubleshooting process.
 
 ## Basic features
 
@@ -65,15 +65,15 @@ Before using the DM tool, note the following restrictions:
 
 ## Contributing
 
-You are welcome to participate in the DM open sourcing project. Your contribution would be highly appreciated. For more details, see [CONTRIBUTING.md](https://github.com/pingcap/tiflow/blob/master/dm/CONTRIBUTING.md).
+You are welcome to participate in the DM open sourcing project. Your contribution would be highly appreciated. For more details, see [CONTRIBUTING.md](https://github.com/pingcap/tiflow/blob/release-7.5/dm/CONTRIBUTING.md).
 
 ## Community support
 
-You can learn about DM through the online documentation. If you have any questions, contact us on [GitHub](https://github.com/pingcap/tiflow/tree/master/dm).
+You can learn about DM through the online documentation. If you have any questions, contact us on [GitHub](https://github.com/pingcap/tiflow/tree/release-7.5/dm).
 
 ## License
 
-DM complies with the Apache 2.0 license. For more details, see [LICENSE](https://github.com/pingcap/tiflow/blob/master/LICENSE).
+DM complies with the Apache 2.0 license. For more details, see [LICENSE](https://github.com/pingcap/tiflow/blob/release-7.5/LICENSE).
 
 ## DM versions
 
@@ -85,5 +85,5 @@ Before v5.4, the DM documentation is independent of the TiDB documentation. To a
 
 > **Note:**
 >
-> - Since October 2021, DM's GitHub repository has been moved to [pingcap/tiflow](https://github.com/pingcap/tiflow/tree/master/dm). If you see any issues with DM, submit your issue to the `pingcap/tiflow` repository for feedback.
+> - Since October 2021, DM's GitHub repository has been moved to [pingcap/tiflow](https://github.com/pingcap/tiflow/tree/release-7.5/dm). If you see any issues with DM, submit your issue to the `pingcap/tiflow` repository for feedback.
 > - In earlier versions (v1.0 and v2.0), DM uses version numbers that are independent of TiDB. Since v5.3, DM uses the same version number as TiDB. The next version of DM v2.0 is DM v5.3. There are no compatibility changes from DM v2.0 to v5.3, and the upgrade process is the same as a normal upgrade, only an increase in version number.

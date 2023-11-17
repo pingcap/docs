@@ -9,7 +9,7 @@ This document introduces the configuration items of TiDB Binlog.
 
 ## Pump
 
-This section introduces the configuration items of Pump. For the example of a complete Pump configuration file, see [Pump Configuration](https://github.com/pingcap/tidb-binlog/blob/master/cmd/pump/pump.toml).
+This section introduces the configuration items of Pump. For the example of a complete Pump configuration file, see [Pump Configuration](https://github.com/pingcap/tidb-binlog/blob/release-7.5/cmd/pump/pump.toml).
 
 ### addr
 
@@ -128,7 +128,7 @@ For the detailed description of the above items, see [GoLevelDB Document](https:
 
 ## Drainer
 
-This section introduces the configuration items of Drainer. For the example of a complete Drainer configuration file, see [Drainer Configuration](https://github.com/pingcap/tidb-binlog/blob/master/cmd/drainer/drainer.toml)
+This section introduces the configuration items of Drainer. For the example of a complete Drainer configuration file, see [Drainer Configuration](https://github.com/pingcap/tidb-binlog/blob/release-7.5/cmd/drainer/drainer.toml)
 
 ### addr
 

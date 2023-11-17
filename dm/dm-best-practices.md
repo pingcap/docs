@@ -5,7 +5,7 @@ summary: Learn about best practices when you use TiDB Data Migration (DM) to mig
 
 # TiDB Data Migration (DM) Best Practices
 
-[TiDB Data Migration (DM)](https://github.com/pingcap/tiflow/tree/master/dm) is a data migration tool developed by PingCAP. It supports full and incremental data migration from MySQL-compatible databases such as MySQL, Percona MySQL, MariaDB, Amazon RDS for MySQL, and Amazon Aurora into TiDB.
+[TiDB Data Migration (DM)](https://github.com/pingcap/tiflow/tree/release-7.5/dm) is a data migration tool developed by PingCAP. It supports full and incremental data migration from MySQL-compatible databases such as MySQL, Percona MySQL, MariaDB, Amazon RDS for MySQL, and Amazon Aurora into TiDB.
 
 You can use DM in the following scenarios:
 
