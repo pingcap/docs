@@ -23,7 +23,7 @@ To create a Data App for your project, perform the following steps:
     >
     > If you are on the **Chat2Query** page of your cluster, you can also open the data app creation dialog by clicking **...** in the upper-right corner, choosing **Access Chat2Query via API**, and clicking **New Chat2Query Data App**.
 
-2. In the dialog, define a name for your Data App, choose the desired clusters as the data source, and select **Chat2Query Data App** as the Data App type. Optionally, you can also write a description for the App.
+2. In the dialog, define a name for your Data App, choose the desired clusters as the data sources, and select **Chat2Query Data App** as the **Data App** type. Optionally, you can also write a description for the App.
 
 3. Click **Create**.
 
@@ -46,8 +46,8 @@ To create an API key, perform the following steps:
         >
         > For Chat2Query API, a data summary is an analysis result of your database by AI, including your database descriptions, table descriptions, and column descriptions. By generating a data summary of your database, you can get a more accurate response when generating SQL statements by providing instructions.
 
-   - `Chat2Query SQL Generate & Execute (ReadOnly) Role`: only allows the API key to generate SQL statements based on provided instructions and execute `SELECT` SQL statements.
-   - `Chat2Query SQL Generate & Execute (ReadWrite) Role`: allows the API key to generate SQL statements based on provided instructions and execute any SQL statements.
+   - `Chat2Query SQL ReadOnly`: only allows the API key to generate SQL statements based on provided instructions and execute `SELECT` SQL statements.
+   - `Chat2Query SQL ReadWrite`: allows the API key to generate SQL statements based on provided instructions and execute any SQL statements.
 
 4. Click **Next**. The public key and private key are displayed.
 
@@ -390,7 +390,7 @@ When calling `/chat2data`, you need to replace the following parameters:
 > Each Chat2Query Data App has a rate limit of 100 requests per day. If you exceed the rate limit, the API returns a `429` error. For more quota, you can [submit a request](https://support.pingcap.com/hc/en-us/requests/new?ticket_form_id=7800003722519) to our support team.
 > API Key with the role `Chat2Query Data Context Management Role` cannot call the Chat2Data v1 endpoint.
 
-The following code example is used to count how many users are in `sp500insight.users` table:
+The following code example is used to count how many users are in the `sp500insight.users` table:
 
 ```bash
 curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request POST 'https://<region>.data.dev.tidbcloud.com/api/v1beta/app/chat2query-<ID>/endpoint/chat2data'\
