@@ -1,7 +1,6 @@
 ---
 title: Introduction to Join Reorder
 summary: Use the Join Reorder algorithm to join multiple tables in TiDB.
-aliases: ['/docs/dev/join-reorder/','/docs/dev/reference/performance/join-reorder/']
 ---
 
 # Introduction to Join Reorder
