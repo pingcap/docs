@@ -23,7 +23,7 @@ summary: Learn what TiCDC is, what features TiCDC provides, and how to install a
 - Replicating incremental data from a TiDB cluster to storage services, such as Amazon S3, GCS, Azure Blob Storage, and NFS.
 - Replicate tables with the ability to filter databases, tables, DMLs, and DDLs.
 - Be highly available with no single point of failure. Supports dynamically adding and deleting TiCDC nodes.
-- Support cluster management through [Open API](/ticdc/ticdc-open-api.md), including querying task status, dynamically modifying task configuration, and creating or deleting tasks.
+- Support cluster management through [Open API](/ticdc/ticdc-open-api-v2.md), including querying task status, dynamically modifying task configuration, and creating or deleting tasks.
 
 ### Replication order
 
