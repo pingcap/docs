@@ -21,7 +21,7 @@ To create a Data App for your project, perform the following steps:
 
     > **Tip:**
     >
-    > If you are on the **Chat2Query** page of your cluster, you can also open the data app creation dialog by clicking ... in the upper-right corner, choosing **Access Chat2Query via API**, and clicking **New Chat2Query Data App**.
+    > If you are on the **Chat2Query** page of your cluster, you can also open the data app creation dialog by clicking **...** in the upper-right corner, choosing **Access Chat2Query via API**, and clicking **New Chat2Query Data App**.
 
 2. In the dialog, define a name for your Data App, choose the desired clusters as the data source, and select **Chat2Query Data App** as the Data App type. Optionally, you can also write a description for the App.
 
