@@ -204,6 +204,27 @@ tiup cluster upgrade <cluster-name> v7.4.0
 >
 > + Try to avoid creating a new clustered index table when you apply rolling updates to the clusters using TiDB Binlog.
 
+#### Specify Component Version during Upgrade
+
+Starting from tiup-cluster v1.14.0, it supports specifying certain components to a specific version during the cluster upgrade. The specified components will be fixed to the specified version and their version number will not change again in the next upgrade unless you specify a new version.
+
+{{< copyable "shell-regular" >}}
+
+```shell
+tiup cluster upgrade -h | grep "version string"
+      --alertmanager-version string        Fix the version of alertmanager and no longer follows the cluster version.
+      --blackbox-exporter-version string   Fix the version of blackbox-exporter and no longer follows the cluster version.
+      --cdc-version string                 Fix the version of cdc and no longer follows the cluster version.
+      --ignore-version-check               Ignore checking if target version is bigger than current version
+      --node-exporter-version string       Fix the version of node-exporter and no longer follows the cluster version.
+      --pd-version string                  Fix the version of pv and no longer follows the cluster version.
+      --tidb-dashboard-version string      Fix the version of tidb-dashboard and no longer follows the cluster version.
+      --tiflash-version string             Fix the version of tiflash and no longer follows the cluster version.
+      --tikv-cdc-version string            Fix the version of tikv-cdc and no longer follows the cluster version.
+      --tikv-version string                Fix the version of tikv and no longer follows the cluster version.
+      --tiproxy-version string             Fix the version of tiproxy and no longer follows the cluster version.
+```
+
 #### Offline upgrade
 
 1. Before the offline upgrade, you first need to stop the entire cluster.
