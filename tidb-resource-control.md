@@ -140,7 +140,7 @@ Starting from v7.4.0, the TiFlash configuration item `enable_resource_control` i
 
 </CustomContent>
 
-For more information about the resource control mechanism and parameters, see [RFC: Global Resource Control in TiDB](https://github.com/pingcap/tidb/blob/master/docs/design/2022-11-25-global-resource-control.md) and [TiFlash Resource Control](https://github.com/pingcap/tiflash/blob/master/docs/design/2023-09-21-tiflash-resource-control.md).
+For more information about the resource control mechanism and parameters, see [RFC: Global Resource Control in TiDB](https://github.com/pingcap/tidb/blob/release-7.5/docs/design/2022-11-25-global-resource-control.md) and [TiFlash Resource Control](https://github.com/pingcap/tiflash/blob/release-7.5/docs/design/2023-09-21-tiflash-resource-control.md).
 
 ## How to use resource control
 
@@ -539,4 +539,4 @@ The resource control feature does not impact the regular usage of data import, e
 * [CREATE RESOURCE GROUP](/sql-statements/sql-statement-create-resource-group.md)
 * [ALTER RESOURCE GROUP](/sql-statements/sql-statement-alter-resource-group.md)
 * [DROP RESOURCE GROUP](/sql-statements/sql-statement-drop-resource-group.md)
-* [RESOURCE GROUP RFC](https://github.com/pingcap/tidb/blob/master/docs/design/2022-11-25-global-resource-control.md)
+* [RESOURCE GROUP RFC](https://github.com/pingcap/tidb/blob/release-7.5/docs/design/2022-11-25-global-resource-control.md)

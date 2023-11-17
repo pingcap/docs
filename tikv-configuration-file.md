@@ -8,7 +8,7 @@ aliases: ['/docs/dev/tikv-configuration-file/','/docs/dev/reference/configuratio
 
 <!-- markdownlint-disable MD001 -->
 
-The TiKV configuration file supports more options than command-line parameters. You can find the default configuration file in [etc/config-template.toml](https://github.com/tikv/tikv/blob/master/etc/config-template.toml) and rename it to `config.toml`.
+The TiKV configuration file supports more options than command-line parameters. You can find the default configuration file in [etc/config-template.toml](https://github.com/tikv/tikv/blob/release-7.5/etc/config-template.toml) and rename it to `config.toml`.
 
 This document only describes the parameters that are not included in command-line parameters. For more details, see [command-line parameter](/command-line-flags-for-tikv-configuration.md).
 

@@ -46,7 +46,7 @@ For how to pause, close, check, and modify the state of Drainer, see the [binlog
 
 ## Use `binlogctl` to manage Pump/Drainer
 
-[`binlogctl`](https://github.com/pingcap/tidb-binlog/tree/master/binlogctl) is an operations tool for TiDB Binlog with the following features:
+[`binlogctl`](https://github.com/pingcap/tidb-binlog/tree/release-7.5/binlogctl) is an operations tool for TiDB Binlog with the following features:
 
 * Checking the state of Pump or Drainer
 * Pausing or closing Pump or Drainer

@@ -6,7 +6,7 @@ aliases: ['/docs/dev/mydumper-overview/','/docs/dev/reference/tools/mydumper/','
 
 # Use Dumpling to Export Data
 
-This document introduces the data export tool - [Dumpling](https://github.com/pingcap/tidb/tree/master/dumpling). Dumpling exports data stored in TiDB/MySQL as SQL or CSV data files and can be used to make a logical full backup or export. Dumpling also supports exporting data to Amazon S3.
+This document introduces the data export tool - [Dumpling](https://github.com/pingcap/tidb/tree/release-7.5/dumpling). Dumpling exports data stored in TiDB/MySQL as SQL or CSV data files and can be used to make a logical full backup or export. Dumpling also supports exporting data to Amazon S3.
 
 <CustomContent platform="tidb">
 

@@ -67,7 +67,7 @@ Scheduling is based on information collection. In short, the PD scheduling compo
 
 - State information reported by each TiKV peer:
 
-    Each TiKV peer sends heartbeats to PD periodically. PD not only checks whether the store is alive, but also collects [`StoreState`](https://github.com/pingcap/kvproto/blob/master/proto/pdpb.proto#L473) in the heartbeat message. `StoreState` includes:
+    Each TiKV peer sends heartbeats to PD periodically. PD not only checks whether the store is alive, but also collects [`StoreState`](https://github.com/pingcap/kvproto/blob/release-7.5/proto/pdpb.proto#L473) in the heartbeat message. `StoreState` includes:
 
     * Total disk space
     * Available disk space
@@ -89,7 +89,7 @@ Scheduling is based on information collection. In short, the PD scheduling compo
 
 - Information reported by Region leaders:
 
-    Each Region leader sends heartbeats to PD periodically to report [`RegionState`](https://github.com/pingcap/kvproto/blob/master/proto/pdpb.proto#L312), including:
+    Each Region leader sends heartbeats to PD periodically to report [`RegionState`](https://github.com/pingcap/kvproto/blob/release-7.5/proto/pdpb.proto#L312), including:
 
     * Position of the leader itself
     * Positions of other replicas

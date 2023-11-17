@@ -25,7 +25,7 @@ To enable OpenAPI, perform one of the following operations:
 
 > **Note:**
 >
-> - DM provides the [specification document](https://github.com/pingcap/tiflow/blob/master/dm/openapi/spec/dm.yaml) that meets the OpenAPI 3.0.0 standard. This document contains all the request parameters and returned values. You can copy the document yaml and preview it in [Swagger Editor](https://editor.swagger.io/).
+> - DM provides the [specification document](https://github.com/pingcap/tiflow/blob/release-7.5/dm/openapi/spec/dm.yaml) that meets the OpenAPI 3.0.0 standard. This document contains all the request parameters and returned values. You can copy the document yaml and preview it in [Swagger Editor](https://editor.swagger.io/).
 >
 > - After you deploy the DM-master nodes, you can access `http://{master-addr}/api/v1/docs` to preview the documentation online.
 >
