@@ -43,6 +43,10 @@ In v7.5 LTS, TiDB provides multi-level support for different quality standards o
         <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
       </tr>
       <tr>
+        <td>Rocky Linux 9.1 or later</td>
+        <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
+      </tr>
+      <tr>
         <td>Kylin Euler V10 SP1/SP2</td>
         <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
       </tr>
@@ -98,10 +102,6 @@ In v7.5 LTS, TiDB provides multi-level support for different quality standards o
       <tr>
         <td>openSUSE Leap later than v15.3 (not including Tumbleweed)</td>
         <td>x86_64</td>
-      </tr>
-      <tr>
-        <td>Rocky Linux 9.1 or later</td>
-        <td><ul><li>x86_64</li><li>ARM 64</li></ul></td>
       </tr>
       <tr>
         <td>SUSE Linux Enterprise Server 15</td>
