@@ -10,16 +10,16 @@ As both Vitess and TiDB support the MySQL protocol and SQL dialect the amount of
 
 ### Dumpling and Lightning
 
-![Vitess to TiDB Migration with TiDB backend](vitess_to_tidb.png)
+![Vitess to TiDB Migration with TiDB backend](/media/vitess_to_tidb.png)
 
 This is with Dumpling and Lightning where Lightning uses the `tidb` backend.
 
 ---
 
-![Vitess to TiDB Migration with local backend](vitess_to_tidb_dumpling_local.png)
+![Vitess to TiDB Migration with local backend](/media/vitess_to_tidb_dumpling_local.png)
 
 This is with Dumpling and Lightning where Lightning uses the `local` backend to directly ingest data into TiKV.
 
 ### DM
 
-![Vitess to TiDB with DM](vitess_to_tidb_dm.png)
+![Vitess to TiDB with DM](/media/vitess_to_tidb_dm.png)
