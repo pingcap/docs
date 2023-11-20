@@ -261,7 +261,7 @@ Example 2: Switch the cluster component to version v1.13.0
 tiup link cluster:v1.13.0
 ```
 
-The `tiup link cluster` command will output the following:
+The following is the output of the `tiup link cluster` command:
 
 ```shell
 package cluster provides these executables: tiup-cluster
