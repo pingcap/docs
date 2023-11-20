@@ -160,7 +160,7 @@ The above configuration specifies the global configuration of TiDB and TiKV.
 
 > **Note:**
 >
-> For components such as TiDB, TiKV, PD, TiCDC that share the same version number, there is no complete test to ensure that they can work properly in a cross-version mixing scenario. Therefore, it is recommended to only use such scenarios for testing purposes or operate under the help of support.
+> For TiDB, TiKV, PD, TiCDC, and other components that share their own version numbers, there are no complete tests to ensure that they work properly in a mixed-version scenario. Ensure that you use this section only for testing scenarios, or with the help of technical support.
 
 `component_versions` is used to specify the version number of a certain component. When `component_versions` is not configured, each component either uses the same version number as the TiDB cluster (such as PD and TiKV), or uses the latest version (such as Alertmanager). When this field is configured, the corresponding component will use the specified version, and this version will be used in subsequent cluster expansion and upgrade operations. Users should only configure this when they need to fix the version number of a component. The main fields include:
 
