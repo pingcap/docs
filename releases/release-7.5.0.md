@@ -213,7 +213,9 @@ Starting from v7.5.0, the following contents are removed from the `TiDB-communit
 + Tools
 
     + Backup & Restore (BR)
-
+        <!--**tw@hfxsd**: 2-->
+        - Add a new inter-table backup parameter `table-concurrency` for snapshot backups. This parameter is used to control the inter-table concurrency of meta information such as statistics backup and data validation [48571](https://github.com/pingcap/tidb/issues/48571) @[3pointer](https://github.com/3pointer)
+        - During restoring a snapshot backup, BR retries when it encounters certain network errors [48528](https://github.com/pingcap/tidb/issues/48528) @[Leavrth](https://github.com/Leavrth)
       <!--**tw@Oreoxmt**: 1-->
         - TiDB snapshot backup and restore supports setting permissions through AWS session tokens and IAM roles [#39832](https://github.com/pingcap/tidb/issues/39832) @[3pointer](https://github.com/3pointer)
 
