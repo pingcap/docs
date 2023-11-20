@@ -9,7 +9,7 @@ TiDB is a MySQL-compatible database, and [MySQL Workbench](https://www.mysql.com
 
 > **Warning:**
 >
-> MySQL Workbench is not full supported TiDB. MySQL Workbench can connect to TiDB, because of TiDB is a MySQL-compatible database. So the MySQL Workbench will treat TiDB as a MySQL. But there some errors might be occered when you are using it. If it is possible, recommand you use some other free GUI tools, they supported TiDB officially:
+> MySQL Workbench does not fully support TiDB. MySQL Workbench can connect to TiDB, because of TiDB is a MySQL-compatible database. So the MySQL Workbench will treat TiDB as a MySQL. But some errors might  occur when you are using it. It is recommended that you use other free GUI tools like the ones below, as they supported TiDB officially:
 >
 > - [DataGrip](/develop/dev-guide-gui-datagrip.md)
 > - [DBeaver](/develop/dev-guide-gui-dbeaver.md)
@@ -149,4 +149,4 @@ Connect to your TiDB cluster depending on the TiDB deployment option you have se
 
 ## Need help?
 
-Ask questions on the [Discord](https://discord.gg/vYU9h56kAX), or [create a support ticket](https://support.pingcap.com/).
+Ask questions on the [Discord](https://discord.gg/vYU9h56kAX), [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap) or [create a support ticket](https://support.pingcap.com/).
