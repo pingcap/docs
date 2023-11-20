@@ -298,14 +298,14 @@ Starting from v7.5.0, the following contents are removed from the `TiDB-communit
     + TiCDC
 
       <!--**tw@hfxsd**: 8-->
-        - 修复同步到对象存储时访问 NFS 目录导致的性能问题 [#10041](https://github.com/pingcap/tiflow/issues/10041)
-        - 修复开启 claim-check 功能，存储路径拼写不对的问题 [#10036](https://github.com/pingcap/tiflow/issues/10036)
-        - 修复开启 column filter 功能时列设置不对的问题 [#10042](https://github.com/pingcap/tiflow/issues/10042)
-        - 修复 cdc 在某些情况下调度不均衡的问题 [#9845](https://github.com/pingcap/tiflow/issues/9845)
-        - 修复同步到 Kafka 时 callback 可能出现丢失的问题 [#9855](https://github.com/pingcap/tiflow/issues/9855)
-        - 修复某些特殊场景下 processor 可能 panic 的问题 [#9849](https://github.com/pingcap/tiflow/issues/9849)[#9917](https://github.com/pingcap/tiflow/issues/9917)
-        - 修复某些场景下，TiCDC 丢失了对 Region 错误的处理导致同步任务卡住的问题 [#9673](https://github.com/pingcap/tiflow/issues/9673)
-        - 修复开启 Redo log 时，NFS 出现故障导致 owner 节点卡住的问题 [#9886](https://github.com/pingcap/tiflow/issues/9886)
+        - Fix the performance issue caused by accessing NFS directories when replicating data to an object store sink [#10041](https://github.com/pingcap/tiflow/issues/10041) @[CharlesCheung96](https://github.com/CharlesCheung96)
+        - Fix the issue that the storage path is misspelled when `claim-check` is enabled [#10036](https://github.com/pingcap/tiflow/issues/10036) @[3AceShowHand](https://github.com/3AceShowHand)
+        - Fix the issue that column selector is incorrect when `column filter` is enabled [#10042](https://github.com/pingcap/tiflow/issues/10042) @[3AceShowHand](https://github.com/3AceShowHand)
+        - Fix the issue that TiCDC scheduling is not balanced in some cases [#9845](https://github.com/pingcap/tiflow/issues/9845) @[3AceShowHand](https://github.com/3AceShowHand)
+        - Fix the issue that callbacks might be lost when TiCDC replicates data to Kafka [#9855](https://github.com/pingcap/tiflow/issues/9855) @[hicqu](https://github.com/hicqu)
+        - Fix the issue that the TiCDC processor might panic in some scenarios [#9849] (https://github.com/pingcap/tiflow/issues/9849)[#9915](https://github.com/pingcap/tiflow/issues/9915) @[hicqu](https://github.com/hicqu) @[3AceShowHand](https://github.com/3AceShowHand)
+        - Fix the issue that enabling `kv-client.enable-multiplexing` causes replication tasks to get stuck [#9673](https://github.com/pingcap/tiflow/issues/9673) @[fubinzh](https://github.com/fubinzh)
+        - Fix the issue that an owner node gets stuck due to NFS failure when redo logging is enabled [#9886](https://github.com/pingcap/tiflow/issues/9886) @[3AceShowHand](https://github.com/3AceShowHand)
 
     + TiDB Data Migration (DM)
 
