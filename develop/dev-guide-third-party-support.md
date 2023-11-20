@@ -170,11 +170,7 @@ If you encounter problems when connecting to TiDB using the tools listed in this
          <td>v4.2</td>
          <td>Full</td>
          <td><a href="https://github.com/pingcap/django-tidb" target="_blank" referrerpolicy="no-referrer-when-downgrade">django-tidb</a></td>
-<<<<<<< HEAD
-         <td><a href="/tidb/v7.4/dev-guide-sample-application-django">Connect to TiDB with Django</a></td>
-=======
          <td><a href="/tidb/dev/dev-guide-sample-application-python-django">Connect to TiDB with Django</a></td>
->>>>>>> ab6d71034f (develop: update the third party support table (#15187))
       </tr>
       <tr>
          <td><a href="https://www.sqlalchemy.org/" target="_blank" referrerpolicy="no-referrer-when-downgrade">SQLAlchemy</a></td>
