@@ -328,8 +328,8 @@ If you want to improve the results of `/v2/chat2data` for a database, you can ch
     In the preceding example, the request body is a JSON object with the following properties:
 
     - `<table_name>`: _string_. The table you want to update.
-    - `table_name.description`: _string_. The new description you want to set for the given table.
-    - `columns`: a key-value pair to specify the target column and the column description you want to update.
+    - `<table_name>.description`: _string_. The new description you want to set for the given table.
+    - `<table_name>.columns`: a key-value pair to specify the target column and the column description you want to update.
 
     An example response is as follows:
 
@@ -382,8 +382,8 @@ TiDB Cloud generates code examples to help you call an endpoint. To get the exam
 When calling `/chat2data`, you need to replace the following parameters:
 
 - Replace the `${PUBLIC_KEY}` and `${PRIVATE_KEY}` placeholders with your API key.
-- Replace the `<your instruction>` placeholder with the instruction you want AI to generate and execute SQL statements.
 - Replace the `<your table name, optional>` placeholder with the table name you want to query. If you do not specify a table name, AI will query all tables in the database.
+- Replace the `<your instruction>` placeholder with the instruction you want AI to generate and execute SQL statements.
 
 > **Note:**
 >
