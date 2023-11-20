@@ -247,7 +247,7 @@ tiup uninstall --all
 
 ### Link Component
 
-TiUP v1.13.0 added experimental `link` and `unlink` commands to link the binary of a component to the executable directory (`$TIUP_HOME/bin/`) and remove the link. This feature allows users to call the component without going through TiUP each time, while preserving the ability to switch between multiple versions. However, this method lacks the process of automatic update checking and setting certain environment variables. Therefore, it's recommended to use it only when necessary.
+TiUP v1.13.0 adds the experimental `link` and `unlink` commands to link the binary of a component to the executable directory (`$TIUP_HOME/bin/`) and remove the link. This feature allows you to call a component without going through TiUP each time, while preserving the ability to switch between multiple versions. However, this method lacks the process of automatic update checking and setting certain environment variables and some components (for example, ctl) can not be used. Therefore, it is recommended to use it only when necessary.
 
 Example 1: Install and link the latest version of the cluster component
 
