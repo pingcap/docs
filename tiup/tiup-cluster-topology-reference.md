@@ -184,7 +184,7 @@ component_versions:
   kvcdc: "v1.1.1"
 ```
 
-The above configuration specifies the version number of TiKV-CDC to be v1.1.1.
+The preceding configuration specifies the version number of TiKV-CDC to be `v1.1.1`.
 
 ### `pd_servers`
 
