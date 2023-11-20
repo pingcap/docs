@@ -278,7 +278,7 @@ tiup unlink cluster
 
 Example 4: Manage the version of TiUP itself
 
-Before v1.13.0, TiUP itself was installed in `~/.tiup/bin/` and could not coexist with multiple versions. Starting from v1.13.0, TiUP can be installed and linked like all other components.
+Before v1.13.0, TiUP is installed in `~/.tiup/bin/` and can not coexist with multiple versions. Starting from v1.13.0, You can install and link TiUP like any other components.
 
 ```shell
 tiup update --self # update tiup itself to a version that supports link
