@@ -204,7 +204,7 @@ In the response, `DataSummaryObject` represents AI exploration information of th
 
 #### 3. Generate and execute SQL statements by calling `/v2/chat2data`
 
-When the data summary of a database is ready, you can call `/v2/chat2data` to generate and execute SQL statements by providing the data summary ID and your instructions as follows:
+When the data summary of a database is ready, you can call `/v2/chat2data` to generate and execute SQL statements by providing the data summary ID and your question as follows:
 
 ```bash
 curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request POST 'https://<region>.data.dev.tidbcloud.com/api/v1beta/app/chat2query-<ID>/endpoint/v2/chat2data'\
