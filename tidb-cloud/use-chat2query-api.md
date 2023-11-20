@@ -39,7 +39,7 @@ To create an API key, perform the following steps:
 2. In the **Authentication** area, click **Create API Key**.
 3. In the **Create API Key** dialog, enter a description, and then select one of the following roles for your API key:
 
-   - `Chat2Query Admin Role`: allows the API key to manage data summaries, generate SQL statements based on provided instructions, and execute any SQL statements.
+   - `Chat2Query Admin`: allows the API key to manage data summaries, generate SQL statements based on provided instructions, and execute any SQL statements.
    - `Chat2Query Data Summary Management Role`: only allows the API key to generate and update data summaries.
 
         > **Tip:**
