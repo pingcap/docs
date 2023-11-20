@@ -7,10 +7,6 @@ summary: An overview of the usage of IMPORT INTO in TiDB.
 
 The `IMPORT INTO` statement is used to import data in formats such as `CSV`, `SQL`, and `PARQUET` into an empty table in TiDB via the [Physical Import Mode](/tidb-lightning/tidb-lightning-physical-import-mode.md) of TiDB Lightning.
 
-> **Warning:**
->
-> Currently, this statement is experimental. It is not recommended to use it in production environments.
-
 > **Note:**
 >
 > This statement is only applicable to TiDB Self-Hosted and not available on [TiDB Cloud](https://docs.pingcap.com/tidbcloud/).
@@ -26,7 +22,7 @@ The `IMPORT INTO` statement is used to import data in formats such as `CSV`, `SQ
 
 ## Restrictions
 
-- Currently, `IMPORT INTO` supports importing data within 1 TiB.
+- Currently, `IMPORT INTO` supports importing data within 10 TiB.
 - `IMPORT INTO` only supports importing data into existing empty tables in the database.
 - `IMPORT INTO` does not support transactions or rollback. Executing `IMPORT INTO` within an explicit transaction (`BEGIN`/`END`) will return an error.
 - The execution of `IMPORT INTO` blocks the current connection until the import is completed. To execute the statement asynchronously, you can add the `DETACHED` option.
@@ -37,7 +33,9 @@ The `IMPORT INTO` statement is used to import data in formats such as `CSV`, `SQ
 - The TiDB [temporary directory](/tidb-configuration-file.md#temp-dir-new-in-v630) is expected to have at least 90 GiB of available space. It is recommended to allocate storage space that is equal to or greater than the volume of data to be imported.
 - One import job supports importing data into one target table only. To import data into multiple target tables, after the import for a target table is completed, you need to create a new job for the next target table.
 - `IMPORT INTO` is not supported during TiDB cluster upgrades.
-- When the [Global Sort](/tidb-global-sort.md) feature is used, the data size of a single row after encoding cannot exceed 32 MiB, and the data size of a single index key after encoding cannot exceed 16 MiB.
+- When the [Global Sort](/tidb-global-sort.md) feature is used for data import, the data size of a single row after encoding cannot exceed 32 MiB.
+- When the Global Sort feature is used for data import, if the target TiDB cluster is deleted before the import task is completed, temporary data used for global sorting might remain on Amazon S3. In this case, you need delete the residual data manually to avoid increasing S3 storage costs.
+- Ensure that the data to be imported does not contain any records with primary key or non-null unique index conflicts. Otherwise, the conflicts can result in import task failures.
 
 ## Prerequisites for import
 
@@ -153,6 +151,10 @@ The supported options are described as follows:
 > The Snappy compressed file must be in the [official Snappy format](https://github.com/google/snappy). Other variants of Snappy compression are not supported.
 
 ## Global Sort
+
+> **Warning:**
+>
+> The Global Sort feature is experimental. It is not recommended to use it in production environments.
 
 `IMPORT INTO` splits the data import job of a source data file into multiple sub-jobs, each sub-job independently encoding and sorting data before importing. If the encoded KV ranges of these sub-jobs have significant overlap (to learn how TiDB encodes data to KV, see [TiDB computing](/tidb-computing.md)), TiKV needs to keep compaction during import, leading to a decrease in import performance and stability.
 
