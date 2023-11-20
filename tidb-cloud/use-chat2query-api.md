@@ -327,8 +327,8 @@ If you want to improve the results of `/v2/chat2data` for a database, you can ch
 
     In the preceding example, the request body is a JSON object with the following properties:
 
-    - `<tables_name>`: _string_. The table you want to update.
-    - `tables_name.description`: _string_. The new description you want to set for the given table.
+    - `<table_name>`: _string_. The table you want to update.
+    - `table_name.description`: _string_. The new description you want to set for the given table.
     - `columns`: a key-value pair to specify the target column and the column description you want to update.
 
     An example response is as follows:
@@ -388,7 +388,7 @@ When calling `/chat2data`, you need to replace the following parameters:
 > **Note:**
 >
 > Each Chat2Query Data App has a rate limit of 100 requests per day. If you exceed the rate limit, the API returns a `429` error. For more quota, you can [submit a request](https://support.pingcap.com/hc/en-us/requests/new?ticket_form_id=7800003722519) to our support team.
-> API Key with the role `Chat2Query Data Context Management Role` cannot call the Chat2Data v1 endpoint.
+> API Key with the role `Chat2Query Data Summary Management Role` cannot call the Chat2Data v1 endpoint.
 
 The following code example is used to count how many users are in the `sp500insight.users` table:
 
