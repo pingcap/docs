@@ -158,7 +158,7 @@ The above configuration specifies the global configuration of TiDB and TiKV.
 
 ### `component_versions`
 
-> ** Note:**
+> **Note:**
 >
 > For components such as TiDB, TiKV, PD, TiCDC that share the same version number, there is no complete test to ensure that they can work properly in a cross-version mixing scenario. Therefore, it is recommended to only use such scenarios for testing purposes or operate under the help of support.
 
