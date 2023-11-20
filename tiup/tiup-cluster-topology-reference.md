@@ -177,7 +177,7 @@ The above configuration specifies the global configuration of TiDB and TiKV.
 - `grafana`: The version of the Grafana component
 - `alertmanager`: The version of the Alertmanager component
 
-Example configuration for `component_versions`:
+The following is an example configuration for `component_versions`:
 
 ```yaml
 component_versions:
