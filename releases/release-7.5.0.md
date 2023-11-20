@@ -79,9 +79,6 @@ Compared with the previous LTS 7.1.0, 7.5.0 includes new features, improvements,
 
     The backend task distributed execution framework introduced in v6.6.0 has become GA. In versions before TiDB v7.1.0, only one TiDB node can execute DDL tasks at the same time. Starting from v7.1.0, multiple TiDB nodes can execute the same DDL task in parallel under the backend task distributed execution framework. Starting from v7.2.0, the backend task distributed execution framework supports multiple TiDB nodes to execute the same `IMPORT INTO` task in parallel, thereby better utilizing the resources of the TiDB cluster and significantly improving the performance of DDL and `IMPORT INTO` tasks. In addition, you can also increase TiDB nodes to linearly improve the performance of these tasks.
 
-    After introducing the global sort feature in v7.4.0, encoded data is no longer written locally for sorting but instead written to cloud storage for global sorting.
-Then, TiDB imports index data and table data that have been globally sorted into TiKV in parallel, thus improving performance and stability.
-
     To use the backend task distributed execution framework, set [`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710) value to `ON`.
 
     For more information, see [documentation](/tidb-global-sort.md).
