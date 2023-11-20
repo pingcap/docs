@@ -33,7 +33,7 @@ The `IMPORT INTO` statement is used to import data in formats such as `CSV`, `SQ
 - The TiDB [temporary directory](/tidb-configuration-file.md#temp-dir-new-in-v630) is expected to have at least 90 GiB of available space. It is recommended to allocate storage space that is equal to or greater than the volume of data to be imported.
 - One import job supports importing data into one target table only. To import data into multiple target tables, after the import for a target table is completed, you need to create a new job for the next target table.
 - `IMPORT INTO` is not supported during TiDB cluster upgrades.
-- When the [Global Sort](/tidb-global-sort.md) feature is used for data import, the data size of a single row after encoding cannot exceed 32 MiB.
+- When the [Global Sort](/tidb-global-sort.md) feature is used for data import, the data size of a single row after encoding must not exceed 32 MiB.
 - When the Global Sort feature is used for data import, if the target TiDB cluster is deleted before the import task is completed, temporary data used for global sorting might remain on Amazon S3. In this case, you need to delete the residual data manually to avoid increasing S3 storage costs.
 - Ensure that the data to be imported does not contain any records with primary key or non-null unique index conflicts. Otherwise, the conflicts can result in import task failures.
 
@@ -166,7 +166,7 @@ In the following scenarios, there can be significant overlap in KV ranges:
 
 When [Backend task distributed execution framework](/tidb-distributed-execution-framework.md) is enabled, you can enable [Global Sort](/tidb-global-sort.md) by specifying the `CLOUD_STORAGE_URI` option in the `IMPORT INTO` statement or by specifying the target storage address for encoded KV data using the system variable [`tidb_cloud_storage_uri`](/system-variables.md#tidb_cloud_storage_uri-new-in-v740). Note that currently, only S3 is supported as the Global Sort storage address. When Global Sort is enabled, `IMPORT INTO` writes encoded KV data to the cloud storage, performs Global Sort in the cloud storage, and then parallelly imports the globally sorted index and table data into TiKV. This prevents problems caused by KV overlap and enhances import stability.
 
-Global Sort consumes a significant amount of memory resources. Before the data import, it is recommended to configure the [`tidb_server_memory_limit_gc_trigger`](/system-variables.md#tidb_server_memory_limit_gc_trigger-new-in-v640) and [`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-introduced-new-in-v640) variables, which avoids golang GC being frequently triggered and thus affecting the import efficiency.
+Global Sort consumes a significant amount of memory resources. Before the data import, it is recommended to configure the [`tidb_server_memory_limit_gc_trigger`](/system-variables.md#tidb_server_memory_limit_gc_trigger-new-in-v640) and [`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-new-in-v640) variables, which avoids golang GC being frequently triggered and thus affecting the import efficiency.
 
 ```sql
 SET GLOBAL tidb_server_memory_limit_gc_trigger=0.99;

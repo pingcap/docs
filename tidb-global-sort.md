@@ -63,7 +63,7 @@ To enable Global Sort, follow these steps:
 
 > **Note:**
 >
-> For [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md), you can also specify the cloud storage path using the [`CLOUD_STORAGE_URI`](/sql-statements/sql-statement-import-into.md#withoptions) option. If both [`tidb_cloud_storage_uri`](/system-variables.md#tidb_cloud_storage_uri-introduced-from-v740-version) and `CLOUD_STORAGE_URI` are configured with a valid cloud storage path, the configuration of `CLOUD_STORAGE_URI` takes effect for [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md).
+> For [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md), you can also specify the cloud storage path using the [`CLOUD_STORAGE_URI`](/sql-statements/sql-statement-import-into.md#withoptions) option. If both [`tidb_cloud_storage_uri`](/system-variables.md#tidb_cloud_storage_uri-new-in-v740) and `CLOUD_STORAGE_URI` are configured with a valid cloud storage path, the configuration of `CLOUD_STORAGE_URI` takes effect for [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md).
 
 ## Implementation principles
 
