@@ -214,7 +214,7 @@ You can use **physical mode** or **logical mode** to migrate **existing data**.
 Physical mode has the following limitations:
 
 - When you use physical mode, you cannot create a second migration job or import task for the TiDB cluster before the existing data migration is completed.
-- Physical mode is only available for TiDB clusters deployed on AWS.
+- Physical mode is available for TiDB clusters deployed on AWS and Google Cloud.
 
 Physical mode exports the upstream data as fast as possible, so [different specifications](/tidb-cloud/tidb-cloud-billing-dm.md#specifications-for-data-migration) have different performance impacts on QPS and TPS of the upstream database during data export. The following table shows the performance regression of each specification.
 
