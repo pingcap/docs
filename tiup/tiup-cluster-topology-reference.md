@@ -41,7 +41,7 @@ The `global` section corresponds to the cluster's global configuration and has t
 
 - `enable_tls`: Specifies whether to enable TLS for the cluster. After TLS is enabled, the generated TLS certificate must be used for connections between components or between the client and the component. The default value is `false`.
 
-- `listen_host`: Default listen host。If it is empty, each instance will automatically set it to `::` or `0.0.0.0` by judging whether its own `Host` field contains `:`.Introduced in tiup-cluster v1.14.0
+- `listen_host`: Specifies the default listen host. If it is empty, each instance will automatically set it to `::` or `0.0.0.0` by judging whether its own `Host` field contains `:`. This field is introduced in tiup-cluster v1.14.0. 
 
 - `deploy_dir`: The deployment directory of each component. The default value is `"deployed"`. Its application rules are as follows:
 
