@@ -18,7 +18,7 @@ As an open-source distributed SQL database with high performance, TiDB can be de
 
 ## OS and platform requirements
 
-In v7.5 LTS, TiDB provides multi-level support for different quality standards on the combination of operating systems and CPU architectures.
+In v7.5 LTS, TiDB ensures multi-level quality standards for various combinations of operating systems and CPU architectures.
 
 + For the following combinations of operating systems and CPU architectures, TiDB **provides enterprise-level production quality**, and the product features have been comprehensively and systematically verified:
 
@@ -100,7 +100,7 @@ In v7.5 LTS, TiDB provides multi-level support for different quality standards o
         <td>x86_64</td>
       </tr>
       <tr>
-        <td>openSUSE Leap later than v15.3 (not including Tumbleweed)</td>
+        <td>openSUSE Leap later than v15.3 (excluding Tumbleweed)</td>
         <td>x86_64</td>
       </tr>
       <tr>
@@ -112,7 +112,7 @@ In v7.5 LTS, TiDB provides multi-level support for different quality standards o
 
     > **Note:**
     >
-    > - For Oracle Enterprise Linux, TiDB supports the Red Hat Compatible Kernel (RHCK) and does not support the Unbreakable Enterprise Kernel provided by Oracle Enterprise Linux.
+    > - For Oracle Enterprise Linux, TiDB supports the Red Hat Compatible Kernel (RHCK), but does not support the Unbreakable Enterprise Kernel provided by Oracle Enterprise Linux.
     > - Support for Ubuntu 16.04 will be removed in future versions of TiDB. Upgrading to Ubuntu 18.04 or later is strongly recommended.
 
 + If you are using the 32-bit version of an operating system listed in the preceding two tables, TiDB **is not guaranteed** to be compilable, buildable or deployable on the 32-bit operating system and the corresponding CPU architecture, or TiDB does not actively adapt to the 32-bit operating system.
