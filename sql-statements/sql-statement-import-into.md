@@ -34,7 +34,7 @@ The `IMPORT INTO` statement is used to import data in formats such as `CSV`, `SQ
 - One import job supports importing data into one target table only. To import data into multiple target tables, after the import for a target table is completed, you need to create a new job for the next target table.
 - `IMPORT INTO` is not supported during TiDB cluster upgrades.
 - When the [Global Sort](/tidb-global-sort.md) feature is used for data import, the data size of a single row after encoding cannot exceed 32 MiB.
-- When the Global Sort feature is used for data import, if the target TiDB cluster is deleted before the import task is completed, temporary data used for global sorting might remain on Amazon S3. In this case, you need delete the residual data manually to avoid increasing S3 storage costs.
+- When the Global Sort feature is used for data import, if the target TiDB cluster is deleted before the import task is completed, temporary data used for global sorting might remain on Amazon S3. In this case, you need to delete the residual data manually to avoid increasing S3 storage costs.
 - Ensure that the data to be imported does not contain any records with primary key or non-null unique index conflicts. Otherwise, the conflicts can result in import task failures.
 
 ## Prerequisites for import
