@@ -15,7 +15,7 @@ A topology configuration file for TiDB deployment using TiUP might contain the f
 - [global](#global): The cluster's global configuration. Some of the configuration items use the default values and you can configure them separately in each instance.
 - [monitored](#monitored): Configuration for monitoring services, namely, the blackbox_exporter and the `node_exporter`. On each machine, a `node_exporter` and a `blackbox_exporter` are deployed.
 - [server_configs](#server_configs): Components' global configuration. You can configure each component separately. If an instance has a configuration item with the same name, the instance's configuration item will take effect.
-- [component_versions](/tiup/tiup-cluster-topology-reference.md#component_versions): Component version, used when component not use cluster version。Introduced in tiup-cluster v1.14.0
+- [component_versions](/tiup/tiup-cluster-topology-reference.md#component_versions): Component version. You can configure it when a component does not use the cluster version. This section is introduced in tiup-cluster v1.14.0.
 - [pd_servers](#pd_servers): The configuration of the PD instance. This configuration specifies the machines to which the PD component is deployed.
 - [tidb_servers](#tidb_servers): The configuration of the TiDB instance. This configuration specifies the machines to which the TiDB component is deployed.
 - [tikv_servers](#tikv_servers): The configuration of the TiKV instance. This configuration specifies the machines to which the TiKV component is deployed.
