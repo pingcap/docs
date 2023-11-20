@@ -27,7 +27,7 @@ The [FLUSH STATUS](/sql-statements/sql-statement-flush-status.md) command is als
 
 ### Compression_level
 
-- Scope: SESSION | GLOBAL
+- Scope: SESSION
 - Type: Integer
 - The compression level that is used for the MySQL Protocol.
 
@@ -81,7 +81,7 @@ The [FLUSH STATUS](/sql-statements/sql-statement-flush-status.md) command is als
 
 ### last_plan_binding_update_time <span class="version-mark">New in v5.2.0</span>
 
-- Scope: SESSION | GLOBAL
+- Scope: SESSION
 - Type: Timestamp
 - The time and date of the last plan binding update.
 
