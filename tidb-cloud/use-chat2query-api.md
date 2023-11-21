@@ -79,6 +79,7 @@ TiDB Cloud provides code examples to help you quickly call Chat2Query endpoints.
     The information for calling this endpoint is displayed on the right side, such as endpoint URL, code example, and request method.
 
 2. Click **Show Code Example**.
+
 3. In the displayed dialog box, select the cluster, database, and authentication method that you want to use to call the endpoint, and then copy the code example.
 
     > **Note:**
@@ -302,7 +303,7 @@ When calling `/v1/chat2data`, you need to replace the following parameters:
 > **Note:**
 >
 > Each Chat2Query Data App has a rate limit of 100 requests per day. If you exceed the rate limit, the API returns a `429` error. For more quota, you can [submit a request](https://support.pingcap.com/hc/en-us/requests/new?ticket_form_id=7800003722519) to our support team.
-> API Key with the role `Chat2Query Data Summary Management Role` cannot call the Chat2Data v1 endpoint.
+> An API Key with the role `Chat2Query Data Summary Management Role` cannot call the Chat2Data v1 endpoint.
 
 The following code example is used to count how many users are in the `sp500insight.users` table:
 
