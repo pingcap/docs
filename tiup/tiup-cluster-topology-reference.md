@@ -41,7 +41,7 @@ The `global` section corresponds to the cluster's global configuration and has t
 
 - `enable_tls`: Specifies whether to enable TLS for the cluster. After TLS is enabled, the generated TLS certificate must be used for connections between components or between the client and the component. The default value is `false`.
 
-- `listen_host`: Specifies the default listen IP address. If it is empty, each instance will automatically set it to `::` or `0.0.0.0` by judging whether its own `host` field contains `:`. This field is introduced in tiup-cluster v1.14.0. 
+- `listen_host`: Specifies the default listening IP address. If it is empty, each instance automatically sets it to `::` or `0.0.0.0` based on whether its `host` field contains `:`. This field is introduced in tiup-cluster v1.14.0. 
 
 - `deploy_dir`: The deployment directory of each component. The default value is `"deployed"`. Its application rules are as follows:
 
@@ -160,7 +160,7 @@ The above configuration specifies the global configuration of TiDB and TiKV.
 
 > **Note:**
 >
-> For TiDB, TiKV, PD, TiCDC, and other components that share their own version numbers, there are no complete tests to ensure that they work properly in a mixed-version scenario. Ensure that you use this section only for testing scenarios, or with the help of [technical support](/support.md).
+> For components that share a version number, such as TiDB, TiKV, PD, and TiCDC, there are no complete tests to ensure that they work properly in a mixed-version deployment scenario. Ensure that you use this section only in test environments, or with the help of [technical support](/support.md).
 
 `component_versions` is used to specify the version number of a certain component. 
 
@@ -169,7 +169,7 @@ The above configuration specifies the global configuration of TiDB and TiKV.
 
 Make sure you only configure it when you need to use a specific version of a component. 
 
-The main fields of `component_versions` include:
+`component_versions` contains the following fields:
 
 - `tikv`: The version of the TiKV component
 - `tiflash`: The version of the TiFlash component

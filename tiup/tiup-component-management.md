@@ -246,16 +246,16 @@ tiup uninstall --all
 
 ### Link components
 
-TiUP v1.13.0 adds the experimental `link` and `unlink` commands to link the binary of a component to the executable directory (`$TIUP_HOME/bin/`) and remove the link. This feature allows you to call a component without going through TiUP each time, while preserving the ability to switch between multiple versions. However, this method lacks the process of automatic update checking and setting certain environment variables and some components (for example, ctl) can not be used. Therefore, it is recommended to use it only when necessary.
+TiUP v1.13.0 adds the experimental `link` and `unlink` commands to link the binary of a component to the executable directory (`$TIUP_HOME/bin/`) and remove the link. This feature enables you to call a component without going through TiUP each time, while preserving the ability to switch between different versions. However, this method lacks the process of automatic update checking and setting certain environment variables and some components (such as ctl) cannot be used. Therefore, it is recommended to use it only when necessary.
 
-Example 1: Install and link the latest version of the cluster component
+Example 1: install and link the latest version of the cluster component
 
 ```shell
 tiup install cluster
 tiup link cluster
 ```
 
-Example 2: Switch the cluster component to version v1.13.0
+Example 2: switch the cluster component to version v1.13.0
 
 ```shell
 tiup link cluster:v1.13.0
@@ -269,15 +269,15 @@ package cluster provides these executables: tiup-cluster
 
 This indicates that the binary name of the cluster component is `tiup-cluster`. After the link command is completed, you can use the cluster component by directly typing `tiup-cluster` into the command line.
 
-Example 3: Cancel the link of the cluster component
+Example 3: cancel the link of the cluster component
 
 ```shell
 tiup unlink cluster
 ```
 
-Example 4: Manage the version of TiUP
+Example 4: manage the version of TiUP
 
-Before v1.13.0, TiUP is installed in `~/.tiup/bin/` and different versions can not coexist. Starting from v1.13.0, you can install and link TiUP like any other components.
+Before v1.13.0, TiUP is installed in `~/.tiup/bin/` and different versions cannot coexist. Starting from v1.13.0, you can install and link TiUP like any other components.
 
 ```shell
 tiup update --self # update tiup itself to a version that supports link
