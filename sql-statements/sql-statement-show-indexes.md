@@ -1,10 +1,7 @@
 ---
 title: SHOW INDEXES [FROM|IN] | TiDB SQL Statement Reference
 summary: An overview of the usage of SHOW INDEXES [FROM|IN] for the TiDB database.
-<<<<<<< HEAD
-=======
-aliases: ['/docs/dev/sql-statements/sql-statement-show-indexes/','/docs/dev/reference/sql/statements/show-indexes/', '/tidb/dev/sql-statement-show-index/', '/tidb/dev/sql-statement-show-keys/']
->>>>>>> eb247c2815 (Remove duplicate docs for SHOW INDEX, SHOW KEYS in favor of SHOW INDEXES (#15364))
+aliases: ['/tidb/v7.5/sql-statement-show-index/', '/tidb/v7.5/sql-statement-show-keys/']
 ---
 
 # SHOW INDEXES [FROM|IN]
