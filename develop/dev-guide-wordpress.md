@@ -24,7 +24,7 @@ To complete this tutorial, you need:
 
 This section demonstrates how to run Wordpress with TiDB Serverless.
 
-## Step 1: Clone the Wordpress sample reposiroty
+### Step 1: Clone the Wordpress sample reposiroty
 
 Run the following commands in your terminal window to clone the sample code repository:
 
@@ -33,7 +33,7 @@ git clone https://github.com/pingcap/wordpress-tidb-docker.git
 cd wordpress-tidb-docker
 ```
 
-## Step 2: Install dependencies
+### Step 2: Install dependencies
 
 1. The sample repository requires [Docker](https://www.docker.com/) and [Docker Compose](https://docs.docker.com/compose/) to start Wordpress. If you have them installed. You can skip this step. It is highly recommended to run your Wordpress in Linux enviroment (e.g., Ubuntu). Run the following command to install them:
 
