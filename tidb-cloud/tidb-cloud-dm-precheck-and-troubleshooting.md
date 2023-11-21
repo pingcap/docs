@@ -88,6 +88,10 @@ The TiDB cluster storage is running low. It is recommended to [increase the TiKV
 
 Failed to connect to the source database. It is recommended to check whether the source database is started, the number of database connections has not reached the upper limit, and you can connect using the parameters specified by the job. After confirming that the source database is available, you can try to resume the job by clicking **Restart**.
 
+### Error message: "Error 1273: Unsupported collation when new collation is enabled: 'utf8mb4_0900_ai_ci'"
+
+Failed to create a schema in the downstream TiDB cluster. This error means that the collation used by the upstream MySQL is not supported by the TiDB cluster. It is recommended to check whether the collation used by the upstream MySQL is supported by the TiDB cluster. If not, you can change the collation of the upstream MySQL to a supported one and then resume the task by clicking **Restart**.
+
 ## Alerts
 
 You can subscribe to TiDB Cloud alert emails to be informed in time when an alert occurs.

@@ -109,10 +109,6 @@ Before creating a migration job, set up the network connection according to your
 
 - If you use public IP (this is, standard connection) for network connection, make sure that the upstream database can be connected through the public network.
 
-- If you use AWS PrivateLink, set it up according to [Connect to TiDB Dedicated via Private Endpoint with AWS](/tidb-cloud/set-up-private-endpoint-connections.md).
-
-- If you use Google Cloud Private Service Connect, set it up according to [Connect to TiDB Dedicated via Private Endpoint with Google Cloud](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md).
-
 - If you use AWS VPC Peering or Google Cloud VPC Network Peering, see the following instructions to configure the network.
 
 <details>
