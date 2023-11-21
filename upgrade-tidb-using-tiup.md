@@ -206,11 +206,11 @@ tiup cluster upgrade <cluster-name> v7.4.0
 
 #### Specify the component version during upgrade
 
-Starting from tiup-cluster v1.14.0, you can specify certain components to a specific version during the cluster upgrade. The specified components will use the specified versions and their version numbers will remain unchanged in the next upgrade unless you specify a new version.
+Starting from tiup-cluster v1.14.0, you can specify certain components to a specific version during cluster upgrade. These components will remain at their fixed version in the subsequent upgrade unless you specify a different version.
 
 > **Note: **
 >
-> For TiDB, TiKV, PD, TiCDC, and other components that share their own version numbers, there are no complete tests to ensure that they work properly in a mixed-version scenario. Ensure that you use this section only for testing scenarios, or with the help of [technical support](/support.md).
+> For components that share a version number, such as TiDB, TiKV, PD, and TiCDC, there are no complete tests to ensure that they work properly in a mixed-version deployment scenario. Ensure that you use this section only in test environments, or with the help of [technical support](/support.md).
 
 ```shell
 tiup cluster upgrade -h | grep "version string"
