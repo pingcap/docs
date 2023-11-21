@@ -89,7 +89,7 @@ You can deploy and run TiDB on the 64-bit generic hardware server platform in th
 
 | Component | CPU     | Memory | Local Storage  | Network  | Number of Instances (Minimum Requirement) |
 | :------: | :-----: | :-----: | :----------: | :------: | :----------------: |
-| TiDB    | 8 core+   | 16 GB+  | No special requirements | Gigabit network card | 1 (can be deployed on the same machine with PD)      |
+| TiDB    | 8 core+   | 16 GB+  | [Disk space requirements](#disk-space-requirements) | Gigabit network card | 1 (can be deployed on the same machine with PD)      |
 | PD      | 4 core+   | 8 GB+  | SAS, 200 GB+ | Gigabit network card | 1 (can be deployed on the same machine with TiDB)       |
 | TiKV    | 8 core+   | 32 GB+  | SAS, 200 GB+ | Gigabit network card | 3       |
 | TiFlash | 32 core+  | 64 GB+  | SSD, 200 GB+ | Gigabit network card | 1     |
@@ -101,7 +101,6 @@ You can deploy and run TiDB on the 64-bit generic hardware server platform in th
 > - For performance-related test, do not use low-performance storage and network hardware configuration, in order to guarantee the correctness of the test result.
 > - For the TiKV server, it is recommended to use NVMe SSDs to ensure faster reads and writes.
 > - If you only want to test and verify the features, follow [Quick Start Guide for TiDB](/quick-start-with-tidb.md) to deploy TiDB on a single machine.
-> - The TiDB server uses the disk to store server logs, so there are no special requirements for the disk type and capacity in the test environment.
 > - Starting from v6.3.0, to deploy TiFlash under the Linux AMD64 architecture, the CPU must support the AVX2 instruction set. Ensure that `cat /proc/cpuinfo | grep avx2` has output. To deploy TiFlash under the Linux ARM64 architecture, the CPU must support the ARMv8 instruction set architecture. Ensure that `cat /proc/cpuinfo | grep 'crc32' | grep 'asimd'` has output. By using the instruction set extensions, TiFlash's vectorization engine can deliver better performance.
 
 ### Production environment
@@ -170,7 +169,7 @@ As an open-source distributed SQL database, TiDB requires the following network 
 
 | Component | Disk space requirement | Healthy disk usage |
 | :-- | :-- | :-- |
-| TiDB | <ul><li>At least 30 GB for the log disk</li> <li> Starting from v6.5.0, `Fast Online DDL` (controlled by the [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) variable) is enabled by default to accelerate DDL operations, such as adding indexes. If DDL operations involving large objects exist in your application, it is highly recommended to prepare additional SSD disk space for TiDB (100 GB or more). For detailed configuration instructions, see [Set a temporary space for a TiDB instance](/check-before-deployment.md#set-temporary-spaces-for-tidb-instances-recommended) </li></ul> | Lower than 90% |
+| TiDB | <ul><li>At least 30 GB for the log disk</li> <li> Starting from v6.5.0, `Fast Online DDL` (controlled by the [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) variable) is enabled by default to accelerate DDL operations, such as adding indexes. If DDL operations involving large objects exist in your application, or you want to use [IMPORT INTO](/sql-statements/sql-statement-import-into.md) to import data, it is highly recommended to prepare additional SSD disk space for TiDB (100 GB or more). For detailed configuration instructions, see [Set a temporary space for a TiDB instance](/check-before-deployment.md#set-temporary-spaces-for-tidb-instances-recommended) </li></ul> | Lower than 90% |
 | PD | At least 20 GB for the data disk and for the log disk, respectively | Lower than 90% |
 | TiKV | At least 100 GB for the data disk and for the log disk, respectively | Lower than 80% |
 | TiFlash | At least 100 GB for the data disk and at least 30 GB for the log disk, respectively | Lower than 80% |
