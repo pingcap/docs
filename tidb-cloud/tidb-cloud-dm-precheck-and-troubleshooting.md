@@ -90,7 +90,9 @@ Failed to connect to the source database. It is recommended to check whether the
 
 ### Error message: "Error 1273: Unsupported collation when new collation is enabled: 'utf8mb4_0900_ai_ci'"
 
-Failed to create a schema in the downstream TiDB cluster. This error means that the collation used by the upstream MySQL is not supported by the TiDB cluster. It is recommended to check whether the collation used by the upstream MySQL is supported by the TiDB cluster. If not, you can change the collation of the upstream MySQL to a supported one and then resume the task by clicking **Restart**.
+Failed to create a schema in the downstream TiDB cluster. This error means that the collation used by the upstream MySQL is not supported by the TiDB cluster.
+
+To resolve this issue, you can create a schema in the TiDB cluster based on a supported collation, and then resume the task by clicking **Restart**.
 
 ## Alerts
 
