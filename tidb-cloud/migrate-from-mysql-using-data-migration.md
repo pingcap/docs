@@ -211,10 +211,11 @@ You can use **physical mode** or **logical mode** to migrate **existing data**.
 
 - For large datasets, it is recommended to use **physical mode**. This mode exports data from upstream databases and encodes it as KV pairs, writing directly to TiKV to achieve faster performance. This mode requires the target tables to be empty before migration. For the specification of 16 RCUs (Replication Capacity Units), the performance is about 2.5 times faster than logical mode. The performance of other specifications can increase by 20% to 50% compared with logical mode. Note that the performance data is for reference only and might vary in different scenarios.
 
-Physical mode has the following limitations:
+Physical mode is available for TiDB clusters deployed on AWS and Google Cloud.
 
-- When you use physical mode, you cannot create a second migration job or import task for the TiDB cluster before the existing data migration is completed.
-- Physical mode is available for TiDB clusters deployed on AWS and Google Cloud.
+> **Note:**
+>
+> When you use physical mode, you cannot create a second migration job or import task for the TiDB cluster before the existing data migration is completed.
 
 Physical mode exports the upstream data as fast as possible, so [different specifications](/tidb-cloud/tidb-cloud-billing-dm.md#specifications-for-data-migration) have different performance impacts on QPS and TPS of the upstream database during data export. The following table shows the performance regression of each specification.
 
