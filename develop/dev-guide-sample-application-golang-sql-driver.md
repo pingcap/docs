@@ -292,4 +292,4 @@ Unless you need to write complex SQL statements, it is recommended to use [ORM](
 
 ## Need help?
 
-Ask questions on the [Discord](https://discord.gg/vYU9h56kAX), or [create a support ticket](https://support.pingcap.com/).
+Ask questions on the [Discord](https://discord.gg/vYU9h56kAX), or [create a support ticket](/support.md).
