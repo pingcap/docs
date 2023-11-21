@@ -9,7 +9,7 @@ TiDB is a MySQL-compatible database, and [Navicat](https://www.navicat.com) is a
 
 > **Warning:**
 >
-> Navicat doesn't fully support TiDB. Navicat can connect to TiDB, because of TiDB being a MySQL-compatible database. So Navicat will treat TiDB as a MySQL. But there some errors might occur when you are using it. Besides, the Navicat is not free. It is recommended to use some other free GUI tools that supported TiDB officially:
+> Navicat doesn't fully support TiDB. Navicat can connect to TiDB, because of TiDB being a MySQL-compatible database. So Navicat will treat TiDB as a MySQL. But there some errors might occur when you are using it. It is recommended to use some other free GUI tools that supported TiDB officially:
 >
 > - [DataGrip](/develop/dev-guide-gui-datagrip.md)
 > - [DBeaver](/develop/dev-guide-gui-dbeaver.md)
