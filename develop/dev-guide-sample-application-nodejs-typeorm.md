@@ -368,4 +368,4 @@ For more information, refer to the [TypeORM FAQ](https://typeorm.io/relations-fa
 
 ## Need help?
 
-Ask questions on the [Discord](https://discord.gg/vYU9h56kAX), or [create a support ticket](https://support.pingcap.com/).
+Ask questions on the [Discord](https://discord.gg/vYU9h56kAX), or [create a support ticket](/support.md).

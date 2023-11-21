@@ -369,4 +369,4 @@ To check [referential integrity](https://en.wikipedia.org/wiki/Referential_integ
 
 ## Need help?
 
-Ask questions on the [Discord](https://discord.gg/vYU9h56kAX), or [create a support ticket](https://support.pingcap.com/).
+Ask questions on the [Discord](https://discord.gg/vYU9h56kAX), or [create a support ticket](/support.md).
