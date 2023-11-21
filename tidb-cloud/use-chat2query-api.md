@@ -78,7 +78,7 @@ TiDB Cloud provides code examples to help you quickly call Chat2Query endpoints.
 
     The information for calling this endpoint is displayed on the right side, such as endpoint URL, code example, and request method.
 
-2. Click **Code Example**.
+2. Click **Show Code Example**.
 3. In the displayed dialog box, select the cluster, database, and authentication method that you want to use to call the endpoint, and then copy the code example.
 
     > **Note:**
