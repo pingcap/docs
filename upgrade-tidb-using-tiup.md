@@ -208,8 +208,6 @@ tiup cluster upgrade <cluster-name> v7.4.0
 
 Starting from tiup-cluster v1.14.0, you can specify certain components to a specific version during the cluster upgrade. The specified components will be fixed to the specified version and their version numbers will remain unchanged in the next upgrade unless you specify a new version.
 
-{{< copyable "shell-regular" >}}
-
 ```shell
 tiup cluster upgrade -h | grep "version string"
       --alertmanager-version string        Fix the version of alertmanager and no longer follows the cluster version.
