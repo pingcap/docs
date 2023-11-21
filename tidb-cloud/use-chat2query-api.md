@@ -63,12 +63,12 @@ To create an API key, perform the following steps:
 
 In each Chat2Query Data App, you can find the following endpoints:
 
-- Chat2Query v1 endpoint: `/chat2data`
+- Chat2Query v1 endpoint: `/v1/chat2data`
 - Chat2Query v2 endpoints: the endpoints whose names starting with `/v2`, such as `/v2/dataSummaries` and `/v2/chat2data`
 
 > **Tip:**
 >
-> Compared with the Chat2Query v1 endpoint `/chat2data`, the Chat2Query v2 endpoint `/v2/chat2data` requires you to analyze your database first by calling `/v2/dataSummaries`, so the results returned by `/v2/chat2data` are generally more accurate.
+> Compared with `/v1/chat2data`, `/v2/chat2data` requires you to analyze your database first by calling `/v2/dataSummaries`, so the results returned by `/v2/chat2data` are generally more accurate.
 
 ### Get the code example of an endpoint
 
@@ -79,7 +79,12 @@ TiDB Cloud provides code examples to help you quickly call Chat2Query endpoints.
     The information for calling this endpoint is displayed on the right side, such as endpoint URL, code example, and request method.
 
 2. Click **Code Example**.
-3. In the displayed dialog box, select the cluster and database that you want to use to call the endpoint, and then copy the code example.
+3. In the displayed dialog box, select the cluster, database, and authentication method that you want to use to call the endpoint, and then copy the code example.
+
+    > **Note:**
+    >
+    > For `/v2/chat2data` and `/v2/jobs/{job_id}`, you only need to select the authentication method.
+
 4. To call the endpoint, you can paste the example in your application, replace the parameters in the example with your own (such as replacing the `${PUBLIC_KEY}` and `${PRIVATE_KEY}` placeholders with your API key), and then run it.
 
 ### Call Chat2Query v2 endpoints
@@ -89,8 +94,6 @@ TiDB Cloud Data Service provides the following Chat2Query v2 endpoints:
 |  Method | Endpoint| Description |
 |  ----  | ----  |----  |
 |  POST  | `/v2/dataSummaries`  | This endpoint generates a data summary for your database schema, table schema, and column schema by using artificial intelligence for analysis. |
-|  GET  | `/v2/dataSummaries/{data_summary_id}`  | This endpoint enables you to retrieve a specific generated data summary. |
-|  PUT  | `/v2/dataSummaries/{data_summary_id}`  | This endpoint enables you to update the table description and column description of a specific data summary |
 |  POST  | `/v2/chat2data`  | This endpoint enables you to generate and execute SQL statements using artificial intelligence by providing the data summary ID and instructions. |
 |  GET  | `/v2/jobs/{job_id}` | This endpoint enables you to query the status of the data summary generation job. |
 
@@ -278,108 +281,19 @@ An example response is as follows:
 }
 ```
 
-#### (Optional) 4. Update a data summary for better results of `/v2/chat2data`
-
-If you want to improve the results of `/v2/chat2data` for a database, you can check and update the data summary of this database.
-
-1. To get the data summary of a database, call the `v2/dataSummaries/{data_summary_id}` endpoint in the GET method.
-
-    ```bash
-    curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request GET 'https://<region>.data.dev.tidbcloud.com/api/v1beta/app/chat2query-<ID>/endpoint/v2/dataSummaries/{data_summary_id}'\
-     --header 'content-type: application/json'
-    ```
-
-    An example response is as follows:
-
-    ```json
-    {
-      "code": 200,
-      "msg": "",
-      "result": {
-        "created_at": 1699518862,
-        "creator": "",
-        "data": DataSummaryObject, // AI exploration information of the given database
-        "id": 481235,
-        "name": "data-context",
-        "org_id": 30061,
-        "type": "data", // Type of data summary, which is `data`
-        "updated_at": 1699518950
-      }
-    }
-    ```
-
-2. To update the data summary of a database, call the `v2/dataSummaries/{data_summary_id}` endpoint in the PUT method. Currently, you can update the table descriptions and column descriptions in the summary.
-
-    ```bash
-    curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request PUT 'https://<region>.data.dev.tidbcloud.com/api/v1beta/app/chat2query-<ID>/endpoint/v2/dataSummaries/{data_summary_id}'\
-     --header 'content-type: application/json'\
-     --data-raw '{
-      "tables": {
-            "<table_name>": {
-                "description": "<New table description you want to set>",
-                "columns": {
-                    "<column name>": "<New column description you want to set>"
-                }
-            }
-      }
-    }'
-    ```
-
-    In the preceding example, the request body is a JSON object with the following properties:
-
-    - `<table_name>`: _string_. The table you want to update.
-    - `<table_name>.description`: _string_. The new description you want to set for the given table.
-    - `<table_name>.columns`: a key-value pair to specify the target column and the column description you want to update.
-
-    An example response is as follows:
-
-    ```json
-    {
-      "code": 200,
-      "msg": "",
-      "result": {
-        "job_id": "103d0bf8d8564ec7b2c768d3180d8ab1"
-      }
-    }
-    ```
-
-3. The `v2/dataSummaries/{data_summary_id}` is asynchronous. You can check the status of the summary updating job by calling the `/v2/jobs/{job_id}` endpoint.
-
-    ```bash
-    curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request GET 'https://<region>.data.dev.tidbcloud.com/api/v1beta/app/chat2query-<ID>/endpoint/v2/jobs/{job_id}'\
-     --header 'content-type: application/json'
-    ```
-
-    An example response is as follows:
-
-    ```bash
-    {
-      "code": 200,
-      "msg": "",
-      "result": {
-        "ended_at": 1699523242,
-        "job_id": "103d0bf8d8564ec7b2c768d3180d8ab1",
-        "result": null,
-        "status": "done"
-      }
-    }
-    ```
-
-    When the `status` is `done`, the job is finished, and the descriptions of tables and columns are updated.
-
 ### Call the Chat2Data v1 endpoint
 
 TiDB Cloud Data Service provides the following Chat2Query v1 endpoint:
 
 |  Method | Endpoint| Description |
 |  ----  | ----  |----  |
-|  POST | `/chat2data`  | This endpoint allows you to generate and execute SQL statements using artificial intelligence by providing the target database name and instructions.  |
+|  POST | `/v1/chat2data`  | This endpoint allows you to generate and execute SQL statements using artificial intelligence by providing the target database name and instructions.  |
 
-You can call the `/chat2data` endpoint directly to generate and execute SQL statements. Compared with `/v2/chat2data`, `/chat2data` provides a faster response but lower performance.
+You can call the `/v1/chat2data` endpoint directly to generate and execute SQL statements. Compared with `/v2/chat2data`, `/v1/chat2data` provides a faster response but lower performance.
 
 TiDB Cloud generates code examples to help you call an endpoint. To get the examples and run the code, see [Get the code example of an endpoint](#get-the-code-example-of-an-endpoint).
 
-When calling `/chat2data`, you need to replace the following parameters:
+When calling `/v1/chat2data`, you need to replace the following parameters:
 
 - Replace the `${PUBLIC_KEY}` and `${PRIVATE_KEY}` placeholders with your API key.
 - Replace the `<your table name, optional>` placeholder with the table name you want to query. If you do not specify a table name, AI will query all tables in the database.
