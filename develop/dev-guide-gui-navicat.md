@@ -9,7 +9,7 @@ TiDB is a MySQL-compatible database, and [Navicat](https://www.navicat.com) is a
 
 > **Warning:**
 >
-> Navicat is not full supported TiDB. Navicat can connect to TiDB, because of TiDB is a MySQL-compatible database. So the Navicat will treat TiDB as a MySQL. But there some errors might be occered when you are using it. Besides, the Navicat is not free. If it is possible, recommand you use some other free GUI tools, they supported TiDB officially:
+> Navicat doesn't fully support TiDB. Navicat can connect to TiDB, because of TiDB being a MySQL-compatible database. So Navicat will treat TiDB as a MySQL. But there some errors might occur when you are using it. Besides, the Navicat is not free. It is recommended to use some other free GUI tools that supported TiDB officially:
 >
 > - [DataGrip](/develop/dev-guide-gui-datagrip.md)
 > - [DBeaver](/develop/dev-guide-gui-dbeaver.md)
@@ -100,7 +100,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you have se
 
     For more details about how to obtain the connection string, refer to [TiDB Dedicated standard connection](https://docs.pingcap.com/tidbcloud/connect-via-standard-connection).
 
-4. Launch Navicat and click the **Connection** in the upper-left corner. In the selection panel, click **MySQL**  as the database type.
+4. Launch Navicat and click the **Connection** in the upper-left corner. In the dropdown menu, click **MySQL** as the database type.
 
     ![Navicat: add new connection](/media/develop/navicat-add-new-connection.jpg)
 
@@ -135,9 +135,9 @@ Connect to your TiDB cluster depending on the TiDB deployment option you have se
 
     ![Navicat: configure connection general panel for self-hosted TiDB](/media/develop/navicat-connection-config-self-hosted-general.png)
 
-3. **Test Connection** to validate the connection to the self-hosted TiDB.
+3. Click **Test Connection** to validate the connection to the self-hosted TiDB.
 
-4. If the connection test is successful, you can see the **Connection Successful** message. Click **Save** to save the connection configuration.
+4. If the connection test is successful, you can see the **Connection Successful** message. Click **Save** to finish the connection configuration.
 
 </div>
 </SimpleTab>
@@ -149,4 +149,4 @@ Connect to your TiDB cluster depending on the TiDB deployment option you have se
 
 ## Need help?
 
-Ask questions on the [Discord](https://discord.gg/vYU9h56kAX), or [create a support ticket](https://support.pingcap.com/).
+Ask questions on the [Discord](https://discord.gg/vYU9h56kAX), or [create a support ticket](/support.md).
