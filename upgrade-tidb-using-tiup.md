@@ -22,12 +22,8 @@ This document is targeted for the following upgrade paths:
 
 > **Note:**
 >
-<<<<<<< HEAD
 > - If your cluster to be upgraded is v3.1 or an earlier version (v3.0 or v2.1), the direct upgrade to v7.3.0 is not supported. You need to upgrade your cluster first to v4.0 and then to v7.3.0.
-=======
-> - If your cluster to be upgraded is v3.1 or an earlier version (v3.0 or v2.1), the direct upgrade to v7.4.0 is not supported. You need to upgrade your cluster first to v4.0 and then to v7.4.0.
 > - If your cluster to be upgraded is earlier than v6.2, the upgrade might get stuck when you upgrade the cluster to v6.2 or later versions in some scenarios. You can refer to [How to fix the issue](#how-to-fix-the-issue-that-the-upgrade-gets-stuck-when-upgrading-to-v620-or-later-versions).
->>>>>>> 6a951e4ac2 (upgrade using tiup: add FAQ for concurrent DDL (#15348))
 > - TiDB nodes use the value of the [`server-version`](/tidb-configuration-file.md#server-version) configuration item to verify the current TiDB version. Therefore, to avoid unexpected behaviors, before upgrading the TiDB cluster, you need to set the value of `server-version` to empty or the real version of the current TiDB cluster.
 
 ## Upgrade caveat
