@@ -27,6 +27,73 @@ When TiDB Lightning is running, it looks for all files that match the pattern of
 
 TiDB Lightning processes data in parallel as much as possible. Because files must be read in sequence, the data processing concurrency is at the file level (controlled by `region-concurrency`). Therefore, when the imported file is large, the import performance is poor. It is recommended to limit the size of the imported file to no greater than 256 MiB to achieve the best performance.
 
+## Rename databases and tables
+
+TiDB Lightning follows the rules defined in the configuration file to import data to the corresponding location of the database and table. If the location of the database and table names change, you can either rename the file and then import again, or use regular expressions to replace the names online and then import again.
+
+### Rename files in batch
+
+For RedHat-Like Linux systems, You can use the following `rename` command to batch rename files in the `data-source-dir` directory.
+
+```shell
+rename srcdb. tgtdb. *.sql
+```
+
+After you modify the database name, it is recommended that you delete the `schema-create.sql` file that contains the `CREATE DATABASE` DDL statement in the `data-source-dir` directory. If you are modifying a table name, you also need to modify the `schema.sql` file that contains the `CREATE TABLE` DDL statement with the table name.
+
+### Use regular expressions to replace names online
+
+To use regular expressions to replace names online, you can use `pattern` within [[mydumper.files]] to match filenames, and replace `schema` and `table` with the names that you want. See [Match customized files](#match-customized-files).
+
+The following is an example of using regular expressions to replace names online. In this example:
+
+- Specify `schema` as '$1', which means that the value of the first regular expression `schema_regrex` remains unchanged. Or specify it as a string, such as 'tgtdb', which means a fixed target database.
+- Specify `table` as '$2', which means that the value of the second regular expression `table_regrex` remains unchanged. Or specify it as a string, such as 't1', which means a fixed target table.
+- Specify `type` as '$3', which means the type of the data file. `"table-schema"` means the `schema.sql` file, or `"schema-schema"` means the `schema-create.sql` file.
+
+```toml
+[mydumper]
+data-source-dir = "/some-subdir/some-database/"
+[[mydumper.files]]
+pattern = '^(srcdb)\.(.*?)-schema-create\.sql'
+schema = 'tgtdb'
+type = "schema-schema"
+[[mydumper.files]]
+pattern = '^(srcdb)\.(.*?)-schema\.sql'
+schema = 'tgtdb'
+table = '$2'
+type = "table-schema"
+[[mydumper.files]]
+pattern = '^(srcdb)\.(.*?)\.(?:[0-9]+)\.(csv|parquet|sql)'
+schema = 'tgtdb'
+table = '$2'
+type = '$3'
+```
+
+If you are using `gzip` to back up data files, you need to configure the compression format accordingly. The matching rule of the data file `pattern` is '^({schema_regrex})\.({table_regrex})\.({file_serial_regrex})\.(csv|parquet|sql)\.(gz)'. You can specify `compression` as '$4' to represent the compressed file format. For example:
+
+```toml
+[mydumper]
+data-source-dir = "/some-subdir/some-database/"
+[[mydumper.files]]
+pattern = '^(srcdb)\.(.*?)-schema-create\.(sql)\.(gz)'
+schema = 'tgtdb'
+type = "schema-schema"
+compression = '$4'
+[[mydumper.files]]
+pattern = '^(srcdb)\.(.*?)-schema\.(sql)\.(gz)'
+schema = 'tgtdb'
+table = '$2'
+type = "table-schema"
+compression = '$4'
+[[mydumper.files]]
+pattern = '^(srcdb)\.(.*?)\.(?:[0-9]+)\.(sql)\.(gz)'
+schema = 'tgtdb'
+table = '$2'
+type = '$3'
+compression = '$4'
+```
+
 ## CSV
 
 ### Schema
