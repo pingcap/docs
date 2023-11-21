@@ -49,7 +49,7 @@ After you have submitted a request, to check the status of your request, perform
 
     On the **My request** page, you can view the status of your request.
 
-Alternatively, you can also access the [Customer Support](/support.md) page, log in to the support portal, and then click **View my requests**.
+Alternatively, you can also access the [Customer Support](https://support.pingcap.com/hc/en-us) page, log in to the support portal, and then click **View my requests**.
 
 ## Check or upgrade your support plan
 
