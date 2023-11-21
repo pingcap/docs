@@ -167,58 +167,14 @@ As an open-source distributed SQL database, TiDB requires the following network 
 
 ## Disk space requirements
 
-<<<<<<< HEAD
 | Component | Disk space requirement | Healthy disk usage |
 | :-- | :-- | :-- |
-| TiDB | <ul><li>At least 30 GB for the log disk</li> <li> Starting from v6.5.0, `Fast Online DDL` (controlled by the [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) variable) is enabled by default to accelerate DDL operations, such as adding indexes. If DDL operations involving large objects exist in your application, it is highly recommended to prepare additional SSD disk space for TiDB (100 GB or more). For detailed configuration instructions, see [Set a temporary space for a TiDB instance](/check-before-deployment.md#set-temporary-spaces-for-tidb-instances-recommended) </li></ul> | Lower than 90% |
+| TiDB | <ul><li>At least 30 GB for the log disk</li> <li> Starting from v6.5.0, `Fast Online DDL` (controlled by the [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) variable) is enabled by default to accelerate DDL operations, such as adding indexes. If DDL operations involving large objects exist in your application, or you want to use [IMPORT INTO](/sql-statements/sql-statement-import-into.md) to import data, it is highly recommended to prepare additional SSD disk space for TiDB (100 GB or more). For detailed configuration instructions, see [Set a temporary space for a TiDB instance](/check-before-deployment.md#set-temporary-spaces-for-tidb-instances-recommended) </li></ul> | Lower than 90% |
 | PD | At least 20 GB for the data disk and for the log disk, respectively | Lower than 90% |
 | TiKV | At least 100 GB for the data disk and for the log disk, respectively | Lower than 80% |
 | TiFlash | At least 100 GB for the data disk and at least 30 GB for the log disk, respectively | Lower than 80% |
 | TiUP | <ul><li>Control machine: No more than 1 GB space is required for deploying a TiDB cluster of a single version. The space required increases if TiDB clusters of multiple versions are deployed. </li> <li> Deployment servers (machines where the TiDB components run): TiFlash occupies about 700 MB space and other components (such as PD, TiDB, and TiKV) occupy about 200 MB space respectively. During the cluster deployment process, the TiUP cluster requires less than 1 MB of temporary space (`/tmp` directory) to store temporary files.</li></ul>| N/A |
 | Ngmonitoring | <ul><li>Conprof: 3 x 1 GB x Number of components (each component occupies about 1 GB per day, 3 days in total) + 20 GB reserved space </li><li> Top SQL: 30 x 50 MB x Number of components (each component occupies about 50 MB per day, 30 days in total) </li><li> Conprof and Top SQL share the reserved space</li></ul> | N/A |
-=======
-<table>
-<thead>
-  <tr>
-    <th>Component</th>
-    <th>Disk space requirement</th>
-    <th>Healthy disk usage</th>
-  </tr>
-</thead>
-<tbody>
-  <tr>
-    <td>TiDB</td>
-    <td><ul><li>At least 30 GB for the log disk</li><li>Starting from v6.5.0, Fast Online DDL (controlled by the <a href="https://docs.pingcap.com/tidb/dev/system-variables#tidb_ddl_enable_fast_reorg-new-in-v630">tidb_ddl_enable_fast_reorg</a> variable) is enabled by default to accelerate DDL operations, such as adding indexes. If DDL operations involving large objects exist in your application, or you want to use <a href="https://docs.pingcap.com/tidb/dev/sql-statement-import-into">IMPORT INTO</a> to import data, it is highly recommended to prepare additional SSD disk space for TiDB (100 GB or more). For detailed configuration instructions, see <a href="https://docs.pingcap.com/tidb/dev/check-before-deployment#set-temporary-spaces-for-tidb-instances-recommended">Set a temporary space for a TiDB instance</a></li></ul></td>
-    <td>Lower than 90%</td>
-  </tr>
-  <tr>
-    <td>PD</td>
-    <td>At least 20 GB for the data disk and for the log disk, respectively</td>
-    <td>Lower than 90%</td>
-  </tr>
-  <tr>
-    <td>TiKV</td>
-    <td>At least 100 GB for the data disk and for the log disk, respectively</td>
-    <td>Lower than 80%</td>
-  </tr>
-  <tr>
-    <td>TiFlash</td>
-    <td>At least 100 GB for the data disk and at least 30 GB for the log disk, respectively</td>
-    <td>Lower than 80%</td>
-  </tr>
-  <tr>
-    <td>TiUP</td>
-    <td><ul><li>Control machine: No more than 1 GB space is required for deploying a TiDB cluster of a single version. The space required increases if TiDB clusters of multiple versions are deployed.</li><li>Deployment servers (machines where the TiDB components run): TiFlash occupies about 700 MB space and other components (such as PD, TiDB, and TiKV) occupy about 200 MB space respectively. During the cluster deployment process, the TiUP cluster requires less than 1 MB of temporary space (<code>/tmp</code> directory) to store temporary files.</li></ul></td>
-    <td>N/A</td>
-  </tr>
-  <tr>
-    <td>Ngmonitoring</td>
-    <td><ul><li>Conprof: 3 x 1 GB x Number of components (each component occupies about 1 GB per day, 3 days in total) + 20 GB reserved space</li><li>Top SQL: 30 x 50 MB x Number of components (each component occupies about 50 MB per day, 30 days in total)</li><li>Conprof and Top SQL share the reserved space</li></ul></td>
-    <td>N/A</td>
-  </tr>
-</tbody>
-</table>
->>>>>>> f5c4fbdd32 (Update disk space requirements for import into (#15384))
 
 ## Web browser requirements
 
