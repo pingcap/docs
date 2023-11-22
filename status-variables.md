@@ -5,11 +5,11 @@ summary: Use status variables to see the system and session status
 
 # Server Status Variables
 
-Most status variables are implemented to be compatible with MySQL. These variables give information about the global status of the server and the status of the current session.
+Server status variables provide information about the global status of the server and the status of the current session in TiDB. Most of these variables are designed to be compatible with MySQL.
 
-The [SHOW GLOBAL STATUS](/sql-statements/sql-statement-show-status.md) command can be used to retrieve the global status and the [SHOW SESSION STATUS](/sql-statements/sql-statement-show-status.md) command can be used to see the status of the current session.
+You can retrieve the global status using the [SHOW GLOBAL STATUS](/sql-statements/sql-statement-show-status.md) command, and the status of the current session using the [SHOW SESSION STATUS](/sql-statements/sql-statement-show-status.md) command. 
 
-The [FLUSH STATUS](/sql-statements/sql-statement-flush-status.md) command is also support to aid MySQL compatibility.
+Additionally, the [FLUSH STATUS](/sql-statements/sql-statement-flush-status.md) command is supported for MySQL compatibility.
 
 ## Variable Reference
 
@@ -89,4 +89,4 @@ The [FLUSH STATUS](/sql-statements/sql-statement-flush-status.md) command is als
 
 - Scope: SESSION | GLOBAL
 - Type: String
-- UUID of the server
+- The UUID of the server.
