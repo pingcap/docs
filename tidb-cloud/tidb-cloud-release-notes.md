@@ -8,6 +8,16 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2023.
 
+## November 21, 2023
+
+**General changes**
+
+- [Data Migration](/tidb-cloud/migrate-from-mysql-using-data-migration.md) supports high-speed physical mode for TiDB clusters deployed on Google Cloud.
+
+    Now you can use physical mode for TiDB clusters deployed on AWS and Google Cloud. The migration speed of physical mode can reach up to 110 MiB/s, which is 2.4 times faster than logical mode. The improved performance is suitable for quickly migrating large datasets to TiDB Cloud.
+
+    For more information, see [Migrate existing data and incremental data](/tidb-cloud/migrate-from-mysql-using-data-migration.md#migrate-existing-data-and-incremental-data).
+
 ## November 14, 2023
 
 **General changes**
