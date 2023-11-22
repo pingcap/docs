@@ -16,9 +16,49 @@ For comparisons between functions and syntax of Oracle and TiDB, see [Comparison
 
 ## Supported functions
 
-### [`ASCII()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_ascii)
+### [`ASCII(str)`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_ascii)
 
-Return numeric value of left-most character.
+The `ASCII(str)` function is used to get the ASCII value of the leftmost character in a given string (`str`).
+
+- If `str` is not empty, the function returns the ASCII value of the leftmost character.
+- If `str` is an empty string, the function returns 0.
+- If `str` is `NULL`, the function returns `NULL`.
+
+> **Note:**
+>
+> ASCII() only works for characters represented using 8 bits of binary digits (one byte).
+
+Examples:
+
+```sql
+SELECT ASCII('A');
+
++------------+
+| ASCII('A') |
++------------+
+|         65 |
++------------+
+```
+
+```sql
+SELECT ASCII('');
+
++------------+
+| ASCII('')  |
++------------+
+|          0 |
++------------+
+```
+
+```sql
+SELECT ASCII('TiDB');
+
++------------+
+| ASCII('T') |
++------------+
+|         84 |
++------------+
+```
 
 ### [`BIN()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_bin)
 
