@@ -7,20 +7,20 @@ summary: Learn how to use Dumpling and TiDB Lightning to back up and restore ful
 
 This document introduces how to use Dumpling and TiDB Lightning to back up and restore full data of TiDB.
 
-If you need to back up a small amount of data (for example, less than 50 GB) and do not require high backup speed, you can use [Dumpling](/dumpling-overview.md) to export data from the TiDB database and then use [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md) to import the data into another TiDB database. For more information about backup and restore, see [TiDB Backup & Restore Overview](/br/backup-and-restore-overview.md).
+If you need to back up a small amount of data (for example, less than 50 GiB) and do not require high backup speed, you can use [Dumpling](/dumpling-overview.md) to export data from the TiDB database and then use [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md) to restore the data into another TiDB database. To backup larger databases the recommended method is to use BR, for more information about backup and restore with BR, see [TiDB Backup & Restore Overview](/br/backup-and-restore-overview.md). Note that Dumpling can be used to export large databases, but BR is better suited tool for that.
 
 ## Requirements
 
-- Install and start Dumpling:
+- Install Dumpling:
 
     ```shell
-    tiup install dumpling && tiup dumpling
+    tiup install dumpling
     ```
 
-- Install and start TiDB Lightning:
+- Install TiDB Lightning:
 
     ```shell
-    tiup install tidb lightning && tiup tidb lightning
+    tiup install tidb tidb-lightning
     ```
 
 - [Grant the source database privileges required for Dumpling](/dumpling-overview.md#export-data-from-tidb-or-mysql)
