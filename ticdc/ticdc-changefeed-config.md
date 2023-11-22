@@ -26,7 +26,7 @@ Info: {"upstream_id":7178706266519722477,"namespace":"default","id":"simple-repl
     [scheme]://[userinfo@][host]:[port][/path]?[query_parameters]
     ```
 
-    When the sink URI contains special characters such as `! * ' ( ) ; : @ & = + $ , / ? % # [ ]`, you need to escape the special characters, for example, in [URI Encoder](https://meyerweb.com/eric/tools/dencoder/).
+    When the sink URI contains special characters such as `! * ' ( ) ; : @ & = + $ , / ? % # [ ]`, you need to escape the special characters, for example, in [URI Encoder](https://www.urlencoder.org/).
 
 - `--start-ts`: Specifies the starting TSO of the changefeed. From this TSO, the TiCDC cluster starts pulling data. The default value is the current time.
 - `--target-ts`: Specifies the ending TSO of the changefeed. To this TSO, the TiCDC cluster stops pulling data. The default value is empty, which means that TiCDC does not automatically stop pulling data.
@@ -63,6 +63,10 @@ case-sensitive = true
 # The default value is "24h".
 # Note: This configuration item only takes effect if the downstream is TiDB.
 # sync-point-retention = "1h"
+
+# Specifies the SQL mode used when parsing DDL statements. Multiple modes are separated by commas.
+# The default value is the same as the default SQL mode of TiDB.
+# sql-mode = "ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION"
 
 [mounter]
 # The number of threads with which the mounter decodes KV data. The default value is 16.
@@ -117,10 +121,20 @@ enable-table-across-nodes = false
 # Note: When the downstream MQ is Pulsar, if the routing rule for `partition` is not specified as any of `ts`, `index-value`, `table`, or `default`, each Pulsar message will be routed using the string you set as the key.
 # For example, if you specify the routing rule for a matcher as the string `code`, then all Pulsar messages that match that matcher will be routed with `code` as the key.
 # dispatchers = [
-#     {matcher = ['test1.*', 'test2.*'], topic = "Topic expression 1", partition = "ts" },
-#     {matcher = ['test3.*', 'test4.*'], topic = "Topic expression 2", partition = "index-value" },
-#     {matcher = ['test1.*', 'test5.*'], topic = "Topic expression 3", partition = "table"},
-#     {matcher = ['test6.*'], partition = "ts"}
+#    {matcher = ['test1.*', 'test2.*'], topic = "Topic expression 1", partition = "index-value"},
+#    {matcher = ['test3.*', 'test4.*'], topic = "Topic expression 2", partition = "index-value", index-name="index1"},
+#    {matcher = ['test1.*', 'test5.*'], topic = "Topic expression 3", partition = "table"},
+#    {matcher = ['test6.*'], partition = "columns", columns = "['a', 'b']"}
+#    {matcher = ['test7.*'], partition = "ts"}
+# ]
+
+# column-selectors is introduced in v7.5.0 and only takes effect when the downstream is Kafka.
+# column-selectors is used to select specific columns for replication.
+# column-selectors = [
+#     {matcher = ['test.t1'], columns = ['a', 'b']},
+#     {matcher = ['test.*'], columns = ["*", "!b"]},
+#     {matcher = ['test1.t1'], columns = ['column*', '!column1']},
+#     {matcher = ['test3.t'], columns = ["column?", "!column1"]},
 # ]
 
 # The protocol configuration item specifies the protocol format used for encoding messages.
