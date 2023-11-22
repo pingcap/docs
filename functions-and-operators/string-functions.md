@@ -26,7 +26,7 @@ The `ASCII(str)` function is used to get the ASCII value of the leftmost charact
 
 > **Note:**
 >
-> ASCII() only works for characters represented using 8 bits of binary digits (one byte).
+> `ASCII(str)` only works for characters represented using 8 bits of binary digits (one byte).
 
 Examples:
 
