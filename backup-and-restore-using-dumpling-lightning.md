@@ -64,8 +64,8 @@ SELECT
 FROM
   information_schema.tables
 GROUP BY
-  table_name,
-  table_schema
+  TABLE_NAME,
+  TABLE_SCHEMA
 ORDER BY
   SUM(DATA_LENGTH+INDEX_LENGTH) DESC
 LIMIT
