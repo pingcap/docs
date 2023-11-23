@@ -11,7 +11,7 @@ You can retrieve the global status using the [SHOW GLOBAL STATUS](/sql-statement
 
 Additionally, the [FLUSH STATUS](/sql-statements/sql-statement-flush-status.md) command is supported for MySQL compatibility.
 
-## Variable Reference
+## Variable reference
 
 ### Compression
 
