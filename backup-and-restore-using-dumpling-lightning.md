@@ -22,7 +22,7 @@ If you need to back up larger databases, the recommended method is to use [BR](/
 - Install TiDB Lightning:
 
     ```shell
-    tiup install tidb tidb-lightning
+    tiup install tidb-lightning
     ```
 
 - [Grant the source database privileges required for Dumpling](/dumpling-overview.md#export-data-from-tidb-or-mysql)
