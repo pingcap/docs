@@ -63,7 +63,7 @@ For more information, see [Deploy automatically with GitHub](/tidb-cloud/data-se
 
 ### Integrate your Data App with GPTs
 
-You can integrate your Data App with GPTs to enhance your applications with intelligent capabilities.
+You can integrate your Data App with [GPTs](https://openai.com/blog/introducing-gpts) to enhance your applications with intelligent capabilities.
 
 To integrate your Data App with GPTs, perform the following steps:
 
@@ -73,8 +73,9 @@ To integrate your Data App with GPTs, perform the following steps:
 4. In the displayed dialog box, you can see the following fields:
 
     - **API Specification URL**: copy the URL of the OpenAPI Specification of your Data App. For more information, see [Use the OpenAPI Specification](#use-the-openapi-specification).
-    - **API Key**: provide the API key of your Data App. If you do not have an API Key yet, click **Create API Key** to create one. For more information, see [Create an API key](/tidb-cloud/data-service-api-key.md#create-an-api-key).
-    - **API Key Encoded**: copy the base64 encoded string equivalent of the API Key you have provided.
+    - **API Key**: enter the API key of your Data App. If you do not have an API key yet, click **Create API Key** to create one. For more information, see [Create an API key](/tidb-cloud/data-service-api-key.md#create-an-api-key).
+    - **API Key Encoded**: copy the base64 encoded string equivalent to the API key you have provided.
+
 5. Copy the API Specification URL and the encoded API Key, and use them in the GPT configuration.
 
 ### Manage linked data sources
