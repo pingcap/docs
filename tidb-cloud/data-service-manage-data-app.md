@@ -69,11 +69,11 @@ To integrate your Data App with GPT, perform the following steps:
 
 1. Navigate to the [**Data Service**](https://tidbcloud.com/console/data-service) page of your project.
 2. In the left pane, locate your target Data App and click the name of your target Data App to view its details.
-3. In the **Integration with GPT** area, click **Get Configuration**.
+3. In the **Integration with GPTs** area, click **Get Configuration**.
 4. In the displayed dialog box, you can see the following fields:
 
     - **API Specification URL**: copy the URL of the OpenAPI Specification of your Data App. For more information, see [Use the OpenAPI Specification](#use-the-openapi-specification).
-    - **API Key**: provide the API key of your Data App. If you do not have an API Key yet, click **Create API Key** to create one. Click **Encode** to encode the API Key. For more information, see [Create an API key](/tidb-cloud/data-service-api-key.md#create-an-api-key).
+    - **API Key**: provide the API key of your Data App. If you do not have an API Key yet, click **Create API Key** to create one. For more information, see [Create an API key](/tidb-cloud/data-service-api-key.md#create-an-api-key).
     - **API Key Encoded**: copy the base64 encoded string equivalent of the API Key you have provided.
 5. Copy the API Specification URL and the encoded API Key, and use them in the GPT configuration.
 
