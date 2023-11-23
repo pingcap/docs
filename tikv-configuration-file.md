@@ -1027,7 +1027,7 @@ Configuration items related to Raftstore.
 
 + When the memory usage of TiKV exceeds 90% of the system available memory, and the memory occupied by Raft entry cache exceeds the used memory * `evict-cache-on-memory-ratio`, TiKV evicts the Raft entry cache.
 + If this value is set to `0`, it means that this feature is disabled.
-+Default value: `0.1`
++ Default value: `0.1`
 + Minimum value: `0`
 
 ## coprocessor
@@ -2344,10 +2344,10 @@ Configuration items related to [Load Base Split](/configure-load-base-split.md).
 
 ### `enable-heap-profiling` <span class="version-mark">New in v7.5.0</span>
 
-+ Controls whether to enable Heap Profiling to track the memory usage of TiKV
++ Controls whether to enable Heap Profiling to track the memory usage of TiKV.
 + Default value: `true`
 
 ### `profiling-sample-per-bytes` <span class="version-mark">New in v7.5.0</span>
 
-+ Specifies the amount of data sampled by Heap Profiling each time, rounding up to the nearest power of 2
++ Specifies the amount of data sampled by Heap Profiling each time, rounding up to the nearest power of 2.
 + Default value: 512KB
