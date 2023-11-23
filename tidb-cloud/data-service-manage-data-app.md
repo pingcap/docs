@@ -76,7 +76,7 @@ To integrate your Data App with GPTs, perform the following steps:
     - **API Key**: enter the API key of your Data App. If you do not have an API key yet, click **Create API Key** to create one. For more information, see [Create an API key](/tidb-cloud/data-service-api-key.md#create-an-api-key).
     - **API Key Encoded**: copy the base64 encoded string equivalent to the API key you have provided.
 
-5. Copy the API Specification URL and the encoded API Key, and use them in the GPT configuration.
+5. Use the copied API Specification URL and the encoded API key in your GPT configuration.
 
 ### Manage linked data sources
 
