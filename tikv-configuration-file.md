@@ -2351,4 +2351,4 @@ Configuration items related to [Load Base Split](/configure-load-base-split.md).
 ### `profiling-sample-per-bytes` <span class="version-mark">New in v7.5.0</span>
 
 + Specifies the amount of data sampled by Heap Profiling each time, rounding up to the nearest power of 2.
-+ Default value: 512KB
++ Default value: `512KB`
