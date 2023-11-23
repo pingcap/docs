@@ -61,11 +61,11 @@ You can edit the name, version, and description of a Data App. To edit Data App 
 
 For more information, see [Deploy automatically with GitHub](/tidb-cloud/data-service-manage-github-connection.md).
 
-### Integrate your Data App with GPT
+### Integrate your Data App with GPTs
 
-You can integrate your Data App with GPT to enhance your applications with intelligent capabilities.
+You can integrate your Data App with GPTs to enhance your applications with intelligent capabilities.
 
-To integrate your Data App with GPT, perform the following steps:
+To integrate your Data App with GPTs, perform the following steps:
 
 1. Navigate to the [**Data Service**](https://tidbcloud.com/console/data-service) page of your project.
 2. In the left pane, locate your target Data App and click the name of your target Data App to view its details.
