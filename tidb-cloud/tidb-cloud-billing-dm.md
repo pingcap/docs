@@ -11,7 +11,7 @@ This document describes the billing for Data Migration in TiDB Cloud.
 
 TiDB Cloud measures the capacity of Data Migration in Replication Capacity Units (RCUs). When you create a Data Migration job, you can select an appropriate specification. The higher the RCU, the better the migration performance. You will be charged for these Data Migration RCUs.
 
-The following table lists the specifications, corresponding performances, and recommended maximum number of tables for Data Migration.
+The following table lists the specifications, corresponding performances, and the maximum number of tables for Data Migration.
 
 | Specification | Full data migration | Incremental data migration | Maximum number of tables |
 |---------------|---------------------|----------------------------|-----------------------|
