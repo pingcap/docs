@@ -66,9 +66,9 @@ For example, if your Kafka cluster is in Confluent Cloud, you can see [Resources
 ## Step 2. Configure the changefeed target
 
 1. Under **Brokers Configuration**, fill in your Kafka brokers endpoints. You can use commas `,` to separate multiple endpoints.
-2. Select the **Authentication** option according to your Kafka authentication configuration.
+2. Select an authentication option according to your Kafka authentication configuration.
 
-    - If your Kafka does not require authentication, keep the default option **DISABLE**.
+    - If your Kafka does not require authentication, keep the default option **Disable**.
     - If your Kafka requires authentication, select the corresponding authentication type, and then fill in the user name and password of your Kafka account for authentication.
 
 3. Select your Kafka version. If you do not know that, use Kafka V2.
