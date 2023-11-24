@@ -37,7 +37,6 @@ If you are using Red Hat Linux or a distribution based on Red Hat Linux, you can
 
 For example:
 
-
 ```shell
 rename srcdb. tgtdb. *.sql
 ```
