@@ -11,7 +11,7 @@ This document describes the billing for Data Migration in TiDB Cloud.
 
 TiDB Cloud measures the capacity of Data Migration in Replication Capacity Units (RCUs). When you create a Data Migration job, you can select an appropriate specification. The higher the RCU, the better the migration performance. You will be charged for these Data Migration RCUs.
 
-The following table lists the corresponding performances and the maximum number of tables that can be migrated by each Data Migration specification.
+The following table lists the corresponding performance and the maximum number of tables that each Data Migration specification can migrate.
 
 | Specification | Full data migration | Incremental data migration | Maximum number of tables |
 |---------------|---------------------|----------------------------|-----------------------|
@@ -24,8 +24,8 @@ For more information about the prices of Data Migration RCUs, see [Data Migratio
 
 > **Note:**
 >
-> - If the number of tables to be migrated exceeds the maximum number of tables, the Data Migration job might can still run, but the job might become unstable or even fail.
-> - All the performance values in this table are maximum performances. It is assumed that there are no performance, network bandwidth, or other bottlenecks in the upstream and downstream databases. The performance values are for reference only and might vary in different scenarios.
+> - If the number of tables to be migrated exceeds the maximum number of tables, the Data Migration job might still run, but the job could become unstable or even fail.
+> - All the performance values in this table are maximum and optimal ones. It is assumed that there are no performance, network bandwidth, or other bottlenecks in the upstream and downstream databases. The performance values are for reference only and might vary in different scenarios.
 
 The Data Migration job measures full data migration performance in MiB/s. This unit indicates the amount of data (in MiB) that is migrated per second by the Data Migration job.
 
