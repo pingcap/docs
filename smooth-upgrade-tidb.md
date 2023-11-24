@@ -11,7 +11,20 @@ summary: This document introduces the smooth upgrade feature of TiDB, which supp
 
 This document introduces the smooth upgrade feature of TiDB, which supports upgrading TiDB clusters without manually canceling DDL operations.
 
-Starting from v7.1.0, when you upgrade TiDB to a later version, TiDB supports smooth upgrade. This feature removes the limitations during the upgrade process and provides a more user-friendly upgrade experience. This feature is enabled by default and cannot be disabled.
+Starting from v7.1.0, when you upgrade TiDB to a later version, TiDB supports smooth upgrade. This feature removes the limitations during the upgrade process and provides a more user-friendly upgrade experience. Note that you need to ensure that there are no user-initiated DDL operations during the upgrade process.
+
+## Supported versions
+
+Depending on whether the feature needs to be controlled by a switch, there are two ways to use smooth upgrade:
+
+- The feature is enabled by default and does not need to be controlled by a switch. Currently, the versions that support this method are v7.1.0, v7.1.1, v7.2.0, and v7.3.0. The specific supported versions are as follows:
+    - Upgrade from v7.1.0 to v7.1.1, v7.2.0, or v7.3.0
+    - Upgrade from v7.1.1 to v7.2.0 or v7.3.0
+    - Upgrade from v7.2.0 to v7.3.0
+
+- The feature is disabled by default, and can be enabled by sending the `/upgrade/start` request. For details, see [TiDB HTTP API](https://github.com/pingcap/tidb/blob/master/docs/tidb_http_api.md). The supported versions are as follows:
+    - Upgrade from v7.1.2 and later v7.1 versions (that is, v7.1.x, where x >= 2) to v7.4.0 and later versions
+    - Upgrade from v7.4.0 to later versions
 
 ## Feature introduction
 
@@ -20,16 +33,31 @@ Before the smooth upgrade feature is introduced, there are the following limitat
 - Running DDL operations during the upgrade process might cause undefined behavior in TiDB.
 - Upgrading TiDB during the DDL operations might cause undefined behavior in TiDB.
 
-After the smooth upgrade feature is introduced, the upgrade process is no longer subject to the preceding limitations.
+These limitations can be summarized as that you need to ensure that there are no user-initiated DDL operations during the upgrade process. After the smooth upgrade feature is introduced, TiDB is no longer subject to this limitation during the upgrade process.
 
-During the upgrade process, TiDB automatically performs the following operations without user intervention:
+### Upgrade steps
 
-1. Pause user DDL operations.
-2. Perform system DDL operations for the upgrade.
-3. Resume the paused user DDL operations.
-4. Complete the upgrade.
+#### Use TiUP to upgrade
 
-The resumed DDL jobs are still executed in the order before the upgrade.
+Starting from v1.14.0, TiUP automatically supports this feature. That is, you can directly use the `tiup cluster upgrade` command to upgrade TiDB clusters. Note that the `tiup cluster patch` command is not supported currently.
+
+#### Use TiDB Operator to upgrade
+
+Currently, this feature is not supported. It will be supported as soon as possible.
+
+#### Other upgrade methods
+
+You can use the following steps to upgrade TiDB manually or by using a script:
+
+1. Send the HTTP upgrade start request to any TiDB node in the cluster: `curl -X POST http://{TiDBIP}:10080/upgrade/start`.
+   * The TiDB cluster enters the **Upgrading** state.
+   * The DDL operations to be performed are paused.
+
+2. Replace the TiDB binary and perform a rolling upgrade. This process is the same as the original upgrade process.
+    * Perform system DDL operations during the upgrade process.
+
+3. After all TiDB nodes in the cluster are upgraded successfully, send the HTTP upgrade finish request to any TiDB node: `curl -X POST http://{TiDBIP}:10080/upgrade/finish`.
+    * The paused DDL operations of users are resumed.
 
 ## Limitations
 
@@ -54,3 +82,7 @@ When using the smooth upgrade feature, note the following limitations.
     * BR: BR might replicate the paused DDL jobs to TiDB. The paused DDL jobs cannot be automatically resumed, which might cause the DDL jobs to be stuck later.
 
     * DM and TiCDC: If you use DM or TiCDC to import SQL statements to TiDB during the upgrade process, and if one of the SQL statements contains DDL operations, the import operation is blocked and undefined errors might occur.
+
+### Limitation on plugins
+
+The plugins installed in TiDB might contain DDL operations. However, during the upgrade, if the DDL operations in the plugins are not performed on system tables, the upgrade might fail.
