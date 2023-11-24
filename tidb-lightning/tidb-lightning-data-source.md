@@ -42,7 +42,7 @@ For example:
 rename srcdb. tgtdb. *.sql
 ```
 
-After you modify the database name, it is recommended that you delete the `schema-create.sql` file that contains the `CREATE DATABASE` DDL statement from the `data-source-dir` directory. If you want to modify the table name as well, you also need to modify the `schema.sql` file that contains the `CREATE TABLE` DDL statement with the table name.
+After you modify the database name, it is recommended that you delete the `${db_name}-schema-create.sql` file that contains the `CREATE DATABASE` DDL statement from the `data-source-dir` directory. If you want to modify the table name as well, you also need to modify the table name in the `${db_name}.${table_name}-schema.sql` file that contains the `CREATE TABLE` DDL statement.
 
 ### Use regular expressions to replace names online
 
