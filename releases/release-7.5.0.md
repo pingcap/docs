@@ -112,6 +112,14 @@ Compared with the previous LTS 7.1.0, 7.5.0 includes new features, improvements,
 
     For more information, see [documentation](/br/br-snapshot-manual.md#back-up-statistics).
 
+### Observability
+
+* TiDB Dashboard supports heap profiling for TiKV [#15927](https://github.com/tikv/tikv/issues/15927) @[Connor1996](https://github.com/Connor1996)
+
+    Previously, addressing TiKV OOM or high memory usage issues typically required manual execution of `jeprof` to generate a heap profile in the instance environment. Starting from v7.5.0, TiKV enables remote processing of heap profiles. You can now directly access the flame graph and call graph of heap profile. This feature provides the same simple and easy-to-use experience as Go heap profiling.
+
+    For more information, see [documentation](/dashboard/dashboard-profiling.md).
+
 ### Data migration
 
 * Support the `IMPORT INTO` SQL statement (GA) [#46704](https://github.com/pingcap/tidb/issues/46704) @[D3Hunter](https://github.com/D3Hunter)
