@@ -62,7 +62,7 @@ Query OK, 0 rows affected (0.30 sec)
 
 ## こちらも参照 {#see-also}
 
--   [インデックスを表示](/sql-statements/sql-statement-show-index.md)
+-   [インデックスを表示](/sql-statements/sql-statement-show-indexes.md)
 -   [インデックスの作成](/sql-statements/sql-statement-create-index.md)
 -   [インデックスの追加](/sql-statements/sql-statement-add-index.md)
 -   [インデックスの名前を変更](/sql-statements/sql-statement-rename-index.md)

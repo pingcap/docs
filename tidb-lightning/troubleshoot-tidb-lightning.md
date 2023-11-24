@@ -42,9 +42,7 @@ strict-format = true
 
 これは、 `tidb-lightning`間違って開始したことが原因である可能性があり、そのためシステムが SIGHUP シグナルを送信して`tidb-lightning`プロセスを停止させます。この状況では、通常、 `tidb-lightning.log`次のログを出力します。
 
-```
-[2018/08/10 07:29:08.310 +08:00] [INFO] [main.go:41] ["got signal to exit"] [signal=hangup]
-```
+    [2018/08/10 07:29:08.310 +08:00] [INFO] [main.go:41] ["got signal to exit"] [signal=hangup]
 
 コマンドラインで`nohup`直接使用して`tidb-lightning`を開始することはお勧めできません。 [`tidb-lightning`を開始する](/tidb-lightning/deploy-tidb-lightning.md#step-3-start-tidb-lightning)スクリプトを実行することで実行できます。
 
@@ -54,15 +52,11 @@ strict-format = true
 
 `tidb-lightning`が異常終了した場合、クラスターは本番には適さない「インポート モード」でスタックする可能性があります。現在のモードは、次のコマンドを使用して取得できます。
 
-{{< copyable "" >}}
-
 ```sh
 tidb-lightning-ctl --config tidb-lightning.toml --fetch-mode
 ```
 
 次のコマンドを使用して、クラスターを強制的に「通常モード」に戻すことができます。
-
-{{< copyable "" >}}
 
 ```sh
 tidb-lightning-ctl --config tidb-lightning.toml --fetch-mode
@@ -91,8 +85,6 @@ tidb-lightning-ctl --config tidb-lightning.toml --fetch-mode
 **解決策**:
 
 1.  `tidb-lightning-ctl`を使用して破損したデータを削除し、テーブル構造とデータを確認して、 TiDB Lightningを再起動して影響を受けるテーブルを再度インポートします。
-
-    {{< copyable "" >}}
 
     ```sh
     tidb-lightning-ctl --config conf/tidb-lightning.toml --checkpoint-error-destroy=all
@@ -130,7 +122,7 @@ tidb-lightning-ctl --config conf/tidb-lightning.toml --checkpoint-error-destroy=
 
 2.  `table-concurrency` + `index-concurrency`の値を`max-open-engines`未満になるように減らします。
 
-3.  すべてのエンジン ファイルを強制的に削除するには、 `tikv-importer`を再起動します (デフォルトは`./data.import/` )。これにより、部分的にインポートされたテーブルもすべて削除されるため、 TiDB Lightning で古いチェックポイントをクリアする必要があります。
+3.  `tikv-importer`を再起動して、すべてのエンジン ファイルを強制的に削除します (デフォルトは`./data.import/` )。これにより、部分的にインポートされたテーブルもすべて削除されるため、 TiDB Lightning で古いチェックポイントをクリアする必要があります。
 
     ```sh
     tidb-lightning-ctl --config conf/tidb-lightning.toml --checkpoint-error-destroy=all
@@ -173,7 +165,7 @@ tidb-lightning-ctl --config conf/tidb-lightning.toml --checkpoint-error-destroy=
 
 **原因**: TiDB Lightningによって生成された 1 行のキーと値のペアが、TiDB によって設定された制限を超えています。
 
-**解決策**:
+**解決**：
 
 現時点では、TiDB の制限を回避することはできません。他のテーブルを正常にインポートするには、このテーブルを無視する必要があります。
 
@@ -196,10 +188,8 @@ TiDB Lightning Local バックエンドは、v4.0.0 以降のバージョンの 
 
 このエラーは通常、CSV データ ファイルにヘッダーが含まれていないために発生します (最初の行は列名ではなくデータです)。したがって、次の設定をTiDB Lightning設定ファイルに追加する必要があります。
 
-```
-[mydumper.csv]
-header = false
-```
+    [mydumper.csv]
+    header = false
 
 ### <code>Unknown character set</code> {#code-unknown-character-set-code}
 
@@ -207,4 +197,8 @@ TiDB は、すべての MySQL 文字セットをサポートしているわけ�
 
 ### <code>invalid compression type ...</code> {#code-invalid-compression-type-code}
 
--   TiDB Lightning v6.4.0 以降のバージョンは、 `.bak`ファイルと圧縮データ ファイル`gzip` 、 `snappy` 、および`zstd`のみをサポートします。他の種類のファイルではエラーが発生します。サポートされていないファイルについては、そのようなエラーを避けるために、事前にファイル名を変更するか、それらのファイルをインポート データ ディレクトリから移動する必要があります。詳細については、 [圧縮ファイル](/tidb-lightning/tidb-lightning-data-source.md#compressed-files)を参照してください。
+-   TiDB Lightning v6.4.0 以降のバージョンは、圧縮データ ファイル`gzip` 、 `snappy` 、および`zstd`のみをサポートします。他の種類の圧縮ファイルではエラーが発生します。ソース データ ファイルが保存されているディレクトリにサポートされていない圧縮ファイルが存在する場合、タスクはエラーを報告します。このようなエラーを回避するには、サポートされていないファイルをインポート データ ディレクトリから移動します。詳細については、 [圧縮ファイル](/tidb-lightning/tidb-lightning-data-source.md#compressed-files)を参照してください。
+
+> **注記：**
+>
+> Snappy 圧縮ファイルは[公式の Snappy フォーマット](https://github.com/google/snappy)に存在する必要があります。 Snappy 圧縮の他のバリアントはサポートされていません。

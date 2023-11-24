@@ -7,9 +7,10 @@ summary: Learn how to schedule placement of tables and partitions using SQL stat
 
 SQL の配置ルールは、SQL インターフェイスを使用して TiKV クラスター内のデータの保存場所を指定できる機能です。この機能を使用すると、テーブルとパーティションが特定の領域、データセンター、ラック、またはホストにスケジュールされます。これは、低コストで高可用性戦略を最適化すること、データのローカル レプリカをローカルの古い読み取りに確実に利用できるようにすること、データの局所性要件を順守することなどのシナリオに役立ちます。
 
-> **ノート：**
+> **注記：**
 >
-> *SQL での配置ルール*の実装は、PD の*配置ルール機能*に依存します。詳細は[配置ルールの構成](/configure-placement-rules.md)を参照してください。 SQL の配置ルールのコンテキストでは、*配置ルールは*、他のオブジェクトに添付された*配置ポリシー*、または TiDB から PD に送信されるルールを指す場合があります。
+> -   この機能は[TiDB サーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless)クラスターでは使用できません。
+> -   *SQL での配置ルール*の実装は、PD の*配置ルール機能*に依存します。詳細は[配置ルールの構成](https://docs.pingcap.com/zh/tidb/stable/configure-placement-rules)を参照してください。 SQL の配置ルールのコンテキストでは、*配置ルールは*、他のオブジェクトに付加された*配置ポリシー*、または TiDB から PD に送信されるルールを指す場合があります。
 
 詳細なユーザー シナリオは次のとおりです。
 
@@ -101,7 +102,7 @@ SELECT * FROM information_schema.partitions WHERE tidb_placement_policy_name IS 
 
 ## オプションリファレンス {#option-reference}
 
-> **ノート：**
+> **注記：**
 >
 > -   配置オプションは、各 TiKV ノードの構成で正しく指定されたラベルによって異なります。たとえば、 `PRIMARY_REGION`オプションは TiKV の`region`ラベルに依存します。 TiKV クラスターで使用可能なすべてのラベルの概要を表示するには、ステートメント[`SHOW PLACEMENT LABELS`](/sql-statements/sql-statement-show-placement-labels.md)を使用します。
 >
@@ -141,7 +142,17 @@ SELECT * FROM information_schema.partitions WHERE tidb_placement_policy_name IS 
 
 ### レプリカの数を増やす {#increase-the-number-of-replicas}
 
+<CustomContent platform="tidb">
+
 デフォルト設定の[`max-replicas`](/pd-configuration-file.md#max-replicas)は`3`です。特定のテーブル セットに対してこれを増やすには、次のように配置ポリシーを使用できます。
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+デフォルト設定の[`max-replicas`](https://docs.pingcap.com/tidb/stable/pd-configuration-file#max-replicas)は`3`です。特定のテーブル セットに対してこれを増やすには、次のように配置ポリシーを使用できます。
+
+</CustomContent>
 
 ```sql
 CREATE PLACEMENT POLICY fivereplicas FOLLOWERS=4;
@@ -245,7 +256,7 @@ PARTITION BY RANGE( YEAR(purchased) ) (
 
 辞書形式では、制約はそのルールに適用されるインスタンスの数も示します。たとえば、 `FOLLOWER_CONSTRAINTS="{+region=us-east-1: 1,+region=us-east-2: 1,+region=us-west-1: 1}";` 1 人のフォロワーが us-east-1 に、1 人のフォロワーが us-east-2 に、1 人のフォロワーが us-west-1 にいることを示します。別の例として、 `FOLLOWER_CONSTRAINTS='{"+region=us-east-1,+disk=nvme":1,"+region=us-west-1":1}';` 、1 人のフォロワーが nvme ディスクを持つ us-east-1 にあり、1 人のフォロワーが us-west-1 にあることを示します。
 
-> **ノート：**
+> **注記：**
 >
 > 辞書とリストの形式は YAML パーサーに基づいていますが、YAML 構文が誤って解析される可能性があります。たとえば、 `"{+disk=ssd:1,+disk=nvme:2}"`は​​誤って`'{"+disk=ssd:1": null, "+disk=nvme:1": null}'`として解析されます。ただし、 `"{+disk=ssd: 1,+disk=nvme: 1}"`は`'{"+disk=ssd": 1, "+disk=nvme": 1}'`として正しく解析されます。
 
@@ -265,11 +276,25 @@ CREATE PLACEMENT POLICY singleaz CONSTRAINTS="[+zone=zone1]" SURVIVAL_PREFERENCE
 -   `multiaz`配置ポリシーがアタッチされたテーブルの場合、データは異なるアベイラビリティ ゾーンの 3 つのレプリカに配置され、ゾーン間のデータ分離の存続目標が優先され、ホスト間のデータ分離の存続目標が続きます。
 -   `singleaz`配置ポリシーがアタッチされたテーブルの場合、データは最初に`zone1`アベイラビリティ ゾーン内の 3 つのレプリカに配置され、その後ホスト間でのデータ分離の存続目標が満たされます。
 
-> **ノート：**
+<CustomContent platform="tidb">
+
+> **注記：**
 >
 > `SURVIVAL_PREFERENCES`は PD の`location-labels`に相当します。詳細については、 [トポロジーラベルごとにレプリカをスケジュールする](/schedule-replicas-by-topology-labels.md)を参照してください。
 
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+> **注記：**
+>
+> `SURVIVAL_PREFERENCES`は PD の`location-labels`に相当します。詳細については、 [トポロジーラベルごとにレプリカをスケジュールする](https://docs.pingcap.com/tidb/stable/schedule-replicas-by-topology-labels)を参照してください。
+
+</CustomContent>
+
 ## ツールとの互換性 {#compatibility-with-tools}
+
+<CustomContent platform="tidb">
 
 | ツール名           | サポートされる最小バージョン | 説明                                                                                                 |
 | -------------- | -------------- | -------------------------------------------------------------------------------------------------- |
@@ -277,6 +302,14 @@ CREATE PLACEMENT POLICY singleaz CONSTRAINTS="[+zone=zone1]" SURVIVAL_PREFERENCE
 | TiDB Lightning | まだ互換性がありません    | TiDB Lightning が配置ポリシーを含むバックアップ データをインポートするとエラーが報告される                                              |
 | TiCDC          | 6.0            | 配置ルールを無視し、ルールをダウンストリームに複製しません。                                                                     |
 | TiDBBinlog     | 6.0            | 配置ルールを無視し、ルールをダウンストリームに複製しません。                                                                     |
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+| TiDB Lightning|まだ互換性がありません | TiDB Lightning が配置ポリシーを含むバックアップ データをインポートすると、エラーが報告されます。 |ティCDC | 6.0 |配置ルールを無視し、ルールをダウンストリームに複製しません。
+
+</CustomContent>
 
 ## 既知の制限事項 {#known-limitations}
 

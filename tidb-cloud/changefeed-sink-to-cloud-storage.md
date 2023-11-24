@@ -14,7 +14,7 @@ Summary: Learn how to create a changefeed to stream data from a TiDB Dedicated c
 
 ## 制限 {#restrictions}
 
--   TiDB Cloudクラスターごとに、最大 5 つの変更フィードを作成できます。
+-   TiDB Cloudクラスターごとに、最大 100 個の変更フィードを作成できます。
 -   TiDB Cloud はTiCDC を使用して変更フィードを確立するため、同じ[TiCDC としての制限](https://docs.pingcap.com/tidb/stable/ticdc-overview#unsupported-scenarios)を持ちます。
 -   レプリケートされるテーブルに主キーまたは NULL 以外の一意のインデックスがない場合、レプリケーション中に一意制約がないため、一部の再試行シナリオでは重複したデータがダウンストリームに挿入される可能性があります。
 
@@ -81,7 +81,7 @@ Summary: Learn how to create a changefeed to stream data from a TiDB Dedicated c
 
         ![Get bucket URI](/media/tidb-cloud/changefeed/sink-to-cloud-storage-gcs-uri01.png)
 
-    -   フォルダーの gsutil URI を取得するには、フォルダーを開いてコピー ボタンをクリックし、プレフィックスとして`gs://`を追加します。たとえば、バケット名が`test-sink-gcs` 、フォルダー名が`changefeed-xxx`の場合、URI は`gs://test-sink-gcs/changefeed-xxx`になります。
+    -   フォルダーの gsutil URI を取得するには、フォルダーを開いてコピー ボタンをクリックし、プレフィックスとして`gs://`を追加します。たとえば、バケット名が`test-sink-gcs` 、フォルダー名が`changefeed-xxx`の場合、URI は`gs://test-sink-gcs/changefeed-xxx/`になります。
 
         ![Get bucket URI](/media/tidb-cloud/changefeed/sink-to-cloud-storage-gcs-uri02.png)
 
@@ -101,17 +101,22 @@ Summary: Learn how to create a changefeed to stream data from a TiDB Dedicated c
 
     ![the table filter of changefeed](/media/tidb-cloud/changefeed/sink-to-s3-02-table-filter.jpg)
 
-    -   **フィルター ルール**: この列でフィルター ルールを設定できます。デフォルトでは、すべてのテーブルを複製することを表すルール`*.*`があります。新しいルールを追加すると、 TiDB CloudはTiDB 内のすべてのテーブルをクエリし、ルールに一致するテーブルのみを右側のボックスに表示します。
+    -   **フィルター ルール**: この列でフィルター ルールを設定できます。デフォルトでは、すべてのテーブルを複製することを表すルール`*.*`があります。新しいルールを追加すると、 TiDB CloudはTiDB 内のすべてのテーブルをクエリし、ルールに一致するテーブルのみを右側のボックスに表示します。最大 100 個のフィルター ルールを追加できます。
     -   **有効なキーを持つテーブル**: この列には、主キーや一意のインデックスなどの有効なキーを持つテーブルが表示されます。
     -   **有効なキーのないテーブル**: この列には、主キーまたは一意のキーがないテーブルが表示されます。これらのテーブルでは、一意の識別子がないと、ダウンストリームで重複イベントを処理するときにデータの不整合が生じる可能性があるため、レプリケーション中に課題が生じます。データの一貫性を確保するには、レプリケーションを開始する前に、これらのテーブルに一意キーまたは主キーを追加することをお勧めします。あるいは、フィルタ ルールを使用してこれらのテーブルを除外することもできます。たとえば、ルール`"!test.tbl1"`を使用してテーブル`test.tbl1`を除外できます。
 
-2.  **「レプリケーション開始位置」**領域で、次のレプリケーション位置のいずれかを選択します。
+2.  **イベント フィルターを**カスタマイズして、複製するイベントをフィルターします。
+
+    -   **一致するテーブル**: この列でイベント フィルターを適用するテーブルを設定できます。ルールの構文は、前述の**テーブル フィルター**領域で使用されるものと同じです。変更フィードごとに最大 10 個のイベント フィルター ルールを追加できます。
+    -   **無視されるイベント**: イベント フィルターが変更フィードから除外するイベントのタイプを設定できます。
+
+3.  **「レプリケーション開始位置」**領域で、次のレプリケーション位置のいずれかを選択します。
 
     -   これからレプリケーションを開始します
     -   特定の[TSO](https://docs.pingcap.com/tidb/stable/glossary#tso)からレプリケーションを開始します
     -   特定の時刻からレプリケーションを開始する
 
-3.  **[データ形式]**領域で、 **CSV 形式**または**Canal-JSON**形式のいずれかを選択します。
+4.  **[データ形式]**領域で、 **CSV 形式**または**Canal-JSON**形式のいずれかを選択します。
 
     <SimpleTab>
      <div label="Configure CSV format">
@@ -136,7 +141,7 @@ Summary: Learn how to create a changefeed to stream data from a TiDB Dedicated c
     </div>
      </SimpleTab>
 
-4.  **「フラッシュパラメータ」**領域では、次の 2 つの項目を設定できます。
+5.  **「フラッシュパラメータ」**領域では、次の 2 つの項目を設定できます。
 
     -   **フラッシュ間隔**: デフォルトでは 60 秒に設定されていますが、2 秒から 10 分の範囲で調整可能です。
     -   **ファイル サイズ**: デフォルトでは 64 MB に設定されていますが、1 MB ～ 512 MB の範囲で調整できます。

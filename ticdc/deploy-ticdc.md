@@ -16,9 +16,9 @@ summary: Learn the hardware and software recommendations for deploying and runni
 | レッドハット エンタープライズ リナックス | 7.3以降のバージョン |
 | CentOS                | 7.3以降のバージョン |
 
-| CPU    | メモリー   | ディスクの種類 | 通信網                    | TiCDC クラスター インスタンスの数 (本番環境の最小要件) |
-| :----- | :----- | :------ | :--------------------- | :------------------------------- |
-| 16コア以上 | 64GB以上 | SSD     | 10ギガビットネットワークカード（2枚推奨） | 2                                |
+| CPU    | メモリ    | ディスク        | 通信網                    | TiCDC クラスター インスタンスの数 (本番環境の最小要件) |
+| :----- | :----- | :---------- | :--------------------- | :------------------------------- |
+| 16コア以上 | 64GB以上 | 500GB以上のSSD | 10ギガビットネットワークカード（2枚推奨） | 2                                |
 
 詳細については、 [ソフトウェアとハ​​ードウェアの推奨事項](/hardware-and-software-requirements.md)を参照してください。
 
@@ -42,7 +42,7 @@ cdc_servers:
 -   設定可能なフィールドの詳細については、 [TiUPを使用して`cdc_servers`を構成する](/tiup/tiup-cluster-topology-reference.md#cdc_servers)を参照してください。
 -   TiDB クラスターをデプロイする詳細な手順については、 [TiUPを使用した TiDBクラスタのデプロイ](/production-deployment-using-tiup.md)を参照してください。
 
-> **ノート：**
+> **注記：**
 >
 > TiCDC をインストールする前に、 TiUPコントロール マシンと TiCDC ホストの間に[パスワードなしで SSH 相互信頼と sudo を手動で設定しました](/check-before-deployment.md#manually-configure-the-ssh-mutual-trust-and-sudo-without-password)があることを確認してください。
 
@@ -93,9 +93,9 @@ tiup update --all && \
 tiup cluster upgrade <cluster-name> <version> --transfer-timeout 600
 ```
 
-> **ノート：**
+> **注記：**
 >
-> 前述のコマンドでは、 `<cluster-name>`と`<version>`実際のクラスター名とクラスターのバージョンに置き換える必要があります。たとえば、バージョンは v7.1.1 になります。
+> 前述のコマンドでは、 `<cluster-name>`と`<version>`実際のクラスター名とクラスターのバージョンに置き換える必要があります。たとえば、バージョンは v7.1.2 になります。
 
 ### アップグレードに関する注意事項 {#upgrade-cautions}
 
@@ -154,7 +154,7 @@ TiUP を使用すると、TiCDC ノードを簡単に停止および起動でき
 
 ## コマンドライン ツールを使用して TiCDC ステータスをビュー {#view-ticdc-status-using-the-command-line-tool}
 
-次のコマンドを実行して、TiCDC クラスターのステータスを表示します。 `v<CLUSTER_VERSION>` TiCDC クラスターのバージョン ( `v7.1.1`など) に置き換える必要があることに注意してください。
+次のコマンドを実行して、TiCDC クラスターのステータスを表示します。 `v<CLUSTER_VERSION>` TiCDC クラスターのバージョン ( `v7.1.2`など) に置き換える必要があることに注意してください。
 
 ```shell
 tiup ctl:v<CLUSTER_VERSION> cdc capture list --server=http://10.0.10.25:8300

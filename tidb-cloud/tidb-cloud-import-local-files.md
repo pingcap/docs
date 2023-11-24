@@ -33,7 +33,7 @@ summary: Learn how to import local files to TiDB Cloud.
 
     2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[インポート]**をクリックします。
 
-2.  [**インポート]**ページでは、ローカル ファイルをアップロード領域に直接ドラッグ アンド ドロップするか、アップロード領域をクリックして対象のローカル ファイルを選択してアップロードできます。 1 つのタスクに対してアップロードできるのは、50 MiB 未満の CSV ファイル 1 つだけであることに注意してください。
+2.  [**インポート]**ページでは、ローカル ファイルをアップロード領域に直接ドラッグ アンド ドロップするか、アップロード領域をクリックして対象のローカル ファイルを選択してアップロードできます。 1 つのタスクに対してアップロードできるのは、50 MiB 未満の CSV ファイル 1 つだけであることに注意してください。ローカル ファイルが 50 MiB より大きい場合は、 [50 MiB を超えるローカル ファイルをインポートするにはどうすればよいですか?](#how-to-import-a-local-file-larger-than-50-mib)を参照してください。
 
 3.  **[ターゲット]**領域で、ターゲット データベースとターゲット テーブルを選択するか、名前を直接入力して新しいデータベースまたは新しいテーブルを作成します。名前は文字 (a から z と AZ) または数字 (0 から 9) で始まる必要があり、文字 (a から z と AZ)、数字 (0 から 9)、およびアンダースコア (_) 文字を含めることができます。 **「プレビュー」**をクリックします。
 
@@ -61,7 +61,7 @@ summary: Learn how to import local files to TiDB Cloud.
 
         必要に応じてデータ型を変更することもできます。
 
-6.  新しいターゲット テーブルの場合、主キーを設定できます。列を主キーとして選択することも、複数の列を選択して複合主キーを作成することもできます。複合主キーは、列名を選択した順序で形成されます。
+6.  新しいターゲット テーブルの場合、主キーを設定できます。列を主キーとして選択することも、複数の列を選択して複合主キーを作成することもできます。複合主キーは、列名を選択した順序で作成されます。
 
     > **注記：**
     >
@@ -76,7 +76,7 @@ summary: Learn how to import local files to TiDB Cloud.
 
     インポートの進行状況は**、「インポート タスクの詳細」**ページで確認できます。警告や失敗したタスクがある場合は、詳細を確認して解決することができます。
 
-9.  インポート タスクが完了したら、 **[Chat2Query でデータを探索]**をクリックして、インポートされたデータをクエリできます。 Chat2Qury の使用方法の詳細については、 [AI を活用した Chat2Query でデータを探索する](/tidb-cloud/explore-data-with-chat2query.md)を参照してください。
+9.  インポート タスクが完了したら、 **[Chat2Query でデータを探索]**をクリックして、インポートされたデータをクエリできます。 Chat2Query の使用方法の詳細については、 [AI を活用した Chat2Query でデータを探索する](/tidb-cloud/explore-data-with-chat2query.md)を参照してください。
 
 10. **[インポート]**ページで、 **[アクション]**列の**[ビュー]**をクリックして、インポート タスクの詳細を確認できます。
 
@@ -103,3 +103,34 @@ LOAD DATA LOCAL INFILE 'load.txt' INTO TABLE import_test FIELDS TERMINATED BY ',
 ### TiDB Cloudにデータをインポートした後、予約済みキーワードを含む列をクエリできないのはなぜですか? {#why-can-t-i-query-a-column-with-a-reserved-keyword-after-importing-data-into-tidb-cloud}
 
 列名が TiDB で予約されている[キーワード](/keywords.md)場合、 TiDB Cloud は自動的にバッククォート`` ` ``追加して列名を囲み、データをターゲット テーブルにインポートします。列をクエリするときは、バッククォート`` ` ``を追加して列名を囲む必要があります。たとえば、列名が`order`の場合、その列に対して`` `order` ``をクエリする必要があります。
+
+### 50 MiB を超えるローカル ファイルをインポートするにはどうすればよいですか? {#how-to-import-a-local-file-larger-than-50-mib}
+
+ファイルが 50 MiB より大きい場合は、 `split [-l ${line_count}]`ユーティリティを使用してファイルを複数の小さいファイルに分割できます (Linux または macOS のみ)。たとえば、 `split -l 100000 tidb-01.csv small_files`を実行すると、 `tidb-01.csv`という名前のファイルが行長`100000`で分割され、分割されたファイルの名前は`small_files${suffix}`なります。次に、これらの小さなファイルを 1 つずつTiDB Cloudにインポートできます。
+
+次のスクリプトを参照してください。
+
+```bash
+#!/bin/bash
+n=$1
+file_path=$2
+file_extension="${file_path##*.}"
+file_name="${file_path%.*}"
+lines_per_file=$(( $(wc -l < $file_path) / $n ))
+split -d -a 1 -l $lines_per_file $file_path $file_name.
+for (( i=0; i<$n; i++ ))
+do
+    mv $file_name.$i $file_name.$i.$file_extension
+done
+```
+
+`n`とファイル名を入力して、スクリプトを実行できます。スクリプトは、元のファイル拡張子を維持したまま、ファイルを`n`の等しい部分に分割します。例えば：
+
+```bash
+> sh ./split.sh 3 mytest.customer.csv
+> ls -h | grep mytest
+mytest.customer.0.csv
+mytest.customer.1.csv
+mytest.customer.2.csv
+mytest.customer.csv
+```

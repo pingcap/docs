@@ -5,13 +5,13 @@ summary: Learn the deployment topology of TiCDC based on the minimal TiDB topolo
 
 # TiCDC 導入トポロジ {#ticdc-deployment-topology}
 
-> **ノート：**
+> **注記：**
 >
 > TiCDC は、v4.0.6 以降の一般提供 (GA) の機能です。本番環境でも使用できます。
 
 このドキュメントでは、最小クラスター トポロジに基づいた[TiCDC](/ticdc/ticdc-overview.md)の展開トポロジについて説明します。
 
-TiCDC は、TiDB 4.0 で導入された、TiDB の増分データを複製するためのツールです。 TiDB、MySQL、MQ などの複数のダウンストリーム プラットフォームをサポートします。 TiDB Binlogと比較して、TiCDC はレイテンシーが低く、ネイティブの高可用性を備えています。
+TiCDC は、TiDB 4.0 で導入された、TiDB の増分データを複製するためのツールです。 TiDB、MySQL、Kafka、MQ、storageサービスなどの複数のダウンストリーム プラットフォームをサポートします。 TiDB Binlogと比較して、TiCDC はレイテンシーが低く、ネイティブの高可用性を備えています。
 
 ## トポロジ情報 {#topology-information}
 
@@ -30,7 +30,7 @@ TiCDC は、TiDB 4.0 で導入された、TiDB の増分データを複製する
 
 上記の TiDB クラスター トポロジー ファイルの構成項目の詳細な説明については、 [TiUPを使用して TiDB を展開するためのトポロジコンフィグレーションファイル](/tiup/tiup-cluster-topology-reference.md)を参照してください。
 
-> **ノート：**
+> **注記：**
 >
 > -   構成ファイルに`tidb`ユーザーを手動で作成する必要はありません。 TiUPクラスターコンポーネントは、ターゲット マシン上に`tidb`のユーザーを自動的に作成します。ユーザーをカスタマイズしたり、ユーザーと制御マシンの一貫性を保つことができます。
 > -   デプロイメント ディレクトリを相対パスとして構成すると、クラスターはユーザーのホーム ディレクトリにデプロイされます。

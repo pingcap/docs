@@ -7,9 +7,23 @@ summary: Learn the overview of the `ALTER INSTANCE` usage in TiDB.
 
 `ALTER INSTANCE`ステートメントは、単一の TiDB インスタンスに変更を加えるために使用されます。現在、TiDB は`RELOAD TLS`句のみをサポートしています。
 
+> **注記：**
+>
+> [TiDB サーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless)では TLS 証明書を自動的に更新できるため、この機能は[TiDB サーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless)クラスターには適用されません。
+
 ## TLSをリロードする {#reload-tls}
 
-`ALTER INSTANCE RELOAD TLS`ステートメントを実行して、元の構成パスから証明書 ( [`ssl-cert`](/tidb-configuration-file.md#ssl-cert) )、キー ( [`ssl-key`](/tidb-configuration-file.md#ssl-key) )、および CA ( [`ssl-ca`](/tidb-configuration-file.md#ssl-ca) ) を再ロードできます。
+<CustomContent platform="tidb">
+
+`ALTER INSTANCE RELOAD TLS`ステートメントを実行すると、元の構成パスから証明書 ( [`ssl-cert`](/tidb-configuration-file.md#ssl-cert) )、キー ( [`ssl-key`](/tidb-configuration-file.md#ssl-key) )、および CA ( [`ssl-ca`](/tidb-configuration-file.md#ssl-ca) ) を再ロードできます。
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+`ALTER INSTANCE RELOAD TLS`ステートメントを実行すると、元の構成パスから証明書 ( [`ssl-cert`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#ssl-cert) )、キー ( [`ssl-key`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#ssl-key) )、および CA ( [`ssl-ca`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#ssl-ca) ) を再ロードできます。
+
+</CustomContent>
 
 新しくロードされた証明書、キー、および CA は、ステートメントが正常に実行された後に確立された接続で有効になります。このステートメントの実行前に確立された接続は影響を受けません。
 
@@ -29,8 +43,6 @@ InstanceOption ::=
 
 ## 例 {#example}
 
-{{< copyable "" >}}
-
 ```sql
 ALTER INSTANCE RELOAD TLS;
 ```
@@ -41,4 +53,14 @@ ALTER INSTANCE RELOAD TLS;
 
 ## こちらも参照 {#see-also}
 
+<CustomContent platform="tidb">
+
 [TiDB クライアントとサーバー間で TLS を有効にする](/enable-tls-between-clients-and-servers.md) 。
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+[TiDB クライアントとサーバー間で TLS を有効にする](https://docs.pingcap.com/tidb/stable/enable-tls-between-clients-and-servers) 。
+
+</CustomContent>

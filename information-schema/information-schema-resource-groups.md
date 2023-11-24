@@ -5,15 +5,11 @@ summary: Learn the `RESOURCE_GROUPS` information_schema table.
 
 # リソース_グループ {#resource-groups}
 
-<CustomContent platform="tidb-cloud">
-
-> **ノート：**
->
-> この機能は[TiDB サーバーレスクラスター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless)では使用できません。
-
-</CustomContent>
-
 `RESOURCE_GROUPS`表には、すべてのリソース グループに関する情報が表示されます。詳細については、 [リソース制御を使用してリソースの分離を実現する](/tidb-resource-control.md)を参照してください。
+
+> **注記：**
+>
+> このテーブルは[TiDB サーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless)クラスターでは使用できません。
 
 ```sql
 USE information_schema;
@@ -87,6 +83,6 @@ SELECT * FROM information_schema.resource_groups WHERE NAME = 'rg1'; -- View the
 -   `PRIORITY` : TiKV 上で処理されるタスクの絶対優先度。 `PRIORITY`設定に従って、さまざまなリソースがスケジュールされます。高`PRIORITY`のタスクが最初にスケジュールされます。同じ`PRIORITY`を持つリソース グループの場合、タスクは`RU_PER_SEC`構成に従って比例的にスケジュールされます。 `PRIORITY`が指定されていない場合、デフォルトの優先順位は`MEDIUM`です。
 -   `BURSTABLE` : リソース グループが利用可能なシステム リソースを過剰に使用することを許可するかどうか。
 
-> **ノート：**
+> **注記：**
 >
 > TiDB は、クラスターの初期化中に`default`リソース グループを自動的に作成します。このリソース グループのデフォルト値`RU_PER_SEC`は`UNLIMITED` ( `INT`タイプの最大値、つまり`2147483647`に相当) で、 `BURSTABLE`モードです。どのリソース グループにもバインドされていないすべてのリクエストは、この`default`のリソース グループに自動的にバインドされます。別のリソース グループの新しい構成を作成する場合は、必要に応じて`default`リソース グループ構成を変更することをお勧めします。

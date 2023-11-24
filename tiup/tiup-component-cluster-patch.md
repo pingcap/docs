@@ -28,7 +28,7 @@ tiup cluster patch <cluster-name> <package-path> [flags]
 1.  次の変数を決定します。
 
     -   `${component}` : 置換されるコンポーネントの名前 ( `tidb` 、 `tikv` 、または`pd`など)。
-    -   `${version}` :コンポーネントのバージョン ( `v7.1.1`や`v6.5.1`など)。
+    -   `${version}` :コンポーネントのバージョン ( `v7.1.2`や`v6.5.5`など)。
     -   `${os}` : オペレーティング システム ( `linux` )。
     -   `${arch}` :コンポーネントが実行されるプラットフォーム ( `amd64` 、 `arm64` )。
 
@@ -80,7 +80,7 @@ tiup cluster patch <cluster-name> <package-path> [flags]
 -   データ型: `UINT`
 -   このオプションが指定されていない場合、 TiUP は`600`秒待った後にサービスを直接再起動します。
 
-> **ノート：**
+> **注記：**
 >
 > TiUP がタイムアウト後にサービスを直接再起動すると、サービスのパフォーマンスが不安定になる可能性があります。
 
@@ -90,7 +90,7 @@ tiup cluster patch <cluster-name> <package-path> [flags]
 -   データ型: `STRINGS`
 -   このオプションが指定されていない場合、 TiUP はデフォルトで置換するノードを選択しません。
 
-> **ノート：**
+> **注記：**
 >
 > オプション`-R, --role`が同時に指定された場合、 TiUP は`-N, --node`と`-R, --role`の両方の要件に一致するサービス ノードを置き換えます。
 
@@ -100,7 +100,7 @@ tiup cluster patch <cluster-name> <package-path> [flags]
 -   データ型: `STRINGS`
 -   このオプションが指定されていない場合、 TiUP はデフォルトで置き換える役割を選択しません。
 
-> **ノート：**
+> **注記：**
 >
 > オプション`-N, --node`が同時に指定された場合、 TiUP は`-N, --node`と`-R, --role`の両方の要件に一致するサービス ノードを置き換えます。
 

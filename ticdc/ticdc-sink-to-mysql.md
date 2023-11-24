@@ -35,11 +35,9 @@ Info: {"sink-uri":"mysql://root:123456@127.0.0.1:3306/","opts":{},"create-time":
 
 シンク URI は、TiCDC ターゲット システムの接続情報を指定するために使用されます。形式は次のとおりです。
 
-```
-[scheme]://[userinfo@][host]:[port][/path]?[query_parameters]
-```
+    [scheme]://[userinfo@][host]:[port][/path]?[query_parameters]
 
-> **ノート：**
+> **注記：**
 >
 > `/path`は MySQL シンクには使用されません。
 
@@ -78,9 +76,9 @@ echo -n '123456' | base64   # '123456' is the password to be encoded.
 MTIzNDU2
 ```
 
-> **ノート：**
+> **注記：**
 >
-> シンク URI に`! * ' ( ) ; : @ & = + $ , / ? % # [ ]`などの特殊文字が含まれている場合は、特殊文字をエスケープする必要があります (たとえば、 [URIエンコーダ](https://meyerweb.com/eric/tools/dencoder/) 。
+> シンク URI に`! * ' ( ) ; : @ & = + $ , / ? % # [ ]`などの特殊文字が含まれている場合は、特殊文字をエスケープする必要があります (たとえば、 [URIエンコーダ](https://www.urlencoder.org/) 。
 
 ## 災害シナリオにおける最終的に整合性のあるレプリケーション {#eventually-consistent-replication-in-disaster-scenarios}
 
@@ -96,7 +94,7 @@ TiCDC レプリケーション ラグは、次のシナリオで増加します�
 -   `add index`などの時間のかかる DDL ステートメントは、アップストリームで実行されます。
 -   PD は積極的なスケジューリング戦略を使用して構成されているため、リージョンリーダーの頻繁な異動、またはリージョンのマージまたはリージョンの分割が頻繁に発生します。
 
-> **ノート：**
+> **注記：**
 >
 > v6.1.1 以降、TiCDC の結果整合性のあるレプリケーション機能は、Amazon S3 互換のオブジェクトstorageをサポートします。 v6.1.4 以降、この機能は GCS および Azure 互換のオブジェクトstorageをサポートします。
 

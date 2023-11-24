@@ -7,6 +7,10 @@ summary: Learn the `TIKV_REGION_PEERS` INFORMATION_SCHEMA table.
 
 `TIKV_REGION_PEERS`表には、TiKV の単一リージョンノードの詳細情報 (学習者かリーダーかなど) が表示されます。
 
+> **注記：**
+>
+> このテーブルは[TiDB サーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless)クラスターでは使用できません。
+
 ```sql
 USE INFORMATION_SCHEMA;
 DESC TIKV_REGION_PEERS;

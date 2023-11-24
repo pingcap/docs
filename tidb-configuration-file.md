@@ -9,7 +9,7 @@ summary: Learn the TiDB configuration file options that are not involved in comm
 
 # TiDBコンフィグレーションファイル {#tidb-configuration-file}
 
-TiDB 構成ファイルは、コマンドライン パラメーターよりも多くのオプションをサポートしています。デフォルトの構成ファイル[`config.toml.example`](https://github.com/pingcap/tidb/blob/master/config/config.toml.example)ダウンロードし、その名前を`config.toml`に変更できます。このドキュメントでは、 [コマンドラインオプション](/command-line-flags-for-tidb-configuration.md)に関係しないオプションのみを説明します。
+TiDB 構成ファイルは、コマンドライン パラメーターよりも多くのオプションをサポートしています。デフォルトの構成ファイル[`config.toml.example`](https://github.com/pingcap/tidb/blob/release-7.1/config/config.toml.example)ダウンロードし、その名前を`config.toml`に変更できます。このドキュメントでは、 [コマンドラインオプション](/command-line-flags-for-tidb-configuration.md)に関係しないオプションのみを説明します。
 
 > **ヒント：**
 >
@@ -198,7 +198,7 @@ TiDB 構成ファイルは、コマンドライン パラメーターよりも�
 
 ### <code>enable-global-kill</code> <span class="version-mark">v6.1.0 の新機能</span> {#code-enable-global-kill-code-span-class-version-mark-new-in-v6-1-0-span}
 
--   Global Kill (インスタンス間でのクエリまたは接続の終了) 機能を有効にするかどうかを制御します。
+-   Global Kill (インスタンス間のクエリまたは接続の終了) 機能を有効にするかどうかを制御します。
 -   デフォルト値: `true`
 -   値が`true`の場合、 `KILL`と`KILL TIDB`ステートメントの両方でインスタンス間のクエリまたは接続を終了できるため、クエリまたは接続が誤って終了することを心配する必要はありません。クライアントを使用して任意の TiDB インスタンスに接続し、 `KILL`または`KILL TIDB`ステートメントを実行すると、ステートメントはターゲット TiDB インスタンスに転送されます。クライアントと TiDB クラスターの間にプロキシがある場合、ステートメント`KILL`と`KILL TIDB`も実行のためにターゲット TiDB インスタンスに転送されます。現在、 `enable-global-kill`が`true`の場合、MySQL コマンド ライン<kbd>ctrl</kbd> + <kbd>c</kbd>を使用して TiDB でクエリまたは接続を終了することはサポートされていません。 `KILL`ステートメントの詳細については、 [殺す](/sql-statements/sql-statement-kill.md)を参照してください。
 
@@ -214,7 +214,7 @@ TiDB 構成ファイルは、コマンドライン パラメーターよりも�
 -   ネットワーク分離の可能性がある場合に、TiDB の PD クライアントと TiKV クライアントがフォロワー経由でリーダーにリクエストを転送するかどうかを制御します。
 -   デフォルト値: `false`
 -   環境でネットワークが分離されている可能性がある場合、このパラメータを有効にすると、サービスが利用できなくなる期間を短縮できます。
--   分離、ネットワークの中断、ダウンタイムが発生したかどうかを正確に判断できない場合、このメカニズムを使用すると判断を誤るリスクがあり、可用性とパフォーマンスの低下を引き起こします。ネットワーク障害が発生したことがない場合は、このパラメータを有効にすることはお勧めできません。
+-   分離、ネットワークの中断、またはダウンタイムが発生したかどうかを正確に判断できない場合、このメカニズムを使用すると判断を誤るリスクがあり、可用性とパフォーマンスの低下が発生します。ネットワーク障害が発生したことがない場合は、このパラメータを有効にすることはお勧めできません。
 
 ### <code>enable-table-lock</code> <span class="version-mark">v4.0.0 の新機能</span> {#code-enable-table-lock-code-span-class-version-mark-new-in-v4-0-0-span}
 

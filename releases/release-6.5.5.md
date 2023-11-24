@@ -24,7 +24,7 @@ TiDB バージョン: 6.5.5
     -   スナップショット[#15401](https://github.com/tikv/tikv/issues/15401) @ [SpadeA-Tang](https://github.com/SpadeA-Tang)の監視メトリクスを追加
     -   リーダー転送中の PITR チェックポイント ラグの安定性を向上[#13638](https://github.com/tikv/tikv/issues/13638) @ [ユジュンセン](https://github.com/YuJuncen)
     -   `safe-ts` [#15082](https://github.com/tikv/tikv/issues/15082) @ [エキシウム](https://github.com/ekexium)に関連するログと監視メトリクスを追加します
-    -   `resolved-ts` [#15082](https://github.com/tikv/tikv/issues/15082) @ [エキシウム](https://github.com/ekexium)のより多くのログと監視メトリクスを提供します
+    -   `resolved-ts` [#15082](https://github.com/tikv/tikv/issues/15082) @ [エキシウム](https://github.com/ekexium)のログと監視メトリクスをさらに提供します
     -   圧縮メカニズムを最適化します。リージョンが分割されるときに、分割するキーがない場合、過剰な MVCC バージョン[#15282](https://github.com/tikv/tikv/issues/15282) @ [SpadeA-Tang](https://github.com/SpadeA-Tang)を排除するために圧縮がトリガーされます。
 
 -   ツール
@@ -42,10 +42,8 @@ TiDB バージョン: 6.5.5
 
 -   TiKV
 
-    -   TiKV ノードに障害が発生したときに、対応するリージョンのピアが誤って休止状態になる問題を修正します[#14547](https://github.com/tikv/tikv/issues/14547) @ [ひっくり返る](https://github.com/hicqu)
     -   Titan が有効になっているときに TiKV が起動できず、 `Blob file deleted twice`エラーが発生する問題を修正します[#15454](https://github.com/tikv/tikv/issues/15454) @ [コナー1996](https://github.com/Connor1996)
     -   Online Unsafe Recovery がマージ中止[#15580](https://github.com/tikv/tikv/issues/15580) @ [v01dstar](https://github.com/v01dstar)を処理できない問題を修正
-    -   PD と TiKV の間のネットワークの中断により PITR がスタックする可能性がある問題を修正します[#15279](https://github.com/tikv/tikv/issues/15279) @ [ユジュンセン](https://github.com/YuJuncen)
 
 -   PD
 
@@ -60,7 +58,7 @@ TiDB バージョン: 6.5.5
         -   PITR によって暗黙的な主キーを復元すると競合が発生する可能性がある問題を修正[#46520](https://github.com/pingcap/tidb/issues/46520) @ [3ポインター](https://github.com/3pointer)
         -   PITRがmeta-kv [#46578](https://github.com/pingcap/tidb/issues/46578) @ [レヴルス](https://github.com/Leavrth)を回復するときにエラーが発生する問題を修正
         -   BR統合テスト ケース[#45561](https://github.com/pingcap/tidb/issues/46561) @ [ピュアリンド](https://github.com/purelind)のエラーを修正
-        -   リージョンリーダーの移行が発生したときに PITR ログ バックアップの進行状況のレイテンシーが増加する問題を緩和します[#13638](https://github.com/tikv/tikv/issues/13638) @ [ユジュンセン](https://github.com/YuJuncen)
+        -   PITR が GCS [#47022](https://github.com/pingcap/tidb/issues/47022) @ [レヴルス](https://github.com/Leavrth)からのデータの復元に失敗する問題を修正
 
     -   TiCDC
 

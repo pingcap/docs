@@ -9,9 +9,9 @@ TiDB は完全な分散トランザクションをサポートします。 v3.0 
 
 ## ロックビューを使用してロックの問題をトラブルシューティングする {#use-lock-view-to-troubleshoot-lock-issues}
 
-v5.1 以降、TiDB はロックビュー機能をサポートしています。この機能には、ロックの競合とロックの待機に関する詳細情報を提供する複数のシステム テーブルが`information_schema`れています。
+v5.1 以降、TiDB はロックビュー機能をサポートしています。この機能には、ロックの競合とロックの待機に関する詳細情報を提供するいくつかのシステム テーブルが`information_schema`れています。
 
-> **ノート：**
+> **注記：**
 >
 > 現在、ロックビュー機能は、悲観的ロックの競合および待機情報のみを提供します。
 
@@ -21,7 +21,7 @@ v5.1 以降、TiDB はロックビュー機能をサポートしています。�
 -   [`DATA_LOCK_WAITS`](/information-schema/information-schema-data-lock-waits.md) : ブロッキングおよびブロックされたトランザクションの`start_ts` 、ブロックされた SQL ステートメントのダイジェスト、および待機が発生したキーを含む、TiKV の悲観的ロック待機情報を提供します。
 -   [`DEADLOCKS`と`CLUSTER_DEADLOCKS`](/information-schema/information-schema-deadlocks.md) : 現在の TiDB ノードまたはクラスター全体で最近発生したいくつかのデッドロック イベントの情報を提供します。これには、デッドロック ループ内のトランザクション間の待機関係、トランザクション内で現在実行中のステートメントのダイジェスト、およびキーが含まれます。待機が発生します。
 
-> **ノート：**
+> **注記：**
 >
 > ロック ビュー関連のシステム テーブルに表示される SQL ステートメントは、SQL ダイジェストに従って内部クエリによって取得される正規化された SQL ステートメント (つまり、形式と引数のない SQL ステートメント) であるため、テーブルは、形式と引数。 SQL ダイジェストと正規化された SQL ステートメントの詳細については、 [ステートメント概要テーブル](/statement-summary-tables.md)を参照してください。
 
@@ -32,8 +32,6 @@ v5.1 以降、TiDB はロックビュー機能をサポートしています。�
 最近のデッドロック エラーの情報を取得するには、 `DEADLOCKS`または`CLUSTER_DEADLOCKS`テーブルをクエリします。
 
 たとえば、 `DEADLOCKS`テーブルをクエリするには、次の SQL ステートメントを実行できます。
-
-{{< copyable "" >}}
 
 ```sql
 select * from information_schema.deadlocks;
@@ -58,8 +56,6 @@ select * from information_schema.deadlocks;
 
 `DATA_LOCK_WAITS`システム テーブルは、TiKV ノード上のロック待機ステータスを提供します。このテーブルにクエリを実行すると、TiDB はすべての TiKV ノードからリアルタイムのロック待機情報を自動的に取得します。いくつかのホット キーが頻繁にロックされ、多くのトランザクションがブロックされている場合は、 `DATA_LOCK_WAITS`テーブルをクエリしてキーごとに結果を集計し、問題が頻繁に発生するキーを見つけることができます。
 
-{{< copyable "" >}}
-
 ```sql
 select `key`, count(*) as `count` from information_schema.data_lock_waits group by `key` order by `count` desc;
 ```
@@ -82,8 +78,6 @@ select `key`, count(*) as `count` from information_schema.data_lock_waits group 
 表`TIDB_TRX`と`CLUSTER_TIDB_TRX`に表示される情報は、クエリの実行時に実行されているトランザクションの情報でもあることに注意してください。これらのテーブルには、完了したトランザクションの情報は表示されません。同時トランザクションが多数ある場合、クエリの結果セットも大きくなる可能性があります。 `limit`句または`where`句を使用して、ロック待機時間が長いトランザクションをフィルタリングできます。 Lock ビューで複数のテーブルを結合すると、異なるテーブルのデータが同時に取得されないため、異なるテーブルの情報に一貫性がなくなる可能性があることに注意してください。
 
 たとえば、 `where`句を使用してロック待機時間が長いトランザクションをフィルタリングするには、次の SQL ステートメントを実行できます。
-
-{{< copyable "" >}}
 
 ```sql
 select trx.* from information_schema.data_lock_waits as l left join information_schema.tidb_trx as trx on l.trx_id = trx.id where l.key = "7480000000000000415F728000000000000001"\G
@@ -124,8 +118,6 @@ CURRENT_SQL_DIGEST_TEXT: update `t` set `v` = `v` + ? where `id` = ? ;
 ### トランザクションが長期間ブロックされている {#a-transaction-is-blocked-for-a-long-time}
 
 トランザクションが別のトランザクション (または複数のトランザクション) によってブロックされていることがわかっており、現在のトランザクションの`start_ts` (トランザクション ID) がわかっている場合は、次のメソッドを使用してブロックしているトランザクションの情報を取得できます。 Lock ビューで複数のテーブルを結合すると、異なるテーブルのデータが同時に取得されないため、異なるテーブルの情報に一貫性がなくなる可能性があることに注意してください。
-
-{{< copyable "" >}}
 
 ```sql
 select l.key, trx.*, tidb_decode_sql_digests(trx.all_sql_digests) as sqls from information_schema.data_lock_waits as l join information_schema.cluster_tidb_trx as trx on l.current_holding_trx_id = trx.id where l.trx_id = 426831965449355272\G
@@ -281,7 +273,7 @@ TiDB ダッシュボードの`KV Errors`パネルには、トランザクショ�
 
 このセクションでは、悲観的トランザクション モードにおける一般的なロック競合の問題の解決策を提供します。
 
-> **ノート：**
+> **注記：**
 >
 > 悲観的トランザクション モードが設定されている場合でも、自動コミット トランザクションは最初に楽観的モードを使用してコミットを試行します。競合が発生した場合、トランザクションは自動再試行中に悲観的トランザクション モードに切り替わります。
 
@@ -322,7 +314,7 @@ ERROR 1205 (HY000): Lock wait timeout exceeded; try restarting transaction
 
 ### TTL マネージャーがタイムアウトしました {#ttl-manager-has-timed-out}
 
-トランザクションの実行時間は GC 時間制限を超えることはできません。さらに、悲観的トランザクションの TTL 時間には上限があり、デフォルト値は 1 時間です。したがって、1 時間を超えて実行された悲観的トランザクションはコミットに失敗します。このタイムアウトしきい値は、TiDB パラメータ[パフォーマンス.max-txn-ttl](https://github.com/pingcap/tidb/blob/master/config/config.toml.example)によって制御されます。
+トランザクションの実行時間は GC 時間制限を超えることはできません。さらに、悲観的トランザクションの TTL 時間には上限があり、デフォルト値は 1 時間です。したがって、1 時間を超えて実行された悲観的トランザクションはコミットに失敗します。このタイムアウトしきい値は、TiDB パラメータ[`performance.max-txn-ttl`](https://github.com/pingcap/tidb/blob/release-7.1/config/config.toml.example)によって制御されます。
 
 悲観的トランザクションの実行時間が TTL 時間を超えると、TiDB ログに次のエラー メッセージが表示されます。
 
@@ -347,5 +339,5 @@ TTL manager has timed out, pessimistic locks may expire, please commit or rollba
 
 解決策:
 
--   v5.1 以降のバージョンでデッドロックの原因を確認することが難しい場合は、システム テーブル`INFORMATION_SCHEMA.DEADLOCKS`または`INFORMATION_SCHEMA.CLUSTER_DEADLOCKS`にクエリを実行して、デッドロック待機チェーンの情報を取得することをお勧めします。詳細については、 [デッドロックエラー](#deadlock-errors)節および[`DEADLOCKS`テーブル](/information-schema/information-schema-deadlocks.md)ドキュメントを参照してください。
+-   v5.1 以降のバージョンでデッドロックの原因を確認することが難しい場合は、システム テーブル`INFORMATION_SCHEMA.DEADLOCKS`または`INFORMATION_SCHEMA.CLUSTER_DEADLOCKS`にクエリを実行して、デッドロック待機チェーンの情報を取得することをお勧めします。詳細については、 [デッドロックエラー](#deadlock-errors)章および[`DEADLOCKS`テーブル](/information-schema/information-schema-deadlocks.md)ドキュメントを参照してください。
 -   デッドロックが頻繁に発生する場合は、アプリケーションのトランザクション クエリ ロジックを調整して、デッドロックの発生を減らす必要があります。

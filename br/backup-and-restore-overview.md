@@ -99,7 +99,7 @@ TiDB BR は次の機能を提供します。
 
 TiDB は、Amazon S3、Google Cloud Storage (GCS)、Azure Blob Storage、NFS、およびその他の S3 互換ファイルstorageサービスへのデータのバックアップをサポートしています。詳細については、次のドキュメントを参照してください。
 
--   [URIでバックアップstorageを指定する](/br/backup-and-restore-storages.md#uri-format)
+-   [URIでバックアップstorageを指定する](/external-storage-uri.md)
 -   [バックアップストレージへのアクセス権限を構成する](/br/backup-and-restore-storages.md#authentication)
 
 ## 互換性 {#compatibility}

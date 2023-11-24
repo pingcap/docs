@@ -7,6 +7,10 @@ summary: An overview of the usage of SHUTDOWN for the TiDB database.
 
 `SHUTDOWN`ステートメントは、TiDB でシャットダウン操作を実行するために使用されます。 `SHUTDOWN`ステートメントを実行するには、ユーザーが`SHUTDOWN privilege`を持っている必要があります。
 
+> **注記：**
+>
+> この機能は TiDB セルフホスト型にのみ適用され、 [TiDB Cloud](https://docs.pingcap.com/tidbcloud/)では利用できません。
+
 ## あらすじ {#synopsis}
 
 **声明：**

@@ -74,7 +74,7 @@ TiDB Cloudクラスターでエラーが発生した場合は、ドキュメン�
 
 ### 移行タスクが中断され、「ドライバー: 接続が正しくありません」または「接続が無効です」というエラーが発生します。 {#the-migration-task-is-interrupted-and-contains-the-error-driver-bad-connection-or-invalid-connection}
 
-このエラーは、ダウンストリーム TiDB クラスターへの接続が失敗したことを意味します。ダウンストリーム TiDB クラスターが正常な状態 ( `Available`と`Modifying`を含む) かどうか、ジョブで指定されたユーザー名とパスワードで接続できるかどうかを確認します。ダウンストリーム TiDB クラスターが使用可能であることを確認したら、 **[再起動]**をクリックしてタスクの再開を試みることができます。
+このエラーは、ダウンストリーム TiDB クラスターへの接続が失敗したことを意味します。ダウンストリーム TiDB クラスターが正常な状態 ( `Available`と`Modifying`を含む) であり、ジョブで指定されたユーザー名とパスワードで接続できるかどうかを確認します。ダウンストリーム TiDB クラスターが使用可能であることを確認したら、 **[再起動]**をクリックしてタスクの再開を試みることができます。
 
 ### エラー メッセージ: 「指定されたユーザーとパスワードを使用して TiDB クラスターに接続できませんでした。TiDBクラスタが起動しており、指定されたユーザーとパスワードを使用して接続できることを確認してください。」 {#error-message-failed-to-connect-to-the-tidb-cluster-using-the-given-user-and-password-please-make-sure-tidb-cluster-is-up-and-can-be-connected-to-using-the-given-user-and-password}
 
@@ -87,6 +87,12 @@ TiDB クラスターのstorageが不足しています。 [TiKV ノードのstor
 ### エラー メッセージ:「ソース データベースに接続できませんでした。データベースが利用可能か、または最大接続数に達しているかを確認してください。」 {#error-message-failed-to-connect-to-the-source-database-please-check-whether-the-database-is-available-or-the-maximum-connections-have-been-reached}
 
 ソースデータベースへの接続に失敗しました。ソースデータベースが起動しているか、データベース接続数が上限に達していないか、ジョブで指定したパラメータを使用して接続できるかを確認することをお勧めします。ソース データベースが使用可能であることを確認したら、 **[再起動]**をクリックしてジョブを再開できます。
+
+### エラー メッセージ: 「エラー 1273: 新しい照合順序が有効な場合、サポートされていない照合順序: &#39;utf8mb4_0900_ai_ci&#39;」 {#error-message-error-1273-unsupported-collation-when-new-collation-is-enabled-utf8mb4-0900-ai-ci}
+
+ダウンストリーム TiDB クラスターでスキーマを作成できませんでした。このエラーは、アップストリーム MySQL で使用される照合順序がTiDB クラスターでサポートされていないことを意味します。
+
+この問題を解決するには、 [サポートされている照合照合順序](/character-set-and-collation.md#character-sets-and-collations-supported-by-tidb)に基づいて TiDB クラスターにスキーマを作成し、 **[再起動]**をクリックしてタスクを再開します。
 
 ## アラート {#alerts}
 

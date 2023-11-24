@@ -7,11 +7,11 @@ summary: Learn the `TIFLASH_SEGMENTS` information_schema table.
 
 > **警告：**
 >
-> このテーブルは本番環境では使用しないでください。テーブルのフィールドは不安定であり、TiDB の新しいリリースでは予告なく変更される可能性があります。
+> このテーブルのフィールドは不安定であり、TiDB の新しいリリースでは予告なく変更される可能性があるため、このテーブルを本番環境では使用しないでください。
 
-> **ノート：**
+> **注記：**
 >
-> このステートメントは、TiDB サーバーレス クラスターには適用されません。
+> このテーブルは[TiDB サーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless)クラスターでは使用できません。
 
 `TIFLASH_SEGMENTS`表は、 TiFlashのデータ テーブルに関する統計情報を提供します。
 
@@ -80,7 +80,7 @@ DESC tiflash_segments;
 -   `DELTA_MEMTABLE_COLUMN_FILES` : デルタレイヤーにキャッシュされたカラムファイルの数。
 -   `DELTA_MEMTABLE_DELETE_RANGES` : デルタレイヤーにキャッシュされた削除範囲の数。
 -   `DELTA_PERSISTED_PAGE_ID` : デルタレイヤーのディスクに保存されているデータの ID。
--   `DELTA_PERSISTED_ROWS` : デルタレイヤー内の永続化データの合計行数。
+-   `DELTA_PERSISTED_ROWS` : デルタレイヤー内の永続化データの総行数。
 -   `DELTA_PERSISTED_SIZE` : デルタレイヤー内の永続化データの合計サイズ (バイト単位)。
 -   `DELTA_PERSISTED_COLUMN_FILES` : デルタレイヤーに保持されるカラムファイルの数。
 -   `DELTA_PERSISTED_DELETE_RANGES` : デルタレイヤー内に保持される削除範囲の数。

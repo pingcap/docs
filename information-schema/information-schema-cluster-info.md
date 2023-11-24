@@ -7,7 +7,9 @@ summary: Learn the `CLUSTER_INFO` cluster topology information table.
 
 `CLUSTER_INFO`クラスター トポロジー テーブルは、クラスターの現在のトポロジー情報、各インスタンスのバージョン情報、インスタンスのバージョンに対応する Git ハッシュ、各インスタンスの開始時刻、および各インスタンスの実行時間を提供します。
 
-{{< copyable "" >}}
+> **注記：**
+>
+> このテーブルは[TiDB サーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless)クラスターでは使用できません。
 
 ```sql
 USE information_schema;
@@ -35,13 +37,11 @@ desc cluster_info;
 -   `TYPE` : インスタンスのタイプ。オプションの値は`tidb` 、 `pd` 、および`tikv`です。
 -   `INSTANCE` : インスタンス アドレス。 `IP:PORT`の形式の文字列です。
 -   `STATUS_ADDRESS` : HTTP APIのサービスアドレス。 tikv-ctl、pd-ctl、または tidb-ctl の一部のコマンドは、この API とこのアドレスを使用する場合があります。このアドレスからさらに多くのクラスター情報を取得することもできます。詳細は[TiDB HTTP API ドキュメント](https://github.com/pingcap/tidb/blob/master/docs/tidb_http_api.md)を参照してください。
--   `VERSION` : 対応するインスタンスのセマンティック バージョン番号。 MySQL のバージョン番号と互換性を持たせるために、TiDB のバージョンは`${mysql-version}-${tidb-version}`の形式で表示されます。
+-   `VERSION` : 対応するインスタンスのセマンティック バージョン番号。 MySQL バージョン番号との互換性を保つために、TiDB バージョンは`${mysql-version}-${tidb-version}`の形式で表示されます。
 -   `GIT_HASH` : インスタンスのバージョンをコンパイルするときの Git コミット ハッシュ。2 つのインスタンスが完全に一貫したバージョンであるかどうかを識別するために使用されます。
 -   `START_TIME` : 対応するインスタンスの開始時刻。
 -   `UPTIME` : 対応するインスタンスの稼働時間。
 -   `SERVER_ID` : 対応するインスタンスのサーバーID。
-
-{{< copyable "" >}}
 
 ```sql
 SELECT * FROM cluster_info;

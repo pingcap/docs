@@ -56,9 +56,9 @@ Info: {"sink-uri":"kafka://127.0.0.1:9092/topic-name?protocol=canal-json&kafka-v
 | `kafka-client-id`                    | レプリケーション タスクの Kafka クライアント ID を指定します (オプション。デフォルトでは`TiCDC_sarama_producer_replication ID` )。                                                                                                                                                                                                                                                                                                                 |
 | `partition-num`                      | ダウンストリーム Kafka パーティションの数 (オプション。値は実際のパーティション数**以下で**ある必要があります。そうでない場合、レプリケーション タスクは正常に作成できません。デフォルトでは`3` )。                                                                                                                                                                                                                                                                                                  |
 | `max-message-bytes`                  | 毎回 Kafka ブローカーに送信されるデータの最大サイズ (オプション、デフォルトでは`10MB` )。 v5.0.6 および v4.0.6 から、デフォルト値は`64MB`および`256MB`から`10MB`に変更されました。                                                                                                                                                                                                                                                                                          |
-| `replication-factor`                 | 保存できる Kafka メッセージ レプリカの数 (オプション、デフォルトでは`1` )。                                                                                                                                                                                                                                                                                                                                                                |
+| `replication-factor`                 | 保存できる Kafka メッセージ レプリカの数 (オプション、デフォルトでは`1` )。この値は、Kafka の値[`min.insync.replicas`](https://kafka.apache.org/33/documentation.html#brokerconfigs_min.insync.replicas)以上である必要があります。                                                                                                                                                                                                                             |
 | `required-acks`                      | `Produce`リクエストで使用されるパラメータ。応答する前に受信する必要があるレプリカ確認応答の数をブローカーに通知します。値のオプションは`0` ( `NoResponse` : 応答なし、 `TCP ACK`のみが提供される)、 `1` ( `WaitForLocal` : ローカル コミットが正常に送信された後にのみ応答する)、および`-1` ( `WaitForAll` : すべての複製されたレプリカが正常にコミットされた後に応答する) です。最小数は構成できます。ブローカーの[`min.insync.replicas`](https://kafka.apache.org/33/documentation.html#brokerconfigs_min.insync.replicas)構成項目を使用して複製されたレプリカの数）。 (オプション、デフォルト値は`-1` )。 |
-| `compression`                        | メッセージの送信時に使用される圧縮アルゴリズム (値のオプションは`none` 、 `lz4` 、 `gzip` 、 `snappy` 、および`zstd`です。デフォルトでは`none`です)。                                                                                                                                                                                                                                                                                                           |
+| `compression`                        | メッセージの送信時に使用される圧縮アルゴリズム (値のオプションは`none` 、 `lz4` 、 `gzip` 、 `snappy` 、および`zstd`です。デフォルトでは`none`です)。 Snappy 圧縮ファイルは[公式の Snappy フォーマット](https://github.com/google/snappy)にある必要があることに注意してください。 Snappy 圧縮の他のバリアントはサポートされていません。                                                                                                                                                                                    |
 | `protocol`                           | Kafka へのメッセージの出力に使用されるプロトコル。値のオプションは`canal-json` 、 `open-protocol` 、 `canal` 、 `avro`および`maxwell`です。                                                                                                                                                                                                                                                                                                         |
 | `auto-create-topic`                  | 渡された`topic-name` Kafka クラスターに存在しない場合に、TiCDC がトピックを自動的に作成するかどうかを決定します (オプション、デフォルトでは`true` )。                                                                                                                                                                                                                                                                                                                 |
 | `enable-tidb-extension`              | オプション。デフォルトでは`false` 。出力プロトコルが`canal-json`の場合、値が`true`の場合、TiCDC は[ウォーターマークイベント](/ticdc/ticdc-canal-json.md#watermark-event)送信し、 [TiDB 拡張フィールド](/ticdc/ticdc-canal-json.md#tidb-extension-field)を Kafka メッセージに追加します。 v6.1.0 以降、このパラメータは`avro`プロトコルにも適用されます。値が`true`の場合、TiCDC は Kafka メッセージに[3 つの TiDB 拡張フィールド](/ticdc/ticdc-avro-protocol.md#tidb-extension-fields)を追加します。                                    |
@@ -91,7 +91,7 @@ Info: {"sink-uri":"kafka://127.0.0.1:9092/topic-name?protocol=canal-json&kafka-v
 -   まだ存在しないトピックを含むチェンジフィードを作成する場合、TiCDC は`partition-num`および`replication-factor`パラメーターを使用してトピックを作成しようとします。これらのパラメータを明示的に指定することをお勧めします。
 -   ほとんどの場合、 `canal-json`プロトコルを使用することをお勧めします。
 
-> **ノート：**
+> **注記：**
 >
 > `protocol`が`open-protocol`の場合、TiCDC は長さが`max-message-bytes`を超えるメッセージの生成を回避しようとします。ただし、行が大きすぎて 1 つの変更だけで長さが`max-message-bytes`を超える場合、サイレント障害を避けるために、TiCDC はこのメッセージの出力を試行し、ログに警告を出力。
 
@@ -227,23 +227,19 @@ Topic 式の形式は`[prefix]{schema}[middle][{table}][suffix]`です。
 -   インデックス値: 主キーの値またはテーブルの一意のインデックスを使用して、イベントをハッシュし、ディスパッチします。
 -   table: テーブルのスキーマ名とテーブル名を使用して、イベントをハッシュしてディスパッチします。
 
-> **ノート：**
+> **注記：**
 >
 > v6.1.0 以降、構成の意味を明確にするために、パーティション ディスパッチャーの指定に使用される構成は`dispatcher`から`partition`に変更され、 `partition`は`dispatcher`のエイリアスです。たとえば、次の 2 つのルールはまったく同じです。
 >
-> ```
-> [sink]
-> dispatchers = [
->    {matcher = ['*.*'], dispatcher = "ts"},
->    {matcher = ['*.*'], partition = "ts"},
-> ]
-> ```
+>     [sink]
+>     dispatchers = [
+>        {matcher = ['*.*'], dispatcher = "ts"},
+>        {matcher = ['*.*'], partition = "ts"},
+>     ]
 >
 > ただし、 `dispatcher`と`partition`同じルールに含めることはできません。たとえば、次のルールは無効です。
 >
-> ```
-> {matcher = ['*.*'], dispatcher = "ts", partition = "table"},
-> ```
+>     {matcher = ['*.*'], dispatcher = "ts", partition = "table"},
 
 > **警告：**
 >
@@ -285,3 +281,68 @@ write-key-threshold = 30000
 ```sql
 SELECT COUNT(*) FROM INFORMATION_SCHEMA.TIKV_REGION_STATUS WHERE DB_NAME="database1" AND TABLE_NAME="table1" AND IS_INDEX=0;
 ```
+
+## Kafka トピックの制限を超えるメッセージを処理する {#handle-messages-that-exceed-the-kafka-topic-limit}
+
+Kafka トピックは、受信できるメッセージのサイズに制限を設定します。この制限は[`max.message.bytes`](https://kafka.apache.org/documentation/#topicconfigs_max.message.bytes)パラメータによって制御されます。 TiCDC Kafka シンクがこの制限を超えるデータを送信すると、変更フィードはエラーを報告し、データの複製を続行できません。この問題を解決するために、TiCDC は次のソリューションを提供します。
+
+### ハンドル キーのみを送信する {#send-handle-keys-only}
+
+v7.1.2 以降、TiCDC Kafka シンクは、メッセージ サイズが制限を超えた場合のハンドル キーの送信のみをサポートします。これにより、メッセージ サイズが大幅に削減され、Kafka トピックの制限を超えるメッセージ サイズによって引き起こされるチェンジフィード エラーやタスクの失敗を回避できます。ハンドル キーとは次のことを指します。
+
+-   レプリケートされるテーブルに主キーがある場合、主キーはハンドル キーになります。
+-   テーブルに主キーがなくても NOT NULL 固有キーがある場合、NOT NULL 固有キーがハンドル キーになります。
+
+現在、この機能は、Canal-JSON と Open Protocol の 2 つのエンコード プロトコルをサポートしています。 Canal-JSON プロトコルを使用する場合は、 `enable-tidb-extension=true` in `sink-uri`を指定する必要があります。
+
+サンプル構成は次のとおりです。
+
+```toml
+[sink.kafka-config.large-message-handle]
+# This configuration is introduced in v7.1.2.
+# Empty by default, which means when the message size exceeds the limit, the changefeed fails.
+# If this configuration is set to "handle-key-only", when the message size exceeds the limit, only the handle key is sent in the data field. If the message size still exceeds the limit, the changefeed fails.
+large-message-handle-option = "handle-key-only"
+```
+
+### ハンドル キーのみを使用してメッセージを消費する {#consume-messages-with-handle-keys-only}
+
+ハンドルキーのみのメッセージフォーマットは次のとおりです。
+
+```json
+{
+    "id": 0,
+    "database": "test",
+    "table": "tp_int",
+    "pkNames": [
+        "id"
+    ],
+    "isDdl": false,
+    "type": "INSERT",
+    "es": 1639633141221,
+    "ts": 1639633142960,
+    "sql": "",
+    "sqlType": {
+        "id": 4
+    },
+    "mysqlType": {
+        "id": "int"
+    },
+    "data": [
+        {
+          "id": "2"
+        }
+    ],
+    "old": null,
+    "_tidb": {     // TiDB extension fields
+        "commitTs": 163963314122145239,
+        "onlyHandleKey": true
+    }
+}
+```
+
+Kafka コンシューマはメッセージを受信すると、まず`onlyHandleKey`フィールドをチェックします。このフィールドが存在し、 `true`である場合、メッセージには完全なデータのハンドル キーのみが含まれていることを意味します。この場合、完全なデータを取得するには、上流の TiDB にクエリを実行し、 [`tidb_snapshot`履歴データを読み取る](/read-historical-data.md)を使用する必要があります。
+
+> **警告：**
+>
+> Kafka コンシューマがデータを処理して TiDB にクエリを実行するときに、データが GC によって削除されている可能性があります。この状況を回避するには、 [TiDB クラスターの GC ライフタイムを変更する](/system-variables.md#tidb_gc_life_time-new-in-v50)からより大きな値にする必要があります。

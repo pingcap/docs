@@ -14,7 +14,7 @@ TiDB Lightning を使用すると、次のシナリオでデータを並行し�
 -   シャード化されたスキーマとシャード化されたテーブルをインポートします。このシナリオでは、複数の上流データベース インスタンスからの複数のテーブルが、異なるTiDB Lightningインスタンスによって並行してダウンストリーム TiDB データベースにインポートされます。
 -   単一のテーブルを並行してインポートします。このシナリオでは、特定のディレクトリまたはクラウドstorage(Amazon S3 など) に保存されている単一のテーブルが、異なるTiDB Lightningインスタンスによって並行してダウンストリーム TiDB クラスターにインポートされます。これは、TiDB 5.3.0 で導入された新機能です。
 
-> **ノート：**
+> **注記：**
 >
 > -   並列インポートでは、TiDB 内の初期化された空のテーブルのみがサポートされ、既存のサービスによって書き込まれたデータを含むテーブルへのデータの移行はサポートされません。そうしないと、データの不整合が発生する可能性があります。
 >
@@ -84,34 +84,30 @@ Dumpling を使用してデータをエクスポートする方法の詳細に�
 
 構成ファイル`tidb-lightning.toml`を作成し、次の内容を追加します。
 
-```
-[lightning]
-status-addr = ":8289"
+    [lightning]
+    status-addr = ":8289"
 
-[mydumper]
-# Specify the path for Dumpling to export data. If Dumpling performs several times and the data belongs to different directories, you can place all the exported data in the same parent directory and specify this parent directory here.
-data-source-dir = "/path/to/source-dir"
+    [mydumper]
+    # Specify the path for Dumpling to export data. If Dumpling performs several times and the data belongs to different directories, you can place all the exported data in the same parent directory and specify this parent directory here.
+    data-source-dir = "/path/to/source-dir"
 
-[tikv-importer]
-# Whether to allow importing data into tables that already have data. The default value is `false`.
-# When using parallel import, because multiple TiDB Lightning instances import a table at the same time, this configuration item must be set to `true`.
-incremental-import = true
-# "local": The default mode. It applies to large dataset import, for example, greater than 1 TiB. However, during the import, downstream TiDB is not available to provide services.
-# "tidb": You can use this mode for small dataset import, for example, smaller than 1 TiB. During the import, downstream TiDB is available to provide services.
-backend = "local"
+    [tikv-importer]
+    # Whether to allow importing data into tables that already have data. The default value is `false`.
+    # When using parallel import, because multiple TiDB Lightning instances import a table at the same time, this configuration item must be set to `true`.
+    incremental-import = true
+    # "local": The default mode. It applies to large dataset import, for example, greater than 1 TiB. However, during the import, downstream TiDB is not available to provide services.
+    # "tidb": You can use this mode for small dataset import, for example, smaller than 1 TiB. During the import, downstream TiDB is available to provide services.
+    backend = "local"
 
-# Specify the path for local sorting data.
-sorted-kv-dir = "/path/to/sorted-dir"
-```
+    # Specify the path for local sorting data.
+    sorted-kv-dir = "/path/to/sorted-dir"
 
 データ ソースが Amazon S3 や GCS などの外部storageに保存されている場合は、接続用の追加パラメータを設定する必要があります。このような構成にはパラメータを指定できます。たとえば、次の例では、データが Amazon S3 に保存されていることを前提としています。
 
-```
-./tidb-lightning --tidb-port=4000 --pd-urls=127.0.0.1:2379 --backend=local --sorted-kv-dir=/tmp/sorted-kvs \
-    -d 's3://my-bucket/sql-backup'
-```
+    ./tidb-lightning --tidb-port=4000 --pd-urls=127.0.0.1:2379 --backend=local --sorted-kv-dir=/tmp/sorted-kvs \
+        -d 's3://my-bucket/sql-backup'
 
-パラメーターの詳細については、 [外部storageURI](/br/backup-and-restore-storages.md#uri-format)を参照してください。
+パラメーターの詳細については、 [外部ストレージ サービスの URI 形式](/external-storage-uri.md)を参照してください。
 
 ### ステップ 3: TiDB Lightning を開始してデータをインポートする {#step-3-start-tidb-lightning-to-import-data}
 
@@ -126,7 +122,7 @@ nohup tiup tidb-lightning -config tidb-lightning.toml > nohup.out &
 
 並行インポート中、 TiDB Lightning はタスクの開始後に次のチェックを自動的に実行します。
 
--   ローカル ディスク ( `sort-kv-dir`構成によって制御される) と TiKV クラスターにデータをインポートするための十分なスペースがあるかどうかを確認します。必要なディスク容量については、 [ダウンストリームのstorageスペース要件](/tidb-lightning/tidb-lightning-requirements.md#storage-space-of-the-target-database)および[リソース要件](/tidb-lightning/tidb-lightning-physical-import-mode.md#environment-requirements)を参照してください。 TiDB Lightning はデータ ソースをサンプリングし、サンプル結果からインデックス サイズのパーセンテージを推定します。推定にはインデックスが含まれるため、ソース データのサイズがローカル ディスク上の利用可能な領域よりも小さい場合でも、チェックは失敗する場合があります。
+-   ローカル ディスク ( `sort-kv-dir`構成によって制御される) と TiKV クラスターにデータをインポートするための十分なスペースがあるかどうかを確認します。必要なディスク容量については、 [ダウンストリームのstorageスペース要件](/tidb-lightning/tidb-lightning-requirements.md#storage-space-of-the-target-database)および[リソース要件](/tidb-lightning/tidb-lightning-physical-import-mode.md#environment-requirements)を参照してください。 TiDB Lightning はデータ ソースをサンプリングし、サンプル結果からインデックス サイズのパーセンテージを推定します。推定にはインデックスが含まれるため、ソース データのサイズがローカル ディスク上の利用可能な領域より小さい場合でも、チェックは失敗する場合があります。
 -   TiKV クラスター内のリージョンが均等に分散されているかどうか、および空のリージョンが多すぎるかどうかを確認します。空領域の数が max(1000, テーブル数 * 3) を超える場合、つまり「1000」または「テーブル数の 3 倍」の大きい方を超える場合、インポートは実行できません。
 -   データがデータソースから順番にインポートされているかどうかを確認します。 `mydumper.batch-size`のサイズはチェックの結果に基づいて自動的に調整されます。したがって、 `mydumper.batch-size`構成は使用できなくなりました。
 
@@ -143,40 +139,38 @@ nohup tiup tidb-lightning -config tidb-lightning.toml > nohup.out &
 
 ## 例 2: 単一テーブルを並行してインポートする {#example-2-import-single-tables-in-parallel}
 
-TiDB Lightning は、単一テーブルの並行インポートもサポートしています。たとえば、異なるTiDB Lightningインスタンスによって Amazon S3 に保存されている複数の単一テーブルをダウンストリーム TiDB クラスターに並行してインポートします。この方法により、全体的なインポート速度が向上します。 Amazon S3 などのリモート ストレージを使用する場合、 TiDB Lightningの設定パラメータはBRの設定パラメータと同じです。詳細については、 [外部storageURI](/br/backup-and-restore-storages.md#uri-format)を参照してください。
+TiDB Lightning は、単一テーブルの並行インポートもサポートしています。たとえば、異なるTiDB Lightningインスタンスによって Amazon S3 に保存されている複数の単一テーブルをダウンストリーム TiDB クラスターに並行してインポートします。この方法により、全体的なインポート速度が向上します。 Amazon S3 などのリモート ストレージを使用する場合、 TiDB Lightningの設定パラメータはBRの設定パラメータと同じです。詳細については、 [外部ストレージ サービスの URI 形式](/external-storage-uri.md)を参照してください。
 
-> **ノート：**
+> **注記：**
 >
 > ローカル環境では、 Dumplingの`--filesize`または`--where`パラメータを使用して、1 つのテーブルのデータを複数の部分に分割し、複数のサーバーのローカル ディスクに事前にエクスポートできます。この方法でも並行輸入を行うことができます。構成は例1と同じです。
 
 ソースファイルが Amazon S3 に保存されているとすると、テーブルファイルは`my_db.my_table.00001.sql` ～ `my_db.my_table.10000.sql` 、合計 10,000 個の SQL ファイルになります。 2 つのTiDB Lightningインスタンスを使用してインポートを高速化する場合は、構成ファイルに次の設定を追加する必要があります。
 
-```
-[[mydumper.files]]
-# the db schema file
-pattern = '(?i)^(?:[^/]*/)*my_db-schema-create\.sql'
-schema = "my_db"
-type = "schema-schema"
+    [[mydumper.files]]
+    # the db schema file
+    pattern = '(?i)^(?:[^/]*/)*my_db-schema-create\.sql'
+    schema = "my_db"
+    type = "schema-schema"
 
-[[mydumper.files]]
-# the table schema file
-pattern = '(?i)^(?:[^/]*/)*my_db\.my_table-schema\.sql'
-schema = "my_db"
-table = "my_table"
-type = "table-schema"
+    [[mydumper.files]]
+    # the table schema file
+    pattern = '(?i)^(?:[^/]*/)*my_db\.my_table-schema\.sql'
+    schema = "my_db"
+    table = "my_table"
+    type = "table-schema"
 
-[[mydumper.files]]
-# Only import 00001~05000 and ignore other files
-pattern = '(?i)^(?:[^/]*/)*my_db\.my_table\.(0[0-4][0-9][0-9][0-9]|05000)\.sql'
-schema = "my_db"
-table = "my_table"
-type = "sql"
+    [[mydumper.files]]
+    # Only import 00001~05000 and ignore other files
+    pattern = '(?i)^(?:[^/]*/)*my_db\.my_table\.(0[0-4][0-9][0-9][0-9]|05000)\.sql'
+    schema = "my_db"
+    table = "my_table"
+    type = "sql"
 
-[tikv-importer]
-# Whether to allow importing data into tables that already have data. The default value is `false`.
-# When using parallel import, because multiple TiDB Lightning instances import a table at the same time, this configuration item must be set to `true`.
-incremental-import = true
-```
+    [tikv-importer]
+    # Whether to allow importing data into tables that already have data. The default value is `false`.
+    # When using parallel import, because multiple TiDB Lightning instances import a table at the same time, this configuration item must be set to `true`.
+    incremental-import = true
 
 `05001 ~ 10000`データ ファイルのみをインポートするように他のインスタンスの構成を変更できます。
 

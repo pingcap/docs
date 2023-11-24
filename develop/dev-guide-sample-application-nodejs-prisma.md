@@ -348,18 +348,20 @@ await prisma.player.delete({
 
 ### 外部キー制約と Prisma リレーション モードの比較 {#foreign-key-constraints-vs-prisma-relation-mode}
 
-TiDB v6.6.0 以降では、 [参照整合性](https://en.wikipedia.org/wiki/Referential_integrity?useskin=vector)のチェックに[プリズマ関係モード](https://www.prisma.io/docs/concepts/components/prisma-schema/relations/relation-mode)ではなく[外部キー制約](https://docs.pingcap.com/tidb/stable/foreign-key)を使用することをお勧めします。
+[参照整合性](https://en.wikipedia.org/wiki/Referential_integrity?useskin=vector)を確認するには、外部キー制約または Prisma リレーション モードを使用できます。
 
-関係モードは、Prisma クライアント側での参照整合性のエミュレーションです。ただし、参照整合性を維持するために追加のデータベース クエリが必要になるため、パフォーマンスに影響があることに注意してください。
+-   [外部キー](https://docs.pingcap.com/tidb/stable/foreign-key)は、TiDB v6.6.0 以降でサポートされる実験的機能であり、関連データのクロステーブル参照と、データの一貫性を維持するための外部キー制約が可能になります。
 
-> **注記**
->
-> **外部キーは、小規模および中規模のデータ シナリオに適しています。**大量のデータで外部キーを使用すると、パフォーマンスに重大な問題が発生し、システムに予期せぬ影響を与える可能性があります。外部キーを使用する予定がある場合は、最初に徹底的な検証を実行し、慎重に使用してください。
+    > **警告：**
+    >
+    > **外部キーは、小規模および中規模のデータ シナリオに適しています。**大量のデータで外部キーを使用すると、パフォーマンスに重大な問題が発生し、システムに予期せぬ影響を与える可能性があります。外部キーを使用する予定がある場合は、最初に徹底的な検証を実行し、慎重に使用してください。
+
+-   [プリズマ関係モード](https://www.prisma.io/docs/concepts/components/prisma-schema/relations/relation-mode)は、Prisma クライアント側での参照整合性のエミュレーションです。ただし、参照整合性を維持するために追加のデータベース クエリが必要になるため、パフォーマンスに影響があることに注意してください。
 
 ## 次のステップ {#next-steps}
 
 -   ORM フレームワーク Prisma ドライバーの詳しい使用方法を[Prisma のドキュメント](https://www.prisma.io/docs)から学びます。
--   [開発者ガイド](/develop/dev-guide-overview.md)の章 ( [データの挿入](/develop/dev-guide-insert-data.md) [SQLパフォーマンスの最適化](/develop/dev-guide-optimize-sql-overview.md) ) で TiDB [取引](/develop/dev-guide-transaction-overview.md)開発[データを更新する](/develop/dev-guide-update-data.md)ベスト プラクティス[データの削除](/develop/dev-guide-delete-data.md)学習[クエリデータ](/develop/dev-guide-get-data-from-single-table.md)ます。
+-   [開発者ガイド](/develop/dev-guide-overview.md) [トランザクション](/develop/dev-guide-transaction-overview.md)章 ( [データの挿入](/develop/dev-guide-insert-data.md) [SQLパフォーマンスの最適化](/develop/dev-guide-optimize-sql-overview.md) ) で TiDB アプリケーション開発[データを更新する](/develop/dev-guide-update-data.md)ベスト プラクティス[クエリデータ](/develop/dev-guide-get-data-from-single-table.md)学習[データの削除](/develop/dev-guide-delete-data.md)ます。
 -   プロフェッショナルとして[TiDB 開発者コース](https://www.pingcap.com/education/)を学び、試験合格後に[TiDB 認定](https://www.pingcap.com/education/certification/)獲得します。
 
 ## 助けが必要？ {#need-help}

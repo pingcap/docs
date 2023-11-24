@@ -8,6 +8,101 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 このページには 2023 年[TiDB Cloud](https://www.pingcap.com/tidb-cloud/)のリリースノートが記載されています。
 
+## 2023年11月21日 {#november-21-2023}
+
+**一般的な変更点**
+
+-   [データ移行](/tidb-cloud/migrate-from-mysql-using-data-migration.md) Google Cloud にデプロイされた TiDB クラスタの高速物理モードをサポートします。
+
+    AWS および Google Cloud にデプロイされた TiDB クラスターに物理モードを使用できるようになりました。物理モードの移行速度は最大 110 MiB/秒に達し、論理モードの 2.4 倍です。向上したパフォーマンスは、大規模なデータセットをTiDB Cloudに迅速に移行するのに適しています。
+
+    詳細については、 [既存のデータと増分データを移行する](/tidb-cloud/migrate-from-mysql-using-data-migration.md#migrate-existing-data-and-incremental-data)を参照してください。
+
+## 2023 年 11 月 14 日 {#november-14-2023}
+
+**一般的な変更点**
+
+-   TiDB 専用クラスターからデータを復元する場合、デフォルトの動作が、ユーザー アカウントなしの復元から、 `cloud_admin@'%'`アカウントを含むすべてのユーザー アカウントを使用した復元に変更されました。
+
+    詳細については、 [TiDB 専用データのバックアップと復元](/tidb-cloud/backup-and-restore.md)を参照してください。
+
+-   変更フィード用のイベント フィルターを導入します。
+
+    この機能強化により、変更フィードのイベント フィルターを直接[TiDB Cloudコンソール](https://tidbcloud.com/)を通じて簡単に管理できるようになり、変更フィードから特定のイベントを除外するプロセスが合理化され、ダウンストリームのデータ レプリケーションをより適切に制御できるようになります。
+
+    詳細については、 [チェンジフィード](/tidb-cloud/changefeed-overview.md#edit-a-changefeed)を参照してください。
+
+## 2023 年 11 月 7 日 {#november-7-2023}
+
+**一般的な変更点**
+
+-   次のリソース使用量アラートを追加します。新しいアラートはデフォルトでは無効になっています。必要に応じて有効にできます。
+
+    -   TiDB ノード全体の最大メモリ使用率が 10 分間で 70% を超えました
+    -   TiKV ノード全体の最大メモリ使用率が 10 分間で 70% を超えました
+    -   TiDB ノード全体の最大 CPU 使用率が 10 分間で 80% を超えました
+    -   TiKV ノード全体の最大 CPU 使用率が 10 分間で 80% を超えました
+
+    詳細については、 [TiDB Cloud組み込みアラート](/tidb-cloud/monitor-built-in-alerting.md#resource-usage-alerts)を参照してください。
+
+## 2023年10月31日 {#october-31-2023}
+
+**一般的な変更点**
+
+-   新しい[TiDB専用](/tidb-cloud/select-cluster-tier.md#tidb-dedicated)クラスターのデフォルトの TiDB バージョンを[v7.1.1](https://docs.pingcap.com/tidb/v7.1/release-7.1.1)から[v7.1.2](https://docs.pingcap.com/tidb/v7.1/release-7.1.2)にアップグレードします。
+
+-   営業担当者に連絡せずに、 TiDB Cloudコンソールでエンタープライズ サポート プランへの直接アップグレードをサポートします。
+
+    詳細については、 [TiDB Cloudのサポート](/tidb-cloud/tidb-cloud-support.md)を参照してください。
+
+## 2023 年 10 月 25 日 {#october-25-2023}
+
+**一般的な変更点**
+
+-   [TiDB専用](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) Google Cloud でのデュアル リージョン バックアップ（ベータ版）をサポートします。
+
+    Google Cloud でホストされている TiDB 専用クラスターは、Google Cloud Storage とシームレスに連携します。 Google Cloud Storage の[デュアルリージョン](https://cloud.google.com/storage/docs/locations#location-dr)機能と同様に、TiDB Dended のデュアル リージョンに使用するリージョンのペアは、同じマルチリージョン内にある必要があります。たとえば、東京と大阪は同じマルチリージョン`ASIA`にあるため、デュアルリージョンstorageとして一緒に使用できます。
+
+    詳細については、 [TiDB 専用データのバックアップと復元](/tidb-cloud/backup-and-restore.md#turn-on-dual-region-backup-beta)を参照してください。
+
+-   [データ変更ログを Apache Kafka にストリーミングする](/tidb-cloud/changefeed-sink-to-apache-kafka.md)の機能は現在一般提供 (GA) されています。
+
+    10 か月のベータ版トライアルが成功した後、 TiDB Cloudから Apache Kafka へのデータ変更ログのストリーミング機能が一般利用可能になります。 TiDB からメッセージ キューへのデータのストリーミングは、データ統合シナリオでは一般的なニーズです。 Kafka シンクを使用して、他のデータ処理システム (Snowflake など) と統合したり、ビジネス利用をサポートしたりできます。
+
+    詳細については、 [チェンジフィードの概要](/tidb-cloud/changefeed-overview.md)を参照してください。
+
+## 2023 年 10 月 11 日 {#october-11-2023}
+
+**一般的な変更点**
+
+-   AWS にデプロイされた[TiDB専用](/tidb-cloud/select-cluster-tier.md#tidb-dedicated)クラスターに対して[デュアル リージョン バックアップ (ベータ版)](/tidb-cloud/backup-and-restore.md#turn-on-dual-region-backup-beta)サポートします。
+
+    クラウド プロバイダー内の地理的リージョン間でバックアップをレプリケートできるようになりました。この機能は、データ保護および災害復旧機能の追加レイヤーを提供します。
+
+    詳細については、 [TiDB 専用データのバックアップと復元](/tidb-cloud/backup-and-restore.md)を参照してください。
+
+-   データ移行では、既存のデータを移行するために物理モードと論理モードの両方がサポートされるようになりました。
+
+    物理モードでは、移行速度は最大 110 MiB/秒に達します。論理モードの 45 MiB/s と比較して、移行パフォーマンスは大幅に向上しました。
+
+    詳細については、 [既存のデータと増分データを移行する](/tidb-cloud/migrate-from-mysql-using-data-migration.md#migrate-existing-data-and-incremental-data)を参照してください。
+
+## 2023 年 10 月 10 日 {#october-10-2023}
+
+**一般的な変更点**
+
+-   TiDB Cloud Vercel 統合による[Vercel のプレビュー展開](https://vercel.com/docs/deployments/preview-deployments)の TiDB サーバーレス ブランチの使用をサポートします。
+
+    詳細については、 [TiDB サーバーレス ブランチで接続する](/tidb-cloud/integrate-tidbcloud-with-vercel.md#connect-with-tidb-serverless-branching)を参照してください。
+
+## 2023年9月28日 {#september-28-2023}
+
+**APIの変更**
+
+-   TiDB Cloud Billing API エンドポイントを導入して、特定の組織の特定の月の請求書を取得します。
+
+    この Billing API エンドポイントは、TiDB TiDB Cloudの最新 API バージョンである TiDB TiDB Cloud API v1beta1 でリリースされています。詳細については、 [API ドキュメント (v1beta1)](https://docs.pingcap.com/tidbcloud/api/v1beta1#tag/Billing)を参照してください。
+
 ## 2023 年 9 月 19 日 {#september-19-2023}
 
 **一般的な変更点**
@@ -98,7 +193,7 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
       --request GET 'https://<region>.data.tidbcloud.com/api/v1beta/app/<App ID>/endpoint/<Endpoint Path>?page=2&page_size=10'
     ```
 
-    この機能は、最後のクエリが`SELECT`ステートメントである`GET`リクエストでのみ使用できることに注意してください。
+    この機能は、最後のクエリが`SELECT`ステートメントである`GET`リクエストに対してのみ使用できることに注意してください。
 
     詳細については、 [エンドポイントを呼び出す](/tidb-cloud/data-service-manage-endpoint.md#call-an-endpoint)を参照してください。
 
@@ -242,7 +337,7 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
     アプリケーション開発に GitHub を使用する場合、TiDB サーバーレス ブランチを GitHub CI/CD パイプラインに統合できます。これにより、本番データベースに影響を与えることなく、ブランチを使用してプル リクエストを自動的にテストできます。詳細については、 [TiDB サーバーレス ブランチング (ベータ版) を GitHub と統合する](/tidb-cloud/branch-github-integration.md)を参照してください。
 
--   [TiDB専用](/tidb-cloud/select-cluster-tier.md#tidb-dedicated)クラスターの毎週のバックアップをサポートします。詳細については、 [TiDB 専用データのバックアップと復元](/tidb-cloud/backup-and-restore.md#automatic-backup)を参照してください。
+-   [TiDB専用](/tidb-cloud/select-cluster-tier.md#tidb-dedicated)クラスターの毎週のバックアップをサポートします。詳細については、 [TiDB 専用データのバックアップと復元](/tidb-cloud/backup-and-restore.md#turn-on-auto-backup)を参照してください。
 
 ## 2023 年 7 月 4 日 {#july-4-2023}
 
@@ -366,7 +461,7 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 -   TiDB Cloudのデータ移行機能の増分データ移行のサポートを強化します。
 
-    binlog位置またはグローバル トランザクション識別子 (GTID) を指定して、指定された位置以降に生成された増分データのみをTiDB Cloudに複製できるようになりました。この機能強化により、特定の要件に合わせて、必要なデータをより柔軟に選択して複製できるようになります。
+    binlog位置またはグローバル トランザクション識別子 (GTID) を指定して、指定された位置の後に生成された増分データのみをTiDB Cloudに複製できるようになりました。この機能強化により、特定の要件に合わせて、必要なデータをより柔軟に選択して複製できるようになります。
 
     詳細は[データ移行を使用して、MySQL 互換データベースからTiDB Cloudに増分データのみを移行する](/tidb-cloud/migrate-incremental-data-from-mysql-using-data-migration.md)を参照してください。
 
@@ -460,7 +555,7 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
     クラスターの**概要**ページの**[今月の使用量]**領域で簡単に[クラスターの使用状況を監視するか、使用量クォータを増やします](/tidb-cloud/manage-serverless-spend-limit.md#manage-spending-limit-for-tidb-serverless-clusters)できます。クラスターの無料クォータに達すると、クォータを増やすか、新しい月の初めに使用量がリセットされるまで、このクラスターでの読み取りおよび書き込み操作は抑制されます。
 
-    さまざまなリソース (読み取り、書き込み、SQL CPU、ネットワーク出力など) の RU 消費量、料金の詳細、および調整された情報の詳細については、 [TiDB CloudServerless Tierの料金詳細](https://www.pingcap.com/tidb-cloud-serverless-pricing-details)を参照してください。
+    さまざまなリソース (読み取り、書き込み、SQL CPU、ネットワーク下りなど) の RU 消費量、料金の詳細、および調整された情報の詳細については、 [TiDB CloudServerless Tierの料金詳細](https://www.pingcap.com/tidb-cloud-serverless-pricing-details)を参照してください。
 
 -   TiDB Cloud [Serverless Tier](/tidb-cloud/select-cluster-tier.md#tidb-serverless)クラスターのバックアップと復元をサポートします。
 
@@ -542,7 +637,7 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 **コンソールの変更**
 
--   [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-dedicated)クラスターの[監視](/tidb-cloud/built-in-monitoring.md#view-the-metrics-page)ページを更新して、 [ノードレベルのリソースメトリック](/tidb-cloud/built-in-monitoring.md#server)を使用します。
+-   [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-dedicated)クラスターの[監視](/tidb-cloud/built-in-monitoring.md#view-the-metrics-page)ページを[ノードレベルのリソースメトリック](/tidb-cloud/built-in-monitoring.md#server)を使用するように更新します。
 
     ノードレベルのリソースメトリクスを使用すると、リソース消費をより正確に表示して、購入したサービスの実際の使用状況をより深く理解できます。
 
@@ -619,7 +714,7 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 -   [Serverless Tier](/tidb-cloud/select-cluster-tier.md#tidb-serverless)クラスターの[遅いクエリ](/tidb-cloud/tune-performance.md#slow-query)ページ用の新しいネイティブ Web インフラストラクチャをリリースします。
 
-    この新しいインフラストラクチャを使用すると、 [遅いクエリ](/tidb-cloud/tune-performance.md#slow-query)ページ内を簡単に移動し、より直感的かつ効率的な方法で必要な情報にアクセスできます。新しいインフラストラクチャは UX に関する多くの問題も解決し、SQL 診断プロセスをより使いやすくしています。
+    この新しいインフラストラクチャを使用すると、 [遅いクエリ](/tidb-cloud/tune-performance.md#slow-query)ページ内を簡単に移動し、より直観的かつ効率的な方法で必要な情報にアクセスできます。新しいインフラストラクチャは UX に関する多くの問題も解決し、SQL 診断プロセスをより使いやすくしています。
 
 ## 2023 年 3 月 21 日 {#march-21-2023}
 

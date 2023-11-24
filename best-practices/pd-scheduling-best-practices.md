@@ -16,7 +16,7 @@ summary: Learn best practice and strategy for PD scheduling.
 -   [スケジューラ](/glossary.md#scheduler)
 -   [店](/glossary.md#store)
 
-> **ノート：**
+> **注記：**
 >
 > このドキュメントは当初、TiDB 3.0 を対象としています。一部の機能は以前のバージョン (2.x) ではサポートされていませんが、基礎となるメカニズムは類似しているため、このドキュメントは引き続き参照として使用できます。
 
@@ -168,7 +168,7 @@ pd-ctl を使用すると、次の 3 つの側面からスケジューリング�
 
 PD は、pd-ctl を介して直接スケジューラを動的に追加および削除することをサポートしています。例えば：
 
--   `scheduler show` : システム内で現在実行中のスケジューラーを表示します。
+-   `scheduler show` : システム内で現在実行中のスケジューラを表示します。
 -   `scheduler remove balance-leader-scheduler` : バランス リーダー スケジューラを削除 (無効)
 -   `scheduler add evict-leader-scheduler 1` : ストア 1 のすべてのリーダーを削除するスケジューラを追加します。
 
@@ -228,7 +228,7 @@ PD の評価メカニズムでは、さまざまなストアのリーダー数�
 
 オペレーターは正常に生成されたものの、スケジューリング プロセスが遅い場合は、次の理由が考えられます。
 
--   スケジュール速度はデフォルトで制限されています。 `leader-schedule-limit`または`replica-schedule-limit`より大きな値に調整できます。s 同様に、 `max-pending-peer-count`と`max-snapshot-count`の制限を緩めることを検討できます。
+-   スケジュール速度はデフォルトで制限されています。 `leader-schedule-limit`または`replica-schedule-limit`をより大きな値に調整できます。同様に、 `max-pending-peer-count`と`max-snapshot-count`の制限を緩和することを検討できます。
 -   他のスケジューリング タスクが同時に実行され、システム内のリソースを奪い合っています。 [リーダー/地域が均等に分散されていない](#leadersregions-are-not-evenly-distributed)の解決策を参照してください。
 -   単一のノードをオフラインにすると、処理されるリージョン リーダーの数 (3 つのレプリカ構成では約 1/3) が削除するノードに分散されます。したがって、速度は、この単一ノードによってスナップショットが生成される速度によって制限されます。リーダーを移行するために手動で`evict-leader-scheduler`を追加すると、速度を上げることができます。
 
@@ -268,15 +268,11 @@ PD の評価メカニズムでは、さまざまなストアのリーダー数�
 
         -   クラスターに TiDB インスタンスがなく、値[`key-type`](/pd-control.md#config-show--set-option-value--placement-rules)が`raw`または`txn`に設定されているとします。この場合、PD は`enable-cross-table-merge setting`の値に関係なく、テーブル全体でリージョンをマージできます。 `key-type`パラメータは動的に変更できます。
 
-        {{< copyable "" >}}
-
         ```bash
         config set key-type txn
         ```
 
         -   クラスターに TiDB インスタンスがあり、値`key-type`が`table`に設定されているとします。この場合、PD は、 `enable-cross-table-merge`の値が`true`に設定されている場合にのみ、テーブル間でリージョンをマージできます。 `key-type`パラメータは動的に変更できます。
-
-        {{< copyable "" >}}
 
         ```bash
         config set enable-cross-table-merge true
@@ -284,7 +280,7 @@ PD の評価メカニズムでは、さまざまなストアのリーダー数�
 
         変更が反映されない場合は、 [FAQ - TiKV/PD 用に変更した`toml`構成が有効にならないのはなぜですか?](/faq/deploy-and-maintain-faq.md#why-the-modified-toml-configuration-for-tikvpd-does-not-take-effect)を参照してください。
 
-        > **ノート：**
+        > **注記：**
         >
         > 配置ルールを有効にした後、デコードの失敗を避けるために、値`key-type`適切に切り替えてください。
 

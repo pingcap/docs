@@ -30,7 +30,7 @@ tiup br backup full --pd "${PD_IP}:2379" \
 
 -   `--lastbackupts` : 最後のバックアップのタイムスタンプ。
 -   `--ratelimit` : バックアップ タスクを実行する**TiKV ごとの**最大速度 (MiB/秒)。
--   `storage` : バックアップデータのstorageパス。増分バックアップ データは、以前のスナップショット バックアップとは別のパスに保存する必要があります。前の例では、増分バックアップ データは完全バックアップ データの下の`incr`ディレクトリに保存されます。詳細は[バックアップstorageURI 構成](/br/backup-and-restore-storages.md#uri-format)を参照してください。
+-   `storage` : バックアップデータのstorageパス。増分バックアップ データは、以前のスナップショット バックアップとは別のパスに保存する必要があります。前の例では、増分バックアップ データは完全バックアップ データの下の`incr`ディレクトリに保存されます。詳細は[外部ストレージ サービスの URI 形式](/external-storage-uri.md)を参照してください。
 
 ## 増分データの復元 {#restore-incremental-data}
 

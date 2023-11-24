@@ -43,7 +43,7 @@ ALTER TABLE `tpch50`.`lineitem` SET TIFLASH REPLICA 0;
 
 -   v4.0.6 より前のバージョンの場合、 TiDB Lightning を使用してデータをインポートする前にTiFlashレプリカを作成すると、データのインポートは失敗します。テーブルのTiFlashレプリカを作成する前に、テーブルにデータをインポートする必要があります。
 
--   TiDB とTiDB Lightning が両方とも v4.0.6 以降の場合、テーブルにTiFlashレプリカがあるかどうかに関係なく、 TiDB Lightningを使用してそのテーブルにデータをインポートできます。これにより、 TiDB Lightning の手順が遅くなる可能性があることに注意してください。これは、Lightning ホストの NIC 帯域幅、 TiFlashノードの CPU とディスクの負荷、 TiFlashレプリカの数によって異なります。
+-   TiDB とTiDB Lightning が両方とも v4.0.6 以降の場合、テーブルにTiFlashレプリカがあるかどうかに関係なく、 TiDB Lightningを使用してそのテーブルにデータをインポートできます。これにより、 TiDB Lightningの手順が遅くなる可能性があることに注意してください。これは、Lightning ホストの NIC 帯域幅、 TiFlashノードの CPU とディスクの負荷、 TiFlashレプリカの数によって異なります。
 
 -   PD スケジュールのパフォーマンスが低下するため、1,000 を超えるテーブルを複製しないことをお勧めします。この制限は、後のバージョンでは削除される予定です。
 
@@ -86,7 +86,7 @@ ALTER DATABASE db_name SET TIFLASH REPLICA count;
     ALTER DATABASE `tpch50` SET TIFLASH REPLICA 0;
     ```
 
-> **ノート：**
+> **注記：**
 >
 > -   このステートメントは実際に、リソースを大量に消費する一連の DDL 操作を実行します。実行中にステートメントが中断された場合、実行された操作はロールバックされず、未実行の操作は続行されません。
 >
@@ -117,7 +117,7 @@ SELECT TABLE_NAME FROM information_schema.tables where TABLE_SCHEMA = "<db_name>
 
 <CustomContent platform="tidb-cloud">
 
-> **ノート：**
+> **注記：**
 >
 > このセクションはTiDB Cloudには適用されません。
 
@@ -143,10 +143,10 @@ TiFlashレプリカが追加される前に、各 TiKV インスタンスはフ�
     tiup ctl:v<CLUSTER_VERSION> pd -u http://<PD_ADDRESS>:2379 store limit all engine tiflash 60 add-peer
     ```
 
-    > 前述のコマンドでは、 `v<CLUSTER_VERSION>`実際のクラスターのバージョンに置き換える必要があります。たとえば、 `v7.1.1`と`<PD_ADDRESS>:2379`任意の PD ノードのアドレスに置き換えます。例えば：
+    > 前述のコマンドでは、 `v<CLUSTER_VERSION>`実際のクラスターのバージョンに置き換える必要があります。たとえば、 `v7.1.2`と`<PD_ADDRESS>:2379`任意の PD ノードのアドレスに置き換えます。例えば：
     >
     > ```shell
-    > tiup ctl:v7.1.1 pd -u http://192.168.1.4:2379 store limit all engine tiflash 60 add-peer
+    > tiup ctl:v7.1.2 pd -u http://192.168.1.4:2379 store limit all engine tiflash 60 add-peer
     > ```
 
     数分以内に、 TiFlashノードの CPU およびディスク IO リソースの使用量が大幅に増加することがわかり、 TiFlashはレプリカをより速く作成するはずです。同時に、TiKV ノードの CPU およびディスク IO リソースの使用量も増加します。
@@ -176,7 +176,7 @@ TiFlashレプリカが追加される前に、各 TiKV インスタンスはフ�
 
 <CustomContent platform="tidb-cloud">
 
-> **ノート：**
+> **注記：**
 >
 > このセクションはTiDB Cloudには適用されません。
 
@@ -186,26 +186,24 @@ TiFlashレプリカが追加される前に、各 TiKV インスタンスはフ�
 
 1.  クラスター構成ファイルでTiFlashノードのラベルを指定します。
 
-    ```
-    tiflash_servers:
-      - host: 172.16.5.81
-          logger.level: "info"
-        learner_config:
-          server.labels:
-            zone: "z1"
-      - host: 172.16.5.82
-        config:
-          logger.level: "info"
-        learner_config:
-          server.labels:
-            zone: "z1"
-      - host: 172.16.5.85
-        config:
-          logger.level: "info"
-        learner_config:
-          server.labels:
-            zone: "z2"
-    ```
+        tiflash_servers:
+          - host: 172.16.5.81
+              logger.level: "info"
+            learner_config:
+              server.labels:
+                zone: "z1"
+          - host: 172.16.5.82
+            config:
+              logger.level: "info"
+            learner_config:
+              server.labels:
+                zone: "z1"
+          - host: 172.16.5.85
+            config:
+              logger.level: "info"
+            learner_config:
+              server.labels:
+                zone: "z2"
 
     以前のバージョンの`flash.proxy.labels`構成では、使用可能なゾーン名の特殊文字を正しく処理できないことに注意してください。使用可能なゾーンの名前を構成するには、 `server.labels` in `learner_config`を使用することをお勧めします。
 
@@ -254,6 +252,6 @@ TiFlashレプリカが追加される前に、各 TiKV インスタンスはフ�
 
 <CustomContent platform="tidb">
 
-ラベルを使用したレプリカのスケジュール設定の詳細については、 [トポロジーラベルごとにレプリカをスケジュールする](/schedule-replicas-by-topology-labels.md) 、 [1 つの地域展開における複数のデータセンター](/multi-data-centers-in-one-city-deployment.md) 、および[2 つの地域に配置された 3 つのデータ センター](/three-data-centers-in-two-cities-deployment.md)を参照してください。
+ラベルを使用したレプリカのスケジュール設定の詳細については、 [トポロジ ラベルごとにレプリカをスケジュールする](/schedule-replicas-by-topology-labels.md) 、 [1 つの地域展開における複数のデータセンター](/multi-data-centers-in-one-city-deployment.md) 、および[2 つの地域に配置された 3 つのデータ センター](/three-data-centers-in-two-cities-deployment.md)を参照してください。
 
 </CustomContent>

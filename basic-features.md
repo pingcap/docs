@@ -9,7 +9,7 @@ summary: Learn about the feature overview of TiDB.
 
 [TiDB プレイグラウンド](https://play.tidbcloud.com/?utm_source=docs&#x26;utm_medium=tidb_features)で TiDB 機能を試すことができます。
 
-> **ノート：**
+> **注記：**
 >
 > PingCAP は、DMR バージョンのパッチ リリースを提供しません。バグは将来のリリースで修正される予定です。一般的な目的では、 [最新のLTSバージョン](https://docs.pingcap.com/tidb/stable)を使用することをお勧めします。
 >
@@ -57,10 +57,10 @@ summary: Learn about the feature overview of TiDB.
 | [非表示のインデックス](/sql-statements/sql-statement-add-index.md)                                    |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  N  |
 | [複合`PRIMARY KEY`](/constraints.md)                                                          |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
 | [固有のインデックス](/constraints.md)                                                                |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
-| [整数`PRIMARY KEY`のクラスター化インデックス](/constraints.md)                                             |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
-| [複合キーまたは非整数キーのクラスター化インデックス](/constraints.md)                                                |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  N  |
+| [整数`PRIMARY KEY`のクラスター化インデックス](/clustered-indexes.md)                                       |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
+| [複合キーまたは非整数キーのクラスター化インデックス](/clustered-indexes.md)                                          |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  N  |
 | [多値インデックス](/sql-statements/sql-statement-create-index.md#multi-valued-indexes)              |  Y  |  N  |  N  |  N  |  N  |  N  |  N  |  N  |  N  |
-| [外部キー](/constraints.md#foreign-key)                                                         |  Y  |  N  |  N  |  N  |  N  |  N  |  N  |  N  |  N  |
+| [外部キー](/constraints.md#foreign-key)                                                         |  E  |  N  |  N  |  N  |  N  |  N  |  N  |  N  |  N  |
 | [TiFlash後期実体化](/tiflash/tiflash-late-materialization.md)                                    |  Y  |  N  |  N  |  N  |  N  |  N  |  N  |  N  |  N  |
 
 ## SQL文 {#sql-statements}
@@ -126,9 +126,9 @@ summary: Learn about the feature overview of TiDB.
 | [メタデータロック](/metadata-lock.md)                                                                 |  Y  |   Y   |  N  |  N  |  N  |  N  |  N  |  N  |  N  |
 | [`FLASHBACK CLUSTER TO TIMESTAMP`](/sql-statements/sql-statement-flashback-to-timestamp.md)   |  Y  |   Y   |  N  |  N  |  N  |  N  |  N  |  N  |  N  |
 
-## 取引 {#transactions}
+## トランザクション {#transactions}
 
-| 取引                                                                    | 7.1 | 6.5 | 6.1 | 5.4 | 5.3 | 5.2 | 5.1 | 5.0 | 4.0 |
+| トランザクション                                                              | 7.1 | 6.5 | 6.1 | 5.4 | 5.3 | 5.2 | 5.1 | 5.0 | 4.0 |
 | --------------------------------------------------------------------- | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
 | [非同期コミット](/system-variables.md#tidb_enable_async_commit-new-in-v50)   |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  N  |
 | [1個](/system-variables.md#tidb_enable_1pc-new-in-v50)                 |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  N  |
@@ -205,9 +205,9 @@ summary: Learn about the feature overview of TiDB.
 | [TiCDC は 2 つの TiDB クラスター間の双方向レプリケーションをサポートします](/ticdc/ticdc-bidirectional-replication.md)               |    Y    |    Y    |    N    |    N    |    N    |    N    |    N    |    N    |    N    |
 | [TiCDC OpenAPI v2](/ticdc/ticdc-open-api-v2.md)                                                         |    Y    |    N    |    N    |    N    |    N    |    N    |    N    |    N    |    N    |
 
-## 管理、可観測性、ツール {#management-observability-and-tools}
+## 管理、可観測性、およびツール {#management-observability-and-tools}
 
-| 管理、可観測性、ツール                                                                                                   | 7.1 | 6.5 | 6.1 | 5.4 | 5.3 | 5.2 | 5.1 | 5.0 | 4.0 |
+| 管理、可観測性、およびツール                                                                                                | 7.1 | 6.5 | 6.1 | 5.4 | 5.3 | 5.2 | 5.1 | 5.0 | 4.0 |
 | ------------------------------------------------------------------------------------------------------------- | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
 | [TiDB ダッシュボード UI](/dashboard/dashboard-intro.md)                                                              |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
 | [TiDB ダッシュボードの継続的プロファイリング](/dashboard/continuous-profiling.md)                                                |  Y  |  Y  |  Y  |  E  |  E  |  N  |  N  |  N  |  N  |

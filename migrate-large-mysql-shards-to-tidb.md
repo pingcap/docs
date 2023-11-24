@@ -41,8 +41,6 @@ MySQL シャードのデータ サイズが 1 TiB 未満の場合は、完全移
 
 テーブル 1 ～ 4 は次のような同じテーブル構造を持つと仮定します。
 
-{{< copyable "" >}}
-
 ```sql
 CREATE TABLE `table1` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
@@ -55,8 +53,6 @@ CREATE TABLE `table1` (
 ```
 
 これら 4 つのテーブルでは、 `id`列が主キーです。これは自動増分であるため、異なるシャード テーブルで重複した`id`範囲が生成され、移行中にターゲット テーブルで主キーの競合が発生します。一方、 `sid`列はシャーディング キーであり、インデックスがグローバルに一意であることが保証されます。したがって、ターゲット`table5`の列`id`の一意の制約を削除して、データ マージの競合を回避できます。
-
-{{< copyable "" >}}
 
 ```sql
 CREATE TABLE `table5` (
@@ -79,8 +75,6 @@ CREATE TABLE `table5` (
 
 まず、次のコマンドを実行して、 Dumplingを使用して`my_db1`から`table1`と`table2`をエクスポートします。
 
-{{< copyable "" >}}
-
 ```shell
 tiup dumpling -h ${ip} -P 3306 -u root -t 16 -r 200000 -F 256MB -B my_db1 -f 'my_db1.table[12]' -o ${data-path}/my_db1
 ```
@@ -94,7 +88,7 @@ tiup dumpling -h ${ip} -P 3306 -u root -t 16 -r 200000 -F 256MB -B my_db1 -f 'my
 | `-p`または`--port`     | 使用するポートを指定します。                                                                                                              |
 | `-h`または`--host`     | データソースのIPアドレスを指定します。                                                                                                        |
 | `-t`または`--thread`   | エクスポートのスレッド数を指定します。スレッドの数を増やすと、 Dumplingの同時実行性とエクスポート速度が向上し、データベースのメモリ消費量が増加します。したがって、あまり大きな数値を設定することはお勧めできません。通常は 64 未満です。 |
-| `-o`または`--output`   | ローカル ファイル パスまたは[外部storageURI](/br/backup-and-restore-storages.md#uri-format)をサポートするstorageのエクスポート ディレクトリを指定します。             |
+| `-o`または`--output`   | ローカル ファイル パスまたは[外部storageURI](/external-storage-uri.md)をサポートするstorageのエクスポート ディレクトリを指定します。                                  |
 | `-r`または`--row`      | 1 つのファイル内の最大行数を指定します。このパラメーターを使用すると、 Dumplingテーブル内の同時実行が有効になり、エクスポートが高速化され、メモリ使用量が削減されます。                                   |
 | `-F`                | 単一ファイルの最大サイズを指定します。単位は`MiB`です。値を 256 MiB に保つことをお勧めします。                                                                      |
 | `-B`または`--database` | エクスポートするデータベースを指定します。                                                                                                       |
@@ -103,8 +97,6 @@ tiup dumpling -h ${ip} -P 3306 -u root -t 16 -r 200000 -F 256MB -B my_db1 -f 'my
 `${data-path}`に十分な空き領域があることを確認してください。単一テーブルのサイズが大きすぎることによるバックアップ プロセスの中断を避けるために、 `-F`オプションを使用することを強くお勧めします。
 
 次に、次のコマンドを実行して、 Dumplingを使用して`my_db2`から`table3`と`table4`をエクスポートします。パスが`${data-path}/my_db1`ではなく`${data-path}/my_db2`であることに注意してください。
-
-{{< copyable "" >}}
 
 ```shell
 tiup dumpling -h ${ip} -P 3306 -u root -t 16 -r 200000 -F 256MB -B my_db2 -f 'my_db2.table[34]' -o ${data-path}/my_db2
@@ -135,8 +127,6 @@ TiDB Lightningタスクが回復不可能なエラー (データ破損など) �
 ### ターゲットスキーマを作成する {#create-a-target-schema}
 
 下流に`mydb.table5`を作成します。
-
-{{< copyable "" >}}
 
 ```sql
 CREATE TABLE `table5` (
@@ -205,8 +195,6 @@ CREATE TABLE `table5` (
 
 2.  `tidb-lightning`を実行します。シェルでプログラム名を直接呼び出してプログラムを実行すると、SIGHUP シグナルの受信後にプロセスが予期せず終了する場合があります。 `nohup` 、 `screen` 、 `tiup`などのツールを使用してプログラムを実行し、プロセスをシェル バックグラウンドに置くことをお勧めします。 S3 から移行する場合は、Amazon S3 バックエンド ストアにアクセスできるアカウントの SecretKey と AccessKey を環境変数として Lightning ノードに渡す必要があります。 `~/.aws/credentials`からの認証情報ファイルの読み取りもサポートされています。例えば：
 
-    {{< copyable "" >}}
-
     ```shell
     export AWS_ACCESS_KEY_ID=${access_key}
     export AWS_SECRET_ACCESS_KEY=${secret_key}
@@ -221,7 +209,7 @@ CREATE TABLE `table5` (
 
 TiDB Lightning はインポートを完了すると、自動的に終了します。最後の行に`tidb-lightning.log` `the whole procedure completed`含まれているかどうかを確認します。 「はい」の場合、インポートは成功です。 「いいえ」の場合、インポートでエラーが発生します。エラー メッセージの指示に従ってエラーに対処します。
 
-> **ノート：**
+> **注記：**
 >
 > 移行が成功したかどうかに関係なく、ログの最後の行は常に`tidb lightning exit`になります。これは、 TiDB Lightning が正常に終了することを意味するだけで、インポート タスクが正常に完了することを保証するものではありません。
 
@@ -234,8 +222,6 @@ binlogに基づいてソース データベース内の指定された位置か�
 ### データソースを追加する {#add-the-data-source}
 
 DM へのアップストリーム データ ソースを構成する`source1.yaml`という新しいデータ ソース ファイルを作成し、次のコンテンツを追加します。
-
-{{< copyable "" >}}
 
 ```yaml
 # Configuration.
@@ -255,8 +241,6 @@ from:
 
 ターミナルで次のコマンドを実行します。データ ソース構成を DM クラスターにロードするには、 `tiup dmctl`を使用します。
 
-{{< copyable "" >}}
-
 ```shell
 tiup dmctl --master-addr ${advertise-addr} operate-source create source1.yaml
 ```
@@ -273,8 +257,6 @@ tiup dmctl --master-addr ${advertise-addr} operate-source create source1.yaml
 ### レプリケーションタスクを作成する {#create-a-replication-task}
 
 `task.yaml`というタスク構成ファイルを編集して、各データ ソースの増分レプリケーション モードとレプリケーション開始点を構成します。
-
-{{< copyable "" >}}
 
 ```yaml
 name: task-test               # The name of the task. Should be globally unique.
@@ -343,15 +325,11 @@ mysql-instances:
 
 データ移行タスクを開始する前に、 `tiup dmctl`の`check-task`サブコマンドを使用して、構成が DM 構成要件を満たしているかどうかを確認することをお勧めします。
 
-{{< copyable "" >}}
-
 ```shell
 tiup dmctl --master-addr ${advertise-addr} check-task task.yaml
 ```
 
 `tiup dmctl`を使用して次のコマンドを実行し、データ移行タスクを開始します。
-
-{{< copyable "" >}}
 
 ```shell
 tiup dmctl --master-addr ${advertise-addr} start-task task.yaml
@@ -369,8 +347,6 @@ tiup dmctl --master-addr ${advertise-addr} start-task task.yaml
 ### 移行ステータスを確認する {#check-the-migration-status}
 
 `tiup dmctl`の`query-status`コマンドを実行すると、DM クラスター内で実行中の移行タスクがあるかどうかとそのステータスを確認できます。
-
-{{< copyable "" >}}
 
 ```shell
 tiup dmctl --master-addr ${advertise-addr} query-status ${task-name}

@@ -33,6 +33,7 @@ delimiter = ','
 quote = '"'
 null = '\N'
 include-commit-ts = true
+binary-encoding-method = 'base64'
 ```
 
 ## トランザクションの制約 {#transactional-constraints}
@@ -45,7 +46,7 @@ include-commit-ts = true
 
 データのstorageパス構造の詳細については、 [ストレージパス構造](/ticdc/ticdc-sink-to-cloud-storage.md#storage-path-structure)を参照してください。
 
-## データフォーマットの定義 {#definition-of-the-data-format}
+## データ形式の定義 {#definition-of-the-data-format}
 
 CSV ファイルでは、各列は次のように定義されます。
 
@@ -79,18 +80,18 @@ CREATE TABLE `employee` (
 
 ## データ型マッピング {#data-type-mapping}
 
-| MySQLの種類                                                                      | CSVタイプ | 例                              | 説明                             |
-| ----------------------------------------------------------------------------- | ------ | ------------------------------ | ------------------------------ |
-| `BOOLEAN` / `TINYINT` / `SMALLINT` / `INT` / `MEDIUMINT` / `BIGINT`           | 整数     | `123`                          | <li></li>                      |
-| `FLOAT` / `DOUBLE`                                                            | 浮く     | `153.123`                      | <li></li>                      |
-| `NULL`                                                                        | ヌル     | `\N`                           | <li></li>                      |
-| `TIMESTAMP` / `DATETIME`                                                      | 弦      | `"1973-12-30 15:30:00.123456"` | 形式: `yyyy-MM-dd HH:mm:ss.%06d` |
-| `DATE`                                                                        | 弦      | `"2000-01-01"`                 | 形式: `yyyy-MM-dd`               |
-| `TIME`                                                                        | 弦      | `"23:59:59"`                   | 形式: `yyyy-MM-dd`               |
-| `YEAR`                                                                        | 整数     | `1970`                         | <li></li>                      |
-| `VARCHAR` / `JSON` / `TINYTEXT` / `MEDIUMTEXT` / `LONGTEXT` / `TEXT` / `CHAR` | 弦      | `"test"`                       | UTF-8エンコード                     |
-| `VARBINARY` / `TINYBLOB` / `MEDIUMBLOB` / `LONGBLOB` / `BLOB` / `BINARY`      | 弦      | `"6Zi/5pav"`                   | Base64エンコード                    |
-| `BIT`                                                                         | 整数     | `81`                           | <li></li>                      |
-| `DECIMAL`                                                                     | 弦      | `"129012.1230000"`             | <li></li>                      |
-| `ENUM`                                                                        | 弦      | `"a"`                          | <li></li>                      |
-| `SET`                                                                         | 弦      | `"a,b"`                        | <li></li>                      |
+| MySQLの種類                                                                      | CSVタイプ | 例                               | 説明                             |
+| ----------------------------------------------------------------------------- | ------ | ------------------------------- | ------------------------------ |
+| `BOOLEAN` / `TINYINT` / `SMALLINT` / `INT` / `MEDIUMINT` / `BIGINT`           | 整数     | `123`                           | <li></li>                      |
+| `FLOAT` / `DOUBLE`                                                            | 浮く     | `153.123`                       | <li></li>                      |
+| `NULL`                                                                        | ヌル     | `\N`                            | <li></li>                      |
+| `TIMESTAMP` / `DATETIME`                                                      | 弦      | `"1973-12-30 15:30:00.123456"`  | 形式: `yyyy-MM-dd HH:mm:ss.%06d` |
+| `DATE`                                                                        | 弦      | `"2000-01-01"`                  | 形式: `yyyy-MM-dd`               |
+| `TIME`                                                                        | 弦      | `"23:59:59"`                    | 形式: `yyyy-MM-dd`               |
+| `YEAR`                                                                        | 整数     | `1970`                          | <li></li>                      |
+| `VARCHAR` / `JSON` / `TINYTEXT` / `MEDIUMTEXT` / `LONGTEXT` / `TEXT` / `CHAR` | 弦      | `"test"`                        | UTF-8エンコード                     |
+| `VARBINARY` / `TINYBLOB` / `MEDIUMBLOB` / `LONGBLOB` / `BLOB` / `BINARY`      | 弦      | `"6Zi/5pav"`または`"e998bfe696af"` | Base64 または 16 進エンコード           |
+| `BIT`                                                                         | 整数     | `81`                            | <li></li>                      |
+| `DECIMAL`                                                                     | 弦      | `"129012.1230000"`              | <li></li>                      |
+| `ENUM`                                                                        | 弦      | `"a"`                           | <li></li>                      |
+| `SET`                                                                         | 弦      | `"a,b"`                         | <li></li>                      |

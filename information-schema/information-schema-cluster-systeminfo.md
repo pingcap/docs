@@ -7,7 +7,9 @@ summary: Learn the `CLUSTER_SYSTEMINFO` kernel parameter table.
 
 `CLUSTER_SYSTEMINFO`カーネル パラメータ テーブルを使用して、クラスタのすべてのインスタンスが配置されているサーバーのカーネル構成情報をクエリできます。現在、 `sysctl`のシステムの情報を照会できます。
 
-{{< copyable "" >}}
+> **注記：**
+>
+> このテーブルは TiDB セルフホスト型にのみ適用され、 [TiDB Cloud](https://docs.pingcap.com/tidbcloud/)では使用できません。
 
 ```sql
 USE information_schema;

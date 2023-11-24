@@ -5,15 +5,11 @@ summary: Learn the usage of ALTER RESOURCE GROUP in TiDB.
 
 # リソースグループの変更 {#alter-resource-group}
 
-<CustomContent platform="tidb-cloud">
-
-> **ノート：**
->
-> この機能は[TiDB サーバーレスクラスター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless)では使用できません。
-
-</CustomContent>
-
 `ALTER RESOURCE GROUP`ステートメントは、データベース内のリソース グループを変更するために使用されます。
+
+> **注記：**
+>
+> この機能は[TiDB サーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless)クラスターでは使用できません。
 
 ## あらすじ {#synopsis}
 
@@ -43,7 +39,7 @@ ResourceGroupPriorityOption ::=
 
 ```
 
-TiDB は次の`DirectResourceGroupOption`サポートします。ここで[リクエストユニット (RU)](/tidb-resource-control.md#what-is-request-unit-ru) 、CPU、IO、およびその他のシステム リソースに対する TiDB の統合抽象化ユニットです。
+TiDB は次の`DirectResourceGroupOption`サポートします。ここで[リクエストユニット (RU)](/tidb-resource-control.md#what-is-request-unit-ru) 、CPU、IO、およびその他のシステム リソースに対する TiDB 内の統合抽象化ユニットです。
 
 | オプション        | 説明                                                                                     | 例                                                                  |
 | ------------ | -------------------------------------------------------------------------------------- | ------------------------------------------------------------------ |
@@ -51,7 +47,7 @@ TiDB は次の`DirectResourceGroupOption`サポートします。ここで[リ�
 | `PRIORITY`   | TiKV 上で処理されるタスクの絶対的な優先度                                                                | `PRIORITY = HIGH`優先度が高いことを示します。指定しない場合、デフォルト値は`MEDIUM`です。          |
 | `BURSTABLE`  | `BURSTABLE`属性が設定されている場合、TiDB は、クォータを超過したときに、対応するリソース グループが利用可能なシステム リソースを使用することを許可します。 |                                                                    |
 
-> **ノート：**
+> **注記：**
 >
 > `ALTER RESOURCE GROUP`ステートメントは、グローバル変数[`tidb_enable_resource_control`](/system-variables.md#tidb_enable_resource_control-new-in-v660) `ON`に設定されている場合にのみ実行できます。
 
@@ -63,9 +59,7 @@ TiDB は次の`DirectResourceGroupOption`サポートします。ここで[リ�
 DROP RESOURCE GROUP IF EXISTS rg1;
 ```
 
-```
-Query OK, 0 rows affected (0.22 sec)
-```
+    Query OK, 0 rows affected (0.22 sec)
 
 ```sql
 CREATE RESOURCE GROUP IF NOT EXISTS rg1
@@ -118,4 +112,4 @@ MySQL は[リソースグループの変更](https://dev.mysql.com/doc/refman/8.
 
 -   [リソースグループを削除](/sql-statements/sql-statement-drop-resource-group.md)
 -   [リソースグループの作成](/sql-statements/sql-statement-create-resource-group.md)
--   [リクエストユニット (RU)](/tidb-resource-control.md#what-is-request-unit-ru)
+-   [リクエストユニット(RU)](/tidb-resource-control.md#what-is-request-unit-ru)

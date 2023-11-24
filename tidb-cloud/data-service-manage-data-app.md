@@ -21,6 +21,10 @@ Data Service のデータ アプリ (ベータ版) は、特定のアプリケ�
 
 2.  名前と説明を入力し、データ アプリがアクセスするクラスターを選択します。
 
+    > **注記：**
+    >
+    > デフォルトでは、データ アプリのタイプは**標準データ アプリ**です。 **Chat2Query データ アプリ**を作成する場合は、このドキュメントの代わりに[Chat2Query API を使ってみる](/tidb-cloud/use-chat2query-api.md)を参照してください。
+
 3.  (オプション) データ アプリのエンドポイントを優先する GitHub リポジトリとブランチに自動的にデプロイするには、 **[GitHub に接続]**を有効にして、次の手順を実行します。
 
     1.  **[GitHub にインストール] を**クリックし、画面上の指示に従って**TiDB Cloud Data Service**をアプリケーションとしてターゲット リポジトリにインストールします。
@@ -56,6 +60,26 @@ Data Service のデータ アプリ (ベータ版) は、特定のアプリケ�
 ### GitHub接続を管理する {#manage-github-connection}
 
 詳細については、 [GitHub を使用して自動的にデプロイ](/tidb-cloud/data-service-manage-github-connection.md)を参照してください。
+
+### データ アプリを GPT と統合する {#integrate-your-data-app-with-gpts}
+
+データ アプリを[GPT](https://openai.com/blog/introducing-gpts)と統合して、インテリジェントな機能でアプリケーションを強化できます。
+
+データ アプリを GPT と統合するには、次の手順を実行します。
+
+1.  プロジェクトの[**データサービス**](https://tidbcloud.com/console/data-service)ページに移動します。
+
+2.  左側のペインでターゲット データ アプリを見つけ、ターゲット データ アプリの名前をクリックして詳細を表示します。
+
+3.  **[GPT との統合]**領域で、 **[コンフィグレーションの取得]**をクリックします。
+
+4.  表示されたダイアログ ボックスには、次のフィールドが表示されます。
+
+    -   **API 仕様 URL** : データ アプリの OpenAPI 仕様の URL をコピーします。詳細については、 [OpenAPI仕様を使用する](#use-the-openapi-specification)を参照してください。
+    -   **API キー**: データ アプリの API キーを入力します。 API キーをまだ持っていない場合は、 **「API キーの作成**」をクリックして作成します。詳細については、 [APIキーを作成する](/tidb-cloud/data-service-api-key.md#create-an-api-key)を参照してください。
+    -   **API Key Encoded** : 指定した API キーと同等の Base64 エンコード文字列をコピーします。
+
+5.  コピーした API 仕様 URL とエンコードされた API キーを GPT 構成で使用します。
 
 ### リンクされたデータソースを管理する {#manage-linked-data-sources}
 

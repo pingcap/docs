@@ -29,8 +29,6 @@ summary: Learn how to create a migration task after the DM cluster is deployed.
 
 実行可能なMySQLインスタンスを2つ用意します。 Docker を使用して MySQL をすばやく起動することもできます。コマンドは次のとおりです。
 
-{{< copyable "" >}}
-
 ```bash
 docker run --rm --name mysql-3306 -p 3306:3306 -e MYSQL_ALLOW_EMPTY_PASSWORD=true mysql:5.7.22 --log-bin=mysql-bin --port=3306 --bind-address=0.0.0.0 --binlog-format=ROW --server-id=1 --gtid_mode=ON --enforce-gtid-consistency=true > mysql.3306.log 2>&1 &
 docker run --rm --name mysql-3307 -p 3307:3307 -e MYSQL_ALLOW_EMPTY_PASSWORD=true mysql:5.7.22 --log-bin=mysql-bin --port=3307 --bind-address=0.0.0.0 --binlog-format=ROW --server-id=1 --gtid_mode=ON --enforce-gtid-consistency=true > mysql.3307.log 2>&1 &
@@ -39,8 +37,6 @@ docker run --rm --name mysql-3307 -p 3307:3307 -e MYSQL_ALLOW_EMPTY_PASSWORD=tru
 ### データの準備 {#prepare-data}
 
 -   サンプル データを mysql-3306 に書き込みます。
-
-    {{< copyable "" >}}
 
     ```sql
     drop database if exists `sharding1`;
@@ -53,8 +49,6 @@ docker run --rm --name mysql-3307 -p 3307:3307 -e MYSQL_ALLOW_EMPTY_PASSWORD=tru
     ```
 
 -   サンプル データを mysql-3307 に書き込みます。
-
-    {{< copyable "" >}}
 
     ```sql
     drop database if exists `sharding2`;
@@ -70,10 +64,8 @@ docker run --rm --name mysql-3307 -p 3307:3307 -e MYSQL_ALLOW_EMPTY_PASSWORD=tru
 
 TiDBサーバーを実行するには、次のコマンドを使用します。
 
-{{< copyable "" >}}
-
 ```bash
-wget https://download.pingcap.org/tidb-community-server-v7.1.1-linux-amd64.tar.gz
+wget https://download.pingcap.org/tidb-community-server-v7.1.2-linux-amd64.tar.gz
 tar -xzvf tidb-latest-linux-amd64.tar.gz
 mv tidb-latest-linux-amd64/bin/tidb-server ./
 ./tidb-server
@@ -89,22 +81,18 @@ mv tidb-latest-linux-amd64/bin/tidb-server ./
 
 ### パスワードを暗号化する {#encrypt-the-password}
 
-> **ノート：**
+> **注記：**
 >
 > -   データベースにパスワードがない場合は、この手順をスキップできます。
 > -   DM v1.0.6 以降のバージョンでは、平文パスワードを使用してソース情報を設定できます。
 
 安全上の理由から、暗号化されたパスワードを構成して使用することをお勧めします。 dmctl を使用して MySQL/TiDB パスワードを暗号化できます。パスワードが「123456」であるとします。
 
-{{< copyable "" >}}
-
 ```bash
 ./dmctl encrypt "123456"
 ```
 
-```
-fCxfQ9XKCezSzuCD0Wf5dUD+LsKegSg=
-```
+    fCxfQ9XKCezSzuCD0Wf5dUD+LsKegSg=
 
 この暗号化された値を保存し、次の手順で MySQL データ ソースを作成するために使用します。
 
@@ -133,8 +121,6 @@ MySQL2 データ ソースで、上記の構成を`conf/source2.yaml`にコピ�
 
 dmctl を使用して MySQL1 のデータ ソース構成を DM クラスターにロードするには、ターミナルで次のコマンドを実行します。
 
-{{< copyable "" >}}
-
 ```bash
 ./dmctl --master-addr=127.0.0.1:8261 operate-source create conf/source1.yaml
 ```
@@ -143,13 +129,11 @@ MySQL2 の場合は、上記のコマンドの構成ファイルを MySQL2 の�
 
 ## データ移行タスクを作成する {#create-a-data-migration-task}
 
-[用意されたデータ](#prepare-data)をインポートした後、MySQL1 インスタンスと MySQL2 インスタンスの両方にいくつかのシャード テーブルが存在します。これらのテーブルは同一の構造を持ち、テーブル名の接頭辞「t」も同じです。これらのテーブルが配置されているデータベースにはすべて「sharding」という接頭辞が付いています。また、主キーまたは一意キーの間に競合はありません (各シャードテーブルでは、主キーまたは一意キーが他のテーブルのものとは異なります)。
+[用意されたデータ](#prepare-data)をインポートすると、MySQL1 インスタンスと MySQL2 インスタンスの両方にいくつかのシャード テーブルが存在します。これらのテーブルは同一の構造を持ち、テーブル名の接頭辞「t」も同じです。これらのテーブルが配置されているデータベースにはすべて「sharding」という接頭辞が付いています。また、主キーまたは一意キーの間に競合はありません (各シャードテーブルでは、主キーまたは一意キーが他のテーブルのものとは異なります)。
 
 ここで、これらのシャード化されたテーブルを TiDB の`db_target.t_target`テーブルに移行する必要があるとします。手順は以下の通りです。
 
 1.  タスクの構成ファイルを作成します。
-
-    {{< copyable "" >}}
 
     ```yaml
     ---
@@ -194,35 +178,31 @@ MySQL2 の場合は、上記のコマンドの構成ファイルを MySQL2 の�
 
 2.  dmctl を使用してタスクを作成するには、上記の設定を`conf/task.yaml`ファイルに書き込みます。
 
-    {{< copyable "" >}}
-
     ```bash
     ./dmctl --master-addr 127.0.0.1:8261 start-task conf/task.yaml
     ```
 
-    ```
-    {
-        "result": true,
-        "msg": "",
-        "sources": [
-            {
-                "result": true,
-                "msg": "",
-                "source": "mysql-replica-01",
-                "worker": "worker1"
-            },
-            {
-                "result": true,
-                "msg": "",
-                "source": "mysql-replica-02",
-                "worker": "worker2"
-            }
-        ]
-    }
-    ```
+        {
+            "result": true,
+            "msg": "",
+            "sources": [
+                {
+                    "result": true,
+                    "msg": "",
+                    "source": "mysql-replica-01",
+                    "worker": "worker1"
+                },
+                {
+                    "result": true,
+                    "msg": "",
+                    "source": "mysql-replica-02",
+                    "worker": "worker2"
+                }
+            ]
+        }
 
 これで、シャード テーブルを MySQL1 インスタンスと MySQL2 インスタンスから TiDB に移行するタスクが正常に作成されました。
 
 ## データの検証 {#verify-data}
 
-アップストリームの MySQL シャード テーブルのデータを変更できます。次に、 [同期差分インスペクター](/sync-diff-inspector/shard-diff.md)を使用して、上流データと下流データが一致しているかどうかを確認します。データが一貫しているということは、移行タスクが適切に機能していることを意味し、クラスターが適切に機能していることも示します。
+アップストリームの MySQL シャード テーブルのデータを変更できます。次に、 [同期差分インスペクター](/sync-diff-inspector/shard-diff.md)を使用して、上流データと下流データが一貫しているかどうかを確認します。データが一貫しているということは、移行タスクが適切に機能していることを意味し、クラスターが適切に機能していることも示します。

@@ -7,6 +7,10 @@ summary: The usage of CREATE PLACEMENT POLICY in TiDB.
 
 `CREATE PLACEMENT POLICY` 、後でテーブル、パーティション、またはデータベース スキーマに割り当てることができる名前付き配置ポリシーを作成するために使用されます。
 
+> **注記：**
+>
+> この機能は[TiDB サーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless)クラスターでは使用できません。
+
 ## あらすじ {#synopsis}
 
 ```ebnf+diagram
@@ -44,13 +48,11 @@ AdvancedPlacementOption ::=
 
 ## 例 {#examples}
 
-> **ノート：**
+> **注記：**
 >
-> クラスター内で使用可能なリージョンを確認するには、 [`SHOW PLACEMENT LABELS`](/sql-statements/sql-statement-show-placement-labels.md)を参照してください。
+> クラスター内でどのリージョンが使用できるかを確認するには、 [`SHOW PLACEMENT LABELS`](/sql-statements/sql-statement-show-placement-labels.md)を参照してください。
 >
 > 利用可能なリージョンが表示されない場合は、TiKV インストールにラベルが正しく設定されていない可能性があります。
-
-{{< copyable "" >}}
 
 ```sql
 CREATE PLACEMENT POLICY p1 PRIMARY_REGION="us-east-1" REGIONS="us-east-1,us-west-1" FOLLOWERS=4;
@@ -58,18 +60,16 @@ CREATE TABLE t1 (a INT) PLACEMENT POLICY=p1;
 SHOW CREATE PLACEMENT POLICY p1;
 ```
 
-```
-Query OK, 0 rows affected (0.08 sec)
+    Query OK, 0 rows affected (0.08 sec)
 
-Query OK, 0 rows affected (0.10 sec)
+    Query OK, 0 rows affected (0.10 sec)
 
-+--------+---------------------------------------------------------------------------------------------------+
-| Policy | Create Policy                                                                                     |
-+--------+---------------------------------------------------------------------------------------------------+
-| p1     | CREATE PLACEMENT POLICY `p1` PRIMARY_REGION="us-east-1" REGIONS="us-east-1,us-west-1" FOLLOWERS=4 |
-+--------+---------------------------------------------------------------------------------------------------+
-1 row in set (0.00 sec)
-```
+    +--------+---------------------------------------------------------------------------------------------------+
+    | Policy | Create Policy                                                                                     |
+    +--------+---------------------------------------------------------------------------------------------------+
+    | p1     | CREATE PLACEMENT POLICY `p1` PRIMARY_REGION="us-east-1" REGIONS="us-east-1,us-west-1" FOLLOWERS=4 |
+    +--------+---------------------------------------------------------------------------------------------------+
+    1 row in set (0.00 sec)
 
 ## MySQLの互換性 {#mysql-compatibility}
 

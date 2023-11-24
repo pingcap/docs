@@ -17,13 +17,13 @@ data-source-dir = "/data/my_database"
 
 TiDB Lightningの実行中は、 `data-source-dir`のパターンに一致するすべてのファイルを検索します。
 
-| ファイル     | タイプ                                                                                         | パターン                                                     |
-| -------- | ------------------------------------------------------------------------------------------- | -------------------------------------------------------- |
-| スキーマファイル | `CREATE TABLE` DDL ステートメントが含まれます                                                            | `${db_name}.${table_name}-schema.sql`                    |
-| スキーマファイル | `CREATE DATABASE` DDL ステートメントが含まれます                                                         | `${db_name}-schema-create.sql`                           |
-| データファイル  | データ ファイルにテーブル全体のデータが含まれている場合、ファイルは`${db_name}.${table_name}`という名前のテーブルにインポートされます。           | `${db_name}.${table_name}.${csv|sql|parquet}`            |
-| データファイル  | テーブルのデータが複数のデータ ファイルに分割されている場合、各データ ファイルのファイル名の末尾に番号を付ける必要があります。                            | `${db_name}.${table_name}.001.${csv|sql|parquet}`        |
-| 圧縮ファイル   | ファイルに`gzip` 、 `snappy` 、 `zstd`などの圧縮接尾辞が含まれている場合、 TiDB Lightning はファイルをインポートする前にファイルを解凍します。 | `${db_name}.${table_name}.${csv|sql|parquet}.{compress}` |
+| ファイル     | タイプ                                                                                                                                                                                                                  | パターン                                                     |
+| -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------- |
+| スキーマファイル | `CREATE TABLE` DDL ステートメントが含まれます                                                                                                                                                                                     | `${db_name}.${table_name}-schema.sql`                    |
+| スキーマファイル | `CREATE DATABASE` DDL ステートメントが含まれます                                                                                                                                                                                  | `${db_name}-schema-create.sql`                           |
+| データファイル  | データ ファイルにテーブル全体のデータが含まれている場合、ファイルは`${db_name}.${table_name}`という名前のテーブルにインポートされます。                                                                                                                                    | `${db_name}.${table_name}.${csv|sql|parquet}`            |
+| データファイル  | テーブルのデータが複数のデータ ファイルに分割されている場合、各データ ファイルのファイル名の末尾に番号を付ける必要があります。                                                                                                                                                     | `${db_name}.${table_name}.001.${csv|sql|parquet}`        |
+| 圧縮ファイル   | ファイルに`gzip` 、 `snappy` 、または`zstd`などの圧縮接尾辞が含まれている場合、 TiDB Lightning はファイルをインポートする前にファイルを解凍します。 Snappy 圧縮ファイルは[公式の Snappy フォーマット](https://github.com/google/snappy)にある必要があることに注意してください。 Snappy 圧縮の他のバリアントはサポートされていません。 | `${db_name}.${table_name}.${csv|sql|parquet}.{compress}` |
 
 TiDB Lightning は、データを可能な限り並行して処理します。ファイルは順番に読み取る必要があるため、データ処理の同時実行性はファイル レベル ( `region-concurrency`で制御) になります。したがって、インポートされるファイルが大きい場合、インポートのパフォーマンスが低下します。最高のパフォーマンスを実現するには、インポートされるファイルのサイズを 256 MiB 以下に制限することをお勧めします。
 
@@ -71,7 +71,7 @@ trim-last-separator = false
 
 *一重引用*符で囲まれた文字列 ( `'…'` ) を使用すると、バックスラッシュのエスケープを抑制できます。たとえば、 `terminator = '\n'` 、LF `\n`ではなく、バックスラッシュ ( `\` ) とその後に文字`n`が続いた 2 文字の文字列をターミネータとして使用することを意味します。
 
-詳細については、 [TOML v1.0.0 仕様](https://toml.io/en/v1.0.0#string)参照してください。
+詳細については、 [TOML v1.0.0 仕様](https://toml.io/en/v1.0.0#string)を参照してください。
 
 #### <code>separator</code> {#code-separator-code}
 
@@ -219,13 +219,11 @@ backslash-escape = true
 
 コンテンツの例:
 
-```
-ID,Region,Count
-1,"East",32
-2,"South",\N
-3,"West",10
-4,"North",39
-```
+    ID,Region,Count
+    1,"East",32
+    2,"South",\N
+    3,"West",10
+    4,"North",39
 
 #### TSV {#tsv}
 
@@ -241,13 +239,11 @@ backslash-escape = false
 
 コンテンツの例:
 
-```
-ID    Region    Count
-1     East      32
-2     South     NULL
-3     West      10
-4     North     39
-```
+    ID    Region    Count
+    1     East      32
+    2     South     NULL
+    3     West      10
+    4     North     39
 
 #### TPC-H DBGEN {#tpc-h-dbgen}
 
@@ -263,12 +259,10 @@ backslash-escape = false
 
 コンテンツの例:
 
-```
-1|East|32|
-2|South|0|
-3|West|10|
-4|North|39|
-```
+    1|East|32|
+    2|South|0|
+    3|West|10|
+    4|North|39|
 
 ## SQL {#sql}
 
@@ -278,14 +272,12 @@ TiDB Lightning がSQL ファイルを処理する場合、 TiDB Lightning は単
 
 TiDB Lightning は現在、Amazon Auroraまたは Apache Hive によって生成された Parquet ファイルのみをサポートしています。 S3 のファイル構造を識別するには、次の構成を使用してすべてのデータ ファイルを照合します。
 
-```
-[[mydumper.files]]
-# The expression needed for parsing Amazon Aurora parquet files
-pattern = '(?i)^(?:[^/]*/)*([a-z0-9_]+)\.([a-z0-9_]+)/(?:[^/]*/)*(?:[a-z0-9\-_.]+\.(parquet))$'
-schema = '$1'
-table = '$2'
-type = '$3'
-```
+    [[mydumper.files]]
+    # The expression needed for parsing Amazon Aurora parquet files
+    pattern = '(?i)^(?:[^/]*/)*([a-z0-9_]+)\.([a-z0-9_]+)/(?:[^/]*/)*(?:[a-z0-9\-_.]+\.(parquet))$'
+    schema = '$1'
+    table = '$2'
+    type = '$3'
 
 この設定は、 Auroraスナップショットによってエクスポートされた寄木細工のファイルを照合する方法のみを示していることに注意してください。スキーマ ファイルを個別にエクスポートして処理する必要があります。
 
@@ -295,12 +287,13 @@ type = '$3'
 
 TiDB Lightning は現在、 Dumplingによってエクスポートされた圧縮ファイル、または命名規則に従った圧縮ファイルをサポートしています。現在、 TiDB Lightning は次の圧縮アルゴリズムをサポートしています: `gzip` 、 `snappy` 、および`zstd` 。ファイル名が命名規則に従っている場合、 TiDB Lightning は圧縮アルゴリズムを自動的に識別し、ストリーミング解凍後に追加の構成を行わずにファイルをインポートします。
 
-> **ノート：**
+> **注記：**
 >
 > -   TiDB Lightning は単一の大きな圧縮ファイルを同時に解凍できないため、圧縮ファイルのサイズはインポート速度に影響します。解凍後のソース ファイルのサイズは 256 MiB 以下であることをお勧めします。
 > -   TiDB Lightning は、個別に圧縮されたデータ ファイルのみをインポートし、複数のデータ ファイルが含まれる単一の圧縮ファイルのインポートをサポートしません。
 > -   TiDB Lightning は、 `parquet`などの別の圧縮ツールで圧縮されたファイルをサポートしていません`db.table.parquet.snappy` 。 `parquet`ファイルを圧縮する場合は、 `parquet`ファイル ライターの圧縮形式を設定できます。
-> -   TiDB Lightning v6.4.0 以降のバージョンは、 `.bak`ファイルと圧縮データ ファイル`gzip` 、 `snappy` 、および`zstd`のみをサポートします。他の種類のファイルではエラーが発生します。サポートされていないファイルについては、そのようなエラーを避けるために、事前にファイル名を変更するか、それらのファイルをインポート データ ディレクトリから移動する必要があります。
+> -   TiDB Lightning v6.4.0 以降のバージョンは、圧縮データ ファイル`gzip` 、 `snappy` 、および`zstd`のみをサポートします。他の種類のファイルではエラーが発生します。ソース データ ファイルが保存されているディレクトリにサポートされていない圧縮ファイルが存在する場合、タスクはエラーを報告します。このようなエラーを回避するには、サポートされていないファイルをインポート データ ディレクトリから移動します。
+> -   Snappy 圧縮ファイルは[公式の Snappy フォーマット](https://github.com/google/snappy)に存在する必要があります。 Snappy 圧縮の他のバリアントはサポートされていません。
 
 ## カスタマイズされたファイルと一致する {#match-customized-files}
 
@@ -338,7 +331,7 @@ type = '$3'
 
 ## Amazon S3 からデータをインポートする {#import-data-from-amazon-s3}
 
-次の例は、 TiDB Lightningを使用して Amazon S3 からデータをインポートする方法を示しています。パラメータ設定の詳細については、 [外部storageURI](/br/backup-and-restore-storages.md#uri-format)を参照してください。
+次の例は、 TiDB Lightningを使用して Amazon S3 からデータをインポートする方法を示しています。パラメータ設定の詳細については、 [外部ストレージ サービスの URI 形式](/external-storage-uri.md)を参照してください。
 
 -   ローカルに設定された権限を使用して S3 データにアクセスします。
 

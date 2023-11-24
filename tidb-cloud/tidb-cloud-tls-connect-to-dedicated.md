@@ -28,16 +28,17 @@ TiDB Cloudでは、TLS 接続の確立は、TiDB 専用クラスターに接続�
 
 3.  このダイアログの**「標準接続」**タブで、3 つの手順に従って TLS 接続を設定します。
     -   ステップ 1：トラフィックフィルターを作成する
-    -   ステップ 2：TiDB クラスター CA をダウンロードする
+    -   ステップ 2：CA 証明書をダウンロードする
     -   ステップ 3：SQL クライアントに接続する
 
 4.  ダイアログの**「ステップ 1: トラフィック フィルターを作成する」**で、クラスターへのアクセスを許可する IP アドレスを構成します。詳細については、 [標準接続でのIPアクセスリストの設定](/tidb-cloud/configure-ip-access-list.md#configure-an-ip-access-list-in-standard-connection)を参照してください。
 
-5.  **[ステップ 2: TiDB クラスター CA をダウンロードする] で**、 **[TiDB クラスター CA をダウンロード**] をクリックして、クライアント TLS 構成用にローカルにダウンロードします。 TiDB クラスター CA は、TLS 接続が安全で信頼できることを保証します。
+5.  **[ステップ 2: CA 証明書のダウンロード] で**、 **[CA 証明書のダウンロード**] をクリックして、クライアント TLS 構成用にローカルにダウンロードします。 CA 証明書により、TLS 接続の安全性と信頼性が保証されます。
 
-    > **ノート：**
+    > **注記：**
     >
-    > TiDB 専用クラスター CA をダウンロードした後、それをオペレーティング システムのデフォルトのstorageパスに保存することも、別のstorageパスを指定することもできます。後続の手順では、コード例の CA パスを独自のクラスター CA パスに置き換える必要があります。
+    > -   ダウンロードした CA 証明書は、オペレーティング システムのデフォルトのstorageパスに保存することも、別のstorageパスを指定することもできます。後続の手順では、コード例の CA 証明書パスを独自の CA 証明書パスに置き換える必要があります。
+    > -   TiDB D dedicated は、クライアントに TLS 接続の使用を強制しません。また、 [`require_secure_transport`](/system-variables.md#require_secure_transport-new-in-v610)変数のユーザー定義構成は現在、TiDB Dended ではサポートされていません。
 
 6.  ダイアログの**「ステップ 3: SQL クライアントに接続する」**で、希望する接続方法のタブをクリックし、タブ上の接続文字列とサンプル コードを参照してクラスターに接続します。
 
@@ -89,30 +90,28 @@ jdbc:mysql://tidb.srgnqxji5bc.clusters.staging.tidb-cloud.com:4000/test?user=roo
 
 **「使用例を表示」を**クリックすると、詳細なコード例が表示されます。
 
-```
-import com.mysql.jdbc.Driver;
-import java.sql.*;
+    import com.mysql.jdbc.Driver;
+    import java.sql.*;
 
-class Main {
-  public static void main(String args[]) throws SQLException, ClassNotFoundException {
-    Class.forName("com.mysql.cj.jdbc.Driver");
-    try {
-      Connection conn = DriverManager.getConnection("jdbc:mysql://tidb.srgnqxji5bc.clusters.staging.tidb-cloud.com:4000/test?user=root&password=<your_password>&sslMode=VERIFY_IDENTITY&tlsVersions=TLSv1.2&trustCertificateKeyStoreUrl=file:<your_custom_truststore_path>&trustCertificateKeyStorePassword=<your_truststore_password>");
-      Statement stmt = conn.createStatement();
-      try {
-        ResultSet rs = stmt.executeQuery("SELECT DATABASE();");
-        if (rs.next()) {
-          System.out.println("using db:" + rs.getString(1));
+    class Main {
+      public static void main(String args[]) throws SQLException, ClassNotFoundException {
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        try {
+          Connection conn = DriverManager.getConnection("jdbc:mysql://tidb.srgnqxji5bc.clusters.staging.tidb-cloud.com:4000/test?user=root&password=<your_password>&sslMode=VERIFY_IDENTITY&tlsVersions=TLSv1.2&trustCertificateKeyStoreUrl=file:<your_custom_truststore_path>&trustCertificateKeyStorePassword=<your_truststore_password>");
+          Statement stmt = conn.createStatement();
+          try {
+            ResultSet rs = stmt.executeQuery("SELECT DATABASE();");
+            if (rs.next()) {
+              System.out.println("using db:" + rs.getString(1));
+            }
+          } catch (Exception e) {
+            System.out.println("exec error:" + e);
+          }
+        } catch (Exception e) {
+          System.out.println("connect error:" + e);
         }
-      } catch (Exception e) {
-        System.out.println("exec error:" + e);
       }
-    } catch (Exception e) {
-      System.out.println("connect error:" + e);
     }
-  }
-}
-```
 
 パラメータの説明：
 
@@ -127,23 +126,19 @@ class Main {
 
 ここでは例として[mysqlクライアント](https://pypi.org/project/mysqlclient/)の TLS 接続構成が使用されています。
 
-```
-host="tidb.srgnqxji5bc.clusters.staging.tidb-cloud.com", user="root", password="<your_password>", port=4000, database="test", ssl_mode="VERIFY_IDENTITY", ssl={"ca": "ca.pem"}
-```
+    host="tidb.srgnqxji5bc.clusters.staging.tidb-cloud.com", user="root", password="<your_password>", port=4000, database="test", ssl_mode="VERIFY_IDENTITY", ssl={"ca": "ca.pem"}
 
 **「使用例を表示」を**クリックすると、詳細なコード例が表示されます。
 
-```
-import MySQLdb
+    import MySQLdb
 
-connection = MySQLdb.connect(host="tidb.srgnqxji5bc.clusters.staging.tidb-cloud.com", port=4000, user="root", password="<your_password>", database="test", ssl_mode="VERIFY_IDENTITY", ssl={"ca": "ca.pem"})
+    connection = MySQLdb.connect(host="tidb.srgnqxji5bc.clusters.staging.tidb-cloud.com", port=4000, user="root", password="<your_password>", database="test", ssl_mode="VERIFY_IDENTITY", ssl={"ca": "ca.pem"})
 
-with connection:
-    with connection.cursor() as cursor:
-        cursor.execute("SELECT DATABASE();")
-        m = cursor.fetchone()
-        print(m[0])
-```
+    with connection:
+        with connection.cursor() as cursor:
+            cursor.execute("SELECT DATABASE();")
+            m = cursor.fetchone()
+            print(m[0])
 
 パラメータの説明：
 
@@ -156,66 +151,62 @@ with connection:
 
 ここでは例として[Go-MySQL-ドライバー](https://github.com/go-sql-driver/mysql)の TLS 接続構成が使用されています。
 
-```
-rootCertPool := x509.NewCertPool()
-pem, err := ioutil.ReadFile("ca.pem")
-if err != nil {
-    log.Fatal(err)
-}
-if ok := rootCertPool.AppendCertsFromPEM(pem); !ok {
-    log.Fatal("Failed to append PEM.")
-}
-mysql.RegisterTLSConfig("tidb", &tls.Config{
-    RootCAs:    rootCertPool,
-    MinVersion: tls.VersionTLS12,
-    ServerName: "tidb.srgnqxji5bc.clusters.staging.tidb-cloud.com",
-})
+    rootCertPool := x509.NewCertPool()
+    pem, err := ioutil.ReadFile("ca.pem")
+    if err != nil {
+        log.Fatal(err)
+    }
+    if ok := rootCertPool.AppendCertsFromPEM(pem); !ok {
+        log.Fatal("Failed to append PEM.")
+    }
+    mysql.RegisterTLSConfig("tidb", &tls.Config{
+        RootCAs:    rootCertPool,
+        MinVersion: tls.VersionTLS12,
+        ServerName: "tidb.srgnqxji5bc.clusters.staging.tidb-cloud.com",
+    })
 
-db, err := sql.Open("mysql", "root:<your_password>@tcp(tidb.srgnqxji5bc.clusters.staging.tidb-cloud.com:4000)/test?tls=tidb")
-```
+    db, err := sql.Open("mysql", "root:<your_password>@tcp(tidb.srgnqxji5bc.clusters.staging.tidb-cloud.com:4000)/test?tls=tidb")
 
 **「使用例を表示」を**クリックすると、詳細なコード例が表示されます。
 
-```
-package main
-import (
-  "crypto/tls"
-  "crypto/x509"
-  "database/sql"
-  "fmt"
-  "io/ioutil"
-  "log"
+    package main
+    import (
+      "crypto/tls"
+      "crypto/x509"
+      "database/sql"
+      "fmt"
+      "io/ioutil"
+      "log"
 
-  "github.com/go-sql-driver/mysql"
-)
-func main() {
-  rootCertPool := x509.NewCertPool()
-  pem, err := ioutil.ReadFile("ca.pem")
-  if err != nil {
-    log.Fatal(err)
-  }
-  if ok := rootCertPool.AppendCertsFromPEM(pem); !ok {
-    log.Fatal("Failed to append PEM.")
-  }
-  mysql.RegisterTLSConfig("tidb", &tls.Config{
-    RootCAs:    rootCertPool,
-    MinVersion: tls.VersionTLS12,
-    ServerName: "tidb.srgnqxji5bc.clusters.staging.tidb-cloud.com",
-  })
-  db, err := sql.Open("mysql", "root:<your_password>@tcp(tidb.srgnqxji5bc.clusters.staging.tidb-cloud.com:4000)/test?tls=tidb")
-  if err != nil {
-    log.Fatal("failed to connect database", err)
-  }
-  defer db.Close()
+      "github.com/go-sql-driver/mysql"
+    )
+    func main() {
+      rootCertPool := x509.NewCertPool()
+      pem, err := ioutil.ReadFile("ca.pem")
+      if err != nil {
+        log.Fatal(err)
+      }
+      if ok := rootCertPool.AppendCertsFromPEM(pem); !ok {
+        log.Fatal("Failed to append PEM.")
+      }
+      mysql.RegisterTLSConfig("tidb", &tls.Config{
+        RootCAs:    rootCertPool,
+        MinVersion: tls.VersionTLS12,
+        ServerName: "tidb.srgnqxji5bc.clusters.staging.tidb-cloud.com",
+      })
+      db, err := sql.Open("mysql", "root:<your_password>@tcp(tidb.srgnqxji5bc.clusters.staging.tidb-cloud.com:4000)/test?tls=tidb")
+      if err != nil {
+        log.Fatal("failed to connect database", err)
+      }
+      defer db.Close()
 
-  var dbName string
-  err = db.QueryRow("SELECT DATABASE();").Scan(&dbName)
-  if err != nil {
-    log.Fatal("failed to execute query", err)
-  }
-  fmt.Println(dbName)
-}
-```
+      var dbName string
+      err = db.QueryRow("SELECT DATABASE();").Scan(&dbName)
+      if err != nil {
+        log.Fatal("failed to execute query", err)
+      }
+      fmt.Println(dbName)
+    }
 
 パラメータの説明：
 
@@ -230,51 +221,47 @@ func main() {
 
 ここでは例として[MySQL2](https://www.npmjs.com/package/mysql2)の TLS 接続構成が使用されています。
 
-```
-var connection = mysql.createConnection({
-  host: 'tidb.srgnqxji5bc.clusters.staging.tidb-cloud.com',
-  port: 4000,
-  user: 'root',
-  password: '<your_password>',
-  database: 'test',
-  ssl: {
-    ca: fs.readFileSync('ca.pem'),
-    minVersion: 'TLSv1.2',
-    rejectUnauthorized: true
-  }
-});
-```
+    var connection = mysql.createConnection({
+      host: 'tidb.srgnqxji5bc.clusters.staging.tidb-cloud.com',
+      port: 4000,
+      user: 'root',
+      password: '<your_password>',
+      database: 'test',
+      ssl: {
+        ca: fs.readFileSync('ca.pem'),
+        minVersion: 'TLSv1.2',
+        rejectUnauthorized: true
+      }
+    });
 
 **「使用例を表示」を**クリックすると、詳細なコード例が表示されます。
 
-```
-var mysql = require('mysql2');
-var fs = require('fs');
-var connection = mysql.createConnection({
-  host: 'tidb.srgnqxji5bc.clusters.staging.tidb-cloud.com',
-  port: 4000,
-  user: 'root',
-  password: '<your_password>',
-  database: 'test',
-  ssl: {
-    ca: fs.readFileSync('ca.pem'),
-    minVersion: 'TLSv1.2',
-    rejectUnauthorized: true
-  }
-});
-connection.connect(function(err) {
-  if (err) {
-    throw err
-  }
-  connection.query('SELECT DATABASE();', function(err, rows) {
-    if (err) {
-      throw err
-    }
-    console.log(rows[0]['DATABASE()']);
-    connection.end()
-  });
-});
-```
+    var mysql = require('mysql2');
+    var fs = require('fs');
+    var connection = mysql.createConnection({
+      host: 'tidb.srgnqxji5bc.clusters.staging.tidb-cloud.com',
+      port: 4000,
+      user: 'root',
+      password: '<your_password>',
+      database: 'test',
+      ssl: {
+        ca: fs.readFileSync('ca.pem'),
+        minVersion: 'TLSv1.2',
+        rejectUnauthorized: true
+      }
+    });
+    connection.connect(function(err) {
+      if (err) {
+        throw err
+      }
+      connection.query('SELECT DATABASE();', function(err, rows) {
+        if (err) {
+          throw err
+        }
+        console.log(rows[0]['DATABASE()']);
+        connection.end()
+      });
+    });
 
 パラメータの説明：
 

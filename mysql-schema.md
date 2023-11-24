@@ -46,6 +46,10 @@ summary: Learn about the TiDB system tables.
 
 ## GC ワーカー システム テーブル {#gc-worker-system-tables}
 
+> **注記：**
+>
+> GC ワーカー システム テーブルは、TiDB セルフホスト型にのみ適用され、 [TiDB Cloud](https://docs.pingcap.com/tidbcloud/)では使用できません。
+
 -   `gc_delete_range` : 削除するKV範囲
 -   `gc_delete_range_done` : 削除された KV 範囲
 
@@ -55,19 +59,27 @@ summary: Learn about the TiDB system tables.
 
 ## TTL関連のシステムテーブル {#ttl-related-system-tables}
 
+> **注記：**
+>
+> TTL 関連のシステム テーブルは[TiDB サーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless)クラスターでは使用できません。
+
 -   `mysql.tidb_ttl_table_status`すべての TTL テーブルに対して以前に実行された TTL ジョブと進行中の TTL ジョブ
 -   `mysql.tidb_ttl_task`現在進行中の TTL サブタスク
 -   `mysql.tidb_ttl_job_history`過去 90 日間の TTL タスクの実行履歴
 
+## メタデータ ロックに関連するシステム テーブル {#system-tables-related-to-metadata-locks}
+
+-   `tidb_mdl_view` ：メタデータロックのビュー。これを使用して、現在ブロックされている DDL ステートメントに関する情報を表示できます。
+-   `tidb_mdl_info` ：ノード間でメタデータ ロックを同期するために TiDB によって内部的に使用されます。
+
 ## その他のシステムテーブル {#miscellaneous-system-tables}
 
+> **注記：**
+>
+> `tidb` 、 `expr_pushdown_blacklist` 、 `opt_rule_blacklist` 、および`table_cache_meta`システム テーブルは、TiDB Self-Hosted にのみ適用され、 [TiDB Cloud](https://docs.pingcap.com/tidbcloud/)では使用できません。
+
 -   `GLOBAL_VARIABLES` : グローバル システム変数テーブル
-
-<CustomContent platform="tidb">
-
 -   `tidb` : TiDB 実行時のバージョン情報を記録します`bootstrap`
 -   `expr_pushdown_blacklist` : 式プッシュダウンのブロックリスト
 -   `opt_rule_blacklist` : 論理最適化ルールのブロックリスト
 -   `table_cache_meta` : キャッシュされたテーブルのメタデータ
-
-</CustomContent>

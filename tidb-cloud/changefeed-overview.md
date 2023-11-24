@@ -9,7 +9,8 @@ TiDB Cloudチェンジフィードは、 TiDB Cloudから他のデータ サー�
 
 > **注記：**
 >
-> -   現在、 TiDB Cloudクラスターごとに最大 5 つの変更フィードのみが許可されます。
+> -   現在、 TiDB Cloudクラスターあたり最大 100 の変更フィードのみが許可されます。
+> -   現在、 TiDB Cloudでは、変更フィードごとに最大 100 個のテーブル フィルター ルールのみが許可されます。
 > -   [TiDB サーバーレスクラスター](/tidb-cloud/select-cluster-tier.md#tidb-serverless)の場合、チェンジフィード機能は使用できません。
 
 チェンジフィード機能にアクセスするには、TiDB クラスターのクラスター概要ページに移動し、左側のナビゲーション ペインで**[チェンジフィード]**をクリックします。チェンジフィードページが表示されます。
@@ -20,7 +21,7 @@ TiDB Cloudチェンジフィードは、 TiDB Cloudから他のデータ サー�
 
 チェンジフィードを作成するには、次のチュートリアルを参照してください。
 
--   [Apache Kafka にシンクする](/tidb-cloud/changefeed-sink-to-apache-kafka.md) (ベータ版)
+-   [Apache Kafka にシンクする](/tidb-cloud/changefeed-sink-to-apache-kafka.md)
 -   [MySQL にシンクする](/tidb-cloud/changefeed-sink-to-mysql.md)
 -   [TiDB Cloudへのシンク](/tidb-cloud/changefeed-sink-to-tidb-cloud.md)
 -   [クラウドstorageにシンクする](/tidb-cloud/changefeed-sink-to-cloud-storage.md)
@@ -66,8 +67,10 @@ TiDB Cloudチェンジフィードは、 TiDB Cloudから他のデータ サー�
 
     TiDB Cloud は、デフォルトで変更フィード構成を設定します。次の構成を変更できます。
 
-    -   MySQL シンク: **MySQL 接続**と**テーブル フィルター**。
-    -   Kafka シンク: すべての構成。
+    -   Apache Kafka シンク: すべての構成。
+    -   MySQL シンク: **MySQL 接続**、**テーブル フィルター**、および**イベント フィルター**。
+    -   TiDB Cloudシンク: **TiDB Cloud接続**、**テーブル フィルター**、および**イベント フィルター**。
+    -   クラウドstorageシンク:**ストレージ エンドポイント**、**テーブル フィルター**、および**イベント フィルター**。
 
 4.  構成を編集した後、 **[...]** &gt; **[再開]**をクリックして、対応する変更フィードを再開します。
 

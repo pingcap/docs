@@ -72,10 +72,10 @@ summary: Learn how to quickly get started with the TiDB platform and see if TiDB
     -   TiDB バージョンと各コンポーネントのインスタンス数を指定するには、次のようなコマンドを実行します。
 
         ```shell
-        tiup playground v7.1.1 --db 2 --pd 3 --kv 3
+        tiup playground v7.1.2 --db 2 --pd 3 --kv 3
         ```
 
-        このコマンドは、v7.1.1 などのバージョン クラスターをローカル マシンにダウンロードして起動します。最新バージョンを表示するには、 `tiup list tidb`を実行します。
+        このコマンドは、v7.1.2 などのバージョン クラスターをローカル マシンにダウンロードして起動します。最新バージョンを表示するには、 `tiup list tidb`を実行します。
 
         このコマンドは、クラスターのアクセス方法を返します。
 
@@ -179,10 +179,10 @@ summary: Learn how to quickly get started with the TiDB platform and see if TiDB
     -   TiDB バージョンと各コンポーネントのインスタンス数を指定するには、次のようなコマンドを実行します。
 
         ```shell
-        tiup playground v7.1.1 --db 2 --pd 3 --kv 3
+        tiup playground v7.1.2 --db 2 --pd 3 --kv 3
         ```
 
-        このコマンドは、v7.1.1 などのバージョン クラスターをローカル マシンにダウンロードして起動します。最新バージョンを表示するには、 `tiup list tidb`を実行します。
+        このコマンドは、v7.1.2 などのバージョン クラスターをローカル マシンにダウンロードして起動します。最新バージョンを表示するには、 `tiup list tidb`を実行します。
 
         このコマンドは、クラスターのアクセス方法を返します。
 
@@ -393,7 +393,7 @@ TiDB クラスターをデプロイする前に、ターゲット マシンが�
     ```
 
     -   `<cluster-name>` : クラスター名を設定します
-    -   `<version>` : TiDB クラスターのバージョンを設定します ( `v7.1.1`など)。 `tiup list tidb`コマンドを実行すると、サポートされているすべての TiDB バージョンを確認できます。
+    -   `<version>` : TiDB クラスターのバージョンを設定します ( `v7.1.2`など)。 `tiup list tidb`コマンドを実行すると、サポートされているすべての TiDB バージョンを確認できます。
     -   `-p` : ターゲットマシンへの接続に使用するパスワードを指定します。
 
         > **注記：**

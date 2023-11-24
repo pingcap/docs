@@ -5,15 +5,11 @@ summary: Learn the usage of CREATE RESOURCE GROUP in TiDB.
 
 # リソースグループの作成 {#create-resource-group}
 
-<CustomContent platform="tidb-cloud">
-
-> **ノート：**
->
-> この機能は[TiDB サーバーレスクラスター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless)では使用できません。
-
-</CustomContent>
-
 `CREATE RESOURCE GROUP`ステートメントを使用してリソース グループを作成できます。
+
+> **注記：**
+>
+> この機能は[TiDB サーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless)クラスターでは使用できません。
 
 ## あらすじ {#synopsis}
 
@@ -44,7 +40,7 @@ ResourceGroupPriorityOption ::=
 
 リソース グループ名パラメーター ( `ResourceGroupName` ) はグローバルに一意である必要があります。
 
-TiDB は次の`DirectResourceGroupOption`サポートします。ここで[リクエストユニット(RU)](/tidb-resource-control.md#what-is-request-unit-ru) 、CPU、IO、およびその他のシステム リソースに対する TiDB の統合抽象化ユニットです。
+TiDB は次の`DirectResourceGroupOption`サポートします。ここで[リクエストユニット (RU)](/tidb-resource-control.md#what-is-request-unit-ru) 、CPU、IO、およびその他のシステム リソースに対する TiDB 内の統合抽象化ユニットです。
 
 | オプション        | 説明                                                                                     | 例                                                                  |
 | ------------ | -------------------------------------------------------------------------------------- | ------------------------------------------------------------------ |
@@ -52,13 +48,13 @@ TiDB は次の`DirectResourceGroupOption`サポートします。ここで[リ�
 | `PRIORITY`   | TiKV 上で処理されるタスクの絶対的な優先度                                                                | `PRIORITY = HIGH`優先度が高いことを示します。指定しない場合、デフォルト値は`MEDIUM`です。          |
 | `BURSTABLE`  | `BURSTABLE`属性が設定されている場合、TiDB は、クォータを超過したときに、対応するリソース グループが利用可能なシステム リソースを使用することを許可します。 |                                                                    |
 
-> **ノート：**
+> **注記：**
 >
 > -   `CREATE RESOURCE GROUP`ステートメントは、グローバル変数[`tidb_enable_resource_control`](/system-variables.md#tidb_enable_resource_control-new-in-v660) `ON`に設定されている場合にのみ実行できます。 TiDB は、クラスターの初期化中に`default`リソース グループを自動的に作成します。このリソース グループのデフォルト値`RU_PER_SEC`は`UNLIMITED` ( `INT`タイプの最大値、つまり`2147483647`に相当) であり、 `BURSTABLE`モードです。どのリソース グループにもバインドされていないすべてのリクエストは、この`default`リソース グループに自動的にバインドされます。別のリソース グループの新しい構成を作成する場合は、必要に応じて`default`リソース グループの構成を変更することをお勧めします。
 
 ## 例 {#examples}
 
-2 つのリソース グループ`rg1`と`rg2`を作成します。
+2 つのリソース グループ`rg1`および`rg2`を作成します。
 
 ```sql
 DROP RESOURCE GROUP IF EXISTS rg1;
@@ -111,4 +107,4 @@ MySQL は[リソースグループの作成](https://dev.mysql.com/doc/refman/8.
 -   [リソースグループを削除](/sql-statements/sql-statement-drop-resource-group.md)
 -   [リソースグループの変更](/sql-statements/sql-statement-alter-resource-group.md)
 -   [ユーザーリソースグループの変更](/sql-statements/sql-statement-alter-user.md#modify-the-resource-group-bound-to-the-user)
--   [リクエストユニット(RU)](/tidb-resource-control.md#what-is-request-unit-ru)
+-   [リクエストユニット (RU)](/tidb-resource-control.md#what-is-request-unit-ru)

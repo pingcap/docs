@@ -43,13 +43,14 @@ TiDB Cloud は、次の 2 種類の SSO 認証をサポートしています。
 
 TiDB Cloud は、組織 SSO 用に次の認証方法を提供します。
 
+-   ユーザー名とパスワード
 -   グーグル
 -   GitHub
 -   マイクロソフト
 -   OIDC
 -   SAML
 
-クラウド組織 SSO を有効にすると、最初の 3 つの方法がデフォルトで有効になります。
+クラウド組織 SSO を有効にすると、最初の 4 つの方法がデフォルトで有効になります。組織に SSO の使用を強制する場合は、ユーザー名とパスワードの認証方法を無効にすることができます。
 
 有効な認証方法はすべてカスタムTiDB Cloudログイン ページに表示されるため、どの認証方法を有効または無効にするかを事前に決定する必要があります。
 
@@ -91,15 +92,15 @@ TiDB Cloud は、組織 SSO 用に次の認証方法を提供します。
 
     > **注記：**
     >
-    > ダイアログにクラウド組織 SSO に再招待および再参加するユーザーのリストが含まれている場合、クラウド組織 SSO を有効にした後、 TiDB Cloudはそれらのユーザーに招待メールを自動的に送信します。招待メールを受信した後、各ユーザーはメール内のリンクをクリックして身元を確認する必要があり、カスタム ログイン ページが表示されます。
+    > ダイアログに、クラウド組織 SSO に再招待して再参加するユーザーのリストが含まれている場合、クラウド組織 SSO を有効にした後、 TiDB Cloud はそれらのユーザーに招待メールを自動的に送信します。招待メールを受信した後、各ユーザーはメール内のリンクをクリックして身元を確認する必要があり、カスタム ログイン ページが表示されます。
 
 ## ステップ 2. 認証方法を構成する {#step-2-configure-authentication-methods}
 
 TiDB Cloudで認証方法を有効にすると、その方法を使用するメンバーがカスタム URL を使用してTiDB Cloudにログインできるようになります。
 
-### Google、GitHub、または Microsoft の認証方法を構成する {#configure-google-github-or-microsoft-authentication-methods}
+### ユーザー名とパスワード、Google、GitHub、または Microsoft の認証方法を構成する {#configure-username-and-password-google-github-or-microsoft-authentication-methods}
 
-Cloud Organization Cloud を有効にした後、次のように Google、GitHub、または Microsoft 認証方法を構成できます。
+Cloud Organization Cloud を有効にすると、ユーザー名とパスワード、Google、GitHub、または Microsoft の認証方法を次のように構成できます。
 
 1.  **[組織の設定]**ページで、必要に応じて Google、GitHub、または Microsoft の認証方法を有効または無効にします。
 
@@ -198,4 +199,56 @@ TiDB Cloudでは、SAML 認証方法はデフォルトで無効になってい�
         >
         > 電子メール ドメインを構成している場合は、 TiDB Cloudによってロックアウトされないように、設定を保存する前に、現在ログインに使用している電子メール ドメインを必ず追加してください。
 
+    -   **SCIM プロビジョニング アカウント**
+
+        デフォルトでは無効になっています。 ID プロバイダーからのTiDB Cloud組織ユーザーおよびグループのプロビジョニング、プロビジョニング解除、および ID 管理を一元化および自動化する場合は、これを有効にできます。詳細な構成手順については、 [SCIM プロビジョニングの構成](#configure-scim-provisioning)を参照してください。
+
 4.  **「保存」**をクリックします。
+
+#### SCIM プロビジョニングの構成 {#configure-scim-provisioning}
+
+[クロスドメイン ID 管理システム (SCIM)](https://www.rfc-editor.org/rfc/rfc7644)は、アイデンティティ ドメインと IT システム間のユーザー ID 情報の交換を自動化するオープン スタンダードです。 SCIM プロビジョニングを構成すると、アイデンティティ プロバイダーのユーザー グループをTiDB Cloudに自動的に同期でき、 TiDB Cloudでこれらのグループの役割を集中管理できます。
+
+> **注記：**
+>
+> SCIM プロビジョニングは[SAML認証方式](#configure-the-saml-authentication-method)でのみ有効にできます。
+
+1.  TiDB Cloudで、 [SAML認証方式](#configure-the-saml-authentication-method)の**SCIM プロビジョニング アカウント**オプションを有効にし、後で使用できるように次の情報を記録します。
+
+    -   SCIM コネクタのベース URL
+    -   ユーザーの一意の識別子フィールド
+    -   認証モード
+
+2.  ID プロバイダーで、 TiDB Cloudの SCIM プロビジョニングを構成します。
+
+    1.  ID プロバイダーで、 TiDB Cloud組織の SCIM プロビジョニングを SAML アプリ統合に追加します。
+
+        たとえば、アイデンティティ プロバイダーが Okta の場合は、 [アプリ統合に SCIM プロビジョニングを追加する](https://help.okta.com/en-us/content/topics/apps/apps_app_integration_wizard_scim.htm)を参照してください。
+
+    2.  SAML アプリ統合を ID プロバイダーの目的のグループに割り当てて、グループのメンバーがアプリ統合にアクセスして使用できるようにします。
+
+        たとえば、アイデンティティ プロバイダーが Okta の場合は、 [アプリ統合をグループに割り当てる](https://help.okta.com/en-us/content/topics/provisioning/lcm/lcm-assign-app-groups.htm)を参照してください。
+
+    3.  ユーザー グループをアイデンティティ プロバイダーからTiDB Cloudにプッシュします。
+
+        たとえば、アイデンティティ プロバイダーが Okta の場合は、 [グループプッシュを管理する](https://help.okta.com/en-us/content/topics/users-groups-profiles/usgp-group-push-main.htm)を参照してください。
+
+3.  TiDB Cloudでは、アイデンティティ プロバイダーからプッシュされたグループを表示します。
+
+    1.  [TiDB Cloudコンソール](https://tidbcloud.com)の左下隅にある をクリックします。<mdsvgicon name="icon-top-organization">をクリックし、 **[組織の設定]**をクリックします。</mdsvgicon>
+    2.  **[組織の設定]**ページで、 **[グループ]**タブをクリックします。 ID プロバイダーから同期されたグループが表示されます。
+    3.  グループ内のユーザーを表示するには、 **「ビュー」**をクリックします。
+
+4.  TiDB Cloudでは、アイデンティティ プロバイダーからプッシュされたグループにロールを付与します。
+
+    > **注記：**
+    >
+    > グループにロールを付与すると、グループ内のすべてのメンバーがそのロールを取得することになります。グループにTiDB Cloud組織に既に所属しているメンバーが含まれている場合、これらのメンバーにもグループの新しい役割が与えられます。
+
+    1.  組織の役割をグループに付与するには、 **[組織別] を**クリックし、 **[組織の役割]**列で役割を構成します。組織の役割の権限については、 [組織の役割](/tidb-cloud/manage-user-access.md#organization-roles)を参照してください。
+    2.  プロジェクトの役割をグループに付与するには、 **[プロジェクト別]**をクリックし、 **[プロジェクトの役割]**列で役割を構成します。プロジェクトの役割の権限については、 [プロジェクトの役割](/tidb-cloud/manage-user-access.md#project-roles)を参照してください。
+
+5.  ID プロバイダーでプッシュされたグループのメンバーを変更すると、これらの変更はTiDB Cloudの対応するグループに動的に同期されます。
+
+    -   ID プロバイダーのグループに新しいメンバーが追加されると、これらのメンバーは対応するグループのロールを取得します。
+    -   アイデンティティ プロバイダーのグループから一部のメンバーが削除されると、これらのメンバーはTiDB Cloudの対応するグループからも削除されます。

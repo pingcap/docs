@@ -164,7 +164,7 @@ TiKV 構成ファイルは、コマンドライン パラメーターよりも�
 
 ### <code>grpc-memory-pool-quota</code> {#code-grpc-memory-pool-quota-code}
 
--   gRPC が使用できるメモリサイズを制限します。
+-   gRPC で使用できるメモリサイズを制限します
 -   デフォルト値: 制限なし
 -   OOM が発生した場合に備えてメモリを制限します。使用量を制限すると、ストールが発生する可能性があることに注意してください
 
@@ -254,7 +254,7 @@ TiKV 構成ファイルは、コマンドライン パラメーターよりも�
 
 ### <code>raft-client-queue-size</code> {#code-raft-client-queue-size-code}
 
--   TiKV のRaftメッセージのキュー サイズを指定します。時間内に送信されなかったメッセージが多すぎてバッファーがいっぱいになったり、メッセージが破棄されたりする場合は、より大きな値を指定してシステムの安定性を向上させることができます。
+-   TiKV のRaftメッセージのキュー サイズを指定します。時間内に送信されなかったメッセージが多すぎてバッファがいっぱいになったり、メッセージが破棄されたりする場合は、より大きな値を指定してシステムの安定性を向上させることができます。
 -   デフォルト値: `8192`
 
 ### <code>simplify-metrics</code> <span class="version-mark">v6.2.0 の新機能</span> {#code-simplify-metrics-code-span-class-version-mark-new-in-v6-2-0-span}
@@ -282,7 +282,7 @@ TiKV 構成ファイルは、コマンドライン パラメーターよりも�
 -   値の範囲: `[min-thread-count, MAX(4, CPU quota * 10)]` 。 `MAX(4, CPU quota * 10)` `4`と`CPU quota * 10`のうち大きい方の値を取得します。
 -   デフォルト値: MAX(4、CPU * 0.8)
 
-> **ノート：**
+> **注記：**
 >
 > スレッド数を増やすとコンテキストの切り替えが多くなり、パフォーマンスが低下する可能性があります。この構成項目の値を変更することはお勧めできません。
 
@@ -494,10 +494,10 @@ storageに関するコンフィグレーション項目。
 
 -   TiKV が RawKV ストアとして機能するときに TiKV によって使用されるstorage形式とインターフェイスのバージョン。
 -   値のオプション:
-    -   `1` : API V1を使用し、クライアントから渡されたデータをエンコードせず、そのままのデータを保存します。 v6.1.0 より前のバージョンでは、TiKV はデフォルトで API V1 を使用します。
+    -   `1` : API V1を使用し、クライアントから渡されたデータをエンコードせず、そのままのデータを格納します。 v6.1.0 より前のバージョンでは、TiKV はデフォルトで API V1 を使用します。
     -   `2` : API V2 を使用します:
         -   データはマルチバージョン同時実行制御 (MVCC) 形式で保存され、タイムスタンプは tikv-server によって PD (TSO) から取得されます。
-        -   データはさまざまな用途に応じてスコープ設定されており、API V2 は、単一クラスター内での TiDB、トランザクション KV、および RawKV アプリケーションの共存をサポートします。
+        -   データはさまざまな用途に応じてスコープ設定され、API V2 は単一クラスター内での TiDB、トランザクション KV、および RawKV アプリケーションの共存をサポートします。
         -   API V2 を使用する場合は、同時に`storage.enable-ttl = true`を設定する必要があります。 API V2 は TTL 機能をサポートしているため、 `enable-ttl`明示的にオンにする必要があります。そうしないと、 `storage.enable-ttl`のデフォルトが`false`になるため、競合します。
         -   API V2 が有効になっている場合、古いデータを再利用するには、少なくとも 1 つの tidb-server インスタンスをデプロイする必要があります。この tidb-server インスタンスは、読み取りサービスと書き込みサービスを同時に提供できます。高可用性を確保するために、複数の tidb-server インスタンスをデプロイできます。
         -   API V2 にはクライアントのサポートが必要です。詳細については、API V2 のクライアントの対応する命令を参照してください。
@@ -609,7 +609,7 @@ Raftstoreに関連するコンフィグレーション項目。
 
 ### <code>raft-base-tick-interval</code> {#code-raft-base-tick-interval-code}
 
-> **ノート：**
+> **注記：**
 >
 > この構成項目は SQL ステートメントを介してクエリすることはできませんが、構成ファイルで構成することができます。
 
@@ -619,7 +619,7 @@ Raftstoreに関連するコンフィグレーション項目。
 
 ### <code>raft-heartbeat-ticks</code> {#code-raft-heartbeat-ticks-code}
 
-> **ノート：**
+> **注記：**
 >
 > この構成項目は SQL ステートメントを介してクエリすることはできませんが、構成ファイルで構成することができます。
 
@@ -629,7 +629,7 @@ Raftstoreに関連するコンフィグレーション項目。
 
 ### <code>raft-election-timeout-ticks</code> {#code-raft-election-timeout-ticks-code}
 
-> **ノート：**
+> **注記：**
 >
 > この構成項目は SQL ステートメントを介してクエリすることはできませんが、構成ファイルで構成することができます。
 
@@ -639,7 +639,7 @@ Raftstoreに関連するコンフィグレーション項目。
 
 ### <code>raft-min-election-timeout-ticks</code> {#code-raft-min-election-timeout-ticks-code}
 
-> **ノート：**
+> **注記：**
 >
 > この構成項目は SQL ステートメントを介してクエリすることはできませんが、構成ファイルで構成することができます。
 
@@ -649,7 +649,7 @@ Raftstoreに関連するコンフィグレーション項目。
 
 ### <code>raft-max-election-timeout-ticks</code> {#code-raft-max-election-timeout-ticks-code}
 
-> **ノート：**
+> **注記：**
 >
 > この構成項目は SQL ステートメントを介してクエリすることはできませんが、構成ファイルで構成することができます。
 
@@ -659,7 +659,7 @@ Raftstoreに関連するコンフィグレーション項目。
 
 ### <code>raft-max-size-per-msg</code> {#code-raft-max-size-per-msg-code}
 
-> **ノート：**
+> **注記：**
 >
 > この構成項目は SQL ステートメントを介してクエリすることはできませんが、構成ファイルで構成することができます。
 
@@ -671,7 +671,7 @@ Raftstoreに関連するコンフィグレーション項目。
 
 ### <code>raft-max-inflight-msgs</code> {#code-raft-max-inflight-msgs-code}
 
-> **ノート：**
+> **注記：**
 >
 > この構成項目は SQL ステートメントを介してクエリすることはできませんが、構成ファイルで構成することができます。
 
@@ -682,7 +682,7 @@ Raftstoreに関連するコンフィグレーション項目。
 
 ### <code>raft-entry-max-size</code> {#code-raft-entry-max-size-code}
 
--   単一ログの最大サイズのハードリミット
+-   単一ログの最大サイズのハード制限
 -   デフォルト値: `"8MB"`
 -   最小値: `0`
 -   単位: MB|GB
@@ -719,7 +719,7 @@ Raftstoreに関連するコンフィグレーション項目。
 
 ### <code>raft-log-reserve-max-ticks</code> <span class="version-mark">v5.3 の新機能</span> {#code-raft-log-reserve-max-ticks-code-span-class-version-mark-new-in-v5-3-span}
 
--   この設定項目で設定したティック数が経過した後、残っているRaftログの数が`raft-log-gc-threshold`で設定した値に達していない場合でも、TiKV はこれらのログに対してガベージコレクション(GC) を実行します。
+-   この構成項目で設定されたティック数が経過した後、残りのRaftログの数が`raft-log-gc-threshold`で設定された値に達していない場合でも、TiKV はこれらのログに対してガベージコレクション(GC) を実行します。
 -   デフォルト値: `6`
 -   最小値: `0`より大きい
 
@@ -1215,7 +1215,7 @@ RocksDBに関するコンフィグレーション項目
 
 ### <code>rate-limiter-auto-tuned</code> <span class="version-mark">v5.0 の新機能</span> {#code-rate-limiter-auto-tuned-code-span-class-version-mark-new-in-v5-0-span}
 
--   最近のワークロードに基づいて、RocksDB の圧縮レート リミッターの構成を自動的に最適化するかどうかを決定します。この構成を有効にすると、圧縮保留中のバイト数が通常よりわずかに増加します。
+-   最近のワークロードに基づいて RocksDB の圧縮レート リミッターの構成を自動的に最適化するかどうかを決定します。この構成を有効にすると、圧縮保留中のバイト数が通常よりわずかに多くなります。
 -   デフォルト値: `true`
 
 ### <code>enable-pipelined-write</code> {#code-enable-pipelined-write-code}
@@ -1429,7 +1429,7 @@ RocksDBに関するコンフィグレーション項目
 -   `lockcf`のデフォルト値: `"128MB"`
 -   最小値: `0`
 -   単位: KB|MB|GB
--   不必要な圧縮を減らすために、値`max-bytes-for-level-base`を L0 のデータ量とほぼ同じに設定することをお勧めします。たとえば、圧縮方法が &quot;no:no:lz4:lz4:lz4:lz4:lz4&quot; の場合、L0 と L1 には圧縮がなく、L0 の圧縮のトリガー条件は次のとおりであるため、 `max-bytes-for-level-base`の値は`write-buffer-size * 4`になります。 SST ファイルの数が 4 (デフォルト値) に達していることを確認します。 L0 と L1 の両方で圧縮を採用する場合、memtable から圧縮された SST ファイルのサイズを理解するには、RocksDB ログを分析する必要があります。たとえば、ファイル サイズが 32 MB の場合、 `max-bytes-for-level-base` ～ 128 MB の値を設定することをお勧めします ( `32 MB * 4` )。
+-   不必要な圧縮を減らすために、値`max-bytes-for-level-base`を L0 のデータ量とほぼ同じに設定することをお勧めします。たとえば、圧縮方法が「no:no:lz4:lz4:lz4:lz4:lz4」の場合、L0 と L1 には圧縮がなく、L0 の圧縮のトリガー条件は次のとおりであるため、 `max-bytes-for-level-base`の値は`write-buffer-size * 4`になります。 SST ファイルの数が 4 (デフォルト値) に達していることを確認します。 L0 と L1 の両方で圧縮を採用する場合、memtable から圧縮された SST ファイルのサイズを理解するには、RocksDB ログを分析する必要があります。たとえば、ファイル サイズが 32 MB の場合、 `max-bytes-for-level-base` ～ 128 MB の値を設定することをお勧めします ( `32 MB * 4` )。
 
 ### <code>target-file-size-base</code> {#code-target-file-size-base-code}
 
@@ -1543,6 +1543,18 @@ RocksDBに関するコンフィグレーション項目
     -   `5` : TiKV v6.1 以降のバージョンで読み込むことができます。フル フィルターとパーティション フィルターでは、異なるスキーマを使用した、より高速で正確なブルーム フィルター実装が使用されます。
 -   デフォルト値: `2`
 
+### <code>ttl</code> <span class="version-mark">v7.1.2 の新機能</span> {#code-ttl-code-span-class-version-mark-new-in-v7-1-2-span}
+
+-   TTL より古い更新を含む SST ファイルは、圧縮対象として自動的に選択されます。これらの SST ファイルはカスケード方式で圧縮されるため、最下位のレベルまたはファイルに圧縮されます。
+-   デフォルト値: `"0s"`は、デフォルトでは SST ファイルが選択されていないことを意味します。
+-   単位: s(秒)|h(時)|d(日)
+
+### <code>periodic-compaction-seconds</code> <span class="version-mark">v7.1.2 の新機能</span> {#code-periodic-compaction-seconds-code-span-class-version-mark-new-in-v7-1-2-span}
+
+-   定期的な圧縮の時間間隔。この値より古い更新を含む SST ファイルは圧縮対象として選択され、これらの SST ファイルが元々存在していたレベルと同じレベルに再書き込みされます。
+-   -   デフォルト値: `"0s"`は、定期的な圧縮がデフォルトで無効であることを意味します。
+-   単位: s(秒)|h(時)|d(日)
+
 ## ロックsdb.defaultcf.titan {#rocksdb-defaultcf-titan}
 
 `rocksdb.defaultcf.titan`に関するコンフィグレーション項目。
@@ -1559,6 +1571,10 @@ RocksDBに関するコンフィグレーション項目
 -   Blob ファイルで使用される圧縮アルゴリズム
 -   オプションの値: `"no"` 、 `"snappy"` 、 `"zlib"` 、 `"bzip2"` 、 `"lz4"` 、 `"lz4hc"` 、 `"zstd"`
 -   デフォルト値: `"lz4"`
+
+> **注記：**
+>
+> Snappy 圧縮ファイルは[公式の Snappy フォーマット](https://github.com/google/snappy)に存在する必要があります。 Snappy 圧縮の他のバリアントはサポートされていません。
 
 ### <code>blob-cache-size</code> {#code-blob-cache-size-code}
 
@@ -1757,7 +1773,7 @@ RocksDBに関するコンフィグレーション項目
 
 Raft Engineに関連するコンフィグレーション項目。
 
-> **ノート：**
+> **注記：**
 >
 > -   初めてRaft Engine を有効にすると、TiKV はデータを RocksDB からRaft Engineに転送します。したがって、TiKV が開始されるまでさらに数十秒待つ必要があります。
 > -   TiDB v5.4.0 のRaft Engineのデータ形式は、以前の TiDB バージョンと互換性がありません。したがって、TiDB クラスターを v5.4.0 から以前のバージョンにダウングレードする必要がある場合は、ダウングレードする**前に**、 `enable`から`false`に設定してRaft Engine を無効にし、構成を有効にするために TiKV を再起動します。
@@ -1822,7 +1838,7 @@ Raft Engineに関連するコンフィグレーション項目。
 
 ### <code>format-version</code> <span class="version-mark">v6.3.0 の新機能</span> {#code-format-version-code-span-class-version-mark-new-in-v6-3-0-span}
 
-> **ノート：**
+> **注記：**
 >
 > `format-version`を`2`に設定した後、TiKV クラスターを v6.3.0 から以前のバージョンにダウングレードする必要がある場合は、ダウングレードする**前に**次の手順を実行します。
 >
@@ -1838,7 +1854,7 @@ Raft Engineに関連するコンフィグレーション項目。
 
 ### <code>enable-log-recycle</code> <span class="version-mark">v6.3.0 の新機能</span> {#code-enable-log-recycle-code-span-class-version-mark-new-in-v6-3-0-span}
 
-> **ノート：**
+> **注記：**
 >
 > この設定項目は、 [`format-version`](#format-version-new-in-v630) &gt;= 2 の場合にのみ使用できます。
 
@@ -1847,7 +1863,7 @@ Raft Engineに関連するコンフィグレーション項目。
 
 ### <code>prefill-for-recycle</code> <span class="version-mark">v7.0.0 の新機能</span> {#code-prefill-for-recycle-code-span-class-version-mark-new-in-v7-0-0-span}
 
-> **ノート：**
+> **注記：**
 >
 > この設定項目は、 [`enable-log-recycle`](#enable-log-recycle-new-in-v630)が`true`に設定されている場合にのみ有効になります。
 
@@ -1934,7 +1950,7 @@ TiDB LightningインポートおよびBRリストアに関連するコンフィ�
 -   値の範囲: [0.0、0.5]
 -   デフォルト値: `0.3` 。これは、システムメモリの 30% が PITR に使用できることを意味します。値が`0.0`場合、PITR はログ ファイルをローカル ディレクトリにダウンロードすることによって実行されます。
 
-> **ノート：**
+> **注記：**
 >
 > v6.5.0 より前のバージョンでは、ポイントインタイム リカバリ (PITR) は、バックアップ ファイルをローカル ディレクトリにダウンロードすることによるデータの復元のみをサポートします。
 
@@ -1990,7 +2006,7 @@ BRバックアップに関するコンフィグレーション項目。
 
 ### <code>s3-multi-part-size</code> <span class="version-mark">v5.3.2 の新機能</span> {#code-s3-multi-part-size-code-span-class-version-mark-new-in-v5-3-2-span}
 
-> **ノート：**
+> **注記：**
 >
 > この構成は、S3 レート制限によって引き起こされるバックアップの失敗に対処するために導入されました。この問題は[バックアップデータのstorage構造を改良する](/br/br-snapshot-architecture.md#structure-of-backup-files)で修正されました。したがって、この構成は v6.1.1 から非推奨となり、推奨されなくなりました。
 
@@ -2186,7 +2202,7 @@ TiKV がデプロイされているマシンのリソースが限られている
 
 #### <code>background-write-bandwidth</code> <span class="version-mark">v6.2.0 の新機能</span> {#code-background-write-bandwidth-code-span-class-version-mark-new-in-v6-2-0-span}
 
-> **ノート：**
+> **注記：**
 >
 > この構成項目は`SHOW CONFIG`の結果として返されますが、現在設定しても効果はありません。
 
@@ -2195,7 +2211,7 @@ TiKV がデプロイされているマシンのリソースが限られている
 
 #### <code>background-read-bandwidth</code> <span class="version-mark">v6.2.0 の新機能</span> {#code-background-read-bandwidth-code-span-class-version-mark-new-in-v6-2-0-span}
 
-> **ノート：**
+> **注記：**
 >
 > この構成項目は`SHOW CONFIG`の結果として返されますが、現在設定しても効果はありません。
 

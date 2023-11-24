@@ -65,7 +65,7 @@ host = "<host>"
 
 > **注記：**
 >
-> 現在、TiDB は、同じリージョン内にあるレプリカの照合と選択を`zone`ラベルに依存しています。この機能を使用するには、 [PD の`location-labels`の設定](#configure-location-labels-for-pd)の場合は`zone`を含める必要があり、 TiDB、TiKV、およびTiFlashに対して`labels`構成する場合は`zone`を構成する必要があります。詳細については、 [TiKV およびTiFlashの`labels`を構成する](#configure-labels-for-tikv-and-tiflash)を参照してください。
+> 現在、TiDB は`zone`ラベルに依存して、同じリージョン内にあるレプリカを照合して選択します。この機能を使用するには、 [PD の`location-labels`の設定](#configure-location-labels-for-pd)の場合は`zone`を含める必要があり、 TiDB、TiKV、およびTiFlashに対して`labels`構成する場合は`zone`を構成する必要があります。詳細については、 [TiKV およびTiFlashの`labels`を構成する](#configure-labels-for-tikv-and-tiflash)を参照してください。
 
 ### PD の<code>location-labels</code>を構成する {#configure-code-location-labels-code-for-pd}
 
@@ -122,7 +122,12 @@ pd-ctl config set isolation-level zone
 
 TiUPを使用してクラスターをデプロイする場合、 [初期化設定ファイル](/production-deployment-using-tiup.md#step-3-initialize-cluster-topology-file)で TiKV の場所を構成できます。 TiUP は、展開中に TiKV、PD、およびTiFlashに対応する構成ファイルを生成します。
 
-次の例では、2 層トポロジ`zone/host`が定義されています。クラスターの TiKV ノードは 3 つのゾーン z1、z2、および z3 に分散されており、各ゾーンには 4 つのホスト h1、h2、h3、および h4 があります。 z1 では、4 つの TiKV インスタンスが 2 つのホスト (h1 に`tikv-1`と`tikv-2` 、h2 に`tikv-3`と`tikv-4`にデプロイされます。 2 つのTiFlashインスタンスが他の 2 つのホスト (h3 に`tiflash-1` 、h4 に`tiflash-2` ) にデプロイされます。 z2 および z3 では、2 つの TiKV インスタンスが 2 つのホストにデプロイされ、2 つのTiFlashインスタンスが他の 2 つのホストにデプロイされます。次の例では、 `tikv-n` `n`番目の TiKV ノードの IP アドレスを表し、 `tiflash-n` `n`番目のTiFlashノードの IP アドレスを表します。
+次の例では、2 層トポロジ`zone/host`が定義されています。クラスターの TiKV ノードとTiFlashノードは、z1、z2、および z3 の 3 つのゾーンに分散されます。
+
+-   各ゾーンには、TiKV インスタンスがデプロイされたホストが 2 つあります。 z1 では、各ホストに 2 つの TiKV インスタンスがデプロイされています。 z2 および z3 では、各ホストに個別の TiKV インスタンスがデプロイされます。
+-   各ゾーンには、 TiFlashインスタンスがデプロイされたホストが 2 つあり、各ホストには個別のTiFlashインスタンスがデプロイされています。
+
+次の例では、 `tikv-host-machine-n` `n`番目の TiKV ノードの IP アドレスを表し、 `tiflash-host-machine-n` `n`番目のTiFlashノードの IP アドレスを表します。
 
     server_configs:
       pd:
@@ -130,86 +135,89 @@ TiUPを使用してクラスターをデプロイする場合、 [初期化設�
 
     tikv_servers:
     # z1
-      - host: tikv-1
+      # machine-1 on z1
+      - host: tikv-host-machine-1
         port：20160
         config:
           server.labels:
             zone: z1
-            host: h1
-       - host: tikv-1
-         port：20161
-        config:
-          server.labels:
-            zone: z1
-            host: h1
-      - host: tikv-2
-        port：20160
-        config:
-          server.labels:
-            zone: z1
-            host: h2
-      - host: tikv-2
+            host: tikv-host-machine-1
+      - host: tikv-host-machine-1
         port：20161
         config:
           server.labels:
             zone: z1
-            host: h2
+            host: tikv-host-machine-1
+      # machine-2 on z1
+      - host: tikv-host-machine-2
+        port：20160
+        config:
+          server.labels:
+            zone: z1
+            host: tikv-host-machine-2
+      - host: tikv-host-machine-2
+        port：20161
+        config:
+          server.labels:
+            zone: z1
+            host: tikv-host-machine-2
     # z2
-      - host: tikv-5
+      - host: tikv-host-machine-3
         config:
           server.labels:
             zone: z2
-            host: h1
-       - host: tikv-6
+            host: tikv-host-machine-3
+      - host: tikv-host-machine-4
         config:
           server.labels:
             zone: z2
-            host: h2
+            host: tikv-host-machine-4
     # z3
-      - host: tikv-7
+      - host: tikv-host-machine-5
         config:
           server.labels:
             zone: z3
-            host: h1
-      - host: tikv-8
+            host: tikv-host-machine-5
+      - host: tikv-host-machine-6
         config:
           server.labels:
             zone: z3
-            host: h2s
+            host: tikv-host-machine-6
+
     tiflash_servers:
     # z1
-      - host: tiflash-1
+      - host: tiflash-host-machine-1
         learner_config:
           server.labels:
             zone: z1
-            host: h3
-       - host: tiflash-2
+            host: tiflash-host-machine-1
+      - host: tiflash-host-machine-2
         learner_config:
           server.labels:
             zone: z1
-            host: h4
+            host: tiflash-host-machine-2
     # z2
-      - host: tiflash-3
+      - host: tiflash-host-machine-3
         learner_config:
           server.labels:
             zone: z2
-            host: h3
-       - host: tiflash-4
+            host: tiflash-host-machine-3
+      - host: tiflash-host-machine-4
         learner_config:
           server.labels:
             zone: z2
-            host: h4
+            host: tiflash-host-machine-4
     # z3
-      - host: tiflash-5
+      - host: tiflash-host-machine-5
         learner_config:
           server.labels:
             zone: z3
-            host: h3
-      - host: tiflash-6
+            host: tiflash-host-machine-5
+      - host: tiflash-host-machine-6
         learner_config:
           server.labels:
             zone: z3
-            host: h4
+            host: tiflash-host-machine-6
 
 詳細は[地理的に分散された導入トポロジ](/geo-distributed-deployment-topology.md)を参照してください。
 
@@ -223,13 +231,13 @@ PD は、同じデータの異なるレプリカが可能な限り分散され�
 
 前のセクションのトポロジを例に挙げます。
 
-クラスターのレプリカの数が 3 ( `max-replicas=3` ) であると仮定します。合計 3 つのゾーンがあるため、PD は各リージョンの 3 つのレプリカがそれぞれ z1、z2、および z3 に配置されるようにします。このようにして、1 つのデータセンターに障害が発生した場合でも、TiDB クラスターは引き続き使用できます。
+クラスターのレプリカの数が 3 ( `max-replicas=3` ) であると仮定します。合計 3 つのゾーンがあるため、PD は各リージョンの 3 つのレプリカがそれぞれ z1、z2、および z3 に配置されるようにします。このようにして、1 つのゾーンに障害が発生した場合でも、TiDB クラスターは引き続き使用できます。
 
 次に、クラスター レプリカの数が 5 ( `max-replicas=5` ) であると仮定します。ゾーンは合計で 3 つしかないため、PD はゾーン レベルでの各レプリカの分離を保証できません。この状況では、PD スケジューラはホスト レベルでレプリカの分離を保証します。つまり、リージョンの複数のレプリカが同じゾーン内に分散されている可能性がありますが、同じホスト上には分散されていない可能性があります。
 
 5 レプリカ構成の場合、z3 に障害が発生するか全体として分離され、一定期間 ( `max-store-down-time`で制御) が経過しても回復できない場合、PD はスケジューリングを通じて 5 つのレプリカを構成します。現時点では、使用可能なホストは 4 つだけです。これは、ホスト レベルの分離が保証されず、複数のレプリカが同じホストにスケジュールされる可能性があることを意味します。ただし、 `isolation-level`値を空のままではなく`zone`に設定すると、リージョンレプリカの物理的分離の最小要件が指定されます。つまり、PD は、同じリージョンのレプリカが異なるゾーンに分散していることを保証します。この分離制限に従うことが複数のレプリカの`max-replicas`の要件を満たさない場合でも、PD は対応するスケジューリングを実行しません。
 
-たとえば、TiKV クラスターは 3 つのデータ ゾーン z1、z2、z3 に分散されています。各リージョンには必要に応じて 3 つのレプリカがあり、PD は同じリージョンの 3 つのレプリカをこれら 3 つのデータ ゾーンにそれぞれ分散します。 z1 で停電が発生し、一定時間 (デフォルトでは[`max-store-down-time`](/pd-configuration-file.md#max-store-down-time)分と 30 分で制御) 経過しても回復できない場合、PD は z1 上のリージョンレプリカが使用できなくなったと判断します。ただし、 `isolation-level`が`zone`に設定されているため、PD は、同じリージョンの異なるレプリカが同じデータ ゾーンにスケジュールされないことを厳密に保証する必要があります。 z2 と z3 の両方にはすでにレプリカがあるため、現時点でレプリカが 2 つしかない場合でも、PD は最小分離レベル制限`isolation-level`の下ではスケジューリングを実行しません。
+`isolation-level`設定が`zone`に設定されている場合、物理レベルでのリージョンレプリカの最小分離要件が指定されます。この場合、PD は、同じリージョンのレプリカが異なるゾーンに分散されていることを常に保証します。この分離制限に従っても`max-replicas`のマルチレプリカ要件を満たさない場合でも、PD はそれに応じてスケジュールを設定しません。 3 つのデータ ゾーン (z1、z2、および z3) に分散された TiKV クラスターを例にとると、各リージョンに 3 つのレプリカが必要な場合、PD は同じリージョンの 3 つのレプリカをこれら 3 つのデータ ゾーンにそれぞれ分散します。 z1 で停電が発生し、一定期間 (デフォルトでは 30 分、 [`max-store-down-time`](/pd-configuration-file.md#max-store-down-time)で制御) が経過しても回復できない場合、PD は z1 のリージョンレプリカが使用できなくなったと判断します。ただし、 `isolation-level`が`zone`に設定されているため、PD は、同じリージョンの異なるレプリカが同じデータ ゾーンにスケジュールされないことを厳密に保証する必要があります。 z2 と z3 の両方にすでにレプリカがあるため、現時点でレプリカが 2 つしかない場合でも、PD は最小分離レベル制限`isolation-level`の下ではスケジューリングを実行しません。
 
 同様に、 `isolation-level`を`rack`に設定すると、最小分離レベルが同じデータセンター内の異なるラックに適用されます。この構成では、可能であれば、ゾーンレイヤーでの分離が最初に保証されます。ゾーン レベルでの分離が保証できない場合、PD は、同じゾーン内の同じラックに異なるレプリカをスケジュールすることを回避しようとします。 `isolation-level`を`host`に設定すると、スケジューリングは同様に機能します。この場合、PD は最初にラックの分離レベルを保証し、次にホストのレベルを保証します。
 

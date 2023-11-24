@@ -63,3 +63,13 @@ SQL ステートメントの概要ページの上部で、表示する SQL 実�
 > -   ステートメント システム テーブルはメモリにのみ格納されるため、SQL ステートメント機能を無効にすると、システム テーブル内のデータはクリアされます。
 >
 > -   `Collect interval`と`retain duration`の値はメモリ使用量に影響するため、実際の状況に応じてこれらの値を調整することをお勧めします。 `retain duration`という値はあまり大きく設定しないでください。
+
+### その他 {#others}
+
+[`tidb_stmt_summary_max_stmt_count`](/system-variables.md#tidb_stmt_summary_max_stmt_count-new-in-v40)ステートメント概要テーブルに格納できる SQL ステートメントの数を制限します。制限を超えると、TiDB は最近未使用のままになっている SQL ステートメントをクリアします。これらのクリアされた SQL ステートメントは、 `DIGEST`が`NULL`に設定された行として表されます。 TiDB ダッシュボードの SQL ステートメント ページでは、これらの行の情報は`Others`として表示されます。
+
+![Others](/media/dashboard/dashboard-statement-other-row.png)
+
+## 次のステップ {#next-step}
+
+SQL ステートメントの実行の詳細を表示する方法の詳細については、 [TiDB ダッシュボードのステートメント実行の詳細](/dashboard/dashboard-statement-details.md)を参照してください。

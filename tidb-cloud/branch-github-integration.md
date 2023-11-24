@@ -158,4 +158,10 @@ github:
 
 ## 次は何ですか {#what-s-next}
 
+次の例を使用して、分岐 GitHub 統合の使用方法を学習します。
+
+-   [分岐ゴームの例](https://github.com/tidbcloud/branching-gorm-example)
+-   [分岐-django-example](https://github.com/tidbcloud/branching-django-example)
+-   [分岐レールの例](https://github.com/tidbcloud/branching-rails-example)
+
 分岐 GitHub 統合を使用せずに分岐 CI/CD ワークフローを構築することもできます。たとえば、 [`setup-tidbcloud-cli`](https://github.com/tidbcloud/setup-tidbcloud-cli)と GitHub Actions を使用して CI/CD ワークフローをカスタマイズできます。

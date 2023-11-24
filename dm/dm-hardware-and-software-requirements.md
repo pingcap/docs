@@ -22,12 +22,12 @@ DM は、64 ビットの汎用ハードウェアサーバープラットフォ�
 
 ### 開発およびテスト環境 {#development-and-test-environments}
 
-| 成分     | CPU   | メモリー   | ローカルストレージ                       | 通信網            | インスタンスの数 (最小要件)    |
+| 成分     | CPU   | メモリ    | ローカルストレージ                       | 通信網            | インスタンスの数 (最小要件)    |
 | ------ | ----- | ------ | ------------------------------- | -------------- | ------------------ |
 | DMマスター | 4コア以上 | 8GB以上  | SAS、200GB以上                     | ギガビットネットワークカード | 1                  |
 | DMワーカー | 8コア以上 | 16GB以上 | SAS、200 GB+ (移行されたデータのサイズより大きい) | ギガビットネットワークカード | 上流の MySQL インスタンスの数 |
 
-> **ノート：**
+> **注記：**
 >
 > -   テスト環境では、機能検証に使用するDM-masterとDM-workerを同一サーバー上に配置できます。
 > -   パフォーマンス テスト結果の精度への干渉を防ぐため、低パフォーマンスのstorageおよびネットワーク ハードウェア構成を使用することは**お勧めできません**。
@@ -36,38 +36,51 @@ DM は、64 ビットの汎用ハードウェアサーバープラットフォ�
 
 ### 本番環境 {#production-environment}
 
-| 成分     | CPU    | メモリー   | ハードディスクの種類                      | 通信網              | インスタンスの数 (最小要件)         |
+| 成分     | CPU    | メモリ    | ハードディスクの種類                      | 通信網              | インスタンスの数 (最小要件)         |
 | ------ | ------ | ------ | ------------------------------- | ---------------- | ----------------------- |
 | DMマスター | 4コア以上  | 8GB以上  | SAS、200GB以上                     | ギガビットネットワークカード   | 3                       |
 | DMワーカー | 16コア以上 | 32GB以上 | SSD、200 GB+ (移行されたデータのサイズより大きい) | 10ギガビットネットワークカード | 上流の MySQL インスタンスの数より大きい |
 | モニター   | 8コア以上  | 16GB以上 | SAS、200GB以上                     | ギガビットネットワークカード   | 1                       |
 
-> **ノート：**
+> **注記：**
 >
 > -   本番環境では、DM マスターと DM ワーカーを同じサーバーにデプロイして実行することはお勧めできません。DM ワーカーがデータをディスクに書き込むと、DM マスターの高可用性コンポーネントによるディスクの使用が妨げられる可能性があるためです。 。
-> -   パフォーマンスの問題が発生した場合は、 [DMのコンフィグレーションを最適化する](/dm/dm-tune-configuration.md)ドキュメントに従ってタスク構成ファイルを変更することをお勧めします。構成ファイルを調整してもパフォーマンスが効果的に最適化されない場合は、サーバーのハードウェアをアップグレードしてみてください。
+> -   パフォーマンスの問題が発生した場合は、 [DMのコンフィグレーションを最適化する](/dm/dm-tune-configuration.md)ドキュメントに従ってタスク構成ファイルを変更することをお勧めします。構成ファイルを調整してもパフォーマンスが効果的に最適化されない場合は、サーバーのハードウェアをアップグレードしてみることができます。
 
 ## ダウンストリームのstorageスペース要件 {#downstream-storage-space-requirements}
 
 ターゲット TiKV クラスターには、インポートされたデータを保存するのに十分なディスク容量が必要です。 [標準的なハードウェア要件](/hardware-and-software-requirements.md)に加えて、ターゲット TiKV クラスターのstorage容量は**、データ ソースのサイズ x レプリカの数 x 2**より大きくなければなりません。たとえば、クラスターがデフォルトで 3 つのレプリカを使用する場合、ターゲット TiKV クラスターにはデータ ソースのサイズの 6 倍を超えるstorageスペースが必要です。この式に`x 2`含まれるのは、次の理由からです。
 
 -   インデックスには余分なスペースが必要になる場合があります。
--   RocksDB には空間増幅効果があります。
+-   RocksDBには空間増幅効果があります。
 
-次の SQL ステートメントを使用して`data-length`フィールドを要約することで、データ量を見積もることができます。
+次の SQL ステートメントを使用して`DATA_LENGTH`フィールドを要約することで、データ量を見積もることができます。
 
--   すべてのスキーマのサイズを MiB 単位で計算します。 `${schema_name}`スキーマ名に置き換えます。
+```sql
+-- Calculate the size of all schemas
+SELECT
+  TABLE_SCHEMA,
+  FORMAT_BYTES(SUM(DATA_LENGTH)) AS 'Data Size',
+  FORMAT_BYTES(SUM(INDEX_LENGTH)) 'Index Size'
+FROM
+  information_schema.tables
+GROUP BY
+  TABLE_SCHEMA;
 
-    {{< copyable "" >}}
-
-    ```sql
-    select table_schema,sum(data_length)/1024/1024 as data_length,sum(index_length)/1024/1024 as index_length,sum(data_length+index_length)/1024/1024 as sum from information_schema.tables where table_schema = "${schema_name}" group by table_schema;
-    ```
-
--   最大のテーブルのサイズを MiB 単位で計算します。 ${schema_name} を実際のスキーマ名に置き換えます。
-
-    {{< copyable "" >}}
-
-    ```sql
-    select table_name,table_schema,sum(data_length)/1024/1024 as data_length,sum(index_length)/1024/1024 as index_length,sum(data_length+index_length)/1024/1024 as sum from information_schema.tables where table_schema = "${schema_name}" group by table_name,table_schema order by sum desc limit 5;
-    ```
+-- Calculate the 5 largest tables
+SELECT 
+  TABLE_NAME,
+  TABLE_SCHEMA,
+  FORMAT_BYTES(SUM(data_length)) AS 'Data Size',
+  FORMAT_BYTES(SUM(index_length)) AS 'Index Size',
+  FORMAT_BYTES(SUM(data_length+index_length)) AS 'Total Size'
+FROM
+  information_schema.tables
+GROUP BY
+  TABLE_NAME,
+  TABLE_SCHEMA
+ORDER BY
+  SUM(DATA_LENGTH+INDEX_LENGTH) DESC
+LIMIT
+  5;
+```

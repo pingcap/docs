@@ -7,6 +7,10 @@ summary: The usage of ALTER PLACEMENT POLICY in TiDB.
 
 `ALTER PLACEMENT POLICY`は、以前に作成された既存の配置ポリシーを変更するために使用されます。配置ポリシーを使用するすべてのテーブルとパーティションは自動的に更新されます。
 
+> **注記：**
+>
+> この機能は[TiDB サーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless)クラスターでは使用できません。
+
 `ALTER PLACEMENT POLICY` 、以前のポリシーを新しい定義に*置き換えます*。古いポリシーと新しいポリシーは*マージされ*ません。次の例では、 `ALTER PLACEMENT POLICY`が実行されると`FOLLOWERS=4`が失われます。
 
 ```sql
@@ -51,13 +55,11 @@ AdvancedPlacementOption ::=
 
 ## 例 {#examples}
 
-> **ノート：**
+> **注記：**
 >
-> クラスター内で使用可能なリージョンを確認するには、 [`SHOW PLACEMENT LABELS`](/sql-statements/sql-statement-show-placement-labels.md)を参照してください。
+> クラスター内でどのリージョンが使用できるかを確認するには、 [`SHOW PLACEMENT LABELS`](/sql-statements/sql-statement-show-placement-labels.md)を参照してください。
 >
 > 利用可能なリージョンが表示されない場合は、TiKV インストールにラベルが正しく設定されていない可能性があります。
-
-{{< copyable "" >}}
 
 ```sql
 CREATE PLACEMENT POLICY p1 PRIMARY_REGION="us-east-1" REGIONS="us-east-1,us-west-1";
@@ -66,16 +68,14 @@ ALTER PLACEMENT POLICY p1 PRIMARY_REGION="us-east-1" REGIONS="us-east-1,us-west-
 SHOW CREATE PLACEMENT POLICY p1\G;
 ```
 
-```
-Query OK, 0 rows affected (0.08 sec)
+    Query OK, 0 rows affected (0.08 sec)
 
-Query OK, 0 rows affected (0.10 sec)
+    Query OK, 0 rows affected (0.10 sec)
 
-***************************[ 1. row ]***************************
-Policy        | p1
-Create Policy | CREATE PLACEMENT POLICY `p1` PRIMARY_REGION="us-east-1" REGIONS="us-east-1,us-west-1,us-west-2" FOLLOWERS=4
-1 row in set (0.00 sec)
-```
+    ***************************[ 1. row ]***************************
+    Policy        | p1
+    Create Policy | CREATE PLACEMENT POLICY `p1` PRIMARY_REGION="us-east-1" REGIONS="us-east-1,us-west-1,us-west-2" FOLLOWERS=4
+    1 row in set (0.00 sec)
 
 ## MySQLの互換性 {#mysql-compatibility}
 

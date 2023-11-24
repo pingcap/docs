@@ -3,14 +3,18 @@ title: RESTORE | TiDB SQL Statement Reference
 summary: An overview of the usage of RESTORE for the TiDB database.
 ---
 
-# 戻す {#restore}
+# 復元する {#restore}
 
 このステートメントは、 [`BACKUP`文](/sql-statements/sql-statement-backup.md)によって以前に作成されたバックアップ アーカイブから分散復元を実行します。
 
-`RESTORE`ステートメントは[BRツール](/br/backup-and-restore-overview.md)と同じエンジンを使用しますが、復元プロセスが別個のBRツールではなく TiDB 自体によって駆動される点が異なります。 BRのすべての利点と注意事項がここにも適用されます。特に、 **`RESTORE`現在ACIDに準拠していません**。 `RESTORE`を実行する前に、次の要件が満たされていることを確認してください。
+> **注記：**
+>
+> この機能は[TiDB サーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless)クラスターでは使用できません。
+
+`RESTORE`ステートメントは[BRツール](https://docs.pingcap.com/tidb/stable/backup-and-restore-overview)と同じエンジンを使用しますが、復元プロセスが別個のBRツールではなく TiDB 自体によって駆動される点が異なります。 BRのすべての利点と注意事項がここにも適用されます。特に、 **`RESTORE`現在ACIDに準拠していません**。 `RESTORE`を実行する前に、次の要件が満たされていることを確認してください。
 
 -   クラスターは「オフライン」であり、現在の TiDB セッションは、復元されるすべてのテーブルにアクセスできる唯一のアクティブな SQL 接続です。
--   完全復元を実行する場合、既存のデータが上書きされ、データとインデックスの間に不整合が生じる可能性があるため、復元されるテーブルがまだ存在してはいけません。
+-   完全復元を実行する場合、既存のデータが上書きされ、データとインデックスの間で不整合が生じる可能性があるため、復元されるテーブルがまだ存在してはいけません。
 -   増分復元が実行されている場合、テーブルはバックアップ作成時の`LAST_BACKUP`タイムスタンプとまったく同じ状態になっている必要があります。
 
 `RESTORE`を実行するには、 `RESTORE_ADMIN`または`SUPER`権限が必要です。さらに、リストアを実行する TiDB ノードとクラスター内のすべての TiKV ノードの両方に、宛先からの読み取り権限が必要です。
@@ -45,8 +49,6 @@ Boolean ::=
 
 ### バックアップアーカイブから復元する {#restore-from-backup-archive}
 
-{{< copyable "" >}}
-
 ```sql
 RESTORE DATABASE * FROM 'local:///mnt/backup/2020/04/';
 ```
@@ -76,13 +78,9 @@ RESTORE DATABASE * FROM 'local:///mnt/backup/2020/04/';
 
 どのデータベースまたはテーブルを復元するかを指定できます。一部のデータベースまたはテーブルがバックアップ アーカイブにない場合、それらは無視されるため、 `RESTORE`何もせずに完了します。
 
-{{< copyable "" >}}
-
 ```sql
 RESTORE DATABASE `test` FROM 'local:///mnt/backup/2020/04/';
 ```
-
-{{< copyable "" >}}
 
 ```sql
 RESTORE TABLE `test`.`sbtest01`, `test`.`sbtest02` FROM 'local:///mnt/backup/2020/04/';
@@ -92,17 +90,23 @@ RESTORE TABLE `test`.`sbtest01`, `test`.`sbtest02` FROM 'local:///mnt/backup/202
 
 BR は、 S3 または GCS からのデータの復元をサポートしています。
 
-{{< copyable "" >}}
-
 ```sql
 RESTORE DATABASE * FROM 's3://example-bucket-2020/backup-05/';
 ```
 
-URL 構文については、 [外部storageURI](/br/backup-and-restore-storages.md#uri-format)で詳しく説明します。
+<CustomContent platform="tidb">
+
+URL 構文については、 [外部ストレージ サービスの URI 形式](/external-storage-uri.md)で詳しく説明します。
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+URL 構文については、 [外部storageURI](https://docs.pingcap.com/tidb/stable/external-storage-uri)で詳しく説明します。
+
+</CustomContent>
 
 認証情報を配布しないクラウド環境で実行する場合は、 `SEND_CREDENTIALS_TO_TIKV`オプションを`FALSE`に設定します。
-
-{{< copyable "" >}}
 
 ```sql
 RESTORE DATABASE * FROM 's3://example-bucket-2020/backup-05/'
@@ -117,8 +121,6 @@ RESTORE DATABASE * FROM 's3://example-bucket-2020/backup-05/'
 
 復元が完了する前に、アーカイブのデータに対してチェック`RESTORE`を実行して、正確性を検証します。このステップが不要であると確信できる場合は、 `CHECKSUM`オプションを使用して無効にすることができます。
 
-{{< copyable "" >}}
-
 ```sql
 RESTORE DATABASE * FROM 's3://example-bucket-2020/backup-06/'
     RATE_LIMIT = 120 MB/SECOND
@@ -132,8 +134,6 @@ RESTORE DATABASE * FROM 's3://example-bucket-2020/backup-06/'
 
 たとえば、バックアップ タスクが次のように作成されたとします。
 
-{{< copyable "" >}}
-
 ```sql
 BACKUP DATABASE `test` TO 's3://example-bucket/full-backup'  SNAPSHOT = 413612900352000;
 BACKUP DATABASE `test` TO 's3://example-bucket/inc-backup-1' SNAPSHOT = 414971854848000 LAST_BACKUP = 413612900352000;
@@ -141,8 +141,6 @@ BACKUP DATABASE `test` TO 's3://example-bucket/inc-backup-2' SNAPSHOT = 41635345
 ```
 
 その場合は、復元でも同じ順序を適用する必要があります。
-
-{{< copyable "" >}}
 
 ```sql
 RESTORE DATABASE * FROM 's3://example-bucket/full-backup';

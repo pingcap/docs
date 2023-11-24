@@ -13,13 +13,13 @@ summary: Learn how to configure TiFlash.
 
 -   [`replica-schedule-limit`](/pd-configuration-file.md#replica-schedule-limit) : レプリカ関連のオペレーターが生成される速度を決定します。このパラメーターは、ノードのオフライン化やレプリカの追加などの操作に影響します。
 
-    > **ノート：**
+    > **注記：**
     >
     > このパラメータの値は`region-schedule-limit`より小さい必要があります。そうしないと、TiKV ノード間の通常のリージョンスケジューリングが影響を受けます。
 
 -   `store-balance-rate` : 各 TiKV/ TiFlashストアのリージョンがスケジュールされるレートを制限します。このパラメーターは、ストアがクラスターに新しく参加した場合にのみ有効であることに注意してください。既存のストアの設定を変更する場合は、次のコマンドを使用します。
 
-    > **ノート：**
+    > **注記：**
     >
     > v4.0.2 以降、 `store-balance-rate`パラメータは非推奨となり、 `store limit`コマンドに変更が加えられました。詳細は[店舗限定](/configure-store-limit.md)を参照してください。
 
@@ -46,9 +46,9 @@ listen_host = "0.0.0.0"
 ## It is **NOT** recommended to configure this port in any TiFlash deployment. (Note: Starting from TiFlash v7.1.0, TiFlash deployed by TiUP >= v1.12.5 or TiDB Operator >= v1.5.0 disables the port by default and is more secure.)
 # tcp_port = 9000
 ## The cache size limit of the metadata of a data block. Generally, you do not need to change this value.
-mark_cache_size = 5368709120
+mark_cache_size = 1073741824
 ## The cache size limit of the min-max index of a data block. Generally, you do not need to change this value.
-minmax_index_cache_size = 5368709120
+minmax_index_cache_size = 1073741824
 ## The cache size limit of the DeltaIndex. The default value is 0, which means no limit.
 delta_index_cache_size = 0
 

@@ -23,7 +23,8 @@ TiCDC には次の主要な機能があります。
 -   第 2 レベルの RPO と分レベルの RTO を使用して、TiDB クラスター間で増分データをレプリケートします。
 -   TiDB クラスター間の双方向レプリケーションにより、TiCDC を使用したマルチアクティブ TiDB ソリューションの作成が可能になります。
 -   TiDB クラスターから MySQL データベースまたは他の MySQL 互換データベースに低レイテンシーで増分データをレプリケートします。
--   TiDB クラスターから Kafka クラスターへの増分データのレプリケーション。推奨するデータ形式には[カナル-JSON](/ticdc/ticdc-canal-json.md)と[アブロ](/ticdc/ticdc-avro-protocol.md)があります。
+-   TiDB クラスターから Kafka クラスターへの増分データのレプリケーション。推奨されるデータ形式には[カナル-JSON](/ticdc/ticdc-canal-json.md)と[アブロ](/ticdc/ticdc-avro-protocol.md)があります。
+-   TiDB クラスターから Amazon S3、GCS、Azure Blob Storage、NFS などのstorageサービスへの増分データのレプリケーション。
 -   データベース、テーブル、DML、DDL をフィルタリングする機能を備えたテーブルのレプリケート。
 -   単一障害点のない高可用性。TiCDC ノードの動的追加と削除をサポートします。
 -   [オープンAPI](/ticdc/ticdc-open-api.md)によるクラスタ管理。これには、タスク ステータスのクエリ、タスク構成の動的変更、タスクの作成または削除が含まれます。
@@ -49,7 +50,7 @@ TiCDC には次の主要な機能があります。
 
     -   TiCDC は、ダウンストリーム トランザクションがアップストリーム トランザクションと同じ順序で実行されることを保証しません。
 
-    > **ノート：**
+    > **注記：**
     >
     > v6.2 以降、シンク URI パラメーター[`transaction-atomicity`](/ticdc/ticdc-sink-to-mysql.md#configure-sink-uri-for-mysql-or-tidb)を使用して、単一テーブルのトランザクションを分割するかどうかを制御できます。単一テーブルのトランザクションを分割すると、大規模なトランザクションをレプリケートする際のレイテンシーとメモリ消費量を大幅に削減できます。
 
@@ -71,11 +72,14 @@ TiCDC のアーキテクチャを次の図に示します。
 -   TiCDC: TiCDC プロセスが実行される TiCDC ノード。各ノードは TiCDC プロセスを実行します。各プロセスは、TiKV ノード内の 1 つ以上のテーブルからデータ変更を取得し、その変更をシンクコンポーネントを通じて下流システムに複製します。
 -   PD: TiDB クラスター内のスケジューリング モジュール。このモジュールはクラスター データのスケジューリングを担当し、通常は 3 つの PD ノードで構成されます。 PD は、etcd クラスターを通じて高可用性を提供します。 etcd クラスターでは、TiCDC はノードのステータス情報や変更フィード構成などのメタデータを保存します。
 
-アーキテクチャ図に示されているように、TiCDC は、TiDB、MySQL、および Kafka データベースへのデータのレプリケーションをサポートしています。
+アーキテクチャ図に示されているように、TiCDC は、TiDB、MySQL、Kafka、およびstorageサービスへのデータのレプリケーションをサポートしています。
 
 ## ベストプラクティス {#best-practices}
 
--   2 つの TiDB クラスター間のネットワークレイテンシーが100 ミリ秒を超える場合は、2 つのクラスター間でデータをレプリケートするときに、ダウンストリーム TiDB クラスターが配置されているリージョン (IDC) に TiCDC をデプロイすることをお勧めします。
+-   TiCDC を使用して 2 つの TiDB クラスター間でデータをレプリケートする場合、2 つのクラスター間のネットワークレイテンシーが100 ミリ秒を超える場合:
+
+    -   v6.5.2 より前の TiCDC バージョンの場合、ダウンストリーム TiDB クラスターが配置されているリージョン (IDC) に TiCDC をデプロイすることをお勧めします。
+    -   TiCDC v6.5.2 から導入された一連の改善により、上流の TiDB クラスターが配置されているリージョン (IDC) に TiCDC をデプロイすることをお勧めします。
 
 -   TiCDC は、少なくとも 1 つの有効なインデックスを持つテーブルのみを複製します。有効なインデックスは次のように定義されます。
 
@@ -84,9 +88,7 @@ TiCDC のアーキテクチャを次の図に示します。
 
 -   災害復旧シナリオで TiCDC を使用するには、 [やり直しログ](/ticdc/ticdc-sink-to-mysql.md#eventually-consistent-replication-in-disaster-scenarios)を構成する必要があります。
 
--   大きな単一行 (1K を超える) を含む幅の広いテーブルをレプリケートする場合は、 `per-table-memory-quota` = `ticdcTotalMemory` /( `tableCount` * 2) になるように[`per-table-memory-quota`](/ticdc/ticdc-server-config.md)を構成することをお勧めします。 `ticdcTotalMemory`は TiCDC ノードのメモリ、 `tableCount`は TiCDC ノードが複製するターゲット テーブルの数です。
-
-> **ノート：**
+> **注記：**
 >
 > v4.0.8 以降、TiCDC はタスク構成を変更することで、有効なインデックスのないテーブルの複製をサポートします。ただし、これによりデータの一貫性の保証がある程度損なわれます。詳細については、 [有効なインデックスのないテーブルをレプリケートする](/ticdc/ticdc-manage-changefeed.md#replicate-tables-without-a-valid-index)を参照してください。
 
@@ -95,6 +97,6 @@ TiCDC のアーキテクチャを次の図に示します。
 現在、次のシナリオはサポートされていません。
 
 -   RawKV のみを使用する TiKV クラスター。
--   TiDB の[`CREATE SEQUENCE` DDL 操作](/sql-statements/sql-statement-create-sequence.md)と[`SEQUENCE`機能](/sql-statements/sql-statement-create-sequence.md#sequence-function) 。アップストリームの TiDB が`SEQUENCE`使用する場合、TiCDC はアップストリームで実行された`SEQUENCE` DDL 操作/関数を無視します。ただし、 `SEQUENCE`関数を使用する DML 操作は正しく複製できます。
+-   TiDB の[`CREATE SEQUENCE` DDL 操作](/sql-statements/sql-statement-create-sequence.md)と[`SEQUENCE`機能](/sql-statements/sql-statement-create-sequence.md#sequence-function) 。アップストリームの TiDB が`SEQUENCE`使用すると、TiCDC はアップストリームで実行された`SEQUENCE` DDL 操作/関数を無視します。ただし、 `SEQUENCE`関数を使用する DML 操作は正しく複製できます。
 
 TiCDC は、アップストリームでの大規模なトランザクションを伴うシナリオを部分的にのみサポートします。詳細については、 [TiCDCFAQ](/ticdc/ticdc-faq.md#does-ticdc-support-replicating-large-transactions-is-there-any-risk)を参照してください。ここでは、TiCDC が大規模なトランザクションのレプリケーションとそれに関連するリスクをサポートしているかどうかの詳細を確認できます。

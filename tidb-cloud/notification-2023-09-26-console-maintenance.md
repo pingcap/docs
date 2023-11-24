@@ -11,8 +11,8 @@ summary: Learn about the details of the TiDB Cloud Console maintenance on Sep 26
 
 -   日付: 2023-09-26
 -   開始時刻: 8:00 (UTC+0)
--   終了時刻: 8:20 (UTC+0)
--   所要時間：約20分
+-   終了時刻: 8:30 (UTC+0)
+-   所要時間：約30分
 
 > **注記：**
 >
@@ -20,7 +20,7 @@ summary: Learn about the details of the TiDB Cloud Console maintenance on Sep 26
 
 ## メンテナンスの理由 {#reason-for-maintenance}
 
-私たちは、パフォーマンスと効率を向上させるためにTiDB Cloudサーバーレスの管理インフラストラクチャをアップグレードし、すべてのユーザーにより良いエクスペリエンスを提供します。これは、高品質のサービスを提供するという当社の継続的な取り組みの一環です。
+私たちはTiDB Cloud Serverless の管理インフラストラクチャをアップグレードしてパフォーマンスと効率を向上させ、すべてのユーザーにより良いエクスペリエンスを提供します。これは、高品質のサービスを提供するという当社の継続的な取り組みの一環です。
 
 ## インパクト {#impact}
 

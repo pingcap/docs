@@ -7,9 +7,11 @@ summary: An overview of the usage of SHOW DRAINER STATUS for the TiDB database.
 
 `SHOW DRAINER STATUS`ステートメントは、クラスター内のすべてのDrainerノードのステータス情報を表示します。
 
-## 例 {#examples}
+> **注記：**
+>
+> この機能は TiDB セルフホスト型にのみ適用され、 [TiDB Cloud](https://docs.pingcap.com/tidbcloud/)では利用できません。
 
-{{< copyable "" >}}
+## 例 {#examples}
 
 ```sql
 SHOW DRAINER STATUS;

@@ -5,7 +5,7 @@ summary: Learn the overview of the Titan storage engine.
 
 # タイタンの概要 {#titan-overview}
 
-[巨人](https://github.com/pingcap/rocksdb/tree/titan-5.15)キーと値を分離するための高性能[ロックスDB](https://github.com/facebook/rocksdb)プラグインです。 Titan は、大きな値が使用される場合、RocksDB での書き込み増幅を減らすことができます。
+[巨人](https://github.com/pingcap/rocksdb/tree/titan-5.15)キーと値を分離するための高性能[ロックスDB](https://github.com/facebook/rocksdb)プラグインです。 Titan は、大きな値が使用された場合に、RocksDB での書き込み増幅を減らすことができます。
 
 Key-Value ペアの値のサイズが大きい (1 KB または 512 B より大きい) 場合、Titan は書き込み、更新、およびポイント読み取りのシナリオで RocksDB よりも優れたパフォーマンスを発揮します。ただし、Titan はstorage領域と範囲クエリのパフォーマンスを犠牲にすることで、より高い書き込みパフォーマンスを実現します。 SSD の価格が下がり続けるにつれて、このトレードオフの意味はますます大きくなります。
 
@@ -49,11 +49,12 @@ Titan は、値ファイルを LSM ツリーから分離するときに、値フ
 
 BLOB ファイルは主に、BLOB レコード、メタ ブロック、メタ インデックス ブロック、およびフッターで構成されます。各ブロック レコードには、キーと値のペアが格納されます。メタ ブロックはスケーラビリティのために使用され、BLOB ファイルに関連するプロパティを保存します。メタ インデックス ブロックは、メタ ブロックの検索に使用されます。
 
-> **ノート：**
+> **注記：**
 >
 > -   BLOB ファイル内の Key-Value ペアは順番に格納されるため、Iterator を実装すると、プリフェッチによって順次読み取りのパフォーマンスを向上させることができます。
 > -   各 BLOB レコードは、値に対応するユーザー キーのコピーを保持します。このようにして、Titan がガベージ コレクション (GC) を実行するときに、ユーザー キーをクエリして、対応する値が古いかどうかを識別できます。ただし、このプロセスでは書き込み増幅が発生します。
 > -   BlobFile は、BLOB レコード レベルでの圧縮をサポートしています。 Titan は、 [キビキビ](https://github.com/google/snappy) 、 [LZ4](https://github.com/lz4/lz4) 、 [Zstd](https://github.com/facebook/zstd)などの複数の圧縮アルゴリズムをサポートしています。現在、Titan が使用するデフォルトの圧縮アルゴリズムは LZ4 です。
+> -   Snappy 圧縮ファイルは[公式の Snappy フォーマット](https://github.com/google/snappy)に存在する必要があります。 Snappy 圧縮の他のバリアントはサポートされていません。
 
 ### TitanTableBuilder {#titantablebuilder}
 

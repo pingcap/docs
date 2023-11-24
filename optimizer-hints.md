@@ -15,8 +15,6 @@ TiDB は、 MySQL 5.7で導入されたコメントのような構文に基づ�
 
 ヒントはカンマで区切って複数指定できます。たとえば、次のクエリでは 3 つの異なるヒントが使用されます。
 
-{{< copyable "" >}}
-
 ```sql
 SELECT /*+ USE_INDEX(t1, idx1), HASH_AGG(), HASH_JOIN(t1) */ count(*) FROM t t1, t t2 WHERE t1.a = t2.b;
 ```
@@ -25,15 +23,13 @@ SELECT /*+ USE_INDEX(t1, idx1), HASH_AGG(), HASH_JOIN(t1) */ count(*) FROM t t1,
 
 間違ったヒントや不完全なヒントによってステートメント エラーが発生することはありません。これは、ヒントがクエリ実行に対する*ヒント*(提案) セマンティクスのみを意図しているためです。同様に、ヒントが適用できない場合、TiDB は最大でも警告を返します。
 
-> **ノート：**
+> **注記：**
 >
 > コメントが指定されたキーワードの後に​​続かない場合、それらは一般的な MySQL コメントとして扱われます。コメントは有効にならず、警告も報告されません。
 
 現在、TiDB は範囲が異なる 2 つのカテゴリのヒントをサポートしています。ヒントの最初のカテゴリは、 [`/*+ HASH_AGG() */`](#hash_agg) ; などのクエリ ブロックのスコープで有効です。 2 番目のカテゴリのヒントは、クエリ全体で有効になります ( [`/*+ MEMORY_QUOTA(1024 MB)*/`](#memory_quotan)など)。
 
 ステートメント内の各クエリまたはサブクエリは異なるクエリ ブロックに対応し、各クエリ ブロックには独自の名前があります。例えば：
-
-{{< copyable "" >}}
 
 ```sql
 SELECT * FROM (SELECT * FROM t) t1, (SELECT * FROM t) t2;
@@ -47,8 +43,6 @@ SELECT * FROM (SELECT * FROM t) t1, (SELECT * FROM t) t2;
 
 例えば：
 
-{{< copyable "" >}}
-
 ```sql
 SELECT /*+ HASH_JOIN(@sel_1 t1@sel_1, t3) */ * FROM (SELECT t1.a, t1.b FROM t t1, t t2 WHERE t1.a = t2.a) t1, t t3 WHERE t1.b = t3.b;
 ```
@@ -60,7 +54,7 @@ SELECT /*+ HASH_JOIN(@sel_1 t1@sel_1, t3) */ * FROM (SELECT t1.a, t1.b FROM t t1
 -   クエリ ブロック名をヒントの最初のパラメーターとして設定し、他のパラメーターとスペースで区切ります。 `QB_NAME`に加えて、このセクションにリストされているすべてのヒントには、別のオプションの隠しパラメータ`@QB_NAME`もあります。このパラメータを使用すると、このヒントの有効範囲を指定できます。
 -   このテーブルがどのクエリ ブロックに属するかを明示的に指定するには、パラメーターのテーブル名に`@QB_NAME`追加します。
 
-> **ノート：**
+> **注記：**
 >
 > ヒントは、ヒントが有効になるクエリ ブロックの中またはその前に配置する必要があります。ヒントがクエリ ブロックの後に置かれた場合、そのヒントは有効になりません。
 
@@ -70,15 +64,13 @@ SELECT /*+ HASH_JOIN(@sel_1 t1@sel_1, t3) */ * FROM (SELECT t1.a, t1.b FROM t t1
 
 `QB_NAME`クエリブロック名を意味します。クエリ ブロックに新しい名前を指定できます。指定した`QB_NAME`と以前のデフォルト名は両方とも有効です。例えば：
 
-{{< copyable "" >}}
-
 ```sql
 SELECT /*+ QB_NAME(QB1) */ * FROM (SELECT * FROM t) t1, (SELECT * FROM t) t2;
 ```
 
 このヒントは、外側`SELECT`クエリ ブロックの名前を`QB1`に指定します。これにより、クエリ ブロックに対して`QB1`とデフォルト名`sel_1`の両方が有効になります。
 
-> **ノート：**
+> **注記：**
 >
 > 上記の例では、ヒントで`QB_NAME` ～ `sel_2`が指定され、元の 2 番目の`SELECT`クエリ ブロックに新しい`QB_NAME`が指定されていない場合、 `sel_2` 2 番目の`SELECT`クエリ ブロックに対して無効な名前になります。
 
@@ -86,21 +78,25 @@ SELECT /*+ QB_NAME(QB1) */ * FROM (SELECT * FROM t) t1, (SELECT * FROM t) t2;
 
 `MERGE_JOIN(t1_name [, tl_name ...])`ヒントは、指定されたテーブルに対してソート/マージ結合アルゴリズムを使用するようにオプティマイザーに指示します。一般に、このアルゴリズムはメモリ消費量は少なくなりますが、処理時間は長くなります。データ量が非常に大きい場合、またはシステムメモリが不足している場合は、このヒントを使用することをお勧めします。例えば：
 
-{{< copyable "" >}}
-
 ```sql
 select /*+ MERGE_JOIN(t1, t2) */ * from t1, t2 where t1.id = t2.id;
 ```
 
-> **ノート：**
+> **注記：**
 >
 > `TIDB_SMJ`は、TiDB 3.0.x 以前のバージョンの`MERGE_JOIN`エイリアスです。これらのバージョンのいずれかを使用している場合は、ヒントに`TIDB_SMJ(t1_name [, tl_name ...])`構文を適用する必要があります。 TiDB の新しいバージョンでは、 `TIDB_SMJ`と`MERGE_JOIN`は両方とも有効なヒント名ですが、 `MERGE_JOIN`をお勧めします。
+
+### NO_MERGE_JOIN(t1_name [, tl_name ...]) {#no-merge-join-t1-name-tl-name}
+
+`NO_MERGE_JOIN(t1_name [, tl_name ...])`ヒントは、指定されたテーブルに対してソート/マージ結合アルゴリズムを使用しないようにオプティマイザーに指示します。例えば：
+
+```sql
+SELECT /*+ NO_MERGE_JOIN(t1, t2) */ * FROM t1, t2 WHERE t1.id = t2.id;
+```
 
 ### INL_JOIN(t1_name [, tl_name ...]) {#inl-join-t1-name-tl-name}
 
 `INL_JOIN(t1_name [, tl_name ...])`ヒントは、指定されたテーブルに対してインデックスのネストされたループ結合アルゴリズムを使用するようにオプティマイザーに指示します。このアルゴリズムは、一部のシナリオでは消費するシステム リソースが少なくなり、処理時間が短縮される可能性がありますが、他のシナリオでは逆の結果が生じる可能性があります。外部テーブルが条件`WHERE`でフィルターされた後の結果セットが 10,000 行未満の場合は、このヒントを使用することをお勧めします。例えば：
-
-{{< copyable "" >}}
 
 ```sql
 select /*+ INL_JOIN(t1, t2) */ * from t1, t2 where t1.id = t2.id;
@@ -108,27 +104,53 @@ select /*+ INL_JOIN(t1, t2) */ * from t1, t2 where t1.id = t2.id;
 
 `INL_JOIN()`で指定したパラメータは、クエリ プランを作成するときの内部テーブルの候補テーブルです。たとえば、 `INL_JOIN(t1)` 、TiDB がクエリ プランを作成するための内部テーブルとして`t1`使用のみを考慮することを意味します。候補テーブルに別名がある場合は、その別名を`INL_JOIN()`のパラメータとして使用する必要があります。別名がない場合は、テーブルの元の名前をパラメータとして使用します。たとえば、 `select /*+ INL_JOIN(t1) */ * from t t1, t t2 where t1.a = t2.b;`クエリでは、 `INL_JOIN()`のパラメータとして`t`ではなく、 `t`テーブルのエイリアス`t1`または`t2`を使用する必要があります。
 
-> **ノート：**
+> **注記：**
 >
 > `TIDB_INLJ`は、TiDB 3.0.x 以前のバージョンの`INL_JOIN`エイリアスです。これらのバージョンのいずれかを使用している場合は、ヒントに`TIDB_INLJ(t1_name [, tl_name ...])`構文を適用する必要があります。 TiDB の新しいバージョンでは、 `TIDB_INLJ`と`INL_JOIN`は両方とも有効なヒント名ですが、 `INL_JOIN`をお勧めします。
+
+### NO_INDEX_JOIN(t1_name [, tl_name ...]) {#no-index-join-t1-name-tl-name}
+
+`NO_INDEX_JOIN(t1_name [, tl_name ...])`ヒントは、指定されたテーブルに対してインデックスのネストされたループ結合アルゴリズムを使用しないようにオプティマイザーに指示します。例えば：
+
+```sql
+SELECT /*+ NO_INDEX_JOIN(t1, t2) */ * FROM t1, t2 WHERE t1.id = t2.id;
+```
 
 ### INL_HASH_JOIN {#inl-hash-join}
 
 `INL_HASH_JOIN(t1_name [, tl_name])`ヒントは、インデックスのネストされたループ ハッシュ結合アルゴリズムを使用するようにオプティマイザーに指示します。このアルゴリズムを使用するための条件は、インデックスネストループ結合アルゴリズムを使用するための条件と同じです。 2 つのアルゴリズムの違いは、 `INL_JOIN`では結合された内部テーブルにハッシュ テーブルが作成されるのに対し、 `INL_HASH_JOIN`では結合された外部テーブルにハッシュ テーブルが作成されることです。 `INL_HASH_JOIN`メモリ使用量に固定制限がありますが、 `INL_JOIN`で使用されるメモリは内部テーブルで一致する行の数に依存します。
 
+### NO_INDEX_HASH_JOIN(t1_name [, tl_name ...]) {#no-index-hash-join-t1-name-tl-name}
+
+`NO_INDEX_HASH_JOIN(t1_name [, tl_name ...])`ヒントは、指定されたテーブルに対してインデックスのネストされたループ ハッシュ結合アルゴリズムを使用しないようにオプティマイザーに指示します。
+
+### INL_MERGE_JOIN {#inl-merge-join}
+
+`INL_MERGE_JOIN(t1_name [, tl_name])`ヒントは、オプティマイザにインデックスのネストされたループ マージ結合アルゴリズムを使用するように指示します。このアルゴリズムを使用するための条件は、インデックスネストループ結合アルゴリズムを使用するための条件と同じです。
+
+### NO_INDEX_MERGE_JOIN(t1_name [, tl_name ...]) {#no-index-merge-join-t1-name-tl-name}
+
+`NO_INDEX_MERGE_JOIN(t1_name [, tl_name ...])`ヒントは、指定されたテーブルに対してインデックスのネストされたループのマージ結合アルゴリズムを使用しないようにオプティマイザーに指示します。
+
 ### HASH_JOIN(t1_name [, tl_name ...]) {#hash-join-t1-name-tl-name}
 
 `HASH_JOIN(t1_name [, tl_name ...])`ヒントは、指定されたテーブルに対してハッシュ結合アルゴリズムを使用するようにオプティマイザーに指示します。このアルゴリズムを使用すると、クエリを複数のスレッドで同時に実行できるため、処理速度は向上しますが、より多くのメモリを消費します。例えば：
-
-{{< copyable "" >}}
 
 ```sql
 select /*+ HASH_JOIN(t1, t2) */ * from t1, t2 where t1.id = t2.id;
 ```
 
-> **ノート：**
+> **注記：**
 >
 > `TIDB_HJ`は、TiDB 3.0.x 以前のバージョンの`HASH_JOIN`エイリアスです。これらのバージョンのいずれかを使用している場合は、ヒントに`TIDB_HJ(t1_name [, tl_name ...])`構文を適用する必要があります。 TiDB の新しいバージョンでは、 `TIDB_HJ`と`HASH_JOIN`は両方とも有効なヒント名ですが、 `HASH_JOIN`をお勧めします。
+
+### NO_HASH_JOIN(t1_name [, tl_name ...]) {#no-hash-join-t1-name-tl-name}
+
+`NO_HASH_JOIN(t1_name [, tl_name ...])`ヒントは、指定されたテーブルに対してハッシュ結合アルゴリズムを使用しないようにオプティマイザーに指示します。例えば：
+
+```sql
+SELECT /*+ NO_HASH_JOIN(t1, t2) */ * FROM t1, t2 WHERE t1.id = t2.id;
+```
 
 ### HASH_JOIN_BUILD(t1_name [, tl_name ...]) {#hash-join-build-t1-name-tl-name}
 
@@ -156,8 +178,6 @@ SELECT /*+ HASH_JOIN_PROBE(t2) */ * FROM t1, t2 WHERE t1.id = t2.id;
 
 `SEMI_JOIN_REWRITE()`を使用してクエリを書き換えると、オプティマイザは選択範囲を拡張して、より適切な実行プランを選択できます。
 
-{{< copyable "" >}}
-
 ```sql
 -- Does not use SEMI_JOIN_REWRITE() to rewrite the query.
 EXPLAIN SELECT * FROM t WHERE EXISTS (SELECT 1 FROM t1 WHERE t1.a = t.a);
@@ -174,8 +194,6 @@ EXPLAIN SELECT * FROM t WHERE EXISTS (SELECT 1 FROM t1 WHERE t1.a = t.a);
 |   └─IndexFullScan_22        | 9990.00 | cop[tikv] | table:t, index:idx(a)  | keep order:true, stats:pseudo                     |
 +-----------------------------+---------+-----------+------------------------+---------------------------------------------------+
 ```
-
-{{< copyable "" >}}
 
 ```sql
 -- Uses SEMI_JOIN_REWRITE() to rewrite the query.
@@ -206,7 +224,7 @@ EXPLAIN SELECT * FROM t WHERE EXISTS (SELECT /*+ SEMI_JOIN_REWRITE() */ 1 FROM t
 SELECT /*+ SHUFFLE_JOIN(t1, t2) */ * FROM t1, t2 WHERE t1.id = t2.id;
 ```
 
-> **ノート：**
+> **注記：**
 >
 > -   このヒントを使用する前に、現在の TiDB クラスターがクエリでのTiFlash MPP モードの使用をサポートできることを確認してください。詳細は[TiFlash MPP モードを使用する](/tiflash/use-tiflash-mpp-mode.md)を参照してください。
 > -   このヒントは、 [`HASH_JOIN_BUILD`ヒント](#hash_join_buildt1_name--tl_name-)および[`HASH_JOIN_PROBE`ヒント](#hash_join_probet1_name--tl_name-)と組み合わせて使用​​して、シャッフル結合アルゴリズムのビルド側とプローブ側を制御できます。
@@ -219,7 +237,7 @@ SELECT /*+ SHUFFLE_JOIN(t1, t2) */ * FROM t1, t2 WHERE t1.id = t2.id;
 SELECT /*+ BROADCAST_JOIN(t1, t2) */ * FROM t1, t2 WHERE t1.id = t2.id;
 ```
 
-> **ノート：**
+> **注記：**
 >
 > -   このヒントを使用する前に、現在の TiDB クラスターがクエリでのTiFlash MPP モードの使用をサポートできることを確認してください。詳細は[TiFlash MPP モードを使用する](/tiflash/use-tiflash-mpp-mode.md)を参照してください。
 > -   このヒントは、 [`HASH_JOIN_BUILD`ヒント](#hash_join_buildt1_name--tl_name-)および[`HASH_JOIN_PROBE`ヒント](#hash_join_probet1_name--tl_name-)と組み合わせて使用​​して、ブロードキャスト結合アルゴリズムのビルド側とプローブ側を制御できます。
@@ -230,16 +248,12 @@ SELECT /*+ BROADCAST_JOIN(t1, t2) */ * FROM t1, t2 WHERE t1.id = t2.id;
 
 このヒントがクエリ ブロックで使用される場合、オプティマイザはサブクエリとその外側のクエリ ブロックの間の相関列の非相関化を実行しようとせず、常に適用演算子を使用してクエリを実行します。
 
-デフォルトでは、TiDB はより高い実行効率を達成するために、相関サブクエリに対して[無相関化を実行する](/correlated-subquery-optimization.md)を試行します。ただし、 [いくつかのシナリオ](/correlated-subquery-optimization.md#restrictions)では、非相関化により実際に実行効率が低下する可能性があります。この場合、このヒントを使用して、非相関化を実行しないようにオプティマイザに手動で指示できます。例えば：
-
-{{< copyable "" >}}
+デフォルトでは、TiDB はより高い実行効率を達成するために、相関サブクエリに対して[無相関化を実行する](/correlated-subquery-optimization.md)を試行します。ただし、 [いくつかのシナリオ](/correlated-subquery-optimization.md#restrictions)では、非相関化により実際に実行効率が低下する可能性があります。この場合、このヒントを使用して、非相関化を実行しないようにオプティマイザーに手動で指示できます。例えば：
 
 ```sql
 create table t1(a int, b int);
 create table t2(a int, b int, index idx(b));
 ```
-
-{{< copyable "" >}}
 
 ```sql
 -- Not using NO_DECORRELATE().
@@ -263,8 +277,6 @@ explain select * from t1 where t1.a < (select sum(t2.a) from t2 where t2.b = t1.
 ```
 
 前述の実行計画から、オプティマイザが非相関化を自動的に実行したことがわかります。非相関実行プランには、Apply 演算子がありません。代わりに、プランにはサブクエリと外側のクエリ ブロック間の結合操作があります。相関列を含む元のフィルター条件 ( `t2.b = t1.b` ) は、通常の結合条件になります。
-
-{{< copyable "" >}}
 
 ```sql
 -- Using NO_DECORRELATE().
@@ -294,8 +306,6 @@ explain select * from t1 where t1.a < (select /*+ NO_DECORRELATE() */ sum(t2.a) 
 
 `HASH_AGG()`ヒントは、指定されたクエリ ブロック内のすべての集計関数でハッシュ集計アルゴリズムを使用するようにオプティマイザに指示します。このアルゴリズムを使用すると、クエリを複数のスレッドで同時に実行できるため、処理速度は向上しますが、より多くのメモリを消費します。例えば：
 
-{{< copyable "" >}}
-
 ```sql
 select /*+ HASH_AGG() */ count(*) from t1, t2 where t1.a > 10 group by t1.id;
 ```
@@ -303,8 +313,6 @@ select /*+ HASH_AGG() */ count(*) from t1, t2 where t1.a > 10 group by t1.id;
 ### STREAM_AGG() {#stream-agg}
 
 `STREAM_AGG()`ヒントは、指定されたクエリ ブロック内のすべての集計関数でストリーム集計アルゴリズムを使用するようにオプティマイザーに指示します。一般に、このアルゴリズムはメモリ消費量は少なくなりますが、処理時間は長くなります。データ量が非常に大きい場合、またはシステムメモリが不足している場合は、このヒントを使用することをお勧めします。例えば：
-
-{{< copyable "" >}}
 
 ```sql
 select /*+ STREAM_AGG() */ count(*) from t1, t2 where t1.a > 10 group by t1.id;
@@ -318,7 +326,7 @@ select /*+ STREAM_AGG() */ count(*) from t1, t2 where t1.a > 10 group by t1.id;
 SELECT /*+ MPP_1PHASE_AGG() */ COUNT(*) FROM t1, t2 WHERE t1.a > 10 GROUP BY t1.id;
 ```
 
-> **ノート：**
+> **注記：**
 >
 > このヒントを使用する前に、現在の TiDB クラスターがクエリでのTiFlash MPP モードの使用をサポートできることを確認してください。詳細は[TiFlash MPP モードを使用する](/tiflash/use-tiflash-mpp-mode.md)を参照してください。
 
@@ -330,7 +338,7 @@ SELECT /*+ MPP_1PHASE_AGG() */ COUNT(*) FROM t1, t2 WHERE t1.a > 10 GROUP BY t1.
 SELECT /*+ MPP_2PHASE_AGG() */ COUNT(*) FROM t1, t2 WHERE t1.a > 10 GROUP BY t1.id;
 ```
 
-> **ノート：**
+> **注記：**
 >
 > このヒントを使用する前に、現在の TiDB クラスターがクエリでのTiFlash MPP モードの使用をサポートできることを確認してください。詳細は[TiFlash MPP モードを使用する](/tiflash/use-tiflash-mpp-mode.md)を参照してください。
 
@@ -338,13 +346,11 @@ SELECT /*+ MPP_2PHASE_AGG() */ COUNT(*) FROM t1, t2 WHERE t1.a > 10 GROUP BY t1.
 
 `USE_INDEX(t1_name, idx1_name [, idx2_name ...])`ヒントは、 `t1_name`されたテーブルに対して指定されたインデックスのみを使用するようにオプティマイザーに指示します。たとえば、次のヒントを適用すると、 `select * from t t1 use index(idx1, idx2);`ステートメントを実行するのと同じ効果があります。
 
-{{< copyable "" >}}
-
 ```sql
 SELECT /*+ USE_INDEX(t1, idx1, idx2) */ * FROM t1;
 ```
 
-> **ノート：**
+> **注記：**
 >
 > このヒントでテーブル名のみを指定し、インデックス名を指定しない場合、実行ではインデックスは考慮されず、テーブル全体がスキャンされます。
 
@@ -356,8 +362,6 @@ SELECT /*+ USE_INDEX(t1, idx1, idx2) */ * FROM t1;
 
 次の 4 つのクエリは同じ効果があります。
 
-{{< copyable "" >}}
-
 ```sql
 SELECT /*+ USE_INDEX(t, idx1) */ * FROM t;
 SELECT /*+ FORCE_INDEX(t, idx1) */ * FROM t;
@@ -368,8 +372,6 @@ SELECT * FROM t force index(idx1);
 ### IGNORE_INDEX(t1_name, idx1_name [, idx2_name ...]) {#ignore-index-t1-name-idx1-name-idx2-name}
 
 `IGNORE_INDEX(t1_name, idx1_name [, idx2_name ...])`ヒントは、指定された`t1_name`テーブルの指定されたインデックスを無視するようにオプティマイザに指示します。たとえば、次のヒントを適用すると、 `select * from t t1 ignore index(idx1, idx2);`ステートメントを実行するのと同じ効果があります。
-
-{{< copyable "" >}}
 
 ```sql
 select /*+ IGNORE_INDEX(t1, idx1, idx2) */ * from t t1;
@@ -403,7 +405,7 @@ EXPLAIN SELECT /*+ ORDER_INDEX(t, a) */ a FROM t ORDER BY a LIMIT 10;
 
 オプティマイザーは、このクエリに対して 2 種類のプラン ( `Limit + IndexScan(keep order: true)`と`TopN + IndexScan(keep order: false)`を生成します。 `ORDER_INDEX`ヒントが使用される場合、オプティマイザはインデックスを順番に読み取る最初のプランを選択します。
 
-> **ノート：**
+> **注記：**
 >
 > -   クエリ自体がインデックスを順番に読み取る必要がない場合 (つまり、ヒントがなければ、オプティマイザはどのような状況でもインデックスを順番に読み取るプランを生成しません)、ヒント`ORDER_INDEX`を使用すると、エラー`Can't find a proper physical plan for this query`発生します。 。この場合、対応する`ORDER_INDEX`ヒントを削除する必要があります。
 > -   パーティションテーブルのインデックスは順番に読み取ることができないため、パーティションテーブルとその関連インデックスに対して`ORDER_INDEX`ヒントを使用しないでください。
@@ -436,8 +438,6 @@ EXPLAIN SELECT /*+ NO_ORDER_INDEX(t, a) */ a FROM t ORDER BY a LIMIT 10;
 
 `AGG_TO_COP()`ヒントは、指定されたクエリ ブロック内の集計演算をコプロセッサにプッシュダウンするようにオプティマイザーに指示します。オプティマイザがプッシュダウンに適した集計関数をプッシュダウンしない場合は、このヒントを使用することをお勧めします。例えば：
 
-{{< copyable "" >}}
-
 ```sql
 select /*+ AGG_TO_COP() */ sum(t1.a) from t t1;
 ```
@@ -446,8 +446,6 @@ select /*+ AGG_TO_COP() */ sum(t1.a) from t t1;
 
 `LIMIT_TO_COP()`ヒントは、指定されたクエリ ブロック内の`Limit`および`TopN`演算子をコプロセッサにプッシュダウンするようにオプティマイザに指示します。オプティマイザがそのような操作を実行しない場合は、このヒントを使用することをお勧めします。例えば：
 
-{{< copyable "" >}}
-
 ```sql
 SELECT /*+ LIMIT_TO_COP() */ * FROM t WHERE a = 1 AND b > 10 ORDER BY c LIMIT 1;
 ```
@@ -455,8 +453,6 @@ SELECT /*+ LIMIT_TO_COP() */ * FROM t WHERE a = 1 AND b > 10 ORDER BY c LIMIT 1;
 ### READ_FROM_STORAGE(TIFLASH[t1_name [, tl_name ...]], TIKV[t2_name [, tl_name ...]]) {#read-from-storage-tiflash-t1-name-tl-name-tikv-t2-name-tl-name}
 
 `READ_FROM_STORAGE(TIFLASH[t1_name [, tl_name ...]], TIKV[t2_name [, tl_name ...]])`ヒントは、特定のstorageエンジンから特定のテーブルを読み取るようにオプティマイザーに指示します。現在、このヒントは 2 つのstorageエンジン パラメーター ( `TIKV`と`TIFLASH`をサポートしています。テーブルに別名がある場合は、その別名を`READ_FROM_STORAGE()`のパラメータとして使用します。テーブルに別名がない場合は、テーブルの元の名前をパラメータとして使用します。例えば：
-
-{{< copyable "" >}}
 
 ```sql
 select /*+ READ_FROM_STORAGE(TIFLASH[t1], TIKV[t2]) */ t1.a from t t1, t t2 where t1.a = t2.a;
@@ -470,23 +466,19 @@ select /*+ READ_FROM_STORAGE(TIFLASH[t1], TIKV[t2]) */ t1.a from t t1, t t2 wher
 
 交差タイプのインデックス マージの場合、指定されたインデックスのリストはヒント内の必須パラメーターです。 Union タイプのインデックス マージの場合、指定されたインデックスのリストはヒント内のオプションのパラメーターです。次の例を参照してください。
 
-{{< copyable "" >}}
-
 ```sql
 SELECT /*+ USE_INDEX_MERGE(t1, idx_a, idx_b, idx_c) */ * FROM t1 WHERE t1.a > 10 OR t1.b > 10;
 ```
 
-同じテーブルに対して複数の`USE_INDEX_MERGE`ヒントが作成されると、オプティマイザは、これらのヒントで指定されたインデックス セットの和集合からインデックスを選択しようとします。
+同じテーブルに対して複数の`USE_INDEX_MERGE`ヒントが作成されると、オプティマイザはこれらのヒントで指定されたインデックス セットの結合からインデックスを選択しようとします。
 
-> **ノート：**
+> **注記：**
 >
 > `USE_INDEX_MERGE`のパラメータは、列名ではなくインデックス名を参照します。主キーのインデックス名は`primary`です。
 
 ### LEADING(t1_name [, tl_name ...]) {#leading-t1-name-tl-name}
 
 `LEADING(t1_name [, tl_name ...])`ヒントは、実行プランを生成するときに、ヒントで指定されたテーブル名の順序に従って複数テーブルの結合の順序を決定することをオプティマイザに思い出させます。例えば：
-
-{{< copyable "" >}}
 
 ```sql
 SELECT /*+ LEADING(t1, t2) */ * FROM t1, t2, t3 WHERE t1.id = t2.id and t2.id = t3.id;
@@ -522,7 +514,7 @@ SHOW WARNINGS;
 +---------+------+-------------------------------------------------------------------------------------------------------------------+
 ```
 
-> **ノート：**
+> **注記：**
 >
 > クエリ ステートメントに外部結合が含まれる場合、ヒントでは結合順序を交換できるテーブルのみを指定できます。結合順序を入れ替えることができないテーブルがヒント内にある場合、ヒントは無効になります。たとえば、 `SELECT * FROM t1 LEFT JOIN (t2 JOIN t3 JOIN t4) ON t1.a = t2.a;`で、 `t2` 、 `t3` 、および`t4`テーブルの結合順序を制御する場合、 `LEADING`ヒントに`t1`を指定することはできません。
 
@@ -538,7 +530,7 @@ WITH CTE AS (SELECT /*+ MERGE() */ * FROM tc WHERE tc.a < 60) SELECT * FROM CTE 
 WITH CTE1 AS (SELECT * FROM t1), CTE2 AS (WITH CTE3 AS (SELECT /*+ MERGE() */ * FROM t2), CTE4 AS (SELECT * FROM t3) SELECT * FROM CTE3, CTE4) SELECT * FROM CTE1, CTE2;
 ```
 
-> **ノート：**
+> **注記：**
 >
 > `MERGE()`は、単純な CTE クエリにのみ適用されます。以下の場合には適用されません。
 >
@@ -555,7 +547,7 @@ WITH CTE1 AS (SELECT * FROM t1), CTE2 AS (WITH CTE3 AS (SELECT /*+ MERGE() */ * 
 
 [`QB_NAME`のヒント](#qb_name)を使用して、ビューの各クエリ ブロックの新しい名前を定義します。ビューの`QB_NAME`ヒントの定義は[クエリブロック](#qb_name)の定義と同じですが、構文は`QB_NAME(QB)`から`QB_NAME(QB, ViewName@QueryBlockName [.ViewName@QueryBlockName .ViewName@QueryBlockName ...])`に拡張されています。
 
-> **ノート：**
+> **注記：**
 >
 > `@QueryBlockName`とその直後の`.ViewName@QueryBlockName`間には空白があります。それ以外の場合、 `.ViewName@QueryBlockName` `QueryBlockName`の一部として扱われます。たとえば、 `QB_NAME(v2_1, v2@SEL_1 .@SEL_1)`は有効ですが、 `QB_NAME(v2_1, v2@SEL_1.@SEL_1)`正しく解析できません。
 
@@ -565,7 +557,7 @@ WITH CTE1 AS (SELECT * FROM t1), CTE2 AS (WITH CTE3 AS (SELECT /*+ MERGE() */ * 
     SELECT /* Comment: The name of the current query block is the default @SEL_1 */ * FROM v;
     ```
 
-    ビュー`v`の場合、クエリ ステートメントから始まるリスト ( `ViewName@QueryBlockName [.ViewName@QueryBlockName .ViewName@QueryBlockName ...]` ) の最初のビュー名は`v@SEL_1`です。ビュー`v`の最初のクエリ ブロックは、 `QB_NAME(v_1, v@SEL_1 .@SEL_1)`として宣言することも、 `@SEL_1`を省略して単に`QB_NAME(v_1, v)`として記述することもできます。
+    ビュー`v`の場合、クエリ ステートメントから始まるリスト ( `ViewName@QueryBlockName [.ViewName@QueryBlockName .ViewName@QueryBlockName ...]` ) 内の最初のビュー名は`v@SEL_1`です。ビュー`v`の最初のクエリ ブロックは、 `QB_NAME(v_1, v@SEL_1 .@SEL_1)`として宣言することも、 `@SEL_1`を省略して単に`QB_NAME(v_1, v)`として記述することもできます。
 
     ```sql
     CREATE VIEW v AS SELECT /* Comment: The name of the current query block is the default @SEL_1 */ * FROM t;
@@ -602,7 +594,7 @@ WITH CTE1 AS (SELECT * FROM t1), CTE2 AS (WITH CTE3 AS (SELECT /*+ MERGE() */ * 
         ) tt;
     ```
 
-> **ノート：**
+> **注記：**
 >
 > -   ビューでグローバル ヒントを使用するには、ビュー内で対応する`QB_NAME`ヒントを定義する必要があります。そうしないと、グローバル ヒントが有効になりません。
 >
@@ -650,7 +642,7 @@ WITH CTE1 AS (SELECT * FROM t1), CTE2 AS (WITH CTE3 AS (SELECT /*+ MERGE() */ * 
 
 このカテゴリのヒントは、**最初の**`SELECT` 、 `UPDATE` 、または`DELETE`キーワードの後に​​のみ続きます。これは、このクエリの実行時に指定されたシステム変数の値を変更するのと同じです。ヒントの優先順位は、既​​存のシステム変数の優先順位よりも高くなります。
 
-> **ノート：**
+> **注記：**
 >
 > このカテゴリのヒントにはオプションの隠し変数`@QB_NAME`もありますが、変数を指定した場合でも、ヒントはクエリ全体で有効になります。
 
@@ -660,26 +652,22 @@ WITH CTE1 AS (SELECT * FROM t1), CTE2 AS (WITH CTE3 AS (SELECT /*+ MERGE() */ * 
 
 たとえば、次のクエリではインデックス マージが使用されません。
 
-{{< copyable "" >}}
-
 ```sql
 select /*+ NO_INDEX_MERGE() */ * from t where t.a > 0 or t.b > 0;
 ```
 
 このヒントに加えて、 `tidb_enable_index_merge`システム変数を設定すると、この機能を有効にするかどうかも制御されます。
 
-> **ノート：**
+> **注記：**
 >
 > -   `NO_INDEX_MERGE` `USE_INDEX_MERGE`よりも高い優先順位を持ちます。両方のヒントを使用した場合、 `USE_INDEX_MERGE`有効になりません。
-> -   サブクエリの場合、 `NO_INDEX_MERGE`サブクエリの最も外側のレベルに配置された場合にのみ有効になります。
+> -   サブクエリの場合、 `NO_INDEX_MERGE`サブクエリの最外部レベルに配置された場合にのみ有効になります。
 
 ### USE_TOJA(ブール値) {#use-toja-boolean-value}
 
 `boolean_value`パラメータには`TRUE`または`FALSE`を指定できます。 `USE_TOJA(TRUE)`ヒントにより、オプティマイザは`in`条件 (サブクエリを含む) を結合および集計操作に変換できるようになります。比較的、 `USE_TOJA(FALSE)`ヒントはこの機能を無効にします。
 
 たとえば、次のクエリは`in (select t2.a from t2) subq`を対応する結合および集計操作に変換します。
-
-{{< copyable "" >}}
 
 ```sql
 select /*+ USE_TOJA(TRUE) */ t1.a, t1.b from t1 where t1.a in (select t2.a from t2) subq;
@@ -690,8 +678,6 @@ select /*+ USE_TOJA(TRUE) */ t1.a, t1.b from t1 where t1.a in (select t2.a from 
 ### MAX_EXECUTION_TIME(N) {#max-execution-time-n}
 
 `MAX_EXECUTION_TIME(N)`ヒントは、サーバーがステートメントを終了するまでにステートメントの実行が許可される時間に制限`N` (ミリ秒単位のタイムアウト値) を設けます。次のヒントでは、 `MAX_EXECUTION_TIME(1000)`タイムアウトが 1000 ミリ秒 (つまり 1 秒) であることを意味します。
-
-{{< copyable "" >}}
 
 ```sql
 select /*+ MAX_EXECUTION_TIME(1000) */ * from t1 inner join t2 where t1.id = t2.id;
@@ -705,8 +691,6 @@ select /*+ MAX_EXECUTION_TIME(1000) */ * from t1 inner join t2 where t1.id = t2.
 
 次のヒントでは、 `MEMORY_QUOTA(1024 MB)`メモリ使用量が 1024 MB に制限されていることを意味します。
 
-{{< copyable "" >}}
-
 ```sql
 select /*+ MEMORY_QUOTA(1024 MB) */ * from t;
 ```
@@ -716,8 +700,6 @@ select /*+ MEMORY_QUOTA(1024 MB) */ * from t;
 ### READ_CONSISTENT_REPLICA() {#read-consistent-replica}
 
 `READ_CONSISTENT_REPLICA()`ヒントにより、TiKV フォロワー ノードから一貫したデータを読み取る機能が有効になります。例えば：
-
-{{< copyable "" >}}
 
 ```sql
 select /*+ READ_CONSISTENT_REPLICA() */ * from t;
@@ -733,8 +715,6 @@ select /*+ READ_CONSISTENT_REPLICA() */ * from t;
 
 次の例では、 `prepare`ステートメントの実行時にプラン キャッシュが強制的に無効になります。
 
-{{< copyable "" >}}
-
 ```sql
 prepare stmt from 'select  /*+ IGNORE_PLAN_CACHE() */ * from t where t.id = ?';
 ```
@@ -743,13 +723,11 @@ prepare stmt from 'select  /*+ IGNORE_PLAN_CACHE() */ * from t where t.id = ?';
 
 `STRAIGHT_JOIN()`ヒントは、結合計画を生成するときに、オプティマイザに`FROM`句のテーブル名の順序でテーブルを結合するように指示します。
 
-{{< copyable "" >}}
-
 ```sql
 SELECT /*+ STRAIGHT_JOIN() */ * FROM t t1, t t2 WHERE t1.a = t2.a;
 ```
 
-> **ノート：**
+> **注記：**
 >
 > -   `STRAIGHT_JOIN`は`LEADING`よりも優先されます。両方のヒントを使用した場合、 `LEADING`有効になりません。
 > -   `STRAIGHT_JOIN`ヒントよりも一般的な`LEADING`ヒントを使用することをお勧めします。
@@ -764,13 +742,11 @@ SELECT /*+ STRAIGHT_JOIN() */ * FROM t t1, t t2 WHERE t1.a = t2.a;
 
 次の例では、オプティマイザは物理的な最適化中に見つかった 3 番目の物理プランを選択するように強制されます。
 
-{{< copyable "" >}}
-
 ```sql
 SELECT /*+ NTH_PLAN(3) */ count(*) from t where a > 5;
 ```
 
-> **ノート：**
+> **注記：**
 >
 > `NTH_PLAN(N)`は主にテスト用に使用されており、それ以降のバージョンでの互換性は保証されません。このヒントは**注意して**使用してください。
 
@@ -937,4 +913,28 @@ EXPLAIN SELECT /*+ leading(t1, t3), inl_join(t3) */ * FROM t1, t2, t3 WHERE t1.i
 |       └─TableRangeScan_24       | 10000.00 | cop[tikv] | table:t3      | range: decided by [test.t1.id], keep order:false, stats:pseudo                                                      |
 +---------------------------------+----------+-----------+---------------+---------------------------------------------------------------------------------------------------------------------+
 9 rows in set (0.01 sec)
+```
+
+### ヒントを使用すると、 <code>Can&#39;t find a proper physical plan for this query</code>エラーが発生します {#using-hints-causes-the-code-can-t-find-a-proper-physical-plan-for-this-query-code-error}
+
+`Can't find a proper physical plan for this query`エラーは、次のシナリオで発生する可能性があります。
+
+-   クエリ自体はインデックスを順番に読み取る必要はありません。つまり、このクエリの場合、オプティマイザは、いかなる場合でもヒントを使用せずにインデックスを順番に読み取るプランを生成しません。この場合、 `ORDER_INDEX`ヒントを指定するとこのエラーが発生します。この問題を解決するには、対応する`ORDER_INDEX`のヒントを削除します。
+-   クエリでは、 `NO_JOIN`関連ヒントを使用して、考えられるすべての結合方法が除外されます。
+
+```sql
+CREATE TABLE t1 (a INT);
+CREATE TABLE t2 (a INT);
+EXPLAIN SELECT /*+ NO_HASH_JOIN(t1), NO_MERGE_JOIN(t1) */ * FROM t1, t2 WHERE t1.a=t2.a;
+ERROR 1815 (HY000): Internal : Can't find a proper physical plan for this query
+```
+
+-   システム変数[`tidb_opt_enable_hash_join`](/system-variables.md#tidb_opt_enable_hash_join-new-in-v712) `OFF`に設定され、他のすべての結合タイプも除外されます。
+
+```sql
+CREATE TABLE t1 (a INT);
+CREATE TABLE t2 (a INT);
+set tidb_opt_enable_hash_join=off;
+EXPLAIN SELECT /*+ NO_MERGE_JOIN(t1) */ * FROM t1, t2 WHERE t1.a=t2.a;
+ERROR 1815 (HY000): Internal : Can't find a proper physical plan for this query
 ```

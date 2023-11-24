@@ -216,7 +216,7 @@ Python の完全な例については、以下を参照してください。
 -   [mysqlclient を使用して TiDB に接続する](https://github.com/tidb-samples/tidb-python-mysqlclient-quickstart)
 -   [MySQL コネクタ/Python を使用して TiDB に接続する](/develop/dev-guide-sample-application-python-mysql-connector.md)
 -   [SQLAlchemy を使用して TiDB に接続する](/develop/dev-guide-sample-application-python-sqlalchemy.md)
--   [peewee を使用して TiDB と Python でシンプルな CRUD アプリを構築する](/develop/dev-guide-sample-application-python-peewee.md#step-2-get-the-code)
+-   [peewee で TiDB に接続する](/develop/dev-guide-sample-application-python-peewee.md)
 
 </div>
 

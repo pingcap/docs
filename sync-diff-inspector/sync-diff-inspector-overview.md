@@ -12,8 +12,6 @@ summary: Use sync-diff-inspector to compare data and repair inconsistent data.
 -   バイナリパッケージ。 sync-diff-inspector バイナリ パッケージはTiDB Toolkitに含まれています。 TiDB Toolkitをダウンロードするには、 [TiDB ツールをダウンロード](/download-ecosystem-tools.md)を参照してください。
 -   ドッカーイメージ。次のコマンドを実行してダウンロードします。
 
-    {{< copyable "" >}}
-
     ```shell
     docker pull pingcap/tidb-tools:latest
     ```
@@ -24,7 +22,7 @@ summary: Use sync-diff-inspector to compare data and repair inconsistent data.
 -   データの不整合が存在する場合にデータを修復するために使用される SQL ステートメントを生成します。
 -   サポート[異なるスキーマ名またはテーブル名を持つテーブルのデータ チェック](/sync-diff-inspector/route-diff.md)
 -   サポート[シャーディングシナリオでのデータチェック](/sync-diff-inspector/shard-diff.md)
--   サポート[TiDB アップストリーム/ダウンストリーム クラスターのデータ チェック](/sync-diff-inspector/upstream-downstream-diff.md)
+-   サポート[TiDB アップストリーム/ダウンストリーム クラスターのデータ チェック](/ticdc/ticdc-upstream-downstream-check.md)
 -   サポート[DM レプリケーション シナリオでのデータ チェック](/sync-diff-inspector/dm-diff.md)
 
 ## sync-diff-inspector の制限事項 {#restrictions-of-sync-diff-inspector}
@@ -165,8 +163,6 @@ collation = ""
 
 次のコマンドを実行します。
 
-{{< copyable "" >}}
-
 ```bash
 ./sync_diff_inspector --config=./config.toml
 ```
@@ -177,7 +173,7 @@ collation = ""
 
 sync-diff-inspector は実行時に進行状況情報を`stdout`に送信します。進捗情報には、テーブル構造の比較結果、テーブルデータの比較結果、プログレスバーが含まれます。
 
-> **ノート：**
+> **注記：**
 >
 > 表示効果を確保するには、表示ウィンドウの幅を 80 文字以上に保ってください。
 
@@ -216,21 +212,19 @@ You can view the comparison details through 'output/sync_diff.log'
 
 出力ファイルのディレクトリ構造は次のとおりです。
 
-```
-output/
-|-- checkpoint # Saves the breakpoint information
-| |-- bbfec8cc8d1f58a5800e63aa73e5 # Config hash. The placeholder file which identifies the configuration file corresponding to the output directory (output/)
-│ |-- DO_NOT_EDIT_THIS_DIR
-│ └-- sync_diff_checkpoints.pb # The breakpoint information
-|
-|-- fix-on-target # Saves SQL files to fix data inconsistency
-| |-- xxx.sql
-| |-- xxx.sql
-| └-- xxx.sql
-|
-|-- summary.txt # Saves the summary of the check results
-└-- sync_diff.log # Saves the output log information when sync-diff-inspector is running
-```
+    output/
+    |-- checkpoint # Saves the breakpoint information
+    | |-- bbfec8cc8d1f58a5800e63aa73e5 # Config hash. The placeholder file which identifies the configuration file corresponding to the output directory (output/)
+    │ |-- DO_NOT_EDIT_THIS_DIR
+    │ └-- sync_diff_checkpoints.pb # The breakpoint information
+    |
+    |-- fix-on-target # Saves SQL files to fix data inconsistency
+    | |-- xxx.sql
+    | |-- xxx.sql
+    | └-- xxx.sql
+    |
+    |-- summary.txt # Saves the summary of the check results
+    └-- sync_diff.log # Saves the output log information when sync-diff-inspector is running
 
 ### ログ {#log}
 
@@ -268,7 +262,7 @@ SQL ファイルには、チャンクが属するテイルと範囲情報が含�
 
 -   ダウンストリーム データベース内の行が欠落している場合は、REPLACE ステートメントが適用されます。
 -   ダウンストリーム データベース内の行が冗長である場合、DELETE ステートメントが適用されます。
--   ダウンストリーム データベース内の行の一部のデータに一貫性がない場合、REPLACE ステートメントが適用され、SQL ファイル内で一貫性のない列に注釈が付けられます。
+-   ダウンストリーム データベース内の行の一部のデータが矛盾している場合、REPLACE ステートメントが適用され、SQL ファイル内で矛盾した列に注釈が付けられます。
 
 ```sql
 -- table: sbtest.sbtest99
@@ -284,10 +278,10 @@ SQL ファイルには、チャンクが属するテイルと範囲情報が含�
 REPLACE INTO `sbtest`.`sbtest99`(`id`,`k`,`c`,`pad`) VALUES (3700000,2501808,'hello','world');
 ```
 
-## ノート {#note}
+## 注記 {#note}
 
 -   sync-diff-inspector はデータをチェックするときに一定量のサーバーリソースを消費します。営業時間のピーク時に sync-diff-inspector を使用してデータをチェックすることは避けてください。
 -   MySQL のデータと TiDB のデータを比較する前に、テーブルの照合順序構成に注意してください。主キーまたは一意キーが`varchar`タイプで、MySQL の照合構成が TiDB の照合順序構成と異なる場合、照合順序順序の問題により、最終チェック結果が正しくない可能性があります。 sync-diff-inspector 構成ファイルに照合順序を追加する必要があります。
 -   sync-diff-inspector は、まず TiDB 統計に従ってデータをチャンクに分割します。統計の正確性を保証する必要があります。 TiDB サーバーの*ワークロードが軽い*場合は、 `analyze table {table_name}`コマンドを手動で実行できます。
--   `table-rules`に特に注意してください。 `schema-pattern="test1"` `table-pattern = "t_1"`設定すると`target-schema="test2"` `target-table = "t_2"` `test1`ソース データベースの`t_1`スキーマと`test2` 。対象データベース内の`t_2`スキーマが比較されます。シャーディングは sync-diff-inspector でデフォルトで有効になっているため、ソース データベースに`test2` . `t_2`表、 `test1` 。 `t_1`テーブルと`test2` 。シャーディングとして機能するソース データベース内の`t_2`テーブルは、 `test2`と比較されます。 `t_2`ターゲットデータベースのテーブル。
+-   `table-rules`に特に注意してください。 `schema-pattern="test1"` `table-pattern = "t_1"`設定する`target-schema="test2"` 、 `target-table = "t_2"` `test1`ソース データベースの`t_1`スキーマと`test2` 。対象データベース内の`t_2`スキーマが比較されます。シャーディングは sync-diff-inspector でデフォルトで有効になっているため、ソース データベースに`test2` . `t_2`表、 `test1` 。 `t_1`テーブルと`test2` 。シャーディングとして機能するソース データベース内の`t_2`テーブルは、 `test2`と比較されます。 `t_2`ターゲットデータベースのテーブル。
 -   生成された SQL ファイルはデータ修復の参考としてのみ使用されるため、これらの SQL ステートメントを実行してデータを修復する前に確認する必要があります。

@@ -11,7 +11,7 @@ TiDB Cloudでは、常に動作していない TiDB D dedicated クラスター�
 
 バックアップや復元と比較すると、クラスターの一時停止と再開にかかる時間は短くなり、クラスター情報 (クラスターのバージョン、クラスター構成、TiDB ユーザー アカウントなど) が保持されます。
 
-> **ノート：**
+> **注記：**
 >
 > [TiDB サーバーレスクラスター](/tidb-cloud/select-cluster-tier.md#tidb-serverless)を一時停止することはできません。
 
@@ -37,7 +37,7 @@ TiDB Cloudでは、常に動作していない TiDB D dedicated クラスター�
     -   ノードのストレージコスト
     -   データバックアップコスト
 
--   TiDB Cloud はクラスターの[自動バックアップ](/tidb-cloud/backup-and-restore.md#automatic-backup)を停止します。
+-   TiDB Cloud はクラスターの[自動バックアップ](/tidb-cloud/backup-and-restore.md#turn-on-auto-backup)を停止します。
 
 クラスターを一時停止するには、次の手順を実行します。
 
@@ -65,7 +65,7 @@ TiDB Cloud API を使用してクラスターを一時停止することもで�
 
 -   TiDB Cloudはクラスターの監視情報の収集を再開し、クラスターからのデータの読み取りまたはクラスターへのデータの書き込みが可能になります。
 -   TiDB Cloud は、コンピューティングとstorageの両方のコストの請求を再開します。
--   TiDB Cloud はクラスターの[自動バックアップ](/tidb-cloud/backup-and-restore.md#automatic-backup)を再開します。
+-   TiDB Cloud はクラスターの[自動バックアップ](/tidb-cloud/backup-and-restore.md#turn-on-auto-backup)を再開します。
 
 一時停止したクラスターを再開するには、次の手順を実行します。
 
@@ -73,7 +73,7 @@ TiDB Cloud API を使用してクラスターを一時停止することもで�
 
 2.  再開するクラスターについては、 **「再開」を**クリックします。 **[クラスターを再開]**ダイアログが表示されます。
 
-    > **ノート：**
+    > **注記：**
     >
     > **一時停止**状態のクラスターを再開することはできません。
 

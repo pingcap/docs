@@ -74,7 +74,7 @@ br backup db \
     --log-file backuptable.log
 ```
 
-前述のコマンドでは、 `--db`にデータベース名を指定し、その他のパラメータは[TiDB クラスターのスナップショットをバックアップする](#back-up-cluster-snapshots)と同じです。
+前述のコマンドでは、 `--db`​​データベース名を指定し、その他のパラメータは[TiDB クラスターのスナップショットをバックアップする](#back-up-cluster-snapshots)と同じです。
 
 ### テーブルをバックアップする {#back-up-a-table}
 
@@ -96,7 +96,7 @@ br backup table \
 
 ### テーブルフィルターを使用して複数のテーブルをバックアップする {#back-up-multiple-tables-with-table-filter}
 
-より多くの条件を使用して複数のテーブルをバックアップするには、 `br backup full`コマンドを実行し、 [テーブルフィルター](/table-filter.md) `--filter`または`-f`で指定します。
+より多くの条件を使用して複数のテーブルをバックアップするには、 `br backup full`コマンドを実行し、 `--filter`または`-f`で[テーブルフィルター](/table-filter.md)を指定します。
 
 次の例では、 `db*.tbl*`フィルター ルールに一致するテーブルを Amazon S3 にバックアップします。
 
@@ -120,7 +120,7 @@ BR は、バックアップ[Amazon S3 にバックアップするときにstorag
 TiDB v5.3.0 以降、次のパラメータを構成することでバックアップ データを暗号化できます。
 
 -   `--crypter.method` : 暗号化アルゴリズム。 `aes128-ctr` 、 `aes192-ctr` 、または`aes256-ctr`のいずれかです。デフォルト値は`plaintext`で、データが暗号化されないことを示します。
--   `--crypter.key` : 16 進文字列形式の暗号化キー。アルゴリズム`aes128-ctr`場合は 128 ビット (16 バイト) の鍵、アルゴリズム`aes192-ctr`の場合は 24 バイトの鍵、アルゴリズム`aes256-ctr`の場合は 32 バイトの鍵です。
+-   `--crypter.key` : 16 進文字列形式の暗号化キー。アルゴリズム`aes128-ctr`の場合は 128 ビット (16 バイト) の鍵、アルゴリズム`aes192-ctr`の場合は 24 バイトの鍵、アルゴリズム`aes256-ctr`の場合は 32 バイトの鍵です。
 -   `--crypter.key-file` : キーファイル。 `crypter.key`を渡さずに、キーが保存されているファイル パスをパラメータとして直接渡すことができます。
 
 以下は例です。
@@ -145,6 +145,7 @@ br backup full\
 ```shell
 br restore full \
     --pd "${PD_IP}:2379" \
+    --with-sys-table \
     --storage "s3://${backup_collection_addr}/snapshot-${date}?access-key=${access-key}&secret-access-key=${secret-access-key}" \
     --ratelimit 128 \
     --log-file restorefull.log
@@ -152,6 +153,7 @@ br restore full \
 
 前述のコマンドでは次のようになります。
 
+-   `--with-sys-table` : BR は、アカウント権限データや SQL バインディングなど、**一部のシステム テーブルのデータ**を復元します。ただし、統計テーブル ( `mysql.stat_*` ) とシステム変数テーブル ( `mysql.tidb`および`mysql.global_variables` ) は復元されません。詳細については、 [`mysql`スキーマ内のテーブルを復元する](/br/br-snapshot-guide.md#restore-tables-in-the-mysql-schema)を参照してください。
 -   `--ratelimit` : バックアップ タスクを実行する**TiKV ごとの**最大速度。単位は MiB/s です。
 -   `--log-file` : `br`ログが書き込まれる対象ファイル。
 
@@ -202,7 +204,7 @@ br restore table \
     --log-file restore_table.log
 ```
 
-前のコマンドでは、 `--table`に復元するテーブルの名前を指定し、その他のパラメータは[データベースを復元する](#restore-a-database)と同じです。
+前述のコマンドでは、 `--table`に復元するテーブルの名前を指定し、その他のパラメータは[データベースを復元する](#restore-a-database)と同じです。
 
 ### テーブルフィルターを使用して複数のテーブルを復元する {#restore-multiple-tables-with-table-filter}
 
@@ -220,7 +222,7 @@ br restore full \
 
 ### <code>mysql</code>スキーマから実行プランのバインディングを復元する {#restore-execution-plan-bindings-from-the-code-mysql-code-schema}
 
-クラスターの実行プラン バインディングを復元するには、 `--with-sys-table`オプションと、復元するスキーマを指定する`--filter`オプションを含む`br restore full`コマンド`-f` `mysql`します。
+クラスターの実行プラン バインディングを復元するには、 `--with-sys-table`オプションと、復元するスキーマを指定する`--filter`オプションを含む`br restore full`コマンド`-f`実行`mysql`ます。
 
 以下は`mysql.bind_info`テーブルを復元する例です。
 

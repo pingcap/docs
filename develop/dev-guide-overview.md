@@ -23,7 +23,7 @@ summary: Introduce the overview of the developer guide.
 
 ## TiDB の基本 {#tidb-basics}
 
-TiDB の使用を開始する前に、TiDB がどのように動作するかに関するいくつかの重要なメカニズムを理解する必要があります。
+TiDB の使用を開始する前に、TiDB がどのように機能するかに関するいくつかの重要なメカニズムを理解する必要があります。
 
 -   TiDB でトランザクションがどのように機能するかを理解するには[TiDBトランザクションの概要](/transaction-overview.md)を読んでください。アプリケーション開発に必要なトランザクションの知識については[アプリケーション開発者向けのトランザクションノート](/develop/dev-guide-transaction-overview.md)を確認してください。
 -   [アプリケーションが TiDB と対話する方法](#the-way-applications-interact-with-tidb)を理解する。
@@ -66,20 +66,37 @@ TiDB は MySQL プロトコルおよび MySQL 構文と互換性があるため�
 -   [データの書き込み](/develop/dev-guide-insert-data.md)
 -   [データの読み取り](/develop/dev-guide-get-data-from-single-table.md)
 -   [トランザクション](/develop/dev-guide-transaction-overview.md)
--   [最適化](/develop/dev-guide-optimize-sql-overview.md)
+-   [最適化する](/develop/dev-guide-optimize-sql-overview.md)
 -   [アプリケーション例](/develop/dev-guide-sample-application-java-spring-boot.md)
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
+ここでは、 TiDB Cloudに接続、管理、開発するための追加リソースを見つけることができます。
+
+**データを探索するには**
+
 -   [クイックスタート](/develop/dev-guide-build-cluster-in-cloud.md)
+-   [AI を活用した SQL エディターの<sup>ベータ版</sup>を使用する](/tidb-cloud/explore-data-with-chat2query.md)
+-   [VSコード](/develop/dev-guide-gui-vscode-sqltools.md) 、 [Dビーバー](/develop/dev-guide-gui-dbeaver.md) 、 [データグリップ](/develop/dev-guide-gui-datagrip.md)などのクライアント ツールと接続します。
+
+**アプリケーションを構築するには**
+
 -   [Driverまたは ORM を選択してください](/develop/dev-guide-choose-driver-or-orm.md)
+-   [TiDB Cloudデータ API<sup>ベータ版</sup>を使用する](/tidb-cloud/data-service-overview.md)
+
+**クラスターを管理するには**
+
+-   [TiDB Cloudコマンドライン ツール](/tidb-cloud/get-started-with-cli.md)
+-   [TiDB Cloud管理 API](https://docs.pingcap.com/tidbcloud/api/v1beta1)
+
+**TiDB についてさらに詳しく知るには**
+
 -   [データベーススキーマの設計](/develop/dev-guide-schema-design-overview.md)
 -   [データの書き込み](/develop/dev-guide-insert-data.md)
 -   [データの読み取り](/develop/dev-guide-get-data-from-single-table.md)
 -   [トランザクション](/develop/dev-guide-transaction-overview.md)
--   [最適化](/develop/dev-guide-optimize-sql-overview.md)
--   [アプリケーション例](/develop/dev-guide-sample-application-java-spring-boot.md)
+-   [最適化する](/develop/dev-guide-optimize-sql-overview.md)
 
 </CustomContent>

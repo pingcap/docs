@@ -337,7 +337,7 @@ console.log(rows[0]['tidb_version']);
 
 ### 外部キー制約 {#foreign-key-constraints}
 
-外部キー制約を使用すると、データベース側でチェックを追加することでデータの[参照整合性](https://en.wikipedia.org/wiki/Referential_integrity)が保証されます。ただし、これにより、データ量が大きいシナリオでは、パフォーマンスに重大な問題が発生する可能性があります。
+[外部キー制約](https://docs.pingcap.com/tidb/stable/foreign-key) (実験的) を使用すると、データベース側でチェックを追加することでデータの[参照整合性](https://en.wikipedia.org/wiki/Referential_integrity)が保証されます。ただし、これにより、データ量が大きいシナリオでは重大なパフォーマンスの問題が発生する可能性があります。
 
 `createForeignKeyConstraints`オプション (デフォルト値は`true` ) を使用して、エンティティ間の関係を構築するときに外部キー制約を作成するかどうかを制御できます。
 

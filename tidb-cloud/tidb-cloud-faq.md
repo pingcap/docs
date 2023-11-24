@@ -41,14 +41,14 @@ TiDB Cloudは現在、アマゾン ウェブ サービスと Google Cloud で利
 
 ### TiDB Cloudではどのバージョンの TiDB がサポートされていますか? {#what-versions-of-tidb-are-supported-on-tidb-cloud}
 
--   2023 年 7 月 25 日以降、新しい TiDB 専用クラスターのデフォルトの TiDB バージョンは v7.1.1 になります。
+-   2023 年 10 月 31 日以降、新しい TiDB 専用クラスターのデフォルトの TiDB バージョンは v7.1.2 になります。
 -   2023 年 3 月 7 日以降、新しい TiDB サーバーレス クラスターのデフォルトの TiDB バージョンは v6.6.0 になります。
 
 詳細については、 [TiDB Cloudリリースノート](/tidb-cloud/tidb-cloud-release-notes.md)を参照してください。
 
 ### TiDB またはTiDB Cloud を本番で使用しているのはどの企業ですか? {#what-companies-are-using-tidb-or-tidb-cloud-in-production}
 
-TiDB は、金融サービス、ゲーム、電子商取引など、さまざまな業界の 1,500 社以上のグローバル企業から信頼されています。当社のユーザーには、Square (米国)、Shopee (シンガポール)、および China UnionPay (中国) が含まれます。具体的な詳細については[ケーススタディ](https://en.pingcap.com/customers/)参照してください。
+TiDB は、金融サービス、ゲーム、電子商取引など、さまざまな業界の 1,500 社を超えるグローバル企業から信頼されています。当社のユーザーには、Square (米国)、Shopee (シンガポール)、および China UnionPay (中国) が含まれます。具体的な詳細については[ケーススタディ](https://en.pingcap.com/customers/)参照してください。
 
 ### SLA はどのようなものですか? {#what-does-the-sla-look-like}
 
@@ -104,7 +104,7 @@ TiDB は MySQL と高い互換性があります。データがセルフホス�
 
 ### TiDB Cloud は増分バックアップをサポートしていますか? {#does-tidb-cloud-support-incremental-backups}
 
-いいえ。クラスターのバックアップ保持期間内の任意の時点にデータを復元する必要がある場合は、PITR (Point-in-time Recovery) を使用できます。詳細については、 [TiDB 専用クラスターで PITR を使用する](/tidb-cloud/backup-and-restore.md#automatic-backup)または[TiDB サーバーレスクラスターで PITR を使用する](/tidb-cloud/backup-and-restore-serverless.md#restore)を参照してください。
+いいえ。クラスターのバックアップ保持期間内の任意の時点にデータを復元する必要がある場合は、PITR (Point-in-time Recovery) を使用できます。詳細については、 [TiDB 専用クラスターで PITR を使用する](/tidb-cloud/backup-and-restore.md#turn-on-auto-backup)または[TiDB サーバーレスクラスターで PITR を使用する](/tidb-cloud/backup-and-restore-serverless.md#restore)を参照してください。
 
 ## HTAPに関するよくある質問 {#htap-faqs}
 

@@ -49,29 +49,31 @@ TiDB Cloudのバケット アクセスを構成し、次のようにロール AR
 
     5.  次のアクセス ポリシー テンプレートをコピーし、ポリシー テキスト フィールドに貼り付けます。
 
-            {
-                "Version": "2012-10-17",
-                "Statement": [
-                    {
-                        "Sid": "VisualEditor0",
-                        "Effect": "Allow",
-                        "Action": [
-                            "s3:GetObject",
-                            "s3:GetObjectVersion"
-                        ],
-                        "Resource": "<Your S3 bucket ARN>/<Directory of your source data>/*"
-                    },
-                    {
-                        "Sid": "VisualEditor1",
-                        "Effect": "Allow",
-                        "Action": [
-                            "s3:ListBucket",
-                            "s3:GetBucketLocation"
-                        ],
-                        "Resource": "<Your S3 bucket ARN>"
-                    }
-                ]
-            }
+        ```json
+        {
+            "Version": "2012-10-17",
+            "Statement": [
+                {
+                    "Sid": "VisualEditor0",
+                    "Effect": "Allow",
+                    "Action": [
+                        "s3:GetObject",
+                        "s3:GetObjectVersion"
+                    ],
+                    "Resource": "<Your S3 bucket ARN>/<Directory of your source data>/*"
+                },
+                {
+                    "Sid": "VisualEditor1",
+                    "Effect": "Allow",
+                    "Action": [
+                        "s3:ListBucket",
+                        "s3:GetBucketLocation"
+                    ],
+                    "Resource": "<Your S3 bucket ARN>"
+                }
+            ]
+        }
+        ```
 
         ポリシー テキスト フィールドで、次の設定を独自の値に更新します。
 
@@ -82,6 +84,19 @@ TiDB Cloudのバケット アクセスを構成し、次のようにロール AR
         -   `"Resource": "<Your S3 bucket ARN>"`
 
             たとえば、 `"Resource": "arn:aws:s3:::tidb-cloud-source-data"` 。
+
+        -   顧客管理のキー暗号化を使用して AWS Key Management Service キー (SSE-KMS) を有効にしている場合は、次の設定がポリシーに含まれていることを確認してください。 `"arn:aws:kms:ap-northeast-1:105880447796:key/c3046e91-fdfc-4f3a-acff-00597dd3801f"`はバケットのサンプル KMS キーです。
+
+                {
+                    "Sid": "AllowKMSkey",
+                    "Effect": "Allow",
+                    "Action": [
+                        "kms:Decrypt"
+                    ],
+                    "Resource": "arn:aws:kms:ap-northeast-1:105880447796:key/c3046e91-fdfc-4f3a-acff-00597dd3801f"
+                }
+
+            バケット内のオブジェクトが別の暗号化されたバケットからコピーされた場合、KMS キーの値には両方のバケットのキーが含まれている必要があります。たとえば、 `"Resource": ["arn:aws:kms:ap-northeast-1:105880447796:key/c3046e91-fdfc-4f3a-acff-00597dd3801f","arn:aws:kms:ap-northeast-1:495580073302:key/0d7926a7-6ecc-4bf7-a9c1-a38f0faec0cd"]` 。
 
     6.  **[次へ: タグ]**をクリックし、ポリシーのタグを追加し (オプション)、 **[次へ: レビュー]**をクリックします。
 

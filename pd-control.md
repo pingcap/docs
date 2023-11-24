@@ -9,7 +9,7 @@ PD Control はPD のコマンド ライン ツールとして、クラスター�
 
 ## PD Controlのインストール {#install-pd-control}
 
-> **ノート：**
+> **注記：**
 >
 > 使用する制御ツールのバージョンがクラスターのバージョンと一致していることをお勧めします。
 
@@ -26,9 +26,9 @@ PD Controlを使用するには、 `tiup ctl:v<CLUSTER_VERSION> pd -u http://<pd
 | `https://download.pingcap.org/tidb-community-server-{version}-linux-amd64.tar.gz` (PD-CTL) | Linux | amd64   | `https://download.pingcap.org/tidb-community-server-{version}-linux-amd64.tar.gz.sha256` |
 | `https://download.pingcap.org/tidb-community-server-{version}-linux-arm64.tar.gz` (PD-CTL) | Linux | 腕64     | `https://download.pingcap.org/tidb-community-server-{version}-linux-arm64.tar.gz.sha256` |
 
-> **ノート：**
+> **注記：**
 >
-> リンク内の`{version}`は、TiDB のバージョン番号を示します。たとえば、 `amd64`アーキテクチャの`v7.1.1`のダウンロード リンクは`https://download.pingcap.org/tidb-community-server-v7.1.1-linux-amd64.tar.gz`です。
+> リンク内の`{version}`は、TiDB のバージョン番号を示します。たとえば、 `amd64`アーキテクチャの`v7.1.2`のダウンロード リンクは`https://download.pingcap.org/tidb-community-server-v7.1.2-linux-amd64.tar.gz`です。
 
 ### ソースコードからコンパイルする {#compile-from-source-code}
 
@@ -105,7 +105,7 @@ tiup ctl:v<CLUSTER_VERSION> pd -u https://127.0.0.1:2379 --cacert="path/to/ca" -
 -   バージョン情報を出力して終了します
 -   デフォルト: false
 
-## 指図 {#command}
+## 指示 {#command}
 
 ### <code>cluster</code> {#code-cluster-code}
 
@@ -227,8 +227,6 @@ tiup ctl:v<CLUSTER_VERSION> pd -u https://127.0.0.1:2379 --cacert="path/to/ca" -
 
 -   `region-score-formula-version`リージョンスコア式のバージョンを制御します。値のオプションは`v1`および`v2`です。式のバージョン 2 は、TiKV ノードをオンラインまたはオフラインにするなど、一部のシナリオで冗長なバランスリージョンのスケジューリングを削減するのに役立ちます。
 
-    {{< copyable "" >}}
-
     ```bash
     config set region-score-formula-version v2
     ```
@@ -248,8 +246,6 @@ tiup ctl:v<CLUSTER_VERSION> pd -u https://127.0.0.1:2379 --cacert="path/to/ca" -
 -   `max-store-preparing-time`ストアがオンラインになるまでの最大待ち時間を制御します。ストアのオンライン段階で、PD はストアのオンライン進行状況をクエリできます。指定された時間を超えると、PD はストアがオンラインになったとみなし、ストアのオンラインの進行状況を再度照会できなくなります。ただし、これはリージョンが新しいオンライン ストアに移行することを妨げるものではありません。ほとんどのシナリオでは、このパラメーターを調整する必要はありません。
 
     次のコマンドは、ストアがオンラインになるまでの最大待ち時間が 4 時間であることを指定します。
-
-    {{< copyable "" >}}
 
     ```bash
     config set max-store-preparing-time 4h
@@ -293,13 +289,13 @@ tiup ctl:v<CLUSTER_VERSION> pd -u https://127.0.0.1:2379 --cacert="path/to/ca" -
     config set tolerant-size-ratio 20        // Set the size of the buffer area to about 20 times of the average Region Size
     ```
 
--   `low-space-ratio`ストアスペースが不十分であるとみなされるしきい値を制御します。ノードが占めるスペースの割合が指定された値を超えると、PD は該当するノードへのデータの移行を可能な限り回避しようとします。同時に、PD は主に、対応するノードのディスク容量を使い果たさないように、残りの容量をスケジュールします。
+-   `low-space-ratio`ストアスペースが不十分であるとみなされるしきい値を制御します。ノードが占めるスペースの割合が指定された値を超える場合、PD は該当するノードへのデータの移行を可能な限り回避しようとします。同時に、PD は主に、対応するノードのディスク容量を使い果たさないように、残りの容量をスケジュールします。
 
     ```bash
     config set low-space-ratio 0.9              // Set the threshold value of insufficient space to 0.9
     ```
 
--   `high-space-ratio`十分なストア スペースとみなされるしきい値を制御します。この設定は、 `region-score-formula-version`が`v1`に設定されている場合にのみ有効になります。ノードが占有する領域の割合が指定値未満の場合、PD は残りの領域を無視し、主に実際のデータ量をスケジュールします。
+-   `high-space-ratio`十分なストア スペースとみなされるしきい値を制御します。この設定は、 `region-score-formula-version`が`v1`に設定されている場合にのみ有効になります。ノードが占有する容量の割合が指定値未満の場合、PD は残りの容量を無視し、主に実際のデータ量をスケジュールします。
 
     ```bash
     config set high-space-ratio 0.5             // Set the threshold value of sufficient space to 0.5
@@ -342,8 +338,6 @@ tiup ctl:v<CLUSTER_VERSION> pd -u https://127.0.0.1:2379 --cacert="path/to/ca" -
 -   PD はフロー番号の最下位の桁を丸めます。これにより、リージョンフロー情報の変更によって引き起こされる統計の更新が削減されます。この設定項目は、リージョンフロー情報の四捨五入の最下位桁数を指定するために使用されます。たとえば、デフォルト値が`3`であるため、フロー`100512` `101000`に丸められます。この構成は`trace-region-flow`を置き​​換えます。
 
 -   たとえば、値`flow-round-by-digit`を`4`に設定します。
-
-    {{< copyable "" >}}
 
     ```bash
     config set flow-round-by-digit 4
@@ -894,7 +888,7 @@ scheduler config balance-leader-scheduler set batch 3 // Set the size of the ope
 
     -   `write-peer-priorities` 、スケジューラが書き込みピア タイプのホット リージョンをスケジュールする際にどのディメンションを優先するかを制御します。次元オプションは`byte`と`key`です。
 
-    > **ノート：**
+    > **注記：**
     >
     > クラスターコンポーネントがv5.2 より前の場合、 `query`ディメンションの構成は有効になりません。一部のコンポーネントが v5.2 以降にアップグレードされた場合でも、ホットリージョンのスケジュールではデフォルトで`byte`ディメンションと`key`ディメンションが優先されます。クラスターのすべてのコンポーネントが v5.2 以降にアップグレードされた後も、このような構成は互換性のために引き続き有効になります。 `pd-ctl`コマンドを使用してリアルタイム構成を表示できます。通常、これらの構成を変更する必要はありません。
 
@@ -953,12 +947,10 @@ jq 形式の出力については、 [jq-formatted-json-output-usage](#jq-format
 store
 ```
 
-```
-{
-  "count": 3,
-  "stores": [...]
-}
-```
+    {
+      "count": 3,
+      "stores": [...]
+    }
 
 ID が 1 のストアを取得するには、次のコマンドを実行します。
 
@@ -966,9 +958,7 @@ ID が 1 のストアを取得するには、次のコマンドを実行しま�
 store 1
 ```
 
-```
-......
-```
+    ......
 
 #### ストアを削除する {#delete-a-store}
 
@@ -992,7 +982,7 @@ store cancel-delete 1
 store remove-tombstone
 ```
 
-> **ノート：**
+> **注記：**
 >
 > ストアの削除中に PD リーダーが変更された場合は、 [`store limit`](#configure-store-scheduling-speed)コマンドを使用してストア制限を手動で変更する必要があります。
 
@@ -1024,7 +1014,7 @@ store remove-tombstone
     store label 1 disk --delete
     ```
 
-> **ノート：**
+> **注記：**
 >
 > -   ストアのラベルは、TiKV のラベルと PD のラベルをマージすることで更新されます。具体的には、TiKV 構成ファイル内のストア ラベルを変更してクラスターを再起動すると、PD は独自のストア ラベルを TiKV ストア ラベルとマージし、ラベルを更新し、マージされた結果を永続化します。
 > -   TiUPを使用してストアのラベルを管理するには、クラスターを再起動する前に`store label <id> --force`コマンドを実行して PD に保存されているラベルを空にします。
@@ -1053,7 +1043,7 @@ store weight 1 5 10
 >> store limit all 5 remove-peer       // Set the limit of removing-peer operations to 5 per minute for all stores
 ```
 
-> **ノート：**
+> **注記：**
 >
 > `pd-ctl`を使用して、TiKV ストアの状態 ( `Up` 、 `Disconnect` 、 `Offline` 、 `Down` 、または`Tombstone` ) を確認できます。各状態の関係については[TiKV ストアの各状態の関係](/tidb-scheduling.md#information-collection)を参照してください。
 
@@ -1134,31 +1124,23 @@ unsafe remove-failed-stores show
 
 ### ステータスが<code>Up</code>ではないすべてのノードをクエリします {#query-all-nodes-whose-status-is-not-code-up-code}
 
-{{< copyable "" >}}
-
 ```bash
 store --jq='.stores[].store | select(.state_name!="Up") | { id, address, state_name}'
 ```
 
-```
-{"id":1,"address":"127.0.0.1:20161""state_name":"Offline"}
-{"id":5,"address":"127.0.0.1:20162""state_name":"Offline"}
-...
-```
+    {"id":1,"address":"127.0.0.1:20161""state_name":"Offline"}
+    {"id":5,"address":"127.0.0.1:20162""state_name":"Offline"}
+    ...
 
 ### すべてのTiFlashノードをクエリする {#query-all-tiflash-nodes}
-
-{{< copyable "" >}}
 
 ```bash
 store --jq='.stores[].store | select(.labels | length>0 and contains([{"key":"engine","value":"tiflash"}])) | { id, address, state_name}'
 ```
 
-```
-{"id":1,"address":"127.0.0.1:20161""state_name":"Up"}
-{"id":5,"address":"127.0.0.1:20162""state_name":"Up"}
-...
-```
+    {"id":1,"address":"127.0.0.1:20161""state_name":"Up"}
+    {"id":5,"address":"127.0.0.1:20162""state_name":"Up"}
+    ...
 
 ### リージョンレプリカの配布ステータスをクエリする {#query-the-distribution-status-of-the-region-replicas}
 
@@ -1219,7 +1201,7 @@ store --jq='.stores[].store | select(.labels | length>0 and contains([{"key":"en
 {"id":24,"peer_stores":[1,32,33]}
 ```
 
-[store30, store31] がダウンしている場合、 `remove-peer`オペレーターを作成することで安全に処理できるすべてのリージョン、つまり 1 つだけの DownPeer を持つリージョンを見つけます。
+[store30、store31] がダウンしている場合、 `remove-peer`オペレーターを作成することで安全に処理できるすべてのリージョン、つまり 1 つだけの DownPeer を持つリージョンを見つけます。
 
 ```bash
 >> region --jq=".regions[] | {id: .id, remove_peer: [.peers[].store_id] | select(length>1) | map(if .==(30,31) then . else empty end) | select(length==1)}"

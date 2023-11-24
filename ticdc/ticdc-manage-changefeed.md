@@ -173,7 +173,7 @@ cdc cli changefeed resume --server=http://10.0.10.25:8300 --changefeed-id simple
 -   `--overwrite-checkpoint-ts` : v6.2.0 以降、レプリケーション タスクを再開する開始 TSO を指定できます。 TiCDC は、指定された TSO からのデータのプルを開始します。引数は`now`または特定の TSO (434873584621453313 など) を受け入れます。指定された TSO は、(GC セーフ ポイント, CurrentTSO] の範囲内にある必要があります。この引数が指定されていない場合、TiCDC はデフォルトで現在の`checkpoint-ts`からデータを複製します。
 -   `--no-confirm` : レプリケーション再開時に関連情報を確認する必要はありません。デフォルトは`false`です。
 
-> **ノート：**
+> **注記：**
 >
 > -   `--overwrite-checkpoint-ts` ( `t2` ) で指定された TSO が、変更フィード ( `t1` ) の現在のチェックポイント TSO より大きい場合、 `t1`と`t2`の間のデータはダウンストリームにレプリケートされません。これにより、データ損失が発生します。 `cdc cli changefeed query`実行すると`t1`取得できます。
 > -   `--overwrite-checkpoint-ts` ( `t2` ) で指定された TSO が、変更フィード ( `t1` ) の現在のチェックポイント TSO より小さい場合、TiCDC は古い時点からデータをプルします ( `t2` )。これにより、データの重複が発生する可能性があります (たとえば、ダウンストリームが MQ シンクの場合) ）。
@@ -192,7 +192,7 @@ cdc cli changefeed remove --server=http://10.0.10.25:8300 --changefeed-id simple
 
 ## タスク構成を更新する {#update-task-configuration}
 
-v4.0.4 以降、TiCDC はレプリケーション タスクの構成の変更をサポートします (動的ではありません)。変更フィード構成を変更するには、タスクを一時停止し、構成を変更してからタスクを再開します。
+TiCDC は、レプリケーション タスクの構成の変更をサポートします (動的ではありません)。変更フィード構成を変更するには、タスクを一時停止し、構成を変更してからタスクを再開します。
 
 ```shell
 cdc cli changefeed pause -c test-cf --server=http://10.0.10.25:8300
@@ -204,7 +204,6 @@ cdc cli changefeed resume -c test-cf --server=http://10.0.10.25:8300
 
 -   チェンジフィードの`sink-uri` 。
 -   変更フィード構成ファイルとそのファイル内のすべての構成項目。
--   ファイルソート機能とソートディレクトリを使用するかどうか。
 -   チェンジフィードの`target-ts` 。
 
 ## レプリケーションサブタスクの処理単位を管理する ( <code>processor</code> ) {#manage-processing-units-of-replication-sub-tasks-code-processor-code}
@@ -287,7 +286,7 @@ force-replicate = true
 
 ## 統合ソーター {#unified-sorter}
 
-> **ノート：**
+> **注記：**
 >
 > v6.0.0 以降、TiCDC はデフォルトで DB ソーター エンジンを使用し、統合ソーターを使用しなくなりました。 `sort engine`項目は設定しないことをお勧めします。
 
@@ -306,7 +305,7 @@ cdc cli --server="http://10.0.10.25:8300" changefeed query --changefeed-id=simpl
 
 上記のコマンドの出力で、値`sort-engine`が「unified」の場合、変更フィードで統合ソーターが有効になっていることを意味します。
 
-> **ノート：**
+> **注記：**
 >
 > -   サーバーが機械式ハード ドライブや、レイテンシーが長い、または帯域幅が制限されているその他のstorageデバイスを使用している場合、Unified Sorter のパフォーマンスは大きな影響を受けます。
 > -   デフォルトでは、Unified Sorter は一時ファイルの保存に`data_dir`を使用します。ディスクの空き容量が 500 GiB 以上であることを確認することをお勧めします。本番環境の場合、各ノードの空きディスク容量が (ビジネスで許容される最大`checkpoint-ts`遅延) * (ビジネスのピーク時のアップストリーム書き込みトラフィック) よりも大きいことを確認することをお勧めします。さらに、 `changefeed`の作成後に大量の履歴データをレプリケートする予定がある場合は、各ノードの空き領域がレプリケートされたデータの量よりも大きいことを確認してください。

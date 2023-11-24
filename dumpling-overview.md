@@ -45,9 +45,7 @@ TiDB は、必要に応じて使用できる他のツールも提供します。
 
 > **注記：**
 >
-> PingCAP は以前、TiDB に固有の拡張機能を備えた[マイダンパープロジェクト](https://github.com/maxbube/mydumper)のフォークを維持していました。その後、このフォークは Go で書き直された[Dumpling](/dumpling-overview.md)に置き換えられ、TiDB に固有のさらなる最適化をサポートしています。 mydumper の代わりにDumpling を使用することを強くお勧めします。
->
-> Mydumper の詳細については、 [v4.0 Mydumper ドキュメント](https://docs.pingcap.com/tidb/v4.0/backup-and-restore-using-mydumper-lightning)を参照してください。
+> PingCAP は以前、TiDB に固有の拡張機能を備えた[マイダンパープロジェクト](https://github.com/maxbube/mydumper)のフォークを維持していました。 Mydumper の詳細については、 [v4.0 Mydumper ドキュメント](https://docs.pingcap.com/tidb/v4.0/backup-and-restore-using-mydumper-lightning)を参照してください。 v7.5.0 以降、 [マイダンパー](https://docs.pingcap.com/tidb/v4.0/mydumper-overview)は非推奨となり、その機能のほとんどが[Dumpling](/dumpling-overview.md)に置き換えられました。 Mydumper の代わりにDumpling を使用することを強くお勧めします。
 
 Mydumper と比較して、 Dumplingには次の改良点があります。
 
@@ -92,19 +90,7 @@ dumpling -u root -P 4000 -h 127.0.0.1 --filetype sql -t 8 -o /tmp/test -r 200000
 上記のコマンドでは次のようになります。
 
 -   `-h` 、 `-P` 、および`-u`オプションは、それぞれアドレス、ポート、およびユーザーを意味します。認証にパスワードが必要な場合は、 `-p $YOUR_SECRET_PASSWORD`を使用してパスワードをDumplingに渡すことができます。
-
-<CustomContent platform="tidb">
-
--   `-o` (または`--output` ) オプションは、絶対ローカル ファイル パスまたは[外部storageURI](/br/backup-and-restore-storages.md#uri-format)をサポートするstorageのエクスポート ディレクトリを指定します。
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
--   `-o` (または`--output` ) オプションは、絶対ローカル ファイル パスまたは[外部storageURI](https://docs.pingcap.com/tidb/stable/backup-and-restore-storages#uri-format)をサポートするstorageのエクスポート ディレクトリを指定します。
-
-</CustomContent>
-
+-   `-o` (または`--output` ) オプションは、絶対ローカル ファイル パスまたは[外部storageURI](/external-storage-uri.md)をサポートするstorageのエクスポート ディレクトリを指定します。
 -   `-t`オプションは、エクスポートのスレッド数を指定します。スレッドの数を増やすと、 Dumplingの同時実行性とエクスポート速度が向上し、データベースのメモリ消費量も増加します。したがって、あまり大きな数値を設定することはお勧めできません。通常は 64 未満です。
 -   `-r`オプションを使用すると、テーブル内の同時実行が有効になり、エクスポートが高速化されます。デフォルト値は`0`で、これは無効を意味します。 0 より大きい値は有効であることを意味し、値は`INT`タイプです。ソース データベースが TiDB の場合、0 より大きい`-r`値は、TiDB リージョン情報が分割に使用され、メモリ使用量が削減されることを示します。特定の`-r`値は分割アルゴリズムには影響しません。ソース データベースが MySQL で、主キーが`INT`タイプの場合、 `-r`指定するとテーブル内の同時実行性も有効になります。
 -   `-F`オプションは、単一ファイルの最大サイズを指定するために使用されます (ここでの単位は`MiB`です`5GiB`や`8KB`などの入力も受け入れられます)。 TiDB Lightningを使用してこのファイルを TiDB インスタンスにロードする予定がある場合は、その値を 256 MiB 以下に保つことをお勧めします。
@@ -112,6 +98,16 @@ dumpling -u root -P 4000 -h 127.0.0.1 --filetype sql -t 8 -o /tmp/test -r 200000
 > **注記：**
 >
 > エクスポートされる 1 つのテーブルのサイズが 10 GB を超える場合は、 `-r`および`-F`オプション**を使用することを強くお勧めし**ます。
+
+#### storageサービスの URI 形式 {#uri-formats-of-the-storage-services}
+
+このセクションでは、Amazon S3、GCS、Azure Blob Storage などのstorageサービスの URI 形式について説明します。 URI の形式は次のとおりです。
+
+```shell
+[scheme]://[host]/[path]?[parameters]
+```
+
+詳細については、 [外部ストレージ サービスの URI 形式](/external-storage-uri.md)を参照してください。
 
 ### CSV ファイルにエクスポート {#export-to-csv-files}
 
@@ -152,6 +148,10 @@ dumpling -u root -P 4000 -h 127.0.0.1 --filetype sql -t 8 -o /tmp/test -r 200000
 -   このオプションは、個々のデータとテーブル構造ファイルのみを圧縮します。フォルダー全体を圧縮して単一の圧縮パッケージを生成することはできません。
 -   このオプションを使用するとディスク領域を節約できますが、エクスポート速度が遅くなり、CPU 消費量も増加します。エクスポート速度が重要なシナリオでは、このオプションを慎重に使用してください。
 -   TiDB Lightning v6.5.0 以降のバージョンでは、追加の構成を行わずに、 Dumplingによってエクスポートされた圧縮ファイルをデータ ソースとして使用できます。
+
+> **注記：**
+>
+> Snappy 圧縮ファイルは[公式の Snappy フォーマット](https://github.com/google/snappy)に存在する必要があります。 Snappy 圧縮の他のバリアントはサポートされていません。
 
 ### エクスポートされるファイルの形式 {#format-of-exported-files}
 
@@ -218,17 +218,7 @@ export AWS_ACCESS_KEY_ID=${AccessKey}
 export AWS_SECRET_ACCESS_KEY=${SecretKey}
 ```
 
-<CustomContent platform="tidb">
-
-Dumpling は、資格情報ファイルの`~/.aws/credentials`からの読み取りもサポートしています。 Dumplingを使用して Amazon S3 にデータをエクスポートするためのパラメータは、 BRで使用されるパラメータと同じです。パラメーターの詳細については、 [外部storageURI](/br/backup-and-restore-storages.md#uri-format)を参照してください。
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-Dumpling は、資格情報ファイルの`~/.aws/credentials`からの読み取りもサポートしています。 Dumplingを使用して Amazon S3 にデータをエクスポートするためのパラメータは、 BRで使用されるパラメータと同じです。パラメーターの詳細については、 [外部storageURI](https://docs.pingcap.com/tidb/stable/backup-and-restore-storages#uri-format)を参照してください。
-
-</CustomContent>
+Dumpling は、資格情報ファイルの`~/.aws/credentials`からの読み取りもサポートしています。 URI パラメータの説明の詳細については、 [外部ストレージ サービスの URI 形式](/external-storage-uri.md)を参照してください。
 
 ```shell
 ./dumpling -u root -P 4000 -h 127.0.0.1 -r 200000 -o "s3://${Bucket}/${Folder}"
@@ -375,7 +365,7 @@ SET GLOBAL tidb_gc_life_time = '10m';
 | `-s`または`--statement-size`    | `INSERT`ステートメントのサイズを制御します。単位はバイトです                                                                                                                                                                                                                                 |                                                                                                                                                                     |     |
 | `-F`または`--filesize`          | 分割されたテーブルのファイルサイズ。単位は`128B` 、 `64KiB` 、 `32MiB` 、 `1.5GiB`などで指定する必要があります。                                                                                                                                                                                          |                                                                                                                                                                     |     |
 | `--filetype`                 | エクスポートされるファイルの種類 (csv/sql)                                                                                                                                                                                                                                         | 「SQL」                                                                                                                                                               |     |
-| `-o`または`--output`            | データをエクスポートする場合は、ローカル ファイルの絶対パスまたは[外部storageURI](https://docs.pingcap.com/tidb/stable/backup-and-restore-storages#uri-format)を指定します。                                                                                                                                | 「./export-${time}」                                                                                                                                                  |     |
+| `-o`または`--output`            | データをエクスポートする場合は、絶対ローカル ファイル パスまたは[外部storageURI](/external-storage-uri.md)を指定します。                                                                                                                                                                                   | 「./export-${time}」                                                                                                                                                  |     |
 | `-S`または`--sql`               | 指定されたSQL文に従ってデータをエクスポートします。このコマンドは同時エクスポートをサポートしていません。                                                                                                                                                                                                             |                                                                                                                                                                     |     |
 | `--consistency`              | フラッシュ: ダンプの前に FTWRL を使用します。<br/>スナップショット: TSO の特定のスナップショットの TiDB データをダンプします。<br/> lock: ダンプされるすべてのテーブルに対して`lock tables read`を実行します。<br/> none: ロックを追加せずにダンプします。一貫性は保証できません。<br/> auto: MySQL の場合は --consistency flash を使用します。 TiDB の --consistency スナップショットを使用する   | 「自動」                                                                                                                                                                |     |
 | `--snapshot`                 | スナップショット TSO。 `consistency=snapshot`の場合のみ有効                                                                                                                                                                                                                        |                                                                                                                                                                     |     |

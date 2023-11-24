@@ -7,7 +7,7 @@ summary: Learn some key metrics displayed on the Grafana TiKV dashboard.
 
 TiUPを使用して TiDB クラスターをデプロイすると、監視システム (Prometheus/Grafana) も同時にデプロイされます。詳細については、 [監視フレームワークの概要](/tidb-monitoring-framework.md)を参照してください。
 
-Grafana ダッシュボードは、Overview、PD、TiDB、TiKV、Node_exporter、Performance_overview を含む一連のサブ ダッシュボードに分割されています。診断に役立つ指標が多数あります。
+Grafana ダッシュボードは、Overview、PD、TiDB、TiKV、Node_exporter、および Performance_overview を含む一連のサブ ダッシュボードに分割されています。診断に役立つ指標が多数あります。
 
 ## TiKV-詳細ダッシュボード {#tikv-details-dashboard}
 
@@ -175,7 +175,7 @@ Grafana ダッシュボードは、Overview、PD、TiDB、TiKV、Node_exporter�
 -   レベル 0 の可能性: 統合読み取りプール内のレベル 0 タスクの割合
 -   実行中のタスク: 統合読み取りプール内で同時に実行されているタスクの数
 
-### 保管所 {#storage}
+### ストレージ {#storage}
 
 -   ストレージコマンド総数：1秒当たりの種類別受信コマンド数
 -   ストレージ非同期リクエスト エラー: 1 秒あたりのエンジン非同期リクエスト エラーの数
@@ -347,7 +347,7 @@ Grafana ダッシュボードは、Overview、PD、TiDB、TiKV、Node_exporter�
     -   read_entry: Raft Engineによる 1 秒あたりの raft ログ読み取りオペレーションの数
     -   read_message: Raft Engineによる 1 秒あたりの raft メタデータ読み取りオペレーションの数
 -   書き込み期間: Raft Engineによる書き込み操作の期間。この期間は、これらのデータの書き込みに伴うディスク IO のレイテンシーの合計に近いです。
--   フロー
+-   流れ
     -   write: Raft Engineの書き込みトラフィック
     -   rewrite append: 追加ログの書き換えのトラフィック
     -   rewrite rewrite: リライトログのリライトのトラフィック
@@ -406,7 +406,21 @@ Grafana ダッシュボードは、Overview、PD、TiDB、TiKV、Node_exporter�
 -   悲観的ロックの合計メモリサイズ: メモリ内の悲観的ロックが占有するメモリサイズ
 -   メモリ内の悲観的ロックの結果:悲観的ロックのみをメモリに保存した結果。 `full`メモリ制限を超えたために悲観的ロックがメモリに保存されなかった回数を意味します。
 
-### メモリー {#memory}
+### 解決済み-TS {#resolved-ts}
+
+-   Resolved-TS ワーカー CPU: resolved-tsワーカー スレッドの CPU 使用率
+-   Advance-TS ワーカー CPU: Advanced-TS ワーカー スレッドの CPU 使用率
+-   スキャン ロック ワーカー CPU: スキャン ロック ワーカー スレッドの CPU 使用率
+-   resolved-tsの最大ギャップ : この TiKV 内のすべてのアクティブなリージョンのresolved-tsと現在時刻の間の最大時間差
+-   安全な時間の最大ギャップ: この TiKV 内のすべてのアクティブなリージョンの安全な時間と現在の時間の間の最大時間差
+-   最小解決 TSリージョン:resolved-tsが最小であるリージョンの ID
+-   Min Safe TSリージョン: 安全な TS が最小であるリージョンの ID
+-   Leaderのチェック期間: リーダーのリクエストの処理に費やされた時間の分布。リーダーでリクエストを送信してからレスポンスを受信するまでの期間
+-   リージョンリーダーのresolved-tsの最大ギャップ: この TiKV 内のすべてのアクティブなリージョンのresolved-tsと現在時刻の間の最大時間差 (リージョンリーダーのみ)
+-   最小Leader解決済み TSリージョン:リージョンリーダーのみの、resolved-ts が最小であるリージョンの ID
+-   ロック ヒープ サイズ: resolved-tsモジュール内のロックを追跡するヒープのサイズ
+
+### メモリ {#memory}
 
 -   アロケータ統計:メモリアロケータの統計
 

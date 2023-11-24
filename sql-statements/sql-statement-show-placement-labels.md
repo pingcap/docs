@@ -7,6 +7,10 @@ summary: The usage of SHOW PLACEMENT LABELS in TiDB.
 
 `SHOW PLACEMENT LABELS`は、配置ルールで使用できるラベルと値を要約するために使用されます。
 
+> **注記：**
+>
+> この機能は[TiDB サーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless)クラスターでは使用できません。
+
 ## あらすじ {#synopsis}
 
 ```ebnf+diagram
@@ -16,21 +20,17 @@ ShowStmt ::=
 
 ## 例 {#examples}
 
-{{< copyable "" >}}
-
 ```sql
 SHOW PLACEMENT LABELS;
 ```
 
-```
-+--------+----------------+
-| Key    | Values         |
-+--------+----------------+
-| region | ["us-east-1"]  |
-| zone   | ["us-east-1a"] |
-+--------+----------------+
-2 rows in set (0.00 sec)
-```
+    +--------+----------------+
+    | Key    | Values         |
+    +--------+----------------+
+    | region | ["us-east-1"]  |
+    | zone   | ["us-east-1a"] |
+    +--------+----------------+
+    2 rows in set (0.00 sec)
 
 ## MySQLの互換性 {#mysql-compatibility}
 

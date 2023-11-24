@@ -16,11 +16,11 @@ PITR を使用すると、前述の要件を満たすことができます。
 
 ## TiDB クラスターとBRをデプロイ {#deploy-the-tidb-cluster-and-br}
 
-PITR を使用するには、TiDB クラスター &gt;= v6.2.0 をデプロイし、 BR をTiDB クラスターと同じバージョンに更新する必要があります。このドキュメントでは例として v7.1.1 を使用します。
+PITR を使用するには、TiDB クラスター &gt;= v6.2.0 をデプロイし、 BR をTiDB クラスターと同じバージョンに更新する必要があります。このドキュメントでは例として v7.1.2 を使用します。
 
 次の表は、TiDB クラスターで PITR を使用する場合に推奨されるハードウェア リソースを示しています。
 
-| 成分   | CPU   | メモリー   | ディスク | AWSインスタンス  | インスタンスの数 |
+| 成分   | CPU   | メモリ    | ディスク | AWSインスタンス  | インスタンスの数 |
 | ---- | ----- | ------ | ---- | ---------- | -------- |
 | TiDB | 8コア以上 | 16GB以上 | SAS  | c5.2xlarge | 2        |
 | PD   | 8コア以上 | 16GB以上 | SSD  | c5.2xlarge | 3        |
@@ -28,7 +28,7 @@ PITR を使用するには、TiDB クラスター &gt;= v6.2.0 をデプロイ�
 | BR   | 8コア以上 | 16GB以上 | SAS  | c5.2xlarge | 1        |
 | モニター | 8コア以上 | 16GB以上 | SAS  | c5.2xlarge | 1        |
 
-> **ノート：**
+> **注記：**
 >
 > -   BR がバックアップおよび復元タスクを実行するときは、PD および TiKV にアクセスする必要があります。 BR がすべての PD および TiKV ノードに接続できることを確認してください。
 > -   BRと PD サーバーは同じタイムゾーンを使用する必要があります。
@@ -43,13 +43,13 @@ TiUPを使用してBR をインストールまたはアップグレードしま�
 -   インストール：
 
     ```shell
-    tiup install br:v7.1.1
+    tiup install br:v7.1.2
     ```
 
 -   アップグレード:
 
     ```shell
-    tiup update br:v7.1.1
+    tiup update br:v7.1.2
     ```
 
 ## バックアップstorageの構成 (Amazon S3) {#configure-backup-storage-amazon-s3}
@@ -69,7 +69,7 @@ TiUPを使用してBR をインストールまたはアップグレードしま�
 
 2.  BRおよび TiKV が S3 ディレクトリにアクセスするための権限を設定します。 S3 バケットにアクセスする最も安全な方法であるIAMメソッドを使用して権限を付与することをお勧めします。詳細な手順については、 [AWS ドキュメント: ユーザー ポリシーによるバケットへのアクセスの制御](https://docs.aws.amazon.com/AmazonS3/latest/userguide/walkthrough1.html)を参照してください。必要な権限は次のとおりです。
 
-    -   バックアップ クラスター内の TiKV およびBRには、 `s3://tidb-pitr-bucket/backup-data`ディレクトリの`s3:ListBucket` 、 `s3:PutObject` 、および`s3:AbortMultipartUpload`アクセス許可が必要です。
+    -   バックアップ クラスター内の TiKV とBRには、 `s3://tidb-pitr-bucket/backup-data`ディレクトリの`s3:ListBucket` 、 `s3:PutObject` 、および`s3:AbortMultipartUpload`アクセス許可が必要です。
     -   復元クラスター内の TiKV とBRには、 `s3://tidb-pitr-bucket/backup-data`ディレクトリの`s3:ListBucket` 、 `s3:GetObject` 、および`s3:PutObject`アクセス許可が必要です。
 
 3.  スナップショット (フル) バックアップやログ バックアップなどのバックアップ データを保存するディレクトリ構造を計画します。

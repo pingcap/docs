@@ -7,6 +7,10 @@ summary: Learn the `METRICS_TABLES` system table.
 
 `METRICS_TABLES`テーブルは、 [`METRICS_SCHEMA`](/metrics-schema.md)データベース内の各ビューの PromQL (Prometheus Query Language) 定義を提供します。
 
+> **注記：**
+>
+> このテーブルは TiDB セルフホスト型にのみ適用され、 [TiDB Cloud](https://docs.pingcap.com/tidbcloud/)では利用できません。
+
 ```sql
 USE INFORMATION_SCHEMA;
 DESC METRICS_TABLES;

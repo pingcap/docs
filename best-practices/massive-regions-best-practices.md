@@ -5,7 +5,7 @@ summary: Learn how to tune the performance of TiKV with a massive amount of Regi
 
 # 大規模な領域での TiKV性能チューニングのベスト プラクティス {#best-practices-for-tikv-performance-tuning-with-massive-regions}
 
-TiDB では、データはリージョンに分割され、それぞれのリージョンに特定のキー範囲のデータが保存されます。これらのリージョンは、複数の TiKV インスタンスに分散されます。データがクラスターに書き込まれると、数百万、場合によっては数千万のリージョンが作成されます。単一の TiKV インスタンス上のリージョンが多すぎると、クラスターに大きな負担がかかり、パフォーマンスに影響を与える可能性があります。
+TiDB では、データはリージョンに分割され、それぞれのリージョンに特定のキー範囲のデータが保存されます。これらのリージョンは、複数の TiKV インスタンスに分散されます。データがクラスターに書き込まれると、数百万のリージョンが作成される可能性があります。単一の TiKV インスタンス上のリージョンが多すぎると、クラスターに大きな負担がかかり、パフォーマンスに影響を与える可能性があります。
 
 このドキュメントでは、 Raftstore (TiKV のコア モジュール) のワークフローを紹介し、大量のリージョンがパフォーマンスに影響を与える理由を説明し、TiKV のパフォーマンスを調整する方法を提供します。
 
@@ -15,7 +15,7 @@ TiKV インスタンスには複数のリージョンがあります。 Raftstor
 
 ![Raftstore Workflow](/media/best-practices/raft-process.png)
 
-> **ノート：**
+> **注記：**
 >
 > この図はRaftstoreのワークフローを示すだけであり、実際のコード構造を表すものではありません。
 
@@ -27,7 +27,7 @@ Raftstoreワークフロー図から、各リージョンのメッセージは 1
 
 一般に、ロードされたRaftstoreの CPU 使用率が 85% 以上に達すると、 Raftstore はビジー状態になり、ボトルネックになります。同時に、 `propose wait duration`数百ミリ秒にもなる可能性があります。
 
-> **ノート：**
+> **注記：**
 >
 > -   Raftstoreの CPU 使用率については、前述の通り、 Raftstore はシングルスレッドです。 Raftstoreがマルチスレッドの場合は、それに比例して CPU 使用率のしきい値 (85%) を増やすことができます。
 > -   Raftstoreスレッドには I/O 操作が存在するため、CPU 使用率が 100% に達することはできません。
@@ -67,11 +67,11 @@ Raftstore はTiDB v3.0 以降マルチスレッド モジュールにアップ�
 
 実際の状況では、読み取りおよび書き込みリクエストはすべてのリージョンに均等に分散されません。代わりに、それらはいくつかの地域に集中しています。その後、 Raftリーダーと、一時的にアイドル状態になっているリージョンのフォロワー間のメッセージの数を最小限に抑えることができます。これが Hibernateリージョンの機能です。この機能では、 Raftstore は、必要がない場合に、アイドル状態のリージョンのRaftステート マシンにティック メッセージを送信します。そうすれば、これらのRaftステート マシンはハートビートメッセージを生成するためにトリガーされなくなり、 Raftstoreのワークロードを大幅に軽減できます。
 
-Hibernateリージョンは[TiKVマスター](https://github.com/tikv/tikv/tree/master)ではデフォルトで有効になっています。この機能は必要に応じて設定できます。詳細は[休止状態リージョンの構成](/tikv-configuration-file.md)を参照してください。
+Hibernateリージョンは[TiKVマスター](https://github.com/tikv/tikv/tree/master)ではデフォルトで有効になっています。この機能はニーズに応じて設定できます。詳細は[休止状態リージョンの構成](/tikv-configuration-file.md)を参照してください。
 
 ### 方法 3: <code>Region Merge</code>を有効にする {#method-3-enable-code-region-merge-code}
 
-> **ノート：**
+> **注記：**
 >
 > TiDB v3.0 以降、 `Region Merge`がデフォルトで有効になっています。
 
@@ -79,13 +79,9 @@ Hibernateリージョンは[TiKVマスター](https://github.com/tikv/tikv/tree/
 
 次のパラメータを構成して`Region Merge`を有効にします。
 
-{{< copyable "" >}}
-
-```
-config set max-merge-region-size 20
-config set max-merge-region-keys 200000
-config set merge-schedule-limit 8
-```
+    config set max-merge-region-size 20
+    config set max-merge-region-keys 200000
+    config set merge-schedule-limit 8
 
 詳細については、 [リージョンのマージ](https://tikv.org/docs/4.0/tasks/configure/region-merge/)と、 [PD設定ファイル](/pd-configuration-file.md#schedule)の次の 3 つの構成パラメータを参照してください。
 
@@ -103,23 +99,15 @@ I/O リソースと CPU リソースが十分な場合は、単一のマシン�
 
 リージョンの数を減らすことに加えて、単位時間内の各リージョンのメッセージ数を減らすことで、 Raftstoreへの負荷を軽減することもできます。たとえば、 `raft-base-tick-interval`構成項目の値を適切に増やすことができます。
 
-{{< copyable "" >}}
-
-```
-[raftstore]
-raft-base-tick-interval = "2s"
-```
+    [raftstore]
+    raft-base-tick-interval = "2s"
 
 上記の構成では、 `raft-base-tick-interval`はRaftstore が各リージョンのRaftステート マシンを駆動する時間間隔です。つまり、この時間間隔でRaftstore がRaftステート マシンにティック メッセージを送信します。この間隔を長くすると、 Raftstoreからのメッセージの数を効果的に減らすことができます。
 
 このティック メッセージ間の間隔によって、 `election timeout`と`heartbeat`の間の間隔も決定されることに注意してください。次の例を参照してください。
 
-{{< copyable "" >}}
-
-```
-raft-election-timeout = raft-base-tick-interval * raft-election-timeout-ticks
-raft-heartbeat-interval = raft-base-tick-interval * raft-heartbeat-ticks
-```
+    raft-election-timeout = raft-base-tick-interval * raft-election-timeout-ticks
+    raft-heartbeat-interval = raft-base-tick-interval * raft-heartbeat-ticks
 
 リージョンフォロワーが`raft-election-timeout`間隔以内にリーダーからハートビートを受信しなかった場合、これらのフォロワーはリーダーが失敗したと判断し、新しい選挙を開始します。 `raft-heartbeat-interval`は、リーダーがフォロワーにハートビートを送信する間隔です。したがって、値`raft-base-tick-interval`を増やすと、 Raftステート マシンから送信されるネットワーク メッセージの数を減らすことができますが、 Raftステート マシンがリーダーの障害を検出するまでの時間も長くなります。
 

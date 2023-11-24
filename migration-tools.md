@@ -57,7 +57,7 @@ TiDB は、完全なデータ移行、増分データ移行、バックアップ
 
 -   **ユーザー シナリオ**: このツールは、TiKV 変更ログを取得することによって実装されます。クラスター データをアップストリーム TSO と一貫した状態に復元し、他のシステムがデータ変更をサブスクライブできるようにサポートします。
 -   **上流**: TiDB
--   **ダウンストリーム**: TiDB、MySQL、Kafka、Confluent
+-   **ダウンストリーム**: TiDB、MySQL、Kafka、MQ、Confluent、Amazon S3、GCS、Azure Blob Storage、NFS などのstorageサービス。
 -   **利点**: TiCDC オープン プロトコルを提供
 -   **制限事項**: TiCDC は、少なくとも 1 つの有効なインデックスを持つテーブルのみを複製します。次のシナリオはサポートされていません。
     -   RawKV のみを使用する TiKV クラスター。
@@ -131,7 +131,7 @@ tidb-lightning  pingcap  TiDB Lightning is a tool used for fast full import of l
 tiup            pingcap  TiUP is a command-line component management tool that can help to download and install TiDB platform components to the local system
 ```
 
-インストールするコンポーネントを選択します:
+インストールするコンポーネントを選択します。
 
 ```shell
 tiup install dumpling tidb-lightning

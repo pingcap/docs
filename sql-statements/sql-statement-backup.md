@@ -7,7 +7,11 @@ summary: An overview of the usage of BACKUP for the TiDB database.
 
 このステートメントは、TiDB クラスターの分散バックアップを実行するために使用されます。
 
-`BACKUP`ステートメントは[BRツール](/br/backup-and-restore-overview.md)と同じエンジンを使用しますが、バックアップ プロセスが別個のBRツールではなく TiDB 自体によって駆動される点が異なります。 BRのすべての利点と警告は、この声明にも適用されます。
+> **注記：**
+>
+> この機能は[TiDB サーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless)クラスターでは使用できません。
+
+`BACKUP`ステートメントは[BRツール](https://docs.pingcap.com/tidb/stable/backup-and-restore-overview)と同じエンジンを使用しますが、バックアップ プロセスが別個のBRツールではなく TiDB 自体によって駆動される点が異なります。 BRのすべての利点と警告は、この声明にも当てはまります。
 
 `BACKUP`を実行するには、 `BACKUP_ADMIN`または`SUPER`権限が必要です。さらに、バックアップを実行する TiDB ノードとクラスター内のすべての TiKV ノードの両方に、宛先への読み取りまたは書き込み権限が必要です。 [Security強化モード](/system-variables.md#tidb_enable_enhanced_security)が有効な場合、ローカルstorage( `local://`で始まるstorageパス) は許可されません。
 
@@ -46,8 +50,6 @@ BackupTSO ::=
 
 ### データベースをバックアップする {#back-up-databases}
 
-{{< copyable "" >}}
-
 ```sql
 BACKUP DATABASE `test` TO 'local:///mnt/backup/2020/04/';
 ```
@@ -75,21 +77,15 @@ BACKUP DATABASE `test` TO 'local:///mnt/backup/2020/04/';
 
 ### テーブルをバックアップする {#back-up-tables}
 
-{{< copyable "" >}}
-
 ```sql
 BACKUP TABLE `test`.`sbtest01` TO 'local:///mnt/backup/sbtest01/';
 ```
-
-{{< copyable "" >}}
 
 ```sql
 BACKUP TABLE sbtest02, sbtest03, sbtest04 TO 'local:///mnt/backup/sbtest/';
 ```
 
 ### クラスター全体をバックアップする {#back-up-the-entire-cluster}
-
-{{< copyable "" >}}
 
 ```sql
 BACKUP DATABASE * TO 'local:///mnt/backup/full/';
@@ -101,17 +97,23 @@ BACKUP DATABASE * TO 'local:///mnt/backup/full/';
 
 BR は、 S3 または GCS へのデータのバックアップをサポートしています。
 
-{{< copyable "" >}}
-
 ```sql
 BACKUP DATABASE `test` TO 's3://example-bucket-2020/backup-05/?access-key={YOUR_ACCESS_KEY}&secret-access-key={YOUR_SECRET_KEY}';
 ```
 
-URL 構文については、 [外部storageURI](/br/backup-and-restore-storages.md#uri-format)で詳しく説明します。
+<CustomContent platform="tidb">
+
+URL 構文については、 [外部ストレージ サービスの URI 形式](/external-storage-uri.md)で詳しく説明します。
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+URL 構文については、 [外部storageURI](https://docs.pingcap.com/tidb/stable/external-storage-uri)で詳しく説明します。
+
+</CustomContent>
 
 認証情報を配布しないクラウド環境で実行する場合は、 `SEND_CREDENTIALS_TO_TIKV`オプションを`FALSE`に設定します。
-
-{{< copyable "" >}}
 
 ```sql
 BACKUP DATABASE `test` TO 's3://example-bucket-2020/backup-05/'
@@ -126,8 +128,6 @@ BACKUP DATABASE `test` TO 's3://example-bucket-2020/backup-05/'
 
 バックアップが完了する前に、クラスター上のデータに対してチェック`BACKUP`を実行して、正確さを検証します。このステップが不要であると確信できる場合は、 `CHECKSUM`オプションを使用して無効にすることができます。
 
-{{< copyable "" >}}
-
 ```sql
 BACKUP DATABASE `test` TO 's3://example-bucket-2020/backup-06/'
     RATE_LIMIT = 120 MB/SECOND
@@ -138,8 +138,6 @@ BACKUP DATABASE `test` TO 's3://example-bucket-2020/backup-06/'
 ### スナップショット {#snapshot}
 
 履歴データをバックアップするタイムスタンプ、TSO、または相対時間を指定します。
-
-{{< copyable "" >}}
 
 ```sql
 -- relative time
@@ -170,8 +168,6 @@ SQL 標準に従って、単位は常に単数であることに注意してく�
 
 最後のバックアップから現在のスナップショットまでの変更のみをバックアップするには、 `LAST_BACKUP`オプションを指定します。
 
-{{< copyable "" >}}
-
 ```sql
 -- timestamp (in current time zone)
 BACKUP DATABASE `test` TO 'local:///mnt/backup/hist02'
@@ -188,5 +184,5 @@ BACKUP DATABASE `test` TO 'local:///mnt/backup/hist03'
 
 ## こちらも参照 {#see-also}
 
--   [戻す](/sql-statements/sql-statement-restore.md)
+-   [復元する](/sql-statements/sql-statement-restore.md)
 -   [バックアップを表示](/sql-statements/sql-statement-show-backups.md)

@@ -5,7 +5,9 @@ summary: Learn about Data Service in TiDB Cloud and its scenarios.
 
 # TiDB Cloudデータ サービス (ベータ版) の概要 {#tidb-cloud-data-service-beta-overview}
 
-TiDB Cloud は、カスタム API エンドポイントを使用して HTTPS リクエスト経由でTiDB Cloudデータにアクセスできるようにする[データサービス（ベータ版）](https://tidbcloud.com/console/data-service)機能を提供します。この機能は、サーバーレスアーキテクチャを使用してコンピューティング リソースと柔軟なスケーリングを処理するため、インフラストラクチャやメンテナンスのコストを心配することなく、エンドポイントのクエリ ロジックに集中できます。
+TiDB Cloud [データサービス（ベータ版）](https://tidbcloud.com/console/data-service)は、バックエンド アプリケーション開発を簡素化し、開発者が拡張性の高い安全なデータ駆動型アプリケーションを迅速に構築できるようにする、フルマネージドのローコードのサービスとしてのバックエンド ソリューションです。
+
+Data Service を使用すると、カスタム API エンドポイントを使用して HTTPS リクエスト経由でTiDB Cloudデータにアクセスできます。この機能は、サーバーレスアーキテクチャを使用してコンピューティング リソースと柔軟なスケーリングを処理するため、インフラストラクチャやメンテナンスのコストを心配することなく、エンドポイントのクエリ ロジックに集中できます。
 
 > **注記：**
 >

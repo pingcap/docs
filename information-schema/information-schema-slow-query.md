@@ -7,13 +7,9 @@ summary: Learn the `SLOW_QUERY` INFORMATION_SCHEMA table.
 
 `SLOW_QUERY`テーブルは、TiDB スロー ログ ファイルの解析結果である、現在のノードのスロー クエリ情報を提供します。テーブル内の列名は、スロー ログ内のフィールド名に対応しています。
 
-<CustomContent platform="tidb-cloud">
-
-> **ノート：**
+> **注記：**
 >
-> `SLOW_QUERY`テーブルは[TiDB サーバーレスクラスター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless)では使用できません。
-
-</CustomContent>
+> このテーブルは[TiDB サーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless)クラスターでは使用できません。
 
 <CustomContent platform="tidb">
 
@@ -113,6 +109,10 @@ DESC SLOW_QUERY;
 ## CLUSTER_SLOW_QUERY テーブル {#cluster-slow-query-table}
 
 `CLUSTER_SLOW_QUERY`テーブルは、クラスター内のすべてのノードのスロー クエリ情報を提供します。これは、TiDB スロー ログ ファイルの解析結果です。 `CLUSTER_SLOW_QUERY`テーブルは`SLOW_QUERY`と同じように使用できます。 `CLUSTER_SLOW_QUERY`テーブルのテーブル スキーマは、 `INSTANCE`列が`CLUSTER_SLOW_QUERY`に追加されるという点で`SLOW_QUERY`テーブルのテーブル スキーマと異なります。 `INSTANCE`列は、スロー クエリの行情報の TiDB ノード アドレスを表します。
+
+> **注記：**
+>
+> このテーブルは[TiDB サーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless)クラスターでは使用できません。
 
 <CustomContent platform="tidb">
 

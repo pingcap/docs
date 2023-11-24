@@ -7,13 +7,9 @@ summary: An overview of the usage of CALIBRATE RESOURCE for the TiDB database.
 
 `CALIBRATE RESOURCE`ステートメントは、現在のクラスターの[「リクエストユニット(RU)」](/tidb-resource-control#what-is-request-unit-ru)を推定して出力するために使用されます。
 
-<CustomContent platform="tidb-cloud">
-
-> **ノート：**
+> **注記：**
 >
-> この機能は[TiDB サーバーレスクラスター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless)では使用できません。
-
-</CustomContent>
+> この機能は TiDB セルフホスト型にのみ適用され、 [TiDB Cloud](https://docs.pingcap.com/tidbcloud/)では使用できません。
 
 ## あらすじ {#synopsis}
 
@@ -47,7 +43,7 @@ TiDB は 2 つの推定方法を提供します。
 -   時間枠の範囲は 10 分から 24 時間です。
 -   指定した時間枠内で、TiDB および TiKV の CPU 使用率が低すぎる場合、容量を見積もることはできません。
 
-> **ノート：**
+> **注記：**
 >
 > TiKV は、macOS 上の CPU 使用率メト​​リクスを監視しません。 macOS 上の実際のワークロードに基づく容量の見積もりはサポートされていません。
 
@@ -60,7 +56,7 @@ TiDB は 2 つの推定方法を提供します。
 -   `OLTP_READ_WRITE` : データの読み取りと書き込みが均等なワークロードに適用されます。これは、 `sysbench oltp_read_write`と同様のワークロード モデルに基づいて推定されます。
 -   `OLTP_READ_ONLY` : 大量のデータを読み取るワークロードに適用されます。これは、 `sysbench oltp_read_only`と同様のワークロード モデルに基づいて推定されます。
 
-> **ノート：**
+> **注記：**
 >
 > クラスターの RU 容量は、クラスターのトポロジー、各コンポーネントのハードウェアおよびソフトウェア構成によって異なります。各クラスターが提供できる実際の RU は、実際のワークロードにも関係します。ハードウェア導入に基づく推定値は参考用であり、実際の最大値とは異なる場合があります。 [実際のワークロードに基づいて容量を見積もる](#estimate-capacity-based-on-actual-workload)にオススメです。
 
@@ -106,7 +102,7 @@ CALIBRATE RESOURCE START_TIME '2023-04-18 08:00:00' DURATION '60m';
 ERROR 1105 (HY000): The workload in selected time window is too low, with which TiDB is unable to reach a capacity estimation; please select another time window with higher workload, or calibrate resource by hardware instead
 ```
 
-容量推定機能で`tidb_server_maxprocs` 、実際のワークロードに応じてメトリクス データ ( `resource_manager_resource_unit`など) `process_cpu_usage` `tikv_cpu_quota`する必要があります。該当するモニタデータが空の場合、以下の例のように該当するモニタ項目名でエラーとなります。ワークロードがなく、 `resource_manager_resource_unit`が空の場合も、このエラーが発生します。
+容量推定機能では、実際のワークロードに応じてメトリクス データ ( `resource_manager_resource_unit`など) `process_cpu_usage` `tikv_cpu_quota`する必要`tidb_server_maxprocs`あります。該当するモニタデータが空の場合、以下の例のように該当するモニタ項目名でエラーとなります。ワークロードがなく、 `resource_manager_resource_unit`が空の場合も、このエラーが発生します。
 
 ```sql
 CALIBRATE RESOURCE START_TIME '2023-04-18 08:00:00' DURATION '60m';

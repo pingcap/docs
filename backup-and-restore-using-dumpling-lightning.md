@@ -7,20 +7,22 @@ summary: Learn how to use Dumpling and TiDB Lightning to back up and restore ful
 
 このドキュメントでは、 DumplingとTiDB Lightning を使用して、TiDB の完全なデータをバックアップおよび復元する方法を紹介します。
 
-少量のデータ (たとえば、50 GB 未満) をバックアップする必要があり、高いバックアップ速度が必要ない場合は、 [Dumpling](/dumpling-overview.md)使用して TiDB データベースからデータをエクスポートし、 [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)使用してデータを別の TiDB にインポートできます。データベース。バックアップと復元の詳細については、 [TiDB のバックアップと復元の概要](/br/backup-and-restore-overview.md)を参照してください。
+少量のデータ (たとえば、50 GiB 未満) をバックアップする必要があり、高いバックアップ速度が必要ない場合は、 [Dumpling](/dumpling-overview.md)を使用して TiDB データベースからデータをエクスポートし、 [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)を使用してデータを別の TiDB に復元できます。データベース。
+
+より大きなデータベースをバックアップする必要がある場合、推奨される方法は[BR](/br/backup-and-restore-overview.md)を使用することです。 Dumpling は大規模なデータベースのエクスポートに使用できますが、その場合はBR の方が優れたツールであることに注意してください。
 
 ## 要件 {#requirements}
 
--   Dumpling をインストールして開始します。
+-   Dumplingをインストールします。
 
     ```shell
-    tiup install dumpling && tiup dumpling
+    tiup install dumpling
     ```
 
--   TiDB Lightning をインストールして開始します。
+-   TiDB Lightningをインストールします。
 
     ```shell
-    tiup install tidb lightning && tiup tidb lightning
+    tiup install tidb-lightning
     ```
 
 -   [Dumplingに必要なソース データベース権限を付与します。](/dumpling-overview.md#export-data-from-tidb-or-mysql)
@@ -33,7 +35,7 @@ summary: Learn how to use Dumpling and TiDB Lightning to back up and restore ful
 
 **メモリと CPU** : TiDB Lightning は大量のリソースを消費するため、64 GiB 以上のメモリと 32 以上の CPU コアを割り当てることをお勧めします。最高のパフォーマンスを得るには、CPU コアとメモリ(GiB) の比率が 1:2 より大きいことを確認してください。
 
-**ディスク容量**:
+**ディスクスペース**：
 
 外部storageとして、Amazon S3、Google Cloud Storage (GCS)、または Azure Blob Storage を使用することをお勧めします。このようなクラウドstorageを使用すると、ディスク容量に制限されることなく、バックアップ ファイルを迅速に保存できます。
 
@@ -42,14 +44,35 @@ summary: Learn how to use Dumpling and TiDB Lightning to back up and restore ful
 -   Dumplingには、データ ソース全体を保存できる (またはエクスポートされるすべてのアップストリーム テーブルを保存できる) ディスク容量が必要です。必要なスペースを計算するには、 [ダウンストリームのstorageスペース要件](/tidb-lightning/tidb-lightning-requirements.md#storage-space-of-the-target-database)を参照してください。
 -   インポート中、 TiDB Lightning はソートされたキーと値のペアを保存するための一時スペースを必要とします。ディスク容量は、データ ソースからの最大の単一テーブルを保持するのに十分である必要があります。
 
-**注**: Dumplingによって MySQL からエクスポートされる正確なデータ量を計算することは困難ですが、次の SQL ステートメントを使用してテーブル`information_schema.tables`の`data-length`フィールドを要約することで、データ量を見積もることができます。
+**注**: Dumplingによって MySQL からエクスポートされる正確なデータ量を計算することは困難ですが、次の SQL ステートメントを使用してテーブル`information_schema.tables`の`DATA_LENGTH`フィールドを要約することで、データ量を見積もることができます。
 
 ```sql
-/* Calculate the size of all schemas, in MiB. Replace ${schema_name} with your schema name. */
-SELECT table_schema,SUM(data_length)/1024/1024 AS data_length,SUM(index_length)/1024/1024 AS index_length,SUM(data_length+index_length)/1024/1024 AS SUM FROM information_schema.tables WHERE table_schema = "${schema_name}" GROUP BY table_schema;
+-- Calculate the size of all schemas
+SELECT
+  TABLE_SCHEMA,
+  FORMAT_BYTES(SUM(DATA_LENGTH)) AS 'Data Size',
+  FORMAT_BYTES(SUM(INDEX_LENGTH)) 'Index Size'
+FROM
+  information_schema.tables
+GROUP BY
+  TABLE_SCHEMA;
 
-/* Calculate the size of the largest table, in MiB. Replace ${schema_name} with your schema name. */
-SELECT table_name,table_schema,SUM(data_length)/1024/1024 AS data_length,SUM(index_length)/1024/1024 AS index_length,SUM(data_length+index_length)/1024/1024 AS SUM from information_schema.tables WHERE table_schema = "${schema_name}" GROUP BY table_name,table_schema ORDER BY SUM DESC LIMIT 5;
+-- Calculate the 5 largest tables
+SELECT 
+  TABLE_NAME,
+  TABLE_SCHEMA,
+  FORMAT_BYTES(SUM(data_length)) AS 'Data Size',
+  FORMAT_BYTES(SUM(index_length)) AS 'Index Size',
+  FORMAT_BYTES(SUM(data_length+index_length)) AS 'Total Size'
+FROM
+  information_schema.tables
+GROUP BY
+  TABLE_NAME,
+  TABLE_SCHEMA
+ORDER BY
+  SUM(DATA_LENGTH+INDEX_LENGTH) DESC
+LIMIT
+  5;
 ```
 
 ### ターゲット TiKV クラスターのディスク容量 {#disk-space-for-the-target-tikv-cluster}
@@ -120,7 +143,7 @@ SELECT table_name,table_schema,SUM(data_length)/1024/1024 AS data_length,SUM(ind
 
 4.  TiDB Lightning はインポートを完了すると、自動的に終了します。最後の行に`tidb-lightning.log` `the whole procedure completed`含まれているかどうかを確認します。 「はい」の場合、インポートは成功です。 「いいえ」の場合、インポートでエラーが発生します。エラー メッセージの指示に従ってエラーに対処します。
 
-> **ノート：**
+> **注記：**
 >
 > インポートが成功したかどうかに関係なく、ログの最後の行には`tidb lightning exit`が表示されます。これは、 TiDB Lightning が正常に終了したことを意味しますが、インポートが成功したことを必ずしも意味するわけではありません。
 

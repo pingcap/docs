@@ -58,5 +58,5 @@ TiDB の`RENAME INDEX`ステートメントは MySQL と完全な互換性があ
 -   [テーブルの作成を表示](/sql-statements/sql-statement-show-create-table.md)
 -   [インデックスの作成](/sql-statements/sql-statement-create-index.md)
 -   [ドロップインデックス](/sql-statements/sql-statement-drop-index.md)
--   [インデックスを表示](/sql-statements/sql-statement-show-index.md)
+-   [インデックスを表示](/sql-statements/sql-statement-show-indexes.md)
 -   [インデックスの変更](/sql-statements/sql-statement-alter-index.md)

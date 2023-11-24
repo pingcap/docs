@@ -41,8 +41,8 @@ br backup full --pd "${PD_IP}:2379" \
 
 ### 共通オプション {#common-options}
 
--   `--pd` : PD サービスアドレスを指定します。たとえば、 `"${PD_IP}:2379"` 。
--   `-s` (または`--storage` ): バックアップ ファイルが保存されるパスを指定します。バックアップ データの保存には、Amazon S3、Google Cloud Storage (GCS)、Azure Blob Storage、NFS がサポートされています。詳細については[バックアップストレージのURI形式](/br/backup-and-restore-storages.md#uri-format)を参照してください。
+-   `--pd` : PDサービスアドレスを指定します。たとえば、 `"${PD_IP}:2379"` 。
+-   `-s` (または`--storage` ): バックアップ ファイルが保存されるパスを指定します。バックアップ データの保存には、Amazon S3、Google Cloud Storage (GCS)、Azure Blob Storage、NFS がサポートされています。詳細については[外部ストレージ サービスの URI 形式](/external-storage-uri.md)を参照してください。
 -   `--ca` : 信頼できる CA 証明書へのパスを PEM 形式で指定します。
 -   `--cert` : PEM 形式の SSL 証明書へのパスを指定します。
 -   `--key` : SSL 証明書キーへのパスを PEM 形式で指定します。

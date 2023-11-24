@@ -11,6 +11,10 @@ TiDB で作成された新しいテーブルごとに、デフォルトで 1 つ
 
 上記のシナリオにおけるホットスポットの問題を解決するために、TiDB は、指定されたパラメーターに従って特定のテーブルの複数のリージョンを事前に分割し、それらを各 TiKV ノードに分散できる事前分割機能を導入します。
 
+> **注記：**
+>
+> この機能は[TiDB サーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless)クラスターでは使用できません。
+
 ## あらすじ {#synopsis}
 
 **SplitRegionStmt:**
@@ -47,8 +51,6 @@ TiDB で作成された新しいテーブルごとに、デフォルトで 1 つ
 
 -   偶数分割の構文:
 
-    {{< copyable "" >}}
-
     ```sql
     SPLIT TABLE table_name [INDEX index_name] BETWEEN (lower_value) AND (upper_value) REGIONS region_num
     ```
@@ -56,8 +58,6 @@ TiDB で作成された新しいテーブルごとに、デフォルトで 1 つ
     `BETWEEN lower_value AND upper_value REGIONS region_num` 、上限、下限、リージョン量を定義します。次に、現在の領域が、上限と下限の間の領域数 ( `region_num`で指定) に均等に分割されます。
 
 -   不等分割の構文:
-
-    {{< copyable "" >}}
 
     ```sql
     SPLIT TABLE table_name [INDEX index_name] BY (value_list) [, (value_list)] ...
@@ -78,7 +78,7 @@ TiDB で作成された新しいテーブルごとに、デフォルトで 1 つ
 -   `TOTAL_SPLIT_REGION` : 新しく分割されたリージョンの数。
 -   `SCATTER_FINISH_RATIO` : 新しく分割されたリージョンのスキャッタリングの完了率。 `1.0` 、すべてのリージョンが分散していることを意味します。 `0.5`リージョンの半分だけが分散しており、残りは分散していることを意味します。
 
-> **ノート：**
+> **注記：**
 >
 > 次の 2 つのセッション変数は、 `SPLIT`ステートメントの動作に影響を与える可能性があります。
 >
@@ -107,15 +107,11 @@ t22_r11
 
 たとえば、テーブル t のキー範囲`minInt64` ～ `maxInt64`から 16 の均等に分割されたリージョンを分割したい場合は、次のステートメントを使用できます。
 
-{{< copyable "" >}}
-
 ```sql
 SPLIT TABLE t BETWEEN (-9223372036854775808) AND (9223372036854775807) REGIONS 16;
 ```
 
 このステートメントは、テーブル t を minInt64 から maxInt64 までの 16 個の領域に分割します。指定された主キー範囲が指定された範囲より小さい場合 (たとえば、0~1000000000)、minInt64 と maxInt64 の代わりに 0 と 1000000000 をそれぞれ使用して、リージョンを分割できます。
-
-{{< copyable "" >}}
 
 ```sql
 SPLIT TABLE t BETWEEN (0) AND (1000000000) REGIONS 16;
@@ -124,8 +120,6 @@ SPLIT TABLE t BETWEEN (0) AND (1000000000) REGIONS 16;
 #### 不均一な分割 {#uneven-split}
 
 既知のデータが不均等に分散しており、リージョンをキー範囲 -inf ~ 10000、10000 ~ 90000、および 90000 ~ +inf にそれぞれ分割したい場合は、以下に示すように固定小数点を設定することでこれを実現できます。
-
-{{< copyable "" >}}
 
 ```sql
 SPLIT TABLE t BY (10000), (90000);
@@ -155,17 +149,13 @@ t22_i5abc
 
 `idx`インデックスの列が整数型の場合、次の SQL ステートメントを使用してインデックス データを分割できます。
 
-{{< copyable "" >}}
-
 ```sql
 SPLIT TABLE t INDEX idx BETWEEN (-9223372036854775808) AND (9223372036854775807) REGIONS 16;
 ```
 
 このステートメントは、テーブル t のインデックス idx のリージョンを`minInt64`から`maxInt64`までの 16 個の領域に分割します。
 
-インデックス idx1 の列が varchar 型で、インデックス データをプレフィックス文字で分割する場合。
-
-{{< copyable "" >}}
+インデックス idx1 の列が varchar 型で、インデックス データをプレフィックス文字によって分割する場合。
 
 ```sql
 SPLIT TABLE t INDEX idx1 BETWEEN ("a") AND ("z") REGIONS 25;
@@ -175,8 +165,6 @@ SPLIT TABLE t INDEX idx1 BETWEEN ("a") AND ("z") REGIONS 25;
 
 上記の分割方法では、上限が`z`ではなく`{` (ASCII の`z`の次の文字) であるため、接頭辞`y`と`z`持つ両方のデータがリージョン25 に書き込まれます。したがって、より正確な分割方法は次のとおりです。
 
-{{< copyable "" >}}
-
 ```sql
 SPLIT TABLE t INDEX idx1 BETWEEN ("a") AND ("{") REGIONS 26;
 ```
@@ -185,8 +173,6 @@ SPLIT TABLE t INDEX idx1 BETWEEN ("a") AND ("{") REGIONS 26;
 
 インデックス`idx2`の列がタイムスタンプ/日付時刻などの時間型で、インデックスリージョンを年ごとに分割する場合は、次のようにします。
 
-{{< copyable "" >}}
-
 ```sql
 SPLIT TABLE t INDEX idx2 BETWEEN ("2010-01-01 00:00:00") AND ("2020-01-01 00:00:00") REGIONS 10;
 ```
@@ -194,8 +180,6 @@ SPLIT TABLE t INDEX idx2 BETWEEN ("2010-01-01 00:00:00") AND ("2020-01-01 00:00:
 このステートメントは、テーブル`t`のインデックス`idx2`のリージョンを`2010-01-01 00:00:00`から`2020-01-01 00:00:00`までの 10 個の領域に分割します。リージョン1 の範囲は`[minIndexValue, 2011-01-01 00:00:00)`です。リージョン2 の範囲は`[2011-01-01 00:00:00, 2012-01-01 00:00:00)`です。
 
 インデックスのリージョンを日ごとに分割する場合は、次の例を参照してください。
-
-{{< copyable "" >}}
 
 ```sql
 SPLIT TABLE t INDEX idx2 BETWEEN ("2020-06-01 00:00:00") AND ("2020-07-01 00:00:00") REGIONS 30;
@@ -209,15 +193,11 @@ SPLIT TABLE t INDEX idx2 BETWEEN ("2020-06-01 00:00:00") AND ("2020-07-01 00:00:
 
 たとえば、インデックス`idx3 (a, b)`は 2 つの列が含まれており、列`a`はタイムスタンプ型、列`b`は int です。列`a`に従って時間範囲の分割を行うだけの場合は、単一列の時間インデックスを分割する SQL ステートメントを使用できます。この場合、 `lower_value`および`upper_velue`には列`b`の値を指定しないでください。
 
-{{< copyable "" >}}
-
 ```sql
 SPLIT TABLE t INDEX idx3 BETWEEN ("2010-01-01 00:00:00") AND ("2020-01-01 00:00:00") REGIONS 10;
 ```
 
 同じ時間範囲内で、列 b 列に従ってもう 1 回分割したい場合。分割する際はb列の値を指定するだけです。
-
-{{< copyable "" >}}
 
 ```sql
 SPLIT TABLE t INDEX idx3 BETWEEN ("2010-01-01 00:00:00", "a") AND ("2010-01-01 00:00:00", "z") REGIONS 10;
@@ -237,20 +217,16 @@ SPLIT TABLE t INDEX `PRIMARY` BETWEEN (-9223372036854775808) AND (92233720368547
 
 たとえば、 `idx4 (a,b)`があり、列`a`は varchar 型、列`b`は timestamp 型です。
 
-{{< copyable "" >}}
-
 ```sql
 SPLIT TABLE t1 INDEX idx4 BY ("a", "2000-01-01 00:00:01"), ("b", "2019-04-17 14:26:19"), ("c", "");
 ```
 
 このステートメントは、4 つのリージョンを分割する 3 つの値を指定します。各リージョンの範囲は次のとおりです。
 
-```
-region1  [ minIndexValue               , ("a", "2000-01-01 00:00:01"))
-region2  [("a", "2000-01-01 00:00:01") , ("b", "2019-04-17 14:26:19"))
-region3  [("b", "2019-04-17 14:26:19") , ("c", "")                   )
-region4  [("c", "")                    , maxIndexValue               )
-```
+    region1  [ minIndexValue               , ("a", "2000-01-01 00:00:01"))
+    region2  [("a", "2000-01-01 00:00:01") , ("b", "2019-04-17 14:26:19"))
+    region3  [("b", "2019-04-17 14:26:19") , ("c", "")                   )
+    region4  [("c", "")                    , maxIndexValue               )
 
 ### パーティション化されたテーブルの分割リージョン {#split-regions-for-partitioned-tables}
 
@@ -258,15 +234,11 @@ region4  [("c", "")                    , maxIndexValue               )
 
 -   偶数分割の構文:
 
-    {{< copyable "" >}}
-
     ```sql
     SPLIT [PARTITION] TABLE t [PARTITION] [(partition_name_list...)] [INDEX index_name] BETWEEN (lower_value) AND (upper_value) REGIONS region_num
     ```
 
 -   不等分割の構文:
-
-    {{< copyable "" >}}
 
     ```sql
     SPLIT [PARTITION] TABLE table_name [PARTITION (partition_name_list...)] [INDEX index_name] BY (value_list) [, (value_list)] ...
@@ -276,15 +248,11 @@ region4  [("c", "")                    , maxIndexValue               )
 
 1.  パーティションテーブルを作成します`t` 。 2 つのパーティションに分割されたハッシュ テーブルを作成するとします。ステートメントの例は次のとおりです。
 
-    {{< copyable "" >}}
-
     ```sql
     create table t (a int,b int,index idx(a)) partition by hash(a) partitions 2;
     ```
 
     テーブル`t`を作成した後、リージョンをパーティションごとに分割します。このテーブルのリージョンを表示するには、 `SHOW TABLE REGIONS`構文を使用します。
-
-    {{< copyable "" >}}
 
     ```sql
     show table t regions;
@@ -301,21 +269,17 @@ region4  [("c", "")                    , maxIndexValue               )
 
 2.  `SPLIT`構文を使用して、パーティションごとにリージョンを分割します。各パーティションの`[0,10000]`範囲のデータを 4 つのリージョンに分割するとします。ステートメントの例は次のとおりです。
 
-    {{< copyable "" >}}
-
     ```sql
     split partition table t between (0) and (10000) regions 4;
     ```
 
     上記のステートメントでは、 `0`と`10000`はそれぞれ、散布するホットスポット データに対応する上限と下限の`row_id`つを表します。
 
-    > **ノート：**
+    > **注記：**
     >
     > この例は、ホットスポット データが均等に分散されているシナリオにのみ適用されます。ホットスポット データが指定されたデータ範囲内で不均等に分散している場合は、 [パーティション化されたテーブルの分割リージョン](#split-regions-for-partitioned-tables)の不均等な分割の構文を参照してください。
 
 3.  このテーブルのリージョンを再度表示するには、 `SHOW TABLE REGIONS`構文を使用します。このテーブルには 10 個のリージョンがあり、各パーティションには 5 つのリージョンがあり、そのうち 4 つは行データ、1 つはインデックス データであることがわかります。
-
-    {{< copyable "" >}}
 
     ```sql
     show table t regions;
@@ -340,8 +304,6 @@ region4  [("c", "")                    , maxIndexValue               )
 
 4.  各パーティションのインデックスのリージョンを分割することもできます。たとえば、 `idx`インデックスの`[1000,10000]`範囲を 2 つのリージョンに分割できます。ステートメントの例は次のとおりです。
 
-    {{< copyable "" >}}
-
     ```sql
     split partition table t index idx between (1000) and (10000) regions 2;
     ```
@@ -352,8 +314,6 @@ region4  [("c", "")                    , maxIndexValue               )
 
 1.  パーティションテーブルを作成します。 3 つのパーティションに分割されたレンジパーティションテーブルを作成するとします。ステートメントの例は次のとおりです。
 
-    {{< copyable "" >}}
-
     ```sql
     create table t ( a int, b int, index idx(b)) partition by range( a ) (
         partition p1 values less than (10000),
@@ -363,23 +323,17 @@ region4  [("c", "")                    , maxIndexValue               )
 
 2.  `p1`のパーティションの`[0,10000]`範囲のデータを 2 つのリージョンに分割するとします。ステートメントの例は次のとおりです。
 
-    {{< copyable "" >}}
-
     ```sql
     split partition table t partition (p1) between (0) and (10000) regions 2;
     ```
 
 3.  `p2`のパーティションの`[10000,20000]`範囲のデータを 2 つのリージョンに分割するとします。ステートメントの例は次のとおりです。
 
-    {{< copyable "" >}}
-
     ```sql
     split partition table t partition (p2) between (10000) and (20000) regions 2;
     ```
 
 4.  `SHOW TABLE REGIONS`構文を使用して、このテーブルのリージョンを表示できます。
-
-    {{< copyable "" >}}
 
     ```sql
     show table t regions;
@@ -399,8 +353,6 @@ region4  [("c", "")                    , maxIndexValue               )
 
 5.  `p1`および`p2`パーティションの`idx`インデックスの`[0,20000]`範囲を 2 つのリージョンに分割するとします。ステートメントの例は次のとおりです。
 
-    {{< copyable "" >}}
-
     ```sql
     split partition table t partition (p1,p2) index idx between (0) and (20000) regions 2;
     ```
@@ -409,15 +361,13 @@ region4  [("c", "")                    , maxIndexValue               )
 
 テーブルの作成時にリージョンを均等に分割するには、 `SHARD_ROW_ID_BITS`と`PRE_SPLIT_REGIONS`を併用することをお勧めします。テーブルが正常に作成されると、 `PRE_SPLIT_REGIONS` 、 `2^(PRE_SPLIT_REGIONS)`で指定された数のリージョンにテーブルを事前に分割します。
 
-> **ノート：**
+> **注記：**
 >
 > `PRE_SPLIT_REGIONS`の値は`SHARD_ROW_ID_BITS`以下である必要があります。
 
 `tidb_scatter_region`グローバル変数は`PRE_SPLIT_REGIONS`の動作に影響を与えます。この変数は、テーブルの作成後に結果を返す前に、リージョンが事前に分割されて分散されるまで待機するかどうかを制御します。テーブルの作成後に集中的な書き込みがある場合は、この変数の値を`1`に設定する必要があります。そうすれば、すべてのリージョンが分割されて分散されるまで、TiDB はクライアントに結果を返しません。そうしないと、TiDB は分散が完了する前にデータを書き込むため、書き込みパフォーマンスに大きな影響を与えます。
 
 ### pre_split_regions の例 {#examples-of-pre-split-regions}
-
-{{< copyable "" >}}
 
 ```sql
 create table t (a int, b int,index idx1(a)) shard_row_id_bits = 4 pre_split_regions=2;
@@ -427,16 +377,14 @@ create table t (a int, b int,index idx1(a)) shard_row_id_bits = 4 pre_split_regi
 
 4 つのテーブル領域の範囲は次のとおりです。
 
-```
-region1:   [ -inf      ,  1<<61 )
-region2:   [ 1<<61     ,  2<<61 )
-region3:   [ 2<<61     ,  3<<61 )
-region4:   [ 3<<61     ,  +inf  )
-```
+    region1:   [ -inf      ,  1<<61 )
+    region2:   [ 1<<61     ,  2<<61 )
+    region3:   [ 2<<61     ,  3<<61 )
+    region4:   [ 3<<61     ,  +inf  )
 
 <CustomContent platform="tidb">
 
-> **ノート：**
+> **注記：**
 >
 > Split リージョンステートメントによって分割されたリージョンは、PD の[リージョンのマージ](/best-practices/pd-scheduling-best-practices.md#region-merge)スケジューラによって制御されます。 PD が新しく分割されたリージョンをすぐに再マージしないようにするには、リージョンのマージ機能に関連する[動的に変更する](/pd-control.md)設定項目を行う必要があります。
 

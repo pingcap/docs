@@ -127,101 +127,102 @@ TiDB Cloud は、 TiDB がサポートするほぼすべてのワークロード
 
 ## システム変数 {#system-variables}
 
-| 変数                                        | TiDB専用          | TiDB サーバーレス                       |
-| :---------------------------------------- | :-------------- | :-------------------------------- |
-| `datadir`                                 | 制限なし            | サポートされていません[^1]                   |
-| `interactive_timeout`                     | 制限なし            | 読み取り専用[^11]                       |
-| `max_allowed_packet`                      | 制限なし            | 読み取り専用[^11]                       |
-| `plugin_dir`                              | 制限なし            | サポートされていません[^8]                   |
-| `plugin_load`                             | 制限なし            | サポートされていません[^8]                   |
-| `skip_name_resolve`                       | 制限なし            | 読み取り専用[^11]                       |
-| `sql_log_bin`                             | 制限なし            | 読み取り専用[^11]                       |
-| `tidb_cdc_write_source`                   | 制限なし            | 読み取り専用[^11]                       |
-| `tidb_check_mb4_value_in_utf8`            | サポートされていません[^4] | サポートされていません[^4]                   |
-| `tidb_config`                             | サポートされていません[^4] | サポートされていません[^4]                   |
-| `tidb_ddl_disk_quota`                     | 制限なし            | 読み取り専用[^11]                       |
-| `tidb_ddl_enable_fast_reorg`              | 制限なし            | 読み取り専用[^11]                       |
-| `tidb_ddl_error_count_limit`              | 制限なし            | 読み取り専用[^11]                       |
-| `tidb_ddl_flashback_concurrency`          | 制限なし            | 読み取り専用[^11]                       |
-| `tidb_ddl_reorg_batch_size`               | 制限なし            | 読み取り専用[^11]                       |
-| `tidb_ddl_reorg_priority`                 | 制限なし            | 読み取り専用[^11]                       |
-| `tidb_ddl_reorg_worker_cnt`               | 制限なし            | 読み取り専用[^11]                       |
-| `tidb_enable_1pc`                         | 制限なし            | 読み取り専用[^11]                       |
-| `tidb_enable_async_commit`                | 制限なし            | 読み取り専用[^11]                       |
-| `tidb_enable_auto_analyze`                | 制限なし            | 読み取り専用[^11]                       |
-| `tidb_enable_collect_execution_info`      | サポートされていません[^4] | サポートされていません[^4]                   |
-| `tidb_enable_ddl`                         | 制限なし            | 読み取り専用[^11]                       |
-| `tidb_enable_gc_aware_memory_track`       | 制限なし            | 読み取り専用[^11]                       |
-| `tidb_enable_gogc_tuner`                  | 制限なし            | 読み取り専用[^11]                       |
-| `tidb_enable_local_txn`                   | 制限なし            | 読み取り専用[^11]                       |
-| `tidb_enable_resource_control`            | 制限なし            | 読み取り専用[^11]                       |
-| `tidb_enable_slow_log`                    | サポートされていません[^4] | サポートされていません[^4]                   |
-| `tidb_enable_stmt_summary`                | 制限なし            | 読み取り専用[^11]                       |
-| `tidb_enable_telemetry`                   | サポートされていません[^4] | サポートされていません[^4]                   |
-| `tidb_enable_top_sql`                     | 制限なし            | 読み取り専用[^11]                       |
-| `tidb_enable_tso_follower_proxy`          | 制限なし            | 読み取り専用[^11]                       |
-| `tidb_expensive_query_time_threshold`     | サポートされていません[^4] | サポートされていません[^4]                   |
-| `tidb_force_priority`                     | サポートされていません[^4] | サポートされていません[^4]                   |
-| `tidb_gc_concurrency`                     | 制限なし            | 読み取り専用[^11]                       |
-| `tidb_gc_enable`                          | 制限なし            | 読み取り専用[^11]                       |
-| `tidb_gc_life_time`                       | 制限なし            | 読み取り専用[^11]                       |
-| `tidb_gc_max_wait_time`                   | 制限なし            | 読み取り専用[^11]                       |
-| `tidb_gc_run_interval`                    | 制限なし            | 読み取り専用[^11]                       |
-| `tidb_gc_scan_lock_mode`                  | 制限なし            | 読み取り専用[^11]                       |
-| `tidb_general_log`                        | サポートされていません[^4] | サポートされていません[^4]                   |
-| `tidb_generate_binary_plan`               | 制限なし            | 読み取り専用[^11]                       |
-| `tidb_gogc_tuner_threshold`               | 制限なし            | 読み取り専用[^11]                       |
-| `tidb_guarantee_linearizability`          | 制限なし            | 読み取り専用[^11]                       |
-| `tidb_isolation_read_engines`             | 制限なし            | 読み取り専用[^11]                       |
-| `tidb_log_file_max_days`                  | 制限なし            | 読み取り専用[^11]                       |
-| `tidb_memory_usage_alarm_ratio`           | サポートされていません[^4] | サポートされていません[^4]                   |
-| `tidb_metric_query_range_duration`        | サポートされていません[^4] | サポートされていません[^4]                   |
-| `tidb_metric_query_step`                  | サポートされていません[^4] | サポートされていません[^4]                   |
-| `tidb_opt_write_row_id`                   | サポートされていません[^4] | サポートされていません[^4]                   |
-| `tidb_placement_mode`                     | 制限なし            | 読み取り専用[^11]                       |
-| `tidb_pprof_sql_cpu`                      | サポートされていません[^4] | サポートされていません[^4]                   |
-| `tidb_record_plan_in_slow_log`            | サポートされていません[^4] | サポートされていません[^4]                   |
-| `tidb_redact_log`                         | サポートされていません[^4] | サポートされていません[^4]                   |
-| `tidb_restricted_read_only`               | サポートされていません[^4] | サポートされていません[^4]                   |
-| `tidb_row_format_version`                 | サポートされていません[^4] | サポートされていません[^4]                   |
-| `tidb_scatter_region`                     | 制限なし            | 読み取り専用[^11]                       |
-| `tidb_server_memory_limit`                | 制限なし            | 読み取り専用[^11]                       |
-| `tidb_server_memory_limit_gc_trigger`     | 制限なし            | 読み取り専用[^11]                       |
-| `tidb_server_memory_limit_sess_min_size`  | 制限なし            | 読み取り専用[^11]                       |
-| `tidb_simplified_metrics`                 | 制限なし            | 読み取り専用[^11]                       |
-| `tidb_slow_query_file`                    | サポートされていません[^4] | サポートされていません[^4]                   |
-| `tidb_slow_log_threshold`                 | サポートされていません[^4] | サポートされていません[^4]                   |
-| `tidb_slow_txn_log_threshold`             | サポートされていません[^4] | サポートされていません[^4]                   |
-| `tidb_stats_load_sync_wait`               | 制限なし            | 読み取り専用[^11]                       |
-| `tidb_stmt_summary_history_size`          | 制限なし            | 読み取り専用[^11]                       |
-| `tidb_stmt_summary_internal_query`        | 制限なし            | 読み取り専用[^11]                       |
-| `tidb_stmt_summary_max_sql_length`        | 制限なし            | 読み取り専用[^11]                       |
-| `tidb_stmt_summary_max_stmt_count`        | 制限なし            | 読み取り専用[^11]                       |
-| `tidb_stmt_summary_refresh_interval`      | 制限なし            | 読み取り専用[^11]                       |
-| `tidb_sysproc_scan_concurrency`           | 制限なし            | 読み取り専用[^11]                       |
-| `tidb_top_sql_max_meta_count`             | サポートされていません[^4] | サポートされていません[^4]                   |
-| `tidb_top_sql_max_time_series_count`      | サポートされていません[^4] | サポートされていません[^4]                   |
-| `tidb_tso_client_batch_max_wait_time`     | 制限なし            | 読み取り専用[^11]                       |
-| `tidb_ttl_delete_batch_size`              | 制限なし            | 読み取り専用[^9]                        |
-| `tidb_ttl_delete_rate_limit`              | 制限なし            | 読み取り専用[^9]                        |
-| `tidb_ttl_delete_worker_count`            | 制限なし            | 読み取り専用[^9]                        |
-| `tidb_ttl_job_enable`                     | 制限なし            | 読み取り専用[^9]                        |
-| `tidb_ttl_job_schedule_window_end_time`   | 制限なし            | 読み取り専用[^9]                        |
-| `tidb_ttl_job_schedule_window_start_time` | 制限なし            | 読み取り専用[^9]                        |
-| `tidb_ttl_running_tasks`                  | 制限なし            | 読み取り専用[^9]                        |
-| `tidb_ttl_scan_batch_size`                | 制限なし            | 読み取り専用[^9]                        |
-| `tidb_ttl_scan_worker_count`              | 制限なし            | 読み取り専用[^9]                        |
-| `tidb_txn_mode`                           | 制限なし            | 読み取り専用[^11]                       |
-| `tidb_wait_split_region_finish`           | 制限なし            | 読み取り専用[^11]                       |
-| `tidb_wait_split_region_timeout`          | 制限なし            | 読み取り専用[^11]                       |
-| `txn_scope`                               | 制限なし            | 読み取り専用[^11]                       |
-| `validate_password.enable`                | 制限なし            | 常に有効[^10]                         |
-| `validate_password.length`                | 制限なし            | 少なくとも`8` [^10]                    |
-| `validate_password.mixed_case_count`      | 制限なし            | 少なくとも`1` [^10]                    |
-| `validate_password.number_count`          | 制限なし            | 少なくとも`1` [^10]                    |
-| `validate_password.policy`                | 制限なし            | `MEDIUM`または`STRONG`のみを指定できます[^10] |
-| `validate_password.special_char_count`    | 制限なし            | 少なくとも`1` [^10]                    |
-| `wait_timeout`                            | 制限なし            | 読み取り専用[^11]                       |
+| 変数                                        | TiDB専用           | TiDB サーバーレス                       |
+| :---------------------------------------- | :--------------- | :-------------------------------- |
+| `datadir`                                 | 制限なし             | サポートされていません[^1]                   |
+| `interactive_timeout`                     | 制限なし             | 読み取り専用[^11]                       |
+| `max_allowed_packet`                      | 制限なし             | 読み取り専用[^11]                       |
+| `plugin_dir`                              | 制限なし             | サポートされていません[^8]                   |
+| `plugin_load`                             | 制限なし             | サポートされていません[^8]                   |
+| `require_secure_transport`                | サポートされていません[^13] | 読み取り専用[^11]                       |
+| `skip_name_resolve`                       | 制限なし             | 読み取り専用[^11]                       |
+| `sql_log_bin`                             | 制限なし             | 読み取り専用[^11]                       |
+| `tidb_cdc_write_source`                   | 制限なし             | 読み取り専用[^11]                       |
+| `tidb_check_mb4_value_in_utf8`            | サポートされていません[^4]  | サポートされていません[^4]                   |
+| `tidb_config`                             | サポートされていません[^4]  | サポートされていません[^4]                   |
+| `tidb_ddl_disk_quota`                     | 制限なし             | 読み取り専用[^11]                       |
+| `tidb_ddl_enable_fast_reorg`              | 制限なし             | 読み取り専用[^11]                       |
+| `tidb_ddl_error_count_limit`              | 制限なし             | 読み取り専用[^11]                       |
+| `tidb_ddl_flashback_concurrency`          | 制限なし             | 読み取り専用[^11]                       |
+| `tidb_ddl_reorg_batch_size`               | 制限なし             | 読み取り専用[^11]                       |
+| `tidb_ddl_reorg_priority`                 | 制限なし             | 読み取り専用[^11]                       |
+| `tidb_ddl_reorg_worker_cnt`               | 制限なし             | 読み取り専用[^11]                       |
+| `tidb_enable_1pc`                         | 制限なし             | 読み取り専用[^11]                       |
+| `tidb_enable_async_commit`                | 制限なし             | 読み取り専用[^11]                       |
+| `tidb_enable_auto_analyze`                | 制限なし             | 読み取り専用[^11]                       |
+| `tidb_enable_collect_execution_info`      | サポートされていません[^4]  | サポートされていません[^4]                   |
+| `tidb_enable_ddl`                         | 制限なし             | 読み取り専用[^11]                       |
+| `tidb_enable_gc_aware_memory_track`       | 制限なし             | 読み取り専用[^11]                       |
+| `tidb_enable_gogc_tuner`                  | 制限なし             | 読み取り専用[^11]                       |
+| `tidb_enable_local_txn`                   | 制限なし             | 読み取り専用[^11]                       |
+| `tidb_enable_resource_control`            | 制限なし             | 読み取り専用[^11]                       |
+| `tidb_enable_slow_log`                    | サポートされていません[^4]  | サポートされていません[^4]                   |
+| `tidb_enable_stmt_summary`                | 制限なし             | 読み取り専用[^11]                       |
+| `tidb_enable_telemetry`                   | サポートされていません[^4]  | サポートされていません[^4]                   |
+| `tidb_enable_top_sql`                     | 制限なし             | 読み取り専用[^11]                       |
+| `tidb_enable_tso_follower_proxy`          | 制限なし             | 読み取り専用[^11]                       |
+| `tidb_expensive_query_time_threshold`     | サポートされていません[^4]  | サポートされていません[^4]                   |
+| `tidb_force_priority`                     | サポートされていません[^4]  | サポートされていません[^4]                   |
+| `tidb_gc_concurrency`                     | 制限なし             | 読み取り専用[^11]                       |
+| `tidb_gc_enable`                          | 制限なし             | 読み取り専用[^11]                       |
+| `tidb_gc_life_time`                       | 制限なし             | 読み取り専用[^11]                       |
+| `tidb_gc_max_wait_time`                   | 制限なし             | 読み取り専用[^11]                       |
+| `tidb_gc_run_interval`                    | 制限なし             | 読み取り専用[^11]                       |
+| `tidb_gc_scan_lock_mode`                  | 制限なし             | 読み取り専用[^11]                       |
+| `tidb_general_log`                        | サポートされていません[^4]  | サポートされていません[^4]                   |
+| `tidb_generate_binary_plan`               | 制限なし             | 読み取り専用[^11]                       |
+| `tidb_gogc_tuner_threshold`               | 制限なし             | 読み取り専用[^11]                       |
+| `tidb_guarantee_linearizability`          | 制限なし             | 読み取り専用[^11]                       |
+| `tidb_isolation_read_engines`             | 制限なし             | 読み取り専用[^11]                       |
+| `tidb_log_file_max_days`                  | 制限なし             | 読み取り専用[^11]                       |
+| `tidb_memory_usage_alarm_ratio`           | サポートされていません[^4]  | サポートされていません[^4]                   |
+| `tidb_metric_query_range_duration`        | サポートされていません[^4]  | サポートされていません[^4]                   |
+| `tidb_metric_query_step`                  | サポートされていません[^4]  | サポートされていません[^4]                   |
+| `tidb_opt_write_row_id`                   | サポートされていません[^4]  | サポートされていません[^4]                   |
+| `tidb_placement_mode`                     | 制限なし             | 読み取り専用[^11]                       |
+| `tidb_pprof_sql_cpu`                      | サポートされていません[^4]  | サポートされていません[^4]                   |
+| `tidb_record_plan_in_slow_log`            | サポートされていません[^4]  | サポートされていません[^4]                   |
+| `tidb_redact_log`                         | サポートされていません[^4]  | サポートされていません[^4]                   |
+| `tidb_restricted_read_only`               | サポートされていません[^4]  | サポートされていません[^4]                   |
+| `tidb_row_format_version`                 | サポートされていません[^4]  | サポートされていません[^4]                   |
+| `tidb_scatter_region`                     | 制限なし             | 読み取り専用[^11]                       |
+| `tidb_server_memory_limit`                | 制限なし             | 読み取り専用[^11]                       |
+| `tidb_server_memory_limit_gc_trigger`     | 制限なし             | 読み取り専用[^11]                       |
+| `tidb_server_memory_limit_sess_min_size`  | 制限なし             | 読み取り専用[^11]                       |
+| `tidb_simplified_metrics`                 | 制限なし             | 読み取り専用[^11]                       |
+| `tidb_slow_query_file`                    | サポートされていません[^4]  | サポートされていません[^4]                   |
+| `tidb_slow_log_threshold`                 | サポートされていません[^4]  | サポートされていません[^4]                   |
+| `tidb_slow_txn_log_threshold`             | サポートされていません[^4]  | サポートされていません[^4]                   |
+| `tidb_stats_load_sync_wait`               | 制限なし             | 読み取り専用[^11]                       |
+| `tidb_stmt_summary_history_size`          | 制限なし             | 読み取り専用[^11]                       |
+| `tidb_stmt_summary_internal_query`        | 制限なし             | 読み取り専用[^11]                       |
+| `tidb_stmt_summary_max_sql_length`        | 制限なし             | 読み取り専用[^11]                       |
+| `tidb_stmt_summary_max_stmt_count`        | 制限なし             | 読み取り専用[^11]                       |
+| `tidb_stmt_summary_refresh_interval`      | 制限なし             | 読み取り専用[^11]                       |
+| `tidb_sysproc_scan_concurrency`           | 制限なし             | 読み取り専用[^11]                       |
+| `tidb_top_sql_max_meta_count`             | サポートされていません[^4]  | サポートされていません[^4]                   |
+| `tidb_top_sql_max_time_series_count`      | サポートされていません[^4]  | サポートされていません[^4]                   |
+| `tidb_tso_client_batch_max_wait_time`     | 制限なし             | 読み取り専用[^11]                       |
+| `tidb_ttl_delete_batch_size`              | 制限なし             | 読み取り専用[^9]                        |
+| `tidb_ttl_delete_rate_limit`              | 制限なし             | 読み取り専用[^9]                        |
+| `tidb_ttl_delete_worker_count`            | 制限なし             | 読み取り専用[^9]                        |
+| `tidb_ttl_job_enable`                     | 制限なし             | 読み取り専用[^9]                        |
+| `tidb_ttl_job_schedule_window_end_time`   | 制限なし             | 読み取り専用[^9]                        |
+| `tidb_ttl_job_schedule_window_start_time` | 制限なし             | 読み取り専用[^9]                        |
+| `tidb_ttl_running_tasks`                  | 制限なし             | 読み取り専用[^9]                        |
+| `tidb_ttl_scan_batch_size`                | 制限なし             | 読み取り専用[^9]                        |
+| `tidb_ttl_scan_worker_count`              | 制限なし             | 読み取り専用[^9]                        |
+| `tidb_txn_mode`                           | 制限なし             | 読み取り専用[^11]                       |
+| `tidb_wait_split_region_finish`           | 制限なし             | 読み取り専用[^11]                       |
+| `tidb_wait_split_region_timeout`          | 制限なし             | 読み取り専用[^11]                       |
+| `txn_scope`                               | 制限なし             | 読み取り専用[^11]                       |
+| `validate_password.enable`                | 制限なし             | 常に有効[^10]                         |
+| `validate_password.length`                | 制限なし             | 少なくとも`8` [^10]                    |
+| `validate_password.mixed_case_count`      | 制限なし             | 少なくとも`1` [^10]                    |
+| `validate_password.number_count`          | 制限なし             | 少なくとも`1` [^10]                    |
+| `validate_password.policy`                | 制限なし             | `MEDIUM`または`STRONG`のみを指定できます[^10] |
+| `validate_password.special_char_count`    | 制限なし             | 少なくとも`1` [^10]                    |
+| `wait_timeout`                            | 制限なし             | 読み取り専用[^11]                       |
 
 [^1]: データ配置の構成は、TiDB サーバーレスではサポートされていません。
 
@@ -246,3 +247,5 @@ TiDB Cloud は、 TiDB がサポートするほぼすべてのワークロード
 [^11]: この変数は、TiDB サーバーレスでは読み取り専用です。
 
 [^12]: [`AUTO_ID_CACHE`](/auto-increment.md#cache-size-control)を使用したキャッシュ サイズのカスタマイズは、TiDB サーバーレスでは一時的に利用できません。
+
+[^13]: サポートされていません。 TiDB 専用クラスターの`require_secure_transport`有効にすると、SQL クライアント接続が失敗します。

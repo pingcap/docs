@@ -11,8 +11,6 @@ summary: Learn how to create a private mirror.
 
 次のコマンドを実行して、 `mirror`コマンドのヘルプ情報を取得します。
 
-{{< copyable "" >}}
-
 ```bash
 tiup mirror --help
 ```
@@ -51,8 +49,6 @@ Use "tiup mirror [command] --help" for more information about a command.
 
 `tiup mirror clone`コマンドを実行してローカル ミラーを構築できます。
 
-{{< copyable "" >}}
-
 ```bash
 tiup mirror clone <target-dir> [global-version] [flags]
 ```
@@ -70,7 +66,7 @@ tiup mirror clone <target-dir> [global-version] [flags]
 
     `--full`フラグを指定すると、公式ミラーを完全に複製できます。
 
-    > **ノート：**
+    > **注記：**
     >
     > `--full` 、 `global-version`フラグ、およびコンポーネントのバージョンが指定されていない場合は、一部のメタ情報のみが複製されます。
 
@@ -86,9 +82,9 @@ tiup mirror clone <target-dir> [global-version] [flags]
 
     コンポーネントの 1 つのバージョン (すべてのバージョンではない) のみを複製する場合は、 `--<component>=<version>`を使用してこのバージョンを指定します。例えば：
 
-    -   `tiup mirror clone <target-dir> --tidb v7.1.1`コマンドを実行して、TiDBコンポーネントの v7.1.1 バージョンのクローンを作成します。
-    -   `tiup mirror clone <target-dir> --tidb v7.1.1 --tikv all`コマンドを実行して、v7.1.1 バージョンの TiDBコンポーネントとすべてのバージョンの TiKVコンポーネントのクローンを作成します。
-    -   `tiup mirror clone <target-dir> v7.1.1`コマンドを実行して、クラスター内のすべてのコンポーネントの v7.1.1 バージョンのクローンを作成します。
+    -   `tiup mirror clone <target-dir> --tidb v7.1.2`コマンドを実行して、TiDBコンポーネントの v7.1.2 バージョンのクローンを作成します。
+    -   `tiup mirror clone <target-dir> --tidb v7.1.2 --tikv all`コマンドを実行して、v7.1.2 バージョンの TiDBコンポーネントとすべてのバージョンの TiKVコンポーネントのクローンを作成します。
+    -   `tiup mirror clone <target-dir> v7.1.2`コマンドを実行して、クラスター内のすべてのコンポーネントの v7.1.2 バージョンのクローンを作成します。
 
 クローン作成後、署名キーが自動的に設定されます。
 
@@ -104,7 +100,7 @@ tiup mirror set /shared_data/tiup
 tiup mirror set https://tiup-mirror.example.com/
 ```
 
-> **ノート：**
+> **注記：**
 >
 > `tiup mirror clone`実行しているマシンで`tiup mirror set...`を実行すると、次回`tiup mirror clone...`を実行するときに、マシンはリモート ミラーではなくローカル ミラーからクローンを作成します。したがって、プライベート ミラーを更新する前に、 `tiup mirror set --reset`を実行してミラーをリセットする必要があります。
 
@@ -121,7 +117,7 @@ tiup list
 
 同じ`target-dir`を指定して`tiup mirror clone`コマンドを再度実行すると、マシンは新しいマニフェストを作成し、利用可能なコンポーネントの最新バージョンをダウンロードします。
 
-> **ノート：**
+> **注記：**
 >
 > マニフェストを再作成する前に、すべてのコンポーネントとバージョン (以前にダウンロードした以前のものを含む) が含まれていることを確認してください。
 
@@ -191,11 +187,9 @@ tiup mirror grant jdoe
     $ tiup hello
     ```
 
-    ```
-    The component `hello` version  is not installed; downloading from repository.
-    Starting component `hello`: /home/dvaneeden/.tiup/components/hello/v0.0.1/hello
-    hello
-    ```
+        The component `hello` version  is not installed; downloading from repository.
+        Starting component `hello`: /home/dvaneeden/.tiup/components/hello/v0.0.1/hello
+        hello
 
     `tiup mirror merge`を使用すると、カスタム コンポーネントを含むリポジトリを別のリポジトリにマージできます。これは、 `/data/my_custom_components`のすべてのコンポーネントが現在の`$USER`によって署名されていることを前提としています。
 

@@ -7,6 +7,10 @@ summary: An overview of the usage of SHOW PLUGINS for the TiDB database.
 
 `SHOW PLUGINS` TiDB にインストールされているすべてのプラグインを、各プラグインのステータスとバージョン情報を含めて表示します。
 
+> **注記：**
+>
+> この機能は[TiDB サーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless)クラスターでは使用できません。
+
 ## あらすじ {#synopsis}
 
 **表示手順:**

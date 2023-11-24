@@ -7,13 +7,9 @@ summary: An overview of the usage of SET RESOURCE GROUP in the TiDB database.
 
 `SET RESOURCE GROUP`は、現在のセッションのリソース グループを設定するために使用されます。
 
-<CustomContent platform="tidb-cloud">
-
-> **ノート：**
+> **注記：**
 >
-> この機能は[TiDB サーバーレスクラスター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless)では使用できません。
-
-</CustomContent>
+> この機能は[TiDB サーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless)クラスターでは使用できません。
 
 ## あらすじ {#synopsis}
 
@@ -43,14 +39,12 @@ ALTER USER 'user1' RESOURCE GROUP `rg1`;
 SELECT CURRENT_RESOURCE_GROUP();
 ```
 
-```
-+--------------------------+
-| CURRENT_RESOURCE_GROUP() |
-+--------------------------+
-| rg1                      |
-+--------------------------+
-1 row in set (0.00 sec)
-```
+    +--------------------------+
+    | CURRENT_RESOURCE_GROUP() |
+    +--------------------------+
+    | rg1                      |
+    +--------------------------+
+    1 row in set (0.00 sec)
 
 `SET RESOURCE GROUP`を実行して、現在のセッションのリソース グループを`rg2`に設定します。
 
@@ -59,14 +53,12 @@ SET RESOURCE GROUP `rg2`;
 SELECT CURRENT_RESOURCE_GROUP();
 ```
 
-```
-+--------------------------+
-| CURRENT_RESOURCE_GROUP() |
-+--------------------------+
-| rg2                      |
-+--------------------------+
-1 row in set (0.00 sec)
-```
+    +--------------------------+
+    | CURRENT_RESOURCE_GROUP() |
+    +--------------------------+
+    | rg2                      |
+    +--------------------------+
+    1 row in set (0.00 sec)
 
 `SET RESOURCE GROUP`を実行して、デフォルトのリソース グループを使用する現在のセッションを指定します。
 

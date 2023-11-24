@@ -51,12 +51,12 @@ TiDB バージョン: 6.5.3
 -   TiDB
 
     -   `min, max`クエリ結果が正しくない問題を修正[#43805](https://github.com/pingcap/tidb/issues/43805) @ [wshwsh12](https://github.com/wshwsh12)
-    -   ウィンドウ関数をTiFlash [#43922](https://github.com/pingcap/tidb/issues/43922) @ [ゲンリキ](https://github.com/gengliqi)にプッシュダウンするときに実行プランが正しくない問題を修正
+    -   ウィンドウ関数をTiFlash [#43922](https://github.com/pingcap/tidb/issues/43922) @ [ゲンリチ](https://github.com/gengliqi)にプッシュダウンするときに実行プランが正しくない問題を修正
     -   CTE を使用したクエリにより TiDB がハングする問題を修正[#43749](https://github.com/pingcap/tidb/issues/43749) [#36896](https://github.com/pingcap/tidb/issues/36896) @ [グオシャオゲ](https://github.com/guo-shaoge)
     -   `AES_DECRYPT`式[#43063](https://github.com/pingcap/tidb/issues/43063) @ [ルクワンチャオ](https://github.com/lcwangchao)を使用すると、SQL ステートメントで`runtime error: index out of range`エラーが報告される問題を修正します。
     -   `SHOW PROCESSLIST`ステートメントがサブクエリ時間の長いステートメント[#40851](https://github.com/pingcap/tidb/issues/40851) @ [クレイジークス520](https://github.com/crazycs520)のトランザクションの TxnStart を表示できない問題を修正
     -   PD 分離により実行中の DDL [#44014](https://github.com/pingcap/tidb/issues/44014) [#43755](https://github.com/pingcap/tidb/issues/43755) [#44267](https://github.com/pingcap/tidb/issues/44267) @ [wjhuang2016](https://github.com/wjhuang2016)がブロックされる可能性がある問題を修正
-    -   `UNION` [#42563](https://github.com/pingcap/tidb/issues/42563) @ [ルクワンチャオ](https://github.com/lcwangchao)を使用してユニオン ビューと一時テーブルをクエリするときに発生する TiDBpanicの問題を修正しました。
+    -   `UNION` [#42563](https://github.com/pingcap/tidb/issues/42563) @ [ルクワンチャオ](https://github.com/lcwangchao)を使用してユニオン ビューと一時テーブルをクエリするときに発生する TiDBpanicの問題を修正
     -   パーティション化されたテーブルの配置ルールの動作の問題を修正し、削除されたパーティションの配置ルールを正しく設定してリサイクルできるようにします[#44116](https://github.com/pingcap/tidb/issues/44116) @ [ルクワンチャオ](https://github.com/lcwangchao)
     -   パーティションテーブルのパーティションを切り捨てると、パーティションの配置ルールが無効になる可能性がある問題を修正します[#44031](https://github.com/pingcap/tidb/issues/44031) @ [ルクワンチャオ](https://github.com/lcwangchao)
     -   テーブルの名前変更[#43338](https://github.com/pingcap/tidb/issues/43338) @ [タンジェンタ](https://github.com/tangenta)中に TiCDC が行の変更の一部を失う可能性がある問題を修正
@@ -83,6 +83,7 @@ TiDB バージョン: 6.5.3
 
 -   TiKV
 
+    -   TiKV ノードに障害が発生したときに、対応するリージョンのピアが誤って休止状態になる問題を修正します[#14547](https://github.com/tikv/tikv/issues/14547) @ [ひっくり返る](https://github.com/hicqu)
     -   継続的プロファイリング[#14224](https://github.com/tikv/tikv/issues/14224) @ [タボキー](https://github.com/tabokie)でのファイル ハンドル リークの問題を修正
     -   PD クラッシュにより PITR が続行できない可能性がある問題を修正[#14184](https://github.com/tikv/tikv/issues/14184) @ [ユジュンセン](https://github.com/YuJuncen)
     -   暗号化キー ID の競合により古いキー[#14585](https://github.com/tikv/tikv/issues/14585) @ [タボキー](https://github.com/tabokie)が削除される可能性がある問題を修正
@@ -115,7 +116,7 @@ TiDB バージョン: 6.5.3
         -   ダウンストリーム MySQL にデータをレプリケートするときに、アップストリーム TiDB [#8040](https://github.com/pingcap/tiflow/issues/8040) @ [東門](https://github.com/asddongmen)で`FLASHBACK CLUSTER TO TIMESTAMP`ステートメントが実行された後にレプリケーション エラーが発生する問題を修正します。
         -   オブジェクトstorageにデータをレプリケートするときに、アップストリームの`EXCHANGE PARTITION`オペレーションがダウンストリーム[#8914](https://github.com/pingcap/tiflow/issues/8914) @ [CharlesCheung96](https://github.com/CharlesCheung96)に適切にレプリケートできない問題を修正します。
         -   一部の特殊なシナリオ[#8974](https://github.com/pingcap/tiflow/issues/8974) @ [ひっくり返る](https://github.com/hicqu)におけるソーターコンポーネントの過剰なメモリ使用によって引き起こされる OOM 問題を修正します。
-        -   ダウンストリームが Kafka の場合、TiCDC がダウンストリーム メタデータを頻繁にクエリし、ダウンストリーム[#8957](https://github.com/pingcap/tiflow/issues/8957) [#8959](https://github.com/pingcap/tiflow/issues/8959) @ [こんにちはラスティン](https://github.com/hi-rustin)で過剰なワークロードが発生する問題を修正します。
+        -   ダウンストリームが Kafka の場合、TiCDC がダウンストリームのメタデータを頻繁にクエリし、ダウンストリームで過度のワークロードが発生する問題を修正します[#8957](https://github.com/pingcap/tiflow/issues/8957) [#8959](https://github.com/pingcap/tiflow/issues/8959) @ [こんにちはラスティン](https://github.com/hi-rustin)
         -   Kafka メッセージのサイズ超過によりレプリケーション エラーが発生した場合、メッセージ本文がログ[#9031](https://github.com/pingcap/tiflow/issues/9031) @ [ダラエス](https://github.com/darraes)に記録される問題を修正
         -   ダウンストリーム Kafka シンクがローリング再起動されるときに発生する TiCDC ノードpanicを修正します[#9023](https://github.com/pingcap/tiflow/issues/9023) @ [東門](https://github.com/asddongmen)
         -   データをstorageサービスにレプリケートするときに、ダウンストリーム DDL ステートメントに対応する JSON ファイルにテーブル フィールド[#9066](https://github.com/pingcap/tiflow/issues/9066) @ [CharlesCheung96](https://github.com/CharlesCheung96)のデフォルト値が記録されない問題を修正します。

@@ -249,7 +249,7 @@ SQL ステートメントの実行プランを履歴実行プランに固定す�
 現在、この機能には次の制限があります。
 
 -   この機能は、履歴実行計画に従ってヒントを生成し、生成されたヒントをバインドに使用します。履歴実行プランは[ステートメント概要テーブル](/statement-summary-tables.md)に保存されるため、この機能を使用する前に、まず[`tidb_enable_stmt_summary`](/system-variables.md#tidb_enable_stmt_summary-new-in-v304)システム変数を有効にする必要があります。
--   現在、この機能は、現在の TiDB ノードの`statements_summary`と`statements_summary_history`テーブルでの履歴実行プランのバインディングのみをサポートしています。 `can't find any plans`エラーが発生した場合は、クラスター内の別の TiDB ノードに接続して、バインドを再試行できます。
+-   この機能は、 TiFlashクエリ、3 つ以上のテーブルとの結合クエリ、またはサブクエリを含むクエリをサポートしていません。
 
 このバインド方法の SQL ステートメントは次のとおりです。
 

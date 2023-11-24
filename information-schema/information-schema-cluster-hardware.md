@@ -7,7 +7,9 @@ summary: Learn the `CLUSTER_HARDWARE` information_schema table.
 
 `CLUSTER_HARDWARE`ハードウェア システム テーブルは、クラスターの各インスタンスが配置されているサーバーのハードウェア情報を提供します。
 
-{{< copyable "" >}}
+> **注記：**
+>
+> このテーブルは TiDB セルフホスト型にのみ適用され、 [TiDB Cloud](https://docs.pingcap.com/tidbcloud/)では利用できません。
 
 ```sql
 USE information_schema;
@@ -42,8 +44,6 @@ DESC cluster_hardware;
 -   `VALUE` : ディスクボリュームやCPUコア番号など、対応するハードウェア情報の値。
 
 次の例は、 `CLUSTER_HARDWARE`テーブルを使用して CPU 情報をクエリする方法を示しています。
-
-{{< copyable "" >}}
 
 ```sql
 SELECT * FROM cluster_hardware WHERE device_type='cpu' AND device_name='cpu' AND name LIKE '%cores';

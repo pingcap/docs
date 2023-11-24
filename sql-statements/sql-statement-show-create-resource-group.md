@@ -5,15 +5,11 @@ summary: Learn the usage of SHOW CREATE RESOURCE GROUP in TiDB.
 
 # 表示 リソースグループの作成 {#show-create-resource-group}
 
-<CustomContent platform="tidb-cloud">
-
-> **ノート：**
->
-> この機能は[TiDB サーバーレスクラスター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless)では使用できません。
-
-</CustomContent>
-
 `SHOW CREATE RESOURCE GROUP`ステートメントを使用すると、リソース グループの現在の定義を表示できます。
+
+> **注記：**
+>
+> この機能は[TiDB サーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless)クラスターでは使用できません。
 
 ## あらすじ {#synopsis}
 

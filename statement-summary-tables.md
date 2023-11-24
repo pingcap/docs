@@ -15,13 +15,9 @@ SQL パフォーマンスの問題をより適切に処理するために、MySQ
 -   [`cluster_statements_summary_history`](#statements_summary_evicted)
 -   [`statements_summary_evicted`](#statements_summary_evicted)
 
-<CustomContent platform="tidb-cloud">
-
 > **注記：**
 >
-> 次のテーブルは[TiDB サーバーレスクラスター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless)では使用できませ`cluster_statements_summary_history` : `statements_summary` 、および`cluster_statements_summary` `statements_summary_history`
-
-</CustomContent>
+> 前述のテーブルは[TiDB サーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless)クラスターでは使用できません。
 
 このドキュメントでは、これらのテーブルについて詳しく説明し、それらを使用して SQL パフォーマンスの問題をトラブルシューティングする方法を紹介します。
 
@@ -109,8 +105,20 @@ select * from employee where id in (...) and salary between ? and ?;
 
 -   `tidb_enable_stmt_summary` : ステートメント要約機能を有効にするかどうかを決定します。 `1` `enable`を表し、 `0` `disable`を意味します。この機能はデフォルトで有効になっています。この機能が無効になっている場合、システム テーブルの統計はクリアされます。統計は、次回この機能が有効になったときに再計算されます。テストの結果、この機能を有効にしてもパフォーマンスにはほとんど影響がないことがわかりました。
 -   `tidb_stmt_summary_refresh_interval` : `statements_summary`テーブルが更新される間隔。時間の単位は秒(s)です。デフォルト値は`1800`です。
--   `tidb_stmt_summary_history_size` : `statements_summary_history`テーブルに格納される各 SQL ステートメント カテゴリのサイズ。これは`statement_summary_evicted`テーブルの最大レコード数でもあります。デフォルト値は`24`です。
--   `tidb_stmt_summary_max_stmt_count` : ステートメントサマリーテーブルに保存できる SQL ステートメントの数を制限します。デフォルト値は`3000`です。制限を超えると、最近未使用のままになっていた SQL ステートメントがクリアされます。これらのクリアされた SQL ステートメントは`statement_summary_evicted`テーブルに記録されます。
+-   `tidb_stmt_summary_history_size` : `statements_summary_history`テーブルに格納される各 SQL ステートメント カテゴリのサイズ。これは`statements_summary_evicted`テーブルの最大レコード数でもあります。デフォルト値は`24`です。
+
+<CustomContent platform="tidb">
+
+-   `tidb_stmt_summary_max_stmt_count` : ステートメントサマリーテーブルに保存できる SQL ステートメントの数を制限します。デフォルト値は`3000`です。制限を超えると、TiDB は最近未使用のままになっている SQL ステートメントをクリアします。これらのクリアされた SQL ステートメントは、 `DIGEST`が`NULL`に設定された行として表され、 `statements_summary_evicted`テーブルに記録されます。 [TiDB ダッシュボードの SQL ステートメント ページ](/dashboard/dashboard-statement-list.md#others)では、これらの行の情報は`Others`として表示されます。
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+-   `tidb_stmt_summary_max_stmt_count` : ステートメントサマリーテーブルに保存できる SQL ステートメントの数を制限します。デフォルト値は`3000`です。制限を超えると、TiDB は最近未使用のままになっている SQL ステートメントをクリアします。これらのクリアされた SQL ステートメントは、 `DIGEST`が`NULL`に設定された行として表され、 `statements_summary_evicted`テーブルに記録されます。 [TiDB ダッシュボードの SQL ステートメント ページ](https://docs.pingcap.com/tidb/stable/dashboard-statement-list#others)では、これらの行の情報は`Others`として表示されます。
+
+</CustomContent>
+
 -   `tidb_stmt_summary_max_sql_length` : `DIGEST_TEXT`と`QUERY_SAMPLE_TEXT`の最長の表示長を指定します。デフォルト値は`4096`です。
 -   `tidb_stmt_summary_internal_query` : TiDB SQLステートメントをカウントするかどうかを決定します。 `1`カウントすることを意味し、 `0`カウントしないことを意味します。デフォルト値は`0`です。
 
@@ -298,7 +306,7 @@ SELECT sum_latency, avg_latency, exec_count, query_sample_text
 -   `DIGEST` : このカテゴリの SQL ステートメントのダイジェスト。
 -   `DIGEST_TEXT` : 正規化された SQL ステートメント。
 -   `QUERY_SAMPLE_TEXT` : SQL カテゴリの元の SQL ステートメント。元のステートメントは 1 つだけ採用されます。
--   `TABLE_NAMES` : SQL ステートメントに関係するすべてのテーブル。複数のテーブルがある場合は、それぞれをカンマで区切ります。
+-   `TABLE_NAMES` : SQL ステートメントに含まれるすべてのテーブル。複数のテーブルがある場合は、それぞれをカンマで区切ります。
 -   `INDEX_NAMES` : SQL ステートメントで使用されるすべての SQL インデックス。複数のインデックスがある場合は、それぞれをカンマで区切ります。
 -   `SAMPLE_USER` : このカテゴリの SQL ステートメントを実行するユーザー。 1 人のユーザーのみが取得されます。
 -   `PLAN_DIGEST` : 実行計画のダイジェスト。

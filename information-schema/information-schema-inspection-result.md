@@ -7,11 +7,13 @@ summary: Learn the `INSPECTION_RESULT` diagnostic result table.
 
 TiDB には、システム内の障害や隠れた問題を検出するためのいくつかの組み込み診断ルールがあります。
 
-`INSPECTION_RESULT`診断機能は、問題を迅速に発見し、反復的な手動作業を軽減するのに役立ちます。 `select * from information_schema.inspection_result`ステートメントを使用して内部診断をトリガーできます。
+`INSPECTION_RESULT`診断テーブルは、問題を迅速に発見し、反復的な手動作業を軽減するのに役立ちます。 `select * from information_schema.inspection_result`ステートメントを使用して内部診断をトリガーできます。
+
+> **注記：**
+>
+> このテーブルは TiDB セルフホスト型にのみ適用され、 [TiDB Cloud](https://docs.pingcap.com/tidbcloud/)では使用できません。
 
 `information_schema.inspection_result`診断結果テーブル`information_schema.inspection_result`の構造は次のとおりです。
-
-{{< copyable "" >}}
 
 ```sql
 USE information_schema;
@@ -55,8 +57,6 @@ DESC inspection_result;
 ## 診断例 {#diagnostics-example}
 
 クラスター内に現在存在する問題を診断します。
-
-{{< copyable "" >}}
 
 ```sql
 SELECT * FROM information_schema.inspection_result\G
@@ -109,8 +109,6 @@ DETAILS   | max duration of 172.16.5.40:20151 tikv rocksdb-write-duration was to
 
 「2020-03-26 00:03:00」から「2020-03-26 00:08:00」など、指定した範囲内に存在する問題を診断することもできます。時間範囲を指定するには、SQL ヒント`/*+ time_range() */`を使用します。次のクエリの例を参照してください。
 
-{{< copyable "" >}}
-
 ```sql
 select /*+ time_range("2020-03-26 00:03:00", "2020-03-26 00:08:00") */ * from information_schema.inspection_result\G
 ```
@@ -143,15 +141,11 @@ DETAILS   | max duration of 172.16.5.40:10089 tidb get-token-duration is too slo
 
 条件を指定して、たとえば`critical`レベルの診断結果をクエリすることもできます。
 
-{{< copyable "" >}}
-
 ```sql
 select * from information_schema.inspection_result where severity='critical';
 ```
 
 `critical-error`ルールの診断結果のみをクエリします。
-
-{{< copyable "" >}}
 
 ```sql
 select * from information_schema.inspection_result where rule='critical-error';
@@ -162,8 +156,6 @@ select * from information_schema.inspection_result where rule='critical-error';
 診断モジュールには一連のルールが含まれています。これらのルールは、既存の監視テーブルおよびクラスター情報テーブルをクエリした後、結果をしきい値と比較します。結果がしきい値を超えた場合、 `warning`または`critical`の診断が生成され、対応する情報が`details`列に表示されます。
 
 `inspection_rules`システム テーブルをクエリすることで、既存の診断ルールをクエリできます。
-
-{{< copyable "" >}}
 
 ```sql
 select * from information_schema.inspection_rules where type='inspection';
@@ -230,8 +222,6 @@ select * from information_schema.inspection_rules where type='inspection';
 ### <code>version</code>診断ルール {#code-version-code-diagnostic-rule}
 
 `version`診断ルールは、 `CLUSTER_INFO`システム テーブルをクエリすることによって、同じコンポーネントのバージョン ハッシュが一貫しているかどうかをチェックします。次の例を参照してください。
-
-{{< copyable "" >}}
 
 ```sql
 SELECT * FROM information_schema.inspection_result WHERE rule='version'\G

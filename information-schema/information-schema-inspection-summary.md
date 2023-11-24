@@ -7,9 +7,11 @@ summary: Learn the `INSPECTION_SUMMARY` inspection summary table.
 
 シナリオによっては、特定のリンクまたはモジュールの監視概要のみに注意を払う必要がある場合があります。たとえば、スレッド プール内のコプロセッサーのスレッド数は 8 に設定されます。コプロセッサーの CPU 使用率が 750% に達した場合、リスクが存在し、コプロセッサーがボトルネックになる可能性があると事前に判断できます。ただし、一部の監視メトリクスはユーザーのワークロードの違いにより大きく異なるため、特定のしきい値を定義するのは困難です。このシナリオでは問題のトラブルシューティングが重要であるため、TiDB はリンクの概要用の`inspection_summary`表を提供します。
 
-`information_schema.inspection_summary`検査集計表の構成は以下のとおりです。
+> **注記：**
+>
+> このテーブルは TiDB セルフホスト型にのみ適用され、 [TiDB Cloud](https://docs.pingcap.com/tidbcloud/)では利用できません。
 
-{{< copyable "" >}}
+`information_schema.inspection_summary`検査集計表の構成は以下のとおりです。
 
 ```sql
 USE information_schema;
@@ -38,10 +40,10 @@ DESC inspection_summary;
 -   `RULE` : 要約ルール。新しいルールは継続的に追加されるため、 `select * from inspection_rules where type='summary'`ステートメントを実行して最新のルール リストをクエリできます。
 -   `INSTANCE` : 監視対象のインスタンス。
 -   `METRICS_NAME` : 監視メトリクス名。
--   `QUANTILE` ： `QUANTILE`を含む監視テーブルに対して有効になります。述語をプッシュダウンすることで、複数のパーセンタイルを指定できます。たとえば、 `select * from inspection_summary where rule='ddl' and quantile in (0.80, 0.90, 0.99, 0.999)`を実行して DDL 関連の監視メトリックを要約し、P80/P90/P99/P999 の結果をクエリできます。 `AVG_VALUE` `MIN_VALUE`それぞれ集計`MAX_VALUE`平均値、最小値、最大値を示す。
+-   `QUANTILE` ： `QUANTILE`を含む監視テーブルに対して有効になります。述語をプッシュダウンすることで、複数のパーセンタイルを指定できます。たとえば、 `select * from inspection_summary where rule='ddl' and quantile in (0.80, 0.90, 0.99, 0.999)`実行して DDL 関連の監視メトリックを要約し、P80/P90/P99/P999 の結果をクエリできます。 `AVG_VALUE` `MIN_VALUE`それぞれ集計`MAX_VALUE`平均値、最小値、最大値を示す。
 -   `COMMENT` : 対応する監視メトリックに関するコメント。
 
-> **ノート：**
+> **注記：**
 >
 > すべての結果を要約するとオーバーヘッドが発生するため、SQL 述語に特定の`rule`を表示してオーバーヘッドを軽減することをお勧めします。たとえば、 `select * from inspection_summary where rule in ('read-link', 'ddl')`を実行すると、読み取りリンクと DDL 関連の監視メトリックが要約されます。
 
@@ -53,8 +55,6 @@ DESC inspection_summary;
 
 -   `(2020-01-16 16:00:54.933, 2020-01-16 16:10:54.933)`
 -   `(2020-01-16 16:10:54.933, 2020-01-16 16:20:54.933)`
-
-{{< copyable "" >}}
 
 ```sql
 SELECT

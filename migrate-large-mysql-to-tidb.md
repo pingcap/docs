@@ -23,22 +23,41 @@ summary: Learn how to migrate MySQL of large datasets to TiDB.
 
 **メモリと CPU** : TiDB Lightning は大量のリソースを消費するため、64 GiB 以上のメモリと 32 以上の CPU コアを割り当てることをお勧めします。最高のパフォーマンスを得るには、CPU コアとメモリ(GiB) の比率が 1:2 より大きいことを確認してください。
 
-**ディスク容量**:
+**ディスクスペース**：
 
 -   Dumplingには、データ ソース全体を保存できる (またはエクスポートされるすべてのアップストリーム テーブルを保存できる) ディスク容量が必要です。 SSD推奨です。必要なスペースを計算するには、 [ダウンストリームのstorageスペース要件](/tidb-lightning/tidb-lightning-requirements.md#storage-space-of-the-target-database)を参照してください。
 -   インポート中、 TiDB Lightning はソートされたキーと値のペアを保存するための一時スペースを必要とします。ディスク容量は、データ ソースからの最大の単一テーブルを保持するのに十分である必要があります。
 -   全データのボリュームが大きい場合は、アップストリームでのbinlogのstorage時間を増やすことができます。これは、増分レプリケーション中にバイナリログが失われないようにするためです。
 
-**注**: Dumplingによって MySQL からエクスポートされる正確なデータ量を計算することは困難ですが、次の SQL ステートメントを使用してテーブル`information_schema.tables`の`data-length`フィールドを要約することで、データ量を見積もることができます。
-
-{{< copyable "" >}}
+**注**: Dumplingによって MySQL からエクスポートされる正確なデータ量を計算することは困難ですが、次の SQL ステートメントを使用してテーブル`information_schema.tables`の`DATA_LENGTH`フィールドを要約することで、データ量を見積もることができます。
 
 ```sql
-/* Calculate the size of all schemas, in MiB. Replace ${schema_name} with your schema name. */
-SELECT table_schema,SUM(data_length)/1024/1024 AS data_length,SUM(index_length)/1024/1024 AS index_length,SUM(data_length+index_length)/1024/1024 AS SUM FROM information_schema.tables WHERE table_schema = "${schema_name}" GROUP BY table_schema;
+-- Calculate the size of all schemas
+SELECT
+  TABLE_SCHEMA,
+  FORMAT_BYTES(SUM(DATA_LENGTH)) AS 'Data Size',
+  FORMAT_BYTES(SUM(INDEX_LENGTH)) 'Index Size'
+FROM
+  information_schema.tables
+GROUP BY
+  TABLE_SCHEMA;
 
-/* Calculate the size of the largest table, in MiB. Replace ${schema_name} with your schema name. */
-SELECT table_name,table_schema,SUM(data_length)/1024/1024 AS data_length,SUM(index_length)/1024/1024 AS index_length,SUM(data_length+index_length)/1024/1024 AS SUM from information_schema.tables WHERE table_schema = "${schema_name}" GROUP BY table_name,table_schema ORDER BY SUM DESC LIMIT 5;
+-- Calculate the 5 largest tables
+SELECT 
+  TABLE_NAME,
+  TABLE_SCHEMA,
+  FORMAT_BYTES(SUM(data_length)) AS 'Data Size',
+  FORMAT_BYTES(SUM(index_length)) AS 'Index Size',
+  FORMAT_BYTES(SUM(data_length+index_length)) AS 'Total Size'
+FROM
+  information_schema.tables
+GROUP BY
+  TABLE_NAME,
+  TABLE_SCHEMA
+ORDER BY
+  SUM(DATA_LENGTH+INDEX_LENGTH) DESC
+LIMIT
+  5;
 ```
 
 ### ターゲット TiKV クラスターのディスク容量 {#disk-space-for-the-target-tikv-cluster}
@@ -52,8 +71,6 @@ SELECT table_name,table_schema,SUM(data_length)/1024/1024 AS data_length,SUM(ind
 
 1.  次のコマンドを実行して、MySQL からすべてのデータをエクスポートします。
 
-    {{< copyable "" >}}
-
     ```shell
     tiup dumpling -h ${ip} -P 3306 -u root -t 16 -r 200000 -F 256MiB -B my_db1 -f 'my_db1.table[12]' -o 's3://my-bucket/sql-backup'
     ```
@@ -62,35 +79,31 @@ SELECT table_name,table_schema,SUM(data_length)/1024/1024 AS data_length,SUM(ind
 
     上記で使用したパラメータは以下のとおりです。 Dumplingパラメータの詳細については、 [Dumplingの概要](/dumpling-overview.md)を参照してください。
 
-    | パラメーター               | 説明                                                                                                       |
-    | -------------------- | -------------------------------------------------------------------------------------------------------- |
-    | `-u`または`--user`      | MySQLユーザー                                                                                                |
-    | `-p`または`--password`  | MySQLユーザーのパスワード                                                                                          |
-    | `-P`または`--port`      | MySQLポート                                                                                                 |
-    | `-h`または`--host`      | MySQLのIPアドレス                                                                                             |
-    | `-t`または`--thread`    | エクスポートに使用されるスレッドの数                                                                                       |
-    | `-o`または`--output`    | エクスポートされたファイルを保存するディレクトリ。ローカル パスまたは[外部storageURI](/br/backup-and-restore-storages.md#uri-format)をサポートします |
-    | `-r`または`--row`       | 1 つのファイル内の最大行数                                                                                           |
-    | `-F`                 | 単一ファイルの最大サイズ (MiB 単位)。推奨値: 256 MiB。                                                                      |
-    | - `B`または`--database` | エクスポートするデータベースを指定します                                                                                     |
-    | `-f`または`--filter`    | パターンに一致するテーブルをエクスポートします。構文については[テーブルフィルター](/table-filter.md)を参照してください。                                   |
+    | パラメーター               | 説明                                                                                  |
+    | -------------------- | ----------------------------------------------------------------------------------- |
+    | `-u`または`--user`      | MySQLユーザー                                                                           |
+    | `-p`または`--password`  | MySQLユーザーのパスワード                                                                     |
+    | `-P`または`--port`      | MySQLポート                                                                            |
+    | `-h`または`--host`      | MySQLのIPアドレス                                                                        |
+    | `-t`または`--thread`    | エクスポートに使用されるスレッドの数                                                                  |
+    | `-o`または`--output`    | エクスポートされたファイルを保存するディレクトリ。ローカル パスまたは[外部storageURI](/external-storage-uri.md)をサポートします |
+    | `-r`または`--row`       | 1 つのファイル内の最大行数                                                                      |
+    | `-F`                 | 単一ファイルの最大サイズ (MiB 単位)。推奨値: 256 MiB。                                                 |
+    | - `B`または`--database` | エクスポートするデータベースを指定します                                                                |
+    | `-f`または`--filter`    | パターンに一致するテーブルをエクスポートします。構文については[テーブルフィルター](/table-filter.md)を参照してください。              |
 
-    `${data-path}`エクスポートされたすべてのアップストリーム テーブルを保存するためのスペースがあることを確認してください。必要なスペースを計算するには、 [ダウンストリームのstorageスペース要件](/tidb-lightning/tidb-lightning-requirements.md#storage-space-of-the-target-database)を参照してください。大きなテーブルがすべてのスペースを消費することによってエクスポートが中断されないようにするには、 `-F`オプションを使用して 1 つのファイルのサイズを制限することを強くお勧めします。
+    `${data-path}`エクスポートされたすべてのアップストリーム テーブルを保存するためのスペースがあることを確認してください。必要なスペースを計算するには、 [ダウンストリームのstorageスペース要件](/tidb-lightning/tidb-lightning-requirements.md#storage-space-of-the-target-database)を参照してください。大きなテーブルがすべてのスペースを消費してエクスポートが中断されないようにするには、 `-F`オプションを使用して 1 つのファイルのサイズを制限することを強くお勧めします。
 
 2.  `${data-path}`ディレクトリ内の`metadata`ファイルをビュー。これは、Dumpling によって生成されたメタデータ ファイルです。ステップ 3 の増分レプリケーションに必要なbinlogの位置情報を記録します。
 
-    ```
-    SHOW MASTER STATUS:
-    Log: mysql-bin.000004
-    Pos: 109227
-    GTID:
-    ```
+        SHOW MASTER STATUS:
+        Log: mysql-bin.000004
+        Pos: 109227
+        GTID:
 
 ## ステップ 2. 完全なデータを TiDB にインポートする {#step-2-import-full-data-to-tidb}
 
 1.  `tidb-lightning.toml`構成ファイルを作成します。
-
-    {{< copyable "" >}}
 
     ```toml
     [lightning]
@@ -125,8 +138,6 @@ SELECT table_name,table_schema,SUM(data_length)/1024/1024 AS data_length,SUM(ind
 
     S3 からデータをインポートする場合は、S3storageパスにアクセスできる SecretKey と AccessKey を環境変数としてTiDB Lightningノードに渡します。 `~/.aws/credentials`から資格情報を読み取ることもできます。
 
-    {{< copyable "" >}}
-
     ```shell
     export AWS_ACCESS_KEY_ID=${access_key}
     export AWS_SECRET_ACCESS_KEY=${secret_key}
@@ -136,12 +147,12 @@ SELECT table_name,table_schema,SUM(data_length)/1024/1024 AS data_length,SUM(ind
 3.  インポートの開始後、次のいずれかの方法でインポートの進行状況を確認できます。
 
     -   `grep`ログ内のキーワード`progress` 。デフォルトでは、進行状況は 5 分ごとに更新されます。
-    -   [監視ダッシュボード](/tidb-lightning/monitor-tidb-lightning.md)で進行状況を確認します。
-    -   [TiDB Lightning Web インターフェース](/tidb-lightning/tidb-lightning-web-interface.md)で進行状況を確認します。
+    -   [監視ダッシュボード](/tidb-lightning/monitor-tidb-lightning.md)で進捗状況を確認します。
+    -   [TiDB Lightning Web インターフェース](/tidb-lightning/tidb-lightning-web-interface.md)で進捗状況を確認します。
 
 4.  TiDB Lightning はインポートを完了すると、自動的に終了します。最後の行に`tidb-lightning.log` `the whole procedure completed`含まれているかどうかを確認します。 「はい」の場合、インポートは成功です。 「いいえ」の場合、インポートでエラーが発生します。エラー メッセージの指示に従ってエラーに対処します。
 
-> **ノート：**
+> **注記：**
 >
 > インポートが成功したかどうかに関係なく、ログの最後の行には`tidb lightning exit`が表示されます。これは、 TiDB Lightning が正常に終了したことを意味しますが、インポートが成功したことを必ずしも意味するわけではありません。
 
@@ -152,8 +163,6 @@ SELECT table_name,table_schema,SUM(data_length)/1024/1024 AS data_length,SUM(ind
 ### データソースを追加する {#add-the-data-source}
 
 1.  次のように`source1.yaml`ファイルを作成します。
-
-    {{< copyable "" >}}
 
     ```yaml
     # Must be unique.
@@ -171,8 +180,6 @@ SELECT table_name,table_schema,SUM(data_length)/1024/1024 AS data_length,SUM(ind
 
 2.  次のコマンドを実行して、 `tiup dmctl`を使用してデータ ソース構成を DM クラスターにロードします。
 
-    {{< copyable "" >}}
-
     ```shell
     tiup dmctl --master-addr ${advertise-addr} operate-source create source1.yaml
     ```
@@ -187,8 +194,6 @@ SELECT table_name,table_schema,SUM(data_length)/1024/1024 AS data_length,SUM(ind
 ### レプリケーションタスクを追加する {#add-a-replication-task}
 
 1.  `task.yaml`ファイルを編集します。増分レプリケーション モードと各データ ソースの開始点を構成します。
-
-    {{< copyable "" >}}
 
     ```yaml
     name: task-test                      # Task name. Must be globally unique.
@@ -227,15 +232,11 @@ SELECT table_name,table_schema,SUM(data_length)/1024/1024 AS data_length,SUM(ind
 
     移行タスクを開始する前に、エラーの可能性を減らすために、 `check-task`コマンドを実行して構成が DM の要件を満たしていることを確認することをお勧めします。
 
-    {{< copyable "" >}}
-
     ```shell
     tiup dmctl --master-addr ${advertise-addr} check-task task.yaml
     ```
 
 2.  次のコマンドを実行して、移行タスクを開始します。
-
-    {{< copyable "" >}}
 
     ```shell
     tiup dmctl --master-addr ${advertise-addr} start-task task.yaml
@@ -250,13 +251,11 @@ SELECT table_name,table_schema,SUM(data_length)/1024/1024 AS data_length,SUM(ind
 
     タスクの開始に失敗した場合は、プロンプト メッセージを確認して構成を修正します。その後、上記のコマンドを再実行してタスクを開始できます。
 
-    何か問題が発生した場合は、 [DMエラー処理](/dm/dm-error-handling.md)と[DMに関するFAQ](/dm/dm-faq.md)を参照してください。
+    問題が発生した場合は、 [DMエラー処理](/dm/dm-error-handling.md)と[DMに関するFAQ](/dm/dm-faq.md)を参照してください。
 
 ### 移行タスクのステータスを確認する {#check-the-migration-task-status}
 
 DM クラスターに進行中の移行タスクがあるかどうかを確認し、タスクのステータスを表示するには、 `tiup dmctl`使用して`query-status`コマンドを実行します。
-
-{{< copyable "" >}}
 
 ```shell
 tiup dmctl --master-addr ${advertise-addr} query-status ${task-name}

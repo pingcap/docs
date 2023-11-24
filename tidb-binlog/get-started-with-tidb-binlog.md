@@ -42,20 +42,18 @@ sudo yum install -y mariadb-server
 ```
 
 ```bash
-curl -L https://download.pingcap.org/tidb-community-server-v7.1.1-linux-amd64.tar.gz | tar xzf -
+curl -L https://download.pingcap.org/tidb-community-server-v7.1.2-linux-amd64.tar.gz | tar xzf -
 cd tidb-latest-linux-amd64
 ```
 
 期待される出力:
 
-```
-[kolbe@localhost ~]$ curl -LO https://download.pingcap.org/tidb-latest-linux-amd64.tar.gz | tar xzf -
-  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-                                 Dload  Upload   Total   Spent    Left  Speed
-100  368M  100  368M    0     0  8394k      0  0:00:44  0:00:44 --:--:-- 11.1M
-[kolbe@localhost ~]$ cd tidb-latest-linux-amd64
-[kolbe@localhost tidb-latest-linux-amd64]$
-```
+    [kolbe@localhost ~]$ curl -LO https://download.pingcap.org/tidb-latest-linux-amd64.tar.gz | tar xzf -
+      % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                     Dload  Upload   Total   Spent    Left  Speed
+    100  368M  100  368M    0     0  8394k      0  0:00:44  0:00:44 --:--:-- 11.1M
+    [kolbe@localhost ~]$ cd tidb-latest-linux-amd64
+    [kolbe@localhost tidb-latest-linux-amd64]$
 
 ## コンフィグレーション {#configuration}
 
@@ -79,47 +77,45 @@ for f in *.toml; do echo "$f:"; cat "$f"; echo; done
 
 期待される出力:
 
-```
-drainer.toml:
-log-file="drainer.log"
-[syncer]
-db-type="mysql"
-[syncer.to]
-host="127.0.0.1"
-user="root"
-password=""
-port=3306
+    drainer.toml:
+    log-file="drainer.log"
+    [syncer]
+    db-type="mysql"
+    [syncer.to]
+    host="127.0.0.1"
+    user="root"
+    password=""
+    port=3306
 
-pd.toml:
-log-file="pd.log"
-data-dir="pd.data"
+    pd.toml:
+    log-file="pd.log"
+    data-dir="pd.data"
 
-pump.toml:
-log-file="pump.log"
-data-dir="pump.data"
-addr="127.0.0.1:8250"
-advertise-addr="127.0.0.1:8250"
-pd-urls="http://127.0.0.1:2379"
+    pump.toml:
+    log-file="pump.log"
+    data-dir="pump.data"
+    addr="127.0.0.1:8250"
+    advertise-addr="127.0.0.1:8250"
+    pd-urls="http://127.0.0.1:2379"
 
-tidb.toml:
-store="tikv"
-path="127.0.0.1:2379"
-[log.file]
-filename="tidb.log"
-[binlog]
-enable=true
+    tidb.toml:
+    store="tikv"
+    path="127.0.0.1:2379"
+    [log.file]
+    filename="tidb.log"
+    [binlog]
+    enable=true
 
-tikv.toml:
-log-file="tikv.log"
-[storage]
-data-dir="tikv.data"
-[pd]
-endpoints=["127.0.0.1:2379"]
-[rocksdb]
-max-open-files=1024
-[raftdb]
-max-open-files=1024
-```
+    tikv.toml:
+    log-file="tikv.log"
+    [storage]
+    data-dir="tikv.data"
+    [pd]
+    endpoints=["127.0.0.1:2379"]
+    [rocksdb]
+    max-open-files=1024
+    [raftdb]
+    max-open-files=1024
 
 ## ブートストラッピング {#bootstrapping}
 
@@ -137,27 +133,23 @@ sleep 3
 
 期待される出力:
 
-```
-[kolbe@localhost tidb-latest-linux-amd64]$ ./bin/pd-server --config=pd.toml &>pd.out &
-[1] 20935
-[kolbe@localhost tidb-latest-linux-amd64]$ ./bin/tikv-server --config=tikv.toml &>tikv.out &
-[2] 20944
-[kolbe@localhost tidb-latest-linux-amd64]$ ./pump --config=pump.toml &>pump.out &
-[3] 21050
-[kolbe@localhost tidb-latest-linux-amd64]$ sleep 3
-[kolbe@localhost tidb-latest-linux-amd64]$ ./bin/tidb-server --config=tidb.toml &>tidb.out &
-[4] 21058
-```
+    [kolbe@localhost tidb-latest-linux-amd64]$ ./bin/pd-server --config=pd.toml &>pd.out &
+    [1] 20935
+    [kolbe@localhost tidb-latest-linux-amd64]$ ./bin/tikv-server --config=tikv.toml &>tikv.out &
+    [2] 20944
+    [kolbe@localhost tidb-latest-linux-amd64]$ ./pump --config=pump.toml &>pump.out &
+    [3] 21050
+    [kolbe@localhost tidb-latest-linux-amd64]$ sleep 3
+    [kolbe@localhost tidb-latest-linux-amd64]$ ./bin/tidb-server --config=tidb.toml &>tidb.out &
+    [4] 21058
 
 `jobs`を実行すると、実行中のデーモンのリストが表示されます。
 
-```
-[kolbe@localhost tidb-latest-linux-amd64]$ jobs
-[1]   Running                 ./bin/pd-server --config=pd.toml &>pd.out &
-[2]   Running                 ./bin/tikv-server --config=tikv.toml &>tikv.out &
-[3]-  Running                 ./pump --config=pump.toml &>pump.out &
-[4]+  Running                 ./bin/tidb-server --config=tidb.toml &>tidb.out &
-```
+    [kolbe@localhost tidb-latest-linux-amd64]$ jobs
+    [1]   Running                 ./bin/pd-server --config=pd.toml &>pd.out &
+    [2]   Running                 ./bin/tikv-server --config=tikv.toml &>tikv.out &
+    [3]-  Running                 ./pump --config=pump.toml &>pump.out &
+    [4]+  Running                 ./bin/tidb-server --config=tidb.toml &>tidb.out &
 
 いずれかのサービスの開始に失敗した場合 (たとえば、「 `Running` 」ではなく「 `Exit 1` 」が表示された場合)、その個別のサービスを再起動してみてください。
 
@@ -171,18 +163,16 @@ mysql -h 127.0.0.1 -P 4000 -u root -e 'select tidb_version()\G'
 
 期待される出力:
 
-```
-[kolbe@localhost tidb-latest-linux-amd64]$ mysql -h 127.0.0.1 -P 4000 -u root -e 'select tidb_version()\G'
-*************************** 1. row ***************************
-tidb_version(): Release Version: v3.0.0-beta.1-154-gd5afff70c
-Git Commit Hash: d5afff70cdd825d5fab125c8e52e686cc5fb9a6e
-Git Branch: master
-UTC Build Time: 2019-04-24 03:10:00
-GoVersion: go version go1.12 linux/amd64
-Race Enabled: false
-TiKV Min Version: 2.1.0-alpha.1-ff3dd160846b7d1aed9079c389fc188f7f5ea13e
-Check Table Before Drop: false
-```
+    [kolbe@localhost tidb-latest-linux-amd64]$ mysql -h 127.0.0.1 -P 4000 -u root -e 'select tidb_version()\G'
+    *************************** 1. row ***************************
+    tidb_version(): Release Version: v3.0.0-beta.1-154-gd5afff70c
+    Git Commit Hash: d5afff70cdd825d5fab125c8e52e686cc5fb9a6e
+    Git Branch: master
+    UTC Build Time: 2019-04-24 03:10:00
+    GoVersion: go version go1.12 linux/amd64
+    Race Enabled: false
+    TiKV Min Version: 2.1.0-alpha.1-ff3dd160846b7d1aed9079c389fc188f7f5ea13e
+    Check Table Before Drop: false
 
 この時点で、TiDBクラスタが実行されており、クラスターから`pump`ログを読み取り、データ ディレクトリにリレー ログとして保存しています。次のステップは、 `drainer`可能な MariaDBサーバーを起動することです。
 
@@ -205,28 +195,26 @@ show databases;
 
 期待される出力:
 
-```
-[kolbe@localhost ~]$ mysql -h 127.0.0.1 -P 3306 -u root
-Welcome to the MariaDB monitor.  Commands end with ; or \g.
-Your MariaDB connection id is 20
-Server version: 5.5.60-MariaDB MariaDB Server
+    [kolbe@localhost ~]$ mysql -h 127.0.0.1 -P 3306 -u root
+    Welcome to the MariaDB monitor.  Commands end with ; or \g.
+    Your MariaDB connection id is 20
+    Server version: 5.5.60-MariaDB MariaDB Server
 
-Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+    Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
 
-Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+    Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
 
-MariaDB [(none)]> show databases;
-+--------------------+
-| Database           |
-+--------------------+
-| information_schema |
-| mysql              |
-| performance_schema |
-| test               |
-| tidb_binlog        |
-+--------------------+
-5 rows in set (0.01 sec)
-```
+    MariaDB [(none)]> show databases;
+    +--------------------+
+    | Database           |
+    +--------------------+
+    | information_schema |
+    | mysql              |
+    | performance_schema |
+    | test               |
+    | tidb_binlog        |
+    +--------------------+
+    5 rows in set (0.01 sec)
 
 ここではすでに`tidb_binlog`データベースが確認できます。このデータベースには、TiDB クラスターからのバイナリ ログが適用された時点までを記録するために`drainer`によって使用される`checkpoint`テーブルが含まれています。
 
@@ -258,31 +246,29 @@ select * from t1;
 
 期待される出力:
 
-```
-TiDB [(none)]> create database tidbtest;
-Query OK, 0 rows affected (0.12 sec)
+    TiDB [(none)]> create database tidbtest;
+    Query OK, 0 rows affected (0.12 sec)
 
-TiDB [(none)]> use tidbtest;
-Database changed
-TiDB [tidbtest]> create table t1 (id int unsigned not null AUTO_INCREMENT primary key);
-Query OK, 0 rows affected (0.11 sec)
+    TiDB [(none)]> use tidbtest;
+    Database changed
+    TiDB [tidbtest]> create table t1 (id int unsigned not null AUTO_INCREMENT primary key);
+    Query OK, 0 rows affected (0.11 sec)
 
-TiDB [tidbtest]> insert into t1 () values (),(),(),(),();
-Query OK, 5 rows affected (0.01 sec)
-Records: 5  Duplicates: 0  Warnings: 0
+    TiDB [tidbtest]> insert into t1 () values (),(),(),(),();
+    Query OK, 5 rows affected (0.01 sec)
+    Records: 5  Duplicates: 0  Warnings: 0
 
-TiDB [tidbtest]> select * from t1;
-+----+
-| id |
-+----+
-|  1 |
-|  2 |
-|  3 |
-|  4 |
-|  5 |
-+----+
-5 rows in set (0.00 sec)
-```
+    TiDB [tidbtest]> select * from t1;
+    +----+
+    | id |
+    +----+
+    |  1 |
+    |  2 |
+    |  3 |
+    |  4 |
+    |  5 |
+    +----+
+    5 rows in set (0.00 sec)
 
 MariaDB クライアントに戻ると、新しいデータベース、新しいテーブル、および新しく挿入された行が見つかるはずです。
 
@@ -294,32 +280,30 @@ select * from t1;
 
 期待される出力:
 
-```
-MariaDB [(none)]> use tidbtest;
-Reading table information for completion of table and column names
-You can turn off this feature to get a quicker startup with -A
+    MariaDB [(none)]> use tidbtest;
+    Reading table information for completion of table and column names
+    You can turn off this feature to get a quicker startup with -A
 
-Database changed
-MariaDB [tidbtest]> show tables;
-+--------------------+
-| Tables_in_tidbtest |
-+--------------------+
-| t1                 |
-+--------------------+
-1 row in set (0.00 sec)
+    Database changed
+    MariaDB [tidbtest]> show tables;
+    +--------------------+
+    | Tables_in_tidbtest |
+    +--------------------+
+    | t1                 |
+    +--------------------+
+    1 row in set (0.00 sec)
 
-MariaDB [tidbtest]> select * from t1;
-+----+
-| id |
-+----+
-|  1 |
-|  2 |
-|  3 |
-|  4 |
-|  5 |
-+----+
-5 rows in set (0.00 sec)
-```
+    MariaDB [tidbtest]> select * from t1;
+    +----+
+    | id |
+    +----+
+    |  1 |
+    |  2 |
+    |  3 |
+    |  4 |
+    |  5 |
+    +----+
+    5 rows in set (0.00 sec)
 
 MariaDBサーバーにクエリを実行するときに、TiDB に挿入したのと同じ行が表示されるはずです。おめでとう！ TiDB Binlog のセットアップが完了しました。
 
@@ -336,13 +320,11 @@ MariaDBサーバーにクエリを実行するときに、TiDB に挿入した�
 
 期待される出力:
 
-```
-[kolbe@localhost tidb-latest-linux-amd64]$ ./binlogctl -cmd drainers
-[2019/04/11 17:44:10.861 -04:00] [INFO] [nodes.go:47] ["query node"] [type=drainer] [node="{NodeID: localhost.localdomain:8249, Addr: 192.168.236.128:8249, State: online, MaxCommitTS: 407638907719778305, UpdateTime: 2019-04-11 17:44:10 -0400 EDT}"]
+    [kolbe@localhost tidb-latest-linux-amd64]$ ./binlogctl -cmd drainers
+    [2019/04/11 17:44:10.861 -04:00] [INFO] [nodes.go:47] ["query node"] [type=drainer] [node="{NodeID: localhost.localdomain:8249, Addr: 192.168.236.128:8249, State: online, MaxCommitTS: 407638907719778305, UpdateTime: 2019-04-11 17:44:10 -0400 EDT}"]
 
-[kolbe@localhost tidb-latest-linux-amd64]$ ./binlogctl -cmd pumps
-[2019/04/11 17:44:13.904 -04:00] [INFO] [nodes.go:47] ["query node"] [type=pump] [node="{NodeID: localhost.localdomain:8250, Addr: 192.168.236.128:8250, State: online, MaxCommitTS: 407638914024079361, UpdateTime: 2019-04-11 17:44:13 -0400 EDT}"]
-```
+    [kolbe@localhost tidb-latest-linux-amd64]$ ./binlogctl -cmd pumps
+    [2019/04/11 17:44:13.904 -04:00] [INFO] [nodes.go:47] ["query node"] [type=pump] [node="{NodeID: localhost.localdomain:8250, Addr: 192.168.236.128:8250, State: online, MaxCommitTS: 407638914024079361, UpdateTime: 2019-04-11 17:44:13 -0400 EDT}"]
 
 Drainer を強制終了すると、クラスターはその Drainer を「一時停止」状態にします。これは、クラスターが Drainer の再参加を期待していることを意味します。
 
@@ -353,11 +335,9 @@ pkill drainer
 
 期待される出力:
 
-```
-[kolbe@localhost tidb-latest-linux-amd64]$ pkill drainer
-[kolbe@localhost tidb-latest-linux-amd64]$ ./binlogctl -cmd drainers
-[2019/04/11 17:44:22.640 -04:00] [INFO] [nodes.go:47] ["query node"] [type=drainer] [node="{NodeID: localhost.localdomain:8249, Addr: 192.168.236.128:8249, State: paused, MaxCommitTS: 407638915597467649, UpdateTime: 2019-04-11 17:44:18 -0400 EDT}"]
-```
+    [kolbe@localhost tidb-latest-linux-amd64]$ pkill drainer
+    [kolbe@localhost tidb-latest-linux-amd64]$ ./binlogctl -cmd drainers
+    [2019/04/11 17:44:22.640 -04:00] [INFO] [nodes.go:47] ["query node"] [type=drainer] [node="{NodeID: localhost.localdomain:8249, Addr: 192.168.236.128:8249, State: paused, MaxCommitTS: 407638915597467649, UpdateTime: 2019-04-11 17:44:18 -0400 EDT}"]
 
 「NodeID」に`binlogctl`を指定すると、個々のノードを制御できます。この場合、drainerの NodeID は「localhost.localdomain:8249」、Pumpの NodeID は「localhost.localdomain:8250」です。
 
@@ -367,18 +347,14 @@ pkill drainer
 
 -   プロセスを強制終了する代わりに`binlogctl`を使用してDrainerを停止します。
 
-    ```
-    ./binlogctl --pd-urls=http://127.0.0.1:2379 --cmd=drainers
-    ./binlogctl --pd-urls=http://127.0.0.1:2379 --cmd=offline-drainer --node-id=localhost.localdomain:8249
-    ```
+        ./binlogctl --pd-urls=http://127.0.0.1:2379 --cmd=drainers
+        ./binlogctl --pd-urls=http://127.0.0.1:2379 --cmd=offline-drainer --node-id=localhost.localdomain:8249
 
 -   Pumpを始動する*前に*Drainerを始動してください。
 
 -   PD の開始後 (ただし、 DrainerとPumpの開始前) に`binlogctl`を使用して、一時停止したDrainerの状態を更新します。
 
-    ```
-    ./binlogctl --pd-urls=http://127.0.0.1:2379 --cmd=update-drainer --node-id=localhost.localdomain:8249 --state=offline
-    ```
+        ./binlogctl --pd-urls=http://127.0.0.1:2379 --cmd=update-drainer --node-id=localhost.localdomain:8249 --state=offline
 
 ## 掃除 {#cleanup}
 
@@ -390,14 +366,12 @@ for p in tidb-server drainer pump tikv-server pd-server; do pkill "$p"; sleep 1;
 
 期待される出力:
 
-```
-kolbe@localhost tidb-latest-linux-amd64]$ for p in tidb-server drainer pump tikv-server pd-server; do pkill "$p"; sleep 1; done
-[4]-  Done                    ./bin/tidb-server --config=tidb.toml &>tidb.out
-[5]+  Done                    ./drainer --config=drainer.toml &>drainer.out
-[3]+  Done                    ./pump --config=pump.toml &>pump.out
-[2]+  Done                    ./bin/tikv-server --config=tikv.toml &>tikv.out
-[1]+  Done                    ./bin/pd-server --config=pd.toml &>pd.out
-```
+    kolbe@localhost tidb-latest-linux-amd64]$ for p in tidb-server drainer pump tikv-server pd-server; do pkill "$p"; sleep 1; done
+    [4]-  Done                    ./bin/tidb-server --config=tidb.toml &>tidb.out
+    [5]+  Done                    ./drainer --config=drainer.toml &>drainer.out
+    [3]+  Done                    ./pump --config=pump.toml &>pump.out
+    [2]+  Done                    ./bin/tikv-server --config=tikv.toml &>tikv.out
+    [1]+  Done                    ./bin/pd-server --config=pd.toml &>pd.out
 
 すべてのサービスが終了した後にクラスターを再起動する場合は、最初にサービスを開始するために実行したのと同じコマンドを使用します。上記の[`binlogctl`](#binlogctl)セクションで説明したように、 `pump`の前に`drainer`開始し、 `tidb-server`の前に`pump`を開始する必要があります。
 

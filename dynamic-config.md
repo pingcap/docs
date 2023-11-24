@@ -9,6 +9,10 @@ summary: Learn how to dynamically modify the cluster configuration.
 
 クラスターコンポーネントを再起動せずに、SQL ステートメントを使用してコンポーネント (TiDB、TiKV、PD など) の構成を動的に更新できます。現在、TiDB インスタンスの構成を変更する方法は、他のコンポーネント (TiKV や PD など) の構成を変更する方法とは異なります。
 
+> **注記：**
+>
+> この機能は TiDB セルフホスト型にのみ適用され、 [TiDB Cloud](https://docs.pingcap.com/tidbcloud/)では使用できません。 TiDB Cloudの場合、構成を変更するには[TiDB Cloudのサポート](https://docs.pingcap.com/tidbcloud/tidb-cloud-support)に連絡する必要があります。
+
 ## 共通の操作 {#common-operations}
 
 このセクションでは、構成を動的に変更する一般的な操作について説明します。
@@ -16,8 +20,6 @@ summary: Learn how to dynamically modify the cluster configuration.
 ### インスタンス構成のビュー {#view-instance-configuration}
 
 クラスター内のすべてのインスタンスの構成を表示するには、 `show config`ステートメントを使用します。結果は次のとおりです。
-
-{{< copyable "" >}}
 
 ```sql
 show config;
@@ -40,8 +42,6 @@ show config;
 
 結果をフィールドでフィルタリングできます。例えば：
 
-{{< copyable "" >}}
-
 ```sql
 show config where type='tidb'
 show config where instance in (...)
@@ -51,7 +51,7 @@ show config where type='tikv' and name='log.level'
 
 ### TiKV 構成を動的に変更する {#modify-tikv-configuration-dynamically}
 
-> **ノート：**
+> **注記：**
 >
 > -   TiKV 構成項目を動的に変更した後、TiKV 構成ファイルは自動的に更新されます。ただし、 `tiup edit-config` ; を実行して、対応する構成項目を変更する必要もあります。そうしないと、 `upgrade`や`reload`などの操作によって変更が上書きされます。設定項目の変更の詳細については、 [TiUPを使用して構成を変更する](/maintain-tidb-using-tiup.md#modify-the-configuration)を参照してください。
 > -   `tiup edit-config`を実行した後、 `tiup reload`を実行する必要はありません。
@@ -60,19 +60,15 @@ show config where type='tikv' and name='log.level'
 
 -   すべての TiKV インスタンスの構成を変更します。
 
-> **ノート：**
+> **注記：**
 >
 > 変数名をバッククォートで囲むことをお勧めします。
-
-{{< copyable "" >}}
 
 ```sql
 set config tikv `split.qps-threshold`=1000;
 ```
 
 -   単一の TiKV インスタンスの構成を変更します。
-
-    {{< copyable "" >}}
 
     ```sql
     set config "127.0.0.1:20180" `split.qps-threshold`=1000;
@@ -86,8 +82,6 @@ Query OK, 0 rows affected (0.01 sec)
 
 バッチ変更中にエラーが発生した場合は、警告が返されます。
 
-{{< copyable "" >}}
-
 ```sql
 set config tikv `log-level`='warn';
 ```
@@ -95,8 +89,6 @@ set config tikv `log-level`='warn';
 ```sql
 Query OK, 0 rows affected, 1 warning (0.04 sec)
 ```
-
-{{< copyable "" >}}
 
 ```sql
 show warnings;
@@ -240,8 +232,6 @@ show warnings;
 
 次のステートメントを使用して PD 構成を変更できます。
 
-{{< copyable "" >}}
-
 ```sql
 set config pd `log.level`='info';
 ```
@@ -305,8 +295,6 @@ Query OK, 0 rows affected (0.01 sec)
 
 デフォルト値の`slow-threshold`は 300 ミリ秒です。 `tidb_slow_log_threshold`を使用すると、200 ミリ秒に設定できます。
 
-{{< copyable "" >}}
-
 ```sql
 set tidb_slow_log_threshold = 200;
 ```
@@ -314,8 +302,6 @@ set tidb_slow_log_threshold = 200;
 ```sql
 Query OK, 0 rows affected (0.00 sec)
 ```
-
-{{< copyable "" >}}
 
 ```sql
 select @@tidb_slow_log_threshold;
@@ -340,8 +326,6 @@ select @@tidb_slow_log_threshold;
 
 デフォルト値`tidb_max_tiflash_threads`は`-1`で、このシステム変数が無効であり、 TiFlash構成ファイルの設定に依存することを示します。 `tidb_max_tiflash_threads`を使用して`max_threads` ～ 10 を設定できます。
 
-{{< copyable "" >}}
-
 ```sql
 set tidb_max_tiflash_threads = 10;
 ```
@@ -349,8 +333,6 @@ set tidb_max_tiflash_threads = 10;
 ```sql
 Query OK, 0 rows affected (0.00 sec)
 ```
-
-{{< copyable "" >}}
 
 ```sql
 select @@tidb_max_tiflash_threads;

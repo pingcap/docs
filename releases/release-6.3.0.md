@@ -8,7 +8,7 @@ title: TiDB 6.3.0 Release Notes
 
 TiDB バージョン: 6.3.0-DMR
 
-> **ノート：**
+> **注記：**
 >
 > TiDB 6.3.0-DMR のドキュメントは[アーカイブされた](https://docs-archive.pingcap.com/tidb/v6.3/)になりました。 PingCAP では、 [最新のLTSバージョン](https://docs.pingcap.com/tidb/stable)の TiDB データベースを使用することをお勧めします。
 
@@ -76,7 +76,7 @@ v6.3.0-DMR の主な新機能と改善点は次のとおりです。
 
 -   遅いログと`TRACE`ステートメントの出力を強化[#34106](https://github.com/pingcap/tidb/issues/34106) @ [cfzjywxk](https://github.com/cfzjywxk)
 
-    TiDB v6.3.0 では、遅いログと`TRACE`の出力が強化されています。 TiDB の解析から KV RocksDB のディスクへの書き込みまでの[フルリンク期間](/latency-breakdown.md)の SQL クエリを観察でき、診断機能がさらに強化されます。
+    TiDB v6.3.0 では、低速ログと`TRACE`の出力が強化されています。 TiDB の解析から KV RocksDB のディスクへの書き込みまでの[フルリンク期間](/latency-breakdown.md)の SQL クエリを観察でき、診断機能がさらに強化されます。
 
 -   TiDB ダッシュボードはデッドロック履歴情報を提供します[#34106](https://github.com/pingcap/tidb/issues/34106) @ [cfzjywxk](https://github.com/cfzjywxk)
 
@@ -120,11 +120,11 @@ v6.3.0-DMR の主な新機能と改善点は次のとおりです。
 
     TiDB v6.2.0 では、CTE インラインを可能にするオプティマイザーに`MERGE`ヒントが導入され、CTE クエリ結果のコンシューマがTiFlashで並列実行できるようになりました。 v6.3.0 では、セッション内で CTE インラインを許可するためにセッション変数[`tidb_opt_force_inline_cte`](/system-variables.md#tidb_opt_force_inline_cte-new-in-v630)が導入されました。これにより、使いやすさが大幅に向上します。
 
-### 取引 {#transactions}
+### トランザクション {#transactions}
 
 -   悲観的トランザクション[#36579](https://github.com/pingcap/tidb/issues/36579) @ [エキシウム](https://github.com/ekexium)における一意制約のチェックの延期をサポート
 
-    [`tidb_constraint_check_in_place_pessimistic`](/system-variables.md#tidb_constraint_check_in_place_pessimistic-new-in-v630)システム変数を使用して、TiDB が悲観的トランザクションで[固有の制約](/constraints.md#pessimistic-transactions)をチェックするタイミングを制御できます。この変数はデフォルトでは無効になっています。変数が有効になっている ( `ON`に設定されている) 場合、TiDB は必要になるまで悲観的トランザクションでのロック操作と一意の制約チェックを延期するため、一括 DML 操作のパフォーマンスが向上します。
+    [`tidb_constraint_check_in_place_pessimistic`](/system-variables.md#tidb_constraint_check_in_place_pessimistic-new-in-v630)システム変数を使用して、TiDB が悲観的トランザクションで[固有の制約](/constraints.md#pessimistic-transactions)をチェックするタイミングを制御できます。この変数はデフォルトでは無効になっています。変数が有効 ( `ON`に設定) の場合、TiDB は必要になるまで悲観的トランザクションでのロック操作と一意の制約チェックを延期するため、一括 DML 操作のパフォーマンスが向上します。
 
 -   Read-Committed 分離レベル[#36812](https://github.com/pingcap/tidb/issues/36812) @ [トンスネークリン](https://github.com/TonsnakeLin)で TSO をフェッチする方法を最適化します。
 
@@ -138,7 +138,7 @@ v6.3.0-DMR の主な新機能と改善点は次のとおりです。
 
 -   統計が古くなった場合に統計をロードするデフォルトのポリシーを変更します[#27601](https://github.com/pingcap/tidb/issues/27601) @ [シュイファングリーンアイズ](https://github.com/xuyifangreeneyes)
 
-    v5.3.0 では、TiDB は統計が古くなったときのオプティマイザーの動作を制御するシステム変数[`tidb_enable_pseudo_for_outdated_stats`](/system-variables.md#tidb_enable_pseudo_for_outdated_stats-new-in-v530)を導入しました。デフォルト値は`ON`で、これは古いバージョンの動作を維持することを意味します。 SQL ステートメントに関係するオブジェクトの統計が古い場合、オプティマイザは統計 (テーブルの合計行数以外) が古いものであるとみなします。より信頼性が高く、代わりに疑似統計を使用します。実際のユーザー シナリオのテストと分析の後、v6.3.0 以降、デフォルト値の`tidb_enable_pseudo_for_outdated_stats`が`OFF`に変更されます。統計が古くなっても、オプティマイザはテーブル上の統計を引き続き使用するため、実行計画がより安定します。
+    v5.3.0 では、TiDB は統計が古くなったときのオプティマイザーの動作を制御するシステム変数[`tidb_enable_pseudo_for_outdated_stats`](/system-variables.md#tidb_enable_pseudo_for_outdated_stats-new-in-v530)を導入しました。デフォルト値は`ON`で、これは古いバージョンの動作を維持することを意味します。SQL ステートメントに関係するオブジェクトの統計が古い場合、オプティマイザは統計 (テーブルの合計行数以外) が古いものであるとみなします。より信頼性が高く、代わりに疑似統計を使用します。実際のユーザー シナリオのテストと分析の後、v6.3.0 以降、デフォルト値の`tidb_enable_pseudo_for_outdated_stats`が`OFF`に変更されます。統計が古くなっても、オプティマイザはテーブル上の統計を引き続き使用するため、実行計画がより安定します。
 
 -   Titan を無効化すると GA @ [タボキー](https://github.com/tabokie)になります
 
@@ -198,7 +198,7 @@ v6.3.0-DMR の主な新機能と改善点は次のとおりです。
 
 -   TiCDC は、アップストリームとダウンストリーム (同期ポイント) [#6977](https://github.com/pingcap/tiflow/issues/6977) @ [東門](https://github.com/asddongmen)の間でスナップショットの一貫性を維持することをサポートします。
 
-    ディザスター リカバリーのためのデータ レプリケーションのシナリオでは、ダウンストリーム スナップショットがアップストリーム スナップショットと一致するように、TiCDC は[ダウンストリームデータのスナップショットを定期的に維持する](/sync-diff-inspector/upstream-downstream-diff.md#data-check-for-tidb-upstream-and-downstream-clusters)をサポートします。この機能により、TiCDC は読み取りと書き込みが分離されるシナリオをより適切にサポートし、コストの削減に役立ちます。
+    災害復旧のためのデータ複製のシナリオでは、ダウンストリーム スナップショットがアップストリーム スナップショットと一貫性を保つように、TiCDC は[ダウンストリームデータのスナップショットを定期的に維持する](/ticdc/ticdc-upstream-downstream-check.md)をサポートします。この機能により、TiCDC は読み取りと書き込みが分離されるシナリオをより適切にサポートし、コストの削減に役立ちます。
 
 -   TiCDC はグレースフル アップグレード[#4757](https://github.com/pingcap/tiflow/issues/4757) @ [オーバーヴィーナス](https://github.com/overvenus) @ [3エースショーハンド](https://github.com/3AceShowHand)をサポートします
 
@@ -276,7 +276,7 @@ v6.3.0 以降、TiCDC は Pulsar シンクの構成をサポートしなくな�
     -   新しい接続に対して生成されるログ警告を改善[#34964](https://github.com/pingcap/tidb/issues/34964) @ [ションジウェイ](https://github.com/xiongjiwei)
     -   DDL 履歴ジョブをクエリするための HTTP API を最適化し、 `start_job_id`パラメーター[#35838](https://github.com/pingcap/tidb/issues/35838) @ [ティエンチャイアマオ](https://github.com/tiancaiamao)のサポートを追加します。
     -   JSON パスの構文が間違っている場合にエラーを報告する[#22525](https://github.com/pingcap/tidb/issues/22525) [#34959](https://github.com/pingcap/tidb/issues/34959) @ [ションジウェイ](https://github.com/xiongjiwei)
-    -   偽共有の問題[#37641](https://github.com/pingcap/tidb/issues/37641) @ [ゲンリチ](https://github.com/gengliqi)を修正して、結合操作のパフォーマンスを向上させます。
+    -   偽共有の問題[#37641](https://github.com/pingcap/tidb/issues/37641) @ [ゲンリキ](https://github.com/gengliqi)を修正して、結合操作のパフォーマンスを向上させます。
     -   [`PLAN REPLAYER`](/sql-plan-replayer.md)を使用して一度に複数の SQL ステートメントの実行計画情報をエクスポートすることをサポートします。これにより、トラブルシューティングがより効率的になります[#37798](https://github.com/pingcap/tidb/issues/37798) @ [イーサール](https://github.com/Yisaer)
 
 -   TiKV
@@ -285,7 +285,7 @@ v6.3.0 以降、TiCDC は Pulsar シンクの構成をサポートしなくな�
     -   TSO サービス[#12794](https://github.com/tikv/tikv/issues/12794) @ [ピンギュ](https://github.com/pingyu)のフォールト トレランスを向上します。
     -   RocksDB で同時に実行されるサブコンパクション操作の数の動的変更をサポート ( `rocksdb.max-sub-compactions` ) [#13145](https://github.com/tikv/tikv/issues/13145) @ [エーテルフロー](https://github.com/ethercflow)
     -   空のリージョン[#12421](https://github.com/tikv/tikv/issues/12421) @ [タボキー](https://github.com/tabokie)をマージするパフォーマンスを最適化します。
-    -   より多くの正規表現関数をサポート[#13483](https://github.com/tikv/tikv/issues/13483) @ [ゲンリチ](https://github.com/gengliqi)
+    -   より多くの正規表現関数をサポート[#13483](https://github.com/tikv/tikv/issues/13483) @ [ゲンリキ](https://github.com/gengliqi)
     -   CPU 使用率[#13313](https://github.com/tikv/tikv/issues/13313) @ [グロルフ](https://github.com/glorv)に基づいてスレッド プール サイズを自動的に調整するサポート
 
 -   PD
@@ -377,7 +377,7 @@ v6.3.0 以降、TiCDC は Pulsar シンクの構成をサポートしなくな�
     -   状況によっては PITR によってデータ損失が発生する可能性がある問題を修正[#13281](https://github.com/tikv/tikv/issues/13281) @ [ユジュンセン](https://github.com/YuJuncen)
     -   長い悲観的トランザクション[#13304](https://github.com/tikv/tikv/issues/13304) @ [ユジュンセン](https://github.com/YuJuncen)があるときにチェックポイントが進められない問題を修正
     -   TiKV が JSON [#13417](https://github.com/tikv/tikv/issues/13417) @ [ヤンケオ](https://github.com/YangKeao)の datetime 型 ( `DATETIME` 、 `DATE` 、 `TIMESTAMP` 、 `TIME` ) と`STRING`型を区別しない問題を修正します。
-    -   JSON bool と他の JSON 値[#13386](https://github.com/tikv/tikv/issues/13386) [#37481](https://github.com/pingcap/tidb/issues/37481) @ [ヤンケオ](https://github.com/YangKeao)との比較における MySQL との非互換性を修正
+    -   JSON bool と他の JSON 値[#13386](https://github.com/tikv/tikv/issues/13386) [#37481](https://github.com/pingcap/tidb/issues/37481) @ [ヤンケオ](https://github.com/YangKeao)の比較における MySQL との非互換性を修正
 
 -   PD
 

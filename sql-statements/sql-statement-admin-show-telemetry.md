@@ -3,9 +3,13 @@ title: ADMIN SHOW TELEMETRY | TiDB SQL Statement Reference
 summary: An overview of the usage of ADMIN SHOW TELEMETRY for the TiDB database.
 ---
 
-# 管理者表示テレメトリー {#admin-show-telemetry}
+# 管理者表示テレメトリ {#admin-show-telemetry}
 
 `ADMIN SHOW TELEMETRY`ステートメントは、 [テレメトリー](/telemetry.md)機能の一部として PingCAP に報告される情報を示します。
+
+> **注記：**
+>
+> この機能は TiDB セルフホスト型にのみ適用され、 [TiDB Cloud](https://docs.pingcap.com/tidbcloud/)では利用できません。
 
 ## あらすじ {#synopsis}
 
@@ -16,8 +20,6 @@ AdminStmt ::=
 ```
 
 ## 例 {#examples}
-
-{{< copyable "" >}}
 
 ```sql
 ADMIN SHOW TELEMETRY\G

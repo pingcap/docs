@@ -7,7 +7,7 @@ summary: Understand how to decorrelate correlated subqueries.
 
 [サブクエリ関連の最適化](/subquery-optimization.md)相関列がない場合に TiDB がサブクエリを処理する方法を示します。相関サブクエリの非相関化は複雑であるため、この記事では、いくつかの簡単なシナリオと最適化ルールが適用される範囲を紹介します。
 
-## 序章 {#introduction}
+## 導入 {#introduction}
 
 `select * from t1 where t1.a < (select sum(t2.a) from t2 where t2.b = t1.b)`例に挙げます。ここでのサブクエリ`t1.a < (select sum(t2.a) from t2 where t2.b = t1.b)`は、クエリ条件`t2.b=t1.b`の相関列を参照します。この条件はたまたま同等の条件であるため、クエリは`select t1.* from t1, (select b, sum(a) sum_a from t2 group by b) t2 where t1.b = t2.b and t1.a < t2.sum_a;`として書き換えることができます。このようにして、相関サブクエリは`JOIN`に書き換えられます。
 
@@ -17,11 +17,9 @@ TiDB がこの書き換えを行う必要がある理由は、相関サブクエ
 
 この書き換えの欠点は、相関関係が解除されていない場合、オプティマイザーが相関列のインデックスを使用できることです。つまり、このサブクエリは何度も繰り返される可能性がありますが、そのたびにインデックスを使用してデータをフィルタリングできます。書き換えルールを使用すると、通常、相関列の位置が変わります。サブクエリは 1 回だけ実行されますが、1 回の実行時間は非相関なしの場合よりも長くなります。
 
-したがって、外部値が少ない場合は、非相関化を実行しないでください。これにより、実行パフォーマンスが向上する可能性があります。この場合、 [`NO_DECORRELATE`](/optimizer-hints.md#no_decorrelate)オプティマイザー ヒントを使用するか、 [最適化ルールと式プッシュダウンのブロックリスト](/blocklist-control-plan.md)の「サブクエリの非相関化」最適化ルールを無効にすることで、この最適化を無効にできます。ほとんどの場合、オプティマイザ ヒントを[SQL計画管理](/sql-plan-management.md)とともに使用して非相関を無効にすることをお勧めします。
+したがって、外部値が少ない場合は、非相関化を実行しないでください。これにより、実行パフォーマンスが向上する可能性があります。この場合、 [`NO_DECORRELATE`](/optimizer-hints.md#no_decorrelate)オプティマイザー ヒントを使用するか、 [最適化ルールと式プッシュダウンのブロックリスト](/blocklist-control-plan.md)の「サブクエリの非相関化」最適化ルールを無効にすることで、この最適化を無効にできます。ほとんどの場合、オプティマイザ ヒントと[SQL計画管理](/sql-plan-management.md)を併用して非相関を無効にすることをお勧めします。
 
 ## 例 {#example}
-
-{{< copyable "" >}}
 
 ```sql
 create table t1(a int, b int);
@@ -50,8 +48,6 @@ explain select * from t1 where t1.a < (select sum(t2.a) from t2 where t2.b = t1.
 
 次に、 `NO_DECORRELATE`オプティマイザー ヒントを使用して、オプティマイザーにサブクエリの非相関化を実行しないように指示できます。
 
-{{< copyable "" >}}
-
 ```sql
 explain select * from t1 where t1.a < (select /*+ NO_DECORRELATE() */ sum(t2.a) from t2 where t2.b = t1.b);
 ```
@@ -74,8 +70,6 @@ explain select * from t1 where t1.a < (select /*+ NO_DECORRELATE() */ sum(t2.a) 
 ```
 
 非相関ルールを無効にしても、同じ効果が得られます。
-
-{{< copyable "" >}}
 
 ```sql
 insert into mysql.opt_rule_blacklist values("decorrelate");
@@ -100,4 +94,4 @@ explain select * from t1 where t1.a < (select sum(t2.a) from t2 where t2.b = t1.
 +------------------------------------------+-----------+-----------+------------------------+--------------------------------------------------------------------------------------+
 ```
 
-サブクエリ非相関ルールを無効にすると、 `range: decided by [eq(test.t2.b, test.t1.b)]` / `operator info` / `IndexRangeScan_25(Build)`が表示されます。これは、相関サブクエリの非相関化が実行されず、TiDB がインデックス範囲クエリを使用することを意味します。
+サブクエリ非相関ルールを無効にすると、 `range: decided by [eq(test.t2.b, test.t1.b)]` / `operator info` / `IndexRangeScan_42(Build)`が表示されます。これは、相関サブクエリの非相関化が実行されず、TiDB がインデックス範囲クエリを使用することを意味します。

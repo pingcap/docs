@@ -21,7 +21,7 @@ v7.1 LTS では、TiDB は、オペレーティング システムと CPU アー
 
 -   以下のオペレーティング システムと CPU アーキテクチャの組み合わせに対して、TiDB は**エンタープライズ レベルの本番品質を提供し**、製品機能は包括的かつ体系的に検証されています。
 
-    <table><thead><tr><th>オペレーティングシステム</th><th>サポートされている CPU アーキテクチャ</th></tr></thead><tbody><tr><td>Red Hat Enterprise Linux 8.4 以降の 8.x バージョン</td><td><ul><li>x86_64</li><li>アーム64</li></ul></td></tr><tr><td><ul><li> Red Hat Enterprise Linux 7.3 以降の 7.x バージョン</li><li>CentOS 7.3 以降 7.x バージョン</li></ul></td><td><ul><li>x86_64</li><li>アーム64</li></ul></td></tr><tr><td>アマゾン リナックス 2</td><td><ul><li> x86_64</li><li>アーム64</li></ul></td></tr><tr><td>キリン オイラー V10 SP1/SP2</td><td><ul><li> x86_64</li><li>アーム64</li></ul></td></tr><tr><td> UOS V20</td><td><ul><li> x86_64</li><li>アーム64</li></ul></td></tr><tr><td> openEuler 22.03 LTS SP1</td><td><ul><li> x86_64</li><li>アーム64</li></ul></td></tr></tbody></table>
+    <table><thead><tr><th>オペレーティングシステム</th><th>サポートされている CPU アーキテクチャ</th></tr></thead><tbody><tr><td>Red Hat Enterprise Linux 8.4 以降の 8.x バージョン</td><td><ul><li>x86_64</li><li>アーム64</li></ul></td></tr><tr><td><ul><li> Red Hat Enterprise Linux 7.3 以降の 7.x バージョン</li><li>CentOS 7.3 以降 7.x バージョン</li></ul></td><td><ul><li>x86_64</li><li>アーム64</li></ul></td></tr><tr><td>アマゾン リナックス 2</td><td><ul><li> x86_64</li><li>アーム64</li></ul></td></tr><tr><td>キリン オイラー V10 SP1/SP2</td><td><ul><li> x86_64</li><li>アーム64</li></ul></td></tr><tr><td>ユニオンテック OS (UOS) V20</td><td><ul><li> x86_64</li><li>アーム64</li></ul></td></tr><tr><td> openEuler 22.03 LTS SP1</td><td><ul><li> x86_64</li><li>アーム64</li></ul></td></tr></tbody></table>
 
     > **注記：**
     >
@@ -116,17 +116,17 @@ TiDB は、Intel x86-64アーキテクチャの 64 ビット汎用ハードウ�
 > **注記：**
 >
 > -   本番環境では、TiDB インスタンスと PD インスタンスを同じサーバーにデプロイできます。パフォーマンスと信頼性に対してより高い要件がある場合は、それらを個別に導入してみてください。
-> -   本番環境ではより高い構成を使用することを強くお勧めします。
-> -   TiKV ハードディスクのサイズは、PCIe SSD を使用している場合は 2 TB 以内、通常の SSD を使用している場合は 1.5 TB 以内にすることをお勧めします。
+> -   本番環境では、TiDB、TiKV、およびTiFlashをそれぞれ少なくとも 8 個の CPU コアで構成することを強くお勧めします。より良いパフォーマンスを得るには、より高い構成をお勧めします。
+> -   TiKV ハードディスクのサイズは、PCIe SSD を使用している場合は 4 TB 以内、通常の SSD を使用している場合は 1.5 TB 以内にすることをお勧めします。
 
 TiFlashを展開する前に、次の点に注意してください。
 
 -   TiFlash は[複数のディスクに展開される](/tiflash/tiflash-configuration.md#multi-disk-deployment)にすることができます。
--   TiKV データのリアルタイム レプリケーションをバッファリングするために、 TiFlashデータ ディレクトリの最初のディスクとして高性能 SSD を使用することをお勧めします。このディスクのパフォーマンスは、PCI-E SSD などの TiKV のパフォーマンスよりも低くてはなりません。ディスク容量は総容量の 10% 以上である必要があります。そうしないと、このノードのボトルネックになる可能性があります。他のディスクに通常の SSD を導入することもできますが、より優れた PCI-E SSD の方がパフォーマンスが向上することに注意してください。
+-   TiKV データのリアルタイム レプリケーションをバッファリングするために、 TiFlashデータ ディレクトリの最初のディスクとして高性能 SSD を使用することをお勧めします。このディスクのパフォーマンスは、PCIe SSD などの TiKV のパフォーマンスよりも低くてはなりません。ディスク容量は総容量の 10% 以上である必要があります。そうしないと、このノードのボトルネックになる可能性があります。他のディスクに通常の SSD を導入することもできますが、より優れた PCIe SSD の方がパフォーマンスが向上することに注意してください。
 -   TiFlash をTiKV とは別のノードにデプロイすることをお勧めします。 TiFlashと TiKV を同じノードに展開する必要がある場合は、CPU コアとメモリの数を増やし、相互の干渉を避けるためにTiFlashと TiKV を異なるディスクに展開してみてください。
 -   TiFlashディスクの総容量は`the data volume of the entire TiKV cluster to be replicated / the number of TiKV replicas * the number of TiFlash replicas`のように計算されます。たとえば、TiKV の計画全体容量が 1 TB、TiKV レプリカの数が 3、 TiFlashレプリカの数が 2 の場合、 TiFlashの推奨合計容量は`1024 GB / 3 * 2`です。一部のテーブルのデータのみを複製できます。この場合、複製するテーブルのデータ量に応じてTiFlashの容量を決定してください。
 
-TiCDC を展開する前に、1 TB を超える PCIe-SSD ディスクに TiCDC を展開することが推奨されることに注意してください。
+TiCDC を展開する前に、500 GB を超える PCIe SSD ディスクに TiCDC を展開することが推奨されることに注意してください。
 
 ## ネットワーク要件 {#network-requirements}
 

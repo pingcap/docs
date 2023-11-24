@@ -41,7 +41,7 @@ TiDB を MySQL GBK 文字セットの照合順序と互換性を持たせるに�
 
 <CustomContent platform="tidb-cloud">
 
-TiDB を MySQL GBK 文字セットの照合順序と互換性を持たせるために、最初に TiDB クラスターを初期化するときに、 TiDB Cloud はデフォルトで[照合順序の新しいフレームワーク](/character-set-and-collation.md#new-framework-for-collations)を有効にします。
+TiDB を MySQL GBK 文字セットの照合順序と互換にするために、最初に TiDB クラスターを初期化するときに、 TiDB Cloud はデフォルトで[照合順序の新しいフレームワーク](/character-set-and-collation.md#new-framework-for-collations)を有効にします。
 
 </CustomContent>
 
@@ -101,6 +101,8 @@ SHOW COLLATION WHERE CHARSET = 'gbk';
 <!---->
 
 -   現在、TiDB では`ENUM`および`SET`タイプのバイナリ文字を`utf8mb4`文字セットとして扱います。
+
+-   述語に`LIKE 'prefix%'`などの文字列接頭辞の`LIKE`が含まれており、ターゲット列が GBK照合順序( `gbk_bin`または`gbk_chinese_ci` ) に設定されている場合、オプティマイザーは現在、この述語を範囲スキャンに変換できません。代わりに、フルスキャンが実行されます。その結果、このような SQL クエリは予期しないリソースの消費につながる可能性があります。
 
 ## コンポーネントの互換性 {#component-compatibility}
 

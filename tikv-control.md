@@ -135,7 +135,7 @@ AAFF
 
 `raft`サブコマンドを使用して、特定の時点でのRaftステート マシンのステータスを表示します。ステータス情報には 2 つの部分が含まれます。3 つの構造体 ( **RegionalLocalState** 、 **RaftLocalState** 、および**RegionApplyState** ) と、ログの特定の部分の対応するエントリです。
 
-上記の情報を取得するには、それぞれ`region`サブコマンドと`log`サブコマンドを使用します。 2 つのサブコマンドは両方とも、リモート モードとローカル モードを同時にサポートします。
+上記の情報を取得するには、それぞれ`region`および`log`サブコマンドを使用します。 2 つのサブコマンドは両方とも、リモート モードとローカル モードを同時にサポートします。
 
 `region`サブコマンドの場合:
 
@@ -607,3 +607,36 @@ tikv-ctl --data-dir </path/to/tikv> bad-ssts --pd <endpoint>
 -   `sst meta`部分の`14` SST ファイル番号を意味します。 `552997`ファイル サイズを意味し、その後に最小および最大のシーケンス番号およびその他のメタ情報が続きます。
 -   `overlap region`部分は、関係するリージョンの情報を示します。この情報は PDサーバーを通じて取得されます。
 -   `suggested operations`番目の部分では、破損した SST ファイルをクリーンアップするための提案が提供されます。ファイルをクリーンアップして TiKV インスタンスを再起動するという提案を採用できます。
+
+### リージョンの<code>RegionReadProgress</code>の状態を取得する {#get-the-state-of-a-region-s-code-regionreadprogress-code}
+
+v6.5.4、v7.1.2、および v7.3.0 以降、TiKV では、リゾルバーの最新の詳細を取得する`get-region-read-progress`サブコマンドと`RegionReadProgress`が導入されています。リージョンID と TiKV を指定する必要があります。これらは、Grafana ( `Min Resolved TS Region`および`Min Safe TS Region` ) または`DataIsNotReady`ログから取得できます。
+
+-   `--log` (オプション): 指定した場合、TiKV は、この TiKV のリージョンのリゾルバーにあるロックのうち最小の`start_ts`をレベル`INFO`で記録します。このオプションは、 resolved-tsをブロックする可能性のあるロックを事前に特定するのに役立ちます。
+
+-   `--min-start-ts` (オプション): 指定すると、TiKV はログ内のこの値より小さい`start_ts`を持つロックを除外します。これを使用して、ログの対象となるトランザクションを指定できます。デフォルトは`0`で、これはフィルターなしを意味します。
+
+以下は例です。
+
+    ./tikv-ctl --host 127.0.0.1:20160 get-region-read-progress -r 14 --log --min-start-ts 0
+
+出力は次のとおりです。
+
+    Region read progress:
+        exist: true,
+        safe_ts: 0,
+        applied_index: 92,
+        pending front item (oldest) ts: 0,
+        pending front item (oldest) applied index: 0,
+        pending back item (latest) ts: 0,
+        pending back item (latest) applied index: 0,
+        paused: false,
+    Resolver:
+        exist: true,
+        resolved_ts: 0,
+        tracked index: 92,
+        number of locks: 0,
+        number of transactions: 0,
+        stopped: false,
+
+このサブコマンドは、 ステイル読み取りおよびsafe-ts に関連する問題を診断するのに役立ちます。詳細は[TiKV のステイル読み取りとsafe-tsを理解する](/troubleshoot-stale-read.md)を参照してください。

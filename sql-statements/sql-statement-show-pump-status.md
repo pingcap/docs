@@ -7,9 +7,11 @@ summary: An overview of the usage of SHOW PUMP STATUS for the TiDB database.
 
 `SHOW PUMP STATUS`ステートメントは、クラスター内のすべてのPumpノードのステータス情報を表示します。
 
-## 例 {#examples}
+> **注記：**
+>
+> この機能は TiDB セルフホスト型にのみ適用され、 [TiDB Cloud](https://docs.pingcap.com/tidbcloud/)では利用できません。
 
-{{< copyable "" >}}
+## 例 {#examples}
 
 ```sql
 SHOW PUMP STATUS;
@@ -32,6 +34,6 @@ SHOW PUMP STATUS;
 
 ## こちらも参照 {#see-also}
 
--   [ドレイナーステータスを表示](/sql-statements/sql-statement-show-drainer-status.md)
+-   [ドレイナーのステータスを表示](/sql-statements/sql-statement-show-drainer-status.md)
 -   [ポンプステータスの変更](/sql-statements/sql-statement-change-pump.md)
 -   [ドレイナーステータスの変更](/sql-statements/sql-statement-change-drainer.md)

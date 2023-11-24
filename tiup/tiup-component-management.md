@@ -30,15 +30,11 @@ summary: Learn how to manage TiUP components using TiUP commands.
 
 例 1: 現在インストールされているすべてのコンポーネントをビュー。
 
-{{< copyable "" >}}
-
 ```shell
 tiup list --installed
 ```
 
 例 2: インストール可能なすべてのバージョンの TiKVコンポーネントのリストをサーバーから取得します。
-
-{{< copyable "" >}}
 
 ```shell
 tiup list tikv
@@ -53,26 +49,20 @@ tiup list tikv
 
 例 1: TiUPを使用して、TiDB の最新の安定バージョンをインストールします。
 
-{{< copyable "" >}}
-
 ```shell
 tiup install tidb
 ```
 
 例 2: TiUPを使用して、TiDB の夜間バージョンをインストールします。
 
-{{< copyable "" >}}
-
 ```shell
 tiup install tidb:nightly
 ```
 
-例 3: TiUPを使用して TiKV v7.1.1 をインストールします。
-
-{{< copyable "" >}}
+例 3: TiUPを使用して TiKV v7.1.2 をインストールします。
 
 ```shell
-tiup install tikv:v7.1.1
+tiup install tikv:v7.1.2
 ```
 
 ## コンポーネントをアップグレードする {#upgrade-components}
@@ -86,23 +76,17 @@ tiup install tikv:v7.1.1
 
 例 1: すべてのコンポーネントを最新バージョンにアップグレードします。
 
-{{< copyable "" >}}
-
 ```shell
 tiup update --all
 ```
 
 例 2: すべてのコンポーネントを夜間バージョンにアップグレードします。
 
-{{< copyable "" >}}
-
 ```shell
 tiup update --all --nightly
 ```
 
 例 3: TiUP を最新バージョンにアップグレードします。
-
-{{< copyable "" >}}
 
 ```shell
 tiup update --self
@@ -123,19 +107,15 @@ Flags:
 
 コンポーネントが開始される前に、 TiUP はコンポーネント用のディレクトリを作成し、このコンポーネントを操作用のディレクトリに置きます。コンポーネントはすべてのデータをこのディレクトリに生成します。このディレクトリの名前は、コンポーネントの動作時に指定されたタグ名になります。タグが指定されていない場合、タグ名はランダムに生成されます。この作業ディレクトリは、インスタンスが終了すると*自動的に削除され*ます。
 
-同じコンポーネントを複数回起動して、以前の作業ディレクトリを再利用する場合は、コンポーネントの起動時に`--tag`を使用して同じ名前を指定できます。タグを指定すると、インスタンス終了時に作業ディレクトリが*自動的に削除されなくなる*ため、作業ディレクトリを再利用するのに便利です。
+同じコンポーネントを複数回起動し、以前の作業ディレクトリを再利用する場合は、コンポーネントの起動時に`--tag`使用して同じ名前を指定できます。タグを指定すると、インスタンス終了時に作業ディレクトリが*自動的に削除されなくなる*ため、作業ディレクトリを再利用するのに便利です。
 
-例 1: TiDB v7.1.1 を動作させます。
-
-{{< copyable "" >}}
+例 1: TiDB v7.1.2 を動作させます。
 
 ```shell
-tiup tidb:v7.1.1
+tiup tidb:v7.1.2
 ```
 
 例2：TiKVが動作するタグを指定します。
-
-{{< copyable "" >}}
 
 ```shell
 tiup --tag=experiment tikv
@@ -144,8 +124,6 @@ tiup --tag=experiment tikv
 ### コンポーネントの動作ステータスを問い合わせる {#query-the-operating-status-of-a-component}
 
 `tiup status`コマンドを使用して、コンポーネントの動作ステータスを確認できます。
-
-{{< copyable "" >}}
 
 ```shell
 tiup status
@@ -166,8 +144,6 @@ tiup status
 
 `tiup clean`コマンドを使用すると、コンポーネントインスタンスをクリーンアップし、作業ディレクトリを削除できます。クリーニング前にインスタンスがまだ動作している場合は、関連するプロセスが最初に強制終了されます。コマンドの使用方法は次のとおりです。
 
-{{< copyable "" >}}
-
 ```bash
 tiup clean [tag] [flags]
 ```
@@ -180,15 +156,11 @@ tiup clean [tag] [flags]
 
 例 1: `experiment`タグ名を持つコンポーネントインスタンスをクリーンアップします。
 
-{{< copyable "" >}}
-
 ```shell
 tiup clean experiment
 ```
 
 例 2: すべてのコンポーネントインスタンスをクリーンアップします。
-
-{{< copyable "" >}}
 
 ```shell
 tiup clean --all
@@ -199,8 +171,6 @@ tiup clean --all
 TiUPを使用してインストールされたコンポーネントは、ローカル ディスク領域を占有します。古いバージョンのコンポーネントをあまり保持したくない場合は、現在インストールされているコンポーネントのバージョンを確認してから、このコンポーネントをアンインストールします。
 
 `tiup uninstall`コマンドを使用すると、コンポーネントのすべてのバージョンまたは特定のバージョンをアンインストールできます。このコマンドは、すべてのコンポーネントのアンインストールもサポートしています。コマンドの使用方法は次のとおりです。
-
-{{< copyable "" >}}
 
 ```bash
 tiup uninstall [component][:version] [flags]
@@ -216,25 +186,19 @@ tiup uninstall [component][:version] [flags]
 -   バージョンが無視される場合、 `--all`を追加すると、このコンポーネントのすべてのバージョンがアンインストールされます。
 -   バージョンとコンポーネントの両方が無視される場合、 `--all`を追加すると、すべてのバージョンのすべてのコンポーネントがアンインストールされます。
 
-例 1: TiDB v7.1.1 をアンインストールします。
-
-{{< copyable "" >}}
+例 1: TiDB v7.1.2 をアンインストールします。
 
 ```shell
-tiup uninstall tidb:v7.1.1
+tiup uninstall tidb:v7.1.2
 ```
 
 例 2: すべてのバージョンの TiKV をアンインストールします。
-
-{{< copyable "" >}}
 
 ```shell
 tiup uninstall tikv --all
 ```
 
 例 3: インストールされているすべてのコンポーネントをアンインストールします。
-
-{{< copyable "" >}}
 
 ```shell
 tiup uninstall --all

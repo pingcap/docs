@@ -66,6 +66,10 @@ CSV ファイルをインポートするときは、データ ファイルに次
 -   `import_db.test_table_0_0_01.csv`
 -   `import_db.test_table_0_0_01.csv.gz`
 
+> **注記：**
+>
+> Snappy 圧縮ファイルは[公式の Snappy フォーマット](https://github.com/google/snappy)に存在する必要があります。 Snappy 圧縮の他のバリアントはサポートされていません。
+
 ### 寄木細工 {#parquet}
 
 Parquet ファイルをインポートするときは、データ ファイルに次のような名前を付けます。
@@ -108,6 +112,10 @@ SQL ファイルをインポートするときは、データ ファイルに次
 -   `import_db.test_table.01.sql.gz`
 
 SQL ファイルがデフォルト構成の TiDB Dumplingを介してエクスポートされる場合、デフォルトで命名規則に従います。
+
+> **注記：**
+>
+> Snappy 圧縮ファイルは[公式の Snappy フォーマット](https://github.com/google/snappy)に存在する必要があります。 Snappy 圧縮の他のバリアントはサポートされていません。
 
 ## ファイルパターン {#file-pattern}
 

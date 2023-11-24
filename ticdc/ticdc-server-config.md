@@ -23,7 +23,7 @@ summary: Learn the CLI and configuration parameters used in TiCDC.
 -   `cert` : TLS 接続用の証明書ファイルのパスを PEM 形式で指定します (オプション)。
 -   `cert-allowed-cn` : TLS 接続の共通名のパスを PEM 形式で指定します (オプション)。
 -   `key` : TLS 接続用の秘密キー ファイルのパスを PEM 形式で指定します (オプション)。
--   `tz` : TiCDC サービスで使用されるタイムゾーン。 TiCDC は、 `TIMESTAMP`などの時間データ型を内部で変換するとき、またはデータをダウンストリームに複製するときに、このタイム ゾーンを使用します。デフォルトは、プロセスが実行されるローカル タイム ゾーンです。 `time-zone` ( `sink-uri` ) と`tz`同時に指定すると、内部 TiCDC プロセスは`tz`で指定されたタイム ゾーンを使用し、シンクはデータをダウンストリームにレプリケートするために`time-zone`で指定されたタイム ゾーンを使用します。 `tz`で指定したタイムゾーンが、( `sink-uri`の) `time-zone`で指定したタイムゾーンと同じであることを確認してください。
+-   `tz` : TiCDC サービスで使用されるタイムゾーン。 TiCDC は、 `TIMESTAMP`などの時間データ型を内部で変換するとき、またはデータをダウンストリームにレプリケートするときに、このタイム ゾーンを使用します。デフォルトは、プロセスが実行されるローカル タイム ゾーンです。 `time-zone` ( `sink-uri` ) と`tz`同時に指定すると、内部 TiCDC プロセスは`tz`で指定されたタイム ゾーンを使用し、シンクはデータをダウンストリームにレプリケートするために`time-zone`で指定されたタイム ゾーンを使用します。 `tz`で指定したタイムゾーンが、( `sink-uri`の) `time-zone`で指定したタイムゾーンと同じであることを確認してください。
 -   `cluster-id` : (オプション) TiCDC クラスターの ID。デフォルト値は`default`です。 `cluster-id`は、TiCDC クラスターの一意の識別子です。同じ`cluster-id`を持つ TiCDC ノードは同じクラスターに属します。 `cluster-id`の長さは最大 128 文字です。 `cluster-id` `^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*$`のパターンに従う必要があり、 `owner` 、 `capture` 、 `task` 、 `changefeed` 、 `job` 、 `meta`のいずれかにすることはできません。
 
 ## <code>cdc server</code>構成ファイルのパラメーター {#code-cdc-server-code-configuration-file-parameters}
@@ -49,7 +49,6 @@ cluster-id = "default"
 capture-session-ttl = 10 # 10s
 owner-flush-interval = 50000000 # 50 ms
 processor-flush-interval = 50000000 # 50 ms
-per-table-memory-quota = 10485760 # 10 MiB
 
 [log]
   error-output = "stderr"

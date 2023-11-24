@@ -11,16 +11,14 @@ Binlog Consumer Client は、 Kafka から TiDB のセカンダリbinlogデー�
 
 Drainerの構成ファイルを変更し、データを Kafka に出力するように設定します。
 
-```
-[syncer]
-db-type = "kafka"
+    [syncer]
+    db-type = "kafka"
 
-[syncer.to]
-# the Kafka address
-kafka-addrs = "127.0.0.1:9092"
-# the Kafka version
-kafka-version = "2.4.0"
-```
+    [syncer.to]
+    # the Kafka address
+    kafka-addrs = "127.0.0.1:9092"
+    # the Kafka version
+    kafka-version = "2.4.0"
 
 ## 受託開発 {#customized-development}
 
@@ -28,100 +26,98 @@ kafka-version = "2.4.0"
 
 まず、 Drainerによって Kafka に出力されるデータの形式情報を取得する必要があります。
 
-```
-// `Column` stores the column data in the corresponding variable based on the data type.
-message Column {
-  // Indicates whether the data is null
-  optional bool is_null = 1 [ default = false ];
-  // Stores `int` data
-  optional int64 int64_value = 2;
-  // Stores `uint`, `enum`, and `set` data
-  optional uint64 uint64_value = 3;
-  // Stores `float` and `double` data
-  optional double double_value = 4;
-  // Stores `bit`, `blob`, `binary` and `json` data
-  optional bytes bytes_value = 5;
-  // Stores `date`, `time`, `decimal`, `text`, `char` data
-  optional string string_value = 6;
-}
+    // `Column` stores the column data in the corresponding variable based on the data type.
+    message Column {
+      // Indicates whether the data is null
+      optional bool is_null = 1 [ default = false ];
+      // Stores `int` data
+      optional int64 int64_value = 2;
+      // Stores `uint`, `enum`, and `set` data
+      optional uint64 uint64_value = 3;
+      // Stores `float` and `double` data
+      optional double double_value = 4;
+      // Stores `bit`, `blob`, `binary` and `json` data
+      optional bytes bytes_value = 5;
+      // Stores `date`, `time`, `decimal`, `text`, `char` data
+      optional string string_value = 6;
+    }
 
-// `ColumnInfo` stores the column information, including the column name, type, and whether it is the primary key.
-message ColumnInfo {
-  optional string name = 1 [ (gogoproto.nullable) = false ];
-  // the lower case column field type in MySQL
-  // https://dev.mysql.com/doc/refman/8.0/en/data-types.html
-  // for the `numeric` type: int bigint smallint tinyint float double decimal bit
-  // for the `string` type: text longtext mediumtext char tinytext varchar
-  // blob longblob mediumblob binary tinyblob varbinary
-  // enum set
-  // for the `json` type: json
-  optional string mysql_type = 2 [ (gogoproto.nullable) = false ];
-  optional bool is_primary_key = 3 [ (gogoproto.nullable) = false ];
-}
+    // `ColumnInfo` stores the column information, including the column name, type, and whether it is the primary key.
+    message ColumnInfo {
+      optional string name = 1 [ (gogoproto.nullable) = false ];
+      // the lower case column field type in MySQL
+      // https://dev.mysql.com/doc/refman/8.0/en/data-types.html
+      // for the `numeric` type: int bigint smallint tinyint float double decimal bit
+      // for the `string` type: text longtext mediumtext char tinytext varchar
+      // blob longblob mediumblob binary tinyblob varbinary
+      // enum set
+      // for the `json` type: json
+      optional string mysql_type = 2 [ (gogoproto.nullable) = false ];
+      optional bool is_primary_key = 3 [ (gogoproto.nullable) = false ];
+    }
 
-// `Row` stores the actual data of a row.
-message Row { repeated Column columns = 1; }
+    // `Row` stores the actual data of a row.
+    message Row { repeated Column columns = 1; }
 
-// `MutationType` indicates the DML type.
-enum MutationType {
-  Insert = 0;
-  Update = 1;
-  Delete = 2;
-}
+    // `MutationType` indicates the DML type.
+    enum MutationType {
+      Insert = 0;
+      Update = 1;
+      Delete = 2;
+    }
 
-// `Table` contains mutations in a table.
-message Table {
-  optional string schema_name = 1;
-  optional string table_name = 2;
-  repeated ColumnInfo column_info = 3;
-  repeated TableMutation mutations = 4;
-}
+    // `Table` contains mutations in a table.
+    message Table {
+      optional string schema_name = 1;
+      optional string table_name = 2;
+      repeated ColumnInfo column_info = 3;
+      repeated TableMutation mutations = 4;
+    }
 
-// `TableMutation` stores mutations of a row.
-message TableMutation {
-  required MutationType type = 1;
-  // data after modification
-  required Row row = 2;
-  // data before modification. It only takes effect for `Update MutationType`.
-  optional Row change_row = 3;
-}
+    // `TableMutation` stores mutations of a row.
+    message TableMutation {
+      required MutationType type = 1;
+      // data after modification
+      required Row row = 2;
+      // data before modification. It only takes effect for `Update MutationType`.
+      optional Row change_row = 3;
+    }
 
-// `DMLData` stores all the mutations caused by DML in a transaction.
-message DMLData {
-  // `tables` contains all the table changes in the transaction.
-  repeated Table tables = 1;
-}
+    // `DMLData` stores all the mutations caused by DML in a transaction.
+    message DMLData {
+      // `tables` contains all the table changes in the transaction.
+      repeated Table tables = 1;
+    }
 
-// `DDLData` stores the DDL information.
-message DDLData {
-  // the database used currently
-  optional string schema_name = 1;
-  // the relates table
-  optional string table_name = 2;
-  // `ddl_query` is the original DDL statement query.
-  optional bytes ddl_query = 3;
-}
+    // `DDLData` stores the DDL information.
+    message DDLData {
+      // the database used currently
+      optional string schema_name = 1;
+      // the relates table
+      optional string table_name = 2;
+      // `ddl_query` is the original DDL statement query.
+      optional bytes ddl_query = 3;
+    }
 
-// `BinlogType` indicates the binlog type, including DML and DDL.
-enum BinlogType {
-  DML = 0; //  Has `dml_data`
-  DDL = 1; //  Has `ddl_query`
-}
+    // `BinlogType` indicates the binlog type, including DML and DDL.
+    enum BinlogType {
+      DML = 0; //  Has `dml_data`
+      DDL = 1; //  Has `ddl_query`
+    }
 
-// `Binlog` stores all the changes in a transaction. Kafka stores the serialized result of the structure data.
-message Binlog {
-  optional BinlogType type = 1 [ (gogoproto.nullable) = false ];
-  optional int64 commit_ts = 2 [ (gogoproto.nullable) = false ];
-  optional DMLData dml_data = 3;
-  optional DDLData ddl_data = 4;
-}
-```
+    // `Binlog` stores all the changes in a transaction. Kafka stores the serialized result of the structure data.
+    message Binlog {
+      optional BinlogType type = 1 [ (gogoproto.nullable) = false ];
+      optional int64 commit_ts = 2 [ (gogoproto.nullable) = false ];
+      optional DMLData dml_data = 3;
+      optional DDLData ddl_data = 4;
+    }
 
-データ形式の定義については、 [`secondary_binlog.proto`](https://github.com/pingcap/tidb/blob/master/tidb-binlog/proto/proto/secondary_binlog.proto)を参照してください。
+データ形式の定義については、 [`secondary_binlog.proto`](https://github.com/pingcap/tidb/blob/release-7.1/tidb-binlog/proto/proto/secondary_binlog.proto)を参照してください。
 
 ### Driver {#driver}
 
-[TiDB ツール](https://github.com/pingcap/tidb-tools/)プロジェクトは、Kafka でbinlogデータを読み取るために使用される[Driver](https://github.com/pingcap/tidb/tree/master/tidb-binlog/driver)提供します。次のような特徴があります。
+[TiDB ツール](https://github.com/pingcap/tidb-tools/)プロジェクトは、Kafka でbinlogデータを読み取るために使用される[Driver](https://github.com/pingcap/tidb/tree/release-7.1/tidb-binlog/driver)提供します。次のような特徴があります。
 
 -   Kafka データを読み取ります。
 -   `commit ts`に基づいて、Kafka に保存されているbinlogを見つけます。
@@ -141,7 +137,7 @@ Driverを使用する場合は、次の情報を構成する必要がありま�
 -   Driverを使用してデータを MySQL にレプリケートします。この例は、binlogを SQL に変換する方法を示します。
 -   Driverを使用してデータを印刷する
 
-> **ノート：**
+> **注記：**
 >
 > -   このサンプル コードでは、 Driver の使用方法のみを示しています。本番環境でDriverを使用する場合は、コードを最適化する必要があります。
 > -   現在、 GolangバージョンのDriverとサンプル コードのみが利用可能です。他の言語を使用する場合は、 binlog proto ファイルに基づいて対応する言語でコード ファイルを生成し、Kafka でbinlogデータを読み取り、データを解析してダウンストリームに出力するアプリケーションを開発する必要があります。サンプル コードを最適化して、他の言語のサンプル コードを[TiDB ツール](https://github.com/pingcap/tidb-tools)に送信することも歓迎します。

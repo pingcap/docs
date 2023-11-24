@@ -7,13 +7,9 @@ summary: Learn the usage of FLASHBACK CLUSTER TO TIMESTAMP in TiDB databases.
 
 TiDB v6.4.0 では`FLASHBACK CLUSTER TO TIMESTAMP`構文が導入されています。これを使用して、クラスターを特定の時点に復元できます。
 
-<CustomContent platform="tidb-cloud">
-
 > **警告：**
 >
 > `FLASHBACK CLUSTER TO TIMESTAMP`構文は[TiDB サーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless)クラスターには適用されません。予期しない結果を避けるため、TiDB サーバーレス クラスターではこのステートメントを実行しないでください。
-
-</CustomContent>
 
 <CustomContent platform="tidb">
 
@@ -25,7 +21,7 @@ TiDB v6.4.0 では`FLASHBACK CLUSTER TO TIMESTAMP`構文が導入されていま
 
 </CustomContent>
 
-> **ノート：**
+> **注記：**
 >
 > `FLASHBACK CLUSTER TO TIMESTAMP`の動作原理は、特定の時点の古いデータを最新のタイムスタンプで書き込み、現在のデータは削除しません。したがって、この機能を使用する前に、古いデータと現在のデータを保存するのに十分なstorage領域があることを確認する必要があります。
 
@@ -130,9 +126,7 @@ ERROR 1105 (HY000): Detected another DDL job at 2023-01-29 14:33:12 +0800 CST, c
 
 ログを通じて、 `FLASHBACK`の実行の進行状況を取得できます。以下は例です。
 
-```
-[2022/10/09 17:25:59.316 +08:00] [INFO] [cluster.go:463] ["flashback cluster stats"] ["complete regions"=9] ["total regions"=10] []
-```
+    [2022/10/09 17:25:59.316 +08:00] [INFO] [cluster.go:463] ["flashback cluster stats"] ["complete regions"=9] ["total regions"=10] []
 
 ## MySQLの互換性 {#mysql-compatibility}
 

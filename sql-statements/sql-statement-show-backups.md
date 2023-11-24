@@ -11,6 +11,10 @@ summary: An overview of the usage of SHOW [BACKUPS|RESTORES] for the TiDB databa
 
 `BACKUP`タスクをクエリするには`SHOW BACKUPS`使用し、 `RESTORE`タスクをクエリするには`SHOW RESTORES`使用します。
 
+> **注記：**
+>
+> この機能は[TiDB サーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless)クラスターでは使用できません。
+
 `br`コマンドライン ツールで開始されたバックアップと復元は表示されません。
 
 ## あらすじ {#synopsis}
@@ -28,15 +32,11 @@ ShowLikeOrWhere ::=
 
 1 つの接続で、次のステートメントを実行します。
 
-{{< copyable "" >}}
-
 ```sql
 BACKUP DATABASE `test` TO 's3://example-bucket/backup-01';
 ```
 
 バックアップが完了する前に、新しい接続で`SHOW BACKUPS`を実行します。
-
-{{< copyable "" >}}
 
 ```sql
 SHOW BACKUPS;
@@ -74,8 +74,6 @@ SHOW BACKUPS;
 
 接続 ID を使用して、 [`KILL TIDB QUERY`](/sql-statements/sql-statement-kill.md)ステートメント経由でバックアップ/復元タスクをキャンセルできます。
 
-{{< copyable "" >}}
-
 ```sql
 KILL TIDB QUERY 4;
 ```
@@ -88,15 +86,11 @@ Query OK, 0 rows affected (0.00 sec)
 
 `LIKE`句を使用して、宛先 URL をワイルドカード式と照合してタスクを除外します。
 
-{{< copyable "" >}}
-
 ```sql
 SHOW BACKUPS LIKE 's3://%';
 ```
 
-`WHERE`句を使用して列でフィルタリングします。
-
-{{< copyable "" >}}
+列でフィルターするには`WHERE`句を使用します。
 
 ```sql
 SHOW BACKUPS WHERE `Progress` < 25.0;
@@ -109,4 +103,4 @@ SHOW BACKUPS WHERE `Progress` < 25.0;
 ## こちらも参照 {#see-also}
 
 -   [バックアップ](/sql-statements/sql-statement-backup.md)
--   [戻す](/sql-statements/sql-statement-restore.md)
+-   [復元する](/sql-statements/sql-statement-restore.md)

@@ -19,8 +19,6 @@ Message Queue (MQ) をダウンストリーム シンクとして使用する場
 
 以下は`Canal-JSON`の使用例です。
 
-{{< copyable "" >}}
-
 ```shell
 cdc cli changefeed create --server=http://127.0.0.1:8300 --changefeed-id="kafka-canal-json" --sink-uri="kafka://127.0.0.1:9092/topic-name?kafka-version=2.4.0&protocol=canal-json"
 ```
@@ -33,8 +31,6 @@ Canal-JSON プロトコルは、もともと MySQL 用に設計されました�
 -   TiCDC は WATERMARK イベント メッセージを送信します。
 
 以下は例です。
-
-{{< copyable "" >}}
 
 ```shell
 cdc cli changefeed create --server=http://127.0.0.1:8300 --changefeed-id="kafka-canal-json-enable-tidb-extension" --sink-uri="kafka://127.0.0.1:9092/topic-name?kafka-version=2.4.0&protocol=canal-json&enable-tidb-extension=true"
@@ -85,8 +81,8 @@ TiCDC は、DDL イベントを次の Canal-JSON 形式にエンコードしま�
 | SQLタイプ   | 物体  | isDdl が`false`の場合、各列のデータ型がJavaでどのように表現されるかを記録します。                                                       |
 | mysqlタイプ | 物体  | isDdl が`false`の場合、各列のデータ型が MySQL でどのように表現されるかを記録します。                                                    |
 | データ      | 物体  | isDdl が`false`の場合、各列の名前とそのデータ値を記録します。                                                                   |
-| 年        | 物体  | メッセージが更新イベントによって生成された場合のみ、更新前の各列の名前とデータ値が記録されます。                                                        |
-| _tidb    | 物体  | TiDB 拡張フィールド。 `enable-tidb-extension` ～ `true`を設定した場合にのみ存在します。値`commitTs` 、行の変更を引き起こしたトランザクションの TSO です。 |
+| 古い       | 物体  | メッセージが更新イベントによって生成された場合のみ、更新前の各列の名前とデータ値が記録されます。                                                        |
+| _tidb    | 物体  | TiDB 拡張フィールド。 `enable-tidb-extension` ～ `true`を設定した場合にのみ存在します。値`commitTs`は、行の変更を引き起こしたトランザクションの TSO です。 |
 
 ### DMLイベント {#dml-event}
 
@@ -204,13 +200,13 @@ Canal-JSON 形式では、 `mysqlType`フィールドと`sqlType`フィールド
 | ブロブ       | 2004年            |
 | ミディアムブロブ  | 2004年            |
 | ロングブロブ    | 2004年            |
-| 日にち       | 91               |
+| 日付        | 91               |
 | 日付時刻      | 93               |
 | タイムスタンプ   | 93               |
 | 時間        | 92               |
 | 年         | 12               |
 | 列挙型       | 4                |
-| 設定        | -7               |
+| セット       | -7               |
 | 少し        | -7               |
 | JSON      | 12               |
 
@@ -230,7 +226,7 @@ Canal-JSON 形式では、 `mysqlType`フィールドと`sqlType`フィールド
 | 署名されていない中程度の  | [0, 8388607]                               | 4                |
 | 署名されていない中程度の  | [8388608、16777215]                         | 4                |
 | 整数            | [-2147483648、2147483647]                   | 4                |
-| int 符号なし      | [0、2147483647]                             | 4                |
+| 符号なし整数        | [0、2147483647]                             | 4                |
 | int 符号なし      | [2147483648、4294967295]                    | -5               |
 | ビギント          | [-9223372036854775808、9223372036854775807] | -5               |
 | bigint 署名なし   | [0, 9223372036854775807]                   | -5               |
@@ -247,7 +243,7 @@ Canal-JSON 形式では、 `mysqlType`フィールドと`sqlType`フィールド
 | 本物           | 7                |
 | ダブル          | 8                |
 | VARCHAR      | 12               |
-| 日にち          | 91               |
+| 日付           | 91               |
 | 時間           | 92               |
 | タイムスタンプ      | 93               |
 | BLOB         | 2004年            |
@@ -262,10 +258,10 @@ Java SQL タイプの詳細については、 [Java SQL クラスの型](https:/
 
 TiCDC が`Update`イベントと`mysqlType`フィールドを含む Canal-JSON データ形式を実装する方法は、公式の Canal とは異なります。次の表に主な違いを示します。
 
-| アイテム             | TiCDC Canal-JSON               | 運河                               |
-| :--------------- | :----------------------------- | :------------------------------- |
-| `Update`種類のイベント  | `old`フィールドにはすべての列データが含まれます     | `old`フィールドには、変更された列データのみが含まれます   |
-| `mysqlType`フィールド | パラメータ付きの型の場合、型パラメータの情報は含まれません。 | パラメータ付きの型の場合、型パラメータの完全な情報が含まれます。 |
+| アイテム             | TiCDC Canal-JSON                                                                                             | 運河                               |
+| :--------------- | :----------------------------------------------------------------------------------------------------------- | :------------------------------- |
+| `Update`種類のイベント  | デフォルトでは、 `old`フィールドにはすべての列データが含まれます。 `only_output_updated_columns`が`true`の場合、 `old`フィールドには変更された列データのみが含まれます。 | `old`フィールドには、変更された列データのみが含まれます   |
+| `mysqlType`フィールド | パラメータ付きの型の場合、型パラメータの情報は含まれません。                                                                               | パラメータ付きの型の場合、型パラメータの完全な情報が含まれます。 |
 
 ### <code>Update</code>タイプのイベント {#event-of-code-update-code-type}
 
@@ -295,7 +291,7 @@ values (127, 32767, 8388607, 2147483647, 9223372036854775807);
 update tp_int set c_int = 0, c_tinyint = 0 where c_smallint = 32767;
 ```
 
-`update`ステートメントの場合、TiCDC は、以下に示すように、 `type`を`UPDATE`として持つイベント メッセージを出力します。 `update`ステートメントは、 `c_int`と`c_tinyint`列のみを変更します。出力イベント メッセージの`old`フィールドには、すべての列データが含まれます。
+`update`ステートメントの場合、TiCDC は、以下に示すように、 `type`を`UPDATE`として持つイベント メッセージを出力します。 `update`ステートメントは`c_int`と`c_tinyint`列のみを変更します。出力イベント メッセージの`old`フィールドには、すべての列データが含まれます。
 
 ```json
 {
@@ -460,40 +456,38 @@ v5.4.0より、 `Delete`イベントのうちの`old`フィールドが変更さ
 
 以下は`Delete`イベント メッセージです。 v5.4.0 より前では、 `old`フィールドには「データ」フィールドと同じ内容が含まれています。 v5.4.0 以降のバージョンでは、 `old`フィールドは null に設定されます。 「データ」フィールドを使用して、削除されたデータを取得できます。
 
-```
-{
-    "id": 0,
-    "database": "test",
-    ...
-    "type": "DELETE",
-    ...
-    "sqlType": {
+    {
+        "id": 0,
+        "database": "test",
         ...
-    },
-    "mysqlType": {
+        "type": "DELETE",
         ...
-    },
-    "data": [
-        {
-            "c_bigint": "9223372036854775807",
-            "c_int": "0",
-            "c_mediumint": "8388607",
-            "c_smallint": "32767",
-            "c_tinyint": "0",
-            "id": "2"
-        }
-    ],
-    "old": null,
-    // The following is an example before v5.4.0. The `old` field contains the same content as the "data" field.
-    "old": [
-        {
-            "c_bigint": "9223372036854775807",
-            "c_int": "0",
-            "c_mediumint": "8388607",
-            "c_smallint": "32767",
-            "c_tinyint": "0",
-            "id": "2"
-        }
-    ]
-}
-```
+        "sqlType": {
+            ...
+        },
+        "mysqlType": {
+            ...
+        },
+        "data": [
+            {
+                "c_bigint": "9223372036854775807",
+                "c_int": "0",
+                "c_mediumint": "8388607",
+                "c_smallint": "32767",
+                "c_tinyint": "0",
+                "id": "2"
+            }
+        ],
+        "old": null,
+        // The following is an example before v5.4.0. The `old` field contains the same content as the "data" field.
+        "old": [
+            {
+                "c_bigint": "9223372036854775807",
+                "c_int": "0",
+                "c_mediumint": "8388607",
+                "c_smallint": "32767",
+                "c_tinyint": "0",
+                "id": "2"
+            }
+        ]
+    }

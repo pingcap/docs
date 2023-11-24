@@ -11,7 +11,7 @@ summary: Learn the hybrid deployment topology of TiDB clusters.
 
 導入マシンには、十分なメモリを備えた複数の CPU プロセッサが搭載されています。物理マシン リソースの使用率を向上させるために、複数のインスタンスを 1 台のマシンにデプロイできます。つまり、TiDB と TiKV の CPU リソースは、NUMA ノード バインディングによって分離されます。 PD と Prometheus は一緒にデプロイされますが、それらのデータ ディレクトリでは別のファイル システムを使用する必要があります。
 
-## トポロジ情報 {#topology-information}
+## トポロジー情報 {#topology-information}
 
 | 実例           | カウント | 物理マシンの構成                    | IP                                   | コンフィグレーション                                                                                                                                                                       |
 | :----------- | :--- | :-------------------------- | :----------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -22,7 +22,7 @@ summary: Learn the hybrid deployment topology of TiDB clusters.
 
 ### トポロジテンプレート {#topology-templates}
 
--   [ハイブリッド展開用のシンプルなテンプレート](https://github.com/pingcap/docs-cn/blob/master/config-templates/simple-multi-instance.yaml)
+-   [ハイブリッド展開用のシンプルなテンプレート](https://github.com/pingcap/docs/blob/master/config-templates/simple-multi-instance.yaml)
 -   [ハイブリッド展開用の複雑なテンプレート](https://github.com/pingcap/docs/blob/master/config-templates/complex-multi-instance.yaml)
 
 上記の TiDB クラスター トポロジー ファイルの構成項目の詳細な説明については、 [TiUPを使用して TiDB を展開するためのトポロジコンフィグレーションファイル](/tiup/tiup-cluster-topology-reference.md)を参照してください。
@@ -44,23 +44,17 @@ summary: Learn the hybrid deployment topology of TiDB clusters.
 
         -   計算方法:
 
-            ```
-            readpool.unified.max-thread-count = cores * 0.8 / the number of TiKV instances
-            ```
+                readpool.unified.max-thread-count = cores * 0.8 / the number of TiKV instances
 
     -   storageCF (すべての RocksDB 列ファミリー) をメモリに自己適応するように構成するには。 `storage.block-cache.capacity`パラメータを設定すると、CF がメモリ使用量のバランスを自動的に調整できます。
 
         -   計算方法:
 
-            ```
-            storage.block-cache.capacity = (MEM_TOTAL * 0.5 / the number of TiKV instances)
-            ```
+                storage.block-cache.capacity = (MEM_TOTAL * 0.5 / the number of TiKV instances)
 
     -   複数の TiKV インスタンスが同じ物理ディスクにデプロイされている場合は、TiKV 構成に`capacity`パラメーターを追加します。
 
-        ```
-        raftstore.capacity = disk total capacity / the number of TiKV instances
-        ```
+            raftstore.capacity = disk total capacity / the number of TiKV instances
 
 -   ラベルのスケジュール設定
 
@@ -93,7 +87,7 @@ summary: Learn the hybrid deployment topology of TiDB clusters.
 
     -   `numa_node`パラメータは`numactl --membind`設定に対応します。
 
-> **ノート：**
+> **注記：**
 >
 > -   構成ファイルのテンプレートを編集するときは、必要なパラメータ、IP、ポート、およびディレクトリを変更します。
 > -   各コンポーネントは、デフォルトでグローバル`<deploy_dir>/<components_name>-<port>` `deploy_dir`として使用します。たとえば、TiDB がポート`4001`指定している場合、デフォルトではその`deploy_dir`は`/tidb-deploy/tidb-4001`です。したがって、複数インスタンスのシナリオでは、デフォルト以外のポートを指定するときに、ディレクトリを再度指定する必要はありません。

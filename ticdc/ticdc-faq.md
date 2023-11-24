@@ -28,8 +28,6 @@ summary: Learn the FAQs you might encounter when you use TiCDC.
 
 TiCDC レプリケーション タスクのステータスを表示するには、 `cdc cli`を使用します。例えば：
 
-{{< copyable "" >}}
-
 ```shell
 cdc cli changefeed list --server=http://127.0.0.1:8300
 ```
@@ -49,10 +47,7 @@ cdc cli changefeed list --server=http://127.0.0.1:8300
 ```
 
 -   `checkpoint` : TiCDC は、このタイムスタンプより前のすべてのデータをダウンストリームに複製しました。
--   `state` : このレプリケーション タスクの状態:
-    -   `normal` : タスクは正常に実行されます。
-    -   `stopped` : タスクが手動で停止されたか、エラーが発生しました。
-    -   `removed` : タスクは削除されます。
+-   `state` : このレプリケーション タスクの状態。各状態とその意味の詳細については、 [フィード状態の変更](/ticdc/ticdc-changefeed-overview.md#changefeed-state-transfer)を参照してください。
 
 > **注記：**
 >
@@ -60,7 +55,7 @@ cdc cli changefeed list --server=http://127.0.0.1:8300
 
 ## TiCDC の<code>gc-ttl</code>は何ですか? {#what-is-code-gc-ttl-code-in-ticdc}
 
-v4.0.0-rc.1 以降、PD はサービス レベルの GC セーフポイントの設定において外部サービスをサポートします。どのサービスでも GC セーフポイントを登録および更新できます。 PD は、この GC セーフポイントより後のキーと値のデータが GC によってクリーンアップされないことを保証します。
+v4.0.0-rc.1 以降、PD はサービス レベルの GC セーフポイントの設定において外部サービスをサポートしています。どのサービスでも GC セーフポイントを登録および更新できます。 PD は、この GC セーフポイントより後のキーと値のデータが GC によってクリーンアップされないことを保証します。
 
 この機能により、レプリケーション タスクが利用できないか中断された場合、TiCDC によって消費されるデータが GC によってクリーンアップされずに TiKV に保持されることが保証されます。
 
@@ -109,8 +104,6 @@ TiCDC がサービス GC セーフポイントに設定する存続時間 (TTL) 
 ## TiCDC は、Canal 形式でのデータ変更の出力をサポートしていますか? {#does-ticdc-support-outputting-data-changes-in-the-canal-format}
 
 はい。 Canal 出力を有効にするには、 `--sink-uri`パラメータでプロトコルを`canal`として指定します。例えば：
-
-{{< copyable "" >}}
 
 ```shell
 cdc cli changefeed create --server=http://127.0.0.1:8300 --sink-uri="kafka://127.0.0.1:9092/cdc-test?kafka-version=2.4.0&protocol=canal" --config changefeed.toml
@@ -224,8 +217,6 @@ TiDB v7.1.0 以降、TiCDC ではこれらの冗長な DML イベントが削除
 
 `create table test (id int primary key, ts timestamp)`ステートメントが上流の TiDB で実行されるとします。 TiCDC がこのステートメントをダウンストリームのMySQL 5.7に複製するとき、MySQL はデフォルトの構成を使用します。レプリケーション後のテーブルスキーマは以下のようになります。 `timestamp`フィールドのデフォルト値は`CURRENT_TIMESTAMP`になります。
 
-{{< copyable "" >}}
-
 ```sql
 mysql root@127.0.0.1:test> show create table test;
 +-------+----------------------------------------------------------------------------------+
@@ -246,7 +237,7 @@ v5.0.1 または v4.0.13 以降、MySQL へのレプリケーションごとに�
 
 ## TiCDC レプリケーション タスクを作成するときに<code>safe-mode</code>を<code>true</code>に設定すると、アップストリームからの<code>INSERT</code> / <code>UPDATE</code>ステートメントがダウンストリームにレプリケートされた後に<code>REPLACE INTO</code>になるのはなぜですか? {#why-do-code-insert-code-code-update-code-statements-from-the-upstream-become-code-replace-into-code-after-being-replicated-to-the-downstream-if-i-set-code-safe-mode-code-to-code-true-code-when-i-create-a-ticdc-replication-task}
 
-TiCDC は、すべてのデータが少なくとも 1 回複製されることを保証します。下流に重複データがあると書き込み競合が発生します。この問題を回避するために、TiCDC は`INSERT`と`UPDATE`ステートメントを`REPLACE INTO`のステートメントに変換します。この動作は`safe-mode`パラメータによって制御されます。
+TiCDC は、すべてのデータが少なくとも 1 回複製されることを保証します。下流に重複データがあると書き込み競合が発生します。この問題を回避するために、TiCDC は`INSERT`と`UPDATE`ステートメントを`REPLACE INTO`ステートメントに変換します。この動作は`safe-mode`パラメータによって制御されます。
 
 v6.1.3 より前のバージョンでは、 `safe-mode`デフォルトは`true`で、これはすべての`INSERT`および`UPDATE`ステートメントが`REPLACE INTO`ステートメントに変換されることを意味します。 v6.1.3 以降のバージョンでは、TiCDC はダウンストリームに重複データがあるかどうかを自動的に判断できるため、デフォルト値`safe-mode`が`false`に変更されます。重複データが検出されない場合、TiCDC は`INSERT`および`UPDATE`ステートメントを変換せずに複製します。
 
@@ -284,7 +275,11 @@ v6.5.2 より前の TiCDC バージョンの場合は、ダウンストリーム
 
 ## DML ステートメントと DDL ステートメントを実行する順序は何ですか? {#what-is-the-order-of-executing-dml-and-ddl-statements}
 
-実行順序は、DML -&gt; DDL -&gt; DML です。データ レプリケーション中に DML イベントがダウンストリームで実行されるときにテーブル スキーマが正しいことを確認するには、DDL ステートメントと DML ステートメントの実行順序を調整する必要があります。現在、TiCDC は単純なアプローチを採用しています。まず、DDL がダウンストリームに送信される前にすべての DML ステートメントを複製し、その後 DDL ステートメントを複製します。
+現在、TiCDC は次の順序を採用しています。
+
+1.  TiCDC は、DDL `CommiTs`まで、DDL ステートメントの影響を受けるテーブルのレプリケーションの進行をブロックします。これにより、DDL `CommiTs`より前に実行された DML ステートメントが最初にダウンストリームに正常にレプリケートされることが保証されます。
+2.  TiCDC は DDL ステートメントのレプリケーションを続行します。複数の DDL ステートメントがある場合、TiCDC はそれらをシリアル方式で複製します。
+3.  DDL ステートメントがダウンストリームで実行された後、TiCDC は DDL `CommiTs`の後に実行された DML ステートメントのレプリケーションを続行します。
 
 ## 上流と下流のデータが一貫しているかどうかを確認するにはどうすればよいですか? {#how-should-i-check-whether-the-upstream-and-downstream-data-is-consistent}
 
@@ -292,7 +287,12 @@ v6.5.2 より前の TiCDC バージョンの場合は、ダウンストリーム
 
 ## 単一テーブルのレプリケーションは、単一の TiCDC ノード上でのみ実行できます。複数の TiCDC ノードを使用して複数のテーブルのデータを複製することは可能ですか? {#replication-of-a-single-table-can-only-be-run-on-a-single-ticdc-node-will-it-be-possible-to-use-multiple-ticdc-nodes-to-replicate-data-of-multiple-tables}
 
-この機能は現在サポートされていませんが、将来のリリースでサポートされる可能性があります。それまでに、TiCDC は TiKVリージョンにデータ変更ログを複製する可能性があり、これはスケーラブルな処理能力を意味します。
+v7.1.0 以降、TiCDC は、TiKV リージョンの粒度でデータ変更ログをレプリケートする MQ シンクをサポートします。これにより、スケーラブルな処理能力が実現され、TiCDC が多数のリージョンを含む単一のテーブルをレプリケートできるようになります。この機能を有効にするには、 [TiCDC 構成ファイル](/ticdc/ticdc-changefeed-config.md)で次のパラメータを設定します。
+
+```toml
+[scheduler]
+enable-table-across-nodes = true
+```
 
 ## アップストリームに長時間実行されているコミットされていないトランザクションがある場合、TiCDC レプリケーションは停止しますか? {#does-ticdc-replication-get-stuck-if-the-upstream-has-long-running-uncommitted-transactions}
 

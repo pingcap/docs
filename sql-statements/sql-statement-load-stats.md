@@ -7,6 +7,10 @@ summary: An overview of the usage of LOAD STATS for the TiDB database.
 
 `LOAD STATS`ステートメントは、統計を TiDB にロードするために使用されます。
 
+> **注記：**
+>
+> この機能は[TiDB サーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless)クラスターでは使用できません。
+
 ## あらすじ {#synopsis}
 
 ```ebnf+diagram
@@ -22,15 +26,11 @@ LoadStatsStmt ::=
 
 `${stats_path}`絶対パスまたは相対パスにすることができます。相対パスを使用する場合は、 `tidb-server`で始まるパスから該当するファイルが検索されます。以下に例を示します。
 
-{{< copyable "" >}}
-
 ```sql
 LOAD STATS '/tmp/stats.json';
 ```
 
-```
-Query OK, 0 rows affected (0.00 sec)
-```
+    Query OK, 0 rows affected (0.00 sec)
 
 ## MySQLの互換性 {#mysql-compatibility}
 

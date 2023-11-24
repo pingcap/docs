@@ -78,7 +78,7 @@ URI の`[query_parameters]`については、次のパラメータを設定で�
 
 > **ヒント：**
 >
-> TiCDC の Amazon S3、GCS、および Azure Blob Storage の URI パラメーターは、 BRの URI パラメーターと同じです。詳細は[バックアップstorageのURI形式](/br/backup-and-restore-storages.md#uri-format-description)を参照してください。
+> TiCDC の Amazon S3、GCS、および Azure Blob Storage の URI パラメーターの詳細については、 [外部ストレージ サービスの URI 形式](/external-storage-uri.md)を参照してください。
 
 ### NFS のシンク URI を構成する {#configure-sink-uri-for-nfs}
 
@@ -220,7 +220,7 @@ URI の`[query_parameters]`については、次のパラメータを設定で�
     -   `ColumnIsPk` : このオプションの値が`true`の場合、列は主キーの一部です。
 -   `TableColumnsTotal` : `TableColumns`配列のサイズ。
 
-### データベースレベルの DDL イベント {#ddl-events-at-the-database-level}
+### データベースレベルのDDLイベント {#ddl-events-at-the-database-level}
 
 データベース レベルの DDL イベントがアップストリーム データベースで実行されると、TiCDC はデータベース スキーマ情報を保存するために次のパスにスキーマ ファイルを自動的に生成します。
 

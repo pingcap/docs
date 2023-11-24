@@ -10,9 +10,11 @@ TiDB クラスターには多くの監視メトリックがあります。異常
 -   `information_schema.metrics_summary`
 -   `information_schema.metrics_summary_by_label`
 
-2 つの表には、各監視メトリックを効率的に確認できるように、すべての監視データがまとめられています。 `information_schema.metrics_summary`と比較して、 `information_schema.metrics_summary_by_label`テーブルには追加の`label`列があり、さまざまなラベルに従って差別化された統計を実行します。
+> **注記：**
+>
+> 前述の 2 つの監視概要テーブルは、TiDB セルフホスト型にのみ適用され、 [TiDB Cloud](https://docs.pingcap.com/tidbcloud/)では使用できません。
 
-{{< copyable "" >}}
+2 つの表には、各監視メトリックを効率的に確認できるように、すべての監視データがまとめられています。 `information_schema.metrics_summary`と比較して、 `information_schema.metrics_summary_by_label`テーブルには追加の`label`列があり、さまざまなラベルに従って差別化された統計を実行します。
 
 ```sql
 USE information_schema;
@@ -46,8 +48,6 @@ DESC metrics_summary;
 例えば：
 
 時間範囲`'2020-03-08 13:23:00', '2020-03-08 13: 33: 00'`内で TiDB クラスター内で平均消費時間が最も長い監視項目の 3 つのグループをクエリするには、 `information_schema.metrics_summary`テーブルを直接クエリし、 `/*+ time_range() */`ヒントを使用して時間範囲を指定します。 SQL ステートメントは次のとおりです。
-
-{{< copyable "" >}}
 
 ```sql
 SELECT /*+ time_range('2020-03-08 13:23:00','2020-03-08 13:33:00') */ *
@@ -87,8 +87,6 @@ COMMENT      | The quantile of kv requests durations by store
 ```
 
 同様に、次の例では`metrics_summary_by_label`監視概要テーブルをクエリします。
-
-{{< copyable "" >}}
 
 ```sql
 SELECT /*+ time_range('2020-03-08 13:23:00','2020-03-08 13:33:00') */ *
@@ -141,8 +139,6 @@ COMMENT      | The quantile of TiDB query durations(second)
 -   期間 t2: `("2020-03-03 17:18:00", "2020-03-03 17:21:00")`
 
 2 つの時間帯の監視項目を`METRICS_NAME`に従って結合し、差分値に従ってソートします。 `TIME_RANGE`はクエリ時間を指定するヒントです。
-
-{{< copyable "" >}}
 
 ```sql
 SELECT GREATEST(t1.avg_value,t2.avg_value)/LEAST(t1.avg_value,

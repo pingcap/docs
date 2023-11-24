@@ -5,7 +5,7 @@ summary: Learn the definitions of CLI and configuration parameters of TiCDC chan
 
 # TiCDC 変更フィードの CLI およびコンフィグレーションパラメーター {#cli-and-configuration-parameters-of-ticdc-changefeeds}
 
-## 変更フィード CLI パラメーター {#changefeed-cli-parameters}
+## 変更フィード CLI パラメータ {#changefeed-cli-parameters}
 
 このセクションでは、レプリケーション (変更フィード) タスクの作成方法を示して、TiCDC 変更フィードのコマンド ライン パラメーターを紹介します。
 
@@ -25,7 +25,7 @@ Info: {"upstream_id":7178706266519722477,"namespace":"default","id":"simple-repl
 
         [scheme]://[userinfo@][host]:[port][/path]?[query_parameters]
 
-    シンク URI に`! * ' ( ) ; : @ & = + $ , / ? % # [ ]`などの特殊文字が含まれている場合は、特殊文字をエスケープする必要があります (たとえば、 [URIエンコーダ](https://meyerweb.com/eric/tools/dencoder/) 。
+    シンク URI に`! * ' ( ) ; : @ & = + $ , / ? % # [ ]`などの特殊文字が含まれている場合は、特殊文字をエスケープする必要があります (たとえば、 [URIエンコーダ](https://www.urlencoder.org/) 。
 
 -   `--start-ts` : チェンジフィードの開始 TSO を指定します。この TSO から、TiCDC クラスターはデータのプルを開始します。デフォルト値は現在時刻です。
 
@@ -53,19 +53,19 @@ enable-old-value = true
 
 # Specifies whether to enable the Syncpoint feature, which is supported since v6.3.0 and is disabled by default.
 # Since v6.4.0, only the changefeed with the SYSTEM_VARIABLES_ADMIN or SUPER privilege can use the TiCDC Syncpoint feature.
-# Note: This configuration item only takes effect if the downstream is Kafka or a storage service.
+# Note: This configuration item only takes effect if the downstream is TiDB.
 # enable-sync-point = false
 
 # Specifies the interval at which Syncpoint aligns the upstream and downstream snapshots.
 # The format is in h m s. For example, "1h30m30s".
 # The default value is "10m" and the minimum value is "30s".
-# Note: This configuration item only takes effect if the downstream is Kafka or a storage service.
+# Note: This configuration item only takes effect if the downstream is TiDB.
 # sync-point-interval = "5m"
 
 # Specifies how long the data is retained by Syncpoint in the downstream table. When this duration is exceeded, the data is cleaned up.
 # The format is in h m s. For example, "24h30m30s".
 # The default value is "24h".
-# Note: This configuration item only takes effect if the downstream is Kafka or a storage service.
+# Note: This configuration item only takes effect if the downstream is TiDB.
 # sync-point-retention = "1h"
 
 [mounter]
@@ -79,10 +79,6 @@ enable-old-value = true
 # Filter rules.
 # Filter syntax: <https://docs.pingcap.com/tidb/stable/table-filter#syntax>.
 rules = ['*.*', '!test.*']
-
-# Specifies the transaction that will be ignored with the specified start_ts.
-# The default value is an empty list.
-# IgnoreTxnStartTs = []
 
 # Event filter rules.
 # The detailed syntax is described in <https://docs.pingcap.com/tidb/stable/ticdc-filter>
@@ -103,20 +99,18 @@ rules = ['*.*', '!test.*']
 # ignore-insert-value-expr = "price > 1000 and origin = 'no where'" # Ignore insert DMLs that contain the conditions "price > 1000" and "origin = 'no where'".
 
 [scheduler]
-# Splits a table into multiple replication ranges based on the number of Regions, and these ranges can be replicated by multiple TiCDC nodes.
+# Allocate tables to multiple TiCDC nodes for replication on a per-Region basis.
 # Note: This configuration item only takes effect on Kafka changefeeds and is not supported on MySQL changefeeds.
 # The value is "false" by default. Set it to "true" to enable this feature.
 enable-table-across-nodes = false
-# When you enable this feature, it takes effect for tables with the number of Regions greater than the `region-threshold` value.
-region-threshold = 100000
-# When you enable this feature, it takes effect for tables with the number of rows modified per minute greater than the `write-key-threshold` value.
+# When `enable-table-across-nodes` is enabled, there are two allocation modes:
+# 1. Allocate tables based on the number of Regions, so that each TiCDC node handles roughly the same number of Regions. If the number of Regions for a table exceeds the value of `region-threshold`, the table will be allocated to multiple nodes for replication. The default value of `region-threshold` is 10000.
+# region-threshold = 10000
+# 2. Allocate tables based on the write traffic, so that each TiCDC node handles roughly the same number of modified rows. Only when the number of modified rows per minute in a table exceeds the value of `write-key-threshold`, will this allocation take effect.
+# write-key-threshold = 30000
 # Note:
-# * The default value of `write-key-threshold` is 0, which means that the feature does not split the table replication range according to the number of rows modified in a table by default.
-# * You can configure this parameter according to your cluster workload. For example, if it is configured as 30000, it means that the feature will split the replication range of a table when the number of modified rows per minute in the table exceeds 30000.
-# * When `region-threshold` and `write-key-threshold` are configured at the same time:
-#   TiCDC will check whether the number of modified rows is greater than `write-key-threshold` first.
-#   If not, next check whether the number of Regions is greater than `region-threshold`.
-write-key-threshold = 0
+# * The default value of `write-key-threshold` is 0, which means that the traffic allocation mode is not used by default.
+# * You only need to configure one of the two modes. If both `region-threshold` and `write-key-threshold` are configured, TiCDC prioritizes the traffic allocation mode, namely `write-key-threshold`.
 
 [sink]
 # For the sink of MQ type, you can use dispatchers to configure the event dispatcher.
@@ -175,6 +169,8 @@ enable-partition-separator = true
 # null = '\N'
 # Whether to include commit-ts in CSV rows. The default value is false.
 # include-commit-ts = false
+# The encoding method of binary data, which can be 'base64' or 'hex'. New in v7.1.2. The default value is 'base64'.
+# binary-encoding-method = 'base64'
 
 # Specifies the replication consistency configurations for a changefeed when using the redo log. For more information, see https://docs.pingcap.com/tidb/stable/ticdc-sink-to-mysql#eventually-consistent-replication-in-disaster-scenarios.
 # Note: The consistency-related configuration items only take effect when the downstream is a database and the redo log feature is enabled.

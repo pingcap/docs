@@ -35,7 +35,7 @@ summary: Learn how to build a TiDB Serverless cluster in TiDB Cloud and connect 
 
     TiDB Cloudクラスターは約 30 秒で作成されます。
 
-6.  TiDB Cloudクラスターが作成されたら、クラスター名をクリックしてクラスターの概要ページに移動し、右上隅にある**[接続]**をクリックします。接続ダイアログボックスが表示されます。
+6.  TiDB Cloudクラスターが作成されたら、クラスター名をクリックしてクラスターの概要ページに移動し、右上隅の**[接続]**をクリックします。接続ダイアログボックスが表示されます。
 
 7.  ダイアログで、希望の接続方法とオペレーティング システムを選択して、対応する接続​​文字列を取得します。このドキュメントでは、例として MySQL クライアントを使用します。
 
@@ -43,17 +43,17 @@ summary: Learn how to build a TiDB Serverless cluster in TiDB Cloud and connect 
 
 <CustomContent platform="tidb">
 
-> **ノート：**
+> **注記：**
 >
-> [TiDB サーバーレスクラスター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless)の場合、クラスターに接続するときに、ユーザー名にクラスターのプレフィックスを含め、名前を引用符で囲む必要があります。詳細については、 [ユーザー名のプレフィックス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#user-name-prefix)を参照してください。
+> [TiDB サーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless)クラスターの場合、クラスターに接続するときに、ユーザー名にクラスターのプレフィックスを含め、名前を引用符で囲む必要があります。詳細については、 [ユーザー名のプレフィックス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#user-name-prefix)を参照してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-> **ノート：**
+> **注記：**
 >
-> [TiDB サーバーレスクラスター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless)の場合、クラスターに接続するときに、ユーザー名にクラスターのプレフィックスを含め、名前を引用符で囲む必要があります。詳細については、 [ユーザー名のプレフィックス](/tidb-cloud/select-cluster-tier.md#user-name-prefix)を参照してください。
+> [TiDB サーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless)クラスターの場合、クラスターに接続するときに、ユーザー名にクラスターのプレフィックスを含め、名前を引用符で囲む必要があります。詳細については、 [ユーザー名のプレフィックス](/tidb-cloud/select-cluster-tier.md#user-name-prefix)を参照してください。
 
 </CustomContent>
 
@@ -73,19 +73,17 @@ brew install mysql-client
 
 出力は次のとおりです。
 
-```
-mysql-client is keg-only, which means it was not symlinked into /opt/homebrew,
-because it conflicts with mysql (which contains client libraries).
+    mysql-client is keg-only, which means it was not symlinked into /opt/homebrew,
+    because it conflicts with mysql (which contains client libraries).
 
-If you need to have mysql-client first in your PATH, run:
-  echo 'export PATH="/opt/homebrew/opt/mysql-client/bin:$PATH"' >> ~/.zshrc
+    If you need to have mysql-client first in your PATH, run:
+      echo 'export PATH="/opt/homebrew/opt/mysql-client/bin:$PATH"' >> ~/.zshrc
 
-For compilers to find mysql-client you may need to set:
-  export LDFLAGS="-L/opt/homebrew/opt/mysql-client/lib"
-  export CPPFLAGS="-I/opt/homebrew/opt/mysql-client/include"
-```
+    For compilers to find mysql-client you may need to set:
+      export LDFLAGS="-L/opt/homebrew/opt/mysql-client/lib"
+      export CPPFLAGS="-I/opt/homebrew/opt/mysql-client/include"
 
-MySQL クライアントを PATH に追加するには、上記の出力内で次のコマンドを見つけて (出力がドキュメント内の上記の出力と一致しない場合は、代わりに出力内の対応するコマンドを使用してください)、それを実行します。
+MySQL クライアントを PATH に追加するには、上記の出力内で次のコマンドを見つけて実行します (出力がドキュメント内の上記の出力と一致しない場合は、代わりに出力内の対応するコマンドを使用してください)。
 
 ```shell
 echo 'export PATH="/opt/homebrew/opt/mysql-client/bin:$PATH"' >> ~/.zshrc
@@ -100,9 +98,7 @@ mysql --version
 
 予想される出力の例:
 
-```
-mysql  Ver 8.0.28 for macos12.0 on arm64 (Homebrew)
-```
+    mysql  Ver 8.0.28 for macos12.0 on arm64 (Homebrew)
 
 </div>
 
@@ -122,9 +118,7 @@ mysql --version
 
 予想される出力の例:
 
-```
-mysql  Ver 15.1 Distrib 5.5.68-MariaDB, for Linux (x86_64) using readline 5.1
-```
+    mysql  Ver 15.1 Distrib 5.5.68-MariaDB, for Linux (x86_64) using readline 5.1
 
 </div>
 
@@ -132,15 +126,13 @@ mysql  Ver 15.1 Distrib 5.5.68-MariaDB, for Linux (x86_64) using readline 5.1
 
 2.  [ステップ1](#step-1-create-a-tidb-serverless-cluster)で取得した接続文字列を実行します。
 
-    {{< copyable "" >}}
-
     ```shell
     mysql --connect-timeout 15 -u '<prefix>.root' -h <host> -P 4000 -D test --ssl-mode=VERIFY_IDENTITY --ssl-ca=/etc/ssl/cert.pem -p
     ```
 
 <CustomContent platform="tidb">
 
-> **ノート：**
+> **注記：**
 >
 > -   TiDB サーバーレス クラスターに接続する場合は、 [TLS接続を使用する](https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-clusters)を行う必要があります。
 > -   TiDB サーバーレス クラスターに接続するときに問題が発生した場合は、 [TiDB サーバーレスクラスターへのセキュリティ接続](https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-clusters)を読んで詳細を確認してください。
@@ -149,7 +141,7 @@ mysql  Ver 15.1 Distrib 5.5.68-MariaDB, for Linux (x86_64) using readline 5.1
 
 <CustomContent platform="tidb-cloud">
 
-> **ノート：**
+> **注記：**
 >
 > -   TiDB サーバーレス クラスターに接続する場合は、 [TLS接続を使用する](/tidb-cloud/secure-connections-to-serverless-clusters.md)を行う必要があります。
 > -   TiDB サーバーレス クラスターに接続するときに問題が発生した場合は、 [TiDB サーバーレスクラスターへのセキュリティ接続](/tidb-cloud/secure-connections-to-serverless-clusters.md)を読んで詳細を確認してください。
