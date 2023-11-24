@@ -13,12 +13,14 @@ TiDB Cloud measures the capacity of Data Migration in Replication Capacity Units
 
 The following table lists the specifications and corresponding performances for Data Migration.
 
-| Specification | Full data migration | Incremental data migration |
-|---------------|---------------------|----------------------------|
-| 2 RCUs  | 25 MiB/s | 10,000 rows/s|
-| 4 RCUs  | 35 MiB/s | 20,000 rows/s|
-| 8 RCUs  | 40 MiB/s | 40,000 rows/s|
-| 16 RCUs | 45 MiB/s | 80,000 rows/s|
+| Specification | Full data migration | Incremental data migration | Supported maximum number of tables |
+|---------------|---------------------|----------------------------|-----------------------|
+| 2 RCUs  | 25 MiB/s | 10,000 rows/s | 500   |
+| 4 RCUs  | 35 MiB/s | 20,000 rows/s | 10000 |
+| 8 RCUs  | 40 MiB/s | 40,000 rows/s | 30000 |
+| 16 RCUs | 45 MiB/s | 80,000 rows/s | 60000 |
+
+For more information about the prices of Data Migration RCUs, see [Data Migration Cost](https://www.pingcap.com/tidb-dedicated-pricing-details/#dm-cost).
 
 Note that all the performance values in this table are maximum performances. It is assumed that there are no performance, network bandwidth, or other bottlenecks in the upstream and downstream databases. The performance values are for reference only and might vary in different scenarios.
 
