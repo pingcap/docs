@@ -29,11 +29,11 @@ TiDB Lightning processes data in parallel as much as possible. Because files mus
 
 ## Rename databases and tables
 
-TiDB Lightning follows the rules defined in the configuration file to import data to the corresponding location of the database and table. If the location of the database and table names change, you can either rename the file and then import again, or use regular expressions to replace the names online.
+TiDB Lightning follows the rules defined in the configuration file to import data to the corresponding database and table. If the database and table names change, you can either rename the file and then import again, or use regular expressions to replace the names online.
 
 ### Rename files in batch
 
-For RedHat-Like Linux systems, You can use the following `rename` command to batch rename files in the `data-source-dir` directory.
+If you are using Red Hat Linux or a distribution based on Red Hat Linux, you can use the following `rename` command to batch rename files in the `data-source-dir` directory:
 
 ```shell
 rename srcdb. tgtdb. *.sql
@@ -43,14 +43,14 @@ After you modify the database name, it is recommended that you delete the `schem
 
 ### Use regular expressions to replace names online
 
-To use regular expressions to replace names online, you can use `pattern` within [[mydumper.files]] to match filenames, and replace `schema` and `table` with the names that you want. See [Match customized files](#match-customized-files).
+To use regular expressions to replace names online, you use the `pattern` configuration within `[[mydumper.files]]` to match filenames, and replace `schema` and `table` with the names that you want. For more information, see [Match customized files](#match-customized-files).
 
 The following is an example of using regular expressions to replace names online. In this example:
 
 - The match rule for the data file `pattern` is '^({schema_regrex})\.({table_regrex})\.({file_serial_regrex})\.(csv|parquet|sql)'.
-- Specify `schema` as '$1', which means that the value of the first regular expression `schema_regrex` remains unchanged. Or specify it as a string, such as 'tgtdb', which means a fixed target database.
-- Specify `table` as '$2', which means that the value of the second regular expression `table_regrex` remains unchanged. Or specify it as a string, such as 't1', which means a fixed target table.
-- Specify `type` as '$3', which means the type of the data file. `"table-schema"` means the `schema.sql` file, or `"schema-schema"` means the `schema-create.sql` file.
+- Specify `schema` as `'$1'`, which means that the value of the first regular expression `schema_regrex` remains unchanged. Or specify `schema` as a string, such as `'tgtdb'`, which means a fixed target database name.
+- Specify `table` as `'$2'`, which means that the value of the second regular expression `table_regrex` remains unchanged. Or specify `table` as a string, such as `'t1'`, which means a fixed target table name.
+- Specify `type` as `'$3'`,  which means the data file typ. You can specify `type` as either `"table-schema"` (representing the `schema.sql` file) or `"schema-schema"` (representing the `schema-create.sql` file).
 
 ```toml
 [mydumper]
