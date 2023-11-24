@@ -30,28 +30,31 @@ TiDB Lightning processes data in parallel as much as possible. Because files mus
 
 ## Rename databases and tables
 
-TiDB Lightning follows the rules defined in the configuration file to import data to the corresponding database and table. If the database and table names change, you can either rename the file and then import again, or use regular expressions to replace the names online.
+TiDB Lightning follows filename patterns to import data to the corresponding database and table. If the database or table names change, you can either rename the files and then import them, or use regular expressions to replace the names online.
 
 ### Rename files in batch
 
-If you are using Red Hat Linux or a distribution based on Red Hat Linux, you can use the following `rename` command to batch rename files in the `data-source-dir` directory:
+If you are using Red Hat Linux or a distribution based on Red Hat Linux, you can use the `rename` command to batch rename files in the `data-source-dir` directory. 
+
+For example:
+
 
 ```shell
 rename srcdb. tgtdb. *.sql
 ```
 
-After you modify the database name, it is recommended that you delete the `schema-create.sql` file that contains the `CREATE DATABASE` DDL statement in the `data-source-dir` directory. If you are modifying a table name, you also need to modify the `schema.sql` file that contains the `CREATE TABLE` DDL statement with the table name.
+After you modify the database name, it is recommended that you delete the `schema-create.sql` file that contains the `CREATE DATABASE` DDL statement from the `data-source-dir` directory. If you want to modify the table name as well, you also need to modify the `schema.sql` file that contains the `CREATE TABLE` DDL statement with the table name.
 
 ### Use regular expressions to replace names online
 
-To use regular expressions to replace names online, you use the `pattern` configuration within `[[mydumper.files]]` to match filenames, and replace `schema` and `table` with the names that you want. For more information, see [Match customized files](#match-customized-files).
+To use regular expressions to replace names online, you can use the `pattern` configuration within `[[mydumper.files]]` to match filenames, and replace `schema` and `table` with your desired names. For more information, see [Match customized files](#match-customized-files).
 
 The following is an example of using regular expressions to replace names online. In this example:
 
-- The match rule for the data file `pattern` is '^({schema_regrex})\.({table_regrex})\.({file_serial_regrex})\.(csv|parquet|sql)'.
+- The match rule for the data file `pattern` is `^({schema_regrex})\.({table_regrex})\.({file_serial_regrex})\.(csv|parquet|sql)`.
 - Specify `schema` as `'$1'`, which means that the value of the first regular expression `schema_regrex` remains unchanged. Or specify `schema` as a string, such as `'tgtdb'`, which means a fixed target database name.
 - Specify `table` as `'$2'`, which means that the value of the second regular expression `table_regrex` remains unchanged. Or specify `table` as a string, such as `'t1'`, which means a fixed target table name.
-- Specify `type` as `'$3'`,  which means the data file typ. You can specify `type` as either `"table-schema"` (representing the `schema.sql` file) or `"schema-schema"` (representing the `schema-create.sql` file).
+- Specify `type` as `'$3'`, which means the data file type. You can specify `type` as either `"table-schema"` (representing the `schema.sql` file) or `"schema-schema"` (representing the `schema-create.sql` file).
 
 ```toml
 [mydumper]
@@ -72,7 +75,7 @@ table = '$2'
 type = '$3'
 ```
 
-If you are using `gzip` to back up data files, you need to configure the compression format accordingly. The matching rule of the data file `pattern` is '^({schema_regrex})\.({table_regrex})\.({file_serial_regrex})\.(csv|parquet|sql)\.(gz)'. You can specify `compression` as '$4' to represent the compressed file format. For example:
+If you are using `gzip` to back up data files, you need to configure the compression format accordingly. The matching rule of the data file `pattern` is `'^({schema_regrex})\.({table_regrex})\.({file_serial_regrex})\.(csv|parquet|sql)\.(gz)'`. You can specify `compression` as `'$4'` to represent the compressed file format. For example:
 
 ```toml
 [mydumper]
