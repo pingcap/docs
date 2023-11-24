@@ -47,14 +47,14 @@ Currently, this feature is not supported. It will be supported as soon as possib
 
 #### Other upgrade methods
 
-You can use the following steps to upgrade TiDB manually or by using a script:
+You can take the following steps to upgrade TiDB manually or by using a script:
 
 1. Send the HTTP upgrade start request to any TiDB node in the cluster: `curl -X POST http://{TiDBIP}:10080/upgrade/start`.
    * The TiDB cluster enters the **Upgrading** state.
    * The DDL operations to be performed are paused.
 
 2. Replace the TiDB binary and perform a rolling upgrade. This process is the same as the original upgrade process.
-    * Perform system DDL operations during the upgrade process.
+    * The system DDL operations are performed during the upgrade process.
 
 3. After all TiDB nodes in the cluster are upgraded successfully, send the HTTP upgrade finish request to any TiDB node: `curl -X POST http://{TiDBIP}:10080/upgrade/finish`.
     * The paused DDL operations of users are resumed.
