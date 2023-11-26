@@ -24,6 +24,7 @@ This document is targeted for the following upgrade paths:
 > **Note:**
 >
 > - If your cluster to be upgraded is v3.1 or an earlier version (v3.0 or v2.1), the direct upgrade to v7.4.0 is not supported. You need to upgrade your cluster first to v4.0 and then to v7.4.0.
+> - If your cluster to be upgraded is earlier than v6.2, the upgrade might get stuck when you upgrade the cluster to v6.2 or later versions in some scenarios. You can refer to [How to fix the issue](#how-to-fix-the-issue-that-the-upgrade-gets-stuck-when-upgrading-to-v620-or-later-versions).
 > - TiDB nodes use the value of the [`server-version`](/tidb-configuration-file.md#server-version) configuration item to verify the current TiDB version. Therefore, to avoid unexpected behaviors, before upgrading the TiDB cluster, you need to set the value of `server-version` to empty or the real version of the current TiDB cluster.
 
 ## Upgrade caveat
@@ -204,6 +205,29 @@ tiup cluster upgrade <cluster-name> v7.4.0
 >
 > + Try to avoid creating a new clustered index table when you apply rolling updates to the clusters using TiDB Binlog.
 
+#### Specify the component version during upgrade
+
+Starting from tiup-cluster v1.14.0, you can specify certain components to a specific version during cluster upgrade. These components will remain at their fixed version in the subsequent upgrade unless you specify a different version.
+
+> **Note:**
+>
+> For components that share a version number, such as TiDB, TiKV, PD, and TiCDC, there are no complete tests to ensure that they work properly in a mixed-version deployment scenario. Ensure that you use this section only in test environments, or with the help of [technical support](/support.md).
+
+```shell
+tiup cluster upgrade -h | grep "version string"
+      --alertmanager-version string        Fix the version of alertmanager and no longer follows the cluster version.
+      --blackbox-exporter-version string   Fix the version of blackbox-exporter and no longer follows the cluster version.
+      --cdc-version string                 Fix the version of cdc and no longer follows the cluster version.
+      --ignore-version-check               Ignore checking if target version is bigger than current version.
+      --node-exporter-version string       Fix the version of node-exporter and no longer follows the cluster version.
+      --pd-version string                  Fix the version of pd and no longer follows the cluster version.
+      --tidb-dashboard-version string      Fix the version of tidb-dashboard and no longer follows the cluster version.
+      --tiflash-version string             Fix the version of tiflash and no longer follows the cluster version.
+      --tikv-cdc-version string            Fix the version of tikv-cdc and no longer follows the cluster version.
+      --tikv-version string                Fix the version of tikv and no longer follows the cluster version.
+      --tiproxy-version string             Fix the version of tiproxy and no longer follows the cluster version.
+```
+
 #### Offline upgrade
 
 1. Before the offline upgrade, you first need to stop the entire cluster.
@@ -271,6 +295,30 @@ Re-execute the `tiup cluster upgrade` command to resume the upgrade. The upgrade
     ```shell
     tiup cluster replay <audit-id>
     ```
+
+### How to fix the issue that the upgrade gets stuck when upgrading to v6.2.0 or later versions?
+
+Starting from v6.2.0, TiDB enables the [concurrent DDL framework](/ddl-introduction.md#how-the-online-ddl-asynchronous-change-works-in-tidb) by default to execute concurrent DDLs. This framework changes the DDL job storage from a KV queue to a table queue. This change might cause the upgrade to get stuck in some scenarios. The following are some scenarios that might trigger this issue and the corresponding solutions:
+
+- Upgrade gets stuck due to plugin loading
+
+    During the upgrade, loading certain plugins that require executing DDL statements might cause the upgrade to get stuck.
+
+    **Solution**: avoid loading plugins during the upgrade. Instead, load plugins only after the upgrade is completed.
+
+- Upgrade gets stuck due to using the `kill -9` command for offline upgrade
+
+    - Precautions: avoid using the `kill -9` command to perform the offline upgrade. If it is necessary, restart the new version TiDB node after 2 minutes.
+    - If the upgrade is already stuck, restart the affected TiDB node. If the issue has just occurred, it is recommended to restart the node after 2 minutes.
+
+- Upgrade gets stuck due to DDL Owner change
+
+    In multi-instance scenarios, network or hardware failures might cause DDL Owner change. If there are unfinished DDL statements in the upgrade phase, the upgrade might get stuck.
+
+    **Solution**:
+
+    1. Terminate the stuck TiDB node (avoid using `kill -9`).
+    2. Restart the new version TiDB node.
 
 ### The evict leader has waited too long during the upgrade. How to skip this step for a quick upgrade?
 
