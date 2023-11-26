@@ -22,12 +22,6 @@ This document gives an overview of the data migration solutions that you can use
 
 You might choose different migration solutions according to the database type, deployment location, application data size, and application needs. The following sections introduce some common migration scenarios, and you can refer to these sections to determine the most suitable solution according to your needs.
 
-## Migrate data from Vitess to TiDB
-
-To migrate data from Vitess to TiDB, the following guide is available:
-
-- [Migrate Data from Vitess to TiDB](/migrate-from-vitess.md)
-
 ## Migrate data from Aurora MySQL to TiDB
 
 When you migrate data from Aurora to a TiDB cluster deployed on AWS, your data migration takes two operations: full data migration and incremental replication. You can choose the corresponding operation according to your application needs.
@@ -53,6 +47,12 @@ Suppose that your application uses MySQL shards for data storage, and you need t
 If the data size of the sharded tables is large (for example, larger than 1 TiB), and you do not allow other applications to write to TiDB during the migration period, you can use TiDB Lightning to quickly merge and import the sharded tables. Then, you can use DM to replicate incremental sharding data (binlog) based on your application needs.
 
 - [Migrate and Merge MySQL Shards of Large Datasets to TiDB](/migrate-large-mysql-shards-to-tidb.md)
+
+## Migrate data from Vitess to TiDB
+
+To migrate data from Vitess to TiDB, the following guide is available:
+
+- [Migrate Data from Vitess to TiDB](/migrate-from-vitess.md)
 
 ## Migrate data from files to TiDB
 
