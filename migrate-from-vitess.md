@@ -19,7 +19,7 @@ Because both Vitess and TiDB support the MySQL protocol and SQL dialect, changes
 
 The following two examples show how Dumpling and TiDB Lightning work together to migrate data from Vitess to TiDB.
 
--  In this example, TiDB Lightning uses the [logical import mode], which first encodes data into SQL statements and then runs the SQL statements to import data.
+- In this example, TiDB Lightning uses the [logical import mode], which first encodes data into SQL statements and then runs the SQL statements to import data.
 
     ![Vitess to TiDB Migration with TiDB backend](/media/vitess_to_tidb.png)
 
