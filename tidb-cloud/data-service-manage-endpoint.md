@@ -53,10 +53,10 @@ In TiDB Cloud Data Service, you can generate one or multiple endpoints automatic
 
 5. Check the generated endpoint name, SQL statements, properties, and parameters of the new endpoint.
 
-    - Endpoint name: the generated endpoint name is in the `/<name of the selected table>` format, and the request method (such as `GET`, `POST`, and `PUT`) is displayed before the endpoint name. For example, if the selected table name is `sample_table` and the selected operation is **POST Create**, the generated endpoint is displayed as `POST /sample_table`.
+    - Endpoint name: the generated endpoint name is in the `/<name of the selected table>` format, and the request method (such as `GET`, `POST`, and `PUT`) is displayed before the endpoint name. For example, if the selected table name is `sample_table` and the selected operation is `POST (Create)`, the generated endpoint is displayed as `POST /sample_table`.
 
-        - If a batch operation is selected, TiDB Cloud Data Service appends `/bulk` to the name of the generated endpoint. For example, if the selected table name is `/sample_table` and the selected operation is **POST (Batch Create)**, the generated endpoint is displayed as `POST /sample_table/bulk`.
-        - If there has been already an endpoint with the same request method and endpoint name, TiDB Cloud Data Service appends `_dump` and `_<random letters>` to the name of the generated endpoint. For example, `/sample_table_dump_EUKRfl`.
+        - If a batch operation is selected, TiDB Cloud Data Service appends `/bulk` to the name of the generated endpoint. For example, if the selected table name is `/sample_table` and the selected operation is `POST (Batch Create)`, the generated endpoint is displayed as `POST /sample_table/bulk`.
+        - If there has been already an endpoint with the same request method and endpoint name, TiDB Cloud Data Service appends `_dump_<random letters>` to the name of the generated endpoint. For example, `/sample_table_dump_EUKRfl`.
 
     - SQL statements: TiDB Cloud Data Service automatically writes SQL statements for the generated endpoints according to the table column specifications and the selected endpoint operations. You can click the endpoint name to view its SQL statements in the middle section of the page.
     - Endpoint properties: TiDB Cloud Data Service automatically configures the endpoint path, request method, timeout, and tag according to your selection. You can find the properties in the right pane of the page.
@@ -158,7 +158,7 @@ On the SQL editor of the endpoint details page, you can write and run the SQL st
 
     - If you have only one statement in the editor, to run it, press **⌘ + Enter** or click <svg width="1rem" height="1rem" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.70001 20.7756C6.01949 20.3926 6.00029 19.5259 6.00034 19.0422L6.00034 12.1205L6 5.33028C6 4.75247 6.00052 3.92317 6.38613 3.44138C6.83044 2.88625 7.62614 2.98501 7.95335 3.05489C8.05144 3.07584 8.14194 3.12086 8.22438 3.17798L19.2865 10.8426C19.2955 10.8489 19.304 10.8549 19.3126 10.8617C19.4069 10.9362 20 11.4314 20 12.1205C20 12.7913 19.438 13.2784 19.3212 13.3725C19.307 13.3839 19.2983 13.3902 19.2831 13.4002C18.8096 13.7133 8.57995 20.4771 8.10002 20.7756C7.60871 21.0812 7.22013 21.0683 6.70001 20.7756Z" fill="currentColor"></path></svg>**Run**.
 
-    - If you have multiple statements in the editor, to run one or several of them sequentially, place your curor on your target statement or select the lines of the target statements with your cursor, and then press **⌘ + Enter** or click **Run**.
+    - If you have multiple statements in the editor, to run one or several of them sequentially, place your cursor on your target statement or select the lines of the target statements with your cursor, and then press **⌘ + Enter** or click **Run**.
 
     - To run all statements in the editor sequentially, press **⇧ + ⌘ + Enter**, or select the lines of all statements with your cursor and click **Run**.
 
@@ -170,7 +170,7 @@ On the SQL editor of the endpoint details page, you can write and run the SQL st
 
     - If you have only one statement in the editor, to run it, press **Ctrl + Enter** or click <svg width="1rem" height="1rem" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.70001 20.7756C6.01949 20.3926 6.00029 19.5259 6.00034 19.0422L6.00034 12.1205L6 5.33028C6 4.75247 6.00052 3.92317 6.38613 3.44138C6.83044 2.88625 7.62614 2.98501 7.95335 3.05489C8.05144 3.07584 8.14194 3.12086 8.22438 3.17798L19.2865 10.8426C19.2955 10.8489 19.304 10.8549 19.3126 10.8617C19.4069 10.9362 20 11.4314 20 12.1205C20 12.7913 19.438 13.2784 19.3212 13.3725C19.307 13.3839 19.2983 13.3902 19.2831 13.4002C18.8096 13.7133 8.57995 20.4771 8.10002 20.7756C7.60871 21.0812 7.22013 21.0683 6.70001 20.7756Z" fill="currentColor"></path></svg>**Run**.
 
-    - If you have multiple statements in the editor, to run one or several of them sequentially, place your curor on your target statement or select the lines of the target statements with your cursor press **Ctrl + Enter** or click **Run**.
+    - If you have multiple statements in the editor, to run one or several of them sequentially, place your cursor on your target statement or select the lines of the target statements with your cursor press **Ctrl + Enter** or click **Run**.
 
     - To run all statements in the editor sequentially, press **Shift + Ctrl + Enter**, or select the lines of all statements with your cursor and click **Run**.
 
