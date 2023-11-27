@@ -117,8 +117,12 @@ On the right pane of the endpoint details page, you can click the **Properties**
     > - The `page_size` must be less than or equal to the **Max Rows** property. Otherwise, an error is returned.
 
 - **Cache Response**: this property is available only when the request method is `GET`. When **Cache Response** is enabled, TiDB Cloud Data Service can cache the response returned by your `GET` requests within a specified time-to-live (TTL) period.
-- **Time-to-live (s)**: this property is available only when **Cache Response** is enabled. You can use it to specify the time-to-live (TTL) period in seconds for cached response. During the TTL period, if you make the same `GET` requests again, Data Service returns the cached response directly instead of fetching data from the target database again, which improves your query performance.
-- **Batch Operation**: this property is visible only when the request method is `POST` or `PUT`. When **Batch Operation** is enabled, you can operate on multiple rows in a single request. For example, you can insert multiple rows of data in a single `POST` request by adding an array of data objects in the `--data-raw` option of your curl command when calling the endpoint.
+- **Time-to-live(s)**: this property is available only when **Cache Response** is enabled. You can use it to specify the time-to-live (TTL) period in seconds for cached response. During the TTL period, if you make the same `GET` requests again, Data Service returns the cached response directly instead of fetching data from the target database again, which improves your query performance.
+- **Batch Operation**: this property is visible only when the request method is `POST` or `PUT`. When **Batch Operation** is enabled, you can operate on multiple rows in a single request. For example, you can insert multiple rows of data in a single `POST` request by putting an array of data objects to the `items` field of an object in the `--data-raw` option of your curl command when [calling the endpoint](#call-an-endpoint).
+
+    > **Note:**
+    >
+    > The endpoint with **Batch Operation** enabled supports both array and object formats for the request body: `[{dataObject1}, {dataObject2}]` and `{items: [{dataObject1}, {dataObject2}]}`. For better compatibility with other systems, it is recommended that you use the object format `{items: [{dataObject1}, {dataObject2}]}`.
 
 ### Write SQL statements
 
@@ -283,13 +287,17 @@ TiDB Cloud Data Service generates code examples to help you call an endpoint. To
 
     ```bash
     curl --digest --user '<Public Key>:<Private Key>' \
-      --request POST 'https://<region>.data.tidbcloud.com/api/v1beta/app/<App ID>/endpoint/<Endpoint Path>' \
-      --header 'content-type: application/json'\
-      --header 'endpoint-type: draft'
-      --data-raw '[{
-        "age": "${age}",
-        "career": "${career}"
-    }]'
+     --request POST 'https://<region>.data.tidbcloud.com/api/v1beta/app/<App ID>/endpoint/<Endpoint Path>' \
+     --header 'content-type: application/json'\
+     --header 'endpoint-type: draft'
+     --data-raw '{
+      "items": [
+        {
+          "age": "${age}",
+          "career": "${career}"
+        }
+      ]
+    }'
     ```
 
     </div>
@@ -302,12 +310,16 @@ TiDB Cloud Data Service generates code examples to help you call an endpoint. To
 
     ```bash
     curl --digest --user '<Public Key>:<Private Key>' \
-      --request POST 'https://<region>.data.tidbcloud.com/api/v1beta/app/<App ID>/endpoint/<Endpoint Path>'
-      --header 'content-type: application/json'\
-      --data-raw '[{
-        "age": "${age}",
-        "career": "${career}"
-    }]'
+     --request POST 'https://<region>.data.tidbcloud.com/api/v1beta/app/<App ID>/endpoint/<Endpoint Path>' \
+     --header 'content-type: application/json'\
+     --data-raw '{
+      "items": [
+        {
+          "age": "${age}",
+          "career": "${career}"
+        }
+      ]
+    }'
     ```
 
     </div>
@@ -324,7 +336,7 @@ TiDB Cloud Data Service generates code examples to help you call an endpoint. To
     - If the request method of your endpoint is `GET` and **Pagination** is enabled for the endpoint, you can paginate the results by updating the values of `page=<Page Number>` and `page_size=<Page Size>` with your desired values. For example, to get the second page with 10 items per page, use `page=2` and `page_size=10`.
     - If the request method of your endpoint is `POST` or `PUT`, fill in the `--data-raw` option according to the rows of data that you want to operate on.
 
-        - For endpoints with **Batch Operation** enabled, the `--data-raw` option accepts an array of data objects so you can operate on multiple rows of data using one endpoint.
+        - For endpoints with **Batch Operation** enabled, the `--data-raw` option accepts an object with an `items` field containing an array of data objects so you can operate on multiple rows of data using one endpoint.
         - For endpoints with **Batch Operation** not enabled, the `--data-raw` option only accepts one data object.
 
     - If the endpoint contains parameters, specify the parameter values when calling the endpoint.
