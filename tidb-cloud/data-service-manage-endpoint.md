@@ -117,17 +117,12 @@ On the right pane of the endpoint details page, you can click the **Properties**
     > - The `page_size` must be less than or equal to the **Max Rows** property. Otherwise, an error is returned.
 
 - **Cache Response**: this property is available only when the request method is `GET`. When **Cache Response** is enabled, TiDB Cloud Data Service can cache the response returned by your `GET` requests within a specified time-to-live (TTL) period.
-<<<<<<< Updated upstream
-- **Time-to-live (s)**: this property is available only when **Cache Response** is enabled. You can use it to specify the time-to-live (TTL) period in seconds for cached response. During the TTL period, if you make the same `GET` requests again, Data Service returns the cached response directly instead of fetching data from the target database again, which improves your query performance.
-- **Batch Operation**: this property is visible only when the request method is `POST` or `PUT`. When **Batch Operation** is enabled, you can operate on multiple rows in a single request. For example, you can insert multiple rows of data in a single `POST` request by adding an array of data objects in the `--data-raw` option of your curl command when calling the endpoint.
-=======
 - **Time-to-live(s)**: this property is available only when **Cache Response** is enabled. You can use it to specify the time-to-live (TTL) period in seconds for cached response. During the TTL period, if you make the same `GET` requests again, Data Service returns the cached response directly instead of fetching data from the target database again, which improves your query performance.
 - **Batch Operation**: this property is visible only when the request method is `POST` or `PUT`. When **Batch Operation** is enabled, you can operate on multiple rows in a single request. For example, you can insert multiple rows of data in a single `POST` request by putting an array of data objects to the `items` field of an object in the `--data-raw` option of your curl command when calling the endpoint.
 
     > **Note:**
     >
     > The endpoint with **Batch Operation** enabled supports both array and object formats for the request body: `[{dataObject1}, {dataObject2}]` and `{items: [{dataObject1}, {dataObject2}]}`. For better compatibility with other systems, it is recommended that you use the object format `{items: [{dataObject1}, {dataObject2}]}`.
->>>>>>> Stashed changes
 
 ### Write SQL statements
 
