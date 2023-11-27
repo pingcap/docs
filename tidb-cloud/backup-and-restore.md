@@ -14,7 +14,7 @@ This document describes how to back up and restore your TiDB Dedicated cluster d
 
 ## Limitations
 
-- For clusters that are v6.2.0 or later, TiDB Dedicated supports restoring user accounts and sql bindings from backups by default.
+- For clusters of v6.2.0 or later versions, TiDB Dedicated supports restoring user accounts and SQL bindings from backups by default.
 - TiDB Dedicated does not support restoring system variables stored in the `mysql` schema. 
 - It is recommended that you import data first, then perform a **manual** snapshot backup, and finally enable Point-in-time Restore. Because the data imported through the TiDB Cloud console **does not** generate change logs, it cannot be automatically detected and backed up. For more information, see [Import CSV Files from Amazon S3 or GCS into TiDB Cloud](/tidb-cloud/import-csv-files.md). 
 - If you turn on and off Point-in-time Restore multiple times, you can only choose a time point within the recoverable range after the most recent Point-in-time Restore is enabled. The earlier recoverable range is not accessible.
