@@ -101,12 +101,13 @@ Connect to your TiDB cluster depending on the TiDB deployment option you have se
 3. Click **Allow Access from Anywhere**.
 
     For more details about how to obtain the connection string, refer to [TiDB Dedicated standard connection](https://docs.pingcap.com/tidbcloud/connect-via-standard-connection).
+4. Click **Download CA cert** to download it locally, and save location signed as `<ca_cert>`.
 
-4. Launch Navicat and click the **Connection** in the upper-left corner. In the dropdown menu, click **MySQL** as the database type.
+5. Launch Navicat and click the **Connection** in the upper-left corner. In the dropdown menu, click **MySQL** as the database type.
 
     ![Navicat: add new connection](/media/develop/navicat-add-new-connection.jpg)
 
-5. In the setting panel, configure the following connection parameters:
+6. In the setting panel, configure the following connection parameters:
 
     - **Connection Name**: give this connection a meaningful name.
     - **Host**: enter the `host` parameter from the TiDB Cloud connection dialog.
@@ -116,9 +117,13 @@ Connect to your TiDB cluster depending on the TiDB deployment option you have se
 
     ![Navicat: configure connection general panel for TiDB Dedicated](/media/develop/navicat-connection-config-dedicated-general.png)
 
-6. **Test Connection** to validate the connection to the TiDB Dedicated cluster.
+7. Click the **SSL** tab, check **Use SSL**, **Use authentication** and **Verify server certificate against CA**. Then enter the `<ca_cert>` which you downloaded from TiDB Cloud to **CA Certificate**.
 
-7. If the connection test is successful, you can see the **Connection Successful** message. Click **Save** to save the connection configuration.
+    ![Navicat: configure connection SSL panel for TiDB Dedicated](/media/develop/navicat-connection-config-dedicated-ssl.jpg)
+
+8. **Test Connection** to validate the connection to the TiDB Dedicated cluster.
+
+9. If the connection test is successful, you can see the **Connection Successful** message. Click **Save** to save the connection configuration.
 
 </div>
 <div label="TiDB Self-Hosted">
