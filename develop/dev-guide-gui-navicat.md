@@ -71,7 +71,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you have se
     >
     > If you have created a password before, you can either use the original password or click **Reset password** to generate a new one.
 
-5. Launch Navicat and click the **Connection** in the upper-left corner. In the selection panel, click **MySQL**  as the database type.
+5. Launch Navicat and click the **Connection** in the upper-left corner. In the dropdown menu, click **MySQL**  as the database type.
 
     ![Navicat: add new connection](/media/develop/navicat-add-new-connection.jpg)
 
