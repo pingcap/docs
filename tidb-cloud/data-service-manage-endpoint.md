@@ -53,10 +53,10 @@ In TiDB Cloud Data Service, you can generate one or multiple endpoints automatic
 
 5. Check the generated endpoint name, SQL statements, properties, and parameters of the new endpoint.
 
-    - Endpoint name: the generated endpoint name is in the `/<name of the selected table>` format, and the request method (such as `GET`, `POST`, and `PUT`) is displayed before the endpoint name. For example, if the selected table name is `sample-table` and the selected operation is **POST Create**, the generated endpoint is displayed as `POST /sample-table`.
+    - Endpoint name: the generated endpoint name is in the `/<name of the selected table>` format, and the request method (such as `GET`, `POST`, and `PUT`) is displayed before the endpoint name. For example, if the selected table name is `sample_table` and the selected operation is **POST Create**, the generated endpoint is displayed as `POST /sample_table`.
 
-        - If a batch operation is selected, TiDB Cloud Data Service appends `/bulk` to the name of the generated endpoint. For example, if the selected table name is `/sample-table` and the selected operation is **POST (Batch Create)**, the generated endpoint is displayed as `POST /sample-table/bulk`.
-        - If there has been already an endpoint with the same request method and endpoint name, TiDB Cloud Data Service appends `_dump` and `_<random letters>` to the name of the generated endpoint. For example, `/sample-table_dump_EUKRfl`.
+        - If a batch operation is selected, TiDB Cloud Data Service appends `/bulk` to the name of the generated endpoint. For example, if the selected table name is `/sample_table` and the selected operation is **POST (Batch Create)**, the generated endpoint is displayed as `POST /sample_table/bulk`.
+        - If there has been already an endpoint with the same request method and endpoint name, TiDB Cloud Data Service appends `_dump` and `_<random letters>` to the name of the generated endpoint. For example, `/sample_table_dump_EUKRfl`.
 
     - SQL statements: TiDB Cloud Data Service automatically writes SQL statements for the generated endpoints according to the table column specifications and the selected endpoint operations. You can click the endpoint name to view its SQL statements in the middle section of the page.
     - Endpoint properties: TiDB Cloud Data Service automatically configures the endpoint path, request method, timeout, and tag according to your selection. You can find the properties in the right pane of the page.
