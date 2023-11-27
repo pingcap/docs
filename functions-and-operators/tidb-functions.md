@@ -129,9 +129,7 @@ select tidb_decode_key('7480000000000000FF3E5F720400000000FF0000000601633430FF33
 1 row in set (0.001 sec)
 ```
 
-The first region of a table will start with a key that only has the `table_id` of the table. The last region of the table ends with `table_id` + 1. Any regions in between will have longer keys that includes a `_tidb_rowid` or `handle`.
-
-{{< copyable "sql" >}}
+The first Region of a table starts with a key that only has the `table_id` of the table. The last Region of the table ends with `table_id + 1`. Any Regions in between have longer keys that includes a `_tidb_rowid` or `handle`.
 
 ```sql
 SELECT TABLE_NAME, START_KEY, END_KEY FROM information_schema.TIKV_REGION_STATUS WHERE TABLE_NAME='stock' AND IS_INDEX=0;
