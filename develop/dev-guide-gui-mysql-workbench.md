@@ -79,7 +79,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you have se
 
         ![MySQL Workbench: store the password of TiDB Serverless in keychain](/media/develop/mysql-workbench-store-password-in-keychain.png)
 
-   The following figure shows an example of the connection parameters:
+    The following figure shows an example of the connection parameters:
 
     ![MySQL Workbench: configure connection settings for TiDB Serverless](/media/develop/mysql-workbench-connection-config-serverless-parameters.png)
 
@@ -112,7 +112,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you have se
 
         ![MySQL Workbench: store the password of TiDB Dedicated in keychain](/media/develop/mysql-workbench-store-dedicated-password-in-keychain.png)
 
-   The following figure shows an example of the connection parameters:
+    The following figure shows an example of the connection parameters:
 
     ![MySQL Workbench: configure connection settings for TiDB Dedicated](/media/develop/mysql-workbench-connection-config-dedicated-parameters.png)
 
@@ -137,8 +137,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you have se
 
         ![MySQL Workbench: store the password of TiDB Self-Hosted in keychain](/media/develop/mysql-workbench-store-self-hosted-password-in-keychain.png)
 
-
-   The following figure shows an example of the connection parameters:
+    The following figure shows an example of the connection parameters:
 
     ![MySQL Workbench: configure connection settings for TiDB Self-Hosted](/media/develop/mysql-workbench-connection-config-self-hosted-parameters.png)
 
@@ -165,6 +164,6 @@ Ask questions on the [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc), or
 
 <CustomContent platform="tidb-cloud">
 
-Ask questions on the [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc), or [create a support ticket](https://support.pingcap.com/).
+Ask questions on the [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc), or [create a support ticket](/tidb-cloud/tidb-cloud-support.md).
 
 </CustomContent>
