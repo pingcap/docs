@@ -164,6 +164,6 @@ Ask questions on the [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc), or
 
 <CustomContent platform="tidb-cloud">
 
-Ask questions on the [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc), or [create a support ticket](https://support.pingcap.com/).
+Ask questions on the [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc), or [create a support ticket](/tidb-cloud/tidb-cloud-support.md).
 
 </CustomContent>
