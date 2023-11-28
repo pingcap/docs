@@ -83,7 +83,11 @@ Download [sync-diff-inspector](/sync-diff-inspector/sync-diff-inspector-overview
 
 | Package name | OS | Architecture | SHA256 checksum |
 |:---|:---|:---|:---|
-| [tidb-enterprise-tools-nightly-linux-amd64.tar.gz](https://download.pingcap.org/tidb-enterprise-tools-nightly-linux-amd64.tar.gz) | Linux | amd64 | [tidb-enterprise-tools-nightly-linux-amd64.sha256](https://download.pingcap.org/tidb-enterprise-tools-nightly-linux-amd64.sha256) |
+| `https://download.pingcap.org/tidb-toolkit-{version}-linux-amd64.tar.gz` | Linux | amd64 | `https://download.pingcap.org/tidb-toolkit-{version}-linux-amd64.sha256` |
+
+> **Note:**
+>
+> `{version}` in the download link is the version number of TiDB. For example, the download link for `v5.3.4` is `https://download.pingcap.org/tidb-toolkit-v5.3.4-linux-amd64.tar.gz`. You can view the currently released versions in [TiDB Releases](https://github.com/pingcap/tidb/releases).
 
 ## TiCDC
 
