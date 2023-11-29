@@ -165,6 +165,7 @@ The following TiKV configuration items can be modified dynamically:
 | `raftstore.store-max-batch-size` | Raft state machines process requests for flushing logs into the disk in batches by the BatchSystem. This configuration item specifies the maximum number of Raft state machines that can process the requests in one batch. |
 | `raftstore.store-io-pool-size` | The number of threads that process Raft I/O tasks, which is also the size of the StoreWriter thread pool (**DO NOT** modify this value from a non-zero value to 0 or from 0 to a non-zero value) |
 | `readpool.unified.max-thread-count` | The maximum number of threads in the thread pool that uniformly processes read requests, which is the size of the UnifyReadPool thread pool |
+| `readpool.unified.max-tasks-per-worker` | The maximum number of tasks allowed for a single thread in the unified read pool. `Server Is Busy` error is returned when the value is exceeded. |
 | `readpool.unified.auto-adjust-pool-size` | Determines whether to automatically adjust the UnifyReadPool thread pool size |
 | `coprocessor.split-region-on-table` | Enables to split Region by table |
 | `coprocessor.batch-split-limit` | The threshold of Region split in batches |
