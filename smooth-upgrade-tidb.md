@@ -5,10 +5,6 @@ summary: This document introduces the smooth upgrade feature of TiDB, which supp
 
 # TiDB Smooth Upgrade
 
-> **Warning:**
->
-> Smooth upgrade is still an experimental feature.
-
 This document introduces the smooth upgrade feature of TiDB, which supports upgrading TiDB clusters without manually canceling DDL operations.
 
 Starting from v7.1.0, when you upgrade TiDB to a later version, TiDB supports smooth upgrade. This feature removes the limitations during the upgrade process and provides a more user-friendly upgrade experience. Note that you need to ensure that there are no user-initiated DDL operations during the upgrade process.
@@ -65,7 +61,7 @@ You can take the following steps to upgrade TiDB manually or by using a script:
 
 1. Send the HTTP upgrade start request to any TiDB node in the cluster: `curl -X POST http://{TiDBIP}:10080/upgrade/start`.
    * The TiDB cluster enters the **Upgrading** state.
-   * The user-initiated DDL operations to be performed are paused.
+   * The DDL operations to be performed are paused.
 
 2. Replace the TiDB binary and perform a rolling upgrade. This process is the same as the original upgrade process.
     * The system DDL operations are performed during the upgrade process.
