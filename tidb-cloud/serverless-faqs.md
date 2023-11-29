@@ -44,7 +44,7 @@ TiDB Serverless adopts a pay-as-you-go model, meaning that you only pay for the 
 
 ### How can I view the RU costs for my SQL statements in TiDB Serverless?
 
-You can view both the Total RU and Mean RU cost per SQL statement in TiDB Serverless. This feature helps in identifying and analyzing RU costs, which can lead to potential cost savings in your operations. To check your SQL statement RU details, visit your TiDB Serverless cluster, navigate to the **Diagnosis** page, and then select the **SQL Statement** tab.
+You can view both the **Total RU** and **Mean RU** costs per SQL statement in [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless). This feature helps in identifying and analyzing RU costs, which can lead to potential cost savings in your operations. To check your SQL statement RU details, navigate to the **Diagnosis** page of [your TiDB Serverless cluster](https://tidbcloud.com/console/clusters) and then click the **SQL Statement** tab.
 
 ### Is there any free plan available for TiDB Serverless?
 
