@@ -96,4 +96,4 @@ The states are described as follows:
 - `DELETING`: the replication task is being deleted.
 - `DELETED`: the replication task is deleted.
 - `WARNING`: the replication task returns a warning. The replication cannot continue due to some recoverable errors. The changefeed in this state keeps trying to resume until the state transfers to `RUNNING`. The changefeed in this state blocks [GC operations](https://docs.pingcap.com/tidb/stable/garbage-collection-overview).
-- `FAILED`: the replication task fails. Due to some unrecoverable errors, the replication task cannot resume and cannot be recovered. The changefeed in this state does not block GC operations.
+- `FAILED`: the replication task fails. Due to some unrecoverable errors, the replication task cannot resume and cannot be recovered automatically. Users can manually resume the changefeed after the problems fixed before incremental data being GC. The upstream GC for a duration specified by gc-ttl, default 24h, elapses from encountering the first blocking error.
