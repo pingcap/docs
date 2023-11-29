@@ -8,7 +8,14 @@ aliases: ['/docs/stable/sql-statements/sql-statement-backup/','/docs/v4.0/sql-st
 
 This statement is used to perform a distributed backup of the TiDB cluster.
 
+<<<<<<< HEAD
 The `BACKUP` statement uses the same engine as the [BR tool](/br/backup-and-restore-use-cases.md) does, except that the backup process is driven by TiDB itself rather than a separate BR tool. All benefits and warnings of BR also apply in this statement.
+=======
+> **Warning:**
+>
+> - This feature is experimental. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+> - This feature is not available on [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless) clusters.
+>>>>>>> c5ccba8507 (add experimental note for BACKUP and RESTORE statements (#15514))
 
 Executing `BACKUP` requires `SUPER` privilege. Additionally, both the TiDB node executing the backup and all TiKV nodes in the cluster must have read or write permission to the destination.
 
