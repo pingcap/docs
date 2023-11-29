@@ -9,8 +9,6 @@ When TiDB reads data from TiKV, TiDB tries to push down some expressions (includ
 
 ## Supported expressions for pushdown
 
-TiFlash also supports pushdown for the functions and operators [listed on this page](/tiflash/tiflash-supported-pushdown-calculations.md).
-
 | Expression Type | Operations |
 | :-------------- | :------------------------------------- |
 | [Logical operators](/functions-and-operators/operators.md#logical-operators) | AND (&&), OR (&#124;&#124;), NOT (!) |
