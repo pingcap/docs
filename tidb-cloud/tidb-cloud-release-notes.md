@@ -8,6 +8,24 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2023.
 
+## November 28, 2023
+
+**General changes**
+
+- [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) supports restoring SQL bindings from backups.
+
+    TiDB Dedicated now restores user accounts and SQL bindings by default when restoring from a backup. This enhancement is available for clusters of v6.2.0 or later versions, streamlining the data restoration process.
+
+    For more information, see [Back up and restore TiDB Dedicated data](/tidb-cloud/backup-and-restore.md).
+
+**Console changes**
+
+- [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) supports monitoring SQL statement RU costs.
+
+    TiDB Serverless now provides detailed insights into each SQL statement's [Request Units (RUs)](/tidb-cloud/tidb-cloud-glossary.md#request-unit). You can view both the **Total RU** and **Mean RU** costs per SQL statement. This feature helps you identify and analyze RU costs, offering opportunities for potential cost savings in your operations.
+
+    To check your SQL statement RU details, navigate to the **Diagnosis** page of [your TiDB Serverless cluster](https://tidbcloud.com/console/clusters) and then click the **SQL Statement** tab.
+
 ## November 21, 2023
 
 **General changes**
