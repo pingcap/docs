@@ -14,7 +14,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 - [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) supports restoring SQL bindings from backups.
 
-    TiDB Dedicated now restores user accounts and SQL bindings by default when restoring from a backup. This enhancement is available for clusters of v6.2.0 or later versions, streamlining the data restoration process.
+    TiDB Dedicated now restores user accounts and SQL bindings by default when restoring from a backup. This enhancement is available for clusters of v6.2.0 or later versions, streamlining the data restoration process. The restoration of SQL bindings ensures the smooth reintegration of query-related configurations and optimizations, providing you with a more comprehensive and efficient recovery experience.
 
     For more information, see [Back up and restore TiDB Dedicated data](/tidb-cloud/backup-and-restore.md).
 
