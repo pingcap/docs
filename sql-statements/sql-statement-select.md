@@ -232,11 +232,8 @@ In this example, you can find the query result in `/tmp/tmp_file3` as follows:
 ## MySQL compatibility
 
 - The syntax `SELECT ... INTO @variable` is not supported.
-<<<<<<< HEAD
 - The syntax `SELECT ... GROUP BY ... WITH ROLLUP` is not supported.
-=======
 - The syntax `SELECT ... INTO DUMPFILE` is not supported.
->>>>>>> d75970d72b (add more explains and examples for `SELECT ... INTO OUTFILE` statements (#15104))
 - The syntax `SELECT .. GROUP BY expr` does not imply `GROUP BY expr ORDER BY expr` as it does in MySQL 5.7. TiDB instead matches the behavior of MySQL 8.0 and does not imply a default order.
 - The syntax `SELECT ... TABLESAMPLE ...` is a TiDB extension designed for compatibility with other database systems and the [ISO/IEC 9075-2](https://standards.iso.org/iso-iec/9075/-2/ed-6/en/) standard, but currently it is not supported by MySQL.
 
