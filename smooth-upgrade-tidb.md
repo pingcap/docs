@@ -26,14 +26,28 @@ Depending on whether the feature needs to be controlled by a switch, there are t
     - Upgrade from v7.1.2 and later v7.1 versions (that is, v7.1.x, where x >= 2) to v7.4.0 and later versions
     - Upgrade from v7.4.0 to later versions
 
+Refer to the following table for the upgrade methods supported by specific versions:
+
+| Original version | Upgraded version | Upgrade methods | Note |
+|------|--------|-------------|-------------|
+| < v7.1.0  | Any version                 | Does not support smooth upgrade. | |
+| v7.1.0    | v7.1.1、v7.2.0, or v7.3.0   | Smooth upgrade is automatically supported. No additional operations are required. | Experimental feature. It might encounter the issue [#44760](https://github.com/pingcap/tidb/pull/44760). |
+| v7.1.1    | v7.2.0 or v7.3.0         | Smooth upgrade is automatically supported. No additional operations are required. | Experimental feature.  |
+| v7.2.0    | v7.3.0                   | Smooth upgrade is automatically supported. No additional operations are required. | Experimental feature.  |
+| [v7.1.2, v7.2.0)                     | [v7.1.2, v7.2.0) | Enable smooth upgrade by sending the `/upgrade/start` HTTP request. There are two methods: [Use TiUP](#use-tiup-to-upgrade) and [Other upgrade methods](#other-upgrade-methods) | When smooth upgrade is not enabled, ensure that no DDL operations are performed during the upgrade. |
+| [v7.1.2, v7.2.0) or >= v7.4.0             | >= v7.4.0 | Enable smooth upgrade by sending the `/upgrade/start` HTTP request. There are two methods: [Use TiUP](#use-tiup-to-upgrade) and [Other upgrade methods](#other-upgrade-methods)  | When smooth upgrade is not enabled, ensure that no DDL operations are performed during the upgrade. |
+| v7.1.0, v7.1.1, v7.2.0, and v7.3.0     | >= v7.4.0 | Does not support smooth upgrade. | |
+
 ## Feature introduction
 
-Before the smooth upgrade feature is introduced, there are the following limitations on DDL operations during the upgrade process (see the *Warning* content in [Upgrade TiDB Using TiUP](/upgrade-tidb-using-tiup.md#upgrade-tidb-using-tiup)):
+Before the smooth upgrade feature is introduced, there are the following limitations on DDL operations during the upgrade process:
 
 - Running DDL operations during the upgrade process might cause undefined behavior in TiDB.
 - Upgrading TiDB during the DDL operations might cause undefined behavior in TiDB.
 
 These limitations can be summarized as that you need to ensure that there are no user-initiated DDL operations during the upgrade process. After the smooth upgrade feature is introduced, TiDB is no longer subject to this limitation during the upgrade process.
+
+For more information, see the **Warning** content in [Upgrade TiDB Using TiUP](/upgrade-tidb-using-tiup.md#upgrade-tidb-using-tiup).
 
 ### Upgrade steps
 
