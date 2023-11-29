@@ -211,7 +211,8 @@ Physical mode is available for TiDB clusters deployed on AWS and Google Cloud.
 
 > **Note:**
 >
-> When you use physical mode, you cannot create a second migration job or import task for the TiDB cluster before the existing data migration is completed.
+> - When you use physical mode, you cannot create a second migration job or import task for the TiDB cluster before the existing data migration is completed.
+> - When you use physical mode and the migration job has started, do **NOT** enable PITR (Point-in-time Recovery) or have any changefeed on the cluster. Otherwise, the migration job will be stuck. If you need to enable PITR or have any changefeed, use logical mode instead to migrate data.
 
 Physical mode exports the upstream data as fast as possible, so [different specifications](/tidb-cloud/tidb-cloud-billing-dm.md#specifications-for-data-migration) have different performance impacts on QPS and TPS of the upstream database during data export. The following table shows the performance regression of each specification.
 
