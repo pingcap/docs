@@ -20,11 +20,11 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **Console changes**
 
-- [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) supports checking SQL statement RU costs.
+- [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) supports monitoring SQL statement RU costs.
 
-    TiDB Serverless now provides detailed insights into each SQL statement's Request Units (RU). You can view both the Total RU and Mean RU cost per SQL statement. This feature is designed to help you identify and analyze RU costs, offering opportunities for potential cost savings in your operations.
+    TiDB Serverless now provides detailed insights into each SQL statement's [Request Units (RUs)](/tidb-cloud/tidb-cloud-glossary.md#request-unit). You can view both the **Total RU** and **Mean RU** costs per SQL statement. This feature helps you identify and analyze RU costs, offering opportunities for potential cost savings in your operations.
 
-    To check your SQL statement RU details, click your [TiDB Cloud cluster](https://tidbcloud.com/console/clusters), navigate to the **Diagnosis** page, and then click the **SQL Statement** tab.
+    To check your SQL statement RU details, navigate to the **Diagnosis** page of [your TiDB Serverless cluster](https://tidbcloud.com/console/clusters) and then click the **SQL Statement** tab.
 
 ## November 21, 2023
 
