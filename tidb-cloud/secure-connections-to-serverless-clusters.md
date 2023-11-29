@@ -28,7 +28,7 @@ aliases: ['/tidbcloud/secure-connections-to-serverless-tier-clusters']
 
 4.  パスワードをまだ設定していない場合は、 **「パスワードの作成」**をクリックして、TiDB サーバーレスクラスター用のランダムなパスワードを生成します。クラスターに簡単に接続できるように、パスワードはサンプル接続文字列に自動的に埋め込まれます。
 
-    > **ノート：**
+    > **注記：**
     >
     > -   ランダムなパスワードは、大文字、小文字、数字、特殊文字を含む 16 文字で構成されます。
     > -   このダイアログを閉じると、生成されたパスワードは再度表示されなくなるため、パスワードを安全な場所に保存する必要があります。パスワードを忘れた場合は、このダイアログで**[パスワードのリセット]**をクリックしてリセットできます。
@@ -36,7 +36,7 @@ aliases: ['/tidbcloud/secure-connections-to-serverless-tier-clusters']
 
 5.  接続文字列を使用してクラスターに接続します。
 
-    > **ノート：**
+    > **注記：**
     >
     > TiDB サーバーレス クラスターに接続するときは、ユーザー名にクラスターのプレフィックスを含め、名前を引用符で囲む必要があります。詳細については、 [ユーザー名のプレフィックス](/tidb-cloud/select-cluster-tier.md#user-name-prefix)を参照してください。
 
@@ -71,11 +71,9 @@ mycli -u <username> -h <host> -P 4000 -D test --ssl-ca=<CA_root_path> --ssl-veri
 
 <div label="JDBC">
 
-ここでは例として[MySQLコネクタ/J](https://dev.mysql.com/doc/connector-j/8.0/en/)の TLS 接続構成が使用されています。
+ここでは例として[MySQLコネクタ/J](https://dev.mysql.com/doc/connector-j/en/)の TLS 接続構成が使用されています。
 
-```
-jdbc:mysql://<host>:4000/test?user=<username>&password=<your_password>&sslMode=VERIFY_IDENTITY&enabledTLSProtocols=TLSv1.2,TLSv1.3
-```
+    jdbc:mysql://<host>:4000/test?user=<username>&password=<your_password>&sslMode=VERIFY_IDENTITY&enabledTLSProtocols=TLSv1.2,TLSv1.3
 
 -   TLS を有効にして TiDB サーバーレス クラスターを検証するには、 `sslMode=VERIFY_IDENTITY`を設定します。 JDBC はデフォルトでシステム CA ルート証明書を信頼するため、証明書を構成する必要はありません。
 -   TLS プロトコルのバージョンを制限するには、 `enabledTLSProtocols=TLSv1.2,TLSv1.3`を設定します。
@@ -86,9 +84,7 @@ jdbc:mysql://<host>:4000/test?user=<username>&password=<your_password>&sslMode=V
 
 ここでは例として[mysqlクライアント](https://pypi.org/project/mysqlclient/)の TLS 接続構成が使用されています。
 
-```
-host="<host>", user="<username>", password="<your_password>", port=4000, database="test", ssl_mode="VERIFY_IDENTITY", ssl={"ca": "<CA_root_path>"}
-```
+    host="<host>", user="<username>", password="<your_password>", port=4000, database="test", ssl_mode="VERIFY_IDENTITY", ssl={"ca": "<CA_root_path>"}
 
 -   TLS を有効にして TiDB サーバーレス クラスターを検証するには、 `ssl_mode="VERIFY_IDENTITY"`を設定します。
 -   システム上の CA ルート パスを設定するには、 `ssl={"ca": "<CA_root_path>"}`を設定します。
@@ -99,14 +95,12 @@ host="<host>", user="<username>", password="<your_password>", port=4000, databas
 
 ここでは例として[Go-MySQL-ドライバー](https://github.com/go-sql-driver/mysql)の TLS 接続構成が使用されています。
 
-```
-mysql.RegisterTLSConfig("tidb", &tls.Config{
-  MinVersion: tls.VersionTLS12,
-  ServerName: "<host>",
-})
+    mysql.RegisterTLSConfig("tidb", &tls.Config{
+      MinVersion: tls.VersionTLS12,
+      ServerName: "<host>",
+    })
 
-db, err := sql.Open("mysql", "<usename>:<your_password>@tcp(<host>:4000)/test?tls=tidb")
-```
+    db, err := sql.Open("mysql", "<usename>:<your_password>@tcp(<host>:4000)/test?tls=tidb")
 
 -   接続に`tls.Config`を登録して TLS を有効にし、TiDB サーバーレス クラスターを検証します。 Go-MySQL-Driver はデフォルトでシステム CA ルート証明書を使用するため、証明書を構成する必要はありません。
 -   TLS プロトコルのバージョンを制限するには、 `MinVersion: tls.VersionTLS12`を設定します。
@@ -119,9 +113,7 @@ db, err := sql.Open("mysql", "<usename>:<your_password>@tcp(<host>:4000)/test?tl
 
 ここでは例として[MySQL2](https://www.npmjs.com/package/mysql2)の TLS 接続構成が使用されています。
 
-```
-host: '<host>', port: 4000,user: '<username>', password: '<your_password>', database: 'test', ssl: {minVersion: 'TLSv1.2', rejectUnauthorized: true}
-```
+    host: '<host>', port: 4000,user: '<username>', password: '<your_password>', database: 'test', ssl: {minVersion: 'TLSv1.2', rejectUnauthorized: true}
 
 -   TLS プロトコルのバージョンを制限するには、 `ssl: {minVersion: 'TLSv1.2'}`を設定します。
 -   TiDB サーバーレス クラスターを検証するには`ssl: {rejectUnauthorized: true}`を設定します。 Mysql2 はデフォルトでシステム CA ルート証明書を使用するため、証明書を構成する必要はありません。
@@ -135,7 +127,7 @@ host: '<host>', port: 4000,user: '<username>', password: '<your_password>', data
 
 TiDB サーバーレスは、クライアントと TiDB サーバーレス クラスター間の TLS 接続の認証局 (CA) として[暗号化しましょう](https://letsencrypt.org/)の証明書を使用します。 TiDB サーバーレス証明書の有効期限が切れると、クラスターの通常の動作や確立された TLS セキュア接続に影響を与えることなく、自動的にローテーションされます。
 
-> **ノート：**
+> **注記：**
 >
 > TiDB サーバーレスは、CA ルート証明書のダウンロードを提供しません。これは、将来同じ CA が証明書の発行に使用されることが保証されず、CA ルート証明書が変更される可能性があるためです。
 
@@ -151,37 +143,27 @@ DBeaver など、内部に複数の証明書を含む証明書ファイルを受
 
 **マックOS**
 
-```
-/etc/ssl/cert.pem
-```
+    /etc/ssl/cert.pem
 
 **Debian / Ubuntu / Arch**
 
-```
-/etc/ssl/certs/ca-certificates.crt
-```
+    /etc/ssl/certs/ca-certificates.crt
 
 **RedHat / Fedora / CentOS / Mageia**
 
-```
-/etc/pki/tls/certs/ca-bundle.crt
-```
+    /etc/pki/tls/certs/ca-bundle.crt
 
 **高山**
 
-```
-/etc/ssl/cert.pem
-```
+    /etc/ssl/cert.pem
 
 **OpenSUSE**
 
-```
-/etc/ssl/ca-bundle.pem
-```
+    /etc/ssl/ca-bundle.pem
 
 **ウィンドウズ**
 
-Windows は、CA ルートへの特定のパスを提供しません。代わりに、 [レジストリ](https://learn.microsoft.com/en-us/windows-hardware/drivers/install/local-machine-and-current-user-certificate-stores)を使用して証明書を保存します。このため、Windows で CA ルート パスを指定するには、次の手順を実行します。
+Windows は CA ルートへの特定のパスを提供しません。代わりに、 [レジストリ](https://learn.microsoft.com/en-us/windows-hardware/drivers/install/local-machine-and-current-user-certificate-stores)使用して証明書を保存します。このため、Windows で CA ルート パスを指定するには、次の手順を実行します。
 
 1.  [Mozilla CA 証明書バンドル](https://curl.se/docs/caextract.html)ダウンロードし、 `<path_to_mozilla_ca_cert_bundle>`などの任意のパスに保存します。
 2.  TiDB サーバーレス クラスターに接続する場合は、パス ( `<path_to_mozilla_ca_cert_bundle>` ) を CA ルート パスとして使用します。

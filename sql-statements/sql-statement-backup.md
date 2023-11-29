@@ -7,9 +7,10 @@ summary: An overview of the usage of BACKUP for the TiDB database.
 
 このステートメントは、TiDB クラスターの分散バックアップを実行するために使用されます。
 
-> **注記：**
+> **警告：**
 >
-> この機能は[TiDB サーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless)クラスターでは使用できません。
+> -   この機能は実験的です。本番環境で使用することはお勧めできません。この機能は予告なく変更または削除される場合があります。バグを見つけた場合は、GitHub で[問題](https://github.com/pingcap/tidb/issues)を報告できます。
+> -   この機能は[TiDB サーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless)クラスターでは使用できません。
 
 `BACKUP`ステートメントは[BRツール](https://docs.pingcap.com/tidb/stable/backup-and-restore-overview)と同じエンジンを使用しますが、バックアップ プロセスが別個のBRツールではなく TiDB 自体によって駆動される点が異なります。 BRのすべての利点と警告は、この声明にも当てはまります。
 
@@ -17,7 +18,7 @@ summary: An overview of the usage of BACKUP for the TiDB database.
 
 `BACKUP`ステートメントは、バックアップ タスク全体が完了するか、失敗するか、キャンセルされるまでブロックされます。 `BACKUP`を実行するには、長時間持続する接続を準備する必要があります。タスクは[`KILL TIDB QUERY`](/sql-statements/sql-statement-kill.md)ステートメントを使用してキャンセルできます。
 
-`BACKUP`と[`RESTORE`](/sql-statements/sql-statement-restore.md)タスクは一度に 1 つだけ実行できます。 `BACKUP`または`RESTORE`ステートメントが同じ TiDBサーバー上ですでに実行されている場合、新しい`BACKUP`ステートメントの実行は、前のタスクがすべて完了するまで待機します。
+`BACKUP`と[`RESTORE`](/sql-statements/sql-statement-restore.md)のタスクは一度に 1 つだけ実行できます。 `BACKUP`または`RESTORE`ステートメントが同じ TiDBサーバー上ですでに実行されている場合、新しい`BACKUP`ステートメントの実行は、前のタスクがすべて完了するまで待機します。
 
 `BACKUP` 「tikv」storageエンジンでのみ使用できます。 「unistore」エンジンで`BACKUP`使用すると失敗します。
 

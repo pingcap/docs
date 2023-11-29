@@ -7,14 +7,14 @@ summary: Learn how to filter DML events using SQL expressions.
 
 このドキュメントでは、DM を使用して継続的な増分データ レプリケーションを実行する場合に、SQL 式を使用してbinlogイベントをフィルタリングする方法を紹介します。レプリケーション手順の詳細については、次のドキュメントを参照してください。
 
--   [小規模なデータセットの MySQL を TiDB に移行する](/migrate-small-mysql-to-tidb.md)
--   [大規模なデータセットの MySQL を TiDB に移行する](/migrate-large-mysql-to-tidb.md)
+-   [小規模なデータセットを MySQL から TiDB に移行する](/migrate-small-mysql-to-tidb.md)
+-   [大規模なデータセットを MySQL から TiDB に移行する](/migrate-large-mysql-to-tidb.md)
 -   [小規模なデータセットの MySQL シャードを TiDB に移行およびマージする](/migrate-small-mysql-shards-to-tidb.md)
 -   [大規模なデータセットの MySQL シャードを TiDB に移行およびマージする](/migrate-large-mysql-shards-to-tidb.md)
 
 増分データ レプリケーションを実行する場合、 [Binlogイベントフィルター](/filter-binlog-event.md)を使用して特定の種類のbinlogイベントをフィルターできます。たとえば、アーカイブや監査などの目的で`DELETE`イベントをダウンストリームにレプリケートしないことを選択できます。ただし、 Binlogイベント フィルターは、より細かい粒度が必要な行の`DELETE`のイベントをフィルターするかどうかを決定できません。
 
-この問題に対処するために、DM は v2.0.5 以降、増分データ レプリケーションで`binlog value filter`を使用してデータをフィルタリングすることをサポートしています。 DM でサポートされている`ROW`形式のbinlogの中で、 binlogイベントはすべての列の値を保持し、これらの値に基づいて SQL 式を構成できます。式で行の変更が`TRUE`として計算される場合、DM はこの行の変更をダウンストリームにレプリケートしません。
+この問題に対処するために、DM は v2.0.5 以降、増分データ レプリケーションで`binlog value filter`を使用してデータをフィルタリングすることをサポートしています。 DM サポートおよび`ROW`形式のbinlogのうち、 binlogイベントはすべての列の値を保持し、これらの値に基づいて SQL 式を構成できます。式で行の変更が`TRUE`として計算される場合、DM はこの行の変更をダウンストリームにレプリケートしません。
 
 [Binlogイベントフィルター](/filter-binlog-event.md)と同様に、タスク構成ファイルで`binlog value filter`を構成する必要があります。詳細については、以下の構成例を参照してください。高度なタスクの構成と説明については、 [DM 拡張タスク構成ファイル](/dm/task-configuration-file-full.md#task-configuration-file-template-advanced)を参照してください。
 
@@ -63,9 +63,9 @@ MySQL [test]> select * from tbl;
 -   `update-new-value-expr` : `UPDATE`のタイプのbinlogイベント (UPDATE_ROWS_EVENT) によって伝えられる新しい値に影響を与える式を構成します。この式を同じ構成アイテム内で`insert-value-expr`または`delete-value-expr`と一緒に使用することはできません。
 -   `delete-value-expr` : `DELETE`種類のbinlogイベント (DELETE_ROWS_EVENT) によって伝送される値に影響を与える式を構成します。この式を`insert-value-expr` 、 `update-old-value-expr` 、または`update-new-value-expr`と一緒に使用することはできません。
 
-> **ノート：**
+> **注記：**
 >
-> -   `update-old-value-expr`と`update-new-value-expr`を一緒に設定できます。
+> -   `update-old-value-expr`と`update-new-value-expr`一緒に設定できます。
 > -   `update-old-value-expr`と`update-new-value-expr`を同時に設定すると、「更新 + 古い値」が`update-old-value-expr`満たす行**と、** 「更新 + 新しい値」が`update-new-value-expr`を満たす行がフィルターされます。
 > -   `update-old-value-expr`と`update-new-value-expr`のいずれかが設定されている場合、設定された式は**行の変更全体**をフィルタリングするかどうかを決定します。これは、古い値の削除と新しい値の挿入が全体としてフィルタリングされることを意味します。
 
@@ -75,6 +75,6 @@ SQL 式は 1 つの列または複数の列で使用できます。 TiDB でサ�
 
 `expression-filter`の設定項目の下に複数のフィルタリング ルールを設定できます。上流のデータ ソースは、 `expression-filters`で必要なルールを参照して有効にします。複数のルールが使用されている場合、**いずれ**かのルールが一致すると、行の変更全体がフィルタリングされます。
 
-> **ノート：**
+> **注記：**
 >
 > 構成する式フィルタリング ルールが多すぎると、DM の計算オーバーヘッドが増加し、データ レプリケーションの速度が低下します。

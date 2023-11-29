@@ -56,11 +56,9 @@ Spark クラスターの独立したデプロイメントの場合:
 
 以下は`spark-env.sh`構成に基づく例です。
 
-```
-SPARK_EXECUTOR_MEMORY = 32g
-SPARK_WORKER_MEMORY = 32g
-SPARK_WORKER_CORES = 8
-```
+    SPARK_EXECUTOR_MEMORY = 32g
+    SPARK_WORKER_MEMORY = 32g
+    SPARK_WORKER_CORES = 8
 
 ## TiSpark を入手 {#get-tispark}
 
@@ -82,9 +80,9 @@ TiSpark の jar の次のバージョンには、 `mysql-connector-java`含ま�
 
 -   Spark ジョブを送信するときに`mysql-connector-java`インポートします。次の例を参照してください。
 
-```
-spark-submit --jars tispark-assembly-3.0_2.12-3.1.0-SNAPSHOT.jar,mysql-connector-java-8.0.29.jar
-```
+<!---->
+
+    spark-submit --jars tispark-assembly-3.0_2.12-3.1.0-SNAPSHOT.jar,mysql-connector-java-8.0.29.jar
 
 ### TiSpark のバージョンを選択してください {#choose-tispark-version}
 
@@ -108,22 +106,18 @@ TiSpark jar は、次のいずれかの方法を使用して取得できます�
 -   [TiSpark リリース](https://github.com/pingcap/tispark/releases)から取得
 -   以下の手順でソースからビルドします。
 
-> **ノート：**
+> **注記：**
 >
 > 現在、TiSpark をビルドするには java8 が唯一の選択肢であり、 mvn -version を実行して確認してください。
 
-```
-git clone https://github.com/pingcap/tispark.git
-```
+    git clone https://github.com/pingcap/tispark.git
 
 TiSpark ルート ディレクトリで次のコマンドを実行します。
 
-```
-// add -Dmaven.test.skip=true to skip the tests
-mvn clean install -Dmaven.test.skip=true
-// or you can add properties to specify spark version
-mvn clean install -Dmaven.test.skip=true -Pspark3.2.1
-```
+    // add -Dmaven.test.skip=true to skip the tests
+    mvn clean install -Dmaven.test.skip=true
+    // or you can add properties to specify spark version
+    mvn clean install -Dmaven.test.skip=true -Pspark3.2.1
 
 ### TiSpark jar のアーティファクト ID {#tispark-jar-s-artifact-id}
 
@@ -135,7 +129,7 @@ TiSpark のアーティファクト ID は、TiSpark のバージョンによっ
 | 2.5.1                        | tispark-assembly-${spark_version}                  |
 | 3.0.x、3.1.x                  | tispark-assembly-${spark_version}-${scala_version} |
 
-## 入門 {#getting-started}
+## はじめる {#getting-started}
 
 このドキュメントでは、Spark-Shell で TiSpark を使用する方法について説明します。
 
@@ -145,18 +139,14 @@ TiSpark のアーティファクト ID は、TiSpark のバージョンによっ
 
 `spark-defaults.conf`に次の構成を追加します。
 
-```
-spark.sql.extensions  org.apache.spark.sql.TiExtensions
-spark.tispark.pd.addresses  ${your_pd_adress}
-spark.sql.catalog.tidb_catalog  org.apache.spark.sql.catalyst.catalog.TiCatalog
-spark.sql.catalog.tidb_catalog.pd.addresses  ${your_pd_adress}
-```
+    spark.sql.extensions  org.apache.spark.sql.TiExtensions
+    spark.tispark.pd.addresses  ${your_pd_adress}
+    spark.sql.catalog.tidb_catalog  org.apache.spark.sql.catalyst.catalog.TiCatalog
+    spark.sql.catalog.tidb_catalog.pd.addresses  ${your_pd_adress}
 
 `--jars`オプションを指定して Spark-Shell を開始します。
 
-```
-spark-shell --jars tispark-assembly-{version}.jar
-```
+    spark-shell --jars tispark-assembly-{version}.jar
 
 ### TiSpark バージョンを取得する {#get-tispark-version}
 
@@ -236,10 +226,8 @@ TiDB OOM につながる可能性のある大きな単一トランザクショ�
 
 Spark SQL を使用して、TiKV からデータを削除できます。
 
-```
-spark.sql("use tidb_catalog")
-spark.sql("delete from ${database}.${table} where xxx")
-```
+    spark.sql("use tidb_catalog")
+    spark.sql("delete from ${database}.${table} where xxx")
 
 詳細については[機能の削除](https://github.com/pingcap/tispark/blob/master/docs/features/delete_userguide.md)参照してください。
 
@@ -247,13 +235,11 @@ spark.sql("delete from ${database}.${table} where xxx")
 
 次のように、複数のカタログを使用して、さまざまなデータ ソースからデータを読み取ることができます。
 
-```
-// Read from Hive
-spark.sql("select * from spark_catalog.default.t").show
+    // Read from Hive
+    spark.sql("select * from spark_catalog.default.t").show
 
-// Join Hive tables and TiDB tables
-spark.sql("select t1.id,t2.id from spark_catalog.default.t t1 left join tidb_catalog.test.t t2").show
-```
+    // Join Hive tables and TiDB tables
+    spark.sql("select t1.id,t2.id from spark_catalog.default.t t1 left join tidb_catalog.test.t t2").show
 
 ## TiSpark 構成 {#tispark-configurations}
 
@@ -311,47 +297,45 @@ TiSpark は TLSv1.2 と TLSv1.3 のみをサポートします。
 
 -   以下は、TiKV クライアントで X.509 証明書を使用して TLS 構成を開く例です。
 
-```
-spark.tispark.tikv.tls_enable                                  true
-spark.tispark.tikv.trust_cert_collection                       /home/tispark/root.pem
-spark.tispark.tikv.key_cert_chain                              /home/tispark/client.pem
-spark.tispark.tikv.key_file                                    /home/tispark/client.key
-```
+<!---->
+
+    spark.tispark.tikv.tls_enable                                  true
+    spark.tispark.tikv.trust_cert_collection                       /home/tispark/root.pem
+    spark.tispark.tikv.key_cert_chain                              /home/tispark/client.pem
+    spark.tispark.tikv.key_file                                    /home/tispark/client.key
 
 -   以下は、TiKV クライアントで JKS 構成を使用して TLS を有効にする例です。
 
-```
-spark.tispark.tikv.tls_enable                                  true
-spark.tispark.tikv.jks_enable                                  true
-spark.tispark.tikv.jks_key_path                                /home/tispark/config/tikv-truststore
-spark.tispark.tikv.jks_key_password                            tikv_trustore_password
-spark.tispark.tikv.jks_trust_path                              /home/tispark/config/tikv-clientstore
-spark.tispark.tikv.jks_trust_password                          tikv_clientstore_password
-```
+<!---->
+
+    spark.tispark.tikv.tls_enable                                  true
+    spark.tispark.tikv.jks_enable                                  true
+    spark.tispark.tikv.jks_key_path                                /home/tispark/config/tikv-truststore
+    spark.tispark.tikv.jks_key_password                            tikv_trustore_password
+    spark.tispark.tikv.jks_trust_path                              /home/tispark/config/tikv-clientstore
+    spark.tispark.tikv.jks_trust_password                          tikv_clientstore_password
 
 JKS 証明書と X.509 証明書の両方が設定されている場合、JKS の優先順位が高くなります。つまり、TLS ビルダーは最初に JKS 証明書を使用します。したがって、共通の PEM 証明書を使用するだけの場合は`spark.tispark.tikv.jks_enable=true`を設定しないでください。
 
 -   以下は、JDBC コネクタで TLS を有効にする例です。
 
-```
-spark.tispark.jdbc.tls_enable                                  true
-spark.tispark.jdbc.server_cert_store                           /home/tispark/jdbc-truststore
-spark.tispark.jdbc.server_cert_password                        jdbc_truststore_password
-spark.tispark.jdbc.client_cert_store                           /home/tispark/jdbc-clientstore
-spark.tispark.jdbc.client_cert_password                        jdbc_clientstore_password
-```
+<!---->
+
+    spark.tispark.jdbc.tls_enable                                  true
+    spark.tispark.jdbc.server_cert_store                           /home/tispark/jdbc-truststore
+    spark.tispark.jdbc.server_cert_password                        jdbc_truststore_password
+    spark.tispark.jdbc.client_cert_store                           /home/tispark/jdbc-clientstore
+    spark.tispark.jdbc.client_cert_password                        jdbc_clientstore_password
 
 -   TiDB TLS を開く方法の詳細については、 [TiDB クライアントとサーバーの間で TLS を有効にする](/enable-tls-between-clients-and-servers.md)を参照してください。
--   JAVA キー ストアの生成方法の詳細については、 [SSLを使用した安全な接続](https://dev.mysql.com/doc/connector-j/8.0/en/connector-j-reference-using-ssl.html)を参照してください。
+-   JAVA キー ストアの生成方法の詳細については、 [SSLを使用した安全な接続](https://dev.mysql.com/doc/connector-j/en/connector-j-reference-using-ssl.html)を参照してください。
 
 ### Log4j 構成 {#log4j-configuration}
 
 `spark-shell`または`spark-sql`開始してクエリを実行すると、次の警告が表示される場合があります。
 
-```
-Failed to get database ****, returning NoSuchObjectException
-Failed to get database ****, returning NoSuchObjectException
-```
+    Failed to get database ****, returning NoSuchObjectException
+    Failed to get database ****, returning NoSuchObjectException
 
 ここで、 `****`はデータベース名です。
 
@@ -359,10 +343,8 @@ Failed to get database ****, returning NoSuchObjectException
 
 ミュートするには、次のテキストを`${SPARK_HOME}/conf/log4j.properties`に追加します。
 
-```
-# tispark disable "WARN ObjectStore:568 - Failed to get database"
-log4j.logger.org.apache.hadoop.hive.metastore.ObjectStore=ERROR
-```
+    # tispark disable "WARN ObjectStore:568 - Failed to get database"
+    log4j.logger.org.apache.hadoop.hive.metastore.ObjectStore=ERROR
 
 ### タイムゾーンの設定 {#time-zone-configuration}
 
@@ -427,7 +409,7 @@ TiSpark は、パーティション式が次のいずれかの場合にのみ、
 -   データソース API を使用して、置換セマンティクスと追加セマンティクスをサポートするパーティション テーブルに書き込みます。
 -   Spark SQL で delete ステートメントを使用します。
 
-> **ノート：**
+> **注記：**
 >
 > 現在、TiSpark は、utf8mb4_bin照合順序が有効になっているパーティション化されたテーブルへの書き込みのみをサポートしています。
 
@@ -437,16 +419,14 @@ TiSpark v2.5.0 以降のバージョンを使用している場合は、TiDB を
 
 認証および認可機能はデフォルトでは無効になっています。これを有効にするには、次の構成を Spark 構成ファイル`spark-defaults.conf`に追加します。
 
-```
-// Enable authentication and authorization
-spark.sql.auth.enable true
+    // Enable authentication and authorization
+    spark.sql.auth.enable true
 
-// Configure TiDB information
-spark.sql.tidb.addr $your_tidb_server_address
-spark.sql.tidb.port $your_tidb_server_port
-spark.sql.tidb.user $your_tidb_server_user
-spark.sql.tidb.password $your_tidb_server_password
-```
+    // Configure TiDB information
+    spark.sql.tidb.addr $your_tidb_server_address
+    spark.sql.tidb.port $your_tidb_server_port
+    spark.sql.tidb.user $your_tidb_server_user
+    spark.sql.tidb.password $your_tidb_server_password
 
 詳細については、 [TiDBサーバーを介した認可と認証](https://github.com/pingcap/tispark/blob/master/docs/features/authorization_userguide.md)を参照してください。
 

@@ -27,7 +27,7 @@ TiDB は MySQL プロトコルと高い互換性がありますが、一部の�
 
 サポートレベル:**フル**
 
-[MySQL ドキュメント](https://dev.mysql.com/doc/connector-j/8.0/en/)に従って、 Java JDBC ドライバーをダウンロードして構成できます。 TiDB v6.3.0 以降では MySQL Connector/J 8.0.33 以降を使用することをお勧めします。
+[MySQL ドキュメント](https://dev.mysql.com/doc/connector-j/en/)に従って、 Java JDBC ドライバーをダウンロードして構成できます。 TiDB v6.3.0 以降では MySQL Connector/J 8.0.33 以降を使用することをお勧めします。
 
 > **ヒント：**
 >
@@ -40,7 +40,7 @@ TiDB は MySQL プロトコルと高い互換性がありますが、一部の�
 
 サポートレベル:**フル**
 
-[TiDB-JDBC](https://github.com/pingcap/mysql-connector-j) MySQL 8.0.29 に基づいてカスタマイズされたJavaドライバーです。 MySQL 正式バージョン 8.0.29 に基づいてコンパイルされた TiDB-JDBC は、オリジナルの JDBC の準備モードにおけるマルチパラメータおよびマルチフィールド EOF のバグを修正し、自動 TiCDC スナップショット メンテナンスや SM3 認証プラグインなどの機能を追加します。
+[TiDB-JDBC](https://github.com/pingcap/mysql-connector-j)は、MySQL 8.0.29 に基づいてカスタマイズされたJavaドライバーです。 MySQL 正式バージョン 8.0.29 に基づいてコンパイルされた TiDB-JDBC は、オリジナルの JDBC の準備モードにおけるマルチパラメータおよびマルチフィールド EOF のバグを修正し、自動 TiCDC スナップショット メンテナンスや SM3 認証プラグインなどの機能を追加します。
 
 SM3 に基づく認証は、TiDB の TiDB-JDBC でのみサポートされています。
 
@@ -263,7 +263,7 @@ mysqlclient を使用して TiDB アプリケーションを構築する例に�
 
 サポートレベル:**互換性あり**
 
-[MySQL コネクタ/Python ドキュメント](https://dev.mysql.com/doc/connector-python/en/connector-python-installation-binary.html)に従ってドライバーをダウンロードして設定できます。 Connector/Python 8.0.31 以降のバージョンを使用することをお勧めします。
+[MySQL コネクタ/Python ドキュメント](https://dev.mysql.com/doc/connector-python/en/connector-python-installation-binary.html)に従ってドライバーをダウンロードして構成できます。 Connector/Python 8.0.31 以降のバージョンを使用することをお勧めします。
 
 MySQL コネクタ/Python を使用して TiDB アプリケーションを構築する例については、 [MySQL コネクタ/Python を使用して TiDB に接続する](/develop/dev-guide-sample-application-python-mysql-connector.md)を参照してください。
 

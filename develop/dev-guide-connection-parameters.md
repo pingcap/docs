@@ -39,9 +39,7 @@ Java には、 [HikariCP](https://github.com/brettwooldridge/HikariCP) 、 [tomc
 
 Javaアプリケーションで次のエラーが頻繁に表示される場合:
 
-```
-The last packet sent successfully to the server was 3600000 milliseconds ago. The driver has not received any packets from the server. com.mysql.jdbc.exceptions.jdbc4.CommunicationsException: Communications link failure
-```
+    The last packet sent successfully to the server was 3600000 milliseconds ago. The driver has not received any packets from the server. com.mysql.jdbc.exceptions.jdbc4.CommunicationsException: Communications link failure
 
 `n milliseconds ago`の`n`が`0`または非常に小さい値の場合、通常は、実行された SQL 操作によって TiDB が異常終了することが原因です。原因を見つけるには、TiDB stderr ログを確認することをお勧めします。
 
@@ -59,9 +57,7 @@ HikariCPの[プールのサイジングについて](https://github.com/brettwoo
 
 経験に基づいた式は次のとおりです。
 
-```
-connections = ((core_count * 2) + effective_spindle_count)
-```
+    connections = ((core_count * 2) + effective_spindle_count)
 
 式の各パラメータの説明は次のとおりです。
 
@@ -69,17 +65,15 @@ connections = ((core_count * 2) + effective_spindle_count)
 -   **core_count** : CPU コアの数。
 -   **有効なスピンドルカウント**: ハードドライブの数 ( [SSD](https://en.wikipedia.org/wiki/Solid-state_drive)ではありません)。回転する各ハードディスクをスピンドルと呼ぶことができるためです。たとえば、16 ディスクの RAID を持つサーバーを使用している場合、 **effective_spindle_count**は 16 である必要があります。通常、 **HDD は**一度に 1 つのリクエストしか処理できないため、ここでの式は実際にサーバーが同時に処理できる I/O リクエストの数を測定します。管理。
 
-特に、 [方式](https://github.com/brettwooldridge/HikariCP/wiki/About-Pool-Sizing#the-formula)の下の注記に注意してください。
+特に、 [式](https://github.com/brettwooldridge/HikariCP/wiki/About-Pool-Sizing#the-formula)の下の注記に注意してください。
 
-> ```
-> A formula which has held up pretty well across a lot of benchmarks for years is
-> that for optimal throughput the number of active connections should be somewhere
-> near ((core_count * 2) + effective_spindle_count). Core count should not include
-> HT threads, even if hyperthreading is enabled. Effective spindle count is zero if
-> the active data set is fully cached, and approaches the actual number of spindles
-> as the cache hit rate falls. ... There hasn't been any analysis so far regarding
-> how well the formula works with SSDs.
-> ```
+>     A formula which has held up pretty well across a lot of benchmarks for years is
+>     that for optimal throughput the number of active connections should be somewhere
+>     near ((core_count * 2) + effective_spindle_count). Core count should not include
+>     HT threads, even if hyperthreading is enabled. Effective spindle count is zero if
+>     the active data set is fully cached, and approaches the actual number of spindles
+>     as the cache hit rate falls. ... There hasn't been any analysis so far regarding
+>     how well the formula works with SSDs.
 
 このメモは次のことを示しています。
 
@@ -89,9 +83,7 @@ connections = ((core_count * 2) + effective_spindle_count)
 
 SSD を使用する場合は、経験に基づいて代わりに次の公式を使用することをお勧めします。
 
-```
-connections = (number of cores * 4)
-```
+    connections = (number of cores * 4)
 
 したがって、SSD の場合は初期接続プールの最大接続サイズを`cores * 4`に設定し、さらにサイズを調整してパフォーマンスを調整できます。
 
@@ -127,7 +119,7 @@ OLTP (オンライン トランザクション処理) シナリオの場合、�
 
 バッチ挿入の場合は、 [`addBatch` / `executeBatch` API](https://www.tutorialspoint.com/jdbc/jdbc-batch-processing)を使用できます。 `addBatch()`メソッドは、最初にクライアント上で複数の SQL ステートメントをキャッシュし、 `executeBatch`メソッドを呼び出すときにそれらをまとめてデータベースサーバーに送信するために使用されます。
 
-> **ノート：**
+> **注記：**
 >
 > デフォルトの MySQL Connector/J 実装では、 `addBatch()`でバッチに追加された SQL ステートメントの送信時刻が`executeBatch()`呼び出される時刻まで遅延しますが、実際のネットワーク転送中にステートメントは 1 つずつ送信されます。したがって、この方法では通常、通信オーバーヘッドの量は削減されません。
 >
@@ -139,19 +131,19 @@ OLTP (オンライン トランザクション処理) シナリオの場合、�
 
 通常、JDBC には次の 2 種類の処理方法があります。
 
--   [**FetchSize を**`Integer.MIN_VALUE`に設定します](https://dev.mysql.com/doc/connector-j/8.0/en/connector-j-reference-implementation-notes.html#ResultSet)を指定すると、クライアントはキャッシュを行わなくなります。クライアントは`StreamingResult`を介してネットワーク接続から実行結果を読み取ります。
+-   [**FetchSize を**`Integer.MIN_VALUE`に設定します](https://dev.mysql.com/doc/connector-j/en/connector-j-reference-implementation-notes.html#ResultSet)を指定すると、クライアントはキャッシュを行わなくなります。クライアントは`StreamingResult`を介してネットワーク接続から実行結果を読み取ります。
 
     クライアントがストリーミング読み取りメソッドを使用する場合、ステートメントを使用してクエリを作成し続ける前に、読み取りを完了するかクローズ`resultset`する必要があります。それ以外の場合は、エラー`No statements may be issued when any streaming result sets are open and in use on a given connection. Ensure that you have called .close() on any active streaming result sets before attempting more queries.`が返されます。
 
     クライアントが読み取りを完了するか、 `resultset`閉じる前にクエリでこのようなエラーが発生するのを回避するには、URL に`clobberStreamingResults=true`パラメータを追加します。その後、 `resultset`は自動的に閉じられますが、前のストリーミング クエリで読み取られる結果セットは失われます。
 
--   カーソルフェッチを使用するには、まず正の整数として[`FetchSize`を設定する](http://makejavafaster.blogspot.com/2015/06/jdbc-fetch-size-performance.html)を指定し、JDBC URL で`useCursorFetch=true`を設定します。
+-   カーソルフェッチを使用するには、まず正の整数として[`FetchSize`を設定する](http://makejavafaster.blogspot.com/2015/06/jdbc-fetch-size-performance.html)を設定し、JDBC URL で`useCursorFetch=true`を設定します。
 
 TiDB は両方の方法をサポートしていますが、最初の方法を使用することをお勧めします。これは、実装が単純で実行効率が高いためです。
 
 ### MySQL JDBC パラメータ {#mysql-jdbc-parameters}
 
-JDBC は通常、実装関連の設定を JDBC URL パラメータの形式で提供します。このセクションでは[MySQL Connector/J のパラメータ設定](https://dev.mysql.com/doc/connector-j/8.0/en/connector-j-reference-configuration-properties.html)を紹介します (MariaDB を使用する場合は[MariaDBのパラメータ設定](https://mariadb.com/kb/en/library/about-mariadb-connector-j/#optional-url-parameters)を参照してください)。このドキュメントではすべての構成項目をカバーすることはできないため、パフォーマンスに影響を与える可能性のあるいくつかのパラメーターに主に焦点を当てています。
+JDBC は通常、実装関連の設定を JDBC URL パラメーターの形式で提供します。このセクションでは[MySQL Connector/J のパラメータ設定](https://dev.mysql.com/doc/connector-j/en/connector-j-reference-configuration-properties.html)を紹介します (MariaDB を使用する場合は[MariaDBのパラメータ設定](https://mariadb.com/kb/en/library/about-mariadb-connector-j/#optional-url-parameters)を参照してください)。このドキュメントではすべての構成項目をカバーすることはできないため、パフォーマンスに影響を与える可能性のあるいくつかのパラメーターに主に焦点を当てています。
 
 #### 関連パラメータの準備 {#prepare-related-parameters}
 
@@ -166,7 +158,7 @@ JDBC は通常、実装関連の設定を JDBC URL パラメータの形式で�
     -   TiDB モニタリング ダッシュボードに移動し、 **[Query Summary]** &gt; **[CPS By Instance]**からリクエスト コマンド タイプを表示します。
     -   リクエスト内で`COM_QUERY` `COM_STMT_EXECUTE`または`COM_STMT_PREPARE`に置き換えられている場合は、この設定がすでに有効になっていることを意味します。
 
--   **キャッシュPrepStmts**
+-   **キャッシュ準備Stmts**
 
     `useServerPrepStmts=true`を指定すると、サーバーはプリペアド ステートメントを実行できますが、デフォルトでは、クライアントは各実行後にプリペアド ステートメントを閉じ、再利用しません。これは、「準備」操作がテキスト ファイルの実行ほど効率的ではないことを意味します。これを解決するには、 `useServerPrepStmts=true`設定した後、 `cachePrepStmts=true`も設定することをお勧めします。これにより、クライアントは Prepared Statement をキャッシュできるようになります。
 
@@ -188,7 +180,7 @@ JDBC は通常、実装関連の設定を JDBC URL パラメータの形式で�
     -   TiDB モニタリング ダッシュボードに移動し、 **[Query Summary]** &gt; **[CPS By Instance]**からリクエスト コマンド タイプを表示します。
     -   そして`cachePrepStmts=true`は設定されていますが、 `COM_STMT_PREPARE`は依然として`COM_STMT_EXECUTE`とほぼ同じであり、 `COM_STMT_CLOSE`存在することがわかります。
 
--   **prepStmtCacheSize**
+-   **prepStmtキャッシュサイズ**
 
     **prepStmtCacheSize は、**キャッシュされる Prepared Statement の数を制御します (デフォルト値は`25` )。アプリケーションで多くの種類の SQL ステートメントを「準備」する必要があり、準備されたステートメントを再利用したい場合は、この値を増やすことができます。
 
@@ -259,7 +251,7 @@ UPDATE `t` SET `a` = 10 WHERE `id` = 1; UPDATE `t` SET `a` = 11 WHERE `id` = 2; 
 
 モニタリングを通じて、アプリケーションは TiDB クラスターに対して`INSERT`操作のみを実行しますが、冗長な`SELECT`のステートメントが多数あることに気づくかもしれません。通常、これは、JDBC が設定をクエリするためにいくつかの SQL ステートメント (例: `select @@session.transaction_read_only`を送信するために発生します。これらの SQL ステートメントは TiDB では役に立たないため、余分なオーバーヘッドを避けるために`useConfigs=maxPerformance`を構成することをお勧めします。
 
-`useConfigs=maxPerformance`には構成のグループが含まれます。 MySQL Connector/J 8.0 の詳細な設定と MySQL Connector/J 5.1 の詳細な設定を取得するには、それぞれ[mysql-コネクタ-j 8.0](https://github.com/mysql/mysql-connector-j/blob/release/8.0/src/main/resources/com/mysql/cj/configurations/maxPerformance.properties)と[mysql-コネクタ-j 5.1](https://github.com/mysql/mysql-connector-j/blob/release/5.1/src/com/mysql/jdbc/configs/maxPerformance.properties)を参照してください。
+`useConfigs=maxPerformance`には構成のグループが含まれます。 MySQL Connector/J 8.0 および MySQL Connector/J 5.1 の詳細な設定を取得するには、それぞれ[mysql-コネクタ-j 8.0](https://github.com/mysql/mysql-connector-j/blob/release/8.0/src/main/resources/com/mysql/cj/configurations/maxPerformance.properties)と[mysql-コネクタ-j 5.1](https://github.com/mysql/mysql-connector-j/blob/release/5.1/src/com/mysql/jdbc/configs/maxPerformance.properties)を参照してください。
 
 構成後、モニタリングをチェックして、 `SELECT`ステートメントの数が減少していることを確認できます。
 

@@ -51,7 +51,7 @@ OLTP (オンライン トランザクション処理) シナリオの場合、�
 
 バッチ挿入の場合は、 [`addBatch` / `executeBatch` API](https://www.tutorialspoint.com/jdbc/jdbc-batch-processing)を使用できます。 `addBatch()`メソッドは、最初にクライアント上で複数の SQL ステートメントをキャッシュし、 `executeBatch`メソッドを呼び出すときにそれらをまとめてデータベースサーバーに送信するために使用されます。
 
-> **ノート：**
+> **注記：**
 >
 > デフォルトの MySQL Connector/J 実装では、 `addBatch()`でバッチに追加された SQL ステートメントの送信時刻が`executeBatch()`呼び出される時刻まで遅延しますが、実際のネットワーク転送中にステートメントは 1 つずつ送信されます。したがって、この方法では通常、通信オーバーヘッドの量は削減されません。
 >
@@ -63,7 +63,7 @@ OLTP (オンライン トランザクション処理) シナリオの場合、�
 
 通常、JDBC には次の 2 種類の処理方法があります。
 
--   [`FetchSize` `Integer.MIN_VALUE`に設定します](https://dev.mysql.com/doc/connector-j/8.0/en/connector-j-reference-implementation-notes.html#ResultSet)を指定すると、クライアントはキャッシュを行わなくなります。クライアントは`StreamingResult`を介してネットワーク接続から実行結果を読み取ります。
+-   [`FetchSize` `Integer.MIN_VALUE`に設定します](https://dev.mysql.com/doc/connector-j/en/connector-j-reference-implementation-notes.html#ResultSet)を指定すると、クライアントはキャッシュを行わなくなります。クライアントは`StreamingResult`を介してネットワーク接続から実行結果を読み取ります。
 
     クライアントがストリーミング読み取りメソッドを使用する場合、ステートメントを使用してクエリを作成し続ける前に、読み取りを完了するかクローズ`resultset`する必要があります。それ以外の場合は、エラー`No statements may be issued when any streaming result sets are open and in use on a given connection. Ensure that you have called .close() on any active streaming result sets before attempting more queries.`が返されます。
 
@@ -75,7 +75,7 @@ TiDB は両方の方法をサポートしていますが、最初の方法を使
 
 ### MySQL JDBC パラメータ {#mysql-jdbc-parameters}
 
-JDBC は通常、実装関連の設定を JDBC URL パラメータの形式で提供します。このセクションでは[MySQL Connector/J のパラメータ設定](https://dev.mysql.com/doc/connector-j/8.0/en/connector-j-reference-configuration-properties.html)を紹介します (MariaDB を使用する場合は[MariaDBのパラメータ設定](https://mariadb.com/kb/en/library/about-mariadb-connector-j/#optional-url-parameters)を参照してください)。このドキュメントではすべての構成項目をカバーすることはできないため、パフォーマンスに影響を与える可能性のあるいくつかのパラメーターに主に焦点を当てています。
+JDBC は通常、実装関連の設定を JDBC URL パラメーターの形式で提供します。このセクションでは[MySQL Connector/J のパラメータ設定](https://dev.mysql.com/doc/connector-j/en/connector-j-reference-configuration-properties.html)を紹介します (MariaDB を使用する場合は[MariaDBのパラメータ設定](https://mariadb.com/kb/en/library/about-mariadb-connector-j/#optional-url-parameters)を参照してください)。このドキュメントではすべての構成項目をカバーすることはできないため、パフォーマンスに影響を与える可能性のあるいくつかのパラメーターに主に焦点を当てています。
 
 #### 関連パラメータの準備 {#prepare-related-parameters}
 
@@ -137,8 +137,6 @@ pstmt.executeBatch();
 
 `Batch`メソッドが使用されていますが、TiDB に送信される SQL ステートメントは依然として個別の`INSERT`のステートメントです。
 
-{{< copyable "" >}}
-
 ```sql
 insert into t(a) values(10);
 insert into t(a) values(11);
@@ -147,15 +145,11 @@ insert into t(a) values(12);
 
 ただし、 `rewriteBatchedStatements=true`を設定すると、TiDB に送信される SQL ステートメントは単一の`INSERT`ステートメントになります。
 
-{{< copyable "" >}}
-
 ```sql
 insert into t(a) values(10),(11),(12);
 ```
 
 `INSERT`ステートメントの書き換えでは、複数の「values」キーワードの後の値が SQL ステートメント全体に連結されることに注意してください。 `INSERT`のステートメントに他の相違点がある場合、次のように書き直すことはできません。
-
-{{< copyable "" >}}
 
 ```sql
 insert into t (a) values (10) on duplicate key update a = 10;
@@ -165,8 +159,6 @@ insert into t (a) values (12) on duplicate key update a = 12;
 
 上記`INSERT`ステートメントを 1 つのステートメントに書き換えることはできません。しかし、3 つのステートメントを次のステートメントに変更すると、次のようになります。
 
-{{< copyable "" >}}
-
 ```sql
 insert into t (a) values (10) on duplicate key update a = values(a);
 insert into t (a) values (11) on duplicate key update a = values(a);
@@ -175,15 +167,11 @@ insert into t (a) values (12) on duplicate key update a = values(a);
 
 その後、書き換え要件を満たします。上記の`INSERT`ステートメントは、次の 1 つのステートメントに書き換えられます。
 
-{{< copyable "" >}}
-
 ```sql
 insert into t (a) values (10), (11), (12) on duplicate key update a = values(a);
 ```
 
 バッチ更新中に 3 つ以上の更新があった場合、SQL ステートメントが書き換えられ、複数のクエリとして送信されます。これにより、クライアントからサーバーへのリクエストのオーバーヘッドが効果的に削減されますが、副作用として、生成される SQL ステートメントが大きくなります。例えば：
-
-{{< copyable "" >}}
 
 ```sql
 update t set a = 10 where id = 1; update t set a = 11 where id = 2; update t set a = 12 where id = 3;
@@ -195,7 +183,7 @@ update t set a = 10 where id = 1; update t set a = 11 where id = 2; update t set
 
 モニタリングを通じて、アプリケーションは TiDB クラスターに対して`INSERT`操作のみを実行しますが、冗長な`SELECT`のステートメントが多数あることに気づくかもしれません。通常、これは、JDBC が設定をクエリするためにいくつかの SQL ステートメント (例: `select @@session.transaction_read_only`を送信するために発生します。これらの SQL ステートメントは TiDB では役に立たないため、余分なオーバーヘッドを避けるために`useConfigs=maxPerformance`を構成することをお勧めします。
 
-`useConfigs=maxPerformance`には構成のグループが含まれます。 MySQL Connector/J 8.0 の詳細な設定と MySQL Connector/J 5.1 の詳細な設定を取得するには、それぞれ[mysql-コネクタ-j 8.0](https://github.com/mysql/mysql-connector-j/blob/release/8.0/src/main/resources/com/mysql/cj/configurations/maxPerformance.properties)と[mysql-コネクタ-j 5.1](https://github.com/mysql/mysql-connector-j/blob/release/5.1/src/com/mysql/jdbc/configs/maxPerformance.properties)を参照してください。
+`useConfigs=maxPerformance`には構成のグループが含まれます。 MySQL Connector/J 8.0 および MySQL Connector/J 5.1 の詳細な設定を取得するには、それぞれ[mysql-コネクタ-j 8.0](https://github.com/mysql/mysql-connector-j/blob/release/8.0/src/main/resources/com/mysql/cj/configurations/maxPerformance.properties)と[mysql-コネクタ-j 5.1](https://github.com/mysql/mysql-connector-j/blob/release/5.1/src/com/mysql/jdbc/configs/maxPerformance.properties)を参照してください。
 
 構成後、モニタリングをチェックして、 `SELECT`ステートメントの数が減少していることを確認できます。
 
@@ -226,9 +214,7 @@ Java には、 [HikariCP](https://github.com/brettwooldridge/HikariCP) 、 [tomc
 
 Javaアプリケーションで次のエラーが頻繁に表示される場合:
 
-```
-The last packet sent successfully to the server was 3600000 milliseconds ago. The driver has not received any packets from the server. com.mysql.jdbc.exceptions.jdbc4.CommunicationsException: Communications link failure
-```
+    The last packet sent successfully to the server was 3600000 milliseconds ago. The driver has not received any packets from the server. com.mysql.jdbc.exceptions.jdbc4.CommunicationsException: Communications link failure
 
 `n milliseconds ago`の`n`が`0`または非常に小さい値の場合、通常は、実行された SQL 操作によって TiDB が異常終了することが原因です。原因を見つけるには、TiDB stderr ログを確認することをお勧めします。
 
@@ -246,7 +232,7 @@ The last packet sent successfully to the server was 3600000 milliseconds ago. Th
 
 ### マイバティス {#mybatis}
 
-[マイバティス](http://www.mybatis.org/mybatis-3/)は、人気のあるJavaデータ アクセス フレームワークです。これは主に、SQL クエリを管理し、結果セットとJavaオブジェクト間のマッピングを完了するために使用されます。 MyBatis は TiDB と高い互換性があります。 MyBatis では、歴史的な問題に基づく問題が発生することはほとんどありません。
+[マイバティス](http://www.mybatis.org/mybatis-3/)は、人気のあるJavaデータ アクセス フレームワークです。これは主に、SQL クエリを管理し、結果セットとJavaオブジェクト間のマッピングを完了するために使用されます。 MyBatis は TiDB と高い互換性があります。 MyBatis では、歴史的な問題に基づく問題がほとんど発生しません。
 
 ここでは、このドキュメントでは主に次の構成に焦点を当てます。
 
@@ -255,13 +241,13 @@ The last packet sent successfully to the server was 3600000 milliseconds ago. Th
 MyBatis Mapper は 2 つのパラメータをサポートしています。
 
 -   `select 1 from t where id = #{param1}`は Prepared Statement として`select 1 from t where id =?`に変換されて「準備」され、実パラメータが再利用されます。このパラメーターを前述の Prepare 接続パラメーターとともに使用すると、最高のパフォーマンスが得られます。
--   `select 1 from t where id = ${param2}`テキストファイルとして`select 1 from t where id = 1`に置き換えて実行します。このステートメントが別のパラメータに置き換えられて実行されると、MyBatis はステートメントを「準備」するためのさまざまなリクエストを TiDB に送信します。これにより、TiDB が大量のプリペアド ステートメントをキャッシュする可能性があり、この方法で SQL 操作を実行すると、インジェクションのセキュリティ リスクが発生します。
+-   `select 1 from t where id = ${param2}`テキストファイルとして`select 1 from t where id = 1`に置き換えて実行します。このステートメントが別のパラメータに置き換えられて実行されると、MyBatis はステートメントを「準備する」ための別のリクエストを TiDB に送信します。これにより、TiDB が大量のプリペアド ステートメントをキャッシュする可能性があり、この方法で SQL 操作を実行すると、インジェクションのセキュリティ リスクが発生します。
 
 #### 動的SQLバッチ {#dynamic-sql-batch}
 
 [動的SQL - foreach](http://www.mybatis.org/mybatis-3/dynamic-sql.html#foreach)
 
-複数の`INSERT`ステートメントの`insert ... values(...), (...), ...`形式への自動書き換えをサポートするために、前述したように JDBC で`rewriteBatchedStatements=true`構成することに加えて、MyBatis は動的 SQL を使用してバッチ挿入を半自動的に生成することもできます。次のマッパーを例として取り上げます。
+複数の`INSERT`ステートメントの`insert ... values(...), (...), ...`形式への自動書き換えをサポートするために、前述のように JDBC で`rewriteBatchedStatements=true`を構成することに加えて、MyBatis は動的 SQL を使用してバッチ挿入を半自動的に生成することもできます。次のマッパーを例として取り上げます。
 
 ```xml
 <insert id="insertTestBatch" parameterType="java.util.List" fetchSize="1">
@@ -337,7 +323,7 @@ Javaアプリケーションで問題が発生し、アプリケーション ロ
 
 `jstack pid`を実行すると、対象プロセス内の全スレッドのIDとスタック情報を出力できます。デフォルトでは、 Javaスタックのみが出力されます。 JVM 内の C++ スタックも同時に出力したい場合は、 `-m`オプションを追加します。
 
-jstack を複数回使用すると、スタックした問題 (たとえば、Mybatis で Batch ExecutorType を使用するためにアプリケーションのビューからのクエリが遅い) やアプリケーションのデッドロックの問題 (たとえば、アプリケーションが SQL ステートメントを送信しないなど) を簡単に特定できます。送信する前にロックをプリエンプトします)。
+jstack を複数回使用すると、行き詰まった問題 (たとえば、Mybatis で Batch ExecutorType を使用するためにアプリケーションのビューからのクエリが遅いなど) やアプリケーションのデッドロックの問題 (たとえば、アプリケーションが SQL ステートメントを送信しないなど) を簡単に特定できます。送信する前にロックをプリエンプトしています)。
 
 さらに、スレッド ID を表示するには、 `top -p $ PID -H`またはJavaスイスナイフが一般的な方法です。また、「スレッドが多くの CPU リソースを占有しており、何を実行しているのかわからない」という問題を特定するには、次の手順を実行します。
 
@@ -348,7 +334,7 @@ jstack を複数回使用すると、スタックした問題 (たとえば、My
 
 Go の pprof/heap とは異なり、プロセス全体のメモリスナップショット (Go ではディストリビュータのサンプリング) を[jmap](https://docs.oracle.com/javase/7/docs/technotes/tools/share/jmap.html)し、そのスナップショットを別のツールで分析できます[マット](https://www.eclipse.org/mat/) 。
 
-mat を通じて、プロセス内のすべてのオブジェクトの関連情報と属性を確認でき、スレッドの実行ステータスを観察することもできます。たとえば、mat を使用すると、現在のアプリケーションに存在する MySQL 接続オブジェクトの数と、各接続オブジェクトのアドレスとステータス情報を確認できます。
+mat を通じて、プロセス内のすべてのオブジェクトの関連情報と属性を確認でき、スレッドの実行ステータスを観察することもできます。たとえば、 mat を使用すると、現在のアプリケーションに存在する MySQL 接続オブジェクトの数と、各接続オブジェクトのアドレスとステータス情報を確認できます。
 
 デフォルトでは、マットは到達可能なオブジェクトのみを処理することに注意してください。若い GC の問題をトラブルシューティングしたい場合は、マット構成を調整して、到達不能なオブジェクトを表示できます。さらに、若い GC の問題 (または多数の存続期間の短いオブジェクト) のメモリ割り当てを調査するには、 Java Flight Recorder を使用する方が便利です。
 

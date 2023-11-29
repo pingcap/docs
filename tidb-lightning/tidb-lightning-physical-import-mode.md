@@ -5,7 +5,7 @@ summary: Learn about the physical import mode in TiDB Lightning.
 
 # 物理インポートモード {#physical-import-mode}
 
-物理インポート モードは、SQL インターフェイスを経由せずに、データをキーと値のペアとして TiKV ノードに直接挿入する、効率的かつ高速なインポート モードです。物理インポート モードを使用する場合、Lightning の単一インスタンスで最大 10 TiB のデータをインポートできます。理論的には、Lightning インスタンスの数が増えると、サポートされるインポートデータの量も増加します。 Lightning ベースの[並行輸入](/tidb-lightning/tidb-lightning-distributed-import.md)最大 20 TiB のデータを効果的に処理できることがユーザーによって検証されています。
+物理インポート モードは、SQL インターフェイスを経由せずに、データをキーと値のペアとして TiKV ノードに直接挿入する、効率的かつ高速なインポート モードです。物理インポート モードを使用する場合、Lightning の単一インスタンスで最大 10 TiB のデータをインポートできます。理論的には、Lightning インスタンスの数が増えると、サポートされるインポートデータの量も増加します。 Lightning ベースの[並行輸入](/tidb-lightning/tidb-lightning-distributed-import.md)最大 50 TiB のデータを効果的に処理できることがユーザーによって検証されています。
 
 物理インポートモードを使用する前に、必ず[要件と制限事項](#requirements-and-restrictions)をお読みください。
 
@@ -19,7 +19,7 @@ backend = "local"
 
 ## 実装 {#implementation}
 
-1.  データをインポートする前に、 TiDB Lightning は自動的に TiKV ノードを「インポート モード」に切り替えます。これにより、書き込みパフォーマンスが向上し、自動圧縮が停止されます。 TiDB Lightning は、 TiDB Lightning のバージョンに従ってグローバル スケジューリングを一時停止するかどうかを決定します。
+1.  データをインポートする前に、 TiDB Lightning はTiKV ノードを自動的に「インポート モード」に切り替えます。これにより、書き込みパフォーマンスが向上し、自動圧縮が停止されます。 TiDB Lightning は、 TiDB Lightning のバージョンに従ってグローバル スケジューリングを一時停止するかどうかを決定します。
 
     -   v7.1.0 以降、 TiDB Lightningパラメータ[`pause-pd-scheduler-scope`](/tidb-lightning/tidb-lightning-configuration.md)を使用して、スケジュールの一時停止の範囲を制御できるようになりました。
     -   v6.2.0 と v7.0.0 の間のTiDB Lightningバージョンの場合、グローバル スケジューリングの一時停止の動作は、TiDB クラスターのバージョンによって異なります。 TiDB クラスター &gt;= v6.1.0 の場合、 TiDB Lightning はターゲット テーブル データを保存するリージョンのスケジューリングを一時停止します。インポートが完了すると、 TiDB Lightning はスケジュールを回復します。他のバージョンの場合、 TiDB Lightning はグローバル スケジューリングを一時停止します。
@@ -49,7 +49,7 @@ backend = "local"
 
 ### 環境要件 {#environment-requirements}
 
-**オペレーティングシステム**:
+**オペレーティング·システム**：
 
 新しい CentOS 7 インスタンスを使用することをお勧めします。仮想マシンはローカル ホストまたはクラウドにデプロイできます。 TiDB Lightning はデフォルトで必要なだけの CPU リソースを消費するため、専用サーバーに展開することをお勧めします。これが不可能な場合は、他の TiDB コンポーネント (例: tikv-server) とともに単一サーバーにデプロイし、 TiDB Lightningからの CPU 使用率を制限するように`region-concurrency`を構成できます。通常、サイズは論理 CPU の 75% に構成できます。
 
@@ -84,7 +84,7 @@ backend = "local"
 
 -   TiFlashでTiDB Lightningを使用する場合は、次の点に注意してください。
 
-    -   テーブルのTiFlashレプリカを作成したかどうかに関係なく、 TiDB Lightning を使用してデータをテーブルにインポートできます。ただし、インポートには通常のインポートよりも時間がかかる場合があります。インポート時間は、 TiDB Lightningがデプロイされているサーバーのネットワーク帯域幅、 TiFlashノードの CPU とディスクの負荷、 TiFlashレプリカの数に影響されます。
+    -   テーブルのTiFlashレプリカを作成したかどうかに関係なく、 TiDB Lightning を使用してデータをテーブルにインポートできます。ただし、インポートには通常のインポートよりも時間がかかる場合があります。インポート時間は、 TiDB Lightningがデプロイされているサーバーのネットワーク帯域幅、 TiFlashノードの CPU とディスクの負荷、およびTiFlashレプリカの数に影響されます。
 
 -   TiDB Lightning文字セット:
 

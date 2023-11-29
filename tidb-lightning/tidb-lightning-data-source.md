@@ -17,15 +17,85 @@ data-source-dir = "/data/my_database"
 
 TiDB Lightningの実行中は、 `data-source-dir`のパターンに一致するすべてのファイルを検索します。
 
-| ファイル     | タイプ                                                                                                                                                                                                                  | パターン                                                     |
-| -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------- |
-| スキーマファイル | `CREATE TABLE` DDL ステートメントが含まれます                                                                                                                                                                                     | `${db_name}.${table_name}-schema.sql`                    |
-| スキーマファイル | `CREATE DATABASE` DDL ステートメントが含まれます                                                                                                                                                                                  | `${db_name}-schema-create.sql`                           |
-| データファイル  | データ ファイルにテーブル全体のデータが含まれている場合、ファイルは`${db_name}.${table_name}`という名前のテーブルにインポートされます。                                                                                                                                    | `${db_name}.${table_name}.${csv|sql|parquet}`            |
-| データファイル  | テーブルのデータが複数のデータ ファイルに分割されている場合、各データ ファイルのファイル名の末尾に番号を付ける必要があります。                                                                                                                                                     | `${db_name}.${table_name}.001.${csv|sql|parquet}`        |
-| 圧縮ファイル   | ファイルに`gzip` 、 `snappy` 、または`zstd`などの圧縮接尾辞が含まれている場合、 TiDB Lightning はファイルをインポートする前にファイルを解凍します。 Snappy 圧縮ファイルは[公式の Snappy フォーマット](https://github.com/google/snappy)にある必要があることに注意してください。 Snappy 圧縮の他のバリアントはサポートされていません。 | `${db_name}.${table_name}.${csv|sql|parquet}.{compress}` |
+| ファイル     | タイプ                                                                                                                                                                                                                | パターン                                                     |
+| -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------- |
+| スキーマファイル | `CREATE TABLE` DDL ステートメントが含まれます                                                                                                                                                                                   | `${db_name}.${table_name}-schema.sql`                    |
+| スキーマファイル | `CREATE DATABASE` DDL ステートメントが含まれます                                                                                                                                                                                | `${db_name}-schema-create.sql`                           |
+| データファイル  | データ ファイルにテーブル全体のデータが含まれている場合、ファイルは`${db_name}.${table_name}`という名前のテーブルにインポートされます。                                                                                                                                  | `${db_name}.${table_name}.${csv|sql|parquet}`            |
+| データファイル  | テーブルのデータが複数のデータ ファイルに分割されている場合、各データ ファイルのファイル名の末尾に番号を付ける必要があります。                                                                                                                                                   | `${db_name}.${table_name}.001.${csv|sql|parquet}`        |
+| 圧縮ファイル   | ファイルに`gzip` 、 `snappy` 、 `zstd`などの圧縮接尾辞が含まれている場合、 TiDB Lightning はファイルをインポートする前にファイルを解凍します。 Snappy 圧縮ファイルは[公式の Snappy フォーマット](https://github.com/google/snappy)にある必要があることに注意してください。 Snappy 圧縮の他のバリアントはサポートされていません。 | `${db_name}.${table_name}.${csv|sql|parquet}.{compress}` |
 
 TiDB Lightning は、データを可能な限り並行して処理します。ファイルは順番に読み取る必要があるため、データ処理の同時実行性はファイル レベル ( `region-concurrency`で制御) になります。したがって、インポートされるファイルが大きい場合、インポートのパフォーマンスが低下します。最高のパフォーマンスを実現するには、インポートされるファイルのサイズを 256 MiB 以下に制限することをお勧めします。
+
+## データベースとテーブルの名前を変更する {#rename-databases-and-tables}
+
+TiDB Lightning は、ファイル名パターンに従って、対応するデータベースとテーブルにデータをインポートします。データベースまたはテーブルの名前が変更された場合は、ファイルの名前を変更してインポートするか、正規表現を使用してオンラインで名前を置き換えることができます。
+
+### ファイル名をバッチで変更する {#rename-files-in-batch}
+
+Red Hat Linux または Red Hat Linux ベースのディストリビューションを使用している場合は、 `rename`コマンドを使用して`data-source-dir`ディレクトリ内のファイルの名前をバッチ変更できます。
+
+例えば：
+
+```shell
+rename srcdb. tgtdb. *.sql
+```
+
+データベース名を変更した後、 `CREATE DATABASE` DDL ステートメントを含む`${db_name}-schema-create.sql`ファイルを`data-source-dir`ディレクトリから削除することをお勧めします。テーブル名も変更する場合は、 `CREATE TABLE` DDL ステートメントを含む`${db_name}.${table_name}-schema.sql`ファイル内のテーブル名も変更する必要があります。
+
+### 正規表現を使用してオンラインで名前を置換する {#use-regular-expressions-to-replace-names-online}
+
+正規表現を使用してオンラインで名前を置換するには、 `[[mydumper.files]]`内の`pattern`構成を使用してファイル名を照合し、 `schema`と`table`を希望の名前に置き換えます。詳細については、 [カスタマイズされたファイルと一致する](#match-customized-files)を参照してください。
+
+以下は、正規表現を使用してオンラインで名前を置換する例です。この例では:
+
+-   データ ファイル`pattern`の一致ルールは`^({schema_regrex})\.({table_regrex})\.({file_serial_regrex})\.(csv|parquet|sql)`です。
+-   `schema`を`'$1'`として指定します。これは、最初の正規表現`schema_regrex`の値が変更されないことを意味します。または、固定ターゲットデータベース名を意味する`'tgtdb'`などの文字列として`schema`を指定します。
+-   `table`を`'$2'`として指定します。これは、2 番目の正規表現`table_regrex`の値が変更されないことを意味します。または、固定ターゲットテーブル名を意味する`'t1'`などの文字列として`table`を指定します。
+-   `type`を`'$3'`として指定します。これはデータ ファイルの種類を意味します。 `type` `"table-schema"` ( `schema.sql`ファイルを表す) または`"schema-schema"` ( `schema-create.sql`ファイルを表す) として指定できます。
+
+```toml
+[mydumper]
+data-source-dir = "/some-subdir/some-database/"
+[[mydumper.files]]
+pattern = '^(srcdb)\.(.*?)-schema-create\.sql'
+schema = 'tgtdb'
+type = "schema-schema"
+[[mydumper.files]]
+pattern = '^(srcdb)\.(.*?)-schema\.sql'
+schema = 'tgtdb'
+table = '$2'
+type = "table-schema"
+[[mydumper.files]]
+pattern = '^(srcdb)\.(.*?)\.(?:[0-9]+)\.(csv|parquet|sql)'
+schema = 'tgtdb'
+table = '$2'
+type = '$3'
+```
+
+データ ファイルのバックアップに`gzip`を使用している場合は、それに応じて圧縮形式を構成する必要があります。データファイル`pattern`のマッチングルールは`'^({schema_regrex})\.({table_regrex})\.({file_serial_regrex})\.(csv|parquet|sql)\.(gz)'`である。圧縮ファイル形式を表すには、 `compression`または`'$4'`を指定できます。例えば：
+
+```toml
+[mydumper]
+data-source-dir = "/some-subdir/some-database/"
+[[mydumper.files]]
+pattern = '^(srcdb)\.(.*?)-schema-create\.(sql)\.(gz)'
+schema = 'tgtdb'
+type = "schema-schema"
+compression = '$4'
+[[mydumper.files]]
+pattern = '^(srcdb)\.(.*?)-schema\.(sql)\.(gz)'
+schema = 'tgtdb'
+table = '$2'
+type = "table-schema"
+compression = '$4'
+[[mydumper.files]]
+pattern = '^(srcdb)\.(.*?)\.(?:[0-9]+)\.(sql)\.(gz)'
+schema = 'tgtdb'
+table = '$2'
+type = '$3'
+compression = '$4'
+```
 
 ## CSV {#csv}
 
@@ -71,7 +141,7 @@ trim-last-separator = false
 
 *一重引用*符で囲まれた文字列 ( `'…'` ) を使用すると、バックスラッシュのエスケープを抑制できます。たとえば、 `terminator = '\n'` 、LF `\n`ではなく、バックスラッシュ ( `\` ) とその後に文字`n`が続いた 2 文字の文字列をターミネータとして使用することを意味します。
 
-詳細については、 [TOML v1.0.0 仕様](https://toml.io/en/v1.0.0#string)を参照してください。
+詳細については、 [TOML v1.0.0 仕様](https://toml.io/en/v1.0.0#string)参照してください。
 
 #### <code>separator</code> {#code-separator-code}
 
@@ -199,7 +269,7 @@ strict-format = true
 -   区切り文字が空です。
 -   どのフィールドにもターミネータ自体は含まれません。デフォルト設定では、これはすべてのフィールドに CR ( `\r` ) または LF ( `\n` ) が含まれていないことを意味します。
 
-CSV ファイルが厳密ではなく、誤って`strict-format`が`true`に設定されている場合、複数行にまたがるフィールドが半分の 2 つのチャンクに分割され、解析エラーが発生したり、破損したデータが静かにインポートされたりする可能性があります。
+CSV ファイルが厳密ではなく、誤って`strict-format`が`true`に設定されている場合、複数行にまたがるフィールドが 2 つのチャンクに半分に分割され、解析エラーが発生したり、破損したデータが静かにインポートされたりする可能性があります。
 
 ### 一般的な構成例 {#common-configuration-examples}
 
@@ -274,7 +344,7 @@ TiDB Lightning は現在、Amazon Auroraまたは Apache Hive によって生成
 
     [[mydumper.files]]
     # The expression needed for parsing Amazon Aurora parquet files
-    pattern = '(?i)^(?:[^/]*/)*([a-z0-9_]+)\.([a-z0-9_]+)/(?:[^/]*/)*(?:[a-z0-9\-_.]+\.(parquet))$'
+    pattern = '(?i)^(?:[^/]*/)*([a-z0-9\-_]+).([a-z0-9\-_]+)/(?:[^/]*/)*(?:[a-z0-9\-_.]+\.(parquet))$'
     schema = '$1'
     table = '$2'
     type = '$3'
@@ -305,14 +375,14 @@ S3 にエクスポートされたAuroraスナップショットを例に挙げ�
 
 通常、 `some-database`データベースをインポートするには、 `data-source-dir`を`S3://some-bucket/some-subdir/some-database/`に設定します。
 
-前述の Parquet ファイル パスに基づいて、ファイルに一致する`(?i)^(?:[^/]*/)*([a-z0-9_]+)\.([a-z0-9_]+)/(?:[^/]*/)*(?:[a-z0-9\-_.]+\.(parquet))$`のような正規表現を作成できます。一致グループでは、 `index=1`は`some-database` 、 `index=2`は`some-table` 、 `index=3`は`parquet`です。
+前述の Parquet ファイル パスに基づいて、ファイルに一致する`(?i)^(?:[^/]*/)*([a-z0-9\-_]+).([a-z0-9\-_]+)/(?:[^/]*/)*(?:[a-z0-9\-_.]+\.(parquet))$`のような正規表現を作成できます。一致グループでは、 `index=1`は`some-database` 、 `index=2`は`some-table` 、 `index=3`は`parquet`です。
 
 正規表現と対応するインデックスに従って構成ファイルを作成すると、 TiDB Lightning がデフォルトの命名規則に従っていないデータ ファイルを認識できるようになります。例えば：
 
 ```toml
 [[mydumper.files]]
 # The expression needed for parsing the Amazon Aurora parquet file
-pattern = '(?i)^(?:[^/]*/)*([a-z0-9_]+)\.([a-z0-9_]+)/(?:[^/]*/)*(?:[a-z0-9\-_.]+\.(parquet))$'
+pattern = '(?i)^(?:[^/]*/)*([a-z0-9\-_]+).([a-z0-9\-_]+)/(?:[^/]*/)*(?:[a-z0-9\-_.]+\.(parquet))$'
 schema = '$1'
 table = '$2'
 type = '$3'

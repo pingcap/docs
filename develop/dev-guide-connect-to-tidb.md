@@ -33,7 +33,7 @@ mysql --host <tidb_server_host> --port 4000 -u root -p --comments
 
 <div label="MySQL Shell">
 
-TiDB のコマンドライン ツールとして使用できる MySQL Shell を使用して TiDB に接続できます。 MySQL Shell をインストールするには、 [MySQL シェルのドキュメント](https://dev.mysql.com/doc/mysql-shell/8.0/en/mysql-shell-install.html)の手順に従ってください。インストール後、次のコマンドを使用して TiDB に接続できます。
+TiDB のコマンドライン ツールとして使用できる MySQL Shell を使用して TiDB に接続できます。 MySQL Shell をインストールするには、 [MySQL シェルのドキュメント](https://dev.mysql.com/doc/mysql-shell/8.0/en/mysql-shell-install.html)の手順に従います。インストール後、次のコマンドを使用して TiDB に接続できます。
 
 ```shell
 mysqlsh --sql mysql://root@<tidb_server_host>:4000
@@ -45,7 +45,7 @@ mysqlsh --sql mysql://root@<tidb_server_host>:4000
 
 ## JDBC {#jdbc}
 
-[JDBC](https://dev.mysql.com/doc/connector-j/8.0/en/)ドライバーを使用して TiDB に接続できます。これを行うには、 `MysqlDataSource`または`MysqlConnectionPoolDataSource`オブジェクト (どちらのオブジェクトも`DataSource`インターフェイスをサポートします) を作成し、 `setURL`関数を使用して接続文字列を設定する必要があります。
+[JDBC](https://dev.mysql.com/doc/connector-j/en/)ドライバーを使用して TiDB に接続できます。これを行うには、 `MysqlDataSource`または`MysqlConnectionPoolDataSource`オブジェクト (どちらのオブジェクトも`DataSource`インターフェイスをサポートします) を作成し、 `setURL`関数を使用して接続文字列を設定する必要があります。
 
 例えば：
 
@@ -54,7 +54,7 @@ MysqlDataSource mysqlDataSource = new MysqlDataSource();
 mysqlDataSource.setURL("jdbc:mysql://{host}:{port}/{database}?user={username}&password={password}");
 ```
 
-JDBC 接続の詳細については、 [JDBC ドキュメント](https://dev.mysql.com/doc/connector-j/8.0/en/)を参照してください。
+JDBC 接続の詳細については、 [JDBC ドキュメント](https://dev.mysql.com/doc/connector-j/en/)を参照してください。
 
 ### 接続パラメータ {#connection-parameters}
 

@@ -13,10 +13,6 @@ summary: An overview of the usage of SELECT for the TiDB database.
 
 ![SelectStmt](/media/sqlgram/SelectStmt.png)
 
-> **注記：**
->
-> `SELECT ... INTO OUTFILE`ステートメントは TiDB セルフホストにのみ適用され、 [TiDB Cloud](https://docs.pingcap.com/tidbcloud/)では使用できません。
-
 **デュアルから:**
 
 ![FromDual](/media/sqlgram/FromDual.png)
@@ -117,6 +113,8 @@ TableSampleOpt ::=
 
 ## 例 {#examples}
 
+### 選択する {#select}
+
 ```sql
 mysql> CREATE TABLE t1 (id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, c1 INT NOT NULL);
 Query OK, 0 rows affected (0.11 sec)
@@ -158,12 +156,80 @@ mysql> SELECT AVG(s_quantity), COUNT(s_quantity) FROM stock;
 
 上の例では、 `tiup bench tpcc prepare`で生成されたデータを使用しています。最初のクエリは`TABLESAMPLE`の使用を示しています。
 
+### ...をOUTFILEに選択してください {#select-into-outfile}
+
+`SELECT ... INTO OUTFILE`ステートメントは、クエリの結果をファイルに書き込むために使用されます。
+
+> **注記：**
+>
+> -   このステートメントは TiDB セルフホスト型にのみ適用され、 [TiDB Cloud](https://docs.pingcap.com/tidbcloud/)では使用できません。
+> -   このステートメントは、Amazon S3 や GCS などへの[外部ストレージ](https://docs.pingcap.com/tidb/stable/backup-and-restore-storages)結果の書き込みをサポートしていません。
+
+ステートメントでは、次の句を使用して出力ファイルの形式を指定できます。
+
+-   `FIELDS TERMINATED BY` : ファイル内のフィールド区切り文字を指定します。たとえば、カンマ区切り値 (CSV) を出力する場合は`','`と指定し、タブ区切り値 (TSV) を出力する場合は`'\t'`と指定できます。
+-   `FIELDS ENCLOSED BY` : ファイル内の各フィールドを囲む囲み文字を指定します。
+-   `LINES TERMINATED BY` : 特定の文字で行を終了する場合は、ファイル内の行終端文字を指定します。
+
+次のような 3 つの列を持つテーブル`t`があるとします。
+
+```sql
+mysql> CREATE TABLE t (a INT, b VARCHAR(10), c DECIMAL(10,2));
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> INSERT INTO t VALUES (1, 'a', 1.1), (2, 'b', 2.2), (3, 'c', 3.3);
+Query OK, 3 rows affected (0.01 sec)
+```
+
+次の例は、 `SELECT ... INTO OUTFILE`ステートメントを使用してクエリ結果をファイルに書き込む方法を示しています。
+
+**例 1:**
+
+```sql
+mysql> SELECT * FROM t INTO OUTFILE '/tmp/tmp_file1';
+Query OK, 3 rows affected (0.00 sec)
+```
+
+この例では、次のように`/tmp/tmp_file1`でクエリ結果を見つけることができます。
+
+    1       a       1.10
+    2       b       2.20
+    3       c       3.30
+
+**例 2:**
+
+```sql
+mysql> SELECT * FROM t INTO OUTFILE '/tmp/tmp_file2' FIELDS TERMINATED BY ',' ENCLOSED BY '"';
+Query OK, 3 rows affected (0.00 sec)
+```
+
+この例では、次のように`/tmp/tmp_file2`でクエリ結果を見つけることができます。
+
+    "1","a","1.10"
+    "2","b","2.20"
+    "3","c","3.30"
+
+**例 3:**
+
+```sql
+mysql> SELECT * FROM t INTO OUTFILE '/tmp/tmp_file3'
+    -> FIELDS TERMINATED BY ',' ENCLOSED BY '\'' LINES TERMINATED BY '<<<\n';
+Query OK, 3 rows affected (0.00 sec)
+```
+
+この例では、次のように`/tmp/tmp_file3`でクエリ結果を見つけることができます。
+
+    '1','a','1.10'<<<
+    '2','b','2.20'<<<
+    '3','c','3.30'<<<
+
 ## MySQLの互換性 {#mysql-compatibility}
 
 -   構文`SELECT ... INTO @variable`はサポートされていません。
 -   構文`SELECT ... GROUP BY ... WITH ROLLUP`はサポートされていません。
+-   構文`SELECT ... INTO DUMPFILE`はサポートされていません。
 -   MySQL 5.7のように、構文`SELECT .. GROUP BY expr` `GROUP BY expr ORDER BY expr`を意味しません。 TiDB は MySQL 8.0 の動作に一致し、デフォルトの順序を意味しません。
--   構文`SELECT ... TABLESAMPLE ...`は TiDB 拡張機能であり、MySQL ではサポートされていません。
+-   構文`SELECT ... TABLESAMPLE ...`は、他のデータベース システムおよび[ISO/IEC 9075-2](https://standards.iso.org/iso-iec/9075/-2/ed-6/en/)標準との互換性を目的として設計された TiDB 拡張機能ですが、現在 MySQL ではサポートされていません。
 
 ## こちらも参照 {#see-also}
 

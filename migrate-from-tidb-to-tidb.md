@@ -61,7 +61,7 @@ summary: Learn how to migrate data from one TiDB cluster to another TiDB cluster
 
 3.  サービスのワークロードをシミュレートします。
 
-    実際のシナリオでは、サービス データは上流クラスターに継続的に書き込まれます。このドキュメントでは、sysbench を使用してこのワークロードをシミュレートします。具体的には、次のコマンドを実行して、10 人のワーカーが 3 つのテーブル (sbtest1、sbtest2、および sbtest3) にデータを連続的に書き込みできるようにします。合計 TPS は 100 を超えません。
+    実際のシナリオでは、サービス データは上流クラスターに継続的に書き込まれます。このドキュメントでは、sysbench を使用してこのワークロードをシミュレートします。具体的には、次のコマンドを実行して、10 人のワーカーが 3 つのテーブル sbtest1、sbtest2、および sbtest3 にデータを連続的に書き込みできるようにします。合計 TPS は 100 を超えません。
 
     ```shell
     sysbench oltp_write_only --config-file=./tidb-config --tables=3 run
@@ -101,11 +101,11 @@ summary: Learn how to migrate data from one TiDB cluster to another TiDB cluster
 
 環境をセットアップしたら、 [BR](https://github.com/pingcap/tidb/tree/master/br)のバックアップおよびリストア関数を使用して、完全なデータを移行できます。 BRは[三つの方法](/br/br-use-overview.md#deploy-and-use-br)で起動可能です。このドキュメントでは、SQL ステートメント`BACKUP`と`RESTORE`を使用します。
 
-> **ノート：**
+> **注記：**
 >
-> 本番クラスターでは、GC を無効にしてバックアップを実行すると、クラスターのパフォーマンスに影響を与える可能性があります。パフォーマンスの低下を避けるために、オフピーク時間にデータをバックアップし、 `RATE_LIMIT`を適切な値に設定することをお勧めします。
->
-> 上流クラスターと下流クラスターのバージョンが異なる場合は、 [BR互換性](/br/backup-and-restore-overview.md#before-you-use)をチェックする必要があります。このドキュメントでは、アップストリーム クラスターとダウンストリーム クラスターが同じバージョンであると仮定します。
+> -   `BACKUP`と`RESTORE` SQL ステートメントは実験的ものです。本番環境でこれらを使用することはお勧めできません。予告なく変更または削除される場合がございます。バグを見つけた場合は、GitHub で[問題](https://github.com/pingcap/tidb/issues)を報告できます。
+> -   本番クラスターでは、GC を無効にしてバックアップを実行すると、クラスターのパフォーマンスに影響を与える可能性があります。パフォーマンスの低下を避けるために、オフピーク時間にデータをバックアップし、 `RATE_LIMIT`を適切な値に設定することをお勧めします。
+> -   上流クラスターと下流クラスターのバージョンが異なる場合は、 [BR互換性](/br/backup-and-restore-overview.md#before-you-use)をチェックする必要があります。このドキュメントでは、アップストリーム クラスターとダウンストリーム クラスターが同じバージョンであると仮定します。
 
 1.  GC を無効にします。
 
@@ -117,9 +117,7 @@ summary: Learn how to migrate data from one TiDB cluster to another TiDB cluster
     MySQL [test]> SET GLOBAL tidb_gc_enable=FALSE;
     ```
 
-    ```
-    Query OK, 0 rows affected (0.01 sec)
-    ```
+        Query OK, 0 rows affected (0.01 sec)
 
     変更が有効であることを確認するには、値`tidb_gc_enable`をクエリします。
 
@@ -127,14 +125,12 @@ summary: Learn how to migrate data from one TiDB cluster to another TiDB cluster
     MySQL [test]> SELECT @@global.tidb_gc_enable;
     ```
 
-    ```
-    +-------------------------+:
-    | @@global.tidb_gc_enable |
-    +-------------------------+
-    |                       0 |
-    +-------------------------+
-    1 row in set (0.00 sec)
-    ```
+        +-------------------------+:
+        | @@global.tidb_gc_enable |
+        +-------------------------+
+        |                       0 |
+        +-------------------------+
+        1 row in set (0.00 sec)
 
 2.  バックアップデータ。
 
@@ -144,14 +140,12 @@ summary: Learn how to migrate data from one TiDB cluster to another TiDB cluster
     MySQL [(none)]> BACKUP DATABASE * TO 's3://backup?access-key=minio&secret-access-key=miniostorage&endpoint=http://${HOST_IP}:6060&force-path-style=true' RATE_LIMIT = 120 MB/SECOND;
     ```
 
-    ```
-    +---------------+----------+--------------------+---------------------+---------------------+
-    | Destination   | Size     | BackupTS           | Queue Time          | Execution Time      |
-    +---------------+----------+--------------------+---------------------+---------------------+
-    | s3://backup   | 10315858 | 431434047157698561 | 2022-02-25 19:57:59 | 2022-02-25 19:57:59 |
-    +---------------+----------+--------------------+---------------------+---------------------+
-    1 row in set (2.11 sec)
-    ```
+        +---------------+----------+--------------------+---------------------+---------------------+
+        | Destination   | Size     | BackupTS           | Queue Time          | Execution Time      |
+        +---------------+----------+--------------------+---------------------+---------------------+
+        | s3://backup   | 10315858 | 431434047157698561 | 2022-02-25 19:57:59 | 2022-02-25 19:57:59 |
+        +---------------+----------+--------------------+---------------------+---------------------+
+        1 row in set (2.11 sec)
 
     `BACKUP`コマンドが実行されると、TiDB はバックアップ データに関するメタデータを返します。 `BackupTS`バックアップ前にデータが生成されるため注意してください。このドキュメントでは、**データ チェックの終了**および**TiCDC による増分移行スキャンの開始**として`BackupTS`を使用します。
 
@@ -163,14 +157,12 @@ summary: Learn how to migrate data from one TiDB cluster to another TiDB cluster
     mysql> RESTORE DATABASE * FROM 's3://backup?access-key=minio&secret-access-key=miniostorage&endpoint=http://${HOST_IP}:6060&force-path-style=true';
     ```
 
-    ```
-    +--------------+-----------+--------------------+---------------------+---------------------+
-    | Destination  | Size      | BackupTS           | Queue Time          | Execution Time      |
-    +--------------+-----------+--------------------+---------------------+---------------------+
-    | s3://backup  | 10315858  | 431434141450371074 | 2022-02-25 20:03:59 | 2022-02-25 20:03:59 |
-    +--------------+-----------+--------------------+---------------------+---------------------+
-    1 row in set (41.85 sec)
-    ```
+        +--------------+-----------+--------------------+---------------------+---------------------+
+        | Destination  | Size      | BackupTS           | Queue Time          | Execution Time      |
+        +--------------+-----------+--------------------+---------------------+---------------------+
+        | s3://backup  | 10315858  | 431434141450371074 | 2022-02-25 20:03:59 | 2022-02-25 20:03:59 |
+        +--------------+-----------+--------------------+---------------------+---------------------+
+        1 row in set (41.85 sec)
 
 4.  (オプション) データを検証します。
 
@@ -216,8 +208,6 @@ summary: Learn how to migrate data from one TiDB cluster to another TiDB cluster
 
     上流クラスターで次のコマンドを実行して、上流クラスターから下流クラスターへの変更フィードを作成します。
 
-    {{< copyable "" >}}
-
     ```shell
     tiup cdc cli changefeed create --server=http://172.16.6.122:8300 --sink-uri="mysql://root:@172.16.6.125:4000" --changefeed-id="upstream-to-downstream" --start-ts="431434047157698561"
     ```
@@ -241,9 +231,7 @@ summary: Learn how to migrate data from one TiDB cluster to another TiDB cluster
     MySQL [test]> SET GLOBAL tidb_gc_enable=TRUE;
     ```
 
-    ```
-    Query OK, 0 rows affected (0.01 sec)
-    ```
+        Query OK, 0 rows affected (0.01 sec)
 
     変更が有効であることを確認するには、値`tidb_gc_enable`をクエリします。
 
@@ -251,14 +239,12 @@ summary: Learn how to migrate data from one TiDB cluster to another TiDB cluster
     MySQL [test]> SELECT @@global.tidb_gc_enable;
     ```
 
-    ```
-    +-------------------------+
-    | @@global.tidb_gc_enable |
-    +-------------------------+
-    |                       1 |
-    +-------------------------+
-    1 row in set (0.00 sec)
-    ```
+        +-------------------------+
+        | @@global.tidb_gc_enable |
+        +-------------------------+
+        |                       1 |
+        +-------------------------+
+        1 row in set (0.00 sec)
 
 ## ステップ 4. サービスを新しい TiDB クラスターに移行する {#step-4-migrate-services-to-the-new-tidb-cluster}
 
@@ -274,19 +260,17 @@ summary: Learn how to migrate data from one TiDB cluster to another TiDB cluster
     tiup cdc cli changefeed list
     ```
 
-    ```
-    [
-      {
-        "id": "upstream-to-downstream",
-        "summary": {
-        "state": "stopped",  # Ensure that the status is stopped
-        "tso": 431747241184329729,
-        "checkpoint": "2022-03-11 15:50:20.387", # This time must be later than the time of stopping writing
-        "error": null
-        }
-      }
-    ]
-    ```
+        [
+          {
+            "id": "upstream-to-downstream",
+            "summary": {
+            "state": "stopped",  # Ensure that the status is stopped
+            "tso": 431747241184329729,
+            "checkpoint": "2022-03-11 15:50:20.387", # This time must be later than the time of stopping writing
+            "error": null
+            }
+          }
+        ]
 
 2.  ダウンストリームからアップストリームへのチェンジフィードを作成します。アップストリーム データとダウンストリーム データに一貫性があり、クラスターに新しいデータが書き込まれることはないため、 `start-ts`指定しないままにしてデフォルト設定を使用できます。
 

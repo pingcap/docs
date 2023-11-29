@@ -30,13 +30,9 @@ Auroraから AWS にデプロイされた TiDB クラスターにデータを移
 
 ## MySQL から TiDB にデータを移行する {#migrate-data-from-mysql-to-tidb}
 
-クラウドstorage(S3) サービスが使用されておらず、ネットワーク接続が良好で、ネットワークレイテンシーが低い場合は、次の方法を使用して MySQL から TiDB にデータを移行できます。
+クラウドstorage(S3) サービスが使用されておらず、ネットワーク接続が良好でネットワークレイテンシーが低い場合は、 [小規模なデータセットを MySQL から TiDB に移行する](/migrate-small-mysql-to-tidb.md)の手順に従って MySQL から TiDB にデータを移行できます。
 
--   [小規模なデータセットの MySQL を TiDB に移行する](/migrate-small-mysql-to-tidb.md)
-
-移行速度に対する要求が高い場合、またはデータ サイズが大きく (たとえば、1 TiB を超える)、移行期間中に他のアプリケーションによる TiDB への書き込みを許可しない場合は、 TiDB Lightningを使用して、データをインポートします。その後、DM を使用して、アプリケーションのニーズに基づいて増分データ (binlog) をレプリケートできます。
-
--   [大規模なデータセットの MySQL を TiDB に移行する](/migrate-large-mysql-to-tidb.md)
+移行速度に対する要求が高い場合、またはデータ サイズが大きい (たとえば、1 TiB を超える) 場合、移行期間中に他のアプリケーションによる TiDB への書き込みを許可しない場合は、 TiDB Lightningを使用して、データをインポートします。その後、DM を使用して、アプリケーションのニーズに基づいて増分データ (binlog) をレプリケートできます。 [大規模なデータセットを MySQL から TiDB に移行する](/migrate-large-mysql-to-tidb.md)を参照してください。
 
 ## MySQL シャードを TiDB に移行およびマージする {#migrate-and-merge-mysql-shards-into-tidb}
 

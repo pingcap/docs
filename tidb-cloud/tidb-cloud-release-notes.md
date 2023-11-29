@@ -8,6 +8,24 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 このページには 2023 年[TiDB Cloud](https://www.pingcap.com/tidb-cloud/)のリリースノートが記載されています。
 
+## 2023年11月28日 {#november-28-2023}
+
+**一般的な変更点**
+
+-   [TiDB専用](/tidb-cloud/select-cluster-tier.md#tidb-dedicated)バックアップからの SQL バインディングの復元をサポートします。
+
+    TiDB D dedicated は、バックアップから復元するときに、デフォルトでユーザー アカウントと SQL バインディングを復元するようになりました。この拡張機能は v6.2.0 以降のバージョンのクラスターで利用でき、データ復元プロセスを合理化します。 SQL バインディングの復元により、クエリ関連の構成と最適化がスムーズに再統合され、より包括的で効率的なリカバリ エクスペリエンスが提供されます。
+
+    詳細については、 [TiDB 専用データのバックアップと復元](/tidb-cloud/backup-and-restore.md)を参照してください。
+
+**コンソールの変更**
+
+-   [TiDB サーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-serverless) SQL ステートメントの RU コストの監視をサポートします。
+
+    TiDB サーバーレスは、 [リクエストユニット (RU)](/tidb-cloud/tidb-cloud-glossary.md#request-unit) SQL ステートメントの詳細な洞察を提供するようになりました。 SQL ステートメントごとの**合計 RU**コストと**平均 RU**コストの両方を表示できます。この機能は、RU コストの特定と分析に役立ち、運用における潜在的なコスト削減の機会を提供します。
+
+    SQL ステートメント RU の詳細を確認するには、 [TiDB サーバーレス クラスター](https://tidbcloud.com/console/clusters)の**[診断]**ページに移動し、 **[SQL ステートメント]**タブをクリックします。
+
 ## 2023年11月21日 {#november-21-2023}
 
 **一般的な変更点**
@@ -48,8 +66,6 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 ## 2023年10月31日 {#october-31-2023}
 
 **一般的な変更点**
-
--   新しい[TiDB専用](/tidb-cloud/select-cluster-tier.md#tidb-dedicated)クラスターのデフォルトの TiDB バージョンを[v7.1.1](https://docs.pingcap.com/tidb/v7.1/release-7.1.1)から[v7.1.2](https://docs.pingcap.com/tidb/v7.1/release-7.1.2)にアップグレードします。
 
 -   営業担当者に連絡せずに、 TiDB Cloudコンソールでエンタープライズ サポート プランへの直接アップグレードをサポートします。
 
@@ -230,7 +246,7 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
     TiDB Cloudデータ サービスは、各データ アプリに対して自動生成された OpenAPI ドキュメントを提供します。ドキュメントでは、エンドポイント、パラメーター、応答を表示し、エンドポイントを試すことができます。
 
-    データ アプリとそのデプロイされたエンドポイントの OpenAPI 仕様 (OAS) を YAML または JSON 形式でダウンロードすることもできます。 OAS は、標準化された API ドキュメント、簡素化された統合、および簡単なコード生成を提供し、これにより開発の迅速化とコラボレーションの向上が可能になります。
+    データ アプリとそのデプロイされたエンドポイントの OpenAPI 仕様 (OAS) を YAML または JSON 形式でダウンロードすることもできます。 OAS は、標準化された API ドキュメント、簡素化された統合、および簡単なコード生成を提供し、より迅速な開発とコラボレーションの向上を可能にします。
 
     詳細については、 [OpenAPI仕様を使用する](/tidb-cloud/data-service-manage-data-app.md#use-the-openapi-specification)および[Next.js で OpenAPI 仕様を使用する](/tidb-cloud/data-service-oas-with-nextjs.md)を参照してください。
 
@@ -319,7 +335,7 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 -   [TiDB サーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-serverless)が一般提供になりました。
 
--   TiDB Bot (ベータ) は、多言語サポート、24 時間年中無休のリアルタイム応答、統合されたドキュメント アクセスを提供する OpenAI 搭載チャットボットです。
+-   TiDB Bot (ベータ版) は、多言語サポート、年中無休のリアルタイム応答、統合されたドキュメント アクセスを提供する OpenAI 搭載チャットボットです。
 
     TiDB ボットには次の利点があります。
 
@@ -387,7 +403,7 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
     この機能強化により、TiDB 専用クラスターのデータstorage容量が増加し、ワークロードのスケーリング効率が向上し、増大するデータ要件に対応できます。
 
-    詳細については、 [クラスターのサイズを設定する](/tidb-cloud/size-your-cluster.md)を参照してください。
+    詳細については、 [クラスターのサイズを調整する](/tidb-cloud/size-your-cluster.md)を参照してください。
 
 -   [モニタリングメトリクスの保持期間](/tidb-cloud/built-in-monitoring.md#metrics-retention-policy) for [TiDB サーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-serverless)クラスターを 3 日間から 7 日間に延長します。
 
@@ -461,7 +477,7 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 -   TiDB Cloudのデータ移行機能の増分データ移行のサポートを強化します。
 
-    binlog位置またはグローバル トランザクション識別子 (GTID) を指定して、指定された位置の後に生成された増分データのみをTiDB Cloudに複製できるようになりました。この機能強化により、特定の要件に合わせて、必要なデータをより柔軟に選択して複製できるようになります。
+    binlog位置またはグローバル トランザクション識別子 (GTID) を指定して、指定された位置以降に生成された増分データのみをTiDB Cloudに複製できるようになりました。この機能強化により、特定の要件に合わせて、必要なデータをより柔軟に選択して複製できるようになります。
 
     詳細は[データ移行を使用して、MySQL 互換データベースからTiDB Cloudに増分データのみを移行する](/tidb-cloud/migrate-incremental-data-from-mysql-using-data-migration.md)を参照してください。
 
@@ -637,7 +653,7 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 **コンソールの変更**
 
--   [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-dedicated)クラスターの[監視](/tidb-cloud/built-in-monitoring.md#view-the-metrics-page)ページを[ノードレベルのリソースメトリック](/tidb-cloud/built-in-monitoring.md#server)を使用するように更新します。
+-   [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-dedicated)クラスターの[監視](/tidb-cloud/built-in-monitoring.md#view-the-metrics-page)ページを更新して、 [ノードレベルのリソースメトリック](/tidb-cloud/built-in-monitoring.md#server)を使用します。
 
     ノードレベルのリソースメトリクスを使用すると、リソース消費をより正確に表示して、購入したサービスの実際の使用状況をより深く理解できます。
 

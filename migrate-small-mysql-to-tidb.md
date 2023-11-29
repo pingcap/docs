@@ -1,11 +1,11 @@
 ---
-title: Migrate MySQL of Small Datasets to TiDB
-summary: Learn how to migrate MySQL of small datasets to TiDB.
+title: Migrate Small Datasets from MySQL to TiDB
+summary: Learn how to migrate small datasets from MySQL to TiDB.
 ---
 
-# 小規模なデータセットの MySQL を TiDB に移行する {#migrate-mysql-of-small-datasets-to-tidb}
+# 小規模なデータセットを MySQL から TiDB に移行する {#migrate-small-datasets-from-mysql-to-tidb}
 
-このドキュメントでは、TiDB Data Migration (DM) を使用して、小規模データセットの MySQL を完全移行モードおよび増分レプリケーション モードで TiDB に移行する方法について説明します。このドキュメントの「小さいデータセット」とは、1 TiB 未満のデータ サイズを意味します。
+このドキュメントでは、TiDB データ移行 (DM) を使用して、完全移行モードおよび増分レプリケーション モードで小規模なデータセットを MySQL から TiDB に移行する方法について説明します。このドキュメントの「小さいデータセット」とは、1 TiB 未満のデータ サイズを意味します。
 
 移行速度は、テーブル スキーマ内のインデックスの数、ハードウェア、ネットワーク環境などの複数の要因に応じて、30 GB/h から 50 GB/h まで変化します。<!--The migration process using DM is shown in the figure below.-->
 
@@ -19,8 +19,6 @@ summary: Learn how to migrate MySQL of small datasets to TiDB.
 ## ステップ 1. データソースを作成する {#step-1-create-the-data-source}
 
 まず、次のように`source1.yaml`ファイルを作成します。
-
-{{< copyable "" >}}
 
 ```yaml
 # The ID must be unique.
@@ -38,8 +36,6 @@ from:
 
 次に、次のコマンドを実行して、 `tiup dmctl`を使用してデータ ソース構成を DM クラスターにロードします。
 
-{{< copyable "" >}}
-
 ```shell
 tiup dmctl --master-addr ${advertise-addr} operate-source create source1.yaml
 ```
@@ -54,8 +50,6 @@ tiup dmctl --master-addr ${advertise-addr} operate-source create source1.yaml
 ## ステップ 2. 移行タスクを作成する {#step-2-create-the-migration-task}
 
 次のように`task1.yaml`ファイルを作成します。
-
-{{< copyable "" >}}
 
 ```yaml
 # Task name. Each of the multiple tasks running at the same time must have a unique name.
@@ -95,15 +89,11 @@ block-allow-list:
 
 エラーを回避するために、移行タスクを開始する前に、 `check-task`コマンドを使用して、構成が DM 構成の要件を満たしているかどうかを確認することをお勧めします。
 
-{{< copyable "" >}}
-
 ```shell
 tiup dmctl --master-addr ${advertise-addr} check-task task.yaml
 ```
 
 次のコマンドを`tiup dmctl`で実行して、移行タスクを開始します。
-
-{{< copyable "" >}}
 
 ```shell
 tiup dmctl --master-addr ${advertise-addr} start-task task.yaml
@@ -121,8 +111,6 @@ tiup dmctl --master-addr ${advertise-addr} start-task task.yaml
 ## ステップ 4: 移行タスクのステータスを確認する {#step-4-check-the-migration-task-status}
 
 DM クラスターに進行中の移行タスクがあるかどうか、タスクのステータス、その他の情報を確認するには、 `tiup dmctl`使用して`query-status`コマンドを実行します。
-
-{{< copyable "" >}}
 
 ```shell
 tiup dmctl --master-addr ${advertise-addr} query-status ${task-name}

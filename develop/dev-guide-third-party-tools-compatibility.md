@@ -5,7 +5,7 @@ summary: Describes TiDB compatibility issues with third-party tools found during
 
 # サードパーティツールとの既知の非互換性の問題 {#known-incompatibility-issues-with-third-party-tools}
 
-> **ノート：**
+> **注記：**
 >
 > [サポートされていない機能](/mysql-compatibility.md#unsupported-features)セクションには、TiDB でサポートされていない次の機能がリストされています。
 >
@@ -36,7 +36,7 @@ TiDB アプリケーションでは、データのオーバーフローを避け
 
 **説明**
 
-MySQL は、データベースに対して実行された操作の合計数を追跡するために、一連の[`Com_`で始まるサーバーステータス変数](https://dev.mysql.com/doc/refman/8.0/en/server-status-variables.html#statvar_Com_xxx)維持します。たとえば、 `Com_select` 、(ステートメントが正常にクエリされなかった場合でも) MySQL が最後に起動されてから開始された`SELECT`のステートメントの合計数を記録します。 TiDB はこれらの変数を維持しません。ステートメント[`SHOW GLOBAL STATUS LIKE 'Com_%'`](/sql-statements/sql-statement-show-status.md)を使用すると、TiDB と MySQL の違いを確認できます。
+MySQL は、データベースに対して実行された操作の合計数を追跡するために、一連の[`Com_`で始まるサーバーステータス変数](https://dev.mysql.com/doc/refman/8.0/en/server-status-variables.html#statvar_Com_xxx)維持します。たとえば、 `Com_select` 、(ステートメントが正常にクエリされなかった場合でも) MySQL が最後に起動されてから開始された`SELECT`のステートメントの合計数を記録します。 TiDB はこれらの変数を管理しません。ステートメント[`SHOW GLOBAL STATUS LIKE 'Com_%'`](/sql-statements/sql-statement-show-status.md)を使用すると、TiDB と MySQL の違いを確認できます。
 
 **回避方法**
 
@@ -131,7 +131,7 @@ TiDB では`noIndexUsed()`および`noGoodIndexUsed()`関数を使用しない�
 
 **説明**
 
-TiDB は[パケットデバッグを有効にする](https://dev.mysql.com/doc/connector-j/8.0/en/connector-j-connp-props-debugging-profiling.html)パラメータをサポートしていません。これは、データ パケットのバッファを保持するデバッグに使用される MySQL Connector/J パラメータです。これにより、接続が予期せず終了する可能性があります。電源を入れ**ないでください**。
+TiDB は[パケットデバッグを有効にする](https://dev.mysql.com/doc/connector-j/en/connector-j-connp-props-debugging-profiling.html)パラメータをサポートしていません。これは、データ パケットのバッファを保持するデバッグに使用される MySQL Connector/J パラメータです。これにより、接続が予期せず終了する可能性があります。電源を入れ**ないでください**。
 
 **回避方法**
 
@@ -157,7 +157,7 @@ TiDB は`UpdatableResultSet`をサポートしていません。 `ResultSet.CONC
 
 **回避方法**
 
-> **ノート：**
+> **注記：**
 >
 > このバグは MySQL JDBC に報告されています。プロセスを追跡するには、この[バグレポート](https://bugs.mysql.com/bug.php?id=108643)に従ってください。
 

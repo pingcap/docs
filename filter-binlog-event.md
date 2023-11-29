@@ -7,8 +7,8 @@ summary: Learn how to filter binlog events when migrating data.
 
 このドキュメントでは、DM を使用して継続的な増分データ レプリケーションを実行するときに、binlogイベントをフィルタリングする方法について説明します。レプリケーション手順の詳細については、シナリオごとに次のドキュメントを参照してください。
 
--   [小規模なデータセットの MySQL を TiDB に移行する](/migrate-small-mysql-to-tidb.md)
--   [大規模なデータセットの MySQL を TiDB に移行する](/migrate-large-mysql-to-tidb.md)
+-   [小規模なデータセットを MySQL から TiDB に移行する](/migrate-small-mysql-to-tidb.md)
+-   [大規模なデータセットを MySQL から TiDB に移行する](/migrate-large-mysql-to-tidb.md)
 -   [小規模なデータセットの MySQL シャードを TiDB に移行およびマージする](/migrate-small-mysql-shards-to-tidb.md)
 -   [大規模なデータセットの MySQL シャードを TiDB に移行およびマージする](/migrate-large-mysql-shards-to-tidb.md)
 
@@ -75,47 +75,41 @@ filters:
 
 すべての削除操作をフィルターで除外するには、以下に示すように`filter-table-rule`と`filter-schema-rule`を構成します。
 
-```
-filters:
-  filter-table-rule:
-    schema-pattern: "test_*"
-    table-pattern: "t_*"
-    events: ["truncate table", "drop table", "delete"]
-    action: Ignore
-  filter-schema-rule:
-    schema-pattern: "test_*"
-    events: ["drop database"]
-    action: Ignore
-```
+    filters:
+      filter-table-rule:
+        schema-pattern: "test_*"
+        table-pattern: "t_*"
+        events: ["truncate table", "drop table", "delete"]
+        action: Ignore
+      filter-schema-rule:
+        schema-pattern: "test_*"
+        events: ["drop database"]
+        action: Ignore
 
 ### シャード化されたスキーマとテーブルの DML 操作のみを移行する {#migrate-only-dml-operations-of-sharded-schemas-and-tables}
 
 DML ステートメントのみをレプリケートするには、以下に示すように 2 つの`Binlog event filter rule`を構成します。
 
-```
-filters:
-  do-table-rule:
-    schema-pattern: "test_*"
-    table-pattern: "t_*"
-    events: ["create table", "all dml"]
-    action: Do
-  do-schema-rule:
-    schema-pattern: "test_*"
-    events: ["create database"]
-    action: Do
-```
+    filters:
+      do-table-rule:
+        schema-pattern: "test_*"
+        table-pattern: "t_*"
+        events: ["create table", "all dml"]
+        action: Do
+      do-schema-rule:
+        schema-pattern: "test_*"
+        events: ["create database"]
+        action: Do
 
 ### TiDB でサポートされていない SQL ステートメントをフィルターで除外する {#filter-out-sql-statements-not-supported-by-tidb}
 
 TiDB でサポートされていない SQL ステートメントを除外するには、以下に示すように`filter-procedure-rule`を設定します。
 
-```
-filters:
-  filter-procedure-rule:
-    schema-pattern: "*"
-    sql-pattern: [".*\\s+DROP\\s+PROCEDURE", ".*\\s+CREATE\\s+PROCEDURE", "ALTER\\s+TABLE[\\s\\S]*ADD\\s+PARTITION", "ALTER\\s+TABLE[\\s\\S]*DROP\\s+PARTITION"]
-    action: Ignore
-```
+    filters:
+      filter-procedure-rule:
+        schema-pattern: "*"
+        sql-pattern: [".*\\s+DROP\\s+PROCEDURE", ".*\\s+CREATE\\s+PROCEDURE", "ALTER\\s+TABLE[\\s\\S]*ADD\\s+PARTITION", "ALTER\\s+TABLE[\\s\\S]*DROP\\s+PARTITION"]
+        action: Ignore
 
 > **警告：**
 >

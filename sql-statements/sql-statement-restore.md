@@ -7,9 +7,10 @@ summary: An overview of the usage of RESTORE for the TiDB database.
 
 このステートメントは、 [`BACKUP`文](/sql-statements/sql-statement-backup.md)によって以前に作成されたバックアップ アーカイブから分散復元を実行します。
 
-> **注記：**
+> **警告：**
 >
-> この機能は[TiDB サーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless)クラスターでは使用できません。
+> -   この機能は実験的です。本番環境で使用することはお勧めできません。この機能は予告なく変更または削除される場合があります。バグを見つけた場合は、GitHub で[問題](https://github.com/pingcap/tidb/issues)を報告できます。
+> -   この機能は[TiDB サーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless)クラスターでは使用できません。
 
 `RESTORE`ステートメントは[BRツール](https://docs.pingcap.com/tidb/stable/backup-and-restore-overview)と同じエンジンを使用しますが、復元プロセスが別個のBRツールではなく TiDB 自体によって駆動される点が異なります。 BRのすべての利点と注意事項がここにも適用されます。特に、 **`RESTORE`現在ACIDに準拠していません**。 `RESTORE`を実行する前に、次の要件が満たされていることを確認してください。
 

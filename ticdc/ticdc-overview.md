@@ -86,7 +86,7 @@ TiCDC のアーキテクチャを次の図に示します。
     -   主キー ( `PRIMARY KEY` ) は有効なインデックスです。
     -   一意のインデックス ( `UNIQUE INDEX` ) は、インデックスのすべての列が null 非許容として明示的に定義され ( `NOT NULL` )、インデックスに仮想生成列 ( `VIRTUAL GENERATED COLUMNS` ) がない場合に有効です。
 
--   災害復旧シナリオで TiCDC を使用するには、 [やり直しログ](/ticdc/ticdc-sink-to-mysql.md#eventually-consistent-replication-in-disaster-scenarios)を構成する必要があります。
+-   災害復旧に TiCDC を使用するときに結果整合性を確保するには、 [やり直しログ](/ticdc/ticdc-sink-to-mysql.md#eventually-consistent-replication-in-disaster-scenarios)を構成し、上流で災害が発生したときに REDO ログが書き込まれるstorageシステムを正常に読み取れることを確認する必要があります。
 
 > **注記：**
 >
@@ -97,6 +97,6 @@ TiCDC のアーキテクチャを次の図に示します。
 現在、次のシナリオはサポートされていません。
 
 -   RawKV のみを使用する TiKV クラスター。
--   TiDB の[`CREATE SEQUENCE` DDL 操作](/sql-statements/sql-statement-create-sequence.md)と[`SEQUENCE`機能](/sql-statements/sql-statement-create-sequence.md#sequence-function) 。アップストリームの TiDB が`SEQUENCE`使用すると、TiCDC はアップストリームで実行された`SEQUENCE` DDL 操作/関数を無視します。ただし、 `SEQUENCE`関数を使用する DML 操作は正しく複製できます。
+-   TiDB の[`CREATE SEQUENCE` DDL 操作](/sql-statements/sql-statement-create-sequence.md)と[`SEQUENCE`機能](/sql-statements/sql-statement-create-sequence.md#sequence-function) 。アップストリームの TiDB が`SEQUENCE`使用する場合、TiCDC はアップストリームで実行された`SEQUENCE` DDL 操作/関数を無視します。ただし、 `SEQUENCE`関数を使用する DML 操作は正しく複製できます。
 
 TiCDC は、アップストリームでの大規模なトランザクションを伴うシナリオを部分的にのみサポートします。詳細については、 [TiCDCFAQ](/ticdc/ticdc-faq.md#does-ticdc-support-replicating-large-transactions-is-there-any-risk)を参照してください。ここでは、TiCDC が大規模なトランザクションのレプリケーションとそれに関連するリスクをサポートしているかどうかの詳細を確認できます。

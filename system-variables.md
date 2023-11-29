@@ -75,7 +75,7 @@ SET GLOBAL tidb_distsql_scan_concurrency = 10;
 -   クラスターへの永続化: はい
 -   タイプ: 文字列
 -   デフォルト値: &quot;&quot;
--   LDAP SASL 認証の場合、この変数は LDAPサーバーにログインしてユーザーを検索するために使用される`dn`を指定します。
+-   LDAP SASL 認証の場合、この変数は LDAPサーバーにログインしてユーザーを検索するために使用される`dn`指定します。
 
 ### Authentication_ldap_sasl_bind_root_pwd <span class="version-mark">v7.1.0 の新機能</span> {#authentication-ldap-sasl-bind-root-pwd-span-class-version-mark-new-in-v7-1-0-span}
 
@@ -1322,8 +1322,8 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
 -   クラスターへの永続化: はい
 -   タイプ: ブール値
 -   デフォルト値: `ON`
--   この変数は、インデックス作成のバックフィル速度を向上させるために`ADD INDEX`と`CREATE INDEX`の高速化を有効にするかどうかを制御します。この変数値を`ON`に設定すると、大量のデータを含むテーブルでのインデックス作成のパフォーマンスが向上します。
--   v7.1.0 以降、インデックス アクセラレーション操作はチェックポイントをサポートします。障害により TiDB 所有者ノードが再起動または変更された場合でも、TiDB は定期的に自動的に更新されるチェックポイントから進行状況を回復できます。
+-   この変数は、インデックス作成のバックフィル速度を向上させるために`ADD INDEX`と`CREATE INDEX`のアクセラレーションを有効にするかどうかを制御します。この変数値を`ON`に設定すると、大量のデータを含むテーブルでのインデックス作成のパフォーマンスが向上します。
+-   v7.1.0 以降、インデックス アクセラレーション操作はチェックポイントをサポートします。 TiDB 所有者ノードが再起動または障害により変更された場合でも、TiDB は定期的に自動的に更新されるチェックポイントから進行状況を回復できます。
 -   完了した`ADD INDEX`操作が高速化されているかどうかを確認するには、 [`ADMIN SHOW DDL JOBS`](/sql-statements/sql-statement-admin-show-ddl.md#admin-show-ddl-jobs)ステートメントを実行して`JOB_TYPE`列に`ingest`が表示されるかどうかを確認します。
 
 <CustomContent platform="tidb">
@@ -2111,7 +2111,7 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
 
 <CustomContent platform="tidb-cloud">
 
--   データを読み取るオペレーターに残っているスレッドが 1 つだけで、単一の SQL ステートメントのメモリ使用量が[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)を超え続ける場合、この SQL ステートメントは、データをディスクにスピルするなど、他のメモリ制御動作をトリガーします。
+-   データを読み取るオペレーターに残っているスレッドが 1 つだけで、単一の SQL ステートメントのメモリ使用量が[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)を超え続ける場合、この SQL ステートメントは、ディスクへのデータのスピルなど、他のメモリ制御動作をトリガーします。
 
 </CustomContent>
 
@@ -2984,7 +2984,7 @@ v5.0 以降、上記のシステム変数を個別に変更することができ
 -   タイプ: 整数
 -   デフォルト値: `-1`
 -   範囲: `[-1, 9223372036854775807]`
--   この変数は、 TiFlashの TopN および Sort オペレーターの最大メモリ使用量をバイト単位で指定するために使用されます。メモリ使用量が指定された値を超えると、 TiFlash はTopN および Sort オペレータをトリガーしてディスクに書き込みます。この変数の値が`-1`の場合、TiDB はこの変数をTiFlashに渡しません。この変数の値が`0`以上の場合にのみ、TiDB はこの変数をTiFlashに渡します。この変数の値が`0`の場合、メモリ使用量が無制限であることを意味します。つまり、 TiFlash TopN および Sort オペレータがスピルをトリガーしないことを意味します。詳細は[TiFlash のディスクへの流出](/tiflash/tiflash-spill-disk.md)を参照してください。
+-   この変数は、 TiFlashの TopN および Sort オペレーターの最大メモリ使用量をバイト単位で指定するために使用されます。メモリ使用量が指定された値を超えると、 TiFlash はTopN および Sort オペレータをトリガーしてディスクに書き込みます。この変数の値が`-1`の場合、TiDB はこの変数をTiFlashに渡しません。この変数の値が`0`以上の場合にのみ、TiDB はこの変数をTiFlashに渡します。この変数の値が`0`の場合、メモリ使用量が無制限であること、つまり、 TiFlash TopN および Sort オペレータがスピルをトリガーしないことを意味します。詳細は[TiFlash のディスクへの流出](/tiflash/tiflash-spill-disk.md)を参照してください。
 
 <CustomContent platform="tidb">
 
@@ -3078,7 +3078,7 @@ v5.0 以降、上記のシステム変数を個別に変更することができ
 -   デフォルト値: `-1`
 -   範囲: `[-1, 9223372036854775807]`
 -   単位: バイト
--   この変数は、TiDB 更新統計の最大メモリ使用量を制御します。このようなメモリ使用量は、 [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md)手動で実行する場合と、TiDB がバックグラウンドでタスクを自動的に分析する場合に発生します。合計メモリ使用量がこのしきい値を超えると、ユーザーが実行した`ANALYZE`終了し、サンプリング レートを低くするか、後で再試行することを促すエラー メッセージが報告されます。メモリしきい値を超え、使用されているサンプリング レートがデフォルト値より高いために TiDB バックグラウンドの自動タスクが終了した場合、TiDB はデフォルトのサンプリング レートを使用して更新を再試行します。この変数値が負またはゼロの場合、TiDB は手動更新タスクと自動更新タスクの両方のメモリ使用量を制限しません。
+-   この変数は、TiDB 更新統計の最大メモリ使用量を制御します。このようなメモリ使用量は、 [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md)手動で実行する場合と、TiDB がバックグラウンドでタスクを自動的に分析する場合に発生します。合計メモリ使用量がこのしきい値を超えると、ユーザーが実行した`ANALYZE`が終了し、サンプリング レートを低くするか、後で再試行することを促すエラー メッセージが報告されます。メモリしきい値を超え、使用されているサンプリング レートがデフォルト値より高いために TiDB バックグラウンドの自動タスクが終了した場合、TiDB はデフォルトのサンプリング レートを使用して更新を再試行します。この変数値が負またはゼロの場合、TiDB は手動更新タスクと自動更新タスクの両方のメモリ使用量を制限しません。
 
 > **注記：**
 >
@@ -3289,7 +3289,7 @@ v5.0 以降、上記のシステム変数を個別に変更することができ
 > デフォルト値の`OFF`のみが安全であると考えられます。アプリケーションが TiDB の以前のバージョン用に特別に設計されている場合は、設定`tidb_multi_statement_mode=ON`必要になる場合があります。アプリケーションで複数のステートメントのサポートが必要な場合は、 `tidb_multi_statement_mode`オプションの代わりにクライアント ライブラリによって提供される設定を使用することをお勧めします。例えば：
 >
 > -   [go-sql-ドライバー](https://github.com/go-sql-driver/mysql#multistatements) ( `multiStatements` )
-> -   [コネクタ/J](https://dev.mysql.com/doc/connector-j/8.0/en/connector-j-reference-configuration-properties.html) ( `allowMultiQueries` )
+> -   [コネクタ/J](https://dev.mysql.com/doc/connector-j/en/connector-j-reference-configuration-properties.html) ( `allowMultiQueries` )
 > -   PHP [ミスクリ](https://www.php.net/manual/en/mysqli.quickstart.multiple-statement.php) ( `mysqli_multi_query` )
 
 ### tidb_nontransactional_ignore_error <span class="version-mark">v6.1.0 の新機能</span> {#tidb-nontransactional-ignore-error-span-class-version-mark-new-in-v6-1-0-span}
@@ -3565,7 +3565,7 @@ mysql> desc select count(distinct a) from test.t;
 -   クラスターへの永続化: はい
 -   タイプ: ブール値
 -   デフォルト値: `OFF`
--   変数値が`ON`の場合、左結合演算子は常に内部テーブルをビルド側として使用し、右結合演算子は常に外部テーブルをビルド側として使用します。値を`OFF`に設定すると、外部結合演算子はテーブルのどちらかの側を構築側として使用できます。
+-   変数値が`ON`の場合、左結合演算子は常にビルド側として内部テーブルを使用し、右結合演算子は常にビルド側として外部テーブルを使用します。値を`OFF`に設定すると、外部結合演算子はテーブルのどちらかの側を構築側として使用できます。
 
 ### tidb_opt_network_factor {#tidb-opt-network-factor}
 
@@ -3584,7 +3584,7 @@ mysql> desc select count(distinct a) from test.t;
 -   デフォルト値: `0`
 -   範囲: `[0, 1]`
 -   この変数は、SQL ステートメントにフィルター条件を含む句が`ORDER BY`つと`LIMIT`ある場合に、オプティマイザーがインデックスを選択する方法を制御するために使用されます。
--   このようなクエリの場合、オプティマイザは、(このインデックスがどのフィルター条件も満たさない場合でも) `ORDER BY`節と`LIMIT`節を満たすための対応するインデックスの選択を検討します。ただし、データ分散の複雑さのため、このシナリオではオプティマイザが次善のインデックスを選択する可能性があります。
+-   このようなクエリの場合、オプティマイザは、(このインデックスがどのフィルター条件も満たさない場合でも) `ORDER BY`と`LIMIT`節を満たすために対応するインデックスの選択を検討します。ただし、データ分散の複雑さのため、このシナリオではオプティマイザが次善のインデックスを選択する可能性があります。
 -   この変数はしきい値を表します。フィルター条件を満たすインデックスが存在し、その選択性推定値がこのしきい値よりも低い場合、オプティマイザーは`ORDER BY`と`LIMIT`を満たすために使用されるインデックスの選択を回避します。代わりに、フィルタリング条件を満たすインデックスが優先されます。
 -   たとえば、変数が`0`に設定されている場合、オプティマイザはデフォルトの動作を維持します。 `1`に設定すると、オプティマイザーは常にフィルター条件を満たすインデックスの選択を優先し、 `ORDER BY`節と`LIMIT`節の両方を満たすインデックスの選択を回避します。
 -   次の例では、テーブル`t`には合計 1,000,000 行があります。列`b`でインデックスを使用する場合、その推定行数は約 8,748 であるため、その選択性推定値は約 0.0087 になります。デフォルトでは、オプティマイザは列`a`のインデックスを選択します。ただし、この変数を 0.01 に設定すると、列`b`のインデックスの選択性 (0.0087) が 0.01 未満になるため、オプティマイザは列`b`のインデックスを選択します。
@@ -4195,7 +4195,7 @@ SHOW WARNINGS;
 -   デフォルト値: `2`
 -   範囲: `[1, 2]`
 -   テーブルに新しく保存されたデータの形式バージョンを制御します。 TiDB v4.0 では、新しいデータを保存するためにデフォルトで[新しいstorage行フォーマット](https://github.com/pingcap/tidb/blob/master/docs/design/2018-07-19-row-format.md)バージョン`2`が使用されます。
--   v4.0.0 より前の TiDB バージョンから v4.0.0 以降のバージョンにアップグレードする場合、形式のバージョンは変更されず、TiDB は引き続きバージョン`1`の古い形式を使用して**テーブル**にデータを書き込みます。**作成されたクラスターは、デフォルトで新しいデータ形式を使用します**。
+-   v4.0.0 より前の TiDB バージョンから v4.0.0 以降のバージョンにアップグレードした場合、形式**の**バージョンは変更されず、TiDB は引き続きバージョン`1`の古い形式を使用してテーブルにデータを書き込みます。**作成されたクラスターは、デフォルトで新しいデータ形式を使用します**。
 -   この変数を変更しても、保存されている古いデータには影響しませんが、対応するバージョン形式は、この変数を変更した後に新しく書き込まれたデータにのみ適用されることに注意してください。
 
 ### tidb_scatter_region {#tidb-scatter-region}
@@ -4431,7 +4431,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 -   範囲: グローバル
 -   タイプ: ブール値
 -   デフォルト値: `OFF`
--   この変数は読み取り専用です。 [ステートメントの概要の永続性](/statement-summary-tables.md#persist-statements-summary)を有効にするかどうかを制御します。
+-   この変数は読み取り専用です。 [ステートメントの概要の永続化](/statement-summary-tables.md#persist-statements-summary)を有効にするかどうかを制御します。
 
 <CustomContent platform="tidb">
 
@@ -4481,7 +4481,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 -   範囲: グローバル
 -   タイプ: 整数
 -   デフォルト値: `0`
--   この変数は読み取り専用です。 [ステートメントの概要の永続性](/statement-summary-tables.md#persist-statements-summary)が有効な場合に保持できるデータ ファイルの最大数を指定します。
+-   この変数は読み取り専用です。 [ステートメントの概要の永続化](/statement-summary-tables.md#persist-statements-summary)が有効な場合に保持できるデータ ファイルの最大数を指定します。
 
 <CustomContent platform="tidb">
 
@@ -4533,7 +4533,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 -   タイプ: 整数
 -   デフォルト値: `64`
 -   単位: MiB
--   この変数は読み取り専用です。 [ステートメントの概要の永続性](/statement-summary-tables.md#persist-statements-summary)が有効な場合、永続データ ファイルの最大サイズを指定します。
+-   この変数は読み取り専用です。 [ステートメントの概要の永続化](/statement-summary-tables.md#persist-statements-summary)が有効な場合、永続データ ファイルの最大サイズを指定します。
 
 <CustomContent platform="tidb">
 
@@ -4941,7 +4941,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 -   タイプ: 列挙型
 -   デフォルト値: `pessimistic`
 -   可能な値: `pessimistic` 、 `optimistic`
--   この変数はトランザクション モードを設定するために使用されます。 TiDB 3.0 は悲観的トランザクションをサポートします。 TiDB 3.0.8 以降、 [悲観的トランザクションモード](/pessimistic-transaction.md)デフォルトで有効になっています。
+-   この変数はトランザクション モードを設定するために使用されます。 TiDB 3.0 は悲観的トランザクションをサポートします。 TiDB 3.0.8 以降、 [悲観的トランザクション モード](/pessimistic-transaction.md)デフォルトで有効になっています。
 -   TiDB を v3.0.7 以前のバージョンから v3.0.8 以降のバージョンにアップグレードしても、デフォルトのトランザクション モードは変更されません。**新しく作成されたクラスタのみが、デフォルトで悲観的トランザクション モードを使用します**。
 -   この変数が「楽観的」または「」に設定されている場合、TiDB は[楽観的トランザクションモード](/optimistic-transaction.md)を使用します。
 

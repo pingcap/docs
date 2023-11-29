@@ -1,9 +1,9 @@
 ---
-title: Migrate MySQL of Large Datasets to TiDB
-summary: Learn how to migrate MySQL of large datasets to TiDB.
+title: Migrate Large Datasets from MySQL to TiDB
+summary: Learn how to migrate large datasets from MySQL to TiDB.
 ---
 
-# 大規模なデータセットの MySQL を TiDB に移行する {#migrate-mysql-of-large-datasets-to-tidb}
+# 大規模なデータセットを MySQL から TiDB に移行する {#migrate-large-datasets-from-mysql-to-tidb}
 
 移行するデータのボリュームが小さい場合は、完全な移行と増分レプリケーションの[DM を使用してデータを移行する](/migrate-small-mysql-to-tidb.md)を簡単に行うことができます。ただし、DM はデータのインポート速度が遅い (30 ～ 50 GiB/h) ため、データ量が多い場合、移行に時間がかかることがあります。このドキュメントにおける「大規模なデータセット」とは、通常、約 1 TiB 以上のデータを意味します。
 
@@ -271,7 +271,7 @@ TiUPを使用して DM をデプロイしたときに Prometheus、Alertmanager�
 
 DM の実行中、DM-worker、DM-master、および dmctl は関連情報をログに出力します。これらのコンポーネントのログ ディレクトリは次のとおりです。
 
--   DM マスター: DM マスター プロセス パラメーター`--log-file`によって指定されます。 TiUPを使用して DM をデプロイする場合、デフォルトのログ ディレクトリは`/dm-deploy/dm-master-8261/log/`です。
+-   DM マスター: DM マスター プロセス パラメーター`--log-file`によって指定されます。 TiUPを使用して DM をデプロイする場合、ログ ディレクトリはデフォルトで`/dm-deploy/dm-master-8261/log/`です。
 -   DM-worker: DM-worker プロセス パラメーター`--log-file`によって指定されます。 TiUPを使用して DM をデプロイする場合、デフォルトのログ ディレクトリは`/dm-deploy/dm-worker-8262/log/`です。
 
 ## 次は何ですか {#what-s-next}
