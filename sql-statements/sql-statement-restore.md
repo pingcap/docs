@@ -7,6 +7,10 @@ summary: An overview of the usage of RESTORE for the TiDB database.
 
 This statement performs a distributed restore from a backup archive previously produced by a [`BACKUP` statement](/sql-statements/sql-statement-backup.md).
 
+> **Warning:**
+>
+> This feature is experimental. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+
 The `RESTORE` statement uses the same engine as the [BR tool](/br/backup-and-restore-tool.md), except that the restore process is driven by TiDB itself rather than a separate BR tool. All benefits and caveats of BR also apply here. In particular, **`RESTORE` is currently not ACID-compliant**. Before running `RESTORE`, ensure that the following requirements are met:
 
 * The cluster is "offline", and the current TiDB session is the only active SQL connection to access all tables being restored.
