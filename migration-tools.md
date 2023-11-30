@@ -51,24 +51,12 @@ This document introduces the user scenarios, supported upstreams and downstreams
 
 ## [Backup & Restore (BR)](/br/backup-and-restore-overview.md)
 
-<<<<<<< HEAD
 | User scenario | <span style="font-weight:normal">Migrate a large amount of TiDB cluster data by backing up and restoring data</span> |
 |---|---|
 | **Upstream** | TiDB |
 | **Downstream (the output file)** | SST, backup.meta files, backup.lock files |
 | **Advantages** |<ul><li>Suitable for migrating data to another TiDB cluster</li><li>Support backing up data to an external storage for disaster recovery</li></ul> |
-| **Limitation** |<ul><li>When BR restores data to the upstream cluster of TiCDC or Drainer, the restored data cannot be replicated to the downstream by TiCDC or Drainer.</li><li>BR supports operations only between clusters that have the same `new_collations_enabled_on_first_bootstrap` value.</li></ul> |
-=======
-- **User scenario**: Migrate a large amount of TiDB cluster data by backing up and restoring data
-- **Upstream**: TiDB
-- **Downstream (the output file)**: SST, backup.meta files, backup.lock files
-- **Advantages**:
-    - Suitable for migrating data to another TiDB cluster
-    - Support backing up data to an external storage for disaster recovery
-- **Limitation**:
-    - When BR restores data to the upstream cluster of TiCDC or Drainer, the restored data cannot be replicated to the downstream by TiCDC or Drainer.
-    - BR supports operations only between clusters that have the same `new_collation_enabled` value in the `mysql.tidb` table.
->>>>>>> e69cc09cc0 (collation: improve some new_collation_enabled relateds doc (#15481))
+| **Limitation** |<ul><li>When BR restores data to the upstream cluster of TiCDC or Drainer, the restored data cannot be replicated to the downstream by TiCDC or Drainer.</li><li>BR supports operations only between clusters that have the same `new_collation_enabled` value in the `mysql.tidb` table</li></ul> |
 
 ## [sync-diff-inspector](/sync-diff-inspector/sync-diff-inspector-overview.md)
 
