@@ -35,6 +35,7 @@ The numbers in the preceding state transfer diagram are described as follows.
 - ⑥ The changefeed encounters an unrecoverable error and directly enters the failed state. At this time, the changefeed continues to block upstream GC for a duration specified by `gc-ttl`.
 - ⑦ The replication progress of the changefeed reaches the value set by `target-ts`, and the replication is completed.
 - ⑧ The changefeed has been suspended for a duration longer than the value specified by `gc-ttl`, thus encountering GC advancement errors, and cannot be resumed.
+- ⑨ If the cause of the failure has been resolved, and the changefeed was suspended for a duration shorter than the value specified by `gc-ttl`, run the `changefeed resume` command to resume the replication task.
 
 ## Operate changefeeds
 
