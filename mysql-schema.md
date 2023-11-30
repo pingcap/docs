@@ -85,15 +85,11 @@ Currently, the `help_topic` is NULL.
 
 <CustomContent platform="tidb">
 
-<<<<<<< HEAD
-- `tidb`: to record the version information when TiDB executes `bootstrap`
-=======
 > **Note:**
 >
 > The `tidb`, `expr_pushdown_blacklist`, `opt_rule_blacklist`, `table_cache_meta`, `tidb_import_jobs`, and `tidb_timers` system tables are only applicable to TiDB Self-Hosted and not available on [TiDB Cloud](https://docs.pingcap.com/tidbcloud/).
 
 - `GLOBAL_VARIABLES`: global system variable table
->>>>>>> e69cc09cc0 (collation: improve some new_collation_enabled relateds doc (#15481))
 - `expr_pushdown_blacklist`: the blocklist for expression pushdown
 - `opt_rule_blacklist`: the blocklist for logical optimization rules
 - `table_cache_meta`: the metadata of cached tables
