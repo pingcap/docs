@@ -113,6 +113,8 @@ SHOW COLLATION;
 > **Warning:**
 >
 > TiDB incorrectly treats latin1 as a subset of utf8. This can lead to unexpected behaviors when you store characters that differ between latin1 and utf8 encodings. It is strongly recommended to the utf8mb4 character set. See [TiDB #18955](https://github.com/pingcap/tidb/issues/18955) for more details.
+>
+> If the predicates include `LIKE` for string prefixes, such as `LIKE 'prefix%'`, and the target column is set to a non-binary collation (the suffix does not end with `_bin`), the optimizer currently cannot convert this predicate into a range scan. Instead, it performs a full scan. As a result, such SQL queries might lead to unexpected resource consumption.
 
 > **Note:**
 >
@@ -494,9 +496,13 @@ Since TiDB v4.0, a complete framework for collations is introduced.
 
 <CustomContent platform="tidb">
 
-This new framework supports semantically parsing collations and introduces the `new_collations_enabled_on_first_bootstrap` configuration item to decide whether to enable the new framework when a cluster is first initialized. To enable the new framework, set `new_collations_enabled_on_first_bootstrap` to `true`. For details, see [`new_collations_enabled_on_first_bootstrap`](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap). If you initialize the cluster after the configuration item is enabled, you can check whether the new collation is enabled through the `new_collation_enabled` variable in the `mysql`.`tidb` table:
+This new framework supports semantically parsing collations and introduces the `new_collations_enabled_on_first_bootstrap` configuration item to decide whether to enable the new framework when a cluster is first initialized. To enable the new framework, set `new_collations_enabled_on_first_bootstrap` to `true`. For details, see [`new_collations_enabled_on_first_bootstrap`](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap).
 
-{{< copyable "sql" >}}
+For a TiDB cluster that is already initialized, you can check whether the new collation is enabled through the `new_collation_enabled` variable in the `mysql.tidb` table:
+
+> **Note:**
+>
+> If the query result of the `mysql.tidb` table is different from the value of `new_collations_enabled_on_first_bootstrap`, the result of the `mysql.tidb` table is the actual value.
 
 ```sql
 SELECT VARIABLE_VALUE FROM mysql.tidb WHERE VARIABLE_NAME='new_collation_enabled';
