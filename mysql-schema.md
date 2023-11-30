@@ -81,8 +81,6 @@ Currently, the `help_topic` is NULL.
 
 ## Miscellaneous system tables
 
-- `GLOBAL_VARIABLES`: global system variable table
-
 <CustomContent platform="tidb">
 
 > **Note:**
