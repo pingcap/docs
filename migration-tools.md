@@ -56,7 +56,7 @@ This document introduces the user scenarios, supported upstreams and downstreams
 | **Upstream** | TiDB |
 | **Downstream (the output file)** | SST, backup.meta files, backup.lock files |
 | **Advantages** |<ul><li>Suitable for migrating data to another TiDB cluster</li><li>Support backing up data to an external storage for disaster recovery</li></ul> |
-| **Limitation** |<ul><li>When BR restores data to the upstream cluster of TiCDC or Drainer, the restored data cannot be replicated to the downstream by TiCDC or Drainer.</li><li>BR supports operations only between clusters that have the same `new_collations_enabled_on_first_bootstrap` value.</li></ul> |
+| **Limitation** |<ul><li>When BR restores data to the upstream cluster of TiCDC or Drainer, the restored data cannot be replicated to the downstream by TiCDC or Drainer.</li><li>BR supports operations only between clusters that have the same `new_collation_enabled` value in the `mysql.tidb` table</li></ul> |
 
 ## [sync-diff-inspector](/sync-diff-inspector/sync-diff-inspector-overview.md)
 
