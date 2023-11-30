@@ -23,7 +23,7 @@ In this tutorial, you can learn how to connect to your TiDB cluster using Navica
 To complete this tutorial, you need:
 
 - [Navicat for MySQL](https://www.navicat.com/en/download/navicat-for-mysql) **16.3.2** or later versions.
-- A Navicat for MySQL paid account.
+- A paid account for Navicat for MySQL.
 - A TiDB cluster.
 
 <CustomContent platform="tidb">
