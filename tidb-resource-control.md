@@ -74,7 +74,7 @@ Request Unit (RU) is a unified abstraction unit in TiDB for system resources, wh
         </tr>
         <tr>
             <td rowspan="3">Write</td>
-            <td>1 storage write batch consumes 1 RU for each replica</td>
+            <td>1 storage write batch consumes 1 RU</td>
         </tr>
         <tr>
             <td>1 storage write request consumes 1 RU</td>
@@ -89,13 +89,11 @@ Request Unit (RU) is a unified abstraction unit in TiDB for system resources, wh
     </tbody>
 </table>
 
-Currently, TiFlash resource control only considers SQL CPU, which is the CPU time consumed by the execution of pipeline tasks for queries, and read request payload.
-
 > **Note:**
 >
 > - Each write operation is eventually replicated to all replicas (by default, TiKV has 3 replicas). Each replication operation is considered a different write operation.
-> - In addition to queries executed by users, RU can be consumed by background tasks, such as automatic statistics collection.
 > - The preceding table lists only the resources involved in RU calculation for TiDB Self-Hosted clusters, excluding the network and storage consumption. For TiDB Serverless RUs, see [TiDB Serverless Pricing Details](https://www.pingcap.com/tidb-cloud-serverless-pricing-details/).
+> - Currently, TiFlash resource control only considers SQL CPU, which is the CPU time consumed by the execution of pipeline tasks for queries, and read request payload.
 
 ## Estimate RU consumption of SQL statements
 
@@ -422,6 +420,7 @@ TiDB supports the following types of background tasks:
 - `br`: perform backup and restore tasks using [BR](/br/backup-and-restore-overview.md). PITR is not supported.
 - `ddl`: control the resource usage during the batch data write back phase of Reorg DDLs.
 - `stats`: the [collect statistics](/statistics.md#collect-statistics) tasks that are manually executed or automatically triggered by TiDB.
+- `background`: For reserved task types, you can use the [`tidb_request_source_type`](/system-variables.md#tidb_request_source_type-new-in-v740) system variable to specify the task type of the current session as `background`.
 
 </CustomContent>
 
@@ -431,36 +430,53 @@ TiDB supports the following types of background tasks:
 - `br`: perform backup and restore tasks using [BR](https://docs.pingcap.com/tidb/stable/backup-and-restore-overview). PITR is not supported.
 - `ddl`: control the resource usage during the batch data write back phase of Reorg DDLs.
 - `stats`: the [collect statistics](/statistics.md#collect-statistics) tasks that are manually executed or automatically triggered by TiDB.
+- `background`: For reserved task types, you can use the [`tidb_request_source_type`](/system-variables.md#tidb_request_source_type-new-in-v740) system variable to specify the task type of the current session as `background`.
 
 </CustomContent>
 
-By default, the task types that are marked as background tasks are empty, and the management of background tasks is disabled. This default behavior is the same as that of versions prior to TiDB v7.4.0. To manage background tasks, you need to manually modify the background task types of the `default` resource group.
+By default, the task types that are marked as background tasks are empty, and the management of background tasks is disabled.. To enable background task management, you must manually modify the background task type of the `default` resource group. Once identified, resource management will control the background tasks automatically. This means that when system resources are insufficient, the background task runs with lower priority to ensure foreground tasks are executed first.
 
 #### Examples
 
-1. Create the `rg1` resource group and set `br` and `stats` as background tasks.
+1. Modify the `default` resource group and mark `br` and `ddl` as background tasks..
 
     ```sql
-    CREATE RESOURCE GROUP IF NOT EXISTS rg1 RU_PER_SEC = 500 BACKGROUND=(TASK_TYPES='br,stats');
+    ALTER RESOURCE GROUP `default` BACKGROUND=(TASK_TYPES='br,ddl');
     ```
 
-2. Change the `rg1` resource group to set `br` and `ddl` as background tasks.
+2. Restore the background tasks of `rg1` resource group to the default value. In this case, the background task types follow the configuration of the `default` resource group.
 
     ```sql
-    ALTER RESOURCE GROUP rg1 BACKGROUND=(TASK_TYPES='br,ddl');
+    ALTER RESOURCE GROUP `default` BACKGROUND=NULL;
     ```
 
-3. Restore the background tasks of `rg1` resource group to the default value. In this case, the background task types follow the configuration of the `default` resource group.
+3. Change the `rg1` resource group to set the background task types to empty. In this case, all tasks of this resource group are not treated as background tasks.
 
     ```sql
-    ALTER RESOURCE GROUP rg1 BACKGROUND=NULL;
+    ALTER RESOURCE GROUP `default` BACKGROUND=(TASK_TYPES="");
     ```
-
-4. Change the `rg1` resource group to set the background task types to empty. In this case, all tasks of this resource group are not treated as background tasks.
-
+4. View the background task type of the `default` resource group.
     ```sql
-    ALTER RESOURCE GROUP rg1 BACKGROUND=(TASK_TYPES="");
+    SELECT * FROM information_schema.resource_groups WHERE NAME="default";
     ```
+    result：
+    ```
+    +---------+------------+----------+-----------+-------------+---------------------+
+    | NAME    | RU_PER_SEC | PRIORITY | BURSTABLE | QUERY_LIMIT | BACKGROUND          |
+    +---------+------------+----------+-----------+-------------+---------------------+
+    | default | UNLIMITED  | MEDIUM   | YES       | NULL        | TASK_TYPES='br,ddl' |
+    +---------+------------+----------+-----------+-------------+---------------------+
+    ```
+5. If you want to explicitly mark the tasks in the current session as background type, you can use `tidb_request_source_type` to explicitly specify the task type, such as:：
+    ``` sql
+    SET @@tidb_request_source_type="background";
+    /* Set background task type */
+    ALTER RESOURCE GROUP `default` BACKGROUND=(TASK_TYPES="background");
+    /* Execute LOAD DATA in the current session */
+    LOAD DATA INFILE "s3://resource-control/Lightning/test.customer.aaaa.csv"
+    ```
+
+
 
 ## Disable resource control
 
