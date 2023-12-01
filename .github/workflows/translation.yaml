@@ -68,6 +68,7 @@ jobs:
           token: ${{ github.token }}
           branch: jp-translation/${{ steps.build_id.outputs.id }}
           title: "ci: JP translation ${{ steps.build_id.outputs.id }}"
+          path: docs
           body: |
             ### What is changed, added or deleted? (Required)
 
