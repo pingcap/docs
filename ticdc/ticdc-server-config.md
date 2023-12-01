@@ -66,7 +66,7 @@ processor-flush-interval = 50000000 # 50 ms
 #     # The number of log files to retain. This parameter is optional and its default value is `0`, indicating to keep all log files.
 #     max-backups = 0
 
-#[sorter]
+# [sorter]
 # The size of the shared pebble block cache in the Sorter module for the 8 pebble DBs started by default, measured in MiB. The default value is 128.
 # cache-size-in-mb = 128
 # The directory where sorter files are stored relative to the data directory (`data-dir`). This parameter is optional and its default value is "/tmp/sorter".
