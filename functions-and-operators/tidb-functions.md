@@ -145,7 +145,6 @@ ORDER BY
 | stock      | {"handle":{"s_i_id":"97451","s_w_id":"7"},"table_id":143} | {"table_id":145}                                          |
 +------------+-----------------------------------------------------------+-----------------------------------------------------------+
 4 rows in set (0.031 sec)
-
 ```
 
 `TIDB_DECODE_KEY` returns valid JSON on success and retuns the argument value if it fails to decode.
