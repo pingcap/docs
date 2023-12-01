@@ -83,7 +83,7 @@ Create Table: CREATE TABLE `t2` (
 ```
 
 ```sql
-select * from information_schema.tikv_region_status where table_name='t2' limit 1\G
+SELECT * FROM information_schema.tikv_region_status WHERE table_name='t2' LIMIT 1\G
 ```
 
 ```sql
@@ -124,20 +124,30 @@ SELECT tidb_decode_key('7480000000000000FF3E5F720400000000FF0000000601633430FF33
 The first Region of a table starts with a key that only has the `table_id` of the table. The last Region of the table ends with `table_id + 1`. Any Regions in between have longer keys that includes a `_tidb_rowid` or `handle`.
 
 ```sql
-SELECT TABLE_NAME, START_KEY, END_KEY FROM information_schema.TIKV_REGION_STATUS WHERE TABLE_NAME='stock' AND IS_INDEX=0;
+SELECT
+  TABLE_NAME,
+  TIDB_DECODE_KEY(START_KEY),
+  TIDB_DECODE_KEY(END_KEY)
+FROM
+  information_schema.TIKV_REGION_STATUS
+WHERE
+  TABLE_NAME='stock'
+  AND IS_INDEX=0
+ORDER BY
+  START_KEY;
 ```
 
 ```sql
-+------------+--------------------------------------------------------+--------------------------------------------------------+
-| TABLE_NAME | START_KEY                                              | END_KEY                                                |
-+------------+--------------------------------------------------------+--------------------------------------------------------+
-| stock      | 7480000000000000FF4700000000000000F8                   | 7480000000000000FF475F728000000000FF029DF00000000000FA |
-| stock      | 7480000000000000FF475F728000000000FF0D7ECA0000000000FA | 7480000000000000FF4900000000000000F8                   |
-| stock      | 7480000000000000FF475F728000000000FF063E890000000000FA | 7480000000000000FF475F728000000000FF09E0350000000000FA |
-| stock      | 7480000000000000FF475F728000000000FF029DF00000000000FA | 7480000000000000FF475F728000000000FF063E890000000000FA |
-| stock      | 7480000000000000FF475F728000000000FF09E0350000000000FA | 7480000000000000FF475F728000000000FF0D7ECA0000000000FA |
-+------------+--------------------------------------------------------+--------------------------------------------------------+
-5 rows in set (0.013 sec)
++------------+-----------------------------------------------------------+-----------------------------------------------------------+
+| TABLE_NAME | TIDB_DECODE_KEY(START_KEY)                                | TIDB_DECODE_KEY(END_KEY)                                  |
++------------+-----------------------------------------------------------+-----------------------------------------------------------+
+| stock      | {"table_id":143}                                          | {"handle":{"s_i_id":"32485","s_w_id":"3"},"table_id":143} |
+| stock      | {"handle":{"s_i_id":"32485","s_w_id":"3"},"table_id":143} | {"handle":{"s_i_id":"64964","s_w_id":"5"},"table_id":143} |
+| stock      | {"handle":{"s_i_id":"64964","s_w_id":"5"},"table_id":143} | {"handle":{"s_i_id":"97451","s_w_id":"7"},"table_id":143} |
+| stock      | {"handle":{"s_i_id":"97451","s_w_id":"7"},"table_id":143} | {"table_id":145}                                          |
++------------+-----------------------------------------------------------+-----------------------------------------------------------+
+4 rows in set (0.031 sec)
+
 ```
 
 `TIDB_DECODE_KEY` returns valid JSON on success and retuns the argument value if it fails to decode.
