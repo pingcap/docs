@@ -64,7 +64,6 @@ jobs:
         run: echo "::set-output name=id::$(date +%s)"
       - name: Create PR
         uses: peter-evans/create-pull-request@v5
-        if: steps.git_commit.outputs.committed == 1
         with:
           token: ${{ github.token }}
           branch: jp-translation/${{ steps.build_id.outputs.id }}
