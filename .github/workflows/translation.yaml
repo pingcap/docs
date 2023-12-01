@@ -58,13 +58,7 @@ jobs:
           git config user.name github-actions
           git config user.email github-actions@github.com
           git add .
-          if git status | grep -q "Changes to be committed"
-          then
-            git commit -m "Update translated files"
-            echo "::set-output name=committed::1"
-          else
-            echo "No changes detected, skipped"
-          fi
+          git commit -m "Update translated files"
       - name: Set build ID
         id: build_id
         run: echo "::set-output name=id::$(date +%s)"
