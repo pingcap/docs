@@ -45,7 +45,6 @@ cluster-id = "default"
   cert-path = ""
   key-path = ""
 
-
 capture-session-ttl = 10 # 10s
 owner-flush-interval = 50000000 # 50 ms
 processor-flush-interval = 50000000 # 50 ms
@@ -57,14 +56,6 @@ per-table-memory-quota = 10485760 # 10 MiB
     max-size = 300 # 300 MiB
     max-days = 0
     max-backups = 0
-
-[sorter]
-  num-concurrent-worker = 4
-  chunk-size-limit = 999
-  max-memory-percentage = 30
-  max-memory-consumption = 17179869184
-  num-workerpool-goroutine = 16
-  sort-dir = "/tmp/sorter"
 
 # [kv-client]
 #  worker-concurrent = 8
