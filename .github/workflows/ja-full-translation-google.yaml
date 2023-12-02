@@ -1,5 +1,7 @@
 name: JA Full Translation (Google version)
 
+on: workflow_dispatch
+
 jobs:
   ja-translation:
     runs-on: ubuntu-latest
