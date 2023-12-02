@@ -3,15 +3,13 @@ title: CLUSTER_SYSTEMINFO
 summary: Learn the `CLUSTER_SYSTEMINFO` kernel parameter table.
 ---
 
-# CLUSTER_SYSTEMINFO
+# CLUSTER_SYSTEMINFO {#cluster-systeminfo}
 
-You can use the `CLUSTER_SYSTEMINFO` kernel parameter table to query the kernel configuration information of the server where all instances of the cluster are located. Currently, you can query the information of the `sysctl` system.
+`CLUSTER_SYSTEMINFO`カーネル パラメータ テーブルを使用して、クラスタのすべてのインスタンスが配置されているサーバーのカーネル構成情報をクエリできます。現在、 `sysctl`のシステムの情報を照会できます。
 
-> **Note:**
+> **注記：**
 >
-> This table is only applicable to TiDB Self-Hosted and not available on [TiDB Cloud](https://docs.pingcap.com/tidbcloud/).
-
-{{< copyable "sql" >}}
+> このテーブルは TiDB セルフホスト型にのみ適用され、 [TiDB Cloud](https://docs.pingcap.com/tidbcloud/)では利用できません。
 
 ```sql
 USE information_schema;
@@ -32,16 +30,16 @@ DESC cluster_systeminfo;
 6 rows in set (0.00 sec)
 ```
 
-Field description:
+フィールドの説明:
 
-* `TYPE`: Corresponds to the `TYPE` field in the [`information_schema.cluster_info`](/information-schema/information-schema-cluster-info.md) table. The optional values are `tidb`, `pd`, and `tikv`.
-* `INSTANCE`: Corresponds to the `INSTANCE` field in the [`information_schema.cluster_info`](/information-schema/information-schema-cluster-info.md) cluster information table.
-* `SYSTEM_TYPE`: The system type. Currently, you can query the `system` system type.
-* `SYSTEM_NAME`: The system name. Currently, you can query the `sysctl` system name.
-* `NAME`: The configuration name corresponding to `sysctl`.
-* `VALUE`: The value of the configuration item corresponding to `sysctl`.
+-   `TYPE` : [`information_schema.cluster_info`](/information-schema/information-schema-cluster-info.md)テーブルの`TYPE`フィールドに対応します。オプションの値は`tidb` 、 `pd` 、および`tikv`です。
+-   `INSTANCE` : [`information_schema.cluster_info`](/information-schema/information-schema-cluster-info.md)クラスタ情報テーブルの`INSTANCE`フィールドに対応します。
+-   `SYSTEM_TYPE` : システムのタイプ。現在、 `system`システム タイプをクエリできます。
+-   `SYSTEM_NAME` : システム名。現在、 `sysctl`システム名を照会できます。
+-   `NAME` : `sysctl`に対応する構成名。
+-   `VALUE` ： `sysctl`に対応する設定項目の値。
 
-The following example shows how to query the kernel version of all servers in the cluster using the `CLUSTER_SYSTEMINFO` system information table.
+次の例は、 `CLUSTER_SYSTEMINFO`システム情報テーブルを使用してクラスター内のすべてのサーバーのカーネル バージョンをクエリする方法を示しています。
 
 ```sql
 SELECT * FROM cluster_systeminfo WHERE name LIKE '%kernel.osrelease%'

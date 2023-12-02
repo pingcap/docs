@@ -2,17 +2,17 @@
 title: SQL Logical Optimization
 ---
 
-# SQL Logical Optimization
+# SQL論理最適化 {#sql-logical-optimization}
 
-This chapter explains some key logic rewrites to help you understand how TiDB generates the final query plan. For example, when you execute the `select * from t where t.a in (select t1.a from t1 where t1.b=t.b)` query in TiDB, you will find that the `IN` sub-query `t.a in (select t1.a from t1 where t1.b=t.b)` does not exist because TiDB has made some rewrites here.
+この章では、TiDB が最終的なクエリ プランを生成する方法を理解するのに役立ついくつかの重要なロジックの書き換えについて説明します。たとえば、TiDB で`select * from t where t.a in (select t1.a from t1 where t1.b=t.b)`クエリを実行すると、TiDB がここでいくつかの書き換えを行っているため、 `IN`サブクエリ`t.a in (select t1.a from t1 where t1.b=t.b)`が存在しないことがわかります。
 
-This chapter introduces the following key rewrites:
+この章では、次の主要な書き換えを紹介します。
 
-- [Subquery Related Optimizations](/subquery-optimization.md)
-- [Column Pruning](/column-pruning.md)
-- [Decorrelation of Correlated Subquery](/correlated-subquery-optimization.md)
-- [Eliminate Max/Min](/max-min-eliminate.md)
-- [Predicates Push Down](/predicate-push-down.md)
-- [Partition Pruning](/partition-pruning.md)
-- [TopN and Limit Operator Push Down](/topn-limit-push-down.md)
-- [Join Reorder](/join-reorder.md)
+-   [サブクエリ関連の最適化](/subquery-optimization.md)
+-   [カラムの剪定](/column-pruning.md)
+-   [相関サブクエリの相関解除](/correlated-subquery-optimization.md)
+-   [最大値/最小値の削除](/max-min-eliminate.md)
+-   [Predicate Push Down](/predicate-push-down.md)
+-   [パーティションのプルーニング](/partition-pruning.md)
+-   [TopN およびリミット演算子のプッシュダウン](/topn-limit-push-down.md)
+-   [結合したテーブルの再配置](/join-reorder.md)

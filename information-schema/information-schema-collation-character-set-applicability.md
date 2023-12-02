@@ -3,16 +3,16 @@ title: COLLATION_CHARACTER_SET_APPLICABILITY
 summary: Learn the `COLLATION_CHARACTER_SET_APPLICABILITY` INFORMATION_SCHEMA table.
 ---
 
-# COLLATION_CHARACTER_SET_APPLICABILITY
+# COLLATION_CHARACTER_SET_APPLICABILITY {#collation-character-set-applicability}
 
-The `COLLATION_CHARACTER_SET_APPLICABILITY` table maps collations to the applicable character set name. Similar to the `COLLATIONS` table, it is included only for compatibility with MySQL.
+`COLLATION_CHARACTER_SET_APPLICABILITY`表は、照合順序を該当する文字セット名にマップします。 `COLLATIONS`テーブルと同様に、これは MySQL との互換性のためだけに含まれています。
 
 ```sql
 USE INFORMATION_SCHEMA;
 DESC COLLATION_CHARACTER_SET_APPLICABILITY;
 ```
 
-The output is as follows:
+出力は次のとおりです。
 
 ```sql
 +--------------------+-------------+------+------+---------+-------+
@@ -24,13 +24,13 @@ The output is as follows:
 2 rows in set (0.00 sec)
 ```
 
-View the collation mapping for the `utf8mb4` character set in the `COLLATION_CHARACTER_SET_APPLICABILITY` table:
+`COLLATION_CHARACTER_SET_APPLICABILITY`表の`utf8mb4`文字セットの照合順序マッピングをビュー。
 
 ```sql
 SELECT * FROM COLLATION_CHARACTER_SET_APPLICABILITY WHERE character_set_name='utf8mb4';
 ```
 
-The output is as follows:
+出力は次のとおりです。
 
 ```sql
 +--------------------+--------------------+
@@ -43,7 +43,7 @@ The output is as follows:
 3 rows in set (0.00 sec)
 ```
 
-The description of columns in the `COLLATION_CHARACTER_SET_APPLICABILITY` table is as follows:
+`COLLATION_CHARACTER_SET_APPLICABILITY`のテーブルの列の説明は次のとおりです。
 
-* `COLLATION_NAME`: The name of the collation.
-* `CHARACTER_SET_NAME`: The name of the character set which the collation belongs to.
+-   `COLLATION_NAME` :照合順序の名前。
+-   `CHARACTER_SET_NAME` :照合順序が属する文字セットの名前。

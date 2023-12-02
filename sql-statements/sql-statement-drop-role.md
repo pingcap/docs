@@ -3,11 +3,11 @@ title: DROP ROLE | TiDB SQL Statement Reference
 summary: An overview of the usage of DROP ROLE for the TiDB database.
 ---
 
-# DROP ROLE
+# 役割を削除する {#drop-role}
 
-This statement removes a role, that was previously created with `CREATE ROLE`.
+このステートメントは、以前に`CREATE ROLE`で作成されたロールを削除します。
 
-## Synopsis
+## あらすじ {#synopsis}
 
 ```ebnf+diagram
 DropRoleStmt ::=
@@ -17,15 +17,15 @@ RolenameList ::=
     Rolename ( ',' Rolename )*
 ```
 
-## Examples
+## 例 {#examples}
 
-Connect to TiDB as the `root` user:
+`root`ユーザーとして TiDB に接続します。
 
 ```shell
 mysql -h 127.0.0.1 -P 4000 -u root
 ```
 
-Create a new role `analyticsteam` and a new user `jennifer`:
+新しいロール`analyticsteam`と新しいユーザー`jennifer`を作成します。
 
 ```sql
 CREATE ROLE analyticsteam;
@@ -41,13 +41,13 @@ GRANT analyticsteam TO jennifer;
 Query OK, 0 rows affected (0.01 sec)
 ```
 
-Connect to TiDB as the `jennifer` user:
+`jennifer`ユーザーとして TiDB に接続します。
 
 ```shell
 mysql -h 127.0.0.1 -P 4000 -u jennifer
 ```
 
-Note that by default `jennifer` needs to execute `SET ROLE analyticsteam` in order to be able to use the privileges associated with the `analyticsteam` role:
+デフォルトでは、 `analyticsteam`ロールに関連付けられた権限を使用できるようにするには、 `jennifer` `SET ROLE analyticsteam`実行する必要があることに注意してください。
 
 ```sql
 SHOW GRANTS;
@@ -83,26 +83,26 @@ SHOW TABLES IN test;
 1 row in set (0.00 sec)
 ```
 
-Connect to TiDB as the `root` user:
+`root`ユーザーとして TiDB に接続します。
 
 ```shell
 mysql -h 127.0.0.1 -P 4000 -u root
 ```
 
-The statement `SET DEFAULT ROLE` can be used to associate the role `analyticsteam` to `jennifer`:
+ステートメント`SET DEFAULT ROLE`使用して、ロール`analyticsteam`を`jennifer`に関連付けることができます。
 
 ```sql
 SET DEFAULT ROLE analyticsteam TO jennifer;
 Query OK, 0 rows affected (0.02 sec)
 ```
 
-Connect to TiDB as the `jennifer` user:
+`jennifer`ユーザーとして TiDB に接続します。
 
 ```shell
 mysql -h 127.0.0.1 -P 4000 -u jennifer
 ```
 
-After this, the user `jennifer` has the privileges associated with the role `analyticsteam` and `jennifer` does not have to execute the statement `SET ROLE`:
+この後、ユーザー`jennifer`はロール`analyticsteam`に関連付けられた権限を持ち、ユーザー`jennifer`はステートメント`SET ROLE`を実行する必要がなくなります。
 
 ```sql
 SHOW GRANTS;
@@ -124,28 +124,28 @@ SHOW TABLES IN test;
 1 row in set (0.00 sec)
 ```
 
-Connect to TiDB as the `root` user:
+`root`ユーザーとして TiDB に接続します。
 
 ```shell
 mysql -h 127.0.0.1 -P 4000 -u root
 ```
 
-Drop the role for the `analyticsteam`:
+`analyticsteam`のロールを削除します。
 
 ```sql
 DROP ROLE analyticsteam;
 Query OK, 0 rows affected (0.02 sec)
 ```
 
-`jennifer` no longer has the default role of `analyticsteam` associated, nor can set the role to `analyticsteam`.
+`jennifer`はデフォルトのロール`analyticsteam`が関連付けられておらず、ロールを`analyticsteam`に設定することもできません。
 
-Connect to TiDB as the `jennifer` user:
+`jennifer`ユーザーとして TiDB に接続します。
 
 ```shell
 mysql -h 127.0.0.1 -P 4000 -u jennifer
 ```
 
-Show the privileges of `jennifer`:
+`jennifer`の権限を表示します。
 
 ```sql
 SHOW GRANTS;
@@ -160,20 +160,20 @@ SET ROLE analyticsteam;
 ERROR 3530 (HY000): `analyticsteam`@`%` is is not granted to jennifer@%
 ```
 
-## MySQL compatibility
+## MySQLの互換性 {#mysql-compatibility}
 
-The `DROP ROLE` statement in TiDB is fully compatible with the roles feature in MySQL 8.0. If you find any compatibility differences, [report a bug](https://docs.pingcap.com/tidb/stable/support).
+TiDB の`DROP ROLE`ステートメントは、MySQL 8.0 のロール機能と完全な互換性があります。互換性の違いが見つかった場合は、 [バグを報告](https://docs.pingcap.com/tidb/stable/support) .
 
-## See also
+## こちらも参照 {#see-also}
 
-* [`CREATE ROLE`](/sql-statements/sql-statement-create-role.md)
-* [`GRANT <role>`](/sql-statements/sql-statement-grant-role.md)
-* [`REVOKE <role>`](/sql-statements/sql-statement-revoke-role.md)
-* [`SET ROLE`](/sql-statements/sql-statement-set-role.md)
-* [`SET DEFAULT ROLE`](/sql-statements/sql-statement-set-default-role.md)
+-   [`CREATE ROLE`](/sql-statements/sql-statement-create-role.md)
+-   [`GRANT &#x3C;role>`](/sql-statements/sql-statement-grant-role.md)
+-   [`REVOKE &#x3C;role>`](/sql-statements/sql-statement-revoke-role.md)
+-   [`SET ROLE`](/sql-statements/sql-statement-set-role.md)
+-   [`SET DEFAULT ROLE`](/sql-statements/sql-statement-set-default-role.md)
 
 <CustomContent platform="tidb">
 
-* [Role-Based Access Control](/role-based-access-control.md)
+-   [役割ベースのアクセス制御](/role-based-access-control.md)
 
 </CustomContent>

@@ -3,36 +3,37 @@ title: Response and HTTP Status Codes of Data Service
 summary: This document describes the response and HTTP status codes of Data Service in TiDB Cloud.
 ---
 
-# Response and HTTP Status Codes of Data Service
+# データサービスのレスポンスコードとHTTPステータスコード {#response-and-http-status-codes-of-data-service}
 
-When you call an API endpoint defined in [Data Service](/tidb-cloud/data-service-overview.md), Data Service returns an HTTP response. Understanding the structure of this response and the meaning of status codes is essential for interpreting data returned by a Data Service endpoint.
+[データサービス](/tidb-cloud/data-service-overview.md)で定義された API エンドポイントを呼び出すと、Data Service は HTTP 応答を返します。 Data Service エンドポイントから返されたデータを解釈するには、この応答の構造とステータス コードの意味を理解することが不可欠です。
 
-This document describes the response and status codes of Data Service in TiDB Cloud.
+このドキュメントでは、 TiDB Cloudのデータ サービスの応答コードとステータス コードについて説明します。
 
-## Response
+## 応答 {#response}
 
-Data Service returns an HTTP response with a JSON body.
+Data Service は、JSON 本文を含む HTTP 応答を返します。
 
-> **Note:**
+> **注記：**
 >
-> When you call an endpoint with multiple SQL statements, Data Service executes the statements one by one, but it only returns the execution result of the last statement in the HTTP response.
+> 複数の SQL ステートメントを使用してエンドポイントを呼び出すと、Data Service はステートメントを 1 つずつ実行しますが、HTTP 応答の最後のステートメントの実行結果のみを返します。
 
-The response body contains the following fields:
+応答本文には次のフィールドが含まれます。
 
-- `type`: _string_. The type of this endpoint. The value might be `"sql_endpoint"` or `"chat2data_endpoint"`. Different endpoints return different types of responses.
-- `data`: _object_. The execution results, which include three parts:
+-   `type` :*文字列*。このエンドポイントのタイプ。値は`"sql_endpoint"`または`"chat2data_endpoint"`である可能性があります。エンドポイントが異なれば、返される応答の種類も異なります。
+-   `data` :*オブジェクト*。実行結果には次の 3 つの部分が含まれます。
 
-    - `columns`: _array_. Schema information for the returned fields.
-    - `rows`: _array_. The returned results in `key:value` format.
+    -   `columns` :*配列*。返されたフィールドのスキーマ情報。
 
-        When **Batch Operation** is enabled for an endpoint and the last SQL statement of the endpoint is an `INSERT`, `UPDATE`, or `DELETE` operation, note the following:
+    -   `rows` :*配列*。返される結果は`key:value`形式です。
 
-        - The returned results of the endpoint will also include the `"message"` and `"success"` fields for each row to indicate their response and status.
-        - If the primary key column of the target table is configured as `auto_increment`, the returned results of the endpoint will also include the `"auto_increment_id"` field for each row. The value of this field is the auto increment ID for an `INSERT` operation and is `null` for other operations such as `UPDATE` and `DELETE`.
+        エンドポイントに対して**バッチ操作が**有効であり、エンドポイントの最後の SQL ステートメントが`INSERT` 、 `UPDATE` 、または`DELETE`操作である場合は、次の点に注意してください。
 
-    - `result`: _object_. The execution-related information of the SQL statement, including success/failure status, execution time, number of rows returned, and user configuration.
+        -   エンドポイントから返される結果には、応答とステータスを示す各行の`"message"`フィールドと`"success"`フィールドも含まれます。
+        -   ターゲット テーブルの主キー列が`auto_increment`として構成されている場合、エンドポイントから返される結果には、各行の`"auto_increment_id"`フィールドも含まれます。このフィールドの値は、 `INSERT`操作の自動インクリメント ID であり、 `UPDATE`や`DELETE`などの他の操作の場合は`null`です。
 
-An example response is as follows:
+    -   `result` :*オブジェクト*。 SQL ステートメントの実行関連情報 (成功/失敗ステータス、実行時間、返された行数、ユーザー構成など)。
+
+応答の例は次のとおりです。
 
 <SimpleTab>
 <div label="SQL Endpoint">
@@ -115,13 +116,13 @@ An example response is as follows:
 </div>
 </SimpleTab>
 
-## Status code
+## ステータスコード {#status-code}
 
-### 200
+### 200 {#200}
 
-If the HTTP status code is `200` and the `data.result.code` field also shows `200`, this indicated that the SQL statement is executed successfully. Otherwise, TiDB Cloud fails to execute the SQL statement defined in your endpoint. You can check the `code` and `message` fields for detailed information.
+HTTP ステータス コードが`200`で、 `data.result.code`フィールドにも`200`表示されている場合は、SQL ステートメントが正常に実行されたことを示します。そうしないと、 TiDB Cloud はエンドポイントで定義された SQL ステートメントの実行に失敗します。詳細については、 `code`フィールドと`message`フィールドを確認してください。
 
-An example response is as follows:
+応答の例は次のとおりです。
 
 ```json
 {
@@ -143,11 +144,11 @@ An example response is as follows:
 }
 ```
 
-### 400
+### 400 {#400}
 
-This status code indicates that the parameter check failed.
+このステータス コードは、パラメータ チェックが失敗したことを示します。
 
-An example response is as follows:
+応答の例は次のとおりです。
 
 ```json
 {
@@ -169,11 +170,11 @@ An example response is as follows:
 }
 ```
 
-### 401
+### 401 {#401}
 
-This status code indicates that the authentication failed due to lack of permission.
+このステータス コードは、権限がないために認証が失敗したことを示します。
 
-An example response is as follows:
+応答の例は次のとおりです。
 
 ```json
 {
@@ -195,11 +196,11 @@ An example response is as follows:
 }
 ```
 
-### 404
+### 404 {#404}
 
-This status code indicates that the authentication failed due to the inability to find the specified endpoint.
+このステータス コードは、指定されたエンドポイントが見つからないために認証が失敗したことを示します。
 
-An example response is as follows:
+応答の例は次のとおりです。
 
 ```json
 {
@@ -221,11 +222,11 @@ An example response is as follows:
 }
 ```
 
-### 405
+### 405 {#405}
 
-This status code indicates that the request used a method that is not allowed. Note that Data Service only supports `GET` and `POST`.
+このステータス コードは、リクエストで許可されていないメソッドが使用されたことを示します。 Data Service は`GET`と`POST`のみをサポートすることに注意してください。
 
-An example response is as follows:
+応答の例は次のとおりです。
 
 ```json
 {
@@ -247,11 +248,11 @@ An example response is as follows:
 }
 ```
 
-### 408
+### 408 {#408}
 
-This status code indicates that the request exceeds the timeout duration of the endpoint. To modify the timeout of an endpoint, refer to [Configure properties](/tidb-cloud/data-service-manage-endpoint.md#configure-properties).
+このステータス コードは、リクエストがエンドポイントのタイムアウト期間を超えたことを示します。エンドポイントのタイムアウトを変更するには、 [プロパティの構成](/tidb-cloud/data-service-manage-endpoint.md#configure-properties)を参照してください。
 
-An example response is as follows:
+応答の例は次のとおりです。
 
 ```json
 {
@@ -273,11 +274,11 @@ An example response is as follows:
 }
 ```
 
-### 429
+### 429 {#429}
 
-This status code indicates that the request exceeds the rate limit of the API key. For more quota, you can [submit a request](https://support.pingcap.com/hc/en-us/requests/new?ticket_form_id=7800003722519) to our support team.
+このステータス コードは、リクエストが API キーのレート制限を超えていることを示します。さらに割り当てが必要な場合は、サポート チームにお[リクエストを送信する](https://support.pingcap.com/hc/en-us/requests/new?ticket_form_id=7800003722519)ください。
 
-An example response is as follows:
+応答の例は次のとおりです。
 
 <SimpleTab>
 <div label="SQL Endpoint">
@@ -329,13 +330,13 @@ An example response is as follows:
 </div>
 </SimpleTab>
 
-### 500
+### 500 {#500}
 
-This status code indicates that the request met an internal error. There might be various causes for this error.
+このステータス コードは、リクエストで内部エラーが発生したことを示します。このエラーにはさまざまな原因が考えられます。
 
-One possible cause is that the authentication failed due to the inability to connect to the authentication server.
+考えられる原因の 1 つは、認証サーバーに接続できないために認証に失敗したことです。
 
-An example response is as follows:
+応答の例は次のとおりです。
 
 ```json
 {
@@ -357,7 +358,7 @@ An example response is as follows:
 }
 ```
 
-This might also be related to the inability to connect the TiDB Cloud cluster. You need to refer to the `message` for troubleshooting.
+これは、 TiDB Cloudクラスターに接続できないことにも関係している可能性があります。トラブルシューティングについては`message`を参照する必要があります。
 
 ```json
 {

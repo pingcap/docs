@@ -3,11 +3,11 @@ title: CREATE VIEW | TiDB SQL Statement Reference
 summary: An overview of the usage of CREATE VIEW for the TiDB database.
 ---
 
-# CREATE VIEW
+# ビューの作成 {#create-view}
 
-The `CREATE VIEW` statement saves a `SELECT` statement as a queryable object, similar to a table. Views in TiDB are non-materialized. This means that as a view is queried, TiDB will internally rewrite the query to combine the view definition with the SQL query.
+`CREATE VIEW`ステートメントは、テーブルと同様に、クエリ可能なオブジェクトとして`SELECT`ステートメントを保存します。 TiDB のビューは実体化されていません。これは、ビューがクエリされると、TiDB が内部でクエリを書き換えて、ビュー定義と SQL クエリを結合することを意味します。
 
-## Synopsis
+## あらすじ {#synopsis}
 
 ```ebnf+diagram
 CreateViewStmt ::=
@@ -34,7 +34,7 @@ ViewCheckOption ::=
     ( 'WITH' ( 'CASCADED' | 'LOCAL' ) 'CHECK' 'OPTION' )?
 ```
 
-## Examples
+## 例 {#examples}
 
 ```sql
 mysql> CREATE TABLE t1 (id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, c1 INT NOT NULL);
@@ -87,15 +87,15 @@ mysql> INSERT INTO v1 (c1) VALUES (7);
 ERROR 1105 (HY000): insert into view v1 is not supported now.
 ```
 
-## MySQL compatibility
+## MySQLの互換性 {#mysql-compatibility}
 
-* Currently, any view in TiDB cannot be inserted or updated (that is, `INSERT VIEW` and `UPDATE VIEW` are not supported). `WITH CHECK OPTION` is only syntactically compatible but does not take effect.
-* Currently, the view in TiDB does not support `ALTER VIEW`, but you can use `CREATE OR REPLACE` instead.
-* Currently, the `ALGORITHM` field is only syntactically compatible in TiDB but does not take effect. TiDB currently only supports the MERGE algorithm.
+-   現在、TiDB 内のビューは挿入または更新できません (つまり、 `INSERT VIEW`と`UPDATE VIEW`はサポートされていません)。 `WITH CHECK OPTION`は構文的に互換性があるだけで、有効になりません。
+-   現在、TiDB のビューは`ALTER VIEW`サポートしていませんが、代わりに`CREATE OR REPLACE`使用できます。
+-   現在、 `ALGORITHM`フィールドは TiDB で構文的にのみ互換性がありますが、有効になりません。 TiDB は現在、MERGE アルゴリズムのみをサポートしています。
 
-## See also
+## こちらも参照 {#see-also}
 
-* [DROP VIEW](/sql-statements/sql-statement-drop-view.md)
-* [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
-* [SHOW CREATE TABLE](/sql-statements/sql-statement-show-create-table.md)
-* [DROP TABLE](/sql-statements/sql-statement-drop-table.md)
+-   [ドロップビュー](/sql-statements/sql-statement-drop-view.md)
+-   [テーブルの作成](/sql-statements/sql-statement-create-table.md)
+-   [テーブルの作成を表示](/sql-statements/sql-statement-show-create-table.md)
+-   [ドロップテーブル](/sql-statements/sql-statement-drop-table.md)

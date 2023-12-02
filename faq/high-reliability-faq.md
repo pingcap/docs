@@ -3,41 +3,39 @@ title: High Reliability FAQs
 summary: Learn about the FAQs related to high reliability of TiDB.
 ---
 
-# High Reliability FAQs
+# 高信頼性に関するよくある質問 {#high-reliability-faqs}
 
-This document summarizes the FAQs related to high reliability of TiDB.
+本書は、TiDB の高信頼性に関する FAQ をまとめたものです。
 
-## Does TiDB support data encryption?
+## TiDB はデータ暗号化をサポートしていますか? {#does-tidb-support-data-encryption}
 
-Yes. To encrypt data in the network traffic, you can [enable TLS between TiDB clients and servers](/enable-tls-between-clients-and-servers.md). To encrypt data in the storage engine, you can enable [transparent data encryption (TDE)](/encryption-at-rest.md).
+はい。ネットワーク トラフィック内のデータを暗号化するには、 [TiDB クライアントとサーバー間の TLS を有効にする](/enable-tls-between-clients-and-servers.md)方法があります。storageエンジン内のデータを暗号化するには、 [透過的データ暗号化 (TDE)](/encryption-at-rest.md)を有効にします。
 
-## Does TiDB support modifying the MySQL version string of the server to a specific one that is required by the security vulnerability scanning tool?
+## TiDB は、サーバーの MySQL バージョン文字列を、セキュリティ脆弱性スキャン ツールに必要な特定の文字列に変更することをサポートしていますか? {#does-tidb-support-modifying-the-mysql-version-string-of-the-server-to-a-specific-one-that-is-required-by-the-security-vulnerability-scanning-tool}
 
-- Since v3.0.8, TiDB supports modifying the version string of the server by modifying [`server-version`](/tidb-configuration-file.md#server-version) in the configuration file.
+-   v3.0.8 以降、TiDB は構成ファイル内の[`server-version`](/tidb-configuration-file.md#server-version)を変更することによるサーバーのバージョン文字列の変更をサポートしています。
 
-- Since v4.0, if you deploy TiDB using TiUP, you can also specify the proper version string by executing `tiup cluster edit-config <cluster-name>` to edit the following section:
+-   v4.0 以降、 TiUPを使用して TiDB をデプロイする場合は、 `tiup cluster edit-config <cluster-name>`を実行して次のセクションを編集することで、適切なバージョン文字列を指定することもできます。
 
-    ```
-    server_configs:
-      tidb:
-        server-version: 'YOUR_VERSION_STRING'
-    ```
+        server_configs:
+          tidb:
+            server-version: 'YOUR_VERSION_STRING'
 
-    Then, use the `tiup cluster reload <cluster-name> -R tidb` command to make the preceding modification effective to avoid the failure of security vulnerability scan.
+    次に、 `tiup cluster reload <cluster-name> -R tidb`コマンドを使用して前述の変更を有効にし、セキュリティ脆弱性スキャンの失敗を回避します。
 
-## What authentication protocols does TiDB support? What's the process?
+## TiDB はどのような認証プロトコルをサポートしていますか?プロセスは何ですか? {#what-authentication-protocols-does-tidb-support-what-s-the-process}
 
-Like MySQL, TiDB supports the SASL protocol for user login authentication and password processing.
+MySQL と同様に、TiDB はユーザー ログイン認証とパスワード処理のために SASL プロトコルをサポートしています。
 
-When the client connects to TiDB, the challenge-response authentication mode starts. The process is as follows:
+クライアントが TiDB に接続すると、チャレンジ/レスポンス認証モードが開始されます。プロセスは次のとおりです。
 
-1. The client connects to the server.
-2. The server sends a random string challenge to the client.
-3. The client sends the username and response to the server.
-4. The server verifies the response.
+1.  クライアントはサーバーに接続します。
+2.  サーバーはランダムな文字列チャレンジをクライアントに送信します。
+3.  クライアントはユーザー名と応答をサーバーに送信します。
+4.  サーバーは応答を検証します。
 
-## How to modify the user password and privilege?
+## ユーザーのパスワードと権限を変更するにはどうすればよいですか? {#how-to-modify-the-user-password-and-privilege}
 
-To modify the user password in TiDB, it is recommended to use `ALTER USER` (for example, `ALTER USER 'test'@'localhost' IDENTIFIED BY 'mypass';`), not `UPDATE mysql.user` which might lead to the condition that the password in other nodes is not refreshed timely.
+TiDB でユーザー パスワードを変更する場合は、他のノードのパスワードが適時に更新されない可能性がある`UPDATE mysql.user`ではなく`ALTER USER` (たとえば、 `ALTER USER 'test'@'localhost' IDENTIFIED BY 'mypass';` ) を使用することをお勧めします。
 
-It is recommended to use the official standard statements when modifying the user password and privilege. For details, see [TiDB user account management](/user-account-management.md).
+ユーザーのパスワードと権限を変更する場合は、公式の標準ステートメントを使用することをお勧めします。詳細は[TiDB ユーザーアカウント管理](/user-account-management.md)を参照してください。

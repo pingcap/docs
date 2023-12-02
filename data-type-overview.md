@@ -3,13 +3,13 @@ title: Data Types
 summary: Learn about the data types supported in TiDB.
 ---
 
-# Data Types
+# データ型 {#data-types}
 
-TiDB supports all the data types in MySQL except the `SPATIAL` type. This includes all the [numeric types](/data-type-numeric.md), [string types](/data-type-string.md), [date & time types](/data-type-date-and-time.md), and [the JSON type](/data-type-json.md).
+TiDB は、 `SPATIAL`のタイプを除く MySQL のすべてのデータ タイプをサポートします。これには、 [数値型](/data-type-numeric.md) 、 [文字列型](/data-type-string.md) 、 [日付と時刻のタイプ](/data-type-date-and-time.md) 、および[JSON タイプ](/data-type-json.md)がすべて含まれます。
 
-The definitions used for datatypes are specified as `T(M[, D])`. Where by:
+データ型に使用される定義は`T(M[, D])`として指定されます。どこで:
 
-- `T` indicates the specific data type.
-- `M` indicates the maximum display width for integer types. For floating-point and fixed-point types, `M` is the total number of digits that can be stored (the precision). For string types, `M` is the maximum length. The maximum permissible value of M depends on the data type.
-- `D` applies to floating-point and fixed-point types and indicates the number of digits following the decimal point (the scale).
-- `fsp` applies to the `TIME`, `DATETIME`, and `TIMESTAMP` types and represents the fractional seconds precision. The `fsp` value, if given, must be in the range 0 to 6. A value of 0 signifies that there is no fractional part. If omitted, the default precision is 0.
+-   `T`特定のデータ型を示します。
+-   `M`整数型の最大表示幅を示します。浮動小数点型および固定小数点型の場合、格納できる合計桁数 (精度) は`M`です。文字列型の場合、最大長は`M`です。 M の最大許容値はデータ型によって異なります。
+-   `D`は浮動小数点型と固定小数点型に適用され、小数点以下の桁数 (スケール) を示します。
+-   `fsp` `TIME` 、 `DATETIME` 、および`TIMESTAMP`タイプに適用され、小数秒の精度を表します。 `fsp`値を指定する場合は、0 ～ 6 の範囲内である必要があります。値 0 は、小数部がないことを意味します。省略した場合、デフォルトの精度は 0 です。

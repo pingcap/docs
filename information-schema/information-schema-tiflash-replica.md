@@ -3,16 +3,16 @@ title: TIFLASH_REPLICA
 summary: Learn the `TIFLASH_REPLICA` INFORMATION_SCHEMA table.
 ---
 
-# TIFLASH_REPLICA
+# TIFLASH_レプリカ {#tiflash-replica}
 
-The `TIFLASH_REPLICA` table provides information about TiFlash replicas available.
+表`TIFLASH_REPLICA`は、利用可能なTiFlashレプリカに関する情報を示します。
 
 ```sql
 USE INFORMATION_SCHEMA;
 DESC TIFLASH_REPLICA;
 ```
 
-The output is as follows:
+出力は次のとおりです。
 
 ```sql
 +-----------------+-------------+------+------+---------+-------+
@@ -29,12 +29,12 @@ The output is as follows:
 7 rows in set (0.01 sec)
 ```
 
-Fields in the `TIFLASH_REPLICA` table are described as follows:
+`TIFLASH_REPLICA`テーブルのフィールドは次のように説明されています。
 
-- `TABLE_SCHEMA`: the name of the database to which the table belongs.
-- `TABLE_NAME`: the name of the table.
-- `TABLE_ID`: the internal ID of the table, which is unique within a TiDB cluster.
-- `REPLICA_COUNT`: the number of TiFlash replicas.
-- `LOCATION_LABELS`: the LocationLabelList that is set when a TiFlash replica is created.
-- `AVAILABLE`: indicates whether the TiFlash replica of the table is available. When the value is `1` (available), the TiDB optimizer can intelligently choose to push down queries to TiKV or TiFlash based on query cost. When the value is `0` (unavailable), TiDB will not push down queries to TiFlash. Once the value of this field becomes `1` (available), it will not change anymore.
-- `PROGRESS`: the replication progress of TiFlash replicas, with the accuracy to two decimal places and at the minute level. The scope of this field is `[0, 1]`. When the `AVAILABLE` field is `1` and `PROGRESS` is less than 1, the TiFlash replica is far behind TiKV, and the queries pushed down to TiFlash will probably fail due to timeout of waiting for data replication.
+-   `TABLE_SCHEMA` : テーブルが属するデータベースの名前。
+-   `TABLE_NAME` : テーブルの名前。
+-   `TABLE_ID` : テーブルの内部 ID。TiDB クラスター内で一意です。
+-   `REPLICA_COUNT` : TiFlashレプリカの数。
+-   `LOCATION_LABELS` : TiFlashレプリカの作成時に設定される LocationLabelList。
+-   `AVAILABLE` : テーブルのTiFlashレプリカが使用可能かどうかを示します。値が`1` (使用可能) の場合、TiDB オプティマイザーはクエリ コストに基づいてクエリを TiKV またはTiFlashにプッシュダウンすることをインテリジェントに選択できます。値が`0` (使用不可) の場合、TiDB はクエリをTiFlashにプッシュダウンしません。このフィールドの値が`1` (使用可能) になると、それ以上変更されなくなります。
+-   `PROGRESS` : TiFlashレプリカのレプリケーションの進行状況。小数点以下 2 桁までの精度で、分レベルで表示されます。このフィールドの範囲は`[0, 1]`です。 `AVAILABLE`フィールドが`1`で、 `PROGRESS`が 1 未満の場合、 TiFlashレプリカは TiKV よりもはるかに遅れており、 TiFlashにプッシュダウンされたクエリは、データ レプリケーションの待機のタイムアウトが原因で失敗する可能性があります。

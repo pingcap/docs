@@ -3,192 +3,199 @@ title: Organization SSO Authentication
 summary: Learn how to log in to the TiDB Cloud console via your customized organization authentication.
 ---
 
-# Organization SSO Authentication
+# 組織のSSO認証 {#organization-sso-authentication}
 
-Single Sign-On (SSO) is an authentication scheme that enables members in your TiDB Cloud [organization](/tidb-cloud/tidb-cloud-glossary.md#organization) to log in to TiDB Cloud using identities from an identity provider (IdP) instead of email addresses and passwords.
+シングル サインオン (SSO) は、 TiDB Cloud[組織](/tidb-cloud/tidb-cloud-glossary.md#organization)のメンバーが、電子メール アドレスとパスワードの代わりにアイデンティティ プロバイダー (IdP) からのアイデンティティを使用してTiDB Cloudにログインできるようにする認証スキームです。
 
-TiDB Cloud supports the following two types of SSO authentication:
+TiDB Cloud は、次の 2 種類の SSO 認証をサポートしています。
 
-- [Basic SSO](/tidb-cloud/tidb-cloud-sso-authentication.md): members can log in to the [TiDB Cloud console](https://tidbcloud.com/) using their GitHub, Google, or Microsoft authentication methods. The basic SSO is enabled by default for all organizations in TiDB Cloud.
+-   [基本的な SSO](/tidb-cloud/tidb-cloud-sso-authentication.md) : メンバーは、GitHub、Google、または Microsoft の認証方法を使用して[TiDB Cloudコンソール](https://tidbcloud.com/)にログインできます。基本 SSO は、 TiDB Cloudのすべての組織に対してデフォルトで有効になっています。
 
-- Cloud Organization SSO: members can log in to a custom login page of TiDB Cloud using the authentication methods specified by your organization. The Cloud Organization SSO is disabled by default.
+-   クラウド組織 SSO: メンバーは、組織が指定した認証方法を使用して、 TiDB Cloudのカスタム ログイン ページにログインできます。クラウド組織 SSO はデフォルトでは無効になっています。
 
-Compared with basic SSO, Cloud Organization SSO provides more flexibility and customization so you can better meet your organization's security and compliance requirements. For example, you can specify which authentication methods are displayed on the login page, limit which email address domains are allowed for login, and let your members log in to TiDB Cloud with your identity provider (IdP) that uses the [OpenID Connect (OIDC)](https://openid.net/connect/) or [Security Assertion Markup Language (SAML)](https://en.wikipedia.org/wiki/Security_Assertion_Markup_Language) identity protocol.
+基本的な SSO と比較して、クラウド組織 SSO は柔軟性とカスタマイズ性が高いため、組織のセキュリティとコンプライアンスの要件をより適切に満たすことができます。たとえば、ログイン ページに表示する認証方法を指定したり、ログインを許可する電子メール アドレス ドメインを制限したり、 [OpenID Connect (OIDC)](https://openid.net/connect/)または[Securityアサーション マークアップ言語 (SAML)](https://en.wikipedia.org/wiki/Security_Assertion_Markup_Language) ID プロトコルを使用する ID プロバイダー (IdP) を使用してメンバーがTiDB Cloudにログインできるようにしたりできます。 。
 
-In this document, you will learn how to migrate the authentication scheme of your organization from basic SSO to Cloud Organization SSO.
+このドキュメントでは、組織の認証スキームを基本 SSO からクラウド組織 SSO に移行する方法について説明します。
 
-> **Note:**
+> **注記：**
 >
-> - The Cloud Organization SSO feature is in beta and is only available upon request. To request this feature, click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com) and click **Request Support**. Then, fill in "Apply for Cloud Organization SSO" in the **Description** field and click **Send**.
-> - If your current TiDB login URL starts with `https://tidbcloud.com/enterprise/`, it means that Cloud Organization SSO is already enabled for your organization.
+> -   クラウド組織 SSO 機能はベータ版であり、リクエストがあった場合にのみ利用可能です。この機能をリクエストするには、 **「?」**をクリックしてください。 [TiDB Cloudコンソール](https://tidbcloud.com)の右下隅にある**[サポートをリクエスト]**をクリックします。次に、「**説明」**フィールドに「クラウド組織 SSO の申請」と入力し、 **「送信」**をクリックします。
+> -   現在の TiDB ログイン URL が`https://tidbcloud.com/enterprise/`で始まる場合は、クラウド組織 SSO が組織ですでに有効になっていることを意味します。
 
-## Before you begin
+## あなたが始める前に {#before-you-begin}
 
-Before migrating to Cloud Organization SSO, check and confirm the items in this section for your organization.
+クラウド組織 SSO に移行する前に、組織に関するこのセクションの項目を確認してください。
 
-> **Note:**
+> **注記：**
 >
-> - Once Cloud Organization SSO is enabled, it cannot be disabled.
-> - To enable Cloud Organization SSO, you need to be in the `Organization Owner` role of your TiDB Cloud organization. For more information about roles, see [User roles](/tidb-cloud/manage-user-access.md#user-roles).
+> -   クラウド組織 SSO を一度有効にすると、無効にすることはできません。
+> -   クラウド組織 SSO を有効にするには、 TiDB Cloud組織の`Organization Owner`ロールに所属する必要があります。役割の詳細については、 [ユーザーの役割](/tidb-cloud/manage-user-access.md#user-roles)を参照してください。
 
-### Decide a custom URL for the TiDB Cloud login page of your organization
+### 組織のTiDB Cloudログイン ページのカスタム URL を決定します。 {#decide-a-custom-url-for-the-tidb-cloud-login-page-of-your-organization}
 
-When Cloud Organization SSO is enabled, your members must use your custom URL instead of the public login URL (`https://tidbcloud.com`) to log in to TiDB Cloud.
+クラウド組織 SSO が有効になっている場合、メンバーは、パブリック ログイン URL ( `https://tidbcloud.com` ) の代わりにカスタム URL を使用してTiDB Cloudにログインする必要があります。
 
-The custom URL cannot be changed after the enablement, so you need to decide which URL to be used in advance.
+カスタム URL は有効化後に変更できないため、どの URL を使用するかを事前に決定する必要があります。
 
-The format of the custom URL is `https://tidbcloud.com/enterprise/signin/your-company-name`, in which you can customize your company name.
+カスタム URL の形式は`https://tidbcloud.com/enterprise/signin/your-company-name`で、会社名をカスタマイズできます。
 
-### Decide authentication methods for your organization members
+### 組織メンバーの認証方法を決定する {#decide-authentication-methods-for-your-organization-members}
 
-TiDB Cloud provides the following authentication methods for Organization SSO.
+TiDB Cloud は、組織 SSO 用に次の認証方法を提供します。
 
-- Google
-- GitHub
-- Microsoft
-- OIDC
-- SAML
+-   グーグル
+-   GitHub
+-   マイクロソフト
+-   OIDC
+-   SAML
 
-When you enable Cloud Organization SSO, the first three methods are enabled by default.
+クラウド組織 SSO を有効にすると、最初の 3 つの方法がデフォルトで有効になります。
 
-All the enabled authentication methods will be displayed on your custom TiDB Cloud login page, so you need to decide which authentication methods to be enabled or disabled in advance.
+有効な認証方法はすべてカスタムTiDB Cloudログイン ページに表示されるため、どの認証方法を有効または無効にするかを事前に決定する必要があります。
 
-### Decide whether to enable auto-provision
+### 自動プロビジョニングを有効にするかどうかを決定する {#decide-whether-to-enable-auto-provision}
 
-Auto-provision is a feature that allows members to automatically join an organization without requiring an invitation from the `Organization Owner` or `Project Owner`. In TiDB Cloud, it is disabled by default for all the supported authentication methods.
+自動プロビジョニングは、メンバーが`Organization Owner`または`Project Owner`からの招待を必要とせずに自動的に組織に参加できるようにする機能です。 TiDB Cloudでは、サポートされているすべての認証方法に対してデフォルトで無効になっています。
 
-- When auto-provision is disabled for an authentication method, only users who have been invited by an `Organization Owner` or `Project Owner` can log in to your custom URL.
-- When auto-provision is enabled for an authentication method, any users using this authentication method can log in to your custom URL. After login, they are automatically assigned the default **Member** role within the organization.
+-   認証方法の自動プロビジョニングが無効になっている場合、 `Organization Owner`または`Project Owner`によって招待されたユーザーのみがカスタム URL にログインできます。
+-   認証方法で自動プロビジョニングが有効になっている場合、この認証方法を使用するすべてのユーザーがカスタム URL にログインできます。ログイン後、組織内のデフォルトの**メンバー**役割が自動的に割り当てられます。
 
-For security considerations, if you choose to enable auto-provision, it is recommended to limit the allowed email domains for authentication when you [configure the authentication method details](#step-2-configure-authentication-methods).
+セキュリティを考慮して、自動プロビジョニングを有効にすることを選択した場合は、 [認証方法の詳細を構成する](#step-2-configure-authentication-methods)時に許可される電子メール ドメインを制限することをお勧めします。
 
-### Notify your members about the Cloud Organization SSO migration plan
+### クラウド組織の SSO 移行計画についてメンバーに通知する {#notify-your-members-about-the-cloud-organization-sso-migration-plan}
 
-Before enabling Cloud Organization SSO, make sure to inform your members about the following:
+クラウド組織 SSO を有効にする前に、次のことをメンバーに必ず通知してください。
 
-- The custom login URL of TiDB Cloud
-- The time when to start using the custom login URL instead of `https://tidbcloud.com` for login
-- The available authentication methods
-- Whether members need invitations to log in to the custom URL
+-   TiDB Cloudのカスタム ログイン URL
+-   ログインに`https://tidbcloud.com`の代わりにカスタム ログイン URL の使用を開始する時期
+-   利用可能な認証方法
+-   メンバーがカスタム URL にログインするための招待が必要かどうか
 
-## Step 1. Enable Cloud Organization SSO
+## ステップ 1. クラウド組織 SSO を有効にする {#step-1-enable-cloud-organization-sso}
 
-To enable Cloud Organization SSO, take the following steps:
+クラウド組織 SSO を有効にするには、次の手順を実行します。
 
-1. Log in to [TiDB Cloud console](https://tidbcloud.com) as a user with the `Organization Owner` role.
-2. In the lower-left corner of the TiDB Cloud console, click <MDSvgIcon name="icon-top-organization" />, and then click **Organization Settings**.
-3. On the **Organization Settings** page, click the **Authentication** tab, and then click **Enable**.
-4. In the dialog, fill in the custom URL for your organization, which must be unique in TiDB Cloud.
+1.  `Organization Owner`役割を持つユーザーとして[TiDB Cloudコンソール](https://tidbcloud.com)にログインします。
 
-    > **Note:**
+2.  TiDB Cloudコンソールの左下隅にある をクリックします。<mdsvgicon name="icon-top-organization">をクリックし、 **[組織の設定]**をクリックします。</mdsvgicon>
+
+3.  **[組織の設定]**ページで、 **[認証]**タブをクリックし、 **[有効にする]**をクリックします。
+
+4.  ダイアログで、組織のカスタム URL を入力します。これはTiDB Cloud内で一意である必要があります。
+
+    > **注記：**
     >
-    > The URL cannot be changed once Cloud Organization SSO is enabled. Members in your organization will only be able to log in to TiDB Cloud using your custom URL. If you need to change the configured URL later, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) for assistance.
+    > クラウド組織 SSO を有効にすると、URL を変更できなくなります。組織内のメンバーは、カスタム URL を使用してのみTiDB Cloudにログインできます。構成された URL を後で変更する必要がある場合は、 [TiDB Cloudのサポート](/tidb-cloud/tidb-cloud-support.md)にお問い合わせください。
 
-5. Click the **I understand and confirm** check box, and then click **Enable**.
+5.  **[理解して確認します**] チェック ボックスをクリックし、 **[有効にする]**をクリックします。
 
-    > **Note:**
+    > **注記：**
     >
-    > If the dialog includes a list of users to be re-invited and re-join for Cloud Organization SSO, TiDB Cloud will automatically send the invitation emails to those users after you enable Cloud Organization SSO. After receiving the invitation email, each user needs to click the link in the email to verify their identity, and the custom login page shows.
+    > ダイアログに、クラウド組織 SSO に再招待して再参加するユーザーのリストが含まれている場合、クラウド組織 SSO を有効にした後、 TiDB Cloud はそれらのユーザーに招待メールを自動的に送信します。招待メールを受信した後、各ユーザーはメール内のリンクをクリックして身元を確認する必要があり、カスタム ログイン ページが表示されます。
 
-## Step 2. Configure authentication methods
+## ステップ 2. 認証方法を構成する {#step-2-configure-authentication-methods}
 
-Enabling an authentication method in TiDB Cloud allows members using that method to log in to TiDB Cloud using your custom URL.
+TiDB Cloudで認証方法を有効にすると、その方法を使用するメンバーがカスタム URL を使用してTiDB Cloudにログインできるようになります。
 
-### Configure Google, GitHub, or Microsoft authentication methods
+### Google、GitHub、または Microsoft の認証方法を構成する {#configure-google-github-or-microsoft-authentication-methods}
 
-After enabling Cloud Organization Cloud, you can configure Google, GitHub, or Microsoft authentication methods as follows:
+Cloud Organization Cloud を有効にした後、次のように Google、GitHub、または Microsoft 認証方法を構成できます。
 
-1. On the **Organization Settings** page, enable or disable the Google, GitHub, or Microsoft authentication methods according to your need.
-2. For an enabled authentication method, you can click <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 20H21M3.00003 20H4.67457C5.16376 20 5.40835 20 5.63852 19.9447C5.84259 19.8957 6.03768 19.8149 6.21663 19.7053C6.41846 19.5816 6.59141 19.4086 6.93732 19.0627L19.5001 6.49998C20.3285 5.67156 20.3285 4.32841 19.5001 3.49998C18.6716 2.67156 17.3285 2.67156 16.5001 3.49998L3.93729 16.0627C3.59139 16.4086 3.41843 16.5816 3.29475 16.7834C3.18509 16.9624 3.10428 17.1574 3.05529 17.3615C3.00003 17.5917 3.00003 17.8363 3.00003 18.3255V20Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg> to configure the method details.
-3. In the method details, you can configure the following:
+1.  **[組織の設定]**ページで、必要に応じて Google、GitHub、または Microsoft の認証方法を有効または無効にします。
 
-    - [**Auto-provision Accounts**](#decide-whether-to-enable-auto-provision)
+2.  有効な認証方法については、 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 20H21M3.00003 20H4.67457C5.16376 20 5.40835 20 5.63852 19.9447C5.84259 19.8957 6.03768 19.8149 6.21663 19.7053C6.41846 19.5816 6.59141 19.4086 6.93732 19.0627L19.5001 6.49998C20.3285 5.67156 20.3285 4.32841 19.5001 3.49998C18.6716 2.67156 17.3285 2.67156 16.5001 3.49998L3.93729 16.0627C3.59139 16.4086 3.41843 16.5816 3.29475 16.7834C3.18509 16.9624 3.10428 17.1574 3.05529 17.3615C3.00003 17.5917 3.00003 17.8363 3.00003 18.3255V20Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>メソッドの詳細を設定します。
 
-        It is disabled by default. You can enable it according to your need. For security considerations, if you choose to enable auto-provision, it is recommended to limit the allowed email domains for authentication.
+3.  メソッドの詳細では、以下を設定できます。
 
-    - **Allowed Email Domains**
+    -   [**アカウントの自動プロビジョニング**](#decide-whether-to-enable-auto-provision)
 
-        After this field is configured, only the specified email domains of this authentication method can log in to TiDB Cloud using the custom URL. When filling in domain names, you need to exclude the `@` symbol and separate them with commas. For example, `company1.com,company2.com`.
+        デフォルトでは無効になっています。必要に応じて有効にすることができます。セキュリティを考慮して、自動プロビジョニングを有効にする場合は、認証に許可される電子メール ドメインを制限することをお勧めします。
 
-        > **Note:**
+    -   **許可された電子メールドメイン**
+
+        このフィールドを構成すると、この認証方法で指定された電子メール ドメインのみがカスタム URL を使用してTiDB Cloudにログインできるようになります。ドメイン名を入力する場合は、 `@`記号を除外し、カンマで区切る必要があります。たとえば、 `company1.com,company2.com` 。
+
+        > **注記：**
         >
-        > If you have configured email domains, before saving the settings, make sure that you add the email domain that you currently use for login, to avoid that you are locked out by TiDB Cloud.
+        > 電子メール ドメインを構成している場合は、 TiDB Cloudによってロックアウトされないように、設定を保存する前に、現在ログインに使用している電子メール ドメインを必ず追加してください。
 
-4. Click **Save**.
+4.  **「保存」**をクリックします。
 
-### Configure the OIDC authentication method
+### OIDC 認証方法を構成する {#configure-the-oidc-authentication-method}
 
-If you have an identity provider that uses the OIDC identity protocol, you can enable the OIDC authentication method for TiDB Cloud login.
+OIDC アイデンティティ プロトコルを使用するアイデンティティ プロバイダーがある場合は、 TiDB Cloudログインの OIDC 認証方法を有効にすることができます。
 
-In TiDB Cloud, the OIDC authentication method is disabled by default. After enabling Cloud Organization Cloud, you can enable and configure the OIDC authentication method as follows:
+TiDB Cloudでは、OIDC 認証方法はデフォルトで無効になっています。 Cloud Organization Cloud を有効にした後、次のように OIDC 認証方法を有効にして構成できます。
 
-1. Get the following information from your identity provider for TiDB Cloud Organization SSO:
+1.  TiDB Cloud Organization SSO のアイデンティティ プロバイダーから次の情報を取得します。
 
-    - Issuer URL
-    - Client ID
-    - Client secret
+    -   発行者のURL
+    -   クライアントID
+    -   クライアントシークレット
 
-2. On the **Organization Settings** page, click the **Authentication** tab, locate the row of OIDC in the **Authentication Methods** area, and then click <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 20H21M3.00003 20H4.67457C5.16376 20 5.40835 20 5.63852 19.9447C5.84259 19.8957 6.03768 19.8149 6.21663 19.7053C6.41846 19.5816 6.59141 19.4086 6.93732 19.0627L19.5001 6.49998C20.3285 5.67156 20.3285 4.32841 19.5001 3.49998C18.6716 2.67156 17.3285 2.67156 16.5001 3.49998L3.93729 16.0627C3.59139 16.4086 3.41843 16.5816 3.29475 16.7834C3.18509 16.9624 3.10428 17.1574 3.05529 17.3615C3.00003 17.5917 3.00003 17.8363 3.00003 18.3255V20Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg> to show the OIDC method details.
-3. In the method details, you can configure the following:
+2.  **[組織の設定]**ページで、 **[認証]**タブをクリックし、 **[認証方法]**領域で OIDC の行を見つけて、[認証] をクリックします。 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 20H21M3.00003 20H4.67457C5.16376 20 5.40835 20 5.63852 19.9447C5.84259 19.8957 6.03768 19.8149 6.21663 19.7053C6.41846 19.5816 6.59141 19.4086 6.93732 19.0627L19.5001 6.49998C20.3285 5.67156 20.3285 4.32841 19.5001 3.49998C18.6716 2.67156 17.3285 2.67156 16.5001 3.49998L3.93729 16.0627C3.59139 16.4086 3.41843 16.5816 3.29475 16.7834C3.18509 16.9624 3.10428 17.1574 3.05529 17.3615C3.00003 17.5917 3.00003 17.8363 3.00003 18.3255V20Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg> OIDC メソッドの詳細を表示します。
 
-    - **Name**
+3.  メソッドの詳細では、以下を設定できます。
 
-        Specify a name for the OIDC authentication method to be displayed on your custom login page.
+    -   **名前**
 
-    - **Issuer URL**, **Client ID**, and **Client Secret**
+        カスタム ログイン ページに表示される OIDC 認証方法の名前を指定します。
 
-        Paste the corresponding values that you get from your IdP.
+    -   **発行者 URL** 、**クライアント ID** 、および**クライアント シークレット**
 
-    - [**Auto-provision Accounts**](#decide-whether-to-enable-auto-provision)
+        IdP から取得した対応する値を貼り付けます。
 
-        It is disabled by default. You can enable it according to your need. For security considerations, if you choose to enable auto-provision, it is recommended to limit the allowed email domains for authentication.
+    -   [**アカウントの自動プロビジョニング**](#decide-whether-to-enable-auto-provision)
 
-    - **Allowed Email Domains**
+        デフォルトでは無効になっています。必要に応じて有効にすることができます。セキュリティを考慮して、自動プロビジョニングを有効にする場合は、認証に許可される電子メール ドメインを制限することをお勧めします。
 
-        After this field is configured, only the specified email domains of this authentication method can log in to TiDB Cloud using the custom URL. When filling in domain names, you need to exclude the `@` symbol and separate them with commas. For example, `company1.com,company2.com`.
+    -   **許可された電子メールドメイン**
 
-        > **Note:**
+        このフィールドを構成すると、この認証方法で指定された電子メール ドメインのみがカスタム URL を使用してTiDB Cloudにログインできるようになります。ドメイン名を入力する場合は、 `@`記号を除外し、カンマで区切る必要があります。たとえば、 `company1.com,company2.com` 。
+
+        > **注記：**
         >
-        > If you have configured email domains, before saving the settings, make sure that you add the email domain that you currently use for login, to avoid that you are locked out by TiDB Cloud.
+        > 電子メール ドメインを構成している場合は、 TiDB Cloudによってロックアウトされないように、設定を保存する前に、現在ログインに使用している電子メール ドメインを必ず追加してください。
 
-4. Click **Save**.
+4.  **「保存」**をクリックします。
 
-### Configure the SAML authentication method
+### SAML 認証方法を構成する {#configure-the-saml-authentication-method}
 
-If you have an identity provider that uses the SAML identity protocol, you can enable the SAML authentication method for TiDB Cloud login.
+SAML ID プロトコルを使用する ID プロバイダーがある場合は、 TiDB Cloudログインの SAML 認証方法を有効にすることができます。
 
-In TiDB Cloud, the SAML authentication method is disabled by default. After enabling Cloud Organization Cloud, you can enable and configure the SAML authentication method as follows:
+TiDB Cloudでは、SAML 認証方法はデフォルトで無効になっています。 Cloud Organization Cloud を有効にした後、次のように SAML 認証方法を有効にして構成できます。
 
-1. Get the following information from your identity provider for TiDB Cloud Organization SSO:
+1.  TiDB Cloud Organization SSO のアイデンティティ プロバイダーから次の情報を取得します。
 
-    - Sign on URL
-    - Signing Certificate
+    -   サインオン URL
+    -   署名証明書
 
-2. On the **Organization Settings** page, click the **Authentication** tab, locate the row of SAML in the **Authentication Methods** area, and then click <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 20H21M3.00003 20H4.67457C5.16376 20 5.40835 20 5.63852 19.9447C5.84259 19.8957 6.03768 19.8149 6.21663 19.7053C6.41846 19.5816 6.59141 19.4086 6.93732 19.0627L19.5001 6.49998C20.3285 5.67156 20.3285 4.32841 19.5001 3.49998C18.6716 2.67156 17.3285 2.67156 16.5001 3.49998L3.93729 16.0627C3.59139 16.4086 3.41843 16.5816 3.29475 16.7834C3.18509 16.9624 3.10428 17.1574 3.05529 17.3615C3.00003 17.5917 3.00003 17.8363 3.00003 18.3255V20Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg> to show the SAML method details.
-3. In the method details, you can configure the following:
+2.  **[組織の設定]**ページで、 **[認証]**タブをクリックし、 **[認証方法]**領域で SAML の行を見つけて、[認証] をクリックします。 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 20H21M3.00003 20H4.67457C5.16376 20 5.40835 20 5.63852 19.9447C5.84259 19.8957 6.03768 19.8149 6.21663 19.7053C6.41846 19.5816 6.59141 19.4086 6.93732 19.0627L19.5001 6.49998C20.3285 5.67156 20.3285 4.32841 19.5001 3.49998C18.6716 2.67156 17.3285 2.67156 16.5001 3.49998L3.93729 16.0627C3.59139 16.4086 3.41843 16.5816 3.29475 16.7834C3.18509 16.9624 3.10428 17.1574 3.05529 17.3615C3.00003 17.5917 3.00003 17.8363 3.00003 18.3255V20Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg> SAML メソッドの詳細を表示します。
 
-    - **Name**
+3.  メソッドの詳細では、以下を設定できます。
 
-        Specify a name for the SAML authentication method to be displayed on your custom login page.
+    -   **名前**
 
-    - **Sign on URL**
+        カスタム ログイン ページに表示される SAML 認証方法の名前を指定します。
 
-        Paste the URL that you get from your IdP.
+    -   **サインオン URL**
 
-    - **Signing Certificate**
+        IdP から取得した URL を貼り付けます。
 
-        Paste the entire signing certificate from your IdP, including the starting line `---begin certificate---` and the end line `---end certificate---`.
+    -   **署名証明書**
 
-    - [**Auto-provision Accounts**](#decide-whether-to-enable-auto-provision)
+        開始行`---begin certificate---`と終了行`---end certificate---`を含む、IdP からの署名証明書全体を貼り付けます。
 
-        It is disabled by default. You can enable it according to your need. For security considerations, if you choose to enable auto-provision, it is recommended to limit the allowed email domains for authentication.
+    -   [**アカウントの自動プロビジョニング**](#decide-whether-to-enable-auto-provision)
 
-    - **Allowed Email Domains**
+        デフォルトでは無効になっています。必要に応じて有効にすることができます。セキュリティを考慮して、自動プロビジョニングを有効にする場合は、認証に許可される電子メール ドメインを制限することをお勧めします。
 
-        After this field is configured, only the specified email domains of this authentication method can log in to TiDB Cloud using the custom URL. When filling in domain names, you need to exclude the `@` symbol and separate them with commas. For example, `company1.com,company2.com`.
+    -   **許可された電子メールドメイン**
 
-        > **Note:**
+        このフィールドを構成すると、この認証方法で指定された電子メール ドメインのみがカスタム URL を使用してTiDB Cloudにログインできるようになります。ドメイン名を入力する場合は、 `@`記号を除外し、カンマで区切る必要があります。たとえば、 `company1.com,company2.com` 。
+
+        > **注記：**
         >
-        > If you have configured email domains, before saving the settings, make sure that you add the email domain that you currently use for login, to avoid that you are locked out by TiDB Cloud.
+        > 電子メール ドメインを構成している場合は、 TiDB Cloudによってロックアウトされないように、設定を保存する前に、現在ログインに使用している電子メール ドメインを必ず追加してください。
 
-4. Click **Save**.
+4.  **「保存」**をクリックします。

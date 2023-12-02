@@ -3,102 +3,102 @@ title: TiDB Serverless FAQs
 summary: Learn about the most frequently asked questions (FAQs) relating to TiDB Serverless.
 ---
 
-# TiDB Serverless FAQs
+# TiDB サーバーレスに関するよくある質問 {#tidb-serverless-faqs}
 
 <!-- markdownlint-disable MD026 -->
 
-This document lists the most frequently asked questions about TiDB Serverless.
+このドキュメントには、TiDB サーバーレスに関して最もよくある質問がリストされています。
 
-## General FAQs
+## 一般的な FAQ {#general-faqs}
 
-### What is TiDB Serverless?
+### TiDB サーバーレスとは​​何ですか? {#what-is-tidb-serverless}
 
-TiDB Serverless offers the TiDB database with full HTAP capabilities for you and your organization. It is a fully managed, auto-scaling deployment of TiDB that lets you start using your database immediately, develop and run your application without caring about the underlying nodes, and automatically scale based on your application's workload changes.
+TiDB サーバーレスは、あなたとあなたの組織に、完全な HTAP 機能を備えた TiDB データベースを提供します。これは TiDB のフルマネージドで自動スケーリングのデプロイメントであり、データベースの使用をすぐに開始し、基盤となるノードを気にせずにアプリケーションを開発および実行し、アプリケーションのワークロードの変化に基づいて自動的にスケーリングすることができます。
 
-### How do I get started with TiDB Serverless?
+### TiDB サーバーレスを使い始めるにはどうすればよいですか? {#how-do-i-get-started-with-tidb-serverless}
 
-Get started with the 5-minute [TiDB Cloud Quick Start](/tidb-cloud/tidb-cloud-quickstart.md).
+5 分間から始めましょう[TiDB Cloudクイック スタート](/tidb-cloud/tidb-cloud-quickstart.md) 。
 
-### How many TiDB Serverless clusters can I create in TiDB Cloud?
+### TiDB Cloudでは TiDB サーバーレス クラスターをいくつ作成できますか? {#how-many-tidb-serverless-clusters-can-i-create-in-tidb-cloud}
 
-For each organization in TiDB Cloud, you can create a maximum of five TiDB Serverless clusters by default. To create more TiDB Serverless clusters, you need to add a credit card and set a [spending limit](/tidb-cloud/tidb-cloud-glossary.md#spending-limit) for usage.
+TiDB Cloudの組織ごとに、デフォルトで最大 5 つの TiDB サーバーレス クラスターを作成できます。さらに TiDB サーバーレス クラスターを作成するには、クレジット カードを追加し、使用量を[支出制限](/tidb-cloud/tidb-cloud-glossary.md#spending-limit)に設定する必要があります。
 
-### Are all TiDB Cloud features fully supported on TiDB Serverless?
+### すべてのTiDB Cloud機能は TiDB サーバーレスで完全にサポートされていますか? {#are-all-tidb-cloud-features-fully-supported-on-tidb-serverless}
 
-Some of TiDB Cloud features are partially supported or not supported on TiDB Serverless. For more information, see [TiDB Serverless Limitations and Quotas](/tidb-cloud/serverless-limitations.md).
+TiDB Cloud機能の一部は、TiDB サーバーレスで部分的にサポートされているか、サポートされていません。詳細については、 [TiDB サーバーレスの制限とクォータ](/tidb-cloud/serverless-limitations.md)を参照してください。
 
-### When will TiDB serverless be available on cloud platforms other than AWS, such as Google Cloud or Azure?
+### TiDB サーバーレスはいつ Google Cloud や Azure などの AWS 以外のクラウド プラットフォームで利用できるようになりますか? {#when-will-tidb-serverless-be-available-on-cloud-platforms-other-than-aws-such-as-google-cloud-or-azure}
 
-We are actively working on expanding TiDB Serverless to other cloud platforms, including Google Cloud and Azure. However, we do not have an exact timeline for now as we currently focus on filling gaps and ensuring seamless functionality across all environments. Rest assured, we are working hard to make TiDB Serverless available on more cloud platforms, and we will keep our community updated as we progress.
+私たちは、TiDB Serverless を Google Cloud や Azure などの他のクラウド プラットフォームに拡張することに積極的に取り組んでいます。ただし、現時点ではギャップを埋め、すべての環境でシームレスな機能を確保することに重点を置いているため、正確なスケジュールはありません。ご安心ください。私たちは TiDB Serverless をより多くのクラウド プラットフォームで利用できるようにするために懸命に取り組んでおり、進捗に合わせてコミュニティに常に最新の情報を提供していきます。
 
-### I created a Developer Tier cluster before TiDB Serverless was available. Can I still use my cluster?
+### TiDB サーバーレスが利用可能になる前に、Developer Tierクラスターを作成しました。クラスターを引き続き使用できますか? {#i-created-a-developer-tier-cluster-before-tidb-serverless-was-available-can-i-still-use-my-cluster}
 
-Yes, your Developer Tier cluster has been automatically migrated to the TiDB Serverless cluster, providing you with an improved user experience without any disruptions to your prior usage.
+はい、Developer Tierクラスターは TiDB サーバーレス クラスターに自動的に移行され、以前の使用状況を中断することなくユーザー エクスペリエンスが向上しました。
 
-## Billing and metering FAQs
+## 請求と計測に関するよくある質問 {#billing-and-metering-faqs}
 
-### What are Request Units?
+### リクエストユニットとは何ですか? {#what-are-request-units}
 
-TiDB Serverless adopts a pay-as-you-go model, meaning that you only pay for the storage space and cluster usage. In this model, all cluster activities such as SQL queries, bulk operations, and background jobs are quantified in [Request Units (RUs)](/tidb-cloud/tidb-cloud-glossary.md#request-unit). RU is an abstract measurement for the size and intricacy of requests initiated on your cluster. For more information, see [TiDB Serverless Pricing Details](https://www.pingcap.com/tidb-cloud-serverless-pricing-details/).
+TiDB サーバーレスは従量課金制モデルを採用しています。つまり、storageスペースとクラスターの使用量に対してのみ料金を支払います。このモデルでは、SQL クエリ、一括操作、バックグラウンド ジョブなどのすべてのクラスター アクティビティが[リクエストユニット (RU)](/tidb-cloud/tidb-cloud-glossary.md#request-unit)に定量化されます。 RU は、クラスター上で開始されたリクエストのサイズと複雑さの抽象的な測定値です。詳細については、 [TiDB サーバーレスの料金詳細](https://www.pingcap.com/tidb-cloud-serverless-pricing-details/)を参照してください。
 
-### Is there any free plan available for TiDB Serverless?
+### TiDB サーバーレスで利用できる無料プランはありますか? {#is-there-any-free-plan-available-for-tidb-serverless}
 
-For the first five TiDB Serverless clusters in your organization, TiDB Cloud provides a free usage quota for each of them as follows:
+組織内の最初の 5 つの TiDB サーバーレス クラスターに対して、 TiDB Cloud は各クラスターに次のように無料の使用量クォータを提供します。
 
-- Row-based storage: 5 GiB
-- [Request Units (RUs)](/tidb-cloud/tidb-cloud-glossary.md#request-unit): 50 million RUs per month
+-   行ベースのstorage: 5 GiB
+-   [リクエストユニット (RU)](/tidb-cloud/tidb-cloud-glossary.md#request-unit) : 月あたり 5,000 万 RU
 
-Usage beyond the free quota will be charged. Once the free quota of a cluster is reached, the read and write operations on this cluster will be throttled until you [increase the quota](/tidb-cloud/manage-serverless-spend-limit.md#update-spending-limit) or the usage is reset upon the start of a new month.
+無料割り当てを超えた使用には料金が発生します。クラスターの無料クォータに達すると、このクラスターでの読み取りおよび書き込み操作は、新しい月の初めに使用量が[割り当てを増やす](/tidb-cloud/manage-serverless-spend-limit.md#update-spending-limit)されるまでスロットルされます。
 
-For more information, see [TiDB Serverless usage quota](/tidb-cloud/select-cluster-tier.md#usage-quota).
+詳細については、 [TiDB サーバーレスの使用量割り当て](/tidb-cloud/select-cluster-tier.md#usage-quota)を参照してください。
 
-### What are the limitations of the free plan?
+### 無料プランの制限は何ですか? {#what-are-the-limitations-of-the-free-plan}
 
-Under the free plan, cluster performance is capped at a maximum of 10,000 RUs per second based on actual workload. Additionally, memory allocation per query is limited to 256 MiB. To maximize cluster performance, you can choose to enable the commercial offering by [increasing your spending limit](/tidb-cloud/manage-serverless-spend-limit.md#update-spending-limit).
+無料プランでは、クラスターのパフォーマンスは、実際のワークロードに基づいて 1 秒あたり最大 10,000 RU に制限されます。さらに、クエリごとのメモリ割り当ては 256 MiB に制限されています。クラスターのパフォーマンスを最大化するには、商用製品を[利用限度額を増やす](/tidb-cloud/manage-serverless-spend-limit.md#update-spending-limit)で有効にすることを選択できます。
 
-### How can I estimate the number of RUs required by my workloads and plan my monthly budget?
+### ワークロードに必要な RU の数を見積もり、毎月の予算を計画するにはどうすればよいですか? {#how-can-i-estimate-the-number-of-rus-required-by-my-workloads-and-plan-my-monthly-budget}
 
-To get the RU consumption of individual SQL statements, you can use the [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md#ru-request-unit-consumption) SQL statement. However, it is important to note that the RUs usage returned in `EXPLAIN ANALYZE` does not incorporate egress RUs, as egress usage is measured separately in the gateway, which is unknown to the TiDB server.
+個々の SQL ステートメントの RU 消費量を取得するには、 [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md#ru-request-unit-consumption) SQL ステートメントを使用できます。ただし、出力使用量はゲートウェイで個別に測定され、TiDBサーバーには認識されないため、 `EXPLAIN ANALYZE`で返される RU 使用量には出力 RU が含まれていないことに注意することが重要です。
 
-To get the RUs and storage used by your cluster, view the **Usage this month** pane on your cluster overview page. With your past resource usage data and real-time resource usage in this pane, you can track your cluster's resource consumption and estimate a reasonable spending limit. If the free quota cannot meet your requirement, you can edit the spending limit easily. For more information, see [Manage Spending Limit for TiDB Serverless clusters](/tidb-cloud/manage-serverless-spend-limit.md).
+クラスターで使用されている RU とstorageを取得するには、クラスターの概要ページの**[今月の使用量]**ペインを表示します。このペインに過去のリソース使用量データとリアルタイムのリソース使用量を表示することで、クラスターのリソース消費を追跡し、適切な使用制限を見積もることができます。無料割り当てが要件を満たせない場合は、支出制限を簡単に編集できます。詳細については、 [TiDB サーバーレス クラスターの支出制限を管理する](/tidb-cloud/manage-serverless-spend-limit.md)を参照してください。
 
-### How can I optimize my workload to minimize the number of RUs consumed?
+### 消費される RU の数を最小限に抑えるためにワークロードを最適化するにはどうすればよいですか? {#how-can-i-optimize-my-workload-to-minimize-the-number-of-rus-consumed}
 
-Ensure that your queries have been carefully optimized for optimal performance by following the guidelines in [Optimizing SQL Performance](/develop/dev-guide-optimize-sql-overview.md). In addition, minimizing the amount of egress traffic is also crucial for reducing RUs consumption. To achieve this, it is recommended to return only the necessary columns and rows in your query, which in turn helps reduce network egress traffic. This can be achieved by carefully selecting and filtering the columns and rows to be returned, thereby optimizing network utilization.
+[SQLパフォーマンスの最適化](/develop/dev-guide-optimize-sql-overview.md)のガイドラインに従って、最適なパフォーマンスが得られるようにクエリが慎重に最適化されていることを確認します。さらに、送信トラフィックの量を最小限に抑えることも、RU の消費量を削減するために重要です。これを実現するには、クエリで必要な列と行のみを返すことをお勧めします。これにより、ネットワーク下りトラフィックが削減されます。これは、返される列と行を慎重に選択してフィルタリングすることで実現でき、それによってネットワークの使用率が最適化されます。
 
-### How storage is metered for TiDB Serverless？
+### TiDB サーバーレスのstorageはどのように計測されますか? {#how-storage-is-metered-for-tidb-serverless}
 
-The storage is metered based on the amount of data stored in a TiDB Serverless cluster, measured in GiB per month. It is calculated by multiplying the total size of all the tables and indexes (excluding data compression or replicas) with the number of hours the data is stored in that month.
+storageは、TiDB サーバーレス クラスターに保存されているデータ量に基づいて測定され、月あたりの GiB 単位で測定されます。これは、すべてのテーブルとインデックス (データ圧縮またはレプリカを除く) の合計サイズに、その月にデータが保存されている時間数を乗算して計算されます。
 
-### Why does the storage usage size remain unchanged after dropping a table or database immediately?
+### テーブルまたはデータベースをすぐに削除した後、storage使用量のサイズが変わらないのはなぜですか? {#why-does-the-storage-usage-size-remain-unchanged-after-dropping-a-table-or-database-immediately}
 
-This is because TiDB retains dropped tables and databases for a certain period of time. This retention period ensures that transactions dependent on these tables can continue execution without disruption. Additionally, the retention period makes the [`FLASHBACK TABLE`](/sql-statements/sql-statement-flashback-table.md)/[`FLASHBACK DATABASE`](/sql-statements/sql-statement-flashback-database.md) feature feasible, which allows you to recover dropped tables and databases if they were mistakenly deleted.
+これは、TiDB が削除されたテーブルとデータベースを一定期間保持するためです。この保持期間により、これらのテーブルに依存するトランザクションは中断することなく実行を継続できます。さらに、保持期間により[`FLASHBACK TABLE`](/sql-statements/sql-statement-flashback-table.md) / [`FLASHBACK DATABASE`](/sql-statements/sql-statement-flashback-database.md)機能が実現可能になり、削除されたテーブルやデータベースが誤って削除された場合に回復できます。
 
-### Why are there RU consumptions when I'm not actively running any queries?
+### クエリをアクティブに実行していないときに RU が消費されるのはなぜですか? {#why-are-there-ru-consumptions-when-i-m-not-actively-running-any-queries}
 
-RU consumptions can occur in various scenarios. One common scenario is during background queries, such as synchronizing schema changes between TiDB instances. Another scenario is when certain web console features generate queries, like loading schemas. These processes use RUs even without explicit user triggers.
+RU の消費はさまざまなシナリオで発生する可能性があります。一般的なシナリオの 1 つは、TiDB インスタンス間でのスキーマ変更の同期など、バックグラウンド クエリ中です。もう 1 つのシナリオは、スキーマの読み込みなど、特定の Web コンソール機能がクエリを生成する場合です。これらのプロセスは、明示的なユーザー トリガーがなくても RU を使用します。
 
-### Why is there a spike in RU usage when my workload is steady?
+### ワークロードが安定しているのに、RU 使用量が急増するのはなぜですか? {#why-is-there-a-spike-in-ru-usage-when-my-workload-is-steady}
 
-A spike in RU usage can occur due to necessary background jobs in TiDB. These jobs, such as automatically analyzing tables and rebuilding statistics, are required for generating optimized query plans.
+TiDB で必要なバックグラウンド ジョブが原因で、RU 使用量の急増が発生する可能性があります。テーブルの自動分析や統計の再構築などのこれらのジョブは、最適化されたクエリ プランを生成するために必要です。
 
-### What happens when my cluster exhausts its free quota or exceeds its spending limit?
+### クラスターが無料クォータを使い果たすか、使用制限を超えるとどうなりますか? {#what-happens-when-my-cluster-exhausts-its-free-quota-or-exceeds-its-spending-limit}
 
-Once a cluster reaches its free quota or spending limit, the cluster will enforce throttling measures on its read and write operations. These operations will be limited until the quota is increased or the usage is reset at the start of a new month. For more information, see [TiDB Serverless Limitations and Quotas](/tidb-cloud/serverless-limitations.md#usage-quota).
+クラスターが無料クォータまたは使用制限に達すると、クラスターは読み取りおよび書き込み操作にスロットル措置を適用します。これらの操作は、クォータが増加するか、新しい月の初めに使用量がリセットされるまで制限されます。詳細については、 [TiDB サーバーレスの制限とクォータ](/tidb-cloud/serverless-limitations.md#usage-quota)を参照してください。
 
-## Security FAQs
+## Securityよくある質問 {#security-faqs}
 
-### Is my TiDB Serverless shared or dedicated?
+### 私の TiDB サーバーレスは共有ですか、それとも専用ですか? {#is-my-tidb-serverless-shared-or-dedicated}
 
-The serverless technology is designed for multi-tenancy and the resources used by all clusters are shared. To get managed TiDB service with isolated infrastructure and resources, you can upgrade it to [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated).
+サーバーレス テクノロジーはマルチテナンシー向けに設計されており、すべてのクラスターで使用されるリソースが共有されます。分離されたインフラストラクチャとリソースを使用してマネージド TiDB サービスを利用するには、サービスを[TiDB専用](/tidb-cloud/select-cluster-tier.md#tidb-dedicated)にアップグレードします。
 
-### How does TiDB Serverless ensure security?
+### TiDB サーバーレスはどのようにセキュリティを確保しますか? {#how-does-tidb-serverless-ensure-security}
 
-- Your connections are encrypted by Transport Layer Security (TLS). For more information about using TLS to connect to TiDB Serverless, see [TLS Connection to TiDB Serverless](/tidb-cloud/secure-connections-to-serverless-clusters.md).
-- All persisted data on TiDB Serverless is encrypted-at-rest using the tool of the cloud provider that your cluster is running in.
+-   接続は Transport Layer Security (TLS) によって暗号化されます。 TLS を使用して TiDB サーバーレスに接続する方法の詳細については、 [TiDB サーバーレスへの TLS 接続](/tidb-cloud/secure-connections-to-serverless-clusters.md)を参照してください。
+-   TiDB サーバーレス上のすべての永続データは、クラスターが実行されているクラウド プロバイダーのツールを使用して保存時に暗号化されます。
 
-## Maintenance FAQ
+## メンテナンスに関するFAQ {#maintenance-faq}
 
-### Can I upgrade the version of TiDB that my cluster is running on?
+### クラスターが実行されている TiDB のバージョンをアップグレードできますか? {#can-i-upgrade-the-version-of-tidb-that-my-cluster-is-running-on}
 
-No. TiDB Serverless clusters are upgraded automatically as we roll out new TiDB versions on TiDB Cloud. You can see what version of TiDB your cluster is running in the [TiDB Cloud console](https://tidbcloud.com/console/clusters) or in the latest [release note](https://docs.pingcap.com/tidbcloud/tidb-cloud-release-notes). Alternatively, you can also connect to your cluster and use `SELECT version()` or `SELECT tidb_version()` to check the TiDB version.
+いいえ。TiDB サーバーレス クラスターは、 TiDB Cloudで新しい TiDB バージョンを展開すると自動的にアップグレードされます。クラスターが実行している TiDB のバージョンは[TiDB Cloudコンソール](https://tidbcloud.com/console/clusters)または最新の[リリースノート](https://docs.pingcap.com/tidbcloud/tidb-cloud-release-notes)で確認できます。あるいは、クラスターに接続し、 `SELECT version()`または`SELECT tidb_version()`を使用して TiDB バージョンを確認することもできます。

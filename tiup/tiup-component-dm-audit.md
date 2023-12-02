@@ -2,33 +2,33 @@
 title: tiup dm audit
 ---
 
-# tiup dm audit
+# tiup dm audit {#tiup-dm-audit}
 
-The `tiup dm audit` command is used to view historical commands executed on all clusters and the execution log of each command.
+`tiup dm audit`コマンドは、すべてのクラスターで実行されたコマンドの履歴と各コマンドの実行ログを表示するために使用されます。
 
-## Syntax
+## 構文 {#syntax}
 
 ```shell
 tiup dm audit [audit-id] [flags]
 ```
 
-- If you do not fill in the `[audit-id]`, the table of operation records is output in reverse chronological order. The first column is the `audit-id`.
-- If you fill in the `[audit-id]`, the execution log of the specified `audit-id` is checked.
+-   `[audit-id]`を入力しない場合、稼働記録一覧表は新しい順に出力されます。最初の列は`audit-id`です。
+-   `[audit-id]`を入力すると、指定した`audit-id`の実行ログがチェックされます。
 
-## Option
+## オプション {#option}
 
-### -h, --help
+### -h, --help {#h-help}
 
-- Prints the help information.
-- Data type: `BOOLEAN`
-- Default: false
+-   ヘルプ情報を出力します。
+-   データ型: `BOOLEAN`
+-   デフォルト: false
 
-## Output
+## 出力 {#output}
 
-- If `[audit-id]` is specified, the corresponding execution log is output.
-- If `[audit-id]` is not specified, a table with the following fields is output:
-    - ID: the `audit-id` corresponding to this record
-    - Time: the execution time of the command corresponding to the record
-    - Command: the command corresponding to the record
+-   `[audit-id]`を指定した場合、該当する実行ログが出力されます。
+-   `[audit-id]`が指定されていない場合は、次のフィールドを含むテーブルが出力されます。
+    -   ID: このレコードに対応する`audit-id`
+    -   時間: レコードに対応するコマンドの実行時間
+    -   コマンド: レコードに対応するコマンド
 
-[<< Back to the previous page - TiUP DM command list](/tiup/tiup-component-dm.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUP DMコマンド一覧](/tiup/tiup-component-dm.md#command-list)

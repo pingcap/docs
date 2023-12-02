@@ -3,50 +3,46 @@ title: TiCDC Canal-JSON Protocol
 summary: Learn the concept of TiCDC Canal-JSON Protocol and how to use it.
 ---
 
-# TiCDC Canal-JSON Protocol
+# TiCDC Canal-JSON プロトコル {#ticdc-canal-json-protocol}
 
-Canal-JSON is a data exchange format protocol defined by [Alibaba Canal](https://github.com/alibaba/canal). In this document, you can learn how Canal-JSON data formats are implemented in TiCDC, including the TiDB extension field, the definitions of the Canal-JSON data formats, and comparison with the official Canal.
+Canal-JSON は、 [アリババ運河](https://github.com/alibaba/canal)によって定義されたデータ交換形式のプロトコルです。このドキュメントでは、TiDB 拡張フィールド、Canal-JSON データ形式の定義、公式 Canal との比較など、Canal-JSON データ形式が TiCDC でどのように実装されているかを学ぶことができます。
 
-## Use Canal-JSON
+## Canal-JSON を使用する {#use-canal-json}
 
-When using Message Queue (MQ) as the downstream Sink, you can specify Canal-JSON in `sink-uri`. TiCDC wraps and constructs Canal-JSON messages with Event as the basic unit, and sends TiDB data change Events to the downstream.
+Message Queue (MQ) をダウンストリーム シンクとして使用する場合、 `sink-uri`で Canal-JSON を指定できます。 TiCDC は、Event を基本単位として Canal-JSON メッセージをラップして構築し、TiDB データ変更イベントをダウンストリームに送信します。
 
-There are three types of Events:
+イベントには 3 つのタイプがあります。
 
-* DDL Event: Represents a DDL change record. It is sent after an upstream DDL statement is successfully executed. The DDL Event is sent to the MQ Partition with the index being 0.
-* DML Event: Represents a row data change record. This type of Event is sent when a row change occurs. It contains the information about the row after the change occurs.
-* WATERMARK Event: Represents a special time point. It indicates that the Events received before this point is complete. It applies only to the TiDB extension field and takes effect when you set `enable-tidb-extension` to `true` in `sink-uri`.
+-   DDL イベント: DDL 変更レコードを表します。これは、上流の DDL ステートメントが正常に実行された後に送信されます。 DDL イベントは、インデックスが 0 の MQ パーティションに送信されます。
+-   DML イベント: 行データ変更レコードを表します。このタイプのイベントは、行の変更が発生したときに送信されます。これには、変更が発生した後の行に関する情報が含まれます。
+-   WATERMARK イベント: 特別な時点を表します。これは、この時点より前に受信したイベントが完了したことを示します。 TiDB 拡張フィールドにのみ適用され、 `sink-uri`に`enable-tidb-extension` ～ `true`を設定すると有効になります。
 
-The following is an example of using `Canal-JSON`:
-
-{{< copyable "shell-regular" >}}
+以下は`Canal-JSON`の使用例です。
 
 ```shell
 cdc cli changefeed create --server=http://127.0.0.1:8300 --changefeed-id="kafka-canal-json" --sink-uri="kafka://127.0.0.1:9092/topic-name?kafka-version=2.4.0&protocol=canal-json"
 ```
 
-## TiDB extension field
+## TiDB 拡張フィールド {#tidb-extension-field}
 
-The Canal-JSON protocol is originally designed for MySQL. It does not contain important fields such as the TiDB-specific unique identifier for the CommitTS transaction. To solve this problem, TiCDC appends a TiDB extension field to the Canal-JSON protocol format. After you set `enable-tidb-extension` to `true` (`false` by default) in `sink-uri`, TiCDC behaves as follows when generating Canal-JSON messages:
+Canal-JSON プロトコルは、もともと MySQL 用に設計されました。これには、CommitTS トランザクションの TiDB 固有の一意識別子などの重要なフィールドは含まれません。この問題を解決するために、TiCDC は TiDB 拡張フィールドを Canal-JSON プロトコル形式に追加します。 `sink-uri`で`enable-tidb-extension` ～ `true` (デフォルトでは`false` ) を設定すると、TiCDC は Canal-JSON メッセージを生成するときに次のように動作します。
 
-* TiCDC sends DML Event and DDL Event messages that contain a field named `_tidb`.
-* TiCDC sends WATERMARK Event messages.
+-   TiCDC は、 `_tidb`という名前のフィールドを含む DML イベント メッセージと DDL イベント メッセージを送信します。
+-   TiCDC は WATERMARK イベント メッセージを送信します。
 
-The following is an example:
-
-{{< copyable "shell-regular" >}}
+以下は例です。
 
 ```shell
 cdc cli changefeed create --server=http://127.0.0.1:8300 --changefeed-id="kafka-canal-json-enable-tidb-extension" --sink-uri="kafka://127.0.0.1:9092/topic-name?kafka-version=2.4.0&protocol=canal-json&enable-tidb-extension=true"
 ```
 
-## Definitions of message formats
+## メッセージフォーマットの定義 {#definitions-of-message-formats}
 
-This section describes the formats of DDL Event, DML Event and WATERMARK Event, and how the data is resolved on the consumer side.
+このセクションでは、DDL イベント、DML イベント、WATERMARK イベントの形式と、コンシューマー側でデータがどのように解決されるかについて説明します。
 
-### DDL Event
+### DDLイベント {#ddl-event}
 
-TiCDC encodes a DDL Event into the following Canal-JSON format.
+TiCDC は、DDL イベントを次の Canal-JSON 形式にエンコードします。
 
 ```json
 {
@@ -69,28 +65,28 @@ TiCDC encodes a DDL Event into the following Canal-JSON format.
 }
 ```
 
-The fields are explained as follows.
+フィールドについては次のように説明します。
 
-| Field      | Type   | Description                                                             |
-|:----------|:-------|:-------------------------------------------------------------------------|
-| id        | Number | The default value is 0 in TiCDC.                                         |
-| database  | String | The name of the database where the row is located                        |
-| table     | String | The name of the table where the row is located                           |
-| pkNames   | Array  | The names of all the columns that make up the primary key                |
-| isDdl     | Bool   | Whether the message is a DDL event                                       |
-| type      | String | Event types defined by Canal-JSON                                        |
-| es        | Number | 13-bit (millisecond) timestamp when the event that generated the message happened     |
-| ts        | Number | 13-bit (millisecond) timestamp when TiCDC generated the message                       |
-| sql       | String | When isDdl is `true`, records the corresponding DDL statement                           |
-| sqlType   | Object | When isDdl is `false`, records how the data type of each column is represented in Java  |
-| mysqlType | object | When isDdl is `false`, records how the data type of each column is represented in MySQL |
-| data      | Object | When isDdl is `false`, records the name of each column and its data value       |
-| old       | Object | Only if the message is generated by an update Event, records the name of each column and the data value before the update |
-| _tidb     | Object | TiDB extension field. It exists only if you set `enable-tidb-extension` to `true`. The value of `commitTs` is the TSO of the transaction that caused the row to change. |
+| 分野       | タイプ | 説明                                                                                                      |
+| :------- | :-- | :------------------------------------------------------------------------------------------------------ |
+| ID       | 番号  | TiCDC のデフォルト値は 0 です。                                                                                    |
+| データベース   | 弦   | 行が存在するデータベースの名前                                                                                         |
+| テーブル     | 弦   | 行が配置されているテーブルの名前                                                                                        |
+| PKNames  | 配列  | 主キーを構成するすべての列の名前                                                                                        |
+| はDdl     | ブール | メッセージが DDL イベントであるかどうか                                                                                  |
+| タイプ      | 弦   | Canal-JSON で定義されたイベント タイプ                                                                               |
+| エス       | 番号  | メッセージを生成したイベントが発生したときの 13 ビット (ミリ秒) のタイムスタンプ                                                            |
+| ts       | 番号  | TiCDC がメッセージを生成したときの 13 ビット (ミリ秒) のタイムスタンプ                                                              |
+| SQL      | 弦   | isDdl が`true`の場合、対応する DDL ステートメントを記録します                                                                 |
+| SQLタイプ   | 物体  | isDdl が`false`の場合、各列のデータ型がJavaでどのように表現されるかを記録します。                                                       |
+| mysqlタイプ | 物体  | isDdl が`false`の場合、各列のデータ型が MySQL でどのように表現されるかを記録します。                                                    |
+| データ      | 物体  | isDdl が`false`の場合、各列の名前とそのデータ値を記録します。                                                                   |
+| 古い       | 物体  | メッセージが更新イベントによって生成された場合のみ、更新前の各列の名前とデータ値が記録されます。                                                        |
+| _tidb    | 物体  | TiDB 拡張フィールド。 `enable-tidb-extension` ～ `true`を設定した場合にのみ存在します。値`commitTs` 、行の変更を引き起こしたトランザクションの TSO です。 |
 
-### DML Event
+### DMLイベント {#dml-event}
 
-TiCDC encodes a row of DML data change event as follows:
+TiCDC は、DML データ変更イベントの行を次のようにエンコードします。
 
 ```json
 {
@@ -138,13 +134,13 @@ TiCDC encodes a row of DML data change event as follows:
 }
 ```
 
-### WATERMARK Event
+### ウォーターマークイベント {#watermark-event}
 
-TiCDC sends a WATERMARK Event only when you set `enable-tidb-extension` to `true`. The value of the `type` field is `TIDB_WATERMARK`. The Event contains the `_tidb` field, and the field contains only one parameter `watermarkTs`. The value of `watermarkTs` is the TSO recorded when the Event is sent.
+TiCDC は、 `enable-tidb-extension` ～ `true`に設定した場合にのみ WATERMARK イベントを送信します。 `type`フィールドの値は`TIDB_WATERMARK`です。イベントには`_tidb`フィールドが含まれており、このフィールドにはパラメータ`watermarkTs`が 1 つだけ含まれています。値`watermarkTs`は、イベントの送信時に記録される TSO です。
 
-When you receive an Event of this type, all Events with `commitTs` less than `watermarkTs` have been sent. Because TiCDC provides the "At Least Once" semantics, data might be sent repeatedly. If a subsequent Event with `commitTs` less than `watermarkTs` is received, you can safely ignore this Event.
+このタイプのイベントを受信すると、 `watermarkTs`未満の`commitTs`を持つすべてのイベントが送信されています。 TiCDC は「At Least Once」セマンティクスを提供するため、データは繰り返し送信される可能性があります。 `watermarkTs`未満の`commitTs`を含む後続のイベントを受信した場合は、このイベントを無視しても問題ありません。
 
-The following is an example of the WATERMARK Event.
+以下は WATERMARK イベントの例です。
 
 ```json
 {
@@ -167,122 +163,122 @@ The following is an example of the WATERMARK Event.
 }
 ```
 
-### Data resolution on the consumer side
+### 消費者側のデータ解決 {#data-resolution-on-the-consumer-side}
 
-As you can see from the example above, Canal-JSON has a uniform data format, with different field filling rules for different Event types. You can use a uniform method to resolve this JSON format data, and then determine the Event type by checking the field values.
+上の例からわかるように、Canal-JSON には統一されたデータ形式があり、イベント タイプごとにフィールド入力ルールが異なります。統一された方法を使用してこの JSON 形式のデータを解決し、フィールド値を確認してイベント タイプを決定できます。
 
-* When `isDdl` is `true`, the message contains a DDL Event.
-* When `isDdl` is `false`, you need to further check the `type` field. If `type` is `TIDB_WATERMARK`, it is a WATERMARK Event; otherwise, it is a DML Event.
+-   `isDdl`が`true`の場合、メッセージには DDL イベントが含まれます。
+-   `isDdl`が`false`場合、さらに`type`フィールドを確認する必要があります。 `type`が`TIDB_WATERMARK`の場合、それは WATERMARK イベントです。それ以外の場合は、DML イベントです。
 
-## Field descriptions
+## フィールドの説明 {#field-descriptions}
 
-The Canal-JSON format records the corresponding data type in the `mysqlType` field and the `sqlType` field.
+Canal-JSON 形式では、 `mysqlType`フィールドと`sqlType`フィールドに対応するデータ型が記録されます。
 
-### MySQL Type field
+### 「MySQL タイプ」フィールド {#mysql-type-field}
 
-In the `mysqlType` field, the Canal-JSON format records the string of MySQL Type in each column. For more information, see [TiDB Data Types](/data-type-overview.md).
+`mysqlType`フィールドには、Canal-JSON 形式で各列に MySQL Type の文字列が記録されます。詳細については、 [TiDB データ型](/data-type-overview.md)を参照してください。
 
-### SQL Type field
+### 「SQL タイプ」フィールド {#sql-type-field}
 
-In the `sqlType` field, the Canal-JSON format records Java SQL Type of each column, which is the data type corresponding to the data in JDBC. Its value can be calculated by MySQL Type and the specific data value. The mapping is as follows:
+`sqlType`フィールドには、Canal-JSON 形式で各列のJava SQL Type が記録されます。これは、JDBC のデータに対応するデータ型です。その値は、MySQL タイプと特定のデータ値によって計算できます。マッピングは次のとおりです。
 
-| MySQL Type | Java SQL Type Code |
-| :----------| :----------------- |
-| Boolean    | -6                 |
-| Float      | 7                  |
-| Double     | 8                  |
-| Decimal    | 3                  |
-| Char       | 1                  |
-| Varchar    | 12                 |
-| Binary     | 2004               |
-| Varbinary  | 2004               |
-| Tinytext   | 2005               |
-| Text       | 2005               |
-| Mediumtext | 2005               |
-| Longtext   | 2005               |
-| Tinyblob   | 2004               |
-| Blob       | 2004               |
-| Mediumblob | 2004               |
-| Longblob   | 2004               |
-| Date       | 91                 |
-| Datetime   | 93                 |
-| Timestamp  | 93                 |
-| Time       | 92                 |
-| Year       | 12                 |
-| Enum       | 4                  |
-| Set        | -7                 |
-| Bit        | -7                 |
-| JSON       | 12                 |
+| MySQLのタイプ | Java SQL タイプ コード |
+| :-------- | :--------------- |
+| ブール値      | -6               |
+| 浮く        | 7                |
+| ダブル       | 8                |
+| 10進数      | 3                |
+| シャア       | 1                |
+| バーチャー     | 12               |
+| バイナリ      | 2004年            |
+| ヴァルバイナリ   | 2004年            |
+| タイニーテキスト  | 2005年            |
+| 文章        | 2005年            |
+| ミディアムテキスト | 2005年            |
+| 長文        | 2005年            |
+| 小さな塊      | 2004年            |
+| ブロブ       | 2004年            |
+| ミディアムブロブ  | 2004年            |
+| ロングブロブ    | 2004年            |
+| 日付        | 91               |
+| 日付時刻      | 93               |
+| タイムスタンプ   | 93               |
+| 時間        | 92               |
+| 年         | 12               |
+| 列挙型       | 4                |
+| セット       | -7               |
+| 少し        | -7               |
+| JSON      | 12               |
 
-## Integer types
+## 整数型 {#integer-types}
 
-You need to consider whether [integer types](/data-type-numeric.md#integer-types) have the `Unsigned` constraint and the value size, which corresponds to different Java SQL Type Codes respectively, as shown in the following table.
+次の表に示すように、 [整数型](/data-type-numeric.md#integer-types)に`Unsigned`制約があるかどうかと、さまざまなJava SQL タイプ コードにそれぞれ対応する値のサイズを考慮する必要があります。
 
-| MySQL Type String  | Value Range                                 | Java SQL Type Code |
-| :------------------| :------------------------------------------ | :----------------- |
-| tinyint            | [-128, 127]                                 | -6                 |
-| tinyint unsigned   | [0, 127]                                    | -6                 |
-| tinyint unsigned   | [128, 255]                                  | 5                  |
-| smallint           | [-32768, 32767]                             | 5                  |
-| smallint unsigned  | [0, 32767]                                  | 5                  |
-| smallint unsigned  | [32768, 65535]                              | 4                  |
-| mediumint          | [-8388608, 8388607]                         | 4                  |
-| mediumint unsigned | [0, 8388607]                                | 4                  |
-| mediumint unsigned | [8388608, 16777215]                         | 4                  |
-| int                | [-2147483648, 2147483647]                   | 4                  |
-| int unsigned       | [0, 2147483647]                             | 4                  |
-| int unsigned       | [2147483648, 4294967295]                    | -5                 |
-| bigint             | [-9223372036854775808, 9223372036854775807] | -5                 |
-| bigint unsigned    | [0, 9223372036854775807]                    | -5                 |
-| bigint unsigned    | [9223372036854775808, 18446744073709551615] | 3                  |
+| MySQLの型文字列    | 値の範囲                                       | Java SQL タイプ コード |
+| :------------ | :----------------------------------------- | :--------------- |
+| タイニーント        | [-128、127]                                 | -6               |
+| tinyint 署名なし  | [0,127]                                    | -6               |
+| tinyint 署名なし  | [128、255]                                  | 5                |
+| smallint      | [-32768、32767]                             | 5                |
+| smallint 署名なし | [0, 32767]                                 | 5                |
+| smallint 署名なし | [32768、65535]                              | 4                |
+| 中程度の          | [-8388608、8388607]                         | 4                |
+| 署名されていない中程度の  | [0, 8388607]                               | 4                |
+| 署名されていない中程度の  | [8388608、16777215]                         | 4                |
+| 整数            | [-2147483648、2147483647]                   | 4                |
+| int 符号なし      | [0、2147483647]                             | 4                |
+| int 符号なし      | [2147483648、4294967295]                    | -5               |
+| ビギント          | [-9223372036854775808、9223372036854775807] | -5               |
+| bigint 署名なし   | [0, 9223372036854775807]                   | -5               |
+| bigint 署名なし   | [9223372036854775808、18446744073709551615] | 3                |
 
-The following table shows the mapping relationships between Java SQL Types in TiCDC and their codes.
+次の表は、TiCDC のJava SQL タイプとそのコード間のマッピング関係を示しています。
 
-| Java SQL Type | Java SQL Type Code |
-| :-------------| :------------------|
-| CHAR          | 1                  |
-| DECIMAL       | 3                  |
-| INTEGER       | 4                  |
-| SMALLINT      | 5                  |
-| REAL          | 7                  |
-| DOUBLE        | 8                  |
-| VARCHAR       | 12                 |
-| DATE          | 91                 |
-| TIME          | 92                 |
-| TIMESTAMP     | 93                 |
-| BLOB          | 2004               |
-| CLOB          | 2005               |
-| BIGINT        | -5                 |
-| TINYINT       | -6                 |
-| Bit           | -7                 |
+| Java SQL タイプ | Java SQL タイプ コード |
+| :----------- | :--------------- |
+| チャー          | 1                |
+| 10進数         | 3                |
+| 整数           | 4                |
+| スモールント       | 5                |
+| 本物           | 7                |
+| ダブル          | 8                |
+| VARCHAR      | 12               |
+| 日付           | 91               |
+| 時間           | 92               |
+| タイムスタンプ      | 93               |
+| BLOB         | 2004年            |
+| クロブ          | 2005年            |
+| BIGINT       | -5               |
+| タイイント        | -6               |
+| 少し           | -7               |
 
-For more information about Java SQL Types, see [Java SQL Class Types](https://docs.oracle.com/javase/8/docs/api/java/sql/Types.html).
+Java SQL タイプの詳細については、 [Java SQL クラスの型](https://docs.oracle.com/javase/8/docs/api/java/sql/Types.html)を参照してください。
 
-## Binary and Blob types
+## バイナリ型とブロブ型 {#binary-and-blob-types}
 
-TiCDC encodes [binary types](/data-type-string.md#binary-type) in the Canal-JSON format by converting each byte to its character representation as follows:
+TiCDC は、次のように各バイトをその文字表現に変換することにより、 [バイナリ型](/data-type-string.md#binary-type) Canal-JSON 形式でエンコードします。
 
-- Printable characters are represented using the ISO/IEC 8859-1 character encodings. 
-- Non-printable characters and certain characters with special meaning in HTML are represented using their UTF-8 escape sequence. 
+-   印刷可能な文字は、ISO/IEC 8859-1 文字エンコーディングを使用して表されます。
+-   印刷不可能な文字と、HTML で特別な意味を持つ特定の文字は、UTF-8 エスケープ シーケンスを使用して表現されます。
 
-The following table shows the detailed representation information.
+次の表に、詳細な表現情報を示します。
 
-| Character type                | Value range | Character representation |
-| :---------------------------| :-----------| :---------------------|
-| Control characters          | [0, 31]     | UTF-8 escape (such as `\u0000` through `\u001F`) |
-| Horizontal tab              | [9]         | `\t`                    |
-| Line feed                   | [10]        | `\n`                    |
-| Carriage return              | [13]       | `\r`                    |
-| Printable characters        | [32, 127]   | Literal character (such as `A`) |
-| Ampersand                   | [38]        | `\u0026`                |
-| Less-than sign              | [60]        | `\u0038`                |
-| Greater-than sign           | [62]        | `\u003E`                |
-| Extended control characters | [128, 159]  | Literal character   |
-| ISO 8859-1 (Latin-1)        | [160, 255]  | Literal character   |
+| 文字の種類              | 値の範囲      | 文字表現                                 |
+| :----------------- | :-------- | :----------------------------------- |
+| 制御文字               | [0、31]    | UTF-8 エスケープ ( `\u0000` ～ `\u001F`など) |
+| 水平タブ               | [9]       | `\t`                                 |
+| 改行                 | [10]      | `\n`                                 |
+| キャリッジリターン          | [13]      | `\r`                                 |
+| 印刷可能な文字            | [32、127]  | リテラル文字 ( `A`など)                      |
+| アンパサンド             | [38]      | `\u0026`                             |
+| 小なり記号              | [60]      | `\u0038`                             |
+| 大なり記号              | [62]      | `\u003E`                             |
+| 拡張制御文字             | [128、159] | リテラル文字                               |
+| ISO 8859-1 (ラテン-1) | [160、255] | リテラル文字                               |
 
-### Example of the encoding
+### エンコーディングの例 {#example-of-the-encoding}
 
-For example, the following 16 bytes `[5 7 10 15 36 50 43 99 120 60 38 255 254 45 55 70]` stored in a `VARBINARY` column called `c_varbinary` are encoded in a Canal-JSON `Update` event as follows:
+たとえば、 `c_varbinary`という名前の`VARBINARY`列に格納されている次の 16 バイト`[5 7 10 15 36 50 43 99 120 60 38 255 254 45 55 70]` 、Canal-JSON `Update`イベントで次のようにエンコードされます。
 
 ```json
 {
@@ -297,23 +293,23 @@ For example, the following 16 bytes `[5 7 10 15 36 50 43 99 120 60 38 255 254 45
 }
 ```
 
-## Comparison of TiCDC Canal-JSON and the official Canal
+## TiCDC Canal-JSON と公式 Canal の比較 {#comparison-of-ticdc-canal-json-and-the-official-canal}
 
-The way that TiCDC implements the Canal-JSON data format, including the `Update` Event and the `mysqlType` field, differs from the official Canal. The following table shows the main differences.
+TiCDC が`Update`イベントと`mysqlType`フィールドを含む Canal-JSON データ形式を実装する方法は、公式の Canal とは異なります。次の表に主な違いを示します。
 
-| Item            | TiCDC Canal-JSON                                                                                                                             | Canal                                |
-|:----------------|:---------------------------------------------------------------------------------------------------------------------------------------------|:-------------------------------------|
-| Event of `Update` Type  | By default, the `old` field contains all the column data. When `only_output_updated_columns` is `true`, the `old` field contains only the modified column data.  | The `old` field contains only the modified column data    |
-| `mysqlType` field  | For types with parameters, it does not contain the information of the type parameter                                                         | For types with parameters, it contains the full information of the type parameter    |
+| アイテム             | TiCDC Canal-JSON                                                                                             | 運河                               |
+| :--------------- | :----------------------------------------------------------------------------------------------------------- | :------------------------------- |
+| `Update`種類のイベント  | デフォルトでは、 `old`フィールドにはすべての列データが含まれます。 `only_output_updated_columns`が`true`の場合、 `old`フィールドには変更された列データのみが含まれます。 | `old`フィールドには、変更された列データのみが含まれます   |
+| `mysqlType`フィールド | パラメータ付きの型の場合、型パラメータの情報は含まれません。                                                                               | パラメータ付きの型の場合、型パラメータの完全な情報が含まれます。 |
 
-### Event of `Update` Type
+### <code>Update</code>タイプのイベント {#event-of-code-update-code-type}
 
-For an Event of `Update` Type:
+`Update`種類のイベントの場合:
 
-- In TiCDC, the `old` field contains all the column data
-- In the official Canal, the `old` field contains only the modified column data
+-   TiCDC では、 `old`フィールドにすべての列データが含まれます
+-   公式 Canal では、 `old`フィールドには変更された列データのみが含まれます
 
-Assume that the following SQL statements are executed sequentially in the upstream TiDB:
+次の SQL ステートメントが上流の TiDB で順次実行されると仮定します。
 
 ```sql
 create table tp_int
@@ -334,7 +330,7 @@ values (127, 32767, 8388607, 2147483647, 9223372036854775807);
 update tp_int set c_int = 0, c_tinyint = 0 where c_smallint = 32767;
 ```
 
-For the `update` statement, TiCDC outputs an Event message with `type` as `UPDATE`, as shown below. The `update` statement only modifies the `c_int` and `c_tinyint` columns. The `old` field in the output event message contains all the column data.
+`update`ステートメントの場合、TiCDC は、以下に示すように、 `type`を`UPDATE`として持つイベント メッセージを出力します。 `update`ステートメントは`c_int`と`c_tinyint`列のみを変更します。出力イベント メッセージの`old`フィールドには、すべての列データが含まれます。
 
 ```json
 {
@@ -371,7 +367,7 @@ For the `update` statement, TiCDC outputs an Event message with `type` as `UPDAT
 }
 ```
 
-For the official Canal, the `old` field in the output event message contains only the modified column data, as shown below.
+公式 Canal の場合、以下に示すように、出力イベント メッセージの`old`フィールドには、変更された列データのみが含まれます。
 
 ```json
 {
@@ -404,13 +400,13 @@ For the official Canal, the `old` field in the output event message contains onl
 }
 ```
 
-### `mysqlType` field
+### <code>mysqlType</code>フィールド {#code-mysqltype-code-field}
 
-For the `mysqlType` field, if a type contains parameters, the official Canal contains the full information of the type parameter. TiCDC does not contain such information.
+`mysqlType`フィールドの場合、型にパラメータが含まれる場合、公式の Canal には型パラメータの完全な情報が含まれます。 TiCDC にはそのような情報は含まれていません。
 
-In the following example, the table-defining SQL statement contains a parameter for each column, such as the ones for `decimal`, `char`, `varchar` and `enum`. By comparing the Canal-JSON formats generated by TiCDC and the official Canal, you can see that TiCDC only contains the basic MySQL information in the `mysqlType` field. If you need the full information of the type parameter, you need to implement it by other means.
+次の例では、テーブル定義 SQL ステートメントに、 `decimal` 、 `char` 、 `varchar` 、 `enum`などの各列のパラメーターが含まれています。 TiCDC と公式 Canal によって生成された Canal-JSON 形式を比較すると、TiCDC の`mysqlType`フィールドには基本的な MySQL 情報のみが含まれていることがわかります。 type パラメータの完全な情報が必要な場合は、他の方法で実装する必要があります。
 
-Assume that the following SQL statements are executed sequentially in the upstream TiDB:
+次の SQL ステートメントが上流の TiDB で順次実行されると仮定します。
 
 ```sql
 create table t (
@@ -431,7 +427,7 @@ insert into t (c_decimal, c_char, c_varchar, c_binary, c_varbinary, c_enum, c_se
 values (123.456, "abc", "abc", "abc", "abc", 'a', 'a,b', b'1000001');
 ```
 
-The output of TiCDC is as follows:
+TiCDC の出力は次のとおりです。
 
 ```json
 {
@@ -461,7 +457,7 @@ The output of TiCDC is as follows:
 }
 ```
 
-The output of the official Canal is as follows:
+公式運河の出力は次のとおりです。
 
 ```json
 {
@@ -491,48 +487,46 @@ The output of the official Canal is as follows:
 }
 ```
 
-## Changes in TiCDC Canal-JSON
+## TiCDC Canal-JSON の変更点 {#changes-in-ticdc-canal-json}
 
-### Changes in the `Old` field of the `Delete` events
+### <code>Delete</code>イベントの<code>Old</code>フィールドの変更 {#changes-in-the-code-old-code-field-of-the-code-delete-code-events}
 
-From v5.4.0, the `old` field of the `Delete` events has changed.
+v5.4.0より、 `Delete`イベントのうちの`old`フィールドが変更されました。
 
-The following is a `Delete` event message. Before v5.4.0, the `old` field contains the same content as the "data" field. In v5.4.0 and later versions, the `old` field is set to null. You can get the deleted data by using the "data" field.
+以下は`Delete`イベント メッセージです。 v5.4.0 より前では、 `old`フィールドには「データ」フィールドと同じ内容が含まれています。 v5.4.0 以降のバージョンでは、 `old`フィールドは null に設定されます。 「データ」フィールドを使用して、削除されたデータを取得できます。
 
-```
-{
-    "id": 0,
-    "database": "test",
-    ...
-    "type": "DELETE",
-    ...
-    "sqlType": {
+    {
+        "id": 0,
+        "database": "test",
         ...
-    },
-    "mysqlType": {
+        "type": "DELETE",
         ...
-    },
-    "data": [
-        {
-            "c_bigint": "9223372036854775807",
-            "c_int": "0",
-            "c_mediumint": "8388607",
-            "c_smallint": "32767",
-            "c_tinyint": "0",
-            "id": "2"
-        }
-    ],
-    "old": null,
-    // The following is an example before v5.4.0. The `old` field contains the same content as the "data" field.
-    "old": [
-        {
-            "c_bigint": "9223372036854775807",
-            "c_int": "0",
-            "c_mediumint": "8388607",
-            "c_smallint": "32767",
-            "c_tinyint": "0",
-            "id": "2"
-        }
-    ]
-}
-```
+        "sqlType": {
+            ...
+        },
+        "mysqlType": {
+            ...
+        },
+        "data": [
+            {
+                "c_bigint": "9223372036854775807",
+                "c_int": "0",
+                "c_mediumint": "8388607",
+                "c_smallint": "32767",
+                "c_tinyint": "0",
+                "id": "2"
+            }
+        ],
+        "old": null,
+        // The following is an example before v5.4.0. The `old` field contains the same content as the "data" field.
+        "old": [
+            {
+                "c_bigint": "9223372036854775807",
+                "c_int": "0",
+                "c_mediumint": "8388607",
+                "c_smallint": "32767",
+                "c_tinyint": "0",
+                "id": "2"
+            }
+        ]
+    }

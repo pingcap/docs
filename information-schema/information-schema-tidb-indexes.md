@@ -3,40 +3,36 @@ title: TIDB_INDEXES
 summary: Learn the `TIDB_INDEXES` information_schema table.
 ---
 
-# TIDB_INDEXES
+# TIDB_INDEXES {#tidb-indexes}
 
-The `TIDB_INDEXES` table provides the INDEX information of all tables.
-
-{{< copyable "sql" >}}
+`TIDB_INDEXES`テーブルは、すべてのテーブルの INDEX 情報を提供します。
 
 ```sql
 USE information_schema;
 DESC tidb_indexes;
 ```
 
-```
-+---------------+---------------+------+------+---------+-------+
-| Field         | Type          | Null | Key  | Default | Extra |
-+---------------+---------------+------+------+---------+-------+
-| TABLE_SCHEMA  | varchar(64)   | YES  |      | NULL    |       |
-| TABLE_NAME    | varchar(64)   | YES  |      | NULL    |       |
-| NON_UNIQUE    | bigint(21)    | YES  |      | NULL    |       |
-| KEY_NAME      | varchar(64)   | YES  |      | NULL    |       |
-| SEQ_IN_INDEX  | bigint(21)    | YES  |      | NULL    |       |
-| COLUMN_NAME   | varchar(64)   | YES  |      | NULL    |       |
-| SUB_PART      | bigint(21)    | YES  |      | NULL    |       |
-| INDEX_COMMENT | varchar(2048) | YES  |      | NULL    |       |
-| Expression    | varchar(64)   | YES  |      | NULL    |       |
-| INDEX_ID      | bigint(21)    | YES  |      | NULL    |       |
-| IS_VISIBLE    | varchar(64)   | YES  |      | NULL    |       |
-| CLUSTERED     | varchar(64)   | YES  |      | NULL    |       |
-+---------------+---------------+------+------+---------+-------+
-12 rows in set (0.00 sec)
-```
+    +---------------+---------------+------+------+---------+-------+
+    | Field         | Type          | Null | Key  | Default | Extra |
+    +---------------+---------------+------+------+---------+-------+
+    | TABLE_SCHEMA  | varchar(64)   | YES  |      | NULL    |       |
+    | TABLE_NAME    | varchar(64)   | YES  |      | NULL    |       |
+    | NON_UNIQUE    | bigint(21)    | YES  |      | NULL    |       |
+    | KEY_NAME      | varchar(64)   | YES  |      | NULL    |       |
+    | SEQ_IN_INDEX  | bigint(21)    | YES  |      | NULL    |       |
+    | COLUMN_NAME   | varchar(64)   | YES  |      | NULL    |       |
+    | SUB_PART      | bigint(21)    | YES  |      | NULL    |       |
+    | INDEX_COMMENT | varchar(2048) | YES  |      | NULL    |       |
+    | Expression    | varchar(64)   | YES  |      | NULL    |       |
+    | INDEX_ID      | bigint(21)    | YES  |      | NULL    |       |
+    | IS_VISIBLE    | varchar(64)   | YES  |      | NULL    |       |
+    | CLUSTERED     | varchar(64)   | YES  |      | NULL    |       |
+    +---------------+---------------+------+------+---------+-------+
+    12 rows in set (0.00 sec)
 
-`INDEX_ID` is the unique ID that TiDB allocates for each index. It can be used to do a join operation with `INDEX_ID` obtained from another table or API.
+`INDEX_ID`は、TiDB が各インデックスに割り当てる一意の ID です。別のテーブルまたは API から取得した`INDEX_ID`の結合操作を行うために使用できます。
 
-For example, you can obtain `TABLE_ID` and `INDEX_ID` that are involved in some slow query in the [`SLOW_QUERY` table](/information-schema/information-schema-slow-query.md) and then obtain the specific index information using the following SQL statements:
+たとえば、 [`SLOW_QUERY`テーブル](/information-schema/information-schema-slow-query.md)の遅いクエリに関係する`TABLE_ID`と`INDEX_ID`を取得し、次の SQL ステートメントを使用して特定のインデックス情報を取得できます。
 
 ```sql
 SELECT
@@ -51,16 +47,16 @@ WHERE
  AND index_id = ?
 ```
 
-Fields in the `TIDB_INDEXES` table are described as follows:
+`TIDB_INDEXES`テーブルのフィールドは次のように説明されています。
 
-* `TABLE_SCHEMA`: The name of the schema to which the index belongs.
-* `TABLE_NAME`: The name of the table to which the index belongs.
-* `NON_UNIQUE`: If the index is unique, the value is `0`; otherwise, the value is `1`.
-* `KEY_NAME`: The index name. If the index is the primary key, the name is `PRIMARY`.
-* `SEQ_IN_INDEX`: The sequential number of columns in the index, which starts from `1`.
-* `COLUMN_NAME`: The name of the column where the index is located.
-* `SUB_PART`: The prefix length of the index. If the column is partly indexed, the `SUB_PART` value is the count of the indexed characters; otherwise, the value is `NULL`.
-* `INDEX_COMMENT`: The comment of the index, which is made when the index is created.
-* `INDEX_ID`: The index ID.
-* `IS_VISIBLE`: Whether the index is visible.
-* `CLUSTERED`: Whether it is a [clustered index](/clustered-indexes.md).
+-   `TABLE_SCHEMA` : インデックスが属するスキーマの名前。
+-   `TABLE_NAME` : インデックスが属するテーブルの名前。
+-   `NON_UNIQUE` : インデックスが一意の場合、値は`0`です。それ以外の場合、値は`1`です。
+-   `KEY_NAME` : インデックス名。インデックスが主キーの場合、名前は`PRIMARY`です。
+-   `SEQ_IN_INDEX` : `1`から始まるインデックス内の列の連続番号。
+-   `COLUMN_NAME` : インデックスが配置されている列の名前。
+-   `SUB_PART` : インデックスのプレフィックス長。列が部分的にインデックス付けされている場合、値`SUB_PART`はインデックス付けされた文字の数になります。それ以外の場合、値は`NULL`です。
+-   `INDEX_COMMENT` : インデックスのコメント。インデックスの作成時に作成されます。
+-   `INDEX_ID` : インデックス ID。
+-   `IS_VISIBLE` : インデックスが表示されるかどうか。
+-   `CLUSTERED` : [クラスター化インデックス](/clustered-indexes.md)かどうか。

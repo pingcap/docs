@@ -3,77 +3,78 @@ title: Select Your Cluster Tier
 summary: Learn how to select your cluster tier on TiDB Cloud.
 ---
 
-# Select Your Cluster Tier
+# Cluster Tierを選択してください {#select-your-cluster-tier}
 
-The cluster tier determines the throughput and performance of your cluster.
+クラスター層によって、クラスターのスループットとパフォーマンスが決まります。
 
-TiDB Cloud provides the following two options of cluster tiers. Before creating a cluster, you need to consider which option suits your need better.
+TiDB Cloud、次の 2 つのクラスター層のオプションが提供されます。クラスターを作成する前に、どちらのオプションがニーズに適しているかを検討する必要があります。
 
-- [TiDB Serverless](#tidb-serverless)
-- [TiDB Dedicated](#tidb-dedicated)
+-   [TiDB サーバーレス](#tidb-serverless)
+-   [TiDB専用](#tidb-dedicated)
 
-## TiDB Serverless
+## TiDB サーバーレス {#tidb-serverless}
 
 <!--To be confirmed-->
-TiDB Serverless is a fully managed, multi-tenant TiDB offering. It delivers an instant, autoscaling MySQL-compatible database and offers a generous free tier and consumption based billing once free limits are exceeded.
 
-### Usage quota
+TiDB Serverless は、フルマネージドのマルチテナント TiDB 製品です。即時自動スケーリングの MySQL 互換データベースを提供し、豊富な無料枠と、無料制限を超えた場合の従量制課金を提供します。
 
-For each organization in TiDB Cloud, you can create a maximum of five TiDB Serverless clusters by default. To create more TiDB Serverless clusters, you need to add a credit card and set a [spending limit](/tidb-cloud/tidb-cloud-glossary.md#spending-limit) for the usage.
+### 使用量割り当て {#usage-quota}
 
-For the first five TiDB Serverless clusters in your organization, TiDB Cloud provides a free usage quota for each of them as follows:
+TiDB Cloudの組織ごとに、デフォルトで最大 5 つの TiDB サーバーレス クラスターを作成できます。さらに TiDB サーバーレス クラスターを作成するには、クレジット カードを追加し、使用量を[支出制限](/tidb-cloud/tidb-cloud-glossary.md#spending-limit)に設定する必要があります。
 
-- Row-based storage: 5 GiB
-- [Request Units (RUs)](/tidb-cloud/tidb-cloud-glossary.md#request-unit): 50 million RUs per month
+組織内の最初の 5 つの TiDB サーバーレス クラスターに対して、 TiDB Cloud は各クラスターに次のように無料の使用量クォータを提供します。
 
-A Request Unit (RU) is a unit of measure used to represent the amount of resources consumed by a single request to the database. The amount of RUs consumed by a request depends on various factors, such as the operation type or the amount of data being retrieved or modified.
+-   行ベースのstorage: 5 GiB
+-   [リクエストユニット (RU)](/tidb-cloud/tidb-cloud-glossary.md#request-unit) : 月あたり 5,000 万 RU
 
-Once the free quota of a cluster is reached, the read and write operations on this cluster will be throttled until you [increase the quota](/tidb-cloud/manage-serverless-spend-limit.md#update-spending-limit) or the usage is reset upon the start of a new month. For example, when the storage of a cluster exceeds 5 GiB, the maximum size limit of a single transaction is reduced from 10 MiB to 1 MiB.
+リクエスト ユニット (RU) は、データベースへの 1 回のリクエストによって消費されるリソースの量を表すために使用される測定単位です。要求によって消費される RU の量は、操作の種類や取得または変更されるデータの量などのさまざまな要因によって異なります。
 
-To learn more about the RU consumption of different resources (including read, write, SQL CPU, and network egress), the pricing details, and the throttled information, see [TiDB Serverless Pricing Details](https://www.pingcap.com/tidb-cloud-serverless-pricing-details).
+クラスターの無料クォータに達すると、このクラスターでの読み取りおよび書き込み操作は、新しい月の初めに使用量が[割り当てを増やす](/tidb-cloud/manage-serverless-spend-limit.md#update-spending-limit)されるまでスロットルされます。たとえば、クラスターのstorageが 5 GiB を超えると、単一トランザクションの最大サイズ制限が 10 MiB から 1 MiB に減ります。
 
-### User name prefix
+さまざまなリソース (読み取り、書き込み、SQL CPU、ネットワーク下りなど) の RU 消費量、料金の詳細、および調整された情報の詳細については、 [TiDB サーバーレスの料金詳細](https://www.pingcap.com/tidb-cloud-serverless-pricing-details)を参照してください。
+
+### ユーザー名のプレフィックス {#user-name-prefix}
 
 <!--Important: Do not update the section name "User name prefix" because this section is referenced by TiDB backend error messages.-->
 
-For each TiDB Serverless cluster, TiDB Cloud generates a unique prefix to distinguish it from other clusters.
+TiDB サーバーレス クラスターごとに、 TiDB Cloudは他のクラスターと区別するための一意のプレフィックスを生成します。
 
-Whenever you use or set a database user name, you must include the prefix in the user name. For example, assume that the prefix of your cluster is `3pTAoNNegb47Uc8`.
+データベース ユーザー名を使用または設定するときは、ユーザー名に接頭辞を含める必要があります。たとえば、クラスターのプレフィックスが`3pTAoNNegb47Uc8`であると仮定します。
 
-- To connect to your cluster:
+-   クラスターに接続するには:
 
     ```shell
     mysql -u '3pTAoNNegb47Uc8.root' -h <host> -P 4000 -D test --ssl-mode=VERIFY_IDENTITY --ssl-ca=<CA_root_path> -p
     ```
 
-    > **Note:**
+    > **注記：**
     >
-    > TiDB Serverless requires TLS connection. To find the CA root path on your system, see [Root certificate default path](/tidb-cloud/secure-connections-to-serverless-clusters.md#root-certificate-default-path).
+    > TiDB サーバーレスには TLS 接続が必要です。システム上の CA ルート パスを見つけるには、 [ルート証明書のデフォルトのパス](/tidb-cloud/secure-connections-to-serverless-clusters.md#root-certificate-default-path)を参照してください。
 
-- To create a database user:
+-   データベース ユーザーを作成するには:
 
     ```sql
     CREATE USER '3pTAoNNegb47Uc8.jeffrey';
     ```
 
-To get the prefix for your cluster, take the following steps:
+クラスターのプレフィックスを取得するには、次の手順を実行します。
 
-1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page.
-2. Click the name of your target cluster to go to its overview page, and then click **Connect** in the upper-right corner. A connection dialog is displayed.
-3. In the dialog, get the prefix from the connection string.
+1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動します。
+2.  ターゲット クラスターの名前をクリックして概要ページに移動し、右上隅の**[接続]**をクリックします。接続ダイアログが表示されます。
+3.  ダイアログで、接続文字列からプレフィックスを取得します。
 
-### TiDB Serverless special terms and conditions
+### TiDB サーバーレス特別利用規約 {#tidb-serverless-special-terms-and-conditions}
 
-Some of TiDB Cloud features are partially supported or not supported on TiDB Serverless. See [TiDB Serverless Limitations](/tidb-cloud/serverless-limitations.md) for details.
+TiDB Cloud機能の一部は、TiDB サーバーレスで部分的にサポートされているか、サポートされていません。詳細については[TiDB サーバーレスの制限事項](/tidb-cloud/serverless-limitations.md)を参照してください。
 
-## TiDB Dedicated
+## TiDB専用 {#tidb-dedicated}
 
-TiDB Dedicated is for production use with the benefits of cross-zone high availability, horizontal scaling, and [HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing).
+TiDB D dedicated は、クロスゾーンの高可用性、水平スケーリング、および[HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing)利点を備えた本番環境向けです。
 
-For TiDB Dedicated clusters, you can customize the cluster size of TiDB, TiKV, and TiFlash easily according to your business need. For each TiKV node and TiFlash node, the data on the node is replicated and distributed in different availability zones for [high availability](/tidb-cloud/high-availability-with-multi-az.md).
+TiDB 専用クラスターの場合、ビジネス ニーズに応じて TiDB、TiKV、およびTiFlashのクラスター サイズを簡単にカスタマイズできます。 TiKV ノードとTiFlashノードごとに、ノード上のデータが複製され、 [高可用性](/tidb-cloud/high-availability-with-multi-az.md)アベイラビリティ ゾーンに分散されます。
 
-To create a TiDB Dedicated cluster, you need to [add a payment method](/tidb-cloud/tidb-cloud-billing.md#payment-method) or [apply for a Proof of Concept (PoC) trial](/tidb-cloud/tidb-cloud-poc.md).
+TiDB 専用クラスターを作成するには、 [支払い方法を追加する](/tidb-cloud/tidb-cloud-billing.md#payment-method)または[概念実証 (PoC) トライアルに申し込む](/tidb-cloud/tidb-cloud-poc.md)を行う必要があります。
 
-> **Note:**
+> **注記：**
 >
-> You cannot decrease the node storage after your cluster is created.
+> クラスターの作成後にノードstorageを減らすことはできません。

@@ -3,51 +3,51 @@ title: Data Migration Billing
 summary: Learn about billing for Data Migration in TiDB Cloud.
 ---
 
-# Data Migration Billing
+# データ移行の請求 {#data-migration-billing}
 
-This document describes the billing for Data Migration in TiDB Cloud.
+このドキュメントでは、 TiDB Cloudでのデータ移行の請求について説明します。
 
-## Specifications for Data Migration
+## データ移行の仕様 {#specifications-for-data-migration}
 
-TiDB Cloud measures the capacity of Data Migration in Replication Capacity Units (RCUs). When you create a Data Migration job, you can select an appropriate specification. The higher the RCU, the better the migration performance. You will be charged for these Data Migration RCUs.
+TiDB Cloudは、データ移行の容量をレプリケーション キャパシティ ユニット (RCU) で測定します。データ移行ジョブを作成するときに、適切な仕様を選択できます。 RCU が高いほど、移行パフォーマンスが向上します。これらのデータ移行 RCU に対して料金が発生します。
 
-The following table lists the specifications and corresponding performances for Data Migration.
+次の表に、データ移行の仕様と対応するパフォーマンスを示します。
 
-| Specification | Full data migration | Incremental data migration |
-|---------------|---------------------|----------------------------|
-| 2 RCUs  | 25 MiB/s | 10,000 rows/s|
-| 4 RCUs  | 35 MiB/s | 20,000 rows/s|
-| 8 RCUs  | 40 MiB/s | 40,000 rows/s|
-| 16 RCUs | 45 MiB/s | 80,000 rows/s|
+| 仕様     | 完全なデータ移行 | 増分データ移行   |
+| ------ | -------- | --------- |
+| 2 RCU  | 25 MiB/秒 | 10,000行/秒 |
+| 4 RCU  | 35 MiB/秒 | 20,000行/秒 |
+| 8 RCU  | 40MiB/秒  | 40,000行/秒 |
+| 16 RCU | 45MiB/秒  | 80,000行/秒 |
 
-Note that all the performance values in this table are maximum performances. It is assumed that there are no performance, network bandwidth, or other bottlenecks in the upstream and downstream databases. The performance values are for reference only and might vary in different scenarios.
+この表の性能値はすべて最大性能であることに注意してください。アップストリームおよびダウンストリームのデータベースにはパフォーマンス、ネットワーク帯域幅、またはその他のボトルネックがないことが前提となります。パフォーマンス値は参考用のみであり、シナリオによって異なる場合があります。
 
-The Data Migration job measures full data migration performance in MiB/s. This unit indicates the amount of data (in MiB) that is migrated per second by the Data Migration job.
+データ移行ジョブは、完全なデータ移行パフォーマンスを MiB/秒で測定します。この単位は、データ移行ジョブによって 1 秒あたりに移行されるデータの量 (MiB 単位) を示します。
 
-The Data Migration job measures incremental data migration performance in rows/s. This unit indicates the number of rows that are migrated to the target database per second. For example, if the upstream database executes `INSERT`, `UPDATE`, or `DELETE` statements of 10,000 rows in about 1 second, the Data Migration job of the corresponding specification can replicate the 10,000 rows to the downstream in about 1 second.
+データ移行ジョブは、増分データ移行パフォーマンスを行/秒単位で測定します。この単位は、1 秒あたりにターゲット データベースに移行される行数を示します。たとえば、アップストリーム データベースが 10,000 行の`INSERT` 、 `UPDATE` 、または`DELETE`のステートメントを約 1 秒で実行する場合、対応する仕様のデータ移行ジョブは、その 10,000 行を約 1 秒でダウンストリームにレプリケートできます。
 
-## Price
+## 価格 {#price}
 
-To learn about the supported regions and the price of TiDB Cloud for each Data Migration RCU, see [Data Migration Cost](https://www.pingcap.com/tidb-cloud-pricing-details/#dm-cost).
+各データ移行 RCU のサポートされるリージョンとTiDB Cloudの価格については、 [データ移行コスト](https://www.pingcap.com/tidb-cloud-pricing-details/#dm-cost)を参照してください。
 
-The Data Migration job is in the same region as the target TiDB cluster.
+データ移行ジョブは、ターゲット TiDB クラスターと同じリージョンにあります。
 
-Note that if you are using AWS PrivateLink or VPC peering connections, and if the source database and the TiDB cluster are not in the same region or not in the same availability zone (AZ), two additional traffic charges will be incurred: cross-region and cross-AZ traffic charges.
+AWS PrivateLink または VPC ピアリング接続を使用しており、ソース データベースと TiDB クラスターが同じリージョンまたは同じアベイラビリティ ゾーン (AZ) にない場合、次の 2 つの追加トラフィック料金が発生することに注意してください。そしてクロスアリゾナ州のトラフィック料金。
 
-- If the source database and the TiDB cluster are not in the same region, cross-region traffic charges are incurred when the Data Migration job collects data from the source database.
+-   ソース データベースと TiDB クラスターが同じリージョンにない場合、データ移行ジョブがソース データベースからデータを収集するときにリージョン間トラフィック料金が発生します。
 
     ![Cross-region traffic charges](/media/tidb-cloud/dm-billing-cross-region-fees.png)
 
-- If the source database and the TiDB cluster are in the same region but in different AZs, cross-AZ traffic charges are incurred when the Data Migration job collects data from the source database.
+-   ソース データベースと TiDB クラスターが同じリージョンにあるものの、異なる AZ にある場合、データ移行ジョブがソース データベースからデータを収集するときに、クロス AZ トラフィック料金が発生します。
 
     ![Cross-AZ traffic charges](/media/tidb-cloud/dm-billing-cross-az-fees.png)
 
-- If the Data Migration job and the TiDB cluster are not in the same AZ, cross-AZ traffic charges are incurred when the Data Migration job writes data to the target TiDB cluster. In addition, if the Data Migration job and the TiDB cluster are not in the same AZ (or region) with the source database, cross-AZ (or cross-region) traffic charges are incurred when the Data Migration job collects data from the source database.
+-   データ移行ジョブと TiDB クラスターが同じ AZ にない場合、データ移行ジョブがターゲット TiDB クラスターにデータを書き込むときにクロス AZ トラフィック料金が発生します。さらに、データ移行ジョブと TiDB クラスターがソース データベースと同じ AZ (またはリージョン) にない場合、データ移行ジョブがソース データベースからデータを収集するときにクロス AZ (またはクロスリージョン) トラフィック料金が発生します。データベース。
 
     ![Cross-region and cross-AZ traffic charges](/media/tidb-cloud/dm-billing-cross-region-and-az-fees.png)
 
-The cross-region and cross-AZ traffic prices are the same as those for TiDB Cloud. For more information, see [TiDB Cloud Pricing Details](https://en.pingcap.com/tidb-cloud-pricing-details/).
+クロスリージョンおよびクロス AZ トラフィックの料金は、 TiDB Cloudの料金と同じです。詳細については、 [TiDB Cloudの料金詳細](https://en.pingcap.com/tidb-cloud-pricing-details/)を参照してください。
 
-## See also
+## こちらも参照 {#see-also}
 
-- [Migrate from MySQL-Compatible Databases Using Data Migration](/tidb-cloud/migrate-from-mysql-using-data-migration.md)
+-   [データ移行を使用した MySQL 互換データベースからの移行](/tidb-cloud/migrate-from-mysql-using-data-migration.md)

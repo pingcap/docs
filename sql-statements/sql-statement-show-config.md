@@ -3,17 +3,17 @@ title: SHOW CONFIG
 summary: Overview of the use of SHOW CONFIG in the TiDB database
 ---
 
-# SHOW CONFIG
+# 設定を表示 {#show-config}
 
-The `SHOW CONFIG` statement is used to show the current configuration of various components of TiDB. Note that the configuration and system variables act on different dimensions and should not be mixed up. If you want to obtain the system variable information, use the [SHOW VARIABLES](/sql-statements/sql-statement-show-variables.md) syntax.
+`SHOW CONFIG`ステートメントは、TiDB のさまざまなコンポーネントの現在の構成を示すために使用されます。構成変数とシステム変数は異なる次元で機能するため、混同しないように注意してください。システム変数情報を取得したい場合は、 [変数を表示](/sql-statements/sql-statement-show-variables.md)構文を使用します。
 
-> **Note:**
+> **注記：**
 >
-> This feature is only applicable to TiDB Self-Hosted and not available on [TiDB Cloud](https://docs.pingcap.com/tidbcloud/). 
+> この機能は TiDB セルフホスト型にのみ適用され、 [TiDB Cloud](https://docs.pingcap.com/tidbcloud/)では利用できません。
 
-## Synopsis
+## あらすじ {#synopsis}
 
-**ShowStmt:**
+**表示手順:**
 
 ![ShowStmt](/media/sqlgram/ShowStmt.png)
 
@@ -21,67 +21,55 @@ The `SHOW CONFIG` statement is used to show the current configuration of various
 
 ![ShowTargetFilterable](/media/sqlgram/ShowTargetFilterable.png)
 
-## Examples
+## 例 {#examples}
 
-Show all configurations:
-
-{{< copyable "sql" >}}
+すべての構成を表示します。
 
 ```sql
 SHOW CONFIG;
 ```
 
-```
-+------+----------------+-------------------------------------------------+---------------------------------------------------------------------+
-| Type | Instance       | Name                                            | Value                                                               |
-+------+----------------+-------------------------------------------------+---------------------------------------------------------------------+
-| tidb | 127.0.0.1:4000 | advertise-address                               | 127.0.0.1                                                           |
-| tidb | 127.0.0.1:4000 | binlog.binlog-socket                            |                                                                     |
-| tidb | 127.0.0.1:4000 | binlog.enable                                   | false                                                               |
-...
-120 rows in set (0.01 sec)
-```
+    +------+----------------+-------------------------------------------------+---------------------------------------------------------------------+
+    | Type | Instance       | Name                                            | Value                                                               |
+    +------+----------------+-------------------------------------------------+---------------------------------------------------------------------+
+    | tidb | 127.0.0.1:4000 | advertise-address                               | 127.0.0.1                                                           |
+    | tidb | 127.0.0.1:4000 | binlog.binlog-socket                            |                                                                     |
+    | tidb | 127.0.0.1:4000 | binlog.enable                                   | false                                                               |
+    ...
+    120 rows in set (0.01 sec)
 
-Show the configuration where the `type` is `tidb`:
-
-{{< copyable "sql" >}}
+`type`が`tidb`である構成を示します。
 
 ```sql
 SHOW CONFIG WHERE type = 'tidb' AND name = 'advertise-address';
 ```
 
-```
-+------+----------------+-------------------+-----------+
-| Type | Instance       | Name              | Value     |
-+------+----------------+-------------------+-----------+
-| tidb | 127.0.0.1:4000 | advertise-address | 127.0.0.1 |
-+------+----------------+-------------------+-----------+
-1 row in set (0.05 sec)
-```
+    +------+----------------+-------------------+-----------+
+    | Type | Instance       | Name              | Value     |
+    +------+----------------+-------------------+-----------+
+    | tidb | 127.0.0.1:4000 | advertise-address | 127.0.0.1 |
+    +------+----------------+-------------------+-----------+
+    1 row in set (0.05 sec)
 
-You can also use the `LIKE` clause to show the configuration where the `type` is `tidb`:
-
-{{< copyable "sql" >}}
+`LIKE`句を使用して、 `type`が`tidb`である構成を示すこともできます。
 
 ```sql
 SHOW CONFIG LIKE 'tidb';
 ```
 
-```
-+------+----------------+-------------------------------------------------+---------------------------------------------------------------------+
-| Type | Instance       | Name                                            | Value                                                               |
-+------+----------------+-------------------------------------------------+---------------------------------------------------------------------+
-| tidb | 127.0.0.1:4000 | advertise-address                               | 127.0.0.1                                                           |
-| tidb | 127.0.0.1:4000 | binlog.binlog-socket                            |                                                                     |
-| tidb | 127.0.0.1:4000 | binlog.enable                                   | false                                                               |
-...
-40 rows in set (0.01 sec)
-```
+    +------+----------------+-------------------------------------------------+---------------------------------------------------------------------+
+    | Type | Instance       | Name                                            | Value                                                               |
+    +------+----------------+-------------------------------------------------+---------------------------------------------------------------------+
+    | tidb | 127.0.0.1:4000 | advertise-address                               | 127.0.0.1                                                           |
+    | tidb | 127.0.0.1:4000 | binlog.binlog-socket                            |                                                                     |
+    | tidb | 127.0.0.1:4000 | binlog.enable                                   | false                                                               |
+    ...
+    40 rows in set (0.01 sec)
 
-## MySQL compatibility
+## MySQLの互換性 {#mysql-compatibility}
 
-This statement is a TiDB extension to MySQL syntax.
+このステートメントは、MySQL 構文に対する TiDB 拡張機能です。
 
-## See also
+## こちらも参照 {#see-also}
 
-* [SHOW VARIABLES](/sql-statements/sql-statement-show-variables.md)
+-   [変数を表示](/sql-statements/sql-statement-show-variables.md)

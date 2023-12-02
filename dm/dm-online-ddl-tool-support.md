@@ -3,49 +3,49 @@ title: TiDB Data Migration Support for Online DDL Tools
 summary: Learn about the support for common online DDL tools, usage, and precautions in DM.
 ---
 
-# TiDB Data Migration Support for Online DDL Tools
+# オンライン DDL ツールの TiDB データ移行サポート {#tidb-data-migration-support-for-online-ddl-tools}
 
-In the MySQL ecosystem, tools such as gh-ost and pt-osc are widely used. TiDB Data Migration (DM) provides supports for these tools to avoid migrating unnecessary intermediate data.
+MySQL エコシステムでは、gh-ost や pt-osc などのツールが広く使用されています。 TiDB Data Migration (DM) は、不要な中間データの移行を回避するために、これらのツールのサポートを提供します。
 
-This document introduces the support for common online DDL tools, usage, and precautions in DM.
+このドキュメントでは、DM における一般的なオンライン DDL ツールのサポート、使用方法、注意事項について紹介します。
 
-For the working principles and implementation methods of DM for online DDL tools, refer to [online-ddl](/dm/feature-online-ddl.md).
+オンライン DDL ツールの DM の動作原理と実装方法については、 [オンライン-ddl](/dm/feature-online-ddl.md)を参照してください。
 
-## Restrictions
+## 制限 {#restrictions}
 
-- DM only supports gh-ost and pt-osc.
-- When `online-ddl` is enabled, the checkpoint corresponding to incremental replication should not be in the process of online DDL execution. For example, if an upstream online DDL operation starts at `position-A` and ends at `position-B` of the binlog, the starting point of incremental replication should be earlier than `position-A` or later than `position-B`; otherwise, an error occurs. For details, refer to [FAQ](/dm/dm-faq.md#how-to-handle-the-error-returned-by-the-ddl-operation-related-to-the-gh-ost-table-after-online-ddl-true-is-set).
+-   DM は gh-ost と pt-osc のみをサポートします。
+-   `online-ddl`が有効な場合、増分レプリケーションに対応するチェックポイントはオンライン DDL 実行のプロセスにあってはなりません。たとえば、アップストリームのオンライン DDL 操作がbinlogの`position-A`で開始し、 `position-B`で終了する場合、増分レプリケーションの開始点は`position-A`より前か`position-B`より後である必要があります。そうしないとエラーが発生します。詳細は[FAQ](/dm/dm-faq.md#how-to-handle-the-error-returned-by-the-ddl-operation-related-to-the-gh-ost-table-after-online-ddl-true-is-set)を参照してください。
 
-## Configure parameters
+## パラメータを設定する {#configure-parameters}
 
 <SimpleTab>
 <div label="v2.0.5 and later">
 
-In v2.0.5 and later versions, you need to use the `online-ddl` configuration item in the `task` configuration file.
+v2.0.5 以降のバージョンでは、 `task`設定ファイルの`online-ddl`設定項目を使用する必要があります。
 
-- If the upstream MySQL/MariaDB (at the same time) uses the gh-ost or pt-osc tool, set `online-ddl` to `true` in the task configuration file:
+-   アップストリームの MySQL/MariaDB が (同時に) gh-ost または pt-osc ツールを使用する場合は、タスク構成ファイルで`online-ddl`から`true`を設定します。
 
 ```yml
 online-ddl: true
 ```
 
-> **Note:**
+> **注記：**
 >
-> Since v2.0.5, `online-ddl-scheme` has been deprecated, so you need to use `online-ddl` instead of `online-ddl-scheme`. That means that setting `online-ddl: true` overwrites `online-ddl-scheme`, and setting `online-ddl-scheme: "pt"` or `online-ddl-scheme: "gh-ost"` is converted to `online-ddl: true`.
+> v2.0.5 以降、 `online-ddl-scheme`​​非推奨になったので、 `online-ddl-scheme`の代わりに`online-ddl`使用する必要があります。つまり、設定`online-ddl: true` `online-ddl-scheme`を上書きし、設定`online-ddl-scheme: "pt"`または`online-ddl-scheme: "gh-ost"`は`online-ddl: true`に変換されます。
 
 </div>
 
 <div label="earlier than v2.0.5">
 
-Before v2.0.5 (not including v2.0.5), you need to use the `online-ddl-scheme` configuration item in the `task` configuration file.
+v2.0.5 より前 (v2.0.5 を除く) は、 `task`構成ファイルの`online-ddl-scheme`構成項目を使用する必要があります。
 
-- If the upstream MySQL/MariaDB uses the gh-ost tool, set it in the task configuration file:
+-   アップストリームの MySQL/MariaDB が gh-ost ツールを使用する場合は、それをタスク構成ファイルに設定します。
 
 ```yml
 online-ddl-scheme: "gh-ost"
 ```
 
-- If the upstream MySQL/MariaDB uses the pt tool, set it in the task configuration file:
+-   アップストリームの MySQL/MariaDB が pt ツールを使用する場合は、それをタスク構成ファイルに設定します。
 
 ```yml
 online-ddl-scheme: "pt"

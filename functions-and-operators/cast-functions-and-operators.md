@@ -3,18 +3,18 @@ title: Cast Functions and Operators
 summary: Learn about the cast functions and operators.
 ---
 
-# Cast Functions and Operators
+# キャスト関数と演算子 {#cast-functions-and-operators}
 
-Cast functions and operators enable conversion of values from one data type to another. TiDB supports all of the [cast functions and operators](https://dev.mysql.com/doc/refman/5.7/en/cast-functions.html) available in MySQL 5.7.
+キャスト関数と演算子を使用すると、あるデータ型から別のデータ型に値を変換できます。 TiDB は、 MySQL 5.7で利用可能な[キャスト関数と演算子](https://dev.mysql.com/doc/refman/5.7/en/cast-functions.html)をサポートします。
 
-## List of cast functions and operators
+## キャスト関数と演算子のリスト {#list-of-cast-functions-and-operators}
 
-| Name                                     | Description                      |
-| ---------------------------------------- | -------------------------------- |
-| [`BINARY`](https://dev.mysql.com/doc/refman/8.0/en/cast-functions.html#operator_binary) | Cast a string to a binary string |
-| [`CAST()`](https://dev.mysql.com/doc/refman/8.0/en/cast-functions.html#function_cast) | Cast a value as a certain type   |
-| [`CONVERT()`](https://dev.mysql.com/doc/refman/8.0/en/cast-functions.html#function_convert) | Cast a value as a certain type   |
+| 名前                                                                                          | 説明                  |
+| ------------------------------------------------------------------------------------------- | ------------------- |
+| [`BINARY`](https://dev.mysql.com/doc/refman/8.0/en/cast-functions.html#operator_binary)     | 文字列をバイナリ文字列にキャストします |
+| [`CAST()`](https://dev.mysql.com/doc/refman/8.0/en/cast-functions.html#function_cast)       | 値を特定の型としてキャストする     |
+| [`CONVERT()`](https://dev.mysql.com/doc/refman/8.0/en/cast-functions.html#function_convert) | 値を特定の型としてキャストする     |
 
-> **Note:**
+> **注記：**
 >
-> TiDB and MySQL display inconsistent results for `SELECT CAST(MeN AS CHAR)` (or its equivalent form `SELECT CONVERT(MeM, CHAR)`), where `MeN` represents a double-precision floating-point number in scientific notation. MySQL displays the complete numeric value when `-15 <= N <= 14` and the scientific notation when `N < -15` or `N > 14`. However, TiDB always displays the complete numeric value. For example, MySQL displays the result of `SELECT CAST(3.1415e15 AS CHAR)` as `3.1415e15`, while TiDB displays the result as `3141500000000000`.
+> TiDB と MySQL では、 `SELECT CAST(MeN AS CHAR)` (または同等の形式`SELECT CONVERT(MeM, CHAR)` ) に対して一貫性のない結果が表示されます。ここで、 `MeN`は科学表記法の倍精度浮動小数点数を表します。 MySQL は、 `-15 <= N <= 14`場合は完全な数値を表示し、 `N < -15`または`N > 14`の場合は科学表記法を表示します。ただし、TiDB では常に完全な数値が表示されます。たとえば、MySQL は`SELECT CAST(3.1415e15 AS CHAR)`の結果を`3.1415e15`と表示しますが、TiDB は結果を`3141500000000000`と表示します。

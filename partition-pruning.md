@@ -3,13 +3,11 @@ title: Partition Pruning
 summary: Learn about the usage scenarios of TiDB partition pruning.
 ---
 
-# Partition Pruning
+# パーティションのプルーニング {#partition-pruning}
 
-Partition pruning is a performance optimization that applies to partitioned tables. It analyzes the filter conditions in query statements, and eliminates (_prunes_) partitions from consideration when they do not contain any data that will be required. By eliminating the non-required partitions, TiDB is able to reduce the amount of data that needs to be accessed and potentially significantly improving query execution times.
+パーティション プルーニングは、パーティション化されたテーブルに適用されるパフォーマンスの最適化です。クエリ ステートメントのフィルター条件を分析し、必要なデータが含まれていないパーティションを考慮から除外 (*プルーニング*) します。不要なパーティションを削除することで、TiDB はアクセスする必要があるデータの量を削減でき、クエリの実行時間を大幅に短縮できる可能性があります。
 
-The following is an example:
-
-{{< copyable "sql" >}}
+以下は例です。
 
 ```sql
 CREATE TABLE t1 (
@@ -39,19 +37,17 @@ EXPLAIN SELECT * FROM t1 WHERE id BETWEEN 80 AND 120;
 5 rows in set (0.00 sec)
 ```
 
-## Usage scenarios of partition pruning
+## パーティションプルーニングの使用シナリオ {#usage-scenarios-of-partition-pruning}
 
-The usage scenarios of partition pruning are different for the two types of partitioned tables: Range partitioned tables and Hash partitioned tables.
+パーティション プルーニングの使用シナリオは、レンジ パーティション テーブルとハッシュ パーティション テーブルの 2 種類のパーティション テーブルで異なります。
 
-### Use partition pruning in Hash partitioned tables
+### ハッシュ パーティション テーブルでパーティション プルーニングを使用する {#use-partition-pruning-in-hash-partitioned-tables}
 
-This section describes the applicable and inapplicable usage scenarios of partition pruning in Hash partitioned tables.
+このセクションでは、ハッシュ パーティション テーブルでのパーティション プルーニングの適用可能な使用シナリオと適用できない使用シナリオについて説明します。
 
-#### Applicable scenario in Hash partitioned tables
+#### ハッシュ パーティション テーブルに適用されるシナリオ {#applicable-scenario-in-hash-partitioned-tables}
 
-Partition pruning applies only to the query condition of equality comparison in Hash partitioned tables.
-
-{{< copyable "sql" >}}
+パーティション プルーニングは、ハッシュ パーティション テーブルの等価比較のクエリ条件にのみ適用されます。
 
 ```sql
 create table t (x int) partition by hash(x) partitions 4;
@@ -68,17 +64,15 @@ explain select * from t where x = 1;
 +-------------------------+----------+-----------+-----------------------+--------------------------------+
 ```
 
-In the SQL statement above, it can be known from the condition `x = 1` that all results fall in one partition. The value `1` can be confirmed to be in the `p1` partition after passing through the Hash partition. Therefore, only the `p1` partition needs to be scanned, and there is no need to access the `p2`, `p3`, and `p4` partitions that will not have matching results. From the execution plan, only one `TableFullScan` operator appears and the `p1` partition is specified in `access object`, so it can be confirmed that `partition pruning` takes effect.
+上記の SQL ステートメントでは、条件`x = 1`から、すべての結果が 1 つのパーティションに収まることがわかります。値`1` 、Hash パーティションを通過した後の`p1`パーティションにあることが確認できます。したがって、スキャンする必要があるのは`p1`パーティションのみであり、一致する結果が得られない`p2` 、 `p3` 、および`p4`パーティションにアクセスする必要はありません。実行計画を見ると、 `TableFullScan`演算子は 1 つだけ現れ、 `access object`には`p1`パーティションが指定されているので、 `partition pruning`有効になっていることが確認できます。
 
-#### Inapplicable scenarios in Hash partitioned tables
+#### ハッシュ パーティション テーブルに適用できないシナリオ {#inapplicable-scenarios-in-hash-partitioned-tables}
 
-This section describes two inapplicable usage scenarios of partition pruning in Hash partitioned tables.
+このセクションでは、ハッシュ パーティション テーブルでのパーティション プルーニングの適用できない 2 つの使用シナリオについて説明します。
 
-##### Scenario one
+##### シナリオ 1 {#scenario-one}
 
-If you cannot confirm the condition that the query result falls in only one partition (such as `in`, `between`, `>`, `<`, `>=`, `<=`), you cannot use the partition pruning optimization. For example:
-
-{{< copyable "sql" >}}
+クエリ結果が 1 つのパーティション ( `in` 、 `between` 、 `>` 、 `<` 、 `>=` 、 `<=`など) にのみ該当するという条件を確認できない場合は、パーティション プルーニングの最適化を使用できません。例えば：
 
 ```sql
 create table t (x int) partition by hash(x) partitions 4;
@@ -105,13 +99,11 @@ explain select * from t where x > 2;
 +------------------------------+----------+-----------+-----------------------+--------------------------------+
 ```
 
-In this case, partition pruning is inapplicable because the corresponding Hash partition cannot be confirmed by the `x > 2` condition.
+この場合、条件`x > 2`では対応するハッシュ パーティションが確認できないため、パーティション プルーニングは適用されません。
 
-##### Scenario two
+##### シナリオ 2 {#scenario-two}
 
-Because the rule optimization of partition pruning is performed during the generation phase of the query plan, partition pruning is not suitable for scenarios where the filter conditions can be obtained only during the execution phase. For example:
-
-{{< copyable "sql" >}}
+パーティション プルーニングのルールの最適化はクエリ プランの生成フェーズ中に実行されるため、パーティション プルーニングは、フィルター条件が実行フェーズ中にのみ取得できるシナリオには適していません。例えば：
 
 ```sql
 create table t (x int) partition by hash(x) partitions 4;
@@ -139,21 +131,19 @@ explain select * from t2 where x = (select * from t1 where t2.x = t1.x and t2.x 
 +--------------------------------------+----------+-----------+------------------------+----------------------------------------------+
 ```
 
-Each time this query reads a row from `t2`, it will query on the `t1` partitioned table. Theoretically, the filter condition of `t1.x = val` is met at this time, but in fact, partition pruning takes effect only in the generation phase of the query plan, not the execution phase.
+このクエリは`t2`から行を読み取るたびに、 `t1`のパーティションにパーティションテーブルに対してクエリを実行します。理論的には、この時点でフィルター条件`t1.x = val`が満たされますが、実際には、パーティション プルーニングはクエリ プランの生成フェーズでのみ有効になり、実行フェーズでは有効になりません。
 
-### Use partition pruning in Range partitioned tables
+### レンジパーティションテーブルでパーティションプルーニングを使用する {#use-partition-pruning-in-range-partitioned-tables}
 
-This section describes the applicable and inapplicable usage scenarios of partition pruning in Range partitioned tables.
+このセクションでは、レンジ パーティション テーブルでのパーティション プルーニングの適用可能な使用シナリオと適用できない使用シナリオについて説明します。
 
-#### Applicable scenarios in Range partitioned tables
+#### レンジパーティションテーブルに適用できるシナリオ {#applicable-scenarios-in-range-partitioned-tables}
 
-This section describes three applicable usage scenarios of partition pruning in Range partitioned tables.
+このセクションでは、レンジ パーティション テーブルでのパーティション プルーニングの 3 つの適用可能な使用シナリオについて説明します。
 
-##### Scenario one
+##### シナリオ 1 {#scenario-one}
 
-Partition pruning applies to the query condition of equality comparison in Range partitioned tables. For example:
-
-{{< copyable "sql" >}}
+パーティション プルーニングは、レンジ パーティション テーブルの等価比較のクエリ条件に適用されます。例えば：
 
 ```sql
 create table t (x int) partition by range (x) (
@@ -174,9 +164,7 @@ explain select * from t where x = 3;
 +-------------------------+----------+-----------+-----------------------+--------------------------------+
 ```
 
-Partition pruning also applies to the equality comparison that uses the `in` query condition. For example:
-
-{{< copyable "sql" >}}
+パーティション プルーニングは、 `in`クエリ条件を使用する等価比較にも適用されます。例えば：
 
 ```sql
 create table t (x int) partition by range (x) (
@@ -201,13 +189,11 @@ explain select * from t where x in(1,13);
 +-----------------------------+----------+-----------+-----------------------+--------------------------------+
 ```
 
-In the SQL statement above, it can be known from the `x in(1,13)` condition that all results fall in a few partitions. After analysis, it is found that all records of `x = 1` are in the `p0` partition, and all records of `x = 13` are in the `p2` partition, so only `p0` and `p2` partitions need to be accessed.
+上記の SQL ステートメントでは、条件`x in(1,13)`から、すべての結果がいくつかのパーティションに分類されることがわかります。分析の結果、 `x = 1`のすべてのレコードは`p0`パーティションにあり、 `x = 13`のすべてのレコードは`p2`パーティションにあることが判明したため、アクセスする必要があるのは`p0`と`p2`パーティションのみです。
 
-##### Scenario two
+##### シナリオ 2 {#scenario-two}
 
-Partition pruning applies to the query condition of interval comparison, such as `between`, `>`, `<`, `=`, `>=`, `<=`. For example:
-
-{{< copyable "sql" >}}
+パーティション プルーニングは`between` 、 `>` 、 `<` 、 `=` 、 `>=` 、 `<=`などの間隔比較のクエリ条件に適用されます。例えば：
 
 ```sql
 create table t (x int) partition by range (x) (
@@ -232,18 +218,16 @@ explain select * from t where x between 7 and 14;
 +-----------------------------+----------+-----------+-----------------------+-----------------------------------+
 ```
 
-##### Scenario three
+##### シナリオ 3 {#scenario-three}
 
-Partition pruning applies to the scenario where the partition expression is in the simple form of `fn(col)`, the query condition is one of `>`, `<`, `=`, `>=`, and `<=`, and the `fn` function is monotonous.
+パーティション プルーニングは、パーティション式が`fn(col)`の単純な形式で、クエリ条件が`>` 、 `<` 、 `=` 、 `>=` 、および`<=`のいずれかであり、 `fn`関数が単調であるシナリオに適用されます。
 
-If the `fn` function is monotonous, for any `x` and `y`, if `x > y`, then `fn(x) > fn(y)`. Then this `fn` function can be called strictly monotonous. For any `x` and `y`, if `x > y`, then `fn(x) >= fn(y)`. In this case, `fn` could also be called "monotonous". Theoretically, all monotonous functions, strictly or not, are supported by partition pruning. Currently, TiDB only supports the following monotonous functions:
+`fn`関数が単調な場合、任意の`x`と`y`について、 `x > y`の場合は`fn(x) > fn(y)`です。したがって、この`fn`関数は厳密に単調であると言えます。 `x`と`y`場合、 `x > y`の場合は`fn(x) >= fn(y)`なります。この場合、 `fn` 「単調」とも言えます。理論的には、厳密かどうかにかかわらず、すべての単調関数がパーティション プルーニングによってサポートされます。現在、TiDB は次の単調関数のみをサポートしています。
 
-* [`UNIX_TIMESTAMP()`](/functions-and-operators/date-and-time-functions.md)
-* [`TO_DAYS()`](/functions-and-operators/date-and-time-functions.md)
+-   [`UNIX_TIMESTAMP()`](/functions-and-operators/date-and-time-functions.md)
+-   [`TO_DAYS()`](/functions-and-operators/date-and-time-functions.md)
 
-For example, partition pruning takes effect when the partition expression is in the form of `fn(col)`, where the `fn` is monotonous function `to_days`:
-
-{{< copyable "sql" >}}
+たとえば、パーティション プルーニングは、パーティション式が`fn(col)`の形式であり、 `fn`が単調関数`to_days`である場合に有効になります。
 
 ```sql
 create table t (id datetime) partition by range (to_days(id)) (
@@ -262,11 +246,9 @@ explain select * from t where id > '2020-04-18';
 +-------------------------+----------+-----------+-----------------------+-------------------------------------------+
 ```
 
-#### Inapplicable scenario in Range partitioned tables
+#### レンジパーティションテーブルに適用できないシナリオ {#inapplicable-scenario-in-range-partitioned-tables}
 
-Because the rule optimization of partition pruning is performed during the generation phase of the query plan, partition pruning is not suitable for scenarios where the filter conditions can be obtained only during the execution phase. For example:
-
-{{< copyable "sql" >}}
+パーティション プルーニングのルールの最適化はクエリ プランの生成フェーズ中に実行されるため、パーティション プルーニングは、フィルター条件が実行フェーズ中にのみ取得できるシナリオには適していません。例えば：
 
 ```sql
 create table t1 (x int) partition by range (x) (
@@ -298,4 +280,4 @@ explain select * from t2 where x < (select * from t1 where t2.x < t1.x and t2.x 
 14 rows in set (0.00 sec)
 ```
 
-Each time this query reads a row from `t2`, it will query on the `t1` partitioned table. Theoretically, the `t1.x> val` filter condition is met at this time, but in fact, partition pruning takes effect only in the generation phase of the query plan, not the execution phase.
+このクエリは`t2`から行を読み取るたびに、 `t1`のパーティションにパーティションテーブルに対してクエリを実行します。理論的には、この時点で`t1.x> val`フィルター条件が満たされていますが、実際には、パーティション プルーニングはクエリ プランの生成フェーズでのみ有効になり、実行フェーズでは有効になりません。

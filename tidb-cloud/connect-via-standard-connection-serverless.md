@@ -3,35 +3,35 @@ title: Connect to TiDB Serverless via Public Endpoint
 summary: Learn how to connect to your TiDB Serverless cluster via public endpoint.
 ---
 
-# Connect to TiDB Serverless via Public Endpoint
+# パブリックエンドポイント経由で TiDB サーバーレスに接続する {#connect-to-tidb-serverless-via-public-endpoint}
 
-This document describes how to connect to your TiDB Serverless cluster via public endpoint. With the public endpoint, you can connect to your TiDB Serverless cluster via a SQL client from your laptop.
+このドキュメントでは、パブリック エンドポイント経由で TiDB サーバーレス クラスターに接続する方法について説明します。パブリック エンドポイントを使用すると、ラップトップから SQL クライアント経由で TiDB サーバーレス クラスターに接続できます。
 
-> **Tip:**
+> **ヒント：**
 >
-> To learn how to connect to a TiDB Dedicated cluster via public endpoint, see [Connect to TiDB Dedicated via Standard Connection](/tidb-cloud/connect-via-standard-connection.md).
+> パブリック エンドポイント経由で TiDB 専用クラスターに接続する方法については、 [標準接続経由で TiDB 専用に接続する](/tidb-cloud/connect-via-standard-connection.md)を参照してください。
 
-To connect to a TiDB Serverless cluster via public endpoint, take the following steps:
+パブリック エンドポイント経由で TiDB サーバーレス クラスターに接続するには、次の手順を実行します。
 
-1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
+1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット クラスターの名前をクリックして、その概要ページに移動します。
 
-2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
+2.  右上隅にある**「接続」**をクリックします。接続ダイアログが表示されます。
 
-3. In the dialog, keep the default setting of the endpoint type as `Public`, and select your preferred connection method and operating system to get the corresponding connection string.
+3.  ダイアログでは、エンドポイント タイプのデフォルト設定を`Public`のままにし、優先接続方法とオペレーティング システムを選択して、対応する接続​​文字列を取得します。
 
-    > **Note:**
+    > **注記：**
     >
-    > - Keeping the endpoint type as `Public` means the connection is via standard TLS connection. For more information, see [TLS Connection to TiDB Serverless](/tidb-cloud/secure-connections-to-serverless-clusters.md).
-    > - If you choose **Private** in the **Endpoint Type** drop-down list, it means that the connection is via private endpoint. For more information, see [Connect to TiDB Serverless via Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections-serverless.md).
+    > -   エンドポイント タイプを`Public`のままにすると、接続が標準の TLS 接続を介して行われることを意味します。詳細については、 [TiDB サーバーレスへの TLS 接続](/tidb-cloud/secure-connections-to-serverless-clusters.md)を参照してください。
+    > -   **[エンドポイント タイプ]**ドロップダウン リストで**[プライベート]**を選択した場合、接続がプライベート エンドポイント経由であることを意味します。詳細については、 [プライベートエンドポイント経由で TiDB サーバーレスに接続する](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)を参照してください。
 
-4. If you have not set a password yet, click **Create password** to generate a random password. The generated password will not show again, so save your password in a secure location.
+4.  パスワードをまだ設定していない場合は、 **「パスワードの作成」**をクリックしてランダムなパスワードを生成します。生成されたパスワードは再度表示されないため、パスワードを安全な場所に保存してください。
 
-5. Connect to your cluster with the connection string.
+5.  接続文字列を使用してクラスターに接続します。
 
-    > **Note:**
+    > **注記：**
     >
-    > When you connect to a TiDB Serverless cluster, you must include the prefix for your cluster in the user name and wrap the name with quotation marks. For more information, see [User name prefix](/tidb-cloud/select-cluster-tier.md#user-name-prefix).
+    > TiDB サーバーレス クラスターに接続するときは、ユーザー名にクラスターのプレフィックスを含め、名前を引用符で囲む必要があります。詳細については、 [ユーザー名のプレフィックス](/tidb-cloud/select-cluster-tier.md#user-name-prefix)を参照してください。
 
-## What's next
+## 次は何ですか {#what-s-next}
 
-After you have successfully connected to your TiDB cluster, you can [explore SQL statements with TiDB](/basic-sql-operations.md).
+TiDB クラスターに正常に接続したら、 [TiDB で SQL ステートメントを探索する](/basic-sql-operations.md)を行うことができます。

@@ -3,25 +3,25 @@ title: Guide for Developing a Storage Sink Consumer
 summary: Learn how to design and implement a consumer to consume data changes in storage sinks.
 ---
 
-# Guide for Developing a Storage Sink Consumer
+# ストレージ シンク コンシューマの開発ガイド {#guide-for-developing-a-storage-sink-consumer}
 
-This document describes how to design and implement a TiDB data change consumer.
+このドキュメントでは、TiDB データ変更コンシューマーを設計および実装する方法について説明します。
 
-> **Note:**
+> **注記：**
 >
-> The storage sink cannot handle the `DROP DATABASE` DDL. Therefore, avoid executing this DDL. If you do need to execute this DDL, execute it manually in the downstream MySQL.
+> storageシンクは`DROP DATABASE` DDL を処理できません。したがって、この DDL は実行しないでください。この DDL を実行する必要がある場合は、ダウンストリーム MySQL で手動で実行してください。
 
-TiCDC does not provide any standard way for implementing a consumer. This document provides a consumer example program written in Golang. This program can read data from the storage service and write the data to a MySQL-compatible database. You can refer to the data format and instructions provided in this example to implement a consumer on your own.
+TiCDC は、コンシューマーを実装するための標準的な方法を提供しません。このドキュメントでは、 Golangで書かれた消費者向けサンプル プログラムを提供します。このプログラムは、storageサービスからデータを読み取り、そのデータを MySQL 互換データベースに書き込むことができます。この例で提供されているデータ形式と手順を参照して、コンシューマーを独自に実装できます。
 
-[Consumer program written in Golang](https://github.com/pingcap/tiflow/tree/release-7.5/cmd/storage-consumer)
+[Golangで書かれたコンシューマ プログラム](https://github.com/pingcap/tiflow/tree/release-7.5/cmd/storage-consumer)
 
-## Design a consumer
+## 消費者をデザインする {#design-a-consumer}
 
-The following diagram shows the overall consumption process of the consumer:
+次の図は、消費者の全体的な消費プロセスを示しています。
 
 ![TiCDC storage consumer overview](/media/ticdc/ticdc-storage-consumer-overview.png)
 
-The components of the consumer and their features are described as follows:
+コンシューマのコンポーネントとその機能は次のように説明されます。
 
 ```go
 type StorageReader struct {
@@ -95,27 +95,25 @@ type TableVersionConsumer struct {
 func (tc *TableVersionConsumer) ExecuteDML() {}
 ```
 
-## Process DDL events
+## DDL イベントを処理する {#process-ddl-events}
 
-The consumer traverses the directory for the first time. The following is an example:
+コンシューマは初めてディレクトリを横断します。以下は例です。
 
-```
-├── metadata
-└── test
-    ├── tbl_1
-    │   └── 437752935075545091
-    │       ├── CDC000001.json
-    │       └── schema.json
-```
+    ├── metadata
+    └── test
+        ├── tbl_1
+        │   └── 437752935075545091
+        │       ├── CDC000001.json
+        │       └── schema.json
 
-The consumer parses the table schema of the `schema.json` file and obtains the DDL Query statements:
+コンシューマは`schema.json`ファイルのテーブル スキーマを解析し、DDL クエリ ステートメントを取得します。
 
-- If no Query statement is found or `TableVersion` is less than the consumer checkpoint, the consumer skips this statement.
-- If Query statements exist or `TableVersion` is equal to or greater than the consumer checkpoint, the consumer executes the DDL statements in the downstream MySQL.
+-   Query ステートメントが見つからないか、コンシューマ チェックポイントより`TableVersion`が小さい場合、コンシューマはこのステートメントをスキップします。
+-   Query ステートメントが存在するか、 `TableVersion`がコンシューマ チェックポイント以上の場合、コンシューマはダウンストリーム MySQL で DDL ステートメントを実行します。
 
-Then the consumer starts replicating the `CDC000001.json` file.
+次に、コンシューマは`CDC000001.json`ファイルの複製を開始します。
 
-In the following example, the DDL Query statement in the `test/tbl_1/437752935075545091/schema.json` file is not empty:
+次の例では、 `test/tbl_1/437752935075545091/schema.json`ファイルの DDL Query ステートメントは空ではありません。
 
 ```json
 {
@@ -155,24 +153,22 @@ In the following example, the DDL Query statement in the `test/tbl_1/43775293507
 }
 ```
 
-When the consumer traverses the directory again, it finds a new version directory of the table. Note that the consumer can consume data in the new directory only after all files in the `test/tbl_1/437752935075545091` directory have been consumed.
+コンシューマがディレクトリを再度トラバースすると、テーブルの新しいバージョンのディレクトリが見つかります。コンシューマは、 `test/tbl_1/437752935075545091`ディレクトリ内のすべてのファイルが消費された後でのみ、新しいディレクトリ内のデータを消費できることに注意してください。
 
-```
-├── metadata
-└── test
-    ├── tbl_1
-    │   ├── 437752935075545091
-    │   │   ├── CDC000001.json
-    │   │   └── schema.json
-    │   └── 437752935075546092
-    │   │   └── CDC000001.json
-    │   │   └── schema.json
-```
+    ├── metadata
+    └── test
+        ├── tbl_1
+        │   ├── 437752935075545091
+        │   │   ├── CDC000001.json
+        │   │   └── schema.json
+        │   └── 437752935075546092
+        │   │   └── CDC000001.json
+        │   │   └── schema.json
 
-The consumption logic is consistent. Specifically, the consumer parses the table schema of the `schema.json` file and obtains and processes DDL Query statements accordingly. Then the consumer starts replicating the `CDC000001.json` file.
+消費ロジックは一貫しています。具体的には、コンシューマは`schema.json`ファイルのテーブル スキーマを解析し、それに応じて DDL クエリ ステートメントを取得して処理します。次に、コンシューマは`CDC000001.json`ファイルの複製を開始します。
 
-## Process DML events
+## DML イベントの処理 {#process-dml-events}
 
-After DDL events are properly processed, you can process DML events in the `{schema}/{table}/{table-version-separator}/` directory based on the specific file format (CSV or Canal-JSON) and file number.
+DDL イベントが適切に処理されると、特定のファイル形式 (CSV または Canal-JSON) とファイル番号に基づいて`{schema}/{table}/{table-version-separator}/`ディレクトリ内の DML イベントを処理できます。
 
-TiCDC ensures that data is replicated at least once. Therefore, there might be duplicate data. You need to compare the commit ts of the change data with the consumer checkpoint. If the commit ts is less than the consumer checkpoint, you need to perform deduplication.
+TiCDC は、データが少なくとも 1 回複製されることを保証します。したがって、重複したデータが存在する可能性があります。変更データのコミット ts をコンシューマ チェックポイントと比較する必要があります。コミット ts がコンシューマー チェックポイントより小さい場合は、重複排除を実行する必要があります。

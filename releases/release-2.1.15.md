@@ -2,50 +2,50 @@
 title: TiDB 2.1.15 Release Notes
 ---
 
-# TiDB 2.1.15 Release Notes
+# TiDB 2.1.15 リリースノート {#tidb-2-1-15-release-notes}
 
-Release date: July 16, 2019
+発売日：2019年7月16日
 
-TiDB version: 2.1.15
+TiDB バージョン: 2.1.15
 
-TiDB Ansible version: 2.1.15
+TiDB Ansible バージョン: 2.1.15
 
-## TiDB
+## TiDB {#tidb}
 
-+ Fix the issue that the `DATE_ADD` function returns wrong results due to incorrect alignment when dealing with microseconds [#11289](https://github.com/pingcap/tidb/pull/11289)
-+ Fix the issue that an error is reported when the empty value in the string column is compared with `FLOAT` or `INT` [#11279](https://github.com/pingcap/tidb/pull/11279)
-+ Fix the issue that the `INSERT` function fails to correctly return the `NULL` value when a parameter is `NULL` [#11249](https://github.com/pingcap/tidb/pull/11249)
-+ Fix the issue that an error occurs when indexing the column of the non-string type and `0` length [#11215](https://github.com/pingcap/tidb/pull/11215)
-+ Add the `SHOW TABLE REGIONS` statement to query the Region distribution of a table through SQL statements [#11238](https://github.com/pingcap/tidb/pull/11238)
-+ Fix the issue that an error is reported when using the `UPDATE … SELECT` statement because the projection elimination is used to optimize rules in the `SELECT` subqueries [#11254](https://github.com/pingcap/tidb/pull/11254)
-+ Add the `ADMIN PLUGINS ENABLE`/`ADMIN PLUGINS DISABLE` SQL statement to dynamically enable or disable plugins [#11189](https://github.com/pingcap/tidb/pull/11189)
-+ Add the session connection information in the Audit plugin [#11189](https://github.com/pingcap/tidb/pull/11189)
-+ Fix the panic issue that happens when a column is queried on multiple times and the returned result is `NULL` during point queries [#11227](https://github.com/pingcap/tidb/pull/11227)
-+ Add the `tidb_scatter_region` configuration item to scatter table Regions when creating a table [#11213](https://github.com/pingcap/tidb/pull/11213)
-+ Fix the data race issue caused by non-thread safe `rand.Rand` when using the `RAND` function [#11170](https://github.com/pingcap/tidb/pull/11170)
-+ Fix the issue that the comparison result of integers and non-integers is incorrect in some cases [#11191](https://github.com/pingcap/tidb/pull/11191)
-+ Support modifying the collation of a database or a table, but the character set of the database/table has to be UTF-8 or utf8mb4 [#11085](https://github.com/pingcap/tidb/pull/11085)
-+ Fix the issue that the precision shown by the `SHOW CREATE TABLE` statement is incomplete when `CURRENT_TIMESTAMP` is used as the default value of the column and the float precision is specified [#11087](https://github.com/pingcap/tidb/pull/11087)
+-   マイクロ秒[#11289](https://github.com/pingcap/tidb/pull/11289)を処理するときに、 `DATE_ADD`関数が不正な位置合わせにより間違った結果を返す問題を修正します。
+-   文字列列の空の値が`FLOAT`または`INT`と比較されるとエラーが報告される問題を修正します[#11279](https://github.com/pingcap/tidb/pull/11279)
+-   パラメータが`NULL` [#11249](https://github.com/pingcap/tidb/pull/11249)の場合、 `INSERT`関数が`NULL`値を正しく返せない問題を修正します。
+-   非文字列型かつ長さ`0` [#11215](https://github.com/pingcap/tidb/pull/11215)のインデックス作成時にエラーが発生する問題を修正
+-   SQL ステートメント[#11238](https://github.com/pingcap/tidb/pull/11238)を通じてテーブルのリージョン分布をクエリする`SHOW TABLE REGIONS`ステートメントを追加します。
+-   [#11254](https://github.com/pingcap/tidb/pull/11254) `SELECT`サブクエリのルールを最適化するために射影除去が使用されるため、 `UPDATE … SELECT`ステートメントを使用するとエラーが報告される問題を修正します。
+-   `ADMIN PLUGINS ENABLE` / `ADMIN PLUGINS DISABLE` SQL ステートメントを追加して、プラグインを動的に有効または無効にします[#11189](https://github.com/pingcap/tidb/pull/11189)
+-   監査プラグイン[#11189](https://github.com/pingcap/tidb/pull/11189)にセッション接続情報を追加します。
+-   列が複数回クエリされ、ポイント クエリ中に返された結果が`NULL`ある場合に発生するpanicの問題を修正します[#11227](https://github.com/pingcap/tidb/pull/11227)
+-   テーブル[#11213](https://github.com/pingcap/tidb/pull/11213)を作成するときに、 `tidb_scatter_region`構成アイテムを散布テーブルのリージョンに追加します。
+-   `RAND`関数[#11170](https://github.com/pingcap/tidb/pull/11170)の使用時に非スレッド セーフ`rand.Rand`によって引き起こされるデータ競合の問題を修正します。
+-   整数と非整数の比較結果が正しくない場合がある問題を修正[#11191](https://github.com/pingcap/tidb/pull/11191)
+-   データベースまたはテーブルの照合順序の変更をサポートしますが、データベース/テーブルの文字セットは UTF-8 または utf8mb4 である必要があります[#11085](https://github.com/pingcap/tidb/pull/11085)
+-   カラムのデフォルト値として`CURRENT_TIMESTAMP`使用し、float 精度を[#11087](https://github.com/pingcap/tidb/pull/11087)に指定した場合、 `SHOW CREATE TABLE`ステートメントで示される精度が不完全になる問題を修正しました。
 
-## TiKV
+## TiKV {#tikv}
 
-+ Unify the log format [#5083](https://github.com/tikv/tikv/pull/5083)
-+ Improve the accuracy of Region's approximate size or keys in extreme cases to improve the accuracy of scheduling [#5085](https://github.com/tikv/tikv/pull/5085)
+-   ログフォーマットの統一[#5083](https://github.com/tikv/tikv/pull/5083)
+-   極端な場合のリージョンのおおよそのサイズまたはキーの精度を向上させ、スケジューリング[#5085](https://github.com/tikv/tikv/pull/5085)の精度を向上させます。
 
-## PD
+## PD {#pd}
 
-+ Unify the log format [#1625](https://github.com/pingcap/pd/pull/1625)
+-   ログフォーマットの統一[#1625](https://github.com/pingcap/pd/pull/1625)
 
-## Tools
+## ツール {#tools}
 
-TiDB Binlog
+TiDBBinlog
 
-+ Optimize the Pump GC strategy and remove the restriction that the unconsumed binlog cannot be cleaned to make sure that the resources are not occupied for a long time [#663](https://github.com/pingcap/tidb-binlog/pull/663)
+-   PumpGC 戦略を最適化し、未消費のbinlogをクリーンアップできないという制限を削除して、リソースが長時間占有されないようにする[#663](https://github.com/pingcap/tidb-binlog/pull/663)
 
 TiDB Lightning
 
-+ Fix the import error that happens when the column names specified by the SQL dump are not in lowercase [#210](https://github.com/pingcap/tidb-lightning/pull/210)
+-   SQL ダンプで指定された列名が小文字ではない場合に発生するインポート エラーを修正[#210](https://github.com/pingcap/tidb-lightning/pull/210)
 
-## TiDB Ansible
+## TiDB Ansible {#tidb-ansible}
 
-+ Add the `parse duration` and `compile duration` monitoring items in TiDB Dashboard to monitor the time that it takes to parse SQL statements and execute compilation [#815](https://github.com/pingcap/tidb-ansible/pull/815)
+-   TiDB ダッシュボードに監視項目`parse duration`と`compile duration`を追加して、SQL ステートメントの解析とコンパイルの実行にかかる時間を監視します[#815](https://github.com/pingcap/tidb-ansible/pull/815)

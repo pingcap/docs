@@ -3,167 +3,167 @@ title: Connect to TiDB with MySQL Workbench
 summary: Learn how to connect to TiDB using MySQL Workbench.
 ---
 
-# Connect to TiDB with MySQL Workbench
+# MySQL Workbench を使用して TiDB に接続する {#connect-to-tidb-with-mysql-workbench}
 
-TiDB is a MySQL-compatible database, and [MySQL Workbench](https://www.mysql.com/products/workbench/) is a GUI tool set for MySQL database users.
+TiDB は MySQL と互換性のあるデータベースであり、 [MySQL ワークベンチ](https://www.mysql.com/products/workbench/)は MySQL データベース ユーザー向けの GUI ツール セットです。
 
-> **Warning:**
+> **警告：**
 >
-> - Although you can use MySQL Workbench to connect to TiDB due to its MySQL compatibility, MySQL Workbench does not fully support TiDB. You might encounter some issues during usage as it treats TiDB as MySQL.
-> - It is recommended to use other GUI tools that officially support TiDB, such as [DataGrip](/develop/dev-guide-gui-datagrip.md), [DBeaver](/develop/dev-guide-gui-dbeaver.md), and [VS Code SQLTools](/develop/dev-guide-gui-vscode-sqltools.md). For a complete list of GUI tools that fully supported by TiDB, see [Third-party tools supported by TiDB](/develop/dev-guide-third-party-support.md#gui).
+> -   MySQL との互換性により、MySQL Workbench を使用して TiDB に接続できますが、MySQL Workbench は TiDB を完全にはサポートしていません。 TiDB を MySQL として扱うため、使用中に問題が発生する可能性があります。
+> -   TiDB を正式にサポートする他の GUI ツール ( [データグリップ](/develop/dev-guide-gui-datagrip.md) 、 [Dビーバー](/develop/dev-guide-gui-dbeaver.md) 、 [VS コード SQL ツール](/develop/dev-guide-gui-vscode-sqltools.md)など) を使用することをお勧めします。 TiDB で完全にサポートされている GUI ツールの完全なリストについては、 [TiDB がサポートするサードパーティ ツール](/develop/dev-guide-third-party-support.md#gui)を参照してください。
 
-In this tutorial, you can learn how to connect to your TiDB cluster using MySQL Workbench.
+このチュートリアルでは、MySQL Workbench を使用して TiDB クラスターに接続する方法を学習できます。
 
-> **Note:**
+> **注記：**
 >
-> This tutorial is compatible with TiDB Serverless, TiDB Dedicated, and TiDB Self-Hosted.
+> このチュートリアルは、TiDB サーバーレス、TiDB 専用、および TiDB セルフホストと互換性があります。
 
-## Prerequisites
+## 前提条件 {#prerequisites}
 
-To complete this tutorial, you need:
+このチュートリアルを完了するには、次のものが必要です。
 
-- [MySQL Workbench](https://dev.mysql.com/downloads/workbench/) **8.0.31** or later versions.
-- A TiDB cluster.
+-   [MySQL ワークベンチ](https://dev.mysql.com/downloads/workbench/) **8.0.31**以降のバージョン。
+-   TiDB クラスター。
 
 <CustomContent platform="tidb">
 
-**If you don't have a TiDB cluster, you can create one as follows:**
+**TiDB クラスターがない場合は、次のように作成できます。**
 
-- (Recommended) Follow [Creating a TiDB Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
-- Follow [Deploy a local test TiDB cluster](/quick-start-with-tidb.md#deploy-a-local-test-cluster) or [Deploy a production TiDB cluster](/production-deployment-using-tiup.md) to create a local cluster.
+-   (推奨) [TiDB サーバーレスクラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って、独自のTiDB Cloudクラスターを作成します。
+-   [ローカル テスト TiDB クラスターをデプロイ](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番TiDB クラスターをデプロイ](/production-deployment-using-tiup.md)に従ってローカル クラスターを作成します。
 
 </CustomContent>
 <CustomContent platform="tidb-cloud">
 
-**If you don't have a TiDB cluster, you can create one as follows:**
+**TiDB クラスターがない場合は、次のように作成できます。**
 
-- (Recommended) Follow [Creating a TiDB Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
-- Follow [Deploy a local test TiDB cluster](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb#deploy-a-local-test-cluster) or [Deploy a production TiDB cluster](https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup) to create a local cluster.
+-   (推奨) [TiDB サーバーレスクラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って、独自のTiDB Cloudクラスターを作成します。
+-   [ローカル テスト TiDB クラスターをデプロイ](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb#deploy-a-local-test-cluster)または[本番TiDB クラスターをデプロイ](https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup)に従ってローカル クラスターを作成します。
 
 </CustomContent>
 
-## Connect to TiDB
+## TiDB に接続する {#connect-to-tidb}
 
-Connect to your TiDB cluster depending on the TiDB deployment option you have selected.
+選択した TiDB デプロイメント オプションに応じて、TiDB クラスターに接続します。
 
 <SimpleTab>
 <div label="TiDB Serverless">
 
-1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
+1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット クラスターの名前をクリックして、その概要ページに移動します。
 
-2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
+2.  右上隅にある**「接続」**をクリックします。接続ダイアログが表示されます。
 
-3. Ensure the configurations in the connection dialog match your operating environment.
+3.  接続ダイアログの設定が動作環境と一致していることを確認してください。
 
-    - **Endpoint Type** is set to `Public`.
-    - **Connect With** is set to `General`.
-    - **Operating System** matches your environment.
+    -   **エンドポイント タイプは**`Public`に設定されます。
+    -   **[接続先] は**`General`に設定されます。
+    -   **オペレーティング システムが**環境に一致します。
 
-4. Click **Create password** to create a random password.
+4.  **「パスワードの作成」**をクリックしてランダムなパスワードを作成します。
 
-    > **Tip:**
+    > **ヒント：**
     >
-    > If you have created a password before, you can either use the original password or click **Reset password** to generate a new one.
+    > 以前にパスワードを作成したことがある場合は、元のパスワードを使用するか、 **「パスワードのリセット」**をクリックして新しいパスワードを生成できます。
 
-5. Launch MySQL Workbench and click **+** near the **MySQL Connections** title.
+5.  MySQL Workbench を起動し、 **MySQL Connections**タイトルの近くにある**+**をクリックします。
 
     ![MySQL Workbench: add new connection](/media/develop/navicat-add-new-connection.png)
 
-6. In the **Setup New Connection** dialog, configure the following connection parameters:
+6.  **[新しい接続のセットアップ] ダイアログ**で、次の接続パラメータを構成します。
 
-    - **Connection Name**: give this connection a meaningful name.
-    - **Hostname**: enter the `host` parameter from the TiDB Cloud connection dialog.
-    - **Port**: enter the `port` parameter from the TiDB Cloud connection dialog.
-    - **Username**: enter the `user` parameter from the TiDB Cloud connection dialog.
-    - **Password**: click **Store in Keychain ...**, enter the password of the TiDB Serverless cluster, and then click **OK** to store the password.
+    -   **接続名**: この接続に意味のある名前を付けます。
+    -   **ホスト名**: TiDB Cloud接続ダイアログから`host`パラメータを入力します。
+    -   **ポート**: TiDB Cloud接続ダイアログから`port`パラメータを入力します。
+    -   **ユーザー名**: TiDB Cloud接続ダイアログから`user`パラメータを入力します。
+    -   **パスワード**: **[キーチェーンに保存...]**をクリックし、TiDB サーバーレス クラスターのパスワードを入力し、 **[OK]**をクリックしてパスワードを保存します。
 
         ![MySQL Workbench: store the password of TiDB Serverless in keychain](/media/develop/mysql-workbench-store-password-in-keychain.png)
 
-    The following figure shows an example of the connection parameters:
+    次の図は、接続パラメータの例を示しています。
 
     ![MySQL Workbench: configure connection settings for TiDB Serverless](/media/develop/mysql-workbench-connection-config-serverless-parameters.png)
 
-7. Click **Test Connection** to validate the connection to the TiDB Serverless cluster.
+7.  **「接続のテスト」**をクリックして、TiDB サーバーレスクラスターへの接続を検証します。
 
-8. If the connection test is successful, you can see the **Successfully made the MySQL connection** message. Click **OK** to save the connection configuration.
+8.  接続テストが成功すると、 **「MySQL 接続が成功しました」**というメッセージが表示されます。 **「OK」**をクリックして接続構成を保存します。
 
 </div>
 <div label="TiDB Dedicated">
 
-1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
+1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット クラスターの名前をクリックして、その概要ページに移動します。
 
-2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
+2.  右上隅にある**「接続」**をクリックします。接続ダイアログが表示されます。
 
-3. Click **Allow Access from Anywhere**.
+3.  **[どこからでもアクセスを許可する]**をクリックします。
 
-    For more details about how to obtain the connection string, refer to [TiDB Dedicated standard connection](https://docs.pingcap.com/tidbcloud/connect-via-standard-connection).
+    接続文字列の取得方法の詳細については、 [TiDB専用標準接続](https://docs.pingcap.com/tidbcloud/connect-via-standard-connection)を参照してください。
 
-4. Launch MySQL Workbench and click **+** near the **MySQL Connections** title.
+4.  MySQL Workbench を起動し、 **MySQL Connections**タイトルの近くにある**+**をクリックします。
 
     ![MySQL Workbench: add new connection](/media/develop/navicat-add-new-connection.png)
 
-5. In the **Setup New Connection** dialog, configure the following connection parameters:
+5.  **[新しい接続のセットアップ] ダイアログ**で、次の接続パラメータを構成します。
 
-    - **Connection Name**: give this connection a meaningful name.
-    - **Hostname**: enter the `host` parameter from the TiDB Cloud connection dialog.
-    - **Port**: enter the `port` parameter from the TiDB Cloud connection dialog.
-    - **Username**: enter the `user` parameter from the TiDB Cloud connection dialog.
-    - **Password**: click **Store in Keychain ...**, enter the password of the TiDB Dedicated cluster, and then click **OK** to store the password.
+    -   **接続名**: この接続に意味のある名前を付けます。
+    -   **ホスト名**: TiDB Cloud接続ダイアログから`host`パラメータを入力します。
+    -   **ポート**: TiDB Cloud接続ダイアログから`port`パラメータを入力します。
+    -   **ユーザー名**: TiDB Cloud接続ダイアログから`user`パラメータを入力します。
+    -   **パスワード**: **[キーチェーンに保存...]**をクリックし、TiDB 専用クラスターのパスワードを入力し、 **[OK]**をクリックしてパスワードを保存します。
 
         ![MySQL Workbench: store the password of TiDB Dedicated in keychain](/media/develop/mysql-workbench-store-dedicated-password-in-keychain.png)
 
-    The following figure shows an example of the connection parameters:
+    次の図は、接続パラメータの例を示しています。
 
     ![MySQL Workbench: configure connection settings for TiDB Dedicated](/media/develop/mysql-workbench-connection-config-dedicated-parameters.png)
 
-6. Click **Test Connection** to validate the connection to the TiDB Dedicated cluster.
+6.  **「接続のテスト」**をクリックして、TiDB 専用クラスターへの接続を検証します。
 
-7. If the connection test is successful, you can see the **Successfully made the MySQL connection** message. Click **OK** to save the connection configuration.
+7.  接続テストが成功すると、 **「MySQL 接続が成功しました」**というメッセージが表示されます。 **「OK」**をクリックして接続構成を保存します。
 
 </div>
 <div label="TiDB Self-Hosted">
 
-1. Launch MySQL Workbench and click **+** near the **MySQL Connections** title.
+1.  MySQL Workbench を起動し、 **MySQL Connections**タイトルの近くにある**+**をクリックします。
 
     ![MySQL Workbench: add new connection](/media/develop/navicat-add-new-connection.png)
 
-2. In the **Setup New Connection** dialog, configure the following connection parameters:
+2.  **[新しい接続のセットアップ] ダイアログ**で、次の接続パラメータを構成します。
 
-    - **Connection Name**: give this connection a meaningful name.
-    - **Hostname**: enter the IP address or domain name of your TiDB Self-Hosted cluster.
-    - **Port**: enter the port number of your TiDB Self-Hosted cluster.
-    - **Username**: enter the username to use to connect to your TiDB.
-    - **Password**: click **Store in Keychain ...**, enter the password to use to connect to your TiDB cluster, and then click **OK** to store the password.
+    -   **接続名**: この接続に意味のある名前を付けます。
+    -   **ホスト名**: TiDB セルフホスト クラスターの IP アドレスまたはドメイン名を入力します。
+    -   **ポート**: TiDB セルフホスト クラスターのポート番号を入力します。
+    -   **ユーザー名**: TiDB への接続に使用するユーザー名を入力します。
+    -   **パスワード**: **[キーチェーンに保存...]**をクリックし、TiDB クラスターへの接続に使用するパスワードを入力し、 **[OK]**をクリックしてパスワードを保存します。
 
         ![MySQL Workbench: store the password of TiDB Self-Hosted in keychain](/media/develop/mysql-workbench-store-self-hosted-password-in-keychain.png)
 
-    The following figure shows an example of the connection parameters:
+    次の図は、接続パラメータの例を示しています。
 
     ![MySQL Workbench: configure connection settings for TiDB Self-Hosted](/media/develop/mysql-workbench-connection-config-self-hosted-parameters.png)
 
-3. Click **Test Connection** to validate the connection to the TiDB Self-Hosted cluster.
+3.  **[接続のテスト]**をクリックして、TiDB セルフホスト クラスターへの接続を検証します。
 
-4. If the connection test is successful, you can see the **Successfully made the MySQL connection** message. Click **OK** to save the connection configuration.
+4.  接続テストが成功すると、 **「MySQL 接続が成功しました」**というメッセージが表示されます。 **「OK」**をクリックして接続構成を保存します。
 
 </div>
 </SimpleTab>
 
-## Next steps
+## 次のステップ {#next-steps}
 
-- Learn more usage of MySQL Workbench from [the documentation of MySQL Workbench](https://dev.mysql.com/doc/workbench/en/).
-- Learn the best practices for TiDB application development with the chapters in the [Developer guide](/develop/dev-guide-overview.md), such as [Insert data](/develop/dev-guide-insert-data.md), [Update data](/develop/dev-guide-update-data.md), [Delete data](/develop/dev-guide-delete-data.md), [Single table reading](/develop/dev-guide-get-data-from-single-table.md), [Transactions](/develop/dev-guide-transaction-overview.md), and [SQL performance optimization](/develop/dev-guide-optimize-sql-overview.md).
-- Learn through the professional [TiDB developer courses](https://www.pingcap.com/education/) and earn [TiDB certifications](https://www.pingcap.com/education/certification/) after passing the exam.
+-   MySQL Workbench の詳しい使い方を[MySQL Workbench のドキュメント](https://dev.mysql.com/doc/workbench/en/)から学びましょう。
+-   TiDB アプリケーション開発[単一テーブルの読み取り](/develop/dev-guide-get-data-from-single-table.md)ベスト プラクティスについて[取引](/develop/dev-guide-transaction-overview.md) 、 [開発者ガイド](/develop/dev-guide-overview.md)の章 ( [データの挿入](/develop/dev-guide-insert-data.md)など) [データを更新する](/develop/dev-guide-update-data.md)参照[データの削除](/develop/dev-guide-delete-data.md) [SQLパフォーマンスの最適化](/develop/dev-guide-optimize-sql-overview.md)ください。
+-   プロフェッショナルとして[TiDB 開発者コース](https://www.pingcap.com/education/)を学び、試験合格後に[TiDB 認定](https://www.pingcap.com/education/certification/)獲得します。
 
-## Need help?
+## 助けが必要？ {#need-help}
 
 <CustomContent platform="tidb">
 
-Ask questions on the [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc), or [create a support ticket](/support.md).
+[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[サポートチケットを作成する](/support.md)について質問してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-Ask questions on the [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc), or [create a support ticket](/tidb-cloud/tidb-cloud-support.md).
+[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[サポートチケットを作成する](/tidb-cloud/tidb-cloud-support.md)について質問してください。
 
 </CustomContent>

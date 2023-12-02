@@ -2,99 +2,99 @@
 title: TiDB 3.0.6 Release Notes
 ---
 
-# TiDB 3.0.6 Release Notes
+# TiDB 3.0.6 リリースノート {#tidb-3-0-6-release-notes}
 
-Release date: November 28, 2019
+発売日：2019年11月28日
 
-TiDB version: 3.0.6
+TiDB バージョン: 3.0.6
 
-TiDB Ansible version: 3.0.6
+TiDB Ansible バージョン: 3.0.6
 
-## TiDB
+## TiDB {#tidb}
 
-+ SQL Optimizer
-    - Fix the issue that the result is incorrect after the window function AST restores SQL text, for example, `over w` being mistakenly restored to `over (w)` [#12933](https://github.com/pingcap/tidb/pull/12933)
-    - Fix the issue of pushing down `STREAM AGG()` to `doubleRead` [#12690](https://github.com/pingcap/tidb/pull/12690)
-    - Fix the issue that quotes are incorrectly handled for SQL binding [#13117](https://github.com/pingcap/tidb/pull/13117)
-    - Optimize the `select max(_tidb_rowid) from t` scenario to avoid full table scans [#13095](https://github.com/pingcap/tidb/pull/13095)
-    - Fix the issue that the query result is incorrect when the query statement contains a variable assignment expression [#13231](https://github.com/pingcap/tidb/pull/13231)
-    - Fix the issue that the result is incorrect when the `UPDATE` statement contains both a sub-query and a generated column; fix the `UPDATE` statement execution error when this statement contains two same-named tables from different source databases [#13350](https://github.com/pingcap/tidb/pull/13350)
-    - Support `_tidb_rowid` for point queries [#13416](https://github.com/pingcap/tidb/pull/13416)
-    - Fix the issue that the generated query execution plan is incorrect, caused by incorrect usage of partitioned table statistics [#13628](https://github.com/pingcap/tidb/pull/13628)
-+ SQL Execution Engine
-    - Fix the issue that TiDB is incompatible with MySQL when handling invalid values of the year type [#12745](https://github.com/pingcap/tidb/pull/12745)
-    - Reuse `Chunk` in the `INSERT ON DUPLICATE UPDATE` statement to reduce the memory overhead [#12998](https://github.com/pingcap/tidb/pull/12998)
-    - Add the support for the `JSON_VALID` built-in function [#13133](https://github.com/pingcap/tidb/pull/13133)
-    - Support executing `ADMIN CHECK TABLE` on partitioned tables [#13140](https://github.com/pingcap/tidb/pull/13140)
-    - Fix the panic issue when `FAST ANALYZE` is executed on empty tables [#13343](https://github.com/pingcap/tidb/pull/13343)
-    - Fix the panic issue when executing `FAST ANALYZE` on an empty table that contains multi-column indexes [#13394](https://github.com/pingcap/tidb/pull/13394)
-    - Fix the issue that the estimated number of rows is greater than 1 when the `WHERE` clause contains an equal condition on the unique key [#13382](https://github.com/pingcap/tidb/pull/13382)
-    - Fix the issue that the returned data might be duplicated when `Streaming` is enabled in TiDB [#13254](https://github.com/pingcap/tidb/pull/13254)
-    - Extract the top N values from the count-min sketch to improve the estimation accuracy [#13429](https://github.com/pingcap/tidb/pull/13429)
-+ Server
-    - Make requests sent to TiKV fail quickly when the gRPC dial times out [#12926](https://github.com/pingcap/tidb/pull/12926)
-    - Add the following virtual tables: [#13009](https://github.com/pingcap/tidb/pull/13009)
-        - `performance_schema.tidb_profile_allocs`
-        - `performance_schema.tidb_profile_block`
-        - `performance_schema.tidb_profile_cpu`
-        - `performance_schema.tidb_profile_goroutines`
-    - Fix the issue that the `kill` command does not work when the query is waiting for pessimistic locking [#12989](https://github.com/pingcap/tidb/pull/12989)
-    - Do not do asynchronous rollback when acquiring pessimistic locking fails and the transaction only involves modifying a single key [#12707](https://github.com/pingcap/tidb/pull/12707)
-    - Fix the panic issue when the response for the request of splitting Regions is empty [#13092](https://github.com/pingcap/tidb/pull/13092)
-    - Avoid unnecessary backoff when `PessimisticLock` returns a locking error [#13116](https://github.com/pingcap/tidb/pull/13116)
-    - Modify the TiDB behavior for checking configurations by printing a warning log for unrecognized configuration option [#13272](https://github.com/pingcap/tidb/pull/13272)
-    - Support obtaining the binlog status of all TiDB nodes via the `/info/all` interface [#13187](https://github.com/pingcap/tidb/pull/13187)
-    - Fix the issue that goroutine might leak when TiDB kills connections [#13251](https://github.com/pingcap/tidb/pull/13251)
-    - Make the `innodb_lock_wait_timeout` parameter work in pessimistic transactions to control the lock wait timeout for pessimistic locking [#13165](https://github.com/pingcap/tidb/pull/13165)
-    - Stop updating pessimistic transaction TTL when pessimistic transactional queries are killed to prevent other transactions from waiting unnecessarily [#13046](https://github.com/pingcap/tidb/pull/13046)
-+ DDL
-    - Fix the issue that the execution result of `SHOW CREATE VIEW` in TiDB is inconsistent with that in MySQL [#12912](https://github.com/pingcap/tidb/pull/12912)
-    - Support creating `View` based on `union`, for example, `create view v as select * from t1 union select * from t2` [#12955](https://github.com/pingcap/tidb/pull/12955)
-    - Add more transaction-related fields for the `slow_query` table: [#13072](https://github.com/pingcap/tidb/pull/13072)
-        - `Prewrite_time`
-        - `Commit_time`
-        - `Get_commit_ts_time`
-        - `Commit_backoff_time`
-        - `Backoff_types`
-        - `Resolve_lock_time`
-        - `Local_latch_wait_time`
-        - `Write_key`
-        - `Write_size`
-        - `Prewrite_region`
-        - `Txn_retry`
-    - Use the table’s `COLLATE` instead of the system’s default charset in the column when a table is created and the table contains `COLLATE` [#13174](https://github.com/pingcap/tidb/pull/13174)
-    - Limit the length of the index name when creating a table [#13310](https://github.com/pingcap/tidb/pull/13310)
-    - Fix the issue that the table name length is not checked when a table is renamed [#13346](https://github.com/pingcap/tidb/pull/13346)
-    - Add the `alter-primary-key` configuration (disabled by default) to support adding/dropping the primary key in TiDB [#13522](https://github.com/pingcap/tidb/pull/13522)
+-   SQLオプティマイザー
+    -   ウィンドウ関数 AST が SQL テキストを復元した後の結果が正しくない問題を修正します。たとえば、 `over w`が誤って`over (w)` [#12933](https://github.com/pingcap/tidb/pull/12933)に復元されるなどです。
+    -   `STREAM AGG()`から`doubleRead` [#12690](https://github.com/pingcap/tidb/pull/12690)まで押し下げられる問題を修正
+    -   SQL バインディング[#13117](https://github.com/pingcap/tidb/pull/13117)で引用符が正しく処理されない問題を修正します。
+    -   テーブル全体のスキャンを回避するために`select max(_tidb_rowid) from t`シナリオを最適化する[#13095](https://github.com/pingcap/tidb/pull/13095)
+    -   クエリ ステートメントに変数代入式[#13231](https://github.com/pingcap/tidb/pull/13231)が含まれている場合、クエリ結果が正しくない問題を修正します。
+    -   `UPDATE`ステートメントにサブクエリと生成された列の両方が含まれている場合、結果が正しくないという問題を修正します。このステートメントに異なるソース データベースの 2 `UPDATE`の同じ名前のテーブルが含まれている場合のステートメント実行エラーを修正します[#13350](https://github.com/pingcap/tidb/pull/13350)
+    -   ポイントクエリ[#13416](https://github.com/pingcap/tidb/pull/13416)のサポート`_tidb_rowid`
+    -   パーティションテーブル統計[#13628](https://github.com/pingcap/tidb/pull/13628)の誤った使用が原因で、生成されたクエリ実行プランが正しくない問題を修正します。
+-   SQL実行エンジン
+    -   年タイプ[#12745](https://github.com/pingcap/tidb/pull/12745)の無効な値を処理するときに TiDB が MySQL と互換性がないという問題を修正
+    -   `INSERT ON DUPLICATE UPDATE`ステートメントの`Chunk`再利用してメモリのオーバーヘッドを削減します[#12998](https://github.com/pingcap/tidb/pull/12998)
+    -   `JSON_VALID`組み込み関数[#13133](https://github.com/pingcap/tidb/pull/13133)のサポートを追加します。
+    -   パーティション化されたテーブル[#13140](https://github.com/pingcap/tidb/pull/13140)での`ADMIN CHECK TABLE`の実行をサポート
+    -   空のテーブル[#13343](https://github.com/pingcap/tidb/pull/13343)で`FAST ANALYZE`が実行されたときのpanicの問題を修正
+    -   複数列インデックスを含む空のテーブルに対して`FAST ANALYZE`を実行するときのpanicの問題を修正します[#13394](https://github.com/pingcap/tidb/pull/13394)
+    -   `WHERE`句に一意のキー[#13382](https://github.com/pingcap/tidb/pull/13382)に対する等しい条件が含まれている場合、推定行数が 1 より大きくなる問題を修正します。
+    -   TiDB [#13254](https://github.com/pingcap/tidb/pull/13254)で`Streaming`を有効にすると返されるデータが重複する可能性がある問題を修正
+    -   count-min スケッチから上位 N 個の値を抽出して、推定精度を向上させます[#13429](https://github.com/pingcap/tidb/pull/13429)
+-   サーバ
+    -   gRPC ダイヤルがタイムアウトすると、TiKV に送信されたリクエストがすぐに失敗するようにします[#12926](https://github.com/pingcap/tidb/pull/12926)
+    -   次の仮想テーブルを追加します。 [#13009](https://github.com/pingcap/tidb/pull/13009)
+        -   `performance_schema.tidb_profile_allocs`
+        -   `performance_schema.tidb_profile_block`
+        -   `performance_schema.tidb_profile_cpu`
+        -   `performance_schema.tidb_profile_goroutines`
+    -   クエリが悲観的ロックを待機しているときに`kill`コマンドが機能しない問題を修正します[#12989](https://github.com/pingcap/tidb/pull/12989)
+    -   悲観的ロックの取得が失敗し、トランザクションに単一のキーの変更のみが含まれる場合は、非同期ロールバックを実行しないでください[#12707](https://github.com/pingcap/tidb/pull/12707)
+    -   リージョンの分割リクエストに対する応答が空の場合のpanicの問題を修正[#13092](https://github.com/pingcap/tidb/pull/13092)
+    -   `PessimisticLock`ロック エラーを返した場合に不必要なバックオフを回避します[#13116](https://github.com/pingcap/tidb/pull/13116)
+    -   認識されない構成オプション[#13272](https://github.com/pingcap/tidb/pull/13272)の警告ログを出力することで、構成をチェックするための TiDB の動作を変更します。
+    -   `/info/all`インターフェイスを介したすべての TiDB ノードのbinlogステータスの取得をサポート[#13187](https://github.com/pingcap/tidb/pull/13187)
+    -   TiDB が接続を強制終了するときに goroutine がリークする可能性がある問題を修正します[#13251](https://github.com/pingcap/tidb/pull/13251)
+    -   `innodb_lock_wait_timeout`パラメータを悲観的トランザクションで機能させて、悲観的ロックのロック待機タイムアウトを制御します[#13165](https://github.com/pingcap/tidb/pull/13165)
+    -   他のトランザクションが不必要に待機するのを防ぐために、悲観的トランザクション クエリが強制終了されたときに、悲観的トランザクション TTL の更新を停止します[#13046](https://github.com/pingcap/tidb/pull/13046)
+-   DDL
+    -   TiDBの`SHOW CREATE VIEW`の実行結果がMySQL [#12912](https://github.com/pingcap/tidb/pull/12912)の実行結果と一致しない問題を修正
+    -   `union`に基づいた`View`の作成をサポート (例: `create view v as select * from t1 union select * from t2` [#12955](https://github.com/pingcap/tidb/pull/12955)
+    -   `slow_query`テーブルにトランザクション関連フィールドをさらに追加します: [#13072](https://github.com/pingcap/tidb/pull/13072)
+        -   `Prewrite_time`
+        -   `Commit_time`
+        -   `Get_commit_ts_time`
+        -   `Commit_backoff_time`
+        -   `Backoff_types`
+        -   `Resolve_lock_time`
+        -   `Local_latch_wait_time`
+        -   `Write_key`
+        -   `Write_size`
+        -   `Prewrite_region`
+        -   `Txn_retry`
+    -   テーブルが作成され、テーブルに`COLLATE` [#13174](https://github.com/pingcap/tidb/pull/13174)含まれている場合、列内のシステムのデフォルトの文字セットの代わりにテーブルの`COLLATE`使用します。
+    -   テーブル作成時のインデックス名の長さを制限する[#13310](https://github.com/pingcap/tidb/pull/13310)
+    -   テーブルの名前を変更するときにテーブル名の長さがチェックされない問題を修正[#13346](https://github.com/pingcap/tidb/pull/13346)
+    -   TiDB [#13522](https://github.com/pingcap/tidb/pull/13522)での主キーの追加/削除をサポートするために`alter-primary-key`構成 (デフォルトでは無効) を追加します。
 
-## TiKV
+## TiKV {#tikv}
 
-- Fix the issue that the `acquire_pessimistic_lock` interface returns a wrong `txn_size` [#5740](https://github.com/tikv/tikv/pull/5740)
-- Limit the writes for GC worker per second to reduce the impact on the performance [#5735](https://github.com/tikv/tikv/pull/5735)
-- Make `lock_manager` accurate [#5845](https://github.com/tikv/tikv/pull/5845)
-- Support `innodb_lock_wait_timeout` for pessimistic locking [#5848](https://github.com/tikv/tikv/pull/5848)
-- Add the configuration check for Titan [#5720](https://github.com/tikv/tikv/pull/5720)
-- Support using tikv-ctl to dynamically modify the GC I/O limit: `tikv-ctl --host=ip:port modify-tikv-config -m server -n gc.max_write_bytes_per_sec -v 10MB` [#5957](https://github.com/tikv/tikv/pull/5957)
-- Reduce useless `clean up` requests to decrease the pressure on the deadlock detector [#5965](https://github.com/tikv/tikv/pull/5965)
-- Avoid reducing TTL in pessimistic locking prewrite requests [#6056](https://github.com/tikv/tikv/pull/6056)
-- Fix the issue that a missing blob file might occur in Titan [#5968](https://github.com/tikv/tikv/pull/5968)
-- Fix the issue that `RocksDBOptions` might not take effect in Titan [#6009](https://github.com/tikv/tikv/pull/6009)
+-   `acquire_pessimistic_lock`インターフェイスが間違った`txn_size` [#5740](https://github.com/tikv/tikv/pull/5740)を返す問題を修正
+-   パフォーマンスへの影響を軽減するために、1 秒あたりの GC ワーカーの書き込みを制限します[#5735](https://github.com/tikv/tikv/pull/5735)
+-   `lock_manager`を正確に[#5845](https://github.com/tikv/tikv/pull/5845)
+-   悲観的ロック[#5848](https://github.com/tikv/tikv/pull/5848)のサポート`innodb_lock_wait_timeout`
+-   Titan [#5720](https://github.com/tikv/tikv/pull/5720)の構成チェックを追加
+-   tikv-ctl を使用した GC I/O 制限の動的変更のサポート: `tikv-ctl --host=ip:port modify-tikv-config -m server -n gc.max_write_bytes_per_sec -v 10MB` [#5957](https://github.com/tikv/tikv/pull/5957)
+-   無駄な`clean up`リクエストを減らしてデッドロック検出器の圧力を下げる[#5965](https://github.com/tikv/tikv/pull/5965)
+-   悲観的ロックの事前書き込みリクエストで TTL を削減しないようにする[#6056](https://github.com/tikv/tikv/pull/6056)
+-   Titan [#5968](https://github.com/tikv/tikv/pull/5968)で BLOB ファイルの欠落が発生する可能性がある問題を修正
+-   Titan [#6009](https://github.com/tikv/tikv/pull/6009)で`RocksDBOptions`有効にならない場合がある問題を修正
 
-## PD
+## PD {#pd}
 
-- Add an `ActOn` dimension for each filter to indicate that each scheduler and checker is affected by the filter, and delete two unused filters: `disconnectFilter` and `rejectLeaderFilter` [#1911](https://github.com/pingcap/pd/pull/1911)
-- Print a warning log when it takes more than 5 milliseconds to generate a timestamp in PD [#1867](https://github.com/pingcap/pd/pull/1867)
-- Lower the client log level when passing unavailable endpoint to the client [#1856](https://github.com/pingcap/pd/pull/1856)
-- Fix the issue that the gRPC message package might exceed the maximum size in the `region_syncer` replication process [#1952](https://github.com/pingcap/pd/pull/1952)
+-   各フィルタに`ActOn`ディメンションを追加して、各スケジューラとチェッカーがフィルタの影響を受けることを示し、2 つの未使用のフィルタ`disconnectFilter`と`rejectLeaderFilter` [#1911](https://github.com/pingcap/pd/pull/1911)を削除します。
+-   PD [#1867](https://github.com/pingcap/pd/pull/1867)でタイムスタンプの生成に 5 ミリ秒以上かかる場合、警告ログを出力します。
+-   使用できないエンドポイントをクライアント[#1856](https://github.com/pingcap/pd/pull/1856)に渡すときにクライアントのログ レベルを下げる
+-   gRPC メッセージ パッケージが`region_syncer`レプリ​​ケーション プロセスの最大サイズを超える可能性がある問題を修正[#1952](https://github.com/pingcap/pd/pull/1952)
 
-## Tools
+## ツール {#tools}
 
-+ TiDB Binlog
-    - Obtain the initial replication timestamp from PD when `initial-commit-ts` is set to “-1” in Drainer [#788](https://github.com/pingcap/tidb-binlog/pull/788)
-    - Decouple Drainer’s `Checkpoint` storage from the downstream and support saving `Checkpoint` in MySQL or local files [#790](https://github.com/pingcap/tidb-binlog/pull/790)
-    - Fix the Drainer panic issue caused by using empty values when configuring replication database/table filtering [#801](https://github.com/pingcap/tidb-binlog/pull/801)
-    - Fix the issue that processes get into the deadlock status instead of exiting after a panic occurs because Drainer fails to apply binlog files to the downstream [#807](https://github.com/pingcap/tidb-binlog/pull/807)
-    - Fix the issue that Pump blocks when it exits because of gRPC’s `GracefulStop` [#817](https://github.com/pingcap/tidb-binlog/pull/817)
-    - Fix the issue that Drainer fails when it receives a binlog which misses a column during the execution of a `DROP COLUMN` statement in TiDB (v3.0.6 or later) [#827](https://github.com/pingcap/tidb-binlog/pull/827)
-+ TiDB Lightning
-    - Add the `max-allowed-packet` configuration (64 M by default) for the TiDB backend [#248](https://github.com/pingcap/tidb-lightning/pull/248)
+-   TiDBBinlog
+    -   Drainer [#788](https://github.com/pingcap/tidb-binlog/pull/788)で`initial-commit-ts`が「-1」に設定されている場合、PD から最初のレプリケーション タイムスタンプを取得します。
+    -   Drainer の`Checkpoint`storageをダウンストリームから切り離し、MySQL またはローカル ファイルへの`Checkpoint`の保存をサポート[#790](https://github.com/pingcap/tidb-binlog/pull/790)
+    -   レプリケーション データベース/テーブル フィルタリング[#801](https://github.com/pingcap/tidb-binlog/pull/801)を構成するときに空の値を使用することによって引き起こされるDrainerpanicの問題を修正します。
+    -   Drainer がbinlogファイルをダウンストリーム[#807](https://github.com/pingcap/tidb-binlog/pull/807)に適用できないため、panicが発生した後にプロセスが終了せずにデッドロック状態になる問題を修正します。
+    -   gRPC `GracefulStop` [#817](https://github.com/pingcap/tidb-binlog/pull/817)が原因で終了時にPumpがブロックされる問題を修正
+    -   TiDB (v3.0.6 以降) `DROP COLUMN`ステートメントの実行中に列が欠落しているbinlogを受信すると、 Drainerが失敗する問題を修正します[#827](https://github.com/pingcap/tidb-binlog/pull/827)
+-   TiDB Lightning
+    -   TiDB バックエンド[#248](https://github.com/pingcap/tidb-lightning/pull/248)に`max-allowed-packet`構成 (デフォルトでは 64 M) を追加します。

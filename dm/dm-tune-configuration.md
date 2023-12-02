@@ -3,57 +3,57 @@ title: Optimize Configuration of DM
 summary: Learn how to optimize the configuration of the data migration task to improve the performance of data migration.
 ---
 
-# Optimize Configuration of DM
+# DMのコンフィグレーションを最適化する {#optimize-configuration-of-dm}
 
-This document introduces how to optimize the configuration of the data migration task to improve the performance of data migration.
+このドキュメントでは、データ移行タスクの構成を最適化してデータ移行のパフォーマンスを向上させる方法を紹介します。
 
-## Full data export
+## 完全なデータのエクスポート {#full-data-export}
 
-`mydumpers` is the configuration item related to full data export. This section describes how to configure performance-related options.
+`mydumpers`は全データエクスポートに関する設定項目です。このセクションでは、パフォーマンス関連のオプションを構成する方法について説明します。
 
-### `rows`
+### <code>rows</code> {#code-rows-code}
 
-Setting the `rows` option enables concurrently exporting data from a single table using multi-thread. The value of `rows` is the maximum number of rows contained in each exported chunk. After this option is enabled, DM selects a column as the split benchmark when the data of a MySQL single table is concurrently exported. This column can be one of the following columns: the primary key column, the unique index column, and the normal index column (ordered from highest priority to lowest). Make sure this column is of integer type (for example, `INT`, `MEDIUMINT`, `BIGINT`).
+`rows`オプションを設定すると、マルチスレッドを使用して単一のテーブルからデータを同時にエクスポートできます。値`rows`は、エクスポートされた各チャンクに含まれる行の最大数です。このオプションを有効にすると、MySQL の単一テーブルのデータが同時にエクスポートされるときに、DM は分割ベンチマークとして列を選択します。この列は、主キー列、一意のインデックス列、および通常のインデックス列 (優先順位が最も高い列から低い列の順) のいずれかになります。この列が整数型であることを確認してください (たとえば、 `INT` 、 `MEDIUMINT` 、 `BIGINT` )。
 
-The value of `rows` can be set to 10000. You can change this value according to the total number of rows in the table and the performance of the database. In addition, you need to set `threads` to control the number of concurrent threads. By default, the value of `threads` is 4. You can adjust this value as needed.
+値`rows`は 10000 に設定できます。テーブル内の総行数とデータベースのパフォーマンスに応じて、この値を変更できます。さらに、同時スレッド数を制御するには`threads`を設定する必要があります。デフォルトでは、 `threads`の値は 4 です。必要に応じてこの値を調整できます。
 
-### `chunk-filesize`
+### <code>chunk-filesize</code> {#code-chunk-filesize-code}
 
-During full backup, DM splits the data of each table into multiple chunks according to the value of the `chunk-filesize` option. Each chunk is saved in a file with a size of about `chunk-filesize`. In this way, data is split into multiple files and you can use the parallel processing of the DM Load unit to improve the import speed. The default value of this option is 64 (in MB). Normally, you do not need to set this option. If you set it, adjust the value of this option according to the size of the full data.
+完全バックアップ中、DM は`chunk-filesize`オプションの値に従って各テーブルのデータを複数のチャンクに分割します。各チャンクは、約`chunk-filesize`のサイズのファイルに保存されます。このように、データは複数のファイルに分割され、DM Load ユニットの並列処理を使用してインポート速度を向上させることができます。このオプションのデフォルト値は 64 (MB 単位) です。通常、このオプションを設定する必要はありません。設定する場合は、完全なデータのサイズに応じてこのオプションの値を調整します。
 
-> **Note:**
+> **注記：**
 >
-> - You cannot update the value of `mydumpers` after the migration task is created. Be sure about the value of each option before creating the task. If you need to update the value, stop the task using dmctl, update the configuration file, and re-create the task.
-> - `mydumpers`.`threads` can be replaced with the `mydumper-thread` configuration item for simplicity.
-> - If `rows` is set, DM ignores the value of `chunk-filesize`.
+> -   移行タスクの作成後に値`mydumpers`を更新することはできません。タスクを作成する前に、各オプションの値を確認してください。値を更新する必要がある場合は、dmctl を使用してタスクを停止し、設定ファイルを更新してタスクを再作成します。
+> -   `mydumpers` 。簡単にするために、 `threads` `mydumper-thread`構成アイテムに置き換えることができます。
+> -   `rows`が設定されている場合、DM は`chunk-filesize`の値を無視します。
 
-## Full data import
+## 完全なデータのインポート {#full-data-import}
 
-`loaders` is the configuration item related to full data import. This section describes how to configure performance-related options.
+`loaders`は全データインポートに関する設定項目です。このセクションでは、パフォーマンス関連のオプションを構成する方法について説明します。
 
-### `pool-size`
+### <code>pool-size</code> {#code-pool-size-code}
 
-The `pool-size` option determines the number of threads in the DM Load unit. The default value is 16. Normally, you do not need to set this option. If you set it, adjust the value of this option according to the size of the full data and the performance of the database.
+`pool-size`オプションは、DM ロード ユニット内のスレッドの数を決定します。デフォルト値は 16 です。通常、このオプションを設定する必要はありません。設定する場合は、完全なデータのサイズとデータベースのパフォーマンスに応じて、このオプションの値を調整します。
 
-> **Note:**
+> **注記：**
 >
-> - You cannot update the value of `loaders` after the migration task is created. Be sure about the value of each option before creating the task. If you need to update the value, stop the task using dmctl, update the configuration file, and re-create the task.
-> - `loaders`.`pool-size` can be replaced with the `loader-thread` configuration item for simplicity.
+> -   移行タスクの作成後に値`loaders`を更新することはできません。タスクを作成する前に、各オプションの値を確認してください。値を更新する必要がある場合は、dmctl を使用してタスクを停止し、設定ファイルを更新してタスクを再作成します。
+> -   `loaders` 。簡単にするために、 `pool-size` `loader-thread`構成アイテムに置き換えることができます。
 
-## Incremental data replication
+## 増分データレプリケーション {#incremental-data-replication}
 
-`syncers` is the configuration item related to incremental data replication. This section describes how to configure performance-related options.
+`syncers`は増分データレプリケーションに関連する設定項目です。このセクションでは、パフォーマンス関連のオプションを構成する方法について説明します。
 
-### `worker-count`
+### <code>worker-count</code> {#code-worker-count-code}
 
-`worker-count` determines the number of threads for concurrent replication of DMLs in the DM Sync unit. The default value is 16. To speed up data replication, increase the value of this option appropriately.
+`worker-count` DM 同期ユニット内の DML の同時レプリケーションのスレッド数を決定します。デフォルト値は 16 です。データ複製を高速化するには、このオプションの値を適切に増やします。
 
-### `batch`
+### <code>batch</code> {#code-batch-code}
 
-`batch` determines the number of DMLs included in each transaction when the data is replicated to the downstream database during the DM Sync unit. The default value is 100. Normally, you do not need to change the value of this option.
+`batch` DM 同期単位中にデータがダウンストリーム データベースにレプリケートされるときに各トランザクションに含まれる DML の数を決定します。デフォルト値は 100 です。通常、このオプションの値を変更する必要はありません。
 
-> **Note:**
+> **注記：**
 >
-> - You cannot update the value of `syncers` after the replication task is created. Be sure about the value of each option before creating the task. If you need to update the value, stop the task using dmctl, update the configuration file, and re-create the task.
-> - `syncers`.`worker-count` can be replaced with the `syncer-thread` configuration item for simplicity.
-> - You can change the values of `worker-count` and `batch` according to the actual scenario. For example, if there is a high network delay between DM and the downstream database, you can increase the value of `worker-count` and decrease the value of `batch` appropriately.
+> -   レプリケーション タスクの作成後に値`syncers`を更新することはできません。タスクを作成する前に、各オプションの値を確認してください。値を更新する必要がある場合は、dmctl を使用してタスクを停止し、設定ファイルを更新してタスクを再作成します。
+> -   `syncers` 。簡単にするために、 `worker-count` `syncer-thread`構成アイテムに置き換えることができます。
+> -   実際のシナリオに応じて`worker-count`と`batch`の値を変更できます。たとえば、DM とダウンストリーム データベース間のネットワーク遅延が大きい場合は、 `worker-count`の値を増やし、 `batch`の値を適切に減らすことができます。

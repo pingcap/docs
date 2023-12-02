@@ -3,22 +3,22 @@ title: Upstream and Downstream Clusters Data Validation and Snapshot Read
 summary: Learn how to check data for TiDB upstream and downstream clusters.
 ---
 
-# Upstream and Downstream Clusters Data Validation and Snapshot Read
+# 上流および下流クラスターのデータ検証とスナップショット読み取り {#upstream-and-downstream-clusters-data-validation-and-snapshot-read}
 
-When you use TiCDC to build upstream and downstream clusters of TiDB, you might need to perform consistent snapshot read or data consistency validation on the upstream and downstream without stopping the replication. In the regular replication mode, TiCDC only guarantees that the data is eventually consistent, but cannot guarantee that the data is consistent during the replication process. Therefore, it is difficult to perform consistent read of dynamically changing data. To meet such a need, TiCDC provides the Syncpoint feature.
+TiCDC を使用して TiDB のアップストリームおよびダウンストリームのクラスターを構築する場合、レプリケーションを停止せずに、アップストリームとダウンストリームで一貫したスナップショットの読み取りまたはデータの整合性検証を実行する必要がある場合があります。通常のレプリケーション モードでは、TiCDC はデータの最終的な整合性のみを保証しますが、レプリケーション プロセス中のデータの整合性は保証できません。したがって、動的に変化するデータを一貫して読み取ることは困難です。このようなニーズを満たすために、TiCDC は Syncpoint 機能を提供します。
 
-Syncpoint uses the snapshot feature provided by TiDB and enables TiCDC to maintain a `ts-map` that has consistency between upstream and downstream snapshots during the replication process. In this way, the issue of verifying the consistency of dynamic data is converted to the issue of verifying the consistency of static snapshot data, which achieves the effect of nearly real-time verification.
+Syncpoint は、TiDB が提供するスナップショット機能を使用し、TiCDC がレプリケーション プロセス中にアップストリーム スナップショットとダウンストリーム スナップショットの間で一貫性のある`ts-map`を維持できるようにします。このようにして、動的データの整合性検証の問題が、静的なスナップショット データの整合性検証の問題に変換され、ほぼリアルタイムの検証の効果が得られます。
 
-## Enable Syncpoint
+## 同期点を有効にする {#enable-syncpoint}
 
-After enabling the Syncpoint feature, you can use [Consistent snapshot read](#consistent-snapshot-read) and [Data consistency validation](#data-consistency-validation).
+同期ポイント機能を有効にすると、 [一貫したスナップショット読み取り](#consistent-snapshot-read)と[データの整合性の検証](#data-consistency-validation)を使用できるようになります。
 
-To enable the Syncpoint feature, set the value of the TiCDC configuration item `enable-sync-point` to `true` when creating a replication task. After enabling Syncpoint, TiCDC writes the following information to the downstream TiDB cluster:
+同期ポイント機能を有効にするには、レプリケーション タスクの作成時に TiCDC 構成項目の値`enable-sync-point`から`true`を設定します。 Syncpoint を有効にすると、TiCDC は次の情報をダウンストリーム TiDB クラスターに書き込みます。
 
-1. During the replication, TiCDC periodically (configured by `sync-point-interval`) aligns snapshots between the upstream and downstream and saves the upstream and downstream TSO correspondences in the downstream `tidb_cdc.syncpoint_v1` table.
-2. During the replication, TiCDC also periodically (configured by `sync-point-interval`) executes `SET GLOBAL tidb_external_ts = @@tidb_current_ts`, which sets a consistent snapshot point that has been replicated in backup clusters.
+1.  レプリケーション中、TiCDC は定期的に ( `sync-point-interval`で構成) アップストリームとダウンストリームの間でスナップショットを調整し、アップストリームとダウンストリームの TSO の対応をダウンストリーム`tidb_cdc.syncpoint_v1`テーブルに保存します。
+2.  レプリケーション中、TiCDC は定期的に ( `sync-point-interval`で構成) `SET GLOBAL tidb_external_ts = @@tidb_current_ts`を実行します。これは、バックアップ クラスターにレプリケートされた一貫性のあるスナップショット ポイントを設定します。
 
-The following TiCDC configuration example enables Syncpoint when creating a replication task:
+次の TiCDC 構成例では、レプリケーション タスクの作成時に同期ポイントを有効にします。
 
 ```toml
 # Enables SyncPoint.
@@ -31,27 +31,27 @@ sync-point-interval = "5m"
 sync-point-retention = "1h"
 ```
 
-## Consistent snapshot read
+## 一貫したスナップショット読み取り {#consistent-snapshot-read}
 
-> **Note:**
+> **注記：**
 >
-> Before you perform consistent snapshot read, make sure that you have [enabled the Syncpoint feature](#enable-syncpoint).
+> 一貫したスナップショット読み取りを実行する前に、 [同期ポイント機能を有効にしました](#enable-syncpoint)があることを確認してください。
 
-When you need to query the data from the backup cluster, you can set `SET GLOBAL|SESSION tidb_enable_external_ts_read = ON;` for the application to obtain transactionally consistent data on the backup cluster.
+バックアップ クラスターからデータをクエリする必要がある場合は、アプリケーションに`SET GLOBAL|SESSION tidb_enable_external_ts_read = ON;`を設定して、バックアップ クラスター上でトランザクションの一貫性のあるデータを取得できます。
 
-In addition, you can also select a previous point in time for snapshot read by querying `ts-map`.
+さらに、 `ts-map`をクエリして、スナップショット読み取りの前の時点を選択することもできます。
 
-## Data consistency validation
+## データの整合性の検証 {#data-consistency-validation}
 
-> **Note:**
+> **注記：**
 >
-> Before you perform data consistency validation, make sure that you have [enabled the Syncpoint feature](#enable-syncpoint).
+> データの整合性検証を実行する前に、 [同期ポイント機能を有効にしました](#enable-syncpoint)あることを確認してください。
 
-To validate the data of upstream and downstream clusters, you only need to configure `snapshot` in sync-diff-inspector.
+アップストリーム クラスターとダウンストリーム クラスターのデータを検証するには、sync-diff-inspector で`snapshot`を設定するだけです。
 
-### Step 1: obtain `ts-map`
+### ステップ 1: <code>ts-map</code>を取得する {#step-1-obtain-code-ts-map-code}
 
-You can execute the following SQL statement in the downstream TiDB cluster to obtain the upstream TSO (`primary_ts`) and downstream TSO (`secondary_ts`):
+ダウンストリーム TiDB クラスターで次の SQL ステートメントを実行して、アップストリーム TSO ( `primary_ts` ) とダウンストリーム TSO ( `secondary_ts` ) を取得できます。
 
 ```sql
 select * from tidb_cdc.syncpoint_v1;
@@ -62,19 +62,19 @@ select * from tidb_cdc.syncpoint_v1;
 +------------------+----------------+--------------------+--------------------+---------------------+
 ```
 
-The fields in the preceding `syncpoint_v1` table are described as follows:
+前述の`syncpoint_v1`の表のフィールドは次のように説明されています。
 
-- `ticdc_cluster_id`: The ID of the TiCDC cluster in this record.
-- `changefeed`: The ID of the changefeed in this record. Because different TiCDC clusters might have changefeeds with the same name, you need to confirm the `ts-map` inserted by a changefeed with the TiCDC cluster ID and changefeed ID.
-- `primary_ts`: The timestamp of the upstream database snapshot.
-- `secondary_ts`: The timestamp of the downstream database snapshot.
-- `created_at`: The time when this record is inserted.
+-   `ticdc_cluster_id` : このレコードの TiCDC クラスターの ID。
+-   `changefeed` : このレコードの変更フィードの ID。異なる TiCDC クラスターに同じ名前の変更フィードがある可能性があるため、変更フィードによって挿入された`ts-map`を TiCDC クラスター ID と変更フィード ID で確認する必要があります。
+-   `primary_ts` : アップストリーム データベース スナップショットのタイムスタンプ。
+-   `secondary_ts` : ダウンストリーム データベース スナップショットのタイムスタンプ。
+-   `created_at` : このレコードが挿入された時刻。
 
-### Step 2: configure snapshot
+### ステップ 2: スナップショットを構成する {#step-2-configure-snapshot}
 
-Then configure the snapshot information of the upstream and downstream databases by using the `ts-map` information obtained in [Step 1](#step-1-obtain-ts-map).
+次に、 [ステップ1](#step-1-obtain-ts-map)で取得した`ts-map`情報を使用して、上流データベースと下流データベースのスナップショット情報を設定します。
 
-Here is a configuration example of the `Datasource config` section:
+`Datasource config`セクションの構成例を次に示します。
 
 ```toml
 ######################### Datasource config ########################
@@ -92,9 +92,9 @@ Here is a configuration example of the `Datasource config` section:
     snapshot = "435953235516456963"
 ```
 
-## Notes
+## ノート {#notes}
 
-- Before TiCDC creates a changefeed, make sure that the value of the TiCDC configuration item `enable-sync-point` is set to `true`. Only in this way, Syncpoint is enabled and the `ts-map` is saved in the downstream. For the complete configuration, see [TiCDC task configuration file](/ticdc/ticdc-changefeed-config.md).
-- When you perform data validation using Syncpoint, you need to modify the Garbage Collection (GC) time of TiKV to ensure that the historical data corresponding to snapshot is not collected by GC during the data check. It is recommended that you modify the GC time to 1 hour and recover the setting after the check.
-- The above example only shows the section of `Datasource config`. For complete configuration, refer to [sync-diff-inspector User Guide](/sync-diff-inspector/sync-diff-inspector-overview.md).
-- Since v6.4.0, only the changefeed with the `SYSTEM_VARIABLES_ADMIN` or `SUPER` privilege can use the TiCDC Syncpoint feature.
+-   TiCDC が変更フィードを作成する前に、TiCDC 構成項目`enable-sync-point`の値が`true`に設定されていることを確認してください。この方法でのみ、同期ポイントが有効になり、 `ts-map`がダウンストリームに保存されます。完全な構成については、 [TiCDC タスク構成ファイル](/ticdc/ticdc-changefeed-config.md)を参照してください。
+-   Syncpoint を使用してデータ検証を実行する場合、TiKV のガベージ コレクション (GC) 時間を変更して、スナップショットに対応する履歴データがデータ チェック中に GC によって収集されないようにする必要があります。 GC 時間を 1 時間に変更し、チェック後に設定を復元することをお勧めします。
+-   上記の例は`Datasource config`のセクションのみを示しています。完全な構成については、 [sync-diff-inspector ユーザーガイド](/sync-diff-inspector/sync-diff-inspector-overview.md)を参照してください。
+-   v6.4.0 以降、TiCDC Syncpoint 機能を使用できるのは、 `SYSTEM_VARIABLES_ADMIN`または`SUPER`権限を持つ変更フィードのみです。

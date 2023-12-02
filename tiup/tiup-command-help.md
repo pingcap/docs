@@ -2,24 +2,24 @@
 title: tiup help
 ---
 
-# tiup help
+# tiup help {#tiup-help}
 
-The TiUP command-line interface provides users with a wealth of help information. You can view it via the `help` command or the `--help` option.
+TiUPコマンドライン インターフェイスは、ユーザーに豊富なヘルプ情報を提供します。 `help`コマンドまたは`--help`オプションを使用して表示できます。
 
-## Syntax
+## 構文 {#syntax}
 
 ```shell
 tiup help [command]
 ```
 
-`[command]` is used to specify the help information of which command that users need to view. If it is not specified, the help information of TiUP is viewed.
+`[command]`は、ユーザーが表示する必要があるコマンドのヘルプ情報を指定するために使用されます。指定しない場合はTiUPのヘルプ情報を参照します。
 
-## Option
+## オプション {#option}
 
-None
+なし
 
-## Output
+## 出力 {#output}
 
-The help information of `[command]` or TiUP.
+`[command]`またはTiUPのヘルプ情報。
 
-[<< Back to the previous page - TiUP Reference command list](/tiup/tiup-reference.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUPリファレンスコマンドリスト](/tiup/tiup-reference.md#command-list)

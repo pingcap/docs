@@ -3,11 +3,9 @@ title: STATISTICS
 summary: Learn the `STATISTICS` information_schema table.
 ---
 
-# STATISTICS
+# 統計 {#statistics}
 
-The `STATISTICS` table provides information about table indexes.
-
-{{< copyable "sql" >}}
+`STATISTICS`表は、テーブルのインデックスに関する情報を提供します。
 
 ```sql
 USE information_schema;
@@ -40,28 +38,28 @@ DESC statistics;
 18 rows in set (0.00 sec)
 ```
 
-Fields in the `STATISTICS` table are described as follows:
+`STATISTICS`テーブルのフィールドは次のように説明されています。
 
-* `TABLE_CATALOG`: The name of the catalog to which the table containing the index belongs. This value is always `def`.
-* `TABLE_SCHEMA`: The name of the database to which the table containing the index belongs.
-* `TABLE_NAME`: The name of the table containing the index.
-* `NON_UNIQUE`: If the index must not contain duplicate values, the value is `0`; if duplicate values are allowed in the index, the value is `1`.
-* `INDEX_SCHEMA`: The name of the database to which the index belongs.
-* `INDEX_NAME`: The name of the index. If the index is the primary key, then the value is always `PRIMARY`.
-* `SEQ_IN_INDEX`: The column number in the index, starting from `1`.
-* `COLUMN_NAME`: The column name. See the description of the `Expression` column.
-* `COLLATION`: The sorting method of the columns in the index. The value can be `A` (ascending order), `D` (descending order) or `NULL` (unsorted).
-* `CARDINALITY`: TiDB does not use this field. The field value is always `0`.
-* `SUB_PART`: The prefix of the index. If only part of the prefix of the column is indexed, the value is the number of indexed characters; if the entire column is indexed, the value is `NULL`.
-* `PACKED`: TiDB does not use this field. This value is always `NULL`.
-* `NULLABLE`: If the column might contain a `NULL` value, the value is `YES`; if not, the value is `''`.
-* `INDEX_TYPE`: The type of the index.
-* `COMMENT`: Other information related to the index.
-* `INDEX_COMMENT`: Any comment with comment attribute provided for the index when creating the index.
-* `IS_VISIBLE`: Whether the optimizer can use this index.
-* `Expression` For the index key of the non-expression part, this value is `NULL`; for the index key of the expression part, this value is the expression itself. Refer to [Expression Index](/sql-statements/sql-statement-create-index.md#expression-index).
+-   `TABLE_CATALOG` : インデックスを含むテーブルが属するカタログの名前。この値は常に`def`です。
+-   `TABLE_SCHEMA` : インデックスを含むテーブルが属するデータベースの名前。
+-   `TABLE_NAME` : インデックスを含むテーブルの名前。
+-   `NON_UNIQUE` : インデックスに重複した値を含めてはいけない場合、値は`0`です。インデックス内で重複した値が許可されている場合、値は`1`です。
+-   `INDEX_SCHEMA` : インデックスが属するデータベースの名前。
+-   `INDEX_NAME` : インデックスの名前。インデックスが主キーの場合、値は常に`PRIMARY`になります。
+-   `SEQ_IN_INDEX` : `1`から始まるインデックス内の列番号。
+-   `COLUMN_NAME` : 列名。 `Expression`列の説明を参照してください。
+-   `COLLATION` : インデックス内の列のソート方法。値は`A` (昇順)、 `D` (降順)、または`NULL` (未ソート) です。
+-   `CARDINALITY` : TiDB はこのフィールドを使用しません。フィールド値は常に`0`です。
+-   `SUB_PART` : インデックスのプレフィックス。列のプレフィックスの一部のみがインデックス付けされている場合、値はインデックス付けされた文字の数になります。列全体にインデックスが付けられている場合、値は`NULL`です。
+-   `PACKED` : TiDB はこのフィールドを使用しません。この値は常に`NULL`です。
+-   `NULLABLE` : 列に値`NULL`が含まれる可能性がある場合、値は`YES`です。そうでない場合、値は`''`です。
+-   `INDEX_TYPE` : インデックスのタイプ。
+-   `COMMENT` : インデックスに関連するその他の情報。
+-   `INDEX_COMMENT` : インデックス作成時にインデックスに指定されたコメント属性を持つコメント。
+-   `IS_VISIBLE` : オプティマイザーがこのインデックスを使用できるかどうか。
+-   `Expression`非式部分のインデックス キーの場合、この値は`NULL`です。式部分のインデックス キーの場合、この値は式そのものです。 [式インデックス](/sql-statements/sql-statement-create-index.md#expression-index)を参照してください。
 
-The following statements are equivalent:
+次のステートメントは同等です。
 
 ```sql
 SELECT * FROM INFORMATION_SCHEMA.STATISTICS

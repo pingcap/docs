@@ -2,52 +2,52 @@
 title: tiup cluster stop
 ---
 
-# tiup cluster stop
+# tiup cluster stop {#tiup-cluster-stop}
 
-The `tiup cluster stop` command is used to stop all services or some services of the specified cluster.
+`tiup cluster stop`コマンドは、指定したクラスターのすべてのサービスまたは一部のサービスを停止するために使用されます。
 
-> **Note:**
+> **注記：**
 >
-> If the core services of a cluster are stopped, the cluster cannot provide services anymore.
+> クラスターのコア サービスが停止すると、クラスターはサービスを提供できなくなります。
 
-## Syntax
+## 構文 {#syntax}
 
 ```shell
 tiup cluster stop <cluster-name> [flags]
 ```
 
-`<cluster-name>` is the name of the cluster to operate on. If you forget the cluster name, you can check it using the [`tiup cluster list`](/tiup/tiup-component-cluster-list.md) command.
+`<cluster-name>`は、操作するクラスターの名前です。クラスター名を忘れた場合は、 [`tiup cluster list`](/tiup/tiup-component-cluster-list.md)コマンドを使用して確認できます。
 
-## Options
+## オプション {#options}
 
-### -N, --node
+### -N、--node {#n-node}
 
-- Specifies the nodes to be stopped. The value of this option is a comma-separated list of node IDs. You can get the node IDs from the first column of the [cluster status table](/tiup/tiup-component-cluster-display.md) returned by the `tiup cluster display` command.
-- Data type: `STRINGS`
-- If this option is not specified in the command, the command stops all the nodes by default.
+-   停止するノードを指定します。このオプションの値は、ノード ID のカンマ区切りリストです。ノード ID は、 `tiup cluster display`コマンドによって返される[クラスタステータステーブル](/tiup/tiup-component-cluster-display.md)の最初の列から取得できます。
+-   データ型: `STRINGS`
+-   このオプションがコマンドで指定されていない場合、コマンドはデフォルトですべてのノードを停止します。
 
-> **Note:**
+> **注記：**
 >
-> If the `-R, --role` option is specified at the same time, only the service nodes that match both the specifications of `-N, --node` and `-R, --role` are stopped.
+> `-R, --role`オプションを同時に指定した場合、 `-N, --node`と`-R, --role`の両方の指定に一致するサービスノードだけが停止されます。
 
-### -R, --role
+### -R、--役割 {#r-role}
 
-- Specifies the roles of nodes to be stopped. The value of this option is a comma-separated list of the roles of the nodes. You can get the roles of the nodes from the second column of the [cluster status table](/tiup/tiup-component-cluster-display.md) returned by the `tiup cluster display` command.
-- Data type: `STRINGS`
-- If this option is not specified in the command, the command stops all the roles by default.
+-   停止するノードの役割を指定します。このオプションの値は、ノードの役割のカンマ区切りリストです。 `tiup cluster display`コマンドによって返される[クラスタステータステーブル](/tiup/tiup-component-cluster-display.md)の 2 番目の列からノードの役割を取得できます。
+-   データ型: `STRINGS`
+-   このオプションがコマンドで指定されていない場合、コマンドはデフォルトですべてのロールを停止します。
 
-> **Note:**
+> **注記：**
 >
-> If the `-N, --node` option is specified at the same time, only the service nodes that match both the specifications of `-N, --node` and `-R, --role` are stopped.
+> `-N, --node`オプションを同時に指定した場合、 `-N, --node`と`-R, --role`の両方の指定に一致するサービスノードだけが停止されます。
 
-### -h, --help
+### -h, --help {#h-help}
 
-- Prints the help information.
-- Data type: `BOOLEAN`
-- This option is disabled by default with the `false` value. To enable this option, add this option to the command, and either pass the `true` value or do not pass any value.
+-   ヘルプ情報を出力します。
+-   データ型: `BOOLEAN`
+-   このオプションは、値`false`を指定するとデフォルトで無効になります。このオプションを有効にするには、このオプションをコマンドに追加し、値`true`渡すか、値を渡しません。
 
-## Output
+## 出力 {#output}
 
-The log of stopping the service.
+サービスを停止したときのログです。
 
-[<< Back to the previous page - TiUP Cluster command list](/tiup/tiup-component-cluster.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUPクラスタコマンド リスト](/tiup/tiup-component-cluster.md#command-list)

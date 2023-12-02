@@ -2,26 +2,26 @@
 title: tiup cluster help
 ---
 
-# tiup cluster help
+# tiup cluster help {#tiup-cluster-help}
 
-tiup-cluster provides a wealth of help information for users in the command line interface. You can obtain it via the `help` command or the `--help` option. `tiup cluster help <command>` is basically equivalent to `tiup cluster <command> --help`.
+tiup-cluster は、コマンド ライン インターフェイスでユーザーに豊富なヘルプ情報を提供します。 `help`コマンドまたは`--help`オプションで取得できます。 `tiup cluster help <command>`は基本的に`tiup cluster <command> --help`と同等です。
 
-## Syntax
+## 構文 {#syntax}
 
 ```shell
 tiup cluster help [command] [flags]
 ```
 
-`[command]` is used to specify the help information of which command that users need to view. If it is not specified, the help information of tiup-cluster is viewed.
+`[command]`は、ユーザーが表示する必要があるコマンドのヘルプ情報を指定するために使用されます。指定しない場合は、 tiup-clusterのヘルプ情報が表示されます。
 
-### -h, --help
+### -h, --help {#h-help}
 
-- Prints the help information.
-- Data type: `BOOLEAN`
-- Default: false
+-   ヘルプ情報を出力します。
+-   データ型: `BOOLEAN`
+-   デフォルト: false
 
-## Output
+## 出力 {#output}
 
-The help information of the `[command]` or tiup-cluster.
+`[command]`またはtiup-clusterのヘルプ情報。
 
-[<< Back to the previous page - TiUP Cluster command list](/tiup/tiup-component-cluster.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUPクラスタコマンド リスト](/tiup/tiup-component-cluster.md#command-list)

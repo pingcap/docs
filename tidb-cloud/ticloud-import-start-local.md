@@ -3,62 +3,62 @@ title: ticloud import start local
 summary: The reference of `ticloud import start local`.
 ---
 
-# ticloud import start local
+# ticloud インポートをローカルで開始 {#ticloud-import-start-local}
 
-Import a local file to a [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) cluster:
+ローカル ファイルを[TiDB サーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-serverless)クラスターにインポートします。
 
 ```shell
 ticloud import start local <file-path> [flags]
 ```
 
-> **Note:**
+> **注記：**
 >
-> Currently, you can only import one CSV file for one import task.
+> 現在、1 つのインポート タスクに対して 1 つの CSV ファイルのみをインポートできます。
 
-## Examples
+## 例 {#examples}
 
-Start an import task in interactive mode:
+対話モードでインポート タスクを開始します。
 
 ```shell
 ticloud import start local <file-path>
 ```
 
-Start an import task in non-interactive mode:
+非対話モードでインポート タスクを開始します。
 
 ```shell
 ticloud import start local <file-path> --project-id <project-id> --cluster-id <cluster-id> --data-format <data-format> --target-database <target-database> --target-table <target-table>
 ```
 
-Start an import task with a custom CSV format:
+カスタム CSV 形式でインポート タスクを開始します。
 
 ```shell
 ticloud import start local <file-path> --project-id <project-id> --cluster-id <cluster-id> --data-format CSV --target-database <target-database> --target-table <target-table> --separator \" --delimiter \' --backslash-escape=false --trim-last-separator=true
 ```
 
-## Flags
+## フラグ {#flags}
 
-In non-interactive mode, you need to manually enter the required flags. In interactive mode, you can just follow CLI prompts to fill them in.
+非対話型モードでは、必要なフラグを手動で入力する必要があります。対話型モードでは、CLI プロンプトに従って入力するだけです。
 
-| Flag | Description | Required | Note |
-|---|---|---|---|
-| --backslash-escape | Whether to parse backslashes inside fields as escape characters for CSV files. The default value is `true`. | No | Only works in non-interactive mode when `--data-format CSV` is specified. |
-| -c, --cluster-id string | Specifies the cluster ID. | Yes | Only works in non-interactive mode. |
-| --data-format string | Specifies the data format. Currently, only `CSV` is supported. | Yes | Only works in non-interactive mode. |
-| --delimiter string | Specifies the delimiter used for quoting for CSV files. The default value is `"`. | No | Only works in non-interactive mode when `--data-format CSV` is specified. |
-| -h, --help | Displays help information for this command. | No | Works in both non-interactive and interactive modes. |
-| -p, --project-id string | Specifies the project ID. | Yes | Only works in non-interactive mode. |
-| --separator string | Specifies the field separator for CSV files. The default value is `,`. | No | Only works in non-interactive mode when `--data-format CSV` is specified. |
-| --target-database string | Specifies the target database to import data to. | Yes | Only works in non-interactive mode. |
-| --target-table string | Specifies the target table to import data to. | Yes | Only works in non-interactive mode. |
-| --trim-last-separator | Whether to treat separators as line terminators and trim all trailing separators for CSV files. The default value is `false`. | No | Only works in non-interactive mode when `--data-format CSV` is specified. |
+| フラグ                 | 説明                                                                  | 必須  | 注記                                           |
+| ------------------- | ------------------------------------------------------------------- | --- | -------------------------------------------- |
+| --バックスラッシュ-エスケープ    | フィールド内のバックスラッシュを CSV ファイルのエスケープ文字として解析するかどうか。デフォルト値は`true`です。       | いいえ | `--data-format CSV`が指定された場合は、非対話モードでのみ機能します。 |
+| -c、--cluster-id 文字列 | クラスターIDを指定します。                                                      | はい  | 非対話モードでのみ動作します。                              |
+| --データ形式文字列          | データ形式を指定します。現在、 `CSV`のみがサポートされています。                                 | はい  | 非対話モードでのみ動作します。                              |
+| --区切り文字列            | CSVファイルの引用符に使用する区切り文字を指定します。デフォルト値は`"`です。                           | いいえ | `--data-format CSV`が指定された場合は、非対話モードでのみ機能します。 |
+| -h, --help          | このコマンドのヘルプ情報を表示します。                                                 | いいえ | 非対話型モードと対話型モードの両方で動作します。                     |
+| -p、--プロジェクトID文字列    | プロジェクトIDを指定します。                                                     | はい  | 非対話モードでのみ動作します。                              |
+| --区切り文字列            | CSV ファイルのフィールド区切り文字を指定します。デフォルト値は`,`です。                             | いいえ | `--data-format CSV`が指定された場合は、非対話モードでのみ機能します。 |
+| --ターゲットデータベース文字列    | データをインポートするターゲット データベースを指定します。                                      | はい  | 非対話モードでのみ動作します。                              |
+| --ターゲットテーブル文字列      | データをインポートするターゲットテーブルを指定します。                                         | はい  | 非対話モードでのみ動作します。                              |
+| --最後の区切り文字をトリミング    | CSV ファイルの区切り文字を行終端文字として扱い、末尾の区切り文字をすべてトリミングするかどうか。デフォルト値は`false`です。 | いいえ | `--data-format CSV`が指定された場合は、非対話モードでのみ機能します。 |
 
-## Inherited flags
+## 継承されたフラグ {#inherited-flags}
 
-| Flag | Description | Required | Note |
-|---|---|---|---|
-| --no-color | Disables color in output. | No | Only works in non-interactive mode. In interactive mode, disabling color might not work with some UI components. |
-| -P, --profile string | Specifies the active [user profile](/tidb-cloud/cli-reference.md#user-profile) used in this command. | No | Works in both non-interactive and interactive modes. |
+| フラグ            | 説明                                                                               | 必須  | 注記                                                                 |
+| -------------- | -------------------------------------------------------------------------------- | --- | ------------------------------------------------------------------ |
+| --色なし          | 出力のカラーを無効にします。                                                                   | いいえ | 非対話型モードでのみ動作します。インタラクティブ モードでは、一部の UI コンポーネントで色の無効化が機能しない可能性があります。 |
+| -P、--プロファイル文字列 | このコマンドで使用されるアクティブな[ユーザープロフィール](/tidb-cloud/cli-reference.md#user-profile)を指定します。 | いいえ | 非対話型モードと対話型モードの両方で動作します。                                           |
 
-## Feedback
+## フィードバック {#feedback}
 
-If you have any questions or suggestions on the TiDB Cloud CLI, feel free to create an [issue](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose). Also, we welcome any contributions.
+TiDB Cloud CLI に関して質問や提案がある場合は、お気軽に[問題](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose)を作成してください。また、貢献も歓迎します。

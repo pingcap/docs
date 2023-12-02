@@ -3,20 +3,20 @@ title: TiFlash Query Result Materialization
 summary: Learn how to save the query results of TiFlash in a transaction.
 ---
 
-# TiFlash Query Result Materialization
+# TiFlashクエリ結果の具体化 {#tiflash-query-result-materialization}
 
-This document introduces how to save the TiFlash query result to a specified TiDB table in an `INSERT INTO SELECT` transaction.
+このドキュメントでは、 TiFlashクエリ結果を`INSERT INTO SELECT`トランザクションで指定した TiDB テーブルに保存する方法を紹介します。
 
-Starting from v6.5.0, TiDB supports saving TiFlash query results in a table, that is, TiFlash query result materialization. During the execution of the `INSERT INTO SELECT` statement, if TiDB pushes down the `SELECT` subquery to TiFlash, the TiFlash query result can be saved to a TiDB table specified in the `INSERT INTO` clause. For TiDB versions earlier than v6.5.0, the TiFlash query results are read-only, so if you want to save TiFlash query results, you have to obtain them from the application level, and then save them in a separate transaction or process.
+v6.5.0 以降、TiDB は、 TiFlashクエリ結果のテーブルへの保存、つまりTiFlashクエリ結果の具体化をサポートします。 `INSERT INTO SELECT`ステートメントの実行中に、TiDB が`SELECT`サブクエリをTiFlashにプッシュダウンすると、 TiFlashクエリ結果を`INSERT INTO`句で指定された TiDB テーブルに保存できます。 v6.5.0 より前の TiDB バージョンの場合、 TiFlashクエリ結果は読み取り専用であるため、 TiFlashクエリ結果を保存する場合は、アプリケーション レベルから結果を取得し、別のトランザクションまたはプロセスに保存する必要があります。
 
-> **Note:**
+> **注記：**
 >
-> By default ([`tidb_allow_mpp = ON`](/system-variables.md#tidb_allow_mpp-new-in-v50)), the optimizer intelligently decides whether to push a query down to TiFlash based on the [SQL mode](/sql-mode.md) and the cost estimates of the TiFlash replica. 
+> デフォルト ( [`tidb_allow_mpp = ON`](/system-variables.md#tidb_allow_mpp-new-in-v50) ) では、オプティマイザは[SQLモード](/sql-mode.md)とTiFlashレプリカのコスト見積もりに基づいて、クエリをTiFlashにプッシュするかどうかをインテリジェントに決定します。
 >
-> - If the [SQL mode](/sql-mode.md) of the current session is not strict (which means the `sql_mode` value does not contain `STRICT_TRANS_TABLES`' and `STRICT_ALL_TABLES`), the optimizer intelligently decides whether to push the `SELECT` subquery in `INSERT INTO SELECT` down to TiFlash based on the cost estimates of the TiFlash replica. In this mode, if you want to ignore the cost estimates of the optimizer and enforce that the queries are pushed down to TiFlash, you can set the [`tidb_enforce_mpp`](/system-variables.md#tidb_enforce_mpp-new-in-v51) system variable to `ON`. 
-> - If the [SQL mode](/sql-mode.md) of the current session is strict (which means the `sql_mode` value contains either `STRICT_TRANS_TABLES` or `STRICT_ALL_TABLES`), the `SELECT` subquery in `INSERT INTO SELECT` cannot be pushed down to TiFlash.
+> -   現在のセッションの[SQLモード](/sql-mode.md)厳密でない場合 (つまり、 `sql_mode`値に`STRICT_TRANS_TABLES` &#39; と`STRICT_ALL_TABLES`が含まれていない場合)、オプティマイザは、 TiFlashレプリカのコスト推定に基づいて、 `INSERT INTO SELECT`の`SELECT`サブクエリをTiFlashにプッシュするかどうかをインテリジェントに決定します。このモードでは、オプティマイザのコスト見積もりを無視してクエリをTiFlashにプッシュダウンするようにしたい場合は、 [`tidb_enforce_mpp`](/system-variables.md#tidb_enforce_mpp-new-in-v51)システム変数を`ON`に設定できます。
+> -   現在のセッションの[SQLモード](/sql-mode.md)厳密である場合 (つまり、 `sql_mode`値に`STRICT_TRANS_TABLES`または`STRICT_ALL_TABLES`含まれる)、 `INSERT INTO SELECT`の`SELECT`サブクエリをTiFlashにプッシュダウンすることはできません。
 
-The syntax of `INSERT INTO SELECT` is as follows.
+`INSERT INTO SELECT`の構文は次のとおりです。
 
 ```sql
 INSERT [LOW_PRIORITY | HIGH_PRIORITY] [IGNORE]
@@ -32,55 +32,55 @@ assignment:
     assignment [, assignment] ...
 ```
 
-For example, you can save the query result from table `t1` in the `SELECT` clause to table `t2` using the following `INSERT INTO SELECT` statement:
+たとえば、次の`INSERT INTO SELECT`ステートメントを使用して、 `SELECT`句のテーブル`t1`のクエリ結果をテーブル`t2`に保存できます。
 
 ```sql
 INSERT INTO t2 (name, country)
 SELECT app_name, country FROM t1;
 ```
 
-## Typical and recommended usage scenarios
+## 典型的な推奨される使用シナリオ {#typical-and-recommended-usage-scenarios}
 
-- Efficient BI solutions
+-   効率的な BI ソリューション
 
-    For many BI applications, the analysis query requests are very heavy. For example, when a lot of users access and refresh a report at the same time, a BI application needs to handle a lot of concurrent query requests. To deal with this situation effectively, you can use `INSERT INTO SELECT` to save the query results of the report in a TiDB table. Then, the end users can query data directly from the result table when the report is refreshed, which avoids multiple repeated computations and analyses. Similarly, by saving historical analysis results, you can further reduce the computation volume for long-time historical data analysis. For example, if you have a report `A` that is used to analyze daily sales profit, you can save the results of report `A` to a result table `T` using `INSERT INTO SELECT`. Then, when you need to generate a report `B` to analyze the sales profit of the past month, you can directly use the daily analysis results in table `T`. This way not only greatly reduces the computation volume but also improves the query response speed and reduces the system load.
+    多くの BI アプリケーションでは、分析クエリ リクエストは非常に大量です。たとえば、多くのユーザーが同時にレポートにアクセスして更新する場合、BI アプリケーションは大量の同時クエリ リクエストを処理する必要があります。この状況に効果的に対処するには、 `INSERT INTO SELECT`を使用してレポートのクエリ結果を TiDB テーブルに保存します。その後、エンド ユーザーは、レポートの更新時に結果テーブルから直接データをクエリできるため、計算や分析を何度も繰り返す必要がなくなります。同様に、履歴分析結果を保存することで、長時間の履歴データ分析の計算量をさらに削減できます。たとえば、毎日の販売利益の分析に使用されるレポート`A`ある場合、 `INSERT INTO SELECT`を使用してレポート`A`の結果を結果テーブル`T`に保存できます。その後、先月の販売利益を分析するレポート`B`を生成する必要がある場合、表`T`の日次分析結果を直接使用できます。これにより、計算量が大幅に削減されるだけでなく、クエリの応答速度が向上し、システムの負荷も軽減されます。
 
-- Serving online applications with TiFlash
+-   TiFlashを使用してオンライン アプリケーションを提供する
 
-    The number of concurrent requests supported by TiFlash depends on the volume of data and complexity of the queries, but it typically does not exceed 100 QPS. You can use `INSERT INTO SELECT` to save TiFlash query results, and then use the query result table to support highly concurrent online requests. The data in the result table can be updated in the background at a low frequency (for example, at an interval of 0.5 second), which is well below the TiFlash concurrency limit, while still maintaining a high level of data freshness.
+    TiFlashでサポートされる同時リクエストの数は、データの量とクエリの複雑さによって異なりますが、通常は 100 QPS を超えません。 `INSERT INTO SELECT`を使用してTiFlashクエリ結果を保存し、クエリ結果テーブルを使用して高度な同時オンライン要求をサポートできます。結果テーブルのデータは、高いレベルのデータの鮮度を維持しながら、 TiFlash の同時実行制限を大幅に下回る低頻度 (たとえば、0.5 秒間隔) でバックグラウンドで更新できます。
 
-## Execution process
+## 実行プロセス {#execution-process}
 
-* During the execution of the `INSERT INTO SELECT` statement, TiFlash first returns the query results of the `SELECT` clause to a TiDB server in the cluster, and then writes the results to the target table, which can have a TiFlash replica.
-* The execution of the `INSERT INTO SELECT` statement guarantees ACID properties.
+-   `INSERT INTO SELECT`ステートメントの実行中、 TiFlash はまず`SELECT`句のクエリ結果をクラスター内の TiDBサーバーに返し、次にその結果をターゲット テーブル ( TiFlashレプリカを持つことができる) に書き込みます。
+-   `INSERT INTO SELECT`ステートメントの実行により、 ACIDプロパティが保証されます。
 
-## Restrictions
+## 制限 {#restrictions}
 
 <CustomContent platform="tidb">
 
-* The TiDB memory limit on the `INSERT INTO SELECT` statement can be adjusted using the system variable [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query). Starting from v6.5.0, it is not recommended to use [`txn-total-size-limit`](/tidb-configuration-file.md#txn-total-size-limit) to control transaction memory size.
+-   `INSERT INTO SELECT`ステートメントの TiDBメモリ制限は、システム変数[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)を使用して調整できます。 v6.5.0 以降、トランザクションメモリサイズを制御するために[`txn-total-size-limit`](/tidb-configuration-file.md#txn-total-size-limit)を使用することは推奨されません。
 
-    For more information, see [TiDB memory control](/configure-memory-usage.md).
+    詳細については、 [TiDBメモリ制御](/configure-memory-usage.md)を参照してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-* The TiDB memory limit on the `INSERT INTO SELECT` statement can be adjusted using the system variable [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query). Starting from v6.5.0, it is not recommended to use [`txn-total-size-limit`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#txn-total-size-limit) to control transaction memory size.
+-   `INSERT INTO SELECT`ステートメントの TiDBメモリ制限は、システム変数[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)を使用して調整できます。 v6.5.0 以降、トランザクションメモリサイズを制御するために[`txn-total-size-limit`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#txn-total-size-limit)を使用することは推奨されません。
 
-    For more information, see [TiDB memory control](https://docs.pingcap.com/tidb/stable/configure-memory-usage).
+    詳細については、 [TiDBメモリ制御](https://docs.pingcap.com/tidb/stable/configure-memory-usage)を参照してください。
 
 </CustomContent>
 
-* TiDB has no hard limit on the concurrency of the `INSERT INTO SELECT` statement, but it is recommended to consider the following practices:
+-   TiDB には`INSERT INTO SELECT`ステートメントの同時実行性に対する厳密な制限はありませんが、次のプラクティスを考慮することをお勧めします。
 
-    * When a "write transaction" is large, such as close to 1 GiB, it is recommended to control concurrency to no more than 10.
-    * When a "write transaction" is small, such as less than 100 MiB, it is recommended to control concurrency to no more than 30.
-    * Determine the concurrency based on testing results and specific circumstances.
+    -   「書き込みトランザクション」が 1 GiB に近いなど大きい場合は、同時実行数を 10 以下に制御することをお勧めします。
+    -   「書き込みトランザクション」が 100 MiB 未満など小さい場合は、同時実行数を 30 以下に制御することをお勧めします。
+    -   テスト結果と特定の状況に基づいて同時実行性を決定します。
 
-## Example
+## 例 {#example}
 
-Data definition:
+データ定義:
 
 ```sql
 CREATE TABLE detail_data (
@@ -106,7 +106,7 @@ INSERT INTO detail_data(ts,customer_id,detail_fee) VALUES
 ('2023-1-6 12:2:3', 'cus002', 20.86);
 ```
 
-Save daily analysis results:
+毎日の分析結果を保存します。
 
 ```sql
 SET @@tidb_enable_tiflash_read_for_write_stmt=ON;
@@ -115,10 +115,10 @@ INSERT INTO daily_data (rec_date, customer_id, daily_fee)
 SELECT DATE(ts), customer_id, sum(detail_fee) FROM detail_data WHERE DATE(ts) = CURRENT_DATE() GROUP BY DATE(ts), customer_id;
 ```
 
-Analyze monthly data based on daily analysis data:
+日次分析データに基づいて月次データを分析します。
 
 ```sql
 SELECT MONTH(rec_date), customer_id, sum(daily_fee) FROM daily_data GROUP BY MONTH(rec_date), customer_id;
 ```
 
-The preceding example materializes the daily analysis results and saves them to the daily result table, based on which the monthly data analysis is accelerated, thus improving data analysis efficiency.
+上記の例では、日次の分析結果を具体化して日次結果テーブルに保存し、それを基に月次のデータ分析を高速化し、データ分析の効率を向上させます。

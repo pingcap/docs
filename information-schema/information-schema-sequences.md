@@ -3,16 +3,16 @@ title: SEQUENCES
 summary: Learn the `SEQUENCES` INFORMATION_SCHEMA table.
 ---
 
-# SEQUENCES
+# シーケンス {#sequences}
 
-The `SEQUENCES` table provides information about sequences. The [sequences feature](/sql-statements/sql-statement-create-sequence.md) is modeled on a similar feature in MariaDB.
+表`SEQUENCES`はシーケンスに関する情報を提供します。 [シーケンス機能](/sql-statements/sql-statement-create-sequence.md) 、MariaDB の同様の機能をモデルにしています。
 
 ```sql
 USE INFORMATION_SCHEMA;
 DESC SEQUENCES;
 ```
 
-The output is as follows:
+出力は次のとおりです。
 
 ```sql
 +-----------------+--------------+------+------+---------+-------+
@@ -33,7 +33,7 @@ The output is as follows:
 11 rows in set (0.00 sec)
 ```
 
-Create a sequence `test.seq` and query the next value of the sequence:
+シーケンス`test.seq`を作成し、シーケンスの次の値をクエリします。
 
 ```sql
 CREATE SEQUENCE test.seq;
@@ -41,7 +41,7 @@ SELECT nextval(test.seq);
 SELECT * FROM sequences\G
 ```
 
-The output is as follows:
+出力は次のとおりです。
 
 ```sql
 +-------------------+
@@ -52,13 +52,13 @@ The output is as follows:
 1 row in set (0.01 sec)
 ```
 
-View all sequences:
+すべてのシーケンスをビュー:
 
 ```sql
 SELECT * FROM SEQUENCES\G
 ```
 
-The output is as follows:
+出力は次のとおりです。
 
 ```sql
 *************************** 1. row ***************************

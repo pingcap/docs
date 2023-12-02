@@ -2,59 +2,59 @@
 title: tiup dm display
 ---
 
-# tiup dm display
+# tiup dm display {#tiup-dm-display}
 
-If you want to check the operational status of each component in a DM cluster, it is inefficient to log in to each machine one by one. Therefore, tiup-dm provides the `tiup dm display` command to do this job efficiently.
+DMクラスタ内の各コンポーネントの稼働状況を確認したい場合、各マシンに1台ずつログインするのは非効率です。したがって、tiup-dm は、このジョブを効率的に実行するための`tiup dm display`コマンドを提供します。
 
-## Syntax
+## 構文 {#syntax}
 
 ```shell
 tiup dm display <cluster-name> [flags]
 ```
 
-`<cluster-name>` is the name of the cluster to be operated. If you forget the cluster name, you can check it using the [`tiup dm list`](/tiup/tiup-component-dm-list.md) command.
+`<cluster-name>`は操作対象のクラスタ名です。クラスター名を忘れた場合は、 [`tiup dm list`](/tiup/tiup-component-dm-list.md)コマンドを使用して確認できます。
 
-## Options
+## オプション {#options}
 
-### -N, --node
+### -N、--node {#n-node}
 
-- Specifies the IDs of the nodes to query, splitting by commas for multiple nodes. If you are not sure about the ID of a node, you can skip this option in the command to show the IDs and status of all nodes in the output.
-- Data type: `STRING`
-- This option is enabled by default with `[]` (which means all nodes) passed in.
+-   クエリするノードの ID を指定します。複数のノードの場合はカンマで区切ります。ノードの ID がわからない場合は、コマンドでこのオプションをスキップして、出力にすべてのノードの ID とステータスを表示できます。
+-   データ型: `STRING`
+-   このオプションは、 `[]` (すべてのノードを意味します) を渡すとデフォルトで有効になります。
 
-> **Note:**
-> 
-> If `-R, --role` is also specified, only the service nodes that match both the specifications of `-N, --node` and `-R, --role` are queried.
+> **注記：**
+>
+> `-R, --role`も指定した場合は、 `-N, --node`と`-R, --role`の両方の指定に一致するサービス ノードのみがクエリされます。
 
-### -R, --role
+### -R、--役割 {#r-role}
 
-- Specifies the roles to query, splitting by commas for multiple roles. If you are not sure about the role deployed on a node, you can skip this option in the command to show the roles and status of all nodes in the output.
-- Data type: `STRING`
-- This option is enabled by default with `[]` (which means all roles) passed in.
+-   クエリするロールを指定します。複数のロールの場合はカンマで区切ります。ノードにデプロイされているロールが不明な場合は、コマンドでこのオプションをスキップして、出力にすべてのノードのロールとステータスを表示できます。
+-   データ型: `STRING`
+-   このオプションはデフォルトで有効になり、 `[]` (すべてのロールを意味します) が渡されます。
 
-> **Note:**
-> 
-> If `-N, --node` is also specified, only the service nodes that match both the specifications of `-N, --node` and `-R, --role` are queried.
+> **注記：**
+>
+> `-N, --node`も指定した場合は、 `-N, --node`と`-R, --role`の両方の指定に一致するサービス ノードのみがクエリされます。
 
-### -h, --help
+### -h, --help {#h-help}
 
-- Prints the help information.
-- Data type: `BOOLEAN`
-- This option is disabled by default with the `false` value. To enable this option, add this option to the command, and either pass the `true` value or do not pass any value.
+-   ヘルプ情報を出力します。
+-   データ型: `BOOLEAN`
+-   このオプションは、値`false`を指定するとデフォルトで無効になります。このオプションを有効にするには、このオプションをコマンドに追加し、値`true`渡すか、値を渡しません。
 
-## Output
+## 出力 {#output}
 
-- Cluster name
-- Cluster version
-- SSH client type
-- A table containing the following fields:
-    - `ID`: the node ID, consisting of IP:PORT.
-    - `Role`: the service role deployed on the node (for example, TiDB or TiKV).
-    - `Host`: the IP address of the machine corresponding to the node.
-    - `Ports`: the port number used by the service.
-    - `OS/Arch`: the operating system and machine architecture of the node.
-    - `Status`: the current status of the services on the node.
-    - `Data Dir`: the data directory of the service. `-` means that there is no data directory.
-    - `Deploy Dir`: the deployment directory of the service.
+-   クラスタ名
+-   クラスタのバージョン
+-   SSHクライアントの種類
+-   次のフィールドを含むテーブル:
+    -   `ID` : IP:PORT で構成されるノード ID。
+    -   `Role` : ノードにデプロイされたサービス ロール (TiDB や TiKV など)。
+    -   `Host` : ノードに対応するマシンの IP アドレス。
+    -   `Ports` : サービスが使用するポート番号。
+    -   `OS/Arch` : ノードのオペレーティング システムとマシンアーキテクチャ。
+    -   `Status` : ノード上のサービスの現在のステータス。
+    -   `Data Dir` : サービスのデータ ディレクトリ。 `-`データ ディレクトリがないことを意味します。
+    -   `Deploy Dir` : サービスのデプロイメントディレクトリ。
 
-[<< Back to the previous page - TiUP DM command list](/tiup/tiup-component-dm.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUP DMコマンド一覧](/tiup/tiup-component-dm.md#command-list)

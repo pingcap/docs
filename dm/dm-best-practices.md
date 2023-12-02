@@ -3,232 +3,232 @@ title: TiDB Data Migration (DM) Best Practices
 summary: Learn about best practices when you use TiDB Data Migration (DM) to migrate data.
 ---
 
-# TiDB Data Migration (DM) Best Practices
+# TiDB データ移行 (DM) のベスト プラクティス {#tidb-data-migration-dm-best-practices}
 
-[TiDB Data Migration (DM)](https://github.com/pingcap/tiflow/tree/release-7.5/dm) is a data migration tool developed by PingCAP. It supports full and incremental data migration from MySQL-compatible databases such as MySQL, Percona MySQL, MariaDB, Amazon RDS for MySQL, and Amazon Aurora into TiDB.
+[TiDB データ移行 (DM)](https://github.com/pingcap/tiflow/tree/release-7.5/dm)は、PingCAP によって開発されたデータ移行ツールです。 MySQL、Percona MySQL、MariaDB、Amazon RDS for MySQL、Amazon Auroraなどの MySQL 互換データベースから TiDB への完全および増分データ移行をサポートします。
 
-You can use DM in the following scenarios:
+DM は次のシナリオで使用できます。
 
-- Perform full and incremental data migration from a single MySQL-compatible database instance to TiDB
-- Migrate and merge MySQL shards of small datasets (less than 1 TiB) to TiDB
-- In the data hub scenario, such as the middle platform of business data, and real-time aggregation of business data, use DM as the middleware for data migration
+-   単一の MySQL 互換データベース インスタンスから TiDB への完全および増分データ移行を実行する
+-   小規模なデータセット (1 TiB 未満) の MySQL シャードを TiDB に移行およびマージします。
+-   ビジネスデータのミドルプラットフォームやビジネスデータのリアルタイム集約などのデータハブシナリオでは、データ移行のミドルウェアとしてDMを使用します
 
-This document introduces how to use DM in an elegant and efficient way, and how to avoid common mistakes when using DM.
+このドキュメントでは、DM をエレガントかつ効率的に使用する方法と、DM を使用する際のよくある間違いを回避する方法を紹介します。
 
-## Performance limitations
+## パフォーマンスの制限 {#performance-limitations}
 
-| Performance item  | Limitation |
-| ----------------- | :--------: |
-|  Max work nodes              |  1000           |
-|  Max task number             |  600            |
-|  Max QPS                     |  30k QPS/worker |
-|  Max Binlog throughput       |  20 MB/s/worker |
-|  Table number limit per task |  Unlimited      |
+| 性能アイテム         |        制限       |
+| -------------- | :-------------: |
+| 最大作業ノード数       |       1000      |
+| 最大タスク数         |       600       |
+| 最大QPS          | 30,000 QPS/ワーカー |
+| 最大Binlogスループット |   20 MB/秒/ワーカー  |
+| タスクごとのテーブル数の制限 |       無制限       |
 
-- DM supports managing 1000 work nodes simultaneously, and the maximum number of tasks is 600. To ensure the high availability of work nodes, you should reserve some work nodes as standby nodes. The recommended number of standby nodes is 20% to 50% of the number of the work nodes that have running migration tasks.
-- A single work node can theoretically support replication QPS of up to 30K QPS/worker. It varies for different schemas and workloads. The ability to handle upstream binlogs is up to 20 MB/s/worker.
-- If you want to use DM as a data replication middleware for long-term use, you need to carefully design the deployment architecture of DM components. For more information, see [Deploy DM-master and DM-worker](#deploy-dm-master-and-dm-worker)
+-   DM は 1000 の作業ノードの同時管理をサポートし、タスクの最大数は 600 です。作業ノードの高可用性を確保するには、いくつかの作業ノードをスタンバイ ノードとして予約する必要があります。推奨されるスタンバイ ノードの数は、移行タスクを実行している作業ノードの数の 20% ～ 50% です。
+-   理論的には、単一の作業ノードはワーカーあたり最大 30,000 QPS のレプリケーション QPS をサポートできます。これはスキーマやワークロードによって異なります。アップストリームのバイナリログを処理できる能力は、ワーカーあたり最大 20 MB/秒です。
+-   DM をデータ レプリケーション ミドルウェアとして長期間使用する場合は、DM コンポーネントのデプロイメントアーキテクチャを慎重に設計する必要があります。詳細については、 [DM マスターと DM ワーカーをデプロイ](#deploy-dm-master-and-dm-worker)を参照してください。
 
-## Before data migration
+## データ移行前 {#before-data-migration}
 
-Before data migration, the design of the overall solution is critical. The following sections describe best practices and scenarios from the business perspective and the implementation perspective.
+データ移行の前に、ソリューション全体の設計が重要です。次のセクションでは、ビジネスの観点と実装の観点からのベスト プラクティスとシナリオについて説明します。
 
-### Best practices for the business side
+### ビジネス側のベストプラクティス {#best-practices-for-the-business-side}
 
-To distribute the workload evenly on multiple nodes, the design for the distributed database is different from traditional databases. The solution needs to ensure both low migration cost and logic correctness after migration. The following sections describe best practices before data migration.
+ワークロードを複数のノードに均等に分散するために、分散データベースの設計は従来のデータベースとは異なります。このソリューションでは、低い移行コストと移行後のロジックの正確性の両方を保証する必要があります。次のセクションでは、データ移行前のベスト プラクティスについて説明します。
 
-#### Business impact of AUTO_INCREMENT in schema design
+#### スキーマ設計における AUTO_INCREMENT のビジネスへの影響 {#business-impact-of-auto-increment-in-schema-design}
 
-`AUTO_INCREMENT` in TiDB is compatible with `AUTO_INCREMENT` in MySQL. However, as a distributed database, TiDB usually has multiple computing nodes (entries for the client end). When the application data is written, the workload is evenly distributed. This leads to the result that when there is an `AUTO_INCREMENT` column in the table, the auto-increment IDs of the column might be inconsecutive. For more details, see [AUTO_INCREMENT](/auto-increment.md#implementation-principles).
+TiDB の`AUTO_INCREMENT` MySQL の`AUTO_INCREMENT`と互換性があります。ただし、分散データベースとして、TiDB には通常、複数のコンピューティング ノード (クライアント エンドのエントリ) があります。アプリケーション データが書き込まれるとき、ワークロードは均等に分散されます。これにより、テーブルに`AUTO_INCREMENT`の列がある場合、その列の自動インクリメント ID が不連続になる可能性があります。詳細については、 [自動増加](/auto-increment.md#implementation-principles)を参照してください。
 
-If your business has a strong dependence on auto-increment IDs, consider using the [SEQUENCE function](/sql-statements/sql-statement-create-sequence.md#sequence-function).
+ビジネスが自動インクリメント ID に強く依存している場合は、 [シーケンス機能](/sql-statements/sql-statement-create-sequence.md#sequence-function)の使用を検討してください。
 
-#### Usage of clustered indexes
+#### クラスター化インデックスの使用法 {#usage-of-clustered-indexes}
 
-When you create a table, you can declare that the primary key is either a clustered index or a non-clustered index. The following sections describe the pros and cons of each choice.
+テーブルを作成するときに、主キーがクラスター化インデックスまたは非クラスター化インデックスのいずれかであることを宣言できます。次のセクションでは、それぞれの選択の長所と短所について説明します。
 
-- Clustered indexes
+-   クラスター化インデックス
 
-    [Clustered indexes](/clustered-indexes.md) use the primary key as the handle ID (row ID) for data storage. Querying using the primary key can avoid table lookup, which effectively improves the query performance. However, if the table is write-intensive and the primary key uses [`AUTO_INCREMENT`](/auto-increment.md), it is very likely to cause [write hotspot problems](/best-practices/high-concurrency-best-practices.md#highly-concurrent-write-intensive-scenario), resulting in a mediocre performance of the cluster and the performance bottleneck of a single storage node.
+    [クラスター化インデックス](/clustered-indexes.md)データstorageのハンドル ID (行 ID) として主キーを使用します。主キーを使用してクエリを実行すると、テーブルの検索を回避できるため、クエリのパフォーマンスが効果的に向上します。ただし、テーブルが書き込み集中型で主キーが[`AUTO_INCREMENT`](/auto-increment.md)使用している場合は、 [書き込みホットスポットの問題](/best-practices/high-concurrency-best-practices.md#highly-concurrent-write-intensive-scenario)発生する可能性が非常に高く、その結果、クラスターのパフォーマンスが中程度になり、単一のstorageノードのパフォーマンスのボトルネックが発生します。
 
-- Non-clustered indexes + `shard row id bit`
+-   非クラスター化インデックス + `shard row id bit`
 
-    Using non-clustered indexes and `shard row id bit`, you can avoid the write hotspot problem when using `AUTO_INCREMENT`. However, table lookup in this scenario can affect the query performance when querying using the primary key.
+    非クラスター化インデックスと`shard row id bit`を使用すると、 `AUTO_INCREMENT`使用する場合の書き込みホットスポットの問題を回避できます。ただし、このシナリオでのテーブル検索は、主キーを使用してクエリを実行する場合のクエリのパフォーマンスに影響を与える可能性があります。
 
-- Clustered indexes + external distributed ID generators
+-   クラスター化インデックス + 外部分散 ID ジェネレーター
 
-    If you want to use clustered indexes and keep the IDs consecutive, consider using external distributed ID generators, such as the Snowflake algorithm and Leaf. The application program generates sequence IDs, which can guarantee that the IDs are consecutive to a certain extent. It also retains the benefits of using clustered indexes. But you need to customize the applications.
+    クラスター化インデックスを使用し、ID を連続的に保ちたい場合は、Snowflake アルゴリズムや Leaf などの外部分散 ID ジェネレーターの使用を検討してください。アプリケーションプログラムはシーケンス ID を生成します。これにより、ID がある程度連続していることが保証されます。また、クラスター化インデックスを使用する利点も維持されます。ただし、アプリケーションをカスタマイズする必要があります。
 
-- Clustered indexes + `AUTO_RANDOM`
+-   クラスター化インデックス + `AUTO_RANDOM`
 
-    This solution can retain the benefits of using clustered indexes and avoid the write hotspot problem. It requires less effort for customization. You can modify the schema attribute when you switch to use TiDB as the write database. In subsequent queries, if you have to use the ID column to sort data, you can use the [`AUTO_RANDOM`](/auto-random.md) ID column and left shift 5 bits to ensure the order of the query data. For example:
+    このソリューションでは、クラスター化インデックスを使用する利点を維持し、書き込みホットスポットの問題を回避できます。カスタマイズに必要な労力が少なくなります。 TiDB を書き込みデータベースとして使用するように切り替えるときに、スキーマ属性を変更できます。後続のクエリで、ID 列を使用してデータを並べ替える必要がある場合は、 [`AUTO_RANDOM`](/auto-random.md) ID 列を使用して 5 ビット左シフトし、クエリ データの順序を確保できます。例えば：
 
     ```sql
     CREATE TABLE t (a bigint PRIMARY KEY AUTO_RANDOM, b varchar(255));
     Select a, a<<5 ,b from t order by a <<5 desc
     ```
 
-The following table summarizes the pros and cons of each solution.
+次の表は、各ソリューションの長所と短所をまとめたものです。
 
-| Scenario | Recommended solution | Pros | Cons |
-| :--- | :--- | :--- | :--- |
-| <li>TiDB will act as the primary and write-intensive database. </li><li>The business logic strongly relies on the continuity of the primary key IDs.</li> | Create tables with non-clustered indexes and set `SHARD_ROW_ID_BIT`. Use `SEQUENCE` as the primary key column.  | It can avoid data write hotspots and ensure the continuity and monotonic increment of business data. | <li>The throughput capacity of data write is decreased to ensure data write continuity. </li><li>The performance of primary key queries is decreased.</li> |
-| <li>TiDB will act as the primary and write-intensive database. </li><li>The business logic strongly relies on the increment of the primary key IDs.</li>  | Create tables with non-clustered indexes and set `SHARD_ROW_ID_BIT`. Use an application ID generator to generate the primary key IDs. | It can avoid data write hotspots, guarantee the performance of data write, and guarantee the increment of business data, but cannot guarantee continuity. | <li>You need to customize the application. </li><li>External ID generators strongly rely on the clock accuracy and might introduce failures.</li> |
-| <li>TiDB will act as the primary and write-intensive database. </li><li>The business logic does not rely on the continuity of the primary key IDs.</li> | Create tables with clustered indexes and set `AUTO_RANDOM` for the primary key column. | <li>It can avoid data write hotspots and has excellent query performance of primary keys. </li><li>You can smoothly switch from `AUTO_INCREMENT` to `AUTO_RANDOM`.</li> | <li>The primary key IDs are random. </li><li>The write throughput ability is limited. </li><li>It is recommended to sort the business data by using the insert time column. </li><li>If you have to use the primary key ID to sort data, you can left shift 5 bits to query, which can guarantee the increment of the data.</li> |
-| TiDB will act as a read-only database. | Create tables with non-clustered indexes and set `SHARD_ROW_ID_BIT`. Keep the primary key column consistent with the data source. | <li>It can avoid data write hotspots. </li><li>It requires less customization cost. </li>| The query performance of primary keys is impacted. |
+| シナリオ                                                                                   | 推奨されるソリューション                                                                                | 長所                                                                                                               | 短所                                                                                                                                                                                 |
+| :------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------ | :--------------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| <li>TiDB は、書き込み集中型のプライマリ データベースとして機能します。</li><li>ビジネス ロジックは、主キー ID の連続性に大きく依存します。</li> | 非クラスター化インデックスを使用してテーブルを作成し、 `SHARD_ROW_ID_BIT`を設定します。主キー列として`SEQUENCE`を使用します。               | データ書き込みのホットスポットを回避し、ビジネス データの連続性と単調な増加を保証できます。                                                                   | <li>データ書き込みの継続性を確保するために、データ書き込みのスループット容量が低下します。</li><li>主キークエリのパフォーマンスが低下します。</li>                                                                                                 |
+| <li>TiDB は、書き込み集中型のプライマリ データベースとして機能します。</li><li>ビジネス ロジックは主キー ID の増加に大きく依存します。</li>   | 非クラスター化インデックスを使用してテーブルを作成し、 `SHARD_ROW_ID_BIT`を設定します。アプリケーション ID ジェネレーターを使用して主キー ID を生成します。 | データ書き込みのホットスポットを回避し、データ書き込みのパフォーマンスを保証し、ビジネス データの増加を保証できますが、継続性は保証できません。                                         | <li>アプリケーションをカスタマイズする必要があります。</li><li>外部 ID ジェネレーターはクロックの精度に大きく依存しているため、障害が発生する可能性があります。</li>                                                                                      |
+| <li>TiDB は、書き込み集中型のプライマリ データベースとして機能します。</li><li>ビジネス ロジックは主キー ID の連続性に依存しません。</li>    | クラスター化インデックスを含むテーブルを作成し、主キー列に`AUTO_RANDOM`を設定します。                                           | <li>データ書き込みホットスポットを回避でき、主キーのクエリ パフォーマンスが優れています。</li><li> `AUTO_INCREMENT`から`AUTO_RANDOM`へスムーズに切り替えることができます。</li> | <li>主キー ID はランダムです。</li><li>書き込みスループット能力には制限があります。</li><li>ビジネス データは、挿入時刻列を使用して並べ替えることをお勧めします。</li><li>データの並べ替えに主キー ID を使用する必要がある場合は、5 ビットを左シフトしてクエリを実行でき、これによりデータの増分が保証されます。</li> |
+| TiDB は読み取り専用データベースとして機能します。                                                            | 非クラスター化インデックスを使用してテーブルを作成し、 `SHARD_ROW_ID_BIT`を設定します。主キー列とデータ ソースの一貫性を維持します。                | <li>データ書き込みのホットスポットを回避できます。</li><li>カスタマイズコストが少なくて済みます。</li>                                                     | 主キーのクエリのパフォーマンスが影響を受けます。                                                                                                                                                           |
 
-### Key points for MySQL shards
+### MySQL シャードの重要なポイント {#key-points-for-mysql-shards}
 
-#### Splitting and merging
+#### 分割と結合 {#splitting-and-merging}
 
-It is recommended that you use DM to [migrate and merge MySQL shards of small datasets to TiDB](/migrate-small-mysql-shards-to-tidb.md).
+[小規模なデータセットの MySQL シャードを TiDB に移行およびマージする](/migrate-small-mysql-shards-to-tidb.md)への DM を使用することをお勧めします。
 
-Besides data merging, another typical scenario is data archiving. Data is constantly being written. As time goes by, large amounts of data gradually change from hot data to warm or even cold data. Fortunately, in TiDB, you can set different [placement rules](/configure-placement-rules.md) for data. The minimum granularity of the rules is [a partition](/partitioned-table.md).
+データのマージのほかに、もう 1 つの典型的なシナリオはデータのアーカイブです。データは常に書き込まれ続けます。時間が経つにつれて、大量のデータはホット データからウォーム データ、さらにはコールド データに徐々に変化します。幸いなことに、TiDB ではデータに異なる[配置ルール](/configure-placement-rules.md)を設定できます。ルールの最小粒度は[パーティション](/partitioned-table.md)です。
 
-Therefore, it is recommended that for write-intensive scenarios, you need to evaluate from the beginning whether you need to archive data and store hot and cold data on different media separately. If you need to archive data, you can set the partitioning rules before migration (TiDB does not support Table Rebuild operations yet). It saves you from the need to recreate tables and import data in future.
+したがって、書き込み集中型のシナリオでは、データをアーカイブし、ホット データとコールド データを異なるメディアに別々に保存する必要があるかどうかを最初から評価する必要があることをお勧めします。データをアーカイブする必要がある場合は、移行前にパーティション化ルールを設定できます (TiDB はテーブル再構築操作をまだサポートしていません)。これにより、今後テーブルを再作成したりデータをインポートしたりする必要がなくなります。
 
-#### The pessimistic mode and the optimistic mode
+#### 悲観的モードと楽観的モード {#the-pessimistic-mode-and-the-optimistic-mode}
 
-DM uses the pessimistic mode by default. In scenarios of migrating and merging MySQL shards, changes in upstream shard schemas can block DML writing to downstream databases. You need to wait until all the schemas are changed and have the same structure, and then continue the migration from the breakpoint.
+DM はデフォルトで悲観的モードを使用します。 MySQL シャードの移行およびマージのシナリオでは、アップストリーム シャード スキーマの変更により、ダウンストリーム データベースへの DML 書き込みがブロックされる可能性があります。すべてのスキーマが変更されて同じ構造になるまで待ってから、ブレークポイントから移行を続行する必要があります。
 
-- If the upstream schema changes take a long time, it might cause the upstream Binlog to be cleaned up. You can enable the relay log to avoid this problem. For more information, see [Use the relay log](#use-the-relay-log).
+-   上流のスキーマ変更に長い時間がかかると、上流のBinlog がクリーンアップされる可能性があります。この問題を回避するには、リレー ログを有効にすることができます。詳細については、 [リレーログを使用する](#use-the-relay-log)を参照してください。
 
-- If you do not want to block data write due to upstream schema changes, consider using the optimistic mode. In this case, DM will not block the data migration even when it spots changes in the upstream shard schemas, but will continue to migrate the data. However, if DM spots incompatible formats in upstream and downstream, the migration task will stop. You need to resolve this issue manually.
+-   上流のスキーマ変更によりデータ書き込みをブロックしたくない場合は、楽観的モードの使用を検討してください。この場合、DM は上流のシャード スキーマの変更を検出した場合でもデータ移行をブロックせず、データの移行を続行します。ただし、DM がアップストリームとダウンストリームで互換性のない形式を検出した場合、移行タスクは停止します。この問題は手動で解決する必要があります。
 
-The following table summarizes the pros and cons of optimistic mode and pessimistic modes.
+次の表は、楽観的モードと悲観的モードの長所と短所をまとめたものです。
 
-| Scenario | Pros | Cons |
-| :--- | :--- | :--- |
-| Pessimistic mode (Default) | It can ensure that the data migrated to the downstream will not go wrong.  | If there are a large number of shards, the migration task will be blocked for a long time, or even stop if the upstream binlogs have been cleaned up. You can enable the relay log to avoid this problem. For more information, see [Use the relay log](#use-the relay-log). |
-| Optimistic mode| Upstream schema changes will not cause data migration latency.  | In this mode, ensure that schema changes are compatible (check whether the incremental column has a default value). It is possible that the inconsistent data can be overlooked. For more information, see [Merge and Migrate Data from Sharded Tables in Optimistic Mode](/dm/feature-shard-merge-optimistic.md#restrictions).|
+| シナリオ           | 長所                                      | 短所                                                                                                                                                                                            |
+| :------------- | :-------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 悲観的モード (デフォルト) | ダウンストリームに移行されたデータに問題が発生しないことを保証できます。    | 多数のシャードがある場合、移行タスクは長時間ブロックされるか、上流のバイナリログがクリーンアップされている場合には停止することもあります。この問題を回避するには、リレー ログを有効にすることができます。詳細については、「リレーログを使用する」(#use-therelay-log)を参照してください。                                        |
+| 楽観的モード         | 上流のスキーマ変更によってデータ移行のレイテンシーが発生することはありません。 | このモードでは、スキーマの変更に互換性があることを確認します (増分列にデフォルト値があるかどうかを確認します)。矛盾したデータが見落とされる可能性があります。詳細については、 [オプティミスティックモードでのシャードテーブルからのデータのマージと移行](/dm/feature-shard-merge-optimistic.md#restrictions)を参照してください。 |
 
-### Other restrictions and impact
+### その他の制限と影響 {#other-restrictions-and-impact}
 
-#### Data types in upstream and downstream
+#### アップストリームとダウンストリームのデータ型 {#data-types-in-upstream-and-downstream}
 
-TiDB supports most MySQL data types. However, some special types are not supported yet (such as `SPATIAL`). For the compatibility of data types, see [Data Types](/data-type-overview.md).
+TiDB はほとんどの MySQL データ型をサポートします。ただし、一部の特殊な型はまだサポートされていません ( `SPATIAL`など)。データ型の互換性については、 [データ型](/data-type-overview.md)を参照してください。
 
-#### Character sets and collations
+#### 文字セットと照合順序 {#character-sets-and-collations}
 
-Since TiDB v6.0.0, the new framework for collations is used by default. In earlier versions, if you want TiDB to support utf8_general_ci, utf8mb4_general_ci, utf8_unicode_ci, utf8mb4_unicode_ci, gbk_chinese_ci and gbk_bin, you need to explicitly declare it when creating the cluster by setting the value of `new_collations_enabled_on_first_bootstrap` to `true`. For more information, see [New framework for collations](/character-set-and-collation.md#new-framework-for-collations).
+TiDB v6.0.0 以降、照合順序の新しいフレームワークがデフォルトで使用されます。以前のバージョンでは、TiDB で utf8_general_ci、utf8mb4_general_ci、utf8_unicode_ci、utf8mb4_unicode_ci、gbk_chinese_ci、gbk_bin をサポートしたい場合は、クラスターの作成時に`new_collations_enabled_on_first_bootstrap`から`true`の値を設定して明示的に宣言する必要がありました。詳細については、 [照合順序の新しいフレームワーク](/character-set-and-collation.md#new-framework-for-collations)を参照してください。
 
-The default character set in TiDB is utf8mb4. It is recommended that you use utf8mb4 for the upstream and downstream databases and applications. If the upstream database has explicitly specified a character set or collation, you need to check whether TiDB supports it.
+TiDB のデフォルトの文字セットは utf8mb4 です。アップストリームおよびダウンストリームのデータベースおよびアプリケーションには utf8mb4 を使用することをお勧めします。上流のデータベースが文字セットまたは照合順序を明示的に指定している場合は、TiDB がそれをサポートしているかどうかを確認する必要があります。
 
-Since TiDB v6.0.0, GBK is supported. For more information, see the following documents:
+TiDB v6.0.0 以降、GBK がサポートされています。詳細については、次のドキュメントを参照してください。
 
-- [Character Set and Collation](/character-set-and-collation.md)
-- [GBK compatibility](/character-set-gbk.md#mysql-compatibility)
+-   [文字セットと照合順序](/character-set-and-collation.md)
+-   [GBKの互換性](/character-set-gbk.md#mysql-compatibility)
 
-### Best practices for deployment
+### 導入のベストプラクティス {#best-practices-for-deployment}
 
-#### Deploy DM-master and DM-worker
+#### DM マスターと DM ワーカーをデプロイ {#deploy-dm-master-and-dm-worker}
 
-DM consists of DM-master and DM-worker nodes.
+DM は、DM マスター ノードと DM ワーカー ノードで構成されます。
 
-- DM-master manages the metadata of migration tasks and schedules DM-worker nodes. It is the core of the whole DM platform. Therefore, you can deploy DM-master as clusters to ensure high availability of the DM platform.
+-   DM マスターは、移行タスクのメタデータを管理し、DM ワーカー ノードをスケジュールします。これは DM プラットフォーム全体の中核です。したがって、DM マスターをクラスターとして展開して、DM プラットフォームの高可用性を確保できます。
 
-- DM-worker executes upstream and downstream migration tasks. A DM-worker node is stateless. You can deploy at most 1000 DM-worker nodes. When using DM, it is recommended that you reserve some idle DM-workers to ensure high availability.
+-   DM ワーカーは、上流および下流の移行タスクを実行します。 DM ワーカー ノードはステートレスです。最大 1000 の DM ワーカー ノードをデプロイできます。 DM を使用する場合、高可用性を確保するために、アイドル状態の DM ワーカーをいくつか予約しておくことをお勧めします。
 
-#### Plan the migration tasks
+#### 移行タスクを計画する {#plan-the-migration-tasks}
 
-When migrating and merging MySQL shards, you can split a migration task according to the types of shards in the upstream. For example, if `usertable_1~50` and `Logtable_1~50` are two types of shards, you can create two migration tasks. It can simplify the migration task template and effectively control the impact of interruption in data migration.
+MySQL シャードを移行およびマージする場合、アップストリームのシャードのタイプに応じて移行タスクを分割できます。たとえば、 `usertable_1~50`と`Logtable_1~50`が 2 種類のシャードである場合、2 つの移行タスクを作成できます。これにより、移行タスク テンプレートが簡素化され、データ移行の中断による影響を効果的に制御できます。
 
-For migration of large datasets, you can refer to the following suggestions to split the migration task:
+大規模なデータセットを移行する場合は、次の提案を参照して移行タスクを分割できます。
 
-- If you need to migrate multiple databases in the upstream, you can split the migration task according to the number of databases.
+-   アップストリームで複数のデータベースを移行する必要がある場合は、データベースの数に応じて移行タスクを分割できます。
 
-- Split the task according to the write pressure in the upstream, that is, split the tables with frequent DML operations in the upstream to a separate migration task. Use another migration task to migrate the tables without frequent DML operations. This method can speed up the migration progress, especially when there are a large number of logs written to a table in the upstream. But if this table that contains a large number of logs does not affect the whole business, this method still works well.
+-   アップストリームでの書き込みプレッシャーに応じてタスクを分割します。つまり、アップストリームで頻繁に DML 操作が行われるテーブルを別の移行タスクに分割します。別の移行タスクを使用して、頻繁な DML 操作を行わずにテーブルを移行します。この方法を使用すると、特にアップストリームのテーブルに大量のログが書き込まれる場合に、移行の進行をスピードアップできます。ただし、大量のログが含まれるこのテーブルがビジネス全体に影響を与えない場合、この方法は引き続き有効です。
 
-Note that splitting the migration task can only guarantee the final consistency of data. Real-time consistency may deviate significantly due to various reasons.
+移行タスクを分割することで保証できるのは、データの最終的な整合性だけであることに注意してください。リアルタイムの一貫性は、さまざまな理由により大幅に逸脱する可能性があります。
 
-The following table describes the recommended deployment plans for DM-master and DM-worker in different scenarios.
+次の表では、さまざまなシナリオにおける DM マスターと DM ワーカーの推奨される展開計画を説明します。
 
-| Scenario | DM-master deployment | DM-worker deployment |
-| :--- | :--- | :--- |
-| <li>Small dataset (less than 1 TiB)</li><li>One-time data migration</li> | Deploy 1 DM-master node | Deploy 1~N DM-worker nodes according to the number of upstream data sources. Generally, 1 DM-worker node is recommended. |
-| <li>Large dataset (more than 1 TiB) and migrating and merging MySQL shards</li><li>One-time data migration</li> | It is recommended to deploy 3 DM-master nodes to ensure the availability of the DM cluster during long-time data migration. | Deploy DM-worker nodes according to the number of data sources or migration tasks. Besides working DM-worker nodes, it is recommended to deploy 1~3 idle DM-worker nodes. |
-| Long-term data replication | It is necessary to deploy 3 DM-master nodes. If you deploy DM-master nodes on the cloud, try to deploy them in different availability zones (AZ). | Deploy DM-worker nodes according to the number of data sources or migration tasks. It is necessary to deploy 1.5~2 times the number of DM-worker nodes that are actually needed. |
+| シナリオ                                                                       | DMマスターの展開                                                                                | DM ワーカーの展開                                                                                               |
+| :------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------- |
+| <li>小規模なデータセット (1 TiB 未満)</li><li> 1 回限りのデータ移行</li>                        | 1 つの DM マスター ノードをデプロイ                                                                    | 上流データソースの数に応じて、1 ～ N 個の DM ワーカー ノードをデプロイ。通常、1 つの DM ワーカー ノードが推奨されます。                                     |
+| <li>大規模なデータセット (1 TiB を超える) と MySQL シャードの移行およびマージ</li><li>1 回限りのデータ移行</li> | 長時間のデータ移行中に DM クラスターの可用性を確保するには、3 つの DM マスター ノードをデプロイすることをお勧めします。                        | データ ソースまたは移行タスクの数に応じて DM ワーカー ノードをデプロイ。動作中の DM ワーカー ノードのほかに、アイドル状態の DM ワーカー ノードを 1 ～ 3 つデプロイすることをお勧めします。 |
+| 長期的なデータレプリケーション                                                            | DMマスターノードを3台導入する必要があります。 DM マスター ノードをクラウド上にデプロイする場合は、異なるアベイラビリティ ゾーン (AZ) にデプロイしてみてください。 | データ ソースまたは移行タスクの数に応じて DM ワーカー ノードをデプロイ。実際に必要なDMワーカーノードの1.5～2倍のノードを導入する必要があります。                           |
 
-#### Choose and configure the upstream data source
+#### アップストリーム データ ソースの選択と構成 {#choose-and-configure-the-upstream-data-source}
 
-DM backs up the full data of the entire database when performing full data migration, and uses the parallel logical backup method. During backing up MySQL, it adds a global read lock [`FLUSH TABLES WITH READ LOCK`](https://dev.mysql.com/doc/refman/8.0/en/flush.html#flush-tables-with-read-lock). DML and DDL operations of the upstream database will be blocked for a short time. Therefore, it is strongly recommended to use a backup database in upstream to perform the full data backup, and enable the GTID function of the data source (`enable-gtid: true`). In this way, you can avoid the impact from the upstream, and switch to the master node in the upstream to reduce the latency during the incremental migration. For the instructions of switching the upstream MySQL data source, see [Switch DM-worker Connection between Upstream MySQL Instances](/dm/usage-scenario-master-slave-switch.md#switch-dm-worker-connection-via-virtual-ip).
+DM は、完全データ移行を実行するときにデータベース全体の完全データをバックアップし、並列論理バックアップ方式を使用します。 MySQL のバックアップ中に、グローバル読み取りロック[`FLUSH TABLES WITH READ LOCK`](https://dev.mysql.com/doc/refman/8.0/en/flush.html#flush-tables-with-read-lock)が追加されます。アップストリーム データベースの DML および DDL 操作は、短期間ブロックされます。したがって、アップストリームでバックアップ データベースを使用して完全なデータ バックアップを実行し、データ ソースの GTID 機能を有効にすることを強くお勧めします ( `enable-gtid: true` )。このようにして、アップストリームからの影響を回避し、アップストリームのマスター ノードに切り替えることで、増分移行中のレイテンシーを短縮できます。上流の MySQL データ ソースを切り替える手順については、 [アップストリーム MySQL インスタンス間の DM ワーカー接続を切り替える](/dm/usage-scenario-master-slave-switch.md#switch-dm-worker-connection-via-virtual-ip)を参照してください。
 
-Note the following:
+次の点に注意してください。
 
-- You can only perform full data backup on the master node of the upstream database.
+-   完全データのバックアップは、アップストリーム データベースのマスター ノードでのみ実行できます。
 
-    In this scenario, you can set the `consistency` parameter to `none` in the configuration file, `mydumpers.global.extra-args: "--consistency none"`, to avoid adding a global read lock to the master node. But this might affect the data consistency of the full backup, which may lead to inconsistent data between the upstream and downstream.
+    このシナリオでは、構成ファイル`mydumpers.global.extra-args: "--consistency none"`で`consistency`パラメーターを`none`に設定して、マスター ノードへのグローバル読み取りロックの追加を回避できます。ただし、これは完全バックアップのデータの一貫性に影響を与える可能性があり、アップストリームとダウンストリームの間でデータの不整合が生じる可能性があります。
 
-- Use backup snapshots to perform full data migration (only applicable to the migration of MySQL RDS and Aurora RDS on AWS)
+-   バックアップ スナップショットを使用して完全なデータ移行を実行します (AWS 上の MySQL RDS およびAurora RDS の移行にのみ適用されます)
 
-    If the database to be migrated is AWS MySQL RDS or Aurora RDS, you can use RDS snapshots to directly migrate the backup data in Amazon S3 to TiDB to ensure data consistency. For more information, see [Migrate Data from Amazon Aurora to TiDB](/migrate-aurora-to-tidb.md).
+    移行するデータベースが AWS MySQL RDS またはAurora RDS の場合、RDS スナップショットを使用して Amazon S3 のバックアップ データを TiDB に直接移行し、データの整合性を確保できます。詳細については、 [Amazon Auroraから TiDB へのデータの移行](/migrate-aurora-to-tidb.md)を参照してください。
 
-### Details of configurations
+### 構成の詳細 {#details-of-configurations}
 
-#### Capitalization
+#### 大文字の使用 {#capitalization}
 
-TiDB schema names are case-insensitive by default, that is, `lower_case_table_names:2`. But most upstream MySQL databases use Linux systems that are case-sensitive by default. In this case, you need to set `case-sensitive` to `true` in the DM task configuration file to ensure that the schema can be correctly migrated from the upstream.
+TiDB スキーマ名は、デフォルトでは大文字と小文字が区別されません`lower_case_table_names:2` 。ただし、アップストリームの MySQL データベースのほとんどは、デフォルトで大文字と小文字を区別する Linux システムを使用しています。この場合、スキーマを上流から正しく移行できるように、DM タスク構成ファイルで`case-sensitive`から`true`設定する必要があります。
 
-In a special case, for example, if there is a database in the upstream that has both uppercase tables such as `Table` and lowercase tables such as `table`, then an error occurs when creating the schema:
+特殊なケースとして、たとえば、 `Table`などの大文字のテーブルと`table`などの小文字のテーブルの両方を持つデータベースがアップストリームにある場合、スキーマの作成時にエラーが発生します。
 
 `ERROR 1050 (42S01): Table '{tablename}' already exists`
 
-#### Filter rules
+#### フィルタルール {#filter-rules}
 
-You can configure the filter rules as soon as you start configuring the data source. For more information, see [Data Migration Task Configuration Guide](/dm/dm-task-configuration-guide.md). The benefits of configuring the filter rules are:
+データ ソースの構成を開始するとすぐにフィルター ルールを構成できます。詳細については、 [データ移行タスクコンフィグレーションガイド](/dm/dm-task-configuration-guide.md)を参照してください。フィルター ルールを構成する利点は次のとおりです。
 
-- Reduce the number of Binlog events that the downstream needs to process, thereby improving migration efficiency.
-- Reduce unnecessary relay log storage, thereby saving disk space.
+-   ダウンストリームが処理する必要があるBinlogイベントの数を減らすことで、移行効率が向上します。
+-   不要なリレー ログstorageを削減し、ディスク領域を節約します。
 
-> **Note:**
+> **注記：**
 >
-> When you migrate and merge MySQL shards, if you have configured filter rules in the data source, you must make sure that the rules match between the data source and the migration task. If they do not match, it may cause the issue that the migration task cannot receive incremental data for a long time.
+> MySQL シャードを移行およびマージするときに、データ ソースでフィルター ルールを構成している場合は、データ ソースと移行タスクの間でルールが一致していることを確認する必要があります。一致しない場合、移行タスクが長時間増分データを受信できないという問題が発生する可能性があります。
 
-#### Use the relay log
+#### リレーログを使用する {#use-the-relay-log}
 
-In the MySQL master/standby mechanism, the standby node saves a copy of relay logs to ensure the reliability and efficiency of asynchronous replication. DM also supports saving a copy of relay logs on DM-worker. You can configure information such as the storage location and expiration time. This feature applies to the following scenarios:
+MySQL マスター/スタンバイ メカニズムでは、スタンバイ ノードがリレー ログのコピーを保存して、非同期レプリケーションの信頼性と効率を確保します。 DM は、DM ワーカーでのリレー ログのコピーの保存もサポートしています。storage場所や有効期限などの情報を設定できます。この機能は次のシナリオに適用されます。
 
-- During full and incremental data migration, if the amount of full data is large, the entire process takes more time than the time for the upstream binlogs to be archived. It causes the incremental replication task to fail to start normally. If you enable the relay log, DM-worker will start receiving relay logs when the full migration is started. This avoids the failure of the incremental task.
+-   完全データおよび増分データの移行中、完全データの量が多い場合、プロセス全体に上流のバイナリログがアーカイブされる時間よりも時間がかかります。これにより、増分レプリケーション タスクが正常に開始できなくなります。リレー ログを有効にすると、完全な移行の開始時に DM ワーカーはリレー ログの受信を開始します。これにより、増分タスクの失敗が回避されます。
 
-- When you use DM to perform long-time data replication, sometimes the migration task is blocked for a long time due to various reasons. If you enable the relay log, you can effectively deal with the problem of upstream binlogs being recycled due to the blocking of the migration task.
+-   DM を使用して長時間のデータ レプリケーションを実行すると、さまざまな理由により移行タスクが長時間ブロックされることがあります。リレー ログを有効にすると、移行タスクのブロックによりアップストリームのバイナリ ログがリサイクルされる問題に効果的に対処できます。
 
-There are some restrictions on using the relay log. DM supports high availability. When a DM-worker fails, it will try to promote an idle DM-worker instance to a working instance. If the upstream binlogs do not contain the necessary migration logs, it may cause interruption. You need to intervene manually to copy the relay log to the new DM-worker node as soon as possible, and modify the corresponding relay meta file. For details, see [Troubleshooting](/dm/dm-error-handling.md#the-relay-unit-throws-error-event-from--in--diff-from-passed-in-event--or-a-migration-task-is-interrupted-with-failing-to-get-or-parse-binlog-errors-like-get-binlog-error-error-1236-hy000-and-binlog-checksum-mismatch-data-may-be-corrupted-returned).
+リレーログの使用にはいくつかの制限があります。 DM は高可用性をサポートします。 DM ワーカーに障害が発生すると、アイドル状態の DM ワーカー インスタンスを動作中のインスタンスに昇格させようとします。アップストリームのバイナリログに必要な移行ログが含まれていない場合、中断が発生する可能性があります。手動で介入して、できるだけ早くリレー ログを新しい DM ワーカー ノードにコピーし、対応するリレー メタ ファイルを変更する必要があります。詳細は[トラブルシューティング](/dm/dm-error-handling.md#the-relay-unit-throws-error-event-from--in--diff-from-passed-in-event--or-a-migration-task-is-interrupted-with-failing-to-get-or-parse-binlog-errors-like-get-binlog-error-error-1236-hy000-and-binlog-checksum-mismatch-data-may-be-corrupted-returned)を参照してください。
 
-#### Use PT-osc/GH-ost in upstream
+#### アップストリームで PT-osc/GH-ost を使用する {#use-pt-osc-gh-ost-in-upstream}
 
-In daily MySQL operation and maintenance, usually you use tools such as PT-osc/GH-ost to change the schema online to minimize impact on the business. However, the whole process will be logged to MySQL Binlog. Migrating such data to TiDB downstream will result in a lot of unnecessary write operations, which is neither efficient nor economical.
+MySQL の日常的な運用と保守では、通常、PT-osc/GH-ost などのツールを使用してオンラインでスキーマを変更し、ビジネスへの影響を最小限に抑えます。ただし、プロセス全体は MySQL Binlogに記録されます。このようなデータを TiDB ダウンストリームに移行すると、多くの不必要な書き込み操作が発生し、効率的でも経済的でもありません。
 
-To resolve this issue, DM supports third-party data tools such as PT-osc and GH-ost when you configure the migration task. When you use such tools, DM does not migrate redundant data and ensure data consistency. For details, see [Migrate from Databases that Use GH-ost/PT-osc](/dm/feature-online-ddl.md).
+この問題を解決するために、DM は移行タスクを構成するときに PT-osc や GH-ost などのサードパーティ データ ツールをサポートします。このようなツールを使用すると、DM は冗長データを移行せず、データの一貫性を確保します。詳細は[GH-ost/PT-osc を使用するデータベースからの移行](/dm/feature-online-ddl.md)を参照してください。
 
-## Best practices during migration
+## 移行時のベスト プラクティス {#best-practices-during-migration}
 
-This section introduces how to troubleshoot problems you might encounter during migration.
+このセクションでは、移行中に発生する可能性のある問題のトラブルシューティング方法を紹介します。
 
-### Inconsistent schemas in upstream and downstream
+### 上流と下流で一貫性のないスキーマ {#inconsistent-schemas-in-upstream-and-downstream}
 
-Common errors include:
+一般的なエラーには次のようなものがあります。
 
-- `messages: Column count doesn't match value count: 3 (columns) vs 2 (values)`
-- `Schema/Column doesn't match`
+-   `messages: Column count doesn't match value count: 3 (columns) vs 2 (values)`
+-   `Schema/Column doesn't match`
 
-Usually such issues are caused by changed or added indexes in the downstream TiDB, or there are more columns in the downstream. When such errors occur, check whether the upstream and downstream schemas are inconsistent.
+通常、このような問題は、ダウンストリーム TiDB でインデックスが変更または追加されたか、ダウンストリームに列が増えたことが原因で発生します。このようなエラーが発生した場合は、上流と下流のスキーマに矛盾がないか確認してください。
 
-To resolve such issues, update the schema information cached in DM to be consistent with the downstream TiDB schema. For details, see [Manage Table Schemas of Tables to be Migrated](/dm/dm-manage-schema.md).
+このような問題を解決するには、DM にキャッシュされたスキーマ情報を更新して、ダウンストリーム TiDB スキーマと一致するようにします。詳細は[移行するテーブルのテーブルスキーマを管理する](/dm/dm-manage-schema.md)を参照してください。
 
-If the downstream has more columns, see [Migrate Data to a Downstream TiDB Table with More Columns](/migrate-with-more-columns-downstream.md).
+下流にさらに多くの列がある場合は、 [より多くの列を含むダウンストリーム TiDB テーブルにデータを移行する](/migrate-with-more-columns-downstream.md)を参照してください。
 
-### Interrupted migration task due to failed DDL
+### DDL の失敗により移行タスクが中断されました {#interrupted-migration-task-due-to-failed-ddl}
 
-DM supports skipping or replacing DDL statements that cause a migration task to interrupt. For details, see [Handle Failed DDL Statements](/dm/handle-failed-ddl-statements.md#usage-examples).
+DM は、移行タスクの中断を引き起こす DDL ステートメントのスキップまたは置換をサポートしています。詳細は[失敗した DDL ステートメントの処理](/dm/handle-failed-ddl-statements.md#usage-examples)を参照してください。
 
-## Data validation after data migration
+## データ移行後のデータ検証 {#data-validation-after-data-migration}
 
-It is recommended that you validate the consistency of data after data migration. TiDB provides [sync-diff-inspector](/sync-diff-inspector/sync-diff-inspector-overview.md) to help you complete the data validation.
+データ移行後にデータの整合性を検証することをお勧めします。 TiDB は、データ検証を完了するのに役立つ[同期差分インスペクター](/sync-diff-inspector/sync-diff-inspector-overview.md)を提供します。
 
-Now sync-diff-inspector can automatically manage the table list to be checked for data consistency through DM tasks. Compared with the previous manual configuration, it is more efficient. For details, see [Data Check in the DM Replication Scenario](/sync-diff-inspector/dm-diff.md).
+sync-diff-inspector は、DM タスクを通じてデータの整合性をチェックするテーブル リストを自動的に管理できるようになりました。以前の手動構成と比較して、より効率的です。詳細は[DM レプリケーション シナリオでのデータ チェック](/sync-diff-inspector/dm-diff.md)を参照してください。
 
-Since DM v6.2.0, DM supports continuous data validation for incremental replication. For details, see [Continuous Data Validation in DM](/dm/dm-continuous-data-validation.md).
+DM v6.2.0 以降、DM は増分レプリケーションの継続的なデータ検証をサポートしています。詳細は[DM での継続的なデータ検証](/dm/dm-continuous-data-validation.md)を参照してください。
 
-## Long-term data replication
+## 長期的なデータレプリケーション {#long-term-data-replication}
 
-If you use DM to perform a long-term data replication task, it is necessary to back up the metadata. On the one hand, it ensures the ability to rebuild the migration cluster. On the other hand, it can implement the version control of the migration task. For details, see [Export and Import Data Sources and Task Configuration of Clusters](/dm/dm-export-import-config.md).
+DM を使用して長期的なデータ複製タスクを実行する場合は、メタデータをバックアップする必要があります。一方で、移行クラスターを再構築できるようになります。一方、移行タスクのバージョン管理を実装できます。詳細は[データソースのエクスポートとインポート、およびクラスターのタスクコンフィグレーション](/dm/dm-export-import-config.md)を参照してください。

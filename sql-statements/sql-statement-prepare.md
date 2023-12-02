@@ -3,11 +3,11 @@ title: PREPARE | TiDB SQL Statement Reference
 summary: An overview of the usage of PREPARE for the TiDB database.
 ---
 
-# PREPARE
+# 準備する {#prepare}
 
-The `PREPARE` statement provides an SQL interface to server-side prepared statements.
+`PREPARE`ステートメントは、サーバー側のプリペアド ステートメントへの SQL インターフェイスを提供します。
 
-## Synopsis
+## あらすじ {#synopsis}
 
 ```ebnf+diagram
 PreparedStmt ::=
@@ -18,7 +18,7 @@ PrepareSQL ::=
 |   UserVariable
 ```
 
-## Examples
+## 例 {#examples}
 
 ```sql
 mysql> PREPARE mystmt FROM 'SELECT ? as num FROM DUAL';
@@ -39,11 +39,11 @@ mysql> DEALLOCATE PREPARE mystmt;
 Query OK, 0 rows affected (0.00 sec)
 ```
 
-## MySQL compatibility
+## MySQLの互換性 {#mysql-compatibility}
 
-The `PREPARE` statement in TiDB is fully compatible with MySQL. If you find any compatibility differences, [report a bug](https://docs.pingcap.com/tidb/stable/support).
+TiDB の`PREPARE`ステートメントは MySQL と完全な互換性があります。互換性の違いが見つかった場合は、 [バグを報告](https://docs.pingcap.com/tidb/stable/support) .
 
-## See also
+## こちらも参照 {#see-also}
 
-* [EXECUTE](/sql-statements/sql-statement-execute.md)
-* [DEALLOCATE](/sql-statements/sql-statement-deallocate.md)
+-   [実行する](/sql-statements/sql-statement-execute.md)
+-   [割り当てを解除する](/sql-statements/sql-statement-deallocate.md)

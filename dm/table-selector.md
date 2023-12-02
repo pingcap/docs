@@ -3,39 +3,39 @@ title: Table Selector of TiDB Data Migration
 summary: Learn about Table Selector used by the table routing, binlog event filtering, and column mapping rule of Data Migration.
 ---
 
-# Table Selector of TiDB Data Migration
+# TiDB データ移行のテーブルセレクター {#table-selector-of-tidb-data-migration}
 
-Table selector provides a match rule based on [wildcard characters](https://en.wikipedia.org/wiki/Wildcard_character) for schema/table. To match a specified table, configure `schema-pattern`/`table-pattern`.
+テーブル セレクターは、スキーマ/テーブルの[ワイルドカード文字](https://en.wikipedia.org/wiki/Wildcard_character)に基づく一致ルールを提供します。指定したテーブルに一致させるには、 `schema-pattern` / `table-pattern`を設定します。
 
-## Wildcard character
+## ワイルドカード文字 {#wildcard-character}
 
-Table selector uses the following two wildcard characters in `schema-pattern`/`table-pattern`:
+テーブル セレクターは、 `schema-pattern` / `table-pattern`で次の 2 つのワイルドカード文字を使用します。
 
-+ The asterisk character (`*`, also called "star")
+-   アスタリスク文字 ( `*` 、「スター」とも呼ばれます)
 
-    - `*` matches zero or more characters. For example, `doc*` matches `doc` and `document` but not `dodo`.
-    - `*` can only be placed at the end of the word. For example, `doc*` is supported, while `do*c` is not supported.
+    -   `*` 0 個以上の文字に一致します。たとえば、 `doc*` `doc`および`document`一致しますが、 `dodo`には一致しません。
+    -   `*`単語の末尾にのみ置くことができます。たとえば、 `doc*`はサポートされますが、 `do*c`はサポートされません。
 
-+ The question mark (`?`)
+-   疑問符 ( `?` )
 
-    `?` matches exactly one character except the empty character.
+    `?`空の文字を除く 1 つの文字に正確に一致します。
 
-## Match rules
+## 試合ルール {#match-rules}
 
-- `schema-pattern` cannot be empty.
-- `table-pattern` can be empty. When you configure it as empty, only `schema` is matched according to `schema-pattern`.
-- When `table-pattern` is not empty, the `schema` is matched according to `schema-pattern` and `table` is matched according to `table-pattern`. Only when both `schema` and `table` are successfully matched, you can get the match result.
+-   `schema-pattern`空にすることはできません。
+-   `table-pattern`空でも構いません。空として構成すると、 `schema-pattern`に従って`schema`のみが一致します。
+-   `table-pattern`が空でない場合、 `schema`は`schema-pattern`に従って照合され、 `table`は`table-pattern`に従って照合されます。 `schema`と`table`両方が正常にマッチングされた場合のみ、マッチング結果を取得できます。
 
-## Usage examples
+## 使用例 {#usage-examples}
 
-- Matching all schemas and tables that have a `schema_` prefix in the schema name:
+-   スキーマ名に接頭辞`schema_`を持つすべてのスキーマとテーブルを照合します。
 
     ```yaml
     schema-pattern: "schema_*"
     table-pattern: ""
     ```
 
-- Matching all tables that have a `schema_` prefix in the schema name and a `table_` prefix in the table name:
+-   スキーマ名に`schema_`プレフィックスがあり、テーブル名に`table_`プレフィックスを持つすべてのテーブルと一致します。
 
     ```yaml
     schema-pattern = "schema_*"

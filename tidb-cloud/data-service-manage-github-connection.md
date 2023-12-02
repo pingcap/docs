@@ -3,160 +3,170 @@ title: Deploy Data App Automatically with GitHub
 summary: Learn how to deploy your Data App automatically with GitHub.
 ---
 
-# Deploy Data App Automatically with GitHub
+# GitHub を使用してデータ アプリを自動的にデプロイ {#deploy-data-app-automatically-with-github}
 
-TiDB Cloud provides a Configuration as Code (CaC) approach to represent your entire Data App configurations as code using the JSON syntax.
+TiDB Cloudは、 JSON 構文を使用してデータ アプリ構成全体をコードとして表すためのコードとしてのコンフィグレーション(CaC) アプローチを提供します。
 
-By connecting your Data App to GitHub, TiDB Cloud can use the CaC approach and push your Data App configurations as [configuration files](/tidb-cloud/data-service-app-config-files.md) to your preferred GitHub repository and branch.
+データ アプリを GitHub に接続することにより、 TiDB CloudはCaC アプローチを使用して、データ アプリ構成を[設定ファイル](/tidb-cloud/data-service-app-config-files.md)として優先 GitHub リポジトリおよびブランチにプッシュできます。
 
-If **Auto Sync & Deployment** is enabled for your GitHub connection, you can also modify your Data App by updating its configuration files on GitHub. After you push the configuration file changes to GitHub, the new configurations will be deployed in TiDB Cloud automatically.
+GitHub 接続で**自動同期とデプロイ**が有効になっている場合は、GitHub 上の構成ファイルを更新してデータ アプリを変更することもできます。構成ファイルの変更を GitHub にプッシュすると、新しい構成がTiDB Cloudに自動的にデプロイされます。
 
-This document introduces how to deploy your Data App automatically with GitHub and how to manage the GitHub connection.
+このドキュメントでは、GitHub を使用してデータ アプリを自動的にデプロイする方法と、GitHub 接続を管理する方法を紹介します。
 
-## Before you begin
+## あなたが始める前に {#before-you-begin}
 
-Before you connect a Data App to GitHub, make sure that you have the following:
+データ アプリを GitHub に接続する前に、次のものが揃っていることを確認してください。
 
-- A GitHub account.
-- A GitHub repository with your target branch.
+-   GitHub アカウント。
+-   ターゲット ブランチを含む GitHub リポジトリ。
 
-> **Note:**
+> **注記：**
 >
-> The GitHub repository is used to store [Data App configuration files](/tidb-cloud/data-service-app-config-files.md) after you connect a Data App to it. If the information (such as the cluster ID and endpoint URL) in the configuration files is sensitive, make sure to use a private repository instead of a public one.
+> GitHub リポジトリは、データ アプリを接続した後に[データアプリ構成ファイル](/tidb-cloud/data-service-app-config-files.md)を保存するために使用されます。構成ファイル内の情報 (クラスター ID やエンドポイント URL など) が機密である場合は、パブリック リポジトリではなくプライベート リポジトリを必ず使用してください。
 
-## Step 1. Connect your Data App to GitHub
+## ステップ 1. データ アプリを GitHub に接続する {#step-1-connect-your-data-app-to-github}
 
-You can connect your Data App to GitHub when you create the App. For more information, see [Create a Data App](/tidb-cloud/data-service-manage-data-app.md).
+アプリを作成するときに、データ アプリを GitHub に接続できます。詳細については、 [データアプリを作成する](/tidb-cloud/data-service-manage-data-app.md)を参照してください。
 
-If you did not enable the GitHub connection during the App creation, you can still enable it as follows:
+アプリの作成時に GitHub 接続を有効にしなかった場合でも、次のようにして有効にすることができます。
 
-1. Navigate to the [**Data Service**](https://tidbcloud.com/console/data-service) page of your project.
-2. In the left pane, click the name of your target Data App to view its details.
-3. On the **Settings** tab, click **Connect** in the **Connect to GitHub** area. A dialog box for connection settings is displayed.
-4. In the dialog box, perform the following steps:
+1.  プロジェクトの[**データサービス**](https://tidbcloud.com/console/data-service)ページに移動します。
 
-    1. Click **Install on GitHub**, and then follow the on-screen instructions to install **TiDB Cloud Data Service** as an application on your target repository.
-    2. Click **Authorize** to authorize access to the application on GitHub.
-    3. Specify the target repository, branch, and directory where you want to store the configuration files of your Data App.
+2.  左側のペインで、ターゲット データ アプリの名前をクリックして詳細を表示します。
 
-        > **Note:**
+3.  **[設定]**タブの**[GitHub に接続]**領域で**[接続] を**クリックします。接続設定のダイアログボックスが表示されます。
+
+4.  ダイアログ ボックスで、次の手順を実行します。
+
+    1.  **[GitHub にインストール] を**クリックし、画面上の指示に従って**TiDB Cloud Data Service**をアプリケーションとしてターゲット リポジトリにインストールします。
+
+    2.  **「承認」**をクリックして、GitHub 上のアプリケーションへのアクセスを承認します。
+
+    3.  データ アプリの構成ファイルを保存するターゲット リポジトリ、ブランチ、ディレクトリを指定します。
+
+        > **注記：**
         >
-        > - The directory must start with a slash (`/`). For example, `/mydata`. If the directory you specified does not exist in the target repository and branch, it will be created automatically.
-        > - The combination of repository, branch, and directory identifies the path of the configuration files, which must be unique among Data Apps. If your specified path is already used by another Data App, you need to specify a new path instead. Otherwise, the endpoints configured in the TiDB Cloud console for the current Data App will overwrite the files in your specified path.
-        > - If your specified path contains configuration files copied from another Data App and you want to import these files to the current Data App, see [Import configurations of an existing Data App](#import-configurations-of-an-existing-data-app).
+        > -   ディレクトリはスラッシュ ( `/` ) で始まる必要があります。たとえば、 `/mydata` 。指定したディレクトリがターゲット リポジトリおよびブランチに存在しない場合は、自動的に作成されます。
+        > -   リポジトリ、ブランチ、ディレクトリの組み合わせによって構成ファイルのパスが識別されます。このパスはデータ アプリ間で一意である必要があります。指定したパスがすでに別のデータ アプリで使用されている場合は、代わりに新しいパスを指定する必要があります。そうしないと、現在のデータ アプリのTiDB Cloudコンソールで構成されたエンドポイントによって、指定したパス内のファイルが上書きされます。
+        > -   指定したパスに別のデータ アプリからコピーされた構成ファイルが含まれており、これらのファイルを現在のデータ アプリにインポートする場合は、 [既存のデータ アプリの構成をインポートする](#import-configurations-of-an-existing-data-app)を参照してください。
 
-    4. To allow Data App changes made in either TiDB Cloud console or GitHub are synchronized with each other, enable **Configure Auto Sync & Deployment**.
+    4.  TiDB Cloudコンソールまたは GitHub で行われたデータ アプリの変更が相互に同期されるようにするには、 **[自動同期とデプロイメントの構成]**を有効にします。
 
-        - When it is enabled, the changes made in your specified GitHub directory can be automatically deployed in TiDB Cloud, and the changes made in the TiDB Cloud console can be pushed to GitHub as well. You can find the corresponding deployment and commit information in the Data App deployment history.
-        - When it is disabled, the changes made in your specified GitHub directory will **NOT** be deployed in TiDB Cloud, and the changes made in the TiDB Cloud console will **NOT** be pushed to GitHub either.
+        -   これを有効にすると、指定した GitHub ディレクトリで行われた変更をTiDB Cloudに自動的にデプロイでき、 TiDB Cloudコンソールで行われた変更も同様に GitHub にプッシュできます。データ アプリのデプロイ履歴で、対応するデプロイとコミットの情報を見つけることができます。
+        -   これを無効にすると、指定した GitHub ディレクトリで行われた変更はTiDB Cloudにデプロイされ**ず**、 TiDB Cloudコンソールで行われた変更も GitHub に**プッシュ**されません。
 
-5. Click **Confirm Connect**.
+5.  **[接続の確認]**をクリックします。
 
-## Step 2. Synchronize Data App configurations with GitHub
+## ステップ 2. データ アプリ構成を GitHub と同期する {#step-2-synchronize-data-app-configurations-with-github}
 
-If GitHub connection is enabled when you [create a Data App](/tidb-cloud/data-service-manage-data-app.md), TiDB Cloud pushes the configuration files of this Data App to GitHub immediately after the App creation.
+[データアプリを作成する](/tidb-cloud/data-service-manage-data-app.md)のときに GitHub 接続が有効になっている場合、 TiDB Cloud はアプリの作成直後にこのデータ アプリの構成ファイルを GitHub にプッシュします。
 
-If GitHub connection is enabled after the App creation, you need to perform a deployment operation to synchronize the Data App configurations with GitHub. For example, you can click the **Deployments** tab, and then re-deploy a deployment for this Data App.
+アプリの作成後に GitHub 接続が有効になっている場合は、デプロイ操作を実行してデータ アプリの構成を GitHub と同期する必要があります。たとえば、 **[デプロイメント]**タブをクリックして、このデータ アプリのデプロイメントを再デプロイできます。
 
-After the deployment operation, check your specified GitHub directory. You will find that the Data App configuration files have been committed to the directory by `tidb-cloud-data-service`, which means that your Data App is connected to GitHub successfully. The directory structure is as follows:
+デプロイメント操作後、指定した GitHub ディレクトリを確認してください。データ アプリ構成ファイルが`tidb-cloud-data-service`によってディレクトリにコミットされたことがわかります。これは、データ アプリが GitHub に正常に接続されていることを意味します。ディレクトリ構造は次のとおりです。
 
-```
-├── <Your Data App directory on GitHub>
-│   ├── data_sources
-│   │   └── cluster.json  # specifies the linked clusters.
-│   ├── dataapp_config.json # specifies the Data APP ID, name, type, version, and description.
-│   ├── http_endpoints
-│   │   ├── config.json # specifies the endpoints.
-│   │   └── sql # contains SQL files of the endpoints.
-│   │       ├── <method>-<endpoint-path1>.sql
-│   │       ├── <method>-<endpoint-path2>.sql
-│   │       └── <method>-<endpoint-path3>.sql
-```
+    ├── <Your Data App directory on GitHub>
+    │   ├── data_sources
+    │   │   └── cluster.json  # specifies the linked clusters.
+    │   ├── dataapp_config.json # specifies the Data APP ID, name, type, version, and description.
+    │   ├── http_endpoints
+    │   │   ├── config.json # specifies the endpoints.
+    │   │   └── sql # contains SQL files of the endpoints.
+    │   │       ├── <method>-<endpoint-path1>.sql
+    │   │       ├── <method>-<endpoint-path2>.sql
+    │   │       └── <method>-<endpoint-path3>.sql
 
-## Step 3. Modify your Data App
+## ステップ 3. データ アプリを変更する {#step-3-modify-your-data-app}
 
-When **Auto Sync & Deployment** is enabled, you can modify your Data App using either GitHub or the TiDB Cloud console.
+**自動同期とデプロイメントが**有効になっている場合、GitHub またはTiDB Cloudコンソールを使用してデータ アプリを変更できます。
 
-- [Option 1: Modify your Data App by updating files on GitHub](#option-1-modify-your-data-app-by-updating-files-on-github)
-- [Option 2: Modify your Data App in the TiDB Cloud console](#option-2-modify-your-data-app-in-the-tidb-cloud-console)
+-   [オプション 1: GitHub 上のファイルを更新してデータ アプリを変更する](#option-1-modify-your-data-app-by-updating-files-on-github)
+-   [オプション 2: TiDB Cloudコンソールでデータ アプリを変更する](#option-2-modify-your-data-app-in-the-tidb-cloud-console)
 
-> **Note:**
+> **注記：**
 >
-> If you have modified your Data App on GitHub and TiDB Cloud console at the same time, to resolve conflicts, you can choose either discard the changes made in the console or let the console changes overwrite the GitHub changes.
+> GitHub とTiDB Cloudコンソールでデータ アプリを同時に変更した場合、競合を解決するには、コンソールで加えた変更を破棄するか、コンソールの変更で GitHub の変更を上書きするかを選択できます。
 
-### Option 1: Modify your Data App by updating files on GitHub
+### オプション 1: GitHub 上のファイルを更新してデータ アプリを変更する {#option-1-modify-your-data-app-by-updating-files-on-github}
 
-When updating the configuration files, pay attention to the following:
+構成ファイルを更新するときは、次の点に注意してください。
 
-| File directory  | Notes |
-| ---------|---------|
-| `data_source/cluster.json`     | When updating this file, make sure that you have access to the linked clusters. You can get the cluster ID from the cluster URL. For example, if the cluster URL is `https://tidbcloud.com/console/clusters/1234567891234567890/overview`, the cluster ID is `1234567891234567890`. |
-| `http_endpoints/config.json`     | When modifying the endpoints, make sure that you follow the rules described in [HTTP endpoint configuration](/tidb-cloud/data-service-app-config-files.md#http-endpoint-configuration).   |
-| `http_endpoints/sql/method-<endpoint-path>.sql`| To add or remove SQL files in the `http_endpoints/sql` directory, you need to update the corresponding endpoint configurations as well. |
-| `datapp_config.json` | Do not change the `app_id` field in this file unless your `dataapp_config.json` file is copied from another Data App and you want to update it to the ID of your current Data App. Otherwise, the deployment triggered by this modification will fail. |
+| ファイルディレクトリ                                      | ノート                                                                                                                                                                                                    |
+| ----------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `data_source/cluster.json`                      | このファイルを更新するときは、リンクされたクラスターにアクセスできることを確認してください。クラスター ID はクラスター URL から取得できます。たとえば、クラスター URL が`https://tidbcloud.com/console/clusters/1234567891234567890/overview`の場合、クラスター ID は`1234567891234567890`です。 |
+| `http_endpoints/config.json`                    | エンドポイントを変更するときは、必ず[HTTPエンドポイント構成](/tidb-cloud/data-service-app-config-files.md#http-endpoint-configuration)で説明されているルールに従ってください。                                                                        |
+| `http_endpoints/sql/method-<endpoint-path>.sql` | `http_endpoints/sql`ディレクトリ内の SQL ファイルを追加または削除するには、対応するエンドポイント構成も更新する必要があります。                                                                                                                           |
+| `datapp_config.json`                            | `dataapp_config.json`ファイルが別のデータ アプリからコピーされ、現在のデータ アプリの ID に更新する場合を除き、このファイルの`app_id`フィールドは変更しないでください。そうしないと、この変更によってトリガーされる展開は失敗します。                                                                   |
 
-For more information about the field configuration in these files, see [Data App configuration files](/tidb-cloud/data-service-app-config-files.md).
+これらのファイルのフィールド構成の詳細については、 [データアプリ構成ファイル](/tidb-cloud/data-service-app-config-files.md)を参照してください。
 
-After the file changes are committed and pushed, TiDB Cloud will automatically deploy the Data App with the latest changes on GitHub. You can view the deployment status and commit information in the deployment history.
+ファイルの変更がコミットされてプッシュされると、 TiDB Cloud は最新の変更を含むデータ アプリを GitHub に自動的にデプロイします。デプロイメント履歴でデプロイメントのステータスとコミット情報を表示できます。
 
-### Option 2: Modify your Data App in the TiDB Cloud console
+### オプション 2: TiDB Cloudコンソールでデータ アプリを変更する {#option-2-modify-your-data-app-in-the-tidb-cloud-console}
 
-After [modifying your Data App endpoints](/tidb-cloud/data-service-manage-endpoint.md) in the TiDB Cloud console (such as modifying endpoints), you can review and deploy the changes to GitHub as follows:
+TiDB Cloudコンソールで[Data App エンドポイントの変更](/tidb-cloud/data-service-manage-endpoint.md)を実行した後 (エンドポイントの変更など)、次のように変更を確認して GitHub にデプロイできます。
 
-1. Click **Deploy** in the upper-right corner. A dialog is displayed for you to review the changes you made.
-2. Depending on your review, do one of the following:
+1.  右上隅にある**「デプロイ」**をクリックします。加えた変更を確認するためのダイアログが表示されます。
+2.  レビューに応じて、次のいずれかを実行します。
 
-    - If you still want to make further changes based on the current draft, close this dialog and make the changes.
-    - If you want to revert the current changes to the last deployment, click **Discard Draft**.
-    - If the current changes look fine, write a change description (optional), and then click **Deploy and Push to GitHub**. The deployment status will be displayed in the top banner.
+    -   現在のドラフトに基づいてさらに変更を加えたい場合は、このダイアログを閉じて変更を加えます。
+    -   現在の変更を最後のデプロイメントに戻す場合は、 **「ドラフトを破棄」**をクリックします。
+    -   現在の変更に問題がない場合は、変更の説明 (オプション) を入力し、 **[デプロイ and Push to GitHub]**をクリックします。導入ステータスは上部のバナーに表示されます。
 
-If the deployment is successful, the changes made in the TiDB Cloud console will be pushed to GitHub automatically.
+デプロイメントが成功すると、 TiDB Cloudコンソールで行われた変更が自動的に GitHub にプッシュされます。
 
-## Import configurations of an existing Data App
+## 既存のデータ アプリの構成をインポートする {#import-configurations-of-an-existing-data-app}
 
-To import configurations of an existing Data App to a new Data App, take the following steps:
+既存のデータ アプリの構成を新しいデータ アプリにインポートするには、次の手順を実行します。
 
-1. Copy configuration files of the existing Data App to a new branch or directory on GitHub.
-2. On the [**Data Service**](https://tidbcloud.com/console/data-service) page of your project, [create a new Data App](/tidb-cloud/data-service-manage-data-app.md#create-a-data-app) without connecting to GitHub.
-3. [Connect your new Data App to GitHub](#step-1-connect-your-data-app-to-github) with **Auto Sync & Deployment** enabled. When you specify the target repository, branch, and directory for your new Data App, use your new path with the copied configuration files.
-4. Get the ID and name of your new Data App. You can click the name of your new Data App in the left pane and get the App ID and name in the **Data App Properties** area of the right pane.
-5. In your new path on GitHub, update the `app_id` and `app_name` in the `datapp_config.json` file to the ID and name you get, and then push the changes.
+1.  既存のデータ アプリの構成ファイルを GitHub 上の新しいブランチまたはディレクトリにコピーします。
 
-    After the file changes are pushed to GitHub, TiDB Cloud will automatically deploy your new Data App with the latest changes.
+2.  プロジェクトの[**データサービス**](https://tidbcloud.com/console/data-service)ページで、GitHub に接続せずに[新しいデータアプリを作成する](/tidb-cloud/data-service-manage-data-app.md#create-a-data-app) 。
 
-6. To view the imported configurations from GitHub, refresh the webpage of the TiDB Cloud console.
+3.  [新しいデータ アプリを GitHub に接続する](#step-1-connect-your-data-app-to-github) (**自動同期と展開**が有効)。新しいデータ アプリのターゲット リポジトリ、ブランチ、ディレクトリを指定するときは、コピーした構成ファイルを含む新しいパスを使用します。
 
-    You can also view the deployment status and commit information in the deployment history.
+4.  新しいデータ アプリの ID と名前を取得します。左側のペインで新しいデータ アプリの名前をクリックし、右側のペインの**データ アプリのプロパティ**領域でアプリ ID と名前を取得できます。
 
-## Edit GitHub connection
+5.  GitHub 上の新しいパスで、 `datapp_config.json`ファイルの`app_id`と`app_name`を取得した ID と名前に更新し、変更をプッシュします。
 
-If you want to edit the GitHub connection for your Data App (such as switching the repository, branch, and directory), perform the following steps.
+    ファイルの変更が GitHub にプッシュされると、 TiDB Cloud は最新の変更を含む新しいデータ アプリを自動的にデプロイします。
 
-1. Navigate to the [**Data Service**](https://tidbcloud.com/console/data-service) page of your project.
-2. In the left pane, click the name of your target Data App to view its details.
-3. In the **Connect to GitHub** area, click <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" color="gray.1"><path d="M11 3.99998H6.8C5.11984 3.99998 4.27976 3.99998 3.63803 4.32696C3.07354 4.61458 2.6146 5.07353 2.32698 5.63801C2 6.27975 2 7.11983 2 8.79998V17.2C2 18.8801 2 19.7202 2.32698 20.362C2.6146 20.9264 3.07354 21.3854 3.63803 21.673C4.27976 22 5.11984 22 6.8 22H15.2C16.8802 22 17.7202 22 18.362 21.673C18.9265 21.3854 19.3854 20.9264 19.673 20.362C20 19.7202 20 18.8801 20 17.2V13M7.99997 16H9.67452C10.1637 16 10.4083 16 10.6385 15.9447C10.8425 15.8957 11.0376 15.8149 11.2166 15.7053C11.4184 15.5816 11.5914 15.4086 11.9373 15.0627L21.5 5.49998C22.3284 4.67156 22.3284 3.32841 21.5 2.49998C20.6716 1.67156 19.3284 1.67155 18.5 2.49998L8.93723 12.0627C8.59133 12.4086 8.41838 12.5816 8.29469 12.7834C8.18504 12.9624 8.10423 13.1574 8.05523 13.3615C7.99997 13.5917 7.99997 13.8363 7.99997 14.3255V16Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>. A dialog box for connection settings is displayed.
-4. In the dialog box, modify the repository, branch, and directory of your Data App.
+6.  GitHub からインポートされた構成を表示するには、 TiDB Cloudコンソールの Web ページを更新します。
 
-    > **Note:**
+    デプロイメント履歴でデプロイメントのステータスとコミット情報を表示することもできます。
+
+## GitHub接続を編集する {#edit-github-connection}
+
+データ アプリの GitHub 接続を編集する場合 (リポジトリ、ブランチ、ディレクトリの切り替えなど)、次の手順を実行します。
+
+1.  プロジェクトの[**データサービス**](https://tidbcloud.com/console/data-service)ページに移動します。
+
+2.  左側のペインで、ターゲット データ アプリの名前をクリックして詳細を表示します。
+
+3.  **「GitHub に接続」**領域で、 をクリックします。 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" color="gray.1"><path d="M11 3.99998H6.8C5.11984 3.99998 4.27976 3.99998 3.63803 4.32696C3.07354 4.61458 2.6146 5.07353 2.32698 5.63801C2 6.27975 2 7.11983 2 8.79998V17.2C2 18.8801 2 19.7202 2.32698 20.362C2.6146 20.9264 3.07354 21.3854 3.63803 21.673C4.27976 22 5.11984 22 6.8 22H15.2C16.8802 22 17.7202 22 18.362 21.673C18.9265 21.3854 19.3854 20.9264 19.673 20.362C20 19.7202 20 18.8801 20 17.2V13M7.99997 16H9.67452C10.1637 16 10.4083 16 10.6385 15.9447C10.8425 15.8957 11.0376 15.8149 11.2166 15.7053C11.4184 15.5816 11.5914 15.4086 11.9373 15.0627L21.5 5.49998C22.3284 4.67156 22.3284 3.32841 21.5 2.49998C20.6716 1.67156 19.3284 1.67155 18.5 2.49998L8.93723 12.0627C8.59133 12.4086 8.41838 12.5816 8.29469 12.7834C8.18504 12.9624 8.10423 13.1574 8.05523 13.3615C7.99997 13.5917 7.99997 13.8363 7.99997 14.3255V16Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg> 。接続設定のダイアログボックスが表示されます。
+
+4.  ダイアログ ボックスで、データ アプリのリポジトリ、ブランチ、ディレクトリを変更します。
+
+    > **注記：**
     >
-    > - The directory must start with a slash (`/`). For example, `/mydata`. If the directory you specified does not exist in the target repository and branch, it will be created automatically.
-    > - The combination of repository, branch, and directory identifies the path of the configuration files, which must be unique among Data Apps. If your specified path is already used by another Data App, you need to specify a new path instead. Otherwise, the endpoints configured in the TiDB Cloud console for the current Data App will overwrite the files in your specified path.
-    > - If your specified path contains configuration files copied from another Data App and you want to import these files to the current Data App, see [Import configurations of an existing Data App](#import-configurations-of-an-existing-data-app).
+    > -   ディレクトリはスラッシュ ( `/` ) で始まる必要があります。たとえば、 `/mydata` 。指定したディレクトリがターゲット リポジトリおよびブランチに存在しない場合は、自動的に作成されます。
+    > -   リポジトリ、ブランチ、ディレクトリの組み合わせによって構成ファイルのパスが識別されます。このパスはデータ アプリ間で一意である必要があります。指定したパスがすでに別のデータ アプリで使用されている場合は、代わりに新しいパスを指定する必要があります。そうしないと、現在のデータ アプリのTiDB Cloudコンソールで構成されたエンドポイントによって、指定したパス内のファイルが上書きされます。
+    > -   指定したパスに別のデータ アプリからコピーされた構成ファイルが含まれており、これらのファイルを現在のデータ アプリにインポートする場合は、 [既存のデータ アプリの構成をインポートする](#import-configurations-of-an-existing-data-app)を参照してください。
 
-5. To allow Data App changes made in either TiDB Cloud console or GitHub are synchronized with each other, enable **Configure Auto Sync & Deployment**.
+5.  TiDB Cloudコンソールまたは GitHub で行われたデータ アプリの変更が相互に同期されるようにするには、 **[自動同期とデプロイメントの構成]**を有効にします。
 
-    - When it is enabled, the changes made in your specified GitHub directory can be automatically deployed in TiDB Cloud, and the changes made in the TiDB Cloud console can be pushed to GitHub as well. You can find the corresponding deployment and commit information in the Data App deployment history.
-    - When it is disabled, the changes made in your specified GitHub directory will **NOT** be deployed in TiDB Cloud, and the changes made in the TiDB Cloud console will **NOT** be pushed to GitHub either.
+    -   これを有効にすると、指定した GitHub ディレクトリで行われた変更を自動的にTiDB Cloudにデプロイでき、 TiDB Cloudコンソールで行われた変更も同様に GitHub にプッシュできます。データ アプリのデプロイ履歴で、対応するデプロイとコミットの情報を見つけることができます。
+    -   これを無効にすると、指定した GitHub ディレクトリで行われた変更はTiDB Cloudにデプロイされ**ず**、 TiDB Cloudコンソールで行われた変更も GitHub に**プッシュ**されません。
 
-6. Click **Confirm Connect**.
+6.  **[接続の確認]**をクリックします。
 
-## Remove GitHub connection
+## GitHub 接続を削除する {#remove-github-connection}
 
-If you no longer want to connect your Data App to GitHub, take the following steps:
+データ アプリを GitHub に接続したくない場合は、次の手順を実行します。
 
-1. Navigate to the [**Data Service**](https://tidbcloud.com/console/data-service) page of your project.
-2. In the left pane, click the name of your target Data App to view its details.
-3. On the **Settings** tab, click **Disconnect** in the **Connect to GitHub** area.
-4. Click **Disconnect** to confirm the disconnection.
+1.  プロジェクトの[**データサービス**](https://tidbcloud.com/console/data-service)ページに移動します。
+2.  左側のペインで、ターゲット データ アプリの名前をクリックして詳細を表示します。
+3.  **[設定]**タブの**[GitHub に接続]**領域で**[切断]**をクリックします。
+4.  **「切断」**をクリックして切断を確認します。
 
-After the disconnection operation, your Data App configuration files will remain in your GitHub directory but will not be synchronized by `tidb-cloud-data-service` anymore.
+切断操作後、データ アプリ構成ファイルは GitHub ディレクトリに残りますが、 `tidb-cloud-data-service`によって同期されなくなります。

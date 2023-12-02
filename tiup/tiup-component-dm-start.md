@@ -2,48 +2,48 @@
 title: tiup dm start
 ---
 
-# tiup dm start
+# ティアップDM開始 {#tiup-dm-start}
 
-The `tiup dm start` command is used to start all or part of the services of the specified cluster.
+`tiup dm start`コマンドは、指定したクラスターのサービスのすべてまたは一部を開始するために使用されます。
 
-## Syntax
+## 構文 {#syntax}
 
 ```shell
 tiup dm start <cluster-name> [flags]
 ```
 
-`<cluster-name>`: the name of the cluster to operate on. If you forget the cluster name, you can check it with the [cluster list](/tiup/tiup-component-dm-list.md) command.
+`<cluster-name>` : 操作するクラスターの名前。クラスター名を忘れた場合は、 [クラスタリスト](/tiup/tiup-component-dm-list.md)コマンドで確認できます。
 
-## Options
+## オプション {#options}
 
-### -N, --node
+### -N、--node {#n-node}
 
-- Specifies the nodes to be started. If not specified, all nodes are started. The value of this option is a comma-separated list of node IDs. You can get the node IDs from the first column of the cluster status table returned by the [`tiup dm display`](/tiup/tiup-component-dm-display.md) command.
-- Data type: `STRINGS`
-- If this option is not specified in the command, all nodes are started.
+-   起動するノードを指定します。指定しない場合は、すべてのノードが開始されます。このオプションの値は、ノード ID のカンマ区切りリストです。ノード ID は、 [`tiup dm display`](/tiup/tiup-component-dm-display.md)コマンドによって返されるクラスター ステータス テーブルの最初の列から取得できます。
+-   データ型: `STRINGS`
+-   コマンドでこのオプションを指定しない場合は、すべてのノードが起動されます。
 
-> **Note:**
+> **注記：**
 >
-> If the `-R, --role` option is specified at the same time, only the service nodes that match both the specifications of `-N, --node` and `-R, --role` are started.
+> `-R, --role`オプションを同時に指定した場合は、 `-N, --node`と`-R, --role`の両方の指定に一致するサービスノードだけが起動されます。
 
-### -R, --role
+### -R、--役割 {#r-role}
 
-- Specifies the roles to be started. If not specified, all roles are started. The value of this option is a comma-separated list of node roles. You can get the roles of nodes from the second column of the cluster status table returned by the [`tiup dm display`](/tiup/tiup-component-dm-display.md) command.
-- Data type: `STRINGS`
-- If this option is not specified in the command, all roles are started.
+-   開始するロールを指定します。指定しない場合、すべてのロールが開始されます。このオプションの値は、ノードの役割のカンマ区切りのリストです。ノードの役割は、 [`tiup dm display`](/tiup/tiup-component-dm-display.md)コマンドによって返されるクラスター状態テーブルの 2 番目の列から取得できます。
+-   データ型: `STRINGS`
+-   このオプションがコマンドで指定されていない場合は、すべてのロールが開始されます。
 
-> **Note:**
+> **注記：**
 >
-> If the `-N, --node` option is specified at the same time, only the service nodes that match both the specifications of `-N, --node` and `-R, --role` are started.
+> `-N, --node`オプションを同時に指定した場合は、 `-N, --node`と`-R, --role`の両方の指定に一致するサービスノードだけが起動されます。
 
-### -h, --help
+### -h, --help {#h-help}
 
-- Prints the help information.
-- Data type: `BOOLEAN`
-- Default: false
+-   ヘルプ情報を出力します。
+-   データ型: `BOOLEAN`
+-   デフォルト: false
 
-## Output
+## 出力 {#output}
 
-The log of starting the service.
+サービスを開始したときのログです。
 
-[<< Back to the previous page - TiUP DM command list](/tiup/tiup-component-dm.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUP DMコマンド一覧](/tiup/tiup-component-dm.md#command-list)

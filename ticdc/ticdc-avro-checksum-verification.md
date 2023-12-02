@@ -3,13 +3,13 @@ title: TiCDC Row Data Checksum Verification Based on Avro
 summary: Introduce the detailed implementation of TiCDC row data checksum verification.
 ---
 
-# TiCDC Row Data Checksum Verification Based on Avro
+# Avro に基づく TiCDC 行データ チェックサム検証 {#ticdc-row-data-checksum-verification-based-on-avro}
 
-This document introduces how to consume data sent to Kafka by TiCDC and encoded by Avro protocol using Golang, and how to perform data verification using the [Single-row data checksum feature](/ticdc/ticdc-integrity-check.md).
+このドキュメントでは、TiCDC によって Kafka に送信され、 Golangを使用して Avro プロトコルによってエンコードされたデータを使用する方法と、 [単一行データチェックサム機能](/ticdc/ticdc-integrity-check.md)を使用してデータ検証を実行する方法を紹介します。
 
-The source code of this example is available in the [`avro-checksum-verification`](https://github.com/pingcap/tiflow/tree/release-7.5/examples/golang/avro-checksum-verification) directory.
+この例のソース コードは[`avro-checksum-verification`](https://github.com/pingcap/tiflow/tree/release-7.5/examples/golang/avro-checksum-verification)ディレクトリにあります。
 
-The example in this document uses [kafka-go](https://github.com/segmentio/kafka-go) to create a simple Kafka consumer program. This program continuously reads data from a specified topic, calculates the checksum, and verifies its value.
+このドキュメントの例では、 [カフカ号](https://github.com/segmentio/kafka-go)を使用して単純な Kafka コンシューマ プログラムを作成します。このプログラムは、指定されたトピックからデータを継続的に読み取り、チェックサムを計算し、その値を検証します。
 
 ```go
 package main
@@ -92,11 +92,11 @@ func main() {
 }
 ```
 
-The key steps for calculating the checksum value are `getValueMapAndSchema()` and `CalculateAndVerifyChecksum()`. The following sections describe the implementation of these two functions.
+チェックサム値を計算するための重要な手順は`getValueMapAndSchema()`と`CalculateAndVerifyChecksum()`です。次のセクションでは、これら 2 つの関数の実装について説明します。
 
-## Decode data and get the corresponding schema
+## データをデコードし、対応するスキーマを取得します {#decode-data-and-get-the-corresponding-schema}
 
-The `getValueMapAndSchema()` method decodes data and gets the corresponding schema. This method returns both the data and schema as a `map[string]interface{}` type.
+`getValueMapAndSchema()`メソッドはデータをデコードし、対応するスキーマを取得します。このメソッドは、データとスキーマの両方を`map[string]interface{}`タイプとして返​​します。
 
 ```go
 // data is the key or value of the received kafka message, and url is the schema registry url.
@@ -203,17 +203,17 @@ type lookupResponse struct {
 
 ```
 
-## Calculate and verify the checksum value
+## チェックサム値を計算して検証する {#calculate-and-verify-the-checksum-value}
 
-The `valueMap` and `valueSchema` obtained in the previous step contain all the elements used for checksum calculation and verification.
+前の手順で取得した`valueMap`と`valueSchema`には、チェックサムの計算と検証に使用されるすべての要素が含まれています。
 
-The checksum calculation and verification process on the consumer side includes the following steps:
+コンシューマ側のチェックサム計算および検証プロセスには、次の手順が含まれます。
 
-1. Get the expected checksum value.
-2. Iterate over each column, generate a byte slice according to the column value and the corresponding MySQL type, and update the checksum value continuously.
-3. Compare the checksum value calculated in the previous step with the checksum value obtained from the received message. If they are not the same, the checksum verification fails and the data might be corrupted.
+1.  期待されるチェックサム値を取得します。
+2.  各カラムを反復処理し、カラム値と対応する MySQL タイプに従ってバイト スライスを生成し、チェックサム値を継続的に更新します。
+3.  前の手順で計算したチェックサム値と、受信したメッセージから取得したチェックサム値を比較します。一致しない場合、チェックサム検証が失敗し、データが破損する可能性があります。
 
-The sample code is as follows:
+サンプルコードは次のとおりです。
 
 ```go
 func CalculateAndVerifyChecksum(valueMap, valueSchema map[string]interface{}) error {

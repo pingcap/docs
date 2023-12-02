@@ -2,27 +2,27 @@
 title: tiup env
 ---
 
-# tiup env
+# ティアップ環境 {#tiup-env}
 
-TiUP provides users with flexible and customized interfaces, some of which are implemented using environment variables. The `tiup env` command is used to query the user-defined environment variables that TiUP supports and their values.
+TiUP はユーザーに柔軟でカスタマイズされたインターフェイスを提供し、その一部は環境変数を使用して実装されます。 `tiup env`コマンドは、 TiUP がサポートするユーザー定義の環境変数とその値をクエリするために使用されます。
 
-## Syntax
+## 構文 {#syntax}
 
 ```shell
 tiup env [name1...N]
 ```
 
-`[name1...N]` is used to view the specified environment variables. If it is not specified, all supported environment variables are viewed by default.
+`[name1...N]`は、指定された環境変数を表示するために使用されます。指定しない場合は、サポートされているすべての環境変数がデフォルトで表示されます。
 
-## Option
+## オプション {#option}
 
-None
+なし
 
-## Output
+## 出力 {#output}
 
-- If `[name1...N]` is not specified, a list of "{key}"="{value}" is output.
-- If `[name1...N]` is specified, the "{value}" list is output in order.
+-   `[name1...N]`を指定しない場合は、&quot;{key}&quot;=&quot;{value}&quot;のリストが出力されます。
+-   `[name1...N]`を指定した場合は、&quot;{value}&quot;のリストを順番に出力します。
 
-In the above output, if `value` is empty, it means that the value of the environment variable is not set. In this case, TiUP uses the default value.
+上記の出力で、 `value`が空の場合は、環境変数の値が設定されていないことを意味します。この場合、 TiUP はデフォルト値を使用します。
 
-[<< Back to the previous page - TiUP Reference command list](/tiup/tiup-reference.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUPリファレンスコマンドリスト](/tiup/tiup-reference.md#command-list)

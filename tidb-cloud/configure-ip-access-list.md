@@ -3,56 +3,58 @@ title: Configure an IP Access List
 summary: Learn how to configure IP addresses that are allowed to access your TiDB Dedicated cluster.
 ---
 
-# Configure an IP Access List
+# IPアクセスリストの設定 {#configure-an-ip-access-list}
 
-For each TiDB Dedicated cluster in TiDB Cloud, you can configure an IP access list to filter internet traffic trying to access the cluster, which works similarly to a firewall access control list. After the configuration, only the clients and applications whose IP addresses are in the IP access list can connect to your TiDB Dedicated cluster.
+TiDB TiDB Cloudの TiDB 専用クラスターごとに、クラスターにアクセスしようとするインターネット トラフィックをフィルターする IP アクセス リストを構成できます。これは、ファイアウォールのアクセス コントロール リストと同様に機能します。構成後は、IP アドレスが IP アクセス リストに含まれているクライアントとアプリケーションのみが TiDB 専用クラスターに接続できます。
 
-> **Note:**
+> **注記：**
 >
-> Configuring the IP access list is only available for [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) clusters.
+> IP アクセス リストの設定は[TiDB専用](/tidb-cloud/select-cluster-tier.md#tidb-dedicated)クラスタでのみ使用できます。
 
-For a TiDB Dedicated cluster, you can configure its IP access list in either of the following ways:
+TiDB 専用クラスターの場合、次のいずれかの方法で IP アクセス リストを構成できます。
 
-- [Configure an IP access list in standard connection](#configure-an-ip-access-list-in-standard-connection)
+-   [標準接続でのIPアクセスリストの設定](#configure-an-ip-access-list-in-standard-connection)
 
-- [Configure an IP access list in security settings](#configure-an-ip-access-list-in-security-settings)
+-   [セキュリティ設定で IP アクセス リストを構成する](#configure-an-ip-access-list-in-security-settings)
 
-## Configure an IP access list in standard connection
+## 標準接続でのIPアクセスリストの設定 {#configure-an-ip-access-list-in-standard-connection}
 
-To configure an IP access list for your TiDB Dedicated cluster in standard connection, take the following steps:
+標準接続で TiDB 専用クラスターの IP アクセス リストを構成するには、次の手順を実行します。
 
-1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
-2. In the row of your TiDB Dedicated cluster, click **...** and select **Connect**. A dialog is displayed.
-3. In the dialog, locate **Step 1: Create traffic filter** on the **Standard Connection** tab and configure the IP access list.
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、プロジェクトの[**クラスター**](https://tidbcloud.com/console/clusters)ページに移動します。
+2.  TiDB 専用クラスターの行で**[...]**をクリックし、 **[接続]**を選択します。ダイアログが表示されます。
+3.  ダイアログの「**標準接続」**タブで**「ステップ 1: トラフィック フィルタを作成する」**を見つけて、IP アクセス リストを構成します。
 
-    - If the IP access list of your cluster has not been set, you can click **Add My Current IP Address** to add your current IP address to the IP access list, and then click **Add Item** to add more IP addresses if necessary. Next, click **Update Filter** to save the configuration.
+    -   クラスターの IP アクセス リストが設定されていない場合は、 **[現在の IP アドレスを追加]**をクリックして現在の IP アドレスを IP アクセス リストに追加し、必要に応じて**[項目の追加]**をクリックして IP アドレスを追加できます。次に、 **「フィルターの更新」**をクリックして構成を保存します。
 
-        > **Note:**
+        > **注記：**
         >
-        > For each TiDB Dedicated cluster, you can add up to 7 IP addresses to the IP access list. To apply for a quota to add more IP addresses, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
+        > TiDB 専用クラスターごとに、最大 7 つの IP アドレスを IP アクセス リストに追加できます。 IP アドレスを追加するためのクォータを申請するには、 [TiDB Cloudのサポート](/tidb-cloud/tidb-cloud-support.md)にお問い合わせください。
 
-    - If the IP access list of your cluster has been set, click **Edit** to add, edit, or remove IP addresses, and then click **Update Filter** to save the configuration.
+    -   クラスターの IP アクセス リストが設定されている場合は、 **[編集]**をクリックして IP アドレスを追加、編集、または削除し、 **[フィルターの更新]**をクリックして構成を保存します。
 
-    - To allow any IP address to access your cluster (not recommended), click **Allow Access From Anywhere**, and then click **Update Filter**. According to security best practices, it is NOT recommended that you allow any IP address to access your cluster, as this would expose your cluster to the internet completely, which is highly risky.
+    -   任意の IP アドレスがクラスターにアクセスできるようにするには (非推奨)、[**どこからでもアクセスを許可する]**をクリックし、 **[フィルターの更新]**をクリックします。セキュリティのベスト プラクティスによれば、任意の IP アドレスによるクラスターへのアクセスを許可することはお勧めできません。これは、クラスターが完全にインターネットに公開されることになり、非常に危険です。
 
-## Configure an IP access list in security settings
+## セキュリティ設定で IP アクセス リストを構成する {#configure-an-ip-access-list-in-security-settings}
 
-To configure an IP access list for your TiDB Dedicated cluster in security settings, take the following steps:
+セキュリティ設定で TiDB 専用クラスターの IP アクセス リストを構成するには、次の手順を実行します。
 
-1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
-2. In the row of your TiDB Dedicated cluster, click **...** and select **Security Settings**. A security setting dialog is displayed.
-3. In the dialog, configure the IP access list as follows:
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、プロジェクトの[**クラスター**](https://tidbcloud.com/console/clusters)ページに移動します。
 
-    - To add your current IP address to the IP access list, click **Add My Current IP Address**.
+2.  TiDB 専用クラスターの行で**[...]**をクリックし、 **[Security設定]**を選択します。セキュリティ設定ダイアログが表示されます。
 
-    - To add an IP address to the IP access list, enter the IP address and description, and click **Add to IP List**.
+3.  ダイアログで、次のように IP アクセス リストを設定します。
 
-        > **Note:**
+    -   現在の IP アドレスを IP アクセス リストに追加するには、 **[現在の IP アドレスを追加]**をクリックします。
+
+    -   IP アドレスを IP アクセス リストに追加するには、IP アドレスと説明を入力し、 **[Add to IP List]**をクリックします。
+
+        > **注記：**
         >
-        > For each TiDB Dedicated cluster, you can add up to 7 IP addresses to the IP access list. To apply for a quota to add more IP addresses, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
+        > TiDB 専用クラスターごとに、最大 7 つの IP アドレスを IP アクセス リストに追加できます。 IP アドレスを追加するためのクォータを申請するには、 [TiDB Cloudのサポート](/tidb-cloud/tidb-cloud-support.md)にお問い合わせください。
 
-    - To allow any IP address to access your cluster (not recommended), click **Allow Access From Anywhere**. According to security best practices, it is NOT recommended that you allow any IP address to access your cluster, as this would expose your cluster to the internet completely, which is highly risky.
+    -   任意の IP アドレスがクラスターにアクセスできるようにするには (推奨されません)、 **「どこからでもアクセスを許可する」**をクリックします。セキュリティのベスト プラクティスによれば、任意の IP アドレスによるクラスターへのアクセスを許可することはお勧めできません。これは、クラスターが完全にインターネットに公開されることになり、非常に危険です。
 
-    - To remove an IP address from the access list, click **Remove** in the line of the IP address.
+    -   アクセス リストから IP アドレスを削除するには、IP アドレスの行にある**[削除]**をクリックします。
 
-4. Click **Apply** to save the configuration.
+4.  **「適用」**をクリックして構成を保存します。

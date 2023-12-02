@@ -5,85 +5,83 @@ summary: This document describes how to query data from a single table in a data
 
 <!-- markdownlint-disable MD029 -->
 
-# Query Data from a Single Table
+# 単一のテーブルからデータをクエリする {#query-data-from-a-single-table}
 
-This document describes how to use SQL and various programming languages to query data from a single table in a database.
+このドキュメントでは、SQL およびさまざまなプログラミング言語を使用して、データベース内の単一テーブルのデータをクエリする方法について説明します。
 
-## Before you begin
+## あなたが始める前に {#before-you-begin}
 
-The following content takes the [Bookshop](/develop/dev-guide-bookshop-schema-design.md) application as an example to show how to query data from a single table in TiDB.
+次のコンテンツでは、 [書店](/develop/dev-guide-bookshop-schema-design.md)アプリケーションを例として、TiDB の単一テーブルのデータをクエリする方法を示します。
 
-Before querying data, make sure that you have completed the following steps:
+データをクエリする前に、次の手順を完了していることを確認してください。
 
 <CustomContent platform="tidb">
 
-1. Build a TiDB cluster (using [TiDB Cloud](/develop/dev-guide-build-cluster-in-cloud.md) or [TiUP](/production-deployment-using-tiup.md) is recommended).
+1.  TiDB クラスターを構築します ( [TiDB Cloud](/develop/dev-guide-build-cluster-in-cloud.md)または[TiUP](/production-deployment-using-tiup.md)の使用を推奨)。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-1. Build a TiDB cluster using [TiDB Cloud](/develop/dev-guide-build-cluster-in-cloud.md).
+1.  [TiDB Cloud](/develop/dev-guide-build-cluster-in-cloud.md)を使用して TiDB クラスターを構築します。
 
 </CustomContent>
 
-2. [Import table schema and sample data of the Bookshop application](/develop/dev-guide-bookshop-schema-design.md#import-table-structures-and-data).
+2.  [Bookshop アプリケーションのテーブル スキーマとサンプル データをインポートします](/develop/dev-guide-bookshop-schema-design.md#import-table-structures-and-data) 。
 
 <CustomContent platform="tidb">
 
-3. [Connect to TiDB](/develop/dev-guide-connect-to-tidb.md).
+3.  [TiDB に接続する](/develop/dev-guide-connect-to-tidb.md) 。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-3. [Connect to TiDB](/tidb-cloud/connect-to-tidb-cluster.md).
+3.  [TiDB に接続する](/tidb-cloud/connect-to-tidb-cluster.md) 。
 
 </CustomContent>
 
-## Execute a simple query
+## 単純なクエリを実行する {#execute-a-simple-query}
 
-In the database of the Bookshop application, the `authors` table stores the basic information of authors. You can use the `SELECT ... FROM ...` statement to query data from the database.
+Bookshop アプリケーションのデータベースには、著者の基本情報が`authors`テーブルに格納されています。 `SELECT ... FROM ...`ステートメントを使用して、データベースのデータをクエリできます。
 
 <SimpleTab groupId="language">
 <div label="SQL" value="sql">
 
-Execute the following SQL statement in a MySQL client:
+MySQL クライアントで次の SQL ステートメントを実行します。
 
 ```sql
 SELECT id, name FROM authors;
 ```
 
-The output is as follows:
+出力は次のとおりです。
 
-```
-+------------+--------------------------+
-| id         | name                     |
-+------------+--------------------------+
-|       6357 | Adelle Bosco             |
-|     345397 | Chanelle Koepp           |
-|     807584 | Clementina Ryan          |
-|     839921 | Gage Huel                |
-|     850070 | Ray Armstrong            |
-|     850362 | Ford Waelchi             |
-|     881210 | Jayme Gutkowski          |
-|    1165261 | Allison Kuvalis          |
-|    1282036 | Adela Funk               |
-...
-| 4294957408 | Lyla Nitzsche            |
-+------------+--------------------------+
-20000 rows in set (0.05 sec)
-```
+    +------------+--------------------------+
+    | id         | name                     |
+    +------------+--------------------------+
+    |       6357 | Adelle Bosco             |
+    |     345397 | Chanelle Koepp           |
+    |     807584 | Clementina Ryan          |
+    |     839921 | Gage Huel                |
+    |     850070 | Ray Armstrong            |
+    |     850362 | Ford Waelchi             |
+    |     881210 | Jayme Gutkowski          |
+    |    1165261 | Allison Kuvalis          |
+    |    1282036 | Adela Funk               |
+    ...
+    | 4294957408 | Lyla Nitzsche            |
+    +------------+--------------------------+
+    20000 rows in set (0.05 sec)
 
 </div>
 <div label="Java" value="java">
 
-In Java, to store the basic information of authors, you can declare a class `Author`. You should choose appropriate Java data types according to the [Data types](/data-type-overview.md) and [Value range](/data-type-numeric.md) in the database. For example:
+Javaでは、作成者の基本情報を保存するために、クラス`Author`を宣言できます。データベースの[データ型](/data-type-overview.md)と[値の範囲](/data-type-numeric.md)に従って、適切なJavaデータ型を選択する必要があります。例えば：
 
-- Use a variable of type `Int` to store data of type `int`.
-- Use a variable of type `Long` to store data of type `bigint`.
-- Use a variable of type `Short` to store data of type `tinyint`.
-- Use a variable of type `String` to store data of type `varchar`.
+-   タイプ`Int`の変数を使用して、タイプ`int`のデータを格納します。
+-   タイプ`bigint`のデータを格納するには、タイプ`Long`の変数を使用します。
+-   タイプ`tinyint`のデータを格納するには、タイプ`Short`の変数を使用します。
+-   タイプ`varchar`のデータを格納するには、タイプ`String`の変数を使用します。
 
 ```java
 public class Author {
@@ -124,32 +122,32 @@ public class AuthorDAO {
 
 <CustomContent platform="tidb">
 
-- After [connecting to TiDB using the JDBC driver](/develop/dev-guide-connect-to-tidb.md#jdbc), you can create a `Statement` object with `conn.createStatus()`.
+-   [JDBC ドライバーを使用して TiDB に接続する](/develop/dev-guide-connect-to-tidb.md#jdbc)の後に、 `conn.createStatus()`を使用して`Statement`オブジェクトを作成できます。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-- After [connecting to TiDB using the JDBC driver](/develop/dev-guide-choose-driver-or-orm.md#java-drivers), you can create a `Statement` object with `conn.createStatus()`.
+-   [JDBC ドライバーを使用して TiDB に接続する](/develop/dev-guide-choose-driver-or-orm.md#java-drivers)の後に、 `conn.createStatus()`を使用して`Statement`オブジェクトを作成できます。
 
 </CustomContent>
 
-- Then call `stmt.executeQuery("query_sql")` to initiate a database query request to TiDB.
-- The query results are stored in a `ResultSet` object. By traversing `ResultSet`, the returned results can be mapped to the `Author` object.
+-   次に、 `stmt.executeQuery("query_sql")`を呼び出して、TiDB へのデータベース クエリ リクエストを開始します。
+-   クエリ結果は`ResultSet`オブジェクトに保存されます。 `ResultSet`トラバースすることで、返された結果を`Author`オブジェクトにマッピングできます。
 
 </div>
 </SimpleTab>
 
-## Filter results
+## フィルタ結果 {#filter-results}
 
-To filter query results, you can use the `WHERE` statement.
+クエリ結果をフィルターするには、 `WHERE`ステートメントを使用できます。
 
-For example, the following command queries authors who were born in 1998 among all authors:
+たとえば、次のコマンドは、すべての著者のうち 1998 年生まれの著者をクエリします。
 
 <SimpleTab groupId="language">
 <div label="SQL" value="sql">
 
-Add filter conditions in the `WHERE` statement:
+`WHERE`ステートメントにフィルター条件を追加します。
 
 ```sql
 SELECT * FROM authors WHERE birth_year = 1998;
@@ -158,11 +156,11 @@ SELECT * FROM authors WHERE birth_year = 1998;
 </div>
 <div label="Java" value="java">
 
-In Java, you can use the same SQL to handle data query requests with dynamic parameters.
+Javaでは、同じ SQL を使用して、動的パラメータを使用したデータ クエリ リクエストを処理できます。
 
-This can be done by concatenating parameters into a SQL statement. However, this method poses a potential [SQL Injection](https://en.wikipedia.org/wiki/SQL_injection) risk to the security of the application.
+これは、パラメータを SQL ステートメントに連結することで実行できます。ただし、この方法はアプリケーションのセキュリティに[SQLインジェクション](https://en.wikipedia.org/wiki/SQL_injection)的なリスクをもたらします。
 
-To deal with such queries, use a [Prepared statement](/develop/dev-guide-prepared-statement.md) instead of a normal statement.
+このようなクエリを処理するには、通常のステートメントの代わりに[作成済みのステートメント](/develop/dev-guide-prepared-statement.md)を使用します。
 
 ```java
 public List<Author> getAuthorsByBirthYear(Short birthYear) throws SQLException {
@@ -187,11 +185,11 @@ public List<Author> getAuthorsByBirthYear(Short birthYear) throws SQLException {
 </div>
 </SimpleTab>
 
-## Sort results
+## 結果の並べ替え {#sort-results}
 
-To sort query results, you can use the `ORDER BY` statement.
+クエリ結果を並べ替えるには、 `ORDER BY`ステートメントを使用できます。
 
-For example, the following SQL statement is to get a list of the youngest authors by sorting the `authors` table in descending order (`DESC`) according to the `birth_year` column.
+たとえば、次の SQL ステートメントは、 `authors`テーブルを`birth_year`列に従って降順 ( `DESC` ) にソートすることにより、最年少の著者のリストを取得します。
 
 <SimpleTab groupId="language">
 <div label="SQL" value="sql">
@@ -232,29 +230,27 @@ public List<Author> getAuthorsSortByBirthYear() throws SQLException {
 </div>
 </SimpleTab>
 
-The result is as follows:
+結果は次のとおりです。
 
-```
-+-----------+------------------------+------------+
-| id        | name                   | birth_year |
-+-----------+------------------------+------------+
-| 83420726  | Terrance Dach          | 2000       |
-| 57938667  | Margarita Christiansen | 2000       |
-| 77441404  | Otto Dibbert           | 2000       |
-| 61338414  | Danial Cormier         | 2000       |
-| 49680887  | Alivia Lemke           | 2000       |
-| 45460101  | Itzel Cummings         | 2000       |
-| 38009380  | Percy Hodkiewicz       | 2000       |
-| 12943560  | Hulda Hackett          | 2000       |
-| 1294029   | Stanford Herman        | 2000       |
-| 111453184 | Jeffrey Brekke         | 2000       |
-...
-300000 rows in set (0.23 sec)
-```
+    +-----------+------------------------+------------+
+    | id        | name                   | birth_year |
+    +-----------+------------------------+------------+
+    | 83420726  | Terrance Dach          | 2000       |
+    | 57938667  | Margarita Christiansen | 2000       |
+    | 77441404  | Otto Dibbert           | 2000       |
+    | 61338414  | Danial Cormier         | 2000       |
+    | 49680887  | Alivia Lemke           | 2000       |
+    | 45460101  | Itzel Cummings         | 2000       |
+    | 38009380  | Percy Hodkiewicz       | 2000       |
+    | 12943560  | Hulda Hackett          | 2000       |
+    | 1294029   | Stanford Herman        | 2000       |
+    | 111453184 | Jeffrey Brekke         | 2000       |
+    ...
+    300000 rows in set (0.23 sec)
 
-## Limit the number of query results
+## クエリ結果の数を制限する {#limit-the-number-of-query-results}
 
-To limit the number of query results, you can use the `LIMIT` statement.
+クエリ結果の数を制限するには、 `LIMIT`ステートメントを使用できます。
 
 <SimpleTab groupId="language">
 <div label="SQL" value="sql">
@@ -297,33 +293,31 @@ public List<Author> getAuthorsWithLimit(Integer limit) throws SQLException {
 </div>
 </SimpleTab>
 
-The result is as follows:
+結果は次のとおりです。
 
-```
-+-----------+------------------------+------------+
-| id        | name                   | birth_year |
-+-----------+------------------------+------------+
-| 83420726  | Terrance Dach          | 2000       |
-| 57938667  | Margarita Christiansen | 2000       |
-| 77441404  | Otto Dibbert           | 2000       |
-| 61338414  | Danial Cormier         | 2000       |
-| 49680887  | Alivia Lemke           | 2000       |
-| 45460101  | Itzel Cummings         | 2000       |
-| 38009380  | Percy Hodkiewicz       | 2000       |
-| 12943560  | Hulda Hackett          | 2000       |
-| 1294029   | Stanford Herman        | 2000       |
-| 111453184 | Jeffrey Brekke         | 2000       |
-+-----------+------------------------+------------+
-10 rows in set (0.11 sec)
-```
+    +-----------+------------------------+------------+
+    | id        | name                   | birth_year |
+    +-----------+------------------------+------------+
+    | 83420726  | Terrance Dach          | 2000       |
+    | 57938667  | Margarita Christiansen | 2000       |
+    | 77441404  | Otto Dibbert           | 2000       |
+    | 61338414  | Danial Cormier         | 2000       |
+    | 49680887  | Alivia Lemke           | 2000       |
+    | 45460101  | Itzel Cummings         | 2000       |
+    | 38009380  | Percy Hodkiewicz       | 2000       |
+    | 12943560  | Hulda Hackett          | 2000       |
+    | 1294029   | Stanford Herman        | 2000       |
+    | 111453184 | Jeffrey Brekke         | 2000       |
+    +-----------+------------------------+------------+
+    10 rows in set (0.11 sec)
 
-With the `LIMIT` statement, the query time is significantly reduced from `0.23 sec` to `0.11 sec` in this example. For more information, see [TopN and Limit](/topn-limit-push-down.md).
+この例では、ステートメント`LIMIT`を使用すると、クエリ時間が`0.23 sec`から`0.11 sec`に大幅に短縮されます。詳細については、 [トップNとリミット](/topn-limit-push-down.md)を参照してください。
 
-## Aggregate queries
+## 集計クエリ {#aggregate-queries}
 
-To have a better understanding of the overall data situation, you can use the `GROUP BY` statement to aggregate query results.
+データ全体の状況をより深く理解するには、 `GROUP BY`ステートメントを使用してクエリ結果を集計します。
 
-For example, if you want to know which years there are more authors born, you can group the `authors` table by the `birth_year` column, and then count for each year:
+たとえば、より多くの著者が生まれた年を知りたい場合は、 `authors`テーブルを`birth_year`列でグループ化し、年ごとにカウントします。
 
 <SimpleTab groupId="language">
 <div label="SQL" value="sql">
@@ -374,25 +368,23 @@ public List<AuthorCount> getAuthorCountsByBirthYear() throws SQLException {
 </div>
 </SimpleTab>
 
-The result is as follows:
+結果は次のとおりです。
 
-```
-+------------+--------------+
-| birth_year | author_count |
-+------------+--------------+
-|       1932 |          317 |
-|       1947 |          290 |
-|       1939 |          282 |
-|       1935 |          289 |
-|       1968 |          291 |
-|       1962 |          261 |
-|       1961 |          283 |
-|       1986 |          289 |
-|       1994 |          280 |
-...
-|       1972 |          306 |
-+------------+--------------+
-71 rows in set (0.00 sec)
-```
+    +------------+--------------+
+    | birth_year | author_count |
+    +------------+--------------+
+    |       1932 |          317 |
+    |       1947 |          290 |
+    |       1939 |          282 |
+    |       1935 |          289 |
+    |       1968 |          291 |
+    |       1962 |          261 |
+    |       1961 |          283 |
+    |       1986 |          289 |
+    |       1994 |          280 |
+    ...
+    |       1972 |          306 |
+    +------------+--------------+
+    71 rows in set (0.00 sec)
 
-In addition to the `COUNT` function, TiDB also supports other aggregate functions. For more information, see [Aggregate (GROUP BY) Functions](/functions-and-operators/aggregate-group-by-functions.md).
+`COUNT`関数に加えて、TiDB は他の集計関数もサポートしています。詳細については、 [集計 (GROUP BY) 関数](/functions-and-operators/aggregate-group-by-functions.md)を参照してください。

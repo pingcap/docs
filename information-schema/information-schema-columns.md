@@ -3,16 +3,16 @@ title: COLUMNS
 summary: Learn the `COLUMNS` INFORMATION_SCHEMA table.
 ---
 
-# COLUMNS
+# コラム {#columns}
 
-The `COLUMNS` table provides detailed information about columns in tables.
+`COLUMNS`表には、表内の列に関する詳細情報が記載されています。
 
 ```sql
 USE INFORMATION_SCHEMA;
 DESC COLUMNS;
 ```
 
-The output is as follows:
+出力は次のとおりです。
 
 ```sql
 +--------------------------+---------------+------+------+---------+-------+
@@ -43,14 +43,14 @@ The output is as follows:
 21 rows in set (0.00 sec)
 ```
 
-Create a table `test.t1` and query the information in the `COLUMNS` table:
+テーブル`test.t1`を作成し、テーブル`COLUMNS`の情報をクエリします。
 
 ```sql
 CREATE TABLE test.t1 (a int);
 SELECT * FROM COLUMNS WHERE table_schema='test' AND TABLE_NAME='t1'\G
 ```
 
-输出结果如下：
+出射結果は以下の通り：
 
 ```sql
 *************************** 1. row ***************************
@@ -78,41 +78,41 @@ CHARACTER_MAXIMUM_LENGTH: NULL
 1 row in set (0.02 sec)
 ```
 
-The description of columns in the `COLUMNS` table is as follows:
+`COLUMNS`のテーブルの列の説明は次のとおりです。
 
-* `TABLE_CATALOG`: The name of the catalog to which the table with the column belongs. The value is always `def`.
-* `TABLE_SCHEMA`: The name of the schema in which the table with the column is located.
-* `TABLE_NAME`: The name of the table with the column.
-* `COLUMN_NAME`: The name of the column.
-* `ORDINAL_POSITION`: The position of the column in the table.
-* `COLUMN_DEFAULT`: The default value of the column. If the explicit default value is `NULL`, or if the column definition does not include the `default` clause, this value is `NULL`.
-* `IS_NULLABLE`: Whether the column is nullable. If the column can store null values, this value is `YES`; otherwise, it is `NO`.
-* `DATA_TYPE`: The type of data in the column.
-* `CHARACTER_MAXIMUM_LENGTH`: For string columns, the maximum length in characters.
-* `CHARACTER_OCTET_LENGTH`: For string columns, the maximum length in bytes.
-* `NUMERIC_PRECISION`: The numeric precision of a number-type column.
-* `NUMERIC_SCALE`: The numeric scale of a number-type column.
-* `DATETIME_PRECISION`: For time-type columns, the fractional seconds precision.
-* `CHARACTER_SET_NAME`: The name of the character set of a string column.
-* `COLLATION_NAME`: The name of the collation of a string column.
-* `COLUMN_TYPE`: The column type.
-* `COLUMN_KEY`: Whether this column is indexed. This field might have the following values:
-    * Empty: This column is not indexed, or this column is indexed and is the second column in a multi-column non-unique index.
-    * `PRI`: This column is the primary key or one of multiple primary keys.
-    * `UNI`: This column is the first column of the unique index.
-    * `MUL`: The column is the first column of a non-unique index, in which a given value is allowed to occur for multiple times.
-* `EXTRA`: Any additional information of the given column.
-* `PRIVILEGES`: The privilege that the current user has on this column. Currently, this value is fixed in TiDB, and is always `select,insert,update,references`.
-* `COLUMN_COMMENT`: Comments contained in the column definition.
-* `GENERATION_EXPRESSION`: For generated columns, this value displays the expression used to calculate the column value. For non-generated columns, the value is empty.
+-   `TABLE_CATALOG` : 列を含むテーブルが属するカタログの名前。値は常に`def`です。
+-   `TABLE_SCHEMA` : 列を含むテーブルが存在するスキーマの名前。
+-   `TABLE_NAME` : 列を含むテーブルの名前。
+-   `COLUMN_NAME` : 列の名前。
+-   `ORDINAL_POSITION` : テーブル内の列の位置。
+-   `COLUMN_DEFAULT` : 列のデフォルト値。明示的なデフォルト値が`NULL`である場合、または列定義に`default`句が含まれていない場合、この値は`NULL`です。
+-   `IS_NULLABLE` : 列が NULL 可能かどうか。列に null 値を格納できる場合、この値は`YES`です。それ以外の場合は`NO`です。
+-   `DATA_TYPE` : 列のデータのタイプ。
+-   `CHARACTER_MAXIMUM_LENGTH` : 文字列列の場合、文字数の最大長。
+-   `CHARACTER_OCTET_LENGTH` : 文字列列の最大長 (バイト単位)。
+-   `NUMERIC_PRECISION` : 数値型列の数値精度。
+-   `NUMERIC_SCALE` : 数値型の列の数値スケール。
+-   `DATETIME_PRECISION` : 時間型の列の場合、小数点以下の秒の精度。
+-   `CHARACTER_SET_NAME` : 文字列列の文字セットの名前。
+-   `COLLATION_NAME` : 文字列列の照合順序の名前。
+-   `COLUMN_TYPE` : 列のタイプ。
+-   `COLUMN_KEY` : この列にインデックスが付けられているかどうか。このフィールドには次の値が含まれる場合があります。
+    -   空: この列にはインデックスが作成されていないか、この列はインデックスが作成されており、複数列の一意でないインデックスの 2 番目の列です。
+    -   `PRI` : この列は主キーまたは複数の主キーの 1 つです。
+    -   `UNI` : この列は一意のインデックスの最初の列です。
+    -   `MUL` : この列は、特定の値が複数回出現することが許可される、一意でないインデックスの最初の列です。
+-   `EXTRA` : 指定された列の追加情報。
+-   `PRIVILEGES` : 現在のユーザーがこの列に対して持つ権限。現在、この値は TiDB で固定されており、常に`select,insert,update,references`です。
+-   `COLUMN_COMMENT` : 列定義に含まれるコメント。
+-   `GENERATION_EXPRESSION` : 生成された列の場合、この値は列値の計算に使用される式を表示します。非生成列の場合、値は空です。
 
-The corresponding `SHOW` statement is as follows:
+対応する`SHOW`ステートメントは次のとおりです。
 
 ```sql
 SHOW COLUMNS FROM t1 FROM test;
 ```
 
-The output is as follows:
+出力は次のとおりです。
 
 ```sql
 +-------+---------+------+------+---------+-------+

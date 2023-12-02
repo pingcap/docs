@@ -3,117 +3,117 @@ title: (The same as L1 heading) Feature name such as "Clustered Indexes" in 59 c
 summary: Summarize this doc in 115 to 145 characters. Start with an SEO-friendly verb that tells users what they can get from this doc. For example, "Learn what is clustered indexes and how to use clustered index to help you...". If your intro paragraph describes your article's intent, you can use it here, edited for length.
 ---
 
-# New Feature Name (the same as title in the metadata)
+# 新しい機能名 (メタデータのタイトルと同じ) {#new-feature-name-the-same-as-title-in-the-metadata}
 
-> About this template:
+> このテンプレートについて:
 >
-> - This document is a template for new features, including feature concepts and how to use the feature. You can directly copy and use this template and delete unnecessary annotations. An example of this type of document: [Clustered Indexes](/clustered-indexes.md).
-> - For a new document, please add a link to the appropriate location in the `TOC.md` file (consider where users are most likely to look for this document in the table of contents).
-> - The headings within the document cannot skip levels, and try to avoid using level 5 headings.
+> -   このドキュメントは、機能の概念や機能の使用方法を含む、新機能のテンプレートです。このテンプレートを直接コピーして使用したり、不要な注釈を削除したりできます。このタイプの文書の例: [クラスター化インデックス](/clustered-indexes.md) .
+> -   新しいドキュメントの場合は、 `TOC.md`ファイル内の適切な場所へのリンクを追加してください (ユーザーが目次のどこでこのドキュメントを探す可能性が最も高いかを考慮してください)。
+> -   文書内の見出しはレベルをスキップできないため、レベル 5 の見出しの使用は避けるようにしてください。
 
-> **Warning** (Optional)
+> **警告**(オプション)
 >
-> This is an experimental feature and is not recommended for production environments.
+> これは実験的機能であり、本番環境では推奨されません。
 
-This document describes the Usage scenarios, usage methods, and limitations of [feature name] and the FAQs when using this feature.
+本書では、[機能名]の利用シーン、利用方法、制限事項、および本機能を利用する際のFAQについて説明します。
 
-[Feature name] is a XXX that can be used to do XXX. By using this feature, you can achieve or optimize [a summary of the usage scenario]. (The implementation details or principles can be omitted, or you can consider putting them in a separate section or another document).
+[機能名] は XXX を行うために使用できる XXX です。この機能を使用すると、[使用シナリオの概要] を実現または最適化できます。 (実装の詳細や原則は省略することも、別のセクションや別のドキュメントに置くことを検討することもできます)。
 
-If you need to add notes or warnings, strictly follow the following format.
+注記や警告を追加する必要がある場合は、次の形式に厳密に従ってください。
 
-> **Note**
+> **注記**
 >
-> For general tips and notes, use a note.
+> 一般的なヒントとメモについては、メモを使用してください。
 
-> **Warning**
+> **警告**
 >
-> If the information might bring risks to users, such as system availability, security, data loss, etc., use a warning.
+> 情報がシステムの可用性、セキュリティ、データ損失などのリスクをユーザーにもたらす可能性がある場合は、警告を使用します。
 
-If the notes or warnings are nested in a list, indent them with four spaces.
+注または警告がリスト内でネストされている場合は、4 つのスペースでインデントします。
 
-To prevent incorrect display, **all indentation on the PingCAP website must be 4 spaces.**
+誤った表示を防ぐため、 **PingCAP Web サイトのインデントはすべてスペース 4 文字にする必要があります。**
 
-## Usage scenario(s)
+## 使用シナリオ {#usage-scenario-s}
 
-Usage scenarios are very important. You need to introduce why users need to use this feature, in what cases they can use it, and what problems this feature can solve from the user's perspective.
+使用シナリオは非常に重要です。ユーザーがなぜこの機能を使う必要があるのか​​、どのような場合に利用できるのか、ユーザーの視点でこの機能がどのような問題を解決できるのかを紹介する必要があります。
 
-[New feature] is suitable for the following scenarios:
+[新機能]は次のシナリオに適しています。
 
-- unordered list
-- unordered list
+-   順序なしリスト
+-   順序なしリスト
 
-### Usage scenario 1
+### 利用シーン1 {#usage-scenario-1}
 
-### Usage scenario 2
+### 利用シーン2 {#usage-scenario-2}
 
-## Prerequisites (optional)
+## 前提条件 (オプション) {#prerequisites-optional}
 
-- Prepare xxx. Describes how to prepare xxx. You can provide a link to the reference document.
-- Ensure that xxx. Describes how to check whether xxx meets the requirements. If not, describe how to handle it.
+-   xxxを準備してください。 xxxの準備方法を説明します。参照ドキュメントへのリンクを提供できます。
+-   xxx であることを確認してください。 xxx が要件を満たしているかどうかを確認する方法について説明します。そうでない場合は、その対処方法を説明します。
 
-## Usage or Procedures
+## 使い方や手順 {#usage-or-procedures}
 
-TiDB provides x methods for xxx, which are AAA method and BBB method.
+TiDB では、xxx に対して x 個のメソッド (AAA メソッドと BBB メソッド) が提供されています。
 
-In the case of xxx, to achieve xxx, it is recommended to use the AAA method.
+xxx の場合、xxx を達成するには AAA 方式を使用することをお勧めします。
 
-### Method 1: AAA (recommended)
+### 方法 1: AAA (推奨) {#method-1-aaa-recommended}
 
-1. first step
-2. second step
-3. third step
+1.  最初の一歩
+2.  第二段階
+3.  第三段階
 
-### Method 2: BBB
+### 方法 2: BBB {#method-2-bbb}
 
-1. first step
-2. second step
-3. third step
+1.  最初の一歩
+2.  第二段階
+3.  第三段階
 
-## Parameter reference
+## パラメータリファレンス {#parameter-reference}
 
-If this feature is mainly a new syntax or command, list the specific configuration item or parameter description, default value, and example.
+この機能が主に新しい構文またはコマンドである場合は、特定の構成項目またはパラメーターの説明、デフォルト値、および例をリストします。
 
-You can either use a table or an unordered list.
+テーブルまたは順序なしリストのいずれかを使用できます。
 
-| Parameter | Description | Default value | Required | Example |
-| :-- | :-- | :-- | :-- | :-- |
-| xxx | xxx | xxx | xxx | xxx |
+| パラメータ | 説明  | デフォルト値 | 必須  | 例   |
+| :---- | :-- | :----- | :-- | :-- |
+| xxx   | xxx | xxx    | xxx | xxx |
 
-## Limitations
+## 制限事項 {#limitations}
 
-In this section, list the usage limitations. If there is no order between the limitations, use an unordered list.
+このセクションでは、使用上の制限を列挙します。制限間に順序がない場合は、順序なしリストを使用します。
 
-## Compatibility
+## 互換性 {#compatibility}
 
-In this section, list the compatibility information of this feature, including:
+このセクションでは、次のようなこの機能の互換性情報をリストします。
 
-- The compatibility with previous TiDB versions
-- The compatibility with MySQL
-- The compatibility under different architectures or platforms.
+-   以前の TiDB バージョンとの互換性
+-   MySQLとの互換性
+-   異なるアーキテクチャまたはプラットフォームでの互換性。
 
-## FAQ (optional)
+## FAQ（オプション） {#faq-optional}
 
-In this section, list the FAQs when using this feature.
+このセクションでは、この機能を使用する際の FAQ を列挙します。
 
-If there are many FAQs, you can add a separate FAQ document for this feature.
+FAQ が多数ある場合は、この機能に別のFAQドキュメントを追加できます。
 
-### Q1: xxx
+### Q1:xxx {#q1-xxx}
 
-Answer.
+答え。
 
-### Q2: xxx
+### Q2:xxx {#q2-xxx}
 
-Answer.
+答え。
 
-## More resources
+## その他のリソース {#more-resources}
 
-In this section, provide more related documents that users might want to read, such as:
+このセクションでは、ユーザーが読みたいと思われる次のような関連ドキュメントをさらに提供します。
 
-- To view the TiFlash version, important logs, and system tables, see [Maintain a TiFlash Cluster](/tiflash/maintain-tiflash.md).
-- If you need to remove a TiFlash node, see [Scale in a TiFlash cluster](/scale-tidb-using-tiup.md#scale-in-a-tiflash-cluster).
+-   TiFlashのバージョン、重要なログ、およびシステム テーブルを表示するには、 [TiFlashクラスタの管理](/tiflash/maintain-tiflash.md)を参照してください。
+-   TiFlashノードを削除する必要がある場合は、 [TiFlashクラスターでのスケールイン](/scale-tidb-using-tiup.md#scale-in-a-tiflash-cluster)を参照してください。
 
-You can also directly provide the documents that users might be interested in, such as:
+ユーザーが興味を持つ可能性のある次のようなドキュメントを直接提供することもできます。
 
-- [Explore HTAP](/explore-htap.md)
-- [TiFlash Architecture](/tiflash/tiflash-overview.md#architecture)
-- [Maintain a TiFlash cluster](/tiflash/maintain-tiflash.md)
+-   [HTAP を探索する](/explore-htap.md)
+-   [TiFlashアーキテクチャ](/tiflash/tiflash-overview.md#architecture)
+-   [TiFlashクラスターを管理](/tiflash/maintain-tiflash.md)

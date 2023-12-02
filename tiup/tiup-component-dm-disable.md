@@ -2,46 +2,46 @@
 title: tiup dm disable
 ---
 
-# tiup dm disable
+# ティアップDMを無効にする {#tiup-dm-disable}
 
-After restarting the machine on which the cluster service is located, the cluster service will be automatically enabled. To disable the auto-enabling of cluster service, you can use the `tiup dm disable` command. This command executes `systemctl disable <service>` on the specified node to disable the auto-enabling of the service.
+クラスター サービスが配置されているマシンを再起動すると、クラスター サービスは自動的に有効になります。クラスター サービスの自動有効化を無効にするには、 `tiup dm disable`コマンドを使用します。このコマンドは、指定されたノード上で`systemctl disable <service>`を実行して、サービスの自動有効化を無効にします。
 
-## Syntax
+## 構文 {#syntax}
 
 ```shell
 tiup dm disable <cluster-name> [flags]
 ```
 
-`<cluster-name>` is the cluster whose service auto-enabling is to be disabled.
+`<cluster-name>`は、サービスの自動有効化を無効にするクラスターです。
 
-## Options
+## オプション {#options}
 
-### -N, --node
+### -N、--node {#n-node}
 
-- Specifies the nodes whose service auto-enabling is to be disabled. The value of this option is a comma-separated list of node IDs. You can get the node IDs from the first column of the cluster status table returned by the [`tiup dm display`](/tiup/tiup-component-dm-display.md) command.
-- Data type: `STRINGS`
-- If this option is not specified in the command, the auto-enabling of all nodes is disabled by default.
+-   サービスの自動有効化を無効にするノードを指定します。このオプションの値は、ノード ID のカンマ区切りリストです。ノード ID は、 [`tiup dm display`](/tiup/tiup-component-dm-display.md)コマンドによって返されるクラスター ステータス テーブルの最初の列から取得できます。
+-   データ型: `STRINGS`
+-   このオプションがコマンドで指定されていない場合、すべてのノードの自動有効化はデフォルトで無効になります。
 
-> **Note:**
+> **注記：**
 >
-> If the `-R, --role` option is specified at the same time, the auto-enabling of services that match both the specifications of `-N, --node` and `-R, --role` is disabled.
+> `-R, --role`オプションを同時に指定した場合、 `-N, --node`と`-R, --role`の両方の指定に一致するサービスの自動有効化は無効になります。
 
-### -R, --role
+### -R、--役割 {#r-role}
 
-- Specifies the roles whose service auto-enabling is to be disabled. The value of this option is a comma-separated list of node roles. You can get the roles of nodes from the second column of the cluster status table returned by the [`tiup dm display`](/tiup/tiup-component-dm-display.md) command.
-- Data type: `STRINGS`
-- If this option is not specified in the command, the auto-enabling of all roles is disabled by default.
+-   サービスの自動有効化を無効にするロールを指定します。このオプションの値は、ノードの役割のカンマ区切りのリストです。ノードの役割は、 [`tiup dm display`](/tiup/tiup-component-dm-display.md)コマンドによって返されるクラスター状態テーブルの 2 番目の列から取得できます。
+-   データ型: `STRINGS`
+-   このオプションがコマンドで指定されていない場合、すべてのロールの自動有効化はデフォルトで無効になります。
 
-> **Note:**
+> **注記：**
 >
-> If the `-N, --node` option is specified at the same time, the auto-enabling of services that match both the specifications of `-N, --node` and `-R, --role` is disabled.
+> `-N, --node`オプションを同時に指定した場合、 `-N, --node`と`-R, --role`の両方の指定に一致するサービスの自動有効化は無効になります。
 
-### -h, --help
+### -h, --help {#h-help}
 
-Prints the help information.
+ヘルプ情報を出力します。
 
-## Output
+## 出力 {#output}
 
-The execution log of the tiup-dm.
+tiup-dmの実行ログ。
 
-[<< Back to the previous page - TiUP DM command list](/tiup/tiup-component-dm.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUP DMコマンド一覧](/tiup/tiup-component-dm.md#command-list)

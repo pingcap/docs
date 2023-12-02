@@ -3,36 +3,34 @@ title: CHARACTER_SETS
 summary: Learn the `CHARACTER_SETS` INFORMATION_SCHEMA table.
 ---
 
-# CHARACTER_SETS
+# CHARACTER_SETS {#character-sets}
 
-The `CHARACTER_SETS` table provides information about [character sets](/character-set-and-collation.md). Currently, TiDB only supports some of the character sets.
+`CHARACTER_SETS`表は[文字セット](/character-set-and-collation.md)に関する情報を提供します。現在、TiDB は一部の文字セットのみをサポートしています。
 
 ```sql
 USE INFORMATION_SCHEMA;
 DESC CHARACTER_SETS;
 ```
 
-The output is as follows:
+出力は次のとおりです。
 
-```
-+----------------------+-------------+------+------+---------+-------+
-| Field                | Type        | Null | Key  | Default | Extra |
-+----------------------+-------------+------+------+---------+-------+
-| CHARACTER_SET_NAME   | varchar(32) | YES  |      | NULL    |       |
-| DEFAULT_COLLATE_NAME | varchar(32) | YES  |      | NULL    |       |
-| DESCRIPTION          | varchar(60) | YES  |      | NULL    |       |
-| MAXLEN               | bigint(3)   | YES  |      | NULL    |       |
-+----------------------+-------------+------+------+---------+-------+
-4 rows in set (0.00 sec)
-```
+    +----------------------+-------------+------+------+---------+-------+
+    | Field                | Type        | Null | Key  | Default | Extra |
+    +----------------------+-------------+------+------+---------+-------+
+    | CHARACTER_SET_NAME   | varchar(32) | YES  |      | NULL    |       |
+    | DEFAULT_COLLATE_NAME | varchar(32) | YES  |      | NULL    |       |
+    | DESCRIPTION          | varchar(60) | YES  |      | NULL    |       |
+    | MAXLEN               | bigint(3)   | YES  |      | NULL    |       |
+    +----------------------+-------------+------+------+---------+-------+
+    4 rows in set (0.00 sec)
 
-View the `CHARACTER_SETS` table:
+`CHARACTER_SETS`テーブルをビュー。
 
 ```sql
 SELECT * FROM `CHARACTER_SETS`;
 ```
 
-The output is as follows:
+出力は次のとおりです。
 
 ```sql
 +--------------------+----------------------+-------------------------------------+--------+
@@ -48,9 +46,9 @@ The output is as follows:
 6 rows in set (0.00 sec)
 ```
 
-The description of columns in the `CHARACTER_SETS` table is as follows:
+`CHARACTER_SETS`のテーブルの列の説明は次のとおりです。
 
-* `CHARACTER_SET_NAME`: The name of the character set.
-* `DEFAULT_COLLATE_NAME` The default collation name of the character set.
-* `DESCRIPTION` The description of the character set.
-* `MAXLEN` The maximum length required to store a character in this character set.
+-   `CHARACTER_SET_NAME` : 文字セットの名前。
+-   `DEFAULT_COLLATE_NAME`文字セットのデフォルトの照合順序名。
+-   `DESCRIPTION`文字セットの説明。
+-   `MAXLEN`この文字セットに文字を格納するために必要な最大長。

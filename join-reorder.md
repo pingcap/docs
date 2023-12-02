@@ -3,68 +3,66 @@ title: Introduction to Join Reorder
 summary: Use the Join Reorder algorithm to join multiple tables in TiDB.
 ---
 
-# Introduction to Join Reorder
+# 結合したテーブルの再配置の概要 {#introduction-to-join-reorder}
 
-In real application scenarios, it is common to join multiple tables. The execution efficiency of join is associated with the order in which each table joins.
+実際のアプリケーションのシナリオでは、複数のテーブルを結合するのが一般的です。結合の実行効率は、各テーブルの結合順序に関係します。
 
-For example:
-
-{{< copyable "sql" >}}
+例えば：
 
 ```sql
 SELECT * FROM t1, t2, t3 WHERE t1.a=t2.a AND t3.a=t2.a;
 ```
 
-In this query, tables can be joined in the following two orders:
+このクエリでは、次の 2 つの順序でテーブルを結合できます。
 
-- t1 joins t2, and then joins t3
-- t2 joins t3, and then joins t1
+-   t1 は t2 に結合し、その後 t3 に結合します
+-   t2 は t3 に結合し、その後 t1 に結合します
 
-As t1 and t3 have different data volumes and distribution, these two execution orders might show different performances.
+t1 と t3 はデータ量と分布が異なるため、これら 2 つの実行順序は異なるパフォーマンスを示す可能性があります。
 
-Therefore, the optimizer needs an algorithm to determine the join order. Currently, the following two Join Reorder algorithms are used in TiDB:
+したがって、オプティマイザには結合順序を決定するアルゴリズムが必要です。現在、TiDB では次の 2 つの結合したテーブルの再配置アルゴリズムが使用されています。
 
-- The greedy algorithm: among all nodes participating in the join, TiDB selects the table with the least rows to estimate its join result with each of the other tables respectively, and then selects the pair with the smallest join result. After that, TiDB continues the similar process to select and join other nodes for the next round, until all the nodes have completed the join.
-- The dynamic programming algorithm: among all nodes participating in the join, TiDB enumerates all possible join orders and selects the optimal join order.
+-   貪欲アルゴリズム: 結合に参加しているすべてのノードの中で、TiDB は行数が最も少ないテーブルを選択して、他の各テーブルとの結合結果をそれぞれ推定し、結合結果が最小のペアを選択します。その後、TiDB は、すべてのノードが結合を完了するまで、次のラウンドで他のノードを選択して結合する同様のプロセスを継続します。
+-   動的プログラミング アルゴリズム: 結合に参加しているすべてのノードの間で、TiDB は考えられるすべての結合順序を列挙し、最適な結合順序を選択します。
 
-## Example: the greedy algorithm of Join Reorder
+## 例: 結合したテーブルの再配置の貪欲なアルゴリズム {#example-the-greedy-algorithm-of-join-reorder}
 
-Take the preceding three tables (t1, t2, and t3) as an example.
+前述の 3 つのテーブル (t1、t2、および t3) を例に挙げます。
 
-First, TiDB obtains all the nodes that participates in the join operation, and sorts the nodes in the ascending order of row numbers.
+まず、TiDB は結合操作に参加するすべてのノードを取得し、行番号の昇順にノードをソートします。
 
 ![join-reorder-1](/media/join-reorder-1.png)
 
-After that, the table with the least rows is selected and joined with other two tables respectively. By comparing the sizes of the output result sets, TiDB selects the pair with a smaller result set.
+その後、行数が最も少ないテーブルが選択され、他の 2 つのテーブルとそれぞれ結合されます。出力結果セットのサイズを比較することにより、TiDB は結果セットが小さいペアを選択します。
 
 ![join-reorder-2](/media/join-reorder-2.png)
 
-Then TiDB enters the next round of selection. If you try to join four tables, TiDB continues to compare the sizes of the output result sets and selects the pair with a smaller result set.
+その後、TiDB は次の選考ラウンドに入ります。 4 つのテーブルを結合しようとすると、TiDB は出力結果セットのサイズを比較し続け、より小さい結果セットを持つペアを選択します。
 
-In this case only three tables are joined, so TiDB gets the final join result.
+この場合、結合されるテーブルは 3 つだけなので、TiDB が最終的な結合結果を取得します。
 
 ![join-reorder-3](/media/join-reorder-3.png)
 
-## Example: the dynamic programming algorithm of Join Reorder
+## 例: 結合したテーブルの再配置の動的計画アルゴリズム {#example-the-dynamic-programming-algorithm-of-join-reorder}
 
-Taking the preceding three tables (t1, t2, and t3) as an example again, the dynamic programming algorithm can enumerate all possibilities. Therefore, comparing with the greedy algorithm, which must start with the `t1` table (the table with the least rows), the dynamic programming algorithm can enumerate a join order as follows:
+前述の 3 つのテーブル (t1、t2、および t3) を再び例として挙げると、動的計画法アルゴリズムはすべての可能性を列挙できます。したがって、 `t1`のテーブル (行数が最も少ないテーブル) から開始する必要がある貪欲アルゴリズムと比較して、動的プログラミング アルゴリズムは次のように結合順序を列挙できます。
 
 ![join-reorder-4](/media/join-reorder-4.png)
 
-When this choice is better than the greedy algorithm, the dynamic programming algorithm can choose a better join order.
+この選択が貪欲アルゴリズムよりも優れている場合、動的プログラミング アルゴリズムはより適切な結合順序を選択できます。
 
-Because all possibilities are enumerated, the dynamic programming algorithm consumes more time and is more susceptible to statistics.
+すべての可能性が列挙されるため、動的プログラミング アルゴリズムはより多くの時間を費やし、統計の影響を受けやすくなります。
 
-## Selection of the Join Reorder algorithms
+## 結合したテーブルの再配置アルゴリズムの選択 {#selection-of-the-join-reorder-algorithms}
 
-The selection of the TiDB Join Reorder algorithms is controlled by the [`tidb_opt_join_reorder_threshold`](/system-variables.md#tidb_opt_join_reorder_threshold) variable. If the number of nodes participating in Join Reorder is greater than this threshold, TiDB uses the greedy algorithm. Otherwise, TiDB uses the dynamic programming algorithm.
+TiDB 結合したテーブルの再配置アルゴリズムの選択は、変数[`tidb_opt_join_reorder_threshold`](/system-variables.md#tidb_opt_join_reorder_threshold)によって制御されます。 結合したテーブルの再配置に参加しているノードの数がこのしきい値より大きい場合、TiDB は貪欲アルゴリズムを使用します。それ以外の場合、TiDB は動的プログラミング アルゴリズムを使用します。
 
-## Limitations of Join Reorder algorithms
+## 結合したテーブルの再配置アルゴリズムの制限 {#limitations-of-join-reorder-algorithms}
 
-The current Join Reorder algorithms have the following limitations:
+現在の結合したテーブルの再配置アルゴリズムには次の制限があります。
 
-- Limited by the calculation methods of the result sets, the algorithm cannot ensure it selects the optimum join order.
-- The Join Reorder algorithm's support for Outer Join is controlled by the [`tidb_enable_outer_join_reorder`](/system-variables.md#tidb_enable_outer_join_reorder-new-in-v610) system variable. 
-- Currently, the dynamic programming algorithm cannot perform Join Reorder for outer join.
+-   結果セットの計算方法によって制限されるため、アルゴリズムは最適な結合順序を選択することを保証できません。
+-   結合したテーブルの再配置アルゴリズムによる外部結合のサポートは、 [`tidb_enable_outer_join_reorder`](/system-variables.md#tidb_enable_outer_join_reorder-new-in-v610)システム変数によって制御されます。
+-   現在、動的プログラミング アルゴリズムは、外部結合の結合したテーブルの再配置を実行できません。
 
-Currently, the `STRAIGHT_JOIN` syntax is supported in TiDB to force a join order. For more information, refer to [Description of the syntax elements](/sql-statements/sql-statement-select.md#description-of-the-syntax-elements).
+現在、結合順序を強制する`STRAIGHT_JOIN`構文が TiDB でサポートされています。詳細については、 [構文要素の説明](/sql-statements/sql-statement-select.md#description-of-the-syntax-elements)を参照してください。

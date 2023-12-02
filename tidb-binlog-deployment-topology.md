@@ -3,55 +3,55 @@ title: TiDB Binlog Deployment Topology
 summary: Learn the deployment topology of TiDB Binlog based on the minimal TiDB topology.
 ---
 
-# TiDB Binlog Deployment Topology
+# TiDBBinlog展開トポロジ {#tidb-binlog-deployment-topology}
 
-This document describes the deployment topology of [TiDB Binlog](/tidb-binlog/tidb-binlog-overview.md) based on the minimal TiDB topology.
+このドキュメントでは、最小の TiDB トポロジに基づいた[TiDBBinlog](/tidb-binlog/tidb-binlog-overview.md)の展開トポロジについて説明します。
 
-TiDB Binlog is the widely used component for replicating incremental data. It provides near real-time backup and replication.
+TiDB Binlog は、増分データをレプリケートするために広く使用されているコンポーネントです。ほぼリアルタイムのバックアップとレプリケーションを提供します。
 
-## Topology information
+## トポロジ情報 {#topology-information}
 
-| Instance | Count | Physical machine configuration | IP | Configuration |
-| :-- | :-- | :-- | :-- | :-- |
-| TiDB | 3 | 16 VCore 32 GB | 10.0.1.1 <br/> 10.0.1.2 <br/> 10.0.1.3 | Default port configuration; <br/> Enable `enable_binlog`; <br/> Enable `ignore-error` |
-| PD | 3 | 4 VCore 8 GB | 10.0.1.4 <br/> 10.0.1.5 <br/> 10.0.1.6 | Default port configuration |
-| TiKV | 3 | 16 VCore 32 GB | 10.0.1.7 <br/> 10.0.1.8 <br/> 10.0.1.9 | Default port configuration |
-| Pump| 3 | 8 VCore 16GB | 10.0.1.1 <br/> 10.0.1.7 <br/> 10.0.1.8 | Default port configuration; <br/> Set GC time to 7 days |
-| Drainer | 1 | 8 VCore 16GB | 10.0.1.12 | Default port configuration; <br/> Set the default initialization commitTS -1 as the latest timestamp; <br/> Configure the downstream target TiDB as `10.0.1.12:4000` |
+| 実例      | カウント | 物理マシンの構成      | IP                                   | コンフィグレーション                                                                                                     |
+| :------ | :--- | :------------ | :----------------------------------- | :------------------------------------------------------------------------------------------------------------- |
+| TiDB    | 3    | 16 仮想コア 32 GB | 10.0.1.1<br/> 10.0.1.2<br/> 10.0.1.3 | デフォルトのポート構成。<br/> `enable_binlog`を有効にする。<br/>有効化`ignore-error`                                                 |
+| PD      | 3    | 4仮想コア8GB      | 10.0.1.4<br/> 10.0.1.5<br/> 10.0.1.6 | デフォルトのポート構成                                                                                                    |
+| TiKV    | 3    | 16 仮想コア 32 GB | 10.0.1.7<br/> 10.0.1.8<br/> 10.0.1.9 | デフォルトのポート構成                                                                                                    |
+| Pump    | 3    | 8仮想コア16GB     | 10.0.1.1<br/> 10.0.1.7<br/> 10.0.1.8 | デフォルトのポート構成。<br/> GC 時間を 7 日に設定する                                                                              |
+| Drainer | 1    | 8仮想コア16GB     | 10.0.1.12                            | デフォルトのポート構成。<br/>デフォルトの初期化 commitTS -1 を最新のタイムスタンプとして設定します。<br/>ダウンストリーム ターゲット TiDB を`10.0.1.12:4000`として構成します。 |
 
-### Topology templates
+### トポロジテンプレート {#topology-templates}
 
-- [The simple template for the TiDB Binlog topology (with `mysql` as the downstream type)](https://github.com/pingcap/docs/blob/master/config-templates/simple-tidb-binlog.yaml)
-- [The simple template for the TiDB Binlog topology (with `file` as the downstream type)](https://github.com/pingcap/docs/blob/master/config-templates/simple-file-binlog.yaml)
-- [The complex template for the TiDB Binlog topology](https://github.com/pingcap/docs/blob/master/config-templates/complex-tidb-binlog.yaml)
+-   [TiDB Binlogトポロジの単純なテンプレート (ダウンストリーム タイプとして`mysql`を使用)](https://github.com/pingcap/docs/blob/master/config-templates/simple-tidb-binlog.yaml)
+-   [TiDB Binlogトポロジの単純なテンプレート (ダウンストリーム タイプとして`file`を使用)](https://github.com/pingcap/docs/blob/master/config-templates/simple-file-binlog.yaml)
+-   [TiDB Binlogトポロジの複雑なテンプレート](https://github.com/pingcap/docs/blob/master/config-templates/complex-tidb-binlog.yaml)
 
-For detailed descriptions of the configuration items in the above TiDB cluster topology file, see [Topology Configuration File for Deploying TiDB Using TiUP](/tiup/tiup-cluster-topology-reference.md).
+上記の TiDB クラスター トポロジー ファイルの構成項目の詳細な説明については、 [TiUPを使用して TiDB を展開するためのトポロジコンフィグレーションファイル](/tiup/tiup-cluster-topology-reference.md)を参照してください。
 
-### Key parameters
+### 主要パラメータ {#key-parameters}
 
-The key parameters in the topology configuration templates are as follows:
+トポロジ構成テンプレートの主要なパラメータは次のとおりです。
 
-- `server_configs.tidb.binlog.enable: true`
+-   `server_configs.tidb.binlog.enable: true`
 
-    - Enables the binlog service.
-    - Default value: `false`.
+    -   binlogサービスを有効にします。
+    -   デフォルト値: `false` 。
 
-- `server_configs.tidb.binlog.ignore-error: true`
+-   `server_configs.tidb.binlog.ignore-error: true`
 
-    - It is recommended to enable this configuration in high availability scenarios.
-    - If set to `true`, when an error occurs, TiDB stops writing data into binlog, and adds `1` to the value of the `tidb_server_critical_error_total` monitoring metric.
-    - If set to `false`, when TiDB fails to write data into binlog, the whole TiDB service is stopped.
+    -   高可用性シナリオでは、この構成を有効にすることをお勧めします。
+    -   `true`に設定すると、エラーが発生すると、TiDB はbinlogへのデータの書き込みを停止し、 `tidb_server_critical_error_total`監視メトリックの値に`1`を追加します。
+    -   `false`に設定すると、TiDB がbinlogへのデータの書き込みに失敗すると、TiDB サービス全体が停止します。
 
-- `drainer_servers.config.syncer.db-type`
+-   `drainer_servers.config.syncer.db-type`
 
-    The downstream type of TiDB Binlog. Currently, `mysql`, `tidb`, `kafka`, and `file` are supported.
+    TiDB Binlogのダウンストリーム タイプ。現在、 `mysql` 、 `tidb` 、 `kafka` 、および`file`がサポートされています。
 
-- `drainer_servers.config.syncer.to`
+-   `drainer_servers.config.syncer.to`
 
-    The downstream configuration of TiDB Binlog. Depending on different `db-type`s, you can use this configuration item to configure the connection parameters of the downstream database, the connection parameters of Kafka, and the file save path. For details, refer to [TiDB Binlog Configuration File](/tidb-binlog/tidb-binlog-configuration-file.md#syncerto).
+    TiDB Binlogのダウンストリーム構成。さまざまな`db-type`に応じて、この構成アイテムを使用して、ダウンストリーム データベースの接続パラメーター、Kafka の接続パラメーター、およびファイルの保存パスを構成できます。詳細は[TiDBBinlogコンフィグレーションファイル](/tidb-binlog/tidb-binlog-configuration-file.md#syncerto)を参照してください。
 
-> **Note:**
+> **注記：**
 >
-> - When editing the configuration file template, if you do not need custom ports or directories, modify the IP only.
-> - You do not need to manually create the `tidb` user in the configuration file. The TiUP cluster component automatically creates the `tidb` user on the target machines. You can customize the user, or keep the user consistent with the control machine.
-> - If you configure the deployment directory as a relative path, the cluster will be deployed in the home directory of the user.
+> -   構成ファイル テンプレートを編集するときに、カスタム ポートまたはディレクトリが必要ない場合は、IP のみを変更します。
+> -   構成ファイルに`tidb`ユーザーを手動で作成する必要はありません。 TiUPクラスターコンポーネントは、ターゲット マシン上に`tidb`のユーザーを自動的に作成します。ユーザーをカスタマイズしたり、ユーザーと制御マシンの一貫性を保つことができます。
+> -   デプロイメント ディレクトリを相対パスとして構成すると、クラスターはユーザーのホーム ディレクトリにデプロイされます。

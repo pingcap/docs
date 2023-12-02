@@ -3,36 +3,36 @@ title: TiFlash Deployment Topology
 summary: Learn the deployment topology of TiFlash based on the minimal TiDB topology.
 ---
 
-# TiFlash Deployment Topology
+# TiFlash導入トポロジ {#tiflash-deployment-topology}
 
-This document describes the deployment topology of [TiFlash](/tiflash/tiflash-overview.md) based on the minimal TiDB topology.
+このドキュメントでは、最小の TiDB トポロジに基づいた[TiFlash](/tiflash/tiflash-overview.md)の展開トポロジについて説明します。
 
-TiFlash is a columnar storage engine, and gradually becomes the standard cluster topology. It is suitable for real-time HTAP applications.
+TiFlashはカラム型storageエンジンであり、徐々に標準のクラスター トポロジになりつつあります。リアルタイム HTAP アプリケーションに適しています。
 
-## Topology information
+## トポロジ情報 {#topology-information}
 
-| Instance | Count | Physical machine configuration | IP | Configuration |
-| :-- | :-- | :-- | :-- | :-- |
-| TiDB | 3 | 16 VCore 32GB * 1 | 10.0.1.7 <br/> 10.0.1.8 <br/> 10.0.1.9 | Default port <br/> Global directory configuration |
-| PD | 3 | 4 VCore 8GB * 1 | 10.0.1.4 <br/> 10.0.1.5 <br/> 10.0.1.6 | Default port <br/> Global directory configuration |
-| TiKV | 3 | 16 VCore 32GB 2TB (nvme ssd) * 1 | 10.0.1.1 <br/> 10.0.1.2 <br/> 10.0.1.3 | Default port <br/> Global directory configuration |
-| TiFlash | 1 | 32 VCore 64 GB 2TB (nvme ssd) * 1  | 10.0.1.11 | Default port <br/> Global directory configuration |
-| Monitoring & Grafana | 1 | 4 VCore 8GB * 1 500GB (ssd) | 10.0.1.10 | Default port <br/> Global directory configuration |
+| 実例           | カウント | 物理マシンの構成                          | IP                                   | コンフィグレーション                  |
+| :----------- | :--- | :-------------------------------- | :----------------------------------- | :-------------------------- |
+| TiDB         | 3    | 16Vコア 32GB*1                      | 10.0.1.7<br/> 10.0.1.8<br/> 10.0.1.9 | デフォルトのポート<br/>グローバルディレクトリ構成 |
+| PD           | 3    | 4Vコア8GB*1                         | 10.0.1.4<br/> 10.0.1.5<br/> 10.0.1.6 | デフォルトのポート<br/>グローバルディレクトリ構成 |
+| TiKV         | 3    | 16 VCore 32GB 2TB (nvme ssd) * 1  | 10.0.1.1<br/> 10.0.1.2<br/> 10.0.1.3 | デフォルトのポート<br/>グローバルディレクトリ構成 |
+| TiFlash      | 1    | 32 VCore 64 GB 2TB (nvme ssd) * 1 | 10.0.1.11                            | デフォルトのポート<br/>グローバルディレクトリ構成 |
+| モニタリングとグラファナ | 1    | 4 VCore 8GB * 1 500GB (SSD)       | 10.0.1.10                            | デフォルトのポート<br/>グローバルディレクトリ構成 |
 
-### Topology templates
+### トポロジテンプレート {#topology-templates}
 
-- [The simple template for the TiFlash topology](https://github.com/pingcap/docs/blob/master/config-templates/simple-tiflash.yaml)
-- [The complex template for the TiFlash topology](https://github.com/pingcap/docs/blob/master/config-templates/complex-tiflash.yaml)
+-   [TiFlashトポロジのシンプルなテンプレート](https://github.com/pingcap/docs/blob/master/config-templates/simple-tiflash.yaml)
+-   [TiFlashトポロジの複雑なテンプレート](https://github.com/pingcap/docs/blob/master/config-templates/complex-tiflash.yaml)
 
-For detailed descriptions of the configuration items in the above TiDB cluster topology file, see [Topology Configuration File for Deploying TiDB Using TiUP](/tiup/tiup-cluster-topology-reference.md).
+上記の TiDB クラスター トポロジー ファイルの構成項目の詳細な説明については、 [TiUPを使用して TiDB を展開するためのトポロジコンフィグレーションファイル](/tiup/tiup-cluster-topology-reference.md)を参照してください。
 
-### Key parameters
+### 主要パラメータ {#key-parameters}
 
-- To enable the [Placement Rules](/configure-placement-rules.md) feature of PD, set the value of `replication.enable-placement-rules` in the configuration template to `true`.
-- The instance level `"-host"` configuration in `tiflash_servers` only supports IP, not domain name.
-- For detailed TiFlash parameter description, see [TiFlash Configuration](/tiflash/tiflash-configuration.md).
+-   PD の[配置ルール](/configure-placement-rules.md)機能を有効にするには、構成テンプレートの`replication.enable-placement-rules`の値を`true`に設定します。
+-   `tiflash_servers`のインスタンス レベル`"-host"`構成は IP のみをサポートし、ドメイン名はサポートしません。
+-   TiFlashパラメータの詳細な説明については、 [TiFlashコンフィグレーション](/tiflash/tiflash-configuration.md)を参照してください。
 
-> **Note:**
+> **注記：**
 >
-> - You do not need to manually create the `tidb` user in the configuration file. The TiUP cluster component automatically creates the `tidb` user on the target machines. You can customize the user, or keep the user consistent with the control machine.
-> - If you configure the deployment directory as a relative path, the cluster will be deployed in the home directory of the user.
+> -   構成ファイルに`tidb`ユーザーを手動で作成する必要はありません。 TiUPクラスターコンポーネントは、ターゲット マシン上に`tidb`のユーザーを自動的に作成します。ユーザーをカスタマイズしたり、ユーザーと制御マシンの一貫性を保つことができます。
+> -   デプロイメント ディレクトリを相対パスとして構成すると、クラスターはユーザーのホーム ディレクトリにデプロイされます。

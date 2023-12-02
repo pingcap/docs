@@ -3,19 +3,17 @@ title: PROCESSLIST
 summary: Learn the `PROCESSLIST` information_schema table.
 ---
 
-# PROCESSLIST
+# プロセスリスト {#processlist}
 
-`PROCESSLIST`, just like `SHOW PROCESSLIST`, is used to view the requests that are being handled.
+`PROCESSLIST`は、 `SHOW PROCESSLIST`と同様に、処理されているリクエストを表示するために使用されます。
 
-The `PROCESSLIST` table has additional columns not present in `SHOW PROCESSLIST`:
+`PROCESSLIST`テーブルには、 `SHOW PROCESSLIST`に存在しない追加の列があります。
 
-* A `DIGEST` column to show the digest of the SQL statement.
-* A `MEM` column to show the memory used by the request that is being processed, in bytes.
-* A `DISK` column to show the disk usage in bytes.
-* A `TxnStart` column to show the start time of the transaction.
-* A `RESOURCE_GROUP` column to show the resource group name.
-
-{{< copyable "sql" >}}
+-   SQL ステートメントのダイジェストを表示する`DIGEST`列。
+-   `MEM`列は、処理中のリクエストによって使用されているメモリをバイト単位で示します。
+-   ディスク使用量をバイト単位で示す`DISK`列。
+-   トランザクションの開始時間を示す`TxnStart`列。
+-   `RESOURCE_GROUP`列にはリソース グループ名が表示されます。
 
 ```sql
 USE information_schema;
@@ -43,8 +41,6 @@ DESC processlist;
 13 rows in set (0.00 sec)
 ```
 
-{{< copyable "sql" >}}
-
 ```sql
 SELECT * FROM processlist\G
 ```
@@ -67,27 +63,25 @@ SELECT * FROM processlist\G
 1 row in set (0.00 sec)
 ```
 
-Fields in the `PROCESSLIST` table are described as follows:
+`PROCESSLIST`テーブルのフィールドは次のように説明されています。
 
-* ID: The ID of the user connection.
-* USER: The name of the user who is executing `PROCESS`.
-* HOST: The address that the user is connecting to.
-* DB: The name of the currently connected default database.
-* COMMAND: The command type that `PROCESS` is executing.
-* TIME: The current execution duration of `PROCESS`, in seconds.
-* STATE: The current connection state.
-* INFO: The requested statement that is being processed.
-* DIGEST: The digest of the SQL statement.
-* MEM: The memory used by the request that is being processed, in bytes.
-* DISK: The disk usage in bytes.
-* TxnStart: The start time of the transaction.
-* RESOURCE_GROUP: The resource group name.
+-   ID: ユーザー接続の ID。
+-   USER: `PROCESS`を実行しているユーザーの名前。
+-   HOST: ユーザーが接続しているアドレス。
+-   DB: 現在接続されているデフォルトのデータベースの名前。
+-   COMMAND: `PROCESS`が実行しているコマンドの種類。
+-   TIME: 現在の実行期間`PROCESS` (秒単位)。
+-   STATE: 現在の接続状態。
+-   情報: 処理中の要求されたステートメント。
+-   DIGEST: SQL ステートメントのダイジェスト。
+-   MEM: 処理中のリクエストによって使用されるメモリ(バイト単位)。
+-   DISK: ディスク使用量 (バイト単位)。
+-   TxnStart: トランザクションの開始時刻。
+-   RESOURCE_GROUP: リソースグループ名。
 
-## CLUSTER_PROCESSLIST
+## CLUSTER_PROCESSLIST {#cluster-processlist}
 
-`CLUSTER_PROCESSLIST` is the cluster system table corresponding to `PROCESSLIST`. It is used to query the `PROCESSLIST` information of all TiDB nodes in the cluster. The table schema of `CLUSTER_PROCESSLIST` has one more column than `PROCESSLIST`, the `INSTANCE` column, which stores the address of the TiDB node this row of data is from.
-
-{{< copyable "sql" >}}
+`CLUSTER_PROCESSLIST`は`PROCESSLIST`に対応するクラスタシステムテーブルです。これは、クラスター内の`PROCESSLIST`の TiDB ノードの情報を照会するために使用されます。 `CLUSTER_PROCESSLIST`のテーブル スキーマには`PROCESSLIST`よりも 1 列多い`INSTANCE`列があり、この列のデータの元の TiDB ノードのアドレスが格納されます。
 
 ```sql
 SELECT * FROM information_schema.cluster_processlist;

@@ -3,165 +3,165 @@ title: TiDB Best Practices
 summary: Learn the best practices of using TiDB.
 ---
 
-# TiDB Best Practices
+# TiDB のベスト プラクティス {#tidb-best-practices}
 
-This document summarizes the best practices of using TiDB, including the use of SQL and optimization tips for Online Analytical Processing (OLAP) and Online Transactional Processing (OLTP) scenarios, especially the optimization options specific for TiDB.
+このドキュメントでは、SQL の使用や、オンライン分析処理 (OLAP) およびオンライン トランザクション処理 (OLTP) シナリオの最適化のヒント、特に TiDB に固有の最適化オプションなど、TiDB の使用のベスト プラクティスを要約します。
 
-Before you read this document, it is recommended that you read three blog posts that introduce the technical principles of TiDB:
+このドキュメントを読む前に、TiDB の技術原則を紹介する 3 つのブログ投稿を読むことをお勧めします。
 
-* [TiDB Internal (I) - Data Storage](https://en.pingcap.com/blog/tidb-internal-data-storage/)
-* [TiDB Internal (II) - Computing](https://en.pingcap.com/blog/tidb-internal-computing/)
-* [TiDB Internal (III) - Scheduling](https://en.pingcap.com/blog/tidb-internal-scheduling/)
+-   [TiDB 内部 (I) - データ ストレージ](https://en.pingcap.com/blog/tidb-internal-data-storage/)
+-   [TiDB 内部 (II) - コンピューティング](https://en.pingcap.com/blog/tidb-internal-computing/)
+-   [TiDB 内部 (III) - スケジュール設定](https://en.pingcap.com/blog/tidb-internal-scheduling/)
 
-## Preface
+## 序文 {#preface}
 
-Database is a generic infrastructure system. It is important to consider various user scenarios during the development process and to modify the data parameters or the way to use according to actual situations in specific business scenarios.
+データベースは汎用インフラストラクチャ システムです。開発プロセスではさまざまなユーザーシナリオを考慮し、特定のビジネスシナリオの実際の状況に応じてデータパラメータや使用方法を変更することが重要です。
 
-TiDB is a distributed database compatible with the MySQL protocol and syntax. But with the internal implementation and supporting of distributed storage and transactions, the way of using TiDB is different from MySQL.
+TiDB は、MySQL プロトコルおよび構文と互換性のある分散データベースです。ただし、分散storageとトランザクションの内部実装とサポートにより、TiDB の使用方法は MySQL とは異なります。
 
-## Basic concepts
+## 基本概念 {#basic-concepts}
 
-The best practices are closely related to its implementation principles. It is recommended that you learn some of the basic mechanisms, including the Raft consensus algorithm, distributed transactions, data sharding, load balancing, the mapping solution from SQL to Key-Value (KV), the implementation method of secondary indexing, and distributed execution engines.
+ベスト プラクティスは、その実装原則と密接に関連しています。 Raftコンセンサス アルゴリズム、分散トランザクション、データ シャーディング、負荷分散、SQL から Key-Value (KV) へのマッピング ソリューション、セカンダリ インデックスの実装方法、分散実行など、基本的なメカニズムのいくつかを学習することをお勧めします。エンジン。
 
-This section is an introduction to these concepts. For detailed information, refer to [PingCAP blog posts](https://pingcap.com/blog/).
+このセクションでは、これらの概念について説明します。詳細については、 [PingCAP のブログ投稿](https://pingcap.com/blog/)を参照してください。
 
-### Raft
+### Raft {#raft}
 
-Raft is a consensus algorithm that ensures data replication with strong consistency. At the bottom layer, TiDB uses Raft to replicate data. TiDB writes data to the majority of the replicas before returning the result of success. In this way, even though a few replicas might get lost, the system still has the latest data. For example, if there are three replicas, the system does not return the result of success until data has been written to two replicas. Whenever a replica is lost, at least one of the remaining two replicas have the latest data.
+Raft は、強い整合性を備えたデータ レプリケーションを保証するコンセンサス アルゴリズムです。最レイヤーでは、TiDB はRaftを使用してデータを複製します。 TiDB は、成功の結果を返す前に、大部分のレプリカにデータを書き込みます。このようにして、いくつかのレプリカが失われる可能性があっても、システムには依然として最新のデータが保持されます。たとえば、レプリカが 3 つある場合、システムはデータが 2 つのレプリカに書き込まれるまで成功の結果を返しません。レプリカが失われた場合、残りの 2 つのレプリカのうち少なくとも 1 つは最新のデータを保持します。
 
-To store three replicas, compared with the replication of Source-Replica, Raft is more efficient. The write latency of Raft depends on the two fastest replicas, instead of the slowest one. Therefore, the implementation of geo-distributed and multiple active data centers becomes possible by using the Raft replication. In the typical scenario of three data centers distributing in two sites, to guarantee the data consistency, TiDB just needs to successfully write data into the local data center and the closer one, instead of writing to all three data centers. However, this does not mean that cross-data center deployment can be implemented in any scenario. When the amount of data to be written is large, the bandwidth and latency between data centers become the key factors. If the write speed exceeds the bandwidth or the latency is too high, the Raft replication mechanism still cannot work well.
+3 つのレプリカを保存するには、Source-Replica のレプリケーションと比較して、 Raftの方が効率的です。 Raftの書き込みレイテンシーは、最も遅いレプリカではなく、2 つの最も速いレプリカに依存します。したがって、 Raftレプリケーションを使用することで、地理的に分散された複数のアクティブなデータセンターの実装が可能になります。 3 つのデータ センターが 2 つのサイトに分散している一般的なシナリオでは、データの一貫性を保証するために、TiDB は 3 つのデータ センターすべてにデータを書き込むのではなく、ローカル データ センターとより近いデータ センターにデータを正常に書き込むだけで済みます。ただし、これは、クロスデータセンター展開がどのようなシナリオでも実装できることを意味するものではありません。書き込まれるデータの量が多い場合、データセンター間の帯域幅とレイテンシーが重要な要素になります。書き込み速度が帯域幅を超えているか、レイテンシーが高すぎる場合、 Raftレプリケーション メカニズムは依然として適切に機能しません。
 
-### Distributed transactions
+### 分散トランザクション {#distributed-transactions}
 
-TiDB provides complete distributed transactions and the model has some optimizations on the basis of [Google Percolator](https://research.google.com/pubs/pub36726.html). This document introduces the following features:
+TiDB は完全な分散トランザクションを提供し、モデルには[Google パーコレーター](https://research.google.com/pubs/pub36726.html)に基づいていくつかの最適化が施されています。このドキュメントでは、次の機能を紹介します。
 
-* Optimistic transaction model
+-   楽観的なトランザクション モデル
 
-    TiDB's optimistic transaction model does not detect conflicts until the commit phase. If there are conflicts, the transaction needs retry. But this model is inefficient if the conflict is severe, because operations before retry are invalid and need to repeat.
+    TiDB の楽観的トランザクション モデルは、コミット フェーズまで競合を検出しません。競合がある場合は、トランザクションを再試行する必要があります。ただし、競合が深刻な場合、このモデルは非効率的です。再試行前の操作は無効であり、繰り返す必要があるためです。
 
-    Assume that the database is used as a counter. High access concurrency might lead to severe conflicts, resulting in multiple retries or even timeouts. Therefore, in the scenario of severe conflicts, it is recommended to use the pessimistic transaction mode or to solve problems at the system architecture level, such as placing counter in Redis. Nonetheless, the optimistic transaction model is efficient if the access conflict is not very severe.
+    データベースがカウンターとして使用されると仮定します。アクセスの同時実行性が高いと、深刻な競合が発生し、複数回の再試行やタイムアウトが発生する可能性があります。したがって、深刻な競合が発生するシナリオでは、悲観的トランザクション モードを使用するか、Redis にカウンターを配置するなど、システムアーキテクチャレベルで問題を解決することをお勧めします。それにもかかわらず、アクセス競合がそれほど深刻でない場合、楽観的トランザクション モデルは効率的です。
 
-* Pessimistic transaction mode
+-   悲観的トランザクション モード
 
-    In TiDB, the pessimistic transaction mode has almost the same behavior as in MySQL. The transaction applies a lock during the execution phase, which avoids retries in conflict situations and ensures a higher success rate. By applying the pessimistic locking, you can also lock data in advance using `SELECT FOR UPDATE`.
+    TiDB では、悲観的トランザクション モードは MySQL とほぼ同じ動作をします。トランザクションは実行フェーズ中にロックを適用します。これにより、競合状況での再試行が回避され、より高い成功率が保証されます。悲観的ロックを適用すると、 `SELECT FOR UPDATE`使用して事前にデータをロックすることもできます。
 
-    However, if the application scenario has fewer conflicts, the optimistic transaction model has better performance.
+    ただし、アプリケーション シナリオの競合が少ない場合は、楽観的トランザクション モデルの方がパフォーマンスが高くなります。
 
-* Transaction size limit
+-   トランザクションサイズの制限
 
-    As distributed transactions need to conduct two-phase commit and the bottom layer performs Raft replication, if a transaction is very large, the commit process would be quite slow, and the following Raft replication process is thus stuck. To avoid this problem, the transaction size is limited:
+    分散トランザクションは 2 フェーズ コミットを実行する必要があり、最レイヤーでRaftレプリケーションを実行するため、トランザクションが非常に大きい場合、コミット プロセスが非常に遅くなり、後続のRaftレプリケーション プロセスが停止します。この問題を回避するために、トランザクション サイズが制限されます。
 
-    - A transaction is limited to 5,000 SQL statements (by default)
-    - Each Key-Value entry is no more than 6 MB (by default)
-    - The total size of Key-Value entries is no more than 10 GB.
+    -   トランザクションは 5,000 SQL ステートメントに制限されています (デフォルト)
+    -   各 Key-Value エントリは 6 MB 以下です (デフォルト)
+    -   Key-Value エントリの合計サイズは 10 GB を超えません。
 
-    You can find similar limits in [Google Cloud Spanner](https://cloud.google.com/spanner/quotas).
+    同様の制限は[Googleクラウドスパナー](https://cloud.google.com/spanner/quotas)にもあります。
 
-### Data sharding
+### データシャーディング {#data-sharding}
 
-TiKV automatically shards bottom-layered data according to the range of keys. Each Region is a range of keys, which is a left-closed and right-open interval, `[StartKey, EndKey)`. When the amount of Key-Value pairs in a Region exceeds a certain value, the Region automatically splits into two.
+TiKV は、キーの範囲に従って最下層のデータを自動的にシャーディングします。各リージョンはキーの範囲であり、左が閉じて右が開いた間隔`[StartKey, EndKey)`です。リージョン内のキーと値のペアの量が特定の値を超えると、リージョンは自動的に 2 つに分割されます。
 
-### Load balancing
+### 負荷分散 {#load-balancing}
 
-Placement Driver (PD) balances the load of the cluster according to the status of the entire TiKV cluster. The unit of scheduling is Region and the logic is the strategy configured by PD.
+配置Driver(PD) は、TiKV クラスター全体のステータスに応じてクラスターの負荷のバランスをとります。スケジューリングの単位はリージョンであり、ロジックは PD によって設定されるストラテジです。
 
-### SQL on KV
+### KV 上の SQL {#sql-on-kv}
 
-TiDB automatically maps the SQL structure into Key-Value structure. For details, see [TiDB Internal (II) - Computing](https://en.pingcap.com/blog/tidb-internal-computing/).
+TiDB は、SQL 構造を Key-Value 構造に自動的にマッピングします。詳細は[TiDB 内部 (II) - コンピューティング](https://en.pingcap.com/blog/tidb-internal-computing/)を参照してください。
 
-Simply put, TiDB performs the following operations:
+簡単に言うと、TiDB は次の操作を実行します。
 
-* A row of data is mapped to a Key-Value pair. The key is prefixed with `TableID` and suffixed with the row ID.
-* An index is mapped as a Key-Value pair. The key is prefixed with `TableID+IndexID` and suffixed with the index value.
+-   データ行は Key-Value ペアにマップされます。キーには接頭辞として`TableID`が付き、接尾辞として行 ID が付きます。
+-   インデックスは Key-Value ペアとしてマップされます。キーには接頭辞として`TableID+IndexID`が付けられ、接尾辞としてインデックス値が付きます。
 
-The data or indexes in the same table have the same prefix. These Key-Values are at adjacent positions in the key space of TiKV. Therefore, when the amount of data to be written is large and all is written to one table, the write hotspot is created. The situation gets worse when some index values of the continuous written data is also continuous (for example, fields that increase with time, like `update time`), which creates a few write hotspots and becomes the bottleneck of the entire system.
+同じテーブル内のデータまたはインデックスには同じプレフィックスが付きます。これらの Key-Value は、TiKV のキー空間内の隣接する位置にあります。したがって、書き込まれるデータの量が多く、すべてが 1 つのテーブルに書き込まれると、書き込みホットスポットが作成されます。連続的に書き込まれるデータの一部のインデックス値も連続的である場合 (たとえば、 `update time`など、時間とともに増加するフィールド)、状況はさらに悪化します。これにより、いくつかの書き込みホットスポットが作成され、システム全体のボトルネックになります。
 
-Similarly, if all data is read from a focused small range (for example, the continuous tens or hundreds of thousands of rows of data), an access hotspot of data is likely to occur.
+同様に、すべてのデータが集中した狭い範囲 (たとえば、連続した数万行または数十万行のデータ) から読み取られる場合、データのアクセス ホットスポットが発生する可能性があります。
 
-### Secondary index
+### セカンダリインデックス {#secondary-index}
 
-TiDB supports the complete secondary indexes, which are also global indexes. Many queries can be optimized by index. Thus, it is important for applications to make good use of secondary indexes.
+TiDB は、グローバル インデックスでもある完全なセカンダリ インデックスをサポートします。多くのクエリはインデックスによって最適化できます。したがって、アプリケーションではセカンダリ インデックスを有効に活用することが重要です。
 
-Lots of MySQL experience is also applicable to TiDB. It is noted that TiDB has its unique features. The following are a few notes when using secondary indexes in TiDB.
+MySQL の豊富な経験は TiDB にも応用できます。 TiDB には独自の機能があることに注意してください。 TiDB でセカンダリ インデックスを使用する場合の注意事項をいくつか示します。
 
-* The more secondary indexes, the better?
+-   セカンダリインデックスは多ければ多いほど良いのでしょうか?
 
-    Secondary indexes can speed up queries, but adding an index has side effects. The previous section introduces the storage model of indexes. For each additional index, there will be one more Key-Value when inserting a row. Therefore, the more indexes, the slower the writing speed and the more space it takes up.
+    セカンダリ インデックスを使用するとクエリを高速化できますが、インデックスを追加すると副作用が生じます。前のセクションでは、インデックスのstorageモデルを紹介しました。追加のインデックスごとに、行を挿入するときに Key-Value が 1 つ増えます。したがって、インデックスの数が増えると、書き込み速度が遅くなり、より多くのスペースを消費します。
 
-    In addition, too many indexes affects the runtime of the optimizer, and inappropriate indexes mislead the optimizer. Thus, more secondary indexes does not mean better performance.
+    さらに、インデックスが多すぎるとオプティマイザーの実行時間に影響し、不適切なインデックスはオプティマイザーに誤解を与えます。したがって、セカンダリ インデックスが多いほどパフォーマンスが向上するわけではありません。
 
-* Which columns should create indexes?
+-   どの列にインデックスを作成する必要がありますか?
 
-    As is mentioned above, index is important but the number of indexes should be proper. You must create appropriate indexes according to the application characteristics. In principle, you need to create an index on the columns involved in the query to improve the performance. The following are situations that need to create indexes:
+    前述したようにインデックスは重要ですが、インデックスの数は適切である必要があります。アプリケーションの特性に応じて、適切なインデックスを作成する必要があります。原則として、パフォーマンスを向上させるには、クエリに含まれる列にインデックスを作成する必要があります。インデックスを作成する必要がある状況は次のとおりです。
 
-    - For columns with a high degree of differentiation, filtered rows are remarkably reduced through indexes.
-    - If there are multiple query criteria, you can choose composite indexes. Note to put the columns with the equivalent condition before composite indexes.
+    -   高度に差別化された列の場合、フィルター処理された行はインデックスによって大幅に削減されます。
+    -   複数のクエリ条件がある場合は、複合インデックスを選択できます。同等の条件を持つ列を複合インデックスの前に置くことに注意してください。
 
-    For example, if a commonly used query is `select * from t where c1 = 10 and c2 = 100 and c3 > 10`, you can create a composite index `Index cidx (c1, c2, c3)`. In this way, you can use the query condition to create an index prefix and then scan.
+    たとえば、よく使用されるクエリが`select * from t where c1 = 10 and c2 = 100 and c3 > 10`の場合、複合インデックス`Index cidx (c1, c2, c3)`を作成できます。このように、クエリ条件を使用してインデックス プレフィックスを作成し、スキャンすることができます。
 
-* The difference between querying through indexes and directly scanning the table
+-   インデックスを使用したクエリとテーブルの直接スキャンの違い
 
-    TiDB has implemented global indexes, so indexes and data of the table are not necessarily on the same data sharding. When querying through indexes, it should firstly scan indexes to get the corresponding row ID and then use the row ID to get the data. Thus, this method involves two network requests and has a certain performance overhead.
+    TiDB はグローバル インデックスを実装しているため、テーブルのインデックスとデータは必ずしも同じデータ シャーディング上にあるとは限りません。インデックスを介してクエリを実行する場合は、まずインデックスをスキャンして対応する行 ID を取得し、次にその行 ID を使用してデータを取得する必要があります。したがって、この方法には 2 つのネットワーク要求が含まれ、一定のパフォーマンスのオーバーヘッドが発生します。
 
-    If the query involves lots of rows, scanning index proceeds concurrently. When the first batch of results is returned, getting the data of the table can then proceed. Therefore, this is a parallel + pipeline model. Though the two accesses create overhead, the latency is not high.
+    クエリに多数の行が含まれる場合、インデックスのスキャンは同時に進行します。結果の最初のバッチが返されると、テーブルのデータの取得を続行できます。したがって、これは並列 + パイプライン モデルです。 2 つのアクセスによりオーバーヘッドが発生しますが、レイテンシーは大きくありません。
 
-    The following two conditions do not have the problem of two accesses:
+    次の 2 つの条件では、2 つのアクセスの問題は発生しません。
 
-    - Columns of the index have already met the query requirement. Assume that the `c` column on the `t` table has an index and the query is `select c from t where c > 10;`. At this time, all needed data can be obtained if you access the index. This situation is called `Covering Index`. But if you focus more on the query performance, you can put into index a portion of columns that do not need to be filtered but need to be returned in the query result, creating composite index. Take `select c1, c2 from t where c1 > 10;` as an example. You can optimize this query by creating composite index `Index c12 (c1, c2)`.
+    -   インデックスの列はすでにクエリ要件を満たしています。 `t`テーブルの`c`列にインデックスがあり、クエリが`select c from t where c > 10;`であると仮定します。このとき、インデックスにアクセスすると必要なデータがすべて取得できます。この状況を`Covering Index`と呼びます。ただし、クエリのパフォーマンスを重視する場合は、フィルターする必要はないがクエリ結果で返す必要がある列の一部をインデックスに入れて、複合インデックスを作成できます。 `select c1, c2 from t where c1 > 10;`例に挙げます。複合インデックス`Index c12 (c1, c2)`を作成することで、このクエリを最適化できます。
 
-    - The primary key of the table is integer. In this case, TiDB uses the value of the primary key as row ID. Thus, if the query condition is on the primary key, you can directly construct the range of the row ID, scan the table data, and get the result.
+    -   テーブルの主キーは整数です。この場合、TiDB は主キーの値を行 ID として使用します。したがって、クエリ条件が主キーにある場合は、行 ID の範囲を直接構築し、テーブル データをスキャンして結果を取得できます。
 
-* Query concurrency
+-   クエリの同時実行性
 
-    As data is distributed across many Regions, queries run in TiDB concurrently. But the concurrency by default is not high in case it consumes lots of system resources. Besides, the OLTP query usually does not involve a large amount of data and the low concurrency is enough. But for the OLAP query, the concurrency is high and TiDB modifies the query concurrency through the following system variables:
+    データは多くのリージョンに分散されるため、クエリは TiDB で同時に実行されます。ただし、システム リソースを大量に消費する場合を考慮して、デフォルトの同時実行性は高くありません。さらに、OLTP クエリには通常、大量のデータが含まれないため、同時実行性が低くても十分です。ただし、OLAP クエリの場合は同時実行性が高く、TiDB は次のシステム変数を通じてクエリの同時実行性を変更します。
 
-    - [`tidb_distsql_scan_concurrency`](/system-variables.md#tidb_distsql_scan_concurrency):
+    -   [`tidb_distsql_scan_concurrency`](/system-variables.md#tidb_distsql_scan_concurrency) :
 
-        The concurrency of scanning data, including scanning the table and index data.
+        テーブルおよびインデックス データのスキャンを含む、データのスキャンの同時実行性。
 
-    - [`tidb_index_lookup_size`](/system-variables.md#tidb_index_lookup_size):
+    -   [`tidb_index_lookup_size`](/system-variables.md#tidb_index_lookup_size) :
 
-        If it needs to access the index to get row IDs before accessing the table data, it uses a batch of row IDs as a single request to access the table data. This parameter sets the size of a batch. The larger batch increases latency, while the smaller one might lead to more queries. The proper size of this parameter is related to the amount of data that the query involves. Generally, no modification is required.
+        テーブル データにアクセスする前にインデックスにアクセスして行 ID を取得する必要がある場合、行 ID のバッチを単一のリクエストとして使用してテーブル データにアクセスします。このパラメータはバッチのサイズを設定します。バッチが大きくなるとレイテンシーが増加しますが、バッチが小さくなるとクエリが増加する可能性があります。このパラメータの適切なサイズは、クエリに含まれるデータの量に関係します。通常、変更は必要ありません。
 
-    - [`tidb_index_lookup_concurrency`](/system-variables.md#tidb_index_lookup_concurrency):
+    -   [`tidb_index_lookup_concurrency`](/system-variables.md#tidb_index_lookup_concurrency) :
 
-        If it needs to access the index to get row IDs before accessing the table data, the concurrency of getting data through row IDs every time is modified through this parameter.
+        テーブル データにアクセスする前にインデックスにアクセスして行 ID を取得する必要がある場合、毎回行 ID を介してデータを取得する同時実行性は、このパラメーターによって変更されます。
 
-* Ensure the order of results through indexes
+-   インデックスを使用して結果の順序を保証する
 
-    You can use indexes to filter or sort data. Firstly, get row IDs according to the index order. Then, return the row content according to the return order of row IDs. In this way, the returned results are ordered according to the index column. It has been mentioned earlier that the model of scanning index and getting row is parallel + pipeline. If the row is returned according to the index order, a high concurrency between two queries does not reduce latency. Thus, the concurrency is low by default, but it can be modified through the [`tidb_index_serial_scan_concurrency`](/system-variables.md#tidb_index_serial_scan_concurrency) variable.
+    インデックスを使用してデータをフィルタリングまたは並べ替えることができます。まず、インデックスの順序に従って行 ID を取得します。次に、行 ID の返される順序に従って、行の内容を返します。このようにして、返された結果はインデックス列に従って順序付けされます。インデックスのスキャンと行の取得のモデルが並列 + パイプラインであることは前述しました。インデックスの順序に従って行が返される場合、2 つのクエリ間の同時実行性が高くてもレイテンシーは短縮されません。したがって、デフォルトでは同時実行性は低くなりますが、 [`tidb_index_serial_scan_concurrency`](/system-variables.md#tidb_index_serial_scan_concurrency)変数を使用して変更できます。
 
-* Reverse index scan
+-   逆インデックススキャン
 
-    TiDB supports scanning an ascending index in reverse order, at a speed slower than normal scan by 20%. If the data is changed frequently and thus too many versions exist, the performance overhead might be higher. It is recommended to avoid reverse index scans as much as possible.
+    TiDB は、通常のスキャンより 20% 遅い速度での逆順の昇順インデックスのスキャンをサポートしています。データが頻繁に変更され、存在するバージョンが多すぎる場合、パフォーマンスのオーバーヘッドが高くなる可能性があります。逆インデックス スキャンはできるだけ避けることをお勧めします。
 
-## Scenarios and practices
+## シナリオと実践 {#scenarios-and-practices}
 
-In the last section, we discussed some basic implementation mechanisms of TiDB and their influence on usage. This section introduces specific usage scenarios and operation practices, from deployment to application usage.
+最後のセクションでは、TiDB のいくつかの基本的な実装メカニズムと、その使用法への影響について説明しました。このセクションでは、展開からアプリケーションの使用まで、具体的な使用シナリオと運用方法を紹介します。
 
-### Deployment
+### 導入 {#deployment}
 
-Before deployment, read [Software and Hardware Requirements](/hardware-and-software-requirements.md).
+導入の前に、 [ソフトウェアとハ​​ードウェアの要件](/hardware-and-software-requirements.md)をお読みください。
 
-It is recommended to deploy the TiDB cluster using [TiUP](/production-deployment-using-tiup.md). This tool can deploy, stop, destroy, and upgrade the whole cluster, which is quite convenient. It is not recommended to manually deploy the TiDB cluster, which might be troublesome to maintain and upgrade later.
+[TiUP](/production-deployment-using-tiup.md)を使用して TiDB クラスターをデプロイすることをお勧めします。このツールはクラスター全体をデプロイ、停止、破棄、アップグレードできるため、非常に便利です。 TiDB クラスターを手動でデプロイすることはお勧めできません。後で保守したりアップグレードしたりするのが面倒になる可能性があります。
 
-### Data import
+### データインポート {#data-import}
 
-To improve the write performance during the import process, you can tune TiKV's parameters as stated in [Tune TiKV Memory Parameter Performance](/tune-tikv-memory-performance.md).
+インポート プロセス中の書き込みパフォーマンスを向上させるために、 [TiKV メモリ パラメータのパフォーマンスを調整する](/tune-tikv-memory-performance.md)で説明したように TiKV のパラメーターを調整できます。
 
-### Write
+### 書く {#write}
 
-As mentioned before, TiDB limits the size of a single transaction in the Key-Value layer. As for the SQL layer, a row of data is mapped to a Key-Value entry. For each additional index, one more Key-Value entry is added.
+前述したように、TiDB は Key-Valueレイヤーの単一トランザクションのサイズを制限します。 SQLレイヤーの場合と同様に、データ行は Key-Value エントリにマップされます。インデックスを追加するたびに、Key-Value エントリが 1 つ追加されます。
 
-> **Note:**
+> **注記：**
 >
-> When you set the size limit for transactions, you need to consider the overhead of TiDB encoding and the extra transaction key. It is recommended that **the number of rows of each transaction is less than 200 and the data size of a single row is less than 100 KB**; otherwise, the performance is bad.
+> トランザクションのサイズ制限を設定するときは、TiDB エンコードのオーバーヘッドと追加のトランザクション キーを考慮する必要があります。**各トランザクションの行数は 200 未満、1 行のデータ サイズは 100 KB 未満にすることを**お勧めします。そうしないとパフォーマンスが悪くなります。
 
-It is recommended to split statements into batches or add a limit to the statements, whether they are `INSERT`, `UPDATE` or `DELETE` statements.
+ステートメントが`INSERT` 、 `UPDATE` 、または`DELETE`ステートメントであっても、ステートメントをバッチに分割するか、ステートメントに制限を追加することをお勧めします。
 
-When deleting a large amount of data, it is recommended to use `Delete from t where xx limit 5000;`. It deletes through the loop and use `Affected Rows == 0` as a condition to end the loop.
+大量のデータを削除する場合は、 `Delete from t where xx limit 5000;`を使用することをお勧めします。ループを通じて削除し、ループを終了する条件として`Affected Rows == 0`を使用します。
 
-If the amount of data that needs to be deleted at a time is large, this loop method gets slower and slower because each deletion traverses backward. After deleting the previous data, lots of deleted flags remain for a short period (then all is cleared by Garbage Collection) and affect the following `DELETE` statement. If possible, it is recommended to refine the `WHERE` condition. Assume that you need to delete all data on `2017-05-26`, you can use the following statements:
+一度に削除する必要があるデータの量が多い場合、各削除が逆方向に実行されるため、このループ方法はますます遅くなります。以前のデータを削除した後、大量の削除済みフラグが短期間残り (その後、ガベージ コレクションによってすべてクリアされます)、次の`DELETE`ステートメントに影響を与えます。可能であれば、 `WHERE`の条件を絞り込むことをお勧めします。 `2017-05-26`上のすべてのデータを削除する必要があると仮定すると、次のステートメントを使用できます。
 
 ```sql
 for i from 0 to 23:
@@ -170,48 +170,48 @@ for i from 0 to 23:
         affected_rows = select affected_rows()
 ```
 
-This pseudocode means to split huge chunks of data into small ones and then delete, so that the earlier `Delete` statements do not affect the later ones.
+この疑似コードは、前の`Delete`のステートメントが後のステートメントに影響を与えないように、巨大なデータのチャンクを小さなチャンクに分割して削除することを意味します。
 
-### Query
+### クエリ {#query}
 
-For query requirements and specific statements, refer to [System Variables](/system-variables.md).
+クエリ要件と特定のステートメントについては、 [システム変数](/system-variables.md)を参照してください。
 
-You can control the concurrency of SQL execution through the `SET` statement and the selection of the `Join` operator through hints.
+`SET`ステートメントを通じて SQL 実行の同時実行性を制御し、ヒントを通じて`Join`演算子の選択を制御できます。
 
-In addition, you can also use MySQL's standard index selection, the hint syntax, or control the optimizer to select indexes through `Use Index`/`Ignore Index hint`.
+さらに、MySQL の標準インデックス選択、ヒント構文を使用したり、 `Use Index` / `Ignore Index hint`までのインデックスを選択するようにオプティマイザを制御したりすることもできます。
 
-If the application scenario has both OLTP and OLAP workloads, you can send the OLTP request and OLAP request to different TiDB servers, diminishing the impact of OLAP on OLTP. It is recommended to use machines with high-performance hardware (for example, more processor cores and larger memory) for the TiDB server that processes OLAP workloads.
+アプリケーション シナリオに OLTP と OLAP の両方のワークロードがある場合は、OLTP リクエストと OLAP リクエストを異なる TiDB サーバーに送信して、OLTP に対する OLAP の影響を軽減できます。 OLAP ワークロードを処理する TiDBサーバーには、高性能ハードウェア (たとえば、より多くのプロセッサ コアやより大きなメモリ) を備えたマシンを使用することをお勧めします。
 
-To completely isolate OLTP and OLAP workloads, it is recommended to run OLAP applications on TiFlash. TiFlash is a columnar storage engine with great performance on OLAP workloads. TiFlash can achieve physical isolation on the storage layer and guarantees consistent reads.
+OLTP および OLAP ワークロードを完全に分離するには、 TiFlashで OLAP アプリケーションを実行することをお勧めします。 TiFlashは、OLAP ワークロードで優れたパフォーマンスを発揮するカラムナ型storageエンジンです。 TiFlash はstorageレイヤーで物理的な分離を実現し、一貫した読み取りを保証します。
 
-### Monitoring and log
+### 監視とログ {#monitoring-and-log}
 
-The monitoring metrics is the best method to learn the status of the system. It is recommended that you deploy the monitoring system along with your TiDB cluster.
+監視メトリクスは、システムのステータスを知るための最良の方法です。 TiDB クラスターと一緒にモニタリング システムを展開することをお勧めします。
 
-TiDB uses [Grafana + Prometheus](/tidb-monitoring-framework.md) to monitor the system status. The monitoring system is automatically deployed and configured if you deploy TiDB using TiUP.
+TiDB は[グラファナ + プロメテウス](/tidb-monitoring-framework.md)を使用してシステムのステータスを監視します。 TiUPを使用して TiDB を展開すると、監視システムが自動的に展開および構成されます。
 
-There are lots of items in the monitoring system, the majority of which are for TiDB developers. You do not have to understand these items without an in-depth knowledge of the source code. Some items that are related to applications or to the state of system key components are selected and put in a separate `overview` panel for users.
+監視システムには多くの項目があり、その大部分は TiDB 開発者向けです。ソース コードに関する深い知識がなくても、これらの項目を理解する必要はありません。アプリケーションまたはシステム キー コンポーネントの状態に関連するいくつかの項目が選択され、ユーザー用の別の`overview`パネルに配置されます。
 
-In addition to monitoring, you can also view the system logs. The three components of TiDB, tidb-server, tikv-server, and pd-server, each has a `--log-file` parameter. If this parameter has been configured when the cluster is started, logs are stored in the file configured by the parameter and log files are automatically archived on a daily basis. If the `--log-file` parameter has not been configured, the log is output to `stderr`.
+監視に加えて、システム ログを表示することもできます。 TiDB の 3 つのコンポーネント、tidb-server、tikv-server、および pd-server には、それぞれ`--log-file`パラメーターがあります。クラスターの起動時にこのパラメーターが設定されている場合、ログはパラメーターで設定されたファイルに保存され、ログ ファイルは毎日自動的にアーカイブされます。 `--log-file`パラメータが設定されていない場合、ログは`stderr`に出力されます。
 
-Starting from TiDB 4.0, TiDB provides [TiDB Dashboard](/dashboard/dashboard-intro.md) UI to improve usability. You can access TiDB Dashboard by visiting <http://${PD_IP}:${PD_PORT}/dashboard> in your browser. TiDB Dashboard provides features such as viewing cluster status, performance analysis, traffic visualization, cluster diagnostics, and log searching.
+TiDB 4.0 以降、TiDB は使いやすさを向上させるために[TiDB ダッシュボード](/dashboard/dashboard-intro.md) UI を提供します。ブラウザで[http://${PD_IP}:${PD_PORT}/ダッシュボード](http://$%7BPD_IP%7D:$%7BPD_PORT%7D/dashboard)アクセスすると、TiDB ダッシュボードにアクセスできます。 TiDB ダッシュボードは、クラスターのステータスの表示、パフォーマンス分析、トラフィックの視覚化、クラスターの診断、ログ検索などの機能を提供します。
 
-### Documentation
+### ドキュメンテーション {#documentation}
 
-The best way to learn about a system or solve the problem is to read its documentation and understand its implementation principles.
+システムについて学び、問題を解決する最善の方法は、そのドキュメントを読み、その実装原理を理解することです。
 
-TiDB has a large number of official documents both in Chinese and English. If you have met an issue, you can start from [FAQ](/faq/tidb-faq.md) and [TiDB Cluster Troubleshooting Guide](/troubleshoot-tidb-cluster.md). You can also search the issue list or create an issue in [TiDB repository on GitHub](https://github.com/pingcap/tidb).
+TiDB には、中国語と英語の両方で多数の公式文書があります。問題が発生した場合は、 [FAQ](/faq/tidb-faq.md)と[TiDBクラスタのトラブルシューティング ガイド](/troubleshoot-tidb-cluster.md)から始めることができます。 [GitHub 上の TiDB リポジトリ](https://github.com/pingcap/tidb)で問題リストを検索したり、問題を作成したりすることもできます。
 
-TiDB also has many useful migration tools. See [Migration Tool Overview](/ecosystem-tool-user-guide.md) for details.
+TiDB には便利な移行ツールも多数あります。詳細については[移行ツールの概要](/ecosystem-tool-user-guide.md)を参照してください。
 
-For more articles on the technical details of TiDB, see the [PingCAP official blog site](https://pingcap.com/blog/).
+TiDB の技術的な詳細に関するその他の記事については、 [PingCAP公式ブログサイト](https://pingcap.com/blog/)を参照してください。
 
-## Best scenarios for TiDB
+## TiDB に最適なシナリオ {#best-scenarios-for-tidb}
 
-TiDB is suitable for the following scenarios:
+TiDB は次のシナリオに適しています。
 
-- The data volume is too large for a standalone database
-- You do not want to do sharding
-- The access mode has no obvious hotspot
-- Transactions, strong consistency, and disaster recovery are required
-- You hope to have real-time Hybrid Transaction/Analytical Processing (HTAP) analytics and reduce storage links
+-   データ量がスタンドアロン データベースには大きすぎます
+-   シャーディングをしたくない場合
+-   アクセス モードに明らかなホットスポットがない
+-   トランザクション、強整合性、災害復旧が必要です
+-   リアルタイムのハイブリッドトランザクション/分析処理 (HTAP) 分析を利用して、storageリンクを削減したいと考えています。

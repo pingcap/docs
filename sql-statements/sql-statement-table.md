@@ -3,32 +3,32 @@ title: TABLE | TiDB SQL Statement Reference
 summary: An overview of the usage of TABLE for the TiDB database.
 ---
 
-# TABLE
+# テーブル {#table}
 
-The `TABLE` statement can be used instead of `SELECT * FROM` when no aggregation or complex filtering is needed.
+集計や複雑なフィルタリングが必要ない場合は、 `SELECT * FROM`の代わりに`TABLE`ステートメントを使用できます。
 
-## Synopsis
+## あらすじ {#synopsis}
 
 ```ebnf+diagram
 TableStmt ::=
     "TABLE" Table ( "ORDER BY" Column )? ( "LIMIT" NUM )?
 ```
 
-## Examples
+## 例 {#examples}
 
-Create table `t1`:
+テーブル`t1`を作成します。
 
 ```sql
 CREATE TABLE t1(id INT PRIMARY KEY);
 ```
 
-Insert some data into `t1`:
+`t1`にデータを挿入します。
 
 ```sql
 INSERT INTO t1 VALUES (1),(2),(3);
 ```
 
-View the data in table `t1`:
+表`t1`のデータをビュー。
 
 ```sql
 TABLE t1;
@@ -45,7 +45,7 @@ TABLE t1;
 3 rows in set (0.01 sec)
 ```
 
-Query `t1` and sort the result by the `id` field in descending order:
+`t1`クエリし、結果を`id`フィールドで降順に並べ替えます。
 
 ```sql
 TABLE t1 ORDER BY id DESC;
@@ -62,7 +62,7 @@ TABLE t1 ORDER BY id DESC;
 3 rows in set (0.01 sec)
 ```
 
-Query the first record in `t1`:
+`t1`の最初のレコードをクエリします。
 
 ```sql
 TABLE t1 LIMIT 1;
@@ -77,11 +77,11 @@ TABLE t1 LIMIT 1;
 1 row in set (0.01 sec)
 ```
 
-## MySQL compatibility
+## MySQLの互換性 {#mysql-compatibility}
 
-The `TABLE` statement was introduced in MySQL 8.0.19.
+`TABLE`ステートメントは MySQL 8.0.19 で導入されました。
 
-## See also
+## こちらも参照 {#see-also}
 
-- [`SELECT`](/sql-statements/sql-statement-select.md)
-- [`TABLE` statements in MySQL](https://dev.mysql.com/doc/refman/8.0/en/table.html)
+-   [`SELECT`](/sql-statements/sql-statement-select.md)
+-   [MySQL の`TABLE`ステートメント](https://dev.mysql.com/doc/refman/8.0/en/table.html)

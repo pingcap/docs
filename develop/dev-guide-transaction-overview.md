@@ -3,22 +3,22 @@ title: Transaction overview
 summary: A brief introduction to transactions in TiDB.
 ---
 
-# Transaction overview
+# トランザクション概要 {#transaction-overview}
 
-TiDB supports complete distributed transactions, providing [optimistic transactions](/optimistic-transaction.md) and [pessimistic transactions](/pessimistic-transaction.md) (introduced in TiDB 3.0). This article mainly introduces transaction statements, optimistic transactions and pessimistic transactions, transaction isolation levels, and application-side retry and error handling in optimistic transactions.
+TiDB は完全な分散トランザクションをサポートし、 [楽観的取引](/optimistic-transaction.md)と[悲観的取引](/pessimistic-transaction.md) (TiDB 3.0 で導入) を提供します。この記事では主に、トランザクション ステートメント、楽観的トランザクションと悲観的トランザクション、トランザクション分離レベル、楽観的トランザクションにおけるアプリケーション側のリトライとエラー処理について紹介します。
 
-## Common statements
+## 一般的なステートメント {#common-statements}
 
-This chapter introduces how to use transactions in TiDB. The following example demonstrates the process of a simple transaction:
+この章では、TiDB でのトランザクションの使用方法を紹介します。次の例は、単純なトランザクションのプロセスを示しています。
 
-Bob wants to transfer $20 to Alice. This transaction includes two operations:
+ボブはアリスに 20 ドルを送金したいと考えています。このトランザクションには次の 2 つの操作が含まれます。
 
-- Bob's account is reduced by $20.
-- Alice's account is increased by $20.
+-   ボブの口座は 20 ドル減額されます。
+-   アリスのアカウントは 20 ドル増加しました。
 
-Transactions can ensure that both of the above operations are executed successfully or both fail.
+トランザクションにより、上記の操作が両方とも正常に実行されるか、両方とも失敗するかを確認できます。
 
-Insert some sample data into the table using the `users` table in the [bookshop](/develop/dev-guide-bookshop-schema-design.md) database:
+[書店](/develop/dev-guide-bookshop-schema-design.md)データベースの`users`テーブルを使用して、サンプル データをテーブルに挿入します。
 
 ```sql
 INSERT INTO users (id, nickname, balance)
@@ -27,7 +27,7 @@ INSERT INTO users (id, nickname, balance)
   VALUES (1, 'Alice', 100);
 ```
 
-Run the following transactions and explain what each statement means:
+次のトランザクションを実行し、各ステートメントの意味を説明します。
 
 ```sql
 BEGIN;
@@ -36,7 +36,7 @@ BEGIN;
 COMMIT;
 ```
 
-After the above transaction is executed successfully, the table should look like this:
+上記のトランザクションが正常に実行されると、テーブルは次のようになります。
 
 ```
 +----+--------------+---------+
@@ -48,9 +48,9 @@ After the above transaction is executed successfully, the table should look like
 
 ```
 
-### Start a transaction
+### 取引を開始する {#start-a-transaction}
 
-To explicitly start a new transaction, you can use either `BEGIN` or `START TRANSACTION`.
+新しいトランザクションを明示的に開始するには、 `BEGIN`または`START TRANSACTION`を使用できます。
 
 ```sql
 BEGIN;
@@ -60,39 +60,39 @@ BEGIN;
 START TRANSACTION;
 ```
 
-The default transaction mode of TiDB is pessimistic. You can also explicitly specify the [optimistic transaction model](/develop/dev-guide-optimistic-and-pessimistic-transaction.md):
+TiDB のデフォルトのトランザクション モードは悲観的です。 [楽観的トランザクション モデル](/develop/dev-guide-optimistic-and-pessimistic-transaction.md)明示的に指定することもできます。
 
 ```sql
 BEGIN OPTIMISTIC;
 ```
 
-Enable the [pessimistic transaction mode](/develop/dev-guide-optimistic-and-pessimistic-transaction.md):
+[悲観的トランザクションモード](/develop/dev-guide-optimistic-and-pessimistic-transaction.md)を有効にします。
 
 ```sql
 BEGIN PESSIMISTIC;
 ```
 
-If the current session is in the middle of a transaction when the above statement is executed, TiDB commits the current transaction first, and then starts a new transaction.
+上記のステートメントが実行されたときに現在のセッションがトランザクションの途中である場合、TiDB は最初に現在のトランザクションをコミットし、次に新しいトランザクションを開始します。
 
-### Commit a transaction
+### トランザクションをコミットする {#commit-a-transaction}
 
-You can use the `COMMIT` statement to commit all modifications made by TiDB in the current transaction.
+`COMMIT`ステートメントを使用すると、現在のトランザクションで TiDB によって行われたすべての変更をコミットできます。
 
 ```sql
 COMMIT;
 ```
 
-Before enabling optimistic transactions, make sure that your application can properly handle errors that may be returned by a `COMMIT` statement. If you are not sure how your application will handle it, it is recommended to use the pessimistic transaction mode instead.
+楽観的トランザクションを有効にする前に、アプリケーションが`COMMIT`ステートメントによって返される可能性のあるエラーを適切に処理できることを確認してください。アプリケーションがそれをどのように処理するかわからない場合は、代わりに悲観的トランザクション モードを使用することをお勧めします。
 
-### Roll back a transaction
+### トランザクションをロールバックする {#roll-back-a-transaction}
 
-You can use the `ROLLBACK` statement to roll back modifications of the current transaction.
+`ROLLBACK`ステートメントを使用すると、現在のトランザクションの変更をロールバックできます。
 
 ```sql
 ROLLBACK;
 ```
 
-In the previous transfer example, if you roll back the entire transaction, Alice's and Bob's balances will remain unchanged, and all modifications of the current transaction are canceled.
+前の転送の例では、トランザクション全体をロールバックすると、アリスとボブの残高は変更されず、現在のトランザクションのすべての変更がキャンセルされます。
 
 ```sql
 TRUNCATE TABLE `users`;
@@ -121,29 +121,29 @@ SELECT * FROM `users`;
 +----+--------------+---------+
 ```
 
-The transaction is also automatically rolled back if the client connection is stopped or closed.
+クライアント接続が停止または閉じられた場合にも、トランザクションは自動的にロールバックされます。
 
-## Transaction isolation levels
+## トランザクション分離レベル {#transaction-isolation-levels}
 
-The transaction isolation levels are the basis of database transaction processing. The "I" (Isolation) in **ACID** refers to the isolation of the transactions.
+トランザクション分離レベルは、データベース トランザクション処理の基礎です。 **ACID**の「I」（分離）は、トランザクションの分離を指します。
 
-The SQL-92 standard defines four isolation levels:
+SQL-92 標準では、次の 4 つの分離レベルが定義されています。
 
-- read uncommitted (`READ UNCOMMITTED`)
-- read committed (`READ COMMITTED`)
-- repeatable read (`REPEATABLE READ`)
-- serializable (`SERIALIZABLE`).
+-   コミットされていない読み取り ( `READ UNCOMMITTED` )
+-   読み取りがコミットされました ( `READ COMMITTED` )
+-   反復可能な読み取り ( `REPEATABLE READ` )
+-   シリアル化可能 ( `SERIALIZABLE` )。
 
-See the table below for details:
+詳細については、以下の表を参照してください。
 
-| Isolation Level  | Dirty Write  | Dirty Read   | Fuzzy Read   | Phantom      |
-| ---------------- | ------------ | ------------ | ------------ | ------------ |
-| READ UNCOMMITTED | Not Possible | Possible     | Possible     | Possible     |
-| READ COMMITTED   | Not Possible | Not possible | Possible     | Possible     |
-| REPEATABLE READ  | Not Possible | Not possible | Not possible | Possible     |
-| SERIALIZABLE     | Not Possible | Not possible | Not possible | Not possible |
+| 分離レベル            | ダーティライト | ダーティリード | ファジーリード | ファントム |
+| ---------------- | ------- | ------- | ------- | ----- |
+| READ UNCOMMITTED | ありえない   | 可能      | 可能      | 可能    |
+| READ COMMITTED   | ありえない   | ありえない   | 可能      | 可能    |
+| REPEATABLE READ  | ありえない   | ありえない   | ありえない   | 可能    |
+| SERIALIZABLE     | ありえない   | ありえない   | ありえない   | ありえない |
 
-TiDB supports the following isolation levels: `READ COMMITTED` and `REPEATABLE READ`:
+TiDB は、次の分離レベル`READ COMMITTED`および`REPEATABLE READ`をサポートします。
 
 ```sql
 mysql> SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;
@@ -158,4 +158,4 @@ mysql> SET TRANSACTION ISOLATION LEVEL SERIALIZABLE;
 ERROR 8048 (HY000): The isolation level 'SERIALIZABLE' is not supported. Set tidb_skip_isolation_level_check=1 to skip this error
 ```
 
-TiDB implements Snapshot Isolation (SI) level consistency, also known as "repeatable read" for consistency with MySQL. This isolation level is different from [ANSI Repeatable Read Isolation Level](/transaction-isolation-levels.md#difference-between-tidb-and-ansi-repeatable-read) and [MySQL Repeatable Read Isolation Level](/transaction-isolation-levels.md#difference-between-tidb-and-mysql-repeatable-read). For more details, see [TiDB Transaction Isolation Levels](/transaction-isolation-levels.md).
+TiDB は、MySQL との一貫性のために「反復読み取り」とも呼ばれるスナップショット分離 (SI) レベルの一貫性を実装しています。この分離レベルは[ANSI 反復読み取り分離レベル](/transaction-isolation-levels.md#difference-between-tidb-and-ansi-repeatable-read)および[MySQL 反復読み取り分離レベル](/transaction-isolation-levels.md#difference-between-tidb-and-mysql-repeatable-read)とは異なります。詳細については、 [TiDBトランザクション分離レベル](/transaction-isolation-levels.md)を参照してください。

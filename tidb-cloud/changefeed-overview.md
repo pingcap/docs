@@ -3,95 +3,97 @@ title: Changefeed
 summary: TiDB Cloud changefeed helps you stream data from TiDB Cloud to other data services.
 ---
 
-# Changefeed
+# チェンジフィード {#changefeed}
 
-TiDB Cloud changefeed helps you stream data from TiDB Cloud to other data services. Currently, TiDB Cloud supports streaming data to Apache Kafka, MySQL, TiDB Cloud and cloud storage.
+TiDB Cloudチェンジフィードは、 TiDB Cloudから他のデータ サービスにデータをストリーミングするのに役立ちます。現在、 TiDB Cloud は、Apache Kafka、MySQL、 TiDB Cloud 、およびクラウドstorageへのストリーミング データをサポートしています。
 
-> **Note:**
+> **注記：**
 >
-> - To use the changefeed feature, make sure that your TiDB Dedicated cluster version is v6.4.0 or later.
-> - Currently, TiDB Cloud only allows up to 5 changefeeds per cluster.
-> - For [TiDB Serverless clusters](/tidb-cloud/select-cluster-tier.md#tidb-serverless), the changefeed feature is unavailable.
+> -   チェンジフィード機能を使用するには、TiDB 専用クラスターのバージョンが v6.4.0 以降であることを確認してください。
+> -   現在、 TiDB Cloudクラスターごとに最大 5 つの変更フィードのみが許可されます。
+> -   [TiDB サーバーレスクラスター](/tidb-cloud/select-cluster-tier.md#tidb-serverless)の場合、チェンジフィード機能は使用できません。
 
-To access the changefeed feature, navigate to the cluster overview page of your TiDB cluster, and then click **Changefeed** in the left navigation pane. The changefeed page is displayed.
+チェンジフィード機能にアクセスするには、TiDB クラスターのクラスター概要ページに移動し、左側のナビゲーション ペインで**[チェンジフィード]**をクリックします。チェンジフィードページが表示されます。
 
-On the changefeed page, you can create a changefeed, view a list of existing changefeeds, and operate the existing changefeeds (such as scaling, pausing, resuming, editing, and deleting a changefeed).
+変更フィード ページでは、変更フィードの作成、既存の変更フィードのリストの表示、既存の変更フィードの操作 (変更フィードの拡大縮小、一時停止、再開、編集、削除など) を行うことができます。
 
-## Create a changefeed
+## 変更フィードを作成する {#create-a-changefeed}
 
-To create a changefeed, refer to the tutorials:
+チェンジフィードを作成するには、次のチュートリアルを参照してください。
 
-- [Sink to Apache Kafka](/tidb-cloud/changefeed-sink-to-apache-kafka.md) (Beta)
-- [Sink to MySQL](/tidb-cloud/changefeed-sink-to-mysql.md)
-- [Sink to TiDB Cloud](/tidb-cloud/changefeed-sink-to-tidb-cloud.md)
-- [Sink to cloud storage](/tidb-cloud/changefeed-sink-to-cloud-storage.md)
+-   [Apache Kafka にシンクする](/tidb-cloud/changefeed-sink-to-apache-kafka.md) (ベータ版)
+-   [MySQL にシンクする](/tidb-cloud/changefeed-sink-to-mysql.md)
+-   [TiDB Cloudへのシンク](/tidb-cloud/changefeed-sink-to-tidb-cloud.md)
+-   [クラウドstorageにシンクする](/tidb-cloud/changefeed-sink-to-cloud-storage.md)
 
-## Query Changefeed RCUs
+## 変更フィード RCU のクエリ {#query-changefeed-rcus}
 
-1. Navigate to the cluster overview page of the target TiDB cluster, and then click **Changefeed** in the left navigation pane.
-2. Locate the corresponding changefeed you want to query, and click **...** > **View** in the **Action** column.
-3. You can see the current TiCDC Replication Capacity Units (RCUs) in the **Specification** area of the page.
+1.  ターゲット TiDB クラスターのクラスター概要ページに移動し、左側のナビゲーション ペインで**[Changefeed]**をクリックします。
+2.  クエリを実行する対応する変更フィードを見つけて、 **[...]** &gt; **[アクション]**列の**[ビュー]**をクリックします。
+3.  現在の TiCDC レプリケーション キャパシティ ユニット (RCU) は、ページの**[仕様]**エリアで確認できます。
 
-## Scale a changefeed
+## チェンジフィードをスケールする {#scale-a-changefeed}
 
-You can change the TiCDC Replication Capacity Units (RCUs) of a changefeed by scaling up or down the changfeed.
+変更フィードをスケールアップまたはスケールダウンすることによって、変更フィードの TiCDC レプリケーション キャパシティ ユニット (RCU) を変更できます。
 
-> **Note:**
+> **注記：**
 >
-> - To scale a changefeed for a cluster, make sure that all changefeeds for this cluster are created after March 28, 2023.
-> - If a cluster has changefeeds created before March 28, 2023, neither the existing changefeeds nor newly created changefeeds for this cluster support scaling up or down.
+> -   クラスターの変更フィードをスケーリングするには、このクラスターのすべての変更フィードが 2023 年 3 月 28 日以降に作成されていることを確認してください。
+> -   クラスターに 2023 年 3 月 28 日より前に作成された変更フィードがある場合、このクラスターの既存の変更フィードも新しく作成された変更フィードもスケールアップまたはスケールダウンをサポートしません。
 
-1. Navigate to the cluster overview page of the target TiDB cluster, and then click **Changefeed** in the left navigation pane.
-2. Locate the corresponding changefeed you want to scale, and click **...** > **Scale Up/Down** in the **Action** column.
-3. Select a new specification.
-4. Click **Submit**.
+1.  ターゲット TiDB クラスターのクラスター概要ページに移動し、左側のナビゲーション ペインで**[Changefeed]**をクリックします。
+2.  スケーリングする対応する変更フィードを見つけて、 **[アクション]**列の**[...]** &gt; **[スケールアップ/ダウン]**をクリックします。
+3.  新しい仕様を選択します。
+4.  **「送信」**をクリックします。
 
-It takes about 10 minutes to complete the scaling process (during which the changfeed works normally) and a few seconds to switch to the new specification (during which the changefeed will be paused and resumed automatically).
+スケーリング プロセスが完了するまでに約 10 分かかり (その間、変更フィードは正常に動作します)、新しい仕様に切り替えるには数秒かかります (その間、変更フィードは一時停止され、自動的に再開されます)。
 
-## Pause or resume a changefeed
+## チェンジフィードを一時停止または再開する {#pause-or-resume-a-changefeed}
 
-1. Navigate to the cluster overview page of the target TiDB cluster, and then click **Changefeed** in the left navigation pane.
-2. Locate the corresponding changefeed you want to pause or resume, and click **...** > **Pause/Resume** in the **Action** column.
+1.  ターゲット TiDB クラスターのクラスター概要ページに移動し、左側のナビゲーション ペインで**[Changefeed]**をクリックします。
+2.  一時停止または再開する対応する変更フィードを見つけて、 **[アクション]**列の**[...]** &gt; **[一時停止/再開]**をクリックします。
 
-## Edit a changefeed
+## 変更フィードを編集する {#edit-a-changefeed}
 
-> **Note:**
+> **注記：**
 >
-> TiDB Cloud currently only allows editing changefeeds in the paused status.
+> TiDB Cloud現在、一時停止ステータスでのみ変更フィードの編集が可能です。
 
-1. Navigate to the cluster overview page of the target TiDB cluster, and then click **Changefeed** in the left navigation pane.
-2. Locate the changefeed you want to pause, and click **...** > **Pause** in the **Action** column.
-3. When the changefeed status changes to `Paused`, click **...** > **Edit** to edit the corresponding changefeed.
+1.  ターゲット TiDB クラスターのクラスター概要ページに移動し、左側のナビゲーション ペインで**[Changefeed]**をクリックします。
 
-    TiDB Cloud populates the changefeed configuration by default. You can modify the following configurations:
+2.  一時停止する変更フィードを見つけて、 **[アクション]**列の**[...]** &gt; **[一時停止]**をクリックします。
 
-    - MySQL sink: **MySQL Connection** and **Table Filter**.
-    - Kafka sink: all configurations.
+3.  チェンジフィードのステータスが`Paused`に変わったら、 **[...]** &gt; **[編集] を**クリックして、対応するチェンジフィードを編集します。
 
-4. After editing the configuration, click **...** > **Resume** to resume the corresponding changefeed.
+    TiDB Cloud は、デフォルトで変更フィード構成を設定します。次の構成を変更できます。
 
-## Delete a changefeed
+    -   MySQL シンク: **MySQL 接続**と**テーブル フィルター**。
+    -   Kafka シンク: すべての構成。
 
-1. Navigate to the cluster overview page of the target TiDB cluster, and then click **Changefeed** in the left navigation pane.
-2. Locate the corresponding changefeed you want to delete, and click **...** > **Delete** in the **Action** column.
+4.  構成を編集した後、 **[...]** &gt; **[再開]**をクリックして、対応する変更フィードを再開します。
 
-## Changefeed billing
+## 変更フィードを削除する {#delete-a-changefeed}
 
-To learn the billing for changefeeds in TiDB Cloud, see [Changefeed billing](/tidb-cloud/tidb-cloud-billing-ticdc-rcu.md).
+1.  ターゲット TiDB クラスターのクラスター概要ページに移動し、左側のナビゲーション ペインで**[Changefeed]**をクリックします。
+2.  削除する対応する変更フィードを見つけて、 **[アクション]**列の**[...]** &gt; **[削除]**をクリックします。
 
-## Changefeed states
+## 変更フィードの請求 {#changefeed-billing}
 
-The state of a replication task represents the running state of the replication task. During the running process, replication tasks might fail with errors, be manually paused, resumed, or reach the specified `TargetTs`. These behaviors can lead to changes of the replication task state.
+TiDB Cloudでの変更フィードの請求については、 [変更フィードの請求](/tidb-cloud/tidb-cloud-billing-ticdc-rcu.md)を参照してください。
 
-The states are described as follows:
+## フィード状態の変更 {#changefeed-states}
 
-- `CREATING`: the replication task is being created.
-- `RUNNING`: the replication task runs normally and the checkpoint-ts proceeds normally.
-- `EDITING`: the replication task is being edited.
-- `PAUSING`: the replication task is being paused.
-- `PAUSED`: the replication task is paused.
-- `RESUMING`: the replication task is being resumed.
-- `DELETING`: the replication task is being deleted.
-- `DELETED`: the replication task is deleted.
-- `WARNING`: the replication task returns a warning. The replication cannot continue due to some recoverable errors. The changefeed in this state keeps trying to resume until the state transfers to `RUNNING`. The changefeed in this state blocks [GC operations](https://docs.pingcap.com/tidb/stable/garbage-collection-overview).
-- `FAILED`: the replication task fails. Due to some unrecoverable errors, the replication task cannot resume and cannot be recovered. The changefeed in this state does not block GC operations.
+レプリケーション タスクの状態は、レプリケーション タスクの実行状態を表します。プロセスの実行中に、レプリケーション タスクがエラーで失敗したり、手動で一時停止または再開されたり、指定された`TargetTs`に達したりする可能性があります。これらの動作により、レプリケーション タスクの状態が変化する可能性があります。
+
+状態は次のように説明されます。
+
+-   `CREATING` : レプリケーションタスクが作成されています。
+-   `RUNNING` : レプリケーション タスクは正常に実行され、チェックポイント ts も正常に進行します。
+-   `EDITING` : レプリケーションタスクは編集中です。
+-   `PAUSING` : レプリケーションタスクは一時停止中です。
+-   `PAUSED` : レプリケーションタスクは一時停止されています。
+-   `RESUMING` : レプリケーションタスクが再開されています。
+-   `DELETING` : レプリケーションタスクは削除中です。
+-   `DELETED` : レプリケーションタスクは削除されます。
+-   `WARNING` : レプリケーション タスクは警告を返します。回復可能なエラーがいくつかあるため、レプリケーションを続行できません。この状態のチェンジフィードは、状態が`RUNNING`に移行するまで再開を試み続けます。この状態のチェンジフィードは[GC 操作](https://docs.pingcap.com/tidb/stable/garbage-collection-overview)をブロックします。
+-   `FAILED` : レプリケーションタスクは失敗します。いくつかの回復不可能なエラーが原因で、レプリケーション タスクを再開できず、回復できません。この状態の変更フィードは GC 操作をブロックしません。

@@ -3,32 +3,32 @@ title: Connect to Your TiDB Serverless Cluster
 summary: Learn how to connect to your TiDB Serverless cluster via different methods.
 ---
 
-# Connect to Your TiDB Serverless Cluster
+# TiDB サーバーレスクラスタに接続する {#connect-to-your-tidb-serverless-cluster}
 
-This document introduces the methods to connect to your TiDB Serverless cluster.
+このドキュメントでは、TiDB サーバーレス クラスターに接続する方法を紹介します。
 
-> **Tip:**
+> **ヒント：**
 >
-> To learn how to connect to a TiDB Dedicated cluster, see [Connect to Your TiDB Dedicated Cluster](/tidb-cloud/connect-to-tidb-cluster.md).
+> TiDB 専用クラスターに接続する方法については、 [TiDB 専用クラスタに接続する](/tidb-cloud/connect-to-tidb-cluster.md)を参照してください。
 
-After your TiDB Serverless cluster is created on TiDB Cloud, you can connect to it via one of the following methods:
+TiDB サーバーレス クラスターがTiDB Cloud上に作成されたら、次のいずれかの方法で接続できます。
 
-- [Connect via private endpoint](/tidb-cloud/set-up-private-endpoint-connections-serverless.md) (recommended)
+-   [プライベートエンドポイント経由で接続する](/tidb-cloud/set-up-private-endpoint-connections-serverless.md) (推奨)
 
-    Private endpoint connection provides a private endpoint to allow SQL clients in your VPC to securely access services over AWS PrivateLink, which provides highly secure and one-way access to database services with simplified network management.
+    プライベート エンドポイント接続は、VPC 内の SQL クライアントが AWS PrivateLink 経由でサービスに安全にアクセスできるようにするプライベート エンドポイントを提供します。これにより、簡素化されたネットワーク管理でデータベース サービスへの安全性の高い一方向のアクセスが実現します。
 
-- [Connect via public endpoint](/tidb-cloud/connect-via-standard-connection-serverless.md)
+-   [パブリックエンドポイント経由で接続する](/tidb-cloud/connect-via-standard-connection-serverless.md)
 
-    The standard connection exposes a public endpoint with traffic filters, so you can connect to your TiDB cluster via a SQL client from your laptop.
+    標準接続では、トラフィック フィルターを備えたパブリック エンドポイントが公開されるため、ラップトップから SQL クライアント経由で TiDB クラスターに接続できます。
 
-    TiDB Serverless supports [TLS connections](/tidb-cloud/secure-connections-to-serverless-clusters.md), which ensures the security of data transmission from your applications to TiDB clusters.
+    TiDB サーバーレスは[TLS接続](/tidb-cloud/secure-connections-to-serverless-clusters.md)サポートしており、アプリケーションから TiDB クラスターへのデータ送信のセキュリティを確保します。
 
-- [Connect via Chat2Query (beta)](/tidb-cloud/explore-data-with-chat2query.md)
+-   [Chat2Query 経由で接続する (ベータ版)](/tidb-cloud/explore-data-with-chat2query.md)
 
-    TiDB Cloud is powered by artificial intelligence (AI). You can use Chat2Query (beta), an AI-powered SQL editor in the [TiDB Cloud console](https://tidbcloud.com/), to maximize your data value.
+    TiDB Cloudは人工知能 (AI) を活用しています。 [TiDB Cloudコンソール](https://tidbcloud.com/)の AI を活用した SQL エディターである Chat2Query (ベータ版) を使用すると、データの価値を最大化できます。
 
-    In Chat2Query, you can either simply type `--` followed by your instructions to let AI generate SQL queries automatically or write SQL queries manually, and then run SQL queries against databases without a terminal. You can find the query results in tables intuitively and check the query logs easily.
+    Chat2Query では、 `--`入力してから AI に SQL クエリを自動的に生成させる指示を入力するか、SQL クエリを手動で作成して、ターミナルを使用せずにデータベースに対して SQL クエリを実行することができます。クエリ結果をテーブルで直感的に見つけたり、クエリログを簡単に確認したりできます。
 
-## What's next
+## 次は何ですか {#what-s-next}
 
-After you have successfully connected to your TiDB cluster, you can [explore SQL statements with TiDB](/basic-sql-operations.md).
+TiDB クラスターに正常に接続したら、 [TiDB で SQL ステートメントを探索する](/basic-sql-operations.md)を行うことができます。

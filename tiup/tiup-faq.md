@@ -3,54 +3,52 @@ title: TiUP FAQs
 summary: Provide answers to common questions asked by TiUP users.
 ---
 
-# TiUP FAQs
+# TiUPよくある質問 {#tiup-faqs}
 
-This document collects the frequently asked questions (FAQs) about TiUP.
+このドキュメントには、 TiUPに関するよくある質問 (FAQ) がまとめられています。
 
-## Can TiUP not use the official mirror source?
+## TiUP は公式ミラーソースを使用できないのでしょうか? {#can-tiup-not-use-the-official-mirror-source}
 
-TiUP supports specifying the mirror source through the `TIUP_MIRRORS` environment variable. The address of the mirror source can be a local directory or an HTTP server address. If your environment cannot access the network, you can create your own offline mirror source to use TiUP.
+TiUP は、 `TIUP_MIRRORS`環境変数を使用したミラー ソースの指定をサポートしています。ミラー ソースのアドレスは、ローカル ディレクトリまたは HTTPサーバーアドレスです。環境がネットワークにアクセスできない場合は、 TiUPを使用する独自のオフライン ミラー ソースを作成できます。
 
-After using an unofficial mirror, if you want the official mirror back and use it, take one of the following measures:
+非公式ミラーを使用した後、公式ミラーに戻して使用したい場合は、次のいずれかの措置を行ってください。
 
-- Set the `TIUP_MIRRORS` variable to the official mirror address: `https://tiup-mirrors.pingcap.com`.
-- Make sure that the `TIUP_MIRRORS` variable is not set, and then execute the `tiup mirror set https://tiup-mirrors.pingcap.com` command.
+-   変数`TIUP_MIRRORS`を公式のミラー アドレスに設定します: `https://tiup-mirrors.pingcap.com` 。
+-   `TIUP_MIRRORS`変数が設定されていないことを確認してから、 `tiup mirror set https://tiup-mirrors.pingcap.com`コマンドを実行します。
 
-## How do I put my own component into the TiUP mirrors?
+## 独自のコンポーネントをTiUPミラーに配置するにはどうすればよいですか? {#how-do-i-put-my-own-component-into-the-tiup-mirrors}
 
-TiUP does not support third-party components for the time being, but the TiUP Team has developed the TiUP component development specifications and is developing the tiup-publish component. After everything is ready, a contributor can publish their own components to TiUP's official mirrors by using the `tiup publish <comp> <version>` command.
+TiUP は当面、サードパーティ コンポーネントをサポートしませんが、 TiUPチームはTiUPコンポーネント開発仕様を開発し、 tiup-publishコンポーネントを開発しています。すべての準備が完了したら、寄稿者は`tiup publish <comp> <version>`コマンドを使用して、独自のコンポーネントを TiUP の公式ミラーに公開できます。
 
-## What is the difference between the TiUP playground and TiUP cluster components?
+## TiUPプレイグラウンドとTiUPクラスター コンポーネントの違いは何ですか? {#what-is-the-difference-between-the-tiup-playground-and-tiup-cluster-components}
 
-The TiUP playground component is mainly used to build a stand-alone development environment on Linux or macOS operating systems. It helps you get started quickly and run a specified version of the TiUP cluster easily. The TiUP cluster component is mainly used to deploy and maintain a production environment cluster, which is usually a large-scale cluster.
+TiUPプレイグラウンドコンポーネントは主に、Linux または macOS オペレーティング システム上にスタンドアロン開発環境を構築するために使用されます。これにより、迅速に開始し、指定したバージョンのTiUPクラスターを簡単に実行できます。 TiUPクラスターコンポーネントは、主に実本番環境クラスター (通常は大規模クラスター) の展開と維持に使用されます。
 
-## How do I write the topology file for the TiUP cluster component?
+## TiUPクラスターコンポーネントのトポロジ ファイルを作成するにはどうすればよいですか? {#how-do-i-write-the-topology-file-for-the-tiup-cluster-component}
 
-Refer to [these templates](https://github.com/pingcap/tiup/tree/master/embed/examples/cluster) to write the topology file. The templates include:
+トポロジファイルの作成は[これらのテンプレート](https://github.com/pingcap/tiup/tree/master/embed/examples/cluster)を参照してください。テンプレートには次のものが含まれます。
 
-- Multi-DC deployment topology
-- Minimal deployment topology
-- Complete topology file
+-   マルチ DC 導入トポロジ
+-   最小限の導入トポロジ
+-   完全なトポロジ ファイル
 
-You can edit your topology file based on the templates and your needs.
+テンプレートとニーズに基づいてトポロジ ファイルを編集できます。
 
-## Can multiple instances be deployed on the same host?
+## 複数のインスタンスを同じホストにデプロイできますか? {#can-multiple-instances-be-deployed-on-the-same-host}
 
-You can use the TiUP cluster component to deploy multiple instances on the same host, but with different ports and directories configured; otherwise, directory and port conflicts might occur.
+TiUPクラスターコンポーネントを使用すると、同じホスト上に複数のインスタンスをデプロイできますが、異なるポートとディレクトリが構成されています。そうしないと、ディレクトリとポートの競合が発生する可能性があります。
 
-## Are port and directory conflicts detected within the same cluster?
+## 同じクラスター内でポートとディレクトリの競合が検出されますか? {#are-port-and-directory-conflicts-detected-within-the-same-cluster}
 
-Port and directory conflicts in the same cluster are detected during deployment and scaling. If there is any directory or port conflict, the deployment or scaling process is interrupted.
+同じクラスター内のポートとディレクトリの競合は、デプロイメントおよびスケーリング中に検出されます。ディレクトリまたはポートの競合がある場合、デプロイメントまたはスケーリングのプロセスは中断されます。
 
-## Are port and directory conflicts detected among different clusters?
+## 異なるクラスター間でポートとディレクトリの競合が検出されますか? {#are-port-and-directory-conflicts-detected-among-different-clusters}
 
-If multiple different clusters are deployed by the same TiUP control machine, the port and directory conflicts among these clusters are detected during deployment and scaling. If the clusters are deployed by different TiUP control machines, conflict detection is not supported currently.
+複数の異なるクラスターが同じTiUP制御マシンによってデプロイされている場合、デプロイメントおよびスケーリング中にこれらのクラスター間のポートとディレクトリの競合が検出されます。クラスターが異なるTiUP制御マシンによってデプロイされている場合、競合検出は現在サポートされていません。
 
-## During cluster deployment, TiUP received an `ssh: handshake failed: read tcp 10.10.10.34:38980 -> 10.10.10.34:3600: read: connection reset by peer` error
+## クラスターの展開中に、 TiUP が<code>ssh: handshake failed: read tcp 10.10.10.34:38980 -&gt; 10.10.10.34:3600: read: connection reset by peer</code> {#during-cluster-deployment-tiup-received-an-code-ssh-handshake-failed-read-tcp-10-10-10-34-38980-10-10-10-34-3600-read-connection-reset-by-peer-code-error}
 
-The error might occur because the default number of concurrent threads of TiUP exceeds the default maximum number of SSH connections. To solve the issue, you can increase the default number of SSH connections, and then restart the sshd service:
-
-{{< copyable "shell-regular" >}}
+TiUPのデフォルトの同時スレッド数がデフォルトの SSH 接続の最大数を超えているために、エラーが発生する可能性があります。この問題を解決するには、デフォルトの SSH 接続数を増やしてから、sshd サービスを再起動します。
 
 ```shell
 vi /etc/ssh/sshd_config

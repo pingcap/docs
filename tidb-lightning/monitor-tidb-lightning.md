@@ -3,15 +3,15 @@ title: TiDB Lightning Monitoring
 summary: Learn about the monitor configuration and monitoring metrics of TiDB Lightning.
 ---
 
-# TiDB Lightning Monitoring
+# TiDB Lightning監視 {#tidb-lightning-monitoring}
 
-`tidb-lightning` supports metrics collection via [Prometheus](https://prometheus.io/). This document introduces the monitor configuration and monitoring metrics of TiDB Lightning.
+`tidb-lightning` [プロメテウス](https://prometheus.io/)によるメトリクス収集をサポートします。このドキュメントでは、 TiDB Lightningのモニター構成とモニタリングメトリクスを紹介します。
 
-## Monitor configuration
+## モニターの設定 {#monitor-configuration}
 
-If TiDB Lightning is manually installed, follow the instructions below.
+TiDB Lightningを手動でインストールする場合は、以下の手順に従ってください。
 
-The metrics of `tidb-lightning` can be gathered directly by Prometheus as long as it is discovered. You can set the metrics port in `tidb-lightning.toml`:
+`tidb-lightning`のメトリクスは、それが検出されている限り、Prometheus によって直接収集できます。 `tidb-lightning.toml`でメトリクス ポートを設定できます。
 
 ```toml
 [lightning]
@@ -21,7 +21,7 @@ pprof-port = 8289
 ...
 ```
 
-You need to configure Prometheus to make it discover the servers. For instance, you can directly add the server address to the `scrape_configs` section:
+Prometheus がサーバーを検出できるように構成する必要があります。たとえば、サーバーアドレスを`scrape_configs`セクションに直接追加できます。
 
 ```yaml
 ...
@@ -31,210 +31,214 @@ scrape_configs:
       - targets: ['192.168.20.10:8289']
 ```
 
-## Grafana dashboard
+## グラファナダッシュボード {#grafana-dashboard}
 
-[Grafana](https://grafana.com/) is a web interface to visualize Prometheus metrics as dashboards.
+[グラファナ](https://grafana.com/)は、Prometheus メトリクスをダッシュ​​ボードとして視覚化するための Web インターフェイスです。
 
-### Row 1: Speed
+### 行 1: 速度 {#row-1-speed}
 
 ![Panels in first row](/media/lightning-grafana-row-1.png)
 
-| Panel | Series | Description |
-|:-----|:-----|:-----|
-| Import speed | write from TiDB Lightning | Speed of sending KVs from TiDB Lightning to TiKV Importer, which depends on each table's complexity |
-| Import speed | upload to tikv | Total upload speed from TiKV Importer to all TiKV replicas |
-| Chunk process duration | | Average time needed to completely encode one single data file |
+| パネル       | シリーズ                  | 説明                                                              |
+| :-------- | :-------------------- | :-------------------------------------------------------------- |
+| インポート速度   | TiDB Lightningからの書き込み | TiDB Lightningから TiKV Importer への KV の送信速度 (各テーブルの複雑さによって異なります) |
+| インポート速度   | tikvにアップロードする         | TiKV インポーターからすべての TiKV レプリカへの合計アップロード速度                         |
+| Chunk処理時間 |                       | 1 つのデータ ファイルを完全にエンコードするのに必要な平均時間                                |
 
-Sometimes the import speed will drop to zero allowing other parts to catch up. This is normal.
+場合によっては、インポート速度がゼロに低下し、他の部分が追いつくことがあります。これは正常です。
 
-### Row 2: Progress
+### 行 2: 進捗状況 {#row-2-progress}
 
 ![Panels in second row](/media/lightning-grafana-row-2.png)
 
-| Panel | Description |
-|:-----|:-----|
-| Import progress | Percentage of data files encoded so far |
-| Checksum progress | Percentage of tables are verified to be imported successfully |
-| Failures | Number of failed tables and their point of failure, normally empty |
+| パネル         | 説明                         |
+| :---------- | :------------------------- |
+| インポートの進行状況  | これまでにエンコードされたデータ ファイルの割合   |
+| チェックサムの進行状況 | 正常にインポートされたことが確認されたテーブルの割合 |
+| 失敗          | 失敗したテーブルの数とその障害点 (通常は空)    |
 
-### Row 3: Resource
+### 行 3: リソース {#row-3-resource}
 
 ![Panels in third row](/media/lightning-grafana-row-3.png)
 
-| Panel | Description |
-|:-----|:-----|
-| Memory usage | Amount of memory occupied by each service |
-| Number of TiDB Lightning Goroutines | Number of running goroutines used by TiDB Lightning |
-| CPU% | Number of logical CPU cores utilized by each service |
+| パネル                   | 説明                                 |
+| :-------------------- | :--------------------------------- |
+| メモリ使用量                | 各サービスが占有するメモリ量                     |
+| TiDB Lightningゴルーチンの数 | TiDB Lightningによって使用される実行中のゴルーチンの数 |
+| CPU％                  | 各サービスが使用する論理 CPU コアの数              |
 
-### Row 4: Quota
+### 行 4: クォータ {#row-4-quota}
 
 ![Panels in fourth row](/media/lightning-grafana-row-4.png)
 
-| Panel | Series | Description |
-|:-----|:-----|:-----|
-| Idle workers | io | Number of unused `io-concurrency`, normally close to configured value (default 5), and close to 0 means the disk is too slow |
-| Idle workers | closed-engine | Number of engines which is closed but not yet cleaned up, normally close to index + table-concurrency (default 8), and close to 0 means TiDB Lightning is faster than TiKV Importer, which will cause TiDB Lightning to stall |
-| Idle workers | table | Number of unused `table-concurrency`, normally 0 until the end of process |
-| Idle workers | index | Number of unused `index-concurrency`, normally 0 until the end of process |
-| Idle workers | region | Number of unused `region-concurrency`, normally 0 until the end of process |
-| External resources | KV Encoder | Counts active KV encoders, normally the same as `region-concurrency` until the end of process |
-| External resources | Importer Engines | Counts opened engine files, should never exceed the `max-open-engines` setting |
+| パネル    | シリーズ       | 説明                                                                                                                                              |
+| :----- | :--------- | :---------------------------------------------------------------------------------------------------------------------------------------------- |
+| 怠惰な労働者 | イオ         | 未使用の数`io-concurrency` 、通常は設定値 (デフォルト 5) に近く、0 に近い場合はディスクが遅すぎることを意味します                                                                           |
+| 怠惰な労働者 | クローズドエンジン  | 閉じられているがまだクリーンアップされていないエンジンの数。通常はインデックス + テーブル同時実行数 (デフォルトは 8) に近く、0 に近い場合は、 TiDB Lightningが TiKV Importer より高速であることを意味し、 TiDB Lightningが停止します。 |
+| 怠惰な労働者 | テーブル       | 未使用の数`table-concurrency` 、通常はプロセスが終了するまで 0                                                                                                      |
+| 怠惰な労働者 | 索引         | 未使用の数`index-concurrency` 、通常はプロセスが終了するまで 0                                                                                                      |
+| 怠惰な労働者 | 地域         | 未使用の数`region-concurrency` 、通常はプロセスが終了するまで 0                                                                                                     |
+| 外部リソース | KVエンコーダ    | アクティブな KV エンコーダをカウントします。通常はプロセスが終了するまで`region-concurrency`と同じです。                                                                                |
+| 外部リソース | インポーターエンジン | 開かれたエンジン ファイルをカウントします。設定`max-open-engines`を超えることはありません                                                                                          |
 
-### Row 5: Read speed
+### 行 5: 読み取り速度 {#row-5-read-speed}
 
 ![Panels in fifth row](/media/lightning-grafana-row-5.png)
 
-| Panel | Series | Description |
-|:-----|:-----|:-----|
-| Chunk parser read block duration | read block | Time taken to read one block of bytes to prepare for parsing |
-| Chunk parser read block duration | apply worker | Time elapsed to wait for an idle io-concurrency |
-| SQL process duration | row encode | Time taken to parse and encode a single row |
-| SQL process duration | block deliver | Time taken to send a block of KV pairs to TiKV Importer |
+| パネル                  | シリーズ      | 説明                                  |
+| :------------------- | :-------- | :---------------------------------- |
+| Chunkパーサーの読み取りブロック期間 | ブロックの読み取り | 解析の準備のためにバイトの 1 ブロックを読み取るのにかかる時間    |
+| Chunkパーサーの読み取りブロック期間 | ワーカーを適用する | アイドル状態の IO 同時実行を待機するために経過した時間       |
+| SQLの処理時間             | 行エンコード    | 単一行の解析とエンコードにかかる時間                  |
+| SQLの処理時間             | ブロック配信    | KV ペアのブロックを TiKV インポーターに送信するのにかかる時間 |
 
-If any of the duration is too high, it indicates that the disk used by TiDB Lightning is too slow or busy with I/O.
+いずれかの時間が長すぎる場合は、 TiDB Lightningによって使用されるディスクが遅すぎるか、I/O でビジーであることを示します。
 
-### Row 6: Storage
+### 行 6: ストレージ {#row-6-storage}
 
 ![Panels in sixth row](/media/lightning-grafana-row-6.png)
 
-| Panel | Series | Description |
-|:-----|:-----|:-----|
-| SQL process rate | data deliver rate | Speed of delivery of data KV pairs to TiKV Importer |
-| SQL process rate | index deliver rate | Speed of delivery of index KV pairs to TiKV Importer |
-| SQL process rate | total deliver rate | The sum of two rates above |
-| Total bytes | parser read size | Number of bytes being read by TiDB Lightning |
-| Total bytes | data deliver size | Number of bytes of data KV pairs already delivered to TiKV Importer |
-| Total bytes | index deliver size | Number of bytes of index KV pairs already delivered to TiKV Importer |
-| Total bytes | storage_size / 3 | Total size occupied by the TiKV cluster, divided by 3 (the default number of replicas) |
+| パネル     | シリーズ         | 説明                                          |
+| :------ | :----------- | :------------------------------------------ |
+| SQL処理速度 | データ配信速度      | データ KV ペアの TiKV インポーターへの配信速度                |
+| SQL処理速度 | インデックス配信率    | TiKV インポーターへのインデックス KV ペアの配信速度              |
+| SQL処理速度 | 合計配信率        | 上記 2 つのレートの合計                               |
+| 合計バイト数  | パーサーの読み取りサイズ | TiDB Lightningによって読み取られているバイト数              |
+| 合計バイト数  | データ配信サイズ     | TiKV インポーターにすでに配信されたデータ KV ペアのバイト数          |
+| 合計バイト数  | インデックス配信サイズ  | TiKV インポーターにすでに配信されたインデックス KV ペアのバイト数       |
+| 合計バイト数  | ストレージサイズ / 3 | TiKV クラスターが占める合計サイズを 3 (デフォルトのレプリカ数) で割ったもの |
 
-### Row 7: Import speed
+### 行 7: インポート速度 {#row-7-import-speed}
 
 ![Panels in seventh row](/media/lightning-grafana-row-7.png)
 
-| Panel | Series | Description |
-|:-----|:-----|:-----|
-| Delivery duration | Range delivery | Time taken to upload a range of KV pairs to the TiKV cluster |
-| Delivery duration | SST delivery | Time taken to upload an SST file to the TiKV cluster |
-| SST process duration | Split SST | Time taken to split the stream of KV pairs into SST files |
-| SST process duration | SST upload | Time taken to upload an SST file |
-| SST process duration | SST ingest | Time taken to ingest an uploaded SST file |
-| SST process duration | SST size | File size of an SST file |
+| パネル           | シリーズ      | 説明                                    |
+| :------------ | :-------- | :------------------------------------ |
+| 配達期間          | 範囲配達      | 一連の KV ペアを TiKV クラスターにアップロードするのにかかる時間 |
+| 配達期間          | SSTの配送    | SST ファイルを TiKV クラスターにアップロードするのにかかる時間  |
+| SST プロセスの所要時間 | スプリットSST  | KV ペアのストリームを SST ファイルに分割するのにかかる時間     |
+| SST プロセスの所要時間 | SSTアップロード | SST ファイルのアップロードにかかる時間                 |
+| SST プロセスの所要時間 | SST の取り込み | アップロードされた SST ファイルの取り込みにかかる時間         |
+| SST プロセスの所要時間 | SSTサイズ    | SSTファイルのファイルサイズ                       |
 
-## Monitoring metrics
+## モニタリング指標 {#monitoring-metrics}
 
-This section explains the monitoring metrics of `tidb-lightning`.
+このセクションでは、 `tidb-lightning`の監視メトリクスについて説明します。
 
-Metrics provided by `tidb-lightning` are listed under the namespace `lightning_*`.
+`tidb-lightning`によって提供されるメトリックは、名前空間`lightning_*`の下にリストされます。
 
-- **`lightning_importer_engine`** (Counter)
+-   **`lightning_importer_engine`** (カウンター)
 
-    Counts open and closed engine files. Labels:
+    開いているエンジン ファイルと閉じているエンジン ファイルをカウントします。ラベル:
 
-    - **type**:
-        * `open`
-        * `closed`
+    -   **タイプ**：
+        -   `open`
+        -   `closed`
 
-- **`lightning_idle_workers`** (Gauge)
+-   **`lightning_idle_workers`** (ゲージ)
 
-    Counts idle workers. Labels:
+    アイドル状態のワーカーをカウントします。ラベル:
 
-    - **name**:
-        * `table`: the remainder of `table-concurrency`, normally 0 until the end of the process
-        * `index`: the remainder of `index-concurrency`, normally 0 until the end of the process
-        * `region`: the remainder of `region-concurrency`, normally 0 until the end of the process
-        * `io`: the remainder of `io-concurrency`, normally close to configured value (default 5), and close to 0 means the disk is too slow
-        * `closed-engine`: number of engines which have been closed but not yet cleaned up, normally close to index + table-concurrency (default 8). A value close to 0 means TiDB Lightning is faster than TiKV Importer, which might cause TiDB Lightning to stall
+    -   **名前**：
+        -   `table` : `table-concurrency`の余り、通常はプロセスが終了するまで 0
+        -   `index` : `index-concurrency`の余り、通常はプロセスが終了するまで 0
+        -   `region` : `region-concurrency`の余り、通常はプロセスが終了するまで 0
+        -   `io` : `io-concurrency`の残り。通常は設定値 (デフォルト 5) に近く、0 に近い場合はディスクが遅すぎることを意味します。
+        -   `closed-engine` : 閉じられているがまだクリーンアップされていないエンジンの数。通常はインデックス + テーブル同時実行数に近い値 (デフォルトは 8)。 0 に近い値は、 TiDB Lightning がTiKV Importer よりも高速であることを意味し、 TiDB Lightningが停止する可能性があります。
 
-- **`lightning_kv_encoder`** (Counter)
+-   **`lightning_kv_encoder`** (カウンター)
 
-    Counts open and closed KV encoders. KV encoders are in-memory TiDB instances that convert SQL `INSERT` statements into KV pairs. The net values need to be bounded in a healthy situation. Labels:
+    開いた KV エンコーダーと閉じた KV エンコーダーをカウントします。 KV エンコーダーは、SQL `INSERT`ステートメントを KV ペアに変換するメモリ内の TiDB インスタンスです。健全な状況では、正味値を制限する必要があります。ラベル:
 
-    - **type**:
-        * `open`
-        * `closed`
+    -   **タイプ**：
+        -   `open`
+        -   `closed`
 
-* **`lightning_tables`** (Counter)
+<!---->
 
-    Counts processed tables and their statuses. Labels:
+-   **`lightning_tables`** (カウンター)
 
-    - **state**: the status of the table, indicating which phase should be completed
-        * `pending`: not yet processed
-        * `written`: all data encoded and sent
-        * `closed`: all corresponding engine files closed
-        * `imported`: all engine files have been imported into the target cluster
-        * `altered_auto_inc`: AUTO_INCREMENT ID altered
-        * `checksum`: checksum performed
-        * `analyzed`: statistics analysis performed
-        * `completed`: the table has been fully imported and verified
-    - **result**: the result of the current phase
-        * `success`: the phase completed successfully
-        * `failure`: the phase failed (did not complete)
+    処理されたテーブルとそのステータスをカウントします。ラベル:
 
-* **`lightning_engines`** (Counter)
+    -   **state** : どのフェーズを完了する必要があるかを示すテーブルのステータス
+        -   `pending` : まだ処理されていません
+        -   `written` : すべてのデータがエンコードされて送信される
+        -   `closed` : 対応するすべてのエンジン ファイルが閉じられています
+        -   `imported` : すべてのエンジン ファイルがターゲット クラスターにインポートされています
+        -   `altered_auto_inc` : AUTO_INCREMENT ID が変更されました
+        -   `checksum` : チェックサムを実行
+        -   `analyzed` : 統計分析を実行
+        -   `completed` : テーブルは完全にインポートされ、検証されています。
+    -   **result** : 現在のフェーズの結果
+        -   `success` : フェーズは正常に完了しました
+        -   `failure` : フェーズは失敗しました (完了しませんでした)
 
-    Counts number of engine files processed and their status. Labels:
+-   **`lightning_engines`** (カウンター)
 
-    - **state**: the status of the engine, indicating which phase should be completed
-        * `pending`: not yet processed
-        * `written`: all data encoded and sent
-        * `closed`: engine file closed
-        * `imported`: the engine file has been imported into the target cluster
-        * `completed`: the engine has been fully imported
-    - **result**: the result of the current phase
-        * `success`: the phase completed successfully
-        * `failure`: the phase failed (did not complete)
+    処理されたエンジン ファイルの数とそのステータスをカウントします。ラベル:
 
-- **`lightning_chunks`** (Counter)
+    -   **state** : エンジンのステータス。どのフェーズを完了する必要があるかを示します。
+        -   `pending` : まだ処理されていません
+        -   `written` : すべてのデータがエンコードされて送信される
+        -   `closed` : エンジン ファイルが閉じられました
+        -   `imported` : エンジン ファイルはターゲット クラスターにインポートされています
+        -   `completed` : エンジンは完全にインポートされています
+    -   **result** : 現在のフェーズの結果
+        -   `success` : フェーズは正常に完了しました
+        -   `failure` : フェーズは失敗しました (完了しませんでした)
 
-    Counts number of chunks processed and their status. Labels:
+<!---->
 
-    - **state**: a chunk's status, indicating which phase the chunk is in
-        * `estimated`: (not a state) this value gives total number of chunks in current task
-        * `pending`: loaded but not yet processed
-        * `running`: data are being encoded and sent
-        * `finished`: the entire chunk has been processed
-        * `failed`: errors happened during processing
+-   **`lightning_chunks`** (カウンター)
 
-- **`lightning_import_seconds`** (Histogram)
+    処理されたチャンクの数とそのステータスをカウントします。ラベル:
 
-    Bucketed histogram for the time needed to import a table.
+    -   **state** : チャンクのステータス。チャンクがどのフェーズにあるかを示します。
+        -   `estimated` : (状態ではない) この値は現在のタスクのチャンクの総数を示します。
+        -   `pending` : ロードされていますが、まだ処理されていません
+        -   `running` : データはエンコードされて送信されています
+        -   `finished` : チャンク全体が処理されました
+        -   `failed` : 処理中にエラーが発生しました
 
-- **`lightning_row_read_bytes`** (Histogram)
+-   **`lightning_import_seconds`** (ヒストグラム)
 
-    Bucketed histogram for the size of a single SQL row.
+    テーブルのインポートに必要な時間のバケット化されたヒストグラム。
 
-- **`lightning_row_encode_seconds`** (Histogram)
+-   **`lightning_row_read_bytes`** (ヒストグラム)
 
-    Bucketed histogram for the time needed to encode a single SQL row into KV pairs.
+    単一 SQL 行のサイズのバケット化されたヒストグラム。
 
-- **`lightning_row_kv_deliver_seconds`** (Histogram)
+-   **`lightning_row_encode_seconds`** (ヒストグラム)
 
-    Bucketed histogram for the time needed to deliver a set of KV pairs corresponding to one single SQL row.
+    単一の SQL 行を KV ペアにエンコードするのに必要な時間のバケット化されたヒストグラム。
 
-- **`lightning_block_deliver_seconds`** (Histogram)
+-   **`lightning_row_kv_deliver_seconds`** (ヒストグラム)
 
-    Bucketed histogram for the time needed to deliver a block of KV pairs to Importer.
+    1 つの SQL 行に対応する KV ペアのセットを配信するのに必要な時間を表すバケット化されたヒストグラム。
 
-- **`lightning_block_deliver_bytes`** (Histogram)
+-   **`lightning_block_deliver_seconds`** (ヒストグラム)
 
-    Bucketed histogram for the uncompressed size of a block of KV pairs delivered to Importer.
+    KV ペアのブロックをインポーターに配信するのに必要な時間のバケット化されたヒストグラム。
 
-- **`lightning_chunk_parser_read_block_seconds`** (Histogram)
+-   **`lightning_block_deliver_bytes`** (ヒストグラム)
 
-    Bucketed histogram for the time needed by the data file parser to read a block.
+    インポーターに配信された KV ペアのブロックの非圧縮サイズのバケット化されたヒストグラム。
 
-- **`lightning_checksum_seconds`** (Histogram)
+-   **`lightning_chunk_parser_read_block_seconds`**秒 (ヒストグラム)
 
-    Bucketed histogram for the time needed to compute the checksum of a table.
+    データ ファイル パーサーがブロックを読み取るのに必要な時間のバケット化されたヒストグラム。
 
-- **`lightning_apply_worker_seconds`** (Histogram)
+-   **`lightning_checksum_seconds`** (ヒストグラム)
 
-    Bucketed histogram for the time needed to acquire an idle worker (see also the `lightning_idle_workers` gauge). Labels:
+    テーブルのチェックサムの計算に必要な時間のバケット化されたヒストグラム。
 
-    - **name**:
-        * `table`
-        * `index`
-        * `region`
-        * `io`
-        * `closed-engine`
+-   **`lightning_apply_worker_seconds`** (ヒストグラム)
+
+    アイドル状態のワーカーを取得するのに必要な時間のバケット化されたヒストグラム ( `lightning_idle_workers`ゲージも参照)。ラベル:
+
+    -   **名前**：
+        -   `table`
+        -   `index`
+        -   `region`
+        -   `io`
+        -   `closed-engine`

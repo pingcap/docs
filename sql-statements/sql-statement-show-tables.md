@@ -3,19 +3,19 @@ title: SHOW [FULL] TABLES | TiDB SQL Statement Reference
 summary: An overview of the usage of SHOW [FULL] TABLES for the TiDB database.
 ---
 
-# SHOW [FULL] TABLES
+# [完全な] テーブルを表示 {#show-full-tables}
 
-This statement shows a list of tables and views in the currently selected database. The optional keyword `FULL` indicates if a table is of type `BASE TABLE` or `VIEW`.
+このステートメントは、現在選択されているデータベース内のテーブルとビューのリストを表示します。オプションのキーワード`FULL`テーブルのタイプが`BASE TABLE`か`VIEW`であるかを示します。
 
-To show tables in a different database, use `SHOW TABLES IN DatabaseName`.
+別のデータベース内のテーブルを表示するには、 `SHOW TABLES IN DatabaseName`を使用します。
 
-## Synopsis
+## あらすじ {#synopsis}
 
 **ShowTablesStmt:**
 
 ![ShowTablesStmt](/media/sqlgram/ShowTablesStmt.png)
 
-**OptFull:**
+**オプトフル:**
 
 ![OptFull](/media/sqlgram/OptFull.png)
 
@@ -27,7 +27,7 @@ To show tables in a different database, use `SHOW TABLES IN DatabaseName`.
 
 ![ShowLikeOrWhereOpt](/media/sqlgram/ShowLikeOrWhereOpt.png)
 
-## Examples
+## 例 {#examples}
 
 ```sql
 mysql> CREATE TABLE t1 (a int);
@@ -82,12 +82,12 @@ mysql> SHOW TABLES IN mysql;
 20 rows in set (0.00 sec)
 ```
 
-## MySQL compatibility
+## MySQLの互換性 {#mysql-compatibility}
 
-The `SHOW [FULL] TABLES` statement in TiDB is fully compatible with MySQL. If you find any compatibility differences, [report a bug](https://docs.pingcap.com/tidb/stable/support).
+TiDB の`SHOW [FULL] TABLES`ステートメントは MySQL と完全な互換性があります。互換性の違いが見つかった場合は、 [バグを報告](https://docs.pingcap.com/tidb/stable/support) .
 
-## See also
+## こちらも参照 {#see-also}
 
-* [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
-* [DROP TABLE](/sql-statements/sql-statement-drop-table.md)
-* [SHOW CREATE TABLE](/sql-statements/sql-statement-show-create-table.md)
+-   [テーブルの作成](/sql-statements/sql-statement-create-table.md)
+-   [ドロップテーブル](/sql-statements/sql-statement-drop-table.md)
+-   [テーブルの作成を表示](/sql-statements/sql-statement-show-create-table.md)

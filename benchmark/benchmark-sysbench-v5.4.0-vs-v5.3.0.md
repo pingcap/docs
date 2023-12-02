@@ -2,39 +2,37 @@
 title: TiDB Sysbench Performance Test Report -- v5.4.0 vs. v5.3.0
 ---
 
-# TiDB Sysbench Performance Test Report -- v5.4.0 vs. v5.3.0
+# TiDB Sysbench パフォーマンス テスト レポート -- v5.4.0 と v5.3.0 {#tidb-sysbench-performance-test-report-v5-4-0-vs-v5-3-0}
 
-## Test overview
+## テストの概要 {#test-overview}
 
-This test aims at comparing the Sysbench performance of TiDB v5.4.0 and TiDB v5.3.0 in the Online Transactional Processing (OLTP) scenario. The results show that performance of v5.4.0 is improved by 2.59% ~ 4.85% in the write-heavy workload.
+このテストは、オンライン トランザクション処理 (OLTP) シナリオにおける TiDB v5.4.0 と TiDB v5.3.0 の Sysbench パフォーマンスを比較することを目的としています。結果は、書き込みの多いワークロードにおいて v5.4.0 のパフォーマンスが 2.59% ～ 4.85% 向上していることを示しています。
 
-## Test environment (AWS EC2）
+## テスト環境（AWS EC2） {#test-environment-aws-ec2}
 
-### Hardware configuration
+### ハードウェア構成 {#hardware-configuration}
 
-| Service type | EC2 type | Instance count |
-|:----------|:----------|:----------|
-| PD        | m5.xlarge |     3     |
-| TiKV      | i3.4xlarge|     3     |
-| TiDB      | c5.4xlarge|     3     |
-| Sysbench  | c5.9xlarge|     1     |
+| サービスの種類 | EC2タイプ     | インスタンス数 |
+| :------ | :--------- | :------ |
+| PD      | m5.xlarge  | 3       |
+| TiKV    | i3.4xlarge | 3       |
+| TiDB    | c5.4xlarge | 3       |
+| システムベンチ | c5.9xlarge | 1       |
 
-### Software version
+### ソフトウェアバージョン {#software-version}
 
-| Service type | Software version |
-|:----------|:-----------|
-| PD        | v5.3.0 and v5.4.0   |
-| TiDB      | v5.3.0 and v5.4.0   |
-| TiKV      | v5.3.0 and v5.4.0   |
-| Sysbench  | 1.1.0-ead2689   |
+| サービスの種類 | ソフトウェアバージョン       |
+| :------ | :---------------- |
+| PD      | v5.3.0 および v5.4.0 |
+| TiDB    | v5.3.0 および v5.4.0 |
+| TiKV    | v5.3.0 および v5.4.0 |
+| システムベンチ | 1.1.0-ead2689     |
 
-### Parameter configuration
+### パラメータ設定 {#parameter-configuration}
 
-TiDB v5.4.0 and TiDB v5.3.0 use the same configuration.
+TiDB v5.4.0 と TiDB v5.3.0 は同じ構成を使用します。
 
-#### TiDB parameter configuration
-
-{{< copyable "" >}}
+#### TiDBパラメータの設定 {#tidb-parameter-configuration}
 
 ```yaml
 log.level: "error"
@@ -43,9 +41,7 @@ prepared-plan-cache.enabled: true
 tikv-client.max-batch-wait-time: 2000000
 ```
 
-#### TiKV parameter configuration
-
-{{< copyable "" >}}
+#### TiKVパラメータ設定 {#tikv-parameter-configuration}
 
 ```yaml
 storage.scheduler-worker-pool-size: 5
@@ -61,9 +57,7 @@ readpool.storage.normal-concurrency: 10
 pessimistic-txn.pipelined: true
 ```
 
-#### TiDB global variable configuration
-
-{{< copyable "sql" >}}
+#### TiDB グローバル変数の設定 {#tidb-global-variable-configuration}
 
 ```sql
 set global tidb_hashagg_final_concurrency=1;
@@ -74,11 +68,9 @@ set global tidb_guarantee_linearizability = 0;
 set global tidb_enable_clustered_index = 1;
 ```
 
-#### HAProxy configuration - haproxy.cfg
+#### HAProxy 構成 - haproxy.cfg {#haproxy-configuration-haproxy-cfg}
 
-For more details about how to use HAProxy on TiDB, see [Best Practices for Using HAProxy in TiDB](/best-practices/haproxy-best-practices.md).
-
-{{< copyable "" >}}
+TiDB で HAProxy を使用する方法の詳細については、 [TiDB で HAProxy を使用するためのベスト プラクティス](/best-practices/haproxy-best-practices.md)を参照してください。
 
 ```yaml
 global                                     # Global configuration.
@@ -104,20 +96,18 @@ listen tidb-cluster                        # Database load balancing.
    server tidb-3 10.9.64.166:4000 check inter 2000 rise 2 fall 3
 ```
 
-## Test plan
+## テスト計画 {#test-plan}
 
-1. Deploy TiDB v5.4.0 and v5.3.0 using TiUP.
-2. Use Sysbench to import 16 tables, each table with 10 million rows of data.
-3. Execute the `analyze table` statement on each table.
-4. Back up the data used for restore before different concurrency tests, which ensures data consistency for each test.
-5. Start the Sysbench client to perform the `point_select`, `read_write`, `update_index`, and `update_non_index` tests. Perform stress tests on TiDB via HAProxy. For each concurrency under each workload, the test takes 20 minutes.
-6. After each type of test is completed, stop the cluster, overwrite the cluster with the backup data in step 4, and restart the cluster.
+1.  TiUPを使用して TiDB v5.4.0 および v5.3.0をデプロイ。
+2.  Sysbench を使用して、各テーブルに 1,000 万行のデータが含まれる 16 のテーブルをインポートします。
+3.  各テーブルに対して`analyze table`ステートメントを実行します。
+4.  さまざまな同時実行テストの前に、復元に使用されるデータをバックアップします。これにより、各テストのデータの一貫性が確保されます。
+5.  Sysbench クライアントを起動して、 `point_select` 、 `read_write` 、 `update_index` 、および`update_non_index`テストを実行します。 HAProxy を介して TiDB でストレス テストを実行します。各ワークロードでの同時実行ごとに、テストには 20 分かかります。
+6.  各種類のテストが完了したら、クラスターを停止し、手順 4 のバックアップ データでクラスターを上書きし、クラスターを再起動します。
 
-### Prepare test data
+### テストデータの準備 {#prepare-test-data}
 
-Run the following command to prepare the test data:
-
-{{< copyable "shell-regular" >}}
+次のコマンドを実行してテスト データを準備します。
 
 ```bash
 sysbench oltp_common \
@@ -132,11 +122,9 @@ sysbench oltp_common \
     prepare --tables=16 --table-size=10000000
 ```
 
-### Perform the test
+### テストを実行する {#perform-the-test}
 
-Run the following command to perform the test:
-
-{{< copyable "shell-regular" >}}
+次のコマンドを実行してテストを実行します。
 
 ```bash
 sysbench $testname \
@@ -151,52 +139,52 @@ sysbench $testname \
     run --tables=16 --table-size=10000000
 ```
 
-## Test results
+## 試験結果 {#test-results}
 
-### Point Select performance
+### ポイントセレクト性能 {#point-select-performance}
 
-| Threads   | v5.3.0 TPS | v5.4.0 TPS  | v5.3.0 95% latency (ms) | v5.4.0 95% latency (ms)   | TPS improvement (%)  |
-|:----------|:----------|:----------|:----------|:----------|:----------|
-|300|266041.84|264345.73|1.96|2.07|-0.64|
-|600|351782.71|348715.98|3.43|3.49|-0.87|
-|900|386553.31|399777.11|5.09|4.74|3.42|
+| スレッド | v5.3.0 TPS | v5.4.0 TPS | v5.3.0 95%レイテンシー(ミリ秒) | v5.4.0 95%レイテンシー(ミリ秒) | TPS の向上 (%) |
+| :--- | :--------- | :--------- | :-------------------- | :-------------------- | :---------- |
+| 300  | 266041.84  | 264345.73  | 1.96                  | 2.07                  | -0.64       |
+| 600  | 351782.71  | 348715.98  | 3.43                  | 3.49                  | -0.87       |
+| 900  | 386553.31  | 399777.11  | 5.09                  | 4.74                  | 3.42        |
 
-Compared with v5.3.0, the Point Select performance of v5.4.0 is slightly improved by 0.64%.
+v5.3.0 と比較して、v5.4.0 のポイント選択パフォーマンスは 0.64% わずかに向上しています。
 
 ![Point Select](/media/sysbench_v530vsv540_point_select.png)
 
-### Update Non-index performance
+### インデックス以外のパフォーマンスを更新する {#update-non-index-performance}
 
-| Threads   | v5.3.0 TPS | v5.4.0 TPS  | v5.3.0 95% latency (ms) | v5.4.0 95% latency (ms)   | TPS improvement (%)  |
-|:----------|:----------|:----------|:----------|:----------|:----------|
-|300|40804.31|41187.1|11.87|11.87|0.94|
-|600|51239.4|53172.03|20.74|19.65|3.77|
-|900|57897.56|59666.8|27.66|27.66|3.06|
+| スレッド | v5.3.0 TPS | v5.4.0 TPS | v5.3.0 95%レイテンシー(ミリ秒) | v5.4.0 95%レイテンシー(ミリ秒) | TPS の向上 (%) |
+| :--- | :--------- | :--------- | :-------------------- | :-------------------- | :---------- |
+| 300  | 40804.31   | 41187.1    | 11.87                 | 11.87                 | 0.94        |
+| 600  | 51239.4    | 53172.03   | 20.74                 | 19.65                 | 3.77        |
+| 900  | 57897.56   | 59666.8    | 27.66                 | 27.66                 | 3.06        |
 
-Compared with v5.3.0, the Update Non-index performance of v5.4.0 is improved by 2.59%.
+v5.3.0 と比較して、v5.4.0 の非インデックス更新のパフォーマンスは 2.59% 向上しています。
 
 ![Update Non-index](/media/sysbench_v530vsv540_update_non_index.png)
 
-### Update Index performance
+### インデックスのパフォーマンスを更新する {#update-index-performance}
 
-| Threads   | v5.3.0 TPS | v5.4.0 TPS  | v5.3.0 95% latency (ms) | v5.4.0 95% latency (ms)   | TPS improvement (%)  |
-|:----------|:----------|:----------|:----------|:----------|:----------|
-|300|17737.82|18716.5|26.2|24.83|5.52|
-|600|21614.39|22670.74|44.98|42.61|4.89|
-|900|23933.7|24922.05|62.19|61.08|4.13|
+| スレッド | v5.3.0 TPS | v5.4.0 TPS | v5.3.0 95%レイテンシー(ミリ秒) | v5.4.0 95%レイテンシー(ミリ秒) | TPS の向上 (%) |
+| :--- | :--------- | :--------- | :-------------------- | :-------------------- | :---------- |
+| 300  | 17737.82   | 18716.5    | 26.2                  | 24.83                 | 5.52        |
+| 600  | 21614.39   | 22670.74   | 44.98                 | 42.61                 | 4.89        |
+| 900  | 23933.7    | 24922.05   | 62.19                 | 61.08                 | 4.13        |
 
-Compared with v5.3.0, the Update Index performance of v5.4.0 is improved by 4.85%.
+v5.3.0 と比較して、v5.4.0 の更新インデックスのパフォーマンスは 4.85% 向上しています。
 
 ![Update Index](/media/sysbench_v530vsv540_update_index.png)
 
-### Read Write performance
+### 読み取り/書き込みパフォーマンス {#read-write-performance}
 
-| Threads   | v5.3.0 TPS  | v5.4.0 TPS | v5.3.0 95% latency (ms) | v5.4.0 95% latency (ms)   | TPS improvement (%)  |
-|:----------|:----------|:----------|:----------|:----------|:----------|
-|300|3810.78|3929.29|108.68|106.75|3.11|
-|600|4514.28|4684.64|193.38|186.54|3.77|
-|900|4842.49|4988.49|282.25|277.21|3.01|
+| スレッド | v5.3.0 TPS | v5.4.0 TPS | v5.3.0 95%レイテンシー(ミリ秒) | v5.4.0 95%レイテンシー(ミリ秒) | TPS の向上 (%) |
+| :--- | :--------- | :--------- | :-------------------- | :-------------------- | :---------- |
+| 300  | 3810.78    | 3929.29    | 108.68                | 106.75                | 3.11        |
+| 600  | 4514.28    | 4684.64    | 193.38                | 186.54                | 3.77        |
+| 900  | 4842.49    | 4988.49    | 282.25                | 277.21                | 3.01        |
 
-Compared with v5.3.0, the Read Write performance of v5.4.0 is improved by 3.30%.
+v5.3.0 と比較して、v5.4.0 の読み取り/書き込みパフォーマンスは 3.30% 向上しています。
 
 ![Read Write](/media/sysbench_v530vsv540_read_write.png)

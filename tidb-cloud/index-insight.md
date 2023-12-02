@@ -3,38 +3,38 @@ title: Index Insight (Beta)
 summary: Learn how to use the Index Insight feature in TiDB Cloud and obtain index recommendations for slow queries.
 ---
 
-# Index Insight (Beta)
+# インデックスインサイト（ベータ版） {#index-insight-beta}
 
-The Index Insight (beta) feature in TiDB Cloud provides powerful capabilities to optimize query performance by offering index recommendations for slow queries that are not using indexes effectively. This document walks you through the steps to enable and utilize the Index Insight feature effectively.
+TiDB Cloudの Index Insight (ベータ) 機能は、インデックスを効果的に使用していない遅いクエリに対してインデックスの推奨を提供することで、クエリのパフォーマンスを最適化する強力な機能を提供します。このドキュメントでは、Index Insight 機能を有効にして効果的に利用する手順について説明します。
 
-> **Note:**
+> **注記：**
 >
-> Index Insight is currently in beta and only available for [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) clusters.
+> Index Insight は現在ベータ版であり、 [TiDB専用](/tidb-cloud/select-cluster-tier.md#tidb-dedicated)クラスターでのみ使用できます。
 
-## Introduction
+## 導入 {#introduction}
 
-The Index Insight feature provides you with the following benefits:
+Index Insight 機能には次の利点があります。
 
-- Enhanced query performance: Index Insight identifies slow queries and suggests appropriate indexes for them, thereby speeding up query execution, reducing response time, and improving user experience.
-- Cost efficiency: By using Index Insight to optimize query performance, the need for extra computing resources is reduced, enabling you to use existing infrastructure more effectively. This can potentially lead to operational cost savings.
-- Simplified optimization process: Index Insight simplifies the identification and implementation of index improvements, eliminating the need for manual analysis and guesswork. As a result, you can save time and effort with accurate index recommendations.
-- Improved application efficiency: By using Index Insight to optimize database performance, applications running on TiDB Cloud can handle larger workloads and serve more users concurrently, which makes scaling operations of applications more efficient.
+-   クエリのパフォーマンスの強化: Index Insight は遅いクエリを特定し、それらに適切なインデックスを提案します。これにより、クエリの実行が高速化され、応答時間が短縮され、ユーザー エクスペリエンスが向上します。
+-   コスト効率: Index Insight を使用してクエリ パフォーマンスを最適化すると、追加のコンピューティング リソースの必要性が減り、既存のインフラストラクチャをより効果的に使用できるようになります。これにより、運用コストの削減につながる可能性があります。
+-   簡素化された最適化プロセス: Index Insight は、インデックスの改善点の特定と実装を簡素化し、手動による分析や推測の必要性を排除します。その結果、正確なインデックス推奨により時間と労力を節約できます。
+-   アプリケーション効率の向上: Index Insight を使用してデータベースのパフォーマンスを最適化することで、 TiDB Cloud上で実行されるアプリケーションはより大きなワークロードを処理し、より多くのユーザーに同時にサービスを提供できるため、アプリケーションのスケーリング操作がより効率的になります。
 
-## Usage
+## 使用法 {#usage}
 
-This section introduces how to enable the Index Insight feature and obtain recommended indexes for slow queries.
+このセクションでは、インデックス インサイト機能を有効にして、遅いクエリに対して推奨されるインデックスを取得する方法を紹介します。
 
-### Before you begin
+### あなたが始める前に {#before-you-begin}
 
-Before enabling the Index Insight feature, make sure that you have created a TiDB Dedicated cluster. If you do not have one, follow the steps in [Create a TiDB Dedicated cluster](/tidb-cloud/create-tidb-cluster.md) to create one.
+Index Insight 機能を有効にする前に、TiDB 専用クラスターを作成していることを確認してください。お持ちでない場合は、 [TiDB 専用クラスターの作成](/tidb-cloud/create-tidb-cluster.md)の手順に従って作成してください。
 
-### Step 1: Enable Index Insight
+### ステップ 1: Index Insight を有効にする {#step-1-enable-index-insight}
 
-1. In the [TiDB Cloud console](https://tidbcloud.com), navigate to the cluster overview page of your TiDB Dedicated cluster, and then click **Diagnosis** in the left navigation pane.
+1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、TiDB 専用クラスターのクラスター概要ページに移動し、左側のナビゲーション ペインで**[診断]**をクリックします。
 
-2. Click the **Index Insight BETA** tab. The **Index Insight overview** page is displayed.
+2.  **「Index Insight BETA」**タブをクリックします。 **Index Insight の概要**ページが表示されます。
 
-3. To use the Index Insight feature, you need to create a dedicated SQL user, which is used to trigger the feature and receive index recommendations. The following SQL statements create a new SQL user with required privileges, including read privilege for `information_schema` and `mysql`, and `PROCESS` and `REFERENCES` privileges for all databases. Replace `'index_insight_user'` and `'random_password'` with your values.
+3.  Index Insight 機能を使用するには、専用の SQL ユーザーを作成する必要があります。このユーザーは、機能をトリガーし、インデックスの推奨事項を受け取るために使用されます。次の SQL ステートメントは、必要な権限( `information_schema`と`mysql`に対する読み取り権限、すべてのデータベースに対する`PROCESS`と`REFERENCES`権限)を持つ新しい SQL ユーザーを作成します。 `'index_insight_user'`と`'random_password'`実際の値に置き換えます。
 
     ```sql
     CREATE user 'index_insight_user'@'%' IDENTIFIED by 'random_password';
@@ -44,102 +44,82 @@ Before enabling the Index Insight feature, make sure that you have created a TiD
     FLUSH PRIVILEGES;
     ```
 
-    > **Note:**
+    > **注記：**
     >
-    > To connect to your TiDB Dedicated cluster, see [Connect to a TiDB Dedicated cluster](/tidb-cloud/connect-to-tidb-cluster.md).
+    > TiDB 専用クラスターに接続するには、 [TiDB 専用クラスターに接続する](/tidb-cloud/connect-to-tidb-cluster.md)を参照してください。
 
-4. Enter the username and password of the SQL user created in the preceding step. Then, click **Activate** to initiate the activation process.
+4.  前の手順で作成した SQL ユーザーのユーザー名とパスワードを入力します。次に、 **「アクティブ化」**をクリックしてアクティブ化プロセスを開始します。
 
-### Step 2: Manually trigger Index Insight
+### ステップ 2: Index Insight を手動でトリガーする {#step-2-manually-trigger-index-insight}
 
-To obtain index recommendations for slow queries, you can manually trigger the Index Insight feature by clicking **Check Up** in the upper-right corner of the **Index Insight overview** page.
+遅いクエリに対するインデックスの推奨事項を取得するには、[インデックス インサイト]**概要**ページの右上隅にある**[チェックアップ]**をクリックして、インデックス インサイト機能を手動でトリガーできます。
 
-Then, the feature begins scanning slow queries from the past three hours. After the scan finishes, it provides a list of index recommendations based on its analysis.
+次に、この機能は過去 3 時間の遅いクエリのスキャンを開始します。スキャンが完了すると、分析に基づいてインデックスの推奨事項のリストが提供されます。
 
-### Step 3: View index recommendations
+### ステップ 3: インデックスの推奨事項をビュー {#step-3-view-index-recommendations}
 
-To view the details of a specific index recommendation, click the insight from the list. The **Index Insight Details** page is displayed.
+特定のインデックス推奨の詳細を表示するには、リストからインサイトをクリックします。 **[インデックス インサイトの詳細]**ページが表示されます。
 
-On this page, you can find the index recommendations, related slow queries, execution plans, and relevant metrics. This information helps you better understand the performance issues and evaluate the potential impact of implementing the index recommendations.
+このページでは、インデックスの推奨事項、関連する遅いクエリ、実行プラン、および関連するメトリクスを見つけることができます。この情報は、パフォーマンスの問題をより深く理解し、インデックス推奨事項の実装による潜在的な影響を評価するのに役立ちます。
 
-### Step 4: Implement index recommendations
+### ステップ 4: インデックスの推奨事項を実装する {#step-4-implement-index-recommendations}
 
-Before implementing the index recommendations, you need to first review and evaluate the recommendations from the **Index Insight Details** page.
+インデックスの推奨事項を実装する前に、まず**[インデックス インサイトの詳細]**ページで推奨事項を確認して評価する必要があります。
 
-To implement the index recommendations, follow these steps:
+インデックスの推奨事項を実装するには、次の手順に従います。
 
-1. Evaluate the impact of the proposed index on existing queries and workload.
-2. Consider the storage requirements and potential trade-offs associated with the index implementation.
-3. Use appropriate database management tools to create the index recommendations on the relevant tables.
-4. Monitor the performance after implementing the indexes to assess the improvements.
+1.  提案されたインデックスが既存のクエリとワークロードに及ぼす影響を評価します。
+2.  storage要件と、インデックスの実装に関連する潜在的なトレードオフを考慮してください。
+3.  適切なデータベース管理ツールを使用して、関連するテーブルに推奨されるインデックスを作成します。
+4.  インデックスを実装した後のパフォーマンスを監視して、改善を評価します。
 
-## Best practices
+## ベストプラクティス {#best-practices}
 
-This section introduces some best practices for using the Index Insight feature.
+このセクションでは、Index Insight 機能を使用するためのベスト プラクティスをいくつか紹介します。
 
-### Regularly trigger Index Insight
+### Index Insight を定期的にトリガーする {#regularly-trigger-index-insight}
 
-To maintain optimized indexes, it is recommended to trigger the Index Insight feature periodically, such as every day, or whenever substantial changes occur in your queries or database schema.
+最適化されたインデックスを維持するには、毎日、またはクエリやデータベース スキーマに大幅な変更が発生したときなど、定期的に Index Insight 機能をトリガーすることをお勧めします。
 
-### Analyze impact before implementing indexes
+### インデックスを導入する前に影響を分析する {#analyze-impact-before-implementing-indexes}
 
-Before implementing the index recommendations, analyze the potential impact on query execution plans, disk space, and any trade-offs involved. Prioritize implementing indexes that provide the most significant performance improvements.
+インデックスの推奨事項を実装する前に、クエリ実行プラン、ディスク容量、および関連するトレードオフに対する潜在的な影響を分析してください。最も大幅なパフォーマンス向上をもたらすインデックスの実装を優先します。
 
-### Monitor performance
+### パフォーマンスを監視する {#monitor-performance}
 
-Regularly monitor query performance after implementing the index recommendations. This helps you confirm the improvements and make further adjustments if necessary.
+インデックスの推奨事項を実装した後は、クエリのパフォーマンスを定期的に監視します。これは、改善点を確認し、必要に応じてさらに調整するのに役立ちます。
 
-## FAQ
+## FAQ {#faq}
 
-This section lists some frequently asked questions about the Index Insight feature.
+このセクションでは、Index Insight 機能に関してよくある質問をいくつか示します。
 
-### How to deactivate Index Insight?
+### Index Insight を非アクティブ化するにはどうすればよいですか? {#how-to-deactivate-index-insight}
 
-To deactivate the Index Insight feature, perform the following steps:
+Index Insight 機能を無効にするには、次の手順を実行します。
 
-1. In the upper-right corner of the **Index Insight overview** page, click **Settings**. The **Index Insight settings** page is displayed.
-2. Click **Deactivate**. A confirmation dialog box is displayed.
-3. Click **OK** to confirm the deactivation.
+1.  **Index Insight の概要**ページの右上隅にある**[設定]**をクリックします。 **Index Insight 設定**ページが表示されます。
+2.  **「非アクティブ化」**をクリックします。確認のダイアログボックスが表示されます。
+3.  **「OK」**をクリックして非アクティブ化を確認します。
 
-    After you deactivate the Index Insight feature, all index recommendations are removed from the **Index Insight overview** page. However, the SQL user created for the feature is not deleted. You can delete the SQL user manually.
+    Index Insight 機能を非アクティブ化すると、すべてのインデックスの推奨事項が**Index Insight の概要**ページから削除されます。ただし、この機能用に作成された SQL ユーザーは削除されません。 SQL ユーザーは手動で削除できます。
 
-### How to delete the SQL user after deactivating Index Insight?
+### Index Insight を非アクティブ化した後に SQL ユーザーを削除するにはどうすればよいですか? {#how-to-delete-the-sql-user-after-deactivating-index-insight}
 
-After you deactivate the Index Insight feature, you can execute the `DROP USER` statement to delete the SQL user created for the feature. The following is an example. Replace `'username'` with your value.
+Index Insight 機能を非アクティブ化した後、 `DROP USER`ステートメントを実行して、この機能用に作成された SQL ユーザーを削除できます。以下は一例です。 `'username'`実際の値に置き換えます。
 
 ```sql
 DROP USER 'username';
 ```
 
-### Why does the `invalid user or password` message show up during activation or check-up?
+### アクティベーションまたはチェックアップ中に<code>invalid user or password</code>メッセージが表示されるのはなぜですか? {#why-does-the-code-invalid-user-or-password-code-message-show-up-during-activation-or-check-up}
 
-The `invalid user or password` message typically prompts when the system cannot authenticate the credentials you provided. This issue might occur due to various reasons, such as incorrect username or password, or an expired or locked user account.
+`invalid user or password`メッセージは通常、指定した資格情報をシステムが認証できない場合にプロンプ​​トを表示します。この問題は、ユーザー名やパスワードが間違っている、ユーザー アカウントの有効期限が切れているかロックされているなど、さまざまな理由で発生する可能性があります。
 
-To resolve this issue, perform the following steps:
+この問題を解決するには、次の手順を実行します。
 
-1. Verify your credentials: Make sure that the username and password you provided are correct. Pay attention to case sensitivity.
-2. Check account status: Make sure that your user account is in active status and not expired or locked. You can confirm this by contacting the system administrator or the relevant support channel.
-3. Create a new SQL user: If this issue is not resolved by the preceding steps, you can create a new SQL user using the following statements. Replace `'index_insight_user'` and `'random_password'` with your values.
-
-    ```sql
-    CREATE user 'index_insight_user'@'%' IDENTIFIED by 'random_password';
-    GRANT SELECT ON information_schema.* TO 'index_insight_user'@'%';
-    GRANT SELECT ON mysql.* TO 'index_insight_user'@'%';
-    GRANT PROCESS, REFERENCES ON *.* TO 'index_insight_user'@'%';
-    FLUSH PRIVILEGES;
-    ```
-
-If you are still facing the issue after following the preceding steps, it is recommended to contact [PingCAP support team](/tidb-cloud/tidb-cloud-support.md).
-
-### Why does the `no sufficient privileges` message show up during activation or check-up?
-
-The `no sufficient privileges` message typically prompts when the SQL user you provided lacks the required privileges to request index recommendations from Index Insight.
-
-To resolve this issue, perform the following steps:
-
-1. Check the user privileges: Confirm if your user account has been granted the required privileges, including read privilege for `information_schema` and `mysql`, and `PROCESS` and `REFERENCES` privileges for all databases.
-
-2. Create a new SQL user: If this issue is not resolved by the preceding steps, you can create a new SQL user using the following statements. Replace `'index_insight_user'` and `'random_password'` with your values.
+1.  資格情報を確認する: 指定したユーザー名とパスワードが正しいことを確認してください。大文字と小文字の区別に注意してください。
+2.  アカウントのステータスを確認する: ユーザー アカウントがアクティブなステータスにあり、期限切れまたはロックされていないことを確認します。これを確認するには、システム管理者または関連するサポート チャネルに問い合わせてください。
+3.  新しい SQL ユーザーを作成する: 前の手順でこの問題が解決されない場合は、次のステートメントを使用して新しい SQL ユーザーを作成できます。 `'index_insight_user'`と`'random_password'`を実際の値に置き換えます。
 
     ```sql
     CREATE user 'index_insight_user'@'%' IDENTIFIED by 'random_password';
@@ -149,22 +129,42 @@ To resolve this issue, perform the following steps:
     FLUSH PRIVILEGES;
     ```
 
-If you are still facing the issue after following the preceding steps, it is recommended to contact [PingCAP support team](/tidb-cloud/tidb-cloud-support.md).
+前述の手順を実行しても問題が解決しない場合は、 [PingCAP サポート チーム](/tidb-cloud/tidb-cloud-support.md)に連絡することをお勧めします。
 
-### Why does the `operations may be too frequent` message show up during using Index Insight?
+### アクティベーションまたはチェックアップ中に<code>no sufficient privileges</code>メッセージが表示されるのはなぜですか? {#why-does-the-code-no-sufficient-privileges-code-message-show-up-during-activation-or-check-up}
 
-The `operations may be too frequent` message typically prompts when you have exceeded the rate or usage limit set by Index Insight.
+`no sufficient privileges`メッセージは通常、指定した SQL ユーザーに Index Insight からのインデックス推奨を要求するために必要な権限がない場合にプロンプ​​トを表示します。
 
-To resolve this issue, perform the following steps:
+この問題を解決するには、次の手順を実行します。
 
-1. Slow down operations: If you receive this message, you need to decrease your operation frequency on Index Insight.
-2. Contact support: If the issue persists, contact [PingCAP support team](/tidb-cloud/tidb-cloud-support.md) and provide details of the error message, your actions, and any other relevant information.
+1.  ユーザー権限を確認する: ユーザー アカウントに、すべてのデータベースに対する`information_schema`と`mysql`の読み取り権限、 `PROCESS`と`REFERENCES`権限など、必要な権限が付与されているかどうかを確認します。
 
-### Why does the `internal error` message show up during using Index Insight?
+2.  新しい SQL ユーザーを作成する: 前の手順でこの問題が解決されない場合は、次のステートメントを使用して新しい SQL ユーザーを作成できます。 `'index_insight_user'`と`'random_password'`を実際の値に置き換えます。
 
-The `internal error` message typically prompts when the system encounters an unexpected error or issue. This error message is general and does not provide details about the underlying cause.
+    ```sql
+    CREATE user 'index_insight_user'@'%' IDENTIFIED by 'random_password';
+    GRANT SELECT ON information_schema.* TO 'index_insight_user'@'%';
+    GRANT SELECT ON mysql.* TO 'index_insight_user'@'%';
+    GRANT PROCESS, REFERENCES ON *.* TO 'index_insight_user'@'%';
+    FLUSH PRIVILEGES;
+    ```
 
-To resolve this issue, perform the following steps:
+前述の手順を実行しても問題が解決しない場合は、 [PingCAP サポート チーム](/tidb-cloud/tidb-cloud-support.md)に連絡することをお勧めします。
 
-1. Retry the operation: Refresh the page or try the operation again. The error might be temporary and can be resolved by a simple retry.
-2. Contact support: If the issue persists, contact [PingCAP support team](/tidb-cloud/tidb-cloud-support.md) and provide details of the error message, your actions, and any other relevant information.
+### Index Insight の使用中に<code>operations may be too frequent</code>というメッセージが表示されるのはなぜですか? {#why-does-the-code-operations-may-be-too-frequent-code-message-show-up-during-using-index-insight}
+
+`operations may be too frequent`メッセージは通常、Index Insight によって設定されたレートまたは使用制限を超過した場合にプロンプ​​トを表示します。
+
+この問題を解決するには、次の手順を実行します。
+
+1.  操作を遅くしてください: このメッセージが表示された場合は、Index Insight での操作頻度を減らす必要があります。
+2.  サポートに連絡する: 問題が解決しない場合は、 [PingCAP サポート チーム](/tidb-cloud/tidb-cloud-support.md)に連絡し、エラー メッセージの詳細、アクション、その他の関連情報を提供してください。
+
+### Index Insight の使用中に<code>internal error</code>メッセージが表示されるのはなぜですか? {#why-does-the-code-internal-error-code-message-show-up-during-using-index-insight}
+
+`internal error`メッセージは通常、システムで予期しないエラーまたは問題が発生したときに表示されます。このエラー メッセージは一般的なものであり、根本的な原因に関する詳細は示されていません。
+
+この問題を解決するには、次の手順を実行します。
+
+1.  操作を再試行します: ページを更新するか、操作を再試行してください。エラーは一時的なものである可能性があり、簡単な再試行で解決できます。
+2.  サポートに連絡する: 問題が解決しない場合は、 [PingCAP サポート チーム](/tidb-cloud/tidb-cloud-support.md)に連絡し、エラー メッセージの詳細、アクション、その他の関連情報を提供してください。

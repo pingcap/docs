@@ -2,216 +2,216 @@
 title: TiDB 3.0 GA Release Notes
 ---
 
-# TiDB 3.0 GA Release Notes
+# TiDB 3.0 GA リリース ノート {#tidb-3-0-ga-release-notes}
 
-Release date: June 28, 2019
+発売日：2019年6月28日
 
-TiDB version: 3.0.0
+TiDB バージョン: 3.0.0
 
-TiDB Ansible version: 3.0.0
+TiDB Ansible バージョン: 3.0.0
 
-## Overview
+## 概要 {#overview}
 
-On June 28, 2019, TiDB 3.0 GA is released. The corresponding TiDB Ansible version is 3.0.0. Compared with TiDB 2.1, this release has greatly improved in the following aspects:
+2019 年 6 月 28 日に、TiDB 3.0 GA がリリースされました。対応する TiDB Ansible バージョンは 3.0.0 です。 TiDB 2.1 と比較して、このリリースは次の点で大幅に改善されています。
 
-- Stability. TiDB 3.0 has demonstrated long-term stability for large-scale clusters with up to 150+ nodes and 300+ TB of storage.
-- Usability. TiDB 3.0 has multi-facet improvements in usability, including standardized slow query logs, well-developed log file specification, and new features such as `EXPLAIN ANALYZE` and SQL Trace to save operation costs for users.
-- Performance. The performance of TiDB 3.0 is 4.5 times greater than TiDB 2.1 in TPC-C benchmarks, and over 1.5 times in Sysbench benchmarks. Thanks to the support for Views, TPC-H 50G Q15 can now run normally.
-- New features including Window Functions, Views (**Experimental**), partitioned tables, the plugin framework, pessimistic locking (**Experimental**), and `SQL Plan Management`.
+-   安定性。 TiDB 3.0 は、最大 150 以上のノードと 300 TB 以上のstorage大規模クラスターの長期安定性を実証しました。
+-   使いやすさ。 TiDB 3.0 では、標準化されたスロー クエリ ログ、よく開発されたログ ファイル仕様、ユーザーの運用コストを節約するための`EXPLAIN ANALYZE`や SQL トレースなどの新機能など、使いやすさが多面的に向上しています。
+-   パフォーマンス。 TiDB 3.0 のパフォーマンスは、TPC-C ベンチマークでは TiDB 2.1 の 4.5 倍、Sysbench ベンチマークでは 1.5 倍以上です。 View のサポートのおかげで、TPC-H 50G Q15 は正常に実行できるようになりました。
+-   ウィンドウ関数、ビュー (**Experimental**)、パーティション テーブル、プラグイン フレームワーク、悲観的ロック (**Experimental**)、および`SQL Plan Management`を含む新機能。
 
-## TiDB
+## TiDB {#tidb}
 
-+ New Features
-    - Support Window Functions; compatible with all window functions in MySQL 8.0, including `NTILE`, `LEAD`, `LAG`, `PERCENT_RANK`, `NTH_VALUE`, `CUME_DIST`, `FIRST_VALUE` , `LAST_VALUE`, `RANK`, `DENSE_RANK`, and `ROW_NUMBER`
-    - Support Views (**Experimental**)
-    - Improve Table Partition
-        - Support Range Partition
-        - Support Hash Partition
-    - Add the plug-in framework, supporting plugins such as IP Whitelist (**Enterprise**) and Audit Log (**Enterprise**).
-    - Support the SQL Plan Management function to create SQL execution plan binding to ensure query stability (**Experimental**)
-+ SQL Optimizer
-    - Optimize the `NOT EXISTS` subquery and convert it to `Anti Semi Join` to improve performance
-    - Optimize the constant propagation on the `Outer Join`, and add the optimization rule of `Outer Join` elimination to reduce non-effective computations and improve performance
-    - Optimize the `IN` subquery to execute `Inner Join` after aggregation to improve performance
-    - Optimize `Index Join` to adapt to more scenarios
-    - Improve the Partition Pruning optimization rule of Range Partition
-    - Optimize the query logic for `_tidb_rowid`to avoid full table scan and improve performance
-    - Match more prefix columns of the indexes when extracting access conditions of composite indexes if there are relevant columns in the filter to improve performance
-    - Improve the accuracy of cost estimates by using order correlation between columns
-    - Optimize `Join Order` based on the greedy strategy and the dynamic programming algorithm to speed up the join operation of multiple tables
-    - Support Skyline Pruning, with some rules to prevent the execution plan from relying too heavily on statistics to improve query stability
-    - Improve the accuracy of row count estimation for single-column indexes with NULL values
-    - Support `FAST ANALYZE` that randomly samples in each Region to avoid full table scan and improve performance with statistics collection
-    - Support the incremental Analyze operation on monotonically increasing index columns to improve performance with statistics collection
-    - Support using subqueries in the `DO` statement
-    - Support using `Index Join` in transactions
-    - Optimize `prepare`/`execute` to support DDL statements with no parameters
-    - Modify the system behavior to auto load statistics when the `stats-lease` variable value is 0
-    - Support exporting historical statistics
-    - Support the `dump`/`load` correlation of histograms
-+ SQL Execution Engine
-    - Optimize log output: `EXECUTE` outputs user variables and `COMMIT` outputs slow query logs to facilitate troubleshooting
-    - Support the `EXPLAIN ANALYZE` function to improve SQL tuning usability
-    - Support the `admin show next_row_id` command to get the ID of the next row
-    - Add six built-in functions: `JSON_QUOTE`, `JSON_ARRAY_APPEND`, `JSON_MERGE_PRESERVE`, `BENCHMARK` ,`COALESCE`, and `NAME_CONST`
-    - Optimize control logics on the chunk size to dynamically adjust based on the query context, to reduce the SQL execution time and resource consumption
-    - Support tracking and controlling memory usage in three operators - `TableReader`, `IndexReader` and `IndexLookupReader`
-    - Optimize the Merge Join operator to support an empty `ON` condition
-    - Optimize write performance for single tables that contains too many columns
-    - Improve the performance of `admin show ddl jobs` by supporting scanning data in reverse order
-    - Add the `split table region` statement to manually split the table Region to alleviate hotspot issues
-    - Add the `split index region` statement to manually split the index Region to alleviate hotspot issues
-    - Add a blocklist to prohibit pushing down expressions to Coprocessor
-    - Optimize the `Expensive Query` log to print the SQL query in the log when it exceeds the configured limit of execution time or memory
-+ DDL
-    - Support migrating from character set `utf8` to `utf8mb4`
-    - Change the default character set from`utf8` to `utf8mb4`
-    - Add the `alter schema` statement to modify the character set and the collation of the database
-    - Support ALTER algorithm `INPLACE`/`INSTANT`
-    - Support `SHOW CREATE VIEW`
-    - Support `SHOW CREATE USER`
-    - Support fast recovery of mistakenly deleted tables
-    - Support adjusting the number of concurrencies of ADD INDEX dynamically
-    - Add the `pre_split_regions` option that pre-allocates Regions when creating the table using the `CREATE TABLE` statement, to relieve write hot Regions caused by lots of writes after the table creation
-    - Support splitting Regions by the index and range of the table specified using SQL statements to relieve hotspot issues
-    - Add the `ddl_error_count_limit` global variable to limit the number of DDL task retries
-    - Add a feature to use `SHARD_ROW_ID_BITS` to scatter row IDs when the column contains an AUTO_INCREMENT attribute to relieve hotspot issues
-    - Optimize the lifetime of invalid DDL metadata to speed up recovering the normal execution of DDL operations after upgrading the TiDB cluster
-+ Transactions
-    - Support the pessimistic transaction mode (**Experimental**)
-    - Optimize transaction processing logics to adapt to more scenarios:
-        - Change the default value `tidb_disable_txn_auto_retry` to `on`, which means non-auto committed transactions will not be retried
-        - Add the `tidb_batch_commit` system variable to split a transaction into multiple ones to be executed concurrently
-        - Add the `tidb_low_resolution_tso` system variable to control the number of TSOs to obtain in batches and reduce the number of times that transactions request for TSOs, to improve performance in scenarios with relatively low requirement of consistency
-        - Add the `tidb_skip_isolation_level_check` variable to control whether to report errors when the isolation level is set to SERIALIZABLE
-        - Modify the `tidb_disable_txn_auto_retry` system variable to make it work on all retryable errors
-+ Permission Management
-    - Perform permission check on the `ANALYZE`, `USE`, `SET GLOBAL`, and `SHOW PROCESSLIST` statements
-    - Support Role Based Access Control (RBAC) (**Experimental**)
-+ Server
-    - Optimize slow query logs:
-        - Restructure the log format
-        - Optimize the log content
-        - Optimize the log query method to support using the `INFORMATION_SCHEMA.SLOW_QUERY` and `ADMIN SHOW SLOW` statements of the memory table to query slow query logs
-    - Develop a unified log format specification with restructured log system to facilitate collection and analysis by tools
-    - Support using SQL statements to manage TiDB Binlog services, including querying status, enabling TiDB Binlog, maintaining and sending TiDB Binlog strategies.
-    - Support using `unix_socket` to connect to the database
-    - Support `Trace` for SQL statements
-    - Support getting information for a TiDB instance via the `/debug/zip` HTTP interface to facilitate troubleshooting.
-    - Optimize monitoring items to facilitate troubleshooting:
-        - Add the `high_error_rate_feedback_total` monitoring item to monitor the difference between the actual data volume and the estimated data volume based on statistics
-        - Add a QPS monitoring item in the database dimension
-    - Optimize the system initialization process to only allow the DDL owner to perform the initialization. This reduces the startup time for initialization or upgrading.
-    - Optimize the execution logic of `kill query` to improve performance and ensure resource is release properly
-    - Add a startup option `config-check` to check the validity of the configuration file
-    - Add the `tidb_back_off_weight` system variable to control the backoff time of internal error retries
-    - Add the `wait_timeout`and `interactive_timeout` system variables to control the maximum idle connections allowed
-    - Add the connection pool for TiKV to shorten the connection establishing time
-+ Compatibility
-    - Support the `ALLOW_INVALID_DATES` SQL mode
-    - Support the MySQL 320 Handshake protocol
-    - Support manifesting unsigned BIGINT columns as auto-increment columns
-    - Support the `SHOW CREATE DATABASE IF NOT EXISTS` syntax
-    - Optimize the fault tolerance of `load data` for CSV files
-    - Abandon the predicate pushdown operation when the filtering condition contains a user variable to improve the compatibility with MySQL’s behavior of using user variables to simulate Window Functions
+-   新機能
+    -   ウィンドウ関数をサポートします。 MySQL 8.0 のすべてのウィンドウ関数( `NTILE` 、 `LEAD` 、 `LAG` 、 `PERCENT_RANK` 、 `NTH_VALUE` 、 `CUME_DIST` 、 `FIRST_VALUE` 、 `LAST_VALUE` 、 `RANK` 、 `DENSE_RANK` 、 `ROW_NUMBER`を含む) と互換性があります。
+    -   サポートビュー (**Experimental**)
+    -   テーブルパーティションの改善
+        -   サポート範囲パーティション
+        -   ハッシュパーティションのサポート
+    -   プラグイン フレームワークを追加し、IP ホワイトリスト ( **Enterprise** ) や監査ログ ( **Enterprise** ) などのプラグインをサポートします。
+    -   SQL 実行プラン バインディングを作成してクエリの安定性を確保する SQL プラン管理機能をサポート (**Experimental**)
+-   SQLオプティマイザー
+    -   `NOT EXISTS`サブクエリを最適化し、 `Anti Semi Join`に変換してパフォーマンスを向上させます。
+    -   `Outer Join`の定数伝播を最適化し、 `Outer Join`消去法による最適化ルールを追加して非効率な計算を削減し、パフォーマンスを向上させます。
+    -   パフォーマンスを向上させるために、集計後に`Inner Join`サブクエリを実行するように`IN`サブクエリを最適化します。
+    -   `Index Join`最適化してより多くのシナリオに適応する
+    -   レンジパーティションのパーティションプルーニング最適化ルールを改善
+    -   クエリ ロジックを`_tidb_rowid`に最適化して、テーブル全体のスキャンを回避し、パフォーマンスを向上させます。
+    -   パフォーマンスを向上させるためにフィルタ内に関連する列がある場合、複合インデックスのアクセス条件を抽出するときにインデックスのより多くのプレフィックス列と一致します。
+    -   列間の注文相関を使用してコスト見積もりの​​精度を向上させる
+    -   貪欲戦略と動的プログラミング アルゴリズムに基づいて`Join Order`を最適化し、複数のテーブルの結合操作を高速化します。
+    -   Skyline Pruning をサポートし、クエリの安定性を向上させるために実行計画が統計に過度に依存することを防ぐいくつかのルールを備えています。
+    -   NULL 値を含む単一列インデックスの行数推定の精度を向上させます。
+    -   テーブル全体のスキャンを回避し、統計収集のパフォーマンスを向上させるために、各リージョンでランダムにサンプリングするサポート`FAST ANALYZE`
+    -   単調に増加するインデックス列に対する増分分析操作をサポートし、統計収集のパフォーマンスを向上させます。
+    -   `DO`ステートメントでのサブクエリの使用のサポート
+    -   トランザクションでの`Index Join`使用のサポート
+    -   パラメータのない DDL ステートメントをサポートするために`prepare` / `execute`を最適化します。
+    -   `stats-lease`変数値が 0 の場合に統計を自動ロードするようにシステムの動作を変更します。
+    -   履歴統計のエクスポートのサポート
+    -   ヒストグラム`load` `dump`相関をサポート
+-   SQL実行エンジン
+    -   ログ出力の最適化: `EXECUTE`はユーザー変数を出力し、 `COMMIT`はトラブルシューティングを容易にするスロー クエリ ログを出力します。
+    -   SQLチューニングの使いやすさを向上させる`EXPLAIN ANALYZE`機能をサポート
+    -   次の行の ID を取得する`admin show next_row_id`コマンドをサポートします
+    -   6 つの組み込み関数を追加します: `JSON_QUOTE` 、 `JSON_ARRAY_APPEND` 、 `JSON_MERGE_PRESERVE` 、 `BENCHMARK` 、 `COALESCE` 、および`NAME_CONST`
+    -   チャンク サイズの制御ロジックを最適化し、クエリ コンテキストに基づいて動的に調整し、SQL の実行時間とリソース消費を削減します。
+    -   3 つの演算子 ( `TableReader` `IndexReader`および`IndexLookupReader` ) でのメモリ使用量の追跡と制御をサポートします。
+    -   空の`ON`条件をサポートするように Merge Join 演算子を最適化します。
+    -   列が多すぎる単一テーブルの書き込みパフォーマンスを最適化する
+    -   逆順でのデータのスキャンをサポートすることで`admin show ddl jobs`のパフォーマンスを向上させます。
+    -   `split table region`ステートメントを追加してテーブルリージョンを手動で分割し、ホットスポットの問題を軽減します
+    -   `split index region`ステートメントを追加してインデックスリージョンを手動で分割し、ホットスポットの問題を軽減します。
+    -   式をコプロセッサーにプッシュダウンすることを禁止するブロックリストを追加する
+    -   構成された実行時間またはメモリの制限を超えた場合に SQL クエリをログに出力するように`Expensive Query`ログを最適化します。
+-   DDL
+    -   文字セット`utf8`から`utf8mb4`への移行をサポート
+    -   デフォルトの文字セットを`utf8`から`utf8mb4`に変更します
+    -   `alter schema`ステートメントを追加して、データベースの文字セットと照合順序を変更します。
+    -   ALTER アルゴリズム`INPLACE` / `INSTANT`をサポート
+    -   サポート`SHOW CREATE VIEW`
+    -   サポート`SHOW CREATE USER`
+    -   誤って削除されたテーブルの高速リカバリをサポート
+    -   ADD INDEX の同時実行数の動的調整のサポート
+    -   `CREATE TABLE`ステートメントを使用してテーブルを作成するときにリージョンを事前に割り当てる`pre_split_regions`オプションを追加し、テーブル作成後の大量の書き込みによって引き起こされる書き込みホット リージョンを軽減します。
+    -   ホットスポットの問題を軽減するために、SQL ステートメントを使用して指定されたテーブルのインデックスと範囲によるリージョンの分割をサポートします。
+    -   `ddl_error_count_limit`グローバル変数を追加して、DDL タスクの再試行数を制限します。
+    -   ホットスポットの問題を軽減するために、列に AUTO_INCREMENT 属性が含まれる場合に`SHARD_ROW_ID_BITS`を使用して行 ID を分散する機能を追加します。
+    -   無効な DDL メタデータの存続期間を最適化し、TiDB クラスターのアップグレード後の DDL 操作の通常の実行の回復を高速化します。
+-   取引
+    -   悲観的トランザクション モードのサポート (**Experimental**)
+    -   トランザクション処理ロジックを最適化して、より多くのシナリオに適応します。
+        -   デフォルト値`tidb_disable_txn_auto_retry`を`on`に変更します。これは、自動コミットされていないトランザクションは再試行されないことを意味します。
+        -   トランザクションを複数のトランザクションに分割して同時に実行するには、 `tidb_batch_commit`システム変数を追加します。
+        -   `tidb_low_resolution_tso`システム変数を追加して、バッチで取得する TSO の数を制御し、トランザクションが TSO を要求する回数を減らし、一貫性の要件が比較的低いシナリオでのパフォーマンスを向上させます。
+        -   分離レベルがSERIALIZABLEに設定されている場合にエラーを報告するかどうかを制御する`tidb_skip_isolation_level_check`変数を追加します。
+        -   `tidb_disable_txn_auto_retry`システム変数を変更して、すべての再試行可能なエラーで機能するようにします。
+-   権限管理
+    -   `ANALYZE` 、 `USE` 、 `SET GLOBAL` 、および`SHOW PROCESSLIST`ステートメントに対して権限チェックを実行します。
+    -   ロールベースのアクセス制御 (RBAC) のサポート (**Experimental**)
+-   サーバ
+    -   遅いクエリのログを最適化します。
+        -   ログフォーマットを再構築する
+        -   ログの内容を最適化する
+        -   メモリテーブルの`INFORMATION_SCHEMA.SLOW_QUERY`ステートメントと`ADMIN SHOW SLOW`ステートメントを使用したスロー クエリ ログのクエリをサポートするようにログ クエリ メソッドを最適化します。
+    -   ツールによる収集と分析を容易にするために、再構築されたログ システムを使用して統一されたログ形式仕様を開発します。
+    -   SQL ステートメントを使用した TiDB Binlogサービスの管理 (ステータスのクエリ、 TiDB Binlog の有効化、TiDB Binlog戦略の維持および送信など) をサポートします。
+    -   `unix_socket`を使用したデータベースへの接続をサポート
+    -   SQL ステートメントのサポート`Trace`
+    -   トラブルシューティングを容易にするために、 `/debug/zip`インターフェイスを介した TiDB インスタンスの情報の取得をサポートします。
+    -   トラブルシューティングを容易にするために監視項目を最適化します。
+        -   実際のデータ量と統計に基づく推定データ量の差を監視する監視項目を`high_error_rate_feedback_total`追加
+        -   データベース ディメンションに QPS モニタリング項目を追加する
+    -   DDL 所有者のみが初期化を実行できるようにシステム初期化プロセスを最適化します。これにより、初期化またはアップグレードの起動時間が短縮されます。
+    -   `kill query`の実行ロジックを最適化してパフォーマンスを向上させ、リソースが適切に解放されるようにします。
+    -   設定ファイルの有効性を確認するための起動オプション`config-check`を追加します。
+    -   `tidb_back_off_weight`システム変数を追加して、内部エラーの再試行のバックオフ時間を制御します
+    -   `wait_timeout`および`interactive_timeout`システム変数を追加して、許可される最大アイドル接続を制御します
+    -   TiKVの接続プールを追加して接続確立時間を短縮します
+-   互換性
+    -   `ALLOW_INVALID_DATES` SQL モードをサポート
+    -   MySQL 320 ハンドシェイク プロトコルのサポート
+    -   符号なし BIGINT 列を自動インクリメント列としてマニフェスト化するサポート
+    -   `SHOW CREATE DATABASE IF NOT EXISTS`構文をサポートする
+    -   CSV ファイルのフォールト トレランスを`load data`に最適化する
+    -   ユーザー変数を使用してウィンドウ関数をシミュレートする MySQL の動作との互換性を向上させるために、フィルター条件にユーザー変数が含まれている場合は述語プッシュダウン操作を放棄します。
 
-## PD
+## PD {#pd}
 
-+ Support re-creating a cluster from a single node
-+ Migrate Region metadata from etcd to the go-leveldb storage engine to solve the storage bottleneck in etcd for large-scale clusters
-+ API
-    - Add the `remove-tombstone` API to clear Tombstone stores
-    - Add the `ScanRegions` API to batch query Region information
-    - Add the `GetOperator` API to query running operators
-    - Optimize the performance of the `GetStores` API
-+ Configurations
-    - Optimize configuration check logic to avoid configuration item errors
-    - Add `enable-two-way-merge` to control the direction of Region merge
-    - Add `hot-region-schedule-limit` to control the scheduling rate for hot Regions
-    - Add `hot-region-cache-hits-threshold` to identify hotspot when hitting multiple thresholds consecutively
-    - Add the `store-balance-rate` configuration item to control the maximum numbers of balance Region operators allowed per minute
-+ Scheduler Optimizations
-    - Add the store limit mechanism for separately controlling the speed of operators for each store
-    - Support the `waitingOperator` queue to optimize the resource race among different schedulers
-    - Support scheduling rate limit to actively send scheduling operations to TiKV. This improves the scheduling rate by limiting the number of concurrent scheduling tasks on a single node.
-    - Optimize the `Region Scatter` scheduling to be not restrained by the limit mechanism
-    - Add the `shuffle-hot-region` scheduler to facilitate TiKV stability test in scenarios of poor hotspot scheduling
-+ Simulator
-    - Add simulator for data import scenarios
-    - Support setting different heartbeats intervals for the Store
-+ Others
-    - Upgrade etcd to solve the issues of inconsistent log output formats, Leader selection failure in prevote, and lease deadlocking
-    - Develop a unified log format specification with restructured log system to facilitate collection and analysis by tools
-    - Add monitoring metrics including scheduling parameters, cluster label information, and time consumed by PD to process TSO requests, Store ID, and address information.
+-   単一ノードからのクラスターの再作成のサポート
+-   リージョンのメタデータを etcd から go-leveldbstorageエンジンに移行して、大規模クラスターの etcd のstorageボトルネックを解決します。
+-   API
+    -   Tombstone ストアをクリアするための`remove-tombstone` API を追加します
+    -   リージョン情報をバッチクエリするための`ScanRegions` API を追加します
+    -   実行中の演算子をクエリする`GetOperator` API を追加します
+    -   `GetStores` APIのパフォーマンスを最適化する
+-   構成
+    -   構成項目のエラーを回避するために構成チェックロジックを最適化する
+    -   `enable-two-way-merge`を追加してリージョン結合の方向を制御します
+    -   `hot-region-schedule-limit`を追加して、ホット リージョンのスケジューリング レートを制御します
+    -   複数のしきい値に連続して到達した場合にホットスポットを識別するには`hot-region-cache-hits-threshold`を追加します。
+    -   `store-balance-rate`構成項目を追加して、1 分あたりに許可されるバランスリージョンオペレーターの最大数を制御します
+-   スケジューラーの最適化
+    -   店舗ごとにオペレーターの速度を個別に制御するための店舗制限メカニズムを追加します。
+    -   `waitingOperator`キューをサポートして、異なるスケジューラー間のリソース競合を最適化します。
+    -   スケジューリング操作を TiKV にアクティブに送信するためのスケジューリング レート制限をサポートします。これにより、単一ノード上の同時スケジューリング タスクの数が制限されるため、スケジューリング速度が向上します。
+    -   `Region Scatter`制限メカニズムに制約されないようにスケジュールを最適化する
+    -   `shuffle-hot-region`スケジューラを追加して、ホットスポットのスケジューリングが不十分なシナリオでの TiKV 安定性テストを容易にします。
+-   シミュレータ
+    -   データインポートシナリオ用のシミュレーターを追加
+    -   ストアのさまざまなハートビート間隔の設定をサポート
+-   その他
+    -   etcd をアップグレードして、一貫性のないログ出力形式、事前投票でのLeader選択の失敗、およびリースのデッドロックの問題を解決します。
+    -   ツールによる収集と分析を容易にするために、再構築されたログ システムを使用して統一されたログ形式仕様を開発します。
+    -   スケジューリング パラメーター、クラスター ラベル情報、TSO 要求の処理に PD が費やした時間、ストア ID、アドレス情報などのモニタリング メトリックを追加します。
 
-## TiKV
+## TiKV {#tikv}
 
-+ Support distributed GC and concurrent lock resolving for improved GC performance
-+ Support reversed `raw_scan` and `raw_batch_scan`
-+ Support Multi-thread Raftstore and Multi-thread Apply to improve scalabilities, concurrency capacity, and resource usage within a single node. Performance improves by 70% under the same level of pressure
-+ Support batch receiving and sending Raft messages, improving TPS by 7% for write intensive scenarios
-+ Support checking RocksDB Level 0 files before applying snapshots to avoid write stall
-+ Introduce Titan, a key-value plugin that improves write performance for scenarios with value sizes greater than 1KiB, and relieves write amplification in certain degrees
-+ Support the pessimistic transaction mode (**Experimental**)
-+ Support getting monitoring information via HTTP
-+ Modify the semantics of `Insert` to allow Prewrite to succeed only when there is no Key
-+ Develop a unified log format specification with restructured log system to facilitate collection and analysis by tools
-+ Add performance metrics related to configuration information and key bound crossing
-+ Support Local Reader in RawKV to improve performance
-+ Engine
-    - Optimize memory management to reduce memory allocation and copying for `Iterator Key Bound Option`
-    - Support `block cache` sharing among different column families
-+ Server
-    - Reduce context switch overhead from `batch commands`
-    - Remove `txn scheduler`
-    - Add monitoring items related to `read index` and `GC worker`
-+ RaftStore
-    - Support Hibernate Regions to optimize CPU consumption from RaftStore (**Experimental**)
-    - Remove the local reader thread
-+ Coprocessor
-    - Refactor the computation framework to implement vector operators, computation using vector expressions, and vector aggregations to improve performance
-    - Support providing operator execution status for the `EXPLAIN ANALYZE` statement in TiDB
-    - Switch to the `work-stealing` thread pool model to reduce context switch cost
+-   分散 GC と同時ロック解決をサポートして GC パフォーマンスを向上
+-   `raw_scan`と`raw_batch_scan`の反転をサポート
+-   マルチスレッドRaftstoreとマルチスレッド アプライをサポートし、単一ノード内のスケーラビリティ、同時実行容量、リソース使用量を向上させます。同じレベルの圧力下でパフォーマンスが 70% 向上
+-   Raftメッセージのバッチ送受信をサポートし、書き込み集中型のシナリオで TPS を 7% 向上させます。
+-   書き込み停止を回避するために、スナップショットを適用する前に RocksDB レベル 0 ファイルのチェックをサポートします
+-   Titan の導入
+-   悲観的トランザクション モードのサポート (**Experimental**)
+-   HTTP経由での監視情報の取得をサポート
+-   `Insert`のセマンティクスを変更して、キーがない場合にのみ Prewrite が成功できるようにします。
+-   ツールによる収集と分析を容易にするために、再構築されたログ システムを使用して統一されたログ形式仕様を開発します。
+-   構成情報とキー バインド交差に関連するパフォーマンス メトリクスを追加します。
+-   RawKV でローカル リーダーをサポートしてパフォーマンスを向上させる
+-   エンジン
+    -   メモリ管理を最適化して、メモリの割り当てとコピーを削減します`Iterator Key Bound Option`
+    -   異なる列ファミリー間での`block cache`共有のサポート
+-   サーバ
+    -   コンテキストスイッチのオーバーヘッドを`batch commands`から削減
+    -   `txn scheduler`を削除
+    -   `read index`と`GC worker`に関する監視項目を追加
+-   RaftStore
+    -   RaftStore からの CPU 消費を最適化するための Hibernate リージョンのサポート (**Experimental**)
+    -   ローカルリーダースレッドを削除する
+-   コプロセッサー
+    -   計算フレームワークをリファクタリングして、ベクトル演算子、ベクトル式を使用した計算、ベクトル集計を実装し、パフォーマンスを向上させます。
+    -   TiDB の`EXPLAIN ANALYZE`ステートメントのオペレーター実行ステータスの提供をサポート
+    -   `work-stealing`スレッド プール モデルに切り替えてコンテキスト スイッチのコストを削減します。
 
-## Tools
+## ツール {#tools}
 
-+ TiDB Lightning
-    - Support redirected replication of data tables
-    - Support importing CSV files
-    - Improve performance for conversion from SQL to KV pairs
-    - Support batch import of single tables to improve performance
-    - Support separately importing data and indexes for big tables to improve the performance of TiKV-importer
-    - Support filling the missing column using the `row_id` or the default column value when column data is missing in the new file
-    - Support setting a speed limit in `TIKV-importer` when uploading SST files to TiKV
-+ TiDB Binlog
-    - Add the `advertise-addr` configuration in Drainer to support the bridge mode in the container environment
-    - Add the `GetMvccByEncodeKey` function in Pump to speed up querying the transaction status
-    - Support compressing communication data among components to reduce network resource consumption
-    - Add the Arbiter tool that supports reading binlog from Kafka and replicate the data into MySQL
-    - Support filtering out files that don’t require replication via Reparo
-    - Support replicating generated columns
-    - Add the `syncer.sql-mode` configuration item to support using different sql-modes to parse DDL queries
-    - Add the `syncer.ignore-table` configuration item to support filtering tables not to be replicated
-+ sync-diff-inspector
-    - Support checkpoint to record verification status and continue the verification from last saved point after restarting
-    - Add the `only-use-checksum` configuration item to check data consistency by calculating checksum
-    - Support using TiDB statistics and multiple columns to split chunks for comparison to adapt to more scenarios
+-   TiDB Lightning
+    -   データテーブルのリダイレクトされたレプリケーションをサポート
+    -   CSVファイルのインポートをサポート
+    -   SQL から KV ペアへの変換のパフォーマンスの向上
+    -   単一テーブルのバッチインポートをサポートしてパフォーマンスを向上させます
+    -   TiKV インポーターのパフォーマンスを向上させるために、大きなテーブルのデータとインデックスを個別にインポートすることをサポートします。
+    -   新しいファイルで列データが欠落している場合に、 `row_id`またはデフォルトの列値を使用して欠落している列を埋めるサポート
+    -   SST ファイルを TiKV にアップロードする際の速度制限の設定を`TIKV-importer`でサポート
+-   TiDBBinlog
+    -   コンテナ環境でブリッジ モードをサポートするために、 Drainerに`advertise-addr`構成を追加します。
+    -   Pumpに`GetMvccByEncodeKey`関数を追加して、トランザクション ステータスのクエリを高速化します。
+    -   コンポーネント間の通信データの圧縮をサポートし、ネットワークリソースの消費を削減します
+    -   Kafka からのbinlogの読み取りをサポートする Arbiter ツールを追加し、データを MySQL にレプリケートします
+    -   Reparoによるレプリケーションを必要としないファイルのフィルタリングのサポート
+    -   生成された列のレプリケートをサポート
+    -   DDL クエリを解析するためのさまざまな SQL モードの使用をサポートする`syncer.sql-mode`構成項目を追加します。
+    -   複製されないテーブルのフィルタリングをサポートするための`syncer.ignore-table`構成アイテムを追加します
+-   同期差分インスペクター
+    -   チェックポイントをサポートして検証ステータスを記録し、再起動後に最後に保存されたポイントから検証を続行します
+    -   チェックサムを計算してデータの整合性をチェックするための構成アイテムを`only-use-checksum`追加します
+    -   TiDB 統計と複数の列を使用してチャンクを分割して比較し、より多くのシナリオに適応できるようにサポート
 
-## TiDB Ansible
+## TiDB Ansible {#tidb-ansible}
 
-- Upgrade the following monitoring components to a stable version:
-    - Prometheus from V2.2.1 to V2.8.1
-    - Pushgateway from V0.4.0 to V0.7.0
-    - Node_exporter from V0.15.2 to V0.17.0
-    - Alertmanager from V0.14.0 to V0.17.0
-    - Grafana from V4.6.3 to V6.1.6
-    - Ansible from V2.5.14 to V2.7.11
-- Add the TiKV summary monitoring dashboard to view cluster status conveniently
-- Add the TiKV trouble_shooting monitoring dashboard to remove duplicate items and facilitate troubleshooting
-- Add the TiKV details monitoring dashboard to facilitate debugging and troubleshooting
-- Add concurrent check for version consistency during rolling updates to improve the update performance
-- Support deployment and operations for TiDB Lightning
-- Optimize the `table-regions.py` script to support displaying Leader distribution by tables
-- Optimize TiDB monitoring and add latency related monitoring items by SQL categories
-- Modify the operating system version limit to only support the CentOS 7.0+ and Red Hat 7.0+ operating systems
-- Add the monitoring item to predict the maximum QPS of the cluster (hidden by default)
+-   次の監視コンポーネントを安定バージョンにアップグレードします。
+    -   プロメテウス V2.2.1 から V2.8.1 へ
+    -   V0.4.0 から V0.7.0 へのプッシュゲートウェイ
+    -   Node_exporter V0.15.2 から V0.17.0 へ
+    -   アラートマネージャー V0.14.0 から V0.17.0 へ
+    -   Grafana V4.6.3 から V6.1.6 へ
+    -   Ansible V2.5.14 から V2.7.11 へ
+-   TiKV サマリー監視ダッシュボードを追加して、クラスターのステータスを簡単に表示します
+-   TiKV トラブルシューティング監視ダッシュボードを追加して重複項目を削除し、トラブルシューティングを容易にします。
+-   TiKV 詳細監視ダッシュボードを追加して、デバッグとトラブルシューティングを容易にします。
+-   更新のパフォーマンスを向上させるために、ローリング アップデート中にバージョンの整合性の同時チェックを追加します。
+-   TiDB Lightningの導入と運用をサポート
+-   テーブルごとのLeader分布の表示をサポートするように`table-regions.py`スクリプトを最適化します。
+-   TiDB 監視を最適化し、SQL カテゴリごとにレイテンシー関連の監視項目を追加します
+-   CentOS 7.0+ および Red Hat 7.0+ オペレーティング システムのみをサポートするようにオペレーティング システムのバージョン制限を変更します。
+-   クラスターの最大 QPS を予測する監視項目を追加します (デフォルトでは非表示)

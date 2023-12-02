@@ -3,11 +3,11 @@ title: GRANT <privileges> | TiDB SQL Statement Reference
 summary: An overview of the usage of GRANT <privileges> for the TiDB database.
 ---
 
-# `GRANT <privileges>`
+# <code>GRANT &#x3C;privileges></code> {#code-grant-x3c-privileges-code}
 
-This statement allocates privileges to a pre-existing user in TiDB. The privilege system in TiDB follows MySQL, where credentials are assigned based on a database/table pattern. Executing this statement requires the `GRANT OPTION` privilege and all privileges you allocate.
+このステートメントは、TiDB 内の既存のユーザーに権限を割り当てます。 TiDB の権限システムは MySQL に従っており、データベース/テーブルのパターンに基づいて資格情報が割り当てられます。このステートメントを実行するには、 `GRANT OPTION`権限と、割り当てたすべての権限が必要です。
 
-## Synopsis
+## あらすじ {#synopsis}
 
 ```ebnf+diagram
 GrantStmt ::=
@@ -56,7 +56,7 @@ UserSpecList ::=
     UserSpec ( ',' UserSpec )*
 ```
 
-## Examples
+## 例 {#examples}
 
 ```sql
 mysql> CREATE USER 'newuser' IDENTIFIED BY 'mypassword';
@@ -75,21 +75,21 @@ mysql> SHOW GRANTS FOR 'newuser';
 2 rows in set (0.00 sec)
 ```
 
-## MySQL compatibility
+## MySQLの互換性 {#mysql-compatibility}
 
-* Similar to MySQL, the `USAGE` privilege denotes the ability to log into a TiDB server.
-* Column level privileges are not currently supported.
-* Similar to MySQL, when the `NO_AUTO_CREATE_USER` sql mode is not present, the `GRANT` statement will automatically create a new user with an empty password when a user does not exist. Removing this sql-mode (it is enabled by default) presents a security risk.
-* In TiDB, after the `GRANT <privileges>` statement is executed successfully, the execution result takes effect immediately on the current connection. Whereas [in MySQL, for some privileges, the execution results take effect only on subsequent connections](https://dev.mysql.com/doc/refman/8.0/en/privilege-changes.html). See [TiDB #39356](https://github.com/pingcap/tidb/issues/39356) for details.
+-   MySQL と同様に、 `USAGE`特権は TiDBサーバーにログインできることを示します。
+-   カラムレベルの権限は現在サポートされていません。
+-   MySQL と同様に、 `NO_AUTO_CREATE_USER` SQL モードが存在しない場合、ユーザーが存在しない場合、 `GRANT`ステートメントは空のパスワードを持つ新しいユーザーを自動的に作成します。この SQL モードを削除すると (デフォルトで有効になっています)、セキュリティ上のリスクが生じます。
+-   TiDB では、 `GRANT <privileges>`ステートメントが正常に実行されると、実行結果は現在の接続に即座に反映されます。一方、 [MySQL では、一部の権限については、実行結果は後続の接続でのみ有効になります。](https://dev.mysql.com/doc/refman/8.0/en/privilege-changes.html) 。詳細は[TiDB #39356](https://github.com/pingcap/tidb/issues/39356)を参照してください。
 
-## See also
+## こちらも参照 {#see-also}
 
-* [`GRANT <role>`](/sql-statements/sql-statement-grant-role.md)
-* [`REVOKE <privileges>`](/sql-statements/sql-statement-revoke-privileges.md)
-* [SHOW GRANTS](/sql-statements/sql-statement-show-grants.md)
+-   [`GRANT &#x3C;role>`](/sql-statements/sql-statement-grant-role.md)
+-   [`REVOKE &#x3C;privileges>`](/sql-statements/sql-statement-revoke-privileges.md)
+-   [助成金を表示する](/sql-statements/sql-statement-show-grants.md)
 
 <CustomContent platform="tidb">
 
-* [Privilege Management](/privilege-management.md)
+-   [権限管理](/privilege-management.md)
 
 </CustomContent>

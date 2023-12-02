@@ -2,22 +2,22 @@
 title: TiDB 1.0.4 Release Notes
 ---
 
-# TiDB 1.0.4 Release Notes
+# TiDB 1.0.4 リリースノート {#tidb-1-0-4-release-notes}
 
-On December 11, 2017, TiDB 1.0.4 is released with the following updates:
+2017 年 12 月 11 日に、次の更新を含む TiDB 1.0.4 がリリースされました。
 
-## TiDB
+## TiDB {#tidb}
 
-- [Speed up the loading of the statistics when starting the `tidb-server`](https://github.com/pingcap/tidb/pull/5362)
-- [Improve the performance of the `show variables` statement](https://github.com/pingcap/tidb/pull/5363)
-- [Fix a potential issue when using the `Add Index` statement to handle the combined indexes](https://github.com/pingcap/tidb/pull/5323)
-- [Fix a potential issue when using the `Rename Table` statement to move a table to another database](https://github.com/pingcap/tidb/pull/5314)
-- [Accelerate the effectiveness for the `Alter/Drop User` statement](https://github.com/pingcap/tidb/pull/5226)
+-   [`tidb-server`の起動時の統計のロードを高速化します。](https://github.com/pingcap/tidb/pull/5362)
+-   [`show variables`ステートメントのパフォーマンスを向上させる](https://github.com/pingcap/tidb/pull/5363)
+-   [`Add Index`ステートメントを使用して結合インデックスを処理する場合の潜在的な問題を修正](https://github.com/pingcap/tidb/pull/5323)
+-   [`Rename Table`ステートメントを使用してテーブルを別のデータベースに移動する場合の潜在的な問題を修正](https://github.com/pingcap/tidb/pull/5314)
+-   [`Alter/Drop User`ステートメントの有効性を加速する](https://github.com/pingcap/tidb/pull/5226)
 
-## TiKV
+## TiKV {#tikv}
 
-- [Fix a possible performance issue when a snapshot is applied](https://github.com/pingcap/tikv/pull/2559)
-- [Fix the performance issue for reverse scan after removing a lot of data](https://github.com/pingcap/tikv/pull/2559)
-- [Fix the wrong encoded result for the Decimal type under special circumstances](https://github.com/pingcap/tikv/pull/2571)
+-   [スナップショットが適用されるときに発生する可能性のあるパフォーマンスの問題を修正します。](https://github.com/pingcap/tikv/pull/2559)
+-   [大量のデータを削除した後の逆スキャンのパフォーマンスの問題を修正](https://github.com/pingcap/tikv/pull/2559)
+-   [特殊な状況下で Decimal 型の間違ったエンコード結果を修正しました。](https://github.com/pingcap/tikv/pull/2571)
 
-To upgrade from 1.0.3 to 1.0.4, follow the rolling upgrade order of PD -> TiKV -> TiDB.
+1.0.3 から 1.0.4 にアップグレードするには、PD -&gt; TiKV -&gt; TiDB のローリング アップグレードの順序に従います。

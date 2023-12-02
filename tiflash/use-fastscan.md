@@ -3,19 +3,19 @@ title: Use FastScan
 summary: Introduces a way to speed up querying in OLAP scenarios by using FastScan.
 ---
 
-# Use FastScan
+# FastScan を使用する {#use-fastscan}
 
-This document describes how to use FastScan to speed up queries in Online Analytical Processing (OLAP) scenarios.
+このドキュメントでは、FastScan を使用してオンライン分析処理 (OLAP) シナリオでクエリを高速化する方法について説明します。
 
-By default, TiFlash guarantees the precision of query results and data consistency. With the feature FastScan, TiFlash provides more efficient query performance, but does not guarantee the accuracy of query results and data consistency.
+デフォルトでは、 TiFlash はクエリ結果の精度とデータの一貫性を保証します。 FastScan 機能を使用すると、 TiFlash はより効率的なクエリ パフォーマンスを提供しますが、クエリ結果の精度とデータの一貫性は保証されません。
 
-Some OLAP scenarios allow for some tolerance to the accuracy of the query results. In these cases, if you need higher query performance, you can enable the FastScan feature at the session or global level. You can choose whether to enable the FastScan feature by configuring the variable `tiflash_fastscan`.
+一部の OLAP シナリオでは、クエリ結果の精度に対してある程度の許容範囲が許容されます。このような場合、より高いクエリ パフォーマンスが必要な場合は、セッション レベルまたはグローバル レベルで FastScan 機能を有効にすることができます。変数`tiflash_fastscan`を構成することで、FastScan 機能を有効にするかどうかを選択できます。
 
-## Restrictions
+## 制限 {#restrictions}
 
-When the FastScan feature is enabled, your query results might include old data of a table. This means that you might get multiple historical versions of data with the same primary key or data that has been deleted.
+FastScan 機能が有効になっている場合、クエリ結果にはテーブルの古いデータが含まれる可能性があります。これは、同じ主キーを持つデータ、または削除されたデータの履歴バージョンを複数取得する可能性があることを意味します。
 
-For example:
+例えば：
 
 ```sql
 CREATE TABLE t1 (a INT PRIMARY KEY, b INT);
@@ -44,60 +44,52 @@ SELECT * FROM t1;
 +------+------+
 ```
 
-Although TiFlash can automatically initiate compaction of old data in the background, the old data will not be cleaned up physically until it has been compacted and its data versions are older than the GC safe point. After the physical cleaning, the cleaned old data will no longer be returned in FastScan mode. The timing of data compaction is automatically triggered by various factors. You can also manually trigger data compaction using the [`ALTER TABLE ... COMPACT`](/sql-statements/sql-statement-alter-table-compact.md) statement.
+TiFlash はバックグラウンドで古いデータの圧縮を自動的に開始できますが、古いデータは圧縮され、そのデータ バージョンが GC セーフ ポイントよりも古いまで、物理的にクリーンアップされません。物理的なクリーニング後、クリーニングされた古いデータは FastScan モードで返されなくなります。データ圧縮のタイミングは、さまざまな要因によって自動的にトリガーされます。 [`ALTER TABLE ... COMPACT`](/sql-statements/sql-statement-alter-table-compact.md)ステートメントを使用してデータ圧縮を手動でトリガーすることもできます。
 
-## Enable and disable FastScan
+## FastScan を有効または無効にする {#enable-and-disable-fastscan}
 
-By default, the variable is `tiflash_fastscan=OFF` at the session level and global level, that is, the FastScan feature is not enabled. You can view the variable information by using the following statement.
+デフォルトでは、変数はセッション レベルおよびグローバル レベルで`tiflash_fastscan=OFF`です。つまり、FastScan 機能は有効になっていません。次のステートメントを使用して変数情報を表示できます。
 
-```
-show variables like 'tiflash_fastscan';
+    show variables like 'tiflash_fastscan';
 
-+------------------+-------+
-| Variable_name    | Value |
-+------------------+-------+
-| tiflash_fastscan | OFF   |
-+------------------+-------+
-```
+    +------------------+-------+
+    | Variable_name    | Value |
+    +------------------+-------+
+    | tiflash_fastscan | OFF   |
+    +------------------+-------+
 
-```
-show global variables like 'tiflash_fastscan';
+<!---->
 
-+------------------+-------+
-| Variable_name    | Value |
-+------------------+-------+
-| tiflash_fastscan | OFF   |
-+------------------+-------+
-```
+    show global variables like 'tiflash_fastscan';
 
-You can configure the variable `tiflash_fastscan` at the session level and global level. If you need to enable FastScan in the current session, you can do so with the following statement:
+    +------------------+-------+
+    | Variable_name    | Value |
+    +------------------+-------+
+    | tiflash_fastscan | OFF   |
+    +------------------+-------+
 
-```
-set session tiflash_fastscan=ON;
-```
+変数`tiflash_fastscan`はセッション レベルおよびグローバル レベルで設定できます。現在のセッションで FastScan を有効にする必要がある場合は、次のステートメントを使用して有効にすることができます。
 
-You can also set `tiflash_fastscan` at the global level. The new setting will take effect in new sessions, but will not take effect in the current and previous sessions. Besides, in new sessions, `tiflash_fastscan` of the session level and global level will both take the new value.
+    set session tiflash_fastscan=ON;
 
-```
-set global tiflash_fastscan=ON;
-```
+グローバル レベルで`tiflash_fastscan`を設定することもできます。新しい設定は新しいセッションで有効になりますが、現在および以前のセッションでは有効になりません。また、新しいセッションでは、セッション レベルとグローバル レベルの`tiflash_fastscan`が両方とも新しい値になります。
 
-You can disable FastScan using the following statement.
+    set global tiflash_fastscan=ON;
 
-```
-set session tiflash_fastscan=OFF;
-set global tiflash_fastscan=OFF;
-```
+次のステートメントを使用して FastScan を無効にできます。
 
-## Mechanism of FastScan
+    set session tiflash_fastscan=OFF;
+    set global tiflash_fastscan=OFF;
 
-Data in the storage layer of TiFlash is stored in two layers: Delta layer and Stable layer.
+## FastScanの仕組み {#mechanism-of-fastscan}
 
-By default, FastScan is not enabled, and the TableScan operator processes data in the following steps:
+TiFlashのstorageレイヤーのデータは、デルタレイヤーと安定レイヤーの 2 つの層に保存されます。
 
-1. Read data: create separate data streams in the Delta layer and Stable layer to read the respective data.
-2. Sort Merge: merge the data streams created in step 1. Then return the data after sorting in the order of (primary key column, timestamp column).
-3. Range Filter: according to the data range, filter the data generated in step 2, and then return the data.
-4. MVCC + Column Filter: filter the data generated in step 3 through MVCC (that is, filtering the data version according to the primary key column and the timestamp column) and through columns (that is, filtering out unneeded columns), and then return the data.
+デフォルトでは、FastScan は有効になっておらず、TableScan オペレーターは次の手順でデータを処理します。
 
-FastScan gains faster query speed by sacrificing some data consistency. Step 2 and the MVCC part in step 4 in the normal scan process are omitted in FastScan, thus improving query performance.
+1.  データの読み取り: デルタレイヤーと安定レイヤーに個別のデータ ストリームを作成して、それぞれのデータを読み取ります。
+2.  ソートマージ：手順1で作成したデータストリームをマージし、（主キー列、タイムスタンプ列）の順にソートしてデータを返します。
+3.  範囲フィルター: データ範囲に従って、手順 2 で生成されたデータをフィルターし、データを返します。
+4.  MVCC +カラムフィルター: 手順 3 で生成されたデータを MVCC を通じて (つまり、主キー列とタイムスタンプ列に従ってデータ バージョンをフィルター処理して)、列を通じて (つまり、不要な列をフィルターして除外して) フィルター処理し、データ。
+
+FastScan は、データの一貫性をある程度犠牲にすることで、クエリ速度を向上させます。 FastScan では、通常のスキャン プロセスのステップ 2 とステップ 4 の MVCC 部分が省略されるため、クエリのパフォーマンスが向上します。

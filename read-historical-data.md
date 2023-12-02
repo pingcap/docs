@@ -3,53 +3,53 @@ title: Read Historical Data Using the System Variable `tidb_snapshot`
 summary: Learn about how TiDB reads data from history versions using the system variable `tidb_snapshot`.
 ---
 
-# Read Historical Data Using the System Variable `tidb_snapshot`
+# システム変数<code>tidb_snapshot</code>を使用した履歴データの読み取り {#read-historical-data-using-the-system-variable-code-tidb-snapshot-code}
 
-This document describes how to read data from the history versions using the system variable `tidb_snapshot`, including specific usage examples and strategies for saving historical data.
+このドキュメントでは、システム変数`tidb_snapshot`を使用して履歴バージョンからデータを読み取る方法について説明します。これには、履歴データを保存するための具体的な使用例や戦略も含まれます。
 
-> **Note:**
+> **注記：**
 >
-> You can also use the [Stale Read](/stale-read.md) feature to read historical data, which is more recommended.
+> [ステイル読み取り](/stale-read.md)機能を使用して履歴データを読み取ることもできますが、これをお勧めします。
 
-## Feature description
+## 機能の説明 {#feature-description}
 
-TiDB implements a feature to read history data using the standard SQL interface directly without special clients or drivers.
+TiDB は、特別なクライアントやドライバーを使用せずに、標準 SQL インターフェイスを使用して履歴データを直接読み取る機能を実装しています。
 
-> **Note:**
+> **注記：**
 >
-> - Even when data is updated or removed, its history versions can be read using the SQL interface.
-> - When reading historical data, TiDB returns the data with the old table structure even if the current table structure is different.
+> -   データが更新または削除された場合でも、SQL インターフェイスを使用してその履歴バージョンを読み取ることができます。
+> -   履歴データを読み取る場合、TiDB は、現在のテーブル構造が異なっていても、古いテーブル構造でデータを返します。
 
-## How TiDB reads data from history versions
+## TiDB が履歴バージョンからデータを読み取る方法 {#how-tidb-reads-data-from-history-versions}
 
-The [`tidb_snapshot`](/system-variables.md#tidb_snapshot) system variable is introduced to support reading history data. About the `tidb_snapshot` variable:
+[`tidb_snapshot`](/system-variables.md#tidb_snapshot)システム変数は、履歴データの読み取りをサポートするために導入されました。 `tidb_snapshot`変数について:
 
-- The variable is valid in the `SESSION` scope.
-- Its value can be modified using the `SET` statement.
-- The data type for the variable is text.
-- The variable accepts TSO (Timestamp Oracle) and datetime. TSO is a globally unique time service, which is obtained from PD. The acceptable datetime format is "2016-10-08 16:45:26.999". Generally, the datetime can be set using second precision, for example "2016-10-08 16:45:26".
-- When the variable is set, TiDB creates a Snapshot using its value as the timestamp, just for the data structure and there is no any overhead. After that, all the `SELECT` operations will read data from this Snapshot.
+-   変数は`SESSION`スコープで有効です。
+-   その値は`SET`ステートメントを使用して変更できます。
+-   変数のデータ型はテキストです。
+-   変数は TSO (Timestamp Oracle) と日時を受け入れます。 TSO は、PD から取得される、世界的に一意の時刻サービスです。受け入れられる日時形式は「2016-10-08 16:45:26.999」です。通常、日時は秒精度を使用して設定できます (例: &quot;2016-10-08 16:45:26&quot;)。
+-   変数が設定されると、TiDB はその値をタイムスタンプとして使用して、データ構造のためだけにスナップショットを作成し、オーバーヘッドはありません。その後、すべての`SELECT`操作がこのスナップショットからデータを読み取ります。
 
-> **Note:**
+> **注記：**
 >
-> Because the timestamp in TiDB transactions is allocated by Placement Driver (PD), the version of the stored data is also marked based on the timestamp allocated by PD. When a Snapshot is created, the version number is based on the value of the `tidb_snapshot` variable. If there is a large difference between the local time of the TiDB server and the PD server, use the time of the PD server.
+> TiDB トランザクションのタイムスタンプは配置Driver(PD) によって割り当てられるため、保存されたデータのバージョンも PD によって割り当てられたタイムスタンプに基づいてマークされます。スナップショットが作成されるとき、バージョン番号は`tidb_snapshot`変数の値に基づきます。 TiDBサーバーと PDサーバーのローカル時刻に大きな差がある場合は、PDサーバーの時刻を使用します。
 
-After reading data from history versions, you can read data from the latest version by ending the current Session or using the `SET` statement to set the value of the `tidb_snapshot` variable to "" (empty string).
+履歴バージョンからデータを読み取った後、現在のセッションを終了するか、 `SET`ステートメントを使用して`tidb_snapshot`変数の値を &quot;&quot; (空の文字列) に設定することで、最新バージョンからデータを読み取ることができます。
 
-## How TiDB manages the data versions
+## TiDB がデータ バージョンを管理する方法 {#how-tidb-manages-the-data-versions}
 
-TiDB implements Multi-Version Concurrency Control (MVCC) to manage data versions. The history versions of data are kept because each update/removal creates a new version of the data object instead of updating/removing the data object in-place. But not all the versions are kept. If the versions are older than a specific time, they will be removed completely to reduce the storage occupancy and the performance overhead caused by too many history versions.
+TiDB は、データ バージョンを管理するためにマルチバージョン同時実行制御 (MVCC) を実装しています。データ オブジェクトをその場で更新/削除するのではなく、更新/削除のたびにデータ オブジェクトの新しいバージョンが作成されるため、データの履歴バージョンが保持されます。ただし、すべてのバージョンが保存されているわけではありません。バージョンが特定の時点よりも古い場合、storage占有量と、履歴バージョンが多すぎることによって生じるパフォーマンスのオーバーヘッドを削減するために、バージョンは完全に削除されます。
 
-In TiDB, Garbage Collection (GC) runs periodically to remove the obsolete data versions. For GC details, see [TiDB Garbage Collection (GC)](/garbage-collection-overview.md)
+TiDB では、ガベージ コレクション (GC) が定期的に実行され、古いデータ バージョンが削除されます。 GC の詳細については、 [TiDB ガベージ コレクション (GC)](/garbage-collection-overview.md)を参照してください。
 
-Pay special attention to the following:
+以下の点に特に注意してください。
 
-- [`tidb_gc_life_time`](/system-variables.md#tidb_gc_life_time-new-in-v50): This system variable is used to configure the retention time of earlier modifications (default: `10m0s`).
-- The output of `SELECT * FROM mysql.tidb WHERE variable_name = 'tikv_gc_safe_point'`. This is the current `safePoint` where you can read historical data up to. It is updated every time the garbage collection process is run.
+-   [`tidb_gc_life_time`](/system-variables.md#tidb_gc_life_time-new-in-v50) : このシステム変数は、以前の変更の保持時間を構成するために使用されます (デフォルト: `10m0s` )。
+-   `SELECT * FROM mysql.tidb WHERE variable_name = 'tikv_gc_safe_point'`の出力。過去のデータが読めるのは現在`safePoint`までです。ガベージコレクションプロセスが実行されるたびに更新されます。
 
-## Example
+## 例 {#example}
 
-1. At the initial stage, create a table and insert several rows of data:
+1.  最初の段階で、テーブルを作成し、いくつかのデータ行を挿入します。
 
     ```sql
     mysql> create table t (c int);
@@ -59,7 +59,7 @@ Pay special attention to the following:
     Query OK, 3 rows affected (0.00 sec)
     ```
 
-2. View the data in the table:
+2.  テーブル内のデータをビュー。
 
     ```sql
     mysql> select * from t;
@@ -73,7 +73,7 @@ Pay special attention to the following:
     3 rows in set (0.00 sec)
     ```
 
-3. View the timestamp of the table:
+3.  テーブルのタイムスタンプをビュー。
 
     ```sql
     mysql> select now();
@@ -85,14 +85,14 @@ Pay special attention to the following:
     1 row in set (0.00 sec)
     ```
 
-4. Update the data in one row:
+4.  1 行のデータを更新します。
 
     ```sql
     mysql> update t set c=22 where c=2;
     Query OK, 1 row affected (0.00 sec)
     ```
 
-5. Make sure the data is updated:
+5.  データが更新されていることを確認します。
 
     ```sql
     mysql> select * from t;
@@ -106,22 +106,22 @@ Pay special attention to the following:
     3 rows in set (0.00 sec)
     ```
 
-6. Set the `tidb_snapshot` variable whose scope is Session. The variable is set so that the latest version before the value can be read.
+6.  スコープがセッションである`tidb_snapshot`変数を設定します。変数はその値よりも前の最新バージョンを読み込めるように設定されています。
 
-    > **Note:**
+    > **注記：**
     >
-    > In this example, the value is set to be the time before the update operation.
+    > この例では、値は更新操作前の時間に設定されます。
 
     ```sql
     mysql> set @@tidb_snapshot="2016-10-08 16:45:26";
     Query OK, 0 rows affected (0.00 sec)
     ```
 
-    > **Note:**
+    > **注記：**
     >
-    > You should use `@@` instead of `@` before `tidb_snapshot` because `@@` is used to denote the system variable while `@` is used to denote the user variable.
+    > `@@`システム変数を表すのに使用され、 `@`はユーザー変数を表すために使用されるため、 `@` `tidb_snapshot`前に`@@`ではなく 1 を使用する必要があります。
 
-    **Result:** The read from the following statement is the data before the update operation, which is the history data.
+    **結果:**次のステートメントから読み取られたデータは、更新操作前のデータ、つまり履歴データです。
 
     ```sql
     mysql> select * from t;
@@ -135,7 +135,7 @@ Pay special attention to the following:
     3 rows in set (0.00 sec)
     ```
 
-7. Set the `tidb_snapshot` variable to be "" (empty string) and you can read the data from the latest version:
+7.  `tidb_snapshot`変数を &quot;&quot; (空の文字列) に設定すると、最新バージョンからデータを読み取ることができます。
 
     ```sql
     mysql> set @@tidb_snapshot="";
@@ -154,24 +154,24 @@ Pay special attention to the following:
     3 rows in set (0.00 sec)
     ```
 
-    > **Note:**
+    > **注記：**
     >
-    > You should use `@@` instead of `@` before `tidb_snapshot` because `@@` is used to denote the system variable while `@` is used to denote the user variable.
+    > `@@`システム変数を表すのに使用され、 `@`はユーザー変数を表すために使用されるため、 `@` `tidb_snapshot`前に`@@`ではなく 1 を使用する必要があります。
 
-## How to restore historical data
+## 履歴データを復元する方法 {#how-to-restore-historical-data}
 
-Before you restore data from an older version, make sure that Garbage Collection (GC) does not clear the history data while you are working on it. This can be done by setting the `tidb_gc_life_time` variable as the following example shows. Do not forget to set the variable back to the previous value after the restore.
+古いバージョンからデータを復元する前に、作業中にガベージ コレクション (GC) によって履歴データが消去されないことを確認してください。これは、次の例に示すように`tidb_gc_life_time`変数を設定することで実行できます。復元後に変数を前の値に戻すことを忘れないでください。
 
 ```sql
 SET GLOBAL tidb_gc_life_time="60m";
 ```
 
-> **Note:**
+> **注記：**
 >
-> Increasing the GC life time from the default 10 minutes to half an hour or more will result in additional versions of rows being retained, which might require more disk space. This might also affect the performance of certain operations such as scans when TiDB needs to skip these additional versions of the same rows during data reads.
+> GC 存続時間をデフォルトの 10 分から 30 分以上に延長すると、行の追加バージョンが保持されることになり、より多くのディスク領域が必要になる可能性があります。これは、TiDB がデータ読み取り中に同じ行のこれらの追加バージョンをスキップする必要がある場合のスキャンなど、特定の操作のパフォーマンスにも影響を与える可能性があります。
 
-To restore data from an older version, you can use one of the following methods:
+古いバージョンからデータを復元するには、次のいずれかの方法を使用できます。
 
-- For simple cases, use [`SELECT`](/sql-statements/sql-statement-select.md) after setting the `tidb_snapshot` variable and copy-paste the output, or use `SELECT ... INTO OUTFILE` and then use [`LOAD DATA`](/sql-statements/sql-statement-load-data.md) to import the data later on.
+-   単純な場合は、変数`tidb_snapshot`設定した後に[`SELECT`](/sql-statements/sql-statement-select.md)使用して出力をコピー＆ペーストするか、 `SELECT ... INTO OUTFILE`を使用してから[`LOAD DATA`](/sql-statements/sql-statement-load-data.md)を使用して後でデータをインポートします。
 
-- Use [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview#export-historical-data-snapshots-of-tidb) to export a historical snapshot. Dumpling performs well in exporting larger sets of data.
+-   履歴スナップショットをエクスポートするには[Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview#export-historical-data-snapshots-of-tidb)使用します。 Dumpling は、大規模なデータ セットのエクスポートに優れたパフォーマンスを発揮します。

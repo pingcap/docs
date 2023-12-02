@@ -3,13 +3,13 @@ title: TiDB Data Migration Binlog Event Filter
 summary: Learn how to use the binlog event filter feature of DM.
 ---
 
-# TiDB Data Migration Binlog Event Filter
+# TiDB データ移行Binlogイベント フィルター {#tidb-data-migration-binlog-event-filter}
 
-TiDB Data Migration (DM) provides the binlog event filter feature to filter out, block and report errors, or only receive specified types of binlog events for some schemas or tables. For example, you can filter out all `TRUNCATE TABLE` or `INSERT` events. The binlog event filter feature is more fine-grained than the [block and allow lists](/dm/dm-block-allow-table-lists.md) feature.
+TiDB Data Migration (DM) は、エラーをフィルタリングしてブロックし、レポートしたり、一部のスキーマまたはテーブルの指定されたタイプのbinlogイベントのみを受信したりするためのbinlogイベント フィルター機能を提供します。たとえば、 `TRUNCATE TABLE`つまたは`INSERT`のイベントをすべてフィルターで除外できます。 binlogイベント フィルター機能は、 [ブロックリストと許可リスト](/dm/dm-block-allow-table-lists.md)機能よりも粒度が細かいです。
 
-## Configure the binlog event filter
+## binlogイベントフィルターを構成する {#configure-the-binlog-event-filter}
 
-In the task configuration file, add the following configuration:
+タスク構成ファイルに次の構成を追加します。
 
 ```yaml
 filters:
@@ -21,90 +21,90 @@ filters:
     ​action: Ignore
 ```
 
-Starting from DM v2.0.2, you can configure the binlog event filter in the source configuration file. For details, see [Upstream Database Configuration File](/dm/dm-source-configuration-file.md).
+DM v2.0.2 以降、ソース構成ファイルでbinlogイベント フィルターを構成できます。詳細は[アップストリーム データベースコンフィグレーションファイル](/dm/dm-source-configuration-file.md)を参照してください。
 
-When you use the wildcard for matching schemas and tables, note the following:
+スキーマとテーブルの一致にワイルドカードを使用する場合は、次の点に注意してください。
 
-- `schema-pattern` and `table-pattern` only support wildcards, including `*`, `?`, and `[]`. There can only be one `*` symbol in a wildcard match, and it must be at the end. For example, in `table-pattern: "t_*"`, `"t_*"` indicates all tables starting with `t_`. See [wildcard matching](https://en.wikipedia.org/wiki/Glob_(programming)#Syntax) for details.
+-   `schema-pattern`と`table-pattern` 、 `*` 、 `?` 、および`[]`を含むワイルドカードのみをサポートします。ワイルドカード一致では`*`シンボルは 1 つだけ使用でき、最後になければなりません。たとえば、 `table-pattern: "t_*"`では、 `"t_*"` `t_`で始まるすべてのテーブルを示します。詳細は[ワイルドカードマッチング](https://en.wikipedia.org/wiki/Glob_(programming)#Syntax)参照してください。
 
-- `sql-pattern` only supports regular expressions.
+-   `sql-pattern`は正規表現のみをサポートします。
 
-## Parameter descriptions
+## パラメータの説明 {#parameter-descriptions}
 
-- [`schema-pattern`/`table-pattern`](/dm/table-selector.md): the binlog events or DDL SQL statements of upstream MySQL or MariaDB instance tables that match `schema-pattern`/`table-pattern` are filtered by the rules below.
+-   [`schema-pattern` / `table-pattern`](/dm/table-selector.md) : `schema-pattern` / `table-pattern`に一致するアップストリーム MySQL または MariaDB インスタンス テーブルのbinlogイベントまたは DDL SQL ステートメントは、以下のルールによってフィルターされます。
 
-- `events`: the binlog event array. You can only select one or more `Event`s from the following table:
+-   `events` :binlogイベント配列。次の表から 1 つ以上の`Event`のみを選択できます。
 
-    | Events            | Type | Description                   |
-    | ---------------   | ---- | ----------------------------- |
-    | `all`             |      | Includes all the events below |
-    | `all dml`         |      | Includes all DML events below |
-    | `all ddl`         |      | Includes all DDL events below |
-    | `incompatible ddl changes` |      | Includes all incompatible DDL events, where "incompatible DDL" means DDL operations that might cause data loss   |
-    | `none`            |      | Includes none of the events below |
-    | `none ddl`        |      | Includes none of the DDL events below |
-    | `none dml`        |      | Includes none of the DML events below |
-    | `insert`          | DML  | The `INSERT` DML event              |
-    | `update`          | DML  | The `UPDATE` DML event              |
-    | `delete`          | DML  | The `DELETE` DML event              |
-    | `create database` | DDL  | The `CREATE DATABASE` DDL event         |
-    | `drop database`   | incompatible DDL  | The `DROP DATABASE` DDL event           |
-    | `create table`    | DDL  | The `CREATE TABLE` DDL event      |
-    | `create index`    | DDL  | The `CREATE INDEX` DDL event          |
-    | `drop table`      | incompatible DDL  | The `DROP TABLE` DDL event              |
-    | `truncate table`  | incompatible DDL  | The `TRUNCATE TABLE` DDL event          |
-    | `rename table`    | incompatible DDL  | The `RENAME TABLE` DDL event            |
-    | `drop index`      | incompatible DDL  | The `DROP INDEX` DDL event           |
-    | `alter table`     | DDL  | The `ALTER TABLE` DDL event           |
-    | `value range decrease` | incompatible DDL  | A DDL statement that decreases the value range of a column field, such as the `ALTER TABLE MODIFY COLUMN` statement that changes `VARCHAR(20)` to `VARCHAR(10)`  |
-    | `precision decrease` | incompatible DDL  | A DDL statement that decreases the precision of a column field, such as the `ALTER TABLE MODIFY COLUMN` statement that changes `Decimal(10, 2)` to `Decimal(10, 1)`  |
-    | `modify column` | incompatible DDL  | A DDL statement that changes the type of a column field, such as the `ALTER TABLE MODIFY COLUMN` statement that changes `INT` to `VARCHAR` |
-    | `rename column` | incompatible DDL  | A DDL statement that changes the name of a column, such as the `ALTER TABLE RENAME COLUMN` statement |
-    | `rename index` | incompatible DDL  | A DDL statement that changes the index name, such as the `ALTER TABLE RENAME INDEX` statement |
-    | `drop column` | incompatible DDL  | A DDL statement that drops a column from a table, such as the `ALTER TABLE DROP COLUMN` statement |
-    | `drop index` | incompatible DDL  | A DDL statement that drops an index in a table, such as the `ALTER TABLE DROP INDEX` statement |
-    | `truncate table partition` | incompatible DDL  | A DDL statement that removes all data from a specified partition, such as the `ALTER TABLE TRUNCATE PARTITION` statement |
-    | `drop primary key` | incompatible DDL  | A DDL statement that drops the primary key, such as the `ALTER TABLE DROP PRIMARY KEY` statement |
-    | `drop unique key` | incompatible DDL  | A DDL statement that drops a unique key, such as the `ALTER TABLE DROP UNIQUE KEY` statement |
-    | `modify default value` | incompatible DDL  | A DDL statement that modifies a column's default value, such as the `ALTER TABLE CHANGE DEFAULT` statement |
-    | `modify constraint` | incompatible DDL  | A DDL statement that modifies the constraint, such as the `ALTER TABLE ADD CONSTRAINT` statement |
-    | `modify columns order` | incompatible DDL  | A DDL statement that modifies the order of the columns, such as the `ALTER TABLE CHANGE AFTER` statement |
-    | `modify charset` | incompatible DDL  | A DDL statement that modifies the charset of a column, such as the `ALTER TABLE MODIFY CHARSET` statement |
-    | `modify collation` | incompatible DDL  | A DDL statement that modifies a column collation, such as the `ALTER TABLE MODIFY COLLATE` statement |
-    | `remove auto increment` | incompatible DDL  | A DDL statement that removes an auto-incremental key |
-    | `modify storage engine` | incompatible DDL  | A DDL statement that modifies the table storage engine, such as the `ALTER TABLE ENGINE = MyISAM` statement |
-    | `reorganize table partition` | incompatible DDL  | A DDL statement that reorganizes partitions in a table, such as the `ALTER TABLE REORGANIZE PARTITION` statement |
-    | `rebuild table partition` | incompatible DDL  | A DDL statement that rebuilds the table partition, such as the `ALTER TABLE REBUILD PARTITION` statement |
-    | `exchange table partition` | incompatible DDL  | A DDL statement that exchanges a partition between two tables, such as the `ALTER TABLE EXCHANGE PARTITION` statement |
-    | `coalesce table partition` | incompatible DDL  | A DDL statement that decreases the number of partitions in a table, such as the `ALTER COALESCE PARTITION` statement |
+    | イベント                         | タイプ        | 説明                                                                                                      |
+    | ---------------------------- | ---------- | ------------------------------------------------------------------------------------------------------- |
+    | `all`                        |            | 以下のすべてのイベントが含まれます                                                                                       |
+    | `all dml`                    |            | 以下のすべての DML イベントが含まれます                                                                                  |
+    | `all ddl`                    |            | 以下のすべての DDL イベントが含まれます                                                                                  |
+    | `incompatible ddl changes`   |            | すべての互換性のない DDL イベントが含まれます。「互換性のない DDL」とは、データ損失を引き起こす可能性のある DDL 操作を意味します。                                |
+    | `none`                       |            | 以下のイベントは含まれません                                                                                          |
+    | `none ddl`                   |            | 以下の DDL イベントは含まれません                                                                                     |
+    | `none dml`                   |            | 以下の DML イベントは含まれません                                                                                     |
+    | `insert`                     | DML        | `INSERT` DML イベント                                                                                       |
+    | `update`                     | DML        | `UPDATE` DML イベント                                                                                       |
+    | `delete`                     | DML        | `DELETE` DML イベント                                                                                       |
+    | `create database`            | DDL        | `CREATE DATABASE` DDL イベント                                                                              |
+    | `drop database`              | 互換性のない DDL | `DROP DATABASE` DDL イベント                                                                                |
+    | `create table`               | DDL        | `CREATE TABLE` DDL イベント                                                                                 |
+    | `create index`               | DDL        | `CREATE INDEX` DDL イベント                                                                                 |
+    | `drop table`                 | 互換性のない DDL | `DROP TABLE` DDL イベント                                                                                   |
+    | `truncate table`             | 互換性のない DDL | `TRUNCATE TABLE` DDL イベント                                                                               |
+    | `rename table`               | 互換性のない DDL | `RENAME TABLE` DDL イベント                                                                                 |
+    | `drop index`                 | 互換性のない DDL | `DROP INDEX` DDL イベント                                                                                   |
+    | `alter table`                | DDL        | `ALTER TABLE` DDL イベント                                                                                  |
+    | `value range decrease`       | 互換性のない DDL | 列フィールドの値の範囲を減らす DDL ステートメント ( `VARCHAR(20)`を`VARCHAR(10)`に変更する`ALTER TABLE MODIFY COLUMN`ステートメントなど)     |
+    | `precision decrease`         | 互換性のない DDL | 列フィールドの精度を下げる DDL ステートメント ( `Decimal(10, 2)`を`Decimal(10, 1)`に変更する`ALTER TABLE MODIFY COLUMN`ステートメントなど) |
+    | `modify column`              | 互換性のない DDL | 列フィールドの型を変更する DDL ステートメント ( `INT`を`VARCHAR`に変更する`ALTER TABLE MODIFY COLUMN`ステートメントなど)                   |
+    | `rename column`              | 互換性のない DDL | 列の名前を変更する DDL ステートメント ( `ALTER TABLE RENAME COLUMN`ステートメントなど)                                           |
+    | `rename index`               | 互換性のない DDL | インデックス名を変更する DDL ステートメント ( `ALTER TABLE RENAME INDEX`ステートメントなど)                                         |
+    | `drop column`                | 互換性のない DDL | `ALTER TABLE DROP COLUMN`ステートメントなど、テーブルから列を削除する DDL ステートメント                                             |
+    | `drop index`                 | 互換性のない DDL | `ALTER TABLE DROP INDEX`ステートメントなど、テーブル内のインデックスを削除する DDL ステートメント                                         |
+    | `truncate table partition`   | 互換性のない DDL | 指定されたパーティションからすべてのデータを削除する DDL ステートメント ( `ALTER TABLE TRUNCATE PARTITION`ステートメントなど)                     |
+    | `drop primary key`           | 互換性のない DDL | 主キーを削除する DDL ステートメント ( `ALTER TABLE DROP PRIMARY KEY`ステートメントなど)                                         |
+    | `drop unique key`            | 互換性のない DDL | 一意のキーを削除する DDL ステートメント ( `ALTER TABLE DROP UNIQUE KEY`ステートメントなど)                                        |
+    | `modify default value`       | 互換性のない DDL | 列のデフォルト値を変更する DDL ステートメント ( `ALTER TABLE CHANGE DEFAULT`ステートメントなど)                                      |
+    | `modify constraint`          | 互換性のない DDL | 制約を変更する DDL ステートメント ( `ALTER TABLE ADD CONSTRAINT`ステートメントなど)                                            |
+    | `modify columns order`       | 互換性のない DDL | 列の順序を変更する DDL ステートメント ( `ALTER TABLE CHANGE AFTER`ステートメントなど)                                            |
+    | `modify charset`             | 互換性のない DDL | `ALTER TABLE MODIFY CHARSET`ステートメントなど、列の文字セットを変更する DDL ステートメント                                          |
+    | `modify collation`           | 互換性のない DDL | 列の照合順序を変更する DDL ステートメント ( `ALTER TABLE MODIFY COLLATE`ステートメントなど)                                        |
+    | `remove auto increment`      | 互換性のない DDL | 自動増分キーを削除する DDL ステートメント                                                                                 |
+    | `modify storage engine`      | 互換性のない DDL | テーブルstorageエンジンを変更する DDL ステートメント ( `ALTER TABLE ENGINE = MyISAM`ステートメントなど)                              |
+    | `reorganize table partition` | 互換性のない DDL | `ALTER TABLE REORGANIZE PARTITION`ステートメントなど、テーブル内のパーティションを再編成する DDL ステートメント                             |
+    | `rebuild table partition`    | 互換性のない DDL | テーブル パーティションを再構築する DDL ステートメント ( `ALTER TABLE REBUILD PARTITION`ステートメントなど)                              |
+    | `exchange table partition`   | 互換性のない DDL | 2 つのテーブル間のパーティションを交換する DDL ステートメント ( `ALTER TABLE EXCHANGE PARTITION`ステートメントなど)                         |
+    | `coalesce table partition`   | 互換性のない DDL | テーブル内のパーティションの数を減らす DDL ステートメント ( `ALTER COALESCE PARTITION`ステートメントなど)                                  |
 
-- `sql-pattern`: it is used to filter specified DDL SQL statements. The matching rule supports using a regular expression. For example, `"^DROP\\s+PROCEDURE"`.
+-   `sql-pattern` : 指定された DDL SQL ステートメントをフィルタリングするために使用されます。一致ルールでは正規表現の使用がサポートされています。たとえば、 `"^DROP\\s+PROCEDURE"` 。
 
-- `action`: the string (`Do`/`Ignore`/`Error`). Based on the rules, it judges as follows:
+-   `action` : 文字列 ( `Do` / `Ignore` / `Error` )。ルールに基づき、以下のように判断します。
 
-    - `Do`: the allow list. The binlog is filtered in either of the following two conditions:
-        - The type of the event is not in the `event` list of the rule.
-        - The SQL statement of the event cannot be matched by `sql-pattern` of the rule.
-    - `Ignore`: the block list. The binlog is filtered in either of the following two conditions:
-        - The type of the event is in the `event` list of the rule.
-        - The SQL statement of the event can be matched by `sql-pattern` of the rule.
-    - `Error`: the error list. The binlog reports an error in either of the following two conditions:
-        - The type of the event is in the `event` list of the rule.
-        - The SQL statement of the event can be matched by `sql-pattern` of the rule.
-    - When multiple rules match the same table, the rules are applied sequentially. The block list has a higher priority than the error list, and the error list has a higher priority than the allow list. For example:
-        - If both the `Ignore` and `Error` rules are applied to the same table, the `Ignore` rule takes effect.
-        - If both the `Error` and `Do` rules are applied to the same table, the `Error` rule takes effect.
+    -   `Do` : 許可リスト。binlogは、次の 2 つの条件のいずれかでフィルタリングされます。
+        -   イベントのタイプはルールのリスト`event`にありません。
+        -   イベントの SQL ステートメントはルールの`sql-pattern`と一致できません。
+    -   `Ignore` : ブロックリスト。binlogは、次の 2 つの条件のいずれかでフィルタリングされます。
+        -   イベントのタイプはルールのリスト`event`にあります。
+        -   イベントの SQL ステートメントは、ルールの`sql-pattern`と照合できます。
+    -   `Error` : エラーリスト。 binlog は、次の 2 つの条件のいずれかでエラーを報告します。
+        -   イベントのタイプはルールのリスト`event`にあります。
+        -   イベントの SQL ステートメントは、ルールの`sql-pattern`と照合できます。
+    -   複数のルールが同じテーブルに一致する場合、ルールは順番に適用されます。ブロック リストはエラー リストよりも優先度が高く、エラー リストは許可リストよりも優先度が高くなります。例えば：
+        -   `Ignore`と`Error`両方のルールが同じテーブルに適用される場合、 `Ignore`ルールが有効になります。
+        -   `Error`と`Do`両方のルールが同じテーブルに適用される場合、 `Error`ルールが有効になります。
 
-## Usage examples
+## 使用例 {#usage-examples}
 
-This section shows the usage examples in the scenario of sharding (sharded schemas and tables).
+このセクションでは、シャーディング (シャードされたスキーマとテーブル) のシナリオでの使用例を示します。
 
-### Filter all sharding deletion operations
+### すべてのシャーディング削除操作をフィルタリングする {#filter-all-sharding-deletion-operations}
 
-To filter out all deletion operations, configure the following two filtering rules:
+すべての削除操作をフィルターで除外するには、次の 2 つのフィルター ルールを構成します。
 
-- `filter-table-rule` filters out the `TRUNCATE TABLE`, `DROP TABLE` and `DELETE STATEMENT` operations of all tables that match the `test_*`.`t_*` pattern.
-- `filter-schema-rule` filters out the `DROP DATABASE` operation of all schemas that match the `test_*` pattern.
+-   `filter-table-rule` `test_*`に一致するすべてのテーブルの`TRUNCATE TABLE` 、 `DROP TABLE` 、および`DELETE STATEMENT`操作を除外します。 `t_*`パターン。
+-   `filter-schema-rule` `test_*`パターンに一致するすべてのスキーマの`DROP DATABASE`操作を除外します。
 
 ```yaml
 filters:
@@ -119,16 +119,16 @@ filters:
     action: Ignore
 ```
 
-### Only migrate sharding DML statements
+### シャーディング DML ステートメントのみを移行する {#only-migrate-sharding-dml-statements}
 
-To only migrate sharding DML statements, configure the following two filtering rules:
+シャーディング DML ステートメントのみを移行するには、次の 2 つのフィルタリング ルールを構成します。
 
-- `do-table-rule` only migrates the `CREATE TABLE`, `INSERT`, `UPDATE` and `DELETE` statements of all tables that match the `test_*`.`t_*` pattern.
-- `do-schema-rule` only migrates the `CREATE DATABASE` statement of all schemas that match the `test_*` pattern.
+-   `do-table-rule` `test_*`に一致するすべてのテーブルの`CREATE TABLE` 、 `INSERT` 、 `UPDATE` 、および`DELETE`ステートメントのみを移行します。 `t_*`パターン。
+-   `do-schema-rule`パターン`test_*`に一致するすべてのスキーマのステートメント`CREATE DATABASE`のみを移行します。
 
-> **Note:**
+> **注記：**
 >
-> The reason why the `CREATE DATABASE/TABLE` statement is migrated is that you can migrate DML statements only after the schema and table are created.
+> `CREATE DATABASE/TABLE`ステートメントが移行される理由は、DML ステートメントはスキーマとテーブルの作成後にのみ移行できるためです。
 
 ```yaml
 filters:
@@ -143,9 +143,9 @@ filters:
     action: Do
 ```
 
-### Filter out the SQL statements that TiDB does not support
+### TiDB がサポートしていない SQL ステートメントをフィルタリングして除外します。 {#filter-out-the-sql-statements-that-tidb-does-not-support}
 
-To filter out the `PROCEDURE` statements that TiDB does not support, configure the following `filter-procedure-rule`:
+TiDB がサポートしていない`PROCEDURE`ステートメントをフィルタリングして除外するには、次の`filter-procedure-rule`を構成します。
 
 ```yaml
 filters:
@@ -156,17 +156,17 @@ filters:
     action: Ignore
 ```
 
-`filter-procedure-rule` filters out the `^CREATE\\s+PROCEDURE` and `^DROP\\s+PROCEDURE` statements of all tables that match the `test_*`.`t_*` pattern.
+`filter-procedure-rule` `test_*`に一致するすべてのテーブルの`^CREATE\\s+PROCEDURE`および`^DROP\\s+PROCEDURE`ステートメントを除外します。 `t_*`パターン。
 
-### Filter out the SQL statements that the TiDB parser does not support
+### TiDB パーサーがサポートしていない SQL ステートメントをフィルターで除外します。 {#filter-out-the-sql-statements-that-the-tidb-parser-does-not-support}
 
-For the SQL statements that the TiDB parser does not support, DM cannot parse them and get the `schema`/`table` information. So you must use the global filtering rule: `schema-pattern: "*"`.
+TiDB パーサーがサポートしていない SQL ステートメントの場合、DM はそれらを解析して`schema` / `table`の情報を取得できません。したがって、グローバル フィルタリング ルール`schema-pattern: "*"`を使用する必要があります。
 
-> **Note:**
+> **注記：**
 >
-> To avoid filtering out data that need to be migrated, you must configure the global filtering rule as strictly as possible.
+> 移行する必要があるデータがフィルターで除外されないようにするには、グローバル フィルター ルールをできるだけ厳密に構成する必要があります。
 
-To filter out the `PARTITION` statements that the TiDB parser (of some version) does not support, configure the following filtering rule:
+TiDB パーサー (一部のバージョン) がサポートしていない`PARTITION`ステートメントをフィルターで除外するには、次のフィルター ルールを構成します。
 
 ```yaml
 filters:
@@ -176,9 +176,9 @@ filters:
     action: Ignore
 ```
 
-### Report errors on some DDL statements
+### 一部の DDL ステートメントのエラーを報告する {#report-errors-on-some-ddl-statements}
 
-If you need to block and report errors on DDL statements generated by some upstream operations before DM replicates them to TiDB, you can use the following settings:
+DM が TiDB に DDL ステートメントをレプリケートする前に、一部のアップストリーム操作によって生成された DDL ステートメントのエラーをブロックして報告する必要がある場合は、次の設定を使用できます。
 
 ```yaml
 filters:

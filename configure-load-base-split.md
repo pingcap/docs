@@ -3,48 +3,48 @@ title: Load Base Split
 summary: Learn the feature of Load Base Split.
 ---
 
-# Load Base Split
+# ロードベースの分割 {#load-base-split}
 
-Load Base Split is a new feature introduced in TiDB 4.0. It aims to solve the hotspot issue caused by unbalanced access between Regions, such as full table scans for small tables.
+ロード ベース分割は、TiDB 4.0 で導入された新機能です。これは、小さなテーブルのフルテーブルスキャンなど、リージョン間の不均衡なアクセスによって引き起こされるホットスポットの問題を解決することを目的としています。
 
-## Scenarios
+## シナリオ {#scenarios}
 
-In TiDB, it is easy to generate hotspots when the load is concentrated on certain nodes. PD tries to schedule the hot Regions so that they are distributed as evenly as possible across all nodes for better performance.
+TiDB では、特定のノードに負荷が集中するとホットスポットが発生しやすくなります。 PD は、パフォーマンスを向上させるために、ホット リージョンがすべてのノードにできるだけ均等に分散されるようにスケジュールを試みます。
 
-However, the minimum unit for PD scheduling is Region. If the number of hotspots in a cluster is smaller than the number of nodes, or if a few hotspots have far more load than other Regions, PD can only move the hotspot from one node to another, but not make the entire cluster share the load.
+ただし、PD スケジューリングの最小単位はリージョンです。クラスター内のホットスポットの数がノードの数よりも少ない場合、またはいくつかのホットスポットの負荷が他のリージョンよりもはるかに大きい場合、PD はホットスポットをあるノードから別のノードに移動することしかできず、クラスター全体で負荷を共有することはできません。 。
 
-This scenario is especially common with workloads that are mostly read requests, such as full table scans and index lookups for small tables, or frequent access to some fields.
+このシナリオは、テーブル全体のスキャンや小さなテーブルのインデックス検索、または一部のフィールドへの頻繁なアクセスなど、主に読み取りリクエストであるワークロードで特に一般的です。
 
-Previously, the solution to this problem was to manually execute a command to split one or more hotspot Regions, but this approach has two problems:
+以前は、この問題に対する解決策は、コマンドを手動で実行して 1 つ以上のホットスポット リージョンを分割することでしたが、このアプローチには 2 つの問題がありました。
 
-- Evenly splitting a Region is not always the best choice, because requests might be concentrated on a few keys. In such cases, hotspots might still be on one of the Regions after evenly splitting, and it might take multiple even splits to realize the goal.
-- Human intervention is not timely or simple.
+-   リージョンがいくつかのキーに集中する可能性があるため、リージョンを均等に分割することが常に最良の選択であるとは限りません。このような場合、均等に分割した後もホットスポットがいずれかのリージョンに存在する可能性があり、目標を実現するには複数の均等な分割が必要になる可能性があります。
+-   人間の介入はタイムリーでも簡単でもありません。
 
-## Implementation principles
+## 実装原則 {#implementation-principles}
 
-Load Base Split automatically splits the Region based on statistics. It identifies the Regions whose read load or CPU usage consistently exceeds the threshold for 10 seconds, and splits these Regions at a proper position. When choosing the split position, Load Base Split tries to balance the access load of both Regions after the split and avoid access across Regions.
+Load Base Split は、統計に基づいてリージョンを自動的に分割します。読み取り負荷または CPU 使用率が 10 秒間継続してしきい値を超えているリージョンを特定し、これらのリージョンを適切な位置で分割します。分割位置を選択すると、Load Base Split は分割後の両方のリージョンのアクセス負荷のバランスをとり、リージョンをまたがるアクセスを回避しようとします。
 
-The Region split by Load Base Split will not be merged quickly. On the one hand, PD's `MergeChecker` skips the hot Regions; on the other hand, PD also determines whether to merge two Regions according to `QPS` in the heartbeat information, to avoid the merging of two Regions with high `QPS`.
+Load Base Split によって分割されたリージョンはすぐにはマージされません。一方では、PD の`MergeChecker`ホットな領域をスキップします。一方、PD は、ハートビート情報の`QPS`に従って 2 つのリージョンをマージするかどうかも決定し、高い`QPS`を持つ 2 つのリージョンのマージを回避します。
 
-## Usage
+## 使用法 {#usage}
 
-The Load Base Split feature is currently controlled by the following parameters:
+ロード ベース分割機能は現在、次のパラメータによって制御されています。
 
-- [`split.qps-threshold`](/tikv-configuration-file.md#qps-threshold): The QPS threshold at which a Region is identified as a hotspot. The default value is `3000` per second when [`region-split-size`](/tikv-configuration-file.md#region-split-size) is less than 4 GB; otherwise the default value is `7000`.
-- [`split.byte-threshold`](/tikv-configuration-file.md#byte-threshold-new-in-v50): (Introduced in v5.0) The traffic threshold at which a Region is identified as a hotspot. The unit is byte. The default value is 30 MiB per second when `region-split-size` is less than 4 GB; otherwise the default value is 100 MiB per second.
-- [`split.region-cpu-overload-threshold-ratio`](/tikv-configuration-file.md#region-cpu-overload-threshold-ratio-new-in-v620): (Introduced in v6.2.0) The CPU usage threshold (the percentage of CPU time of the read thread pool) at which a Region is identified as a hotspot. The default value is `0.25` when `region-split-size` is less than 4 GB; otherwise the default value is `0.75`.
+-   [`split.qps-threshold`](/tikv-configuration-file.md#qps-threshold) :リージョンがホットスポットとして識別される QPS しきい値。 [`region-split-size`](/tikv-configuration-file.md#region-split-size)が 4 GB 未満の場合、デフォルト値は`3000` /秒です。それ以外の場合、デフォルト値は`7000`です。
+-   [`split.byte-threshold`](/tikv-configuration-file.md#byte-threshold-new-in-v50) : (v5.0 で導入)リージョンがホットスポットとして識別されるトラフィックのしきい値。単位はバイトです。 `region-split-size` 4 GB 未満の場合、デフォルト値は 30 MiB/秒です。それ以外の場合、デフォルト値は 100 MiB/秒です。
+-   [`split.region-cpu-overload-threshold-ratio`](/tikv-configuration-file.md#region-cpu-overload-threshold-ratio-new-in-v620) : (v6.2.0 で導入)リージョンがホットスポットとして識別される CPU 使用率のしきい値 (読み取りスレッド プールの CPU 時間の割合)。 `region-split-size`が 4 GB 未満の場合、デフォルト値は`0.25`です。それ以外の場合、デフォルト値は`0.75`です。
 
-If a Region meets one of the following conditions for 10 consecutive seconds, TiKV tries to split the Region:
+リージョンが10 秒間連続して次の条件のいずれかを満たしている場合、TiKV はリージョンの分割を試みます。
 
-- the sum of its read requests exceeds `split.qps-threshold`.
-- its traffic exceeds `split.byte-threshold`.
-- its CPU usage in the Unified Read Pool exceeds `split.region-cpu-overload-threshold-ratio`.
+-   読み取りリクエストの合計が`split.qps-threshold`を超えています。
+-   そのトラフィックは`split.byte-threshold`を超えます。
+-   統合読み取りプールの CPU 使用率が`split.region-cpu-overload-threshold-ratio`を超えています。
 
-Load Base Split is enabled by default, but the parameter is set to a rather high value. If you want to disable this feature, set `split.qps-threshold` and `split.byte-threshold` high enough and set `split.region-cpu-overload-threshold-ratio` to `0` at the same time.
+Load Base Split はデフォルトで有効になっていますが、パラメータはかなり高い値に設定されています。この機能を無効にしたい場合は、 `split.qps-threshold`と`split.byte-threshold`十分に高く設定し、同時に`split.region-cpu-overload-threshold-ratio` ～ `0`を設定します。
 
-To modify the parameter, take either of the following two methods:
+パラメータを変更するには、次の 2 つの方法のいずれかを実行します。
 
-- Use a SQL statement:
+-   SQL ステートメントを使用します。
 
     ```sql
     # Set the QPS threshold to 1500
@@ -55,9 +55,7 @@ To modify the parameter, take either of the following two methods:
     SET config tikv split.region-cpu-overload-threshold-ratio=0.5;
     ```
 
-- Use TiKV:
-
-    {{< copyable "shell-regular" >}}
+-   TiKV を使用します。
 
     ```shell
     curl -X POST "http://ip:status_port/config" -H "accept: application/json" -d '{"split.qps-threshold":"1500"}'
@@ -65,24 +63,20 @@ To modify the parameter, take either of the following two methods:
     curl -X POST "http://ip:status_port/config" -H "accept: application/json" -d '{"split.region-cpu-overload-threshold-ratio":"0.5"}'
     ```
 
-Accordingly, you can view the configuration by either of the following two methods:
+したがって、次の 2 つの方法のいずれかで構成を表示できます。
 
-- Use a SQL statement:
-
-    {{< copyable "sql" >}}
+-   SQL ステートメントを使用します。
 
     ```sql
     show config where type='tikv' and name like '%split.qps-threshold%';
     ```
 
-- Use TiKV:
-
-    {{< copyable "shell-regular" >}}
+-   TiKV を使用します。
 
     ```shell
     curl "http://ip:status_port/config"
     ```
 
-> **Note:**
+> **注記：**
 >
-> Starting from v4.0.0-rc.2, you can modify and view the configuration using SQL statements.
+> v4.0.0-rc.2 以降、SQL ステートメントを使用して構成を変更および表示できるようになりました。

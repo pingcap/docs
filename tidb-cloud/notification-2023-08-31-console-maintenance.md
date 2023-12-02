@@ -3,89 +3,89 @@ title: 2023-08-31 TiDB Cloud Console Maintenance Notification
 summary: Learn about the details of the TiDB Cloud Console maintenance on August 31, 2023, such as the maintenance window, reason, and impact.
 ---
 
-# [2023-08-31] TiDB Cloud Console Maintenance Notification
+# [2023-08-31] TiDB Cloudコンソール メンテナンスのお知らせ {#2023-08-31-tidb-cloud-console-maintenance-notification}
 
-This notification describes the details that you need to know about the [TiDB Cloud console](https://tidbcloud.com/) maintenance on August 31, 2023.
+このお知らせには、2023年8月31日の[TiDB Cloudコンソール](https://tidbcloud.com/)メンテナンスにあたり、知っておいていただきたい内容が記載されております。
 
-## Maintenance window
+## メンテナンス期間 {#maintenance-window}
 
-- Date: 2023-08-31
-- Start time: 8:00 (UTC+0)
-- End time: 10:00 (UTC+0)
-- Duration: Approximately 2 hours
+-   日付: 2023-08-31
+-   開始時刻: 8:00 (UTC+0)
+-   終了時刻: 10:00 (UTC+0)
+-   所要時間：約2時間
 
-> **Note:**
+> **注記：**
 >
-> Currently, users cannot modify the maintenance timing for the TiDB Cloud console, so you need to plan accordingly in advance.
+> 現在、ユーザーはTiDB Cloudコンソールのメンテナンスのタイミングを変更できないため、事前にそれに応じて計画を立てる必要があります。
 
-## Reason for maintenance
+## メンテナンスの理由 {#reason-for-maintenance}
 
-We are upgrading the meta database services of the TiDB Cloud console to enhance performance and efficiency. This improvement aims to provide a better experience for all users as part of our ongoing commitment to delivering high-quality services.
+パフォーマンスと効率を向上させるために、 TiDB Cloudコンソールのメタ データベース サービスをアップグレードしています。この改善は、高品質のサービスを提供するという継続的な取り組みの一環として、すべてのユーザーにより良いエクスペリエンスを提供することを目的としています。
 
-## Impact
+## インパクト {#impact}
 
-During the maintenance window, you might experience intermittent disruptions in functionalities related to creating and updating within the TiDB Cloud console UI and API. However, your TiDB cluster will maintain its regular operations for data read and write, ensuring no adverse effects on your online business.
+メンテナンス期間中は、 TiDB Cloudコンソール UI および API 内の作成および更新に関連する機能で断続的な中断が発生する可能性があります。ただし、TiDB クラスターはデータの読み取りと書き込みの通常の操作を維持し、オンライン ビジネスに悪影響を及ぼさないようにします。
 
-### Affected features of TiDB Cloud console UI
+### 影響を受けるTiDB Cloudコンソール UI の機能 {#affected-features-of-tidb-cloud-console-ui}
 
-- Cluster level
-    - Cluster management
-        - Create clusters
-        - Delete clusters
-        - Scale clusters
-        - Pause or Resume clusters
-        - Change cluster password
-        - Change cluster traffic filter
-    - Import
-        - Create an import job
-    - Data Migration
-        - Create a migration job
-    - Changefeed
-        - Create a changefeed job
-    - Backup
-        - Create a manual backup job
-        - Auto backup job
-    - Restore
-        - Create a restore Job
-    - Database audit log
-        - Test connectivity
-        - Add or delete access record
-        - Enable or disable Database audit logging
-        - Restart database audit logging
-- Project level
-    - Network access
-        - Create a private endpoint
-        - Delete a private endpoint
-        - Add VPC Peering
-        - Delete VPC Peering
-    - Maintenance
-        - Change maintenance window
-        - Defer task
-    - Recycle Bin
-        - Delete clusters
-        - Delete backups
-        - Restore clusters
+-   クラスタレベル
+    -   クラスタ管理
+        -   クラスターの作成
+        -   クラスターの削除
+        -   スケールクラスター
+        -   クラスターの一時停止または再開
+        -   クラスターのパスワードを変更する
+        -   クラスタートラフィックフィルターを変更する
+    -   輸入
+        -   インポートジョブを作成する
+    -   データ移行
+        -   移行ジョブを作成する
+    -   チェンジフィード
+        -   チェンジフィードジョブを作成する
+    -   バックアップ
+        -   手動バックアップジョブを作成する
+        -   自動バックアップジョブ
+    -   復元する
+        -   復元ジョブの作成
+    -   データベース監査ログ
+        -   接続性をテストする
+        -   アクセスレコードの追加または削除
+        -   データベース監査ログを有効または無効にする
+        -   データベース監査ログを再開する
+-   プロジェクトレベル
+    -   ネットワークアクセス
+        -   プライベートエンドポイントを作成する
+        -   プライベート エンドポイントを削除する
+        -   VPC ピアリングの追加
+        -   VPC ピアリングの削除
+    -   メンテナンス
+        -   メンテナンス期間の変更
+        -   タスクを延期する
+    -   ごみ箱
+        -   クラスターの削除
+        -   バックアップの削除
+        -   クラスターの復元
 
-### Affected features of TiDB Cloud API
+### 影響を受けるTiDB Cloud API の機能 {#affected-features-of-tidb-cloud-api}
 
-- Cluster management
-    - [CreateCluster](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/CreateCluster)
-    - [DeleteCluster](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/DeleteCluster)
-    - [UpdateCluster](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/UpdateCluster)
-    - [CreateAwsCmek](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/CreateAwsCmek)
-- Backup
-    - [CreateBackup](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Backup/operation/CreateBackup)
-    - [DeleteBackup](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Backup/operation/DeleteBackup)
-- Restore
-    - [CreateRestoreTask](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Restore/operation/CreateRestoreTask)
-- Import
-    - [CreateImportTask](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Import/operation/CreateImportTask)
-    - [UpdateImportTask](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Import/operation/UpdateImportTask)
+-   クラスタ管理
+    -   [クラスターの作成](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/CreateCluster)
+    -   [クラスターの削除](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/DeleteCluster)
+    -   [クラスターの更新](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/UpdateCluster)
+    -   [AWSCmekの作成](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/CreateAwsCmek)
+-   バックアップ
+    -   [バックアップを作成する](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Backup/operation/CreateBackup)
+    -   [バックアップの削除](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Backup/operation/DeleteBackup)
+-   復元する
+    -   [復元タスクの作成](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Restore/operation/CreateRestoreTask)
+-   輸入
+    -   [インポートタスクの作成](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Import/operation/CreateImportTask)
+    -   [更新インポートタスク](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Import/operation/UpdateImportTask)
 
-## Completion and resumption
+## 完了と再開 {#completion-and-resumption}
 
-Once the maintenance is successfully completed, the affected functionalities will be reinstated, offering you an even better experience.
+メンテナンスが正常に完了すると、影響を受けた機能が復元され、さらに優れたエクスペリエンスが提供されます。
 
-## Get support
+## 支持を得ます {#get-support}
 
-If you have any questions or need assistance, contact our [support team](/tidb-cloud/tidb-cloud-support.md). We are here to address your concerns and provide any necessary guidance.
+ご質問がある場合、またはサポートが必要な場合は、 [支援チーム](/tidb-cloud/tidb-cloud-support.md)までお問い合わせください。私たちはあなたの懸念に対処し、必要なガイダンスを提供するためにここにいます。

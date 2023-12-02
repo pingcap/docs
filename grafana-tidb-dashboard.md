@@ -3,212 +3,212 @@ title: TiDB Monitoring Metrics
 summary: Learn some key metrics displayed on the Grafana TiDB dashboard.
 ---
 
-# TiDB Monitoring Metrics
+# TiDB モニタリングメトリクス {#tidb-monitoring-metrics}
 
-If you use TiUP to deploy the TiDB cluster, the monitoring system (Prometheus & Grafana) is deployed at the same time. For the monitoring architecture, see [TiDB Monitoring Framework Overview](/tidb-monitoring-framework.md).
+TiUPを使用して TiDB クラスターをデプロイすると、監視システム (Prometheus および Grafana) も同時にデプロイされます。監視アーキテクチャについては、 [TiDB モニタリング フレームワークの概要](/tidb-monitoring-framework.md)を参照してください。
 
-The Grafana dashboard is divided into a series of sub dashboards which include Overview, PD, TiDB, TiKV, Node\_exporter, Disk Performance, and Performance\_overview. The TiDB dashboard consists of the TiDB panel and the TiDB Summary panel. The differences between the two panels are different in the following aspects:
+Grafana ダッシュボードは、概要、PD、TiDB、TiKV、Node_exporter、Disk Performance、および Performance_overview を含む一連のサブ ダッシュボードに分割されています。 TiDB ダッシュボードは、TiDB パネルと TiDB 概要パネルで構成されます。 2 つのパネルの違いは次の点です。
 
-- TiDB panel: provides as comprehensive information as possible for troubleshooting cluster anomalies.
-- TiDB Summary Panel: extracts parts of the TiDB panel information with which users are most concerned, with some modifications. It provides data (such as QPS, TPS, response delay) that users care about in the daily database operations, which serves as the monitoring information to be displayed or reported.
+-   TiDB パネル: クラスターの異常をトラブルシューティングするための可能な限り包括的な情報を提供します。
+-   TiDB 概要パネル: TiDB パネル情報のうち、ユーザーが最も関心のある部分を一部変更して抽出します。日々のデータベース運用においてユーザーが気になるデータ（QPS、TPS、応答遅延など）を表示・レポートする監視情報として提供します。
 
-This document describes some key monitoring metrics displayed on the TiDB dashboard.
+このドキュメントでは、TiDB ダッシュボードに表示されるいくつかの主要な監視メトリクスについて説明します。
 
-## Key metrics description
+## 主要な指標の説明 {#key-metrics-description}
 
-To understand the key metrics displayed on the TiDB dashboard, check the following sections:
+TiDB ダッシュボードに表示される主要なメトリクスを理解するには、次のセクションを確認してください。
 
-### Query Summary
+### クエリの概要 {#query-summary}
 
-- Duration: execution time
-    - The duration between the time that the client's network request is sent to TiDB and the time that the request is returned to the client after TiDB has executed it. In general, client requests are sent in the form of SQL statements, but can also include the execution time of commands such as `COM_PING`, `COM_SLEEP`, `COM_STMT_FETCH`, and `COM_SEND_LONG_DATA`
-    - Because TiDB supports Multi-Query, it supports sending multiple SQL statements at one time, such as `select 1; select 1; select 1;`. In this case, the total execution time of this query includes the execution time of all SQL statements
-- Command Per Second: the number of commands processed by TiDB per second, which is classified according to the success or failure of command execution results
-- QPS: the number of SQL statements executed per second on all TiDB instances, which is counted according to `SELECT`, `INSERT`, `UPDATE`, and other types of statements
-- CPS By Instance: the command statistics on each TiDB instance, which is classified according to the success or failure of command execution results
-- Failed Query OPM: the statistics of error types (such as syntax errors and primary key conflicts) according to the errors occurred when executing SQL statements per minute on each TiDB instance. It contains the module in which the error occurs and the error code
-- Slow query: the statistics of the processing time of slow queries (the time cost of the entire slow query, the time cost of Coprocessor, and the waiting time for Coprocessor scheduling). Slow queries are classified into internal and general SQL statements
-- Connection Idle Duration: the duration of idle connections
-- 999/99/95/80 Duration: the statistics of the execution time for different types of SQL statements (different percentiles)
+-   期間: 実行時間
+    -   クライアントのネットワーク リクエストが TiDB に送信されてから、TiDB がリクエストを実行した後にリクエストがクライアントに返されるまでの期間。一般に、クライアント要求は SQL ステートメントの形式で送信されますが、 `COM_PING` 、 `COM_SLEEP` 、 `COM_STMT_FETCH` 、 `COM_SEND_LONG_DATA`などのコマンドの実行時間が含まれる場合もあります。
+    -   TiDB はマルチクエリをサポートしているため、複数の SQL ステートメント ( `select 1; select 1; select 1;`など) を一度に送信することができます。この場合、このクエリの合計実行時間には、すべての SQL ステートメントの実行時間が含まれます。
+-   Command Per Second: TiDB によって処理される 1 秒あたりのコマンド数。コマンド実行結果の成功または失敗に従って分類されます。
+-   QPS: すべての TiDB インスタンスで 1 秒あたりに実行される SQL ステートメントの数。 `SELECT` 、 `INSERT` 、 `UPDATE` 、およびその他のタイプのステートメントに従ってカウントされます。
+-   CPS By Instance: コマンド実行結果の成功または失敗に従って分類された、各 TiDB インスタンスのコマンド統計。
+-   失敗したクエリ OPM: 各 TiDB インスタンスで 1 分あたりの SQL ステートメントの実行時に発生したエラーに応じたエラー タイプ (構文エラーや主キーの競合など) の統計。エラーが発生したモジュールとエラーコードが含まれています
+-   スロー クエリ: スロー クエリの処理時間の統計 (スロー クエリ全体の時間コスト、 コプロセッサーの時間コスト、およびコプロセッサースケジューリングの待機時間)。遅いクエリは内部 SQL ステートメントと一般 SQL ステートメントに分類されます。
+-   接続アイドル期間: アイドル接続の期間
+-   999/99/95/80 期間: さまざまなタイプの SQL ステートメントの実行時間の統計 (さまざまなパーセンタイル)
 
-### Query Detail
+### クエリの詳細 {#query-detail}
 
-- Duration 80/95/99/999 By Instance: the statistics of the execution time for SQL statements on each TiDB instance (different percentiles)
-- Failed Query OPM Detail: the statistics of error types (such as syntax errors and primary key conflicts) according to the errors occurred when executing SQL statements per minute on each TiDB instance
-- Internal SQL OPS: the internal SQL statements executed per second in the entire TiDB cluster. The internal SQL statements are internally executed and are generally triggered by user SQL statements or internally scheduled tasks.
+-   期間 80/95/99/999 インスタンス別: 各 TiDB インスタンスでの SQL ステートメントの実行時間の統計 (さまざまなパーセンタイル)
+-   失敗したクエリ OPM の詳細: 各 TiDB インスタンスで 1 分あたりの SQL ステートメントの実行時に発生したエラーに応じたエラー タイプ (構文エラーや主キーの競合など) の統計。
+-   内部 SQL OPS: TiDB クラスター全体で 1 秒あたりに実行される内部 SQL ステートメント。内部 SQL ステートメントは内部で実行され、通常はユーザー SQL ステートメントまたは内部でスケジュールされたタスクによってトリガーされます。
 
-### Server
+### サーバ {#server}
 
-- Uptime: the runtime of each TiDB instance
-- Memory Usage: the memory usage statistics of each TiDB instance, which is divided into the memory occupied by processes and the memory applied by Golang on the heap
-- CPU Usage: the statistics of CPU usage of each TiDB instance
-- Connection Count: the number of clients connected to each TiDB instance
-- Open FD Count: the statistics of opened file descriptors of each TiDB instance
-- Disconnection Count: the number of clients disconnected to each TiDB instance
-- Events OPM: the statistics of key events, such as "start", "close", "graceful-shutdown","kill", and "hang"
-- Goroutine Count: the number of Goroutines on each TiDB instance
-- Prepare Statement Count: the number of `Prepare` statements that are executed on each TiDB instance and the total count of them
-- Keep Alive OPM: the number of times that the metrics are refreshed every minute on each TiDB instance. It usually needs no attention.
-- Panic And Critical Error: the number of panics and critical errors occurred in TiDB
-- Time Jump Back OPS: the number of times that the operating system rewinds every second on each TiDB instance
-- Get Token Duration: the time cost of getting Token on each connection
-- Skip Binlog Count: the number of binlog write failures in TiDB
-- Client Data Traffic: data traffic statistics of TiDB and the client
+-   稼働時間: 各 TiDB インスタンスの実行時間
+-   メモリ使用量: 各 TiDB インスタンスのメモリ使用量統計。プロセスによって占有されているメモリとGolangによってヒープ上に適用されるメモリに分けられます。
+-   CPU 使用率: 各 TiDB インスタンスの CPU 使用率の統計
+-   接続数: 各 TiDB インスタンスに接続されているクライアントの数
+-   Open FD Count: 各 TiDB インスタンスのオープンされたファイル記述子の統計
+-   切断数: 各 TiDB インスタンスに切断されたクライアントの数
+-   イベント OPM: 「start」、「close」、「graceful-shutdown」、「kill」、「hang」などの主要なイベントの統計。
+-   Goroutine Count: 各 TiDB インスタンス上の Goroutine の数
+-   Prepare ステートメント数: 各 TiDB インスタンスで実行される`Prepare`ステートメントの数とその合計数
+-   Keep Alive OPM: 各 TiDB インスタンスでメトリクスが 1 分ごとに更新される回数。通常は注意する必要はありません。
+-   パニックおよびクリティカル エラー: TiDB で発生したパニックおよびクリティカル エラーの数
+-   Time Jump Back OPS: 各 TiDB インスタンスでオペレーティング システムが 1 秒ごとに巻き戻す回数
+-   トークンの取得期間: 各接続でトークンを取得する時間コスト
+-   Skip Binlog Count: TiDB でのbinlog書き込み失敗の数
+-   クライアント データ トラフィック: TiDB とクライアントのデータ トラフィック統計
 
-### Transaction
+### トランザクション {#transaction}
 
-- Transaction OPS: the number of transactions executed per second
-- Duration: the execution duration of a transaction
-- Transaction Statement Num: the number of SQL statements in a transaction
-- Transaction Retry Num: the number of times that a transaction retries
-- Session Retry Error OPS: the number of errors encountered during the transaction retry per second. This metric includes two error types: retry failure and exceeding the maximum number of retries
-- Commit Token Wait Duration: the wait duration in the flow control queue during the transaction commit. If the wait duration is long, it means that the transaction to commit is too large and the flow is controlled. If the system still has resources available, you can speed up the commit process by increasing the system variable `tidb_committer_concurrency`.
-- KV Transaction OPS: the number of transactions executed per second within each TiDB instance
-    - A user transaction might trigger multiple transaction executions in TiDB, including reading internal metadata and atomic retries of the user transaction
-    - TiDB's internally scheduled tasks also operate on the database through transactions, which are also included in this panel
-- KV Transaction Duration: the time spent on executing transactions within each TiDB
-- Transaction Regions Num: the number of Regions operated in the transaction
-- Transaction Write KV Num Rate and Sum: the rate at which KVs are written and the sum of these written KVs in the transaction
-- Transaction Write KV Num: the number of KVs operated in the transaction
-- Statement Lock Keys: the number of locks for a single statement
-- Send HeartBeat Duration: the duration for the transaction to send heartbeats
-- Transaction Write Size Bytes Rate and sum: the rate at which bytes are written and the sum of these written bytes in the transaction
-- Transaction Write Size Bytes: the size of the data written in the transaction
-- Acquire Pessimistic Locks Duration: the time consumed by adding locks
-- TTL Lifetime Reach Counter: the number of transactions that reach the upper limit of TTL. The default value of the TTL upper limit is 1 hour. It means that 1 hour has passed since the first lock of a pessimistic transaction or the first prewrite of an optimistic transaction. The default value of the upper limit of TTL is 1 hour. The upper limit of TTL life can be changed by modifying `max-txn-TTL` in the TiDB configuration file
-- Load Safepoint OPS: the number of times that `Safepoint` is loaded. `Safepoint` is to ensure that the data before `Safepoint` is not read when the transaction reads data, thus ensuring data safety. The data before `Safepoint` might be cleaned up by the GC
-- Pessimistic Statement Retry OPS: the number of retry attempts for pessimistic statements. When the statement tries to add lock, it might encounter a write conflict. At this time, the statement will acquire a new snapshot and add lock again
-- Transaction Types Per Seconds: the number of transactions committed per second using the two-phase commit (2PC), async commit, and one-phase commit (1PC) mechanisms, including both success and failure transactions
+-   トランザクションOPS: 1 秒あたりに実行されるトランザクションの数
+-   期間: トランザクションの実行期間
+-   トランザクション Statement Num: トランザクション内の SQL ステートメントの数
+-   トランザクション再試行回数: トランザクションが再試行される回数
+-   セッション再試行エラー OPS: トランザクションの再試行中に発生したエラーの 1 秒あたりの数。このメトリクスには、再試行の失敗と再試行の最大数の超過という 2 つのエラー タイプが含まれます。
+-   コミットトークン待機期間: トランザクションコミット中のフロー制御キュー内の待機期間。待機時間が長い場合は、コミットするトランザクションが大きすぎるため、フローが制御されていることを意味します。システムに利用可能なリソースがまだある場合は、システム変数`tidb_committer_concurrency`を増やすことでコミット プロセスを高速化できます。
+-   KVトランザクションOPS: 各 TiDB インスタンス内で 1 秒あたりに実行されるトランザクションの数
+    -   ユーザー トランザクションは、内部メタデータの読み取りやユーザー トランザクションのアトミック再試行など、TiDB で複数のトランザクション実行をトリガーする場合があります。
+    -   TiDB の内部でスケジュールされたタスクも、このパネルに含まれるトランザクションを通じてデータベース上で動作します。
+-   KVトランザクション期間: 各 TiDB 内でのトランザクションの実行に費やされた時間
+-   トランザクション領域数: トランザクションで操作された領域の数
+-   トランザクション書き込み KV 数値のレートと合計: トランザクション内で KV が書き込まれるレートと、これらの書き込まれた KV の合計
+-   トランザクション書き込み KV 数: トランザクションで操作された KV の数
+-   ステートメント ロック キー: 単一ステートメントのロックの数
+-   ハートビート送信期間: トランザクションがハートビートを送信する期間
+-   トランザクション書き込みサイズ バイト数 レートと合計: トランザクション内でのバイトの書き込みレートとこれらの書き込みバイトの合計
+-   トランザクション書き込みサイズ バイト: トランザクションで書き込まれるデータのサイズ
+-   悲観的ロックの取得期間: ロックの追加にかかる時間
+-   TTL Lifetime Reach Counter: TTL の上限に達したトランザクションの数。 TTL 上限のデフォルト値は 1 時間です。これは、悲観的的なトランザクションの最初のロック、または楽観的トランザクションの最初の事前書き込みから 1 時間が経過したことを意味します。 TTL の上限のデフォルト値は 1 時間です。 TTL 寿命の上限は、TiDB 設定ファイルの`max-txn-TTL`を変更することで変更できます。
+-   ロード セーフポイント OPS: `Safepoint`がロードされる回数。 `Safepoint`は、トランザクションがデータを読み取るときに`Safepoint`より前のデータが読み込まれないようにすることで、データの安全性を確保します。 `Safepoint`より前のデータは GC によってクリーンアップされる可能性があります
+-   悲観的ステートメントの再試行 OPS:悲観的ステートメントの再試行回数。ステートメントがロックを追加しようとすると、書き込み競合が発生する可能性があります。このとき、ステートメントは新しいスナップショットを取得し、ロックを再度追加します。
+-   秒あたりのトランザクションタイプ: 2 フェーズ コミット (2PC)、非同期コミット、および 1 フェーズ コミット (1PC) メカニズムを使用して 1 秒あたりにコミットされたトランザクションの数 (成功したトランザクションと失敗したトランザクションの両方を含む)
 
-### Executor
+### 執行者 {#executor}
 
-- Parse Duration: the statistics of the parsing time of SQL statements
-- Compile Duration: the statistics of the time of compiling the parsed SQL AST to the execution plan
-- Execution Duration: the statistics of the execution time for SQL statements
-- Expensive Executor OPS: the statistics of the operators that consume many system resources per second, including `Merge Join`, `Hash Join`, `Index Look Up Join`, `Hash Agg`, `Stream Agg`, `Sort`, and `TopN`
-- Queries Using Plan Cache OPS: the statistics of queries using the Plan Cache per second
-- Plan Cache Miss OPS: the statistics of the number of times that the Plan Cache is missed per second
-- Plan Cache Memory Usage: the total memory consumed by the execution plan cached in each TiDB instance
-- Plan Cache Plan Num: the total number of execution plans cached in each TiDB instance
+-   解析時間: SQL ステートメントの解析時間の統計
+-   コンパイル時間: 解析された SQL AST を実行計画にコンパイルする時間の統計
+-   実行時間: SQL ステートメントの実行時間の統計
+-   高価なエグゼキューター OPS: 1 秒あたり多くのシステム リソースを消費するオペレーターの統計 ( `Merge Join` 、 `Hash Join` 、 `Index Look Up Join` 、 `Hash Agg` 、 `Stream Agg` 、 `Sort` 、 `TopN`を含む)
+-   プラン キャッシュを使用したクエリ OPS: 1 秒あたりのプラン キャッシュを使用したクエリの統計
+-   プラン キャッシュ ミス OPS: 1 秒あたりのプラン キャッシュがミスされた回数の統計
+-   プラン キャッシュ メモリ使用量: 各 TiDB インスタンスにキャッシュされた実行プランによって消費されるメモリの合計
+-   プラン キャッシュ プラン数: 各 TiDB インスタンスにキャッシュされた実行プランの総数
 
-### Distsql
+### ディスSQL {#distsql}
 
-- Distsql Duration: the processing time of Distsql statements
-- Distsql QPS: the statistics of Distsql statements
-- Distsql Partial QPS: the number of Partial results every second
-- Scan Keys Num: the number of keys that each query scans
-- Scan Keys Partial Num: the number of keys that each Partial result scans
-- Partial Num: the number of Partial results for each SQL statement
+-   Distsql 期間: Distsql ステートメントの処理時間
+-   Distsql QPS: Distsql ステートメントの統計
+-   Distsql 部分 QPS: 1 秒あたりの部分結果の数
+-   Scan Keys Num: 各クエリがスキャンするキーの数
+-   スキャン キーの部分的な数: 各部分的な結果がスキャンするキーの数
+-   Partial Num: 各 SQL ステートメントの部分結果の数
 
-### KV Errors
+### KVエラー {#kv-errors}
 
-- KV Backoff Duration: the total duration that a KV retry request lasts. TiDB might encounter an error when sending a request to TiKV. TiDB has a retry mechanism for every request to TiKV. This `KV Backoff Duration` item records the total time of a request retry.
-- TiClient Region Error OPS: the number of Region related error messages returned by TiKV
-- KV Backoff OPS: the number of error messages returned by TiKV
-- Lock Resolve OPS: the number of TiDB operations to resolve locks. When TiDB's read or write request encounters a lock, it tries to resolve the lock
-- Other Errors OPS: the number of other types of errors, including clearing locks and updating `SafePoint`
+-   KV バックオフ期間: KV 再試行リクエストが継続する合計期間。 TiDB が TiKV にリクエストを送信するときにエラーが発生する場合があります。 TiDB には、TiKV へのすべてのリクエストに対する再試行メカニズムがあります。この`KV Backoff Duration`項目には、リクエストのリトライの合計時間が記録されます。
+-   TiClientリージョンエラー OPS: TiKV によって返されたリージョン関連のエラー メッセージの数
+-   KV バックオフ OPS: TiKV によって返されたエラー メッセージの数
+-   ロック解決 OPS: ロックを解決するための TiDB 操作の数。 TiDB の読み取りまたは書き込みリクエストがロックに遭遇すると、ロックを解決しようとします。
+-   その他のエラー OPS: ロックのクリアや更新`SafePoint`など、その他の種類のエラーの数
 
-### KV Request
+### KV リクエスト {#kv-request}
 
-The following metrics relate to requests sent to TiKV. Retry requests are counted multiple times.
+次のメトリクスは、TiKV に送信されたリクエストに関連しています。リトライ要求は複数回カウントされます。
 
-- KV Request OPS: the execution times of a KV request, displayed according to TiKV
-- KV Request Duration 99 by store: the execution time of a KV request, displayed according to TiKV
-- KV Request Duration 99 by type: the execution time of a KV request, displayed according to the request type
-- Stale Read Hit/Miss Ops
-    - **hit**: the number of requests per second that successfully execute a stale read
-    - **miss**: the number of requests per second that attempt a stale read but fail
-- Stale Read Req Ops:
-    - **cross-zone**: the number of requests per second that attempt a stale read in a remote zone
-    - **local**: the number of requests per second that attempt a stale read in the local zone
-- Stale Read Req Traffic:
-    - **cross-zone-in**: the incoming traffic of responses to requests that attempt a stale read in a remote zone
-    - **cross-zone-out**: the outgoing traffic of requests that attempt a stale read in a remote zone
-    - **local-in**: the incoming traffic of responses to requests that attempt a stale read in the local zone
-    - **local-out**: the outgoing traffic of requests that attempt a stale read in the local zone
+-   KV リクエスト OPS: TiKV に従って表示される KV リクエストの実行時間
+-   ストア別の KV リクエスト期間 99: TiKV に従って表示される KV リクエストの実行時間
+-   タイプ別の KV リクエスト期間 99: リクエストのタイプに応じて表示される、KV リクエストの実行時間
+-   ステイル読み取りヒット/ミス操作
+    -   **hit** : 古い読み取りを正常に実行した 1 秒あたりのリクエストの数
+    -   **miss** : 古い読み取りを試行したが失敗した 1 秒あたりのリクエストの数
+-   ステイル読み取り要求操作:
+    -   **Cross-zone** : リモート ゾーンで古い読み取りを試行する 1 秒あたりのリクエストの数
+    -   **local** : ローカル ゾーンで古い読み取りを試行する 1 秒あたりのリクエストの数
+-   ステイル読み取り要求トラフィック:
+    -   **Cross-zone-in** : リモート ゾーンで古い読み取りを試みるリクエストに対する応答の受信トラフィック
+    -   **Cross-zone-out** : リモート ゾーンで古い読み取りを試行するリクエストの送信トラフィック
+    -   **local-in** : ローカルゾーンで古い読み取りを試みるリクエストに対する応答の受信トラフィック
+    -   **local-out** : ローカルゾーンで古い読み取りを試みるリクエストの送信トラフィック
 
-### PD Client
+### PDクライアント {#pd-client}
 
-- PD Client CMD OPS: the statistics of commands executed by PD Client per second
-- PD Client CMD Duration: the time it takes for PD Client to execute commands
-- PD Client CMD Fail OPS: the statistics of failed commands executed by PD Client per second
-- PD TSO OPS: the number of TSO that TiDB obtains from PD per second
-- PD TSO Wait Duration: the time that TiDB waits for PD to return TSO
-- PD TSO RPC duration: the duration from the time that TiDB sends request to PD (to get TSO) to the time that TiDB receives TSO
-- Start TSO Wait Duration: the duration from the time that TiDB sends request to PD (to get `start TSO`) to the time that TiDB receives `start TSO`
+-   PD Client CMD OPS: PD Client によって 1 秒あたりに実行されたコマンドの統計
+-   PD クライアント CMD 持続時間: PD クライアントがコマンドを実行するのにかかる時間
+-   PD Client CMD Fail OPS: PD Client によって実行された失敗したコマンドの 1 秒あたりの統計
+-   PD TSO OPS: TiDB が 1 秒あたり PD から取得する TSO の数
+-   PD TSO 待機時間: TiDB が PD が TSO を返すのを待機する時間
+-   PD TSO RPC 期間: TiDB が (TSO を取得するために) PD にリクエストを送信してから、TiDB が TSO を受信するまでの期間
+-   TSO 開始待機期間: TiDB が PD にリクエストを送信して ( `start TSO`を取得する) から TiDB が`start TSO`を受信するまでの期間
 
-### Schema Load
+### スキーマのロード {#schema-load}
 
-- Load Schema Duration: the time it takes TiDB to obtain the schema from TiKV
-- Load Schema OPS: the statistics of the schemas that TiDB obtains from TiKV per second
-- Schema Lease Error OPM: the Schema Lease errors include two types: `change` and `outdate`. `change` means that the schema has changed, and `outdate` means that the schema cannot be updated, which is a more serious error and triggers an alert.
-- Load Privilege OPS: the statistics of the number of privilege information obtained by TiDB from TiKV per second
+-   スキーマの読み込み時間: TiDB が TiKV からスキーマを取得するのにかかる時間
+-   ロード スキーマ OPS: TiDB が TiKV から取得する 1 秒あたりのスキーマの統計
+-   スキーマ リース エラー OPM: スキーマ リース エラーには`change`と`outdate` 2 つのタイプがあります。 `change`スキーマが変更されたことを意味し、 `outdate`スキーマを更新できないことを意味します。これはより重大なエラーであり、アラートがトリガーされます。
+-   Load Privilege OPS: TiDB が TiKV から取得した 1 秒あたりの権限情報の数の統計
 
-### DDL
+### DDL {#ddl}
 
-- DDL Duration 95: 95% quantile of DDL statement processing time
-- Batch Add Index Duration 100: statistics of the maximum time spent by each Batch on creating an index
-- DDL Waiting Jobs Count: the number of DDL tasks that are waiting
-- DDL META OPM: the number of times that a DDL obtains META every minute
-- DDL Worker Duration 99: 99% quantile of the execution time of each DDL worker
-- Deploy Syncer Duration: the time consumed by Schema Version Syncer initialization, restart, and clearing up operations
-- Owner Handle Syncer Duration: the time that it takes the DDL Owner to update, obtain, and check the Schema Version
-- Update Self Version Duration: the time consumed by updating the version information of Schema Version Syncer
-- DDL OPM: the number of DDL executions per second
-- DDL backfill progress in percentage: the progress of backfilling DDL tasks
+-   DDL 期間 95: DDL ステートメント処理時間の 95% 分位数
+-   バッチ追加インデックス期間 100: インデックスの作成に各バッチが費やした最大時間の統計
+-   DDL 待機ジョブ数: 待機している DDL タスクの数
+-   DDL META OPM: DDL が毎分 META を取得する回数
+-   DDL ワーカー期間 99: 各 DDL ワーカーの実行時間の 99% 分位数
+-   Syncerのデプロイ時間: Schema Version Syncer の初期化、再起動、および操作のクリアにかかる時間
+-   オーナー ハンドル シンサー期間: DDL オーナーがスキーマ バージョンを更新、取得、確認するのにかかる時間
+-   自己バージョン更新期間: Schema Version Syncer のバージョン情報の更新にかかる時間
+-   DDL OPM: 1 秒あたりの DDL 実行数
+-   DDL バックフィルの進行状況 (パーセンテージ): DDL タスクのバックフィルの進行状況
 
-### Statistics
+### 統計 {#statistics}
 
-- Auto Analyze Duration 95: the time consumed by automatic `ANALYZE`
-- Auto Analyze QPS: the statistics of automatic `ANALYZE`
-- Stats Inaccuracy Rate: the information of the statistics inaccuracy rate
-- Pseudo Estimation OPS: the number of the SQL statements optimized using pseudo statistics
-- Dump Feedback OPS: the number of stored statistical feedbacks
-- Store Query Feedback QPS: the number of operations per second to store the feedback information of the union query, which is performed in TiDB memory
-- Significant Feedback: the number of significant feedback pieces that update the statistics information
-- Update Stats OPS: the number of operations of updating statistics with feedback
+-   自動分析期間 95: 自動分析にかかる時間`ANALYZE`
+-   Auto Analyze QPS: 自動`ANALYZE`の統計
+-   統計不正確率: 統計不正確率の情報
+-   擬似推定 OPS: 擬似統計を使用して最適化された SQL ステートメントの数
+-   ダンプ フィードバック OPS: 保存された統計フィードバックの数
+-   クエリ フィードバックの保存 QPS: TiDBメモリで実行される、ユニオン クエリのフィードバック情報を保存するための 1 秒あたりの操作の数。
+-   重要なフィードバック: 統計情報を更新する重要なフィードバックの数
+-   Update Stats OPS: フィードバックを使用して統計を更新する操作の数
 
-### Owner
+### 所有者 {#owner}
 
-- New ETCD Session Duration 95: the time it takes to create a new etcd session. TiDB connects to etcd in PD through etcd client to save/read some metadata information. This records the time spent creating the session
-- Owner Watcher OPS: the number of Goroutine operations per second of DDL owner watch PD's etcd metadata
+-   新しい ETCD セッション期間 95: 新しい etcd セッションの作成にかかる時間。 TiDB は、etcd クライアントを通じて PD の etcd に接続し、メタデータ情報を保存/読み取ります。これは、セッションの作成に費やした時間を記録します。
+-   オーナー ウォッチャー OPS: DDL オーナー ウォッチ PD の etcd メタデータの 1 秒あたりの Goroutine オペレーションの数
 
-### Meta
+### メタ {#meta}
 
-- AutoID QPS: AutoID related statistics, including three operations (global ID allocation, a single table AutoID allocation, a single table AutoID Rebase)
-- AutoID Duration: the time consumed by AutoID related operations
-- Region Cache Error OPS: the number of errors encountered per second by the cached Region information in TiDB
-- Meta Operations Duration 99: the latency of Meta operations
+-   AutoID QPS: AutoID 関連の統計。3 つの操作 (グローバル ID 割り当て、単一テーブル AutoID 割り当て、単一テーブル AutoID Rebase) を含みます。
+-   AutoID 継続時間: AutoID 関連の操作にかかる時間
+-   リージョンキャッシュ エラー OPS: TiDB のキャッシュされたリージョン情報によって 1 秒あたりに発生したエラーの数
+-   メタ操作期間 99: メタ操作のレイテンシー
 
-### GC
+### GC {#gc}
 
-- Worker Action OPM: the number of GC related operations, including `run_job`, `resolve_lock`, and `delete_range`
-- Duration 99: the time consumed by GC related operations
-- Config: the configuration of GC data life time and GC running interval
-- GC Failure OPM: the number of failed GC related operations
-- Delete Range Failure OPM: the number of times the `Delete Range` has failed
-- Too Many Locks Error OPM: the number of the error that GC clears up too many locks
-- Action Result OPM: the number of results of GC-related operations
-- Delete Range Task Status: the task status of `Delete Range`, including completion and failure
-- Push Task Duration 95: the time spent pushing GC subtasks to GC workers
+-   Worker Action OPM: GC 関連の操作の数 ( `run_job` 、 `resolve_lock` 、および`delete_range`を含む)
+-   期間 99: GC 関連の操作に費やされる時間
+-   Config: GC データの有効期間と GC 実行間隔の設定
+-   GC 失敗 OPM: 失敗した GC 関連操作の数
+-   範囲削除失敗 OPM: `Delete Range`が失敗した回数
+-   Too Many Locks Error OPM: GC が多すぎるロックをクリアするエラーの数
+-   Action Result OPM: GC 関連の操作の結果の数
+-   範囲の削除タスクのステータス: タスクのステータス`Delete Range` (完了と失敗を含む)
+-   プッシュ タスク期間 95: GC サブタスクを GC ワーカーにプッシュするのに費やした時間
 
-### Batch Client
+### バッチクライアント {#batch-client}
 
-- Pending Request Count by TiKV: the number of Batch messages that are pending processing
-- Batch Client Unavailable Duration 95: the unavailable time of the Batch client
-- No Available Connection Counter: the number of times the Batch client cannot find an available link
+-   TiKV ごとの保留リクエスト数: 処理が保留されているバッチ メッセージの数
+-   バッチ クライアントの使用不可期間 95: バッチ クライアントが使用できない時間
+-   利用可能な接続なしカウンター: Batch クライアントが利用可能なリンクを見つけられなかった回数
 
-### TTL
+### TTL {#ttl}
 
-- TiDB CPU Usage: the CPU usage of each TiDB instance.
-- TiKV IO MBps: the total bytes of I/O in each TiKV instance.
-- TiKV CPU: the CPU usage of each TiKV instance.
-- TTL QPS By Type: the QPS information of different types of statements generated by TTL jobs.
-- TTL Insert Rows Per Second: the number of rows inserted into TTL tables per second.
-- TTL Processed Rows Per Second: the number of expired rows processed by TTL jobs per second.
-- TTL Insert Rows Per Hour: the number of rows inserted into TTL tables for every hour.
-- TTL Delete Rows Per Hour: the number of expired rows deleted by TTL jobs for every hour.
-- TTL Scan/Delete Query Duration: the execution time of TTL scan/delete statements.
-- TTL Scan/Delete Worker Time By Phase: the time consumed by different phases of TTL internal worker threads.
-- TTL Job Count By Status: the number of TTL jobs currently being executed.
-- TTL Task Count By Status: the number of TTL tasks currently being executed.
+-   TiDB CPU 使用率: 各 TiDB インスタンスの CPU 使用率。
+-   TiKV IO MBps: 各 TiKV インスタンスの I/O の合計バイト数。
+-   TiKV CPU: 各 TiKV インスタンスの CPU 使用率。
+-   タイプ別 TTL QPS: TTL ジョブによって生成されたさまざまなタイプのステートメントの QPS 情報。
+-   1 秒あたりの TTL 挿入行数: 1 秒あたりに TTL テーブルに挿入される行数。
+-   1 秒あたりの TTL 処理行数: 1 秒あたりの TTL ジョブによって処理される期限切れの行数。
+-   1 時間あたりの TTL 挿入行数: 1 時間ごとに TTL テーブルに挿入される行数。
+-   1 時間あたりの TTL 削除行数: 1 時間ごとに TTL ジョブによって削除された期限切れの行の数。
+-   TTL スキャン/削除クエリ期間: TTL スキャン/削除ステートメントの実行時間。
+-   フェーズごとの TTL スキャン/削除ワーカー時間: TTL 内部ワーカー スレッドのさまざまなフェーズによって消費された時間。
+-   ステータス別の TTL ジョブ数: 現在実行されている TTL ジョブの数。
+-   ステータスごとの TTL タスク数: 現在実行されている TTL タスクの数。

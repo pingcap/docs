@@ -3,26 +3,24 @@ title: Use TiSpark to Read TiFlash Replicas
 summary: Learn how to use TiSpark to read TiFlash replicas.
 ---
 
-# Use TiSpark to Read TiFlash Replicas
+# TiSpark を使用してTiFlashレプリカを読み取る {#use-tispark-to-read-tiflash-replicas}
 
-This document introduces how to use TiSpark to read TiFlash replicas.
+このドキュメントでは、TiSpark を使用してTiFlashレプリカを読み取る方法を紹介します。
 
-Currently, you can use TiSpark to read TiFlash replicas in a method similar to the engine isolation in TiDB. This method is to configure the `spark.tispark.isolation_read_engines` parameter. The parameter value defaults to `tikv,tiflash`, which means that TiDB reads data from TiFlash or from TiKV according to CBO's selection. If you set the parameter value to `tiflash`, it means that TiDB forcibly reads data from TiFlash.
+現在、TiSpark を使用して、TiDB のエンジン分離と同様の方法でTiFlashレプリカを読み取ることができます。この方法は`spark.tispark.isolation_read_engines`パラメータを設定する方法です。パラメータ値のデフォルトは`tikv,tiflash`です。これは、TiDB が CBO の選択に従ってTiFlashまたは TiKV からデータを読み取ることを意味します。パラメータ値を`tiflash`に設定すると、TiDB がTiFlashからデータを強制的に読み取ります。
 
-> **Note:**
+> **注記：**
 >
-> When this parameter is set to `tiflash`, only the TiFlash replicas of all tables involved in the query are read and these tables must have TiFlash replicas; for tables that do not have TiFlash replicas, an error is reported. When this parameter is set to `tikv`, only the TiKV replica is read.
+> このパラメータが`tiflash`に設定されている場合、クエリに含まれるすべてのテーブルのTiFlashレプリカのみが読み取られ、これらのテーブルにはTiFlashレプリカが必要です。 TiFlashレプリカがないテーブルの場合、エラーが報告されます。このパラメータを`tikv`に設定すると、TiKV レプリカのみが読み取られます。
 
-You can configure this parameter in one of the following ways:
+このパラメータは、次のいずれかの方法で構成できます。
 
-* Add the following item in the `spark-defaults.conf` file:
+-   `spark-defaults.conf`ファイルに次の項目を追加します。
 
-    ```
-    spark.tispark.isolation_read_engines tiflash
-    ```
+        spark.tispark.isolation_read_engines tiflash
 
-* Add `--conf spark.tispark.isolation_read_engines=tiflash` in the initialization command when initializing Spark shell or Thrift server.
+-   Spark シェルまたは Thriftサーバーを初期化する場合は、初期化コマンドに`--conf spark.tispark.isolation_read_engines=tiflash`を追加します。
 
-* Set `spark.conf.set("spark.tispark.isolation_read_engines", "tiflash")` in Spark shell in a real-time manner.
+-   Spark シェルにリアルタイムで`spark.conf.set("spark.tispark.isolation_read_engines", "tiflash")`を設定します。
 
-* Set `set spark.tispark.isolation_read_engines=tiflash` in Thrift server after the server is connected via beeline.
+-   サーバーがbeeline経由で接続された後、Thriftサーバーに`set spark.tispark.isolation_read_engines=tiflash`を設定します。

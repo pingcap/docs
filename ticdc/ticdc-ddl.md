@@ -3,110 +3,110 @@ title: Changefeed DDL Replication
 summary: Learn about the DDL statements supported by TiCDC and some special cases.
 ---
 
-# Changefeed DDL Replication
+# チェンジフィード DDL レプリケーション {#changefeed-ddl-replication}
 
-This document describes the rules and special cases of DDL replication in TiCDC.
+このドキュメントでは、TiCDC での DDL レプリケーションのルールと特殊なケースについて説明します。
 
-## DDL allow list
+## DDL許可リスト {#ddl-allow-list}
 
-Currently, TiCDC uses an allow list to determine whether to replicate a DDL statement. Only the DDL statements in the allow list are replicated to the downstream. The DDL statements not in the allow list are not replicated.
+現在、TiCDC は許可リストを使用して、DDL ステートメントを複製するかどうかを決定します。許可リスト内の DDL ステートメントのみがダウンストリームにレプリケートされます。許可リストにない DDL ステートメントはレプリケートされません。
 
-The allow list of DDL statements supported by TiCDC is as follows:
+TiCDC でサポートされる DDL ステートメントの許可リストは次のとおりです。
 
-- create database
-- drop database
-- create table
-- drop table
-- add column
-- drop column
-- create index / add index
-- drop index
-- truncate table
-- modify column
-- rename table
-- alter column default value
-- alter table comment
-- rename index
-- add partition
-- drop partition
-- truncate partition
-- create view
-- drop view
-- alter table character set
-- alter database character set
-- recover table
-- add primary key
-- drop primary key
-- rebase auto id
-- alter table index visibility
-- exchange partition
-- reorganize partition
-- alter table ttl
-- alter table remove ttl
+-   データベースを作成する
+-   データベースを削除する
+-   テーブルを作成する
+-   ドロップテーブル
+-   列を追加
+-   ドロップカラム
+-   インデックスの作成 / インデックスの追加
+-   インデックスを削除
+-   テーブルを切り捨てる
+-   列を変更する
+-   テーブルの名前を変更する
+-   列のデフォルト値を変更する
+-   テーブルのコメントを変更する
+-   インデックスの名前を変更する
+-   パーティションを追加する
+-   パーティションを削除する
+-   パーティションを切り詰める
+-   ビューの作成
+-   ドロップビュー
+-   テーブルの文字セットを変更する
+-   データベースの文字セットを変更する
+-   テーブルをリカバリする
+-   主キーを追加する
+-   主キーを削除する
+-   自動 ID をリベースする
+-   テーブルインデックスの可視性を変更する
+-   パーティションを交換する
+-   パーティションを再編成する
+-   テーブルttlを変更する
+-   テーブルを変更して TTL を削除
 
-## DDL replication considerations
+## DDL レプリケーションに関する考慮事項 {#ddl-replication-considerations}
 
-### Asynchronous execution of `ADD INDEX` and `CREATE INDEX` DDLs
+### <code>ADD INDEX</code>および<code>CREATE INDEX</code> DDL の非同期実行 {#asynchronous-execution-of-code-add-index-code-and-code-create-index-code-ddls}
 
-When the downstream is TiDB, TiCDC executes `ADD INDEX` and `CREATE INDEX` DDL operations asynchronously to minimize the impact on changefeed replication latency. This means that, after replicating `ADD INDEX` and `CREATE INDEX` DDLs to the downstream TiDB for execution, TiCDC returns immediately without waiting for the completion of the DDL execution. This avoids blocking subsequent DML executions.
+ダウンストリームが TiDB の場合、TiCDC は`ADD INDEX`および`CREATE INDEX` DDL 操作を非同期に実行して、チェンジフィード レプリケーションのレイテンシーへの影響を最小限に抑えます。これは、実行のために`ADD INDEX`および`CREATE INDEX` DDL をダウンストリーム TiDB に複製した後、TiCDC は DDL 実行の完了を待たずにすぐに戻ることを意味します。これにより、後続の DML 実行のブロックが回避されます。
 
-> **Note:**
+> **注記：**
 >
-> - If the execution of certain downstream DMLs relies on indexes that have not completed replication, these DMLs might be executed slowly, thereby affecting TiCDC replication latency.
-> - Before replicating DDLs to the downstream, if a TiCDC node crashes or if the downstream is performing other write operations, the DDL replication has an extremely low probability of failure. You can check the downstream to see whether that occurs.
+> -   特定のダウンストリーム DML の実行が、レプリケーションが完了していないインデックスに依存している場合、これらの DML の実行が遅くなる可能性があり、その結果 TiCDC レプリケーションのレイテンシーに影響を与える可能性があります。
+> -   DDL をダウンストリームにレプリケートする前に、TiCDC ノードがクラッシュした場合、またはダウンストリームが他の書き込み操作を実行している場合、DDL レプリケーションが失敗する可能性は非常に低くなります。ダウンストリームをチェックして、それが発生するかどうかを確認できます。
 
-### DDL replication considerations for renaming tables
+### テーブルの名前変更に関する DDL レプリケーションの考慮事項 {#ddl-replication-considerations-for-renaming-tables}
 
-Due to the lack of some context during the replication process, TiCDC has some constraints on the replication of `RENAME TABLE` DDLs.
+レプリケーション プロセス中に一部のコンテキストが欠如しているため、TiCDC には`RENAME TABLE` DDL のレプリケーションにいくつかの制約があります。
 
-#### Rename a single table in a DDL statement
+#### DDL ステートメント内の単一テーブルの名前を変更する {#rename-a-single-table-in-a-ddl-statement}
 
-If a DDL statement renames a single table, TiCDC only replicates the DDL statement when the old table name matches the filter rule. The following is an example.
+DDL ステートメントが単一テーブルの名前を変更する場合、TiCDC は、古いテーブル名がフィルター ルールに一致する場合にのみ DDL ステートメントを複製します。以下は一例です。
 
-Assume that the configuration file of your changefeed is as follows:
-
-```toml
-[filter]
-rules = ['test.t*']
-```
-
-TiCDC processes this type of DDL as follows:
-
-| DDL | Whether to replicate | Reason for the handling |
-| --- | --- | --- |
-| `RENAME TABLE test.t1 TO test.t2` | Replicate | `test.t1` matches the filter rule |
-| `RENAME TABLE test.t1 TO ignore.t1` | Replicate | `test.t1` matches the filter rule |
-| `RENAME TABLE ignore.t1 TO ignore.t2` | Ignore | `ignore.t1` does not match the filter rule |
-| `RENAME TABLE test.n1 TO test.t1` | Report an error and exit the replication | `test.n1` does not match the filter rule, but `test.t1` matches the filter rule. This operation is illegal. In this case, refer to the error message for handling. |
-| `RENAME TABLE ignore.t1 TO test.t1` | Report an error and exit the replication | Same reason as above. |
-
-#### Rename multiple tables in a DDL statement
-
-If a DDL statement renames multiple tables, TiCDC only replicates the DDL statement when the old database name, old table names, and the new database name all match the filter rule.
-
-In addition, TiCDC does not support the `RENAME TABLE` DDL that swaps the table names. The following is an example.
-
-Assume that the configuration file of your changefeed is as follows:
+変更フィードの構成ファイルが次のとおりであると仮定します。
 
 ```toml
 [filter]
 rules = ['test.t*']
 ```
 
-TiCDC processes this type of DDL as follows:
+TiCDC は、このタイプの DDL を次のように処理します。
 
-| DDL | Whether to replicate | Reason for the handling |
-| --- | --- | --- |
-| `RENAME TABLE test.t1 TO test.t2, test.t3 TO test.t4` | Replicate | All database names and table names match the filter rule. |
-| `RENAME TABLE test.t1 TO test.ignore1, test.t3 TO test.ignore2` | Replicate | The old database name, the old table names, and the new database name match the filter rule. |
-| `RENAME TABLE test.t1 TO ignore.t1, test.t2 TO test.t22;` | Report an error | The new database name `ignore` does not match the filter rule. |
-| `RENAME TABLE test.t1 TO test.t4, test.t3 TO test.t1, test.t4 TO test.t3;` | Report an error | The `RENAME TABLE` DDL swaps the names of `test.t1` and `test.t3` in one DDL statement, which TiCDC cannot handle correctly. In this case, refer to the error message for handling. |
+| DDL                                   | 複製するかどうか               | 取り扱い理由                                                                                       |
+| ------------------------------------- | ---------------------- | -------------------------------------------------------------------------------------------- |
+| `RENAME TABLE test.t1 TO test.t2`     | 複製する                   | `test.t1`フィルタルールに一致します                                                                       |
+| `RENAME TABLE test.t1 TO ignore.t1`   | 複製する                   | `test.t1`フィルタルールに一致します                                                                       |
+| `RENAME TABLE ignore.t1 TO ignore.t2` | 無視する                   | `ignore.t1`はフィルタルールに一致しません                                                                   |
+| `RENAME TABLE test.n1 TO test.t1`     | エラーを報告してレプリケーションを終了します | `test.n1`はフィルター ルールに一致しませんが、 `test.t1`フィルター ルールに一致します。この操作は違法です。この場合は、エラーメッセージを参照して対処してください。 |
+| `RENAME TABLE ignore.t1 TO test.t1`   | エラーを報告してレプリケーションを終了します | 上記と同じ理由です。                                                                                   |
 
-### SQL mode
+#### DDL ステートメント内の複数のテーブルの名前を変更する {#rename-multiple-tables-in-a-ddl-statement}
 
-By default, TiCDC uses the default SQL mode of TiDB to parse DDL statements. If your upstream TiDB cluster uses a non-default SQL mode, you must specify the SQL mode in the TiCDC configuration file. Otherwise, TiCDC might fail to parse DDL statements correctly. For more information about TiDB SQL mode, see [SQL Mode](/sql-mode.md).
+DDL ステートメントで複数のテーブルの名前を変更する場合、TiCDC は、古いデータベース名、古いテーブル名、および新しいデータベース名のすべてがフィルター ルールに一致する場合にのみ DDL ステートメントを複製します。
 
-For example, if the upstream TiDB cluster uses the `ANSI_QUOTES` mode, you must specify the SQL mode in the changefeed configuration file as follows:
+さらに、TiCDC はテーブル名を交換する`RENAME TABLE` DDL をサポートしていません。以下は一例です。
+
+変更フィードの構成ファイルが次のとおりであると仮定します。
+
+```toml
+[filter]
+rules = ['test.t*']
+```
+
+TiCDC は、このタイプの DDL を次のように処理します。
+
+| DDL                                                                        | 複製するかどうか | 取り扱い理由                                                                                                                 |
+| -------------------------------------------------------------------------- | -------- | ---------------------------------------------------------------------------------------------------------------------- |
+| `RENAME TABLE test.t1 TO test.t2, test.t3 TO test.t4`                      | 複製する     | すべてのデータベース名とテーブル名がフィルター ルールに一致します。                                                                                     |
+| `RENAME TABLE test.t1 TO test.ignore1, test.t3 TO test.ignore2`            | 複製する     | 古いデータベース名、古いテーブル名、および新しいデータベース名がフィルター ルールに一致します。                                                                       |
+| `RENAME TABLE test.t1 TO ignore.t1, test.t2 TO test.t22;`                  | エラーを報告する | 新しいデータベース名`ignore`はフィルター ルールに一致しません。                                                                                   |
+| `RENAME TABLE test.t1 TO test.t4, test.t3 TO test.t1, test.t4 TO test.t3;` | エラーを報告する | `RENAME TABLE` DDL は 1 つの DDL ステートメント内で`test.t1`と`test.t3`の名前を交換しますが、TiCDC はこれを正しく処理できません。この場合は、エラーメッセージを参照して対処してください。 |
+
+### SQLモード {#sql-mode}
+
+デフォルトでは、TiCDC は TiDB のデフォルト SQL モードを使用して DDL ステートメントを解析します。アップストリーム TiDB クラスターがデフォルト以外の SQL モードを使用する場合は、TiCDC 構成ファイルで SQL モードを指定する必要があります。そうしないと、TiCDC が DDL ステートメントを正しく解析できない可能性があります。 TiDB SQLモードの詳細については、 [SQLモード](/sql-mode.md)を参照してください。
+
+たとえば、アップストリーム TiDB クラスターが`ANSI_QUOTES`モードを使用する場合、changefeed 構成ファイルで次のように SQL モードを指定する必要があります。
 
 ```toml
 # In the value, "ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION" is the default SQL mode of TiDB.
@@ -115,12 +115,12 @@ For example, if the upstream TiDB cluster uses the `ANSI_QUOTES` mode, you must 
 sql-mode = "ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION,ANSI_QUOTES"
 ```
 
-If the SQL mode is not configured, TiCDC might fail to parse some DDL statements correctly. For example:
+SQL モードが構成されていない場合、TiCDC は一部の DDL ステートメントを正しく解析できない可能性があります。例えば：
 
 ```sql
 CREATE TABLE "t1" ("a" int PRIMARY KEY);
 ```
 
-Because in the default SQL mode of TiDB, double quotation marks are treated as strings rather than identifiers, TiCDC fails to parse the DDL statement correctly.
+TiDB のデフォルト SQL モードでは、二重引用符が識別子ではなく文字列として扱われるため、TiCDC は DDL ステートメントを正しく解析できません。
 
-Therefore, when creating a replication task, it is recommended that you specify the SQL mode used by the upstream TiDB cluster in the configuration file.
+したがって、レプリケーション タスクを作成するときは、構成ファイルで上流の TiDB クラスターによって使用される SQL モードを指定することをお勧めします。

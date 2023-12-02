@@ -3,183 +3,188 @@ title: Migrate from MySQL-Compatible Databases to TiDB Cloud Using AWS DMS
 summary: Learn how to migrate data from MySQL-compatible databases to TiDB Cloud using AWS Database Migration Service (AWS DMS).
 ---
 
-# Migrate from MySQL-Compatible Databases to TiDB Cloud Using AWS DMS
+# AWS DMS を使用して MySQL 互換データベースからTiDB Cloudに移行する {#migrate-from-mysql-compatible-databases-to-tidb-cloud-using-aws-dms}
 
-If you want to migrate heterogeneous databases, such as PostgreSQL, Oracle, and SQL Server to TiDB Cloud, it is recommended to use AWS Database Migration Service (AWS DMS).
+PostgreSQL、Oracle、SQL Server などの異種データベースをTiDB Cloudに移行する場合は、AWS Database Migration Service (AWS DMS) を使用することをお勧めします。
 
-AWS DMS is a cloud service that makes it easy to migrate relational databases, data warehouses, NoSQL databases, and other types of data stores. You can use AWS DMS to migrate your data into TiDB Cloud.
+AWS DMS は、リレーショナル データベース、データ ウェアハウス、NoSQL データベース、その他のタイプのデータ ストアの移行を簡単にするクラウド サービスです。 AWS DMS を使用してデータをTiDB Cloudに移行できます。
 
-This document uses Amazon RDS as an example to show how to migrate data to TiDB Cloud using AWS DMS. The procedure also applies to migrating data from self-hosted MySQL databases or Amazon Aurora to TiDB Cloud.
+このドキュメントでは、Amazon RDS を例として使用し、AWS DMS を使用してTiDB Cloudにデータを移行する方法を示します。この手順は、セルフホスト型 MySQL データベースまたは Amazon AuroraからTiDB Cloudへのデータの移行にも適用されます。
 
-In this example, the data source is Amazon RDS, and the data destination is a TiDB Dedicated cluster in TiDB Cloud. Both upstream and downstream databases are in the same region.
+この例では、データ ソースは Amazon RDS で、データの宛先はTiDB Cloudの TiDB 専用クラスターです。アップストリーム データベースとダウンストリーム データベースは両方とも同じリージョンにあります。
 
-## Prerequisites
+## 前提条件 {#prerequisites}
 
-Before you start the migration, make sure you have read the following:
+移行を開始する前に、次の内容を必ず読んでください。
 
-- If the source database is Amazon RDS or Amazon Aurora, you need to set the `binlog_format` parameter to `ROW`. If the database uses the default parameter group, the `binlog_format` parameter is `MIXED` by default and cannot be modified. In this case, you need to [create a new parameter group](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_GettingStarted.Prerequisites.html#CHAP_GettingStarted.Prerequisites.params), for example `newset`, and set its `binlog_format` to `ROW`. Then, [modify the default parameter group](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithDBInstanceParamGroups.html#USER_WorkingWithParamGroups.Modifying) to `newset`. Note that modifying the parameter group will restart the database.
-- Check and ensure that the source database uses collations that are compatible with TiDB. The default collation for the utf8mb4 character set in TiDB is `utf8mb4_bin`. But in MySQL 8.0, the default collation is `utf8mb4_0900_ai_ci`. If the upstream MySQL uses the default collation, because TiDB is not compatible with `utf8mb4_0900_ai_ci`, AWS DMS cannot create the target tables in TiDB and cannot migrate the data. To resolve this problem, you need to modify the collation of the source database to `utf8mb4_bin` before the migration. For a complete list of TiDB supported character sets and collations, see [Character Set and Collation](https://docs.pingcap.com/tidb/stable/character-set-and-collation).
-- TiDB contains the following system databases by default: `INFORMATION_SCHEMA`, `PERFORMANCE_SCHEMA`, `mysql`, `sys`, and `test`. When you create an AWS DMS migration task, you need to filter out these system databases instead of using the default `%` to select the migration object. Otherwise, AWS DMS will try to migrate these system databases from the source database to the target TiDB, which will cause the task to fail. To avoid this issue, it is recommended to fill in the specific database and table names.
-- Add the public and private network IP addresses of AWS DMS to the IP access lists of both source and target databases. Otherwise, the network connection might fail in some scenarios.
-- Use [VPC Peerings](/tidb-cloud/set-up-vpc-peering-connections.md#set-up-vpc-peering-on-aws) or [Private Endpoint connections](/tidb-cloud/set-up-private-endpoint-connections.md) to connect AWS DMS and the TiDB cluster.
-- It is recommended to use the same region for AWS DMS and the TiDB cluster to get better data writing performance.
-- It is recommended to use AWS DMS `dms.t3.large` (2 vCPUs and 8 GiB memory) or a higher instance class. Small instance classes will possibly cause out of memory (OOM) errors.
-- AWS DMS will automatically create the `awsdms_control` database in the target database.
+-   ソースデータベースが Amazon RDS または Amazon Auroraの場合は、 `binlog_format`パラメータを`ROW`に設定する必要があります。データベースがデフォルトのパラメータ グループを使用する場合、 `binlog_format`パラメータはデフォルトで`MIXED`になり、変更できません。この場合、 [新しいパラメータグループを作成する](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_GettingStarted.Prerequisites.html#CHAP_GettingStarted.Prerequisites.params) (たとえば`newset`を指定し、その`binlog_format`を`ROW`に設定する必要があります。次に、 [デフォルトのパラメータグループを変更する](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithDBInstanceParamGroups.html#USER_WorkingWithParamGroups.Modifying) ～ `newset` 。パラメータグループを変更するとデータベースが再起動されることに注意してください。
+-   ソース データベースが TiDB と互換性のある照合順序を使用していることを確認してください。 TiDB の utf8mb4 文字セットのデフォルトの照合順序は`utf8mb4_bin`です。ただし、MySQL 8.0 では、デフォルトの照合順序は`utf8mb4_0900_ai_ci`です。アップストリームの MySQL がデフォルトの照合順序を使用する場合、TiDB は`utf8mb4_0900_ai_ci`と互換性がないため、AWS DMS は TiDB にターゲットテーブルを作成できず、データを移行できません。この問題を解決するには、移行前にソース データベースの照合順序を`utf8mb4_bin`に変更する必要があります。 TiDB でサポートされる文字セットと照合順序の完全なリストについては、 [文字セットと照合順序](https://docs.pingcap.com/tidb/stable/character-set-and-collation)を参照してください。
+-   TiDB には、デフォルトでシステム データベース`INFORMATION_SCHEMA` 、 `PERFORMANCE_SCHEMA` 、 `mysql` 、 `sys` 、および`test`が含まれています。 AWS DMS 移行タスクを作成するときは、デフォルトの`%`使用して移行オブジェクトを選択するのではなく、これらのシステム データベースをフィルタリングして除外する必要があります。そうしないと、AWS DMS はこれらのシステム データベースをソース データベースからターゲット TiDB に移行しようとし、タスクが失敗します。この問題を回避するには、特定のデータベース名とテーブル名を入力することをお勧めします。
+-   AWS DMS のパブリックおよびプライベートネットワーク IP アドレスを、ソースデータベースとターゲットデータベースの両方の IP アクセスリストに追加します。そうしないと、一部のシナリオでネットワーク接続が失敗する可能性があります。
+-   [VPC ピアリング](/tidb-cloud/set-up-vpc-peering-connections.md#set-up-vpc-peering-on-aws)または[プライベートエンドポイント接続](/tidb-cloud/set-up-private-endpoint-connections.md)を使用して、AWS DMS と TiDB クラスターを接続します。
+-   データ書き込みパフォーマンスを向上させるために、AWS DMS と TiDB クラスターに同じリージョンを使用することをお勧めします。
+-   AWS DMS `dms.t3.large` (2 vCPU と 8 GiBメモリ) 以降のインスタンス クラスを使用することをお勧めします。小さなインスタンス クラスでは、メモリ不足 (OOM) エラーが発生する可能性があります。
+-   AWS DMS は、ターゲット データベースに`awsdms_control`データベースを自動的に作成します。
 
-## Limitation
+## 制限 {#limitation}
 
-AWS DMS does not support replicating `DROP TABLE`.
+AWS DMS はレプリケーションをサポートしていません`DROP TABLE` 。
 
-## Step 1. Create an AWS DMS replication instance
+## ステップ 1. AWS DMS レプリケーションインスタンスを作成する {#step-1-create-an-aws-dms-replication-instance}
 
-1. Go to the [Replication instances](https://console.aws.amazon.com/dms/v2/home#replicationInstances) page in the AWS DMS console, and switch to the corresponding region. It is recommended to use the same region for AWS DMS as TiDB Cloud. In this document, the upstream and downstream databases and the DMS instance are all in the **us-west-2** region.
+1.  AWS DMS コンソールの[レプリケーションインスタンス](https://console.aws.amazon.com/dms/v2/home#replicationInstances)ページに移動し、対応するリージョンに切り替えます。 AWS DMS にはTiDB Cloudと同じリージョンを使用することをお勧めします。このドキュメントでは、アップストリームおよびダウンストリームのデータベースと DMS インスタンスはすべて**us-west-2**リージョンにあります。
 
-2. Click **Create replication instance**.
+2.  **[レプリケーション インスタンスの作成]**をクリックします。
 
     ![Create replication instance](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-create-instance.png)
 
-3. Fill in an instance name, ARN, and description.
+3.  インスタンス名、ARN、説明を入力します。
 
-4. Fill in the instance configuration:
-    - **Instance class**: select an appropriate instance class. It is recommended to use `dms.t3.large` or a higher instance class to get better performance.
-    - **Engine version**: use the default configuration.
-    - **Multi-AZ**: select **Single-AZ** or **Multi-AZ** based on your business needs.
+4.  インスタンス構成を入力します。
+    -   **インスタンス クラス**: 適切なインスタンス クラスを選択します。パフォーマンスを向上させるには、 `dms.t3.large`つ以上のインスタンス クラスを使用することをお勧めします。
+    -   **エンジンのバージョン**: デフォルトの構成を使用します。
+    -   **マルチ AZ** : ビジネス ニーズに基づいて**シングル AZ**または**マルチ AZ**を選択します。
 
-5. Configure the storage in the **Allocated storage (GiB)** field. Use the default configuration.
+5.  **[割り当てられたstorage(GiB)]**フィールドでstorageを構成します。デフォルトの構成を使用します。
 
-6. Configure connectivity and security.
-    - **Network type - new**: select **IPv4**.
-    - **Virtual private cloud (VPC) for IPv4**: select the VPC that you need. It is recommended to use the same VPC as the upstream database to simplify the network configuration.
-    - **Replication subnet group**: choose a subnet group for your replication instance.
-    - **Public accessible**: use the default configuration.
+6.  接続とセキュリティを構成します。
+    -   **ネットワーク タイプ - 新規**: **IPv4**を選択します。
+    -   **IPv4 用の仮想プライベート クラウド (VPC)** : 必要な VPC を選択します。ネットワーク構成を簡素化するために、上流データベースと同じ VPC を使用することをお勧めします。
+    -   **レプリケーション サブネット グループ**: レプリケーション インスタンスのサブネット グループを選択します。
+    -   **パブリックにアクセス可能**: デフォルト設定を使用します。
 
-7. Configure the **Advanced settings**, **Maintenance**, and **Tags** if needed. Click **Create replication instance** to finish the instance creation.
+7.  必要に応じて、 **[詳細設定]** 、 **[メンテナンス]** 、および**[タグ]**を構成します。 **「レプリケーション・インスタンスの作成」**をクリックしてインスタンスの作成を完了します。
 
-## Step 2. Create the source database endpoint
+## ステップ 2. ソース データベース エンドポイントを作成する {#step-2-create-the-source-database-endpoint}
 
-1. In the [AWS DMS console](https://console.aws.amazon.com/dms/v2/home), click the replication instance that you just created. Copy the public and private network IP addresses as shown in the following screenshot.
+1.  [AWS DMS コンソール](https://console.aws.amazon.com/dms/v2/home)で、作成したばかりのレプリケーション インスタンスをクリックします。次のスクリーンショットに示すように、パブリック ネットワーク IP アドレスとプライベート ネットワーク IP アドレスをコピーします。
 
     ![Copy the public and private network IP addresses](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-copy-ip.png)
 
-2. Configure the security group rules for Amazon RDS. In this example, add the public and private IP addresses of the AWS DMS instance to the security group.
+2.  Amazon RDS のセキュリティ グループ ルールを設定します。この例では、AWS DMS インスタンスのパブリック IP アドレスとプライベート IP アドレスをセキュリティ グループに追加します。
 
     ![Configure the security group rules](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-rules.png)
 
-3. Click **Create endpoint** to create the source database endpoint.
+3.  **[エンドポイントの作成]**をクリックして、ソース データベース エンドポイントを作成します。
 
     ![Click Create endpoint](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-endpoint.png)
 
-4. In this example, click **Select RDS DB instance** and then select the source RDS instance. If the source database is a self-hosted MySQL, you can skip this step and fill in the information in the following steps.
+4.  この例では、 **[RDS DB インスタンスの選択]**をクリックして、ソース RDS インスタンスを選択します。ソース データベースがセルフホスト型 MySQL である場合は、この手順をスキップして、次の手順で情報を入力できます。
 
     ![Select RDS DB instance](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-select-rds.png)
 
-5. Configure the following information:
-   - **Endpoint identifier**: create a label for the source endpoint to help you identify it in the subsequent task configuration.
-   - **Descriptive Amazon Resource Name (ARN) - optional**: create a friendly name for the default DMS ARN.
-   - **Source engine**: select **MySQL**.
-   - **Access to endpoint database**: select **Provide access information manually**.
-   - **Server name**: fill in the name of the data server for the data provider. You can copy it from the database console. If the upstream is Amazon RDS or Amazon Aurora, the name will be automatically filled in. If it is a self-hosted MySQL without a domain name, you can fill in the IP address.
-   - Fill in the source database **Port**, **Username**, and **Password**.
-   - **Secure Socket Layer (SSL) mode**: you can enable SSL mode as needed.
+5.  次の情報を設定します。
+
+    -   **エンドポイント識別子**: ソース エンドポイントのラベルを作成して、後続のタスク構成で識別しやすくします。
+    -   **説明的な Amazon リソースネーム (ARN) - オプション**: デフォルトの DMS ARN のフレンドリ名を作成します。
+    -   **ソース エンジン**: **MySQL**を選択します。
+    -   **エンドポイント データベースへのアクセス**: **[アクセス情報を手動で提供する]**を選択します。
+    -   **サーバー名**: データプロバイダーのデータサーバーの名前を入力します。データベース コンソールからコピーできます。アップストリームが Amazon RDS または Amazon Auroraの場合、名前は自動的に入力されます。ドメイン名のないセルフホスト MySQL の場合は、IP アドレスを入力できます。
+    -   ソース データベースの [**ポート]** 、 **[ユーザー名**] 、および**[パスワード]**を入力します。
+    -   **セキュリティ Socket Layer (SSL) モード**: 必要に応じて SSL モードを有効にできます。
 
     ![Fill in the endpoint configurations](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-endpoint-config.png)
 
-6. Use default values for **Endpoint settings**, **KMS key**, and **Tags**. In the **Test endpoint connection (optional)** section, it is recommended to select the same VPC as the source database to simplify the network configuration. Select the corresponding replication instance, and then click **Run test**. The status needs to be **successful**.
+6.  **エンドポイント設定**、 **KMS キー**、**タグに**はデフォルト値を使用します。 **[エンドポイント接続のテスト (オプション)]**セクションでは、ネットワーク構成を簡素化するために、ソース データベースと同じ VPC を選択することをお勧めします。対応するレプリケーション インスタンスを選択し、 **[テストの実行]**をクリックします。ステータスは**成功で**ある必要があります。
 
-7. Click **Create endpoint**.
+7.  **「エンドポイントの作成」**をクリックします。
 
     ![Click Create endpoint](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-connection.png)
 
-## Step 3. Create the target database endpoint
+## ステップ 3. ターゲット データベース エンドポイントを作成する {#step-3-create-the-target-database-endpoint}
 
-1. In the [AWS DMS console](https://console.aws.amazon.com/dms/v2/home), click the replication instance that you just created. Copy the public and private network IP addresses as shown in the following screenshot.
+1.  [AWS DMS コンソール](https://console.aws.amazon.com/dms/v2/home)で、作成したばかりのレプリケーション インスタンスをクリックします。次のスクリーンショットに示すように、パブリック ネットワーク IP アドレスとプライベート ネットワーク IP アドレスをコピーします。
 
     ![Copy the public and private network IP addresses](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-copy-ip.png)
 
-2. In the TiDB Cloud console, go to the [**Clusters**](https://tidbcloud.com/console/clusters) page, click the name of your target cluster, and then click **Connect** in the upper-right corner to get the TiDB Cloud database connection information.
+2.  TiDB Cloudコンソールで、 [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット クラスターの名前をクリックし、右上隅にある**[接続]**をクリックして、 TiDB Cloudデータベース接続情報を取得します。
 
-3. Under **Step 1: Create traffic filter** in the dialog, click **Edit**, enter the public and private network IP addresses that you copied from the AWS DMS console, and then click **Update Filter**. It is recommended to add the public IP address and private IP address of the AWS DMS replication instance to the TiDB cluster traffic filter at the same time. Otherwise, AWS DMS might not be able to connect to the TiDB cluster in some scenarios.
+3.  **[ステップ 1: ダイアログのトラフィック フィルターを作成する]**で、 **[編集]**をクリックし、AWS DMS コンソールからコピーしたパブリック ネットワークおよびプライベート ネットワークの IP アドレスを入力し、 **[フィルターの更新]**をクリックします。 AWS DMS レプリケーション インスタンスのパブリック IP アドレスとプライベート IP アドレスを同時に TiDB クラスター トラフィック フィルターに追加することをお勧めします。そうしないと、一部のシナリオでは AWS DMS が TiDB クラスターに接続できない可能性があります。
 
-4. Click **Download TiDB cluster CA** to download the CA certificate. Under **Step 3: Connect with a SQL client** in the dialog, take a note of the `-u`, `-h`, and `-P` information in the connection string for later use.
+4.  **[TiDB クラスター CA のダウンロード]**をクリックして CA 証明書をダウンロードします。ダイアログの**「ステップ 3: SQL クライアントに接続する」で**、後で使用できるように接続文字列の`-u` 、 `-h` 、および`-P`の情報をメモします。
 
-5. Click the **VPC Peering** tab in the dialog, and then click **Add** under **Step 1: Set up VPC** to create a VPC Peering connection for the TiDB cluster and AWS DMS.
+5.  ダイアログの**[VPC ピアリング]**タブをクリックし、 **[ステップ 1: VPC をセットアップする]**で**[追加**] をクリックして、TiDB クラスターと AWS DMS の VPC ピアリング接続を作成します。
 
-6. Configure the corresponding information. See [Set Up VPC Peering Connections](/tidb-cloud/set-up-vpc-peering-connections.md).
+6.  対応する情報を設定します。 [VPC ピア接続のセットアップ](/tidb-cloud/set-up-vpc-peering-connections.md)を参照してください。
 
-7. Configure the target endpoint for the TiDB cluster.
-    - **Endpoint type**: select **Target endpoint**.
-    - **Endpoint identifier**: fill in a name for the endpoint.
-    - **Descriptive Amazon Resource Name (ARN) - optional**: create a friendly name for the default DMS ARN.
-    - **Target engine**: select **MySQL**.
+7.  TiDB クラスターのターゲット エンドポイントを構成します。
+
+    -   **エンドポイント タイプ**: **[ターゲット エンドポイント]**を選択します。
+    -   **エンドポイント識別子**: エンドポイントの名前を入力します。
+    -   **説明的な Amazon リソースネーム (ARN) - オプション**: デフォルトの DMS ARN のフレンドリ名を作成します。
+    -   **ターゲット エンジン**: **MySQL**を選択します。
 
     ![Configure the target endpoint](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-target-endpoint.png)
 
-8. In the [AWS DMS console](https://console.aws.amazon.com/dms/v2/home), click **Create endpoint** to create the target database endpoint, and then configure the following information:
-    - **Server name**: fill in the hostname of your TiDB cluster, which is the `-h` information you have recorded.
-    - **Port**: enter the port of your TiDB cluster, which is the `-P` information you have recorded. The default port of a TiDB cluster is 4000.
-    - **User name**: enter the user name of your TiDB cluster, which is the `-u` information you have recorded.
-    - **Password**: enter the password of your TiDB cluster.
-    - **Secure Socket Layer (SSL) mode**: select **Verify-ca**.
-    - Click **Add new CA certificate** to import the CA file downloaded from the TiDB Cloud console in the previous steps.
+8.  [AWS DMS コンソール](https://console.aws.amazon.com/dms/v2/home)で、 **[エンドポイントの作成]**をクリックしてターゲット データベース エンドポイントを作成し、次の情報を構成します。
+
+    -   **サーバー名**: TiDB クラスターのホスト名を入力します。これは、記録した`-h`情報です。
+    -   **Port** : TiDB クラスターのポートを入力します。これは、記録した`-P`の情報です。 TiDB クラスターのデフォルトのポートは 4000 です。
+    -   **ユーザー名**: TiDB クラスターのユーザー名を入力します。これは、記録した`-u`情報です。
+    -   **パスワード**: TiDB クラスターのパスワードを入力します。
+    -   **セキュリティ Socket Layer (SSL) モード**: **Verify-ca**を選択します。
+    -   **[新しい CA 証明書の追加]**をクリックして、前の手順でTiDB Cloudコンソールからダウンロードした CA ファイルをインポートします。
 
     ![Fill in the target endpoint information](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-target-endpoint2.png)
 
-9. Import the CA file.
+9.  CA ファイルをインポートします。
 
     ![Upload CA](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-upload-ca.png)
 
-10. Use the default values for **Endpoint settings**, **KMS key**, and **Tags**. In the **Test endpoint connection (optional)** section, select the same VPC as the source database. Select the corresponding replication instance, and then click **Run test**. The status needs to be **successful**.
+10. **エンドポイント設定**、 **KMS キー**、および**タグ**にはデフォルト値を使用します。 **[エンドポイント接続のテスト (オプション)]**セクションで、ソース データベースと同じ VPC を選択します。対応するレプリケーション インスタンスを選択し、 **[テストの実行]**をクリックします。ステータスは**成功で**ある必要があります。
 
-11. Click **Create endpoint**.
+11. **「エンドポイントの作成」**をクリックします。
 
     ![Click Create endpoint](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-target-endpoint3.png)
 
-## Step 4. Create a database migration task
+## ステップ 4. データベース移行タスクを作成する {#step-4-create-a-database-migration-task}
 
-1. In the AWS DMS console, go to the [Data migration tasks](https://console.aws.amazon.com/dms/v2/home#tasks) page. Switch to your region. Then click **Create task** in the upper-right corner of the window.
+1.  AWS DMS コンソールで、 [データ移行タスク](https://console.aws.amazon.com/dms/v2/home#tasks)ページに移動します。お住まいの地域に切り替えてください。次に、ウィンドウの右上隅にある**「タスクの作成」**をクリックします。
 
     ![Create task](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-create-task.png)
 
-2. Configure the following information:
-    - **Task identifier**: fill in a name for the task. It is recommended to use a name that is easy to remember.
-    - **Descriptive Amazon Resource Name (ARN) - optional**: create a friendly name for the default DMS ARN.
-    - **Replication instance**: select the AWS DMS instance that you just created.
-    - **Source database endpoint**: select the source database endpoint that you just created.
-    - **Target database endpoint**: select the target database endpoint that you just created.
-    - **Migration type**: select a migration type as needed. In this example, select **Migrate existing data and replicate ongoing changes**.
+2.  次の情報を設定します。
+
+    -   **タスク識別子**: タスクの名前を入力します。覚えやすい名前を使用することをお勧めします。
+    -   **説明的な Amazon リソースネーム (ARN) - オプション**: デフォルトの DMS ARN のフレンドリ名を作成します。
+    -   **レプリケーションインスタンス**: 作成したばかりの AWS DMS インスタンスを選択します。
+    -   **ソース データベース エンドポイント**: 作成したばかりのソース データベース エンドポイントを選択します。
+    -   **ターゲット データベース エンドポイント**: 作成したばかりのターゲット データベース エンドポイントを選択します。
+    -   **移行タイプ**: 必要に応じて移行タイプを選択します。この例では、 **[既存のデータを移行し、進行中の変更をレプリケートする]**を選択します。
 
     ![Task configurations](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-task-config.png)
 
-3. Configure the following information:
-    - **Editing mode**: select **Wizard**.
-    - **Custom CDC stop mode for source transactions**: use the default setting.
-    - **Target table preparation mode**: select **Do nothing** or other options as needed. In this example, select **Do nothing**.
-    - **Stop task after full load completes**: use the default setting.
-    - **Include LOB columns in replication**: select **Limited LOB mode**.
-    - **Maximum LOB size in (KB)**: use the default value **32**.
-    - **Turn on validation**: select it according to your needs.
-    - **Task logs**: select **Turn on CloudWatch logs** for troubleshooting in future. Use the default settings for the related configurations.
+3.  次の情報を設定します。
+
+    -   **編集モード**:**ウィザード**を選択します。
+    -   **ソース トランザクションのカスタム CDC 停止モード**: デフォルト設定を使用します。
+    -   **ターゲットテーブル準備モード**: 必要に応じて、 **[何もしない]**または他のオプションを選択します。この例では、 **[何もしない]**を選択します。
+    -   **全ロード完了後にタスクを停止**: デフォルト設定を使用します。
+    -   **レプリケーションに LOB 列を含める**:**制限付き LOB モード**を選択します。
+    -   **最大 LOB サイズ (KB)** : デフォルト値**32**を使用します。
+    -   **検証をオンにする**: ニーズに応じて選択します。
+    -   **タスク ログ**: 今後のトラブルシューティングのために**CloudWatch ログをオンにする**を選択します。関連する構成にはデフォルト設定を使用します。
 
     ![Task settings](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-task-settings.png)
 
-4. In the **Table mappings** section, specify the database to be migrated.
+4.  **[テーブル マッピング]**セクションで、移行するデータベースを指定します。
 
-    The schema name is the database name in the Amazon RDS instance. The default value of the **Source name** is "%", which means that all databases in the Amazon RDS will be migrated to TiDB. It will cause the system databases such as `mysql` and `sys` in Amazon RDS to be migrated to the TiDB cluster, and result in task failure. Therefore, it is recommended to fill in the specific database name, or filter out all system databases. For example, according to the settings in the following screenshot, only the database named `franktest` and all the tables in that database will be migrated.
+    スキーマ名は、Amazon RDS インスタンスのデータベース名です。**ソース名**のデフォルト値は「%」です。これは、Amazon RDS 内のすべてのデータベースが TiDB に移行されることを意味します。これにより、Amazon RDS の`mysql`や`sys`などのシステム データベースが TiDB クラスターに移行され、タスクが失敗します。したがって、特定のデータベース名を入力するか、すべてのシステム データベースをフィルターで除外することをお勧めします。たとえば、次のスクリーンショットの設定によれば、 `franktest`という名前のデータベースとそのデータベース内のすべてのテーブルのみが移行されます。
 
     ![Table mappings](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-table-mappings.png)
 
-5. Click **Create task** in the lower-right corner.
+5.  右下隅にある**「タスクの作成」**をクリックします。
 
-6. Go back to the [Data migration tasks](https://console.aws.amazon.com/dms/v2/home#tasks) page. Switch to your region. You can see the status and progress of the task.
+6.  [データ移行タスク](https://console.aws.amazon.com/dms/v2/home#tasks)ページに戻ります。お住まいの地域に切り替えてください。タスクのステータスと進捗状況を確認できます。
 
     ![Tasks status](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-task-status.png)
 
-If you encounter any issues or failures during the migration, you can check the log information in [CloudWatch](https://console.aws.amazon.com/cloudwatch/home) to troubleshoot the issues.
+移行中に問題や障害が発生した場合は、 [クラウドウォッチ](https://console.aws.amazon.com/cloudwatch/home)のログ情報を確認して問題のトラブルシューティングを行うことができます。
 
 ![Troubleshooting](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-troubleshooting.png)
 
-## See also
+## こちらも参照 {#see-also}
 
-- If you want to migrate from MySQL-compatible databases, such as Aurora MySQL and Amazon Relational Database Service (RDS), to TiDB Cloud, it is recommended to use [Data Migration on TiDB Cloud](/tidb-cloud/migrate-from-mysql-using-data-migration.md).
+-   Aurora MySQL や Amazon Relational Database Service (RDS) などの MySQL 互換データベースからTiDB Cloudに移行する場合は、 [TiDB Cloudでのデータ移行](/tidb-cloud/migrate-from-mysql-using-data-migration.md)を使用することをお勧めします。
 
-- If you want to migrate from Amazon RDS for Oracle to TiDB Serverless Using AWS DMS, see [Migrate from Amazon RDS for Oracle to TiDB Serverless Using AWS DMS](/tidb-cloud/migrate-from-oracle-using-aws-dms.md).
+-   AWS DMS を使用して Amazon RDS for Oracle から TiDB サーバーレスに移行する場合は、 [AWS DMS を使用して Amazon RDS for Oracle から TiDB サーバーレスに移行する](/tidb-cloud/migrate-from-oracle-using-aws-dms.md)を参照してください。

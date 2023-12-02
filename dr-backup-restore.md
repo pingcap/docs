@@ -3,31 +3,31 @@ title: DR Solution Based on BR
 summary: Learn how to implement disaster recovery based on TiDB's backup and restore feature.
 ---
 
-# DR Solution Based on BR
+# BRをベースとしたDRソリューション {#dr-solution-based-on-br}
 
-A TiDB cluster has multiple replicas, which allows it to tolerate the failure of a single data center or region and continue to provide services. In the case of a natural disaster, software vulnerability, hardware failure, virus attack, or misoperations, which impacts an area larger than a single data center or region, TiDB's Backup & Restore (BR) feature can back up data to an independent disaster recovery (DR) storage device to protect user data from damage. Compared with other DR solutions, the BR feature is more flexible, reliable, recoverable, and cost-effective:
+TiDB クラスターには複数のレプリカがあるため、単一のデータセンターまたはリージョンの障害に耐えてサービスを提供し続けることができます。自然災害、ソフトウェアの脆弱性、ハードウェア障害、ウイルス攻撃、または誤操作が単一のデータセンターや地域よりも大きなエリアに影響を及ぼした場合、TiDB のバックアップ &amp; リストア (BR) 機能により、データを独立した災害復旧にバックアップできます。ユーザーデータを損傷から保護する (DR)storageデバイス。他の DR ソリューションと比較して、 BR機能は柔軟性、信頼性、回復可能性が高く、コスト効率が優れています。
 
-- Flexibility: You can back up data any time with any frequency. This makes backup and restore flexible and better adapts to different business scenarios.
-- Reliability: Backup data is usually stored on an independent storage device and this means enhanced data security.
-- Recoverability: Any loss or damage to the original data caused by any unexpected situation can be recovered by restoring the backup data. This makes the BR feature highly recoverable and ensures the normal use of your database.
-- Cost effectiveness: You can get your database protected using BR without spending too much.
+-   柔軟性: データはいつでも、どの頻度でもバックアップできます。これにより、バックアップと復元が柔軟になり、さまざまなビジネス シナリオにさらに適応できるようになります。
+-   信頼性: バックアップ データは通常、独立したstorageデバイスに保存されるため、データ セキュリティが強化されます。
+-   回復可能性: 予期せぬ事態による元のデータの損失や損傷は、バックアップ データを復元することで回復できます。これにより、 BR機能の回復可能性が高まり、データベースの通常の使用が保証されます。
+-   費用対効果: BRを使用すると、それほど費用をかけずにデータベースを保護できます。
 
-Generally speaking, BR is the last resort for data safety. It improves the safety and reliability of the databases without requiring too much cost. BR protects data in various unexpected situations so that you can use the database safely without worrying about the risk of data loss or damage.
+一般に、 BR はデータの安全性を確保するための最後の手段です。あまりコストをかけずにデータベースの安全性と信頼性を向上させます。 BRは、さまざまな予期せぬ事態からデータを保護するため、データの損失や破損のリスクを心配することなく、データベースを安全に使用できます。
 
-## Perform backup and restore
+## バックアップと復元を実行する {#perform-backup-and-restore}
 
 ![BR log backup and PITR architecture](/media/dr/dr-backup-and-restore.png)
 
-As shown in the preceding architecture, you can back up data to a DR storage device located in other regions, and recover data from the backup data as needed. This means that the cluster can tolerate the failure of a single region with a Recovery Point Objective (RPO) of up to 5 minutes and a Recovery Time Objective (RTO) between tens of minutes and a few hours. However, if the database size is large, the RTO might be longer.
+前述のアーキテクチャに示すように、他のリージョンにある DRstorageデバイスにデータをバックアップし、必要に応じてバックアップ データからデータをリカバリできます。これは、クラスターが最大 5 分の目標復旧時点 (RPO) と数十分から数時間の目標復旧時間 (RTO) で単一リージョンの障害を許容できることを意味します。ただし、データベースのサイズが大きい場合は、RTO が長くなる可能性があります。
 
-> **Note:**
+> **注記：**
 >
-> The term "region" in this document means a physical location.
+> 本書における「地域」という用語は、物理的な場所を意味します。
 
-Meanwhile, TiDB provides backup and restore based on block storage snapshots. This feature reduces the recovery time to hours or even less than one hour. TiDB is continuously improving and optimizing the backup and restore capabilities so as to provide you better services.
+一方、TiDB は、ブロックstorageスナップショットに基づいてバックアップと復元を提供します。この機能により、回復時間が数時間、場合によっては 1 時間未満に短縮されます。 TiDB は、より良いサービスを提供するために、バックアップと復元の機能を継続的に改善および最適化しています。
 
-TiDB also provides detailed documentation to help you understand how to use the backup and restore feature in DR scenarios. Among them,
+TiDB は、DR シナリオでのバックアップおよび復元機能の使用方法を理解するのに役立つ詳細なドキュメントも提供します。その中で、
 
-- [Usage Overview of TiDB Backup and Restore](/br/br-use-overview.md) is an overview of the BR feature, including the backup strategy and the organization of backup data.
-- [Backup & Restore FAQs](/faq/backup-and-restore-faq.md) lists the frequently asked questions (FAQs) and the solutions of TiDB Backup & Restore (BR).
-- [Overview of TiDB Backup & Restore Architecture](/br/backup-and-restore-design.md) describes the design architecture of the BR feature, including the backup and restore processes and the design of backup files.
+-   [TiDB のバックアップと復元の使用法の概要](/br/br-use-overview.md)は、バックアップ戦略とバックアップ データの構成を含む、 BR機能の概要です。
+-   [バックアップと復元に関するよくある質問](/faq/backup-and-restore-faq.md) TiDB バックアップ &amp; リストア (BR) のよくある質問 (FAQ) と解決策がリストされています。
+-   [TiDB バックアップおよび復元アーキテクチャの概要](/br/backup-and-restore-design.md) 、バックアップおよび復元プロセス、バックアップ ファイルの設計など、 BR機能の設計アーキテクチャを説明します。

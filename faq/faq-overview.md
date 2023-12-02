@@ -3,73 +3,8 @@ title: TiDB FAQ Summary
 summary: Summarizes frequently asked questions (FAQs) about TiDB.
 ---
 
-# TiDB FAQ Summary
+# TiDB FAQの概要 {#tidb-faq-summary}
 
-This document summarizes frequently asked questions (FAQs) about TiDB.
+この文書は、TiDB に関するよくある質問 (FAQ) をまとめたものです。
 
-<table>
-<thead>
-  <tr>
-    <th>Category</th>
-    <th>Related documents</th>
-  </tr>
-</thead>
-<tbody>
-  <tr>
-    <td>TiDB architecture and principles</td>
-    <td><a href="https://docs.pingcap.com/tidb/v7.5/tidb-faq">TiDB Architecture FAQs</a></td>
-  </tr>
-  <tr>
-    <td>Deployment</td>
-    <td><ul><li><a href="https://docs.pingcap.com/tidb/v7.5/deploy-and-maintain-faq">Deployment FAQs</a></li><li><a href="https://docs.pingcap.com/tidb/v7.5/tiup-faq">TiUP FAQs</a></li><li><a href="https://docs.pingcap.com/tidb-in-kubernetes/stable/faq">TiDB on Kubernetes FAQs</a></li></ul></td>
-  </tr>
-  <tr>
-    <td>Data migration</td>
-    <td>
-      <ul>
-        <li><a href="https://docs.pingcap.com/tidb/v7.5/migration-tidb-faq">Data Migration FAQs</a></li>
-        <li>Data import
-          <ul>
-            <li><a href="https://docs.pingcap.com/tidb/v7.5/tidb-lightning-faq">TiDB Lightning FAQs</a></li>
-            <li><a href="https://docs.pingcap.com/tidb/v7.5/dm-faq">DM FAQs</a></li>
-          </ul>
-        </li>
-        <li>Incremental data replication
-          <ul>
-            <li><a href="https://docs.pingcap.com/tidb/v7.5/ticdc-faq">TiCDC FAQs</a></li>
-            <li><a href="https://docs.pingcap.com/tidb/v7.5/tidb-binlog-faq">TiDB Binlog FAQs</a></li>
-          </ul>
-        </li>
-      </ul>
-    </td>
-  </tr>
-  <tr>
-    <td>Data backup and restore</td>
-    <td><a href="https://docs.pingcap.com/tidb/v7.5/backup-and-restore-faq">Backup &amp; Restore FAQs</a></td>
-  </tr>
-  <tr>
-    <td>SQL operations</td>
-    <td><a href="https://docs.pingcap.com/tidb/v7.5/sql-faq">SQL FAQs</a></td>
-  </tr>
-  <tr>
-    <td>Cluster upgrade</td>
-    <td><a href="https://docs.pingcap.com/tidb/v7.5/upgrade-faq">TiDB Upgrade FAQs</a></td>
-  </tr>
-  <tr>
-    <td>Cluster management</td>
-    <td><a href="https://docs.pingcap.com/tidb/v7.5/manage-cluster-faq">Cluster Management FAQs</a></td>
-  </tr>
-  <tr>
-    <td>Monitor and alert</td>
-    <td><ul><li><a href="https://docs.pingcap.com/tidb/v7.5/monitor-faq">Monitoring FAQs</a></li><li><a href="https://docs.pingcap.com/tidb/v7.5/dashboard-faq">TiDB Dashboard FAQs</a></li><li><a href="https://docs.pingcap.com/tidb/v7.5/alert-rules">TiDB Cluster Alert Rules</a></li></ul></td>
-  </tr>
-  <tr>
-    <td>High availability and high reliability</td>
-    <td><ul><li><a href="https://docs.pingcap.com/tidb/v7.5/high-availability-faq">High Availability FAQs</a></li><li><a href="https://docs.pingcap.com/tidb/v7.5/high-reliability-faq">High Reliability FAQs</a></li></ul></td>
-  </tr>
-  <tr>
-    <td>Common error codes</td>
-    <td><a href="https://docs.pingcap.com/tidb/v7.5/error-codes">Error Codes and Troubleshooting</a></td>
-  </tr>
-</tbody>
-</table>
+<table><thead><tr><th>カテゴリー</th><th>関連資料</th></tr></thead><tbody><tr><td>TiDB のアーキテクチャと原則</td><td><a href="https://docs.pingcap.com/tidb/v7.5/tidb-faq">TiDBアーキテクチャよくある質問</a></td></tr><tr><td>導入</td><td><ul><li><a href="https://docs.pingcap.com/tidb/v7.5/deploy-and-maintain-faq">導入に関するよくある質問</a></li><li><a href="https://docs.pingcap.com/tidb/v7.5/tiup-faq">TiUPよくある質問</a></li><li><a href="https://docs.pingcap.com/tidb-in-kubernetes/stable/faq">Kubernetes 上の TiDB に関するよくある質問</a></li></ul></td></tr><tr><td>データ移行</td><td><ul><li><a href="https://docs.pingcap.com/tidb/v7.5/migration-tidb-faq">データ移行に関するよくある質問</a></li><li>データインポート<ul><li><a href="https://docs.pingcap.com/tidb/v7.5/tidb-lightning-faq">TiDB Lightningよくある質問</a></li><li><a href="https://docs.pingcap.com/tidb/v7.5/dm-faq">DMに関するよくある質問</a></li></ul></li><li>増分データレプリケーション<ul><li><a href="https://docs.pingcap.com/tidb/v7.5/ticdc-faq">TiCDC よくある質問</a></li><li><a href="https://docs.pingcap.com/tidb/v7.5/tidb-binlog-faq">TiDBBinlogよくある質問</a></li></ul></li></ul></td></tr><tr><td>データのバックアップと復元</td><td><a href="https://docs.pingcap.com/tidb/v7.5/backup-and-restore-faq">バックアップと復元に関するよくある質問</a></td></tr><tr><td>SQL操作</td><td><a href="https://docs.pingcap.com/tidb/v7.5/sql-faq">SQL FAQ</a></td></tr><tr><td>クラスタのアップグレード</td><td><a href="https://docs.pingcap.com/tidb/v7.5/upgrade-faq">TiDB アップグレードに関するよくある質問</a></td></tr><tr><td>クラスタ管理</td><td><a href="https://docs.pingcap.com/tidb/v7.5/manage-cluster-faq">クラスタ管理に関するよくある質問</a></td></tr><tr><td>監視と警告</td><td><ul><li><a href="https://docs.pingcap.com/tidb/v7.5/monitor-faq">モニタリングに関するよくある質問</a></li><li><a href="https://docs.pingcap.com/tidb/v7.5/dashboard-faq">TiDB ダッシュボードに関するよくある質問</a></li><li><a href="https://docs.pingcap.com/tidb/v7.5/alert-rules">TiDBクラスタのアラート ルール</a></li></ul></td></tr><tr><td>高可用性と高信頼性</td><td><ul><li><a href="https://docs.pingcap.com/tidb/v7.5/high-availability-faq">高可用性に関するよくある質問</a></li><li><a href="https://docs.pingcap.com/tidb/v7.5/high-reliability-faq">高信頼性に関するよくある質問</a></li></ul></td></tr><tr><td>一般的なエラーコード</td><td><a href="https://docs.pingcap.com/tidb/v7.5/error-codes">エラーコードとトラブルシューティング</a></td></tr></tbody></table>

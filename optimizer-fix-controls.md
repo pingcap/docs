@@ -3,64 +3,64 @@ title: Optimizer Fix Controls
 summary: Learn about the Optimizer Fix Controls feature and how to use `tidb_opt_fix_control` to control the TiDB optimizer in a more fine-grained way.
 ---
 
-# Optimizer Fix Controls
+# オプティマイザー修正コントロール {#optimizer-fix-controls}
 
-As the product evolves iteratively, the behavior of the TiDB optimizer changes, which in turn generates more reasonable execution plans. However, in some particular scenarios, the new behavior might lead to unexpected results. For example:
+製品が反復的に進化するにつれて、TiDB オプティマイザーの動作が変化し、より合理的な実行計画が生成されます。ただし、特定のシナリオでは、新しい動作により予期しない結果が生じる可能性があります。例えば：
 
-- The effect of some behaviors relies on a specific scenario. Changes that bring improvements to most scenarios might cause regressions to others.
-- Sometimes, the relationship between changes in the behavior details and their consequences is very complicated. An improvement in a certain behavior might cause overall regression.
+-   一部の動作の影響は、特定のシナリオに依存します。ほとんどのシナリオに改善をもたらす変更は、他のシナリオに後退を引き起こす可能性があります。
+-   場合によっては、動作の詳細の変化とその結果との関係が非常に複雑になることがあります。特定の動作を改善すると、全体的な退行が発生する可能性があります。
 
-Therefore, TiDB provides the Optimizer Fix Controls feature that allows you to make fine-grained control of TiDB optimizer behaviors by setting values for a group of fixes. This document describes the Optimizer Fix Controls feature and how to use them, and lists all the fixes that TiDB currently supports for Optimizer Fix Controls.
+したがって、TiDB は、修正グループの値を設定することによって、TiDB オプティマイザーの動作をきめ細かく制御できるオプティマイザー修正コントロール機能を提供します。このドキュメントでは、Optimizer Fix Controls 機能とその使用方法について説明し、TiDB が現在 Optimizer Fix Controls に対してサポートしているすべての修正をリストします。
 
-## Introduction to `tidb_opt_fix_control`
+## <code>tidb_opt_fix_control</code>の概要 {#introduction-to-code-tidb-opt-fix-control-code}
 
-Starting from v7.1.0, TiDB provides the [`tidb_opt_fix_control`](/system-variables.md#tidb_opt_fix_control-new-in-v710) system variable to control the behavior of the optimizer in a more fine-grained way.
+v7.1.0 以降、TiDB はオプティマイザーの動作をよりきめ細かい方法で制御するための[`tidb_opt_fix_control`](/system-variables.md#tidb_opt_fix_control-new-in-v710)システム変数を提供します。
 
-Each fix is a control item used to adjust the behavior in the TiDB optimizer for one particular purpose. It is denoted by a number that corresponds to a GitHub Issue that contains the technical details of the behavior change. For example, for fix `44262`, you can review what it controls in [Issue 44262](https://github.com/pingcap/tidb/issues/44262).
+各修正は、特定の目的のために TiDB オプティマイザーの動作を調整するために使用される制御項目です。これは、動作変更の技術的な詳細を含む GitHub の問題に対応する番号で示されます。たとえば、修正`44262`の場合、修正[問題 44262](https://github.com/pingcap/tidb/issues/44262)で制御される内容を確認できます。
 
-The [`tidb_opt_fix_control`](/system-variables.md#tidb_opt_fix_control-new-in-v710) system variable accepts multiple fixes as one value, separated by commas (`,`). The format is `"<#issue1>:<value1>,<#issue2>:<value2>,...,<#issueN>:<valueN>"`, where `<#issueN>` is the fix number. For example:
+[`tidb_opt_fix_control`](/system-variables.md#tidb_opt_fix_control-new-in-v710)システム変数は、複数の修正をカンマ ( `,` ) で区切って 1 つの値として受け入れます。形式は`"<#issue1>:<value1>,<#issue2>:<value2>,...,<#issueN>:<valueN>"`で、 `<#issueN>`は修正番号です。例えば：
 
 ```sql
 SET SESSION tidb_opt_fix_control = '44262:ON,44389:ON';
 ```
 
-## Optimizer Fix Controls reference
+## オプティマイザー修正コントロールのリファレンス {#optimizer-fix-controls-reference}
 
-### [`44262`](https://github.com/pingcap/tidb/issues/44262) <span class="version-mark">New in v7.2.0</span>
+### <a href="https://github.com/pingcap/tidb/issues/44262"><code>44262</code></a> <span class="version-mark">v7.2.0 の新機能</span> {#a-href-https-github-com-pingcap-tidb-issues-44262-code-44262-code-a-span-class-version-mark-new-in-v7-2-0-span}
 
-- Default value: `OFF`
-- Possible values: `ON`, `OFF`
-- This variable controls whether to allow the use of [Dynamic pruning mode](/partitioned-table.md#dynamic-pruning-mode) to access the partitioned table when the [GlobalStats](/statistics.md#collect-statistics-of-partitioned-tables-in-dynamic-pruning-mode) are missing.
+-   デフォルト値: `OFF`
+-   可能な値: `ON` 、 `OFF`
+-   この変数は、 [グローバル統計](/statistics.md#collect-statistics-of-partitioned-tables-in-dynamic-pruning-mode)が欠落している場合に、パーティションテーブルにアクセスするために[動的プルーニングモード](/partitioned-table.md#dynamic-pruning-mode)の使用を許可するかどうかを制御します。
 
-### [`44389`](https://github.com/pingcap/tidb/issues/44389) <span class="version-mark">New in v7.2.0</span>
+### <a href="https://github.com/pingcap/tidb/issues/44389"><code>44389</code></a> <span class="version-mark">v7.2.0 の新機能</span> {#a-href-https-github-com-pingcap-tidb-issues-44389-code-44389-code-a-span-class-version-mark-new-in-v7-2-0-span}
 
-- Default value: `OFF`
-- Possible values: `ON`, `OFF`
-- For filters such as `c = 10 and (a = 'xx' or (a = 'kk' and b = 1))`, this variable controls whether to try to build more comprehensive scan ranges for `IndexRangeScan`.
+-   デフォルト値: `OFF`
+-   可能な値: `ON` 、 `OFF`
+-   `c = 10 and (a = 'xx' or (a = 'kk' and b = 1))`などのフィルタの場合、この変数は`IndexRangeScan`に対してより包括的なスキャン範囲を構築するかどうかを制御します。
 
-### [`44823`](https://github.com/pingcap/tidb/issues/44823) <span class="version-mark">New in v7.3.0</span>
+### <a href="https://github.com/pingcap/tidb/issues/44823"><code>44823</code></a> <span class="version-mark">v7.3.0 の新機能</span> {#a-href-https-github-com-pingcap-tidb-issues-44823-code-44823-code-a-span-class-version-mark-new-in-v7-3-0-span}
 
-- Default value: `200`
-- Possible values: `[0, 2147483647]`
-- To save memory, Plan Cache does not cache queries with parameters exceeding the specified number of this variable. `0` means no limit.
+-   デフォルト値: `200`
+-   可能な値: `[0, 2147483647]`
+-   メモリを節約するために、プラン キャッシュは、この変数で指定された数を超えるパラメーターを持つクエリをキャッシュしません。 `0`制限なしを意味します。
 
-### [`44830`](https://github.com/pingcap/tidb/issues/44830) <span class="version-mark">New in v7.3.0</span>
+### <a href="https://github.com/pingcap/tidb/issues/44830"><code>44830</code></a> <span class="version-mark">v7.3.0 の新機能</span> {#a-href-https-github-com-pingcap-tidb-issues-44830-code-44830-code-a-span-class-version-mark-new-in-v7-3-0-span}
 
-- Default value: `OFF`
-- Possible values: `ON`, `OFF`
-- This variable controls whether Plan Cache is allowed to cache execution plans with the `PointGet` operator generated during physical optimization.
+-   デフォルト値: `OFF`
+-   可能な値: `ON` 、 `OFF`
+-   この変数は、プラン キャッシュが物理的な最適化中に生成された`PointGet`演算子を使用して実行プランをキャッシュできるかどうかを制御します。
 
-### [`44855`](https://github.com/pingcap/tidb/issues/44855) <span class="version-mark">New in v7.3.0</span>
+### <a href="https://github.com/pingcap/tidb/issues/44855"><code>44855</code></a> <span class="version-mark">v7.3.0 の新機能</span> {#a-href-https-github-com-pingcap-tidb-issues-44855-code-44855-code-a-span-class-version-mark-new-in-v7-3-0-span}
 
-- Default value: `OFF`
-- Possible values: `ON`, `OFF`
-- In some scenarios, when the `Probe` side of an `IndexJoin` operator contains a `Selection` operator, TiDB severely overestimates the row count of `IndexScan`. This might cause suboptimal query plans to be selected instead of `IndexJoin`.
-- To mitigate this issue, TiDB has introduced an improvement. However, due to potential query plan fallback risks, this improvement is disabled by default.
-- This variable controls whether to enable the preceding improvement.
+-   デフォルト値: `OFF`
+-   可能な値: `ON` 、 `OFF`
+-   一部のシナリオでは、 `IndexJoin`演算子の`Probe`側に`Selection`演算子が含まれる場合、TiDB は行数`IndexScan`を大幅に過大評価します。これにより、 `IndexJoin`ではなく次善のクエリ プランが選択される可能性があります。
+-   この問題を軽減するために、TiDB は改善を導入しました。ただし、潜在的なクエリ プランのフォールバック リスクのため、この改善はデフォルトで無効になっています。
+-   この変数は、前述の改善を有効にするかどうかを制御します。
 
-### [`45132`](https://github.com/pingcap/tidb/issues/45132) <span class="version-mark">New in v7.4.0</span>
+### <a href="https://github.com/pingcap/tidb/issues/45132"><code>45132</code></a> <span class="version-mark">v7.4.0 の新機能</span> {#a-href-https-github-com-pingcap-tidb-issues-45132-code-45132-code-a-span-class-version-mark-new-in-v7-4-0-span}
 
-- Default value: `1000`
-- Possible values: `[0, 2147483647]`
-- This variable sets the threshold for the optimizer's heuristic strategy to select access paths. If the estimated rows for an access path (such as `Index_A`) is much smaller than that of other access paths (default `1000` times), the optimizer skips the cost comparison and directly selects `Index_A`.
-- `0` means to disable this heuristic strategy.
+-   デフォルト値: `1000`
+-   可能な値: `[0, 2147483647]`
+-   この変数は、アクセス パスを選択するためのオプティマイザーのヒューリスティック戦略のしきい値を設定します。アクセス パスの推定行数 ( `Index_A`など) が他のアクセス パスの推定行数 (デフォルトは`1000`倍) よりもはるかに小さい場合、オプティマイザはコスト比較をスキップし、 `Index_A`を直接選択します。
+-   `0`このヒューリスティック戦略を無効にすることを意味します。

@@ -3,79 +3,73 @@ title: Garbage Collection Configuration
 summary: Learn about GC configuration parameters.
 ---
 
-# Garbage Collection Configuration
+# ガベージコレクションのコンフィグレーション {#garbage-collection-configuration}
 
-You can configure garbage collection (GC) using the following system variables:
+次のシステム変数を使用してガベージコレクション(GC) を構成できます。
 
-* [`tidb_gc_enable`](/system-variables.md#tidb_gc_enable-new-in-v50): controls whether to enable garbage collection for TiKV.
-* [`tidb_gc_run_interval`](/system-variables.md#tidb_gc_run_interval-new-in-v50): specifies the GC interval.
-* [`tidb_gc_life_time`](/system-variables.md#tidb_gc_life_time-new-in-v50): specifies the time limit during which data is retained for each GC.
-* [`tidb_gc_concurrency`](/system-variables.md#tidb_gc_concurrency-new-in-v50): specifies the number of threads in the [Resolve Locks](/garbage-collection-overview.md#resolve-locks) step of GC.
-* [`tidb_gc_scan_lock_mode`](/system-variables.md#tidb_gc_scan_lock_mode-new-in-v50): specifies the way of scanning locks in the Resolve Locks step of GC.
-* [`tidb_gc_max_wait_time`](/system-variables.md#tidb_gc_max_wait_time-new-in-v610): specifies the maximum time that active transactions block the GC safe point.
+-   [`tidb_gc_enable`](/system-variables.md#tidb_gc_enable-new-in-v50) : TiKV のガベージコレクションを有効にするかどうかを制御します。
+-   [`tidb_gc_run_interval`](/system-variables.md#tidb_gc_run_interval-new-in-v50) : GC 間隔を指定します。
+-   [`tidb_gc_life_time`](/system-variables.md#tidb_gc_life_time-new-in-v50) : 各 GC のデータが保持される時間制限を指定します。
+-   [`tidb_gc_concurrency`](/system-variables.md#tidb_gc_concurrency-new-in-v50) : GC の[ロックの解決](/garbage-collection-overview.md#resolve-locks)ステップのスレッド数を指定します。
+-   [`tidb_gc_scan_lock_mode`](/system-variables.md#tidb_gc_scan_lock_mode-new-in-v50) : GC のロックの解決ステップでロックをスキャンする方法を指定します。
+-   [`tidb_gc_max_wait_time`](/system-variables.md#tidb_gc_max_wait_time-new-in-v610) : アクティブなトランザクションが GC セーフ ポイントをブロックする最大時間を指定します。
 
-For more information about how to modify the value of a system variable, see [System variables](/system-variables.md).
+システム変数の値を変更する方法の詳細については、 [システム変数](/system-variables.md)を参照してください。
 
-## GC I/O limit
+## GC I/O 制限 {#gc-i-o-limit}
 
 <CustomContent platform="tidb-cloud">
 
-> **Note:**
+> **注記：**
 >
-> This section is only applicable to TiDB Self-Hosted. TiDB Cloud does not have a GC I/O limit by default.
+> このセクションは、TiDB セルフホスト型にのみ適用されます。 TiDB Cloud には、デフォルトでは GC I/O 制限がありません。
 
 </CustomContent>
 
-TiKV supports the GC I/O limit. You can configure `gc.max-write-bytes-per-sec` to limit writes of a GC worker per second, and thus to reduce the impact on normal requests.
+TiKV は GC I/O 制限をサポートしています。 1 を構成すると、 `gc.max-write-bytes-per-sec`秒あたりの GC ワーカーの書き込みを制限し、通常のリクエストへの影響を軽減できます。
 
-`0` indicates disabling this feature.
+`0` 、この機能を無効にすることを示します。
 
-You can dynamically modify this configuration using tikv-ctl:
-
-{{< copyable "shell-regular" >}}
+tikv-ctl を使用してこの構成を動的に変更できます。
 
 ```bash
 tikv-ctl --host=ip:port modify-tikv-config -n gc.max-write-bytes-per-sec -v 10MB
 ```
 
-## Changes in TiDB 5.0
+## TiDB 5.0 の変更点 {#changes-in-tidb-5-0}
 
-In previous releases of TiDB, garbage collection was configured via the `mysql.tidb` system table. While changes to this table continue to be supported, it is recommended to use the system variables provided. This helps ensure that any changes to configuration can be validated, and prevent unexpected behavior ([#20655](https://github.com/pingcap/tidb/issues/20655)).
+TiDB の以前のリリースでは、ガベージコレクションは`mysql.tidb`システム テーブルを介して構成されていました。このテーブルへの変更は引き続きサポートされていますが、提供されているシステム変数を使用することをお勧めします。これにより、構成への変更を確実に検証し、予期しない動作を防ぐことができます ( [#20655](https://github.com/pingcap/tidb/issues/20655) )。
 
-The `CENTRAL` garbage collection mode is no longer supported. The `DISTRIBUTED` GC mode (which has been the default since TiDB 3.0) will automatically be used in its place. This mode is more efficient, since TiDB no longer needs to send requests to each TiKV region to trigger garbage collection.
+`CENTRAL`ガベージコレクションモードはサポートされなくなりました。代わりに`DISTRIBUTED` GC モード (TiDB 3.0 以降のデフォルト) が自動的に使用されます。 TiDB はガベージコレクションをトリガーするために各 TiKV 領域にリクエストを送信する必要がなくなるため、このモードはより効率的です。
 
-For information on changes in previous releases, refer to earlier versions of this document using the _TIDB version selector_ in the left hand menu.
+以前のリリースでの変更点については、左側のメニューの*TIDB バージョン セレクター*を使用して、このドキュメントの以前のバージョンを参照してください。
 
-## Changes in TiDB 6.1.0
+## TiDB 6.1.0 の変更点 {#changes-in-tidb-6-1-0}
 
-Before TiDB v6.1.0, the transaction in TiDB does not affect the GC safe point. Starting from v6.1.0, TiDB considers the startTS of the transaction when calculating the GC safe point, to resolve the problem that the data to be accessed has been cleared. If the transaction is too long, the safe point will be blocked for a long time, which affects the application performance.
+TiDB v6.1.0 より前では、TiDB のトランザクションは GC セーフ ポイントに影響しません。 v6.1.0 以降、TiDB は GC セーフ ポイントを計算するときにトランザクションの startTS を考慮し、アクセス対象のデータがクリアされているという問題を解決します。トランザクションが長すぎると、安全なポイントが長時間ブロックされ、アプリケーションのパフォーマンスに影響します。
 
-In TiDB v6.1.0, the system variable [`tidb_gc_max_wait_time`](/system-variables.md#tidb_gc_max_wait_time-new-in-v610) is introduced to control the maximum time that active transactions block the GC safe point. After the value is exceeded, the GC safe point is forwarded forcefully.
+TiDB v6.1.0 では、アクティブなトランザクションが GC セーフ ポイントをブロックする最大時間を制御するためにシステム変数[`tidb_gc_max_wait_time`](/system-variables.md#tidb_gc_max_wait_time-new-in-v610)が導入されました。この値を超えると、GC セーフ ポイントが強制的に転送されます。
 
-### GC in Compaction Filter
+### 圧縮フィルターの GC {#gc-in-compaction-filter}
 
-Based on the `DISTRIBUTED` GC mode, the mechanism of GC in Compaction Filter uses the compaction process of RocksDB, instead of a separate GC worker thread, to run GC. This new GC mechanism helps to avoid extra disk read caused by GC. Also, after clearing the obsolete data, it avoids a large number of left tombstone marks which degrade the sequential scan performance.
+`DISTRIBUTED` GC モードに基づいて、コンパクション フィルターの GC メカニズムは、別個の GC ワーカー スレッドの代わりに RocksDB のコンパクション プロセスを使用して GC を実行します。この新しい GC メカニズムは、GC による余分なディスク読み取りを回避するのに役立ちます。また、古いデータを消去した後は、シーケンシャル スキャンのパフォーマンスを低下させる大量の廃棄マークが残ることを回避します。
 
 <CustomContent platform="tidb-cloud">
 
-> **Note:**
+> **注記：**
 >
-> The following examples of modifying TiKV configurations are only applicable to TiDB Self-Hosted. For TiDB Cloud, the mechanism of GC in Compaction Filter is enabled by default.
+> TiKV 構成を変更する次の例は、TiDB セルフホストにのみ適用されます。 TiDB Cloudの場合、コンパクション フィルターの GC メカニズムはデフォルトで有効になっています。
 
 </CustomContent>
 
-The following example shows how to enable the mechanism in the TiKV configuration file:
-
-{{< copyable "" >}}
+次の例は、TiKV 構成ファイルでメカニズムを有効にする方法を示しています。
 
 ```toml
 [gc]
 enable-compaction-filter = true
 ```
 
-You can also enable this GC mechanism by modifying the configuration dynamically. See the following example:
-
-{{< copyable "sql" >}}
+構成を動的に変更することで、この GC メカニズムを有効にすることもできます。次の例を参照してください。
 
 ```sql
 show config where type = 'tikv' and name like '%enable-compaction-filter%';
@@ -90,8 +84,6 @@ show config where type = 'tikv' and name like '%enable-compaction-filter%';
 | tikv | 172.16.5.35:20163 | gc.enable-compaction-filter | false |
 +------+-------------------+-----------------------------+-------+
 ```
-
-{{< copyable "sql" >}}
 
 ```sql
 set config tikv gc.enable-compaction-filter = true;

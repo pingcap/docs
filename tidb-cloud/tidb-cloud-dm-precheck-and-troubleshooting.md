@@ -3,121 +3,121 @@ title: Precheck Errors, Migration Errors, and Alerts for Data Migration
 summary: Learn how to resolve precheck errors, migration errors, and alerts when using Data Migration.
 ---
 
-# Precheck Errors, Migration Errors, and Alerts for Data Migration
+# データ移行の事前チェック エラー、移行エラー、およびアラート {#precheck-errors-migration-errors-and-alerts-for-data-migration}
 
-This document describes how to resolve precheck errors, troubleshoot migration errors, and subscribe to alerts when you [use Data Migration to migrate data](/tidb-cloud/migrate-from-mysql-using-data-migration.md). 
+このドキュメントでは、 [データ移行を使用してデータを移行する](/tidb-cloud/migrate-from-mysql-using-data-migration.md)場合に事前チェック エラーを解決し、移行エラーをトラブルシューティングし、アラートを購読する方法について説明します。
 
-## Precheck errors and solutions
+## 事前チェックエラーと解決策 {#precheck-errors-and-solutions}
 
-This section describes the precheck errors and corresponding solutions during data migration. These errors are shown on the **Precheck** page when you [migrate data using Data Migration](/tidb-cloud/migrate-from-mysql-using-data-migration.md).
+このセクションでは、データ移行時の事前チェック エラーと対応する解決策について説明します。これらのエラーは、 [データ移行を使用してデータを移行する](/tidb-cloud/migrate-from-mysql-using-data-migration.md)を実行すると**[事前チェック]**ページに表示されます。
 
-The solutions vary depending on your upstream database.
+解決策は上流のデータベースによって異なります。
 
-### Error message: Check whether mysql server_id has been greater than 0
+### エラー メッセージ: mysql server_id が 0 より大きいかどうかを確認してください {#error-message-check-whether-mysql-server-id-has-been-greater-than-0}
 
-- Amazon Aurora MySQL or Amazon RDS: `server_id` is configured by default. You do not need to configure it. Make sure you are using Amazon Aurora MySQL writer instances to support both full and incremental data migration.
-- MySQL: to configure `server_id` for MySQL, see [Setting the Replication Source Configuration](https://dev.mysql.com/doc/refman/8.0/en/replication-howto-masterbaseconfig.html).
+-   Amazon Aurora MySQL または Amazon RDS: `server_id`がデフォルトで設定されています。設定する必要はありません。完全データ移行と増分データ移行の両方をサポートするには、Amazon Aurora MySQL ライター インスタンスを使用していることを確認してください。
+-   MySQL: MySQL に`server_id`設定するには、 [レプリケーションソースコンフィグレーションの設定](https://dev.mysql.com/doc/refman/8.0/en/replication-howto-masterbaseconfig.html)を参照してください。
 
-### Error message: Check whether mysql binlog is enabled
+### エラー メッセージ: mysql binlogが有効かどうかを確認してください {#error-message-check-whether-mysql-binlog-is-enabled}
 
-- Amazon Aurora MySQL: see [How do I turn on binary logging for my Amazon Aurora MySQL-Compatible cluster](https://aws.amazon.com/premiumsupport/knowledge-center/enable-binary-logging-aurora/?nc1=h_ls). Make sure you are using Amazon Aurora MySQL writer instances to support both full and incremental data migration.
-- Amazon RDS: see [Configuring MySQL binary logging](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.MySQL.BinaryFormat.html).
-- Google Cloud SQL for MySQL: Google enables binary logging through point-in-time recovery for MySQL master databases. See [Enable point-in-time recovery](https://cloud.google.com/sql/docs/mysql/backup-recovery/pitr#enablingpitr).
-- MySQL: see [Setting the Replication Source Configuration](https://dev.mysql.com/doc/refman/8.0/en/replication-howto-masterbaseconfig.html).
+-   Amazon Aurora MySQL: [Amazon Aurora MySQL 互換クラスターのバイナリログを有効にするにはどうすればよいですか?](https://aws.amazon.com/premiumsupport/knowledge-center/enable-binary-logging-aurora/?nc1=h_ls)を参照してください。完全データ移行と増分データ移行の両方をサポートするには、Amazon Aurora MySQL ライター インスタンスを使用していることを確認してください。
+-   Amazon RDS: [MySQL バイナリ ロギングの構成](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.MySQL.BinaryFormat.html)を参照してください。
+-   Google Cloud SQL for MySQL: Google は、MySQL マスター データベースのポイントインタイム リカバリを通じてバイナリ ロギングを可能にします。 [ポイントインタイムリカバリを有効にする](https://cloud.google.com/sql/docs/mysql/backup-recovery/pitr#enablingpitr)を参照してください。
+-   MySQL: [レプリケーションソースコンフィグレーションの設定](https://dev.mysql.com/doc/refman/8.0/en/replication-howto-masterbaseconfig.html)を参照してください。
 
-### Error message: Check whether mysql binlog_format is ROW
+### エラー メッセージ: mysql binlog_format が ROW であるかどうかを確認してください {#error-message-check-whether-mysql-binlog-format-is-row}
 
-- Amazon Aurora MySQL: see [How do I turn on binary logging for my Amazon Aurora MySQL-Compatible cluster](https://aws.amazon.com/premiumsupport/knowledge-center/enable-binary-logging-aurora/?nc1=h_ls). Make sure you are using Amazon Aurora MySQL writer instances to support both full and incremental data migration.
-- Amazon RDS: see [Configuring MySQL binary logging](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.MySQL.BinaryFormat.html).
-- MySQL: execute `set global binlog_format=ROW;`. See [Setting The Binary Log Format](https://dev.mysql.com/doc/refman/8.0/en/binary-log-setting.html).
+-   Amazon Aurora MySQL: [Amazon Aurora MySQL 互換クラスターのバイナリログを有効にするにはどうすればよいですか?](https://aws.amazon.com/premiumsupport/knowledge-center/enable-binary-logging-aurora/?nc1=h_ls)を参照してください。完全データ移行と増分データ移行の両方をサポートするには、Amazon Aurora MySQL ライター インスタンスを使用していることを確認してください。
+-   Amazon RDS: [MySQL バイナリ ロギングの構成](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.MySQL.BinaryFormat.html)を参照してください。
+-   MySQL: `set global binlog_format=ROW;`を実行します。 [バイナリログ形式の設定](https://dev.mysql.com/doc/refman/8.0/en/binary-log-setting.html)を参照してください。
 
-### Error message: Check whether mysql binlog_row_image is FULL
+### エラー メッセージ: mysql binlog_row_image が FULL かどうかを確認してください {#error-message-check-whether-mysql-binlog-row-image-is-full}
 
-- Amazon Aurora MySQL: `binlog_row_image` is not configurable. This precheck item does not fail for it. Make sure you are using Amazon Aurora MySQL writer instances to support both full and incremental data migration.
-- Amazon RDS: the process is similar to setting the `binlog_format` parameter. The only difference is that the parameter you need to change is `binlog_row_image` instead of `binlog_format`. See [Configuring MySQL binary logging](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.MySQL.BinaryFormat.html).
-- MySQL: `set global binlog_row_image = FULL;`. See [Binary Logging Options and Variables](https://dev.mysql.com/doc/refman/8.0/en/replication-options-binary-log.html#sysvar_binlog_row_image).
+-   Amazon Aurora MySQL: `binlog_row_image`は構成できません。この事前チェック項目は失敗しません。完全データ移行と増分データ移行の両方をサポートするには、Amazon Aurora MySQL ライター インスタンスを使用していることを確認してください。
+-   Amazon RDS: このプロセスは`binlog_format`パラメーターの設定と似ています。唯一の違いは、変更する必要があるパラメーターが`binlog_format`ではなく`binlog_row_image`であることです。 [MySQL バイナリ ロギングの構成](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.MySQL.BinaryFormat.html)を参照してください。
+-   MySQL: `set global binlog_row_image = FULL;` 。 [バイナリログのオプションと変数](https://dev.mysql.com/doc/refman/8.0/en/replication-options-binary-log.html#sysvar_binlog_row_image)を参照してください。
 
-### Error message: Check whether migrated dbs are in binlog_do_db/binlog_ignore_db
+### エラー メッセージ: 移行されたデータベースが binlog_do_db/binlog_ignore_db にあるかどうかを確認してください {#error-message-check-whether-migrated-dbs-are-in-binlog-do-db-binlog-ignore-db}
 
-Make sure that binlog has been enabled in the upstream database. See [Check whether mysql binlog is enabled](#error-message-check-whether-mysql-binlog-is-enabled). After that, resolve the issue according to the message you get:
+アップストリーム データベースでbinlog が有効になっていることを確認してください。 [mysql binlog が有効になっているかどうかを確認する](#error-message-check-whether-mysql-binlog-is-enabled)を参照してください。その後、表示されるメッセージに従って問題を解決します。
 
-- If the message is similar to `These dbs xxx are not in binlog_do_db xxx`, make sure all the databases that you want to migrate are in the list. See [--binlog-do-db=db_name](https://dev.mysql.com/doc/refman/8.0/en/replication-options-binary-log.html#option_mysqld_binlog-do-db).
-- If the message is similar to `These dbs xxx are in binlog_ignore_db xxx`, make sure all the databases that you want to migrate are not in the ignore list. See [--binlog-ignore-db=db_name](https://dev.mysql.com/doc/refman/8.0/en/replication-options-binary-log.html#option_mysqld_binlog-ignore-db).
+-   メッセージが`These dbs xxx are not in binlog_do_db xxx`に似ている場合は、移行するすべてのデータベースがリストに含まれていることを確認してください。 [--binlog-do-db=db_name](https://dev.mysql.com/doc/refman/8.0/en/replication-options-binary-log.html#option_mysqld_binlog-do-db)を参照してください。
+-   メッセージが`These dbs xxx are in binlog_ignore_db xxx`に似ている場合は、移行するすべてのデータベースが無視リストに含まれていないことを確認してください。 [--binlog-ignore-db=db_name](https://dev.mysql.com/doc/refman/8.0/en/replication-options-binary-log.html#option_mysqld_binlog-ignore-db)を参照してください。
 
-For Amazon Aurora MySQL, this precheck item does not fail for it. Make sure you are using Amazon Aurora MySQL writer instances to support both full and incremental data migration.
+Amazon Aurora MySQL の場合、この事前チェック項目は失敗しません。完全データ移行と増分データ移行の両方をサポートするには、Amazon Aurora MySQL ライター インスタンスを使用していることを確認してください。
 
-For Amazon RDS, you need to change the following parameters: `replicate-do-db`, `replicate-do-table`, `replicate-ignore-db`, and `replicate-ignore-table`. See [Configuring MySQL binary logging](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.MySQL.BinaryFormat.html).
+Amazon RDS の場合、パラメータ`replicate-do-db` 、 `replicate-do-table` 、 `replicate-ignore-db` 、および`replicate-ignore-table`を変更する必要があります。 [MySQL バイナリ ロギングの構成](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.MySQL.BinaryFormat.html)を参照してください。
 
-### Error message: Check if connection concurrency exceeds database's maximum connection limit
+### エラー メッセージ: 同時接続数がデータベースの最大接続制限を超えているかどうかを確認してください {#error-message-check-if-connection-concurrency-exceeds-database-s-maximum-connection-limit}
 
-If the error occurs in the upstream database, set `max_connections` as follows:
+上流データベースでエラーが発生した場合は、次のように`max_connections`を設定します。
 
-- Amazon Aurora MySQL: the process is similar to setting the `binlog_format`. The only difference is that the parameter you change is `max_connections` instead of `binlog_format`. See [How do I turn on binary logging for my Amazon Aurora MySQL-Compatible cluster](https://aws.amazon.com/premiumsupport/knowledge-center/enable-binary-logging-aurora/?nc1=h_ls).
-- Amazon RDS: the process is similar to setting the `binlog_format`. The only difference is that the parameter you change is `max_connections` instead of `binlog_format`.  See [Configuring MySQL binary logging](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.MySQL.BinaryFormat.html).
-- MySQL: configure `max_connections` following the document [max_connections](https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_max_connections).
+-   Amazon Aurora MySQL: プロセスは`binlog_format`の設定と似ています。唯一の違いは、変更するパラメーターが`binlog_format`ではなく`max_connections`であることです。 [Amazon Aurora MySQL 互換クラスターのバイナリログを有効にするにはどうすればよいですか?](https://aws.amazon.com/premiumsupport/knowledge-center/enable-binary-logging-aurora/?nc1=h_ls)を参照してください。
+-   Amazon RDS: プロセスは`binlog_format`の設定と似ています。唯一の違いは、変更するパラメーターが`binlog_format`ではなく`max_connections`であることです。 [MySQL バイナリ ロギングの構成](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.MySQL.BinaryFormat.html)を参照してください。
+-   MySQL: ドキュメント[最大接続数](https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_max_connections)に従って`max_connections`を設定します。
 
-If the error occurs in the TiDB Cloud cluster, configure `max_connections` following the document [max_connections](https://docs.pingcap.com/tidb/stable/system-variables#max_connections).
+TiDB Cloudクラスターでエラーが発生した場合は、ドキュメント[最大接続数](https://docs.pingcap.com/tidb/stable/system-variables#max_connections)に従って`max_connections`を設定します。
 
-## Migration errors and solutions
+## 移行エラーと解決策 {#migration-errors-and-solutions}
 
-This section describes the problems and solutions you might encounter during the migration. These error messages are shown on the **Migration Job Details** page.
+このセクションでは、移行中に発生する可能性のある問題と解決策について説明します。これらのエラー メッセージは、 **[移行ジョブの詳細]**ページに表示されます。
 
-### Error message: "The required binary log for migration no longer exists on the source database. Please make sure binary log files are kept for long enough time for migration to succeed."
+### エラー メッセージ: 「移行に必要なバイナリ ログは、ソース データベースに存在しません。移行が成功するために、バイナリ ログ ファイルが十分な期間保持されていることを確認してください。」 {#error-message-the-required-binary-log-for-migration-no-longer-exists-on-the-source-database-please-make-sure-binary-log-files-are-kept-for-long-enough-time-for-migration-to-succeed}
 
-This error means that the binlogs to be migrated have been cleaned up and can only be restored by creating a new task.
+このエラーは、移行するバイナリログがクリーンアップされており、新しいタスクを作成することによってのみ復元できることを意味します。
 
-Ensure that the binlogs required for incremental migration exist. It is recommended to configure `expire_logs_days` to extend the duration of binlogs. Do not use `purge binary log` to clean up binlogs if it's needed by some migration job.
+増分移行に必要なバイナリログが存在することを確認してください。バイナリログの期間を延長するには、 `expire_logs_days`を設定することをお勧めします。移行ジョブで必要な場合は、バイナリログのクリーンアップに`purge binary log`を使用しないでください。
 
-### Error message: "Failed to connect to the source database using given parameters. Please make sure the source database is up and can be connected using the given parameters."
+### エラー メッセージ:「指定されたパラメーターを使用してソース データベースに接続できませんでした。ソース データベースが起動しており、指定されたパラメーターを使用して接続できることを確認してください。」 {#error-message-failed-to-connect-to-the-source-database-using-given-parameters-please-make-sure-the-source-database-is-up-and-can-be-connected-using-the-given-parameters}
 
-This error means that the connection to the source database failed. Check whether the source database is started and can be connected to using the specified parameters. After confirming that the source database is available, you can try to recover the task by clicking **Restart**.
+このエラーは、ソース データベースへの接続が失敗したことを意味します。ソース データベースが起動されており、指定されたパラメータを使用して接続できるかどうかを確認します。ソース データベースが使用可能であることを確認した後、 **[再起動]**をクリックしてタスクの回復を試みることができます。
 
-### The migration task is interrupted and contains the error "driver: bad connection" or "invalid connection"
+### 移行タスクが中断され、「ドライバー: 接続が正しくありません」または「接続が無効です」というエラーが発生します。 {#the-migration-task-is-interrupted-and-contains-the-error-driver-bad-connection-or-invalid-connection}
 
-This error means that the connection to the downstream TiDB cluster failed. Check whether the downstream TiDB cluster is in a normal state (including `Available` and `Modifying`) and can be connected with the username and password specified by the job. After confirming that the downstream TiDB cluster is available, you can try to resume the task by clicking **Restart**.
+このエラーは、ダウンストリーム TiDB クラスターへの接続が失敗したことを意味します。ダウンストリーム TiDB クラスターが正常な状態 ( `Available`と`Modifying`を含む) であり、ジョブで指定されたユーザー名とパスワードで接続できるかどうかを確認します。ダウンストリーム TiDB クラスターが使用可能であることを確認したら、 **[再起動]**をクリックしてタスクの再開を試みることができます。
 
-### Error message: "Failed to connect to the TiDB cluster using the given user and password. Please make sure TiDB Cluster is up and can be connected to using the given user and password."
+### エラー メッセージ: 「指定されたユーザーとパスワードを使用して TiDB クラスターに接続できませんでした。TiDBクラスタが起動しており、指定されたユーザーとパスワードを使用して接続できることを確認してください。」 {#error-message-failed-to-connect-to-the-tidb-cluster-using-the-given-user-and-password-please-make-sure-tidb-cluster-is-up-and-can-be-connected-to-using-the-given-user-and-password}
 
-Failed to connect to the TiDB cluster. It is recommended to check whether the TiDB cluster is in a normal state (including `Available` and `Modifying`). You can connect with the username and password specified by the job. After confirming that the TiDB cluster is available, you can try to resume the task by clicking **Restart**.
+TiDB クラスターへの接続に失敗しました。 TiDB クラスターが正常な状態 ( `Available`と`Modifying`を含む) であるかどうかを確認することをお勧めします。ジョブで指定されたユーザー名とパスワードを使用して接続できます。 TiDB クラスターが使用可能であることを確認したら、 **「再起動」**をクリックしてタスクの再開を試みることができます。
 
-### Error message: "TiDB cluster storage is not enough. Please increase the node storage of TiKV."
+### エラー メッセージ:「TiDB クラスターstorageが十分ではありません。TiKV のノードstorageを増やしてください。」 {#error-message-tidb-cluster-storage-is-not-enough-please-increase-the-node-storage-of-tikv}
 
-The TiDB cluster storage is running low. It is recommended to [increase the TiKV node storage](/tidb-cloud/scale-tidb-cluster.md#change-storage) and then resume the task by clicking **Restart**.
+TiDB クラスターのstorageが不足しています。 [TiKV ノードのstorageを増やす](/tidb-cloud/scale-tidb-cluster.md#change-storage)し、 **[再起動]**をクリックしてタスクを再開することをお勧めします。
 
-### Error message: "Failed to connect to the source database. Please check whether the database is available or the maximum connections have been reached."
+### エラー メッセージ:「ソース データベースに接続できませんでした。データベースが利用可能か、または最大接続数に達しているかを確認してください。」 {#error-message-failed-to-connect-to-the-source-database-please-check-whether-the-database-is-available-or-the-maximum-connections-have-been-reached}
 
-Failed to connect to the source database. It is recommended to check whether the source database is started, the number of database connections has not reached the upper limit, and you can connect using the parameters specified by the job. After confirming that the source database is available, you can try to resume the job by clicking **Restart**.
+ソースデータベースへの接続に失敗しました。ソースデータベースが起動しているか、データベース接続数が上限に達していないか、ジョブで指定したパラメータを使用して接続できるかを確認することをお勧めします。ソース データベースが使用可能であることを確認したら、 **[再起動]**をクリックしてジョブを再開できます。
 
-## Alerts
+## アラート {#alerts}
 
-You can subscribe to TiDB Cloud alert emails to be informed in time when an alert occurs.
+TiDB Cloudアラート電子メールを購読すると、アラートが発生したときにすぐに通知を受けることができます。
 
-The following are alerts about Data Migration: 
+データ移行に関するアラートは次のとおりです。
 
-- "Data migration job met error during data export"
+-   「データのエクスポート中にデータ移行ジョブでエラーが発生しました」
 
-    Recommended action: check the error message on the data migration page, and see [Migration errors and solutions](#migration-errors-and-solutions) for help.
+    推奨されるアクション: データ移行ページのエラー メッセージを確認し、ヘルプについては[移行エラーと解決策](#migration-errors-and-solutions)を参照してください。
 
-- "Data migration job met error during data import"
+-   「データのインポート中にデータ移行ジョブでエラーが発生しました」
 
-    Recommended action: check the error message on the data migration page, and see [Migration errors and solutions](#migration-errors-and-solutions) for help.
+    推奨されるアクション: データ移行ページのエラー メッセージを確認し、ヘルプについては[移行エラーと解決策](#migration-errors-and-solutions)を参照してください。
 
-- "Data migration job met error during incremental data migration"
+-   「増分データ移行中にデータ移行ジョブでエラーが発生しました」
 
-    Recommended action: check the error message on the data migration page, and see [Migration errors and solutions](#migration-errors-and-solutions) for help.
+    推奨されるアクション: データ移行ページのエラー メッセージを確認し、ヘルプについては[移行エラーと解決策](#migration-errors-and-solutions)を参照してください。
 
-- "Data migration job has been paused for more than 6 hours during incremental migration" 
+-   「増分移行中にデータ移行ジョブが 6 時間以上一時停止されました」
 
-    Recommended action: resume the data migration job or ignore this alert.     
+    推奨されるアクション: データ移行ジョブを再開するか、このアラートを無視してください。
 
-- "Replication lag is larger than 10 minutes and stilling increasing for more than 20 minutes"
+-   「レプリケーションの遅延が 10 分を超えており、20 分以上増加し続けています」
 
-    - Recommended action: contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) for help.
+    -   推奨される処置: [TiDB Cloudのサポート](/tidb-cloud/tidb-cloud-support.md)に連絡して助けを求めてください。
 
-If you need help to address these alerts, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) for consultation.
+これらのアラートに対処するためにサポートが必要な場合は、 [TiDB Cloudのサポート](/tidb-cloud/tidb-cloud-support.md)にお問い合わせください。
 
-For more information about how to subscribe to alert emails, see [TiDB Cloud Built-in Alerting](/tidb-cloud/monitor-built-in-alerting.md).
+アラート電子メールを購読する方法の詳細については、 [TiDB Cloud組み込みアラート](/tidb-cloud/monitor-built-in-alerting.md)を参照してください。
 
-## See also
+## こちらも参照 {#see-also}
 
-- [Migrate MySQL-Compatible Databases to TiDB Cloud Using Data Migration](/tidb-cloud/migrate-from-mysql-using-data-migration.md)
+-   [データ移行を使用して MySQL 互換データベースをTiDB Cloudに移行する](/tidb-cloud/migrate-from-mysql-using-data-migration.md)

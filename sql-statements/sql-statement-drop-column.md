@@ -3,11 +3,11 @@ title: DROP COLUMN | TiDB SQL Statement Reference
 summary: An overview of the usage of DROP COLUMN for the TiDB database.
 ---
 
-# DROP COLUMN
+# ドロップカラム {#drop-column}
 
-This statement drops a column from a specified table. `DROP COLUMN` is online in TiDB, which means that it does not block read or write operations.
+このステートメントは、指定されたテーブルから列を削除します。 `DROP COLUMN`は TiDB でオンラインです。これは、読み取りまたは書き込み操作をブロックしないことを意味します。
 
-## Synopsis
+## あらすじ {#synopsis}
 
 ```ebnf+diagram
 AlterTableStmt
@@ -20,7 +20,7 @@ ColumnName
          ::= Identifier ( '.' Identifier ( '.' Identifier )? )?
 ```
 
-## Examples
+## 例 {#examples}
 
 ```sql
 mysql> CREATE TABLE t1 (id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, col1 INT NOT NULL, col2 INT NOT NULL);
@@ -72,12 +72,12 @@ mysql> SELECT * FROM t1;
 5 rows in set (0.00 sec)
 ```
 
-## MySQL compatibility
+## MySQLの互換性 {#mysql-compatibility}
 
-* Dropping primary key columns or columns covered by the composite index is not supported.
+-   主キー列または複合インデックスの対象となる列の削除はサポートされていません。
 
-## See also
+## こちらも参照 {#see-also}
 
-* [ADD COLUMN](/sql-statements/sql-statement-add-column.md)
-* [SHOW CREATE TABLE](/sql-statements/sql-statement-show-create-table.md)
-* [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
+-   [列の追加](/sql-statements/sql-statement-add-column.md)
+-   [テーブルの作成を表示](/sql-statements/sql-statement-show-create-table.md)
+-   [テーブルの作成](/sql-statements/sql-statement-create-table.md)

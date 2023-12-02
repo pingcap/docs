@@ -3,62 +3,52 @@ title: Stop a Data Migration Task
 summary: Learn how to stop a data migration task.
 ---
 
-# Stop a Data Migration Task
+# データ移行タスクの停止 {#stop-a-data-migration-task}
 
-You can use the `stop-task` command to stop a data migration task. For differences between `stop-task` and `pause-task`, refer to [Pause a Data Migration Task](/dm/dm-pause-task.md).
-
-{{< copyable "" >}}
+`stop-task`コマンドを使用して、データ移行タスクを停止できます。 `stop-task`と`pause-task`の違いについては、 [データ移行タスクを一時停止する](/dm/dm-pause-task.md)を参照してください。
 
 ```bash
 help stop-task
 ```
 
-```
-stop a specified task
+    stop a specified task
 
-Usage:
- dmctl stop-task [-s source ...] <task-name | task-file> [flags]
+    Usage:
+     dmctl stop-task [-s source ...] <task-name | task-file> [flags]
 
-Flags:
- -h, --help   help for stop-task
+    Flags:
+     -h, --help   help for stop-task
 
-Global Flags:
- -s, --source strings   MySQL Source ID
-```
+    Global Flags:
+     -s, --source strings   MySQL Source ID
 
-## Usage example
-
-{{< copyable "" >}}
+## 使用例 {#usage-example}
 
 ```bash
 stop-task [-s "mysql-replica-01"]  task-name
 ```
 
-## Flags description
+## フラグの説明 {#flags-description}
 
-- `-s`: (Optional) Specifies the MySQL source where the subtasks of the migration task (that you want to stop) run. If it is set, only subtasks on the specified MySQL source are stopped.
-- `task-name | task-file`: (Required) Specifies the task name or task file path.
+-   `-s` : (オプション) (停止する) 移行タスクのサブタスクが実行される MySQL ソースを指定します。設定されている場合、指定された MySQL ソース上のサブタスクのみが停止されます。
+-   `task-name | task-file` : (必須) タスク名またはタスク ファイルのパスを指定します。
 
-## Returned results
-
-{{< copyable "" >}}
+## 返された結果 {#returned-results}
 
 ```bash
 stop-task test
 ```
 
-```
-{
-    "op": "Stop",
-    "result": true,
-    "msg": "",
-    "sources": [
-        {
-            "result": true,
-            "msg": "",
-            "source": "mysql-replica-01",
-            "worker": "worker1"
-        }
-    ]
-}
-```
+    {
+        "op": "Stop",
+        "result": true,
+        "msg": "",
+        "sources": [
+            {
+                "result": true,
+                "msg": "",
+                "source": "mysql-replica-01",
+                "worker": "worker1"
+            }
+        ]
+    }

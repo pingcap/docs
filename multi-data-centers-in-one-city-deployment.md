@@ -3,7 +3,7 @@ title: Multiple Availability Zones in One Region Deployment
 summary: Learn the deployment solution to multiple availability zones in one region.
 ---
 
-# Multiple Availability Zones in One Region Deployment
+# 1 つのリージョンでの複数のアベイラビリティーゾーンの展開 {#multiple-availability-zones-in-one-region-deployment}
 
 <!-- Localization note for TiDB:
 
@@ -13,61 +13,61 @@ summary: Learn the deployment solution to multiple availability zones in one reg
 
 -->
 
-As a distributed SQL database, TiDB combines the best features of the traditional relational database and the scalability of the NoSQL database, and is highly available across availability zones (AZs). This document introduces the deployment of multiple AZs in one region.
+分散 SQL データベースとして、TiDB は従来のリレーショナル データベースの最良の機能と NoSQL データベースのスケーラビリティを組み合わせており、アベイラビリティ ゾーン (AZ) 全体での可用性が高くなります。このドキュメントでは、1 つのリージョンでの複数の AZ のデプロイについて紹介します。
 
-The term "region" in this document refers to a geographic area, while the capitalized "Region" refers to a basic unit of data storage in TiKV. "AZ" refers to an isolated location within a region, and each region has multiple AZs. The solution described in this document also applies to the scenario where multiple data centers are located in a single city.
+このドキュメントの「リージョン」という用語は地理的エリアを指しますが、大文字の「リージョン」は TiKV のデータstorageの基本単位を指します。 「AZ」はリージョン内の孤立した場所を指し、各リージョンには複数の AZ があります。このドキュメントで説明されているソリューションは、複数のデータ センターが 1 つの都市にあるシナリオにも当てはまります。
 
-## Raft protocol
+## Raftプロトコル {#raft-protocol}
 
-Raft is a distributed consensus algorithm. Using this algorithm, both PD and TiKV, among components of the TiDB cluster, achieve disaster recovery of data, which is implemented through the following mechanisms:
+Raftは分散型コンセンサス アルゴリズムです。このアルゴリズムを使用すると、TiDB クラスターのコンポーネント間で PD と TiKV の両方がデータの災害復旧を実現します。これは次のメカニズムを通じて実装されます。
 
-- The essential role of Raft members is to perform log replication and act as a state machine. Among Raft members, data replication is implemented by replicating logs. Raft members change their own states in different conditions to elect a leader to provide services.
-- Raft is a voting system that follows the majority protocol. In a Raft group, if a member gets the majority of votes, its membership changes to leader. In other words, when the majority of nodes remain in the Raft group, a leader can be elected to provide services.
+-   Raftメンバーの重要な役割は、ログのレプリケーションを実行し、ステート マシンとして機能することです。 Raftメンバー間では、ログを複製することによってデータ レプリケーションが実装されます。 Raftメンバーはさまざまな条件で自分の状態を変更し、サービスを提供するリーダーを選出します。
+-   Raftは多数決プロトコルに従う投票システムです。 Raftグループでは、メンバーが過半数の票を獲得すると、そのメンバーがリーダーに変わります。言い換えれば、ノードの大部分がRaftグループに残っている場合、サービスを提供するリーダーを選出できます。
 
-To take advantage of Raft's reliability, the following conditions must be met in a real deployment scenario:
+Raft の信頼性を活用するには、実際の展開シナリオで次の条件を満たす必要があります。
 
-- Use at least three servers in case one server fails.
-- Use at least three racks in case one rack fails.
-- Use at least three AZs in case one AZ fails.
-- Deploy TiDB in at least three regions in case data safety issue occurs in one region.
+-   1 台のサーバーに障害が発生した場合に備えて、少なくとも 3 台のサーバーを使用してください。
+-   1 つのラックに障害が発生した場合に備えて、少なくとも 3 つのラックを使用してください。
+-   1 つの AZ に障害が発生した場合に備えて、少なくとも 3 つの AZ を使用してください。
+-   1 つのリージョンでデータ安全性の問題が発生した場合にデプロイ。
 
-The native Raft protocol does not have good support for an even number of replicas. Considering the impact of cross-region network latency, three AZs in the same region might be the most suitable solution to a highly available and disaster tolerant Raft deployment.
+ネイティブRaftプロトコルは、偶数のレプリカを適切にサポートしていません。リージョン間のネットワークレイテンシーの影響を考慮すると、同じリージョンに 3 つの AZ を配置することが、可用性が高く耐災害性の高いRaft導入に最も適したソリューションである可能性があります。
 
-## Three AZs in one region deployment
+## 1 つのリージョンに 3 つの AZ を展開 {#three-azs-in-one-region-deployment}
 
-TiDB clusters can be deployed in three AZs in the same region. In this solution, data replication across the three AZs is implemented using the Raft protocol within the cluster. These three AZs can provide read and write services at the same time. Data consistency is not affected even if one AZ fails.
+TiDB クラスターは、同じリージョン内の 3 つの AZ にデプロイできます。このソリューションでは、クラスター内のRaftプロトコルを使用して 3 つの AZ にわたるデータ レプリケーションが実装されます。これら 3 つの AZ は、読み取りおよび書き込みサービスを同時に提供できます。 1 つの AZ に障害が発生した場合でも、データの整合性は影響を受けません。
 
-### Simple architecture
+### シンプルなアーキテクチャ {#simple-architecture}
 
-TiDB, TiKV, and PD are distributed among three AZs, which is the most common deployment with the highest availability.
+TiDB、TiKV、PD は 3 つの AZ に分散されており、最も高い可用性を備えた最も一般的な展開です。
 
 ![3-AZ Deployment Architecture](/media/deploy-3dc.png)
 
-**Advantages:**
+**利点:**
 
-- All replicas are distributed among three AZs, with high availability and disaster recovery capability.
-- No data will be lost if one AZ is down (RPO = 0).
-- Even if one AZ is down, the other two AZs will automatically start leader election and automatically resume services within a certain period (within 20 seconds in most cases). See the following diagram for more information:
+-   すべてのレプリカは 3 つの AZ に分散され、高可用性と災害復旧機能を備えています。
+-   1 つの AZ がダウンしても (RPO = 0)、データは失われません。
+-   1 つの AZ がダウンした場合でも、他の 2 つの AZ は自動的にリーダー選出を開始し、一定期間内 (ほとんどの場合 20 秒以内) にサービスを自動的に再開します。詳細については、次の図を参照してください。
 
 ![Disaster Recovery for 3-AZ Deployment](/media/deploy-3dc-dr.png)
 
-**Disadvantages:**
+**短所:**
 
-The performance can be affected by the network latency.
+パフォーマンスはネットワークレイテンシーの影響を受ける可能性があります。
 
-- For writes, all the data has to be replicated to at least two AZs. Because TiDB uses a two-phase commit for writes, the write latency is at least twice the latency of the network between two AZs.
-- The read performance will also be affected by the network latency if the leader is not in the same AZ with the TiDB node that sends the read request.
-- Each TiDB transaction needs to obtain TimeStamp Oracle (TSO) from the PD leader. So if the TiDB and PD leaders are not in the same AZ, the performance of the transactions will also be affected by the network latency because each transaction with the write request has to obtain TSO twice.
+-   書き込みの場合、すべてのデータを少なくとも 2 つの AZ にレプリケートする必要があります。 TiDB は書き込みに 2 フェーズ コミットを使用するため、書き込みレイテンシーは2 つの AZ 間のネットワークのレイテンシーの少なくとも 2 倍になります。
+-   リーダーが読み取りリクエストを送信する TiDB ノードと同じ AZ にない場合、読み取りパフォーマンスはネットワークレイテンシーの影響も受けます。
+-   各 TiDB トランザクションは、PD リーダーから TimeStamp Oracle (TSO) を取得する必要があります。したがって、TiDB リーダーと PD リーダーが同じ AZ にない場合、書き込みリクエストを伴う各トランザクションは TSO を 2 回取得する必要があるため、トランザクションのパフォーマンスもネットワークレイテンシーの影響を受けます。
 
-### Optimized architecture
+### 最適化されたアーキテクチャ {#optimized-architecture}
 
-If not all of the three AZs need to provide services to the applications, you can dispatch all the requests to one AZ and configure the scheduling policy to migrate the TiKV Region leader and PD leader to the same AZ. In this way, neither obtaining TSO nor reading TiKV Regions will be impacted by the network latency across AZs. If this AZ is down, the PD leader and TiKV Region leader will be automatically elected in other surviving AZs, and you just need to switch the requests to the AZs that are still alive.
+3 つの AZ のすべてがアプリケーションにサービスを提供する必要がない場合は、すべてのリクエストを 1 つの AZ にディスパッチし、TiKVリージョンリーダーと PD リーダーを同じ AZ に移行するようにスケジュール ポリシーを構成できます。このようにして、TSO の取得も TiKV リージョンの読み取りも、AZ 間のネットワークレイテンシーの影響を受けません。この AZ がダウンしている場合、PD リーダーと TiKVリージョンリーダーは他の生き残っている AZ で自動的に選出されるため、要求をまだ生きている AZ に切り替えるだけで済みます。
 
 ![Read Performance Optimized 3-AZ Deployment](/media/deploy-3dc-optimize.png)
 
-**Advantages:**
+**利点:**
 
-The cluster's read performance and the capability to get TSO are improved. A configuration template of scheduling policy is as follows:
+クラスターの読み取りパフォーマンスと TSO を取得する機能が向上しました。スケジューリングポリシーの設定テンプレートは次のとおりです。
 
 ```shell
 -- Evicts all leaders of other AZs to the AZ that provides services to the application.
@@ -80,38 +80,38 @@ member leader_priority pdName2 4
 member leader_priority pdName3 3
 ```
 
-> **Note:**
+> **注記：**
 >
-> Starting from TiDB v5.2, the `label-property` configuration is not supported by default. To set the replica policy, use the [placement rules](/configure-placement-rules.md).
+> TiDB v5.2 以降、 `label-property`構成はデフォルトではサポートされません。レプリカ ポリシーを設定するには、 [配置ルール](/configure-placement-rules.md)を使用します。
 
-**Disadvantages:**
+**短所:**
 
-- Write scenarios are still affected by network latency across AZs. This is because Raft follows the majority protocol and all written data must be replicated to at least two AZs.
-- The TiDB server that provides services is only in one AZ.
-- All application traffic is processed by one AZ and the performance is limited by the network bandwidth pressure of that AZ.
-- The capability to get TSO and the read performance are affected by whether the PD server and TiKV server are up in the AZ that processes application traffic. If these servers are down, the application is still affected by the cross-center network latency.
+-   書き込みシナリオは、依然として AZ 間のネットワークレイテンシーの影響を受けます。これは、 Raft が多数派プロトコルに従っており、書き込まれたすべてのデータを少なくとも 2 つの AZ にレプリケートする必要があるためです。
+-   サービスを提供する TiDBサーバーは1 つの AZ 内にのみ存在します。
+-   すべてのアプリケーション トラフィックは 1 つの AZ によって処理され、パフォーマンスはその AZ のネットワーク帯域幅の圧力によって制限されます。
+-   TSO を取得する機能と読み取りパフォーマンスは、アプリケーション トラフィックを処理する AZ で PDサーバーと TiKVサーバーが稼働しているかどうかに影響されます。これらのサーバーがダウンしても、アプリケーションは依然としてクロスセンター ネットワークのレイテンシーの影響を受けます。
 
-### Deployment example
+### 導入例 {#deployment-example}
 
-This section provides a topology example, and introduces TiKV labels and TiKV labels planning.
+このセクションでは、トポロジの例を示し、TiKV ラベルと TiKV ラベルの計画について紹介します。
 
-#### Topology example
+#### トポロジの例 {#topology-example}
 
-The following example assumes that three AZs (AZ1, AZ2, and AZ3) are located in one region; each AZ has two sets of racks and each rack has three servers. The example ignores the hybrid deployment or the scenario where multiple instances are deployed on one machine. The deployment of a TiDB cluster (three replicas) on three AZs in one region is as follows:
+次の例では、3 つの AZ (AZ1、AZ2、および AZ3) が 1 つのリージョンに配置されていると想定しています。各 AZ には 2 セットのラックがあり、各ラックには 3 台のサーバーがあります。この例では、ハイブリッド デプロイメント、または複数のインスタンスが 1 台のマシンにデプロイされるシナリオは無視されます。 1 つのリージョン内の 3 つの AZ での TiDB クラスター (3 つのレプリカ) のデプロイは次のとおりです。
 
 ![3-AZ in One Region](/media/multi-data-centers-in-one-city-deployment-sample.png)
 
-#### TiKV labels
+#### TiKV ラベル {#tikv-labels}
 
-TiKV is a Multi-Raft system where data is divided into Regions and the size of each Region is 96 MB by default. Three replicas of each Region form a Raft group. For a TiDB cluster of three replicas, because the number of Region replicas is independent of the TiKV instance numbers, three replicas of a Region are only scheduled to three TiKV instances. This means that even if the cluster is scaled out to have N TiKV instances, it is still a cluster of three replicas.
+TiKV は、データが領域に分割され、各リージョンのサイズがデフォルトで 96 MB である Multi-Raft システムです。各リージョンの 3 つのレプリカがRaftグループを形成します。 3 つのレプリカからなる TiDB クラスターの場合、リージョンレプリカの数は TiKV インスタンスの数に依存しないため、リージョンの 3 つのレプリカは 3 つの TiKV インスタンスにのみスケジュールされます。これは、クラスターが N 個の TiKV インスタンスを持つようにスケールアウトされた場合でも、依然として 3 つのレプリカからなるクラスターであることを意味します。
 
-Because a Raft group of three replicas tolerates only one replica failure, even if the cluster is scaled out to have N TiKV instances, this cluster still tolerates only one replica failure. Two failed TiKV instances might cause some Regions to lose replicas and the data in this cluster is no longer complete. SQL requests that access data from these Regions will fail. The probability of two simultaneous failures among N TiKV instances is much higher than the probability of two simultaneous failures among three TiKV instances. This means that the more TiKV instances the Multi-Raft system is scaled out to have, the less the availability of the system.
+3 つのレプリカからなるRaftグループは 1 つのレプリカ障害のみを許容するため、クラスターが N 個の TiKV インスタンスを持つようにスケールアウトされた場合でも、このクラスターは依然として 1 つのレプリカ障害のみを許容します。 2 つの TiKV インスタンスに障害が発生すると、一部のリージョンでレプリカが失われ、このクラスター内のデータが完全でなくなる可能性があります。これらのリージョンからのデータにアクセスする SQL リクエストは失敗します。 N 個の TiKV インスタンス間で 2 つの同時障害が発生する確率は、3 つの TiKV インスタンス間で 2 つの同時障害が発生する確率よりもはるかに高くなります。これは、Multi-Raft システムがスケールアウトされる TiKV インスタンスが増えるほど、システムの可用性が低下することを意味します。
 
-Because of the preceding limitation, `label` is used to describe the location information of TiKV. The label information is refreshed to the TiKV startup configuration file with deployment or rolling upgrade operations. The started TiKV reports its latest label information to PD. Based on the user-registered label name (the label metadata) and the TiKV topology, PD optimally schedules Region replicas and improves the system availability.
+前述の制限のため、TiKV の位置情報の記述には`label`が使用されます。ラベル情報は、展開またはローリング アップグレード操作によって TiKV 起動構成ファイルに更新されます。起動した TiKV は最新のレーベル情報を PD に報告します。ユーザーが登録したラベル名 (ラベル メタデータ) と TiKV トポロジに基づいて、PD はリージョンレプリカを最適にスケジュールし、システムの可用性を向上させます。
 
-#### TiKV labels planning example
+#### TiKVラベルプランニング例 {#tikv-labels-planning-example}
 
-To improve the availability and disaster recovery of the system, you need to design and plan TiKV labels according to your existing physical resources and the disaster recovery capability. You also need to edit the cluster initialization configuration file according to the planned topology:
+システムの可用性と災害復旧を向上させるには、既存の物理リソースと災害復旧機能に応じて TiKV ラベルを設計および計画する必要があります。計画されたトポロジに従ってクラスター初期化構成ファイルを編集する必要もあります。
 
 ```ini
 server_configs:
@@ -159,12 +159,12 @@ tikv_servers:
       server.labels: { zone: "z3", az: "az3", rack: "r2", host: "41" }
 ```
 
-In the preceding example, `zone` is the logical availability zone layer that controls the isolation of replicas (three replicas in the example cluster).
+前述の例では、 `zone`はレプリカ (サンプル クラスター内の 3 つのレプリカ) の分離を制御する論理アベイラビリティ ゾーンレイヤーです。
 
-Considering that the AZs might be scaled out in the future, the three-layer label structure (`az`, `rack`, and `host`) is not directly adopted. Assuming that `AZ2`, `AZ3`, and `AZ4` are to be scaled out, you only need to scale out the AZs in the corresponding availability zone and scale out the racks in the corresponding AZ.
+将来のAZのスケールアウトを考慮して、3層のラベル構造( `az` 、 `rack` 、 `host` )をそのまま採用しません。 `AZ2` 、 `AZ3` 、および`AZ4`をスケールアウトすると仮定すると、対応するアベイラビリティ ゾーン内の AZ をスケールアウトし、対応する AZ 内のラックをスケールアウトするだけで済みます。
 
-If this three-layer label structure is directly adopted, after scaling out an AZ, you might need to apply new labels and the data in TiKV needs to be rebalanced.
+この 3 層ラベル構造を直接採用した場合、AZ をスケールアウトした後、新しいラベルを適用し、TiKV 内のデータの再バランスが必要になる場合があります。
 
-### High availability and disaster recovery analysis
+### 高可用性と災害復旧の分析 {#high-availability-and-disaster-recovery-analysis}
 
-The multiple AZs in one region deployment can guarantee that if one AZ fails, the cluster can automatically recover services without manual intervention. Data consistency is also guaranteed. Note that scheduling policies are used to optimize performance, but when a failure occurs, these policies prioritize availability over performance.
+1 つのリージョンに複数の AZ を展開すると、1 つの AZ に障害が発生した場合でも、手動介入なしでクラスターが自動的にサービスを回復できることが保証されます。データの一貫性も保証されます。スケジュール ポリシーはパフォーマンスを最適化するために使用されますが、障害が発生した場合、これらのポリシーはパフォーマンスよりも可用性を優先することに注意してください。

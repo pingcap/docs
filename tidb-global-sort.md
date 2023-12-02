@@ -4,43 +4,44 @@ summary: Learn the use cases, limitations, usage, and implementation principles 
 ---
 
 <!-- markdownlint-disable MD029 -->
+
 <!-- markdownlint-disable MD046 -->
 
-# TiDB Global Sort
+# TiDB グローバル ソート {#tidb-global-sort}
 
-> **Warning:**
+> **警告：**
 >
-> This feature is experimental. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+> この機能は実験的です。本番環境で使用することはお勧めできません。この機能は予告なく変更または削除される場合があります。バグを見つけた場合は、GitHub で[問題](https://github.com/pingcap/tidb/issues)を報告できます。
 
 <CustomContent platform="tidb-cloud">
 
-> **Note:**
+> **注記：**
 >
-> Currently, this feature is only applicable to TiDB Dedicated clusters. You cannot use it on TiDB Serverless clusters.
+> 現在、この機能は TiDB 専用クラスターにのみ適用されます。 TiDB サーバーレス クラスターでは使用できません。
 
 </CustomContent>
 
-## Overview
+## 概要 {#overview}
 
-The TiDB Global Sort feature enhances the stability and efficiency of data import and DDL (Data Definition Language) operations. It serves as a general operator in the [distributed execution framework](/tidb-distributed-execution-framework.md), providing a global sort service on cloud.
+TiDB グローバル ソート機能は、データ インポートと DDL (データ定義言語) 操作の安定性と効率を強化します。 [分散実行フレームワーク](/tidb-distributed-execution-framework.md)の総合事業者としてクラウド上でグローバルソートサービスを提供しています。
 
-The Global Sort feature currently only supports using Amazon S3 as cloud storage. In future releases, it will be extended to support multiple shared storage interfaces, such as POSIX, enabling seamless integration with different storage systems. This flexibility enables efficient and adaptable data sorting for various use cases.
+グローバル ソート機能は現在、クラウドstorageとして Amazon S3 の使用のみをサポートしています。将来のリリースでは、POSIX などの複数の共有storageインターフェイスをサポートするように拡張され、さまざまなstorageシステムとのシームレスな統合が可能になります。この柔軟性により、さまざまなユースケースに合わせて効率的かつ適応性のあるデータの並べ替えが可能になります。
 
-## Use cases
+## ユースケース {#use-cases}
 
-The Global Sort feature enhances the stability and efficiency of `IMPORT INTO` and `CREATE INDEX`. By globally sorting the data that are processed by the tasks, it improves the stability, controllability, and scalability of writing data to TiKV. This provides an enhanced user experience for data import and DDL tasks, as well as higher-quality services.
+グローバル ソート機能により、 `IMPORT INTO`と`CREATE INDEX`の安定性と効率が向上します。タスクによって処理されるデータをグローバルに並べ替えることにより、TiKV へのデータ書き込みの安定性、制御性、拡張性が向上します。これにより、データ インポートおよび DDL タスクのユーザー エクスペリエンスが向上し、さらに高品質のサービスが提供されます。
 
-The Global Sort feature executes tasks within the unified distributed parallel execution framework, ensuring efficient and parallel sorting of data on a global scale.
+グローバル ソート機能は、統合された分散並列実行フレームワーク内でタスクを実行し、グローバル スケールでのデータの効率的かつ並列ソートを保証します。
 
-## Limitations
+## 制限事項 {#limitations}
 
-Currently, the Global Sort feature is not used as a component of the query execution process responsible for sorting query results.
+現在、グローバル ソート機能は、クエリ結果の並べ替えを担当するクエリ実行プロセスのコンポーネントとしては使用されていません。
 
-## Usage
+## 使用法 {#usage}
 
-To enable Global Sort, follow these steps:
+グローバル ソートを有効にするには、次の手順に従います。
 
-1. Enable the distributed execution framework by setting the value of [`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710) to `ON`:
+1.  値[`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710) ～ `ON`を設定して、分散実行フレームワークを有効にします。
 
     ```sql
     SET GLOBAL tidb_enable_dist_task = ON;
@@ -48,16 +49,16 @@ To enable Global Sort, follow these steps:
 
 <CustomContent platform="tidb">
 
-2. Set [`tidb_cloud_storage_uri`](/system-variables.md#tidb_cloud_storage_uri-new-in-v740) to a correct cloud storage path. See [an example](/br/backup-and-restore-storages.md).
+2.  [`tidb_cloud_storage_uri`](/system-variables.md#tidb_cloud_storage_uri-new-in-v740)を正しいクラウドstorageパスに設定します。 [例](/br/backup-and-restore-storages.md)を参照してください。
 
-> **Note:**
+> **注記：**
 >
-> For [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md), you can also specify the cloud storage path using the [`CLOUD_STORAGE_URI`](/sql-statements/sql-statement-import-into.md#withoptions) option. If both [`tidb_cloud_storage_uri`](/system-variables.md#tidb_cloud_storage_uri-new-in-v740) and `CLOUD_STORAGE_URI` are configured with a valid cloud storage path, the configuration of `CLOUD_STORAGE_URI` takes effect for [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md).
+> [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md)の場合、 [`CLOUD_STORAGE_URI`](/sql-statements/sql-statement-import-into.md#withoptions)オプションを使用してクラウドstorageパスを指定することもできます。 [`tidb_cloud_storage_uri`](/system-variables.md#tidb_cloud_storage_uri-new-in-v740)と`CLOUD_STORAGE_URI`の両方が有効なクラウドstorageパスで構成されている場合、 `CLOUD_STORAGE_URI`の構成は[`IMPORT INTO`](/sql-statements/sql-statement-import-into.md)にも有効になります。
 
 </CustomContent>
 <CustomContent platform="tidb-cloud">
 
-2. Set [`tidb_cloud_storage_uri`](/system-variables.md#tidb_cloud_storage_uri-new-in-v740) to a correct cloud storage path. See [an example](https://docs.pingcap.com/tidb/stable/backup-and-restore-storages).
+2.  [`tidb_cloud_storage_uri`](/system-variables.md#tidb_cloud_storage_uri-new-in-v740)を正しいクラウドstorageパスに設定します。 [例](https://docs.pingcap.com/tidb/stable/backup-and-restore-storages)を参照してください。
 
 </CustomContent>
 
@@ -65,27 +66,27 @@ To enable Global Sort, follow these steps:
     SET GLOBAL tidb_cloud_storage_uri = 's3://my-bucket/test-data?role-arn=arn:aws:iam::888888888888:role/my-role'
     ```
 
-## Implementation principles
+## 実装原則 {#implementation-principles}
 
-The algorithm of the Global Sort feature is as follows:
+グローバル ソート機能のアルゴリズムは次のとおりです。
 
 ![Algorithm of Global Sort](/media/dist-task/global-sort.jpeg)
 
-The detailed implementation principles are as follows:
+詳細な実装原則は次のとおりです。
 
-### Step 1: Scan and prepare data
+### ステップ 1: データをスキャンして準備する {#step-1-scan-and-prepare-data}
 
-1. After TiDB nodes scan a specific range of data (the data source can be either CSV data or table data in TiKV):
+1.  TiDB ノードが特定範囲のデータをスキャンした後 (データ ソースは CSV データまたは TiKV のテーブル データのいずれかです):
 
-    1. TiDB nodes encode them into Key-Value pairs.
-    2. TiDB nodes sort Key-Value pairs into several block data segments (the data segments are locally sorted), where each segment is one file and is uploaded into the cloud storage.
+    1.  TiDB ノードは、それらをキーと値のペアにエンコードします。
+    2.  TiDB ノードは、Key-Value ペアをいくつかのブロック データ セグメントに分類します (データ セグメントはローカルに分類されます)。各セグメントは 1 つのファイルであり、クラウドstorageにアップロードされます。
 
-2. The TiDB node also records a serial actual Key-Value ranges for each segment (referred to as a statistics file), which is a key preparation for scalable sort implementation. These files are then uploaded into the cloud storage along with the real data.
+2.  TiDB ノードは、各セグメント (統計ファイルと呼ばれる) のシリアルの実際の Key-Value 範囲も記録します。これは、スケーラブルな並べ替え実装の重要な準備となります。これらのファイルは、実際のデータとともにクラウドstorageにアップロードされます。
 
-### Step 2: Sort and distribute data
+### ステップ 2: データの分類と配布 {#step-2-sort-and-distribute-data}
 
-From step 1, the Global Sort program obtains a list of sorted blocks and their corresponding statistics files, which provide the number of locally sorted blocks. The program also has a real data scope that can be used by PD to split and scatter. The following steps are performed:
+ステップ 1 から、グローバル ソート プログラムは、ソートされたブロックのリストと、ローカルでソートされたブロックの数を提供するそれに対応する統計ファイルを取得します。このプログラムには、PD が分割および分散するために使用できる実際のデータ スコープもあります。次の手順が実行されます。
 
-1. Sort the records in the statistics file to divide them into nearly equal-sized ranges, which are subtasks that will be executed in parallel.
-2. Distribute the subtasks to TiDB nodes for execution.
-3. Each TiDB node independently sorts the data of subtasks into ranges and ingests them into TiKV without overlap.
+1.  統計ファイル内のレコードを並べ替えて、ほぼ同じサイズの範囲に分割します。これらの範囲は、並行して実行されるサブタスクです。
+2.  サブタスクを TiDB ノードに分散して実行します。
+3.  各 TiDB ノードは、サブタスクのデータを個別に範囲にソートし、重複することなく TiKV に取り込みます。

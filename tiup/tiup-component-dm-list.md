@@ -2,36 +2,36 @@
 title: tiup dm list
 ---
 
-# tiup dm list
+# tiup dm list {#tiup-dm-list}
 
-`tiup-dm` supports deploying multiple clusters using the same control machine. You can use the `tiup dm list` command to check which clusters are deployed using the control machine by the currently logged-in user.
+`tiup-dm`同じ制御マシンを使用した複数のクラスターの展開をサポートします。 `tiup dm list`コマンドを使用すると、現在ログインしているユーザーが制御マシンを使用してデプロイされているクラスターを確認できます。
 
-> **Note:**
+> **注記：**
 >
-> By default, the data of the deployed clusters is stored in the `~/.tiup/storage/dm/clusters/` directory. The currently logged-in user cannot view the clusters deployed by other users on the same control machine.
+> デフォルトでは、デプロイされたクラスターのデータは`~/.tiup/storage/dm/clusters/`ディレクトリに保存されます。現在ログインしているユーザーは、同じ制御マシン上に他のユーザーがデプロイしたクラスターを表示できません。
 
-## Syntax
+## 構文 {#syntax}
 
 ```shell
 tiup dm list [flags]
 ```
 
-## Options
+## オプション {#options}
 
-### -h, --help
+### -h, --help {#h-help}
 
-- Prints the help information.
-- Data type: `BOOLEAN`
-- This option is disabled by default with the `false` value. To enable this option, add this option to the command, and either pass the `true` value or do not pass any value.
+-   ヘルプ情報を出力します。
+-   データ型: `BOOLEAN`
+-   このオプションは、値`false`を指定するとデフォルトで無効になります。このオプションを有効にするには、このオプションをコマンドに追加し、値`true`渡すか、値を渡しません。
 
-## Output
+## 出力 {#output}
 
-A table consisting of the following fields:
+次のフィールドで構成されるテーブル:
 
-- `Name`: the cluster name.
-- `User`: the user who deployed the cluster.
-- `Version`: the cluster version.
-- `Path`: the path of the cluster deployment data on the control machine.
-- `PrivateKey`: the path of the private key to the cluster.
+-   `Name` : クラスター名。
+-   `User` : クラスターをデプロイしたユーザー。
+-   `Version` : クラスターのバージョン。
+-   `Path` : 制御マシン上のクラスター展開データのパス。
+-   `PrivateKey` : クラスターへの秘密キーのパス。
 
-[<< Back to the previous page - TiUP DM command list](/tiup/tiup-component-dm.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUP DMコマンド一覧](/tiup/tiup-component-dm.md#command-list)

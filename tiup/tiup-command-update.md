@@ -2,51 +2,51 @@
 title: tiup update
 ---
 
-# tiup update
+# tiup update {#tiup-update}
 
-The `tiup update` command is used to update the installed components or TiUP itself.
+`tiup update`コマンドは、インストールされているコンポーネントまたはTiUP自体を更新するために使用されます。
 
-## Syntax
+## 構文 {#syntax}
 
 ```shell
 tiup update [component1][:version] [component2..N] [flags]
 ```
 
-- `[component1]`: the name of the component to update.
-- `[version]`: the version to update. If this field is omitted, it means updating to the latest stable version of the component.
-- `[component2...N]`: specifies updating multiple components or versions. If no component is specified, which means `[component1][:version] [component2..N]` is empty, you need to use the `--all` or the `--self` option together.
+-   `[component1]` : 更新するコンポーネントの名前。
+-   `[version]` : 更新するバージョン。このフィールドを省略した場合は、コンポーネントの最新の安定したバージョンに更新することを意味します。
+-   `[component2...N]` : 複数のコンポーネントまたはバージョンの更新を指定します。コンポーネントが指定されていない場合、つまり`[component1][:version] [component2..N]`が空である場合は、 `--all`または`--self`オプションを一緒に使用する必要があります。
 
-The update operation does not delete the old version. You can still specify using the old version during execution.
+更新操作では古いバージョンは削除されません。実行時に古いバージョンを使用するように指定することもできます。
 
-## Options
+## オプション {#options}
 
-### --all
+### &#x20;--all {#all}
 
-- If no component is specified, this option must be specified.
-- Data type: `BOOLEAN`
-- This option is disabled by default and its default value is `false`. To enable this option, you can add this option to the command, and pass the `true` value or do not pass any value.
+-   コンポーネントが指定されていない場合は、このオプションを指定する必要があります。
+-   データ型: `BOOLEAN`
+-   このオプションはデフォルトでは無効になっており、デフォルト値は`false`です。このオプションを有効にするには、このオプションをコマンドに追加して、値`true`渡すか、値を渡さないことができます。
 
-### --force
+### &#x20;--force {#force}
 
-- If the specified version of the component is already installed, the update operation is skipped by default. Specifying this option will have the installed version forcibly updated.
-- Data type: `BOOLEAN`
-- This option is disabled by default and its default value is `false`. To enable this option, you can add this option to the command, and pass the `true` value or do not pass any value.
+-   指定したバージョンのコンポーネントがすでにインストールされている場合、デフォルトでは更新操作はスキップされます。このオプションを指定すると、インストールされているバージョンが強制的に更新されます。
+-   データ型: `BOOLEAN`
+-   このオプションはデフォルトでは無効になっており、デフォルト値は`false`です。このオプションを有効にするには、このオプションをコマンドに追加して、値`true`渡すか、値を渡さないことができます。
 
-### --nightly
+### --毎晩 {#nightly}
 
-- Updates the specified components to the nightly version. The `tiup update` command with this option is equivalent to the `tiup update <component>:nightly` command.
-- Data type: `BOOLEAN`
-- This option is disabled by default and its default value is `false`. To enable this option, you can add this option to the command, and pass the `true` value or do not pass any value.
+-   指定されたコンポーネントを夜間バージョンに更新します。このオプションを指定した`tiup update`コマンドは`tiup update <component>:nightly`コマンドと同等です。
+-   データ型: `BOOLEAN`
+-   このオプションはデフォルトでは無効になっており、デフォルト値は`false`です。このオプションを有効にするには、このオプションをコマンドに追加して、値`true`渡すか、値を渡さないことができます。
 
-### --self
+### - 自己 {#self}
 
-- Updates TiUP itself.
-- Data type: `BOOLEAN`
-- This option is disabled by default and its default value is `false`. To enable this option, you can add this option to the command, and pass the `true` value or do not pass any value.
+-   TiUP本体をアップデートします。
+-   データ型: `BOOLEAN`
+-   このオプションはデフォルトでは無効になっており、デフォルト値は`false`です。このオプションを有効にするには、このオプションをコマンドに追加して、値`true`渡すか、値を渡さないことができます。
 
-## Outputs
+## 出力 {#outputs}
 
-- If the update is successful, `Updated successfully!` is output.
-- If target version does not exist, the `Error: version %s not supported by component %s` error is reported.
+-   アップデートが成功した場合は`Updated successfully!`が出力されます。
+-   ターゲット バージョンが存在しない場合は、 `Error: version %s not supported by component %s`エラーが報告されます。
 
-[<< Back to the previous page - TiUP Reference command list](/tiup/tiup-reference.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUPリファレンスコマンドリスト](/tiup/tiup-reference.md#command-list)

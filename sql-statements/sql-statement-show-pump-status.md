@@ -3,17 +3,15 @@ title: SHOW PUMP STATUS
 summary: An overview of the usage of SHOW PUMP STATUS for the TiDB database.
 ---
 
-# SHOW PUMP STATUS
+# ポンプのステータスを表示 {#show-pump-status}
 
-The `SHOW PUMP STATUS` statement displays the status information for all Pump nodes in the cluster.
+`SHOW PUMP STATUS`ステートメントは、クラスター内のすべてのPumpノードのステータス情報を表示します。
 
-> **Note:**
+> **注記：**
 >
-> This feature is only applicable to TiDB Self-Hosted and not available on [TiDB Cloud](https://docs.pingcap.com/tidbcloud/).
+> この機能は TiDB セルフホスト型にのみ適用され、 [TiDB Cloud](https://docs.pingcap.com/tidbcloud/)では利用できません。
 
-## Examples
-
-{{< copyable "sql" >}}
+## 例 {#examples}
 
 ```sql
 SHOW PUMP STATUS;
@@ -30,12 +28,12 @@ SHOW PUMP STATUS;
 2 rows in set (0.00 sec)
 ```
 
-## MySQL compatibility
+## MySQLの互換性 {#mysql-compatibility}
 
-This statement is a TiDB extension to MySQL syntax.
+このステートメントは、MySQL 構文に対する TiDB 拡張機能です。
 
-## See also
+## こちらも参照 {#see-also}
 
-* [SHOW DRAINER STATUS](/sql-statements/sql-statement-show-drainer-status.md)
-* [CHANGE PUMP STATUS](/sql-statements/sql-statement-change-pump.md)
-* [CHANGE DRAINER STATUS](/sql-statements/sql-statement-change-drainer.md)
+-   [ドレイナーのステータスを表示](/sql-statements/sql-statement-show-drainer-status.md)
+-   [ポンプステータスの変更](/sql-statements/sql-statement-change-pump.md)
+-   [ドレイナーステータスの変更](/sql-statements/sql-statement-change-drainer.md)

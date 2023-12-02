@@ -2,38 +2,38 @@
 title: TiDB 2.1.6 Release Notes
 ---
 
-# TiDB 2.1.6 Release Notes
+# TiDB 2.1.6 リリースノート {#tidb-2-1-6-release-notes}
 
-On March 15, 2019, TiDB 2.1.6 is released. The corresponding TiDB Ansible 2.1.6 is also released. Compared with TiDB 2.1.5, this release has greatly improved the stability, the SQL optimizer, statistics, and the execution engine.
+2019 年 3 月 15 日に、TiDB 2.1.6 がリリースされました。対応する TiDB Ansible 2.1.6 もリリースされています。 TiDB 2.1.5 と比較して、このリリースでは安定性、SQL オプティマイザー、統計、実行エンジンが大幅に向上しています。
 
-## TiDB
+## TiDB {#tidb}
 
-+ SQL Optimizer/Executor
-    - Optimize planner to select the outer table based on cost when both tables are specified in Hint of `TIDB_INLJ` [#9615](https://github.com/pingcap/tidb/pull/9615)
-    - Fix the issue that `IndexScan` cannot be selected correctly in some cases [#9587](https://github.com/pingcap/tidb/pull/9587)
-    - Fix incompatibility with MySQL of check in the `agg` function in subqueries [#9551](https://github.com/pingcap/tidb/pull/9551)
-    - Make `show stats_histograms` only output valid columns to avoid panics [#9502](https://github.com/pingcap/tidb/pull/9502)
+-   SQL オプティマイザー/エグゼキューター
+    -   ヒント`TIDB_INLJ` [#9615](https://github.com/pingcap/tidb/pull/9615)で両方のテーブルが指定されている場合、コストに基づいて外部テーブルを選択するようにプランナーを最適化します。
+    -   `IndexScan`正しく選択できない場合がある問題を修正[#9587](https://github.com/pingcap/tidb/pull/9587)
+    -   サブクエリ[#9551](https://github.com/pingcap/tidb/pull/9551)の`agg`関数のチェックの MySQL との非互換性を修正
+    -   パニックを避けるために`show stats_histograms`有効な列のみを出力するようにします[#9502](https://github.com/pingcap/tidb/pull/9502)
 
-+ Server
-    - Support the `log_bin` variable to enable/disable Binlog [#9634](https://github.com/pingcap/tidb/pull/9634)
-    - Add a sanity check for transactions to avoid false transaction commit [#9559](https://github.com/pingcap/tidb/pull/9559)
-    - Fix the issue that setting variables may lead to panic  [#9539](https://github.com/pingcap/tidb/pull/9539)
+-   サーバ
+    -   Binlog [#9634](https://github.com/pingcap/tidb/pull/9634)を有効/無効にする`log_bin`変数をサポートします
+    -   トランザクションの健全性チェックを追加して、誤ったトランザクションのコミットを回避します[#9559](https://github.com/pingcap/tidb/pull/9559)
+    -   変数を設定するとpanic[#9539](https://github.com/pingcap/tidb/pull/9539)が発生する場合がある問題を修正
 
-+ DDL
-    - Fix the issue that the `Create Table Like` statement causes panic in some cases [#9652](https://github.com/pingcap/tidb/pull/9652)
-    - Enable the `AutoSync` feature of etcd clients to avoid connection issues between TiDB and etcd in some cases [#9600](https://github.com/pingcap/tidb/pull/9600)
+-   DDL
+    -   `Create Table Like`ステートメントが場合によってpanicを引き起こす問題を修正[#9652](https://github.com/pingcap/tidb/pull/9652)
+    -   etcd クライアントの`AutoSync`機能を有効にして、場合によっては TiDB と etcd 間の接続の問題を回避します[#9600](https://github.com/pingcap/tidb/pull/9600)
 
-## TiKV
+## TiKV {#tikv}
 
-- Fix the issue that a `protobuf` parsing failure would in some cases cause a `StoreNotMatch` error [#4303](https://github.com/tikv/tikv/pull/4303)
+-   `protobuf`解析失敗により場合によっては`StoreNotMatch`エラーが発生する問題を修正[#4303](https://github.com/tikv/tikv/pull/4303)
 
-## Tools
+## ツール {#tools}
 
-+ Lightning
-    - Change the default `region-split-size` of importer to 512 MiB [#4369](https://github.com/tikv/tikv/pull/4369)
-    - Save the intermediate SST previously cached in memory to the local disk to reduce memory usage [#4369](https://github.com/tikv/tikv/pull/4369)
-    - Limit the memory usage of RocksDB [#4369](https://github.com/tikv/tikv/pull/4369)
-    - Fix the issue that Regions are scattered before scheduling is finished [#4369](https://github.com/tikv/tikv/pull/4369)
-    - Separate importing of data and indexes for large tables to effectively reduce time consumption when importing in batches [#132](https://github.com/pingcap/tidb-lightning/pull/132)
-    - Support CSV [#111](https://github.com/pingcap/tidb-lightning/pull/111)
-    - Fix the error of import failure due to non-alphanumeric characters in schema names [#9547](https://github.com/pingcap/tidb/pull/9547)
+-   稲妻
+    -   インポーターのデフォルトの`region-split-size` 512 MiB [#4369](https://github.com/tikv/tikv/pull/4369)に変更します。
+    -   メモリ使用量を削減するために、以前にメモリにキャッシュされた中間 SST をローカル ディスクに保存します[#4369](https://github.com/tikv/tikv/pull/4369)
+    -   RocksDB のメモリ使用量を制限する[#4369](https://github.com/tikv/tikv/pull/4369)
+    -   スケジューリングが完了する前にリージョンが分散してしまう問題を修正[#4369](https://github.com/tikv/tikv/pull/4369)
+    -   大きなテーブルのデータとインデックスを個別にインポートして、バッチでインポートする際の時間消費を効果的に削減します[#132](https://github.com/pingcap/tidb-lightning/pull/132)
+    -   [#111](https://github.com/pingcap/tidb-lightning/pull/111)をサポート
+    -   スキーマ名に英数字以外の文字が含まれているためにインポートが失敗するエラーを修正[#9547](https://github.com/pingcap/tidb/pull/9547)

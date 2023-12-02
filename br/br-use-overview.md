@@ -3,98 +3,98 @@ title: Usage Overview of TiDB Backup and Restore
 summary: Learn about how to deploy the backup and restore tool, and how to use it to back up and restore a TiDB cluster.
 ---
 
-# Usage Overview of TiDB Backup and Restore
+# TiDB バックアップと復元の使用法の概要 {#usage-overview-of-tidb-backup-and-restore}
 
-This document describes best practices of using TiDB backup and restore features, including how to choose a backup method, how to manage backup data, and how to install and deploy the backup and restore tool.
+このドキュメントでは、バックアップ方法の選択方法、バックアップ データの管理方法、バックアップおよび復元ツールのインストールおよび展開方法など、TiDB のバックアップおよび復元機能を使用するベスト プラクティスについて説明します。
 
-## Recommended practices
+## 推奨される実践方法 {#recommended-practices}
 
-Before using TiDB backup and restore features, it is recommended that you understand the recommended backup and restore solutions.
+TiDB のバックアップおよび復元機能を使用する前に、推奨されるバックアップおよび復元ソリューションを理解しておくことをお勧めします。
 
-### How to back up data?
+### データをバックアップするにはどうすればよいですか? {#how-to-back-up-data}
 
-**TiDB provides two types of backup. Which one should I use?** Full backup contains the full data of a cluster at a certain point in time. Log backup contains the data changes written to TiDB. It is recommended to use both types of backup at the same time:
+**TiDB は 2 種類のバックアップを提供します。どれを使えばいいのでしょうか？**完全バックアップには、特定の時点でのクラスターの完全なデータが含まれます。ログ バックアップには、TiDB に書き込まれたデータ変更が含まれます。両方のタイプのバックアップを同時に使用することをお勧めします。
 
-- **[Start log backup](/br/br-pitr-guide.md#start-log-backup)**: Run the `br log start` command to start the log backup task. After that, the task keeps running on all TiKV nodes and backs up TiDB data changes to the specified storage in small batches regularly.
-- **Perform [snapshot (full) backup](/br/br-snapshot-guide.md#back-up-cluster-snapshots) regularly**: Run the `br backup full` command to back up the snapshot of the cluster to the specified storage. For example, back up the cluster snapshot at 0:00 AM every day.
+-   **<a href="/br/br-pitr-guide.md#start-log-backup">ログ バックアップの開始</a>**: `br log start`コマンドを実行して、ログ バックアップ タスクを開始します。その後、タスクはすべての TiKV ノードで実行を継続し、TiDB データの変更を指定されたstorageに小さなバッチで定期的にバックアップします。
+-   **定期的に<a href="/br/br-snapshot-guide.md#back-up-cluster-snapshots">スナップショット (フル) バックアップ</a>を実行する**: `br backup full`コマンドを実行して、クラスターのスナップショットを指定したstorageにバックアップします。たとえば、毎日午前 0 時にクラスターのスナップショットをバックアップします。
 
-### How to manage backup data?
+### バックアップデータはどのように管理すればいいのでしょうか？ {#how-to-manage-backup-data}
 
-BR provides only basic backup and restore features, and does not support backup management. Therefore, you need to decide how to manage backup data on your own, which might involve the following questions?
+BR は基本的なバックアップおよび復元機能のみを提供し、バックアップ管理はサポートしません。したがって、バックアップ データを管理する方法を自分で決定する必要があります。これには次のような疑問が含まれる可能性があります。
 
-* Which backup storage system should I choose?
-* In which directory should I place the backup data during a backup task?
-* In what way should I organize the directory of the full backup data and log backup data?
-* How to handle the historical backup data in the storage system?
+-   どのバックアップstorageシステムを選択すればよいですか?
+-   バックアップ タスク中にバックアップ データをどのディレクトリに配置する必要がありますか?
+-   フルバックアップデータやログバックアップデータのディレクトリはどのように整理すればよいでしょうか？
+-   storageシステム内の過去のバックアップ データはどのように処理すればよいですか?
 
-The following sections will answer these questions one by one.
+次のセクションでは、これらの質問に 1 つずつ答えていきます。
 
-**Choose a backup storage system**
+**バックアップstorageシステムを選択する**
 
-It is recommended that you store backup data to Amazon S3, Google Cloud Storage (GCS), or Azure Blob Storage. Using these systems, you do not need to worry about the backup capacity and bandwidth allocation.
+バックアップ データは、Amazon S3、Google Cloud Storage (GCS)、または Azure Blob Storage に保存することをお勧めします。これらのシステムを使用すると、バックアップ容量や帯域幅の割り当てについて心配する必要がなくなります。
 
-If the TiDB cluster is deployed in a self-built data center, the following practices are recommended:
+TiDB クラスターが自社構築のデータセンターにデプロイされている場合は、次の方法が推奨されます。
 
-* Build [MinIO](https://docs.min.io/docs/minio-quickstart-guide.html) as the backup storage system, and use the S3 protocol to back up data to MinIO.
-* Mount Network File System (NFS, such as NAS) disks to br command-line tool and all TiKV instances, and use the POSIX file system interface to write backup data to the corresponding NFS directory.
+-   バックアップstorageシステムとして[MinIO](https://docs.min.io/docs/minio-quickstart-guide.html)を構築し、S3 プロトコルを使用してデータを MinIO にバックアップします。
+-   ネットワーク ファイル システム (NAS など) ディスクを br コマンド ライン ツールおよびすべての TiKV インスタンスにマウントし、POSIX ファイル システム インターフェイスを使用してバックアップ データを対応する NFS ディレクトリに書き込みます。
 
-> **Note:**
+> **注記：**
 >
-> If you do not choose NFS or a storage system that supports Amazon S3, GCS, or Azure Blob Storage protocols, the data backed up is generated at each TiKV node. **Note that this is not the recommended way to use BR**, because collecting the backup data might result in data redundancy and operation and maintenance problems.
+> Amazon S3、GCS、または Azure Blob Storage プロトコルをサポートする NFS またはstorageシステムを選択しない場合、バックアップされたデータは各 TiKV ノードで生成されます。バックアップ データを収集すると、データの冗長性や運用および保守の問題が発生する可能性があるため、**これはBR の推奨される使用方法ではないことに注意してください**。
 
-**Organize the backup data directory**
+**バックアップデータのディレクトリを整理する**
 
-* Store the snapshot backup and log backup in the same directory for unified management, for example, `backup-${cluster-id}`.
-* Store each snapshot backup in a directory with the backup date included, for example, `backup-${cluster-id}/fullbackup-202209081330`.
-* Store the log backup in a fixed directory, for example, `backup-${cluster-id}/logbackup`. The log backup program creates subdirectories under the `logbackup` directory every day to distinguish the data backed up each day.
+-   スナップショット バックアップとログ バックアップは、統合管理のために同じディレクトリに保存します (例: `backup-${cluster-id}` 。
+-   各スナップショット バックアップを、バックアップ日付を含むディレクトリ (例: `backup-${cluster-id}/fullbackup-202209081330`に保存します。
+-   ログのバックアップを固定ディレクトリ (例: `backup-${cluster-id}/logbackup`に保存します。ログ バックアップ プログラムは、毎日バックアップされるデータを区別するために、 `logbackup`ディレクトリの下にサブディレクトリを毎日作成します。
 
-**Handle historical backup data**
+**過去のバックアップデータを処理する**
 
-Assume that you need to set the life cycle for each backup data, for example, 7 days. Such a life cycle is called **backup retention period**, which will also be mentioned in backup tutorials.
+各バックアップ データのライフ サイクルを、たとえば 7 日間に設定する必要があるとします。このようなライフサイクルは**バックアップ保持期間**と呼ばれ、バックアップのチュートリアルでも説明されます。
 
-* To perform PITR, you need to restore the full backup before the restore point, and the log backup between the full backup and the restore point. Therefore, **It is recommended to only delete the log backup before the full snapshot**. For log backups that exceed the backup retention period, you can use `br log truncate` command to delete the backup before the specified time point.
-* For backup data that exceeds the retention period, you can delete or archive the backup directory.
+-   PITR を実行するには、復元ポイントの前に完全バックアップを復元し、完全バックアップと復元ポイントの間にログ バックアップを復元する必要があります。したがって、**完全なスナップショットの前にのみログ バックアップを削除することをお勧めします**。バックアップ保持期間を超えたログ バックアップの場合は、 `br log truncate`コマンドを使用して、指定した時点より前にバックアップを削除できます。
+-   保存期間を超えたバックアップ データについては、バックアップ ディレクトリを削除またはアーカイブできます。
 
-### How to restore data?
+### データを復元するにはどうすればよいですか? {#how-to-restore-data}
 
-- To restore only full backup data, you can use `br restore` to perform a full restore of the specified backup.
-- If you have started log backup and regularly performed a full backup, you can run the `br restore point` command to restore data to any time point within the backup retention period.
+-   完全バックアップ データのみを復元するには、 `br restore`を使用して、指定したバックアップの完全復元を実行します。
+-   ログ バックアップを開始し、定期的に完全バックアップを実行している場合は、 `br restore point`コマンドを実行して、バックアップ保持期間内の任意の時点にデータを復元できます。
 
-## Deploy and use BR
+## BRをデプロイて使用する {#deploy-and-use-br}
 
-To deploy BR, ensure that the following requirements are met:
+BRを展開するには、次の要件が満たされていることを確認してください。
 
-- BR, TiKV nodes, and the backup storage system provide network bandwidth that is greater than the backup speed. If the target cluster is particularly large, the threshold of backup and restore speed is limited by the bandwidth of the backup network.
-- The backup storage system provides sufficient read and write performance (IOPS). Otherwise, they might become a performance bottleneck during backup or restore.
-- TiKV nodes have at least two additional CPU cores and high performance disks for backups. Otherwise, the backup might have an impact on the services running on the cluster.
-- BR runs on a node with more than 8 cores and 16 GiB memory.
+-   BR、TiKV ノード、およびバックアップstorageシステムは、バックアップ速度を超えるネットワーク帯域幅を提供します。ターゲット クラスタが特に大きい場合、バックアップおよび復元速度のしきい値はバックアップ ネットワークの帯域幅によって制限されます。
+-   バックアップstorageシステムは、十分な読み取りおよび書き込みパフォーマンス (IOPS) を提供します。そうしないと、バックアップまたは復元中にパフォーマンスのボトルネックになる可能性があります。
+-   TiKV ノードには、少なくとも 2 つの追加の CPU コアとバックアップ用の高性能ディスクが搭載されています。そうしないと、バックアップがクラスター上で実行されているサービスに影響を与える可能性があります。
+-   BR は、 8 コアと 16 GiBメモリを超えるノード上で実行されます。
 
-You can use backup and restore features in several ways, such as via the command-line tool, by running SQL commands, and using TiDB Operator. The following sections describe these three methods in detail.
+バックアップおよび復元機能は、コマンドライン ツール、SQL コマンドの実行、 TiDB Operator の使用など、いくつかの方法で使用できます。次のセクションでは、これら 3 つの方法について詳しく説明します。
 
-### Use br command-line tool (recommended)
+### br コマンドライン ツールを使用する (推奨) {#use-br-command-line-tool-recommended}
 
-TiDB supports backup and restore using br command-line tool.
+TiDB は、br コマンドライン ツールを使用したバックアップと復元をサポートしています。
 
-* You can run the `tiup install br` command to [install br command-line tool using TiUP online](/migration-tools.md#install-tools-using-tiup).
-* For details about how to use `br` commands to back up and restore data, refer to the following documents:
+-   `tiup install br`から[TiUPオンラインを使用して br コマンドライン ツールをインストールします](/migration-tools.md#install-tools-using-tiup)までのコマンドを実行できます。
+-   `br`コマンドを使用してデータをバックアップおよび復元する方法の詳細については、次のドキュメントを参照してください。
 
-    * [TiDB Snapshot Backup and Restore Guide](/br/br-snapshot-guide.md)
-    * [TiDB Log Backup and PITR Guide](/br/br-pitr-guide.md)
-    * [TiDB Backup and Restore Use Cases](/br/backup-and-restore-use-cases.md)
+    -   [TiDB スナップショットのバックアップおよび復元ガイド](/br/br-snapshot-guide.md)
+    -   [TiDB ログのバックアップと PITR ガイド](/br/br-pitr-guide.md)
+    -   [TiDB のバックアップと復元の使用例](/br/backup-and-restore-use-cases.md)
 
-### Use SQL statements
+### SQL ステートメントを使用する {#use-sql-statements}
 
-TiDB supports full backup and restore using SQL statements:
+TiDB は、SQL ステートメントを使用した完全バックアップと復元をサポートしています。
 
-- [`BACKUP`](/sql-statements/sql-statement-backup.md): backs up full snapshot data.
-- [`RESTORE`](/sql-statements/sql-statement-restore.md): restores snapshot backup data.
-- [`SHOW BACKUPS|RESTORES`](/sql-statements/sql-statement-show-backups.md): views the backup and restore progress.
+-   [`BACKUP`](/sql-statements/sql-statement-backup.md) : 完全なスナップショット データをバックアップします。
+-   [`RESTORE`](/sql-statements/sql-statement-restore.md) : スナップショットバックアップデータを復元します。
+-   [`SHOW BACKUPS|RESTORES`](/sql-statements/sql-statement-show-backups.md) : バックアップと復元の進行状況を表示します。
 
-### Use TiDB Operator on Kubernetes
+### Kubernetes でTiDB Operatorを使用する {#use-tidb-operator-on-kubernetes}
 
-On Kubernetes, you can use TiDB Operator to back up TiDB cluster data to Amazon S3, GCS, or Azure Blob Storage, and restore data from the backup data in such systems. For details, see [Back Up and Restore Data Using TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/stable/backup-restore-overview).
+Kubernetes では、 TiDB Operatorを使用して TiDB クラスター データを Amazon S3、GCS、または Azure Blob Storage にバックアップし、そのようなシステムのバックアップ データからデータを復元できます。詳細は[TiDB Operatorを使用したデータのバックアップと復元](https://docs.pingcap.com/tidb-in-kubernetes/stable/backup-restore-overview)を参照してください。
 
-## See also
+## こちらも参照 {#see-also}
 
-- [TiDB Backup and Restore Overview](/br/backup-and-restore-overview.md)
-- [TiDB Backup and Restore Architecture](/br/backup-and-restore-design.md)
+-   [TiDB のバックアップと復元の概要](/br/backup-and-restore-overview.md)
+-   [TiDB のバックアップと復元のアーキテクチャ](/br/backup-and-restore-design.md)

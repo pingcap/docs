@@ -3,93 +3,75 @@ title: User-Defined Variables
 summary: Learn how to use user-defined variables.
 ---
 
-# User-Defined Variables
+# ユーザー定義変数 {#user-defined-variables}
 
-This document describes the concept of user-defined variables in TiDB and the methods to set and read the user-defined variables.
+このドキュメントでは、TiDB のユーザー定義変数の概念と、ユーザー定義変数を設定および読み取る方法について説明します。
 
-> **Warning:**
+> **警告：**
 >
-> User-defined variables are still an experimental feature. It is **NOT** recommended that you use them in the production environment.
+> ユーザー定義変数はまだ実験的機能です。本番環境でこれらを使用することは**お**勧めできません。
 
-The format of the user-defined variables is `@var_name`. The characters that compose `var_name` can be any characters that can compose an identifier, including the numbers `0-9`, the letters `a-zA-Z`, the underscore `_`, the dollar sign `$`, and the UTF-8 characters. In addition, it also includes the English period `.`. The user-defined variables are case-insensitive.
+ユーザー定義変数の形式は`@var_name`です。 `var_name`を構成する文字には、数字`0-9` 、文字`a-zA-Z` 、アンダースコア`_` 、ドル記号`$` 、UTF-8 文字など、識別子を構成できる任意の文字を使用できます。さらに、英語のピリオドも含まれます`.` 。ユーザー定義変数では大文字と小文字が区別されません。
 
-The user-defined variables are session-specific, which means a user variable defined by one client connection cannot be seen or used by other client connections.
+ユーザー定義変数はセッション固有です。つまり、あるクライアント接続で定義されたユーザー変数は、他のクライアント接続では表示または使用できません。
 
-## Set the user-defined variables
+## ユーザー定義変数を設定する {#set-the-user-defined-variables}
 
-You can use the `SET` statement to set a user-defined variable, and the syntax is `SET @var_name = expr [, @var_name = expr] ...;`. For example:
-
-{{< copyable "sql" >}}
+`SET`ステートメントを使用してユーザー定義変数を設定できます。構文は`SET @var_name = expr [, @var_name = expr] ...;`です。例えば：
 
 ```sql
 SET @favorite_db = 'TiDB';
 ```
 
-{{< copyable "sql" >}}
-
 ```sql
 SET @a = 'a', @b = 'b', @c = 'c';
 ```
 
-For the assignment operator, you can also use `:=`. For example:
-
-{{< copyable "sql" >}}
+代入演算子には、 `:=`を使用することもできます。例えば：
 
 ```sql
 SET @favorite_db := 'TiDB';
 ```
 
-The content to the right of the assignment operator can be any valid expression. For example:
-
-{{< copyable "sql" >}}
+代入演算子の右側の内容には、任意の有効な式を指定できます。例えば：
 
 ```sql
 SET @c = @a + @b;
 ```
 
-{{< copyable "sql" >}}
-
 ```sql
 set @c = b'1000001' + b'1000001';
 ```
 
-## Read the user-defined variables
+## ユーザー定義変数を読み取る {#read-the-user-defined-variables}
 
-To read a user-defined variable, you can use the `SELECT` statement to query:
-
-{{< copyable "sql" >}}
+ユーザー定義変数を読み取るには、 `SELECT`ステートメントを使用してクエリを実行できます。
 
 ```sql
 SELECT @a1, @a2, @a3
 ```
 
-```
-+------+------+------+
-| @a1  | @a2  | @a3  |
-+------+------+------+
-|    1 |    2 |    4 |
-+------+------+------+
-```
+    +------+------+------+
+    | @a1  | @a2  | @a3  |
+    +------+------+------+
+    |    1 |    2 |    4 |
+    +------+------+------+
 
-You can also assign values in the `SELECT` statement:
+`SELECT`ステートメントで値を割り当てることもできます。
 
 ```sql
 SELECT @a1, @a2, @a3, @a4 := @a1+@a2+@a3;
 ```
 
-```
-+------+------+------+--------------------+
-| @a1  | @a2  | @a3  | @a4 := @a1+@a2+@a3 |
-+------+------+------+--------------------+
-|    1 |    2 |    4 |                  7 |
-+------+------+------+--------------------+
-```
+    +------+------+------+--------------------+
+    | @a1  | @a2  | @a3  | @a4 := @a1+@a2+@a3 |
+    +------+------+------+--------------------+
+    |    1 |    2 |    4 |                  7 |
+    +------+------+------+--------------------+
 
-Before the variable `@a4` is modified or the connection is closed, its value is always `7`.
+変数`@a4`が変更されるか、接続が閉じられる前は、その値は常に`7`です。
 
-If a hexadecimal literal or binary literal is used when setting the user-defined variable, TiDB will treat it as a binary string. If you want to set it to a number, you can manually add the `CAST` conversion, or use the numeric operator in the expression:
-
-{{< copyable "sql" >}}
+ユーザー定義変数を設定するときに 16 進リテラルまたはバイナリ リテラルが使用される場合、TiDB はそれをバイナリ文字列として扱います。これを数値に設定する場合は、手動で`CAST`変換を追加するか、式で数値演算子を使用します。
 
 ```sql
 SET @v1 = b'1000001';
@@ -97,39 +79,29 @@ SET @v2 = b'1000001'+0;
 SET @v3 = CAST(b'1000001' AS UNSIGNED);
 ```
 
-{{< copyable "sql" >}}
-
 ```sql
 SELECT @v1, @v2, @v3;
 ```
 
-```
-+------+------+------+
-| @v1  | @v2  | @v3  |
-+------+------+------+
-| A    | 65   | 65   |
-+------+------+------+
-```
+    +------+------+------+
+    | @v1  | @v2  | @v3  |
+    +------+------+------+
+    | A    | 65   | 65   |
+    +------+------+------+
 
-If you refer to a user-defined variable that has not been initialized, it has a value of NULL and a type of string.
-
-{{< copyable "sql" >}}
+初期化されていないユーザー定義変数を参照する場合、その変数の値は NULL で、型は文字列になります。
 
 ```sql
 SELECT @not_exist;
 ```
 
-```
-+------------+
-| @not_exist |
-+------------+
-| NULL       |
-+------------+
-```
+    +------------+
+    | @not_exist |
+    +------------+
+    | NULL       |
+    +------------+
 
-In addition to using the `SELECT` statement to read the user-defined variables, another common usage is the `PREPARE` statement. For example:
-
-{{< copyable "sql" >}}
+ユーザー定義変数を読み取るために`SELECT`ステートメントを使用することに加えて、もう 1 つの一般的な使用法は`PREPARE`ステートメントです。例えば：
 
 ```sql
 SET @s = 'SELECT SQRT(POW(?,2) + POW(?,2)) AS hypotenuse';
@@ -139,47 +111,37 @@ SET @b = 8;
 EXECUTE stmt USING @a, @b;
 ```
 
-```
-+------------+
-| hypotenuse |
-+------------+
-|         10 |
-+------------+
-```
+    +------------+
+    | hypotenuse |
+    +------------+
+    |         10 |
+    +------------+
 
-The contents of the user-defined variables are not recognized as identifiers in the SQL statements. For example:
-
-{{< copyable "sql" >}}
+ユーザー定義変数の内容は、SQL ステートメント内の識別子として認識されません。例えば：
 
 ```sql
 SELECT * from t;
 ```
 
-```
-+---+
-| a |
-+---+
-| 1 |
-+---+
-```
-
-{{< copyable "sql" >}}
+    +---+
+    | a |
+    +---+
+    | 1 |
+    +---+
 
 ```sql
 SET @col = "`a`";
 SELECT @col FROM t;
 ```
 
-```
-+------+
-| @col |
-+------+
-| `a`  |
-+------+
-```
+    +------+
+    | @col |
+    +------+
+    | `a`  |
+    +------+
 
-## MySQL compatibility
+## MySQLの互換性 {#mysql-compatibility}
 
-Except for `SELECT ... INTO <variable>`, the syntax supported in MySQL and TiDB is identical.
+`SELECT ... INTO <variable>`を除いて、MySQL と TiDB でサポートされる構文は同じです。
 
-For more information, see [User-Defined Variables in MySQL](https://dev.mysql.com/doc/refman/8.0/en/user-variables.html).
+詳細については、 [MySQL のユーザー定義変数](https://dev.mysql.com/doc/refman/8.0/en/user-variables.html)を参照してください。

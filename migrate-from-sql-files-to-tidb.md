@@ -3,39 +3,37 @@ title: Migrate Data from SQL Files to TiDB
 summary: Learn how to migrate data from SQL files to TiDB.
 ---
 
-# Migrate Data from SQL Files to TiDB
+# SQL ファイルから TiDB へのデータの移行 {#migrate-data-from-sql-files-to-tidb}
 
-This document describes how to migrate data from MySQL SQL files to TiDB using TiDB Lightning. For how to generate MySQL SQL files, refer to [Export to SQL files using Dumpling](/dumpling-overview.md#export-to-sql-files).
+このドキュメントでは、 TiDB Lightningを使用して MySQL SQL ファイルから TiDB にデータを移行する方法について説明します。 MySQL SQL ファイルの生成方法については、 [Dumplingを使用して SQL ファイルにエクスポートする](/dumpling-overview.md#export-to-sql-files)を参照してください。
 
-## Prerequisites
+## 前提条件 {#prerequisites}
 
-- [Install TiDB Lightning using TiUP](/migration-tools.md)
-- [Grant the required privileges to the target database for TiDB Lightning](/tidb-lightning/tidb-lightning-faq.md#what-are-the-privilege-requirements-for-the-target-database)
+-   [TiUPを使用してTiDB Lightningをインストールする](/migration-tools.md)
+-   [TiDB Lightningのターゲット データベースに必要な権限を付与します。](/tidb-lightning/tidb-lightning-faq.md#what-are-the-privilege-requirements-for-the-target-database)
 
-## Step 1. Prepare SQL files
+## ステップ 1. SQL ファイルを準備する {#step-1-prepare-sql-files}
 
-Put all the SQL files in the same directory, like `/data/my_datasource/` or `s3://my-bucket/sql-backup`. TiDB Lightning recursively searches for all `.sql` files in this directory and its subdirectories.
+すべての SQL ファイルを同じディレクトリ ( `/data/my_datasource/`や`s3://my-bucket/sql-backup`など) に置きます。 TiDB Lightning は、このディレクトリとそのサブディレクトリ内の`.sql`ファイルすべてを再帰的に検索します。
 
-## Step 2. Define the target table schema
+## ステップ 2. ターゲットテーブルスキーマを定義する {#step-2-define-the-target-table-schema}
 
-To import data to TiDB, you need to create the table schema for the target database.
+TiDB にデータをインポートするには、ターゲット データベースのテーブル スキーマを作成する必要があります。
 
-If you use Dumpling to export data, the table schema file is automatically exported. For the data exported in other ways, you can create the table schema in one of the following methods:
+Dumplingを使用してデータをエクスポートすると、テーブル スキーマ ファイルが自動的にエクスポートされます。他の方法でエクスポートされたデータの場合は、次のいずれかの方法でテーブル スキーマを作成できます。
 
-+ **Method 1**: Create the target table schema using TiDB Lightning.
+-   **方法 1** : TiDB Lightningを使用してターゲット テーブル スキーマを作成します。
 
-    Create SQL files that contain the required DDL statements:
+    必要な DDL ステートメントを含む SQL ファイルを作成します。
 
-    - Add `CREATE DATABASE` statements in the `${db_name}-schema-create.sql` files.
-    - Add `CREATE TABLE` statements in the `${db_name}.${table_name}-schema.sql` files.
+    -   `${db_name}-schema-create.sql`ファイルに`CREATE DATABASE`ステートメントを追加します。
+    -   `${db_name}.${table_name}-schema.sql`ファイルに`CREATE TABLE`ステートメントを追加します。
 
-+ **Method 2**: Create the target table schema manually.
+-   **方法 2** : ターゲット テーブル スキーマを手動で作成します。
 
-## Step 3. Create the configuration file
+## ステップ 3. 構成ファイルを作成する {#step-3-create-the-configuration-file}
 
-Create a `tidb-lightning.toml` file with the following content:
-
-{{< copyable "" >}}
+次の内容を含む`tidb-lightning.toml`ファイルを作成します。
 
 ```toml
 [lightning]
@@ -65,15 +63,13 @@ status-port = ${status-port}  # During the import process, TiDB Lightning needs 
 pd-addr = "${ip}:${port}"     # The address of the cluster's PD. TiDB Lightning obtains some information through PD, such as 172.16.31.3:2379. When backend = "local", you must correctly specify status-port and pd-addr. Otherwise, the import will encounter errors.
 ```
 
-For more information about the configuration file, refer to [TiDB Lightning Configuration](/tidb-lightning/tidb-lightning-configuration.md).
+構成ファイルの詳細については、 [TiDB Lightningコンフィグレーション](/tidb-lightning/tidb-lightning-configuration.md)を参照してください。
 
-## Step 4. Import the data
+## ステップ 4. データをインポートする {#step-4-import-the-data}
 
-To start the import, run `tidb-lightning`. If you launch the program in the command line, the program might exit because of the `SIGHUP` signal. In this case, it is recommended to run the program with a `nohup` or `screen` tool.
+インポートを開始するには、 `tidb-lightning`を実行します。コマンド ラインでプログラムを起動すると、 `SIGHUP`シグナルが原因でプログラムが終了する可能性があります。この場合、 `nohup`または`screen`ツールを使用してプログラムを実行することをお勧めします。
 
-If you import the data from S3, you need to pass in `SecretKey` and `AccessKey` of the account as environment variables. The account has the permission to access the S3 backend storage.
-
-{{< copyable "shell-regular" >}}
+S3 からデータをインポートする場合は、アカウントの`SecretKey`と`AccessKey`を環境変数として渡す必要があります。このアカウントには、S3 バックエンドstorageにアクセスする権限があります。
 
 ```shell
 export AWS_ACCESS_KEY_ID=${access_key}
@@ -81,17 +77,16 @@ export AWS_SECRET_ACCESS_KEY=${secret_key}
 nohup tiup tidb-lightning -config tidb-lightning.toml > nohup.out 2>&1 &
 ```
 
-TiDB Lightning also supports reading credential files from `~/.aws/credentials`.
+TiDB Lightning は、 `~/.aws/credentials`からの認証情報ファイルの読み取りもサポートしています。
 
-After the import is started, you can check the progress in one of the following ways:
+インポートが開始されたら、次のいずれかの方法で進行状況を確認できます。
 
-- Search the `progress` keyword in the `grep` log, which is updated every 5 minutes by default.
-- Use the Grafana dashboard. For details, see [TiDB Lightning Monitoring](/tidb-lightning/monitor-tidb-lightning.md).
-- Use web interface. For details, see [TiDB Lightning Web Interface](/tidb-lightning/tidb-lightning-web-interface.md).
+-   デフォルトでは 5 分ごとに更新される`grep`ログで`progress`キーワードを検索します。
+-   Grafana ダッシュボードを使用します。詳細は[TiDB Lightning監視](/tidb-lightning/monitor-tidb-lightning.md)を参照してください。
+-   Webインターフェイスを使用します。詳細は[TiDB LightningWeb インターフェイス](/tidb-lightning/tidb-lightning-web-interface.md)を参照してください。
 
-After the import is completed, TiDB Lightning automatically exits. Check whether `tidb-lightning.log` contains `the whole procedure completed` in the last lines. If yes, the import is successful. If no, the import encounters an error. Address the error as instructed in the error message.
+インポートが完了すると、 TiDB Lightning は自動的に終了します。最後の行に`tidb-lightning.log` `the whole procedure completed`含まれているかどうかを確認します。 「はい」の場合、インポートは成功です。 「いいえ」の場合、インポートでエラーが発生します。エラー メッセージの指示に従ってエラーに対処します。
 
-> **Note:**
+> **注記：**
 >
-> No matter whether the import is successful or not, the last line displays `tidb lightning exit`. It only means that TiDB Lightning has exited normally, not the completion of the task.
-If you encounter problems during the import process, refer to [TiDB Lightning FAQ](/tidb-lightning/tidb-lightning-faq.md) for troubleshooting.
+> インポートが成功したかどうかに関係なく、最後の行には`tidb lightning exit`が表示されます。これは、 TiDB Lightning が正常に終了したことを意味するだけで、タスクが完了したことを意味するわけではありません。インポート プロセス中に問題が発生した場合は、トラブルシューティングについて[TiDB LightningFAQ](/tidb-lightning/tidb-lightning-faq.md)を参照してください。

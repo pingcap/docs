@@ -3,43 +3,43 @@ title: Understanding Stale Read and safe-ts in TiKV
 summary: Introduce the principles of Stale Read and safe-ts in TiKV and provide troubleshooting tips and examples for diagnosing common issues related to Stale Read.
 ---
 
-# Understanding Stale Read and safe-ts in TiKV
+# TiKV のステイル読み取りとsafe-tsを理解する {#understanding-stale-read-and-safe-ts-in-tikv}
 
-In this guide, you can learn about Stale Read and safe-ts in TiKV and how to diagnose common issues related to Stale Read.
+このガイドでは、TiKV のステイル読み取りとsafe-ts について、またステイル読み取りに関連する一般的な問題を診断する方法について学習できます。
 
-## Overview of Stale Read and safe-ts
+## ステイル読み取りとsafe-tsの概要 {#overview-of-stale-read-and-safe-ts}
 
-[Stale Read](/stale-read.md)  is a mechanism that TiDB applies to read historical versions of data stored in TiDB. In TiKV, Stale Read relies on [safe-ts](/#what-is-safe-ts). If a read request on a Region peer has a timestamp (ts) that is less than or equal to the Region's safe-ts, TiDB can safely read the data from the peer. TiKV implements this safety guarantee by ensuring that safe-ts is always less than or equal to [resolved-ts](#what-is-resolved-ts).
+[ステイル読み取り](/stale-read.md)は、TiDB に保存されているデータの履歴バージョンを読み取るために TiDB が適用するメカニズムです。 TiKV では、 ステイル読み取り は[セーフ-TS](/#what-is-safe-ts)に依存します。リージョンピア上の読み取りリクエストのタイムスタンプ (ts) がリージョンのsafe-ts 以下である場合、TiDB はピアからデータを安全に読み取ることができます。 TiKV は、safe-ts が常に[resolved-ts](#what-is-resolved-ts)以下であることを保証することで、この安全性保証を実装します。
 
-## Understand safe-ts and resolved-ts
+## 安全なTSとresolved-tsを理解する {#understand-safe-ts-and-resolved-ts}
 
-This section explains the concepts and maintenance of safe-ts and resolved-ts.
+このセクションでは、safe-ts とresolved-tsの概念とメンテナンスについて説明します。
 
-### What is safe-ts?
+### セーフTSとは何ですか？ {#what-is-safe-ts}
 
-The safe-ts is a timestamp that each peer in a Region maintains. It ensures that all transactions with a timestamp less than this value have been applied locally, which enables local Stale Read.
+safe-ts は、リージョン内の各ピアが維持するタイムスタンプです。この値より小さいタイムスタンプを持つすべてのトランザクションがローカルに適用されていることを確認し、ローカルのステイル読み取りを有効にします。
 
-### What is resolved-ts?
+### resolved-tsとは何ですか? {#what-is-resolved-ts}
 
-The resolved-ts is a timestamp that guarantees all transactions with a timestamp less than this value have been applied by the leader. Unlike safe-ts, which is a peer concept, resolved-ts is only maintained by the Region leader. Followers might have a smaller apply index than the leader, so resolved-ts cannot be directly treated as safe-ts in followers.
+resolved-ts は、この値より小さいタイムスタンプを持つすべてのトランザクションがリーダーによって適用されていることを保証するタイムスタンプです。ピアの概念であるsafe-tsとは異なり、 resolved-tsはリージョンリーダーによってのみ維持されます。フォロワーはリーダーよりも適用インデックスが小さい可能性があるため、resolved-ts をフォロワー内で安全な t として直接扱うことはできません。
 
-### The maintenance of safe-ts
+### 安全なTSのメンテナンス {#the-maintenance-of-safe-ts}
 
-The `RegionReadProgress` module maintains safe-ts. The Region leader maintains resolved-ts and periodically sends its resolved-ts, the minimum required apply index (which validates this resolved-ts), and the Region itself to the `RegionReadProgerss` modules of all replicas via the CheckLeader RPC.
+`RegionReadProgress`モジュールは安全性を維持します。リージョンリーダーは、 resolved-tsを維持し、そのresolved-ts、最小限必要な適用インデックス (このresolved-ts を検証する)、およびリージョン自体を CheckLeader RPC 経由ですべてのレプリカの`RegionReadProgerss`のモジュールに定期的に送信します。
 
-When a peer applies data, it updates the apply index and checks if any pending resolved-ts can become the new safe-ts.
+ピアがデータを適用すると、適用インデックスが更新され、保留中のresolved-ts が新しい安全 T になり得るかどうかがチェックされます。
 
-### The maintenance of resolved-ts
+### resolved-tsのメンテナンス {#the-maintenance-of-resolved-ts}
 
-The Region leader uses a resolver to manage resolved-ts. This resolver tracks locks in the LOCK CF (Column Family) by receiving change logs when Raft applies. When initialized, the resolver scans the entire Region to track locks.
+リージョンリーダーは、リゾルバーを使用して、 resolved-tsを管理します。このリゾルバーは、 Raft が適用されるときに変更ログを受信することによって、LOCK CF (カラムファミリー) のロックを追跡します。初期化されると、リゾルバはリージョン全体をスキャンしてロックを追跡します。
 
-## Diagnose Stale Read issues
+## ステイル読み取りの問題を診断する {#diagnose-stale-read-issues}
 
-This section introduces how to diagnose Stale Read issues using Grafana, `tikv-ctl`, and logs.
+このセクションでは、Grafana、 `tikv-ctl` 、およびログを使用してステイル読み取りの問題を診断する方法を紹介します。
 
-### Identify issues
+### 問題を特定する {#identify-issues}
 
-In the [Grafana > TiDB dashboard > **KV Request** dashboard](/grafana-tidb-dashboard.md#kv-request), the following panels show the hit rate, OPS, and traffic of Stale Read:
+[Grafana &gt; TiDB ダッシュボード &gt; **KV リクエスト**ダッシュボード](/grafana-tidb-dashboard.md#kv-request)では、次のパネルにステイル読み取りのヒット率、OPS、トラフィックが表示されます。
 
 ![Stale Read Hit/Miss OPS](/media/stale-read/metrics-hit-miss.png)
 
@@ -47,33 +47,33 @@ In the [Grafana > TiDB dashboard > **KV Request** dashboard](/grafana-tidb-dashb
 
 ![Stale Read Req Traffic](/media/stale-read/traffic.png)
 
-For more information about the preceding metrics, see [TiDB monitoring metrics](/grafana-tidb-dashboard.md#kv-request).
+前述のメトリクスの詳細については、 [TiDB モニタリングメトリクス](/grafana-tidb-dashboard.md#kv-request)を参照してください。
 
-When Stale Read issues occur, you might notice changes in the preceding metrics. The most direct indicator is a WARN log from TiDB, which reports `DataIsNotReady` with a Region ID and the `safe-ts` it encounters.
+ステイル読み取りの問題が発生すると、前述のメトリックの変化に気づく場合があります。最も直接的な指標は TiDB からの WARN ログで、リージョンID を含む`DataIsNotReady`と、検出された`safe-ts`報告します。
 
-### Common causes
+### よくある原因 {#common-causes}
 
-The most common causes that can impact the effectiveness of Stale Read are as follows:
+ステイル読み取りの有効性に影響を与える可能性のある最も一般的な原因は次のとおりです。
 
-- Transactions that take long time to commit.
-- Transactions live too long before they commit.
-- Delays in pushing the information of CheckLeader from the leader to the follower.
+-   コミットに長時間かかるトランザクション。
+-   トランザクションがコミットされるまでの期間が長すぎます。
+-   CheckLeader の情報をリーダーからフォロワーにプッシュする際の遅延。
 
-### Use Grafana to diagnose
+### Grafana を使用して診断する {#use-grafana-to-diagnose}
 
-In the [**TiKV-Details** > **Resolved-TS** dashboard](/grafana-tikv-dashboard.md#resolved-ts), you can identify the Region with the smallest resolved-ts and safe-ts for each TiKV. If these timestamps are significantly behind real-time, you need to check the details of these Regions using `tikv-ctl`.
+[**TiKV-詳細**&gt;**解決済み-TS**ダッシュボード](/grafana-tikv-dashboard.md#resolved-ts)では、各 TiKV の最小のresolved-tsと安全な ts を持つリージョンを識別できます。これらのタイムスタンプがリアルタイムより大幅に遅れている場合は、 `tikv-ctl`使用してこれらのリージョンの詳細を確認する必要があります。
 
-### Use `tikv-ctl` to diagnose
+### <code>tikv-ctl</code>使用して診断する {#use-code-tikv-ctl-code-to-diagnose}
 
-`tikv-ctl` provides up-to-date details of the resolver and `RegionReadProgress`. For more details, see [Get the state of a Region's `RegionReadProgress`](/tikv-control.md#get-the-state-of-a-regions-regionreadprogress).
+`tikv-ctl`リゾルバーの最新の詳細を提供し、 `RegionReadProgress`リゾルバーの最新の詳細を提供します。詳細については、 [リージョンの`RegionReadProgress`の状態を取得する](/tikv-control.md#get-the-state-of-a-regions-regionreadprogress)を参照してください。
 
-The following is an example:
+以下は例です。
 
 ```bash
 ./tikv-ctl --host 127.0.0.1:20160 get-region-read-progress -r 14 --log --min-start-ts 0
 ```
 
-The output is as follows:
+出力は次のとおりです。
 
 ```log
 Region read progress:
@@ -94,25 +94,25 @@ Resolver:
     stopped: false,
 ```
 
-The preceding output helps you determine:
+前述の出力は、以下を判断するのに役立ちます。
 
-- Whether locks are blocking resolved-ts.
-- Whether the apply index is too small to update safe-ts.
-- Whether the leader is sending a sufficiently updated resolved-ts when a follower peer exists.
+-   ロックがresolved-tsをブロックしているかどうか。
+-   適用インデックスが小さすぎて、safe-ts を更新できないかどうか。
+-   フォロワーピアが存在する場合、リーダーが十分に更新されたresolved-tsを送信しているかどうか。
 
-### Use logs to diagnose
+### ログを使用して診断する {#use-logs-to-diagnose}
 
-Every 10 seconds, TiKV checks the following metrics:
+TiKV は 10 秒ごとに次のメトリクスをチェックします。
 
-- The Region leader whose resolved-ts is the minimal
-- The Region follower whose safe-ts is the minimal
-- The Region follower whose resolved-ts is the minimal
+-   resolved-tsが最小であるリージョンリーダー
+-   safety-ts が最小であるリージョンフォロワー
+-   resolved-tsが最小であるリージョンフォロワー
 
-If any of these timestamps is abnormally small, TiKV prints a log.
+これらのタイムスタンプのいずれかが異常に小さい場合、TiKV はログを出力。
 
-These logs are especially useful when you want to diagnose a historical problem that is no longer present.
+これらのログは、現在は存在しない過去の問題を診断する場合に特に役立ちます。
 
-The following shows an example of the logs:
+以下にログの例を示します。
 
 ```log
 [2023/08/29 16:48:18.118 +08:00] [INFO] [endpoint.rs:505] ["the max gap of leader resolved-ts is large"] [last_resolve_attempt="Some(LastAttempt { success: false, ts: TimeStamp(443888082736381953), reason: \"lock\", lock: Some(7480000000000000625F728000000002512B5C) })"] [duration_to_last_update_safe_ts=10648ms] [min_memory_lock=None] [txn_num=0] [lock_num=0] [min_lock=None] [safe_ts=443888117326544897] [gap=110705ms] [region_id=291]
@@ -122,65 +122,67 @@ The following shows an example of the logs:
 [2023/08/29 16:48:18.118 +08:00] [INFO] [endpoint.rs:547] ["the max gap of follower resolved-ts is large; it's the same region that has the min safe-ts"]
 ```
 
-## Troubleshooting tips
+## トラブルシューティングのヒント {#troubleshooting-tips}
 
-### Handle slow transaction commit
+### 遅いトランザクションのコミットを処理する {#handle-slow-transaction-commit}
 
-A transaction that takes a long time to commit is often a large transaction. The prewrite phase of this slow transaction leaves some locks, but it takes too long before the commit phase clean the locks. To troubleshoot this issue, you can try to identify the transaction to which the locks belong and try to pinpoint the reason they exist, such as using logs.
+コミットに時間がかかるトランザクションは、多くの場合、大規模なトランザクションです。この遅いトランザクションの事前書き込みフェーズではいくつかのロックが残りますが、コミットフェーズでロックが消去されるまでに時間がかかりすぎます。この問題をトラブルシューティングするには、ログを使用するなどして、ロックが属しているトランザクションを特定し、ロックが存在する理由を正確に特定することを試みることができます。
 
-The following list some actions you can take:
+以下に、実行できるアクションをいくつかリストします。
 
-- Specify the `--log` option in the `tikv-ctl` command and check TiKV logs to find the specific locks with their start_ts.
-- Search the start_ts in both TiDB and TiKV logs to identify issues with the transaction.
+-   `tikv-ctl`コマンドで`--log`オプションを指定し、TiKV ログをチェックして、start_ts を持つ特定のロックを見つけます。
 
-    If a query takes over 60 seconds, an `expensive_query` log is printed with the SQL statement. You can use the start_ts value to match the log. The following is an example:
+-   TiDB ログと TiKV ログの両方で start_ts を検索して、トランザクションの問題を特定します。
+
+    クエリに 60 秒以上かかる場合、SQL ステートメントとともに`expensive_query`ログが出力されます。 start_ts 値を使用してログと一致させることができます。以下は例です。
 
     ```log
     [2023/07/17 19:32:09.403 +08:00] [WARN] [expensivequery.go:145] [expensive_query] [cost_time=60.025022732s] [cop_time=0.00346666s] [process_time=8.358409508s] [wait_time=0.013582596s] [request_count=278] [total_keys=9943616] [process_keys=9943360] [num_cop_tasks=278] [process_avg_time=0.030066221s] [process_p90_time=0.045296042s] [process_max_time=0.052828934s] [process_max_addr=192.168.31.244:20160] [wait_avg_time=0.000048858s] [wait_p90_time=0.00006057s] [wait_max_time=0.00040991s] [wait_max_addr=192.168.31.244:20160] [stats=t:442916666913587201] [conn=2826881778407440457] [user=root] [database=test] [table_ids="[100]"] [**txn_start_ts**=442916790435840001] [mem_max="2514229289 Bytes (2.34 GB)"] [sql="update t set b = b + 1"]
     ```
 
-- Use the [`CLUSTER_TIDB_TRX`](/information-schema/information-schema-tidb-trx.md#cluster_tidb_trx) table to find active transactions if you cannot get enough information about the locks from logs.
-- Execute [`SHOW PROCESSLIST`](/sql-statements/sql-statement-show-processlist.md) to view the current sessions connected to the same TiDB server and their time spent on the current statement. But it does not show start_ts.
+-   ログからロックに関する十分な情報を取得できない場合は、 [`CLUSTER_TIDB_TRX`](/information-schema/information-schema-tidb-trx.md#cluster_tidb_trx)テーブルを使用してアクティブなトランザクションを見つけます。
 
-If the locks exist due to ongoing large transactions, consider modifying your application logic as these locks can hinder the progress of resolve-ts.
+-   [`SHOW PROCESSLIST`](/sql-statements/sql-statement-show-processlist.md)を実行すると、同じ TiDBサーバーに接続されている現在のセッションと、現在のステートメントに費やされた時間が表示されます。しかし、start_ts は表示されません。
 
-If the locks do not belong to any ongoing transactions, it might be due to a coordinator (TiDB) crashing after it prewrites the locks. In this case, TiDB will automatically resolve the locks. No action is required unless the problem persists.
+進行中の大規模なトランザクションによってロックが存在する場合は、これらのロックがresolve-tsの進行を妨げる可能性があるため、アプリケーションロジックを変更することを検討してください。
 
-### Handle long-lived transactions
+ロックが進行中のトランザクションに属していない場合は、ロックを事前に書き込んだ後にコーディネーター (TiDB) がクラッシュしたことが原因である可能性があります。この場合、TiDB は自動的にロックを解決します。問題が解決しない限り、対処の必要はありません。
 
-Transactions that remain active for a long time could possibly block the advance of resolved-ts, even if they eventually commit quickly. This is because it is the start-ts of these long-lived transactions that are used to calculate the resolved-ts.
+### 存続期間の長いトランザクションを処理する {#handle-long-lived-transactions}
 
-To address this issue:
+トランザクションが長期間アクティブのままであると、たとえ最終的にはすぐにコミットされたとしても、 resolved-tsの進行がブロックされる可能性があります。これは、 resolved-tsの計算に使用されるのは、これらの長期トランザクションの start-ts であるためです。
 
-- Identify the Transaction: Begin by pinpointing the transaction associated with the locks. It is crucial to understand the reason behind their existence. Leveraging logs can be particularly helpful.
+この問題に対処するには:
 
-- Examine Application Logic: If the prolonged transaction duration is a result of your application's logic, consider revising it to prevent such occurrences.
+-   トランザクションを特定する : まず、ロックに関連付けられているトランザクションを特定することから始めます。それらの存在の背後にある理由を理解することが重要です。ログの活用は特に役立ちます。
 
-- Address Slow Queries: If the transaction's duration is extended due to slow queries, prioritize resolving these queries to alleviate the issue.
+-   アプリケーション ロジックを調査する: トランザクション期間の延長がアプリケーションのロジックの結果である場合は、そのような事態が発生しないようにアプリケーション ロジックを修正することを検討してください。
 
-### Address CheckLeader issues
+-   遅いクエリに対処する: 遅いクエリが原因でトランザクションの時間が延長される場合は、問題を軽減するためにこれらのクエリの解決を優先します。
 
-To address CheckLeader issues, you can check the network and the **Check Leader Duration** metric in [**TiKV-Details** > **Resolved-TS** dashboard](/grafana-tikv-dashboard.md#resolved-ts).
+### CheckLeader の問題に対処する {#address-checkleader-issues}
 
-## Example
+CheckLeader の問題に対処するには、 [**TiKV-詳細**&gt;**解決済み-TS**ダッシュボード](/grafana-tikv-dashboard.md#resolved-ts)でネットワークと**チェックLeader期間**メトリックを確認します。
 
-If you observe an increasing miss rate of **Stale Read OPS** as follows:
+## 例 {#example}
+
+次のように、 **ステイル読み取り OPS**のミス率が増加していることが観察された場合:
 
 ![Example: Stale Read OPS](/media/stale-read/example-ops.png)
 
-You can first check the **Max Resolved TS gap** and **Min Resolved TS Region** metrics in the [**TiKV-Details** > **Resolved-TS** dashboard](/grafana-tikv-dashboard.md#resolved-ts):
+まず、 [**TiKV-詳細**&gt;**解決済み-TS**ダッシュボード](/grafana-tikv-dashboard.md#resolved-ts)で**最大解決 TS ギャップ**と**最小解決 TSリージョン**メトリクスを確認できます。
 
 ![Example: Max Resolved TS gap](/media/stale-read/example-ts-gap.png)
 
-From the preceding metrics, you can find that Region `3121` and some other Regions have not updated their resolved-ts in time.
+前述のメトリクスから、リージョン`3121`と他の一部のリージョンがresolved-ts を時間内に更新していないことがわかります。
 
-To get more details about the state of Region `3121`, you can run the following command:
+リージョン`3121`の状態に関する詳細を取得するには、次のコマンドを実行します。
 
 ```bash
 ./tikv-ctl --host 127.0.0.1:20160 get-region-read-progress -r 3121 --log
 ```
 
-The output is as follows:
+出力は次のとおりです。
 
 ```log
 Region read progress:
@@ -204,15 +206,15 @@ Resolver:
     stopped: false,
 ```
 
-A notable observation here is that the `applied_index` equals to the `tracked index` in resolver. Therefore, the resolver appears to be the root of this issue. You can also see that there is 1 transaction that leaves 480000 locks in this Region, which might be the cause.
+ここで注目すべき点は、リゾルバでは`applied_index` `tracked index`に等しいということです。したがって、リゾルバーがこの問題の根本であると考えられます。また、このリージョンに 480000 個のロックを残すトランザクションが 1 つあることもわかります。これが原因である可能性があります。
 
-To get the exact transaction and the keys of some of the locks, you can check TiKV logs and grep `locks with`. The output is as follows:
+正確なトランザクションと一部のロックのキーを取得するには、TiKV ログを確認し、 grep `locks with`を実行します。出力は次のとおりです。
 
 ```log
 [2023/07/17 21:16:44.257 +08:00] [INFO] [resolver.rs:213] ["locks with the minimum start_ts in resolver"] [keys="[74800000000000006A5F7280000000000405F6, ... , 74800000000000006A5F72800000000000EFF6, 74800000000000006A5F7280000000000721D9, 74800000000000006A5F72800000000002F691]"] [start_ts=442918429687808001] [region_id=3121]
 ```
 
-From the TiKV log, you can get the start_ts of the transaction, that is `442918429687808001`. To get more information about the statement and transaction, you can grep this timestamp in TiDB logs. The output is as follows:
+TiKV ログから、トランザクションの start_ts `442918429687808001`を取得できます。ステートメントとトランザクションに関する詳細情報を取得するには、TiDB ログ内のこのタイムスタンプを grep します。出力は次のとおりです。
 
 ```log
 [2023/07/17 21:16:18.287 +08:00] [INFO] [2pc.go:685] ["[BIG_TXN]"] [session=2826881778407440457] ["key sample"=74800000000000006a5f728000000000000000] [size=319967171] [keys=10000000] [puts=10000000] [dels=0] [locks=0] [checks=0] [txnStartTS=442918429687808001]
@@ -220,7 +222,7 @@ From the TiKV log, you can get the start_ts of the transaction, that is `4429184
 [2023/07/17 21:16:22.703 +08:00] [WARN] [expensivequery.go:145] [expensive_query] [cost_time=60.047172498s] [cop_time=0.004575113s] [process_time=15.356963423s] [wait_time=0.017093811s] [request_count=397] [total_keys=20000398] [process_keys=10000000] [num_cop_tasks=397] [process_avg_time=0.038682527s] [process_p90_time=0.082608262s] [process_max_time=0.116321331s] [process_max_addr=192.168.31.244:20160] [wait_avg_time=0.000043057s] [wait_p90_time=0.00004007s] [wait_max_time=0.00075014s] [wait_max_addr=192.168.31.244:20160] [stats=t:442918428521267201] [conn=2826881778407440457] [user=root] [database=test] [table_ids="[106]"] [txn_start_ts=442918429687808001] [mem_max="2513773983 Bytes (2.34 GB)"] [sql="update t set b = b + 1"]
 ```
 
-Then, you can basically locate the statement that caused the problem. To further check it, you can execute the [`SHOW PROCESSLIST`](/sql-statements/sql-statement-show-processlist.md) statement. The output is as follows:
+その後、基本的に、問題の原因となったステートメントを特定できます。さらに詳しく確認するには、 [`SHOW PROCESSLIST`](/sql-statements/sql-statement-show-processlist.md)ステートメントを実行します。出力は次のとおりです。
 
 ```sql
 +---------------------+------+---------------------+--------+---------+------+------------+---------------------------+
@@ -232,6 +234,6 @@ Then, you can basically locate the statement that caused the problem. To further
 +---------------------+------+---------------------+--------+---------+------+------------+---------------------------+
 ```
 
-The output shows that someone is executing an unexpected `UPDATE` statement (`update t set b = b + 1`), which results in a large transaction and hinders Stale Read.
+出力は、誰かが予期しない`UPDATE`ステートメント ( `update t set b = b + 1` ) を実行していることを示しています。これにより、大規模なトランザクションが発生し、 ステイル読み取りが妨げられます。
 
-To resolve this issue, you can stop the application that is running this `UPDATE` statement.
+この問題を解決するには、この`UPDATE`ステートメントを実行しているアプリケーションを停止します。

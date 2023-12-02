@@ -2,26 +2,26 @@
 title: tiup cluster prune
 ---
 
-# tiup cluster prune
+# tiup cluster prune {#tiup-cluster-prune}
 
-When [scaling in the cluster](/tiup/tiup-component-cluster-scale-in.md), for some components, TiUP does not immediately stop their services or delete their data. You need to wait for the data scheduling to complete and then manually execute the `tiup cluster prune` command to clean up.
+[クラスター内のスケーリング](/tiup/tiup-component-cluster-scale-in.md)の場合、一部のコンポーネントでは、 TiUP はサービスをすぐに停止したり、データを削除したりしません。データのスケジュール設定が完了するまで待ってから、手動で`tiup cluster prune`コマンドを実行してクリーンアップする必要があります。
 
-## Syntax
+## 構文 {#syntax}
 
 ```shell
 tiup cluster prune <cluster-name> [flags]
 ```
 
-## Option
+## オプション {#option}
 
-### -h, --help
+### -h, --help {#h-help}
 
-- Prints the help information.
-- Data type: `BOOLEAN`
-- Default: false
+-   ヘルプ情報を出力します。
+-   データ型: `BOOLEAN`
+-   デフォルト: false
 
-## Output
+## 出力 {#output}
 
-The log of the cleanup process.
+クリーンアッププロセスのログ。
 
-[<< Back to the previous page - TiUP Cluster command list](/tiup/tiup-component-cluster.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUPクラスタコマンド リスト](/tiup/tiup-component-cluster.md#command-list)

@@ -2,114 +2,114 @@
 title: TiDB 4.0 GA Release Notes
 ---
 
-# TiDB 4.0 GA Release Notes
+# TiDB 4.0 GA リリース ノート {#tidb-4-0-ga-release-notes}
 
-Release date: May 28, 2020
+発売日：2020年5月28日
 
-TiDB version: 4.0.0
+TiDB バージョン: 4.0.0
 
-## Compatibility Changes
+## 互換性の変更 {#compatibility-changes}
 
-* TiDB
-    - Optimize the error message of the large-sized transactions for easier troubleshooting [#17219](https://github.com/pingcap/tidb/pull/17219)
+-   TiDB
+    -   トラブルシューティングを容易にするために、大規模なトランザクションのエラー メッセージを最適化します[#17219](https://github.com/pingcap/tidb/pull/17219)
 
-* TiCDC
-    - Optimize the structure of the `Changefeed` configuration file to improve usability [#588](https://github.com/pingcap/tiflow/pull/588)
-    - Add the `ignore-txn-start-ts` configuration item, and change the condition from `commit_ts` to `start_ts` during transactions filtering [#589](https://github.com/pingcap/tiflow/pull/589)
+-   TiCDC
+    -   `Changefeed`設定ファイルの構造を最適化して使いやすさを向上[#588](https://github.com/pingcap/tiflow/pull/588)
+    -   設定項目`ignore-txn-start-ts`を追加し、トランザクションフィルタリング時の条件を`commit_ts`から`start_ts`に変更します[#589](https://github.com/pingcap/tiflow/pull/589)
 
-## Important Bug Fixes
+## 重要なバグ修正 {#important-bug-fixes}
 
-* TiKV
-    - Fix the `DefaultNotFound` error that occurs when backing up using Backup & Restore (BR) [#7937](https://github.com/tikv/tikv/pull/7937)
-    - Fix system panics caused by the out-of-order `ReadIndex` packages [#7930](https://github.com/tikv/tikv/pull/7930)
-    - Fix system panics caused by incorrectly removing snapshot files after TiKV is restarted [#7927](https://github.com/tikv/tikv/pull/7927)
+-   TiKV
+    -   バックアップと復元 (BR) [#7937](https://github.com/tikv/tikv/pull/7937)を使用してバックアップするときに発生する`DefaultNotFound`エラーを修正します。
+    -   順序が狂っていることによるシステムパニックを修正`ReadIndex`パッケージ[#7930](https://github.com/tikv/tikv/pull/7930)
+    -   TiKV の再起動後にスナップショット ファイルを誤って削除することによって引き起こされるシステム パニックを修正します[#7927](https://github.com/tikv/tikv/pull/7927)
 
-* TiFlash
-    - Fix the possible data loss issue that occurs when the system panics because of incorrect processing logic of `Raft Admin Command`
+-   TiFlash
+    -   `Raft Admin Command`の処理ロジックが間違っているためにシステムがパニックになったときに発生する可能性のあるデータ損失の問題を修正します。
 
-## New Features
+## 新機能 {#new-features}
 
-* TiDB
-    - Add the `committer-concurrency` configuration item to control the number of `goroutines` in the retry-commit phase [#16849](https://github.com/pingcap/tidb/pull/16849)
-    - Support the `show table partition regions` syntax [#17294](https://github.com/pingcap/tidb/pull/17294)
-    - Add the `tmp-storage-quota` configuration item to limit the temporary disk space used by the TiDB server [#15700](https://github.com/pingcap/tidb/pull/15700)
-    - Support checking whether the partitioned table uses a unique prefix index when creating and changing tables [#17213](https://github.com/pingcap/tidb/pull/17213)
-    - Support the `insert/replace into tbl_name partition`(`partition_name_list`) statement [#17313](https://github.com/pingcap/tidb/pull/17313)
-    - Support checking the value of `collations` when using the `Distinct` function [#17240](https://github.com/pingcap/tidb/pull/17240)
-    - Support the `is null` filter condition during the Hash partition pruning [#17310](https://github.com/pingcap/tidb/pull/17310)
-    - Support `admin check index`, `admin cleanup index`, and `admin recover index` in partitioned tables [#17392](https://github.com/pingcap/tidb/pull/17392) [#17405](https://github.com/pingcap/tidb/pull/17405) [#17317](https://github.com/pingcap/tidb/pull/17317)
-    - Support range partition pruning for the `in` expressions  [#17320](https://github.com/pingcap/tidb/pull/17320)
+-   TiDB
+    -   再試行コミットフェーズ[#16849](https://github.com/pingcap/tidb/pull/16849)の`goroutines`の数を制御する`committer-concurrency`構成項目を追加します。
+    -   `show table partition regions`構文[#17294](https://github.com/pingcap/tidb/pull/17294)をサポートします。
+    -   `tmp-storage-quota`構成項目を追加して、TiDBサーバーが使用する一時ディスク容量を制限します[#15700](https://github.com/pingcap/tidb/pull/15700)
+    -   テーブルの作成および変更時に、パーティションテーブルが一意のプレフィックス インデックスを使用しているかどうかのチェックのサポート[#17213](https://github.com/pingcap/tidb/pull/17213)
+    -   `insert/replace into tbl_name partition` ( `partition_name_list` ) ステートメントをサポートします[#17313](https://github.com/pingcap/tidb/pull/17313)
+    -   `Distinct`関数使用時の`collations`の値のチェックをサポート[#17240](https://github.com/pingcap/tidb/pull/17240)
+    -   ハッシュ パーティション プルーニング中の`is null`フィルター条件のサポート[#17310](https://github.com/pingcap/tidb/pull/17310)
+    -   パーティション化されたテーブルで`admin check index` 、 `admin cleanup index` 、および`admin recover index`をサポート[#17392](https://github.com/pingcap/tidb/pull/17392) [#17405](https://github.com/pingcap/tidb/pull/17405) [#17317](https://github.com/pingcap/tidb/pull/17317)
+    -   `in`式[#17320](https://github.com/pingcap/tidb/pull/17320)の範囲パーティション プルーニングをサポートします。
 
-* TiFlash
-    - Support filtering out the data corresponding to the qualified `TSO` through the `min commit ts` value of the `Lock CF` when the Learner reads the data
-    - Add the feature that the system explicitly reports an error to avoid incorrect calculation results when the value of `TIMESTAMP` type is less than `1970-01-01 00:00:00`
-    - Support using flags in regular expressions when searching logs
+-   TiFlash
+    -   Learnerがデータを読み取るときに、 `Lock CF`のうち修飾された`TSO` ～ `min commit ts`値に対応するデータをフィルタリングして除外することをサポートします。
+    -   `TIMESTAMP`種類の値が`1970-01-01 00:00:00`未満の場合、誤った計算結果を回避するためにシステムが明示的にエラーを報告する機能を追加
+    -   ログを検索する際の正規表現でのフラグの使用のサポート
 
-* TiKV
-    - Support collation rules of `ascii_bin` and `latin1_bin` encoding [#7919](https://github.com/tikv/tikv/pull/7919)
+-   TiKV
+    -   `ascii_bin`および`latin1_bin`エンコード[#7919](https://github.com/tikv/tikv/pull/7919)の照合順序ルールをサポート
 
-* PD
-    - Support specifying the reverse proxy resource prefix for built-in TiDB Dashboard [#2457](https://github.com/pingcap/pd/pull/2457)
-    - Support returning the `pending peer` and `down peer` information in interfaces of the PD client Region [#2443](https://github.com/pingcap/pd/pull/2443)
-    - Add monitoring items such as `Direction of hotspot move leader`, `Direction of hotspot move peer`, and `Hot cache read entry number` [#2448](https://github.com/pingcap/pd/pull/2448)
+-   PD
+    -   組み込み TiDB ダッシュボード[#2457](https://github.com/pingcap/pd/pull/2457)のリバース プロキシ リソース プレフィックスの指定をサポート
+    -   PD クライアントリージョン[#2443](https://github.com/pingcap/pd/pull/2443)のインターフェイスで`pending peer`および`down peer`情報を返すサポート
+    -   `Direction of hotspot move leader` 、 `Direction of hotspot move peer` 、 `Hot cache read entry number`などの監視項目を追加[#2448](https://github.com/pingcap/pd/pull/2448)
 
-* Tools
-    + Backup & Restore (BR)
-        - Support the backup and restore of `Sequence` and `View` [#242](https://github.com/pingcap/br/pull/242)
-    + TiCDC
-        - Support checking the validity of `Sink URI` when creating `Changefeed` [#561](https://github.com/pingcap/tiflow/pull/561)
-        - Support checking whether the PD and TiKV versions meet the system requirements during system startup [#570](https://github.com/pingcap/tiflow/pull/570)
-        - Support scheduling multiple tables in the same scheduling task generation cycle [#572](https://github.com/pingcap/tiflow/pull/572)
-        - Add information about node roles in HTTP API [#591](https://github.com/pingcap/tiflow/pull/591)
+-   ツール
+    -   バックアップと復元 (BR)
+        -   `Sequence`と`View` [#242](https://github.com/pingcap/br/pull/242)のバックアップと復元をサポート
+    -   TiCDC
+        -   `Changefeed` [#561](https://github.com/pingcap/tiflow/pull/561)を作成する際の`Sink URI`の有効性チェックをサポート
+        -   システム起動時に PD および TiKV バージョンがシステム要件を満たしているかどうかのチェックをサポート[#570](https://github.com/pingcap/tiflow/pull/570)
+        -   同じスケジューリング タスク生成サイクル[#572](https://github.com/pingcap/tiflow/pull/572)で複数のテーブルのスケジューリングをサポート
+        -   HTTP API [#591](https://github.com/pingcap/tiflow/pull/591)のノードの役割に関する情報を追加
 
-## Bug Fixes
+## バグの修正 {#bug-fixes}
 
-* TiDB
+-   TiDB
 
-    - Fix the issue of unexpected timeouts when sending and receiving messages by disabling TiDB to send batch commands to TiFlash [#17307](https://github.com/pingcap/tidb/pull/17307)
-    - Fix the issue of incorrectly distinguishing signed and unsigned integers during partition pruning, which improves performance [#17230](https://github.com/pingcap/tidb/pull/17230)
-    - Fix the issue of upgrade failure from v3.1.1 to v4.0 because of the incompatible `mysql.user` table [#17300](https://github.com/pingcap/tidb/pull/17300)
-    - Fix the issue of incorrect selection of the partition in the `update` statement [#17305](https://github.com/pingcap/tidb/pull/17305)
-    - Fix system panics when receiving an unknown error message from TiKV [#17380](https://github.com/pingcap/tidb/pull/17380)
-    - Fix system panics caused by incorrect processing logic when creating the table that is `key` partitioned [#17242](https://github.com/pingcap/tidb/pull/17242)
-    - Fix the issue that the wrong `Index Merge Join` plan is selected because of incorrect optimizer processing logic [#17365](https://github.com/pingcap/tidb/pull/17365)
-    - Fix the issue of inaccurate `duration` monitoring metric of the `SELECT` statement in Grafana [#16561](https://github.com/pingcap/tidb/pull/16561)
-    - Fix the issue that the GC worker is blocked when the system error occurs [#16915](https://github.com/pingcap/tidb/pull/16915)
-    - Fix the issue that the `UNIQUE` constraint on a boolean column results in an incorrect result in a comparison [#17306](https://github.com/pingcap/tidb/pull/17306)
-    - Fix system panics caused by incorrect processing logic when `tidb_opt_agg_push_down` is enabled and the aggregation function pushes down the partitioned table [#17328](https://github.com/pingcap/tidb/pull/17328)
-    - Fix the issue of accessing failed TiKV nodes in some cases [#17342](https://github.com/pingcap/tidb/pull/17342)
-    - Fix the issue that the `isolation-read` configuration item in `tidb.toml` does not take effect [#17322](https://github.com/pingcap/tidb/pull/17322)
-    - Fix the issue of incorrect order of output results due to incorrect processing logic when `hint` is used to enforce the stream aggregation [#17347](https://github.com/pingcap/tidb/pull/17347)
-    - Fix the behavior that `insert` processes DIV under different `SQL_MODE` [#17314](https://github.com/pingcap/tidb/pull/17314)
+    -   TiDB がTiFlash [#17307](https://github.com/pingcap/tidb/pull/17307)にバッチ コマンドを送信できるようにすることで、メッセージの送受信時に予期しないタイムアウトが発生する問題を修正しました。
+    -   パーティション プルーニング中に符号付き整数と符号なし整数が誤って区別される問題を修正し、パフォーマンスを向上させます[#17230](https://github.com/pingcap/tidb/pull/17230)
+    -   `mysql.user`テーブル[#17300](https://github.com/pingcap/tidb/pull/17300)に互換性がないために v3.1.1 から v4.0 へのアップグレードが失敗する問題を修正
+    -   `update`ステートメント[#17305](https://github.com/pingcap/tidb/pull/17305)でのパーティションの誤った選択の問題を修正します。
+    -   TiKV [#17380](https://github.com/pingcap/tidb/pull/17380)から不明なエラー メッセージを受信したときのシステム パニックを修正
+    -   `key`パーティション[#17242](https://github.com/pingcap/tidb/pull/17242)のテーブルを作成するときに、不適切な処理ロジックによって引き起こされるシステム パニックを修正しました。
+    -   オプティマイザーの処理ロジック[#17365](https://github.com/pingcap/tidb/pull/17365)が正しくないため、間違った`Index Merge Join`プランが選択される問題を修正
+    -   Grafana [#16561](https://github.com/pingcap/tidb/pull/16561)の`SELECT`ステートメントの不正確な`duration`監視メトリクスの問題を修正
+    -   システムエラー発生時に GC ワーカーがブロックされる問題を修正[#16915](https://github.com/pingcap/tidb/pull/16915)
+    -   ブール列の制約`UNIQUE`により、比較[#17306](https://github.com/pingcap/tidb/pull/17306)で誤った結果が生じる問題を修正します。
+    -   `tidb_opt_agg_push_down`が有効で、集計関数がパーティションテーブル[#17328](https://github.com/pingcap/tidb/pull/17328)をプッシュダウンした場合に、不正な処理ロジックによって引き起こされるシステム パニックを修正しました。
+    -   場合によっては障害が発生した TiKV ノードにアクセスする問題を修正します[#17342](https://github.com/pingcap/tidb/pull/17342)
+    -   `tidb.toml`の`isolation-read`設定項目が反映されない問題を修正[#17322](https://github.com/pingcap/tidb/pull/17322)
+    -   `hint`を使用してストリーム集約[#17347](https://github.com/pingcap/tidb/pull/17347)を強制する場合、不正な処理ロジックにより出力結果の順序が正しくなくなる問題を修正します。
+    -   `insert`が異なる`SQL_MODE` [#17314](https://github.com/pingcap/tidb/pull/17314)で DIV を処理する動作を修正
 
-* TiFlash
+-   TiFlash
 
-    - Fix the issue that the matching behavior of regular expressions in the search log feature is inconsistent with other components
-    - Fix the issue of excessive restart time when nodes write large amounts of data by disabling the delay processing optimization of `Raft Compact Log Command` by default
-    - Fix the issue that the system fails to start because TiDB incorrectly processes the `DROP DATABASE` statement in some scenarios
-    - Fix the issue that the method of collecting CPU information in `Server_info` is different from that in other components
-    - Fix the issue that the error `Too Many Pings` is reported when the `Query` statement is executed if `batch coprocessor` is enabled
-    - Fix the issue that Dashboard fails to display the correct `deploy path` information because TiFlash does not report the related information
+    -   検索ログ機能の正規表現のマッチング動作が他のコンポーネントと矛盾する問題を修正
+    -   デフォルトで遅延処理の最適化の`Raft Compact Log Command`を無効にすることで、ノードが大量のデータを書き込むときに過剰な再起動時間がかかる問題を修正しました。
+    -   一部のシナリオで TiDB が`DROP DATABASE`ステートメントを誤って処理するため、システムが起動できない問題を修正
+    -   `Server_info`のCPU情報の収集方法が他のコンポーネントと異なる問題を修正
+    -   `batch coprocessor`が有効な場合に`Query`ステートメントを実行するとエラー`Too Many Pings`が報告される問題を修正
+    -   TiFlash が関連情報をレポートしないため、ダッシュボードが正しい`deploy path`情報を表示できない問題を修正
 
-* TiKV
+-   TiKV
 
-    - Fix the `DefaultNotFound` error that occurs when backing up using BR  [#7937](https://github.com/tikv/tikv/pull/7937)
-    - Fix system panics caused by out-of-order `ReadIndex` packets [#7930](https://github.com/tikv/tikv/pull/7930)
-    - Fix the issue that an unexpected error is returned because the read request callback function is not called [#7921](https://github.com/tikv/tikv/pull/7921)
-    - Fix system panics caused by incorrectly removing snapshot files when TiKV is restarted [#7927](https://github.com/tikv/tikv/pull/7927)
-    - Fix the issue that the `master key` cannot be rotated due to incorrect processing logic in storage encryption [#7898](https://github.com/tikv/tikv/pull/7898)
-    - Fix the issue that the received `lock cf` file of the snapshot is not encrypted when the storage encryption is enabled [#7922](https://github.com/tikv/tikv/pull/7922)
+    -   BR [#7937](https://github.com/tikv/tikv/pull/7937)を使用してバックアップするときに発生するエラー`DefaultNotFound`を修正
+    -   順序の乱れによるシステム パニックを修正`ReadIndex`パケット[#7930](https://github.com/tikv/tikv/pull/7930)
+    -   リードリクエストのコールバック関数が呼び出されていないため、予期せぬエラーが返される問題を修正[#7921](https://github.com/tikv/tikv/pull/7921)
+    -   TiKV の再起動時にスナップショット ファイルが誤って削除されることによって引き起こされるシステム パニックを修正します[#7927](https://github.com/tikv/tikv/pull/7927)
+    -   storage暗号化[#7898](https://github.com/tikv/tikv/pull/7898)の処理ロジックが正しくないため、 `master key`をローテーションできない問題を修正
+    -   storage暗号化が有効になっている場合、受信したスナップショットの`lock cf`が暗号化されない問題を修正します[#7922](https://github.com/tikv/tikv/pull/7922)
 
-* PD
+-   PD
 
-    - Fix the 404 error when deleting `evict-leader-scheduler` or `grant-leader-scheduler` using pd-ctl [#2446](https://github.com/pingcap/pd/pull/2446)
-    - Fix the issue that the `presplit` feature might not work properly when the TiFlash replica exists [#2447](https://github.com/pingcap/pd/pull/2447)
+    -   pd-ctl [#2446](https://github.com/pingcap/pd/pull/2446)を使用して`evict-leader-scheduler`または`grant-leader-scheduler`を削除するときの404エラーを修正
+    -   TiFlashレプリカが存在する場合、 `presplit`機能が正しく動作しない場合がある問題を修正[#2447](https://github.com/pingcap/pd/pull/2447)
 
-* Tools
+-   ツール
 
-    + Backup & Restore (BR)
-        - Fix the issue that the data restoration fails due to network issues when BR restores data from cloud storage [#298](https://github.com/pingcap/br/pull/298)
-    + TiCDC
-        - Fix system panics caused by data race [#565](https://github.com/pingcap/tiflow/pull/565) [#566](https://github.com/pingcap/tiflow/pull/566)
-        - Fix resource leaks or system blockages caused by incorrect processing logic [#574](https://github.com/pingcap/tiflow/pull/574) [#586](https://github.com/pingcap/tiflow/pull/586)
-        - Fix the issue that the command line gets stuck because CLI cannot connect to PD [#579](https://github.com/pingcap/tiflow/pull/579)
+    -   バックアップと復元 (BR)
+        -   BR がクラウドstorage[#298](https://github.com/pingcap/br/pull/298)からデータを復元するときに、ネットワークの問題によりデータの復元が失敗する問題を修正します。
+    -   TiCDC
+        -   データ競合によって引き起こされるシステムパニックを修正[#565](https://github.com/pingcap/tiflow/pull/565) [#566](https://github.com/pingcap/tiflow/pull/566)
+        -   不適切な処理ロジックによって引き起こされるリソース リークまたはシステムのブロックを修正します[#574](https://github.com/pingcap/tiflow/pull/574) [#586](https://github.com/pingcap/tiflow/pull/586)
+        -   CLI が PD [#579](https://github.com/pingcap/tiflow/pull/579)に接続できないためにコマンド ラインがスタックする問題を修正

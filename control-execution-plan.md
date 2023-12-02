@@ -2,22 +2,22 @@
 title: Control Execution Plan
 ---
 
-# Control Execution Plan
+# 制御実行計画 {#control-execution-plan}
 
-The first two chapters of SQL Tuning introduce how to understand TiDB's execution plan and how TiDB generates an execution plan. This chapter introduces what methods can be used to control the generation of the execution plan when you determine the problems with the execution plan. This chapter mainly includes the following three aspects:
+SQL チューニングの最初の 2 章では、TiDB の実行計画を理解する方法と、TiDB が実行計画を生成する方法を紹介します。この章では、実行計画の問題を特定するときに、実行計画の生成を制御するためにどのような方法を使用できるかを紹介します。この章には主に次の 3 つの側面が含まれます。
 
-- In [Optimizer Hints](/optimizer-hints.md), you will learn how to use hints to guide TiDB to generate an execution plan.
-- But hints change the SQL statement intrusively. In some scenarios, hints cannot be simply inserted. In [SQL Plan Management](/sql-plan-management.md), you will know how TiDB uses another syntax to non-intrusively control the generation of execution plans, and the methods of automatic execution plan evolution in the background. This method helps address issues such as execution plan instability caused by version upgrades and cluster performance degradation.
-- Finally, you will learn how to use the blocklist in [Blocklist of Optimization Rules and Expression Pushdown](/blocklist-control-plan.md).
+-   [オプティマイザーのヒント](/optimizer-hints.md)では、ヒントを使用して TiDB が実行計画を生成するようにガイドする方法を学びます。
+-   ただし、ヒントは SQL ステートメントを侵入的に変更します。シナリオによっては、ヒントを単純に挿入できない場合があります。 [SQL計画管理](/sql-plan-management.md)では、TiDB が別の構文を使用して実行プランの生成を非侵入的に制御する方法と、バックグラウンドでの自動実行プラン展開の方法について説明します。この方法は、バージョンのアップグレードやクラスターのパフォーマンスの低下によって引き起こされる実行計画の不安定性などの問題に対処するのに役立ちます。
+-   最後に、 [最適化ルールと式プッシュダウンのブロックリスト](/blocklist-control-plan.md)でブロックリストの使用方法を学習します。
 
 <CustomContent platform="tidb">
 
-Besides the preceding methods, the execution plan is also affected by some system variables. By modifying these variables at the system level or session level, you can control the generation of the execution plan. Starting from v7.1.0, TiDB introduces a relatively special variable [`tidb_opt_fix_control`](/system-variables.md#tidb_opt_fix_control-new-in-v710). This variable can accept multiple control items to control the behavior of the optimizer in a more fine-grained way, to prevent performance regression caused by behavior changes in the optimizer after cluster upgrade. Refer to [Optimizer Fix Controls](/optimizer-fix-controls.md) for a more detailed introduction.
+前述の方法に加えて、実行計画はいくつかのシステム変数にも影響されます。これらの変数をシステム レベルまたはセッション レベルで変更することにより、実行計画の生成を制御できます。 v7.1.0 以降、TiDB は比較的特殊な変数[`tidb_opt_fix_control`](/system-variables.md#tidb_opt_fix_control-new-in-v710)を導入します。この変数は複数の制御項目を受け入れて、よりきめ細かい方法でオプティマイザーの動作を制御し、クラスターのアップグレード後のオプティマイザーの動作変更によって引き起こされるパフォーマンスの低下を防ぐことができます。より詳細な紹介については、 [オプティマイザー修正コントロール](/optimizer-fix-controls.md)を参照してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-Besides the preceding methods, the execution plan is also affected by some system variables. By modifying these variables at the system level or session level, you can control the generation of the execution plan. Starting from v7.1.0, TiDB introduces a relatively special variable [`tidb_opt_fix_control`](/system-variables.md#tidb_opt_fix_control-new-in-v710). This variable can accept multiple control items to control the behavior of the optimizer in a more fine-grained way, to prevent performance regression caused by behavior changes in the optimizer after cluster upgrade. Refer to [Optimizer Fix Controls](https://docs.pingcap.com/tidb/v7.2/optimizer-fix-controls) for a more detailed introduction.
+前述の方法に加えて、実行計画はいくつかのシステム変数にも影響されます。これらの変数をシステム レベルまたはセッション レベルで変更することにより、実行計画の生成を制御できます。 v7.1.0 以降、TiDB は比較的特殊な変数[`tidb_opt_fix_control`](/system-variables.md#tidb_opt_fix_control-new-in-v710)を導入します。この変数は複数の制御項目を受け入れて、よりきめ細かい方法でオプティマイザーの動作を制御し、クラスターのアップグレード後のオプティマイザーの動作変更によって引き起こされるパフォーマンスの低下を防ぐことができます。より詳細な紹介については、 [オプティマイザー修正コントロール](https://docs.pingcap.com/tidb/v7.2/optimizer-fix-controls)を参照してください。
 
 </CustomContent>

@@ -2,37 +2,37 @@
 title: TiDB 2.0 RC1 Release Notes
 ---
 
-# TiDB 2.0 RC1 Release Notes
+# TiDB 2.0 RC1 リリースノート {#tidb-2-0-rc1-release-notes}
 
-On March 9, 2018, TiDB 2.0 RC1 is released. This release has great improvement in MySQL compatibility, SQL optimization and stability.
+2018 年 3 月 9 日に、TiDB 2.0 RC1 がリリースされました。このリリースでは、MySQL の互換性、SQL の最適化、安定性が大幅に向上しています。
 
-## TiDB
+## TiDB {#tidb}
 
-- Support limiting the memory usage by a single SQL statement, to reduce the risk of OOM
-- Support pushing the Stream Aggregate operator down to TiKV
-- Support validating the configuration file
-- Support obtaining the information of TiDB configuration through HTTP API
-- Compatible with more MySQL syntax in Parser
-- Improve the compatibility with Navicat
-- Improve the optimizer and extract common expressions with multiple OR conditions, to choose better query plan
-- Improve the optimizer and convert subqueries to Join operators in more scenarios, to choose better query plan
-- Resolve Lock in the Batch mode to increase the garbage collection speed
-- Fix the length of Boolean field to improve compatibility
-- Optimize the Add Index operation and give lower priority to all write and read operations, to reduce the impact on online business
+-   OOM のリスクを軽減するために、単一の SQL ステートメントによるメモリ使用量の制限をサポートします。
+-   Stream Aggregate オペレーターの TiKV へのプッシュのサポート
+-   構成ファイルの検証のサポート
+-   HTTP APIを介したTiDB構成情報の取得のサポート
+-   パーサーにおけるより多くの MySQL 構文との互換性
+-   Navicat との互換性の向上
+-   オプティマイザーを改善し、複数の OR 条件で共通の式を抽出し、より適切なクエリ プランを選択します。
+-   オプティマイザーを改善し、より多くのシナリオでサブクエリを結合演算子に変換して、より適切なクエリ プランを選択します。
+-   バッチ モードでロックを解決してガベージコレクションの速度を向上させます
+-   互換性を向上させるためにブールフィールドの長さを修正しました。
+-   オンライン ビジネスへの影響を軽減するために、インデックスの追加操作を最適化し、すべての書き込みおよび読み取り操作の優先順位を下げます。
 
-## PD
+## PD {#pd}
 
-- Optimize the logic of code used to check the Region status to improve performance
-- Optimize the output of log information in abnormal conditions to facilitate debugging
-- Fix the monitor statistics that the disk space of TiKV nodes is not enough
-- Fix the wrong reporting issue of the health interface when TLS is enabled
-- Fix the issue that concurrent addition of replicas might exceed the threshold value of configuration, to improve stability
+-   リージョンのステータスをチェックするために使用されるコードのロジックを最適化し、パフォーマンスを向上させます。
+-   異常時のログ情報の出力を最適化し、デバッグを容易にします。
+-   TiKV ノードのディスク容量が不足しているというモニター統計を修正
+-   TLS が有効になっている場合のヘルス インターフェイスの誤ったレポートの問題を修正
+-   安定性を向上させるために、レプリカの同時追加が構成のしきい値を超える可能性がある問題を修正しました。
 
-## TiKV
+## TiKV {#tikv}
 
-- Fix the issue that gRPC call is not cancelled when PD leaders switch
-- Protect important configuration which cannot be changed after initial configuration
-- Add gRPC APIs used to obtain metrics
-- Check whether SSD is used when you start the cluster
-- Optimize the read performance using ReadPool, and improve the performance by 30% in the `raw get` test
-- Improve metrics and optimize the usage of metrics
+-   PD リーダーが切り替わったときに gRPC 呼び出しがキャンセルされない問題を修正
+-   初期設定後に変更できない重要な設定を保護する
+-   メトリクスの取得に使用される gRPC API を追加する
+-   クラスター起動時にSSDが使用されているかどうかを確認する
+-   ReadPool を使用して読み取りパフォーマンスを最適化し、 `raw get`テストでパフォーマンスを 30% 向上
+-   メトリクスを改善し、メトリクスの使用を最適化する

@@ -3,26 +3,26 @@ title: BACKUP | TiDB SQL Statement Reference
 summary: An overview of the usage of BACKUP for the TiDB database.
 ---
 
-# BACKUP
+# バックアップ {#backup}
 
-This statement is used to perform a distributed backup of the TiDB cluster.
+このステートメントは、TiDB クラスターの分散バックアップを実行するために使用されます。
 
-> **Warning:**
+> **警告：**
 >
-> - This feature is experimental. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
-> - This feature is not available on [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless) clusters.
+> -   この機能は実験的です。本番環境で使用することはお勧めできません。この機能は予告なく変更または削除される場合があります。バグを見つけた場合は、GitHub で[問題](https://github.com/pingcap/tidb/issues)を報告できます。
+> -   この機能は[TiDB サーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless)クラスターでは使用できません。
 
-The `BACKUP` statement uses the same engine as the [BR tool](https://docs.pingcap.com/tidb/stable/backup-and-restore-overview) does, except that the backup process is driven by TiDB itself rather than a separate BR tool. All benefits and warnings of BR also apply to this statement.
+`BACKUP`ステートメントは[BRツール](https://docs.pingcap.com/tidb/stable/backup-and-restore-overview)と同じエンジンを使用しますが、バックアップ プロセスが別個のBRツールではなく TiDB 自体によって駆動される点が異なります。 BRのすべての利点と警告は、この声明にも当てはまります。
 
-Executing `BACKUP` requires either the `BACKUP_ADMIN` or `SUPER` privilege. Additionally, both the TiDB node executing the backup and all TiKV nodes in the cluster must have read or write permission to the destination. Local storage (storage paths starting with `local://`) is not permitted when [Security Enhanced Mode](/system-variables.md#tidb_enable_enhanced_security) is enabled.
+`BACKUP`を実行するには、 `BACKUP_ADMIN`または`SUPER`権限が必要です。さらに、バックアップを実行する TiDB ノードとクラスター内のすべての TiKV ノードの両方に、宛先への読み取りまたは書き込み権限が必要です。 [Security強化モード](/system-variables.md#tidb_enable_enhanced_security)が有効な場合、ローカルstorage( `local://`で始まるstorageパス) は許可されません。
 
-The `BACKUP` statement is blocked until the entire backup task is finished, failed, or canceled. A long-lasting connection should be prepared for executing `BACKUP`. The task can be canceled using the [`KILL TIDB QUERY`](/sql-statements/sql-statement-kill.md) statement.
+`BACKUP`ステートメントは、バックアップ タスク全体が完了するか、失敗するか、キャンセルされるまでブロックされます。 `BACKUP`を実行するには、長時間持続する接続を準備する必要があります。タスクは[`KILL TIDB QUERY`](/sql-statements/sql-statement-kill.md)ステートメントを使用してキャンセルできます。
 
-Only one `BACKUP` and [`RESTORE`](/sql-statements/sql-statement-restore.md) task can be executed at a time. If a `BACKUP` or `RESTORE` statement is already being executed on the same TiDB server, the new `BACKUP` execution will wait until all previous tasks are finished.
+`BACKUP`と[`RESTORE`](/sql-statements/sql-statement-restore.md)タスクは一度に 1 つだけ実行できます。 `BACKUP`または`RESTORE`ステートメントが同じ TiDBサーバー上ですでに実行されている場合、新しい`BACKUP`ステートメントの実行は、前のタスクがすべて完了するまで待機します。
 
-`BACKUP` can only be used with "tikv" storage engine. Using `BACKUP` with the "unistore" engine will fail.
+`BACKUP` 「tikv」storageエンジンでのみ使用できます。 「unistore」エンジンで`BACKUP`使用すると失敗します。
 
-## Synopsis
+## あらすじ {#synopsis}
 
 ```ebnf+diagram
 BackupStmt ::=
@@ -47,11 +47,9 @@ BackupTSO ::=
     LengthNum | stringLit
 ```
 
-## Examples
+## 例 {#examples}
 
-### Back up databases
-
-{{< copyable "sql" >}}
+### データベースをバックアップする {#back-up-databases}
 
 ```sql
 BACKUP DATABASE `test` TO 'local:///mnt/backup/2020/04/';
@@ -66,47 +64,39 @@ BACKUP DATABASE `test` TO 'local:///mnt/backup/2020/04/';
 1 row in set (58.453 sec)
 ```
 
-In the example above, the `test` database is backed up into the local filesystem. The data is saved as SST files in the `/mnt/backup/2020/04/` directories distributed among all TiDB and TiKV nodes.
+上の例では、 `test`データベースがローカル ファイルシステムにバックアップされます。データは、すべての TiDB ノードと TiKV ノードに分散された`/mnt/backup/2020/04/`のディレクトリに SST ファイルとして保存されます。
 
-The first row of the result above is described as follows:
+上記の結果の最初の行は次のように説明されます。
 
-| Column | Description |
-| :-------- | :--------- |
-| `Destination` | The destination URL |
-| `Size` |  The total size of the backup archive, in bytes |
-| `BackupTS` | The TSO of the snapshot when the backup is created (useful for [incremental backup](#incremental-backup)) |
-| `Queue Time` | The timestamp (in current time zone) when the `BACKUP` task is queued. |
-| `Execution Time` | The timestamp (in current time zone) when the `BACKUP` task starts to run. |
+| カラム              | 説明                                                               |
+| :--------------- | :--------------------------------------------------------------- |
+| `Destination`    | リンク先の URL                                                        |
+| `Size`           | バックアップ アーカイブの合計サイズ (バイト単位)                                       |
+| `BackupTS`       | バックアップ作成時のスナップショットの TSO ( [増分バックアップ](#incremental-backup)に役立ちます) |
+| `Queue Time`     | `BACKUP`のタスクがキューに入れられたときのタイムスタンプ (現在のタイムゾーン)。                    |
+| `Execution Time` | `BACKUP`タスクの実行が開始されたときのタイムスタンプ (現在のタイムゾーン)。                      |
 
-### Back up tables
-
-{{< copyable "sql" >}}
+### テーブルをバックアップする {#back-up-tables}
 
 ```sql
 BACKUP TABLE `test`.`sbtest01` TO 'local:///mnt/backup/sbtest01/';
 ```
 
-{{< copyable "sql" >}}
-
 ```sql
 BACKUP TABLE sbtest02, sbtest03, sbtest04 TO 'local:///mnt/backup/sbtest/';
 ```
 
-### Back up the entire cluster
-
-{{< copyable "sql" >}}
+### クラスター全体をバックアップする {#back-up-the-entire-cluster}
 
 ```sql
 BACKUP DATABASE * TO 'local:///mnt/backup/full/';
 ```
 
-Note that the system tables (`mysql.*`, `INFORMATION_SCHEMA.*`, `PERFORMANCE_SCHEMA.*`, …) will not be included into the backup.
+システム テーブル ( `mysql.*` 、 `INFORMATION_SCHEMA.*` 、 `PERFORMANCE_SCHEMA.*` 、…) はバックアップに含まれないことに注意してください。
 
-### External storages
+### 外部ストレージ {#external-storages}
 
-BR supports backing up data to S3 or GCS:
-
-{{< copyable "sql" >}}
+BR は、 S3 または GCS へのデータのバックアップをサポートしています。
 
 ```sql
 BACKUP DATABASE `test` TO 's3://example-bucket-2020/backup-05/?access-key={YOUR_ACCESS_KEY}&secret-access-key={YOUR_SECRET_KEY}';
@@ -114,34 +104,30 @@ BACKUP DATABASE `test` TO 's3://example-bucket-2020/backup-05/?access-key={YOUR_
 
 <CustomContent platform="tidb">
 
-The URL syntax is further explained in [URI Formats of External Storage Services](/external-storage-uri.md).
+URL 構文については、 [外部ストレージ サービスの URI 形式](/external-storage-uri.md)で詳しく説明します。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-The URL syntax is further explained in [external storage URI](https://docs.pingcap.com/tidb/stable/external-storage-uri).
+URL 構文については、 [外部storageURI](https://docs.pingcap.com/tidb/stable/external-storage-uri)で詳しく説明します。
 
 </CustomContent>
 
-When running on cloud environment where credentials should not be distributed, set the `SEND_CREDENTIALS_TO_TIKV` option to `FALSE`:
-
-{{< copyable "sql" >}}
+認証情報を配布しないクラウド環境で実行する場合は、 `SEND_CREDENTIALS_TO_TIKV`オプションを`FALSE`に設定します。
 
 ```sql
 BACKUP DATABASE `test` TO 's3://example-bucket-2020/backup-05/'
     SEND_CREDENTIALS_TO_TIKV = FALSE;
 ```
 
-### Performance fine-tuning
+### パフォーマンスの微調整 {#performance-fine-tuning}
 
-Use `RATE_LIMIT` to limit the average upload speed per TiKV node to reduce network bandwidth.
+`RATE_LIMIT`を使用すると、TiKV ノードごとの平均アップロード速度が制限され、ネットワーク帯域幅が削減されます。
 
-By default, every TiKV node would run 4 backup threads. This value can be adjusted with the `CONCURRENCY` option.
+デフォルトでは、すべての TiKV ノードは 4 つのバックアップ スレッドを実行します。この値は`CONCURRENCY`オプションで調整できます。
 
-Before backup is completed, `BACKUP` would perform a checksum against the data on the cluster to verify correctness. This step can be disabled with the `CHECKSUM` option if you are confident that this is unnecessary.
-
-{{< copyable "sql" >}}
+バックアップが完了する前に、クラスター上のデータに対してチェック`BACKUP`を実行して、正確さを検証します。このステップが不要であると確信できる場合は、 `CHECKSUM`オプションを使用して無効にすることができます。
 
 ```sql
 BACKUP DATABASE `test` TO 's3://example-bucket-2020/backup-06/'
@@ -150,11 +136,9 @@ BACKUP DATABASE `test` TO 's3://example-bucket-2020/backup-06/'
     CHECKSUM = FALSE;
 ```
 
-### Snapshot
+### スナップショット {#snapshot}
 
-Specify a timestamp, TSO or relative time to backup historical data.
-
-{{< copyable "sql" >}}
+履歴データをバックアップするタイムスタンプ、TSO、または相対時間を指定します。
 
 ```sql
 -- relative time
@@ -170,22 +154,20 @@ BACKUP DATABASE `test` TO 'local:///mnt/backup/hist03'
     SNAPSHOT = 415685305958400;
 ```
 
-The supported units for relative time are:
+サポートされている相対時間の単位は次のとおりです。
 
-* MICROSECOND
-* SECOND
-* MINUTE
-* HOUR
-* DAY
-* WEEK
+-   マイクロ秒
+-   2番
+-   分
+-   時間
+-   日
+-   週
 
-Note that, following SQL standard, the units are always singular.
+SQL 標準に従って、単位は常に単数であることに注意してください。
 
-### Incremental backup
+### 増分バックアップ {#incremental-backup}
 
-Supply the `LAST_BACKUP` option to only backup the changes between the last backup to the current snapshot.
-
-{{< copyable "sql" >}}
+最後のバックアップから現在のスナップショットまでの変更のみをバックアップするには、 `LAST_BACKUP`オプションを指定します。
 
 ```sql
 -- timestamp (in current time zone)
@@ -197,11 +179,11 @@ BACKUP DATABASE `test` TO 'local:///mnt/backup/hist03'
     LAST_BACKUP = 415685305958400;
 ```
 
-## MySQL compatibility
+## MySQLの互換性 {#mysql-compatibility}
 
-This statement is a TiDB extension to MySQL syntax.
+このステートメントは、MySQL 構文に対する TiDB 拡張機能です。
 
-## See also
+## こちらも参照 {#see-also}
 
-* [RESTORE](/sql-statements/sql-statement-restore.md)
-* [SHOW BACKUPS](/sql-statements/sql-statement-show-backups.md)
+-   [復元する](/sql-statements/sql-statement-restore.md)
+-   [バックアップを表示](/sql-statements/sql-statement-show-backups.md)

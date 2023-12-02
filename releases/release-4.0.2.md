@@ -2,160 +2,160 @@
 title: TiDB 4.0.2 Release Notes
 ---
 
-# TiDB 4.0.2 Release Notes
+# TiDB 4.0.2 リリースノート {#tidb-4-0-2-release-notes}
 
-Release date: July 1, 2020
+発売日：2020年7月1日
 
-TiDB version: 4.0.2
+TiDB バージョン: 4.0.2
 
-## Compatibility Changes
+## 互換性の変更 {#compatibility-changes}
 
-+ TiDB
+-   TiDB
 
-    - Remove sensitive information in the slow query log and the statement summary table [#18130](https://github.com/pingcap/tidb/pull/18130)
-    - Forbid negative value in the sequence cache [#18103](https://github.com/pingcap/tidb/pull/18103)
-    - Remove tombstone TiKV and TiFlash stores from the `CLUSTER_INFO` table [#17953](https://github.com/pingcap/tidb/pull/17953)
-    - Change the diagnostic rule from `current-load` to `node-check` [#17660](https://github.com/pingcap/tidb/pull/17660)
+    -   スロークエリログとステートメント概要テーブル[#18130](https://github.com/pingcap/tidb/pull/18130)の機密情報を削除します。
+    -   シーケンス キャッシュ[#18103](https://github.com/pingcap/tidb/pull/18103)での負の値の禁止
+    -   トゥームストーン TiKV およびTiFlashストアを`CLUSTER_INFO`テーブル[#17953](https://github.com/pingcap/tidb/pull/17953)から削除します。
+    -   診断ルールを`current-load`から`node-check`に変更します[#17660](https://github.com/pingcap/tidb/pull/17660)
 
-+ PD
+-   PD
 
-    - Persist `store-limit` and remove `store-balance-rate` [#2557](https://github.com/pingcap/pd/pull/2557)
+    -   `store-limit`を保持し、 `store-balance-rate`を削除します[#2557](https://github.com/pingcap/pd/pull/2557)
 
-## New Change
+## 新しい変化 {#new-change}
 
-- By default, TiDB and TiDB Dashboard share usage details with PingCAP to help understand how to improve the product [#18180](https://github.com/pingcap/tidb/pull/18180). For details about what is shared and how to disable the sharing, see [Telemetry](/telemetry.md).
+-   デフォルトでは、TiDB と TiDB ダッシュボードは使用状況の詳細を PingCAP と共有し、製品の改善方法を理解するのに役立ちます[#18180](https://github.com/pingcap/tidb/pull/18180) 。共有内容と共有を無効にする方法については、 [テレメトリー](/telemetry.md)を参照してください。
 
-## New Features
+## 新機能 {#new-features}
 
-+ TiDB
+-   TiDB
 
-    - Support the `MEMORY_QUOTA()` hint in `INSERT` statements [#18101](https://github.com/pingcap/tidb/pull/18101)
-    - Support authentication based on the `SAN` field of TLS certificate [#17698](https://github.com/pingcap/tidb/pull/17698)
-    - Support collation for the `REGEXP()` function [#17581](https://github.com/pingcap/tidb/pull/17581)
-    - Support the `sql_select_limit` session and global variable [#17604](https://github.com/pingcap/tidb/pull/17604)
-    - Support splitting the Region for the newly added partition by default [#17665](https://github.com/pingcap/tidb/pull/17665)
-    - Support pushing the `IF()`/`BITXOR()`/`BITNEG()`/`JSON_LENGTH()` functions to the TiFlash Coprocessor [#17651](https://github.com/pingcap/tidb/pull/17651) [#17592](https://github.com/pingcap/tidb/pull/17592)
-    - Support a new aggregate function `APPROX_COUNT_DISTINCT()` to calculate the approximate result of `COUNT(DISTINCT)` [#18120](https://github.com/pingcap/tidb/pull/18120)
-    - Support collation in TiFlash and pushing collation-related functions to TiFlash [#17705](https://github.com/pingcap/tidb/pull/17705)
-    - Add the `STATUS_ADDRESS` column in the `INFORMATION_SCHEMA.INSPECTION_RESULT` table to indicate the status address of servers [#17695](https://github.com/pingcap/tidb/pull/17695)
-    - Add the `SOURCE` column in the `MYSQL.BIND_INFO` table to indicate the how the bindings are created [#17587](https://github.com/pingcap/tidb/pull/17587)
-    - Add the `PLAN_IN_CACHE` and `PLAN_CACHE_HITS` columns in the `PERFORMANCE_SCHEMA.EVENTS_STATEMENTS_SUMMARY_BY_DIGEST` table to indicate the plan cache usage of SQL statements [#17493](https://github.com/pingcap/tidb/pull/17493)
-    - Add the `enable-collect-execution-info` configuration item and the `tidb_enable_collect_execution_info` session variable to control whether to collect execution information of each operator and record the information in the slow query log [#18073](https://github.com/pingcap/tidb/pull/18073) [#18072](https://github.com/pingcap/tidb/pull/18072)
-    - Add the `tidb_slow_log_masking` global variable to control whether to desensitize the queries in slow query log [#17694](https://github.com/pingcap/tidb/pull/17694)
-    - Add a diagnostic rule in the `INFORMATION_SCHEMA.INSPECTION_RESULT` table for the `storage.block-cache.capacity` TiKV configuration item [#17671](https://github.com/pingcap/tidb/pull/17671)
-    - Add the `BACKUP` and `RESTORE` SQL statements to back up and restore data [#15274](https://github.com/pingcap/tidb/pull/15274)
+    -   `INSERT`ステートメントで`MEMORY_QUOTA()`ヒントをサポート[#18101](https://github.com/pingcap/tidb/pull/18101)
+    -   TLS 証明書の`SAN`フィールドに基づく認証をサポート[#17698](https://github.com/pingcap/tidb/pull/17698)
+    -   `REGEXP()`関数[#17581](https://github.com/pingcap/tidb/pull/17581)の照合順序のサポート
+    -   `sql_select_limit`セッションとグローバル変数[#17604](https://github.com/pingcap/tidb/pull/17604)をサポート
+    -   新しく追加されたパーティションのリージョン分割をデフォルトでサポートします[#17665](https://github.com/pingcap/tidb/pull/17665)
+    -   `IF()` / `BITXOR()` / `BITNEG()` / `JSON_LENGTH()`関数のTiFlashコプロセッサーへのプッシュをサポート[#17651](https://github.com/pingcap/tidb/pull/17651) [#17592](https://github.com/pingcap/tidb/pull/17592)
+    -   `COUNT(DISTINCT)` [#18120](https://github.com/pingcap/tidb/pull/18120)の近似結果を計算するための新しい集計関数`APPROX_COUNT_DISTINCT()`サポートします。
+    -   TiFlashでの照合順序をサポートし、照合関連の関数をTiFlash [#17705](https://github.com/pingcap/tidb/pull/17705)にプッシュ
+    -   サーバー[#17695](https://github.com/pingcap/tidb/pull/17695)のステータス アドレスを示すために、テーブル`INFORMATION_SCHEMA.INSPECTION_RESULT`に`STATUS_ADDRESS`列を追加します。
+    -   `MYSQL.BIND_INFO`テーブルに`SOURCE`列を追加して、バインディングの作成方法を示します[#17587](https://github.com/pingcap/tidb/pull/17587)
+    -   `PERFORMANCE_SCHEMA.EVENTS_STATEMENTS_SUMMARY_BY_DIGEST`テーブルに`PLAN_IN_CACHE`と`PLAN_CACHE_HITS`列を追加して、SQL ステートメントのプラン キャッシュの使用量を示します[#17493](https://github.com/pingcap/tidb/pull/17493)
+    -   各オペレーターの実行情報を収集し、スロークエリログに情報を記録するかどうかを制御するための`enable-collect-execution-info`構成アイテムと`tidb_enable_collect_execution_info`セッション変数を追加します[#18073](https://github.com/pingcap/tidb/pull/18073) [#18072](https://github.com/pingcap/tidb/pull/18072)
+    -   `tidb_slow_log_masking`グローバル変数を追加して、低速クエリ ログ[#17694](https://github.com/pingcap/tidb/pull/17694)のクエリを鈍感にするかどうかを制御します。
+    -   `INFORMATION_SCHEMA.INSPECTION_RESULT`テーブルに`storage.block-cache.capacity` TiKV 構成項目[#17671](https://github.com/pingcap/tidb/pull/17671)の診断ルールを追加します。
+    -   データをバックアップおよび復元するために`BACKUP`および`RESTORE` SQL ステートメントを追加します[#15274](https://github.com/pingcap/tidb/pull/15274)
 
-+ TiKV
+-   TiKV
 
-    - Support the `encryption-meta` command in TiKV Control [#8103](https://github.com/tikv/tikv/pull/8103)
-    - Add a perf context metric for `RocksDB::WriteImpl` [#7991](https://github.com/tikv/tikv/pull/7991)
+    -   TiKV Control [#8103](https://github.com/tikv/tikv/pull/8103)の`encryption-meta`コマンドをサポート
+    -   `RocksDB::WriteImpl` [#7991](https://github.com/tikv/tikv/pull/7991)のパフォーマンス コンテキスト メトリックを追加します
 
-+ PD
+-   PD
 
-    - Support the operator to fail immediately when trying to remove a leader peer [#2551](https://github.com/pingcap/pd/pull/2551)
-    - Set a suitable default store limit for TiFlash stores [#2559](https://github.com/pingcap/pd/pull/2559)
+    -   オペレーターがリーダー ピア[#2551](https://github.com/pingcap/pd/pull/2551)を削除しようとするときにすぐに失敗するようにサポートします。
+    -   TiFlashストアに適切なデフォルトのストア制限を設定します[#2559](https://github.com/pingcap/pd/pull/2559)
 
-+ TiFlash
+-   TiFlash
 
-    - Support new aggregation function `APPROX_COUNT_DISTINCT` in Coprocessor
-    - Enable the `rough set filter` feature by default
-    - Enable TiFlash to run on the ARM architecture
-    - Support pushing down the `JSON_LENGTH` function in Coprocessor
+    -   コプロセッサーで新しい集計関数`APPROX_COUNT_DISTINCT`をサポート
+    -   `rough set filter`機能をデフォルトで有効にする
+    -   TiFlash をARMアーキテクチャ上で実行できるようにする
+    -   コプロセッサーの`JSON_LENGTH`関数のプッシュダウンをサポート
 
-+ Tools
+-   ツール
 
-    - TiCDC
+    -   TiCDC
 
-        - Support migrating sub-tasks to new `capture`s [#665](https://github.com/pingcap/tiflow/pull/665)
-        - Add a `cli` command to delete the TiCDC GC TTL [#652](https://github.com/pingcap/tiflow/pull/652)
-        - Support canal protocol in MQ sink [#649](https://github.com/pingcap/tiflow/pull/649)
+        -   新しい`capture` s [#665](https://github.com/pingcap/tiflow/pull/665)へのサブタスクの移行をサポート
+        -   TiCDC GC TTL [#652](https://github.com/pingcap/tiflow/pull/652)を削除する`cli`コマンドを追加します。
+        -   MQ シンク[#649](https://github.com/pingcap/tiflow/pull/649)でカナルプロトコルをサポート
 
-## Improvements
+## 改善点 {#improvements}
 
-+ TiDB
+-   TiDB
 
-    - Reduce the query latency caused by the Golang memory allocation when CM-Sketch consumes too much memory [#17545](https://github.com/pingcap/tidb/pull/17545)
-    - Reduce the QPS recovery duration of a cluster when a TiKV server is in the failure recovery process [#17681](https://github.com/pingcap/tidb/pull/17681)
-    - Support pushing aggregate functions to TiKV/TiFlash Coprocessor on partition tables [#17655](https://github.com/pingcap/tidb/pull/17655)
-    - Improve the accuracy of row count estimation for index equal conditions [#17611](https://github.com/pingcap/tidb/pull/17611)
+    -   CM-Sketch が大量のメモリを消費する場合に、 Golang のメモリ割り当てによって引き起こされるクエリのレイテンシーを削減します[#17545](https://github.com/pingcap/tidb/pull/17545)
+    -   TiKVサーバーが障害回復プロセス中の場合、クラスターの QPS 回復時間を短縮します[#17681](https://github.com/pingcap/tidb/pull/17681)
+    -   パーティション テーブル[#17655](https://github.com/pingcap/tidb/pull/17655)上の TiKV/ TiFlashコプロセッサーへの集計関数のプッシュのサポート
+    -   インデックス等しい条件[#17611](https://github.com/pingcap/tidb/pull/17611)の行数推定の精度を向上させます。
 
-+ TiKV
+-   TiKV
 
-    - Improve the PD client panic log [#8093](https://github.com/tikv/tikv/pull/8093)
-    - Add back the `process_cpu_seconds_total` and `process_start_time_seconds` monitoring metrics [#8029](https://github.com/tikv/tikv/pull/8029)
+    -   PDクライアントpanicログ[#8093](https://github.com/tikv/tikv/pull/8093)の改善
+    -   `process_cpu_seconds_total`と`process_start_time_seconds`監視メトリクスを再度追加します[#8029](https://github.com/tikv/tikv/pull/8029)
 
-+ TiFlash
+-   TiFlash
 
-    - Improve backward compatibility when upgrading from an older version [#786](https://github.com/pingcap/tics/pull/786)
-    - Reduce memory consumption of delta index [#787](https://github.com/pingcap/tics/pull/787)
-    - Use the more efficient update algorithm for delta index [#794](https://github.com/pingcap/tics/pull/794)
+    -   古いバージョンからアップグレードする場合の下位互換性を向上[#786](https://github.com/pingcap/tics/pull/786)
+    -   デルタインデックス[#787](https://github.com/pingcap/tics/pull/787)のメモリ消費量を削減します。
+    -   デルタ インデックス[#794](https://github.com/pingcap/tics/pull/794)には、より効率的な更新アルゴリズムを使用します。
 
-+ Tools
+-   ツール
 
-    - Backup & Restore (BR)
+    -   バックアップと復元 (BR)
 
-        - Improve the performance by pipelining the restore process [#266](https://github.com/pingcap/br/pull/266)
+        -   復元プロセスをパイプライン化してパフォーマンスを向上させる[#266](https://github.com/pingcap/br/pull/266)
 
-## Bug Fixes
+## バグの修正 {#bug-fixes}
 
-+ TiDB
+-   TiDB
 
-    - Fix the issue of incorrect execution plan obtained from the plan cache after `tidb_isolation_read_engines` is changed [#17570](https://github.com/pingcap/tidb/pull/17570)
-    - Fix the occasional runtime error that occurs when executing the `EXPLAIN FOR CONNECTION` statement [#18124](https://github.com/pingcap/tidb/pull/18124)
-    - Fix the incorrect result of the `last_plan_from_cache` session variable in some cases [#18111](https://github.com/pingcap/tidb/pull/18111)
-    - Fix the runtime error that occurs when executing the `UNIX_TIMESTAMP()` function from the plan cache [#18002](https://github.com/pingcap/tidb/pull/18002) [#17673](https://github.com/pingcap/tidb/pull/17673)
-    - Fix the runtime error when the child of `HashJoin` executor returns the `NULL` column [#17937](https://github.com/pingcap/tidb/pull/17937)
-    - Fix the runtime error caused by concurrently executing the `DROP DATABASE` statement and other DDL statements in the same database [#17659](https://github.com/pingcap/tidb/pull/17659)
-    - Fix the incorrect result of the `COERCIBILITY()` function on user variables [#17890](https://github.com/pingcap/tidb/pull/17890)
-    - Fix the issue that the `IndexMergeJoin` executor occasionally gets stuck [#18091](https://github.com/pingcap/tidb/pull/18091)
-    - Fix the hang issue of the `IndexMergeJoin` executor when out of memory quota and query cancelling is triggered [#17654](https://github.com/pingcap/tidb/pull/17654)
-    - Fix the excessive counting memory usage of the `Insert` and `Replace` executors [#18062](https://github.com/pingcap/tidb/pull/18062)
-    - Fix the issue that the data replication to TiFlash storage is stopped when `DROP DATABASE` and `DROP TABLE` are executed concurrently in the same database [#17901](https://github.com/pingcap/tidb/pull/17901)
-    - Fix the `BACKUP`/`RESTORE` failure between TiDB and the object storage service [#17844](https://github.com/pingcap/tidb/pull/17844)
-    - Fix the incorrect error message of privilege check failure when access is denied [#17724](https://github.com/pingcap/tidb/pull/17724)
-    - Discard the query feedbacks generated from the `DELETE`/`UPDATE` statement [#17843](https://github.com/pingcap/tidb/pull/17843)
-    - Forbid altering `AUTO_RANDOM_BASE` for a table without `AUTO_RANDOM` property [#17828](https://github.com/pingcap/tidb/pull/17828)
-    - Fix the issue that the `AUTO_RANDOM` column is allocated wrong results when the table is moved between databases by `ALTER TABLE ... RENAME` [#18243](https://github.com/pingcap/tidb/pull/18243)
-    - Fix the issue that some system tables cannot be accessed when setting the value of `tidb_isolation_read_engines` without `tidb` [#17719](https://github.com/pingcap/tidb/pull/17719)
-    - Fix the inaccurate result of JSON comparison on large integers and float values [#17717](https://github.com/pingcap/tidb/pull/17717)
-    - Fix the incorrect decimal property for the result of the `COUNT()` function [#17704](https://github.com/pingcap/tidb/pull/17704)
-    - Fix the incorrect result of the `HEX()` function when the type of input is the binary string [#17620](https://github.com/pingcap/tidb/pull/17620)
-    - Fix the issue that an empty result is returned when querying the `INFORMATION_SCHEMA.INSPECTION_SUMMARY` table without filter condition [#17697](https://github.com/pingcap/tidb/pull/17697)
-    - Fix the issue that the hashed password used by the `ALTER USER` statement to update user information is unexpected [#17646](https://github.com/pingcap/tidb/pull/17646)
-    - Support collation for `ENUM` and `SET` values [#17701](https://github.com/pingcap/tidb/pull/17701)
-    - Fix the issue that the timeout mechanism for pre-splitting Regions does not work when creating a table [#17619](https://github.com/pingcap/tidb/pull/17619)
-    - Fix the issue that the schema is unexpectedly updated when a DDL job is retried, which might break the atomicity of DDL jobs [#17608](https://github.com/pingcap/tidb/pull/17608)
-    - Fix the incorrect result of the `FIELD()` function when the argument contains the column [#17562](https://github.com/pingcap/tidb/pull/17562)
-    - Fix the issue that the `max_execution_time` hint does not work occasionally [#17536](https://github.com/pingcap/tidb/pull/17536)
-    - Fix the issue that the concurrency information is redundantly printed in the result of `EXPLAIN ANALYZE` [#17350](https://github.com/pingcap/tidb/pull/17350)
-    - Fix the incompatible behavior of `%h` on the `STR_TO_DATE` function [#17498](https://github.com/pingcap/tidb/pull/17498)
-    - Fix the issue that the follower/learner keeps retrying when `tidb_replica_read` is set to `follower` and there is a network partition between the leader and the follower/learner [#17443](https://github.com/pingcap/tidb/pull/17443)
-    - Fix the issue that TiDB sends too many pings to PD follower in some cases [#17947](https://github.com/pingcap/tidb/pull/17947)
-    - Fix the issue that the range partition table of older versions cannot be loaded in TiDB v4.0 [#17983](https://github.com/pingcap/tidb/pull/17983)
-    - Fix the SQL statement timeout issue when multiple Region requests fail at the same time by assigning different `Backoffer` for each Region [#17585](https://github.com/pingcap/tidb/pull/17585)
-    - Fix the MySQL incompatible behavior when parsing `DateTime` delimiters [#17501](https://github.com/pingcap/tidb/pull/17501)
-    - Fix the issue that TiKV requests are occasionally sent to the TiFlash server [#18105](https://github.com/pingcap/tidb/pull/18105)
-    - Fix the data inconsistency issue occurred because the lock of a written and deleted primary key in one transaction is resolved by another transaction [#18250](https://github.com/pingcap/tidb/pull/18250)
+    -   `tidb_isolation_read_engines`を変更した後、プラン キャッシュから取得された実行プランが正しくなくなる問題を修正[#17570](https://github.com/pingcap/tidb/pull/17570)
+    -   `EXPLAIN FOR CONNECTION`ステートメント[#18124](https://github.com/pingcap/tidb/pull/18124)の実行時に時折発生するランタイム エラーを修正しました。
+    -   場合によっては`last_plan_from_cache`セッション変数の誤った結果が修正される[#18111](https://github.com/pingcap/tidb/pull/18111)
+    -   プラン キャッシュ[#18002](https://github.com/pingcap/tidb/pull/18002) [#17673](https://github.com/pingcap/tidb/pull/17673)から`UNIX_TIMESTAMP()`関数を実行するときに発生するランタイム エラーを修正します。
+    -   `HashJoin`エグゼキューターの子が`NULL`列[#17937](https://github.com/pingcap/tidb/pull/17937)を返すときのランタイム エラーを修正しました。
+    -   同じデータベース[#17659](https://github.com/pingcap/tidb/pull/17659)内で`DROP DATABASE`ステートメントと他の DDL ステートメントを同時に実行することによって発生するランタイム エラーを修正します。
+    -   ユーザー変数[#17890](https://github.com/pingcap/tidb/pull/17890)に対する関数`COERCIBILITY()`の誤った結果を修正しました。
+    -   `IndexMergeJoin` executor が時々スタックする問題を修正[#18091](https://github.com/pingcap/tidb/pull/18091)
+    -   メモリクォータが不足し、クエリのキャンセルがトリガーされたときの`IndexMergeJoin`エグゼキュータのハングの問題を修正します[#17654](https://github.com/pingcap/tidb/pull/17654)
+    -   `Insert`および`Replace`エグゼキュータの過剰なカウントメモリ使用量を修正する[#18062](https://github.com/pingcap/tidb/pull/18062)
+    -   `DROP DATABASE`と`DROP TABLE`を同じデータベースで同時に実行すると、 TiFlashstorageへのデータレプリケーションが停止する問題を修正[#17901](https://github.com/pingcap/tidb/pull/17901)
+    -   TiDB `RESTORE`オブジェクトstorageサービス間の`BACKUP`障害を修正[#17844](https://github.com/pingcap/tidb/pull/17844)
+    -   アクセスが拒否された場合の権限チェック失敗の誤ったエラー メッセージを修正[#17724](https://github.com/pingcap/tidb/pull/17724)
+    -   `DELETE` / `UPDATE`ステートメントから生成されたクエリ フィードバックを破棄します[#17843](https://github.com/pingcap/tidb/pull/17843)
+    -   `AUTO_RANDOM`プロパティ[#17828](https://github.com/pingcap/tidb/pull/17828)のないテーブルの`AUTO_RANDOM_BASE`の変更を禁止する
+    -   テーブルをデータベース間で`ALTER TABLE ... RENAME` [#18243](https://github.com/pingcap/tidb/pull/18243)移動すると、 `AUTO_RANDOM`列が誤った結果として割り当てられる問題を修正
+    -   `tidb` [#17719](https://github.com/pingcap/tidb/pull/17719)を指定せずに`tidb_isolation_read_engines`の値を設定すると、一部のシステム テーブルにアクセスできない問題を修正
+    -   大きな整数と浮動小数点値に対する JSON 比較の不正確な結果を修正しました[#17717](https://github.com/pingcap/tidb/pull/17717)
+    -   `COUNT()`関数[#17704](https://github.com/pingcap/tidb/pull/17704)の結果の誤った 10 進数プロパティを修正しました。
+    -   入力の型がバイナリ文字列[#17620](https://github.com/pingcap/tidb/pull/17620)の場合、 `HEX()`関数の誤った結果を修正しました。
+    -   フィルター条件[#17697](https://github.com/pingcap/tidb/pull/17697)なしで`INFORMATION_SCHEMA.INSPECTION_SUMMARY`テーブルをクエリすると空の結果が返される問題を修正
+    -   ユーザー情報を更新するための`ALTER USER`ステートメントで使用されるハッシュ化されたパスワードが予期しないものである問題を修正します[#17646](https://github.com/pingcap/tidb/pull/17646)
+    -   `ENUM`および`SET`値の照合順序をサポート[#17701](https://github.com/pingcap/tidb/pull/17701)
+    -   テーブル[#17619](https://github.com/pingcap/tidb/pull/17619)の作成時にリージョンの事前分割のタイムアウト メカニズムが機能しない問題を修正します。
+    -   DDL ジョブの再試行時にスキーマが予期せず更新され、DDL ジョブのアトミック性が損なわれる可能性がある問題を修正します[#17608](https://github.com/pingcap/tidb/pull/17608)
+    -   引数に列[#17562](https://github.com/pingcap/tidb/pull/17562)含まれる場合の`FIELD()`関数の誤った結果を修正しました。
+    -   `max_execution_time`ヒントが時々機能しない問題を修正[#17536](https://github.com/pingcap/tidb/pull/17536)
+    -   `EXPLAIN ANALYZE` [#17350](https://github.com/pingcap/tidb/pull/17350)の結果に同時実行情報が重複して出力される問題を修正
+    -   `STR_TO_DATE`関数[#17498](https://github.com/pingcap/tidb/pull/17498)の`%h`の互換性のない動作を修正しました。
+    -   `tidb_replica_read`を`follower`に設定し、リーダーとフォロワー/ラーナーの間にネットワーク パーティションがある場合、フォロワー/ラーナーがリトライを繰り返す問題を修正[#17443](https://github.com/pingcap/tidb/pull/17443)
+    -   場合によっては TiDB が PD フォロワーに多すぎる ping を送信する問題を修正します[#17947](https://github.com/pingcap/tidb/pull/17947)
+    -   TiDB v4.0 [#17983](https://github.com/pingcap/tidb/pull/17983)で古いバージョンのレンジ パーティション テーブルをロードできない問題を修正
+    -   リージョン[#17585](https://github.com/pingcap/tidb/pull/17585)ごとに異なる`Backoffer`を割り当てることで、複数のリージョンリクエストが同時に失敗した場合の SQL ステートメントのタイムアウトの問題を修正します。
+    -   `DateTime`区切り文字[#17501](https://github.com/pingcap/tidb/pull/17501)を解析するときの MySQL の互換性のない動作を修正しました。
+    -   TiKV リクエストが時々 TiFlashサーバーに送信される問題を修正します[#18105](https://github.com/pingcap/tidb/pull/18105)
+    -   あるトランザクションで書き込まれ削除された主キーのロックが別のトランザクションによって解決されるために発生するデータの不整合の問題を修正します[#18250](https://github.com/pingcap/tidb/pull/18250)
 
-+ TiKV
+-   TiKV
 
-    - Fix a memory safety issue for the status server [#8101](https://github.com/tikv/tikv/pull/8101)
-    - Fix the issue of lost precision in JSON numeric comparison [#8087](https://github.com/tikv/tikv/pull/8087)
-    - Fix the wrong query slow log [#8050](https://github.com/tikv/tikv/pull/8050)
-    - Fix the issue that a peer cannot be removed when its store is isolated during multiple merge processes [#8048](https://github.com/tikv/tikv/pull/8048)
-    - Fix the issue that `tikv-ctl recover-mvcc` does not remove invalid pessimistic locks [#8047](https://github.com/tikv/tikv/pull/8047)
-    - Fix the issue that some Titan histogram metrics are missing [#7997](https://github.com/tikv/tikv/pull/7997)
-    - Fix the issue that TiKV returns `duplicated error` to TiCDC [#7887](https://github.com/tikv/tikv/pull/7887)
+    -   ステータスサーバー[#8101](https://github.com/tikv/tikv/pull/8101)のメモリの安全性の問題を修正します。
+    -   JSON 数値比較[#8087](https://github.com/tikv/tikv/pull/8087)で精度が失われる問題を修正
+    -   間違ったクエリの遅いログ[#8050](https://github.com/tikv/tikv/pull/8050)を修正する
+    -   複数のマージ プロセス中にピアのストアが分離されている場合、ピアを削除できない問題を修正します[#8048](https://github.com/tikv/tikv/pull/8048)
+    -   `tikv-ctl recover-mvcc`が無効な悲観的ロックを削除しない問題を修正します[#8047](https://github.com/tikv/tikv/pull/8047)
+    -   一部の Titan ヒストグラム メトリクスが欠落している問題を修正[#7997](https://github.com/tikv/tikv/pull/7997)
+    -   TiKV が TiCDC [#7887](https://github.com/tikv/tikv/pull/7887)に`duplicated error`を返す問題を修正
 
-+ PD
+-   PD
 
-    - Check the correctness of the `pd-server.dashboard-address` configuration item [#2517](https://github.com/pingcap/pd/pull/2517)
-    - Fix the panic issue of PD when setting `store-limit-mode` to `auto` [#2544](https://github.com/pingcap/pd/pull/2544)
-    - Fix the issue that hotspots cannot be identified in some cases [#2463](https://github.com/pingcap/pd/pull/2463)
-    - Fix the issue that placement rules prevent the store from changing to `tombstone` in some cases [#2546](https://github.com/pingcap/pd/pull/2546)
-    - Fix the panic issue of PD when upgrading from earlier versions in some cases [#2564](https://github.com/pingcap/pd/pull/2564)
+    -   `pd-server.dashboard-address`設定項目が正しいか確認します[#2517](https://github.com/pingcap/pd/pull/2517)
+    -   `store-limit-mode` ～ `auto` [#2544](https://github.com/pingcap/pd/pull/2544)設定時のPDのpanic問題を修正
+    -   ホットスポットが特定できない場合がある問題を修正[#2463](https://github.com/pingcap/pd/pull/2463)
+    -   場合によっては配置ルールによりストアが`tombstone`に変更されない問題を修正します[#2546](https://github.com/pingcap/pd/pull/2546)
+    -   以前のバージョンからアップグレードする場合に発生する PD のpanic問題を修正[#2564](https://github.com/pingcap/pd/pull/2564)
 
-+ TiFlash
+-   TiFlash
 
-    - Fix the issue that the proxy might panic when the `region not found` error occurs
-    - Fix the issue that the I/O exception thrown in `drop table` might lead to synchronization failure of TiFlash schema
+    -   `region not found`エラーが発生したときにプロキシがpanicになる可能性がある問題を修正
+    -   `drop table`でスローされた I/O 例外によりTiFlashスキーマの同期失敗が発生する可能性がある問題を修正

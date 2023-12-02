@@ -3,15 +3,13 @@ title: TIKV_REGION_STATUS
 summary: Learn the `TIKV_REGION_STATUS` information_schema table.
 ---
 
-# TIKV_REGION_STATUS
+# TIKV_REGION_STATUS {#tikv-region-status}
 
-The `TIKV_REGION_STATUS` table shows some basic information of TiKV Regions via PD's API, like the Region ID, starting and ending key-values, and read and write traffic.
+`TIKV_REGION_STATUS`の表は、リージョンID、開始および終了の Key-Value、読み取りおよび書き込みトラフィックなど、PD の API を介した TiKV リージョンの基本情報を示しています。
 
-> **Note:**
+> **注記：**
 >
-> This table is not available on [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless) clusters.
-
-{{< copyable "sql" >}}
+> このテーブルは[TiDB サーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless)クラスターでは使用できません。
 
 ```sql
 USE information_schema;
@@ -43,29 +41,29 @@ DESC tikv_region_status;
 17 rows in set (0.00 sec)
 ```
 
-The descriptions of the columns in the `TIKV_REGION_STATUS` table are as follows:
+`TIKV_REGION_STATUS`の表の列の説明は次のとおりです。
 
-* `REGION_ID`: The ID of the Region.
-* `START_KEY`: The value of the start key of the Region.
-* `END_KEY`: The value of the end key of the Region.
-* `TABLE_ID`: The ID of the table to which the Region belongs.
-* `DB_NAME`: The name of the database to which `TABLE_ID` belongs.
-* `TABLE_NAME`: The name of the table to which the Region belongs.
-* `IS_INDEX`: Whether the Region data is an index. 0 means that it is not an index, while 1 means that it is an index. If the current Region contains both table data and index data, there will be multiple rows of records, and `IS_INDEX` is 0 and 1 respectively.
-* `INDEX_ID`: The ID of the index to which the Region belongs. If `IS_INDEX` is 0, the value of this column is NULL.
-* `INDEX_NAME`: The name of the index to which the Region belongs. If `IS_INDEX` is 0, the value of this column is NULL.
-* `EPOCH_CONF_VER`: The version number of the Region configuration. The version number increases when a peer is added or removed.
-* `EPOCH_VERSION`: The current version number of the Region. The version number increases when the Region is split or merged.
-* `WRITTEN_BYTES`: The amount of data (bytes) written to the Region.
-* `READ_BYTES`: The amount of data (bytes) that has been read from the Region.
-* `APPROXIMATE_SIZE`: The approximate data size (MB) of the Region.
-* `APPROXIMATE_KEYS`: The approximate number of keys in the Region.
-* `REPLICATIONSTATUS_STATE`: The current replication status of the Region. The status might be `UNKNOWN`, `SIMPLE_MAJORITY`, or `INTEGRITY_OVER_LABEL`.
-* `REPLICATIONSTATUS_STATEID`: The identifier corresponding to `REPLICATIONSTATUS_STATE`.
+-   `REGION_ID` :リージョンの ID。
+-   `START_KEY` :リージョンの開始キーの値。
+-   `END_KEY` :リージョンの終了キーの値。
+-   `TABLE_ID` :リージョンが属するテーブルの ID。
+-   `DB_NAME` : `TABLE_ID`が属するデータベースの名前。
+-   `TABLE_NAME` :リージョンが属するテーブルの名前。
+-   `IS_INDEX` :リージョンデータがインデックスであるかどうか。 0 はインデックスではないことを意味し、1 はインデックスであることを意味します。現在のリージョンにテーブル データとインデックス データの両方が含まれている場合、複数のレコード行が存在し、 `IS_INDEX`はそれぞれ 0 と 1 になります。
+-   `INDEX_ID` :リージョンが属するインデックスの ID。 `IS_INDEX`が 0 の場合、この列の値は NULL になります。
+-   `INDEX_NAME` :リージョンが属するインデックスの名前。 `IS_INDEX`が 0 の場合、この列の値は NULL になります。
+-   `EPOCH_CONF_VER` :リージョン構成のバージョン番号。バージョン番号は、ピアが追加または削除されると増加します。
+-   `EPOCH_VERSION` :リージョンの現在のバージョン番号。バージョン番号は、リージョンが分割または結合されると増加します。
+-   `WRITTEN_BYTES` :リージョンに書き込まれるデータの量 (バイト)。
+-   `READ_BYTES` :リージョンから読み取られたデータの量 (バイト)。
+-   `APPROXIMATE_SIZE` :リージョンのおおよそのデータ サイズ (MB)。
+-   `APPROXIMATE_KEYS` :リージョン内のキーのおおよその数。
+-   `REPLICATIONSTATUS_STATE` :リージョンの現在のレプリケーション ステータス。ステータスは`UNKNOWN` 、 `SIMPLE_MAJORITY` 、または`INTEGRITY_OVER_LABEL`です。
+-   `REPLICATIONSTATUS_STATEID` : `REPLICATIONSTATUS_STATE`に対応する識別子。
 
-Also, you can implement the `top confver`, `top read` and `top write` operations in pd-ctl via the `ORDER BY X LIMIT Y` operation on the `EPOCH_CONF_VER`, `WRITTEN_BYTES` and `READ_BYTES` columns.
+また、 `EPOCH_CONF_VER` 、 `WRITTEN_BYTES`および`READ_BYTES`列に対する`ORDER BY X LIMIT Y`操作を介して、 pd-ctl で`top confver` 、 `top read` 、および`top write`操作を実装することもできます。
 
-You can query the top 3 Regions with the most write data using the following SQL statement:
+次の SQL ステートメントを使用して、書き込みデータが最も多い上位 3 つのリージョンをクエリできます。
 
 ```sql
 SELECT * FROM tikv_region_status ORDER BY written_bytes DESC LIMIT 3;

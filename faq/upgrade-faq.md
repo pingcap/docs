@@ -3,116 +3,100 @@ title: Upgrade and After Upgrade FAQs
 summary: Learn about some FAQs and the solutions during and after upgrading TiDB.
 ---
 
-# Upgrade and After Upgrade FAQs
+# アップグレードおよびアップグレード後のよくある質問 {#upgrade-and-after-upgrade-faqs}
 
-This document introduces some FAQs and their solutions when or after you upgrade TiDB.
+このドキュメントでは、TiDB のアップグレード時またはアップグレード後のいくつかの FAQ とその解決策を紹介します。
 
-## Upgrade FAQs
+## アップグレードに関するよくある質問 {#upgrade-faqs}
 
-This section lists some FAQs and their solutions when you upgrade TiDB.
+このセクションでは、TiDB をアップグレードする際のいくつかの FAQ とその解決策を示します。
 
-### What are the effects of rolling updates?
+### ローリングアップデートの影響は何ですか? {#what-are-the-effects-of-rolling-updates}
 
-When you apply rolling updates to the TiDB services, the running application is affected to varying degrees. Therefore, it is not recommended that you perform a rolling update during business peak hours. You need to configure the minimum cluster topology (TiDB \* 2, PD \* 3, TiKV \* 3). If the Pump or Drainer service is involved in the cluster, it is recommended to stop Drainer before rolling updates. When you upgrade TiDB, Pump is also upgraded.
+TiDB サービスにローリング アップデートを適用すると、実行中のアプリケーションはさまざまな程度の影響を受けます。したがって、ビジネスのピーク時間中にローリング アップデートを実行することはお勧めできません。最小のクラスタトポロジ（TiDB * 2、PD * 3、TiKV * 3）を構成する必要があります。 PumpサービスまたはDrainerサービスがクラスターに関与している場合は、ローリング アップデートの前にDrainer を停止することをお勧めします。 TiDB をアップグレードすると、 Pumpもアップグレードされます。
 
-### Can I upgrade the TiDB cluster during the DDL execution?
+### DDL の実行中に TiDB クラスターをアップグレードできますか? {#can-i-upgrade-the-tidb-cluster-during-the-ddl-execution}
 
-* If the TiDB version before upgrade is earlier than v7.1.0:
+-   アップグレード前の TiDB バージョンが v7.1.0 より前の場合:
 
-    * **DO NOT** upgrade a TiDB cluster when a DDL statement is being executed in the cluster (usually for the time-consuming DDL statements such as `ADD INDEX` and the column type changes). Before the upgrade, it is recommended to use the [`ADMIN SHOW DDL`](/sql-statements/sql-statement-admin-show-ddl.md) command to check whether the TiDB cluster has an ongoing DDL job. If the cluster has a DDL job, to upgrade the cluster, wait until the DDL execution is finished or use the [`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md) command to cancel the DDL job before you upgrade the cluster.
+    -   DDL ステートメントがクラスター内で実行されているときは、TiDB クラスターをアップグレードし**ないでください**(通常は、 `ADD INDEX`や列タイプの変更など、時間のかかる DDL ステートメントの場合)。アップグレードの前に、 [`ADMIN SHOW DDL`](/sql-statements/sql-statement-admin-show-ddl.md)コマンドを使用して、TiDB クラスターに進行中の DDL ジョブがあるかどうかを確認することをお勧めします。クラスターに DDL ジョブがある場合、クラスターをアップグレードするには、DDL の実行が完了するまで待つか、クラスターをアップグレードする前に[`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md)コマンドを使用して DDL ジョブをキャンセルします。
 
-    * During the cluster upgrade, **DO NOT** execute any DDL statement. Otherwise, the issue of undefined behavior might occur.
+    -   クラスターのアップグレード中は、DDL ステートメントを実行し**ないでください**。そうしないと、未定義の動作の問題が発生する可能性があります。
 
-* If the TiDB version before upgrade is v7.1.0 or later:
+-   アップグレード前の TiDB バージョンが v7.1.0 以降の場合:
 
-    * You do not need to follow the restrictions of upgrading from an earlier version to v7.1.0. That is, TiDB can receive user DDL tasks during the upgrade. For details, refer to [TiDB Smooth Upgrade](/smooth-upgrade-tidb.md).
+    -   以前のバージョンから v7.1.0 にアップグレードする場合の制限に従う必要はありません。つまり、TiDB はアップグレード中にユーザーの DDL タスクを受け取ることができます。詳細は[TiDB のスムーズなアップグレード](/smooth-upgrade-tidb.md)を参照してください。
 
-### How to upgrade TiDB using the binary?
+### バイナリを使用して TiDB をアップグレードするにはどうすればよいですか? {#how-to-upgrade-tidb-using-the-binary}
 
-It is not recommended to upgrade TiDB using the binary. Instead, it is recommended to [upgrade TiDB using TiUP](/upgrade-tidb-using-tiup.md) or [upgrade a TiDB cluster on Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/stable/upgrade-a-tidb-cluster), which ensures both version consistency and compatibility.
+バイナリを使用して TiDB をアップグレードすることはお勧めできません。代わりに、バージョンの一貫性と互換性の両方を保証する[TiUPを使用して TiDB をアップグレードする](/upgrade-tidb-using-tiup.md)または[Kubernetes 上の TiDB クラスターをアップグレードする](https://docs.pingcap.com/tidb-in-kubernetes/stable/upgrade-a-tidb-cluster)をお勧めします。
 
-## After upgrade FAQs
+## アップグレード後のよくある質問 {#after-upgrade-faqs}
 
-This section lists some FAQs and their solutions after you upgrade TiDB.
+このセクションでは、TiDB をアップグレードした後のいくつかの FAQ とその解決策をリストします。
 
-### The character set (charset) errors when executing DDL operations
+### DDL 操作実行時の文字セット (charset) エラー {#the-character-set-charset-errors-when-executing-ddl-operations}
 
-In v2.1.0 and earlier versions (including all versions of v2.0), the character set of TiDB is UTF-8 by default. But starting from v2.1.1, the default character set has been changed into UTF8MB4.
+v2.1.0 以前のバージョン (v2.0 のすべてのバージョンを含む) では、TiDB の文字セットはデフォルトで UTF-8 です。ただし、v2.1.1 からは、デフォルトの文字セットが UTF8MB4 に変更されました。
 
-If you explicitly specify the charset of a newly created table as UTF-8 in v2.1.0 or earlier versions, then you might fail to execute DDL operations after upgrading TiDB to v2.1.1.
+v2.1.0 以前のバージョンで新しく作成したテーブルの文字セットを UTF-8 として明示的に指定した場合、TiDB を v2.1.1 にアップグレードした後に DDL 操作の実行に失敗する可能性があります。
 
-To avoid this issue, you need to pay attention to:
+この問題を回避するには、次の点に注意する必要があります。
 
-- Before v2.1.3, TiDB does not support modifying the charset of the column. Therefore, when you execute DDL operations, you need to make sure that the charset of the new column is consistent with that of the original column.
+-   v2.1.3 より前では、TiDB は列の文字セットの変更をサポートしていません。したがって、DDL 操作を実行するときは、新しい列の文字セットが元の列の文字セットと一致していることを確認する必要があります。
 
-- Before v2.1.3, even if the charset of the column is different from that of the table, `show create table` does not show the charset of the column. But as shown in the following example, you can view it by obtaining the metadata of the table through the HTTP API.
+-   v2.1.3 より前では、列の文字セットがテーブルの文字セットと異なっていても、 `show create table`は列の文字セットを示しません。ただし、次の例に示すように、HTTP API を通じてテーブルのメタデータを取得することで表示できます。
 
-#### `unsupported modify column charset utf8mb4 not match origin utf8`
+#### <code>unsupported modify column charset utf8mb4 not match origin utf8</code> {#code-unsupported-modify-column-charset-utf8mb4-not-match-origin-utf8-code}
 
-- Before upgrading, the following operations are executed in v2.1.0 and earlier versions.
-
-    {{< copyable "sql" >}}
+-   v2.1.0以前のバージョンでは、アップグレード前に以下の操作が実行されます。
 
     ```sql
     create table t(a varchar(10)) charset=utf8;
     ```
 
-    ```
-    Query OK, 0 rows affected
-    Time: 0.106s
-    ```
-
-    {{< copyable "sql" >}}
+        Query OK, 0 rows affected
+        Time: 0.106s
 
     ```sql
     show create table t;
     ```
 
-    ```
-    +-------+-------------------------------------------------------+
-    | Table | Create Table                                          |
-    +-------+-------------------------------------------------------+
-    | t     | CREATE TABLE `t` (                                    |
-    |       |   `a` varchar(10) DEFAULT NULL                        |
-    |       | ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin |
-    +-------+-------------------------------------------------------+
-    1 row in set
-    Time: 0.006s
-    ```
+        +-------+-------------------------------------------------------+
+        | Table | Create Table                                          |
+        +-------+-------------------------------------------------------+
+        | t     | CREATE TABLE `t` (                                    |
+        |       |   `a` varchar(10) DEFAULT NULL                        |
+        |       | ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin |
+        +-------+-------------------------------------------------------+
+        1 row in set
+        Time: 0.006s
 
-- After upgrading, the following error is reported in v2.1.1 and v2.1.2 but there is no such error in v2.1.3 and the later versions.
-
-    {{< copyable "sql" >}}
+-   アップグレード後、v2.1.1 および v2.1.2 では次のエラーが報告されますが、v2.1.3 以降のバージョンではそのようなエラーは発生しません。
 
     ```sql
     alter table t change column a a varchar(20);
     ```
 
-    ```
-    ERROR 1105 (HY000): unsupported modify column charset utf8mb4 not match origin utf8
-    ```
+        ERROR 1105 (HY000): unsupported modify column charset utf8mb4 not match origin utf8
 
-Solution:
+解決：
 
-You can explicitly specify the column charset as the same with the original charset.
-
-{{< copyable "sql" >}}
+列の文字セットを元の文字セットと同じものとして明示的に指定できます。
 
 ```sql
 alter table t change column a a varchar(22) character set utf8;
 ```
 
-- According to Point #1, if you do not specify the column charset, UTF8MB4 is used by default, so you need to specify the column charset to make it consistent with the original one.
+-   ポイント #1 によると、列の文字セットを指定しない場合、デフォルトで UTF8MB4 が使用されるため、元の文字セットと一致させるために列の文字セットを指定する必要があります。
 
-- According to Point #2, you can obtain the metadata of the table through the HTTP API, and find the column charset by searching the column name and the keyword "Charset".
-
-    {{< copyable "shell-regular" >}}
+-   ポイント #2 によると、HTTP API を通じてテーブルのメタデータを取得し、列名とキーワード「Charset」を検索することで列の文字セットを見つけることができます。
 
     ```sh
     curl "http://$IP:10080/schema/test/t" | python -m json.tool
     ```
 
-    A python tool is used here to format JSON, which is not required and only for the convenience to add the comments.
+    ここでは Python ツールを使用して JSON をフォーマットしていますが、これは必須ではなく、コメントを追加するためだけに使用されています。
 
     ```json
     {
@@ -146,208 +130,152 @@ alter table t change column a a varchar(22) character set utf8;
     }
     ```
 
-#### `unsupported modify charset from utf8mb4 to utf8`
+#### <code>unsupported modify charset from utf8mb4 to utf8</code> {#code-unsupported-modify-charset-from-utf8mb4-to-utf8-code}
 
-- Before upgrading, the following operations are executed in v2.1.1 and v2.1.2.
-
-    {{< copyable "sql" >}}
+-   アップグレード前に、v2.1.1 および v2.1.2 では次の操作が実行されます。
 
     ```sql
     create table t(a varchar(10)) charset=utf8;
     ```
 
-    ```
-    Query OK, 0 rows affected
-    Time: 0.109s
-    ```
-
-    {{< copyable "sql" >}}
+        Query OK, 0 rows affected
+        Time: 0.109s
 
     ```sql
     show create table t;
     ```
 
-    ```
-    +-------+-------------------------------------------------------+
-    | Table | Create Table                                          |
-    +-------+-------------------------------------------------------+
-    | t     | CREATE TABLE `t` (                                    |
-    |       |   `a` varchar(10) DEFAULT NULL                        |
-    |       | ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin |
-    +-------+-------------------------------------------------------+
-    ```
+        +-------+-------------------------------------------------------+
+        | Table | Create Table                                          |
+        +-------+-------------------------------------------------------+
+        | t     | CREATE TABLE `t` (                                    |
+        |       |   `a` varchar(10) DEFAULT NULL                        |
+        |       | ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin |
+        +-------+-------------------------------------------------------+
 
-    In the above example, `show create table` only shows the charset of the table, but the charset of the column is actually UTF8MB4, which can be confirmed by obtaining the schema through the HTTP API. However, when a new table is created, the charset of the column should stay consistent with that of the table. This bug has been fixed in v2.1.3.
+    上記の例では、 `show create table`テーブルの文字セットのみを示していますが、実際には列の文字セットは UTF8MB4 であり、HTTP API を通じてスキーマを取得することで確認できます。ただし、新しいテーブルを作成する場合、列の文字セットはテーブルの文字セットと一貫性を保つ必要があります。このバグは v2.1.3 で修正されました。
 
-- After upgrading, the following operations are executed in v2.1.3 and the later versions.
-
-    {{< copyable "sql" >}}
+-   バージョンアップ後、v2.1.3 以降では以下の操作が実行されます。
 
     ```sql
     show create table t;
     ```
 
-    ```
-    +-------+--------------------------------------------------------------------+
-    | Table | Create Table                                                       |
-    +-------+--------------------------------------------------------------------+
-    | t     | CREATE TABLE `t` (                                                 |
-    |       |   `a` varchar(10) CHARSET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL |
-    |       | ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin              |
-    +-------+--------------------------------------------------------------------+
-    1 row in set
-    Time: 0.007s
-    ```
-
-    {{< copyable "sql" >}}
+        +-------+--------------------------------------------------------------------+
+        | Table | Create Table                                                       |
+        +-------+--------------------------------------------------------------------+
+        | t     | CREATE TABLE `t` (                                                 |
+        |       |   `a` varchar(10) CHARSET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL |
+        |       | ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin              |
+        +-------+--------------------------------------------------------------------+
+        1 row in set
+        Time: 0.007s
 
     ```sql
     alter table t change column a a varchar(20);
     ```
 
-    ```
-    ERROR 1105 (HY000): unsupported modify charset from utf8mb4 to utf8
-    ```
+        ERROR 1105 (HY000): unsupported modify charset from utf8mb4 to utf8
 
-Solution:
+解決：
 
-- Starting from v2.1.3, TiDB supports modifying the charsets of the column and the table, so it is recommended to modify the table charset into UTF8MB4.
-
-    {{< copyable "sql" >}}
+-   v2.1.3 以降、TiDB は列とテーブルの文字セットの変更をサポートするため、テーブルの文字セットを UTF8MB4 に変更することをお勧めします。
 
     ```sql
     alter table t convert to character set utf8mb4;
     ```
 
-- You can also specify the column charset as done in Issue #1, making it stay consistent with the original column charset (UTF8MB4).
-
-    {{< copyable "sql" >}}
+-   問題 #1 で行ったように列の文字セットを指定して、元の列の文字セット (UTF8MB4) との一貫性を保つこともできます。
 
     ```sql
     alter table t change column a a varchar(20) character set utf8mb4;
     ```
 
-#### `ERROR 1366 (HY000): incorrect utf8 value f09f8c80(🌀) for column a`
+#### <code>ERROR 1366 (HY000): incorrect utf8 value f09f8c80(🌀) for column a</code> {#code-error-1366-hy000-incorrect-utf8-value-f09f8c80-for-column-a-code}
 
-In TiDB v2.1.1 and earlier versions, if the charset is UTF-8, there is no UTF-8 Unicode encoding check on the inserted 4-byte data. But in v2.1.2 and the later versions, this check is added.
+TiDB v2.1.1 以前のバージョンでは、文字セットが UTF-8 の場合、挿入された 4 バイト データに対する UTF-8 Unicode エンコード チェックは行われません。ただし、v2.1.2以降ではこのチェックが追加されています。
 
-- Before upgrading, the following operations are executed in v2.1.1 and earlier versions.
-
-    {{< copyable "sql" >}}
+-   v2.1.1以前のバージョンでは、アップグレード前に以下の操作が実行されます。
 
     ```sql
     create table t(a varchar(100) charset utf8);
     ```
 
-    ```
-    Query OK, 0 rows affected
-    ```
-
-    {{< copyable "sql" >}}
+        Query OK, 0 rows affected
 
     ```sql
     insert t values (unhex('f09f8c80'));
     ```
 
-    ```
-    Query OK, 1 row affected
-    ```
+        Query OK, 1 row affected
 
-- After upgrading, the following error is reported in v2.1.2 and the later versions.
-
-    {{< copyable "sql" >}}
+-   アップグレード後、v2.1.2 以降のバージョンでは次のエラーが報告されます。
 
     ```sql
     insert t values (unhex('f09f8c80'));
     ```
 
-    ```
-    ERROR 1366 (HY000): incorrect utf8 value f09f8c80(🌀) for column a
-    ```
+        ERROR 1366 (HY000): incorrect utf8 value f09f8c80(🌀) for column a
 
-Solution:
+解決：
 
-- In v2.1.2: this version does not support modifying the column charset, so you have to skip the UTF-8 check.
-
-    {{< copyable "sql" >}}
+-   v2.1.2: このバージョンは列の文字セットの変更をサポートしていないため、UTF-8 チェックをスキップする必要があります。
 
     ```sql
     set @@session.tidb_skip_utf8_check=1;
     ```
 
-    ```
-    Query OK, 0 rows affected
-    ```
-
-    {{< copyable "sql" >}}
+        Query OK, 0 rows affected
 
     ```sql
     insert t values (unhex('f09f8c80'));
     ```
 
-    ```
-    Query OK, 1 row affected
-    ```
+        Query OK, 1 row affected
 
-- In v2.1.3 and the later versions: it is recommended to modify the column charset into UTF8MB4. Or you can set `tidb_skip_utf8_check` to skip the UTF-8 check. But if you skip the check, you might fail to replicate data from TiDB to MySQL because MySQL executes the check.
-
-    {{< copyable "sql" >}}
+-   v2.1.3 以降のバージョン: 列の文字セットを UTF8MB4 に変更することをお勧めします。または、 `tidb_skip_utf8_check`を設定して UTF-8 チェックをスキップすることもできます。ただし、チェックをスキップすると、MySQL がチェックを実行するため、TiDB から MySQL へのデータの複製に失敗する可能性があります。
 
     ```sql
     alter table t change column a a varchar(100) character set utf8mb4;
     ```
 
-    ```
-    Query OK, 0 rows affected
-    ```
-
-    {{< copyable "sql" >}}
+        Query OK, 0 rows affected
 
     ```sql
     insert t values (unhex('f09f8c80'));
     ```
 
-    ```
-    Query OK, 1 row affected
-    ```
+        Query OK, 1 row affected
 
-    Specifically, you can use the variable `tidb_skip_utf8_check` to skip the legal UTF-8 and UTF8MB4 check on the data. But if you skip the check, you might fail to replicate the data from TiDB to MySQL because MySQL executes the check.
+    具体的には、変数`tidb_skip_utf8_check`を使用して、データの正当な UTF-8 および UTF8MB4 チェックをスキップできます。ただし、チェックをスキップすると、MySQL がチェックを実行するため、TiDB から MySQL へのデータの複製に失敗する可能性があります。
 
-    If you only want to skip the UTF-8 check, you can set `tidb_check_mb4_value_in_utf8`. This variable is added to the `config.toml` file in v2.1.3, and you can modify `check-mb4-value-in-utf8` in the configuration file and then restart the cluster to enable it.
+    UTF-8 チェックのみをスキップしたい場合は、 `tidb_check_mb4_value_in_utf8`を設定できます。この変数は v2.1.3 の`config.toml`ファイルに追加されており、構成ファイル内の`check-mb4-value-in-utf8`変更してクラスターを再起動して有効にすることができます。
 
-    Starting from v2.1.5, you can set `tidb_check_mb4_value_in_utf8` through the HTTP API and the session variable:
+    v2.1.5 以降、HTTP API およびセッション変数を通じて`tidb_check_mb4_value_in_utf8`を設定できます。
 
-    * HTTP API（the HTTP API can be enabled only on a single server）
+    -   HTTP API（HTTP APIは単一サーバーでのみ有効にできます）
 
-        * To enable HTTP API:
-
-            {{< copyable "shell-regular" >}}
+        -   HTTP API を有効にするには:
 
             ```sh
             curl -X POST -d "check_mb4_value_in_utf8=1" http://{TiDBIP}:10080/settings
             ```
 
-        * To disable HTTP API:
-
-            {{< copyable "shell-regular" >}}
+        -   HTTP API を無効にするには:
 
             ```sh
             curl -X POST -d "check_mb4_value_in_utf8=0" http://{TiDBIP}:10080/settings
             ```
 
-    * Session variable
+    -   セッション変数
 
-        * To enable session variable:
-
-            {{< copyable "sql" >}}
+        -   セッション変数を有効にするには:
 
             ```sql
             set @@session.tidb_check_mb4_value_in_utf8 = 1;
             ```
 
-        * To disable session variable:
-
-            {{< copyable "sql" >}}
+        -   セッション変数を無効にするには:
 
             ```sql
             set @@session.tidb_check_mb4_value_in_utf8 = 0;

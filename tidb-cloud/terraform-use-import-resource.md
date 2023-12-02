@@ -3,299 +3,279 @@ title: Use Import Resource
 summary: Learn how to manage the import task using the import resource.
 ---
 
-# Use Import Resource
+# インポートリソースを使用する {#use-import-resource}
 
-You can learn how to import data to a TiDB Cloud cluster with the `tidbcloud_import` resource in this document.
+このドキュメントの`tidbcloud_import`リソースを使用してTiDB Cloudクラスターにデータをインポートする方法を学習できます。
 
-The features of the `tidbcloud_import` resource include the following:
+`tidbcloud_import`リソースの特徴は次のとおりです。
 
-- Create import tasks for TiDB Serverless and TiDB Dedicated clusters.
-- Import data either from local disks or from Amazon S3 buckets.
-- Cancel ongoing import tasks.
+-   TiDB サーバーレス クラスターおよび TiDB 専用クラスターのインポート タスクを作成します。
+-   ローカル ディスクまたは Amazon S3 バケットからデータをインポートします。
+-   進行中のインポートタスクをキャンセルします。
 
-## Prerequisites
+## 前提条件 {#prerequisites}
 
-- [Get TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md).
-- [Create a TiDB Serverless cluster](/tidb-cloud/create-tidb-cluster-serverless.md) or [Create a TiDB Dedicated cluster](/tidb-cloud/create-tidb-cluster.md).
+-   [TiDB Cloud Terraform プロバイダーを入手する](/tidb-cloud/terraform-get-tidbcloud-provider.md) 。
+-   [TiDB サーバーレスクラスターを作成する](/tidb-cloud/create-tidb-cluster-serverless.md)または[TiDB 専用クラスターの作成](/tidb-cloud/create-tidb-cluster.md) 。
 
-## Create and run an import task
+## インポートタスクを作成して実行する {#create-and-run-an-import-task}
 
-You can manage either a local import task or an Amazon S3 import task using the import resource.
+インポート リソースを使用して、ローカル インポート タスクまたは Amazon S3 インポート タスクのいずれかを管理できます。
 
-### Create and run a local import task
+### ローカルインポートタスクを作成して実行する {#create-and-run-a-local-import-task}
 
-> **Note:**
+> **注記：**
 >
-> Importing local files is supported only for TiDB Serverless clusters, not for TiDB Dedicated clusters.
+> ローカル ファイルのインポートは、TiDB サーバーレス クラスターでのみサポートされており、TiDB 専用クラスターではサポートされていません。
 
-1. Create a CSV file for import. For example:
+1.  インポート用のCSVファイルを作成します。例えば：
 
-   ```
-   id;name;age
-   1;Alice;20
-   2;Bob;30
-   ```
+        id;name;age
+        1;Alice;20
+        2;Bob;30
 
-2. Create an `import` directory, and then create a `main.tf` inside it. For example:
+2.  `import`ディレクトリを作成し、その中に`main.tf`を作成します。例えば：
 
-    ```
-    terraform {
-     required_providers {
-       tidbcloud = {
-         source = "tidbcloud/tidbcloud"
-       }
-     }
-   }
+        terraform {
+         required_providers {
+           tidbcloud = {
+             source = "tidbcloud/tidbcloud"
+           }
+         }
+        }
 
-    provider "tidbcloud" {
-      public_key = "your_public_key"
-      private_key = "your_private_key"
-    }
+        provider "tidbcloud" {
+          public_key = "your_public_key"
+          private_key = "your_private_key"
+        }
 
-    resource "tidbcloud_import" "example_local" {
-      project_id  = "your_project_id"
-      cluster_id  = "your_cluster_id"
-      type        = "LOCAL"
-      data_format = "CSV"
-      csv_format = {
-        separator = ";"
-      }
-      target_table = {
-        database = "test"
-        table  = "import_test"
-      }
-      file_name = "your_csv_path"
-    }
-    ```
+        resource "tidbcloud_import" "example_local" {
+          project_id  = "your_project_id"
+          cluster_id  = "your_cluster_id"
+          type        = "LOCAL"
+          data_format = "CSV"
+          csv_format = {
+            separator = ";"
+          }
+          target_table = {
+            database = "test"
+            table  = "import_test"
+          }
+          file_name = "your_csv_path"
+        }
 
-   Replace resource values (such as project ID, cluster ID, and CSV path) in the file with your own. And you can find details of `csv_format` on the [configuration page](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/import#nested-schema-for-csv_format).
+    ファイル内のリソース値 (プロジェクト ID、クラスター ID、CSV パスなど) を独自の値に置き換えます。そしてその[設定ページ](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/import#nested-schema-for-csv_format) `csv_format`の詳細。
 
-3. Run the `terraform apply` command to create an import task, and then type `yes` to confirm the creation and start the import:
+3.  `terraform apply`コマンドを実行してインポート タスクを作成し、 `yes`を入力して作成を確認し、インポートを開始します。
 
-   ```
-   $ terraform apply
-   ...
-   Plan: 1 to add, 0 to change, 0 to destroy.
+        $ terraform apply
+        ...
+        Plan: 1 to add, 0 to change, 0 to destroy.
 
-   Do you want to perform these actions?
-   Terraform will perform the actions described above.
-   Only 'yes' will be accepted to approve.
+        Do you want to perform these actions?
+        Terraform will perform the actions described above.
+        Only 'yes' will be accepted to approve.
 
-   Enter a value: yes
+        Enter a value: yes
 
-   tidbcloud_import.example_local: Creating...
-   tidbcloud_import.example_local: Creation complete after 6s [id=781074]
-   ```
+        tidbcloud_import.example_local: Creating...
+        tidbcloud_import.example_local: Creation complete after 6s [id=781074]
 
-4. Use `terraform state show tidbcloud_import.${resource-name}` to check the status of the import task:
+4.  インポート タスクのステータスを確認するには、 `terraform state show tidbcloud_import.${resource-name}`を使用します。
 
-   ```
-   $ terraform state show tidbcloud_import.example_local
-   # tidbcloud_import.example_local:
-   resource "tidbcloud_import" "example_local" {
-       all_completed_tables          = [
-           {
-               message    = ""
-               result     = "SUCCESS"
-               table_name = "`test`.`import_test`"
-           },
-       ]
-       cluster_id                    = "1379661944641274168"
-       completed_percent             = 100
-       completed_tables              = 1
-       created_at                    = "2023-02-06T05:39:46.000Z"
-       csv_format                    = {
-           separator = ";"
-       }
-       data_format                   = "CSV"
-       elapsed_time_seconds          = 48
-       file_name                     = "./t.csv"
-       id                            = "781074"
-       new_file_name                 = "2023-02-06T05:39:42Z-t.csv"
-       pending_tables                = 0
-       post_import_completed_percent = 100
-       processed_source_data_size    = "31"
-       project_id                    = "1372813089191151295"
-       status                        = "IMPORTING"
-       target_table                  = {
-           database = "test"
-           table  = "import_test"
-       }
-       total_files                   = 0
-       total_size                    = "31"
-       total_tables_count            = 1
-       type                          = "LOCAL"
-   }
-   ```
+        $ terraform state show tidbcloud_import.example_local
+        # tidbcloud_import.example_local:
+        resource "tidbcloud_import" "example_local" {
+            all_completed_tables          = [
+                {
+                    message    = ""
+                    result     = "SUCCESS"
+                    table_name = "`test`.`import_test`"
+                },
+            ]
+            cluster_id                    = "1379661944641274168"
+            completed_percent             = 100
+            completed_tables              = 1
+            created_at                    = "2023-02-06T05:39:46.000Z"
+            csv_format                    = {
+                separator = ";"
+            }
+            data_format                   = "CSV"
+            elapsed_time_seconds          = 48
+            file_name                     = "./t.csv"
+            id                            = "781074"
+            new_file_name                 = "2023-02-06T05:39:42Z-t.csv"
+            pending_tables                = 0
+            post_import_completed_percent = 100
+            processed_source_data_size    = "31"
+            project_id                    = "1372813089191151295"
+            status                        = "IMPORTING"
+            target_table                  = {
+                database = "test"
+                table  = "import_test"
+            }
+            total_files                   = 0
+            total_size                    = "31"
+            total_tables_count            = 1
+            type                          = "LOCAL"
+        }
 
-5. Use `terraform refresh` to update the status after several minutes:
+5.  数分後にステータスを更新するには、 `terraform refresh`を使用します。
 
-   ```
-   $ terraform refresh && terraform state show tidbcloud_import.example_local
-   tidbcloud_import.example_local: Refreshing state... [id=781074]
-   # tidbcloud_import.example_local:
-   resource "tidbcloud_import" "example_local" {
-       all_completed_tables          = [
-           {
-               message    = ""
-               result     = "SUCCESS"
-               table_name = "`test`.`import_test`"
-           },
-       ]
-       cluster_id                    = "1379661944641274168"
-       completed_percent             = 100
-       completed_tables              = 1
-       created_at                    = "2023-02-06T05:39:46.000Z"
-       csv_format                    = {
-           separator = ";"
-       }
-       data_format                   = "CSV"
-       elapsed_time_seconds          = 49
-       file_name                     = "./t.csv"
-       id                            = "781074"
-       new_file_name                 = "2023-02-06T05:39:42Z-t.csv"
-       pending_tables                = 0
-       post_import_completed_percent = 100
-       processed_source_data_size    = "31"
-       project_id                    = "1372813089191151295"
-       status                        = "COMPLETED"
-       target_table                  = {
-           database = "test"
-           table  = "import_test"
-       }
-       total_files                   = 0
-       total_size                    = "31"
-       total_tables_count            = 1
-       type                          = "LOCAL"
-   }
-   ```
+        $ terraform refresh && terraform state show tidbcloud_import.example_local
+        tidbcloud_import.example_local: Refreshing state... [id=781074]
+        # tidbcloud_import.example_local:
+        resource "tidbcloud_import" "example_local" {
+            all_completed_tables          = [
+                {
+                    message    = ""
+                    result     = "SUCCESS"
+                    table_name = "`test`.`import_test`"
+                },
+            ]
+            cluster_id                    = "1379661944641274168"
+            completed_percent             = 100
+            completed_tables              = 1
+            created_at                    = "2023-02-06T05:39:46.000Z"
+            csv_format                    = {
+                separator = ";"
+            }
+            data_format                   = "CSV"
+            elapsed_time_seconds          = 49
+            file_name                     = "./t.csv"
+            id                            = "781074"
+            new_file_name                 = "2023-02-06T05:39:42Z-t.csv"
+            pending_tables                = 0
+            post_import_completed_percent = 100
+            processed_source_data_size    = "31"
+            project_id                    = "1372813089191151295"
+            status                        = "COMPLETED"
+            target_table                  = {
+                database = "test"
+                table  = "import_test"
+            }
+            total_files                   = 0
+            total_size                    = "31"
+            total_tables_count            = 1
+            type                          = "LOCAL"
+        }
 
-   When the status turns to `COMPLETED`, it indicates that the import task is finished.
+    ステータスが`COMPLETED`に変わると、インポート タスクが完了したことを示します。
 
-6. Check the imported data with MySQL CLI:
+6.  MySQL CLI でインポートされたデータを確認します。
 
-   ```
-   mysql> SELECT * FROM test.import_test;
-   +------+-------+------+
-   | id   | name  | age  |
-   +------+-------+------+
-   |    1 | Alice |   20 |
-   |    2 | Bob   |   30 |
-   +------+-------+------+
-   2 rows in set (0.24 sec)
-   ```
+        mysql> SELECT * FROM test.import_test;
+        +------+-------+------+
+        | id   | name  | age  |
+        +------+-------+------+
+        |    1 | Alice |   20 |
+        |    2 | Bob   |   30 |
+        +------+-------+------+
+        2 rows in set (0.24 sec)
 
-### Create and run an Amazon S3 import task
+### Amazon S3 インポート タスクを作成して実行する {#create-and-run-an-amazon-s3-import-task}
 
-> **Note:**
+> **注記：**
 >
-> To allow TiDB Cloud to access your files in the Amazon S3 bucket, you need to [configure Amazon S3 access](/tidb-cloud/config-s3-and-gcs-access.md#configure-amazon-s3-access) first.
+> TiDB Cloud がAmazon S3 バケット内のファイルにアクセスできるようにするには、まず[Amazon S3 アクセスを設定する](/tidb-cloud/config-s3-and-gcs-access.md#configure-amazon-s3-access)を行う必要があります。
 
-1. Create an `import` directory, and then create a `main.tf` inside it. For example:
+1.  `import`ディレクトリを作成し、その中に`main.tf`を作成します。例えば：
 
-   ```
-   terraform {
-     required_providers {
-       tidbcloud = {
-         source = "tidbcloud/tidbcloud"
-       }
-     }
-   }
+        terraform {
+          required_providers {
+            tidbcloud = {
+              source = "tidbcloud/tidbcloud"
+            }
+          }
+        }
 
-   provider "tidbcloud" {
-     public_key  = "your_public_key"
-     private_key = "your_private_key"
-   }
+        provider "tidbcloud" {
+          public_key  = "your_public_key"
+          private_key = "your_private_key"
+        }
 
-   resource "tidbcloud_import" "example_s3_csv" {
-     project_id   = "your_project_id"
-     cluster_id   = "your_cluster_id"
-     type         = "S3"
-     data_format  = "CSV"
-     aws_role_arn = "your_arn"
-     source_url   = "your_url"
-   }
+        resource "tidbcloud_import" "example_s3_csv" {
+          project_id   = "your_project_id"
+          cluster_id   = "your_cluster_id"
+          type         = "S3"
+          data_format  = "CSV"
+          aws_role_arn = "your_arn"
+          source_url   = "your_url"
+        }
 
-   resource "tidbcloud_import" "example_s3_parquet" {
-     project_id   = "your_project_id"
-     cluster_id   = "your_cluster_id"
-     type         = "S3"
-     data_format  = "Parquet"
-     aws_role_arn = "your_arn"
-     source_url   = "your_url"
-   }
-   ```
+        resource "tidbcloud_import" "example_s3_parquet" {
+          project_id   = "your_project_id"
+          cluster_id   = "your_cluster_id"
+          type         = "S3"
+          data_format  = "Parquet"
+          aws_role_arn = "your_arn"
+          source_url   = "your_url"
+        }
 
-2. Run the `terraform apply` command to create an import task, and then type `yes` to confirm the creation and start the import:
+2.  `terraform apply`コマンドを実行してインポート タスクを作成し、 `yes`を入力して作成を確認し、インポートを開始します。
 
-   ```
-   $ terraform apply
-   ...
-   Plan: 2 to add, 0 to change, 0 to destroy.
+        $ terraform apply
+        ...
+        Plan: 2 to add, 0 to change, 0 to destroy.
 
-   Do you want to perform these actions?
-   Terraform will perform the actions described above.
-   Only 'yes' will be accepted to approve.
+        Do you want to perform these actions?
+        Terraform will perform the actions described above.
+        Only 'yes' will be accepted to approve.
 
-   Enter a value: yes
+        Enter a value: yes
 
-   tidbcloud_import.example_s3_csv: Creating...
-   tidbcloud_import.example_s3_csv: Creation complete after 3s [id=781075]
-   tidbcloud_import.example_s3_parquet: Creating...
-   tidbcloud_import.example_s3_parquet: Creation complete after 4s [id=781076]
-   ```
+        tidbcloud_import.example_s3_csv: Creating...
+        tidbcloud_import.example_s3_csv: Creation complete after 3s [id=781075]
+        tidbcloud_import.example_s3_parquet: Creating...
+        tidbcloud_import.example_s3_parquet: Creation complete after 4s [id=781076]
 
-3. Use `terraform refresh` and `terraform state show tidbcloud_import.${resource-name}` to update and check the status of the import task.
+3.  `terraform refresh`と`terraform state show tidbcloud_import.${resource-name}`を使用して、インポート タスクのステータスを更新および確認します。
 
-## Update an import task
+## インポートタスクを更新する {#update-an-import-task}
 
-Import tasks cannot be updated.
+インポートタスクは更新できません。
 
-## Delete an import task
+## インポートタスクを削除する {#delete-an-import-task}
 
-For Terraform, deleting an import task means canceling the corresponding import resource.
+Terraform の場合、インポート タスクの削除は、対応するインポート リソースをキャンセルすることを意味します。
 
-You cannot cancel a `COMPLETED` import task. Otherwise, you will get a `Delete Error` as in the following example:
+`COMPLETED`インポート タスクはキャンセルできません。それ以外の場合は、次の例のように`Delete Error`が返されます。
 
-```
-$ terraform destroy
-...
-Plan: 0 to add, 0 to change, 1 to destroy.
+    $ terraform destroy
+    ...
+    Plan: 0 to add, 0 to change, 1 to destroy.
 
-Do you really want to destroy all resources?
-  Terraform will destroy all your managed infrastructure, as shown above.
-  There is no undo. Only 'yes' will be accepted to confirm.
+    Do you really want to destroy all resources?
+      Terraform will destroy all your managed infrastructure, as shown above.
+      There is no undo. Only 'yes' will be accepted to confirm.
 
-  Enter a value: yes
+      Enter a value: yes
 
-tidbcloud_import.example_local: Destroying... [id=781074]
-╷
-│ Error: Delete Error
-│
-│ Unable to call CancelImport, got error: [DELETE /api/internal/projects/{project_id}/clusters/{cluster_id}/imports/{id}][500] CancelImport default  &{Code:59900104 Details:[] Message:failed to cancel
-│ import}
-╵
-```
+    tidbcloud_import.example_local: Destroying... [id=781074]
+    ╷
+    │ Error: Delete Error
+    │
+    │ Unable to call CancelImport, got error: [DELETE /api/internal/projects/{project_id}/clusters/{cluster_id}/imports/{id}][500] CancelImport default  &{Code:59900104 Details:[] Message:failed to cancel
+    │ import}
+    ╵
 
-You can cancel an import task whose status is `IMPORTING`. For example:
+ステータスが`IMPORTING`のインポートタスクはキャンセルできます。例えば：
 
-```
-$ terraform destroy
-...
-Plan: 0 to add, 0 to change, 1 to destroy.
+    $ terraform destroy
+    ...
+    Plan: 0 to add, 0 to change, 1 to destroy.
 
-Do you really want to destroy all resources?
-  Terraform will destroy all your managed infrastructure, as shown above.
-  There is no undo. Only 'yes' will be accepted to confirm.
+    Do you really want to destroy all resources?
+      Terraform will destroy all your managed infrastructure, as shown above.
+      There is no undo. Only 'yes' will be accepted to confirm.
 
-  Enter a value: yes
+      Enter a value: yes
 
-tidbcloud_import.example_local: Destroying... [id=781074]
-tidbcloud_import.example_local: Destruction complete after 0s
+    tidbcloud_import.example_local: Destroying... [id=781074]
+    tidbcloud_import.example_local: Destruction complete after 0s
 
-Destroy complete! Resources: 1 destroyed.
-```
+    Destroy complete! Resources: 1 destroyed.
 
-## Configurations
+## 構成 {#configurations}
 
-See [configuration documentation](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/import) to get all the available configurations for the import resource.
+インポート リソースで使用可能なすべての構成を取得するには、 [設定ドキュメント](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/import)を参照してください。

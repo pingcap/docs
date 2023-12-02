@@ -3,41 +3,41 @@ title: ticloud config edit
 summary: The reference of `ticloud config edit`.
 ---
 
-# ticloud config edit
+# ticloud設定編集 {#ticloud-config-edit}
 
-If you are using macOS or Linux, you can open the profile configuration file with your default text editor:
+macOS または Linux を使用している場合は、デフォルトのテキスト エディタでプロファイル構成ファイルを開くことができます。
 
 ```shell
 ticloud config edit [flags]
 ```
 
-If you are using Windows, after you execute the preceding command, the path of the profile configuration file will be printed instead.
+Windows を使用している場合は、前述のコマンドを実行すると、代わりにプロファイル構成ファイルのパスが表示されます。
 
-> **Note:**
+> **注記：**
 >
-> To avoid format errors and execution failures, it is NOT recommended to manually edit the configuration file. Instead, you can use [`ticloud config create`](/tidb-cloud/ticloud-config-create.md), [`ticloud config delete`](/tidb-cloud/ticloud-config-delete.md), or [`ticloud config set`](/tidb-cloud/ticloud-config-set.md) to modify the confiturations.
+> フォーマット エラーや実行エラーを避けるために、構成ファイルを手動で編集することはお勧めしません。代わりに、 [`ticloud config create`](/tidb-cloud/ticloud-config-create.md) 、 [`ticloud config delete`](/tidb-cloud/ticloud-config-delete.md) 、または[`ticloud config set`](/tidb-cloud/ticloud-config-set.md)を使用して構成を変更できます。
 
-## Examples
+## 例 {#examples}
 
-Edit the profile configuration file:
+プロファイル構成ファイルを編集します。
 
 ```shell
 ticloud config edit
 ```
 
-## Flags
+## フラグ {#flags}
 
-| Flag       | Description              |
-|------------|--------------------------|
- | -h, --help | Help information for this command |
+| フラグ        | 説明           |
+| ---------- | ------------ |
+| -h, --help | このコマンドのヘルプ情報 |
 
-## Inherited flags
+## 継承されたフラグ {#inherited-flags}
 
-| Flag                 | Description                                                                               | Required | Note                                                                                                                    |
-|----------------------|-------------------------------------------------------------------------------------------|----------|--------------------------------------------------------------------------------------------------------------------------|
-| --no-color           | Disables color in output.                                                                  | No       | Only works in non-interactive mode. In interactive mode, disabling color might not work with some UI components. |
-| -P, --profile string | Specifies the active [user profile](/tidb-cloud/cli-reference.md#user-profile) used in this command. | No       | Works in both non-interactive and interactive modes.                                                                      |
+| フラグ            | 説明                                                                               | 必須  | 注記                                                                 |
+| -------------- | -------------------------------------------------------------------------------- | --- | ------------------------------------------------------------------ |
+| --色なし          | 出力のカラーを無効にします。                                                                   | いいえ | 非対話型モードでのみ動作します。インタラクティブ モードでは、一部の UI コンポーネントで色の無効化が機能しない可能性があります。 |
+| -P、--プロファイル文字列 | このコマンドで使用されるアクティブな[ユーザープロフィール](/tidb-cloud/cli-reference.md#user-profile)を指定します。 | いいえ | 非対話型モードと対話型モードの両方で動作します。                                           |
 
-## Feedback
+## フィードバック {#feedback}
 
-If you have any questions or suggestions on the TiDB Cloud CLI, feel free to create an [issue](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose). Also, we welcome any contributions.
+TiDB Cloud CLI に関して質問や提案がある場合は、お気軽に[問題](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose)を作成してください。また、貢献も歓迎します。

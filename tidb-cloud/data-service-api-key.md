@@ -3,75 +3,78 @@ title: API Keys in Data Service
 summary: Learn how to create, edit, and delete an API key for a Data App.
 ---
 
-# API Keys in Data Service
+# データサービスの API キー {#api-keys-in-data-service}
 
-The TiDB Cloud Data API supports both [Basic Authentication](https://en.wikipedia.org/wiki/Basic_access_authentication) and [Digest Authentication](https://en.wikipedia.org/wiki/Digest_access_authentication).
+TiDB Cloud Data API は[基本認証](https://en.wikipedia.org/wiki/Basic_access_authentication)と[ダイジェスト認証](https://en.wikipedia.org/wiki/Digest_access_authentication)の両方をサポートします。
 
-- [Basic Authentication](https://en.wikipedia.org/wiki/Basic_access_authentication) uses non-encrypted base64 encoding to transmit your public key and private key. HTTPS ensures the transmission security. For more information, see [RFC 7617 - The 'Basic' HTTP Authentication Scheme](https://datatracker.ietf.org/doc/html/rfc7617).
-- [Digest Authentication](https://en.wikipedia.org/wiki/Digest_access_authentication) offers an additional security layer by hashing your public key, private key, a server-supplied nonce value, the HTTP method, and the requested URI before network transmission. This encrypts the private key to prevent it from being transmitted in plain text. For more information, see [RFC 7616 - HTTP Digest Access Authentication](https://datatracker.ietf.org/doc/html/rfc7616).
+-   [基本認証](https://en.wikipedia.org/wiki/Basic_access_authentication)暗号化されていない Base64 エンコードを使用して、公開キーと秘密キーを送信します。 HTTPS により通信のセキュリティが確保されます。詳細については、 [RFC 7617 - 「基本」HTTP 認証スキーム](https://datatracker.ietf.org/doc/html/rfc7617)を参照してください。
+-   [ダイジェスト認証](https://en.wikipedia.org/wiki/Digest_access_authentication)ネットワーク送信前に公開キー、秘密キー、サーバー提供の nonce 値、HTTP メソッド、および要求された URI をハッシュすることにより、追加のセキュリティレイヤーを提供します。これにより、秘密キーが暗号化され、平文で送信されるのを防ぎます。詳細については、 [RFC 7616 - HTTP ダイジェスト アクセス認証](https://datatracker.ietf.org/doc/html/rfc7616)を参照してください。
 
-> **Note:**
+> **注記：**
 >
-> The Data API key in Data Service is different from the key used in the [TiDB Cloud API](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication). The Data API key is used to access data in the TiDB Cloud clusters, whereas the TiDB Cloud API key is used to manage resources such as projects, clusters, backups, restores, and imports.
+> Data Service の Data API キーは、 [TiDB CloudAPI](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication)で使用されるキーとは異なります。 Data API キーはTiDB Cloudクラスター内のデータにアクセスするために使用され、 TiDB CloudAPI キーはプロジェクト、クラスター、バックアップ、復元、インポートなどのリソースを管理するために使用されます。
 
-## API key overview
+## APIキーの概要 {#api-key-overview}
 
-- An API key contains a public key and a private key, which act as the username and password required in the authentication. The private key is only displayed upon the key creation.
-- Each API key belongs to one Data App only and is used to access the data in the TiDB Cloud clusters.
-- You must provide the correct API key in every request. Otherwise, TiDB Cloud responds with a `401` error.
+-   API キーには公開キーと秘密キーが含まれており、認証に必要なユーザー名とパスワードとして機能します。秘密キーはキーの作成時にのみ表示されます。
+-   各 API キーは 1 つのデータ アプリにのみ属し、 TiDB Cloudクラスター内のデータにアクセスするために使用されます。
+-   すべてのリクエストで正しい API キーを指定する必要があります。それ以外の場合、 TiDB Cloud は`401`エラーで応答します。
 
-## Rate limiting
+## レート制限 {#rate-limiting}
 
-Request quotas are rate-limited as follows:
+リクエスト クォータは次のようにレート制限されます。
 
-- 100 requests per minute (rpm) per API key
-- 100 requests per day for each Chat2Query Data App
+-   API キーあたり 1 分あたり 100 リクエスト (rpm)
+-   Chat2Query データ アプリごとに 1 日あたり 100 リクエスト
 
-If you exceed the rate limit, the API returns a `429` error. To increase your quota, you can [submit a request](https://support.pingcap.com/hc/en-us/requests/new?ticket_form_id=7800003722519) to our support team.
+レート制限を超えると、API は`429`エラーを返します。割り当てを増やすには、サポート チームに[リクエストを送信する](https://support.pingcap.com/hc/en-us/requests/new?ticket_form_id=7800003722519)連絡してください。
 
-## Manage API keys
+## APIキーを管理する {#manage-api-keys}
 
-The following sections describe how to create, edit, and delete an API key for a Data App.
+次のセクションでは、データ アプリの API キーを作成、編集、削除する方法について説明します。
 
-### Create an API key
+### APIキーを作成する {#create-an-api-key}
 
-To create an API key for a Data App, perform the following steps:
+データ アプリの API キーを作成するには、次の手順を実行します。
 
-1. Navigate to the [**Data Service**](https://tidbcloud.com/console/data-service) page of your project.
-2. In the left pane, click the name of your target Data App to view its details.
-3. In the **Authentication** area, click **Create API Key**.
-4. In the **Create API Key** dialog box, enter a description and select a role for your API key.
+1.  プロジェクトの[**データサービス**](https://tidbcloud.com/console/data-service)ページに移動します。
 
-    The role is used to control whether the API key can read or write data to the clusters linked to the Data App. You can select the `ReadOnly` or `ReadAndWrite` role:
+2.  左側のペインで、ターゲット データ アプリの名前をクリックして詳細を表示します。
 
-    - `ReadOnly`: only allows the API key to read data, such as `SELECT`, `SHOW`, `USE`, `DESC`, and `EXPLAIN` statements.
-    - `ReadAndWrite`: allows the API key to read and write data. You can use this API key to execute all SQL statements, such as DML and DDL statements.
+3.  **「認証」**領域で、 **「API キーの作成」を**クリックします。
 
-5. Click **Next**. The public key and private key are displayed.
+4.  **[API キーの作成]**ダイアログ ボックスで、説明を入力し、API キーのロールを選択します。
 
-    Make sure that you have copied and saved the private key in a secure location. After leaving this page, you will not be able to get the full private key again.
+    このロールは、API キーがデータ アプリにリンクされたクラスターに対してデータの読み取りまたは書き込みを行えるかどうかを制御するために使用されます。 `ReadOnly`または`ReadAndWrite`役割を選択できます。
 
-6. Click **Done**.
+    -   `ReadOnly` : API キーは`SELECT` 、 `SHOW` 、 `USE` 、 `DESC` 、 `EXPLAIN`ステートメントなどのデータの読み取りのみを許可します。
+    -   `ReadAndWrite` : API キーによるデータの読み取りと書き込みを許可します。この API キーを使用して、DML ステートメントや DDL ステートメントなどのすべての SQL ステートメントを実行できます。
 
-### Edit an API key
+5.  **「次へ」**をクリックします。公開鍵と秘密鍵が表示されます。
 
-To edit the description of an API key, perform the following steps:
+    秘密キーをコピーして安全な場所に保存したことを確認してください。このページを離れると、完全な秘密キーを再度取得することはできなくなります。
 
-1. Navigate to the [**Data Service**](https://tidbcloud.com/console/data-service) page of your project.
-2. In the left pane, click the name of your target Data App to view its details.
-3. In the **API Key** area, locate the **Action** column, and then click **...** > **Edit** in the API key row that you want to change.
-4. Update the description or the role of the API key.
-5. Click **Update**.
+6.  **「完了」**をクリックします。
 
-### Delete an API key
+### APIキーを編集する {#edit-an-api-key}
 
-> **Note:**
+API キーの説明を編集するには、次の手順を実行します。
+
+1.  プロジェクトの[**データサービス**](https://tidbcloud.com/console/data-service)ページに移動します。
+2.  左側のペインで、ターゲット データ アプリの名前をクリックして詳細を表示します。
+3.  **[API キー]**領域で [**アクション]**列を見つけ、変更する API キー行で**[...]** &gt; **[編集]**をクリックします。
+4.  API キーの説明または役割を更新します。
+5.  **「更新」**をクリックします。
+
+### APIキーを削除する {#delete-an-api-key}
+
+> **注記：**
 >
-> Before you delete an API key, make sure that the API key is not used by any Data App.
+> API キーを削除する前に、その API キーがどのデータ アプリでも使用されていないことを確認してください。
 
-To delete an API key for a Data App, perform the following steps:
+データ アプリの API キーを削除するには、次の手順を実行します。
 
-1. Navigate to the [**Data Service**](https://tidbcloud.com/console/data-service) page of your project.
-2. In the left pane, click the name of your target Data App to view its details.
-3. In the **API Key** area, locate the **Action** column, and then click **...** > **Delete** in the API key row that you want to delete.
-4. In the displayed dialog box, confirm the deletion.
+1.  プロジェクトの[**データサービス**](https://tidbcloud.com/console/data-service)ページに移動します。
+2.  左側のペインで、ターゲット データ アプリの名前をクリックして詳細を表示します。
+3.  **[API キー]**領域で、 **[アクション]**列を見つけて、削除する API キー行の**[...]** &gt; **[削除]**をクリックします。
+4.  表示されるダイアログボックスで、削除を確認します。

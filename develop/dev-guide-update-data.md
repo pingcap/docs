@@ -3,69 +3,68 @@ title: Update Data
 summary: Learn about how to update data and batch update data.
 ---
 
-# Update Data
+# データを更新する {#update-data}
 
-This document describes how to use the following SQL statements to update the data in TiDB with various programming languages:
+このドキュメントでは、次の SQL ステートメントを使用して、さまざまなプログラミング言語で TiDB 内のデータを更新する方法について説明します。
 
-- [UPDATE](/sql-statements/sql-statement-update.md): Used to modify the data in the specified table.
-- [INSERT ON DUPLICATE KEY UPDATE](/sql-statements/sql-statement-insert.md): Used to insert data and update this data if there is a primary key or unique key conflict. It is **not recommended** to use this statement if there are multiple unique keys (including primary keys). This is because this statement updates the data once it detects any unique key (including primary key) conflict. When there are more than one row conflicts, it updates only one row.
+-   [アップデート](/sql-statements/sql-statement-update.md) : 指定されたテーブル内のデータを変更するために使用されます。
+-   [重複キーの更新時に挿入](/sql-statements/sql-statement-insert.md) : 主キーまたは一意キーの競合がある場合に、データを挿入し、このデータを更新するために使用されます。複数の一意のキー (主キーを含む) がある場合、このステートメントを使用すること**はお勧めできません**。これは、このステートメントが一意のキー (主キーを含む) の競合を検出するとデータを更新するためです。複数の行の競合がある場合、1 つの行のみが更新されます。
 
-## Before you start
+## 始める前に {#before-you-start}
 
-Before reading this document, you need to prepare the following:
+このドキュメントを読む前に、以下を準備する必要があります。
 
-- [Build a TiDB Serverless Cluster](/develop/dev-guide-build-cluster-in-cloud.md).
-- Read [Schema Design Overview](/develop/dev-guide-schema-design-overview.md), [Create a Database](/develop/dev-guide-create-database.md), [Create a Table](/develop/dev-guide-create-table.md), and [Create Secondary Indexes](/develop/dev-guide-create-secondary-indexes.md).
-- If you want to `UPDATE` data, you need to [insert data](/develop/dev-guide-insert-data.md) first.
+-   [TiDB サーバーレスクラスタを構築する](/develop/dev-guide-build-cluster-in-cloud.md) 。
+-   [スキーマ設計の概要](/develop/dev-guide-schema-design-overview.md) 、 [データベースを作成する](/develop/dev-guide-create-database.md) 、 [テーブルを作成する](/develop/dev-guide-create-table.md) 、および[セカンダリインデックスの作成](/develop/dev-guide-create-secondary-indexes.md)を読み取ります。
+-   データを`UPDATE`にしたい場合は、まず[データを挿入する](/develop/dev-guide-insert-data.md)を行う必要があります。
 
-## Use `UPDATE`
+## <code>UPDATE</code>を使用する {#use-code-update-code}
 
-To update an existing row in a table, you need to use an [`UPDATE` statement](/sql-statements/sql-statement-update.md) with a `WHERE` clause to filter the columns for updating.
+テーブル内の既存の行を更新するには、 [`UPDATE`ステートメント](/sql-statements/sql-statement-update.md)と`WHERE`句を使用して、更新する列をフィルタリングする必要があります。
 
-> **Note:**
+> **注記：**
 >
-> If you need to update a large number of rows, for example, more than ten thousand, it is recommended that you do **_NOT_** doing a complete update at once, but rather updating a portion at a time iteratively until all rows are updated. You can write scripts or programs to loop this operation.
-> See [Bulk-update](#bulk-update) for details.
+> 大量の行 (たとえば、1 万行を超える行) を更新する必要がある場合は、一度に完全な更新を実行せ***ず***、すべての行が更新されるまで一度に一部を繰り返し更新することをお勧めします。この操作をループするスクリプトまたはプログラムを作成できます。詳細は[一括更新](#bulk-update)参照してください。
 
-### `UPDATE` SQL syntax
+### <code>UPDATE</code> SQL 構文 {#code-update-code-sql-syntax}
 
-In SQL, the `UPDATE` statement is generally in the following form:
+SQL では、 `UPDATE`ステートメントは通常次の形式になります。
 
 ```sql
 UPDATE {table} SET {update_column} = {update_value} WHERE {filter_column} = {filter_value}
 ```
 
-| Parameter Name | Description |
-| :---------------: | :------------------: |
-|     `{table}`     |         Table Name         |
-| `{update_column}` |     Column names to be updated     |
-| `{update_value}`  |   Column values to be updated   |
-| `{filter_column}` | Column names matching filters |
-| `{filter_value}`  | Column values matching filters |
+|       パラメータ名      |       説明       |
+| :---------------: | :------------: |
+|     `{table}`     |      テーブル名     |
+| `{update_column}` |    更新するカラム名    |
+|  `{update_value}` |    更新するカラムの値   |
+| `{filter_column}` | フィルターに一致するカラム名 |
+|  `{filter_value}` | フィルタに一致するカラムの値 |
 
-For detailed information, see [UPDATE syntax](/sql-statements/sql-statement-update.md).
+詳細については、 [UPDATE 構文](/sql-statements/sql-statement-update.md)を参照してください。
 
-### `UPDATE` best practices
+### ベストプラクティス<code>UPDATE</code> {#code-update-code-best-practices}
 
-The following are some best practices for updating data:
+データを更新するためのいくつかのベスト プラクティスを次に示します。
 
-- Always specify the `WHERE` clause in the `UPDATE` statement. If the `UPDATE` statement does not have a `WHERE` clause, TiDB will update **_ALL ROWS_** in the table.
+-   `UPDATE`ステートメントには必ず`WHERE`句を指定します。 `UPDATE`ステートメントに`WHERE`句がない場合、TiDB はテーブル内の***すべての行を***更新します。
 
 <CustomContent platform="tidb">
 
-- Use [bulk-update](#bulk-update) when you need to update a large number of rows (for example, more than ten thousand). Because TiDB limits the size of a single transaction ([txn-total-size-limit](/tidb-configuration-file.md#txn-total-size-limit), 100 MB by default), too many data updates at once will result in holding locks for too long ([pessimistic transactions](/pessimistic-transaction.md)) or cause conflicts ([optimistic transactions](/optimistic-transaction.md)).
+-   多数の行 (たとえば、1 万行以上) を更新する必要がある場合は、 [一括更新](#bulk-update)使用します。 TiDB は 1 つのトランザクションのサイズを制限しているため (デフォルトでは[txn 合計サイズ制限](/tidb-configuration-file.md#txn-total-size-limit) MB)、一度に更新するデータが多すぎると、ロックが長時間保持されすぎたり ( [悲観的取引](/pessimistic-transaction.md) )、競合が発生したり ( [楽観的取引](/optimistic-transaction.md) ) することがあります。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-- Use [bulk-update](#bulk-update) when you need to update a large number of rows (for example, more than ten thousand). Because TiDB limits the size of a single transaction to 100 MB by default, too many data updates at once will result in holding locks for too long ([pessimistic transactions](/pessimistic-transaction.md)) or cause conflicts ([optimistic transactions](/optimistic-transaction.md)).
+-   多数の行 (たとえば、1 万行以上) を更新する必要がある場合は、 [一括更新](#bulk-update)使用します。 TiDB はデフォルトで 1 つのトランザクションのサイズを 100 MB に制限しているため、一度に更新するデータが多すぎると、ロックが長時間保持されすぎたり ( [悲観的取引](/pessimistic-transaction.md) )、競合が発生したり ( [楽観的取引](/optimistic-transaction.md) ) する可能性があります。
 
 </CustomContent>
 
-### `UPDATE` example
+### <code>UPDATE</code>例 {#code-update-code-example}
 
-Suppose an author changes her name to **Helen Haruki**. You need to change the [authors](/develop/dev-guide-bookshop-schema-design.md#authors-table) table. Assume that her unique `id` is **1**, and the filter should be: `id = 1`.
+著者が名前を**春木ヘレン**に変更したとします。 [著者](/develop/dev-guide-bookshop-schema-design.md#authors-table)テーブルを変更する必要があります。彼女の一意の`id` **1**であると仮定し、フィルターは`id = 1`である必要があります。
 
 <SimpleTab groupId="language">
 <div label="SQL" value="sql">
@@ -93,37 +92,37 @@ try (Connection connection = ds.getConnection()) {
 </div>
 </SimpleTab>
 
-## Use `INSERT ON DUPLICATE KEY UPDATE`
+## <code>INSERT ON DUPLICATE KEY UPDATE</code>使用する {#use-code-insert-on-duplicate-key-update-code}
 
-If you need to insert new data into a table, but if there are unique key (a primary key is also a unique key) conflicts, the first conflicted record will be updated. You can use `INSERT ... ON DUPLICATE KEY UPDATE ...` statement to insert or update.
+新しいデータをテーブルに挿入する必要があるが、一意のキー (主キーも一意のキー) の競合がある場合、最初に競合したレコードが更新されます。 `INSERT ... ON DUPLICATE KEY UPDATE ...`ステートメントを使用して挿入または更新できます。
 
-### `INSERT ON DUPLICATE KEY UPDATE` SQL Syntax
+### <code>INSERT ON DUPLICATE KEY UPDATE</code> SQL 構文 {#code-insert-on-duplicate-key-update-code-sql-syntax}
 
-In SQL, the `INSERT ... ON DUPLICATE KEY UPDATE ...` statement is generally in the following form:
+SQL では、 `INSERT ... ON DUPLICATE KEY UPDATE ...`ステートメントは通常次の形式になります。
 
 ```sql
 INSERT INTO {table} ({columns}) VALUES ({values})
     ON DUPLICATE KEY UPDATE {update_column} = {update_value};
 ```
 
-| Parameter Name | Description |
-| :---------------: | :--------------: |
-|     `{table}`     |       Table name       |
-|    `{columns}`    |   Column names to be inserted   |
-|    `{values}`     | Column values to be inserted |
-| `{update_column}` |   Column names to be updated   |
-| `{update_value}`  | Column values to be updated |
+|       パラメータ名      |     説明    |
+| :---------------: | :-------: |
+|     `{table}`     |   テーブル名   |
+|    `{columns}`    |  挿入するカラム名 |
+|     `{values}`    | 挿入するカラムの値 |
+| `{update_column}` |  更新するカラム名 |
+|  `{update_value}` | 更新するカラムの値 |
 
-### `INSERT ON DUPLICATE KEY UPDATE` best practices
+### <code>INSERT ON DUPLICATE KEY UPDATE</code>ベスト プラクティス {#code-insert-on-duplicate-key-update-code-best-practices}
 
-- Use `INSERT ON DUPLICATE KEY UPDATE` only for a table with one unique key. This statement updates the data if any **_UNIQUE KEY_** (including the primary key) conflicts are detected. If there are more than one row of conflicts, only one row will be updated. Therefore, it is not recommended to use the `INSERT ON DUPLICATE KEY UPDATE` statement in tables with multiple unique keys unless you can guarantee that there is only one row of conflict.
-- Use this statement when you create data or update data.
+-   `INSERT ON DUPLICATE KEY UPDATE`一意のキーが 1 つあるテーブルにのみ使用します。このステートメントは、 ***UNIQUE KEY*** (主キーを含む) の競合が検出された場合にデータを更新します。競合する行が複数ある場合は、1 行のみが更新されます。したがって、競合する行が 1 行だけであることが保証できない限り、複数の一意キーを持つテーブルで`INSERT ON DUPLICATE KEY UPDATE`ステートメントを使用することはお勧めできません。
+-   このステートメントは、データを作成または更新するときに使用します。
 
-### `INSERT ON DUPLICATE KEY UPDATE` example
+### <code>INSERT ON DUPLICATE KEY UPDATE</code>例 {#code-insert-on-duplicate-key-update-code-example}
 
-For example, you need to update the [ratings](/develop/dev-guide-bookshop-schema-design.md#ratings-table) table to include the user's ratings for the book. If the user has not yet rated the book, a new rating will be created. If the user has already rated it, his previous rating will be updated.
+たとえば、書籍に対するユーザーの評価を含めるように[評価](/develop/dev-guide-bookshop-schema-design.md#ratings-table)テーブルを更新する必要があります。ユーザーがまだ書籍を評価していない場合は、新しい評価が作成されます。ユーザーがすでに評価している場合は、以前の評価が更新されます。
 
-In the following example, the primary key is the joint primary keys of `book_id` and `user_id`. A user `user_id = 1` gives a rating of `5` to a book `book_id = 1000`.
+次の例では、主キーは`book_id`と`user_id`の結合主キーです。ユーザ`user_id = 1`は、書籍`book_id = 1000`に`5`の評価を与える。
 
 <SimpleTab groupId="language">
 <div label="SQL" value="sql">
@@ -159,48 +158,48 @@ VALUES (?, ?, ?, NOW()) ON DUPLICATE KEY UPDATE `score` = ?, `rated_at` = NOW()"
 </div>
 </SimpleTab>
 
-## Bulk-update
+## 一括更新 {#bulk-update}
 
-When you need to update multiple rows of data in a table, you can [use `INSERT ON DUPLICATE KEY UPDATE`](#use-insert-on-duplicate-key-update) with the `WHERE` clause to filter the data that needs to be updated.
+テーブル内の複数行のデータを更新する必要がある場合は、 `WHERE`句を[`INSERT ON DUPLICATE KEY UPDATE`使用する](#use-insert-on-duplicate-key-update)して、更新する必要があるデータをフィルタリングできます。
 
 <CustomContent platform="tidb">
 
-However, if you need to update a large number of rows (for example, more than ten thousand), it is recommended that you update the data iteratively, that is, updating only a portion of the data at each iteration until the update is complete. This is because TiDB limits the size of a single transaction ([txn-total-size-limit](/tidb-configuration-file.md#txn-total-size-limit), 100 MB by default). Too many data updates at once will result in holding locks for too long ([pessimistic transactions](/pessimistic-transaction.md), or causing conflicts ([optimistic transactions](/optimistic-transaction.md)). You can use a loop in your program or script to complete the operation.
+ただし、多数の行 (たとえば、1 万行以上) を更新する必要がある場合は、データを繰り返し更新することをお勧めします。つまり、更新が完了するまで、各繰り返しでデータの一部のみを更新します。 。これは、TiDB が単一トランザクションのサイズを制限しているためです (デフォルトでは[txn 合計サイズ制限](/tidb-configuration-file.md#txn-total-size-limit) MB)。一度にあまりに多くのデータ更新を行うと、ロックが長時間保持されすぎたり ( [悲観的取引](/pessimistic-transaction.md) )、競合が発生したり ( [楽観的取引](/optimistic-transaction.md) ) します。プログラムまたはスクリプトでループを使用すると、操作を完了できます。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-However, if you need to update a large number of rows (for example, more than ten thousand), it is recommended that you update the data iteratively, that is, updating only a portion of the data at each iteration until the update is complete. This is because TiDB limits the size of a single transaction to 100 MB by default. Too many data updates at once will result in holding locks for too long ([pessimistic transactions](/pessimistic-transaction.md), or causing conflicts ([optimistic transactions](/optimistic-transaction.md)). You can use a loop in your program or script to complete the operation.
+ただし、多数の行 (たとえば、1 万行以上) を更新する必要がある場合は、データを繰り返し更新することをお勧めします。つまり、更新が完了するまで、各繰り返しでデータの一部のみを更新します。 。これは、TiDB がデフォルトで 1 つのトランザクションのサイズを 100 MB に制限しているためです。一度にあまりに多くのデータ更新を行うと、ロックが長時間保持されすぎたり ( [悲観的取引](/pessimistic-transaction.md) )、競合が発生したり ( [楽観的取引](/optimistic-transaction.md) ) します。プログラムまたはスクリプトでループを使用すると、操作を完了できます。
 
 </CustomContent>
 
-This section provides examples of writing scripts to handle iterative updates. This example shows how a combination of `SELECT` and `UPDATE` should be done to complete a bulk-update.
+このセクションでは、反復的な更新を処理するスクリプトの作成例を示します。この例は、一括更新を完了するために`SELECT`と`UPDATE`を組み合わせて実行する方法を示しています。
 
-### Write bulk-update loop
+### 一括更新ループの作成 {#write-bulk-update-loop}
 
-First, you should write a `SELECT` query in a loop of your application or script. The return value of this query can be used as the primary key for the rows that need to be updated. Note that when defining this `SELECT` query, you need to use the `WHERE` clause to filter the rows that need to be updated.
+まず、アプリケーションまたはスクリプトのループ内に`SELECT`クエリを作成する必要があります。このクエリの戻り値は、更新する必要がある行の主キーとして使用できます。この`SELECT`クエリを定義するときは、 `WHERE`句を使用して、更新する必要がある行をフィルタリングする必要があることに注意してください。
 
-### Example
+### 例 {#example}
 
-Suppose that you have had a lot of book ratings from users on your `bookshop` website over the past year, but the original design of a 5-point scale has resulted in a lack of differentiation in book ratings. Most books are rated `3`. You decide to switch from a 5-point scale to a 10-point scale to differentiate ratings.
+過去 1 年間、あなたの`bookshop` Web サイトでユーザーから多くの書籍評価があったとします。しかし、元のデザインの 5 段階評価では書籍評価に差別化が欠けていたとします。ほとんどの本の評価は`3`です。評価を区別するために、5 ポイント スケールから 10 ポイント スケールに切り替えることにしました。
 
-You need to multiply by `2` the data in the `ratings` table from the previous 5-point scale, and add a new column to the ratings table to indicate whether the rows have been updated. Using this column, you can filter out rows that have been updated in `SELECT`, which will prevent the script from crashing and updating the rows multiple times, resulting in unreasonable data.
+前の 5 段階評価の`ratings`テーブルのデータに`2`を掛けて、行が更新されたかどうかを示す新しい列を評価テーブルに追加する必要があります。この列を使用すると、 `SELECT`で更新された行をフィルターで除外できます。これにより、スクリプトがクラッシュして行が複数回更新され、結果として不合理なデータが生成されるのを防ぐことができます。
 
-For example, you create a column named `ten_point` with the data type [BOOL](/data-type-numeric.md#boolean-type) as an identifier of whether it is a 10-point scale:
+たとえば、10 点スケールかどうかの識別子として、データ型[ブール](/data-type-numeric.md#boolean-type)を使用して`ten_point`という名前の列を作成します。
 
 ```sql
 ALTER TABLE `bookshop`.`ratings` ADD COLUMN `ten_point` BOOL NOT NULL DEFAULT FALSE;
 ```
 
-> **Note:**
+> **注記：**
 >
-> This bulk-update application uses the **DDL** statements to make schema changes to the data tables. All DDL change operations for TiDB are executed online. For more information, see [ADD COLUMN](/sql-statements/sql-statement-add-column.md).
+> この一括更新アプリケーションは、 **DDL**ステートメントを使用してデータ テーブルにスキーマ変更を加えます。 TiDB のすべての DDL 変更操作はオンラインで実行されます。詳細については、 [列の追加](/sql-statements/sql-statement-add-column.md)を参照してください。
 
 <SimpleTab groupId="language">
 <div label="Golang" value="golang">
 
-In Golang, a bulk-update application is similar to the following:
+Golangでは、一括更新アプリケーションは次のようになります。
 
 ```go
 package main
@@ -276,15 +275,15 @@ func placeHolder(n int) string {
 }
 ```
 
-In each iteration, `SELECT` queries in order of the primary key. It selects primary key values for up to `1000` rows that have not been updated to the 10-point scale (`ten_point` is `false`). Each `SELECT` statement selects primary keys larger than the largest of the previous `SELECT` results to prevent duplication. Then, it uses bulk-update, multiples its `score` column by `2`, and sets `ten_point` to `true`. The purpose of updating `ten_point` is to prevent the update application from repeatedly updating the same row in case of restart after crashing, which can cause data corruption. `time.Sleep(time.Second)` in each loop makes the update application pause for 1 second to prevent the update application from consuming too many hardware resources.
+各反復では、主キーの順に`SELECT`が実行されます。 10 点スケール ( `ten_point`は`false` ) に更新されていない最大`1000`行の主キー値を選択します。 `SELECT`つの各ステートメントは、重複を防ぐために、前の`SELECT`の結果の最大のものよりも大きい主キーを選択します。次に、Bulk-update を使用し、その`score`列を`2`で乗算し、 `ten_point` `true`に設定します。更新`ten_point`の目的は、クラッシュ後の再起動の場合に、更新アプリケーションが同じ行を繰り返し更新することを防ぐことであり、これによりデータ破損が発生する可能性があります。各ループに`time.Sleep(time.Second)`指定すると、更新アプリケーションがハードウェア リソースを過剰に消費するのを防ぐために、更新アプリケーションが 1 秒間一時停止します。
 
 </div>
 
 <div label="Java (JDBC)" value="jdbc">
 
-In Java (JDBC), a bulk-update application might be similar to the following:
+Java (JDBC) では、一括更新アプリケーションは次のようになります。
 
-**Code:**
+**コード：**
 
 ```java
 package com.pingcap.bulkUpdate;
@@ -416,7 +415,7 @@ public class BatchUpdateExample {
 }
 ```
 
-- `hibernate.cfg.xml` configuration:
+-   `hibernate.cfg.xml`構成:
 
 ```xml
 <?xml version='1.0' encoding='utf-8'?>
@@ -442,7 +441,7 @@ public class BatchUpdateExample {
 </hibernate-configuration>
 ```
 
-In each iteration, `SELECT` queries in order of the primary key. It selects primary key values for up to `1000` rows that have not been updated to the 10-point scale (`ten_point` is `false`). Each `SELECT` statement selects primary keys larger than the largest of the previous `SELECT` results to prevent duplication. Then, it uses bulk-update, multiples its `score` column by `2`, and sets `ten_point` to `true`. The purpose of updating `ten_point` is to prevent the update application from repeatedly updating the same row in case of restart after crashing, which can cause data corruption. `TimeUnit.SECONDS.sleep(1);` in each loop makes the update application pause for 1 second to prevent the update application from consuming too many hardware resources.
+各反復では、主キーの順に`SELECT`が実行されます。 10 点スケール ( `ten_point`は`false` ) に更新されていない最大`1000`行の主キー値を選択します。 `SELECT`つの各ステートメントは、重複を防ぐために、前の`SELECT`の結果の最大のものよりも大きい主キーを選択します。次に、Bulk-update を使用し、その`score`列を`2`で乗算し、 `ten_point` `true`に設定します。更新`ten_point`の目的は、クラッシュ後の再起動の場合に、更新アプリケーションが同じ行を繰り返し更新することを防ぐことであり、これによりデータ破損が発生する可能性があります。各ループに`TimeUnit.SECONDS.sleep(1);`指定すると、更新アプリケーションがハードウェア リソースを過剰に消費するのを防ぐために、更新アプリケーションが 1 秒間一時停止します。
 
 </div>
 

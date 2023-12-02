@@ -2,65 +2,65 @@
 title: tiup cluster clean
 ---
 
-# tiup cluster clean
+# tiup cluster clean {#tiup-cluster-clean}
 
-In the test environment, sometimes you might need to reset the cluster back to the state as it has been just deployed, which means deleting all data. You can do that easily using the `tiup cluster clean` command. After running it, the cluster is stopped and then cluster data is deleted. After restarting the cluster manually, you will get a clean cluster.
+テスト環境では、クラスターをデプロイされたばかりの状態にリセットする必要がある場合があります。これは、すべてのデータを削除することを意味します。 `tiup cluster clean`コマンドを使用して簡単に実行できます。実行後、クラスターが停止され、クラスターデータが削除されます。クラスターを手動で再起動すると、クリーンなクラスターが得られます。
 
-> **Warning:**
+> **警告：**
 >
-> This command will first stop the cluster even if you choose only to clean up logs. Therefore, do not use it in a production environment.
+> このコマンドは、ログのクリーンアップのみを選択した場合でも、最初にクラスターを停止します。したがって、本番環境では使用しないでください。
 
-## Syntax
+## 構文 {#syntax}
 
 ```shell
 tiup cluster clean <cluster-name> [flags]
 ```
 
-`<cluster-name>` is the cluster to clean.
+`<cluster-name>`はクリーンアップするクラスターです。
 
-## Options
+## オプション {#options}
 
-### --all
+### &#x20;--all {#all}
 
-- Cleans data and the log at the same time. It is equivalent to specifying `--data` and `--log` at the same time.
-- Data type: `BOOLEAN`
-- This option is disabled by default and its default value is `false`. To enable this option, you can add this option to the command, and pass the `true` value or do not pass any value.
-- If it is not specified, you must specify at lease one of the following options:
-    - --data: Cleans data
-    - --log: Cleans the log
+-   データとログを同時にクリーンアップします。 `--data`と`--log`を同時に指定したことに相当します。
+-   データ型: `BOOLEAN`
+-   このオプションはデフォルトでは無効になっており、デフォルト値は`false`です。このオプションを有効にするには、このオプションをコマンドに追加して、値`true`渡すか、値を渡さないことができます。
+-   指定しない場合は、次のオプションの少なくとも 1 つを指定する必要があります。
+    -   --data: データをクリーンアップします
+    -   --log: ログを消去します
 
-### --data
+### &#x20;--data {#data}
 
-- Cleans data. If neither of it nor `--all` is specified, data will not be cleaned.
-- Data type: `BOOLEAN`
-- This option is disabled by default and its default value is `false`. To enable this option, you can add this option to the command, and pass the `true` value or do not pass any value.
+-   データをクリーンアップします。どちらも`--all`指定されていない場合、データは消去されません。
+-   データ型: `BOOLEAN`
+-   このオプションはデフォルトでは無効になっており、デフォルト値は`false`です。このオプションを有効にするには、このオプションをコマンドに追加して、値`true`渡すか、値を渡さないことができます。
 
-### --log
+### &#x20;--log {#log}
 
-- Cleans the log. If neither of it nor `--all` is specified, the log will not be cleaned.
-- Data type: `BOOLEAN`
-- This option is disabled by default and its default value is `false`. To enable this option, you can add this option to the command, and pass the `true` value or do not pass any value.
+-   ログをクリーンアップします。どちらも`--all`指定されていない場合、ログは消去されません。
+-   データ型: `BOOLEAN`
+-   このオプションはデフォルトでは無効になっており、デフォルト値は`false`です。このオプションを有効にするには、このオプションをコマンドに追加して、値`true`渡すか、値を渡さないことができます。
 
-### --ignore-node
+### --ignore-node {#ignore-node}
 
-- Specifies the node that does not need cleaning. To specify multiple nodes, you can use this option multiple times. For example, `--ignore-node <node-A> --ignore-node <node-B>`.
-- Data type: `StringArray`
-- Default: empty
+-   クリーニングが必要ないノードを指定します。複数のノードを指定するには、このオプションを複数回使用できます。たとえば、 `--ignore-node <node-A> --ignore-node <node-B>` 。
+-   データ型: `StringArray`
+-   デフォルト: 空
 
-### --ignore-role
+### --ignore-role {#ignore-role}
 
-- Specifies the role that does not need cleaning. To specify multiple roles, you can use this option multiple times. For example, `--ignore-role <role-A> --ignore-role <role-B>`.
-- Data type: `StringArray`
-- Default: empty
+-   クリーニングが必要ないロールを指定します。複数のロールを指定するには、このオプションを複数回使用できます。たとえば、 `--ignore-role <role-A> --ignore-role <role-B>` 。
+-   データ型: `StringArray`
+-   デフォルト: 空
 
-### -h, --help
+### -h, --help {#h-help}
 
-- Prints help information.
-- Data type: `BOOLEAN`
-- This option is disabled by default and its default value is `false`. To enable this option, you can add this option to the command, and pass the `true` value or do not pass any value.
+-   ヘルプ情報を出力します。
+-   データ型: `BOOLEAN`
+-   このオプションはデフォルトでは無効になっており、デフォルト値は`false`です。このオプションを有効にするには、このオプションをコマンドに追加して、値`true`渡すか、値を渡さないことができます。
 
-## Output
+## 出力 {#output}
 
-The execution logs of tiup-cluster.
+tiup-clusterの実行ログ。
 
-[<< Back to the previous page - TiUP Cluster command list](/tiup/tiup-component-cluster.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUPクラスタコマンド リスト](/tiup/tiup-component-cluster.md#command-list)

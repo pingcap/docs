@@ -3,54 +3,54 @@ title: IMPORT INTO
 summary: An overview of the usage of IMPORT INTO in TiDB.
 ---
 
-# IMPORT INTO
+# にインポート {#import-into}
 
-The `IMPORT INTO` statement is used to import data in formats such as `CSV`, `SQL`, and `PARQUET` into an empty table in TiDB via the [Physical Import Mode](/tidb-lightning/tidb-lightning-physical-import-mode.md) of TiDB Lightning.
+`IMPORT INTO`ステートメントは、 TiDB Lightningの[物理インポートモード](/tidb-lightning/tidb-lightning-physical-import-mode.md)を介して、 `CSV` 、 `SQL` 、 `PARQUET`などの形式のデータを TiDB の空のテーブルにインポートするために使用されます。
 
-> **Note:**
+> **注記：**
 >
-> This statement is only applicable to TiDB Self-Hosted and not available on [TiDB Cloud](https://docs.pingcap.com/tidbcloud/).
+> このステートメントは TiDB セルフホスト型にのみ適用され、 [TiDB Cloud](https://docs.pingcap.com/tidbcloud/)では使用できません。
 
-`IMPORT INTO` supports importing data from files stored in Amazon S3, GCS, and the TiDB local storage.
+`IMPORT INTO` Amazon S3、GCS、TiDB ローカルstorageに保存されているファイルからのデータのインポートをサポートします。
 
-- For data files stored in Amazon S3, GCS, or Azure Blob Storage, `IMPORT INTO` supports running in the [TiDB backend task distributed execution framework](/tidb-distributed-execution-framework.md).
+-   Amazon S3、GCS、または Azure Blob Storage に保存されているデータ ファイルの場合、 `IMPORT INTO` [TiDB バックエンド タスク分散実行フレームワーク](/tidb-distributed-execution-framework.md)での実行をサポートします。
 
-    - When this framework is enabled ([tidb_enable_dist_task](/system-variables.md#tidb_enable_dist_task-new-in-v710) is `ON`), `IMPORT INTO` splits a data import job into multiple sub-jobs and distributes these sub-jobs to different TiDB nodes for execution to improve the import efficiency.
-    - When this framework is disabled, `IMPORT INTO` only supports running on the TiDB node where the current user is connected.
+    -   このフレームワークが有効な場合 ( [tidb_enable_dist_task](/system-variables.md#tidb_enable_dist_task-new-in-v710)が`ON` )、 `IMPORT INTO`データ インポート ジョブを複数のサブジョブに分割し、これらのサブジョブを異なる TiDB ノードに分散して実行し、インポート効率を向上させます。
+    -   このフレームワークが無効になっている場合、 `IMPORT INTO`現在のユーザーが接続している TiDB ノードでの実行のみをサポートします。
 
-- For data files stored locally in TiDB, `IMPORT INTO` only supports running on the TiDB node where the current user is connected. Therefore, the data files need to be placed on the TiDB node where the current user is connected. If you access TiDB through a proxy or load balancer, you cannot import data files stored locally in TiDB.
+-   TiDB にローカルに保存されているデータ ファイルの場合、 `IMPORT INTO`現在のユーザーが接続している TiDB ノードでの実行のみをサポートします。したがって、データ ファイルは、現在のユーザーが接続している TiDB ノードに配置する必要があります。プロキシまたはロード バランサ経由で TiDB にアクセスする場合、TiDB にローカルに保存されているデータ ファイルをインポートできません。
 
-## Restrictions
+## 制限 {#restrictions}
 
-- Currently, `IMPORT INTO` supports importing data within 10 TiB.
-- `IMPORT INTO` only supports importing data into existing empty tables in the database.
-- `IMPORT INTO` does not support transactions or rollback. Executing `IMPORT INTO` within an explicit transaction (`BEGIN`/`END`) will return an error.
-- The execution of `IMPORT INTO` blocks the current connection until the import is completed. To execute the statement asynchronously, you can add the `DETACHED` option.
-- `IMPORT INTO` does not support working simultaneously with features such as [Backup & Restore](/br/backup-and-restore-overview.md), [`FLASHBACK CLUSTER TO TIMESTAMP`](/sql-statements/sql-statement-flashback-to-timestamp.md), [acceleration of adding indexes](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630), data import using TiDB Lightning, data replication using TiCDC, or [Point-in-Time Recovery (PITR)](/br/br-log-architecture.md).
-- Only one `IMPORT INTO` job can run on a cluster at a time. Although `IMPORT INTO` performs a precheck for running jobs, it is not a hard limit. Starting multiple import jobs might work when multiple clients execute `IMPORT INTO` simultaneously, but you need to avoid that because it might result in data inconsistency or import failures.
-- During the data import process, do not perform DDL or DML operations on the target table, and do not execute [`FLASHBACK DATABASE`](/sql-statements/sql-statement-flashback-database.md) for the target database. These operations can lead to import failures or data inconsistencies. In addition, it is **NOT** recommended to perform read operations during the import process, as the data being read might be inconsistent. Perform read and write operations only after the import is completed.
-- The import process consumes system resources significantly. To get better performance, it is recommended to use TiDB nodes with at least 32 cores and 64 GiB of memory. TiDB writes sorted data to the TiDB [temporary directory](/tidb-configuration-file.md#temp-dir-new-in-v630) during import, so it is recommended to configure high-performance storage media such as flash memory. For more information, see [Physical Import Mode limitations](/tidb-lightning/tidb-lightning-physical-import-mode.md#requirements-and-restrictions).
-- The TiDB [temporary directory](/tidb-configuration-file.md#temp-dir-new-in-v630) is expected to have at least 90 GiB of available space. It is recommended to allocate storage space that is equal to or greater than the volume of data to be imported.
-- One import job supports importing data into one target table only. To import data into multiple target tables, after the import for a target table is completed, you need to create a new job for the next target table.
-- `IMPORT INTO` is not supported during TiDB cluster upgrades.
-- When the [Global Sort](/tidb-global-sort.md) feature is used for data import, the data size of a single row after encoding must not exceed 32 MiB.
-- When the Global Sort feature is used for data import, if the target TiDB cluster is deleted before the import task is completed, temporary data used for global sorting might remain on Amazon S3. In this case, you need to delete the residual data manually to avoid increasing S3 storage costs.
-- Ensure that the data to be imported does not contain any records with primary key or non-null unique index conflicts. Otherwise, the conflicts can result in import task failures.
-- Known issue: the `IMPORT INTO` task might fail if the PD address in the TiDB node configuration file is inconsistent with the current PD topology of the cluster. This inconsistency can arise in situations such as that PD was scaled in previously, but the TiDB configuration file was not updated accordingly or the TiDB node was not restarted after the configuration file update.
+-   現在、 `IMPORT INTO` 10 TiB 以内のデータのインポートをサポートしています。
+-   `IMPORT INTO`データベース内の既存の空のテーブルへのデータのインポートのみをサポートします。
+-   `IMPORT INTO`はトランザクションやロールバックをサポートしません。明示的なトランザクション ( `BEGIN` / `END` ) 内で`IMPORT INTO`を実行すると、エラーが返されます。
+-   `IMPORT INTO`を実行すると、インポートが完了するまで現在の接続がブロックされます。ステートメントを非同期的に実行するには、 `DETACHED`オプションを追加します。
+-   `IMPORT INTO` [復元する](/br/backup-and-restore-overview.md) 、 [`FLASHBACK CLUSTER TO TIMESTAMP`](/sql-statements/sql-statement-flashback-to-timestamp.md) 、 [インデックス追加の高速化](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) 、 TiDB Lightningを使用したデータ インポート、 TiCDC を使用したデータ レプリケーション、または[ポイントインタイムリカバリ (PITR)](/br/br-log-architecture.md)などの機能との同時作業をサポートしていません。
+-   クラスター上で一度に実行できるジョブは`IMPORT INTO`つだけです。 `IMPORT INTO`実行中のジョブの事前チェックを実行しますが、これは厳密な制限ではありません。複数のクライアントが同時に実行する場合、 `IMPORT INTO`のインポート ジョブの開始が機能する可能性がありますが、データの不整合やインポートの失敗が発生する可能性があるため、それを回避する必要があります。
+-   データ インポート プロセス中は、ターゲット テーブルに対して DDL または DML 操作を実行しないでください。また、ターゲット データベースに対して[`FLASHBACK DATABASE`](/sql-statements/sql-statement-flashback-database.md)を実行しないでください。これらの操作により、インポートの失敗やデータの不整合が発生する可能性があります。また、読み取られるデータに一貫性がない可能性があるため、インポート プロセス中に読み取り操作を実行することは**お**勧めできません。インポートが完了した後にのみ、読み取りおよび書き込み操作を実行してください。
+-   インポート プロセスはシステム リソースを大幅に消費します。パフォーマンスを向上させるには、少なくとも 32 コアと 64 GiB のメモリを備えた TiDB ノードを使用することをお勧めします。 TiDB はインポート中にソートされたデータを TiDB [一時ディレクトリ](/tidb-configuration-file.md#temp-dir-new-in-v630)に書き込むため、フラッシュメモリなどの高性能storageメディアを構成することをお勧めします。詳細については、 [物理インポートモードの制限事項](/tidb-lightning/tidb-lightning-physical-import-mode.md#requirements-and-restrictions)を参照してください。
+-   TiDB [一時ディレクトリ](/tidb-configuration-file.md#temp-dir-new-in-v630) 、少なくとも 90 GiB の使用可能なスペースがあることが予想されます。インポートするデータの量と同じかそれ以上のstorageスペースを割り当てることをお勧めします。
+-   1 つのインポート ジョブは、1 つのターゲット テーブルへのデータのみのインポートをサポートします。複数のターゲット テーブルにデータをインポートするには、ターゲット テーブルのインポートが完了した後、次のターゲット テーブルの新しいジョブを作成する必要があります。
+-   `IMPORT INTO`は、TiDB クラスターのアップグレード中はサポートされません。
+-   [グローバルソート](/tidb-global-sort.md)機能を使用してデータをインポートする場合、エンコード後の 1 行のデータ サイズは 32 MiB を超えてはなりません。
+-   データのインポートにグローバル ソート機能を使用する場合、インポート タスクが完了する前にターゲット TiDB クラスターが削除されると、グローバル ソートに使用された一時データが Amazon S3 に残る可能性があります。この場合、S3storageコストの増加を避けるために、残留データを手動で削除する必要があります。
+-   インポートするデータに、主キーまたは NULL 以外の一意のインデックスが競合するレコードが含まれていないことを確認してください。そうしないと、競合によりインポート タスクが失敗する可能性があります。
+-   既知の問題: TiDB ノード構成ファイル内の PD アドレスがクラスターの現在の PD トポロジーと一致しない場合、 `IMPORT INTO`タスクが失敗する可能性があります。この不一致は、PD が以前にスケールインされたが、それに応じて TiDB 構成ファイルが更新されなかったり、構成ファイルの更新後に TiDB ノードが再起動されなかった場合などに発生する可能性があります。
 
-## Prerequisites for import
+## インポートの前提条件 {#prerequisites-for-import}
 
-Before using `IMPORT INTO` to import data, make sure the following requirements are met:
+`IMPORT INTO`を使用してデータをインポートする前に、次の要件が満たされていることを確認してください。
 
-- The target table to be imported is already created in TiDB and it is empty.
-- The target cluster has sufficient space to store the data to be imported.
-- The [temporary directory](/tidb-configuration-file.md#temp-dir-new-in-v630) of the TiDB node connected to the current session has at least 90 GiB of available space. If [`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710) is enabled, also make sure that the temporary directory of each TiDB node in the cluster has sufficient disk space.
+-   インポート対象のテーブルはすでに TiDB に作成されており、空です。
+-   ターゲット クラスターには、インポートするデータを保存するのに十分なスペースがあります。
+-   現在のセッションに接続されている TiDB ノードの[一時ディレクトリ](/tidb-configuration-file.md#temp-dir-new-in-v630)には、少なくとも 90 GiB の使用可能なスペースがあります。 [`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710)が有効な場合は、クラスター内の各 TiDB ノードの一時ディレクトリに十分なディスク容量があることも確認してください。
 
-## Required privileges
+## 必要な権限 {#required-privileges}
 
-Executing `IMPORT INTO` requires the `SELECT`, `UPDATE`, `INSERT`, `DELETE`, and `ALTER` privileges on the target table. To import files in TiDB local storage, the `FILE` privilege is also required.
+`IMPORT INTO`を実行するには、ターゲット テーブルに対する`SELECT` 、 `UPDATE` 、 `INSERT` 、 `DELETE` 、および`ALTER`の権限が必要です。 TiDB ローカルstorageにファイルをインポートするには、 `FILE`権限も必要です。
 
-## Synopsis
+## あらすじ {#synopsis}
 
 ```ebnf+diagram
 ImportIntoStmt ::=
@@ -75,115 +75,115 @@ OptionItem ::=
     optionName '=' optionVal | optionName
 ```
 
-## Parameter description
+## パラメータの説明 {#parameter-description}
 
-### ColumnNameOrUserVarList
+### 列名またはユーザー変数リスト {#columnnameoruservarlist}
 
-It specifies how each field in the data file corresponds to the columns in the target table. You can also use it to map fields to variables to skip certain fields for the import, or use it in `SetClause`.
+データ ファイルの各フィールドがターゲット テーブルの列にどのように対応するかを指定します。また、これを使用してフィールドを変数にマップし、インポートの特定のフィールドをスキップしたり、 `SetClause`で使用したりすることもできます。
 
-- If this parameter is not specified, the number of fields in each row of the data file must match the number of columns in the target table, and the fields will be imported to the corresponding columns in order.
-- If this parameter is specified, the number of specified columns or variables must match the number of fields in each row of the data file.
+-   このパラメーターが指定されていない場合、データ ファイルの各行のフィールドの数はターゲット テーブルの列の数と一致する必要があり、フィールドは対応する列に順番にインポートされます。
+-   このパラメーターを指定する場合、指定された列または変数の数は、データ ファイルの各行のフィールドの数と一致する必要があります。
 
-### SetClause
+### SetClause {#setclause}
 
-It specifies how the values of target columns are calculated. In the right side of the `SET` expression, you can reference the variables specified in `ColumnNameOrUserVarList`.
+ターゲット列の値がどのように計算されるかを指定します。 `SET`の式の右側では、 `ColumnNameOrUserVarList`で指定した変数を参照できます。
 
-In the left side of the `SET` expression, you can only reference a column name that is not included in `ColumnNameOrUserVarList`. If the target column name already exists in `ColumnNameOrUserVarList`, the `SET` expression is invalid.
+`SET`式の左側では、 `ColumnNameOrUserVarList`に含まれない列名のみを参照できます。ターゲット列名が`ColumnNameOrUserVarList`にすでに存在する場合、 `SET`の式は無効です。
 
-### fileLocation
+### ファイルの場所 {#filelocation}
 
-It specifies the storage location of the data file, which can be an Amazon S3, GCS, or Azure Blob Storage URI path, or a TiDB local file path.
+データ ファイルのstorage場所を指定します。Amazon S3、GCS、Azure Blob Storage の URI パス、または TiDB ローカル ファイル パスを指定できます。
 
-- Amazon S3, GCS, or Azure Blob Storage URI path: for URI configuration details, see [URI Formats of External Storage Services](/external-storage-uri.md).
-- TiDB local file path: it must be an absolute path, and the file extension must be `.csv`, `.sql`, or `.parquet`. Make sure that the files corresponding to this path are stored on the TiDB node connected by the current user, and the user has the `FILE` privilege.
+-   Amazon S3、GCS、または Azure Blob Storage URI パス: URI 構成の詳細については、 [外部ストレージ サービスの URI 形式](/external-storage-uri.md)を参照してください。
+-   TiDB ローカル ファイル パス: 絶対パスである必要があり、ファイル拡張子は`.csv` 、 `.sql` 、または`.parquet`である必要があります。このパスに対応するファイルが現在のユーザーが接続している TiDB ノードに保存されていること、およびユーザーが`FILE`権限を持っていることを確認してください。
 
-> **Note:**
+> **注記：**
 >
-> If [SEM](/system-variables.md#tidb_enable_enhanced_security) is enabled in the target cluster, the `fileLocation` cannot be specified as a local file path.
+> 対象クラスタで[SEM](/system-variables.md#tidb_enable_enhanced_security)が有効な場合、 `fileLocation`ローカルファイルパスとして指定できません。
 
-In the `fileLocation` parameter, you can specify a single file or use the `*` wildcard to match multiple files for import. Note that the wildcard can only be used in the file name, because it does not match directories or recursively match files in subdirectories. Taking files stored on Amazon S3 as examples, you can configure the parameter as follows:
+`fileLocation`パラメータでは、単一のファイルを指定することも、ワイルドカード`*`を使用して複数のファイルをインポート対象に一致させることもできます。ワイルドカードはディレクトリと一致したり、サブディレクトリ内のファイルと再帰的に一致したりしないため、ワイルドカードはファイル名でのみ使用できることに注意してください。 Amazon S3 に保存されているファイルを例として、パラメータを次のように設定できます。
 
-- Import a single file: `s3://<bucket-name>/path/to/data/foo.csv`
-- Import all files in a specified path: `s3://<bucket-name>/path/to/data/*`
-- Import all files with the `.csv` suffix in a specified path: `s3://<bucket-name>/path/to/data/*.csv`
-- Import all files with the `foo` prefix in a specified path: `s3://<bucket-name>/path/to/data/foo*`
-- Import all files with the `foo` prefix and the `.csv` suffix in a specified path: `s3://<bucket-name>/path/to/data/foo*.csv`
+-   単一のファイルをインポートする: `s3://<bucket-name>/path/to/data/foo.csv`
+-   指定されたパスにあるすべてのファイルをインポートします: `s3://<bucket-name>/path/to/data/*`
+-   指定されたパスにあるサフィックス`.csv`を持つすべてのファイルをインポートします: `s3://<bucket-name>/path/to/data/*.csv`
+-   指定されたパスにプレフィックス`foo`を持つすべてのファイルをインポートします: `s3://<bucket-name>/path/to/data/foo*`
+-   プレフィックス`foo`とサフィックス`.csv`持つすべてのファイルを指定したパスにインポートします: `s3://<bucket-name>/path/to/data/foo*.csv`
 
-### Format
+### フォーマット {#format}
 
-The `IMPORT INTO` statement supports three data file formats: `CSV`, `SQL`, and `PARQUET`. If not specified, the default format is `CSV`.
+`IMPORT INTO`ステートメントは、 `CSV` 、 `SQL` 、および`PARQUET`の 3 つのデータ ファイル形式をサポートします。指定しない場合、デフォルトの形式は`CSV`です。
 
-### WithOptions
+### オプションあり {#withoptions}
 
-You can use `WithOptions` to specify import options and control the data import process. For example, to execute the import asynchronously in the backend, you can enable the `DETACHED` mode for the import by adding the `WITH DETACHED` option to the `IMPORT INTO` statement.
+`WithOptions`を使用すると、インポート オプションを指定し、データ インポート プロセスを制御できます。たとえば、バックエンドでインポートを非同期に実行するには、 `IMPORT INTO`ステートメントに`WITH DETACHED`オプションを追加して、インポートの`DETACHED`モードを有効にします。
 
-The supported options are described as follows:
+サポートされているオプションは次のとおりです。
 
-| Option name | Supported data formats | Description |
-|:---|:---|:---|
-| `CHARACTER_SET='<string>'` | CSV | Specifies the character set of the data file. The default character set is `utf8mb4`. The supported character sets include `binary`, `utf8`, `utf8mb4`, `gb18030`, `gbk`, `latin1`, and `ascii`. |
-| `FIELDS_TERMINATED_BY='<string>'` | CSV | Specifies the field separator. The default separator is `,`. |
-| `FIELDS_ENCLOSED_BY='<char>'` | CSV | Specifies the field delimiter. The default delimiter is `"`. |
-| `FIELDS_ESCAPED_BY='<char>'` | CSV | Specifies the escape character for fields. The default escape character is `\`. |
-| `FIELDS_DEFINED_NULL_BY='<string>'` | CSV | Specifies the value that represents `NULL` in the fields. The default value is `\N`. |
-| `LINES_TERMINATED_BY='<string>'` | CSV | Specifies the line terminator. By default, `IMPORT INTO` automatically identifies `\n`, `\r`, or `\r\n` as line terminators. If the line terminator is one of these three, you do not need to explicitly specify this option. |
-| `SKIP_ROWS=<number>` | CSV | Specifies the number of rows to skip. The default value is `0`. You can use this option to skip the header in a CSV file. If you use a wildcard to specify the source files for import, this option applies to all source files that are matched by the wildcard in `fileLocation`. |
-| `SPLIT_FILE` | CSV | Splits a single CSV file into multiple smaller chunks of around 256 MiB for parallel processing to improve import efficiency. This parameter only works for **non-compressed** CSV files and has the same usage restrictions as that of TiDB Lightning [`strict-format`](/tidb-lightning/tidb-lightning-data-source.md#strict-format). |
-| `DISK_QUOTA='<string>'` | All formats | Specifies the disk space threshold that can be used during data sorting. The default value is 80% of the disk space in the TiDB [temporary directory](/tidb-configuration-file.md#temp-dir-new-in-v630). If the total disk size cannot be obtained, the default value is 50 GiB. When specifying `DISK_QUOTA` explicitly, make sure that the value does not exceed 80% of the disk space in the TiDB temporary directory. |
-| `DISABLE_TIKV_IMPORT_MODE` | All formats | Specifies whether to disable switching TiKV to import mode during the import process. By default, switching TiKV to import mode is not disabled. If there are ongoing read-write operations in the cluster, you can enable this option to avoid impact from the import process. |
-| `THREAD=<number>` | All formats | Specifies the concurrency for import. The default value is 50% of the CPU cores, with a minimum value of 1. You can explicitly specify this option to control the resource usage, but make sure that the value does not exceed the number of CPU cores. To import data into a new cluster without any data, it is recommended to increase this concurrency appropriately to improve import performance. If the target cluster is already used in a production environment, it is recommended to adjust this concurrency according to your application requirements. |
-| `MAX_WRITE_SPEED='<string>'` | All formats | Controls the write speed to a TiKV node. By default, there is no speed limit. For example, you can specify this option as `1MiB` to limit the write speed to 1 MiB/s. |
-| `CHECKSUM_TABLE='<string>'` | All formats | Configures whether to perform a checksum check on the target table after the import to validate the import integrity. The supported values include `"required"` (default), `"optional"`, and `"off"`. `"required"` means performing a checksum check after the import. If the checksum check fails, TiDB will return an error and the import will exit. `"optional"` means performing a checksum check after the import. If an error occurs, TiDB will return a warning and ignore the error. `"off"` means not performing a checksum check after the import. |
-| `DETACHED` | All Formats | Controls whether to execute `IMPORT INTO` asynchronously. When this option is enabled, executing `IMPORT INTO` immediately returns the information of the import job (such as the `Job_ID`), and the job is executed asynchronously in the backend. |
-| `CLOUD_STORAGE_URI` | All formats | Specifies the target address where encoded KV data for [Global Sort](/tidb-global-sort.md) is stored. When `CLOUD_STORAGE_URI` is not specified, `IMPORT INTO` determines whether to use Global Sort based on the value of the system variable [`tidb_cloud_storage_uri`](/system-variables.md#tidb_cloud_storage_uri-new-in-v740). If this system variable specifies a target storage address, `IMPORT INTO` uses this address for Global Sort. When `CLOUD_STORAGE_URI` is specified with a non-empty value, `IMPORT INTO` uses that value as the target storage address. When `CLOUD_STORAGE_URI` is specified with an empty value, local sorting is enforced. Currently, the target storage address only supports S3. For details about the URI configuration, see [Amazon S3 URI format](/external-storage-uri.md#amazon-s3-uri-format). When this feature is used, all TiDB nodes must have read and write access for the target S3 bucket. |
+| オプション名                              | サポートされるデータ形式 | 説明                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| :---------------------------------- | :----------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `CHARACTER_SET='<string>'`          | CSV          | データファイルの文字セットを指定します。デフォルトの文字セットは`utf8mb4`です。サポートされている文字セットには`binary` 、 `utf8` 、 `utf8mb4` 、 `gb18030` 、 `gbk` 、 `latin1` 、および`ascii`が含まれます。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| `FIELDS_TERMINATED_BY='<string>'`   | CSV          | フィールド区切り文字を指定します。デフォルトの区切り文字は`,`です。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| `FIELDS_ENCLOSED_BY='<char>'`       | CSV          | フィールド区切り文字を指定します。デフォルトの区切り文字は`"`です。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| `FIELDS_ESCAPED_BY='<char>'`        | CSV          | フィールドのエスケープ文字を指定します。デフォルトのエスケープ文字は`\`です。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| `FIELDS_DEFINED_NULL_BY='<string>'` | CSV          | フィールドに`NULL`を表す値を指定します。デフォルト値は`\N`です。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| `LINES_TERMINATED_BY='<string>'`    | CSV          | 行末文字を指定します。デフォルトでは、 `IMPORT INTO` `\n` 、 `\r` 、または`\r\n`を行終端記号として自動的に識別します。行終端文字がこれら 3 つのいずれかである場合、このオプションを明示的に指定する必要はありません。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| `SKIP_ROWS=<number>`                | CSV          | スキップする行数を指定します。デフォルト値は`0`です。このオプションを使用すると、CSV ファイルのヘッダーをスキップできます。ワイルドカードを使用してインポートするソース ファイルを指定する場合、このオプションは`fileLocation`のワイルドカードに一致するすべてのソース ファイルに適用されます。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| `SPLIT_FILE`                        | CSV          | 単一の CSV ファイルを約 256 MiB の複数の小さなチャンクに分割して並列処理し、インポート効率を向上させます。このパラメータは**非圧縮**CSV ファイルに対してのみ機能し、 TiDB Lightning [`strict-format`](/tidb-lightning/tidb-lightning-data-source.md#strict-format)と同じ使用制限があります。                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| `DISK_QUOTA='<string>'`             | すべてのフォーマット   | データの並べ替え中に使用できるディスク容量のしきい値を指定します。デフォルト値は、TiDB [一時ディレクトリ](/tidb-configuration-file.md#temp-dir-new-in-v630)のディスク容量の 80% です。合計ディスク サイズを取得できない場合、デフォルト値は 50 GiB です。明示的に`DISK_QUOTA`を指定する場合は、その値が TiDB 一時ディレクトリのディスク容量の 80% を超えないようにしてください。                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| `DISABLE_TIKV_IMPORT_MODE`          | すべてのフォーマット   | インポート プロセス中に TiKV をインポート モードに切り替えることを無効にするかどうかを指定します。デフォルトでは、TiKV をインポート モードに切り替えることは無効になっていません。クラスター内で読み取り/書き込み操作が進行中の場合は、このオプションを有効にして、インポート プロセスによる影響を回避できます。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| `THREAD=<number>`                   | すべてのフォーマット   | インポートの同時実行性を指​​定します。デフォルト値は CPU コアの 50% で、最小値は 1 です。このオプションを明示的に指定してリソース使用量を制御できますが、値が CPU コアの数を超えないようにしてください。データをまったく含まない新しいクラスターにデータをインポートするには、この同時実行数を適切に増やしてインポートのパフォーマンスを向上させることをお勧めします。ターゲット クラスターが本番環境ですでに使用されている場合は、アプリケーションの要件に応じてこの同時実行性を調整することをお勧めします。                                                                                                                                                                                                                                                                                                                                                                                       |
+| `MAX_WRITE_SPEED='<string>'`        | すべてのフォーマット   | TiKV ノードへの書き込み速度を制御します。デフォルトでは、速度制限はありません。たとえば、このオプションを`1MiB`に指定すると、書き込み速度を 1 MiB/s に制限できます。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| `CHECKSUM_TABLE='<string>'`         | すべてのフォーマット   | インポート後にターゲットテーブルに対してチェックサムチェックを実行して、インポートの整合性を検証するかどうかを構成します。サポートされている値には、 `"required"` (デフォルト)、 `"optional"` 、および`"off"`が含まれます。 `"required"`インポート後にチェックサム チェックを実行することを意味します。チェックサム チェックが失敗した場合、TiDB はエラーを返し、インポートは終了します。 `"optional"`インポート後にチェックサム チェックを実行することを意味します。エラーが発生した場合、TiDB は警告を返し、エラーを無視します。 `"off"`インポート後にチェックサム チェックを実行しないことを意味します。                                                                                                                                                                                                                                                                                                        |
+| `DETACHED`                          | すべてのフォーマット   | `IMPORT INTO`非同期で実行するかどうかを制御します。このオプションが有効な場合、 `IMPORT INTO`を実行するとインポート ジョブ ( `Job_ID`など) の情報がすぐに返され、ジョブはバックエンドで非同期的に実行されます。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| `CLOUD_STORAGE_URI`                 | すべてのフォーマット   | [グローバルソート](/tidb-global-sort.md)のエンコードされたKVデータが格納されるターゲットアドレスを指定します。 `CLOUD_STORAGE_URI`が指定されていない場合、 `IMPORT INTO`システム変数[`tidb_cloud_storage_uri`](/system-variables.md#tidb_cloud_storage_uri-new-in-v740)の値に基づいてグローバル ソートを使用するかどうかを決定します。このシステム変数がターゲットstorageアドレスを指定している場合、 `IMPORT INTO`このアドレスをグローバル ソートに使用します。 `CLOUD_STORAGE_URI`空ではない値で指定された場合、 `IMPORT INTO`その値をターゲットstorageアドレスとして使用します。空の値で`CLOUD_STORAGE_URI`指定すると、ローカル ソートが適用されます。現在、ターゲットstorageアドレスは S3 のみをサポートしています。 URI設定の詳細については、 [Amazon S3 URI 形式](/external-storage-uri.md#amazon-s3-uri-format)を参照してください。この機能を使用する場合、すべての TiDB ノードはターゲット S3 バケットに対する読み取りおよび書き込みアクセス権を持っている必要があります。 |
 
-## Compressed files
+## 圧縮ファイル {#compressed-files}
 
-`IMPORT INTO` supports importing compressed `CSV` and `SQL` files. It can automatically determine whether a file is compressed and the compression format based on the file extension:
+`IMPORT INTO`圧縮`CSV`および`SQL`ファイルのインポートをサポートします。ファイルが圧縮されているかどうか、およびファイル拡張子に基づいて圧縮形式を自動的に判断できます。
 
-| Extension | Compression format |
-|:---|:---|
-| `.gz`, `.gzip` | gzip compression format |
-| `.zstd`, `.zst` | ZStd compression format |
-| `.snappy` | snappy compression format |
+| 拡大             | 圧縮形式            |
+| :------------- | :-------------- |
+| `.gz` `.gzip`  | gzip圧縮形式        |
+| `.zstd` `.zst` | ZStd圧縮形式        |
+| `.snappy`      | きびきびとした圧縮フォーマット |
 
-> **Note:**
+> **注記：**
 >
-> The Snappy compressed file must be in the [official Snappy format](https://github.com/google/snappy). Other variants of Snappy compression are not supported.
+> Snappy 圧縮ファイルは[公式の Snappy フォーマット](https://github.com/google/snappy)に存在する必要があります。 Snappy 圧縮の他のバリアントはサポートされていません。
 
-## Global Sort
+## グローバルソート {#global-sort}
 
-> **Warning:**
+> **警告：**
 >
-> The Global Sort feature is experimental. It is not recommended to use it in production environments.
+> グローバル ソート機能は実験的です。本番環境での使用はお勧めできません。
 
-`IMPORT INTO` splits the data import job of a source data file into multiple sub-jobs, each sub-job independently encoding and sorting data before importing. If the encoded KV ranges of these sub-jobs have significant overlap (to learn how TiDB encodes data to KV, see [TiDB computing](/tidb-computing.md)), TiKV needs to keep compaction during import, leading to a decrease in import performance and stability.
+`IMPORT INTO`ソース データ ファイルのデータ インポート ジョブを複数のサブジョブに分割し、各サブジョブはインポート前にデータを個別にエンコードおよび並べ替えます。これらのサブジョブのエンコードされた KV 範囲に大幅な重複がある場合 (TiDB がデータを KV にエンコードする方法については、 [TiDB コンピューティング](/tidb-computing.md)を参照)、TiKV はインポート中に圧縮を維持する必要があり、インポートのパフォーマンスと安定性の低下につながります。
 
-In the following scenarios, there can be significant overlap in KV ranges:
+次のシナリオでは、KV 範囲に大幅な重複が存在する可能性があります。
 
-- If rows in the data file assigned to each sub-job have overlapping primary key ranges, the data KV generated by the encoding of each sub-job will also overlap.
-    - `IMPORT INTO` splits sub-jobs based on the traversal order of data files, usually sorted by file name in lexicographic order.
-- If the target table has many indexes, or the index column values are scattered in the data file, the index KV generated by the encoding of each sub-job will also overlap.
+-   各サブジョブに割り当てられたデータ ファイル内の行に重複する主キー範囲がある場合、各サブジョブのエンコードによって生成されるデータ KV も重複します。
+    -   `IMPORT INTO` 、データ ファイルの走査順序に基づいてサブジョブを分割します。通常はファイル名によって辞書順に並べ替えられます。
+-   対象テーブルに多くのインデックスがある場合、またはインデックス列の値がデータ ファイル内に分散している場合、各サブジョブのエンコードによって生成されるインデックス KV も重複します。
 
-When [Backend task distributed execution framework](/tidb-distributed-execution-framework.md) is enabled, you can enable [Global Sort](/tidb-global-sort.md) by specifying the `CLOUD_STORAGE_URI` option in the `IMPORT INTO` statement or by specifying the target storage address for encoded KV data using the system variable [`tidb_cloud_storage_uri`](/system-variables.md#tidb_cloud_storage_uri-new-in-v740). Note that currently, only S3 is supported as the Global Sort storage address. When Global Sort is enabled, `IMPORT INTO` writes encoded KV data to the cloud storage, performs Global Sort in the cloud storage, and then parallelly imports the globally sorted index and table data into TiKV. This prevents problems caused by KV overlap and enhances import stability.
+[バックエンドタスク分散実行フレームワーク](/tidb-distributed-execution-framework.md)が有効な場合、 `IMPORT INTO`ステートメントで`CLOUD_STORAGE_URI`オプションを指定するか、システム変数[`tidb_cloud_storage_uri`](/system-variables.md#tidb_cloud_storage_uri-new-in-v740)を使用してエンコードされた KV データのターゲットstorageアドレスを指定することにより、 [グローバルソート](/tidb-global-sort.md)有効にできます。現在、グローバル ソートstorageアドレスとしてサポートされているのは S3 のみであることに注意してください。グローバル ソートが有効な場合、 `IMPORT INTO`エンコードされた KV データをクラウドstorageに書き込み、クラウドstorageでグローバル ソートを実行してから、グローバルにソートされたインデックスとテーブル データを TiKV に並行してインポートします。これにより、KV の重複によって引き起こされる問題が防止され、インポートの安定性が向上します。
 
-Global Sort consumes a significant amount of memory resources. Before the data import, it is recommended to configure the [`tidb_server_memory_limit_gc_trigger`](/system-variables.md#tidb_server_memory_limit_gc_trigger-new-in-v640) and [`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-new-in-v640) variables, which avoids golang GC being frequently triggered and thus affecting the import efficiency.
+グローバル ソートは大量のメモリリソースを消費します。データをインポートする前に、変数[`tidb_server_memory_limit_gc_trigger`](/system-variables.md#tidb_server_memory_limit_gc_trigger-new-in-v640)と[`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-new-in-v640)を設定することをお勧めします。これにより、golang GC が頻繁にトリガーされてインポ​​ート効率に影響が出るのを回避できます。
 
 ```sql
 SET GLOBAL tidb_server_memory_limit_gc_trigger=0.99;
 SET GLOBAL tidb_server_memory_limit='88%';
 ```
 
-> **Note:**
+> **注記：**
 >
-> - If the KV range overlap in a source data file is low, enabling Global Sort might decrease import performance. This is because when Global Sort is enabled, TiDB needs to wait for the completion of local sorting in all sub-jobs before proceeding with the Global Sort operations and subsequent import.
-> - After an import job using Global Sort completes, the files stored in the cloud storage for Global Sort are cleaned up asynchronously in a background thread.
+> -   ソース データ ファイル内の KV 範囲の重複が少ない場合、グローバル ソートを有効にするとインポートのパフォーマンスが低下する可能性があります。これは、グローバル ソートが有効な場合、TiDB はグローバル ソート操作とその後のインポートを続行する前に、すべてのサブジョブでローカル ソートが完了するまで待機する必要があるためです。
+> -   Global Sort を使用したインポート ジョブが完了すると、Global Sort のクラウドstorageに保存されたファイルがバックグラウンド スレッドで非同期的にクリーンアップされます。
 
-## Output
+## 出力 {#output}
 
-When `IMPORT INTO` completes the import or when the `DETACHED` mode is enabled, `IMPORT INTO` will return the current job information in the output, as shown in the following examples. For the description of each field, see [`SHOW IMPORT JOB(s)`](/sql-statements/sql-statement-show-import-job.md).
+`IMPORT INTO`インポートを完了するか、 `DETACHED`モードが有効になっている場合、次の例に示すように、 `IMPORT INTO`出力で現在のジョブ情報を返します。各フィールドの説明については、 [`SHOW IMPORT JOB(s)`](/sql-statements/sql-statement-show-import-job.md)を参照してください。
 
-When `IMPORT INTO` completes the import, the example output is as follows:
+`IMPORT INTO`がインポートを完了すると、出力例は次のようになります。
 
 ```sql
 IMPORT INTO t FROM '/path/to/small.csv';
@@ -194,7 +194,7 @@ IMPORT INTO t FROM '/path/to/small.csv';
 +--------+--------------------+--------------+----------+-------+----------+------------------+---------------+----------------+----------------------------+----------------------------+----------------------------+------------+
 ```
 
-When the `DETACHED` mode is enabled, executing the `IMPORT INTO` statement will immediately return the job information in the output. From the output, you can see that the status of the job is `pending`, which means waiting for execution.
+`DETACHED`モードが有効な場合、 `IMPORT INTO`ステートメントを実行すると、出力でジョブ情報がすぐに返されます。出力から、ジョブのステータスが`pending`であることがわかります。これは、実行待ちを意味します。
 
 ```sql
 IMPORT INTO t FROM '/path/to/small.csv' WITH DETACHED;
@@ -205,107 +205,103 @@ IMPORT INTO t FROM '/path/to/small.csv' WITH DETACHED;
 +--------+--------------------+--------------+----------+-------+---------+------------------+---------------+----------------+----------------------------+------------+----------+------------+
 ```
 
-## View and manage import jobs
+## インポートジョブのビューと管理 {#view-and-manage-import-jobs}
 
-For an import job with the `DETACHED` mode enabled, you can use [`SHOW IMPORT`](/sql-statements/sql-statement-show-import-job.md) to view its current job progress.
+`DETACHED`モードが有効になっているインポート ジョブの場合、 [`SHOW IMPORT`](/sql-statements/sql-statement-show-import-job.md)使用して現在のジョブの進行状況を表示できます。
 
-After an import job is started, you can cancel it using [`CANCEL IMPORT JOB <job-id>`](/sql-statements/sql-statement-cancel-import-job.md).
+インポート ジョブの開始後は、 [`CANCEL IMPORT JOB &#x3C;job-id>`](/sql-statements/sql-statement-cancel-import-job.md)を使用してキャンセルできます。
 
-## Examples
+## 例 {#examples}
 
-### Import a CSV file with headers
+### ヘッダー付きの CSV ファイルをインポートする {#import-a-csv-file-with-headers}
 
 ```sql
 IMPORT INTO t FROM '/path/to/file.csv' WITH skip_rows=1;
 ```
 
-### Import a file asynchronously in the `DETACHED` mode
+### <code>DETACHED</code>モードでファイルを非同期にインポートする {#import-a-file-asynchronously-in-the-code-detached-code-mode}
 
 ```sql
 IMPORT INTO t FROM '/path/to/file.csv' WITH DETACHED;
 ```
 
-### Skip importing a specific field in your data file
+### データ ファイル内の特定のフィールドのインポートをスキップする {#skip-importing-a-specific-field-in-your-data-file}
 
-Assume that your data file is in the CSV format and its content is as follows:
+データ ファイルが CSV 形式であり、その内容が次のとおりであると仮定します。
 
-```
-id,name,age
-1,Tom,23
-2,Jack,44
-```
+    id,name,age
+    1,Tom,23
+    2,Jack,44
 
-And assume that the target table schema for the import is `CREATE TABLE t(id int primary key, name varchar(100))`. To skip importing the `age` field in the data file to the table `t`, you can execute the following SQL statement:
+また、インポートのターゲット表スキーマが`CREATE TABLE t(id int primary key, name varchar(100))`であると仮定します。データ ファイルの`age`フィールドのテーブル`t`へのインポートをスキップするには、次の SQL ステートメントを実行します。
 
 ```sql
 IMPORT INTO t(id, name, @1) FROM '/path/to/file.csv' WITH skip_rows=1;
 ```
 
-### Import multiple data files using the wildcard `*`
+### ワイルドカード<code>*</code>を使用して複数のデータ ファイルをインポートします {#import-multiple-data-files-using-the-wildcard-code-code}
 
-Assume that there are three files named `file-01.csv`, `file-02.csv`, and `file-03.csv` in the `/path/to/` directory. To import these three files into a target table `t` using `IMPORT INTO`, you can execute the following SQL statement:
+`/path/to/`ディレクトリに`file-01.csv` 、 `file-02.csv` 、および`file-03.csv`という名前の 3 つのファイルがあると仮定します。 `IMPORT INTO`を使用してこれら 3 つのファイルをターゲット テーブル`t`にインポートするには、次の SQL ステートメントを実行できます。
 
 ```sql
 IMPORT INTO t FROM '/path/to/file-*.csv'
 ```
 
-### Import data files from Amazon S3, GCS, or Azure Blob Storage
+### Amazon S3、GCS、または Azure Blob Storage からデータ ファイルをインポートする {#import-data-files-from-amazon-s3-gcs-or-azure-blob-storage}
 
-- Import data files from Amazon S3:
+-   Amazon S3 からデータ ファイルをインポートします。
 
     ```sql
     IMPORT INTO t FROM 's3://bucket-name/test.csv?access-key=XXX&secret-access-key=XXX';
     ```
 
-- Import data files from GCS:
+-   GCS からデータ ファイルをインポートします。
 
     ```sql
     IMPORT INTO t FROM 'gs://import/test.csv?credentials-file=${credentials-file-path}';
     ```
 
-- Import data files from Azure Blob Storage:
+-   Azure Blob Storage からデータ ファイルをインポートします。
 
     ```sql
     IMPORT INTO t FROM 'azure://import/test.csv?credentials-file=${credentials-file-path}';
     ```
 
-For details about the URI path configuration for Amazon S3, GCS, or Azure Blob Storage, see [URI Formats of External Storage Services](/external-storage-uri.md).
+Amazon S3、GCS、または Azure Blob Storage の URI パス設定の詳細については、 [外部ストレージ サービスの URI 形式](/external-storage-uri.md)を参照してください。
 
-### Calculate column values using SetClause
+### SetClause を使用して列の値を計算する {#calculate-column-values-using-setclause}
 
-Assume that your data file is in the CSV format and its content is as follows:
+データ ファイルが CSV 形式であり、その内容が次のとおりであると仮定します。
 
-```
-id,name,val
-1,phone,230
-2,book,440
-```
+    id,name,val
+    1,phone,230
+    2,book,440
 
-And assume that the target table schema for the import is `CREATE TABLE t(id int primary key, name varchar(100), val int)`. If you want to multiply the `val` column values by 100 during the import, you can execute the following SQL statement:
+また、インポートのターゲット表スキーマが`CREATE TABLE t(id int primary key, name varchar(100), val int)`であると仮定します。インポート中に`val`列の値を 100 倍する場合は、次の SQL ステートメントを実行できます。
 
 ```sql
 IMPORT INTO t(id, name, @1) SET val=@1*100 FROM '/path/to/file.csv' WITH skip_rows=1;
 ```
 
-### Import a data file in the SQL format
+### SQL形式のデータファイルをインポートする {#import-a-data-file-in-the-sql-format}
 
 ```sql
 IMPORT INTO t FROM '/path/to/file.sql' FORMAT 'sql';
 ```
 
-### Limit the write speed to TiKV
+### 書き込み速度を TiKV に制限する {#limit-the-write-speed-to-tikv}
 
-To limit the write speed to a TiKV node to 10 MiB/s, execute the following SQL statement:
+TiKV ノードへの書き込み速度を 10 MiB/s に制限するには、次の SQL ステートメントを実行します。
 
 ```sql
 IMPORT INTO t FROM 's3://bucket/path/to/file.parquet?access-key=XXX&secret-access-key=XXX' FORMAT 'parquet' WITH MAX_WRITE_SPEED='10MiB';
 ```
 
-## MySQL compatibility
+## MySQLの互換性 {#mysql-compatibility}
 
-This statement is a TiDB extension to MySQL syntax.
+このステートメントは、MySQL 構文に対する TiDB 拡張機能です。
 
-## See also
+## こちらも参照 {#see-also}
 
-* [`SHOW IMPORT JOB(s)`](/sql-statements/sql-statement-show-import-job.md)
-* [`CANCEL IMPORT JOB`](/sql-statements/sql-statement-cancel-import-job.md)
+-   [`SHOW IMPORT JOB(s)`](/sql-statements/sql-statement-show-import-job.md)
+-   [`CANCEL IMPORT JOB`](/sql-statements/sql-statement-cancel-import-job.md)

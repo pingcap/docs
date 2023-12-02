@@ -2,48 +2,48 @@
 title: tiup mirror sign
 ---
 
-# tiup mirror sign
+# tiup mirror sign {#tiup-mirror-sign}
 
-The `tiup mirror sign` command is used to sign the metadata files (*.json）defined in TiUP [mirror](/tiup/tiup-mirror-reference.md). These metadata files might be stored on the local file system or remotely stored using the HTTP protocol to provide a signature entry.
+`tiup mirror sign`コマンドは、 TiUP [鏡](/tiup/tiup-mirror-reference.md)で定義されたメタデータ ファイル (*.json) に署名するために使用されます。これらのメタデータ ファイルは、ローカル ファイル システムに保存されるか、署名エントリを提供するために HTTP プロトコルを使用してリモートに保存される場合があります。
 
-## Syntax
+## 構文 {#syntax}
 
 ```shell
 tiup mirror sign <manifest-file> [flags]
 ```
 
-`<manifest-file>` is the address of the file to be signed, which has two forms:
+`<manifest-file>`は署名されるファイルのアドレスで、次の 2 つの形式があります。
 
-- Network address, which starts with HTTP or HTTPS, such as `http://172.16.5.5:8080/rotate/root.json`
-- Local file path, which is a relative path or an absolute path
+-   HTTP または HTTPS で始まるネットワーク アドレス ( `http://172.16.5.5:8080/rotate/root.json`など)
+-   ローカル ファイル パス。相対パスまたは絶対パスです。
 
-If it is a network address, this address must provide the following features:
+ネットワーク アドレスの場合、このアドレスは次の機能を提供する必要があります。
 
-- Supports the access via `http get` that returns the complete content of the signed file (including the `signatures` field).
-- Supports the access via `http post`. The client adds the signature to the `signatures` field of the content that is returned by `http get` and posts to this network address.
+-   署名されたファイルの完全なコンテンツ ( `signatures`フィールドを含む) を返す`http get`経由のアクセスをサポートします。
+-   `http post`によるアクセスをサポートします。クライアントは、 `http get`によって返されたコンテンツの`signatures`フィールドに署名を追加し、このネットワーク アドレスにポストします。
 
-## Options
+## オプション {#options}
 
-### -k, --key
+### -k、--キー {#k-key}
 
-- Specifies the location of the private key used for signing the `{component}.json` file.
-- Data type: `STRING`
-- - If this option is not specified in the command, `"${TIUP_HOME}/keys/private.json"` is used by default.
+-   `{component}.json`ファイルの署名に使用される秘密キーの場所を指定します。
+-   データ型: `STRING`
+-   -   このオプションがコマンドで指定されていない場合、デフォルトで`"${TIUP_HOME}/keys/private.json"`が使用されます。
 
-### --timeout
+### - タイムアウト {#timeout}
 
-- Specifies the access timeout time for signing through the network. The unit is in seconds.
-- Data type: `INT`
-- Default: 10
+-   ネットワーク経由の署名のアクセス タイムアウト時間を指定します。単位は秒です。
+-   データ型: `INT`
+-   デフォルト: 10
 
-> **Note:**
+> **注記：**
 >
-> This option is valid only when `<manifest-file>` is a network address.
+> このオプションは、 `<manifest-file>`がネットワーク アドレスの場合にのみ有効です。
 
-## Output
+## 出力 {#output}
 
-- If the command is executed successfully, there is no output.
-- If the file has been signed by the specified key, TiUP reports the error `Error: this manifest file has already been signed by specified key`.
-- If the file is not a valid manifest, TiUP reports the error `Error: unmarshal manifest: %s`.
+-   コマンドが正常に実行された場合、出力はありません。
+-   ファイルが指定されたキーで署名されている場合、 TiUP はエラー`Error: this manifest file has already been signed by specified key`を報告します。
+-   ファイルが有効なマニフェストではない場合、 TiUP はエラー`Error: unmarshal manifest: %s`を報告します。
 
-[<< Back to the previous page - TiUP Mirror command list](/tiup/tiup-command-mirror.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUP Mirror コマンド一覧](/tiup/tiup-command-mirror.md#command-list)

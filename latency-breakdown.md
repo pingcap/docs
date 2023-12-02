@@ -3,30 +3,28 @@ title: Latency Breakdown
 summary: Introduce more details about TiDB latency and how to analyze latency in real use cases.
 ---
 
-# Latency Breakdown
+# レイテンシの内訳 {#latency-breakdown}
 
-This document breaks down the latency into metrics and then analyzes it from the user's perspective from the following aspects:
+このドキュメントでは、レイテンシーをメトリクスに分類し、ユーザーの観点から次の側面から分析します。
 
-- [General SQL layer](#general-sql-layer)
-- [Read queries](#read-queries)
-- [Write queries](#write-queries)
-- [Batch client](#batch-client)
-- [TiKV snapshot](#tikv-snapshot)
-- [Async write](#async-write)
+-   [一般的な SQLレイヤー](#general-sql-layer)
+-   [クエリの読み取り](#read-queries)
+-   [クエリの作成](#write-queries)
+-   [バッチクライアント](#batch-client)
+-   [TiKV スナップショット](#tikv-snapshot)
+-   [非同期書き込み](#async-write)
 
-These analyses provide you with a deep insight into time cost during TiDB SQL queries. This is a guide to TiDB's critical path diagnosis. Besides, the [Diagnosis use cases](#diagnosis-use-cases) section introduces how to analyze latency in real use cases.
+これらの分析により、 TiDB SQLクエリ中の時間コストについての深い洞察が得られます。 TiDB のクリティカル パス診断のガイドです。さらに、第[診断の使用例](#diagnosis-use-cases)セクションでは、実際のユースケースでレイテンシーを分析する方法を紹介します。
 
-It's better to read [Performance Analysis and Tuning](/performance-tuning-methods.md) before this document. Note that when breaking down latency into metrics, the average value of duration or latency is calculated instead of some specific slow queries. Many metrics are shown as histogram, which is a distribution of the duration or latency. To calculate the average latency, you need to use the following sum and count counter.
+この文書の前に[パフォーマンスの分析とチューニング](/performance-tuning-methods.md)を読んでおいた方がよいでしょう。レイテンシーをメトリクスに分類する場合、特定の遅いクエリの代わりに、期間またはレイテンシーの平均値が計算されることに注意してください。多くのメトリクスは、期間またはレイテンシーの分布であるヒストグラムとして表示されます。平均レイテンシーを計算するには、次の合計とカウント カウンターを使用する必要があります。
 
-```
-avg = ${metric_name}_sum / ${metric_name}_count
-```
+    avg = ${metric_name}_sum / ${metric_name}_count
 
-Metrics described in this document can be read directly from the Prometheus dashboard of TiDB.
+このドキュメントで説明されているメトリクスは、TiDB の Prometheus ダッシュボードから直接読み取ることができます。
 
-## General SQL layer
+## 一般的な SQLレイヤー {#general-sql-layer}
 
-This general SQL layer latency exists on the top level of TiDB and is shared by all SQL queries. The following is the time cost diagram of general SQL layer operation:
+この一般的な SQLレイヤーのレイテンシーはTiDB の最上位に存在し、すべての SQL クエリによって共有されます。以下は、一般的な SQLレイヤー操作の時間コスト図です。
 
 ```railroad+diagram
 Diagram(
@@ -54,7 +52,7 @@ Diagram(
 )
 ```
 
-The general SQL layer latency can be observed as the `e2e duration` metric and is calculated as:
+一般的な SQLレイヤーのレイテンシーは`e2e duration`メトリックとして観察でき、次のように計算されます。
 
 ```text
 e2e duration =
@@ -64,20 +62,20 @@ e2e duration =
     tidb_session_execute_duration_seconds{type="general"}
 ```
 
-- `tidb_server_get_token_duration_seconds` records the duration of Token waiting. This is usually less than 1 millisecond and is small enough to be ignored.
-- `tidb_session_parse_duration_seconds` records the duration of parsing SQL queries to an Abstract Syntax Tree (AST), which can be skipped by [`PREPARE/EXECUTE` statements](/develop/dev-guide-optimize-sql-best-practices.md#use-prepare).
-- `tidb_session_compile_duration_seconds` records the duration of compiling an AST to an execution plan, which can be skipped by [SQL prepared execution plan cache](/sql-prepared-plan-cache.md).
-- `tidb_session_execute_duration_seconds{type="general"}` records the duration of execution, which mixes all types of user queries. This needs to be broken down into fine-grained durations for analyzing performance issues or bottlenecks.
+-   `tidb_server_get_token_duration_seconds`トークンの待機時間を記録します。これは通常 1 ミリ秒未満であり、無視できるほど小さいです。
+-   `tidb_session_parse_duration_seconds` SQL クエリを抽象構文ツリー (AST) に解析する時間を記録します。これは[`PREPARE/EXECUTE`ステートメント](/develop/dev-guide-optimize-sql-best-practices.md#use-prepare)でスキップできます。
+-   `tidb_session_compile_duration_seconds` AST を実行プランにコンパイルする時間を記録します。これは[SQLで準備された実行プランのキャッシュ](/sql-prepared-plan-cache.md)でスキップできます。
+-   `tidb_session_execute_duration_seconds{type="general"}` 、あらゆる種類のユーザー クエリが混在する実行時間を記録します。パフォーマンスの問題やボトルネックを分析するには、これを細かい期間に分割する必要があります。
 
-Generally, OLTP (Online Transactional Processing) workload can be divided into read and write queries, which share some critical code. The following sections describe latency in [read queries](#read-queries) and [write queries](#write-queries), which are executed differently.
+一般に、OLTP (オンライン トランザクション処理) ワークロードは、いくつかの重要なコードを共有する読み取りクエリと書き込みクエリに分割できます。次のセクションでは、実行方法が異なる[クエリの読み取り](#read-queries)と[クエリを書く](#write-queries)のレイテンシーについて説明します。
 
-## Read queries
+## クエリの読み取り {#read-queries}
 
-Read queries have only a single process form.
+読み取りクエリにはプロセス フォームが 1 つだけあります。
 
-### Point get
+### ポイントゲット {#point-get}
 
-The following is the time cost diagram of [point get](/glossary.md#point-get) operations:
+以下は[ポイントゲット](/glossary.md#point-get)操作の時間コスト図です。
 
 ```railroad+diagram
 Diagram(
@@ -95,7 +93,7 @@ Diagram(
 )
 ```
 
-During point get, the `tidb_session_execute_duration_seconds{type="general"}` duration is calculated as:
+ポイント取得中、 `tidb_session_execute_duration_seconds{type="general"}`期間は次のように計算されます。
 
 ```text
 tidb_session_execute_duration_seconds{type="general"} =
@@ -104,9 +102,9 @@ tidb_session_execute_duration_seconds{type="general"} =
     read value duration
 ```
 
-`pd_client_cmd_handle_cmds_duration_seconds{type="wait"}` records the duration of fetching [TSO (Timestamp Oracle)](/glossary.md#tso) from PD. When reading in an auto-commit transaction mode with a clustered primary index or from a snapshot, the value will be zero.
+`pd_client_cmd_handle_cmds_duration_seconds{type="wait"}` PD から[TSO (タイムスタンプ Oracle)](/glossary.md#tso)フェッチする時間を記録します。クラスター化プライマリ インデックスを使用して自動コミット トランザクション モードで読み取る場合、またはスナップショットから読み取る場合、値はゼロになります。
 
-The `read handle duration` and `read value duration` are calculated as:
+`read handle duration`と`read value duration`は次のように計算されます。
 
 ```text
 read handle duration = read value duration =
@@ -119,9 +117,9 @@ read handle duration = read value duration =
     tidb_tikvclient_rpc_net_latency_seconds{store="?"}
 ```
 
-The `tidb_tikvclient_request_seconds{type="Get"}` records a duration of get requests which are sent directly to TiKV via a batched gRPC wrapper. For more details about the preceding batch client duration, such as `tidb_tikvclient_batch_wait_duration`, `tidb_tikvclient_batch_send_latency`, and `tidb_tikvclient_rpc_net_latency_seconds{store="?"}`, refer to the [Batch client](#batch-client) section.
+`tidb_tikvclient_request_seconds{type="Get"}` 、バッチ化された gRPC ラッパーを介して TiKV に直接送信される get リクエストの継続時間を記録します。 `tidb_tikvclient_batch_wait_duration` 、 `tidb_tikvclient_batch_send_latency` 、 `tidb_tikvclient_rpc_net_latency_seconds{store="?"}`など、前述のバッチ クライアント期間の詳細については、 [バッチクライアント](#batch-client)セクションを参照してください。
 
-The `tikv_grpc_msg_duration_seconds{type="kv_get"}` duration is calculated as:
+`tikv_grpc_msg_duration_seconds{type="kv_get"}`期間は次のように計算されます。
 
 ```text
 tikv_grpc_msg_duration_seconds{type="kv_get"} =
@@ -131,20 +129,20 @@ tikv_grpc_msg_duration_seconds{type="kv_get"} =
     read value duration(non-short value)
 ```
 
-At this time, requests are in TiKV. TiKV processes get requests by one seek and one or two read actions (short values are encoded in a write column family, and reading it once is enough). TiKV gets a snapshot before processing the read request. For more details about the TiKV snapshot duration, refer to the [TiKV snapshot](#tikv-snapshot) section.
+現時点では、リクエストは TiKV にあります。 TiKV プロセスは、1 回のシークと 1 回または 2 回の読み取りアクションによってリクエストを取得します (短い値は書き込みカラムファミリーにエンコードされており、一度読み取るだけで十分です)。 TiKV は、読み取りリクエストを処理する前にスナップショットを取得します。 TiKV スナップショットの持続時間の詳細については、 [TiKV スナップショット](#tikv-snapshot)セクションを参照してください。
 
-The `read value duration(from disk)` is calculated as:
+`read value duration(from disk)`は次のように計算されます。
 
 ```text
 read value duration(from disk) =
     sum(rate(tikv_storage_rocksdb_perf{metric="block_read_time",req="get/batch_get_command"})) / sum(rate(tikv_storage_rocksdb_perf{metric="block_read_count",req="get/batch_get_command"}))
 ```
 
-TiKV uses RocksDB as its storage engine. When the required value is missing from the block cache, TiKV needs to load the value from the disk. For `tikv_storage_rocksdb_perf`, the get request can be either `get` or `batch_get_command`.
+TiKV はstorageエンジンとして RocksDB を使用しています。必要な値がブロックキャッシュにない場合、TiKV はディスクから値をロードする必要があります。 `tikv_storage_rocksdb_perf`の場合、get リクエストは`get`または`batch_get_command`いずれかになります。
 
-### Batch point get
+### バッチポイントゲット {#batch-point-get}
 
-The following is the time cost diagram of batch point get operations:
+以下は、バッチ ポイント取得操作の時間コスト図です。
 
 ```railroad+diagram
 Diagram(
@@ -158,7 +156,7 @@ Diagram(
 )
 ```
 
-During batch point get, the `tidb_session_execute_duration_seconds{type="general"}` is calculated as:
+バッチ ポイントの取得中に、 `tidb_session_execute_duration_seconds{type="general"}`は次のように計算されます。
 
 ```text
 tidb_session_execute_duration_seconds{type="general"} =
@@ -167,9 +165,9 @@ tidb_session_execute_duration_seconds{type="general"} =
     read values duration
 ```
 
-The process of batch point get is almost the same as [Point get](#point-get) except that batch point get reads multiple values at the same time.
+バッチポイント取得の処理は[ポイントゲット](#point-get)とほぼ同じですが、バッチポイント取得は複数の値を同時に読み込む点が異なります。
 
-The `read handles duration` and `read values duration` are calculated as:
+`read handles duration`と`read values duration`は次のように計算されます。
 
 ```text
 read handles duration = read values duration =
@@ -182,9 +180,9 @@ read handles duration = read values duration =
     tidb_tikvclient_rpc_net_latency_seconds{store="?"}(transaction)
 ```
 
-For more details about the preceding batch client duration, such as `tidb_tikvclient_batch_wait_duration(transaction)`, `tidb_tikvclient_batch_send_latency(transaction)`, and `tidb_tikvclient_rpc_net_latency_seconds{store="?"}(transaction)`, refer to the [Batch client](#batch-client) section.
+`tidb_tikvclient_batch_wait_duration(transaction)` 、 `tidb_tikvclient_batch_send_latency(transaction)` 、 `tidb_tikvclient_rpc_net_latency_seconds{store="?"}(transaction)`など、前述のバッチ クライアント期間の詳細については、 [バッチクライアント](#batch-client)セクションを参照してください。
 
-The `tikv_grpc_msg_duration_seconds{type="kv_batch_get"}` duration is calculated as:
+`tikv_grpc_msg_duration_seconds{type="kv_batch_get"}`期間は次のように計算されます。
 
 ```text
 tikv_grpc_msg_duration_seconds{type="kv_batch_get"} =
@@ -199,11 +197,11 @@ read value duration(from disk) =
     sum(rate(tikv_storage_rocksdb_perf{metric="block_read_time",req="batch_get"})) / sum(rate(tikv_storage_rocksdb_perf{metric="block_read_count",req="batch_get"}))
 ```
 
-After getting a snapshot, TiKV reads multiple values from the same snapshot. The read duration is the same as [Point get](#point-get). When TiKV loads data from disk, the average duration can be calculated by `tikv_storage_rocksdb_perf` with `req="batch_get"`.
+スナップショットを取得した後、TiKV は同じスナップショットから複数の値を読み取ります。読み取り期間は[ポイントゲット](#point-get)と同じです。 TiKV がディスクからデータをロードする場合、平均所要時間は`tikv_storage_rocksdb_perf`と`req="batch_get"`で計算できます。
 
-### Table scan & Index scan
+### テーブルスキャンとインデックススキャン {#table-scan-x26-index-scan}
 
-The following is the time cost diagram of table scan and index scan operations:
+以下は、テーブル スキャンおよびインデックス スキャン操作の時間コストの図です。
 
 ```railroad+diagram
 Diagram(
@@ -218,7 +216,7 @@ Diagram(
 )
 ```
 
-During table scan and index scan, the `tidb_session_execute_duration_seconds{type="general"}` duration is calculated as:
+テーブル スキャンおよびインデックス スキャン中、 `tidb_session_execute_duration_seconds{type="general"}`期間は次のように計算されます。
 
 ```text
 tidb_session_execute_duration_seconds{type="general"} =
@@ -229,9 +227,9 @@ tidb_session_execute_duration_seconds{type="general"} =
     tidb_distsql_handle_query_duration_seconds{sql_type="general"} <= send request duration
 ```
 
-Table scan and index scan are processed in the same way. `req_per_copr` is the distributed task count. Because coprocessor execution and data responding to client are in different threads, `tidb_distsql_handle_query_duration_seconds{sql_type="general"}` is the wait time and it is less than the `send request duration`.
+テーブルスキャンとインデックススキャンは同じ方法で処理されます。 `req_per_copr`は分散タスク数です。コプロセッサの実行とクライアントに応答するデータは別のスレッドにあるため、 `tidb_distsql_handle_query_duration_seconds{sql_type="general"}`は待機時間であり、 `send request duration`よりも小さくなります。
 
-The `send request duration` and `req_per_copr` are calculated as:
+`send request duration`と`req_per_copr`は次のように計算されます。
 
 ```text
 send request duration =
@@ -249,11 +247,11 @@ tikv_grpc_msg_duration_seconds{type="coprocessor"} =
 req_per_copr = rate(tidb_distsql_handle_query_duration_seconds_count) / rate(tidb_distsql_scan_keys_partial_num_count)
 ```
 
-In TiKV, the table scan type is `select` and the index scan type is `index`. The details of `select` and `index` type duration are the same.
+TiKV では、テーブル スキャン タイプは`select` 、インデックス スキャン タイプは`index`です。 `select`と`index`タイプの持続時間の詳細は同じです。
 
-### Index look up
+### インデックスルックアップ {#index-look-up}
 
-The following is the time cost diagram of index look up operations:
+以下は、インデックス検索操作の時間コストの図です。
 
 ```railroad+diagram
 Diagram(
@@ -271,7 +269,7 @@ Diagram(
 )
 ```
 
-During index look up, the `tidb_session_execute_duration_seconds{type="general"}` duration is calculated as:
+インデックスの検索中、 `tidb_session_execute_duration_seconds{type="general"}`期間は次のように計算されます。
 
 ```text
 tidb_session_execute_duration_seconds{type="general"} =
@@ -286,11 +284,11 @@ tidb_session_execute_duration_seconds{type="general"} =
 req_per_copr = rate(tidb_distsql_handle_query_duration_seconds_count) / rate(tidb_distsql_scan_keys_partial_num_count)
 ```
 
-An index look up combines index scan and table scan, which are processed in a pipeline.
+インデックス ルックアップは、パイプラインで処理されるインデックス スキャンとテーブル スキャンを組み合わせたものです。
 
-## Write queries
+## クエリの作成 {#write-queries}
 
-Write queries are much more complex than read queries. There are some variants of write queries. The following is the time cost diagram of write queries operations:
+書き込みクエリは読み取りクエリよりもはるかに複雑です。書き込みクエリにはいくつかのバリエーションがあります。以下は、クエリ書き込み操作の時間コスト図です。
 
 ```railroad+diagram
 Diagram(
@@ -308,24 +306,24 @@ Diagram(
 )
 ```
 
-|                 | Pessimistic transaction | Optimistic transaction |
-|-----------------|-------------------------|------------------------|
-| Auto-commit     | execute + lock + commit | execute + commit       |
-| Non-auto-commit | execute + lock          | execute                |
+|         | 悲観的な取引          | 楽観的な取引    |
+| ------- | --------------- | --------- |
+| 自動コミット  | 実行 + ロック + コミット | 実行 + コミット |
+| 非自動コミット | 実行+ロック          | 実行する      |
 
-A write query is divided into the following three phases:
+書き込みクエリは次の 3 つのフェーズに分かれています。
 
-- execute phase: execute and write mutation into the memory of TiDB.
-- lock phase: acquire pessimistic locks for the execution result.
-- commit phase: commit the transaction via the two-phase commit protocol (2PC).
+-   実行フェーズ: ミューテーションを実行し、TiDB のメモリに書き込みます。
+-   ロックフェーズ: 実行結果に対して悲観的ロックを取得します。
+-   コミット フェーズ: 2 フェーズ コミット プロトコル (2PC) 経由でトランザクションをコミットします。
 
-In the execute phase, TiDB manipulates data in memory and the main latency comes from reading the required data. For update and delete queries, TiDB reads data from TiKV first, and then updates or deletes the row in memory.
+実行フェーズでは、TiDB はメモリ内のデータを操作し、主なレイテンシーは必要なデータの読み取りから発生します。更新クエリと削除クエリの場合、TiDB は最初に TiKV からデータを読み取り、次にメモリ内の行を更新または削除します。
 
-The exception is lock-time read operations (`SELECT FOR UPDATE`) with point get and batch point get, which perform read and lock in a single Remote Procedure Call (RPC).
+例外は、ポイント取得およびバッチ ポイント取得によるロック時読み取り操作 ( `SELECT FOR UPDATE` ) であり、単一のリモート プロシージャ コール (RPC) で読み取りとロックを実行します。
 
-### Lock-time point get
+### ロックタイムポイントゲット {#lock-time-point-get}
 
-The following is the time cost diagram of lock-time point get operations:
+以下は、ロック時点のポイント取得操作の時間コスト図です。
 
 ```railroad+diagram
 Diagram(
@@ -342,7 +340,7 @@ Diagram(
 )
 ```
 
-During lock-time point get, the `execution(clustered PK)` and `execution(non-clustered PK or UK)` duration are calculated as:
+ロックタイム ポイントの取得中、 `execution(clustered PK)`と`execution(non-clustered PK or UK)`の期間は次のように計算されます。
 
 ```text
 execution(clustered PK) =
@@ -351,11 +349,11 @@ execution(non-clustered PK or UK) =
     2 * tidb_tikvclient_txn_cmd_duration_seconds{type="lock_keys"}
 ```
 
-Lock-time point get locks the key and returns its value. Compared with the lock phase after execution, this saves 1 round trip. The duration of the lock-time point get can be treated the same as [Lock duration](#lock).
+Lock-time point get はキーをロックし、その値を返します。実行後のロックフェーズに比べて1往復が節約されます。ロックタイムポイントの取得期間は[ロック期間](#lock)と同じように扱うことができます。
 
-### Lock-time batch point get
+### ロックタイム一括ポイント取得 {#lock-time-batch-point-get}
 
-The following is the time cost diagram of lock-time batch point get operations:
+以下は、ロック時のバッチ ポイント取得操作の時間コスト図です。
 
 ```railroad+diagram
 Diagram(
@@ -369,7 +367,7 @@ Diagram(
 )
 ```
 
-During lock-time batch point get, the `execution(clustered PK)` and `execution(non-clustered PK or UK)` duration are calculated as:
+ロックタイム バッチ ポイントの取得中、 `execution(clustered PK)`と`execution(non-clustered PK or UK)`の期間は次のように計算されます。
 
 ```text
 execution(clustered PK) =
@@ -379,11 +377,11 @@ execution(non-clustered PK or UK) =
     tidb_tikvclient_txn_cmd_duration_seconds{type="lock_keys"}
 ```
 
-The execution of the lock-time batch point get is similar to the [Lock-time point get](#lock-time-point-get) except that the lock-time batch point get reads multiple values in a single RPC. For more details about the `tidb_tikvclient_txn_cmd_duration_seconds{type="batch_get"}` duration, refer to the [Batch point get](#batch-point-get) section.
+ロック時バッチ ポイント get の実行は、ロック時バッチ ポイント get が 1 つの RPC で複数の値を読み取ることを除いて、 [ロックタイムポイントゲット](#lock-time-point-get)と似ています。 `tidb_tikvclient_txn_cmd_duration_seconds{type="batch_get"}`期間の詳細については、 [バッチポイントゲット](#batch-point-get)セクションを参照してください。
 
-### Lock
+### ロック {#lock}
 
-This section describes the lock duration.
+このセクションでは、ロック期間について説明します。
 
 ```text
 round = ceil(
@@ -396,9 +394,9 @@ lock = tidb_tikvclient_txn_cmd_duration_seconds{type="lock_keys"} =
     round * tidb_tikvclient_request_seconds{type="PessimisticLock"}
 ```
 
-Locks are acquired through the 2PC structure, which has a flow control mechanism. The flow control limits concurrent on-the-fly requests by `committer-concurrency` (default value is `128`). For simplicity, the flow control can be treated as an amplification of request latency (`round`).
+ロックは、フロー制御メカニズムを備えた 2PC 構造を通じて取得されます。フロー制御は、同時オンザフライ要求を`committer-concurrency`に制限します (デフォルト値は`128` )。簡単にするために、フロー制御はリクエストレイテンシーの増幅として扱うことができます ( `round` )。
 
-The `tidb_tikvclient_request_seconds{type="PessimisticLock"}` is calculated as:
+`tidb_tikvclient_request_seconds{type="PessimisticLock"}`は次のように計算されます。
 
 ```text
 tidb_tikvclient_request_seconds{type="PessimisticLock"} =
@@ -408,9 +406,9 @@ tidb_tikvclient_request_seconds{type="PessimisticLock"} =
     tidb_tikvclient_rpc_net_latency_seconds{store="?"}
 ```
 
-For more details about the preceding batch client duration, such as `tidb_tikvclient_batch_wait_duration`, `tidb_tikvclient_batch_send_latency`, and `tidb_tikvclient_rpc_net_latency_seconds{store="?"}`, refer to the [Batch client](#batch-client) section.
+`tidb_tikvclient_batch_wait_duration` 、 `tidb_tikvclient_batch_send_latency` 、 `tidb_tikvclient_rpc_net_latency_seconds{store="?"}`など、前述のバッチ クライアント期間の詳細については、 [バッチクライアント](#batch-client)セクションを参照してください。
 
-The `tikv_grpc_msg_duration_seconds{type="kv_pessimistic_lock"}` duration is calculated as:
+`tikv_grpc_msg_duration_seconds{type="kv_pessimistic_lock"}`期間は次のように計算されます。
 
 ```text
 tikv_grpc_msg_duration_seconds{type="kv_pessimistic_lock"} =
@@ -421,9 +419,11 @@ tikv_grpc_msg_duration_seconds{type="kv_pessimistic_lock"} =
     lock write duration
 ```
 
-- Since TiDB v6.0, TiKV uses [in-memory pessimistic lock](/pessimistic-transaction.md#in-memory-pessimistic-lock) by default. In-memory pessimistic lock bypass the async write process.
-- `tikv_storage_engine_async_request_duration_seconds{type="snapshot"}` is a snapshot type duration. For more details, refer to the [TiKV Snapshot](#tikv-snapshot) section.
-- The `lock in-mem key count` and `lock on-disk key count` are calculated as:
+-   TiDB v6.0 以降、TiKV はデフォルトで[メモリ内悲観的ロック](/pessimistic-transaction.md#in-memory-pessimistic-lock)を使用します。インメモリ悲観的ロックは、非同期書き込みプロセスをバイパスします。
+
+-   `tikv_storage_engine_async_request_duration_seconds{type="snapshot"}`はスナップショット タイプの期間です。詳細については、 [TiKV スナップショット](#tikv-snapshot)セクションを参照してください。
+
+-   `lock in-mem key count`と`lock on-disk key count`は次のように計算されます。
 
     ```text
     lock in-mem key count =
@@ -435,18 +435,18 @@ tikv_grpc_msg_duration_seconds{type="kv_pessimistic_lock"} =
         sum(rate(tikv_grpc_msg_duration_seconds_count{type="kv_pessimistic_lock"}}))
     ```
 
-    The count of in-memory and on-disk locked keys can be calculated by the in-memory lock counter. TiKV reads the keys' values before acquiring locks, and the read duration can be calculated by RocksDB performance context.
+    メモリ内およびディスク上のロックされたキーの数は、メモリ内ロック カウンターによって計算できます。 TiKV はロックを取得する前にキーの値を読み取り、読み取り期間は RocksDB パフォーマンス コンテキストによって計算できます。
 
     ```text
     lock read duration(from disk) =
         sum(rate(tikv_storage_rocksdb_perf{metric="block_read_time",req="acquire_pessimistic_lock"})) / sum(rate(tikv_storage_rocksdb_perf{metric="block_read_count",req="acquire_pessimistic_lock"}))
     ```
 
-- `lock write duration` is the duration of writing on-disk lock. For more details, refer to the [Async write](#async-write) section.
+-   `lock write duration`は、ディスク上のロックを書き込む期間です。詳細については、 [非同期書き込み](#async-write)セクションを参照してください。
 
-### Commit
+### 専念 {#commit}
 
-This section describes the commit duration. The following is the time cost diagram of commit operations:
+このセクションでは、コミット期間について説明します。以下は、コミット操作の時間コストの図です。
 
 ```railroad+diagram
 Diagram(
@@ -487,7 +487,7 @@ Diagram(
 )
 ```
 
-The duration of the commit phase is calculated as:
+コミットフェーズの期間は次のように計算されます。
 
 ```text
 commit =
@@ -518,16 +518,16 @@ Commit_time =
     commit_round * tidb_tikvclient_request_seconds{type="Commit"}
 ```
 
-The commit duration can be broken down into four metrics:
+コミット期間は 4 つの指標に分類できます。
 
-- `Get_latest_ts_time` records the duration of getting latest TSO in async-commit or single-phase commit (1PC) transaction.
-- `Prewrite_time` records the duration of the prewrite phase.
-- `Get_commit_ts_time` records the duration of common 2PC transaction.
-- `Commit_time` records the duration of the commit phase. Note that an async-commit or 1PC transaction does not have this phase.
+-   `Get_latest_ts_time`非同期コミットまたは単一フェーズ コミット (1PC) トランザクションで最新の TSO を取得する時間を記録します。
+-   `Prewrite_time` 、事前書き込みフェーズの期間を記録します。
+-   `Get_commit_ts_time` 、共通 2PC トランザクションの期間を記録します。
+-   `Commit_time`コミットフェーズの継続時間を記録します。非同期コミットまたは 1PC トランザクションにはこのフェーズがないことに注意してください。
 
-Like pessimistic lock, flow control acts as an amplification of latency (`prewrite_round` and `commit_round` in the preceding formula).
+悲観的ロックと同様に、フロー制御はレイテンシーの増幅として機能します (上の式の`prewrite_round`と`commit_round` )。
 
-The `tidb_tikvclient_request_seconds{type="Prewrite"}` and `tidb_tikvclient_request_seconds{type="Commit"}` duration are calculated as:
+`tidb_tikvclient_request_seconds{type="Prewrite"}`と`tidb_tikvclient_request_seconds{type="Commit"}`期間は次のように計算されます。
 
 ```text
 tidb_tikvclient_request_seconds{type="Prewrite"} =
@@ -543,9 +543,9 @@ tidb_tikvclient_request_seconds{type="Commit"} =
     tidb_tikvclient_rpc_net_latency_seconds{store="?"}
 ```
 
-For more details about the preceding batch client duration, such as `tidb_tikvclient_batch_wait_duration`, `tidb_tikvclient_batch_send_latency`, and `tidb_tikvclient_rpc_net_latency_seconds{store="?"}`, refer to the [Batch client](#batch-client) section.
+`tidb_tikvclient_batch_wait_duration` 、 `tidb_tikvclient_batch_send_latency` 、 `tidb_tikvclient_rpc_net_latency_seconds{store="?"}`など、前述のバッチ クライアント期間の詳細については、 [バッチクライアント](#batch-client)セクションを参照してください。
 
-The `tikv_grpc_msg_duration_seconds{type="kv_prewrite"}` is calculated as:
+`tikv_grpc_msg_duration_seconds{type="kv_prewrite"}`は次のように計算されます。
 
 ```text
 tikv_grpc_msg_duration_seconds{type="kv_prewrite"} =
@@ -560,9 +560,9 @@ prewrite read duration(from disk) =
     sum(rate(tikv_storage_rocksdb_perf{metric="block_read_time",req="prewrite"})) / sum(rate(tikv_storage_rocksdb_perf{metric="block_read_count",req="prewrite"}))
 ```
 
-Like locks in TiKV, prewrite is processed in read and write phases. The read duration can be calculated from the RocksDB performance context. For more details about the write duration, refer to the [Async write](#async-write) section.
+TiKV のロックと同様に、事前書き込みは読み取りフェーズと書き込みフェーズで処理されます。読み取り時間は、RocksDB のパフォーマンス コンテキストから計算できます。書き込み時間の詳細については、 [非同期書き込み](#async-write)セクションを参照してください。
 
-The `tikv_grpc_msg_duration_seconds{type="kv_commit"}` is calculated as:
+`tikv_grpc_msg_duration_seconds{type="kv_commit"}`は次のように計算されます。
 
 ```text
 tikv_grpc_msg_duration_seconds{type="kv_commit"} =
@@ -577,11 +577,11 @@ commit read duration(from disk) =
     sum(rate(tikv_storage_rocksdb_perf{metric="block_read_time",req="commit"})) / sum(rate(tikv_storage_rocksdb_perf{metric="block_read_count",req="commit"})) (storage)
 ```
 
-The duration of `kv_commit` is almost the same as `kv_prewrite`. For more details about the write duration, refer to the [Async write](#async-write) section.
+`kv_commit`の継続時間は`kv_prewrite`とほぼ同じです。書き込み時間の詳細については、 [非同期書き込み](#async-write)セクションを参照してください。
 
-## Batch client
+## バッチクライアント {#batch-client}
 
-The following is the time cost diagram of the batch client:
+以下は、バッチ クライアントの時間コスト図です。
 
 ```railroad+diagram
 Diagram(
@@ -606,13 +606,13 @@ Diagram(
 )
 ```
 
-- The overall duration of sending a request is observed as `tidb_tikvclient_request_seconds`.
-- RPC client maintains connection pools (named ConnArray) to each store, and each pool has a BatchConn with a batch request (send) channel.
-- Batch is enabled when the store is TiKV and batch size is positive, which is true in most cases.
-- The size of batch request channel is [`tikv-client.max-batch-size`](/tidb-configuration-file.md#max-batch-size) (default is `128`), the duration of enqueue is observed as `tidb_tikvclient_batch_wait_duration`.
-- There are three kinds of stream requests: `CmdBatchCop`, `CmdCopStream`, and `CmdMPPConn`, which involve an additional `recv()` call to fetch the first response from the stream.
+-   リクエストの送信にかかる全体的な時間は`tidb_tikvclient_request_seconds`として観察されます。
+-   RPC クライアントは各ストアへの接続プール (ConnArray という名前) を維持し、各プールにはバッチ要求 (送信) チャネルを持つ BatchConn があります。
+-   ストアが TiKV でバッチ サイズが正の場合、バッチは有効になります。これはほとんどの場合に当てはまります。
+-   バッチ リクエスト チャネルのサイズは[`tikv-client.max-batch-size`](/tidb-configuration-file.md#max-batch-size) (デフォルトは`128` )、エンキューの期間は`tidb_tikvclient_batch_wait_duration`として観察されます。
+-   ストリーム要求には`CmdBatchCop` 、 `CmdCopStream` 、および`CmdMPPConn`の 3 種類があり、ストリームから最初の応答を取得するために追加の`recv()`呼び出しが必要です。
 
-Though there is still some latency missed observed, the `tidb_tikvclient_request_seconds` can be calculated approximately as:
+レイテンシーがまだ観察されていませんが、 `tidb_tikvclient_request_seconds`は次のように近似的に計算できます。
 
 ```text
 tidb_tikvclient_request_seconds{type="?"} =
@@ -622,14 +622,14 @@ tidb_tikvclient_request_seconds{type="?"} =
     tidb_tikvclient_rpc_net_latency_seconds{store="?"}
 ```
 
-- `tidb_tikvclient_batch_wait_duration` records the waiting duration in the batch system.
-- `tidb_tikvclient_batch_send_latency` records the encode duration in the batch system.
-- `tikv_grpc_msg_duration_seconds{type="kv_?"}` is the TiKV processing duration.
-- `tidb_tikvclient_rpc_net_latency_seconds` records the network latency.
+-   `tidb_tikvclient_batch_wait_duration`バッチ システムでの待機時間を記録します。
+-   `tidb_tikvclient_batch_send_latency`バッチ システムでのエンコード時間を記録します。
+-   `tikv_grpc_msg_duration_seconds{type="kv_?"}`は TiKV 処理期間です。
+-   `tidb_tikvclient_rpc_net_latency_seconds`ネットワークレイテンシーを記録します。
 
-## TiKV snapshot
+## TiKV スナップショット {#tikv-snapshot}
 
-The following is the time cost diagram of TiKV snapshot operations:
+以下は、TiKV スナップショット操作の時間コストの図です。
 
 ```railroad+diagram
 Diagram(
@@ -645,7 +645,7 @@ Diagram(
 )
 ```
 
-The overall duration of a TiKV snapshot is observed as `tikv_storage_engine_async_request_duration_seconds{type="snapshot"}` and is calculated as:
+TiKV スナップショットの全体的な継続時間は`tikv_storage_engine_async_request_duration_seconds{type="snapshot"}`として観察され、次のように計算されます。
 
 ```text
 tikv_storage_engine_async_request_duration_seconds{type="snapshot"} =
@@ -655,15 +655,15 @@ tikv_storage_engine_async_request_duration_seconds{type="snapshot"} =
     get snapshot from rocksdb duration
 ```
 
-When leader lease is expired, TiKV proposes a read index command before getting a snapshot from RocksDB. `tikv_raftstore_request_wait_time_duration_secs` and `tikv_raftstore_commit_log_duration_seconds` are the duration of committing read index command.
+リーダーのリースが期限切れになると、TiKV は RocksDB からスナップショットを取得する前にインデックス読み取りコマンドを提案します。 `tikv_raftstore_request_wait_time_duration_secs`と`tikv_raftstore_commit_log_duration_seconds`は、インデックス読み取りコマンドをコミットする期間です。
 
-Since getting a snapshot from RocksDB is usually a fast operation, the `get snapshot from rocksdb duration` is ignored.
+RocksDB からのスナップショットの取得は通常は高速な操作であるため、 `get snapshot from rocksdb duration`は無視されます。
 
-## Async write
+## 非同期書き込み {#async-write}
 
-Async write is the process that TiKV writes data into the Raft-based replicated state machine asynchronously with a callback.
+非同期書き込みは、TiKV がコールバックを使用して Raft ベースのレプリケートされたステート マシンにデータを非同期に書き込むプロセスです。
 
-- The following is the time cost diagram of async write operations when the asynchronous IO is disabled:
+-   以下は、非同期 IO が無効になっている場合の非同期書き込み操作の時間コストの図です。
 
     ```railroad+diagram
     Diagram(
@@ -685,7 +685,7 @@ Async write is the process that TiKV writes data into the Raft-based replicated 
     )
     ```
 
-- The following is the time cost diagram of async write operations when the asynchronous IO is enabled:
+-   以下は、非同期 IO が有効な場合の非同期書き込み操作の時間コストの図です。
 
     ```railroad+diagram
     Diagram(
@@ -704,7 +704,7 @@ Async write is the process that TiKV writes data into the Raft-based replicated 
     )
     ```
 
-The async write duration is calculated as:
+非同期書き込み期間は次のように計算されます。
 
 ```text
 async write duration(async io disabled) =
@@ -720,13 +720,13 @@ async write duration(async io enabled) =
     tikv_raftstore_apply_log_duration_seconds
 ```
 
-Async write can be broken down into the following three phases:
+非同期書き込みは、次の 3 つのフェーズに分類できます。
 
-- Propose
-- Commit
-- Apply: `tikv_raftstore_apply_wait_time_duration_secs + tikv_raftstore_apply_log_duration_seconds` in the preceding formula
+-   プロポーズする
+-   専念
+-   適用: 上の式の`tikv_raftstore_apply_wait_time_duration_secs + tikv_raftstore_apply_log_duration_seconds`
 
-The duration of the propose phase is calculated as:
+提案フェーズの期間は次のように計算されます。
 
 ```text
 propose =
@@ -741,9 +741,9 @@ propose duration =
     tikv_raftstore_store_wf_batch_wait_duration_seconds
 ```
 
-The Raft process is recorded in a waterfall manner. So the propose duration is calculated from the difference between the two metrics.
+Raft のプロセスはウォーターフォール形式で記録されます。したがって、提案期間は 2 つのメトリクスの差から計算されます。
 
-The duration of the commit phase is calculated as:
+コミットフェーズの期間は次のように計算されます。
 
 ```text
 async io disabled commit = max(
@@ -757,7 +757,7 @@ async io enabled commit = max(
 )
 ```
 
-Since v5.3.0, TiKV supports Async IO Raft (write Raft log by a StoreWriter thread pool). The Async IO Raft is only enabled when the [`store-io-pool-size`](/tikv-configuration-file.md#store-io-pool-size-new-in-v530) is set to a positive value, which changes the process of commit. The `persist log locally duration` and `wait by write worker duration` are calculated as:
+v5.3.0 以降、TiKV は Async IO Raft (StoreWriter スレッド プールによるRaftログの書き込み) をサポートしています。非同期 IO Raft は、 [`store-io-pool-size`](/tikv-configuration-file.md#store-io-pool-size-new-in-v530)が正の値に設定されている場合にのみ有効になり、コミットのプロセスが変更されます。 `persist log locally duration`と`wait by write worker duration`は次のように計算されます。
 
 ```text
 persist log locally duration =
@@ -777,9 +777,9 @@ wait by write worker duration =
     tikv_raftstore_store_wf_send_to_queue_duration_seconds
 ```
 
-The difference between with and without Async IO is the duration of persisting logs locally. With Async IO, the duration of persisting log locally can be calculated from the waterfall metrics directly (skip the batch wait duration).
+非同期 IO を使用する場合と使用しない場合の違いは、ログがローカルに保持される期間です。非同期 IO を使用すると、ログをローカルに保持する期間をウォーターフォール メトリクスから直接計算できます (バッチ待機期間をスキップします)。
 
-The replicate log duration records the duration of log persisted in quorum peers, which contains an RPC duration and the duration of log persisting in the majority. The `replicate log duration` is calculated as:
+レプリケート ログ期間は、クォーラム ピアに保持されるログの期間を記録します。これには、RPC 期間と大部分のログが保持される期間が含まれます。 `replicate log duration`は次のように計算されます。
 
 ```text
 replicate log duration =
@@ -795,9 +795,9 @@ commit log wait duration =
     tikv_raftstore_store_wf_send_proposal_duration_seconds
 ```
 
-### Raft DB
+### RaftDB {#raft-db}
 
-The following is the time cost diagram of Raft DB operations:
+以下は、 Raft DB 操作の時間コストの図です。
 
 ```railroad+diagram
 Diagram(
@@ -823,13 +823,13 @@ raft db write duration(raft engine disabled) =
     tikv_raftstore_store_perf_context_time_duration_secs{type="write_memtable_time"}
 ```
 
-Because `commit log wait duration` is the longest duration of quorum peers, it might be larger than `raft db write duration`.
+`commit log wait duration`はクォーラム ピアの最長期間であるため、 `raft db write duration`よりも大きくなる可能性があります。
 
-Since v6.1.0, TiKV uses [Raft Engine](/glossary.md#raft-engine) as its default log storage engine, which changes the process of writing log.
+v6.1.0 以降、TiKV はデフォルトのログstorageエンジンとして[Raft Engine](/glossary.md#raft-engine)を使用し、ログの書き込みプロセスが変更されます。
 
-### KV DB
+### KV DB {#kv-db}
 
-The following is the time cost diagram of KV DB operations:
+以下は、KV DB 操作の時間コストの図です。
 
 ```railroad+diagram
 Diagram(
@@ -853,23 +853,23 @@ tikv_raftstore_apply_log_duration_seconds =
     tikv_raftstore_apply_perf_context_time_duration_secs{type="write_memtable_time"}
 ```
 
-In the async write process, committed logs need to be applied to the KV DB. The applying duration can be calculated from the RocksDB performance context.
+非同期書き込みプロセスでは、コミットされたログを KV DB に適用する必要があります。適用期間は、RocksDB パフォーマンス コンテキストから計算できます。
 
-## Diagnosis use cases
+## 診断の使用例 {#diagnosis-use-cases}
 
-The preceding sections explain the details about time cost metrics during querying. This section introduces common procedures of metrics analysis when you encounter slow read or write queries. All metrics can be checked in the Database Time panel of [Performance Overview Dashboard](/grafana-performance-overview-dashboard.md).
+前のセクションでは、クエリ時の時間コスト メトリックの詳細について説明しました。このセクションでは、読み取りまたは書き込みの遅いクエリが発生した場合のメトリクス分析の一般的な手順を紹介します。すべてのメトリックは、 [パフォーマンス概要ダッシュボード](/grafana-performance-overview-dashboard.md)の [データベース時間] パネルで確認できます。
 
-### Slow read queries
+### 読み込みが遅いクエリ {#slow-read-queries}
 
-If `SELECT` statements account for a significant portion of the database time, you can assume that TiDB is slow at read queries.
+`SELECT`ステートメントがデータベース時間のかなりの部分を占めている場合は、TiDB の読み取りクエリが遅いと想定できます。
 
-The execution plans of slow queries can be found in the [Top SQL statements](/dashboard/dashboard-overview.md#top-sql-statements) panel of TiDB Dashboard. To investigate the time costs of slow read queries, you can analyze [Point get](#point-get), [Batch point get](#batch-point-get) and some [simple coprocessor queries](#table-scan--index-scan) according to the preceding descriptions.
+遅いクエリの実行プランは、TiDB ダッシュボードの[Top SQLステートメント](/dashboard/dashboard-overview.md#top-sql-statements)パネルに表示されます。低速読み取りクエリの時間コストを調査するには、前述の説明に従って[ポイントゲット](#point-get) 、 [バッチポイントゲット](#batch-point-get) 、および一部の[単純なコプロセッサクエリ](#table-scan--index-scan)を分析できます。
 
-### Slow write queries
+### 書き込みが遅いクエリ {#slow-write-queries}
 
-Before investigating slow writes, you need to troubleshoot the cause of the conflicts by checking `tikv_scheduler_latch_wait_duration_seconds_sum{type="acquire_pessimistic_lock"} by (instance)`:
+書き込み速度の低下を調査する前に、次の`tikv_scheduler_latch_wait_duration_seconds_sum{type="acquire_pessimistic_lock"} by (instance)`を確認して競合の原因をトラブルシューティングする必要があります。
 
-- If this metric is high in some specific TiKV instances, there might be conflicts in hot Regions.
-- If this metric is high across all instances, there might be conflicts in the application.
+-   一部の特定の TiKV インスタンスでこのメトリクスが高い場合、ホット リージョンで競合が発生している可能性があります。
+-   このメトリックがすべてのインスタンスにわたって高い場合は、アプリケーションで競合が発生している可能性があります。
 
-After confirming the cause of conflicts from the application, you can investigate slow write queries by analyzing the duration of [Lock](#lock) and [Commit](#commit).
+アプリケーションから競合の原因を確認した後、 [ロック](#lock)と[専念](#commit)の継続時間を分析することで、遅い書き込みクエリを調査できます。

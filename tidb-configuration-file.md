@@ -4,984 +4,985 @@ summary: Learn the TiDB configuration file options that are not involved in comm
 ---
 
 <!-- markdownlint-disable MD001 -->
+
 <!-- markdownlint-disable MD024 -->
 
-# TiDB Configuration File
+# TiDBコンフィグレーションファイル {#tidb-configuration-file}
 
-The TiDB configuration file supports more options than command-line parameters. You can download the default configuration file [`config.toml.example`](https://github.com/pingcap/tidb/blob/release-7.5/pkg/config/config.toml.example) and rename it to `config.toml`. This document describes only the options that are not involved in [command line options](/command-line-flags-for-tidb-configuration.md).
+TiDB 構成ファイルは、コマンドライン パラメーターよりも多くのオプションをサポートしています。デフォルトの構成ファイル[`config.toml.example`](https://github.com/pingcap/tidb/blob/release-7.5/pkg/config/config.toml.example)ダウンロードし、その名前を`config.toml`に変更できます。このドキュメントでは、 [コマンドラインオプション](/command-line-flags-for-tidb-configuration.md)に関係しないオプションのみを説明します。
 
-> **Tip:**
+> **ヒント：**
 >
-> If you need to adjust the value of a configuration item, refer to [Modify the configuration](/maintain-tidb-using-tiup.md#modify-the-configuration).
+> 設定項目の値を調整する必要がある場合は、 [構成を変更する](/maintain-tidb-using-tiup.md#modify-the-configuration)を参照してください。
 
-### `split-table`
+### <code>split-table</code> {#code-split-table-code}
 
-- Determines whether to create a separate Region for each table.
-- Default value: `true`
-- It is recommended to set it to `false` if you need to create a large number of tables (for example, more than 100 thousand tables).
+-   テーブルごとに個別のリージョンを作成するかどうかを決定します。
+-   デフォルト値: `true`
+-   多数のテーブル (たとえば、10 万テーブル以上) を作成する必要がある場合は、 `false`に設定することをお勧めします。
 
-### `tidb-max-reuse-chunk` <span class="version-mark">New in v6.4.0</span>
+### <code>tidb-max-reuse-chunk</code> <span class="version-mark">v6.4.0 の新機能</span> {#code-tidb-max-reuse-chunk-code-span-class-version-mark-new-in-v6-4-0-span}
 
-- Controls the maximum cached chunk objects of chunk allocation. Setting this configuration item to too large a value might increase the risk of OOM.
-- Default value: `64`
-- Minimum value: `0`
-- Maximum value: `2147483647`
+-   チャンク割り当てのキャッシュされたチャンク オブジェクトの最大数を制御します。この構成項目の値を大きすぎる値に設定すると、OOM のリスクが増加する可能性があります。
+-   デフォルト値: `64`
+-   最小値: `0`
+-   最大値： `2147483647`
 
-### `tidb-max-reuse-column` <span class="version-mark">New in v6.4.0</span>
+### <code>tidb-max-reuse-column</code> <span class="version-mark">v6.4.0 の新機能</span> {#code-tidb-max-reuse-column-code-span-class-version-mark-new-in-v6-4-0-span}
 
-- Controls the maximum cached column objects of chunk allocation. Setting this configuration item to too large a value might increase the risk of OOM.
-- Default value: `256`
-- Minimum value: `0`
-- Maximum value: `2147483647`
+-   チャンク割り当てのキャッシュされた列オブジェクトの最大数を制御します。この構成項目の値を大きすぎる値に設定すると、OOM のリスクが増加する可能性があります。
+-   デフォルト値: `256`
+-   最小値: `0`
+-   最大値： `2147483647`
 
-### `token-limit`
+### <code>token-limit</code> {#code-token-limit-code}
 
-+ The number of sessions that can execute requests concurrently.
-+ Type: Integer
-+ Default value: `1000`
-+ Minimum value: `1`
-+ Maximum Value (64-bit platforms): `18446744073709551615`
-+ Maximum Value (32-bit platforms): `4294967295`
+-   リクエストを同時に実行できるセッションの数。
+-   タイプ: 整数
+-   デフォルト値: `1000`
+-   最小値: `1`
+-   最大値 (64 ビット プラットフォーム): `18446744073709551615`
+-   最大値 (32 ビット プラットフォーム): `4294967295`
 
-### `temp-dir` <span class="version-mark">New in v6.3.0</span>
+### <code>temp-dir</code> <span class="version-mark">v6.3.0 の新機能</span> {#code-temp-dir-code-span-class-version-mark-new-in-v6-3-0-span}
 
-+ File system location used by TiDB to store temporary data. If a feature requires local storage in TiDB nodes, TiDB stores the corresponding temporary data in this location.
-+ When creating an index, if [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) is enabled, data that needs to be backfilled for a newly created index will be at first stored in the TiDB local temporary directory, and then imported into TiKV in batches, thus accelerating the index creation.
-+ When [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md) is used to import data, the sorted data is first stored in the TiDB local temporary directory, and then imported into TiKV in batches.
-+ Default value: `"/tmp/tidb"`
+-   TiDB が一時データを保存するために使用するファイル システムの場所。機能が TiDB ノードのローカルstorageを必要とする場合、TiDB は対応する一時データをこの場所に保存します。
+-   インデックスの作成時に[`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630)が有効な場合、新しく作成されたインデックスに対してバックフィルする必要があるデータは、最初に TiDB ローカル一時ディレクトリに保存され、次にバッチで TiKV にインポートされるため、インデックスの作成が高速化されます。
+-   データのインポートに[`IMPORT INTO`](/sql-statements/sql-statement-import-into.md)を使用すると、並べ替えられたデータはまず TiDB ローカル一時ディレクトリに保存され、次に TiKV にバッチでインポートされます。
+-   デフォルト値: `"/tmp/tidb"`
 
-> **Note:**
+> **注記：**
 >
-> If the directory does not exist, TiDB will automatically create it upon startup. If the directory creation fails or TiDB does not have the read and write permissions on that directory, [`Fast Online DDL`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) might experience unpredictable issues.
+> ディレクトリが存在しない場合、TiDB は起動時に自動的に作成します。ディレクトリの作成が失敗した場合、または TiDB にそのディレクトリに対する読み取りおよび書き込み権限がない場合、予期しない問題が発生する可能[`Fast Online DDL`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630)があります。
 
-### `oom-use-tmp-storage`
+### <code>oom-use-tmp-storage</code> {#code-oom-use-tmp-storage-code}
 
-> **Warning:**
+> **警告：**
 >
-> Since v6.3.0, this configuration item is deprecated and superseded by the system variable [`tidb_enable_tmp_storage_on_oom`](/system-variables.md#tidb_enable_tmp_storage_on_oom). When the TiDB cluster is upgraded to v6.3.0 or a later version, it will automatically initialize the variable with the value of `oom-use-tmp-storage`. After that, changing the value of `oom-use-tmp-storage` **does not** take effect anymore.
+> v6.3.0 以降、この構成項目は非推奨になり、システム変数[`tidb_enable_tmp_storage_on_oom`](/system-variables.md#tidb_enable_tmp_storage_on_oom)に置き換えられます。 TiDB クラスターが v6.3.0 以降のバージョンにアップグレードされると、変数は値`oom-use-tmp-storage`で自動的に初期化されます。その後、 `oom-use-tmp-storage`の値を変更しても**無効になります**。
 
-+ Controls whether to enable the temporary storage for some operators when a single SQL statement exceeds the memory quota specified by the system variable [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query).
-+ Default value: `true`
+-   単一の SQL ステートメントがシステム変数[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)で指定されたメモリクォータを超えた場合に、一部の演算子の一時storageを有効にするかどうかを制御します。
+-   デフォルト値: `true`
 
-### `tmp-storage-path`
+### <code>tmp-storage-path</code> {#code-tmp-storage-path-code}
 
-+ Specifies the temporary storage path for some operators when a single SQL statement exceeds the memory quota specified by the system variable [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query).
-+ Default value: `<temporary directory of OS>/<OS user ID>_tidb/MC4wLjAuMDo0MDAwLzAuMC4wLjA6MTAwODA=/tmp-storage`. `MC4wLjAuMDo0MDAwLzAuMC4wLjA6MTAwODA=` is the `Base64` encoding result of `<host>:<port>/<statusHost>:<statusPort>`.
-+ This configuration takes effect only when the system variable [`tidb_enable_tmp_storage_on_oom`](/system-variables.md#tidb_enable_tmp_storage_on_oom) is `ON`.
+-   単一の SQL ステートメントがシステム変数[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)で指定されたメモリクォータを超えた場合に、一部の演算子の一時storage域パスを指定します。
+-   デフォルト値: `<temporary directory of OS>/<OS user ID>_tidb/MC4wLjAuMDo0MDAwLzAuMC4wLjA6MTAwODA=/tmp-storage` 。 `MC4wLjAuMDo0MDAwLzAuMC4wLjA6MTAwODA=` `<host>:<port>/<statusHost>:<statusPort>`の`Base64`エンコード結果です。
+-   この設定は、システム変数[`tidb_enable_tmp_storage_on_oom`](/system-variables.md#tidb_enable_tmp_storage_on_oom)が`ON`の場合にのみ有効です。
 
-### `tmp-storage-quota`
+### <code>tmp-storage-quota</code> {#code-tmp-storage-quota-code}
 
-+ Specifies the quota for the storage in `tmp-storage-path`. The unit is byte.
-+ When a single SQL statement uses a temporary disk and the total volume of the temporary disk of the TiDB server exceeds this configuration value, the current SQL operation is cancelled and the `Out of Global Storage Quota!` error is returned.
-+ When the value of this configuration is smaller than `0`, the above check and limit do not apply.
-+ Default value: `-1`
-+ When the remaining available storage in `tmp-storage-path` is lower than the value defined by `tmp-storage-quota`, the TiDB server reports an error when it is started, and exits.
+-   `tmp-storage-path`でstorageのクォータを指定します。単位はバイトです。
+-   単一の SQL ステートメントが一時ディスクを使用し、TiDBサーバーの一時ディスクの合計ボリュームがこの構成値を超えると、現在の SQL 操作がキャンセルされ、 `Out of Global Storage Quota!`エラーが返されます。
+-   この構成の値が`0`より小さい場合、上記のチェックと制限は適用されません。
+-   デフォルト値: `-1`
+-   `tmp-storage-path`で使用可能な残りのstorageが`tmp-storage-quota`で定義された値よりも少ない場合、TiDBサーバーは起動時にエラーを報告し、終了します。
 
-### `lease`
+### <code>lease</code> {#code-lease-code}
 
-+ The timeout of the DDL lease.
-+ Default value: `45s`
-+ Unit: second
+-   DDL リースのタイムアウト。
+-   デフォルト値: `45s`
+-   単位：秒
 
-### `compatible-kill-query`
+### <code>compatible-kill-query</code> {#code-compatible-kill-query-code}
 
-+ Determines whether to set the `KILL` statement to be MySQL compatible.
-+ Default value: `false`
-+ `compatible-kill-query` takes effect only when [`enable-global-kill`](#enable-global-kill-new-in-v610) is set to `false`.
-+ When [`enable-global-kill`](#enable-global-kill-new-in-v610) is `false`, `compatible-kill-query` controls whether you need to append the `TIDB` keyword when killing a query.
-    - When `compatible-kill-query` is `false`, the behavior of `KILL xxx` in TiDB is different from that in MySQL. To kill a query in TiDB, you need to append the `TIDB` keyword, such as `KILL TIDB xxx`.
-    - When `compatible-kill-query` is `true`, to kill a query in TiDB, there is no need to append the `TIDB` keyword. It is **STRONGLY NOT RECOMMENDED** to set `compatible-kill-query` to `true` in your configuration file UNLESS you are certain that clients will be always connected to the same TiDB instance. This is because pressing <kbd>Control</kbd>+<kbd>C</kbd> in the default MySQL client opens a new connection in which `KILL` is executed. If there is a proxy between the client and the TiDB cluster, the new connection might be routed to a different TiDB instance, which possibly kills a different session by mistake.
-+ When [`enable-global-kill`](#enable-global-kill-new-in-v610) is `true`, `KILL xxx` and `KILL TIDB xxx` have the same effect, but using <kbd>Control</kbd>+<kbd>C</kbd> to kill a query is not supported.
-+ For more information about the `KILL` statement, see [KILL [TIDB]](/sql-statements/sql-statement-kill.md).
+-   `KILL`ステートメントを MySQL 互換に設定するかどうかを決定します。
+-   デフォルト値: `false`
+-   `compatible-kill-query` [`enable-global-kill`](#enable-global-kill-new-in-v610) `false`に設定されている場合にのみ有効です。
+-   [`enable-global-kill`](#enable-global-kill-new-in-v610)が`false`の場合、クエリを強制終了するときに`TIDB`キーワードを追加する必要があるかどうかは`compatible-kill-query`制御されます。
+    -   `compatible-kill-query`が`false`場合、TiDB の`KILL xxx`の動作は MySQL の動作とは異なります。 TiDB でクエリを強制終了するには、 `KILL TIDB xxx`などの`TIDB`キーワードを追加する必要があります。
+    -   `compatible-kill-query`が`true`場合、TiDB でクエリを強制終了するために、 `TIDB`キーワードを追加する必要はありません。クライアントが常に同じ TiDB インスタンスに接続されることが確実でない限り、構成ファイルで`compatible-kill-query`から`true`を設定することは**強く推奨されません**。これは、デフォルトの MySQL クライアントで<kbd>Control</kbd> + <kbd>C</kbd>を押すと、 `KILL`が実行される新しい接続が開かれるためです。クライアントと TiDB クラスターの間にプロキシがある場合、新しい接続が別の TiDB インスタンスにルーティングされる可能性があり、これにより誤って別のセッションが強制終了される可能性があります。
+-   [`enable-global-kill`](#enable-global-kill-new-in-v610)が`true`の場合、 `KILL xxx`と`KILL TIDB xxx`は同じ効果がありますが、 <kbd>Control</kbd> + <kbd>C</kbd>を使用してクエリを強制終了することはサポートされていません。
+-   `KILL`ステートメントの詳細については、 [[TIDB]を殺す](/sql-statements/sql-statement-kill.md)を参照してください。
 
-### `check-mb4-value-in-utf8`
+### <code>check-mb4-value-in-utf8</code> {#code-check-mb4-value-in-utf8-code}
 
-- Determines whether to enable the `utf8mb4` character check. When this feature is enabled, if the character set is `utf8` and the `mb4` characters are inserted in `utf8`, an error is returned.
-- Default value: `false`
-- Since v6.1.0, whether to enable the `utf8mb4` character check is determined by the TiDB configuration item `instance.tidb_check_mb4_value_in_utf8` or the system variable `tidb_check_mb4_value_in_utf8`. `check-mb4-value-in-utf8` still takes effect. But if both `check-mb4-value-in-utf8` and `instance.tidb_check_mb4_value_in_utf8` are set, the latter takes effect.
+-   `utf8mb4`文字チェックを有効にするかどうかを決定します。この機能が有効な場合、文字セットが`utf8`で`mb4`文字が`utf8`に挿入されると、エラーが返されます。
+-   デフォルト値: `false`
+-   v6.1.0 以降、 `utf8mb4`文字チェックを有効にするかどうかは、TiDB 設定項目`instance.tidb_check_mb4_value_in_utf8`またはシステム変数`tidb_check_mb4_value_in_utf8`によって決まります。 `check-mb4-value-in-utf8`引き続き有効です。ただし、 `check-mb4-value-in-utf8`と`instance.tidb_check_mb4_value_in_utf8`の両方が設定されている場合は、後者が有効になります。
 
-### `treat-old-version-utf8-as-utf8mb4`
+### <code>treat-old-version-utf8-as-utf8mb4</code> {#code-treat-old-version-utf8-as-utf8mb4-code}
 
-- Determines whether to treat the `utf8` character set in old tables as `utf8mb4`.
-- Default value: `true`
+-   古いテーブルの`utf8`文字セットを`utf8mb4`として扱うかどうかを決定します。
+-   デフォルト値: `true`
 
-### `alter-primary-key` (Deprecated)
+### <code>alter-primary-key</code> (非推奨) {#code-alter-primary-key-code-deprecated}
 
-- Determines whether to add or remove the primary key constraint to or from a column.
-- Default value: `false`
-- With this default setting, adding or removing the primary key constraint is not supported. You can enable this feature by setting `alter-primary-key` to `true`. However, if a table already exists before the switch is on, and the data type of its primary key column is an integer, dropping the primary key from the column is not possible even if you set this configuration item to `true`.
+-   主キー制約を列に追加するか列から削除するかを決定します。
+-   デフォルト値: `false`
+-   このデフォルト設定では、主キー制約の追加または削除はサポートされていません。 `alter-primary-key` ～ `true`を設定することでこの機能を有効にできます。ただし、スイッチをオンにする前にテーブルがすでに存在しており、その主キー列のデータ型が整数の場合は、この構成項目を`true`に設定しても、列から主キーを削除することはできません。
 
-> **Note:**
+> **注記：**
 >
-> This configuration item has been deprecated, and currently takes effect only when the value of `@tidb_enable_clustered_index` is `INT_ONLY`. If you need to add or remove the primary key, use the `NONCLUSTERED` keyword instead when creating the table. For more details about the primary key of the `CLUSTERED` type, refer to [clustered index](/clustered-indexes.md).
+> この構成項目は非推奨になり、現在は`@tidb_enable_clustered_index`の値が`INT_ONLY`の場合にのみ有効になります。主キーを追加または削除する必要がある場合は、テーブルの作成時に代わりに`NONCLUSTERED`キーワードを使用します。 `CLUSTERED`タイプの主キーの詳細については、 [クラスター化インデックス](/clustered-indexes.md)を参照してください。
 
-### `server-version`
+### <code>server-version</code> {#code-server-version-code}
 
-+ Modifies the version string returned by TiDB in the following situations:
-    - When the built-in `VERSION()` function is used.
-    - When TiDB establishes the initial connection to the client and returns the initial handshake packet with version string of the server. For details, see [MySQL Initial Handshake Packet](https://dev.mysql.com/doc/dev/mysql-server/latest/page_protocol_connection_phase.html#sect_protocol_connection_phase_initial_handshake).
-+ Default value: ""
-+ By default, the format of the TiDB version string is `5.7.${mysql_latest_minor_version}-TiDB-${tidb_version}`.
+-   次の状況で、TiDB によって返されるバージョン文字列を変更します。
+    -   内蔵`VERSION()`機能使用時。
+    -   TiDB がクライアントへの最初の接続を確立し、サーバーのバージョン文字列を含む最初のハンドシェイク パケットを返すとき。詳細は[MySQL 初期ハンドシェイク パケット](https://dev.mysql.com/doc/dev/mysql-server/latest/page_protocol_connection_phase.html#sect_protocol_connection_phase_initial_handshake)を参照してください。
+-   デフォルト値: &quot;&quot;
+-   デフォルトでは、TiDB バージョン文字列の形式は`5.7.${mysql_latest_minor_version}-TiDB-${tidb_version}`です。
 
-> **Note:**
+> **注記：**
 >
-> TiDB nodes use the value of `server-version` to verify the current TiDB version. Therefore, to avoid unexpected behaviors, before upgrading the TiDB cluster, you need to set the value of `server-version` to empty or the real version of the current TiDB cluster.
+> TiDB ノードは、値`server-version`を使用して現在の TiDB バージョンを確認します。したがって、予期しない動作を回避するには、TiDB クラスターをアップグレードする前に、値`server-version`を空、または現在の TiDB クラスターの実際のバージョンに設定する必要があります。
 
-### `repair-mode`
+### <code>repair-mode</code> {#code-repair-mode-code}
 
-- Determines whether to enable the untrusted repair mode. When the `repair-mode` is set to `true`, bad tables in the `repair-table-list` cannot be loaded.
-- Default value: `false`
-- The `repair` syntax is not supported by default. This means that all tables are loaded when TiDB is started.
+-   信頼できない修復モードを有効にするかどうかを決定します。 `repair-mode`が`true`に設定されている場合、 `repair-table-list`内の不良テーブルはロードできません。
+-   デフォルト値: `false`
+-   `repair`構文はデフォルトではサポートされていません。これは、TiDB の開始時にすべてのテーブルがロードされることを意味します。
 
-### `repair-table-list`
+### <code>repair-table-list</code> {#code-repair-table-list-code}
 
-- `repair-table-list` is only valid when [`repair-mode`](#repair-mode) is set to `true`. `repair-table-list` is a list of bad tables that need to be repaired in an instance. An example of the list is: ["db.table1","db.table2"...].
-- Default value: []
-- The list is empty by default. This means that there are no bad tables that need to be repaired.
+-   `repair-table-list` [`repair-mode`](#repair-mode) `true`に設定されている場合にのみ有効です。 `repair-table-list`は、インスタンス内で修復する必要がある不良テーブルのリストです。リストの例は次のとおりです: [&quot;db.table1&quot;,&quot;db.table2&quot;...]。
+-   デフォルト値: []
+-   デフォルトではリストは空です。これは、修復する必要がある不良テーブルがないことを意味します。
 
-### `new_collations_enabled_on_first_bootstrap`
+### <code>new_collations_enabled_on_first_bootstrap</code> {#code-new-collations-enabled-on-first-bootstrap-code}
 
-- Enables or disables the new collation support.
-- Default value: `true`
-- Note: This configuration takes effect only for the TiDB cluster that is first initialized. After the initialization, you cannot use this configuration item to enable or disable the new collation support.
+-   新しい照合順序のサポートを有効または無効にします。
+-   デフォルト値: `true`
+-   注: この構成は、最初に初期化される TiDB クラスターに対してのみ有効です。初期化後は、この構成項目を使用して新しい照合順序のサポートを有効または無効にすることはできません。
 
-### `max-server-connections`
+### <code>max-server-connections</code> {#code-max-server-connections-code}
 
-- The maximum number of concurrent client connections allowed in TiDB. It is used to control resources.
-- Default value: `0`
-- By default, TiDB does not set limit on the number of concurrent client connections. When the value of this configuration item is greater than `0` and the number of actual client connections reaches this value, the TiDB server rejects new client connections.
-- Since v6.2.0, the TiDB configuration item [`instance.max_connections`](/tidb-configuration-file.md#max_connections) or the system variable [`max_connections`](/system-variables.md#max_connections) is used to set the maximum number of concurrent client connections allowed in TiDB. `max-server-connections` still takes effect. But if `max-server-connections` and `instance.max_connections` are set at the same time, the latter takes effect.
+-   TiDB で許可される同時クライアント接続の最大数。リソースを制御するために使用されます。
+-   デフォルト値: `0`
+-   デフォルトでは、TiDB は同時クライアント接続数に制限を設定しません。この構成項目の値が`0`より大きく、実際のクライアント接続の数がこの値に達すると、TiDBサーバーは新しいクライアント接続を拒否します。
+-   v6.2.0 以降、TiDB 構成項目[`instance.max_connections`](/tidb-configuration-file.md#max_connections)またはシステム変数[`max_connections`](/system-variables.md#max_connections)は、TiDB で許可される同時クライアント接続の最大数を設定するために使用されます。 `max-server-connections`は引き続き有効です。ただし、 `max-server-connections`と`instance.max_connections`同時に設定した場合は、後者が有効になります。
 
-### `max-index-length`
+### <code>max-index-length</code> {#code-max-index-length-code}
 
-- Sets the maximum allowable length of the newly created index.
-- Default value: `3072`
-- Unit: byte
-- Currently, the valid value range is `[3072, 3072*4]`. MySQL and TiDB (version < v3.0.11) do not have this configuration item, but both limit the length of the newly created index. This limit in MySQL is `3072`. In TiDB (version =< 3.0.7), this limit is `3072*4`. In TiDB (3.0.7 < version < 3.0.11), this limit is `3072`. This configuration is added to be compatible with MySQL and earlier versions of TiDB.
+-   新しく作成されるインデックスの最大許容長を設定します。
+-   デフォルト値: `3072`
+-   単位：バイト
+-   現在、有効な値の範囲は`[3072, 3072*4]`です。 MySQL と TiDB (バージョン &lt; v3.0.11) にはこの設定項目はありませんが、どちらも新しく作成されるインデックスの長さを制限します。 MySQL でのこの制限は`3072`です。 TiDB (バージョン =&lt; 3.0.7) では、この制限は`3072*4`です。 TiDB (3.0.7 &lt; バージョン &lt; 3.0.11) では、この制限は`3072`です。この構成は、MySQL および以前のバージョンの TiDB と互換性を持たせるために追加されました。
 
-### `table-column-count-limit` <span class="version-mark">New in v5.0</span>
+### <code>table-column-count-limit</code> <span class="version-mark">v5.0 の新機能</span> {#code-table-column-count-limit-code-span-class-version-mark-new-in-v5-0-span}
 
-- Sets the limit on the number of columns in a single table.
-- Default value: `1017`
-- Currently, the valid value range is `[1017, 4096]`.
+-   単一テーブル内の列数の制限を設定します。
+-   デフォルト値: `1017`
+-   現在、有効な値の範囲は`[1017, 4096]`です。
 
-### `index-limit` <span class="version-mark">New in v5.0</span>
+### <code>index-limit</code> <span class="version-mark">v5.0 の新機能</span> {#code-index-limit-code-span-class-version-mark-new-in-v5-0-span}
 
-- Sets the limit on the number of indexes in a single table.
-- Default value: `64`
-- Currently, the valid value range is `[64, 512]`.
+-   単一テーブル内のインデックスの数の制限を設定します。
+-   デフォルト値: `64`
+-   現在、有効な値の範囲は`[64, 512]`です。
 
-### `enable-telemetry` <span class="version-mark">New in v4.0.2</span>
+### <code>enable-telemetry</code> <span class="version-mark">v4.0.2 の新機能</span> {#code-enable-telemetry-code-span-class-version-mark-new-in-v4-0-2-span}
 
-- Enables or disables the telemetry collection in TiDB.
-- Default value: `false`
-- When this configuration is set to `true` on a TiDB instance, the telemetry collection in this TiDB instance is enabled and the [`tidb_enable_telemetry`](/system-variables.md#tidb_enable_telemetry-new-in-v402) system variable takes effect.
-- When this configuration is set to `false` on all TiDB instances, the telemetry collection in TiDB is disabled and the [`tidb_enable_telemetry`](/system-variables.md#tidb_enable_telemetry-new-in-v402) system variable does not take effect. See [Telemetry](/telemetry.md) for details.
+-   TiDB でのテレメトリ収集を有効または無効にします。
+-   デフォルト値: `false`
+-   TiDB インスタンスでこの構成が`true`に設定されている場合、この TiDB インスタンスのテレメトリ収集が有効になり、システム変数[`tidb_enable_telemetry`](/system-variables.md#tidb_enable_telemetry-new-in-v402)有効になります。
+-   すべての TiDB インスタンスでこの構成が`false`に設定されている場合、TiDB のテレメトリ収集は無効になり、 [`tidb_enable_telemetry`](/system-variables.md#tidb_enable_telemetry-new-in-v402)システム変数は有効になりません。詳細は[テレメトリー](/telemetry.md)を参照してください。
 
-### `deprecate-integer-display-length`
+### <code>deprecate-integer-display-length</code> {#code-deprecate-integer-display-length-code}
 
-- Deprecates the display width for integer types when this configuration item is set to `true`.
-- Default value: `false`
+-   この構成項目が`true`に設定されている場合、整数型の表示幅は非推奨になります。
+-   デフォルト値: `false`
 
-### `enable-tcp4-only` <span class="version-mark">New in v5.0</span>
+### <code>enable-tcp4-only</code> <span class="version-mark">v5.0 の新機能</span> {#code-enable-tcp4-only-code-span-class-version-mark-new-in-v5-0-span}
 
-- Enables or disables listening on TCP4 only.
-- Default value: `false`
-- Enabling this option is useful when TiDB is used with LVS for load balancing because the [real client IP from the TCP header](https://github.com/alibaba/LVS/tree/master/kernel/net/toa) can be correctly parsed by the "tcp4" protocol.
+-   TCP4 のみでのリスニングを有効または無効にします。
+-   デフォルト値: `false`
+-   [TCPヘッダーからの実際のクライアントIP](https://github.com/alibaba/LVS/tree/master/kernel/net/toa)は「tcp4」プロトコルで正しく解析できるため、ロード バランシングのために TiDB を LVS とともに使用する場合、このオプションを有効にすると便利です。
 
-### `enable-enum-length-limit` <span class="version-mark">New in v5.0</span>
+### <code>enable-enum-length-limit</code> <span class="version-mark">v5.0 の新機能</span> {#code-enable-enum-length-limit-code-span-class-version-mark-new-in-v5-0-span}
 
-+ Determines whether to limit the maximum length of a single `ENUM` element and a single `SET` element.
-+ Default value: `true`
-+ When this configuration value is `true`, the maximum length of a single `ENUM` element and a single `SET` element is 255 characters, which is compatible with [MySQL 8.0](https://dev.mysql.com/doc/refman/8.0/en/string-type-syntax.html). When this configuration value is `false`, there is no limit on the length of a single element, which is compatible with TiDB (earlier than v5.0).
+-   単一の`ENUM`要素と単一の`SET`要素の最大長を制限するかどうかを決定します。
+-   デフォルト値: `true`
+-   この構成値が`true`の場合、単一の`ENUM`要素および単一の`SET`要素の最大長は 255 文字であり、 [MySQL 8.0](https://dev.mysql.com/doc/refman/8.0/en/string-type-syntax.html)と互換性があります。この構成値が`false`の場合、単一要素の長さには制限がなく、TiDB (v5.0 以前) と互換性があります。
 
-### `graceful-wait-before-shutdown` <span class="version-mark">New in v5.0</span>
+### <code>graceful-wait-before-shutdown</code> <span class="version-mark">v5.0 の新機能</span> {#code-graceful-wait-before-shutdown-code-span-class-version-mark-new-in-v5-0-span}
 
-- Specifies the number of seconds that TiDB waits when you shut down the server, which allows the clients to disconnect.
-- Default value: `0`
-- When TiDB is waiting for shutdown (in the grace period), the HTTP status will indicate a failure, which allows the load balancers to reroute traffic.
+-   サーバーをシャットダウンするときに TiDB が待機する秒数を指定します。これにより、クライアントは切断できるようになります。
+-   デフォルト値: `0`
+-   TiDB がシャットダウンを待機しているとき (猶予期間内)、HTTP ステータスは障害を示し、ロード バランサーがトラフィックを再ルーティングできるようになります。
 
-### `enable-global-kill` <span class="version-mark">New in v6.1.0</span>
+### <code>enable-global-kill</code> <span class="version-mark">v6.1.0 の新機能</span> {#code-enable-global-kill-code-span-class-version-mark-new-in-v6-1-0-span}
 
-+ Controls whether to enable the Global Kill (terminating queries or connections across instances) feature.
-+ Default value: `true`
-+ When the value is `true`, both `KILL` and `KILL TIDB` statements can terminate queries or connections across instances so you do not need to worry about erroneously terminating queries or connections. When you use a client to connect to any TiDB instance and execute the `KILL` or `KILL TIDB` statement, the statement will be forwarded to the target TiDB instance. If there is a proxy between the client and the TiDB cluster, the `KILL` and `KILL TIDB` statements will also be forwarded to the target TiDB instance for execution.
-+ Starting from v7.3.0, you can terminate a query or connection using the MySQL command line <kbd>Control+C</kbd> when both `enable-global-kill` and [`enable-32bits-connection-id`](#enable-32bits-connection-id-new-in-v730) are set to `true`. For more information, see [`KILL`](/sql-statements/sql-statement-kill.md).
+-   Global Kill (インスタンス間のクエリまたは接続の終了) 機能を有効にするかどうかを制御します。
+-   デフォルト値: `true`
+-   値が`true`の場合、 `KILL`と`KILL TIDB`ステートメントの両方でインスタンス間のクエリまたは接続を終了できるため、クエリまたは接続が誤って終了することを心配する必要はありません。クライアントを使用して任意の TiDB インスタンスに接続し、 `KILL`または`KILL TIDB`ステートメントを実行すると、ステートメントはターゲット TiDB インスタンスに転送されます。クライアントと TiDB クラスターの間にプロキシがある場合、ステートメント`KILL`と`KILL TIDB`も実行のためにターゲット TiDB インスタンスに転送されます。
+-   v7.3.0 以降、 `enable-global-kill`と[`enable-32bits-connection-id`](#enable-32bits-connection-id-new-in-v730)両方が`true`に設定されている場合、MySQL コマンド ライン<kbd>Control+C</kbd>を使用してクエリまたは接続を終了できます。詳細については、 [`KILL`](/sql-statements/sql-statement-kill.md)を参照してください。
 
-### `enable-32bits-connection-id` <span class="version-mark">New in v7.3.0</span>
+### <code>enable-32bits-connection-id</code> <span class="version-mark">v7.3.0 の新</span>機能 {#code-enable-32bits-connection-id-code-span-class-version-mark-new-in-v7-3-0-span}
 
-+ Controls whether to enable the 32-bit connection ID feature.
-+ Default value: `true`
-+ When both this configuration item and [`enable-global-kill`](#enable-global-kill-new-in-v610) are set to `true`, TiDB generates 32-bit connection IDs. This enables you to terminate queries or connections by the MySQL command-line <kbd>Control+C</kbd>.
+-   32 ビット接続 ID 機能を有効にするかどうかを制御します。
+-   デフォルト値: `true`
+-   この構成項目と[`enable-global-kill`](#enable-global-kill-new-in-v610)両方が`true`に設定されている場合、TiDB は 32 ビットの接続 ID を生成します。これにより、MySQL コマンドライン<kbd>Control+C</kbd>によってクエリまたは接続を終了できるようになります。
 
-> **Warning:**
+> **警告：**
 >
-> When the number of TiDB instances in the cluster exceeds 2048 or the concurrent connection count of a single TiDB instance exceeds 1048576, the 32-bit connection ID space becomes insufficient and is automatically upgraded to 64-bit connection IDs. During the upgrade process, existing business and established connections are unaffected. However, subsequent new connections cannot be terminated using <kbd>Control+C</kbd> in the MySQL command-line.
+> クラスター内の TiDB インスタンスの数が 2048 を超えるか、単一 TiDB インスタンスの同時接続数が 1048576 を超えると、32 ビットの接続 ID スペースが不足し、自動的に 64 ビットの接続 ID にアップグレードされます。アップグレード プロセス中、既存のビジネスおよび確立された接続は影響を受けません。ただし、MySQL コマンドラインで<kbd>Control+C</kbd>を使用して後続の新しい接続を終了することはできません。
 
-### `initialize-sql-file` <span class="version-mark">New in v6.6.0</span>
+### <code>initialize-sql-file</code> <span class="version-mark">v6.6.0 の新機能</span> {#code-initialize-sql-file-code-span-class-version-mark-new-in-v6-6-0-span}
 
-+ Specifies the SQL script to be executed when the TiDB cluster is started for the first time.
-+ Default value: `""`
-+ All SQL statements in this script are executed with the highest privilege without any privilege check. If the specified SQL script fails to execute, the TiDB cluster might fail to start.
-+ This configuration item is used to perform such operations as modifying the value of a system variable, creating a user, or granting privileges.
+-   TiDB クラスターを初めて起動するときに実行される SQL スクリプトを指定します。
+-   デフォルト値: `""`
+-   このスクリプト内のすべての SQL ステートメントは、権限チェックなしで最高の権限で実行されます。指定された SQL スクリプトの実行に失敗すると、TiDB クラスターの起動に失敗する可能性があります。
+-   この構成アイテムは、システム変数の値の変更、ユーザーの作成、権限などの操作を実行するために使用されます。
 
-### `enable-forwarding` <span class="version-mark">New in v5.0.0</span>
+### <code>enable-forwarding</code> <span class="version-mark">v5.0.0 の新機能</span> {#code-enable-forwarding-code-span-class-version-mark-new-in-v5-0-0-span}
 
-+ Controls whether the PD client and TiKV client in TiDB forward requests to the leader via the followers in the case of possible network isolation.
-+ Default value: `false`
-+ If the environment might have isolated network, enabling this parameter can reduce the window of service unavailability.
-+ If you cannot accurately determine whether isolation, network interruption, or downtime has occurred, using this mechanism has the risk of misjudgment and causes reduced availability and performance. If network failure has never occurred, it is not recommended to enable this parameter.
+-   ネットワーク分離の可能性がある場合に、TiDB の PD クライアントと TiKV クライアントがフォロワー経由でリーダーにリクエストを転送するかどうかを制御します。
+-   デフォルト値: `false`
+-   環境でネットワークが分離されている可能性がある場合、このパラメータを有効にすると、サービスが利用できなくなる期間を短縮できます。
+-   分離、ネットワークの中断、またはダウンタイムが発生したかどうかを正確に判断できない場合、このメカニズムを使用すると判断を誤るリスクがあり、可用性とパフォーマンスの低下が発生します。ネットワーク障害が発生したことがない場合は、このパラメータを有効にすることはお勧めできません。
 
-### `enable-table-lock` <span class="version-mark">New in v4.0.0</span>
+### <code>enable-table-lock</code> <span class="version-mark">v4.0.0 の新機能</span> {#code-enable-table-lock-code-span-class-version-mark-new-in-v4-0-0-span}
 
-> **Warning:**
+> **警告：**
 >
-> The table lock is an experimental feature. It is not recommended that you use it in the production environment.
+> テーブル ロックは実験的機能です。本番環境で使用することはお勧めできません。
 
-+ Controls whether to enable the table lock feature.
-+ Default value: `false`
-+ The table lock is used to coordinate concurrent access to the same table among multiple sessions. Currently, the `READ`, `WRITE`, and `WRITE LOCAL` lock types are supported. When the configuration item is set to `false`, executing the `LOCK TABLES` or `UNLOCK TABLES` statement does not take effect and returns the "LOCK/UNLOCK TABLES is not supported" warning. For more information, see [`LOCK TABLES` and `UNLOCK TABLES`](/sql-statements/sql-statement-lock-tables-and-unlock-tables.md).
+-   テーブルロック機能を有効にするかどうかを制御します。
+-   デフォルト値: `false`
+-   テーブル ロックは、複数のセッション間での同じテーブルへの同時アクセスを調整するために使用されます。現在、 `READ` 、 `WRITE` 、および`WRITE LOCAL`ロック タイプがサポートされています。構成項目が`false`に設定されている場合、 `LOCK TABLES`または`UNLOCK TABLES`ステートメントを実行しても有効にならず、「LOCK/UNLOCK TABLES はサポートされていません」という警告が返されます。詳細については、 [`LOCK TABLES`と`UNLOCK TABLES`](/sql-statements/sql-statement-lock-tables-and-unlock-tables.md)参照してください。
 
-### `labels`
+### <code>labels</code> {#code-labels-code}
 
-+ Specify server labels. For example, `{ zone = "us-west-1", dc = "dc1", rack = "rack1", host = "tidb1" }`.
-+ Default value: `{}`
+-   サーバーラベルを指定します。たとえば、 `{ zone = "us-west-1", dc = "dc1", rack = "rack1", host = "tidb1" }` 。
+-   デフォルト値: `{}`
 
-> **Note:**
+> **注記：**
 >
-> - In TiDB, the `zone` label is specially used to specify the zone where a server is located. If `zone` is set to a non-null value, the corresponding value is automatically used by features such as [`txn-score`](/system-variables.md#txn_scope) and [`Follower read`](/follower-read.md).
-> - The `group` label has a special use in TiDB Operator. For clusters deployed using [TiDB Operator](/tidb-operator-overview.md), it is **NOT** recommended that you specify the `group` label manually.
+> -   TiDB では、 `zone`ラベルはサーバーが配置されているゾーンを指定するために特別に使用されます。 `zone`が null 以外の値に設定されている場合、対応する値が[`txn-score`](/system-variables.md#txn_scope)や[`Follower read`](/follower-read.md)などの機能によって自動的に使用されます。
+> -   `group`ラベルはTiDB Operatorで特別な用途があります。 [TiDB Operator](/tidb-operator-overview.md)使用してデプロイされたクラスターの場合、 `group`ラベルを手動で指定することは**お**勧めできません。
 
-## Log
+## ログ {#log}
 
-Configuration items related to log.
+ログに関するコンフィグレーション項目です。
 
-### `level`
+### <code>level</code> {#code-level-code}
 
-+ Specifies the log output level.
-+ Value options: `debug`, `info`, `warn`, `error`, and `fatal`.
-+ Default value: `info`
+-   ログの出力レベルを指定します。
+-   値のオプション: `debug` 、 `info` 、 `warn` 、 `error` 、および`fatal` 。
+-   デフォルト値: `info`
 
-### `format`
+### <code>format</code> {#code-format-code}
 
-- Specifies the log output format.
-- Value options: `json` and `text`.
-- Default value: `text`
+-   ログの出力形式を指定します。
+-   値のオプション: `json`および`text` 。
+-   デフォルト値: `text`
 
-### `enable-timestamp`
+### <code>enable-timestamp</code> {#code-enable-timestamp-code}
 
-- Determines whether to enable timestamp output in the log.
-- Default value: `null`
-- If you set the value to `false`, the log does not output timestamp.
+-   ログへのタイムスタンプ出力を有効にするかどうかを決定します。
+-   デフォルト値: `null`
+-   値を`false`に設定すると、ログにはタイムスタンプが出力されません。
 
-> **Note:**
+> **注記：**
 >
-> - To be backward compatible, the initial `disable-timestamp` configuration item remains valid. But if the value of `disable-timestamp` semantically conflicts with the value of `enable-timestamp` (for example, if both `enable-timestamp` and `disable-timestamp` are set to `true`), TiDB ignores the value for `disable-timestamp`.
-> - Currently, TiDB use `disable-timestamp` to determine whether to output timestamps in the log. In this situation, the value of `enable-timestamp` is `null`.
-> - In later versions, the `disable-timestamp` configuration will be removed. Discard `disable-timestamp` and use `enable-timestamp` which is semantically easier to understand.
+> -   下位互換性を保つために、最初の`disable-timestamp`構成項目は引き続き有効です。ただし、 `disable-timestamp`の値が`enable-timestamp`の値と意味的に競合する場合 (たとえば、 `enable-timestamp`と`disable-timestamp`の両方が`true`に設定されている場合)、TiDB は`disable-timestamp`の値を無視します。
+> -   現在、TiDB はログにタイムスタンプを出力するかどうかを決定するために`disable-timestamp`を使用します。この状況では、 `enable-timestamp`の値は`null`になります。
+> -   以降のバージョンでは、 `disable-timestamp`構成は削除されます。 `disable-timestamp`破棄し、意味的に理解しやすい`enable-timestamp`を使用します。
 
-### `enable-slow-log`
+### <code>enable-slow-log</code> {#code-enable-slow-log-code}
 
-- Determines whether to enable the slow query log.
-- Default value: `true`
-- To enable the slow query log, set `enable-slow-log` to `true`. Otherwise, set it to `false`.
-- Since v6.1.0, whether to enable slow query log is determined by the TiDB configuration item [`instance.tidb_enable_slow_log`](/tidb-configuration-file.md#tidb_enable_slow_log) or the system variable [`tidb_enable_slow_log`](/system-variables.md#tidb_enable_slow_log). `enable-slow-log` still takes effect. But if `enable-slow-log` and `instance.tidb_enable_slow_log` are set at the same time, the latter takes effect.
+-   スロークエリログを有効にするかどうかを決定します。
+-   デフォルト値: `true`
+-   スロークエリログを有効にするには、 `enable-slow-log` ～ `true`を設定します。それ以外の場合は、 `false`に設定します。
+-   v6.1.0 以降、スロー クエリ ログを有効にするかどうかは、TiDB 構成項目[`instance.tidb_enable_slow_log`](/tidb-configuration-file.md#tidb_enable_slow_log)またはシステム変数[`tidb_enable_slow_log`](/system-variables.md#tidb_enable_slow_log)によって決定されます。 `enable-slow-log`は引き続き有効です。ただし、 `enable-slow-log`と`instance.tidb_enable_slow_log`同時に設定した場合は、後者が有効になります。
 
-### `slow-query-file`
+### <code>slow-query-file</code> {#code-slow-query-file-code}
 
-- The file name of the slow query log.
-- Default value: `tidb-slow.log`
-- The format of the slow log is updated in TiDB v2.1.8, so the slow log is output to the slow log file separately. In versions before v2.1.8, this variable is set to "" by default.
-- After you set it, the slow query log is output to this file separately.
+-   スロークエリログのファイル名。
+-   デフォルト値: `tidb-slow.log`
+-   TiDB v2.1.8 ではスローログの形式が更新されたため、スローログは別途スローログファイルに出力されます。 v2.1.8 より前のバージョンでは、この変数はデフォルトで &quot;&quot; に設定されます。
+-   設定すると、スロークエリログが別途このファイルに出力されます。
 
-### `slow-threshold`
+### <code>slow-threshold</code> {#code-slow-threshold-code}
 
-- Outputs the threshold value of consumed time in the slow log.
-- Default value: `300`
-- Unit: Milliseconds
-- If the value in a query is larger than the default value, it is a slow query and is output to the slow log.
-- Since v6.1.0, the threshold value of consumed time in the slow log is specified by the TiDB configuration item [`instance.tidb_slow_log_threshold`](/tidb-configuration-file.md#tidb_slow_log_threshold) or the system variable [`tidb_slow_log_threshold`](/system-variables.md#tidb_slow_log_threshold). `slow-threshold` still takes effect. But if `slow-threshold` and `instance.tidb_slow_log_threshold` are set at the same time, the latter takes effect.
+-   スローログの消費時間の閾値を出力します。
+-   デフォルト値: `300`
+-   単位: ミリ秒
+-   クエリの値がデフォルト値より大きい場合、それは低速クエリであり、低速ログに出力されます。
+-   v6.1.0 以降、スローログの消費時間の閾値は TiDB 設定項目[`instance.tidb_slow_log_threshold`](/tidb-configuration-file.md#tidb_slow_log_threshold)またはシステム変数[`tidb_slow_log_threshold`](/system-variables.md#tidb_slow_log_threshold)で指定されます。 `slow-threshold`は引き続き有効です。ただし、 `slow-threshold`と`instance.tidb_slow_log_threshold`同時に設定した場合は、後者が有効になります。
 
-### `record-plan-in-slow-log`
+### <code>record-plan-in-slow-log</code> {#code-record-plan-in-slow-log-code}
 
-- Determines whether to record execution plans in the slow log.
-- Default value: `1`
-- Since v6.1.0, whether to record execution plans in the slow log is determined by the TiDB configuration item [`instance.tidb_record_plan_in_slow_log`](/tidb-configuration-file.md#tidb_record_plan_in_slow_log) or the system variable [`tidb_record_plan_in_slow_log`](/system-variables.md#tidb_record_plan_in_slow_log). `record-plan-in-slow-log` still takes effect. But if `record-plan-in-slow-log` and `instance.tidb_record_plan_in_slow_log` are set at the same time, the latter takes effect.
+-   実行計画を低速ログに記録するかどうかを決定します。
+-   デフォルト値: `1`
+-   v6.1.0 以降、実行計画をスロー ログに記録するかどうかは、TiDB 構成項目[`instance.tidb_record_plan_in_slow_log`](/tidb-configuration-file.md#tidb_record_plan_in_slow_log)またはシステム変数[`tidb_record_plan_in_slow_log`](/system-variables.md#tidb_record_plan_in_slow_log)によって決定されます。 `record-plan-in-slow-log`は引き続き有効です。ただし、 `record-plan-in-slow-log`と`instance.tidb_record_plan_in_slow_log`同時に設定した場合は、後者が有効になります。
 
-### `expensive-threshold`
+### <code>expensive-threshold</code> {#code-expensive-threshold-code}
 
-> **Warning:**
+> **警告：**
 >
-> Starting from v5.4.0, the `expensive-threshold` configuration item is deprecated and replaced by the system variable [`tidb_expensive_query_time_threshold`](/system-variables.md#tidb_expensive_query_time_threshold).
+> v5.4.0 以降、 `expensive-threshold`構成項目は非推奨になり、システム変数[`tidb_expensive_query_time_threshold`](/system-variables.md#tidb_expensive_query_time_threshold)に置き換えられます。
 
-- Outputs the threshold value of the number of rows for the `expensive` operation.
-- Default value: `10000`
-- When the number of query rows (including the intermediate results based on statistics) is larger than this value, it is an `expensive` operation and outputs log with the `[EXPENSIVE_QUERY]` prefix.
+-   `expensive`操作の行数の閾値を出力します。
+-   デフォルト値: `10000`
+-   クエリ行数 (統計に基づく中間結果を含む) がこの値より大きい場合、 `expensive`操作となり、接頭辞`[EXPENSIVE_QUERY]`付いたログが出力されます。
 
-### `timeout` <span class="version-mark">New in v7.1.0</span>
+### <code>timeout</code> <span class="version-mark">v7.1.0 の新機能</span> {#code-timeout-code-span-class-version-mark-new-in-v7-1-0-span}
 
-- Sets the timeout for log-writing operations in TiDB. In case of a disk failure that prevents logs from being written, this configuration item can trigger the TiDB process to panic instead of hang.
-- Default value: `0`, indicating no timeout is set.
-- Unit: second
-- In some user scenarios, TiDB logs might be stored on hot-pluggable or network-attached disks, which might become permanently unavailable. In these cases, TiDB cannot recover automatically from such disaster and the log-writing operations will be permanently blocked. Although the TiDB process might seem to be running, it does not respond to any requests. This configuration item is designed to handle such situations.
+-   TiDB でのログ書き込み操作のタイムアウトを設定します。ディスク障害が発生してログの書き込みができなくなった場合、この構成項目により、TiDB プロセスがハングせずにpanicを引き起こす可能性があります。
+-   デフォルト値: `0` 、タイムアウトが設定されていないことを示します。
+-   単位：秒
+-   一部のユーザー シナリオでは、TiDB ログがホットプラグ対応ディスクまたはネットワーク接続ディスクに保存され、永久に使用できなくなる可能性があります。このような場合、TiDB はそのような災害から自動的に回復できず、ログ書き込み操作は永久にブロックされます。 TiDB プロセスは実行されているように見えますが、リクエストには応答しません。この設定項目は、そのような状況に対処するために設計されています。
 
-## log.file
+## ログファイル {#log-file}
 
-Configuration items related to log files.
+ログファイルに関するコンフィグレーション項目です。
 
-#### `filename`
+#### <code>filename</code> {#code-filename-code}
 
-- The file name of the general log file.
-- Default value: ""
-- If you set it, the log is output to this file.
+-   一般ログファイルのファイル名。
+-   デフォルト値: &quot;&quot;
+-   設定すると、このファイルにログが出力されます。
 
-#### `max-size`
+#### <code>max-size</code> {#code-max-size-code}
 
-- The size limit of the log file.
-- Default value: 300
-- Unit: MB
-- The maximum value is 4096.
+-   ログ ファイルのサイズ制限。
+-   デフォルト値: 300
+-   単位：MB
+-   最大値は 4096 です。
 
-#### `max-days`
+#### <code>max-days</code> {#code-max-days-code}
 
-- The maximum number of days that the log is retained.
-- Default value: `0`
-- The log is retained by default. If you set the value, the expired log is cleaned up after `max-days`.
+-   ログが保持される最大日数。
+-   デフォルト値: `0`
+-   ログはデフォルトで保持されます。値を設定すると、期限切れのログは`max-days`の後にクリーンアップされます。
 
-#### `max-backups`
+#### <code>max-backups</code> {#code-max-backups-code}
 
-- The maximum number of retained logs.
-- Default value: `0`
-- All the log files are retained by default. If you set it to `7`, seven log files are retained at maximum.
+-   保持されるログの最大数。
+-   デフォルト値: `0`
+-   すべてのログ ファイルはデフォルトで保持されます。 `7`に設定すると、最大 7 つのログ ファイルが保持されます。
 
-## Security
+## Security {#security}
 
-Configuration items related to security.
+セキュリティに関するコンフィグレーション項目。
 
-### `enable-sem`
+### <code>enable-sem</code> {#code-enable-sem-code}
 
-- Enables the Security Enhanced Mode (SEM).
-- Default value: `false`
-- The status of SEM is available via the system variable [`tidb_enable_enhanced_security`](/system-variables.md#tidb_enable_enhanced_security).
+-   Security強化モード (SEM) を有効にします。
+-   デフォルト値: `false`
+-   SEM のステータスは、システム変数[`tidb_enable_enhanced_security`](/system-variables.md#tidb_enable_enhanced_security)を介して取得できます。
 
-### `ssl-ca`
+### <code>ssl-ca</code> {#code-ssl-ca-code}
 
-- The file path of the trusted CA certificate in the PEM format.
-- Default value: ""
-- If you set this option and `--ssl-cert`, `--ssl-key` at the same time, TiDB authenticates the client certificate based on the list of trusted CAs specified by this option when the client presents the certificate. If the authentication fails, the connection is terminated.
-- If you set this option but the client does not present the certificate, the secure connection continues without client certificate authentication.
+-   PEM 形式の信頼された CA 証明書のファイル パス。
+-   デフォルト値: &quot;&quot;
+-   このオプションと`--ssl-cert` 、 `--ssl-key`を同時に設定すると、TiDB は、クライアントが証明書を提示するときに、このオプションで指定された信頼できる CA のリストに基づいてクライアント証明書を認証します。認証に失敗した場合、接続は終了します。
+-   このオプションを設定してもクライアントが証明書を提示しない場合、クライアント証明書の認証なしで安全な接続が継続されます。
 
-### `ssl-cert`
+### <code>ssl-cert</code> {#code-ssl-cert-code}
 
-- The file path of the SSL certificate in the PEM format.
-- Default value: ""
-- If you set this option and `--ssl-key` at the same time, TiDB allows (but not forces) the client to securely connect to TiDB using TLS.
-- If the specified certificate or private key is invalid, TiDB starts as usual but cannot receive secure connection.
+-   PEM 形式の SSL 証明書のファイル パス。
+-   デフォルト値: &quot;&quot;
+-   このオプションと`--ssl-key`同時に設定すると、TiDB はクライアントが TLS を使用して TiDB に安全に接続できるようにします (強制はしません)。
+-   指定された証明書または秘密キーが無効な場合、TiDB は通常どおり起動しますが、安全な接続を受信できません。
 
-### `ssl-key`
+### <code>ssl-key</code> {#code-ssl-key-code}
 
-- The file path of the SSL certificate key in the PEM format, that is, the private key of the certificate specified by `--ssl-cert`.
-- Default value: ""
-- Currently, TiDB does not support loading the private keys protected by passwords.
+-   PEM 形式の SSL 証明書キーのファイル パス、つまり`--ssl-cert`で指定された証明書の秘密キー。
+-   デフォルト値: &quot;&quot;
+-   現在、TiDB はパスワードで保護された秘密キーのロードをサポートしていません。
 
-### `cluster-ssl-ca`
+### <code>cluster-ssl-ca</code> {#code-cluster-ssl-ca-code}
 
-- The CA root certificate used to connect TiKV or PD with TLS.
-- Default value: ""
+-   TiKV または PD を TLS で接続するために使用される CA ルート証明書。
+-   デフォルト値: &quot;&quot;
 
-### `cluster-ssl-cert`
+### <code>cluster-ssl-cert</code> {#code-cluster-ssl-cert-code}
 
-- The path of the SSL certificate file used to connect TiKV or PD with TLS.
-- Default value: ""
+-   TiKV または PD を TLS で接続するために使用される SSL 証明書ファイルのパス。
+-   デフォルト値: &quot;&quot;
 
-### `cluster-ssl-key`
+### <code>cluster-ssl-key</code> {#code-cluster-ssl-key-code}
 
-- The path of the SSL private key file used to connect TiKV or PD with TLS.
-- Default value: ""
+-   TiKV または PD を TLS で接続するために使用される SSL 秘密キー ファイルのパス。
+-   デフォルト値: &quot;&quot;
 
-### `spilled-file-encryption-method`
+### <code>spilled-file-encryption-method</code> {#code-spilled-file-encryption-method-code}
 
-+ Determines the encryption method used for saving the spilled files to disk.
-+ Default value: `"plaintext"`, which disables encryption.
-+ Optional values: `"plaintext"` and `"aes128-ctr"`
+-   流出したファイルをディスクに保存するために使用される暗号化方法を決定します。
+-   デフォルト値: `"plaintext"` 、暗号化を無効にします。
+-   オプションの値: `"plaintext"`および`"aes128-ctr"`
 
-### `auto-tls`
+### <code>auto-tls</code> {#code-auto-tls-code}
 
-- Determines whether to automatically generate the TLS certificates on startup.
-- Default value: `false`
+-   起動時に TLS 証明書を自動的に生成するかどうかを決定します。
+-   デフォルト値: `false`
 
-### `tls-version`
+### <code>tls-version</code> {#code-tls-version-code}
 
-- Set the minimum TLS version for MySQL Protocol connections.
-- Default value: "", which allows TLSv1.1 or higher.
-- Optional values: `"TLSv1.0"`, `"TLSv1.1"`, `"TLSv1.2"` and `"TLSv1.3"`
+-   MySQL プロトコル接続の最小 TLS バージョンを設定します。
+-   デフォルト値: &quot;&quot;。TLSv1.1 以降が許可されます。
+-   オプションの値: `"TLSv1.0"` 、 `"TLSv1.1"` 、 `"TLSv1.2"`および`"TLSv1.3"`
 
-### `auth-token-jwks` <span class="version-mark">New in v6.4.0</span>
+### <code>auth-token-jwks</code> <span class="version-mark">v6.4.0 の新機能</span> {#code-auth-token-jwks-code-span-class-version-mark-new-in-v6-4-0-span}
 
-> **Warning:**
+> **警告：**
 >
-> The `tidb_auth_token` authentication method is used only for the internal operation of TiDB Cloud. **DO NOT** change the value of this configuration.
+> `tidb_auth_token`認証方法は、 TiDB Cloudの内部操作にのみ使用されます。この設定の値は変更**しないでください**。
 
-- Set the local file path of the JSON Web Key Sets (JWKS) for the `tidb_auth_token` authentication method.
-- Default value: `""`
+-   `tidb_auth_token`認証方法の JSON Web Key Sets (JWKS) のローカル ファイル パスを設定します。
+-   デフォルト値: `""`
 
-### `auth-token-refresh-interval` <span class="version-mark">New in v6.4.0</span>
+### <code>auth-token-refresh-interval</code> <span class="version-mark">v6.4.0 の新機能</span> {#code-auth-token-refresh-interval-code-span-class-version-mark-new-in-v6-4-0-span}
 
-> **Warning:**
+> **警告：**
 >
-> The `tidb_auth_token` authentication method is used only for the internal operation of TiDB Cloud. **DO NOT** change the value of this configuration.
+> `tidb_auth_token`認証方法は、 TiDB Cloudの内部操作にのみ使用されます。この設定の値は変更**しないでください**。
 
-- Set the JWKS refresh interval for the `tidb_auth_token` authentication method.
-- Default value: `1h`
+-   `tidb_auth_token`認証方法の JWKS 更新間隔を設定します。
+-   デフォルト値: `1h`
 
-### `disconnect-on-expired-password` <span class="version-mark">New in v6.5.0</span>
+### <code>disconnect-on-expired-password</code> <span class="version-mark">v6.5.0 の新機能</span> {#code-disconnect-on-expired-password-code-span-class-version-mark-new-in-v6-5-0-span}
 
-- Determines whether TiDB disconnects the client connection when the password is expired.
-- Default value: `true`
-- Optional values: `true`, `false`
-- If you set it to `true`, the client connection is disconnected when the password is expired. If you set it to `false`, the client connection is restricted to the "sandbox mode" and the user can only execute the password reset operation.
+-   パスワードの有効期限が切れたときに、TiDB がクライアント接続を切断するかどうかを決定します。
+-   デフォルト値: `true`
+-   オプション`false`値: `true`
+-   これを`true`に設定すると、パスワードの有効期限が切れるとクライアント接続が切断されます。 `false`に設定すると、クライアント接続は「サンドボックス モード」に制限され、ユーザーはパスワード リセット操作のみを実行できます。
 
-### `session-token-signing-cert` <span class="version-mark">New in v6.4.0</span>
+### <code>session-token-signing-cert</code> <span class="version-mark">v6.4.0 の新機能</span> {#code-session-token-signing-cert-code-span-class-version-mark-new-in-v6-4-0-span}
 
-> **Warning:**
+> **警告：**
 >
-> The feature controlled by this parameter is under development. **Do not modify the default value**.
+> このパラメータによって制御される機能は開発中です。**デフォルト値は変更しないでください**。
 
-+ Default value: ""
+-   デフォルト値: &quot;&quot;
 
-### `session-token-signing-key` <span class="version-mark">New in v6.4.0</span>
+### <code>session-token-signing-key</code> <span class="version-mark">v6.4.0 の新機能</span> {#code-session-token-signing-key-code-span-class-version-mark-new-in-v6-4-0-span}
 
-> **Warning:**
+> **警告：**
 >
-> The feature controlled by this parameter is under development. **Do not modify the default value**.
+> このパラメータによって制御される機能は開発中です。**デフォルト値は変更しないでください**。
 
-+ Default value: ""
+-   デフォルト値: &quot;&quot;
 
-## Performance
+## パフォーマンス {#performance}
 
-Configuration items related to performance.
+パフォーマンスに関するコンフィグレーション項目。
 
-### `max-procs`
+### <code>max-procs</code> {#code-max-procs-code}
 
-- The number of CPUs used by TiDB.
-- Default value: `0`
-- The default `0` indicates using all the CPUs on the machine. You can also set it to n, and then TiDB uses n CPUs.
+-   TiDB によって使用される CPU の数。
+-   デフォルト値: `0`
+-   デフォルトの`0`マシン上のすべての CPU を使用することを示します。これを n に設定すると、TiDB は n 個の CPU を使用することもできます。
 
-### `server-memory-quota` <span class="version-mark">New in v4.0.9</span>
+### <code>server-memory-quota</code> <span class="version-mark">v4.0.9 の新機能</span> {#code-server-memory-quota-code-span-class-version-mark-new-in-v4-0-9-span}
 
-> **Warning:**
+> **警告：**
 >
-> Since v6.5.0, the `server-memory-quota` configuration item is deprecated and replaced by the system variable [`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-new-in-v640).
+> v6.5.0 以降、 `server-memory-quota`構成項目は非推奨になり、システム変数[`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-new-in-v640)に置き換えられます。
 
-+ The memory usage limit of tidb-server instances.
-+ Default value: `0` (in bytes), which means no memory limit.
+-   tidb-server インスタンスのメモリ使用制限。
+-   デフォルト値: `0` (バイト単位)。これはメモリ制限がないことを意味します。
 
-### `max-txn-ttl`
+### <code>max-txn-ttl</code> {#code-max-txn-ttl-code}
 
-- The longest time that a single transaction can hold locks. If this time is exceeded, the locks of a transaction might be cleared by other transactions so that this transaction cannot be successfully committed.
-- Default value: `3600000`
-- Unit: Millisecond
-- The transaction that holds locks longer than this time can only be committed or rolled back. The commit might not be successful.
+-   1 つのトランザクションがロックを保持できる最長時間。この時間を超えると、トランザクションのロックが他のトランザクションによってクリアされ、このトランザクションを正常にコミットできなくなる可能性があります。
+-   デフォルト値: `3600000`
+-   単位: ミリ秒
+-   この時間を超えてロックを保持するトランザクションは、コミットまたはロールバックのみ可能です。コミットが成功しない可能性があります。
 
-### `stmt-count-limit`
+### <code>stmt-count-limit</code> {#code-stmt-count-limit-code}
 
-- The maximum number of statements allowed in a single TiDB transaction.
-- Default value: `5000`
-- If a transaction does not roll back or commit after the number of statements exceeds `stmt-count-limit`, TiDB returns the `statement count 5001 exceeds the transaction limitation, autocommit = false` error. This configuration takes effect **only** in the retryable optimistic transaction. If you use the pessimistic transaction or have disabled the transaction retry, the number of statements in a transaction is not limited by this configuration.
+-   単一の TiDB トランザクションで許可されるステートメントの最大数。
+-   デフォルト値: `5000`
+-   ステートメントの数が`stmt-count-limit`超えた後にトランザクションがロールバックまたはコミットしない場合、TiDB は`statement count 5001 exceeds the transaction limitation, autocommit = false`エラーを返します。この設定は、再試行可能な楽観的トランザクションで**のみ**有効です。悲観的トランザクションを使用する場合、またはトランザクションの再試行を無効にしている場合、トランザクション内のステートメントの数はこの構成によって制限されません。
 
-### `txn-entry-size-limit` <span class="version-mark">New in v5.0</span>
+### <code>txn-entry-size-limit</code> <span class="version-mark">v5.0 の新機能</span> {#code-txn-entry-size-limit-code-span-class-version-mark-new-in-v5-0-span}
 
-- The size limit of a single row of data in TiDB.
-- Default value: `6291456` (in bytes)
-- The size limit of a single key-value record in a transaction. If the size limit is exceeded, TiDB returns the `entry too large` error. The maximum value of this configuration item does not exceed `125829120` (120 MB).
-- Note that TiKV has a similar limit. If the data size of a single write request exceeds [`raft-entry-max-size`](/tikv-configuration-file.md#raft-entry-max-size), which is 8 MB by default, TiKV refuses to process this request. When a table has a row of large size, you need to modify both configurations at the same time.
-- The default value of [`max_allowed_packet`](/system-variables.md#max_allowed_packet-new-in-v610) (the maximum size of a packet for the MySQL protocol) is 67108864 (64 MiB). If a row is larger than `max_allowed_packet`, the row gets truncated.
-- The default value of [`txn-total-size-limit`](#txn-total-size-limit) (the size limit of a single transaction in TiDB) is 100 MiB. If you increase the `txn-entry-size-limit` value to be over 100 MiB, you need to increase the `txn-total-size-limit` value accordingly.
+-   TiDB 内の 1 行のデータのサイズ制限。
+-   デフォルト値: `6291456` (バイト単位)
+-   トランザクション内の単一のキーと値のレコードのサイズ制限。サイズ制限を超えると、TiDB は`entry too large`エラーを返します。この設定項目の最大値は`125829120` (120 MB) を超えません。
+-   TiKV にも同様の制限があることに注意してください。 1 回の書き込みリクエストのデータ サイズが[`raft-entry-max-size`](/tikv-configuration-file.md#raft-entry-max-size) (デフォルトでは 8 MB) を超える場合、TiKV はこのリクエストの処理を拒否します。テーブルに大きなサイズの行がある場合は、両方の構成を同時に変更する必要があります。
+-   デフォルト値の[`max_allowed_packet`](/system-variables.md#max_allowed_packet-new-in-v610) (MySQL プロトコルのパケットの最大サイズ) は 67108864 (64 MiB) です。行が`max_allowed_packet`より大きい場合、行は切り捨てられます。
+-   デフォルト値の[`txn-total-size-limit`](#txn-total-size-limit) (TiDB の単一トランザクションのサイズ制限) は 100 MiB です。 `txn-entry-size-limit`値を増やして 100 MiB を超える場合は、それに応じて`txn-total-size-limit`値も増やす必要があります。
 
-### `txn-total-size-limit`
+### <code>txn-total-size-limit</code> {#code-txn-total-size-limit-code}
 
-- The size limit of a single transaction in TiDB.
-- Default value: `104857600` (in bytes)
-- In a single transaction, the total size of key-value records cannot exceed this value. The maximum value of this parameter is `1099511627776` (1 TB). Note that if you have used the binlog to serve the downstream consumer Kafka (such as the `arbiter` cluster), the value of this parameter must be no more than `1073741824` (1 GB). This is because 1 GB is the upper limit of a single message size that Kafka can process. Otherwise, an error is returned if this limit is exceeded.
-- In TiDB v6.5.0 and later versions, this configuration is no longer recommended. The memory size of a transaction will be accumulated into the memory usage of the session, and the [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query) variable will take effect when the session memory threshold is exceeded. To be compatible with previous versions, this configuration works as follows when you upgrade from an earlier version to TiDB v6.5.0 or later:
-    - If this configuration is not set or is set to the default value (`104857600`), after an upgrade, the memory size of a transaction will be accumulated into the memory usage of the session, and the `tidb_mem_quota_query` variable will take effect.
-    - If this configuration is not defaulted (`104857600`), it still takes effect and its behavior on controling the size of a single transaction remains unchanged before and after the upgrade. This means that the memory size of the transaction is not controlled by the `tidb_mem_quota_query` variable.
+-   TiDB の単一トランザクションのサイズ制限。
+-   デフォルト値: `104857600` (バイト単位)
+-   単一トランザクションでは、キーと値のレコードの合計サイズがこの値を超えることはできません。このパラメータの最大値は`1099511627776` (1 TB) です。 binlogを使用してダウンストリーム コンシューマー Kafka ( `arbiter`クラスターなど) にサービスを提供している場合、このパラメーターの値は`1073741824` (1 GB) 以下である必要があることに注意してください。これは、Kafka が処理できる 1 つのメッセージ サイズの上限が 1 GB であるためです。それ以外の場合、この制限を超えるとエラーが返されます。
+-   TiDB v6.5.0 以降のバージョンでは、この構成は推奨されなくなりました。トランザクションのメモリサイズはセッションのメモリ使用量に累積され、セッションメモリのしきい値を超えると変数[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)が有効になります。以前のバージョンとの互換性を保つために、以前のバージョンから TiDB v6.5.0 以降にアップグレードする場合、この構成は次のように機能します。
+    -   この構成が設定されていないか、デフォルト値 ( `104857600` ) に設定されている場合、アップグレード後、トランザクションのメモリサイズがセッションのメモリ使用量に累積され、変数`tidb_mem_quota_query`が有効になります。
+    -   この構成がデフォルト ( `104857600` ) に設定されていない場合でも、その構成は有効であり、単一トランザクションのサイズを制御する動作はアップグレードの前後でも変わりません。これは、トランザクションのメモリサイズが`tidb_mem_quota_query`変数によって制御されないことを意味します。
 
-### `tcp-keep-alive`
+### <code>tcp-keep-alive</code> {#code-tcp-keep-alive-code}
 
-- Determines whether to enable `keepalive` in the TCP layer.
-- Default value: `true`
+-   TCPレイヤーで`keepalive`を有効にするかどうかを決定します。
+-   デフォルト値: `true`
 
-### `tcp-no-delay`
+### <code>tcp-no-delay</code> {#code-tcp-no-delay-code}
 
-- Determines whether to enable TCP_NODELAY at the TCP layer. After it is enabled, TiDB disables the Nagle algorithm in the TCP/IP protocol and allows sending small data packets to reduce network latency. This is suitable for latency-sensitive applications with a small transmission volume of data.
-- Default value: `true`
+-   TCPレイヤーで TCP_NODELAY を有効にするかどうかを決定します。 TiDB を有効にすると、TCP/IP プロトコルの Nagle アルゴリズムが無効になり、小さなデータ パケットの送信が可能になり、ネットワークレイテンシーが短縮されます。これは、データの送信量が少なく、遅延の影響を受けやすいアプリケーションに適しています。
+-   デフォルト値: `true`
 
-### `cross-join`
+### <code>cross-join</code> {#code-cross-join-code}
 
-- Default value: `true`
-- TiDB supports executing the `JOIN` statement without any condition (the `WHERE` field) of both sides tables by default; if you set the value to `false`, the server refuses to execute when such a `JOIN` statement appears.
+-   デフォルト値: `true`
+-   TiDB は、デフォルトで両側テーブルの条件 ( `WHERE`フィールド) なしで`JOIN`ステートメントの実行をサポートします。値を`false`に設定すると、そのような`JOIN`ステートメントが表示されたときにサーバーは実行を拒否します。
 
-### `stats-lease`
+### <code>stats-lease</code> {#code-stats-lease-code}
 
-- The time interval of reloading statistics, updating the number of table rows, checking whether it is needed to perform the automatic analysis, using feedback to update statistics and loading statistics of columns.
-- Default value: `3s`
-    - At intervals of `stats-lease` time, TiDB checks the statistics for updates and updates them to the memory if updates exist.
-    - At intervals of `20 * stats-lease` time, TiDB updates the total number of rows generated by DML and the number of modified rows to the system table.
-    - At intervals of `stats-lease`, TiDB checks for tables and indexes that need to be automatically analyzed.
-    - At intervals of `stats-lease`, TiDB checks for column statistics that need to be loaded to the memory.
-    - At intervals of `200 * stats-lease`, TiDB writes the feedback cached in the memory to the system table.
-    - At intervals of `5 * stats-lease`, TiDB reads the feedback in the system table, and updates the statistics cached in the memory.
-- When `stats-lease` is set to 0s, TiDB periodically reads the feedback in the system table, and updates the statistics cached in the memory every three seconds. But TiDB no longer automatically modifies the following statistics-related system tables:
-    - `mysql.stats_meta`: TiDB no longer automatically records the number of table rows that are modified by the transaction and updates it to this system table.
-    - `mysql.stats_histograms`/`mysql.stats_buckets` and `mysql.stats_top_n`: TiDB no longer automatically analyzes and proactively updates statistics.
-    - `mysql.stats_feedback`: TiDB no longer updates the statistics of the tables and indexes according to a part of statistics returned by the queried data.
+-   統計の再ロード、テーブルの行数の更新、自動分析の実行が必要かどうかの確認、フィードバックを使用した統計の更新、および列の統計のロードの時間間隔。
+-   デフォルト値: `3s`
+    -   TiDB は`stats-lease`回の間隔で更新の統計をチェックし、更新が存在する場合はメモリに更新します。
+    -   TiDB は、DML によって生成された行の総数とシステム テーブルに変更された行の数を`20 * stats-lease`回の間隔で更新します。
+    -   TiDB は、自動分析が必要なテーブルとインデックスを`stats-lease`の間隔でチェックします。
+    -   TiDB は、メモリにロードする必要がある列統計を`stats-lease`の間隔でチェックします。
+    -   TiDB は`200 * stats-lease`の間隔で、メモリにキャッシュされたフィードバックをシステム テーブルに書き込みます。
+    -   TiDB は`5 * stats-lease`の間隔でシステム テーブルのフィードバックを読み取り、メモリにキャッシュされた統計を更新します。
+-   `stats-lease`を 0 に設定すると、TiDB はシステム テーブル内のフィードバックを定期的に読み取り、メモリにキャッシュされた統計を 3 秒ごとに更新します。ただし、TiDB は、次の統計関連のシステム テーブルを自動的に変更しなくなりました。
+    -   `mysql.stats_meta` : TiDB は、トランザクションによって変更されたテーブル行の数を自動的に記録し、それをこのシステム テーブルに更新しなくなりました。
+    -   `mysql.stats_histograms` / `mysql.stats_buckets`および`mysql.stats_top_n` : TiDB は統計を自動的に分析し、積極的に更新しなくなりました。
+    -   `mysql.stats_feedback` : TiDB は、クエリされたデータによって返された統計の一部に従ってテーブルとインデックスの統計を更新しなくなりました。
 
-### `pseudo-estimate-ratio`
+### <code>pseudo-estimate-ratio</code> {#code-pseudo-estimate-ratio-code}
 
-- The ratio of (number of modified rows)/(total number of rows) in a table. If the value is exceeded, the system assumes that the statistics have expired and the pseudo statistics will be used.
-- Default value: `0.8`
-- The minimum value is `0` and the maximum value is `1`.
+-   テーブル内の (変更された行数)/(総行数) の比率。この値を超えると、システムは統計の有効期限が切れたとみなして、疑似統計が使用されます。
+-   デフォルト値: `0.8`
+-   最小値は`0` 、最大値は`1`です。
 
-### `force-priority`
+### <code>force-priority</code> {#code-force-priority-code}
 
-- Sets the priority for all statements.
-- Default value: `NO_PRIORITY`
-- Value options: The default value `NO_PRIORITY` means that the priority for statements is not forced to change. Other options are `LOW_PRIORITY`, `DELAYED`, and `HIGH_PRIORITY` in ascending order.
-- Since v6.1.0, the priority for all statements is determined by the TiDB configuration item [`instance.tidb_force_priority`](/tidb-configuration-file.md#tidb_force_priority) or the system variable [`tidb_force_priority`](/system-variables.md#tidb_force_priority). `force-priority` still takes effect. But if `force-priority` and `instance.tidb_force_priority` are set at the same time, the latter takes effect.
+-   すべてのステートメントの優先順位を設定します。
+-   デフォルト値: `NO_PRIORITY`
+-   値のオプション: デフォルト値`NO_PRIORITY`は、ステートメントの優先順位が強制的に変更されないことを意味します。他のオプションは昇順で`LOW_PRIORITY` 、 `DELAYED` 、および`HIGH_PRIORITY`です。
+-   v6.1.0 以降、すべてのステートメントの優先順位は、TiDB 構成項目[`instance.tidb_force_priority`](/tidb-configuration-file.md#tidb_force_priority)またはシステム変数[`tidb_force_priority`](/system-variables.md#tidb_force_priority)によって決定されます。 `force-priority`は引き続き有効です。ただし、 `force-priority`と`instance.tidb_force_priority`同時に設定した場合は、後者が有効になります。
 
-### `distinct-agg-push-down`
+### <code>distinct-agg-push-down</code> {#code-distinct-agg-push-down-code}
 
-- Determines whether the optimizer executes the operation that pushes down the aggregation function with `Distinct` (such as `select count(distinct a) from t`) to Coprocessors.
-- Default: `false`
-- This variable is the initial value of the system variable [`tidb_opt_distinct_agg_push_down`](/system-variables.md#tidb_opt_distinct_agg_push_down).
+-   オプティマイザが`Distinct`の集計関数 ( `select count(distinct a) from t`など) をコプロセッサにプッシュダウンする操作を実行するかどうかを決定します。
+-   デフォルト: `false`
+-   この変数はシステム変数[`tidb_opt_distinct_agg_push_down`](/system-variables.md#tidb_opt_distinct_agg_push_down)の初期値です。
 
-### `enforce-mpp`
+### <code>enforce-mpp</code> {#code-enforce-mpp-code}
 
-+ Determines whether to ignore the optimizer's cost estimation and to forcibly use TiFlash's MPP mode for query execution.
-+ Default value: `false`
-+ This configuration item controls the initial value of [`tidb_enforce_mpp`](/system-variables.md#tidb_enforce_mpp-new-in-v51). For example, when this configuration item is set to `true`, the default value of `tidb_enforce_mpp` is `ON`.
+-   オプティマイザのコスト見積もりを無視し、クエリ実行に TiFlash の MPP モードを強制的に使用するかどうかを決定します。
+-   デフォルト値: `false`
+-   この構成項目は、初期値[`tidb_enforce_mpp`](/system-variables.md#tidb_enforce_mpp-new-in-v51)を制御します。たとえば、この構成項目が`true`に設定されている場合、デフォルト値の`tidb_enforce_mpp`は`ON`です。
 
-### `enable-stats-cache-mem-quota` <span class="version-mark">New in v6.1.0</span>
+### <code>enable-stats-cache-mem-quota</code> <span class="version-mark">v6.1.0 の新</span>機能 {#code-enable-stats-cache-mem-quota-code-span-class-version-mark-new-in-v6-1-0-span}
 
-+ Controls whether to enable the memory quota for the statistics cache.
-+ Default value: `true`
+-   統計キャッシュのメモリ割り当てを有効にするかどうかを制御します。
+-   デフォルト値: `true`
 
-### `stats-load-concurrency` <span class="version-mark">New in v5.4.0</span>
+### <code>stats-load-concurrency</code> <span class="version-mark">v5.4.0 の新機能</span> {#code-stats-load-concurrency-code-span-class-version-mark-new-in-v5-4-0-span}
 
-+ The maximum number of columns that the TiDB synchronously loading statistics feature can process concurrently.
-+ Default value: `5`
-+ Currently, the valid value range is `[1, 128]`.
+-   TiDB 同期ロード統計機能が同時に処理できる列の最大数。
+-   デフォルト値: `5`
+-   現在、有効な値の範囲は`[1, 128]`です。
 
-### `stats-load-queue-size` <span class="version-mark">New in v5.4.0</span>
+### <code>stats-load-queue-size</code> <span class="version-mark">v5.4.0 の新機能</span> {#code-stats-load-queue-size-code-span-class-version-mark-new-in-v5-4-0-span}
 
-+ The maximum number of column requests that the TiDB synchronously loading statistics feature can cache.
-+ Default value: `1000`
-+ Currently, the valid value range is `[1, 100000]`.
+-   TiDB 同期ロード統計機能がキャッシュできる列リクエストの最大数。
+-   デフォルト値: `1000`
+-   現在、有効な値の範囲は`[1, 100000]`です。
 
-### `lite-init-stats` <span class="version-mark">New in v7.1.0</span>
+### <code>lite-init-stats</code> <span class="version-mark">v7.1.0 の新機能</span> {#code-lite-init-stats-code-span-class-version-mark-new-in-v7-1-0-span}
 
-+ Controls whether to use lightweight statistics initialization during TiDB startup.
-+ Default value: `false` for versions earlier than v7.2.0, `true` for v7.2.0 and later versions.
-+ When the value of `lite-init-stats` is `true`, statistics initialization does not load any histogram, TopN, or Count-Min Sketch of indexes or columns into memory. When the value of `lite-init-stats` is `false`, statistics initialization loads histograms, TopN, and Count-Min Sketch of indexes and primary keys into memory but does not load any histogram, TopN, or Count-Min Sketch of non-primary key columns into memory. When the optimizer needs the histogram, TopN, and Count-Min Sketch of a specific index or column, the necessary statistics are loaded into memory synchronously or asynchronously (controlled by [`tidb_stats_load_sync_wait`](/system-variables.md#tidb_stats_load_sync_wait-new-in-v540)).
-+ Setting `lite-init-stats` to `true` speeds up statistics initialization and reduces TiDB memory usage by avoiding unnecessary statistics loading. For details, see [Load statistics](/statistics.md#load-statistics).
+-   TiDB の起動時に軽量統計初期化を使用するかどうかを制御します。
+-   デフォルト値: v7.2.0 より前のバージョンの場合は`false` 、v7.2.0 以降のバージョンの場合は`true` 。
+-   `lite-init-stats`の値が`true`の場合、統計の初期化では、インデックスまたは列のヒストグラム、TopN、または Count-Min スケッチがメモリにロードされません。 `lite-init-stats`の値が`false`の場合、統計の初期化では、インデックスと主キーのヒストグラム、TopN、および Count-Min スケッチがメモリにロードされますが、非主キー列のヒストグラム、TopN、または Count-Min スケッチはメモリにロードされません。オプティマイザが特定のインデックスまたは列のヒストグラム、TopN、および Count-Min スケッチを必要とする場合、必要な統計が同期または非同期でメモリにロードされます ( [`tidb_stats_load_sync_wait`](/system-variables.md#tidb_stats_load_sync_wait-new-in-v540)によって制御されます)。
+-   `lite-init-stats`から`true`に設定すると、統計の初期化が高速化され、不必要な統計のロードが回避されるため、TiDBメモリの使用量が削減されます。詳細は[負荷統計](/statistics.md#load-statistics)を参照してください。
 
-### `force-init-stats` <span class="version-mark">New in v7.1.0</span>
+### <code>force-init-stats</code> <span class="version-mark">v7.1.0 の新機能</span> {#code-force-init-stats-code-span-class-version-mark-new-in-v7-1-0-span}
 
-+ Controls whether to wait for statistics initialization to finish before providing services during TiDB startup.
-+ Default value: `false` for versions earlier than v7.2.0, `true` for v7.2.0 and later versions.
-+ When the value of `force-init-stats` is `true`, TiDB needs to wait until statistics initialization is finished before providing services upon startup. Note that if there are a large number of tables and partitions and the value of [`lite-init-stats`](/tidb-configuration-file.md#lite-init-stats-new-in-v710) is `false`, setting `force-init-stats` to `true` might prolong the time it takes for TiDB to start providing services.
-+ When the value of `force-init-stats` is `false`, TiDB can still provide services before statistics initialization is finished, but the optimizer uses pseudo statistics to make decisions, which might result in suboptimal execution plans.
+-   TiDB の起動時にサービスを提供する前に、統計の初期化が完了するまで待機するかどうかを制御します。
+-   デフォルト値: v7.2.0 より前のバージョンの場合は`false` 、v7.2.0 以降のバージョンの場合は`true` 。
+-   `force-init-stats`の値が`true`の場合、TiDB は起動時にサービスを提供する前に、統計の初期化が完了するまで待つ必要があります。テーブルとパーティションの数が多く、 [`lite-init-stats`](/tidb-configuration-file.md#lite-init-stats-new-in-v710)の値が`false`ある場合、 `force-init-stats`から`true`に設定すると、TiDB がサービスの提供を開始するまでにかかる時間が長くなる可能性があることに注意してください。
+-   `force-init-stats`の値が`false`の場合、TiDB は統計の初期化が完了する前でもサービスを提供できますが、オプティマイザは擬似統計を使用して決定を行うため、最適とは言えない実行計画が生じる可能性があります。
 
-## opentracing
+## オープントレース {#opentracing}
 
-Configuration items related to opentracing.
+opentracing に関連するコンフィグレーション項目。
 
-### `enable`
+### <code>enable</code> {#code-enable-code}
 
-+ Enables opentracing to trace the call overhead of some TiDB components. Note that enabling opentracing causes some performance loss.
-+ Default value: `false`
+-   opentracing を有効にして、一部の TiDB コンポーネントの呼び出しオーバーヘッドをトレースします。 opentracing を有効にすると、パフォーマンスがいくらか低下することに注意してください。
+-   デフォルト値: `false`
 
-### `rpc-metrics`
+### <code>rpc-metrics</code> {#code-rpc-metrics-code}
 
-+ Enables RPC metrics.
-+ Default value: `false`
+-   RPC メトリクスを有効にします。
+-   デフォルト値: `false`
 
-## opentracing.sampler
+## opentracing.sampler {#opentracing-sampler}
 
-Configuration items related to opentracing.sampler.
+opentracing.samplerに関するコンフィグレーション項目。
 
-### `type`
+### <code>type</code> {#code-type-code}
 
-+ Specifies the type of the opentracing sampler. The string value is case-insensitive.
-+ Default value: `"const"`
-+ Value options: `"const"`, `"probabilistic"`, `"ratelimiting"`, `"remote"`
+-   opentracing サンプラーのタイプを指定します。文字列値では大文字と小文字が区別されません。
+-   デフォルト値: `"const"`
+-   値のオプション: `"const"` 、 `"probabilistic"` 、 `"ratelimiting"` 、 `"remote"`
 
-### `param`
+### <code>param</code> {#code-param-code}
 
-+ The parameter of the opentracing sampler.
-    - For the `const` type, the value can be `0` or `1`, which indicates whether to enable the `const` sampler.
-    - For the `probabilistic` type, the parameter specifies the sampling probability, which can be a float number between `0` and `1`.
-    - For the `ratelimiting` type, the parameter specifies the number of spans sampled per second.
-    - For the `remote` type, the parameter specifies the sampling probability, which can be a float number between `0` and `1`.
-+ Default value: `1.0`
+-   opentracing サンプラーのパラメーター。
+    -   `const`タイプの場合、値は`0`または`1`で、 `const`サンプラーを有効にするかどうかを示します。
+    -   `probabilistic`タイプの場合、パラメーターはサンプリング確率を指定します。これは`0` ～ `1`の浮動小数点数にすることができます。
+    -   `ratelimiting`タイプの場合、パラメータは 1 秒あたりにサンプリングされるスパンの数を指定します。
+    -   `remote`タイプの場合、パラメーターはサンプリング確率を指定します。これは`0` ～ `1`の浮動小数点数にすることができます。
+-   デフォルト値: `1.0`
 
-### `sampling-server-url`
+### <code>sampling-server-url</code> {#code-sampling-server-url-code}
 
-+ The HTTP URL of the jaeger-agent sampling server.
-+ Default value: `""`
+-   jaeger-agent サンプリングサーバーの HTTP URL。
+-   デフォルト値: `""`
 
-### `max-operations`
+### <code>max-operations</code> {#code-max-operations-code}
 
-+ The maximum number of operations that the sampler can trace. If an operation is not traced, the default probabilistic sampler is used.
-+ Default value: `0`
+-   サンプラーがトレースできる操作の最大数。操作がトレースされない場合は、デフォルトの確率サンプラーが使用されます。
+-   デフォルト値: `0`
 
-### `sampling-refresh-interval`
+### <code>sampling-refresh-interval</code> {#code-sampling-refresh-interval-code}
 
-+ Controls the frequency of polling the jaeger-agent sampling policy.
-+ Default value: `0`
+-   jaeger-agent サンプリング ポリシーをポーリングする頻度を制御します。
+-   デフォルト値: `0`
 
-## opentracing.reporter
+## opentracing.reporter {#opentracing-reporter}
 
-Configuration items related to opentracing.reporter.
+opentracing.reporterに関するコンフィグレーション項目。
 
-### `queue-size`
+### <code>queue-size</code> {#code-queue-size-code}
 
-+ The queue size with which the reporter records spans in memory.
-+ Default value: `0`
+-   レポーターがメモリ内で記録するキュー サイズ。
+-   デフォルト値: `0`
 
-### `buffer-flush-interval`
+### <code>buffer-flush-interval</code> {#code-buffer-flush-interval-code}
 
-+ The interval at which the reporter flushes the spans in memory to the storage.
-+ Default value: `0`
+-   レポーターがメモリ内のスパンをstorageにフラッシュする間隔。
+-   デフォルト値: `0`
 
-### `log-spans`
+### <code>log-spans</code> {#code-log-spans-code}
 
-+ Determines whether to print the log for all submitted spans.
-+ Default value: `false`
+-   送信されたすべてのスパンのログを印刷するかどうかを決定します。
+-   デフォルト値: `false`
 
-### `local-agent-host-port`
+### <code>local-agent-host-port</code> {#code-local-agent-host-port-code}
 
-+ The address at which the reporter sends spans to the jaeger-agent.
-+ Default value: `""`
+-   レポーターがスパンを jaeger-agent に送信するアドレス。
+-   デフォルト値: `""`
 
-## tikv-client
+## tikvクライアント {#tikv-client}
 
-### `grpc-connection-count`
+### <code>grpc-connection-count</code> {#code-grpc-connection-count-code}
 
-- The maximum number of connections established with each TiKV.
-- Default value: `4`
+-   各 TiKV で確立される接続の最大数。
+-   デフォルト値: `4`
 
-### `grpc-keepalive-time`
+### <code>grpc-keepalive-time</code> {#code-grpc-keepalive-time-code}
 
-- The `keepalive` time interval of the RPC connection between TiDB and TiKV nodes. If there is no network packet within the specified time interval, the gRPC client executes `ping` command to TiKV to see if it is alive.
-- Default: `10`
-- Unit: second
+-   TiDB ノードと TiKV ノード間の RPC 接続の`keepalive`時間間隔。指定された時間間隔内にネットワーク パケットがない場合、gRPC クライアントは TiKV に対して`ping`コマンドを実行して、TiKV が生きているかどうかを確認します。
+-   デフォルト: `10`
+-   単位：秒
 
-### `grpc-keepalive-timeout`
+### <code>grpc-keepalive-timeout</code> {#code-grpc-keepalive-timeout-code}
 
-- The timeout of the RPC `keepalive` check between TiDB and TiKV nodes.
-- Default value: `3`
-- Unit: second
+-   TiDB ノードと TiKV ノード間の RPC `keepalive`チェックのタイムアウト。
+-   デフォルト値: `3`
+-   単位：秒
 
-### `grpc-compression-type`
+### <code>grpc-compression-type</code> {#code-grpc-compression-type-code}
 
-- Specifies the compression type used for data transfer between TiDB and TiKV nodes. The default value is `"none"`, which means no compression. To enable the gzip compression, set this value to `"gzip"`.
-- Default value: `"none"`
-- Value options: `"none"`, `"gzip"`
+-   TiDB ノードと TiKV ノード間のデータ転送に使用される圧縮タイプを指定します。デフォルト値は`"none"`で、圧縮しないことを意味します。 gzip 圧縮を有効にするには、この値を`"gzip"`に設定します。
+-   デフォルト値: `"none"`
+-   値`"gzip"`オプション: `"none"`
 
-### `commit-timeout`
+### <code>commit-timeout</code> {#code-commit-timeout-code}
 
-- The maximum timeout when executing a transaction commit.
-- Default value: `41s`
-- It is required to set this value larger than twice of the Raft election timeout.
+-   トランザクションコミット実行時の最大タイムアウト。
+-   デフォルト値: `41s`
+-   この値はRaft選出タイムアウトの 2 倍より大きく設定する必要があります。
 
-### `max-batch-size`
+### <code>max-batch-size</code> {#code-max-batch-size-code}
 
-- The maximum number of RPC packets sent in batch. If the value is not `0`, the `BatchCommands` API is used to send requests to TiKV, and the RPC latency can be reduced in the case of high concurrency. It is recommended that you do not modify this value.
-- Default value: `128`
+-   バッチで送信される RPC パケットの最大数。値が`0`ではない場合、 `BatchCommands` API を使用して TiKV にリクエストが送信され、同時実行性が高い場合には RPCレイテンシーを短縮できます。この値は変更しないことをお勧めします。
+-   デフォルト値: `128`
 
-### `max-batch-wait-time`
+### <code>max-batch-wait-time</code> {#code-max-batch-wait-time-code}
 
-- Waits for `max-batch-wait-time` to encapsulate the data packets into a large packet in batch and send it to the TiKV node. It is valid only when the value of `tikv-client.max-batch-size` is greater than `0`. It is recommended not to modify this value.
-- Default value: `0`
-- Unit: nanoseconds
+-   データ パケットを大きなパケットにバッチでカプセル化し、TiKV ノードに送信するまで`max-batch-wait-time`を待機します。 `tikv-client.max-batch-size`の値が`0`より大きい場合にのみ有効です。この値は変更しないことをお勧めします。
+-   デフォルト値: `0`
+-   単位: ナノ秒
 
-### `batch-wait-size`
+### <code>batch-wait-size</code> {#code-batch-wait-size-code}
 
-- The maximum number of packets sent to TiKV in batch. It is recommended not to modify this value.
-- Default value: `8`
-- If the value is `0`, this feature is disabled.
+-   バッチで TiKV に送信されるパケットの最大数。この値は変更しないことをお勧めします。
+-   デフォルト値: `8`
+-   値が`0`の場合、この機能は無効になります。
 
-### `overload-threshold`
+### <code>overload-threshold</code> {#code-overload-threshold-code}
 
-- The threshold of the TiKV load. If the TiKV load exceeds this threshold, more `batch` packets are collected to relieve the pressure of TiKV. It is valid only when the value of `tikv-client.max-batch-size` is greater than `0`. It is recommended not to modify this value.
-- Default value: `200`
+-   TiKV 負荷のしきい値。 TiKV 負荷がこのしきい値を超えると、TiKV の圧力を軽減するためにさらに`batch`パケットが収集されます。 `tikv-client.max-batch-size`の値が`0`より大きい場合にのみ有効です。この値は変更しないことをお勧めします。
+-   デフォルト値: `200`
 
-## tikv-client.copr-cache <span class="version-mark">New in v4.0.0</span>
+## tikv-client.copr-cache <span class="version-mark">v4.0.0 の新機能</span> {#tikv-client-copr-cache-span-class-version-mark-new-in-v4-0-0-span}
 
-This section introduces configuration items related to the Coprocessor Cache feature.
+このセクションでは、コプロセッサーキャッシュ機能に関連する設定項目を紹介します。
 
-### `capacity-mb`
+### <code>capacity-mb</code> {#code-capacity-mb-code}
 
-- The total size of the cached data. When the cache space is full, old cache entries are evicted. When the value is `0.0`, the Coprocessor Cache feature is disabled.
-- Default value: `1000.0`
-- Unit: MB
-- Type: Float
+-   キャッシュされたデータの合計サイズ。キャッシュ領域がいっぱいになると、古いキャッシュ エントリが削除されます。値が`0.0`の場合、コプロセッサーキャッシュ機能は無効になります。
+-   デフォルト値: `1000.0`
+-   単位：MB
+-   タイプ: フロート
 
-## txn-local-latches
+## txn-ローカル-ラッチ {#txn-local-latches}
 
-Configuration related to the transaction latch. It is recommended to enable it when many local transaction conflicts occur.
+トランザクションラッチに関するコンフィグレーション。ローカル トランザクションの競合が多数発生する場合は、これを有効にすることをお勧めします。
 
-### `enabled`
+### <code>enabled</code> {#code-enabled-code}
 
-- Determines whether to enable the memory lock of transactions.
-- Default value: `false`
+-   トランザクションのメモリロックを有効にするかどうかを決定します。
+-   デフォルト値: `false`
 
-### `capacity`
+### <code>capacity</code> {#code-capacity-code}
 
-- The number of slots corresponding to Hash, which automatically adjusts upward to an exponential multiple of 2. Each slot occupies 32 Bytes of memory. If set too small, it might result in slower running speed and poor performance in the scenario where data writing covers a relatively large range (such as importing data).
-- Default value: `2048000`
+-   ハッシュに対応するスロットの数。2 の指数倍に自動的に調整されます。各スロットは 32 バイトのメモリを占有します。設定が小さすぎると、データの書き込みが比較的広い範囲をカバーするシナリオ (データのインポートなど) で、実行速度が遅くなり、パフォーマンスが低下する可能性があります。
+-   デフォルト値: `2048000`
 
-## binlog
+## binlog {#binlog}
 
-Configurations related to TiDB Binlog.
+TiDB Binlogに関連する構成。
 
-### `enable`
+### <code>enable</code> {#code-enable-code}
 
-- Enables or disables binlog.
-- Default value: `false`
+-   binlog を有効または無効にします。
+-   デフォルト値: `false`
 
-### `write-timeout`
+### <code>write-timeout</code> {#code-write-timeout-code}
 
-- The timeout of writing binlog into Pump. It is not recommended to modify this value.
-- Default: `15s`
-- unit: second
+-   Pumpへのbinlog の書き込みのタイムアウト。この値を変更することはお勧めできません。
+-   デフォルト: `15s`
+-   単位：秒
 
-### `ignore-error`
+### <code>ignore-error</code> {#code-ignore-error-code}
 
-- Determines whether to ignore errors occurred in the process of writing binlog into Pump. It is not recommended to modify this value.
-- Default value: `false`
-- When the value is set to `true` and an error occurs, TiDB stops writing binlog and add `1` to the count of the `tidb_server_critical_error_total` monitoring item. When the value is set to `false`, the binlog writing fails and the entire TiDB service is stopped.
+-   binlog をPumpに書き込むプロセスで発生したエラーを無視するかどうかを決定します。この値を変更することはお勧めできません。
+-   デフォルト値: `false`
+-   値が`true`に設定され、エラーが発生すると、TiDB はbinlogの書き込みを停止し、 `tidb_server_critical_error_total`監視項目のカウントに`1`追加します。値が`false`に設定されている場合、binlogの書き込みは失敗し、TiDB サービス全体が停止します。
 
-### `binlog-socket`
+### <code>binlog-socket</code> {#code-binlog-socket-code}
 
-- The network address to which binlog is exported.
-- Default value: ""
+-   binlogがエクスポートされるネットワーク アドレス。
+-   デフォルト値: &quot;&quot;
 
-### `strategy`
+### <code>strategy</code> {#code-strategy-code}
 
-- The strategy of Pump selection when binlog is exported. Currently, only the `hash` and `range` methods are supported.
-- Default value: `range`
+-   binlogをエクスポートするときのPump選択の戦略。現在、 `hash`と`range`方法のみがサポートされています。
+-   デフォルト値: `range`
 
-## status
+## 状態 {#status}
 
-Configuration related to the status of TiDB service.
+TiDB サービスのステータスに関連するコンフィグレーション。
 
-### `report-status`
+### <code>report-status</code> {#code-report-status-code}
 
-- Enables or disables the HTTP API service.
-- Default value: `true`
+-   HTTP API サービスを有効または無効にします。
+-   デフォルト値: `true`
 
-### `record-db-qps`
+### <code>record-db-qps</code> {#code-record-db-qps-code}
 
-- Determines whether to transmit the database-related QPS metrics to Prometheus.
-- Default value: `false`
+-   データベース関連の QPS メトリクスを Prometheus に送信するかどうかを決定します。
+-   デフォルト値: `false`
 
-## pessimistic-txn
+## pessimistic-txn {#pessimistic-txn}
 
-For pessimistic transaction usage, refer to [TiDB Pessimistic Transaction Mode](/pessimistic-transaction.md).
+悲観的トランザクションの使用法については、 [TiDB ペシミスティックトランザクションモード](/pessimistic-transaction.md)を参照してください。
 
-### max-retry-count
+### max-retry-count {#max-retry-count}
 
-- The maximum number of retries of each statement in pessimistic transactions. If the number of retries exceeds this limit, an error occurs.
-- Default value: `256`
+-   悲観的トランザクションにおける各ステートメントの最大再試行回数。再試行回数がこの制限を超えると、エラーが発生します。
+-   デフォルト値: `256`
 
-### deadlock-history-capacity
+### deadlock-history-capacity {#deadlock-history-capacity}
 
-+ The maximum number of deadlock events that can be recorded in the [`INFORMATION_SCHEMA.DEADLOCKS`](/information-schema/information-schema-deadlocks.md) table of a single TiDB server. If this table is in full volume and an additional deadlock event occurs, the earliest record in the table will be removed to make place for the newest error.
-+ Default value: `10`
-+ Minimum value: `0`
-+ Maximum value: `10000`
+-   単一の TiDBサーバーの[`INFORMATION_SCHEMA.DEADLOCKS`](/information-schema/information-schema-deadlocks.md)テーブルに記録できるデッドロック イベントの最大数。このテーブルがフルボリュームで、追加のデッドロック イベントが発生した場合、テーブル内の最も古いレコードが削除されて、最新のエラーが配置されます。
+-   デフォルト値: `10`
+-   最小値: `0`
+-   最大値： `10000`
 
-### deadlock-history-collect-retryable
+### deadlock-history-collect-retryable {#deadlock-history-collect-retryable}
 
-+ Controls whether the [`INFORMATION_SCHEMA.DEADLOCKS`](/information-schema/information-schema-deadlocks.md) table collects the information of retryable deadlock errors. For the description of retryable deadlock errors, see [Retryable deadlock errors](/information-schema/information-schema-deadlocks.md#retryable-deadlock-errors).
-+ Default value: `false`
+-   [`INFORMATION_SCHEMA.DEADLOCKS`](/information-schema/information-schema-deadlocks.md)テーブルが再試行可能なデッドロック エラーの情報を収集するかどうかを制御します。再試行可能なデッドロック エラーの説明については、 [再試行可能なデッドロック エラー](/information-schema/information-schema-deadlocks.md#retryable-deadlock-errors)を参照してください。
+-   デフォルト値: `false`
 
-### pessimistic-auto-commit <span class="version-mark">New in v6.0.0</span>
+### pessimistic-auto-commit<span class="version-mark">v6.0.0 の新機能</span> {#pessimistic-auto-commit-span-class-version-mark-new-in-v6-0-0-span}
 
-+ Determines the transaction mode that the auto-commit transaction uses when the pessimistic transaction mode is globally enabled (`tidb_txn_mode='pessimistic'`). By default, even if the pessimistic transaction mode is globally enabled, the auto-commit transaction still uses the optimistic transaction mode. After enabling `pessimistic-auto-commit` (set to `true`), the auto-commit transaction also uses pessimistic mode, which is consistent with the other explicitly committed pessimistic transactions.
-+ For scenarios with conflicts, after enabling this configuration, TiDB includes auto-commit transactions into the global lock-waiting management, which avoids deadlocks and mitigates the latency spike brought by deadlock-causing conflicts.
-+ For scenarios with no conflicts, if there are many auto-commit transactions (the specific number is determined by the real scenarios. For example, the number of auto-commit transactions accounts for more than half of the total number of applications), and a single transaction operates a large data volume, enabling this configuration causes performance regression. For example, the auto-commit `INSERT INTO SELECT` statement.
-+ Default value: `false`
+-   悲観的トランザクション モードがグローバルに有効になっている場合 ( `tidb_txn_mode='pessimistic'` )、自動コミット トランザクションが使用するトランザクション モードを決定します。デフォルトでは、悲観的トランザクション モードがグローバルに有効になっている場合でも、自動コミット トランザクションは依然として楽観的トランザクション モードを使用します。 `pessimistic-auto-commit` ( `true`に設定) を有効にすると、自動コミット トランザクションでも悲観的モードが使用されます。これは、明示的にコミットされた他の悲観的トランザクションと一貫性があります。
+-   競合が発生するシナリオの場合、この構成を有効にした後、TiDB はグローバルなロック待機管理に自動コミット トランザクションを組み込みます。これにより、デッドロックが回避され、デッドロックの原因となる競合によってもたらされるレイテンシーのスパイクが軽減されます。
+-   競合のないシナリオの場合、自動コミット トランザクションが多数ある場合 (具体的な数は実際のシナリオによって決まります。たとえば、自動コミット トランザクションの数がアプリケーションの総数の半分以上を占めます)、単一トランザクションは大量のデータを処理するため、この構成を有効にするとパフォーマンスが低下します。たとえば、auto-commit `INSERT INTO SELECT`ステートメントです。
+-   デフォルト値: `false`
 
-### constraint-check-in-place-pessimistic <span class="version-mark">New in v6.4.0</span>
+### constraint-check-in-place-pessimistic<span class="version-mark">v6.4.0 の新機能</span> {#constraint-check-in-place-pessimistic-span-class-version-mark-new-in-v6-4-0-span}
 
-+ Controls the default value of the system variable [`tidb_constraint_check_in_place_pessimistic`](/system-variables.md#tidb_constraint_check_in_place_pessimistic-new-in-v630).
-+ Default value: `true`
+-   システム変数[`tidb_constraint_check_in_place_pessimistic`](/system-variables.md#tidb_constraint_check_in_place_pessimistic-new-in-v630)のデフォルト値を制御します。
+-   デフォルト値: `true`
 
-## isolation-read
+## 分離読み取り {#isolation-read}
 
-Configuration items related to read isolation.
+読み取り分離に関するコンフィグレーション項目。
 
-### `engines`
+### <code>engines</code> {#code-engines-code}
 
-- Controls from which engine TiDB allows to read data.
-- Default value: ["tikv", "tiflash", "tidb"], indicating that the engine is automatically selected by the optimizer.
-- Value options: Any combinations of "tikv", "tiflash", and "tidb", for example, ["tikv", "tidb"] or ["tiflash", "tidb"]
+-   TiDB がどのエンジンからデータを読み取ることができるかを制御します。
+-   デフォルト値: [&quot;tikv&quot;, &quot;tiflash&quot;, &quot;tidb&quot;]、エンジンがオプティマイザによって自動的に選択されることを示します。
+-   値のオプション: 「tikv」、「tiflash」、および「tidb」の任意の組み合わせ (例: [&quot;tikv&quot;, &quot;tidb&quot;] または [&quot;tiflash&quot;, &quot;tidb&quot;])
 
-## instance
+## 実例 {#instance}
 
-### `tidb_enable_collect_execution_info`
+### <code>tidb_enable_collect_execution_info</code> {#code-tidb-enable-collect-execution-info-code}
 
-- This configuration controls whether to record the execution information of each operator in the slow query log.
-- Default value: `true`
-- Before v6.1.0, this configuration is set by `enable-collect-execution-info`.
+-   この構成は、各オペレーターの実行情報をスロークエリーログに記録するかどうかを制御します。
+-   デフォルト値: `true`
+-   v6.1.0 より前では、この構成は`enable-collect-execution-info`によって設定されます。
 
-### `tidb_enable_slow_log`
+### <code>tidb_enable_slow_log</code> {#code-tidb-enable-slow-log-code}
 
-- This configuration is used to control whether to enable the slow log feature.
-- Default value: `true`
-- Value options: `true` or `false`
-- Before v6.1.0, this configuration is set by `enable-slow-log`.
+-   この構成は、スロー ログ機能を有効にするかどうかを制御するために使用されます。
+-   デフォルト値: `true`
+-   値のオプション: `true`または`false`
+-   v6.1.0 より前では、この構成は`enable-slow-log`によって設定されます。
 
-### `tidb_slow_log_threshold`
+### <code>tidb_slow_log_threshold</code> {#code-tidb-slow-log-threshold-code}
 
-- This configuration is used to output the threshold value of the time consumed by the slow log. When the time consumed by a query is larger than this value, this query is considered as a slow log and its log is output to the slow query log.
-- Default value: `300`
-- Range: `[-1, 9223372036854775807]`
-- Unit: Milliseconds
-- Before v6.1.0, this configuration is set by `slow-threshold`.
+-   この設定は、スローログの消費時間の閾値を出力するために使用されます。クエリの所要時間がこの値よりも長い場合、そのクエリはスローログとみなされ、スロークエリログにログが出力されます。
+-   デフォルト値: `300`
+-   範囲: `[-1, 9223372036854775807]`
+-   単位: ミリ秒
+-   v6.1.0 より前では、この構成は`slow-threshold`によって設定されます。
 
-### `in-mem-slow-query-topn-num` <span class="version-mark">New in v7.3.0</span>
+### <code>in-mem-slow-query-topn-num</code> <span class="version-mark">v7.3.0 の新機能</span> {#code-in-mem-slow-query-topn-num-code-span-class-version-mark-new-in-v7-3-0-span}
 
-+ The configuration controls the number of slowest queries that are cached in memory.
-+ Default value: 30
+-   この構成は、メモリにキャッシュされる最も遅いクエリの数を制御します。
+-   デフォルト値: 30
 
-### `in-mem-slow-query-recent-num` <span class="version-mark">New in v7.3.0</span>
+### <code>in-mem-slow-query-recent-num</code> <span class="version-mark">v7.3.0 の新機能</span> {#code-in-mem-slow-query-recent-num-code-span-class-version-mark-new-in-v7-3-0-span}
 
-+ The configuration controls the number of recently used slow queries that are cached in memory.
-+ Default value: 500
+-   この構成は、メモリにキャッシュされる、最近使用された低速クエリの数を制御します。
+-   デフォルト値: 500
 
-### `tidb_expensive_query_time_threshold`
+### <code>tidb_expensive_query_time_threshold</code> {#code-tidb-expensive-query-time-threshold-code}
 
-- This configuration is used to set the threshold value that determines whether to print expensive query logs. The difference between expensive query logs and slow query logs is:
-    - Slow logs are printed after the statement is executed.
-    - Expensive query logs print the statements that are being executed, with execution time exceeding the threshold value, and their related information.
-- Default value: `60`
-- Range: `[10, 2147483647]`
-- Unit: Seconds
-- Before v5.4.0, this configuration is set by `expensive-threshold`.
+-   この構成は、高価なクエリ ログを印刷するかどうかを決定するしきい値を設定するために使用されます。高価なクエリ ログと低速なクエリ ログの違いは次のとおりです。
+    -   スローログはステートメントの実行後に出力されます。
+    -   負荷の高いクエリ ログには、実行時間がしきい値を超えて実行されているステートメントとその関連情報が出力されます。
+-   デフォルト値: `60`
+-   範囲: `[10, 2147483647]`
+-   単位: 秒
+-   v5.4.0 より前では、この構成は`expensive-threshold`によって設定されます。
 
-### `tidb_record_plan_in_slow_log`
+### <code>tidb_record_plan_in_slow_log</code> {#code-tidb-record-plan-in-slow-log-code}
 
-- This configuration is used to control whether to include the execution plan of slow queries in the slow log.
-- Default value: `1`
-- Value options: `1` (enabled, default) or `0` (disabled).
-- The value of this configuration will initialize the value of system variable [`tidb_record_plan_in_slow_log`](/system-variables.md#tidb_record_plan_in_slow_log)
-- Before v6.1.0, this configuration is set by `record-plan-in-slow-log`.
+-   この構成は、低速クエリの実行計画を低速ログに含めるかどうかを制御するために使用されます。
+-   デフォルト値: `1`
+-   値のオプション: `1` (有効、デフォルト) または`0` (無効)。
+-   この設定の値はシステム変数[`tidb_record_plan_in_slow_log`](/system-variables.md#tidb_record_plan_in_slow_log)の値を初期化します。
+-   v6.1.0 より前では、この構成は`record-plan-in-slow-log`によって設定されます。
 
-### `tidb_force_priority`
+### <code>tidb_force_priority</code> {#code-tidb-force-priority-code}
 
-- This configuration is used to change the default priority for statements executed on a TiDB server.
-- Default value: `NO_PRIORITY`
-- The default value `NO_PRIORITY` means that the priority for statements is not forced to change. Other options are `LOW_PRIORITY`, `DELAYED`, and `HIGH_PRIORITY` in ascending order.
-- Before v6.1.0, this configuration is set by `force-priority`.
+-   この設定は、TiDBサーバー上で実行されるステートメントのデフォルトの優先順位を変更するために使用されます。
+-   デフォルト値: `NO_PRIORITY`
+-   デフォルト値`NO_PRIORITY`は、ステートメントの優先順位が強制的に変更されないことを意味します。他のオプションは昇順で`LOW_PRIORITY` 、 `DELAYED` 、および`HIGH_PRIORITY`です。
+-   v6.1.0 より前では、この構成は`force-priority`によって設定されます。
 
-### `max_connections`
+### <code>max_connections</code> {#code-max-connections-code}
 
-- The maximum number of connections permitted for a single TiDB instance. It can be used for resources control.
-- Default value: `0`
-- Range: `[0, 100000]`
-- The default value `0` means no limit. When the value of this variable is larger than `0`, and the number of connections reaches the value, the TiDB server will reject new connections from clients.
-- The value of this configuration will initialize the value of system variable [`max_connections`](/system-variables.md#max_connections)
-- Before v6.2.0, this configuration is set by `max-server-connections`.
+-   単一の TiDB インスタンスに許可される接続の最大数。リソース制御に使用できます。
+-   デフォルト値: `0`
+-   範囲: `[0, 100000]`
+-   デフォルト値`0`は制限がないことを意味します。この変数の値が`0`より大きく、接続数がその値に達すると、TiDBサーバーはクライアントからの新しい接続を拒否します。
+-   この設定の値はシステム変数[`max_connections`](/system-variables.md#max_connections)の値を初期化します。
+-   v6.2.0 より前では、この構成は`max-server-connections`によって設定されます。
 
-### `tidb_enable_ddl`
+### <code>tidb_enable_ddl</code> {#code-tidb-enable-ddl-code}
 
-- This configuration controls whether the corresponding TiDB instance can become a DDL owner or not.
-- Default value: `true`
-- Possible values: `OFF`, `ON`
-- The value of this configuration will initialize the value of the system variable [`tidb_enable_ddl`](/system-variables.md#tidb_enable_ddl-new-in-v630)
-- Before v6.3.0, this configuration is set by `run-ddl`.
+-   この構成は、対応する TiDB インスタンスが DDL 所有者になれるかどうかを制御します。
+-   デフォルト値: `true`
+-   可能な値: `OFF` 、 `ON`
+-   この設定の値はシステム変数[`tidb_enable_ddl`](/system-variables.md#tidb_enable_ddl-new-in-v630)の値を初期化します。
+-   v6.3.0 より前では、この構成は`run-ddl`によって設定されます。
 
-### `tidb_stmt_summary_enable_persistent` <span class="version-mark">New in v6.6.0</span>
+### <code>tidb_stmt_summary_enable_persistent</code> <span class="version-mark">v6.6.0 の新機能</span> {#code-tidb-stmt-summary-enable-persistent-code-span-class-version-mark-new-in-v6-6-0-span}
 
-> **Warning:**
+> **警告：**
 >
-> Statements summary persistence is an experimental feature. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+> ステートメントの概要の永続化は実験的機能です。本番環境で使用することはお勧めできません。この機能は予告なく変更または削除される場合があります。バグを見つけた場合は、GitHub で[問題](https://github.com/pingcap/tidb/issues)を報告できます。
 
-+ Controls whether to enable statements summary persistence.
-+ Default value: `false`
-+ For more details, see [Persist statements summary](/statement-summary-tables.md#persist-statements-summary).
+-   ステートメントの概要の永続性を有効にするかどうかを制御します。
+-   デフォルト値: `false`
+-   詳細については、 [永続化ステートメントの概要](/statement-summary-tables.md#persist-statements-summary)を参照してください。
 
-### `tidb_stmt_summary_filename` <span class="version-mark">New in v6.6.0</span>
+### <code>tidb_stmt_summary_filename</code> <span class="version-mark">v6.6.0 の新機能</span> {#code-tidb-stmt-summary-filename-code-span-class-version-mark-new-in-v6-6-0-span}
 
-> **Warning:**
+> **警告：**
 >
-> Statements summary persistence is an experimental feature. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+> ステートメントの概要の永続化は実験的機能です。本番環境で使用することはお勧めできません。この機能は予告なく変更または削除される場合があります。バグを見つけた場合は、GitHub で[問題](https://github.com/pingcap/tidb/issues)を報告できます。
 
-+ When statements summary persistence is enabled, this configuration specifies the file to which persistent data is written.
-+ Default value: `tidb-statements.log`
+-   ステートメントの概要の永続性が有効になっている場合、この構成は永続データが書き込まれるファイルを指定します。
+-   デフォルト値: `tidb-statements.log`
 
-### `tidb_stmt_summary_file_max_days` <span class="version-mark">New in v6.6.0</span>
+### <code>tidb_stmt_summary_file_max_days</code> <span class="version-mark">v6.6.0 の新機能</span> {#code-tidb-stmt-summary-file-max-days-code-span-class-version-mark-new-in-v6-6-0-span}
 
-> **Warning:**
+> **警告：**
 >
-> Statements summary persistence is an experimental feature. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+> ステートメントの概要の永続化は実験的機能です。本番環境で使用することはお勧めできません。この機能は予告なく変更または削除される場合があります。バグを見つけた場合は、GitHub で[問題](https://github.com/pingcap/tidb/issues)を報告できます。
 
-+ When statements summary persistence is enabled, this configuration specifies the maximum number of days to keep persistent data files.
-+ Default value: `3`
-+ Unit: day
-+ You can adjust the value based on the data retention requirements and disk space usage.
+-   ステートメント概要の永続性が有効になっている場合、この構成は永続データ ファイルを保持する最大日数を指定します。
+-   デフォルト値: `3`
+-   単位：日
+-   データ保持要件とディスク領域の使用量に基づいて値を調整できます。
 
-### `tidb_stmt_summary_file_max_size` <span class="version-mark">New in v6.6.0</span>
+### <code>tidb_stmt_summary_file_max_size</code> <span class="version-mark">v6.6.0 の新機能</span> {#code-tidb-stmt-summary-file-max-size-code-span-class-version-mark-new-in-v6-6-0-span}
 
-> **Warning:**
+> **警告：**
 >
-> Statements summary persistence is an experimental feature. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+> ステートメントの概要の永続化は実験的機能です。本番環境で使用することはお勧めできません。この機能は予告なく変更または削除される場合があります。バグを見つけた場合は、GitHub で[問題](https://github.com/pingcap/tidb/issues)を報告できます。
 
-+ When statements summary persistence is enabled, this configuration specifies the maximum size of a persistent data file.
-+ Default value: `64`
-+ Unit: MiB
-+ You can adjust the value based on the data retention requirements and disk space usage.
+-   ステートメント概要の永続性が有効になっている場合、この構成は永続データ ファイルの最大サイズを指定します。
+-   デフォルト値: `64`
+-   単位: MiB
+-   データ保持要件とディスク領域の使用量に基づいて値を調整できます。
 
-### `tidb_stmt_summary_file_max_backups` <span class="version-mark">New in v6.6.0</span>
+### <code>tidb_stmt_summary_file_max_backups</code> <span class="version-mark">v6.6.0 の新機能</span> {#code-tidb-stmt-summary-file-max-backups-code-span-class-version-mark-new-in-v6-6-0-span}
 
-> **Warning:**
+> **警告：**
 >
-> Statements summary persistence is an experimental feature. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+> ステートメントの概要の永続化は実験的機能です。本番環境で使用することはお勧めできません。この機能は予告なく変更または削除される場合があります。バグを見つけた場合は、GitHub で[問題](https://github.com/pingcap/tidb/issues)を報告できます。
 
-+ When statements summary persistence is enabled, this configuration specifies the maximum number of data files that can be persisted. `0` means no limit on the number of files.
-+ Default value: `0`
-+ You can adjust the value based on the data retention requirements and disk space usage.
+-   ステートメント概要の永続化が有効になっている場合、この構成では、永続化できるデータ ファイルの最大数を指定します。 `0`ファイル数に制限がないことを意味します。
+-   デフォルト値: `0`
+-   データ保持要件とディスク領域の使用量に基づいて値を調整できます。
 
-## proxy-protocol
+## プロキシプロトコル {#proxy-protocol}
 
-Configuration items related to the PROXY protocol.
+PROXYプロトコルに関するコンフィグレーション項目。
 
-### `networks`
+### <code>networks</code> {#code-networks-code}
 
-- The list of proxy server's IP addresses allowed to connect to TiDB using the [PROXY protocol](https://www.haproxy.org/download/1.8/doc/proxy-protocol.txt)
-- Default value: ""
-- In general cases, when you access TiDB behind a reverse proxy, TiDB takes the IP address of the reverse proxy server as the IP address of the client. By enabling the PROXY protocol, reverse proxies that support this protocol, such as HAProxy, can pass the real client IP address to TiDB.
-- After configuring this parameter, TiDB allows the configured source IP address to connect to TiDB using the PROXY protocol; if a protocol other than PROXY is used, this connection will be denied. If this parameter is left empty, no IP address can connect to TiDB using the PROXY protocol. The value can be an IP address (192.168.1.50) or CIDR (192.168.1.0/24) with `,` as the separator. `*` means any IP addresses.
+-   [プロキシプロトコル](https://www.haproxy.org/download/1.8/doc/proxy-protocol.txt)を使用して TiDB に接続できるプロキシ サーバーの IP アドレスのリスト
+-   デフォルト値: &quot;&quot;
+-   一般に、リバース プロキシの背後で TiDB にアクセスすると、TiDB はリバース プロキシサーバーの IP アドレスをクライアントの IP アドレスとして取得します。 PROXY プロトコルを有効にすることにより、このプロトコルをサポートするリバース プロキシ (HAProxy など) は、実際のクライアント IP アドレスを TiDB に渡すことができます。
+-   このパラメーターを構成すると、TiDB は、構成された送信元 IP アドレスが PROXY プロトコルを使用して TiDB に接続できるようにします。 PROXY 以外のプロトコルが使用されている場合、この接続は拒否されます。このパラメータを空のままにすると、PROXY プロトコルを使用して IP アドレスが TiDB に接続できなくなります。値には、区切り文字として`,`を使用した IP アドレス (192.168.1.50) または CIDR (192.168.1.0/24) を指定できます。 `*`任意の IP アドレスを意味します。
 
-> **Warning:**
+> **警告：**
 >
-> Use `*` with caution because it might introduce security risks by allowing a client of any IP address to report its IP address. In addition, using `*` might also cause the internal component that directly connects to TiDB (such as TiDB Dashboard) to be unavailable.
+> `*`を使用すると、任意の IP アドレスのクライアントがその IP アドレスを報告できるようになるため、セキュリティ リスクが生じる可能性があるため、注意して使用してください。さらに、 `*`を使用すると、TiDB に直接接続する内部コンポーネント(TiDB ダッシュボードなど) が使用できなくなる可能性があります。
 
-### `fallbackable` <span class="version-mark">New in v6.5.1</span>
+### <code>fallbackable</code> <span class="version-mark">v6.5.1 の新機能</span> {#code-fallbackable-code-span-class-version-mark-new-in-v6-5-1-span}
 
-+ Controls whether to enable the PROXY protocol fallback mode. If this configuration item is set to `true`, TiDB can accept clients that belong to `proxy-protocol.networks` to connect to TiDB without using the PROXY protocol specification or without sending the PROXY protocol header. By default, TiDB only accepts client connections that belong to `proxy-protocol.networks` and send a PROXY protocol header.
-+ Default value: `false`
+-   PROXY プロトコル フォールバック モードを有効にするかどうかを制御します。この構成項目が`true`に設定されている場合、TiDB は、PROXY プロトコル仕様を使用せず、または PROXY プロトコル ヘッダーを送信せずに、 `proxy-protocol.networks`に属するクライアントによる TiDB への接続を受け入れることができます。デフォルトでは、TiDB は`proxy-protocol.networks`に属し、PROXY プロトコル ヘッダーを送信するクライアント接続のみを受け入れます。
+-   デフォルト値: `false`
 
-## experimental
+## 実験的 {#experimental}
 
-The `experimental` section, introduced in v3.1.0, describes the configurations related to the experimental features of TiDB.
+v3.1.0 で導入された`experimental`セクションでは、TiDB の実験的機能に関連する構成について説明します。
 
-### `allow-expression-index` <span class="version-mark">New in v4.0.0</span>
+### <code>allow-expression-index</code> <span class="version-mark">v4.0.0 の新機能</span> {#code-allow-expression-index-code-span-class-version-mark-new-in-v4-0-0-span}
 
-+ Controls whether an expression index can be created. Since TiDB v5.2.0, if the function in an expression is safe, you can create an expression index directly based on this function without enabling this configuration. If you want to create an expression index based on other functions, you can enable this configuration, but correctness issues might exist. By querying the `tidb_allow_function_for_expression_index` variable, you can get the functions that are safe to be directly used for creating an expression.
-+ Default value: `false`
+-   式インデックスを作成できるかどうかを制御します。 TiDB v5.2.0 以降、式内の関数が安全であれば、この構成を有効にしなくても、この関数に基づいて式インデックスを直接作成できます。他の関数に基づいて式インデックスを作成する場合は、この構成を有効にできますが、正確性の問題が発生する可能性があります。 `tidb_allow_function_for_expression_index`変数をクエリすると、式の作成に直接使用しても安全な関数を取得できます。
+-   デフォルト値: `false`

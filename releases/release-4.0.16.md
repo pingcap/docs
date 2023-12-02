@@ -2,111 +2,111 @@
 title: TiDB 4.0.16 Release Notes
 ---
 
-# TiDB 4.0.16 Release Notes
+# TiDB 4.0.16 リリースノート {#tidb-4-0-16-release-notes}
 
-Release date: December 17, 2021
+発売日：2021年12月17日
 
-TiDB version: 4.0.16
+TiDB バージョン: 4.0.16
 
-## Compatibility changes
+## 互換性の変更 {#compatibility-changes}
 
-+ TiKV
+-   TiKV
 
-    - Before v4.0.16, when TiDB converts an illegal UTF-8 string to a Real type, an error is reported directly. Starting from v4.0.16, TiDB processes the conversion according to the legal UTF-8 prefix in the string [#11466](https://github.com/tikv/tikv/issues/11466)
+    -   v4.0.16 より前では、TiDB が不正な UTF-8 文字列を実数型に変換すると、エラーが直接報告されます。 v4.0.16 以降、TiDB は文字列[#11466](https://github.com/tikv/tikv/issues/11466)内の正当な UTF-8 プレフィックスに従って変換を処理します。
 
-+ Tools
+-   ツール
 
-    + TiCDC
+    -   TiCDC
 
-        - Change the default value of Kafka Sink `max-message-bytes` to 1 MB to prevent TiCDC from sending too large messages to Kafka clusters [#2962](https://github.com/pingcap/tiflow/issues/2962)
-        - Change the default value of Kafka Sink `partition-num` to 3 so that TiCDC distributes messages across Kafka partitions more evenly [#3337](https://github.com/pingcap/tiflow/issues/3337)
+        -   TiCDC が Kafka クラスター[#2962](https://github.com/pingcap/tiflow/issues/2962)に大きすぎるメッセージを送信しないように、Kafka シンク`max-message-bytes`のデフォルト値を 1 MB に変更します。
+        -   TiCDC が Kafka パーティション間でメッセージをより均等に分散できるように、Kafka Sink のデフォルト値`partition-num`を[#3337](https://github.com/pingcap/tiflow/issues/3337)に変更します。
 
-## Improvements
+## 改善点 {#improvements}
 
-+ TiDB
+-   TiDB
 
-    - Upgrade the Grafana version from 7.5.7 to 7.5.11
+    -   Grafana バージョンを 7.5.7 から 7.5.11 にアップグレードします。
 
-+ TiKV
+-   TiKV
 
-    - Reduce disk space consumption by adopting the zstd algorithm to compress SST files when restoring data using Backup & Restore or importing data using Local-backend of TiDB Lightning [#11469](https://github.com/tikv/tikv/issues/11469)
+    -   バックアップと復元を使用してデータを復元するとき、または TiDB Lightning [#11469](https://github.com/tikv/tikv/issues/11469)のローカル バックエンドを使用してデータをインポートするときに、zstd アルゴリズムを採用して SST ファイルを圧縮することにより、ディスク容量の消費をTiDB Lightning。
 
-+ Tools
+-   ツール
 
-    + Backup & Restore (BR)
+    -   バックアップと復元 (BR)
 
-        - Improve the robustness of restoring [#27421](https://github.com/pingcap/tidb/issues/27421)
+        -   復元の堅牢性の向上[#27421](https://github.com/pingcap/tidb/issues/27421)
 
-    + TiCDC
+    -   TiCDC
 
-        - Add a tick frequency limit to EtcdWorker to prevent frequent etcd writes from affecting PD services [#3112](https://github.com/pingcap/tiflow/issues/3112)
-        - Optimize rate limiting control on TiKV reloads to reduce gPRC congestion during changefeed initialization [#3110](https://github.com/pingcap/tiflow/issues/3110)
+        -   頻繁な etcd 書き込みが PD サービスに影響を与えるのを防ぐために、EtcdWorker にティック頻度制限を追加します[#3112](https://github.com/pingcap/tiflow/issues/3112)
+        -   TiKV リロードのレート制限制御を最適化し、チェンジフィードの初期化中の gPRC の輻輳を軽減します[#3110](https://github.com/pingcap/tiflow/issues/3110)
 
-## Bug fixes
+## バグの修正 {#bug-fixes}
 
-+ TiDB
+-   TiDB
 
-    - Fix the query panic caused by overflow in the statistics module when converting a range to points for cost estimation [#23625](https://github.com/pingcap/tidb/issues/23625)
-    - Fix wrong results of the control functions (such as `IF` and `CASE WHEN`) when using the `ENUM` type data as parameters of such functions [#23114](https://github.com/pingcap/tidb/issues/23114)
-    - Fix the issue that the `GREATEST` function returns inconsistent results due to different values of `tidb_enable_vectorized_expression` (`on` or `off`) [#29434](https://github.com/pingcap/tidb/issues/29434)
-    - Fix the panic when applying index join on prefix indexes in some cases [#24547](https://github.com/pingcap/tidb/issues/24547)
-    - Fix the issue that planner might cache invalid plans for `join` in some cases [#28087](https://github.com/pingcap/tidb/issues/28087)
-    - Fix a bug that TiDB cannot insert `null` into a non-null column when `sql_mode` is empty [#11648](https://github.com/pingcap/tidb/issues/11648)
-    - Fix the wrong result type of the `GREATEST` and `LEAST` functions [#29019](https://github.com/pingcap/tidb/issues/29019)
-    - Fix the `privilege check fail` error when performing the `grant` and `revoke` operations to grant and revoke global level privileges [#29675](https://github.com/pingcap/tidb/issues/29675)
-    - Fix the panic when using the `CASE WHEN` function on the `ENUM` data type [#29357](https://github.com/pingcap/tidb/issues/29357)
-    - Fix wrong results of the `microsecond` function in vectorized expressions [#29244](https://github.com/pingcap/tidb/issues/29244)
-    - Fix wrong results of the `hour` function in vectorized expression [#28643](https://github.com/pingcap/tidb/issues/28643)
-    - Fix the issue that optimistic transaction conflicts might cause transactions to block each other [#11148](https://github.com/tikv/tikv/issues/11148)
-    - Fix the issue of incomplete log information from the `auto analyze` result [#29188](https://github.com/pingcap/tidb/issues/29188)
-    - Fix the issue that using an invalid default date does not report an error when the `SQL_MODE` is 'NO_ZERO_IN_DATE' [#26766](https://github.com/pingcap/tidb/issues/26766)
-    - Fix the issue that the Coprocessor Cache panel in Grafana does not display metrics. Now, Grafana displays the number of `hits`/`miss`/`evict` [#26338](https://github.com/pingcap/tidb/issues/26338)
-    - Fix the issue that concurrently truncating the same partition causes DDL statements to stuck [#26229](https://github.com/pingcap/tidb/issues/26229)
-    - Fix the issue that the length information is wrong when converting `Decimal` to `String` [#29417](https://github.com/pingcap/tidb/issues/29417)
-    - Fix the issue of an extra column in the query result when `NATURAL JOIN` is used to join multiple tables [#29481](https://github.com/pingcap/tidb/issues/29481)
-    - Fix the issue that `TopN` is wrongly pushed down to `indexPlan` when `IndexScan` uses a prefix index [#29711](https://github.com/pingcap/tidb/issues/29711)
-    - Fix the issue that retrying transactions with the auto-increment columns of `DOUBLE` type causes data corruption [#29892](https://github.com/pingcap/tidb/issues/29892)
+    -   コスト見積もり[#23625](https://github.com/pingcap/tidb/issues/23625)ために範囲をポイントに変換するときに、統計モジュールのオーバーフローによって引き起こされるpanicを修正しました。
+    -   制御関数（ `IF`や`CASE WHEN`など）の関数として`ENUM`種類のデータを使用した場合の誤った結果を修正[#23114](https://github.com/pingcap/tidb/issues/23114)
+    -   `tidb_enable_vectorized_expression` ( `on`または`off` ) [#29434](https://github.com/pingcap/tidb/issues/29434)の値が異なるために`GREATEST`関数が一貫性のない結果を返す問題を修正します。
+    -   場合によってはプレフィックスインデックスにインデックス結合を適用するときのpanicを修正しました[#24547](https://github.com/pingcap/tidb/issues/24547)
+    -   場合によってはプランナーが`join`の無効なプランをキャッシュする可能性がある問題を修正します[#28087](https://github.com/pingcap/tidb/issues/28087)
+    -   `sql_mode` [#11648](https://github.com/pingcap/tidb/issues/11648)空の場合、TiDB が null 以外の列に`null`を挿入できないバグを修正
+    -   `GREATEST`と`LEAST`関数の間違った結果の型を修正[#29019](https://github.com/pingcap/tidb/issues/29019)
+    -   グローバル レベルの権限を付与および取り消すための`grant`および`revoke`操作を実行するときの`privilege check fail`エラーを修正します[#29675](https://github.com/pingcap/tidb/issues/29675)
+    -   `ENUM`データ型[#29357](https://github.com/pingcap/tidb/issues/29357)で`CASE WHEN`関数を使用するときのpanicを修正しました。
+    -   ベクトル化された式[#29244](https://github.com/pingcap/tidb/issues/29244)の関数`microsecond`の誤った結果を修正します。
+    -   ベクトル化された式[#28643](https://github.com/pingcap/tidb/issues/28643)の関数`hour`の誤った結果を修正しました。
+    -   楽観的トランザクションの競合によってトランザクションが互いにブロックされる可能性がある問題を修正します[#11148](https://github.com/tikv/tikv/issues/11148)
+    -   `auto analyze`結果[#29188](https://github.com/pingcap/tidb/issues/29188)のログ情報が不完全である問題を修正
+    -   `SQL_MODE`が &#39;NO_ZERO_IN_DATE&#39; [#26766](https://github.com/pingcap/tidb/issues/26766)の場合、無効なデフォルト日付を使用してもエラーが報告されない問題を修正します。
+    -   Grafana の[コプロセッサーキャッシュ] パネルにメトリクスが表示されない問題を修正します。これで、Grafana は`hits` / `miss` / `evict` [#26338](https://github.com/pingcap/tidb/issues/26338)の数字を表示します
+    -   同じパーティションを同時に切り詰めると DDL ステートメントがスタックする問題を修正します[#26229](https://github.com/pingcap/tidb/issues/26229)
+    -   `Decimal`を`String` [#29417](https://github.com/pingcap/tidb/issues/29417)に変換する際に長さ情報が間違っている問題を修正
+    -   `NATURAL JOIN`を使用して複数のテーブルを結合する場合、クエリ結果に余分な列が表示される問題を修正します[#29481](https://github.com/pingcap/tidb/issues/29481)
+    -   `IndexScan`プレフィックス インデックス[#29711](https://github.com/pingcap/tidb/issues/29711)を使用する場合、 `TopN`が誤って`indexPlan`にプッシュダウンされる問題を修正します。
+    -   `DOUBLE`タイプの自動インクリメント列でトランザクションを再試行するとデータ破損が発生する問題を修正します[#29892](https://github.com/pingcap/tidb/issues/29892)
 
-+ TiKV
+-   TiKV
 
-    - Fix a panic issue that occurs when Region merge, ConfChange, and Snapshot happen at the same time in extreme conditions [#11475](https://github.com/tikv/tikv/issues/11475)
-    - Fix the issue of negative sign when the decimal divide result is zero [#29586](https://github.com/pingcap/tidb/issues/29586)
-    - Fix the issue that the average latency of the by-instance gRPC requests is inaccurate in TiKV metrics [#11299](https://github.com/tikv/tikv/issues/11299)
-    - Fix the issue of TiCDC panic that occurs when the downstream database is missing [#11123](https://github.com/tikv/tikv/issues/11123)
-    - Fix the issue that the Raft connection is broken when the channel is full [#11047](https://github.com/tikv/tikv/issues/11047)
-    - Fix the issue that TiDB cannot correctly identify whether the `Int64` types in `Max`/`Min` functions are a signed integer or not, which causes the wrong calculation result of `Max`/`Min` [#10158](https://github.com/tikv/tikv/issues/10158)
-    - Fix the issue that CDC adds scan retries frequently due to the Congest error [#11082](https://github.com/tikv/tikv/issues/11082)
+    -   極端な条件でリージョンのマージ、ConfChange、およびスナップショットが同時に発生したときに発生するpanicの問題を修正します[#11475](https://github.com/tikv/tikv/issues/11475)
+    -   10 進数の除算結果が 0 の場合の負号の問題を修正します[#29586](https://github.com/pingcap/tidb/issues/29586)
+    -   TiKV メトリクス[#11299](https://github.com/tikv/tikv/issues/11299)でインスタンスごとの gRPC リクエストの平均レイテンシーが不正確である問題を修正します。
+    -   ダウンストリーム データベースが見つからない場合に発生する TiCDCpanicの問題を修正します[#11123](https://github.com/tikv/tikv/issues/11123)
+    -   チャンネルがいっぱいの場合、 Raft接続が切断される問題を修正[#11047](https://github.com/tikv/tikv/issues/11047)
+    -   TiDB が`Max` / `Min`関数の`Int64`型が符号付き整数であるかどうかを正しく識別できず、 `Max` / `Min`という間違った計算結果が発生する問題を修正[#10158](https://github.com/tikv/tikv/issues/10158)
+    -   輻輳エラー[#11082](https://github.com/tikv/tikv/issues/11082)が原因で CDC がスキャンの再試行を頻繁に追加する問題を修正します。
 
-+ PD
+-   PD
 
-    - Fix a panic issue that occurs after the TiKV node is removed [#4344](https://github.com/tikv/pd/issues/4344)
-    - Fix slow leader election caused by stucked region syncer [#3936](https://github.com/tikv/pd/issues/3936)
-    - Support that the evict leader scheduler can schedule regions with unhealthy peers [#4093](https://github.com/tikv/pd/issues/4093)
+    -   TiKV ノードが削除された後に発生するpanicの問題を修正します[#4344](https://github.com/tikv/pd/issues/4344)
+    -   リージョン同期器[#3936](https://github.com/tikv/pd/issues/3936)のスタックによって引き起こされるリーダー選出の遅さを修正
+    -   エビクト リーダー スケジューラが異常なピアのあるリージョンをスケジュールできることのサポート[#4093](https://github.com/tikv/pd/issues/4093)
 
-+ TiFlash
+-   TiFlash
 
-    - Fix the issue that TiFlash fails to start up on some platforms due to the absence of library `nsl`
+    -   ライブラリ`nsl`がないため、一部のプラットフォームでTiFlash が起動できない問題を修正
 
-+ Tools
+-   ツール
 
-    + TiDB Binlog
+    -   TiDBBinlog
 
-        - Fix the bug that Drainer exits when transporting a transaction greater than 1 GB [#28659](https://github.com/pingcap/tidb/issues/28659)
+        -   1 GBを超えるトランザクションを転送するとDrainerが終了するバグを修正[#28659](https://github.com/pingcap/tidb/issues/28659)
 
-    + TiCDC
+    -   TiCDC
 
-        - Fix the negative value error in the changefeed checkpoint lag [#3010](https://github.com/pingcap/tiflow/issues/3010)
-        - Fix OOM in container environments [#1798](https://github.com/pingcap/tiflow/issues/1798)
-        - Fix the TiCDC replication interruption issue when multiple TiKVs crash or during a forced restart [#3288](https://github.com/pingcap/tiflow/issues/3288)
-        - Fix the memory leak issue after processing DDLs [#3174](https://github.com/pingcap/tiflow/issues/3174)
-        - Fix the issue that changefeed does not fail fast enough when the ErrGCTTLExceeded error occurs [#3111](https://github.com/pingcap/tiflow/issues/3111)
-        - Fix the issue that TiCDC replication task might terminate when the upstream TiDB instance unexpectedly exits [#3061](https://github.com/pingcap/tiflow/issues/3061)
-        - Fix the issue that TiCDC process might panic when TiKV sends duplicate requests to the same Region [#2386](https://github.com/pingcap/tiflow/issues/2386)
-        - Fix the issue that the volume of Kafka messages generated by TiCDC is not constrained by `max-message-size` [#2962](https://github.com/pingcap/tiflow/issues/2962)
-        - Fix the issue that `tikv_cdc_min_resolved_ts_no_change_for_1m` keeps alerting when there is no changefeed [#11017](https://github.com/tikv/tikv/issues/11017)
-        - Fix the issue that TiCDC sync task might pause when an error occurs during writing a Kafka message [#2978](https://github.com/pingcap/tiflow/issues/2978)
-        - Fix the issue that some partitioned tables without valid indexes might be ignored when `force-replicate` is enabled [#2834](https://github.com/pingcap/tiflow/issues/2834)
-        - Fix the memory leak issue when creating a new changefeed [#2389](https://github.com/pingcap/tiflow/issues/2389)
-        - Fix the issue that might cause inconsistent data due to Sink components advancing resolved ts early [#3503](https://github.com/pingcap/tiflow/issues/3503)
-        - Fix the issue that scanning stock data might fail due to TiKV performing GC when scanning stock data takes too long [#2470](https://github.com/pingcap/tiflow/issues/2470)
-        - Fix the issue that the changefeed update command does not recognize global command line parameters [#2803](https://github.com/pingcap/tiflow/issues/2803)
+        -   チェンジフィードチェックポイントラグ[#3010](https://github.com/pingcap/tiflow/issues/3010)の負の値エラーを修正
+        -   コンテナ環境での OOM の修正[#1798](https://github.com/pingcap/tiflow/issues/1798)
+        -   複数の TiKV がクラッシュしたとき、または強制再起動中に TiCDC レプリケーションが中断される問題を修正します[#3288](https://github.com/pingcap/tiflow/issues/3288)
+        -   DDL 処理後のメモリリーク問題を修正[#3174](https://github.com/pingcap/tiflow/issues/3174)
+        -   ErrGCTTLExceeded エラーが発生したときに変更フィードが十分な速度で失敗しない問題を修正します[#3111](https://github.com/pingcap/tiflow/issues/3111)
+        -   上流の TiDB インスタンスが予期せず終了すると、TiCDC レプリケーション タスクが終了する可能性がある問題を修正します[#3061](https://github.com/pingcap/tiflow/issues/3061)
+        -   TiKV が同じリージョン[#2386](https://github.com/pingcap/tiflow/issues/2386)に重複したリクエストを送信すると、TiCDC プロセスがパニックになる可能panicがある問題を修正
+        -   TiCDC によって生成される Kafka メッセージの量が`max-message-size` [#2962](https://github.com/pingcap/tiflow/issues/2962)の制限を受けない問題を修正
+        -   変更フィード[#11017](https://github.com/tikv/tikv/issues/11017)がないときに`tikv_cdc_min_resolved_ts_no_change_for_1m`がアラートを出し続ける問題を修正します。
+        -   Kafka メッセージの書き込み中にエラーが発生したときに TiCDC 同期タスクが一時停止することがある問題を修正します[#2978](https://github.com/pingcap/tiflow/issues/2978)
+        -   `force-replicate`が有効な場合、有効なインデックスのない一部のパーティション テーブルが無視される可能性がある問題を修正します[#2834](https://github.com/pingcap/tiflow/issues/2834)
+        -   新しいチェンジフィード作成時のメモリリーク問題を修正[#2389](https://github.com/pingcap/tiflow/issues/2389)
+        -   シンク コンポーネントが早期に解決されるためにデータの不整合が発生する可能性がある問題を修正します[#3503](https://github.com/pingcap/tiflow/issues/3503)
+        -   ストック データのスキャンに時間がかかりすぎる場合、TiKV が GC を実行するためにストック データのスキャンが失敗する可能性がある問題を修正します[#2470](https://github.com/pingcap/tiflow/issues/2470)
+        -   Changefeed update コマンドがグローバル コマンド ライン パラメータ[#2803](https://github.com/pingcap/tiflow/issues/2803)を認識しない問題を修正します。

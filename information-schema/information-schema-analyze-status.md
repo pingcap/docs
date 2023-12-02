@@ -3,15 +3,13 @@ title: ANALYZE_STATUS
 summary: Learn the `ANALYZE_STATUS` information_schema table.
 ---
 
-# ANALYZE_STATUS
+# 分析ステータス {#analyze-status}
 
-The `ANALYZE_STATUS` table provides information about the running tasks that collect statistics and a limited number of history tasks.
+`ANALYZE_STATUS`表には、統計を収集する実行中のタスクと限られた数の履歴タスクに関する情報が表示されます。
 
-Starting from TiDB v6.1.0, the `ANALYZE_STATUS` table supports showing cluster-level tasks. Even after a TiDB restart, you can still view task records before the restart using this table. Before TiDB v6.1.0, the `ANALYZE_STATUS` table can only show instance-level tasks, and task records are cleared after a TiDB restart.
+TiDB v6.1.0 以降、 `ANALYZE_STATUS`テーブルはクラスターレベルのタスクの表示をサポートします。 TiDB の再起動後でも、このテーブルを使用して再起動前のタスク レコードを表示できます。 TiDB v6.1.0 より前では、 `ANALYZE_STATUS`テーブルにはインスタンス レベルのタスクのみが表示され、タスク レコードは TiDB の再起動後にクリアされます。
 
-Starting from TiDB v6.1.0, you can view the history tasks within the last 7 days through the system table `mysql.analyze_jobs`.
-
-{{< copyable "sql" >}}
+TiDB v6.1.0 以降、システム テーブル`mysql.analyze_jobs`を通じて過去 7 日間の履歴タスクを表示できるようになりました。
 
 ```sql
 USE information_schema;
@@ -40,8 +38,6 @@ DESC analyze_status;
 14 rows in set (0.00 sec)
 ```
 
-{{< copyable "sql" >}}
-
 ```sql
 SELECT * FROM information_schema.analyze_status;
 ```
@@ -61,19 +57,19 @@ SELECT * FROM information_schema.analyze_status;
 6 rows in set (0.00 sec)
 ```
 
-Fields in the `ANALYZE_STATUS` table are described as follows:
+`ANALYZE_STATUS`テーブルのフィールドは次のように説明されています。
 
-* `TABLE_SCHEMA`: The name of the database to which the table belongs.
-* `TABLE_NAME`: The name of the table.
-* `PARTITION_NAME`: The name of the partitioned table.
-* `JOB_INFO`: The information of the `ANALYZE` task. If an index is analyzed, this information will include the index name. When `tidb_analyze_version = 2`, this information will include configuration items such as sample rate.
-* `PROCESSED_ROWS`: The number of rows that have been processed.
-* `START_TIME`: The start time of the `ANALYZE` task.
-* `END_TIME`: The end time of the `ANALYZE` task.
-* `STATE`: The execution status of the `ANALYZE` task. Its value can be `pending`, `running`,`finished` or `failed`.
-* `FAIL_REASON`: The reason why the task fails. If the execution is successful, the value is `NULL`.
-* `INSTANCE`: The TiDB instance that executes the task.
-* `PROCESS_ID`: The process ID that executes the task.
-* `REMAINING_SECONDS`: The estimated time (in seconds) remaining for the task to complete.
-* `PROGRESS`: The progress of the task.
-* `ESTIMATED_TOTAL_ROWS`: The total rows that need to be analyzed by the task.
+-   `TABLE_SCHEMA` : テーブルが属するデータベースの名前。
+-   `TABLE_NAME` : テーブルの名前。
+-   `PARTITION_NAME` :パーティションテーブルの名前。
+-   `JOB_INFO` : `ANALYZE`のタスクの情報。インデックスが分析される場合、この情報にはインデックス名が含まれます。 `tidb_analyze_version = 2`の場合、この情報にはサンプル レートなどの設定項目が含まれます。
+-   `PROCESSED_ROWS` : 処理された行数。
+-   `START_TIME` : `ANALYZE`タスクの開始時刻。
+-   `END_TIME` : `ANALYZE`タスクの終了時刻。
+-   `STATE` : `ANALYZE`タスクの実行ステータス。その値は`pending` 、 `running` 、 `finished`または`failed`です。
+-   `FAIL_REASON` : タスクが失敗した理由。実行が成功した場合、値は`NULL`になります。
+-   `INSTANCE` : タスクを実行する TiDB インスタンス。
+-   `PROCESS_ID` : タスクを実行するプロセスID。
+-   `REMAINING_SECONDS` : タスクが完了するまでの推定残り時間 (秒単位)。
+-   `PROGRESS` : タスクの進行状況。
+-   `ESTIMATED_TOTAL_ROWS` : タスクによって分析する必要がある行の合計。

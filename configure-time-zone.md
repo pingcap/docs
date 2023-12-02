@@ -3,108 +3,82 @@ title: Time Zone Support
 summary: Learn how to set the time zone and its format.
 ---
 
-# Time Zone Support
+# タイムゾーンのサポート {#time-zone-support}
 
-The time zone in TiDB is decided by the global `time_zone` system variable and the session `time_zone` system variable. The default value of `time_zone` is `SYSTEM`. The actual time zone corresponding to `System` is configured when the TiDB cluster bootstrap is initialized. The detailed logic is as follows:
+TiDB のタイムゾーンは、グローバル`time_zone`システム変数とセッション`time_zone`システム変数によって決定されます。デフォルト値の`time_zone`は`SYSTEM`です。 `System`に対応する実際のタイム ゾーンは、TiDB クラスターのブートストラップが初期化されるときに構成されます。詳細なロジックは次のとおりです。
 
-- Prioritize the use of the `TZ` environment variable.
-- If the `TZ` environment variable fails, extract the time zone from the actual soft link address of `/etc/localtime`.
-- If both of the above methods fail, use `UTC` as the system time zone.
+-   `TZ`環境変数の使用を優先します。
+-   `TZ`環境変数が失敗した場合は、 `/etc/localtime`の実際のソフト リンク アドレスからタイム ゾーンを抽出します。
+-   上記の両方の方法が失敗した場合は、システムのタイムゾーンとして`UTC`を使用します。
 
-You can use the following statement to set the global server `time_zone` value at runtime:
-
-{{< copyable "sql" >}}
+次のステートメントを使用して、実行時にグローバルサーバー`time_zone`値を設定できます。
 
 ```sql
 SET GLOBAL time_zone = timezone;
 ```
 
-Each client has its own time zone setting, given by the session `time_zone` variable. Initially, the session variable takes its value from the global `time_zone` variable, but the client can change its own time zone with this statement:
-
-{{< copyable "sql" >}}
+各クライアントには、セッション`time_zone`変数によって指定される独自のタイムゾーン設定があります。最初、セッション変数はグローバル`time_zone`変数から値を取得しますが、クライアントは次のステートメントを使用して独自のタイムゾーンを変更できます。
 
 ```sql
 SET time_zone = timezone;
 ```
 
-You can use the following statement to view the current values of the global, client-specific and system time zones:
-
-{{< copyable "sql" >}}
+次のステートメントを使用すると、グローバル タイム ゾーン、クライアント固有のタイム ゾーン、およびシステム タイム ゾーンの現在の値を表示できます。
 
 ```sql
 SELECT @@global.time_zone, @@session.time_zone, @@global.system_time_zone;
 ```
 
-To set the format of the value of the `time_zone`:
+`time_zone`の値の形式を設定するには:
 
-- The value 'SYSTEM' indicates that the time zone should be the same as the system time zone.
-- The value can be given as a string indicating an offset from UTC, such as '+10:00' or '-6:00'.
-- The value can be given as a named time zone, such as 'Europe/Helsinki', 'US/Eastern', or 'MET'.
+-   値「SYSTEM」は、タイムゾーンがシステムのタイムゾーンと同じである必要があることを示します。
+-   値は、「+10:00」や「-6:00」など、UTC からのオフセットを示す文字列として指定できます。
+-   値は、「ヨーロッパ/ヘルシンキ」、「米国/東部」、「MET」などの名前付きタイムゾーンとして指定できます。
 
-The current session time zone setting affects the display and storage of time values that are zone-sensitive. This includes the values displayed by functions such as `NOW()` or `CURTIME()`.
+現在のセッションのタイム ゾーン設定は、ゾーンに依存する時間値の表示とstorageに影響します。これには、 `NOW()`や`CURTIME()`などの関数によって表示される値が含まれます。
 
-> **Note:**
+> **注記：**
 >
-> Only the values of the Timestamp data type is affected by time zone. This is because the Timestamp data type uses the literal value + time zone information. Other data types, such as Datetime/Date/Time, do not have time zone information, thus their values are not affected by the changes of time zone.
-
-{{< copyable "sql" >}}
+> タイムゾーンの影響を受けるのは、タイムスタンプ データ型の値のみです。これは、Timestamp データ型がリテラル値 + タイム ゾーン情報を使用するためです。 Datetime/Date/Time などの他のデータ型にはタイム ゾーン情報がないため、その値はタイム ゾーンの変更の影響を受けません。
 
 ```sql
 create table t (ts timestamp, dt datetime);
 ```
 
-```
-Query OK, 0 rows affected (0.02 sec)
-```
-
-{{< copyable "sql" >}}
+    Query OK, 0 rows affected (0.02 sec)
 
 ```sql
 set @@time_zone = 'UTC';
 ```
 
-```
-Query OK, 0 rows affected (0.00 sec)
-```
-
-{{< copyable "sql" >}}
+    Query OK, 0 rows affected (0.00 sec)
 
 ```sql
 insert into t values ('2017-09-30 11:11:11', '2017-09-30 11:11:11');
 ```
 
-```
-Query OK, 1 row affected (0.00 sec)
-```
-
-{{< copyable "sql" >}}
+    Query OK, 1 row affected (0.00 sec)
 
 ```sql
 set @@time_zone = '+8:00';
 ```
 
-```
-Query OK, 0 rows affected (0.00 sec)
-```
-
-{{< copyable "sql" >}}
+    Query OK, 0 rows affected (0.00 sec)
 
 ```sql
 select * from t;
 ```
 
-```
-+---------------------|---------------------+
-| ts                  | dt                  |
-+---------------------|---------------------+
-| 2017-09-30 19:11:11 | 2017-09-30 11:11:11 |
-+---------------------|---------------------+
-1 row in set (0.00 sec)
-```
+    +---------------------|---------------------+
+    | ts                  | dt                  |
+    +---------------------|---------------------+
+    | 2017-09-30 19:11:11 | 2017-09-30 11:11:11 |
+    +---------------------|---------------------+
+    1 row in set (0.00 sec)
 
-In this example, no matter how you adjust the value of the time zone, the value of the Datetime data type is not affected. But the displayed value of the Timestamp data type changes if the time zone information changes. In fact, the value that is stored in the storage does not change, it's just displayed differently according to different time zone setting.
+この例では、タイム ゾーンの値をどのように調整しても、Datetime データ型の値は影響を受けません。ただし、タイムゾーン情報が変更されると、タイムスタンプ データ型の表示値も変わります。実際、storageに保存される値は変化せず、タイムゾーン設定の違いに応じて表示方法が異なるだけです。
 
-> **Note:**
+> **注記：**
 >
-> - Time zone is involved during the conversion of the value of Timestamp and Datetime, which is handled based on the current `time_zone` of the session.
-> - For data migration, you need to pay special attention to the time zone setting of the primary database and the secondary database.
+> -   タイム ゾーンは、タイムスタンプと日時の値の変換中に関係し、セッションの現在の`time_zone`に基づいて処理されます。
+> -   データ移行の場合、プライマリ データベースとセカンダリ データベースのタイムゾーン設定に特に注意する必要があります。

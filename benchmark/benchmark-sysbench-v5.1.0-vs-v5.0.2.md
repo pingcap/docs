@@ -2,39 +2,37 @@
 title: TiDB Sysbench Performance Test Report -- v5.1.0 vs. v5.0.2
 ---
 
-# TiDB Sysbench Performance Test Report -- v5.1.0 vs. v5.0.2
+# TiDB Sysbench パフォーマンス テスト レポート -- v5.1.0 と v5.0.2 {#tidb-sysbench-performance-test-report-v5-1-0-vs-v5-0-2}
 
-## Test overview
+## テストの概要 {#test-overview}
 
-This test aims at comparing the Sysbench performance of TiDB v5.1.0 and TiDB v5.0.2 in the Online Transactional Processing (OLTP) scenario. The results show that compared with v5.0.2, the Point Select performance of v5.1.0 is improved by 19.4%, and the performance of the Read Write and Update Index is slightly reduced.
+このテストは、オンライン トランザクション処理 (OLTP) シナリオにおける TiDB v5.1.0 と TiDB v5.0.2 の Sysbench パフォーマンスを比較することを目的としています。結果は、v5.0.2 と比較して、v5.1.0 のポイント選択パフォーマンスが 19.4% 向上し、読み取り書き込みおよびインデックス更新のパフォーマンスがわずかに低下していることを示しています。
 
-## Test environment (AWS EC2）
+## テスト環境（AWS EC2） {#test-environment-aws-ec2}
 
-### Hardware configuration
+### ハードウェア構成 {#hardware-configuration}
 
-| Service type         | EC2 type     | Instance count |
-|:----------|:----------|:----------|
-| PD        | m5.xlarge |     3     |
-| TiKV      | i3.4xlarge|     3     |
-| TiDB      | c5.4xlarge|     3     |
-| Sysbench  | c5.9xlarge|     1     |
+| サービスの種類 | EC2タイプ     | インスタンス数 |
+| :------ | :--------- | :------ |
+| PD      | m5.xlarge  | 3       |
+| TiKV    | i3.4xlarge | 3       |
+| TiDB    | c5.4xlarge | 3       |
+| システムベンチ | c5.9xlarge | 1       |
 
-### Software version
+### ソフトウェアバージョン {#software-version}
 
-| Service type   | Software version    |
-|:----------|:-----------|
-| PD        | v5.0.2 and v5.1.0   |
-| TiDB      | v5.0.2 and v5.1.0   |
-| TiKV      | v5.0.2 and v5.1.0   |
-| Sysbench  | 1.0.20     |
+| サービスの種類 | ソフトウェアバージョン       |
+| :------ | :---------------- |
+| PD      | v5.0.2 および v5.1.0 |
+| TiDB    | v5.0.2 および v5.1.0 |
+| TiKV    | v5.0.2 および v5.1.0 |
+| システムベンチ | 1.0.20            |
 
-### Parameter configuration
+### パラメータ設定 {#parameter-configuration}
 
-TiDB v5.1.0 and TiDB v5.0.2 use the same configuration.
+TiDB v5.1.0 と TiDB v5.0.2 は同じ構成を使用します。
 
-#### TiDB parameter configuration
-
-{{< copyable "" >}}
+#### TiDBパラメータの設定 {#tidb-parameter-configuration}
 
 ```yaml
 log.level: "error"
@@ -43,9 +41,7 @@ prepared-plan-cache.enabled: true
 tikv-client.max-batch-wait-time: 2000000
 ```
 
-#### TiKV parameter configuration
-
-{{< copyable "" >}}
+#### TiKVパラメータ設定 {#tikv-parameter-configuration}
 
 ```yaml
 storage.scheduler-worker-pool-size: 5
@@ -62,9 +58,7 @@ pessimistic-txn.pipelined: true
 server.enable-request-batch: false
 ```
 
-#### TiDB global variable configuration
-
-{{< copyable "sql" >}}
+#### TiDB グローバル変数の設定 {#tidb-global-variable-configuration}
 
 ```sql
 set global tidb_hashagg_final_concurrency=1;
@@ -75,20 +69,18 @@ set global tidb_guarantee_linearizability = 0;
 set global tidb_enable_clustered_index = 1; 
 ```
 
-## Test plan
+## テスト計画 {#test-plan}
 
-1. Deploy TiDB v5.1.0 and v5.0.2 using TiUP.
-2. Use Sysbench to import 16 tables, each table with 10 million rows of data.
-3. Execute the `analyze table` statement on each table.
-4. Back up the data used for restore before different concurrency tests, which ensures data consistency for each test.
-5. Start the Sysbench client to perform the `point_select`, `read_write`, `update_index`, and `update_non_index` tests. Perform stress tests on TiDB via HAProxy. The test takes 5 minutes.
-6. After each type of test is completed, stop the cluster, overwrite the cluster with the backup data in step 4, and restart the cluster.
+1.  TiUPを使用して TiDB v5.1.0 および v5.0.2をデプロイ。
+2.  Sysbench を使用して、各テーブルに 1,000 万行のデータが含まれる 16 のテーブルをインポートします。
+3.  各テーブルに対して`analyze table`ステートメントを実行します。
+4.  さまざまな同時実行テストの前に、復元に使用されるデータをバックアップします。これにより、各テストのデータの一貫性が確保されます。
+5.  Sysbench クライアントを起動して、 `point_select` 、 `read_write` 、 `update_index` 、および`update_non_index`テストを実行します。 HAProxy を介して TiDB でストレス テストを実行します。テストには 5 分かかります。
+6.  各種類のテストが完了したら、クラスターを停止し、手順 4 のバックアップ データでクラスターを上書きし、クラスターを再起動します。
 
-### Prepare test data
+### テストデータの準備 {#prepare-test-data}
 
-Execute the following command to prepare the test data:
-
-{{< copyable "shell-regular" >}}
+次のコマンドを実行してテスト データを準備します。
 
 ```bash
 sysbench oltp_common \
@@ -103,11 +95,9 @@ sysbench oltp_common \
     prepare --tables=16 --table-size=10000000
 ```
 
-### Perform the test
+### テストを実行する {#perform-the-test}
 
-Execute the following command to perform the test:
-
-{{< copyable "shell-regular" >}}
+次のコマンドを実行してテストを実行します。
 
 ```bash
 sysbench $testname \
@@ -122,64 +112,64 @@ sysbench $testname \
     run --tables=16 --table-size=10000000
 ```
 
-## Test results
+## 試験結果 {#test-results}
 
-### Point Select performance
+### ポイントセレクト性能 {#point-select-performance}
 
-| Threads   | v5.0.2 QPS   | v5.0.2 95% latency (ms)   | v5.1.0 QPS   | v5.1.0 95% latency (ms)   | QPS improvement   |
-|:----------|:----------|:----------|:----------|:----------|:----------|
-|150|137732.27|1.86|158861.67|2|15.34%|
-|300|201420.58|2.91|238038.44|2.71|18.18%|
-|600|303631.52|3.49|428573.21|2.07|41.15%|
-|900|383628.13|3.55|464863.22|3.89|21.18%|
-|1200|391451.54|5.28|413656.74|13.46|5.67%|
-|1500|410276.93|7.43|471418.78|10.65|14.90%|
+| スレッド | v5.0.2 QPS | v5.0.2 95%レイテンシー(ミリ秒) | v5.1.0 QPS | v5.1.0 95%レイテンシー(ミリ秒) | QPSの向上 |
+| :--- | :--------- | :-------------------- | :--------- | :-------------------- | :----- |
+| 150  | 137732.27  | 1.86                  | 158861.67  | 2                     | 15.34% |
+| 300  | 201420.58  | 2.91                  | 238038.44  | 2.71                  | 18.18% |
+| 600  | 303631.52  | 3.49                  | 428573.21  | 2.07                  | 41.15% |
+| 900  | 383628.13  | 3.55                  | 464863.22  | 3.89                  | 21.18% |
+| 1200 | 391451.54  | 5.28                  | 413656.74  | 13.46                 | 5.67%  |
+| 1500 | 410276.93  | 7.43                  | 471418.78  | 10.65                 | 14.90% |
 
-Compared with v5.0.2, the Point Select performance of v5.1.0 is improved by 19.4%.
+v5.0.2 と比較して、v5.1.0 のポイント選択パフォーマンスは 19.4% 向上しています。
 
 ![Point Select](/media/sysbench_v510vsv502_point_select.png)
 
-### Update Non-index performance
+### インデックス以外のパフォーマンスを更新する {#update-non-index-performance}
 
-| Threads   | v5.0.2 QPS   | v5.0.2 95% latency (ms)   | v5.1.0 QPS   | v5.1.0 95% latency (ms)   | QPS improvement   |
-|:----------|:----------|:----------|:----------|:----------|:----------|
-|150|29248.2|7.17|29362.7|8.13|0.39%|
-|300|40316.09|12.52|39651.52|13.7|-1.65%|
-|600|51011.11|22.28|47047.9|27.66|-7.77%|
-|900|58814.16|27.66|59331.84|28.67|0.88%|
-|1200|65286.52|32.53|67745.39|31.37|3.77%|
-|1500|68300.86|39.65|67899.17|44.17|-0.59%|
+| スレッド | v5.0.2 QPS | v5.0.2 95%レイテンシー(ミリ秒) | v5.1.0 QPS | v5.1.0 95%レイテンシー(ミリ秒) | QPSの向上 |
+| :--- | :--------- | :-------------------- | :--------- | :-------------------- | :----- |
+| 150  | 29248.2    | 7.17                  | 29362.7    | 8.13                  | 0.39%  |
+| 300  | 40316.09   | 12.52                 | 39651.52   | 13.7                  | -1.65% |
+| 600  | 51011.11   | 22.28                 | 47047.9    | 27.66                 | -7.77% |
+| 900  | 58814.16   | 27.66                 | 59331.84   | 28.67                 | 0.88%  |
+| 1200 | 65286.52   | 32.53                 | 67745.39   | 31.37                 | 3.77%  |
+| 1500 | 68300.86   | 39.65                 | 67899.17   | 44.17                 | -0.59% |
 
-Compared with v5.0.2, the Update Non-index performance of v5.1.0 is reduced by 0.8%.
+v5.0.2 と比較すると、v5.1.0 のインデックス以外の更新のパフォーマンスは 0.8% 低下します。
 
 ![Update Non-index](/media/sysbench_v510vsv502_update_non_index.png)
 
-### Update Index performance
+### インデックスのパフォーマンスを更新する {#update-index-performance}
 
-| Threads   | v5.0.2 QPS   | v5.0.2 95% latency (ms)   | v5.1.0 QPS   | v5.1.0 95% latency (ms)   | QPS improvement   |
-|:----------|:----------|:----------|:----------|:----------|:----------|
-|150|15066.54|14.73|14829.31|14.73|-1.57%|
-|300|18535.92|24.83|17401.01|29.72|-6.12%|
-|600|22862.73|41.1|21923.78|44.98|-4.11%|
-|900|25286.74|57.87|24916.76|58.92|-1.46%|
-|1200|27566.18|70.55|27800.62|69.29|0.85%|
-|1500|28184.76|92.42|28679.72|86|1.76%|
+| スレッド | v5.0.2 QPS | v5.0.2 95%レイテンシー(ミリ秒) | v5.1.0 QPS | v5.1.0 95%レイテンシー(ミリ秒) | QPSの向上 |
+| :--- | :--------- | :-------------------- | :--------- | :-------------------- | :----- |
+| 150  | 15066.54   | 14.73                 | 14829.31   | 14.73                 | -1.57% |
+| 300  | 18535.92   | 24.83                 | 17401.01   | 29.72                 | -6.12% |
+| 600  | 22862.73   | 41.1                  | 21923.78   | 44.98                 | -4.11% |
+| 900  | 25286.74   | 57.87                 | 24916.76   | 58.92                 | -1.46% |
+| 1200 | 27566.18   | 70.55                 | 27800.62   | 69.29                 | 0.85%  |
+| 1500 | 28184.76   | 92.42                 | 28679.72   | 86                    | 1.76%  |
 
-Compared with v5.0.2, the Update Index performance of v5.1.0 is reduced by 1.8%.
+v5.0.2 と比較すると、v5.1.0 の更新インデックスのパフォーマンスは 1.8% 低下します。
 
 ![Update Index](/media/sysbench_v510vsv502_update_index.png)
 
-### Read Write performance
+### 読み取り/書き込みパフォーマンス {#read-write-performance}
 
-| Threads   | v5.0.2 QPS   | v5.0.2 95% latency (ms)   | v5.1.0 QPS   | v5.1.0 95% latency (ms)   | QPS improvement   |
-|:----------|:----------|:----------|:----------|:----------|:----------|
-|150|66415.33|56.84|66591.49|57.87|0.27%|
-|300|82488.39|97.55|81226.41|101.13|-1.53%|
-|600|99195.36|173.58|97357.86|179.94|-1.85%|
-|900|107382.76|253.35|101665.95|267.41|-5.32%|
-|1200|112389.23|337.94|107426.41|350.33|-4.42%|
-|1500|113548.73|450.77|109805.26|442.73|-3.30%|
+| スレッド | v5.0.2 QPS | v5.0.2 95%レイテンシー(ミリ秒) | v5.1.0 QPS | v5.1.0 95%レイテンシー(ミリ秒) | QPSの向上   |
+| :--- | :--------- | :-------------------- | :--------- | :-------------------- | :------- |
+| 150  | 66415.33   | 56.84                 | 66591.49   | 57.87                 | 0.27%    |
+| 300  | 82488.39   | 97.55                 | 81226.41   | 101.13                | -1.53​​% |
+| 600  | 99195.36   | 173.58                | 97357.86   | 179.94                | -1.85%   |
+| 900  | 107382.76  | 253.35                | 101665.95  | 267.41                | -5.32%   |
+| 1200 | 112389.23  | 337.94                | 107426.41  | 350.33                | -4.42%   |
+| 1500 | 113548.73  | 450.77                | 109805.26  | 442.73                | -3.30%   |
 
-Compared with v5.0.2, the Read Write performance of v5.1.0 is reduced by 2.7%.
+v5.0.2 と比較すると、v5.1.0 の読み取り/書き込みパフォーマンスは 2.7% 低下します。
 
 ![Read Write](/media/sysbench_v510vsv502_read_write.png)

@@ -3,11 +3,9 @@ title: DATA_LOCK_WAITS
 summary: Learn the `DATA_LOCK_WAITS` information_schema table.
 ---
 
-# DATA_LOCK_WAITS
+# DATA_LOCK_WAITS {#data-lock-waits}
 
-The `DATA_LOCK_WAITS` table shows the ongoing lock-wait information on all TiKV nodes in a cluster, including the lock-wait information of pessimistic transactions and the information of optimistic transactions being blocked.
-
-{{< copyable "sql" >}}
+表`DATA_LOCK_WAITS`は、クラスター内のすべての TiKV ノードで進行中のロック待機情報を示します。これには、悲観的トランザクションのロック待機情報と、ブロックされている楽観的トランザクションの情報が含まれます。
 
 ```sql
 USE information_schema;
@@ -27,51 +25,49 @@ DESC data_lock_waits;
 +------------------------+---------------------+------+------+---------+-------+
 ```
 
-The meaning of each column field in the `DATA_LOCK_WAITS` table is as follows:
+`DATA_LOCK_WAITS`テーブルの各列フィールドの意味は次のとおりです。
 
-* `KEY`: The key that is waiting for the lock and in the hexadecimal form.
-* `KEY_INFO`: The detailed information of `KEY`. See the [KEY_INFO](#key_info) section.
-* `TRX_ID`: The ID of the transaction that is waiting for the lock. This ID is also the `start_ts` of the transaction.
-* `CURRENT_HOLDING_TRX_ID`: The ID of the transaction that currently holds the lock. This ID is also the `start_ts` of the transaction.
-* `SQL_DIGEST`: The digest of the SQL statement that is currently blocked in the lock-waiting transaction.
-* `SQL_DIGEST_TEXT`: The normalized SQL statement (the SQL statement without arguments and formats) that is currently blocked in the lock-waiting transaction. It corresponds to `SQL_DIGEST`.
+-   `KEY` : ロックを待機している 16 進数形式のキー。
+-   `KEY_INFO` ： `KEY`の詳細情報です。 [KEY_INFO](#key_info)セクションを参照してください。
+-   `TRX_ID` : ロックを待機しているトランザクションの ID。この ID はトランザクションの`start_ts`でもあります。
+-   `CURRENT_HOLDING_TRX_ID` : 現在ロックを保持しているトランザクションの ID。この ID はトランザクションの`start_ts`でもあります。
+-   `SQL_DIGEST` : ロック待ちトランザクションで現在ブロックされている SQL 文のダイジェスト。
+-   `SQL_DIGEST_TEXT` : ロック待機トランザクションで現在ブロックされている正規化された SQL ステートメント (引数と形式のない SQL ステートメント)。 `SQL_DIGEST`に相当します。
 
-> **Warning:**
+> **警告：**
 >
-> * Only the users with the [PROCESS](https://dev.mysql.com/doc/refman/8.0/en/privileges-provided.html#priv_process) privilege can query this table.
-> * Currently, the `SQL_DIGEST` and `SQL_DIGEST_TEXT` fields are `null` (which means unavailable) for optimistic transactions. As a workaround, to find out the SQL statement that causes the blocking, you can join this table with [`CLUSTER_TIDB_TRX`](/information-schema/information-schema-tidb-trx.md) to get all the SQL statements of the optimistic transaction.
-> * The information in the `DATA_LOCK_WAITS` table is obtained in real time from all TiKV nodes during the query. Currently, even if a query has the `WHERE` condition, the information collection is still performed on all TiKV nodes. If your cluster is large and the load is high, querying this table might cause potential risk of performance jitter. Therefore, use it according to your actual situation.
-> * Information from different TiKV nodes is NOT guaranteed to be snapshots of the same time.
-> * The information (SQL digest) in the `SQL_DIGEST` column is the hash value calculated from the normalized SQL statement. The information in the `SQL_DIGEST_TEXT` column is internally queried from statements summary tables, so it is possible that the corresponding statement cannot be found internally. For the detailed description of SQL digests and the statements summary tables, see [Statement Summary Tables](/statement-summary-tables.md).
+> -   [プロセス](https://dev.mysql.com/doc/refman/8.0/en/privileges-provided.html#priv_process)権限を持つユーザーのみがこのテーブルをクエリできます。
+> -   現在、楽観的トランザクションの場合、 `SQL_DIGEST`フィールドと`SQL_DIGEST_TEXT`フィールドは`null` (使用できないことを意味します) です。回避策として、ブロッキングの原因となっている SQL ステートメントを特定するには、このテーブルを[`CLUSTER_TIDB_TRX`](/information-schema/information-schema-tidb-trx.md)と結合して、楽観的トランザクションのすべての SQL ステートメントを取得します。
+> -   `DATA_LOCK_WAITS`テーブルの情報は、クエリ中にすべての TiKV ノードからリアルタイムで取得されます。現在、クエリに`WHERE`条件がある場合でも、情報収集はすべての TiKV ノードで実行されます。クラスターが大きく負荷が高い場合、このテーブルにクエリを実行すると、パフォーマンス ジッターの潜在的なリスクが発生する可能性があります。したがって、実際の状況に応じて使用してください。
+> -   異なる TiKV ノードからの情報は、同じ時刻のスナップショットであることは保証されません。
+> -   `SQL_DIGEST`列目の情報（SQLダイジェスト）は、正規化されたSQL文から計算されたハッシュ値です。 `SQL_DIGEST_TEXT`列の情報はステートメント概要テーブルから内部的にクエリされるため、対応するステートメントが内部で見つからない可能性があります。 SQL ダイジェストとステートメント概要テーブルの詳細については、 [ステートメント概要テーブル](/statement-summary-tables.md)を参照してください。
 
-## `KEY_INFO`
+## <code>KEY_INFO</code> {#code-key-info-code}
 
-The `KEY_INFO` column shows the detailed information of the `KEY` column. The information is shown in the JSON format. The description of each field is as follows:
+`KEY_INFO`列目は`KEY`列目の詳細情報を表示します。情報はJSON形式で表示されます。各フィールドの説明は次のとおりです。
 
-* `"db_id"`: The ID of the schema to which the key belongs.
-* `"db_name"`: The name of the schema to which the key belongs.
-* `"table_id"`: The ID of the table to which the key belongs.
-* `"table_name"`: The name of the table to which the key belongs.
-* `"partition_id"`: The ID of the partition where the key is located.
-* `"partition_name"`: The name of the partition where the key is located.
-* `"handle_type"`: The handle type of the row key (that is, the key that stores a row of data). The possible values ​​are as follows:
-    * `"int"`: The handle type is int, which means that the handle is the row ID.
-    * `"common"`: The handle type is not int64. This type is shown in the non-int primary key when clustered index is enabled.
-    * `"unknown"`: The handle type is currently not supported.
-* `"handle_value"`: The handle value.
-* `"index_id"`: The index ID to which the index key (the key that stores the index) belongs.
-* `"index_name"`: The name of the index to which the index key belongs.
-* `"index_values"`: The index value in the index key.
+-   `"db_id"` : キーが属するスキーマの ID。
+-   `"db_name"` : キーが属するスキーマの名前。
+-   `"table_id"` : キーが属するテーブルの ID。
+-   `"table_name"` : キーが属するテーブルの名前。
+-   `"partition_id"` : キーが配置されているパーティションの ID。
+-   `"partition_name"` : キーが存在するパーティションの名前。
+-   `"handle_type"` : 行キー (つまり、データ行を格納するキー) のハンドル タイプ。可能な値は次のとおりです。
+    -   `"int"` : ハンドルのタイプは int です。これは、ハンドルが行 ID であることを意味します。
+    -   `"common"` : ハンドルの型は int64 ではありません。この型は、クラスター化インデックスが有効になっている場合、非 int 主キーに表示されます。
+    -   `"unknown"` : ハンドル タイプは現在サポートされていません。
+-   `"handle_value"` : ハンドル値。
+-   `"index_id"` : インデックスキー(インデックスを格納するキー)が属するインデックスID。
+-   `"index_name"` : インデックスキーが属するインデックスの名前。
+-   `"index_values"` : インデックス キーのインデックス値。
 
-In the above fields, if the information of a field is not applicable or currently unavailable, the field is omitted in the query result. For example, the row key information does not contain `index_id`, `index_name`, and `index_values`; the index key does not contain `handle_type` and `handle_value`; non-partitioned tables do not display `partition_id` and `partition_name`; the key information in the deleted table cannot obtain schema information such as `table_name`, `db_id`, `db_name`, and `index_name`, and it is unable to distinguish whether the table is a partitioned table.
+上記のフィールドでは、フィールドの情報が適用できない場合、または現在利用できない場合、そのフィールドはクエリ結果で省略されます。たとえば、行キー情報には`index_id` 、 `index_name` 、および`index_values`は含まれません。インデックス キーには`handle_type`と`handle_value`が含まれません。パーティション化されていないテーブルには`partition_id`と`partition_name`は表示されません。削除されたテーブルのキー情報は、 `table_name`などのスキーマ情報`db_name`取得できず、テーブル`index_name`パーティションテーブルである`db_id`どうかを区別できません。
 
-> **Note:**
+> **注記：**
 >
-> If a key comes from a table with partitioning enabled, and the information of the schema to which the key belongs cannot be queried due to some reasons (for example, the table to which the key belongs has been deleted) during the query, the ID of the partition to which the key belongs might be appear in the `table_id` field. This is because TiDB encodes the keys of different partitions in the same way as it encodes the keys of several independent tables. Therefore, when the schema information is missing, TiDB cannot confirm whether the key belongs to an unpartitioned table or to one partition of a table.
+> パーティショニングが有効になっているテーブルからキーが取得され、クエリ中に何らかの理由 (キーが属するテーブルが削除されたなど) によりキーが属するスキーマの情報をクエリできない場合、IDキーが属するパーティションの名前が`table_id`フィールドに表示される場合があります。これは、TiDB が複数の独立したテーブルのキーをエンコードするのと同じ方法で、異なるパーティションのキーをエンコードするためです。したがって、スキーマ情報が欠落している場合、TiDB はキーがパーティション化されていないテーブルに属しているのか、テーブルの 1 つのパーティションに属しているのかを確認できません。
 
-## Example
-
-{{< copyable "sql" >}}
+## 例 {#example}
 
 ```sql
 select * from information_schema.data_lock_waits\G
@@ -88,4 +84,4 @@ CURRENT_HOLDING_TRX_ID: 426790590082449409
 1 row in set (0.01 sec)
 ```
 
-The above query result shows that the transaction of the ID `426790594290122753` is trying to obtain the pessimistic lock on the key `"7480000000000000355F728000000000000001"` when executing a statement that has digest `"38b03afa5debbdf0326a014dbe5012a62c51957f1982b3093e748460f8b00821"` and  is in the form of ``update `t` set `v` = `v` + ? where `id` = ?``, but the lock on this key was held by the transaction of the ID `426790590082449409`.
+上記のクエリ結果は、ID `426790594290122753`のトランザクションが、ダイジェスト`"38b03afa5debbdf0326a014dbe5012a62c51957f1982b3093e748460f8b00821"`を持ち、 ``update `t` set `v` = `v` + ? where `id` = ?``の形式であるステートメントを実行するときに、キー`"7480000000000000355F728000000000000001"`の悲観的ロックを取得しようとしていますが、このキーのロックはトランザクションによって保持されていることを示しています。 ID `426790590082449409`の。

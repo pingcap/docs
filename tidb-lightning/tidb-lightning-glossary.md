@@ -3,192 +3,192 @@ title: TiDB Lightning Glossary
 summary: List of special terms used in TiDB Lightning.
 ---
 
-# TiDB Lightning Glossary
+# TiDB Lightning用語集 {#tidb-lightning-glossary}
 
-This page explains the special terms used in TiDB Lightning's logs, monitoring, configurations, and documentation.
+このページでは、TiDB Lightning のログ、モニタリング、構成、およびドキュメントで使用される特別な用語について説明します。
 
 <!-- A -->
 
-## A
+## あ {#a}
 
-### Analyze
+### 分析する {#analyze}
 
-An operation to rebuild the [statistics](/statistics.md) information of a TiDB table, which is running the [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md) statement.
+[`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md)ステートメントを実行している TiDB テーブルの[統計](/statistics.md)情報を再構築する操作。
 
-Because TiDB Lightning imports data without going through TiDB, the statistics information is not automatically updated. Therefore, TiDB Lightning explicitly analyzes every table after importing. This step can be omitted by setting the `post-restore.analyze` configuration to `false`.
+TiDB Lightning はTiDB を経由せずにデータをインポートするため、統計情報は自動的に更新されません。したがって、 TiDB Lightning はインポート後にすべてのテーブルを明示的に分析します。この手順は、 `post-restore.analyze`構成を`false`に設定することで省略できます。
 
-### `AUTO_INCREMENT_ID`
+### <code>AUTO_INCREMENT_ID</code> {#code-auto-increment-id-code}
 
-Every table has an associated `AUTO_INCREMENT_ID` counter to provide the default value of an auto-incrementing column. In TiDB, this counter is additionally used to assign row IDs.
+すべてのテーブルには、自動インクリメント列のデフォルト値を提供する`AUTO_INCREMENT_ID`カウンターが関連付けられています。 TiDB では、このカウンターは行 ID を割り当てるためにさらに使用されます。
 
-Because TiDB Lightning imports data without going through TiDB, the `AUTO_INCREMENT_ID` counter is not automatically updated. Therefore, TiDB Lightning explicitly alters `AUTO_INCREMENT_ID` to a valid value. This step is always performed, even if the table has no `AUTO_INCREMENT` columns.
+TiDB Lightning はTiDB を経由せずにデータをインポートするため、 `AUTO_INCREMENT_ID`カウンターは自動的に更新されません。したがって、 TiDB Lightning は`AUTO_INCREMENT_ID`明示的に有効な値に変更します。このステップは、テーブルに`AUTO_INCREMENT`列がない場合でも常に実行されます。
 
 <!-- B -->
 
-## B
+## B {#b}
 
-### Back end
+### バックエンド {#back-end}
 
-Back end is the destination where TiDB Lightning sends the parsed result. Also spelled as "backend".
+バックエンドは、 TiDB Lightning が解析結果を送信する宛先です。 「バックエンド」とも表記されます。
 
-See [TiDB Lightning architecture](/tidb-lightning/tidb-lightning-overview.md) for details.
+詳細については[TiDB Lightningアーキテクチャ](/tidb-lightning/tidb-lightning-overview.md)を参照してください。
 
 <!-- C -->
 
-## C
+## C {#c}
 
-### Checkpoint
+### チェックポイント {#checkpoint}
 
-TiDB Lightning continuously saves its progress into a local file or a remote database while importing. This allows it to resume from an intermediate state should it crashes in the process. See the [Checkpoints](/tidb-lightning/tidb-lightning-checkpoints.md) section for details.
+TiDB Lightning は、インポート中に進行状況をローカル ファイルまたはリモート データベースに継続的に保存します。これにより、プロセス中にクラッシュした場合でも、中間状態から再開できます。詳細については、 [チェックポイント](/tidb-lightning/tidb-lightning-checkpoints.md)セクションを参照してください。
 
-### Checksum
+### チェックサム {#checksum}
 
-In TiDB Lightning, the checksum of a table is a set of 3 numbers calculated from the content of each KV pair in that table. These numbers are respectively:
+TiDB Lightningでは、テーブルのチェックサムは、そのテーブル内の各 KV ペアの内容から計算された 3 つの数値のセットです。これらの数値はそれぞれ次のとおりです。
 
-* the number of KV pairs,
-* total length of all KV pairs, and
-* the bitwise-XOR of [CRC-64-ECMA](https://en.wikipedia.org/wiki/Cyclic_redundancy_check) value each pair.
+-   KV ペアの数、
+-   すべての KV ペアの合計長、および
+-   各ペアの[CRC-64-ECMA](https://en.wikipedia.org/wiki/Cyclic_redundancy_check)の値のビットごとの XOR。
 
-TiDB Lightning [validates the imported data](/tidb-lightning/tidb-lightning-faq.md#how-to-ensure-the-integrity-of-the-imported-data) by comparing the [local](/tidb-lightning/tidb-lightning-glossary.md#local-checksum) and [remote checksums](/tidb-lightning/tidb-lightning-glossary.md#remote-checksum) of every table. The program would stop if any pair does not match. You can skip this check by setting the `post-restore.checksum` configuration to `false`.
+TiDB Lightning [インポートされたデータを検証します](/tidb-lightning/tidb-lightning-faq.md#how-to-ensure-the-integrity-of-the-imported-data)各表の[地元](/tidb-lightning/tidb-lightning-glossary.md#local-checksum)と[リモートチェックサム](/tidb-lightning/tidb-lightning-glossary.md#remote-checksum)を比較します。いずれかのペアが一致しない場合、プログラムは停止します。 `post-restore.checksum`構成を`false`に設定すると、このチェックをスキップできます。
 
-See also the [FAQs](/tidb-lightning/troubleshoot-tidb-lightning.md#checksum-failed-checksum-mismatched-remote-vs-local) for how to properly handle checksum mismatch.
+チェックサムの不一致を適切に処理する方法については、 [よくある質問](/tidb-lightning/troubleshoot-tidb-lightning.md#checksum-failed-checksum-mismatched-remote-vs-local)も参照してください。
 
-### Chunk
+### Chunk {#chunk}
 
-A continuous range of source data, normally equivalent to a single file in the data source.
+ソース データの連続した範囲。通常はデータ ソース内の 1 つのファイルに相当します。
 
-When a file is too large, TiDB Lightning might split a file into multiple chunks.
+ファイルが大きすぎる場合、 TiDB Lightning はファイルを複数のチャンクに分割することがあります。
 
-### Compaction
+### 圧縮 {#compaction}
 
-An operation that merges multiple small SST files into one large SST file, and cleans up the deleted entries. TiKV automatically compacts data in background while TiDB Lightning is importing.
+複数の小さな SST ファイルを 1 つの大きな SST ファイルにマージし、削除されたエントリをクリーンアップする操作。 TiKV は、 TiDB Lightningのインポート中にバックグラウンドでデータを自動的に圧縮します。
 
-> **Note:**
+> **注記：**
 >
-> For legacy reasons, you can still configure TiDB Lightning to explicitly trigger a compaction every time a table is imported. However, this is not recommended and the corresponding settings are disabled by default.
+> 従来の理由から、テーブルがインポートされるたびに明示的に圧縮をトリガーするようにTiDB Lightningを設定することもできます。ただし、これはお勧めできません。対応する設定はデフォルトで無効になっています。
 
-See [RocksDB's wiki page on Compaction](https://github.com/facebook/rocksdb/wiki/Compaction) for its technical details.
+技術的な詳細については[RocksDB の圧縮に関する wiki ページ](https://github.com/facebook/rocksdb/wiki/Compaction)参照してください。
 
 <!-- D -->
 
-## D
+## D {#d}
 
-### Data engine
+### データエンジン {#data-engine}
 
-An [engine](/tidb-lightning/tidb-lightning-glossary.md#engine) for sorting actual row data.
+実際の行データをソートする場合は[エンジン](/tidb-lightning/tidb-lightning-glossary.md#engine) 。
 
-When a table is very large, its data is placed into multiple data engines to improve task pipelining and save space of TiKV Importer. By default, a new data engine is opened for every 100 GB of SQL data, which can be configured through the `mydumper.batch-size` setting.
+テーブルが非常に大きい場合、そのデータは複数のデータ エンジンに配置され、タスクのパイプライン処理が改善され、TiKV インポーターのスペースが節約されます。デフォルトでは、100 GB の SQL データごとに新しいデータ エンジンが開きます。これは`mydumper.batch-size`設定で構成できます。
 
-TiDB Lightning processes multiple data engines concurrently. This is controlled by the `lightning.table-concurrency` setting.
+TiDB Lightning は複数のデータ エンジンを同時に処理します。これは`lightning.table-concurrency`設定によって制御されます。
 
 <!-- E -->
 
-## E
+## E {#e}
 
-### Engine
+### エンジン {#engine}
 
-In TiKV Importer, an engine is a RocksDB instance for sorting KV pairs.
+TiKV Importer では、エンジンは KV ペアをソートするための RocksDB インスタンスです。
 
-TiDB Lightning transfers data to TiKV Importer through engines. It first opens an engine, sends KV pairs to it (with no particular order), and finally closes the engine. The engine sorts the received KV pairs after it is closed. These closed engines can then be further uploaded to the TiKV stores for ingestion.
+TiDB Lightning は、エンジンを通じてデータを TiKV Importer に転送します。まずエンジンを開き、KV ペアをそれに送信し (特に順序はありません)、最後にエンジンを閉じます。エンジンは閉じられた後に、受信した KV ペアを並べ替えます。これらのクローズド エンジンは、さらに TiKV ストアにアップロードして取り込むことができます。
 
-Engines use TiKV Importer's `import-dir` as temporary storage, which are sometimes referred to as "engine files".
+エンジンは TiKV Importer の`import-dir`一時storageとして使用します。これは「エンジン ファイル」と呼ばれることもあります。
 
-See also [data engine](/tidb-lightning/tidb-lightning-glossary.md#data-engine) and [index engine](/tidb-lightning/tidb-lightning-glossary.md#index-engine).
+[データエンジン](/tidb-lightning/tidb-lightning-glossary.md#data-engine)と[インデックスエンジン](/tidb-lightning/tidb-lightning-glossary.md#index-engine)も参照してください。
 
 <!-- F -->
 
-## F
+## F {#f}
 
-### Filter
+### フィルター {#filter}
 
-A configuration list that specifies which tables to be imported or excluded.
+どのテーブルをインポートまたは除外するかを指定する構成リスト。
 
-See [Table Filter](/table-filter.md) for details.
+詳細については[テーブルフィルター](/table-filter.md)を参照してください。
 
 <!-- I -->
 
-## I
+## 私 {#i}
 
-### Import mode
+### インポートモード {#import-mode}
 
-A configuration that optimizes TiKV for writing at the cost of degraded read speed and space usage.
+読み取り速度とスペース使用量の低下を犠牲にして、書き込み用に TiKV を最適化する構成。
 
-TiDB Lightning automatically switches to and off the import mode while running. However, if TiKV gets stuck in import mode, you can use `tidb-lightning-ctl` to [force revert](/tidb-lightning/troubleshoot-tidb-lightning.md#the-tidb-cluster-uses-lots-of-cpu-resources-and-runs-very-slowly-after-using-tidb-lightning) to [normal mode](/tidb-lightning/tidb-lightning-glossary.md#normal-mode).
+TiDB Lightning は、実行中に自動的にインポート モードに切り替わったり、インポート モードがオフになったりします。ただし、TiKV がインポート モードでスタックした場合は、 `tidb-lightning-ctl` ～ [強制的に元に戻す](/tidb-lightning/troubleshoot-tidb-lightning.md#the-tidb-cluster-uses-lots-of-cpu-resources-and-runs-very-slowly-after-using-tidb-lightning) ～ [ノーマルモード](/tidb-lightning/tidb-lightning-glossary.md#normal-mode)を使用できます。
 
-### Index engine
+### インデックスエンジン {#index-engine}
 
-An [engine](/tidb-lightning/tidb-lightning-glossary.md#engine) for sorting indices.
+インデックスをソートする場合は[エンジン](/tidb-lightning/tidb-lightning-glossary.md#engine) 。
 
-Regardless of number of indices, every table is associated with exactly one index engine.
+インデックスの数に関係なく、すべてのテーブルは 1 つのインデックス エンジンにのみ関連付けられます。
 
-TiDB Lightning processes multiple index engines concurrently. This is controlled by the `lightning.index-concurrency` setting. Since every table has exactly one index engine, this also configures the maximum number of tables to process at the same time.
+TiDB Lightning は複数のインデックス エンジンを同時に処理します。これは`lightning.index-concurrency`設定によって制御されます。すべてのテーブルにはインデックス エンジンが 1 つだけあるため、同時に処理するテーブルの最大数もこれによって構成されます。
 
-### Ingest
+### 取り込み {#ingest}
 
-An operation which inserts the entire content of an [SST file](/tidb-lightning/tidb-lightning-glossary.md#sst-file) into the RocksDB (TiKV) store.
+[SSTファイル](/tidb-lightning/tidb-lightning-glossary.md#sst-file)の内容全体を RocksDB (TiKV) ストアに挿入する操作。
 
-Ingestion is a very fast operation compared with inserting KV pairs one by one. This operation is the determinant factor for the performance of TiDB Lightning.
+取り込みは、KV ペアを 1 つずつ挿入する場合と比べて、非常に高速な操作です。この操作は、 TiDB Lightningのパフォーマンスの決定要因となります。
 
-See [RocksDB's wiki page on Creating and Ingesting SST files](https://github.com/facebook/rocksdb/wiki/Creating-and-Ingesting-SST-files) for its technical details.
+技術的な詳細については[SST ファイルの作成と取り込みに関する RocksDB の Wiki ページ](https://github.com/facebook/rocksdb/wiki/Creating-and-Ingesting-SST-files)参照してください。
 
 <!-- K -->
 
-## K
+## K {#k}
 
-### KV pair
+### KVペア {#kv-pair}
 
-Abbreviation of "key-value pair".
+「キーと値のペア」の略称。
 
-### KV encoder
+### KVエンコーダ {#kv-encoder}
 
-A routine which parses SQL or CSV rows to KV pairs. Multiple KV encoders run in parallel to speed up processing.
+SQL または CSV 行を KV ペアに解析するルーチン。複数の KV エンコーダを並列実行して処理を高速化します。
 
 <!-- L -->
 
-## L
+## L {#l}
 
-### Local checksum
+### ローカルチェックサム {#local-checksum}
 
-The [checksum](/tidb-lightning/tidb-lightning-glossary.md#checksum) of a table calculated by TiDB Lightning itself before sending the KV pairs to TiKV Importer.
+KV ペアを TiKV Importer に送信する前に、 TiDB Lightning自体によって計算されるテーブルの[チェックサム](/tidb-lightning/tidb-lightning-glossary.md#checksum) 。
 
 <!-- N -->
 
-## N
+## N {#n}
 
-### Normal mode
+### ノーマルモード {#normal-mode}
 
-The mode where [import mode](/tidb-lightning/tidb-lightning-glossary.md#import-mode) is disabled.
+[インポートモード](/tidb-lightning/tidb-lightning-glossary.md#import-mode)が無効になるモード。
 
 <!-- P -->
 
-## P
+## P {#p}
 
-### Post-processing
+### 後処理 {#post-processing}
 
-The period of time after the entire data source is parsed and sent to TiKV Importer. TiDB Lightning is waiting for TiKV Importer to upload and [ingest](/tidb-lightning/tidb-lightning-glossary.md#ingest) the [SST files](/tidb-lightning/tidb-lightning-glossary.md#sst-file).
+データ ソース全体が解析されて TiKV インポーターに送信された後の期間。 TiDB Lightning は、 TiKV インポーターがアップロードするのを待っています[摂取する](/tidb-lightning/tidb-lightning-glossary.md#ingest) [SST ファイル](/tidb-lightning/tidb-lightning-glossary.md#sst-file) 。
 
 <!-- R -->
 
-## R
+## R {#r}
 
-### Remote checksum
+### リモートチェックサム {#remote-checksum}
 
-The [checksum](/tidb-lightning/tidb-lightning-glossary.md#checksum) of a table calculated by TiDB after it has been imported.
+インポート後に TiDB によって計算されたテーブルの[チェックサム](/tidb-lightning/tidb-lightning-glossary.md#checksum) 。
 
 <!-- S -->
 
-## S
+## S {#s}
 
-### Scattering
+### Scattering {#scattering}
 
-An operation that randomly reassigns the leader and the peers of a [Region](/glossary.md#regionpeerraft-group). Scattering ensures that the imported data are distributed evenly among TiKV stores. This reduces stress on PD.
+[リージョン](/glossary.md#regionpeerraft-group)のリーダーとピアをランダムに再割り当てする操作。Scattering、インポートされたデータが TiKV ストア間で均等に分散されます。これにより、PD へのストレスが軽減されます。
 
-### Splitting
+### 分割 {#splitting}
 
-An engine is typically very large (around 100 GB), which is not friendly to TiKV if treated as a single [region](/glossary.md#regionpeerraft-group). TiKV Importer splits an engine into multiple small [SST files](/tidb-lightning/tidb-lightning-glossary.md#sst-file) (configurable by TiKV Importer's `import.region-split-size` setting) before uploading.
+通常、エンジンは非常に大きく (約 100 GB)、単一の[地域](/glossary.md#regionpeerraft-group)として扱う場合は TiKV にとって好ましくありません。 TiKV Importer は、アップロードする前にエンジンを複数の小さな[SST ファイル](/tidb-lightning/tidb-lightning-glossary.md#sst-file) (TiKV Importer の`import.region-split-size`設定で構成可能) に分割します。
 
-### SST file
+### SSTファイル {#sst-file}
 
-SST is the abbreviation of "sorted string table". An SST file is RocksDB's (and thus TiKV's) native storage format of a collection of KV pairs.
+SSTとは「ソート文字列テーブル」の略称です。 SST ファイルは、RocksDB (したがって TiKV) の KV ペアのコレクションのネイティブstorage形式です。
 
-TiKV Importer produces SST files from a closed [engine](/tidb-lightning/tidb-lightning-glossary.md#engine). These SST files are uploaded and then [ingested](/tidb-lightning/tidb-lightning-glossary.md#ingest) into TiKV stores.
+TiKV インポーターは、閉じた[エンジン](/tidb-lightning/tidb-lightning-glossary.md#engine)から SST ファイルを生成します。これらの SST ファイルはアップロードされ、TiKV ストアに[摂取した](/tidb-lightning/tidb-lightning-glossary.md#ingest)されます。

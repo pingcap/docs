@@ -2,141 +2,141 @@
 title: TiDB 4.0.13 Release Notes
 ---
 
-# TiDB 4.0.13 Release Notes
+# TiDB 4.0.13 リリースノート {#tidb-4-0-13-release-notes}
 
-Release date: May 28, 2021
+発売日：2021年5月28日
 
-TiDB version: 4.0.13
+TiDB バージョン: 4.0.13
 
-## New Features
+## 新機能 {#new-features}
 
-+ TiDB
+-   TiDB
 
-    - Support changing an `AUTO_INCREMENT` column to an `AUTO_RANDOM` one [#24608](https://github.com/pingcap/tidb/pull/24608)
-    - Add the `infoschema.client_errors_summary` tables to help users keep track of the errors that have been returned to clients [#23267](https://github.com/pingcap/tidb/pull/23267)
+    -   `AUTO_INCREMENT`列から`AUTO_RANDOM`列[#24608](https://github.com/pingcap/tidb/pull/24608)への変更をサポート
+    -   `infoschema.client_errors_summary`テーブルを追加して、ユーザーがクライアントに返されたエラーを追跡できるようにします[#23267](https://github.com/pingcap/tidb/pull/23267)
 
-## Improvements
+## 改善点 {#improvements}
 
-+ TiDB
+-   TiDB
 
-    - Avoid frequently reading the `mysql.stats_histograms` table if the cached statistics is up-to-date to avoid high CPU usage [#24352](https://github.com/pingcap/tidb/pull/24352)
+    -   `mysql.stats_histograms`キャッシュされた統計が最新の場合は、CPU 使用率が高くなるのを避けるためにテーブルを頻繁に読み取らないようにします[#24352](https://github.com/pingcap/tidb/pull/24352)
 
-+ TiKV
+-   TiKV
 
-    - Make the calculation process of `store used size` more precise [#9904](https://github.com/tikv/tikv/pull/9904)
-    - Set more Regions in the `EpochNotMatch` message to reduce Region misses [#9731](https://github.com/tikv/tikv/pull/9731)
-    - Speed up freeing the memory accumulated in the long-running cluster [#10035](https://github.com/tikv/tikv/pull/10035)
+    -   `store used size`の計算処理をより正確にする[#9904](https://github.com/tikv/tikv/pull/9904)
+    -   リージョンのミスを減らすために`EpochNotMatch`メッセージにさらに多くの領域を設定します[#9731](https://github.com/tikv/tikv/pull/9731)
+    -   長時間実行されているクラスターに蓄積されたメモリの解放を高速化します[#10035](https://github.com/tikv/tikv/pull/10035)
 
-+ PD
+-   PD
 
-    - Optimize the metrics of TSO processing time to help users determine whether the TSO processing time at the PD side is too long [#3524](https://github.com/pingcap/pd/pull/3524)
-    - Update the dashboard version to v2021.03.12.1 [#3469](https://github.com/pingcap/pd/pull/3469)
+    -   TSO 処理時間のメトリクスを最適化して、PD 側の TSO 処理時間が長すぎるかどうかをユーザーが判断できるようにします[#3524](https://github.com/pingcap/pd/pull/3524)
+    -   ダッシュボードのバージョンを v2021.03.12.1 に更新します[#3469](https://github.com/pingcap/pd/pull/3469)
 
-+ TiFlash
+-   TiFlash
 
-    - Automatically clean archived data to free up disk space
+    -   アーカイブされたデータを自動的にクリーンアップしてディスク領域を解放します
 
-+ Tools
+-   ツール
 
-    + Backup & Restore (BR)
+    -   バックアップと復元 (BR)
 
-        - Support backing up user tables created in the `mysql` schema [#1077](https://github.com/pingcap/br/pull/1077)
-        - Update `checkVersion` to check the cluster data and the backup data [#1090](https://github.com/pingcap/br/pull/1090)
-        - Tolerate a small number of TiKV node failures during backup [#1062](https://github.com/pingcap/br/pull/1062)
+        -   `mysql`スキーマ[#1077](https://github.com/pingcap/br/pull/1077)で作成されたユーザー テーブルのバックアップのサポート
+        -   アップデート`checkVersion`でクラスターデータとバックアップデータを確認します[#1090](https://github.com/pingcap/br/pull/1090)
+        -   バックアップ中の少数の TiKV ノード障害を許容する[#1062](https://github.com/pingcap/br/pull/1062)
 
-    + TiCDC
+    -   TiCDC
 
-        - Implement the processor flow control to avoid memory overflow (OOM) [#1751](https://github.com/pingcap/tiflow/pull/1751)
-        - Support cleaning up stale temporary files in Unified Sorter and prevent multiple `cdc server` instances from sharing the same `sort-dir` directory [#1741](https://github.com/pingcap/tiflow/pull/1741)
-        - Add the HTTP handler for the failpoint [#1732](https://github.com/pingcap/tiflow/pull/1732)
+        -   プロセッサ フロー制御を実装してメモリオーバーフロー (OOM) を回避します[#1751](https://github.com/pingcap/tiflow/pull/1751)
+        -   統合ソーターでの古い一時ファイルのクリーンアップをサポートし、複数の`cdc server`インスタンスが`sort-dir`ディレクトリを共有するのを防ぎます[#1741](https://github.com/pingcap/tiflow/pull/1741)
+        -   フェイルポイント[#1732](https://github.com/pingcap/tiflow/pull/1732)の HTTP ハンドラーを追加します。
 
-## Bug Fixes
+## バグの修正 {#bug-fixes}
 
-+ TiDB
+-   TiDB
 
-    - Fix the panic issue that occurs when the `UPDATE` statement with a subquery updates the generated column [#24658](https://github.com/pingcap/tidb/pull/24658)
-    - Fix the issue that causes duplicate query results when using the multi-column index for data reads [#24634](https://github.com/pingcap/tidb/pull/24634)
-    - Fix the issue that causes wrong query result when using the `BIT` type constant as the divisor in the DIV expression [#24266](https://github.com/pingcap/tidb/pull/24266)
-    - Fix the issue that the `NO_ZERO_IN_DATE` SQL mode does not take effect for the default column value set in DDL statements [#24185](https://github.com/pingcap/tidb/pull/24185)
-    - Fix an issue which causes wrong query results when using `UNION` between a `BIT` type column and an `INTEGER` type column [#24026](https://github.com/pingcap/tidb/pull/24026)
-    - Fix the issue that the `TableDual` plans are mistakenly created when comparing the `BINARY` type and the `CHAR` type [#23917](https://github.com/pingcap/tidb/pull/23917)
-    - Fix the issue that the `insert ignore on duplicate` statement might unexpectedly delete table records [#23825](https://github.com/pingcap/tidb/pull/23825)
-    - Fix the issue that the Audit plugin causes TiDB panic [#23819](https://github.com/pingcap/tidb/pull/23819)
-    - Fix the issue that the `HashJoin` operator incorrectly processes the collation [#23812](https://github.com/pingcap/tidb/pull/23812)
-    - Fix the issue of disconnection that occurs when `batch_point_get` incorrectly handles abnormal values in the pessimistic transaction [#23778](https://github.com/pingcap/tidb/pull/23778)
-    - Fix the issue of inconsistent indexes that occurs when the `tidb_row_format_version` configuration value is set to `1` and the `enable_new_collation` value is set to `true` [#23772](https://github.com/pingcap/tidb/pull/23772)
-    - Fix a bug that occurs when comparing the `INTEGER` type column with the `STRING` constant value [#23705](https://github.com/pingcap/tidb/pull/23705)
-    - Fix the error that occurs when the `BIT` type column is passed into the `approx_percent` function [#23702](https://github.com/pingcap/tidb/pull/23702)
-    - Fix a bug that causes TiDB to mistakenly report the `TiKV server timeout` error when executing TiFlash batch requests [#23700](https://github.com/pingcap/tidb/pull/23700)
-    - Fix the issue that the `IndexJoin` operator returns wrong results on the prefix column index [#23691](https://github.com/pingcap/tidb/pull/23691)
-    - Fix the issue which causes wrong query results because the collation on the `BINARY` type column is not properly handled [#23598](https://github.com/pingcap/tidb/pull/23598)
-    - Fix the issue of query panic that occurs when the `UPDATE` statement contains the join query with the `HAVING` clause [#23575](https://github.com/pingcap/tidb/pull/23575)
-    - Fix the issue that causes TiFlash to return wrong results when using the `NULL` constant in the comparison expression [#23474](https://github.com/pingcap/tidb/pull/23474)
-    - Fix the issue of wrong results when comparing the `YEAR` type column with the `STRING` constant [#23335](https://github.com/pingcap/tidb/pull/23335)
-    - Fix the issue that `group_concat` panics when `session.group_concat_max_len` is set too small [#23257](https://github.com/pingcap/tidb/pull/23257)
-    - Fix the issue of wrong query results that occurs when using the `BETWEEN` expression for the `TIME` type column [#23233](https://github.com/pingcap/tidb/pull/23233)
-    - Fix the issue of privilege check in the `DELETE` statements [#23215](https://github.com/pingcap/tidb/pull/23215)
-    - Fix the issue that no error is reported when inserting invalid strings to the `DECIMAL` type column [#23196](https://github.com/pingcap/tidb/pull/23196)
-    - Fix the issue of parsing error occurred when inserting data to the `DECIMAL` type columns [#23152](https://github.com/pingcap/tidb/pull/23152)
-    - Fix the issue that the `USE_INDEX_MERGE` hint does not take effect [#22924](https://github.com/pingcap/tidb/pull/22924)
-    - Fix a bug that the query returns wrong results when using `ENUM` or `SET` columns in the `WHERE` clause as an filter [#22814](https://github.com/pingcap/tidb/pull/22814)
-    - Fix a bug that the query returns wrong results when using the clustered index and the new collation at the same time [#21408](https://github.com/pingcap/tidb/pull/21408)
-    - Fix the panic that occurs when executing `ANALYZE` with `enable_new_collation` enabled [#21299](https://github.com/pingcap/tidb/pull/21299)
-    - Fix the issue that SQL views does not correctly handle the default roles associated with the SQL DEFINER [#24531](https://github.com/pingcap/tidb/pull/24531)
-    - Fix the issue that cancelling DDL jobs gets stuck [#24445](https://github.com/pingcap/tidb/pull/24445)
-    - Fix the issue that the `concat` function incorrectly handles the collation [#24300](https://github.com/pingcap/tidb/pull/24300)
-    - Fix a bug that the query returns wrong results when the `SELECT` field has an `IN` subquery and the subquery's outer side contains `NULL` tuples [#24022](https://github.com/pingcap/tidb/pull/24022)
-    - Fix a bug that TiFlash is chosen wrongly by the optimizer when `TableScan` is in descending order [#23974](https://github.com/pingcap/tidb/pull/23974)
-    - Fix a bug that the `point_get` plan returns the column name that is inconsistent with that of MySQL [#23970](https://github.com/pingcap/tidb/pull/23970)
-    - Fix the issue that executing the `show table status` statement on a database with a upper-cased name returns wrong results [#23958](https://github.com/pingcap/tidb/pull/23958)
-    - Fix a bug that the users who do not have the `INSERT` and `DELETE` privileges on a table at the same time can perform the `REPLACE` operation [#23938](https://github.com/pingcap/tidb/pull/23938)
-    - Fix the issue that the results of the `concat`/`make_set`/`insert` expressions are wrong because the collation is incorrectly handled [#23878](https://github.com/pingcap/tidb/pull/23878)
-    - Fix the panic that occurs when executing a query on the table that has `RANGE` partitions [#23689](https://github.com/pingcap/tidb/pull/23689)
-    - Fix the issue: In the cluster of an earlier version, if the `tidb_enable_table_partition` variable is set to `false`, the tables that contain partitions are handled as non-partitioned tables. Executing `batch point get` queries on this table, when the cluster is upgraded to a later version, causes connection panic. [#23682](https://github.com/pingcap/tidb/pull/23682)
-    - Fix the issue that when TiDB is configured to listen on TCP and UNIX sockets, the remote hosts over the TCP connection are not correctly validated for connection [#23513](https://github.com/pingcap/tidb/pull/23513)
-    - Fix a bug that the non-default collation causes wrong query results [#22923](https://github.com/pingcap/tidb/pull/22923)
-    - Fix a bug that the **Coprocessor Cache** panel of Grafana does not work [#22617](https://github.com/pingcap/tidb/pull/22617)
-    - Fix the error that occurs when the optimizer accesses the statistic cache [#22565](https://github.com/pingcap/tidb/pull/22565)
+    -   サブクエリを含む`UPDATE`ステートメントが生成された列[#24658](https://github.com/pingcap/tidb/pull/24658)更新するときに発生するpanicの問題を修正します。
+    -   データ読み取りに複数列インデックスを使用する場合に重複したクエリ結果が発生する問題を修正します[#24634](https://github.com/pingcap/tidb/pull/24634)
+    -   DIV 式[#24266](https://github.com/pingcap/tidb/pull/24266)の除数として`BIT`型定数を使用すると、間違ったクエリ結果が発生する問題を修正します。
+    -   `NO_ZERO_IN_DATE` SQL モードが DDL ステートメントで設定されたデフォルトの列値に対して有効にならない問題を修正します[#24185](https://github.com/pingcap/tidb/pull/24185)
+    -   `BIT`タイプの列と`INTEGER`タイプの列の間で`UNION`を使用すると、間違ったクエリ結果が発生する問題を修正します[#24026](https://github.com/pingcap/tidb/pull/24026)
+    -   `BINARY`タイプと`CHAR`タイプ[#23917](https://github.com/pingcap/tidb/pull/23917)を比較すると、誤って`TableDual`プランが作成されてしまう問題を修正
+    -   `insert ignore on duplicate`ステートメントが予期せずテーブル レコード[#23825](https://github.com/pingcap/tidb/pull/23825)を削除する可能性がある問題を修正します。
+    -   監査プラグインが TiDBpanic[#23819](https://github.com/pingcap/tidb/pull/23819)を引き起こす問題を修正
+    -   `HashJoin`演算子が照合順序[#23812](https://github.com/pingcap/tidb/pull/23812)を誤って処理する問題を修正
+    -   `batch_point_get`悲観的トランザクション[#23778](https://github.com/pingcap/tidb/pull/23778)で異常値を誤って処理した場合に切断が発生する問題を修正
+    -   `tidb_row_format_version`構成値が`1`に設定され、 `enable_new_collation`値が`true` [#23772](https://github.com/pingcap/tidb/pull/23772)に設定されている場合に発生する不整合なインデックスの問題を修正します。
+    -   `INTEGER`型の列と`STRING`定数値[#23705](https://github.com/pingcap/tidb/pull/23705)を比較するときに発生するバグを修正
+    -   `BIT` type カラムが`approx_percent`関数に渡されるときに発生するエラーを修正します[#23702](https://github.com/pingcap/tidb/pull/23702)
+    -   TiFlashバッチ リクエスト[#23700](https://github.com/pingcap/tidb/pull/23700)の実行時に TiDB が誤って`TiKV server timeout`エラーを報告するバグを修正しました。
+    -   `IndexJoin`演算子がプレフィックス列インデックス[#23691](https://github.com/pingcap/tidb/pull/23691)で間違った結果を返す問題を修正します。
+    -   `BINARY` type 列の照合順序が適切に処理されないため、間違ったクエリ結果が発生する問題を修正します[#23598](https://github.com/pingcap/tidb/pull/23598)
+    -   `UPDATE`ステートメントに`HAVING`句を含む結合クエリが含まれている場合に発生するクエリpanicの問題を修正します[#23575](https://github.com/pingcap/tidb/pull/23575)
+    -   比較式[#23474](https://github.com/pingcap/tidb/pull/23474)で定数`NULL`を使用すると、 TiFlashが間違った結果を返す問題を修正します。
+    -   `YEAR`型列と`STRING`定数[#23335](https://github.com/pingcap/tidb/pull/23335)を比較するときに間違った結果が表示される問題を修正
+    -   `session.group_concat_max_len`の設定が小さすぎると`group_concat`パニックになる問題を修正[#23257](https://github.com/pingcap/tidb/pull/23257)
+    -   `TIME`タイプの列[#23233](https://github.com/pingcap/tidb/pull/23233)に`BETWEEN`式を使用すると、間違ったクエリ結果が発生する問題を修正します。
+    -   `DELETE`ステートメント[#23215](https://github.com/pingcap/tidb/pull/23215)の権限チェックの問題を修正します。
+    -   `DECIMAL`型列[#23196](https://github.com/pingcap/tidb/pull/23196)に無効な文字列を挿入してもエラーが報告されない問題を修正
+    -   `DECIMAL`型列[#23152](https://github.com/pingcap/tidb/pull/23152)にデータを挿入すると解析エラーが発生する問題を修正
+    -   `USE_INDEX_MERGE`ヒントが反映されない問題を修正[#22924](https://github.com/pingcap/tidb/pull/22924)
+    -   `WHERE`句の`ENUM`または`SET`の列をフィルタとして使用すると、クエリが間違った結果を返すバグを修正[#22814](https://github.com/pingcap/tidb/pull/22814)
+    -   クラスター化インデックスと新しい照合順序を同時に使用すると、クエリが間違った結果を返すバグを修正します[#21408](https://github.com/pingcap/tidb/pull/21408)
+    -   `enable_new_collation`を有効にして`ANALYZE`実行すると発生するpanicを修正[#21299](https://github.com/pingcap/tidb/pull/21299)
+    -   SQL ビューが SQL DEFINER [#24531](https://github.com/pingcap/tidb/pull/24531)に関連付けられたデフォルトのロールを正しく処理しない問題を修正します。
+    -   DDL ジョブのキャンセルがスタックする問題を修正[#24445](https://github.com/pingcap/tidb/pull/24445)
+    -   `concat`関数が照合照合順序[#24300](https://github.com/pingcap/tidb/pull/24300)を正しく処理しない問題を修正します。
+    -   `SELECT`フィールドに`IN`サブクエリがあり、サブクエリの外側に`NULL`タプルが含まれる場合、クエリが間違った結果を返すバグを修正[#24022](https://github.com/pingcap/tidb/pull/24022)
+    -   降順で`TableScan`が[#23974](https://github.com/pingcap/tidb/pull/23974)の場合、オプティマイザによってTiFlash が誤って選択されるバグを修正
+    -   `point_get`プランが MySQL [#23970](https://github.com/pingcap/tidb/pull/23970)と一致しないカラム名を返すバグを修正
+    -   大文字の名前を持つデータベースで`show table status`ステートメントを実行すると、間違った結果が返される問題を修正します[#23958](https://github.com/pingcap/tidb/pull/23958)
+    -   テーブルに対する`INSERT`と`DELETE`権限を同時に持たないユーザーが`REPLACE`操作を実行できるバグを修正[#23938](https://github.com/pingcap/tidb/pull/23938)
+    -   照合順序が正しく処理されないため、 `concat` / `make_set` / `insert`式の結果が間違っている問題を修正します[#23878](https://github.com/pingcap/tidb/pull/23878)
+    -   `RANGE`パーティション[#23689](https://github.com/pingcap/tidb/pull/23689)を持つテーブルでクエリを実行するときに発生するpanicを修正しました。
+    -   問題の修正: 以前のバージョンのクラスターでは、 `tidb_enable_table_partition`変数が`false`に設定されている場合、パーティションを含むテーブルはパーティション化されていないテーブルとして処理されます。クラスターが新しいバージョンにアップグレードされるときに、このテーブルに対して`batch point get`クエリを実行すると、接続panicが発生します。 [#23682](https://github.com/pingcap/tidb/pull/23682)
+    -   TiDB が TCP および UNIX ソケットでリッスンするように構成されている場合、TCP 接続上のリモート ホストが接続[#23513](https://github.com/pingcap/tidb/pull/23513)に対して正しく検証されない問題を修正します。
+    -   デフォルト以外の照合順序誤ったクエリ結果が発生するバグを修正[#22923](https://github.com/pingcap/tidb/pull/22923)
+    -   Grafana の**コプロセッサー Cache**パネルが動作しないバグを修正[#22617](https://github.com/pingcap/tidb/pull/22617)
+    -   オプティマイザが統計キャッシュ[#22565](https://github.com/pingcap/tidb/pull/22565)にアクセスするときに発生するエラーを修正しました。
 
-+ TiKV
+-   TiKV
 
-    - Fix a bug that TiKV cannot start if the `file_dict` file is not fully written into the disk that has been full [#9963](https://github.com/tikv/tikv/pull/9963)
-    - Limit TiCDC's scan speed at 128MB/s by default [#9983](https://github.com/tikv/tikv/pull/9983)
-    - Reduce the memory usage of TiCDC's initial scan [#10133](https://github.com/tikv/tikv/pull/10133)
-    - Support the back pressure for TiCDC's scan speed [#10142](https://github.com/tikv/tikv/pull/10142)
-    - Fix a potential OOM issue by avoiding unnecessary reads to get TiCDC old values [#10031](https://github.com/tikv/tikv/pull/10031)
-    - Fix a TiCDC OOM issue caused by reading old values [#10197](https://github.com/tikv/tikv/pull/10197)
-    - Add a timeout mechanism for S3 storages to avoid the client hanging without responses [#10132](https://github.com/tikv/tikv/pull/10132)
+    -   `file_dict`ファイルがフルになったディスクに完全に書き込まれていない場合、TiKV が起動できないバグを修正[#9963](https://github.com/tikv/tikv/pull/9963)
+    -   TiCDC のスキャン速度をデフォルトで 128MB/s に制限する[#9983](https://github.com/tikv/tikv/pull/9983)
+    -   TiCDC の初期スキャン[#10133](https://github.com/tikv/tikv/pull/10133)のメモリ使用量を削減します。
+    -   TiCDC のスキャン速度[#10142](https://github.com/tikv/tikv/pull/10142)のバック プレッシャーをサポート
+    -   TiCDC の古い値を取得するための不必要な読み取りを回避して、潜在的な OOM 問題を修正します[#10031](https://github.com/tikv/tikv/pull/10031)
+    -   古い値の読み取りによって発生する TiCDC OOM 問題を修正します[#10197](https://github.com/tikv/tikv/pull/10197)
+    -   応答なしでクライアントがハングするのを避けるために、S3 ストレージにタイムアウト メカニズムを追加します[#10132](https://github.com/tikv/tikv/pull/10132)
 
-+ TiFlash
+-   TiFlash
 
-    - Fix the issue that number of `delta-merge-tasks` is not reported to Prometheus
-    - Fix the TiFlash panic issue that occurs during `Segment Split`
-    - Fix the issue that the `Region write Duration (write blocks)` panel in Grafana is shown in a wrong place
-    - Fix the potential issue that the storage engine fails to remove data
-    - Fix the issue of incorrect results when casting the `TIME` type to the `INTEGER` type
-    - Fix a bug that the behavior of the `bitwise` operator is different from that of TiDB
-    - Fix the issue of incorrect results when casting the `STRING` type to the `INTEGER` type
-    - Fix the issue that consecutive and fast writes might make TiFlash out of memory
-    - Fix the potential issue that the exception of null pointer might be raised during the table GC
-    - Fix the TiFlash panic issue that occurs when writing data to dropped tables
-    - Fix the TiFlash panic issue that occurs during BR restore
-    - Fix a bug that the weights of some characters are wrong when using the general CI collation
-    - Fix the potential issue that data will be lost in tombstoned tables
-    - Fix the issue of incorrect results when comparing the string which contains zero bytes
-    - Fix the issue that the logical function returns wrong results if the input column contains null constants
-    - Fix the issue that the logical function only accepts the numeric type
-    - Fix the issue of incorrect results that occurs when the timestamp value is `1970-01-01` and the timezone offset is negative
-    - Fix the issue that hash value of `Decimal256` is not stable
+    -   `delta-merge-tasks`の数値がPrometheusに報告されない問題を修正
+    -   `Segment Split`中に発生するTiFlashpanic問題を修正
+    -   Grafanaの`Region write Duration (write blocks)`パネルが間違った場所に表示される問題を修正
+    -   storageエンジンがデータの削除に失敗するという潜在的な問題を修正します
+    -   `TIME`型を`INTEGER`型にキャストするときに誤った結果が表示される問題を修正
+    -   `bitwise`オペレーターの挙動がTiDBと異なるバグを修正
+    -   `STRING`型を`INTEGER`型にキャストするときに誤った結果が表示される問題を修正
+    -   連続した高速書き込みによりTiFlash がメモリ不足になる可能性がある問題を修正
+    -   テーブル GC 中に null ポインターの例外が発生する可能性がある潜在的な問題を修正
+    -   ドロップされたテーブルにデータを書き込むときに発生するTiFlashpanic問題を修正
+    -   BR復元中に発生するTiFlashpanic問題を修正
+    -   一般的なCI照合順序を使用した場合、一部の文字の重みが正しくないバグを修正
+    -   トゥームストーン化されたテーブルでデータが失われるという潜在的な問題を修正
+    -   ゼロバイトを含む文字列を比較すると結果が正しくなくなる問題を修正
+    -   入力列に null 定数が含まれている場合、論理関数が間違った結果を返す問題を修正します。
+    -   論理関数が数値型のみを受け入れる問題を修正
+    -   タイムスタンプ値が`1970-01-01`で、タイムゾーン オフセットが負の場合に発生する誤った結果の問題を修正します。
+    -   ハッシュ値`Decimal256`が安定しない問題を修正
 
-+ Tools
+-   ツール
 
-    + TiCDC
+    -   TiCDC
 
-        - Fix the deadlock issue caused by the flow control when the sorter's input channel has been blocked [#1779](https://github.com/pingcap/tiflow/pull/1779)
-        - Fix the issue that the TiKV GC safe point is blocked due to the stagnation of TiCDC changefeed checkpoint [#1756](https://github.com/pingcap/tiflow/pull/1756)
-        - Revert the update in `explicit_defaults_for_timestamp` which requires the `SUPER` privilege when replicating data to MySQL [#1749](https://github.com/pingcap/tiflow/pull/1749)
+        -   ソーターの入力チャネルがブロックされている場合にフロー制御によって引き起こされるデッドロックの問題を修正します[#1779](https://github.com/pingcap/tiflow/pull/1779)
+        -   TiCDC チェンジフィード チェックポイント[#1756](https://github.com/pingcap/tiflow/pull/1756)の停滞により TiKV GC セーフ ポイントがブロックされる問題を修正
+        -   データを MySQL [#1749](https://github.com/pingcap/tiflow/pull/1749)にレプリケートするときに`SUPER`権限が必要となる`explicit_defaults_for_timestamp`の更新を元に戻します。
 
-    + TiDB Lightning
+    -   TiDB Lightning
 
-        - Fix a bug that TiDB Lightning's TiDB-backend cannot load any data when autocommit is disabled
+        -   自動コミットが無効になっている場合、TiDB Lightning の TiDB バックエンドがデータをロードできないバグを修正

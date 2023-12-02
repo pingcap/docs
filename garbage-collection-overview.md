@@ -3,49 +3,49 @@ title: GC Overview
 summary: Learn about Garbage Collection in TiDB.
 ---
 
-# GC Overview
+# GCの概要 {#gc-overview}
 
-TiDB uses MVCC to control transaction concurrency. When you update the data, the original data is not deleted immediately but is kept together with the new data, with a timestamp to distinguish the version. The goal of Garbage Collection (GC) is to clear the obsolete data.
+TiDB は MVCC を使用してトランザクションの同時実行性を制御します。データを更新すると、元のデータはすぐに削除されず、バージョンを区別するためのタイムスタンプ付きで新しいデータとともに保持されます。ガベージ コレクション (GC) の目的は、古いデータを消去することです。
 
-## GC process
+## GCプロセス {#gc-process}
 
-Each TiDB cluster contains a TiDB instance that is selected as the GC leader, which controls the GC process.
+各 TiDB クラスターには、GC プロセスを制御する GC リーダーとして選択された TiDB インスタンスが含まれています。
 
-GC runs periodically on TiDB. For each GC, TiDB firstly calculates a timestamp called "safe point". Then, TiDB clears the obsolete data under the premise that all the snapshots after the safe point retain the integrity of the data. Specifically, there are three steps involved in each GC process:
+GC は TiDB 上で定期的に実行されます。各 GC について、TiDB はまず「安全ポイント」と呼ばれるタイムスタンプを計算します。次に、TiDB は、安全ポイント以降のすべてのスナップショットがデータの整合性を保持しているという前提で、古いデータを消去します。具体的には、各 GC プロセスには 3 つのステップが含まれます。
 
-1. Resolve Locks. During this step, TiDB scans locks before the safe point on all Regions and clears these locks.
-2. Delete Ranges. During this step, the obsolete data of the entire range generated from the `DROP TABLE`/`DROP INDEX` operation is quickly cleared.
-3. Do GC. During this step, each TiKV node scans data on it and deletes unneeded old versions of each key.
+1.  ロックを解決します。このステップ中に、TiDB はすべてのリージョンの安全ポイントの手前でロックをスキャンし、これらのロックをクリアします。
+2.  範囲を削除します。このステップでは、 `DROP TABLE` / `DROP INDEX`演算から生成された範囲全体の古いデータがすぐに消去されます。
+3.  GCを実行します。このステップ中に、各 TiKV ノードはそのノード上のデータをスキャンし、各キーの不要な古いバージョンを削除します。
 
-In the default configuration, GC is triggered every 10 minutes. Each GC retains data of the recent 10 minutes, which means that the GC life time is 10 minutes by default (safe point = the current time - GC life time). If one round of GC has been running for too long, before this round of GC is completed, the next round of GC will not start even if it is time to trigger the next GC. In addition, for long-duration transactions to run properly after exceeding the GC life time, the safe point does not exceed the start time (start_ts) of the ongoing transactions.
+デフォルト構成では、GC は 10 分ごとにトリガーされます。各 GC は最近 10 分間のデータを保持します。これは、GC 存続時間がデフォルトで 10 分であることを意味します (安全点 = 現在時刻 - GC 存続時間)。 GC の 1 ラウンドの実行時間が長すぎると、このラウンドの GC が完了する前に、次の GC をトリガーする時間になっても、次の GC ラウンドは開始されません。さらに、GC ライフタイムを超えた後に長期間のトランザクションが適切に実行されるためには、安全点は進行中のトランザクションの開始時刻 (start_ts) を超えません。
 
-## Implementation details
+## 実装の詳細 {#implementation-details}
 
-### Resolve Locks
+### ロックの解決 {#resolve-locks}
 
-The TiDB transaction model is implemented based on [Google's Percolator](https://ai.google/research/pubs/pub36726). It's mainly a two-phase commit protocol with some practical optimizations. When the first phase is finished, all the related keys are locked. Among these locks, one is the primary lock and the others are secondary locks which contain a pointer to the primary lock; in the second phase, the key with the primary lock gets a write record and its lock is removed. The write record indicates the write or delete operation in the history or the transactional rollback record of this key. The type of write record that replaces the primary lock indicates whether the corresponding transaction is committed successfully. Then all the secondary locks are replaced successively. If, for some reason such as failure, these secondary locks are retained and not replaced, you can still find the primary key based on the information in the secondary locks and determines whether the entire transaction is committed based on whether the primary key is committed. However, if the primary key information is cleared by GC and this transaction has uncommitted secondary locks, you will never learn whether these locks can be committed. As a result, data integrity cannot be guaranteed.
+TiDB トランザクション モデルは[Googleのパーコレーター](https://ai.google/research/pubs/pub36726)に基づいて実装されます。これは主に 2 フェーズ コミット プロトコルであり、いくつかの実用的な最適化が施されています。最初のフェーズが終了すると、関連するすべてのキーがロックされます。これらのロックのうち、1 つはプライマリ ロックで、もう 1 つはプライマリ ロックへのポインタを含むセカンダリ ロックです。 2 番目のフェーズでは、プライマリ ロックを持つキーが書き込みレコードを取得し、そのロックが削除されます。書き込みレコードは、このキーの履歴またはトランザクション ロールバック レコード内の書き込みまたは削除操作を示します。プライマリ ロックを置き換える書き込みレコードのタイプは、対応するトランザクションが正常にコミットされたかどうかを示します。次に、すべての二次ロックが連続して交換されます。障害などの何らかの理由で、これらの 2 次ロックが保持され、置き換えられない場合でも、2 次ロック内の情報に基づいて主キーを見つけることができ、主キーがコミットされているかどうかに基づいてトランザクション全体がコミットされているかどうかを判断できます。ただし、主キー情報が GC によってクリアされ、このトランザクションにコミットされていない二次ロックがある場合、これらのロックがコミットできるかどうかはわかりません。その結果、データの整合性は保証されません。
 
-The Resolve Locks step clears the locks before the safe point. This means that if the primary key of a lock is committed, this lock needs to be committed; otherwise, it needs to be rolled back. If the primary key is still locked (not committed or rolled back), this transaction is seen as timing out and rolled back.
+「ロックの解決」ステップでは、安全なポイントの手前でロックをクリアします。これは、ロックの主キーがコミットされている場合は、このロックもコミットする必要があることを意味します。それ以外の場合は、ロールバックする必要があります。主キーがまだロックされている (コミットまたはロールバックされていない) 場合、このトランザクションはタイムアウトとみなされ、ロールバックされます。
 
-The Resolve Locks step is implemented in either of the following two ways, which can be configured using the system variable [`tidb_gc_scan_lock_mode`](/system-variables.md#tidb_gc_scan_lock_mode-new-in-v50):
+ロックの解決ステップは、次の 2 つの方法のいずれかで実装され、システム変数[`tidb_gc_scan_lock_mode`](/system-variables.md#tidb_gc_scan_lock_mode-new-in-v50)を使用して構成できます。
 
-> **Warning:**
+> **警告：**
 >
-> Currently, `PHYSICAL` (Green GC) is an experimental feature. It is not recommended that you use it in the production environment.
+> 現在、 `PHYSICAL` (Green GC) は実験的機能です。本番環境で使用することはお勧めできません。
 
-- `LEGACY` (default): The GC leader sends requests to all Regions to scan obsolete locks, checks the primary key statuses of scanned locks, and sends requests to commit or roll back the corresponding transaction.
-- `PHYSICAL`: TiDB bypasses the Raft layer and directly scans data on each TiKV node.
+-   `LEGACY` (デフォルト): GC リーダーは、古いロックをスキャンするリクエストをすべてのリージョンに送信し、スキャンされたロックの主キーのステータスを確認し、対応するトランザクションをコミットまたはロールバックするリクエストを送信します。
+-   `PHYSICAL` : TiDB はRaftレイヤーをバイパスし、各 TiKV ノード上のデータを直接スキャンします。
 
-### Delete Ranges
+### 範囲の削除 {#delete-ranges}
 
-A great amount of data with consecutive keys is removed during operations such as `DROP TABLE/INDEX`. Removing each key and performing GC later for them can result in low execution efficiency on storage reclaiming. In such scenarios, TiDB actually does not delete each key. Instead, it only records the range to be removed and the timestamp of the deletion. Then the Delete Ranges step performs a fast physical deletion on the ranges whose timestamp is before the safe point.
+連続キーを持つ大量のデータは、 `DROP TABLE/INDEX`などの操作中に削除されます。各キーを削除して後で GC を実行すると、storage再利用の実行効率が低下する可能性があります。このようなシナリオでは、TiDB は実際には各キーを削除しません。代わりに、削除される範囲と削除のタイムスタンプのみが記録されます。次に、範囲の削除ステップで、タイムスタンプが安全点より前の範囲に対して高速物理削除が実行されます。
 
-### Do GC
+### GCを実行する {#do-gc}
 
-The Do GC step clears the outdated versions for all keys. To guarantee that all timestamps after the safe point have consistent snapshots, this step deletes the data committed before the safe point, but retains the last write for each key before the safe point as long as it is not a deletion.
+Do GC ステップでは、すべてのキーの古いバージョンがクリアされます。安全なポイント以降のすべてのタイムスタンプに一貫性のあるスナップショットがあることを保証するために、この手順では安全なポイントより前にコミットされたデータを削除しますが、削除でない限り、安全なポイントより前の各キーの最後の書き込みは保持されます。
 
-In this step, TiDB only needs to send the safe point to PD, and then the whole round of GC is completed. TiKV automatically detects the change of safe point and performs GC for all Region leaders on the current node. At the same time, the GC leader can continue to trigger the next round of GC.
+このステップでは、TiDB は安全なポイントを PD に送信するだけで済み、その後 GC のラウンド全体が完了します。 TiKV は安全ポイントの変更を自動的に検出し、現在のノード上のすべてのリージョンリーダーに対して GC を実行します。同時に、GC リーダーは GC の次のラウンドをトリガーし続けることができます。
 
-> **Note:**
+> **注記：**
 >
-> Starting with TiDB 5.0, the Do GC step will always use the `DISTRIBUTED` gc mode. This replaces the earlier `CENTRAL` gc mode, which was implemented by TiDB servers sending GC requests to each Region.
+> TiDB 5.0 以降、Do GC ステップでは常に`DISTRIBUTED` gc モードが使用されます。これは、各リージョンに GC リクエストを送信する TiDB サーバーによって実装されていた以前の`CENTRAL` gc モードを置き換えます。

@@ -3,60 +3,60 @@ title: (The same as L1 heading) Such as "Garbage Collection Configuration" in 59
 summary: Summarize this doc in 115 to 145 characters. Start with an SEO-friendly verb that tells the users what they can get from this doc. For example, "Learn all the configuration options that you can use in garbage collection". If your intro paragraph describes your article's intent, you can use it here, edited for length.
 ---
 
-# L1 heading (the same as title in the metadata)
+# L1 見出し (メタデータのタイトルと同じ) {#l1-heading-the-same-as-title-in-the-metadata}
 
-> About this template:
+> このテンプレートについて:
 >
-> - This document is a template for reference topics, including commands, parameters, configuration options. You can directly copy and use this template and delete unnecessary annotations. An example of this type of document: [TiDB Cluster Alert Rules](/alert-rules.md)
-> - For a new document, please add a link to the appropriate location in the `TOC.md` file (consider where users are most likely to look for this document in the table of contents).
-> - The headings within the document cannot skip levels, and try to avoid using level 5 headings.
+> -   このドキュメントは、コマンド、パラメータ、構成オプションなどの参照トピックのテンプレートです。このテンプレートを直接コピーして使用したり、不要な注釈を削除したりできます。このタイプの文書の例: [TiDBクラスタのアラート ルール](/alert-rules.md)
+> -   新しいドキュメントの場合は、 `TOC.md`ファイル内の適切な場所へのリンクを追加してください (ユーザーが目次のどこでこのドキュメントを探す可能性が最も高いかを考慮してください)。
+> -   文書内の見出しはレベルをスキップできないため、レベル 5 の見出しの使用は避けるようにしてください。
 
-**Required** In the first paragraph, summarize the content of this document in a few sentences.
+**必須**最初の段落では、この文書の内容を数文で要約してください。
 
-You can use the following sentence:
+次の文を使用できます。
 
-"This document describes..."
+「この文書には...について説明しています。」
 
-## L2 heading (A category or a parameter/configuration item)
+## L2 見出し (カテゴリまたはパラメータ/設定項目) {#l2-heading-a-category-or-a-parameter-configuration-item}
 
-Introduce the category/parameter/configuration item described in this section, using the following sentence:
+次の文を使用して、このセクションで説明するカテゴリ/パラメータ/設定項目を紹介します。
 
-"This section describes..."
+「このセクションでは...について説明します。」
 
-### L3 Heading (optional, a parameter or a configuration item)
+### L3 見出し (オプション、パラメータまたは構成項目) {#l3-heading-optional-a-parameter-or-a-configuration-item}
 
-If you need to list multiple parameters, use unordered lists (`*`/`+`/`-`).
+複数のパラメータをリストする必要がある場合は、順序なしリスト ( `*` / `+` / `-` ) を使用します。
 
-- xxx: xxx
-- xxx: xxx
-- xxx: xxx
+-   xxx: xxx
+-   xxx: xxx
+-   xxx: xxx
 
-### L3 Heading 2
+### L3 見出し 2 {#l3-heading-2}
 
 xxx
 
-## L2 Heading 2
+## L2 見出し 2 {#l2-heading-2}
 
-If you need to add notes or warnings, strictly follow the following format.
+注記や警告を追加する必要がある場合は、次の形式に厳密に従ってください。
 
-> **Warning**
+> **警告**
 >
-> If the information might bring risks to users, such as system availability, security, data loss, etc., use a warning. For example, the current feature is an experimental feature and is not recommended for production environments.
+> 情報がシステムの可用性、セキュリティ、データ損失などのリスクをユーザーにもたらす可能性がある場合は、警告を使用します。たとえば、現在の機能は実験的機能であり、本番環境には推奨されません。
 
-> **Note**
+> **注記**
 >
-> For general tips and notes, use a note. For example, when reading historical data, even if the current table structure is different from the table structure of the historical data, the historical data will be returned in the table structure of the historical data at that time.
+> 一般的なヒントとメモについては、メモを使用してください。たとえば、履歴データを読み込む場合、現在のテーブル構造が履歴データのテーブル構造と異なっていても、履歴データはその時点の履歴データのテーブル構造で返されます。
 
-If the notes or warnings are nested in a list, indent them with four spaces.
+注または警告がリスト内でネストされている場合は、4 つのスペースでインデントします。
 
-To prevent incorrect display, all indentation on the PingCAP website must be 4 spaces.
+誤った表示を防ぐため、PingCAP Web サイトのインデントはすべてスペース 4 文字にする必要があります。
 
-## L2 heading 3
+## L2 見出し 3 {#l2-heading-3}
 
-If you need to use a table, note that the table must have headers (namely, the first row).
+テーブルを使用する必要がある場合は、テーブルにヘッダー (つまり、最初の行) が必要であることに注意してください。
 
-The following table lists the description, default value, and example of the specific configuration item/parameter.
+次の表に、特定の構成項目/パラメーターの説明、デフォルト値、および例を示します。
 
-| Parameter | Description | Default value | Required | Example |
-| :-- | :-- | :-- | :-- | :-- |
-| xxx | xxx | xxx | xxx | xxx |
+| パラメータ | 説明  | デフォルト値 | 必須  | 例   |
+| :---- | :-- | :----- | :-- | :-- |
+| xxx   | xxx | xxx    | xxx | xxx |

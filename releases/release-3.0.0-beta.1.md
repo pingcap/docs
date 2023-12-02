@@ -2,106 +2,115 @@
 title: TiDB 3.0.0 Beta.1 Release Notes
 ---
 
-# TiDB 3.0.0 Beta.1 Release Notes
+# TiDB 3.0.0 ベータ.1 リリースノート {#tidb-3-0-0-beta-1-release-notes}
 
-Release Date: March 26, 2019
+リリース日：2019年3月26日
 
-TiDB version: 3.0.0-beta.1
+TiDB バージョン: 3.0.0-beta.1
 
-TiDB Ansible version: 3.0.0-beta.1
+TiDB Ansible バージョン: 3.0.0-beta.1
 
-## Overview
+## 概要 {#overview}
 
-On March 26, 2019, TiDB 3.0.0 Beta.1 is released. The corresponding TiDB Ansible version is 3.0.0 Beta.1. Compared with TiDB 3.0.0 Beta, this release has greatly improved the stability, usability, features, the SQL optimizer, statistics, and the execution engine.
+2019 年 3 月 26 日に、TiDB 3.0.0 Beta.1 がリリースされました。対応する TiDB Ansible バージョンは 3.0.0 Beta.1 です。 TiDB 3.0.0 ベータと比較して、このリリースでは安定性、使いやすさ、機能、SQL オプティマイザー、統計、実行エンジンが大幅に向上しています。
 
-## TiDB
+## TiDB {#tidb}
 
-+ SQL Optimizer
-    - Support calculating the Cartesian product by using `Sort Merge Join` [#9032](https://github.com/pingcap/tidb/pull/9037)
-    - Support Skyline Pruning, with some rules to prevent the execution plan from relying too heavily on statistics [#9337](https://github.com/pingcap/tidb/pull/9337)
-    + Support Window Functions
-        - `NTILE` [#9682](https://github.com/pingcap/tidb/pull/9682)
-        - `LEAD` and `LAG` [#9672](https://github.com/pingcap/tidb/pull/9672)
-        - `PERCENT_RANK` [#9671](https://github.com/pingcap/tidb/pull/9671)
-        - `NTH_VALUE` [#9596](https://github.com/pingcap/tidb/pull/9596)
-        - `CUME_DIST` [#9619](https://github.com/pingcap/tidb/pull/9619)
-        - `FIRST_VALUE` and `LAST_VALUE` [#9560](https://github.com/pingcap/tidb/pull/9560)
-        - `RANK` and `DENSE_RANK` [#9500](https://github.com/pingcap/tidb/pull/9500)
-        - `RANGE FRAMED` [#9450](https://github.com/pingcap/tidb/pull/9450)
-        - `ROW FRAMED` [#9358](https://github.com/pingcap/tidb/pull/9358)
-        - `ROW NUMBER` [#9098](https://github.com/pingcap/tidb/pull/9098)
-    - Add a type of statistic that indicates the order correlation between columns and the handle column [#9315](https://github.com/pingcap/tidb/pull/9315)
-+ SQL Execution Engine
-    + Add built-in functions
-        - `JSON_QUOTE` [#7832](https://github.com/pingcap/tidb/pull/7832)
-        - `JSON_ARRAY_APPEND` [#9609](https://github.com/pingcap/tidb/pull/9609)
-        - `JSON_MERGE_PRESERVE` [#8931](https://github.com/pingcap/tidb/pull/8931)
-        - `BENCHMARK` [#9252](https://github.com/pingcap/tidb/pull/9252)
-        - `COALESCE` [#9087](https://github.com/pingcap/tidb/pull/9087)
-        - `NAME_CONST` [#9261](https://github.com/pingcap/tidb/pull/9261)
-    - Optimize the Chunk size based on the query context, to reduce the execution time of SQL statements and resources consumption of the cluster [#6489](https://github.com/pingcap/tidb/issues/6489)
-+ Privilege management
-    - Support `SET ROLE` and `CURRENT_ROLE` [#9581](https://github.com/pingcap/tidb/pull/9581)
-    - Support `DROP ROLE` [#9616](https://github.com/pingcap/tidb/pull/9616)
-    - Support `CREATE ROLE` [#9461](https://github.com/pingcap/tidb/pull/9461)
-+ Server
-    - Add the `/debug/zip` HTTP interface to get information of the current TiDB instance [#9651](https://github.com/pingcap/tidb/pull/9651)
-    - Support the `show pump status` and `show drainer status` SQL statements to check the Pump or Drainer status [#9456](https://github.com/pingcap/tidb/pull/9456)
-    - Support modifying the Pump or Drainer status by using SQL statements [#9789](https://github.com/pingcap/tidb/pull/9789)
-    - Support adding HASH fingerprints to SQL text for easy tracking of slow SQL statements [#9662](https://github.com/pingcap/tidb/pull/9662)
-    - Add the `log_bin` system variable ("0" by default) to control the enabling state of binlog; only support checking the state currently [#9343](https://github.com/pingcap/tidb/pull/9343)
-    - Support managing the sending binlog strategy by using the configuration file [#9864](https://github.com/pingcap/tidb/pull/9864)
-    - Support querying the slow log by using the `INFORMATION_SCHEMA.SLOW_QUERY` memory table [#9290](https://github.com/pingcap/tidb/pull/9290)
-    - Change the MySQL version displayed in TiDB from 5.7.10 to 5.7.25 [#9553](https://github.com/pingcap/tidb/pull/9553)
-    - Unify the [log format](https://github.com/tikv/rfcs/blob/master/text/0018-unified-log-format.md) for easy collection and analysis by tools
-    - Add the `high_error_rate_feedback_total` monitoring item to record the difference between the actual data volume and the estimated data volume based on statistics [#9209](https://github.com/pingcap/tidb/pull/9209)
-    - Add the QPS monitoring item in the database dimension, which can be enabled by using a configuration item [#9151](https://github.com/pingcap/tidb/pull/9151)
-+ DDL
-    - Add the `ddl_error_count_limit` global variable (“512” by default) to limit the number of DDL task retries (If this number exceeds the limit, the DDL task is canceled) [#9295](https://github.com/pingcap/tidb/pull/9295)
-    - Support ALTER ALGORITHM `INPLACE`/`INSTANT` [#8811](https://github.com/pingcap/tidb/pull/8811)
-    - Support the `SHOW CREATE VIEW` statement [#9309](https://github.com/pingcap/tidb/pull/9309)
-    - Support the `SHOW CREATE USER` statement [#9240](https://github.com/pingcap/tidb/pull/9240)
+-   SQLオプティマイザー
+    -   `Sort Merge Join` [#9032](https://github.com/pingcap/tidb/pull/9037)を使用したデカルト積の計算をサポート
+    -   Skyline Pruning をサポートし、実行計画が統計に過度に依存することを防ぐいくつかのルールを備えています[#9337](https://github.com/pingcap/tidb/pull/9337)
 
-## PD
+    <!---->
 
-+ Unify the [log format](https://github.com/tikv/rfcs/blob/master/text/0018-unified-log-format.md) for easy collection and analysis by tools
-+ Simulator
-    - Support different heartbeat intervals in different stores [#1418](https://github.com/pingcap/pd/pull/1418)
-    - Add a case about importing data [#1263](https://github.com/pingcap/pd/pull/1263)
-+ Make hotspot scheduling configurable [#1412](https://github.com/pingcap/pd/pull/1412)
-+ Add the store address as the dimension monitoring item to replace the previous Store ID [#1429](https://github.com/pingcap/pd/pull/1429)
-+ Optimize the `GetStores` overhead to speed up the Region inspection cycle [#1410](https://github.com/pingcap/pd/pull/1410)
-+ Add an interface to delete the Tombstone Store [#1472](https://github.com/pingcap/pd/pull/1472)
+    -   サポートウィンドウの機能
+        -   `NTILE` [#9682](https://github.com/pingcap/tidb/pull/9682)
+        -   `LEAD`と`LAG` [#9672](https://github.com/pingcap/tidb/pull/9672)
+        -   `PERCENT_RANK` [#9671](https://github.com/pingcap/tidb/pull/9671)
+        -   `NTH_VALUE` [#9596](https://github.com/pingcap/tidb/pull/9596)
+        -   `CUME_DIST` [#9619](https://github.com/pingcap/tidb/pull/9619)
+        -   `FIRST_VALUE`と`LAST_VALUE` [#9560](https://github.com/pingcap/tidb/pull/9560)
+        -   `RANK`と`DENSE_RANK` [#9500](https://github.com/pingcap/tidb/pull/9500)
+        -   `RANGE FRAMED` [#9450](https://github.com/pingcap/tidb/pull/9450)
+        -   `ROW FRAMED` [#9358](https://github.com/pingcap/tidb/pull/9358)
+        -   `ROW NUMBER` [#9098](https://github.com/pingcap/tidb/pull/9098)
 
-## TiKV
+    <!---->
 
-+ Optimize the Coprocessor calculation execution framework and implement the TableScan section, with the Single TableScan performance improved by 5% ~ 30%
-    - Implement the definition of the `BatchRows` row and the `BatchColumn` column [#3660](https://github.com/tikv/tikv/pull/3660)
-    - Implement `VectorLike` to support accessing encoded and decoded data in the same way [#4242](https://github.com/tikv/tikv/pull/4242)
-    - Define the `BatchExecutor` to interface and implement the way of converting requests to `BatchExecutor` [#4243](https://github.com/tikv/tikv/pull/4243)
-    - Implement transforming the expression tree into the RPN format [#4329](https://github.com/tikv/tikv/pull/4329)
-    - Implement the `BatchTableScanExecutor` vectorization operator to accelerate calculation [#4351](https://github.com/tikv/tikv/pull/4351)
-+ Unify the [log format](https://github.com/tikv/rfcs/blob/master/text/0018-unified-log-format.md) for easy collection and analysis by tools
-+ Support using the Local Reader to read in the Raw Read interface [#4222](https://github.com/tikv/tikv/pull/4222)
-+ Add metrics about configuration information [#4206](https://github.com/tikv/tikv/pull/4206)
-+ Add metrics about key exceeding bound [#4255](https://github.com/tikv/tikv/pull/4255)
-+ Add an option to control panic or return an error when encountering the key exceeding bound error [#4254](https://github.com/tikv/tikv/pull/4254)
-+ Add support for the `INSERT` operation, make prewrite succeed only when keys do not exist, and eliminate `Batch Get` [#4085](https://github.com/tikv/tikv/pull/4085)
-+ Use more fair batch strategy in the Batch System [#4200](https://github.com/tikv/tikv/pull/4200)
-+ Support Raw scan in tikv-ctl [#3825](https://github.com/tikv/tikv/pull/3825)
+    -   列とハンドル列[#9315](https://github.com/pingcap/tidb/pull/9315)の間の順序相関を示すタイプの統計を追加します。
+-   SQL実行エンジン
+    -   組み込み関数を追加する
+        -   `JSON_QUOTE` [#7832](https://github.com/pingcap/tidb/pull/7832)
+        -   `JSON_ARRAY_APPEND` [#9609](https://github.com/pingcap/tidb/pull/9609)
+        -   `JSON_MERGE_PRESERVE` [#8931](https://github.com/pingcap/tidb/pull/8931)
+        -   `BENCHMARK` [#9252](https://github.com/pingcap/tidb/pull/9252)
+        -   `COALESCE` [#9087](https://github.com/pingcap/tidb/pull/9087)
+        -   `NAME_CONST` [#9261](https://github.com/pingcap/tidb/pull/9261)
 
-## Tools
+    <!---->
 
-+ TiDB Binlog
-    - Add the Arbiter tool that supports reading binlog from Kafka and replicate the data into MySQL
-    - Support filtering files that do not need to be replicated
-    - Support replicating generated columns
-+ Lightning
-    - Support disabling TiKV periodic Level-1 compaction, and when the TiKV cluster version is 2.1.4 or later, Level-1 compaction is automatically executed in the import mode [#119](https://github.com/pingcap/tidb-lightning/pull/119), [#4199](https://github.com/tikv/tikv/pull/4199)
-    - Add the `table_concurrency` configuration item to limit the number of import engines ("16" by default) and avoid overusing the importer disk space [#119](https://github.com/pingcap/tidb-lightning/pull/119)
-    - Support saving the intermediate state SST to the disk, to reduce memory usage [#4369](https://github.com/tikv/tikv/pull/4369)
-    - Optimize the import performance of TiKV-Importer and support separate import of data and indexes for large tables [#132](https://github.com/pingcap/tidb-lightning/pull/132)
-    - Support importing CSV files [#111](https://github.com/pingcap/tidb-lightning/pull/111)
-+ Data replication comparison tool (sync-diff-inspector)
-    - Support using TiDB statistics to split chunks to be compared [#197](https://github.com/pingcap/tidb-tools/pull/197)
-    - Support using multiple columns to split chunks to be compared [#197](https://github.com/pingcap/tidb-tools/pull/197)
+    -   クエリ コンテキストに基づいてChunkサイズを最適化し、SQL ステートメントの実行時間とクラスターのリソース消費を削減します[#6489](https://github.com/pingcap/tidb/issues/6489)
+-   権限管理
+    -   サポート`SET ROLE`および`CURRENT_ROLE` [#9581](https://github.com/pingcap/tidb/pull/9581)
+    -   サポート`DROP ROLE` [#9616](https://github.com/pingcap/tidb/pull/9616)
+    -   サポート`CREATE ROLE` [#9461](https://github.com/pingcap/tidb/pull/9461)
+-   サーバ
+    -   `/debug/zip`現在の TiDB インスタンスの情報を取得するための HTTP インターフェースを追加します[#9651](https://github.com/pingcap/tidb/pull/9651)
+    -   PumpまたはDrainerのステータスを確認するための`show pump status`および`show drainer status` SQL ステートメントをサポートします[#9456](https://github.com/pingcap/tidb/pull/9456)
+    -   SQL ステートメントを使用したPumpまたはDrainerのステータス変更のサポート[#9789](https://github.com/pingcap/tidb/pull/9789)
+    -   遅い SQL ステートメントを簡単に追跡できるように、SQL テキストへの HASH フィンガープリントの追加をサポートします[#9662](https://github.com/pingcap/tidb/pull/9662)
+    -   `log_bin`システム変数 (デフォルトでは「0」) を追加して、 binlogの有効状態を制御します。現在の状態のチェックのみをサポートします[#9343](https://github.com/pingcap/tidb/pull/9343)
+    -   構成ファイル[#9864](https://github.com/pingcap/tidb/pull/9864)を使用した送信binlog戦略の管理のサポート
+    -   `INFORMATION_SCHEMA.SLOW_QUERY`メモリテーブル[#9290](https://github.com/pingcap/tidb/pull/9290)を使用した低速ログのクエリのサポート
+    -   TiDB に表示される MySQL バージョンを 5.7.10 から 5.7.25 に変更します[#9553](https://github.com/pingcap/tidb/pull/9553)
+    -   [ログ形式](https://github.com/tikv/rfcs/blob/master/text/0018-unified-log-format.md)統合してツールによる収集と分析を容易にする
+    -   実際のデータ量と統計に基づく推定データ量の差を記録する監視項目`high_error_rate_feedback_total`を追加[#9209](https://github.com/pingcap/tidb/pull/9209)
+    -   データベース ディメンションに QPS 監視項目を追加します。これは、構成項目[#9151](https://github.com/pingcap/tidb/pull/9151)を使用して有効にできます。
+-   DDL
+    -   `ddl_error_count_limit`グローバル変数 (デフォルトでは「512」) を追加して、DDL タスクの再試行数を制限します (この数が制限を超えると、DDL タスクはキャンセルされます) [#9295](https://github.com/pingcap/tidb/pull/9295)
+    -   ALTER Algorithm `INPLACE` / `INSTANT` [#8811](https://github.com/pingcap/tidb/pull/8811)をサポート
+    -   `SHOW CREATE VIEW`ステートメント[#9309](https://github.com/pingcap/tidb/pull/9309)をサポートします
+    -   `SHOW CREATE USER`ステートメント[#9240](https://github.com/pingcap/tidb/pull/9240)をサポートします
+
+## PD {#pd}
+
+-   [ログ形式](https://github.com/tikv/rfcs/blob/master/text/0018-unified-log-format.md)統合してツールによる収集と分析を容易にする
+-   シミュレータ
+    -   異なるストアで異なるハートビート間隔をサポート[#1418](https://github.com/pingcap/pd/pull/1418)
+    -   データのインポートに関するケースを追加[#1263](https://github.com/pingcap/pd/pull/1263)
+-   ホットスポットのスケジュールを構成可能にする[#1412](https://github.com/pingcap/pd/pull/1412)
+-   店舗アドレスをディメンション監視項目として追加し、以前の店舗 ID [#1429](https://github.com/pingcap/pd/pull/1429)を置き換えます。
+-   `GetStores`オーバーヘッドを最適化してリージョン検査サイクルを高速化します[#1410](https://github.com/pingcap/pd/pull/1410)
+-   Tombstone Store [#1472](https://github.com/pingcap/pd/pull/1472)を削除するためのインターフェイスの追加
+
+## TiKV {#tikv}
+
+-   コプロセッサー計算実行フレームワークを最適化し、TableScan セクションを実装し、Single TableScan のパフォーマンスが 5% ～ 30% 向上しました。
+    -   `BatchRows`行`BatchColumn`列の定義を実装する[#3660](https://github.com/tikv/tikv/pull/3660)
+    -   エンコードされたデータとデコードされたデータへの同じ方法でのアクセスをサポートするために`VectorLike`を実装します[#4242](https://github.com/tikv/tikv/pull/4242)
+    -   `BatchExecutor`からインターフェイスを定義し、リクエストを`BatchExecutor` [#4243](https://github.com/tikv/tikv/pull/4243)に変換する方法を実装します。
+    -   式ツリーのRPN形式への変換の実装[#4329](https://github.com/tikv/tikv/pull/4329)
+    -   `BatchTableScanExecutor`ベクトル化演算子を実装して計算を高速化する[#4351](https://github.com/tikv/tikv/pull/4351)
+-   [ログ形式](https://github.com/tikv/rfcs/blob/master/text/0018-unified-log-format.md)統合してツールによる収集と分析を容易にする
+-   Local Reader を使用した Raw Read インターフェイスでの読み取りのサポート[#4222](https://github.com/tikv/tikv/pull/4222)
+-   構成情報に関するメトリックの追加[#4206](https://github.com/tikv/tikv/pull/4206)
+-   境界[#4255](https://github.com/tikv/tikv/pull/4255)を超えるキーに関するメトリクスを追加します
+-   キー超過エラー[#4254](https://github.com/tikv/tikv/pull/4254)が発生したときにpanicを制御するかエラーを返すオプションを追加します。
+-   `INSERT`操作のサポートを追加し、キーが存在しない場合にのみ事前書き込みが成功するようにし、 `Batch Get` [#4085](https://github.com/tikv/tikv/pull/4085)を削除します。
+-   バッチ システム[#4200](https://github.com/tikv/tikv/pull/4200)でより公平なバッチ戦略を使用する
+-   tikv-ctl [#3825](https://github.com/tikv/tikv/pull/3825)での Raw スキャンのサポート
+
+## ツール {#tools}
+
+-   TiDBBinlog
+    -   Kafka からのbinlogの読み取りをサポートする Arbiter ツールを追加し、データを MySQL にレプリケートします
+    -   レプリケートする必要のないファイルのフィルタリングをサポート
+    -   生成された列のレプリケートをサポート
+-   稲妻
+    -   TiKV の定期的なレベル 1 コンパクションの無効化をサポートし、TiKV クラスターのバージョンが 2.1.4 以降の場合、インポート モード[#119](https://github.com/pingcap/tidb-lightning/pull/119) 、 [#4199](https://github.com/tikv/tikv/pull/4199)でレベル 1 コンパクションが自動的に実行されます。
+    -   `table_concurrency`構成項目を追加して、インポート エンジンの数 (デフォルトでは「16」) を制限し、インポーターのディスク領域の過剰使用を回避します[#119](https://github.com/pingcap/tidb-lightning/pull/119)
+    -   メモリ使用量を削減するために、中間状態の SST をディスクに保存するサポート[#4369](https://github.com/tikv/tikv/pull/4369)
+    -   TiKV-Importer のインポート パフォーマンスを最適化し、大きなテーブルのデータとインデックスの個別のインポートをサポートします[#132](https://github.com/pingcap/tidb-lightning/pull/132)
+    -   CSV ファイルのインポートをサポート[#111](https://github.com/pingcap/tidb-lightning/pull/111)
+-   データ複製比較ツール (sync-diff-inspector)
+    -   TiDB 統計を使用した比較対象のチャンクの分割のサポート[#197](https://github.com/pingcap/tidb-tools/pull/197)
+    -   複数の列を使用して比較するチャンクを分割するサポート[#197](https://github.com/pingcap/tidb-tools/pull/197)

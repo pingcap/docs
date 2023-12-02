@@ -3,106 +3,104 @@ title: Apply Hotfix to DM Clusters Online
 summary: Learn how to apply hotfix patches to DM clusters.
 ---
 
-# Apply Hotfix to DM Clusters Online
+# ホットフィックスをオンラインで DM クラスターに適用する {#apply-hotfix-to-dm-clusters-online}
 
-If you need to dynamically replace the binaries of a service while the cluster is running (that is, to keep the cluster available during the replacement), you can use the `tiup dm patch` command. The command does the following:
+クラスターの実行中にサービスのバイナリを動的に置換する必要がある場合 (つまり、置換中にクラスターを使用可能な状態に保つため)、 `tiup dm patch`コマンドを使用できます。このコマンドは次のことを行います。
 
-- Uploads the binary package for replacement to the target machine.
-- Takes the related nodes offline using the API.
-- Stops the target service.
-- Unpacks the binary package and replaces the service.
-- Starts the target service.
+-   置換用のバイナリ パッケージをターゲット マシンにアップロードします。
+-   API を使用して関連ノードをオフラインにします。
+-   対象のサービスを停止します。
+-   バイナリ パッケージを解凍し、サービスを置き換えます。
+-   対象のサービスを開始します。
 
-## Syntax
+## 構文 {#syntax}
 
 ```shell
 tiup dm patch <cluster-name> <package-path> [flags]
 ```
 
-- `<cluster-name>`: The name of the cluster to be operated
-- `<package-path>`: The path to the binary package used for replacement
+-   `<cluster-name>` : 操作するクラスタ名
+-   `<package-path>` : 置換に使用されるバイナリパッケージへのパス
 
-### Preparation
+### 準備 {#preparation}
 
-You need to pack the binary package required for this command in advance according to the following steps:
+このコマンドに必要なバイナリパッケージは、以下の手順に従って事前に圧縮しておく必要があります。
 
-- Determine the name `${component}` of the component to be replaced (dm-master, dm-worker ...), the `${version}` of the component (v2.0.0, v2.0.1 ...), and the operating system `${os}` and platform `${arch}` on which the component runs.
-- Download the current component package using the command `wget https://tiup-mirrors.pingcap.com/${component}-${version}-${os}-${arch}.tar.gz -O /tmp/${component}-${version}-${os}-${arch}.tar.gz`.
-- Run `mkdir -p /tmp/package && cd /tmp/package` to create a temporary directory to pack files.
-- Run `tar xf /tmp/${component}-${version}-${os}-${arch}.tar.gz` to unpack the original binary package.
-- Run `find .` to view the file structure in the temporary package directory.
-- Copy the binary files or configuration files to the corresponding locations in the temporary directory.
-- Run `tar czf /tmp/${component}-hotfix-${os}-${arch}.tar.gz *` to pack the files in the temporary directory.
-- Finally, you can use `/tmp/${component}-hotfix-${os}-${arch}.tar.gz` as the value of `<package-path>` in the `tiup dm patch` command.
+-   置き換えるコンポーネントの名前`${component}` (dm-master、dm-worker ...)、コンポーネントの名前`${version}` (v2.0.0、v2.0.1 ...)、オペレーティング システム`${os}`とプラットフォーム`${arch}`を決定します。コンポーネントが実行するもの。
+-   コマンド`wget https://tiup-mirrors.pingcap.com/${component}-${version}-${os}-${arch}.tar.gz -O /tmp/${component}-${version}-${os}-${arch}.tar.gz`を使用して、現在のコンポーネントパッケージをダウンロードします。
+-   `mkdir -p /tmp/package && cd /tmp/package`を実行して、ファイルをパックするための一時ディレクトリを作成します。
+-   `tar xf /tmp/${component}-${version}-${os}-${arch}.tar.gz`を実行して、元のバイナリ パッケージを解凍します。
+-   `find .`を実行して、一時パッケージ ディレクトリ内のファイル構造を表示します。
+-   バイナリ ファイルまたは構成ファイルを一時ディレクトリ内の対応する場所にコピーします。
+-   `tar czf /tmp/${component}-hotfix-${os}-${arch}.tar.gz *`を実行してファイルを一時ディレクトリにパックします。
+-   最後に、 `tiup dm patch`コマンドの`<package-path>`の値として`/tmp/${component}-hotfix-${os}-${arch}.tar.gz`使用できます。
 
-## Options
+## オプション {#options}
 
-### --overwrite
+### --overwrite {#overwrite}
 
-- After you patch a certain component (such as dm-worker), when the tiup-dm scales out the component, tiup-dm uses the original component version by default. To use the version that you patch when the cluster scales out in the future, you need to specify the option `--overwrite` in the command.
-- Data type: `BOOLEAN`
-- This option is disabled by default with the `false` value. To enable this option, add this option to the command, and either pass the `true` value or do not pass any value.
+-   特定のコンポーネント(dm-worker など) にパッチを適用した後、tiup-dm がコンポーネントをスケールアウトすると、tiup-dm はデフォルトで元のコンポーネントのバージョンを使用します。将来クラスターがスケールアウトするときにパッチを適用したバージョンを使用するには、コマンドでオプション`--overwrite`を指定する必要があります。
+-   データ型: `BOOLEAN`
+-   このオプションは、値`false`を指定するとデフォルトで無効になります。このオプションを有効にするには、このオプションをコマンドに追加し、値`true`渡すか、値を渡しません。
 
-### -N, --node
+### -N、--node {#n-node}
 
-- Specifies the nodes to be replaced. The value of this option is a comma-separated list of node IDs. You can get the node IDs from the first column of the cluster status table returned by the `[tiup dm display](/tiup/tiup-component-dm-display.md)` command.
-- Data type: `STRING`
-- If this option is not specified, TiUP selects all nodes to replace by default.
+-   置き換えるノードを指定します。このオプションの値は、ノード ID のカンマ区切りリストです。ノード ID は、 `[tiup dm display](/tiup/tiup-component-dm-display.md)`コマンドによって返されるクラスター ステータス テーブルの最初の列から取得できます。
+-   データ型: `STRING`
+-   このオプションが指定されていない場合、 TiUP はデフォルトで置換するすべてのノードを選択します。
 
-> **Note:**
+> **注記：**
 >
-> If the option `-R, --role` is specified at the same time, TiUP then replaces service nodes that match both the requirements of `-N, --node` and `-R, --role`.
+> オプション`-R, --role`が同時に指定された場合、 TiUP は`-N, --node`と`-R, --role`の両方の要件に一致するサービス ノードを置き換えます。
 
-### -R, --role
+### -R、--役割 {#r-role}
 
-- Specifies the roles to be replaced. The value of this option is a comma-separated list of the roles of the nodes. You can get the roles of the nodes from the second column of the cluster status table returned by the `[tiup dm display](/tiup/tiup-component-dm-display.md)` command.
-- Data type: `STRING`
-- If this option is not specified, TiUP selects all roles to replace by default.
+-   置き換える役割を指定します。このオプションの値は、ノードの役割のカンマ区切りリストです。ノードの役割は、 `[tiup dm display](/tiup/tiup-component-dm-display.md)`コマンドによって返されるクラスター ステータス テーブルの 2 番目の列から取得できます。
+-   データ型: `STRING`
+-   このオプションが指定されていない場合、 TiUP はデフォルトで置き換えるすべての役割を選択します。
 
-> **Note:**
+> **注記：**
 >
-> If the option `-N, --node` is specified at the same time, TiUP then replaces service nodes that match both the requirements of `-N, --node` and `-R, --role`.
+> オプション`-N, --node`が同時に指定された場合、 TiUP は`-N, --node`と`-R, --role`の両方の要件に一致するサービス ノードを置き換えます。
 
-### --offline
+### &#x20;--offline {#offline}
 
-- Declares that the current cluster is offline. When this option is specified, TiUP DM only replaces the binary files of the cluster components in place without restarting the service.
+-   現在のクラスターがオフラインであることを宣言します。このオプションを指定すると、 TiUP DM はサービスを再起動せずに、所定のクラスター コンポーネントのバイナリ ファイルのみを置き換えます。
 
-### -h, --help
+### -h, --help {#h-help}
 
-- Prints help information.
-- Data type: `BOOLEAN`
-- This option is disabled by default with the `false` value. To enable this option, add this option to the command, and either pass the `true` value or do not pass any value.
+-   ヘルプ情報を出力します。
+-   データ型: `BOOLEAN`
+-   このオプションは、値`false`を指定するとデフォルトで無効になります。このオプションを有効にするには、このオプションをコマンドに追加し、値`true`渡すか、値を渡しません。
 
-## Example
+## 例 {#example}
 
-The following example shows how to apply `v5.3.0-hotfix` to the `v5.3.0` cluster deployed using TiUP. The operations might vary if you deploy the cluster using other methods.
+次の例は、 TiUPを使用してデプロイされた`v5.3.0`クラスターに`v5.3.0-hotfix`適用する方法を示しています。他の方法を使用してクラスターをデプロイする場合、操作は異なる場合があります。
 
-> **Note:**
+> **注記：**
 >
-> Hotfix is used only for emergency fixes. Its daily maintenance is complicated. It is recommend that you upgrade the DM cluster to an official version as soon as it is released.
+> ホットフィックスは緊急修正のみに使用されます。日常のメンテナンスは複雑です。 DM クラスターがリリースされたらすぐに正式バージョンにアップグレードすることをお勧めします。
 
-### Preparations
+### 準備 {#preparations}
 
-Before applying a hotfix, prepare the hotfix package `dm-linux-amd64.tar.gz` and confirm the current DM software version:
+ホットフィックスを適用する前に、ホットフィックス パッケージ`dm-linux-amd64.tar.gz`を準備し、現在の DM ソフトウェア バージョンを確認します。
 
 ```shell
 /home/tidb/dm/deploy/dm-master-8261/bin/dm-master/dm-master -V
 ```
 
-Output:
+出力：
 
-```
-Release Version: v5.3.0
+    Release Version: v5.3.0
 
-Git Commit Hash: 20626babf21fc381d4364646c40dd84598533d66
-Git Branch: heads/refs/tags/v5.3.0
-UTC Build Time: 2021-11-29 08:29:49
-Go Version: go version go1.16.4 linux/amd64
-```
+    Git Commit Hash: 20626babf21fc381d4364646c40dd84598533d66
+    Git Branch: heads/refs/tags/v5.3.0
+    UTC Build Time: 2021-11-29 08:29:49
+    Go Version: go version go1.16.4 linux/amd64
 
-### Prepare the patch package and apply it to the DM cluster
+### パッチ パッケージを準備し、DM クラスターに適用します。 {#prepare-the-patch-package-and-apply-it-to-the-dm-cluster}
 
-1. Prepare the DM software package that matches the current version:
+1.  現在のバージョンと一致する DM ソフトウェア パッケージを準備します。
 
     ```shell
     mkdir -p /tmp/package
@@ -110,7 +108,7 @@ Go Version: go version go1.16.4 linux/amd64
     tar -zxvf /root/.tiup/storage/dm/packages/dm-worker-v5.3.0-linux-amd64.tar.gz -C /tmp/package/
     ```
 
-2. Replace the binary file with the hotfix package:
+2.  バイナリ ファイルを修正プログラム パッケージに置き換えます。
 
     ```shell
     # Decompress the hotfix package and use it to replace the binary file.
@@ -123,82 +121,74 @@ Go Version: go version go1.16.4 linux/amd64
     cd /tmp/package/ && tar -czvf dm-worker-hotfix-linux-amd64.tar.gz dm-worker/
     ```
 
-3. Apply the hotfix:
+3.  ホットフィックスを適用します。
 
-    Query the cluster status. The following uses the cluster named `dm-test` as an example:
+    クラスターのステータスを問い合わせます。以下では、例として`dm-test`という名前のクラスターを使用します。
 
     ```shell
     tiup dm display dm-test
     ```
 
-    Output:
+    出力：
 
-    ```
-    Cluster type:       dm
-    Cluster name:       dm-test
-    Cluster version:    v5.3.0
-    Deploy user:        tidb
-    SSH type:           builtin
-    ID                  Role                 Host           Ports      OS/Arch       Status     Data Dir                              Deploy Dir
-    --                  ----                 ----           -----      -------       ------     --------                              ----------
-    172.16.100.21:9093  alertmanager         172.16.100.21  9093/9094  linux/x86_64  Up         /home/tidb/dm/data/alertmanager-9093  /home/tidb/dm/deploy/alertmanager-9093
-    172.16.100.21:8261  dm-master            172.16.100.21  8261/8291  linux/x86_64  Healthy|L  /home/tidb/dm/data/dm-master-8261     /home/tidb/dm/deploy/dm-master-8261
-    172.16.100.21:8262  dm-worker            172.16.100.21  8262       linux/x86_64  Free       /home/tidb/dm/data/dm-worker-8262     /home/tidb/dm/deploy/dm-worker-8262
-    172.16.100.21:3000  grafana              172.16.100.21  3000       linux/x86_64  Up         -                                     /home/tidb/dm/deploy/grafana-3000
-    172.16.100.21:9090  prometheus           172.16.100.21  9090       linux/x86_64  Up         /home/tidb/dm/data/prometheus-9090    /home/tidb/dm/deploy/prometheus-9090
-    Total nodes: 5
-    ```
+        Cluster type:       dm
+        Cluster name:       dm-test
+        Cluster version:    v5.3.0
+        Deploy user:        tidb
+        SSH type:           builtin
+        ID                  Role                 Host           Ports      OS/Arch       Status     Data Dir                              Deploy Dir
+        --                  ----                 ----           -----      -------       ------     --------                              ----------
+        172.16.100.21:9093  alertmanager         172.16.100.21  9093/9094  linux/x86_64  Up         /home/tidb/dm/data/alertmanager-9093  /home/tidb/dm/deploy/alertmanager-9093
+        172.16.100.21:8261  dm-master            172.16.100.21  8261/8291  linux/x86_64  Healthy|L  /home/tidb/dm/data/dm-master-8261     /home/tidb/dm/deploy/dm-master-8261
+        172.16.100.21:8262  dm-worker            172.16.100.21  8262       linux/x86_64  Free       /home/tidb/dm/data/dm-worker-8262     /home/tidb/dm/deploy/dm-worker-8262
+        172.16.100.21:3000  grafana              172.16.100.21  3000       linux/x86_64  Up         -                                     /home/tidb/dm/deploy/grafana-3000
+        172.16.100.21:9090  prometheus           172.16.100.21  9090       linux/x86_64  Up         /home/tidb/dm/data/prometheus-9090    /home/tidb/dm/deploy/prometheus-9090
+        Total nodes: 5
 
-    Apply the hotfix to the specified node or specified role. If both `-R` and `-N` are specified, the intersection will be taken.
+    指定したノードまたは指定したロールにホットフィックスを適用します。 `-R`と`-N`の両方を指定すると、交差が取得されます。
 
-    ```
-    # Apply hotfix to a specified node.
-    tiup dm patch dm-test dm-master-hotfix-linux-amd64.tar.gz -N 172.16.100.21:8261
-    tiup dm patch dm-test dm-worker-hotfix-linux-amd64.tar.gz -N 172.16.100.21:8262
-    # Apply hotfix to a specified role.
-    tiup dm patch dm-test dm-master-hotfix-linux-amd64.tar.gz -R dm-master
-    tiup dm patch dm-test dm-worker-hotfix-linux-amd64.tar.gz -R dm-worker
-    ```
+        # Apply hotfix to a specified node.
+        tiup dm patch dm-test dm-master-hotfix-linux-amd64.tar.gz -N 172.16.100.21:8261
+        tiup dm patch dm-test dm-worker-hotfix-linux-amd64.tar.gz -N 172.16.100.21:8262
+        # Apply hotfix to a specified role.
+        tiup dm patch dm-test dm-master-hotfix-linux-amd64.tar.gz -R dm-master
+        tiup dm patch dm-test dm-worker-hotfix-linux-amd64.tar.gz -R dm-worker
 
-4. Query the hotfix application result:
+4.  ホットフィックスの適用結果をクエリします。
 
     ```shell
     /home/tidb/dm/deploy/dm-master-8261/bin/dm-master/dm-master -V
     ```
 
-    Output:
+    出力：
 
-    ```
-    Release Version: v5.3.0-20211230
-    Git Commit Hash: ca7070c45013c24d34bd9c1e936071253451d707
-    Git Branch: heads/refs/tags/v5.3.0-20211230
-    UTC Build Time: 2022-01-05 14:19:02
-    Go Version: go version go1.16.4 linux/amd64
-    ```
+        Release Version: v5.3.0-20211230
+        Git Commit Hash: ca7070c45013c24d34bd9c1e936071253451d707
+        Git Branch: heads/refs/tags/v5.3.0-20211230
+        UTC Build Time: 2022-01-05 14:19:02
+        Go Version: go version go1.16.4 linux/amd64
 
-    The cluster information changes accordingly:
+    それに応じてクラスター情報が変更されます。
 
     ```shell
     tiup dm display dm-test
     ```
 
-    Output:
+    出力：
 
-    ```
-    Starting component `dm`: /root/.tiup/components/dm/v1.8.1/tiup-dm display dm-test
-    Cluster type:       dm
-    Cluster name:       dm-test
-    Cluster version:    v5.3.0
-    Deploy user:        tidb
-    SSH type:           builtin
-    ID                  Role                 Host           Ports      OS/Arch       Status     Data Dir                              Deploy Dir
-    --                  ----                 ----           -----      -------       ------     --------                              ----------
-    172.16.100.21:9093  alertmanager         172.16.100.21  9093/9094  linux/x86_64  Up         /home/tidb/dm/data/alertmanager-9093  /home/tidb/dm/deploy/alertmanager-9093
-    172.16.100.21:8261  dm-master (patched)  172.16.100.21  8261/8291  linux/x86_64  Healthy|L  /home/tidb/dm/data/dm-master-8261     /home/tidb/dm/deploy/dm-master-8261
-    172.16.100.21:8262  dm-worker (patched)  172.16.100.21  8262       linux/x86_64  Free       /home/tidb/dm/data/dm-worker-8262     /home/tidb/dm/deploy/dm-worker-8262
-    172.16.100.21:3000  grafana              172.16.100.21  3000       linux/x86_64  Up         -                                     /home/tidb/dm/deploy/grafana-3000
-    172.16.100.21:9090  prometheus           172.16.100.21  9090       linux/x86_64  Up         /home/tidb/dm/data/prometheus-9090    /home/tidb/dm/deploy/prometheus-9090
-    Total nodes: 5
-    ```
+        Starting component `dm`: /root/.tiup/components/dm/v1.8.1/tiup-dm display dm-test
+        Cluster type:       dm
+        Cluster name:       dm-test
+        Cluster version:    v5.3.0
+        Deploy user:        tidb
+        SSH type:           builtin
+        ID                  Role                 Host           Ports      OS/Arch       Status     Data Dir                              Deploy Dir
+        --                  ----                 ----           -----      -------       ------     --------                              ----------
+        172.16.100.21:9093  alertmanager         172.16.100.21  9093/9094  linux/x86_64  Up         /home/tidb/dm/data/alertmanager-9093  /home/tidb/dm/deploy/alertmanager-9093
+        172.16.100.21:8261  dm-master (patched)  172.16.100.21  8261/8291  linux/x86_64  Healthy|L  /home/tidb/dm/data/dm-master-8261     /home/tidb/dm/deploy/dm-master-8261
+        172.16.100.21:8262  dm-worker (patched)  172.16.100.21  8262       linux/x86_64  Free       /home/tidb/dm/data/dm-worker-8262     /home/tidb/dm/deploy/dm-worker-8262
+        172.16.100.21:3000  grafana              172.16.100.21  3000       linux/x86_64  Up         -                                     /home/tidb/dm/deploy/grafana-3000
+        172.16.100.21:9090  prometheus           172.16.100.21  9090       linux/x86_64  Up         /home/tidb/dm/data/prometheus-9090    /home/tidb/dm/deploy/prometheus-9090
+        Total nodes: 5
 
-[<< Back to the previous page - TiUP DM command list](/tiup/tiup-component-dm.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUP DMコマンド一覧](/tiup/tiup-component-dm.md#command-list)

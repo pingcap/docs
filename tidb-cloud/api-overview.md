@@ -3,24 +3,24 @@ title: TiDB Cloud API Overview
 summary: Learn about what is TiDB Cloud API, its features, and how to use API to manage your TiDB Cloud clusters.
 ---
 
-# TiDB Cloud API Overview <span style="color: #fff; background-color: #00bfff; border-radius: 4px; font-size: 0.5em; vertical-align: middle; margin-left: 16px; padding: 0 2px;">Beta</span>
+# TiDB CloudAPI 概要<span style="color: #fff; background-color: #00bfff; border-radius: 4px; font-size: 0.5em; vertical-align: middle; margin-left: 16px; padding: 0 2px;">ベータ版</span> {#tidb-cloud-api-overview-span-style-color-fff-background-color-00bfff-border-radius-4px-font-size-0-5em-vertical-align-middle-margin-left-16px-padding-0-2px-beta-span}
 
-> **Note:**
+> **注記：**
 >
-> [TiDB Cloud API](https://docs.pingcap.com/tidbcloud/api/v1beta) is in beta.
+> [TiDB CloudAPI](https://docs.pingcap.com/tidbcloud/api/v1beta)はベータ版です。
 
-The TiDB Cloud API is a [REST interface](https://en.wikipedia.org/wiki/Representational_state_transfer) that provides you with programmatic access to manage administrative objects within TiDB Cloud. Through this API, you can automatically and efficiently manage resources such as Projects, Clusters, Backups, Restores, and Imports.
+TiDB CloudAPI は、 TiDB Cloud内の管理オブジェクトを管理するためのプログラムによるアクセスを提供する[RESTインターフェース](https://en.wikipedia.org/wiki/Representational_state_transfer)です。この API を通じて、プロジェクト、クラスター、バックアップ、リストア、インポートなどのリソースを自動的かつ効率的に管理できます。
 
-The API has the following features:
+API には次の機能があります。
 
-- **JSON entities.** All entities are expressed in JSON.
-- **HTTPS-only.** You can only access the API via HTTPS, ensuring all the data sent over the network is encrypted with TLS.
-- **Key-based access and digest authentication.** Before you access TiDB Cloud API, you must generate an API key. All requests are authenticated through [HTTP Digest Authentication](https://en.wikipedia.org/wiki/Digest_access_authentication), ensuring the API key is never sent over the network.
+-   **JSON エンティティ。**すべてのエンティティは JSON で表現されます。
+-   **HTTPS のみ。** API には HTTPS 経由でのみアクセスできるため、ネットワーク経由で送信されるすべてのデータは TLS で暗号化されます。
+-   **キーベースのアクセスとダイジェスト認証。** TiDB Cloud API にアクセスする前に、API キーを生成する必要があります。すべてのリクエストは[HTTPダイジェスト認証](https://en.wikipedia.org/wiki/Digest_access_authentication)を通じて認証され、API キーがネットワーク経由で送信されることはありません。
 
-To start using TiDB Cloud API, refer to the following resources in [TiDB Cloud API Documentation](https://docs.pingcap.com/tidbcloud/api/v1beta):
+TiDB Cloud API の使用を開始するには、 [TiDB CloudAPI ドキュメント](https://docs.pingcap.com/tidbcloud/api/v1beta)の次のリソースを参照してください。
 
-- [Get Started](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Get-Started)
-- [Authentication](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication)
-- [Rate Limiting](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Rate-Limiting)
-- [API Full References](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Project)
-- [Changelog](https://docs.pingcap.com/tidbcloud/api/v1beta#section/API-Changelog)
+-   [始めましょう](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Get-Started)
+-   [認証](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication)
+-   [レート制限](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Rate-Limiting)
+-   [API の完全なリファレンス](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Project)
+-   [変更履歴](https://docs.pingcap.com/tidbcloud/api/v1beta#section/API-Changelog)

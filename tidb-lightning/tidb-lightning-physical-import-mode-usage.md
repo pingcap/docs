@@ -3,15 +3,15 @@ title: Use Physical Import Mode
 summary: Learn how to use the physical import mode in TiDB Lightning.
 ---
 
-# Use Physical Import Mode
+# 物理インポートモードを使用する {#use-physical-import-mode}
 
-This document introduces how to use the [physical import mode](/tidb-lightning/tidb-lightning-physical-import-mode.md) in TiDB Lightning, including writing the configuration file, tuning performance, and configuring disk quota.
+このドキュメントでは、構成ファイルの作成、パフォーマンスのチューニング、ディスク クォータの構成など、 TiDB Lightningの[物理インポートモード](/tidb-lightning/tidb-lightning-physical-import-mode.md)の使用方法を紹介します。
 
-There are limitations on the physical import mode. Before using the physical import mode, make sure to read [Limitations](/tidb-lightning/tidb-lightning-physical-import-mode.md#limitations).
+物理インポート モードには制限があります。物理インポートモードを使用する前に、必ず[制限事項](/tidb-lightning/tidb-lightning-physical-import-mode.md#limitations)をお読みください。
 
-## Configure and use the physical import mode
+## 物理インポート モードを構成して使用する {#configure-and-use-the-physical-import-mode}
 
-You can use the following configuration file to execute data import using the physical import mode:
+以下の設定ファイルを使用すると、物理インポートモードでデータインポートを実行できます。
 
 ```toml
 [lightning]
@@ -92,54 +92,54 @@ checksum = "required"
 analyze = "optional"
 ```
 
-For the complete configuration file, refer to [the configuration file and command line parameters](/tidb-lightning/tidb-lightning-configuration.md).
+完全な構成ファイルについては、 [設定ファイルとコマンドラインパラメータ](/tidb-lightning/tidb-lightning-configuration.md)を参照してください。
 
-## Conflict detection
+## 競合の検出 {#conflict-detection}
 
-Conflicting data refers to two or more records with the same primary key or unique key column data. When the data source contains conflicting data and conflict detection feature is not turned on, the actual number of rows in the table is different from the total number of rows returned by the query using unique index.
+競合するデータとは、同じ主キーまたは一意キー列データを持つ 2 つ以上のレコードを指します。データ ソースに競合するデータが含まれており、競合検出機能が有効になっていない場合、テーブル内の実際の行数は、一意のインデックスを使用したクエリによって返される行の合計数と異なります。
 
-There are two versions for conflict detection:
+競合検出には 2 つのバージョンがあります。
 
-- The new version of conflict detection, controlled by the `conflict` configuration item.
-- The old version of conflict detection, controlled by the `tikv-importer.duplicate-resolution` configuration item.
+-   新しいバージョンの競合検出は、 `conflict`構成項目によって制御されます。
+-   古いバージョンの競合検出は、 `tikv-importer.duplicate-resolution`構成項目によって制御されます。
 
-### The new version of conflict detection
+### 新しいバージョンの競合検出 {#the-new-version-of-conflict-detection}
 
-The meaning of configuration values are as follows:
+設定値の意味は次のとおりです。
 
-| Strategy | Default behavior of conflicting data | The corresponding SQL statement |
-| :-- | :-- | :-- |
-| `"replace"` | Replacing existing data with new data. | `REPLACE INTO ...` |
-| `"ignore"` | Keeping existing data and ignoring new data. | `INSERT IGNORE INTO ...` |
-| `"error"` | Pausing the import and reporting an error. | `INSERT INTO ...` |
-| `""` | TiDB Lightning does not detect or handle conflicting data. If data with primary and unique key conflicts exists, the subsequent step reports an error. |  None   |
+| 戦略          | 競合するデータのデフォルトの動作                                                                    | 対応するSQL文                 |
+| :---------- | :---------------------------------------------------------------------------------- | :----------------------- |
+| `"replace"` | 既存のデータを新しいデータに置き換えます。                                                               | `REPLACE INTO ...`       |
+| `"ignore"`  | 既存のデータを保持し、新しいデータを無視します。                                                            | `INSERT IGNORE INTO ...` |
+| `"error"`   | インポートを一時停止し、エラーを報告します。                                                              | `INSERT INTO ...`        |
+| `""`        | TiDB Lightning は、競合するデータを検出したり処理したりしません。主キーと一意キーが競合するデータが存在する場合、後続のステップでエラーが報告されます。 | なし                       |
 
-> **Note:**
+> **注記：**
 >
-> The conflict detection result in the physical import mode might differ from SQL-based import due to internal implementation and limitation of TiDB Lightning.
+> TiDB Lightningの内部実装と制限により、物理インポート モードでの競合検出結果は SQL ベースのインポートとは異なる場合があります。
 
-When the strategy is `"replace"` or `"ignore"`, conflicting data is treated as [conflict errors](/tidb-lightning/tidb-lightning-error-resolution.md#conflict-errors). If the [`conflict.threshold`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task) value is greater than `0`, TiDB Lightning tolerates the specified number of conflict errors. The default value is `9223372036854775807`, which means that almost all errors are tolerant. For more information, see [error resolution](/tidb-lightning/tidb-lightning-error-resolution.md).
+戦略が`"replace"`または`"ignore"`の場合、競合するデータは[競合エラー](/tidb-lightning/tidb-lightning-error-resolution.md#conflict-errors)として扱われます。 [`conflict.threshold`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task)値が`0`より大きい場合、 TiDB Lightning は指定された数の競合エラーを許容します。デフォルト値は`9223372036854775807`で、これはほとんどすべてのエラーが許容されることを意味します。詳細については、 [エラー解決](/tidb-lightning/tidb-lightning-error-resolution.md)参照してください。
 
-The new version of conflict detection has the following limitations:
+新しいバージョンの競合検出には次の制限があります。
 
-- Before importing, TiDB Lightning prechecks potential conflicting data by reading all data and encoding it. During the detection process, TiDB Lightning uses `tikv-importer.sorted-kv-dir` to store temporary files. After the detection is complete, TiDB Lightning retains the results for import phase. This introduces additional overhead for time consumption, disk space usage, and API requests to read the data.
-- The new version of conflict detection only works in a single node, and does not apply to parallel imports and scenarios where the `disk-quota` parameter is enabled.
-- The new version (`conflict`) and old version (`tikv-importer.duplicate-resolution`) conflict detection cannot be used at the same time. The new version of conflict detection is enabled when the configuration [`conflict.strategy`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task) is set.
+-   インポートする前に、 TiDB Lightning はすべてのデータを読み取ってエンコードすることにより、競合する可能性のあるデータを事前チェックします。検出プロセス中、 TiDB Lightning は`tikv-importer.sorted-kv-dir`を使用して一時ファイルを保存します。検出が完了すると、 TiDB Lightning はインポート フェーズの結果を保持します。これにより、時間の消費、ディスク領域の使用量、データを読み取るための API リクエストによる追加のオーバーヘッドが発生します。
+-   新しいバージョンの競合検出は単一ノードでのみ機能し、並行インポートや`disk-quota`パラメーターが有効になっているシナリオには適用されません。
+-   新バージョン( `conflict` )と旧バージョン( `tikv-importer.duplicate-resolution` )の競合検出を同時に使用することはできません。新しいバージョンの競合検出は、構成[`conflict.strategy`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task)設定されている場合に有効になります。
 
-Compared with the old version of conflict detection, the new version takes less time when the imported data contains a large amount of conflicting data. It is recommended that you use the new version of conflict detection in non-parallel import tasks when the data contains conflicting data and there is sufficient local disk space.
+古いバージョンの競合検出と比較して、新しいバージョンでは、インポートされたデータに大量の競合データが含まれている場合にかかる時間が短縮されます。データに競合するデータが含まれており、十分なローカル ディスク領域がある場合は、非並行インポート タスクで新しいバージョンの競合検出を使用することをお勧めします。
 
-### The old version of conflict detection
+### 古いバージョンの競合検出 {#the-old-version-of-conflict-detection}
 
-The old version of conflict detection is enabled when `tikv-importer.duplicate-resolution` is not an empty string. In v7.2.0 and earlier versions, TiDB Lightning only supports this conflict detection method.
+古いバージョンの競合検出は、 `tikv-importer.duplicate-resolution`が空の文字列でない場合に有効になります。 v7.2.0 以前のバージョンでは、 TiDB Lightning はこの競合検出方法のみをサポートしています。
 
-In the old version of conflict detection, TiDB Lightning offers two strategies:
+古いバージョンの競合検出では、 TiDB Lightning は2 つの戦略を提供します。
 
-- `remove` (recommended): records and removes all conflicting records from the target table to ensure a consistent state in the target TiDB.
-- `none`: does not detect duplicate records. `none` has the best performance in the two strategies, but might lead to inconsistent data in the target TiDB.
+-   `remove` (推奨): 競合するレコードをすべて記録し、ターゲット テーブルから削除して、ターゲット TiDB 内の一貫した状態を確保します。
+-   `none` : 重複レコードを検出しません。 `none` 2 つの戦略の中で最高のパフォーマンスを示しますが、ターゲット TiDB でデータの不整合が生じる可能性があります。
 
-Before v5.3, TiDB Lightning does not support conflict detection. If there is conflicting data, the import process fails at the checksum step. When conflict detection is enabled, if there is conflicting data, TiDB Lightning skips the checksum step (because it always fails).
+v5.3 より前のTiDB Lightning は競合検出をサポートしていません。競合するデータがある場合、インポート プロセスはチェックサム ステップで失敗します。競合検出が有効になっている場合、競合するデータがある場合、 TiDB Lightning はチェックサム ステップをスキップします (チェックサム ステップは常に失敗するため)。
 
-Suppose an `order_line` table has the following schema:
+`order_line`テーブルに次のスキーマがあるとします。
 
 ```sql
 CREATE TABLE IF NOT EXISTS `order_line` (
@@ -157,7 +157,7 @@ CREATE TABLE IF NOT EXISTS `order_line` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 ```
 
-If Lightning detects conflicting data during the import, you can query the `lightning_task_info.conflict_error_v1` table as follows:
+Lightning がインポート中に競合するデータを検出した場合は、次のように`lightning_task_info.conflict_error_v1`テーブルをクエリできます。
 
 ```sql
 mysql> select table_name,index_name,key_data,row_data from conflict_error_v1 limit 10;
@@ -178,23 +178,23 @@ mysql> select table_name,index_name,key_data,row_data from conflict_error_v1 lim
 10 rows in set (0.14 sec)
 ```
 
-You can manually identify the records that need to be retained and insert these records into the table.
+保持する必要があるレコードを手動で特定し、これらのレコードをテーブルに挿入できます。
 
-## Scope of pausing scheduling during import
+## インポート中のスケジュール一時停止の範囲 {#scope-of-pausing-scheduling-during-import}
 
-Starting from v6.2.0, TiDB Lightning implements a mechanism to limit the impact of data import on online applications. With the new mechanism, TiDB Lightning does not pause the global scheduling, but only pauses scheduling for the Region that stores the target table data. This significantly reduces the impact of the import on online applications.
+v6.2.0 以降、 TiDB Lightning は、オンライン アプリケーションへのデータ インポートの影響を制限するメカニズムを実装します。新しいメカニズムにより、 TiDB Lightning はグローバル スケジューリングを一時停止せず、ターゲット テーブル データを保存するリージョンのスケジューリングのみを一時停止します。これにより、オンライン アプリケーションに対するインポートの影響が大幅に軽減されます。
 
-Starting from v7.1.0, you can control the scope of pausing scheduling by using the TiDB Lightning parameter [`pause-pd-scheduler-scope`](/tidb-lightning/tidb-lightning-configuration.md). The default value is `"table"`, which means that the scheduling is paused only for the Region that stores the target table data. When there is no business traffic in the cluster, it is recommended to set this parameter to `"global"` to avoid interference from other scheduling during the import.
+v7.1.0 以降、 TiDB Lightningパラメータ[`pause-pd-scheduler-scope`](/tidb-lightning/tidb-lightning-configuration.md)を使用して、スケジュールの一時停止の範囲を制御できます。デフォルト値は`"table"`です。これは、ターゲット テーブル データを保存するリージョンに対してのみスケジュールが一時停止されることを意味します。クラスター内にビジネス トラフィックがない場合は、インポート中の他のスケジュールによる干渉を避けるために、このパラメーターを`"global"`に設定することをお勧めします。
 
 <Note>
 
-TiDB Lightning does not support importing data into a table that already contains data.
+TiDB Lightning は、既にデータが含まれているテーブルへのデータのインポートをサポートしていません。
 
-The TiDB cluster must be v6.1.0 or later versions. For earlier versions, TiDB Lightning keeps the old behavior, which pauses scheduling globally and severely impacts the online application during the import.
+TiDB クラスターは v6.1.0 以降のバージョンである必要があります。以前のバージョンの場合、 TiDB Lightning は古い動作を維持しており、これによりスケジュールがグローバルに一時停止され、インポート中にオンライン アプリケーションに重大な影響が与えられます。
 
 </Note>
 
-By default, TiDB Lightning pauses the cluster scheduling for the minimum range possible. However, under the default configuration, the cluster performance still might be affected by fast import. To avoid this, you can configure the following options to control the import speed and other factors that might impact the cluster performance:
+デフォルトでは、 TiDB Lightning はクラスターのスケジューリングを可能な限り最小限の範囲で一時停止します。ただし、デフォルト構成では、クラスターのパフォーマンスが高速インポートの影響を受ける可能性があります。これを回避するには、次のオプションを構成して、クラスターのパフォーマンスに影響を与える可能性のあるインポート速度やその他の要因を制御できます。
 
 ```toml
 [tikv-importer]
@@ -206,58 +206,56 @@ store-write-bwlimit = "128MiB"
 distsql-scan-concurrency = 3
 ```
 
-## Performance tuning
+## 性能調整 {#performance-tuning}
 
-**The most direct and effective ways to improve import performance of the physical import mode are as follows:**
+**物理インポート モードのインポート パフォーマンスを向上させる最も直接的かつ効果的な方法は次のとおりです。**
 
-- **Upgrade the hardware of the node where Lightning is deployed, especially the CPU and the storage device of `sorted-key-dir`.**
-- **Use the [parallel import](/tidb-lightning/tidb-lightning-distributed-import.md) feature to achieve horizontal scaling.**
+-   **Lightning がデプロイされているノードのハードウェア (特に、 `sorted-key-dir`の CPU とstorageデバイス) をアップグレードします。**
+-   **水平方向のスケーリングを実現するには、<a href="/tidb-lightning/tidb-lightning-distributed-import.md">平行インポート</a>機能を使用します。**
 
-TiDB Lightning provides some concurrency-related configurations to affect import performance in the physical import mode. However, from long-term experience, it is recommended to keep the following four configuration items in the default value. Adjusting the four configuration items does not bring significant performance boost.
+TiDB Lightning は、物理インポート モードでのインポート パフォーマンスに影響を与えるいくつかの同時実行関連の構成を提供します。ただし、長年の経験から、次の 4 つの設定項目はデフォルト値のままにすることをお勧めします。 4 つの構成項目を調整しても、パフォーマンスは大幅に向上しません。
 
-```
-[lightning]
-# The maximum concurrency of engine files.
-# Each table is split into one "index engine" to store indices, and multiple
-# "data engines" to store row data. These settings control the maximum
-# concurrent number for each type of engines.
-# The two settings controls the maximum concurrency of the two engine files.
-index-concurrency = 2
-table-concurrency = 6
+    [lightning]
+    # The maximum concurrency of engine files.
+    # Each table is split into one "index engine" to store indices, and multiple
+    # "data engines" to store row data. These settings control the maximum
+    # concurrent number for each type of engines.
+    # The two settings controls the maximum concurrency of the two engine files.
+    index-concurrency = 2
+    table-concurrency = 6
 
-# The concurrency of data. The default value is the number of logical CPUs.
-region-concurrency =
+    # The concurrency of data. The default value is the number of logical CPUs.
+    region-concurrency =
 
-# The maximum concurrency of I/O. When the concurrency is too high, the disk
-# cache may be frequently refreshed, causing the cache miss and read speed
-# to slow down. For different storage mediums, this parameter may need to be
-# adjusted to achieve the best performance.
-io-concurrency = 5
-```
+    # The maximum concurrency of I/O. When the concurrency is too high, the disk
+    # cache may be frequently refreshed, causing the cache miss and read speed
+    # to slow down. For different storage mediums, this parameter may need to be
+    # adjusted to achieve the best performance.
+    io-concurrency = 5
 
-During the import, each table is split into one "index engine" to store indices, and multiple "data engines" to store row data.
+インポート中、各テーブルはインデックスを格納する 1 つの「インデックス エンジン」と行データを格納する複数の「データ エンジン」に分割されます。
 
-`index-concurrency` controls the maximum concurrency of the index engine. When you adjust `index-concurrency`, make sure that `index-concurrency * the number of source files of each table > region-concurrency` to ensure that the CPU is fully utilized. The ratio is usually between 1.5 ~ 2. Do not set `index-concurrency` too high and not lower than 2 (default). Too high `index-concurrency` causes too many pipelines to be built, which causes the index-engine import stage to pile up.
+`index-concurrency`インデックス エンジンの最大同時実行性を制御します。 `index-concurrency`を調整するときは、CPU が完全に活用されるように`index-concurrency * the number of source files of each table > region-concurrency`を調整してください。通常、比率は 1.5 ～ 2 の間です`index-concurrency`を大きすぎたり、2 (デフォルト) より低く設定したりしないでください。 `index-concurrency`が大きすぎると、構築されるパイプラインが多すぎて、インデックス エンジンのインポート ステージが蓄積されてしまいます。
 
-The same goes for `table-concurrency`. Make sure that `table-concurrency * the number of source files of each table > region-concurrency` to ensure that the CPU is fully utilized. A recommended value is around `region-concurrency * 4 / the number of source files of each table` and not lower than 4.
+`table-concurrency`についても同様です。 CPU が最大限に活用されるようにするには、 `table-concurrency * the number of source files of each table > region-concurrency`を確認してください。推奨値は約`region-concurrency * 4 / the number of source files of each table`であり、4 以上です。
 
-If the table is large, Lightning will split the table into multiple batches of 100 GiB. The concurrency is controlled by `table-concurrency`.
+テーブルが大きい場合、Lightning はテーブルを 100 GiB の複数のバッチに分割します。同時実行性は`table-concurrency`によって制御されます。
 
-`index-concurrency` and `table-concurrency` has little effect on the import speed. You can leave them in the default value.
+`index-concurrency`と`table-concurrency`はインポート速度にほとんど影響しません。デフォルト値のままにすることができます。
 
-`io-concurrency` controls the concurrency of file read. The default value is 5. At any given time, only 5 handles are performing read operations. Because the file read speed is usually not a bottleneck, you can leave this configuration in the default value.
+`io-concurrency`ファイル読み取りの同時実行性を制御します。デフォルト値は 5 です。常に 5 つのハンドルのみが読み取り操作を実行します。通常、ファイルの読み取り速度はボトルネックではないため、この構成はデフォルト値のままにして問題ありません。
 
-After the file data is read, Lightning needs to do some post-processing, such as encoding and sorting the data locally. The concurrency of these operations is controlled by `region-concurrency`. The default value is the number of CPU cores. You can leave this configuration in the default value. It is recommended to deploy Lightning on a separate server from other components. If you must deploy Lightning together with other components, you need to lower the value of `region-concurrency` according to the load.
+ファイルデータが読み取られた後、Lightning はローカルでのデータのエンコードや並べ替えなどの後処理を行う必要があります。これらの操作の同時実行性は`region-concurrency`によって制御されます。デフォルト値は CPU コアの数です。この設定はデフォルト値のままにすることができます。 Lightning を他のコンポーネントとは別のサーバーにデプロイすることをお勧めします。 Lightning を他のコンポーネントと一緒にデプロイする必要がある場合は、負荷に応じて`region-concurrency`の値を下げる必要があります。
 
-The [`num-threads`](/tikv-configuration-file.md#num-threads) configuration of TiKV can also affect the performance. For new clusters, it is recommended to set `num-threads` to the number of CPU cores.
+TiKV の[`num-threads`](/tikv-configuration-file.md#num-threads)構成もパフォーマンスに影響を与える可能性があります。新しいクラスターの場合は、CPU コアの数を`num-threads`に設定することをお勧めします。
 
-## Configure disk quota <span class="version-mark">New in v6.2.0</span>
+## ディスク クォータの構成<span class="version-mark">v6.2.0 の新機能</span> {#configure-disk-quota-span-class-version-mark-new-in-v6-2-0-span}
 
-When you import data in the physical import mode, TiDB Lightning creates a large number of temporary files on the local disk to encode, sort, and split the original data. When the local disk space is insufficient, TiDB Lightning reports an error and exits because of write failure.
+物理インポート モードでデータをインポートすると、 TiDB Lightning はローカル ディスク上に多数の一時ファイルを作成し、元のデータをエンコード、並べ替え、分割します。ローカル ディスク容量が不十分な場合、 TiDB Lightning はエラーを報告し、書き込み失敗のために終了します。
 
-To avoid this situation, you can configure disk quota for TiDB Lightning. When the size of the temporary files exceeds the disk quota, TiDB Lightning pauses the process of reading the source data and writing temporary files. TiDB Lightning prioritizes writing the sorted key-value pairs to TiKV. After deleting the local temporary files, TiDB Lightning continues the import process.
+この状況を回避するには、 TiDB Lightningのディスク クォータを構成します。一時ファイルのサイズがディスク クォータを超えると、 TiDB Lightning はソース データの読み取りと一時ファイルの書き込みプロセスを一時停止します。 TiDB Lightning は、ソートされたキーと値のペアを TiKV に優先的に書き込みます。ローカル一時ファイルを削除した後、 TiDB Lightning はインポート プロセスを続行します。
 
-To enable disk quota, add the following configuration to your configuration file:
+ディスク クォータを有効にするには、次の構成を構成ファイルに追加します。
 
 ```toml
 [tikv-importer]
@@ -270,6 +268,6 @@ backend = "local"
 check-disk-quota = "30s"
 ```
 
-`disk-quota` limits the storage space used by TiDB Lightning. The default value is MaxInt64, which is 9223372036854775807 bytes. This value is much larger than the disk space you might need for the import, so leaving it as the default value is equivalent to not setting the disk quota.
+`disk-quota` TiDB Lightningによって使用されるstorageスペースを制限します。デフォルト値は MaxInt64、つまり 9223372036854775807 バイトです。この値は、インポートに必要なディスク容量よりもはるかに大きいため、デフォルト値のままにすることは、ディスク クォータを設定しないことと同じです。
 
-`check-disk-quota` is the interval of checking disk quota. The default value is 60 seconds. When TiDB Lightning checks the disk quota, it acquires an exclusive lock for the relevant data, which blocks all the import threads. Therefore, if TiDB Lightning checks the disk quota before every write, it significantly slows down the write efficiency (as slow as a single-thread write). To achieve efficient write, disk quota is not checked before every write; instead, TiDB Lightning pauses all the import threads and checks the disk quota every `check-disk-quota` interval. That is, if the value of `check-disk-quota` is set to a large value, the disk space used by TiDB Lightning might exceed the disk quota you set, which leaves the disk quota ineffective. Therefore, it is recommended to set the value of `check-disk-quota` to a small value. The specific value of this item is determined by the environment in which TiDB Lightning is running. In different environments, TiDB Lightning writes temporary files at different speeds. Theoretically, the faster the speed, the smaller the value of `check-disk-quota` should be.
+`check-disk-quota`はディスク クォータをチェックする間隔です。デフォルト値は 60 秒です。 TiDB Lightning はディスク クォータをチェックするときに、関連するデータの排他ロックを取得し、すべてのインポート スレッドをブロックします。したがって、 TiDB Lightning が書き込みのたびにディスク クォータをチェックすると、書き込み効率が大幅に低下します (シングル スレッド書き込みと同じくらい遅くなります)。効率的な書き込みを実現するために、毎回の書き込み前にディスク クォータはチェックされません。代わりに、 TiDB Lightning はすべてのインポート スレッドを一時停止し、 `check-disk-quota`間隔ごとにディスク クォータをチェックします。つまり、値`check-disk-quota`が大きな値に設定されている場合、 TiDB Lightningによって使用されるディスク容量が設定したディスク クォータを超える可能性があり、その結果、ディスク クォータが無効になります。したがって、 `check-disk-quota`の値を小さい値に設定することをお勧めします。この項目の具体的な値は、 TiDB Lightningが実行されている環境によって決まります。異なる環境では、 TiDB Lightning は異なる速度で一時ファイルを書き込みます。理論的には、速度が速いほど、 `check-disk-quota`の値は小さくする必要があります。

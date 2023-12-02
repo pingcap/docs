@@ -3,47 +3,43 @@ title: Use PLAN REPLAYER to Save and Restore the On-Site Information of a Cluste
 summary: Learn how to use PLAN REPLAYER to save and restore the on-site information of a cluster.
 ---
 
-# Use PLAN REPLAYER to Save and Restore the On-Site Information of a Cluster
+# PLAN REPLAYER を使用してクラスタのオンサイト情報を保存および復元する {#use-plan-replayer-to-save-and-restore-the-on-site-information-of-a-cluster}
 
-When you locate and troubleshoot the issues of a TiDB cluster, you often need to provide information on the system and the execution plan. To help you get the information and troubleshoot cluster issues in a more convenient and efficient way, the `PLAN REPLAYER` command is introduced in TiDB v5.3.0. This command enables you to easily save and restore the on-site information of a cluster, improves the efficiency of troubleshooting, and helps you more easily archive the issue for management.
+TiDB クラスターの問題を特定してトラブルシューティングする場合、多くの場合、システムと実行計画に関する情報を提供する必要があります。より便利かつ効率的な方法で情報を取得し、クラスターの問題をトラブルシューティングできるように、TiDB v5.3.0 では`PLAN REPLAYER`コマンドが導入されました。このコマンドを使用すると、クラスターのオンサイト情報を簡単に保存および復元できるようになり、トラブルシューティングの効率が向上し、管理のために問題をより簡単にアーカイブできるようになります。
 
-The features of `PLAN REPLAYER` are as follows:
+`PLAN REPLAYER`の特徴は以下の通りです。
 
-- Exports the information of a TiDB cluster at an on-site troubleshooting to a ZIP-formatted file for storage.
-- Imports into a cluster the ZIP-formatted file exported from another TiDB cluster. This file contains the information of the latter TiDB cluster at an on-site troubleshooting.
+-   オンサイトのトラブルシューティングで TiDB クラスターの情報を ZIP 形式のファイルにエクスポートしてstorage。
+-   別の TiDB クラスターからエクスポートされた ZIP 形式のファイルをクラスターにインポートします。このファイルには、オンサイトのトラブルシューティングにおける後者の TiDB クラスターの情報が含まれています。
 
-## Use `PLAN REPLAYER` to export cluster information
+## <code>PLAN REPLAYER</code>使用してクラスター情報をエクスポートする {#use-code-plan-replayer-code-to-export-cluster-information}
 
-You can use `PLAN REPLAYER` to save the on-site information of a TiDB cluster. The export interface is as follows:
-
-{{< copyable "sql" >}}
+`PLAN REPLAYER`を使用すると、TiDB クラスターのオンサイト情報を保存できます。エクスポートインターフェイスは次のとおりです。
 
 ```sql
 PLAN REPLAYER DUMP EXPLAIN [ANALYZE] [WITH STATS AS OF TIMESTAMP expression] sql-statement;
 ```
 
-Based on `sql-statement`, TiDB sorts out and exports the following on-site information:
+TiDB は`sql-statement`に基づいて、次のオンサイト情報を整理してエクスポートします。
 
-- TiDB version
-- TiDB configuration
-- TiDB session variables
-- TiDB SQL bindings
-- The table schema in `sql-statement`
-- The statistics of the table in `sql-statement`
-- The result of `EXPLAIN [ANALYZE] sql-statement`
-- Some internal procudures of query optimization
+-   TiDBのバージョン
+-   TiDB 構成
+-   TiDB セッション変数
+-   TiDB SQLバインディング
+-   `sql-statement`のテーブル スキーマ
+-   `sql-statement`のテーブルの統計
+-   `EXPLAIN [ANALYZE] sql-statement`の結果
+-   クエリ最適化のいくつかの内部手順
 
-If historical statistics are [enabled](/system-variables.md#tidb_enable_historical_stats), you can specify a time in the `PLAN REPLAYER` statement to get the historical statistics for the corresponding time. You can directly specify a time and date or specify a timestamp. TiDB looks for the historical statistics before the specified time and exports the latest one among them.
+履歴統計が[有効化](/system-variables.md#tidb_enable_historical_stats)の場合、 `PLAN REPLAYER`ステートメントで時間を指定して、対応する時間の履歴統計を取得できます。日時を直接指定することも、タイムスタンプを指定することもできます。 TiDB は、指定された時刻より前の履歴統計を検索し、その中の最新の統計をエクスポートします。
 
-If there are no historical statistics before the specified time, TiDB exports the latest statistics, which is consistent with the behavior when no time is specified. In addition, TiDB prints the error messages in the `errors.txt` file within the exported `ZIP` file.
+指定された時刻より前の履歴統計がない場合、TiDB は最新の統計をエクスポートします。これは、時刻が指定されていない場合の動作と一致します。さらに、TiDB は、エクスポートされた`ZIP`ファイル内の`errors.txt`ファイルにエラー メッセージを出力。
 
-> **Note:**
+> **注記：**
 >
-> `PLAN REPLAYER` **DOES NOT** export any table data.
+> `PLAN REPLAYER`はテーブルデータをエクスポート**しません**。
 
-### Examples of exporting cluster information
-
-{{< copyable "sql" >}}
+### クラスタ情報のエクスポート例 {#examples-of-exporting-cluster-information}
 
 ```sql
 use test;
@@ -56,11 +52,11 @@ plan replayer dump with stats as of timestamp '2023-07-17 12:00:00' explain sele
 plan replayer dump with stats as of timestamp '442012134592479233' explain select * from t;
 ```
 
-`PLAN REPLAYER DUMP` packages the table information above into a `ZIP` file and returns the file identifier as the execution result.
+`PLAN REPLAYER DUMP` 、上記のテーブル情報を`ZIP`ファイルにパッケージ化し、実行結果としてファイル識別子を返します。
 
-> **Note:**
+> **注記：**
 >
-> The `ZIP` file is stored in a TiDB cluster for at most one hour. After one hour, TiDB will delete it.
+> `ZIP`ファイルは TiDB クラスターに最大 1 時間保存されます。 1 時間後、TiDB はそれを削除します。
 
 ```sql
 MySQL [test]> plan replayer dump explain select * from t;
@@ -75,7 +71,7 @@ MySQL [test]> plan replayer dump explain select * from t;
 1 row in set (0.015 sec)
 ```
 
-Alternatively, you can use the session variable [`tidb_last_plan_replayer_token`](/system-variables.md#tidb_last_plan_replayer_token-new-in-v630) to obtain the result of the last `PLAN REPLAYER DUMP` execution.
+あるいは、セッション変数[`tidb_last_plan_replayer_token`](/system-variables.md#tidb_last_plan_replayer_token-new-in-v630)を使用して、最後の`PLAN REPLAYER DUMP`回の実行結果を取得することもできます。
 
 ```sql
 SELECT @@tidb_last_plan_replayer_token;
@@ -90,7 +86,7 @@ SELECT @@tidb_last_plan_replayer_token;
 1 row in set (0.00 sec)
 ```
 
-When there are multiple SQL statements, you can obtain the result of the `PLAN REPLAYER DUMP` execution using a file. The results of multiple SQL statements are separated by `;` in this file.
+SQL文が複数ある場合、 `PLAN REPLAYER DUMP`の実行結果をファイルで取得できます。このファイルでは、複数の SQL ステートメントの結果が`;`で区切られています。
 
 ```sql
 plan replayer dump explain 'sqls.txt';
@@ -113,47 +109,39 @@ SELECT @@tidb_last_plan_replayer_token;
 1 row in set (0.00 sec)
 ```
 
-Because the file cannot be downloaded on MySQL Client, you need to use the TiDB HTTP interface and the file identifier to download the file:
-
-{{< copyable "shell-regular" >}}
+ファイルは MySQL クライアントではダウンロードできないため、ファイルをダウンロードするには TiDB HTTP インターフェイスとファイル識別子を使用する必要があります。
 
 ```shell
 http://${tidb-server-ip}:${tidb-server-status-port}/plan_replayer/dump/${file_token}
 ```
 
-`${tidb-server-ip}:${tidb-server-status-port}` is the address of any TiDB server in the cluster. For example:
-
-{{< copyable "shell-regular" >}}
+`${tidb-server-ip}:${tidb-server-status-port}`は、クラスター内の任意の TiDBサーバーのアドレスです。例えば：
 
 ```shell
 curl http://127.0.0.1:10080/plan_replayer/dump/replayer_JOGvpu4t7dssySqJfTtS4A==_1635750890568691080.zip > plan_replayer.zip
 ```
 
-## Use `PLAN REPLAYER` to import cluster information
+## <code>PLAN REPLAYER</code>使用してクラスター情報をインポートする {#use-code-plan-replayer-code-to-import-cluster-information}
 
-> **Warning:**
+> **警告：**
 >
-> When you import the on-site information of a TiDB cluster to another cluster, the TiDB session variables, SQL bindings, table schemas and statistics of the latter cluster are modified.
+> TiDB クラスターのオンサイト情報を別のクラスターにインポートすると、後者のクラスターの TiDB セッション変数、SQL バインディング、テーブル スキーマ、および統計が変更されます。
 
-With an existing `ZIP` file exported using `PLAN REPLAYER`, you can use the `PLAN REPLAYER` import interface to restore the on-site information of a cluster to any other TiDB cluster. The syntax is as follows:
-
-{{< copyable "sql" >}}
+`PLAN REPLAYER`を使用してエクスポートされた既存の`ZIP`ファイルでは、 `PLAN REPLAYER`インポート インターフェイスを使用して、クラスターのオンサイト情報を他の TiDB クラスターに復元できます。構文は次のとおりです。
 
 ```sql
 PLAN REPLAYER LOAD 'file_name';
 ```
 
-In the statement above, `file_name` is the name of the `ZIP` file to be exported.
+上記のステートメントでは、 `file_name`はエクスポートされる`ZIP`ファイルの名前です。
 
-For example:
-
-{{< copyable "sql" >}}
+例えば：
 
 ```sql
 PLAN REPLAYER LOAD 'plan_replayer.zip';
 ```
 
-After the cluster information is imported, the TiDB cluster is loaded with the required table schema, statistics and other information that affects the construction of the execution plan. You can view the execution plan and verify statistics in the following way:
+クラスター情報がインポートされると、必要なテーブル スキーマ、統計、および実行計画の構築に影響を与えるその他の情報が TiDB クラスターにロードされます。次の方法で実行計画を表示し、統計を確認できます。
 
 ```sql
 mysql> desc t;
@@ -184,41 +172,41 @@ mysql> show stats_meta;
 1 row in set (0.04 sec)
 ```
 
-After the scene is loaded and restored, you can diagnose and improve the execution plan for the cluster.
+シーンがロードされて復元された後、クラスターの実行計画を診断して改善できます。
 
-## Use `PLAN REPLAYER CAPTURE` to capture target plans
+## <code>PLAN REPLAYER CAPTURE</code>使用してターゲット プランをキャプチャする {#use-code-plan-replayer-capture-code-to-capture-target-plans}
 
-When you locate the execution plan of TiDB in some scenarios, the target SQL statement and the target execution plan might only appear occasionally in the query, so you cannot directly capture the statement and the plan using `PLAN REPLAYER`. In such cases, you can use `PLAN REPLAYER CAPTURE` to help you capture the optimizer information of the target SQL statement and the target plan.
+一部のシナリオで TiDB の実行プランを見つける場合、ターゲット SQL ステートメントとターゲット実行プランはクエリにたまにしか表示されないため、 `PLAN REPLAYER`使用してステートメントとプランを直接キャプチャすることはできません。このような場合、 `PLAN REPLAYER CAPTURE`を使用すると、ターゲット SQL ステートメントとターゲット プランのオプティマイザー情報を取得しやすくなります。
 
-`PLAN REPLAYER CAPTURE` has the following main features:
+`PLAN REPLAYER CAPTURE`には次の主な機能があります。
 
-- Registers the target SQL statement and the digest of the target execution plan in the TiDB cluster in advance, and starts matching the target query.
-- When the target query is matched successfully, directly captures its optimizer-related information and exports it as a ZIP file.
-- For each matched SQL and execution plan, the information is only captured once.
-- Displays the ongoing matching tasks and generated files through the system table.
-- Periodically cleans up historical files.
+-   対象のSQL文と対象の実行プランのダイジェストを事前にTiDBクラスターに登録し、対象のクエリとのマッチングを開始します。
+-   ターゲット クエリが正常に一致すると、オプティマイザ関連の情報を直接取得し、ZIP ファイルとしてエクスポートします。
+-   一致した SQL および実行プランごとに、情報は 1 回だけ取得されます。
+-   システム テーブルを通じて、進行中の一致タスクと生成されたファイルを表示します。
+-   履歴ファイルを定期的にクリーンアップします。
 
-### Enable `PLAN REPLAYER CAPTURE`
+### <code>PLAN REPLAYER CAPTURE</code>を有効にする {#enable-code-plan-replayer-capture-code}
 
-`PLAN REPLAYER CAPTURE` is controlled by the system variable [`tidb_enable_plan_replayer_capture`](/system-variables.md#tidb_enable_plan_replayer_capture). To enable `PLAN REPLAYER CAPTURE`, set the value of the system variable to `ON`.
+`PLAN REPLAYER CAPTURE`はシステム変数[`tidb_enable_plan_replayer_capture`](/system-variables.md#tidb_enable_plan_replayer_capture)によって制御されます。 `PLAN REPLAYER CAPTURE`を有効にするには、システム変数の値を`ON`に設定します。
 
-### Use `PLAN REPLAYER CAPTURE`
+### <code>PLAN REPLAYER CAPTURE</code>を使用する {#use-code-plan-replayer-capture-code}
 
-You can register the digest of the target SQL statement and execution plan in the TiDB cluster using the following statement:
+次のステートメントを使用して、ターゲット SQL ステートメントのダイジェストと実行プランを TiDB クラスターに登録できます。
 
 ```sql
 PLAN REPLAYER CAPTURE 'sql_digest' 'plan_digest';
 ```
 
-If the target SQL statement has multiple execution plans and you want to capture all execution plans, you can register all the execution plans at once using the following statement:
+ターゲット SQL ステートメントに複数の実行プランがあり、すべての実行プランをキャプチャしたい場合は、次のステートメントを使用してすべての実行プランを一度に登録できます。
 
 ```sql
 PLAN REPLAYER CAPTURE 'sql_digest' '*';
 ```
 
-### View the capture tasks
+### キャプチャタスクをビュー {#view-the-capture-tasks}
 
-You can view the ongoing capture tasks of `PLAN REPLAYER CAPTURE` in the TiDB cluster using the following statement:
+次のステートメントを使用して、TiDB クラスター内の`PLAN REPLAYER CAPTURE`進行中のキャプチャ タスクを表示できます。
 
 ```sql
 mysql> PLAN PLAYER CAPTURE 'example_sql' 'example_plan';
@@ -233,9 +221,9 @@ mysql> SELECT * FROM mysql.plan_replayer_task;
 1 row in set (0.01 sec)
 ```
 
-### View the capture results
+### キャプチャ結果をビュー {#view-the-capture-results}
 
-After `PLAN REPLAYER CAPTURE` successfully captures the result, you can view the token used for file download using the following SQL statement:
+`PLAN REPLAYER CAPTURE`が結果を正常に取得したら、次の SQL ステートメントを使用して、ファイルのダウンロードに使用されたトークンを表示できます。
 
 ```sql
 mysql> SELECT * FROM mysql.plan_replayer_status;
@@ -249,20 +237,20 @@ mysql> SELECT * FROM mysql.plan_replayer_status;
 3 rows in set (0.00 sec)
 ```
 
-The method of downloading the file of `PLAN REPLAYER CAPTURE` is the same as that of `PLAN REPLAYER`. For details, see [Examples of exporting cluster information](#examples-of-exporting-cluster-information).
+`PLAN REPLAYER CAPTURE`のファイルのダウンロード方法は`PLAN REPLAYER`と同様です。詳細は[クラスタ情報のエクスポート例](#examples-of-exporting-cluster-information)を参照してください。
 
-> **Note:**
+> **注記：**
 >
-> The result file of `PLAN REPLAYER CAPTURE` is kept in the TiDB cluster for up to one week. After one week, TiDB deletes the file.
+> `PLAN REPLAYER CAPTURE`の結果ファイルは、TiDB クラスターに最大 1 週間保持されます。 1 週間後、TiDB はファイルを削除します。
 
-## Use `PLAN REPLAYER CONTINUOUS CAPTURE`
+## <code>PLAN REPLAYER CONTINUOUS CAPTURE</code>を使用する {#use-code-plan-replayer-continuous-capture-code}
 
-After `PLAN REPLAYER CONTINUOUS CAPTURE` is enabled, TiDB asynchronously records the applications' SQL statements with the `PLAN REPLAYER` method according to their `SQL DIGEST` and `PLAN DIGEST`. For SQL statements and execution plans that share the same DIGEST, `PLAN REPLAYER CONTINUOUS CAPTURE` does not record them repeatedly.
+`PLAN REPLAYER CONTINUOUS CAPTURE`を有効にすると、TiDB は`SQL DIGEST`と`PLAN DIGEST`に従って`PLAN REPLAYER`メソッドを使用してアプリケーションの SQL ステートメントを非同期的に記録します。同じ DIGEST を共有する SQL ステートメントと実行プランの場合、 `PLAN REPLAYER CONTINUOUS CAPTURE`それらを繰り返し記録しません。
 
-### Enable `PLAN REPLAYER CONTINUOUS CAPTURE`
+### <code>PLAN REPLAYER CONTINUOUS CAPTURE</code>を有効にする {#enable-code-plan-replayer-continuous-capture-code}
 
-`PLAN REPLAYER CONTINUOUS CAPTURE` is controlled by the system variable [`tidb_enable_plan_replayer_continuous_capture`](/system-variables.md#tidb_enable_plan_replayer_continuous_capture-new-in-v700). To enable `PLAN REPLAYER CONTINUOUS CAPTURE`, set the value of the system variable to `ON`.
+`PLAN REPLAYER CONTINUOUS CAPTURE`はシステム変数[`tidb_enable_plan_replayer_continuous_capture`](/system-variables.md#tidb_enable_plan_replayer_continuous_capture-new-in-v700)によって制御されます。 `PLAN REPLAYER CONTINUOUS CAPTURE`を有効にするには、システム変数の値を`ON`に設定します。
 
-### View the capture results
+### キャプチャ結果をビュー {#view-the-capture-results}
 
-The method of viewing the capture results of `PLAN REPLAYER CONTINUOUS CAPTURE` is the same as that of [Viewing the capture results of `PLAN REPLAYER CAPTURE`](#view-the-capture-results).
+`PLAN REPLAYER CONTINUOUS CAPTURE`の攻略結果の見方は[`PLAN REPLAYER CAPTURE`のキャプチャ結果の確認](#view-the-capture-results)と同様です。

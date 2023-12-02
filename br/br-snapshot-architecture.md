@@ -3,156 +3,152 @@ title: TiDB Snapshot Backup and Restore Architecture
 summary: Learn about the architecture of TiDB snapshot backup and restore.
 ---
 
-# TiDB Snapshot Backup and Restore Architecture
+# TiDB スナップショットのバックアップおよび復元のアーキテクチャ {#tidb-snapshot-backup-and-restore-architecture}
 
-This document introduces the architecture and process of TiDB snapshot backup and restore using a Backup & Restore (BR) tool as an example.
+このドキュメントでは、例としてバックアップ &amp; リストア ( BR ) ツールを使用した TiDB スナップショットのバックアップとリストアのアーキテクチャとプロセスを紹介します。
 
-## Architecture
+## アーキテクチャ {#architecture}
 
-The TiDB snapshot backup and restore architecture is as follows:
+TiDB スナップショットのバックアップと復元のアーキテクチャは次のとおりです。
 
 ![BR snapshot backup and restore architecture](/media/br/br-snapshot-arch.png)
 
-## Process of backup
+## バックアップのプロセス {#process-of-backup}
 
-The process of a cluster snapshot backup is as follows:
+クラスターのスナップショット バックアップのプロセスは次のとおりです。
 
 ![snapshot backup process design](/media/br/br-snapshot-backup-ts.png)
 
-The complete backup process is as follows:
+完全なバックアップ プロセスは次のとおりです。
 
-1. BR receives the `br backup full` command.
+1.  BRは`br backup full`コマンドを受信します。
 
-    * Gets the backup time point and storage path.
+    -   バックアップの時点とstorageのパスを取得します。
 
-2. BR schedules the backup data.
+2.  BR はデータのバックアップをスケジュールします。
 
-    * **Pause GC**: BR configures the TiDB GC time to prevent the backup data from being cleaned up by [TiDB GC mechanism](/garbage-collection-overview.md).
-    * **Fetch TiKV and Region info**: BR accesses PD to get all TiKV nodes addresses and [Region](/tidb-storage.md#region) distribution of data.
-    * **Request TiKV to back up data**: BR creates a backup request and sends it to all TiKV nodes. The backup request includes the backup time point, Regions to be backed up, and the storage path.
+    -   **GC の一時停止**: BR は、バックアップ データが[TiDB GC メカニズム](/garbage-collection-overview.md)によってクリーンアップされないように TiDB GC 時間を設定します。
+    -   **TiKV およびリージョン情報の取得**: BR はPD にアクセスして、すべての TiKV ノードのアドレスとデータの[リージョン](/tidb-storage.md#region)を取得します。
+    -   **TiKV にデータのバックアップを要求する**: BR はバックアップ要求を作成し、それをすべての TiKV ノードに送信します。バックアップ要求には、バックアップ時点、バックアップ対象のリージョン、およびstorageパスが含まれます。
 
-3. TiKV accepts the backup request and initiates a backup worker.
+3.  TiKV はバックアップ要求を受け入れ、バックアップ ワーカーを開始します。
 
-4. TiKV backs up the data.
+4.  TiKV はデータをバックアップします。
 
-    * **Scan KVs**: the backup worker reads data corresponding to the backup time point from the Region where the leader locates.
-    * **Generate SST**: the backup worker saves the data to SST files, which are stored in the memory.
-    * **Upload SST**: the backup worker uploads the SST files to the storage path.
+    -   **KV のスキャン**: バックアップ ワーカーは、リーダーが配置されているリージョンからバックアップ時点に対応するデータを読み取ります。
+    -   **SST の生成**: バックアップ ワーカーはデータを SST ファイルに保存し、メモリに保存します。
+    -   **SST のアップロード**: バックアップ ワーカーは、SST ファイルをstorageパスにアップロードします。
 
-5. BR receives the backup result from each TiKV node.
+5.  BR は各 TiKV ノードからバックアップ結果を受信します。
 
-    * If some data fails to be backed up due to Region changes, for example, a TiKV node is down, BR will retry the backup.
-    * If there is any data fails to be backed up and cannot be retried, the backup task fails.
-    * After all data is backed up, BR will then back up the metadata.
+    -   TiKV ノードがダウンしているなど、リージョンの変更により一部のデータのバックアップに失敗した場合、 BR はバックアップを再試行します。
+    -   バックアップに失敗し、再試行できないデータがある場合、バックアップ タスクは失敗します。
+    -   すべてのデータがバックアップされた後、 BR はメタデータをバックアップします。
 
-6. BR backs up the metadata.
+6.  BR はメタデータをバックアップします。
 
-    * **Back up schemas**: BR backs up the table schemas and calculates the checksum of the table data.
-    * **Upload metadata**: BR generates the backup metadata and uploads it to the storage path. The backup metadata includes the backup timestamp, the table and corresponding backup files, data checksum, and file checksum.
+    -   **スキーマのバックアップ**: BR はテーブル スキーマをバックアップし、テーブル データのチェックサムを計算します。
+    -   **メタデータのアップロード**: BR はバックアップ メタデータを生成し、storageパスにアップロードします。バックアップ メタデータには、バックアップ タイムスタンプ、テーブルと対応するバックアップ ファイル、データ チェックサム、ファイル チェックサムが含まれます。
 
-## Process of restore
+## 復元のプロセス {#process-of-restore}
 
-The process of a cluster snapshot restore is as follows:
+クラスターのスナップショット復元のプロセスは次のとおりです。
 
 ![snapshot restore process design](/media/br/br-snapshot-restore-ts.png)
 
-The complete restore process is as follows:
+完全な復元プロセスは次のとおりです。
 
-1. BR receives the `br restore` command.
+1.  BRは`br restore`コマンドを受信します。
 
-    * Gets the data storage path and the database or table to be restored.
-    * Checks whether the table to be restored exists and whether it meets the requirements for restore.
+    -   データstorageパスと復元するデータベースまたはテーブルを取得します。
+    -   リストア対象のテーブルが存在するか、リストアの要件を満たしているかを確認します。
 
-2. BR schedules the restore data.
+2.  BR はデータの復元をスケジュールします。
 
-    * **Pause Region schedule**: BR requests PD to pause the automatic Region scheduling during restore.
-    * **Restore schema**: BR gets the schema of the backup data and the database and table to be restored. Note that the ID of a newly created table might be different from that of the backup data.
-    * **Split & scatter Region**: BR requests PD to allocate Regions (split Region) based on backup data, and schedules Regions to be evenly distributed to storage nodes (scatter Region). Each Region has a specified data range `[start key, end key)`.
-    * **Request TiKV to restore data**: BR creates a restore request and sends it to the corresponding TiKV nodes according to the result of Region split. The restore request includes the data to be restored and rewrite rules.
+    -   **リージョンスケジュールの一時停止**: BR は、復元中に自動リージョンスケジュールを一時停止するように PD に要求します。
+    -   **スキーマの復元**: BR は、バックアップ データと復元するデータベースおよびテーブルのスキーマを取得します。新規に作成したテーブルのIDはバックアップデータのIDと異なる場合があるので注意してください。
+    -   **分割および分散リージョン**: BR は、バックアップ データに基づいて領域を割り当てるように PD に要求し (分割リージョン)、領域がstorageノードに均等に分散されるようにスケジュールします (分散リージョン)。各リージョンには指定されたデータ範囲があります`[start key, end key)` 。
+    -   **TiKV にデータの復元を要求する**: BR は復元要求を作成し、リージョン分割の結果に従って対応する TiKV ノードに送信します。復元リクエストには、復元するデータと書き換えルールが含まれます。
 
-3. TiKV accepts the restore request and initiates a restore worker.
+3.  TiKV は復元リクエストを受け入れ、復元ワーカーを開始します。
 
-    * The restore worker calculates the backup data that needs to be read to restore.
+    -   リストア ワーカーは、リストアするために読み取る必要があるバックアップ データを計算します。
 
-4. TiKV restores the data.
+4.  TiKV がデータを復元します。
 
-    * **Download SST**: the restore worker downloads corresponding SST files from the storage path to a local directory.
-    * **Rewrite KVs**: the restore worker rewrites the KV data according to the new table ID, that is, replace the original table ID in the [Key-Value](/tidb-computing.md#mapping-table-data-to-key-value) with the new table ID. The restore worker also rewrites the index ID in the same way.
-    * **Ingest SST**: the restore worker ingests the processed SST files into RocksDB.
-    * **Report restore result**: the restore worker reports the restore result to BR.
+    -   **SST のダウンロード**: リストア ワーカーは、対応する SST ファイルをstorageパスからローカル ディレクトリにダウンロードします。
+    -   **KV の書き換え**: 復元ワーカーは、新しいテーブル ID に従って KV データを書き換えます。つまり、 [キーと値](/tidb-computing.md#mapping-table-data-to-key-value)の元のテーブル ID を新しいテーブル ID に置き換えます。復元ワーカーも同様にインデックス ID を書き換えます。
+    -   **SSTの取り込み**: リストア ワーカーは、処理された SST ファイルを RocksDB に取り込みます。
+    -   **復元結果の報告**: 復元ワーカーは復元結果をBRに報告します。
 
-5. BR receives the restore result from each TiKV node.
+5.  BR は各 TiKV ノードからリストア結果を受け取ります。
 
-    * If some data fails to be restored due to `RegionNotFound` or `EpochNotMatch`, for example, a TiKV node is down, BR will retry the restore.
-    * If there is any data fails to be restored and cannot be retried, the restore task fails.
-    * After all data is restored, the restore task succeeds.
+    -   TiKV ノードがダウンしているなど、 `RegionNotFound`または`EpochNotMatch`原因で一部のデータの復元に失敗した場合、 BR は復元を再試行します。
+    -   復元に失敗し、再試行できないデータがある場合、復元タスクは失敗します。
+    -   すべてのデータが復元されると、復元タスクは成功します。
 
-## Backup files
+## バックアップファイル {#backup-files}
 
-### Types of backup files
+### バックアップファイルの種類 {#types-of-backup-files}
 
-Snapshot backup generates the following types of files:
+スナップショット バックアップでは、次の種類のファイルが生成されます。
 
-- `SST` file: stores the data that the TiKV node backs up. The size of an `SST` file equals to that of a Region.
-- `backupmeta` file: stores the metadata of a backup task, including the number of all backup files, and the key range, the size, and the Hash (sha256) value of each backup file.
-- `backup.lock` file: prevents multiple backup tasks from storing data at the same directory.
+-   `SST`ファイル: TiKV ノードがバックアップするデータを保存します。 `SST`ファイルのサイズは、リージョンのサイズと同じです。
+-   `backupmeta`ファイル: すべてのバックアップ ファイルの数、各バックアップ ファイルのキー範囲、サイズ、ハッシュ (sha256) 値など、バックアップ タスクのメタデータを保存します。
+-   `backup.lock`ファイル: 複数のバックアップ タスクが同じディレクトリにデータを保存することを防ぎます。
 
-### Naming format of SST files
+### SST ファイルの命名形式 {#naming-format-of-sst-files}
 
-When data is backed up to Google Cloud Storage (GCS) or Azure Blob Storage, SST files are named in the format of `storeID_regionID_regionEpoch_keyHash_timestamp_cf`. The fields in the name are explained as follows:
+データが Google Cloud Storage (GCS) または Azure Blob Storage にバックアップされる場合、SST ファイルには`storeID_regionID_regionEpoch_keyHash_timestamp_cf`の形式で名前が付けられます。名前のフィールドについては次のように説明します。
 
-- `storeID` is the TiKV node ID.
-- `regionID` is the Region ID.
-- `regionEpoch` is the version number of Region.
-- `keyHash` is the Hash (sha256) value of the startKey of a range, which ensures the uniqueness of a file.
-- `timestamp` is the Unix timestamp of an SST file when it is generated by TiKV.
-- `cf` indicates the Column Family of RocksDB (only restores data whose `cf` is `default` or `write` ).
+-   `storeID`は TiKV ノード ID です。
+-   `regionID`はリージョンID です。
+-   `regionEpoch`は、リージョンのバージョン番号です。
+-   `keyHash`は範囲の startKey のハッシュ (sha256) 値で、ファイルの一意性が保証されます。
+-   `timestamp`は、TiKV によって生成された SST ファイルの Unix タイムスタンプです。
+-   `cf` RocksDB のカラムファミリーを示します ( `cf`が`default`または`write`であるデータのみを復元します)。
 
-When data is backed up to Amazon S3 or a network disk, the SST files are named in the format of `regionID_regionEpoch_keyHash_timestamp_cf`. The fields in the name are explained as follows:
+データが Amazon S3 またはネットワーク ディスクにバックアップされる場合、SST ファイルには`regionID_regionEpoch_keyHash_timestamp_cf`の形式で名前が付けられます。名前のフィールドについては次のように説明します。
 
-- `regionID` is the Region ID.
-- `regionEpoch` is the version number of Region.
-- `keyHash` is the Hash (sha256) value of the startKey of a range, which ensures the uniqueness of a file.
-- `timestamp` is the Unix timestamp of an SST file when it is generated by TiKV.
-- `cf` indicates the Column Family of RocksDB (only restores data whose `cf` is `default` or `write` ).
+-   `regionID`はリージョンID です。
+-   `regionEpoch`は、リージョンのバージョン番号です。
+-   `keyHash`は範囲の startKey のハッシュ (sha256) 値で、ファイルの一意性が保証されます。
+-   `timestamp`は、TiKV によって生成された SST ファイルの Unix タイムスタンプです。
+-   `cf` RocksDB のカラムファミリーを示します ( `cf`が`default`または`write`であるデータのみを復元します)。
 
-### Storage format of SST files
+### SSTファイルの保存形式 {#storage-format-of-sst-files}
 
-- For details about the storage format of SST files, see [RocksDB BlockBasedTable format](https://github.com/facebook/rocksdb/wiki/Rocksdb-BlockBasedTable-Format).
-- For details about the encoding format of backup data in SST files, see [mapping of table data to Key-Value](/tidb-computing.md#mapping-table-data-to-key-value).
+-   SST ファイルのstorage形式については、 [RocksDB BlockBasedTable 形式](https://github.com/facebook/rocksdb/wiki/Rocksdb-BlockBasedTable-Format)を参照してください。
+-   SSTファイルのバックアップデータのエンコード形式については、 [テーブルデータの Key-Value へのマッピング](/tidb-computing.md#mapping-table-data-to-key-value)を参照してください。
 
-### Structure of backup files
+### バックアップファイルの構造 {#structure-of-backup-files}
 
-When you back up data to GCS or Azure Blob Storage, the SST files, `backupmeta` files, and `backup.lock` files are stored in the same directory as the following structure:
+データを GCS または Azure Blob Storage にバックアップすると、SST ファイル、 `backupmeta`ファイル、および`backup.lock`ファイルが次の構造として同じディレクトリに保存されます。
 
-```
-.
-└── 20220621
-    ├── backupmeta
-    |—— backup.lock
-    ├── {storeID}-{regionID}-{regionEpoch}-{keyHash}-{timestamp}-{cf}.sst
-    ├── {storeID}-{regionID}-{regionEpoch}-{keyHash}-{timestamp}-{cf}.sst
-    └── {storeID}-{regionID}-{regionEpoch}-{keyHash}-{timestamp}-{cf}.sst
-```
+    .
+    └── 20220621
+        ├── backupmeta
+        |—— backup.lock
+        ├── {storeID}-{regionID}-{regionEpoch}-{keyHash}-{timestamp}-{cf}.sst
+        ├── {storeID}-{regionID}-{regionEpoch}-{keyHash}-{timestamp}-{cf}.sst
+        └── {storeID}-{regionID}-{regionEpoch}-{keyHash}-{timestamp}-{cf}.sst
 
-When you back up data to Amazon S3 or a network disk, the SST files are stored in sub-directories based on the `storeID`. The structure is as follows:
+データを Amazon S3 またはネットワーク ディスクにバックアップすると、SST ファイルは`storeID`に基づいてサブディレクトリに保存されます。構造は次のとおりです。
 
-```
-.
-└── 20220621
-    ├── backupmeta
-    |—— backup.lock
-    ├── store1
-    │   └── {regionID}-{regionEpoch}-{keyHash}-{timestamp}-{cf}.sst
-    ├── store100
-    │   └── {regionID}-{regionEpoch}-{keyHash}-{timestamp}-{cf}.sst
-    ├── store2
-    │   └── {regionID}-{regionEpoch}-{keyHash}-{timestamp}-{cf}.sst
-    ├── store3
-    ├── store4
-    └── store5
-```
+    .
+    └── 20220621
+        ├── backupmeta
+        |—— backup.lock
+        ├── store1
+        │   └── {regionID}-{regionEpoch}-{keyHash}-{timestamp}-{cf}.sst
+        ├── store100
+        │   └── {regionID}-{regionEpoch}-{keyHash}-{timestamp}-{cf}.sst
+        ├── store2
+        │   └── {regionID}-{regionEpoch}-{keyHash}-{timestamp}-{cf}.sst
+        ├── store3
+        ├── store4
+        └── store5
 
-## See also
+## こちらも参照 {#see-also}
 
-- [TiDB snapshot backup and restore guide](/br/br-snapshot-guide.md)
+-   [TiDB スナップショットのバックアップおよび復元ガイド](/br/br-snapshot-guide.md)

@@ -3,165 +3,165 @@ title: Connect to TiDB with Navicat
 summary: Learn how to connect to TiDB using Navicat.
 ---
 
-# Connect to TiDB with Navicat
+# Navicat を使用して TiDB に接続する {#connect-to-tidb-with-navicat}
 
-TiDB is a MySQL-compatible database, and [Navicat](https://www.navicat.com) is a GUI tool set for database users. This tutorial uses the [Navicat for MySQL](https://www.navicat.com/en/products/navicat-for-mysql) tool to connect to TiDB.
+TiDB は MySQL と互換性のあるデータベースであり、 [ナビキャット](https://www.navicat.com)はデータベース ユーザー向けの GUI ツール セットです。このチュートリアルでは、 [MySQL 用 Navicat](https://www.navicat.com/en/products/navicat-for-mysql)ツールを使用して TiDB に接続します。
 
-> **Warning:**
+> **警告：**
 >
-> - Although you can use Navicat to connect to TiDB due to its MySQL compatibility, Navicat does not fully support TiDB. You might encounter some issues during usage as it treats TiDB as MySQL. There is a known issue about [Navicat user management compatibility](https://github.com/pingcap/tidb/issues/45154). For more compatibility issues between Navicat and TiDB, see the [TiDB GitHub issue page](https://github.com/pingcap/tidb/issues?q=is%3Aissue+navicat+is%3Aopen).
-> - It is recommended to use other GUI tools that officially support TiDB, such as [DataGrip](/develop/dev-guide-gui-datagrip.md), [DBeaver](/develop/dev-guide-gui-dbeaver.md), and [VS Code SQLTools](/develop/dev-guide-gui-vscode-sqltools.md). For a complete list of GUI tools that fully supported by TiDB, see [Third-party tools supported by TiDB](/develop/dev-guide-third-party-support.md#gui).
+> -   Navicat は MySQL と互換性があるため、Navicat を使用して TiDB に接続できますが、Navicat は TiDB を完全にはサポートしません。 TiDB を MySQL として扱うため、使用中に問題が発生する可能性があります。 [Navicat ユーザー管理の互換性](https://github.com/pingcap/tidb/issues/45154)に関する既知の問題があります。 Navicat と TiDB の間の互換性の問題の詳細については、「 [TiDB GitHub の問題ページ](https://github.com/pingcap/tidb/issues?q=is%3Aissue+navicat+is%3Aopen)を参照してください。
+> -   TiDB を正式にサポートする他の GUI ツール ( [データグリップ](/develop/dev-guide-gui-datagrip.md) 、 [Dビーバー](/develop/dev-guide-gui-dbeaver.md) 、 [VS コード SQL ツール](/develop/dev-guide-gui-vscode-sqltools.md)など) を使用することをお勧めします。 TiDB で完全にサポートされている GUI ツールの完全なリストについては、 [TiDB がサポートするサードパーティ ツール](/develop/dev-guide-third-party-support.md#gui)を参照してください。
 
-In this tutorial, you can learn how to connect to your TiDB cluster using Navicat.
+このチュートリアルでは、Navicat を使用して TiDB クラスターに接続する方法を学習できます。
 
-> **Note:**
+> **注記：**
 >
-> This tutorial is compatible with TiDB Serverless, TiDB Dedicated, and TiDB Self-Hosted.
+> このチュートリアルは、TiDB サーバーレス、TiDB 専用、および TiDB セルフホストと互換性があります。
 
-## Prerequisites
+## 前提条件 {#prerequisites}
 
-To complete this tutorial, you need:
+このチュートリアルを完了するには、次のものが必要です。
 
-- [Navicat for MySQL](https://www.navicat.com/en/download/navicat-for-mysql) **16.3.2** or later versions.
-- A paid account for Navicat for MySQL.
-- A TiDB cluster.
+-   [MySQL 用 Navicat](https://www.navicat.com/en/download/navicat-for-mysql) **16.3.2**以降のバージョン。
+-   Navicat for MySQL の有料アカウント。
+-   TiDB クラスター。
 
 <CustomContent platform="tidb">
 
-**If you don't have a TiDB cluster, you can create one as follows:**
+**TiDB クラスターがない場合は、次のように作成できます。**
 
-- (Recommended) Follow [Creating a TiDB Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
-- Follow [Deploy a local test TiDB cluster](/quick-start-with-tidb.md#deploy-a-local-test-cluster) or [Deploy a production TiDB cluster](/production-deployment-using-tiup.md) to create a local cluster.
+-   (推奨) [TiDB サーバーレスクラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って、独自のTiDB Cloudクラスターを作成します。
+-   [ローカル テスト TiDB クラスターをデプロイ](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番TiDB クラスターをデプロイ](/production-deployment-using-tiup.md)に従ってローカル クラスターを作成します。
 
 </CustomContent>
 <CustomContent platform="tidb-cloud">
 
-**If you don't have a TiDB cluster, you can create one as follows:**
+**TiDB クラスターがない場合は、次のように作成できます。**
 
-- (Recommended) Follow [Creating a TiDB Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
-- Follow [Deploy a local test TiDB cluster](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb#deploy-a-local-test-cluster) or [Deploy a production TiDB cluster](https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup) to create a local cluster.
+-   (推奨) [TiDB サーバーレスクラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って、独自のTiDB Cloudクラスターを作成します。
+-   [ローカル テスト TiDB クラスターをデプロイ](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb#deploy-a-local-test-cluster)または[本番TiDB クラスターをデプロイ](https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup)に従ってローカル クラスターを作成します。
 
 </CustomContent>
 
-## Connect to TiDB
+## TiDB に接続する {#connect-to-tidb}
 
-Connect to your TiDB cluster depending on the TiDB deployment option you have selected.
+選択した TiDB デプロイメント オプションに応じて、TiDB クラスターに接続します。
 
 <SimpleTab>
 <div label="TiDB Serverless">
 
-1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
+1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット クラスターの名前をクリックして、その概要ページに移動します。
 
-2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
+2.  右上隅にある**「接続」**をクリックします。接続ダイアログが表示されます。
 
-3. Ensure the configurations in the connection dialog match your operating environment.
+3.  接続ダイアログの設定が動作環境と一致していることを確認してください。
 
-    - **Endpoint Type** is set to `Public`.
-    - **Connect With** is set to `General`.
-    - **Operating System** matches your environment.
+    -   **エンドポイント タイプは**`Public`に設定されます。
+    -   **[接続先] は**`General`に設定されます。
+    -   **オペレーティング システムが**環境に一致します。
 
-4. Click **Create password** to create a random password.
+4.  **「パスワードの作成」**をクリックしてランダムなパスワードを作成します。
 
-    > **Tip:**
+    > **ヒント：**
     >
-    > If you have created a password before, you can either use the original password or click **Reset password** to generate a new one.
+    > 以前にパスワードを作成したことがある場合は、元のパスワードを使用するか、 **「パスワードのリセット」**をクリックして新しいパスワードを生成できます。
 
-5. Launch Navicat for MySQL, click **Connection** in the upper-left corner, and select **MySQL** from the drop-down list.
+5.  Navicat for MySQL を起動し、左上隅の**[接続]**をクリックして、ドロップダウン リストから**MySQL**を選択します。
 
     ![Navicat: add new connection](/media/develop/navicat-add-new-connection.jpg)
 
-6. In the **New Connection (MySQL)** dialog, configure the following connection parameters:
+6.  **[新しい接続 (MySQL)]**ダイアログで、次の接続パラメータを構成します。
 
-    - **Connection Name**: give this connection a meaningful name.
-    - **Host**: enter the `host` parameter from the TiDB Cloud connection dialog.
-    - **Port**: enter the `port` parameter from the TiDB Cloud connection dialog.
-    - **User Name**: enter the `user` parameter from the TiDB Cloud connection dialog.
-    - **Password**: enter the password of the TiDB Serverless cluster.
+    -   **接続名**: この接続に意味のある名前を付けます。
+    -   **ホスト**: TiDB Cloud接続ダイアログから`host`パラメータを入力します。
+    -   **ポート**: TiDB Cloud接続ダイアログから`port`パラメータを入力します。
+    -   **ユーザー名**: TiDB Cloud接続ダイアログから`user`パラメータを入力します。
+    -   **パスワード**: TiDB サーバーレスクラスターのパスワードを入力します。
 
     ![Navicat: configure connection general panel for TiDB Serverless](/media/develop/navicat-connection-config-serverless-general.png)
 
-7. Click the **SSL** tab and select **Use SSL**, **Use authentication**, and **Verify server certificate against CA** checkboxes. Then, select the `ssl_ca` file from the TiDB Cloud connection dialog into the **CA Certificate** field.
+7.  **[SSL]**タブをクリックし、 **[SSL を使用する]** 、 **[認証を使用する**] 、および**[CA に対してサーバー証明書を検証する**] チェックボックスを選択します。次に、 TiDB Cloud接続ダイアログから**CA 証明書**フィールドに`ssl_ca`ファイルを選択します。
 
     ![Navicat: configure connection SSL panel for TiDB Serverless](/media/develop/navicat-connection-config-serverless-ssl.png)
 
-8. Click **Test Connection** to validate the connection to the TiDB Serverless cluster.
+8.  **「接続のテスト」**をクリックして、TiDB サーバーレスクラスターへの接続を検証します。
 
-9. If the connection test is successful, you can see the **Connection Successful** message. Click **Save** to finish the connection configuration.
+9.  接続テストが成功すると、 **「接続成功」**メッセージが表示されます。 **「保存」**をクリックして接続構成を終了します。
 
 </div>
 <div label="TiDB Dedicated">
 
-1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
+1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット クラスターの名前をクリックして、その概要ページに移動します。
 
-2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
+2.  右上隅にある**「接続」**をクリックします。接続ダイアログが表示されます。
 
-3. Click **Allow Access from Anywhere**.
+3.  **[どこからでもアクセスを許可する]**をクリックします。
 
-    For more details about how to obtain the connection string, refer to [TiDB Dedicated standard connection](https://docs.pingcap.com/tidbcloud/connect-via-standard-connection).
+    接続文字列の取得方法の詳細については、 [TiDB専用標準接続](https://docs.pingcap.com/tidbcloud/connect-via-standard-connection)を参照してください。
 
-4. Click **Download CA cert** to download the CA file.
+4.  **[CA 証明書のダウンロード]**をクリックして CA ファイルをダウンロードします。
 
-5. Launch Navicat for MySQL, click **Connection** in the upper-left corner, and select **MySQL** from the drop-down list.
+5.  Navicat for MySQL を起動し、左上隅の**[接続]**をクリックして、ドロップダウン リストから**MySQL**を選択します。
 
     ![Navicat: add new connection](/media/develop/navicat-add-new-connection.jpg)
 
-6. In the **New Connection (MySQL)** dialog, configure the following connection parameters:
+6.  **[新しい接続 (MySQL)]**ダイアログで、次の接続パラメータを構成します。
 
-    - **Connection Name**: give this connection a meaningful name.
-    - **Host**: enter the `host` parameter from the TiDB Cloud connection dialog.
-    - **Port**: enter the `port` parameter from the TiDB Cloud connection dialog.
-    - **User Name**: enter the `user` parameter from the TiDB Cloud connection dialog.
-    - **Password**: enter the password of the TiDB Dedicated cluster.
+    -   **接続名**: この接続に意味のある名前を付けます。
+    -   **ホスト**: TiDB Cloud接続ダイアログから`host`パラメータを入力します。
+    -   **ポート**: TiDB Cloud接続ダイアログから`port`パラメータを入力します。
+    -   **ユーザー名**: TiDB Cloud接続ダイアログから`user`パラメータを入力します。
+    -   **パスワード**: TiDB 専用クラスターのパスワードを入力します。
 
     ![Navicat: configure connection general panel for TiDB Dedicated](/media/develop/navicat-connection-config-dedicated-general.png)
 
-7. Click the **SSL** tab and select **Use SSL**, **Use authentication**, and **Verify server certificate against CA** checkboxes. Then, select the CA file downloaded in step 4 into the **CA Certificate** field.
+7.  **[SSL]**タブをクリックし、 **[SSL を使用する]** 、 **[認証を使用する**] 、および**[CA に対してサーバー証明書を検証する**] チェックボックスを選択します。次に、手順 4 でダウンロードした CA ファイルを**[CA 証明書]**フィールドに選択します。
 
     ![Navicat: configure connection SSL panel for TiDB Dedicated](/media/develop/navicat-connection-config-dedicated-ssl.jpg)
 
-8. **Test Connection** to validate the connection to the TiDB Dedicated cluster.
+8.  **接続をテストして、** TiDB 専用クラスターへの接続を検証します。
 
-9. If the connection test is successful, you can see the **Connection Successful** message. Click **Save** to finish the connection configuration.
+9.  接続テストが成功すると、 **「接続成功」**メッセージが表示されます。 **「保存」**をクリックして接続構成を終了します。
 
 </div>
 <div label="TiDB Self-Hosted">
 
-1. Launch Navicat for MySQL, click **Connection** in the upper-left corner, and select **MySQL** from the drop-down list.
+1.  Navicat for MySQL を起動し、左上隅の**[接続]**をクリックして、ドロップダウン リストから**MySQL**を選択します。
 
     ![Navicat: add new connection](/media/develop/navicat-add-new-connection.jpg)
 
-2. In the **New Connection (MySQL)** dialog, configure the following connection parameters:
+2.  **[新しい接続 (MySQL)]**ダイアログで、次の接続パラメータを構成します。
 
-    - **Connection Name**: give this connection a meaningful name.
-    - **Host**: enter the IP address or domain name of your TiDB Self-Hosted cluster.
-    - **Port**: enter the port number of your TiDB Self-Hosted cluster.
-    - **User Name**: enter the username to use to connect to your TiDB.
-    - **Password**: enter the password to use to connect to your TiDB.
+    -   **接続名**: この接続に意味のある名前を付けます。
+    -   **ホスト**: TiDB セルフホスト クラスターの IP アドレスまたはドメイン名を入力します。
+    -   **ポート**: TiDB セルフホスト クラスターのポート番号を入力します。
+    -   **ユーザー名**: TiDB への接続に使用するユーザー名を入力します。
+    -   **パスワード**: TiDB への接続に使用するパスワードを入力します。
 
     ![Navicat: configure connection general panel for self-hosted TiDB](/media/develop/navicat-connection-config-self-hosted-general.png)
 
-3. Click **Test Connection** to validate the connection to the TiDB Self-Hosted cluster.
+3.  **[接続のテスト]**をクリックして、TiDB セルフホスト クラスターへの接続を検証します。
 
-4. If the connection test is successful, you can see the **Connection Successful** message. Click **Save** to finish the connection configuration.
+4.  接続テストが成功すると、 **「接続成功」**メッセージが表示されます。 **「保存」**をクリックして接続構成を終了します。
 
 </div>
 </SimpleTab>
 
-## Next steps
+## 次のステップ {#next-steps}
 
-- Learn the best practices for TiDB application development with the chapters in the [Developer guide](/develop/dev-guide-overview.md), such as [Insert data](/develop/dev-guide-insert-data.md), [Update data](/develop/dev-guide-update-data.md), [Delete data](/develop/dev-guide-delete-data.md), [Single table reading](/develop/dev-guide-get-data-from-single-table.md), [Transactions](/develop/dev-guide-transaction-overview.md), and [SQL performance optimization](/develop/dev-guide-optimize-sql-overview.md).
-- Learn through the professional [TiDB developer courses](https://www.pingcap.com/education/) and earn [TiDB certifications](https://www.pingcap.com/education/certification/) after passing the exam.
+-   TiDB アプリケーション開発の[SQLパフォーマンスの最適化](/develop/dev-guide-optimize-sql-overview.md)プラクティスについて[取引](/develop/dev-guide-transaction-overview.md) 、 [開発者ガイド](/develop/dev-guide-overview.md)の章 ( [データの挿入](/develop/dev-guide-insert-data.md)など) [データを更新する](/develop/dev-guide-update-data.md)参照[データの削除](/develop/dev-guide-delete-data.md) [単一テーブルの読み取り](/develop/dev-guide-get-data-from-single-table.md)ください。
+-   プロフェッショナルとして[TiDB 開発者コース](https://www.pingcap.com/education/)を学び、試験合格後に[TiDB 認定](https://www.pingcap.com/education/certification/)獲得します。
 
-## Need help?
+## 助けが必要？ {#need-help}
 
 <CustomContent platform="tidb">
 
-Ask questions on the [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc), or [create a support ticket](/support.md).
+[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[サポートチケットを作成する](/support.md)について質問してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-Ask questions on the [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc), or [create a support ticket](/tidb-cloud/tidb-cloud-support.md).
+[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[サポートチケットを作成する](/tidb-cloud/tidb-cloud-support.md)について質問してください。
 
 </CustomContent>

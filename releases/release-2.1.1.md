@@ -2,44 +2,44 @@
 title: TiDB 2.1.1 Release Notes
 ---
 
-# TiDB 2.1.1 Release Notes
+# TiDB 2.1.1 リリースノート {#tidb-2-1-1-release-notes}
 
-On December 12, 2018, TiDB 2.1.1 is released. Compared with TiDB 2.1.0, this release has great improvement in stability, SQL optimizer, statistics information, and execution engine.
+2018 年 12 月 12 日に、TiDB 2.1.1 がリリースされました。 TiDB 2.1.0 と比較して、このリリースでは安定性、SQL オプティマイザー、統計情報、および実行エンジンが大幅に向上しています。
 
-## TiDB
+## TiDB {#tidb}
 
-+ SQL Optimizer/Executor
-    - Fix the round error of the negative date [#8574](https://github.com/pingcap/tidb/pull/8574)
-    - Fix the issue that the `uncompress` function does not check the data length [#8606](https://github.com/pingcap/tidb/pull/8606)
-    - Reset bind arguments of the `prepare` statement after the `execute` command is executed [#8652](https://github.com/pingcap/tidb/pull/8652)
-    - Support automatically collecting the statistics information of a partition table [#8649](https://github.com/pingcap/tidb/pull/8649)
-    - Fix the wrongly configured integer type when pushing down the `abs` function [#8628](https://github.com/pingcap/tidb/pull/8628)
-    - Fix the data race on the JSON column [#8660](https://github.com/pingcap/tidb/pull/8660)
-+ Server
-    - Fix the issue that the transaction obtained TSO is incorrect when PD breaks down [#8567](https://github.com/pingcap/tidb/pull/8567)
-    - Fix the bootstrap failure caused by the statement that does not conform to ANSI standards [#8576](https://github.com/pingcap/tidb/pull/8576)
-    - Fix the issue that incorrect parameters are used in transaction retries [#8638](https://github.com/pingcap/tidb/pull/8638)
-+ DDL
-    - Change the default character set and collation of tables into `utf8mb4` [#8590](https://github.com/pingcap/tidb/pull/8590)
-    - Add the `ddl_reorg_batch_size` variable to control the speed of adding indexes [#8614](https://github.com/pingcap/tidb/pull/8614)
-    - Make the character set and collation options content in DDL case-insensitive [#8611](https://github.com/pingcap/tidb/pull/8611)
-    - Fix the issue of adding indexes for generated columns [#8655](https://github.com/pingcap/tidb/pull/8655)
+-   SQL オプティマイザー/エグゼキューター
+    -   負の日付の丸め誤差を修正[#8574](https://github.com/pingcap/tidb/pull/8574)
+    -   `uncompress`関数がデータ長をチェックしない問題を修正[#8606](https://github.com/pingcap/tidb/pull/8606)
+    -   `execute`コマンドの実行後に`prepare`ステートメントのバインド引数をリセットします[#8652](https://github.com/pingcap/tidb/pull/8652)
+    -   パーティションテーブルの統計情報の自動収集をサポート[#8649](https://github.com/pingcap/tidb/pull/8649)
+    -   `abs`関数[#8628](https://github.com/pingcap/tidb/pull/8628)を押したときに誤って設定された整数型を修正しました。
+    -   JSON列[#8660](https://github.com/pingcap/tidb/pull/8660)のデータ競合を修正する
+-   サーバ
+    -   PDがダウンした場合にTSOを取得したトランザクションが正しくない問題を修正[#8567](https://github.com/pingcap/tidb/pull/8567)
+    -   ANSI 標準に準拠していないステートメントによって引き起こされるブートストラップの失敗を修正[#8576](https://github.com/pingcap/tidb/pull/8576)
+    -   トランザクションの再試行で不正なパラメータが使用される問題を修正[#8638](https://github.com/pingcap/tidb/pull/8638)
+-   DDL
+    -   デフォルトの文字セットとテーブルの照合順序を`utf8mb4` [#8590](https://github.com/pingcap/tidb/pull/8590)に変更します。
+    -   `ddl_reorg_batch_size`変数を追加してインデックス[#8614](https://github.com/pingcap/tidb/pull/8614)の追加速度を制御します
+    -   文字セットと照合順序オプションの内容を DDL で大文字と小文字を区別しないようにします[#8611](https://github.com/pingcap/tidb/pull/8611)
+    -   生成された列のインデックス追加の問題を修正[#8655](https://github.com/pingcap/tidb/pull/8655)
 
-## PD
+## PD {#pd}
 
-- Fix the issue that some configuration items cannot be set to `0` in the configuration file [#1334](https://github.com/pingcap/pd/pull/1334)
-- Check the undefined configuration when starting PD [#1362](https://github.com/pingcap/pd/pull/1362)
-- Avoid transferring the leader to a newly created peer, to optimize the possible delay [#1339](https://github.com/pingcap/pd/pull/1339)
-- Fix the issue that `RaftCluster` cannot stop caused by deadlock [#1370](https://github.com/pingcap/pd/pull/1370)
+-   設定ファイル[#1334](https://github.com/pingcap/pd/pull/1334)の一部の設定項目が`0`に設定できない問題を修正
+-   PD [#1362](https://github.com/pingcap/pd/pull/1362)起動時に未定義の構成を確認する
+-   起こり得る遅延を最適化するために、リーダーを新しく作成されたピアに転送しないようにします[#1339](https://github.com/pingcap/pd/pull/1339)
+-   `RaftCluster`がデッドロックにより停止できない問題を修正[#1370](https://github.com/pingcap/pd/pull/1370)
 
-## TiKV
+## TiKV {#tikv}
 
-- Avoid transferring the leader to a newly created peer, to optimize the possible delay [#3878](https://github.com/tikv/tikv/pull/3878)
+-   起こり得る遅延を最適化するために、リーダーを新しく作成されたピアに転送しないようにします[#3878](https://github.com/tikv/tikv/pull/3878)
 
-## Tools
+## ツール {#tools}
 
-+ Lightning
-    - Optimize the `analyze` mechanism on imported tables to increase the import speed
-    - Support storing the checkpoint information to a local file
-+ TiDB Binlog
-    - Fix the output bug of pb files that a table only with the primary key column cannot generate the pb event
+-   稲妻
+    -   インポートされたテーブルの`analyze`メカニズムを最適化してインポート速度を向上させます
+    -   チェックポイント情報のローカル ファイルへの保存をサポート
+-   TiDBBinlog
+    -   主キーカラムのみを持つテーブルではpbイベントが発生できないというpbファイルの出力バグを修正

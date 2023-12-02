@@ -3,11 +3,9 @@ title: COLLATIONS
 summary: Learn the `COLLATIONS` information_schema table.
 ---
 
-# COLLATIONS
+# 照合順序 {#collations}
 
-The `COLLATIONS` table provides a list of collations that correspond to character sets in the `CHARACTER_SETS` table. Currently, this table is included only for compatibility with MySQL.
-
-{{< copyable "sql" >}}
+`COLLATIONS`表は、 `CHARACTER_SETS`表の文字セットに対応する照合順序のリストを提供します。現在、このテーブルは MySQL との互換性のためにのみ含まれています。
 
 ```sql
 USE information_schema;
@@ -28,8 +26,6 @@ DESC collations;
 6 rows in set (0.00 sec)
 ```
 
-{{< copyable "sql" >}}
-
 ```sql
 SELECT * FROM collations WHERE character_set_name='utf8mb4';
 ```
@@ -45,11 +41,11 @@ SELECT * FROM collations WHERE character_set_name='utf8mb4';
 3 rows in set (0.001 sec)
 ```
 
-The description of columns in the `COLLATIONS` table is as follows:
+`COLLATIONS`のテーブルの列の説明は次のとおりです。
 
-* `COLLATION_NAME`: The name of the collation.
-* `CHARACTER_SET_NAME`: The name of the character set which the collation belongs to.
-* `ID`: The ID of the collation.
-* `IS_DEFAULT`: Whether this collation is the default collation of the character set it belongs to.
-* `IS_COMPILED`: Whether the character set is compiled into the server.
-* `SORTLEN`: The minimum length of memory allocated when the collation sorts characters.
+-   `COLLATION_NAME` :照合順序の名前。
+-   `CHARACTER_SET_NAME` :照合順序が属する文字セットの名前。
+-   `ID` :照合順序の ID。
+-   `IS_DEFAULT` : この照合順序が、それが属する文字セットのデフォルトの照合順序であるかどうか。
+-   `IS_COMPILED` : 文字セットがサーバーにコンパイルされるかどうか。
+-   `SORTLEN` :照合順序順序で文字をソートするときに割り当てられるメモリの最小長。

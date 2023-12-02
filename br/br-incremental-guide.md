@@ -3,23 +3,23 @@ title: TiDB Incremental Backup and Restore Guide
 summary: Learns about how to perform incremental backup and restore in TiDB.
 ---
 
-# TiDB Incremental Backup and Restore Guide
+# TiDB 増分バックアップおよび復元ガイド {#tidb-incremental-backup-and-restore-guide}
 
-Incremental data of a TiDB cluster is differentiated data between the starting snapshot and the end snapshot of time period, and the DDLs generated during this period. Compared with full (snapshot) backup data, incremental data is smaller and therefore it is a supplementary to snapshot backup, which reduces the volume of backup data. To perform incremental backup, ensure that MVCC data generated within the specified period is not garbage collected by the [TiDB GC mechanism](/garbage-collection-overview.md). For example, to perform incremental backup hourly, you must set [`tidb_gc_life_time`](/system-variables.md#tidb_gc_life_time-new-in-v50) to a value greater than 1 hour.
+TiDB クラスターの増分データは、期間の開始スナップショットと終了スナップショットの間の差分データ、およびこの期間中に生成された DDL です。増分データは完全 (スナップショット) バックアップ データと比較してデータ量が小さいため、スナップショット バックアップを補完するものであり、バックアップ データの量を削減します。増分バックアップを実行するには、指定された期間内に生成された MVCC データが[TiDB GC メカニズム](/garbage-collection-overview.md)によってガベージ コレクションされていないことを確認してください。たとえば、増分バックアップを 1 時間ごとに実行するには、 [`tidb_gc_life_time`](/system-variables.md#tidb_gc_life_time-new-in-v50) 1 時間より大きい値に設定する必要があります。
 
-> **Warning:**
+> **警告：**
 >
-> Development for this feature has stopped. It is recommended that you use [log backup and PITR](/br/br-pitr-guide.md) as an alternative.
+> この機能の開発は停止されました。代わりに[ログバックアップとPITR](/br/br-pitr-guide.md)を使用することをお勧めします。
 
-## Back up incremental data
+## 増分データをバックアップする {#back-up-incremental-data}
 
-To back up incremental data, run the `br backup` command with **the last backup timestamp** `--lastbackupts` specified. In this way, br command-line tool automatically backs up incremental data generated between `lastbackupts` and the current time. To get `--lastbackupts`, run the `validate` command. The following is an example:
+増分データをバックアップするには、**最後のバックアップのタイムスタンプ**`--lastbackupts`を指定して`br backup`コマンドを実行します。このようにして、br コマンド ライン ツールは、 `lastbackupts`から現在までの間に生成された増分データを自動的にバックアップします。 `--lastbackupts`取得するには、 `validate`コマンドを実行します。以下は例です。
 
 ```shell
 LAST_BACKUP_TS=`tiup br validate decode --field="end-version" --storage "s3://backup-101/snapshot-202209081330?access-key=${access-key}&secret-access-key=${secret-access-key}"| tail -n1`
 ```
 
-The following command backs up the incremental data between `(LAST_BACKUP_TS, current PD timestamp]` and the DDLs generated during this time period:
+次のコマンドは、 `(LAST_BACKUP_TS, current PD timestamp]`とこの期間中に生成された DDL の間の増分データをバックアップします。
 
 ```shell
 tiup br backup full --pd "${PD_IP}:2379" \
@@ -28,22 +28,22 @@ tiup br backup full --pd "${PD_IP}:2379" \
 --ratelimit 128
 ```
 
-- `--lastbackupts`: The last backup timestamp.
-- `--ratelimit`: The maximum speed **per TiKV** performing backup tasks (in MiB/s).
-- `storage`: The storage path of backup data. You need to save the incremental backup data under a different path from the previous snapshot backup. In the preceding example, incremental backup data is saved in the `incr` directory under the full backup data. For details, see [URI Formats of External Storage Services](/external-storage-uri.md).
+-   `--lastbackupts` : 最後のバックアップのタイムスタンプ。
+-   `--ratelimit` : バックアップ タスクを実行する**TiKV ごとの**最大速度 (MiB/秒)。
+-   `storage` : バックアップデータのstorageパス。増分バックアップ データは、以前のスナップショット バックアップとは別のパスに保存する必要があります。前の例では、増分バックアップ データは完全バックアップ データの下の`incr`ディレクトリに保存されます。詳細は[外部ストレージ サービスの URI 形式](/external-storage-uri.md)を参照してください。
 
-## Restore incremental data
+## 増分データの復元 {#restore-incremental-data}
 
-When restoring incremental data, make sure that all the data backed up before `LAST_BACKUP_TS` has been restored to the target cluster. Also, because incremental restore updates data, you need to ensure that there are no other writes during the restore. Otherwise, conflicts might occur.
+増分データを復元するときは、 `LAST_BACKUP_TS`より前にバックアップされたすべてのデータがターゲット クラスターに復元されていることを確認してください。また、増分復元ではデータが更新されるため、復元中に他の書き込みがないことを確認する必要があります。そうしないと、競合が発生する可能性があります。
 
-The following command restores the full backup data stored in the `backup-101/snapshot-202209081330` directory:
+次のコマンドは、 `backup-101/snapshot-202209081330`ディレクトリに保存されている完全バックアップ データを復元します。
 
 ```shell
 tiup br restore full --pd "${PD_IP}:2379" \
 --storage "s3://backup-101/snapshot-202209081330?access-key=${access-key}&secret-access-key=${secret-access-key}"
 ```
 
-The following command restores the incremental backup data stored in the `backup-101/snapshot-202209081330/incr` directory:
+次のコマンドは、 `backup-101/snapshot-202209081330/incr`ディレクトリに保存されている増分バックアップ データを復元します。
 
 ```shell
 tiup br restore full --pd "${PD_IP}:2379" \

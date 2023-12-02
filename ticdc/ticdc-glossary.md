@@ -3,34 +3,34 @@ title: TiCDC Glossary
 summary: Learn the terms about TiCDC and their definitions.
 ---
 
-# TiCDC Glossary
+# TiCDC 用語集 {#ticdc-glossary}
 
-This glossary provides TiCDC-related terms and definitions. These terms appears in TiCDC logs, monitoring metrics, configurations, and documents.
+この用語集では、TiCDC 関連の用語と定義を説明します。これらの用語は、TiCDC ログ、モニタリング メトリック、構成、およびドキュメントに表示されます。
 
-For TiDB-related terms and definitions, refer to [TiDB glossary](/glossary.md).
+TiDB 関連の用語と定義については、 [TiDB用語集](/glossary.md)を参照してください。
 
-## C
+## C {#c}
 
-### Capture
+### 捕獲 {#capture}
 
-A single TiCDC instance on which the replication task of the cluster runs. Multiple captures form a TiCDC cluster.
+クラスターのレプリケーション タスクが実行される単一の TiCDC インスタンス。複数のキャプチャにより TiCDC クラスターが形成されます。
 
-### Changed data
+### 変更されたデータ {#changed-data}
 
-The data to be written to TiCDC from the upstream TiDB cluster, including the DML-caused data changes and the DDL-caused table schema changes.
+アップストリーム TiDB クラスターから TiCDC に書き込まれるデータ。これには、DML に起因するデータ変更と DDL に起因するテーブル スキーマ変更が含まれます。
 
-### Changefeed
+### チェンジフィード {#changefeed}
 
-An incremental replication task in TiCDC, which outputs the data change logs of several tables in a TiDB cluster to the designated downstream.
+TiCDC の増分レプリケーション タスク。TiDB クラスター内の複数のテーブルのデータ変更ログを指定されたダウンストリームに出力します。
 
-## O
+## ○ {#o}
 
-### Owner
+### 所有者 {#owner}
 
-A [capture](#capture) of a special role that manages the TiCDC cluster and schedules replication tasks of the cluster. An owner is elected by captures and there is at most one owner at any time.
+TiCDC クラスターを管理し、クラスターのレプリケーション タスクをスケジュールする特別なロールの[捕獲](#capture) 。所有者はキャプチャによって選出され、常に存在する所有者は最大 1 人です。
 
-## P
+## P {#p}
 
-### Processor
+### プロセッサー {#processor}
 
-TiCDC replication tasks allocate data tables on TiCDC instances, and the processor refers to the replication processing unit of these tables. Processor tasks include pulling, sorting, restoring, and distributing changed data.
+TiCDC レプリケーション タスクは TiCDC インスタンスにデータ テーブルを割り当て、プロセッサはこれらのテーブルのレプリケーション処理ユニットを参照します。プロセッサーのタスクには、変更されたデータの取得、並べ替え、復元、配布が含まれます。

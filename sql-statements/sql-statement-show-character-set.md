@@ -3,21 +3,21 @@ title: SHOW CHARACTER SET | TiDB SQL Statement Reference
 summary: An overview of the usage of SHOW CHARACTER SET for the TiDB database.
 ---
 
-# SHOW CHARACTER SET
+# キャラクターセットを表示 {#show-character-set}
 
-This statement provides a static list of available character sets in TiDB. The output does not reflect any attributes of the current connection or user.
+このステートメントは、TiDB で使用可能な文字セットの静的なリストを提供します。出力には、現在の接続またはユーザーの属性は反映されません。
 
-## Synopsis
+## あらすじ {#synopsis}
 
 **ShowCharsetStmt:**
 
 ![ShowCharsetStmt](/media/sqlgram/ShowCharsetStmt.png)
 
-**CharsetKw:**
+**文字セットKw:**
 
 ![CharsetKw](/media/sqlgram/CharsetKw.png)
 
-## Examples
+## 例 {#examples}
 
 ```sql
 mysql> SHOW CHARACTER SET;
@@ -33,11 +33,11 @@ mysql> SHOW CHARACTER SET;
 5 rows in set (0.00 sec)
 ```
 
-## MySQL compatibility
+## MySQLの互換性 {#mysql-compatibility}
 
-The usage of `SHOW CHARACTER SET` statement in TiDB is fully compatible with MySQL. However, charsets in TiDB might have different default collations compared with MySQL. For details, refer to [Compatibility with MySQL](/mysql-compatibility.md). If you find any compatibility differences, [report a bug](https://docs.pingcap.com/tidb/stable/support).
+TiDB での`SHOW CHARACTER SET`ステートメントの使用は、MySQL と完全に互換性があります。ただし、TiDB の文字セットには、MySQL と比較してデフォルトの照合順序が異なる場合があります。詳細は[MySQLとの互換性](/mysql-compatibility.md)を参照してください。互換性の違いが見つかった場合は、 [バグを報告](https://docs.pingcap.com/tidb/stable/support) .
 
-## See also
+## こちらも参照 {#see-also}
 
-* [SHOW COLLATION](/sql-statements/sql-statement-show-collation.md)
-* [Character Set and Collation](/character-set-and-collation.md)
+-   [照合順序を表示](/sql-statements/sql-statement-show-collation.md)
+-   [文字セットと照合順序](/character-set-and-collation.md)

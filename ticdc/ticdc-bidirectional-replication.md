@@ -3,79 +3,79 @@ title: Bidirectional Replication
 summary: Learn how to use bidirectional replication of TiCDC.
 ---
 
-# Bidirectional Replication
+# 双方向レプリケーション {#bidirectional-replication}
 
-Starting from v6.5.0, TiCDC supports bi-directional replication among two TiDB clusters. Based on this feature, you can create a multi-active TiDB solution using TiCDC.
+v6.5.0 以降、TiCDC は 2 つの TiDB クラスター間の双方向レプリケーションをサポートします。この機能に基づいて、TiCDC を使用してマルチアクティブ TiDB ソリューションを作成できます。
 
-This section describes how to use bi-directional replication taking two TiDB clusters as an example.
+このセクションでは、2 つの TiDB クラスターを例として、双方向レプリケーションの使用方法について説明します。
 
-## Deploy bi-directional replication
+## 双方向レプリケーションをデプロイ {#deploy-bi-directional-replication}
 
-TiCDC only replicates incremental data changes that occur after a specified timestamp to the downstream cluster. Before starting the bi-directional replication, you need to take the following steps:
+TiCDC は、指定されたタイムスタンプの後に発生する増分データ変更のみをダウンストリーム クラスターにレプリケートします。双方向レプリケーションを開始する前に、次の手順を実行する必要があります。
 
-1. (Optional) According to your needs, import the data of the two TiDB clusters into each other using the data export tool [Dumpling](/dumpling-overview.md) and data import tool [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md).
+1.  (オプション) 必要に応じて、データ エクスポート ツール[Dumpling](/dumpling-overview.md)とデータ インポート ツール[TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)を使用して、2 つの TiDB クラスターのデータを相互にインポートします。
 
-2. Deploy two TiCDC clusters between the two TiDB clusters. The cluster topology is as follows. The arrows in the diagram indicate the directions of data flow.
+2.  2 つの TiDB クラスターの間に 2 つの TiCDC クラスターをデプロイ。クラスタのトポロジは以下のとおりです。図中の矢印はデータの流れの方向を示しています。
 
     ![TiCDC bidirectional replication](/media/ticdc/ticdc-bidirectional-replication.png)
 
-3. Specify the starting time point of data replication for the upstream and downstream clusters.
+3.  上流クラスターと下流クラスターのデータ複製の開始時点を指定します。
 
-    1. Check the time point of the upstream and downstream clusters. In the case of two TiDB clusters, make sure that data in the two clusters are consistent at certain time points. For example, the data of TiDB A at `ts=1` and the data of TiDB B at `ts=2` are consistent.
+    1.  上流クラスターと下流クラスターの時点を確認します。 2 つの TiDB クラスターの場合は、2 つのクラスター内のデータが特定の時点で一貫していることを確認してください。たとえば、 `ts=1`の TiDB A のデータと`ts=2`の TiDB B のデータは一致します。
 
-    2. When you create the changefeed, set the `--start-ts` of the changefeed for the upstream cluster to the corresponding `tso`. That is, if the upstream cluster is TiDB A, set `--start-ts=1`; if the upstream cluster is TiDB B, set `--start-ts=2`.
+    2.  変更フィードを作成するときは、上流クラスターの変更フィードの`--start-ts`を、対応する`tso`に設定します。つまり、上流クラスターが TiDB A の場合は`--start-ts=1`を設定します。上流クラスターが TiDB B の場合は、 `--start-ts=2`を設定します。
 
-4. In the configuration file specified by the `--config` parameter, add the following configuration:
+4.  `--config`パラメータで指定された構成ファイルに、次の構成を追加します。
 
     ```toml
     # Whether to enable the bi-directional replication mode
     bdr-mode = true
     ```
 
-After the configuration takes effect, the clusters can perform bi-directional replication.
+構成が有効になると、クラスターは双方向レプリケーションを実行できるようになります。
 
-## Execute DDL
+## DDLの実行 {#execute-ddl}
 
-After the bidirectional replication is enabled, TiCDC does not replicate any DDL statements. You need to execute DDL statements in the upstream and downstream clusters respectively.
+双方向レプリケーションが有効になった後は、TiCDC は DDL ステートメントを複製しません。 DDL ステートメントは、アップストリーム クラスターとダウンストリーム クラスターでそれぞれ実行する必要があります。
 
-Note that some DDL statements might cause table structure changes or data change time sequence problems, which might lead to data inconsistency after the replication. Therefore, after enabling bidirectional replication, only the DDL statements in the following table can be executed without stopping the write operations of the application.
+一部の DDL ステートメントは、テーブル構造の変更やデータ変更の時間順序の問題を引き起こす可能性があり、レプリケーション後にデータの不整合を引き起こす可能性があることに注意してください。したがって、双方向レプリケーションを有効にした後は、アプリケーションの書き込み操作を停止せずに、次の表の DDL ステートメントのみを実行できます。
 
-| Event | Does it cause changefeed errors | Note |
-|---|---|---|
-| create database | Yes | After you manually execute the DDL statements in the upstream and downstream clusters, the errors can be automatically recovered. |
-| drop database | Yes | You need to manually restart the changefeed and specify `--overwrite-checkpoint-ts` as the `commitTs` of the DDL statement to recover the errors. |
-| create table | Yes | After you manually execute the DDL statements in the upstream and downstream clusters, the errors can be automatically recovered. |
-| drop table | Yes | You need to manually restart the changefeed and specify `--overwrite-checkpoint-ts` as the `commitTs` of the DDL statement to recover the errors. |
-| alter table comment | No |  |
-| rename index | No |  |
-| alter table index visibility | No |  |
-| add partition | Yes | After you manually execute the DDL statements in the upstream and downstream clusters, the errors can be automatically recovered. |
-| drop partition | No |  |
-| create view | No |  |
-| drop view | No |  |
-| alter column default value | No |  |
-| reorganize partition | Yes | After you manually execute the DDL statements in the upstream and downstream clusters, the errors can be automatically recovered. |
-| alter table ttl | No |  |
-| alter table remove ttl | No |  |
-| add **not unique** index | No |  |
-| drop **not unique** index | No |  |
+| イベント                   | チェンジフィードエラーの原因になりますか | 注記                                                                                          |
+| ---------------------- | -------------------- | ------------------------------------------------------------------------------------------- |
+| データベースを作成する            | はい                   | アップストリーム クラスターとダウンストリーム クラスターで DDL ステートメントを手動で実行すると、エラーは自動的に回復できます。                         |
+| データベースを削除する            | はい                   | エラーを回復するには、変更フィードを手動で再起動し、DDL ステートメントの`commitTs`として`--overwrite-checkpoint-ts`を指定する必要があります。 |
+| テーブルを作成する              | はい                   | アップストリーム クラスターとダウンストリーム クラスターで DDL ステートメントを手動で実行すると、エラーは自動的に回復できます。                         |
+| ドロップテーブル               | はい                   | エラーを回復するには、変更フィードを手動で再起動し、DDL ステートメントの`commitTs`として`--overwrite-checkpoint-ts`を指定する必要があります。 |
+| テーブルのコメントを変更する         | いいえ                  |                                                                                             |
+| インデックスの名前を変更する         | いいえ                  |                                                                                             |
+| テーブルインデックスの可視性を変更する    | いいえ                  |                                                                                             |
+| パーティションを追加する           | はい                   | アップストリーム クラスターとダウンストリーム クラスターで DDL ステートメントを手動で実行すると、エラーは自動的に回復できます。                         |
+| パーティションを削除する           | いいえ                  |                                                                                             |
+| ビューの作成                 | いいえ                  |                                                                                             |
+| ドロップビュー                | いいえ                  |                                                                                             |
+| 列のデフォルト値を変更する          | いいえ                  |                                                                                             |
+| パーティションを再編成する          | はい                   | アップストリーム クラスターとダウンストリーム クラスターで DDL ステートメントを手動で実行すると、エラーは自動的に回復できます。                         |
+| テーブルttlを変更する           | いいえ                  |                                                                                             |
+| テーブルを変更して TTL を削除      | いいえ                  |                                                                                             |
+| **一意ではない**インデックスを追加する  | いいえ                  |                                                                                             |
+| **一意ではない**インデックスを削除します | いいえ                  |                                                                                             |
 
-If you need to execute DDL statements that are not in the preceding table, take the following steps:
+前の表にない DDL ステートメントを実行する必要がある場合は、次の手順を実行します。
 
-1. Pause the write operations in the tables that need to execute DDL in all clusters.
-2. After the write operations of the corresponding tables in all clusters have been replicated to other clusters, manually execute all DDL statements in each TiDB cluster.
-3. After the DDL statements are executed, resume the write operations.
+1.  すべてのクラスターで DDL を実行する必要があるテーブルの書き込み操作を一時停止します。
+2.  すべてのクラスター内の対応するテーブルの書き込み操作が他のクラスターにレプリケートされた後、各 TiDB クラスター内のすべての DDL ステートメントを手動で実行します。
+3.  DDL ステートメントが実行された後、書き込み操作を再開します。
 
-## Stop bi-directional replication
+## 双方向レプリケーションを停止する {#stop-bi-directional-replication}
 
-After the application has stopped writing data, you can insert a special record into each cluster. By checking the two special records, you can make sure that data in two clusters are consistent.
+アプリケーションがデータの書き込みを停止した後、各クラスターに特別なレコードを挿入できます。 2 つの特別なレコードをチェックすることで、2 つのクラスター内のデータが一貫していることを確認できます。
 
-After the check is completed, you can stop the changefeed to stop bi-directional replication.
+チェックが完了したら、変更フィードを停止して双方向レプリケーションを停止できます。
 
-## Limitations
+## 制限事項 {#limitations}
 
-- For the limitations of DDL, see [Execute DDL](#execute-ddl).
+-   DDL の制限については、 [DDLの実行](#execute-ddl)を参照してください。
 
-- Bi-directional replication clusters cannot detect write conflicts, which might cause undefined behaviors. Therefore, you must ensure that there are no write conflicts from the application side.
+-   双方向レプリケーション クラスターは書き込み競合を検出できず、未定義の動作が発生する可能性があります。したがって、アプリケーション側から書き込み競合がないことを確認する必要があります。
 
-- Bi-directional replication supports more than two clusters, but does not support multiple clusters in cascading mode, that is, a cyclic replication like TiDB A -> TiDB B -> TiDB C -> TiDB A. In such a topology, if one cluster fails, the whole data replication will be affected. Therefore, to enable bi-directional replication among multiple clusters, you need to connect each cluster with every other clusters, for example, `TiDB A <-> TiDB B`, `TiDB B <-> TiDB C`, `TiDB C <-> TiDB A`.
+-   双方向レプリケーションは 3 つ以上のクラスターをサポートしますが、カスケード モードでの複数のクラスター、つまり TiDB A -&gt; TiDB B -&gt; TiDB C -&gt; TiDB A のような循環レプリケーションはサポートしません。このようなトポロジでは、1 つのクラスターが失敗すると、データ レプリケーション全体が影響を受けます。したがって、複数のクラスター間で双方向レプリケーションを有効にするには、各クラスターを他のすべてのクラスター (たとえば、 `TiDB A <-> TiDB B` 、 `TiDB B <-> TiDB C` 、 `TiDB C <-> TiDB A`に接続する必要があります。

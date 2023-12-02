@@ -3,19 +3,19 @@ title: TiDB Data Migration Shard Merge
 summary: Learn the shard merge feature of DM.
 ---
 
-# TiDB Data Migration Shard Merge
+# TiDB データ移行シャード マージ {#tidb-data-migration-shard-merge}
 
-TiDB Data Migration (DM) supports merging the DML and DDL data in the upstream MySQL/MariaDB sharded tables and migrating the merged data to the downstream TiDB tables.
+TiDB データ移行 (DM) は、アップストリームの MySQL/MariaDB シャード テーブル内の DML データと DDL データのマージと、マージされたデータのダウンストリーム TiDB テーブルへの移行をサポートします。
 
-If you need to migrate and merge MySQL shards of small datasets to TiDB, refer to [this tutorial](/migrate-small-mysql-shards-to-tidb.md).
+小規模なデータセットの MySQL シャードを TiDB に移行してマージする必要がある場合は、 [このチュートリアル](/migrate-small-mysql-shards-to-tidb.md)を参照してください。
 
-## Restrictions
+## 制限 {#restrictions}
 
-Currently, the shard merge feature is supported only in limited scenarios. For details, refer to [Sharding DDL usage Restrictions in the pessimistic mode](/dm/feature-shard-merge-pessimistic.md#restrictions) and [Sharding DDL usage Restrictions in the optimistic mode](/dm/feature-shard-merge-optimistic.md#restrictions).
+現在、シャード マージ機能は限られたシナリオでのみサポートされています。詳細は[シャーディング DDL の使用法悲観的モードでの制限事項](/dm/feature-shard-merge-pessimistic.md#restrictions) 、 [シャーディング DDL の使用法楽観的モードでの制限事項](/dm/feature-shard-merge-optimistic.md#restrictions)を参照してください。
 
-## Configure parameters
+## パラメータを設定する {#configure-parameters}
 
-In the task configuration file, set `shard-mode` to `pessimistic`:
+タスク構成ファイルで、 `shard-mode` ～ `pessimistic`を設定します。
 
 ```yaml
 shard-mode: "pessimistic"
@@ -25,6 +25,6 @@ shard-mode: "pessimistic"
 # can set it to the "optimistic" mode.
 ```
 
-## Handle sharding DDL locks manually
+## シャーディング DDL ロックを手動で処理する {#handle-sharding-ddl-locks-manually}
 
-In some abnormal scenarios, you need to [handle sharding DDL Locks manually](/dm/manually-handling-sharding-ddl-locks.md).
+一部の異常なシナリオでは、 [DDL ロックのシャーディングを手動で処理する](/dm/manually-handling-sharding-ddl-locks.md)を行う必要があります。

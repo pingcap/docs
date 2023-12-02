@@ -3,27 +3,25 @@ title: TIDB_HOT_REGIONS_HISTORY
 summary: Learn the `TIDB_HOT_REGIONS_HISTORY` information_schema table.
 ---
 
-# TIDB_HOT_REGIONS_HISTORY
+# TIDB_HOT_REGIONS_HISTORY {#tidb-hot-regions-history}
 
-The `TIDB_HOT_REGIONS_HISTORY` table provides information about history hot Regions that are periodically recorded locally by PD.
+表`TIDB_HOT_REGIONS_HISTORY`は、PD によってローカルに定期的に記録される履歴ホット リージョンに関する情報を提供します。
 
-> **Note:**
+> **注記：**
 >
-> This table is not available on [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless) clusters.
+> このテーブルは[TiDB サーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless)クラスターでは使用できません。
 
 <CustomContent platform="tidb">
 
-You can specify the record interval by configuring [`hot-regions-write-interval`](/pd-configuration-file.md#hot-regions-write-interval-new-in-v540). The default value is 10 minutes. You can specify the period for reserving history information about hot Regions by configuring [`hot-regions-reserved-days`](/pd-configuration-file.md#hot-regions-reserved-days-new-in-v540). The default value is 7 days. See [PD configuration file description](/pd-configuration-file.md#hot-regions-write-interval-new-in-v540) for details.
+[`hot-regions-write-interval`](/pd-configuration-file.md#hot-regions-write-interval-new-in-v540)を設定することで記録間隔を指定できます。デフォルト値は 10 分です。 [`hot-regions-reserved-days`](/pd-configuration-file.md#hot-regions-reserved-days-new-in-v540)を設定することで、ホット リージョンの履歴情報を保存する期間を指定できます。デフォルト値は 7 日です。詳細は[PD設定ファイルの説明](/pd-configuration-file.md#hot-regions-write-interval-new-in-v540)を参照してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-By default, the record interval is 10 minutes, and the period for reserving history information about hot Regions is 7 days.
+デフォルトでは、記録間隔は 10 分で、ホット リージョンに関する履歴情報を保存する期間は 7 日間です。
 
 </CustomContent>
-
-{{< copyable "sql" >}}
 
 ```sql
 USE information_schema;
@@ -54,78 +52,66 @@ DESC tidb_hot_regions_history;
 16 rows in set (0.00 sec)
 ```
 
-The fields in the `TIDB_HOT_REGIONS_HISTORY` table are described as follows:
+`TIDB_HOT_REGIONS_HISTORY`テーブルのフィールドは次のように説明されています。
 
-* UPDATE_TIME: The update time of the hot Region.
-* DB_NAME: The database name of the object in which the hot Region is located.
-* TABLE_ID: The ID of the table in which the hot Region is located.
-* TABLE_NAME: The name of the table in which the hot Region is located.
-* INDEX_NAME: The name of the index in which the hot Region is located.
-* INDEX_ID: The ID of the index in which the hot Region is located.
-* REGION_ID: The ID of the hot Region.
-* STORE_ID: The ID of the store in which the hot Region is located.
-* PEER_ID: The ID of the Peer corresponding to the hot Region.
-* IS_LEARNER: Whether the PEER is the LEARNER.
-* IS_LEADER: Whether the PEER is the LEADER.
-* TYPE: The type of the hot Region.
-* HOT_DEGREE: The hot degree of the hot Region.
-* FLOW_BYTES: The number of bytes written and read in the Region.
-* KEY_RATE: The number of keys written and read in the Region.
-* QUERY_RATE: The number of queries written and read in the Region.
+-   UPDATE_TIME: ホットリージョンの更新時間。
+-   DB_NAME: ホットリージョンが存在するオブジェクトのデータベース名。
+-   TABLE_ID: ホットリージョンが配置されているテーブルの ID。
+-   TABLE_NAME: ホットリージョンが配置されているテーブルの名前。
+-   INDEX_NAME: ホットリージョンが配置されているインデックスの名前。
+-   INDEX_ID: ホットリージョンが配置されているインデックスの ID。
+-   REGION_ID: ホットリージョンの ID。
+-   STORE_ID: ホットリージョンが存在するストアの ID。
+-   PEER_ID: ホットリージョンに対応するピアの ID。
+-   IS_LEARNER: PEER が LEARNER であるかどうか。
+-   IS_LEADER: PEER が LEADER であるかどうか。
+-   TYPE: ホットリージョンのタイプ。
+-   HOT_DEGREE: ホットリージョンのホット度。
+-   FLOW_BYTES:リージョン内での書き込みおよび読み取りのバイト数。
+-   KEY_RATE:リージョン内で読み書きされるキーの数。
+-   QUERY_RATE:リージョン内で読み書きされたクエリの数。
 
-> **Note:**
+> **注記：**
 >
-> `UPDATE_TIME`, `REGION_ID`, `STORE_ID`, `PEER_ID`, `IS_LEARNER`, `IS_LEADER` and `TYPE` fields are pushed down to the PD servers for execution. To reduce the overhead of using the table, you must specify the time range for the search, and specify as many conditions as possible. For example, `select * from tidb_hot_regions_history where store_id = 11 and update_time > '2020-05-18 20:40:00' and update_time < '2020-05-18 21:40:00' and type='write'`.
+> `UPDATE_TIME` 、 `REGION_ID` 、 `STORE_ID` 、 `PEER_ID` 、 `IS_LEARNER` 、 `IS_LEADER`および`TYPE`フィールドは、実行のために PD サーバーにプッシュダウンされます。テーブル使用のオーバーヘッドを軽減するには、検索の時間範囲を指定し、できるだけ多くの条件を指定する必要があります。たとえば、 `select * from tidb_hot_regions_history where store_id = 11 and update_time > '2020-05-18 20:40:00' and update_time < '2020-05-18 21:40:00' and type='write'` 。
 
-## Common user scenarios
+## 一般的なユーザーシナリオ {#common-user-scenarios}
 
-* Query hot Regions within a specific period of time. Replace `update_time` with your actual time.
-
-    {{< copyable "sql" >}}
+-   特定の期間内のホット リージョンをクエリします。 `update_time`実際の時刻に置き換えます。
 
     ```sql
     SELECT * FROM INFORMATION_SCHEMA.TIDB_HOT_REGIONS_HISTORY WHERE update_time >'2021-08-18 21:40:00' and update_time <'2021-09-19 00:00:00';
     ```
 
-    > **Note:**
+    > **注記：**
     >
-    > `UPDATE_TIME` also supports Unix timestamps. For example, `update_time >TIMESTAMP('2021-08-18 21:40:00')` or `update_time > FROM_UNIXTIME(1629294000.000)`.
+    > `UPDATE_TIME`は Unix タイムスタンプもサポートします。たとえば、 `update_time >TIMESTAMP('2021-08-18 21:40:00')`または`update_time > FROM_UNIXTIME(1629294000.000)`です。
 
-* Query hot Regions in a table within a specific period of time. Replace `update_time` and `table_name` with your actual values.
-
-    {{< copyable "sql" >}}
+-   特定の期間内のテーブル内のホット リージョンをクエリします。 `update_time`と`table_name`を実際の値に置き換えます。
 
     ```SQL
     SELECT * FROM INFORMATION_SCHEMA.TIDB_HOT_REGIONS_HISTORY WHERE update_time >'2021-08-18 21:40:00' and update_time <'2021-09-19 00:00:00' and TABLE_NAME = 'table_name';
     ```
 
-* Query the distribution of hot Regions within a specific period of time. Replace `update_time` and `table_name` with your actual values.
-
-    {{< copyable "sql" >}}
+-   特定の期間内のホット リージョンの分布をクエリします。 `update_time`と`table_name`を実際の値に置き換えます。
 
     ```sql
     SELECT count(region_id) cnt, store_id FROM INFORMATION_SCHEMA.TIDB_HOT_REGIONS_HISTORY WHERE update_time >'2021-08-18 21:40:00' and update_time <'2021-09-19 00:00:00' and table_name = 'table_name' GROUP BY STORE_ID ORDER BY cnt DESC;
     ```
 
-* Query the distribution of hot Leader Regions within a specific period of time. Replace `update_time` and `table_name` with your actual values.
-
-    {{< copyable "sql" >}}
+-   特定の期間内のホットLeader領域の分布をクエリします。 `update_time`と`table_name`を実際の値に置き換えます。
 
     ```sql
     SELECT count(region_id) cnt, store_id FROM INFORMATION_SCHEMA.TIDB_HOT_REGIONS_HISTORY WHERE update_time >'2021-08-18 21:40:00' and update_time <'2021-09-19 00:00:00' and table_name = 'table_name' and is_leader=1 GROUP BY STORE_ID ORDER BY cnt DESC;
     ```
 
-* Query the distribution of hot Index Regions within a specific period of time. Replace `update_time` and `table_name` with your actual values.
-
-    {{< copyable "sql" >}}
+-   特定の期間内のホットインデックス領域の分布をクエリします。 `update_time`と`table_name`を実際の値に置き換えます。
 
     ```sql
     SELECT count(region_id) cnt, index_name, store_id FROM INFORMATION_SCHEMA.TIDB_HOT_REGIONS_HISTORY WHERE update_time >'2021-08-18 21:40:00' and update_time <'2021-09-19 00:00:00' and table_name = 'table_name' group by index_name, store_id order by index_name,cnt desc;
     ```
 
-* Query the distribution of hot Index Leader Regions within a specific period of time. Replace `update_time` and `table_name` with your actual values.
-
-    {{< copyable "sql" >}}
+-   特定の期間内のホットなインデックスLeader領域の分布をクエリします。 `update_time`と`table_name`を実際の値に置き換えます。
 
     ```sql
     SELECT count(region_id) cnt, index_name, store_id FROM INFORMATION_SCHEMA.TIDB_HOT_REGIONS_HISTORY WHERE update_time >'2021-08-18 21:40:00' and update_time <'2022-09-19 00:00:00' and table_name = 'table_name' and is_leader=1 group by index_name, store_id order by index_name,cnt desc;

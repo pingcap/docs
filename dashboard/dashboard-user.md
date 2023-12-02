@@ -3,51 +3,51 @@ title: TiDB Dashboard User Management
 summary: Learn how to create SQL users to access TiDB Dashboard.
 ---
 
-# TiDB Dashboard User Management
+# TiDB ダッシュボードのユーザー管理 {#tidb-dashboard-user-management}
 
-TiDB Dashboard uses the same user privilege system and sign-in authentication as TiDB. You can control and manage TiDB SQL users to limit their access to TiDB Dashboard. This document describes the least privileges required for TiDB SQL users to access TiDB Dashboard and exemplifies how to create a least-privileged SQL user and how to authorize via RBAC.
+TiDB ダッシュボードは、TiDB と同じユーザー権限システムとサインイン認証を使用します。 TiDB SQLユーザーを制御および管理して、TiDB ダッシュボードへのアクセスを制限できます。このドキュメントでは、 TiDB SQLユーザーが TiDB ダッシュボードにアクセスするために必要な最小限の権限について説明し、最小限の権限を持つ SQL ユーザーを作成する方法と RBAC を介して認証する方法を例示します。
 
-For details about how to control and manage TiDB SQL users, see [TiDB User Account Management](/user-account-management.md).
+TiDB SQLユーザーを制御および管理する方法の詳細については、 [TiDB ユーザーアカウント管理](/user-account-management.md)を参照してください。
 
-## Required privileges
+## 必要な権限 {#required-privileges}
 
-- To access TiDB Dashboard when [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security) is not enabled on the connected TiDB server, the SQL user should have **all** the following privileges:
+-   接続された TiDBサーバーで[Security強化モード (SEM)](/system-variables.md#tidb_enable_enhanced_security)が有効になっていない場合に TiDB ダッシュボードにアクセスするには、SQL ユーザーは次の**すべての**権限を持っている必要があります。
 
-    - PROCESS
-    - SHOW DATABASES
-    - CONFIG
-    - DASHBOARD_CLIENT
+    -   プロセス
+    -   データベースを表示する
+    -   設定
+    -   ダッシュボード_クライアント
 
-- To access TiDB Dashboard when [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security) is enabled on the connected TiDB server, the SQL user should have **all** the following privileges:
+-   接続された TiDBサーバーで[Security強化モード (SEM)](/system-variables.md#tidb_enable_enhanced_security)が有効になっているときに TiDB ダッシュボードにアクセスするには、SQL ユーザーは次の**すべての**権限を持っている必要があります。
 
-    - PROCESS
-    - SHOW DATABASES
-    - CONFIG
-    - DASHBOARD_CLIENT
-    - RESTRICTED_TABLES_ADMIN
-    - RESTRICTED_STATUS_ADMIN
-    - RESTRICTED_VARIABLES_ADMIN
+    -   プロセス
+    -   データベースを表示する
+    -   設定
+    -   ダッシュボード_クライアント
+    -   RESTRICTED_TABLES_ADMIN
+    -   RESTRICTED_STATUS_ADMIN
+    -   RESTRICTED_VARIABLES_ADMIN
 
-- To modify the configurations on the interface after signing in to TiDB Dashboard, the SQL user must also have the following privilege:
+-   TiDB ダッシュボードにサインインした後にインターフェースの構成を変更するには、SQL ユーザーは次の権限も持っている必要があります。
 
-    - SYSTEM_VARIABLES_ADMIN
+    -   SYSTEM_VARIABLES_ADMIN
 
-- To use the [Fast Bind Executions Plan](/dashboard/dashboard-statement-details.md#fast-plan-binding) feature on the interface after signing in to TiDB Dashboard, the SQL user must also have the following privileges:
+-   TiDB ダッシュボードにサインインした後、インターフェイスで[高速バインド実行計画](/dashboard/dashboard-statement-details.md#fast-plan-binding)機能を使用するには、SQL ユーザーは次の権限も持っている必要があります。
 
-    - SYSTEM_VARIABLES_ADMIN
-    - SUPER
+    -   SYSTEM_VARIABLES_ADMIN
+    -   素晴らしい
 
-> **Note:**
+> **注記：**
 >
-> Users with high privileges such as `ALL PRIVILEGES` or `SUPER` can sign in to TiDB Dashboard as well. Therefore, to comply with the least privilege principle, it is highly recommended that you create users with the required privileges only to prevent unintended operations. See [Privilege Management](/privilege-management.md) for more information on these privileges.
+> `ALL PRIVILEGES`や`SUPER`などの高い権限を持つユーザーも、TiDB ダッシュボードにサインインできます。したがって、最小特権の原則に従うために、意図しない操作を防ぐためにのみ必要な権限を持つユーザーを作成することを強くお勧めします。これらの権限の詳細については、 [権限管理](/privilege-management.md)参照してください。
 
-If an SQL user does not meet the preceding privilege requirements, the user fails to sign in to TiDB Dashboard, as shown below.
+SQL ユーザーが前述の権限要件を満たしていない場合、以下に示すように、ユーザーは TiDB ダッシュボードへのサインインに失敗します。
 
 ![insufficient-privileges](/media/dashboard/dashboard-user-insufficient-privileges.png)
 
-## Example: Create a least-privileged SQL user to access TiDB Dashboard
+## 例: TiDB ダッシュボードにアクセスするための最小権限の SQL ユーザーを作成する {#example-create-a-least-privileged-sql-user-to-access-tidb-dashboard}
 
-- When [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security) is not enabled on the connected TiDB server, to create an SQL user `dashboardAdmin` that can sign in to TiDB Dashboard, execute the following SQL statements:
+-   接続された TiDBサーバーで[Security強化モード (SEM)](/system-variables.md#tidb_enable_enhanced_security)が有効になっていない場合、TiDB ダッシュボードにサインインできる SQL ユーザー`dashboardAdmin`を作成するには、次の SQL ステートメントを実行します。
 
     ```sql
     CREATE USER 'dashboardAdmin'@'%' IDENTIFIED BY '<YOUR_PASSWORD>';
@@ -57,13 +57,13 @@ If an SQL user does not meet the preceding privilege requirements, the user fail
 
     -- To modify the configuration items on the interface after signing in to TiDB Dashboard, the user-defined SQL user must be granted with the following privilege.
     GRANT SYSTEM_VARIABLES_ADMIN ON *.* TO 'dashboardAdmin'@'%';
-    
+
     -- To use the Fast Bind Executions Plan feature (https://docs.pingcap.com/tidb/v7.5/dashboard-statement-details#fast-plan-binding) on the interface after signing in to TiDB Dashboard, the user-defined SQL user must be granted with the following privileges.
     GRANT SYSTEM_VARIABLES_ADMIN ON *.* TO 'dashboardAdmin'@'%';
     GRANT SUPER ON *.* TO 'dashboardAdmin'@'%';
     ```
 
-- When [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security) is enabled on the connected TiDB server, disable SEM first and execute the following SQL statements to create an SQL user `dashboardAdmin` that can sign in to TiDB Dashboard. After creating the user, enable SEM again:
+-   接続された TiDBサーバーで[Security強化モード (SEM)](/system-variables.md#tidb_enable_enhanced_security)が有効になっている場合は、まず SEM を無効にし、次の SQL ステートメントを実行して、TiDB ダッシュボードにサインインできる SQL ユーザー`dashboardAdmin`を作成します。ユーザーを作成した後、SEM を再度有効にします。
 
     ```sql
     CREATE USER 'dashboardAdmin'@'%' IDENTIFIED BY '<YOUR_PASSWORD>';
@@ -76,17 +76,17 @@ If an SQL user does not meet the preceding privilege requirements, the user fail
 
     -- To modify the configuration items on the interface after signing in to TiDB Dashboard, the user-defined SQL user must be granted with the following privilege.
     GRANT SYSTEM_VARIABLES_ADMIN ON *.* TO 'dashboardAdmin'@'%';
-    
+
     -- To use the Fast Bind Executions Plan feature (https://docs.pingcap.com/tidb/v7.5/dashboard-statement-details#fast-plan-binding) on the interface after signing in to TiDB Dashboard, the user-defined SQL user must be granted with the following privileges.
     GRANT SYSTEM_VARIABLES_ADMIN ON *.* TO 'dashboardAdmin'@'%';
     GRANT SUPER ON *.* TO 'dashboardAdmin'@'%';
     ```
 
-## Example: Authorize SQL user to access TiDB Dashboard via RBAC
+## 例: SQL ユーザーに RBAC 経由で TiDB ダッシュボードにアクセスする権限を与える {#example-authorize-sql-user-to-access-tidb-dashboard-via-rbac}
 
-The following example demonstrates how to create a role and a user to access TiDB Dashboard through the [role-based access control (RBAC)](/role-based-access-control.md) mechanism.
+次の例は、 [ロールベースのアクセス制御 (RBAC)](/role-based-access-control.md)メカニズムを通じて TiDB ダッシュボードにアクセスするためのロールとユーザーを作成する方法を示しています。
 
-1. Create a `dashboard_access` role that meets all privilege requirements of TiDB Dashboard:
+1.  TiDB ダッシュボードのすべての権限要件を満たす`dashboard_access`ロールを作成します。
 
     ```sql
     CREATE ROLE 'dashboard_access';
@@ -97,7 +97,7 @@ The following example demonstrates how to create a role and a user to access TiD
     GRANT SUPER ON *.* TO 'dashboardAdmin'@'%';    
     ```
 
-2. Grant the `dashboard_access` role to other users and set `dashboard_access` as the default role:
+2.  `dashboard_access`ロールを他のユーザーに付与し、 `dashboard_access`デフォルトのロールとして設定します。
 
     ```sql
     CREATE USER 'dashboardAdmin'@'%' IDENTIFIED BY '<YOUR_PASSWORD>';
@@ -106,8 +106,8 @@ The following example demonstrates how to create a role and a user to access TiD
     SET DEFAULT ROLE dashboard_access to 'dashboardAdmin'@'%';
     ```
 
-After the above steps, you can use the `dashboardAdmin` user to sign in to TiDB Dashboard.
+上記の手順を完了すると、 `dashboardAdmin`ユーザーを使用して TiDB ダッシュボードにサインインできるようになります。
 
-## Sign in to TiDB Dashboard
+## TiDB ダッシュボードにサインインする {#sign-in-to-tidb-dashboard}
 
-After creating an SQL user that meets the privilege requirements of TiDB Dashboard, you can use this user to [Sign in](/dashboard/dashboard-access.md#sign-in) to TiDB Dashboard.
+TiDB ダッシュボードの権限要件を満たす SQL ユーザーを作成した後、このユーザーを TiDB ダッシュ[サインイン](/dashboard/dashboard-access.md#sign-in)に使用できます。

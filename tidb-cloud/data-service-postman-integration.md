@@ -3,87 +3,93 @@ title: Run Data App in Postman
 summary: Learn how to run your Data App in Postman.
 ---
 
-# Run Data App in Postman
+# Postman でデータ アプリを実行する {#run-data-app-in-postman}
 
-[Postman](https://www.postman.com/) is an API platform that simplifies the API lifecycle and enhances collaboration for faster and better API development.
+[郵便屋さん](https://www.postman.com/)は、API ライフサイクルを簡素化し、コラボレーションを強化して、より迅速で優れた API 開発を実現する API プラットフォームです。
 
-In TiDB Cloud [Data Service](https://tidbcloud.com/console/data-service), you can easily import your Data App to Postman and leverage Postman's extensive tools to enhance your API development experience.
+TiDB Cloud [データサービス](https://tidbcloud.com/console/data-service)では、データ アプリを Postman に簡単にインポートし、Postman の広範なツールを活用して API 開発エクスペリエンスを強化できます。
 
-This document describes how to import your Data App to Postman and how to run your Data App in Postman.
+このドキュメントでは、データ アプリを Postman にインポートする方法と、データ アプリを Postman で実行する方法について説明します。
 
-## Before you begin
+## あなたが始める前に {#before-you-begin}
 
-Before importing a Data App to Postman, make sure that you have the following:
+Data App を Postman にインポートする前に、次のことを確認してください。
 
-- A [Postman](https://www.postman.com/) account
-- A [Postman desktop app](https://www.postman.com/downloads) (optional). Alternatively, you can use the Postman web version without downloading the app.
-- A [Data App](/tidb-cloud/data-service-manage-data-app.md) with at least one well-defined [endpoint](/tidb-cloud/data-service-manage-endpoint.md). Only endpoints that meet the following requirements can be imported to Postman:
+-   [郵便屋さん](https://www.postman.com/)アカウント
 
-    - The target cluster is selected.
-    - The endpoint path and request method are configured.
-    - The SQL statements are written.
+-   A [ポストマンデスクトップアプリ](https://www.postman.com/downloads) (オプション)。あるいは、アプリをダウンロードせずに Postman Web バージョンを使用することもできます。
 
-- An [API key](/tidb-cloud/data-service-api-key.md#create-an-api-key) for the Data App.
+-   明確に定義された[終点](/tidb-cloud/data-service-manage-endpoint.md)が少なくとも 1 つある[データアプリ](/tidb-cloud/data-service-manage-data-app.md) 。次の要件を満たすエンドポイントのみを Postman にインポートできます。
 
-## Step 1. Import your Data App to Postman
+    -   ターゲットクラスターが選択されます。
+    -   エンドポイントのパスとリクエスト方法が構成されます。
+    -   SQL ステートメントが書き込まれます。
 
-To import your Data App to Postman, take the following steps:
+-   データ アプリの場合は[APIキー](/tidb-cloud/data-service-api-key.md#create-an-api-key) 。
 
-1. In the [TiDB Cloud console](https://tidbcloud.com), navigate to the [**Data Service**](https://tidbcloud.com/console/data-service) page of your project.
-2. In the left pane, click the name of your target Data App to view its details.
-3. In the upper-right corner of the page, click **Run in Postman**. A dialog with import instructions is displayed.
+## ステップ 1. データ アプリを Postman にインポートする {#step-1-import-your-data-app-to-postman}
 
-    > **Note:**
+Data App を Postman にインポートするには、次の手順を実行します。
+
+1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、プロジェクトの[**データサービス**](https://tidbcloud.com/console/data-service)ページに移動します。
+
+2.  左側のペインで、ターゲット データ アプリの名前をクリックして詳細を表示します。
+
+3.  ページの右上隅にある**[Postman で実行]**をクリックします。インポート手順を示すダイアログが表示されます。
+
+    > **注記：**
     >
-    > - If a Data App lacks a well-defined endpoint (the target cluster, path, request method, and SQL statements are configured), **Run in Postman** remains disabled for the Data App.
-    > - For a Chat2Query Data App, **Run in Postman** is not available.
+    > -   データ アプリに明確に定義されたエンドポイントがない場合 (ターゲット クラスター、パス、リクエスト メソッド、および SQL ステートメントが構成されている場合)、データ アプリに対して**Postman での実行は**無効のままになります。
+    > -   Chat2Query データ アプリの場合、 **Postman で実行は**利用できません。
 
-4. Follow the steps provided in the dialog for the Data App import:
+4.  データ アプリのインポートのダイアログに表示される手順に従います。
 
-    1. Depending on your preference, choose either **Run in Postman for Web** or **Run in Postman Desktop** to open your Postman workspaces, and then select your target workspace.
+    1.  好みに応じて、 **「Postman for Web で実行」**または**「Postman デスクトップで実行」**を選択して Postman ワークスペースを開き、ターゲット ワークスペースを選択します。
 
-        - If you have not logged into Postman, follow the on-screen instructions to log into Postman first.
-        - If you clicked **Run in Postman Desktop**, follow the on-screen instructions to launch the Postman desktop app.
+        -   Postman にログインしていない場合は、まず画面上の指示に従って Postman にログインします。
+        -   **[Postman デスクトップで実行]**をクリックした場合は、画面上の指示に従って Postman デスクトップ アプリを起動します。
 
-    2. On the page of your target workspace in Postman, click **Import** in the left navigation menu.
-    3. Copy the Data App URL from the TiDB Cloud dialog, and then paste the URL to Postman for the import.
+    2.  Postman のターゲット ワークスペースのページで、左側のナビゲーション メニューの**[インポート]**をクリックします。
 
-5. After you paste the URL, Postman imports the Data App automatically as a new [collection](https://learning.postman.com/docs/collections/collections-overview). The name of the collection is in the `TiDB Data Service - <Your App Name>` format.
+    3.  TiDB Cloudダイアログから Data App URL をコピーし、インポートのためにその URL を Postman に貼り付けます。
 
-    In the collection, the deployed endpoints are grouped under the **Deployed** folder and the un-deployed endpoints are grouped under the **Draft** folder.
+5.  URL を貼り付けると、Postman はデータ アプリを新しい[コレクション](https://learning.postman.com/docs/collections/collections-overview)として自動的にインポートします。コレクションの名前は`TiDB Data Service - <Your App Name>`形式です。
 
-## Step 2. Configure your Data App API key in Postman
+    コレクションでは、デプロイされたエンドポイントは**Deployed**フォルダーの下にグループ化され、デプロイされていないエンドポイントは**Draft**フォルダーの下にグループ化されます。
 
-Before running the imported Data App in Postman, you need to configure the API key for the Data App in Postman as follows:
+## ステップ 2. Postman で Data App API キーを構成する {#step-2-configure-your-data-app-api-key-in-postman}
 
-1. In the left navigation menu of Postman, click `TiDB Data Service - <Your App Name>` to open a tab for it on the right side.
-2. Under the `TiDB Data Service - <Your App Name>` tab, click the **Variables** tab.
-3. In the variable table, enter the public key and private key for your Data App in the **Current value** column.
-4. In the upper-right corner of the `TiDB Data Service - <Your App Name>` tab, click **Save**.
+インポートされたデータ アプリを Postman で実行する前に、Postman でデータ アプリの API キーを次のように構成する必要があります。
 
-## Step 3. Run Data App in Postman
+1.  Postman の左側のナビゲーション メニューで、 `TiDB Data Service - <Your App Name>`をクリックして右側にそのタブを開きます。
+2.  `TiDB Data Service - <Your App Name>`タブの下で**「変数」**タブをクリックします。
+3.  変数テーブルの**[現在の値]**列にデータ アプリの公開キーと秘密キーを入力します。
+4.  `TiDB Data Service - <Your App Name>`タブの右上隅にある**[保存]**をクリックします。
 
-To run your Data App in Postman, take the following steps:
+## ステップ 3. Postman でデータ アプリを実行する {#step-3-run-data-app-in-postman}
 
-1. In the left navigation pane of Postman, expand the **Deployed** or **Draft** folder, and then click your endpoint name to open a tab for it on the right side.
-2. Under the `<Your Endpoint Name>` tab, you can call your endpoint as follows:
+Postman でデータ アプリを実行するには、次の手順を実行します。
 
-    - For an endpoint without parameters, you can click **Send** to call it directly.
-    - For an endpoint with parameters, you need to fill in the parameter values first, and then click **Send**.
+1.  Postman の左側のナビゲーション ウィンドウで、 **[Deployed]**フォルダーまたは**[Draft]**フォルダーを展開し、エンドポイント名をクリックして右側にそのタブを開きます。
 
-        - For a `GET` or `DELETE` request, fill in the parameter values in the **Query Params** table.
-        - For a `POST` or `PUT` request, click the **Body** tab, and then fill in the parameter values as a JSON object. If **Batch Operation** is enabled for the endpoint in TiDB Cloud Data Service, fill in the parameter values as an array of JSON objects.
+2.  `<Your Endpoint Name>`タブで、次のようにエンドポイントを呼び出すことができます。
 
-3. Check the response in the lower pane.
+    -   パラメーターのないエンドポイントの場合は、 **「送信」**をクリックしてエンドポイントを直接呼び出すことができます。
+    -   パラメーターを含むエンドポイントの場合は、最初にパラメーター値を入力してから、 **[送信]**をクリックする必要があります。
 
-4. If you want to call the endpoint again with different parameter values, you can edit the parameter values accordingly, and then click **Send** again.
+        -   `GET`または`DELETE`リクエストの場合、 **Query Params**テーブルにパラメータ値を入力します。
+        -   `POST`または`PUT`リクエストの場合は、 **「本文」**タブをクリックし、パラメータ値を JSON オブジェクトとして入力します。 TiDB Cloud Data Service のエンドポイントに対して**バッチ操作が**有効になっている場合は、パラメーター値を JSON オブジェクトの配列として入力します。
 
-To learn more about the Postman usage, see [Postman documentation](https://learning.postman.com/docs).
+3.  下部ペインで応答を確認します。
 
-## Deal with new changes in Data App
+4.  異なるパラメーター値を使用してエンドポイントを再度呼び出す場合は、パラメーター値を編集して、再度**[送信]**をクリックします。
 
-After a Data App is imported to Postman, TiDB Cloud Data Service will not automatically synchronize new changes of the Data App to Postman.
+Postman の使用法の詳細については、 [郵便配達員のドキュメント](https://learning.postman.com/docs)を参照してください。
 
-If you want any new changes to reflect in Postman, you have to [follow the import process](#step-1-import-your-data-app-to-postman) once again. Because the collection name is unique in a Postman workspace, you can either use the latest Data App to replace the previously imported one or import the latest Data App as a new collection.
+## Data App の新しい変更に対処する {#deal-with-new-changes-in-data-app}
 
-Also, after re-importing the Data App, you will have to [configure the API key for the newly imported App](#step-2-configure-your-data-app-api-key-in-postman) in Postman again.
+データ アプリが Postman にインポートされた後、 TiDB Cloudデータ サービスはデータ アプリの新しい変更を Postman に自動的に同期しません。
+
+新しい変更を Postman に反映させたい場合は、もう一度[インポートプロセスに従ってください](#step-1-import-your-data-app-to-postman)実行する必要があります。コレクション名は Postman ワークスペース内で一意であるため、最新のデータ アプリを使用して以前にインポートしたデータ アプリを置き換えるか、最新のデータ アプリを新しいコレクションとしてインポートできます。
+
+また、Data App を再インポートした後は、Postman で再度[新しくインポートされたアプリの API キーを構成する](#step-2-configure-your-data-app-api-key-in-postman)を行う必要があります。

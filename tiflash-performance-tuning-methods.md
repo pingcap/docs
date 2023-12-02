@@ -3,111 +3,113 @@ title: TiFlash Performance Analysis and Tuning Methods
 summary: Introduces the TiFlash metrics on the Performance Overview dashboard to help you better understand and monitor TiFlash workloads.
 ---
 
-# TiFlash Performance Analysis and Tuning Methods
+# TiFlash のパフォーマンス分析およびチューニング方法 {#tiflash-performance-analysis-and-tuning-methods}
 
-This document introduces TiFlash resource utilization and key performance metrics. You can monitor and evaluate the TiFlash cluster performance through the [TiFlash panel](/grafana-performance-overview-dashboard.md#tiflash) on the Performance Overview dashboard.
+このドキュメントでは、 TiFlashリソースの使用率と主要なパフォーマンス メトリクスを紹介します。 TiFlashクラスターのパフォーマンスは、[パフォーマンス概要] ダッシュボードの[TiFlashパネル](/grafana-performance-overview-dashboard.md#tiflash)から監視および評価できます。
 
-## Resource utilization of a TiFlash cluster
+## TiFlashクラスターのリソース使用率 {#resource-utilization-of-a-tiflash-cluster}
 
-With the following three metrics, you can quickly get the resource utilization of a TiFlash cluster:
+次の 3 つのメトリックを使用すると、 TiFlashクラスターのリソース使用率をすぐに取得できます。
 
-- CPU: the CPU utilization per TiFlash instance.
-- Memory: the memory usage per TiFlash instance.
-- IO utilization: the IO utilization per TiFlash instance.
+-   CPU: TiFlashインスタンスごとの CPU 使用率。
+-   メモリ: TiFlashインスタンスごとのメモリ使用量。
+-   IO 使用率: TiFlashインスタンスごとの IO 使用率。
 
-Example: Resource utilization during [CH-benCHmark workload](/benchmark/benchmark-tidb-using-ch.md)
+例: [CH-benCHmark のワークロード](/benchmark/benchmark-tidb-using-ch.md)の間のリソース使用率
 
-This TiFlash cluster consists of two nodes, each node configured with 16 cores and 48 GB of memory. During the CH-benCHmark workload, CPU utilization can reach up to 1500%, memory usage can reach up to 20 GB, and IO utilization can reach up to 91%. These metrics indicate that TiFlash node resources are approaching saturation.
+このTiFlashクラスターは 2 つのノードで構成され、各ノードは 16 コアと 48 GB のメモリで構成されています。 CH-benCHmark ワークロード中、CPU 使用率は最大 1500%、メモリ使用率は最大 20 GB、IO 使用率は最大 91% に達する可能性があります。これらのメトリクスは、 TiFlashノードのリソースが飽和に近づいていることを示しています。
 
-![CH-TiFlash-MPP](/media/performance/tiflash/tiflash-resource-usage.png)  
+![CH-TiFlash-MPP](/media/performance/tiflash/tiflash-resource-usage.png)
 
-## Key metrics for TiFlash performance
+## TiFlashパフォーマンスの主要な指標 {#key-metrics-for-tiflash-performance}
 
-### Throughput metrics
+### スループットメトリクス {#throughput-metrics}
 
-With the following metrics, you can get the throughput of TiFlash:
+次のメトリクスを使用して、 TiFlashのスループットを取得できます。
 
-- MPP Query count: the instant value of MPP query count for each TiFlash instance, reflecting the current number of MPP queries that need to be processed by the TiFlash instance (including those being processed and those awaiting scheduling).
-- Request QPS: the number of coprocessor requests received by all TiFlash instances.
-    - `run_mpp_task`, `dispatch_mpp_task`, and `mpp_establish_conn` are MPP requests.
-    - `batch`: the number of batch requests.
-    - `cop`: the number of coprocessor requests that are sent directly via the coprocessor interface.
-    - `cop_execution`: the number of coprocessor requests currently being executed.
-    - `remote_read`, `remote_read_constructed`, and `remote_read_sent` are remote read-related metrics. An increase in remote reads usually indicates an issue in the system.
-- Executor QPS: the number of each type of dag operators in the requests received by all TiFlash instances, where `table_scan` is the table scan operator, `selection` is the selection operator, `aggregation` is the aggregation operator, `top_n` is the TopN operator, `limit` is the limit operator, `join` is a join operator, `exchange_sender` is a data sending operator, and `exchange_receiver` is a data receiving operator.
+-   MPP クエリ数: 各TiFlashインスタンスの MPP クエリ数の瞬間値TiFlashインスタンスによって処理する必要がある MPP クエリの現在の数 (処理中のものとスケジュールを待っているものを含む) を反映します。
+-   リクエスト QPS: すべてのTiFlashインスタンスによって受信されたコプロセッサ リクエストの数。
+    -   `run_mpp_task` 、 `dispatch_mpp_task` 、および`mpp_establish_conn`は MPP リクエストです。
+    -   `batch` : バッチリクエストの数。
+    -   `cop` : コプロセッサ インターフェイスを介して直接送信されるコプロセッサ リクエストの数。
+    -   `cop_execution` : 現在実行中のコプロセッサリクエストの数。
+    -   `remote_read` 、 `remote_read_constructed` 、および`remote_read_sent` 、リモート読み取り関連のメトリックです。リモート読み取りの増加は、通常、システムに問題があることを示しています。
+-   Executor QPS: すべてのTiFlashインスタンスによって受信されたリクエスト内の各タイプの DAG オペレーターの数`table_scan`はテーブル スキャン オペレーター、 `selection`は選択オペレーター、 `aggregation`は集計オペレーター、 `top_n`は TopN オペレーター、 `limit`は制限です演算子、 `join`は結合演算子、 `exchange_sender`はデータ送信演算子、 `exchange_receiver`はデータ受信演算子である。
 
-### Latency metrics
+### レイテンシのメトリクス {#latency-metrics}
 
-With the following metrics, you can get the latency of TiFlash:
+次のメトリクスを使用して、 TiFlashのレイテンシーを取得できます。
 
-- Request Duration Overview: provides a stacked chart of the total processing duration for all request types in all TiFlash instances per second.
+-   リクエスト時間の概要: すべてのTiFlashインスタンスにおけるすべてのリクエスト タイプの 1 秒あたりの合計処理時間の積み上げグラフを提供します。
 
-    - If the type of a request is `run_mpp_task`, `dispatch_mpp_task`, or `mpp_establish_conn`, it indicates that the SQL statement execution has been partially or fully pushed down to TiFlash, typically involving join and data distribution operations. This is the most common request type in TiFlash.
-    - If the type of a request is `cop`, it indicates that the statement related to this request has not been fully pushed down to TiFlash. Typically, TiDB pushes down the table full scan operator to TiFlash for data access and filtering. If `cop` becomes the most common request type in the stacked chart, you need to check if it is reasonable.
+    -   リクエストのタイプが`run_mpp_task` 、 `dispatch_mpp_task` 、または`mpp_establish_conn`の場合、SQL ステートメントの実行が部分的または完全にTiFlashにプッシュダウンされたことを示します。これには通常、結合操作とデータ分散操作が含まれます。これは、 TiFlashで最も一般的なリクエスト タイプです。
+    -   リクエストのタイプが`cop`の場合、このリクエストに関連するステートメントがTiFlashに完全にはプッシュダウンされていないことを示します。通常、TiDB は、データ アクセスとフィルタリングのためにテーブル フル スキャン オペレーターをTiFlashにプッシュダウンします。積み上げグラフで`cop`最も一般的なリクエスト タイプになった場合は、それが妥当かどうかを確認する必要があります。
 
-        - If the amount of data queried by a SQL statement is large, the optimizer might estimate that TiFlash full table scans are more cost-effective according to the cost model.
-        - If the schema of a queried table lacks suitable indexes, the optimizer can only push the query down to TiFlash for a full table scan, even if the amount of data to be queried is small. In this case, it is more efficient to create proper indexes and access the data through TiKV.
+        -   SQL ステートメントによってクエリされるデータの量が多い場合、オプティマイザは、コスト モデルに従って、 TiFlashフル テーブル スキャンの方がコスト効率が高いと推定する可能性があります。
+        -   クエリ対象のテーブルのスキーマに適切なインデックスがない場合、オプティマイザは、クエリ対象のデータ量が少ない場合でも、テーブル全体のスキャンのためにクエリをTiFlashにプッシュすることしかできません。この場合、適切なインデックスを作成し、TiKV 経由でデータにアクセスする方が効率的です。
 
-- Request Duration: the total processing duration for each MPP and coprocessor request type in all TiFlash instances, which includes the average latency and p99 latency.
-- Request Handle Duration: the time from the start of executing the `cop` and `batch cop` requests to the completion of the execution, excluding waiting time. This metric is only applicable to the `cop` and `batch cop` types of requests, including average and P99 latency.
+-   リクエスト期間: すべてのTiFlashインスタンスにおける各 MPP およびコプロセッサ リクエスト タイプの合計処理時間。これには平均レイテンシーと p99レイテンシーが含まれます。
 
-Example 1: Processing duration overview of TiFlash MPP requests
+-   リクエスト ハンドル時間: `cop`と`batch cop`のリクエストの実行開始から実行完了までの待ち時間を除く時間。このメトリクスは、平均レイテンシと P99レイテンシーを含む、 `cop`および`batch cop`タイプのリクエストにのみ適用されます。
 
-In the workload of the following diagram, `run_mpp_task` and `mpp_establish_conn` requests constitute the majority of the total processing duration, indicating that most of the requests are MPP tasks that are fully pushed down to TiFlash for execution.
+例 1: TiFlash MPP リクエストの処理時間の概要
 
-The processing duration of `cop` requests is relatively small, indicating that some of the requests are pushed down to TiFlash for data access and filtering through the coprocessor.
+次の図のワークロードでは、 `run_mpp_task`と`mpp_establish_conn`のリクエストが合計処理時間の大部分を占めており、ほとんどのリクエストが実行のためにTiFlashに完全にプッシュダウンされる MPP タスクであることを示しています。
+
+`cop`リクエストの処理時間は比較的短く、一部のリクエストがデータ アクセスとコプロセッサによるフィルタリングのためにTiFlashにプッシュダウンされていることを示しています。
 
 ![CH-TiFlash-MPP](/media/performance/tiflash/ch-2tiflash-op.png)
 
-Example 2: TiFlash `cop` requests constitute the majority of the total processing duration
+例 2: TiFlash `cop`リクエストが総処理時間の大部分を占める
 
-In the workload of the following diagram, `cop` requests constitute the majority of the total processing duration. In this case, you can check the SQL execution plan to see why these `cop` requests are generated.
+次の図のワークロードでは、 `cop`リクエストが合計処理時間の大部分を占めています。この場合、SQL 実行プランをチェックして、これら`cop`のリクエストが生成された理由を確認できます。
 
 ![Cop](/media/performance/tiflash/tiflash_request_duration_by_type.png)
 
-### Raft-related metrics
+### Raft 関連のメトリクス {#raft-related-metrics}
 
-With the following metrics, you can get the Raft replication status of TiFlash:
+次のメトリクスを使用して、 TiFlashのRaftレプリケーション ステータスを取得できます。
 
-- Raft Wait Index Duration: the duration of waiting until the local Region index >= `read_index` for all TiFlash instances, which represents the latency of the `wait_index` operation. If this metric is too high, it indicates that data replication from TiKV to TiFlash has a significant latency. Possible reasons include the following:
+-   Raft待機インデックス期間: すべてのTiFlashインスタンスのローカルリージョンインデックスが`read_index`以上になるまでの待機期間。これは`wait_index`操作のレイテンシーを表します。このメトリクスが高すぎる場合は、TiKV からTiFlashへのデータ レプリケーションに重大なレイテンシーがあることを示します。考えられる理由は次のとおりです。
 
-    - TiKV resource is overloaded.
-    - TiFlash resource is overloaded, especially IO resources.
-    - There is a network bottleneck between TiKV and TiFlash.
+    -   TiKV リソースが過負荷になっています。
+    -   TiFlashリソース、特に IO リソースが過負荷になっています。
+    -   TiKV とTiFlashの間にネットワークのボトルネックがあります。
 
-- Raft Batch Read Index Duration: the latency of `read_index` for all TiFlash instances. If this metric is too high, it indicates that the interaction between TiFlash and TiKV is slow. Possible reasons include the following:
+-   Raftバッチ読み取りインデックス期間: すべてのTiFlashインスタンスのレイテンシー`read_index` 。このメトリクスが高すぎる場合は、 TiFlashと TiKV の間の相互作用が遅いことを示します。考えられる理由は次のとおりです。
 
-    - TiFlash resource is overloaded.
-    - TiKV resource is overloaded.
-    - There is a network bottleneck between TiFlash and TiKV.
+    -   TiFlashリソースが過負荷になっています。
+    -   TiKV リソースが過負荷になっています。
+    -   TiFlashと TiKV の間にネットワークのボトルネックがあります。
 
-### IO throughput metrics
+### IOスループットのメトリクス {#io-throughput-metrics}
 
-With the following metrics, you can get the IO throughput of TiFlash:
+次のメトリクスを使用して、 TiFlashの IO スループットを取得できます。
 
-- Write Throughput By Instance: the throughput of data written by each TiFlash instance. It includes the throughput by applying the Raft data logs and Raft snapshots.
-- Write flow: the traffic of disk writes by all TiFlash instances.
+-   インスタンスごとの書き込みスループット: 各TiFlashインスタンスによって書き込まれるデータのスループット。これには、 Raftデータ ログとRaftスナップショットを適用することによるスループットが含まれます。
 
-    - File Descriptor: the stable layer of the DeltaTree storage engine used by TiFlash.
-    - Page: refers to Pagestore, the Delta change layer of the DeltaTree storage engine used by TiFlash.
+-   書き込みフロー: すべてのTiFlashインスタンスによるディスク書き込みのトラフィック。
 
-- Read flow: traffic of disk read operations for all TiFlash instances.
+    -   ファイル記述子: TiFlashによって使用される DeltaTreestorageエンジンの安定したレイヤー。
+    -   Page: TiFlashで使用される DeltaTreestorageエンジンのデルタ変更レイヤーである Pagestore を指します。
 
-    - File Descriptor: the stable layer of the DeltaTree storage engine used by TiFlash.
-    - Page: refers to Pagestore, the Delta change layer of the DeltaTree storage engine used by TiFlash.
+-   読み取りフロー: すべてのTiFlashインスタンスのディスク読み取り操作のトラフィック。
 
-You can calculate the write amplification factor of the entire TiFlash cluster using the `(Read flow + Write flow) ÷ total Write Throughput By Instance` formula.
+    -   ファイル記述子: TiFlashによって使用される DeltaTreestorageエンジンの安定したレイヤー。
+    -   Page: TiFlashで使用される DeltaTreestorageエンジンのデルタ変更レイヤーである Pagestore を指します。
 
-Example 1: Raft and IO metrics of the [CH-benCHmark workload](/benchmark/benchmark-tidb-using-ch.md) in a self-hosted environment
+TiFlashクラスター全体の書き込み増幅率は、 `(Read flow + Write flow) ÷ total Write Throughput By Instance`の式を使用して計算できます。
 
-As shown in the following diagram, the `Raft Wait Index Duration` and the 99th percentile of `Raft Batch Read Index Duration` for this TiFlash cluster are relatively high, at 3.24 seconds and 753 milliseconds respectively. This is because the TiFlash workload in this cluster is high and latency occurs in data replication.
+例 1: セルフホスト環境におけるRaftと[CH-benCHmark のワークロード](/benchmark/benchmark-tidb-using-ch.md)の IO メトリクス
 
-In this cluster, there are two TiFlash nodes. The incremental data replication speed from TiKV to TiFlash is approximately 28 MB per second. The maximum write throughput of the stable layer (File Descriptor) is 939 MB/s, and the maximum read throughput is 1.1 GiB/s. Meanwhile, the maximum write throughput of the Delta layer (Page) is 74 MB/s, and the maximum read throughput is 111 MB/s. In this environment, TiFlash uses dedicated NVME disks, which have strong IO throughput capabilities.
+次の図に示すように、このTiFlashクラスターの`Raft Wait Index Duration`パーセンタイルと`Raft Batch Read Index Duration`の 99 パーセンタイルは、それぞれ 3.24 秒と 753 ミリ秒と比較的高くなります。これは、このクラスターのTiFlashワークロードが高く、データ レプリケーションでレイテンシーが発生するためです。
+
+このクラスターには 2 つのTiFlashノードがあります。 TiKV からTiFlashへの増分データ レプリケーションの速度は、1 秒あたり約 28 MB です。安定レイヤー(ファイル記述子) の最大書き込みスループットは 939 MB/秒、最大読み取りスループットは 1.1 GiB/秒です。一方、デルタレイヤー(Page) の最大書き込みスループットは 74 MB/s、最大読み取りスループットは 111 MB/s です。この環境では、 TiFlash は強力な IO スループット能力を持つ専用の NVME ディスクを使用します。
 
 ![CH-2TiFlash-OP](/media/performance/tiflash/ch-2tiflash-raft-io-flow.png)
 
-Example 2: Raft and IO metrics of the [CH-benCHmark workload](/benchmark/benchmark-tidb-using-ch.md) in a public cloud deployment environment
+例 2: パブリック クラウド デプロイメント環境におけるRaftと[CH-benCHmark のワークロード](/benchmark/benchmark-tidb-using-ch.md)の IO メトリクス
 
-As shown in the following diagram, the 99th percentile of `Raft Wait Index Duration` is up to 438 milliseconds, and 99th percentile of the `Raft Batch Read Index Duration` is up to 125 milliseconds. This cluster has only one TiFlash node. TiKV replicates about 5 MB of incremental data to TiFlash per second. The maximum write traffic of the stable layer (File Descriptor) is 78 MB/s and the maximum read traffic is 221 MB/s. In the meantime, the maximum write traffic of the Delta layer (Page) is 8 MB/s and the maximum read traffic is 18 MB/s. In this environment, TiFlash uses an AWS EBS cloud disk, which has relatively weak IO throughput.
+次の図に示すように、 `Raft Wait Index Duration`の 99 パーセンタイルは最大 438 ミリ秒、 `Raft Batch Read Index Duration`の 99 パーセンタイルは最大 125 ミリ秒です。このクラスターにはTiFlashノードが 1 つだけあります。 TiKV は、1 秒あたり約 5 MB の増分データをTiFlashにレプリケートします。安定レイヤー(ファイル記述子) の最大書き込みトラフィックは 78 MB/秒、最大読み取りトラフィックは 221 MB/秒です。一方、デルタレイヤー(ページ) の最大書き込みトラフィックは 8 MB/s、最大読み取りトラフィックは 18 MB/s です。この環境では、 TiFlash は、IO スループットが比較的弱い AWS EBS クラウド ディスクを使用します。
 
 ![CH-TiFlash-MPP](/media/performance/tiflash/ch-1tiflash-raft-io-flow-cloud.png)

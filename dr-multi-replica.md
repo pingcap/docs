@@ -3,30 +3,30 @@ title: DR Solution Based on Multiple Replicas in a Single Cluster
 summary: Learn about the multi-replica disaster recovery solution for a single cluster.
 ---
 
-# DR Solution Based on Multiple Replicas in a Single Cluster
+# 単一クラスタ内の複数のレプリカに基づく DR ソリューション {#dr-solution-based-on-multiple-replicas-in-a-single-cluster}
 
-This document describes the disaster recovery (DR) solution based on multiple replicas in a single cluster. The document is organized as follows:
+このドキュメントでは、単一クラスター内の複数のレプリカに基づく災害復旧 (DR) ソリューションについて説明します。この文書は次のように構成されています。
 
-- Solution introduction
-- How to set up a cluster and configure replicas
-- How to monitor the cluster
-- How to perform a DR switchover
+-   ソリューションの紹介
+-   クラスターをセットアップしてレプリカを構成する方法
+-   クラスターを監視する方法
+-   DR スイッチオーバーを実行する方法
 
-## Introduction
+## 導入 {#introduction}
 
-Important production systems usually require regional DR with zero RPO and minute-level RTO. A Raft-based distributed database, TiDB provides multiple replicas, which allows it to support regional DR with data consistency and high availability guaranteed. Considering the small network latency between available zones (AZs) in the same region, we can dispatch business traffic to two AZs on the same region simultaneously, and achieve load balance among AZs on the same region by properly locating the Region leader and the PD leader.
+重要な本番システムには通常、ゼロ RPO と分単位の RTO を備えた地域的な DR が必要です。 Raft ベースの分散データベースである TiDB は複数のレプリカを提供するため、データの一貫性と高可用性が保証された地域 DR をサポートできます。同じリージョン内のアベイラブル ゾーン (AZ) 間のネットワークレイテンシーが小さいことを考慮すると、ビジネス トラフィックを同じリージョン上の 2 つの AZ に同時にディスパッチし、リージョンリーダーと PD リーダーを適切に配置することで、同じリージョン上の AZ 間の負荷分散を実現できます。 。
 
-> **Note:**
+> **注記：**
 >
-> ["Region" in TiKV](/glossary.md#regionpeerraft-group) means a range of data while the term "region" means a physical location. The two terms are not interchangeable.
+> [TiKVの「リージョン」](/glossary.md#regionpeerraft-group)データの範囲を意味し、「領域」という用語は物理的な位置を意味します。この 2 つの用語は互換性がありません。
 
-## Set up a cluster and configure replicas
+## クラスターをセットアップし、レプリカを構成する {#set-up-a-cluster-and-configure-replicas}
 
-This section illustrates how to create a TiDB cluster across three regions with five replicas using TiUP, and how to achieve DR by properly distributing data and PD nodes.
+このセクションでは、 TiUPを使用して 5 つのレプリカを持つ 3 つのリージョンにまたがる TiDB クラスターを作成する方法と、データと PD ノードを適切に分散して DR を実現する方法を説明します。
 
-In this example, TiDB contains five replicas and three regions. Region 1 is the primary region, region 2 is the secondary region, and region 3 is used for voting. Similarly, the PD cluster also contains 5 replicas, which function basically the same as the TiDB cluster.
+この例では、TiDB には 5 つのレプリカと 3 つのリージョンが含まれています。リージョン1 はプライマリ リージョン、リージョン 2 はセカンダリ リージョン、リージョン 3 は投票に使用されます。同様に、PD クラスターにも 5 つのレプリカが含まれており、基本的に TiDB クラスターと同じように機能します。
 
-1. Create a topology file similar to the following:
+1.  次のようなトポロジ ファイルを作成します。
 
     ```toml
     global:
@@ -87,12 +87,12 @@ In this example, TiDB contains five replicas and three regions. Region 1 is the 
       - host: tidb-dr-test2
     ```
 
-    The preceding configurations use the following options to optimize toward cross-region DR:
+    前述の構成では、クロスリージョン DR に向けて最適化するために次のオプションを使用します。
 
-    - `server.grpc-compression-type: gzip` to enable gRPC message compression in TiKV, thus reducing network traffic.
-    - `raftstore.raft-min-election-timeout-ticks` and `raftstore.raft-max-election-timeout-ticks` to extend the time before region 3 participates in the election, thus preventing any replica in this region from being voted as the leader.
+    -   `server.grpc-compression-type: gzip`を指定すると、TiKV での gRPC メッセージ圧縮が有効になり、ネットワーク トラフィックが削減されます。
+    -   `raftstore.raft-min-election-timeout-ticks`と`raftstore.raft-max-election-timeout-ticks`使用して、リージョン 3 が選挙に参加するまでの時間を延長します。これにより、このリージョン内のレプリカがリーダーとして投票されなくなります。
 
-2. Create a cluster using the preceding configuration file:
+2.  前述の構成ファイルを使用してクラスターを作成します。
 
     ```shell
     tiup cluster deploy drtest v6.4.0 ./topo.yaml
@@ -100,7 +100,7 @@ In this example, TiDB contains five replicas and three regions. Region 1 is the 
     tiup cluster display drtest
     ```
 
-    Configure the number of replicas and the leader limit for the cluster:
+    クラスターのレプリカの数とリーダー制限を構成します。
 
     ```shell
     tiup ctl:v6.4.0 pd config set max-replicas 5
@@ -110,7 +110,7 @@ In this example, TiDB contains five replicas and three regions. Region 1 is the 
     tiup bench tpcc  prepare -H 127.0.0.1 -P 4000 -D tpcc --warehouses 1
     ```
 
-    Specify the priority of PD leader:
+    PD リーダーの優先順位を指定します。
 
     ```shell
     tiup ctl:v6.4.0 pd member leader_priority  pd-1 4
@@ -120,11 +120,11 @@ In this example, TiDB contains five replicas and three regions. Region 1 is the 
     tiup ctl:v6.4.0 pd member leader_priority  pd-5 0
     ```
 
-    > **Note:**
+    > **注記：**
     >
-    > The greater the priority number, the higher the probability that this node becomes the leader.
+    > 優先順位の数値が大きいほど、このノードがリーダーになる確率が高くなります。
 
-3. Create placement rules and fix the primary replica of the test table to region 1:
+3.  配置ルールを作成し、テスト テーブルのプライマリ レプリカをリージョン 1 に固定します。
 
     ```sql
     -- Create two placement rules: the first rule specifies that region 1 works as the primary region, and region 2 as the secondary region.
@@ -142,31 +142,31 @@ In this example, TiDB contains five replicas and three regions. Region 1 is the 
     SELECT STORE_ID, address, leader_count, label FROM TIKV_STORE_STATUS ORDER BY store_id;
     ```
 
-    The following SQL statement can generate a SQL script to configure the leader of all non-system schema tables to a specific region:
+    次の SQL ステートメントは、すべての非システム スキーマ テーブルのリーダーを特定のリージョンに構成する SQL スクリプトを生成できます。
 
     ```sql
     SET @region_name=primary_rule_for_region1;
     SELECT CONCAT('ALTER TABLE ', table_schema, '.', table_name, ' PLACEMENT POLICY=', @region_name, ';') FROM information_schema.tables WHERE table_schema NOT IN ('METRICS_SCHEMA', 'PERFORMANCE_SCHEMA', 'INFORMATION_SCHEMA','mysql');
     ```
 
-## Monitor the cluster
+## クラスターを監視する {#monitor-the-cluster}
 
-You can monitor the performance metrics of TiKV, TiDB, PD, and other components in the cluster by accessing Grafana or TiDB Dashboard. Based on the status of the components, you can determine whether to perform a DR switchover. For details, see the following documents:
+Grafana または TiDB ダッシュボードにアクセスして、クラスター内の TiKV、TiDB、PD、およびその他のコンポーネントのパフォーマンス メトリックを監視できます。コンポーネントのステータスに基づいて、DR スイッチオーバーを実行するかどうかを決定できます。詳細については、次のドキュメントを参照してください。
 
-- [Key Monitoring Metrics of TiDB](/grafana-tidb-dashboard.md)
-- [Key Monitoring Metrics of TiKV](/grafana-tikv-dashboard.md)
-- [Key Monitoring Metrics of PD](/grafana-pd-dashboard.md)
-- [TiDB Dashboard Monitoring Page](/dashboard/dashboard-monitoring.md)
+-   [TiDB の主要なモニタリング指標](/grafana-tidb-dashboard.md)
+-   [TiKV の主要なモニタリング指標](/grafana-tikv-dashboard.md)
+-   [PD の主要なモニタリング指標](/grafana-pd-dashboard.md)
+-   [TiDB ダッシュボード監視ページ](/dashboard/dashboard-monitoring.md)
 
-## Perform a DR switchover
+## DR スイッチオーバーを実行する {#perform-a-dr-switchover}
 
-This section describes how to perform a DR switchover, including planned switchover and unplanned switchover.
+このセクションでは、計画的スイッチオーバーと計画外のスイッチオーバーを含む DR スイッチオーバーを実行する方法について説明します。
 
-### Planned switchover
+### 計画的な切り替え {#planned-switchover}
 
-A planned switchover is a scheduled switchover between the primary and secondary regions based on the maintenance needs. It can be used to verify whether the DR system works properly. This section describes how to perform a planned switchover.
+計画的スイッチオーバーは、メンテナンスのニーズに基づいてプライマリ リージョンとセカンダリ リージョンの間でスケジュールされたスイッチオーバーです。 DR システムが適切に動作しているかどうかを検証するために使用できます。このセクションでは、計画的なスイッチオーバーを実行する方法について説明します。
 
-1. Run the following command to switch all user tables and PD leaders to region 2:
+1.  次のコマンドを実行して、すべてのユーザー テーブルと PD リーダーをリージョン 2 に切り替えます。
 
     ```sql
     -- Apply the rule secondary_rule_for_region2 to the corresponding user tables.
@@ -174,30 +174,30 @@ A planned switchover is a scheduled switchover between the primary and secondary
     ALTER TABLE tpcc.district PLACEMENT POLICY=secondary_rule_for_region2;
     ```
 
-    Note: You can modify the database name, table name, and placement rule name as needed.
+    注: 必要に応じて、データベース名、テーブル名、配置ルール名を変更できます。
 
-    Run the following commands to lower the priority of PD nodes in region 1 and increase that of PD nodes in region 2.
+    次のコマンドを実行して、リージョン 1 の PD ノードの優先順位を下げ、リージョン 2 の PD ノードの優先順位を上げます。
 
-    ``` shell
+    ```shell
     tiup ctl:v6.4.0 pd member leader_priority pd-1 2
     tiup ctl:v6.4.0 pd member leader_priority pd-2 1
     tiup ctl:v6.4.0 pd member leader_priority pd-3 4
     tiup ctl:v6.4.0 pd member leader_priority pd-4 3
     ```
 
-2. Observe the PD and TiKV nodes in Grafana and ensure that leaders of the PD and user tables have been transferred to the target region. The steps for switching back to the original region are the same as the preceding steps and are therefore not covered in this document.
+2.  Grafana の PD ノードと TiKV ノードを観察し、PD とユーザー テーブルのリーダーがターゲット リージョンに転送されていることを確認します。元のリージョンに戻す手順は前述の手順と同じであるため、このドキュメントでは説明しません。
 
-### Unplanned switchover
+### 計画外のスイッチオーバー {#unplanned-switchover}
 
-An unplanned switchover means a switchover between primary and secondary regions when a disaster occurs. It can also be a primary-secondary region switchover initiated to simulate disaster scenarios so as to verify the effectiveness of DR systems.
+計画外のスイッチオーバーとは、災害発生時のプライマリ リージョンとセカンダリ リージョン間のスイッチオーバーを意味します。また、災害シナリオをシミュレートして DR システムの有効性を検証するために開始されるプライマリ - セカンダリ リージョンの切り替えであることもできます。
 
-1. Run the following command to stop all TiKV, TiDB, and PD nodes in region 1:
+1.  次のコマンドを実行して、リージョン 1 のすべての TiKV、TiDB、および PD ノードを停止します。
 
-    ``` shell
+    ```shell
     tiup cluster stop drtest -N tidb-dr-test1:20160,tidb-dr-test2:20160,tidb-dr-test1:2379,tidb-dr-test2:2379
     ```
 
-2. Run the following commands to switch the leaders of all user tables to region 2:
+2.  次のコマンドを実行して、すべてのユーザー テーブルのリーダーをリージョン 2 に切り替えます。
 
     ```sql
     -- Apply the rule secondary_rule_for_region2 to the corresponding user tables.
@@ -208,4 +208,4 @@ An unplanned switchover means a switchover between primary and secondary regions
     SELECT STORE_ID, address, leader_count, label FROM TIKV_STORE_STATUS ORDER BY store_id;
     ```
 
-    After region 1 recovers, you can use commands similar to the preceding ones to switch the leaders of user tables back to region 1.
+    リージョン 1 が回復したら、前述のコマンドと同様のコマンドを使用して、ユーザー テーブルのリーダーをリージョン 1 に戻すことができます。

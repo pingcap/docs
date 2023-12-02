@@ -3,55 +3,53 @@ title: Reparo User Guide
 summary: Learn to use Reparo.
 ---
 
-# Reparo User Guide
+# Reparoユーザーガイド {#reparo-user-guide}
 
-Reparo is a TiDB Binlog tool, used to recover the incremental data. To back up the incremental data, you can use Drainer of TiDB Binlog to output the binlog data in the protobuf format to files. To restore the incremental data, you can use Reparo to parse the binlog data in the files and apply the binlog in TiDB/MySQL.
+Reparo は、増分データを回復するために使用される TiDB Binlogツールです。増分データをバックアップするには、TiDB BinlogのDrainer を使用して、 binlogデータを protobuf 形式でファイルに出力します。増分データを復元するには、 Reparoを使用してファイル内のbinlogデータを解析し、そのbinlogをTiDB/MySQL に適用します。
 
-The Reparo installation package (`reparo`) is included in the TiDB Toolkit. To download the TiDB Toolkit, see [Download TiDB Tools](/download-ecosystem-tools.md).
+Reparoインストール パッケージ ( `reparo` ) はTiDB Toolkitに含まれています。 TiDB Toolkitをダウンロードするには、 [TiDB ツールをダウンロード](/download-ecosystem-tools.md)を参照してください。
 
-## Reparo usage
+## Reparoの使い方 {#reparo-usage}
 
-### Description of command line parameters
+### コマンドラインパラメータの説明 {#description-of-command-line-parameters}
 
-```
-Usage of Reparo:
--L string
-    The level of the output information of logs
-    Value: "debug"/"info"/"warn"/"error"/"fatal" ("info" by default)
--V Prints the version.
--c int
-    The number of concurrencies in the downstream for the replication process (`16` by default). A higher value indicates a better throughput for the replication.
--config string
-    The path of the configuration file
-    If the configuration file is specified, Reparo reads the configuration data in this file.
-    If the configuration data also exists in the command line parameters, Reparo uses the configuration data in the command line parameters to cover that in the configuration file.
--data-dir string
-    The storage directory for the binlog file in the protobuf format that Drainer outputs ("data.drainer" by default)
--dest-type string
-    The downstream service type
-    Value: "print"/"mysql" ("print" by default)
-    If it is set to "print", the data is parsed and printed to standard output while the SQL statement is not executed.
-    If it is set to "mysql", you need to configure the "host", "port", "user" and "password" information in the configuration file.
--log-file string
-    The path of the log file
--log-rotate string
-    The switch frequency of log files
-    Value: "hour"/"day"
--start-datetime string
-    Specifies the time point for starting recovery.
-    Format: "2006-01-02 15:04:05"
-    If it is not set, the recovery process starts from the earliest binlog file.
--stop-datetime string
-    Specifies the time point of finishing the recovery process.
-    Format: "2006-01-02 15:04:05"
-    If it is not set, the recovery process ends up with the last binlog file.
--safe-mode bool
-    Specifies whether to enable safe mode. When enabled, it supports repeated replication.
--txn-batch int
-    The number of SQL statements in a transaction that is output to the downstream database (`20` by default).
-```
+    Usage of Reparo:
+    -L string
+        The level of the output information of logs
+        Value: "debug"/"info"/"warn"/"error"/"fatal" ("info" by default)
+    -V Prints the version.
+    -c int
+        The number of concurrencies in the downstream for the replication process (`16` by default). A higher value indicates a better throughput for the replication.
+    -config string
+        The path of the configuration file
+        If the configuration file is specified, Reparo reads the configuration data in this file.
+        If the configuration data also exists in the command line parameters, Reparo uses the configuration data in the command line parameters to cover that in the configuration file.
+    -data-dir string
+        The storage directory for the binlog file in the protobuf format that Drainer outputs ("data.drainer" by default)
+    -dest-type string
+        The downstream service type
+        Value: "print"/"mysql" ("print" by default)
+        If it is set to "print", the data is parsed and printed to standard output while the SQL statement is not executed.
+        If it is set to "mysql", you need to configure the "host", "port", "user" and "password" information in the configuration file.
+    -log-file string
+        The path of the log file
+    -log-rotate string
+        The switch frequency of log files
+        Value: "hour"/"day"
+    -start-datetime string
+        Specifies the time point for starting recovery.
+        Format: "2006-01-02 15:04:05"
+        If it is not set, the recovery process starts from the earliest binlog file.
+    -stop-datetime string
+        Specifies the time point of finishing the recovery process.
+        Format: "2006-01-02 15:04:05"
+        If it is not set, the recovery process ends up with the last binlog file.
+    -safe-mode bool
+        Specifies whether to enable safe mode. When enabled, it supports repeated replication.
+    -txn-batch int
+        The number of SQL statements in a transaction that is output to the downstream database (`20` by default).
 
-### Description of the configuration file
+### 設定ファイルの説明 {#description-of-the-configuration-file}
 
 ```toml
 # The storage directory for the binlog file in the protobuf format that Drainer outputs
@@ -113,21 +111,18 @@ user = "root"
 password = ""
 ```
 
-### Start example
+### 開始例 {#start-example}
 
-```
-./reparo -config reparo.toml
-```
+    ./reparo -config reparo.toml
 
-> **Note:**
+> **注記：**
 >
-> * `data-dir` specifies the directory for the binlog file that Drainer outputs.
-> * Both `start-datatime` and `start-tso` are used to specify the time point for starting recovery, but they are different in the time format. If they are not set, the recovery process starts from the earliest binlog file by default.
-> * Both `stop-datetime` and `stop-tso` are used to specify the time point for finishing recovery, but they are different in the time format. If they are not set, the recovery process ends up with the last binlog file by default.
-> * `dest-type` specifies the destination type. Its value can be "mysql" and "print."
+> -   `data-dir` Drainer が出力するbinlogファイルのディレクトリを指定します。
+> -   `start-datatime`と`start-tso`は両方ともリカバリを開始する時点を指定するために使用されますが、時間形式が異なります。これらが設定されていない場合、デフォルトでは、リカバリ プロセスは最も古いbinlogファイルから開始されます。
+> -   `stop-datetime`と`stop-tso`は両方ともリカバリを終了する時点を指定するために使用されますが、時間形式が異なります。これらが設定されていない場合、デフォルトでは、リカバリ プロセスは最後のbinlogファイルで終了します。
+> -   `dest-type`宛先タイプを指定します。その値は「mysql」と「print」です。
 >
->     * When it is set to `mysql`, the data can be recovered to MySQL or TiDB that uses or is compatible with the MySQL protocol. In this case, you need to specify the database information in `[dest-db]` of the configuration information.
->     * When it is set to `print`, only the binlog information is printed. It is generally used for debugging and checking the binlog information. In this case, there is no need to specify `[dest-db]`.
->
-> * `replicate-do-db` specifies the database for recovery. If it is not set, all the databases are to be recovered.
-> * `replicate-do-table` specifies the table for recovery. If it is not set, all the tables are to be recovered.
+>     -   `mysql`に設定すると、MySQL プロトコルを使用する、または MySQL プロトコルと互換性のある MySQL または TiDB にデータをリカバリできます。この場合、構成情報の`[dest-db]`にデータベース情報を指定する必要があります。
+>     -   `print`に設定すると、binlog情報のみが出力されます。これは通常、デバッグとbinlog情報の確認に使用されます。この場合、 `[dest-db]`を指定する必要はありません。
+> -   `replicate-do-db`リカバリするデータベースを指定します。設定されていない場合は、すべてのデータベースが回復されます。
+> -   `replicate-do-table`リカバリ用のテーブルを指定します。設定されていない場合は、すべてのテーブルが復元されます。

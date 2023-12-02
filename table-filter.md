@@ -3,21 +3,21 @@ title: Table Filter
 summary: Usage of table filter feature in TiDB tools.
 ---
 
-# Table Filter
+# テーブルフィルター {#table-filter}
 
-The TiDB migration tools operate on all the databases by default, but oftentimes only a subset is needed. For example, you only want to work with the schemas in the form of `foo*` and `bar*` and nothing else.
+TiDB 移行ツールはデフォルトですべてのデータベースで動作しますが、必要なのはサブセットのみであることがよくあります。たとえば、 `foo*`と`bar*`の形式のスキーマのみを操作し、それ以外は操作しないとします。
 
-Since TiDB 4.0, all TiDB migration tools share a common filter syntax to define subsets. This document describes how to use the table filter feature.
+TiDB 4.0 以降、すべての TiDB 移行ツールは、サブセットを定義するための共通のフィルター構文を共有します。このドキュメントでは、テーブル フィルター機能の使用方法について説明します。
 
-## Usage
+## 使用法 {#usage}
 
-### CLI
+### CLI {#cli}
 
-Table filters can be applied to the tools using multiple `-f` or `--filter` command line parameters. Each filter is in the form of `db.table`, where each part can be a wildcard (further explained in the [next section](#wildcards)). The following lists the example usage.
+テーブル フィルターは、複数の`-f`または`--filter`コマンド ライン パラメーターを使用してツールに適用できます。各フィルターは`db.table`の形式で、各部分はワイルドカードにすることができます ( [次のセクション](#wildcards)で詳しく説明します)。以下に使用例を示します。
 
 <CustomContent platform="tidb">
 
-* [BR](/br/backup-and-restore-overview.md):
+-   [BR](/br/backup-and-restore-overview.md) :
 
     ```shell
     ./br backup full -f 'foo*.*' -f 'bar*.*' -s 'local:///tmp/backup'
@@ -29,7 +29,7 @@ Table filters can be applied to the tools using multiple `-f` or `--filter` comm
 
 </CustomContent>
 
-* [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview):
+-   [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview) :
 
     ```shell
     ./dumpling -f 'foo*.*' -f 'bar*.*' -P 3306 -o /tmp/data/
@@ -37,7 +37,7 @@ Table filters can be applied to the tools using multiple `-f` or `--filter` comm
 
 <CustomContent platform="tidb">
 
-* [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md):
+-   [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md) :
 
     ```shell
     ./tidb-lightning -f 'foo*.*' -f 'bar*.*' -d /tmp/data/ --backend tidb
@@ -47,7 +47,7 @@ Table filters can be applied to the tools using multiple `-f` or `--filter` comm
 
 <CustomContent platform="tidb-cloud">
 
-* [TiDB Lightning](https://docs.pingcap.com/tidb/stable/tidb-lightning-overview):
+-   [TiDB Lightning](https://docs.pingcap.com/tidb/stable/tidb-lightning-overview) :
 
     ```shell
     ./tidb-lightning -f 'foo*.*' -f 'bar*.*' -d /tmp/data/ --backend tidb
@@ -55,11 +55,11 @@ Table filters can be applied to the tools using multiple `-f` or `--filter` comm
 
 </CustomContent>
 
-### TOML configuration files
+### TOML 設定ファイル {#toml-configuration-files}
 
-Table filters in TOML files are specified as [array of strings](https://toml.io/en/v1.0.0-rc.1#section-15). The following lists the example usage.
+TOML ファイルのテーブル フィルターは[文字列の配列](https://toml.io/en/v1.0.0-rc.1#section-15)として指定されます。以下に使用例を示します。
 
-* TiDB Lightning:
+-   TiDB Lightning:
 
     ```toml
     [mydumper]
@@ -68,7 +68,7 @@ Table filters in TOML files are specified as [array of strings](https://toml.io/
 
 <CustomContent platform="tidb">
 
-* [TiCDC](/ticdc/ticdc-overview.md):
+-   [TiCDC](/ticdc/ticdc-overview.md) :
 
     ```toml
     [filter]
@@ -81,156 +81,138 @@ Table filters in TOML files are specified as [array of strings](https://toml.io/
 
 </CustomContent>
 
-## Syntax
+## 構文 {#syntax}
 
-### Plain table names
+### プレーンなテーブル名 {#plain-table-names}
 
-Each table filter rule consists of a "schema pattern" and a "table pattern", separated by a dot (`.`). Tables whose fully-qualified name matches the rules are accepted.
+各テーブル フィルター ルールは、ドット ( `.` ) で区切られた「スキーマ パターン」と「テーブル パターン」で構成されます。完全修飾名がルールに一致するテーブルが受け入れられます。
 
-```
-db1.tbl1
-db2.tbl2
-db3.tbl3
-```
+    db1.tbl1
+    db2.tbl2
+    db3.tbl3
 
-A plain name must only consist of valid [identifier characters](/schema-object-names.md), such as:
+プレーン名は、次のように有効な[識別文字](/schema-object-names.md)のみで構成されている必要があります。
 
-* digits (`0` to `9`)
-* letters (`a` to `z`, `A` to `Z`)
-* `$`
-* `_`
-* non ASCII characters (U+0080 to U+10FFFF)
+-   数字 ( `0` ～ `9` )
+-   文字 ( `a` ～ `z` 、 `A` ～ `Z` )
+-   `$`
+-   `_`
+-   非 ASCII 文字 (U+0080 ～ U+10FFFF)
 
-All other ASCII characters are reserved. Some punctuations have special meanings, as described in the next section.
+他のすべての ASCII 文字は予約されています。次のセクションで説明するように、一部の句読点には特別な意味があります。
 
-### Wildcards
+### ワイルドカード {#wildcards}
 
-Each part of the name can be a wildcard symbol described in [fnmatch(3)](https://pubs.opengroup.org/onlinepubs/9699919799/utilities/V3_chap02.html#tag_18_13):
+名前の各部分には、 [fnmatch(3)](https://pubs.opengroup.org/onlinepubs/9699919799/utilities/V3_chap02.html#tag_18_13)で説明されているワイルドカード記号を使用できます。
 
-* `*` — matches zero or more characters
-* `?` — matches one character
-* `[a-z]` — matches one character between "a" and "z" inclusively
-* `[!a-z]` — matches one character except "a" to "z".
+-   `*` — 0 個以上の文字と一致します
+-   `?` — 1 つの文字と一致します
+-   `[a-z]` — 「a」と「z」の間の 1 文字を包括的に一致させます。
+-   `[!a-z]` — 「a」から「z」を除く 1 つの文字と一致します。
 
-```
-db[0-9].tbl[0-9a-f][0-9a-f]
-data.*
-*.backup_*
-```
+<!---->
 
-"Character" here means a Unicode code point, such as:
+    db[0-9].tbl[0-9a-f][0-9a-f]
+    data.*
+    *.backup_*
 
-* U+00E9 (é) is 1 character.
-* U+0065 U+0301 (é) are 2 characters.
-* U+1F926 U+1F3FF U+200D U+2640 U+FE0F (🤦🏿‍♀️) are 5 characters.
+ここでの「文字」とは、次のような Unicode コード ポイントを意味します。
 
-### File import
+-   U+00E9 (é) は 1 文字です。
+-   U+0065 U+0301 (é) は 2 文字です。
+-   U+1F926 U+1F3FF U+200D U+2640 U+FE0F (🤦🏿‍♀️)は5文字です。
 
-To import a file as the filter rule, include an `@` at the beginning of the rule to specify the file name. The table filter parser treats each line of the imported file as additional filter rules.
+### ファイルのインポート {#file-import}
 
-For example, if a file `config/filter.txt` has the following content:
+ファイルをフィルター ルールとしてインポートするには、ルールの先頭に`@`を含めてファイル名を指定します。テーブル フィルター パーサーは、インポートされたファイルの各行を追加のフィルター ルールとして処理します。
 
-```
-employees.*
-*.WorkOrder
-```
+たとえば、ファイル`config/filter.txt`に次の内容があるとします。
 
-the following two invocations are equivalent:
+    employees.*
+    *.WorkOrder
+
+次の 2 つの呼び出しは同等です。
 
 ```bash
 ./dumpling -f '@config/filter.txt'
 ./dumpling -f 'employees.*' -f '*.WorkOrder'
 ```
 
-A filter file cannot further import another file.
+フィルター ファイルはさらに別のファイルをインポートできません。
 
-### Comments and blank lines
+### コメントと空白行 {#comments-and-blank-lines}
 
-Inside a filter file, leading and trailing white-spaces of every line are trimmed. Furthermore, blank lines (empty strings) are ignored.
+フィルター ファイル内では、各行の先頭と末尾の空白がトリミングされます。また、空白行（空文字列）は無視されます。
 
-A leading `#` marks a comment and is ignored. `#` not at start of line is considered syntax error.
+先頭の`#`コメントをマークし、無視されます。行の先頭にない`#`構文エラーとみなされます。
 
-```
-# this line is a comment
-db.table   # but this part is not comment and may cause error
-```
+    # this line is a comment
+    db.table   # but this part is not comment and may cause error
 
-### Exclusion
+### 除外 {#exclusion}
 
-An `!` at the beginning of the rule means the pattern after it is used to exclude tables from being processed. This effectively turns the filter into a block list.
+ルールの先頭の`!`テーブルを処理から除外するために使用されるパターンを意味します。これにより、フィルターが効果的にブロック リストに変わります。
 
-```
-*.*
-#^ note: must add the *.* to include all tables first
-!*.Password
-!employees.salaries
-```
+    *.*
+    #^ note: must add the *.* to include all tables first
+    !*.Password
+    !employees.salaries
 
-### Escape character
+### エスケープ文字 {#escape-character}
 
-To turn a special character into an identifier character, precede it with a backslash `\`.
+特殊文字を識別子文字に変えるには、その前にバックスラッシュ`\`を付けます。
 
-```
-db\.with\.dots.*
-```
+    db\.with\.dots.*
 
-For simplicity and future compatibility, the following sequences are prohibited:
+簡素化と将来の互換性のために、次のシーケンスは禁止されています。
 
-* `\` at the end of the line after trimming whitespaces (use `[ ]` to match a literal whitespace at the end).
-* `\` followed by any ASCII alphanumeric character (`[0-9a-zA-Z]`). In particular, C-like escape sequences like `\0`, `\r`, `\n` and `\t` currently are meaningless.
+-   空白をトリミングした後の行末の`\` (末尾のリテラル空白と一致させるには`[ ]`を使用します)。
+-   `\`の後に任意の ASCII 英数字 ( `[0-9a-zA-Z]` ) が続きます。特に、 `\0` 、 `\r` 、 `\n` 、 `\t`などの C 風のエスケープ シーケンスは、現時点では意味がありません。
 
-### Quoted identifier
+### 引用符で囲まれた識別子 {#quoted-identifier}
 
-Besides `\`, special characters can also be suppressed by quoting using `"` or `` ` ``.
+`\`のほかに、 `"`または`` ` ``を使用して引用符で特殊文字を抑制することもできます。
 
-```
-"db.with.dots"."tbl\1"
-`db.with.dots`.`tbl\2`
-```
+    "db.with.dots"."tbl\1"
+    `db.with.dots`.`tbl\2`
 
-The quotation mark can be included within an identifier by doubling itself.
+引用符は、それ自体を二重化することで識別子の中に含めることができます。
 
-```
-"foo""bar".`foo``bar`
-# equivalent to:
-foo\"bar.foo\`bar
-```
+    "foo""bar".`foo``bar`
+    # equivalent to:
+    foo\"bar.foo\`bar
 
-Quoted identifiers cannot span multiple lines.
+引用符で囲まれた識別子は複数行にまたがることはできません。
 
-It is invalid to partially quote an identifier:
+識別子の一部を引用することは無効です。
 
-```
-"this is "invalid*.*
-```
+    "this is "invalid*.*
 
-### Regular expression
+### 正規表現 {#regular-expression}
 
-In case very complex rules are needed, each pattern can be written as a regular expression delimited with `/`:
+非常に複雑なルールが必要な場合は、各パターンを`/`で区切った正規表現として記述することができます。
 
-```
-/^db\d{2,}$/./^tbl\d{2,}$/
-```
+    /^db\d{2,}$/./^tbl\d{2,}$/
 
-These regular expressions use the [Go dialect](https://pkg.go.dev/regexp/syntax?tab=doc). The pattern is matched if the identifier contains a substring matching the regular expression. For instance, `/b/` matches `db01`.
+これらの正規表現では[囲碁方言](https://pkg.go.dev/regexp/syntax?tab=doc)を使用します。識別子に正規表現と一致する部分文字列が含まれている場合、パターンは一致します。たとえば、 `/b/` `db01`と一致します。
 
-> **Note:**
+> **注記：**
 >
-> Every `/` in the regular expression must be escaped as `\/`, including inside `[…]`. You cannot place an unescaped `/` between `\Q…\E`.
+> 正規表現内のすべての`/` `[…]`の内側も含めて`\/`としてエスケープする必要があります。エスケープされていない`/` `\Q…\E`の間に置くことはできません。
 
-## Multiple rules
+## 複数のルール {#multiple-rules}
 
 <CustomContent platform="tidb-cloud">
 
-> **Note:**
+> **注記：**
 >
-> This section is not applicable to TiDB Cloud. Currently, TiDB Cloud only supports one table filter rule.
+> このセクションはTiDB Cloudには適用されません。現在、 TiDB Cloud は1 つのテーブル フィルター ルールのみをサポートしています。
 
 </CustomContent>
 
-When a table name matches none of the rules in the filter list, the default behavior is to ignore such unmatched tables.
+テーブル名がフィルタ リスト内のどのルールにも一致しない場合、デフォルトの動作では、そのような一致しないテーブルは無視されます。
 
-To build a block list, an explicit `*.*` must be used as the first rule, otherwise all tables will be excluded.
+ブロック リストを作成するには、最初のルールとして明示的な`*.*`を使用する必要があります。そうしないと、すべてのテーブルが除外されます。
 
 ```bash
 # every table will be filtered out
@@ -240,34 +222,32 @@ To build a block list, an explicit `*.*` must be used as the first rule, otherwi
 ./dumpling -f '*.*' -f '!*.Password'
 ```
 
-In a filter list, if a table name matches multiple patterns, the last match decides the outcome. For instance:
+フィルター リストでは、テーブル名が複数のパターンに一致する場合、最後の一致によって結果が決まります。例えば：
 
-```
-# rule 1
-employees.*
-# rule 2
-!*.dep*
-# rule 3
-*.departments
-```
+    # rule 1
+    employees.*
+    # rule 2
+    !*.dep*
+    # rule 3
+    *.departments
 
-The filtered outcome is as follows:
+フィルタリングされた結果は次のようになります。
 
-| Table name            | Rule 1 | Rule 2 | Rule 3 | Outcome          |
-|-----------------------|--------|--------|--------|------------------|
-| irrelevant.table      |        |        |        | Default (reject) |
-| employees.employees   | ✓      |        |        | Rule 1 (accept)  |
-| employees.dept_emp    | ✓      | ✓      |        | Rule 2 (reject)  |
-| employees.departments | ✓      | ✓      | ✓      | Rule 3 (accept)  |
-| else.departments      |        | ✓      | ✓      | Rule 3 (accept)  |
+| テーブル名        | ルール1 | ルール2 | ルール3 | 結果            |
+| ------------ | ---- | ---- | ---- | ------------- |
+| 無関係なテーブル     |      |      |      | デフォルト (拒否)    |
+| 従業員、従業員      | ✓    |      |      | ルール 1 (受け入れる) |
+| 従業員.dept_emp | ✓    | ✓    |      | ルール 2 (拒否)    |
+| 従業員.部門       | ✓    | ✓    | ✓    | ルール 3 (受け入れる) |
+| その他の部門       |      | ✓    | ✓    | ルール 3 (受け入れる) |
 
-> **Note:**
+> **注記：**
 >
-> In TiDB tools, the system schemas are always excluded in the default configuration. The system schemas are:
+> TiDB ツールでは、システム スキーマはデフォルト構成で常に除外されます。システム スキーマは次のとおりです。
 >
-> * `INFORMATION_SCHEMA`
-> * `PERFORMANCE_SCHEMA`
-> * `METRICS_SCHEMA`
-> * `INSPECTION_SCHEMA`
-> * `mysql`
-> * `sys`
+> -   `INFORMATION_SCHEMA`
+> -   `PERFORMANCE_SCHEMA`
+> -   `METRICS_SCHEMA`
+> -   `INSPECTION_SCHEMA`
+> -   `mysql`
+> -   `sys`

@@ -4,11 +4,11 @@ summary: An overview of the usage of SHOW INDEXES [FROM|IN] for the TiDB databas
 aliases: ['/tidb/v7.5/sql-statement-show-index/', '/tidb/v7.5/sql-statement-show-keys/']
 ---
 
-# SHOW INDEXES [FROM|IN]
+# インデックスを表示 [From|IN] {#show-indexes-from-in}
 
-The statement `SHOW INDEXES [FROM|IN]` lists the indexes on a specified table. The statements `SHOW INDEX [FROM|IN]`, `SHOW KEYS [FROM|IN]` are aliases of this statement, and included for compatibility with MySQL.
+ステートメント`SHOW INDEXES [FROM|IN]`は、指定されたテーブルのインデックスをリストします。ステートメント`SHOW INDEX [FROM|IN]` 、 `SHOW KEYS [FROM|IN]`はこのステートメントのエイリアスであり、MySQL との互換性のために含まれています。
 
-## Synopsis
+## あらすじ {#synopsis}
 
 **ShowIndexStmt:**
 
@@ -18,11 +18,11 @@ The statement `SHOW INDEXES [FROM|IN]` lists the indexes on a specified table. T
 
 ![ShowIndexKwd](/media/sqlgram/ShowIndexKwd.png)
 
-**FromOrIn:**
+**送信者または受信者:**
 
 ![FromOrIn](/media/sqlgram/FromOrIn.png)
 
-**TableName:**
+**テーブル名:**
 
 ![TableName](/media/sqlgram/TableName.png)
 
@@ -30,7 +30,7 @@ The statement `SHOW INDEXES [FROM|IN]` lists the indexes on a specified table. T
 
 ![ShowLikeOrWhereOpt](/media/sqlgram/ShowLikeOrWhereOpt.png)
 
-## Examples
+## 例 {#examples}
 
 ```sql
 mysql> CREATE TABLE t1 (id int not null primary key AUTO_INCREMENT, col1 INT, INDEX(col1));
@@ -64,12 +64,12 @@ mysql> SHOW KEYS FROM t1;
 2 rows in set (0.00 sec)
 ```
 
-## MySQL compatibility
+## MySQLの互換性 {#mysql-compatibility}
 
-The `SHOW INDEXES [FROM|IN]` statement in TiDB is fully compatible with MySQL. If you find any compatibility differences, [report a bug](https://docs.pingcap.com/tidb/stable/support).
+TiDB の`SHOW INDEXES [FROM|IN]`ステートメントは MySQL と完全な互換性があります。互換性の違いが見つかった場合は、 [バグを報告](https://docs.pingcap.com/tidb/stable/support) .
 
-## See also
+## こちらも参照 {#see-also}
 
-* [SHOW CREATE TABLE](/sql-statements/sql-statement-show-create-table.md)
-* [DROP INDEX](/sql-statements/sql-statement-drop-index.md)
-* [CREATE INDEX](/sql-statements/sql-statement-create-index.md)
+-   [テーブルの作成を表示](/sql-statements/sql-statement-show-create-table.md)
+-   [ドロップインデックス](/sql-statements/sql-statement-drop-index.md)
+-   [インデックスの作成](/sql-statements/sql-statement-create-index.md)

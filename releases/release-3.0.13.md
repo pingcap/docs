@@ -2,18 +2,18 @@
 title: TiDB 3.0.13 Release Notes
 ---
 
-# TiDB 3.0.13 Release Notes
+# TiDB 3.0.13 リリースノート {#tidb-3-0-13-release-notes}
 
-Release date: April 22, 2020
+発売日：2020年4月22日
 
-TiDB version: 3.0.13
+TiDB バージョン: 3.0.13
 
-## Bug Fixes
+## バグの修正 {#bug-fixes}
 
-+ TiDB
+-   TiDB
 
-    - Fix the issue caused by unchecked `MemBuffer` that the `INSERT ... ON DUPLICATE KEY UPDATE` statement might be executed incorrectly within a transaction when users need to insert multiple rows of duplicate data [#16690](https://github.com/pingcap/tidb/pull/16690)
+    -   ユーザーが複数行の重複データを挿入する必要がある場合に、トランザクション内でステートメントが誤って実行される可能性がある`MemBuffer` `INSERT ... ON DUPLICATE KEY UPDATE`チェックによって引き起こされる問題を修正します[#16690](https://github.com/pingcap/tidb/pull/16690)
 
-+ TiKV
+-   TiKV
 
-    - Fix the issue that the system might get stuck and the service is unavailable if `Region Merge` is executed repeatedly [#7612](https://github.com/tikv/tikv/pull/7612)
+    -   `Region Merge`を繰り返し実行するとシステムが固まりサービスが利用できなくなる場合がある問題を修正[#7612](https://github.com/tikv/tikv/pull/7612)

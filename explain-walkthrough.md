@@ -3,23 +3,21 @@ title: EXPLAIN Walkthrough
 summary: Learn how to use EXPLAIN by walking through an example statement
 ---
 
-# `EXPLAIN` Walkthrough
+# <code>EXPLAIN</code>ウォークスルー {#code-explain-code-walkthrough}
 
-Because SQL is a declarative language, you cannot automatically tell whether a query is executed efficiently. You must first use the [`EXPLAIN`](/sql-statements/sql-statement-explain.md) statement to learn the current execution plan.
+SQL は宣言型言語であるため、クエリが効率的に実行されたかどうかを自動的に判断することはできません。まず[`EXPLAIN`](/sql-statements/sql-statement-explain.md)ステートメントを使用して、現在の実行計画を確認する必要があります。
 
 <CustomContent platform="tidb">
 
-The following statement from the [bikeshare example database](/import-example-data.md) counts how many trips were taken on July 1, 2017:
+[自転車シェアのサンプル データベース](/import-example-data.md)の次のステートメントは、2017 年 7 月 1 日に行われた旅行の数をカウントします。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-The following statement from the [bikeshare example database](/tidb-cloud/import-sample-data.md) counts how many trips were taken on July 1, 2017:
+[自転車シェアのサンプル データベース](/tidb-cloud/import-sample-data.md)の次のステートメントは、2017 年 7 月 1 日に行われた旅行の数をカウントします。
 
 </CustomContent>
-
-{{< copyable "sql" >}}
 
 ```sql
 EXPLAIN SELECT count(*) FROM trips WHERE start_date BETWEEN '2017-07-01 00:00:00' AND '2017-07-01 23:59:59';
@@ -38,23 +36,21 @@ EXPLAIN SELECT count(*) FROM trips WHERE start_date BETWEEN '2017-07-01 00:00:00
 5 rows in set (0.00 sec)
 ```
 
-From the child operator `└─TableFullScan_18` back, you can see its execution process as follows, which is currently suboptimal:
+子演算子`└─TableFullScan_18`から遡ると、次のような実行プロセスがわかりますが、これは現時点では最適ではありません。
 
-1. The coprocessor (TiKV) reads the entire `trips` table as a `TableFullScan` operation. It then passes the rows that it reads to the `Selection_19` operator, which is still within TiKV.
-2. The `WHERE start_date BETWEEN ..` predicate is then filtered in the `Selection_19` operator. Approximately `250` rows are estimated to meet this selection. Note that this number is estimated according to the statistics and the operator's logic. The `└─TableFullScan_18` operator shows `stats:pseudo`, which means that the table does not have the actual statistical information. After running `ANALYZE TABLE trips` to collect statistical information, the statistics are expected to be more accurate.
-3. The rows that meet the selection criteria then have a `count` function applied to them. This is also completed inside the `StreamAgg_9` operator, which is still inside TiKV (`cop[tikv]`). The TiKV coprocessor can execute a number of MySQL built-in functions, `count` being one of them.
-4. The results from `StreamAgg_9` are then sent to the `TableReader_21` operator which is now inside the TiDB server (the task of `root`). The `estRows` column value for this operator is `1`, which means that the operator will receive one row from each of the TiKV Regions to be accessed. For more information about these requests, see [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md).
-5. The `StreamAgg_20` operator then applies a `count` function to each of the rows from the `└─TableReader_21` operator, which you can see from [`SHOW TABLE REGIONS`](/sql-statements/sql-statement-show-table-regions.md) and will be about 56 rows. Because this is the root operator, it then returns results to the client.
+1.  コプロセッサ (TiKV) は、 `trips`テーブル全体を`TableFullScan`操作として読み取ります。次に、読み取った行を TiKV 内にある`Selection_19`オペレーターに渡します。
+2.  次に、 `WHERE start_date BETWEEN ..`述語が`Selection_19`演算子でフィルタリングされます。約`250`行がこの選択を満たすと推定されます。この数値は統計とオペレーターのロジックに従って推定されることに注意してください。 `└─TableFullScan_18`演算子は`stats:pseudo`を示します。これは、テーブルに実際の統計情報がないことを意味します。 `ANALYZE TABLE trips`を実行して統計情報を収集すると、統計はより正確になることが期待されます。
+3.  選択基準を満たす行には`count`関数が適用されます。これも、TiKV ( `cop[tikv]` ) 内にある`StreamAgg_9`オペレーター内で完了します。 TiKV コプロセッサは、多数の MySQL 組み込み関数を実行できます。そのうちの 1 つは`count`です。
+4.  `StreamAgg_9`の結果は、TiDBサーバー内にある`TableReader_21`オペレーターに送信されます ( `root`のタスク)。この演算子の`estRows`列の値は`1`です。これは、演算子がアクセスされる各 TiKV リージョンから 1 行を受け取ることを意味します。これらのリクエストの詳細については、 [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md)を参照してください。
+5.  次に、 `StreamAgg_20`演算子は`└─TableReader_21`演算子からの各行に`count`関数を適用します。これは[`SHOW TABLE REGIONS`](/sql-statements/sql-statement-show-table-regions.md)からわかるように、約 56 行になります。これはルート オペレーターであるため、結果をクライアントに返します。
 
-> **Note:**
+> **注記：**
 >
-> For a general view of the Regions that a table contains, execute [`SHOW TABLE REGIONS`](/sql-statements/sql-statement-show-table-regions.md).
+> テーブルに含まれるリージョンの概要を表示するには、 [`SHOW TABLE REGIONS`](/sql-statements/sql-statement-show-table-regions.md)を実行します。
 
-## Assess the current performance
+## 現在のパフォーマンスを評価する {#assess-the-current-performance}
 
-`EXPLAIN` only returns the query execution plan but does not execute the query. To get the actual execution time, you can either execute the query or use `EXPLAIN ANALYZE`:
-
-{{< copyable "sql" >}}
+`EXPLAIN`クエリ実行プランを返すだけで、クエリは実行されません。実際の実行時間を取得するには、クエリを実行するか、 `EXPLAIN ANALYZE`使用します。
 
 ```sql
 EXPLAIN ANALYZE SELECT count(*) FROM trips WHERE start_date BETWEEN '2017-07-01 00:00:00' AND '2017-07-01 23:59:59';
@@ -73,11 +69,9 @@ EXPLAIN ANALYZE SELECT count(*) FROM trips WHERE start_date BETWEEN '2017-07-01 
 5 rows in set (1.03 sec)
 ```
 
-The example query above takes `1.03` seconds to execute, which is an ideal performance.
+上記のクエリ例の実行には`1.03`秒かかりますが、これは理想的なパフォーマンスです。
 
-From the result of `EXPLAIN ANALYZE` above, `actRows` indicates that some of the estimates (`estRows`) are inaccurate (expecting 10 thousand rows but finding 19 million rows), which is already indicated in the `operator info` (`stats:pseudo`) of `└─TableFullScan_18`. If you run [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md) first and then `EXPLAIN ANALYZE` again, you can see that the estimates are much closer:
-
-{{< copyable "sql" >}}
+上記`EXPLAIN ANALYZE`の結果から、 `actRows`推定値 ( `estRows` ) の一部が不正確であることを示します (10,000 行を期待していましたが、1,900 万行が見つかりました)。これは`└─TableFullScan_18`の`operator info` ( `stats:pseudo` ) ですでに示されています。最初に[`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md)実行し、次に`EXPLAIN ANALYZE`再度実行すると、推定値がかなり近くなることがわかります。
 
 ```sql
 ANALYZE TABLE trips;
@@ -99,11 +93,9 @@ Query OK, 0 rows affected (10.22 sec)
 5 rows in set (0.93 sec)
 ```
 
-After `ANALYZE TABLE` is executed, you can see that the estimated rows for the `└─TableFullScan_18` operator is accurate and the estimate for `└─Selection_19` is now also much closer. In the two cases above, although the execution plan (the set of operators TiDB uses to execute this query) has not changed, quite frequently sub-optimal plans are caused by outdated statistics.
+`ANALYZE TABLE`が実行されると、 `└─TableFullScan_18`演算子の推定行が正確で、 `└─Selection_19`の推定もかなり近づいていることがわかります。上記の 2 つのケースでは、実行計画 (TiDB がこのクエリを実行するために使用する一連の演算子) は変更されていませんが、古い統計が原因で次善の計画が発生することがよくあります。
 
-In addition to `ANALYZE TABLE`, TiDB automatically regenerates statistics as a background operation after the threshold of [`tidb_auto_analyze_ratio`](/system-variables.md#tidb_auto_analyze_ratio) is reached. You can see how close TiDB is to this threshold (how healthy TiDB considers the statistics to be) by executing the [`SHOW STATS_HEALTHY`](/sql-statements/sql-statement-show-stats-healthy.md) statement:
-
-{{< copyable "sql" >}}
+`ANALYZE TABLE`に加えて、TiDB はしきい値[`tidb_auto_analyze_ratio`](/system-variables.md#tidb_auto_analyze_ratio)に達した後、バックグラウンド操作として統計を自動的に再生成します。次の[`SHOW STATS_HEALTHY`](/sql-statements/sql-statement-show-stats-healthy.md)ステートメントを実行すると、TiDB がこのしきい値にどの程度近づいているか (TiDB が統計がどの程度健全であるとみなしているか) を確認できます。
 
 ```sql
 SHOW STATS_HEALTHY;
@@ -118,17 +110,15 @@ SHOW STATS_HEALTHY;
 1 row in set (0.00 sec)
 ```
 
-## Identify optimizations
+## 最適化を特定する {#identify-optimizations}
 
-The current execution plan is efficient in the following aspects:
+現在の実行計画は、次の点で効率的です。
 
-* Most of the work is handled inside the TiKV coprocessor. Only 56 rows need to be sent across the network back to TiDB for processing. Each of these rows is short and contains only the count that matches the selection.
+-   作業のほとんどは TiKV コプロセッサ内で処理されます。処理のためにネットワーク経由で TiDB に送り返す必要があるのは 56 行だけです。これらの各行は短く、選択内容に一致するカウントのみが含まれます。
 
-* Aggregating the count of rows both in TiDB (`StreamAgg_20`) and in TiKV (`└─StreamAgg_9`) uses the stream aggregation, which is very efficient in its memory usage.
+-   TiDB ( `StreamAgg_20` ) と TiKV ( `└─StreamAgg_9` ) の両方の行数の集計には、メモリ使用量が非常に効率的なストリーム集計が使用されます。
 
-The biggest issue with the current execution plan is that the predicate `start_date BETWEEN '2017-07-01 00:00:00' AND '2017-07-01 23:59:59'` does not apply immediately. All rows are read first with a `TableFullScan` operator, and then a selection is applied afterwards. You can find out the cause from the output of `SHOW CREATE TABLE trips`:
-
-{{< copyable "sql" >}}
+現在の実行計画の最大の問題は、述語`start_date BETWEEN '2017-07-01 00:00:00' AND '2017-07-01 23:59:59'`すぐに適用されないことです。最初に`TableFullScan`演算子を使用してすべての行が読み取られ、その後選択が適用されます。 `SHOW CREATE TABLE trips`の出力から原因を見つけることができます。
 
 ```sql
 SHOW CREATE TABLE trips\G
@@ -153,9 +143,7 @@ Create Table: CREATE TABLE `trips` (
 1 row in set (0.00 sec)
 ```
 
-There is **NO** index on `start_date`. You would need an index in order to push this predicate into an index reader operator. Add an index as follows:
-
-{{< copyable "sql" >}}
+`start_date`にはインデックスがありませ**ん**。この述語をインデックス リーダー演算子にプッシュするにはインデックスが必要です。次のようにインデックスを追加します。
 
 ```sql
 ALTER TABLE trips ADD INDEX (start_date);
@@ -165,13 +153,11 @@ ALTER TABLE trips ADD INDEX (start_date);
 Query OK, 0 rows affected (2 min 10.23 sec)
 ```
 
-> **Note:**
+> **注記：**
 >
-> You can monitor the progress of DDL jobs using the [`ADMIN SHOW DDL JOBS`](/sql-statements/sql-statement-admin-show-ddl.md) command. The defaults in TiDB are carefully chosen so that adding an index does not impact production workloads too much. For testing environments, consider increasing the [`tidb_ddl_reorg_batch_size`](/system-variables.md#tidb_ddl_reorg_batch_size) and [`tidb_ddl_reorg_worker_cnt`](/system-variables.md#tidb_ddl_reorg_worker_cnt) values. On a reference system, a batch size of `10240` and worker count of `32` can achieve a 10x performance improvement over the defaults.
+> [`ADMIN SHOW DDL JOBS`](/sql-statements/sql-statement-admin-show-ddl.md)コマンドを使用して、DDL ジョブの進行状況を監視できます。 TiDB のデフォルトは、インデックスの追加が実本番ワークロードに大きな影響を与えないよう慎重に選択されています。テスト環境の場合は、 [`tidb_ddl_reorg_batch_size`](/system-variables.md#tidb_ddl_reorg_batch_size)と[`tidb_ddl_reorg_worker_cnt`](/system-variables.md#tidb_ddl_reorg_worker_cnt)値を増やすことを検討してください。リファレンス システムでは、バッチ サイズ`10240`とワーカー数`32`により、デフォルトと比較して 10 倍のパフォーマンス向上を達成できます。
 
-After adding an index, you can then repeat the query in `EXPLAIN`. In the following output, you can see that a new execution plan is chosen, and the `TableFullScan` and `Selection` operators have been eliminated:
-
-{{< copyable "sql" >}}
+インデックスを追加した後、 `EXPLAIN`のクエリを繰り返すことができます。次の出力では、新しい実行プランが選択され、 `TableFullScan`と`Selection`演算子が削除されていることがわかります。
 
 ```sql
 EXPLAIN SELECT count(*) FROM trips WHERE start_date BETWEEN '2017-07-01 00:00:00' AND '2017-07-01 23:59:59';
@@ -189,9 +175,7 @@ EXPLAIN SELECT count(*) FROM trips WHERE start_date BETWEEN '2017-07-01 00:00:00
 4 rows in set (0.00 sec)
 ```
 
-To compare the actual execution time, you can again use [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md):
-
-{{< copyable "sql" >}}
+実際の実行時間を比較するには、再度[`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md)を使用します。
 
 ```sql
 EXPLAIN ANALYZE SELECT count(*) FROM trips WHERE start_date BETWEEN '2017-07-01 00:00:00' AND '2017-07-01 23:59:59';
@@ -209,15 +193,15 @@ EXPLAIN ANALYZE SELECT count(*) FROM trips WHERE start_date BETWEEN '2017-07-01 
 4 rows in set (0.00 sec)
 ```
 
-From the result above, the query time has reduced from 1.03 seconds to 0.0 seconds.
+上記の結果から、クエリ時間は 1.03 秒から 0.0 秒に短縮されました。
 
-> **Note:**
+> **注記：**
 >
-> Another optimization that applies here is the coprocessor cache. If you are unable to add indexes, consider enabling the [coprocessor cache](/coprocessor-cache.md). When it is enabled, as long as the Region has not been modified since the operator is last executed, TiKV will return the value from the cache. This will also help reduce much of the cost of the expensive `TableFullScan` and `Selection` operators.
+> ここで適用されるもう 1 つの最適化は、コプロセッサ キャッシュです。インデックスを追加できない場合は、 [コプロセッサキャッシュ](/coprocessor-cache.md)を有効にすることを検討してください。これが有効な場合、オペレーターが最後に実行されてからリージョンが変更されていない限り、TiKV はキャッシュから値を返します。これは、高価な`TableFullScan`および`Selection`オペレータのコストの大幅な削減にも役立ちます。
 
-## Disable the early execution of subqueries
+## サブクエリの早期実行を無効にする {#disable-the-early-execution-of-subqueries}
 
-During query optimization, TiDB pre-executes subqueries that can be directly calculated. For example:
+クエリの最適化中に、TiDB は直接計算できるサブクエリを事前に実行します。例えば：
 
 ```sql
 CREATE TABLE t1(a int);
@@ -237,9 +221,9 @@ EXPLAIN SELECT * FROM t2 WHERE a = (SELECT a FROM t1);
 3 rows in set (0.00 sec)
 ```
 
-In the preceding example, the `a = (SELECT a FROM t1)` subquery is calculated during optimization and rewritten as `t2.a=1`. This allows more optimizations such as constant propagation and folding during optimization. However, it affects the execution time of the `EXPLAIN` statement. When the subquery itself takes a long time to execute, the `EXPLAIN` statement might not be completed, which could affect online troubleshooting.
+前の例では、 `a = (SELECT a FROM t1)`サブクエリが最適化中に計算され、 `t2.a=1`として書き換えられます。これにより、最適化中の定数伝播やフォールディングなど、より多くの最適化が可能になります。ただし、 `EXPLAIN`ステートメントの実行時間には影響します。サブクエリ自体の実行に時間がかかる場合、 `EXPLAIN`ステートメントが完了しない可能性があり、オンライン トラブルシューティングに影響を与える可能性があります。
 
-Starting from v7.3.0, TiDB introduces the [`tidb_opt_enable_non_eval_scalar_subquery`](/system-variables.md#tidb_opt_enable_non_eval_scalar_subquery-new-in-v730) system variable, which controls whether to disable the pre-execution of such subqueries in `EXPLAIN`. The default value of this variable is `OFF`, which means that the subquery is pre-calculated. You can set this variable to `ON` to disable the pre-execution of subqueries:
+v7.3.0 以降、TiDB は[`tidb_opt_enable_non_eval_scalar_subquery`](/system-variables.md#tidb_opt_enable_non_eval_scalar_subquery-new-in-v730)システム変数を導入します。これは、 `EXPLAIN`でそのようなサブクエリの事前実行を無効にするかどうかを制御します。この変数のデフォルト値は`OFF`で、これはサブクエリが事前に計算されることを意味します。この変数を`ON`に設定すると、サブクエリの事前実行を無効にすることができます。
 
 ```sql
 SET @@tidb_opt_enable_non_eval_scalar_subquery = ON;
@@ -261,8 +245,8 @@ EXPLAIN SELECT * FROM t2 WHERE a = (SELECT a FROM t1);
 7 rows in set (0.00 sec)
 ```
 
-As you can see, the scalar subquery is not expanded during the execution, which makes it easier to understand the specific execution process of such SQL.
+ご覧のとおり、スカラー サブクエリは実行中に展開されないため、SQL の具体的な実行プロセスを理解しやすくなります。
 
-> **Note:**
+> **注記：**
 >
-> [`tidb_opt_enable_non_eval_scalar_subquery`](/system-variables.md#tidb_opt_enable_non_eval_scalar_subquery-new-in-v730) only affects the behavior of the `EXPLAIN` statement, and the `EXPLAIN ANALYZE` statement still pre-executes the subquery in advance.
+> [`tidb_opt_enable_non_eval_scalar_subquery`](/system-variables.md#tidb_opt_enable_non_eval_scalar_subquery-new-in-v730)ステートメント`EXPLAIN`の動作にのみ影響し、ステートメント`EXPLAIN ANALYZE`は引き続き事前にサブクエリを実行します。

@@ -3,35 +3,35 @@ title: ticloud update
 summary: The reference of `ticloud update`.
 ---
 
-# ticloud update
+# ティクラウドアップデート {#ticloud-update}
 
-Update the TiDB Cloud CLI to the latest version:
+TiDB Cloud CLI を最新バージョンに更新します。
 
 ```shell
 ticloud update [flags]
 ```
 
-## Examples
+## 例 {#examples}
 
-Update the TiDB Cloud CLI to the latest version:
+TiDB Cloud CLI を最新バージョンに更新します。
 
 ```shell
 ticloud update
 ```
 
-## Flags
+## フラグ {#flags}
 
-| Flag       | Description              |
-|------------|--------------------------|
- | -h, --help | Help information for this command |
+| フラグ        | 説明           |
+| ---------- | ------------ |
+| -h, --help | このコマンドのヘルプ情報 |
 
-## Inherited flags
+## 継承されたフラグ {#inherited-flags}
 
-| Flag                 | Description                                                                               | Required | Note                                                                                                                    |
-|----------------------|-------------------------------------------------------------------------------------------|----------|--------------------------------------------------------------------------------------------------------------------------|
-| --no-color           | Disables color in output.                                                                  | No       | Only works in non-interactive mode. In interactive mode, disabling color might not work with some UI components. |
-| -P, --profile string | Specifies the active [user profile](/tidb-cloud/cli-reference.md#user-profile) used in this command. | No       | Works in both non-interactive and interactive modes.                                                                      |
+| フラグ            | 説明                                                                               | 必須  | 注記                                                                |
+| -------------- | -------------------------------------------------------------------------------- | --- | ----------------------------------------------------------------- |
+| --色なし          | 出力のカラーを無効にします。                                                                   | いいえ | 非対話モードでのみ動作します。インタラクティブ モードでは、一部の UI コンポーネントで色の無効化が機能しない可能性があります。 |
+| -P、--プロファイル文字列 | このコマンドで使用されるアクティブな[ユーザープロフィール](/tidb-cloud/cli-reference.md#user-profile)を指定します。 | いいえ | 非対話型モードと対話型モードの両方で動作します。                                          |
 
-## Feedback
+## フィードバック {#feedback}
 
-If you have any questions or suggestions on the TiDB Cloud CLI, feel free to create an [issue](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose). Also, we welcome any contributions.
+TiDB Cloud CLI に関して質問や提案がある場合は、お気軽に[問題](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose)を作成してください。また、貢献も歓迎します。

@@ -3,9 +3,9 @@ title: TiCDC Compatibility
 summary: Learn about compatibility issues of TiCDC and how to handle them.
 ---
 
-# TiCDC Compatibility
+# TiCDC の互換性 {#ticdc-compatibility}
 
-This section describes compatibility issues related to TiCDC and how to handle them.
+このセクションでは、TiCDC に関連する互換性の問題とその対処方法について説明します。
 
 <!--
 ## component compatibility matrix
@@ -17,50 +17,50 @@ TODO
 TODO
 -->
 
-## CLI and configuration file compatibility
+## CLIと設定ファイルの互換性 {#cli-and-configuration-file-compatibility}
 
-* In TiCDC v4.0.0, `ignore-txn-commit-ts` is removed and `ignore-txn-start-ts` is added, which uses start_ts to filter transactions.
-* In TiCDC v4.0.2, `db-dbs`/`db-tables`/`ignore-dbs`/`ignore-tables` are removed and `rules` is added, which uses new filter rules for databases and tables. For detailed filter syntax, see [Table Filter](/table-filter.md).
-* Starting from TiCDC v6.2.0, `cdc cli` can directly interact with TiCDC server via TiCDC Open API. You can specify the address of the TiCDC server using the `--server` parameter. `--pd` is deprecated.
-* Since v6.4.0, only the changefeed with the `SYSTEM_VARIABLES_ADMIN` or `SUPER` privilege can use the TiCDC Syncpoint feature.
+-   TiCDC v4.0.0 では、 `ignore-txn-commit-ts`が削除され、 `ignore-txn-start-ts`が追加され、start_ts を使用してトランザクションをフィルタリングします。
+-   TiCDC v4.0.2 では、 `db-dbs` / `db-tables` / `ignore-dbs` / `ignore-tables`が削除され、データベースとテーブルに新しいフィルター ルールを使用する`rules`が追加されています。フィルター構文の詳細については、 [テーブルフィルター](/table-filter.md)を参照してください。
+-   TiCDC v6.2.0 以降、TiCDC Open API を介して TiCDCサーバーと直接対話できるようになりまし`cdc cli` 。 `--server`パラメータを使用して、TiCDCサーバーのアドレスを指定できます。 `--pd`は非推奨です。
+-   v6.4.0 以降、TiCDC Syncpoint 機能を使用できるのは、 `SYSTEM_VARIABLES_ADMIN`または`SUPER`権限を持つ変更フィードのみです。
 
-## Handle compatibility issues
+## 互換性の問題を処理する {#handle-compatibility-issues}
 
-This section describes compatibility issues related to TiCDC and how to handle them.
+このセクションでは、TiCDC に関連する互換性の問題とその対処方法について説明します。
 
-### Incompatibility issue caused by using the TiCDC v5.0.0-rc `cdc cli` tool to operate a v4.0.x cluster
+### TiCDC v5.0.0-rc <code>cdc cli</code>ツールを使用して v4.0.x クラスターを操作することによって発生する非互換性の問題 {#incompatibility-issue-caused-by-using-the-ticdc-v5-0-0-rc-code-cdc-cli-code-tool-to-operate-a-v4-0-x-cluster}
 
-When using the `cdc cli` tool of TiCDC v5.0.0-rc to operate a v4.0.x TiCDC cluster, you might encounter the following abnormal situations:
+TiCDC v5.0.0-rc の`cdc cli`ツールを使用して v4.0.x TiCDC クラスターを操作すると、次のような異常な状況が発生する可能性があります。
 
-- If the TiCDC cluster is v4.0.8 or an earlier version, using the v5.0.0-rc `cdc cli` tool to create a replication task might cause cluster anomalies and get the replication task stuck.
+-   TiCDC クラスターが v4.0.8 以前のバージョンの場合、v5.0.0-rc `cdc cli`ツールを使用してレプリケーション タスクを作成すると、クラスターに異常が発生し、レプリケーション タスクが停止する可能性があります。
 
-- If the TiCDC cluster is v4.0.9 or a later version, using the v5.0.0-rc `cdc cli` tool to create a replication task will cause the old value and unified sorter features to be unexpectedly enabled by default.
+-   TiCDC クラスターが v4.0.9 以降のバージョンの場合、v5.0.0-rc `cdc cli`ツールを使用してレプリケーション タスクを作成すると、古い値と統合ソーター機能が予期せずデフォルトで有効になります。
 
-Solutions:
+解決策:
 
-Use the `cdc` executable file corresponding to the TiCDC cluster version to perform the following operations:
+TiCDC クラスターのバージョンに対応する`cdc`実行可能ファイルを使用して、次の操作を実行します。
 
-1. Delete the changefeed created using the v5.0.0-rc `cdc cli` tool. For example, run the `tiup cdc:v4.0.9 cli changefeed remove -c xxxx --pd=xxxxx --force` command.
-2. If the replication task is stuck, restart the TiCDC cluster. For example, run the `tiup cluster restart <cluster_name> -R cdc` command.
-3. Re-create the changefeed. For example, run the `tiup cdc:v4.0.9 cli changefeed create --sink-uri=xxxx --pd=xxx` command.
+1.  v5.0.0-rc `cdc cli`ツールを使用して作成された変更フィードを削除します。たとえば、 `tiup cdc:v4.0.9 cli changefeed remove -c xxxx --pd=xxxxx --force`コマンドを実行します。
+2.  レプリケーション タスクが停止した場合は、TiCDC クラスターを再起動します。たとえば、 `tiup cluster restart <cluster_name> -R cdc`コマンドを実行します。
+3.  チェンジフィードを再作成します。たとえば、 `tiup cdc:v4.0.9 cli changefeed create --sink-uri=xxxx --pd=xxx`コマンドを実行します。
 
-> **Note:**
+> **注記：**
 >
-> This issue exists only when `cdc cli` is v5.0.0-rc. `cdc cli` tool of other v5.0.x versions is compatible with v4.0.x clusters.
+> この問題は、 `cdc cli`が v5.0.0-rc の場合にのみ発生します。他の v5.0.x バージョンの`cdc cli`ツールは、v4.0.x クラスターと互換性があります。
 
-### Compatibility notes for `sort-dir` and `data-dir`
+### <code>sort-dir</code>と<code>data-dir</code>の互換性に関する注意事項 {#compatibility-notes-for-code-sort-dir-code-and-code-data-dir-code}
 
-The `sort-dir` configuration is used to specify the temporary file directory for the TiCDC sorter. Its functionalities might vary in different versions. The following table lists `sort-dir`'s compatibility changes across versions.
+`sort-dir`構成は、TiCDC ソーターの一時ファイル ディレクトリを指定するために使用されます。その機能はバージョンによって異なる場合があります。次の表は、バージョン間の`sort-dir`の互換性の変更を示しています。
 
-|  Version  |  `sort-engine` functionality  |  Note   |  Recommendation   |
-|  :---  |    :---               |  :--    | :-- |
-| v4.0.11 or an earlier v4.0 version, v5.0.0-rc | It is a changefeed configuration item and specifies temporary file directory for the `file` sorter and `unified` sorter. | In these versions, `file` sorter and `unified` sorter are **experimental features** and **NOT** recommended for the production environment. <br/><br/> If multiple changefeeds use the `unified` sorter as its `sort-engine`, the actual temporary file directory might be the `sort-dir` configuration of any changefeed, and the directory used for each TiCDC node might be different. | It is not recommended to use `unified` sorter in the production environment. |
-| v4.0.12, v4.0.13, v5.0.0, and v5.0.1 |  It is a configuration item of changefeed or of `cdc server`. | By default, the `sort-dir` configuration of a changefeed does not take effect, and the `sort-dir` configuration of `cdc server` defaults to `/tmp/cdc_sort`. It is recommended to only configure `cdc server` in the production environment.<br /><br /> If you use TiUP to deploy TiCDC, it is recommended to use the latest TiUP version and set `sorter.sort-dir` in the TiCDC server configuration.<br /><br /> The `unified` sorter is enabled by default in v4.0.13, v5.0.0, and v5.0.1. If you want to upgrade your cluster to these versions, make sure that you have correctly configured `sorter.sort-dir` in the TiCDC server configuration. | You need to configure `sort-dir` using the `cdc server` command-line parameter (or TiUP). |
-|  v4.0.14 and later v4.0 versions, v5.0.3 and later v5.0 versions, later TiDB versions | `sort-dir` is deprecated. It is recommended to configure `data-dir`.  |  You can configure `data-dir` using the latest version of TiUP. In these TiDB versions, `unified` sorter is enabled by default. Make sure that `data-dir` has been configured correctly when you upgrade your cluster. Otherwise, `/tmp/cdc_data` will be used by default as the temporary file directory. <br /><br /> If the storage capacity of the device where the directory is located is insufficient, the problem of insufficient hard disk space might occur. In this situation, the previous `sort-dir` configuration of changefeed will become invalid.| You need to configure `data-dir` using the `cdc server` command-line parameter (or TiUP).  |
-| v6.0.0 and later versions | `data-dir` is used for saving the temporary files generated by TiCDC. | Starting from v6.0.0, TiCDC uses `db sorter` as the sort engine by default. `data-dir` is the disk directory for this engine.  | You need to configure `data-dir` using the `cdc server` command-line parameter (or TiUP).  |
+| バージョン                                                     | `sort-engine`機能                                                   | 注記                                                                                                                                                                                                                                                                                                                                                                                   | おすすめ                                                              |
+| :-------------------------------------------------------- | :---------------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------- |
+| v4.0.11 またはそれ以前の v4.0 バージョン、v5.0.0-rc                     | これはチェンジフィード設定項目であり、 `file`ソーターと`unified`ソーターの一時ファイル ディレクトリを指定します。 | これらのバージョンでは、 `file`ソーターと`unified`ソーターは**実験的機能**であり、本番環境には推奨され**ません**。<br/><br/>複数の変更フィードが`unified`ソーターを`sort-engine`として使用する場合、実際の一時ファイル ディレクトリは変更フィードの`sort-dir`構成になる可能性があり、各 TiCDC ノードで使用されるディレクトリは異なる可能性があります。                                                                                                                                                                     | 本番環境で`unified`ソーターを使用することはお勧めできません。                               |
+| v4.0.12、v4.0.13、v5.0.0、および v5.0.1                         | これは、changefeed または`cdc server`の構成アイテムです。                          | デフォルトでは、変更フィードの`sort-dir`構成は有効にならず、 `cdc server`の`sort-dir`構成はデフォルトで`/tmp/cdc_sort`になります。本番環境では`cdc server`のみを構成することをお勧めします。<br/><br/> TiUPを使用して TiCDC を展開する場合は、最新のTiUPバージョンを使用し、TiCDCサーバー構成で`sorter.sort-dir`を設定することをお勧めします。<br/><br/> `unified`ソーターは、v4.0.13、v5.0.0、および v5.0.1 ではデフォルトで有効になっています。クラスターをこれらのバージョンにアップグレードする場合は、TiCDCサーバー構成で`sorter.sort-dir`が正しく構成されていることを確認してください。 | `cdc server`コマンドライン パラメーター (またはTiUP) を使用して`sort-dir`を構成する必要があります。 |
+| v4.0.14 以降 v4.0 バージョン、v5.0.3 以降 v5.0 バージョン、以降の TiDB バージョン | `sort-dir`は非推奨です。 `data-dir`を設定することをお勧めします。                       | 最新バージョンのTiUP を使用して`data-dir`を設定できます。これらの TiDB バージョンでは、 `unified`ソーターがデフォルトで有効になっています。クラスターをアップグレードするときは、 `data-dir`正しく構成されていることを確認してください。それ以外の場合は、デフォルトで`/tmp/cdc_data`一時ファイル ディレクトリとして使用されます。<br/><br/>ディレクトリが存在するデバイスのstorage容量が不足している場合、ハードディスクの空き容量が不足する問題が発生する可能性があります。この状況では、変更フィードの以前の`sort-dir`構成は無効になります。                                                                   | `cdc server`コマンドライン パラメーター (またはTiUP) を使用して`data-dir`を構成する必要があります。 |
+| v6.0.0以降のバージョン                                            | `data-dir`は、TiCDC によって生成された一時ファイルの保存に使用されます。                      | v6.0.0 以降、TiCDC はデフォルトでソート エンジンとして`db sorter`を使用します。 `data-dir`は、このエンジンのディスク ディレクトリです。                                                                                                                                                                                                                                                                                               | `cdc server`コマンドライン パラメーター (またはTiUP) を使用して`data-dir`を構成する必要があります。 |
 
-### Compatibility with temporary tables
+### 一時テーブルとの互換性 {#compatibility-with-temporary-tables}
 
-Since v5.3.0, TiCDC supports [global temporary tables](/temporary-tables.md#global-temporary-tables). Replicating global temporary tables to the downstream using TiCDC of a version earlier than v5.3.0 causes table definition error.
+v5.3.0 以降、TiCDC は[グローバル一時テーブル](/temporary-tables.md#global-temporary-tables)をサポートします。 v5.3.0 より前のバージョンの TiCDC を使用してグローバル一時テーブルをダウンストリームにレプリケートすると、テーブル定義エラーが発生します。
 
-If the upstream cluster contains a global temporary table, the downstream TiDB cluster is expected to be v5.3.0 or a later version. Otherwise, an error occurs during the replication process.
+アップストリーム クラスターにグローバル一時テーブルが含まれている場合、ダウンストリーム TiDB クラスターは v5.3.0 以降のバージョンであることが予想されます。そうしないと、レプリケーション プロセス中にエラーが発生します。

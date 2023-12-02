@@ -3,116 +3,116 @@ title: Migrate and Merge MySQL Shards of Large Datasets to TiDB Cloud
 summary: Learn how to migrate and merge MySQL shards of large datasets to TiDB Cloud.
 ---
 
-# Migrate and Merge MySQL Shards of Large Datasets to TiDB Cloud
+# 大規模なデータセットの MySQL シャードをTiDB Cloudに移行およびマージ {#migrate-and-merge-mysql-shards-of-large-datasets-to-tidb-cloud}
 
-This document describes how to migrate and merge a large MySQL dataset (for example, more than 1 TiB) from different partitions into TiDB Cloud. After full data migration, you can use [TiDB Data Migration (DM)](https://docs.pingcap.com/tidb/stable/dm-overview) to perform incremental migration according to your business needs.
+このドキュメントでは、大規模な MySQL データセット (たとえば、1 TiB を超える) をさまざまなパーティションからTiDB Cloudに移行およびマージする方法について説明します。完全なデータ移行後、ビジネス ニーズに応じて[TiDB データ移行 (DM)](https://docs.pingcap.com/tidb/stable/dm-overview)を使用して増分移行を実行できます。
 
-The example in this document uses a complex shard migration task across multiple MySQL instances, and involves handling conflicts in auto-increment primary keys. The scenario in this example is also applicable to merging data from different sharded tables within a single MySQL instance.
+このドキュメントの例では、複数の MySQL インスタンスにわたる複雑なシャード移行タスクを使用しており、自動インクリメント主キーの競合の処理が含まれています。この例のシナリオは、単一の MySQL インスタンス内の異なるシャード テーブルのデータをマージする場合にも適用できます。
 
-## Environment information in the example
+## 例の環境情報 {#environment-information-in-the-example}
 
-This section describes the basic information of the upstream cluster, DM, and downstream cluster used in the example.
+このセクションでは、例で使用される上流クラスタ、DM、および下流クラスタの基本情報について説明します。
 
-### Upstream cluster
+### 上流クラスター {#upstream-cluster}
 
-The environment information of the upstream cluster is as follows:
+上流クラスタの環境情報は以下のとおりです。
 
-- MySQL version: MySQL v5.7.18
-- MySQL instance1:
-    - schema `store_01` and table `[sale_01, sale_02]`
-    - schema `store_02` and table `[sale_01, sale_02]`
-- MySQL instance 2:
-    - schema `store_01`and table `[sale_01, sale_02]`
-    - schema `store_02`and table `[sale_01, sale_02]`
-- Table structure:
+-   MySQL バージョン: MySQL v5.7.18
+-   MySQL インスタンス 1:
+    -   スキーマ`store_01`とテーブル`[sale_01, sale_02]`
+    -   スキーマ`store_02`とテーブル`[sale_01, sale_02]`
+-   MySQL インスタンス 2:
+    -   スキーマ`store_01`とテーブル`[sale_01, sale_02]`
+    -   スキーマ`store_02`とテーブル`[sale_01, sale_02]`
+-   テーブル構造:
 
-  ```sql
-  CREATE TABLE sale_01 (
-  id bigint(20) NOT NULL auto_increment,
-  uid varchar(40) NOT NULL,
-  sale_num bigint DEFAULT NULL,
-  PRIMARY KEY (id),
-  UNIQUE KEY ind_uid (uid)
-  );
-  ```
+    ```sql
+    CREATE TABLE sale_01 (
+    id bigint(20) NOT NULL auto_increment,
+    uid varchar(40) NOT NULL,
+    sale_num bigint DEFAULT NULL,
+    PRIMARY KEY (id),
+    UNIQUE KEY ind_uid (uid)
+    );
+    ```
 
-### DM
+### DM {#dm}
 
-The version of DM is v5.3.0. You need to deploy TiDB DM manually. For detailed steps, see [Deploy a DM Cluster Using TiUP](https://docs.pingcap.com/tidb/stable/deploy-a-dm-cluster-using-tiup).
+DM のバージョンは v5.3.0 です。 TiDB DM を手動でデプロイする必要があります。詳細な手順については、 [TiUPを使用した DMクラスタのデプロイ](https://docs.pingcap.com/tidb/stable/deploy-a-dm-cluster-using-tiup)を参照してください。
 
-### External storage
+### 外部storage {#external-storage}
 
-This document uses the Amazon S3 as an example.
+このドキュメントでは、例として Amazon S3 を使用します。
 
-### Downstream cluster
+### ダウンストリームクラスター {#downstream-cluster}
 
-The sharded schemas and tables are merged into the table `store.sales`.
+シャード化されたスキーマとテーブルはテーブル`store.sales`にマージされます。
 
-## Perform full data migration from MySQL to TiDB Cloud
+## MySQL からTiDB Cloudへの完全なデータ移行を実行する {#perform-full-data-migration-from-mysql-to-tidb-cloud}
 
-The following is the procedure to migrate and merge full data of MySQL shards to TiDB Cloud.
+以下は、MySQL シャードの完全なデータをTiDB Cloudに移行およびマージする手順です。
 
-In the following example, you only need to export the data in tables to **CSV** format.
+次の例では、テーブル内のデータを**CSV**形式にエクスポートするだけで済みます。
 
-### Step 1. Create directories in the Amazon S3 bucket
+### ステップ 1. Amazon S3 バケットにディレクトリを作成する {#step-1-create-directories-in-the-amazon-s3-bucket}
 
-Create a first-level directory `store` (corresponding to the level of databases) and a second-level directory `sales` (corresponding to the level of tables) in the Amazon S3 bucket. In `sales`, create a third-level directory for each MySQL instance (corresponding to the level of MySQL instances). For example:
+Amazon S3 バケットに第 1 レベルのディレクトリ`store` (データベースのレベルに対応) と第 2 レベルのディレクトリ`sales` (テーブルのレベルに対応) を作成します。 `sales`では、MySQL インスタンスごとに第 3 レベルのディレクトリを作成します (MySQL インスタンスのレベルに対応します)。例えば：
 
-- Migrate the data in MySQL instance1 to `s3://dumpling-s3/store/sales/instance01/`
-- Migrate the data in MySQL instance2 to `s3://dumpling-s3/store/sales/instance02/`
+-   MySQL インスタンス 1 のデータを`s3://dumpling-s3/store/sales/instance01/`に移行する
+-   MySQL インスタンス 2 のデータを`s3://dumpling-s3/store/sales/instance02/`に移行する
 
-If there are shards across multiple instances, you can create one first-level directory for each database and create one second-level directory for each sharded table. Then create a third-level directory for each MySQL instance for easy management. For example, if you want to migrate and merge tables `stock_N.product_N` from MySQL instance1 and MySQL instance2 into the table `stock.products` in TiDB Cloud, you can create the following directories:
+複数のインスタンスにシャードがある場合は、データベースごとに第 1 レベルのディレクトリを 1 つ作成し、シャード テーブルごとに第 2 レベルのディレクトリを 1 つ作成できます。次に、管理を容易にするために、MySQL インスタンスごとに第 3 レベルのディレクトリを作成します。たとえば、テーブル`stock_N.product_N`を MySQL インスタンス 1 と MySQL インスタンス 2 からTiDB Cloudのテーブル`stock.products`に移行してマージする場合、次のディレクトリを作成できます。
 
-- `s3://dumpling-s3/stock/products/instance01/`
-- `s3://dumpling-s3/stock/products/instance02/`
+-   `s3://dumpling-s3/stock/products/instance01/`
+-   `s3://dumpling-s3/stock/products/instance02/`
 
-### Step 2. Use Dumpling to export data to Amazon S3
+### ステップ 2. Dumpling を使用してデータを Amazon S3 にエクスポートする {#step-2-use-dumpling-to-export-data-to-amazon-s3}
 
-For information about how to install Dumpling, see [Dumpling Introduction](https://docs.pingcap.com/tidb/stable/dumpling-overview).
+Dumplingのインストール方法については、 [Dumplingの紹介](https://docs.pingcap.com/tidb/stable/dumpling-overview)を参照してください。
 
-When you use Dumpling to export data to Amazon S3, note the following:
+Dumplingを使用してデータを Amazon S3 にエクスポートする場合は、次の点に注意してください。
 
-- Enable binlog for upstream clusters.
-- Choose the correct Amazon S3 directory and region.
-- Choose the appropriate concurrency by configuring the `-t` option to minimize the impact on the upstream cluster, or export directly from the backup database. For more information about how to use this parameter, see [Option list of Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview#option-list-of-dumpling).
-- Set appropriate values for `--filetype csv` and `--no-schemas`. For more information about how to use these parameters, see [Option list of Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview#option-list-of-dumpling).
+-   アップストリーム クラスターのbinlog を有効にします。
+-   正しい Amazon S3 ディレクトリとリージョンを選択します。
+-   `-t`オプションを構成して上流クラスターへの影響を最小限に抑えるか、バックアップ データベースから直接エクスポートすることで、適切な同時実行性を選択します。このパラメータの使用方法の詳細については、 [Dumplingのオプション一覧](https://docs.pingcap.com/tidb/stable/dumpling-overview#option-list-of-dumpling)を参照してください。
+-   `--filetype csv`と`--no-schemas`に適切な値を設定します。これらのパラメータの使用方法の詳細については、 [Dumplingのオプション一覧](https://docs.pingcap.com/tidb/stable/dumpling-overview#option-list-of-dumpling)を参照してください。
 
-Name the CSV files as follows:
+CSV ファイルに次の名前を付けます。
 
-- If the data of one table is separated into multiple CSV files, append a numeric suffix to these CSV files. For example, `${db_name}.${table_name}.000001.csv` and `${db_name}.${table_name}.000002.csv`. The numeric suffixes can be inconsecutive but must be in ascending order. You also need to add extra zeros before the number to ensure all the suffixes are in the same length.
+-   1 つのテーブルのデータが複数の CSV ファイルに分割されている場合は、これらの CSV ファイルに数字のサフィックスを追加します。たとえば、 `${db_name}.${table_name}.000001.csv`と`${db_name}.${table_name}.000002.csv`です。数値接尾辞は連続していなくてもかまいませんが、昇順である必要があります。また、すべての接尾辞が同じ長さになるように、数値の前にゼロを追加する必要があります。
 
-> **Note:**
+> **注記：**
 >
-> If you cannot update the CSV filenames according to the preceding rules in some cases (for example, the CSV file links are also used by your other programs), you can keep the filenames unchanged and use the **File Patterns** in [Step 5](#step-5-perform-the-data-import-task) to import your source data to a single target table.
+> 場合によっては、前述のルールに従って CSV ファイル名を更新できない場合 (たとえば、CSV ファイルのリンクが他のプログラムでも使用されている場合)、ファイル名を変更しないで、 [ステップ5](#step-5-perform-the-data-import-task)の**ファイル パターン**を使用してソース データをインポートできます。単一のターゲットテーブルに。
 
-To export data to Amazon S3, do the following:
+データを Amazon S3 にエクスポートするには、次の手順を実行します。
 
-1. Get the `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` of the Amazon S3 bucket.
+1.  Amazon S3 バケットの`AWS_ACCESS_KEY_ID`と`AWS_SECRET_ACCESS_KEY`を取得します。
 
     ```shell
     [root@localhost ~]# export AWS_ACCESS_KEY_ID={your_aws_access_key_id}
     [root@localhost ~]# export AWS_SECRET_ACCESS_KEY= {your_aws_secret_access_key}
     ```
 
-2. Export data from MySQL instance1 to the `s3://dumpling-s3/store/sales/instance01/` directory in the Amazon S3 bucket.
+2.  MySQL インスタンス 1 から Amazon S3 バケットの`s3://dumpling-s3/store/sales/instance01/`ディレクトリにデータをエクスポートします。
 
     ```shell
     [root@localhost ~]# tiup dumpling -u {username} -p {password} -P {port} -h {mysql01-ip} -B store_01,store_02 -r 20000 --filetype csv --no-schemas -o "s3://dumpling-s3/store/sales/instance01/" --s3.region "ap-northeast-1"
     ```
 
-    For more information about the parameters, see [Option list of Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview#option-list-of-dumpling).
+    パラメータの詳細については、 [Dumplingのオプション一覧](https://docs.pingcap.com/tidb/stable/dumpling-overview#option-list-of-dumpling)を参照してください。
 
-3. Export data from MySQL instance2 to the `s3://dumpling-s3/store/sales/instance02/` directory in the Amazon S3 bucket.
+3.  MySQL インスタンス 2 から Amazon S3 バケットの`s3://dumpling-s3/store/sales/instance02/`ディレクトリにデータをエクスポートします。
 
     ```shell
     [root@localhost ~]# tiup dumpling -u {username} -p {password} -P {port} -h {mysql02-ip} -B store_01,store_02 -r 20000 --filetype csv --no-schemas -o "s3://dumpling-s3/store/sales/instance02/" --s3.region "ap-northeast-1"
     ```
 
-For detailed steps, see [Export data to Amazon S3 cloud storage](https://docs.pingcap.com/tidb/stable/dumpling-overview#export-data-to-amazon-s3-cloud-storage).
+詳細な手順については、 [データを Amazon S3 クラウドstorageにエクスポートする](https://docs.pingcap.com/tidb/stable/dumpling-overview#export-data-to-amazon-s3-cloud-storage)を参照してください。
 
-### Step 3. Create schemas in TiDB Cloud cluster
+### ステップ 3. TiDB Cloudクラスターでスキーマを作成する {#step-3-create-schemas-in-tidb-cloud-cluster}
 
-Create schemas in the TiDB Cloud cluster as follows:
+次のようにTiDB Cloudクラスターにスキーマを作成します。
 
 ```sql
 mysql> CREATE DATABASE store;
@@ -121,7 +121,7 @@ mysql> use store;
 Database changed
 ```
 
-In this example, the column IDs of the upstream tables `sale_01` and `sale_02` are auto-increment primary keys. Conflicts might occur when you merge sharded tables in the downstream database. Execute the following SQL statement to set the ID column as a normal index instead of a primary key:
+この例では、上流テーブル`sale_01`と`sale_02`のカラム ID が自動インクリメント主キーです。ダウンストリーム データベースでシャード テーブルをマージすると、競合が発生する可能性があります。次の SQL ステートメントを実行して、ID 列を主キーではなく通常のインデックスとして設定します。
 
 ```sql
 mysql> CREATE TABLE `sales` (
@@ -134,13 +134,13 @@ mysql> CREATE TABLE `sales` (
 Query OK, 0 rows affected (0.17 sec)
 ```
 
-For more information about the solutions to solve such conflicts, see [Remove the PRIMARY KEY attribute from the column](https://docs.pingcap.com/tidb/stable/shard-merge-best-practices#remove-the-primary-key-attribute-from-the-column).
+このような競合を解決する解決策の詳細については、 [列から PRIMARY KEY 属性を削除します。](https://docs.pingcap.com/tidb/stable/shard-merge-best-practices#remove-the-primary-key-attribute-from-the-column)を参照してください。
 
-### Step 4. Configure Amazon S3 access
+### ステップ 4. Amazon S3 アクセスを構成する {#step-4-configure-amazon-s3-access}
 
-Follow the instructions in [Configure Amazon S3 access](/tidb-cloud/config-s3-and-gcs-access.md#configure-amazon-s3-access) to get the role ARN to access the source data.
+[Amazon S3 アクセスを構成する](/tidb-cloud/config-s3-and-gcs-access.md#configure-amazon-s3-access)の手順に従って、ソース データにアクセスするためのロール ARN を取得します。
 
-The following example only lists key policy configurations. Replace the Amazon S3 path with your own values.
+次の例では、主要なポリシー構成のみをリストします。 Amazon S3 パスを独自の値に置き換えます。
 
 ```yaml
 {
@@ -171,78 +171,78 @@ The following example only lists key policy configurations. Replace the Amazon S
 }
 ```
 
-### Step 5. Perform the data import task
+### ステップ 5. データインポートタスクを実行する {#step-5-perform-the-data-import-task}
 
-After configuring the Amazon S3 access, you can perform the data import task in the TiDB Cloud console as follows:
+Amazon S3 アクセスを構成した後、次のようにTiDB Cloudコンソールでデータ インポート タスクを実行できます。
 
-1. Open the **Import** page for your target cluster.
+1.  ターゲットクラスターの**インポート**ページを開きます。
 
-    1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
+    1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、プロジェクトの[**クラスター**](https://tidbcloud.com/console/clusters)ページに移動します。
 
-        > **Tip:**
+        > **ヒント：**
         >
-        > If you have multiple projects, you can click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner and switch to another project.
+        > 複数のプロジェクトがある場合は、<mdsvgicon name="icon-left-projects">左下隅の をクリックして、別のプロジェクトに切り替えます。</mdsvgicon>
 
-    2. Click the name of your target cluster to go to its overview page, and then click **Import** in the left navigation pane.
+    2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[インポート]**をクリックします。
 
-2. On the **Import** page, click **Import Data** in the upper-right corner, and then select **From S3**.
+2.  **[インポート]**ページで、右上隅の**[データのインポート]**をクリックし、 **[S3 から]**を選択します。
 
-3. On the **Import from S3** page, fill in the following information:
+3.  **[S3 からインポート]**ページで、次の情報を入力します。
 
-    - **Data format**: select **CSV**.
-    - **Bucket URI**: fill in the bucket URI of your source data. You can use the second-level directory corresponding to tables, `s3://dumpling-s3/store/sales` in this example, so that TiDB Cloud can import and merge the data in all MySQL instances into `store.sales` in one go.
-    - **Role ARN**: enter the Role-ARN you obtained.
+    -   **データ形式**： **CSV**を選択します。
+    -   **バケット URI** : ソース データのバケット URI を入力します。テーブルに対応する第 2 レベルのディレクトリ (この例では`s3://dumpling-s3/store/sales`を使用すると、 TiDB Cloud がすべての MySQL インスタンスのデータを一度にインポートして`store.sales`にマージできます。
+    -   **ロール ARN** : 取得したロール ARN を入力します。
 
-    If the location of the bucket is different from your cluster, confirm the compliance of cross region. Click **Next**.
+    バケットの場所がクラスターと異なる場合は、クロスリージョンのコンプライアンスを確認してください。 **「次へ」**をクリックします。
 
-    TiDB Cloud starts validating whether it can access your data in the specified bucket URI. After validation, TiDB Cloud tries to scan all the files in the data source using the default file naming pattern, and returns a scan summary result on the left side of the next page. If you get the `AccessDenied` error, see [Troubleshoot Access Denied Errors during Data Import from S3](/tidb-cloud/troubleshoot-import-access-denied-error.md).
+    TiDB Cloudは、指定されたバケット URI 内のデータにアクセスできるかどうかの検証を開始します。検証後、 TiDB Cloudはデフォルトのファイル命名パターンを使用してデータ ソース内のすべてのファイルのスキャンを試行し、次のページの左側にスキャンの概要結果を返します。 `AccessDenied`エラーが発生した場合は、 [S3 からのデータインポート中のアクセス拒否エラーのトラブルシューティング](/tidb-cloud/troubleshoot-import-access-denied-error.md)を参照してください。
 
-4. Modify the file patterns and add the table filter rules if needed.
+4.  必要に応じて、ファイル パターンを変更し、テーブル フィルター ルールを追加します。
 
-    - **File Pattern**: modify the file pattern if you want to import CSV files whose filenames match a certain pattern to a single target table.
+    -   **ファイル パターン**: ファイル名が特定のパターンに一致する CSV ファイルを単一のターゲット テーブルにインポートする場合は、ファイル パターンを変更します。
 
-        > **Note:**
+        > **注記：**
         >
-        > When you use this feature, one import task can only import data to a single table at a time. If you want to use this feature to import data into different tables, you need to import several times, each time specifying a different target table.
+        > この機能を使用する場合、1 つのインポート タスクは一度に 1 つのテーブルにのみデータをインポートできます。この機能を使用してデータを別のテーブルにインポートする場合は、毎回異なるターゲット テーブルを指定して、複数回インポートする必要があります。
 
-        To modify the file pattern, click **Modify**, specify a custom mapping rule between CSV files and a single target table in the following fields, and then click **Scan**.
+        ファイル パターンを変更するには、 **[変更]**をクリックし、次のフィールドで CSV ファイルと 1 つのターゲット テーブル間のカスタム マッピング ルールを指定し、 **[スキャン]**をクリックします。
 
-        - **Source file name**: enter a pattern that matches the names of the CSV files to be imported. If you have one CSV file only, enter the file name here directly. Note that the names of the CSV files must include the suffix ".csv".
+        -   **ソースファイル名**：インポートするCSVファイルの名前と一致するパターンを入力します。 CSV ファイルが 1 つだけの場合は、ここにファイル名を直接入力します。 CSV ファイルの名前には接尾辞「.csv」が含まれている必要があることに注意してください。
 
-            For example:
+            例えば：
 
-            - `my-data?.csv`: all CSV files starting with `my-data` and one character (such as `my-data1.csv` and `my-data2.csv`) will be imported into the same target table.
-            - `my-data*.csv`: all CSV files starting with `my-data` will be imported into the same target table.
+            -   `my-data?.csv` : `my-data`と 1 文字 ( `my-data1.csv`や`my-data2.csv`など) で始まるすべての CSV ファイルが同じターゲット テーブルにインポートされます。
+            -   `my-data*.csv` : `my-data`で始まるすべての CSV ファイルが同じターゲット テーブルにインポートされます。
 
-        - **Target table name**: enter the name of the target table in TiDB Cloud, which must be in the `${db_name}.${table_name}` format. For example, `mydb.mytable`. Note that this field only accepts one specific table name, so wildcards are not supported.
+        -   **ターゲット テーブル名**: TiDB Cloudのターゲット テーブルの名前を入力します。これは`${db_name}.${table_name}`形式である必要があります。たとえば、 `mydb.mytable` 。このフィールドは 1 つの特定のテーブル名のみを受け入れるため、ワイルドカードはサポートされていないことに注意してください。
 
-    - **Table Filter**: If you want to filter which tables to be imported, you can specify one or more [table filter](/table-filter.md#syntax) rules in this area.
+    -   **テーブル フィルター**: インポートするテーブルをフィルターする場合は、この領域で[テーブルフィルター](/table-filter.md#syntax)つ以上のルールを指定できます。
 
-5. Click **Next**.
+5.  **「次へ」**をクリックします。
 
-6. On the **Preview** page, you can have a preview of the data. If the previewed data is not what you expect, click the **Click here to edit csv configuration** link to update the CSV-specific configurations, including separator, delimiter, header, `backslash escape`, and `trim last separator`.
+6.  **[プレビュー]**ページでは、データのプレビューを表示できます。プレビューされたデータが期待したものと異なる場合は、 **「ここをクリックして CSV 構成を編集します」リンクを**クリックして、区切り文字、区切り記号、ヘッダー、 `backslash escape` 、および`trim last separator`を含む CSV 固有の構成を更新します。
 
-    > **Note:**
+    > **注記：**
     >
-    > For the configurations of separator, delimiter, and null, you can use both alphanumeric characters and certain special characters. The supported special characters include `\t`, `\b`, `\n`, `\r`, `\f`, and `\u0001`.
+    > 区切り文字、区切り文字、null の設定には、英数字と特定の特殊文字の両方を使用できます。サポートされている特殊文字には、 `\t` 、 `\b` 、 `\n` 、 `\r` 、 `\f` 、および`\u0001`が含まれます。
 
-7. Click **Start Import**.
+7.  **[インポートの開始]**をクリックします。
 
-8. When the import progress shows **Finished**, check the imported tables.
+8.  インポートの進行状況に**「 Finished 」**と表示されたら、インポートされたテーブルを確認します。
 
-After the data is imported, if you want to remove the Amazon S3 access of TiDB Cloud, simply delete the policy that you added.
+データのインポート後、 TiDB Cloudの Amazon S3 アクセスを削除する場合は、追加したポリシーを削除するだけです。
 
-## Perform incremental data replication from MySQL to TiDB Cloud
+## MySQL からTiDB Cloudへの増分データ レプリケーションを実行する {#perform-incremental-data-replication-from-mysql-to-tidb-cloud}
 
-To replicate the data changes based on binlog from a specified position in the upstream cluster to TiDB Cloud, you can use TiDB Data Migration (DM) to perform incremental replication.
+binlogに基づいてデータ変更を上流クラスターの指定された位置からTiDB Cloudに複製するには、TiDB データ移行 (DM) を使用して増分複製を実行できます。
 
-### Before you begin
+### あなたが始める前に {#before-you-begin}
 
-If you want to migrate incremental data and merge MySQL shards to TiDB Cloud, you need to manually deploy TiDB DM, because TiDB Cloud does not support migrating and merging MySQL shards yet. For detailed steps, see [Deploy a DM Cluster Using TiUP](https://docs.pingcap.com/tidb/stable/deploy-a-dm-cluster-using-tiup).
+増分データを移行し、MySQL シャードをTiDB Cloudにマージする場合は、TiDB DM を手動でデプロイする必要があります。これは、 TiDB Cloud がMySQL シャードの移行とマージをまだサポートしていないためです。詳細な手順については、 [TiUPを使用した DMクラスタのデプロイ](https://docs.pingcap.com/tidb/stable/deploy-a-dm-cluster-using-tiup)を参照してください。
 
-### Step 1. Add the data source
+### ステップ 1. データソースを追加する {#step-1-add-the-data-source}
 
-1. Create a new data source file `dm-source1.yaml` to configure an upstream data source into DM. Add the following content:
+1.  新しいデータ ソース ファイル`dm-source1.yaml`を作成して、アップストリーム データ ソースを DM に構成します。次のコンテンツを追加します。
 
     ```yaml
     # MySQL Configuration.
@@ -258,7 +258,7 @@ If you want to migrate incremental data and merge MySQL shards to TiDB Cloud, yo
      port: ${port}             # For example: 3307
     ```
 
-2. Create another new data source file `dm-source2.yaml`, and add the following content:
+2.  別の新しいデータ ソース ファイル`dm-source2.yaml`を作成し、次の内容を追加します。
 
     ```yaml
     # MySQL Configuration.
@@ -274,20 +274,20 @@ If you want to migrate incremental data and merge MySQL shards to TiDB Cloud, yo
      port: 3308
     ```
 
-3. Run the following command in a terminal. Use `tiup dmctl` to load the first data source configuration into the DM cluster:
+3.  ターミナルで次のコマンドを実行します。最初のデータ ソース構成を DM クラスターにロードするには、 `tiup dmctl`を使用します。
 
     ```shell
     [root@localhost ~]# tiup dmctl --master-addr ${advertise-addr} operate-source create dm-source1.yaml
     ```
 
-    The parameters used in the command above are described as follows:
+    上記のコマンドで使用されるパラメータは次のように説明されます。
 
-    |Parameter              |Description    |
-    |-                      |-              |
-    |`--master-addr`        |The `{advertise-addr}` of any DM-master node in the cluster where `dmctl` is to be connected. For example: 192.168.11.110:9261|
-    |`operate-source create`|Loads the data source to the DM cluster.|
+    | パラメータ                   | 説明                                                                             |
+    | ----------------------- | ------------------------------------------------------------------------------ |
+    | `--master-addr`         | `dmctl`が接続されるクラスター内の任意の DM マスター ノードの`{advertise-addr}` 。例: 192.168.11.110:9261 |
+    | `operate-source create` | データ ソースを DM クラスターにロードします。                                                      |
 
-    The following is an example output:
+    以下は出力例です。
 
     ```shell
     tiup is checking updates for component dmctl ...
@@ -309,13 +309,13 @@ If you want to migrate incremental data and merge MySQL shards to TiDB Cloud, yo
 
     ```
 
-4. Run the following command in a terminal. Use `tiup dmctl` to load the second data source configuration into the DM cluster:
+4.  ターミナルで次のコマンドを実行します。 2 番目のデータ ソース構成を DM クラスターにロードするには、 `tiup dmctl`を使用します。
 
     ```shell
     [root@localhost ~]# tiup dmctl --master-addr 192.168.11.110:9261 operate-source create dm-source2.yaml
     ```
 
-    The following is an example output:
+    以下は出力例です。
 
     ```shell
     tiup is checking updates for component dmctl ...
@@ -336,11 +336,11 @@ If you want to migrate incremental data and merge MySQL shards to TiDB Cloud, yo
     }
     ```
 
-### Step 2. Create a replication task
+### ステップ 2. レプリケーションタスクを作成する {#step-2-create-a-replication-task}
 
-1. Create a `test-task1.yaml` file for the replication task.
+1.  レプリケーションタスク用にファイルを`test-task1.yaml`作成します。
 
-2. Find the starting point in the metadata file of MySQL instance1 exported by Dumpling. For example:
+2.  Dumplingによってエクスポートされた MySQL インスタンス 1 のメタデータ ファイルで開始点を見つけます。例えば：
 
     ```toml
     Started dump at: 2022-05-25 10:16:26
@@ -351,7 +351,7 @@ If you want to migrate incremental data and merge MySQL shards to TiDB Cloud, yo
     Finished dump at: 2022-05-25 10:16:27
     ```
 
-3. Find the starting point in the metadata file of MySQL instance2 exported by Dumpling. For example:
+3.  Dumplingによってエクスポートされた MySQL インスタンス 2 のメタデータ ファイルで開始点を見つけます。例えば：
 
     ```toml
     Started dump at: 2022-05-25 10:20:32
@@ -362,7 +362,7 @@ If you want to migrate incremental data and merge MySQL shards to TiDB Cloud, yo
     Finished dump at: 2022-05-25 10:20:32
     ```
 
-4. Edit the task configuration file `test-task1`, to configure the incremental replication mode and replication starting point for each data source.
+4.  タスク構成ファイル`test-task1`を編集して、各データ ソースの増分レプリケーション モードとレプリケーション開始点を構成します。
 
     ```yaml
     ## ********* Task Configuration *********
@@ -436,15 +436,15 @@ If you want to migrate incremental data and merge MySQL shards to TiDB Cloud, yo
     ignore-checking-items: ["table_schema","auto_increment_ID"]
     ```
 
-For detailed task configurations, see [DM Task Configurations](https://docs.pingcap.com/tidb/stable/task-configuration-file-full).
+タスク構成の詳細については、 [DM タスクの構成](https://docs.pingcap.com/tidb/stable/task-configuration-file-full)を参照してください。
 
-To run a data replication task smoothly, DM triggers a precheck automatically at the start of the task and returns the check results. DM starts the replication only after the precheck is passed. To trigger a precheck manually, run the check-task command:
+データ レプリケーション タスクをスムーズに実行するために、DM はタスクの開始時に事前チェックを自動的にトリガーし、チェック結果を返します。 DM は、事前チェックに合格した後にのみレプリケーションを開始します。事前チェックを手動でトリガーするには、check-task コマンドを実行します。
 
 ```shell
 [root@localhost ~]# tiup dmctl --master-addr 192.168.11.110:9261 check-task dm-task.yaml
 ```
 
-The following is an example output:
+以下は出力例です。
 
 ```shell
 tiup is checking updates for component dmctl ...
@@ -457,22 +457,22 @@ Starting component `dmctl`: /root/.tiup/components/dmctl/${tidb_version}/dmctl/d
 }
 ```
 
-### Step 3. Start the replication task
+### ステップ 3. レプリケーションタスクを開始する {#step-3-start-the-replication-task}
 
-Use `tiup dmctl` to run the following command to start the data replication task:
+`tiup dmctl`を使用して次のコマンドを実行し、データ レプリケーション タスクを開始します。
 
 ```shell
 [root@localhost ~]# tiup dmctl --master-addr ${advertise-addr}  start-task dm-task.yaml
 ```
 
-The parameters used in the command above are described as follows:
+上記のコマンドで使用されるパラメータは次のように説明されます。
 
-|Parameter              |Description    |
-|-                      |-              |
-|`--master-addr`        |The `{advertise-addr}` of any DM-master node in the cluster where `dmctl` is to be connected. For example: 192.168.11.110:9261|
-|`start-task`           |Starts the migration task.|
+| パラメータ           | 説明                                                                             |
+| --------------- | ------------------------------------------------------------------------------ |
+| `--master-addr` | `dmctl`が接続されるクラスター内の任意の DM マスター ノードの`{advertise-addr}` 。例: 192.168.11.110:9261 |
+| `start-task`    | 移行タスクを開始します。                                                                   |
 
-The following is an example output:
+以下は出力例です。
 
 ```shell
 tiup is checking updates for component dmctl ...
@@ -501,19 +501,19 @@ Starting component `dmctl`: /root/.tiup/components/dmctl/${tidb_version}/dmctl/d
 }
 ```
 
-If the task fails to start, check the prompt message and fix the configuration. After that, you can re-run the command above to start the task.
+タスクの開始に失敗した場合は、プロンプト メッセージを確認して構成を修正します。その後、上記のコマンドを再実行してタスクを開始できます。
 
-If you encounter any problem, refer to [DM error handling](https://docs.pingcap.com/tidb/stable/dm-error-handling) and [DM FAQ](https://docs.pingcap.com/tidb/stable/dm-faq).
+問題が発生した場合は、 [DMエラー処理](https://docs.pingcap.com/tidb/stable/dm-error-handling)と[DMに関するFAQ](https://docs.pingcap.com/tidb/stable/dm-faq)を参照してください。
 
-### Step 4. Check the replication task status
+### ステップ 4. レプリケーションタスクのステータスを確認する {#step-4-check-the-replication-task-status}
 
-To learn whether the DM cluster has an ongoing replication task and view the task status, run the `query-status` command using `tiup dmctl`:
+DM クラスターに進行中のレプリケーション タスクがあるかどうかを確認し、タスクのステータスを表示するには、 `tiup dmctl`使用して`query-status`コマンドを実行します。
 
 ```shell
 [root@localhost ~]# tiup dmctl --master-addr 192.168.11.110:9261 query-status test-task1
 ```
 
-The following is an example output:
+以下は出力例です。
 
 ```shell
 {
@@ -599,4 +599,4 @@ The following is an example output:
 }
 ```
 
-For a detailed interpretation of the results, see [Query Status](https://docs.pingcap.com/tidb/stable/dm-query-status).
+結果の詳細な解釈については、 [クエリステータス](https://docs.pingcap.com/tidb/stable/dm-query-status)を参照してください。

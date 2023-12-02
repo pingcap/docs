@@ -3,28 +3,28 @@ title: LOCK TABLES and UNLOCK TABLES
 summary: An overview of the usage of LOCK TABLES and UNLOCK TABLES for the TiDB database.
 ---
 
-# LOCK TABLES and UNLOCK TABLES
+# テーブルのロックとテーブルのロック解除 {#lock-tables-and-unlock-tables}
 
-> **Warning:**
+> **警告：**
 >
-> `LOCK TABLES` and `UNLOCK TABLES` are experimental features for the current version. It is not recommended to use it in the production environment.
+> `LOCK TABLES`と`UNLOCK TABLES`は現在のバージョンの実験的機能です。本番環境での使用はお勧めしません。
 
-TiDB enables client sessions to acquire table locks for the purpose of cooperating with other sessions for access to tables, or to prevent other sessions from modifying tables. A session can acquire or release locks only for itself. One session cannot acquire locks for another session or release locks held by another session.
+TiDB を使用すると、クライアント セッションがテーブルにアクセスするために他のセッションと連携したり、他のセッションによるテーブルの変更を防止したりする目的でテーブル ロックを取得できるようになります。セッションは、それ自体に対してのみロックを取得または解放できます。あるセッションが別のセッションのロックを取得したり、別のセッションが保持しているロックを解放したりすることはできません。
 
-`LOCK TABLES` acquires table locks for the current client session. If you have the `LOCK TABLES` and `SELECT` privileges for each object to be locked, you can acquire table locks for common tables.
+`LOCK TABLES`現在のクライアント セッションのテーブル ロックを取得します。ロックする各オブジェクトに対して`LOCK TABLES`および`SELECT`権限を持っている場合は、共通テーブルのテーブル ロックを取得できます。
 
-`UNLOCK TABLES` explicitly releases any table locks held by the current session. `LOCK TABLES` implicitly releases all table locks held by the current session before acquiring new locks.
+`UNLOCK TABLES`現在のセッションが保持しているテーブル ロックを明示的に解放します。 `LOCK TABLES`新しいロックを取得する前に、現在のセッションによって保持されているすべてのテーブル ロックを暗黙的に解放します。
 
-A table lock protects against reads or writes by other sessions. A session that holds a `WRITE` lock can perform table-level operations such as `DROP TABLE` or `TRUNCATE TABLE`.
+テーブル ロックは、他のセッションによる読み取りまたは書き込みから保護します。 `WRITE`ロックを保持するセッションは、 `DROP TABLE`や`TRUNCATE TABLE`などのテーブルレベルの操作を実行できます。
 
-> **Note：**
+> **注記：**
 >
-> The table locks feature is disabled by default.
+> テーブル ロック機能はデフォルトでは無効になっています。
 >
-> - For TiDB Self-Hosted, to enable the table locks feature, you need to set [`enable-table-lock`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#enable-table-lock-new-in-v400) to `true` in the configuration files of all TiDB instances.
-> - For TiDB Cloud, to enable the table locks feature, you need to contact [TiDB Cloud Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support) to set [`enable-table-lock`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#enable-table-lock-new-in-v400) to `true`.
+> -   TiDB セルフホストの場合、テーブル ロック機能を有効にするには、すべての TiDB インスタンスの構成ファイルで[`enable-table-lock`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#enable-table-lock-new-in-v400) ～ `true`を設定する必要があります。
+> -   TiDB Cloudの場合、テーブル ロック機能を有効にするには、 [TiDB Cloudのサポート](https://docs.pingcap.com/tidbcloud/tidb-cloud-support)に連絡して[`enable-table-lock`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#enable-table-lock-new-in-v400)を`true`に設定する必要があります。
 
-## Synopsis
+## あらすじ {#synopsis}
 
 ```ebnf+diagram
 LockTablesDef
@@ -39,72 +39,72 @@ LockType
            | 'WRITE' ('LOCAL')?
 ```
 
-## Acquire table locks
+## テーブルロックの取得 {#acquire-table-locks}
 
-You can acquire table locks within the current session by using the `LOCK TABLES` statement. The following lock types are available:
+`LOCK TABLES`ステートメントを使用すると、現在のセッション内でテーブル ロックを取得できます。次のロック タイプが使用可能です。
 
-`READ` lock:
+`READ`ロック:
 
-- The session that holds this lock can read the table, but cannot write it.
-- Multiple sessions can acquire a `READ` lock from the same table at the same time.
-- Other sessions can read the table without explicitly acquiring a `READ` lock.
+-   このロックを保持しているセッションはテーブルを読み取ることはできますが、書き込むことはできません。
+-   複数のセッションが同じテーブルから同時に`READ`ロックを取得できます。
+-   他のセッションは、明示的に`READ`ロックを取得しなくてもテーブルを読み取ることができます。
 
-The `READ LOCAL` lock is only for syntax compatibility with MySQL and is not supported.
+`READ LOCAL`ロックは MySQL との構文互換性のみを目的としており、サポートされていません。
 
-`WRITE` lock:
+`WRITE`ロック:
 
-- The session that holds this lock can read and write the table.
-- Only the session that holds this lock can access the table. No other sessions can access it until the lock is released.
+-   このロックを保持するセッションは、テーブルの読み取りと書き込みができます。
+-   このロックを保持しているセッションのみがテーブルにアクセスできます。ロックが解放されるまで、他のセッションはアクセスできません。
 
-`WRITE LOCAL` lock:
+`WRITE LOCAL`ロック:
 
-- The session that holds this lock can read and write the table.
-- Only the session that holds this lock can access the table. Other sessions can read the table, but cannot write it.
+-   このロックを保持するセッションは、テーブルの読み取りと書き込みができます。
+-   このロックを保持しているセッションのみがテーブルにアクセスできます。他のセッションはテーブルを読み取ることはできますが、書き込むことはできません。
 
-If the lock that the `LOCK TABLES` statement needs is held by another session, the `LOCK TABLES` statement must wait, and an error is returned upon the execution of this statement, for example:
+`LOCK TABLES`ステートメントに必要なロックが別のセッションによって保持されている場合、 `LOCK TABLES`ステートメントは待機する必要があり、このステートメントの実行時にエラーが返されます。次に例を示します。
 
 ```sql
 > LOCK TABLES t1 READ;
 ERROR 8020 (HY000): Table 't1' was locked in WRITE by server: f4799bcb-cad7-4285-8a6d-23d3555173f1_session: 2199023255959
 ```
 
-The preceding error message indicates that the session with ID `2199023255959` in TiDB `f4799bcb-cad7-4285-8a6d-23d3555173f1` already holds a `WRITE` lock on table `t1`. Therefore, the current session cannot acquire a `READ` lock on table `t1`.
+前述のエラー メッセージは、TiDB `f4799bcb-cad7-4285-8a6d-23d3555173f1`の ID `2199023255959`のセッションがテーブル`t1`に対してすでに`WRITE`ロックを保持していることを示しています。したがって、現在のセッションはテーブル`t1`の`READ`ロックを取得できません。
 
-You cannot acquire the same table lock multiple times in a single `LOCK TABLES` statement.
+1 つの`LOCK TABLES`ステートメントで同じテーブル ロックを複数回取得することはできません。
 
 ```sql
 > LOCK TABLES t WRITE, t READ;
 ERROR 1066 (42000): Not unique table/alias: 't'
 ```
 
-## Release table locks
+## テーブルのロックを解除する {#release-table-locks}
 
-When the table locks held by a session are released, they are all released at the same time. A session can release its locks explicitly or implicitly.
+セッションによって保持されているテーブル ロックが解放されると、それらはすべて同時に解放されます。セッションは、明示的または暗黙的にロックを解放できます。
 
-- A session can release its locks explicitly with `UNLOCK TABLES`.
-- If a session issues a `LOCK TABLES` statement to acquire a lock while already holding locks, its existing locks are released implicitly before the new locks are acquired.
+-   セッションは`UNLOCK TABLES`を使用して明示的にロックを解放できます。
+-   セッションがすでにロックを保持しているときに`LOCK TABLES`ステートメントを発行してロックを取得すると、新しいロックが取得される前に、既存のロックが暗黙的に解放されます。
 
-If the connection for a client session terminates, whether normally or abnormally, TiDB implicitly releases all table locks held by the session. If the client reconnects, the locks are no longer in effect. For this reason, it is not recommended to enable auto-reconnection on the client. If you enable auto-reconnection, the client is not notified when reconnection occurs, and all table locks or current transactions are lost. By contrast, with auto-reconnection disabled, if the connection drops, an error occurs when the next statement is issued. The client can detect the error and take appropriate action such as reacquiring the locks or redoing the transaction.
+クライアント セッションの接続が終了すると、正常か異常かに関係なく、TiDB はセッションによって保持されているすべてのテーブル ロックを暗黙的に解放します。クライアントが再接続すると、ロックは無効になります。このため、クライアントで自動再接続を有効にすることはお勧めできません。自動再接続を有効にすると、再接続が発生したときにクライアントに通知されず、すべてのテーブル ロックまたは現在のトランザクションが失われます。対照的に、自動再接続が無効になっている場合、接続が切断されると、次のステートメントの発行時にエラーが発生します。クライアントはエラーを検出し、ロックの再取得やトランザクションのやり直しなどの適切なアクションを実行できます。
 
-## Table-locking restrictions and conditions
+## テーブルロックの制限と条件 {#table-locking-restrictions-and-conditions}
 
-You can safely use `KILL` to terminate a session that holds a table lock.
+`KILL`を使用すると、テーブル ロックを保持しているセッションを安全に終了できます。
 
-You cannot acquire table locks on tables in the following databases:
+次のデータベースのテーブルではテーブル ロックを取得できません。
 
-- `INFORMATION_SCHEMA`
-- `PERFORMANCE_SCHEMA`
-- `METRICS_SCHEMA`
-- `mysql`
+-   `INFORMATION_SCHEMA`
+-   `PERFORMANCE_SCHEMA`
+-   `METRICS_SCHEMA`
+-   `mysql`
 
-## MySQL compatibility
+## MySQLの互換性 {#mysql-compatibility}
 
-### Table lock acquisition
+### テーブルロックの取得 {#table-lock-acquisition}
 
-- In TiDB, if session A has already held a table lock, an error is returned if session B attempts to write to the table. In MySQL, the write request of session B is blocked until session A releases the table lock, and requests for locking the table from other sessions are blocked until the current session releases the `WRITE` lock.
-- In TiDB, if the lock that the `LOCK TABLES` statement needs is held by another session, the `LOCK TABLES` statement must wait, and an error is returned upon the execution of this statement. In MySQL, this statement is blocked until the lock is acquired.
-- In TiDB, the `LOCK TABLES` statement is effective in the whole cluster. In MySQL, this statement is effective only in the current MySQL server, and is not compatible with the NDB cluster.
+-   TiDB では、セッション A がすでにテーブル ロックを保持している場合、セッション B がテーブルに書き込もうとするとエラーが返されます。 MySQL では、セッション B の書き込みリクエストはセッション A がテーブル ロックを解放するまでブロックされ、他のセッションからのテーブル ロックのリクエストは現在のセッションがロック`WRITE`を解放するまでブロックされます。
+-   TiDB では、 `LOCK TABLES`ステートメントが必要とするロックが別のセッションによって保持されている場合、 `LOCK TABLES`ステートメントは待機する必要があり、このステートメントの実行時にエラーが返されます。 MySQL では、このステートメントはロックが取得されるまでブロックされます。
+-   TiDB では、 `LOCK TABLES`ステートメントはクラスター全体で有効です。 MySQL では、このステートメントは現在の MySQLサーバーでのみ有効であり、NDB クラスターとは互換性がありません。
 
-### Table lock release
+### テーブルロック解除 {#table-lock-release}
 
-When a transaction is explicitly started in a TiDB session (for example, with the `BEGIN` statement), TiDB does not implicitly release the table locks held by the session; but MySQL does.
+トランザクションが TiDB セッションで明示的に開始された場合 (たとえば、 `BEGIN`ステートメントを使用して)、TiDB はセッションによって保持されているテーブル ロックを暗黙的に解放しません。ただし、MySQL は可能です。

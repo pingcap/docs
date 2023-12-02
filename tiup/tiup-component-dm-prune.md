@@ -2,26 +2,26 @@
 title: tiup dm prune
 ---
 
-# tiup dm prune
+# ティアップDMプルーン {#tiup-dm-prune}
 
-When you scale in the cluster(/tiup/tiup-component-dm-scale-in.md), a small amount of metadata in etcd is not cleaned up, which usually causes no problem. If you need to clean up the metadata, you can manually execute the `tiup dm prune` command.
+クラスター (/tiup/tiup-component-dm-scale-in.md) をスケールインすると、etcd 内の少量のメタデータがクリーンアップされませんが、通常は問題は発生しません。メタデータをクリーンアップする必要がある場合は、 `tiup dm prune`コマンドを手動で実行できます。
 
-## Syntax
+## 構文 {#syntax}
 
 ```shell
 tiup dm prune <cluster-name> [flags]
 ```
 
-## Option
+## オプション {#option}
 
-### -h, --help
+### -h, --help {#h-help}
 
-- Prints the help information.
-- Data type: `BOOLEAN`
-- Default: false
+-   ヘルプ情報を出力します。
+-   データ型: `BOOLEAN`
+-   デフォルト: false
 
-## Output
+## 出力 {#output}
 
-The log of the cleanup process.
+クリーンアッププロセスのログ。
 
-[<< Back to the previous page - TiUP DM command list](/tiup/tiup-component-dm.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUP DMコマンド一覧](/tiup/tiup-component-dm.md#command-list)

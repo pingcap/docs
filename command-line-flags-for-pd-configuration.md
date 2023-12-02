@@ -3,104 +3,102 @@ title: PD Configuration Flags
 summary: Learn some configuration flags of PD.
 ---
 
-# PD Configuration Flags
+# PDコンフィグレーションフラグ {#pd-configuration-flags}
 
-PD is configurable using command-line flags and environment variables.
+PD は、コマンドライン フラグと環境変数を使用して構成できます。
 
-## `--advertise-client-urls`
+## <code>--advertise-client-urls</code> {#code-advertise-client-urls-code}
 
-- The list of advertise URLs for the client to access PD
-- Default: `"${client-urls}"`
-- In some situations such as in the Docker or NAT network environment, if a client cannot access PD through the default client URLs listened to by PD, you must manually set the advertise client URLs.
-- For example, the internal IP address of Docker is `172.17.0.1`, while the IP address of the host is `192.168.100.113` and the port mapping is set to `-p 2379:2379`. In this case, you can set `--advertise-client-urls` to `"http://192.168.100.113:2379"`. The client can find this service through `"http://192.168.100.113:2379"`.
+-   クライアントが PD にアクセスするためのアドバタイズ URL のリスト
+-   デフォルト: `"${client-urls}"`
+-   Docker や NAT ネットワーク環境などの状況によっては、PD がリッスンするデフォルトのクライアント URL を介してクライアントが PD にアクセスできない場合は、アドバタイズ クライアント URL を手動で設定する必要があります。
+-   たとえば、Docker の内部 IP アドレスは`172.17.0.1`ですが、ホストの IP アドレスは`192.168.100.113`で、ポート マッピングは`-p 2379:2379`に設定されています。この場合、 `--advertise-client-urls` ～ `"http://192.168.100.113:2379"`を設定できます。クライアントは`"http://192.168.100.113:2379"`を通じてこのサービスを見つけることができます。
 
-## `--advertise-peer-urls`
+## <code>--advertise-peer-urls</code> {#code-advertise-peer-urls-code}
 
-- The list of advertise URLs for other PD nodes (peers) to access a PD node
-- Default: `"${peer-urls}"`
-- In some situations such as in the Docker or NAT network environment, if the other nodes (peers) cannot access the PD node through the default peer URLs listened to by this PD node, you must manually set the advertise peer URLs.
-- For example, the internal IP address of Docker is `172.17.0.1`, while the IP address of the host is `192.168.100.113` and the port mapping is set to `-p 2380:2380`. In this case, you can set `--advertise-peer-urls` to `"http://192.168.100.113:2380"`. The other PD nodes can find this service through `"http://192.168.100.113:2380"`.
+-   他の PD ノード (ピア) が PD ノードにアクセスするためのアドバタイズ URL のリスト
+-   デフォルト: `"${peer-urls}"`
+-   Docker または NAT ネットワーク環境などの状況によっては、他のノード (ピア) が、この PD ノードがリッスンするデフォルトのピア URL を介して PD ノードにアクセスできない場合は、アドバタイズピア URL を手動で設定する必要があります。
+-   たとえば、Docker の内部 IP アドレスは`172.17.0.1`ですが、ホストの IP アドレスは`192.168.100.113`で、ポート マッピングは`-p 2380:2380`に設定されています。この場合、 `--advertise-peer-urls` ～ `"http://192.168.100.113:2380"`を設定できます。他の PD ノードは`"http://192.168.100.113:2380"`を通じてこのサービスを見つけることができます。
 
-## `--client-urls`
+## <code>--client-urls</code> {#code-client-urls-code}
 
-- The list of client URLs to be listened to by PD
-- Default: `"http://127.0.0.1:2379"`
-- When you deploy a cluster, you must specify the IP address of the current host as `--client-urls` (for example, `"http://192.168.100.113:2379"`). If the cluster runs on Docker, specify the IP address of Docker as `"http://0.0.0.0:2379"`.
+-   PD がリッスンするクライアント URL のリスト
+-   デフォルト: `"http://127.0.0.1:2379"`
+-   クラスターをデプロイするときは、現在のホストの IP アドレスを`--client-urls` (たとえば、 `"http://192.168.100.113:2379"` ) として指定する必要があります。クラスターが Docker 上で実行されている場合は、Docker の IP アドレスを`"http://0.0.0.0:2379"`として指定します。
 
-## `--peer-urls`
+## <code>--peer-urls</code> {#code-peer-urls-code}
 
-- The list of peer URLs to be listened to by a PD node
-- Default: `"http://127.0.0.1:2380"`
-- When you deploy a cluster, you must specify `--peer-urls` as the IP address of the current host, such as `"http://192.168.100.113:2380"`. If the cluster runs on Docker, specify the IP address of Docker as `"http://0.0.0.0:2380"`.
+-   PD ノードがリッスンするピア URL のリスト
+-   デフォルト: `"http://127.0.0.1:2380"`
+-   クラスターをデプロイするときは、現在のホストの IP アドレスとして`--peer-urls` ( `"http://192.168.100.113:2380"`など) を指定する必要があります。クラスターが Docker 上で実行されている場合は、Docker の IP アドレスを`"http://0.0.0.0:2380"`として指定します。
 
-## `--config`
+## <code>--config</code> {#code-config-code}
 
-- The configuration file
-- Default: `""`
-- If you set the configuration using the command line, the same setting in the configuration file will be overwritten.
+-   設定ファイル
+-   デフォルト: `""`
+-   コマンドラインを使用して構成を設定した場合、構成ファイル内の同じ設定は上書きされます。
 
-## `--data-dir`
+## <code>--data-dir</code> {#code-data-dir-code}
 
-- The path to the data directory
-- Default: `"default.${name}"`
+-   データディレクトリへのパス
+-   デフォルト: `"default.${name}"`
 
-## `--initial-cluster`
+## <code>--initial-cluster</code> {#code-initial-cluster-code}
 
-- The initial cluster configuration for bootstrapping
-- Default: `"{name}=http://{advertise-peer-url}"`
-- For example, if `name` is "pd", and `advertise-peer-urls` is `"http://192.168.100.113:2380"`, the `initial-cluster` is `"pd=http://192.168.100.113:2380"`.
-- If you need to start three PD servers, the `initial-cluster` might be:
+-   ブートストラップ用の初期クラスター構成
+-   デフォルト: `"{name}=http://{advertise-peer-url}"`
+-   たとえば、 `name`が &quot;pd&quot; で、 `advertise-peer-urls`が`"http://192.168.100.113:2380"`の場合、 `initial-cluster`は`"pd=http://192.168.100.113:2380"`になります。
+-   3 つの PD サーバーを起動する必要がある場合、 `initial-cluster`は次のようになります。
 
-    ```
-    pd1=http://192.168.100.113:2380, pd2=http://192.168.100.114:2380, pd3=192.168.100.115:2380
-    ```
+        pd1=http://192.168.100.113:2380, pd2=http://192.168.100.114:2380, pd3=192.168.100.115:2380
 
-## `--join`
+## <code>--join</code> {#code-join-code}
 
-- Join the cluster dynamically
-- Default: `""`
-- If you want to join an existing cluster, you can use `--join="${advertise-client-urls}"`, the `advertise-client-url` is any existing PD's, multiply advertise client urls are separated by comma.
+-   クラスターに動的に参加する
+-   デフォルト: `""`
+-   既存のクラスターに参加する場合は、 `--join="${advertise-client-urls}"`使用できます。 `advertise-client-url`は既存の PD であり、アドバタイズ クライアント URL をカンマで区切って複数指定します。
 
-## `-L`
+## <code>-L</code> {#code-l-code}
 
-- The log level
-- Default: `"info"`
-- Optional values: `"debug"`, `"info"`, `"warn"`, `"error"`, `"fatal"`
+-   ログレベル
+-   デフォルト: `"info"`
+-   オプションの値: `"debug"` 、 `"info"` 、 `"warn"` 、 `"error"` 、 `"fatal"`
 
-## `--log-file`
+## <code>--log-file</code> {#code-log-file-code}
 
-- The log file
-- Default: `""`
-- If this flag is not set, logs will be written to "stderr". If this flag is set, logs are output to the corresponding file.
+-   ログファイル
+-   デフォルト: `""`
+-   このフラグが設定されていない場合、ログは「stderr」に書き込まれます。このフラグが設定されている場合、ログは対応するファイルに出力されます。
 
-## `--log-rotate`
+## <code>--log-rotate</code> {#code-log-rotate-code}
 
-- To enable or disable log rotation
-- Default: `true`
-- When the value is true, follow the `[log.file]` in PD configuration files.
+-   ログのローテーションを有効または無効にするには
+-   デフォルト: `true`
+-   値が true の場合は、PD 設定ファイルの`[log.file]`に従います。
 
-## `--name`
+## <code>--name</code> {#code-name-code}
 
-- The human-readable unique name for this PD member
-- Default: `"pd"`
-- If you want to start multiply PDs, you must use different name for each one.
+-   この PD メンバーの人が判読できる一意の名前
+-   デフォルト: `"pd"`
+-   複数の PD を開始する場合は、それぞれに異なる名前を使用する必要があります。
 
-## `--cacert`
+## <code>--cacert</code> {#code-cacert-code}
 
-- The file path of CA, used to enable TLS
-- Default: `""`
+-   TLS を有効にするために使用される CA のファイル パス
+-   デフォルト: `""`
 
-## `--cert`
+## <code>--cert</code> {#code-cert-code}
 
-- The path of the PEM file including the X509 certificate, used to enable TLS
-- Default: `""`
+-   TLS を有効にするために使用される、X509 証明書を含む PEM ファイルのパス
+-   デフォルト: `""`
 
-## `--key`
+## <code>--key</code> {#code-key-code}
 
-- The path of the PEM file including the X509 key, used to enable TLS
-- Default: `""`
+-   TLS を有効にするために使用される、X509 キーを含む PEM ファイルのパス
+-   デフォルト: `""`
 
-## `--metrics-addr`
+## <code>--metrics-addr</code> {#code-metrics-addr-code}
 
-- The address of Prometheus Pushgateway, which does not push data to Prometheus by default.
-- Default: `""`
+-   Prometheus Pushgateway のアドレス。デフォルトではデータを Prometheus にプッシュしません。
+-   デフォルト: `""`

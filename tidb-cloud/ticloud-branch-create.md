@@ -3,49 +3,49 @@ title: ticloud branch create
 summary: The reference of `ticloud branch create`.
 ---
 
-# ticloud branch create
+# ticloudブランチ作成 {#ticloud-branch-create}
 
-Create a branch for a cluster:
+クラスターのブランチを作成します。
 
 ```shell
 ticloud branch create [flags]
 ```
 
-> **Note:**
+> **注記：**
 >
-> Currently, you can only create branches for [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) cluster.
+> 現在、 [TiDB サーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-serverless)クラスターに対してのみブランチを作成できます。
 
-## Examples
+## 例 {#examples}
 
-Create a branch in interactive mode:
+対話モードでブランチを作成します。
 
 ```shell
 ticloud branch create
 ```
 
-Create a branch in non-interactive mode:
+非対話モードでブランチを作成します。
 
 ```shell
 ticloud branch create --cluster-id <cluster-id> --branch-name <branch-name>
 ```
 
-## Flags
+## フラグ {#flags}
 
-In non-interactive mode, you need to manually enter the required flags. In interactive mode, you can just follow CLI prompts to fill them in.
+非対話型モードでは、必要なフラグを手動で入力する必要があります。対話型モードでは、CLI プロンプトに従って入力するだけです。
 
-| Flag                    | Description                                                | Required | Note                                                |
-|-------------------------|------------------------------------------------------------|----------|-----------------------------------------------------|
-| -c, --cluster-id string | The ID of the cluster, in which the branch will be created | Yes      | Only works in non-interactive mode.                 |
-| --branch-name string    | The name of the branch to be created                           | Yes      | Only works in non-interactive mode.                 |
-| -h, --help              | Get help information for this command                      | No       | Works in both non-interactive and interactive modes |
+| フラグ                 | 説明                  | 必須  | 注記                      |
+| ------------------- | ------------------- | --- | ----------------------- |
+| -c、--cluster-id 文字列 | ブランチが作成されるクラスターの ID | はい  | 非対話モードでのみ動作します。         |
+| --ブランチ名の文字列         | 作成するブランチの名前         | はい  | 非対話モードでのみ動作します。         |
+| -h, --help          | このコマンドのヘルプ情報を取得する   | いいえ | 非対話型モードと対話型モードの両方で動作します |
 
-## Inherited flags
+## 継承されたフラグ {#inherited-flags}
 
-| Flag                 | Description                                                                                          | Required | Note                                                                                                               |
-|----------------------|------------------------------------------------------------------------------------------------------|----------|--------------------------------------------------------------------------------------------------------------------|
-| --no-color           | Disables color in output.                                                                            | No       | Only works in non-interactive mode. In interactive mode, disabling color might not work with some UI components.   |
-| -P, --profile string | Specifies the active [user profile](/tidb-cloud/cli-reference.md#user-profile) used in this command. | No       | Works in both non-interactive and interactive modes.                                                               |
+| フラグ            | 説明                                                                               | 必須  | 注記                                                                |
+| -------------- | -------------------------------------------------------------------------------- | --- | ----------------------------------------------------------------- |
+| --色なし          | 出力のカラーを無効にします。                                                                   | いいえ | 非対話モードでのみ動作します。インタラクティブ モードでは、一部の UI コンポーネントで色の無効化が機能しない可能性があります。 |
+| -P、--プロファイル文字列 | このコマンドで使用されるアクティブな[ユーザープロフィール](/tidb-cloud/cli-reference.md#user-profile)を指定します。 | いいえ | 非対話型モードと対話型モードの両方で動作します。                                          |
 
-## Feedback
+## フィードバック {#feedback}
 
-If you have any questions or suggestions on the TiDB Cloud CLI, feel free to create an [issue](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose). Also, we welcome any contributions.
+TiDB Cloud CLI に関して質問や提案がある場合は、お気軽に[問題](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose)を作成してください。また、貢献も歓迎します。

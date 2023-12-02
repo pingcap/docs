@@ -3,64 +3,64 @@ title: Migrate Data from Parquet Files to TiDB
 summary: Learn how to migrate data from parquet files to TiDB.
 ---
 
-# Migrate Data from Parquet Files to TiDB
+# Parquet ファイルから TiDB へのデータの移行 {#migrate-data-from-parquet-files-to-tidb}
 
-This document describes how to generate parquet files from Apache Hive and how to migrate data from parquet files to TiDB using TiDB Lightning.
+このドキュメントでは、Apache Hive から寄木細工ファイルを生成する方法と、 TiDB Lightningを使用して寄木細工ファイルから TiDB にデータを移行する方法について説明します。
 
-If you export parquet files from Amazon Aurora, refer to [Migrate data from Amazon Aurora to TiDB](/migrate-aurora-to-tidb.md).
+Amazon Auroraから寄木細工ファイルをエクスポートする場合は、 [Amazon Auroraから TiDB にデータを移行する](/migrate-aurora-to-tidb.md)を参照してください。
 
-## Prerequisites
+## 前提条件 {#prerequisites}
 
-- [Install TiDB Lightning using TiUP](/migration-tools.md).
-- [Get the target database privileges required for TiDB Lightning](/tidb-lightning/tidb-lightning-faq.md#what-are-the-privilege-requirements-for-the-target-database).
+-   [TiUPを使用してTiDB Lightningをインストールする](/migration-tools.md) 。
+-   [TiDB Lightningに必要なターゲット データベース権限を取得します。](/tidb-lightning/tidb-lightning-faq.md#what-are-the-privilege-requirements-for-the-target-database) 。
 
-## Step 1. Prepare the parquet files
+## ステップ 1. 寄木細工のファイルを準備する {#step-1-prepare-the-parquet-files}
 
-This section describes how to export parquet files from Hive that can be read by TiDB Lightning.
+このセクションでは、 TiDB Lightningで読み取れる寄木細工ファイルを Hive からエクスポートする方法について説明します。
 
-Each table in Hive can be exported to parquet files by annotating `STORED AS PARQUET LOCATION '/path/in/hdfs'`. Therefore, if you need to export a table named `test`, perform the following steps:
+Hive の各テーブルは、 `STORED AS PARQUET LOCATION '/path/in/hdfs'`に注釈を付けることで寄木細工ファイルにエクスポートできます。したがって、 `test`という名前のテーブルをエクスポートする必要がある場合は、次の手順を実行します。
 
-1. Run the following SQL statement in Hive:
+1.  Hive で次の SQL ステートメントを実行します。
 
     ```sql
     CREATE TABLE temp STORED AS PARQUET LOCATION '/path/in/hdfs'
     AS SELECT * FROM test;
     ```
 
-    After executing the preceding statement, the table data is successfully exported to the HDFS system.
+    前述のステートメントを実行すると、テーブル データが HDFS システムに正常にエクスポートされます。
 
-2. Export the parquet files to the local file system using the `hdfs dfs -get` command:
+2.  `hdfs dfs -get`コマンドを使用して、寄木細工のファイルをローカル ファイル システムにエクスポートします。
 
     ```shell
     hdfs dfs -get /path/in/hdfs /path/in/local
     ```
 
-    After the export is complete, if you need to delete the exported parquet files in HDFS, you can directly delete the temporary table (`temp`):
+    エクスポートの完了後、HDFS 内のエクスポートされた寄木細工のファイルを削除する必要がある場合は、一時テーブル ( `temp` ) を直接削除できます。
 
     ```sql
     DROP TABLE temp;
     ```
 
-3. The parquet files exported from Hive might not have the `.parquet` suffix and cannot be correctly identified by TiDB Lightning. Therefore, before importing the files, you need to rename the exported files and add the `.parquet` suffix.
+3.  Hive からエクスポートされた寄木細工のファイルには`.parquet`接尾辞が付いていない可能性があり、 TiDB Lightningでは正しく識別できません。したがって、ファイルをインポートする前に、エクスポートされたファイルの名前を変更し、接尾辞`.parquet`を追加する必要があります。
 
-4. Put all the parquet files in a unified directory, for example, `/data/my_datasource/` or `s3://my-bucket/sql-backup`. TiDB Lightning will recursively search for all `.parquet` files in this directory and its subdirectories.
+4.  すべての寄木細工のファイルを統一ディレクトリ (たとえば、 `/data/my_datasource/`または`s3://my-bucket/sql-backup`に置きます。 TiDB Lightning は、このディレクトリとそのサブディレクトリ内の`.parquet`ファイルすべてを再帰的に検索します。
 
-## Step 2. Create the target table schema
+## ステップ 2. ターゲットテーブルスキーマを作成する {#step-2-create-the-target-table-schema}
 
-Before importing data from parquet files into TiDB, you need to create the target table schema. You can create the target table schema by either of the following two methods:
+データを寄木細工ファイルから TiDB にインポートする前に、ターゲット テーブル スキーマを作成する必要があります。次の 2 つの方法のいずれかでターゲット テーブル スキーマを作成できます。
 
-* **Method 1**: create the target table schema using TiDB Lightning.
+-   **方法 1** : TiDB Lightningを使用してターゲット テーブル スキーマを作成します。
 
-    Create SQL files that contain the required DDL statements:
+    必要な DDL ステートメントを含む SQL ファイルを作成します。
 
-    - Add `CREATE DATABASE` statements in the `${db_name}-schema-create.sql` files.
-    - Add `CREATE TABLE` statements in the `${db_name}.${table_name}-schema.sql` files.
+    -   `${db_name}-schema-create.sql`ファイルに`CREATE DATABASE`ステートメントを追加します。
+    -   `${db_name}.${table_name}-schema.sql`ファイルに`CREATE TABLE`ステートメントを追加します。
 
-* **Method 2**: create the target table schema manually.
+-   **方法 2** : ターゲット テーブル スキーマを手動で作成します。
 
-## Step 3. Create the configuration file
+## ステップ 3. 構成ファイルを作成する {#step-3-create-the-configuration-file}
 
-Create a `tidb-lightning.toml` file with the following content:
+次の内容を含む`tidb-lightning.toml`ファイルを作成します。
 
 ```toml
 [lightning]
@@ -90,41 +90,41 @@ status-port = ${status-port} # During the import, TiDB Lightning needs to obtain
 pd-addr = "${ip}:${port}" # The address of the PD cluster, e.g.: 172.16.31.3:2379. TiDB Lightning obtains some information from PD. When backend = "local", you must specify status-port and pd-addr correctly. Otherwise, the import will be abnormal.
 ```
 
-For more information on the configuration file, refer to [TiDB Lightning configuration](/tidb-lightning/tidb-lightning-configuration.md).
+設定ファイルの詳細については、 [TiDB Lightning構成](/tidb-lightning/tidb-lightning-configuration.md)を参照してください。
 
-## Step 4. Import the data
+## ステップ 4. データをインポートする {#step-4-import-the-data}
 
-1. Run `tidb-lightning`.
+1.  `tidb-lightning`を実行します。
 
-    - If you import data from Amazon S3, you need to set the SecretKey and AccessKey of the account that has permission to access the S3 backend storage as environment variables before running TiDB Lightning.
+    -   Amazon S3 からデータをインポートする場合は、 TiDB Lightningを実行する前に、S3 バックエンドstorageへのアクセス権限を持つアカウントの SecretKey と AccessKey を環境変数として設定する必要があります。
 
         ```shell
         export AWS_ACCESS_KEY_ID=${access_key}
         export AWS_SECRET_ACCESS_KEY=${secret_key}
         ```
 
-        In addition to the preceding method, TiDB Lightning also supports reading the credential file from `~/.aws/credentials`.
+        前述の方法に加えて、 TiDB Lightning は`~/.aws/credentials`からの認証情報ファイルの読み取りもサポートしています。
 
-    - If you launch the program in the command line, the process might exit unexpectedly after receiving a `SIGHUP` signal. In this case, it is recommended to run the program using a `nohup` or `screen` tool. For example:
+    -   コマンド ラインでプログラムを起動すると、 `SIGHUP`シグナルを受信した後にプロセスが予期せず終了する可能性があります。この場合、 `nohup`または`screen`ツールを使用してプログラムを実行することをお勧めします。例えば：
 
         ```shell
         nohup tiup tidb-lightning -config tidb-lightning.toml > nohup.out 2>&1 &
         ```
 
-2. After the import starts, you can check the progress of the import by either of the following methods:
+2.  インポートの開始後、次のいずれかの方法でインポートの進行状況を確認できます。
 
-    - Search for the keyword `progress` in the log using `grep`. The progress is updated every 5 minutes by default.
-    - Check progress in the [monitoring dashboard](/tidb-lightning/monitor-tidb-lightning.md).
-    - Check progress in [TiDB Lightning web interface](/tidb-lightning/tidb-lightning-web-interface.md).
+    -   `grep`を使用してログ内のキーワード`progress`を検索します。デフォルトでは、進行状況は 5 分ごとに更新されます。
+    -   [監視ダッシュボード](/tidb-lightning/monitor-tidb-lightning.md)で進行状況を確認します。
+    -   [TiDB LightningWeb インターフェース](/tidb-lightning/tidb-lightning-web-interface.md)で進捗状況を確認します。
 
-    After TiDB Lightning completes the import, it exits automatically.
+    TiDB Lightning はインポートを完了すると、自動的に終了します。
 
-3. Check if the import is successful.
+3.  インポートが成功したかどうかを確認します。
 
-    Check whether `tidb-lightning.log` contains `the whole procedure completed` in the last lines. If yes, the import is successful. If no, the import encounters an error. Address the error as instructed in the error message.
+    最後の行に`tidb-lightning.log` `the whole procedure completed`含まれているかどうかを確認します。 「はい」の場合、インポートは成功です。 「いいえ」の場合、インポートでエラーが発生します。エラー メッセージの指示に従ってエラーに対処します。
 
-    > **Note:**
+    > **注記：**
     >
-    > Whether the import is successful or not, the last line of the log shows `tidb lightning exit`. It means that TiDB Lightning exits normally, but does not necessarily mean that the import is successful.
+    > インポートが成功したかどうかに関係なく、ログの最後の行には`tidb lightning exit`が表示されます。これは、 TiDB Lightning が正常に終了したことを意味しますが、必ずしもインポートが成功したことを意味するわけではありません。
 
-If the import fails, refer to [TiDB Lightning FAQ](/tidb-lightning/tidb-lightning-faq.md) for troubleshooting.
+インポートが失敗した場合は、 [TiDB LightningFAQ](/tidb-lightning/tidb-lightning-faq.md)のトラブルシューティングを参照してください。

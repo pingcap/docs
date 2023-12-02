@@ -3,20 +3,20 @@ title: TIKV_STORE_STATUS
 summary: Learn the `TIKV_STORE_STATUS` INFORMATION_SCHEMA table.
 ---
 
-# TIKV_STORE_STATUS
+# TIKV_STORE_STATUS {#tikv-store-status}
 
-The `TIKV_STORE_STATUS` table shows some basic information of TiKV nodes via PD's API, like the ID allocated in the cluster, address and port, and status, capacity, and the number of Region leaders of the current node.
+表`TIKV_STORE_STATUS`は、クラスターに割り当てられた ID、アドレスとポート、ステータス、容量、現在のノードのリージョンリーダーの数など、PD の API を介した TiKV ノードの基本情報を示しています。
 
-> **Note:**
+> **注記：**
 >
-> This table is not available on [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless) clusters.
+> このテーブルは[TiDB サーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless)クラスターでは使用できません。
 
 ```sql
 USE INFORMATION_SCHEMA;
 DESC TIKV_STORE_STATUS;
 ```
 
-The output is as follows:
+出力は次のとおりです。
 
 ```sql
 +-------------------+-------------+------+------+---------+-------+
@@ -45,24 +45,24 @@ The output is as follows:
 19 rows in set (0.00 sec)
 ```
 
-The descriptions of the columns in the `TIKV_STORE_STATUS` table are as follows:
+`TIKV_STORE_STATUS`の表の列の説明は次のとおりです。
 
-* `STORE_ID`: The ID of the Store.
-* `ADDRESS`: The address of the Store.
-* `STORE_STATE`: The identifier of the Store state, which corresponds to `STORE_STATE_NAME`.
-* `STORE_STATE_NAME`: The name of the Store state. The name is `Up`, `Offline`, or `Tombstone`.
-* `LABEL`: The label set for the Store.
-* `VERSION`: The version number of the Store.
-* `CAPACITY`: The storage capacity of the Store.
-* `AVAILABLE`: The remaining storage space of the Store.
-* `LEADER_COUNT`: The number of leaders on the Store.
-* `LEADER_WEIGHT`: The leader weight of the Store.
-* `LEADER_SCORE`: The leader score of the Store.
-* `LEADER_SIZE`: The approximate total data size (MB) of all leaders on the Store.
-* `REGION_COUNT`: The number of Regions on the Store.
-* `REGION_WEIGHT`: The Region weight of the Store.
-* `REGION_SCORE`: The Region score of the Store.
-* `REGION_SIZE`: The approximate total data size (MB) of all Regions on the Store.
-* `START_TS`: The timestamp when the Store is started.
-* `LAST_HEARTBEAT_TS`: The timestamp of the last heartbeat sent by the Store.
-* `UPTIME`: The total time since the Store starts.
+-   `STORE_ID` : ストアのID。
+-   `ADDRESS` : ストアのアドレス。
+-   `STORE_STATE` : Store 状態の識別子。 `STORE_STATE_NAME`に対応します。
+-   `STORE_STATE_NAME` : ストア状態の名前。名前は`Up` 、 `Offline` 、または`Tombstone`です。
+-   `LABEL` : ストアに設定されたラベル。
+-   `VERSION` : ストアのバージョン番号。
+-   `CAPACITY` : ストアのstorage容量。
+-   `AVAILABLE` : ストアの残りのstorage容量。
+-   `LEADER_COUNT` : ストア上のリーダーの数。
+-   `LEADER_WEIGHT` : ストアのリーダーの重み。
+-   `LEADER_SCORE` : ストアのリーダースコア。
+-   `LEADER_SIZE` : ストア上のすべてのリーダーのおおよその合計データ サイズ (MB)。
+-   `REGION_COUNT` : ストア上のリージョンの数。
+-   `REGION_WEIGHT` : ストアのリージョンの重み。
+-   `REGION_SCORE` : ストアのリージョンスコア。
+-   `REGION_SIZE` : ストア上のすべてのリージョンのおおよその合計データ サイズ (MB)。
+-   `START_TS` : ストアが開始されたときのタイムスタンプ。
+-   `LAST_HEARTBEAT_TS` : ストアによって送信された最後のハートビートのタイムスタンプ。
+-   `UPTIME` : ストアが開始されてからの合計時間。

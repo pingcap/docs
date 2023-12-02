@@ -3,40 +3,40 @@ title: TiCDC OpenAPI v2
 summary: Learn how to use the OpenAPI v2 interface to manage the cluster status and data replication.
 ---
 
-# TiCDC OpenAPI v2
+# TiCDC OpenAPI v2 {#ticdc-openapi-v2}
 
 <!-- markdownlint-disable MD024 -->
 
-TiCDC provides the OpenAPI feature for querying and operating the TiCDC cluster. The OpenAPI feature is a subset of the [`cdc cli` tool](/ticdc/ticdc-manage-changefeed.md).
+TiCDC は、TiCDC クラスターのクエリと操作のための OpenAPI 機能を提供します。 OpenAPI 機能は[`cdc cli`ツール](/ticdc/ticdc-manage-changefeed.md)のサブセットです。
 
-> **Note:**
+> **注記：**
 >
-> TiCDC OpenAPI v1 will be removed in the future. It is recommended to use TiCDC OpenAPI v2.
+> TiCDC OpenAPI v1 は将来削除される予定です。 TiCDC OpenAPI v2 を使用することをお勧めします。
 
-You can use the APIs to perform the following maintenance operations on the TiCDC cluster:
+API を使用して、TiCDC クラスター上で次のメンテナンス操作を実行できます。
 
-- [Get the status information of a TiCDC node](#get-the-status-information-of-a-ticdc-node)
-- [Check the health status of a TiCDC cluster](#check-the-health-status-of-a-ticdc-cluster)
-- [Create a replication task](#create-a-replication-task)
-- [Remove a replication task](#remove-a-replication-task)
-- [Update the replication configuration](#update-the-replication-configuration)
-- [Query the replication task list](#query-the-replication-task-list)
-- [Query a specific replication task](#query-a-specific-replication-task)
-- [Pause a replication task](#pause-a-replication-task)
-- [Resume a replication task](#resume-a-replication-task)
-- [Query the replication subtask list](#query-the-replication-subtask-list)
-- [Query a specific replication subtask](#query-a-specific-replication-subtask)
-- [Query the TiCDC service process list](#query-the-ticdc-service-process-list)
-- [Evict an owner node](#evict-an-owner-node)
-- [Dynamically adjust the log level of the TiCDC server](#dynamically-adjust-the-log-level-of-the-ticdc-server)
+-   [TiCDC ノードのステータス情報を取得する](#get-the-status-information-of-a-ticdc-node)
+-   [TiCDC クラスターの健全性ステータスを確認する](#check-the-health-status-of-a-ticdc-cluster)
+-   [レプリケーションタスクを作成する](#create-a-replication-task)
+-   [レプリケーションタスクを削除する](#remove-a-replication-task)
+-   [レプリケーション構成を更新する](#update-the-replication-configuration)
+-   [レプリケーションタスクリストのクエリ](#query-the-replication-task-list)
+-   [特定のレプリケーションタスクをクエリする](#query-a-specific-replication-task)
+-   [レプリケーションタスクを一時停止する](#pause-a-replication-task)
+-   [レプリケーションタスクを再開する](#resume-a-replication-task)
+-   [レプリケーションサブタスクリストのクエリ](#query-the-replication-subtask-list)
+-   [特定のレプリケーションサブタスクをクエリする](#query-a-specific-replication-subtask)
+-   [TiCDC サービス プロセス リストのクエリ](#query-the-ticdc-service-process-list)
+-   [所有者ノードを削除する](#evict-an-owner-node)
+-   [TiCDCサーバーのログ レベルを動的に調整する](#dynamically-adjust-the-log-level-of-the-ticdc-server)
 
-The request body and returned values of all APIs are in JSON format. A successful request returns a `200 OK` message. The following sections describe the specific usage of the APIs.
+すべての API のリクエスト本文と戻り値は JSON 形式です。リクエストが成功すると、 `200 OK`メッセージが返されます。次のセクションでは、API の具体的な使用法について説明します。
 
-In the following examples, the listening IP address of the TiCDC server is `127.0.0.1` and the port is `8300`. You can specify the IP address and port bound to TiCDC via `--addr=ip:port` when starting the TiCDC server.
+次の例では、TiCDCサーバーのリスニング IP アドレスは`127.0.0.1` 、ポートは`8300`です。 TiCDCサーバーを起動するときに、 `--addr=ip:port`介して TiCDC にバインドされる IP アドレスとポートを指定できます。
 
-## API error message template
+## APIエラーメッセージテンプレート {#api-error-message-template}
 
-After an API request is sent, if an error occurs, the returned error message is in the following format:
+API リクエストの送信後にエラーが発生した場合、返されるエラー メッセージは次の形式になります。
 
 ```json
 {
@@ -45,11 +45,11 @@ After an API request is sent, if an error occurs, the returned error message is 
 }
 ```
 
-In the above JSON output, `error_msg` describes the error message and `error_code` is the corresponding error code.
+上記の JSON 出力では、 `error_msg`エラー メッセージを示し、 `error_code`は対応するエラー コードを示します。
 
-## Return format of the API List interface
+## APIリストインターフェースの戻り形式 {#return-format-of-the-api-list-interface}
 
-If an API request returns a list of resources (for example, a list of all `Captures`), the TiCDC return format is as follows:
+API リクエストがリソースのリスト (たとえば、すべて`Captures`のリスト) を返す場合、TiCDC の戻り形式は次のとおりです。
 
 ```json
 {
@@ -69,22 +69,22 @@ If an API request returns a list of resources (for example, a list of all `Captu
 }
 ```
 
-In the above example:
+上の例では:
 
-- `total`: indicates the total number of resources.
-- `items`: an array that contains all the resources returned by this request. All elements of the array are of the same resource.
+-   `total` : リソースの総数を示します。
+-   `items` : このリクエストによって返されたすべてのリソースを含む配列。配列のすべての要素は同じリソースに属します。
 
-## Get the status information of a TiCDC node
+## TiCDC ノードのステータス情報を取得する {#get-the-status-information-of-a-ticdc-node}
 
-This API is a synchronous interface. If the request is successful, the status information of the corresponding node is returned.
+この API は同期インターフェイスです。リクエストが成功すると、該当ノードのステータス情報が返されます。
 
-### Request URI
+### リクエストURI {#request-uri}
 
 `GET /api/v2/status`
 
-### Example
+### 例 {#example}
 
-The following request gets the status information of the TiCDC node whose IP address is `127.0.0.1` and port number is `8300`.
+次のリクエストは、IP アドレスが`127.0.0.1`でポート番号が`8300` TiCDC ノードのステータス情報を取得します。
 
 ```shell
 curl -X GET http://127.0.0.1:8300/api/v2/status
@@ -101,46 +101,46 @@ curl -X GET http://127.0.0.1:8300/api/v2/status
 }
 ```
 
-The parameters of the above output are described as follows:
+上記の出力のパラメータは次のように説明されます。
 
-- `version`: the current version number of TiCDC.
-- `git_hash`: the Git hash value.
-- `id`: the capture ID of the node.
-- `pid`: the capture process ID (PID) of the node.
-- `is_owner`: indicates whether the node is an owner.
-- `liveness`: whether this node is live. `0` means normal. `1` means that the node is in the `graceful shutdown` state.
+-   `version` : TiCDC の現在のバージョン番号。
+-   `git_hash` : Git ハッシュ値。
+-   `id` : ノードのキャプチャ ID。
+-   `pid` : ノードのキャプチャ プロセス ID (PID)。
+-   `is_owner` : ノードが所有者であるかどうかを示します。
+-   `liveness` : このノードがライブであるかどうか。 `0`通常を意味します。 `1`ノードが`graceful shutdown`状態にあることを意味します。
 
-## Check the health status of a TiCDC cluster
+## TiCDC クラスターの健全性ステータスを確認する {#check-the-health-status-of-a-ticdc-cluster}
 
-This API is a synchronous interface. If the cluster is healthy, `200 OK` is returned.
+この API は同期インターフェイスです。クラスターが正常な場合は`200 OK`が返されます。
 
-### Request URI
+### リクエストURI {#request-uri}
 
 `GET /api/v2/health`
 
-### Example
+### 例 {#example}
 
 ```shell
 curl -X GET http://127.0.0.1:8300/api/v2/health
 ```
 
-If the cluster is healthy, the response is `200 OK` and an empty JSON object:
+クラスターが正常な場合、応答は`200 OK`で空の JSON オブジェクトになります。
 
 ```json
 {}
 ```
 
-If the cluster is not healthy, the response is a JSON object containing the error message.
+クラスターが正常でない場合、応答はエラー メッセージを含む JSON オブジェクトです。
 
-## Create a replication task
+## レプリケーションタスクを作成する {#create-a-replication-task}
 
-This interface is used to submit a replication task to TiCDC. If the request is successful, `200 OK` is returned. The returned result only means that the server agrees to run the command but does not guarantee that the command will be run successfully.
+このインターフェイスは、レプリケーション タスクを TiCDC に送信するために使用されます。リクエストが成功すると`200 OK`が返されます。返された結果は、サーバーがコマンドの実行に同意したことを意味するだけで、コマンドが正常に実行されることを保証するものではありません。
 
-### Request URI
+### リクエストURI {#request-uri}
 
 `POST /api/v2/changefeeds`
 
-### Parameter descriptions
+### パラメータの説明 {#parameter-descriptions}
 
 ```json
 {
@@ -249,132 +249,132 @@ This interface is used to submit a replication task to TiCDC. If the request is 
 }
 ```
 
-The parameters are described as follows:
+パラメータは次のように説明されます。
 
-| Parameter name | Description |
-| :------------------------ | :----------------------------------------------------- |
-| `changefeed_id` | `STRING` type. The ID of the replication task. (Optional) |
-| `replica_config` | Configuration parameters for the replication task. (Optional) |
-| **`sink_uri`** | `STRING` type. The downstream address of the replication task. (**Required**) |
-| `start_ts` | `UINT64` type. Specifies the start TSO of the changefeed. The TiCDC cluster will start pulling data from this TSO. The default value is the current time. (Optional) |
-| `target_ts` | `UINT64` type. Specifies the target TSO of the changefeed. The TiCDC cluster stops pulling data when reaching this TSO. The default value is empty, meaning TiCDC does not stop automatically. (Optional) |
+| パラメータ名           | 説明                                                                                                                           |
+| :--------------- | :--------------------------------------------------------------------------------------------------------------------------- |
+| `changefeed_id`  | `STRING`タイプ。レプリケーションタスクのID。 (オプション)                                                                                          |
+| `replica_config` | レプリケーションタスクのコンフィグレーションパラメータ。 (オプション)                                                                                         |
+| **`sink_uri`**   | `STRING`タイプ。レプリケーションタスクの下流アドレス。 （**必須**）                                                                                     |
+| `start_ts`       | `UINT64`タイプ。変更フィードの開始 TSO を指定します。 TiCDC クラスターは、この TSO からのデータのプルを開始します。デフォルト値は現在時刻です。 (オプション)                                 |
+| `target_ts`      | `UINT64`タイプ。変更フィードのターゲット TSO を指定します。 TiCDC クラスターは、この TSO に到達するとデータのプルを停止します。デフォルト値は空です。これは、TiCDC が自動的に停止しないことを意味します。 (オプション) |
 
-The meaning and format of `changefeed_id`, `start_ts`, `target_ts`, and `sink_uri` are the same as those described in the [Use `cdc cli` to create a replication task](/ticdc/ticdc-manage-changefeed.md#create-a-replication-task) document. For the detailed description of these parameters, see that document. Note that when you specify the certificate path in `sink_uri`, make sure you have uploaded the corresponding certificate to the corresponding TiCDC server.
+`changefeed_id` 、 `start_ts` 、 `target_ts` 、 `sink_uri`の意味と形式は、ドキュメント[`cdc cli`を使用してレプリケーション タスクを作成する](/ticdc/ticdc-manage-changefeed.md#create-a-replication-task)に記載されているものと同じです。これらのパラメータの詳細については、そのドキュメントを参照してください。 `sink_uri`で証明書のパスを指定する場合は、対応する証明書が対応する TiCDCサーバーにアップロードされていることを確認してください。
 
-The descriptions of the `replica_config` parameters are as follows.
+`replica_config`パラメータの説明は次のとおりです。
 
-| Parameter name | Description |
-| :------------------------ | :----------------------------------------------------- |
-| `bdr_mode`                | `BOOLEAN` type. Determines whether to enable [bidirectional replication](/ticdc/ticdc-bidirectional-replication.md). The default value is `false`. (Optional)               |
-| `case_sensitive`          | `BOOLEAN` type. Determines whether to be case-sensitive when filtering table names. Starting from v7.5.0, the default value changes from `true` to `false`. (Optional)   |
-| `check_gc_safe_point`     | `BOOLEAN` type. Determines whether to check that the start time of the replication task is earlier than the GC time. The default value is `true`. (Optional)                                  |
-| `consistent`              | The configuration parameters of redo log. (Optional) |
-| `enable_sync_point`       | `BOOLEAN` type. Determines whether to enable `sync point`. (Optional)         |
-| `filter`                  | The configuration parameters of `filter`. (Optional)           |
-| `force_replicate`         | `BOOLEAN` type. The default value is `false`. When you set it to `true`, the replication task forcibly replicates the tables without unique indexes. (Optional)                |
-| `ignore_ineligible_table` | `BOOLEAN` type. The default value is `false`. When you set it to `true`, the replication task ignores the tables that cannot be replicated. (Optional)                     |
-| `memory_quota`            | `UINT64` type. The memory quota for the replication task. (Optional)           |
-| `mounter`                 | The  configuration parameters of `mounter`. (Optional)               |
-| `sink`                    | The configuration parameters of `sink`. (Optional)                         |
-| `sync_point_interval`     | `STRING` type. Note that the returned value is a time in nanosecond of the `UINT64` type. When the `sync point` feature is enabled, this parameter specifies the interval at which Syncpoint aligns the upstream and downstream snapshots. The default value is `10m` and the minimum value is `30s`. (Optional) |
-| `sync_point_retention`    | `STRING` type. Note that the returned value is a time in nanosecond of the `UINT64` type. When the `sync point` feature is enabled, this parameter specifies how long the data is retained by Syncpoint in the downstream table. When this duration is exceeded, the data is cleaned up. The default value is `24h`. (Optional) |
+| パラメータ名                    | 説明                                                                                                                                                                           |
+| :------------------------ | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `bdr_mode`                | `BOOLEAN`タイプ。 [双方向レプリケーション](/ticdc/ticdc-bidirectional-replication.md)を有効にするかどうかを決定します。デフォルト値は`false`です。 (オプション)                                                             |
+| `case_sensitive`          | `BOOLEAN`タイプ。テーブル名をフィルタリングするときに大文字と小文字を区別するかどうかを決定します。 v7.5.0 以降、デフォルト値は`true`から`false`に変更されます。 (オプション)                                                                      |
+| `check_gc_safe_point`     | `BOOLEAN`タイプ。レプリケーション タスクの開始時刻が GC 時刻よりも前であることを確認するかどうかを決定します。デフォルト値は`true`です。 (オプション)                                                                                       |
+| `consistent`              | REDO ログの構成パラメータ。 (オプション)                                                                                                                                                     |
+| `enable_sync_point`       | `BOOLEAN`タイプ。 `sync point`を有効にするかどうかを決定します。 (オプション)                                                                                                                          |
+| `filter`                  | `filter`の構成パラメータ。 (オプション)                                                                                                                                                    |
+| `force_replicate`         | `BOOLEAN`タイプ。デフォルト値は`false`です。これを`true`に設定すると、レプリケーション タスクは一意のインデックスのないテーブルを強制的にレプリケートします。 (オプション)                                                                           |
+| `ignore_ineligible_table` | `BOOLEAN`タイプ。デフォルト値は`false`です。これを`true`に設定すると、レプリケーション タスクはレプリケートできないテーブルを無視します。 (オプション)                                                                                     |
+| `memory_quota`            | `UINT64`タイプ。レプリケーション タスクのメモリクォータ。 (オプション)                                                                                                                                    |
+| `mounter`                 | `mounter`の構成パラメータ。 (オプション)                                                                                                                                                   |
+| `sink`                    | `sink`の構成パラメータ。 (オプション)                                                                                                                                                      |
+| `sync_point_interval`     | `STRING`タイプ。戻り値は`UINT64`種類のナノ秒単位の時間であることに注意してください。 `sync point`機能が有効な場合、このパラメータは、Syncpoint がアップストリームとダウンストリームのスナップショットを調整する間隔を指定します。デフォルト値は`10m`で、最小値は`30s`です。 (オプション)       |
+| `sync_point_retention`    | `STRING`タイプ。戻り値は`UINT64`種類のナノ秒単位の時間であることに注意してください。 `sync point`機能が有効な場合、このパラメータは、同期ポイントによってダウンストリーム テーブルにデータが保持される期間を指定します。この期間を超えると、データはクリーンアップされます。デフォルト値は`24h`です。 (オプション) |
 
-The `consistent` parameters are described as follows:
+`consistent`パラメータは次のように説明されます。
 
-| Parameter name | Description |
-|:-----------------|:---------------------------------------|
-| `flush_interval` | `UINT64` type. The interval to flush redo log files. (Optional) |
-| `level`          | `STRING` type. The consistency level of the replicated data. (Optional)    |
-| `max_log_size`   | `UINT64` type. The maximum value of redo log. (Optional)      |
-| `storage`        | `STRING` type. The destination address of the storage. (Optional)            |
+| パラメータ名           | 説明                                           |
+| :--------------- | :------------------------------------------- |
+| `flush_interval` | `UINT64`タイプ。 REDO ログ ファイルをフラッシュする間隔。 (オプション) |
+| `level`          | `STRING`タイプ。レプリケートされたデータの整合性レベル。 (オプション)     |
+| `max_log_size`   | `UINT64`タイプ。 REDOログの最大値。 (オプション)             |
+| `storage`        | `STRING`タイプ。storageの宛先アドレス。 (オプション)          |
 
-The `filter` parameters are described as follows:
+`filter`パラメータは次のように説明されます。
 
-| Parameter name | Description |
-|:-----------------|:---------------------------------------|
-| `do_dbs`              | `STRING ARRAY` type. The databases to be replicated. (Optional)                                       |
-| `do_tables`           | The tables to be replicated. (Optional)                                                     |
-| `ignore_dbs`          | `STRING ARRAY` type. The databases to be ignored. (Optional)            |
-| `ignore_tables`       | The tables to be ignored. (Optional)        |
-| `event_filters`       | The configuration to filter events. (Optional)  |
-| `ignore_txn_start_ts` | `UINT64 ARRAY` type. Specifying this will ignore transactions that specify `start_ts`, such as `[1, 2]`. (Optional)   |
-| `rules`               | `STRING ARRAY` type. The rules for table schema filtering, such as `['foo*.*', 'bar*.*']`. For more information, see [Table Filter](/table-filter.md). (Optional)  |
+| パラメータ名                | 説明                                                                                                                           |
+| :-------------------- | :--------------------------------------------------------------------------------------------------------------------------- |
+| `do_dbs`              | `STRING ARRAY`タイプ。レプリケートされるデータベース。 (オプション)                                                                                   |
+| `do_tables`           | レプリケートされるテーブル。 (オプション)                                                                                                       |
+| `ignore_dbs`          | `STRING ARRAY`タイプ。無視されるデータベース。 (オプション)                                                                                       |
+| `ignore_tables`       | 無視されるテーブル。 (オプション)                                                                                                           |
+| `event_filters`       | イベントをフィルタリングするための構成。 (オプション)                                                                                                 |
+| `ignore_txn_start_ts` | `UINT64 ARRAY`タイプ。これを指定すると、 `[1, 2]`などの`start_ts`を指定したトランザクションは無視されます。 (オプション)                                               |
+| `rules`               | `STRING ARRAY`タイプ。テーブル スキーマ フィルタリングのルール ( `['foo*.*', 'bar*.*']`など)。詳細については、 [テーブルフィルター](/table-filter.md)を参照してください。 (オプション) |
 
-The `filter.event_filters` parameters are described as follows. For more information, see [Changefeed Log Filters](/ticdc/ticdc-filter.md).
+`filter.event_filters`パラメータは次のように説明されます。詳細については、 [変更フィードログフィルター](/ticdc/ticdc-filter.md)を参照してください。
 
-| Parameter name | Description |
-|:-----------------|:---------------------------------------|
-| `ignore_delete_value_expr`     | `STRING ARRAY` type. For example, `"name = 'john'"` means to filter out DELETE DML statements containing the `name = 'john'` condition. (Optional)            |
-| `ignore_event`                 | `STRING ARRAY` type. For example, `["insert"]` indicates that the INSERT events are filtered out. (Optional)     |
-| `ignore_insert_value_expr`     | `STRING ARRAY` type. For example, `"id >= 100"` means to filter out INSERT DML statements that match the `id >= 100` condition. (Optional)                |
-| `ignore_sql`                   | `STRING ARRAY` type. For example, `["^drop", "add column"]` means to filter out DDL statements that start with `DROP` or contain `ADD COLUMN`. (Optional)  |
-| `ignore_update_new_value_expr` | `STRING ARRAY` type. For example, `"gender = 'male'"` means to filter out the UPDATE DML statements with the new value `gender = 'male'`. (Optional)          |
-| `ignore_update_old_value_expr` | `STRING ARRAY` type. For example, `"age < 18"` means to filter out the UPDATE DML statements with the old value `age < 18`. (Optional)                  |
-| `matcher`                      | `STRING ARRAY` type. It works as an allowlist. For example, `["test.worker"]` means that the filter rule applies only to the `worker` table in the `test` database. (Optional)          |
+| パラメータ名                         | 説明                                                                                                                          |
+| :----------------------------- | :-------------------------------------------------------------------------------------------------------------------------- |
+| `ignore_delete_value_expr`     | `STRING ARRAY`タイプ。たとえば、 `"name = 'john'"` 、 `name = 'john'`条件を含む DELETE DML ステートメントをフィルターで除外することを意味します。 (オプション)             |
+| `ignore_event`                 | `STRING ARRAY`タイプ。たとえば、 `["insert"]` INSERT イベントがフィルターで除外されることを示します。 (オプション)                                                |
+| `ignore_insert_value_expr`     | `STRING ARRAY`タイプ。たとえば、 `"id >= 100"` 、条件`id >= 100`に一致する INSERT DML ステートメントを除外することを意味します。 (オプション)                          |
+| `ignore_sql`                   | `STRING ARRAY`タイプ。たとえば、 `["^drop", "add column"]` 、 `DROP`で始まるか、 `ADD COLUMN`を含む DDL ステートメントをフィルタリングして除外することを意味します。 (オプション) |
+| `ignore_update_new_value_expr` | `STRING ARRAY`タイプ。たとえば、 `"gender = 'male'"` 、新しい値`gender = 'male'`を持つ UPDATE DML ステートメントをフィルターで除外することを意味します。 (オプション)        |
+| `ignore_update_old_value_expr` | `STRING ARRAY`タイプ。たとえば、 `"age < 18"` 、古い値`age < 18`を持つ UPDATE DML ステートメントをフィルタリングして除外することを意味します。 (オプション)                    |
+| `matcher`                      | `STRING ARRAY`タイプ。ホワイトリストとして機能します。たとえば、 `["test.worker"]` 、フィルタ ルールが`test`データベース内の`worker`テーブルにのみ適用されることを意味します。 (オプション)     |
 
-The `mounter` parameter is described as follows:
+`mounter`パラメータは次のように説明されます。
 
-| Parameter name | Description |
-|:-----------------|:---------------------------------------|
-| `worker_num` | `INT` type. The number of Mounter threads. Mounter is used to decode the data output from TiKV. The default value is `16`. (Optional)   |
+| パラメータ名       | 説明                                                                               |
+| :----------- | :------------------------------------------------------------------------------- |
+| `worker_num` | `INT`タイプ。マウンタのスレッド数。マウンタは、TiKV から出力されたデータをデコードするために使用されます。デフォルト値は`16`です。 (オプション) |
 
-The `sink` parameters are described as follows:
+`sink`パラメータは次のように説明されます。
 
-| Parameter name | Description                                                                                                                                                                                                    |
-|:-----------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `column_selectors`      | The column selector configuration. (Optional)                                                                                                                                                                  |
-| `csv`                   | The CSV configuration. (Optional)                                                                                                                                                                              |
-| `date_separator`        | `STRING` type. Indicates the date separator type of the file directory. Value options are `none`, `year`, `month`, and `day`. `none` is the default value and means that the date is not separated. (Optional) |
-| `dispatchers`           | An configuration array for event dispatching. (Optional)                                                                                                                                                       |
-| `encoder_concurrency`   | `INT` type. The number of encoder threads in the MQ sink. The default value is `16`. (Optional)                                                                                                                |
-| `protocol`              | `STRING` type. For MQ sinks, you can specify the protocol format of the message. The following protocols are currently supported: `canal-json`, `open-protocol`, `canal`, `avro`, and `maxwell`.               |
-| `schema_registry`       | `STRING` type. The schema registry address. (Optional)                                                                                                                                                         |
-| `terminator`            | `STRING` type. The terminator is used to separate two data change events. The default value is null, which means `"\r\n"` is used as the terminator. (Optional)                                                |
-| `transaction_atomicity` | `STRING` type. The atomicity level of the transaction. (Optional)                                                                                                                                              |
-| `only_output_updated_columns` | `BOOLEAN` type. For MQ sinks using the `canal-json` or `open-protocol` protocol, you can specify whether only output the modified columns. The default value is `false`. (Optional) |
+| パラメータ名                        | 説明                                                                                                                                 |
+| :---------------------------- | :--------------------------------------------------------------------------------------------------------------------------------- |
+| `column_selectors`            | 列セレクターの構成。 (オプション)                                                                                                                 |
+| `csv`                         | CSV 構成。 (オプション)                                                                                                                    |
+| `date_separator`              | `STRING`タイプ。ファイルディレクトリの日付区切り文字のタイプを示します。値のオプションは`none` 、 `year` 、 `month` 、および`day`です。 `none`はデフォルト値で、日付が区切られていないことを意味します。 (オプション) |
+| `dispatchers`                 | イベントディスパッチ用の構成配列。 (オプション)                                                                                                          |
+| `encoder_concurrency`         | `INT`タイプ。 MQ シンク内のエンコーダー スレッドの数。デフォルト値は`16`です。 (オプション)                                                                             |
+| `protocol`                    | `STRING`タイプ。 MQ シンクの場合、メッセージのプロトコル形式を指定できます。現在サポートされているプロトコルは`canal-json` 、 `open-protocol` 、 `canal` 、 `avro` 、および`maxwell`です。    |
+| `schema_registry`             | `STRING`タイプ。スキーマ レジストリ アドレス。 (オプション)                                                                                               |
+| `terminator`                  | `STRING`タイプ。ターミネータは、2 つのデータ変更イベントを区切るために使用されます。デフォルト値は null です。これは、 `"\r\n"`がターミネータとして使用されることを意味します。 (オプション)                       |
+| `transaction_atomicity`       | `STRING`タイプ。トランザクションのアトミックレベル。 (オプション)                                                                                             |
+| `only_output_updated_columns` | `BOOLEAN`タイプ。 `canal-json`または`open-protocol`プロトコルを使用する MQ シンクの場合、変更された列のみを出力するかどうかを指定できます。デフォルト値は`false`です。 (オプション)                |
 
-`sink.column_selectors` is an array. The parameters are described as follows:
+`sink.column_selectors`は配列です。パラメータは次のように説明されます。
 
-| Parameter name | Description |
-|:-----------------|:---------------------------------------|
-| `columns` | `STRING ARRAY` type. The column array.                 |
-| `matcher` | `STRING ARRAY` type. The matcher configuration. It has the same matching syntax as the filter rule does.  |
+| パラメータ名    | 説明                                                |
+| :-------- | :------------------------------------------------ |
+| `columns` | `STRING ARRAY`タイプ。列配列。                            |
+| `matcher` | `STRING ARRAY`タイプ。マッチャーの構成。フィルター ルールと同じ一致構文を持ちます。 |
 
-The `sink.csv` parameters are described as follows:
+`sink.csv`パラメータは次のように説明されます。
 
-| Parameter name | Description |
-|:-----------------|:---------------------------------------|
-| `delimiter`         | `STRING` type. The character used to separate fields in the CSV file. The value must be an ASCII character and defaults to `,`.     |
-| `include_commit_ts` | `BOOLEAN` type. Whether to include commit-ts in CSV rows. The default value is `false`. |
-| `null`              | `STRING` type. The character that is displayed when a CSV column is null. The default value is `\N`. |
-| `quote`             | `STRING` type. The quotation character used to surround fields in the CSV file. If the value is empty, no quotation is used. The default value is `"`. |
+| パラメータ名              | 説明                                                                          |
+| :------------------ | :-------------------------------------------------------------------------- |
+| `delimiter`         | `STRING`タイプ。 CSV ファイル内のフィールドを区切るために使用される文字。値は ASCII 文字である必要があり、デフォルトは`,`です。 |
+| `include_commit_ts` | `BOOLEAN`タイプ。 CSV 行に commit-t を含めるかどうか。デフォルト値は`false`です。                    |
+| `null`              | `STRING`タイプ。 CSV 列が null の場合に表示される文字。デフォルト値は`\N`です。                         |
+| `quote`             | `STRING`タイプ。 CSV ファイル内のフィールドを囲むために使用される引用符。値が空の場合、引用符は使用されません。デフォルト値は`"`です。 |
 
-`sink.dispatchers`: for the sink of MQ type, you can use this parameter to configure the event dispatcher. The following dispatchers are supported: `default`, `ts`, `rowid`, and `table`. The dispatcher rules are as follows:
+`sink.dispatchers` : MQ タイプのシンクの場合、このパラメーターを使用してイベント ディスパッチャーを構成できます。次のディスパッチャーがサポートされています: `default` 、 `ts` 、 `rowid` 、および`table` 。ディスパッチャのルールは次のとおりです。
 
-- `default`: dispatches events in the `table` mode.
-- `ts`: uses the commitTs of the row change to create the hash value and dispatch events.
-- `rowid`: uses the name and value of the selected HandleKey column to create the hash value and dispatch events.
-- `table`: uses the schema name of the table and the table name to create the hash value and dispatch events.
+-   `default` : `table`モードでイベントをディスパッチします。
+-   `ts` : 行変更の commitT を使用してハッシュ値を作成し、イベントをディスパッチします。
+-   `rowid` : 選択した HandleKey 列の名前と値を使用して、ハッシュ値を作成し、イベントをディスパッチします。
+-   `table` : テーブルのスキーマ名とテーブル名を使用してハッシュ値を作成し、イベントをディスパッチします。
 
-`sink.dispatchers` is an array. The parameters are described as follows:
+`sink.dispatchers`は配列です。パラメータは次のように説明されます。
 
-| Parameter name | Description |
-|:-----------------|:---------------------------------------|
-| `matcher`   | `STRING ARRAY` type. It has the same matching syntax as the filter rule does. |
-| `partition` | `STRING` type. The target partition for dispatching events.    |
-| `topic`     | `STRING` type. The target topic for dispatching events.        |
+| パラメータ名      | 説明                                         |
+| :---------- | :----------------------------------------- |
+| `matcher`   | `STRING ARRAY`タイプ。フィルター ルールと同じ一致構文を持ちます。   |
+| `partition` | `STRING`タイプ。イベントをディスパッチするためのターゲット パーティション。 |
+| `topic`     | `STRING`タイプ。イベントをディスパッチする対象のトピック。          |
 
-### Example
+### 例 {#example}
 
-The following request creates a replication task with an ID of `test5` and `sink_uri` of `blackhome://`.
+次のリクエストは、ID が`test5`および`sink_uri` `blackhome://`レプリケーション タスクを作成します。
 
 ```shell
 curl -X POST -H "'Content-type':'application/json'" http://127.0.0.1:8300/api/v2/changefeeds -d '{"changefeed_id":"test5","sink_uri":"blackhole://"}'
 ```
 
-If the request is successful, `200 OK` is returned. If the request fails, an error message and error code are returned.
+リクエストが成功すると`200 OK`が返されます。リクエストが失敗した場合は、エラー メッセージとエラー コードが返されます。
 
-### Response body format
+### レスポンスボディの形式 {#response-body-format}
 
 ```json
 {
@@ -503,85 +503,85 @@ If the request is successful, `200 OK` is returned. If the request fails, an err
 }
 ```
 
-The parameters are described as follows:
+パラメータは次のように説明されます。
 
-| Parameter name | Description |
-|:-----------------|:---------------------------------------|
-| `admin_job_type`  | `INTEGER` type. The admin job type.                 |
-| `checkpoint_time` | `STRING` type. The formatted time of the current checkpoint for the replication task.                  |
-| `checkpoint_ts`   | `STRING` type. The TSO of the current checkpoint for the replication task.    |
-| `config`          | The replication task configuration. The structure and meaning are the same as that of the `replica_config` configuration in creating the replication task.       |
-| `create_time`     | `STRING` type. The time when the replication task is created.                          |
-| `creator_version` | `STRING` type. The TiCDC version when the replication task is created.         |
-| `error`           | The replication task error.                      |
-| `id`              | `STRING` type. The replication task ID.                |
-| `resolved_ts`     | `UINT64` type. The replication task resolved ts.    |
-| `sink_uri`        | `STRING` type. The replication task sink URI.                                     |
-| `start_ts`        | `UINT64` type. The replication task start ts.                                      |
-| `state`           | `STRING` type. The replication task status. It can be `normal`, `stopped`, `error`, `failed`, or `finished`. |
-| `target_ts`       | `UINT64` type. The replication task target ts.                                    |
-| `task_status`     | The detailed status of dispatching the replication task. |
+| パラメータ名            | 説明                                                                                     |
+| :---------------- | :------------------------------------------------------------------------------------- |
+| `admin_job_type`  | `INTEGER`タイプ。管理者のジョブタイプ。                                                               |
+| `checkpoint_time` | `STRING`タイプ。レプリケーション タスクの現在のチェックポイントの形式化された時刻。                                         |
+| `checkpoint_ts`   | `STRING`タイプ。レプリケーション タスクの現在のチェックポイントの TSO。                                             |
+| `config`          | レプリケーションタスクの構成。構造と意味はレプリケーションタスク作成時の構成`replica_config`と同じです。                           |
+| `create_time`     | `STRING`タイプ。レプリケーションタスクが作成された時刻。                                                       |
+| `creator_version` | `STRING`タイプ。レプリケーション タスクが作成されたときの TiCDC バージョン。                                         |
+| `error`           | レプリケーションタスクのエラー。                                                                       |
+| `id`              | `STRING`タイプ。レプリケーションタスクID。                                                             |
+| `resolved_ts`     | `UINT64`タイプ。レプリケーション タスクにより ts が解決されました。                                               |
+| `sink_uri`        | `STRING`タイプ。レプリケーション タスクのシンク URI。                                                      |
+| `start_ts`        | `UINT64`タイプ。レプリケーション タスクが ts を開始します。                                                   |
+| `state`           | `STRING`タイプ。レプリケーションタスクのステータス。 `normal` 、または`finished` `failed` `stopped` `error`なります。 |
+| `target_ts`       | `UINT64`タイプ。レプリケーションタスクのターゲット ts。                                                      |
+| `task_status`     | レプリケーションタスクのディスパッチの詳細なステータス。                                                           |
 
-The `task_status` parameters are described as follows:
+`task_status`パラメータは次のように説明されます。
 
-| Parameter name | Description |
-|:-----------------|:---------------------------------------|
-| `capture_id` | `STRING` type. The capture ID.                    |
-| `table_ids`  | `UINT64 ARRAY` type. The ID of the table being replicated on this capture. |
+| パラメータ名       | 説明                                           |
+| :----------- | :------------------------------------------- |
+| `capture_id` | `STRING`タイプ。キャプチャID。                         |
+| `table_ids`  | `UINT64 ARRAY`タイプ。このキャプチャでレプリケートされるテーブルの ID。 |
 
-The `error` parameters are described as follows:
+`error`パラメータは次のように説明されます。
 
-| Parameter name | Description |
-|:-----------------|:---------------------------------------|
-| `addr` | `STRING` type. The capture address. |
-| `code` | `STRING` type. The error code.          |
-| `message` | `STRING` type. The details of the error.      |
+| パラメータ名    | 説明                     |
+| :-------- | :--------------------- |
+| `addr`    | `STRING`タイプ。キャプチャアドレス。 |
+| `code`    | `STRING`タイプ。エラーコード。    |
+| `message` | `STRING`タイプ。エラーの詳細。    |
 
-## Remove a replication task
+## レプリケーションタスクを削除する {#remove-a-replication-task}
 
-This API is an idempotent interface (that is, it can be applied multiple times without changing the result beyond the initial application) for removing a replication task. If the request is successful, `200 OK` is returned. The returned result only means that the server agrees to run the command but does not guarantee that the command will be run successfully.
+この API は、レプリケーション タスクを削除するための冪等インターフェイス (つまり、最初の適用を超えて結果を変更することなく複数回適用できます) です。リクエストが成功すると`200 OK`が返されます。返された結果は、サーバーがコマンドの実行に同意したことを意味するだけで、コマンドが正常に実行されることを保証するものではありません。
 
-### Request URI
+### リクエストURI {#request-uri}
 
 `DELETE /api/v2/changefeeds/{changefeed_id}`
 
-### Parameter descriptions
+### パラメータの説明 {#parameter-descriptions}
 
-#### Path parameters
+#### パスパラメータ {#path-parameters}
 
-| Parameter name | Description |
-| :-------------- | :----------------------------------- |
-| `changefeed_id` | The ID of the replication task (changefeed) to be removed. |
+| パラメータ名          | 説明                              |
+| :-------------- | :------------------------------ |
+| `changefeed_id` | 削除するレプリケーション タスク (変更フィード) の ID。 |
 
-### Example
+### 例 {#example}
 
-The following request removes the replication task with the ID `test1`.
+次のリクエストは、ID `test1`のレプリケーション タスクを削除します。
 
 ```shell
 curl -X DELETE http://127.0.0.1:8300/api/v2/changefeeds/test1
 ```
 
-If the request is successful, `200 OK` is returned. If the request fails, an error message and error code are returned.
+リクエストが成功すると`200 OK`が返されます。リクエストが失敗した場合は、エラー メッセージとエラー コードが返されます。
 
-## Update the replication configuration
+## レプリケーション構成を更新する {#update-the-replication-configuration}
 
-This API is used for updating a replication task. If the request is successful, `200 OK` is returned. The returned result only means that the server agrees to run the command but does not guarantee that the command will be run successfully.
+この API は、レプリケーション タスクを更新するために使用されます。リクエストが成功すると`200 OK`が返されます。返された結果は、サーバーがコマンドの実行に同意したことを意味するだけで、コマンドが正常に実行されることを保証するものではありません。
 
-To modify the changefeed configuration, follow the steps of `pause the replication task -> modify the configuration -> resume the replication task`.
+チェンジフィード構成を変更するには、 `pause the replication task -> modify the configuration -> resume the replication task`の手順に従います。
 
-### Request URI
+### リクエストURI {#request-uri}
 
 `PUT /api/v2/changefeeds/{changefeed_id}`
 
-### Parameter descriptions
+### パラメータの説明 {#parameter-descriptions}
 
-#### Path parameters
+#### パスパラメータ {#path-parameters}
 
-| Parameter name | Description |
-| :-------------- | :----------------------------------- |
-| `changefeed_id` | The ID of the replication task (changefeed) to be updated. |
+| パラメータ名          | 説明                              |
+| :-------------- | :------------------------------ |
+| `changefeed_id` | 更新するレプリケーション タスク (変更フィード) の ID。 |
 
-#### Parameters for the request body
+#### リクエストボディのパラメータ {#parameters-for-the-request-body}
 
 ```json
 {
@@ -688,49 +688,49 @@ To modify the changefeed configuration, follow the steps of `pause the replicati
 }
 ```
 
-Currently, only the following configurations can be modified via the API.
+現在、API 経由で変更できるのは次の構成のみです。
 
-| Parameter name | Description |
-| :-------------------- | :----------------------------------------------------- |
-| `target_ts` | `UINT64` type. Specifies the target TSO of the changefeed. (Optional) |
-| `sink_uri` | `STRING` type. The downstream address of the replication task. (Optional) |
-| `replica_config` | The configuration parameters of sink. It must be complete. (Optional) |
+| パラメータ名           | 説明                                           |
+| :--------------- | :------------------------------------------- |
+| `target_ts`      | `UINT64`タイプ。変更フィードのターゲット TSO を指定します。 (オプション) |
+| `sink_uri`       | `STRING`タイプ。レプリケーションタスクの下流アドレス。 (オプション)      |
+| `replica_config` | シンクの構成パラメータ。それは完全でなければなりません。 (オプション)         |
 
-The meanings of the above parameters are the same as those in the [Create a replication task](#create-a-replication-task) section. See that section for details.
+上記パラメータの意味は[レプリケーションタスクを作成する](#create-a-replication-task)項と同様です。詳細については、そのセクションを参照してください。
 
-### Example
+### 例 {#example}
 
-The following request updates the `target_ts` of the replication task with the ID `test1` to `32`.
+次のリクエストは、ID が`test1`レプリケーション タスクの`target_ts`を`32`に更新します。
 
 ```shell
  curl -X PUT -H "'Content-type':'application/json'" http://127.0.0.1:8300/api/v2/changefeeds/test1 -d '{"target_ts":32}'
 ```
 
-If the request is successful, `200 OK` is returned. If the request fails, an error message and error code are returned. The meanings of the JSON response body are the same as those in the [Create a replication task](#create-a-replication-task) section. See that section for details.
+リクエストが成功すると`200 OK`が返されます。リクエストが失敗した場合は、エラー メッセージとエラー コードが返されます。 JSON レスポンスボディの意味は[レプリケーションタスクを作成する](#create-a-replication-task)セクションと同じです。詳細については、そのセクションを参照してください。
 
-## Query the replication task list
+## レプリケーションタスクリストのクエリ {#query-the-replication-task-list}
 
-This API is a synchronous interface. If the request is successful, the basic information of all replication tasks (changefeed) in the TiCDC cluster is returned.
+この API は同期インターフェイスです。リクエストが成功すると、TiCDC クラスター内のすべてのレプリケーション タスク (変更フィード) の基本情報が返されます。
 
-### Request URI
+### リクエストURI {#request-uri}
 
 `GET /api/v2/changefeeds`
 
-### Parameter descriptions
+### パラメータの説明 {#parameter-descriptions}
 
-#### Query parameter
+#### クエリパラメータ {#query-parameter}
 
-| Parameter name | Description |
-| :------ | :--------------------------------------------- |
-| `state` | When this parameter is specified, the information of replication tasks in this specified state is returned. (Optional) |
+| パラメータ名  | 説明                                                    |
+| :------ | :---------------------------------------------------- |
+| `state` | このパラメータを指定すると、その指定された状態のレプリケーションタスクの情報が返されます。 (オプション) |
 
-The value options for `state` are `all`, `normal`, `stopped`, `error`, `failed`, and `finished`.
+`state`の値のオプションは`all` 、 `normal` 、 `stopped` 、 `error` 、 `failed` 、および`finished`です。
 
-If this parameter is not specified, the basic information of replication tasks in the `normal`, `stopped`, or `failed` state is returned by default.
+このパラメータが指定されていない場合、デフォルトでは、 `normal` 、 `stopped` 、または`failed`状態のレプリケーション タスクの基本情報が返されます。
 
-### Example
+### 例 {#example}
 
-The following request queries the basic information of all replication tasks in the `normal` state.
+次のリクエストは、 `normal`状態のすべてのレプリケーション タスクの基本情報をクエリします。
 
 ```shell
 curl -X GET http://127.0.0.1:8300/api/v2/changefeeds?state=normal
@@ -758,83 +758,83 @@ curl -X GET http://127.0.0.1:8300/api/v2/changefeeds?state=normal
 }
 ```
 
-The parameters in the returned result above are described as follows:
+上記で返された結果のパラメータは次のように説明されます。
 
-- `id`: the ID of the replication task.
-- `state`: the current [state](/ticdc/ticdc-changefeed-overview.md#changefeed-state-transfer) of the replication task.
-- `checkpoint_tso`: the TSO of the current checkpoint of the replication task.
-- `checkpoint_time`: the formatted time of the current checkpoint of the replication task.
-- `error`: the error information of the replication task.
+-   `id` : レプリケーション タスクの ID。
+-   `state` : レプリケーションタスクの現在の[州](/ticdc/ticdc-changefeed-overview.md#changefeed-state-transfer) 。
+-   `checkpoint_tso` : レプリケーション タスクの現在のチェックポイントの TSO。
+-   `checkpoint_time` : レプリケーション タスクの現在のチェックポイントのフォーマットされた時刻。
+-   `error` : レプリケーションタスクのエラー情報。
 
-## Query a specific replication task
+## 特定のレプリケーションタスクをクエリする {#query-a-specific-replication-task}
 
-This API is a synchronous interface. If the request is successful, the detailed information of the specified replication task (changefeed) is returned.
+この API は同期インターフェイスです。リクエストが成功すると、指定したレプリケーションタスクの詳細情報（変更フィード）が返されます。
 
-### Request URI
+### リクエストURI {#request-uri}
 
 `GET /api/v2/changefeeds/{changefeed_id}`
 
-### Parameter description
+### パラメータの説明 {#parameter-description}
 
-#### Path parameter
+#### パスパラメータ {#path-parameter}
 
-| Parameter name | Description |
-| :-------------- | :----------------------------------- |
-| `changefeed_id` | The ID of the replication task (changefeed) to be queried. |
+| パラメータ名          | 説明                                |
+| :-------------- | :-------------------------------- |
+| `changefeed_id` | クエリ対象のレプリケーション タスク (変更フィード) の ID。 |
 
-### Example
+### 例 {#example}
 
-The following request queries the detailed information of the replication task with the ID `test1`.
+次のリクエストは、ID `test1`のレプリケーション タスクの詳細情報をクエリします。
 
 ```shell
 curl -X GET http://127.0.0.1:8300/api/v2/changefeeds/test1
 ```
 
-The meanings of the JSON response body are the same as those in the [Create a replication task](#create-a-replication-task) section. See that section for details.
+JSON レスポンスボディの意味は[レプリケーションタスクを作成する](#create-a-replication-task)セクションと同じです。詳細については、そのセクションを参照してください。
 
-## Pause a replication task
+## レプリケーションタスクを一時停止する {#pause-a-replication-task}
 
-This API pauses a replication task. If the request is successful, `200 OK` is returned. The returned result only means that the server agrees to run the command but does not guarantee that the command will be run successfully.
+この API はレプリケーション タスクを一時停止します。リクエストが成功すると`200 OK`が返されます。返された結果は、サーバーがコマンドの実行に同意したことを意味するだけで、コマンドが正常に実行されることを保証するものではありません。
 
-### Request URI
+### リクエストURI {#request-uri}
 
 `POST /api/v2/changefeeds/{changefeed_id}/pause`
 
-### Parameter description
+### パラメータの説明 {#parameter-description}
 
-#### Path parameter
+#### パスパラメータ {#path-parameter}
 
-| Parameter name | Description |
-| :-------------- | :----------------------------------- |
-| `changefeed_id` | The ID of the replication task (changefeed) to be paused. |
+| パラメータ名          | 説明                                |
+| :-------------- | :-------------------------------- |
+| `changefeed_id` | 一時停止するレプリケーション タスク (変更フィード) の ID。 |
 
-### Example
+### 例 {#example}
 
-The following request pauses the replication task with the ID `test1`.
+次のリクエストは、ID `test1`のレプリケーション タスクを一時停止します。
 
 ```shell
 curl -X POST http://127.0.0.1:8300/api/v2/changefeeds/test1/pause
 ```
 
-If the request is successful, `200 OK` is returned. If the request fails, an error message and error code are returned.
+リクエストが成功すると`200 OK`が返されます。リクエストが失敗した場合は、エラー メッセージとエラー コードが返されます。
 
-## Resume a replication task
+## レプリケーションタスクを再開する {#resume-a-replication-task}
 
-This API resumes a replication task. If the request is successful, `200 OK` is returned. The returned result only means that the server agrees to run the command but does not guarantee that the command will be run successfully.
+この API はレプリケーション タスクを再開します。リクエストが成功すると`200 OK`が返されます。返された結果は、サーバーがコマンドの実行に同意したことを意味するだけで、コマンドが正常に実行されることを保証するものではありません。
 
-### Request URI
+### リクエストURI {#request-uri}
 
 `POST /api/v2/changefeeds/{changefeed_id}/resume`
 
-### Parameter description
+### パラメータの説明 {#parameter-description}
 
-#### Path parameter
+#### パスパラメータ {#path-parameter}
 
-| Parameter name | Description |
-| :-------------- | :----------------------------------- |
-| `changefeed_id` | The ID of the replication task (changefeed) to be resumed. |
+| パラメータ名          | 説明                              |
+| :-------------- | :------------------------------ |
+| `changefeed_id` | 再開するレプリケーション タスク (変更フィード) の ID。 |
 
-#### Parameters for the request body
+#### リクエストボディのパラメータ {#parameters-for-the-request-body}
 
 ```json
 {
@@ -842,29 +842,29 @@ This API resumes a replication task. If the request is successful, `200 OK` is r
 }
 ```
 
-| Parameter name | Description |
-| :-------------- | :----------------------------------- |
-| `overwrite_checkpoint_ts` | `UINT64` type. Reassign a checkpoint TSO when resuming a replication task (changefeed). |
+| パラメータ名                    | 説明                                                                 |
+| :------------------------ | :----------------------------------------------------------------- |
+| `overwrite_checkpoint_ts` | `UINT64`タイプ。レプリケーション タスク (変更フィード) を再開するときに、チェックポイント TSO を再割り当てします。 |
 
-### Example
+### 例 {#example}
 
-The following request resumes the replication task with the ID `test1`.
+次のリクエストは、ID `test1`のレプリケーション タスクを再開します。
 
 ```shell
 curl -X POST http://127.0.0.1:8300/api/v2/changefeeds/test1/resume -d '{}'
 ```
 
-If the request is successful, `200 OK` is returned. If the request fails, an error message and error code are returned.
+リクエストが成功すると`200 OK`が返されます。リクエストが失敗した場合は、エラー メッセージとエラー コードが返されます。
 
-## Query the replication subtask list
+## レプリケーションサブタスクリストのクエリ {#query-the-replication-subtask-list}
 
-This API is a synchronous interface. If the request is successful, the basic information of all replication subtasks (`processor`) is returned.
+この API は同期インターフェイスです。リクエストが成功すると、すべてのレプリケーション サブタスク ( `processor` ) の基本情報が返されます。
 
-### Request URI
+### リクエストURI {#request-uri}
 
 `GET /api/v2/processors`
 
-### Example
+### 例 {#example}
 
 ```shell
 curl -X GET http://127.0.0.1:8300/api/v2/processors
@@ -890,31 +890,31 @@ curl -X GET http://127.0.0.1:8300/api/v2/processors
 }
 ```
 
-The parameters are described as follows:
+パラメータは次のように説明されます。
 
-- `changefeed_id`: the changefeed ID.
-- `capture_id`: the capture ID.
+-   `changefeed_id` : チェンジフィード ID。
+-   `capture_id` : キャプチャID。
 
-## Query a specific replication subtask
+## 特定のレプリケーションサブタスクをクエリする {#query-a-specific-replication-subtask}
 
-This API is a synchronous interface. If the request is successful, the detailed information of the specified replication subtask (`processor`) is returned.
+この API は同期インターフェイスです。リクエストが成功すると、指定されたレプリケーションサブタスク ( `processor` ) の詳細情報が返されます。
 
-### Request URI
+### リクエストURI {#request-uri}
 
 `GET /api/v2/processors/{changefeed_id}/{capture_id}`
 
-### Parameter descriptions
+### パラメータの説明 {#parameter-descriptions}
 
-#### Path parameters
+#### パスパラメータ {#path-parameters}
 
-| Parameter name | Description |
-| :-------------- | :----------------------------------- |
-| `changefeed_id` | The changefeed ID of the replication subtask to be queried. |
-| `capture_id` | The capture ID of the replication subtask to be queried. |
+| パラメータ名          | 説明                              |
+| :-------------- | :------------------------------ |
+| `changefeed_id` | クエリ対象のレプリケーション サブタスクの変更フィード ID。 |
+| `capture_id`    | クエリ対象のレプリケーション サブタスクのキャプチャ ID。  |
 
-### Example
+### 例 {#example}
 
-The following request queries the detailed information of a subtask whose `changefeed_id` is `test` and `capture_id` is `561c3784-77f0-4863-ad52-65a3436db6af`. A subtask can be identified by `changefeed_id` and `capture_id`.
+次のリクエストは、 `changefeed_id`が`test` 、 `capture_id`が`561c3784-77f0-4863-ad52-65a3436db6af`であるサブタスクの詳細情報をクエリします。サブタスクは`changefeed_id`と`capture_id`で識別できます。
 
 ```shell
 curl -X GET http://127.0.0.1:8300/api/v2/processors/test/561c3784-77f0-4863-ad52-65a3436db6af
@@ -928,19 +928,19 @@ curl -X GET http://127.0.0.1:8300/api/v2/processors/test/561c3784-77f0-4863-ad52
 }
 ```
 
-The parameter is described as follows:
+パラメータは次のように説明されます。
 
-- `table_ids`: The table ID to be replicated on this capture.
+-   `table_ids` : このキャプチャでレプリケートされるテーブル ID。
 
-## Query the TiCDC service process list
+## TiCDC サービス プロセス リストのクエリ {#query-the-ticdc-service-process-list}
 
-This API is a synchronous interface. If the request is successful, the basic information of all replication processes (`capture`) is returned.
+この API は同期インターフェイスです。リクエストが成功すると、すべてのレプリケーション プロセスの基本情報 ( `capture` ) が返されます。
 
-### Request URI
+### リクエストURI {#request-uri}
 
 `GET /api/v2/captures`
 
-### Example
+### 例 {#example}
 
 ```shell
 curl -X GET http://127.0.0.1:8300/api/v2/captures
@@ -959,52 +959,52 @@ curl -X GET http://127.0.0.1:8300/api/v2/captures
 }
 ```
 
-The parameters are described as follows:
+パラメータは次のように説明されます。
 
-- `id`: the capture ID.
-- `is_owner`: whether the capture is the owner.
-- `address`: the address of the capture.
+-   `id` : キャプチャID。
+-   `is_owner` : キャプチャが所有者であるかどうか。
+-   `address` : キャプチャのアドレス。
 
-## Evict an owner node
+## 所有者ノードを削除する {#evict-an-owner-node}
 
-This API is an asynchronous interface. If the request is successful, `200 OK` is returned. The returned result only means that the server agrees to run the command but does not guarantee that the command will be run successfully.
+この API は非同期インターフェイスです。リクエストが成功すると`200 OK`が返されます。返された結果は、サーバーがコマンドの実行に同意したことを意味するだけで、コマンドが正常に実行されることを保証するものではありません。
 
-### Request URI
+### リクエストURI {#request-uri}
 
 `POST /api/v2/owner/resign`
 
-### Example
+### 例 {#example}
 
-The following request evicts the current owner node of TiCDC and triggers a new round of elections to generate a new owner node.
+次のリクエストは、TiCDC の現在の所有者ノードを削除し、新しいラウンドの選挙をトリガーして新しい所有者ノードを生成します。
 
 ```shell
 curl -X POST http://127.0.0.1:8300/api/v2/owner/resign
 ```
 
-If the request is successful, `200 OK` is returned. If the request fails, an error message and error code are returned.
+リクエストが成功すると`200 OK`が返されます。リクエストが失敗した場合は、エラー メッセージとエラー コードが返されます。
 
-## Dynamically adjust the log level of the TiCDC server
+## TiCDCサーバーのログ レベルを動的に調整する {#dynamically-adjust-the-log-level-of-the-ticdc-server}
 
-This API is a synchronous interface. If the request is successful, `200 OK` is returned.
+この API は同期インターフェイスです。リクエストが成功すると`200 OK`が返されます。
 
-### Request URI
+### リクエストURI {#request-uri}
 
 `POST /api/v2/log`
 
-### Request parameter
+### リクエストパラメータ {#request-parameter}
 
-#### Parameter for the request body
+#### リクエストボディのパラメータ {#parameter-for-the-request-body}
 
-| Parameter name | Description |
-| :---------- | :----------------- |
-| `log_level` | The log level you want to set. |
+| パラメータ名      | 説明         |
+| :---------- | :--------- |
+| `log_level` | 設定するログレベル。 |
 
-`log_level` supports the [log levels provided by zap](https://godoc.org/go.uber.org/zap#UnmarshalText): "debug", "info", "warn", "error", "dpanic" , "panic", and "fatal".
+`log_level` 「debug」、「info」、「warn」、「error」、「dpanic」、「panic」、および「fatal」の[zap によって提供されるログ レベル](https://godoc.org/go.uber.org/zap#UnmarshalText)をサポートします。
 
-### Example
+### 例 {#example}
 
 ```shell
 curl -X POST -H "'Content-type':'application/json'" http://127.0.0.1:8300/api/v2/log -d '{"log_level":"debug"}'
 ```
 
-If the request is successful, `200 OK` is returned. If the request fails, an error message and error code are returned.
+リクエストが成功すると`200 OK`が返されます。リクエストが失敗した場合は、エラー メッセージとエラー コードが返されます。

@@ -3,128 +3,128 @@ title: Slow Queries Page of TiDB Dashboard
 summary: Learn the Slow Queries page of TiDB Dashboard.
 ---
 
-# Slow Queries Page of TiDB Dashboard
+# TiDB ダッシュボードの「遅いクエリ」ページ {#slow-queries-page-of-tidb-dashboard}
 
-On the Slow Queries page of TiDB Dashboard, you can search and view all slow queries in the cluster.
+TiDB ダッシュボードの「スロー クエリ」ページでは、クラスター内のすべてのスロー クエリを検索して表示できます。
 
-By default, SQL queries with an execution time of more than 300 milliseconds are considered as slow queries. These queries are recorded in the [slow query logs](/identify-slow-queries.md) and can be searched via TiDB Dashboard. You can adjust the threshold of slow queries through the [`tidb_slow_log_threshold`](/system-variables.md#tidb_slow_log_threshold) session variable or the [`instance.tidb_slow_log_threshold`](/tidb-configuration-file.md#tidb_slow_log_threshold) TiDB parameter.
+デフォルトでは、実行時間が 300 ミリ秒を超える SQL クエリは低速クエリとみなされます。これらのクエリは[遅いクエリログ](/identify-slow-queries.md)に記録され、TiDB ダッシュボード経由で検索できます。低速クエリのしきい値は、 [`tidb_slow_log_threshold`](/system-variables.md#tidb_slow_log_threshold)セッション変数または[`instance.tidb_slow_log_threshold`](/tidb-configuration-file.md#tidb_slow_log_threshold) TiDB パラメータを通じて調整できます。
 
-> **Note:**
+> **注記：**
 >
-> If the slow query log is disabled, this feature will be unavailable. The slow query log is enabled by default, and you can enable or disable it through the system variable [`tidb_enable_slow_log`](/system-variables.md#tidb_enable_slow_log).
+> スロークエリログが無効になっている場合、この機能は使用できません。スロー クエリ ログはデフォルトで有効になっており、システム変数[`tidb_enable_slow_log`](/system-variables.md#tidb_enable_slow_log)を使用して有効または無効にできます。
 
-## Access the page
+## ページにアクセスする {#access-the-page}
 
-You can use one of the following two methods to access the slow query page:
+次の 2 つの方法のいずれかを使用して、低速クエリ ページにアクセスできます。
 
-* After logging in to TiDB Dashboard, click **Slow Queries** in the left navigation menu.
+-   TiDB ダッシュボードにログインした後、左側のナビゲーション メニューで**[Slow Queries]**をクリックします。
 
-* Visit <http://127.0.0.1:2379/dashboard/#/slow_query> in your browser. Replace `127.0.0.1:2379` with the actual PD address and port.
+-   ブラウザで[http://127.0.0.1:2379/dashboard/#/slow_query](http://127.0.0.1:2379/dashboard/#/slow_query)にアクセスしてください。 `127.0.0.1:2379`実際の PD アドレスとポートに置き換えます。
 
-All data displayed on the slow query page comes from TiDB slow query system tables and slow query logs. See [slow query logs](/identify-slow-queries.md) for details.
+スロー クエリ ページに表示されるすべてのデータは、TiDB スロー クエリ システム テーブルおよびスロー クエリ ログから取得されます。詳細については[遅いクエリログ](/identify-slow-queries.md)を参照してください。
 
-### Change filters
+### フィルターを変更する {#change-filters}
 
-You can filter slow queries based on the time range, the related database, SQL keywords, SQL types, the number of slow queries to be displayed. In the image below, 100 slow queries over the recent 30 minutes are displayed by default.
+時間範囲、関連データベース、SQL キーワード、SQL タイプ、表示する低速クエリの数に基づいて低速クエリをフィルタリングできます。以下の画像では、最近 30 分間の 100 件の低速クエリがデフォルトで表示されています。
 
 ![Modify list filters](/media/dashboard/dashboard-slow-queries-list1-v620.png)
 
-### Display more columns
+### さらに多くの列を表示する {#display-more-columns}
 
-Click **Columns** on the page and you can choose to see more columns. You can move your mouse to the **(i)** icon at the right side of a column name to view the description of this column:
+ページ上の**[列]**をクリックすると、さらに列を表示することを選択できます。列名の右側にある**(i)**アイコンにマウスを移動すると、この列の説明が表示されます。
 
 ![Show more columns](/media/dashboard/dashboard-slow-queries-list2-v620.png)
 
-### Export slow queries locally
+### 遅いクエリをローカルにエクスポートする {#export-slow-queries-locally}
 
-Click ☰ (**More**) in the upper-right corner of the page to display the **Export** option. After you click **Export**, TiDB Dashboard exports slow queries in the current list as a CSV file.
+ページの右上隅にある ☰ ( [**詳細**] ) をクリックして、 **[エクスポート]**オプションを表示します。 **[エクスポート]**をクリックすると、TiDB ダッシュボードは現在のリスト内の低速クエリを CSV ファイルとしてエクスポートします。
 
 ![Export slow queries locally](/media/dashboard/dashboard-slow-queries-export-v651.png)
 
-### Sort by column
+### 列ごとに並べ替える {#sort-by-column}
 
-By default, the list is sorted by **Finish Time** in the descending order. Click column headings to sort by the column or switch the sorting order:
+デフォルトでは、リストは**終了時間の**降順に並べ替えられます。列見出しをクリックして列で並べ替えるか、並べ替え順序を切り替えます。
 
 ![Modify sorting basis](/media/dashboard/dashboard-slow-queries-list3-v620.png)
 
-## View execution details
+## 実行の詳細をビュー {#view-execution-details}
 
-Click any item in the list to display detailed execution information of the slow query, including:
+リスト内の任意の項目をクリックすると、次のような遅いクエリの詳細な実行情報が表示されます。
 
-- Query: The text of the SQL statement (area 1 in the following figure)
-- Plan: The execution plan of the slow query (area 2 in the following figure)
-- Other sorted SQL execution information (area 3 in the following figure)
+-   クエリ: SQL ステートメントのテキスト (次の図の領域 1)
+-   プラン: 低速クエリの実行プラン (次の図の領域 2)
+-   その他のソート済みSQL実行情報（下図の領域3）
 
 ![View execution details](/media/dashboard/dashboard-slow-queries-detail1-v620.png)
 
-### SQL
+### SQL {#sql}
 
-Click the **Expand** button to view the detailed information of an item. Click the **Copy** button to copy the detailed information to the clipboard.
+**「展開」**ボタンをクリックすると、項目の詳細情報が表示されます。 **「コピー」**ボタンをクリックすると、詳細情報がクリップボードにコピーされます。
 
-### Execution plans
+### 実行計画 {#execution-plans}
 
-On TiDB Dashboard, you can view execution plans in three ways: table, text, and graph. To learn how to read an execution plan, see [Understand the query execution plan](/explain-overview.md).
+TiDB ダッシュボードでは、表、テキスト、グラフの 3 つの方法で実行計画を表示できます。実行計画の見方については、 [クエリ実行計画を理解する](/explain-overview.md)を参照してください。
 
-#### Execution plan in table format
+#### 表形式の実行計画 {#execution-plan-in-table-format}
 
-The table format provides detailed information about the execution plan, which helps you quickly identify abnormal operator metrics and compare the status of different operators. The following figure shows an execution plan in table format:
+表形式では、実行計画に関する詳細情報が提供されるため、異常なオペレーター メトリックを迅速に特定し、さまざまなオペレーターのステータスを比較するのに役立ちます。次の図は、実行計画を表形式で示しています。
 
 ![Execution plan in table format](/media/dashboard/dashboard-table-plan.png)
 
-The table format displays similar information to the text format but provides more user-friendly interactions:
+表形式ではテキスト形式と同様の情報が表示されますが、よりユーザーフレンドリーな操作が可能です。
 
-- You can adjust the column width freely.
-- When content exceeds the column width, it is automatically truncated and a tooltip is shown for the full information.
-- If the execution plan is large, you can download it as a text file for local analysis.
-- You can hide and manage columns using the column picker.
+-   列幅を自由に調整できます。
+-   コンテンツが列幅を超えると、コンテンツは自動的に切り詰められ、完全な情報がツールチップに表示されます。
+-   実行プランが大きい場合は、ローカル分析用にテキスト ファイルとしてダウンロードできます。
+-   列ピッカーを使用して列を非表示にしたり管理したりできます。
 
 ![Execution plan in table format - column picker](/media/dashboard/dashboard-table-plan-columnpicker.png)
 
-#### Execution plan in graph format
+#### 実行計画をグラフ形式で表示 {#execution-plan-in-graph-format}
 
-The graph format is more suitable for viewing the execution plan tree of a complex SQL statement and understanding each operator and its corresponding content in detail. The following figure shows an execution plan in graph format:
+グラフ形式は、複雑な SQL ステートメントの実行計画ツリーを表示し、各演算子とそれに対応する内容を詳細に理解するのに適しています。次の図は、実行計画をグラフ形式で示しています。
 
 ![Execution plan in graph format](/media/dashboard/dashboard-visual-plan-2.png)
 
-- The graph shows the execution from left to right, and from top to bottom.
-- Upper nodes are parent operators and lower nodes are child operators.
-- The color of the title bar indicates the component where the operator is executed: yellow stands for TiDB, blue stands for TiKV, and pink stands for TiFlash.
-- The title bar shows the operator name and the text shown below is the basic information of the operator.
+-   グラフは、左から右、上から下の順に実行を示します。
+-   上位ノードは親演算子、下位ノードは子演算子です。
+-   タイトル バーの色は、オペレーターが実行されるコンポーネントを示します。黄色は TiDB を表し、青は TiKV を表し、ピンクはTiFlashを表します。
+-   タイトルバーにはオペレーター名が表示され、その下のテキストはオペレーターの基本情報です。
 
-Click the node area, and the detailed operator information is displayed on the right sidebar.
+ノードエリアをクリックすると、右側のサイドバーにオペレータの詳細情報が表示されます。
 
 ![Execution plan in graph format - sidebar](/media/dashboard/dashboard-visual-plan-popup.png)
 
-### SQL execution details
+### SQL実行の詳細 {#sql-execution-details}
 
-For basic information, execution time, Coprocessor read, transaction, and slow query of the SQL statement, you can click the corresponding tab titles to switch among different information.
+SQL ステートメントの基本情報、実行時間、コプロセッサー読み取り、トランザクション、低速クエリについては、対応するタブ タイトルをクリックしてさまざまな情報を切り替えることができます。
 
 ![Show different execution information](/media/dashboard/dashboard-slow-queries-detail2-v620.png)
 
-#### Basic tab
+#### 基本タブ {#basic-tab}
 
-The basic information of a SQL execution includes the table names, index name, execution count, and total latency. The **Description** column provides detailed description of each field.
+SQL 実行の基本情報には、テーブル名、インデックス名、実行回数、合計レイテンシーが含まれます。 **「説明」**列には、各フィールドの詳細な説明が記載されています。
 
 ![Basic information](/media/dashboard/dashboard-slow-queries-detail-plans-basic.png)
 
-#### Time tab
+#### 「時間」タブ {#time-tab}
 
-Click the **Time** tab, and you can see how long each stage of the execution plan lasts.
+**[時間]**タブをクリックすると、実行計画の各ステージの所要時間を確認できます。
 
-> **Note:**
+> **注記：**
 >
-> Because some operations might be performed in parallel within a single SQL statement, the cumulative duration of each stage might exceed the actual execution time of the SQL statement.
+> 一部の操作は 1 つの SQL ステートメント内で並行して実行される場合があるため、各ステージの累積所要時間は SQL ステートメントの実際の実行時間を超える可能性があります。
 
 ![Execution time](/media/dashboard/dashboard-slow-queries-detail-plans-time.png)
 
-#### Coprocessor tab
+#### 「コプロセッサー」タブ {#coprocessor-tab}
 
-Click the **Coprocessor** tab, and you can see information related to Coprocessor read.
+**[コプロセッサー]**タブをクリックすると、コプロセッサー読み取りに関連する情報が表示されます。
 
 ![Coprocessor read](/media/dashboard/dashboard-slow-queries-detail-plans-cop-read.png)
 
-#### Transaction tab
+#### トランザクションタブ {#transaction-tab}
 
-Click the **Transaction** tab, and you can see information related to execution plans and transactions, such as the average number of written keys or the maximum number of written keys.
+**「トランザクション」**タブをクリックすると、書き込まれたキーの平均数や書き込まれたキーの最大数など、実行計画とトランザクションに関連する情報が表示されます。
 
 ![Transaction](/media/dashboard/dashboard-slow-queries-detail-plans-transaction.png)

@@ -3,54 +3,54 @@ title: Share TiDB Dashboard Sessions
 summary: Learn how to share the current TiDB Dashboard session to other users.
 ---
 
-# Share TiDB Dashboard Sessions
+# TiDB ダッシュボード セッションを共有する {#share-tidb-dashboard-sessions}
 
-You can share the current session of the TiDB Dashboard to other users so that they can access and operate the TiDB Dashboard without entering the user password.
+TiDB ダッシュボードの現在のセッションを他のユーザーと共有すると、ユーザーはユーザー パスワードを入力せずに TiDB ダッシュボードにアクセスして操作できるようになります。
 
-## Steps for the inviter
+## 招待者の手順 {#steps-for-the-inviter}
 
-1. Sign into TiDB Dashboard.
+1.  TiDB ダッシュボードにサインインします。
 
-2. Click the username in the left sidebar to access the configuration page.
+2.  左側のサイドバーでユーザー名をクリックして、設定ページにアクセスします。
 
-3. Click **Share Current Session**.
+3.  **[現在のセッションを共有]**をクリックします。
 
-   ![Sample Step](/media/dashboard/dashboard-session-share-settings-1-v650.png)
+    ![Sample Step](/media/dashboard/dashboard-session-share-settings-1-v650.png)
 
-   > **Note:**
-   >
-   > For security reasons, the shared session cannot be shared again.
+    > **注記：**
+    >
+    > セキュリティ上の理由から、共有セッションを再度共有することはできません。
 
-4. Adjust sharing settings in the popup dialog:
+4.  ポップアップ ダイアログで共有設定を調整します。
 
-   - Expire in: How long the shared session will be effective. Signing out of the current session does not affect the effective time of the shared session.
+    -   有効期限: 共有セッションが有効な期間。現在のセッションからサインアウトしても、共有セッションの有効時間には影響しません。
 
-   - Share as read-only privilege: The shared session only permits read operations but not write operations (such as modifying configurations).
+    -   読み取り専用権限として共有: 共有セッションでは読み取り操作のみが許可されますが、書き込み操作 (構成の変更など) は許可されません。
 
-5. Click **Generate Authorization Code**.
+5.  **「認証コードの生成」**をクリックします。
 
-   ![Sample Step](/media/dashboard/dashboard-session-share-settings-2-v650.png)
+    ![Sample Step](/media/dashboard/dashboard-session-share-settings-2-v650.png)
 
-6. Provide the generated **Authorization Code** to the user to whom you want to share the session.
+6.  生成された**認証コードを**セッションを共有するユーザーに提供します。
 
-   ![Sample Step](/media/dashboard/dashboard-session-share-settings-3-v650.png)
+    ![Sample Step](/media/dashboard/dashboard-session-share-settings-3-v650.png)
 
-   > **Warning:**
-   >
-   > Keep your authorization code secure and do not send it to anyone who is untrusted. Otherwise, they will be able to access and operate TiDB Dashboard without your authorization.
+    > **警告：**
+    >
+    > 認証コードは安全に保管し、信頼できない人には送信しないでください。そうしないと、ユーザーはあなたの許可なしに TiDB ダッシュボードにアクセスして操作できるようになります。
 
-## Steps for the invitee
+## 招待者の手順 {#steps-for-the-invitee}
 
-1. On the sign-in page of TiDB Dashboard, click **Use Alternative Authentication**.
+1.  TiDB ダッシュボードのサインイン ページで、 **[代替認証を使用する]**をクリックします。
 
-   ![Sample Step](/media/dashboard/dashboard-session-share-signin-1-v650.png)
+    ![Sample Step](/media/dashboard/dashboard-session-share-signin-1-v650.png)
 
-2. Click **Authorization Code** to use it to sign in.
+2.  **「認証コード」**をクリックしてサインインに使用します。
 
-   ![Sample Step](/media/dashboard/dashboard-session-share-signin-2-v650.png)
+    ![Sample Step](/media/dashboard/dashboard-session-share-signin-2-v650.png)
 
-3. Enter the authorization code you have received from the inviter.
+3.  招待者から受け取った認証コードを入力します。
 
-4. Click **Sign In**.
+4.  **「サインイン」**をクリックします。
 
-   ![Sample Step](/media/dashboard/dashboard-session-share-signin-3-v650.png)
+    ![Sample Step](/media/dashboard/dashboard-session-share-signin-3-v650.png)

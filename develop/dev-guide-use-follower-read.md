@@ -3,59 +3,59 @@ title: Follower Read
 summary: Learn how to use Follower Read to optimize query performance.
 ---
 
-# Follower Read
+# Follower Read {#follower-read}
 
-This document introduces how to use Follower Read to optimize query performance.
+このドキュメントでは、 Follower Read を使用してクエリのパフォーマンスを最適化する方法を紹介します。
 
-## Introduction
+## 導入 {#introduction}
 
-TiDB uses [Region](/tidb-storage.md#region) as the basic unit to distribute data to all nodes in the cluster. A Region can have multiple replicas, and the replicas are divided into a leader and multiple followers. When the data on the leader changes, TiDB will update the data to the followers synchronously.
+TiDB は、クラスター内のすべてのノードにデータを分散するための基本単位として[リージョン](/tidb-storage.md#region)を使用します。リージョンには複数のレプリカを含めることができ、レプリカはリーダーと複数のフォロワーに分割されます。リーダー上のデータが変更されると、TiDB は同期的にデータをフォロワーに更新します。
 
-By default, TiDB only reads and writes data on the leader of the same Region. When a read hotspot occurs in a Region, the Region leader can become a read bottleneck for the entire system. In this situation, enabling the Follower Read feature can significantly reduce the load of the leader and improve the throughput of the whole system by balancing the load among multiple followers.
+デフォルトでは、TiDB は同じリージョンのリーダー上でのみデータの読み取りと書き込みを行います。リージョンで読み取りホットスポットが発生すると、リージョンリーダーがシステム全体の読み取りボトルネックになる可能性があります。この状況では、Follower Read機能を有効にすると、リーダーの負荷が大幅に軽減され、複数のフォロワー間で負荷が分散されるため、システム全体のスループットが向上します。
 
-## When to use
+## いつ使用するか {#when-to-use}
 
-### Reduce read hotspots
+### 読み取りホットスポットを減らす {#reduce-read-hotspots}
 
 <CustomContent platform="tidb">
 
-You can visually analyze whether your application has a hotspot Region on the [TiDB Dashboard Key Visualizer Page](/dashboard/dashboard-key-visualizer.md). You can check whether a read hotspot occurs by selecting the "metrics selection box" to `Read (bytes)` or `Read (keys)`.
+アプリケーションに[TiDB ダッシュボード キー ビジュアライザー ページ](/dashboard/dashboard-key-visualizer.md)スポットリージョンがあるかどうかを視覚的に分析できます。 「メトリクス選択ボックス」を`Read (bytes)`または`Read (keys)`に選択すると、読み取りホットスポットが発生しているかどうかを確認できます。
 
-For more information about handling hotspot, see [TiDB Hotspot Problem Handling](/troubleshoot-hot-spot-issues.md).
+ホットスポットの処理の詳細については、 [TiDB ホットスポットの問題処理](/troubleshoot-hot-spot-issues.md)を参照してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-You can visually analyze whether your application has a hotspot Region on the [TiDB Cloud Key Visualizer Page](/tidb-cloud/tune-performance.md#key-visualizer). You can check whether a read hotspot occurs by selecting the "metrics selection box" to `Read (bytes)` or `Read (keys)`.
+アプリケーションに[TiDB Cloudキー ビジュアライザー ページ](/tidb-cloud/tune-performance.md#key-visualizer)スポットリージョンがあるかどうかを視覚的に分析できます。 「メトリクス選択ボックス」を`Read (bytes)`または`Read (keys)`に選択すると、読み取りホットスポットが発生しているかどうかを確認できます。
 
-For more information about handling hotspot, see [TiDB Hotspot Problem Handling](https://docs.pingcap.com/tidb/stable/troubleshoot-hot-spot-issues).
+ホットスポットの処理の詳細については、 [TiDB ホットスポットの問題処理](https://docs.pingcap.com/tidb/stable/troubleshoot-hot-spot-issues)を参照してください。
 
 </CustomContent>
 
-If read hotspots are unavoidable or the changing cost is very high, you can try using the Follower Read feature to better load the balance of reading requests to the follower Region.
+読み取りホットスポットが避けられない場合、または変更コストが非常に高い場合は、Follower Read機能を使用して、フォロワーリージョンへの読み取りリクエストのバランスをより適切にロードしてみることができます。
 
-### Reduce latency for geo-distributed deployments
+### 地理的に分散された展開のレイテンシーを削減 {#reduce-latency-for-geo-distributed-deployments}
 
-If your TiDB cluster is deployed across districts or data centers, different replicas of a Region are distributed in different districts or data centers. In this case, you can configure Follower Read as `closest-adaptive` or `closest-replicas` to allow TiDB to prioritize reading from the current data center, which can significantly reduce the latency and traffic overhead of read operations. For implementation details, see [Follower Read](/follower-read.md).
+TiDB クラスターが複数の地区またはデータセンターに展開されている場合、リージョンの異なるレプリカが異なる地区またはデータセンターに分散されます。この場合、 Follower Read を`closest-adaptive`または`closest-replicas`に設定すると、TiDB が現在のデータセンターからの読み取りを優先できるようになり、読み取り操作のレイテンシーとトラフィック オーバーヘッドを大幅に削減できます。実装の詳細については、 [Follower Read](/follower-read.md)を参照してください。
 
-## Enable Follower Read
+## Follower Readを有効にする {#enable-follower-read}
 
 <SimpleTab groupId="language">
 <div label="SQL" value="sql">
 
-To enable Follower Read, set the variable `tidb_replica_read` (default value is `leader`) to `follower`, `leader-and-follower`, `prefer-leader`, `closest-replicas`, or `closest-adaptive`:
+Follower Readを有効にするには、変数`tidb_replica_read` (デフォルト値は`leader` ) を`follower` 、 `leader-and-follower` 、 `prefer-leader` 、 `closest-replicas` 、または`closest-adaptive`に設定します。
 
 ```sql
 SET [GLOBAL] tidb_replica_read = 'follower';
 ```
 
-For more details about this variable, see [Follower Read Usage](/follower-read.md#usage).
+この変数の詳細については、 [Follower Readの使用法](/follower-read.md#usage)を参照してください。
 
 </div>
 <div label="Java" value="java">
 
-In Java, to enable Follower Read, define a `FollowerReadHelper` class.
+JavaでFollower Read を有効にするには、 `FollowerReadHelper`クラスを定義します。
 
 ```java
 public enum FollowReadMode {
@@ -100,7 +100,7 @@ public class FollowerReadHelper {
 }
 ```
 
-When reading data from the Follower node, use the `setSessionReplicaRead(conn, FollowReadMode.LEADER_AND_FOLLOWER)` method to enable the Follower Read feature, which can balance the load between the Leader node and the Follower node in the current session. When the connection is disconnected, it will be restored to the original mode.
+Followerノードからデータを読み取る場合は、 `setSessionReplicaRead(conn, FollowReadMode.LEADER_AND_FOLLOWER)`方法を使用してFollower Read機能を有効にします。これにより、現在のセッションでLeaderノードとFollowerノードの間で負荷のバランスをとることができます。接続が切断されると元のモードに戻ります。
 
 ```java
 public static class AuthorDAO {
@@ -143,20 +143,20 @@ public static class AuthorDAO {
 </div>
 </SimpleTab>
 
-## Read more
+## 続きを読む {#read-more}
 
-- [Follower Read](/follower-read.md)
+-   [Follower Read](/follower-read.md)
 
 <CustomContent platform="tidb">
 
-- [Troubleshoot Hotspot Issues](/troubleshoot-hot-spot-issues.md)
-- [TiDB Dashboard - Key Visualizer Page](/dashboard/dashboard-key-visualizer.md)
+-   [ホットスポットの問題のトラブルシューティング](/troubleshoot-hot-spot-issues.md)
+-   [TiDB ダッシュボード - キー ビジュアライザー ページ](/dashboard/dashboard-key-visualizer.md)
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-- [Troubleshoot Hotspot Issues](https://docs.pingcap.com/tidb/stable/troubleshoot-hot-spot-issues)
-- [TiDB Cloud Key Visualizer Page](/tidb-cloud/tune-performance.md#key-visualizer)
+-   [ホットスポットの問題のトラブルシューティング](https://docs.pingcap.com/tidb/stable/troubleshoot-hot-spot-issues)
+-   [TiDB Cloudキー ビジュアライザー ページ](/tidb-cloud/tune-performance.md#key-visualizer)
 
 </CustomContent>

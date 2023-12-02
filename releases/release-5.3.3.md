@@ -2,20 +2,20 @@
 title: TiDB 5.3.3 Release Note
 ---
 
-# TiDB 5.3.3 Release Note
+# TiDB 5.3.3 リリースノート {#tidb-5-3-3-release-note}
 
-Release date: September 14, 2022
+発売日：2022年9月14日
 
-TiDB version: 5.3.3
+TiDB バージョン: 5.3.3
 
-## Bug fix
+## バグ修正 {#bug-fix}
 
-+ TiKV
+-   TiKV
 
-    - Fix the issue of continuous SQL execution errors in the cluster after the PD leader is switched or PD is restarted.
+    -   PD リーダーが切り替わった後、または PD が再起動された後、クラスター内で継続的に SQL 実行エラーが発生する問題を修正します。
 
-        - Cause: This issue is caused by a TiKV bug that TiKV does not retry sending heartbeat information to PD client after heartbeat requests fail, until TiKV reconnects to PD client. As a result, the Region information on the failed TiKV node becomes outdated, and TiDB cannot get the latest Region information, which causes SQL execution errors.
-        - Affected versions: v5.3.2 and v5.4.2. This issue has been fixed in v5.3.3. If you are using v5.3.2, you can upgrade your cluster to v5.3.3.
-        - Workaround: In addition to upgrade, you can also restart the TiKV nodes that cannot send Region heartbeat to PD, until there is no Region heartbeat to send.
+        -   原因: この問題は、ハートビート要求が失敗した後、TiKV が PD クライアントに再接続するまで、TiKV が PD クライアントへのハートビート情報の送信を再試行しないという TiKV のバグによって発生します。その結果、障害が発生した TiKV ノードのリージョン情報が古くなり、TiDB は最新のリージョン情報を取得できなくなり、SQL 実行エラーが発生します。
+        -   影響を受けるバージョン: v5.3.2 および v5.4.2。この問題は v5.3.3 で修正されました。 v5.3.2 を使用している場合は、クラスターを v5.3.3 にアップグレードできます。
+        -   回避策: アップグレードに加えて、送信するリージョンハートビートがなくなるまで、リージョンハートビートを PD に送信できない TiKV ノードを再起動することもできます。
 
-        For bug details, see [#12934](https://github.com/tikv/tikv/issues/12934).
+        バグの詳細については、 [#12934](https://github.com/tikv/tikv/issues/12934)を参照してください。

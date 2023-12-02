@@ -3,21 +3,21 @@ title: SHOW [BACKUPS|RESTORES] | TiDB SQL Statement Reference
 summary: An overview of the usage of SHOW [BACKUPS|RESTORES] for the TiDB database.
 ---
 
-# SHOW [BACKUPS|RESTORES]
+# [バックアップ|復元]を表示 {#show-backups-restores}
 
-These statements show a list of all queued, running and recently finished [`BACKUP`](/sql-statements/sql-statement-backup.md) and [`RESTORE`](/sql-statements/sql-statement-restore.md) tasks that were executed on a TiDB instance.
+これらのステートメントは、TiDB インスタンス上で実行された、キューに入れられ、実行中、および最近終了したすべてのタスク[`BACKUP`](/sql-statements/sql-statement-backup.md)および[`RESTORE`](/sql-statements/sql-statement-restore.md)リストを表示します。
 
-Both statements require `SUPER` privilege to run.
+どちらのステートメントも実行するには`SUPER`権限が必要です。
 
-Use `SHOW BACKUPS` to query `BACKUP` tasks and use `SHOW RESTORES` to query `RESTORE` tasks.
+`BACKUP`タスクをクエリするには`SHOW BACKUPS`使用し、 `RESTORE`タスクをクエリするには`SHOW RESTORES`使用します。
 
-> **Note:**
+> **注記：**
 >
-> This feature is not available on [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless) clusters.
+> この機能は[TiDB サーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless)クラスターでは使用できません。
 
-Backups and restores that were started with the `br` commandline tool are not shown.
+`br`コマンドライン ツールで開始されたバックアップと復元は表示されません。
 
-## Synopsis
+## あらすじ {#synopsis}
 
 ```ebnf+diagram
 ShowBRIEStmt ::=
@@ -28,19 +28,15 @@ ShowLikeOrWhere ::=
 |   "WHERE" Expression
 ```
 
-## Examples
+## 例 {#examples}
 
-In one connection, execute the following statement:
-
-{{< copyable "sql" >}}
+1 つの接続で、次のステートメントを実行します。
 
 ```sql
 BACKUP DATABASE `test` TO 's3://example-bucket/backup-01';
 ```
 
-Before the backup completes, run `SHOW BACKUPS` in a new connection:
-
-{{< copyable "sql" >}}
+バックアップが完了する前に、新しい接続で`SHOW BACKUPS`を実行します。
 
 ```sql
 SHOW BACKUPS;
@@ -55,30 +51,28 @@ SHOW BACKUPS;
 1 row in set (0.00 sec)
 ```
 
-The first row of the result above is described as follows:
+上記の結果の最初の行は次のように説明されます。
 
-| Column | Description |
-| :-------- | :--------- |
-| `Destination` | The destination URL (with all parameters stripped to avoid leaking secret keys) |
-| `State` | State of the task |
-| `Progress` | Estimated progress in the current state as a percentage |
-| `Queue_time` | When the task was queued |
-| `Execution_time` | When the task was started; the value is `0000-00-00 00:00:00` for queueing tasks |
-| `Finish_time` | The timestamp when the task finished; the value is `0000-00-00 00:00:00` for queueing and running tasks |
-| `Connection` | Connection ID running this task |
-| `Message` | Message with details |
+| カラム              | 説明                                                              |
+| :--------------- | :-------------------------------------------------------------- |
+| `Destination`    | 宛先 URL (秘密キーの漏洩を避けるためにすべてのパラメータが削除されています)                       |
+| `State`          | タスクの状態                                                          |
+| `Progress`       | 現在の状態の推定進捗状況 (パーセンテージ)                                          |
+| `Queue_time`     | タスクがキューに入れられたとき                                                 |
+| `Execution_time` | タスクが開始されたとき。タスクをキューに入れる場合、値は`0000-00-00 00:00:00`です。            |
+| `Finish_time`    | タスクが終了したときのタイムスタンプ。タスクをキューに入れて実行する場合、値は`0000-00-00 00:00:00`です。 |
+| `Connection`     | このタスクを実行する接続 ID                                                 |
+| `Message`        | 詳細を含むメッセージ                                                      |
 
-The possible states are:
+考えられる状態は次のとおりです。
 
-| State | Description |
-| :-----|:------------|
-| Backup | Making a backup |
-| Wait | Waiting for execution |
-| Checksum | Running a checksum operation |
+| 州      | 説明          |
+| :----- | :---------- |
+| バックアップ | バックアップの作成   |
+| 待って    | 実行を待っています   |
+| チェックサム | チェックサム操作の実行 |
 
-The connection ID can be used to cancel a backup/restore task via the [`KILL TIDB QUERY`](/sql-statements/sql-statement-kill.md) statement.
-
-{{< copyable "sql" >}}
+接続 ID を使用して、 [`KILL TIDB QUERY`](/sql-statements/sql-statement-kill.md)ステートメント経由でバックアップ/復元タスクをキャンセルできます。
 
 ```sql
 KILL TIDB QUERY 4;
@@ -88,29 +82,25 @@ KILL TIDB QUERY 4;
 Query OK, 0 rows affected (0.00 sec)
 ```
 
-### Filtering
+### フィルタリング {#filtering}
 
-Use the `LIKE` clause to filter out tasks by matching the destination URL against a wildcard expression.
-
-{{< copyable "sql" >}}
+`LIKE`句を使用して、宛先 URL をワイルドカード式と照合してタスクを除外します。
 
 ```sql
 SHOW BACKUPS LIKE 's3://%';
 ```
 
-Use the `WHERE` clause to filter by columns.
-
-{{< copyable "sql" >}}
+`WHERE`句を使用して列でフィルタリングします。
 
 ```sql
 SHOW BACKUPS WHERE `Progress` < 25.0;
 ```
 
-## MySQL compatibility
+## MySQLの互換性 {#mysql-compatibility}
 
-This statement is a TiDB extension to MySQL syntax.
+このステートメントは、MySQL 構文に対する TiDB 拡張機能です。
 
-## See also
+## こちらも参照 {#see-also}
 
-* [BACKUP](/sql-statements/sql-statement-backup.md)
-* [RESTORE](/sql-statements/sql-statement-restore.md)
+-   [バックアップ](/sql-statements/sql-statement-backup.md)
+-   [復元する](/sql-statements/sql-statement-restore.md)

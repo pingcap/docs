@@ -3,46 +3,46 @@ title: Key Monitoring Metrics of Resource Control
 summary: Learn some key metrics displayed on the Grafana Resource Control dashboard.
 ---
 
-# Key Monitoring Metrics of Resource Control
+# リソース制御の主要な監視指標 {#key-monitoring-metrics-of-resource-control}
 
-If you use TiUP to deploy the TiDB cluster, the monitoring system (Prometheus & Grafana) is deployed at the same time. For more information, see [Overview of the Monitoring Framework](/tidb-monitoring-framework.md).
+TiUPを使用して TiDB クラスターをデプロイする場合、監視システム (Prometheus および Grafana) も同時にデプロイされます。詳細については、 [監視フレームワークの概要](/tidb-monitoring-framework.md)を参照してください。
 
-The Grafana dashboard is divided into a series of sub dashboards which include Overview, PD, TiDB, TiKV, Node\_exporter, Disk Performance, and Performance\_overview.
+Grafana ダッシュボードは、概要、PD、TiDB、TiKV、Node_exporter、Disk Performance、および Performance_overview を含む一連のサブ ダッシュボードに分割されています。
 
-If your cluster has used the [Resource Control](/tidb-resource-control.md) feature, you can get an overview of the resource consumption status from the Resource Control dashboard.
+クラスターで[リソース制御](/tidb-resource-control.md)機能が使用されている場合は、リソース制御ダッシュボードからリソース消費ステータスの概要を取得できます。
 
-TiDB uses the [token bucket algorithm](https://en.wikipedia.org/wiki/Token_bucket) for flow control. As described in the [RFC: Global Resource Control in TiDB](https://github.com/pingcap/tidb/blob/release-7.5/docs/design/2022-11-25-global-resource-control.md#distributed-token-buckets), a TiDB node might have multiple Resource Groups, which are flow controlled by GAC (Global Admission Control) on the PD side. The Local Token Buckets in each TiDB node periodically (5 seconds by default) communicate with the GAC on the PD side to reconfigure the local tokens. In TiDB, the Local Token Buckets are implemented as Resource Controller Clients.
+TiDB はフロー制御に[トークンバケットアルゴリズム](https://en.wikipedia.org/wiki/Token_bucket)を使用します。 [RFC: TiDB におけるグローバル リソース制御](https://github.com/pingcap/tidb/blob/release-7.5/docs/design/2022-11-25-global-resource-control.md#distributed-token-buckets)で説明したように、TiDB ノードには複数のリソース グループがある場合があり、これらのリソース グループは PD 側の GAC (グローバル アドミッション コントロール) によってフロー制御されます。各 TiDB ノードのローカル トークン バケットは、PD 側の GAC と定期的に (デフォルトでは 5 秒) 通信して、ローカル トークンを再構成します。 TiDB では、ローカル トークン バケットはリソース コントローラー クライアントとして実装されます。
 
-This document describes some key monitoring metrics displayed on the Resource Control dashboard.
+このドキュメントでは、リソース制御ダッシュボードに表示されるいくつかの主要な監視メトリックについて説明します。
 
-## Metrics about Request Unit
+## リクエストユニットに関するメトリクス {#metrics-about-request-unit}
 
-- RU: the [Request Unit (RU)](/tidb-resource-control.md#what-is-request-unit-ru) consumption information of each resource group, calculated in real time. `total` is the sum of the Request Units consumed by all Resource Groups. The Request Unit consumption of each resource group should be equal to the sum of its read consumption (Read Request Unit) and write consumption (Write Request Unit).
-- RU Per Query: the average number of Request Units consumed by each SQL statement per second. It is obtained by dividing the above RU metric by the number of SQL statements executed per second.
-- RRU: the Read Request Unit consumption information of each resource group, calculated in real time. `total` is the sum of the Read Request Units consumed by all Resource Groups.
-- RRU Per Query: the average number of Read Request Units consumed by each SQL statement per second. It is obtained by dividing the above RRU metric by the number of SQL statements executed per second.
-- WRU: the Write Request Unit consumption information of each resource group, calculated in real time. `total` is the sum of the Write Request Units consumed by all Resource Groups.
-- WRU Per Query: the average number of Write Request Units consumed by each SQL statement per second. It is obtained by dividing the above WRU metric by the number of SQL statements executed per second.
-- Available RU: the available tokens in the RU token bucket of each resource group. When it is `0`, this resource group consumes tokens at the rate of `RU_PER_SEC` and can be considered to be in a rate-limited state.
-- Query Max Duration: the maximum Query Duration in terms of resource groups.
+-   RU: リアルタイムで計算された、各リソース グループの[リクエストユニット (RU)](/tidb-resource-control.md#what-is-request-unit-ru)情報。 `total`は、すべてのリソース グループによって消費されるリクエスト ユニットの合計です。各リソース グループのリクエスト ユニット消費量は、その読み取り消費量 (読み取りリクエスト ユニット) と書き込み消費量 (書き込みリクエスト ユニット) の合計と等しくなければなりません。
+-   クエリあたりの RU: 1 秒あたりに各 SQL ステートメントによって消費されるリクエスト ユニットの平均数。これは、上記の RU メトリックを 1 秒あたりに実行される SQL ステートメントの数で割ることによって取得されます。
+-   RRU: リアルタイムで計算された、各リソース グループの読み取りリクエスト ユニット消費情報。 `total`は、すべてのリソース グループによって消費される読み取りリクエスト ユニットの合計です。
+-   クエリごとの RRU: 各 SQL ステートメントによって消費される 1 秒あたりの読み取りリクエスト ユニットの平均数。これは、上記の RRU メトリックを 1 秒あたりに実行される SQL ステートメントの数で割ることによって取得されます。
+-   WRU: リアルタイムで計算された、各リソース グループの書き込み要求ユニット消費情報。 `total`は、すべてのリソース グループによって消費される書き込みリクエスト ユニットの合計です。
+-   クエリごとの WRU: 1 秒あたりに各 SQL ステートメントによって消費される書き込みリクエスト ユニットの平均数。これは、上記の WRU メトリックを 1 秒あたりに実行される SQL ステートメントの数で割ることによって取得されます。
+-   使用可能な RU: 各リソース グループの RU トークン バケット内の使用可能なトークン。 `0`の場合、このリソース グループは`RU_PER_SEC`レートでトークンを消費し、レート制限状態にあるとみなすことができます。
+-   クエリ最大期間: リソース グループに関する最大クエリ期間。
 
-## Metrics about resources
+## リソースに関するメトリクス {#metrics-about-resources}
 
-- KV Request Count: the number of KV requests for each resource group, calculated per second. The requests are divided into read and write types. `total` is the sum of the KV requests for all Resource Groups.
-- KV Request Count Per Query: the average number of read and write KV requests by each SQL statement per second. It is obtained by dividing the above KV Request Count metric by the number of SQL statements executed per second.
-- Bytes Read: the amount of data read by each Resource Group, calculated per second. `total` is the sum of the data read by all Resource Groups.
-- Bytes Read Per Query: the average amount of data read by each SQL statement per second. It is obtained by dividing the above Bytes Read metric by the number of SQL statements executed per second.
-- Bytes Written: the amount of data written by each Resource Group, calculated in real time. `total` is the sum of the data written by all Resource Groups.
-- Bytes Written Per Query: the average amount of data written by each SQL statement per second. It is obtained by dividing the above Bytes Written metric by the number of SQL statements executed per second.
-- KV CPU Time: the KV layer CPU time consumed by each Resource Group, calculated in real time. `total` is the sum of the KV layer CPU time consumed by all Resource Groups.
-- SQL CPU Time: the SQL layer CPU time consumed by each Resource Group, calculated in real time. `total` is the sum of the SQL layer CPU time consumed by all Resource Groups.
+-   KV リクエスト数: 1 秒あたりに計算された、各リソース グループの KV リクエストの数。リクエストは読み取りタイプと書き込みタイプに分けられます。 `total`は、すべてのリソース グループの KV リクエストの合計です。
+-   クエリごとの KV リクエスト数: 各 SQL ステートメントによる 1 秒あたりの読み取りおよび書き込み KV リクエストの平均数。これは、上記の KV リクエスト数メトリックを 1 秒あたりに実行される SQL ステートメントの数で割ることによって取得されます。
+-   読み取りバイト数: 1 秒あたりに計算された、各リソース グループによって読み取られたデータの量。 `total`は、すべてのリソース グループによって読み取られたデータの合計です。
+-   クエリごとに読み取られたバイト数: 1 秒あたりに各 SQL ステートメントによって読み取られたデータの平均量。これは、上記の読み取りバイト数メトリクスを 1 秒あたりに実行される SQL ステートメントの数で割ることによって取得されます。
+-   書き込まれたバイト数: リアルタイムで計算された、各リソース グループによって書き込まれたデータの量。 `total`は、すべてのリソース グループによって書き込まれたデータの合計です。
+-   クエリごとに書き込まれたバイト数: 各 SQL ステートメントによって 1 秒あたりに書き込まれるデータの平均量。これは、上記の Bytes Written メトリックを 1 秒あたりに実行される SQL ステートメントの数で割ることによって取得されます。
+-   KV CPU 時間: リアルタイムで計算された、各リソース グループによって消費される KVレイヤーCPU 時間。 `total`は、すべてのリソース グループによって消費される KVレイヤーCPU 時間の合計です。
+-   SQL CPU 時間: リアルタイムで計算された、各リソース グループによって消費される SQLレイヤーのCPU 時間。 `total`は、すべてのリソース グループによって消費された SQLレイヤーの CPU 時間の合計です。
 
-## Metrics about Resource Controller Client
+## リソースコントローラークライアントに関するメトリック {#metrics-about-resource-controller-client}
 
-- Active Resource Groups: the number of resource groups for each Resource Controller Client, calculated in real time.
-- Total KV Request Count: the number of KV requests for each Resource Controller Client, calculated in real time and by resource groups. `total` is the sum of the KV requests for all Resource Controller Clients.
-- Failed KV Request Count: the number of failed KV requests for each Resource Controller Client, calculated in real time and by resource groups. `total` is the sum of the failed KV requests for all Resource Controller Clients.
-- Successful KV Request Count: the number of successful KV requests for each Resource Controller Client, calculated in real time and by resource groups. `total` is the sum of the successful KV requests for all Resource Controller Clients.
-- Successful KV Request Wait Duration (99/90): the waiting time (at different percentiles) for successful KV requests for each Resource Controller Client, calculated in real time and by resource groups.
-- Token Request Handle Duration (999/99): the waiting time (at different percentiles) for token requests from the server side for each Resource Controller Client, calculated in real time and by resource groups.
-- Token Request Count: the number of token requests from the server side for each Resource Controller Client, calculated in real time and by resource groups. `successful` and `failed` are the sums of the successful and failed token requests for all Resource Controller Clients.
+-   アクティブなリソース グループ: リアルタイムで計算された、各リソース コントローラー クライアントのリソース グループの数。
+-   合計 KV リクエスト数: リソース グループごとにリアルタイムで計算された、各リソース コントローラー クライアントの KV リクエストの数。 `total`は、すべてのリソース コントローラー クライアントの KV リクエストの合計です。
+-   失敗した KV リクエスト数: 各リソース コントローラー クライアントの失敗した KV リクエストの数。リソース グループごとにリアルタイムで計算されます。 `total`は、すべてのリソース コントローラー クライアントの失敗した KV リクエストの合計です。
+-   成功した KV リクエスト数: リソース グループごとにリアルタイムで計算された、各リソース コントローラー クライアントの成功した KV リクエストの数。 `total`は、すべてのリソース コントローラー クライアントの成功した KV リクエストの合計です。
+-   成功した KV リクエストの待機時間 (99/90): 各リソース コントローラー クライアントの成功した KV リクエストの待機時間 (さまざまなパーセンタイルで)。リソース グループごとにリアルタイムで計算されます。
+-   トークン リクエスト ハンドル期間 (999/99): 各リソース コントローラー クライアントのサーバー側からのトークン リクエストの待機時間 (さまざまなパーセンタイルで)。リソース グループごとにリアルタイムで計算されます。
+-   トークン リクエスト数: 各リソース コントローラー クライアントのサーバー側からのトークン リクエストの数。リソース グループごとにリアルタイムで計算されます。 `successful`と`failed`は、すべてのリソース コントローラー クライアントの成功したトークン リクエストと失敗したトークン リクエストの合計です。

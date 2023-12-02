@@ -3,178 +3,178 @@ title: Console Audit Logging
 summary: Learn about the audit logging feature for the TiDB Cloud console.
 ---
 
-# Console Audit Logging
+# コンソール監査ログ {#console-audit-logging}
 
-TiDB Cloud provides the console audit logging feature to help you track various behaviors and operations of users on the [TiDB Cloud console](https://tidbcloud.com). For example, you can track operations, such as inviting a user to join your organization and creating a cluster.
+TiDB Cloudは、コンソール監査ログ機能を提供して、 [TiDB Cloudコンソール](https://tidbcloud.com)上のユーザーのさまざまな動作や操作を追跡するのに役立ちます。たとえば、ユーザーを組織に招待したり、クラスターを作成したりするなどの操作を追跡できます。
 
-## Prerequisites
+## 前提条件 {#prerequisites}
 
-- You must be in the `Organization Owner` or `Organization Console Audit Admin` role of your organization in TiDB Cloud. Otherwise, you cannot see the console audit logging-related options in the TiDB Cloud console. The `Organization Console Audit Admin` role is only visible upon request, so it is recommended that you use the `Organization Owner` role directly. If you need to use the `Organization Console Audit Admin` role, click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com) and click **Request Support**. Then, fill in "Apply for the Organization Console Audit Admin role" in the **Description** field and click **Send**. For more information about roles in TiDB Cloud, see [User roles](/tidb-cloud/manage-user-access.md#user-roles).
-- You can only enable and disable the console audit logging for your organization. You can only track the actions of users in your organization.
-- After the console audit logging is enabled, all event types of the TiDB Cloud console will be audited, and you cannot specify only auditing some of them.
+-   TiDB Cloudでは、組織の`Organization Owner`または`Organization Console Audit Admin`役割に属している必要があります。そうしないと、 TiDB Cloudコンソールにコンソール監査ログ関連のオプションが表示されません。 `Organization Console Audit Admin`ロールはリクエストに応じてのみ表示されるため、 `Organization Owner`ロールを直接使用することをお勧めします。 `Organization Console Audit Admin`ロールを使用する必要がある場合は、 **「?」**をクリックします。 [TiDB Cloudコンソール](https://tidbcloud.com)の右下隅にある**[サポートをリクエスト]**をクリックします。次に、「**説明」**フィールドに「組織コンソール監査管理者の役割に応募する」と入力し、 **「送信」**をクリックします。 TiDB Cloudでの役割の詳細については、 [ユーザーの役割](/tidb-cloud/manage-user-access.md#user-roles)を参照してください。
+-   コンソール監査ログを有効または無効にできるのは、組織に対してのみです。追跡できるのは、組織内のユーザーのアクションのみです。
+-   コンソール監査ログを有効にすると、 TiDB Cloudコンソールのすべてのイベント タイプが監査されるようになり、一部のイベント タイプのみを監査するように指定することはできません。
 
-## Enable console audit logging
+## コンソール監査ログを有効にする {#enable-console-audit-logging}
 
-The console audit logging feature is disabled by default. To enable it, take the following steps:
+コンソール監査ログ機能はデフォルトでは無効になっています。これを有効にするには、次の手順を実行します。
 
-1. In the lower-left corner of the [TiDB Cloud console](https://tidbcloud.com/), click <MDSvgIcon name="icon-top-organization" />, and then click **Console Audit Logging**.
-2. Click **Settings** in the upper-right corner, and then enable console audit logging.
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/)の左下隅にある をクリックします。<mdsvgicon name="icon-top-organization">をクリックし、 **「コンソール監査ログ」**をクリックします。</mdsvgicon>
+2.  右上隅の**[設定]**をクリックし、コンソール監査ログを有効にします。
 
-## Disable console audit logging
+## コンソール監査ログを無効にする {#disable-console-audit-logging}
 
-To disable console audit logging, take the following steps:
+コンソール監査ログを無効にするには、次の手順を実行します。
 
-1. In the lower-left corner of the [TiDB Cloud console](https://tidbcloud.com/), click <MDSvgIcon name="icon-top-organization" />, and then click **Console Audit Logging**.
-2. Click **Settings** in the upper-right corner, and then disable console audit logging.
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/)の左下隅にある をクリックします。<mdsvgicon name="icon-top-organization">をクリックし、 **「コンソール監査ログ」**をクリックします。</mdsvgicon>
+2.  右上隅にある**[設定]**をクリックし、コンソール監査ログを無効にします。
 
-## View console audit logs
+## コンソール監査ログをビュー {#view-console-audit-logs}
 
-You can only view the console audit logs of your organization.
+表示できるのは、組織のコンソール監査ログのみです。
 
-> **Note:**
+> **注記：**
 >
-> - If it is the first time your organization enables console audit logging, the console audit logs are empty. After any audited events are performed, you will see the corresponding logs.
-> - If it has been more than 90 days since console audit logging was disabled, you cannot see any logs.
+> -   組織が初めてコンソール監査ログを有効にする場合、コンソール監査ログは空です。監査されたイベントが実行されると、対応するログが表示されます。
+> -   コンソール監査ログが無効になってから 90 日以上経過している場合、ログは表示されません。
 
-1. In the lower-left corner of the [TiDB Cloud console](https://tidbcloud.com/), click <MDSvgIcon name="icon-top-organization" />, and then click **Console Audit Logging**.
-2. To get a specific part of audit logs, you can filter the event type, operation status, and time range.
-3. (Optional) To filter more fields, click **Advanced filter**, add more filters, and then click **Apply**.
-4. Click the row of a log to view its detailed information in the right pane.
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/)の左下隅にある をクリックします。<mdsvgicon name="icon-top-organization">をクリックし、 **「コンソール監査ログ」**をクリックします。</mdsvgicon>
+2.  監査ログの特定の部分を取得するには、イベント タイプ、操作ステータス、および時間範囲をフィルタリングできます。
+3.  (オプション) さらにフィールドをフィルタするには、 **[詳細フィルタ]**をクリックし、さらにフィルタを追加して、 **[適用]**をクリックします。
+4.  ログの行をクリックすると、右側のペインに詳細情報が表示されます。
 
-## Export console audit logs
+## コンソール監査ログをエクスポートする {#export-console-audit-logs}
 
-To export the console audit logs of your organization, take the following step:
+組織のコンソール監査ログをエクスポートするには、次の手順を実行します。
 
-1. In the lower-left corner of the [TiDB Cloud console](https://tidbcloud.com/), click <MDSvgIcon name="icon-top-organization" />, and then click **Console Audit Logging**.
-2. (Optional) If you need to export a specific part of console audit logs, you can filter through various conditions. Otherwise, skip this step.
-3. Click **Export** and select the desired export format in JSON or CSV.
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/)の左下隅にある をクリックします。<mdsvgicon name="icon-top-organization">をクリックし、 **「コンソール監査ログ」**をクリックします。</mdsvgicon>
+2.  (オプション) コンソール監査ログの特定の部分をエクスポートする必要がある場合は、さまざまな条件でフィルタリングできます。それ以外の場合は、この手順をスキップしてください。
+3.  **[エクスポート]**をクリックし、JSON または CSV で目的のエクスポート形式を選択します。
 
-## Console audit log storage policy
+## コンソール監査ログstorageポリシー {#console-audit-log-storage-policy}
 
-The storage time of console audit logs is 90 days, after which the logs will be automatically cleaned up.
+コンソール監査ログのstorage期間は 90 日間で、その後、ログは自動的にクリーンアップされます。
 
-> **Note:**
+> **注記：**
 >
-> - You cannot specify the storage location of console audit logs in TiDB Cloud.
-> - You cannot manually delete audit logs.
+> -   TiDB Cloudではコンソール監査ログのstorage場所を指定できません。
+> -   監査ログを手動で削除することはできません。
 
-## Console audit event types
+## コンソール監査イベントの種類 {#console-audit-event-types}
 
-The console audit logs record various user activities on the TiDB Cloud console through event types.
+コンソール監査ログは、イベント タイプを通じてTiDB Cloudコンソール上のさまざまなユーザー アクティビティを記録します。
 
-> **Note:**
+> **注記：**
 >
-> Currently, most event types on the TiDB Cloud console can be audited, and you can find them in the following table. For the remaining event types that are not covered yet, TiDB Cloud will continuously work on including them as well.
+> 現在、 TiDB Cloudコンソール上のほとんどのイベント タイプは監査できます。それらは次の表で確認できます。まだカバーされていない残りのイベント タイプについても、 TiDB Cloud は引き続きそれらを含めるように取り組んでいきます。
 
-| Console audit event type       | Description                                                                      |
-|--------------------------------|----------------------------------------------------------------------------------|
-| CreateOrganization             | Create an organization                                                           |
-| LoginOrganization              | Log in to an organization                                                        |
-| SwitchOrganization             | Switch from the current organization to another organization                     |
-| LogoutOrganization             | Log out from an organization                                                     |
-| InviteUserToOrganization       | Invite a user to join the organization                                           |
-| DeleteInvitationToOrganization | Delete a user's invitation to join the organization                              |
-| ResendInvitationToOrganization | Resend an invitation for a user to join the organization                         |
-| ConfirmJoinOrganization        | The invited user confirms joining the organization                               |
-| DeleteUserFromOrganization     | Delete a joined user from the organization                                       |
-| UpdateUserRoleInOrganization   | Update the role of a user in the organization                                    |
-| CreateAPIKey                   | Create an API Key                                                                |
-| EditAPIKey                     | Edit an API Key                                                                  |
-| DeleteAPIKey                   | Delete an API Key                                                                |
-| UpdateTimezone                 | Update the time zone of your organization                                        |
-| ShowBill                       | Show organization bill                                                           |
-| DownloadBill                   | Download organization bill                                                       |
-| ShowCredits                    | Show organization credits                                                        |
-| AddPaymentCard                 | Add a payment card                                                               |
-| UpdatePaymentCard              | Update a payment card                                                            |
-| DeletePaymentCard              | Delete a payment card                                                            |
-| SetDefaultPaymentCard          | Set a default payment card                                                       |
-| EditBillingProfile             | Edit billing profile information                                                 |
-| ContractAction                 | Organize contract-related activities                                             |
-| EnableConsoleAuditLog          | Enable console audit logging                                                     |
-| ShowConsoleAuditLog            | Show console audit logs                                                          |
-| InviteUserToProject            | Invite a user to join a project                                                  |
-| DeleteInvitationToProject      | Delete a user's invitation to join the project                                   |
-| ResendInvitationToProject      | Resend an invitation for a user to join the project                              |
-| ConfirmJoinProject             | The invited user confirms joining the project                                    |
-| DeleteUserFromProject          | Delete a joined user from the project                                            |
-| CreateProject                  | Create a project                                                                 |
-| CreateProjectCIDR              | Create a new project CIDR                                                        |
-| CreateAWSVPCPeering            | Create an AWS VPC Peering                                                        |
-| DeleteAWSVPCPeering            | Delete an AWS VPC Peering                                                        |
-| CreateGCPVPCPeering            | Create a Google Cloud VPC Peering                                                         |
-| DeleteGCPVPCPeering            | Delete a Google Cloud VPC Peering                                                         |
-| CreatePrivateEndpointService   | Create private endpoint service                                                  |
-| DeletePrivateEndpointService   | Delete private endpoint service                                                  |
-| CreateAWSPrivateEndPoint       | Create an AWS private endpoint                                                   |
-| DeleteAWSPrivateEndPoint       | Delete AWS private endpoint                                                      |
-| SubscribeAlerts                | Subscribe alerts                                                                 |
-| UnsubscribeAlerts              | Unsubscribe alerts                                                               |
-| CreateDatadogIntegration       | Create datadog integration                                                       |
-| DeleteDatadogIntegration       | Delete datadog integration                                                       |
-| CreateVercelIntegration        | Create vercel integration                                                        |
-| DeleteVercelIntegration        | Delete vercel integration                                                        |
-| CreatePrometheusIntegration    | Create Prometheus integration                                                    |
-| DeletePrometheusIntegration    | Delete Prometheus integration                                                    |
-| CreateCluster                  | Create a cluster                                                                 |
-| DeleteCluster                  | Delete a cluster                                                                 |
-| PauseCluster                   | Pause a cluster                                                                  |
-| ResumeCluster                  | Resume a cluster                                                                 |
-| ScaleCluster                   | Scale a cluster                                                                  |
-| DownloadTiDBClusterCA          | Download TiDB cluster CA certificate                                             |
-| OpenWebSQLConsole              | Connect to a TiDB cluster through Web SQL                                        |
-| SetRootPassword                | Set the root password of a TiDB cluster                                          |
-| UpdateIPAccessList             | Update the IP access list of a TiDB cluster                                      |
-| SetAutoBackup                  | Set the automatic backup mechanism of a TiDB cluster                             |
-| DoManualBackup                 | Perform a manual backup of TiDB cluster                                          |
-| DeleteBackupTask               | Delete a backup task                                                             |
-| DeleteBackup                   | Delete a backup file                                                             |
-| RestoreFromBackup              | Restore to a TiDB cluster based on the backup files                              |
-| RestoreFromTrash               | Restore to a TiDB cluster based on the backup files in the trash                 |
-| ImportDataFromAWS              | Import data from AWS                                                             |
-| ImportDataFromGCP              | Import data from Google Cloud                                                             |
-| ImportDataFromLocal            | Import data from local disks                                                     |
-| CreateMigrationJob             | Create a migration job                                                           |
-| SuspendMigrationJob            | Suspend a migration job                                                          |
-| ResumeMigrationJob             | Resume a migration job                                                           |
-| DeleteMigrationJob             | Delete a migration job                                                           |
-| ShowDiagnose                   | Show diagnosis information                                                       |
-| DBAuditLogAction               | Set the activity of database audit logging                                       |
-| AddDBAuditFilter               | Add a database audit log filter                                                  |
-| DeleteDBAuditFilter            | Delete a database audit log filter                                               |
-| EditProject                    | Edit the information of a project                                                |
-| DeleteProject                  | Delete a project                                                                 |
-| BindSupportPlan                | Bind a support plan                                                              |
-| CancelSupportPlan              | Cancel a support plan                                                            |
-| UpdateOrganizationName         | Update the organization name                                                     |
-| SetSpendLimit                  | Edit the spending limit of a TiDB Serverless cluster                             |
-| UpdateMaintenanceWindow        | Modify maintenance window start time                                             |
-| DeferMaintenanceTask           | Defer a maintenance task                                                         |
-| CreateBranch                   | Create a TiDB Serverless branch                                                  |
-| DeleteBranch                   | Delete a TiDB Serverless branch                                                  |
-| SetBranchRootPassword          | Set root password for a TiDB Serverless branch                                   |
-| ConnectBranchGitHub            | Connect the cluster with a GitHub repository to enable branching integration     |
-| DisconnectBranchGitHub         | Disconnect the cluster from a GitHub repository to disable branching integration |
+| コンソール監査イベントの種類               | 説明                                     |
+| ---------------------------- | -------------------------------------- |
+| 組織の作成                        | 組織を作成する                                |
+| ログイン組織                       | 組織にログインする                              |
+| スイッチ組織                       | 現在の組織から別の組織に切り替える                      |
+| ログアウト組織                      | 組織からログアウトする                            |
+| ユーザーを組織に招待                   | ユーザーを組織に招待する                           |
+| 組織への招待を削除                    | 組織に参加するためのユーザーの招待を削除する                 |
+| 組織への招待を再送信                   | ユーザーが組織に参加するための招待状を再送信する               |
+| 組織への参加を確認する                  | 招待されたユーザーが組織への参加を確認する                  |
+| 組織からユーザーを削除                  | 参加しているユーザーを組織から削除する                    |
+| UpdateUserRoleInOrganization | 組織内のユーザーの役割を更新する                       |
+| APIキーの作成                     | APIキーを作成する                             |
+| APIキーの編集                     | APIキーを編集する                             |
+| APIキーの削除                     | APIキーを削除する                             |
+| タイムゾーンの更新                    | 組織のタイムゾーンを更新する                         |
+| ショービル                        | 組織請求書を表示する                             |
+| 請求書をダウンロード                   | 組織請求書をダウンロードする                         |
+| クレジットを表示                     | 組織のクレジットを表示する                          |
+| ペイメントカードの追加                  | 支払いカードを追加する                            |
+| ペイメントカードの更新                  | 支払いカードを更新する                            |
+| ペイメントカードの削除                  | 支払いカードを削除する                            |
+| SetDefaultPaymentCard        | デフォルトの支払いカードを設定する                      |
+| 請求プロファイルの編集                  | 請求プロファイル情報の編集                          |
+| 契約アクション                      | 契約関連の活動を整理する                           |
+| コンソール監査ログを有効にする              | コンソール監査ログを有効にする                        |
+| ShowConsole監査ログ              | コンソール監査ログを表示する                         |
+| ユーザーをプロジェクトに招待               | ユーザーをプロジェクトに招待する                       |
+| プロジェクトへの招待を削除                | プロジェクトに参加するためのユーザーの招待を削除する             |
+| プロジェクトへの招待を再送信               | ユーザーがプロジェクトに参加するための招待状を再送信する           |
+| プロジェクトに参加することを確認する           | 招待されたユーザーがプロジェクトへの参加を確認する              |
+| プロジェクトからユーザーを削除              | 参加しているユーザーをプロジェクトから削除する                |
+| プロジェクトの作成                    | プロジェクトを作成する                            |
+| プロジェクトCIDRの作成                | 新しいプロジェクトCIDRを作成する                     |
+| CreateAWSVPCピアリング            | AWS VPC ピアリングを作成する                     |
+| 削除AWSVPCピアリング                | AWS VPC ピアリングを削除する                     |
+| CreateGCPVPCeering           | Google Cloud VPC ピアリングを作成する            |
+| 削除GCPVPCeering               | Google Cloud VPC ピアリングを削除する            |
+| CreatePrivateEndpointService | プライベート エンドポイント サービスの作成                 |
+| DeletePrivateEndpointService | プライベート エンドポイント サービスを削除する               |
+| AWSプライベートエンドポイントの作成          | AWS プライベート エンドポイントを作成する                |
+| AWSPrivateEndPoint の削除       | AWSプライベートエンドポイントを削除する                  |
+| アラートを購読する                    | アラートを購読する                              |
+| アラートの購読解除                    | アラートの購読を解除する                           |
+| データドッグの作成統合                  | Datadog 統合の作成                          |
+| 削除データドッグ統合                   | Datadog 統合の削除                          |
+| CreateVercel統合               | Vercel統合の作成                            |
+| 削除Vercel統合                   | Vercel統合の削除                            |
+| プロメテウスの作成統合                  | Prometheus 統合の作成                       |
+| 削除プロメテウス統合                   | Prometheus 統合の削除                       |
+| クラスターの作成                     | クラスターを作成する                             |
+| クラスターの削除                     | クラスターを削除する                             |
+| クラスターの一時停止                   | クラスターを一時停止する                           |
+| クラスタを再開する                    | クラスターを再開する                             |
+| スケールクラスター                    | クラスターをスケールする                           |
+| ダウンロードTiDBClusterCA          | TiDB クラスター CA 証明書をダウンロードする             |
+| OpenWebSQLコンソール              | Web SQL を介して TiDB クラスターに接続する           |
+| SetRootPassword              | TiDB クラスターの root パスワードを設定する            |
+| IPAccessListの更新              | TiDB クラスターの IP アクセス リストを更新する           |
+| 自動バックアップの設定                  | TiDB クラスターの自動バックアップ メカニズムを設定する         |
+| 手動バックアップを行う                  | TiDB クラスターの手動バックアップを実行する               |
+| バックアップタスクの削除                 | バックアップタスクを削除する                         |
+| バックアップの削除                    | バックアップファイルを削除する                        |
+| バックアップから復元                   | バックアップ ファイルに基づいて TiDB クラスターに復元する       |
+| ゴミ箱から復元                      | ゴミ箱内のバックアップ ファイルに基づいて TiDB クラスターに復元します |
+| AWS からデータをインポート              | AWS からデータをインポートする                      |
+| GCP からデータをインポート              | Google Cloud からデータをインポートする             |
+| ローカルからデータをインポート              | ローカルディスクからデータをインポートする                  |
+| 移行ジョブの作成                     | 移行ジョブを作成する                             |
+| 一時停止移行ジョブ                    | 移行ジョブを一時停止する                           |
+| 再開移行ジョブ                      | 移行ジョブを再開する                             |
+| 移行ジョブの削除                     | 移行ジョブを削除する                             |
+| 表示診断                         | 診断情報を表示する                              |
+| DB監査ログアクション                  | データベース監査ログのアクティビティを設定する                |
+| DBAuditFilterの追加             | データベース監査ログフィルターを追加する                   |
+| DB監査フィルタの削除                  | データベース監査ログフィルタを削除する                    |
+| プロジェクトの編集                    | プロジェクトの情報を編集する                         |
+| プロジェクトの削除                    | プロジェクトを削除する                            |
+| バインドサポートプラン                  | サポートプランをバインドする                         |
+| キャンセルサポートプラン                 | サポートプランをキャンセルする                        |
+| 組織名を更新する                     | 組織名を更新します                              |
+| 支出制限の設定                      | TiDB サーバーレスクラスターの使用量制限を編集する            |
+| メンテナンスウィンドウの更新               | メンテナンスウィンドウの開始時刻を変更する                  |
+| メンテナンスタスクの延期                 | メンテナンスタスクを延期する                         |
+| ブランチの作成                      | TiDB サーバーレス ブランチを作成する                  |
+| ブランチの削除                      | TiDB サーバーレス ブランチを削除する                  |
+| ブランチルートパスワードの設定              | TiDB サーバーレス ブランチの root パスワードを設定する      |
+| ブランチGitHubに接続する              | クラスターを GitHub リポジトリに接続してブランチ統合を有効にする   |
+| 切断ブランチGitHub                 | クラスターを GitHub リポジトリから切断して分岐統合を無効にします   |
 
-## Console audit log fields
+## コンソール監査ログのフィールド {#console-audit-log-fields}
 
-To help you track user activities, TiDB Cloud provides the following fields for each console audit log:
+ユーザー アクティビティの追跡を支援するために、 TiDB Cloudは各コンソール監査ログに次のフィールドを提供します。
 
-| Field name | Data type | Description |
-|---|---|---|
-| type | string | Event type |
-| ends_at | timestamp | Event time |
-| operator_type | enum | Operator type: `user` or `api_key` |
-| operator_id | uint64 | Operator ID |
-| operator_name | string | Operator name |
-| operator_ip | string | Operator's IP address |
-| operator_login_method | enum | Operator's login method: `google`, `github`, `microsoft`, `email`, or `api_key` |
-| org_id | uint64 | Organization ID to which the event belongs |
-| org_name | string | Organization name to which the event belongs |
-| project_id | uint64 | Project ID to which the event belongs |
-| project_name | string | Project name to which the event belongs |
-| cluster_id | uint64 | Cluster ID to which the event belongs |
-| cluster_name | string | Cluster name to which the event belongs |
-| trace_id | string | Trace ID of the request initiated by the operator. This field is empty currently and will be available in future releases. |
-| result | enum | Event result: `success` or `failure` |
-| details | json | Detailed description of the event |
+| フィールド名           | データ・タイプ | 説明                                                                       |
+| ---------------- | ------- | ------------------------------------------------------------------------ |
+| タイプ              | 弦       | イベントタイプ                                                                  |
+| 終了時刻             | タイムスタンプ | イベント時間                                                                   |
+| 演算子の種類           | 列挙型     | 演算子の種類: `user`または`api_key`                                               |
+| オペレーターID         | uint64  | オペレーターID                                                                 |
+| オペレータ名           | 弦       | オペレーター名                                                                  |
+| オペレーターIP         | 弦       | オペレータのIPアドレス                                                             |
+| オペレーター_ログイン_メソッド | 列挙型     | オペレーターのログイン方法: `google` 、 `github` 、 `microsoft` 、 `email` 、または`api_key` |
+| 組織ID             | uint64  | イベントが所属する組織ID                                                            |
+| 組織名              | 弦       | イベントが所属する組織名                                                             |
+| プロジェクトID         | uint64  | イベントが属するプロジェクトID                                                         |
+| プロジェクト名          | 弦       | イベントが属するプロジェクト名                                                          |
+| クラスターID          | uint64  | イベントが属するクラスタID                                                           |
+| クラスター名           | 弦       | イベントが属するクラスタ名                                                            |
+| トレースID           | 弦       | オペレーターによって開始されたリクエストのトレース ID。このフィールドは現在空ですが、将来のリリースで使用できるようになる予定です。      |
+| 結果               | 列挙型     | イベント結果: `success`または`failure`                                            |
+| 詳細               | json    | イベントの詳しい説明                                                               |

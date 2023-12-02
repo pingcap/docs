@@ -3,164 +3,164 @@ title: TiDB Cloud CLI Quick Start
 summary: Learn how to manage TiDB Cloud resources through the TiDB Cloud CLI.
 ---
 
-# TiDB Cloud CLI Quick Start
+# TiDB CloudCLI クイック スタート {#tidb-cloud-cli-quick-start}
 
-TiDB Cloud provides a command-line interface (CLI) [`ticloud`](https://github.com/tidbcloud/tidbcloud-cli) for you to interact with TiDB Cloud from your terminal with a few lines of commands. For example, you can easily perform the following operations using `ticloud`:
+TiDB Cloud は、数行のコマンドを使用してターミナルからTiDB Cloudと対話できるコマンドライン インターフェイス (CLI) [`ticloud`](https://github.com/tidbcloud/tidbcloud-cli)を提供します。たとえば、 `ticloud`を使用すると、次の操作を簡単に実行できます。
 
-- Create, delete, and list your clusters.
-- Import data from Amazon S3 or local files to your clusters.
+-   クラスターを作成、削除、リストします。
+-   Amazon S3 またはローカル ファイルからクラスターにデータをインポートします。
 
-## Before you begin
+## あなたが始める前に {#before-you-begin}
 
-- Have a TiDB Cloud account. If you do not have one, [sign up for a free trial](https://tidbcloud.com/free-trial).
-- [Create a TiDB Cloud API Key](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication/API-Key-Management).
+-   TiDB Cloudアカウントを持っていること。お持ちでない場合は、 [無料トライアルにサインアップする](https://tidbcloud.com/free-trial) 。
+-   [TiDB CloudAPI キーを作成する](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication/API-Key-Management) 。
 
-## Installation
+## インストール {#installation}
 
 <SimpleTab>
 <div label="macOS/Linux">
 
-For macOS or Linux, you can install `ticloud` using any of the following methods:
+macOS または Linux の場合は、次のいずれかの方法を使用して`ticloud`をインストールできます。
 
-- Install via script (recommended)
+-   スクリプト経由でインストールする (推奨)
 
     ```shell
     curl https://raw.githubusercontent.com/tidbcloud/tidbcloud-cli/main/install.sh | sh
     ```
 
-- Install via [TiUP](https://tiup.io/)
+-   [TiUP](https://tiup.io/)経由でインストールする
 
     ```shell
     tiup install cloud
     ```
 
-- Install manually
+-   手動でインストールする
 
-    Download the pre-compiled binaries from the [releases](https://github.com/tidbcloud/tidbcloud-cli/releases/latest) page and copy them to your desired location for installation.
+    [リリース](https://github.com/tidbcloud/tidbcloud-cli/releases/latest)ページからコンパイル済みのバイナリをダウンロードし、インストールする場所にコピーします。
 
-- Install in GitHub Actions
+-   GitHub アクションにインストールする
 
-    To set up `ticloud` in GitHub Action, use [`setup-tidbcloud-cli`](https://github.com/tidbcloud/setup-tidbcloud-cli).
+    GitHub Action で`ticloud`を設定するには、 [`setup-tidbcloud-cli`](https://github.com/tidbcloud/setup-tidbcloud-cli)使用します。
 
-Install the MySQL command-line client if you do not have it. You can install it via your package manager:
+MySQL コマンドライン クライアントがない場合は、インストールします。パッケージマネージャー経由でインストールできます。
 
-- Debian-based distributions:
+-   Debian ベースのディストリビューション:
 
     ```shell
     sudo apt-get install mysql-client
     ```
 
-- RPM-based distributions:
+-   RPM ベースのディストリビューション:
 
     ```shell
     sudo yum install mysql
     ```
 
-- macOS:
+-   マックOS：
 
-  ```shell
-  brew install mysql-client
-  ```
+    ```shell
+    brew install mysql-client
+    ```
 
 </div>
 
 <div label="Windows">
 
-For Windows, you can install `ticloud` using either of the following methods:
+Windows の場合、次のいずれかの方法を使用して`ticloud`をインストールできます。
 
-- Install manually
+-   手動でインストールする
 
-    Download the pre-compiled binaries from the [releases](https://github.com/tidbcloud/tidbcloud-cli/releases/latest) page and copy them to the desired location for installation.
+    [リリース](https://github.com/tidbcloud/tidbcloud-cli/releases/latest)ページからコンパイル済みのバイナリをダウンロードし、インストールする目的の場所にコピーします。
 
-- Install in GitHub Actions
+-   GitHub アクションにインストールする
 
-    To set up `ticloud` in GitHub Actions, use [`setup-tidbcloud-cli`](https://github.com/tidbcloud/setup-tidbcloud-cli).
+    GitHub Actions で`ticloud`設定するには、 [`setup-tidbcloud-cli`](https://github.com/tidbcloud/setup-tidbcloud-cli)を使用します。
 
-Install the MySQL command-line client if you do not have it. You can refer to the instructions in [MySQL Installer for Windows](https://dev.mysql.com/doc/refman/8.0/en/mysql-installer.html) for the installation. To launch `ticloud connect` on Windows, you need to have the directory containing `mysql.exe` in the PATH environment variable.
+MySQL コマンドライン クライアントがない場合は、インストールします。インストールについては[Windows 用 MySQL インストーラー](https://dev.mysql.com/doc/refman/8.0/en/mysql-installer.html)の手順を参照してください。 Windows で`ticloud connect`起動するには、PATH 環境変数に`mysql.exe`を含むディレクトリが必要です。
 
 </div>
 </SimpleTab>
 
-## Use the TiDB Cloud CLI
+## TiDB CloudCLI を使用する {#use-the-tidb-cloud-cli}
 
-View all commands available:
+使用可能なすべてのコマンドをビュー。
 
 ```shell
 ticloud --help
 ```
 
-Verify that you are using the latest version:
+最新バージョンを使用していることを確認します。
 
 ```shell
 ticloud version
 ```
 
-If not, update to the latest version:
+そうでない場合は、最新バージョンに更新します。
 
 ```shell
 ticloud update
 ```
 
-### Use the TiDB Cloud CLI through TiUP
+### TiUPを通じてTiDB Cloud CLI を使用する {#use-the-tidb-cloud-cli-through-tiup}
 
-The TiDB Cloud CLI is also available through [TiUP](https://tiup.io/), with the component name as `cloud`.
+TiDB Cloud CLI は、コンポーネント名`cloud`を使用して[TiUP](https://tiup.io/)からも使用できます。
 
-View all commands available:
+使用可能なすべてのコマンドをビュー。
 
 ```shell
 tiup cloud --help
 ```
 
-Run commands with `tiup cloud <command>`. For example:
+`tiup cloud <command>`でコマンドを実行します。例えば：
 
 ```shell
 tiup cloud cluster create
 ```
 
-Update to the latest version by TiUP:
+TiUPによって最新バージョンに更新します。
 
 ```shell
 tiup update cloud
 ```
 
-## Quick start
+## クイックスタート {#quick-start}
 
-[TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) is the best way to get started with TiDB Cloud. In this section, you will learn how to create a TiDB Serverless cluster with TiDB Cloud CLI.
+TiDB Cloudを開始するには、 [TiDB サーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-serverless)が最適な方法です。このセクションでは、 TiDB Cloud CLI を使用して TiDB サーバーレス クラスターを作成する方法を学習します。
 
-### Create a user profile
+### ユーザープロファイルを作成する {#create-a-user-profile}
 
-Before creating a cluster, you need to create a user profile with your TiDB Cloud API Key:
+クラスターを作成する前に、 TiDB CloudAPI キーを使用してユーザー プロファイルを作成する必要があります。
 
 ```shell
 ticloud config create
 ```
 
-> **Warning:**
+> **警告：**
 >
-> The profile name **MUST NOT** contain `.`.
+> プロファイル名に`.`を含める**ことはできません**。
 
-### Create a TiDB Serverless cluster
+### TiDB サーバーレスクラスターを作成する {#create-a-tidb-serverless-cluster}
 
-To create a TiDB Serverless cluster, enter the following command, and then follow the CLI prompts to provide the required information and set the password:
+TiDB サーバーレス クラスターを作成するには、次のコマンドを入力し、CLI プロンプトに従って必要な情報を入力し、パスワードを設定します。
 
 ```shell
 ticloud cluster create
 ```
 
-### Connect to the cluster
+### クラスターに接続する {#connect-to-the-cluster}
 
-After the cluster is created, you can connect to the cluster:
+クラスターが作成されたら、クラスターに接続できます。
 
 ```shell
 ticloud connect
 ```
 
-When you are prompted about whether to use the default user, choose `Y` and enter the password that you set when creating the cluster.
+デフォルトのユーザーを使用するかどうかを尋ねるプロンプトが表示されたら、 `Y`を選択し、クラスターの作成時に設定したパスワードを入力します。
 
-## What's next
+## 次は何ですか {#what-s-next}
 
-Check out [CLI reference](/tidb-cloud/cli-reference.md) to explore more features of TiDB Cloud CLI.
+TiDB Cloud CLI の機能をさらに詳しく調べるには、 [CLI リファレンス](/tidb-cloud/cli-reference.md)を確認してください。
 
-## Feedback
+## フィードバック {#feedback}
 
-If you have any questions or suggestions on the TiDB Cloud CLI, feel free to create an [issue](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose). Also, we welcome any contributions.
+TiDB Cloud CLI に関して質問や提案がある場合は、お気軽に[問題](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose)を作成してください。また、貢献も歓迎します。

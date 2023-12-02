@@ -3,161 +3,164 @@ title: Sink to Cloud Storage
 Summary: Learn how to create a changefeed to stream data from a TiDB Dedicated cluster to cloud storage, such as Amazon S3 and GCS.
 ---
 
-# Sink to Cloud Storage
+# クラウドストレージにシンクする {#sink-to-cloud-storage}
 
-This document describes how to create a changefeed to stream data from TiDB Cloud to cloud storage. Currently, Amazon S3 and GCS are supported.
+このドキュメントでは、 TiDB Cloudからクラウドstorageにデータをストリーミングするためのチェンジフィードを作成する方法について説明します。現在、Amazon S3 と GCS がサポートされています。
 
-> **Note:**
+> **注記：**
 >
-> - To stream data to cloud storage, make sure that your TiDB cluster version is v7.1.1 or later. To upgrade your TiDB Dedicated cluster to v7.1.1 or later, [contact TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
-> - For [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) clusters, the changefeed feature is unavailable.
+> -   データをクラウドstorageにストリーミングするには、TiDB クラスターのバージョンが v7.1.1 以降であることを確認してください。 TiDB 専用クラスターを v7.1.1 以降にアップグレードするには、 [TiDB Cloudサポートにお問い合わせください](/tidb-cloud/tidb-cloud-support.md) .
+> -   [TiDB サーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-serverless)クラスターの場合、チェンジフィード機能は使用できません。
 
-## Restrictions
+## 制限 {#restrictions}
 
-- For each TiDB Cloud cluster, you can create up to 5 changefeeds.
-- Because TiDB Cloud uses TiCDC to establish changefeeds, it has the same [restrictions as TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview#unsupported-scenarios).
-- If the table to be replicated does not have a primary key or a non-null unique index, the absence of a unique constraint during replication could result in duplicated data being inserted downstream in some retry scenarios.
+-   TiDB Cloudクラスターごとに、最大 5 つの変更フィードを作成できます。
+-   TiDB Cloud はTiCDC を使用して変更フィードを確立するため、同じ[TiCDC としての制限](https://docs.pingcap.com/tidb/stable/ticdc-overview#unsupported-scenarios)を持ちます。
+-   レプリケートされるテーブルに主キーまたは NULL 以外の一意のインデックスがない場合、レプリケーション中に一意制約がないため、一部の再試行シナリオでは重複したデータがダウンストリームに挿入される可能性があります。
 
-## Step 1. Configure destination
+## ステップ 1. 宛先の設定 {#step-1-configure-destination}
 
-Navigate to the cluster overview page of the target TiDB cluster. Click **Changefeed** in the left navigation pane, click **Create Changefeed**, and select **Amazon S3** or **GCS** as the destination. The configuration process varies depend on the destination you choose.
+ターゲット TiDB クラスターのクラスター概要ページに移動します。左側のナビゲーションペインで**[Changefeed]**をクリックし、 **[Create Changefeed]**をクリックして、宛先として**Amazon S3**または**GCS**を選択します。設定プロセスは、選択した宛先によって異なります。
 
 <SimpleTab>
 <div label="Amazon S3">
 
-For **Amazon S3**, fill the **S3 Endpoint** area: `S3 URI`, `Access Key ID`, and `Secret Access Key`. Make the S3 bucket in the same region with your TiDB cluster.
+**Amazon S3**の場合、 **S3 エンドポイント**領域に`S3 URI` 、 `Access Key ID` 、および`Secret Access Key`を入力します。 TiDB クラスターと同じリージョンに S3 バケットを作成します。
 
-![s3_endpoint](/media/tidb-cloud/changefeed/sink-to-cloud-storage-s3-endpoint.jpg)
+![s3\_endpoint](/media/tidb-cloud/changefeed/sink-to-cloud-storage-s3-endpoint.jpg)
 
 </div>
 <div label="GCS">
 
-For **GCS**, before filling **GCS Endpoint**, you need to first grant the GCS bucket access. Take the following steps:
+**GCS**の場合、 **GCS Endpoint**を入力する前に、まず GCS バケットへのアクセスを許可する必要があります。次の手順を実行します。
 
-1. In the TiDB Cloud console, record the **Service Account ID**, which will be used to grant TiDB Cloud access to your GCS bucket.
+1.  TiDB Cloudコンソールで、 TiDB Cloudに GCS バケットへのアクセスを許可するために使用される**サービス アカウント ID**を記録します。
 
-    ![gcs_endpoint](/media/tidb-cloud/changefeed/sink-to-cloud-storage-gcs-endpoint.png)
+    ![gcs\_endpoint](/media/tidb-cloud/changefeed/sink-to-cloud-storage-gcs-endpoint.png)
 
-2. In the Google Cloud console, create an IAM role for your GCS bucket.
+2.  Google Cloud コンソールで、GCS バケットのIAMロールを作成します。
 
-    1. Sign in to the [Google Cloud console](https://console.cloud.google.com/).
-    2. Go to the [Roles](https://console.cloud.google.com/iam-admin/roles) page, and then click **Create role**.
+    1.  [Google Cloud コンソール](https://console.cloud.google.com/)にサインインします。
+
+    2.  [役割](https://console.cloud.google.com/iam-admin/roles)ページに移動し、 **[ロールの作成]**をクリックします。
 
         ![Create a role](/media/tidb-cloud/changefeed/sink-to-cloud-storage-gcs-create-role.png)
 
-    3. Enter a name, description, ID, and role launch stage for the role. The role name cannot be changed after the role is created. 
-    4. Click **Add permissions**. Add the following read-only permissions to the role, and then click **Add**.
+    3.  ロールの名前、説明、ID、およびロール起動ステージを入力します。ロールの作成後にロール名を変更することはできません。
 
-        - storage.buckets.get
-        - storage.objects.create
-        - storage.objects.delete
-        - storage.objects.get
-        - storage.objects.list
-        - storage.objects.update
+    4.  **[アクセス許可の追加]**をクリックします。次の読み取り専用権限をロールに追加し、 **[追加]**をクリックします。
+
+        -   storage.buckets.get
+        -   storage.objects.create
+        -   storage.オブジェクト.削除
+        -   storage.objects.get
+        -   storage.objects.list
+        -   storage.objects.update
 
     ![Add permissions](/media/tidb-cloud/changefeed/sink-to-cloud-storage-gcs-assign-permission.png)
 
-3. Go to the [Bucket](https://console.cloud.google.com/storage/browser) page, and choose a GCS bucket you want TiDB Cloud to access. Note that the GCS bucket must be in the same region as your TiDB cluster.
+3.  [バケツ](https://console.cloud.google.com/storage/browser)ページに移動し、 TiDB Cloudがアクセスする GCS バケットを選択します。 GCS バケットは TiDB クラスターと同じリージョンに存在する必要があることに注意してください。
 
-4. On the **Bucket details** page, click the **Permissions** tab, and then click **Grant access**.
+4.  **[バケットの詳細]**ページで、 **[アクセス許可]**タブをクリックし、 **[アクセスの許可]**をクリックします。
 
     ![Grant Access to the bucket ](/media/tidb-cloud/changefeed/sink-to-cloud-storage-gcs-grant-access-1.png)
 
-5. Fill in the following information to grant access to your bucket, and then click **Save**.
+5.  次の情報を入力してバケットへのアクセスを許可し、 **[保存]**をクリックします。
 
-    - In the **New Principals** field, paste the **Service Account ID** of the target TiDB cluster you recorded before.
-    - In the **Select a role** drop-down list, type the name of the IAM role you just created, and then choose the name from the filter result.
+    -   **[新しいプリンシパル]**フィールドに、前に記録したターゲット TiDB クラスターの**サービス アカウント ID を**貼り付けます。
 
-    > **Note:**
+    -   **[ロールの選択]**ドロップダウン リストに、作成したIAMロールの名前を入力し、フィルター結果から名前を選択します。
+
+    > **注記：**
     >
-    > To remove the access to TiDB Cloud, simply remove the access that you have granted.
+    > TiDB Cloudへのアクセスを削除するには、付与したアクセスを削除するだけです。
 
-6. On the **Bucket details** page, click the **Objects** tab.
+6.  **「バケットの詳細」**ページで、 **「オブジェクト」**タブをクリックします。
 
-    - To get a bucket's gsutil URI, click the copy button and add `gs://` as a prefix. For example, if the bucket name is `test-sink-gcs`, the URI would be `gs://test-sink-gcs/`.
+    -   バケットの gsutil URI を取得するには、コピー ボタンをクリックし、プレフィックスとして`gs://`を追加します。たとえば、バケット名が`test-sink-gcs`の場合、URI は`gs://test-sink-gcs/`になります。
 
         ![Get bucket URI](/media/tidb-cloud/changefeed/sink-to-cloud-storage-gcs-uri01.png)
 
-    - To get a folder's gsutil URI, open the folder, click the copy button, and add `gs://` as a prefix. For example, if the bucket name is `test-sink-gcs` and the folder name is `changefeed-xxx`, the URI would be `gs://test-sink-gcs/changefeed-xxx`.
+    -   フォルダーの gsutil URI を取得するには、フォルダーを開いてコピー ボタンをクリックし、プレフィックスとして`gs://`を追加します。たとえば、バケット名が`test-sink-gcs` 、フォルダー名が`changefeed-xxx`の場合、URI は`gs://test-sink-gcs/changefeed-xxx`になります。
 
         ![Get bucket URI](/media/tidb-cloud/changefeed/sink-to-cloud-storage-gcs-uri02.png)
 
-7. In the TiDB Cloud console, go to the Changefeed's **Configure Destination** page, and fill in the **bucket gsutil URI** field.
+7.  TiDB Cloudコンソールで、Changefeed の**「宛先の構成」**ページに移動し、**バケットの gsutil URI**フィールドに入力します。
 
 </div>
 </SimpleTab>
 
-Click **Next** to establish the connection from the TiDB Dedicated cluster to Amazon S3 or GCS. TiDB Cloud will automatically test and verify if the connection is successful.
+**[次へ]**をクリックして、TiDB 専用クラスターから Amazon S3 または GCS への接続を確立します。 TiDB Cloud は、接続が成功したかどうかを自動的にテストして検証します。
 
-- If yes, you are directed to the next step of configuration.
-- If not, a connectivity error is displayed, and you need to handle the error. After the error is resolved, click **Next** to retry the connection.
+-   「はい」の場合、次の構成ステップに進みます。
+-   そうでない場合は、接続エラーが表示されるため、エラーを処理する必要があります。エラーが解決したら、 **「次へ」**をクリックして接続を再試行します。
 
-## Step 2. Configure replication
+## ステップ 2. レプリケーションを構成する {#step-2-configure-replication}
 
-1. Customize **Table Filter** to filter the tables that you want to replicate. For the rule syntax, refer to [table filter rules](https://docs.pingcap.com/tidb/stable/ticdc-filter#changefeed-log-filters).
+1.  **テーブル フィルターを**カスタマイズして、複製するテーブルをフィルターします。ルールの構文については、 [テーブルフィルタールール](https://docs.pingcap.com/tidb/stable/ticdc-filter#changefeed-log-filters)を参照してください。
 
     ![the table filter of changefeed](/media/tidb-cloud/changefeed/sink-to-s3-02-table-filter.jpg)
 
-    - **Filter Rules**: you can set filter rules in this column. By default, there is a rule `*.*`, which stands for replicating all tables. When you add a new rule, TiDB Cloud queries all the tables in TiDB and displays only the tables that match the rules in the box on the right.
-    - **Tables with valid keys**: this column displays the tables that have valid keys, including primary keys or unique indexes.
-    - **Tables without valid keys**: this column shows tables that lack primary keys or unique keys. These tables present a challenge during replication because the absence of a unique identifier can result in inconsistent data when handling duplicate events downstream. To ensure data consistency, it is recommended to add unique keys or primary keys to these tables before initiating the replication. Alternatively, you can employ filter rules to exclude these tables. For example, you can exclude the table `test.tbl1` by using the rule `"!test.tbl1"`.
+    -   **フィルター ルール**: この列でフィルター ルールを設定できます。デフォルトでは、すべてのテーブルを複製することを表すルール`*.*`があります。新しいルールを追加すると、 TiDB CloudはTiDB 内のすべてのテーブルをクエリし、ルールに一致するテーブルのみを右側のボックスに表示します。
+    -   **有効なキーを持つテーブル**: この列には、主キーや一意のインデックスなどの有効なキーを持つテーブルが表示されます。
+    -   **有効なキーのないテーブル**: この列には、主キーまたは一意のキーがないテーブルが表示されます。これらのテーブルでは、一意の識別子がないと、ダウンストリームで重複イベントを処理するときにデータの不整合が生じる可能性があるため、レプリケーション中に課題が生じます。データの一貫性を確保するには、レプリケーションを開始する前に、これらのテーブルに一意キーまたは主キーを追加することをお勧めします。あるいは、フィルタ ルールを使用してこれらのテーブルを除外することもできます。たとえば、ルール`"!test.tbl1"`を使用してテーブル`test.tbl1`を除外できます。
 
-2. In the **Start Replication Position** area, select one of the following replication positions:
+2.  **「レプリケーション開始位置」**領域で、次のレプリケーション位置のいずれかを選択します。
 
-    - Start replication from now on
-    - Start replication from a specific [TSO](https://docs.pingcap.com/tidb/stable/glossary#tso)
-    - Start replication from a specific time
+    -   これからレプリケーションを開始します
+    -   特定の[TSO](https://docs.pingcap.com/tidb/stable/glossary#tso)からレプリケーションを開始します
+    -   特定の時刻からレプリケーションを開始する
 
-3. In the **Data Format** area, select either the **CSV** or **Canal-JSON** format.
+3.  **[データ形式]**領域で、 **CSV 形式**または**Canal-JSON**形式のいずれかを選択します。
 
     <SimpleTab>
-    <div label="Configure CSV format">
+     <div label="Configure CSV format">
 
-    To configure the **CSV** format, fill in the following fields:
+    **CSV**形式を設定するには、次のフィールドに入力します。
 
-    - **Binary Encode Method**: The encoding method for binary data. You can choose **base64** (default) or **hex**. If you want to integrate with AWS DMS, use **hex**.
-    - **Date Separator**: To rotate data based on the year, month, and day, or choose not to rotate at all.
-    - **Delimiter**: Specify the character used to separate values in the CSV file. The comma (`,`) is the most commonly used delimiter.
-    - **Quote**: Specify the character used to enclose values that contain the delimiter character or special characters. Typically, double quotes (`"`) are used as the quote character.
-    - **Null/Empty Values**: Specify how null or empty values are represented in the CSV file. This is important for proper handling and interpretation of the data.
-    - **Include Commit Ts**: Control whether to include [`commit-ts`](https://docs.pingcap.com/tidb/stable/ticdc-sink-to-cloud-storage#replicate-change-data-to-storage-services) in the CSV row.
-
-    </div>
-    <div label="Configure Canal-JSON format">
-
-    Canal-JSON is a plain JSON text format. To configure it, fill in the following fields:
-
-    - **Date Separator**: To rotate data based on the year, month, and day, or choose not to rotate at all.
-    - **Enable TiDB Extension**: When you enable this option, TiCDC sends [WATERMARK events](https://docs.pingcap.com/tidb/stable/ticdc-canal-json#watermark-event) and adds the [TiDB extension field](https://docs.pingcap.com/tidb/stable/ticdc-canal-json#tidb-extension-field) to Canal-JSON messages.
+    -   **バイナリエンコード方式**: バイナリデータのエンコード方式です。 **Base64** (デフォルト) または**hex**を選択できます。 AWS DMS と統合する場合は、 **hex**を使用します。
+    -   **日付区切り文字**: 年、月、日に基づいてデータをローテーションするか、まったくローテーションしないことを選択します。
+    -   **区切り文字**: CSV ファイル内の値を区切るために使用する文字を指定します。カンマ ( `,` ) は最も一般的に使用される区切り文字です。
+    -   **引用符**: 区切り文字または特殊文字を含む値を囲むために使用する文字を指定します。通常、二重引用符 ( `"` ) が引用符文字として使用されます。
+    -   **Null/空の値**: CSV ファイル内で Null または空の値をどのように表現するかを指定します。これは、データを適切に処理および解釈するために重要です。
+    -   **Include Commit Ts** : CSV 行に[`commit-ts`](https://docs.pingcap.com/tidb/stable/ticdc-sink-to-cloud-storage#replicate-change-data-to-storage-services)を含めるかどうかを制御します。
 
     </div>
-    </SimpleTab>
+     <div label="Configure Canal-JSON format">
 
-4. In the **Flush Parameters** area, you can configure two items:
+    Canal-JSON はプレーンな JSON テキスト形式です。設定するには、次のフィールドに入力します。
 
-    - **Flush Interval**: set to 60 seconds by default, adjustable within a range of 2 seconds to 10 minutes;
-    - **File Size**: set to 64 MB by default, adjustable within a range of 1 MB to 512 MB.
+    -   **日付区切り文字**: 年、月、日に基づいてデータをローテーションするか、まったくローテーションしないことを選択します。
+    -   **TiDB 拡張機能を有効にする**: このオプションを有効にすると、TiCDC は[ウォーターマークイベント](https://docs.pingcap.com/tidb/stable/ticdc-canal-json#watermark-event)を送信し、 [TiDB 拡張フィールド](https://docs.pingcap.com/tidb/stable/ticdc-canal-json#tidb-extension-field) Canal-JSON メッセージに追加します。
+
+    </div>
+     </SimpleTab>
+
+4.  **「フラッシュパラメータ」**領域では、次の 2 つの項目を設定できます。
+
+    -   **フラッシュ間隔**: デフォルトでは 60 秒に設定されていますが、2 秒から 10 分の範囲で調整可能です。
+    -   **ファイル サイズ**: デフォルトでは 64 MB に設定されていますが、1 MB ～ 512 MB の範囲で調整できます。
 
     ![Flush Parameters](/media/tidb-cloud/changefeed/sink-to-cloud-storage-flush-parameters.jpg)
 
-    > **Note:**
+    > **注記：**
     >
-    > These two parameters will affect the quantity of objects generated in cloud storage for each individual database table. If there are a large number of tables, using the same configuration will increase the number of objects generated and subsequently raise the cost of invoking the cloud storage API. Therefore, it is recommended to configure these parameters appropriately based on your Recovery Point Objective (RPO) and cost requirements.
+    > これら 2 つのパラメーターは、クラウドstorage内で個々のデータベース テーブルごとに生成されるオブジェクトの量に影響します。テーブルの数が多い場合、同じ構成を使用すると、生成されるオブジェクトの数が増加し、クラウドstorageAPI を呼び出すコストが増加します。したがって、目標復旧時点 (RPO) とコスト要件に基づいて、これらのパラメーターを適切に構成することをお勧めします。
 
-## Step 3. Configure specification
+## ステップ 3. 仕様の構成 {#step-3-configure-specification}
 
-Click **Next** to configure your changefeed specification.
+**「次へ」**をクリックして、変更フィード仕様を構成します。
 
-1. In the **Changefeed Specification** area, specify the number of Replication Capacity Units (RCUs) to be used by the changefeed.
-2. In the **Changefeed Name** area, specify a name for the changefeed.
+1.  **「変更フィードの仕様」**領域で、変更フィードで使用するレプリケーション キャパシティ ユニット (RCU) の数を指定します。
+2.  **「変更フィード名」**領域で、変更フィードの名前を指定します。
 
-## Step 4. Review the configuration and start replication
+## ステップ 4. 構成を確認してレプリケーションを開始する {#step-4-review-the-configuration-and-start-replication}
 
-Click **Next** to review the changefeed configuration.
+**「次へ」**をクリックして、変更フィード構成を確認します。
 
-- If you have verified that all configurations are correct, click **Create** to proceed with the creation of the changefeed.
-- If you need to modify any configurations, click **Previous** to go back and make the necessary changes.
+-   すべての構成が正しいことを確認したら、 **「作成」を**クリックして変更フィードの作成に進みます。
+-   構成を変更する必要がある場合は、 **「前**へ」をクリックして戻り、必要な変更を加えます。
 
-The sink will start shortly, and you will observe the status of the sink changing from **Creating** to **Running**.
+シンクがすぐに起動し、シンクのステータスが**[作成中]**から**[実行中]**に変化するのがわかります。
 
-Click the name of the changefeed to go to its details page. On this page, you can view more information about the changefeed, including the checkpoint status, replication latency, and other relevant metrics.
+変更フィードの名前をクリックして、詳細ページに移動します。このページでは、チェックポイントのステータス、レプリケーションのレイテンシー、その他の関連メトリックなど、変更フィードに関する詳細情報を表示できます。

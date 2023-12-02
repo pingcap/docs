@@ -3,24 +3,24 @@ title: Wrong Index Solution
 summary: Learn how to solve the wrong index issue.
 ---
 
-# Wrong Index Solution
+# インデックス問題の解決方法 {#wrong-index-solution}
 
-If you find that the execution speed of some query does not reach the expectation, the optimizer might choose the wrong index to run the query.
+一部のクエリの実行速度が期待に達していないことが判明した場合、オプティマイザはクエリを実行するために間違ったインデックスを選択する可能性があります。
 
-You can first view the [health state of tables](/statistics.md#health-state-of-tables) in the statistics, and then solve this issue according to the different health states.
+まず統計の[テーブルの健全性状態](/statistics.md#health-state-of-tables)確認してから、さまざまな健康状態に応じてこの問題を解決できます。
 
-## Low health state
+## 健康状態が低い {#low-health-state}
 
-The low health state means TiDB has not performed the`ANALYZE` statement for a long time. You can update the statistics by running the `ANALYZE` command. After the update, if the optimizer still uses the wrong index, refer to the next section.
+健全性状態が低いということは、TiDB が`ANALYZE`ステートメントを長期間実行していないことを意味します。 `ANALYZE`コマンドを実行すると、統計を更新できます。更新後もオプティマイザーが間違ったインデックスを使用する場合は、次のセクションを参照してください。
 
-## Near 100% health state
+## 100% に近い健康状態 {#near-100-health-state}
 
-The near 100% health state suggests that the `ANALYZE` statement is just completed or was completed a short time ago. In this case, the wrong index issue might be related to TiDB's estimation logic for the number of rows.
+ほぼ 100% の健全性状態は、 `ANALYZE`ステートメントが完了したばかりか、少し前に完了したことを示しています。この場合、間違ったインデックスの問題は、TiDB の行数の推定ロジックに関連している可能性があります。
 
-For equivalence queries, the cause might be [Count-Min Sketch](/statistics.md#count-min-sketch). You can check whether Count-Min Sketch is the cause and take corresponding solutions. 
+等価性クエリの場合、原因は[カウントミニスケッチ](/statistics.md#count-min-sketch)である可能性があります。 Count-Min Sketch が原因かどうかを確認し、対応する解決策を講じることができます。
 
-If the cause above does not apply to your problem, you can force-select indexes by using the `USE_INDEX` or `use index` optimzer hint (see [USE_INDEX](/optimizer-hints.md#use_indext1_name-idx1_name--idx2_name-) for details). Also, you can change the query behavior by using [SQL Plan Management](/sql-plan-management.md) in a non-intrusive way.
+上記の原因が問題に当てはまらない場合は、 `USE_INDEX`または`use index`オプティマイザー ヒントを使用してインデックスを強制的に選択できます (詳細については[USE_INDEX](/optimizer-hints.md#use_indext1_name-idx1_name--idx2_name-)を参照)。また、非侵入的な方法で[SQL計画管理](/sql-plan-management.md)を使用してクエリの動作を変更することもできます。
 
-## Other situations
+## その他の状況 {#other-situations}
 
-Apart from the aforementioned situations, the wrong index issue might also be caused by data updates which renders all the indexes no longer applicable. In such cases, you need to perform analysis on the conditions and data distribution to see whether new indexes can speed up the query. If so, you can add new indexes by running the [`ADD INDEX`](/sql-statements/sql-statement-add-index.md) command.
+前述の状況とは別に、間違ったインデックスの問題は、すべてのインデックスが適用できなくなるデータ更新によって引き起こされる可能性もあります。このような場合は、条件とデータ分布を分析して、新しいインデックスによってクエリが高速化できるかどうかを確認する必要があります。その場合は、 [`ADD INDEX`](/sql-statements/sql-statement-add-index.md)コマンドを実行して新しいインデックスを追加できます。

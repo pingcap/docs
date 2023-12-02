@@ -2,36 +2,36 @@
 title: tiup cluster audit cleanup
 ---
 
-# tiup cluster audit cleanup
+# tiup cluster auditクリーンアップ {#tiup-cluster-audit-cleanup}
 
-The `tiup cluster audit cleanup` command is used to clean up the logs generated in executing the `tiup cluster`command.
+`tiup cluster audit cleanup`コマンドは、 `tiup cluster`コマンドの実行時に生成されたログをクリーンアップするために使用されます。
 
-## Syntax
+## 構文 {#syntax}
 
 ```shell
 tiup cluster audit cleanup [flags]
 ```
 
-## Options
+## オプション {#options}
 
-### --retain-days
+### --保持日数 {#retain-days}
 
-- Specifies the days for which logs are retained.
-- Data type: `INT`
-- Default value: `60`, in the unit of day.
-- By default, logs generated within the last 60 days are retained, which means logs generated before 60 days are removed.
+-   ログを保存する日数を指定します。
+-   データ型: `INT`
+-   デフォルト値: `60` (日単位)。
+-   デフォルトでは、過去 60 日以内に生成されたログは保持されます。つまり、60 日より前に生成されたログは削除されます。
 
-### -h, --help
+### -h, --help {#h-help}
 
-- Prints the help information.
-- Data type: `BOOLEAN`
-- Default value: `false`
-- To enable this option, you can add this option to the command, and pass the `true` value or do not pass any value.
+-   ヘルプ情報を出力します。
+-   データ型: `BOOLEAN`
+-   デフォルト値: `false`
+-   このオプションを有効にするには、このオプションをコマンドに追加し、値`true`を渡すか、値を渡さないことができます。
 
-## Output
+## 出力 {#output}
 
 ```shell
 clean audit log successfully
 ```
 
-[<< Back to the previous page - TiUP Cluster command list](/tiup/tiup-component-cluster.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUPクラスタコマンド リスト](/tiup/tiup-component-cluster.md#command-list)

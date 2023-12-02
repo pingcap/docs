@@ -3,15 +3,15 @@ title: DROP RESOURCE GROUP
 summary: Learn the usage of DROP RESOURCE GROUP in TiDB.
 ---
 
-# DROP RESOURCE GROUP
+# リソースグループを削除 {#drop-resource-group}
 
-You can use the `DROP RESOURCE GROUP` statement to drop a resource group.
+`DROP RESOURCE GROUP`ステートメントを使用してリソース グループを削除できます。
 
-> **Note:**
+> **注記：**
 >
-> This feature is not available on [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless) clusters.
+> この機能は[TiDB サーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless)クラスターでは使用できません。
 
-## Synopsis
+## あらすじ {#synopsis}
 
 ```ebnf+diagram
 DropResourceGroupStmt ::=
@@ -25,14 +25,14 @@ ResourceGroupName ::=
 |   "DEFAULT"
 ```
 
-> **Note:**
+> **注記：**
 >
-> - The `DROP RESOURCE GROUP` statement can only be executed when the global variable [`tidb_enable_resource_control`](/system-variables.md#tidb_enable_resource_control-new-in-v660) is set to `ON`.
-> - The `default` resource group is reserved and cannot be dropped.
+> -   `DROP RESOURCE GROUP`ステートメントは、グローバル変数[`tidb_enable_resource_control`](/system-variables.md#tidb_enable_resource_control-new-in-v660) `ON`に設定されている場合にのみ実行できます。
+> -   `default`リソース グループは予約されているため、削除できません。
 
-## Examples
+## 例 {#examples}
 
-Drop a resource group named `rg1`.
+`rg1`という名前のリソース グループを削除します。
 
 ```sql
 DROP RESOURCE GROUP IF EXISTS rg1;
@@ -71,20 +71,18 @@ DROP RESOURCE GROUP IF EXISTS rg1;
 Query OK, 1 rows affected (0.09 sec)
 ```
 
-```
-SELECT * FROM information_schema.resource_groups WHERE NAME ='rg1';
-```
+    SELECT * FROM information_schema.resource_groups WHERE NAME ='rg1';
 
 ```sql
 Empty set (0.00 sec)
 ```
 
-## MySQL compatibility
+## MySQLの互換性 {#mysql-compatibility}
 
-MySQL also supports [DROP RESOURCE GROUP](https://dev.mysql.com/doc/refman/8.0/en/drop-resource-group.html), but TiDB does not support the `FORCE` parameter.
+MySQL は[リソースグループを削除](https://dev.mysql.com/doc/refman/8.0/en/drop-resource-group.html)もサポートしますが、TiDB は`FORCE`パラメータをサポートしません。
 
-## See also
+## こちらも参照 {#see-also}
 
-* [ALTER RESOURCE GROUP](/sql-statements/sql-statement-alter-resource-group.md)
-* [CREATE RESOURCE GROUP](/sql-statements/sql-statement-create-resource-group.md)
-* [Request Unit (RU)](/tidb-resource-control.md#what-is-request-unit-ru)
+-   [リソースグループの変更](/sql-statements/sql-statement-alter-resource-group.md)
+-   [リソースグループの作成](/sql-statements/sql-statement-create-resource-group.md)
+-   [リクエストユニット (RU)](/tidb-resource-control.md#what-is-request-unit-ru)

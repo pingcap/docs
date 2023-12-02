@@ -3,187 +3,187 @@ title: Handle Alerts in TiDB Data Migration
 summary: Understand how to deal with the alert information in DM.
 ---
 
-# Handle Alerts in TiDB Data Migration
+# TiDB データ移行でのアラートの処理 {#handle-alerts-in-tidb-data-migration}
 
-This document introduces how to deal with the alert information in DM.
+本書では、DM内のアラート情報への対処方法を紹介します。
 
-## Alerts related to high availability
+## 高可用性に関するアラート {#alerts-related-to-high-availability}
 
-### `DM_master_all_down`
+### <code>DM_master_all_down</code> {#code-dm-master-all-down-code}
 
-- Description:
+-   説明：
 
-    If all DM-master nodes are offline, this alert is triggered.
+    すべての DM マスター ノードがオフラインの場合、このアラートがトリガーされます。
 
-- Solution:
+-   解決：
 
-    You can take the following steps to handle the alert:
+    次の手順を実行してアラートを処理できます。
 
-    1. Check the environment of the cluster.
-    2. Check the logs of all DM-master nodes for troubleshooting.
+    1.  クラスタの環境を確認してください。
+    2.  トラブルシューティングのためにすべての DM マスター ノードのログを確認します。
 
-### `DM_worker_offline`
+### <code>DM_worker_offline</code> {#code-dm-worker-offline-code}
 
-- Description:
+-   説明：
 
-    If a DM-worker node is offline for more than one hour, this alert is triggered. In a high-availability architecture, this alert might not directly interrupt the task but increases the risk of interruption.
+    DM ワーカー ノードが 1 時間以上オフラインになっている場合、このアラートがトリガーされます。高可用性アーキテクチャでは、このアラートはタスクを直接中断しない可能性がありますが、中断のリスクは増加します。
 
-- Solution:
+-   解決：
 
-    You can take the following steps to handle the alert:
+    次の手順を実行してアラートを処理できます。
 
-    1. View the working status of the corresponding DM-worker node.
-    2. Check whether the node is connected.
-    3. Troubleshoot errors through logs.
+    1.  対応する DM ワーカー ノードの動作ステータスをビュー。
+    2.  ノードが接続されているかどうかを確認します。
+    3.  ログを通じてエラーのトラブルシューティングを行います。
 
-### `DM_DDL_error`
+### <code>DM_DDL_error</code> {#code-dm-ddl-error-code}
 
-- Description:
+-   説明：
 
-    This error occurs when DM is processing the sharding DDL operations.
+    このエラーは、DM がシャーディング DDL 操作を処理しているときに発生します。
 
-- Solution:
+-   解決：
 
-    Refer to [Troubleshoot DM](/dm/dm-error-handling.md#troubleshooting).
+    [DM のトラブルシューティング](/dm/dm-error-handling.md#troubleshooting)を参照してください。
 
-### `DM_pending_DDL`
+### <code>DM_pending_DDL</code> {#code-dm-pending-ddl-code}
 
-- Description:
+-   説明：
 
-    If a sharding DDL operation is pending for more than one hour, this alert is triggered.
+    シャーディング DDL 操作が 1 時間以上保留されている場合、このアラートがトリガーされます。
 
-- Solution:
+-   解決：
 
-    In some scenarios, the pending sharding DDL operation might be what users expect. Otherwise, refer to [Handle Sharding DDL Locks Manually in DM](/dm/manually-handling-sharding-ddl-locks.md) for solution.
+    シナリオによっては、保留中のシャーディング DDL 操作がユーザーの期待どおりである場合があります。それ以外の場合は、解決策について[DM でシャーディング DDL ロックを手動で処理する](/dm/manually-handling-sharding-ddl-locks.md)を参照してください。
 
-## Alert rules related to task status
+## タスクのステータスに関連するアラート ルール {#alert-rules-related-to-task-status}
 
-### `DM_task_state`
+### <code>DM_task_state</code> {#code-dm-task-state-code}
 
-- Description:
+-   説明：
 
-    When a sub-task of DM-worker is in the `Paused` state for over 20 minutes, an alert is triggered.
+    DM ワーカーのサブタスクが 20 分以上`Paused`状態になると、アラートがトリガーされます。
 
-- Solution:
+-   解決：
 
-    Refer to [Troubleshoot DM](/dm/dm-error-handling.md#troubleshooting).
+    [DM のトラブルシューティング](/dm/dm-error-handling.md#troubleshooting)を参照してください。
 
-## Alert rules related to relay log
+## リレーログに関するアラートルール {#alert-rules-related-to-relay-log}
 
-### `DM_relay_process_exits_with_error`
+### <code>DM_relay_process_exits_with_error</code> {#code-dm-relay-process-exits-with-error-code}
 
-- Description:
+-   説明：
 
-    When the relay log processing unit encounters a non-autorecoverable error (for example, binlog files not found), or when it encounters multiple recoverable errors (for example, network problems) in a short period of time (for example, more than 3 times in 2 minutes), this alert is triggered.
+    リレー ログ処理ユニットで自動回復不可能なエラー (たとえば、 binlogファイルが見つからない) が発生したとき、または短期間に複数の回復可能なエラー (たとえば、ネットワークの問題) が発生したとき (たとえば、3 回以上) 2 分以内)、このアラートがトリガーされます。
 
-- Solution:
+-   解決：
 
-    Refer to [Troubleshoot DM](/dm/dm-error-handling.md#troubleshooting).
+    [DM のトラブルシューティング](/dm/dm-error-handling.md#troubleshooting)を参照してください。
 
-### `DM_remain_storage_of_relay_log`
+### <code>DM_remain_storage_of_relay_log</code> {#code-dm-remain-storage-of-relay-log-code}
 
-- Description:
+-   説明：
 
-    When the free space of the disk where the relay log is located is less than 10G, an alert is triggered.
+    リレー ログが保存されているディスクの空き容量が 10G 未満になると、アラートがトリガーされます。
 
-- Solutions:
+-   解決策:
 
-    You can take the following methods to handle the alert:
+    アラートを処理するには、次の方法を使用できます。
 
-    - Delete unwanted data manually to increase free disk space.
-    - Reconfigure the [automatic data purge strategy of the relay log](/dm/relay-log.md#automatic-purge) or [purge data manually](/dm/relay-log.md#manual-purge).
-    - Execute the command `pause-relay` to pause the relay log pulling process. After there is enough free disk space, resume the process by running the command `resume-relay`. Note that you must not purge upstream binlog files that have not been pulled after the relay log pulling process is paused.
+    -   不要なデータを手動で削除して、ディスクの空き容量を増やします。
+    -   [リレーログの自動データパージ戦略](/dm/relay-log.md#automatic-purge)または[データを手動で消去する](/dm/relay-log.md#manual-purge)を再構成します。
+    -   コマンド`pause-relay`を実行して中継ログの取得処理を一時停止します。十分な空きディスク容量が確保できたら、コマンド`resume-relay`を実行してプロセスを再開します。リレー ログの取得プロセスが一時停止された後は、取得されていないアップストリームのbinlogファイルを削除しないでください。
 
-### `DM_relay_log_data_corruption`
+### <code>DM_relay_log_data_corruption</code> {#code-dm-relay-log-data-corruption-code}
 
-- Description:
+-   説明：
 
-    When the relay log processing unit validates the binlog event read from the upstream and detects abnormal checksum information, this unit moves to the `Paused` state, and an alert is triggered.
+    リレー ログ処理ユニットが上流から読み取ったbinlogイベントを検証し、異常なチェックサム情報を検出すると、このユニットは`Paused`状態に移行し、アラートがトリガーされます。
 
-- Solution:
+-   解決：
 
-    Refer to [Troubleshoot DM](/dm/dm-error-handling.md#troubleshooting).
+    [DM のトラブルシューティング](/dm/dm-error-handling.md#troubleshooting)を参照してください。
 
-### `DM_fail_to_read_binlog_from_master`
+### <code>DM_fail_to_read_binlog_from_master</code> {#code-dm-fail-to-read-binlog-from-master-code}
 
-- Description:
+-   説明：
 
-    If an error occurs when the relay log processing unit tries to read the binlog event from the upstream, this unit moves to the `Paused` state, and an alert is triggered.
+    リレー ログ処理ユニットがアップストリームからbinlogイベントを読み取ろうとしたときにエラーが発生した場合、このユニットは`Paused`状態に移行し、アラートがトリガーされます。
 
-- Solution:
+-   解決：
 
-    Refer to [Troubleshoot DM](/dm/dm-error-handling.md#troubleshooting).
+    [DM のトラブルシューティング](/dm/dm-error-handling.md#troubleshooting)を参照してください。
 
-### `DM_fail_to_write_relay_log`
+### <code>DM_fail_to_write_relay_log</code> {#code-dm-fail-to-write-relay-log-code}
 
-- Description:
+-   説明：
 
-    If an error occurs when the relay log processing unit tries to write the binlog event into the relay log file, this unit moves to the `Paused` state, and an alert is triggered.
+    リレー ログ処理ユニットがbinlogイベントをリレー ログ ファイルに書き込もうとしたときにエラーが発生した場合、このユニットは`Paused`状態に移行し、アラートがトリガーされます。
 
-- Solution:
+-   解決：
 
-    Refer to [Troubleshoot DM](/dm/dm-error-handling.md#troubleshooting).
+    [DM のトラブルシューティング](/dm/dm-error-handling.md#troubleshooting)を参照してください。
 
-### `DM_binlog_file_gap_between_master_relay`
+### <code>DM_binlog_file_gap_between_master_relay</code> {#code-dm-binlog-file-gap-between-master-relay-code}
 
-- Description:
+-   説明：
 
-    When the number of the binlog files in the current upstream MySQL/MariaDB exceeds that of the latest binlog files pulled by the relay log processing unit by **more than** 1 for 10 minutes, and an alert is triggered.
+    現在のアップストリーム MySQL/MariaDB 内のbinlogファイルの数が、リレー ログ処理ユニットによってプルされた最新のbinlogファイルの数を 10 分間に 1**つ以上**超えると、アラートがトリガーされます。
 
-- Solution:
+-   解決：
 
-    Refer to [Troubleshoot DM](/dm/dm-error-handling.md#troubleshooting).
+    [DM のトラブルシューティング](/dm/dm-error-handling.md#troubleshooting)を参照してください。
 
-## Alert rules related to Dump/Load
+## ダンプ/ロードに関連するアラート ルール {#alert-rules-related-to-dump-load}
 
-### `DM_dump_process_exists_with_error`
+### <code>DM_dump_process_exists_with_error</code> {#code-dm-dump-process-exists-with-error-code}
 
-- Description:
+-   説明：
 
-    When the Dump processing unit encounters a non-autorecoverable error (for example, binlog files not found), or when it encounters multiple recoverable errors (for example, network problems) in a short period of time (for example, more than 3 times in 2 minutes), this alert is triggered.
+    ダンプ処理ユニットで自動回復不可能なエラー (たとえば、 binlogファイルが見つからない) が発生したとき、または短期間に複数の回復可能なエラー (たとえば、ネットワークの問題) が発生したとき (たとえば、3 回以上) 2 分)、このアラートがトリガーされます。
 
-- Solution:
+-   解決：
 
-    Refer to [Troubleshoot DM](/dm/dm-error-handling.md#troubleshooting).
+    [DM のトラブルシューティング](/dm/dm-error-handling.md#troubleshooting)を参照してください。
 
-### `DM_load_process_exists_with_error`
+### <code>DM_load_process_exists_with_error</code> {#code-dm-load-process-exists-with-error-code}
 
-- Description:
+-   説明：
 
-    When the Load processing unit encounters a non-autorecoverable error (for example, binlog files not found), or when it encounters multiple recoverable errors (for example, network problems) in a short period of time (for example, more than 3 times in 2 minutes), this alert is triggered.
+    ロード処理ユニットで自動回復不可能なエラー (たとえば、 binlogファイルが見つからない) が発生したとき、または短期間に複数の回復可能なエラー (たとえば、ネットワークの問題) が発生したとき (たとえば、3 回以上) 2 分)、このアラートがトリガーされます。
 
-- Solution:
+-   解決：
 
-    Refer to [Troubleshoot DM](/dm/dm-error-handling.md#troubleshooting).
+    [DM のトラブルシューティング](/dm/dm-error-handling.md#troubleshooting)を参照してください。
 
-## Alert rules related to binlog replication
+## binlogレプリケーションに関連するアラートルール {#alert-rules-related-to-binlog-replication}
 
-### `DM_sync_process_exists_with_error`
+### <code>DM_sync_process_exists_with_error</code> {#code-dm-sync-process-exists-with-error-code}
 
-- Description:
+-   説明：
 
-    When the binlog replication processing unit encounters a non-autorecoverable error (for example, binlog files not found), or when it encounters multiple recoverable errors (for example, network problems) in a short period of time (for example, more than 3 times in 2 minutes), this alert is triggered.
+    binlogレプリケーション処理ユニットで自動回復不可能なエラー (たとえば、binlogファイルが見つからない) が発生したとき、または短期間 (たとえば、3 回以上) に複数の回復可能なエラー (たとえば、ネットワークの問題) が発生したとき。 2 分以内)、このアラートがトリガーされます。
 
-- Solution:
+-   解決：
 
-    Refer to [Troubleshoot DM](/dm/dm-error-handling.md#troubleshooting).
+    [DM のトラブルシューティング](/dm/dm-error-handling.md#troubleshooting)を参照してください。
 
-### `DM_binlog_file_gap_between_master_syncer`
+### <code>DM_binlog_file_gap_between_master_syncer</code> {#code-dm-binlog-file-gap-between-master-syncer-code}
 
-- Description:
+-   説明：
 
-    When the number of the binlog files in the current upstream MySQL/MariaDB exceeds that of the latest binlog files processed by the relay log processing unit by **more than** 1 for 10 minutes, an alert is triggered.
+    現在のアップストリーム MySQL/MariaDB 内のbinlogファイルの数が、リレー ログ処理ユニットによって処理された最新のbinlogファイルの数を 10 分間に 1**つ以上**超えると、アラートがトリガーされます。
 
-- Solution:
+-   解決：
 
-    Refer to [Handle Performance Issues](/dm/dm-handle-performance-issues.md).
+    [パフォーマンスの問題に対処する](/dm/dm-handle-performance-issues.md)を参照してください。
 
-### `DM_binlog_file_gap_between_relay_syncer`
+### <code>DM_binlog_file_gap_between_relay_syncer</code> {#code-dm-binlog-file-gap-between-relay-syncer-code}
 
-- Description:
+-   説明：
 
-    When the number of the binlog files in the current relay log processing unit exceeds that of the latest binlog files processed by the binlog replication processing unit by **more than** 1 for 10 minutes, an alert is triggered.
+    現在のリレー ログ処理ユニット内のbinlogファイルの数が、binlogレプリケーション処理ユニットによって処理される最新のbinlogファイルの数を 10 分間に 1**つ以上**超えると、アラートがトリガーされます。
 
-- Solution:
+-   解決：
 
-    Refer to [Handle Performance Issues](/dm/dm-handle-performance-issues.md).
+    [パフォーマンスの問題に対処する](/dm/dm-handle-performance-issues.md)を参照してください。

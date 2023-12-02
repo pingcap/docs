@@ -3,13 +3,13 @@ title: Use Logical Import Mode
 summary: Learn how to use the logical import mode in TiDB Lightning.
 ---
 
-# Use Logical Import Mode
+# 論理インポートモードを使用する {#use-logical-import-mode}
 
-This document introduces how to use the [logical import mode](/tidb-lightning/tidb-lightning-logical-import-mode.md) in TiDB Lightning, including writing the configuration file and tuning performance.
+このドキュメントでは、設定ファイルの作成やパフォーマンスのチューニングなど、 TiDB Lightningの[論理インポートモード](/tidb-lightning/tidb-lightning-logical-import-mode.md)の使用方法を紹介します。
 
-## Configure and use the logical import mode
+## 論理インポート モードを構成して使用する {#configure-and-use-the-logical-import-mode}
 
-You can use the logical import mode via the following configuration file to import data:
+次の構成ファイルを介して論理インポート モードを使用してデータをインポートできます。
 
 ```toml
 [lightning]
@@ -43,34 +43,34 @@ password = ""
 log-level = "error"
 ```
 
-For the complete configuration file, refer to [TiDB Lightning Configuration](/tidb-lightning/tidb-lightning-configuration.md).
+完全な構成ファイルについては、 [TiDB Lightningコンフィグレーション](/tidb-lightning/tidb-lightning-configuration.md)を参照してください。
 
-## Conflict detection
+## 競合の検出 {#conflict-detection}
 
-Conflicting data refers to two or more records with the same data in the PK or UK column. In the logical import mode, you can configure the strategy for handling conflicting data by setting the [`conflict.strategy`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task) configuration item. Based on the strategy, TiDB Lightning imports data with different SQL statements.
+競合するデータとは、PK 列または UK 列に同じデータを持つ 2 つ以上のレコードを指します。論理インポートモードでは、設定項目[`conflict.strategy`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task)を設定することで、競合するデータを処理するための戦略を設定できます。戦略に基づいて、 TiDB Lightning はさまざまな SQL ステートメントを使用してデータをインポートします。
 
-| Strategy | Default behavior of conflicting data | The corresponding SQL statement |
-| :-- | :-- | :-- |
-| `"replace"` | Replacing existing data with new data. | `REPLACE INTO ...` |
-| `"ignore"` | Keeping existing data and ignoring new data. | `INSERT IGNORE INTO ...` |
-| `"error"` | Pausing the import and reporting an error. | `INSERT INTO ...` |
-|  `""`  | TiDB Lightning does not detect or handle conflicting data. If data with primary and unique key conflicts exists, the subsequent step reports an error. |  None   |
+| 戦略          | 競合するデータのデフォルトの動作                                                                    | 対応するSQL文                 |
+| :---------- | :---------------------------------------------------------------------------------- | :----------------------- |
+| `"replace"` | 既存のデータを新しいデータに置き換えます。                                                               | `REPLACE INTO ...`       |
+| `"ignore"`  | 既存のデータを保持し、新しいデータを無視します。                                                            | `INSERT IGNORE INTO ...` |
+| `"error"`   | インポートを一時停止し、エラーを報告します。                                                              | `INSERT INTO ...`        |
+| `""`        | TiDB Lightning は、競合するデータを検出したり処理したりしません。主キーと一意キーが競合するデータが存在する場合、後続のステップでエラーが報告されます。 | なし                       |
 
-When the strategy is `"error"`, errors caused by conflicting data directly terminates the import task. When the strategy is `"replace"` or `"ignore"`, you can control the maximum tolerant conflicts by configuring [`conflict.threshold`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task). The default value is `9223372036854775807`, which means that almost all errors are tolerant.
+戦略が`"error"`の場合、データの競合によってエラーが発生すると、インポート タスクが直接終了します。戦略が`"replace"`または`"ignore"`の場合、 [`conflict.threshold`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task)を構成することで最大許容競合を制御できます。デフォルト値は`9223372036854775807`で、ほとんどすべてのエラーが許容されることを意味します。
 
-When the strategy is `"ignore"`, conflicting data is recorded in the downstream `conflict_records` table. For further details, see [Error report](/tidb-lightning/tidb-lightning-error-resolution.md#error-report). In this case, you can limit the records by configuring [`conflict.max-record-rows`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task), and conflicting data that exceeds the limit is skipped and not recorded. The default value is `100`.
+ストラテジが`"ignore"`の場合、下流`conflict_records`テーブルには矛盾するデータが記録されます。詳細については、 [エラーレポート](/tidb-lightning/tidb-lightning-error-resolution.md#error-report)を参照してください。この場合、 [`conflict.max-record-rows`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task)を設定することでレコードを制限でき、制限を超える競合するデータはスキップされ、記録されません。デフォルト値は`100`です。
 
-## Performance tuning
+## 性能調整 {#performance-tuning}
 
-- In the logical import mode, the performance of TiDB Lightning largely depends on the write performance of the target TiDB cluster. If the cluster hits a performance bottleneck, refer to [Highly Concurrent Write Best Practices](/best-practices/high-concurrency-best-practices.md).
+-   論理インポート モードでは、 TiDB Lightningのパフォーマンスはターゲット TiDB クラスターの書き込みパフォーマンスに大きく依存します。クラスターがパフォーマンスのボトルネックに達した場合は、 [高度な同時書き込みのベスト プラクティス](/best-practices/high-concurrency-best-practices.md)を参照してください。
 
-- If the target TiDB cluster does not hit a write bottleneck, consider increasing the value of `region-concurrency` in TiDB Lightning configuration. The default value of `region-concurrency` is the number of CPU cores. The meaning of `region-concurrency` is different between the physical import mode and the logical import mode. In the logical import mode, `region-concurrency` is the write concurrency.
+-   ターゲット TiDB クラスターが書き込みボトルネックに遭遇しない場合は、 TiDB Lightning構成の値`region-concurrency`を増やすことを検討してください。デフォルト値の`region-concurrency`は CPU コアの数です。 `region-concurrency`の意味は、物理インポートモードと論理インポートモードで異なります。論理インポート モードでは、書き込み同時実行数は`region-concurrency`です。
 
-    Example configuration:
+    構成例:
 
     ```toml
     [lightning]
     region-concurrency = 32
     ```
 
-- Adjusting the `raftstore.apply-pool-size` and `raftstore.store-pool-size` configuration items in the target TiDB cluster might improve the import speed.
+-   ターゲット TiDB クラスターの`raftstore.apply-pool-size`および`raftstore.store-pool-size`構成項目を調整すると、インポート速度が向上する可能性があります。

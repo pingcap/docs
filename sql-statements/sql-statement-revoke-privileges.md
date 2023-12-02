@@ -3,11 +3,11 @@ title: REVOKE <privileges> | TiDB SQL Statement Reference
 summary: An overview of the usage of REVOKE <privileges> for the TiDB database.
 ---
 
-# `REVOKE <privileges>`
+# <code>REVOKE &#x3C;privileges></code> {#code-revoke-x3c-privileges-code}
 
-This statement removes privileges from an existing user. Executing this statement requires the `GRANT OPTION` privilege and all privileges you revoke.
+このステートメントは、既存のユーザーから権限を削除します。このステートメントを実行するには、 `GRANT OPTION`権限と取り消すすべての権限が必要です。
 
-## Synopsis
+## あらすじ {#synopsis}
 
 ```ebnf+diagram
 GrantStmt ::=
@@ -56,7 +56,7 @@ UserSpecList ::=
     UserSpec ( ',' UserSpec )*
 ```
 
-## Examples
+## 例 {#examples}
 
 ```sql
 mysql> CREATE USER 'newuser' IDENTIFIED BY 'mypassword';
@@ -92,17 +92,17 @@ mysql> SHOW GRANTS FOR 'newuser';
 ERROR 1141 (42000): There is no such grant defined for user 'newuser' on host '%'
 ```
 
-## MySQL compatibility
+## MySQLの互換性 {#mysql-compatibility}
 
-* In TiDB, after the `REVOKE <privileges>` statement is executed successfully, the execution result takes effect immediately on the current connection. Whereas [in MySQL, for some privileges, the execution results take effect only on subsequent connections](https://dev.mysql.com/doc/refman/8.0/en/privilege-changes.html). See [TiDB #39356](https://github.com/pingcap/tidb/issues/39356) for details.
+-   TiDB では、 `REVOKE <privileges>`ステートメントが正常に実行されると、実行結果は現在の接続に即座に反映されます。一方、 [MySQL では、一部の権限については、実行結果は後続の接続でのみ有効になります。](https://dev.mysql.com/doc/refman/8.0/en/privilege-changes.html) 。詳細は[TiDB #39356](https://github.com/pingcap/tidb/issues/39356)を参照してください。
 
-## See also
+## こちらも参照 {#see-also}
 
-* [`GRANT <privileges>`](/sql-statements/sql-statement-grant-privileges.md)
-* [SHOW GRANTS](/sql-statements/sql-statement-show-grants.md)
+-   [`GRANT &#x3C;privileges>`](/sql-statements/sql-statement-grant-privileges.md)
+-   [助成金を表示する](/sql-statements/sql-statement-show-grants.md)
 
 <CustomContent platform="tidb">
 
-* [Privilege Management](/privilege-management.md)
+-   [権限管理](/privilege-management.md)
 
 </CustomContent>

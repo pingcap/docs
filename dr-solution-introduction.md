@@ -3,111 +3,111 @@ title: Overview of TiDB Disaster Recovery Solutions
 summary: Learn about the disaster recovery solutions provided by TiDB, including disaster recovery based on primary and secondary clusters, disaster recovery based on multiple replicas in a single cluster, and disaster recovery based on backup and restore.
 ---
 
-# Overview of TiDB Disaster Recovery Solutions
+# TiDB 災害復旧ソリューションの概要 {#overview-of-tidb-disaster-recovery-solutions}
 
-This document introduces the disaster recovery (DR) solutions provided by TiDB. The organization of this document is as follows:
+このドキュメントでは、TiDB が提供する災害復旧 (DR) ソリューションを紹介します。この文書の構成は次のとおりです。
 
-- Describes the basic concepts in DR.
-- Introduces the architecture of TiDB, TiCDC, and Backup & Restore (BR).
-- Describes the DR solutions provided by TiDB.
-- Compares these DR solutions.
+-   DR の基本概念について説明します。
+-   TiDB、TiCDC、バックアップ &amp; リストア ( BR ) のアーキテクチャを紹介します。
+-   TiDB が提供する DR ソリューションについて説明します。
+-   これらの DR ソリューションを比較します。
 
-## Basic concepts
+## 基本概念 {#basic-concepts}
 
-- RTO (Recovery Time Objective): The time required for the system to recover from a disaster.
-- RPO (Recovery Point Objective): The maximum amount of data loss that the business can tolerate in a disaster.
+-   RTO (目標復旧時間): システムが災害から復旧するのに必要な時間。
+-   RPO (目標復旧時点): 災害時に企業が許容できるデータ損失の最大量。
 
-The following figure illustrates these two concepts:
+次の図は、これら 2 つの概念を示しています。
 
 ![RTO and RPO](/media/dr/rto-rpo.png)
 
-- Error tolerance objective: Because a disaster can affect different regions. In this document, the term error tolerance objective is used to describe the maximum range of a disaster that the system can tolerate.
-- Region: This document focuses on regional DR and "region" mentioned here refers to a geographical area or city.
+-   エラー許容範囲の目標: 災害はさまざまな地域に影響を与える可能性があるため。このドキュメントでは、エラー許容目標という用語は、システムが許容できる災害の最大範囲を説明するために使用されます。
+-   リージョン: このドキュメントは地域の DR に焦点を当てており、ここで言う「地域」とは地理的なエリアまたは都市を指します。
 
-## Component architecture
+## コンポーネントアーキテクチャ {#component-architecture}
 
-Before introducing specific DR solutions, this section introduces the architecture of TiDB components from the perspective of DR, including TiDB, TiCDC, and BR.
+特定の DR ソリューションを紹介する前に、このセクションでは、TiDB、TiCDC、 BRなどの TiDB コンポーネントのアーキテクチャを DR の観点から紹介します。
 
-### TiDB
+### TiDB {#tidb}
 
 ![TiDB architecture](/media/dr/tidb-architecture.png)
 
-TiDB is designed with an architecture of separated computing and storage:
+TiDB は、コンピューティングとstorageを分離したアーキテクチャで設計されています。
 
-- TiDB is the SQL computing layer of the system.
-- TiKV is the storage layer of the system, and is a row-based storage engine. [Region](/glossary.md#regionpeerraft-group) is the basic unit for scheduling data in TiKV. A Region is a collection of sorted rows of data. The data in a Region is saved in at least three replicas, and data changes are replicated in the log layer through the Raft protocol.
-- An optional component, TiFlash is a columnar storage engine that can be used to speed up analytical queries. Data is replicated from TiKV to TiFlash through the learner role in a Raft group.
+-   TiDB は、システムの SQL コンピューティングレイヤーです。
+-   TiKV はシステムのstorageレイヤーであり、行ベースのstorageエンジンです。 [リージョン](/glossary.md#regionpeerraft-group)は、TiKV でデータをスケジュールするための基本単位です。リージョンは、ソートされたデータ行のコレクションです。リージョン内のデータは少なくとも 3 つのレプリカに保存され、データの変更はRaftプロトコルを通じてログレイヤーに複製されます。
+-   オプションのコンポーネントTiFlash は、分析クエリを高速化するために使用できるカラムナ型storageエンジンです。データは、 Raftグループの学習者の役割を通じて TiKV からTiFlashに複製されます。
 
-TiDB stores three complete data replicas. Therefore, it is naturally capable of DR based on multiple replicas. At the same time, because TiDB uses Raft logs to replicate transaction logs, it can also provide DR based on transaction log replication.
+TiDB は 3 つの完全なデータ レプリカを保存します。したがって、当然のことながら、複数のレプリカに基づいた DR が可能です。同時に、TiDB はRaftログを使用してトランザクション ログをレプリケートするため、トランザクション ログ レプリケーションに基づいた DR も提供できます。
 
-### TiCDC
+### TiCDC {#ticdc}
 
 ![TiCDC architecture](/media/ticdc/cdc-architecture.png)
 
-As an incremental data replication tool for TiDB, TiCDC is highly available through PD's etcd. TiCDC pulls data changes from TiKV nodes through multiple Capture processes, and then sorts and merges data changes internally. After that, TiCDC replicates data to multiple downstream systems by using multiple replication tasks. In the preceding architecture diagram:
+TiDB の増分データ レプリケーション ツールとして、TiCDC は PD の etcd を通じて高可用性を備えています。 TiCDC は、複数のキャプチャ プロセスを通じて TiKV ノードからデータ変更を取得し、内部でデータ変更を並べ替えてマージします。その後、TiCDC は複数のレプリケーション タスクを使用して、複数のダウンストリーム システムにデータをレプリケートします。前述のアーキテクチャ図では次のようになります。
 
-- TiKV server: sends data changes in the upstream to TiCDC nodes. When TiCDC nodes find the change logs not continuous, they will actively request the TiKV server to provide change logs.
-- TiCDC: runs multiple Capture processes. Each Capture process pulls part of the KV change logs, and sorts the pulled data before replicating the changes to different downstream systems.
+-   TiKVサーバー: アップストリームのデータ変更を TiCDC ノードに送信します。 TiCDC ノードは、変更ログが連続していないことを検出すると、TiKVサーバーに変更ログを提供するよう積極的に要求します。
+-   TiCDC: 複数のキャプチャ プロセスを実行します。各キャプチャ プロセスは、KV 変更ログの一部を取得し、変更を別のダウンストリーム システムにレプリケートする前に、取得したデータを並べ替えます。
 
-It can be seen from the preceding architecture diagram that, the architecture of TiCDC is similar to that of a transactional log replication system, but with better scalability and merits of logical data replication. Therefore, TiCDC is a good supplementation for TiDB in the DR scenario.
+前述のアーキテクチャ図から、TiCDC のアーキテクチャはトランザクション ログ レプリケーション システムのアーキテクチャに似ていますが、より優れたスケーラビリティと論理データ レプリケーションのメリットを備えていることがわかります。したがって、TiCDC は、DR シナリオにおいて TiDB を補完するのに適しています。
 
-### BR
+### BR {#br}
 
 ![BR architecture](/media/br/br-snapshot-arch.png)
 
-As a backup and restore tool for TiDB, BR can perform full snapshot backup based on a specific time point and continuous log backup of a TiDB cluster. When the TiDB cluster is completely unavailable, you can restore the backup files in a new cluster. BR is usually considered the last resort for data security.
+BR は、TiDB のバックアップおよび復元ツールとして、特定の時点に基づいた完全なスナップショット バックアップと、TiDB クラスターの継続的なログ バックアップを実行できます。 TiDB クラスターが完全に使用できなくなった場合は、新しいクラスターにバックアップ ファイルを復元できます。 BRは通常、データ セキュリティの最後の手段とみなされます。
 
-## Solutions introduction
+## ソリューションの紹介 {#solutions-introduction}
 
-### DR solution based on primary and secondary clusters
+### プライマリ クラスタとセカンダリ クラスタに基づく DR ソリューション {#dr-solution-based-on-primary-and-secondary-clusters}
 
 ![Primary-secondary cluster DR](/media/dr/ticdc-dr.png)
 
-The preceding architecture contains two TiDB clusters, cluster 1 runs in region 1 and handles read and write requests. Cluster 2 runs in region 2 and works as the secondary cluster. When cluster 1 encounters a disaster, cluster 2 takes over services. Data changes are replicated between the two clusters using TiCDC. This architecture is also called the "1:1" DR solution.
+前述のアーキテクチャには 2 つの TiDB クラスターが含まれており、クラスター 1 はリージョン 1 で実行され、読み取りおよび書き込みリクエストを処理します。クラスタ2 はリージョン 2 で実行され、セカンダリ クラスターとして機能します。クラスター 1 で障害が発生すると、クラスター 2 がサービスを引き継ぎます。データ変更は、TiCDC を使用して 2 つのクラスター間で複製されます。このアーキテクチャは「1:1」DR ソリューションとも呼ばれます。
 
-This architecture is simple and highly available with region-level error tolerance objective, scalable write capability, second-level RPO, and minute-level RTO or even lower. If a production system does not require the RPO to be zero, this DR solution is recommended. For more information about this solution, see [DR solution based on primary and secondary clusters](/dr-secondary-cluster.md).
+このアーキテクチャはシンプルで可用性が高く、領域レベルのエラー許容目標、スケーラブルな書き込み機能、第 2 レベルの RPO、分単位以下の RTO を備えています。本番システムで RPO をゼロにする必要がない場合は、この DR ソリューションをお勧めします。このソリューションの詳細については、 [プライマリ クラスタとセカンダリ クラスタに基づく DR ソリューション](/dr-secondary-cluster.md)を参照してください。
 
-### DR solution based on multiple replicas in a single cluster
+### 単一クラスター内の複数のレプリカに基づく DR ソリューション {#dr-solution-based-on-multiple-replicas-in-a-single-cluster}
 
 ![Multi-replica cluster DR](/media/dr/multi-replica-dr.png)
 
-In the preceding architecture, each region has two complete data replicas located in different available zones (AZs). The entire cluster is across three regions. Region 1 is the primary region that handles read and write requests. When region 1 is completely unavailable due to a disaster, region 2 can be used as a DR region. Region 3 is a replica used to meet the majority protocol. This architecture is also called the "2-2-1" solution.
+前述のアーキテクチャでは、各リージョンには、異なる利用可能なゾーン (AZ) に配置された 2 つの完全なデータ レプリカがあります。クラスター全体は 3 つのリージョンにまたがっています。リージョン1 は、読み取りおよび書き込みリクエストを処理するプライマリ リージョンです。災害によりリージョン 1 が完全に使用できなくなった場合、リージョン 2 を DR リージョンとして使用できます。リージョン3 は、多数派プロトコルを満たすために使用されるレプリカです。このアーキテクチャは「2-2-1」ソリューションとも呼ばれます。
 
-This solution provides region-level error tolerance, scalable write capability, zero RPO, and minute-level RTO or even lower. If a production system requires zero RPO, it is recommended to use this DR solution. For more information about this solution, see [DR solution based on multiple replicas in a single cluster](/dr-multi-replica.md).
+このソリューションは、領域レベルのエラー耐性、スケーラブルな書き込み機能、ゼロ RPO、分単位以下の RTO を提供します。本番システムでゼロ RPO が必要な場合は、この DR ソリューションを使用することをお勧めします。このソリューションの詳細については、 [単一クラスター内の複数のレプリカに基づく DR ソリューション](/dr-multi-replica.md)を参照してください。
 
-### DR solution based on TiCDC and multiple replicas
+### TiCDC と複数のレプリカに基づく DR ソリューション {#dr-solution-based-on-ticdc-and-multiple-replicas}
 
-The preceding two solutions provide regional DR. However, they fail to work if multiple regions are unavailable at the same time. If your system is very important and requires error tolerance objective to cover multiple regions, you need to combine these two solutions.
+前述の 2 つのソリューションは、地域的な DR を提供します。ただし、複数のリージョンが同時に利用できない場合は機能しません。システムが非常に重要であり、複数の領域をカバーするエラー許容目標が必要な場合は、これら 2 つのソリューションを組み合わせる必要があります。
 
 ![TiCDC-based multi-replica cluster DR](/media/dr/ticdc-multi-replica-dr.png)
 
-In the preceding architecture, there are two TiDB clusters. Cluster 1 has five replicas that span three regions. Region 1 contains two replicas that work as the primary region and handle write requests. Region 2 has two replicas that work as the DR region for region 1. This region provides read services that are not sensitive to latency. Located in Region 3, the last replica is used for voting.
+前述のアーキテクチャには、2 つの TiDB クラスターがあります。クラスタ1 には、3 つのリージョンにまたがる 5 つのレプリカがあります。リージョン1 には、プライマリ リージョンとして機能し、書き込みリクエストを処理する 2 つのレプリカが含まれています。リージョン2 には、リージョン 1 の DR リージョンとして機能する 2 つのレプリカがあります。このリージョンは、レイテンシーの影響を受けない読み取りサービスを提供します。リージョン3 に位置する最後のレプリカは投票に使用されます。
 
-As the DR cluster for region 1 and region 2, cluster 2 runs in region 3 and contains three replicas. TiCDC replicates data from cluster 1. This architecture looks complicated but it can increase the error tolerance objective to multiple regions. If the RPO is not required to be zero when multiple regions are unavailable at the same time, this architecture is a good choice. This architecture is also called the "2-2-1:1" solution.
+リージョン 1 とリージョン 2 の DR クラスターとして、クラスター 2 はリージョン 3 で実行され、3 つのレプリカが含まれています。 TiCDC はクラスター 1 からデータをレプリケートします。このアーキテクチャは複雑に見えますが、複数のリージョンに対するエラー耐性の目標を高めることができます。複数のリージョンが同時に使用できないときに RPO をゼロにする必要がない場合は、このアーキテクチャが適しています。このアーキテクチャは「2-2-1:1」ソリューションとも呼ばれます。
 
-Of course, if the error tolerance objective is multiple regions and RPO must be zero, you can also consider creating a cluster with at least nine replicas spanning five regions. This architecture is also called the "2-2-2-2-1" solution.
+もちろん、エラー許容範囲の目標が複数のリージョンであり、RPO をゼロにする必要がある場合は、5 つのリージョンにまたがる少なくとも 9 つのレプリカを持つクラスターの作成を検討することもできます。このアーキテクチャは、「2-2-2-2-1」ソリューションとも呼ばれます。
 
-### DR solution based on BR
+### BRをベースとしたDRソリューション {#dr-solution-based-on-br}
 
 ![BR-based cluster DR](/media/dr/br-dr.png)
 
-In this architecture, TiDB cluster 1 is deployed in region 1. BR regularly backs up the data of cluster 1 to region 2, and continuously backs up the data change logs of this cluster to region 2 as well. When region 1 encounters a disaster and cluster 1 cannot be recovered, you can use the backup data and data change logs to restore a new cluster (cluster 2) in region 2 to provide services.
+このアーキテクチャでは、TiDB クラスター 1 がリージョン 1 にデプロイされていますBR はクラスター 1 のデータをリージョン 2 に定期的にバックアップし、このクラスターのデータ変更ログもリージョン 2 に継続的にバックアップします。リージョン 1 で障害が発生し、クラスター 1 を回復できない場合、バックアップ データとデータ変更ログを使用してリージョン 2 に新しいクラスター (クラスター 2) を復元し、サービスを提供できます。
 
-The DR solution based on BR provides an RPO lower than 5 minutes and an RTO that varies with the size of the data to be restored. For BR v6.5.0, you can refer to [Performance and impact of snapshot restore](/br/br-snapshot-guide.md#performance-and-impact-of-snapshot-restore) and [Performance and impact of PITR](/br/br-pitr-guide.md#performance-and-impact-of-pitr) to learn about the restore speed. Usually, the feature of backup across regions is considered the last resort of data security and also a must-have solution for most systems. For more information about this solution, see [DR solution based on BR](/dr-backup-restore.md).
+BRに基づく DR ソリューションは、5 分未満の RPO と、復元するデータのサイズに応じて変化する RTO を提供します。 BR v6.5.0 の場合、復元速度については[スナップショット復元のパフォーマンスと影響](/br/br-snapshot-guide.md#performance-and-impact-of-snapshot-restore)と[PITRのパフォーマンスと影響](/br/br-pitr-guide.md#performance-and-impact-of-pitr)を参照してください。通常、リージョン間でのバックアップ機能はデータ セキュリティの最後の手段とみなされ、ほとんどのシステムにとって必須のソリューションでもあります。このソリューションの詳細については、 [BRをベースとしたDRソリューション](/dr-backup-restore.md)を参照してください。
 
-Meanwhile, starting from v6.5.0, BR supports [restoring a TiDB cluster from EBS volume snapshots](https://docs.pingcap.com/tidb-in-kubernetes/stable/restore-from-aws-s3-by-snapshot). If your cluster is running on Kubernetes and you want to restore the cluster as fast as possible without affecting the cluster, you can use this feature to reduce the RTO of your system.
+一方、v6.5.0 以降、 BR は[EBS ボリューム スナップショットから TiDB クラスターを復元する](https://docs.pingcap.com/tidb-in-kubernetes/stable/restore-from-aws-s3-by-snapshot)をサポートします。クラスターが Kubernetes 上で実行されており、クラスターに影響を与えずにできるだけ早くクラスターを復元したい場合は、この機能を使用してシステムの RTO を短縮できます。
 
-### Other DR solutions
+### その他の DR ソリューション {#other-dr-solutions}
 
-Besides the preceding DR solutions, if zero RPO is a must in the same-city dual-center scenario, you can also use the DR-AUTO sync solution. For more information, see [Two Data Centers in One City Deployment](/two-data-centers-in-one-city-deployment.md).
+前述の DR ソリューションに加えて、同じ都市のデュアルセンター シナリオでゼロ RPO が必須の場合は、DR-AUTO 同期ソリューションを使用することもできます。詳細については、 [1 つの地域に展開された 2 つのデータ センター](/two-data-centers-in-one-city-deployment.md)を参照してください。
 
-## Solution comparison
+## ソリューションの比較 {#solution-comparison}
 
-This section compares the DR solutions mentioned in this document, based on which you can select an appropriate DR solution to satisfy your business needs.
+このセクションでは、このドキュメントで説明されている DR ソリューションを比較します。これに基づいて、ビジネス ニーズを満たす適切な DR ソリューションを選択できます。
 
-| DR solution | TCO | Error tolerance objective | RPO | RTO | Network latency requirement | Target system |
-| --- | --- | --- | --- | --- | --- | --- |
-| DR solution based on multiple replicas in a single cluster (2-2-1) | High | Single region | 0 | Minute level | Less than 30 ms between regions | Production systems that have specific requirements on DR and response (RPO = 0) |
-| DR solution based on primary and secondary clusters (1:1)  | Medium | Single region | Less than 10 seconds | Less than 5 minutes | Less than 100 ms between regions | Production systems that have specific requirements on DR and response (RPO > 0) |
-| DR solution based on TiCDC and multiple replicas (2-2-1:1) | High | Multiple regions | Less than 10 seconds | Less than 5 minutes | Less than 30 ms for regions that use multiple replicas for DR. Less than 100 ms for the third region and other regions | Production systems that have strict requirements on DR and response |
-| DR solution based on BR | Low | Single region | Less than 5 minutes |  Hour level | No special requirement | Production systems that accept an RPO of less than 5 minutes and an RTO of up to an hour |
+| DRソリューション                                   | TCO  | エラー許容範囲の目標 | RPO   | RTO   | ネットワークレイテンシー要件                                                 | ターゲットシステム                              |
+| ------------------------------------------- | ---- | ---------- | ----- | ----- | -------------------------------------------------------------- | -------------------------------------- |
+| 単一クラスター内の複数のレプリカに基づく DR ソリューション (2-2-1)     | 高い   | 単一領域       | 0     | 分レベル  | リージョン間は 30 ミリ秒未満                                               | DR と対応に関して特定の要件がある運用システム (RPO = 0)     |
+| プライマリ クラスタとセカンダリ クラスタ (1:1) に基づく DR ソリューション | 中くらい | 単一領域       | 10秒未満 | 5分未満  | リージョン間は 100 ミリ秒未満                                              | DR と対応に関して特定の要件がある運用システム (RPO &gt; 0)  |
+| TiCDC と複数のレプリカ (2-2-1:1) に基づく DR ソリューション    | 高い   | 複数の地域      | 10秒未満 | 5分未満  | DR に複数のレプリカを使用するリージョンの場合は 30 ミリ秒未満。 3 番目の領域とその他の領域では 100 ミリ秒未満 | DR と対応に厳しい要件がある本番システム                  |
+| BRをベースとしたDRソリューション                          | 低い   | 単一領域       | 5分未満  | 時間レベル | 特別な要件はありません                                                    | 5 分未満の RPO と最大 1 時間の RTO を受け入れる実稼働システム |

@@ -3,30 +3,30 @@ title: ALTER TABLE ... COMPACT
 summary: An overview of the usage of ALTER TABLE ... COMPACT for the TiDB database.
 ---
 
-# ALTER TABLE ... COMPACT
+# ALTER TABLE ... コンパクト {#alter-table-compact}
 
-To enhance read performance and reduce disk usage, TiDB automatically schedules data compaction on storage nodes in the background. During the compaction, storage nodes rewrite physical data, including cleaning up deleted rows and merging multiple versions of data caused by updates. The `ALTER TABLE ... COMPACT` statement allows you to initiate compaction for a specific table immediately, without waiting until compaction is triggered in the background.
+読み取りパフォーマンスを向上させ、ディスク使用量を削減するために、TiDB はバックグラウンドでstorageノード上でデータ圧縮を自動的にスケジュールします。圧縮中に、storageノードは、削除された行のクリーンアップや、更新によって生じた複数のバージョンのデータのマージなど、物理データを再書き込みします。 `ALTER TABLE ... COMPACT`ステートメントを使用すると、バックグラウンドで圧縮がトリガーされるまで待たずに、特定のテーブルの圧縮をすぐに開始できます。
 
-The execution of this statement does not block existing SQL statements or affect any TiDB features, such as transactions, DDL, and GC. Data that can be selected via SQL statements will not be changed either. Executing this statement consumes some IO and CPU resources. Be careful to choose an appropriate timing for execution, such as when resources are available, to avoid negative impact on the business.
+このステートメントの実行は、既存の SQL ステートメントをブロックしたり、トランザクション、DDL、GC などの TiDB 機能に影響を与えたりすることはありません。 SQL ステートメントで選択できるデータも変更されません。このステートメントを実行すると、一部の IO リソースと CPU リソースが消費されます。ビジネスへの悪影響を避けるために、リソースが利用可能な場合など、実行の適切なタイミングを選択するように注意してください。
 
-The compaction statement will be finished and returned when all replicas of a table are compacted. During the execution process, you can safely interrupt the compaction by executing the [`KILL`](/sql-statements/sql-statement-kill.md) statement. Interrupting a compaction does not break data consistency or lead to data loss, nor does it affect subsequent manual or background compactions.
+テーブルのすべてのレプリカが圧縮されると、圧縮ステートメントは終了して返されます。実行プロセス中に、 [`KILL`](/sql-statements/sql-statement-kill.md)ステートメントを実行することで圧縮を安全に中断できます。圧縮を中断しても、データの一貫性が損なわれたり、データの損失が発生したりすることはなく、その後の手動またはバックグラウンドの圧縮にも影響しません。
 
-This data compaction statement is currently supported only for TiFlash replicas, not for TiKV replicas.
+このデータ圧縮ステートメントは現在、 TiFlashレプリカでのみサポートされており、TiKV レプリカではサポートされていません。
 
-## Synopsis
+## あらすじ {#synopsis}
 
 ```ebnf+diagram
 AlterTableCompactStmt ::=
     'ALTER' 'TABLE' TableName 'COMPACT' ( 'PARTITION' PartitionNameList )? ( 'TIFLASH' 'REPLICA' )?
 ```
 
-Since v6.2.0, the `TIFLASH REPLICA` part of the syntax can be omitted. When omitted, the semantic of the statement remains unchanged, and takes effect only for TiFlash.
+v6.2.0 以降、構文の`TIFLASH REPLICA`部分は省略できるようになりました。省略した場合、ステートメントのセマンティクスは変更されず、 TiFlashに対してのみ有効になります。
 
-## Examples
+## 例 {#examples}
 
-### Compact TiFlash replicas in a table
+### テーブル内のコンパクトTiFlashレプリカ {#compact-tiflash-replicas-in-a-table}
 
-The following takes an `employees` table as an example, which has 4 partitions with 2 TiFlash replicas:
+以下では、2 つのTiFlashレプリカを持つ 4 つのパーティションを持つ`employees`テーブルを例として取り上げます。
 
 ```sql
 CREATE TABLE employees (
@@ -43,17 +43,15 @@ PARTITION BY LIST (store_id) (
 ALTER TABLE employees SET TIFLASH REPLICA 2;
 ```
 
-You can execute the following statement to immediately initiate the compaction for the 2 TiFlash replicas for all partitions in the `employees` table:
-
-{{< copyable "sql" >}}
+次のステートメントを実行すると、 `employees`テーブル内のすべてのパーティションの 2 つのTiFlashレプリカの圧縮をすぐに開始できます。
 
 ```sql
 ALTER TABLE employees COMPACT TIFLASH REPLICA;
 ```
 
-### Compact TiFlash replicas of specified partitions in a table
+### テーブル内の指定されたパーティションのコンパクトTiFlashレプリカ {#compact-tiflash-replicas-of-specified-partitions-in-a-table}
 
-The following takes an `employees` table as an example, which has 4 partitions with 2 TiFlash replicas:
+以下では、2 つのTiFlashレプリカを持つ 4 つのパーティションを持つ`employees`テーブルを例として取り上げます。
 
 ```sql
 CREATE TABLE employees (
@@ -71,30 +69,29 @@ PARTITION BY LIST (store_id) (
 ALTER TABLE employees SET TIFLASH REPLICA 2;
 ```
 
-You can execute the following statement to immediately initiate the compaction for the 2 TiFlash replicas of the `pNorth` and `pEast` partitions in the `employees` table:
+次のステートメントを実行すると、テーブル`employees`のパーティション`pNorth`と`pEast`の 2 つのTiFlashレプリカの圧縮をただちに開始できます。
 
 ```sql
 ALTER TABLE employees COMPACT PARTITION pNorth, pEast TIFLASH REPLICA;
 ```
 
-## Concurrency
+## 同時実行性 {#concurrency}
 
-The `ALTER TABLE ... COMPACT` statement compacts all replicas in a table simultaneously.
+`ALTER TABLE ... COMPACT`ステートメントは、テーブル内のすべてのレプリカを同時に圧縮します。
 
-To avoid a significant impact on online business, each TiFlash instance only compacts data in one table at a time by default (except for the compaction triggered in the background). This means that if you execute the `ALTER TABLE ... COMPACT` statement on multiple tables at the same time, their executions will be queued on the same TiFlash instance, rather than being executed simultaneously.
+オンライン ビジネスへの重大な影響を避けるため、各TiFlashインスタンスは、デフォルトで一度に 1 つのテーブルのデータのみを圧縮します (バックグラウンドでトリガーされる圧縮を除く)。これは、複数のテーブルで`ALTER TABLE ... COMPACT`ステートメントを同時に実行すると、それらの実行は同時に実行されるのではなく、同じTiFlashインスタンスのキューに入れられることを意味します。
 
 <CustomContent platform="tidb">
 
-To obtain greater table-level concurrency with higher resource usage, you can modify the TiFlash configuration [`manual_compact_pool_size`](/tiflash/tiflash-configuration.md). For example, when `manual_compact_pool_size` is set to 2, compaction for 2 tables can be processed simultaneously.
+リソース使用量を増やしてテーブルレベルの同時実行性を高めるには、 TiFlash構成を変更します[`manual_compact_pool_size`](/tiflash/tiflash-configuration.md) 。たとえば、 `manual_compact_pool_size`を 2 に設定すると、2 つのテーブルのコンパクションを同時に処理できます。
 
 </CustomContent>
 
-## Observe data compaction progress
+## データ圧縮の進行状況を観察する {#observe-data-compaction-progress}
 
-You can observe the progress of data compaction or determine whether to initiate compaction for a table by checking the `TOTAL_DELTA_ROWS` column in the `INFORMATION_SCHEMA.TIFLASH_TABLES` table. The larger the value of `TOTAL_DELTA_ROWS`, the more data that can be compacted. If `TOTAL_DELTA_ROWS` is `0`, all data in the table is in the best state and does not need to be compacted.
+`INFORMATION_SCHEMA.TIFLASH_TABLES`テーブルの`TOTAL_DELTA_ROWS`列をチェックすることで、データ圧縮の進行状況を観察したり、テーブルの圧縮を開始するかどうかを決定したりできます。 `TOTAL_DELTA_ROWS`の値が大きいほど、より多くのデータを圧縮できます。 `TOTAL_DELTA_ROWS`が`0`の場合、テーブル内のすべてのデータは最良の状態にあり、圧縮する必要はありません。
 
-<details>
-  <summary>Example: Check the compaction state of a non-partitioned table</summary>
+<details><summary>例: 非パーティションテーブルの圧縮状態を確認する</summary>
 
 ```sql
 USE test;
@@ -139,8 +136,7 @@ SELECT TOTAL_DELTA_ROWS, TOTAL_STABLE_ROWS FROM INFORMATION_SCHEMA.TIFLASH_TABLE
 
 </details>
 
-<details>
-  <summary>Example: Check the compaction state of a partitioned table</summary>
+<details><summary>例:パーティションテーブルの圧縮状態を確認する</summary>
 
 ```sql
 USE test;
@@ -191,23 +187,23 @@ SELECT PARTITION_NAME, TOTAL_DELTA_ROWS, TOTAL_STABLE_ROWS
 
 </details>
 
-> **Note:**
+> **注記：**
 >
-> - If data is updated during compaction, `TOTAL_DELTA_ROWS` might still be a non-zero value after compaction is done. This is normal and indicates that these updates have not been compacted. To compact these updates, execute the `ALTER TABLE ... COMPACT` statement again.
+> -   圧縮中にデータが更新された場合、圧縮が完了した後も`TOTAL_DELTA_ROWS`ゼロ以外の値になる可能性があります。これは正常であり、これらの更新が圧縮されていないことを示します。これらの更新を圧縮するには、 `ALTER TABLE ... COMPACT`ステートメントを再度実行します。
 >
-> - `TOTAL_DELTA_ROWS` indicates the data version, not the number of rows. For example, if you insert a row and then delete it, `TOTAL_DELTA_ROWS` will increase by 2.
+> -   `TOTAL_DELTA_ROWS`は行数ではなく、データのバージョンを示します。たとえば、行を挿入して削除すると、 `TOTAL_DELTA_ROWS` 2 ずつ増加します。
 
-## Compatibility
+## 互換性 {#compatibility}
 
-### MySQL compatibility
+### MySQLの互換性 {#mysql-compatibility}
 
-The `ALTER TABLE ... COMPACT` syntax is TiDB specific, which is an extension to the standard SQL syntax. Although there is no equivalent MySQL syntax, you can still execute this statement by using MySQL clients or various database drivers that comply with the MySQL protocol.
+`ALTER TABLE ... COMPACT`構文は TiDB 固有であり、標準 SQL 構文の拡張です。同等の MySQL 構文はありませんが、MySQL クライアントまたは MySQL プロトコルに準拠するさまざまなデータベース ドライバーを使用してこのステートメントを実行できます。
 
-### TiDB Binlog and TiCDC compatibility
+### TiDB Binlogと TiCDC の互換性 {#tidb-binlog-and-ticdc-compatibility}
 
-The `ALTER TABLE ... COMPACT` statement does not result in logical data changes and are therefore not replicated to downstream by TiDB Binlog or TiCDC.
+`ALTER TABLE ... COMPACT`ステートメントは論理データの変更をもたらさないため、TiDB Binlogまたは TiCDC によってダウンストリームにレプリケートされません。
 
-## See also
+## こちらも参照 {#see-also}
 
-- [ALTER TABLE](/sql-statements/sql-statement-alter-table.md)
-- [KILL TIDB](/sql-statements/sql-statement-kill.md)
+-   [他の机](/sql-statements/sql-statement-alter-table.md)
+-   [タイブを殺す](/sql-statements/sql-statement-kill.md)

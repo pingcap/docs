@@ -3,90 +3,80 @@ title: The Blocklist of Optimization Rules and Expression Pushdown
 summary: Learn about the blocklist to control the optimization rules and the behavior of expression pushdown.
 ---
 
-# The Blocklist of Optimization Rules and Expression Pushdown
+# 最適化ルールと式プッシュダウンのブロックリスト {#the-blocklist-of-optimization-rules-and-expression-pushdown}
 
-This document introduces how to use the blocklist of optimization rules and the blocklist of expression pushdown to control the behavior of TiDB.
+このドキュメントでは、最適化ルールのブロックリストと式プッシュダウンのブロックリストを使用して TiDB の動作を制御する方法を紹介します。
 
-## The blocklist of optimization rules
+## 最適化ルールのブロックリスト {#the-blocklist-of-optimization-rules}
 
-The blocklist of optimization rules is one way to tune optimization rules, mainly used to manually disable some optimization rules.
+最適化ルールのブロックリストは、最適化ルールを調整する 1 つの方法であり、主に一部の最適化ルールを手動で無効にするために使用されます。
 
-### Important optimization rules
+### 重要な最適化ルール {#important-optimization-rules}
 
-|**Optimization Rule**|**Rule Name**|**Description**|
-| :--- | :--- | :--- |
-| Column pruning | column_prune | One operator will prune the column if it is not needed by the upper executor. |
-| Decorrelate subquery | decorrelate | Tries to rewrite the correlated subquery to non-correlated join or aggregation. |
-| Aggregation elimination | aggregation_eliminate | Tries to remove unnecessary aggregation operators from the execution plan. |
-| Projection elimination | projection_eliminate | Removes unnecessary projection operators from the execution plan. |
-| Max/Min elimination | max_min_eliminate | Rewrites some max/min functions in aggregation to the `order by` + `limit 1` form. |
-| Predicate pushdown | predicate_push_down | Tries to push predicates down to the operator that is closer to the data source. |
-| Outer join elimination | outer_join_eliminate | Tries to remove the unnecessary left join or right join from the execution plan. |
-| Partition pruning | partition_processor | Prunes partitions which are rejected by the predicates and rewrite partitioned table query to the `UnionAll + Partition Datasource` form. |
-| Aggregation pushdown | aggregation_push_down | Tries to push aggregations down to their children. |
-| TopN pushdown | topn_push_down | Tries to push the TopN operator to the place closer to the data source. |
-| Join reorder | join_reorder | Decides the order of multi-table joins. |
-| Derive TopN or Limit from window functions | derive_topn_from_window | Derives the TopN or Limit operator from window functions. |
+| **最適化ルール**                     | **ルール名**              | **説明**                                                                                |
+| :----------------------------- | :-------------------- | :------------------------------------------------------------------------------------ |
+| カラム刈り                          | 列プルーン                 | 上位の実行者が列を必要としない場合、1 人のオペレーターが列をプルーニングします。                                             |
+| サブクエリの相関関係を解除する                | 相関関係を解除する             | 相関サブクエリを非相関結合または集計に書き換えようとします。                                                        |
+| 集計の除去                          | aggregation_eliminate | 実行計画から不要な集計演算子を削除しようとします。                                                             |
+| 突起の除去                          | 投影_削除                 | 実行計画から不要な射影演算子を削除します。                                                                 |
+| 最大/最小の消去                       | max_min_eliminate     | 集計内のいくつかの最大/最小関数を`order by` + `limit 1`形式に書き換えます。                                     |
+| 述語のプッシュダウン                     | predicate_push_down   | 述語をデータ ソースに近い演算子にプッシュしようとします。                                                         |
+| 外部結合の削除                        | アウタージョインエリミネート        | 実行計画から不要な左結合または右結合を削除しようとします。                                                         |
+| パーティションのプルーニング                 | パーティションプロセッサ          | 述語によって拒否されたパーティションをプルーニングし、パーティションテーブルクエリを`UnionAll + Partition Datasource`形式に書き換えます。 |
+| 集計プッシュダウン                      | aggregation_push_down | 集約を子にプッシュしようとします。                                                                     |
+| トップNプッシュダウン                    | トップン_プッシュ_ダウン         | TopN 演算子をデータ ソースに近い場所にプッシュしようとします。                                                    |
+| 結合の再注文                         | 参加_再注文                | 複数テーブルの結合の順序を決定します。                                                                   |
+| ウィンドウ関数から TopN または Limit を導出する | 派生_topn_from_window   | ウィンドウ関数から TopN または Limit 演算子を導出します。                                                   |
 
-### Disable optimization rules
+### 最適化ルールを無効にする {#disable-optimization-rules}
 
-You can use the blocklist of optimization rules to disable some of them if some rules lead to a sub-optimal execution plan for special queries.
+一部のルールが特殊なクエリの実行プランを最適化しない場合は、最適化ルールのブロックリストを使用してルールの一部を無効にすることができます。
 
-#### Usage
+#### 使用法 {#usage}
 
-> **Note:**
+> **注記：**
 >
-> All the following operations need the `super privilege` privilege of the database. Each optimization rule has a name. For example, the name of column pruning is `column_prune`. The names of all optimization rules can be found in the second column of the table [Important Optimization Rules](#important-optimization-rules).
+> 以下のすべての操作には、データベースの`super privilege`権限が必要です。各最適化ルールには名前があります。たとえば、列枝刈りの名前は`column_prune`です。すべての最適化ルールの名前は、表[重要な最適化ルール](#important-optimization-rules)の 2 番目の列にあります。
 
-- If you want to disable some rules, write its name to the `mysql.opt_rule_blacklist` table. For example:
-
-    {{< copyable "sql" >}}
+-   一部のルールを無効にしたい場合は、その名前を`mysql.opt_rule_blacklist`テーブルに書き込みます。例えば：
 
     ```sql
     INSERT INTO mysql.opt_rule_blacklist VALUES("join_reorder"), ("topn_push_down");
     ```
 
-    Executing the following SQL statement can make the above operation take effect immediately. The effective range includes all old connections of the corresponding TiDB server:
-
-    {{< copyable "sql" >}}
+    次の SQL ステートメントを実行すると、上記の操作がすぐに有効になります。有効範囲には、対応する TiDBサーバーの古い接続がすべて含まれます。
 
     ```sql
     admin reload opt_rule_blacklist;
     ```
 
-    > **Note:**
+    > **注記：**
     >
-    > `admin reload opt_rule_blacklist` only takes effect on the TiDB server where the above statement has been run. If you want all TiDB servers of the cluster to take effect, run this command on each TiDB server.
+    > `admin reload opt_rule_blacklist`上記のステートメントが実行された TiDBサーバーでのみ有効です。クラスターのすべての TiDB サーバーを有効にする場合は、各 TiDBサーバーでこのコマンドを実行します。
 
-- If you want to re-enable a rule, delete the corresponding data in the table, and then run the `admin reload` statement:
-
-    {{< copyable "sql" >}}
+-   ルールを再度有効にする場合は、テーブル内の対応するデータを削除してから、 `admin reload`ステートメントを実行します。
 
     ```sql
     DELETE FROM mysql.opt_rule_blacklist WHERE name IN ("join_reorder", "topn_push_down");
     ```
 
-    {{< copyable "sql" >}}
-
     ```sql
     admin reload opt_rule_blacklist;
     ```
 
-## The blocklist of expression pushdown
+## 式プッシュダウンのブロックリスト {#the-blocklist-of-expression-pushdown}
 
-The blocklist of expression pushdown is one way to tune the expression pushdown, mainly used to manually disable some expressions of some specific data types.
+式プッシュダウンのブロックリストは式プッシュダウンを調整する 1 つの方法であり、主に特定のデータ型の一部の式を手動で無効にするために使用されます。
 
-### Expressions that are supported to be pushed down
+### プッシュダウンがサポートされている式 {#expressions-that-are-supported-to-be-pushed-down}
 
-For more information about the expressions that are supported to be pushed down, see [Supported expressions for pushdown to TiKV](/functions-and-operators/expressions-pushed-down.md#supported-expressions-for-pushdown-to-tikv).
+プッシュダウンがサポートされている式の詳細については、 [TiKV へのプッシュダウンでサポートされる式](/functions-and-operators/expressions-pushed-down.md#supported-expressions-for-pushdown-to-tikv)を参照してください。
 
-### Disable the pushdown of specific expressions
+### 特定の式のプッシュダウンを無効にする {#disable-the-pushdown-of-specific-expressions}
 
-When you get wrong results due to the expression pushdown, you can use the blocklist to make a quick recovery for the application. More specifically, you can add some of the supported functions or operators to the `mysql.expr_pushdown_blacklist` table to disable the pushdown of specific expressions.
+式のプッシュダウンにより間違った結果が得られた場合、ブロックリストを使用してアプリケーションを迅速に回復できます。具体的には、サポートされている関数または演算子の一部を`mysql.expr_pushdown_blacklist`テーブルに追加して、特定の式のプッシュダウンを無効にすることができます。
 
-The schema of `mysql.expr_pushdown_blacklist` is shown as follows:
-
-{{< copyable "sql" >}}
+`mysql.expr_pushdown_blacklist`のスキーマは次のように示されます。
 
 ```sql
 DESC mysql.expr_pushdown_blacklist;
@@ -103,48 +93,46 @@ DESC mysql.expr_pushdown_blacklist;
 3 rows in set (0.00 sec)
 ```
 
-Here is the description of each field above:
+上記の各フィールドの説明は次のとおりです。
 
-+ `name`: The name of the function that is disabled to be pushed down.
-+ `store_type`: To specify the component that you want to prevent the function from being pushed down to for computing. Available components are `tidb`, `tikv`, and `tiflash`. The `store_type` is case-insensitive. If you need to specify multiple components, use a comma to separate each component.
-    - When `store_type` is `tidb`, it indicates whether the function can be executed in other TiDB servers while the TiDB memory table is being read.
-    - When `store_type` is `tikv`, it indicates whether the function can be executed in TiKV server's Coprocessor component.
-    - When `store_type` is `tiflash`, it indicates whether the function can be executed in TiFlash Server's Coprocessor component.
-+ `reason`: To record the reason why this function is added to the blocklist.
+-   `name` : プッシュダウンを無効にする機能の名前。
+-   `store_type` :コンポーネントを指定します。使用可能なコンポーネントは`tidb` 、 `tikv` 、および`tiflash`です。 `store_type`は大文字と小文字が区別されません。複数のコンポーネントを指定する必要がある場合は、コンマを使用して各コンポーネントを区切ります。
+    -   `store_type`が`tidb`の場合、TiDBメモリテーブルの読み取り中に他の TiDB サーバーで関数を実行できるかどうかを示します。
+    -   `store_type`が`tikv`の場合、関数が TiKV サーバーのコプロセッサーコンポーネントで実行できるかどうかを示します。
+    -   `store_type`が`tiflash`の場合、関数がTiFlash Server のコプロセッサーコンポーネントで実行できるかどうかを示します。
+-   `reason` : この関数がブロックリストに追加された理由を記録します。
 
-### Usage
+### 使用法 {#usage}
 
-This section describes how to use the blocklist of expression pushdown.
+このセクションでは、式プッシュダウンのブロックリストの使用方法について説明します。
 
-#### Add to the blocklist
+#### ブロックリストに追加する {#add-to-the-blocklist}
 
-To add one or more expressions (functions or operators) to the blocklist, perform the following steps:
+1 つ以上の式 (関数または演算子) をブロックリストに追加するには、次の手順を実行します。
 
-1. Insert the corresponding function name or operator name, and the set of components you want to disable the pushdown, to the `mysql.expr_pushdown_blacklist` table.
+1.  対応する関数名または演算子名、およびプッシュダウンを無効にするコンポーネントのセットを`mysql.expr_pushdown_blacklist`テーブルに挿入します。
 
-2. Execute `admin reload expr_pushdown_blacklist`.
+2.  `admin reload expr_pushdown_blacklist`を実行します。
 
-### Remove from the blocklist
+### ブロックリストから削除する {#remove-from-the-blocklist}
 
-To remove one or more expressions from the blocklist, perform the following steps:
+ブロックリストから 1 つ以上の式を削除するには、次の手順を実行します。
 
-1. Delete the corresponding function name or operator name, and the set of components you want to disable the pushdown, from the `mysql.expr_pushdown_blacklist` table.
+1.  対応する関数名または演算子名、およびプッシュダウンを無効にするコンポーネントのセットを`mysql.expr_pushdown_blacklist`テーブルから削除します。
 
-2. Execute `admin reload expr_pushdown_blacklist`.
+2.  `admin reload expr_pushdown_blacklist`を実行します。
 
-> **Note:**
+> **注記：**
 >
-> `admin reload expr_pushdown_blacklist` only takes effect on the TiDB server where this statement is run. If you want all TiDB servers of the cluster to take effect, run this command on each TiDB server.
+> `admin reload expr_pushdown_blacklist`は、このステートメントが実行される TiDBサーバーでのみ有効です。クラスターのすべての TiDB サーバーを有効にする場合は、各 TiDBサーバーでこのコマンドを実行します。
 
-## Expression blocklist usage example
+## 式ブロックリストの使用例 {#expression-blocklist-usage-example}
 
-In the following example, the `<` and `>` operators are added to the blocklist, and then the `>` operator is removed from the blocklist.
+次の例では、 `<`と`>`演算子がブロックリストに追加され、 `>`演算子がブロックリストから削除されます。
 
-To judge whether the blocklist takes effect, observe the results of `EXPLAIN` (See [TiDB Query Execution Plan Overview](/explain-overview.md)).
+ブロックリストが有効かどうかを判断するには、 `EXPLAIN`の結果を観察します ( [TiDB クエリ実行計画の概要](/explain-overview.md)を参照)。
 
-1. The predicates `a < 2` and `a > 2` in the `WHERE` clause of the following SQL statement can be pushed down to TiKV.
-
-    {{< copyable "sql" >}}
+1.  次の SQL ステートメントの`WHERE`句の述語`a < 2`と`a > 2`を TiKV にプッシュダウンできます。
 
     ```sql
     EXPLAIN SELECT * FROM t WHERE a < 2 AND a > 2;
@@ -161,9 +149,7 @@ To judge whether the blocklist takes effect, observe the results of `EXPLAIN` (S
     3 rows in set (0.00 sec)
     ```
 
-2. Insert the expression to the `mysql.expr_pushdown_blacklist` table and execute `admin reload expr_pushdown_blacklist`.
-
-    {{< copyable "sql" >}}
+2.  `mysql.expr_pushdown_blacklist`テーブルに式を挿入し、 `admin reload expr_pushdown_blacklist`を実行します。
 
     ```sql
     INSERT INTO mysql.expr_pushdown_blacklist VALUES('<','tikv',''), ('>','tikv','');
@@ -174,8 +160,6 @@ To judge whether the blocklist takes effect, observe the results of `EXPLAIN` (S
     Records: 2  Duplicates: 0  Warnings: 0
     ```
 
-    {{< copyable "sql" >}}
-
     ```sql
     admin reload expr_pushdown_blacklist;
     ```
@@ -184,9 +168,7 @@ To judge whether the blocklist takes effect, observe the results of `EXPLAIN` (S
     Query OK, 0 rows affected (0.00 sec)
     ```
 
-3. Observe the execution plan again and you will find that both the `<` and `>` operators are not pushed down to TiKV Coprocessor.
-
-    {{< copyable "sql" >}}
+3.  実行プランをもう一度観察すると、 `<`と`>`演算子が両方とも TiKVコプロセッサーにプッシュダウンされていないことがわかります。
 
     ```sql
     EXPLAIN SELECT * FROM t WHERE a < 2 and a > 2;
@@ -203,9 +185,7 @@ To judge whether the blocklist takes effect, observe the results of `EXPLAIN` (S
     3 rows in set (0.00 sec)
     ```
 
-4. Remove one expression (here is `>`) from the blocklist and execute `admin reload expr_pushdown_blacklist`.
-
-    {{< copyable "sql" >}}
+4.  ブロックリストから 1 つの式 (ここでは`>` ) を削除し、 `admin reload expr_pushdown_blacklist`を実行します。
 
     ```sql
     DELETE FROM mysql.expr_pushdown_blacklist WHERE name = '>';
@@ -215,8 +195,6 @@ To judge whether the blocklist takes effect, observe the results of `EXPLAIN` (S
     Query OK, 1 row affected (0.01 sec)
     ```
 
-    {{< copyable "sql" >}}
-
     ```sql
     admin reload expr_pushdown_blacklist;
     ```
@@ -225,9 +203,7 @@ To judge whether the blocklist takes effect, observe the results of `EXPLAIN` (S
     Query OK, 0 rows affected (0.00 sec)
     ```
 
-5. Observe the execution plan again and you will find that `<` is not pushed down while `>` is pushed down to TiKV Coprocessor.
-
-    {{< copyable "sql" >}}
+5.  実行プランをもう一度観察すると、 `<`はプッシュダウンされていないが、 `>`は TiKVコプロセッサーにプッシュダウンされていることがわかります。
 
     ```sql
     EXPLAIN SELECT * FROM t WHERE a < 2 AND a > 2;

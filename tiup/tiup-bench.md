@@ -3,9 +3,9 @@ title: Stress Test TiDB Using TiUP Bench Component
 summary: Learn how to stress test TiDB with TPC-C, TPC-H, CH, RawSQL, and YCSB workloads using TiUP.
 ---
 
-# Stress Test TiDB Using TiUP Bench Component
+# TiUPベンチ コンポーネントを使用した TiDB ストレス テスト {#stress-test-tidb-using-tiup-bench-component}
 
-When you test the performance of a database, it is often required to stress test the database. To facilitate this, TiUP has integrated the bench component, which provides multiple workloads for stress testing. You can access these workloads by the following commands:
+データベースのパフォーマンスをテストする場合、多くの場合、データベースのストレス テストが必要になります。これを容易にするために、 TiUP はストレス テストに複数のワークロードを提供するベンチコンポーネントを統合しました。これらのワークロードには、次のコマンドでアクセスできます。
 
 ```bash
 tiup bench tpcc   # Benchmark a database using TPC-C
@@ -15,44 +15,42 @@ tiup bench ycsb   # Benchmark a database using YCSB
 tiup bench rawsql # Benchmark a database using arbitrary SQL files
 ```
 
-`tpcc`, `tpch`, `ch`, and `rawsql` share the following common command flags. However, `ycsb` is mainly configured by a `.properties` file, which is described in its [usage guide](https://github.com/pingcap/go-ycsb#usage).
+`tpcc` 、 `tpch` 、 `ch` 、および`rawsql` 、次の共通コマンド フラグを共有します。ただし、 `ycsb`は主に`.properties`ファイルによって構成されており、その[使用ガイド](https://github.com/pingcap/go-ycsb#usage)で説明されています。
 
-```
-  -t, --acThreads int         OLAP client concurrency, only for CH-benCHmark (default to 1)
-      --conn-params string    Session variables, such as setting `--conn-params tidb_isolation_read_engines='tiflash'` for TiDB queries and setting `--conn-params sslmode=disable` for PostgreSQL connections
-      --count int             Total execution count (0 means infinite count)
-  -D, --db string             Database name (default to "test")
-  -d, --driver string         Database driver: mysql, postgres (default to "mysql")
-      --dropdata              Clean up historical data before preparing
-  -H, --host strings          Database host (default to [127.0.0.1])
-      --ignore-error          Ignore errors when running workload
-      --interval duration     Output interval time (default to 10s)
-      --isolation int         Isolation Level (0: Default; 1: ReadUncommitted;
-                              2: ReadCommitted; 3: WriteCommitted; 4: RepeatableRead;
-                              5: Snapshot; 6: Serializable; 7: Linerizable)
-      --max-procs int         runtime.GOMAXPROCS of golang, the limits of how many cores can be used
-      --output string         Output style. Valid values can be { plain | table | json } (default to "plain")
-  -p, --password string       Database password
-  -P, --port ints             Database port (default to [4000])
-      --pprof string          Address of pprof endpoint
-      --silence               Don't print errors when running workload
-  -S, --statusPort int        Database status port (default to 10080)
-  -T, --threads int           Thread concurrency (default to 1)
-      --time duration         Total execution time (default to 2562047h47m16.854775807s)
-  -U, --user string           Database user (default to "root")
-```
+      -t, --acThreads int         OLAP client concurrency, only for CH-benCHmark (default to 1)
+          --conn-params string    Session variables, such as setting `--conn-params tidb_isolation_read_engines='tiflash'` for TiDB queries and setting `--conn-params sslmode=disable` for PostgreSQL connections
+          --count int             Total execution count (0 means infinite count)
+      -D, --db string             Database name (default to "test")
+      -d, --driver string         Database driver: mysql, postgres (default to "mysql")
+          --dropdata              Clean up historical data before preparing
+      -H, --host strings          Database host (default to [127.0.0.1])
+          --ignore-error          Ignore errors when running workload
+          --interval duration     Output interval time (default to 10s)
+          --isolation int         Isolation Level (0: Default; 1: ReadUncommitted;
+                                  2: ReadCommitted; 3: WriteCommitted; 4: RepeatableRead;
+                                  5: Snapshot; 6: Serializable; 7: Linerizable)
+          --max-procs int         runtime.GOMAXPROCS of golang, the limits of how many cores can be used
+          --output string         Output style. Valid values can be { plain | table | json } (default to "plain")
+      -p, --password string       Database password
+      -P, --port ints             Database port (default to [4000])
+          --pprof string          Address of pprof endpoint
+          --silence               Don't print errors when running workload
+      -S, --statusPort int        Database status port (default to 10080)
+      -T, --threads int           Thread concurrency (default to 1)
+          --time duration         Total execution time (default to 2562047h47m16.854775807s)
+      -U, --user string           Database user (default to "root")
 
-- You can pass comma-separated values to `--host` and `--port` to enable client-side load balancing. For example, when you specify `--host 172.16.4.1,172.16.4.2 --port 4000,4001`, the program will connect to 172.16.4.1:4000, 172.16.4.1:4001, 172.16.4.2:4000, and 172.16.4.2:4001, chosen in round-robin fashion.
-- `--conn-params` must follow the format of [query string](https://en.wikipedia.org/wiki/Query_string). Different databases might have different parameters. For example:
-    - `--conn-params tidb_isolation_read_engines='tiflash'` forces TiDB to read from TiFlash.
-    - `--conn-params sslmode=disable` disables SSL when you connect to PostgreSQL.
-- When running CH-benCHmark, you can use `--ap-host`, `--ap-port`, and `--ap-conn-params` to specify a standalone TiDB server for OLAP queries.
+-   カンマ区切りの値を`--host`と`--port`に渡すと、クライアント側の負荷分散を有効にすることができます。たとえば、 `--host 172.16.4.1,172.16.4.2 --port 4000,4001`を指定すると、プログラムはラウンドロビン方式で選択された 172.16.4.1:4000、172.16.4.1:4001、172.16.4.2:4000、および 172.16.4.2:4001 に接続します。
+-   `--conn-params` [クエリ文字列](https://en.wikipedia.org/wiki/Query_string)の形式に従う必要があります。データベースが異なれば、パラメーターも異なる場合があります。例えば：
+    -   `--conn-params tidb_isolation_read_engines='tiflash'` 、TiDB にTiFlashからの読み取りを強制します。
+    -   `--conn-params sslmode=disable`指定すると、PostgreSQL に接続するときに SSL が無効になります。
+-   CH-benCHmark を実行する場合、 `--ap-host` 、 `--ap-port` 、および`--ap-conn-params`を使用して、OLAP クエリ用のスタンドアロン TiDBサーバーを指定できます。
 
-The following sections describe how to run TPC-C, TPC-H, YCSB tests using TiUP.
+次のセクションでは、 TiUPを使用して TPC-C、TPC-H、YCSB テストを実行する方法について説明します。
 
-## Run TPC-C test using TiUP
+## TiUPを使用して TPC-C テストを実行する {#run-tpc-c-test-using-tiup}
 
-The TiUP bench component supports the following commands and flags to run the TPC-C test:
+TiUPベンチコンポーネントは、 TPC-C テストを実行するための次のコマンドとフラグをサポートしています。
 
 ```bash
 Available Commands:
@@ -70,63 +68,51 @@ Flags:
 
 ```
 
-### Test procedures
+### 試験手順 {#test-procedures}
 
-The following provides simplified steps for running a TPC-C test. For detailed steps, see [How to Run TPC-C Test on TiDB](/benchmark/benchmark-tidb-using-tpcc.md).
+以下に、TPC-C テストを実行するための簡略化された手順を示します。詳細な手順については、 [TiDB で TPC-C テストを実行する方法](/benchmark/benchmark-tidb-using-tpcc.md)を参照してください。
 
-1. Create 4 warehouses using 4 partitions via hash:
-
-    {{< copyable "shell-regular" >}}
+1.  ハッシュ経由で 4 つのパーティションを使用して 4 つのウェアハウスを作成します。
 
     ```shell
     tiup bench tpcc --warehouses 4 --parts 4 prepare
     ```
 
-2. Run the TPC-C test:
-
-    {{< copyable "shell-regular" >}}
+2.  TPC-C テストを実行します。
 
     ```shell
     tiup bench tpcc --warehouses 4 --time 10m run
     ```
 
-3. Check the consistency:
-
-    {{< copyable "shell-regular" >}}
+3.  一貫性を確認します。
 
     ```shell
     tiup bench tpcc --warehouses 4 check
     ```
 
-4. Clean up data:
-
-    {{< copyable "shell-regular" >}}
+4.  データをクリーンアップします。
 
     ```shell
     tiup bench tpcc --warehouses 4 cleanup
     ```
 
-Preparing data via SQL might be slow when you want to run a benchmark with a large data set. In that case, you can generate data in the CSV format by the following commands and then import it to TiDB via [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md).
+大規模なデータセットを使用してベンチマークを実行する場合、SQL を介してデータを準備すると時間がかかる可能性があります。その場合は、以下のコマンドでCSV形式のデータを生成し、 [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)経由でTiDBにインポートすることができます。
 
-- Generate the CSV file:
-
-    {{< copyable "shell-regular" >}}
+-   CSV ファイルを生成します。
 
     ```shell
     tiup bench tpcc --warehouses 4 prepare --output-dir data --output-type=csv
     ```
 
-- Generate the CSV file for the specified table:
-
-    {{< copyable "shell-regular" >}}
+-   指定したテーブルの CSV ファイルを生成します。
 
     ```shell
     tiup bench tpcc --warehouses 4 prepare --output-dir data --output-type=csv --tables history,orders
     ```
 
-## Run TPC-H test using TiUP
+## TiUPを使用して TPC-H テストを実行する {#run-tpc-h-test-using-tiup}
 
-The TiUP bench component supports the following commands and parameters to run the TPC-H test:
+TiUPベンチコンポーネントは、 TPC-H テストを実行するための次のコマンドとパラメータをサポートしています。
 
 ```bash
 Available Commands:
@@ -141,81 +127,73 @@ Flags:
       --sf int           scale factor
 ```
 
-### Test procedures
+### 試験手順 {#test-procedures}
 
-1. Prepare data:
-
-    {{< copyable "shell-regular" >}}
+1.  データを準備します:
 
     ```shell
     tiup bench tpch --sf=1 prepare
     ```
 
-2. Run the TPC-H test by executing one of the following commands:
+2.  次のコマンドのいずれかを実行して、TPC-H テストを実行します。
 
-    - If you check the result, run this command:
-
-        {{< copyable "shell-regular" >}}
+    -   結果を確認する場合は、次のコマンドを実行します。
 
         ```shell
         tiup bench tpch --count=22 --sf=1 --check=true run
         ```
 
-    - If you do not check the result, run this command:
-
-        {{< copyable "shell-regular" >}}
+    -   結果を確認しない場合は、次のコマンドを実行します。
 
         ```shell
         tiup bench tpch --count=22 --sf=1 run
         ```
 
-3. Clean up data:
-
-    {{< copyable "shell-regular" >}}
+3.  データをクリーンアップします。
 
     ```shell
     tiup bench tpch cleanup
     ```
 
-## Run YCSB test using TiUP
+## TiUPを使用して YCSB テストを実行する {#run-ycsb-test-using-tiup}
 
-You can stress test both TiDB and TiKV via YCSB.
+YCSB を介して TiDB と TiKV の両方をストレス テストできます。
 
-### Stress test TiDB
+### ストレステスト TiDB {#stress-test-tidb}
 
-1. Prepare data:
+1.  データを準備します:
 
     ```shell
     tiup bench ycsb load tidb -p tidb.instances="127.0.0.1:4000" -p recordcount=10000
     ```
 
-2. Run the YCSB workload:
+2.  YCSB ワークロードを実行します。
 
     ```shell
     # The read-write percent is 95% by default
     tiup bench ycsb run tidb -p tidb.instances="127.0.0.1:4000" -p operationcount=10000
     ```
 
-### Stress test TiKV
+### ストレステスト TiKV {#stress-test-tikv}
 
-1. Prepare data:
+1.  データを準備します:
 
     ```shell
     tiup bench ycsb load tikv -p tikv.pd="127.0.0.1:2379" -p recordcount=10000
     ```
 
-2. Run the YCSB workload:
+2.  YCSB ワークロードを実行します。
 
     ```shell
     # The read-write percent is 95% by default
     tiup bench ycsb run tikv -p tikv.pd="127.0.0.1:2379" -p operationcount=10000
     ```
 
-## Run RawSQL test using TiUP
+## TiUPを使用して RawSQL テストを実行する {#run-rawsql-test-using-tiup}
 
-You can write an arbitrary query in a SQL file, and then use it for the test by executing `tiup bench rawsql` as follows:
+SQL ファイルに任意のクエリを記述し、次のように`tiup bench rawsql`を実行してテストに使用できます。
 
-1. Prepare data and the query:
+1.  データとクエリを準備します。
 
     ```sql
     -- Prepare data
@@ -226,7 +204,7 @@ You can write an arbitrary query in a SQL file, and then use it for the test by 
     SELECT a, sleep(rand()) FROM t WHERE a < 4*rand();
     ```
 
-2. Run the RawSQL test:
+2.  RawSQL テストを実行します。
 
     ```shell
     tiup bench rawsql run --count 60 --query-files demo.sql

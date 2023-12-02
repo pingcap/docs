@@ -3,16 +3,16 @@ title: TiDB Data Migration Table Routing
 summary: Learn the usage and precautions of table routing in DM.
 ---
 
-# TiDB Data Migration Table Routing
+# TiDB データ移行テーブルのルーティング {#tidb-data-migration-table-routing}
 
-When you migrate data using TiDB Data Migration (DM), you can configure the table routing to migrate a certain table of the upstream MySQL or MariaDB instance to the specified table in the downstream.
+TiDB Data Migration (DM) を使用してデータを移行する場合、アップストリームの MySQL または MariaDB インスタンスの特定のテーブルをダウンストリームの指定されたテーブルに移行するようにテーブル ルーティングを構成できます。
 
-> **Note:**
+> **注記：**
 >
-> - Configuring multiple different routing rules for a single table is not supported.
-> - The match rule of schema needs to be configured separately, which is used to migrate `CREATE/DROP SCHEMA xx`, as shown in `rule-2` of the [Configure table routing](#configure-table-routing) section.
+> -   1 つのテーブルに対して複数の異なるルーティング ルールを構成することはサポートされていません。
+> -   スキーマの一致ルールは個別に構成する必要があります。これは、セクション[テーブルルーティングを構成する](#configure-table-routing)の`rule-2`に示すように、 `CREATE/DROP SCHEMA xx`の移行に使用されます。
 
-## Configure table routing
+## テーブルルーティングを構成する {#configure-table-routing}
 
 ```yaml
 routes:
@@ -38,38 +38,38 @@ routes:
     target-schema: "test"
 ```
 
-Regular expressions and wildcards are supported to match database and table names. In simple scenarios, it is recommended that you use the wildcard for matching schemas and tables. However, note the following:
+データベース名とテーブル名を一致させるための正規表現とワイルドカードがサポートされています。単純なシナリオでは、スキーマとテーブルを一致させるためにワイルドカードを使用することをお勧めします。ただし、次の点に注意してください。
 
-- Wildcards including `*`, `?`, and `[]` are supported. There can only be one `*` symbol in a wildcard match, and it must be at the end. For example, in `table-pattern: "t_*"`, `"t_*"` indicates all tables starting with `t_`. See [wildcard matching](https://en.wikipedia.org/wiki/Glob_(programming)#Syntax) for details.
+-   `*` 、 `?` 、および`[]`を含むワイルドカードがサポートされています。ワイルドカード一致では`*`シンボルは 1 つだけ使用でき、最後になければなりません。たとえば、 `table-pattern: "t_*"`では、 `"t_*"` `t_`で始まるすべてのテーブルを示します。詳細は[ワイルドカードマッチング](https://en.wikipedia.org/wiki/Glob_(programming)#Syntax)参照してください。
 
-- `table-regexp`, `schema-regexp`, and `source-regexp` only support regular expressions and cannot start with the `~` symbol.
+-   `table-regexp` 、 `schema-regexp` 、および`source-regexp`正規表現のみをサポートしており、 `~`記号で始めることはできません。
 
-- `schema-pattern` and `table-pattern` support both wildcards and regular expressions. Regular expressions must begin with the `~` symbol.
+-   `schema-pattern`と`table-pattern` 、ワイルドカードと正規表現の両方をサポートします。正規表現は`~`記号で始まる必要があります。
 
-## Parameter descriptions
+## パラメータの説明 {#parameter-descriptions}
 
-- DM migrates the upstream MySQL or MariaDB instance tables that match the [`schema-pattern`/`table-pattern` rule provided by Table selector](/dm/table-selector.md) to the downstream `target-schema`/`target-table`.
-- For sharded tables that match the `schema-pattern`/`table-pattern` rules, DM extracts the table name by using the `extract-table`.`table-regexp` regular expression, the schema name by using the `extract-schema`.`schema-regexp` regular expression, and source information by using the `extract-source`.`source-regexp` regular expression. Then DM writes the extracted information to the corresponding `target-column` in the merged table in the downstream.
+-   DM は、 [テーブル セレクターによって提供される`schema-pattern` / `table-pattern`ルール](/dm/table-selector.md)に一致するアップストリームの MySQL または MariaDB インスタンス テーブルをダウンストリーム`target-schema` `target-table`移行します。
+-   `schema-pattern` / `table-pattern`ルールに一致するシャードテーブルの場合、DM は`extract-table`を使用してテーブル名を抽出します。 `table-regexp`正規表現、 `extract-schema`を使用したスキーマ名。 `schema-regexp`正規表現、および`extract-source`を使用したソース情報。 `source-regexp`の正規表現。次に、DM は抽出した情報を下流のマージされたテーブルの対応する`target-column`に書き込みます。
 
-## Usage examples
+## 使用例 {#usage-examples}
 
-This section shows the usage examples in four different scenarios.
+このセクションでは、4 つの異なるシナリオでの使用例を示します。
 
-If you need to migrate and merge MySQL shards of small datasets to TiDB, refer to [this tutorial](/migrate-small-mysql-shards-to-tidb.md).
+小規模なデータセットの MySQL シャードを TiDB に移行してマージする必要がある場合は、 [このチュートリアル](/migrate-small-mysql-shards-to-tidb.md)を参照してください。
 
-### Merge sharded schemas and tables
+### シャードされたスキーマとテーブルをマージする {#merge-sharded-schemas-and-tables}
 
-Assuming in the scenario of sharded schemas and tables, you want to migrate the `test_{1,2,3...}`.`t_{1,2,3...}` tables in two upstream MySQL instances to the `test`.`t` table in the downstream TiDB instance.
+シャード化されたスキーマとテーブルのシナリオで、 `test_{1,2,3...}`を移行するとします。 2 つのアップストリーム MySQL インスタンスの`t_{1,2,3...}`テーブルを`test`にします。 `t`ダウンストリーム TiDB インスタンスのテーブル。
 
-To migrate the upstream instances to the downstream `test`.`t`, you must create the following routing rules:
+アップストリーム インスタンスをダウンストリームに移行するには、 `test`に従います。 `t`では、次のルーティング ルールを作成する必要があります。
 
-- `rule-1` is used to migrate DML or DDL statements of the table that matches `schema-pattern: "test_*"` and `table-pattern: "t_*"` to the downstream `test`.`t`.
-- `rule-2` is used to migrate DDL statements of the schema that matches `schema-pattern: "test_*"`, such as `CREATE/DROP SCHEMA xx`.
+-   `rule-1` 、 `schema-pattern: "test_*"`および`table-pattern: "t_*"`に一致するテーブルの DML または DDL ステートメントをダウンストリーム`test`に移行するために使用されます。 `t` ．
+-   `rule-2` 、 `schema-pattern: "test_*"`一致するスキーマの DDL ステートメント ( `CREATE/DROP SCHEMA xx`など) を移行するために使用されます。
 
-> **Note:**
+> **注記：**
 >
-> - If the downstream `schema: test` already exists and is not to be deleted, you can omit `rule-2`.
-> - If the downstream `schema: test` does not exist and only `rule-1` is configured, then it reports the `schema test doesn't exist` error during migration.
+> -   下流`schema: test`すでに存在し、削除しない場合は、 `rule-2`を省略できます。
+> -   ダウンストリーム`schema: test`存在せず、 `rule-1`のみが構成されている場合、移行中に`schema test doesn't exist`エラーが報告されます。
 
 ```yaml
   rule-1:
@@ -82,15 +82,15 @@ To migrate the upstream instances to the downstream `test`.`t`, you must create 
     target-schema: "test"
 ```
 
-### Extract table, schema, and source information and write into the merged table
+### テーブル、スキーマ、ソース情報を抽出し、マージされたテーブルに書き込みます {#extract-table-schema-and-source-information-and-write-into-the-merged-table}
 
-Assuming in the scenario of sharded schemas and tables, you want to migrate the `test_{1,2,3...}`.`t_{1,2,3...}` tables in two upstream MySQL instances to the `test`.`t` table in the downstream TiDB instance. At the same time, you want to extract the source information of the sharded tables and write it to the downstream merged table.
+シャード化されたスキーマとテーブルのシナリオで、 `test_{1,2,3...}`を移行するとします。 2 つのアップストリーム MySQL インスタンスの`t_{1,2,3...}`テーブルを`test`にします。 `t`ダウンストリーム TiDB インスタンスのテーブル。同時に、シャードテーブルのソース情報を抽出し、それを下流のマージテーブルに書き込む必要があります。
 
-To migrate the upstream instances to the downstream `test`.`t`, you must create routing rules similar to the previous section [Merge sharded schemas and tables](#merge-sharded-schemas-and-tables). In addtion, you need to add the `extract-table`, `extract-schema`, and `extract-source` configurations:
+アップストリーム インスタンスをダウンストリームに移行するには、 `test`に従います。 `t`前のセクション[シャードされたスキーマとテーブルをマージする](#merge-sharded-schemas-and-tables)と同様のルーティング ルールを作成する必要があります。さらに、 `extract-table` 、 `extract-schema` 、および`extract-source`構成を追加する必要があります。
 
-- `extract-table`: For a sharded table matching `schema-pattern` and `table-pattern`, DM extracts the sharded table name by using `table-regexp` and writes the name suffix without the `t_` part to `target-column` of the merged table, that is, the `c_table` column.
-- `extract-schema`: For a sharded schema matching `schema-pattern` and `table-pattern`, DM extracts the sharded schema name by using `schema-regexp` and writes the name suffix without the `test_` part to `target-column` of the merged table, that is, the `c_schema` column.
-- `extract-source`: For a sharded table matching `schema-pattern` and `table-pattern`, DM writes the source instance information to the `target-column` of the merged table, that is, the `c_source` column.
+-   `extract-table` : `schema-pattern`と`table-pattern`に一致するシャードテーブルの場合、DM は`table-regexp`を使用してシャードテーブル名を抽出し、 `t_`部分を除いた名前サフィックスをマージされたテーブルの`target-column` 、つまり`c_table`列に書き込みます。
+-   `extract-schema` : `schema-pattern`と`table-pattern`に一致するシャード スキーマの場合、DM は`schema-regexp`を使用してシャード スキーマ名を抽出し、 `test_`部分を除いた名前サフィックスをマージされたテーブルの`target-column` 、つまり`c_schema`列に書き込みます。
+-   `extract-source` : `schema-pattern`と`table-pattern`に一致するシャード テーブルの場合、DM はソース インスタンス情報をマージされたテーブルの`target-column` 、つまり`c_source`列に書き込みます。
 
 ```yaml
   rule-1:
@@ -112,7 +112,7 @@ To migrate the upstream instances to the downstream `test`.`t`, you must create 
     target-schema: "test"
 ```
 
-To extract the source information of upstream sharded tables to the merged table in the downstream, you **must manually create a merged table in the downstream before starting the migration**. The merged table must contain the three `target-columns` (`c_table`, `c_schema`, and `c_source`) used for specifying the source information. In addition, these columns **must be the last columns and be [string types](/data-type-string.md)**.
+アップストリームのシャードテーブルのソース情報をダウンストリームのマージテーブルに抽出するには、**移行を開始する前に、ダウンストリームにマージテーブルを手動で作成する必要があります**。マージされたテーブルには、ソース情報を指定するために使用される 3 つの`target-columns` ( `c_table` 、 `c_schema` 、および`c_source` ) が含まれている必要があります。さらに、これらの列は**最後の列であり、<a href="/data-type-string.md">文字列型</a>である必要があります**。
 
 ```sql
 CREATE TABLE `test`.`t` (
@@ -123,9 +123,9 @@ CREATE TABLE `test`.`t` (
 );
 ```
 
-Assume that the upstream has the following two data sources:
+アップストリームに次の 2 つのデータ ソースがあると仮定します。
 
-Data source `mysql-01`:
+データソース`mysql-01` :
 
 ```sql
 mysql> select * from test_11.t_1;
@@ -148,7 +148,7 @@ mysql> select * from test_12.t_1;
 +---+
 ```
 
-Data source `mysql-02`:
+データソース`mysql-02` :
 
 ```sql
 mysql> select * from test_13.t_3;
@@ -159,7 +159,7 @@ mysql> select * from test_13.t_3;
 +---+
 ```
 
-After migration using DM, data in the merged table will be as follows:
+DM を使用して移行した後、マージされたテーブルのデータは次のようになります。
 
 ```sql
 mysql> select * from test.t;
@@ -173,13 +173,13 @@ mysql> select * from test.t;
 +---+---------+----------+----------+
 ```
 
-#### Incorrect examples of creating merged tables
+#### マージされたテーブルを作成する間違った例 {#incorrect-examples-of-creating-merged-tables}
 
-> **Note:**
+> **注記：**
 >
-> If any of the following errors occur, source information of sharded tables and schemas might fail to be written to the merged table.
+> 次のいずれかのエラーが発生した場合、シャードされたテーブルおよびスキーマのソース情報がマージされたテーブルに書き込まれない可能性があります。
 
-- `c-table` is not in the last three columns:
+-   最後の 3 列には`c-table`ありません。
 
 ```sql
 CREATE TABLE `test`.`t` (
@@ -190,7 +190,7 @@ CREATE TABLE `test`.`t` (
 );
 ```
 
-- `c-source` is absent:
+-   `c-source`が存在しない場合:
 
 ```sql
 CREATE TABLE `test`.`t` (
@@ -200,7 +200,7 @@ CREATE TABLE `test`.`t` (
 );
 ```
 
-- `c_schema` is not a string type:
+-   `c_schema`は文字列型ではありません。
 
 ```sql
 CREATE TABLE `test`.`t` (
@@ -211,11 +211,11 @@ CREATE TABLE `test`.`t` (
 );
 ```
 
-### Merge sharded schemas
+### シャード化されたスキーマをマージする {#merge-sharded-schemas}
 
-Assuming in the scenario of sharded schemas, you want to migrate the `test_{1,2,3...}`.`t_{1,2,3...}` tables in the two upstream MySQL instances to the `test`.`t_{1,2,3...}` tables in the downstream TiDB instance.
+シャード化スキーマのシナリオでは、 `test_{1,2,3...}`を移行するとします。 2 つのアップストリーム MySQL インスタンスの`t_{1,2,3...}`テーブルを`test`にします。ダウンストリーム TiDB インスタンスに`t_{1,2,3...}`テーブル。
 
-To migrate the upstream schemas to the downstream `test`.`t_[1,2,3]`, you only need to create one routing rule.
+上流のスキーマを下流に移行するには、 `test`手順に従います。 `t_[1,2,3]` 、作成する必要があるのはルーティング ルールを 1 つだけです。
 
 ```yaml
   rule-1:
@@ -223,9 +223,9 @@ To migrate the upstream schemas to the downstream `test`.`t_[1,2,3]`, you only n
     target-schema: "test"
 ```
 
-### Incorrect table routing
+### 不正なテーブルルーティング {#incorrect-table-routing}
 
-Assuming that the following two routing rules are configured and `test_1_bak`.`t_1_bak` matches both `rule-1` and `rule-2`, an error is reported because the table routing configuration violates the number limitation.
+次の 2 つ`test_1_bak`ルーティング ルールが設定されていると仮定します。 `t_1_bak` `rule-1`と`rule-2`の両方に一致します。テーブル ルーティング構成が数の制限に違反しているため、エラーが報告されます。
 
 ```yaml
   rule-1:

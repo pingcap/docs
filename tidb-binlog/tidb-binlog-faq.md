@@ -3,270 +3,269 @@ title: TiDB Binlog FAQs
 summary: Learn about the frequently asked questions (FAQs) and answers about TiDB Binlog.
 ---
 
-# TiDB Binlog FAQs
+# TiDBBinlogよくある質問 {#tidb-binlog-faqs}
 
-This document collects the frequently asked questions (FAQs) about TiDB Binlog.
+このドキュメントには、 TiDB Binlogに関するよくある質問 (FAQ) がまとめられています。
 
-## What is the impact of enabling TiDB Binlog on the performance of TiDB?
+## TiDB Binlogを有効にすると、TiDB のパフォーマンスにどのような影響がありますか? {#what-is-the-impact-of-enabling-tidb-binlog-on-the-performance-of-tidb}
 
-- There is no impact on the query.
+-   クエリには影響ありません。
 
-- There is a slight performance impact on `INSERT`, `DELETE` and `UPDATE` transactions. In latency, a p-binlog is written concurrently in the TiKV prewrite stage before the transactions are committed. Generally, writing binlog is faster than TiKV prewrite, so it does not increase latency. You can check the response time of writing binlog in Pump's monitoring panel.
+-   `INSERT` 、 `DELETE` 、および`UPDATE`のトランザクションでは、パフォーマンスにわずかな影響があります。 レイテンシーでは、トランザクションがコミットされる前に、TiKV 事前書き込みステージで p-binlog が同時に書き込まれます。一般に、 binlog の書き込みは TiKV prewrite よりも高速であるため、レイテンシーは増加しません。binlog書き込みの応答時間は、Pump のモニタリング パネルで確認できます。
 
-## How high is the replication latency of TiDB Binlog?
+## TiDB Binlogのレプリケーションレイテンシーはどれくらいですか? {#how-high-is-the-replication-latency-of-tidb-binlog}
 
-The latency of TiDB Binlog replication is measured in seconds, which is generally about 3 seconds during off-peak hours.
+TiDB Binlogレプリケーションのレイテンシーは秒単位で測定され、オフピーク時間では通常約 3 秒です。
 
-## What privileges does Drainer need to replicate data to the downstream MySQL or TiDB cluster?
+## データをダウンストリームの MySQL または TiDB クラスターにレプリケートするには、 Drainer にはどのような権限が必要ですか? {#what-privileges-does-drainer-need-to-replicate-data-to-the-downstream-mysql-or-tidb-cluster}
 
-To replicate data to the downstream MySQL or TiDB cluster, Drainer must have the following privileges:
+データをダウンストリームの MySQL または TiDB クラスターにレプリケートするには、 Drainerには次の権限が必要です。
 
-* Insert
-* Update
-* Delete
-* Create
-* Drop
-* Alter
-* Execute
-* Index
-* Select
-* Create View
+-   入れる
+-   アップデート
+-   消去
+-   作成する
+-   落とす
+-   オルタ
+-   実行する
+-   索引
+-   選択する
+-   ビューの作成
 
-## What can I do if the Pump disk is almost full?
+## Pumpディスクがほぼ満杯の場合はどうすればよいですか? {#what-can-i-do-if-the-pump-disk-is-almost-full}
 
-1. Check whether Pump's GC works well:
+1.  Pump の GC が正常に動作するかどうかを確認します。
 
-    - Check whether the **gc_tso** time in Pump's monitoring panel is identical with that of the configuration file.
+    -   Pump の監視パネルの**gc_tso 時間が設定ファイルの gc_tso**時間と同じであるかどうかを確認します。
 
-2. If GC works well, perform the following steps to reduce the amount of space required for a single Pump:
+2.  GC が正常に機能する場合は、次の手順を実行して、1 つのPumpに必要なスペースの量を削減します。
 
-    - Modify the **GC** parameter of Pump to reduce the number of days to retain data.
+    -   Pumpの**GC**パラメータを変更して、データを保持する日数を減らします。
 
-    - Add pump instances.
+    -   ポンプ インスタンスを追加します。
 
-## What can I do if Drainer replication is interrupted?
+## Drainer のレプリケーションが中断された場合はどうすればよいですか? {#what-can-i-do-if-drainer-replication-is-interrupted}
 
-Execute the following command to check whether the status of Pump is normal and whether all the Pump instances that are not in the `offline` state are running.
-
-{{< copyable "shell-regular" >}}
+以下のコマンドを実行して、 Pumpの状態が正常であるか、および状態`offline`以外のPumpインスタンスがすべて起動しているかを確認します。
 
 ```bash
 binlogctl -cmd pumps
 ```
 
-Then, check whether the Drainer monitor or log outputs corresponding errors. If so, resolve them accordingly.
+次に、 Drainerモニターまたはログが対応するエラーを出力するかどうかを確認します。その場合は、それに応じて解決してください。
 
-## What can I do if Drainer is slow to replicate data to the downstream MySQL or TiDB cluster?
+## Drainer がダウンストリームの MySQL または TiDB クラスターにデータをレプリケートするのが遅い場合はどうすればよいですか? {#what-can-i-do-if-drainer-is-slow-to-replicate-data-to-the-downstream-mysql-or-tidb-cluster}
 
-Check the following monitoring items:
+以下の監視項目を確認してください。
 
-- For the **Drainer Event** monitoring metric, check the speed of Drainer replicating `INSERT`, `UPDATE` and `DELETE` transactions to the downstream per second.
+-   **Drainerイベント**監視メトリクスについては、1 秒あたり`INSERT` `UPDATE`および`DELETE`のトランザクションをダウンストリームにレプリケートするDrainerの速度を確認します。
 
-- For the **SQL Query Time** monitoring metric, check the time Drainer takes to execute SQL statements in the downstream.
+-   **SQL クエリ時間**監視メトリクスについては、 Drainer がダウンストリームで SQL ステートメントを実行するのにかかる時間を確認します。
 
-Possible causes and solutions for slow replication:
+レプリケーションが遅い場合の考えられる原因と解決策:
 
-- If the replicated database contains a table without a primary key or unique index, add a primary key to the table.
+-   レプリケートされたデータベースに主キーまたは一意のインデックスのないテーブルが含まれている場合は、テーブルに主キーを追加します。
 
-- If the latency between Drainer and the downstream is high, increase the value of the `worker-count` parameter of Drainer. For cross-datacenter replication, it is recommended to deploy Drainer in the downstream.
+-   Drainerとダウンストリーム間のレイテンシーが高い場合は、 Drainerの`worker-count`パラメータの値を増やします。データセンター間のレプリケーションの場合は、 Drainer をダウンストリームにデプロイすることをお勧めします。
 
-- If the load in the downstream is not high, increase the value of the `worker-count` parameter of Drainer.
+-   下流の負荷が高くない場合は、 Drainerの`worker-count`パラメータの値を大きくします。
 
-## What can I do if a Pump instance crashes?
+## Pumpインスタンスがクラッシュした場合はどうすればよいですか? {#what-can-i-do-if-a-pump-instance-crashes}
 
-If a Pump instance crashes, Drainer cannot replicate data to the downstream because it cannot obtain the data of this instance. If this Pump instance can recover to the normal state, Drainer resumes replication; if not, perform the following steps:
+Pumpインスタンスがクラッシュすると、 Drainerはこのインスタンスのデータを取得できないため、データをダウンストリームにレプリケートできません。このPumpインスタンスが通常の状態に回復できる場合、 Drainer はレプリケーションを再開します。そうでない場合は、次の手順を実行します。
 
-1. Use [binlogctl to change the state of this Pump instance to `offline`](/tidb-binlog/maintain-tidb-binlog-cluster.md) to discard the data of this Pump instance.
+1.  このPumpインスタンスのデータを破棄するには、 [binlogctl を使用して、このPumpインスタンスの状態を`offline`に変更します。](/tidb-binlog/maintain-tidb-binlog-cluster.md)を使用します。
 
-2. Because Drainer cannot obtain the data of this pump instance, the data in the downstream and upstream is inconsistent. In this situation, perform full and incremental backups again. The steps are as follows:
+2.  Drainer はこのポンプ インスタンスのデータを取得できないため、下流と上流のデータに一貫性がありません。この状況では、完全バックアップと増分バックアップを再度実行します。手順は次のとおりです。
 
-    1. Stop the Drainer.
+    1.  Drainerを停止します。
 
-    2. Perform a full backup in the upstream.
+    2.  アップストリームで完全バックアップを実行します。
 
-    3. Clear the data in the downstream including the `tidb_binlog.checkpoint` table.
+    3.  `tidb_binlog.checkpoint`テーブルを含む下流のデータをクリアします。
 
-    4. Restore the full backup to the downstream.
+    4.  完全バックアップをダウンストリームに復元します。
 
-    5. Deploy Drainer and use `initialCommitTs` (set `initialCommitTs` as the snapshot timestamp of the full backup) as the start point of initial replication.
+    5.  Drainerをデプロイ、初期レプリケーションの開始点として`initialCommitTs` (完全バックアップのスナップショット タイムスタンプとして`initialCommitTs`を設定) を使用します。
 
-## What is checkpoint?
+## チェックポイントとは何ですか? {#what-is-checkpoint}
 
-Checkpoint records the `commit-ts` that Drainer replicates to the downstream. When Drainer restarts, it reads the checkpoint and then replicates data to the downstream starting from the corresponding `commit-ts`. The `["write save point"] [ts=411222863322546177]` Drainer log means saving the checkpoint with the corresponding timestamp.
+チェックポイントは、 Drainerがダウンストリームにレプリケートする`commit-ts`を記録します。 Drainer が再起動すると、チェックポイントを読み取り、対応する`commit-ts`から開始してダウンストリームにデータを複製します。 `["write save point"] [ts=411222863322546177]` Drainerログは、チェックポイントを対応するタイムスタンプとともに保存することを意味します。
 
-Checkpoint is saved in different ways for different types of downstream platforms:
+チェックポイントは、ダウンストリーム プラットフォームの種類ごとにさまざまな方法で保存されます。
 
-- For MySQL/TiDB, it is saved in the `tidb_binlog.checkpoint` table.
+-   MySQL/TiDBの場合は`tidb_binlog.checkpoint`テーブルに保存されます。
 
-- For Kafka/file, it is saved in the file of the corresponding configuration directory.
+-   Kafka/file の場合、対応する構成ディレクトリのファイルに保存されます。
 
-The data of kafka/file contains `commit-ts`, so if the checkpoint is lost, you can check the latest `commit-ts` of the downstream data by consuming the latest data in the downstream .
+kafka/file のデータには`commit-ts`含まれているため、チェックポイントが失われた場合、 downstream にある最新のデータを消費することで、下流のデータの最新`commit-ts`を確認できます。
 
-Drainer reads the checkpoint when it starts. If Drainer cannot read the checkpoint, it uses the configured `initialCommitTs` as the start point of the initial replication.
+Drainer は開始時にチェックポイントを読み取ります。 Drainer がチェックポイントを読み取ることができない場合、初期レプリケーションの開始点として構成された`initialCommitTs`が使用されます。
 
-## How to redeploy Drainer on the new machine when Drainer fails and the data in the downstream remains?
+## Drainerに障害が発生し、ダウンストリームのデータが残っている場合に、新しいマシンにDrainer を再デプロイするにはどうすればよいですか? {#how-to-redeploy-drainer-on-the-new-machine-when-drainer-fails-and-the-data-in-the-downstream-remains}
 
-If the data in the downstream is not affected, you can redeploy Drainer on the new machine as long as the data can be replicated from the corresponding checkpoint.
+ダウンストリームのデータが影響を受けない場合は、対応するチェックポイントからデータを複製できる限り、新しいマシンにDrainerを再デプロイできます。
 
-- If the checkpoint is not lost, perform the following steps:
+-   チェックポイントが失われていない場合は、次の手順を実行します。
 
-    1. Deploy and start a new Drainer (Drainer can read checkpoint and resumes replication).
+    1.  新しいDrainerをデプロイて開始します ( Drainer はチェックポイントを読み取り、レプリケーションを再開できます)。
 
-    2. Use [binlogctl to change the state of the old Drainer to `offline`](/tidb-binlog/maintain-tidb-binlog-cluster.md).
+    2.  [binlogctl は、古いDrainerの状態を`offline`に変更します。](/tidb-binlog/maintain-tidb-binlog-cluster.md)を使用します 。
 
-- If the checkpoint is lost, perform the following steps:
+-   チェックポイントが失われた場合は、次の手順を実行します。
 
-    1. To deploy a new Drainer, obtain the `commit-ts` of the old Drainer as the `initialCommitTs` of the new Drainer.
+    1.  新しいDrainerをデプロイするには、古いDrainerの`commit-ts`を新しいDrainerの`initialCommitTs`として取得します。
 
-    2. Use [binlogctl to change the state of the old Drainer to `offline`](/tidb-binlog/maintain-tidb-binlog-cluster.md).
+    2.  [binlogctl は、古いDrainerの状態を`offline`に変更します。](/tidb-binlog/maintain-tidb-binlog-cluster.md)を使用します 。
 
-## How to restore the data of a cluster using a full backup and a binlog backup file?
+## 完全バックアップとbinlogバックアップ ファイルを使用してクラスターのデータを復元するにはどうすればよいですか? {#how-to-restore-the-data-of-a-cluster-using-a-full-backup-and-a-binlog-backup-file}
 
-1. Clean up the cluster and restore a full backup.
+1.  クラスターをクリーンアップし、完全バックアップを復元します。
 
-2. To restore the latest data of the backup file, use Reparo to set `start-tso` = {snapshot timestamp of the full backup + 1} and `end-ts` = 0 (or you can specify a point in time).
+2.  バックアップ ファイルの最新データを復元するには、 Reparoを使用して`start-tso` = {完全バックアップのスナップショット タイムスタンプ + 1} および`end-ts` = 0 を設定します (または、時点を指定することもできます)。
 
-## How to redeploy Drainer when enabling `ignore-error` in Primary-Secondary replication triggers a critical error?
+## プライマリ - セカンダリ レプリケーションで<code>ignore-error</code>有効にすると重大なエラーが発生する場合、 Drainerを再デプロイするにはどうすればよいですか? {#how-to-redeploy-drainer-when-enabling-code-ignore-error-code-in-primary-secondary-replication-triggers-a-critical-error}
 
-If a critical error is triggered when TiDB fails to write binlog after enabling `ignore-error`, TiDB stops writing binlog and binlog data loss occurs. To resume replication, perform the following steps:
+`ignore-error`を有効にした後に TiDB がbinlogの書き込みに失敗し、重大なエラーがトリガーされた場合、TiDB はbinlogの書き込みを停止し、binlogデータの損失が発生します。レプリケーションを再開するには、次の手順を実行します。
 
-1. Stop the Drainer instance.
+1.  Drainerインスタンスを停止します。
 
-2. Restart the `tidb-server` instance that triggers critical error and resume writing binlog (TiDB does not write binlog to Pump after critical error is triggered).
+2.  重大なエラーをトリガーする`tidb-server`インスタンスを再起動し、binlogの書き込みを再開します (重大なエラーがトリガーされた後、TiDB はbinlogをPumpに書き込みません)。
 
-3. Perform a full backup in the upstream.
+3.  アップストリームで完全バックアップを実行します。
 
-4. Clear the data in the downstream including the `tidb_binlog.checkpoint` table.
+4.  `tidb_binlog.checkpoint`テーブルを含む下流のデータをクリアします。
 
-5. Restore the full backup to the downstream.
+5.  完全バックアップをダウンストリームに復元します。
 
-6. Deploy Drainer and use `initialCommitTs` (set `initialCommitTs` as the snapshot timestamp of the full backup) as the start point of initial replication.
+6.  Drainerをデプロイ、初期レプリケーションの開始点として`initialCommitTs` (完全バックアップのスナップショット タイムスタンプとして`initialCommitTs`を設定) を使用します。
 
-## When can I pause or close a Pump or Drainer node?
+## PumpまたはDrainerノードを一時停止または閉じることができるのはいつですか? {#when-can-i-pause-or-close-a-pump-or-drainer-node}
 
-Refer to [TiDB Binlog Cluster Operations](/tidb-binlog/maintain-tidb-binlog-cluster.md) to learn the description of the Pump or Drainer state and how to start and exit the process.
+PumpまたはDrainerの状態の説明と、プロセスの開始および終了方法については、 [TiDBBinlogクラスタの操作](/tidb-binlog/maintain-tidb-binlog-cluster.md)を参照してください。
 
-Pause a Pump or Drainer node when you need to temporarily stop the service. For example:
+サービスを一時的に停止する必要がある場合は、 PumpノードまたはDrainerノードを一時停止します。例えば：
 
-- Version upgrade
+-   バージョンアップ
 
-  Use the new binary to restart the service after the process is stopped.
+    プロセスが停止した後、新しいバイナリを使用してサービスを再起動します。
 
-- Server maintenance
+-   サーバのメンテナンス
 
-  When the server needs a downtime maintenance, exit the process and restart the service after the maintenance is finished.
+    サーバーのダウンタイムメンテナンスが必要な場合は、プロセスを終了し、メンテナンス終了後にサービスを再起動します。
 
-Close a Pump or Drainer node when you no longer need the service. For example:
+サービスが必要なくなったら、PumpまたはDrainerノードを閉じます。例えば：
 
-- Pump scale-in
+-   Pumpのスケールイン
 
-  If you do not need too many Pump services, close some of them.
+    あまり多くのPumpサービスが必要ない場合は、いくつかを閉じてください。
 
-- Cancelling replication tasks
+-   レプリケーションタスクのキャンセル
 
-  If you no longer need to replicate data to a downstream database, close the corresponding Drainer node.
+    データをダウンストリーム データベースにレプリケートする必要がなくなった場合は、対応するDrainerノードを閉じます。
 
-- Service migration
+-   サービスの移行
 
-  If you need to migrate the service to another server, close the service and re-deploy it on the new server.
+    サービスを別のサーバーに移行する必要がある場合は、サービスを閉じて、新しいサーバーに再デプロイします。
 
-## How can I pause a Pump or Drainer process?
+## PumpまたはDrainerのプロセスを一時停止するにはどうすればよいですか? {#how-can-i-pause-a-pump-or-drainer-process}
 
-- Directly kill the process.
+-   プロセスを直接強制終了します。
 
-    > **Note:**
+    > **注記：**
     >
-    > Do not use the `kill -9` command. Otherwise, the Pump or Drainer node cannot process signals.
+    > `kill -9`コマンドは使用しないでください。そうしないと、 PumpノードまたはDrainerノードは信号を処理できません。
 
-- If the Pump or Drainer node runs in the foreground, pause it by pressing <kbd>Ctrl</kbd>+<kbd>C</kbd>.
-- Use the `pause-pump` or `pause-drainer` command in binlogctl.
+-   PumpまたはDrainerノードがフォアグラウンドで実行されている場合は、 <kbd>Ctrl</kbd> + <kbd>C</kbd>を押して一時停止します。
 
-## Can I use the `update-pump` or `update-drainer` command in binlogctl to pause the Pump or Drainer service?
+-   binlogctl の`pause-pump`または`pause-drainer`コマンドを使用します。
 
-No. The `update-pump` or `update-drainer` command directly modifies the state information saved in PD without notifying Pump or Drainer to perform the corresponding operation. Misusing the two commands can interrupt data replication and might even cause data loss.
+## binlogctl で<code>update-pump</code>または<code>update-drainer</code>コマンドを使用して、 PumpサービスまたはDrainerサービスを一時停止できますか? {#can-i-use-the-code-update-pump-code-or-code-update-drainer-code-command-in-binlogctl-to-pause-the-pump-or-drainer-service}
 
-## Can I use the `update-pump` or `update-drainer` command in binlogctl to close the Pump or Drainer service?
+いいえ`update-pump`または`update-drainer`コマンドは、 PumpまたはDrainerに対応する操作を実行するように通知せずに、PD に保存されている状態情報を直接変更します。 2 つのコマンドを誤って使用すると、データ レプリケーションが中断され、データ損失が発生する可能性もあります。
 
-No. The `update-pump` or `update-drainer` command directly modifies the state information saved in PD without notifying Pump or Drainer to perform the corresponding operation. Misusing the two commands interrupts data replication and might even cause data inconsistency. For example:
+## binlogctl で<code>update-pump</code>または<code>update-drainer</code>コマンドを使用して、 PumpサービスまたはDrainerサービスを閉じることはできますか? {#can-i-use-the-code-update-pump-code-or-code-update-drainer-code-command-in-binlogctl-to-close-the-pump-or-drainer-service}
 
-- When a Pump node runs normally or is in the `paused` state, if you use the `update-pump` command to set the Pump state to `offline`, the Drainer node stops pulling the binlog data from the `offline` Pump. In this situation, the newest binlog cannot be replicated to the Drainer node, causing data inconsistency between upstream and downstream.
-- When a Drainer node runs normally, if you use the `update-drainer` command to set the Drainer state to `offline`, the newly started Pump node only notifies Drainer nodes in the `online` state. In this situation, the `offline` Drainer fails to pull the binlog data from the Pump node in time, causing data inconsistency between upstream and downstream.
+いいえ`update-pump`または`update-drainer`コマンドは、 PumpまたはDrainerに対応する操作を実行するように通知せずに、PD に保存されている状態情報を直接変更します。 2 つのコマンドを誤って使用すると、データ レプリケーションが中断され、データの不整合が発生する可能性もあります。例えば：
 
-## When can I use the `update-pump` command in binlogctl to set the Pump state to `paused`?
+-   Pumpノードが正常に実行されているとき、または`paused`状態にあるときに、 `update-pump`コマンドを使用してPump状態を`offline`に設定すると、 Drainerノードは`offline` Pumpからのbinlogデータのプルを停止します。この状況では、最新のbinlogをDrainerノードに複製できず、アップストリームとダウンストリームの間でデータの不整合が発生します。
+-   Drainerノードが正常に実行されている場合、 `update-drainer`コマンドを使用してDrainer状態を`offline`に設定すると、新しく開始されたPumpノードは`online`状態のDrainerノードのみに通知します。この状況では、 `offline` Drainer がPumpノードからbinlogデータを時間内に取得できず、アップストリームとダウンストリームの間でデータの不整合が発生します。
 
-In some abnormal situations, Pump fails to correctly maintain its state. Then, use the `update-pump` command to modify the state.
+## binlogctl の<code>update-pump</code>コマンドを使用してPump状態を<code>paused</code>に設定できるのはいつですか? {#when-can-i-use-the-code-update-pump-code-command-in-binlogctl-to-set-the-pump-state-to-code-paused-code}
 
-For example, when a Pump process is exited abnormally (caused by directly exiting the process when a panic occurs or mistakenly using the `kill -9` command to kill the process), the Pump state information saved in PD is still `online`. In this situation, if you do not need to restart Pump to recover the service at the moment, use the `update-pump` command to update the Pump state to `paused`. Then, interruptions can be avoided when TiDB writes binlogs and Drainer pulls binlogs.
+異常な状況では、Pumpがその状態を正しく維持できなくなることがあります。次に、 `update-pump`コマンドを使用して状態を変更します。
 
-## When can I use the `update-drainer` command in binlogctl to set the Drainer state to `paused`?
+たとえば、 Pumpプロセスが異常終了した場合 (panic発生時にプロセスを直接終了したり、誤って`kill -9`コマンドを使用してプロセスを強制終了したりしたことが原因)、PD に保存されるPump状態情報は`online`のままです。この状況で、現時点でサービスを回復するためにPumpを再起動する必要がない場合は、 `update-pump`コマンドを使用してPump の状態を`paused`に更新します。これにより、TiDB がバイナリログを書き込み、 Drainer がバイナリログをプルするときの中断を回避できます。
 
-In some abnormal situations, the Drainer node fails to correctly maintain its state, which has influenced the replication task. Then, use the `update-drainer` command to modify the state.
+## binlogctl の<code>update-drainer</code>コマンドを使用して、 Drainer状態を<code>paused</code>に設定できるのはいつですか? {#when-can-i-use-the-code-update-drainer-code-command-in-binlogctl-to-set-the-drainer-state-to-code-paused-code}
 
-For example, when a Drainer process is exited abnormally (caused by directly exiting the process when a panic occurs or mistakenly using the `kill -9` command to kill the process), the Drainer state information saved in PD is still `online`. When a Pump node is started, it fails to notify the exited Drainer node (the `notify drainer ...` error), which cause the Pump node failure. In this situation, use the `update-drainer` command to update the Drainer state to `paused` and restart the Pump node.
+一部の異常な状況では、Drainerノードがその状態を正しく維持できず、レプリケーション タスクに影響を及ぼします。次に、 `update-drainer`コマンドを使用して状態を変更します。
 
-## How can I close a Pump or Drainer node?
+たとえば、 Drainerプロセスが異常終了した場合 (panic発生時にプロセスを直接終了したり、誤って`kill -9`コマンドを使用してプロセスを強制終了したりしたことが原因)、PD に保存されるDrainer の状態情報は`online`のままです。 Pumpノードが開始されると、終了したDrainerノードへの通知が失敗し ( `notify drainer ...`エラー)、 Pumpノードの障害が発生します。この状況では、 `update-drainer`コマンドを使用してDrainer状態を`paused`に更新し、 Pumpノードを再起動します。
 
-Currently, you can only use the `offline-pump` or `offline-drainer` command in binlogctl to close a Pump or Drainer node.
+## PumpまたはDrainerノードを閉じるにはどうすればよいですか? {#how-can-i-close-a-pump-or-drainer-node}
 
-## When can I use the `update-pump` command in binlogctl to set the Pump state to `offline`?
+現在、PumpまたはDrainerノードを閉じるには、binlogctl で`offline-pump`または`offline-drainer`コマンドのみを使用できます。
 
-You can use the `update-pump` command to set the Pump state to `offline` in the following situations:
+## binlogctl の<code>update-pump</code>コマンドを使用してPump状態を<code>offline</code>に設定できるのはいつですか? {#when-can-i-use-the-code-update-pump-code-command-in-binlogctl-to-set-the-pump-state-to-code-offline-code}
 
-- When a Pump process is exited abnormally and the service cannot be recovered, the replication task is interrupted. If you want to recover the replication and accept some losses of binlog data, use the `update-pump` command to set the Pump state to `offline`. Then, the Drainer node stops pulling binlog from the Pump node and continues replicating data.
-- Some stale Pump nodes are left over from historical tasks. Their processes have been exited and their services are no longer needed. Then, use the `update-pump` command to set their state to `offline`.
+次の状況では、 `update-pump`コマンドを使用してPump状態を`offline`に設定できます。
 
-For other situations, use the `offline-pump` command to close the Pump service, which is the regular process.
+-   Pumpプロセスが異常終了し、サービスを回復できない場合、レプリケーション タスクは中断されます。レプリケーションを回復し、binlogデータの一部の損失を許容する場合は、 `update-pump`コマンドを使用してPump状態を`offline`に設定します。その後、 DrainerノードはPumpノードからのbinlogの取得を停止し、データのレプリケーションを続行します。
+-   一部の古いPumpノードは、履歴タスクから残っています。彼らのプロセスは終了しており、サービスはもう必要ありません。次に、 `update-pump`コマンドを使用して状態を`offline`に設定します。
 
-> **Warning:**
+その他の状況では、 `offline-pump`コマンドを使用してPumpサービスを閉じます。これは通常のプロセスです。
+
+> **警告：**
 >
-> > Do not use the `update-pump` command unless you can tolerate binlog data loss and data inconsistency between upstream and downstream, or you no longer need the binlog data stored in the Pump node.
+> > binlogデータの損失やアップストリームとダウンストリーム間のデータの不一致を許容できる場合、またはPumpノードに保存されているbinlogデータが不要になった場合を除き、 `update-pump`コマンドを使用しないでください。
 
-## Can I use the `update-pump` command in binlogctl to set the Pump state to `offline` if I want to close a Pump node that is exited and set to `paused`?
+## 終了して一時停止に設定されているPumpノードを閉じたい場合、binlogctl で<code>update-pump</code>コマンドを使用してPump状態を<code>offline</code> <code>paused</code>設定できますか? {#can-i-use-the-code-update-pump-code-command-in-binlogctl-to-set-the-pump-state-to-code-offline-code-if-i-want-to-close-a-pump-node-that-is-exited-and-set-to-code-paused-code}
 
-When a Pump process is exited and the node is in the `paused` state, not all the binlog data in the node is consumed in its downstream Drainer node. Therefore, doing so might risk data inconsistency between upstream and downstream. In this situation, restart the Pump and use the `offline-pump` command to close the Pump node.
+Pumpプロセスが終了し、ノードが`paused`状態にある場合、ノード内のすべてのbinlogデータが下流のDrainerノードで消費されるわけではありません。したがって、これを行うと、上流と下流の間でデータの不整合が生じる危険性があります。この状況では、 Pump を再起動し、 `offline-pump`コマンドを使用してPumpノードを閉じます。
 
-## When can I use the `update-drainer` command in binlogctl to set the Drainer state to `offline`?
+## binlogctl の<code>update-drainer</code>コマンドを使用してDrainer状態を<code>offline</code>に設定できるのはいつですか? {#when-can-i-use-the-code-update-drainer-code-command-in-binlogctl-to-set-the-drainer-state-to-code-offline-code}
 
-Some stale Drainer nodes are left over from historical tasks. Their processes have been exited and their services are no longer needed. Then, use the `update-drainer` command to set their state to `offline`.
+一部の古いDrainerノードは、履歴タスクから残されています。彼らのプロセスは終了しており、サービスはもう必要ありません。次に、 `update-drainer`コマンドを使用して状態を`offline`に設定します。
 
-## Can I use SQL operations such as `change pump` and `change drainer` to pause or close the Pump or Drainer service?
+## <code>change pump</code>や<code>change drainer</code>などの SQL 操作を使用して、PumpまたはDrainerサービスを一時停止または終了できますか? {#can-i-use-sql-operations-such-as-code-change-pump-code-and-code-change-drainer-code-to-pause-or-close-the-pump-or-drainer-service}
 
-No. For more details on these SQL operations, refer to [Use SQL statements to manage Pump or Drainer](/tidb-binlog/maintain-tidb-binlog-cluster.md#use-sql-statements-to-manage-pump-or-drainer).
+いいえ。これらの SQL 操作の詳細については、 [SQL ステートメントを使用してPumpまたはDrainerを管理する](/tidb-binlog/maintain-tidb-binlog-cluster.md#use-sql-statements-to-manage-pump-or-drainer)を参照してください。
 
-These SQL operations directly modifies the state information saved in PD and are functionally equivalent to the `update-pump` and `update-drainer` commands in binlogctl. To pause or close the Pump or Drainer service, use the binlogctl tool.
+これらの SQL 操作は、PD に保存された状態情報を直接変更し、binlogctl の`update-pump`および`update-drainer`コマンドと機能的に同等です。 PumpサービスまたはDrainerサービスを一時停止または閉じるには、binlogctl ツールを使用します。
 
-## What can I do when some DDL statements supported by the upstream database cause error when executed in the downstream database?
+## アップストリーム データベースでサポートされている一部の DDL ステートメントをダウンストリーム データベースで実行するとエラーが発生する場合は、どうすればよいですか? {#what-can-i-do-when-some-ddl-statements-supported-by-the-upstream-database-cause-error-when-executed-in-the-downstream-database}
 
-To solve the problem, follow these steps:
+問題を解決するには、次の手順に従います。
 
-1. Check `drainer.log`. Search `exec failed` for the last failed DDL operation before the Drainer process is exited.
-2. Change the DDL version to the one compatible to the downstream. Perform this step manually in the downstream database.
-3. Check `drainer.log`. Search for the failed DDL operation and find the `commit-ts` of this operation. For example:
+1.  チェック`drainer.log` 。 Drainerプロセスが終了する前に、 `exec failed`に失敗した DDL 操作を検索します。
 
-    ```
-    [2020/05/21 09:51:58.019 +08:00] [INFO] [syncer.go:398] ["add ddl item to syncer, you can add this commit ts to `ignore-txn-commit-ts` to skip this ddl if needed"] [sql="ALTER TABLE `test` ADD INDEX (`index1`)"] ["commit ts"=416815754209656834].
-    ```
+2.  DDL バージョンをダウンストリームと互換性のあるものに変更します。この手順はダウンストリーム データベースで手動で実行します。
 
-4. Modify the `drainer.toml` configuration file. Add the `commit-ts` in the `ignore-txn-commit-ts` item and restart the Drainer node.
+3.  チェック`drainer.log` 。失敗した DDL 操作を検索し、この操作の`commit-ts`を見つけます。例えば：
 
-## TiDB fails to write to binlog and gets stuck, and `listener stopped, waiting for manual stop` appears in the log
+        [2020/05/21 09:51:58.019 +08:00] [INFO] [syncer.go:398] ["add ddl item to syncer, you can add this commit ts to `ignore-txn-commit-ts` to skip this ddl if needed"] [sql="ALTER TABLE `test` ADD INDEX (`index1`)"] ["commit ts"=416815754209656834].
 
-In TiDB v3.0.12 and earlier versions, the binlog write failure causes TiDB to report the fatal error. TiDB does not automatically exit but only stops the service, which seems like getting stuck. You can see the `listener stopped, waiting for manual stop` error in the log.
+4.  `drainer.toml`設定ファイルを変更します。 `ignore-txn-commit-ts`項目に`commit-ts`追加し、 Drainerノードを再起動します。
 
-You need to determine the specific causes of the binlog write failure. If the failure occurs because binlog is slowly written into the downstream, you can consider scaling out Pump or increasing the timeout time for writing binlog.
+## TiDB がbinlogへの書き込みに失敗してスタックし、 <code>listener stopped, waiting for manual stop</code>ログに表示される {#tidb-fails-to-write-to-binlog-and-gets-stuck-and-code-listener-stopped-waiting-for-manual-stop-code-appears-in-the-log}
 
-Since v3.0.13, the error-reporting logic is optimized. The binlog write failure causes transaction execution to fail and TiDB Binlog will return an error but will not get TiDB stuck.
+TiDB v3.0.12 以前のバージョンでは、binlogの書き込みエラーにより TiDB が致命的なエラーを報告します。 TiDB は自動的に終了せず、サービスを停止するだけなので、スタックしているように見えます。ログに`listener stopped, waiting for manual stop`エラーが表示されます。
 
-## TiDB writes duplicate binlogs to Pump
+binlog書き込み失敗の具体的な原因を特定する必要があります。 binlog のダウンストリームへの書き込みが遅いために障害が発生した場合は、 Pump をスケールアウトするか、 binlog の書き込みのタイムアウト時間を増やすことを検討できます。
 
-This issue does not affect the downstream and replication logic.
+v3.0.13 以降、エラー報告ロジックが最適化されています。 binlog書き込みの失敗によりトランザクションの実行が失敗し、TiDB Binlog はエラーを返しますが、TiDB はスタックしません。
 
-When the binlog write fails or becomes timeout, TiDB retries writing binlog to the next available Pump node until the write succeeds. Therefore, if the binlog write to a Pump node is slow and causes TiDB timeout (default 15s), then TiDB determines that the write fails and tries to write to the next Pump node. If binlog is actually successfully written to the timeout-causing Pump node, the same binlog is written to multiple Pump nodes. When Drainer processes the binlog, it automatically de-duplicates binlogs with the same TSO, so this duplicate write does not affect the downstream and replication logic.
+## TiDB は重複したバイナリログをPumpに書き込みます {#tidb-writes-duplicate-binlogs-to-pump}
 
-## Reparo is interrupted during the full and incremental restore process. Can I use the last TSO in the log to resume replication?
+この問題は、ダウンストリームおよびレプリケーション ロジックには影響しません。
 
-Yes. Reparo does not automatically enable the safe-mode when you start it. You need to perform the following steps manually:
+binlogの書き込みが失敗するかタイムアウトになると、TiDB は書き込みが成功するまで、次に利用可能なPumpノードへのbinlogの書き込みを再試行します。したがって、Pumpノードへのbinlogの書き込みが遅く、TiDB タイムアウト (デフォルトは 15 秒) が発生する場合、TiDB は書き込みが失敗したと判断し、次のPumpノードへの書き込みを試行します。実際にタイムアウトの原因となったPumpノードにbinlogが正常に書き込まれた場合、同じbinlogが複数のPumpノードに書き込まれます。 Drainer がbinlogを処理するとき、同じ TSO を持つ binlog の重複が自動的に除外されるため、この重複書き込みはダウンストリームおよびレプリケーション ロジックに影響を与えません。
 
-1. After Reparo is interrupted, record the last TSO in the log as `checkpoint-tso`.
-2. Modify the Reparo configuration file, set the configuration item `start-tso` to `checkpoint-tso + 1`, set `stop-tso` to `checkpoint-tso + 80,000,000,000` (approximately five minutes after the `checkpoint-tso`), and set `safe-mode` to `true`. Start Reparo, and Reparo replicates data to `stop-tso` and then stops automatically.
-3. After Reparo stops automatically, set `start-tso` to `checkpoint tso + 80,000,000,001`, set `stop-tso` to `0`, and set `safe-mode` to `false`. Start Reparo to resume replication.
+## Reparo は、完全復元プロセスおよび増分復元プロセス中に中断されます。ログ内の最後の TSO を使用してレプリケーションを再開できますか? {#reparo-is-interrupted-during-the-full-and-incremental-restore-process-can-i-use-the-last-tso-in-the-log-to-resume-replication}
+
+はい。 Reparo は、起動時にセーフ モードを自動的に有効にしません。次の手順を手動で実行する必要があります。
+
+1.  Reparoが中断された後、ログ内の最後の TSO を`checkpoint-tso`として記録します。
+2.  Reparo設定ファイルを変更し、設定項目`start-tso`を`checkpoint-tso + 1`に設定し、 `stop-tso` `checkpoint-tso + 80,000,000,000`に設定します ( `checkpoint-tso`の約 5 分後)、 `safe-mode`を`true`に設定します。 Reparo を開始すると、 Reparo はデータを`stop-tso`に複製し、その後自動的に停止します。
+3.  Reparoが自動停止した後、 `start-tso` ～ `checkpoint tso + 80,000,000,001` `stop-tso` `0` ～ `safe-mode` `false`設定します。 Reparoを起動してレプリケーションを再開します。

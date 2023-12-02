@@ -3,44 +3,34 @@ title: TiDB Data Migration Quick Start
 summary: Learn how to quickly deploy a DM cluster using binary packages.
 ---
 
-# Quick Start Guide for TiDB Data Migration
+# TiDB データ移行のクイック スタート ガイド {#quick-start-guide-for-tidb-data-migration}
 
-This document describes how to migrate data from MySQL to TiDB using [TiDB Data Migration](https://github.com/pingcap/dm) (DM). This guide is a quick demo of DM features and is not recommended for any production environment.
+このドキュメントでは、 [TiDB データ移行](https://github.com/pingcap/dm) (DM) を使用して MySQL から TiDB にデータを移行する方法について説明します。このガイドは DM 機能の簡単なデモであり、本番環境には推奨されません。
 
-## Step 1: Deploy a DM cluster
+## ステップ 1: DM クラスターをデプロイ {#step-1-deploy-a-dm-cluster}
 
-1. Install TiUP, and install [`dmctl`](/dm/dmctl-introduction.md) using TiUP:
-
-    {{< copyable "shell-regular" >}}
+1.  TiUPをインストールし、 TiUPを使用して[`dmctl`](/dm/dmctl-introduction.md)をインストールします。
 
     ```shell
     curl --proto '=https' --tlsv1.2 -sSf https://tiup-mirrors.pingcap.com/install.sh | sh
     tiup install dm dmctl
     ```
 
-2. Generate the minimal deployment topology file of a DM cluster:
+2.  DM クラスターの最小限のデプロイメント トポロジー ファイルを生成します。
 
-    {{< copyable "shell-regular" >}}
+        tiup dm template
 
-    ```
-    tiup dm template
-    ```
-
-3. Copy the configuration information in the output, and save it as the `topology.yaml` file with the modified IP address. Deploy the DM cluster with the `topology.yaml` file using TiUP:
-
-    {{< copyable "shell-regular" >}}
+3.  出力内の構成情報をコピーし、変更された IP アドレスを含む`topology.yaml`ファイルとして保存します。 TiUPを使用して、 `topology.yaml`ファイルを含む DM クラスターをデプロイ。
 
     ```shell
     tiup dm deploy dm-test 6.0.0 topology.yaml -p
     ```
 
-## Step 2: Prepare the data source
+## ステップ 2: データソースを準備する {#step-2-prepare-the-data-source}
 
-You can use one or multiple MySQL instances as an upstream data source.
+1 つまたは複数の MySQL インスタンスをアップストリーム データ ソースとして使用できます。
 
-1. Create a configuration file for each data source as follows:
-
-    {{< copyable "shell-regular" >}}
+1.  次のように、各データ ソースの構成ファイルを作成します。
 
     ```yaml
     source-id: "mysql-01"
@@ -51,19 +41,15 @@ You can use one or multiple MySQL instances as an upstream data source.
       port: 3306
     ```
 
-2. Add the source to the DM cluster by running the following command. `mysql-01.yaml` is the configuration file created in the previous step.
-
-    {{< copyable "shell-regular" >}}
+2.  次のコマンドを実行して、ソースを DM クラスターに追加します。 `mysql-01.yaml`は、前の手順で作成した構成ファイルです。
 
     ```bash
     tiup dmctl --master-addr=127.0.0.1:8261 operate-source create mysql-01.yaml # use one of master_servers as the argument of --master-addr
     ```
 
-If you do not have a MySQL instance for testing, you can create a MySQL instance in Docker by taking the following steps:
+テスト用の MySQL インスタンスがない場合は、次の手順を実行して、Docker で MySQL インスタンスを作成できます。
 
-1. Create a MySQL configuration file:
-
-    {{< copyable "shell-regular" >}}
+1.  MySQL 構成ファイルを作成します。
 
     ```shell
     mkdir -p /tmp/mysqltest && cd /tmp/mysqltest
@@ -82,43 +68,35 @@ If you do not have a MySQL instance for testing, you can create a MySQL instance
     EOF
     ```
 
-2. Start the MySQL instance using Docker:
-
-    {{< copyable "shell-regular" >}}
+2.  Docker を使用して MySQL インスタンスを起動します。
 
     ```shell
     docker run --name mysql-01 -v /tmp/mysqltest:/etc/mysql/conf.d -e MYSQL_ROOT_PASSWORD=my-secret-pw -d -p 3306:3306 mysql:5.7
     ```
 
-3. After the MySQL instance is started, access the instance:
+3.  MySQL インスタンスが起動したら、インスタンスにアクセスします。
 
-    > **Note:**
+    > **注記：**
     >
-    > This command is only suitable for trying out data migration, and cannot be used in production environments or stress tests.
-
-    {{< copyable "shell-regular" >}}
+    > このコマンドはデータ移行を試す場合にのみ適しており、本番環境やストレス テストでは使用できません。
 
     ```shell
     mysql -uroot -p -h 127.0.0.1 -P 3306
     ```
 
-## Step 3: Prepare a downstream database
+## ステップ 3: ダウンストリーム データベースを準備する {#step-3-prepare-a-downstream-database}
 
-You can choose an existing TiDB cluster as a target for data migration.
+既存の TiDB クラスターをデータ移行のターゲットとして選択できます。
 
-If you do not have a TiDB cluster for testing, you can quickly build a demonstration environment by running the following command:
-
-{{< copyable "shell-regular" >}}
+テスト用の TiDB クラスターがない場合は、次のコマンドを実行してデモンストレーション環境を迅速に構築できます。
 
 ```shell
 tiup playground
 ```
 
-## Step 4: Prepare test data
+## ステップ 4: テストデータを準備する {#step-4-prepare-test-data}
 
-Create a test table and data in one or multiple data sources. If you use an existing MySQL database, and the database contains available data, you can skip this step.
-
-{{< copyable "sql" >}}
+1 つまたは複数のデータ ソースにテスト テーブルとデータを作成します。既存の MySQL データベースを使用しており、そのデータベースに利用可能なデータが含まれている場合は、この手順をスキップできます。
 
 ```sql
 drop database if exists `testdm`;
@@ -130,11 +108,9 @@ insert into t1 (id, uid, name) values (1, 10001, 'Gabriel García Márquez'), (2
 insert into t2 (id, uid, name) values (3, 20001, 'José Arcadio Buendía'), (4, 20002, 'Úrsula Iguarán'), (5, 20003, 'José Arcadio');
 ```
 
-## Step 5: Create a data migration task
+## ステップ 5: データ移行タスクを作成する {#step-5-create-a-data-migration-task}
 
-1. Create a task configuration file `testdm-task.yaml`:
-
-    {{< copyable "" >}}
+1.  タスク構成ファイルを作成します`testdm-task.yaml` :
 
     ```yaml
     name: testdm
@@ -156,21 +132,17 @@ insert into t2 (id, uid, name) values (3, 20001, 'José Arcadio Buendía'), (4, 
         do-dbs: ["testdm"]
     ```
 
-2. Create the task using dmctl:
-
-    {{< copyable "shell-regular" >}}
+2.  dmctl を使用してタスクを作成します。
 
     ```bash
     tiup dmctl --master-addr 127.0.0.1:8261 start-task testdm-task.yaml
     ```
 
-You have successfully created a task that migrates data from a `mysql-01` database to TiDB.
+`mysql-01`データベースから TiDB にデータを移行するタスクが正常に作成されました。
 
-## Step 6: Check the status of the task
+## ステップ 6: タスクのステータスを確認する {#step-6-check-the-status-of-the-task}
 
-After the task is created, you can use the `dmctl query-status` command to check the status of the task:
-
-{{< copyable "shell-regular" >}}
+タスクの作成後、 `dmctl query-status`コマンドを使用してタスクのステータスを確認できます。
 
 ```bash
 tiup dmctl --master-addr 127.0.0.1:8261 query-status testdm

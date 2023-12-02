@@ -3,47 +3,47 @@ title: ticloud branch connect-info
 summary: The reference of `ticloud branch connect-info`.
 ---
 
-# ticloud branch connect-info
+# ticloud ブランチ接続情報 {#ticloud-branch-connect-info}
 
-Get the connection string of a branch:
+ブランチの接続文字列を取得します。
 
 ```shell
 ticloud branch connect-info [flags]
 ```
 
-## Examples
+## 例 {#examples}
 
-Get the connection string of a branch in interactive mode:
+対話モードでブランチの接続文字列を取得します。
 
 ```shell
 ticloud branch connect-info
 ```
 
-Get the connection string of a branch in non-interactive mode:
+非対話モードでブランチの接続文字列を取得します。
 
 ```shell
 ticloud branch connect-info --branch-id <branch-id> --cluster-id <cluster-id> --client <client-name> --operating-system <operating-system>
 ```
 
-## Flags
+## フラグ {#flags}
 
-In non-interactive mode, you need to manually enter the required flags. In interactive mode, you can just follow CLI prompts to fill them in.
+非対話型モードでは、必要なフラグを手動で入力する必要があります。対話型モードでは、CLI プロンプトに従って入力するだけです。
 
-| Flag                      | Description                                                                                                                                                                                                                                                                                                                                                                                                                         | Required | Note                                                 |
-|---------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------|------------------------------------------------------|
-| -c, --cluster-id string   | The ID of the cluster, in which the branch is created                                                                                                                                                                                                                                                                                                                                                                               | Yes      | Only works in non-interactive mode.                  |
-| -b, --branch-id string    | The ID of the branch                                                                                                                                                                                                                                                                                                                                                                                                                | Yes      | Only works in non-interactive mode.                  |
-| --client string           | The desired client used for the connection. Supported clients include `general`, `mysql_cli`, `mycli`, `libmysqlclient`, `python_mysqlclient`, `pymysql`, `mysql_connector_python`, `mysql_connector_java`, `go_mysql_driver`, `node_mysql2`, `ruby_mysql2`, `php_mysqli`, `rust_mysql`, `mybatis`, `hibernate`, `spring_boot`, `gorm`, `prisma`, `sequelize_mysql2`, `django_tidb`, `sqlalchemy_mysqlclient`, and `active_record`. | Yes      | Only works in non-interactive mode.                  |
-| --operating-system string | The operating system name. Supported operating systems include `macOS`, `Windows`, `Ubuntu`, `CentOS`, `RedHat`, `Fedora`, `Debian`, `Arch`, `OpenSUSE`, `Alpine`, and `Others`.                                                                                                                                                                                                                                                    | Yes      | Only works in non-interactive mode.                  |
-| -h, --help                | Help information for this command                                                                                                                                                                                                                                                                                                                                                                                                   | No       | Works in both non-interactive and interactive modes. |
+| フラグ                 | 説明                                                                                                                                                                                                                                                                                                                                                     | 必須  | 注記                       |
+| ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --- | ------------------------ |
+| -c、--cluster-id 文字列 | ブランチが作成されるクラスターの ID                                                                                                                                                                                                                                                                                                                                    | はい  | 非対話モードでのみ動作します。          |
+| -b、--ブランチ ID 文字列    | ブランチのID                                                                                                                                                                                                                                                                                                                                                | はい  | 非対話モードでのみ動作します。          |
+| --クライアント文字列         | 接続に使用される目的のクライアント。 `go_mysql_driver` `php_mysqli` `rust_mysql` `spring_boot` `mysql_cli` `pymysql` `mysql_connector_python` `general` `hibernate` `mybatis` `ruby_mysql2` `mycli` `mysql_connector_java` `libmysqlclient` `python_mysqlclient` `node_mysql2` `gorm` `prisma` `sequelize_mysql2` `django_tidb` `sqlalchemy_mysqlclient` `active_record` | はい  | 非対話モードでのみ動作します。          |
+| --オペレーティング システム文字列  | オペレーティング システム名。サポートされているオペレーティング システムには、 `macOS` 、 `Windows` 、 `Ubuntu` 、 `CentOS` 、 `RedHat` 、 `Fedora` 、 `Debian` 、 `Arch` 、 `OpenSUSE` 、 `Alpine` 、および`Others`が含まれます。                                                                                                                                                                               | はい  | 非対話モードでのみ動作します。          |
+| -h, --help          | このコマンドのヘルプ情報                                                                                                                                                                                                                                                                                                                                           | いいえ | 非対話型モードと対話型モードの両方で動作します。 |
 
-## Inherited flags
+## 継承されたフラグ {#inherited-flags}
 
-| Flag                 | Description                                                                                           | Required | Note                                                                                                              |
-|----------------------|-------------------------------------------------------------------------------------------------------|----------|-------------------------------------------------------------------------------------------------------------------|
-| --no-color           | Disables color in output.                                                                             | No       | Only works in non-interactive mode. In interactive mode, disabling color might not work with some UI components.  |
-| -P, --profile string | Specifies the active [user profile](/tidb-cloud/cli-reference.md#user-profile) used in this command.  | No       | Works in both non-interactive and interactive modes.                                                              |
+| フラグ            | 説明                                                                               | 必須  | 注記                                                                |
+| -------------- | -------------------------------------------------------------------------------- | --- | ----------------------------------------------------------------- |
+| --色なし          | 出力のカラーを無効にします。                                                                   | いいえ | 非対話モードでのみ動作します。インタラクティブ モードでは、一部の UI コンポーネントで色の無効化が機能しない可能性があります。 |
+| -P、--プロファイル文字列 | このコマンドで使用されるアクティブな[ユーザープロフィール](/tidb-cloud/cli-reference.md#user-profile)を指定します。 | いいえ | 非対話型モードと対話型モードの両方で動作します。                                          |
 
-## Feedback
+## フィードバック {#feedback}
 
-If you have any questions or suggestions on the TiDB Cloud CLI, feel free to create an [issue](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose). Also, we welcome any contributions.
+TiDB Cloud CLI に関して質問や提案がある場合は、お気軽に[問題](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose)を作成してください。また、貢献も歓迎します。

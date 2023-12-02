@@ -2,32 +2,32 @@
 title: tiup cluster meta backup
 ---
 
-# tiup cluster meta backup
+# tiup クラスターのメタバックアップ {#tiup-cluster-meta-backup}
 
-The TiUP meta file is used for cluster operation and maintenance (OM). If this file is lost, you cannot use TiUP to manage the cluster. To avoid this situation, you can use the `tiup cluster meta backup` command to back up the TiUP meta file regularly.
+TiUPメタ ファイルは、クラスターの運用と保守 (OM) に使用されます。このファイルが失われると、 TiUP を使用してクラスターを管理することができなくなります。この状況を回避するには、 `tiup cluster meta backup`コマンドを使用してTiUPメタ ファイルを定期的にバックアップします。
 
-## Syntax
+## 構文 {#syntax}
 
 ```shell
 tiup cluster meta backup <cluster-name> [flags]
 ```
 
-`<cluster-name>` is the name of the cluster to be operated on. If you forget the cluster name, you can check it using the [`tiup dm list`](/tiup/tiup-component-dm-list.md) command.
+`<cluster-name>`は、操作対象のクラスターの名前です。クラスター名を忘れた場合は、 [`tiup dm list`](/tiup/tiup-component-dm-list.md)コマンドを使用して確認できます。
 
-## Options
+## オプション {#options}
 
-### --file (string, defaults to the current directory)
+### --file (文字列、デフォルトは現在のディレクトリ) {#file-string-defaults-to-the-current-directory}
 
-Specifies the target directory to store the TiUP meta backup file.
+TiUPメタ バックアップ ファイルを保存するターゲット ディレクトリを指定します。
 
-### -h, --help
+### -h, --help {#h-help}
 
-- Prints the help information.
-- Data type: `Boolean`
-- This option is disabled by default and its default value is `false`. To enable this option, you can add this option to the command, and pass the `true` value or do not pass any value.
+-   ヘルプ情報を出力します。
+-   データ型: `Boolean`
+-   このオプションはデフォルトでは無効になっており、デフォルト値は`false`です。このオプションを有効にするには、このオプションをコマンドに追加して、値`true`渡すか、値を渡さないことができます。
 
-## Output
+## 出力 {#output}
 
-The execution logs of tiup-cluster.
+tiup-clusterの実行ログ。
 
-[<< Back to the previous page - TiUP Cluster command list](/tiup/tiup-component-cluster.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUPクラスタコマンド リスト](/tiup/tiup-component-cluster.md#command-list)

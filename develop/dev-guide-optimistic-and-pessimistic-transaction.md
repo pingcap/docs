@@ -3,41 +3,41 @@ title: Optimistic Transactions and Pessimistic Transactions
 summary: Learn about optimistic and pessimistic transactions in TiDB.
 ---
 
-# Optimistic Transactions and Pessimistic Transactions
+# 楽観的なトランザクションと悲観的なトランザクション {#optimistic-transactions-and-pessimistic-transactions}
 
-The [optimistic transaction](/optimistic-transaction.md) model commits the transaction directly, and rolls back when there is a conflict. By contrast, the [pessimistic transaction](/pessimistic-transaction.md) model tries to lock the resources that need to be modified before actually committing the transaction, and only starts committing after ensuring that the transaction can be successfully executed.
+[楽観的取引](/optimistic-transaction.md)モデルはトランザクションを直接コミットし、競合が発生した場合はロールバックします。対照的に、 [悲観的取引](/pessimistic-transaction.md)モデルは、トランザクションを実際にコミットする前に、変更が必要なリソースのロックを試行し、トランザクションが正常に実行できることを確認した後でのみコミットを開始します。
 
-The optimistic transaction model is suitable for scenarios with low conflict rates, because the direct commit has a high probability of success. But once a transaction conflict occurs, the cost of rollback is relatively high.
+楽観的トランザクション モデルは、直接コミットが成功する可能性が高いため、競合率が低いシナリオに適しています。ただし、トランザクションの競合が発生すると、ロールバックのコストが比較的高くなります。
 
-The advantage of the pessimistic transaction model is that for scenarios with high conflict rates, the cost of locking ahead is less than the cost of rollback afterwards. Moreover, it can solve the problem that multiple concurrent transactions fail to commit due to conflicts. However, the pessimistic transaction model is not as efficient as the optimistic transaction model in scenarios with low conflict rates.
+悲観的トランザクション モデルの利点は、競合率が高いシナリオでは、事前にロックするコストがその後のロールバックのコストよりも低いことです。さらに、複数の同時トランザクションが競合によりコミットできないという問題も解決できます。ただし、競合率が低いシナリオでは、悲観的楽観的モデルは楽観的なトランザクション モデルほど効率的ではありません。
 
-The pessimistic transaction model is more intuitive and easier to implement on the application side. The optimistic transaction model requires complex application-side retry mechanisms.
+悲観的トランザクション モデルはより直感的で、アプリケーション側での実装が簡単です。楽観的トランザクション モデルには、アプリケーション側の複雑な再試行メカニズムが必要です。
 
-The following is an example of a [bookshop](/develop/dev-guide-bookshop-schema-design.md). It uses an example of buying books to show the pros and cons of optimistic and pessimistic transactions. The process of buying books mainly consists of the following:
+以下は[書店](/develop/dev-guide-bookshop-schema-design.md)の例です。本を購入する例を使用して、楽観的取引と悲観悲観的取引の長所と短所を示しています。本を買うまでの流れは主に以下のような流れになります。
 
-1. Update the stock quantity
-2. Create an order
-3. Make the payment
+1.  在庫数を更新します
+2.  注文を作成する
+3.  支払いをする
 
-These operations must either all succeed or all fail. You must ensure that overselling does not happen in the case of concurrent transactions.
+これらの操作はすべて成功するか、すべて失敗する必要があります。同時トランザクションの場合は、過剰販売が発生しないようにする必要があります。
 
-## Pessimistic transactions
+## 悲観的な取引 {#pessimistic-transactions}
 
-The following code uses two threads to simulate the process that two users buy the same book in a pessimistic transaction mode. There are 10 books left in the bookstore. Bob buys 6 books, and Alice buys 4 books. They complete the orders at nearly the same time. As a result, all books in inventory are sold out.
+次のコードは、2 つのスレッドを使用して、2 人のユーザーが悲観的トランザクション モードで同じ書籍を購入するプロセスをシミュレートします。本屋には10冊の本が残っています。ボブは 6 冊の本を購入し、アリスは 4 冊の本を購入します。彼らはほぼ同時に注文を完了します。その結果、在庫の書籍はすべて完売となりました。
 
 <SimpleTab groupId="language">
 
 <div label="Java" value="java">
 
-Because you use multiple threads to simulate the situation that multiple users insert data simultaneously, you need to use a connection object with safe threads. Here use Java's popular connection pool [HikariCP](https://github.com/brettwooldridge/HikariCP) for demo.
+複数のスレッドを使用して複数のユーザーが同時にデータを挿入する状況をシミュレートするため、安全なスレッドを持つ接続オブジェクトを使用する必要があります。ここでは、Java の一般的な接続プール[HikariCP](https://github.com/brettwooldridge/HikariCP)をデモに使用します。
 
 </div>
 
 <div label="Golang" value="golang">
 
-`sql.DB` in Golang is concurrency-safe, so there is no need to import a third-party package.
+Golangの`sql.DB`同時実行安全であるため、サードパーティのパッケージをインポートする必要はありません。
 
-To adapt TiDB transactions, write a toolkit [util](https://github.com/pingcap-inc/tidb-example-golang/tree/main/util) according to the following code:
+TiDB トランザクションを適応させるには、次のコードに従ってツールキット[ユーティリティ](https://github.com/pingcap-inc/tidb-example-golang/tree/main/util)を作成します。
 
 ```go
 package util
@@ -93,21 +93,21 @@ func (tx *TiDBSqlTx) Rollback() error {
 
 <div label="Python" value="python">
 
-To ensure thread safety, you can use the mysqlclient driver to open multiple connections that are not shared between threads.
+スレッドの安全性を確保するために、mysqlclient ドライバーを使用して、スレッド間で共有されない複数の接続を開くことができます。
 
 </div>
 
 </SimpleTab>
 
-### Write a pessimistic transaction example
+### 悲観的トランザクションの例を書く {#write-a-pessimistic-transaction-example}
 
 <SimpleTab groupId="language">
 
 <div label="Java" value="java">
 
-**Configuration file**
+**コンフィグレーションファイル**
 
-If you use Maven to manage the package, in the `<dependencies>` node in `pom.xml`, add the following dependencies to import `HikariCP`, and set the packaging target, and the main class of the JAR package startup. The following is an example of `pom.xml`.
+Maven を使用してパッケージを管理する場合は、 `pom.xml`の`<dependencies>`ノードで、 import `HikariCP`に次の依存関係を追加し、パッケージ化ターゲットと JAR パッケージ起動のメイン クラスを設定します。以下は`pom.xml`の例です。
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -183,9 +183,9 @@ If you use Maven to manage the package, in the `<dependencies>` node in `pom.xml
 </project>
 ```
 
-**Coding**
+**コーディング**
 
-Then write the code:
+次に、コードを書きます。
 
 ```java
 package com.pingcap.txn;
@@ -334,7 +334,7 @@ public class TxnExample {
 
 <div label="Golang" value="golang">
 
-Write a `helper.go` file that contains the required database operations:
+必要なデータベース操作を含む`helper.go`ファイルを書き込みます。
 
 ```go
 package main
@@ -582,7 +582,7 @@ func createUser(txn *util.TiDBSqlTx, id int, nickname string, balance decimal.De
 }
 ```
 
-Then write a `txn.go` with a `main` function to call `helper.go` and handle the incoming command line arguments:
+次に、 `helper.go`を呼び出して受信コマンド ライン引数を処理する`main`関数を含む`txn.go`を記述します。
 
 ```go
 package main
@@ -648,7 +648,7 @@ func parseParams() (optimistic bool, alice, bob int) {
 }
 ```
 
-The Golang example already includes optimistic transactions.
+Golang の例にはすでに楽観的トランザクションが含まれています。
 
 </div>
 
@@ -829,15 +829,15 @@ bob_thread.join(timeout=10)
 alice_thread.join(timeout=10)
 ```
 
-The Python example already includes optimistic transactions.
+Python の例には、楽観的トランザクションがすでに含まれています。
 
 </div>
 
 </SimpleTab>
 
-### An example that does not involve overselling
+### 過剰販売を伴わない例 {#an-example-that-does-not-involve-overselling}
 
-Run the sample program:
+サンプル プログラムを実行します。
 
 <SimpleTab groupId="language">
 
@@ -869,7 +869,7 @@ OPTIMISTIC=False ALICE=4 BOB=6 python3 txn_example.py
 
 </SimpleTab>
 
-SQL logs:
+SQL ログ:
 
 ```sql
 /* txn 1 */ BEGIN PESSIMISTIC
@@ -886,7 +886,7 @@ SQL logs:
 /* txn 1 */ COMMIT
 ```
 
-Finally, check that the order is created, the user balance is deducted, and the book inventory is deducted as expected.
+最後に、注文が作成され、ユーザー残高が差し引かれ、書籍の在庫が予想どおりに差し引かれていることを確認します。
 
 ```sql
 mysql> SELECT * FROM `books`;
@@ -916,11 +916,11 @@ mysql> SELECT * FROM users;
 2 rows in set (0.00 sec)
 ```
 
-### An example that prevents overselling
+### 過剰販売を防ぐ例 {#an-example-that-prevents-overselling}
 
-The task in this example is more challenging. Suppose there are 10 books left in stock. Bob buys 7 books, Alice buys 4 books, and they place orders almost at the same time. What will happen? You can reuse the code from the previous example to solve this challenge, and change Bob's purchase quantity from 6 to 7.
+この例のタスクはさらに困難です。在庫が 10 冊残っているとします。ボブは 7​​ 冊の本を購入し、アリスは 4 冊の本を購入し、ほぼ同時に注文します。何が起こるか？前の例のコードを再利用してこの課題を解決し、Bob の購入数量を 6 から 7 に変更できます。
 
-Run the sample program:
+サンプル プログラムを実行します。
 
 <SimpleTab groupId="language">
 
@@ -965,9 +965,9 @@ OPTIMISTIC=False ALICE=4 BOB=7 python3 txn_example.py
 /* txn 1 */ ROLLBACK
 ```
 
-Since `txn 2` preemptively gets the lock resource and updates the stock, the return value of `affected_rows` in `txn 1` is 0, and it enters the `rollback` process.
+`txn 2`ロックリソースを先取りしてストックを更新するため、 `txn 1`の`affected_rows`の戻り値は0となり、 `rollback`処理に入ります。
 
-Let's check the order creation, user balance deduction, and book inventory deduction. Alice successfully ordered 4 books, Bob failed to order 7 books, and the remaining 6 books are in stock as expected.
+注文の作成、ユーザー残高の控除、帳簿在庫の控除を確認してみましょう。アリスは 4 冊の注文に成功しましたが、ボブは 7​​ 冊の注文に失敗しました。残りの 6 冊は予想どおり在庫があります。
 
 ```sql
 mysql> SELECT * FROM books;
@@ -996,17 +996,17 @@ mysql> SELECT * FROM users;
 2 rows in set (0.01 sec)
 ```
 
-## Optimistic transactions
+## 楽観的な取引 {#optimistic-transactions}
 
-The following code uses two threads to simulate the process that two users buy the same book in an optimistic transaction, just like the pessimistic transaction example. There are 10 books left in inventory. Bob buys 6 and Alice buys 4. They complete the order at about the same time. In the end, no books are left in inventory.
+次のコードは、楽観的トランザクションの例と同様に、2 つのスレッドを使用して、悲観的トランザクションで 2 人のユーザーが同じ書籍を購入するプロセスをシミュレートします。在庫はあと10冊あります。ボブは 6 個、アリスは 4 個購入します。彼らはほぼ同時に注文を完了します。結局、在庫に本は残りません。
 
-### Write an optimistic transaction example
+### 楽観的トランザクションの例を作成する {#write-an-optimistic-transaction-example}
 
 <SimpleTab groupId="language">
 
 <div label="Java" value="java">
 
-**Coding**
+**コーディング**
 
 ```java
 package com.pingcap.txn.optimistic;
@@ -1164,15 +1164,15 @@ public class TxnExample {
 }
 ```
 
-**Configuration changes**
+**コンフィグレーションの変更**
 
-Change the startup class in `pom.xml`:
+`pom.xml`でスタートアップ クラスを変更します。
 
 ```xml
 <mainClass>com.pingcap.txn.TxnExample</mainClass>
 ```
 
-Change it to the following to point to the optimistic transaction example.
+これを次のように変更して、楽観的トランザクションの例を指すようにします。
 
 ```xml
 <mainClass>com.pingcap.txn.optimistic.TxnExample</mainClass>
@@ -1182,21 +1182,21 @@ Change it to the following to point to the optimistic transaction example.
 
 <div label="Golang" value="golang">
 
-The Golang example in the [Write a pessimistic transaction example](#write-a-pessimistic-transaction-example) section already supports optimistic transactions and can be used directly without changes.
+[悲観的トランザクションの例を書く](#write-a-pessimistic-transaction-example)セクションのGolang の例はすでに楽観的トランザクションをサポートしており、変更せずに直接使用できます。
 
 </div>
 
 <div label="Python" value="python">
 
-The Python example in the [Write a pessimistic transaction example](#write-a-pessimistic-transaction-example) section already supports optimistic transactions and can be used directly without changes.
+[悲観的トランザクションの例を書く](#write-a-pessimistic-transaction-example)セクションの Python の例はすでに楽観的トランザクションをサポートしており、変更せずに直接使用できます。
 
 </div>
 
 </SimpleTab>
 
-### An example that does not involve overselling
+### 過剰販売を伴わない例 {#an-example-that-does-not-involve-overselling}
 
-Run the sample program:
+サンプル プログラムを実行します。
 
 <SimpleTab groupId="language">
 
@@ -1228,7 +1228,7 @@ OPTIMISTIC=True ALICE=4 BOB=6 python3 txn_example.py
 
 </SimpleTab>
 
-SQL statement execution process:
+SQL文の実行処理：
 
 ```sql
     /* txn 2 */ BEGIN OPTIMISTIC
@@ -1251,9 +1251,9 @@ retry 1 times for 9007 Write conflict, txnStartTS=432618733006225412, conflictSt
 /* txn 1 */ COMMIT
 ```
 
-In the optimistic transaction mode, because the intermediate state is not necessarily correct, it is not possible to judge whether a statement is successfully executed through `affected_rows` as in the pessimistic transaction mode. You need to regard the transaction as a whole, and judge whether the current transaction has a write conflict by checking whether the final `COMMIT` statement returns an exception.
+楽観的トランザクションモードでは、中間状態が必ずしも正しいとは限らないため、悲観的トランザクションモードのようにステートメントの実行が成功したかどうかを`affected_rows`から判断することはできません。トランザクション全体を考慮し、最後の`COMMIT`のステートメントが例外を返すかどうかを確認することで、現在のトランザクションに書き込み競合があるかどうかを判断する必要があります。
 
-As you can see from the above SQL log, because two transactions are executed concurrently and the same record is modified, a `9007 Write conflict` exception is thrown after `txn 1` COMMIT. For write conflicts in the optimistic transaction mode, you can safely retry on the application side. After one retry, the data is committed successfully. The final execution result is as expected:
+上記の SQL ログからわかるように、2 つのトランザクションが同時に実行され、同じレコードが変更されるため、 `txn 1` COMMIT 後に`9007 Write conflict`例外がスローされます。楽観的トランザクション モードでの書き込み競合の場合は、アプリケーション側で安全に再試行できます。 1 回の再試行の後、データは正常にコミットされます。最終的な実行結果は予想どおりです。
 
 ```sql
 mysql> SELECT * FROM books;
@@ -1283,11 +1283,11 @@ mysql> SELECT * FROM users;
 2 rows in set (0.00 sec)
 ```
 
-### An example that prevents overselling
+### 過剰販売を防ぐ例 {#an-example-that-prevents-overselling}
 
-This section describes an optimistic transaction example that prevents overselling. Suppose there are 10 books left in inventory. Bob buys 7 books,and Alice buys 4 books. They place orders almost at the same time. What will happen? You can reuse the code from the optimistic transaction example to address this requirement. Change Bob's purchases from 6 to 7.
+このセクションでは、売り過ぎを防ぐ楽観的取引の例について説明します。在庫に 10 冊の本が残っているとします。ボブは 7​​ 冊の本を買い、アリスは 4 冊の本を買います。彼らはほぼ同時に注文を出します。何が起こるか？楽観的トランザクションの例のコードを再利用して、この要件に対処できます。ボブの購入数を 6 から 7 に変更します。
 
-Run the sample program:
+サンプル プログラムを実行します。
 
 <SimpleTab groupId="language">
 
@@ -1338,7 +1338,7 @@ Fail -> out of stock
 /* txn 1 */ ROLLBACK
 ```
 
-You can see from the above SQL log that `txn 1` is retried on the application side due to a write conflict in the first execution. By comparing the latest snapshots, you can find that the stock is running out. The application side throws `out of stock`, and ends abnormally.
+上記の SQL ログから、最初の実行で書き込み競合が発生したため、アプリケーション側で`txn 1`が再試行されたことがわかります。最新のスナップショットを比較すると、在庫がなくなりつつあることがわかります。アプリケーション側は`out of stock`スローし、異常終了します。
 
 ```sql
 mysql> SELECT * FROM books;

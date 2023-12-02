@@ -3,15 +3,15 @@ title: ANALYZE | TiDB SQL Statement Reference
 summary: An overview of the usage of ANALYZE for the TiDB database.
 ---
 
-# ANALYZE
+# 分析する {#analyze}
 
-This statement updates the statistics that TiDB builds on tables and indexes. It is recommended to run `ANALYZE` after performing a large batch update or import of records, or when you notice that query execution plans are sub-optimal.
+このステートメントは、TiDB がテーブルとインデックスに基づいて構築する統計を更新します。大規模なバッチ更新またはレコードのインポートを実行した後、またはクエリ実行プランが最適ではないことに気付いた場合は、 `ANALYZE`実行することをお勧めします。
 
-TiDB will also automatically update its statistics over time as it discovers that they are inconsistent with its own estimates.
+TiDB はまた、統計が独自の推定値と矛盾していることを発見すると、時間の経過とともに自動的に統計を更新します。
 
-Currently, TiDB collects statistical information as a full collection by using the `ANALYZE TABLE` statement. For more information, see [Introduction to statistics](/statistics.md).
+現在、TiDB は`ANALYZE TABLE`ステートメントを使用して統計情報を完全なコレクションとして収集します。詳細については、 [統計学入門](/statistics.md)を参照してください。
 
-## Synopsis
+## あらすじ {#synopsis}
 
 ```ebnf+diagram
 AnalyzeTableStmt ::=
@@ -45,7 +45,7 @@ PartitionNameList ::=
     Identifier ( ',' Identifier )*
 ```
 
-## Examples
+## 例 {#examples}
 
 ```sql
 mysql> CREATE TABLE t1 (id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, c1 INT NOT NULL);
@@ -74,7 +74,7 @@ mysql> EXPLAIN SELECT * FROM t1 WHERE c1 = 3;
 2 rows in set (0.00 sec)
 ```
 
-The status of the current statistics is `pseudo`, which means the statistics is inaccurate.
+現在の統計のステータスは`pseudo`です。これは、統計が不正確であることを意味します。
 
 ```sql
 mysql> ANALYZE TABLE t1;
@@ -90,16 +90,16 @@ mysql> EXPLAIN SELECT * FROM t1 WHERE c1 = 3;
 2 rows in set (0.00 sec)
 ```
 
-The statistics is now correctly updated and loaded.
+統計が正しく更新され、ロードされるようになりました。
 
-## MySQL compatibility
+## MySQLの互換性 {#mysql-compatibility}
 
-TiDB differs from MySQL in **both** the statistics it collects and how it makes use of statistics during query execution. While this statement is syntactically similar to MySQL, the following differences apply:
+TiDB は、収集する統計とクエリ実行中の統計の利用方法の**両方**において MySQL とは異なります。このステートメントは構文的には MySQL と似ていますが、次のような違いがあります。
 
-+ TiDB might not include very recently committed changes when running `ANALYZE TABLE`. After a batch update of rows, you might need to `sleep(1)` before executing `ANALYZE TABLE` in order for the statistics update to reflect these changes. See [#16570](https://github.com/pingcap/tidb/issues/16570).
-+ `ANALYZE TABLE` takes significantly longer to execute in TiDB than MySQL.
+-   TiDB には、 `ANALYZE TABLE`の実行時に最近コミットされた変更が含まれていない可能性があります。行のバッチ更新後、統計の更新にこれらの変更を反映させるには、 `ANALYZE TABLE`実行する前に`sleep(1)`を実行する必要がある場合があります。 [#16570](https://github.com/pingcap/tidb/issues/16570)を参照してください。
+-   `ANALYZE TABLE` TiDB での実行に MySQL よりも大幅に時間がかかります。
 
-## See also
+## こちらも参照 {#see-also}
 
-* [EXPLAIN](/sql-statements/sql-statement-explain.md)
-* [EXPLAIN ANALYZE](/sql-statements/sql-statement-explain-analyze.md)
+-   [EXPLAIN](/sql-statements/sql-statement-explain.md)
+-   [EXPLAINの説明](/sql-statements/sql-statement-explain-analyze.md)

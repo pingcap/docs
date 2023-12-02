@@ -3,11 +3,11 @@ title: CREATE USER | TiDB SQL Statement Reference
 summary: An overview of the usage of CREATE USER for the TiDB database.
 ---
 
-# CREATE USER
+# ユーザーを作成 {#create-user}
 
-This statement creates a new user, specified with a password. In the MySQL privilege system, a user is the combination of a username and the host from which they are connecting from. Thus, it is possible to create a user `'newuser2'@'192.168.1.1'` who is only able to connect from the IP address `192.168.1.1`. It is also possible to have two users have the same user-portion, and different permissions as they login from different hosts.
+このステートメントは、パスワードを指定して新しいユーザーを作成します。 MySQL 権限システムでは、ユーザーはユーザー名と接続元のホストの組み合わせです。これにより、ＩＰアドレス`192.168.1.1`からのみ接続可能なユーザ`'newuser2'@'192.168.1.1'`を作成することができる。 2 人のユーザーに同じユーザー部分を持たせ、異なるホストからログインするときに異なる権限を持たせることもできます。
 
-## Synopsis
+## あらすじ {#synopsis}
 
 ```ebnf+diagram
 CreateUserStmt ::=
@@ -38,63 +38,59 @@ AttributeOption ::= ( 'COMMENT' CommentString | 'ATTRIBUTE' AttributeString )?
 ResourceGroupNameOption::= ( 'RESOURCE' 'GROUP' Identifier)?
 ```
 
-## Examples
+## 例 {#examples}
 
-Create a user with the `newuserpassword` password.
+`newuserpassword`パスワードを使用してユーザーを作成します。
 
 ```sql
 mysql> CREATE USER 'newuser' IDENTIFIED BY 'newuserpassword';
 Query OK, 1 row affected (0.04 sec)
 ```
 
-Create a user who can only log in to `192.168.1.1`.
+`192.168.1.1`にのみログインできるユーザーを作成します。
 
 ```sql
 mysql> CREATE USER 'newuser2'@'192.168.1.1' IDENTIFIED BY 'newuserpassword';
 Query OK, 1 row affected (0.02 sec)
 ```
 
-Create a user who is enforced to log in using TLS connection.
+TLS 接続を使用してログインすることが強制されるユーザーを作成します。
 
 ```sql
 CREATE USER 'newuser3'@'%' IDENTIFIED BY 'newuserpassword' REQUIRE SSL;
 Query OK, 1 row affected (0.02 sec)
 ```
 
-Create a user who is required to use X.509 certificate at login.
+ログイン時に X.509 証明書を使用する必要があるユーザーを作成します。
 
 ```sql
 CREATE USER 'newuser4'@'%' IDENTIFIED BY 'newuserpassword' REQUIRE ISSUER '/C=US/ST=California/L=San Francisco/O=PingCAP';
 Query OK, 1 row affected (0.02 sec)
 ```
 
-Create a user who is locked upon creation.
+作成時にロックされるユーザーを作成します。
 
 ```sql
 CREATE USER 'newuser5'@'%' ACCOUNT LOCK;
 ```
 
-```
-Query OK, 1 row affected (0.02 sec)
-```
+    Query OK, 1 row affected (0.02 sec)
 
-Create a user with a comment.
+コメントを含むユーザーを作成します。
 
 ```sql
 CREATE USER 'newuser6'@'%' COMMENT 'This user is created only for test';
 SELECT * FROM information_schema.user_attributes;
 ```
 
-```
-+-----------+------+---------------------------------------------------+
-| USER      | HOST | ATTRIBUTE                                         |
-+-----------+------+---------------------------------------------------+
-| newuser6  | %    | {"comment": "This user is created only for test"} |
-+-----------+------+---------------------------------------------------+
-1 rows in set (0.00 sec)
-```
+    +-----------+------+---------------------------------------------------+
+    | USER      | HOST | ATTRIBUTE                                         |
+    +-----------+------+---------------------------------------------------+
+    | newuser6  | %    | {"comment": "This user is created only for test"} |
+    +-----------+------+---------------------------------------------------+
+    1 rows in set (0.00 sec)
 
-Create a user with an `email` attribute.
+`email`属性のユーザーを作成します。
 
 ```sql
 CREATE USER 'newuser7'@'%' ATTRIBUTE '{"email": "user@pingcap.com"}';
@@ -110,27 +106,23 @@ SELECT * FROM information_schema.user_attributes;
 1 rows in set (0.00 sec)
 ```
 
-Create a user who is not allowed to reuse the last 5 passwords:
+最新の 5 つのパスワードの再利用を許可しないユーザーを作成します。
 
 ```sql
 CREATE USER 'newuser8'@'%' PASSWORD HISTORY 5;
 ```
 
-```
-Query OK, 1 row affected (0.02 sec)
-```
+    Query OK, 1 row affected (0.02 sec)
 
-Create a user whose password is manually expired:
+パスワードが手動で期限切れになったユーザーを作成します。
 
 ```sql
 CREATE USER 'newuser9'@'%' PASSWORD EXPIRE;
 ```
 
-```
-Query OK, 1 row affected (0.02 sec)
-```
+    Query OK, 1 row affected (0.02 sec)
 
-Create a user that uses the resource group `rg1`.
+リソース グループ`rg1`を使用するユーザーを作成します。
 
 ```sql
 CREATE USER 'newuser7'@'%' RESOURCE GROUP rg1;
@@ -146,22 +138,22 @@ SELECT USER, HOST, USER_ATTRIBUTES FROM MYSQL.USER WHERE USER='newuser7';
 1 rows in set (0.00 sec)
 ```
 
-## MySQL compatibility
+## MySQLの互換性 {#mysql-compatibility}
 
-The following `CREATE USER` options are not yet supported by TiDB, and will be parsed but ignored:
+次の`CREATE USER`オプションは TiDB ではまだサポートされていないため、解析されますが無視されます。
 
-* TiDB does not support `WITH MAX_QUERIES_PER_HOUR`, `WITH MAX_UPDATES_PER_HOUR`, and `WITH MAX_USER_CONNECTIONS` options.
-* TiDB does not support the `DEFAULT ROLE` option.
+-   TiDB は、 `WITH MAX_QUERIES_PER_HOUR` 、 `WITH MAX_UPDATES_PER_HOUR` 、および`WITH MAX_USER_CONNECTIONS`オプションをサポートしません。
+-   TiDB は`DEFAULT ROLE`オプションをサポートしていません。
 
-## See also
+## こちらも参照 {#see-also}
 
 <CustomContent platform="tidb">
 
-* [Security Compatibility with MySQL](/security-compatibility-with-mysql.md)
-* [Privilege Management](/privilege-management.md)
+-   [MySQL とのSecurity互換性](/security-compatibility-with-mysql.md)
+-   [権限管理](/privilege-management.md)
 
 </CustomContent>
 
-* [DROP USER](/sql-statements/sql-statement-drop-user.md)
-* [SHOW CREATE USER](/sql-statements/sql-statement-show-create-user.md)
-* [ALTER USER](/sql-statements/sql-statement-alter-user.md)
+-   [ユーザーを削除する](/sql-statements/sql-statement-drop-user.md)
+-   [ユーザーの作成を表示](/sql-statements/sql-statement-show-create-user.md)
+-   [ユーザーの変更](/sql-statements/sql-statement-alter-user.md)

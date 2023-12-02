@@ -2,49 +2,49 @@
 title: tiup mirror clone
 ---
 
-# tiup mirror clone
+# tiup mirror clone {#tiup-mirror-clone}
 
-The command `tiup mirror clone` is used to clone an existing mirror or clone some of its components to create a new mirror. The new mirror has the same components as the old one, but uses a different signature key.
+コマンド`tiup mirror clone` 、既存のミラーのクローンを作成するか、そのコンポーネントの一部をクローンして新しいミラーを作成するために使用されます。新しいミラーには古いミラーと同じコンポーネントがありますが、異なる署名キーが使用されます。
 
-## Syntax
+## 構文 {#syntax}
 
 ```shell
 tiup mirror clone <target-dir> [global version] [flags]
 ```
 
-- `<target-dir>` is used to set the local path to the cloned mirror. If the path does not exist, TiUP automatically creates one.
-- If `[global version]` is specified, TiUP tries to clone all components of the specified version. If some components do not have the specified version, then TiUP clones its latest version.
+-   `<target-dir>`は、複製されたミラーへのローカル パスを設定するために使用されます。パスが存在しない場合、 TiUP は自動的にパスを作成します。
+-   `[global version]`を指定すると、 TiUP は指定されたバージョンのすべてのコンポーネントのクローンを作成しようとします。一部のコンポーネントのバージョンが指定されていない場合、 TiUP はその最新バージョンのクローンを作成します。
 
-## Options
+## オプション {#options}
 
-### -f, --full
+### -f、 --full {#f-full}
 
-- Whether to clone the whole mirror. If this option is set, other options becomes ignored and TiUP completely clones all components of all versions from the targeted mirror.
-- Data type: `BOOLEAN`
-- This option is disabled by default and its default value is `false`. To enable this option, you can add this option to the command, and pass the `true` value or do not pass any value.
+-   ミラー全体のクローンを作成するかどうか。このオプションが設定されている場合、他のオプションは無視され、 TiUP はターゲットのミラーからすべてのバージョンのすべてのコンポーネントを完全にクローン作成します。
+-   データ型: `BOOLEAN`
+-   このオプションはデフォルトでは無効になっており、デフォルト値は`false`です。このオプションを有効にするには、このオプションをコマンドに追加して、値`true`渡すか、値を渡さないことができます。
 
-### -a, --arch
+### -a、--アーチ {#a-arch}
 
-- Only clones components that can run on the specified platform.
-- Data type: `STRING`
-- Default: "amd64,arm64"
+-   指定されたプラットフォームで実行できるコンポーネントのみを複製します。
+-   データ型: `STRING`
+-   デフォルト: 「amd64,arm64」
 
-### -o, --os
+### -o、--os {#o-os}
 
-- Only clones components that can run on the specified operating system.
-- Data type: `STRING`
-- Default: "linux,darwin"
+-   指定されたオペレーティング システム上で実行できるコンポーネントのみを複製します。
+-   データ型: `STRING`
+-   デフォルト: 「linux、ダーウィン」
 
-### --prefix
+### --プレフィックス {#prefix}
 
-- Whether to only match the prefix of versions. By default, TiUP downloads a component version when it is strictly matched. If this option is set, TiUP also downloads component versions of which prefixes are matched.
-- Data type: `BOOLEAN`
-- This option is disabled by default and its default value is `false`. To enable this option, you can add this option to the command, and pass the `true` value or do not pass any value.
+-   バージョンのプレフィックスのみを照合するかどうか。デフォルトでは、 TiUP はコンポーネントのバージョンが厳密に一致する場合にダウンロードします。このオプションが設定されている場合、 TiUP はプレフィックスが一致するコンポーネントのバージョンもダウンロードします。
+-   データ型: `BOOLEAN`
+-   このオプションはデフォルトでは無効になっており、デフォルト値は`false`です。このオプションを有効にするには、このオプションをコマンドに追加して、値`true`渡すか、値を渡さないことができます。
 
-### --{component}
+### - {コンポーネント} {#component}
 
-- Specifies the version list of the component to be cloned. Fill component names in `{component}`. You can run [`tiup list --all`](/tiup/tiup-command-list.md) to view available component names.
-- Data type: Strings
-- Default: Null
+-   クローンを作成するコンポーネントのバージョンリストを指定します。 `{component}`にコンポーネント名を入力します。 [`tiup list --all`](/tiup/tiup-command-list.md)を実行すると、使用可能なコンポーネント名が表示されます。
+-   データ型: 文字列
+-   デフォルト: ヌル
 
-[<< Back to the previous page - TiUP Mirror command list](/tiup/tiup-command-mirror.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUP Mirror コマンド一覧](/tiup/tiup-command-mirror.md#command-list)

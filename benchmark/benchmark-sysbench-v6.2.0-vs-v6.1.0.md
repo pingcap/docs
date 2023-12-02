@@ -2,39 +2,37 @@
 title: TiDB Sysbench Performance Test Report -- v6.2.0 vs. v6.1.0
 ---
 
-# TiDB Sysbench Performance Test Report -- v6.2.0 vs. v6.1.0
+# TiDB Sysbench パフォーマンス テスト レポート -- v6.2.0 と v6.1.0 {#tidb-sysbench-performance-test-report-v6-2-0-vs-v6-1-0}
 
-## Test overview
+## テストの概要 {#test-overview}
 
-This test aims at comparing the Sysbench performance of TiDB v6.2.0 and TiDB v6.1.0 in the Online Transactional Processing (OLTP) scenario. The results show that performance of v6.2.0 is basically the same as that of v6.1.0. The performance of Point Select slightly drops by 3.58%.
+このテストは、オンライン トランザクション処理 (OLTP) シナリオにおける TiDB v6.2.0 と TiDB v6.1.0 の Sysbench パフォーマンスを比較することを目的としています。結果は、v6.2.0 のパフォーマンスが v6.1.0 のパフォーマンスと基本的に同じであることを示しています。ポイントセレクトのパフォーマンスはわずかに 3.58% 低下します。
 
-## Test environment (AWS EC2）
+## テスト環境（AWS EC2） {#test-environment-aws-ec2}
 
-### Hardware configuration
+### ハードウェア構成 {#hardware-configuration}
 
-| Service type | EC2 type | Instance count |
-|:----------|:----------|:----------|
-| PD        | m5.xlarge |     3     |
-| TiKV      | i3.4xlarge|     3     |
-| TiDB      | c5.4xlarge|     3     |
-| Sysbench  | c5.9xlarge|     1     |
+| サービスの種類 | EC2タイプ     | インスタンス数 |
+| :------ | :--------- | :------ |
+| PD      | m5.xlarge  | 3       |
+| TiKV    | i3.4xlarge | 3       |
+| TiDB    | c5.4xlarge | 3       |
+| システムベンチ | c5.9xlarge | 1       |
 
-### Software version
+### ソフトウェアバージョン {#software-version}
 
-| Service type | Software version |
-|:----------|:-----------|
-| PD        | v6.1.0 and v6.2.0 |
-| TiDB      | v6.1.0 and v6.2.0 |
-| TiKV      | v6.1.0 and v6.2.0 |
-| Sysbench  | 1.1.0-df89d34   |
+| サービスの種類 | ソフトウェアバージョン       |
+| :------ | :---------------- |
+| PD      | v6.1.0 および v6.2.0 |
+| TiDB    | v6.1.0 および v6.2.0 |
+| TiKV    | v6.1.0 および v6.2.0 |
+| システムベンチ | 1.1.0-df89d34     |
 
-### Parameter configuration
+### パラメータ設定 {#parameter-configuration}
 
-TiDB v6.2.0 and TiDB v6.1.0 use the same configuration.
+TiDB v6.2.0 と TiDB v6.1.0 は同じ構成を使用します。
 
-#### TiDB parameter configuration
-
-{{< copyable "" >}}
+#### TiDBパラメータの設定 {#tidb-parameter-configuration}
 
 ```yaml
 log.level: "error"
@@ -42,9 +40,7 @@ prepared-plan-cache.enabled: true
 tikv-client.max-batch-wait-time: 2000000
 ```
 
-#### TiKV parameter configuration
-
-{{< copyable "" >}}
+#### TiKVパラメータ設定 {#tikv-parameter-configuration}
 
 ```yaml
 storage.scheduler-worker-pool-size: 5
@@ -55,9 +51,7 @@ server.grpc-concurrency: 6
 readpool.unified.max-thread-count: 10
 ```
 
-#### TiDB global variable configuration
-
-{{< copyable "sql" >}}
+#### TiDB グローバル変数の設定 {#tidb-global-variable-configuration}
 
 ```sql
 set global tidb_hashagg_final_concurrency=1;
@@ -69,11 +63,9 @@ set global tidb_enable_clustered_index = 1;
 set global tidb_prepared_plan_cache_size=1000;
 ```
 
-#### HAProxy configuration - haproxy.cfg
+#### HAProxy 構成 - haproxy.cfg {#haproxy-configuration-haproxy-cfg}
 
-For more details about how to use HAProxy on TiDB, see [Best Practices for Using HAProxy in TiDB](/best-practices/haproxy-best-practices.md).
-
-{{< copyable "" >}}
+TiDB で HAProxy を使用する方法の詳細については、 [TiDB で HAProxy を使用するためのベスト プラクティス](/best-practices/haproxy-best-practices.md)を参照してください。
 
 ```yaml
 global                                     # Global configuration.
@@ -100,20 +92,18 @@ listen tidb-cluster                        # Database load balancing.
    server tidb-3 10.9.64.166:4000 check inter 2000 rise 2 fall 3
 ```
 
-## Test plan
+## テスト計画 {#test-plan}
 
-1. Deploy TiDB v6.2.0 and v6.1.0 using TiUP.
-2. Use Sysbench to import 16 tables, each table with 10 million rows of data.
-3. Execute the `analyze table` statement on each table.
-4. Back up the data used for restore before different concurrency tests, which ensures data consistency for each test.
-5. Start the Sysbench client to perform the `point_select`, `read_write`, `update_index`, and `update_non_index` tests. Perform stress tests on TiDB via HAProxy. For each concurrency under each workload, the test takes 20 minutes.
-6. After each type of test is completed, stop the cluster, overwrite the cluster with the backup data in step 4, and restart the cluster.
+1.  TiUPを使用して TiDB v6.2.0 および v6.1.0をデプロイ。
+2.  Sysbench を使用して、各テーブルに 1,000 万行のデータが含まれる 16 のテーブルをインポートします。
+3.  各テーブルに対して`analyze table`ステートメントを実行します。
+4.  さまざまな同時実行テストの前に、復元に使用されるデータをバックアップします。これにより、各テストのデータの一貫性が確保されます。
+5.  Sysbench クライアントを起動して、 `point_select` 、 `read_write` 、 `update_index` 、および`update_non_index`テストを実行します。 HAProxy を介して TiDB でストレス テストを実行します。各ワークロードでの同時実行ごとに、テストには 20 分かかります。
+6.  各種類のテストが完了したら、クラスターを停止し、手順 4 のバックアップ データでクラスターを上書きし、クラスターを再起動します。
 
-### Prepare test data
+### テストデータの準備 {#prepare-test-data}
 
-Run the following command to prepare the test data:
-
-{{< copyable "shell-regular" >}}
+次のコマンドを実行してテスト データを準備します。
 
 ```bash
 sysbench oltp_common \
@@ -128,11 +118,9 @@ sysbench oltp_common \
     prepare --tables=16 --table-size=10000000
 ```
 
-### Perform the test
+### テストを実行する {#perform-the-test}
 
-Run the following command to perform the test:
-
-{{< copyable "shell-regular" >}}
+次のコマンドを実行してテストを実行します。
 
 ```bash
 sysbench $testname \
@@ -147,52 +135,52 @@ sysbench $testname \
     run --tables=16 --table-size=10000000
 ```
 
-## Test results
+## 試験結果 {#test-results}
 
-### Point Select performance
+### ポイントセレクト性能 {#point-select-performance}
 
-| Threads | v6.1.0 TPS | v6.2.0 TPS | v6.1.0 95% latency (ms) | v6.2.0 95% latency (ms) | TPS improvement (%) |
-| :------ | :--------- | :--------- | :---------------------- | :---------------------- | :----------- |
-| 300     | 243530.01  | 236885.24  | 1.93                    | 2.07                    | -2.73        |
-| 600     | 304121.47  | 291395.84  | 3.68                    | 4.03                    | -4.18        |
-| 900     | 327301.23  | 314720.02  | 5                       | 5.47                    | -3.84        |
+| スレッド | v6.1.0 TPS | v6.2.0 TPS | v6.1.0 95%レイテンシー(ミリ秒) | v6.2.0 95%レイテンシー(ミリ秒) | TPS の向上 (%) |
+| :--- | :--------- | :--------- | :-------------------- | :-------------------- | :---------- |
+| 300  | 243530.01  | 236885.24  | 1.93                  | 2.07                  | -2.73       |
+| 600  | 304121.47  | 291395.84  | 3.68                  | 4.03                  | -4.18       |
+| 900  | 327301.23  | 314720.02  | 5                     | 5.47                  | -3.84       |
 
-Compared with v6.1.0, the Point Select performance of v6.2.0 slightly drops by 3.58%.
+v6.1.0 と比較すると、v6.2.0 のポイント選択パフォーマンスは 3.58% わずかに低下します。
 
 ![Point Select](/media/sysbench_v610vsv620_point_select.png)
 
-### Update Non-index performance
+### インデックス以外のパフォーマンスを更新する {#update-non-index-performance}
 
-| Threads | v6.1.0 TPS | v6.2.0 TPS | v6.1.0 95% latency (ms) | v6.2.0 95% latency (ms) | TPS improvement (%)  |
-| :------ | :--------- | :--------- | :---------------------- | :---------------------- | :----------- |
-| 300     | 42608.8    | 42372.82   | 11.45                   | 11.24                   | -0.55        |
-| 600     | 54264.47   | 53672.69   | 18.95                   | 18.95                   | -1.09        |
-| 900     | 60667.47   | 60116.14   | 26.2                    | 26.68                   | -0.91        |
+| スレッド | v6.1.0 TPS | v6.2.0 TPS | v6.1.0 95%レイテンシー(ミリ秒) | v6.2.0 95%レイテンシー(ミリ秒) | TPS の向上 (%) |
+| :--- | :--------- | :--------- | :-------------------- | :-------------------- | :---------- |
+| 300  | 42608.8    | 42372.82   | 11.45                 | 11.24                 | -0.55       |
+| 600  | 54264.47   | 53672.69   | 18.95                 | 18.95                 | -1.09       |
+| 900  | 60667.47   | 60116.14   | 26.2                  | 26.68                 | -0.91       |
 
-Compared with v6.1.0, the Update Non-index performance of v6.2.0 is basically unchanged, reduced by 0.85%.
+v6.1.0 と比較すると、v6.2.0 のインデックス以外の更新のパフォーマンスは基本的に変わらず、0.85% 低下しています。
 
 ![Update Non-index](/media/sysbench_v610vsv620_update_non_index.png)
 
-### Update Index performance
+### インデックスのパフォーマンスを更新する {#update-index-performance}
 
-| Threads | v6.1.0 TPS | v6.2.0 TPS | v6.1.0 95% latency (ms) | v6.2.0 95% latency (ms) | TPS improvement (%) |
-| :------ | :--------- | :--------- | :---------------------- | :---------------------- | :----------- |
-| 300     | 19384.75   | 19353.58   | 23.52                   | 23.52                   | -0.16        |
-| 600     | 24144.78   | 24007.57   | 38.25                   | 37.56                   | -0.57        |
-| 900     | 26770.9    | 26589.84   | 51.94                   | 52.89                   | -0.68        |
+| スレッド | v6.1.0 TPS | v6.2.0 TPS | v6.1.0 95%レイテンシー(ミリ秒) | v6.2.0 95%レイテンシー(ミリ秒) | TPS の向上 (%) |
+| :--- | :--------- | :--------- | :-------------------- | :-------------------- | :---------- |
+| 300  | 19384.75   | 19353.58   | 23.52                 | 23.52                 | -0.16       |
+| 600  | 24144.78   | 24007.57   | 38.25                 | 37.56                 | -0.57       |
+| 900  | 26770.9    | 26589.84   | 51.94                 | 52.89                 | -0.68       |
 
-Compared with v6.1.0, the Update Index performance of v6.2.0 is basically unchanged, reduced by 0.47%.
+v6.1.0 と比較すると、v6.2.0 の更新インデックスのパフォーマンスは基本的に変わらず、0.47% 低下しています。
 
 ![Update Index](/media/sysbench_v610vsv620_update_index.png)
 
-### Read Write performance
+### 読み取り/書き込みパフォーマンス {#read-write-performance}
 
-| Threads | v6.1.0 TPS | v6.2.0 TPS | v6.1.0 95% latency (ms) | v6.2.0 95% latency (ms) | TPS improvement (%) |
-| :------ | :--------- | :--------- | :---------------------- | :---------------------- | :----------- |
-| 300     | 4849.67    | 4797.59    | 86                      | 84.47                   | -1.07        |
-| 600     | 5643.89    | 5565.17    | 161.51                  | 161.51                  | -1.39        |
-| 900     | 5954.91    | 5885.22    | 235.74                  | 235.74                  | -1.17        |
+| スレッド | v6.1.0 TPS | v6.2.0 TPS | v6.1.0 95%レイテンシー(ミリ秒) | v6.2.0 95%レイテンシー(ミリ秒) | TPS の向上 (%) |
+| :--- | :--------- | :--------- | :-------------------- | :-------------------- | :---------- |
+| 300  | 4849.67    | 4797.59    | 86                    | 84.47                 | -1.07       |
+| 600  | 5643.89    | 5565.17    | 161.51                | 161.51                | -1.39       |
+| 900  | 5954.91    | 5885.22    | 235.74                | 235.74                | -1.17       |
 
-Compared with v6.1.0, the Read Write performance of v6.2.0 is reduced by 1.21%.
+v6.1.0 と比較すると、v6.2.0 の読み取り/書き込みパフォーマンスは 1.21% 低下します。
 
 ![Read Write](/media/sysbench_v610vsv620_read_write.png)

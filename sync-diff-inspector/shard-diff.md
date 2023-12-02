@@ -3,17 +3,17 @@ title: Data Check in the Sharding Scenario
 summary: Learn the data check in the sharding scenario.
 ---
 
-# Data Check in the Sharding Scenario
+# シャーディングシナリオでのデータチェック {#data-check-in-the-sharding-scenario}
 
-sync-diff-inspector supports data check in the sharding scenario. Assume that you use the [TiDB Data Migration](/dm/dm-overview.md) tool to replicate data from multiple MySQL instances into TiDB, you can use sync-diff-inspector to check upstream and downstream data.
+sync-diff-inspector は、シャーディング シナリオでのデータ チェックをサポートします。 [TiDB データ移行](/dm/dm-overview.md)ツールを使用して複数の MySQL インスタンスから TiDB にデータをレプリケートすると仮定すると、sync-diff-inspector を使用してアップストリーム データとダウンストリーム データをチェックできます。
 
-For scenarios where the number of upstream sharded tables is small and the naming rules of sharded tables do not have a pattern as shown below, you can use `Datasource config` to configure `table-0`, set corresponding `rules` and configure the tables that have the mapping relationship between the upstream and downstream databases. This configuration method requires setting all sharded tables.
+アップストリームのシャードテーブルの数が少なく、シャードテーブルの命名規則に以下に示すようなパターンがないシナリオの場合、 `Datasource config`を使用して`table-0`を構成し、対応する`rules`を設定して、アップストリーム間のマッピング関係を持つテーブルを構成できます。そしてダウンストリームデータベース。この構成方法では、すべてのシャードテーブルを設定する必要があります。
 
 ![shard-table-replica-1](/media/shard-table-replica-1.png)
 
-Below is a complete example of the sync-diff-inspector configuration.
+以下は、sync-diff-inspector 構成の完全な例です。
 
-``` toml
+```toml
 # Diff Configuration.
 
 ######################### Global config #########################
@@ -75,11 +75,11 @@ target-table = "table-0"     # The name of the target table
     target-check-tables = ["test.table-0"]
 ```
 
-You can use `table-rules` for configuration when there are a large number of upstream sharded tables and the naming rules of all sharded tables have a pattern, as shown below:
+以下に示すように、上流のシャード テーブルが多数あり、すべてのシャード テーブルの命名規則にパターンがある場合は、構成に`table-rules`使用できます。
 
 ![shard-table-replica-2](/media/shard-table-replica-2.png)
 
-Below is a complete example of the sync-diff-inspector configuration.
+以下は、sync-diff-inspector 構成の完全な例です。
 
 ```toml
 # Diff Configuration.
@@ -131,6 +131,6 @@ target-table = "table-0"     # The name of the target table
     target-check-tables = ["test.table-0"]
 ```
 
-## Note
+## 注記 {#note}
 
-If `test.table-0` exists in the upstream database, the downstream database also compares this table.
+上流データベースに`test.table-0`存在する場合、下流データベースもこのテーブルを比較します。

@@ -3,30 +3,30 @@ title: Views
 summary: Learn how to use views in TiDB.
 ---
 
-# Views
+# ビュー {#views}
 
-This document describes how to use views in TiDB.
+このドキュメントでは、TiDB でのビューの使用方法について説明します。
 
-## Overview
+## 概要 {#overview}
 
-TiDB supports views. A view acts as a virtual table, whose schema is defined by the `SELECT` statement that creates the view.
+TiDB はビューをサポートしています。ビューは仮想テーブルとして機能し、そのスキーマはビューを作成する`SELECT`ステートメントによって定義されます。
 
-- You can create views to expose only safe fields and data to users, which ensures the security of sensitive fields and data in the underlying tables.
-- You can create views for complex queries that are frequently used to make complex queries easier and more convenient.
+-   安全なフィールドとデータのみをユーザーに公開するビューを作成すると、基になるテーブル内の機密フィールドとデータのセキュリティが確保されます。
+-   頻繁に使用される複雑なクエリのビューを作成して、複雑なクエリをより簡単かつ便利にすることができます。
 
-## Create a view
+## ビューを作成する {#create-a-view}
 
-In TiDB, a complex query can be defined as a view with the `CREATE VIEW` statement. The syntax is as follows:
+TiDB では、複雑なクエリを`CREATE VIEW`ステートメントを使用してビューとして定義できます。構文は次のとおりです。
 
 ```sql
 CREATE VIEW view_name AS query;
 ```
 
-Note that you cannot create a view with the same name as an existing view or table.
+既存のビューまたはテーブルと同じ名前のビューを作成することはできないことに注意してください。
 
-For example, the [multi-table join query](/develop/dev-guide-join-tables.md) gets a list of books with average ratings by joining the `books` table and the `ratings` table through a `JOIN` statement.
+たとえば、 [複数テーブル結合クエリ](/develop/dev-guide-join-tables.md) 、 `JOIN`ステートメントを通じて`books`テーブルと`ratings`テーブルを結合することにより、平均評価を持つ書籍のリストを取得します。
 
-For the convenience of subsequent queries, you can define the query as a view using the following statement:
+後続のクエリの便宜のために、次のステートメントを使用してクエリをビューとして定義できます。
 
 ```sql
 CREATE VIEW book_with_ratings AS
@@ -36,22 +36,22 @@ LEFT JOIN ratings r ON b.id = r.book_id
 GROUP BY b.id;
 ```
 
-## Query views
+## クエリビュー {#query-views}
 
-Once a view is created, you can use the `SELECT` statement to query the view just like a normal table.
+ビューが作成されたら、通常のテーブルと同じように`SELECT`ステートメントを使用してビューをクエリできます。
 
 ```sql
 SELECT * FROM book_with_ratings LIMIT 10;
 ```
 
-When TiDB queries a view, it queries the `SELECT` statement associated with the view.
+TiDB はビューをクエリするとき、ビューに関連付けられた`SELECT`ステートメントをクエリします。
 
-## Update views
+## ビューを更新する {#update-views}
 
-Currently, the view in TiDB does not support the `ALTER VIEW view_name AS query;`, you can "update" a view in the following two ways:
+現在、TiDB のビューは`ALTER VIEW view_name AS query;`サポートしていません。次の 2 つの方法でビューを「更新」できます。
 
-- Delete the old view with the `DROP VIEW view_name;` statement, and then update the view by creating a new view with the `CREATE VIEW view_name AS query;` statement.
-- Use the `CREATE OR REPLACE VIEW view_name AS query;` statement to overwrite an existing view with the same name.
+-   `DROP VIEW view_name;`ステートメントで古いビューを削除し、 `CREATE VIEW view_name AS query;`ステートメントで新しいビューを作成してビューを更新します。
+-   `CREATE OR REPLACE VIEW view_name AS query;`ステートメントを使用して、同じ名前の既存のビューを上書きします。
 
 ```sql
 CREATE OR REPLACE VIEW book_with_ratings AS
@@ -61,64 +61,60 @@ LEFT JOIN ratings r ON b.id = r.book_id
 GROUP BY b.id;
 ```
 
-## Get view related information
+## ビュー関連情報の取得 {#get-view-related-information}
 
-### Using the `SHOW CREATE TABLE|VIEW view_name` statement
+### <code>SHOW CREATE TABLE|VIEW view_name</code>ステートメントの使用 {#using-the-code-show-create-table-view-view-name-code-statement}
 
 ```sql
 SHOW CREATE VIEW book_with_ratings\G
 ```
 
-The result is as follows:
+結果は次のとおりです。
 
-```
-*************************** 1. row ***************************
-                View: book_with_ratings
-         Create View: CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`%` SQL SECURITY DEFINER VIEW `book_with_ratings` (`book_id`, `ANY_VALUE(b.title)`, `book_title`, `average_score`) AS SELECT `b`.`id` AS `book_id`,ANY_VALUE(`b`.`title`) AS `ANY_VALUE(b.title)`,ANY_VALUE(`b`.`published_at`) AS `book_title`,AVG(`r`.`score`) AS `average_score` FROM `bookshop`.`books` AS `b` LEFT JOIN `bookshop`.`ratings` AS `r` ON `b`.`id`=`r`.`book_id` GROUP BY `b`.`id`
-character_set_client: utf8mb4
-collation_connection: utf8mb4_general_ci
-1 row in set (0.00 sec)
-```
+    *************************** 1. row ***************************
+                    View: book_with_ratings
+             Create View: CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`%` SQL SECURITY DEFINER VIEW `book_with_ratings` (`book_id`, `ANY_VALUE(b.title)`, `book_title`, `average_score`) AS SELECT `b`.`id` AS `book_id`,ANY_VALUE(`b`.`title`) AS `ANY_VALUE(b.title)`,ANY_VALUE(`b`.`published_at`) AS `book_title`,AVG(`r`.`score`) AS `average_score` FROM `bookshop`.`books` AS `b` LEFT JOIN `bookshop`.`ratings` AS `r` ON `b`.`id`=`r`.`book_id` GROUP BY `b`.`id`
+    character_set_client: utf8mb4
+    collation_connection: utf8mb4_general_ci
+    1 row in set (0.00 sec)
 
-### Query the `INFORMATION_SCHEMA.VIEWS` table
+### <code>INFORMATION_SCHEMA.VIEWS</code>テーブルをクエリする {#query-the-code-information-schema-views-code-table}
 
 ```sql
 SELECT * FROM information_schema.views WHERE TABLE_NAME = 'book_with_ratings'\G
 ```
 
-The result is as follows:
+結果は次のとおりです。
 
-```
-*************************** 1. row ***************************
-       TABLE_CATALOG: def
-        TABLE_SCHEMA: bookshop
-          TABLE_NAME: book_with_ratings
-     VIEW_DEFINITION: SELECT `b`.`id` AS `book_id`,ANY_VALUE(`b`.`title`) AS `ANY_VALUE(b.title)`,ANY_VALUE(`b`.`published_at`) AS `book_title`,AVG(`r`.`score`) AS `average_score` FROM `bookshop`.`books` AS `b` LEFT JOIN `bookshop`.`ratings` AS `r` ON `b`.`id`=`r`.`book_id` GROUP BY `b`.`id`
-        CHECK_OPTION: CASCADED
-        IS_UPDATABLE: NO
-             DEFINER: root@%
-       SECURITY_TYPE: DEFINER
-CHARACTER_SET_CLIENT: utf8mb4
-COLLATION_CONNECTION: utf8mb4_general_ci
-1 row in set (0.00 sec)
-```
+    *************************** 1. row ***************************
+           TABLE_CATALOG: def
+            TABLE_SCHEMA: bookshop
+              TABLE_NAME: book_with_ratings
+         VIEW_DEFINITION: SELECT `b`.`id` AS `book_id`,ANY_VALUE(`b`.`title`) AS `ANY_VALUE(b.title)`,ANY_VALUE(`b`.`published_at`) AS `book_title`,AVG(`r`.`score`) AS `average_score` FROM `bookshop`.`books` AS `b` LEFT JOIN `bookshop`.`ratings` AS `r` ON `b`.`id`=`r`.`book_id` GROUP BY `b`.`id`
+            CHECK_OPTION: CASCADED
+            IS_UPDATABLE: NO
+                 DEFINER: root@%
+           SECURITY_TYPE: DEFINER
+    CHARACTER_SET_CLIENT: utf8mb4
+    COLLATION_CONNECTION: utf8mb4_general_ci
+    1 row in set (0.00 sec)
 
-## Drop views
+## ビューを削除 {#drop-views}
 
-Use the `DROP VIEW view_name;` statement to drop a view.
+ビューを削除するには、 `DROP VIEW view_name;`ステートメントを使用します。
 
 ```sql
 DROP VIEW book_with_ratings;
 ```
 
-## Limitation
+## 制限 {#limitation}
 
-For limitations of views in TiDB, see [Limitations of Views](/views.md#limitations).
+TiDB のビューの制限については、 [ビューの制限](/views.md#limitations)を参照してください。
 
-## Read More
+## 続きを読む {#read-more}
 
-- [Views](/views.md)
-- [CREATE VIEW Statement](/sql-statements/sql-statement-create-view.md)
-- [DROP VIEW Statement](/sql-statements/sql-statement-drop-view.md)
-- [EXPLAIN Statements Using Views](/explain-views.md)
-- [TiFlink: Strongly Consistent Materialized Views Using TiKV and Flink](https://github.com/tiflink/tiflink)
+-   [ビュー](/views.md)
+-   [CREATE VIEW ステートメント](/sql-statements/sql-statement-create-view.md)
+-   [DROP VIEW ステートメント](/sql-statements/sql-statement-drop-view.md)
+-   [ビューを使用したEXPLAINステートメント](/explain-views.md)
+-   [TiFlink: TiKV と Flink を使用した一貫性の高いマテリアライズド ビュー](https://github.com/tiflink/tiflink)

@@ -3,62 +3,62 @@ title: ticloud import start s3
 summary: The reference of `ticloud import start s3`.
 ---
 
-# ticloud import start s3
+# ticloud インポート開始 s3 {#ticloud-import-start-s3}
 
-Import files from Amazon S3 into TiDB Cloud:
+Amazon S3 からTiDB Cloudにファイルをインポートします。
 
 ```shell
 ticloud import start s3 [flags]
 ```
 
-> **Note:**
+> **注記：**
 >
-> Before importing files from Amazon S3 into TiDB Cloud, you need to configure the Amazon S3 bucket access for TiDB Cloud and get the Role ARN. For more information, see [Configure Amazon S3 access](/tidb-cloud/config-s3-and-gcs-access.md#configure-amazon-s3-access).
+> Amazon S3 からTiDB Cloudにファイルをインポートする前に、 TiDB Cloudの Amazon S3 バケット アクセスを設定し、ロール ARN を取得する必要があります。詳細については、 [Amazon S3 アクセスを構成する](/tidb-cloud/config-s3-and-gcs-access.md#configure-amazon-s3-access)を参照してください。
 
-## Examples
+## 例 {#examples}
 
-Start an import task in interactive mode:
+対話モードでインポート タスクを開始します。
 
 ```shell
 ticloud import start s3
 ```
 
-Start an import task in non-interactive mode:
+非対話モードでインポート タスクを開始します。
 
 ```shell
 ticloud import start s3 --project-id <project-id> --cluster-id <cluster-id> --aws-role-arn <aws-role-arn> --data-format <data-format> --source-url <source-url>
 ```
 
-Start an import task with a custom CSV format:
+カスタム CSV 形式でインポート タスクを開始します。
 
 ```shell
 ticloud import start s3 --project-id <project-id> --cluster-id <cluster-id> --aws-role-arn <aws-role-arn> --data-format CSV --source-url <source-url> --separator \" --delimiter \' --backslash-escape=false --trim-last-separator=true
 ```
 
-## Flags
+## フラグ {#flags}
 
-In non-interactive mode, you need to manually enter the required flags. In interactive mode, you can just follow CLI prompts to fill them in.
+非対話型モードでは、必要なフラグを手動で入力する必要があります。対話型モードでは、CLI プロンプトに従って入力するだけです。
 
-| Flag | Description | Required | Note |
-|---|---|---|---|
-| --aws-role-arn string | Specifies the AWS role ARN that is used to access the Amazon S3 data source. | Yes | Only works in non-interactive mode. |
-| --backslash-escape | Whether to parse backslashes inside fields as escape characters for CSV files. The default value is `true`. | No | Only works in non-interactive mode when `--data-format CSV` is specified. |
-| -c, --cluster-id string | Specifies the cluster ID. | Yes | Only works in non-interactive mode. |
-| --data-format string | Specifies the data format. Valid values are `CSV`, `SqlFile`, `Parquet`, or `AuroraSnapshot`. | Yes | Only works in non-interactive mode. |
-| --delimiter string | Specifies the delimiter used for quoting for CSV files. The default value is `"`. | No | Only works in non-interactive mode when `--data-format CSV` is specified. |
-| -h, --help | Displays help information for this command. | No | Works in both non-interactive and interactive modes. |
-| -p, --project-id string | Specifies the project ID. | Yes | Only works in non-interactive mode. |
-| --separator string | Specifies the field separator for CSV files. The default value is `,`. | No | Only works in non-interactive mode when `--data-format CSV` is specified. |
-| --source-url string | The S3 path where the source data files are stored. | Yes | Only works in non-interactive mode. |
-| --trim-last-separator | Whether to treat separators as line terminators and trim all trailing separators for CSV files. The default value is `false`. | No | Only works in non-interactive mode when `--data-format CSV` is specified. |
+| フラグ                 | 説明                                                                     | 必須  | 注記                                           |
+| ------------------- | ---------------------------------------------------------------------- | --- | -------------------------------------------- |
+| --aws-role-arn 文字列  | Amazon S3 データソースへのアクセスに使用される AWS ロール ARN を指定します。                       | はい  | 非対話モードでのみ動作します。                              |
+| --バックスラッシュ-エスケープ    | フィールド内のバックスラッシュを CSV ファイルのエスケープ文字として解析するかどうか。デフォルト値は`true`です。          | いいえ | `--data-format CSV`が指定された場合は、非対話モードでのみ機能します。 |
+| -c、--cluster-id 文字列 | クラスターIDを指定します。                                                         | はい  | 非対話モードでのみ動作します。                              |
+| --データ形式文字列          | データ形式を指定します。有効な値は`CSV` 、 `SqlFile` 、 `Parquet` 、または`AuroraSnapshot`です。 | はい  | 非対話モードでのみ動作します。                              |
+| --区切り文字列            | CSVファイルの引用符に使用する区切り文字を指定します。デフォルト値は`"`です。                              | いいえ | `--data-format CSV`が指定された場合は、非対話モードでのみ機能します。 |
+| -h, --help          | このコマンドのヘルプ情報を表示します。                                                    | いいえ | 非対話型モードと対話型モードの両方で動作します。                     |
+| -p、--プロジェクトID文字列    | プロジェクトIDを指定します。                                                        | はい  | 非対話モードでのみ動作します。                              |
+| --区切り文字列            | CSV ファイルのフィールド区切り文字を指定します。デフォルト値は`,`です。                                | いいえ | `--data-format CSV`が指定された場合は、非対話モードでのみ機能します。 |
+| --source-url 文字列    | ソース データ ファイルが保存されている S3 パス。                                            | はい  | 非対話モードでのみ動作します。                              |
+| --最後の区切り文字をトリミング    | CSV ファイルの区切り文字を行終端文字として扱い、末尾の区切り文字をすべてトリミングするかどうか。デフォルト値は`false`です。    | いいえ | `--data-format CSV`が指定された場合は、非対話モードでのみ機能します。 |
 
-## Inherited flags
+## 継承されたフラグ {#inherited-flags}
 
-| Flag | Description | Required | Note |
-|---|---|---|---|
-| --no-color | Disables color in output | No | Only works in non-interactive mode. In interactive mode, disabling color might not work with some UI components. |
-| -P, --profile string | Specifies the active [user profile](/tidb-cloud/cli-reference.md#user-profile) used in this command. | No | Works in both non-interactive and interactive modes. |
+| フラグ            | 説明                                                                               | 必須  | 注記                                                                 |
+| -------------- | -------------------------------------------------------------------------------- | --- | ------------------------------------------------------------------ |
+| --色なし          | 出力のカラーを無効にします                                                                    | いいえ | 非対話型モードでのみ動作します。インタラクティブ モードでは、一部の UI コンポーネントで色の無効化が機能しない可能性があります。 |
+| -P、--プロファイル文字列 | このコマンドで使用されるアクティブな[ユーザープロフィール](/tidb-cloud/cli-reference.md#user-profile)を指定します。 | いいえ | 非対話型モードと対話型モードの両方で動作します。                                           |
 
-## Feedback
+## フィードバック {#feedback}
 
-If you have any questions or suggestions on the TiDB Cloud CLI, feel free to create an [issue](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose). Also, we welcome any contributions.
+TiDB Cloud CLI に関して質問や提案がある場合は、お気軽に[問題](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose)を作成してください。また、貢献も歓迎します。

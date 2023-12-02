@@ -3,53 +3,53 @@ title: ticloud cluster create
 summary: The reference of `ticloud cluster create`.
 ---
 
-# ticloud cluster create
+# ticloud クラスターの作成 {#ticloud-cluster-create}
 
-Create a cluster:
+クラスターを作成します。
 
 ```shell
 ticloud cluster create [flags]
 ```
 
-> **Note:**
+> **注記：**
 >
-> Currently, you can only create a [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) cluster using the preceding command.
+> 現在、前述のコマンドを使用して作成できるクラスターは[TiDB サーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-serverless)だけです。
 
-## Examples
+## 例 {#examples}
 
-Create a cluster in interactive mode:
+対話モードでクラスターを作成します。
 
 ```shell
 ticloud cluster create
 ```
 
-Create a cluster in non-interactive mode:
+非対話モードでクラスターを作成します。
 
 ```shell
 ticloud cluster create --project-id <project-id> --cluster-name <cluster-name> --cloud-provider <cloud-provider> --region <region> --root-password <password> --cluster-type <cluster-type>
 ```
 
-## Flags
+## フラグ {#flags}
 
-In non-interactive mode, you need to manually enter the required flags. In interactive mode, you can just follow CLI prompts to fill them in.
+非対話型モードでは、必要なフラグを手動で入力する必要があります。対話型モードでは、CLI プロンプトに従って入力するだけです。
 
-| Flag                    | Description                                                 | Required | Note                             |
-|-------------------------|-------------------------------------------------------------|----------|-----------------------------------|
-| --cloud-provider string | Cloud provider (Currently, only `AWS` is supported)                                | Yes      | Only works in non-interactive mode. |
-| --cluster-name string   | Name of the cluster to be created                           | Yes      | Only works in non-interactive mode. |
-| --cluster-type string   | Cluster type (Currently, only `SERVERLESS` is supported)    | Yes      | Only works in non-interactive mode. |
-| -h, --help              | Get help information for this command   | No       | Works in both non-interactive and interactive modes     |
-| -p, --project-id string | The ID of the project, in which the cluster will be created | Yes      | Only works in non-interactive mode. |
-| -r, --region string     | Cloud region                                                | Yes      | Only works in non-interactive mode. |
-| --root-password string  | The root password of the cluster                            | Yes      | Only works in non-interactive mode. |
+| フラグ              | 説明                                     | 必須  | 注記                      |
+| ---------------- | -------------------------------------- | --- | ----------------------- |
+| --クラウドプロバイダー文字列  | クラウドプロバイダー (現在サポートされているのは`AWS`だけです)    | はい  | 非対話モードでのみ動作します。         |
+| --クラスタ名文字列       | 作成するクラスターの名前                           | はい  | 非対話モードでのみ動作します。         |
+| --クラスタタイプ文字列     | クラスタの種類 (現在は`SERVERLESS`のみがサポートされています) | はい  | 非対話モードでのみ動作します。         |
+| -h, --help       | このコマンドのヘルプ情報を取得する                      | いいえ | 非対話型モードと対話型モードの両方で動作します |
+| -p、--プロジェクトID文字列 | クラスターが作成されるプロジェクトの ID                  | はい  | 非対話モードでのみ動作します。         |
+| -r、--地域文字列       | クラウド領域                                 | はい  | 非対話モードでのみ動作します。         |
+| --root パスワード文字列  | クラスターの root パスワード                      | はい  | 非対話モードでのみ動作します。         |
 
-## Inherited flags
+## 継承されたフラグ {#inherited-flags}
 
-| Flag                 | Description                                                                               | Required | Note                                                                                                                    |
-|----------------------|-------------------------------------------------------------------------------------------|----------|--------------------------------------------------------------------------------------------------------------------------|
-| --no-color           | Disables color in output.                                                                  | No       | Only works in non-interactive mode. In interactive mode, disabling color might not work with some UI components. |
-| -P, --profile string | Specifies the active [user profile](/tidb-cloud/cli-reference.md#user-profile) used in this command. | No       | Works in both non-interactive and interactive modes.                                                                      |
+| フラグ            | 説明                                                                               | 必須  | 注記                                                                |
+| -------------- | -------------------------------------------------------------------------------- | --- | ----------------------------------------------------------------- |
+| --色なし          | 出力のカラーを無効にします。                                                                   | いいえ | 非対話モードでのみ動作します。インタラクティブ モードでは、一部の UI コンポーネントで色の無効化が機能しない可能性があります。 |
+| -P、--プロファイル文字列 | このコマンドで使用されるアクティブな[ユーザープロフィール](/tidb-cloud/cli-reference.md#user-profile)を指定します。 | いいえ | 非対話型モードと対話型モードの両方で動作します。                                          |
 
-## Feedback
+## フィードバック {#feedback}
 
-If you have any questions or suggestions on the TiDB Cloud CLI, feel free to create an [issue](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose). Also, we welcome any contributions.
+TiDB Cloud CLI に関して質問や提案がある場合は、お気軽に[問題](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose)を作成してください。また、貢献も歓迎します。

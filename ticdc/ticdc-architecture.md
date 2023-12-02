@@ -3,180 +3,172 @@ title: Architecture and Principles of TiCDC
 summary: Learn the architecture and working principles of TiCDC.
 ---
 
-# Architecture and Principles of TiCDC
+# TiCDC のアーキテクチャと原則 {#architecture-and-principles-of-ticdc}
 
-## TiCDC architecture
+## TiCDCアーキテクチャ {#ticdc-architecture}
 
-Consisting of multiple TiCDC nodes, a TiCDC cluster uses a distributed and stateless architecture. The design of TiCDC and its components is as follows:
+複数の TiCDC ノードで構成される TiCDC クラスターは、分散型のステートレスアーキテクチャを使用します。 TiCDC とそのコンポーネントの設計は次のとおりです。
 
 ![TiCDC architecture](/media/ticdc/ticdc-architecture-1.jpg)
 
-## TiCDC components
+## TiCDC コンポーネント {#ticdc-components}
 
-In the preceding diagram, a TiCDC cluster consists of multiple nodes running TiCDC instances. Each TiCDC instance carries a Capture process. One of the Capture processes is elected as the owner Capture, which is responsible for scheduling workload, replicating DDL statements, and performing management tasks.
+上の図では、TiCDC クラスターは、TiCDC インスタンスを実行する複数のノードで構成されています。各 TiCDC インスタンスはキャプチャ プロセスを実行します。 Capture プロセスの 1 つが所有者 Capture として選出され、ワー​​クロードのスケジュール設定、DDL ステートメントのレプリケート、および管理タスクの実行を担当します。
 
-Each Capture process contains one or multiple Processor threads for replicating data from tables in the upstream TiDB. Because table is the minimum unit of data replication in TiCDC, a Processor is composed of multiple table pipelines.
+各キャプチャ プロセスには、上流の TiDB 内のテーブルからデータを複製するための 1 つまたは複数のプロセッサ スレッドが含まれています。 TiCDC ではテーブルがデータ レプリケーションの最小単位であるため、プロセッサは複数のテーブル パイプラインで構成されます。
 
-Each pipeline contains the following components: Puller, Sorter, Mounter, and Sink.
+各パイプラインには、プーラー、ソーター、マウンター、シンクのコンポーネントが含まれています。
 
 ![TiCDC architecture](/media/ticdc/ticdc-architecture-2.jpg)
 
-These components work in serial with each other to complete the replication process, including pulling data, sorting data, loading data, and replicating data from the upstream to the downstream. The components are described as follows:
+これらのコンポーネントは相互に直列に動作して、データのプル、データの並べ替え、データのロード、上流から下流へのデータの複製などのレプリケーション プロセスを完了します。コンポーネントは次のように説明されます。
 
-- Puller: pulls DDL and row changes from TiKV nodes.
-- Sorter: sorts the changes received from TiKV nodes in ascending order of timestamps.
-- Mounter: converts the changes into a format that TiCDC sink can process based on the schema information.
-- Sink: replicates the changes to the downstream system.
+-   プラー: TiKV ノードから DDL と行の変更をプルします。
+-   ソーター: TiKV ノードから受信した変更をタイムスタンプの昇順に並べ替えます。
+-   マウンタ: 変更を、スキーマ情報に基づいて TiCDC シンクが処理できる形式に変換します。
+-   シンク: 変更をダウンストリーム システムにレプリケートします。
 
-To realize high availability, each TiCDC cluster runs multiple TiCDC nodes. These nodes regularly report their status to the etcd cluster in PD, and elect one of the nodes as the owner of the TiCDC cluster. The owner node schedules data based on the status stored in etcd and writes the scheduling results to etcd. The Processor completes tasks according to the status in etcd. If the node running the Processor fails, the cluster schedules tables to other nodes. If the owner node fails, the Capture processes in other nodes will elect a new owner. See the following figure:
+高可用性を実現するために、各 TiCDC クラスターは複数の TiCDC ノードを実行します。これらのノードは定期的にステータスを PD の etcd クラスターに報告し、ノードの 1 つを TiCDC クラスターの所有者として選択します。オーナーノードは、etcd に保存されているステータスに基づいてデータをスケジュールし、スケジュール結果を etcd に書き込みます。プロセッサは、etcd のステータスに従ってタスクを完了します。プロセッサを実行しているノードに障害が発生した場合、クラスタはテーブルを他のノードにスケジュールします。所有者ノードに障害が発生した場合、他のノードのキャプチャ プロセスが新しい所有者を選出します。次の図を参照してください。
 
 ![TiCDC architecture](/media/ticdc/ticdc-architecture-3.PNG)
 
-## Changefeeds and tasks
+## 変更フィードとタスク {#changefeeds-and-tasks}
 
-Changefeed and Task in TiCDC are two logical concepts. The specific description is as follows:
+TiCDC におけるチェンジフィードとタスクは 2 つの論理概念です。具体的な説明は以下の通りです。
 
-- Changefeed: Represents a replication task. It carries the information about the tables to be replicated and the downstream.
-- Task: After TiCDC receives a replication task, it splits this task into several subtasks. Such a subtask is called Task. These Tasks are assigned to the Capture processes of the TiCDC nodes for processing.
+-   Changefeed: レプリケーション タスクを表します。これには、複製されるテーブルとダウンストリームに関する情報が含まれます。
+-   タスク: TiCDC はレプリケーション タスクを受信すると、このタスクをいくつかのサブタスクに分割します。このようなサブタスクはタスクと呼ばれます。これらのタスクは、処理のために TiCDC ノードのキャプチャ プロセスに割り当てられます。
 
-For example:
+例えば：
 
-```
-cdc cli changefeed create --server="http://127.0.0.1:8300" --sink-uri="kafka://127.0.0.1:9092/cdc-test?kafka-version=2.4.0&partition-num=6&max-message-bytes=67108864&replication-factor=1"
-cat changefeed.toml
-......
-[sink]
-dispatchers = [
-    {matcher = ['test1.tab1', 'test2.tab2'], topic = "{schema}_{table}"},
-    {matcher = ['test3.tab3', 'test4.tab4'], topic = "{schema}_{table}"},
-]
-```
+    cdc cli changefeed create --server="http://127.0.0.1:8300" --sink-uri="kafka://127.0.0.1:9092/cdc-test?kafka-version=2.4.0&partition-num=6&max-message-bytes=67108864&replication-factor=1"
+    cat changefeed.toml
+    ......
+    [sink]
+    dispatchers = [
+        {matcher = ['test1.tab1', 'test2.tab2'], topic = "{schema}_{table}"},
+        {matcher = ['test3.tab3', 'test4.tab4'], topic = "{schema}_{table}"},
+    ]
 
-For a detailed description of the parameters in the preceding `cdc cli changefeed create` command, see [TiCDC Changefeed Configuration Parameters](/ticdc/ticdc-changefeed-config.md).
+前述の`cdc cli changefeed create`コマンドのパラメーターの詳細については、 [TiCDC Changefeedコンフィグレーションパラメータ](/ticdc/ticdc-changefeed-config.md)を参照してください。
 
-The preceding `cdc cli changefeed create` command creates a changefeed task that replicates `test1.tab1`, `test1.tab2`, `test3.tab3`, and `test4.tab4` to the Kafka cluster. The processing flow after TiCDC receives this command is as follows:
+前述の`cdc cli changefeed create`コマンドは、 `test1.tab1` 、 `test1.tab2` 、 `test3.tab3` 、および`test4.tab4`を Kafka クラスターにレプリケートする変更フィード タスクを作成します。 TiCDC がこのコマンドを受信した後の処理フローは次のとおりです。
 
-1. TiCDC sends this task to the owner Capture process.
-2. The owner Capture process saves information about this changefeed task in etcd in PD.
-3. The owner Capture process splits the changefeed task into several Tasks and notifies other Capture processes of the Tasks to be completed.
-4. The Capture processes start pulling data from TiKV nodes, process the data, and complete replication.
+1.  TiCDC は、このタスクを所有者のキャプチャ プロセスに送信します。
+2.  所有者のキャプチャ プロセスは、この変更フィード タスクに関する情報を PD の etcd に保存します。
+3.  所有者のキャプチャ プロセスは、チェンジフィード タスクを複数のタスクに分割し、完了するタスクを他のキャプチャ プロセスに通知します。
+4.  キャプチャ プロセスは、TiKV ノードからのデータの取得を開始し、データを処理して、レプリケーションを完了します。
 
-The following is the TiCDC architecture diagram with Changefeed and Task included:
+以下は、Changefeed と Task が含まれる TiCDCアーキテクチャ図です。
 
 ![TiCDC architecture](/media/ticdc/ticdc-architecture-6.jpg)
 
-In the preceding diagram, a changefeed is created to replicate four tables to downstream. This changefeed is split into three Tasks, which are sent to the three Capture processes respectively in the TiCDC cluster. After TiCDC processes the data, the data is replicated to the downstream system.
+上の図では、4 つのテーブルをダウンストリームにレプリケートするために変更フィードが作成されます。この変更フィードは 3 つのタスクに分割され、TiCDC クラスター内の 3 つのキャプチャ プロセスにそれぞれ送信されます。 TiCDC がデータを処理した後、データはダウンストリーム システムに複製されます。
 
-TiCDC supports replicating data to MySQL, TiDB, and Kafka databases. The preceding diagram only illustrates the process of data transfer at the changefeed level. The following sections describe in detail how TiCDC processes data, using Task1 that replicates table `table1` as an example.
+TiCDC は、MySQL、TiDB、および Kafka データベースへのデータのレプリケーションをサポートしています。上の図は、チェンジフィード レベルでのデータ転送のプロセスのみを示しています。次のセクションでは、テーブル`table1`を複製する Task1 を例として、TiCDC がデータを処理する方法について詳しく説明します。
 
 ![TiCDC architecture](/media/ticdc/ticdc-architecture-5.jpg)
 
-1. Push data: When a data change occurs, TiKV pushes data to the Puller module.
-2. Scan incremental data: The Puller module pulls data from TiKV when it finds the data changes received not continuous.
-3. Sort data: The Sorter module sorts the data received from TiKV based on the timestamps and sends the sorted data to the Mounter module.
-4. Mount data: After receiving the data changes, the Mounter module loads the data in a format that TiCDC sink can understand.
-5. Replicate data: The Sink module replicates the data changes to the downstream.
+1.  データのプッシュ: データ変更が発生すると、TiKV はデータを Puller モジュールにプッシュします。
+2.  増分データのスキャン: Puller モジュールは、受信したデータ変更が連続していないと判断した場合、TiKV からデータをプルします。
+3.  データのソート: ソーター モジュールは、TiKV から受信したデータをタイムスタンプに基づいてソートし、ソートされたデータをマウンター モジュールに送信します。
+4.  データのマウント: データ変更を受信した後、マウンター モジュールは TiCDC シンクが理解できる形式でデータをロードします。
+5.  データのレプリケート: シンク モジュールは、データの変更をダウンストリームにレプリケートします。
 
-The upstream of TiCDC is the distributed relational database TiDB that supports transactions. When TiCDC replicates data, it should ensure the consistency of data and that of transactions when replicating multiple tables, which is a great challenge. The following sections introduce the key technologies and concepts used by TiCDC to address this challenge.
+TiCDC の上流には、トランザクションをサポートする分散リレーショナル データベース TiDB があります。 TiCDC がデータをレプリケートする場合、複数のテーブルをレプリケートするときにデータとトランザクションの一貫性を確保する必要がありますが、これは大きな課題です。次のセクションでは、この課題に対処するために TiCDC が使用する主要なテクノロジーと概念を紹介します。
 
-## Key concepts of TiCDC
+## TiCDC の主要な概念 {#key-concepts-of-ticdc}
 
-For the downstream relational databases, TiCDC ensures the consistency of transactions in a single table and eventual transaction consistency in multiple tables. In addition, TiCDC ensures that any data change that has occurred in the upstream TiDB cluster can be replicated to the downstream at least once.
+ダウンストリームのリレーショナル データベースの場合、TiCDC は単一テーブル内のトランザクションの一貫性と、複数のテーブル内の最終的なトランザクションの一貫性を保証します。さらに、TiCDC は、アップストリームの TiDB クラスターで発生したデータ変更を少なくとも 1 回はダウンストリームに複製できることを保証します。
 
-### Architecture-related concepts
+### アーキテクチャ関連の概念 {#architecture-related-concepts}
 
-- Capture: The process that runs the TiCDC node. Multiple Capture processes constitute a TiCDC cluster. Each Capture process is responsible for replicating data changes in TiKV, including receiving and actively pulling data changes, and replicating the data to the downstream.
-- Capture Owner: The owner Capture among multiple Capture processes. Only one owner role exists in a TiCDC cluster at a time. The Capture Owner is responsible for scheduling data within the cluster.
-- Processor: The logical thread inside Capture. Each Processor is responsible for processing the data of one or more tables in the same replication stream. A Capture node can run multiple Processors.
-- Changefeed: A task that replicates data from an upstream TiDB cluster to a downstream system. A changefeed contains multiple Tasks, and each Task is processed by a Capture node.
+-   キャプチャ: TiCDC ノードを実行するプロセス。複数のキャプチャ プロセスが TiCDC クラスターを構成します。各キャプチャ プロセスは、データ変更の受信とアクティブなプル、ダウンストリームへのデータの複製など、TiKV でのデータ変更の複製を担当します。
+-   Capture 所有者: 複数の Capture プロセス間の Capture 所有者。 TiCDC クラスターには一度に 1 つの所有者ロールのみが存在します。キャプチャ オーナーは、クラスター内のデータのスケジュールを担当します。
+-   プロセッサ: Capture 内の論理スレッド。各プロセッサは、同じレプリケーション ストリーム内の 1 つ以上のテーブルのデータを処理します。キャプチャ ノードは複数のプロセッサを実行できます。
+-   Changefeed: 上流の TiDB クラスターから下流のシステムにデータを複製するタスク。変更フィードには複数のタスクが含まれており、各タスクはキャプチャ ノードによって処理されます。
 
-### Timestamp-related concepts
+### タイムスタンプ関連の概念 {#timestamp-related-concepts}
 
-TiCDC introduces a series of timestamps (TS) to indicate the status of data replication. These timestamps are used to ensure that data is replicated to the downstream at least once and that the consistency of data is guaranteed.
+TiCDC では、データ レプリケーションのステータスを示す一連のタイムスタンプ (TS) が導入されています。これらのタイムスタンプは、データが少なくとも 1 回はダウンストリームにレプリケートされ、データの一貫性が保証されることを保証するために使用されます。
 
-#### ResolvedTS
+#### 解決済みTS {#resolvedts}
 
-This timestamp exists in both TiKV and TiCDC.
+このタイムスタンプは TiKV と TiCDC の両方に存在します。
 
-- ResolvedTS in TiKV: Represents the start time of the earliest transaction in a Region leader, that is, `ResolvedTS` = max(`ResolvedTS`, min(`StartTS`)). Because a TiDB cluster contains multiple TiKV nodes, the minimum ResolvedTS of the Region leader on all TiKV nodes is called the global ResolvedTS. The TiDB cluster ensures that all transactions before the global ResolvedTS are committed. Alternatively, you can assume that there are no uncommitted transactions before this timestamp.
+-   TiKV の ResolvedTS:リージョンリーダーの最も早いトランザクションの開始時刻を表します。つまり、 `ResolvedTS` = max( `ResolvedTS` , min( `StartTS` ))。 TiDB クラスターには複数の TiKV ノードが含まれるため、すべての TiKV ノード上のリージョンリーダーの最小 ResolvedTS はグローバル ResolvedTS と呼ばれます。 TiDB クラスターは、グローバル ResolvedTS の前のすべてのトランザクションがコミットされることを保証します。あるいは、このタイムスタンプより前にコミットされていないトランザクションがないと仮定することもできます。
 
-- ResolvedTS in TiCDC:
+-   TiCDC の解決済みTS:
 
-    - table ResolvedTS: Each table has a table-level ResolvedTS, which indicates all data changes in the table that are smaller than the Resolved TS have been received. To make it simple, this timestamp is the same as the minimum value of the ResolvedTS of all Regions corresponding to this table on the TiKV node.
-    - global ResolvedTS: The minimum ResolvedTS of all Processors on all TiCDC nodes. Because each TiCDC node has one or more Processors, each Processor corresponds to multiple table pipelines.
+    -   table ResolvedTS: 各テーブルにはテーブルレベルの ResolvedTS があり、Resolved TS より小さいテーブル内のすべてのデータ変更が受信されたことを示します。簡単に説明すると、このタイムスタンプは、TiKV ノード上のこのテーブルに対応するすべてのリージョンの ResolvedTS の最小値と同じです。
+    -   global ResolvedTS: すべての TiCDC ノード上のすべてのプロセッサの最小 ResolvedTS。各 TiCDC ノードには 1 つ以上のプロセッサがあるため、各プロセッサは複数のテーブル パイプラインに対応します。
 
-    For TiCDC, the ResolvedTS sent by TiKV is a special event in the format of `<resolvedTS: timestamp>`. In general, the ResolvedTS satisfies the following constraints:
+    TiCDC の場合、TiKV によって送信される ResolvedTS は、 `<resolvedTS: timestamp>`の形式の特別なイベントです。一般に、ResolvedTS は次の制約を満たします。
 
-    ```
-    table ResolvedTS >= global ResolvedTS
-    ```
+        table ResolvedTS >= global ResolvedTS
 
-#### CheckpointTS
+#### チェックポイントTS {#checkpointts}
 
-This timestamp exists only in TiCDC. It means that the data changes that occur before this timestamp have been replicated to the downstream system.
+このタイムスタンプは TiCDC にのみ存在します。これは、このタイムスタンプより前に発生したデータ変更がダウンストリーム システムにレプリケートされたことを意味します。
 
-- table CheckpointTS: Because TiCDC replicates data in tables, the table checkpointTS indicates all data changes that occur before CheckpointTS have been replicated at the table level.
-- processor CheckpointTS: Indicates the minimum table CheckpointTS on a Processor.
-- global CheckpointTS: Indicates the minimum CheckpointTS among all Processors.
+-   テーブル CheckpointTS: TiCDC はテーブル内のデータを複製するため、テーブル CheckpointTS は、CheckpointTS がテーブル レベルで複製される前に発生したすべてのデータ変更を示します。
+-   プロセッサー CheckpointTS: プロセッサー上の最小テーブル CheckpointTS を示します。
+-   global CheckpointTS: すべてのプロセッサの最小の CheckpointTS を示します。
 
-Generally, a checkpointTS satisfies the following constraint:
+一般に、チェックポイントTS は次の制約を満たします。
 
-```
-table CheckpointTS >= global CheckpointTS
-```
+    table CheckpointTS >= global CheckpointTS
 
-Because TiCDC only replicates data smaller than the global ResolvedTS to the downstream, the complete constraint is as follows:
+TiCDC はグローバル ResolvedTS よりも小さいデータのみをダウンストリームにレプリケートするため、完全な制約は次のようになります。
 
-```
-table ResolvedTS >= global ResolvedTS >= table CheckpointTS >= global CheckpointTS
-```
+    table ResolvedTS >= global ResolvedTS >= table CheckpointTS >= global CheckpointTS
 
-After data changes and transactions are committed, the ResolvedTS on the TiKV node will continue to advance, and the Puller module on the TiCDC node keeps receiving data pushed by TiKV. The Puller module also decides whether to scan incremental data based on the data changes it has received, which ensures that all data changes are sent to the TiCDC node.
+データが変更され、トランザクションがコミットされた後も、TiKV ノード上の ResolvedTS は続行し、TiCDC ノード上の Puller モジュールは TiKV によってプッシュされたデータを受信し続けます。また、Puller モジュールは、受信したデータ変更に基づいて増分データをスキャンするかどうかを決定します。これにより、すべてのデータ変更が TiCDC ノードに確実に送信されます。
 
-The Sorter module sorts data received by the Puller module in ascending order according to the timestamp. This process ensures data consistency at the table level. Next, the Mounter module assembles the data changes from the upstream into a format that the Sink module can consume, and sends it to the Sink module. The Sink module replicates the data changes between the CheckpointTS and the ResolvedTS to the downstream in the order of the timestamp, and advances the checkpointTS after the downstream receives the data changes.
+Sorter モジュールは、Puller モジュールが受信したデータをタイムスタンプに従って昇順に並べ替えます。このプロセスにより、テーブル レベルでのデータの一貫性が保証されます。次に、マウンター モジュールは、アップストリームからのデータ変更をシンク モジュールが使用できる形式に組み立て、シンク モジュールに送信します。シンク モジュールは、CheckpointTS と ResolvedTS の間のデータ変更をタイムスタンプの順に下流に複製し、下流がデータ変更を受信した後にチェックポイント TS を進めます。
 
-The preceding sections only cover data changes of DML statements and do not include DDL statements. The following sections introduce the timestamp related to DDL statements.
+前のセクションでは、DML ステートメントのデータ変更のみを説明しており、DDL ステートメントは含まれていません。次のセクションでは、DDL ステートメントに関連するタイムスタンプを紹介します。
 
-#### Barrier TS
+#### バリアTS {#barrier-ts}
 
-Barrier TS is generated when there are DDL change events or a Syncpoint is used.
+バリア TS は、DDL 変更イベントがある場合、または同期ポイントが使用される場合に生成されます。
 
-- DDL change events: Barrier TS ensures that all changes before the DDL statement are replicated to the downstream. After this DDL statement is executed and replicated, TiCDC starts replicating other data changes. Because DDL statements are processed by the Capture Owner, the Barrier TS corresponding to a DDL statement is only generated by the owner node.
-- Syncpoint: When you enable the Syncpoint feature of TiCDC, a Barrier TS is generated by TiCDC according to the `sync-point-interval` you specified. When all table changes before this Barrier TS are replicated, TiCDC inserts the current global CheckpointTS as the primary TS to the table recording tsMap in downstream. Then TiCDC continues data replication.
+-   DDL 変更イベント: バリア TS は、DDL ステートメント前のすべての変更がダウンストリームにレプリケートされることを保証します。この DDL ステートメントが実行されてレプリケートされた後、TiCDC は他のデータ変更のレプリケーションを開始します。 DDL ステートメントはキャプチャ オーナーによって処理されるため、DDL ステートメントに対応するバリア TS はオーナー ノードによってのみ生成されます。
+-   同期ポイント: TiCDC の同期ポイント機能を有効にすると、指定した`sync-point-interval`に従って TiCDC によってバリア TS が生成されます。このバリア TS が複製される前にすべてのテーブルが変更されると、TiCDC は現在のグローバル チェックポイント TS をプライマリ TS としてダウンストリームの tsMap を記録するテーブルに挿入します。その後、TiCDC はデータ レプリケーションを続行します。
 
-After a Barrier TS is generated, TiCDC ensures that only data changes that occur before this Barrier TS are replicated to downstream. Before these data changes are replicated to downstream, the replication task does not proceed. The owner TiCDC checks whether all target data has been replicated by continuously comparing the global CheckpointTS and the Barrier TS. If the global CheckpointTS equals to the Barrier TS, TiCDC continues replication after performing a designated operation (such as executing a DDL statement or recording the global CheckpointTS downstream). Otherwise, TiCDC waits for all data changes that occur before the Barrier TS to be replicated to the downstream.
+バリア TS が生成された後、TiCDC は、このバリア TS が生成される前に発生したデータ変更のみがダウンストリームに複製されることを保証します。これらのデータ変更がダウンストリームにレプリケートされるまで、レプリケーション タスクは続行されません。オーナー TiCDC は、グローバル CheckpointTS と Barrier TS を継続的に比較することにより、すべてのターゲット データが複製されたかどうかをチェックします。グローバル CheckpointTS が Barrier TS と等しい場合、TiCDC は指定された操作 (DDL ステートメントの実行やグローバル CheckpointTS ダウンストリームの記録など) を実行した後、レプリケーションを続行します。それ以外の場合、TiCDC は、バリア TS がダウンストリームに複製される前に発生するすべてのデータ変更を待機します。
 
-## Major processes
+## 主な工程 {#major-processes}
 
-This section describes the major processes of TiCDC to help you better understand its working principles.
+このセクションでは、TiCDC の動作原理をより深く理解できるように、TiCDC の主要なプロセスについて説明します。
 
-Note that the following processes occur only within TiCDC and are transparent to users. Therefore, you do not need to care about which TiCDC node you are starting.
+次のプロセスは TiCDC 内でのみ発生し、ユーザーには透過的であることに注意してください。したがって、どの TiCDC ノードを開始するかを気にする必要はありません。
 
-### Start TiCDC
+### TiCDC を開始する {#start-ticdc}
 
-- For a TiCDC node that is not an owner, it works as follows:
+-   所有者ではない TiCDC ノードの場合、次のように動作します。
 
-    1. Starts the Capture process.
-    2. Starts the Processor.
-    3. Receives the Task scheduling command executed by the Owner.
-    4. Starts or stops tablePipeline according to the scheduling command.
+    1.  キャプチャプロセスを開始します。
+    2.  プロセッサを起動します。
+    3.  オーナーが実行したタスクスケジュールコマンドを受け取ります。
+    4.  スケジューリングコマンドに従って tablePipeline を開始または停止します。
 
-- For an owner TiCDC node, it works as follows:
+-   所有者の TiCDC ノードの場合、次のように動作します。
 
-    1. Starts the Capture process.
-    2. The node is elected as the Owner and the corresponding thread is started.
-    3. Reads the changefeed information.
-    4. Starts the changefeed management process.
-    5. Reads the schema information in TiKV according to the changefeed configuration and the latest CheckpointTS to determine the tables to be replicated.
-    6. Reads the list of tables currently replicated by each Processor and distributes the tables to be added.
-    7. Updates the replication progress.
+    1.  キャプチャプロセスを開始します。
+    2.  ノードが所有者として選出され、対応するスレッドが開始されます。
+    3.  チェンジフィード情報を読み取ります。
+    4.  チェンジフィード管理プロセスを開始します。
+    5.  変更フィード構成と最新の CheckpointTS に従って TiKV 内のスキーマ情報を読み取り、レプリケートするテーブルを決定します。
+    6.  各プロセッサーによって現在複製されているテーブルのリストを読み取り、追加するテーブルを配布します。
+    7.  レプリケーションの進行状況を更新します。
 
-### Stop TiCDC
+### TiCDC を停止する {#stop-ticdc}
 
-Usually, you stop a TiCDC node when you need to upgrade it or perform some planned maintenance operations. The process of stopping a TiCDC node is as follows:
+通常、TiCDC ノードをアップグレードする必要がある場合、または計画されたメンテナンス操作を実行する必要がある場合は、TiCDC ノードを停止します。 TiCDC ノードを停止するプロセスは次のとおりです。
 
-1. The node receives the command to stop itself.
-2. The node sets its service status to unavailable.
-3. The node stops receiving new replication tasks.
-4. The node notifies the Owner node to transfer its data replication tasks to other nodes.
-5. The node stops after the replication tasks are transferred to other nodes.
+1.  ノードは自身を停止するコマンドを受け取ります。
+2.  ノードはサービス ステータスを利用不可に設定します。
+3.  ノードは新しいレプリケーション タスクの受信を停止します。
+4.  ノードは、データ複製タスクを他のノードに転送するように所有者ノードに通知します。
+5.  レプリケーションタスクが他のノードに転送された後、ノードは停止します。

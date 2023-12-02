@@ -3,19 +3,19 @@ title: SHOW ERRORS | TiDB SQL Statement Reference
 summary: An overview of the usage of SHOW ERRORS for the TiDB database.
 ---
 
-# SHOW ERRORS
+# エラーを表示 {#show-errors}
 
-This statement shows errors from previously executed statements. The error buffer is cleared as soon as a statement executes successfully. In which case, `SHOW ERRORS` will return an empty set.
+このステートメントは、以前に実行されたステートメントからのエラーを示します。エラー バッファは、ステートメントが正常に実行されるとすぐにクリアされます。この場合、 `SHOW ERRORS`空のセットを返します。
 
-The behavior of which statements generate errors vs. warnings is highly influenced by the current `sql_mode`.
+どのステートメントがエラーと警告を生成するかの動作は、現在の`sql_mode`に大きく影響されます。
 
-## Synopsis
+## あらすじ {#synopsis}
 
 **ShowErrorsStmt:**
 
 ![ShowErrorsStmt](/media/sqlgram/ShowErrorsStmt.png)
 
-## Examples
+## 例 {#examples}
 
 ```sql
 mysql> select invalid;
@@ -45,10 +45,10 @@ mysql> SHOW ERRORS;
 Empty set (0.00 sec)
 ```
 
-## MySQL compatibility
+## MySQLの互換性 {#mysql-compatibility}
 
-The `SHOW ERRORS` statement in TiDB is fully compatible with MySQL. If you find any compatibility differences, [report a bug](https://docs.pingcap.com/tidb/stable/support).
+TiDB の`SHOW ERRORS`ステートメントは MySQL と完全な互換性があります。互換性の違いが見つかった場合は、 [バグを報告](https://docs.pingcap.com/tidb/stable/support) .
 
-## See also
+## こちらも参照 {#see-also}
 
-* [SHOW WARNINGS](/sql-statements/sql-statement-show-warnings.md)
+-   [警告を表示](/sql-statements/sql-statement-show-warnings.md)

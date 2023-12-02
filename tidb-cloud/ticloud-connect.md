@@ -3,68 +3,68 @@ title: ticloud connect
 summary: The reference of `ticloud connect`.
 ---
 
-# ticloud connect
+# ティッククラウド接続 {#ticloud-connect}
 
-Connect to a TiDB Cloud cluster or branch:
+TiDB Cloudクラスターまたはブランチに接続します。
 
 ```shell
 ticloud connect [flags]
 ```
 
-> **Note:**
+> **注記：**
 >
-> - If you are prompted about whether to use the default user, you can choose `Y` to use the default root user or choose `n` to specify another user. For [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) clusters, the name of the default root user has a [prefix](/tidb-cloud/select-cluster-tier.md#user-name-prefix) such as `3pTAoNNegb47Uc8`.
-> - The connection forces the [ANSI SQL mode](https://dev.mysql.com/doc/refman/8.0/en/sql-mode.html#sqlmode_ansi) for the session. To exit the session, enter `\q`.
+> -   デフォルトのユーザーを使用するかどうかを尋ねられた場合は、 `Y`を選択してデフォルトの root ユーザーを使用するか、 `n`選択して別のユーザーを指定できます。 [TiDB サーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-serverless)クラスターの場合、デフォルトの root ユーザーの名前には`3pTAoNNegb47Uc8`などの[接頭語](/tidb-cloud/select-cluster-tier.md#user-name-prefix)が含まれます。
+> -   接続ではセッションに対して[ANSI SQL モード](https://dev.mysql.com/doc/refman/8.0/en/sql-mode.html#sqlmode_ansi)強制されます。セッションを終了するには、 `\q`を入力します。
 
-## Examples
+## 例 {#examples}
 
-Connect to a TiDB Cloud cluster or branch in interactive mode:
+インタラクティブ モードでTiDB Cloudクラスターまたはブランチに接続します。
 
 ```shell
 ticloud connect
 ```
 
-Use the default user to connect to a TiDB Cloud cluster or branch in non-interactive mode:
+デフォルト ユーザーを使用して、非対話モードでTiDB Cloudクラスターまたはブランチに接続します。
 
 ```shell
 ticloud connect -p <project-id> -c <cluster-id>
 ticloud connect -p <project-id> -c <cluster-id> -b <branch-id>
 ```
 
-Use the default user to connect to the TiDB Cloud cluster or branch with password in non-interactive mode:
+デフォルトのユーザーを使用して、非対話モードでパスワードを使用してTiDB Cloudクラスターまたはブランチに接続します。
 
 ```shell
 ticloud connect -p <project-id> -c <cluster-id> --password <password>
 ticloud connect -p <project-id> -c <cluster-id> -b <branch-id> --password <password>
 ```
 
-Use a specific user to connect to the TiDB Cloud cluster or branch in non-interactive mode:
+特定のユーザーを使用して、非対話モードでTiDB Cloudクラスターまたはブランチに接続します。
 
 ```shell
 ticloud connect -p <project-id> -c <cluster-id> -u <user-name>
 ticloud connect -p <project-id> -c <cluster-id> -b <branch-id> -u <user-name>
 ```
 
-## Flags
+## フラグ {#flags}
 
-In non-interactive mode, you need to manually enter the required flags. In interactive mode, you can just follow CLI prompts to fill them in.
+非対話型モードでは、必要なフラグを手動で入力する必要があります。対話型モードでは、CLI プロンプトに従って入力するだけです。
 
-| Flag                    | Description                       | Required | Note                                                 |
-|-------------------------|-----------------------------------|----------|------------------------------------------------------|
-| -c, --cluster-id string | Cluster ID                        | Yes      | Only works in non-interactive mode.                  |
-| -b, --branch-id string  | Branch ID                         | No       | Only works in non-interactive mode.                  |
-| -h, --help              | Help information for this command | No       | Works in both non-interactive and interactive modes. |
-| --password              | The password of the user          | No       | Only works in non-interactive mode.                  |
-| -p, --project-id string | Project ID                        | Yes      | Only works in non-interactive mode.                  |
-| -u, --user string       | A specific user for login         | No       | Only works in non-interactive mode.                  |
+| フラグ                 | 説明            | 必須  | 注記                       |
+| ------------------- | ------------- | --- | ------------------------ |
+| -c、--cluster-id 文字列 | クラスタID        | はい  | 非対話モードでのみ動作します。          |
+| -b、--ブランチ ID 文字列    | 支店ID          | いいえ | 非対話モードでのみ動作します。          |
+| -h, --help          | このコマンドのヘルプ情報  | いいえ | 非対話型モードと対話型モードの両方で動作します。 |
+| - パスワード             | ユーザーのパスワード    | いいえ | 非対話モードでのみ動作します。          |
+| -p、--プロジェクトID文字列    | プロジェクトID      | はい  | 非対話モードでのみ動作します。          |
+| -u、--user 文字列       | ログイン用の特定のユーザー | いいえ | 非対話モードでのみ動作します。          |
 
-## Inherited flags
+## 継承されたフラグ {#inherited-flags}
 
-| Flag                 | Description                                                                                          | Required | Note                                                                                                                     |
-|----------------------|------------------------------------------------------------------------------------------------------|----------|--------------------------------------------------------------------------------------------------------------------------|
-| --no-color           | Disables color in output.                                                                            | No       | Only works in non-interactive mode. In interactive mode, disabling color might not work with some UI components. |
-| -P, --profile string | Specifies the active [user profile](/tidb-cloud/cli-reference.md#user-profile) used in this command. | No       | Works in both non-interactive and interactive modes.                                                                     |
+| フラグ            | 説明                                                                               | 必須  | 注記                                                                |
+| -------------- | -------------------------------------------------------------------------------- | --- | ----------------------------------------------------------------- |
+| --色なし          | 出力のカラーを無効にします。                                                                   | いいえ | 非対話モードでのみ動作します。インタラクティブ モードでは、一部の UI コンポーネントで色の無効化が機能しない可能性があります。 |
+| -P、--プロファイル文字列 | このコマンドで使用されるアクティブな[ユーザープロフィール](/tidb-cloud/cli-reference.md#user-profile)を指定します。 | いいえ | 非対話型モードと対話型モードの両方で動作します。                                          |
 
-## Feedback
+## フィードバック {#feedback}
 
-If you have any questions or suggestions on the TiDB Cloud CLI, feel free to create an [issue](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose). Also, we welcome any contributions.
+TiDB Cloud CLI に関して質問や提案がある場合は、お気軽に[問題](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose)を作成してください。また、貢献も歓迎します。

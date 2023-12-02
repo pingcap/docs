@@ -3,21 +3,21 @@ title: Overview of TiDB Backup & Restore Architecture
 summary: Learn about the architecture design of TiDB backup and restore features.
 ---
 
-# Overview of TiDB Backup & Restore Architecture
+# TiDB バックアップおよび復元アーキテクチャの概要 {#overview-of-tidb-backup-x26-restore-architecture}
 
-As described in [TiDB Backup & Restore Overview](/br/backup-and-restore-overview.md), TiDB supports backing up and restoring multiple types of cluster data. You can use Backup & Restore (BR) and TiDB Operator to access these features, and create tasks to back up data from TiKV nodes or restore data to TiKV nodes.
+[TiDB のバックアップと復元の概要](/br/backup-and-restore-overview.md)で説明したように、TiDB は複数のタイプのクラスター データのバックアップと復元をサポートします。バックアップと復元 (BR) とTiDB Operatorを使用してこれらの機能にアクセスし、TiKV ノードからデータをバックアップしたり、TiKV ノードにデータを復元したりするタスクを作成できます。
 
-For details about the architecture of each backup and restore feature, see the following documents:
+各バックアップおよび復元機能のアーキテクチャの詳細については、次のドキュメントを参照してください。
 
-- Full data backup and restore
+-   フルデータのバックアップと復元
 
-    - [Back up snapshot data](/br/br-snapshot-architecture.md#process-of-backup)
-    - [Restore snapshot backup data](/br/br-snapshot-architecture.md#process-of-restore)
+    -   [スナップショットデータをバックアップする](/br/br-snapshot-architecture.md#process-of-backup)
+    -   [スナップショットバックアップデータの復元](/br/br-snapshot-architecture.md#process-of-restore)
 
-- Data change log backup
+-   データ変更ログのバックアップ
 
-    - [Log backup: backup of KV data change](/br/br-log-architecture.md#process-of-log-backup)
+    -   [ログバックアップ：KVデータ変更のバックアップ](/br/br-log-architecture.md#process-of-log-backup)
 
-- Point-in-time recovery (PITR)
+-   ポイントインタイムリカバリ (PITR)
 
-    - [PITR](/br/br-log-architecture.md#process-of-pitr)
+    -   [PITR](/br/br-log-architecture.md#process-of-pitr)

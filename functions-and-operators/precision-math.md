@@ -3,111 +3,111 @@ title: Precision Math
 summary: Learn about the precision math in TiDB.
 ---
 
-# Precision Math
+# 精密計算 {#precision-math}
 
-The precision math support in TiDB is consistent with MySQL. For more information, see [Precision Math in MySQL](https://dev.mysql.com/doc/refman/8.0/en/precision-math.html).
+TiDB の精度数学サポートは MySQL と一貫しています。詳細については、 [MySQL の精密計算](https://dev.mysql.com/doc/refman/8.0/en/precision-math.html)を参照してください。
 
-## Numeric types
+## 数値型 {#numeric-types}
 
-The scope of precision math for exact-value operations includes the exact-value data types (integer and DECIMAL types) and exact-value numeric literals. Approximate-value data types and numeric literals are handled as floating-point numbers.
+正確な値の演算の精度計算の範囲には、正確な値のデータ型 (整数および DECIMAL 型) と正確な値の数値リテラルが含まれます。近似値のデータ型と数値リテラルは浮動小数点数として扱われます。
 
-Exact-value numeric literals have an integer part or fractional part, or both. They may be signed. Examples: `1`, `.2`, `3.4`, `-5`, `-6.78`, `+9.10`.
+正確な値の数値リテラルには、整数部分または小数部分、またはその両方があります。署名されている場合があります。例: `1` 、 `.2` 、 `3.4` 、 `-5` 、 `-6.78` 、 `+9.10` 。
 
-Approximate-value numeric literals are represented in scientific notation (power-of-10) with a mantissa and exponent. Either or both parts may be signed. Examples: `1.2E3`, `1.2E-3`, `-1.2E3`, `-1.2E-3`.
+近似値の数値リテラルは、仮数と指数を使用した科学表記法 (10 のべき乗) で表されます。どちらかまたは両方の部分に署名できます。例: `1.2E3` 、 `1.2E-3` 、 `-1.2E3` 、 `-1.2E-3` 。
 
-Two numbers that look similar might be treated differently. For example, `2.34` is an exact-value (fixed-point) number, whereas `2.34E0` is an approximate-value (floating-point) number.
+似ているように見える 2 つの数値が異なるように扱われる場合があります。たとえば、 `2.34`は正確な値 (固定小数点) の数値ですが、 `2.34E0`は近似値 (浮動小数点) の数値です。
 
-The DECIMAL data type is a fixed-point type and the calculations are exact. The FLOAT and DOUBLE data types are floating-point types and calculations are approximate.
+DECIMAL データ型は固定小数点型であり、計算は正確です。 FLOAT および DOUBLE データ型は浮動小数点型であり、計算は近似値です。
 
-## DECIMAL data type characteristics
+## DECIMAL データ型の特性 {#decimal-data-type-characteristics}
 
-This section discusses the following topics of the characteristics of the DECIMAL data type (and its synonyms):
+このセクションでは、DECIMAL データ型 (およびその同義語) の特性に関する次のトピックについて説明します。
 
-- Maximum number of digits
-- Storage format
-- Storage requirements
+-   最大桁数
+-   保存形式
+-   ストレージ要件
 
-The declaration syntax for a DECIMAL column is `DECIMAL(M,D)`. The ranges of values for the arguments are as follows:
+DECIMAL 列の宣言構文は`DECIMAL(M,D)`です。引数の値の範囲は次のとおりです。
 
-- M is the maximum number of digits (the precision). 1<= M <= 65.
-- D is the number of digits to the right of the decimal point (the scale). 1 <= D <= 30 and D must be no larger than M.
+-   M は最大桁数 (精度) です。 1&lt;= M &lt;= 65。
+-   D は、小数点の右側の桁数 (スケール) です。 1 &lt;= D &lt;= 30、D は M 以下でなければなりません。
 
-The maximum value of 65 for M means that calculations on DECIMAL values are accurate up to 65 digits. This limit of 65 digits of precision also applies to exact-value numeric literals.
+M の最大値 65 は、DECIMAL 値の計算が 65 桁まで正確であることを意味します。この 65 桁の精度制限は、正確な値の数値リテラルにも適用されます。
 
-Values for DECIMAL columns are stored using a binary format that packs 9 decimal digits into 4 bytes. The storage requirements for the integer and fractional parts of each value are determined separately. Each multiple of 9 digits requires 4 bytes, and any remaining digits left over require some fraction of 4 bytes. The storage required for remaining digits is given by the following table.
+DECIMAL 列の値は、10 進数 9 桁を 4 バイトにパックするバイナリ形式を使用して格納されます。各値の整数部と小数部のstorage要件は個別に決定されます。 9 桁の各倍数には 4 バイトが必要で、残りの桁には 4 バイトの小数部分が必要です。残りの桁に必要なstorageは、次の表に示されています。
 
-| Leftover Digits | Number of Bytes |
-| --- | --- |
-| 0   | 0 |
-| 1–2 | 1 |
-| 3–4 | 2 |
-| 5–6 | 3 |
-| 7–9 | 4 |
+| 残りの数字 | バイト数 |
+| ----- | ---- |
+| 0     | 0    |
+| 1-2   | 1    |
+| 3～4   | 2    |
+| 5～6   | 3    |
+| 7–9   | 4    |
 
-For example, a `DECIMAL(18,9)` column has 9 digits on each side of the decimal point, so the integer part and the fractional part each require 4 bytes. A `DECIMAL(20,6)` column has 14 integer digits and 6 fractional digits. The integer digits require 4 bytes for 9 of the digits and 3 bytes for the remaining 5 digits. The 6 fractional digits require 3 bytes.
+たとえば、 `DECIMAL(18,9)`列には小数点の両側に 9 桁があるため、整数部分と小数部分にそれぞれ 4 バイトが必要です。 `DECIMAL(20,6)`列には 14 桁の整数桁と 6 桁の小数桁があります。整数の数字には、9 桁に 4 バイト、残りの 5 桁に 3 バイトが必要です。小数点以下 6 桁には 3 バイトが必要です。
 
-DECIMAL columns do not store a leading `+` character or `-` character or leading `0` digits. If you insert `+0003.1` into a `DECIMAL(5,1)` column, it is stored as `3.1`. For negative numbers, a literal `-` character is not stored.
+DECIMAL 列には、先頭の`+`文字、 `-`文字、または先頭の`0`桁は格納されません。 `DECIMAL(5,1)`列に`+0003.1`挿入すると、 `3.1`として格納されます。負の数の場合、リテラルの`-`文字は保存されません。
 
-DECIMAL columns do not permit values larger than the range implied by the column definition. For example, a `DECIMAL(3,0)` column supports a range of `-999` to `999`. A `DECIMAL(M,D)` column permits at most `M - D` digits to the left of the decimal point.
+DECIMAL 列では、列定義によって暗示される範囲を超える値は許可されません。たとえば、 `DECIMAL(3,0)`列は`-999` ～ `999`の範囲をサポートします。 `DECIMAL(M,D)`列では、小数点の左側に最大`M - D`桁が許可されます。
 
-For more information about the internal format of the DECIMAL values, see [`mydecimal.go`](https://github.com/pingcap/tidb/blob/release-7.5/pkg/types/mydecimal.go) in TiDB souce code.
+DECIMAL 値の内部形式の詳細については、TiDB ソース コードの[`mydecimal.go`](https://github.com/pingcap/tidb/blob/release-7.5/pkg/types/mydecimal.go)を参照してください。
 
-## Expression handling
+## 式の処理 {#expression-handling}
 
-For expressions with precision math, TiDB uses the exact-value numbers as given whenever possible. For example, numbers in comparisons are used exactly as given without a change in value. In strict SQL mode, if you add an exact data type into a column, a number is inserted with its exact value if it is within the column range. When retrieved, the value is the same as what is inserted. If strict SQL mode is not enabled, truncation for INSERT is permitted in TiDB.
+精度の計算を伴う式の場合、TiDB は可能な限り指定された正確な値の数値を使用します。たとえば、比較における数値は、値を変更せずに指定されたとおりに使用されます。厳密な SQL モードでは、正確なデータ型を列に追加すると、列の範囲内にある数値がその正確な値とともに挿入されます。取得された場合、値は挿入された値と同じになります。厳密な SQL モードが有効になっていない場合、TiDB では INSERT の切り捨てが許可されます。
 
-How to handle a numeric expression depends on the values of the expression:
+数値式の処理方法は、式の値によって異なります。
 
-- If the expression contains any approximate values, the result is approximate. TiDB evaluates the expression using floating-point arithmetic.
-- If the expression contains no approximate values are present, which means only exact values are contained, and if any exact value contains a fractional part, the expression is evaluated using DECIMAL exact arithmetic and has a precision of 65 digits.
-- Otherwise, the expression contains only integer values. The expression is exact. TiDB evaluates the expression using integer arithmetic and has a precision the same as BIGINT (64 bits).
+-   式に近似値が含まれている場合、結果は近似値になります。 TiDB は、浮動小数点演算を使用して式を評価します。
+-   式に近似値が含まれていない場合、つまり正確な値のみが含まれており、正確な値に小数部分が含まれている場合、式は DECIMAL の正確な算術を使用して評価され、精度は 65 桁になります。
+-   それ以外の場合、式には整数値のみが含まれます。表現が的確ですね。 TiDB は整数演算を使用して式を評価し、精度は BIGINT (64 ビット) と同じになります。
 
-If a numeric expression contains strings, the strings are converted to double-precision floating-point values and the result of the expression is approximate.
+数値式に文字列が含まれている場合、文字列は倍精度浮動小数点値に変換され、式の結果は近似値になります。
 
-Inserts into numeric columns are affected by the SQL mode. The following discussions mention strict mode and `ERROR_FOR_DIVISION_BY_ZERO`. To turn on all the restrictions, you can simply use the `TRADITIONAL` mode, which includes both strict mode values and `ERROR_FOR_DIVISION_BY_ZERO`:
+数値列への挿入は SQL モードの影響を受けます。以下の説明では、厳密モードと`ERROR_FOR_DIVISION_BY_ZERO`について説明します。すべての制限をオンにするには、厳密モード値と`ERROR_FOR_DIVISION_BY_ZERO`両方を含む`TRADITIONAL`モードを使用するだけです。
 
 ```sql
 SET sql_mode = 'TRADITIONAL`;
 ```
 
-If a number is inserted into an exact type column (DECIMAL or integer), it is inserted with its exact value if it is within the column range. For this number:
+数値が正確な型の列 (DECIMAL または整数) に挿入される場合、その数値が列の範囲内にある場合は、その正確な値が挿入されます。この番号の場合:
 
-- If the value has too many digits in the fractional part, rounding occurs and a warning is generated.
-- If the value has too many digits in the integer part, it is too large and is handled as follows:
-    - If strict mode is not enabled, the value is truncated to the nearest legal value and a warning is generated.
-    - If strict mode is enabled, an overflow error occurs.
+-   値の小数部の桁数が多すぎる場合、四捨五入が発生し、警告が生成されます。
+-   値の整数部分の桁数が多すぎる場合は、大きすぎるため、次のように処理されます。
+    -   厳密モードが有効になっていない場合、値は最も近い正当な値に切り捨てられ、警告が生成されます。
+    -   厳密モードが有効な場合、オーバーフロー エラーが発生します。
 
-To insert strings into numeric columns, TiDB handles the conversion from string to number as follows if the string has nonnumeric contents:
+文字列を数値列に挿入するために、文字列に数値以外の内容が含まれている場合、TiDB は文字列から数値への変換を次のように処理します。
 
-- In strict mode, a string (including an empty string) that does not begin with a number cannot be used as a number. An error, or a warning occurs.
-- A string that begins with a number can be converted, but the trailing nonnumeric portion is truncated. In strict mode, if the truncated portion contains anything other than spaces, an error, or a warning occurs.
+-   strict モードでは、数字で始まらない文字列 (空の文字列を含む) を数字として使用できません。エラーまたは警告が発生します。
+-   数字で始まる文字列は変換できますが、末尾の数字以外の部分は切り捨てられます。 strict モードでは、切り捨てられた部分にスペース以外のものが含まれている場合、エラーまたは警告が発生します。
 
-By default, the result of the division by 0 is NULL and no warning. By setting the SQL mode appropriately, division by 0 can be restricted. If you enable the `ERROR_FOR_DIVISION_BY_ZERO` SQL mode, TiDB handles division by 0 differently:
+デフォルトでは、0 による除算の結果は NULL になり、警告は表示されません。 SQLモードを適切に設定することで、0による除算を制限することができます。 `ERROR_FOR_DIVISION_BY_ZERO` SQL モードを有効にすると、TiDB は 0 による除算を別の方法で処理します。
 
-- In strict mode, inserts and updates are prohibited, and an error occurs.
-- If it's not in the strict mode, a warning occurs.
+-   strict モードでは、挿入と更新が禁止され、エラーが発生します。
+-   厳密モードでない場合は、警告が表示されます。
 
-In the following SQL statement:
+次の SQL ステートメントでは次のようになります。
 
 ```sql
 INSERT INTO t SET i = 1/0;
 ```
 
-The following results are returned in different SQL modes:
+さまざまな SQL モードで次の結果が返されます。
 
-| `sql_mode` Value | Result |
-| :--- | :--- |
-| '' | No warning, no error; i is set to NULL.|
-| strict | No warning, no error; i is set to NULL. |
-| `ERROR_FOR_DIVISION_BY_ZERO` | Warning, no error; i is set to NULL. |
-| strict, `ERROR_FOR_DIVISION_BY_ZERO` | Error; no row is inserted. |
+| `sql_mode`値                      | 結果                              |
+| :------------------------------- | :------------------------------ |
+| 」                                | 警告もエラーもありません。 i は NULL に設定されます。 |
+| 厳しい                              | 警告もエラーもありません。 i は NULL に設定されます。 |
+| `ERROR_FOR_DIVISION_BY_ZERO`     | 警告、エラーはありません。 i は NULL に設定されます。 |
+| 厳密、 `ERROR_FOR_DIVISION_BY_ZERO` | エラー;行は挿入されません。                  |
 
-## Rounding behavior
+## 丸め動作 {#rounding-behavior}
 
-The result of the `ROUND()` function depends on whether its argument is exact or approximate:
+`ROUND()`関数の結果は、その引数が正確であるか近似であるかによって異なります。
 
-- For exact-value numbers, the `ROUND()` function uses the "round half up" rule.
-- For approximate-value numbers, the results in TiDB differs from that in MySQL:
+-   正確な値の数値の場合、 `ROUND()`関数は「四捨五入」ルールを使用します。
+-   近似値の数値については、TiDB の結果は MySQL の結果とは異なります。
 
     ```sql
     TiDB > SELECT ROUND(2.5), ROUND(25E-1);
@@ -119,7 +119,7 @@ The result of the `ROUND()` function depends on whether its argument is exact or
     1 row in set (0.00 sec)
     ```
 
-For inserts into a DECIMAL or integer column, the rounding uses [round half away from zero](https://en.wikipedia.org/wiki/Rounding#Round_half_away_from_zero).
+DECIMAL または整数列への挿入の場合、丸めには[半分をゼロから四捨五入する](https://en.wikipedia.org/wiki/Rounding#Round_half_away_from_zero)が使用されます。
 
 ```sql
 TiDB > CREATE TABLE t (d DECIMAL(10,0));

@@ -3,42 +3,42 @@ title: Compatibility Catalog of TiDB Data Migration
 summary: This document describes the compatibility between DM of different versions and upstream/downstream databases.
 ---
 
-# Compatibility Catalog of TiDB Data Migration
+# TiDB データ移行の互換性カタログ {#compatibility-catalog-of-tidb-data-migration}
 
-DM supports migrating data from different sources to TiDB clusters. Based on the data source type, DM has four compatibility levels:
+DM は、さまざまなソースから TiDB クラスターへのデータの移行をサポートします。データ ソースの種類に基づいて、DM には 4 つの互換性レベルがあります。
 
-- **Generally available (GA)**: The application scenario has been verified and passed the GA test.
-- **Experimental**: Although the application scenario has been verified, the test does not cover all scenarios or involves only a limited number of users. The application scenario might encounter problems occasionally.
-- **Not tested**: DM is expected to be always compatible with MySQL during iteration. However, due to resource constraints, not all MySQL forks are tested with DM. Therefore, the *not tested* source or target is technically compatible with DM, but is not fully tested, which means you need to verify its compatibility before you use.
-- **Incompatible**: DM is proved to be incompatible with the data source and the application is not recommended for use in production environments.
+-   **一般提供 (GA)** : アプリケーション シナリオは検証され、GA テストに合格しました。
+-   **Experimental**: アプリケーション シナリオは検証されていますが、テストはすべてのシナリオをカバーしていないか、限られた数のユーザーのみが参加しています。アプリケーション シナリオでは、問題が発生する場合があります。
+-   **未テスト**: DM は反復中に常に MySQL と互換性があることが期待されます。ただし、リソースの制約により、すべての MySQL フォークが DM でテストされるわけではありません。したがって、*テストされていない*ソースまたはターゲットは、技術的には DM と互換性がありますが、完全にはテストされていないため、使用する前に互換性を確認する必要があります。
+-   **互換性がない**: DM はデータ ソースと互換性がないことが判明しており、アプリケーションは本番環境での使用が推奨されません。
 
-## Data sources
+## データソース {#data-sources}
 
-|Data source|Compatibility level|Remarks|
-|-|-|-|
-|MySQL ≤ 5.5|Not tested||
-|MySQL 5.6|GA||
-|MySQL 5.7|GA||
-|MySQL 8.0|Experimental||
-|MariaDB < 10.1.2|Incompatible|Incompatible with binlog of the time type|
-|MariaDB 10.1.2 ~ 10.5.10|Experimental||
-|MariaDB > 10.5.10|Incompatible|Permission errors reported in the check procedure|
+| 情報元                  | 互換性レベル       | 備考                   |
+| -------------------- | ------------ | -------------------- |
+| MySQL ≤ 5.5          | 未検証          |                      |
+| MySQL 5.6            | GA           |                      |
+| MySQL 5.7            | GA           |                      |
+| MySQL 8.0            | Experimental |                      |
+| マリアDB &lt; 10.1.2    | 非互換          | 時間型のbinlogと互換性がありません |
+| マリアDB 10.1.2～10.5.10 | Experimental |                      |
+| マリアDB &gt; 10.5.10   | 非互換          | チェック手順で報告された権限エラー    |
 
-## Target databases
+## 対象データベース {#target-databases}
 
-> **Warning:**
+> **警告：**
 >
-> DM v5.3.0 is not recommended. If you have enabled GTID replication but do not enable relay log in DM v5.3.0, data replication fails with low probability.
+> DM v5.3.0 は推奨されません。 GTID レプリケーションを有効にしているが、DM v5.3.0 でリレー ログを有効にしていない場合、データ レプリケーションは低い確率で失敗します。
 
-|Target database|Compatibility level|DM version|
-|-|-|-|
-|TiDB 6.0|GA|≥ 5.3.1|
-|TiDB 5.4|GA|≥ 5.3.1|
-|TiDB 5.3|GA|≥ 5.3.1|
-|TiDB 5.2|GA|≥ 2.0.7, recommended: 5.4|
-|TiDB 5.1|GA|≥ 2.0.4, recommended: 5.4|
-|TiDB 5.0|GA|≥ 2.0.4, recommended: 5.4|
-|TiDB 4.x|GA|≥ 2.0.1, recommended: 2.0.7|
-|TiDB 3.x|GA|≥ 2.0.1, recommended: 2.0.7|
-|MySQL|Experimental||
-|MariaDB|Experimental||
+| ターゲットデータベース | 互換性レベル       | DM版               |
+| ----------- | ------------ | ----------------- |
+| TiDB 6.0    | GA           | 5.3.1以上           |
+| TiDB 5.4    | GA           | 5.3.1以上           |
+| TiDB 5.3    | GA           | 5.3.1以上           |
+| TiDB 5.2    | GA           | ≥ 2.0.7、推奨: 5.4   |
+| TiDB 5.1    | GA           | ≥ 2.0.4、推奨: 5.4   |
+| TiDB 5.0    | GA           | ≥ 2.0.4、推奨: 5.4   |
+| TiDB 4.x    | GA           | ≥ 2.0.1、推奨: 2.0.7 |
+| TiDB 3.x    | GA           | ≥ 2.0.1、推奨: 2.0.7 |
+| MySQL       | Experimental |                   |
+| マリアDB       | Experimental |                   |

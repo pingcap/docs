@@ -3,72 +3,70 @@ title: TiDB Cloud CLI Reference
 summary: Provides an overview of TiDB Cloud CLI.
 ---
 
-# TiDB Cloud CLI Reference
+# TiDB CloudCLI リファレンス {#tidb-cloud-cli-reference}
 
-TiDB Cloud CLI is a command line interface, which allows you to operate TiDB Cloud from your terminal with a few lines of commands. In the TiDB Cloud CLI, you can easily manage your TiDB Cloud clusters, import data to your clusters, and perform more operations.
+TiDB Cloud CLI はコマンド ライン インターフェイスであり、数行のコマンドで端末からTiDB Cloudを操作できるようになります。 TiDB Cloud CLI では、 TiDB Cloudクラスターの管理、クラスターへのデータのインポート、その他の操作の実行が簡単に行えます。
 
-## Before you begin
+## あなたが始める前に {#before-you-begin}
 
-Make sure to first [set up your TiDB Cloud CLI environment](/tidb-cloud/get-started-with-cli.md). Once you have installed the `ticloud` CLI, you can use it to manage your TiDB Cloud clusters from the command lines.
+必ず最初に[TiDB Cloud CLI 環境をセットアップする](/tidb-cloud/get-started-with-cli.md)を行ってください。 `ticloud` CLI をインストールすると、それを使用してコマンド ラインからTiDB Cloudクラスターを管理できるようになります。
 
-## Commands available
+## 利用可能なコマンド {#commands-available}
 
-The following table lists the commands available for the TiDB Cloud CLI.
+次の表に、 TiDB Cloud CLI で使用できるコマンドを示します。
 
-To use the `ticloud` CLI in your terminal, run `ticloud [command] [subcommand]`. If you are using [TiUP](https://docs.pingcap.com/tidb/stable/tiup-overview), use `tiup cloud [command] [subcommand]` instead.
+ターミナルで`ticloud` CLI を使用するには、 `ticloud [command] [subcommand]`を実行します。 [TiUP](https://docs.pingcap.com/tidb/stable/tiup-overview)使用している場合は、代わりに`tiup cloud [command] [subcommand]`を使用してください。
 
-| Command    | Subcommand                                                 | Description                                                                                              |
-|------------|------------------------------------------------------------|----------------------------------------------------------------------------------------------------------|
-| cluster    | create, delete, describe, list, connect-info               | Manage clusters                                                                                          |
-| branch     | create, delete, describe, list, connect-info               | Manage branches                                                                                          |
-| completion | bash, fish, powershell, zsh                                | Generate completion script for specified shell                                                           |
-| config     | create, delete, describe, edit, list, set, use             | Configure user profiles                                                                                  |
-| connect    | -                                                          | Connect to a TiDB cluster                                                                                |
-| help       | cluster, completion, config, help, import, project, update | View help for any command                                                                                |
-| import     | cancel, describe, list, start                              | Manage [import](/tidb-cloud/tidb-cloud-migration-overview.md#import-data-from-files-to-tidb-cloud) tasks |
-| project    | list                                                       | Manage projects                                                                                          |
-| update     | -                                                          | Update the CLI to the latest version                                                                     |
+| 指示     | サブコマンド                          | 説明                                                                                              |
+| ------ | ------------------------------- | ----------------------------------------------------------------------------------------------- |
+| 集まる    | 作成、削除、説明、リスト、接続情報               | クラスターの管理                                                                                        |
+| 支店     | 作成、削除、説明、リスト、接続情報               | ブランチの管理                                                                                         |
+| 完了     | バッシュ、フィッシュ、パワーシェル、zsh           | 指定されたシェルの完了スクリプトを生成します                                                                          |
+| 構成     | 作成、削除、説明、編集、リスト、設定、使用           | ユーザープロファイルを構成する                                                                                 |
+| 接続する   | <li></li>                       | TiDB クラスターに接続する                                                                                 |
+| ヘルプ    | クラスター、完了、構成、ヘルプ、インポート、プロジェクト、更新 | 任意のコマンドのヘルプをビュー                                                                                 |
+| 輸入     | キャンセル、説明、リスト、開始                 | [輸入](/tidb-cloud/tidb-cloud-migration-overview.md#import-data-from-files-to-tidb-cloud)タスクを管理する |
+| プロジェクト | リスト                             | プロジェクトを管理する                                                                                     |
+| アップデート | <li></li>                       | CLIを最新バージョンに更新します                                                                               |
 
-## Command modes
+## コマンドモード {#command-modes}
 
-The TiDB Cloud CLI provides two modes for some commands for easy use:
+TiDB Cloud CLI は、簡単に使用できるようにいくつかのコマンドに対して 2 つのモードを提供します。
 
-- Interactive mode
+-   インタラクティブモード
 
-    You can run a command without flags (such as `ticloud config create`), and the CLI prompts you for input.
+    フラグ ( `ticloud config create`など) を指定せずにコマンドを実行すると、CLI によって入力を求めるプロンプトが表示されます。
 
-- Non-interactive mode
+-   非対話型モード
 
-    You must provide all arguments and flags that are required when running a command, such as `ticloud config create --profile-name <profile-name> --public-key <public-key> --private-key <private-key>`.
+    コマンドの実行時に必要なすべての引数とフラグ`ticloud config create --profile-name <profile-name> --public-key <public-key> --private-key <private-key>`など) を指定する必要があります。
 
-## User profile
+## ユーザープロフィール {#user-profile}
 
-For the TiDB Cloud CLI, a user profile is a collection of properties associated with a user, including the profile name, public key, and private key. To use TiDB Cloud CLI, you must create a user profile first.
+TiDB Cloud CLI の場合、ユーザー プロファイルは、プロファイル名、公開キー、秘密キーなど、ユーザーに関連付けられたプロパティのコレクションです。 TiDB Cloud CLI を使用するには、最初にユーザー プロファイルを作成する必要があります。
 
-### Create a user profile
+### ユーザープロファイルを作成する {#create-a-user-profile}
 
-Use [`ticloud config create`](/tidb-cloud/ticloud-config-create.md) to create a user profile.
+ユーザー プロファイルを作成するには[`ticloud config create`](/tidb-cloud/ticloud-config-create.md)を使用します。
 
-### List all user profiles
+### すべてのユーザープロファイルをリストする {#list-all-user-profiles}
 
-Use [`ticloud config list`](/tidb-cloud/ticloud-config-list.md) to list all user profiles.
+すべてのユーザー プロファイルをリストするには[`ticloud config list`](/tidb-cloud/ticloud-config-list.md)を使用します。
 
-An example output is as follows:
+出力例は次のとおりです。
 
-```
-Profile Name
-default (active)
-dev
-staging
-```
+    Profile Name
+    default (active)
+    dev
+    staging
 
-In this example output, the user profile `default` is currently active.
+この出力例では、ユーザー プロファイル`default`が現在アクティブです。
 
-### Describe a user profile
+### ユーザープロフィールを説明する {#describe-a-user-profile}
 
-Use [`ticloud config describe`](/tidb-cloud/ticloud-config-describe.md) to get the properties of a user profile.
+ユーザー プロファイルのプロパティを取得するには、 [`ticloud config describe`](/tidb-cloud/ticloud-config-describe.md)を使用します。
 
-An example output is as follows:
+出力例は次のとおりです。
 
 ```json
 {
@@ -77,37 +75,35 @@ An example output is as follows:
 }
 ```
 
-### Set properties in a user profile
+### ユーザープロファイルでプロパティを設定する {#set-properties-in-a-user-profile}
 
-Use [`ticloud config set`](/tidb-cloud/ticloud-config-set.md) to set properties in a user profile.
+ユーザー プロファイルのプロパティを設定するには[`ticloud config set`](/tidb-cloud/ticloud-config-set.md)を使用します。
 
-### Switch to another user profile
+### 別のユーザー プロファイルに切り替える {#switch-to-another-user-profile}
 
-Use [`ticloud config use`](/tidb-cloud/ticloud-config-use.md) to switch to another user profile.
+別のユーザー プロファイルに切り替えるには[`ticloud config use`](/tidb-cloud/ticloud-config-use.md)を使用します。
 
-An example output is as follows:
+出力例は次のとおりです。
 
-```
-Current profile has been changed to default
-```
+    Current profile has been changed to default
 
-### Edit the config file
+### 設定ファイルを編集する {#edit-the-config-file}
 
-Use [`ticloud config edit`](/tidb-cloud/ticloud-config-edit.md) to open the configuration file for editing.
+編集のために構成ファイルを開くには、 [`ticloud config edit`](/tidb-cloud/ticloud-config-edit.md)を使用します。
 
-### Delete a user profile
+### ユーザープロファイルを削除する {#delete-a-user-profile}
 
-Use [`ticloud config delete`](/tidb-cloud/ticloud-config-delete.md) to delete a user profile.
+ユーザー プロファイルを削除するには[`ticloud config delete`](/tidb-cloud/ticloud-config-delete.md)を使用します。
 
-## Global flags
+## グローバルフラグ {#global-flags}
 
-The following table lists the global flags for the TiDB Cloud CLI.
+次の表に、 TiDB Cloud CLI のグローバル フラグを示します。
 
-| Flag                 | Description                                   | Required | Note                                                                                                                    |
-|----------------------|-----------------------------------------------|----------|--------------------------------------------------------------------------------------------------------------------------|
-| --no-color           | Disables color in output.                      | No       | Only works in non-interactive mode. In interactive mode, disabling color might not work with some UI components. |
-| -P, --profile string | Specifies the active user profile used in this command. | No       | Works in both non-interactive and interactive modes.                                                                      |
+| フラグ            | 説明                                   | 必須  | 注記                                                                |
+| -------------- | ------------------------------------ | --- | ----------------------------------------------------------------- |
+| --色なし          | 出力のカラーを無効にします。                       | いいえ | 非対話モードでのみ動作します。インタラクティブ モードでは、一部の UI コンポーネントで色の無効化が機能しない可能性があります。 |
+| -P、--プロファイル文字列 | このコマンドで使用されるアクティブなユーザー プロファイルを指定します。 | いいえ | 非対話型モードと対話型モードの両方で動作します。                                          |
 
-## Feedback
+## フィードバック {#feedback}
 
-If you have any questions or suggestions on the TiDB Cloud CLI, feel free to create an [issue](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose). Also, we welcome any contributions.
+TiDB Cloud CLI に関して質問や提案がある場合は、お気軽に[問題](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose)を作成してください。また、貢献も歓迎します。

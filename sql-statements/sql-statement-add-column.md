@@ -3,11 +3,11 @@ title: ADD COLUMN | TiDB SQL Statement Reference
 summary: An overview of the usage of ADD COLUMN for the TiDB database.
 ---
 
-# ADD COLUMN
+# 列の追加 {#add-column}
 
-The `ALTER TABLE.. ADD COLUMN` statement adds a column to an existing table. This operation is online in TiDB, which means that neither reads or writes to the table are blocked by adding a column.
+`ALTER TABLE.. ADD COLUMN`ステートメントは、既存のテーブルに列を追加します。この操作は TiDB ではオンラインです。つまり、列の追加によってテーブルへの読み取りも書き込みもブロックされません。
 
-## Synopsis
+## あらすじ {#synopsis}
 
 ```ebnf+diagram
 AlterTableStmt
@@ -43,7 +43,7 @@ ColumnOption
            | 'AUTO_RANDOM' ( '(' LengthNum ')' )?
 ```
 
-## Examples
+## 例 {#examples}
 
 ```sql
 mysql> CREATE TABLE t1 (id INT NOT NULL PRIMARY KEY AUTO_INCREMENT);
@@ -83,13 +83,13 @@ mysql> SELECT * FROM t1;
 1 row in set (0.00 sec)
 ```
 
-## MySQL compatibility
+## MySQLの互換性 {#mysql-compatibility}
 
-* Adding a new column and setting it to the `PRIMARY KEY` is not supported.
-* Adding a new column and setting it to `AUTO_INCREMENT` is not supported.
-* There are limitations on adding generated columns, refer to: [generated column limitations](/generated-columns.md#limitations).
+-   新しい列を追加して`PRIMARY KEY`に設定することはサポートされていません。
+-   新しい列を追加して`AUTO_INCREMENT`に設定することはサポートされていません。
+-   生成された列の追加には制限があります。以下を参照してください。 [生成される列の制限事項](/generated-columns.md#limitations) 。
 
-## See also
+## こちらも参照 {#see-also}
 
-* [ADD INDEX](/sql-statements/sql-statement-add-index.md)
-* [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
+-   [インデックスの追加](/sql-statements/sql-statement-add-index.md)
+-   [テーブルの作成](/sql-statements/sql-statement-create-table.md)

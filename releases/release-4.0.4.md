@@ -2,17 +2,17 @@
 title: TiDB 4.0.4 Release Notes
 ---
 
-# TiDB 4.0.4 Release Notes
+# TiDB 4.0.4 リリースノート {#tidb-4-0-4-release-notes}
 
-Release date: July 31, 2020
+発売日：2020年7月31日
 
-TiDB version: 4.0.4
+TiDB バージョン: 4.0.4
 
-## Bug Fixes
+## バグの修正 {#bug-fixes}
 
-+ TiDB
+-   TiDB
 
-    - Fix the issue of getting stuck when querying `information_schema.columns` [#18849](https://github.com/pingcap/tidb/pull/18849)
-    - Fix the errors that occur when the `PointGet` and `BatchPointGet` operators encounter `in null` [#18848](https://github.com/pingcap/tidb/pull/18848)
-    - Fix the wrong result of `BatchPointGet` [#18815](https://github.com/pingcap/tidb/pull/18815)
-    - Fix the issue of incorrect query result that occurs when the `HashJoin` operator encounters the `set` or `enum` type [#18859](https://github.com/pingcap/tidb/pull/18859)
+    -   `information_schema.columns` [#18849](https://github.com/pingcap/tidb/pull/18849)のクエリ時にスタックする問題を修正
+    -   `PointGet`および`BatchPointGet`演算子が`in null` [#18848](https://github.com/pingcap/tidb/pull/18848)に遭遇したときに発生するエラーを修正しました。
+    -   `BatchPointGet` [#18815](https://github.com/pingcap/tidb/pull/18815)の間違った結果を修正します
+    -   `HashJoin`演算子が`set`または`enum`タイプ[#18859](https://github.com/pingcap/tidb/pull/18859)に遭遇したときに発生する誤ったクエリ結果の問題を修正します。

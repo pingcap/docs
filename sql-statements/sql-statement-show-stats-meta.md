@@ -3,28 +3,28 @@ title: SHOW STATS_META
 summary: An overview of the usage of SHOW STATS_META for TiDB database.
 ---
 
-# SHOW STATS_META
+# 統計_メタを表示 {#show-stats-meta}
 
-You can use `SHOW STATS_META` to view how many rows are in a table and how many rows are changed in that table. When using this statement, you can filter the needed information by the `ShowLikeOrWhere` clause.
+`SHOW STATS_META`を使用すると、テーブル内の行数とそのテーブル内で変更された行数を表示できます。このステートメントを使用する場合、 `ShowLikeOrWhere`節で必要な情報をフィルタリングできます。
 
-Currently, the `SHOW STATS_META` statement outputs 6 columns:
+現在、 `SHOW STATS_META`ステートメントは 6 列を出力します。
 
-| Column name | Description            |
-| -------- | ------------- |
-| db_name  |  Database name    |
-| table_name | Table name |
-| partition_name| Partition name |
-| update_time | Last updated time |
-| modify_count | The number of rows modified |
-| row_count | The total row count |
+| カラム名     | 説明       |
+| -------- | -------- |
+| データベース名  | データベース名  |
+| テーブル名    | テーブル名    |
+| パーティション名 | パーティション名 |
+| 更新時間     | 最終更新時間   |
+| 修正数      | 変更された行数  |
+| 行数       | 合計行数     |
 
-> **Note:**
+> **注記：**
 >
-> The `update_time` is updated when TiDB updates the `modify_count` and `row_count` fields according to DML statements. So `update_time` is not the last execution time of the `ANALYZE` statement.
+> TiDB が DML ステートメントに従って`modify_count`フィールドと`row_count`フィールドを更新すると、 `update_time`が更新されます。したがって`update_time` `ANALYZE`ステートメントの最後の実行時刻ではありません。
 
-## Synopsis
+## あらすじ {#synopsis}
 
-**ShowStmt**
+**ショースタンド**
 
 ![ShowStmt](/media/sqlgram/ShowStmt.png)
 
@@ -36,9 +36,7 @@ Currently, the `SHOW STATS_META` statement outputs 6 columns:
 
 ![ShowLikeOrWhereOpt](/media/sqlgram/ShowLikeOrWhereOpt.png)
 
-## Examples
-
-{{< copyable "sql" >}}
+## 例 {#examples}
 
 ```sql
 show stats_meta;
@@ -57,8 +55,6 @@ show stats_meta;
 5 rows in set (0.00 sec)
 ```
 
-{{< copyable "sql" >}}
-
 ```sql
 show stats_meta where table_name = 't2';
 ```
@@ -72,11 +68,11 @@ show stats_meta where table_name = 't2';
 1 row in set (0.00 sec)
 ```
 
-## MySQL compatibility
+## MySQLの互換性 {#mysql-compatibility}
 
-This statement is a TiDB extension to MySQL syntax.
+このステートメントは、MySQL 構文に対する TiDB 拡張機能です。
 
-## See also
+## こちらも参照 {#see-also}
 
-* [ANALYZE](/sql-statements/sql-statement-analyze-table.md)
-* [Introduction to Statistics](/statistics.md)
+-   [分析する](/sql-statements/sql-statement-analyze-table.md)
+-   [統計入門](/statistics.md)

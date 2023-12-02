@@ -3,66 +3,66 @@ title: Manage TiDB Serverless Branches
 summary: Learn How to manage TiDB Serverless branches.
 ---
 
-# Manage TiDB Serverless Branches
+# TiDB サーバーレス ブランチの管理 {#manage-tidb-serverless-branches}
 
-This document describes how to manage TiDB Serverless branches using the [TiDB Cloud console](https://tidbcloud.com). To manage it using the TiDB Cloud CLI, see [`ticloud branch`](/tidb-cloud/ticloud-branch-create.md).
+このドキュメントでは、 [TiDB Cloudコンソール](https://tidbcloud.com)を使用して TiDB サーバーレス ブランチを管理する方法について説明します。 TiDB Cloud CLI を使用して管理するには、 [`ticloud branch`](/tidb-cloud/ticloud-branch-create.md)を参照してください。
 
-## Required access
+## 必要なアクセス {#required-access}
 
-- To [create a branch](#create-a-branch) or [connect to a branch](#connect-to-a-branch), you must be in the `Organization Owner` role of your organization or the `Project Owner` role of the target project.
-- To [view branches](#create-a-branch) for clusters in a project, you must belong to that project.
+-   [ブランチを作成する](#create-a-branch)または[ブランチに接続する](#connect-to-a-branch)を行うには、組織の`Organization Owner`役割、または対象プロジェクトの`Project Owner`役割に属している必要があります。
+-   プロジェクト内のクラスターの[ブランチを表示する](#create-a-branch)は、そのプロジェクトに属している必要があります。
 
-For more information about permissions, see [User roles](/tidb-cloud/manage-user-access.md#user-roles).
+権限の詳細については、 [ユーザーの役割](/tidb-cloud/manage-user-access.md#user-roles)を参照してください。
 
-## Create a branch
+## ブランチを作成する {#create-a-branch}
 
-> **Note:**
+> **注記：**
 >
-> You can only create branches for TiDB Serverless clusters that are created after July 5, 2023. See [Limitations and quotas](/tidb-cloud/branch-overview.md#limitations-and-quotas) for more limitations.
+> 2023 年 7 月 5 日以降に作成された TiDB サーバーレス クラスターのブランチのみを作成できます。その他の制限事項については、 [制限と割り当て](/tidb-cloud/branch-overview.md#limitations-and-quotas)を参照してください。
 
-To create a branch, perform the following steps:
+ブランチを作成するには、次の手順を実行します。
 
-1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project, and then click the name of your target TiDB Serverless cluster to go to its overview page.
-2. Click **Branches** in the left navigation pane.
-3. Click **Create Branch** in the upper-right corner.
-4. Enter the branch name, and then click **Create**.
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、プロジェクトの[**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット TiDB サーバーレス クラスターの名前をクリックして、その概要ページに移動します。
+2.  左側のナビゲーション ペインで**[ブランチ]**をクリックします。
+3.  右上隅にある**「ブランチの作成」**をクリックします。
+4.  ブランチ名を入力し、 **[作成]**をクリックします。
 
-Depending on the data size in your cluster, the branch creation will be completed in a few minutes.
+クラスター内のデータ サイズに応じて、ブランチの作成は数分で完了します。
 
-## View branches
+## ブランチをビュー {#view-branches}
 
-To view branches for your cluster, perform the following steps:
+クラスターのブランチを表示するには、次の手順を実行します。
 
-1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project, and then click the name of your target TiDB Serverless cluster to go to its overview page.
-2. Click **Branches** in the left navigation pane.
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、プロジェクトの[**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット TiDB サーバーレス クラスターの名前をクリックして、その概要ページに移動します。
+2.  左側のナビゲーション ペインで**[ブランチ]**をクリックします。
 
-    The branch list of the cluster is displayed in the right pane.
+    クラスターのブランチリストが右側のペインに表示されます。
 
-## Connect to a branch
+## ブランチに接続する {#connect-to-a-branch}
 
-To connect to a branch, perform the following steps:
+ブランチに接続するには、次の手順を実行します。
 
-1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project, and then click the name of your target TiDB Serverless cluster to go to its overview page.
-2. Click **Branches** in the left navigation pane.
-3. In the row of your target branch to be connected, click **...** in the **Action** column.
-4. Click **Connect** in the drop-down list. The dialog for the connection information is displayed.
-5. Click **Create password** or **Reset password** to create or reset the root password.
-6. Connect to the branch using the connection information.
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、プロジェクトの[**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット TiDB サーバーレス クラスターの名前をクリックして、その概要ページに移動します。
+2.  左側のナビゲーション ペインで**[ブランチ]**をクリックします。
+3.  接続するターゲット ブランチの行で、 **[アクション]**列の**[...]**をクリックします。
+4.  ドロップダウン リストで**[接続]**をクリックします。接続情報のダイアログが表示されます。
+5.  **「パスワードの作成」**または**「パスワードのリセット」**をクリックして、root パスワードを作成またはリセットします。
+6.  接続情報を使用してブランチに接続します。
 
-> **Note:**
+> **注記：**
 >
-> Currently, branches do not support [private endpoints](/tidb-cloud/set-up-private-endpoint-connections-serverless.md).
+> 現在、ブランチは[プライベートエンドポイント](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)をサポートしていません。
 
-## Delete a branch
+## ブランチを削除する {#delete-a-branch}
 
-To delete a branch, perform the following steps:
+ブランチを削除するには、次の手順を実行します。
 
-1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project, and then click the name of your target TiDB Serverless cluster to go to its overview page.
-2. Click **Branches** in the left navigation pane.
-3. In the row of your target branch to be deleted, click **...** in the **Action** column.
-4. Click **Delete** in the drop-down list.
-5. Confirm the deletion.
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、プロジェクトの[**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット TiDB サーバーレス クラスターの名前をクリックして、その概要ページに移動します。
+2.  左側のナビゲーション ペインで**[ブランチ]**をクリックします。
+3.  削除するターゲット ブランチの行で、 **[アクション]**列の**[...]**をクリックします。
+4.  ドロップダウン リストで**[削除]**をクリックします。
+5.  削除を確認します。
 
-## What's next
+## 次は何ですか {#what-s-next}
 
-- [Integrate TiDB Serverless branching into your GitHub CI/CD pipeline](/tidb-cloud/branch-github-integration.md)
+-   [TiDB サーバーレス ブランチを GitHub CI/CD パイプラインに統合](/tidb-cloud/branch-github-integration.md)

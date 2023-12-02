@@ -3,190 +3,174 @@ title: TiDB Best Practices on Public Cloud
 summary: Learn about the best practices for deploying TiDB on public cloud.
 ---
 
-# TiDB Best Practices on Public Cloud
+# パブリック クラウドにおける TiDB のベスト プラクティス {#tidb-best-practices-on-public-cloud}
 
-Public cloud infrastructure has become an increasingly popular choice for deploying and managing TiDB. However, deploying TiDB on public cloud requires careful consideration of several critical factors, including performance tuning, cost optimization, reliability, and scalability.
+パブリック クラウド インフラストラクチャは、TiDB の導入と管理のための選択肢としてますます人気が高まっています。ただし、TiDB をパブリック クラウドに展開するには、パフォーマンスのチューニング、コストの最適化、信頼性、スケーラビリティなど、いくつかの重要な要素を慎重に検討する必要があります。
 
-This document covers various essential best practices for deploying TiDB on public cloud, such as using a dedicated disk for Raft Engine, reducing compaction I/O flow in KV RocksDB, optimizing costs for cross-AZ traffic, mitigating Google Cloud live migration events, and fine-tuning the PD server in large clusters. By following these best practices, you can maximize the performance, cost efficiency, reliability, and scalability of your TiDB deployment on public cloud.
+このドキュメントでは、 Raft Engineの専用ディスクの使用、KV RocksDB でのコンパクション I/O フローの削減、クロス AZ トラフィックのコストの最適化、Google Cloud ライブ マイグレーション イベントの軽減など、パブリック クラウドに TiDB をデプロイするためのさまざまな重要なベスト プラクティスについて説明します。大規模なクラスター内の PDサーバーを微調整します。これらのベスト プラクティスに従うことで、パブリック クラウド上での TiDB 導入のパフォーマンス、コスト効率、信頼性、拡張性を最大化できます。
 
-## Use a dedicated disk for Raft Engine
+## Raft Engineには専用ディスクを使用する {#use-a-dedicated-disk-for-raft-engine}
 
-The [Raft Engine](/glossary.md#raft-engine) in TiKV plays a critical role similar to that of a write-ahead log (WAL) in traditional databases. To achieve optimal performance and stability, it is crucial to allocate a dedicated disk for the Raft Engine when you deploy TiDB on public cloud. The following `iostat` shows the I/O characteristics on a TiKV node with a write-heavy workload.
+TiKV の[Raft Engine](/glossary.md#raft-engine)は、従来のデータベースの先行書き込みログ (WAL) と同様の重要な役割を果たします。最適なパフォーマンスと安定性を実現するには、TiDB をパブリック クラウドに展開するときにRaft Engineに専用のディスクを割り当てることが重要です。次の`iostat`書き込みの多いワークロードを伴う TiKV ノードの I/O 特性を示しています。
 
-```
-Device            r/s     rkB/s       w/s     wkB/s      f/s  aqu-sz  %util
-sdb           1649.00 209030.67   1293.33 304644.00    13.33    5.09  48.37
-sdd           1033.00   4132.00   1141.33  31685.33   571.00    0.94 100.00
-```
+    Device            r/s     rkB/s       w/s     wkB/s      f/s  aqu-sz  %util
+    sdb           1649.00 209030.67   1293.33 304644.00    13.33    5.09  48.37
+    sdd           1033.00   4132.00   1141.33  31685.33   571.00    0.94 100.00
 
-The device `sdb` is used for KV RocksDB, while `sdd` is used to restore Raft Engine logs. Note that `sdd` has a significantly higher `f/s` value, which represents the number of flush requests completed per second for the device. In Raft Engine, when a write in a batch is marked synchronous, the batch leader will call `fdatasync()` after writing, guaranteeing that buffered data is flushed to the storage. By using a dedicated disk for Raft Engine, TiKV reduces the average queue length of requests, thereby ensuring optimal and stable write latency.
+デバイス`sdb`は KV RocksDB に使用され、デバイス`sdd`はRaft Engineログの復元に使用されます。 `sdd`デバイスの 1 秒あたりに完了したフラッシュ リクエストの数を表す`f/s`値よりも大幅に大きいことに注意してください。 Raft Engineでは、バッチ内の書き込みが同期としてマークされると、バッチ リーダーは書き込み後に`fdatasync()`を呼び出し、バッファされたデータがstorageにフラッシュされることを保証します。 Raft Engineに専用ディスクを使用することで、TiKV はリクエストの平均キュー長を短縮し、最適で安定した書き込みレイテンシーを確保します。
 
-Different cloud providers offer various disk types with different performance characteristics, such as IOPS and MBPS. Therefore, it is important to choose an appropriate cloud provider, disk type, and disk size based on your workload.
+さまざまなクラウド プロバイダーが、IOPS や MBPS などのさまざまなパフォーマンス特性を持つさまざまなディスク タイプを提供しています。したがって、ワークロードに基づいて、適切なクラウド プロバイダー、ディスク タイプ、ディスク サイズを選択することが重要です。
 
-### Choose appropriate disks for Raft Engine on public clouds
+### パブリック クラウド上のRaft Engineに適切なディスクを選択する {#choose-appropriate-disks-for-raft-engine-on-public-clouds}
 
-This section outlines best practices for choosing appropriate disks for Raft Engine on different public clouds. Depending on performance requirements, two types of recommended disks are available.
+このセクションでは、さまざまなパブリック クラウド上でRaft Engineに適切なディスクを選択するためのベスト プラクティスについて概説します。パフォーマンス要件に応じて、2 種類の推奨ディスクが用意されています。
 
-#### Middle-range disk
+#### ミドルレンジディスク {#middle-range-disk}
 
-The following are recommended middle-range disks for different public clouds:
+以下は、さまざまなパブリック クラウドに推奨されるミドルレンジ ディスクです。
 
-- On AWS, [gp3](https://aws.amazon.com/ebs/general-purpose/) is recommended. The gp3 volume offers a free allocation of 3000 IOPS and 125 MB/s throughput, regardless of the volume size, which is usually sufficient for the Raft Engine.
+-   AWS では[GP3](https://aws.amazon.com/ebs/general-purpose/)が推奨されます。 gp3 ボリュームは、ボリューム サイズに関係なく、3000 IOPS と 125 MB/秒のスループットの無料割り当てを提供します。通常、 Raft Engineにはこれで十分です。
 
-- On Google Cloud, [pd-ssd](https://cloud.google.com/compute/docs/disks#disk-types/) is recommended. The IOPS and MBPS vary depending on the allocated disk size. To meet performance requirements, it is recommended to allocate 200 GB for Raft Engine. Although Raft Engine does not require such a large space, it ensures optimal performance.
+-   Google Cloud では、 [PD-SSD](https://cloud.google.com/compute/docs/disks#disk-types/)が推奨されます。 IOPS と MBPS は、割り当てられたディスク サイズによって異なります。パフォーマンス要件を満たすために、 Raft Engineに 200 GB を割り当てることをお勧めします。 Raft Engine はそれほど大きなスペースを必要としませんが、最適なパフォーマンスを保証します。
 
-- On Azure, [Premium SSD v2](https://learn.microsoft.com/en-us/azure/virtual-machines/disks-types#premium-ssd-v2) is recommended. Similar to AWS gp3, Premium SSD v2 provides a free allocation of 3000 IOPS and 125 MB/s throughput, regardless of the volume size, which is usually sufficient for Raft Engine.
+-   Azure では[プレミアムSSD v2](https://learn.microsoft.com/en-us/azure/virtual-machines/disks-types#premium-ssd-v2)が推奨されます。 AWS gp3 と同様に、Premium SSD v2 は、ボリューム サイズに関係なく、3000 IOPS と 125 MB/秒のスループットの無料割り当てを提供します。通常、これはRaft Engineには十分です。
 
-#### High-end disk
+#### ハイエンドディスク {#high-end-disk}
 
-If you expect an even lower latency for Raft Engine, consider using high-end disks. The following are recommended high-end disks for different public clouds:
+Raft Engineのレイテンシーがさらに低いことが期待される場合は、ハイエンド ディスクの使用を検討してください。以下は、さまざまなパブリック クラウドに推奨されるハイエンド ディスクです。
 
-- On AWS, [io2](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-volume-types.html) is recommended. Disk size and IOPS can be provisioned according to your specific requirements.
+-   AWS では[io2](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-volume-types.html)が推奨されます。ディスク サイズと IOPS は、特定の要件に応じてプロビジョニングできます。
 
-- On Google Cloud, [pd-extreme](https://cloud.google.com/compute/docs/disks#disk-types/) is recommended. Disk size, IOPS, and MBPS can be provisioned, but it is only available on instances with more than 64 CPU cores.
+-   Google Cloud では、 [pd-エクストリーム](https://cloud.google.com/compute/docs/disks#disk-types/)が推奨されます。ディスク サイズ、IOPS、MBPS をプロビジョニングできますが、これは 64 個を超える CPU コアを備えたインスタンスでのみ使用できます。
 
-- On Azure, [ultra disk](https://learn.microsoft.com/en-us/azure/virtual-machines/disks-types#ultra-disks) is recommended. Disk size, IOPS, and MBPS can be provisioned according to your specific requirements.
+-   Azure では[ウルトラディスク](https://learn.microsoft.com/en-us/azure/virtual-machines/disks-types#ultra-disks)が推奨されます。ディスク サイズ、IOPS、MBPS は、特定の要件に応じてプロビジョニングできます。
 
-### Example 1: Run a social network workload on AWS
+### 例 1: AWS でソーシャル ネットワーク ワークロードを実行する {#example-1-run-a-social-network-workload-on-aws}
 
-AWS offers 3000 IOPS and 125 MBPS/s for a 20 GB [gp3](https://aws.amazon.com/ebs/general-purpose/) volume.
+AWS は、20 GB [GP3](https://aws.amazon.com/ebs/general-purpose/)ボリュームに対して 3000 IOPS と 125 MBPS/秒を提供します。
 
-By using a dedicated 20 GB [gp3](https://aws.amazon.com/ebs/general-purpose/) Raft Engine disk on AWS for a write-intensive social network application workload, the following improvements are observed but the estimated cost only increases by 0.4%:
+書き込み集中型のソーシャル ネットワーク アプリケーションのワークロードに AWS 上の専用の 20 GB [GP3](https://aws.amazon.com/ebs/general-purpose/) Raft Engineディスクを使用すると、次のような改善が見られますが、推定コストは 0.4% しか増加しません。
 
-- a 17.5% increase in QPS (queries per second)
-- an 18.7% decrease in average latency for insert statements
-- a 45.6% decrease in p99 latency for insert statements.
+-   QPS (1 秒あたりのクエリ数) が 17.5% 増加
+-   挿入ステートメントの平均レイテンシーが 18.7% 減少
+-   挿入ステートメントの p99レイテンシーが 45.6% 減少しました。
 
-| Metric | Shared Raft Engine disk | Dedicated Raft Engine disk | Difference (%) |
-| ------------- | ------------- |------------- |------------- |
-| QPS (K/s)| 8.0 | 9.4 | 17.5|
-| AVG Insert Latency (ms)| 11.3 | 9.2 | -18.7 |
-| P99 Insert Latency (ms)| 29.4 | 16.0 | -45.6|
+| メトリック              | 共有Raft Engineディスク | Raft Engine専用ディスク | 違い （％） |
+| ------------------ | ----------------- | ----------------- | ------ |
+| QPS (K/秒)          | 8.0               | 9.4               | 17.5   |
+| AVG 挿入レイテンシー (ミリ秒) | 11.3              | 9.2               | -18.7  |
+| P99 挿入遅延 (ミリ秒)     | 29.4              | 16.0              | -45.6  |
 
-### Example 2: Run TPC-C/Sysbench workload on Azure
+### 例 2: Azure で TPC-C/Sysbench ワークロードを実行する {#example-2-run-tpc-c-sysbench-workload-on-azure}
 
-By using a dedicated 32 GB [ultra disk](https://learn.microsoft.com/en-us/azure/virtual-machines/disks-types#ultra-disks) for Raft Engine on Azure, the following improvements are observed:
+Azure 上のRaft Engineに専用の 32 GB [ウルトラディスク](https://learn.microsoft.com/en-us/azure/virtual-machines/disks-types#ultra-disks)を使用すると、次の改善が見られます。
 
-- Sysbench `oltp_read_write` workload: a 17.8% increase in QPS and a 15.6% decrease in average latency.
-- TPC-C workload: a 27.6% increase in QPS and a 23.1% decrease in average latency.
+-   Sysbench `oltp_read_write`ワークロード: QPS が 17.8% 増加し、平均レイテンシーが 15.6% 減少しました。
+-   TPC-C ワークロード: QPS が 27.6% 増加し、平均レイテンシーが 23.1% 減少しました。
 
-| Metric | Workload | Shared Raft Engine disk | Dedicated Raft Engine disk | Difference (%) |
-| ------------- | ------------- | ------------- |------------- |------------- |
-| QPS (K/s) | Sysbench `oltp_read_write` | 60.7 | 71.5 | 17.8|
-| QPS (K/s) | TPC-C | 23.9 | 30.5 | 27.6|
-| AVG Latency (ms)| Sysbench `oltp_read_write` |  4.5 | 3.8 | -15.6 |
-| AVG Latency (ms)| TPC-C |  3.9 | 3.0 | -23.1 |
+| メトリック            | ワークロード                   | 共有Raft Engineディスク | Raft Engine専用ディスク | 違い （％） |
+| ---------------- | ------------------------ | ----------------- | ----------------- | ------ |
+| QPS (K/秒)        | システムベンチ`oltp_read_write` | 60.7              | 71.5              | 17.8   |
+| QPS (K/秒)        | TPC-C                    | 23.9              | 30.5              | 27.6   |
+| AVG レイテンシー (ミリ秒) | システムベンチ`oltp_read_write` | 4.5               | 3.8               | -15.6  |
+| AVG レイテンシー (ミリ秒) | TPC-C                    | 3.9               | 3.0               | -23.1  |
 
-### Example 3: Attach a dedicated pd-ssd disk on Google Cloud for Raft Engine on TiKV manifest
+### 例 3: TiKV マニフェストのRaft Engine用に Google Cloud に専用の pd-ssd ディスクを接続する {#example-3-attach-a-dedicated-pd-ssd-disk-on-google-cloud-for-raft-engine-on-tikv-manifest}
 
-The following TiKV configuration example shows how to attach an additional 512 GB [pd-ssd](https://cloud.google.com/compute/docs/disks#disk-types/) disk to a cluster on Google Cloud deployed by [TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/stable), with `raft-engine.dir` configured to store Raft Engine logs to this specific disk.
+次の TiKV 構成例は、追加の 512 GB [PD-SSD](https://cloud.google.com/compute/docs/disks#disk-types/)ディスクを[TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/stable)によってデプロイされた Google Cloud 上のクラスタに接続する方法を示しています。この特定のディスクにRaft Engineログを保存するように`raft-engine.dir`が構成されています。
 
-```
-tikv:
-    config: |
-      [raft-engine]
-        dir = "/var/lib/raft-pv-ssd/raft-engine"
-        enable = true
-        enable-log-recycle = true
-    requests:
-      storage: 4Ti
-    storageClassName: pd-ssd
-    storageVolumes:
-    - mountPath: /var/lib/raft-pv-ssd
-      name: raft-pv-ssd
-      storageSize: 512Gi
-```
+    tikv:
+        config: |
+          [raft-engine]
+            dir = "/var/lib/raft-pv-ssd/raft-engine"
+            enable = true
+            enable-log-recycle = true
+        requests:
+          storage: 4Ti
+        storageClassName: pd-ssd
+        storageVolumes:
+        - mountPath: /var/lib/raft-pv-ssd
+          name: raft-pv-ssd
+          storageSize: 512Gi
 
-## Reduce compaction I/O flow in KV RocksDB
+## KV RocksDB のコンパクション I/O フローを削減する {#reduce-compaction-i-o-flow-in-kv-rocksdb}
 
-As the storage engine of TiKV, [RocksDB](https://rocksdb.org/) is used to store user data. Because the provisioned IO throughput on cloud EBS is usually limited due to cost considerations, RocksDB might exhibit high write amplification, and the disk throughput might become the bottleneck for the workload. As a result, the total number of pending compaction bytes grows over time and triggers flow control, which indicates that TiKV lacks sufficient disk bandwidth to keep up with the foreground write flow.
+TiKV のstorageエンジンとして、ユーザー データの保存に[ロックスDB](https://rocksdb.org/)が使用されます。クラウド EBS でプロビジョニングされた IO スループットは通常、コストを考慮して制限されているため、RocksDB では高い書き込み増幅が発生し、ディスク スループットがワークロードのボトルネックになる可能性があります。その結果、保留中の圧縮バイトの合計数が時間の経過とともに増加し、フロー制御がトリガーされます。これは、TiKV にはフォアグラウンド書き込みフローに対応するのに十分なディスク帯域幅が不足していることを示しています。
 
-To alleviate the bottleneck caused by limited disk throughput, you can improve performance by increasing the compression level for RocksDB and reducing the disk throughput. For example, you can refer to the following example to increase all the compression levels of the default column family to `zstd`.
+ディスク スループットの制限によって引き起こされるボトルネックを軽減するには、RocksDB の圧縮レベルを上げ、ディスク スループットを下げることでパフォーマンスを向上させることができます。たとえば、次の例を参照して、デフォルトのカラムファミリーのすべての圧縮レベルを`zstd`に増やすことができます。
 
-```
-[rocksdb.defaultcf]
-compression-per-level = ["zstd", "zstd", "zstd", "zstd", "zstd", "zstd", "zstd"]
-```
+    [rocksdb.defaultcf]
+    compression-per-level = ["zstd", "zstd", "zstd", "zstd", "zstd", "zstd", "zstd"]
 
-## Optimize cost for cross-AZ network traffic
+## クロス AZ ネットワーク トラフィックのコストを最適化する {#optimize-cost-for-cross-az-network-traffic}
 
-Deploying TiDB across multiple availability zones (AZs) can lead to increased costs due to cross-AZ data transfer fees. To optimize costs, it is important to reduce cross-AZ network traffic.
+TiDB を複数のアベイラビリティ ゾーン (AZ) にまたがって展開すると、AZ 間のデータ転送料金によりコストが増加する可能性があります。コストを最適化するには、クロス AZ ネットワーク トラフィックを削減することが重要です。
 
-To reduce cross-AZ read traffic, you can enable the [Follower Read feature](/follower-read.md), which allows TiDB to prioritize selecting replicas in the same availability zone. To enable this feature, set the [`tidb_replica_read`](/system-variables.md#tidb_replica_read-new-in-v40) variable to `closest-replicas` or `closest-adaptive`.
+クロス AZ 読み取りトラフィックを削減するには、 [Follower Read機能](/follower-read.md)有効にします。これにより、TiDB が同じアベイラビリティ ゾーン内のレプリカを優先的に選択できるようになります。この機能を有効にするには、変数[`tidb_replica_read`](/system-variables.md#tidb_replica_read-new-in-v40)を`closest-replicas`または`closest-adaptive`に設定します。
 
-To reduce cross-AZ write traffic in TiKV instances, you can enable the gRPC compression feature, which compresses data before transmitting it over the network. The following configuration example shows how to enable gzip gRPC compression for TiKV.
+TiKV インスタンスでのクロス AZ 書き込みトラフィックを削減するには、ネットワーク経由で送信する前にデータを圧縮する gRPC 圧縮機能を有効にします。次の設定例は、TiKV の gzip gRPC 圧縮を有効にする方法を示しています。
 
-```
-server_configs:
-  tikv:
-    server.grpc-compression-type: gzip
-```
+    server_configs:
+      tikv:
+        server.grpc-compression-type: gzip
 
-To reduce network traffic caused by the data shuffle of TiFlash MPP tasks, it is recommended to deploy multiple TiFlash instances in the same availability zones (AZs). Starting from v6.6.0, [compression exchange](/explain-mpp.md#mpp-version-and-exchange-data-compression) is enabled by default, which reduces the network traffic caused by MPP data shuffle.
+TiFlash MPP タスクのデータ シャッフルによって発生するネットワーク トラフィックを削減するには、複数のTiFlashインスタンスを同じアベイラビリティ ゾーン (AZ) にデプロイすることをお勧めします。 v6.6.0 以降、デフォルトで[圧縮交換](/explain-mpp.md#mpp-version-and-exchange-data-compression)が有効になり、MPP データ シャッフルによって発生するネットワーク トラフィックが軽減されます。
 
-## Mitigate live migration maintenance events on Google Cloud
+## Google Cloud でのライブ マイグレーション メンテナンス イベントを軽減する {#mitigate-live-migration-maintenance-events-on-google-cloud}
 
-The [Live Migration feature](https://cloud.google.com/compute/docs/instances/live-migration-process) of Google Cloud enables VMs to be seamlessly migrated between hosts without causing downtime. However, these migration events, although infrequent, can significantly impact the performance of VMs, including those running in a TiDB cluster. During such events, affected VMs might experience reduced performance, leading to longer query processing times in the TiDB cluster.
+Google Cloud の[ライブマイグレーション機能](https://cloud.google.com/compute/docs/instances/live-migration-process)により、ダウンタイムを発生させることなく VM をホスト間でシームレスに移行できます。ただし、これらの移行イベントは、頻度は低いものの、TiDB クラスター内で実行されている VM を含む VM のパフォーマンスに大きな影響を与える可能性があります。このようなイベントが発生すると、影響を受ける VM のパフォーマンスが低下し、TiDB クラスターでのクエリの処理時間が長くなる可能性があります。
 
-To detect live migration events initiated by Google Cloud and mitigate the performance impact of these events, TiDB provides a [watching script](https://github.com/PingCAP-QE/tidb-google-maintenance) based on Google's metadata [example](https://github.com/GoogleCloudPlatform/python-docs-samples/blob/master/compute/metadata/main.py). You can deploy this script on TiDB, TiKV, and PD nodes to detect maintenance events. When a maintenance event is detected, appropriate actions can be taken automatically as follows to minimize disruption and optimize the cluster behavior:
+Google Cloud によって開始されたライブ マイグレーション イベントを検出し、これらのイベントによるパフォーマンスへの影響を軽減するために、TiDB は Google のメタデータに基づいて[スクリプトを見ている](https://github.com/PingCAP-QE/tidb-google-maintenance)を提供します[例](https://github.com/GoogleCloudPlatform/python-docs-samples/blob/master/compute/metadata/main.py) 。このスクリプトを TiDB、TiKV、および PD ノードにデプロイして、メンテナンス イベントを検出できます。メンテナンス イベントが検出されると、中断を最小限に抑え、クラスターの動作を最適化するために、次のように適切なアクションが自動的に実行されます。
 
-- TiDB: Takes the TiDB node offline by cordoning it and deleting the TiDB pod. This assumes that the node pool of the TiDB instance is set to auto-scale and dedicated to TiDB. Other pods running on the node might experience interruptions, and the cordoned node is expected to be reclaimed by the auto-scaler.
-- TiKV: Evicts leaders on the affected TiKV store during maintenance.
-- PD: Resigns a leader if the current PD instance is the PD leader.
+-   TiDB: TiDB ノードを遮断し、TiDB ポッドを削除することで、TiDB ノードをオフラインにします。これは、TiDB インスタンスのノード プールが自動スケールに設定されており、TiDB 専用であることを前提としています。ノード上で実行されている他のポッドで中断が発生する可能性があり、封鎖されたノードはオートスケーラーによって再利用されることが予想されます。
+-   TiKV: メンテナンス中に、影響を受ける TiKV ストアのリーダーを排除します。
+-   PD: 現在の PD インスタンスが PD リーダーである場合、リーダーを辞任します。
 
-It is important to note that this watching script is specifically designed for TiDB clusters deployed using [TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/dev/tidb-operator-overview), which offers enhanced management functionalities for TiDB in Kubernetes environments.
+この監視スクリプトは、Kubernetes 環境で TiDB の管理機能を強化する[TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/dev/tidb-operator-overview)使用してデプロイされた TiDB クラスター用に特別に設計されていることに注意することが重要です。
 
-By utilizing the watching script and taking necessary actions during maintenance events, TiDB clusters can better handle live migration events on Google Cloud and ensure smoother operations with minimal impact on query processing and response times.
+監視スクリプトを利用し、メンテナンス イベント中に必要なアクションを実行することで、TiDB クラスタは Google Cloud でのライブ マイグレーション イベントをより適切に処理し、クエリ処理と応答時間への影響を最小限に抑えながら、よりスムーズな操作を保証できます。
 
-## Tune PD for a large-scale TiDB cluster with high QPS
+## 高い QPS を備えた大規模 TiDB クラスター向けに PD を調整する {#tune-pd-for-a-large-scale-tidb-cluster-with-high-qps}
 
-In a TiDB cluster, a single active Placement Driver (PD) server is used to handle crucial tasks such as serving the TSO (Timestamp Oracle) and processing requests. However, relying on a single active PD server can limit the scalability of TiDB clusters.
+TiDB クラスターでは、TSO (Timestamp Oracle) の提供やリクエストの処理などの重要なタスクを処理するために、単一のアクティブな配置Driver(PD)サーバーが使用されます。ただし、単一のアクティブな PDサーバーに依存すると、TiDB クラスターのスケーラビリティが制限される可能性があります。
 
-### Symptoms of PD limitation
+### PD制限の症状 {#symptoms-of-pd-limitation}
 
-The following diagrams show the symptoms of a large-scale TiDB cluster consisting of three PD servers, each equipped with 56 CPUs. From these diagrams, it is observed that when the query per second (QPS) exceeds 1 million and the TSO (Timestamp Oracle) requests per second exceed 162,000, the CPU utilization reaches approximately 4,600%. This high CPU utilization indicates that the PD leader is experiencing a significant load and is running out of available CPU resources.
+次の図は、それぞれ 56 個の CPU を搭載した 3 台の PD サーバーで構成される大規模 TiDB クラスターの症状を示しています。これらの図から、1 秒あたりのクエリ (QPS) が 100 万を超え、1 秒あたりの TSO (Timestamp Oracle) リクエストが 162,000 を超えると、CPU 使用率が約 4,600% に達することがわかります。この高い CPU 使用率は、PD リーダーに重大な負荷がかかっており、利用可能な CPU リソースが不足していることを示しています。
 
-![pd-server-cpu](/media/performance/public-cloud-best-practice/baseline_cpu.png)
-![pd-server-metrics](/media/performance/public-cloud-best-practice/baseline_metrics.png)
+![pd-server-cpu](/media/performance/public-cloud-best-practice/baseline_cpu.png) ![pd-server-metrics](/media/performance/public-cloud-best-practice/baseline_metrics.png)
 
-### Tune PD performance
+### PD パフォーマンスを調整する {#tune-pd-performance}
 
-To address the high CPU utilization issue in the PD server, you can make the following tuning adjustments:
+PDサーバーの CPU 使用率が高い問題に対処するには、次のチューニング調整を行うことができます。
 
-#### Adjust PD configuration
+#### PD構成を調整する {#adjust-pd-configuration}
 
-[`tso-update-physical-interval`](/pd-configuration-file.md#tso-update-physical-interval): This parameter controls the interval at which the PD server updates the physical TSO batch. By reducing the interval, the PD server can allocate TSO batches more frequently, thereby reducing the waiting time for the next allocation.
+[`tso-update-physical-interval`](/pd-configuration-file.md#tso-update-physical-interval) : このパラメータは、PDサーバーが物理 TSO バッチを更新する間隔を制御します。間隔を短くすることで、PDサーバーはTSO バッチをより頻繁に割り当てることができるため、次の割り当てまでの待ち時間が短縮されます。
 
-```
-tso-update-physical-interval = "10ms" # default: 50ms
-```
+    tso-update-physical-interval = "10ms" # default: 50ms
 
-#### Adjust a TiDB global variable
+#### TiDB グローバル変数を調整する {#adjust-a-tidb-global-variable}
 
-In addition to the PD configuration, enabling the TSO client batch wait feature can further optimize the TSO client's behavior. To enable this feature, you can set the global variable [`tidb_tso_client_batch_max_wait_time`](/system-variables.md#tidb_tso_client_batch_max_wait_time-new-in-v530) to a non-zero value.
+PD 構成に加えて、TSO クライアントのバッチ待機機能を有効にすると、TSO クライアントの動作をさらに最適化できます。この機能を有効にするには、グローバル変数[`tidb_tso_client_batch_max_wait_time`](/system-variables.md#tidb_tso_client_batch_max_wait_time-new-in-v530)をゼロ以外の値に設定します。
 
-```
-set global tidb_tso_client_batch_max_wait_time = 2; # default: 0
-```
+    set global tidb_tso_client_batch_max_wait_time = 2; # default: 0
 
-#### Adjust TiKV configuration
+#### TiKV 構成を調整する {#adjust-tikv-configuration}
 
-To reduce the number of Regions and alleviate the heartbeat overhead on the system, it is recommended to increase the Region size in the TiKV configuration from `96MB` to `256MB`.
+リージョンの数を減らし、システムのハートビートオーバーヘッドを軽減するには、TiKV 構成のリージョンサイズを`96MB`から`256MB`に増やすことをお勧めします。
 
-```
-[coprocessor]
-  region-split-size = "256MB"
-```
+    [coprocessor]
+      region-split-size = "256MB"
 
-## After tuning
+## チューニング後 {#after-tuning}
 
-After the tunning, the following effects can be observed:
+調整後、次の効果が観察されます。
 
-- The TSO requests per second are decreased to 64,800.
-- The CPU utilization is significantly reduced from approximately 4,600% to 1,400%.
-- The P999 value of `PD server TSO handle time` is decreased from 2ms to 0.5ms.
+-   1 秒あたりの TSO リクエストは 64,800 に減少します。
+-   CPU 使用率は約 4,600% から 1,400% に大幅に減少します。
+-   P999 値`PD server TSO handle time`は 2ms から 0.5ms に減少します。
 
-These improvements indicate that the tuning adjustments have successfully reduced the CPU utilization of the PD server while maintaining stable TSO handling performance.
+これらの改善は、チューニング調整により、安定した TSO 処理パフォーマンスを維持しながら、PDサーバーの CPU 使用率を削減することに成功したことを示しています。
 
-![pd-server-cpu](/media/performance/public-cloud-best-practice/after_tuning_cpu.png)
-![pd-server-metrics](/media/performance/public-cloud-best-practice/after_tuning_metrics.png)
+![pd-server-cpu](/media/performance/public-cloud-best-practice/after_tuning_cpu.png) ![pd-server-metrics](/media/performance/public-cloud-best-practice/after_tuning_metrics.png)

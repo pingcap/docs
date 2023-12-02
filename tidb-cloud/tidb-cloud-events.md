@@ -3,62 +3,63 @@ title: TiDB Cloud Cluster Events
 summary: Learn how to view the events for TiDB Cloud clusters using the Events page.
 ---
 
-# TiDB Cloud Cluster Events
+# TiDB Cloudクラスタイベント {#tidb-cloud-cluster-events}
 
-TiDB Cloud logs the historical events at the cluster level. An *event* indicates a change in your TiDB Cloud cluster. You can view the logged events on the **Events** page, including the event type, status, message, trigger time, and trigger user.
+TiDB Cloudは、クラスター レベルで履歴イベントを記録します。*イベントは、* TiDB Cloudクラスター内の変更を示します。 **[イベント]**ページで、イベント タイプ、ステータス、メッセージ、トリガー時間、トリガー ユーザーなどのログに記録されたイベントを表示できます。
 
-This document describes how to view the events for TiDB Cloud clusters using the **Events** page and lists the supported event types.
+このドキュメントでは、 **[イベント]**ページを使用してTiDB Cloudクラスターのイベントを表示する方法を説明し、サポートされているイベント タイプをリストします。
 
-> **Note:**
+> **注記：**
 >
-> Currently, the Events page is only available for [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) clusters.
+> 現在、「イベント」ページは[TiDB専用](/tidb-cloud/select-cluster-tier.md#tidb-dedicated)クラスターでのみ使用できます。
 
-## View the Events page
+## イベントページをビュー {#view-the-events-page}
 
-To view the events on the Events page, take the following steps:
+「イベント」ページでイベントを表示するには、次の手順を実行します。
 
-1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、プロジェクトの[**クラスター**](https://tidbcloud.com/console/clusters)ページに移動します。
 
-    > **Tip:**
+    > **ヒント：**
     >
-    > If you have multiple projects, you can click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner and switch to another project.
+    > 複数のプロジェクトがある場合は、<mdsvgicon name="icon-left-projects">左下隅の をクリックして、別のプロジェクトに切り替えます。</mdsvgicon>
 
-2. Click the name of the target cluster. The cluster overview page is displayed.
-3. Click **Events** in the left navigation pane.
+2.  ターゲットクラスターの名前をクリックします。クラスターの概要ページが表示されます。
 
-## Logged events
+3.  左側のナビゲーションペインで**「イベント」**をクリックします。
 
-TiDB Cloud logs the following types of cluster events:
+## 記録されたイベント {#logged-events}
 
-| Event Type| Description |
-|:--- |:--- |
-| CreateCluster |  Create a cluster |  
-| PauseCluster |   Pause a cluster |  
-| ResumeCluster |   Resume a cluster | 
-| ModifyClusterSize |   Modify cluster size | 
-| BackupCluster |   Back up a cluster |  
-| RestoreFromCluster |   Restore a cluster |  
-| CreateChangefeed |   Create a changefeed |  
-| PauseChangefeed |   Pause a changefeed | 
-| ResumeChangefeed |   Resume a changefeed | 
-| DeleteChangefeed |   Delete a changefeed |  
-| EditChangefeed |  Edit a changefeed |  
-| ScaleChangefeed |   Scale the specification of a changefeed |  
-| FailedChangefeed |   Changefeed failures |  
-| ImportData |   Import data to a cluster |  
+TiDB Cloudは、次のタイプのクラスター イベントをログに記録します。
 
-For each event, the following information is logged:
+| イベントタイプ      | 説明                 |
+| :----------- | :----------------- |
+| クラスターの作成     | クラスターを作成する         |
+| クラスターの一時停止   | クラスターを一時停止する       |
+| クラスタを再開する    | クラスターを再開する         |
+| クラスターサイズの変更  | クラスターサイズの変更        |
+| バックアップクラスター  | クラスターをバックアップする     |
+| クラスターから復元    | クラスターを復元する         |
+| 変更フィードの作成    | 変更フィードを作成する        |
+| 一時停止変更フィード   | チェンジフィードを一時停止する    |
+| 再開変更フィード     | 変更フィードを再開する        |
+| 削除フィード変更     | 変更フィードを削除する        |
+| 編集フィード変更     | 変更フィードを編集する        |
+| スケール変更フィード   | チェンジフィードの仕様をスケールする |
+| 失敗しました変更フィード | チェンジフィードの失敗        |
+| データのインポート    | データをクラスターにインポートする  |
 
-- Event Type
-- Status
-- Message
-- Time
-- Triggered By
+イベントごとに、次の情報が記録されます。
 
-> **Note:**
+-   イベントタイプ
+-   状態
+-   メッセージ
+-   時間
+-   引き起こされた
+
+> **注記：**
 >
-> Cluster events started before 2023-03-22 are not visible on the Events page.
+> 2023 年 3 月 22 日より前に開始されたクラスタイベントは、[イベント] ページに表示されません。
 
-## Event retention policy
+## イベント保持ポリシー {#event-retention-policy}
 
-For TiDB Dedicated clusters, the event data is kept for 7 days.
+TiDB 専用クラスターの場合、イベント データは 7 日間保存されます。

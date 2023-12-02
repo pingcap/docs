@@ -3,11 +3,9 @@ title: TABLE_CONSTRAINTS
 summary: Learn the `TABLE_CONSTRAINTS` information_schema table.
 ---
 
-# TABLE_CONSTRAINTS
+# TABLE_CONSTRAINTS {#table-constraints}
 
-The `TABLE_CONSTRAINTS` table describes which tables have constraints.
-
-{{< copyable "sql" >}}
+`TABLE_CONSTRAINTS`表は、どのテーブルに制約があるかを示しています。
 
 ```sql
 USE information_schema;
@@ -28,8 +26,6 @@ DESC table_constraints;
 6 rows in set (0.00 sec)
 ```
 
-{{< copyable "sql" >}}
-
 ```sql
 SELECT * FROM table_constraints WHERE constraint_type='UNIQUE';
 ```
@@ -49,10 +45,10 @@ SELECT * FROM table_constraints WHERE constraint_type='UNIQUE';
 7 rows in set (0.01 sec)
 ```
 
-Fields in the `TABLE_CONSTRAINTS` table are described as follows:
+`TABLE_CONSTRAINTS`テーブルのフィールドは次のように説明されています。
 
-* `CONSTRAINT_CATALOG`: The name of the catalog to which the constraint belongs. This value is always `def`.
-* `CONSTRAINT_SCHEMA`: The name of the database to which the constraint belongs.
-* `CONSTRAINT_NAME`: The name of the constraint.
-* `TABLE_NAME`: The name of the table.
-* `CONSTRAINT_TYPE`: The type of the constraint. The value can be `UNIQUE`, `PRIMARY KEY` or `FOREIGN KEY`. The `UNIQUE` and `PRIMARY KEY` information is similar to the execution result of the `SHOW INDEX` statement.
+-   `CONSTRAINT_CATALOG` : 制約が属するカタログの名前。この値は常に`def`です。
+-   `CONSTRAINT_SCHEMA` : 制約が属するデータベースの名前。
+-   `CONSTRAINT_NAME` : 制約の名前。
+-   `TABLE_NAME` : テーブルの名前。
+-   `CONSTRAINT_TYPE` : 制約のタイプ。値は`UNIQUE` 、 `PRIMARY KEY`または`FOREIGN KEY`です。 `UNIQUE`と`PRIMARY KEY`情報は、 `SHOW INDEX`ステートメントの実行結果と同様です。

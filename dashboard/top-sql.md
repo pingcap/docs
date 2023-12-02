@@ -3,143 +3,139 @@ title: TiDB Dashboard Top SQL page
 summary: Learn how to use Top SQL to find SQL statements with high CPU overhead.
 ---
 
-# TiDB Dashboard Top SQL Page
+# TiDB ダッシュボードのTop SQLページ {#tidb-dashboard-top-sql-page}
 
-With Top SQL, you can monitor and visually explore the CPU overhead of each SQL statement in your database in real-time, which helps you optimize and resolve database performance issues. Top SQL continuously collects and stores CPU load data summarized by SQL statements at any seconds from all TiDB and TiKV instances. The collected data can be stored for up to 30 days. Top SQL presents you with visual charts and tables to quickly pinpoint which SQL statements are contributing the high CPU load of a TiDB or TiKV instance over a certain period of time.
+Top SQLを使用すると、データベース内の各 SQL ステートメントの CPU オーバーヘッドをリアルタイムで監視して視覚的に調査できるため、データベースのパフォーマンスの問題を最適化し、解決するのに役立ちます。 Top SQL は、 SQL ステートメントによって要約された CPU 負荷データをすべての TiDB および TiKV インスタンスから任意の秒単位で継続的に収集し、保存します。収集されたデータは最大 30 日間保存できます。 「Top SQL」では、視覚的なチャートと表を表示して、特定の期間にわたる TiDB または TiKV インスタンスの高い CPU 負荷の原因となっている SQL ステートメントを素早く特定します。
 
-Top SQL provides the following features:
+Top SQL は次の機能を提供します。
 
-* Visualize the top 5 types of SQL statements with the highest CPU overhead through charts and tables.
-* Display detailed execution information such as queries per second, average latency, and query plan.
-* Collect all SQL statements that are executed, including those that are still running.
-* Allow viewing data of a specific TiDB and TiKV instance.
+-   CPU オーバーヘッドが最も高い上位 5 種類の SQL ステートメントをグラフと表で視覚化します。
+-   1 秒あたりのクエリ、平均レイテンシー、クエリ プランなどの詳細な実行情報を表示します。
+-   まだ実行中のものも含め、実行されたすべての SQL ステートメントを収集します。
+-   特定の TiDB および TiKV インスタンスのデータの表示を許可します。
 
-## Recommended scenarios
+## 推奨されるシナリオ {#recommended-scenarios}
 
-Top SQL is suitable for analyzing performance issues. The following are some typical Top SQL scenarios:
+Top SQL は、パフォーマンスの問題の分析に適しています。次に、いくつかの典型的なTop SQLシナリオを示します。
 
-* You discovered that an individual TiKV instance in the cluster has a very high CPU usage through the Grafana charts. You want to know which SQL statements cause the CPU hotspots so that you can optimize them and better leverage all of your distributed resources.
-* You discovered that the cluster has a very high CPU usage overall and queries are slow. You want to quickly figure out which SQL statements are currently consuming the most CPU resources so that you can optimize them.
-* The CPU usage of the cluster has drastically changed and you want to know the major cause.
-* Analyze the most resource-intensive SQL statements in the cluster and optimize them to reduce hardware costs.
+-   Grafana グラフから、クラスター内の個々の TiKV インスタンスの CPU 使用率が非常に高いことがわかりました。 CPU ホットスポットを最適化し、すべての分散リソースをより有効に活用できるように、どの SQL ステートメントが CPU ホットスポットの原因となっているのかを知りたいと考えています。
+-   クラスター全体の CPU 使用率が非常に高く、クエリが遅いことがわかりました。どの SQL ステートメントが現在 CPU リソースを最も多く消費しているかをすばやく把握し、最適化できるようにしたいと考えています。
+-   クラスターの CPU 使用率が大幅に変化したため、主な原因を知りたいと考えています。
+-   クラスター内で最もリソースを大量に消費する SQL ステートメントを分析し、それらを最適化してハードウェア コストを削減します。
 
-Top SQL cannot be used to pinpoint non-performance issues, such as incorrect data or abnormal crashes.
+Top SQL は、不正なデータや異常なクラッシュなど、パフォーマンス以外の問題を正確に特定するために使用することはできません。
 
-The Top SQL feature is still in an early stage and is being continuously enhanced. Here are some scenarios that are **not supported** at the moment:
+Top SQL機能はまだ初期段階にあり、継続的に強化されています。現時点では**サポートされていない**シナリオをいくつか示します。
 
-* Analyzing the overhead of SQL statements outside of Top 5 (for example, when multiple business workloads are mixed).
-* Analyzing the overhead of Top N SQL statements by various dimensions such as users and databases.
-* Analyzing database performance issues that are not caused by high CPU load, such as transaction lock conflicts.
+-   上位 5 以外の SQL ステートメントのオーバーヘッドを分析します (たとえば、複数のビジネス ワークロードが混在している場合)。
+-   ユーザーやデータベースなどのさまざまな次元による上位 N SQL ステートメントのオーバーヘッドを分析します。
+-   トランザクション ロックの競合など、高い CPU 負荷が原因ではないデータベースのパフォーマンスの問題を分析します。
 
-## Access the page
+## ページにアクセスする {#access-the-page}
 
-You can access the Top SQL page using either of the following methods:
+次のいずれかの方法を使用して、 「Top SQL」ページにアクセスできます。
 
-* After logging in to TiDB Dashboard, click **Top SQL** in the left navigation menu.
+-   TiDB ダッシュボードにログインした後、左側のナビゲーション メニューで**[Top SQL]**をクリックします。
 
-  ![Top SQL](/media/dashboard/top-sql-access.png)
+    ![Top SQL](/media/dashboard/top-sql-access.png)
 
-* Visit <http://127.0.0.1:2379/dashboard/#/topsql> in your browser. Replace `127.0.0.1:2379` with the actual PD instance address and port.
+-   ブラウザで[http://127.0.0.1:2379/dashboard/#/topsql](http://127.0.0.1:2379/dashboard/#/topsql)にアクセスしてください。 `127.0.0.1:2379`を実際の PD インスタンスのアドレスとポートに置き換えます。
 
-## Enable Top SQL
+## Top SQLを有効にする {#enable-top-sql}
 
-> **Note:**
+> **注記：**
 >
-> To use Top SQL, your cluster should be deployed or upgraded with a recent version of TiUP (v1.9.0 or above) or TiDB Operator (v1.3.0 or above). If your cluster was upgraded using an earlier version of TiUP or TiDB Operator, see [FAQ](/dashboard/dashboard-faq.md#a-required-component-ngmonitoring-is-not-started-error-is-shown) for instructions.
+> Top SQLを使用するには、最新バージョンのTiUP (v1.9.0 以降) またはTiDB Operator (v1.3.0 以降) を使用してクラスターをデプロイまたはアップグレードする必要があります。クラスターが以前のバージョンのTiUPまたはTiDB Operatorを使用してアップグレードされた場合、手順については[FAQ](/dashboard/dashboard-faq.md#a-required-component-ngmonitoring-is-not-started-error-is-shown)を参照してください。
 
-Top SQL is not enabled by default as it has a slight impact on cluster performance (within 3% on average) when enabled. You can enable Top SQL by the following steps:
+Top SQL は、有効にするとクラスターのパフォーマンスにわずかな影響 (平均 3% 以内) を与えるため、デフォルトでは有効になりません。次の手順でTop SQL を有効にできます。
 
-1. Visit the [Top SQL page](#access-the-page).
-2. Click **Open Settings**. On the right side of the **Settings** area, switch on **Enable Feature**.
-3. Click **Save**.
+1.  [Top SQLページ](#access-the-page)にアクセスしてください。
+2.  **[設定を開く]**をクリックします。 **[設定]**領域の右側で、 **[機能を有効にする**] をオンにします。
+3.  **「保存」**をクリックします。
 
-After enabling the feature, wait up to 1 minute for Top SQL to load the data. Then you can see the CPU load details.
+機能を有効にした後、 Top SQL がデータをロードするまで最大 1 分間待ちます。次に、CPU 負荷の詳細を確認できます。
 
-In addition to the UI, you can also enable the Top SQL feature by setting the TiDB system variable [`tidb_enable_top_sql`](/system-variables.md#tidb_enable_top_sql-new-in-v540):
-
-{{< copyable "sql" >}}
+UI に加えて、TiDB システム変数[`tidb_enable_top_sql`](/system-variables.md#tidb_enable_top_sql-new-in-v540)を設定してTop SQL機能を有効にすることもできます。
 
 ```sql
 SET GLOBAL tidb_enable_top_sql = 1;
 ```
 
-## Use Top SQL
+## Top SQLを使用する {#use-top-sql}
 
-The following are the common steps to use Top SQL.
+以下は、 Top SQL を使用するための一般的な手順です。
 
-1. Visit the [Top SQL page](#access-the-page).
+1.  [Top SQLページ](#access-the-page)にアクセスしてください。
 
-2. Select a particular TiDB or TiKV instance that you want to observe the load.
+2.  負荷を観察したい特定の TiDB または TiKV インスタンスを選択します。
 
-   ![Select Instance](/media/dashboard/top-sql-usage-select-instance.png)
+    ![Select Instance](/media/dashboard/top-sql-usage-select-instance.png)
 
-   If you are unsure of which TiDB or TiKV instance to observe, you can select an arbitrary instance. Also, when the cluster CPU load is extremely unbalanced, you can first use Grafana charts to determine the specific instance you want to observe.
+    どの TiDB または TiKV インスタンスを観察すればよいかわからない場合は、任意のインスタンスを選択できます。また、クラスターの CPU 負荷が極端に不均衡な場合は、最初に Grafana チャートを使用して、観察する特定のインスタンスを決定できます。
 
-3. Observe the charts and tables presented by Top SQL.
+3.  Top SQLによって表示されるグラフと表を観察してください。
 
-   ![Chart and Table](/media/dashboard/top-sql-usage-chart.png)
+    ![Chart and Table](/media/dashboard/top-sql-usage-chart.png)
 
-   The size of the bars in the bar chart represents the size of CPU resources consumed by the SQL statement at that moment. Different colors distinguish different types of SQL statements. In most cases, you only need to focus on the SQL statements that have a higher CPU resource overhead in the corresponding time range in the chart.
+    棒グラフの棒のサイズは、その時点で SQL ステートメントによって消費される CPU リソースのサイズを表します。色によって SQL ステートメントの種類が区別されます。ほとんどの場合、グラフ内の対応する時間範囲内で CPU リソースのオーバーヘッドが高い SQL ステートメントに注目するだけで済みます。
 
-4. Click a SQL statement in the table to show more information. You can see detailed execution metrics of different plans of that statement, such as Call/sec (average queries per second) and Scan Indexes/sec (average number of index rows scanned per second).
+4.  表内の SQL ステートメントをクリックすると、詳細が表示されます。 Call/sec (1 秒あたりの平均クエリ数) や Scan Indexes/sec (1 秒あたりにスキャンされたインデックス行の平均数) など、そのステートメントのさまざまなプランの詳細な実行メトリクスを確認できます。
 
-   ![Details](/media/dashboard/top-sql-details.png)
+    ![Details](/media/dashboard/top-sql-details.png)
 
-5. Based on these initial clues, you can further explore the [SQL Statement](/dashboard/dashboard-statement-list.md) or [Slow Queries](/dashboard/dashboard-slow-query.md) page to find the root cause of high CPU consumption or large data scans of the SQL statement.
+5.  これらの最初の手がかりに基づいて、 [SQL文](/dashboard/dashboard-statement-list.md)または[遅いクエリ](/dashboard/dashboard-slow-query.md)ページをさらに調査して、CPU 消費量の増加や SQL ステートメントの大規模なデータ スキャンの根本原因を見つけることができます。
 
-Additionally, you can configure Top SQL as follows:
+さらに、次のようにTop SQLを構成できます。
 
-* You can adjust the time range in the time picker or select a time range in the chart to get a more precise and detailed look at the problem. A smaller time range can provide more detailed data, with precision of up to 1 second.
+-   時間ピッカーで時間範囲を調整したり、チャートで時間範囲を選択したりして、問題をより正確かつ詳細に調べることができます。時間範囲を小さくすると、最大 1 秒の精度で、より詳細なデータが得られます。
 
-  ![Change time range](/media/dashboard/top-sql-usage-change-timerange.png)
+    ![Change time range](/media/dashboard/top-sql-usage-change-timerange.png)
 
-* If the chart is out of date, you can click the **Refresh** button or select Auto Refresh options from the **Refresh** drop-down list.
+-   グラフが古い場合は、 **「更新」**ボタンをクリックするか、 **「更新」**ドロップダウン リストから自動更新オプションを選択できます。
 
-  ![Refresh](/media/dashboard/top-sql-usage-refresh.png)
+    ![Refresh](/media/dashboard/top-sql-usage-refresh.png)
 
-## Disable Top SQL
+## Top SQLを無効にする {#disable-top-sql}
 
-You can disable this feature by following these steps:
+次の手順に従って、この機能を無効にできます。
 
-1. Visit [Top SQL page](#access-the-page).
-2. Click the gear icon in the upper right corner to open the settings screen and switch off **Enable Feature**.
-3. Click **Save**.
-4. In the popped-up dialog box, click **Disable**.
+1.  訪問[Top SQLページ](#access-the-page) 。
+2.  右上隅にある歯車アイコンをクリックして設定画面を開き、 **[機能を有効にする]**をオフにします。
+3.  **「保存」**をクリックします。
+4.  ポップアップダイアログボックスで、 **「無効にする」**をクリックします。
 
-In addition to the UI, you can also disable the Top SQL feature by setting the TiDB system variable [`tidb_enable_top_sql`](/system-variables.md#tidb_enable_top_sql-new-in-v540):
-
-{{< copyable "sql" >}}
+UI に加えて、TiDB システム変数[`tidb_enable_top_sql`](/system-variables.md#tidb_enable_top_sql-new-in-v540)を設定してTop SQL機能を無効にすることもできます。
 
 ```sql
 SET GLOBAL tidb_enable_top_sql = 0;
 ```
 
-## Frequently asked questions
+## よくある質問 {#frequently-asked-questions}
 
-**1. Top SQL cannot be enabled and the UI displays "required component NgMonitoring is not started"**.
+**1. Top SQL を有効にできず、UI に「必須コンポーネントNgMonitoring が開始されていません」と表示されます**。
 
-See [TiDB Dashboard FAQ](/dashboard/dashboard-faq.md#a-required-component-ngmonitoring-is-not-started-error-is-shown).
+[TiDB ダッシュボードFAQ](/dashboard/dashboard-faq.md#a-required-component-ngmonitoring-is-not-started-error-is-shown)を参照してください。
 
-**2. Will performance be affected after enabling Top SQL?**
+**2. Top SQL を有効にするとパフォーマンスに影響しますか?**
 
-This feature has a slight impact on cluster performance. According to our benchmark, the average performance impact is usually less than 3% when the feature is enabled.
+この機能はクラスターのパフォーマンスにわずかな影響を与えます。弊社のベンチマークによると、この機能が有効になっている場合、平均パフォーマンスへの影響は通常 3% 未満です。
 
-**3. What is the status of this feature?**
+**3. この機能のステータスはどうなっていますか?**
 
-It is now a generally available (GA) feature and can be used in production environments.
+現在、一般提供 (GA) 機能となっており、本番環境で使用できます。
 
-**4. What is the meaning of "Other Statements"?**
+**4. 「その他の発言」とはどういう意味ですか?**
 
-"Other Statement" counts the total CPU overhead of all non-Top 5 statements. With this information, you can learn the CPU overhead contributed by the Top 5 statements compared with the overall.
+「その他のステートメント」は、上位 5 以外のすべてのステートメントの合計 CPU オーバーヘッドをカウントします。この情報を使用すると、上位 5 つのステートメントが寄与する CPU オーバーヘッドを全体と比較して知ることができます。
 
-**5. What is the relationship between the CPU overhead displayed by Top SQL and the actual CPU usage of the process?**
+**5. Top SQLによって表示される CPU オーバーヘッドとプロセスの実際の CPU 使用率の間にはどのような関係がありますか?**
 
-Their correlation is strong but they are not exactly the same thing. For example, the cost of writing multiple replicas is not counted in the TiKV CPU overhead displayed by Top SQL. In general, SQL statements with higher CPU usage result in higher CPU overhead displayed in Top SQL.
+それらの相関関係は強いですが、まったく同じものではありません。たとえば、複数のレプリカの書き込みコストは、 Top SQLで表示される TiKV CPU オーバーヘッドにはカウントされません。一般に、CPU 使用率が高い SQL ステートメントは、Top SQLに表示される CPU オーバーヘッドも高くなります。
 
-**6. What is the meaning of the Y-axis of the Top SQL chart?**
+**6.Top SQLチャートの Y 軸の意味は何ですか?**
 
-It represents the size of CPU resources consumed. The more resources consumed by a SQL statement, the higher the value is. In most cases, you do not need to care about the meaning or unit of the specific value.
+消費される CPU リソースのサイズを表します。 SQL ステートメントによって消費されるリソースが多いほど、値は高くなります。ほとんどの場合、特定の値の意味や単位を気にする必要はありません。
 
-**7. Does Top SQL collect running (unfinished) SQL statements?**
+**7. Top SQL は実行中の (未完了の) SQL ステートメントを収集しますか?**
 
-Yes. The bars displayed in the Top SQL chart at each moment indicate the CPU overhead of all running SQL statements at that moment.
+はい。Top SQLグラフに各瞬間に表示されるバーは、その時点で実行されているすべての SQL ステートメントの CPU オーバーヘッドを示します。

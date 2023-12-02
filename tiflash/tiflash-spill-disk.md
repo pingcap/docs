@@ -3,37 +3,38 @@ title: TiFlash Spill to Disk
 summary: Learn how TiFlash spills data to disk and how to customize the spill behavior.
 ---
 
-# TiFlash Spill to Disk
+# TiFlash のディスクへの流出 {#tiflash-spill-to-disk}
 
-This document introduces how TiFlash spills data to disk during computation.
+このドキュメントでは、 TiFlash が計算中にデータをディスクに書き込む方法を紹介します。
 
-Starting from v7.0.0, TiFlash supports spilling intermediate data to disk to relieve memory pressure. The following operators are supported:
+v7.0.0 以降、 TiFlash はメモリ負荷を軽減するために中間データのディスクへのスピルをサポートします。次の演算子がサポートされています。
 
-* Hash Join operators with equi-join conditions
-* Hash Aggregation operators with `GROUP BY` keys
-* TopN operators, and Sort operators in Window functions
+-   等結合条件を持つハッシュ結合演算子
+-   `GROUP BY`キーを持つハッシュ集計演算子
+-   ウィンドウ関数の TopN 演算子と並べ替え演算子
 
-## Trigger the spilling
+## 流出を引き起こす {#trigger-the-spilling}
 
-TiFlash provides two triggering mechanisms for spilling data to disk.
+TiFlash は、データをディスクに書き出すための 2 つのトリガー メカニズムを提供します。
 
-* Operator-level spilling: by specifing the data spilling threshold for each operator, you can control when TiFlash spills data of that operator to disk.
-* Query-level spilling: by specifing the maximum memory usage of a query on a TiFlash node and the memory ratio for spilling, you can control when TiFlash spills data of supported operators in a query to disk as needed.
+-   オペレーターレベルのスピル: 各オペレーターのデータスピルしきい値を指定することで、 TiFlash がそのオペレーターのデータをいつディスクにスピルするかを制御できます。
+-   クエリレベルのスピル: TiFlashノード上のクエリの最大メモリ使用量とスピルのメモリ比率を指定することで、 TiFlash がクエリでサポートされているオペレータのデータを必要に応じてディスクにスピルするタイミングを制御できます。
 
-### Operator-level spilling
+### オペレーターレベルの流出 {#operator-level-spilling}
 
-Starting from v7.0.0, TiFlash supports automatic spilling at the operator level. You can control the threshold of data spilling for each operator using the following system variables. When the memory usage of an operator exceeds the threshold, TiFlash triggers spilling for the operator.
+v7.0.0 以降、 TiFlash はオペレーター レベルでの自動スピルをサポートします。次のシステム変数を使用して、各オペレーターのデータ流出のしきい値を制御できます。オペレーターのメモリ使用量がしきい値を超えると、 TiFlash はオペレーターに対してスピルをトリガーします。
 
-* [`tidb_max_bytes_before_tiflash_external_group_by`](/system-variables.md#tidb_max_bytes_before_tiflash_external_group_by-new-in-v700)
-* [`tidb_max_bytes_before_tiflash_external_join`](/system-variables.md#tidb_max_bytes_before_tiflash_external_join-new-in-v700)
-* [`tidb_max_bytes_before_tiflash_external_sort`](/system-variables.md#tidb_max_bytes_before_tiflash_external_sort-new-in-v700)
+-   [`tidb_max_bytes_before_tiflash_external_group_by`](/system-variables.md#tidb_max_bytes_before_tiflash_external_group_by-new-in-v700)
+-   [`tidb_max_bytes_before_tiflash_external_join`](/system-variables.md#tidb_max_bytes_before_tiflash_external_join-new-in-v700)
+-   [`tidb_max_bytes_before_tiflash_external_sort`](/system-variables.md#tidb_max_bytes_before_tiflash_external_sort-new-in-v700)
 
-#### Example
+#### 例 {#example}
 
-This example constructs a SQL statement that consumes a lot of memory to demonstrate the spilling of the Hash Aggregation operator.
+この例では、ハッシュ集計演算子の流出を示すために、大量のメモリを消費する SQL ステートメントを構築します。
 
-1. Prepare the environment. Create a TiFlash cluster with 2 nodes and import the TPCH-100 data.
-2. Execute the following statements. These statements do not limit the memory usage of the Hash Aggregation operator with `GROUP BY` keys.
+1.  環境を準備します。 2 つのノードでTiFlashクラスターを作成し、TPCH-100 データをインポートします。
+
+2.  次のステートメントを実行します。これらのステートメントは、 `GROUP BY`キーによるハッシュ集計演算子のメモリ使用量を制限しません。
 
     ```sql
     SET tidb_max_bytes_before_tiflash_external_group_by = 0;
@@ -49,13 +50,11 @@ This example constructs a SQL statement that consumes a lot of memory to demonst
     HAVING SUM(l_quantity) > 314;
     ```
 
-3. From the log of TiFlash, you can see that the query needs to consume 29.55 GiB of memory on a single TiFlash node:
+3.  TiFlashのログから、クエリは単一のTiFlashノードで 29.55 GiB のメモリを消費する必要があることがわかります。
 
-    ```
-    [DEBUG] [MemoryTracker.cpp:69] ["Peak memory usage (total): 29.55 GiB."] [source=MemoryTracker] [thread_id=468]
-    ```
+        [DEBUG] [MemoryTracker.cpp:69] ["Peak memory usage (total): 29.55 GiB."] [source=MemoryTracker] [thread_id=468]
 
-4. Execute the following statement. This statement limits the memory usage of the Hash Aggregation operator with `GROUP BY` keys to 10737418240 (10 GiB).
+4.  次のステートメントを実行します。このステートメントは、キーが`GROUP BY`ハッシュ集計演算子のメモリ使用量を 10737418240 (10 GiB) に制限します。
 
     ```sql
     SET tidb_max_bytes_before_tiflash_external_group_by = 10737418240;
@@ -71,28 +70,26 @@ This example constructs a SQL statement that consumes a lot of memory to demonst
     HAVING SUM(l_quantity) > 314;
     ```
 
-5. From the log of TiFlash, you can see that by configuring `tidb_max_bytes_before_tiflash_external_group_by`, TiFlash triggers the spilling of intermediate results, significantly reducing the memory used by the query.
+5.  TiFlashのログから、 `tidb_max_bytes_before_tiflash_external_group_by`を設定すると、 TiFlash が中間結果の流出をトリガーし、クエリで使用されるメモリが大幅に削減されることがわかります。
 
-    ```
-    [DEBUG] [MemoryTracker.cpp:69] ["Peak memory usage (total): 12.80 GiB."] [source=MemoryTracker] [thread_id=110]
-    ```
+        [DEBUG] [MemoryTracker.cpp:69] ["Peak memory usage (total): 12.80 GiB."] [source=MemoryTracker] [thread_id=110]
 
-### Query-level spilling
+### クエリレベルのスピル {#query-level-spilling}
 
-Starting from v7.4.0, TiFlash supports automatic spilling at the query level. You can control this feature using the following system variables:
+v7.4.0 以降、 TiFlash はクエリ レベルでの自動スピルをサポートします。この機能は、次のシステム変数を使用して制御できます。
 
-* [`tiflash_mem_quota_query_per_node`](/system-variables.md#tiflash_mem_quota_query_per_node-new-in-v740): limits the maximum memory usage for a query on a TiFlash node.
-* [`tiflash_query_spill_ratio`](/system-variables.md#tiflash_query_spill_ratio-new-in-v740): controls the memory ratio that triggers data spilling.
+-   [`tiflash_mem_quota_query_per_node`](/system-variables.md#tiflash_mem_quota_query_per_node-new-in-v740) : TiFlashノード上のクエリの最大メモリ使用量を制限します。
+-   [`tiflash_query_spill_ratio`](/system-variables.md#tiflash_query_spill_ratio-new-in-v740) : データの流出を引き起こすメモリ比率を制御します。
 
-If both `tiflash_mem_quota_query_per_node` and `tiflash_query_spill_ratio` are set to values greater than 0, TiFlash automatically triggers spilling for supported operators in a query when the memory usage of a query exceeds `tiflash_mem_quota_query_per_node * tiflash_query_spill_ratio`.
+`tiflash_mem_quota_query_per_node`と`tiflash_query_spill_ratio`の両方が 0 より大きい値に設定されている場合、クエリのメモリ使用量が`tiflash_mem_quota_query_per_node * tiflash_query_spill_ratio`を超えると、 TiFlash はクエリでサポートされている演算子のスピルを自動的にトリガーします。
 
-#### Example
+#### 例 {#example}
 
-This example constructs a SQL statement that consumes a lot of memory to demonstrate the query-level spilling.
+この例では、クエリ レベルの流出を示すために、大量のメモリを消費する SQL ステートメントを構築します。
 
-1. Prepare the environment. Create a TiFlash cluster with 2 nodes and import the TPCH-100 data.
+1.  環境を準備します。 2 つのノードでTiFlashクラスターを作成し、TPCH-100 データをインポートします。
 
-2. Execute the following statements. These statements do not limit the memory usage of the query or the memory usage of the Hash Aggregation operator with `GROUP BY` keys.
+2.  次のステートメントを実行します。これらのステートメントは、クエリのメモリ使用量や`GROUP BY`キーによるハッシュ集計演算子のメモリ使用量を制限しません。
 
     ```sql
     SET tidb_max_bytes_before_tiflash_external_group_by = 0;
@@ -110,13 +107,11 @@ This example constructs a SQL statement that consumes a lot of memory to demonst
     HAVING SUM(l_quantity) > 314;
     ```
 
-3. From the log of TiFlash, you can see that the query consumes 29.55 GiB of memory on a single TiFlash node:
+3.  TiFlashのログから、クエリが単一のTiFlashノードで 29.55 GiB のメモリを消費していることがわかります。
 
-    ```
-    [DEBUG] [MemoryTracker.cpp:69] ["Peak memory usage (total): 29.55 GiB."] [source=MemoryTracker] [thread_id=468]
-    ```
+        [DEBUG] [MemoryTracker.cpp:69] ["Peak memory usage (total): 29.55 GiB."] [source=MemoryTracker] [thread_id=468]
 
-4. Execute the following statements. These statements limit the maximum memory usage of the query on a TiFlash node to 5 GiB.
+4.  次のステートメントを実行します。これらのステートメントは、 TiFlashノード上のクエリの最大メモリ使用量を 5 GiB に制限します。
 
     ```sql
     SET tiflash_mem_quota_query_per_node = 5368709120;
@@ -133,22 +128,21 @@ This example constructs a SQL statement that consumes a lot of memory to demonst
     HAVING SUM(l_quantity) > 314;
     ```
 
-5. From the log of TiFlash, you can see that by configuring query-level spilling, TiFlash triggers the spilling of intermediate results, significantly reducing the memory used by the query.
+5.  TiFlashのログから、クエリ レベルのスピルを構成することにより、 TiFlash が中間結果のスピルをトリガーし、クエリによって使用されるメモリが大幅に削減されることがわかります。
 
-    ```
-    [DEBUG] [MemoryTracker.cpp:101] ["Peak memory usage (for query): 3.94 GiB."] [source=MemoryTracker] [thread_id=1547]
-    ```
+        [DEBUG] [MemoryTracker.cpp:101] ["Peak memory usage (for query): 3.94 GiB."] [source=MemoryTracker] [thread_id=1547]
 
-## Notes
+## ノート {#notes}
 
-* When the Hash Aggregation operator does not have a `GROUP BY` key, it does not support spilling. Even if the Hash Aggregation operator contains a distinct aggregation function, it does not support spilling.
-* Currently, the threshold for operator-level spilling is calculated for each operator separately. For a query containing two Hash Aggregation operators, if the query-level spilling is not configured and the threshold of the aggregation operator is set to 10 GiB, the two Hash Aggregation operators will only spill data when their respective memory usage exceeds 10 GiB.
-* Currently, the Hash Aggregation operators and TopN/Sort operators use the merge aggregation and merge sort algorithm during the restore phase. Therefore, these two operators only trigger a single round of spill. If the memory demand is very high and the memory usage during the restore phase still exceeds the threshold, the spill will not be triggered again.
-* Currently, the Hash Join operator uses the partition-based spill strategy. If the memory usage during the restore phase still exceeds the threshold, the spill will be triggered again. However, to control the scale of the spill, the number of rounds of spill is limited to three. If the memory usage during the restore phase still exceeds the threshold after the third round of spill, the spill will not be triggered again.
-* When query-level spilling is configured (that is, both [`tiflash_mem_quota_query_per_node`](/system-variables.md#tiflash_mem_quota_query_per_node-new-in-v740) and [`tiflash_query_spill_ratio`](/system-variables.md#tiflash_query_spill_ratio-new-in-v740) are greater than 0), TiFlash ignores spilling thresholds of individual operators and automatically triggers spilling for relevant operators in a query based on the query-level spilling thresholds.
-* Even when query-level spilling is configured, if none of the operators used in a query support spilling, the intermediate computation results of that query still cannot be spilled to disk. In this case, when the memory usage of that query exceeds the related threshold, TiFlash will return an error and terminate the query.
-* Even when query-level spilling is configured and a query contains operators that support spilling, the query might still return an error due to exceeding memory thresholds in either of the following scenarios:
-    - Other non-spilling operators in the query consume too much memory.
-    - The spilling operators do not spill to disk timely.
+-   ハッシュ集計演算子に`GROUP BY`キーがない場合、スピルはサポートされません。ハッシュ集計演算子に個別の集約関数が含まれている場合でも、スピルはサポートされません。
+-   現在、オペレーターレベルの流出のしきい値はオペレーターごとに個別に計算されます。 2 つのハッシュ集計演算子を含むクエリの場合、クエリレベルのスピルが構成されておらず、集約演算子のしきい値が 10 GiB に設定されている場合、2 つのハッシュ集計演算子は、それぞれのメモリ使用量が 10 GiB を超えた場合にのみデータをスピルします。
+-   現在、ハッシュ集計演算子と TopN/Sort 演算子は、復元フェーズ中にマージ集約アルゴリズムとマージ ソート アルゴリズムを使用します。したがって、これら 2 つの演算子は 1 ラウンドのスピルをトリガーするだけです。メモリ需要が非常に高く、復元フェーズ中のメモリ使用量が依然としてしきい値を超えている場合、スピルは再度トリガーされません。
+-   現在、ハッシュ結合演算子はパーティションベースのスピル戦略を使用しています。復元フェーズ中のメモリ使用量が依然としてしきい値を超えている場合、スピルは再びトリガーされます。ただし、流出規模を抑えるため、流出回数は３回までに制限されている。復元フェーズ中のメモリ使用量が 3 回目のスピル後もしきい値を超えている場合、スピルは再びトリガーされません。
+-   クエリ レベルのスピルが設定されている場合 (つまり、 [`tiflash_mem_quota_query_per_node`](/system-variables.md#tiflash_mem_quota_query_per_node-new-in-v740)と[`tiflash_query_spill_ratio`](/system-variables.md#tiflash_query_spill_ratio-new-in-v740)の両方が 0 より大きい場合)、 TiFlash は個々の演算子のスピルしきい値を無視し、クエリ レベルのスピルしきい値に基づいて、クエリ内の関連演算子のスピルを自動的にトリガーします。
+-   クエリ レベルのスピルが構成されている場合でも、クエリで使用される演算子のいずれもスピルをサポートしていない場合、そのクエリの中間計算結果をディスクにスピルすることはできません。この場合、そのクエリのメモリ使用量が関連するしきい値を超えると、 TiFlash はエラーを返し、クエリを終了します。
+-   クエリ レベルのスピルが構成されており、クエリにスピルをサポートする演算子が含まれている場合でも、次のいずれかのシナリオでメモリしきい値を超過するため、クエリはエラーを返す可能性があります。
 
-  To address situations where spilling operators do not spill to disk in time, you can try reducing [`tiflash_query_spill_ratio`](/system-variables.md#tiflash_query_spill_ratio-new-in-v740) to avoid memory threshold errors.
+    -   クエリ内の他の非スピル演算子はメモリを大量に消費します。
+    -   スピル演算子は、タイムリーにディスクにスピルしません。
+
+    スピル演算子が時間内にディスクにスピルしない状況に対処するには、 [`tiflash_query_spill_ratio`](/system-variables.md#tiflash_query_spill_ratio-new-in-v740)減らしてメモリしきい値エラーを回避してみてください。

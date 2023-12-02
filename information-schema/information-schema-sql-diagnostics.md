@@ -3,54 +3,54 @@ title: SQL Diagnostics
 summary: Understand SQL diagnostics in TiDB.
 ---
 
-# SQL Diagnostics
+# SQL診断 {#sql-diagnostics}
 
-SQL diagnostics is a feature introduced in TiDB v4.0. You can use this feature to locate problems in TiDB with higher efficiency. Before TiDB v4.0, you need to use different tools to obtain different information.
+SQL 診断は、TiDB v4.0 で導入された機能です。この機能を使用すると、TiDB 内の問題をより効率的に特定できます。 TiDB v4.0 より前は、さまざまな情報を取得するにはさまざまなツールを使用する必要がありました。
 
-The SQL diagnostic system has the following advantages:
+SQL 診断システムには次の利点があります。
 
-+ It integrates information from all components of the system as a whole.
-+ It provides a consistent interface to the upper layer through system tables.
-+ It provides monitoring summaries and automatic diagnostics.
-+ You will find it easier to query cluster information.
+-   システムのすべてのコンポーネントからの情報を全体として統合します。
+-   システム テーブルを通じて上位レイヤーに一貫したインターフェイスを提供します。
+-   監視の概要と自動診断を提供します。
+-   クラスター情報のクエリが簡単になることがわかります。
 
-## Overview
+## 概要 {#overview}
 
-The SQL diagnostic system consists of three major parts:
+SQL 診断システムは、次の 3 つの主要な部分で構成されます。
 
-+ **Cluster information table**: The SQL diagnostics system introduces cluster information tables that provide a unified way to get the discrete information of each instance. This system fully integrates the cluster topology, hardware information, software information, kernel parameters, monitoring, system information, slow queries, statements, and logs of the entire cluster into the table. So you can query these information using SQL statements.
+-   **クラスタ情報テーブル**: SQL 診断システムには、各インスタンスの個別の情報を取得する統一された方法を提供するクラスター情報テーブルが導入されています。このシステムは、クラスタ全体のクラスタ トポロジ、ハードウェア情報、ソフトウェア情報、カーネル パラメータ、モニタリング、システム情報、スロー クエリ、ステートメント、ログをテーブルに完全に統合します。したがって、SQL ステートメントを使用してこれらの情報をクエリできます。
 
-+ **Cluster monitoring table**: The SQL diagnostic system introduces cluster monitoring tables. All of these tables are in `metrics_schema`, and you can query monitoring information using SQL statements. Compared to the visualized monitoring before v4.0, you can use this SQL-based method to perform correlated queries on all the monitoring information of the entire cluster, and compare the results of different time periods to quickly identify performance bottlenecks. Because the TiDB cluster has many monitoring metrics, the SQL diagnostic system also provides monitoring summary tables, so you can find abnormal monitoring items more easily.
+-   **クラスタ監視テーブル**: SQL 診断システムにはクラスター監視テーブルが導入されています。これらのテーブルはすべて`metrics_schema`にあり、SQL ステートメントを使用して監視情報をクエリできます。 v4.0 より前の視覚化された監視と比較して、この SQL ベースの方法を使用すると、クラスター全体のすべての監視情報に対して相関クエリを実行し、異なる期間の結果を比較してパフォーマンスのボトルネックを迅速に特定できます。 TiDB クラスターには多くの監視メトリックがあるため、SQL 診断システムには監視概要テーブルも用意されているため、異常な監視項目をより簡単に見つけることができます。
 
-**Automatic diagnostics**: Although you can manually execute SQL statements to query cluster information tables, cluster monitoring tables, and summary tables to locate issues, the automatic diagnostics allows you to quickly locate common issues. The SQL diagnostic system performs automatic diagnostics based on the existing cluster information tables and monitoring tables, and provides relevant diagnostic result tables and diagnostic summary tables.
+**自動診断**: SQL ステートメントを手動で実行して、クラスター情報テーブル、クラスター監視テーブル、およびサマリー テーブルをクエリして問題を特定することもできますが、自動診断を使用すると、一般的な問題を迅速に見つけることができます。 SQL 診断システムは、既存のクラスター情報テーブルと監視テーブルに基づいて自動診断を実行し、関連する診断結果テーブルと診断概要テーブルを提供します。
 
-## Cluster information tables
+## クラスタ情報テーブル {#cluster-information-tables}
 
-The cluster information tables bring together the information of all instances and instances in a cluster. With these tables, you can query all cluster information using only one SQL statement. The following is a list of cluster information tables:
+クラスター情報テーブルには、すべてのインスタンスとクラスター内のインスタンスの情報がまとめられます。これらのテーブルを使用すると、1 つの SQL ステートメントだけを使用してすべてのクラスター情報をクエリできます。以下はクラスター情報テーブルのリストです。
 
-+ From the cluster topology table [`information_schema.cluster_info`](/information-schema/information-schema-cluster-info.md), you can get the current topology information of the cluster, the version of each instance, the Git Hash corresponding to the version, the starting time of each instance, and the running time of each instance.
-+ From the cluster configuration table [`information_schema.cluster_config`](/information-schema/information-schema-cluster-config.md), you can get the configuration of all instances in the cluster. For versions earlier than 4.0, you need to access the HTTP API of each instance one by one to get these configuration information.
-+ On the cluster hardware table [`information_schema.cluster_hardware`](/information-schema/information-schema-cluster-hardware.md), you can quickly query the cluster hardware information.
-+ On the cluster load table [`information_schema.cluster_load`](/information-schema/information-schema-cluster-load.md), you can query the load information of different instances and hardware types of the cluster.
-+ On the kernel parameter table [`information_schema.cluster_systeminfo`](/information-schema/information-schema-cluster-systeminfo.md), you can query the kernel configuration information of different instances in the cluster. Currently, TiDB supports querying the sysctl information.
-+ On the cluster log table [`information_schema.cluster_log`](/information-schema/information-schema-cluster-log.md), you can query cluster logs. By pushing down query conditions to each instance, the impact of the query on cluster performance is less than that of the `grep` command.
+-   クラスタ トポロジ テーブル[`information_schema.cluster_info`](/information-schema/information-schema-cluster-info.md)から、クラスタの現在のトポロジ情報、各インスタンスのバージョン、バージョンに対応する Git ハッシュ、各インスタンスの開始時刻、各インスタンスの実行時間を取得できます。
+-   クラスター構成テーブル[`information_schema.cluster_config`](/information-schema/information-schema-cluster-config.md)から、クラスター内のすべてのインスタンスの構成を取得できます。 4.0 より前のバージョンの場合、これらの構成情報を取得するには、各インスタンスの HTTP API に 1 つずつアクセスする必要があります。
+-   クラスター ハードウェア テーブル[`information_schema.cluster_hardware`](/information-schema/information-schema-cluster-hardware.md)では、クラスター ハードウェア情報を簡単にクエリできます。
+-   クラスター負荷テーブル[`information_schema.cluster_load`](/information-schema/information-schema-cluster-load.md)では、クラスターのさまざまなインスタンスおよびハードウェア タイプの負荷情報をクエリできます。
+-   カーネル パラメータ テーブル[`information_schema.cluster_systeminfo`](/information-schema/information-schema-cluster-systeminfo.md)では、クラスタ内のさまざまなインスタンスのカーネル構成情報をクエリできます。現在、TiDB は sysctl 情報のクエリをサポートしています。
+-   クラスター ログ テーブル[`information_schema.cluster_log`](/information-schema/information-schema-cluster-log.md)では、クラスター ログをクエリできます。クエリ条件を各インスタンスにプッシュダウンすることにより、クラスターのパフォーマンスに対するクエリの影響は、 `grep`のコマンドよりも少なくなります。
 
-On the system tables earlier than TiDB v4.0, you can only view the current instance. TiDB v4.0 introduces the corresponding cluster tables and you can have a global view of the entire cluster on a single TiDB instance. These tables are currently in `information_schema`, and the query method is the same as other `information_schema` system tables.
+TiDB v4.0 より前のシステム テーブルでは、現在のインスタンスのみを表示できます。 TiDB v4.0 では、対応するクラスター テーブルが導入されており、単一の TiDB インスタンス上でクラスター全体のグローバル ビューを得ることができます。これらのテーブルは現在`information_schema`にあり、クエリ方法は他の`information_schema`のシステム テーブルと同じです。
 
-## Cluster monitoring tables
+## クラスタ監視テーブル {#cluster-monitoring-tables}
 
-To dynamically observe and compare cluster conditions in different time periods, the SQL diagnostic system introduces cluster monitoring system tables. All monitoring tables are in `metrics_schema`, and you can query the monitoring information using SQL statements. Using this method, you can perform correlated queries on all monitoring information of the entire cluster and compare the results of different time periods to quickly identify performance bottlenecks.
+さまざまな期間でクラスターの状態を動的に観察および比較するために、SQL 診断システムにはクラスター監視システム テーブルが導入されています。すべての監視テーブルは`metrics_schema`にあり、SQL ステートメントを使用して監視情報をクエリできます。この方法を使用すると、クラスター全体のすべての監視情報に対して相関クエリを実行し、さまざまな期間の結果を比較して、パフォーマンスのボトルネックを迅速に特定できます。
 
-+ [`information_schema.metrics_tables`](/information-schema/information-schema-metrics-tables.md): Because many system tables exist now, you can query meta-information of these monitoring tables on the `information_schema.metrics_tables` table.
+-   [`information_schema.metrics_tables`](/information-schema/information-schema-metrics-tables.md) : 現在、多くのシステム テーブルが存在するため、これらの監視テーブルのメタ情報を`information_schema.metrics_tables`テーブルでクエリできます。
 
-Because the TiDB cluster has many monitoring metrics, TiDB provides the following monitoring summary tables in v4.0:
+TiDB クラスターには多くの監視メトリックがあるため、TiDB は v4.0 で次の監視概要テーブルを提供します。
 
-+ The monitoring summary table [`information_schema.metrics_summary`](/information-schema/information-schema-metrics-summary.md) summarizes all monitoring data to for you to check each monitoring metric with higher efficiency.
-+ [`information_schema.metrics_summary_by_label`](/information-schema/information-schema-metrics-summary.md) also summarizes all monitoring data. Particularly, this table aggregates statistics using different labels of each monitoring metric.
+-   監視概要表[`information_schema.metrics_summary`](/information-schema/information-schema-metrics-summary.md)は、各監視メトリックをより効率的に確認できるように、すべての監視データを要約しています。
+-   [`information_schema.metrics_summary_by_label`](/information-schema/information-schema-metrics-summary.md)はすべての監視データも要約します。特に、このテーブルは、各監視メトリックの異なるラベルを使用して統計を集計します。
 
-## Automatic diagnostics
+## 自動診断 {#automatic-diagnostics}
 
-On the cluster information tables and cluster monitoring tables above, you need to manually execute SQL statements to troubleshoot the cluster. TiDB v4.0 supports the automatic diagnostics. You can use diagnostic-related system tables based on the existing basic information tables, so that the diagnostics is automatically executed. The following are the system tables related to the automatic diagnostics:
+上記のクラスター情報テーブルとクラスター監視テーブルでは、クラスターのトラブルシューティングを行うために SQL ステートメントを手動で実行する必要があります。 TiDB v4.0 は自動診断をサポートしています。既存の基本情報テーブルに基づいて診断関連のシステム テーブルを使用すると、診断が自動的に実行されます。以下は、自動診断に関連するシステム テーブルです。
 
-+ The diagnostic result table [`information_schema.inspection_result`](/information-schema/information-schema-inspection-result.md) displays the diagnostic result of the system. The diagnostics is passively triggered. Executing `select * from inspection_result` triggers all diagnostic rules to diagnose the system, and the faults or risks in the system are displayed in the results.
-+ The diagnostic summary table [`information_schema.inspection_summary`](/information-schema/information-schema-inspection-summary.md) summarizes the monitoring information of a specific link or module. You can troubleshoot and locate problems based on the context of the entire module or link.
+-   診断結果表[`information_schema.inspection_result`](/information-schema/information-schema-inspection-result.md)には、システムの診断結果が表示されます。診断は受動的にトリガーされます。 `select * from inspection_result`を実行すると、すべての診断ルールがトリガーされてシステムを診断し、システムの障害またはリスクが結果に表示されます。
+-   診断概要テーブル[`information_schema.inspection_summary`](/information-schema/information-schema-inspection-summary.md)には、特定のリンクまたはモジュールの監視情報がまとめられています。モジュール全体またはリンクのコンテキストに基づいてトラブルシューティングを行い、問題を特定できます。

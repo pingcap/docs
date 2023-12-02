@@ -3,11 +3,9 @@ title: Explain Statements That Use Aggregation
 summary: Learn about the execution plan information returned by the `EXPLAIN` statement in TiDB.
 ---
 
-# Explain Statements Using Aggregation
+# 集計を使用した Explain ステートメント {#explain-statements-using-aggregation}
 
-When aggregating data, the SQL Optimizer will select either a Hash Aggregation or Stream Aggregation operator. To improve query efficiency, aggregation is performed at both the coprocessor and TiDB layers. Consider the following example:
-
-{{< copyable "sql" >}}
+データを集約するとき、SQL オプティマイザーはハッシュ集計またはストリーム集計演算子のいずれかを選択します。クエリの効率を向上させるために、集約はコプロセッサ層と TiDB 層の両方で実行されます。次の例を考えてみましょう。
 
 ```sql
 CREATE TABLE t1 (id INT NOT NULL PRIMARY KEY auto_increment, pad1 BLOB, pad2 BLOB, pad3 BLOB);
@@ -31,9 +29,7 @@ SELECT SLEEP(1);
 ANALYZE TABLE t1;
 ```
 
-From the output of [`SHOW TABLE REGIONS`](/sql-statements/sql-statement-show-table-regions.md), you can see that this table is split into multiple Regions:
-
-{{< copyable "sql" >}}
+[`SHOW TABLE REGIONS`](/sql-statements/sql-statement-show-table-regions.md)の出力から、このテーブルが複数のリージョンに分割されていることがわかります。
 
 ```sql
 SHOW TABLE t1 REGIONS;
@@ -51,9 +47,7 @@ SHOW TABLE t1 REGIONS;
 4 rows in set (0.00 sec)
 ```
 
-Using `EXPLAIN` with the following aggregation statement, you can see that `└─StreamAgg_8` is first performed on each Region inside TiKV. Each TiKV Region will then send one row back to TiDB, which aggregates the data from each Region in `StreamAgg_16`:
-
-{{< copyable "sql" >}}
+次の集計ステートメントで`EXPLAIN`を使用すると、TiKV 内の各リージョンで最初に`└─StreamAgg_8`が実行されることがわかります。次に、各 TiKVリージョンは1 行を TiDB に送り返し、各リージョンからのデータを`StreamAgg_16`に集約します。
 
 ```sql
 EXPLAIN SELECT COUNT(*) FROM t1;
@@ -71,7 +65,7 @@ EXPLAIN SELECT COUNT(*) FROM t1;
 4 rows in set (0.00 sec)
 ```
 
-This is easiest to observe in `EXPLAIN ANALYZE`, where the `actRows` matches the number of Regions from `SHOW TABLE REGIONS` because a `TableFullScan` is being used and there are no secondary indexes:
+これは`EXPLAIN ANALYZE`で観察するのが最も簡単です。ここでは`TableFullScan`が使用されており、セカンダリ インデックスがないため、 `actRows` `SHOW TABLE REGIONS`のリージョンの数と一致します。
 
 ```sql
 EXPLAIN ANALYZE SELECT COUNT(*) FROM t1;
@@ -89,13 +83,11 @@ EXPLAIN ANALYZE SELECT COUNT(*) FROM t1;
 4 rows in set (0.01 sec)
 ```
 
-## Hash Aggregation
+## ハッシュ集計 {#hash-aggregation}
 
-The Hash Aggregation algorithm uses a hash table to store intermediate results while performing aggregation. It executes in parallel using multiple threads but consumes more memory than Stream Aggregation.
+ハッシュ集計アルゴリズムは、ハッシュ テーブルを使用して、集約の実行中に中間結果を保存します。複数のスレッドを使用して並列実行されますが、 Stream 集計よりも多くのメモリを消費します。
 
-The following is an example of the `HashAgg` operator:
-
-{{< copyable "sql" >}}
+以下は`HashAgg`演算子の例です。
 
 ```sql
 EXPLAIN SELECT /*+ HASH_AGG() */ count(*) FROM t1;
@@ -113,15 +105,13 @@ EXPLAIN SELECT /*+ HASH_AGG() */ count(*) FROM t1;
 4 rows in set (0.00 sec)
 ```
 
-The `operator info` shows that the hashing function used to aggregate the data is `funcs:count(1)->Column#6`.
+`operator info` 、データの集計に使用されるハッシュ関数が`funcs:count(1)->Column#6`であることを示します。
 
-## Stream Aggregation
+## ストリーム集計 {#stream-aggregation}
 
-The Stream Aggregation algorithm usually consumes less memory than Hash Aggregation. However, this operator requires that data is sent ordered so that it can _stream_ and apply the aggregation on values as they arrive.
+ストリーム集計アルゴリズムは、通常、ハッシュ集計よりもメモリ消費量が少なくなります。ただし、この演算子では、値が到着したときに*ストリーミング*して集計を適用できるように、データが順序付けられて送信される必要があります。
 
-Consider the following example:
-
-{{< copyable "sql" >}}
+次の例を考えてみましょう。
 
 ```sql
 CREATE TABLE t2 (id INT NOT NULL PRIMARY KEY, col1 INT NOT NULL);
@@ -147,9 +137,7 @@ Records: 5  Duplicates: 0  Warnings: 0
 5 rows in set (0.00 sec)
 ```
 
-In this example, the `└─Sort_13` operator can be eliminated by adding an index on `col1`. Once the index is added, the data can be read in order and the `└─Sort_13` operator is eliminated:
-
-{{< copyable "sql" >}}
+この例では、 `col1`にインデックスを追加することで`└─Sort_13`演算子を削除できます。インデックスが追加されると、データを順番に読み取ることができ、 `└─Sort_13`演算子が削除されます。
 
 ```sql
 ALTER TABLE t2 ADD INDEX (col1);
@@ -171,15 +159,15 @@ Query OK, 0 rows affected (0.28 sec)
 5 rows in set (0.00 sec)
 ```
 
-## Multidimensional data aggregation with ROLLUP
+## ROLLUP を使用した多次元データ集約 {#multidimensional-data-aggregation-with-rollup}
 
-Starting from v7.4.0, the `GROUP BY` clause of TiDB supports the `WITH ROLLUP` modifier.
+v7.4.0 以降、TiDB の`GROUP BY`句は`WITH ROLLUP`修飾子をサポートします。
 
-In the `GROUP BY` clause, you can specify one or more columns as a group list and append the `WITH ROLLUP` modifier after the list. Then, TiDB will conduct multidimensional descending grouping based on the columns in the group list and provide you with summary results for each group in the output.
+`GROUP BY`句では、1 つ以上の列をグループ リストとして指定し、リストの後に`WITH ROLLUP`修飾子を追加できます。次に、TiDB は、グループ リストの列に基づいて多次元の降順グループ化を実行し、出力で各グループの概要結果を提供します。
 
-> **Note:**
+> **注記：**
 >
-> Currently, TiDB does not support the Cube syntax, and TiDB supports generating valid execution plans for the `WITH ROLLUP` syntax only in TiFlash MPP mode.
+> 現在、TiDB は Cube 構文をサポートしておらず、TiDB はTiFlash MPP モードでのみ`WITH ROLLUP`構文の有効な実行プランの生成をサポートしています。
 
 ```sql
 explain SELECT year, month, grouping(year), grouping(month), SUM(profit) AS profit FROM bank GROUP BY year, month WITH ROLLUP;
@@ -200,6 +188,6 @@ explain SELECT year, month, grouping(year), grouping(month), SUM(profit) AS prof
 10 rows in set (0.05 sec)
 ```
 
-According to the `GROUP BY year, month WITH ROLLUP` syntax in the preceding statement, the SQL aggregation results for this statement can be calculated and concatenated in three groups: `{year, month}`, `{year}`, and `{}` respectively.
+前述のステートメントの`GROUP BY year, month WITH ROLLUP`構文に従って、このステートメントの SQL 集計結果を計算し、3 つのグループ、 `{year, month}` 、 `{year}` 、および`{}`に連結できます。
 
-For more information, see [GROUP BY modifiers](/functions-and-operators/group-by-modifier.md).
+詳細については、 [GROUP BY 修飾子](/functions-and-operators/group-by-modifier.md)を参照してください。

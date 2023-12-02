@@ -3,44 +3,44 @@ title: TiDB Password Management
 summary: Learn the mechanism of user password management in TiDB.
 ---
 
-# TiDB Password Management
+# TiDB パスワード管理 {#tidb-password-management}
 
-To protect the security of user passwords, TiDB supports the following password management policies starting from v6.5.0:
+ユーザー パスワードのセキュリティを保護するために、TiDB は v6.5.0 以降、次のパスワード管理ポリシーをサポートします。
 
-- Password complexity policy: require users to set strong passwords to prevent empty and weak passwords.
-- Password expiration policy: require users to change their passwords periodically.
-- Password reuse policy: prevent users from reusing old passwords.
-- Failed-login tracking and temporary account locking policy: temporarily lock a user account to prevent the same user from trying to log in after multiple login failures caused by wrong passwords.
+-   パスワードの複雑さのポリシー: 空のパスワードや弱いパスワードを防ぐために、ユーザーに強力なパスワードを設定するよう要求します。
+-   パスワード有効期限ポリシー: ユーザーにパスワードを定期的に変更するよう要求します。
+-   パスワード再利用ポリシー: ユーザーが古いパスワードを再利用できないようにします。
+-   ログイン失敗の追跡と一時的なアカウント ロック ポリシー: 間違ったパスワードによって複数回ログインが失敗した後に、同じユーザーがログインを試みることを防ぐために、ユーザー アカウントを一時的にロックします。
 
-## TiDB authentication credential storage
+## TiDB 認証資格情報storage {#tidb-authentication-credential-storage}
 
-To ensure the authenticity of user identity, TiDB uses passwords as credentials to authenticate users when they log in to the TiDB server.
+ユーザー ID の信頼性を確保するために、TiDB はユーザーが TiDBサーバーにログインするときにユーザーを認証するための資格情報としてパスワードを使用します。
 
-The *password* described in this document refers to the internal credentials generated, stored, and verified by TiDB. TiDB stores user passwords in the `mysql.user` system table.
+このドキュメントで説明されている*パスワードは*、TiDB によって生成、保存、検証される内部認証情報を指します。 TiDB はユーザー パスワードを`mysql.user`システム テーブルに保存します。
 
-The following authentication plugins are related to TiDB password management:
+次の認証プラグインは TiDB パスワード管理に関連しています。
 
-- `mysql_native_password`
-- `caching_sha2_password`
-- `tidb_sm3_password`
+-   `mysql_native_password`
+-   `caching_sha2_password`
+-   `tidb_sm3_password`
 
-For more information about TiDB authentication plugins, see [Authentication plugin status](/security-compatibility-with-mysql.md#authentication-plugin-status).
+TiDB 認証プラグインの詳細については、 [認証プラグインのステータス](/security-compatibility-with-mysql.md#authentication-plugin-status)を参照してください。
 
-## Password complexity policy
+## パスワードの複雑さのポリシー {#password-complexity-policy}
 
-Password complexity check is disabled by default in TiDB. By configuring system variables related to password complexity, you can enable the password complexity check and make sure the user passwords comply with the password complexity policy.
+TiDB では、パスワードの複雑さのチェックはデフォルトで無効になっています。パスワードの複雑さに関連するシステム変数を構成することで、パスワードの複雑さのチェックを有効にし、ユーザーのパスワードがパスワードの複雑さのポリシーに準拠していることを確認できます。
 
-The password complexity policy has the following features:
+パスワードの複雑さのポリシーには次の機能があります。
 
-- For SQL statements that set user passwords in plaintext (including `CREATE USER`, `ALTER USER`, and `SET PASSWORD`), TiDB checks the passwords against the password complexity policy. If a password does not meet the requirements, the password is rejected.
-- You can use the SQL function [`VALIDATE_PASSWORD_STRENGTH()`](https://dev.mysql.com/doc/refman/8.0/en/encryption-functions.html#function_validate-password-strength) to validate the password strength.
+-   ユーザー パスワードをプレーンテキスト ( `CREATE USER` 、 `ALTER USER` 、および`SET PASSWORD`を含む) で設定する SQL ステートメントの場合、TiDB はパスワードの複雑さのポリシーに照らしてパスワードをチェックします。パスワードが要件を満たしていない場合、パスワードは拒否されます。
+-   SQL 関数[`VALIDATE_PASSWORD_STRENGTH()`](https://dev.mysql.com/doc/refman/8.0/en/encryption-functions.html#function_validate-password-strength)を使用して、パスワードの強度を検証できます。
 
-> **Note:**
+> **注記：**
 >
-> - For the `CREATE USER` statement, even if you can lock the account upon creation, you must set an acceptable password. Otherwise, when the account is unlocked, this account can log in to TiDB using a password that does not comply with the password complexity policy.
-> - The modification to the password complexity policy does not affect the passwords that already exist and only affects the newly set passwords.
+> -   `CREATE USER`ステートメントの場合、作成時にアカウントをロックできる場合でも、許容可能なパスワードを設定する必要があります。それ以外の場合、アカウントのロックが解除されると、このアカウントはパスワードの複雑さのポリシーに準拠していないパスワードを使用して TiDB にログインできます。
+> -   パスワードの複雑さのポリシーの変更は、既存のパスワードには影響せず、新しく設定されたパスワードにのみ影響します。
 
-You can view all system variables related to the password complexity policy by executing the following SQL statement:
+次の SQL ステートメントを実行すると、パスワードの複雑さのポリシーに関連するすべてのシステム変数を表示できます。
 
 ```sql
 mysql> SHOW VARIABLES LIKE 'validate_password.%';
@@ -60,37 +60,37 @@ mysql> SHOW VARIABLES LIKE 'validate_password.%';
 8 rows in set (0.00 sec)
 ```
 
-For a detailed description of each system variable, see [System Variables](/system-variables.md#validate_passwordcheck_user_name-new-in-v650).
+各システム変数の詳細については、 [システム変数](/system-variables.md#validate_passwordcheck_user_name-new-in-v650)を参照してください。
 
-### Configure password complexity policy
+### パスワードの複雑さのポリシーを構成する {#configure-password-complexity-policy}
 
-This section shows examples of configuring system variables related to the password complexity policy.
+このセクションでは、パスワードの複雑さのポリシーに関連するシステム変数の構成例を示します。
 
-Enable the password complexity check:
+パスワードの複雑さのチェックを有効にします。
 
 ```sql
 SET GLOBAL validate_password.enable = ON;
 ```
 
-Do not allow users to use a password that is the same as the user name:
+ユーザー名と同じパスワードの使用をユーザーに許可しないでください。
 
 ```sql
 SET GLOBAL validate_password.check_user_name = ON;
 ```
 
-Set the password complexity level to `LOW`:
+パスワードの複雑さのレベルを`LOW`に設定します。
 
 ```sql
 SET GLOBAL validate_password.policy = LOW;
 ```
 
-Set the minimum password length to `10`:
+パスワードの最小長を`10`に設定します。
 
 ```sql
 SET GLOBAL validate_password.length = 10;
 ```
 
-Require a password to contain at least two numbers, one uppercase letter, one lowercase letter, and one special character:
+パスワードには少なくとも 2 つの数字、1 つの大文字、1 つの小文字、および 1 つの特殊文字を含める必要があります。
 
 ```sql
 SET GLOBAL validate_password.number_count = 2;
@@ -98,51 +98,51 @@ SET GLOBAL validate_password.mixed_case_count = 1;
 SET GLOBAL validate_password.special_char_count = 1;
 ```
 
-Enable the dictionary check that prevents a password from containing words like `mysql` or `abcd`:
+パスワードに`mysql`や`abcd`の単語が含まれないようにする辞書チェックを有効にします。
 
 ```sql
 SET GLOBAL validate_password.dictionary = 'mysql;abcd';
 ```
 
-> **Note:**
+> **注記：**
 >
-> - The value of `validate_password.dictionary` is a string, no longer than 1024 characters. It contains a list of words that must not exist in the password. Each word is separated by semicolon (`;`).
-> - The dictionary check is case-insensitive.
+> -   値`validate_password.dictionary`は 1024 文字以内の文字列です。これには、パスワードに存在してはいけない単語のリストが含まれています。各単語はセミコロン ( `;` ) で区切られます。
+> -   辞書チェックでは大文字と小文字が区別されません。
 
-### Password complexity check examples
+### パスワードの複雑さチェックの例 {#password-complexity-check-examples}
 
-When the system variable `validate_password.enable` is set to `ON`, TiDB enables the password complexity check. The following are examples of the check results:
+システム変数`validate_password.enable`が`ON`に設定されている場合、TiDB はパスワードの複雑さのチェックを有効にします。チェック結果の例は次のとおりです。
 
-TiDB checks the user's plaintext password against the default password complexity policy. If the set password does not meet the policy, the password is rejected.
+TiDB は、ユーザーの平文パスワードをデフォルトのパスワード複雑さポリシーと照合してチェックします。設定されたパスワードがポリシーを満たさない場合、パスワードは拒否されます。
 
 ```sql
 mysql> ALTER USER 'test'@'localhost' IDENTIFIED BY 'abc';
 ERROR 1819 (HY000): Require Password Length: 8
 ```
 
-TiDB does not check the hashed password against the password complexity policy.
+TiDB は、ハッシュされたパスワードをパスワードの複雑さのポリシーに照らしてチェックしません。
 
 ```sql
 mysql> ALTER USER 'test'@'localhost' IDENTIFIED WITH mysql_native_password AS '*0D3CED9BEC10A777AEC23CCC353A8C08A633045E';
 Query OK, 0 rows affected (0.01 sec)
 ```
 
-When creating an account initially locked, you must also set a password that matches the password complexity policy, or the creation will fail.
+最初にロックされたアカウントを作成する場合は、パスワードの複雑さのポリシーに一致するパスワードも設定する必要があります。そうしないと、作成は失敗します。
 
 ```sql
 mysql> CREATE USER 'user02'@'localhost' ACCOUNT LOCK;
 ERROR 1819 (HY000): Require Password Length: 8
 ```
 
-### Password strength validation function
+### パスワード強度検証機能 {#password-strength-validation-function}
 
-To check the password strength, you can use the `VALIDATE_PASSWORD_STRENGTH()` function. This function accepts a password argument and returns an integer from 0 (weak) to 100 (strong).
+パスワードの強度を確認するには、 `VALIDATE_PASSWORD_STRENGTH()`機能を使用できます。この関数はパスワード引数を受け取り、0 (弱い) ～ 100 (強い) の整数を返します。
 
-> **Note:**
+> **注記：**
 >
-> This function evaluates the password strength based on the current password complexity policy. If the password complexity policy is changed, the same password might get different evaluation results.
+> この関数は、現在のパスワードの複雑さのポリシーに基づいてパスワードの強度を評価します。パスワードの複雑さのポリシーが変更されると、同じパスワードでも異なる評価結果が得られる可能性があります。
 
-The following example shows how to use the `VALIDATE_PASSWORD_STRENGTH()` function:
+次の例は、 `VALIDATE_PASSWORD_STRENGTH()`関数の使用方法を示しています。
 
 ```sql
 mysql> SELECT VALIDATE_PASSWORD_STRENGTH('weak');
@@ -170,29 +170,29 @@ mysql> SELECT VALIDATE_PASSWORD_STRENGTH('N0Tweak$_@123!');
 1 row in set (0.01 sec)
 ```
 
-## Password expiration policy
+## パスワードの有効期限ポリシー {#password-expiration-policy}
 
-TiDB supports configuring a password expiration policy so that users must change their passwords periodically to improve password security. You can manually make account passwords expire or establish a policy for automatic password expiration.
+TiDB は、パスワードのセキュリティを向上させるためにユーザーが定期的にパスワードを変更する必要があるように、パスワード有効期限ポリシーの構成をサポートしています。アカウントのパスワードの有効期限を手動で設定したり、パスワードの自動有効期限のポリシーを確立したりできます。
 
-The automatic password expiration policy can be set at the global level and at the account level. As a database administrator, you can establish an automatic password expiration policy at the global level, and also use an account-level policy to override the global policy.
+自動パスワード有効期限ポリシーは、グローバル レベルおよびアカウント レベルで設定できます。データベース管理者は、グローバル レベルで自動パスワード有効期限ポリシーを確立したり、アカウント レベルのポリシーを使用してグローバル ポリシーをオーバーライドしたりできます。
 
-The privileges for setting the password expiration policy are as follows:
+パスワード有効期限ポリシーを設定する権限は次のとおりです。
 
-- Database administrator with `SUPER` or `CREATE USER` privileges can manually make passwords expire.
-- Database administrator with `SUPER` or `CREATE USER` privileges can set the account-level password expiration policy.
-- Database administrator with `SUPER` or `SYSTEM_VARIABLES_ADMINR` privileges can set the global-level password expiration policy.
+-   `SUPER`または`CREATE USER`権限を持つデータベース管理者は、パスワードの有効期限を手動で設定できます。
+-   `SUPER`または`CREATE USER`権限を持つデータベース管理者は、アカウント レベルのパスワード有効期限ポリシーを設定できます。
+-   `SUPER`または`SYSTEM_VARIABLES_ADMINR`権限を持つデータベース管理者は、グローバル レベルのパスワード有効期限ポリシーを設定できます。
 
-### Manual expiration
+### 手動有効期限切れ {#manual-expiration}
 
-To manually make an account password expire, use the `CREATE USER` or `ALTER USER` statements.
+アカウントのパスワードを手動で期限切れにするには、 `CREATE USER`または`ALTER USER`ステートメントを使用します。
 
 ```sql
 ALTER USER 'test'@'localhost' PASSWORD EXPIRE;
 ```
 
-When the account password is set to expire by a database administrator, you must change the password before you can log in to TiDB. The manual expiration cannot be revoked.
+データベース管理者によってアカウントのパスワードの有効期限が設定されている場合、TiDB にログインする前にパスワードを変更する必要があります。手動有効期限は取り消すことができません。
 
-For roles created using the `CREATE ROLE` statement, since the role does not require a password, the password field for the role is empty. In such case, TiDB sets the `password_expired` attribute to `'Y'`, which means that the role's password is manually expired. The purpose of this design is to prevent the role from being unlocked and logged into TiDB with an empty password. When the role is unlocked by the `ALTER USER ... ACCOUNT UNLOCK` statement, you can log in with this account even though the password is empty. Therefore, TiDB makes the password manually expired using the `password_expired` attribute so that the user must set a valid password for the account.
+`CREATE ROLE`ステートメントを使用して作成されたロールの場合、ロールにはパスワードが必要ないため、ロールのパスワード フィールドは空です。このような場合、TiDB は`password_expired`属性を`'Y'`に設定します。これは、ロールのパスワードが手動で期限切れになることを意味します。この設計の目的は、ロールのロックが解除され、空のパスワードで TiDB にログインすることを防ぐことです。 `ALTER USER ... ACCOUNT UNLOCK`ステートメントによってロールのロックが解除されると、パスワードが空であっても、このアカウントを使用してログインできます。したがって、TiDB は`password_expired`属性を使用してパスワードを手動で期限切れにし、ユーザーがアカウントに有効なパスワードを設定する必要があるようにします。
 
 ```sql
 mysql> CREATE ROLE testrole;
@@ -207,130 +207,130 @@ mysql> SELECT user,password_expired,Account_locked FROM mysql.user WHERE user = 
 1 row in set (0.02 sec)
 ```
 
-### Automatic expiration
+### 自動有効期限切れ {#automatic-expiration}
 
-Automatic password expiration is based on the **password age** and the **password lifetime**.
+パスワードの自動有効期限は、**パスワードの有効期間**と**パスワードの有効期間**に基づいて設定されます。
 
-- Password age: the time interval from the last password change date to the current date. The time of the last password change is recorded in the `mysql.user` system table.
-- Password lifetime: the number of days the password can be used to log in to TiDB.
+-   パスワードの有効期間: 最後にパスワードを変更した日から現在の日付までの時間間隔。最後にパスワードを変更した時刻は、システム テーブル`mysql.user`に記録されます。
+-   パスワードの有効期間: TiDB へのログインにパスワードを使用できる日数。
 
-If a password is used for a longer period than it is allowed to live, the server automatically treats the password as expired.
+パスワードが有効期間を超えて使用された場合、サーバーは自動的にパスワードを期限切れとして扱います。
 
-TiDB supports automatic password expiration at the global level and at the account level.
+TiDB は、グローバル レベルおよびアカウント レベルでの自動パスワード有効期限をサポートしています。
 
-- The global level
+-   世界レベル
 
-    You can set the system variable [`default_password_lifetime`](/system-variables.md#default_password_lifetime-new-in-v650) to control the password lifetime. The default value `0` indicates that the password never expires. If this system variable is set to a positive integer `N`, it means that the password lifetime is `N` days, and you must change your password every `N` days.
+    システム変数[`default_password_lifetime`](/system-variables.md#default_password_lifetime-new-in-v650)を設定して、パスワードの有効期間を制御できます。デフォルト値`0`は、パスワードの有効期限が切れないことを示します。このシステム変数が正の整数`N`に設定されている場合、パスワードの有効期間は`N`日であり、 `N`日ごとにパスワードを変更する必要があることを意味します。
 
-    The global automatic password expiration policy applies to all accounts that do not have an account-level override.
+    グローバル自動パスワード有効期限ポリシーは、アカウント レベルの上書きがないすべてのアカウントに適用されます。
 
-    The following example establishes a global automatic password expiration policy with a password lifetime of 180 days:
+    次の例では、パスワードの有効期間が 180 日であるグローバル自動パスワード有効期限ポリシーを確立します。
 
     ```sql
     SET GLOBAL default_password_lifetime = 180;
     ```
 
-- The account level
+-   アカウントレベル
 
-    To establish an automatic password expiration policy for an individual account, use the `PASSWORD EXPIRE` option in the `CREATE USER` or `ALTER USER` statement.
+    個々のアカウントの自動パスワード有効期限ポリシーを確立するには、 `CREATE USER`または`ALTER USER`ステートメントで`PASSWORD EXPIRE`オプションを使用します。
 
-    The following examples require that the user password is changed every 90 days:
+    次の例では、ユーザー パスワードを 90 日ごとに変更する必要があります。
 
     ```sql
     CREATE USER 'test'@'localhost' PASSWORD EXPIRE INTERVAL 90 DAY;
     ALTER USER 'test'@'localhost' PASSWORD EXPIRE INTERVAL 90 DAY;
     ```
 
-    The following examples disable the automatic password expiration policy for an individual account:
+    次の例では、個々のアカウントの自動パスワード有効期限ポリシーを無効にします。
 
     ```sql
     CREATE USER 'test'@'localhost' PASSWORD EXPIRE NEVER;
     ALTER USER 'test'@'localhost' PASSWORD EXPIRE NEVER;
     ```
 
-    Remove the account-level automatic password expiration policy for a specified account so that it follows the global automatic password expiration policy:
+    指定したアカウントのアカウント レベルの自動パスワード有効期限ポリシーを削除して、グローバルな自動パスワード有効期限ポリシーに従うようにします。
 
     ```sql
     CREATE USER 'test'@'localhost' PASSWORD EXPIRE DEFAULT;
     ALTER USER 'test'@'localhost' PASSWORD EXPIRE DEFAULT;
     ```
 
-### Password expiration check mechanism
+### パスワードの有効期限チェックの仕組み {#password-expiration-check-mechanism}
 
-When a client connects to the TiDB server, the server checks whether the password is expired in the following order:
+クライアントが TiDBサーバーに接続すると、サーバーは次の順序でパスワードの有効期限が切れているかどうかを確認します。
 
-1. The server checks whether the password has been set as expired manually.
-2. If the password is not manually expired, the server checks whether the password age is longer than its configured lifetime. If so, the server treats the password as expired.
+1.  サーバーは、パスワードが手動で期限切れとして設定されているかどうかを確認します。
+2.  パスワードが手動で期限切れになっていない場合、サーバーはパスワードの有効期間が設定された有効期間より長いかどうかを確認します。有効な場合、サーバーはパスワードを期限切れとして扱います。
 
-### Handle an expired password
+### 期限切れのパスワードを処理する {#handle-an-expired-password}
 
-You can control the behavior of the TiDB server for password expiration. When a password is expired, the server either disconnects the client or restricts the client to the "sandbox mode". In a "sandbox mode", the TiDB server allows connections from the expired account. However, in such connections, the user is only allowed to reset the password.
+パスワードの有効期限に関する TiDBサーバーの動作を制御できます。パスワードの有効期限が切れると、サーバーはクライアントを切断するか、クライアントを「サンドボックス モード」に制限します。 「サンドボックス モード」では、TiDBサーバーは期限切れのアカウントからの接続を許可します。ただし、そのような接続では、ユーザーはパスワードのリセットのみを許可されます。
 
-The TiDB server can control whether to restrict the user with an expired password in the "sandbox mode". To control the behavior of the TiDB server when a password is expired, configure the [`security.disconnect-on-expired-password`](/tidb-configuration-file.md#disconnect-on-expired-password-new-in-v650) parameter in the TiDB configuration file:
+TiDBサーバーは、 「サンドボックス モード」でパスワードが期限切れになったユーザーを制限するかどうかを制御できます。パスワードの有効期限が切れたときの TiDBサーバーの動作を制御するには、TiDB 構成ファイルで[`security.disconnect-on-expired-password`](/tidb-configuration-file.md#disconnect-on-expired-password-new-in-v650)パラメーターを構成します。
 
 ```toml
 [security]
 disconnect-on-expired-password = true
 ```
 
-- If `disconnect-on-expired-password` is set to `true` (default), the server disconnects the client when the password is expired.
-- If `disconnect-on-expired-password` is set to `false`, the server enables the "sandbox mode" and allows the user to connect to the server. However, the user can only reset the password. After the password is reset, the user can execute SQL statements normally.
+-   `disconnect-on-expired-password`が`true` (デフォルト) に設定されている場合、パスワードの有効期限が切れると、サーバーはクライアントを切断します。
+-   `disconnect-on-expired-password`を`false`に設定すると、サーバーは「サンドボックス モード」を有効にし、ユーザーがサーバーに接続できるようにします。ただし、ユーザーができるのはパスワードのリセットのみです。パスワードがリセットされると、ユーザーは通常どおり SQL ステートメントを実行できるようになります。
 
-When `disconnect-on-expired-password` is enabled, if an account password is expired, TiDB rejects the connection from the account. In such cases, you can modify the password in the following ways:
+`disconnect-on-expired-password`が有効な場合、アカウントのパスワードの有効期限が切れている場合、TiDB はアカウントからの接続を拒否します。このような場合は、次の方法でパスワードを変更できます。
 
-- If the password for a normal account is expired, the administrator can change the password for the account by using SQL statements.
-- If the password for an administrator account is expired, another administrator can change the password for the account by using SQL statements.
-- If the password for an administrator account is expired and no other administrator is available to help change the password, you can use the `skip-grant-table` mechanism to change the password for the account. For details, see [Forgot password process](/user-account-management.md#forget-the-root-password).
+-   通常のアカウントのパスワードの有効期限が切れた場合、管理者は SQL ステートメントを使用してアカウントのパスワードを変更できます。
+-   管理者アカウントのパスワードの有効期限が切れた場合、別の管理者は SQL ステートメントを使用してアカウントのパスワードを変更できます。
+-   管理者アカウントのパスワードの有効期限が切れており、パスワードの変更を手伝ってくれる他の管理者がいない場合は、 `skip-grant-table`メカニズムを使用してアカウントのパスワードを変更できます。詳細は[パスワードを忘れた場合の手続き](/user-account-management.md#forget-the-root-password)を参照してください。
 
-## Password reuse policy
+## パスワード再利用ポリシー {#password-reuse-policy}
 
-TiDB can limit the reuse of previous passwords. The password reuse policy can be based on the number of password changes or time elapsed, or both.
+TiDB は、以前のパスワードの再利用を制限できます。パスワード再利用ポリシーは、パスワード変更の回数または経過時間、あるいはその両方に基づくことができます。
 
-The password reuse policy can be set at the global level and at the account level. You can establish a password reuse policy at the global level, and also use an account-level policy to override the global policy.
+パスワード再利用ポリシーは、グローバル レベルおよびアカウント レベルで設定できます。パスワード再利用ポリシーをグローバル レベルで確立したり、アカウント レベルのポリシーを使用してグローバル ポリシーをオーバーライドしたりすることもできます。
 
-TiDB records the password history for an account and limits the selection of a new password from the history:
+TiDB はアカウントのパスワード履歴を記録し、履歴からの新しいパスワードの選択を制限します。
 
-- If a password reuse policy is based on the number of password changes, a new password must not be the same as any of the specified number of most recent passwords. For example, if the minimum number of password changes is set to `3`, the new password cannot be the same as any of the previous 3 passwords.
-- If a password reuse policy is based on time elapsed, a new password must not be the same as any of the passwords used within the specified number of days. For example, if the password reuse interval is set to `60`, the new password cannot be the same as any of the passwords used within the last 60 days.
+-   パスワード再利用ポリシーがパスワードの変更回数に基づいている場合、新しいパスワードは、指定された数の最新のパスワードと同じであってはなりません。たとえば、パスワード変更の最小回数が`3`に設定されている場合、新しいパスワードは以前の 3 つのパスワードのいずれかと同じにすることはできません。
+-   パスワード再利用ポリシーが経過時間に基づいている場合、新しいパスワードは、指定された日数内に使用されたパスワードと同じであってはなりません。たとえば、パスワードの再利用間隔が`60`に設定されている場合、新しいパスワードは、過去 60 日以内に使用されたパスワードと同じにすることはできません。
 
-> **Note:**
+> **注記：**
 >
-> Empty passwords are not recorded in the password history and can be reused at any time.
+> 空のパスワードはパスワード履歴に記録されず、いつでも再利用できます。
 
-### Global-level password reuse policy
+### グローバルレベルのパスワード再利用ポリシー {#global-level-password-reuse-policy}
 
-To establish a global password reuse policy, use the [`password_history`](/system-variables.md#password_history-new-in-v650) and [`password_reuse_interval`](/system-variables.md#password_reuse_interval-new-in-v650) system variables.
+グローバルなパスワード再利用ポリシーを確立するには、 [`password_history`](/system-variables.md#password_history-new-in-v650)および[`password_reuse_interval`](/system-variables.md#password_reuse_interval-new-in-v650)システム変数を使用します。
 
-For example, to establish a global password reuse policy that prohibits the reuse of the last 6 passwords and passwords used within the last 365 days:
+たとえば、過去 6 個のパスワードと過去 365 日以内に使用されたパスワードの再利用を禁止するグローバル パスワード再利用ポリシーを確立するには、次のようにします。
 
 ```sql
 SET GLOBAL password_history = 6;
 SET GLOBAL password_reuse_interval = 365;
 ```
 
-The global password reuse policy applies to all accounts that do not have an account-level override.
+グローバル パスワード再利用ポリシーは、アカウント レベルの上書きがないすべてのアカウントに適用されます。
 
-### Account-level password reuse policy
+### アカウントレベルのパスワード再利用ポリシー {#account-level-password-reuse-policy}
 
-To establish an account-level password reuse policy, use the `PASSWORD HISTORY` and `PASSWORD REUSE INTERVAL` options in the `CREATE USER` or `ALTER USER` statement.
+アカウントレベルのパスワード再利用ポリシーを確立するには、 `CREATE USER`または`ALTER USER`ステートメントで`PASSWORD HISTORY`および`PASSWORD REUSE INTERVAL`オプションを使用します。
 
-For example:
+例えば：
 
-To prohibit the reuse of the last 5 passwords:
+最新の 5 つのパスワードの再利用を禁止するには:
 
 ```sql
 CREATE USER 'test'@'localhost' PASSWORD HISTORY 5;
 ALTER USER 'test'@'localhost' PASSWORD HISTORY 5;
 ```
 
-To prohibit the reuse of passwords used within the last 365 days:
+過去 365 日以内に使用したパスワードの再利用を禁止するには:
 
 ```sql
 CREATE USER 'test'@'localhost' PASSWORD REUSE INTERVAL 365 DAY;
 ALTER USER 'test'@'localhost' PASSWORD REUSE INTERVAL 365 DAY;
 ```
 
-To combine the two types of reuse policies, use both `PASSWORD HISTORY` and `PASSWORD REUSE INTERVAL`:
+2 種類の再利用ポリシーを組み合わせるには、 `PASSWORD HISTORY`と`PASSWORD REUSE INTERVAL`の両方を使用します。
 
 ```sql
 CREATE USER 'test'@'localhost'
@@ -341,7 +341,7 @@ ALTER USER 'test'@'localhost'
   PASSWORD REUSE INTERVAL 365 DAY;
 ```
 
-To remove the account-level password reuse policy for a specified account so that it follows the global password reuse policy:
+指定したアカウントのアカウント レベルのパスワード再利用ポリシーを削除して、グローバル パスワード再利用ポリシーに従うようにするには、次の手順を実行します。
 
 ```sql
 CREATE USER 'test'@'localhost'
@@ -352,71 +352,71 @@ ALTER USER 'test'@'localhost'
   PASSWORD REUSE INTERVAL DEFAULT;
 ```
 
-> **Note:**
+> **注記：**
 >
-> - If you set the password reuse policy multiple times, the last set value takes effect.
-> - The default value of the `PASSWORD HISTORY` and `PASSWORD REUSE INTERVAL` options is 0, which means that the reuse policy is disabled.
-> - When you modify a username, TiDB migrates the corresponding password history in the `mysql.password_history` system table from the original username to the new username.
+> -   パスワード再利用ポリシーを複数回設定すると、最後に設定した値が有効になります。
+> -   `PASSWORD HISTORY`および`PASSWORD REUSE INTERVAL`オプションのデフォルト値は 0 で、これは再利用ポリシーが無効であることを意味します。
+> -   ユーザー名を変更すると、TiDB は`mysql.password_history`システム テーブル内の対応するパスワード履歴を元のユーザー名から新しいユーザー名に移行します。
 
-## Failed-login tracking and temporary account locking policy
+## ログイン失敗の追跡と一時的なアカウント ロック ポリシー {#failed-login-tracking-and-temporary-account-locking-policy}
 
-TiDB can track the number of failed login attempts for an account. To prevent the password from being cracked by brute force, TiDB can lock the account after a specified number of failed login attempts.
+TiDB は、アカウントのログイン試行の失敗回数を追跡できます。パスワードがブルート フォースによって解読されるのを防ぐために、TiDB はログイン試行が指定回数失敗した後にアカウントをロックできます。
 
-> **Note:**
+> **注記：**
 >
-> - TiDB only supports failed-login tracking and temporary account locking at the account level, but not at the global level.
-> - Failed-login means that the client fails to provide the correct password during the connection attempt, and does not include connection failures due to unknown users or network issues.
-> - When you enable the failed-login tracking and temporary account locking for an account, the account is subject to additional checks when the account attempts to log in. This affects the performance of the login operation, especially in high-concurrency login scenarios.
+> -   TiDB は、失敗したログインの追跡とアカウント レベルでの一時的なアカウント ロックのみをサポートしており、グローバル レベルではサポートしていません。
+> -   ログイン失敗とは、クライアントが接続試行中に正しいパスワードの入力に失敗したことを意味し、不明なユーザーやネットワークの問題による接続失敗は含まれません。
+> -   アカウントの失敗したログインの追跡と一時的なアカウント ロックを有効にすると、アカウントがログインを試行するときに、そのアカウントは追加のチェックの対象になります。これは、特に同時実行性の高いログイン シナリオで、ログイン操作のパフォーマンスに影響します。
 
-### Configure the login failure tracking policy
+### ログイン失敗追跡ポリシーを構成する {#configure-the-login-failure-tracking-policy}
 
-You can configure the number of failed login attempts and the lock time for each account by using the `FAILED_LOGIN_ATTEMPTS` and `PASSWORD_LOCK_TIME` options in the `CREATE USER` or `ALTER USER` statement. The available value options are as follows:
+`CREATE USER`または`ALTER USER`ステートメントの`FAILED_LOGIN_ATTEMPTS`および`PASSWORD_LOCK_TIME`オプションを使用して、ログイン試行の失敗回数と各アカウントのロック時間を構成できます。使用可能な値のオプションは次のとおりです。
 
-- `FAILED_LOGIN_ATTEMPTS`: N. The account is temporarily locked after `N` consecutive login failures. The value of N ranges from 0 to 32767.
-- `PASSWORD_LOCK_TIME`: N | UNBOUNDED.
-    - N means that the account will be temporarily locked for `N` days after consecutive failed login attempts. The value of N ranges from 0 to 32767.
-    - `UNBOUNDED` means that the lock time is unlimited and the account must be manually unlocked. The value of N ranges from 0 to 32767.
+-   `FAILED_LOGIN_ATTEMPTS` : N。2 `N`連続してログインに失敗すると、アカウントは一時的にロックされます。 N の値の範囲は 0 ～ 32767 です。
+-   `PASSWORD_LOCK_TIME` : N |無制限。
+    -   N は、ログイン試行が連続して失敗した後、アカウントが`N`日間一時的にロックされることを意味します。 N の値の範囲は 0 ～ 32767 です。
+    -   `UNBOUNDED` 、ロック時間が無制限で、アカウントのロックを手動で解除する必要があることを意味します。 N の値の範囲は 0 ～ 32767 です。
 
-> **Note:**
+> **注記：**
 >
-> - You can configure only `FAILED_LOGIN_ATTEMPTS` or `PASSWORD_LOCK_TIME` in a single SQL statement. In this case, the account locking does not take effect.
-> - The account locking takes effect only when both `FAILED_LOGIN_ATTEMPTS` and `PASSWORD_LOCK_TIME` are not 0.
+> -   1 つの SQL ステートメントで設定できるのは`FAILED_LOGIN_ATTEMPTS`または`PASSWORD_LOCK_TIME`だけです。この場合、アカウントのロックは有効になりません。
+> -   アカウントのロックは、 `FAILED_LOGIN_ATTEMPTS`と`PASSWORD_LOCK_TIME`が両方とも 0 でない場合にのみ有効になります。
 
-You can configure the account locking policy as follows:
+アカウント ロック ポリシーは次のように構成できます。
 
-Create a user and configure the account locking policy. When the password is entered incorrectly for 3 consecutive times, the account will be temporarily locked for 3 days:
+ユーザーを作成し、アカウント ロック ポリシーを構成します。パスワードを 3 回連続で間違えると、アカウントは 3 日間一時的にロックされます。
 
 ```sql
 CREATE USER 'test1'@'localhost' IDENTIFIED BY 'password' FAILED_LOGIN_ATTEMPTS 3 PASSWORD_LOCK_TIME 3;
 ```
 
-Modify the account locking policy for an existing user. When the password is entered incorrectly for 4 consecutive times, the account will be locked indefinitely until it is manually unlocked:
+既存のユーザーのアカウント ロック ポリシーを変更します。パスワードを 4 回連続して間違って入力すると、アカウントは手動でロックを解除するまで無期限にロックされます。
 
 ```sql
 ALTER USER 'test2'@'localhost' FAILED_LOGIN_ATTEMPTS 4 PASSWORD_LOCK_TIME UNBOUNDED;
 ```
 
-Disable the account locking policy for an existing user:
+既存のユーザーのアカウント ロック ポリシーを無効にします。
 
 ```sql
 ALTER USER 'test3'@'localhost' FAILED_LOGIN_ATTEMPTS 0 PASSWORD_LOCK_TIME 0;
 ```
 
-### Unlock the locked account
+### ロックされたアカウントのロックを解除する {#unlock-the-locked-account}
 
-In the following scenarios, the count of consecutive password errors can be reset:
+次のシナリオでは、連続したパスワード エラーの数をリセットできます。
 
-- When you execute the `ALTER USER ... ACCOUNT UNLOCK` statement.
-- When you log in successfully.
+-   `ALTER USER ... ACCOUNT UNLOCK`ステートメントを実行するとき。
+-   ログインに成功したとき。
 
-In the following scenarios, the locked account can be unlocked:
+次のシナリオでは、ロックされたアカウントのロックを解除できます。
 
-- When the lock time ends, the automatic lock flag of the account will be reset at the next login attempt.
-- When you execute the `ALTER USER ... ACCOUNT UNLOCK` statement.
+-   ロック時間が終了すると、次回ログイン時にアカウントの自動ロックフラグがリセットされます。
+-   `ALTER USER ... ACCOUNT UNLOCK`ステートメントを実行するとき。
 
-> **Note:**
+> **注記：**
 >
-> When an account is locked due to consecutive login failures, modifying the account locking policy has the following effects:
+> 連続したログイン失敗によりアカウントがロックされた場合、アカウント ロック ポリシーを変更すると次のような影響があります。
 >
-> - When you modify `FAILED_LOGIN_ATTEMPTS`, the lock status of the account does not change. The modified `FAILED_LOGIN_ATTEMPTS` takes effect after the account is unlocked and attempts to log in again.
-> - When you modify `PASSWORD_LOCK_TIME`, the lock status of the account does not change. The modified `PASSWORD_LOCK_TIME` takes effect when the account attempts to log in again. At that time, TiDB checks whether the new lock time has reached. If yes, TiDB will unlock the user.
+> -   `FAILED_LOGIN_ATTEMPTS`を変更しても、アカウントのロック状態は変わりません。変更された`FAILED_LOGIN_ATTEMPTS`アカウントのロックが解除され、再度ログインを試行した後に有効になります。
+> -   `PASSWORD_LOCK_TIME`を変更しても、アカウントのロック状態は変わりません。変更された`PASSWORD_LOCK_TIME`アカウントが再度ログインしようとしたときに有効になります。このとき、TiDB は新しいロック時間に達したかどうかを確認します。 「はい」の場合、TiDB はユーザーのロックを解除します。

@@ -2,96 +2,96 @@
 title: TiDB 5.0.1 Release Notes
 ---
 
-# TiDB 5.0.1 Release Notes
+# TiDB 5.0.1 リリースノート {#tidb-5-0-1-release-notes}
 
-Release date: April 24, 2021
+発売日：2021年4月24日
 
-TiDB version: 5.0.1
+TiDB バージョン: 5.0.1
 
-## Compatibility change
+## 互換性の変更 {#compatibility-change}
 
-- The default value of the `committer-concurrency` configuration item is changed from `16` to `128`.
+-   `committer-concurrency`設定項目のデフォルト値が`16`から`128`に変更されます。
 
-## Improvements
+## 改善点 {#improvements}
 
-+ TiDB
+-   TiDB
 
-    - Support the built-in function `VITESS_HASH()` [#23915](https://github.com/pingcap/tidb/pull/23915)
+    -   組み込み関数のサポート`VITESS_HASH()` [#23915](https://github.com/pingcap/tidb/pull/23915)
 
-+ TiKV
+-   TiKV
 
-    - Use `zstd` to compress the Region snapshot [#10005](https://github.com/tikv/tikv/pull/10005)
+    -   `zstd`を使用してリージョンスナップショット[#10005](https://github.com/tikv/tikv/pull/10005)を圧縮します。
 
-+ PD
+-   PD
 
-    - Modify the Region score calculator to better satisfy isomerous stores [#3605](https://github.com/pingcap/pd/pull/3605)
-    - Avoid unexpected statistics after adding the `scatter region` scheduler [#3602](https://github.com/pingcap/pd/pull/3602)
+    -   異性ストア[#3605](https://github.com/pingcap/pd/pull/3605)をより適切に満たすようにリージョンスコア計算ツールを変更します。
+    -   `scatter region`スケジューラ[#3602](https://github.com/pingcap/pd/pull/3602)を追加した後の予期しない統計を回避します
 
-+ Tools
+-   ツール
 
-    + Backup & Restore (BR)
+    -   バックアップと復元 (BR)
 
-        - Remove some misleading information from the summary log [#1009](https://github.com/pingcap/br/pull/1009)
+        -   概要ログ[#1009](https://github.com/pingcap/br/pull/1009)から誤解を招く情報を削除します。
 
-## Bug Fixes
+## バグの修正 {#bug-fixes}
 
-+ TiDB
+-   TiDB
 
-    - Fix the issue that the execution result of project elimination might be wrong when the projection result is empty [#24093](https://github.com/pingcap/tidb/pull/24093)
-    - Fix the issue of wrong query results when a column contains `NULL` values in some cases [#24063](https://github.com/pingcap/tidb/pull/24063)
-    - Forbid generating MPP plans when the scan contains virtual columns [#24058](https://github.com/pingcap/tidb/pull/24058)
-    - Fix the wrong reuse of `PointGet` and `TableDual` in Plan Cache [#24043](https://github.com/pingcap/tidb/pull/24043)
-    - Fix the error that occurs when the optimizer builds the `IndexMerge` plan for clustered indexes [#24042](https://github.com/pingcap/tidb/pull/24042)
-    - Fix the type inference of the BIT-type errors [#24027](https://github.com/pingcap/tidb/pull/24027)
-    - Fix the issue that some optimizer hints do not take effect when the `PointGet` operator exists [#23685](https://github.com/pingcap/tidb/pull/23685)
-    - Fix the issue that DDL operations might fail when rolling back due to an error [#24080](https://github.com/pingcap/tidb/pull/24080)
-    - Fix the issue that the index range of the binary literal constant is incorrectly built [#24041](https://github.com/pingcap/tidb/pull/24041)
-    - Fix the potential wrong results of the `IN` clause in some cases [#24023](https://github.com/pingcap/tidb/pull/24023)
-    - Fix the wrong results of some string functions  [#23879](https://github.com/pingcap/tidb/pull/23879)
-    - Users now need both `INSERT` and `DELETE` privileges on a table to perform `REPLACE` operations [#23939](https://github.com/pingcap/tidb/pull/23939)
-    - Fix the performance regression when executing the point query [#24070](https://github.com/pingcap/tidb/pull/24070)
-    - Fix the wrong `TableDual` plans caused by incorrectly comparing binaries and bytes [#23918](https://github.com/pingcap/tidb/pull/23918)
+    -   投影結果が空の場合、プロジェクトの削除の実行結果が正しくない場合がある問題を修正[#24093](https://github.com/pingcap/tidb/pull/24093)
+    -   列に`NULL`値が含まれる場合に、場合によっては間違ったクエリ結果が表示される問題を修正します[#24063](https://github.com/pingcap/tidb/pull/24063)
+    -   スキャンに仮想列が含まれる場合、MPP プランの生成を禁止する[#24058](https://github.com/pingcap/tidb/pull/24058)
+    -   プラン キャッシュ[#24043](https://github.com/pingcap/tidb/pull/24043)の`PointGet`と`TableDual`の誤った再利用を修正
+    -   オプティマイザーがクラスター化インデックス`IndexMerge`のプランを構築するときに発生するエラーを修正します[#24042](https://github.com/pingcap/tidb/pull/24042)
+    -   BIT 型エラーの型推論を修正[#24027](https://github.com/pingcap/tidb/pull/24027)
+    -   `PointGet`演算子が存在する場合、一部のオプティマイザ ヒントが有効にならない問題を修正[#23685](https://github.com/pingcap/tidb/pull/23685)
+    -   ロールバック時にエラー[#24080](https://github.com/pingcap/tidb/pull/24080)が原因で DDL 操作が失敗する可能性がある問題を修正します。
+    -   バイナリリテラル定数のインデックス範囲が正しく構築されない問題を修正[#24041](https://github.com/pingcap/tidb/pull/24041)
+    -   場合によっては`IN`節の誤った結果が生じる可能性がある問題を修正[#24023](https://github.com/pingcap/tidb/pull/24023)
+    -   一部の文字列関数の間違った結果を修正[#23879](https://github.com/pingcap/tidb/pull/23879)
+    -   ユーザーが`REPLACE`操作を実行するには、テーブルに対する`INSERT`と`DELETE`両方の権限が必要になる[#23939](https://github.com/pingcap/tidb/pull/23939)
+    -   ポイント クエリ[#24070](https://github.com/pingcap/tidb/pull/24070)を実行するときのパフォーマンスの低下を修正しました。
+    -   バイナリとバイト[#23918](https://github.com/pingcap/tidb/pull/23918)の誤った比較によって引き起こされる間違った`TableDual`プランを修正します。
 
-+ TiKV
+-   TiKV
 
-    - Fix the issue that the coprocessor fails to properly handle the signed or unsigned integer types in the `IN` expression [#10018](https://github.com/tikv/tikv/pull/10018)
-    - Fix the issue of many empty Regions after batch ingesting SST files [#10015](https://github.com/tikv/tikv/pull/10015)
-    - Fix the potential panic that occurs when the input of `cast_string_as_time` is invalid UTF-8 bytes [#9995](https://github.com/tikv/tikv/pull/9995)
-    - Fix a bug that TiKV cannot start up after the file dictionary file is damaged [#9992](https://github.com/tikv/tikv/pull/9992)
+    -   コプロセッサが`IN`式[#10018](https://github.com/tikv/tikv/pull/10018)の符号付き整数型または符号なし整数型を適切に処理できない問題を修正します。
+    -   SST ファイルのバッチ取り込み後に多数の空のリージョンが発生する問題を修正[#10015](https://github.com/tikv/tikv/pull/10015)
+    -   `cast_string_as_time`の入力が無効な UTF-8 バイト[#9995](https://github.com/tikv/tikv/pull/9995)である場合に発生する潜在的なpanicを修正しました。
+    -   ファイル辞書ファイルが破損するとTiKVが起動できなくなるバグを修正[#9992](https://github.com/tikv/tikv/pull/9992)
 
-+ TiFlash
+-   TiFlash
 
-    - Fix the issue that the storage engine fails to remove the data of some ranges
-    - Fix the issue of incorrect results when casting the time type to the integer type
-    - Fix a bug that the `receiver` cannot find corresponding tasks within 10 seconds
-    - Fix the issue that there might be invalid iterators in `cancelMPPQuery`
-    - Fix a bug that the behavior of the `bitwise` operator is different from that of TiDB
-    - Fix the alert issue caused by overlapping ranges when using the `prefix key`
-    - Fix the issue of incorrect results when casting the string type to the integer type
-    - Fix the issue that consecutive and fast writes might make TiFlash out of memory
-    - Fix the issue that duplicated column names will make TiFlash raise errors
-    - Fix the issue that TiFlash fails to parse MPP plans
-    - Fix the potential issue that the exception of null pointer might be raised during the table GC
-    - Fix the TiFlash panic issue that occurs when writing data to dropped tables
-    - Fix the issue that TiFlash might panic during BR restore
+    -   storageエンジンが一部の範囲のデータを削除できない問題を修正
+    -   時刻型を整数型にキャストするときに誤った結果が表示される問題を修正
+    -   `receiver`が10秒以内に対応するタスクを見つけられないバグを修正
+    -   `cancelMPPQuery`に無効な反復子が存在する可能性がある問題を修正
+    -   `bitwise`オペレーターの挙動がTiDBと異なるバグを修正
+    -   `prefix key`を使用するときに範囲が重複することによって引き起こされるアラートの問題を修正します。
+    -   文字列型を整数型にキャストするときに誤った結果が発生する問題を修正
+    -   連続した高速書き込みによりTiFlash がメモリ不足になる可能性がある問題を修正
+    -   列名が重複するとTiFlash でエラーが発生する問題を修正
+    -   TiFlash がMPP プランの解析に失敗する問題を修正
+    -   テーブル GC 中に null ポインターの例外が発生する可能性がある潜在的な問題を修正
+    -   ドロップされたテーブルにデータを書き込むときに発生するTiFlashpanicの問題を修正
+    -   BR復元中にTiFlash がpanicになる可能性がある問題を修正
 
-+ Tools
+-   ツール
 
-    + TiDB Lightning
+    -   TiDB Lightning
 
-        - Fix the issue of the inaccurate table count in the progress log during the import [#1005](https://github.com/pingcap/br/pull/1005)
+        -   インポート中の進行状況ログ内のテーブル数が不正確になる問題を修正[#1005](https://github.com/pingcap/br/pull/1005)
 
-    + Backup & Restore (BR)
+    -   バックアップと復元 (BR)
 
-        - Fix a bug that the actual backup speed exceeds the `--ratelimit` limit [#1026](https://github.com/pingcap/br/pull/1026)
-        - Fix the issue of backup interruption caused by the failure of a few TiKV nodes [#1019](https://github.com/pingcap/br/pull/1019)
-        - Fix the issue of the inaccurate table count in the progress log during TiDB Lightning's import [#1005](https://github.com/pingcap/br/pull/1005)
+        -   実際のバックアップ速度が`--ratelimit`制限[#1026](https://github.com/pingcap/br/pull/1026)を超えるバグを修正
+        -   いくつかの TiKV ノードの障害によって引き起こされるバックアップ中断の問題を修正します[#1019](https://github.com/pingcap/br/pull/1019)
+        -   TiDB Lightning のインポート[#1005](https://github.com/pingcap/br/pull/1005)中に進行状況ログに表示されるテーブル数が不正確になる問題を修正しました。
 
-    + TiCDC
+    -   TiCDC
 
-        - Fix the concurrency issue in Unified Sorter and filter the unhelpful error messages [#1678](https://github.com/pingcap/tiflow/pull/1678)
-        - Fix a bug that the creation of redundant directories might interrupt the replication with MinIO [#1672](https://github.com/pingcap/tiflow/pull/1672)
-        - Set the default value of the `explicit_defaults_for_timestamp` session variable to `ON` to make the MySQL 5.7 downstream keep the same behavior with the upstream TiDB [#1659](https://github.com/pingcap/tiflow/pull/1659)
-        - Fix the issue that the incorrect handling of `io.EOF` might cause replication interruption [#1648](https://github.com/pingcap/tiflow/pull/1648)
-        - Correct the TiKV CDC endpoint CPU metric in the TiCDC dashboard [#1645](https://github.com/pingcap/tiflow/pull/1645)
-        - Increase `defaultBufferChanSize` to avoid replication blocking in some cases [#1632](https://github.com/pingcap/tiflow/pull/1632)
+        -   統合ソーターの同時実行の問題を修正し、役に立たないエラー メッセージをフィルタリングします[#1678](https://github.com/pingcap/tiflow/pull/1678)
+        -   冗長ディレクトリの作成により MinIO [#1672](https://github.com/pingcap/tiflow/pull/1672)でのレプリケーションが中断される可能性があるバグを修正
+        -   `explicit_defaults_for_timestamp`セッション変数のデフォルト値を`ON`に設定して、 MySQL 5.7ダウンストリームがアップストリームの TiDB [#1659](https://github.com/pingcap/tiflow/pull/1659)と同じ動作を維持できるようにします。
+        -   `io.EOF`の処理を​​誤るとレプリケーションが中断される可能性がある問題を修正[#1648](https://github.com/pingcap/tiflow/pull/1648)
+        -   TiCDC ダッシュボード[#1645](https://github.com/pingcap/tiflow/pull/1645)で TiKV CDC エンドポイントの CPU メトリックを修正します。
+        -   場合によってはレプリケーションのブロックを避けるために`defaultBufferChanSize`を増やします[#1632](https://github.com/pingcap/tiflow/pull/1632)

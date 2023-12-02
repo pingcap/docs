@@ -3,19 +3,19 @@ title: Migrate Only Incremental Data from MySQL-Compatible Databases to TiDB Clo
 summary: Learn how to migrate incremental data from MySQL-compatible databases hosted in Amazon Aurora MySQL, Amazon Relational Database Service (RDS), Google Cloud SQL for MySQL, or a local MySQL instance to TiDB Cloud using Data Migration.
 ---
 
-# Migrate Only Incremental Data from MySQL-Compatible Databases to TiDB Cloud Using Data Migration
+# データ移行を使用して、MySQL 互換データベースからTiDB Cloudに増分データのみを移行する {#migrate-only-incremental-data-from-mysql-compatible-databases-to-tidb-cloud-using-data-migration}
 
-This document describes how to migrate incremental data from a MySQL-compatible database on a cloud provider (Amazon Aurora MySQL, Amazon Relational Database Service (RDS), or Google Cloud SQL for MySQL) or self-hosted source database to TiDB Cloud using the Data Migration feature of the TiDB Cloud console.
+このドキュメントでは、クラウド プロバイダー (Amazon Aurora MySQL、Amazon Relational Database Service (RDS)、または Google Cloud SQL for MySQL) 上の MySQL 互換データベース、またはセルフホスト型ソース データベースから、データを使用して増分データをTiDB Cloudに移行する方法について説明します。 TiDB Cloudコンソールの移行機能。
 
-For instructions about how to migrate existing data or both existing data and incremental data, see [Migrate MySQL-Compatible Databases to TiDB Cloud Using Data Migration](/tidb-cloud/migrate-from-mysql-using-data-migration.md).
+既存のデータ、または既存のデータと増分データの両方を移行する方法については、 [データ移行を使用して MySQL 互換データベースをTiDB Cloudに移行する](/tidb-cloud/migrate-from-mysql-using-data-migration.md)を参照してください。
 
-## Limitations
+## 制限事項 {#limitations}
 
-> **Note**:
+> **注記**：
 >
-> This section only includes limitations about incremental data migration. It is recommended that you also read the general limitations. See [Limitations](/tidb-cloud/migrate-from-mysql-using-data-migration.md#limitations).
+> このセクションには、増分データ移行に関する制限のみが含まれています。一般的な制限事項も読むことをお勧めします。 [制限事項](/tidb-cloud/migrate-from-mysql-using-data-migration.md#limitations)を参照してください。
 
-- If the target table is not yet created in the target database, the migration job will report an error as follows and fail. In this case, you need to manually create the target table and then retry the migration job.
+-   ターゲット テーブルがターゲット データベースにまだ作成されていない場合、移行ジョブは次のようなエラーを報告し、失敗します。この場合、ターゲットテーブルを手動で作成してから、移行ジョブを再試行する必要があります。
 
     ```sql
     startLocation: [position: (mysql_bin.000016, 5122), gtid-set:
@@ -26,60 +26,60 @@ For instructions about how to migrate existing data or both existing data and in
     tracker Raw Cause: Error 1146: Table 'zm.table1' doesn't exist
     ```
 
-- If some rows are deleted or updated in the upstream and there are no corresponding rows in the downstream, the migration job will detect that there are no rows available for deletion or update when replicating the `DELETE` and `UPDATE` DML operations from the upstream.
+-   一部の行がアップストリームで削除または更新され、ダウンストリームに対応する行がない場合、移行ジョブは、アップストリームから`DELETE`および`UPDATE` DML 操作をレプリケートするときに、削除または更新に使用できる行がないことを検出します。
 
-If you specify GTID as the start position to migrate incremental data, note the following limitations:
+増分データを移行する開始位置として GTID を指定する場合は、次の制限事項に注意してください。
 
-- Make sure that the GTID mode is enabled in the source database.
-- If the source database is MySQL, the MySQL version must be 5.6 or later, and the storage engine must be InnoDB.
-- If the migration job connects to a secondary database in the upstream, the `REPLICATE CREATE TABLE ... SELECT` events cannot be migrated. This is because the statement will be split into two transactions (`CREATE TABLE` and `INSERT`) that are assigned the same GTID. As a result, the `INSERT` statement will be ignored by the secondary database.
+-   GTID モードがソース データベースで有効になっていることを確認してください。
+-   ソース データベースが MySQL の場合、MySQL バージョンは 5.6 以降、storageエンジンは InnoDB である必要があります。
+-   移行ジョブがアップストリームのセカンダリ データベースに接続する場合、 `REPLICATE CREATE TABLE ... SELECT`イベントは移行できません。これは、ステートメントが同じ GTID が割り当てられる 2 つのトランザクション ( `CREATE TABLE`と`INSERT` ) に分割されるためです。その結果、 `INSERT`ステートメントはセカンダリ データベースによって無視されます。
 
-## Prerequisites
+## 前提条件 {#prerequisites}
 
-> **Note**:
+> **注記**：
 >
-> This section only includes prerequisites about incremental data migration. It is recommended that you also read the [general prerequisites](/tidb-cloud/migrate-from-mysql-using-data-migration.md#prerequisites).
+> このセクションには、増分データ移行に関する前提条件のみが含まれています。 [一般的な前提条件](/tidb-cloud/migrate-from-mysql-using-data-migration.md#prerequisites)も併せて読むことをお勧めします。
 
-If you want to use GTID to specify the start position, make sure that the GTID is enabled in the source database. The operations vary depending on the database type.
+GTID を使用して開始位置を指定する場合は、ソース データベースで GTID が有効になっていることを確認してください。データベースの種類によって操作が異なります。
 
-### For Amazon RDS and Amazon Aurora MySQL
+### Amazon RDS および Amazon Aurora MySQL の場合 {#for-amazon-rds-and-amazon-aurora-mysql}
 
-For Amazon RDS and Amazon Aurora MySQL, you need to create a new modifiable parameter group (that is, not the default parameter group) and then modify the following parameters in the parameter group and restart the instance application.
+Amazon RDS および Amazon Aurora MySQL の場合は、新しい変更可能なパラメータ グループ (つまり、デフォルトのパラメータ グループではない) を作成し、パラメータ グループ内の次のパラメータを変更して、インスタンス アプリケーションを再起動する必要があります。
 
-- `gtid_mode`
-- `enforce_gtid_consistency`
+-   `gtid_mode`
+-   `enforce_gtid_consistency`
 
-You can check if the GTID mode has been successfully enabled by executing the following SQL statement:
+次の SQL ステートメントを実行すると、GTID モードが正常に有効になったかどうかを確認できます。
 
 ```sql
 SHOW VARIABLES LIKE 'gtid_mode';
 ```
 
-If the result is `ON` or `ON_PERMISSIVE`, the GTID mode is successfully enabled.
+結果が`ON`または`ON_PERMISSIVE`の場合、GTID モードは正常に有効になっています。
 
-For more information, see [Parameters for GTID-based replication](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/mysql-replication-gtid.html#mysql-replication-gtid.parameters).
+詳細については、 [GTID ベースのレプリケーションのパラメーター](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/mysql-replication-gtid.html#mysql-replication-gtid.parameters)を参照してください。
 
-### For Google Cloud SQL for MySQL
+### Google Cloud SQL for MySQL の場合 {#for-google-cloud-sql-for-mysql}
 
-The GTID mode is enabled for Google Cloud SQL for MySQL by default. You can check if the GTID mode has been successfully enabled by executing the following SQL statement:
+Google Cloud SQL for MySQL では、GTID モードがデフォルトで有効になっています。次の SQL ステートメントを実行すると、GTID モードが正常に有効になったかどうかを確認できます。
 
 ```sql
 SHOW VARIABLES LIKE 'gtid_mode';
 ```
 
-If the result is `ON` or `ON_PERMISSIVE`, the GTID mode is successfully enabled.
+結果が`ON`または`ON_PERMISSIVE`の場合、GTID モードは正常に有効になっています。
 
-### For a self-hosted MySQL instance
+### セルフホスト型 MySQL インスタンスの場合 {#for-a-self-hosted-mysql-instance}
 
-> **Note**:
+> **注記**：
 >
-> The exact steps and commands might vary depending on the MySQL version and configuration. Make sure that you understand the impact of enabling GTID and that you have properly tested and verified it in a non-production environment before performing this action.
+> 正確な手順とコマンドは、MySQL のバージョンと構成によって異なる場合があります。このアクションを実行する前に、GTID を有効にすることによる影響を理解し、非運用環境で GTID を適切にテストおよび検証していることを確認してください。
 
-To enable the GTID mode for a self-hosted MySQL instance, follow these steps:
+セルフホスト型 MySQL インスタンスの GTID モードを有効にするには、次の手順に従います。
 
-1. Connect to the MySQL server using a MySQL client with the appropriate privileges.
+1.  適切な権限を持つ MySQLサーバーを使用して MySQL サーバーに接続します。
 
-2. Execute the following SQL statements to enable the GTID mode:
+2.  次の SQL ステートメントを実行して、GTID モードを有効にします。
 
     ```sql
     -- Enable the GTID mode
@@ -92,133 +92,133 @@ To enable the GTID mode for a self-hosted MySQL instance, follow these steps:
     RESET MASTER;
     ```
 
-3. Restart the MySQL server to ensure that the configuration changes take effect.
+3.  MySQLサーバーを再起動して、構成の変更を確実に有効にします。
 
-4. Check if the GTID mode has been successfully enabled by executing the following SQL statement:
+4.  次の SQL ステートメントを実行して、GTID モードが正常に有効になったかどうかを確認します。
 
     ```sql
     SHOW VARIABLES LIKE 'gtid_mode';
     ```
 
-    If the result is `ON` or `ON_PERMISSIVE`, the GTID mode is successfully enabled.
+    結果が`ON`または`ON_PERMISSIVE`の場合、GTID モードは正常に有効になっています。
 
-## Step 1: Go to the **Data Migration** page
+## ステップ 1:<strong>データ移行</strong>ページに移動する {#step-1-go-to-the-strong-data-migration-strong-page}
 
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、プロジェクトの[**クラスター**](https://tidbcloud.com/console/clusters)ページに移動します。
 
-    > **Tip:**
+    > **ヒント：**
     >
-    > If you have multiple projects, you can click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner and switch to another project.
+    > 複数のプロジェクトがある場合は、<mdsvgicon name="icon-left-projects">左下隅の をクリックして、別のプロジェクトに切り替えます。</mdsvgicon>
 
-2. Click the name of your target cluster to go to its overview page, and then click **Data Migration** in the left navigation pane.
+2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[データ移行]**をクリックします。
 
-3. On the **Data Migration** page, click **Create Migration Job** in the upper-right corner. The **Create Migration Job** page is displayed.
+3.  **[データ移行]**ページで、右上隅にある**[移行ジョブの作成]**をクリックします。 **「移行ジョブの作成」**ページが表示されます。
 
-## Step 2: Configure the source and target connection
+## ステップ 2: ソース接続とターゲット接続を構成する {#step-2-configure-the-source-and-target-connection}
 
-On the **Create Migration Job** page, configure the source and target connection.
+**[移行ジョブの作成]**ページで、ソース接続とターゲット接続を構成します。
 
-1. Enter a job name, which must start with a letter and must be less than 60 characters. Letters (A-Z, a-z), numbers (0-9), underscores (_), and hyphens (-) are acceptable.
+1.  ジョブ名を入力します。ジョブ名は文字で始まり、60 文字未満である必要があります。文字 (A ～ Z、az)、数字 (0 ～ 9)、アンダースコア (_)、およびハイフン (-) を使用できます。
 
-2. Fill in the source connection profile.
+2.  ソース接続プロファイルを入力します。
 
-   - **Data source**: the data source type.
-   - **Region**: the region of the data source, which is required for cloud databases only.
-   - **Connectivity method**: the connection method for the data source. Currently, you can choose public IP, VPC Peering, or Private Link according to your connection method.
-   - **Hostname or IP address** (for public IP and VPC Peering): the hostname or IP address of the data source.
-   - **Service Name** (for Private Link): the endpoint service name.
-   - **Port**: the port of the data source.
-   - **Username**: the username of the data source.
-   - **Password**: the password of the username.
-   - **SSL/TLS**: if you enable SSL/TLS, you need to upload the certificates of the data source, including any of the following:
-        - only the CA certificate
-        - the client certificate and client key
-        - the CA certificate, client certificate and client key
+    -   **データ ソース**: データ ソースの種類。
+    -   **リージョン**: データ ソースのリージョン。クラウド データベースにのみ必要です。
+    -   **接続方法**: データ ソースの接続方法。現在、接続方法に応じてパブリック IP、VPC ピアリング、またはプライベート リンクを選択できます。
+    -   **ホスト名または IP アドレス**(パブリック IP および VPC ピアリングの場合): データ ソースのホスト名または IP アドレス。
+    -   **サービス名**(Private Link の場合): エンドポイント サービス名。
+    -   **ポート**: データ ソースのポート。
+    -   **ユーザー名**: データ ソースのユーザー名。
+    -   **パスワード**: ユーザー名のパスワード。
+    -   **SSL/TLS** : SSL/TLS を有効にする場合は、次のいずれかを含むデータ ソースの証明書をアップロードする必要があります。
+        -   CA証明書のみ
+        -   クライアント証明書とクライアントキー
+        -   CA証明書、クライアント証明書、クライアントキー
 
-3. Fill in the target connection profile.
+3.  ターゲット接続プロファイルを入力します。
 
-   - **Username**: enter the username of the target cluster in TiDB Cloud.
-   - **Password**: enter the password of the TiDB Cloud username.
+    -   **ユーザー名**: TiDB Cloudのターゲットクラスターのユーザー名を入力します。
+    -   **パスワード**: TiDB Cloudユーザー名のパスワードを入力します。
 
-4. Click **Validate Connection and Next** to validate the information you have entered.
+4.  **「接続を検証して次へ」**をクリックして、入力した情報を検証します。
 
-5. Take action according to the message you see:
+5.  表示されるメッセージに従ってアクションを実行します。
 
-    - If you use Public IP or VPC Peering, you need to add the Data Migration service's IP addresses to the IP Access List of your source database and firewall (if any).
-    - If you use AWS Private Link, you are prompted to accept the endpoint request. Go to the [AWS VPC console](https://us-west-2.console.aws.amazon.com/vpc/home), and click **Endpoint services** to accept the endpoint request.
+    -   パブリック IP または VPC ピアリングを使用する場合は、ソース データベースとファイアウォール (存在する場合) の IP アクセス リストにデータ移行サービスの IP アドレスを追加する必要があります。
+    -   AWS Private Link を使用する場合は、エンドポイント リクエストを受け入れるように求められます。 [AWS VPC コンソール](https://us-west-2.console.aws.amazon.com/vpc/home)に移動し、 **「エンドポイント サービス」**をクリックしてエンドポイント要求を受け入れます。
 
-## Step 3: Choose migration job type
+## ステップ 3: 移行ジョブの種類を選択する {#step-3-choose-migration-job-type}
 
-To migrate only the incremental data of the source database to TiDB Cloud, select **Incremental data migration** and do not select **Existing data migration**. In this way, the migration job only migrates ongoing changes of the source database to TiDB Cloud.
+ソース データベースの増分データのみをTiDB Cloudに移行するには、 **[増分データ移行]**を選択し、 **[既存のデータ移行]**を選択しないでください。このように、移行ジョブは、ソース データベースの進行中の変更のみをTiDB Cloudに移行します。
 
-In the **Start Position** area, you can specify one of the following types of start positions for incremental data migration:
+**「開始位置」**領域では、増分データ移行の開始位置の次のタイプのいずれかを指定できます。
 
-- The time when the incremental migration job starts
-- GTID
-- Binlog file name and position
+-   増分移行ジョブが開始される時刻
+-   GTID
+-   Binlogファイルの名前と位置
 
-Once a migration job starts, you cannot change the start position.
+移行ジョブが開始されると、開始位置を変更することはできません。
 
-### The time when the incremental migration job starts
+### 増分移行ジョブが開始される時刻 {#the-time-when-the-incremental-migration-job-starts}
 
-If you select this option, the migration job will only migrate the incremental data that is generated in the source database after the migration job starts.
+このオプションを選択した場合、移行ジョブは、移行ジョブの開始後にソース データベースで生成された増分データのみを移行します。
 
-### Specify GTID
+### GTIDの指定 {#specify-gtid}
 
-Select this option to specify the GTID of the source database, for example, `3E11FA47-71CA-11E1-9E33-C80AA9429562:1-23`. The migration job will replicate the transactions excluding the specified GTID set to migrate ongoing changes of the source database to TiDB Cloud.
+ソース データベースの GTID (例: `3E11FA47-71CA-11E1-9E33-C80AA9429562:1-23`を指定するには、このオプションを選択します。移行ジョブは、指定された GTID セットを除くトランザクションを複製して、ソース データベースの進行中の変更をTiDB Cloudに移行します。
 
-You can run the following command to check the GTID of the source database:
-
-```sql
-SHOW MASTER STATUS;
-```
-
-For information about how to enable GTID, see [Prerequisites](#prerequisites).
-
-### Specify binlog file name and position
-
-Select this option to specify the binlog file name (for example, `binlog.000001`) and binlog position (for example, `1307`) of the source database. The migration job will start from the specified binlog file name and position to migrate ongoing changes of the source database to TiDB Cloud.
-
-You can run the following command to check the binlog file name and position of the source database:
+次のコマンドを実行して、ソース データベースの GTID を確認できます。
 
 ```sql
 SHOW MASTER STATUS;
 ```
 
-If there is data in the target database, make sure the binlog position is correct. Otherwise, there might be conflicts between the existing data and the incremental data. If conflicts occur, the migration job will fail. If you want to replace the conflicted records with data from the source database, you can resume the migration job.
+GTID を有効にする方法については、 [前提条件](#prerequisites)を参照してください。
 
-## Step 4: Choose the objects to be migrated
+### binlogファイルの名前と位置を指定する {#specify-binlog-file-name-and-position}
 
-1. On the **Choose Objects to Migrate** page, select the objects to be migrated. You can click **All** to select all objects, or click **Customize** and then click the checkbox next to the object name to select the object.
+ソース データベースのbinlogファイル名 (たとえば、 `binlog.000001` ) とbinlogの位置 (たとえば、 `1307` ) を指定するには、このオプションを選択します。移行ジョブは、指定されたbinlogファイル名と位置から開始され、ソース データベースの進行中の変更をTiDB Cloudに移行します。
 
-2. Click **Next**.
+次のコマンドを実行して、 binlogファイル名とソース データベースの位置を確認できます。
 
-## Step 5: Precheck
+```sql
+SHOW MASTER STATUS;
+```
 
-On the **Precheck** page, you can view the precheck results. If the precheck fails, you need to operate according to **Failed** or **Warning** details, and then click **Check again** to recheck.
+ターゲット データベースにデータがある場合は、binlogの位置が正しいことを確認してください。そうしないと、既存のデータと増分データの間に競合が発生する可能性があります。競合が発生すると、移行ジョブは失敗します。競合するレコードをソース データベースのデータで置き換える場合は、移行ジョブを再開できます。
 
-If there are only warnings on some check items, you can evaluate the risk and consider whether to ignore the warnings. If all warnings are ignored, the migration job will automatically go on to the next step.
+## ステップ 4: 移行するオブジェクトを選択する {#step-4-choose-the-objects-to-be-migrated}
 
-For more information about errors and solutions, see [Precheck errors and solutions](/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshooting.md#precheck-errors-and-solutions).
+1.  **「移行するオブジェクトの選択」**ページで、移行するオブジェクトを選択します。 **「すべて」**をクリックしてすべてのオブジェクトを選択するか、 **「カスタマイズ」**をクリックしてオブジェクト名の横にあるチェックボックスをクリックしてオブジェクトを選択します。
 
-For more information about precheck items, see [Migration Task Precheck](https://docs.pingcap.com/tidb/stable/dm-precheck).
+2.  **「次へ」**をクリックします。
 
-If all check items show **Pass**, click **Next**.
+## ステップ 5: 事前チェック {#step-5-precheck}
 
-## Step 6: Choose a spec and start migration
+**[事前チェック]**ページでは、事前チェックの結果を表示できます。事前チェックが失敗した場合は、「**失敗」**または**「警告」の**詳細に従って操作し、 **「再度チェック」を**クリックして再チェックする必要があります。
 
-On the **Choose a Spec and Start Migration** page, select an appropriate migration specification according to your performance requirements. For more information about the specifications, see [Specifications for Data Migration](/tidb-cloud/tidb-cloud-billing-dm.md#specifications-for-data-migration).
+一部のチェック項目に警告のみがある場合は、リスクを評価し、警告を無視するかどうかを検討できます。すべての警告が無視された場合、移行ジョブは自動的に次のステップに進みます。
 
-After selecting the spec, click **Create Job and Start** to start the migration.
+エラーと解決策の詳細については、 [事前チェックエラーと解決策](/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshooting.md#precheck-errors-and-solutions)を参照してください。
 
-## Step 7: View the migration progress
+事前チェック項目の詳細については、 [移行タスクの事前チェック](https://docs.pingcap.com/tidb/stable/dm-precheck)を参照してください。
 
-After the migration job is created, you can view the migration progress on the **Migration Job Details** page. The migration progress is displayed in the **Stage and Status** area.
+すべてのチェック項目に**「合格」**と表示されている場合は、 **「次へ」**をクリックします。
 
-You can pause or delete a migration job when it is running.
+## ステップ 6: 仕様を選択して移行を開始する {#step-6-choose-a-spec-and-start-migration}
 
-If a migration job has failed, you can resume it after solving the problem.
+**[仕様を選択して移行を開始]**ページで、パフォーマンス要件に応じて適切な移行仕様を選択します。仕様の詳細については、 [データ移行の仕様](/tidb-cloud/tidb-cloud-billing-dm.md#specifications-for-data-migration)を参照してください。
 
-You can delete a migration job in any status.
+仕様を選択した後、 **「ジョブを作成して開始」**をクリックして移行を開始します。
 
-If you encounter any problems during the migration, see [Migration errors and solutions](/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshooting.md#migration-errors-and-solutions).
+## ステップ 7: 移行の進行状況をビュー {#step-7-view-the-migration-progress}
+
+移行ジョブの作成後、 **[移行ジョブの詳細]**ページで移行の進行状況を確認できます。移行の進行状況が**「ステージとステータス」**領域に表示されます。
+
+実行中の移行ジョブを一時停止または削除できます。
+
+移行ジョブが失敗した場合は、問題を解決した後に再開できます。
+
+移行ジョブはどのステータスでも削除できます。
+
+移行中に問題が発生した場合は、 [移行エラーと解決策](/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshooting.md#migration-errors-and-solutions)を参照してください。

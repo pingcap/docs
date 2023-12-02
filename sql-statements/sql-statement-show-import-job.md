@@ -3,9 +3,9 @@ title: SHOW IMPORT
 summary: An overview of the usage of SHOW IMPORT in TiDB.
 ---
 
-# SHOW IMPORT
+# インポートを表示 {#show-import}
 
-The `SHOW IMPORT` statement is used to show the IMPORT jobs created in TiDB. This statement can only show jobs created by the current user.
+`SHOW IMPORT`ステートメントは、TiDB で作成された IMPORT ジョブを表示するために使用されます。このステートメントでは、現在のユーザーが作成したジョブのみを表示できます。
 
 <!-- Support note for TiDB Cloud:
 
@@ -13,12 +13,12 @@ This TiDB statement is not applicable to TiDB Cloud.
 
 -->
 
-## Required privileges
+## 必要な権限 {#required-privileges}
 
-- `SHOW IMPORT JOBS`: if a user has the `SUPER` privilege, this statement shows all import jobs in TiDB. Otherwise, this statement only shows jobs created by the current user.
-- `SHOW IMPORT JOB <job-id>`: only the creator of an import job or users with the `SUPER` privilege can use this statement to view a specific job.
+-   `SHOW IMPORT JOBS` : ユーザーが`SUPER`権限を持っている場合、このステートメントは TiDB 内のすべてのインポート ジョブを表示します。それ以外の場合、このステートメントは現在のユーザーが作成したジョブのみを表示します。
+-   `SHOW IMPORT JOB <job-id>` : インポート ジョブの作成者または`SUPER`権限を持つユーザーのみが、このステートメントを使用して特定のジョブを表示できます。
 
-## Synopsis
+## あらすじ {#synopsis}
 
 ```ebnf+diagram
 ShowImportJobsStmt ::=
@@ -28,57 +28,53 @@ ShowImportJobStmt ::=
     'SHOW' 'IMPORT' 'JOB' JobID
 ```
 
-The output fields of the `SHOW IMPORT` statement are described as follows:
+`SHOW IMPORT`ステートメントの出力フィールドは次のように説明されます。
 
-| Column           | Description             |
-|------------------|-------------------------|
-| Job_ID           | The ID of the task                  |
-| Data_Source      | Information about the data source                  |
-| Target_Table     | The name of the target table                     |
-| Phase            | The current phase of the job, including `importing`, `validating`, and `add-index` |
-| Status           | The current status of the job, including `pending` (means created but not started yet), `running`, `canceled`, `failed`, and `finished` |
-| Source_File_Size | The size of the source file  |
-| Imported_Rows | The number of data rows that have been read and written to the target table  |
-| Result_Message   | If the import fails, this field returns the error message. Otherwise, it is empty.|
-| Create_Time      | The time when the task is created                 |
-| Start_Time       | The time when the task is started                     |
-| End_Time         | The time when the task is ended            |
-| Created_By       | The name of the database user who creates the task         |
+| カラム         | 説明                                                                                                         |
+| ----------- | ---------------------------------------------------------------------------------------------------------- |
+| ジョブID       | タスクのID                                                                                                     |
+| 情報元         | データソースに関する情報                                                                                               |
+| ターゲットテーブル   | 対象テーブルの名前                                                                                                  |
+| 段階          | ジョブの現在のフェーズ ( `importing` 、 `validating` 、および`add-index`を含む)                                               |
+| 状態          | ジョブの現在のステータス。 `pending` (作成されたがまだ開始されていないことを意味します)、 `running` 、 `canceled` 、 `failed` 、および`finished`を含みます。 |
+| ソースファイルのサイズ | ソースファイルのサイズ                                                                                                |
+| インポートされた行   | ターゲットテーブルで読み書きされたデータ行の数                                                                                    |
+| 結果_メッセージ    | インポートが失敗した場合、このフィールドはエラー メッセージを返します。それ以外の場合は空です。                                                           |
+| 作成時間        | タスクが作成された時刻                                                                                                |
+| 始まる時間       | タスクが開始された時刻                                                                                                |
+| 終了時間        | タスクが終了した時刻                                                                                                 |
+| によって作成された   | タスクを作成したデータベース ユーザーの名前                                                                                     |
 
-## Example
+## 例 {#example}
 
 ```sql
 SHOW IMPORT JOBS;
 ```
 
-```
-+--------+-------------------+--------------+----------+-------+----------+------------------+---------------+----------------+----------------------------+----------------------------+----------------------------+------------+
-| Job_ID | Data_Source       | Target_Table | Table_ID | Phase | Status   | Source_File_Size | Imported_Rows | Result_Message | Create_Time                | Start_Time                 | End_Time                   | Created_By |
-+--------+-------------------+--------------+----------+-------+----------+------------------+---------------+----------------+----------------------------+----------------------------+----------------------------+------------+
-|      1 | /path/to/file.csv | `test`.`foo` |      116 |       | finished | 11GB             |        950000 |                | 2023-06-26 11:23:59.281257 | 2023-06-26 11:23:59.484932 | 2023-06-26 13:04:30.622952 | root@%     |
-|      2 | /path/to/file.csv | `test`.`bar` |      130 |       | finished | 1.194TB          |      49995000 |                | 2023-06-26 15:42:45.079237 | 2023-06-26 15:42:45.388108 | 2023-06-26 17:29:43.023568 | root@%     |
-+--------+-------------------+--------------+----------+-------+----------+------------------+---------------+----------------+----------------------------+----------------------------+----------------------------+------------+
-1 row in set (0.01 sec)
-```
+    +--------+-------------------+--------------+----------+-------+----------+------------------+---------------+----------------+----------------------------+----------------------------+----------------------------+------------+
+    | Job_ID | Data_Source       | Target_Table | Table_ID | Phase | Status   | Source_File_Size | Imported_Rows | Result_Message | Create_Time                | Start_Time                 | End_Time                   | Created_By |
+    +--------+-------------------+--------------+----------+-------+----------+------------------+---------------+----------------+----------------------------+----------------------------+----------------------------+------------+
+    |      1 | /path/to/file.csv | `test`.`foo` |      116 |       | finished | 11GB             |        950000 |                | 2023-06-26 11:23:59.281257 | 2023-06-26 11:23:59.484932 | 2023-06-26 13:04:30.622952 | root@%     |
+    |      2 | /path/to/file.csv | `test`.`bar` |      130 |       | finished | 1.194TB          |      49995000 |                | 2023-06-26 15:42:45.079237 | 2023-06-26 15:42:45.388108 | 2023-06-26 17:29:43.023568 | root@%     |
+    +--------+-------------------+--------------+----------+-------+----------+------------------+---------------+----------------+----------------------------+----------------------------+----------------------------+------------+
+    1 row in set (0.01 sec)
 
 ```sql
 SHOW IMPORT JOB 60001;
 ```
 
-```
-+--------+--------------------+--------------+----------+-------+---------+------------------+---------------+----------------+----------------------------+------------+----------+------------+
-| Job_ID | Data_Source        | Target_Table | Table_ID | Phase | Status  | Source_File_Size | Imported_Rows | Result_Message | Create_Time                | Start_Time | End_Time | Created_By |
-+--------+--------------------+--------------+----------+-------+---------+------------------+---------------+----------------+----------------------------+------------+----------+------------+
-|  60001 | /path/to/small.csv | `test`.`t`   |      361 |       | pending | 16B              |          NULL |                | 2023-06-08 15:59:37.047703 | NULL       | NULL     | root@%     |
-+--------+--------------------+--------------+----------+-------+---------+------------------+---------------+----------------+----------------------------+------------+----------+------------+
-1 row in set (0.01 sec)
-```
+    +--------+--------------------+--------------+----------+-------+---------+------------------+---------------+----------------+----------------------------+------------+----------+------------+
+    | Job_ID | Data_Source        | Target_Table | Table_ID | Phase | Status  | Source_File_Size | Imported_Rows | Result_Message | Create_Time                | Start_Time | End_Time | Created_By |
+    +--------+--------------------+--------------+----------+-------+---------+------------------+---------------+----------------+----------------------------+------------+----------+------------+
+    |  60001 | /path/to/small.csv | `test`.`t`   |      361 |       | pending | 16B              |          NULL |                | 2023-06-08 15:59:37.047703 | NULL       | NULL     | root@%     |
+    +--------+--------------------+--------------+----------+-------+---------+------------------+---------------+----------------+----------------------------+------------+----------+------------+
+    1 row in set (0.01 sec)
 
-## MySQL compatibility
+## MySQLの互換性 {#mysql-compatibility}
 
-This statement is a TiDB extension to MySQL syntax.
+このステートメントは、MySQL 構文に対する TiDB 拡張機能です。
 
-## See also
+## こちらも参照 {#see-also}
 
-* [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md)
-* [`CANCEL IMPORT JOB`](/sql-statements/sql-statement-cancel-import-job.md)
+-   [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md)
+-   [`CANCEL IMPORT JOB`](/sql-statements/sql-statement-cancel-import-job.md)

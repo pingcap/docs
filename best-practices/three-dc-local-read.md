@@ -3,27 +3,25 @@ title: Local Read under Three Data Centers Deployment
 summary: Learn how to use the Stale Read feature to read local data under three DCs deployment and thus reduce cross-center requests.
 ---
 
-# Local Read under Three Data Centers Deployment
+# 3 つのデータセンター展開におけるローカル読み取り {#local-read-under-three-data-centers-deployment}
 
-In the model of three data centers, a Region has three replicas which are isolated in each data center. However, due to the requirement of strongly consistent read, TiDB must access the Leader replica of the corresponding data for every query. If the query is generated in a data center different from that of the Leader replica, TiDB needs to read data from another data center, thus causing the access latency to increase.
+3 つのデータセンターのモデルでは、リージョンには各データセンターに分離された 3 つのレプリカがあります。ただし、強力な一貫性のある読み取りの要件により、TiDB はクエリごとに対応するデータのLeaderレプリカにアクセスする必要があります。Leaderレプリカとは異なるデータ センターでクエリが生成された場合、TiDB は別のデータ センターからデータを読み取る必要があるため、アクセスレイテンシーが増加します。
 
-This document describes how to use the [Stale Read](/stale-read.md) feature to avoid cross-center access and reduce the access latency at the expense of real-time data availability.
+このドキュメントでは、 [ステイル読み取り](/stale-read.md)機能を使用して、リアルタイムのデータ可用性を犠牲にしてセンター間アクセスを回避し、アクセスレイテンシーを短縮する方法について説明します。
 
-## Deploy a TiDB cluster of three data centers
+## 3 つのデータセンターからなる TiDB クラスターをデプロイ {#deploy-a-tidb-cluster-of-three-data-centers}
 
-For the three-data-center deployment method, refer to [Multiple Data Centers in One City Deployment](/multi-data-centers-in-one-city-deployment.md).
+3 データセンター展開方法については、 [1 つの地域展開における複数のデータセンター](/multi-data-centers-in-one-city-deployment.md)を参照してください。
 
-Note that if both the TiKV and TiDB nodes have the configuration item `labels` configured, the TiKV and TiDB nodes in the same data center must have the same value for the `zone` label. For example, if a TiKV node and a TiDB node are both in the data center `dc-1`, then the two nodes need to be configured with the following label:
+TiKV ノードと TiDB ノードの両方に構成項目`labels`が構成されている場合、同じデータセンター内の TiKV ノードと TiDB ノードの`zone`ラベルの値が同じである必要があることに注意してください。たとえば、TiKV ノードと TiDB ノードが両方ともデータ センター`dc-1`にある場合、2 つのノードを次のラベルで構成する必要があります。
 
-```
-[labels]
-zone=dc-1
-```
+    [labels]
+    zone=dc-1
 
-## Perform local read using Stale Read
+## ステイル読み取りを使用してローカル読み取りを実行する {#perform-local-read-using-stale-read}
 
-[Stale Read](/stale-read.md) is a mechanism that TiDB provides for the users to read historical data. Using this mechanism, you can read the corresponding historical data of a specific point in time or within a specified time range, and thus save the latency brought by data replication between storage nodes. When using Stale Read in some scenarios of geo-distributed deployment, TiDB accesses the replica in the current data center to read the corresponding data at the expense of some real-time performance, which avoids network latency brought by cross-center connection and reduces the access latency for the entire query process.
+[ステイル読み取り](/stale-read.md)は、ユーザーが履歴データを読み取るために TiDB が提供するメカニズムです。このメカニズムを使用すると、特定の時点または指定された時間範囲内の対応する履歴データを読み取ることができるため、storageノード間のデータ レプリケーションによってもたらされるレイテンシーを節約できます。地域分散展開の一部のシナリオでステイル読み取りを使用すると、TiDB は現在のデータ センターのレプリカにアクセスして、リアルタイム パフォーマンスを犠牲にして対応するデータを読み取ります。これにより、センター間接続によってもたらされるネットワークレイテンシーが回避され、クエリプロセス全体のアクセスレイテンシー。
 
-When TiDB receives a Stale Read query, if the `zone` label of that TiDB node is configured, and [`tidb_replica_read`](/system-variables.md#tidb_replica_read-new-in-v40) is set to `closest-replicas`, then TiDB sends the request to the TiKV node with the same `zone` label where the corresponding data replica resides.
+TiDB がステイル読み取りクエリを受信したとき、その TiDB ノードの`zone`ラベルが構成され、 [`tidb_replica_read`](/system-variables.md#tidb_replica_read-new-in-v40)が`closest-replicas`に設定されている場合、TiDB は、対応するデータ レプリカが存在する同じ`zone`ラベルを持つ TiKV ノードにリクエストを送信します。
 
-For how to perform Stale Read, see [Perform Stale Read using the `AS OF TIMESTAMP` clause](/as-of-timestamp.md).
+ステイル読み取りの実行方法については、 [`AS OF TIMESTAMP`句を使用してステイル読み取りを実行する](/as-of-timestamp.md)を参照してください。

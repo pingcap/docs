@@ -2,102 +2,102 @@
 title: TiDB 4.0.7 Release Notes
 ---
 
-# TiDB 4.0.7 Release Notes
+# TiDB 4.0.7 リリースノート {#tidb-4-0-7-release-notes}
 
-Release date: September 29, 2020
+発売日：2020年9月29日
 
-TiDB version: 4.0.7
+TiDB バージョン: 4.0.7
 
-## New Features
+## 新機能 {#new-features}
 
-+ PD
+-   PD
 
-    - Add the `GetAllMembers` function in the PD client to get PD member information [#2980](https://github.com/pingcap/pd/pull/2980)
+    -   PD メンバー情報を取得する`GetAllMembers`関数を PD クライアントに追加します[#2980](https://github.com/pingcap/pd/pull/2980)
 
-+ TiDB Dashboard
+-   TiDB ダッシュボード
 
-    - Support generating the metrics relationship graph [#760](https://github.com/pingcap-incubator/tidb-dashboard/pull/760)
+    -   メトリクス関係グラフ[#760](https://github.com/pingcap-incubator/tidb-dashboard/pull/760)の生成をサポート
 
-## Improvements
+## 改善点 {#improvements}
 
-+ TiDB
+-   TiDB
 
-    - Add more runtime information for the `join` operator [#20093](https://github.com/pingcap/tidb/pull/20093)
-    - Add the hit ratio information of coprocessor cache in `EXPLAIN ANALYZE` [#19972](https://github.com/pingcap/tidb/pull/19972)
-    - Support pushing down the `ROUND` function to TiFlash [#19967](https://github.com/pingcap/tidb/pull/19967)
-    - Add the default value of `CMSketch` for `ANALYZE` [#19927](https://github.com/pingcap/tidb/pull/19927)
-    - Refine error message desensitization [#20004](https://github.com/pingcap/tidb/pull/20004)
-    - Accept connections from clients using connectors from MySQL 8.0 [#19959](https://github.com/pingcap/tidb/pull/19959)
+    -   `join`オペレーター[#20093](https://github.com/pingcap/tidb/pull/20093)のランタイム情報を追加します。
+    -   `EXPLAIN ANALYZE` [#19972](https://github.com/pingcap/tidb/pull/19972)にコプロセッサキャッシュのヒット率情報を追加
+    -   `ROUND`機能をTiFlash [#19967](https://github.com/pingcap/tidb/pull/19967)にプッシュダウンするサポート
+    -   `ANALYZE` [#19927](https://github.com/pingcap/tidb/pull/19927)にデフォルト値の`CMSketch`を追加します。
+    -   エラーメッセージの感度を下げる[#20004](https://github.com/pingcap/tidb/pull/20004)を調整する
+    -   MySQL 8.0 のコネクタを使用してクライアントからの接続を受け入れる[#19959](https://github.com/pingcap/tidb/pull/19959)
 
-+ TiKV
+-   TiKV
 
-    - Support the JSON log format [#8382](https://github.com/tikv/tikv/pull/8382)
+    -   JSONログ形式[#8382](https://github.com/tikv/tikv/pull/8382)のサポート
 
-+ PD
+-   PD
 
-    - Count schedule operators when they are finished rather than added [#2983](https://github.com/pingcap/pd/pull/2983)
-    - Set the `make-up-replica` operator to high priority [#2977](https://github.com/pingcap/pd/pull/2977)
+    -   スケジュール演算子を追加するのではなく、終了時にカウントする[#2983](https://github.com/pingcap/pd/pull/2983)
+    -   `make-up-replica`オペレータを高優先度[#2977](https://github.com/pingcap/pd/pull/2977)に設定します
 
-+ TiFlash
+-   TiFlash
 
-    - Improve the error handling of the Region meta change that occurs during reads
+    -   読み取り中に発生するリージョンメタ変更のエラー処理を改善します。
 
-+ Tools
+-   ツール
 
-    + TiCDC
+    -   TiCDC
 
-        - Support translating more execution-efficient SQL statements in MySQL sink when the old value feature is enabled [#955](https://github.com/pingcap/tiflow/pull/955)
+        -   古い値機能が有効になっている場合、MySQL シンクでより実行効率の高い SQL ステートメントの変換をサポートします[#955](https://github.com/pingcap/tiflow/pull/955)
 
-    + Backup & Restore (BR)
+    -   バックアップと復元 (BR)
 
-        - Add connection retry when the connection is broken during backup [#508](https://github.com/pingcap/br/pull/508)
+        -   バックアップ中に接続が切断された場合の接続の再試行を追加[#508](https://github.com/pingcap/br/pull/508)
 
-    + TiDB Lightning
+    -   TiDB Lightning
 
-        - Support dynamically updating the log level via the HTTP interface [#393](https://github.com/pingcap/tidb-lightning/pull/393)
+        -   HTTP インターフェイスを介したログ レベルの動的更新のサポート[#393](https://github.com/pingcap/tidb-lightning/pull/393)
 
-## Bug Fixes
+## バグの修正 {#bug-fixes}
 
-+ TiDB
+-   TiDB
 
-    - Fix a vectorization bug from `and`/`or`/`COALESCE` caused by shortcut [#20092](https://github.com/pingcap/tidb/pull/20092)
-    - Fix the issue that plan digests are the same when the cop task stores are of different types [#20076](https://github.com/pingcap/tidb/pull/20076)
-    - Fix the wrong behavior of the `!= any()` function [#20062](https://github.com/pingcap/tidb/pull/20062)
-    - Fix the query error that occurs when the `slow-log` file does not exist [#20051](https://github.com/pingcap/tidb/pull/20051)
-    - Fix the issue that Region requests continue to retry when the context is canceled [#20031](https://github.com/pingcap/tidb/pull/20031)
-    - Fix the issue that querying the time type of the `cluster_slow_query` table in streaming request might result in an error [#19943](https://github.com/pingcap/tidb/pull/19943)
-    - Fix the issue that DML statements using `case when` might cause schema change [#20095](https://github.com/pingcap/tidb/pull/20095)
-    - Fix the issue that the `prev_stmt` information in slow log is not desensitized [#20048](https://github.com/pingcap/tidb/pull/20048)
-    - Fix the issue that tidb-server does not release the table lock when it exits abnormally [#20020](https://github.com/pingcap/tidb/pull/20020)
-    - Fix the incorrect error message that occurs when inserting data of the `ENUM` and `SET` type [#19950](https://github.com/pingcap/tidb/pull/19950)
-    - Fix the wrong behavior of the `IsTrue` function in some situations [#19903](https://github.com/pingcap/tidb/pull/19903)
-    - Fix the issue that the `CLUSTER_INFO` system table might not work normally after PD is scaled in or out [#20026](https://github.com/pingcap/tidb/pull/20026)
-    - Avoid unnecessary warnings or errors when folding constants in `control` expressions [#19910](https://github.com/pingcap/tidb/pull/19910)
-    - Update the method of updating statistics to avoid Out of Memory (OOM) [#20013](https://github.com/pingcap/tidb/pull/20013)
+    -   ショートカット[#20092](https://github.com/pingcap/tidb/pull/20092)によって引き起こされる`and` / `or` / `COALESCE`のベクトル化バグを修正
+    -   cop タスク ストアのタイプが異なる場合にプラン ダイジェストが同じになる問題を修正します[#20076](https://github.com/pingcap/tidb/pull/20076)
+    -   `!= any()`関数[#20062](https://github.com/pingcap/tidb/pull/20062)の誤った動作を修正します。
+    -   `slow-log`ファイルが存在しない場合に発生するクエリエラーを修正[#20051](https://github.com/pingcap/tidb/pull/20051)
+    -   コンテキストがキャンセルされたときにリージョンリクエストが再試行し続ける問題を修正します[#20031](https://github.com/pingcap/tidb/pull/20031)
+    -   ストリーミングリクエストでテーブル`cluster_slow_query`の時刻型をクエリするとエラー[#19943](https://github.com/pingcap/tidb/pull/19943)が発生することがある問題を修正
+    -   `case when`を使用する DML ステートメントによってスキーマ変更が発生する可能性がある問題を修正します[#20095](https://github.com/pingcap/tidb/pull/20095)
+    -   スローログの`prev_stmt`情報が感度解除されない問題を修正[#20048](https://github.com/pingcap/tidb/pull/20048)
+    -   tidb-server が異常終了したときにテーブル ロックを解放しない問題を修正します[#20020](https://github.com/pingcap/tidb/pull/20020)
+    -   `ENUM`および`SET`タイプ[#19950](https://github.com/pingcap/tidb/pull/19950)のデータを挿入するときに発生する誤ったエラー メッセージを修正しました。
+    -   状況によっては`IsTrue`関数の誤った動作を修正します[#19903](https://github.com/pingcap/tidb/pull/19903)
+    -   PD をスケールインまたはスケールアウトした後、 `CLUSTER_INFO`システム テーブルが正常に動作しなくなることがある問題を修正します[#20026](https://github.com/pingcap/tidb/pull/20026)
+    -   定数を式`control`に折りたたむときに不要な警告やエラーが発生するのを回避します[#19910](https://github.com/pingcap/tidb/pull/19910)
+    -   メモリ不足 (OOM) [#20013](https://github.com/pingcap/tidb/pull/20013)を回避するために統計の更新方法を更新します。
 
-+ TiKV
+-   TiKV
 
-    - Fix the issue of unavailable Status API when TLS handshake fails [#8649](https://github.com/tikv/tikv/pull/8649)
-    - Fix the potential undefined behaviors [#7782](https://github.com/tikv/tikv/pull/7782)
-    - Fix the possible panic caused by generating snapshots when executing `UnsafeDestroyRange` [#8681](https://github.com/tikv/tikv/pull/8681)
+    -   TLS ハンドシェイクが失敗した場合にステータス API が利用できない問題を修正[#8649](https://github.com/tikv/tikv/pull/8649)
+    -   潜在的な未定義の動作を修正します[#7782](https://github.com/tikv/tikv/pull/7782)
+    -   `UnsafeDestroyRange` [#8681](https://github.com/tikv/tikv/pull/8681)の実行時にスナップショットを生成することによって発生する可能性のあるpanicを修正しました。
 
-+ PD
+-   PD
 
-    - Fix the bug that PD might panic if some Regions have no Leader when `balance-region` is enabled [#2994](https://github.com/pingcap/pd/pull/2994)
-    - Fix the statistical deviation of Region size and Region keys after Region merge [#2985](https://github.com/pingcap/pd/pull/2985)
-    - Fix the incorrect hotspot statistics [#2991](https://github.com/pingcap/pd/pull/2991)
-    - Fix the issue that there is no `nil` check in `redirectSchedulerDelete` [#2974](https://github.com/pingcap/pd/pull/2974)
+    -   `balance-region`を有効にした場合、一部のリージョンにLeaderがいない場合に PD がパニックになる可能性があるバグを修正[#2994](https://github.com/pingcap/pd/pull/2994)
+    -   リージョンマージ[#2985](https://github.com/pingcap/pd/pull/2985)後のリージョンサイズとリージョンキーの統計的偏差を修正
+    -   間違ったホットスポット統計を修正します[#2991](https://github.com/pingcap/pd/pull/2991)
+    -   `redirectSchedulerDelete` [#2974](https://github.com/pingcap/pd/pull/2974)で`nil`チェックが無い問題を修正
 
-+ TiFlash
+-   TiFlash
 
-    - Fix the wrong result of right outer join
+    -   右外部結合の間違った結果を修正
 
-+ Tools
+-   ツール
 
-    + Backup & Restore (BR)
+    -   バックアップと復元 (BR)
 
-        - Fix a bug that causes the TiDB configuration to change after the restore process [#509](https://github.com/pingcap/br/pull/509)
+        -   復元プロセス[#509](https://github.com/pingcap/br/pull/509)後に TiDB 構成が変更されるバグを修正しました。
 
-    + Dumpling
+    -   Dumpling
 
-        - Fix the issue that Dumpling fails to parse metadata when some variables are `NULL` [#150](https://github.com/pingcap/dumpling/pull/150)
+        -   一部の変数が`NULL` [#150](https://github.com/pingcap/dumpling/pull/150)の場合、 Dumpling がメタデータの解析に失敗する問題を修正

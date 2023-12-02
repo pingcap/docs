@@ -2,32 +2,32 @@
 title: tiup dm destroy
 ---
 
-# tiup dm destroy
+# ティアップDM破壊 {#tiup-dm-destroy}
 
-After an application goes offline, if you want to release the machines occupied by the cluster for use by other applications, you need to clean up the data on the cluster and the deployed binary files. To destroy the cluster, the `tiup dm destroy` command performs the following operations:
+アプリケーションがオフラインになった後、クラスターによって占有されていたマシンを他のアプリケーションで使用できるように解放したい場合は、クラスター上のデータとデプロイされたバイナリ ファイルをクリーンアップする必要があります。クラスターを破棄するには、 `tiup dm destroy`コマンドは次の操作を実行します。
 
-- Stops the cluster.
-- For each service, delete its log directory, deployment directory, and data directory.
-- If the parent directory of the data directory or deployment directory of each service is created by `tiup-dm`, also delete the parent directory.
+-   クラスターを停止します。
+-   サービスごとに、ログ ディレクトリ、デプロイメント ディレクトリ、およびデータ ディレクトリを削除します。
+-   `tiup-dm`で各サービスのデータディレクトリやデプロイメントディレクトリの親ディレクトリを作成した場合は、親ディレクトリも削除します。
 
-## Syntax
+## 構文 {#syntax}
 
 ```shell
 tiup dm destroy <cluster-name> [flags]
 ```
 
-`<cluster-name>`: the name of the cluster to be destroyed.
+`<cluster-name>` : 破棄するクラスターの名前。
 
-## Option
+## オプション {#option}
 
-### -h, --help
+### -h, --help {#h-help}
 
-- Prints the help information.
-- Data type: `Boolean`
-- Default: false
+-   ヘルプ情報を出力します。
+-   データ型: `Boolean`
+-   デフォルト: false
 
-## Output
+## 出力 {#output}
 
-The execution log of the tiup-dm.
+tiup-dmの実行ログ。
 
-[<< Back to the previous page - TiUP DM command list](/tiup/tiup-component-dm.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUP DMコマンド一覧](/tiup/tiup-component-dm.md#command-list)

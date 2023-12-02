@@ -3,177 +3,147 @@ title: Generate Self-signed Certificates
 summary: Use `openssl` to generate self-signed certificates.
 ---
 
-# Generate Self-Signed Certificates
+# 証明書を生成する {#generate-self-signed-certificates}
 
-> **Note:**
+> **注記：**
 >
-> To enable TLS between clients and servers, you only need to set `auto-tls`.
+> クライアントとサーバーの間で TLS を有効にするには、 `auto-tls`を設定するだけです。
 
-This document provides an example of using `openssl` to generate a self-signed certificate. You can also generate certificates and keys that meet requirements according to your demands.
+このドキュメントでは、 `openssl`を使用して自己署名証明書を生成する例を示します。必要に応じて、要件を満たす証明書とキーを生成することもできます。
 
-Assume that the topology of the instance cluster is as follows:
+インスタンス クラスターのトポロジが次のとおりであると仮定します。
 
-| Name  | Host IP      | Services   |
-| ----- | -----------  | ---------- |
-| node1 | 172.16.10.11 | PD1, TiDB1 |
-| node2 | 172.16.10.12 | PD2        |
-| node3 | 172.16.10.13 | PD3        |
-| node4 | 172.16.10.14 | TiKV1      |
-| node5 | 172.16.10.15 | TiKV2      |
-| node6 | 172.16.10.16 | TiKV3      |
+| 名前   | ホストIP        | サービス      |
+| ---- | ------------ | --------- |
+| ノード1 | 172.16.10.11 | PD1、TiDB1 |
+| ノード2 | 172.16.10.12 | PD2       |
+| ノード3 | 172.16.10.13 | PD3       |
+| ノード4 | 172.16.10.14 | TiKV1     |
+| ノード5 | 172.16.10.15 | TiKV2     |
+| ノード6 | 172.16.10.16 | TiKV3     |
 
-## Install OpenSSL
+## OpenSSL をインストールする {#install-openssl}
 
-- For Debian or Ubuntu OS:
-
-    {{< copyable "shell-regular" >}}
+-   Debian または Ubuntu OS の場合:
 
     ```bash
     apt install openssl
     ```
 
-- For RedHat or CentOS OS:
-
-    {{< copyable "shell-regular" >}}
+-   RedHat または CentOS OS の場合:
 
     ```bash
     yum install openssl
     ```
 
-You can also refer to OpenSSL's official [download document](https://www.openssl.org/source/) for installation.
+インストールについては、OpenSSL の公式[ドキュメントをダウンロードする](https://www.openssl.org/source/)を参照することもできます。
 
-## Generate the CA certificate
+## CA証明書を生成する {#generate-the-ca-certificate}
 
-A certificate authority (CA) is a trusted entity that issues digital certificates. In practice, contact your administrator to issue the certificate or use a trusted CA. CA manages multiple certificate pairs. Here you only need to generate an original pair of certificates as follows.
+認証局 (CA) は、デジタル証明書を発行する信頼できるエンティティです。実際には、管理者に連絡して証明書を発行するか、信頼できる CA を使用してください。 CA は複数の証明書ペアを管理します。ここで必要なのは、次のように元の証明書のペアを生成することだけです。
 
-1. Generate the root key:
-
-    {{< copyable "shell-regular" >}}
+1.  ルートキーを生成します。
 
     ```bash
     openssl genrsa -out root.key 4096
     ```
 
-2. Generate root certificates:
-
-    {{< copyable "shell-regular" >}}
+2.  ルート証明書を生成します。
 
     ```bash
     openssl req -new -x509 -days 1000 -key root.key -out root.crt
     ```
 
-3. Validate root certificates:
-
-    {{< copyable "shell-regular" >}}
+3.  ルート証明書を検証します。
 
     ```bash
     openssl x509 -text -in root.crt -noout
     ```
 
-## Issue certificates for individual components
+## 個々のコンポーネントの証明書を発行する {#issue-certificates-for-individual-components}
 
-This section describes how to issue certificates for individual components.
+このセクションでは、個々のコンポーネントの証明書を発行する方法について説明します。
 
-### Certificates that might be used in the cluster
+### クラスターで使用される可能性のある証明書 {#certificates-that-might-be-used-in-the-cluster}
 
-- tidb-server certificate: used by TiDB to authenticate TiDB for other components and clients
-- tikv-server certificate: used by TiKV to authenticate TiKV for other components and clients
-- pd-server certificate: used by PD to authenticate PD for other components and clients
-- client certificate: used to authenticate the clients from PD, TiKV and TiDB, such as `pd-ctl`, `tikv-ctl`
+-   tidb-server 証明書: 他のコンポーネントおよびクライアントに対して TiDB を認証するために TiDB によって使用されます。
+-   tikv-server 証明書: 他のコンポーネントおよびクライアントに対して TiKV を認証するために TiKV によって使用されます。
+-   pd-server 証明書: 他のコンポーネントおよびクライアントに対して PD を認証するために PD によって使用されます。
+-   クライアント証明書: PD、TiKV、TiDB からクライアントを認証するために使用されます ( `pd-ctl` 、 `tikv-ctl`など)。
 
-### Issue certificates to TiKV instances
+### TiKV インスタンスに証明書を発行する {#issue-certificates-to-tikv-instances}
 
-To issue a certificate to a TiKV instance, perform the following steps:
+TiKV インスタンスに証明書を発行するには、次の手順を実行します。
 
-1. Generate the private key corresponding to the certificate:
-
-    {{< copyable "shell-regular" >}}
+1.  証明書に対応する秘密キーを生成します。
 
     ```bash
     openssl genrsa -out tikv.key 2048
     ```
 
-2. Make a copy of the OpenSSL configuration template file (Refer to the actual location of your template file because it might have more than one location):
-
-    {{< copyable "shell-regular" >}}
+2.  OpenSSL 構成テンプレート ファイルのコピーを作成します (複数の場所がある場合があるため、テンプレート ファイルの実際の場所を参照してください)。
 
     ```bash
     cp /usr/lib/ssl/openssl.cnf .
     ```
 
-    If you do not know the actual location, look for it in the root directory:
+    実際の場所がわからない場合は、ルート ディレクトリで探してください。
 
     ```bash
     find / -name openssl.cnf
     ```
 
-3. Edit `openssl.cnf`, add `req_extensions = v3_req` under the `[ req ]` field, and add `subjectAltName = @alt_names` under the `[ v3_req ]` field. Finally, create a new field and edit the information of SAN.
+3.  `openssl.cnf`を編集し、 `[ req ]`フィールドの下に`req_extensions = v3_req`追加し、 `[ v3_req ]`フィールドの下に`subjectAltName = @alt_names`を追加します。最後に、新しいフィールドを作成し、SAN の情報を編集します。
 
-    ```
-    [ alt_names ]
-    IP.1 = 127.0.0.1
-    IP.2 = 172.16.10.14
-    IP.3 = 172.16.10.15
-    IP.4 = 172.16.10.16
-    ```
+        [ alt_names ]
+        IP.1 = 127.0.0.1
+        IP.2 = 172.16.10.14
+        IP.3 = 172.16.10.15
+        IP.4 = 172.16.10.16
 
-4. Save the `openssl.cnf` file, and generate the certificate request file (in this step, you can also assign a Common Name to the certificate, which is used to allow the server to validate the identity of the client. Each component does not enable the validation by default, and you can enable it in the configuration file):
-
-    {{< copyable "shell-regular" >}}
+4.  `openssl.cnf`ファイルを保存し、証明書要求ファイルを生成します (この手順では、サーバーがクライアントの ID を検証できるようにするために使用される共通名を証明書に割り当てることもできます。各コンポーネントは、次のような検証を有効にしません)デフォルトであり、構成ファイルで有効にすることができます):
 
     ```bash
     openssl req -new -key tikv.key -out tikv.csr -config openssl.cnf
     ```
 
-5. Issue and generate the certificate:
-
-    {{< copyable "shell-regular" >}}
+5.  証明書を発行して生成します。
 
     ```bash
     openssl x509 -req -days 365 -CA root.crt -CAkey root.key -CAcreateserial -in tikv.csr -out tikv.crt -extensions v3_req -extfile openssl.cnf
     ```
 
-6. Verify that the certificate includes the SAN field (optional):
-
-    {{< copyable "shell-regular" >}}
+6.  証明書に SAN フィールドが含まれていることを確認します (オプション)。
 
     ```bash
     openssl x509 -text -in tikv.crt -noout
     ```
 
-7. Confirm that the following files exist in your current directory:
+7.  現在のディレクトリに次のファイルが存在することを確認します。
 
-    ```
-    root.crt
-    tikv.crt
-    tikv.key
-    ```
+        root.crt
+        tikv.crt
+        tikv.key
 
-The process of issuing certificates for other TiDB components is similar and will not be repeated in this document.
+他の TiDB コンポーネントの証明書を発行するプロセスも同様であるため、このドキュメントでは繰り返しません。
 
-### Issue certificates for clients
+### クライアントに証明書を発行する {#issue-certificates-for-clients}
 
-To issue a certificate to a client, perform the following steps:
+クライアントに証明書を発行するには、次の手順を実行します。
 
-1. Generate the private key corresponding to the certificate:
-
-    {{< copyable "shell-regular" >}}
+1.  証明書に対応する秘密キーを生成します。
 
     ```bash
     openssl genrsa -out client.key 2048
     ```
 
-2. Generate the certificate request file (in this step, you can also assign a Common Name to the certificate, which is used to allow the server to validate the identity of the client. Each component does not enable the validation by default, and you can enable it in the configuration file):
-
-    {{< copyable "shell-regular" >}}
+2.  証明書要求ファイルを生成します (この手順では、サーバーがクライアントの ID を検証できるようにするために使用される共通名を証明書に割り当てることもできます。各コンポーネントはデフォルトでは検証を有効にしませんが、有効にすることができます)構成ファイル内にあります):
 
     ```bash
     openssl req -new -key client.key -out client.csr
     ```
 
-3. Issue and generate the certificate:
-
-    {{< copyable "shell-regular" >}}
+3.  証明書を発行して生成します。
 
     ```bash
     openssl x509 -req -days 365 -CA root.crt -CAkey root.key -CAcreateserial -in client.csr -out client.crt

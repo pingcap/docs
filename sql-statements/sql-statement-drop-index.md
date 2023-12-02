@@ -3,11 +3,11 @@ title: DROP INDEX | TiDB SQL Statement Reference
 summary: An overview of the usage of DROP INDEX for the TiDB database.
 ---
 
-# DROP INDEX
+# ドロップインデックス {#drop-index}
 
-This statement removes an index from a specified table, marking space as free in TiKV.
+このステートメントは、指定されたテーブルからインデックスを削除し、TiKV 内のスペースを空きとしてマークします。
 
-## Synopsis
+## あらすじ {#synopsis}
 
 ```ebnf+diagram
 DropIndexStmt ::=
@@ -20,7 +20,7 @@ IndexLockAndAlgorithmOpt ::=
     ( LockClause AlgorithmClause? | AlgorithmClause LockClause? )?
 ```
 
-## Examples
+## 例 {#examples}
 
 ```sql
 mysql> CREATE TABLE t1 (id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, c1 INT NOT NULL);
@@ -56,14 +56,14 @@ mysql> DROP INDEX c1 ON t1;
 Query OK, 0 rows affected (0.30 sec)
 ```
 
-## MySQL compatibility
+## MySQLの互換性 {#mysql-compatibility}
 
-* Dropping the primary key of the `CLUSTERED` type is not supported. For more details about the primary key of the `CLUSTERED` type, refer to [clustered index](/clustered-indexes.md).
+-   `CLUSTERED`タイプの主キーの削除はサポートされていません。 `CLUSTERED`種類の主キーの詳細については、 [クラスター化インデックス](/clustered-indexes.md)を参照してください。
 
-## See also
+## こちらも参照 {#see-also}
 
-* [SHOW INDEXES](/sql-statements/sql-statement-show-indexes.md)
-* [CREATE INDEX](/sql-statements/sql-statement-create-index.md)
-* [ADD INDEX](/sql-statements/sql-statement-add-index.md)
-* [RENAME INDEX](/sql-statements/sql-statement-rename-index.md)
-* [ALTER INDEX](/sql-statements/sql-statement-alter-index.md)
+-   [インデックスを表示](/sql-statements/sql-statement-show-indexes.md)
+-   [インデックスの作成](/sql-statements/sql-statement-create-index.md)
+-   [インデックスの追加](/sql-statements/sql-statement-add-index.md)
+-   [インデックスの名前を変更](/sql-statements/sql-statement-rename-index.md)
+-   [インデックスの変更](/sql-statements/sql-statement-alter-index.md)

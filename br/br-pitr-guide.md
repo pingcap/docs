@@ -3,60 +3,58 @@ title: TiDB Log Backup and PITR Guide
 summary: Learns about how to perform log backup and PITR in TiDB.
 ---
 
-# TiDB Log Backup and PITR Guide
+# TiDB ログのバックアップと PITR ガイド {#tidb-log-backup-and-pitr-guide}
 
-A full backup (snapshot backup) contains the full cluster data at a certain point, while TiDB log backup can back up data written by applications to a specified storage in a timely manner. If you want to choose the restore point as required, that is, to perform point-in-time recovery (PITR), you can [start log backup](#start-log-backup) and [run full backup regularly](#run-full-backup-regularly).
+フル バックアップ (スナップショット バックアップ) には特定の時点での完全なクラスター データが含まれますが、TiDB ログ バックアップでは、アプリケーションによって指定されたstorageに書き込まれたデータをタイムリーにバックアップできます。必要に応じて復元ポイントを選択する場合、つまりポイントインタイム リカバリ (PITR) を実行する場合は、 [ログのバックアップを開始する](#start-log-backup)と[完全バックアップを定期的に実行する](#run-full-backup-regularly)を実行できます。
 
-Before you back up or restore data using the br command-line tool (hereinafter referred to as `br`), you need to [install `br`](/br/br-use-overview.md#deploy-and-use-br) first.
+br コマンドライン ツール (以下`br`とします) を使用してデータをバックアップまたは復元する前に、まず[`br`をインストールする](/br/br-use-overview.md#deploy-and-use-br)を行う必要があります。
 
-## Back up TiDB cluster
+## TiDB クラスターをバックアップする {#back-up-tidb-cluster}
 
-### Start log backup
+### ログのバックアップを開始する {#start-log-backup}
 
-> **Note:**
+> **注記：**
 >
-> - The following examples assume that Amazon S3 access keys and secret keys are used to authorize permissions. If IAM roles are used to authorize permissions, you need to set `--send-credentials-to-tikv` to `false`.
-> - If other storage systems or authorization methods are used to authorize permissions, adjust the parameter settings according to [Backup Storages](/br/backup-and-restore-storages.md).
+> -   次の例では、Amazon S3 アクセス キーと秘密キーがアクセス許可の承認に使用されることを前提としています。 IAMロールを使用して権限を承認する場合は、 `--send-credentials-to-tikv` ～ `false`を設定する必要があります。
+> -   他のstorageシステムまたは認証方法を使用して権限を認証する場合は、 [バックアップストレージ](/br/backup-and-restore-storages.md)に従ってパラメータ設定を調整します。
 
-To start a log backup, run `br log start`. A cluster can only run one log backup task each time.
+ログのバックアップを開始するには、 `br log start`を実行します。クラスターは毎回 1 つのログ バックアップ タスクのみを実行できます。
 
 ```shell
 tiup br log start --task-name=pitr --pd "${PD_IP}:2379" \
 --storage 's3://backup-101/logbackup?access-key=${access-key}&secret-access-key=${secret-access-key}"'
 ```
 
-After the log backup task starts, it runs in the background of the TiDB cluster until you stop it manually. During this process, the TiDB change logs are regularly backed up to the specified storage in small batches. To query the status of the log backup task, run the following command:
+ログ バックアップ タスクが開始されると、手動で停止するまで TiDB クラスターのバックグラウンドで実行されます。このプロセス中、TiDB 変更ログは、指定されたstorageに小さなバッチで定期的にバックアップされます。ログ バックアップ タスクのステータスをクエリするには、次のコマンドを実行します。
 
 ```shell
 tiup br log status --task-name=pitr --pd "${PD_IP}:2379"
 ```
 
-Expected output:
+期待される出力:
 
-```
-● Total 1 Tasks.
-> #1 <
-    name: pitr
-    status: ● NORMAL
-    start: 2022-05-13 11:09:40.7 +0800
-      end: 2035-01-01 00:00:00 +0800
-    storage: s3://backup-101/log-backup
-    speed(est.): 0.00 ops/s
-checkpoint[global]: 2022-05-13 11:31:47.2 +0800; gap=4m53s
-```
+    ● Total 1 Tasks.
+    > #1 <
+        name: pitr
+        status: ● NORMAL
+        start: 2022-05-13 11:09:40.7 +0800
+          end: 2035-01-01 00:00:00 +0800
+        storage: s3://backup-101/log-backup
+        speed(est.): 0.00 ops/s
+    checkpoint[global]: 2022-05-13 11:31:47.2 +0800; gap=4m53s
 
-### Run full backup regularly
+### 完全バックアップを定期的に実行する {#run-full-backup-regularly}
 
-The snapshot backup can be used as a method of full backup. You can run `br backup full` to back up the cluster snapshot to the backup storage according to a fixed schedule (for example, every 2 days).
+スナップショット バックアップは完全バックアップの方法として使用できます。 `br backup full`実行すると、固定スケジュール (たとえば、2 日ごと) に従ってクラスターのスナップショットをバックアップstorageにバックアップできます。
 
 ```shell
 tiup br backup full --pd "${PD_IP}:2379" \
 --storage 's3://backup-101/snapshot-${date}?access-key=${access-key}&secret-access-key=${secret-access-key}"'
 ```
 
-## Run PITR
+## PITRを実行する {#run-pitr}
 
-To restore the cluster to any point in time within the backup retention period, you can use `br restore point`. When you run this command, you need to specify the **time point you want to restore**, **the latest snapshot backup data before the time point**, and the **log backup data**. BR will automatically determine and read data needed for the restore, and then restore these data to the specified cluster in order.
+バックアップ保持期間内の任意の時点にクラスターを復元するには、 `br restore point`を使用できます。このコマンドを実行するときは、**復元する時点**、**その時点より前の最新のスナップショット バックアップ データ**、および**ログ バックアップ データ**を指定する必要があります。 BR は、リストアに必要なデータを自動的に判断して読み取り、これらのデータを指定されたクラスターに順番にリストアします。
 
 ```shell
 br restore point --pd "${PD_IP}:2379" \
@@ -65,7 +63,7 @@ br restore point --pd "${PD_IP}:2379" \
 --restored-ts '2022-05-15 18:00:00+0800'
 ```
 
-During data restore, you can view the progress through the progress bar in the terminal. The restore is divided into two phases, full restore and log restore (restore meta files and restore KV files). After each phase is completed, `br` outputs information such as restore time and data size.
+データの復元中、ターミナルの進行状況バーで進行状況を確認できます。復元は、完全復元とログ復元 (メタ ファイルの復元と KV ファイルの復元) の 2 つのフェーズに分かれています。各フェーズが完了すると、 `br`復元時間やデータ サイズなどの情報を出力します。
 
 ```shell
 Full Restore <--------------------------------------------------------------------------------------------------------------------------------------------------------> 100.00%
@@ -75,71 +73,70 @@ Restore KV Files <--------------------------------------------------------------
 *** ["restore log success summary"] [total-take=xxx.xx] [restore-from={TS}] [restore-to={TS}] [total-kv-count=xxx] [total-size=xxx]
 ```
 
-## Clean up outdated data
+## 古いデータをクリーンアップする {#clean-up-outdated-data}
 
-As described in the [Usage Overview of TiDB Backup and Restore](/br/br-use-overview.md):
+[TiDB バックアップと復元の使用法の概要](/br/br-use-overview.md)で説明したように:
 
-To perform PITR, you need to restore the full backup before the restore point, and the log backup between the full backup point and the restore point. Therefore, for log backups that exceed the backup retention period, you can use `br log truncate` to delete the backup before the specified time point. **It is recommended to only delete the log backup before the full snapshot**.
+PITR を実行するには、復元ポイントの前に完全バックアップを復元し、完全バックアップ ポイントと復元ポイントの間にログ バックアップを復元する必要があります。したがって、バックアップ保持期間を超えたログ バックアップの場合は、 `br log truncate`を使用して、指定された時点より前にバックアップを削除できます。**完全なスナップショットの前にのみログ バックアップを削除することをお勧めします**。
 
-The following steps describe how to clean up backup data that exceeds the backup retention period:
+次の手順では、バックアップ保持期間を超えたバックアップ データをクリーンアップする方法について説明します。
 
-1. Get the **last full backup** outside the backup retention period.
-2. Use the `validate` command to get the time point corresponding to the backup. Assume that the backup data before 2022/09/01 needs to be cleaned, you should look for the last full backup before this time point and ensure that it will not be cleaned.
+1.  バックアップ保持期間外の**最後の完全バックアップ**を取得します。
+
+2.  `validate`コマンドを使用して、バックアップに対応する時点を取得します。 2022/09/01 より前のバックアップ データをクリーンアップする必要があるとします。この時点より前の最後の完全バックアップを探し、それがクリーンアップされないことを確認する必要があります。
 
     ```shell
     FULL_BACKUP_TS=`tiup br validate decode --field="end-version" --storage "s3://backup-101/snapshot-${date}?access-key=${access-key}&secret-access-key=${secret-access-key}"| tail -n1`
     ```
 
-3. Delete log backup data earlier than the snapshot backup `FULL_BACKUP_TS`:
+3.  スナップショット バックアップよりも前のログ バックアップ データを削除します`FULL_BACKUP_TS` :
 
     ```shell
     tiup br log truncate --until=${FULL_BACKUP_TS} --storage='s3://backup-101/logbackup?access-key=${access-key}&secret-access-key=${secret-access-key}"'
     ```
 
-4. Delete snapshot data earlier than the snapshot backup `FULL_BACKUP_TS`:
+4.  スナップショット バックアップより前のスナップショット データを削除します`FULL_BACKUP_TS` :
 
     ```shell
     rm -rf s3://backup-101/snapshot-${date}
     ```
 
-## Performance and impact of PITR
+## PITRのパフォーマンスと影響 {#performance-and-impact-of-pitr}
 
-### Capabilities
+### 能力 {#capabilities}
 
-- On each TiKV node, PITR can restore snapshot data at a speed of 280 GB/h and log data 30 GB/h.
-- BR deletes outdated log backup data at a speed of 600 GB/h.
+-   各 TiKV ノードでは、PITR は 280 GB/h の速度でスナップショット データを復元し、30 GB/h のログ データを復元できます。
+-   BR は、古いログ バックアップ データを 600 GB/h の速度で削除します。
 
-> **Note:**
+> **注記：**
 >
-> The preceding specifications are based on test results from the following two testing scenarios. The actual data might be different.
+> 上記の仕様は、次の 2 つのテスト シナリオのテスト結果に基づいています。実際のデータは異なる場合があります。
 >
-> - Snapshot data restore speed = Snapshot data size / (duration * the number of TiKV nodes)
-> - Log data restore speed = Restored log data size / (duration * the number of TiKV nodes)
+> -   スナップショット データの復元速度 = スナップショット データのサイズ / (期間 * TiKV ノードの数)
+> -   ログデータの復元速度 = 復元されたログデータのサイズ / (期間 * TiKV ノードの数)
 >
-> The snapshot data size refers to the logical size of all KVs in a single replica, not the actual amount of restored data. BR restores all replicas according to the number of replicas configured for the cluster. The more replicas there are, the more data can be actually restored.
-> The default replica number for all clusters in the test is 3.
-> To improve the overall restore performance, you can modify the [`import.num-threads`](/tikv-configuration-file.md#import) item in the TiKV configuration file and the [`concurrency`](/br/use-br-command-line-tool.md#common-options) option in the BR command.
+> スナップショットのデータ サイズは、復元されたデータの実際の量ではなく、単一レプリカ内のすべての KV の論理サイズを指します。 BR は、クラスターに構成されたレプリカの数に従って、すべてのレプリカを復元します。レプリカが多ければ多いほど、実際に復元できるデータも多くなります。テスト内のすべてのクラスターのデフォルトのレプリカ番号は 3 です。全体的な復元パフォーマンスを向上させるために、TiKV 構成ファイルの[`import.num-threads`](/tikv-configuration-file.md#import)項目とBRコマンドの[`concurrency`](/br/use-br-command-line-tool.md#common-options)オプションを変更できます。
 
-Testing scenario 1 (on [TiDB Cloud](https://tidbcloud.com)):
+テストシナリオ 1 ( [TiDB Cloud](https://tidbcloud.com)上):
 
-- The number of TiKV nodes (8 core, 16 GB memory): 21
-- TiKV configuration item `import.num-threads`: 8
-- BR command option `concurrency`: 128
-- The number of Regions: 183,000
-- New log data created in the cluster: 10 GB/h
-- Write (INSERT/UPDATE/DELETE) QPS: 10,000
+-   TiKV ノード数 (8 コア、16 GBメモリ): 21
+-   TiKV構成項目`import.num-threads` ：8
+-   BRコマンドオプション`concurrency` ：128
+-   リージョンの数: 183,000
+-   クラスター内に作成される新しいログ データ: 10 GB/h
+-   書き込み (挿入/更新/削除) QPS: 10,000
 
-Testing scenario 2 (on TiDB Self-Hosted):
+テスト シナリオ 2 (TiDB セルフホスト上):
 
-- The number of TiKV nodes (8 core, 64 GB memory): 6
-- TiKV configuration item `import.num-threads`: 8
-- BR command option `concurrency`: 128
-- The number of Regions: 50,000
-- New log data created in the cluster: 10 GB/h
-- Write (INSERT/UPDATE/DELETE) QPS: 10,000
+-   TiKV ノード数 (8 コア、64 GBメモリ): 6
+-   TiKV構成項目`import.num-threads` ：8
+-   BRコマンドオプション`concurrency` ：128
+-   リージョン数: 50,000
+-   クラスター内に作成される新しいログ データ: 10 GB/h
+-   書き込み (挿入/更新/削除) QPS: 10,000
 
-## See also
+## こちらも参照 {#see-also}
 
-* [TiDB Backup and Restore Use Cases](/br/backup-and-restore-use-cases.md)
-* [br Command-line Manual](/br/use-br-command-line-tool.md)
-* [Log Backup and PITR Architecture](/br/br-log-architecture.md)
+-   [TiDB のバックアップと復元の使用例](/br/backup-and-restore-use-cases.md)
+-   [br コマンドラインマニュアル](/br/use-br-command-line-tool.md)
+-   [ログバックアップとPITRアーキテクチャ](/br/br-log-architecture.md)

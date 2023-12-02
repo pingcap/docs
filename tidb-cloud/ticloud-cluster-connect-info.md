@@ -3,51 +3,51 @@ title: ticloud cluster connect-info
 summary: The reference of `ticloud cluster connect-info`.
 ---
 
-# ticloud cluster connect-info
+# ticloud クラスターの接続情報 {#ticloud-cluster-connect-info}
 
-Get the connection string of a cluster:
+クラスターの接続文字列を取得します。
 
 ```shell
 ticloud cluster connect-info [flags]
 ```
 
-> **Note:**
+> **注記：**
 >
-> Currently, this command only supports getting the connection string of a [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) cluster.
+> 現在、このコマンドは[TiDB サーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-serverless)クラスターの接続文字列の取得のみをサポートしています。
 
-## Examples
+## 例 {#examples}
 
-Get the connection string of a cluster in interactive mode:
+対話型モードでクラスターの接続文字列を取得します。
 
 ```shell
 ticloud cluster connect-info
 ```
 
-Get the connection string of a cluster in non-interactive mode:
+非対話モードでクラスターの接続文字列を取得します。
 
 ```shell
 ticloud cluster connect-info --project-id <project-id> --cluster-id <cluster-id> --client <client-name> --operating-system <operating-system>
 ```
 
-## Flags
+## フラグ {#flags}
 
-In non-interactive mode, you need to manually enter the required flags. In interactive mode, you can just follow CLI prompts to fill them in.
+非対話型モードでは、必要なフラグを手動で入力する必要があります。対話型モードでは、CLI プロンプトに従って入力するだけです。
 
-| Flag                       | Description                                                                                                                                                                                                                                                                                                                                                                | Required | Note                                                 |
-|----------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------|------------------------------------------------------|
-| -p, --project-id string    | The ID of the project, in which the cluster is created                                                                                                                                                                                                                                                                                                                | Yes      | Only works in non-interactive mode.                  |
-| -c, --cluster-id string    | The ID of the cluster                                                                                                                                                                                                                                                                                                                                                      | Yes      | Only works in non-interactive mode.                  |
-| --client string            | The desired client used for the connection. Supported clients include `general`, `mysql_cli`, `mycli`, `libmysqlclient`, `python_mysqlclient`, `pymysql`, `mysql_connector_python`, `mysql_connector_java`, `go_mysql_driver`, `node_mysql2`, `ruby_mysql2`, `php_mysqli`, `rust_mysql`, `mybatis`, `hibernate`, `spring_boot`, `gorm`, `prisma`, `sequelize_mysql2`, `django_tidb`, `sqlalchemy_mysqlclient`, and `active_record`. | Yes      | Only works in non-interactive mode.                  |
-| --operating-system string  | The operating system name. Supported operating systems include `macOS`, `Windows`, `Ubuntu`, `CentOS`, `RedHat`, `Fedora`, `Debian`, `Arch`, `OpenSUSE`, `Alpine`, and `Others`.                                                                                                                    | Yes      | Only works in non-interactive mode.                  |
-| -h, --help                 | Help information for this command                                                                                                                                                                                                                                                                                                                                          | No       | Works in both non-interactive and interactive modes. |
+| フラグ                 | 説明                                                                                                                                                                                                                                                                                                                                                     | 必須  | 注記                       |
+| ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --- | ------------------------ |
+| -p、--プロジェクトID文字列    | クラスターが作成されるプロジェクトの ID                                                                                                                                                                                                                                                                                                                                  | はい  | 非対話モードでのみ動作します。          |
+| -c、--cluster-id 文字列 | クラスターのID                                                                                                                                                                                                                                                                                                                                               | はい  | 非対話モードでのみ動作します。          |
+| --クライアント文字列         | 接続に使用される目的のクライアント。 `go_mysql_driver` `php_mysqli` `rust_mysql` `spring_boot` `mysql_cli` `pymysql` `mysql_connector_python` `general` `hibernate` `mybatis` `ruby_mysql2` `mycli` `mysql_connector_java` `libmysqlclient` `python_mysqlclient` `node_mysql2` `gorm` `prisma` `sequelize_mysql2` `django_tidb` `sqlalchemy_mysqlclient` `active_record` | はい  | 非対話モードでのみ動作します。          |
+| --オペレーティング システム文字列  | オペレーティング システム名。サポートされているオペレーティング システムには、 `macOS` 、 `Windows` 、 `Ubuntu` 、 `CentOS` 、 `RedHat` 、 `Fedora` 、 `Debian` 、 `Arch` 、 `OpenSUSE` 、 `Alpine` 、および`Others`が含まれます。                                                                                                                                                                               | はい  | 非対話モードでのみ動作します。          |
+| -h, --help          | このコマンドのヘルプ情報                                                                                                                                                                                                                                                                                                                                           | いいえ | 非対話型モードと対話型モードの両方で動作します。 |
 
-## Inherited flags
+## 継承されたフラグ {#inherited-flags}
 
-| Flag                 | Description                                                                                           | Required | Note                                                                                                              |
-|----------------------|-------------------------------------------------------------------------------------------------------|----------|-------------------------------------------------------------------------------------------------------------------|
-| --no-color           | Disables color in output.                                                                             | No       | Only works in non-interactive mode. In interactive mode, disabling color might not work with some UI components.  |
-| -P, --profile string | Specifies the active [user profile](/tidb-cloud/cli-reference.md#user-profile) used in this command.  | No       | Works in both non-interactive and interactive modes.                                                              |
+| フラグ            | 説明                                                                               | 必須  | 注記                                                                 |
+| -------------- | -------------------------------------------------------------------------------- | --- | ------------------------------------------------------------------ |
+| --色なし          | 出力のカラーを無効にします。                                                                   | いいえ | 非対話型モードでのみ動作します。インタラクティブ モードでは、一部の UI コンポーネントで色の無効化が機能しない可能性があります。 |
+| -P、--プロファイル文字列 | このコマンドで使用されるアクティブな[ユーザープロフィール](/tidb-cloud/cli-reference.md#user-profile)を指定します。 | いいえ | 非対話型モードと対話型モードの両方で動作します。                                           |
 
-## Feedback
+## フィードバック {#feedback}
 
-If you have any questions or suggestions on the TiDB Cloud CLI, feel free to create an [issue](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose). Also, we welcome any contributions.
+TiDB Cloud CLI に関して質問や提案がある場合は、お気軽に[問題](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose)を作成してください。また、貢献も歓迎します。

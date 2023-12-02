@@ -2,31 +2,31 @@
 title: tiup mirror merge
 ---
 
-# tiup mirror merge
+# tiup mirror merge {#tiup-mirror-merge}
 
-The `tiup mirror merge` command is used to merge one or more mirrors to the current mirror.
+`tiup mirror merge`コマンドは、1 つ以上のミラーを現在のミラーにマージするために使用されます。
 
-To execute this command, the following conditions must be met:
+このコマンドを実行するには、次の条件が満たされる必要があります。
 
-- The owner IDs of all components of the target mirror exist in the current mirror.
-- The `${TIUP_HOME}/keys` directory of the user who executes this command contains all the private keys corresponding to the above owner IDs in the current mirror (you can use the command [`tiup mirror set`](/tiup/tiup-command-mirror-set.md) to switch the current mirror to the mirror that is currently authorized to modify).
+-   ターゲット ミラーのすべてのコンポーネントの所有者 ID は、現在のミラーに存在します。
+-   このコマンドを実行するユーザーの`${TIUP_HOME}/keys`ディレクトリには、現在のミラー内の上記の所有者 ID に対応するすべての秘密キーが含まれています (コマンド[`tiup mirror set`](/tiup/tiup-command-mirror-set.md)を使用して、現在のミラーを現在変更が許可されているミラーに切り替えることができます)。
 
-## Syntax
+## 構文 {#syntax}
 
 ```shell
 tiup mirror merge <mirror-dir-1> [mirror-dir-N] [flags]
 ```
 
-- `<mirror-dir-1>`: the first mirror to be merged into the current mirror
-- `[mirror-dir-N]`: the Nth mirror to be merged into the current mirror
+-   `<mirror-dir-1>` : 現在のミラーにマージされる最初のミラー
+-   `[mirror-dir-N]` : 現在のミラーにマージされる N 番目のミラー
 
-## Option
+## オプション {#option}
 
-None
+なし
 
-## Outputs
+## 出力 {#outputs}
 
-- If the command is executed successfully, there is no output.
-- If the current mirror does not have a component owner of the target mirror, or if `${TIUP_HOME}/keys` does not have the owner's private key, TiUP reports the `Error: missing owner keys for owner %s on component %s` error.
+-   コマンドが正常に実行された場合、出力はありません。
+-   現在のミラーにターゲット ミラーのコンポーネント所有者が存在しない場合、または`${TIUP_HOME}/keys`所有者の秘密キーがない場合、 TiUP は`Error: missing owner keys for owner %s on component %s`エラーを報告します。
 
-[<< Back to the previous page - TiUP Mirror command list](/tiup/tiup-command-mirror.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUP Mirror コマンド一覧](/tiup/tiup-command-mirror.md#command-list)

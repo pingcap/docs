@@ -3,90 +3,94 @@ title: Get Started with Chat2Query API
 summary: Learn how to use TiDB Cloud Chat2Query API to generate and execute SQL statements using AI by providing instructions.
 ---
 
-# Get Started with Chat2Query API
+# Chat2Query API を使ってみる {#get-started-with-chat2query-api}
 
-TiDB Cloud provides the Chat2Query API, a RESTful interface that allows you to generate and execute SQL statements using AI by providing instructions. Then, the API returns the query results for you.
+TiDB Cloud は、指示を提供することで AI を使用して SQL ステートメントを生成および実行できる RESTful インターフェイスである Chat2Query API を提供します。その後、API はクエリ結果を返します。
 
-Chat2Query API can only be accessed through HTTPS, ensuring that all data transmitted over the network is encrypted using TLS.
+Chat2Query API には HTTPS 経由でのみアクセスできるため、ネットワーク上で送信されるすべてのデータは TLS を使用して暗号化されます。
 
-> **Note:**
+> **注記：**
 >
-> Chat2Query API is available for [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) clusters. To use the Chat2Query API on [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) clusters, contact [TiDB Cloud support](/tidb-cloud/tidb-cloud-support.md).
+> Chat2Query APIは[TiDB サーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-serverless)クラスタで利用可能です。 [TiDB専用](/tidb-cloud/select-cluster-tier.md#tidb-dedicated)クラスターで Chat2Query API を使用するには、 [TiDB Cloudのサポート](/tidb-cloud/tidb-cloud-support.md)にお問い合わせください。
 
-## Before you begin
+## あなたが始める前に {#before-you-begin}
 
-Before using the Chat2Query API, make sure that you have created a TiDB cluster and enabled [AI to generate SQL queries](/tidb-cloud/explore-data-with-chat2query.md). If you do not have a TiDB cluster, follow the steps in [Create a TiDB Serverless cluster](/tidb-cloud/create-tidb-cluster-serverless.md) or [Create a TiDB Dedicated cluster](/tidb-cloud/create-tidb-cluster.md) to create one.
+Chat2Query API を使用する前に、TiDB クラスターを作成し、 [SQLクエリを生成するAI](/tidb-cloud/explore-data-with-chat2query.md)有効にしていることを確認してください。 TiDB クラスターがない場合は、 [TiDB サーバーレスクラスターを作成する](/tidb-cloud/create-tidb-cluster-serverless.md)または[TiDB 専用クラスターの作成](/tidb-cloud/create-tidb-cluster.md)の手順に従って作成します。
 
-## Step 1. Enable the Chat2Query API
+## ステップ 1. Chat2Query API を有効にする {#step-1-enable-the-chat2query-api}
 
-To enable the Chat2Query API, perform the following steps:
+Chat2Query API を有効にするには、次の手順を実行します。
 
-1. Go to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
+1.  プロジェクトの[**クラスター**](https://tidbcloud.com/console/clusters)ページに移動します。
 
-    > **Tip:**
+    > **ヒント：**
     >
-    > If you have multiple projects, you can click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner and switch to another project.
+    > 複数のプロジェクトがある場合は、<mdsvgicon name="icon-left-projects">左下隅の をクリックして、別のプロジェクトに切り替えます。</mdsvgicon>
 
-2. Click your cluster name, and then click **Chat2Query** in the left navigation pane.
-3. In the upper-right corner of Chat2Query, click **...** and select **Settings**.
-4. Enable **DataAPI** and the Chat2Query Data App is created.
+2.  クラスター名をクリックし、左側のナビゲーション ウィンドウで**[Chat2Query]**をクリックします。
 
-    > **Note:**
+3.  Chat2Query の右上隅で**[...]**をクリックし、 **[設定]**を選択します。
+
+4.  **DataAPI**を有効にすると、Chat2Query データ アプリが作成されます。
+
+    > **注記：**
     >
-    > After DataAPI is enabled for one TiDB cluster, all TiDB clusters in the same project can use the Chat2Query API.
+    > 1 つの TiDB クラスターで DataAPI を有効にすると、同じプロジェクト内のすべての TiDB クラスターで Chat2Query API を使用できるようになります。
 
-5. Click the **Data Service** link in the message to access the Chat2Query API.
+5.  メッセージ内の**「Data Service」**リンクをクリックして、Chat2Query API にアクセスします。
 
-    You can find that the **Chat2Query System** [Data App](/tidb-cloud/tidb-cloud-glossary.md#data-app) and its **Chat2Data** [endpoint](/tidb-cloud/tidb-cloud-glossary.md#endpoint) are displayed in the left pane.
+    **Chat2Query System** [データアプリ](/tidb-cloud/tidb-cloud-glossary.md#data-app)とその**Chat2Data** [終点](/tidb-cloud/tidb-cloud-glossary.md#endpoint)左側のペインに表示されていることがわかります。
 
-## Step 2. Create an API key
+## ステップ 2. API キーを作成する {#step-2-create-an-api-key}
 
-Before calling an endpoint, you need to create an API key. To create an API key for the Chat2Query Data App, perform the following steps:
+エンドポイントを呼び出す前に、API キーを作成する必要があります。 Chat2Query データ アプリの API キーを作成するには、次の手順を実行します。
 
-1. In the left pane of [**Data Service**](https://tidbcloud.com/console/data-service), click the name of **Chat2Query System** to view its details.
-2. In the **Authentication** area, click **Create API Key**.
-3. In the **Create API Key** dialog box, enter a description and select a role for your API key.
+1.  [**データサービス**](https://tidbcloud.com/console/data-service)の左側のペインで、 **Chat2Query システム**の名前をクリックして詳細を表示します。
 
-    The role is used to control whether the API key can read or write data to the clusters linked to the Data App. You can select the `ReadOnly` or `ReadAndWrite` role:
+2.  **「認証」**領域で、 **「API キーの作成」を**クリックします。
 
-    - `ReadOnly`: only allows the API key to read data, such as `SELECT`, `SHOW`, `USE`, `DESC`, and `EXPLAIN` statements.
-    - `ReadAndWrite`: allows the API key to read and write data. You can use this API key to execute all SQL statements, such as DML and DDL statements.
+3.  **[API キーの作成]**ダイアログ ボックスで、説明を入力し、API キーのロールを選択します。
 
-4. Click **Next**. The public key and private key are displayed.
+    このロールは、API キーがデータ アプリにリンクされたクラスターに対してデータの読み取りまたは書き込みを行えるかどうかを制御するために使用されます。 `ReadOnly`または`ReadAndWrite`役割を選択できます。
 
-    Make sure that you have copied and saved the private key in a secure location. After leaving this page, you will not be able to get the full private key again.
+    -   `ReadOnly` : API キーは`SELECT` 、 `SHOW` 、 `USE` 、 `DESC` 、 `EXPLAIN`ステートメントなどのデータの読み取りのみを許可します。
+    -   `ReadAndWrite` : API キーによるデータの読み取りと書き込みを許可します。この API キーを使用して、DML ステートメントや DDL ステートメントなどのすべての SQL ステートメントを実行できます。
 
-5. Click **Done**.
+4.  **「次へ」**をクリックします。公開鍵と秘密鍵が表示されます。
 
-## Step 3. Call the Chat2Data endpoint
+    秘密キーをコピーして安全な場所に保存したことを確認してください。このページを離れると、完全な秘密キーを再度取得することはできなくなります。
 
-In the left pane of the [**Data Service**](https://tidbcloud.com/console/data-service) page, click **Chat2Query** > **/chat2data** to view the endpoint details. The **Properties** of Chat2Data are displayed:
+5.  **「完了」**をクリックします。
 
-- **Endpoint Path**: (read-only) the path of the Chat2Data endpoint, which is `/chat2data`.
+## ステップ 3. Chat2Data エンドポイントを呼び出す {#step-3-call-the-chat2data-endpoint}
 
-- **Endpoint URL**: (read-only) the URL of the Chat2Data endpoint, which is used to call the endpoint. For example, `https://<region>.data.tidbcloud.com/api/v1beta/app/chat2query-<ID>/endpoint/chat2data`.
+[**データサービス**](https://tidbcloud.com/console/data-service)ページの左側のペインで、 **[Chat2Query]** &gt; **[/chat2data]**をクリックしてエンドポイントの詳細を表示します。 Chat2Data の**プロパティが**表示されます。
 
-- **Request Method**: (read-only) the HTTP method of the Chat2Data endpoint, which is `POST`.
+-   **エンドポイント パス**: (読み取り専用) Chat2Data エンドポイントのパス`/chat2data` 。
 
-- **Timeout(ms)**: the timeout for the Chat2Data endpoint, in milliseconds.
+-   **エンドポイント URL** : (読み取り専用) Chat2Data エンドポイントの URL。エンドポイントを呼び出すために使用されます。たとえば、 `https://<region>.data.tidbcloud.com/api/v1beta/app/chat2query-<ID>/endpoint/chat2data` 。
 
-- **Max Rows**: the maximum number of rows that the Chat2Data endpoint returns.
+-   **Request Method** : (読み取り専用) Chat2Data エンドポイントの HTTP メソッド`POST` 。
 
-TiDB Cloud generates code examples to help you call an endpoint. To get the examples and run the code, perform the following steps:
+-   **Timeout(ms)** : Chat2Data エンドポイントのタイムアウト (ミリ秒単位)。
 
-1. On the current **Chat2Data** page, click **Code Example** to the right of **Endpoint URL**. The **Code Example** dialog box is displayed.
-2. In the dialog box, select the cluster and database that you want to use to call the endpoint, and then copy the code example.
-3. Paste the code example in your application and run it.
+-   **Max Rows** : Chat2Data エンドポイントが返す最大行数。
 
-    - Replace the `<Public Key>` and `<Private Key>` placeholders with your API key.
-    - Replace the `<your instruction>` placeholder with the instruction you want AI to generate and execute SQL statements.
-    - Replace the `<your table name, optional>` placeholder with the table name you want to query. If you do not specify a table name, AI will query all tables in the database.
+TiDB Cloudは、エンドポイントの呼び出しに役立つコード サンプルを生成します。例を取得してコードを実行するには、次の手順を実行します。
 
-> **Note:**
+1.  現在の**Chat2Data**ページで、 **[エンドポイント URL]**の右側にある**[コード例]**をクリックします。 **[コード例]**ダイアログ ボックスが表示されます。
+2.  ダイアログ ボックスで、エンドポイントの呼び出しに使用するクラスターとデータベースを選択し、コード例をコピーします。
+3.  コード例をアプリケーションに貼り付けて実行します。
+
+    -   `<Public Key>`と`<Private Key>`プレースホルダーを API キーに置き換えます。
+    -   `<your instruction>`プレースホルダーを、AI に SQL ステートメントを生成して実行させる命令に置き換えます。
+    -   `<your table name, optional>`プレースホルダーを、クエリするテーブル名に置き換えます。テーブル名を指定しない場合、AI はデータベース内のすべてのテーブルをクエリします。
+
+> **注記：**
 >
-> Each Chat2Query Data App has a rate limit of 100 requests per day. If you exceed the rate limit, the API returns a `429` error. For more quota, you can [submit a request](https://support.pingcap.com/hc/en-us/requests/new?ticket_form_id=7800003722519) to our support team.
+> 各 Chat2Query データ アプリには、1 日あたり 100 リクエストのレート制限があります。レート制限を超えると、API は`429`エラーを返します。さらに割り当てが必要な場合は、サポート チームに[リクエストを送信する](https://support.pingcap.com/hc/en-us/requests/new?ticket_form_id=7800003722519)お問い合わせください。
 
-The following code example is used to find the most popular GitHub repository from `sample_data.github_events` table:
+次のコード例は、 `sample_data.github_events`テーブルから最も人気のある GitHub リポジトリを検索するために使用されます。
 
 ```bash
 curl --digest --user '<Public Key>:<Private Key>' \
@@ -100,14 +104,14 @@ curl --digest --user '<Public Key>:<Private Key>' \
       }'
 ```
 
-In the preceding example, the request body is a JSON object with the following properties:
+前述の例では、リクエスト本文は次のプロパティを持つ JSON オブジェクトです。
 
-- `cluster_id`: _string_. A unique identifier of the TiDB cluster.
-- `database`: _string_. The name of the database.
-- `tables`: _array_. (optional) A list of table names to be queried.
-- `instruction`: _string_. A natural language instruction describing the query you want.
+-   `cluster_id` :*文字列*。 TiDB クラスターの一意の識別子。
+-   `database` :*文字列*。データベースの名前。
+-   `tables` :*配列*。 (オプション) クエリ対象のテーブル名のリスト。
+-   `instruction` :*文字列*。必要なクエリを説明する自然言語命令。
 
-The response is as follows:
+応答は次のとおりです。
 
 ```json
 {
@@ -146,7 +150,7 @@ The response is as follows:
     }
 ```
 
-If your API call is not successful, you will receive a status code other than `200`. The following is an example of the `500` status code:
+API 呼び出しが成功しなかった場合は、 `200`以外のステータス コードが返されます。以下は`500`ステータス コードの例です。
 
 ```json
 {
@@ -168,7 +172,7 @@ If your API call is not successful, you will receive a status code other than `2
 }
 ```
 
-## Learn more
+## もっと詳しく知る {#learn-more}
 
-- [Manage an API key](/tidb-cloud/data-service-api-key.md)
-- [Response and Status Codes of Data Service](/tidb-cloud/data-service-response-and-status-code.md)
+-   [APIキーを管理する](/tidb-cloud/data-service-api-key.md)
+-   [データサービスのレスポンスコードとステータスコード](/tidb-cloud/data-service-response-and-status-code.md)

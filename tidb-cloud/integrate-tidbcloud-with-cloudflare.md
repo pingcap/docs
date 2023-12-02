@@ -3,154 +3,140 @@ title: Integrate TiDB Cloud with Cloudflare
 summary: Learn how deploy Cloudflare Workers with TiDB Cloud.
 ---
 
-# Integrate TiDB Cloud with Cloudflare Workers
+# TiDB Cloudと Cloudflare ワーカーを統合する {#integrate-tidb-cloud-with-cloudflare-workers}
 
-[Cloudflare Workers](https://workers.cloudflare.com/) is a platform that allows you to run code in response to specific events, such as HTTP requests or changes to a database. Cloudflare Workers is easy to use and can be used to build a variety of applications, including custom APIs, serverless functions, and microservices. It is particularly useful for applications that require low-latency performance or need to scale quickly.
+[Cloudflare ワーカー](https://workers.cloudflare.com/)は、HTTP リクエストやデータベースへの変更などの特定のイベントに応答してコードを実行できるプラットフォームです。 Cloudflare Workers は使いやすく、カスタム API、サーバーレス関数、マイクロサービスなどのさまざまなアプリケーションの構築に使用できます。これは、低レイテンシのパフォーマンスを必要とするアプリケーションや、迅速に拡張する必要があるアプリケーションに特に役立ちます。
 
-However, you may find it hard to connect to TiDB Cloud from Cloudflare Workers because Cloudflare Workers runs on the V8 engine which cannot make direct TCP connections.
+ただし、Cloudflare Workers は直接 TCP 接続を行うことができない V8 エンジン上で実行されるため、Cloudflare Workers からTiDB Cloudに接続するのが難しい場合があります。
 
-Fortunately, Prisma has your back with the [Data Proxy](https://www.prisma.io/docs/data-platform/data-proxy). It can help you use Cloudflare Workers to process and manipulate the data being transmitted over a TCP connection.
+幸いなことに、Prisma は[データプロキシ](https://www.prisma.io/docs/data-platform/data-proxy)をサポートします。これは、Cloudflare Workers を使用して、TCP 接続経由で送信されるデータを処理および操作するのに役立ちます。
 
-This document shows how to deploy Cloudflare Workers with TiDB Cloud and Prisma Data Proxy step by step.
+このドキュメントでは、 TiDB Cloudおよび Prisma Data Proxy を使用して Cloudflare Workers をデプロイする方法を段階的に説明します。
 
-> **Note:**
+> **注記：**
 >
-> If you want to connect a locally deployed TiDB to Cloudflare Workers, you can try [worker-tidb](https://github.com/shiyuhang0/worker-tidb), which uses Cloudflare tunnels as a proxy. However, worker-tidb is not recommended for production use.
+> ローカルにデプロイされた TiDB を Cloudflare Workers に接続する場合は、Cloudflare トンネルをプロキシとして使用する[労働者-情報](https://github.com/shiyuhang0/worker-tidb)を試すことができます。ただし、worker-tdb は本番での使用はお勧めできません。
 
-## Before you begin
+## あなたが始める前に {#before-you-begin}
 
-Before you try the steps in this article, you need to prepare the following things:
+この記事の手順を試す前に、次のものを準備する必要があります。
 
-- A TiDB Cloud account and a TiDB Serverless cluster on TiDB Cloud. For more details, see [TiDB Cloud Quick Start](/tidb-cloud/tidb-cloud-quickstart.md#step-1-create-a-tidb-cluster).
-- A [Cloudflare Workers account](https://dash.cloudflare.com/login).
-- A [Prisma Data Platform account](https://cloud.prisma.io/).
-- A [GitHub account](https://github.com/login).
-- Install Node.js and npm.
-- Install dependencies using `npm install -D prisma typescript wrangler`
+-   TiDB CloudアカウントとTiDB Cloud上の TiDB サーバーレス クラスター。詳細については、 [TiDB Cloudクイック スタート](/tidb-cloud/tidb-cloud-quickstart.md#step-1-create-a-tidb-cluster)を参照してください。
+-   回答[Cloudflare ワーカーアカウント](https://dash.cloudflare.com/login) ．
+-   回答[Prisma データ プラットフォーム アカウント](https://cloud.prisma.io/) ．
+-   回答[GitHub アカウント](https://github.com/login) ．
+-   Node.js と npm をインストールします。
+-   `npm install -D prisma typescript wrangler`を使用して依存関係をインストールします
 
-## Step 1: Set up Wrangler
+## ステップ 1: Wrangler をセットアップする {#step-1-set-up-wrangler}
 
-[Wrangler](https://developers.cloudflare.com/workers/wrangler/) is the official Cloudflare Worker CLI. You can use it to generate, build, preview, and publish your Workers.
+[ラングラー](https://developers.cloudflare.com/workers/wrangler/)は公式のCloudflare Worker CLIです。これを使用して、ワーカーを生成、構築、プレビュー、公開できます。
 
-1. To authenticate Wrangler, run wrangler login:
+1.  Wrangler を認証するには、wrangler ログインを実行します。
 
-    ```
-    wrangler login
-    ```
+        wrangler login
 
-2. Use Wrangler to create a worker project:
+2.  Wrangler を使用してワーカー プロジェクトを作成します。
 
-    ```
-    wrangler init prisma-tidb-cloudflare
-    ```
+        wrangler init prisma-tidb-cloudflare
 
-3. In your terminal, you will be asked a series of questions related to your project. Choose the default values for all questions.
+3.  ターミナルでは、プロジェクトに関連する一連の質問が表示されます。すべての質問に対してデフォルト値を選択します。
 
-## Step 2: Set up Prisma
+## ステップ 2: Prisma をセットアップする {#step-2-set-up-prisma}
 
-1. Enter your project directory:
+1.  プロジェクト ディレクトリを入力します。
 
-    ```
-    cd prisma-tidb-cloudflare
-    ```
+        cd prisma-tidb-cloudflare
 
-2. Use the `prisma init` command to set up Prisma:
+2.  `prisma init`コマンドを使用して Prisma をセットアップします。
 
-    ```
-    npx prisma init
-    ```
+        npx prisma init
 
-    This creates a Prisma schema in `prisma/schema.prisma`.
+    これにより、 `prisma/schema.prisma`に Prisma スキーマが作成されます。
 
-3. Inside `prisma/schema.prisma`, add the schema according to your tables in TiDB. Assume that you have `table1` and `table2` in TiDB, you can add the following schema:
+3.  `prisma/schema.prisma`内に、TiDB のテーブルに従ってスキーマを追加します。 TiDB に`table1`と`table2`あると仮定すると、次のスキーマを追加できます。
 
-    ```
-    generator client {
-      provider = "prisma-client-js"
-    }
+        generator client {
+          provider = "prisma-client-js"
+        }
 
-    datasource db {
-      provider = "mysql"
-      url      = env("DATABASE_URL")
-    }
+        datasource db {
+          provider = "mysql"
+          url      = env("DATABASE_URL")
+        }
 
-    model table1 {
-      id   Int                   @id @default(autoincrement())
-      name String
-    }
+        model table1 {
+          id   Int                   @id @default(autoincrement())
+          name String
+        }
 
-    model table2 {
-      id   Int                   @id @default(autoincrement())
-      name String
-    }
-    ```
+        model table2 {
+          id   Int                   @id @default(autoincrement())
+          name String
+        }
 
-    This data model will be used to store incoming requests from your Worker.
+    このデータ モデルは、ワーカーからの受信リクエストを保存するために使用されます。
 
-## Step 3: Push your project to GitHub
+## ステップ 3: プロジェクトを GitHub にプッシュする {#step-3-push-your-project-to-github}
 
-1. [Create a repository](https://github.com/new) named `prisma-tidb-cloudflare` on GitHub.
+1.  GitHub では[リポジトリを作成する](https://github.com/new) `prisma-tidb-cloudflare`と名付けました。
 
-2. After you create the repository, you can push your project to GitHub:
+2.  リポジトリを作成したら、プロジェクトを GitHub にプッシュできます。
 
-    ```
-    git remote add origin https://github.com/<username>/prisma-tidb-cloudflare
-    git add .
-    git commit -m "initial commit"
-    git push -u origin main
-    ```
+        git remote add origin https://github.com/<username>/prisma-tidb-cloudflare
+        git add .
+        git commit -m "initial commit"
+        git push -u origin main
 
-## Step 4: Import your Project into the Prisma Data Platform
+## ステップ 4: プロジェクトを Prisma データ プラットフォームにインポートする {#step-4-import-your-project-into-the-prisma-data-platform}
 
-With Cloudflare Workers, you cannot directly access your database because there is no TCP support. Instead, you can use Prisma Data Proxy as described above.
+Cloudflare Workers では、TCP サポートがないため、データベースに直接アクセスできません。代わりに、上記のように Prisma Data Proxy を使用できます。
 
-1. To get started, sign in to the [Prisma Data Platform](https://cloud.prisma.io/) and click **New Project**.
-2. Fill in the **Connection string** with this pattern `mysql://USER:PASSWORD@HOST:PORT/DATABASE?sslaccept=strict`. You can find the connection information in your [TiDB Cloud console](https://tidbcloud.com/console/clusters).
-3. Leave the **Static IPs** as disabled because TiDB Serverless is accessible from any IP address.
-4. Select a Data Proxy region that is geographically close to your TiDB Cloud cluster location. Then click **Create project**.
+1.  開始するには、 [プリズマ データ プラットフォーム](https://cloud.prisma.io/)にサインインし、 **[新しいプロジェクト]**をクリックします。
 
-   ![Configure project settings](/media/tidb-cloud/cloudflare/cloudflare-project.png)
+2.  **接続文字列**にこのパターンを入力します`mysql://USER:PASSWORD@HOST:PORT/DATABASE?sslaccept=strict` 。接続情報は[TiDB Cloudコンソール](https://tidbcloud.com/console/clusters)にあります。
 
-5. Fill in the repository, and click **Link Prisma schema** in the **Get Started** page.
-6. Click **Create a new connection string** and you will get a new connection string that starts with `prisma://.` Copy this connection string and save it for later.
+3.  TiDB Serverless にはどの IP アドレスからでもアクセスできるため、**静的 IP は**無効のままにしておきます。
 
-   ![Create new connection string](/media/tidb-cloud/cloudflare/cloudflare-start.png)
+4.  TiDB Cloudクラスターの場所に地理的に近いデータ プロキシ リージョンを選択します。次に、 **「プロジェクトの作成」**をクリックします。
 
-7. Click **Skip and continue to Data Platform** to go to the Data Platform.
+    ![Configure project settings](/media/tidb-cloud/cloudflare/cloudflare-project.png)
 
-## Step 5: Set the Data Proxy Connection string in your environment
+5.  リポジトリに入力し、 **「開始」**ページで**「Prisma スキーマをリンク」を**クリックします。
 
-1. Add the Data Proxy connection string to your local environment `.env` file:
+6.  **[新しい接続文字列の作成]**をクリックすると、 `prisma://.`で始まる新しい接続文字列が取得されます。この接続文字列をコピーして、後で使用できるように保存します。
 
-    ```
-    DATABASE_URL=prisma://aws-us-east-1.prisma-data.com/?api_key=•••••••••••••••••"
-    ```
+    ![Create new connection string](/media/tidb-cloud/cloudflare/cloudflare-start.png)
 
-2. Add the Data Proxy connection to Cloudflare Workers with secret:
+7.  **[スキップしてデータ プラットフォームに進む]**をクリックして、データ プラットフォームに移動します。
 
-    ```
-    wrangler secret put DATABASE_URL
-    ```
+## ステップ 5: 環境でデータ プロキシ接続文字列を設定する {#step-5-set-the-data-proxy-connection-string-in-your-environment}
 
-3. According to the prompt, enter the Data Proxy connection string.
+1.  データ プロキシ接続文字列をローカル環境`.env`ファイルに追加します。
 
-> **Note:**
+        DATABASE_URL=prisma://aws-us-east-1.prisma-data.com/?api_key=•••••••••••••••••"
+
+2.  シークレットを使用してデータ プロキシ接続を Cloudflare Workers に追加します。
+
+        wrangler secret put DATABASE_URL
+
+3.  プロンプトに従って、データ プロキシ接続文字列を入力します。
+
+> **注記：**
 >
-> You can also edit the `DATABASE_URL` secret via the Cloudflare Workers dashboard.
+> Cloudflare Workers ダッシュボードから`DATABASE_URL`シークレットを編集することもできます。
 
-## Step 6: Generate a Prisma Client
+## ステップ 6: Prisma クライアントを生成する {#step-6-generate-a-prisma-client}
 
-Generate a Prisma Client that connects through the [Data Proxy](https://www.prisma.io/docs/data-platform/data-proxy):
+[データプロキシ](https://www.prisma.io/docs/data-platform/data-proxy)を介して接続する Prisma クライアントを生成します。
 
-```
-npx prisma generate --data-proxy
-```
+    npx prisma generate --data-proxy
 
-## Step 7: Develop the Cloudflare Worker function
+## ステップ7: Cloudflare Worker機能を開発する {#step-7-develop-the-cloudflare-worker-function}
 
-You need to change the `src/index.ts` according to your needs.
+必要に応じて`src/index.ts`を変更する必要があります。
 
-For example, if you want to query different tables with an URL variable, you can use the following code:
+たとえば、URL 変数を使用してさまざまなテーブルをクエリする場合は、次のコードを使用できます。
 
 ```js
 import { PrismaClient } from '@prisma/client/edge'
@@ -186,49 +172,42 @@ async function handleEvent(event: FetchEvent): Promise<Response> {
 }
 ```
 
-## Step 8: Publish to Cloudflare Workers
+## ステップ8: Cloudflareワーカーに公開する {#step-8-publish-to-cloudflare-workers}
 
-You're now ready to deploy to Cloudflare Workers.
+これで、Cloudflare Workers にデプロイする準備ができました。
 
-In your project directory, run the following command:
+プロジェクト ディレクトリで、次のコマンドを実行します。
 
-```
-npx wrangler publish
-```
-
-## Step 9: Try your Cloudflare Workers
-
-1. Go to [Cloudflare dashboard](https://dash.cloudflare.com) to find your worker. You can find the URL of your worker on the overview page.
-
-2. Visit the URL with your table name: `https://{your-worker-url}/?table={table_name}`. You will get the result from the corresponding TiDB table.
-
-## Update the project
-
-### Change the serverless function
-
-If you want to change the serverless function, update `src/index.ts` and publish it to Cloudflare Workers again.
-
-### Create a new table
-
-If you create a new table and want to query it, take the following steps:
-
-1. Add a new model in `prisma/schema.prisma`.
-2. Push the changes to your repository.
-
-    ```
-    git add prisma
-    git commit -m "add new model"
-    git push
-    ```
-
-3. Generate the Prisma Client again.
-
-    ```
-    npx prisma generate --data-proxy
-    ```
-
-4. Publish the Cloudflare Worker again.
-
-    ```
     npx wrangler publish
-    ```
+
+## ステップ9: Cloudflareワーカーを試す {#step-9-try-your-cloudflare-workers}
+
+1.  [Cloudflareダッシュボード](https://dash.cloudflare.com)に進み、ワーカーを見つけます。ワーカーの URL は概要ページで確認できます。
+
+2.  テーブル名を含む URL にアクセスします: `https://{your-worker-url}/?table={table_name}` 。対応する TiDB テーブルから結果を取得します。
+
+## プロジェクトを更新する {#update-the-project}
+
+### サーバーレス機能を変更する {#change-the-serverless-function}
+
+サーバーレス機能を変更したい場合は、 `src/index.ts`更新して再度Cloudflare Workersに公開してください。
+
+### 新しいテーブルを作成する {#create-a-new-table}
+
+新しいテーブルを作成してクエリを実行する場合は、次の手順を実行します。
+
+1.  `prisma/schema.prisma`で新しいモデルを追加します。
+
+2.  変更をリポジトリにプッシュします。
+
+        git add prisma
+        git commit -m "add new model"
+        git push
+
+3.  Prisma クライアントを再度生成します。
+
+        npx prisma generate --data-proxy
+
+4.  Cloudflare Workerを再度公開します。
+
+        npx wrangler publish

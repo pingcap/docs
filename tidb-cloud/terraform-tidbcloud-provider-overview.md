@@ -3,53 +3,53 @@ title: Terraform Integration Overview
 summary: Create, manage, and update your TiDB Cloud resources through Terraform.
 ---
 
-# Terraform Integration Overview
+# Terraform 統合の概要 {#terraform-integration-overview}
 
-[Terraform](https://www.terraform.io/) is an infrastructure as code tool that lets you define both cloud and self-hosted resources in human-readable configuration files that you can version, reuse, and share.
+[テラフォーム](https://www.terraform.io/)は、コードとしてのインフラストラクチャ ツールであり、クラウド リソースとセルフホスト リソースの両方を、バージョン管理、再利用、共有できる人間が判読できる構成ファイルで定義できます。
 
-[TiDB Cloud Terraform Provider](https://registry.terraform.io/providers/tidbcloud/tidbcloud) is a plugin that allows you to use Terraform to manage TiDB Cloud resources, such as clusters, backups, and restores.
+[TiDB CloudTerraform プロバイダー](https://registry.terraform.io/providers/tidbcloud/tidbcloud)は、Terraform を使用して、クラスター、バックアップ、復元などのTiDB Cloudリソースを管理できるようにするプラグインです。
 
-If you are looking for a simple way to automate resource provisioning and your infrastructure workflow, you can try out TiDB Cloud Terraform Provider, which provides you with the following capacities:
+リソース プロビジョニングとインフラストラクチャ ワークフローを自動化する簡単な方法を探している場合は、次の機能を提供するTiDB Cloud Terraform Provider を試すことができます。
 
-- Get your project information.
-- Get cluster specification information, such as supported cloud providers, regions, and node sizes.
-- Manage your TiDB cluster, including creating, scaling, pausing, and resuming a cluster.
-- Create and delete a backup for your cluster.
-- Create a restore task for your cluster.
+-   プロジェクト情報を取得します。
+-   サポートされているクラウドプロバイダー、リージョン、ノードサイズなどのクラスター仕様情報を取得します。
+-   クラスターの作成、スケーリング、一時停止、再開など、TiDB クラスターを管理します。
+-   クラスターのバックアップを作成および削除します。
+-   クラスターの復元タスクを作成します。
 
-## Requirements
+## 要件 {#requirements}
 
-- [A TiDB Cloud account](https://tidbcloud.com/free-trial)
-- [Terraform version](https://www.terraform.io/downloads.html) >= 1.0
-- [Go version](https://golang.org/doc/install) >= 1.18 (required only if you want to build [TiDB Cloud Terraform Provider](https://github.com/tidbcloud/terraform-provider-tidbcloud) locally)
+-   [TiDB Cloudアカウント](https://tidbcloud.com/free-trial)
+-   [Terraform バージョン](https://www.terraform.io/downloads.html) &gt;= 1.0
+-   [Goのバージョン](https://golang.org/doc/install) &gt;= 1.18 (ローカルで[TiDB CloudTerraform プロバイダー](https://github.com/tidbcloud/terraform-provider-tidbcloud)をビルドする場合にのみ必要)
 
-## Supported resources and data sources
+## サポートされているリソースとデータソース {#supported-resources-and-data-sources}
 
-[Resources](https://www.terraform.io/language/resources) and [Data sources](https://www.terraform.io/language/data-sources) are the two most important elements in the Terraform language.
+[リソース](https://www.terraform.io/language/resources)と[データソース](https://www.terraform.io/language/data-sources)は、Terraform 言語の 2 つの最も重要な要素です。
 
-TiDB Cloud supports the following resources and data sources:
+TiDB Cloud は、次のリソースとデータ ソースをサポートします。
 
-- Resources
+-   リソース
 
-    - `tidbcloud_cluster`
-    - `tidbcloud_backup`
-    - `tidbcloud_restore`
-    - `tidbcloud_import`
+    -   `tidbcloud_cluster`
+    -   `tidbcloud_backup`
+    -   `tidbcloud_restore`
+    -   `tidbcloud_import`
 
-- Data sources
+-   データソース
 
-    - `tidbcloud_projects`
-    - `tidbcloud_cluster_specs`
-    - `tidbcloud_clusters`
-    - `tidbcloud_restores`
-    - `tidbcloud_backups`
+    -   `tidbcloud_projects`
+    -   `tidbcloud_cluster_specs`
+    -   `tidbcloud_clusters`
+    -   `tidbcloud_restores`
+    -   `tidbcloud_backups`
 
-To get all the available configurations for the resources and data sources, see this [configuration documentation](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs).
+リソースとデータ ソースで使用可能なすべての構成を取得するには、この[設定ドキュメント](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs)を参照してください。
 
-## Next step
+## 次のステップ {#next-step}
 
-- [Learn more about Terraform](https://www.terraform.io/docs)
-- [Get TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md)
-- [Use Cluster Resource](/tidb-cloud/terraform-use-cluster-resource.md)
-- [Use Backup Resource](/tidb-cloud/terraform-use-backup-resource.md)
-- [Use Restore Resource](/tidb-cloud/terraform-use-restore-resource.md)
+-   [Terraform について詳しく見る](https://www.terraform.io/docs)
+-   [TiDB Cloud Terraform プロバイダーを入手する](/tidb-cloud/terraform-get-tidbcloud-provider.md)
+-   [クラスタリソースの使用](/tidb-cloud/terraform-use-cluster-resource.md)
+-   [バックアップリソースの使用](/tidb-cloud/terraform-use-backup-resource.md)
+-   [復元リソースの使用](/tidb-cloud/terraform-use-restore-resource.md)

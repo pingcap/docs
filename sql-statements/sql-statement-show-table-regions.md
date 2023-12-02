@@ -3,80 +3,78 @@ title: SHOW TABLE REGIONS
 summary: Learn how to use SHOW TABLE REGIONS in TiDB.
 ---
 
-# SHOW TABLE REGIONS
+# テーブル領域を表示 {#show-table-regions}
 
-The `SHOW TABLE REGIONS` statement is used to show the Region information of a table in TiDB.
+`SHOW TABLE REGIONS`ステートメントは、TiDB 内のテーブルのリージョン情報を表示するために使用されます。
 
-> **Note:**
+> **注記：**
 >
-> This feature is not available on [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless) clusters.
+> この機能は[TiDB サーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless)クラスターでは使用できません。
 
-## Syntax
+## 構文 {#syntax}
 
 ```sql
 SHOW TABLE [table_name] REGIONS [WhereClauseOptional];
 SHOW TABLE [table_name] INDEX [index_name] REGIONS [WhereClauseOptional];
 ```
 
-## Synopsis
+## あらすじ {#synopsis}
 
 **ShowTableRegionStmt:**
 
 ![ShowTableRegionStmt](/media/sqlgram/ShowTableRegionStmt.png)
 
-**TableName:**
+**テーブル名:**
 
 ![TableName](/media/sqlgram/TableName.png)
 
-**PartitionNameListOpt:**
+**パーティション名リストオプション:**
 
 ![PartitionNameListOpt](/media/sqlgram/PartitionNameListOpt.png)
 
-**WhereClauseOptional:**
+**WhereClauseオプション:**
 
 ![WhereClauseOptional](/media/sqlgram/WhereClauseOptional.png)
 
-**WhereClause:**
+**Where句:**
 
 ![WhereClause](/media/sqlgram/WhereClause.png)
 
-Executing `SHOW TABLE REGIONS` returns the following columns:
+`SHOW TABLE REGIONS`を実行すると、次の列が返されます。
 
-* `REGION_ID`: The Region ID.
-* `START_KEY`: The start key of the Region.
-* `END_KEY`: The end key of the Region.
-* `LEADER_ID`: The Leader ID of the Region.
-* `LEADER_STORE_ID`: The ID of the store (TiKV) where the Region leader is located.
-* `PEERS`: The IDs of all Region replicas.
-* `SCATTERING`: Whether the Region is being scheduled. `1` means true.
-* `WRITTEN_BYTES`: The estimated amount of data written into the Region within one heartbeat cycle. The unit is byte.
-* `READ_BYTES`: The estimated amount of data read from the Region within one heartbeat cycle. The unit is byte.
-* `APPROXIMATE_SIZE(MB)`: The estimated amount of data in the Region. The unit is megabytes (MB).
-* `APPROXIMATE_KEYS`: The estimated number of Keys in the Region.
+-   `REGION_ID` :リージョンID。
+-   `START_KEY` :リージョンの開始キー。
+-   `END_KEY` :リージョンの終了キー。
+-   `LEADER_ID` :リージョンのLeaderID。
+-   `LEADER_STORE_ID` :リージョンリーダーが存在する店舗 (TiKV) の ID。
+-   `PEERS` : すべてのリージョンレプリカの ID。
+-   `SCATTERING` :リージョンがスケジュールされているかどうか。 `1`真を意味します。
+-   `WRITTEN_BYTES` : 1ハートビートサイクル内にリージョンに書き込まれるデータの推定量。単位はバイトです。
+-   `READ_BYTES` : 1ハートビートサイクル内にリージョンから読み取られるデータの推定量。単位はバイトです。
+-   `APPROXIMATE_SIZE(MB)` :リージョン内の推定データ量。単位はメガバイト（MB）です。
+-   `APPROXIMATE_KEYS` :リージョン内のキーの推定数。
 
 <CustomContent platform="tidb">
 
-* `SCHEDULING_CONSTRAINTS`: The [placement policy settings](/placement-rules-in-sql.md) associated with the table or partition to which a Region belongs.
+-   `SCHEDULING_CONSTRAINTS` :リージョンが属するテーブルまたはパーティションに関連付けられた[配置ポリシーの設定](/placement-rules-in-sql.md) 。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-* `SCHEDULING_CONSTRAINTS`: The placement policy settings associated with the table or partition to which a Region belongs.
+-   `SCHEDULING_CONSTRAINTS` :リージョンが属するテーブルまたはパーティションに関連付けられた配置ポリシー設定。
 
 </CustomContent>
 
-* `SCHEDULING_STATE`: The scheduling state of the Region which has a placement policy.
+-   `SCHEDULING_STATE` : 配置ポリシーがあるリージョンのスケジューリング状態。
 
-> **Note:**
+> **注記：**
 >
-> The values of `WRITTEN_BYTES`, `READ_BYTES`, `APPROXIMATE_SIZE(MB)`, `APPROXIMATE_KEYS` are not accurate data. They are estimated data from PD based on the heartbeat information that PD receives from the Region.
+> `WRITTEN_BYTES` 、 `READ_BYTES` 、 `APPROXIMATE_SIZE(MB)` 、 `APPROXIMATE_KEYS`の値は正確なデータではありません。これらは、PD がリージョンから受信したハートビート情報に基づいて PD から推定されたデータです。
 
-## Examples
+## 例 {#examples}
 
-Create an example table with enough data that fills a few Regions:
-
-{{< copyable "sql" >}}
+いくつかのリージョンを満たす十分なデータを含むテーブルの例を作成します。
 
 ```sql
 CREATE TABLE t1 (
@@ -102,7 +100,7 @@ SELECT SLEEP(5);
 SHOW TABLE t1 REGIONS;
 ```
 
-The output should show that the table is split into Regions. The `REGION_ID`, `START_KEY` and `END_KEY` may not match exactly:
+出力には、テーブルがリージョンに分割されていることが示されます。 `REGION_ID` 、 `START_KEY` 、および`END_KEY`正確に一致しない場合があります。
 
 ```sql
 ...
@@ -117,9 +115,9 @@ mysql> SHOW TABLE t1 REGIONS;
 3 rows in set (0.00 sec)
 ```
 
-In the output above, a `START_KEY` of `t_75_r_31717` and `END_KEY` of `t_75_r_63434` shows that data with a PRIMARY KEY between `31717` and `63434` is stored in this Region. The prefix `t_75_` indicates that this is the Region for a table (`t`) which has an internal table ID of `75`. An empty key value for `START_KEY` or `END_KEY` indicates negative infinity or positive infinity respectively.
+上記の出力では、 `START_KEY` / `t_75_r_31717`と`END_KEY` `t_75_r_63434` 、PRIMARY KEY が`31717`から`63434`までのデータがこのリージョンに格納されていることを示しています。接頭辞`t_75_`これが内部テーブル ID `75`を持つテーブル ( `t` ) のリージョンであることを示します。 `START_KEY`または`END_KEY`空のキー値は、それぞれ負の無限大または正の無限大を示します。
 
-TiDB automatically rebalances Regions as needed. For manual rebalancing, use the `SPLIT TABLE REGION` statement:
+TiDB は、必要に応じてリージョンのバランスを自動的に再調整します。手動でリバランスするには、 `SPLIT TABLE REGION`ステートメントを使用します。
 
 ```sql
 mysql> SPLIT TABLE t1 BETWEEN (31717) AND (63434) REGIONS 2;
@@ -142,12 +140,12 @@ mysql> SHOW TABLE t1 REGIONS;
 4 rows in set (0.00 sec)
 ```
 
-The above output shows that Region 96 was split, with a new Region 98 being created. The remaining Regions in the table were unaffected by the split operation. This is confirmed by the output statistics:
+上記の出力は、リージョン96 が分割され、新しいリージョン98 が作成されたことを示しています。テーブル内の残りのリージョンは、分割操作の影響を受けませんでした。これは、出力統計によって確認されます。
 
-* `TOTAL_SPLIT_REGION` indicates the number of newly split Regions. In this example, the number is 1.
-* `SCATTER_FINISH_RATIO` indicates the rate at which the newly split Regions are successfully scattered. `1.0` means that all Regions are scattered.
+-   `TOTAL_SPLIT_REGION`新しく分割されたリージョンの数を示します。この例では、数値は 1 です。
+-   `SCATTER_FINISH_RATIO`新しく分割されたリージョンが正常に分散された率を示します。 `1.0` 、すべてのリージョンが分散していることを意味します。
 
-For a more detailed example:
+より詳細な例については、次のとおりです。
 
 ```sql
 mysql> show table t regions;
@@ -164,14 +162,14 @@ mysql> show table t regions;
 6 rows in set
 ```
 
-In the above example:
+上の例では:
 
-* Table t corresponds to six Regions. In these Regions, `102`, `106`, `110`, `114`, and `3` store the row data and `98` stores the index data.
-* For `START_KEY` and `END_KEY` of Region `102`, `t_43` indicates the table prefix and ID. `_r` is the prefix of the record data in table t. `_i` is the prefix of the index data.
-* In Region `102`, `START_KEY` and `END_KEY` mean that record data in the range of `[-inf, 20000)` is stored. In similar way, the ranges of data storage in Regions (`106`, `110`, `114`, `3`) can also be calculated.
-* Region `98` stores the index data. The start key of table t's index data is `t_43_i`, which is in the range of Region `98`.
+-   テーブル t は 6 つの領域に対応します。これらのリージョンでは、 `102` `110`行データが格納さ`114` `3` `98` `106`インデックス データが格納されます。
+-   リージョン`102`の`START_KEY`と`END_KEY`の場合、 `t_43`テーブルのプレフィックスと ID を示します。 `_r`はテーブルtのレコードデータの接頭辞です。 `_i`はインデックスデータのプレフィックスです。
+-   リージョン`102`は`START_KEY` `[-inf, 20000)`の範囲`END_KEY`レコードデータが格納されることを意味する。同様に、領域（ `106` ） `114`データstorage`3` `110`計算できる。
+-   リージョン`98`にはインデックス データが格納されます。テーブル t のインデックス データの開始キーは`t_43_i`で、これはリージョン`98`の範囲内にあります。
 
-To check the Region that corresponds to table t in store 1, use the `WHERE` clause:
+ストア 1 のテーブル t に対応するリージョンを確認するには、 `WHERE`句を使用します。
 
 ```sql
 test> show table t regions where leader_store_id =1;
@@ -182,7 +180,7 @@ test> show table t regions where leader_store_id =1;
 +-----------+-----------+---------+-----------+-----------------+--------------+------------+---------------+------------+----------------------+------------------+------------------------+------------------+
 ```
 
-Use `SPLIT TABLE REGION` to split the index data into Regions. In the following example, the index data `name` of table t is split into two Regions in the range of `[a,z]`.
+インデックス データをリージョンに分割するには`SPLIT TABLE REGION`を使用します。次の例では、テーブル t のインデックス データ`name` `[a,z]`の範囲の 2 つのリージョンに分割されます。
 
 ```sql
 test> split table t index name between ("a") and ("z") regions 2;
@@ -194,7 +192,7 @@ test> split table t index name between ("a") and ("z") regions 2;
 1 row in set
 ```
 
-Now table t corresponds to seven Regions. Five of them (`102`, `106`, `110`, `114`, `3`) store the record data of table t and another two (`135`, `98`) store the index data `name`.
+ここで、テーブル t は 7 つの領域に対応します。そのうちの 5 つ ( `102` ) `106` `110` `114`のレコード データが格納さ`3` 、別の`98` `135`にはインデックス データ`name`が格納されます。
 
 ```sql
 test> show table t regions;
@@ -212,11 +210,11 @@ test> show table t regions;
 7 rows in set
 ```
 
-## MySQL compatibility
+## MySQLの互換性 {#mysql-compatibility}
 
-This statement is a TiDB extension to MySQL syntax.
+このステートメントは、MySQL 構文に対する TiDB 拡張機能です。
 
-## See also
+## こちらも参照 {#see-also}
 
-* [SPLIT REGION](/sql-statements/sql-statement-split-region.md)
-* [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
+-   [分割領域](/sql-statements/sql-statement-split-region.md)
+-   [テーブルの作成](/sql-statements/sql-statement-create-table.md)

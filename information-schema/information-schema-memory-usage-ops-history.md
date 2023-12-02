@@ -3,9 +3,9 @@ title: MEMORY_USAGE_OPS_HISTORY
 summary: Learn the `MEMORY_USAGE_OPS_HISTORY` information_schema system table.
 ---
 
-# MEMORY_USAGE_OPS_HISTORY
+# MEMORY_USAGE_OPS_HISTORY {#memory-usage-ops-history}
 
-The `MEMORY_USAGE_OPS_HISTORY` table describes the history of memory-related operations and the execution basis of the current TiDB instance.
+表`MEMORY_USAGE_OPS_HISTORY`は、メモリ関連の操作の履歴と現在の TiDB インスタンスの実行基盤を示しています。
 
 ```sql
 USE information_schema;
@@ -32,8 +32,6 @@ DESC memory_usage_ops_history;
 12 rows in set (0.000 sec)
 ```
 
-{{< copyable "sql" >}}
-
 ```sql
 SELECT * FROM information_schema.memory_usage_ops_history;
 ```
@@ -47,17 +45,17 @@ SELECT * FROM information_schema.memory_usage_ops_history;
 2 rows in set (0.002 sec)
 ```
 
-The columns in the `MEMORY_USAGE_OPS_HISTORY` table are described as follows:
+`MEMORY_USAGE_OPS_HISTORY`のテーブルの列は次のように説明されます。
 
-* `TIME`: The timestamp when the session is terminated.
-* `OPS`: "SessionKill"
-* `MEMORY_LIMIT`: The memory usage limit of TiDB at the time of termination, in bytes. Its value is the same as that of the system variable `tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-new-in-v640).
-* `MEMORY_CURRENT`: The current memory usage of TiDB, in bytes.
-* `PROCESSID`: The connection ID of the terminated session.
-* `MEM`: The memory usage of the terminated session, in bytes.
-* `DISK`: The disk usage of the terminated session, in bytes.
-* `CLIENT`: The client connection address of the terminated session.
-* `DB`: The name of the database connected to the terminated session.
-* `USER`: The user name of the terminated session.
-* `SQL_DIGEST`: The digest of the SQL statement being executed in the terminated session.
-* `SQL_TEXT`: The SQL statement being executed in the terminated session.
+-   `TIME` : セッションが終了したときのタイムスタンプ。
+-   `OPS` ：「セッションキル」
+-   `MEMORY_LIMIT` : 終了時の TiDB のメモリ使用量制限 (バイト単位)。その値は、システム変数`tidb_server_memory_limit` ](/system-variables.md#tidb_server_memory_limit-new-in-v640) の値と同じです。
+-   `MEMORY_CURRENT` : TiDB の現在のメモリ使用量 (バイト単位)。
+-   `PROCESSID` : 終了したセッションの接続 ID。
+-   `MEM` : 終了したセッションのメモリ使用量 (バイト単位)。
+-   `DISK` : 終了したセッションのディスク使用量 (バイト単位)。
+-   `CLIENT` : 終了したセッションのクライアント接続アドレス。
+-   `DB` : 終了したセッションに接続されているデータベースの名前。
+-   `USER` : 終了したセッションのユーザー名。
+-   `SQL_DIGEST` : 終了したセッションで実行中の SQL ステートメントのダイジェスト。
+-   `SQL_TEXT` : 終了したセッションで実行中の SQL ステートメント。

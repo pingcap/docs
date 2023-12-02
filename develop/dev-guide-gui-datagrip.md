@@ -3,185 +3,185 @@ title: Connect to TiDB with JetBrains DataGrip
 summary: Learn how to connect to TiDB using JetBrains DataGrip. This tutorial also applies to the Database Tools and SQL plugin available in other JetBrains IDEs, such as IntelliJ, PhpStorm, and PyCharm.
 ---
 
-# Connect to TiDB with JetBrains DataGrip
+# JetBrains DataGrip を使用して TiDB に接続する {#connect-to-tidb-with-jetbrains-datagrip}
 
-TiDB is a MySQL-compatible database, and [JetBrains DataGrip](https://www.jetbrains.com/help/datagrip/getting-started.html) is a powerful integrated development environment (IDE) for database and SQL. This tutorial walks you through the process of connecting to your TiDB cluster using DataGrip.
+TiDB は MySQL と互換性のあるデータベースであり、データベースと SQL のための強力な統合開発環境 ( [JetBrains データグリップ](https://www.jetbrains.com/help/datagrip/getting-started.html) ) です。このチュートリアルでは、DataGrip を使用して TiDB クラスターに接続するプロセスを説明します。
 
-> **Note:**
+> **注記：**
 >
-> This tutorial is compatible with TiDB Serverless, TiDB Dedicated, and TiDB Self-Hosted.
+> このチュートリアルは、TiDB サーバーレス、TiDB 専用、および TiDB セルフホストと互換性があります。
 
-You can use DataGrip in two ways:
+DataGrip は 2 つの方法で使用できます。
 
-- As the [DataGrip IDE](https://www.jetbrains.com/datagrip/download) standalone tool.
-- As the [Database Tools and SQL plugin](https://www.jetbrains.com/help/idea/relational-databases.html) in JetBrains IDEs, such as IntelliJ, PhpStorm, and PyCharm.
+-   [データグリップIDE](https://www.jetbrains.com/datagrip/download)スタンドアロン ツールとして。
+-   IntelliJ、PhpStorm、PyCharm などの JetBrains IDE の[データベースツールとSQLプラグイン](https://www.jetbrains.com/help/idea/relational-databases.html)として。
 
-This tutorial mainly focuses on the standalone DataGrip IDE. The steps of connecting to TiDB using the JetBrains Database Tools and SQL plugin in JetBrains IDEs are similar. You can also follow the steps in this document for reference when connecting to TiDB from any JetBrains IDE.
+このチュートリアルでは主にスタンドアロンの DataGrip IDE に焦点を当てます。 JetBrains データベース ツールと JetBrains IDE の SQL プラグインを使用して TiDB に接続する手順は似ています。 JetBrains IDE から TiDB に接続する場合は、参考としてこのドキュメントの手順に従うこともできます。
 
-## Prerequisites
+## 前提条件 {#prerequisites}
 
-To complete this tutorial, you need:
+このチュートリアルを完了するには、次のものが必要です。
 
-- [DataGrip **2023.2.1** or later](https://www.jetbrains.com/datagrip/download/) or a non-community edition [JetBrains](https://www.jetbrains.com/) IDE.
-- A TiDB cluster.
+-   [DataGrip **2023.2.1**以降](https://www.jetbrains.com/datagrip/download/)または非コミュニティ エディション[ジェットブレインズ](https://www.jetbrains.com/) IDE。
+-   TiDB クラスター。
 
 <CustomContent platform="tidb">
 
-**If you don't have a TiDB cluster, you can create one as follows:**
+**TiDB クラスターがない場合は、次のように作成できます。**
 
-- (Recommended) Follow [Creating a TiDB Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
-- Follow [Deploy a local test TiDB cluster](/quick-start-with-tidb.md#deploy-a-local-test-cluster) or [Deploy a production TiDB cluster](/production-deployment-using-tiup.md) to create a local cluster.
+-   (推奨) [TiDB サーバーレスクラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って、独自のTiDB Cloudクラスターを作成します。
+-   [ローカル テスト TiDB クラスターをデプロイ](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番TiDB クラスターをデプロイ](/production-deployment-using-tiup.md)に従ってローカル クラスターを作成します。
 
 </CustomContent>
 <CustomContent platform="tidb-cloud">
 
-**If you don't have a TiDB cluster, you can create one as follows:**
+**TiDB クラスターがない場合は、次のように作成できます。**
 
-- (Recommended) Follow [Creating a TiDB Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
-- Follow [Deploy a local test TiDB cluster](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb#deploy-a-local-test-cluster) or [Deploy a production TiDB cluster](https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup) to create a local cluster.
+-   (推奨) [TiDB サーバーレスクラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って、独自のTiDB Cloudクラスターを作成します。
+-   [ローカル テスト TiDB クラスターをデプロイ](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb#deploy-a-local-test-cluster)または[本番TiDB クラスターをデプロイ](https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup)に従ってローカル クラスターを作成します。
 
 </CustomContent>
 
-## Connect to TiDB
+## TiDB に接続する {#connect-to-tidb}
 
-Connect to your TiDB cluster depending on the TiDB deployment option you've selected.
+選択した TiDB デプロイメント オプションに応じて、TiDB クラスターに接続します。
 
 <SimpleTab>
 <div label="TiDB Serverless">
 
-1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
+1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット クラスターの名前をクリックして、その概要ページに移動します。
 
-2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
+2.  右上隅にある**「接続」**をクリックします。接続ダイアログが表示されます。
 
-3. Ensure the configurations in the connection dialog match your operating environment.
+3.  接続ダイアログの設定が動作環境と一致していることを確認してください。
 
-    - **Endpoint Type** is set to `Public`
-    - **Connect With** is set to `JDBC`
-    - **Operating System** matches your environment.
+    -   **エンドポイント タイプは**`Public`に設定されます
+    -   **[接続先] は**`JDBC`に設定されています
+    -   **オペレーティング システムが**環境に一致します。
 
-4. Click **Create password** to create a random password.
+4.  **「パスワードの作成」**をクリックしてランダムなパスワードを作成します。
 
-    > **Tip:**
+    > **ヒント：**
     >
-    > If you have created a password before, you can either use the original password or click **Reset password** to generate a new one.
+    > 以前にパスワードを作成したことがある場合は、元のパスワードを使用するか、 **「パスワードのリセット」**をクリックして新しいパスワードを生成できます。
 
-5. Launch DataGrip and create a project to manage your connections.
+5.  DataGrip を起動し、接続を管理するためのプロジェクトを作成します。
 
     ![Create a project in DataGrip](/media/develop/datagrip-create-project.jpg)
 
-6. In the newly created project, click **+** in the upper-left corner of the **Database Explorer** panel, and select **Data Source** > **Other** > **TiDB**.
+6.  新しく作成したプロジェクトで、 **[データベース エクスプローラー]**パネルの左上隅にある**[+]**をクリックし、 **[データ ソース]** &gt; **[その他]** &gt; **[TiDB]**を選択します。
 
     ![Select a data source in DataGrip](/media/develop/datagrip-data-source-select.jpg)
 
-7. Copy the JDBC string from the TiDB Cloud connection dialog and replace `<your_password>` with your actual password. Then, paste it into the **URL** field, and the remaining parameters will be auto-populated. An example result is as follows:
+7.  TiDB Cloud接続ダイアログから JDBC 文字列をコピーし、 `<your_password>`実際のパスワードに置き換えます。次に、それを**URL**フィールドに貼り付けると、残りのパラメータが自動入力されます。結果の例は次のとおりです。
 
     ![Configure the URL field for TiDB Serverless](/media/develop/datagrip-url-paste.jpg)
 
-    If a **Download missing driver files** warning displays, click **Download** to acquire the driver files.
+    **「不足しているドライバー ファイルをダウンロードする」**という警告が表示された場合は、 **「ダウンロード」を**クリックしてドライバー ファイルを取得します。
 
-8. Click **Test Connection** to validate the connection to the TiDB Serverless cluster.
+8.  **「接続のテスト」**をクリックして、TiDB サーバーレスクラスターへの接続を検証します。
 
     ![Test the connection to a TiDB Serverless clustser](/media/develop/datagrip-test-connection.jpg)
 
-9. Click **OK** to save the connection configuration.
+9.  **「OK」**をクリックして接続構成を保存します。
 
 </div>
 <div label="TiDB Dedicated">
 
-1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
+1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット クラスターの名前をクリックして、その概要ページに移動します。
 
-2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
+2.  右上隅にある**「接続」**をクリックします。接続ダイアログが表示されます。
 
-3. Click **Allow Access from Anywhere** and then click **Download TiDB cluster CA** to download the CA certificate.
+3.  **「どこからでもアクセスを許可」**をクリックし、 **「TiDB クラスター CA のダウンロード」**をクリックして CA 証明書をダウンロードします。
 
-    For more details about how to obtain the connection string, refer to [TiDB Dedicated standard connection](https://docs.pingcap.com/tidbcloud/connect-via-standard-connection).
+    接続文字列の取得方法の詳細については、 [TiDB専用標準接続](https://docs.pingcap.com/tidbcloud/connect-via-standard-connection)を参照してください。
 
-4. Launch DataGrip and create a project to manage your connections.
+4.  DataGrip を起動し、接続を管理するためのプロジェクトを作成します。
 
     ![Create a project in DataGrip](/media/develop/datagrip-create-project.jpg)
 
-5. In the newly created project, click **+** in the upper-left corner of the **Database Explorer** panel, and select **Data Source** > **Other** > **TiDB**.
+5.  新しく作成したプロジェクトで、 **[データベース エクスプローラー]**パネルの左上隅にある**[+]**をクリックし、 **[データ ソース]** &gt; **[その他]** &gt; **[TiDB]**を選択します。
 
     ![Select a data source in DataGrip](/media/develop/datagrip-data-source-select.jpg)
 
-6. Copy and paste the appropriate connection string into the **Data Source and Drivers** window in DataGrip. The mappings between DataGrip fields and TiDB Dedicated connection string are as follows:
+6.  適切な接続文字列をコピーして、DataGrip の**[データ ソースとドライバー]**ウィンドウに貼り付けます。 DataGrip フィールドと TiDB 専用接続文字列間のマッピングは次のとおりです。
 
-    | DataGrip field | TiDB Dedicated connection string |
-    | -------------- | ------------------------------- |
-    | Host           | `{host}`                        |
-    | Port           | `{port}`                        |
-    | User           | `{user}`                        |
-    | Password       | `{password}`                    |
+    | データグリップフィールド | TiDB 専用接続文字列 |
+    | ------------ | ------------ |
+    | ホスト          | `{host}`     |
+    | ポート          | `{port}`     |
+    | ユーザー         | `{user}`     |
+    | パスワード        | `{password}` |
 
-    An example is as follows:
+    例は次のとおりです。
 
     ![Configure the connection parameters for TiDB Dedicated](/media/develop/datagrip-dedicated-connect.jpg)
 
-7. Click the **SSH/SSL** tab, select the **Use SSL** checkbox, and input the CA certificate path into the **CA file** field.
+7.  **[SSH/SSL]**タブをクリックし、 **[SSL を使用]**チェックボックスを選択して、CA 証明書のパスを**[CA ファイル]**フィールドに入力します。
 
     ![Configure the CA for TiDB Dedicated](/media/develop/datagrip-dedicated-ssl.jpg)
 
-    If a **Download missing driver files** warning displays, click **Download** to acquire the driver files.
+    **「不足しているドライバー ファイルをダウンロードする」**という警告が表示された場合は、 **「ダウンロード」を**クリックしてドライバー ファイルを取得します。
 
-8. Click the **Advanced** tab, scroll to find the **enabledTLSProtocols** parameter, and set its value to `TLSv1.2,TLSv1.3`.
+8.  **「詳細」**タブをクリックし、スクロールして**「enabledTLSProtocols」**パラメータを見つけ、その値を`TLSv1.2,TLSv1.3`に設定します。
 
     ![Configure the TLS for TiDB Dedicated](/media/develop/datagrip-dedicated-advanced.jpg)
 
-9. Click **Test Connection** to validate the connection to the TiDB Dedicated cluster.
+9.  **「接続のテスト」**をクリックして、TiDB 専用クラスターへの接続を検証します。
 
     ![Test the connection to a TiDB Dedicated cluster](/media/develop/datagrip-dedicated-test-connection.jpg)
 
-10. Click **OK** to save the connection configuration.
+10. **「OK」**をクリックして接続構成を保存します。
 
 </div>
 <div label="TiDB Self-Hosted">
 
-1. Launch DataGrip and create a project to manage your connections.
+1.  DataGrip を起動し、接続を管理するためのプロジェクトを作成します。
 
     ![Create a project in DataGrip](/media/develop/datagrip-create-project.jpg)
 
-2. In the newly created project, click **+** in the upper-left corner of the **Database Explorer** panel, and select **Data Source** > **Other** > **TiDB**.
+2.  新しく作成したプロジェクトで、 **[データベース エクスプローラー]**パネルの左上隅にある**[+]**をクリックし、 **[データ ソース]** &gt; **[その他]** &gt; **[TiDB]**を選択します。
 
     ![Select a data source in DataGrip](/media/develop/datagrip-data-source-select.jpg)
 
-3. Configure the following connection parameters:
+3.  次の接続パラメータを構成します。
 
-    - **Host**: The IP address or domain name of your TiDB Self-Hosted cluster.
-    - **Port**: The port number of your TiDB Self-Hosted cluster.
-    - **User**: The username to use to connect to your TiDB Self-Hosted cluster.
-    - **Password**: The password of the username.
+    -   **ホスト**: TiDB セルフホスト クラスターの IP アドレスまたはドメイン名。
+    -   **Port** : TiDB セルフホスト クラスターのポート番号。
+    -   **User** : TiDB セルフホスト クラスターへの接続に使用するユーザー名。
+    -   **パスワード**: ユーザー名のパスワード。
 
-    An example is as follows:
+    例は次のとおりです。
 
     ![Configure the connection parameters for TiDB Self-Hosted](/media/develop/datagrip-self-hosted-connect.jpg)
 
-    If a **Download missing driver files** warning displays, click **Download** to acquire the driver files.
+    **「不足しているドライバー ファイルをダウンロードする」**という警告が表示された場合は、 **「ダウンロード」を**クリックしてドライバー ファイルを取得します。
 
-4. Click **Test Connection** to validate the connection to the TiDB Self-Hosted cluster.
+4.  **[接続のテスト]**をクリックして、TiDB セルフホスト クラスターへの接続を検証します。
 
     ![Test the connection to a TiDB Self-Hosted cluster](/media/develop/datagrip-self-hosted-test-connection.jpg)
 
-5. Click **OK** to save the connection configuration.
+5.  **「OK」**をクリックして接続構成を保存します。
 
 </div>
 </SimpleTab>
 
-## Next steps
+## 次のステップ {#next-steps}
 
-- Learn more usage of DataGrip from [the documentation of DataGrip](https://www.jetbrains.com/help/datagrip/getting-started.html).
-- Learn the best practices for TiDB application development with the chapters in the [Developer guide](/develop/dev-guide-overview.md), such as [Insert data](/develop/dev-guide-insert-data.md), [Update data](/develop/dev-guide-update-data.md), [Delete data](/develop/dev-guide-delete-data.md), [Single table reading](/develop/dev-guide-get-data-from-single-table.md), [Transactions](/develop/dev-guide-transaction-overview.md), and [SQL performance optimization](/develop/dev-guide-optimize-sql-overview.md).
-- Learn through the professional [TiDB developer courses](https://www.pingcap.com/education/) and earn [TiDB certifications](https://www.pingcap.com/education/certification/) after passing the exam.
+-   DataGrip の詳しい使い方を[DataGrip のドキュメント](https://www.jetbrains.com/help/datagrip/getting-started.html)から学びましょう。
+-   TiDB アプリケーション開発[単一テーブルの読み取り](/develop/dev-guide-get-data-from-single-table.md)ベスト プラクティスについて[取引](/develop/dev-guide-transaction-overview.md) 、 [開発者ガイド](/develop/dev-guide-overview.md)の章 ( [データの挿入](/develop/dev-guide-insert-data.md)など) [データを更新する](/develop/dev-guide-update-data.md)参照[データの削除](/develop/dev-guide-delete-data.md) [SQLパフォーマンスの最適化](/develop/dev-guide-optimize-sql-overview.md)ください。
+-   プロフェッショナルとして[TiDB 開発者コース](https://www.pingcap.com/education/)を学び、試験合格後に[TiDB 認定](https://www.pingcap.com/education/certification/)獲得します。
 
-## Need help?
+## 助けが必要？ {#need-help}
 
 <CustomContent platform="tidb">
 
-Ask questions on the [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc), or [create a support ticket](/support.md).
+[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[サポートチケットを作成する](/support.md)について質問してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-Ask questions on the [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc), or [create a support ticket](https://support.pingcap.com/).
+[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[サポートチケットを作成する](https://support.pingcap.com/)について質問してください。
 
 </CustomContent>

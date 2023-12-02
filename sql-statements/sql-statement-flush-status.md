@@ -3,11 +3,11 @@ title: FLUSH STATUS | TiDB SQL Statement Reference
 summary: An overview of the usage of FLUSH STATUS for the TiDB database.
 ---
 
-# FLUSH STATUS
+# フラッシュステータス {#flush-status}
 
-This statement is included for compatibility with MySQL. It has no effect on TiDB, which uses Prometheus and Grafana for centralized metrics collection instead of `SHOW STATUS`.
+このステートメントは、MySQL との互換性のために組み込まれています。 TiDB には影響しません。TiDB は、集中メトリクス収集に`SHOW STATUS`の代わりに Prometheus と Grafana を使用します。
 
-## Synopsis
+## あらすじ {#synopsis}
 
 ```ebnf+diagram
 FlushStmt ::=
@@ -25,7 +25,7 @@ FlushOption ::=
 |   TableOrTables TableNameListOpt WithReadLockOpt
 ```
 
-## Examples
+## 例 {#examples}
 
 ```sql
 mysql> show status;
@@ -71,10 +71,10 @@ mysql> show status;
 6 rows in set (0.00 sec)
 ```
 
-## MySQL compatibility
+## MySQLの互換性 {#mysql-compatibility}
 
-* This statement is included only for compatibility with MySQL.
+-   このステートメントは、MySQL との互換性のためだけに含まれています。
 
-## See also
+## こちらも参照 {#see-also}
 
-* [SHOW \[GLOBAL|SESSION\] STATUS](/sql-statements/sql-statement-show-status.md)
+-   [[グローバル|セッション]ステータスを表示](/sql-statements/sql-statement-show-status.md)

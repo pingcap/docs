@@ -3,52 +3,52 @@ title: Index Selection
 summary: Choose the best indexes for TiDB query optimization.
 ---
 
-# Index Selection
+# インデックスの選択 {#index-selection}
 
-Reading data from storage engines is one of the most time-consuming steps during the SQL execution. Currently, TiDB supports reading data from different storage engines and different indexes. Query execution performance depends largely on whether you select a suitable index or not.
+storageエンジンからのデータの読み取りは、SQL 実行中に最も時間がかかる手順の 1 つです。現在、TiDB は、さまざまなstorageエンジンおよびさまざまなインデックスからのデータの読み取りをサポートしています。クエリの実行パフォーマンスは、適切なインデックスを選択したかどうかに大きく依存します。
 
-This document introduces how to select an index to access a table, and some related ways to control index selection.
+このドキュメントでは、テーブルにアクセスするためのインデックスの選択方法と、インデックスの選択を制御するための関連する方法をいくつか紹介します。
 
-## Access tables
+## アクセステーブル {#access-tables}
 
-Before introducing index selection, it is important to understand the ways TiDB accesses tables, what triggers each way, what differences each way makes, and what the pros and cons are.
+インデックス選択を導入する前に、TiDB がテーブルにアクセスする方法、各方法のトリガー、各方法の違い、および長所と短所を理解することが重要です。
 
-### Operators for accessing tables
+### テーブルにアクセスするための演算子 {#operators-for-accessing-tables}
 
-| Operator | Trigger Conditions | Applicable Scenarios | Explanations |
-| :------- | :------- | :------- | :---- |
-| PointGet / BatchPointGet | When accessing tables in one or more single point ranges. | Any scenario | If triggered, it is usually considered as the fastest operator, since it calls the kvget interface directly to perform the calculations rather than calls the coprocessor interface.  |
-| TableReader | None | Any scenario | This TableReader operator is for TiKV. It is generally considered as the least efficient operator that scans table data directly from the TiKV layer. It can be selected only if there is a range query on the `_tidb_rowid` column, or if there are no other operators for accessing tables to choose from. |
-| TableReader | A table has a replica on the TiFlash node. | There are fewer columns to read, but many rows to evaluate.  | This TableReader operator is for TiFlash. TiFlash is column-based storage. If you need to calculate a small number of columns and a large number of rows, it is recommended to choose this operator. |
-| IndexReader | A table has one or more indexes, and the columns needed for the calculation are included in the indexes. | When there is a smaller range query on the indexes, or when there is an order requirement for indexed columns. | When multiple indexes exist, a reasonable index is selected based on the cost estimation. |
-| IndexLookupReader | A table has one or more indexes, and the columns needed for calculation are not completely included in the indexes. | Same as IndexReader. |  Since the index does not completely cover calculated columns, TiDB needs to retrieve rows from a table after reading indexes. There is an extra cost compared to the IndexReader operator. |
-| IndexMerge | A table has multiple indexes or a multi-valued index. | When a multi-valued index or multiple indexes are used. | To use the operator, you can specify the [optimizer hints](/optimizer-hints.md), or let the optimizer to automatically select this operator based on cost estimation. For details, see [Explain Statements Using Index Merge](/explain-index-merge.md). |
+| オペレーター               | トリガー条件                                              | 該当するシナリオ                                     | 説明                                                                                                                                                                      |
+| :------------------- | :-------------------------------------------------- | :------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ポイントゲット / バッチポイントゲット | 1 つ以上の単一ポイント範囲内のテーブルにアクセスする場合。                      | あらゆるシナリオ                                     | トリガーされると、コプロセッサー・インターフェースを呼び出すのではなく、kvget インターフェースを直接呼び出して計算を実行するため、通常は最も高速なオペレーターとみなされます。                                                                              |
+| テーブルリーダー             | なし                                                  | あらゆるシナリオ                                     | この TableReader オペレーターは TiKV 用です。これは一般に、TiKVレイヤーからテーブル データを直接スキャンする最も効率の悪いオペレーターとみなされます。これは、 `_tidb_rowid`列に範囲クエリがある場合、またはテーブルにアクセスするための他の演算子が選択できない場合にのみ選択できます。         |
+| テーブルリーダー             | テーブルにはTiFlashノード上にレプリカがあります。                        | 読み取る列は少なくなりますが、評価する行は多くなります。                 | この TableReader オペレーターはTiFlash用です。 TiFlash は列ベースのstorageです。少数の列と多数の行を計算する必要がある場合は、この演算子を選択することをお勧めします。                                                                   |
+| インデックスリーダー           | テーブルには 1 つ以上のインデックスがあり、計算に必要な列はインデックスに含まれています。      | インデックスに狭い範囲のクエリがある場合、またはインデックス付き列の順序要件がある場合。 | 複数のインデックスが存在する場合、コスト見積もりに基づいて合理的なインデックスが選択されます。                                                                                                                         |
+| IndexLookupReader    | テーブルには 1 つ以上のインデックスがあり、計算に必要な列がインデックスに完全には含まれていません。 | IndexReader と同じです。                           | インデックスは計算列を完全にはカバーしていないため、TiDB はインデックスを読み取った後にテーブルから行を取得する必要があります。 IndexReader オペレーターと比較して追加のコストがかかります。                                                                 |
+| インデックスマージ            | テーブルには複数のインデックスまたは複数値のインデックスがあります。                  | 多値インデックスまたは複数のインデックスが使用される場合。                | 演算子を使用するには、 [オプティマイザーのヒント](/optimizer-hints.md)指定するか、コスト見積もりに基づいてオプティマイザにこの演算子を自動的に選択させることができます。詳細は[インデックス マージを使用した Explain ステートメント](/explain-index-merge.md)を参照してください。 |
 
-> **Note:**
+> **注記：**
 >
-> The TableReader operator is based on the `_tidb_rowid` column index, and TiFlash uses a column storage index, so the selection of index is the selection of an operator for accessing tables.
+> TableReader 演算子は`_tidb_rowid`列インデックスに基づいており、 TiFlash は列storageインデックスを使用するため、インデックスの選択はテーブルにアクセスするための演算子の選択となります。
 
-## Index selection rules
+## インデックスの選択ルール {#index-selection-rules}
 
-TiDB selects indexes based on rules or cost. The based rules include pre-rules and skyline-pruning. When selecting an index, TiDB tries the pre-rule first. If an index satisfies a pre-rule, TiDB directly selects this index. Otherwise, TiDB uses skyline-pruning to exclude unsuitable indexes, and then selects the index with the lowest cost based on the cost estimation of each operator that accesses tables.
+TiDB はルールまたはコストに基づいてインデックスを選択します。ベースのルールには、事前ルールとスカイライン プルーニングが含まれます。インデックスを選択するとき、TiDB は最初に事前ルールを試行します。インデックスが事前ルールを満たす場合、TiDB はこのインデックスを直接選択します。それ以外の場合、TiDB はスカイライン プルーニングを使用して不適切なインデックスを除外し、テーブルにアクセスする各オペレーターのコスト推定に基づいて最低コストのインデックスを選択します。
 
-### Rule-based selection
+### ルールベースの選択 {#rule-based-selection}
 
-#### Pre-rules
+#### 事前ルール {#pre-rules}
 
-TiDB uses the following heuristic pre-rules to select indexes:
+TiDB は、次のヒューリスティック事前ルールを使用してインデックスを選択します。
 
-+ Rule 1: If an index satisfies "unique index with full match + no need to retrieve rows from a table (which means that the plan generated by the index is the IndexReader operator)", TiDB directly selects this index.
+-   ルール 1: インデックスが「完全一致の一意のインデックス + テーブルから行を取得する必要がない (つまり、インデックスによって生成されたプランが IndexReader 演算子であることを意味します)」を満たす場合、TiDB はこのインデックスを直接選択します。
 
-+ Rule 2: If an index satisfies "unique index with full match + the need to retrieve rows from a table (which means that the plan generated by the index is the IndexReader operator)", TiDB selects the index with the smallest number of rows to be retrieved from a table as a candidate index.
+-   ルール 2: インデックスが「完全一致を持つ一意のインデックス + テーブルから行を取得する必要性 (つまり、インデックスによって生成されたプランが IndexReader 演算子であることを意味します)」を満たしている場合、TiDB は、行数が最も少ないインデックスを選択します。候補インデックスとしてテーブルから取得されます。
 
-+ Rule 3: If an index satisfies "ordinary index + no need to retrieve rows from a table + the number of rows to be read is less than the value of a certain threshold", TiDB selects the index with the smallest number of rows to be read as a candidate index.
+-   ルール 3: インデックスが「通常のインデックス + テーブルから行を取得する必要がない + 読み込む行数が一定のしきい値未満」を満たす場合、TiDB は読み込む行数が最も少ないインデックスを選択します。候補インデックスとして読み込まれます。
 
-+ Rule 4: If only one candidate index is selected based on rule 2 and 3, select this candidate index. If two candidate indexes are respectively selected based on rule 2 and 3, select the index with the smaller number of rows to be read (the number of rows with index + the number of rows to be retrieved from a table).
+-   ルール 4: ルール 2 および 3 に基づいて候補インデックスが 1 つだけ選択された場合は、この候補インデックスを選択します。ルール 2 と 3 でそれぞれ 2 つの候補インデクスが選択された場合は、読み込む行数（インデクスのある行数 + 表から取得する行数）が少ない方のインデクスを選択します。
 
-The "index with full match" in the above rules means each indexed column has the equal condition. When executing the `EXPLAIN FORMAT = 'verbose' ...` statement, if the pre-rules match an index, TiDB outputs a NOTE-level warning indicating that the index matches the pre-rule.
+上記のルールの「完全一致のインデックス」とは、インデックス付けされた各列が等しい条件を持つことを意味します。 `EXPLAIN FORMAT = 'verbose' ...`ステートメントの実行時に、事前ルールがインデックスと一致する場合、TiDB はインデックスが事前ルールと一致することを示す NOTE レベルの警告を出力します。
 
-In the following example, because the index `idx_b` meets the condition "unique index with full match + the need to retrieve rows from a table" in rule 2, TiDB selects the index `idx_b` as the access path, and `SHOW WARNING` returns a note indicating that the index `idx_b` matches the pre-rule.
+次の例では、インデックス`idx_b`ルール 2 の「完全一致の一意のインデックス + テーブルから行を取得する必要がある」という条件を満たしているため、TiDB はアクセス パスとしてインデックス`idx_b`を選択し、インデックス`SHOW WARNING`は、インデックス`idx_b`事前ルールに一致します。
 
 ```sql
 mysql> CREATE TABLE t(a INT PRIMARY KEY, b INT, c INT, UNIQUE INDEX idx_b(b));
@@ -71,19 +71,19 @@ mysql> SHOW WARNINGS;
 1 row in set (0.00 sec)
 ```
 
-### Skyline-pruning
+### スカイラインの剪定 {#skyline-pruning}
 
-Skyline-pruning is a heuristic filtering rule for indexes, which can reduce the probability of wrong index selection caused by wrong estimation. To judge an index, the following three dimensions are needed:
+スカイライン プルーニングはインデックスのヒューリスティック フィルタリング ルールであり、誤った推定によって引き起こされる誤ったインデックスの選択の可能性を減らすことができます。インデックスを判断するには、次の 3 つの側面が必要です。
 
-- How many access conditions are covered by the indexed columns. An "access condition" is a where condition that can be converted to a column range. And the more access conditions an indexed column set covers, the better it is in this dimension.
+-   インデックス付き列でカバーされるアクセス条件の数。 「アクセス条件」は、列範囲に変換できる where 条件です。また、インデックス付き列セットがカバーするアクセス条件が多ければ多いほど、このディメンションではより優れたものになります。
 
-- Whether it needs to retrieve rows from a table when you select the index to access the table (that is, the plan generated by the index is IndexReader operator or IndexLookupReader operator). Indexes that do not retrieve rows from a table are better on this dimension than indexes that do. If both indexes need TiDB to retrieve rows from the table, compare how many filtering conditions are covered by the indexed columns. Filtering conditions mean the `where` condition that can be judged based on the index. If the column set of an index covers more access conditions, the smaller the number of retrieved rows from a table, and the better the index is in this dimension.
+-   テーブルにアクセスするインデックスを選択するときに、テーブルから行を取得する必要があるかどうか (つまり、インデックスによって生成されるプランは IndexReader 演算子または IndexLookupReader 演算子です)。このディメンションでは、テーブルから行を取得しないインデックスの方が、テーブルから行を取得するインデックスよりも優れています。両方のインデックスでテーブルから行を取得するために TiDB が必要な場合は、インデックス付き列でカバーされるフィルター条件の数を比較します。絞り込み条件とは、指標に基づいて判断できる`where`条件を指します。インデックスの列セットがより多くのアクセス条件をカバーする場合、テーブルから取得される行の数が少なくなり、このディメンションにおけるインデックスの品質が向上します。
 
-- Select whether the index satisfies a certain order. Because index reading can guarantee the order of certain column sets, indexes that satisfy the query order are superior to indexes that do not satisfy on this dimension.
+-   インデックスが特定の順序を満たすかどうかを選択します。インデックスの読み取りによって特定の列セットの順序が保証されるため、クエリ順序を満たすインデックスは、このディメンションに関して満たさないインデックスよりも優れています。
 
-For these three dimensions above, if the index `idx_a` performs no worse than the index `idx_b` in all three dimensions and performs better than `idx_b` in one dimension, then `idx_a` is preferred. When executing the `EXPLAIN FORMAT = 'verbose' ...` statement, if skyline-pruning excludes some indexes, TiDB outputs a NOTE-level warning listing the remaining indexes after the skyline-pruning exclusion.
+上記の 3 つの次元について、インデックス`idx_a`パフォーマンスが 3 つの次元すべてでインデックス`idx_b`より悪くなく、1 つの次元で`idx_b`よりも優れている場合は、 `idx_a`が優先されます。 `EXPLAIN FORMAT = 'verbose' ...`ステートメントの実行時に、スカイライン プルーニングによって一部のインデックスが除外される場合、TiDB は、スカイライン プルーニングの除外後に残りのインデックスをリストした NOTE レベルの警告を出力します。
 
-In the following example, the indexes `idx_b` and `idx_e` are both inferior to `idx_b_c`, so they are excluded by skyline-pruning. The returned result of `SHOW WARNING` displays the remaining indexes after skyline-pruning.
+次の例では、インデックス`idx_b`と`idx_e`は両方とも`idx_b_c`より劣っているため、スカイライン枝刈りによって除外されます。返された結果`SHOW WARNING`には、スカイライン プルーニング後の残りのインデックスが表示されます。
 
 ```sql
 mysql> CREATE TABLE t(a INT PRIMARY KEY, b INT, c INT, d INT, e INT, INDEX idx_b(b), INDEX idx_b_c(b, c), INDEX idx_e(e));
@@ -108,48 +108,48 @@ mysql> SHOW WARNINGS;
 1 row in set (0.00 sec)
 ```
 
-### Cost estimation-based selection
+### 見積りによる選定 {#cost-estimation-based-selection}
 
-After using the skyline-pruning rule to rule out inappropriate indexes, the selection of indexes is based entirely on the cost estimation. The cost estimation of accessing tables requires the following considerations:
+スカイライン プルーニング ルールを使用して不適切なインデックスを除外した後、インデックスの選択は完全にコスト見積もりに基づいて行われます。テーブルへのアクセスのコストを見積もるには、次の考慮事項が必要です。
 
-- The average length of each row of the indexed data in the storage engine.
-- The number of rows in the query range generated by the index.
-- The cost for retrieving rows from a table.
-- The number of ranges generated by index during the query execution.
+-   storageエンジン内のインデックス付きデータの各行の平均長。
+-   インデックスによって生成されたクエリ範囲内の行数。
+-   テーブルから行を取得するためのコスト。
+-   クエリの実行中にインデックスによって生成された範囲の数。
 
-According to these factors and the cost model, the optimizer selects an index with the lowest cost to access the table.
+これらの要素とコスト モデルに従って、オプティマイザはテーブルにアクセスするためのコストが最も低いインデックスを選択します。
 
-#### Common tuning problems with cost estimation based selection
+#### コスト見積もりに基づいた選択に伴う一般的なチューニングの問題 {#common-tuning-problems-with-cost-estimation-based-selection}
 
-1. The estimated number of rows is not accurate?
+1.  推定行数は正確ではありませんか?
 
-    This is usually due to stale or inaccurate statistics. You can re-execute the `analyze table` statement or modify the parameters of the `analyze table` statement.
+    これは通常、統計が古いか不正確であることが原因です。 `analyze table`ステートメントを再実行するか、 `analyze table`ステートメントのパラメーターを変更できます。
 
-2. Statistics are accurate, and reading from TiFlash is faster, but why does the optimizer choose to read from TiKV?
+2.  統計は正確で、 TiFlashからの読み取りの方が高速ですが、オプティマイザはなぜ TiKV からの読み取りを選択するのでしょうか?
 
-    At present, the cost model of distinguishing TiFlash from TiKV is still rough. You can decrease the value of `tidb_opt_seek_factor` parameter, then the optimizer prefers to choose TiFlash.
+    現時点では、 TiFlashと TiKV を区別するコスト モデルはまだ大まかです。 `tidb_opt_seek_factor`パラメータの値を減らすことができ、その場合、オプティマイザはTiFlashを選択することを優先します。
 
-3. The statistics are accurate. Index A needs to retrieve rows from tables, but it actually executes faster than Index B that does not retrieve rows from tables. Why does the optimizer choose Index B?
+3.  統計は正確です。インデックス A はテーブルから行を取得する必要がありますが、実際にはテーブルから行を取得しないインデックス B よりも高速に実行されます。オプティマイザはなぜインデックス B を選択するのでしょうか?
 
-    In this case, the cost estimation may be too large for retrieving rows from tables. You can decrease the value of `tidb_opt_network_factor` parameter to reduce the cost of retrieving rows from tables.
+    この場合、コスト見積もりが大きすぎてテーブルから行を取得できない可能性があります。 `tidb_opt_network_factor`パラメータの値を減らして、テーブルから行を取得するコストを削減できます。
 
-## Control index selection
+## 制御インデックスの選択 {#control-index-selection}
 
-The index selection can be controlled by a single query through [Optimizer Hints](/optimizer-hints.md).
+インデックスの選択は、 [オプティマイザーのヒント](/optimizer-hints.md)を介して単一のクエリによって制御できます。
 
-- `USE_INDEX` / `IGNORE_INDEX` can force the optimizer to use / not use certain indexes. `FORCE_INDEX` and `USE_INDEX` have the same effect.
+-   `USE_INDEX` / `IGNORE_INDEX` 、オプティマイザに特定のインデックスを使用または使用しないように強制できます。 `FORCE_INDEX`と`USE_INDEX`同様の効果があります。
 
-- `READ_FROM_STORAGE` can force the optimizer to choose the TiKV / TiFlash storage engine for certain tables to execute queries.
+-   `READ_FROM_STORAGE`指定すると、オプティマイザがクエリを実行するために特定のテーブルに対して TiKV / TiFlashstorageエンジンを選択するように強制できます。
 
-## Use multi-valued indexes
+## 複数値のインデックスを使用する {#use-multi-valued-indexes}
 
-[Multi-valued indexes](/sql-statements/sql-statement-create-index.md#multi-valued-indexes) are different from normal indexes. TiDB currently only uses [IndexMerge](/explain-index-merge.md) to access multi-valued indexes. Therefore, to use multi-valued indexes for data access, make sure that the value of the system variable `tidb_enable_index_merge` is set to `ON`.
+[多値インデックス](/sql-statements/sql-statement-create-index.md#multi-valued-indexes)は通常のインデックスとは異なります。 TiDB は現在、複数値インデックスへのアクセスに[インデックスマージ](/explain-index-merge.md)のみを使用します。したがって、データ アクセスに複数値インデックスを使用するには、システム変数`tidb_enable_index_merge`の値が`ON`に設定されていることを確認してください。
 
-For the limitations of multi-valued indexes, refer to [`CREATE INDEX`](/sql-statements/sql-statement-create-index.md#limitations).
+複数値インデックスの制限については、 [`CREATE INDEX`](/sql-statements/sql-statement-create-index.md#limitations)を参照してください。
 
-### Supported scenarios
+### サポートされているシナリオ {#supported-scenarios}
 
-Currently, TiDB supports accessing multi-valued indexes using IndexMerge that is automatically converted from `json_member_of`, `json_contains`, and `json_overlaps` conditions. You can either rely on the optimizer to automatically select IndexMerge based on cost, or specify the selection of multi-valued indexes through the optimizer hint [`use_index_merge`](/optimizer-hints.md#use_index_merget1_name-idx1_name--idx2_name-) or [`use_index`](/optimizer-hints.md#use_indext1_name-idx1_name--idx2_name-). See the following examples:
+現在、TiDB は、 `json_member_of` 、 `json_contains` 、および`json_overlaps`条件から自動的に変換される IndexMerge を使用した複数値インデックスへのアクセスをサポートしています。オプティマイザを利用してコストに基づいて IndexMerge を自動的に選択することも、オプティマイザのヒント[`use_index_merge`](/optimizer-hints.md#use_index_merget1_name-idx1_name--idx2_name-)または[`use_index`](/optimizer-hints.md#use_indext1_name-idx1_name--idx2_name-)を使用して複数値インデックスの選択を指定することもできます。次の例を参照してください。
 
 ```sql
 mysql> CREATE TABLE t1 (j JSON, INDEX idx((CAST(j->'$.path' AS SIGNED ARRAY)))); -- Uses '$.path' as the path to create a multi-valued index
@@ -192,7 +192,7 @@ mysql> EXPLAIN SELECT /*+ use_index_merge(t1, idx) */ * FROM t1 WHERE JSON_OVERL
 6 rows in set, 1 warning (0.00 sec)
 ```
 
-The composite multi-valued index can also be accessed through IndexMerge:
+複合多値インデックスには、IndexMerge を通じてアクセスすることもできます。
 
 ```sql
 mysql> CREATE TABLE t2 (a INT, j JSON, b INT, INDEX idx(a, (CAST(j->'$.path' AS SIGNED ARRAY)), b));
@@ -235,7 +235,7 @@ mysql> EXPLAIN SELECT /*+ use_index_merge(t2, idx) */ * FROM t2 WHERE a=1 AND JS
 6 rows in set, 1 warning (0.00 sec)
 ```
 
-For `OR` conditions composed of multiple `member of` expressions that can access the same multi-valued index, IndexMerge can be used to access the multi-valued index:
+同じ複数値インデックスにアクセスできる複数の`member of`式で構成される`OR`条件の場合、IndexMerge を使用して複数値インデックスにアクセスできます。
 
 ```sql
 mysql> CREATE TABLE t3 (a INT, j JSON, INDEX idx(a, (CAST(j AS SIGNED ARRAY))));
@@ -253,9 +253,9 @@ mysql> EXPLAIN SELECT /*+ use_index_merge(t3, idx) */ * FROM t3 WHERE ((a=1 AND 
 +---------------------------------+---------+-----------+---------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------+
 ```
 
-### Partially supported scenarios
+### 部分的にサポートされるシナリオ {#partially-supported-scenarios}
 
-For `AND` conditions composed of multiple expressions that correspond to multiple different indexes, only one multi-valued index can be used to access:
+複数の異なるインデックスに対応する複数の式で構成される`AND`条件の場合、アクセスに使用できる複数値インデックスは 1 つだけです。
 
 ```sql
 mysql> create table t(j1 json, j2 json, a int, INDEX k1((CAST(j1->'$.path' AS SIGNED ARRAY))), INDEX k2((CAST(j2->'$.path' AS SIGNED ARRAY))), INDEX ka(a));
@@ -274,21 +274,19 @@ mysql> explain select /*+ use_index_merge(t, k1, k2, ka) */ * from t where (1 me
 5 rows in set, 6 warnings (0.01 sec)
 ```
 
-Currently, TiDB only supports using one index to access instead of generating the following plan that uses multiple indexes to access at the same time:
+現在、TiDB は、複数のインデックスを使用して同時にアクセスする次のプランを生成するのではなく、1 つのインデックスを使用したアクセスのみをサポートしています。
 
-```
-Selection
-└─IndexMerge
-  ├─IndexRangeScan(k1)
-  ├─IndexRangeScan(k2)
-  ├─IndexRangeScan(ka)
-  └─Selection
-    └─TableRowIDScan
-```
+    Selection
+    └─IndexMerge
+      ├─IndexRangeScan(k1)
+      ├─IndexRangeScan(k2)
+      ├─IndexRangeScan(ka)
+      └─Selection
+        └─TableRowIDScan
 
-### Unsupported scenarios
+### サポートされていないシナリオ {#unsupported-scenarios}
 
-For `OR` conditions composed of multiple expressions that correspond to multiple different indexes, multi-valued indexes cannot be used:
+複数の異なるインデックスに対応する複数の式で構成される`OR`条件の場合、複数値インデックスは使用できません。
 
 ```sql
 mysql> create table t(j1 json, j2 json, a int, INDEX k1((CAST(j1->'$.path' AS SIGNED ARRAY))), INDEX k2((CAST(j2->'$.path' AS SIGNED ARRAY))), INDEX ka(a));
@@ -315,9 +313,9 @@ mysql> explain select /*+ use_index_merge(t, k1, k2, ka) */ * from t where (1 me
 3 rows in set, 3 warnings (0.00 sec)
 ```
 
-A workaround for the preceding scenario is to rewrite the query using `Union All`:
+前述のシナリオの回避策は、 `Union All`を使用してクエリを書き直すことです。
 
-The following are some more complex scenarios that are not yet supported.
+以下は、まだサポートされていない、より複雑なシナリオです。
 
 ```sql
 mysql> CREATE TABLE t4 (j JSON, INDEX idx((CAST(j AS SIGNED ARRAY))));
@@ -364,7 +362,7 @@ mysql> EXPLAIN SELECT /*+ use_index_merge(t3, idx) */ * FROM t3 WHERE ((1 member
 3 rows in set, 2 warnings (0.00 sec)
 ```
 
-Limited by the current implementation of multi-valued indexes, using [`use_index`](/optimizer-hints.md#use_indext1_name-idx1_name--idx2_name-) might return the `Can't find a proper physical plan for this query` error while using [`use_index_merge`](/optimizer-hints.md#use_index_merget1_name-idx1_name--idx2_name-) will not return such an error. Therefore, it is recommended to use `use_index_merge` if you want to use multi-valued indexes.
+複数値インデックスの現在の実装による制限により、 [`use_index`](/optimizer-hints.md#use_indext1_name-idx1_name--idx2_name-)を使用すると`Can't find a proper physical plan for this query`エラーが返される可能性がありますが、 [`use_index_merge`](/optimizer-hints.md#use_index_merget1_name-idx1_name--idx2_name-)を使用するとそのようなエラーは返されません。したがって、複数値のインデックスを使用する場合は`use_index_merge`を使用することをお勧めします。
 
 ```sql
 mysql> EXPLAIN SELECT /*+ use_index(t3, idx) */ * FROM t3 WHERE ((1 member of (j)) AND (2 member of (j))) OR ((3 member of (j)) AND (4 member of (j)));

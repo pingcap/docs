@@ -3,64 +3,64 @@ title: ticloud branch list
 summary: The reference of `ticloud branch list`.
 ---
 
-# ticloud branch list
+# ticloudブランチリスト {#ticloud-branch-list}
 
-List all branches for a cluster:
+クラスターのすべてのブランチをリストします。
 
 ```shell
 ticloud branch list <cluster-id> [flags]
 ```
 
-Or use the following alias command:
+または、次のエイリアス コマンドを使用します。
 
 ```shell
 ticloud branch ls <cluster-id> [flags]
 ```
 
-## Examples
+## 例 {#examples}
 
-List all branches for a cluster (interactive mode):
+クラスターのすべてのブランチをリストします (対話モード)。
 
 ```shell
 ticloud branch list
 ```
 
-List all branches for a specified cluster (non-interactive mode):
+指定したクラスターのすべてのブランチをリストします (非対話モード)。
 
 ```shell
 ticloud branch list <cluster-id>
 ```
 
-List all branches for a specified cluster in the JSON format:
+指定したクラスターのすべてのブランチを JSON 形式でリストします。
 
 ```shell
 ticloud branch list <cluster-id> -o json
 ```
 
-## Arguments
+## 引数 {#arguments}
 
-The `branch list` command has the following arguments:
+`branch list`コマンドには次の引数があります。
 
-| Argument Index | Description                                         | Required | Note                                  |
-|----------------|-----------------------------------------------------|----------|---------------------------------------|
-| `<cluster-id>` | The cluster ID of the branches which will be listed | Yes      | Only works in non-interactive mode.   |
+| 引数インデックス       | 説明                  | 必須 | 注記              |
+| -------------- | ------------------- | -- | --------------- |
+| `<cluster-id>` | リストされるブランチのクラスター ID | はい | 非対話モードでのみ動作します。 |
 
-## Flags
+## フラグ {#flags}
 
-In non-interactive mode, you need to manually enter the required flags. In interactive mode, you can just follow CLI prompts to fill them in.
+非対話型モードでは、必要なフラグを手動で入力する必要があります。対話型モードでは、CLI プロンプトに従って入力するだけです。
 
-| Flag                | Description                                                                                                              | Required | Note                                                 |
-|---------------------|--------------------------------------------------------------------------------------------------------------------------|----------|------------------------------------------------------|
-| -h, --help          | Help information for this command                                                                                        | No       | Works in both non-interactive and interactive modes. |
-| -o, --output string | Output format (`human` by default). Valid values are `human` or `json`. To get a complete result, use the `json` format. | No       | Works in both non-interactive and interactive modes. |
+| フラグ         | 説明                                                                         | 必須  | 注記                       |
+| ----------- | -------------------------------------------------------------------------- | --- | ------------------------ |
+| -h, --help  | このコマンドのヘルプ情報                                                               | いいえ | 非対話型モードと対話型モードの両方で動作します。 |
+| -o, --出力文字列 | 出力形式 (デフォルトでは`human` )。有効な値は`human`または`json`です。完全な結果を得るには、 `json`形式を使用します。 | いいえ | 非対話型モードと対話型モードの両方で動作します。 |
 
-## Inherited flags
+## 継承されたフラグ {#inherited-flags}
 
-| Flag                 | Description                                                                                          | Required | Note                                                                                                                     |
-|----------------------|------------------------------------------------------------------------------------------------------|----------|--------------------------------------------------------------------------------------------------------------------------|
-| --no-color           | Disables color in output.                                                                            | No       | Only works in non-interactive mode. In interactive mode, disabling color might not work with some UI components.         |
-| -P, --profile string | Specifies the active [user profile](/tidb-cloud/cli-reference.md#user-profile) used in this command. | No       | Works in both non-interactive and interactive modes.                                                                     |
+| フラグ            | 説明                                                                               | 必須  | 注記                                                                |
+| -------------- | -------------------------------------------------------------------------------- | --- | ----------------------------------------------------------------- |
+| --色なし          | 出力のカラーを無効にします。                                                                   | いいえ | 非対話モードでのみ動作します。インタラクティブ モードでは、一部の UI コンポーネントで色の無効化が機能しない可能性があります。 |
+| -P、--プロファイル文字列 | このコマンドで使用されるアクティブな[ユーザープロフィール](/tidb-cloud/cli-reference.md#user-profile)を指定します。 | いいえ | 非対話型モードと対話型モードの両方で動作します。                                          |
 
-## Feedback
+## フィードバック {#feedback}
 
-If you have any questions or suggestions on the TiDB Cloud CLI, feel free to create an [issue](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose). Also, we welcome any contributions.
+TiDB Cloud CLI に関して質問や提案がある場合は、お気軽に[問題](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose)を作成してください。また、貢献も歓迎します。

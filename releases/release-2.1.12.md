@@ -2,41 +2,41 @@
 title: TiDB 2.1.12 Release Notes
 ---
 
-# TiDB 2.1.12 Release Notes
+# TiDB 2.1.12 リリースノート {#tidb-2-1-12-release-notes}
 
-Release date: June 13, 2019
+発売日：2019年6月13日
 
-TiDB version: 2.1.12
+TiDB バージョン: 2.1.12
 
-TiDB Ansible version: 2.1.12
+TiDB Ansible バージョン: 2.1.12
 
-## TiDB
+## TiDB {#tidb}
 
-- Fix the issue caused by unmatched data types when using the index query feedback [#10755](https://github.com/pingcap/tidb/pull/10755)
-- Fix the issue that the blob column is changed to the text column caused by charset altering in some cases [#10745](https://github.com/pingcap/tidb/pull/10745)
-- Fix the issue that the `GRANT` operation in the transaction mistakenly reports "Duplicate Entry" in some cases [#10739](https://github.com/pingcap/tidb/pull/10739)
-- Improve the compatibility with MySQL of the following features
-    - The `DAYNAME` function [#10732](https://github.com/pingcap/tidb/pull/10732)
-    - The `MONTHNAME` function [#10733](https://github.com/pingcap/tidb/pull/10733)
-    - Support the 0 value for the `EXTRACT` function when processing `MONTH` [#10702](https://github.com/pingcap/tidb/pull/10702)
-    - The `DECIMAL` type can be converted to `TIMESTAMP` or `DATETIME` [#10734](https://github.com/pingcap/tidb/pull/10734)
-- Change the column charset while changing the table charset [#10714](https://github.com/pingcap/tidb/pull/10714)
-- Fix the overflow issue when converting a decimal to a float in some cases [#10730](https://github.com/pingcap/tidb/pull/10730)
-- Fix the issue that some extremely large messages report the "grpc: received message larger than max" error caused by inconsistent maximum sizes of messages sent/received by gRPC of TiDB and TiKV [#10710](https://github.com/pingcap/tidb/pull/10710)
-- Fix the panic issue caused by `ORDER BY` not filtering NULL in some cases [#10488](https://github.com/pingcap/tidb/pull/10488)
-- Fix the issue that values returned by the `UUID` function might be duplicate when multiple nodes exist [#10711](https://github.com/pingcap/tidb/pull/10711)
-- Change the value returned by `CAST(-num as datetime)` from `error` to NULL [#10703](https://github.com/pingcap/tidb/pull/10703)
-- Fix the issue that an unsigned histogram meets signed ranges in some cases [#10695](https://github.com/pingcap/tidb/pull/10695)
-- Fix the issue that an error is reported mistakenly for reading data when the statistics feedback meets the bigint unsigned primary key [#10307](https://github.com/pingcap/tidb/pull/10307)
-- Fix the issue that the result of `Show Create Table` for partitioned tables is not correctly displayed in some cases [#10690](https://github.com/pingcap/tidb/pull/10690)
-- Fix the issue that the calculation result of the `GROUP_CONCAT` aggregate function is not correct for some correlated subqueries [#10670](https://github.com/pingcap/tidb/pull/10670)
-- Fix the issue that the result is wrongly displayed when the memory table of slow queries parses the slow query log in some cases [#10776](https://github.com/pingcap/tidb/pull/10776)
+-   インデックス クエリ フィードバック[#10755](https://github.com/pingcap/tidb/pull/10755)を使用するときにデータ型が一致しないことによって発生する問題を修正します。
+-   場合によっては、文字セットの変更によって BLOB 列がテキスト列に変更される問題を修正します[#10745](https://github.com/pingcap/tidb/pull/10745)
+-   トランザクション内の`GRANT`オペレーションが誤って「重複エントリ」を報告する場合がある問題を修正[#10739](https://github.com/pingcap/tidb/pull/10739)
+-   以下の機能のMySQLとの互換性を向上します。
+    -   `DAYNAME`機能[#10732](https://github.com/pingcap/tidb/pull/10732)
+    -   `MONTHNAME`機能[#10733](https://github.com/pingcap/tidb/pull/10733)
+    -   `MONTH` [#10702](https://github.com/pingcap/tidb/pull/10702)を処理するときに`EXTRACT`関数の 0 値をサポートします。
+    -   `DECIMAL`タイプは`TIMESTAMP`または`DATETIME` [#10734](https://github.com/pingcap/tidb/pull/10734)に変換できます
+-   テーブルの文字セットを変更するときに列の文字セットを変更する[#10714](https://github.com/pingcap/tidb/pull/10714)
+-   場合によっては[#10730](https://github.com/pingcap/tidb/pull/10730)進数を浮動小数点に変換するときのオーバーフローの問題を修正します。
+-   TiDB および TiKV [#10710](https://github.com/pingcap/tidb/pull/10710)の gRPC で送受信されるメッセージの最大サイズが一貫していないために、一部の非常に大きなメッセージで「grpc: 最大値より大きいメッセージを受信しました」エラーが報告される問題を修正
+-   場合によっては`ORDER BY`をフィルタリングしないことによって引き起こされるpanicの問題を修正します[#10488](https://github.com/pingcap/tidb/pull/10488)
+-   複数のノードが存在する場合に`UUID`関数によって返される値が重複する可能性がある問題を修正します[#10711](https://github.com/pingcap/tidb/pull/10711)
+-   `CAST(-num as datetime)`によって返される値を`error`から NULL [#10703](https://github.com/pingcap/tidb/pull/10703)に変更します。
+-   場合によっては、符号なしヒストグラムが符号付き範囲と一致する問題を修正します[#10695](https://github.com/pingcap/tidb/pull/10695)
+-   統計フィードバックが bigint の署名なし主キー[#10307](https://github.com/pingcap/tidb/pull/10307)に一致する場合、データの読み取りに関するエラーが誤って報告される問題を修正します。
+-   パーティションテーブルの`Show Create Table`の結果が正しく表示されない場合がある問題を修正[#10690](https://github.com/pingcap/tidb/pull/10690)
+-   一部の相関サブクエリ[#10670](https://github.com/pingcap/tidb/pull/10670)において、 `GROUP_CONCAT`集計関数の計算結果が正しくない問題を修正
+-   スロークエリのメモリテーブルがスロークエリログを解析すると、結果が誤って表示される場合がある問題を修正[#10776](https://github.com/pingcap/tidb/pull/10776)
 
-## PD
+## PD {#pd}
 
-- Fix the issue that etcd leader election is blocked in extreme conditions [#1576](https://github.com/pingcap/pd/pull/1576)
+-   極端な状況で etcd リーダーの選出がブロックされる問題を修正[#1576](https://github.com/pingcap/pd/pull/1576)
 
-## TiKV
+## TiKV {#tikv}
 
-- Fix the issue that Regions are not available during the leader transfer process in extreme conditions [#4799](https://github.com/tikv/tikv/pull/4734)
-- Fix the issue that TiKV loses data when the power of the machine fails abnormally, caused by delayed data flush to the disk when receiving snapshots [#4850](https://github.com/tikv/tikv/pull/4850)
+-   極限状態[#4799](https://github.com/tikv/tikv/pull/4734)でのリーダー転送プロセス中にリージョンが利用できない問題を修正
+-   スナップショットの受信時にディスクへのデータのフラッシュが遅れたため、マシンの電源が異常に落ちたときに TiKV がデータを失う問題を修正します[#4850](https://github.com/tikv/tikv/pull/4850)

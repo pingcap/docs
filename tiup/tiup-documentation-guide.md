@@ -3,18 +3,18 @@ title: TiUP Documentation Map
 summary: Guide you through TiUP documentation with links and introductions.
 ---
 
-# TiUP Documentation Map
+# TiUPドキュメント マップ {#tiup-documentation-map}
 
-## User guide
+## ユーザーガイド {#user-guide}
 
-- [TiUP Overview](/tiup/tiup-overview.md): Gives an overall introduction to TiUP, for example, how to install and use TiUP, and the related terminologies.
-- [TiUP Terminology and Concepts](/tiup/tiup-terminology-and-concepts.md): Explains the terms that you might bump into when using TiUP, and help you understand the key concepts of TiUP
-- [TiUP Component Management](/tiup/tiup-component-management.md): Introduces all TiUP commands in detail, and how to use TiUP to download, update and delete components
-- [TiUP FAQ](/tiup/tiup-faq.md): Introduces common issues when you use TiUP, including FAQs of the third-party components of TiUP
-- [TiUP Troubleshooting Guide](/tiup/tiup-troubleshooting-guide.md): Introduces the troubleshooting methods and solutions if you encounter issues when using TiUP
-- [TiUP Reference Guide](/tiup/tiup-reference.md): Introduces detailed references, including commands, components, and mirrors.
+-   [TiUPの概要](/tiup/tiup-overview.md) : TiUP のインストール方法や使用方法、関連用語など、 TiUPの全体的な概要を示します。
+-   [TiUP の用語と概念](/tiup/tiup-terminology-and-concepts.md) : TiUP を使用する際に遭遇する可能性のある用語について説明し、 TiUPの主要な概念を理解するのに役立ちます
+-   [TiUPコンポーネント管理](/tiup/tiup-component-management.md) : すべてのTiUPコマンドを詳細に紹介し、 TiUP を使用してコンポーネントをダウンロード、更新、削除する方法を紹介します。
+-   [TiUPFAQ](/tiup/tiup-faq.md) : TiUPのサードパーティ コンポーネントの FAQ など、 TiUPを使用する際の一般的な問題を紹介します。
+-   [TiUPトラブルシューティング ガイド](/tiup/tiup-troubleshooting-guide.md) : TiUP使用時に問題が発生した場合のトラブルシューティング方法と解決策を紹介します。
+-   [TiUPリファレンスガイド](/tiup/tiup-reference.md) : コマンド、コンポーネント、ミラーなどの詳細なリファレンスを紹介します。
 
-## TiUP resources
+## TiUPリソース {#tiup-resources}
 
-- [TiUP Release Notes](https://github.com/pingcap/tiup/releases)
-- [TiUP Issues](https://github.com/pingcap/tiup/issues): Lists TiUP GitHub issues
+-   [TiUPリリースノート](https://github.com/pingcap/tiup/releases)
+-   [TiUPの問題](https://github.com/pingcap/tiup/issues) : TiUP GitHub の問題をリストします

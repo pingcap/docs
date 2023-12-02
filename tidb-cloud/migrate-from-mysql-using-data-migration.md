@@ -3,295 +3,293 @@ title: Migrate MySQL-Compatible Databases to TiDB Cloud Using Data Migration
 summary: Learn how to migrate data from MySQL-compatible databases hosted in Amazon Aurora MySQL, Amazon Relational Database Service (RDS), Google Cloud SQL for MySQL, or a local MySQL instance to TiDB Cloud using Data Migration.
 ---
 
-# Migrate MySQL-Compatible Databases to TiDB Cloud Using Data Migration
+# データ移行を使用して MySQL 互換データベースをTiDB Cloudに移行する {#migrate-mysql-compatible-databases-to-tidb-cloud-using-data-migration}
 
-This document describes how to migrate data from a MySQL-compatible database on a cloud provider (Amazon Aurora MySQL, Amazon Relational Database Service (RDS), or Google Cloud SQL for MySQL) or self-hosted source database to TiDB Cloud using the Data Migration feature of the TiDB Cloud console.
+このドキュメントでは、データ移行を使用して、クラウドプロバイダー上の MySQL 互換データベース (Amazon Aurora MySQL、Amazon Relational Database Service (RDS)、または Google Cloud SQL for MySQL) またはセルフホストのソース データベースからTiDB Cloudにデータを移行する方法について説明します。 TiDB Cloudコンソールの機能。
 
-This feature helps you migrate your source databases' existing data and ongoing changes to TiDB Cloud (either in the same region or cross regions) directly in one go.
+この機能は、ソース データベースの既存のデータと進行中の変更を (同じリージョン内またはリージョン間で) TiDB Cloudに一度に直接移行するのに役立ちます。
 
-If you want to migrate incremental data only, see [Migrate Incremental Data from MySQL-Compatible Databases to TiDB Cloud Using Data Migration](/tidb-cloud/migrate-incremental-data-from-mysql-using-data-migration.md).
+増分データのみを移行する場合は、 [データ移行を使用して、MySQL 互換データベースからTiDB Cloudに増分データを移行する](/tidb-cloud/migrate-incremental-data-from-mysql-using-data-migration.md)を参照してください。
 
-## Limitations
+## 制限事項 {#limitations}
 
-- The Data Migration feature is available only for **TiDB Dedicated** clusters.
+-   データ移行機能は、 **TiDB 専用**クラスターでのみ使用できます。
 
-- The Data Migration feature is only available to clusters in the projects that are created in the following regions after November 9, 2022. If your **project** was created before the date or if your cluster is in another region, this feature is not available to your cluster and the **Data Migration** tab will not be displayed on the cluster overview page in the TiDB Cloud console.
+-   データ移行機能は、2022 年 11 月 9 日以降に次のリージョンで作成されたプロジェクトのクラスターでのみ使用できます。**プロジェクト**がその日より前に作成された場合、またはクラスターが別のリージョンにある場合、この機能はクラスターでは使用できません。また、 **[データ移行]**タブは、 TiDB Cloudコンソールのクラスター概要ページに表示されません。
 
-    - AWS Oregon (us-west-2)
-    - AWS N. Virginia (us-east-1)
-    - AWS Singapore (ap-southeast-1)
-    - AWS Tokyo (ap-northeast-1)
-    - AWS Frankfurt (eu-central-1)
-    - AWS Seoul (ap-northeast-2)
-    - Google Cloud Oregon (us-west1)
-    - Google Cloud Singapore (asia-southeast1)
-    - Google Cloud Tokyo (asia-northeast1)
+    -   AWS オレゴン州 (us-west-2)
+    -   AWS 北バージニア (us-east-1)
+    -   AWS シンガポール (ap-southeast-1)
+    -   AWS 東京 (ap-northeast-1)
+    -   AWS フランクフルト (eu-central-1)
+    -   AWS ソウル (ap-northeast-2)
+    -   Google Cloud オレゴン (us-west1)
+    -   Google Cloud シンガポール (asia-southeast1)
+    -   Google Cloud 東京 (asia-northeast1)
 
-- Amazon Aurora MySQL writer instances support both existing data and incremental data migration. Amazon Aurora MySQL reader instances only support existing data migration and do not support incremental data migration.
+-   Amazon Aurora MySQL ライター インスタンスは、既存のデータと増分データ移行の両方をサポートします。 Amazon Aurora MySQL リーダー インスタンスは、既存のデータ移行のみをサポートし、増分データ移行はサポートしません。
 
-- You can create up to 200 migration jobs for each organization. To create more migration jobs, you need to [file a support ticket](/tidb-cloud/tidb-cloud-support.md).
+-   組織ごとに最大 200 個の移行ジョブを作成できます。さらに移行ジョブを作成するには、 [サポートチケットを提出する](/tidb-cloud/tidb-cloud-support.md)を実行する必要があります。
 
-- The system databases will be filtered out and not migrated to TiDB Cloud even if you select all of the databases to migrate. That is, `mysql`, `information_schema`, `information_schema`, and `sys` will not be migrated using this feature.
+-   移行するデータベースをすべて選択した場合でも、システム データベースはフィルターで除外され、 TiDB Cloudには移行されません。つまり、 `mysql` 、 `information_schema` 、 `information_schema` 、および`sys`は、この機能を使用して移行されません。
 
-- During existing data migration, if the table to be migrated already exists in the target database with duplicated keys, the duplicate keys will be replaced.
+-   既存のデータの移行中に、移行対象のテーブルが重複キーを持つターゲット データベースにすでに存在する場合、重複キーは置き換えられます。
 
-- During incremental data migration, if the table to be migrated already exists in the target database with duplicated keys, an error is reported and the migration is interrupted. In this situation, you need to make sure whether the upstream data is accurate. If yes, click the "Restart" button of the migration job and the migration job will replace the downstream conflicting records with the upstream records.
+-   増分データ移行中に、移行対象のテーブルが重複したキーを持つターゲット データベースにすでに存在する場合、エラーが報告され、移行は中断されます。この状況では、アップストリーム データが正確かどうかを確認する必要があります。 「はい」の場合、移行ジョブの「再開」ボタンをクリックすると、移行ジョブは競合する下流のレコードを上流のレコードに置き換えます。
 
-- When you delete a cluster in TiDB Cloud, all migration jobs in that cluster are automatically deleted and not recoverable.
+-   TiDB Cloudでクラスターを削除すると、そのクラスター内のすべての移行ジョブが自動的に削除され、回復できなくなります。
 
-- During incremental replication (migrating ongoing changes to your cluster), if the migration job recovers from an abrupt error, it might open the safe mode for 60 seconds. During the safe mode, `INSERT` statements are migrated as `REPLACE`, `UPDATE` statements as `DELETE` and `REPLACE`, and then these transactions are migrated to the downstream cluster to make sure that all the data during the abrupt error has been migrated smoothly to the downstream cluster. In this scenario, for upstream tables without primary keys or not-null unique indexes, some data might be duplicated in the downstream cluster because the data might be inserted repeatedly to the downstream.
+-   増分レプリケーション (進行中の変更をクラスターに移行する) 中に、移行ジョブが突然のエラーから回復すると、セーフ モードが 60 秒間開くことがあります。セーフ モードでは、 `INSERT`ステートメントは`REPLACE`として、 `UPDATE`ステートメントは`DELETE`および`REPLACE`として移行され、その後、これらのトランザクションはダウンストリーム クラスターに移行され、突然のエラー中のすべてのデータがダウンストリーム クラスターにスムーズに移行されたことを確認します。このシナリオでは、主キーや非 null の一意のインデックスがないアップストリーム テーブルの場合、データがダウンストリームに繰り返し挿入される可能性があるため、一部のデータがダウンストリーム クラスターで重複する可能性があります。
 
-- When you use Data Migration, it is recommended to keep the size of your dataset smaller than 1 TiB. If the dataset size is larger than 1 TiB, the existing data migration will take a long time due to limited specifications.
+-   データ移行を使用する場合は、データセットのサイズを 1 TiB 未満に保つことをお勧めします。データセットのサイズが 1 TiB より大きい場合、仕様が制限されているため、既存のデータの移行に時間がかかります。
 
-- In the following scenarios, if the migration job takes longer than 24 hours, do not purge binary logs in the source database to ensure that Data Migration can get consecutive binary logs for incremental replication:
+-   次のシナリオでは、移行ジョブに 24 時間以上かかる場合は、データ移行が増分レプリケーション用に連続したバイナリ ログを確実に取得できるように、ソース データベース内のバイナリ ログをパージしないでください。
 
-    - During existing data migration.
-    - After the existing data migration is completed and when incremental data migration is started for the first time, the latency is not 0ms.
+    -   既存のデータの移行中。
+    -   既存のデータ移行が完了した後、初めて増分データ移行を開始するとき、レイテンシーは0 ミリ秒ではありません。
 
-## Prerequisites
+## 前提条件 {#prerequisites}
 
-Before performing the migration, you need to check the data sources, prepare privileges for upstream and downstream databases, and set up network connections.
+移行を実行する前に、データ ソースを確認し、上流および下流のデータベースに対する権限を準備し、ネットワーク接続を設定する必要があります。
 
-### Make sure your data source and version are supported
+### データ ソースとバージョンがサポートされていることを確認してください {#make-sure-your-data-source-and-version-are-supported}
 
-Data Migration supports the following data sources and versions:
+データ移行は、次のデータ ソースとバージョンをサポートします。
 
-- MySQL 5.6, 5.7, and 8.0 local instances or on a public cloud provider. Note that MySQL 8.0 is still experimental on TiDB Cloud and might have incompatibility issues.
-- Amazon Aurora (MySQL 5.6 and 5.7)
-- Amazon RDS (MySQL 5.7)
-- Google Cloud SQL for MySQL 5.6 and 5.7
+-   MySQL 5.6、5.7、および 8.0 のローカル インスタンスまたはパブリック クラウド プロバイダー上。 MySQL 8.0 はTiDB Cloud上でまだ実験的にあるため、非互換性の問題が発生する可能性があることに注意してください。
+-   Amazon Aurora (MySQL 5.6 および 5.7)
+-   Amazon RDS (MySQL 5.7)
+-   MySQL 5.6 および 5.7 用の Google Cloud SQL
 
-### Grant required privileges to the upstream database
+### 上流データベースに必要な権限を付与します。 {#grant-required-privileges-to-the-upstream-database}
 
-The username you use for the upstream database must have all the following privileges:
+アップストリーム データベースに使用するユーザー名には、次のすべての権限が必要です。
 
-| Privilege | Scope |
-|:----|:----|
-| `SELECT` | Tables |
-| `LOCK` | Tables |
-| `REPLICATION SLAVE` | Global |
-| `REPLICATION CLIENT` | Global |
+| 特権                   | 範囲    |
+| :------------------- | :---- |
+| `SELECT`             | テーブル  |
+| `LOCK`               | テーブル  |
+| `REPLICATION SLAVE`  | グローバル |
+| `REPLICATION CLIENT` | グローバル |
 
-For example, you can use the following `GRANT` statement to grant corresponding privileges:
+たとえば、次の`GRANT`ステートメントを使用して、対応する権限を付与できます。
 
 ```sql
 GRANT SELECT,LOCK TABLES,REPLICATION SLAVE,REPLICATION CLIENT ON *.* TO 'your_user'@'your_IP_address_of_host'
 ```
 
-### Grant required privileges to the downstream TiDB Cloud cluster
+### ダウンストリームTiDB Cloudクラスターに必要な権限を付与します。 {#grant-required-privileges-to-the-downstream-tidb-cloud-cluster}
 
-The username you use for the downstream TiDB Cloud cluster must have the following privileges:
+ダウンストリームTiDB Cloudクラスターに使用するユーザー名には、次の権限が必要です。
 
-| Privilege | Scope |
-|:----|:----|
-| `CREATE` | Databases, Tables |
-| `SELECT` | Tables |
-| `INSERT` | Tables |
-| `UPDATE` | Tables |
-| `DELETE` | Tables |
-| `ALTER`  | Tables |
-| `DROP`   | Databases, Tables |
-| `INDEX`  | Tables |
-| `TRUNCATE`  | Tables |
+| 特権         | 範囲          |
+| :--------- | :---------- |
+| `CREATE`   | データベース、テーブル |
+| `SELECT`   | テーブル        |
+| `INSERT`   | テーブル        |
+| `UPDATE`   | テーブル        |
+| `DELETE`   | テーブル        |
+| `ALTER`    | テーブル        |
+| `DROP`     | データベース、テーブル |
+| `INDEX`    | テーブル        |
+| `TRUNCATE` | テーブル        |
 
-For example, you can execute the following `GRANT` statement to grant corresponding privileges:
+たとえば、次の`GRANT`ステートメントを実行して、対応する権限を付与できます。
 
 ```sql
 GRANT CREATE,SELECT,INSERT,UPDATE,DELETE,ALTER,TRUNCATE,DROP,INDEX ON *.* TO 'your_user'@'your_IP_address_of_host'
 ```
 
-To quickly test a migration job, you can use the `root` account of the TiDB Cloud cluster.
+移行ジョブを迅速にテストするには、 TiDB Cloudクラスターの`root`アカウントを使用できます。
 
-### Set up network connection
+### ネットワーク接続をセットアップする {#set-up-network-connection}
 
-Before creating a migration job, set up the network connection according to your connection methods. See [Connect to Your TiDB Dedicated Cluster](/tidb-cloud/connect-to-tidb-cluster.md).
+移行ジョブを作成する前に、接続方法に従ってネットワーク接続を設定します。 [TiDB 専用クラスタに接続する](/tidb-cloud/connect-to-tidb-cluster.md)を参照してください。
 
-- If you use public IP (this is, standard connection) for network connection, make sure that the upstream database can be connected through the public network.
+-   ネットワーク接続にパブリック IP (標準接続) を使用する場合は、上流のデータベースがパブリック ネットワーク経由で接続できることを確認してください。
 
-- If you use AWS PrivateLink, set it up according to [Connect to TiDB Dedicated via Private Endpoint with AWS](/tidb-cloud/set-up-private-endpoint-connections.md).
+-   AWS PrivateLink を使用する場合は、 [AWS のプライベート エンドポイント経由で専用 TiDB に接続する](/tidb-cloud/set-up-private-endpoint-connections.md)に従って設定します。
 
-- If you use Google Cloud Private Service Connect, set it up according to [Connect to TiDB Dedicated via Private Endpoint with Google Cloud](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md).
+-   Google Cloud Private Service Connect を使用する場合は、 [Google Cloud のプライベート エンドポイント経由で専用 TiDB に接続する](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)に従って設定します。
 
-- If you use AWS VPC Peering or Google Cloud VPC Network Peering, see the following instructions to configure the network.
+-   AWS VPC ピアリングまたは Google Cloud VPC ネットワーク ピアリングを使用する場合は、次の手順を参照してネットワークを構成してください。
 
-<details>
-<summary> Set up AWS VPC Peering</summary>
+<details><summary>AWS VPC ピアリングを設定する</summary>
 
-If your MySQL service is in an AWS VPC, take the following steps:
+MySQL サービスが AWS VPC 内にある場合は、次の手順を実行します。
 
-1. [Set up a VPC peering connection](/tidb-cloud/set-up-vpc-peering-connections.md) between the VPC of the MySQL service and your TiDB cluster.
+1.  MySQL サービスの VPC と TiDB クラスターの間は[VPC ピアリング接続をセットアップする](/tidb-cloud/set-up-vpc-peering-connections.md) 。
 
-2. Modify the inbound rules of the security group that the MySQL service is associated with.
+2.  MySQL サービスが関連付けられているセキュリティ グループの受信ルールを変更します。
 
-    You must add [the CIDR of the region where your TiDB Cloud cluster is located](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-project-cidr) to the inbound rules. Doing so allows the traffic to flow from your TiDB cluster to the MySQL instance.
+    受信ルールに[TiDB Cloudクラスターが配置されているリージョンの CIDR](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-project-cidr)を追加する必要があります。これにより、トラフィックが TiDB クラスターから MySQL インスタンスに流れるようになります。
 
-3. If the MySQL URL contains a DNS hostname, you need to allow TiDB Cloud to be able to resolve the hostname of the MySQL service.
+3.  MySQL URL に DNS ホスト名が含まれている場合は、 TiDB Cloud がMySQL サービスのホスト名を解決できるようにする必要があります。
 
-    1. Follow the steps in [Enable DNS resolution for a VPC peering connection](https://docs.aws.amazon.com/vpc/latest/peering/modify-peering-connections.html#vpc-peering-dns).
-    2. Enable the **Accepter DNS resolution** option.
-
-</details>
-
-<details>
-<summary> Set up Google Cloud VPC Network Peering </summary>
-
-If your MySQL service is in a Google Cloud VPC, take the following steps:
-
-1. If it is a self-hosted MySQL, you can skip this step and proceed to the next step. If your MySQL service is Google Cloud SQL, you must expose a MySQL endpoint in the associated VPC of the Google Cloud SQL instance. You might need to use the [Cloud SQL Auth proxy](https://cloud.google.com/sql/docs/mysql/sql-proxy) developed by Google.
-
-2. [Set up a VPC peering connection](/tidb-cloud/set-up-vpc-peering-connections.md) between the VPC of your MySQL service and your TiDB cluster.
-
-3. Modify the ingress firewall rules of the VPC where MySQL is located.
-
-    You must add [the CIDR of the region where your TiDB Cloud cluster is located](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-project-cidr) to the ingress firewall rules. This allows the traffic to flow from your TiDB cluster to the MySQL endpoint.
+    1.  [VPC ピアリング接続の DNS 解決を有効にする](https://docs.aws.amazon.com/vpc/latest/peering/modify-peering-connections.html#vpc-peering-dns)の手順に従います。
+    2.  **アクセプター DNS 解決**オプションを有効にします。
 
 </details>
 
-### Enable binary logs
+<details><summary>Google Cloud VPC ネットワーク ピアリングを設定する</summary>
 
-To perform incremental data migration, make sure you have enabled binary logs of the upstream database, and the binary logs have been kept for more than 24 hours.
+MySQL サービスが Google Cloud VPC 内にある場合は、次の手順を実行します。
 
-## Step 1: Go to the **Data Migration** page
+1.  セルフホスト型 MySQL の場合は、この手順をスキップして次の手順に進むことができます。 MySQL サービスが Google Cloud SQL の場合は、Google Cloud SQL インスタンスの関連する VPC で MySQL エンドポイントを公開する必要があります。 Google が開発した[Cloud SQL 認証プロキシ](https://cloud.google.com/sql/docs/mysql/sql-proxy)使用する必要がある場合があります。
 
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
+2.  MySQL サービスの VPC と TiDB クラスターの間の[VPC ピアリング接続をセットアップする](/tidb-cloud/set-up-vpc-peering-connections.md) 。
 
-    > **Tip:**
+3.  MySQL が配置されている VPC のイングレス ファイアウォール ルールを変更します。
+
+    受信ファイアウォール ルールに[TiDB Cloudクラスターが配置されているリージョンの CIDR](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-project-cidr)を追加する必要があります。これにより、トラフィックが TiDB クラスターから MySQL エンドポイントに流れることが可能になります。
+
+</details>
+
+### バイナリログを有効にする {#enable-binary-logs}
+
+増分データ移行を実行するには、アップストリーム データベースのバイナリ ログが有効になっていること、およびバイナリ ログが 24 時間以上保存されていることを確認してください。
+
+## ステップ 1:<strong>データ移行</strong>ページに移動する {#step-1-go-to-the-strong-data-migration-strong-page}
+
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、プロジェクトの[**クラスター**](https://tidbcloud.com/console/clusters)ページに移動します。
+
+    > **ヒント：**
     >
-    > If you have multiple projects, you can click <MDSvgIcon name="icon-left-projects" /> in the lower-left corner and switch to another project.
+    > 複数のプロジェクトがある場合は、<mdsvgicon name="icon-left-projects">左下隅の をクリックして、別のプロジェクトに切り替えます。</mdsvgicon>
 
-2. Click the name of your target cluster to go to its overview page, and then click **Data Migration** in the left navigation pane.
+2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[データ移行]**をクリックします。
 
-3. On the **Data Migration** page, click **Create Migration Job** in the upper-right corner. The **Create Migration Job** page is displayed.
+3.  **[データ移行]**ページで、右上隅にある**[移行ジョブの作成]**をクリックします。 **「移行ジョブの作成」**ページが表示されます。
 
-## Step 2: Configure the source and target connection
+## ステップ 2: ソース接続とターゲット接続を構成する {#step-2-configure-the-source-and-target-connection}
 
-On the **Create Migration Job** page, configure the source and target connection.
+**[移行ジョブの作成]**ページで、ソース接続とターゲット接続を構成します。
 
-1. Enter a job name, which must start with a letter and must be less than 60 characters. Letters (A-Z, a-z), numbers (0-9), underscores (_), and hyphens (-) are acceptable.
+1.  ジョブ名を入力します。ジョブ名は文字で始まり、60 文字未満である必要があります。文字 (A ～ Z、az)、数字 (0 ～ 9)、アンダースコア (_)、およびハイフン (-) を使用できます。
 
-2. Fill in the source connection profile.
+2.  ソース接続プロファイルを入力します。
 
-   - **Data source**: the data source type.
-   - **Region**: the region of the data source, which is required for cloud databases only.
-   - **Connectivity method**: the connection method for the data source. Currently, you can choose public IP, VPC Peering, or Private Link according to your connection method.
-   - **Hostname or IP address** (for public IP and VPC Peering): the hostname or IP address of the data source.
-   - **Service Name** (for Private Link): the endpoint service name.
-   - **Port**: the port of the data source.
-   - **Username**: the username of the data source.
-   - **Password**: the password of the username.
-   - **SSL/TLS**: if you enable SSL/TLS, you need to upload the certificates of the data source, including any of the following:
-        - only the CA certificate
-        - the client certificate and client key
-        - the CA certificate, client certificate and client key
+    -   **データ ソース**: データ ソースの種類。
+    -   **リージョン**: データ ソースのリージョン。クラウド データベースにのみ必要です。
+    -   **接続方法**: データ ソースの接続方法。現在、接続方法に応じてパブリック IP、VPC ピアリング、またはプライベート リンクを選択できます。
+    -   **ホスト名または IP アドレス**(パブリック IP および VPC ピアリングの場合): データ ソースのホスト名または IP アドレス。
+    -   **サービス名**(Private Link の場合): エンドポイント サービス名。
+    -   **ポート**: データ ソースのポート。
+    -   **ユーザー名**: データ ソースのユーザー名。
+    -   **パスワード**: ユーザー名のパスワード。
+    -   **SSL/TLS** : SSL/TLS を有効にする場合は、次のいずれかを含むデータ ソースの証明書をアップロードする必要があります。
+        -   CA証明書のみ
+        -   クライアント証明書とクライアントキー
+        -   CA証明書、クライアント証明書、クライアントキー
 
-3. Fill in the target connection profile.
+3.  ターゲット接続プロファイルを入力します。
 
-   - **Username**: enter the username of the target cluster in TiDB Cloud.
-   - **Password**: enter the password of the TiDB Cloud username.
+    -   **ユーザー名**: TiDB Cloudのターゲットクラスターのユーザー名を入力します。
+    -   **パスワード**: TiDB Cloudユーザー名のパスワードを入力します。
 
-4. Click **Validate Connection and Next** to validate the information you have entered.
+4.  **「接続を検証して次へ」**をクリックして、入力した情報を検証します。
 
-5. Take action according to the message you see:
+5.  表示されるメッセージに従ってアクションを実行します。
 
-    - If you use Public IP or VPC Peering, you need to add the Data Migration service's IP addresses to the IP Access List of your source database and firewall (if any).
-    - If you use AWS Private Link, you are prompted to accept the endpoint request. Go to the [AWS VPC console](https://us-west-2.console.aws.amazon.com/vpc/home), and click **Endpoint services** to accept the endpoint request.
+    -   パブリック IP または VPC ピアリングを使用する場合は、ソース データベースとファイアウォール (存在する場合) の IP アクセス リストにデータ移行サービスの IP アドレスを追加する必要があります。
+    -   AWS Private Link を使用する場合は、エンドポイント リクエストを受け入れるように求められます。 [AWS VPC コンソール](https://us-west-2.console.aws.amazon.com/vpc/home)に移動し、 **「エンドポイント サービス」**をクリックしてエンドポイント要求を受け入れます。
 
-## Step 3: Choose migration job type
+## ステップ 3: 移行ジョブの種類を選択する {#step-3-choose-migration-job-type}
 
-In the **Choose the objects to be migrated** step, you can choose existing data migration, incremental data migration, or both.
+**「移行するオブジェクトの選択」**ステップでは、既存のデータ移行、増分データ移行、またはその両方を選択できます。
 
-### Migrate existing data and incremental data
+### 既存のデータと増分データを移行する {#migrate-existing-data-and-incremental-data}
 
-To migrate data to TiDB Cloud once and for all, choose both **Existing data migration** and **Incremental data migration**, which ensures data consistency between the source and target databases.
+TiDB Cloudにデータを一度に移行するには、 **[既存のデータ移行]**と**[増分データ移行]**の両方を選択します。これにより、ソース データベースとターゲット データベース間のデータの一貫性が確保されます。
 
-### Migrate only existing data
+### 既存のデータのみを移行する {#migrate-only-existing-data}
 
-To migrate only existing data of the source database to TiDB Cloud, choose **Existing data migration**.
+ソース データベースの既存データのみをTiDB Cloudに移行するには、 **[既存のデータの移行]**を選択します。
 
-### Migrate only incremental data
+### 増分データのみを移行する {#migrate-only-incremental-data}
 
-To migrate only the incremental data of the source database to TiDB Cloud, choose **Incremental data migration**. In this case, the migration job does not migrate the existing data of the source database to TiDB Cloud, but only migrates the ongoing changes of the source database that are explicitly specified by the migration job.
+ソース データベースの増分データのみをTiDB Cloudに移行するには、 **[増分データ移行]**を選択します。この場合、移行ジョブはソース データベースの既存のデータをTiDB Cloudに移行せず、移行ジョブによって明示的に指定されたソース データベースの進行中の変更のみを移行します。
 
-For detailed instructions about incremental data migration, see [Migrate Only Incremental Data from MySQL-Compatible Databases to TiDB Cloud Using Data Migration](/tidb-cloud/migrate-incremental-data-from-mysql-using-data-migration.md).
+増分データ移行の詳細な手順については、 [データ移行を使用して、MySQL 互換データベースからTiDB Cloudに増分データのみを移行する](/tidb-cloud/migrate-incremental-data-from-mysql-using-data-migration.md)を参照してください。
 
-## Step 4: Choose the objects to be migrated
+## ステップ 4: 移行するオブジェクトを選択する {#step-4-choose-the-objects-to-be-migrated}
 
-1. On the **Choose Objects to Migrate** page, select the objects to be migrated. You can click **All** to select all objects, or click **Customize** and then click the checkbox next to the object name to select the object.
+1.  **「移行するオブジェクトの選択」**ページで、移行するオブジェクトを選択します。 **「すべて」**をクリックしてすべてのオブジェクトを選択するか、 **「カスタマイズ」**をクリックしてオブジェクト名の横にあるチェックボックスをクリックしてオブジェクトを選択します。
 
-    - If you click **All**, the migration job will migrate the existing data from the whole source database instance to TiDB Cloud and migrate ongoing changes after the full migration. Note that it happens only if you have selected the **Existing data migration** and **Incremental data migration** checkboxes in the previous step.
+    -   **「すべて」**をクリックすると、移行ジョブはソース・データベース・インスタンス全体から既存のデータをTiDB Cloudに移行し、完全な移行後に進行中の変更を移行します。これは、前の手順で**[既存のデータ移行]**チェックボックスと**[増分データ移行]**チェックボックスを選択した場合にのみ発生することに注意してください。
 
         <img src="https://download.pingcap.com/images/docs/tidb-cloud/migration-job-select-all.png" width="60%" />
 
-    - If you click **Customize** and select some databases, the migration job will migrate the existing data and migrate ongoing changes of the selected databases to TiDB Cloud. Note that it happens only if you have selected the **Existing data migration** and **Incremental data migration** checkboxes in the previous step.
+    -   **「カスタマイズ」**をクリックしてデータベースを選択すると、移行ジョブによって既存のデータが移行され、選択したデータベースの進行中の変更がTiDB Cloudに移行されます。これは、前の手順で**[既存のデータ移行]**チェックボックスと**[増分データ移行]**チェックボックスを選択した場合にのみ発生することに注意してください。
 
         <img src="https://download.pingcap.com/images/docs/tidb-cloud/migration-job-select-db.png" width="60%" />
 
-    - If you click **Customize** and select some tables under a dataset name, the migration job only will migrate the existing data and migrate ongoing changes of the selected tables. Tables created afterwards in the same database will not be migrated.
+    -   **[カスタマイズ]**をクリックし、データセット名の下でいくつかのテーブルを選択すると、移行ジョブは既存のデータのみを移行し、選択したテーブルの進行中の変更を移行します。同じデータベース内に後で作成されたテーブルは移行されません。
 
         <img src="https://download.pingcap.com/images/docs/tidb-cloud/migration-job-select-tables.png" width="60%" />
 
     <!--
-    - If you click **Customize** and select some databases, and then select some tables in the **Selected Objects** area to move them back to the **Source Database** area, (for example the `username` table in the following screenshots), then the tables will be treated as in a blocklist. The migration job will migrate the existing data but filter out the excluded tables (such as the `username` table in the screenshots), and will migrate ongoing changes of the selected databases to TiDB Cloud except the filtered-out tables.
-        ![Select Databases and Deselect Some Tables](/media/tidb-cloud/migration-job-select-db-blacklist1.png)
-        ![Select Databases and Deselect Some Tables](/media/tidb-cloud/migration-job-select-db-blacklist2.png)
-    -->
+     - If you click **Customize** and select some databases, and then select some tables in the **Selected Objects** area to move them back to the **Source Database** area, (for example the `username` table in the following screenshots), then the tables will be treated as in a blocklist. The migration job will migrate the existing data but filter out the excluded tables (such as the `username` table in the screenshots), and will migrate ongoing changes of the selected databases to TiDB Cloud except the filtered-out tables.
+         ![Select Databases and Deselect Some Tables](/media/tidb-cloud/migration-job-select-db-blacklist1.png)
+         ![Select Databases and Deselect Some Tables](/media/tidb-cloud/migration-job-select-db-blacklist2.png)
+     -->
 
-2. Click **Next**.
+2.  **「次へ」**をクリックします。
 
-## Step 5: Precheck
+## ステップ 5: 事前チェック {#step-5-precheck}
 
-On the **Precheck** page, you can view the precheck results. If the precheck fails, you need to operate according to **Failed** or **Warning** details, and then click **Check again** to recheck.
+**[事前チェック]**ページでは、事前チェックの結果を表示できます。事前チェックが失敗した場合は、「**失敗」**または**「警告」の**詳細に従って操作し、 **「再度チェック」を**クリックして再チェックする必要があります。
 
-If there are only warnings on some check items, you can evaluate the risk and consider whether to ignore the warnings. If all warnings are ignored, the migration job will automatically go on to the next step.
+一部のチェック項目に警告のみがある場合は、リスクを評価し、警告を無視するかどうかを検討できます。すべての警告が無視された場合、移行ジョブは自動的に次のステップに進みます。
 
-For more information about errors and solutions, see [Precheck errors and solutions](/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshooting.md#precheck-errors-and-solutions).
+エラーと解決策の詳細については、 [事前チェックエラーと解決策](/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshooting.md#precheck-errors-and-solutions)を参照してください。
 
-For more information about precheck items, see [Migration Task Precheck](https://docs.pingcap.com/tidb/stable/dm-precheck).
+事前チェック項目の詳細については、 [移行タスクの事前チェック](https://docs.pingcap.com/tidb/stable/dm-precheck)を参照してください。
 
-If all check items show **Pass**, click **Next**.
+すべてのチェック項目に**「合格」**と表示されている場合は、 **「次へ」**をクリックします。
 
-## Step 6: Choose a spec and start migration
+## ステップ 6: 仕様を選択して移行を開始する {#step-6-choose-a-spec-and-start-migration}
 
-On the **Choose a Spec and Start Migration** page, select an appropriate migration specification according to your performance requirements. For more information about the specifications, see [Specifications for Data Migration](/tidb-cloud/tidb-cloud-billing-dm.md#specifications-for-data-migration).
+**[仕様を選択して移行を開始]**ページで、パフォーマンス要件に応じて適切な移行仕様を選択します。仕様の詳細については、 [データ移行の仕様](/tidb-cloud/tidb-cloud-billing-dm.md#specifications-for-data-migration)を参照してください。
 
-After selecting the spec, click **Create Job and Start** to start the migration.
+仕様を選択した後、 **「ジョブを作成して開始」**をクリックして移行を開始します。
 
-## Step 7: View the migration progress
+## ステップ 7: 移行の進行状況をビュー {#step-7-view-the-migration-progress}
 
-After the migration job is created, you can view the migration progress on the **Migration Job Details** page. The migration progress is displayed in the **Stage and Status** area.
+移行ジョブの作成後、 **[移行ジョブの詳細]**ページで移行の進行状況を確認できます。移行の進行状況が**「ステージとステータス」**領域に表示されます。
 
-You can pause or delete a migration job when it is running.
+実行中の移行ジョブを一時停止または削除できます。
 
-If a migration job has failed, you can resume it after solving the problem.
+移行ジョブが失敗した場合は、問題を解決した後に再開できます。
 
-You can delete a migration job in any status.
+移行ジョブはどのステータスでも削除できます。
 
-If you encounter any problems during the migration, see [Migration errors and solutions](/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshooting.md#migration-errors-and-solutions).
+移行中に問題が発生した場合は、 [移行エラーと解決策](/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshooting.md#migration-errors-and-solutions)を参照してください。
 
-## Scale a migration job specification
+## 移行ジョブの仕様を拡張する {#scale-a-migration-job-specification}
 
-TiDB Cloud supports scaling up or down a migration job specification to meet your performance and cost requirements in different scenarios.
+TiDB Cloudは、さまざまなシナリオでのパフォーマンスとコストの要件を満たすために、移行ジョブ仕様のスケールアップまたはスケールダウンをサポートしています。
 
-Different migration specifications have different performances. Your performance requirements might vary at different stages as well. For example, during the existing data migration, you want the performance to be as fast as possible, so you choose a migration job with a large specification, such as 8 RCU. Once the existing data migration is completed, the incremental migration does not require such a high performance, so you can scale down the job specification, for example, from 8 RCU to 2 RUC, to save cost.
+移行仕様が異なればパフォーマンスも異なります。パフォーマンス要件もさまざまな段階で異なる場合があります。たとえば、既存のデータの移行中に、パフォーマンスをできるだけ高速にする必要があるため、8 RCU などの大きな仕様の移行ジョブを選択します。既存のデータ移行が完了すると、増分移行にはそれほど高いパフォーマンスは必要ないため、コストを節約するためにジョブ仕様をたとえば 8 RCU から 2 RUC にスケールダウンできます。
 
-When scaling a migration job specification, note the following:
+移行ジョブの仕様を拡張する場合は、次の点に注意してください。
 
-- It takes about 5 to 10 minutes to scale a migration job specification.
-- If the scaling fails, the job specification remains the same as it was before the scaling.
+-   移行ジョブの仕様を拡張するには、約 5 ～ 10 分かかります。
+-   スケーリングが失敗した場合、ジョブ仕様はスケーリング前と同じままになります。
 
-### Limitations
+### 制限事項 {#limitations}
 
-- You can only scale a migration job specification when the job is in the **Running** or **Paused** status.
-- TiDB Cloud does not support scaling a migration job specification during the existing data export stage.
-- Scaling a migration job specification will restart the job. If a source table of the job does not have a primary key, duplicate data might be inserted.
-- During scaling, do not purge the binary log of the source database or increase `expire_logs_days` of the upstream database temporarily. Otherwise, the job might fail because it cannot get the continuous binary log position.
+-   移行ジョブ仕様をスケールできるのは、ジョブが**実行中**または**一時停止**ステータスにある場合のみです。
+-   TiDB Cloudは、既存のデータ エクスポート段階での移行ジョブ仕様のスケーリングをサポートしていません。
+-   移行ジョブ仕様をスケーリングすると、ジョブが再開されます。ジョブのソーステーブルに主キーがない場合、重複データが挿入される可能性があります。
+-   スケーリング中は、ソース データベースのバイナリ ログをパージしたり、上流データベースの`expire_logs_days`を一時的に増やしたりしないでください。そうしないと、連続バイナリ ログの位置を取得できないため、ジョブが失敗する可能性があります。
 
-### Scaling procedure
+### スケーリング手順 {#scaling-procedure}
 
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、プロジェクトの[**クラスター**](https://tidbcloud.com/console/clusters)ページに移動します。
 
-2. Click the name of your target cluster to go to its overview page, and then click **Data Migration** in the left navigation pane.
+2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[データ移行]**をクリックします。
 
-3. On the **Data Migration** page, locate the migration job you want to scale. In the **Action** column, click **...** > **Scale Up/Down**.
+3.  **[データ移行]**ページで、スケールする移行ジョブを見つけます。 **[アクション]**列で、 **[...]** &gt; **[スケールアップ/ダウン]**をクリックします。
 
-4. In the **Scale Up/Down** window, select the new specification you want to use, and then click **Submit**. You can view the new price of the specification at the bottom of the window.
+4.  **[スケールアップ/スケールダウン]**ウィンドウで、使用する新しい仕様を選択し、 **[送信]**をクリックします。ウィンドウの下部に仕様の新しい価格が表示されます。

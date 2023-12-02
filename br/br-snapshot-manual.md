@@ -3,33 +3,33 @@ title: TiDB Snapshot Backup and Restore Command Manual
 summary: Learn about the commands of TiDB snapshot backup and restore.
 ---
 
-# TiDB Snapshot Backup and Restore Command Manual
+# TiDB スナップショットのバックアップおよび復元コマンド マニュアル {#tidb-snapshot-backup-and-restore-command-manual}
 
-This document describes the commands of TiDB snapshot backup and restore according to the application scenarios, including:
+このドキュメントでは、次のようなアプリケーション シナリオに従って、TiDB スナップショットのバックアップと復元のコマンドについて説明します。
 
-- [Back up cluster snapshots](#back-up-cluster-snapshots)
-- [Back up a database or a table](#back-up-a-database-or-a-table)
-    - [Back up a database](#back-up-a-database)
-    - [Back up a table](#back-up-a-table)
-    - [Back up multiple tables with table filter](#back-up-multiple-tables-with-table-filter)
-- [Back up statistics](#back-up-statistics)
-- [Encrypt the backup data](#encrypt-the-backup-data)
-- [Restore cluster snapshots](#restore-cluster-snapshots)
-- [Restore a database or a table](#restore-a-database-or-a-table)
-    - [Restore a database](#restore-a-database)
-    - [Restore a table](#restore-a-table)
-    - [Restore multiple tables with table filter](#restore-multiple-tables-with-table-filter)
-    - [Restore execution plan bindings from the `mysql` schema](#restore-execution-plan-bindings-from-the-mysql-schema)
-- [Restore encrypted snapshots](#restore-encrypted-snapshots)
+-   [クラスターのスナップショットをバックアップする](#back-up-cluster-snapshots)
+-   [データベースまたはテーブルをバックアップする](#back-up-a-database-or-a-table)
+    -   [データベースをバックアップする](#back-up-a-database)
+    -   [テーブルをバックアップする](#back-up-a-table)
+    -   [テーブルフィルターを使用して複数のテーブルをバックアップする](#back-up-multiple-tables-with-table-filter)
+-   [統計のバックアップ](#back-up-statistics)
+-   [バックアップデータを暗号化する](#encrypt-the-backup-data)
+-   [クラスターのスナップショットを復元する](#restore-cluster-snapshots)
+-   [データベースまたはテーブルを復元する](#restore-a-database-or-a-table)
+    -   [データベースを復元する](#restore-a-database)
+    -   [テーブルを復元する](#restore-a-table)
+    -   [テーブルフィルターを使用して複数のテーブルを復元する](#restore-multiple-tables-with-table-filter)
+    -   [`mysql`スキーマから実行プランのバインディングを復元する](#restore-execution-plan-bindings-from-the-mysql-schema)
+-   [暗号化されたスナップショットを復元する](#restore-encrypted-snapshots)
 
-For more information about snapshot backup and restore, refer to:
+スナップショットのバックアップと復元の詳細については、以下を参照してください。
 
-- [Snapshot Backup and Restore Guide](/br/br-snapshot-guide.md)
-- [Backup and Restore Use Cases](/br/backup-and-restore-use-cases.md)
+-   [スナップショットのバックアップと復元ガイド](/br/br-snapshot-guide.md)
+-   [バックアップと復元の使用例](/br/backup-and-restore-use-cases.md)
 
-## Back up cluster snapshots
+## クラスターのスナップショットをバックアップする {#back-up-cluster-snapshots}
 
-You can back up the latest or specified snapshot of the TiDB cluster using the `br backup full` command. For more information about the command, run the `br backup full --help` command.
+`br backup full`コマンドを使用して、TiDB クラスターの最新または指定したスナップショットをバックアップできます。コマンドの詳細については、 `br backup full --help`コマンドを実行してください。
 
 ```shell
 br backup full \
@@ -40,31 +40,31 @@ br backup full \
     --log-file backupfull.log
 ```
 
-In the preceding command:
+前述のコマンドでは次のようになります。
 
-- `--backupts`: The time point of the snapshot. The format can be [TSO](/glossary.md#tso) or timestamp, such as `400036290571534337` or `2018-05-11 01:42:23`. If the data of this snapshot is garbage collected, the `br backup` command returns an error and 'br' exits. If you leave this parameter unspecified, `br` picks the snapshot corresponding to the backup start time.
-- `--ratelimit`: The maximum speed **per TiKV** performing backup tasks. The unit is in MiB/s.
-- `--log-file`: The target file where `br` log is written.
+-   `--backupts` : スナップショットの時点。形式は[TSO](/glossary.md#tso)またはタイムスタンプ ( `400036290571534337`や`2018-05-11 01:42:23`など) です。このスナップショットのデータがガベージ コレクションされた場合、 `br backup`コマンドはエラーを返し、「br」は終了します。このパラメータを指定しないままにすると、 `br`バックアップ開始時刻に対応するスナップショットを選択します。
+-   `--ratelimit` : バックアップ タスクを実行する**TiKV ごとの**最大速度。単位は MiB/s です。
+-   `--log-file` : `br`ログが書き込まれる対象ファイル。
 
-> **Note:**
+> **注記：**
 >
-> The BR tool already supports self-adapting to GC. It automatically registers `backupTS` (the latest PD timestamp by default) to PD's `safePoint` to ensure that TiDB's GC Safe Point does not move forward during the backup, thus avoiding manually setting GC configurations.
+> BRツールはすでに GC への自己適応をサポートしています。 PD の`safePoint`に`backupTS` (デフォルトでは最新の PD タイムスタンプ) を自動的に登録して、バックアップ中に TiDB の GC セーフ ポイントが先に進まないようにし、GC 構成を手動で設定する必要がなくなります。
 
-During backup, a progress bar is displayed in the terminal, as shown below. When the progress bar advances to 100%, the backup is complete.
+バックアップ中、以下に示すように、ターミナルに進行状況バーが表示されます。進行状況バーが 100% まで進むと、バックアップは完了です。
 
 ```shell
 Full Backup <---------/................................................> 17.12%.
 ```
 
-## Back up a database or a table
+## データベースまたはテーブルをバックアップする {#back-up-a-database-or-a-table}
 
-Backup & Restore (BR) supports backing up partial data of a specified database or table from a cluster snapshot or incremental data backup. This feature allows you to filter out unwanted data from snapshot backup and incremental data backup, and back up only business-critical data.
+バックアップと復元 (BR) は、クラスター スナップショットまたは増分データ バックアップからの指定されたデータベースまたはテーブルの部分データのバックアップをサポートします。この機能を使用すると、スナップショット バックアップと増分データ バックアップから不要なデータをフィルタリングして除外し、ビジネス クリティカルなデータのみをバックアップできます。
 
-### Back up a database
+### データベースをバックアップする {#back-up-a-database}
 
-To back up a database in a cluster, run the `br backup db` command.
+クラスター内のデータベースをバックアップするには、 `br backup db`コマンドを実行します。
 
-The following example backs up the `test` database to Amazon S3:
+次の例では、 `test`データベースを Amazon S3 にバックアップします。
 
 ```shell
 br backup db \
@@ -75,13 +75,13 @@ br backup db \
     --log-file backuptable.log
 ```
 
-In the preceding command, `--db` specifies the database name, and other parameters are the same as those in [Back up TiDB cluster snapshots](#back-up-cluster-snapshots).
+前述のコマンドでは、 `--db`​​データベース名を指定し、その他のパラメータは[TiDB クラスターのスナップショットをバックアップする](#back-up-cluster-snapshots)と同じです。
 
-### Back up a table
+### テーブルをバックアップする {#back-up-a-table}
 
-To back up a table in a cluster, run the `br backup table` command.
+クラスター内のテーブルをバックアップするには、 `br backup table`コマンドを実行します。
 
-The following example backs up the `test.usertable` table to Amazon S3:
+次の例では、 `test.usertable`テーブルを Amazon S3 にバックアップします。
 
 ```shell
 br backup table \
@@ -93,13 +93,13 @@ br backup table \
     --log-file backuptable.log
 ```
 
-In the preceding command, `--db` and `--table` specify the database name and table name respectively, and other parameters are the same as those in [Back up TiDB cluster snapshots](#back-up-cluster-snapshots).
+前述のコマンドでは、 `--db`と`--table`にそれぞれデータベース名とテーブル名を指定し、その他のパラメータは[TiDB クラスターのスナップショットをバックアップする](#back-up-cluster-snapshots)と同じです。
 
-### Back up multiple tables with table filter
+### テーブルフィルターを使用して複数のテーブルをバックアップする {#back-up-multiple-tables-with-table-filter}
 
-To back up multiple tables with more criteria, run the `br backup full` command and specify the [table filters](/table-filter.md) with `--filter` or `-f`.
+より多くの条件を使用して複数のテーブルをバックアップするには、 `br backup full`コマンドを実行し、 `--filter`または`-f`で[テーブルフィルター](/table-filter.md)を指定します。
 
-The following example backs up tables that match the `db*.tbl*` filter rule to Amazon S3:
+次の例では、 `db*.tbl*`フィルター ルールに一致するテーブルを Amazon S3 にバックアップします。
 
 ```shell
 br backup full \
@@ -110,13 +110,13 @@ br backup full \
     --log-file backupfull.log
 ```
 
-## Back up statistics
+## 統計のバックアップ {#back-up-statistics}
 
-Starting from TiDB v7.5.0, the `br` command-line tool introduces the `--ignore-stats` parameter. When you set this parameter to `false`, the `br` command-line tool supports backing up and restoring statistics of columns, indexes, and tables. In this case, you do not need to manually run the statistics collection task for the TiDB database restored from the backup, or wait for the completion of the automatic collection task. This feature simplifies the database maintenance work and improves the query performance.
+TiDB v7.5.0 以降、 `br`コマンドライン ツールには`--ignore-stats`パラメータが導入されています。このパラメータを`false`に設定すると、 `br`コマンドライン ツールは列、インデックス、テーブルの統計のバックアップと復元をサポートします。この場合、バックアップから復元された TiDB データベースの統計収集タスクを手動で実行したり、自動収集タスクの完了を待つ必要はありません。この機能により、データベースのメンテナンス作業が簡素化され、クエリのパフォーマンスが向上します。
 
-If you do not set this parameter to `false`, the `br` command-line tool uses the default setting `--ignore-stats=true`, which means statistics are not backed up during data backup.
+このパラメーターを`false`に設定しない場合、 `br`コマンドライン ツールはデフォルト設定`--ignore-stats=true`を使用します。これは、データのバックアップ中に統計がバックアップされないことを意味します。
 
-The following is an example of backing up cluster snapshot data and backing up table statistics with `--ignore-stats=false`:
+以下は、クラスターのスナップショット データをバックアップし、 `--ignore-stats=false`を使用してテーブル統計をバックアップする例です。
 
 ```shell
 br backup full \
@@ -124,30 +124,30 @@ br backup full \
 --ignore-stats=false
 ```
 
-After backing up data with the preceding configuration, when you restore data, the `br` command-line tool automatically restores table statistics if table statistics are included in the backup:
+前述の構成でデータをバックアップした後、データを復元すると、バックアップにテーブル統計が含まれている場合、 `br`コマンド ライン ツールによってテーブル統計が自動的に復元されます。
 
 ```shell
 br restore full \
 --storage local:///br_data/ --pd "${PD_IP}:2379" --log-file restore.log
 ```
 
-When the backup and restore feature backs up data, it stores statistics in JSON format within the `backupmeta` file. When restoring data, it loads statistics in JSON format into the cluster. For more information, see [LOAD STATS](/sql-statements/sql-statement-load-stats.md).
+バックアップおよび復元機能でデータをバックアップすると、統計が`backupmeta`のファイル内に JSON 形式で保存されます。データを復元するとき、統計情報が JSON 形式でクラスターにロードされます。詳細については、 [負荷統計](/sql-statements/sql-statement-load-stats.md)を参照してください。
 
-## Encrypt the backup data
+## バックアップデータを暗号化する {#encrypt-the-backup-data}
 
-> **Warning:**
+> **警告：**
 >
-> This is an experimental feature. It is not recommended that you use it in the production environment.
+> これは実験的機能です。本番環境で使用することはお勧めできません。
 
-BR supports encrypting backup data at the backup side and [at the storage side when backing up to Amazon S3](/br/backup-and-restore-storages.md#amazon-s3-server-side-encryption). You can choose either encryption method as required.
+BR は、バックアップ[Amazon S3 にバックアップするときにstorage側で](/br/backup-and-restore-storages.md#amazon-s3-server-side-encryption)でのバックアップ データの暗号化をサポートします。必要に応じてどちらかの暗号化方式を選択できます。
 
-Since TiDB v5.3.0, you can encrypt backup data by configuring the following parameters:
+TiDB v5.3.0 以降、次のパラメータを構成することでバックアップ データを暗号化できます。
 
-- `--crypter.method`: Encryption algorithm, which can be `aes128-ctr`, `aes192-ctr`, or `aes256-ctr`. The default value is `plaintext`, indicating that data is not encrypted.
-- `--crypter.key`: Encryption key in hexadecimal string format. It is a 128-bit (16 bytes) key for the algorithm `aes128-ctr`, a 24-byte key for the algorithm `aes192-ctr`, and a 32-byte key for the algorithm `aes256-ctr`.
-- `--crypter.key-file`: The key file. You can directly pass in the file path where the key is stored as a parameter without passing in the `crypter.key`.
+-   `--crypter.method` : 暗号化アルゴリズム。 `aes128-ctr` 、 `aes192-ctr` 、または`aes256-ctr`のいずれかです。デフォルト値は`plaintext`で、データが暗号化されないことを示します。
+-   `--crypter.key` : 16 進文字列形式の暗号化キー。アルゴリズム`aes128-ctr`場合は 128 ビット (16 バイト) の鍵、アルゴリズム`aes192-ctr`の場合は 24 バイトの鍵、アルゴリズム`aes256-ctr`の場合は 32 バイトの鍵です。
+-   `--crypter.key-file` : キーファイル。 `crypter.key`を渡さずに、キーが保存されているファイル パスをパラメータとして直接渡すことができます。
 
-The following is an example:
+以下は例です。
 
 ```shell
 br backup full\
@@ -157,14 +157,14 @@ br backup full\
     --crypter.key 0123456789abcdef0123456789abcdef
 ```
 
-> **Note:**
+> **注記：**
 >
-> - If the key is lost, the backup data cannot be restored to the cluster.
-> - The encryption feature needs to be used on `br` and TiDB clusters v5.3.0 or later versions. The encrypted backup data cannot be restored on clusters earlier than v5.3.0.
+> -   キーを紛失すると、バックアップ データをクラスターに復元できなくなります。
+> -   暗号化機能は、 `br`および TiDB クラスター v5.3.0 以降のバージョンで使用する必要があります。暗号化されたバックアップ データは、v5.3.0 より前のクラスターでは復元できません。
 
-## Restore cluster snapshots
+## クラスターのスナップショットを復元する {#restore-cluster-snapshots}
 
-You can restore a TiDB cluster snapshot by running the `br restore full` command.
+`br restore full`コマンドを実行すると、TiDB クラスターのスナップショットを復元できます。
 
 ```shell
 br restore full \
@@ -175,27 +175,27 @@ br restore full \
     --log-file restorefull.log
 ```
 
-In the preceding command:
+前述のコマンドでは次のようになります。
 
-- `--with-sys-table`: BR restores **data in some system tables**, including account permission data and SQL bindings, and statistics (see [Back up statistics](/br/br-snapshot-manual.md#back-up-statistics)). However, it does not restore statistics tables (`mysql.stat_*`) and system variable tables (`mysql.tidb` and `mysql.global_variables`). For more information, see [Restore tables in the `mysql` schema](/br/br-snapshot-guide.md#restore-tables-in-the-mysql-schema).
-- `--ratelimit`: The maximum speed **per TiKV** performing backup tasks. The unit is in MiB/s.
-- `--log-file`: The target file where the `br` log is written.
+-   `--with-sys-table` : BR は、アカウント権限データ、SQL バインディング、統計など、**一部のシステム テーブルのデータ**を復元します ( [統計のバックアップ](/br/br-snapshot-manual.md#back-up-statistics)を参照)。ただし、統計テーブル ( `mysql.stat_*` ) とシステム変数テーブル ( `mysql.tidb`および`mysql.global_variables` ) は復元されません。詳細については、 [`mysql`スキーマ内のテーブルを復元する](/br/br-snapshot-guide.md#restore-tables-in-the-mysql-schema)を参照してください。
+-   `--ratelimit` : バックアップ タスクを実行する**TiKV ごとの**最大速度。単位は MiB/s です。
+-   `--log-file` : `br`ログが書き込まれる対象ファイル。
 
-During restore, a progress bar is displayed in the terminal as shown below. When the progress bar advances to 100%, the restore task is completed. Then `br` will verify the restored data to ensure data security.
+復元中、以下に示すように進行状況バーがターミナルに表示されます。進行状況バーが 100% まで進むと、復元タスクは完了します。 `br` 、復元されたデータを検証してデータのセキュリティを確保します。
 
 ```shell
 Full Restore <---------/...............................................> 17.12%.
 ```
 
-## Restore a database or a table
+## データベースまたはテーブルを復元する {#restore-a-database-or-a-table}
 
-You can use `br` to restore partial data of a specified database or table from backup data. This feature allows you to filter out data that you do not need during the restore.
+`br`を使用すると、指定したデータベースまたはテーブルの部分データをバックアップ データから復元できます。この機能を使用すると、復元中に不要なデータを除外できます。
 
-### Restore a database
+### データベースを復元する {#restore-a-database}
 
-To restore a database to a cluster, run the `br restore db` command.
+データベースをクラスターに復元するには、 `br restore db`コマンドを実行します。
 
-The following example restores the `test` database from the backup data to the target cluster:
+次の例では、バックアップ データから`test`データベースをターゲット クラスターに復元します。
 
 ```shell
 br restore db \
@@ -206,17 +206,17 @@ br restore db \
     --log-file restore_db.log
 ```
 
-In the preceding command, `--db` specifies the name of the database to be restored and other parameters are the same as those in [Restore TiDB cluster snapshots](#restore-cluster-snapshots).
+前述のコマンドでは、 `--db`​​復元するデータベースの名前を指定し、その他のパラメータは[TiDB クラスターのスナップショットを復元する](#restore-cluster-snapshots)と同じです。
 
-> **Note:**
+> **注記：**
 >
-> When you restore the backup data, the database name specified by `--db` must be the same as the one specified by `-- db` in the backup command. Otherwise, the restore fails. This is because the metafile of the backup data (`backupmeta` file) records the database name, and you can only restore data to the database with the same name. The recommended method is to restore the backup data to the database with the same name in another cluster.
+> バックアップデータをリストアする場合、バックアップコマンドの`--db`で指定したデータベース名と`-- db`で指定したデータベース名は同じである必要があります。そうしないと、復元は失敗します。これは、バックアップデータのメタファイル（ `backupmeta`ファイル）にデータベース名が記録されており、同じ名前のデータベースにしかデータをリストアできないためです。推奨される方法は、バックアップ データを別のクラスター内の同じ名前のデータベースに復元することです。
 
-### Restore a table
+### テーブルを復元する {#restore-a-table}
 
-To restore a single table to a cluster, run the `br restore table` command.
+単一のテーブルをクラスターに復元するには、 `br restore table`コマンドを実行します。
 
-The following example restores the `test.usertable` table from Amazon S3 to the target cluster:
+次の例では、 `test.usertable`テーブルを Amazon S3 からターゲットクラスターに復元します。
 
 ```shell
 br restore table \
@@ -228,13 +228,13 @@ br restore table \
     --log-file restore_table.log
 ```
 
-In the preceding command, `--table` specifies the name of the table to be restored, and other parameters are the same as those in [Restore a database](#restore-a-database).
+前述のコマンドでは、 `--table`に復元するテーブルの名前を指定し、その他のパラメータは[データベースを復元する](#restore-a-database)と同じです。
 
-### Restore multiple tables with table filter
+### テーブルフィルターを使用して複数のテーブルを復元する {#restore-multiple-tables-with-table-filter}
 
-To restore multiple tables with more complex filter rules, run the `br restore full` command and specify the [table filters](/table-filter.md) with `--filter` or `-f`.
+より複雑なフィルター ルールを使用して複数のテーブルを復元するには、 `br restore full`コマンドを実行し、 [テーブルフィルター](/table-filter.md)に`--filter`または`-f`を指定します。
 
-The following example restores tables that match the `db*.tbl*` filter rule from Amazon S3 to the target cluster:
+次の例では、 `db*.tbl*`フィルター ルールに一致するテーブルを Amazon S3 からターゲット クラスターに復元します。
 
 ```shell
 br restore full \
@@ -244,11 +244,11 @@ br restore full \
     --log-file restorefull.log
 ```
 
-### Restore execution plan bindings from the `mysql` schema
+### <code>mysql</code>スキーマから実行プランのバインディングを復元する {#restore-execution-plan-bindings-from-the-code-mysql-code-schema}
 
-To restore execution plan bindings of a cluster, you can run the `br restore full` command, including the `--with-sys-table` option and also the `--filter` or `-f` option to specify the `mysql` schema to be restored.
+クラスターの実行プラン バインディングを復元するには、 `--with-sys-table`オプションと、復元するスキーマを指定する`--filter`オプションを含む`br restore full` `mysql` `-f`実行します。
 
-The following is an example of restoring the `mysql.bind_info` table:
+以下は`mysql.bind_info`テーブルを復元する例です。
 
 ```shell
 br restore full \
@@ -260,13 +260,13 @@ br restore full \
     --log-file restore_system_table.log
 ```
 
-After the restore is completed, you can confirm the execution plan binding information with [`SHOW GLOBAL BINDINGS`](/sql-statements/sql-statement-show-bindings.md):
+復元が完了したら、実行プランのバインド情報を[`SHOW GLOBAL BINDINGS`](/sql-statements/sql-statement-show-bindings.md)で確認できます。
 
 ```sql
 SHOW GLOBAL BINDINGS;
 ```
 
-The dynamic loading of execution plan bindings after the restore is still undergoing optimization (related issues are [#46527](https://github.com/pingcap/tidb/issues/46527) and [#46528](https://github.com/pingcap/tidb/issues/46528)). You need to manually reload the execution plan bindings after the restore.
+復元後の実行プラン バインディングの動的読み込みはまだ最適化中です (関連する問題は[#46527](https://github.com/pingcap/tidb/issues/46527)と[#46528](https://github.com/pingcap/tidb/issues/46528)です)。復元後に実行計画バインディングを手動で再ロードする必要があります。
 
 ```sql
 -- Ensure that the mysql.bind_info table has only one record for builtin_pseudo_sql_for_bind_lock. If there are more records, you need to manually delete them.
@@ -277,13 +277,13 @@ DELETE FROM bind_info WHERE original_sql = 'builtin_pseudo_sql_for_bind_lock' LI
 ADMIN RELOAD BINDINGS;
 ```
 
-## Restore encrypted snapshots
+## 暗号化されたスナップショットを復元する {#restore-encrypted-snapshots}
 
-> **Warning:**
+> **警告：**
 >
-> This is an experimental feature. It is not recommended that you use it in the production environment.
+> これは実験的機能です。本番環境で使用することはお勧めできません。
 
-After encrypting the backup data, you need to pass in the corresponding decryption parameters to restore the data. Ensure that the decryption algorithm and key are correct. If the decryption algorithm or key is incorrect, the data cannot be restored. The following is an example:
+バックアップ データを暗号化した後、データを復元するには、対応する復号化パラメータを渡す必要があります。復号化アルゴリズムとキーが正しいことを確認してください。復号化アルゴリズムまたはキーが間違っている場合、データを復元することはできません。以下は例です。
 
 ```shell
 br restore full\

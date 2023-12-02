@@ -3,11 +3,11 @@ title: REVOKE <role> | TiDB SQL Statement Reference
 summary: An overview of the usage of REVOKE <role> for the TiDB database.
 ---
 
-# `REVOKE <role>`
+# <code>REVOKE &#x3C;role></code> {#code-revoke-x3c-role-code}
 
-This statement removes a previously assigned role from a specified user (or list of users).
+このステートメントは、指定されたユーザー (またはユーザーのリスト) から以前に割り当てられたロールを削除します。
 
-## Synopsis
+## あらすじ {#synopsis}
 
 ```ebnf+diagram
 RevokeRoleStmt ::=
@@ -20,15 +20,15 @@ UsernameList ::=
     Username ( ',' Username )*
 ```
 
-## Examples
+## 例 {#examples}
 
-Connect to TiDB as the `root` user:
+`root`ユーザーとして TiDB に接続します。
 
 ```shell
 mysql -h 127.0.0.1 -P 4000 -u root
 ```
 
-Create a new role `analyticsteam` and a new user `jennifer`:
+新しいロール`analyticsteam`と新しいユーザー`jennifer`を作成します。
 
 ```sql
 CREATE ROLE analyticsteam;
@@ -44,13 +44,13 @@ GRANT analyticsteam TO jennifer;
 Query OK, 0 rows affected (0.01 sec)
 ```
 
-Connect to TiDB as the `jennifer` user:
+`jennifer`ユーザーとして TiDB に接続します。
 
 ```shell
 mysql -h 127.0.0.1 -P 4000 -u jennifer
 ```
 
-Note that by default `jennifer` needs to execute `SET ROLE analyticsteam` in order to be able to use the privileges associated with the `analyticsteam` role:
+デフォルトでは、 `analyticsteam`ロールに関連付けられた権限を使用できるようにするには、 `jennifer` `SET ROLE analyticsteam`実行する必要があることに注意してください。
 
 ```sql
 SHOW GRANTS;
@@ -86,26 +86,26 @@ SHOW TABLES IN test;
 1 row in set (0.00 sec)
 ```
 
-Connect to TiDB as the `root` user:
+`root`ユーザーとして TiDB に接続します。
 
 ```shell
 mysql -h 127.0.0.1 -P 4000 -u root
 ```
 
-The statement `SET DEFAULT ROLE` can be used to associate the role `analyticsteam` to `jennifer`:
+ステートメント`SET DEFAULT ROLE`使用して、ロール`analyticsteam`を`jennifer`に関連付けることができます。
 
 ```sql
 SET DEFAULT ROLE analyticsteam TO jennifer;
 Query OK, 0 rows affected (0.02 sec)
 ```
 
-Connect to TiDB as the `jennifer` user:
+`jennifer`ユーザーとして TiDB に接続します。
 
 ```shell
 mysql -h 127.0.0.1 -P 4000 -u jennifer
 ```
 
-After this, the user `jennifer` has the privileges associated with the role `analyticsteam` and `jennifer` does not have to execute the statement `SET ROLE`:
+この後、ユーザー`jennifer`はロール`analyticsteam`に関連付けられた権限を持ち、ユーザー`jennifer`はステートメント`SET ROLE`を実行する必要がなくなります。
 
 ```sql
 SHOW GRANTS;
@@ -127,26 +127,26 @@ SHOW TABLES IN test;
 1 row in set (0.00 sec)
 ```
 
-Connect to TiDB as the `root` user:
+`root`ユーザーとして TiDB に接続します。
 
 ```shell
 mysql -h 127.0.0.1 -P 4000 -u root
 ```
 
-Revoke the role of analyticsteam from `jennifer`:
+Analyticsteam の役割を`jennifer`から取り消します。
 
 ```sql
 REVOKE analyticsteam FROM jennifer;
 Query OK, 0 rows affected (0.01 sec)
 ```
 
-Connect to TiDB as the `jennifer` user:
+`jennifer`ユーザーとして TiDB に接続します。
 
 ```shell
 mysql -h 127.0.0.1 -P 4000 -u jennifer
 ```
 
-Show the privileges of `jennifer`:
+`jennifer`の権限を表示します。
 
 ```sql
 SHOW GRANTS;
@@ -158,20 +158,20 @@ SHOW GRANTS;
 1 row in set (0.00 sec)
 ```
 
-## MySQL compatibility
+## MySQLの互換性 {#mysql-compatibility}
 
-The `REVOKE <role>` statement in TiDB is fully compatible with the roles feature in MySQL 8.0. If you find any compatibility differences, [report a bug](https://docs.pingcap.com/tidb/stable/support).
+TiDB の`REVOKE <role>`ステートメントは、MySQL 8.0 のロール機能と完全な互換性があります。互換性の違いが見つかった場合は、 [バグを報告](https://docs.pingcap.com/tidb/stable/support) .
 
-## See also
+## こちらも参照 {#see-also}
 
-* [`CREATE ROLE`](/sql-statements/sql-statement-create-role.md)
-* [`DROP ROLE`](/sql-statements/sql-statement-drop-role.md)
-* [`GRANT <role>`](/sql-statements/sql-statement-grant-role.md)
-* [`SET ROLE`](/sql-statements/sql-statement-set-role.md)
-* [`SET DEFAULT ROLE`](/sql-statements/sql-statement-set-default-role.md)
+-   [`CREATE ROLE`](/sql-statements/sql-statement-create-role.md)
+-   [`DROP ROLE`](/sql-statements/sql-statement-drop-role.md)
+-   [`GRANT &#x3C;role>`](/sql-statements/sql-statement-grant-role.md)
+-   [`SET ROLE`](/sql-statements/sql-statement-set-role.md)
+-   [`SET DEFAULT ROLE`](/sql-statements/sql-statement-set-default-role.md)
 
 <CustomContent platform="tidb">
 
-* [Role-Based Access Control](/role-based-access-control.md)
+-   [役割ベースのアクセス制御](/role-based-access-control.md)
 
 </CustomContent>

@@ -1,188 +1,177 @@
-# TiDB Documentation Contributing Guide
+# TiDB ドキュメント貢献ガイド {#tidb-documentation-contributing-guide}
 
-Welcome to [TiDB](https://github.com/pingcap/tidb) documentation! We are excited about the prospect of you joining [TiDB Community](https://github.com/pingcap/community/).
+[TiDB](https://github.com/pingcap/tidb)ドキュメントへようこそ!私たちは、あなたが[TiDB コミュニティ](https://github.com/pingcap/community/)に参加してくれることを楽しみにしています。
 
-## What you can contribute
+## あなたが貢献できること {#what-you-can-contribute}
 
-You can start from any one of the following items to help improve [TiDB Docs at the PingCAP website](https://docs.pingcap.com/tidb/stable):
+[PingCAP Web サイトの TiDB ドキュメント](https://docs.pingcap.com/tidb/stable)を改善するには、次のいずれかの項目から始めることができます。
 
-- Fix typos or format (punctuation, space, indentation, code block, etc.)
-- Fix or update inappropriate or outdated descriptions
-- Add missing content (sentence, paragraph, or a new document)
-- Translate docs changes from English to Chinese
-- Submit, reply to, and resolve [docs issues](https://github.com/pingcap/docs/issues)
-- (Advanced) Review Pull Requests created by others
+-   タイプミスやフォーマット (句読点、スペース、インデント、コード ブロックなど) を修正します。
+-   不適切または古い説明を修正または更新する
+-   不足しているコンテンツ (文、段落、または新しいドキュメント) を追加します。
+-   ドキュメントの変更を英語から中国語に翻訳する
+-   送信、返信、解決[ドキュメントの問題](https://github.com/pingcap/docs/issues)
+-   (上級) 他の人が作成したプル リクエストを確認する
 
-## Before you contribute
+## 貢献する前に {#before-you-contribute}
 
-Before you contribute, please take a quick look at some general information about TiDB documentation maintenance. This can help you to become a contributor soon.
+貢献する前に、TiDB ドキュメントのメンテナンスに関する一般情報を簡単に読んでください。これは、すぐに貢献者になるのに役立ちます。
 
-### Get familiar with style
+### スタイルに慣れる {#get-familiar-with-style}
 
-- [Commit Message Style](https://github.com/pingcap/community/blob/master/contributors/commit-message-pr-style.md#how-to-write-a-good-commit-message)
-- [Pull Request Title Style](https://github.com/pingcap/community/blob/master/contributors/commit-message-pr-style.md#pull-request-title-style)
-- [Markdown Rules](/resources/markdownlint-rules.md)
-- [Code Comment Style](https://github.com/pingcap/community/blob/master/contributors/code-comment-style.md)
-- Diagram Style: [Figma Quick Start Guide](https://github.com/pingcap/community/blob/master/contributors/figma-quick-start-guide.md)
+-   [コミットメッセージのスタイル](https://github.com/pingcap/community/blob/master/contributors/commit-message-pr-style.md#how-to-write-a-good-commit-message)
+-   [プルリクエストのタイトルスタイル](https://github.com/pingcap/community/blob/master/contributors/commit-message-pr-style.md#pull-request-title-style)
+-   [マークダウンルール](/resources/markdownlint-rules.md)
+-   [コードコメントのスタイル](https://github.com/pingcap/community/blob/master/contributors/code-comment-style.md)
+-   図のスタイル: [Figma クイック スタート ガイド](https://github.com/pingcap/community/blob/master/contributors/figma-quick-start-guide.md)
 
-    To keep a consistent style for diagrams, we recommend using [Figma](https://www.figma.com/) to draw or design diagrams. If you need to draw a diagram, refer to the guide and use shapes or colors provided in the template.
+    図のスタイルの一貫性を維持するには、 [フィグマ](https://www.figma.com/)を使用して図を描画または設計することをお勧めします。図を描く必要がある場合は、ガイドを参照し、テンプレートに用意されている図形や色を使用してください。
 
-### Pick a doc template
+### ドキュメントテンプレートを選択してください {#pick-a-doc-template}
 
-We provide [several doc templates](/resources/doc-templates) for you to use to create documentation that aligns with our style.
+私たちのスタイルに沿ったドキュメントを作成するために使用できる[いくつかのドキュメントテンプレート](/resources/doc-templates)を提供します。
 
-Please check out these templates before you submit a pull request:
+プル リクエストを送信する前に、次のテンプレートを確認してください。
 
-- [Concept](/resources/doc-templates/template-concept.md)
-- [Task](/resources/doc-templates/template-task.md)
-- [Reference](/resources/doc-templates/template-reference.md)
-- [New Feature](/resources/doc-templates/template-new-feature.md)
-- [Troubleshooting](/resources/doc-templates/template-troubleshooting.md)
+-   [コンセプト](/resources/doc-templates/template-concept.md)
+-   [タスク](/resources/doc-templates/template-task.md)
+-   [参照](/resources/doc-templates/template-reference.md)
+-   [新機能](/resources/doc-templates/template-new-feature.md)
+-   [トラブルシューティング](/resources/doc-templates/template-troubleshooting.md)
 
-### Learn about docs versions
+### ドキュメントのバージョンについて学ぶ {#learn-about-docs-versions}
 
-Currently, we maintain the following versions of TiDB documentation, each with a separate branch:
+現在、私たちは次のバージョンの TiDB ドキュメントを維持しており、それぞれに個別のブランチがあります。
 
-| Docs branch name | Version description |
-| :--- | :--- |
-| `master` branch | the latest development version |
-| `release 6.1` branch | the 6.1 LTS (Long-Term Support) version |
-| `release 6.0` branch | the 6.0 Development Milestone Release |
-| `release-5.4` branch | the 5.4 stable version |
-| `release-5.3` branch | the 5.3 stable version |
-| `release-5.2` branch | the 5.2 stable version |
-| `release-5.1` branch | the 5.1 stable version |
-| `release-5.0` branch | the 5.0 stable version |
-| `release-4.0` branch | the 4.0 stable version |
-| `release-3.1` branch | the 3.1 stable version |
-| `release-3.0` branch | the 3.0 stable version |
-| `release-2.1` branch | the 2.1 stable version |
+| ドキュメントブランチ名     | バージョンの説明               |
+| :-------------- | :--------------------- |
+| `master`支店      | 最新の開発バージョン             |
+| `release 6.1`支店 | 6.1 LTS (長期サポート) バージョン |
+| `release 6.0`支店 | 6.0 開発マイルストーン リリース     |
+| `release-5.4`支店 | 5.4安定版                 |
+| `release-5.3`支店 | 5.3安定版                 |
+| `release-5.2`支店 | 5.2安定版                 |
+| `release-5.1`支店 | 5.1安定版                 |
+| `release-5.0`支店 | 5.0安定版                 |
+| `release-4.0`支店 | 4.0安定版                 |
+| `release-3.1`支店 | 3.1 安定版                |
+| `release-3.0`支店 | 3.0安定版                 |
+| `release-2.1`支店 | 2.1安定版                 |
 
-> **Note:**
+> **注記：**
 >
-> Previously, we maintain all versions in the `master` branch, with directories like `dev` (the latest development version), `v3.0` and so on. Each docs version is updated very frequently and changes to one version often apply to another version or other versions as well.
+> 以前は、すべてのバージョンを`master`ブランチに、 `dev` (最新の開発バージョン)、 `v3.0`などのディレクトリで管理していました。ドキュメントの各バージョンは非常に頻繁に更新され、あるバージョンに対する変更は別のバージョンにも適用されることがよくあります。
 >
-> Since February 21, 2020, to reduce manual editing and updating work among versions, we have started to maintain each version in a separate branch and introduced sre-bot (now ti-chi-bot) to automatically file PRs to other versions as long as you add corresponding cherry-pick labels to your PR.
+> 2020 年 2 月 21 日以降、バージョン間の手動による編集と更新の作業を減らすために、各バージョンを別のブランチで保守し始め、次の期間に限り PR を他のバージョンに自動的にファイルする sre-bot (現在は ti-chi-bot) を導入しました。対応する厳選ラベルを PR に追加します。
 
-### Use cherry-pick labels
+### チェリーピックラベルを使用する {#use-cherry-pick-labels}
 
-- If your changes apply to only one docs version, just submit a PR to the corresponding version branch.
+-   変更が 1 つのドキュメント バージョンにのみ適用される場合は、対応するバージョン ブランチに PR を送信するだけです。
 
-- If your changes apply to multiple docs versions, you don't have to submit a PR to each branch. Instead, after you submit your PR, trigger the ti-chi-bot to submit a PR to other version branches by adding one or several of the following labels as needed. Once the current PR is merged, ti-chi-bot will start to work.
-    - `needs-cherry-pick-6.1` label: ti-chi-bot will submit a PR to the `release-6.1` branch.
-    - `needs-cherry-pick-6.0` label: ti-chi-bot will submit a PR to the `release-6.0` branch.
-    - `needs-cherry-pick-5.4` label: ti-chi-bot will submit a PR to the `release-5.4` branch.
-    - `needs-cherry-pick-5.3` label: ti-chi-bot will submit a PR to the `release-5.3` branch.
-    - `needs-cherry-pick-5.2` label: ti-chi-bot will submit a PR to the `release-5.2` branch.
-    - `needs-cherry-pick-5.1` label: ti-chi-bot will submit a PR to the `release-5.1` branch.
-    - `needs-cherry-pick-5.0` label: ti-chi-bot will submit a PR to the `release-5.0` branch.
-    - `needs-cherry-pick-4.0` label: ti-chi-bot will submit a PR to the `release-4.0` branch.
-    - `needs-cherry-pick-3.1` label: ti-chi-bot will submit a PR to the `release-3.1` branch.
-    - `needs-cherry-pick-3.0` label: ti-chi-bot will submit a PR to the `release-3.0` branch.
-    - `needs-cherry-pick-2.1` label: ti-chi-bot will submit a PR to the `release-2.1` branch.
-    - `needs-cherry-pick-master` label: ti-chi-bot will submit a PR to the `master` branch.
+-   変更が複数のドキュメント バージョンに適用される場合、各ブランチに PR を送信する必要はありません。代わりに、PR を送信した後、必要に応じて次のラベルの 1 つまたは複数を追加することで、ti-chi-bot が他のバージョン ブランチに PR を送信するようにトリガーします。現在の PR がマージされると、ti-chi-bot が動作し始めます。
 
-    For how to choose the docs versions, refer to [Guideline for choosing the affected version(s)](#guideline-for-choosing-the-affected-versions).
+    -   `needs-cherry-pick-6.1`ラベル: ti-chi-bot が`release-6.1`支店に PR を提出します。
+    -   `needs-cherry-pick-6.0`ラベル: ti-chi-bot が`release-6.0`支店に PR を提出します。
+    -   `needs-cherry-pick-5.4`ラベル: ti-chi-bot が`release-5.4`支店に PR を提出します。
+    -   `needs-cherry-pick-5.3`ラベル: ti-chi-bot が`release-5.3`支店に PR を提出します。
+    -   `needs-cherry-pick-5.2`ラベル: ti-chi-bot が`release-5.2`支店に PR を提出します。
+    -   `needs-cherry-pick-5.1`ラベル: ti-chi-bot が`release-5.1`支店に PR を提出します。
+    -   `needs-cherry-pick-5.0`ラベル: ti-chi-bot が`release-5.0`支店に PR を提出します。
+    -   `needs-cherry-pick-4.0`ラベル: ti-chi-bot が`release-4.0`支店に PR を提出します。
+    -   `needs-cherry-pick-3.1`ラベル: ti-chi-bot が`release-3.1`支店に PR を提出します。
+    -   `needs-cherry-pick-3.0`ラベル: ti-chi-bot が`release-3.0`支店に PR を提出します。
+    -   `needs-cherry-pick-2.1`ラベル: ti-chi-bot が`release-2.1`支店に PR を提出します。
+    -   `needs-cherry-pick-master`ラベル: ti-chi-bot が`master`支店に PR を提出します。
 
-- If most of your changes apply to multiple docs versions but some differences exist among versions, you still can use cherry-pick labels to let ti-chi-bot create PRs to other versions. After the PR to another version is successfully submitted by ti-chi-bot, you can make changes to that PR.
+    ドキュメントのバージョンの選択方法については、 [影響を受けるバージョンを選択するためのガイドライン](#guideline-for-choosing-the-affected-versions)を参照してください。
 
-## How to contribute
+-   変更のほとんどが複数のドキュメント バージョンに適用されるが、バージョン間にいくつかの違いが存在する場合でも、チェリーピック ラベルを使用して、ti-chi-bot に他のバージョンへの PR を作成させることができます。別のバージョンへの PR が ti-chi-bot によって正常に送信された後、その PR に変更を加えることができます。
 
-Please perform the following steps to create your Pull Request to this repository. If don't like to use commands, you can also use [GitHub Desktop](https://desktop.github.com/), which is easier to get started.
+## 貢献方法 {#how-to-contribute}
 
-> **Note:**
+このリポジトリへのプル リクエストを作成するには、次の手順を実行してください。コマンドを使用したくない場合は、簡単に開始できる[GitHub デスクトップ](https://desktop.github.com/)使用することもできます。
+
+> **注記：**
 >
-> This section takes creating a PR to the `master` branch as an example. Steps of creating PRs to other branches are similar.
+> このセクションでは、例として`master`ブランチへの PR の作成を取り上げます。他のブランチへの PR を作成する手順も同様です。
 
-### Step 0: Sign the CLA
+### ステップ 0: CLA に署名する {#step-0-sign-the-cla}
 
-Your Pull Requests can only be merged after you sign the [Contributor License Agreement](https://cla-assistant.io/pingcap/docs) (CLA). Please make sure you sign the CLA before continuing.
+プル リクエストは、 [コントリビューターライセンス契約](https://cla-assistant.io/pingcap/docs) (CLA) に署名した後にのみマージできます。続行する前に、必ず CLA に署名してください。
 
-### Step 1: Fork the repository
+### ステップ 1: リポジトリをフォークする {#step-1-fork-the-repository}
 
-1. Visit the project: <https://github.com/pingcap/docs>
-2. Click the **Fork** button on the top right and wait it to finish.
+1.  プロジェクトにアクセスしてください: [https://github.com/pingcap/docs](https://github.com/pingcap/docs)
+2.  右上の**「Fork」**ボタンをクリックし、完了するまで待ちます。
 
-### Step 2: Clone the forked repository to local storage
+### ステップ 2: フォークされたリポジトリのクローンをローカルstorageに作成する {#step-2-clone-the-forked-repository-to-local-storage}
 
-```
-cd $working_dir # Comes to the directory that you want put the fork in, for example, "cd ~/Documents/GitHub"
-git clone git@github.com:$user/docs.git # Replace "$user" with your GitHub ID
+    cd $working_dir # Comes to the directory that you want put the fork in, for example, "cd ~/Documents/GitHub"
+    git clone git@github.com:$user/docs.git # Replace "$user" with your GitHub ID
 
-cd $working_dir/docs
-git remote add upstream git@github.com:pingcap/docs.git # Adds the upstream repo
-git remote -v # Confirms that your remote makes sense
-```
-
-### Step 3: Create a new branch
-
-1. Get your local master up-to-date with upstream/master.
-
-    ```
     cd $working_dir/docs
+    git remote add upstream git@github.com:pingcap/docs.git # Adds the upstream repo
+    git remote -v # Confirms that your remote makes sense
+
+### ステップ 3: 新しいブランチを作成する {#step-3-create-a-new-branch}
+
+1.  ローカルマスターをupstream/masterで最新の状態にします。
+
+        cd $working_dir/docs
+        git fetch upstream
+        git checkout master
+        git rebase upstream/master
+
+2.  master ブランチに基づいて新しいブランチを作成します。
+
+        git checkout -b new-branch-name
+
+### ステップ 4: 何かをする {#step-4-do-something}
+
+`new-branch-name`ブランチ上のいくつかのファイルを編集し、変更を保存します。 Visual Studio Code などのエディターを使用して、 `.md`ファイルを開いて編集できます。
+
+### ステップ 5: 変更をコミットする {#step-5-commit-your-changes}
+
+    git status # Checks the local status
+    git add <file> ... # Adds the file(s) you want to commit. If you want to commit all changes, you can directly use `git add.`
+    git commit -m "commit-message: update the xx"
+
+[コミットメッセージのスタイル](https://github.com/pingcap/community/blob/master/contributors/commit-message-pr-style.md#how-to-write-a-good-commit-message)を参照してください。
+
+### ステップ 6: ブランチをアップストリーム/マスターと同期した状態に保つ {#step-6-keep-your-branch-in-sync-with-upstream-master}
+
+    # While on your new branch
     git fetch upstream
-    git checkout master
     git rebase upstream/master
-    ```
 
-2. Create a new branch based on the master branch.
+### ステップ 7: 変更をリモートにプッシュする {#step-7-push-your-changes-to-the-remote}
 
-    ```
-    git checkout -b new-branch-name
-    ```
+    git push -u origin new-branch-name # "-u" is used to track the remote branch from origin
 
-### Step 4: Do something
+### ステップ 8: プル リクエストを作成する {#step-8-create-a-pull-request}
 
-Edit some file(s) on the `new-branch-name` branch and save your changes. You can use editors like Visual Studio Code to open and edit `.md` files.
+1.  [https://github.com/$user/docs](https://github.com/$user/docs)のフォークにアクセスします ( `$user` GitHub ID に置き換えます)。
+2.  `new-branch-name`ブランチの横にある`Compare & pull request`ボタンをクリックして PR を作成します。 [プルリクエストのタイトルスタイル](https://github.com/pingcap/community/blob/master/contributors/commit-message-pr-style.md#pull-request-title-style)を参照してください。
 
-### Step 5: Commit your changes
+これで、PR が正常に送信されました。この PR がマージされると、自動的に TiDB ドキュメントの寄稿者になります。
 
-```
-git status # Checks the local status
-git add <file> ... # Adds the file(s) you want to commit. If you want to commit all changes, you can directly use `git add.`
-git commit -m "commit-message: update the xx"
-```
+## 影響を受けるバージョンを選択するためのガイドライン {#guideline-for-choosing-the-affected-version-s}
 
-See [Commit Message Style](https://github.com/pingcap/community/blob/master/contributors/commit-message-pr-style.md#how-to-write-a-good-commit-message).
+プル リクエストを作成するときは、プル リクエスト ページの説明テンプレートでドキュメントの変更を適用するリリース バージョンを選択する必要があります。
 
-### Step 6: Keep your branch in sync with upstream/master
+変更が次のいずれかの状況に当てはまる場合は、 **MASTER ブランチのみを選択する**ことをお勧めします。 PR がマージされると、変更はすぐに[PingCAP ドキュメント Web サイトの開発ページ](https://docs.pingcap.com/tidb/dev/)に表示されます。 TiDB の次のメジャー バージョンまたはマイナー バージョンがリリースされると、その変更は Web サイトの新しいバージョンのページにも表示されます。
 
-```
-# While on your new branch
-git fetch upstream
-git rebase upstream/master
-```
+-   欠落または不完全なドキュメント内容の補足など、ドキュメントの強化に関連します。
+-   値、説明、例、タイプミスなど、不正確または間違ったドキュメントの内容を修正します。
+-   特定のトピック モジュールにドキュメントのリファクタリングが含まれます。
 
-### Step 7: Push your changes to the remote
+変更が次のいずれかの状況に該当する場合は、**影響を受けるリリース ブランチとマスターを選択してください**。
 
-```
-git push -u origin new-branch-name # "-u" is used to track the remote branch from origin
-```
+-   特定のバージョンに関連する機能の動作変更が含まれます。
+-   構成項目またはシステム変数のデフォルト値の変更を含む、互換性の変更が含まれます。
+-   表示エラーを解決するために形式を修正しました
+-   壊れたリンクを修正します
 
-### Step 8: Create a pull request
+## 接触 {#contact}
 
-1. Visit your fork at <https://github.com/$user/docs> (replace `$user` with your GitHub ID)
-2. Click the `Compare & pull request` button next to your `new-branch-name` branch to create your PR. See [Pull Request Title Style](https://github.com/pingcap/community/blob/master/contributors/commit-message-pr-style.md#pull-request-title-style).
-
-Now, your PR is successfully submitted! After this PR is merged, you will automatically become a contributor to TiDB documentation.
-
-## Guideline for choosing the affected version(s)
-
-When you create a Pull Request, you need to choose the release version to which your document change applies in the description template on your Pull Request page.
-
-If your change fits one of the following situations, it is recommended to **CHOOSE THE MASTER BRANCH ONLY**. After the PR is merged, the change will be soon displayed on the [Dev page of the PingCAP documentation website](https://docs.pingcap.com/tidb/dev/). After the next major or minor version of TiDB is released, the change will also be displayed on the website page for the new version.
-
-- Relates to a documentation enhancement, such as supplementing missing or incomplete document contents.
-- Fixes inaccurate or incorrect document contents, including values, descriptions, examples, or typos.
-- Involves a documentation refactor in a specific topic module.
-
-If your change fits one of the following situations, **CHOOSE THE AFFECTED RELEASE BRANCH(ES) AND MASTER**:
-
-- Involves a feature behavior change that relates to a specific version.
-- Involves a compatibility change, including changing the default value of a configuration item or a system variable.
-- Fixes format to resolve a display error
-- Fixes broken links
-
-## Contact
-
-Join the [TiDB Internals forum](https://internals.tidb.io/) for discussion.
+[TiDB 内部フォーラム](https://internals.tidb.io/)に参加してディスカッションしてください。

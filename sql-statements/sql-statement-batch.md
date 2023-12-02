@@ -3,23 +3,23 @@ title: BATCH
 summary: An overview of the usage of BATCH for the TiDB database.
 ---
 
-# BATCH
+# バッチ {#batch}
 
-The `BATCH` syntax splits a DML statement into multiple statements in TiDB for execution. This means that there are **no guarantees** of transactional atomicity and isolation. Therefore, it is a "non-transactional" statement.
+`BATCH`構文は、DML ステートメントを TiDB 内の複数のステートメントに分割して実行します。これは、トランザクションの原子性と分離性**が保証されていない**ことを意味します。したがって、これは「非トランザクション」ステートメントです。
 
-Currently, `INSERT`, `REPLACE`, `UPDATE`, and `DELETE` are supported in `BATCH`.
+現在、 `INSERT` 、 `REPLACE` 、 `UPDATE` 、および`DELETE` `BATCH`でサポートされています。
 
-Based on a column, the `BATCH` syntax divides a DML statement into multiple ranges of scope for execution. In each range, a single SQL statement is executed.
+`BATCH`構文は、列に基づいて、DML ステートメントを実行範囲の複数の範囲に分割します。各範囲で、単一の SQL ステートメントが実行されます。
 
-For details about the usage and restrictions, see [Non-transactional DML statements](/non-transactional-dml.md).
+使用方法および制限事項の詳細については、 [非トランザクション DML ステートメント](/non-transactional-dml.md)を参照してください。
 
-When you use multi-table join in a `BATCH` statement, you need to specify the full path of the column to avoid ambiguity:
+`BATCH`ステートメントで複数テーブル結合を使用する場合、あいまいさを避けるために列のフルパスを指定する必要があります。
 
 ```sql
 BATCH ON test.t2.id LIMIT 1 INSERT INTO t SELECT t2.id, t2.v, t3.v FROM t2 JOIN t3 ON t2.k = t3.k;
 ```
 
-The preceding statement specifies the column to be split as `test.t2.id`, which is unambiguous. If you use the `id` as follows, an error is reported:
+前述のステートメントでは、分割する列を`test.t2.id`として指定していますが、これは明確です。次のように`id`使用すると、エラーが報告されます。
 
 ```sql
 BATCH ON id LIMIT 1 INSERT INTO t SELECT t2.id, t2.v, t3.v FROM t2 JOIN t3 ON t2.k = t3.k;
@@ -27,7 +27,7 @@ BATCH ON id LIMIT 1 INSERT INTO t SELECT t2.id, t2.v, t3.v FROM t2 JOIN t3 ON t2
 Non-transactional DML, shard column must be fully specified
 ```
 
-## Synopsis
+## あらすじ {#synopsis}
 
 ```ebnf+diagram
 NonTransactionalDMLStmt ::=
@@ -43,10 +43,10 @@ ShardableStmt ::=
 |   ReplaceIntoStmt
 ```
 
-## MySQL compatibility
+## MySQLの互換性 {#mysql-compatibility}
 
-The `BATCH` syntax is TiDB-specific and not compatible with MySQL.
+`BATCH`構文は TiDB 固有であり、MySQL とは互換性がありません。
 
-## See also
+## こちらも参照 {#see-also}
 
-* [Non-transactional DML statements](/non-transactional-dml.md)
+-   [非トランザクション DML ステートメント](/non-transactional-dml.md)

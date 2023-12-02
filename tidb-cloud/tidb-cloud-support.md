@@ -3,95 +3,97 @@ title: TiDB Cloud Support
 summary: Learn how to contact the support team of TiDB Cloud.
 ---
 
-# TiDB Cloud Support
+# TiDB Cloudのサポート {#tidb-cloud-support}
 
-The **?** icon in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com/) consolidates all the help and support information for TiDB Cloud, such as documentation, interactive tutorials, self-paced training, and support entries.
+**？** [TiDB Cloudコンソール](https://tidbcloud.com/)のアイコンの右下隅にあるアイコンには、ドキュメント、インタラクティブなチュートリアル、セルフペースのトレーニング、サポート エントリなど、 TiDB Cloudのすべてのヘルプとサポート情報が統合されています。
 
-## Request PoC, demo, or free trial credits
+## PoC、デモ、または無料トライアルのクレジットをリクエストする {#request-poc-demo-or-free-trial-credits}
 
-To request a Proof of Concept (PoC), a demo, or free trial credits, click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com/), and click **Contact Sales**.
+概念実証 (PoC)、デモ、または無料トライアル クレジットをリクエストするには、 **?**をクリックしてください。 [TiDB Cloudコンソール](https://tidbcloud.com/)の右下隅にある をクリックし、 **[Contact Sales]**をクリックします。
 
-> **Tip:**
+> **ヒント：**
 >
-> For more information about PoC, see [Perform a Proof of Concept (PoC) with TiDB Cloud](/tidb-cloud/tidb-cloud-poc.md).
+> PoC の詳細については、 [TiDB Cloudを使用して概念実証 (PoC) を実行する](/tidb-cloud/tidb-cloud-poc.md)を参照してください。
 
-## Get support
+## 支持を得ます {#get-support}
 
-You can get support for your clusters, projects, and organizations. After receiving your request, the support team will contact you via email.
+クラスター、プロジェクト、組織のサポートを受けることができます。リクエストを受信後、サポート チームが電子メールでご連絡します。
 
-> **Tip:**
+> **ヒント：**
 >
-> If you want to apply for a beta feature that is available upon request, fill in your application information in the **Description** field of the request. For example, "apply for the xxx feature".
+> リクエストに応じて利用可能なベータ機能を申請したい場合は、リクエストの**説明**フィールドにアプリケーション情報を入力してください。たとえば、「xxx 機能に応募する」などです。
 
-### Get support for a cluster
+### クラスターのサポートを受ける {#get-support-for-a-cluster}
 
-You can get support for a cluster in either of the following ways:
+次のいずれかの方法でクラスターのサポートを取得できます。
 
-- On the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project, click **...** in the row of your cluster and select **Get Support**.
+-   プロジェクトの[**クラスター**](https://tidbcloud.com/console/clusters)ページで、クラスターの行にある**[...]**をクリックし、 **[Get Support]**を選択します。
 
-- On your cluster overview page, click **...** in the upper-right corner and select **Get Support**.
+-   クラスターの概要ページで、右上隅にある**[...]**をクリックし、 **[サポートを受ける]**を選択します。
 
-### Get support for a project or organization
+### プロジェクトまたは組織のサポートを受ける {#get-support-for-a-project-or-organization}
 
-To get support for a project or organization, click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com/), and then click **Request Support**.
+プロジェクトまたは組織のサポートを受けるには、 **「?」**をクリックします。 [TiDB Cloudコンソール](https://tidbcloud.com/)の右下隅にある をクリックし、 **「サポートをリクエスト」**をクリックします。
 
-Alternatively, you can click <MDSvgIcon name="icon-top-organization" /> in the lower-left corner, and then click **Support** to go to the support page.
+または、<mdsvgicon name="icon-top-organization">左下隅の をクリックし、 **「サポート」**をクリックしてサポート ページに移動します。</mdsvgicon>
 
-## Check your submitted request
+## 送信されたリクエストを確認してください {#check-your-submitted-request}
 
-After you have submitted a request, to check the status of your request, perform the following steps:
+リクエストを送信した後、リクエストのステータスを確認するには、次の手順を実行します。
 
-1. In the [TiDB Cloud console](https://tidbcloud.com/), click **?** in the lower-right corner, and then click **View Support**. The support page is displayed.
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、 **「?」**をクリックします。右下隅の をクリックし、 **[サポートをビュー]**をクリックします。サポートページが表示されます。
 
-    Alternatively, you can click <MDSvgIcon name="icon-top-organization" /> in the lower-left corner, and then click **Support** to go to the support page.
+    または、<mdsvgicon name="icon-top-organization">左下隅の をクリックし、 **「サポート」**をクリックしてサポート ページに移動します。</mdsvgicon>
 
-2. In the **Request Support** area, click **View Support Portal**. The **My request** page is displayed.
+2.  **[サポートのリクエスト]**領域で、 **[サポート ポータルのビュー]**をクリックします。 **「マイリクエスト」**ページが表示されます。
 
-    On the **My request** page, you can view the status of your request.
+    **[私のリクエスト]**ページで、リクエストのステータスを確認できます。
 
-Alternatively, you can also access the [Customer Support](https://support.pingcap.com/hc/en-us) page, log in to the support portal, and then click **View my requests**.
+あるいは、 [顧客サポート](https://support.pingcap.com/hc/en-us)ページにアクセスし、サポート ポータルにログインし、 **[リクエストのビュー]**をクリックすることもできます。
 
-## Check or upgrade your support plan
+## サポート プランを確認またはアップグレードする {#check-or-upgrade-your-support-plan}
 
-TiDB Cloud offers a free basic support plan for each user and you can upgrade to a paid plan for extended services.
+TiDB Cloud は、各ユーザーに無料の基本サポート プランを提供しており、拡張サービスの有料プランにアップグレードすることができます。
 
-To check or upgrade your support plan, perform the following steps:
+サポート プランを確認またはアップグレードするには、次の手順を実行します。
 
-1. In the [TiDB Cloud console](https://tidbcloud.com/), click **?** in the lower-right corner, and then click **View Support**.
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、 **「?」**をクリックします。右下隅の をクリックし、 **[サポートをビュー]**をクリックします。
 
-    The support page is displayed. On this page, you can see your **Current Plan**. By default, the **Basic** free plan is selected.
+    サポートページが表示されます。このページでは、**現在のプラン**を確認できます。デフォルトでは、 **Basic**無料プランが選択されています。
 
-2. Choose your desired support plan.
+2.  ご希望のサポート プランをお選びください。
 
     <SimpleTab>
-    <div label="Upgrade to Standard">
+     <div label="Upgrade to Standard">
 
-    To upgrade to **Standard**:
+    **標準**にアップグレードするには:
 
-    1. Click **Select Plan** in the **Standard** pane. A **Finish and Start Using Support** page is displayed.
-    2. Check the billing information in the lower-left corner of the page.
-    3. Add your payment information in the **Billing Profile** and **Credit Card** areas.
+    1.  **「標準」**ペインで**「プランの選択」**をクリックします。 **「サポートの使用を終了して開始」**ページが表示されます。
 
-        For more information about billing, see [TiDB Cloud Payment Method](/tidb-cloud/tidb-cloud-billing.md#payment-method).
+    2.  ページの左下隅にある請求情報を確認してください。
 
-    4. Click **Confirm and Start Using Support** in the lower-right corner of the page.
+    3.  **[請求プロファイル]**領域と**[クレジット カード]**領域に支払い情報を追加します。
 
-    After the payment is finished, you have upgraded your plan to **Standard**.
+        請求の詳細については、 [TiDB Cloudの支払い方法](/tidb-cloud/tidb-cloud-billing.md#payment-method)を参照してください。
 
-    </div>
-    <div label="Upgrade to Enterprise or Premium">
+    4.  ページの右下隅にある**「確認してサポートの使用を開始」**をクリックします。
 
-    To upgrade your plan to **Enterprise** or **Premium**:
-
-    1. Click **Contact Sales** in the **Enterprise** or **Premium** pane. A **Contact Us** page is displayed.
-    2. Fill in and submit your contact information on the page. Then, the support team will contact you and help you with your subscription.
+    支払いが完了すると、プランは**Standard**にアップグレードされます。
 
     </div>
-    </SimpleTab>
+     <div label="Upgrade to Enterprise or Premium">
 
-## Downgrade your support plan
+    プランを**Enterprise**または**Premium**にアップグレードするには:
 
-To downgrade your support plan to **Basic**, perform the following steps:
+    1.  **「Enterprise** 」または**「Premium」**ペインで**「Contact Sales」**をクリックします。**お問い合わせ**ページが表示されます。
+    2.  このページに連絡先情報を入力して送信します。その後、サポート チームから連絡があり、サブスクリプションのサポートをさせていただきます。
 
-1. In the [TiDB Cloud console](https://tidbcloud.com/), click **?** in the lower-right corner, and then click **View Support**.
-2. At the bottom of the **Support** page, click **Downgrade to basic plan**.
+    </div>
+     </SimpleTab>
+
+## サポート プランをダウングレードする {#downgrade-your-support-plan}
+
+サポート プランを**Basic**にダウングレードするには、次の手順を実行します。
+
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、 **「?」**をクリックします。右下隅の をクリックし、 **[サポートをビュー]**をクリックします。
+2.  **[サポート]**ページの下部にある**[基本プランにダウングレード]**をクリックします。

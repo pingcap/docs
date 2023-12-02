@@ -3,11 +3,11 @@ title: SET ROLE | TiDB SQL Statement Reference
 summary: An overview of the usage of SET ROLE for the TiDB database.
 ---
 
-# SET ROLE
+# 役割を設定する {#set-role}
 
-The `SET ROLE` statement is used to enable roles in the current session. After enabling roles, users can use the privileges of the role(s).
+`SET ROLE`ステートメントは、現在のセッションでロールを有効にするために使用されます。ロールを有効にすると、ユーザーはロールの権限を使用できるようになります。
 
-## Synopsis
+## あらすじ {#synopsis}
 
 **SetRoleStmt:**
 
@@ -21,11 +21,9 @@ The `SET ROLE` statement is used to enable roles in the current session. After e
 
 ![SetDefaultRoleOpt](/media/sqlgram/SetDefaultRoleOpt.png)
 
-## Examples
+## 例 {#examples}
 
-Create a user `'u1'@'%'` and three roles: `'r1'@'%'`, `'r2'@'%'` and `'r3'@'%'`. Grant these roles to `'u1'@'%'` and set `'r1'@'%'` as the default role of `'u1'@'%'`.
-
-{{< copyable "sql" >}}
+ユーザー`'u1'@'%'`と 3 つのロール ( `'r1'@'%'` 、 `'r2'@'%'` 、および`'r3'@'%'`を作成します。これらのロールを`'u1'@'%'`に付与し、 `'r1'@'%'`デフォルトのロール`'u1'@'%'`として設定します。
 
 ```sql
 CREATE USER 'u1'@'%';
@@ -34,92 +32,76 @@ GRANT 'r1', 'r2', 'r3' TO 'u1'@'%';
 SET DEFAULT ROLE 'r1' TO 'u1'@'%';
 ```
 
-Log in as `'u1'@'%'` and execute the following `SET ROLE` statement to enable all roles.
-
-{{< copyable "sql" >}}
+`'u1'@'%'`としてログインし、次の`SET ROLE`ステートメントを実行してすべてのロールを有効にします。
 
 ```sql
 SET ROLE ALL;
 SELECT CURRENT_ROLE();
 ```
 
-```
-+----------------------------+
-| CURRENT_ROLE()             |
-+----------------------------+
-| `r1`@`%`,`r2`@`%`,`r3`@`%` |
-+----------------------------+
-1 row in set (0.000 sec)
-```
+    +----------------------------+
+    | CURRENT_ROLE()             |
+    +----------------------------+
+    | `r1`@`%`,`r2`@`%`,`r3`@`%` |
+    +----------------------------+
+    1 row in set (0.000 sec)
 
-Execute the following `SET ROLE` statement to enable `'r2'` and `'r3'`.
-
-{{< copyable "sql" >}}
+次の`SET ROLE`ステートメントを実行して、 `'r2'`と`'r3'`を有効にします。
 
 ```sql
 SET ROLE 'r2', 'r3';
 SELECT CURRENT_ROLE();
 ```
 
-```
-+-------------------+
-| CURRENT_ROLE()    |
-+-------------------+
-| `r2`@`%`,`r3`@`%` |
-+-------------------+
-1 row in set (0.000 sec)
-```
+    +-------------------+
+    | CURRENT_ROLE()    |
+    +-------------------+
+    | `r2`@`%`,`r3`@`%` |
+    +-------------------+
+    1 row in set (0.000 sec)
 
-Execute the following `SET ROLE` statement to enable the default role(s).
-
-{{< copyable "sql" >}}
+次の`SET ROLE`ステートメントを実行して、デフォルトのロールを有効にします。
 
 ```sql
 SET ROLE DEFAULT;
 SELECT CURRENT_ROLE();
 ```
 
-```
-+----------------+
-| CURRENT_ROLE() |
-+----------------+
-| `r1`@`%`       |
-+----------------+
-1 row in set (0.000 sec)
-```
+    +----------------+
+    | CURRENT_ROLE() |
+    +----------------+
+    | `r1`@`%`       |
+    +----------------+
+    1 row in set (0.000 sec)
 
-Execute the following `SET ROLE` statement to cancel all enabled role(s).
-
-{{< copyable "sql" >}}
+次の`SET ROLE`ステートメントを実行して、有効なロールをすべてキャンセルします。
 
 ```sql
 SET ROLE NONE;
 SELECT CURRENT_ROLE();
 ```
 
-```
-+----------------+
-| CURRENT_ROLE() |
-+----------------+
-|                |
-+----------------+
-1 row in set (0.000 sec)
-```
+    +----------------+
+    | CURRENT_ROLE() |
+    +----------------+
+    |                |
+    +----------------+
+    1 row in set (0.000 sec)
 
-## MySQL compatibility
+## MySQLの互換性 {#mysql-compatibility}
 
-The `SET ROLE` statement in TiDB is fully compatible with the roles feature in MySQL 8.0. If you find any compatibility differences, [report a bug](https://docs.pingcap.com/tidb/stable/support).
+TiDB の`SET ROLE`ステートメントは、MySQL 8.0 のロール機能と完全な互換性があります。互換性の違いが見つかった場合は、 [バグを報告](https://docs.pingcap.com/tidb/stable/support) .
 
-## See also
+## こちらも参照 {#see-also}
 
-* [CREATE ROLE](/sql-statements/sql-statement-create-role.md)
-* [DROP ROLE](/sql-statements/sql-statement-drop-role.md)
-* [`GRANT <role>`](/sql-statements/sql-statement-grant-role.md)
-* [`REVOKE <role>`](/sql-statements/sql-statement-revoke-role.md)
-* [SET DEFAULT ROLE](/sql-statements/sql-statement-set-default-role.md)
+-   [ロールの作成](/sql-statements/sql-statement-create-role.md)
+-   [役割を削除する](/sql-statements/sql-statement-drop-role.md)
+-   [`GRANT &#x3C;role>`](/sql-statements/sql-statement-grant-role.md)
+-   [`REVOKE &#x3C;role>`](/sql-statements/sql-statement-revoke-role.md)
+-   [デフォルトの役割を設定](/sql-statements/sql-statement-set-default-role.md)
 
 <CustomContent platform="tidb">
 
-* [Role-Based Access Control](/role-based-access-control.md)
+-   [役割ベースのアクセス制御](/role-based-access-control.md)
 
 </CustomContent>

@@ -3,13 +3,13 @@ title: Changefeed Log Filters
 summary: Learn how to use the table filter and event filter of TiCDC.
 ---
 
-# Changefeed Log Filters
+# 変更フィードログフィルター {#changefeed-log-filters}
 
-TiCDC supports filtering data by tables and events. This document introduces how to use the two types of filters.
+TiCDC は、テーブルとイベントによるデータのフィルタリングをサポートしています。このドキュメントでは、2 種類のフィルターの使用方法を紹介します。
 
-## Table filter
+## テーブルフィルター {#table-filter}
 
-Table filter is a feature that allows you to keep or filter out specific databases and tables by specifying the following configurations:
+テーブル フィルターは、次の構成を指定することで、特定のデータベースとテーブルを保持またはフィルターで除外できる機能です。
 
 ```toml
 [filter]
@@ -17,26 +17,26 @@ Table filter is a feature that allows you to keep or filter out specific databas
 rules = ['*.*', '!test.*']
 ```
 
-Common filter rules:
+一般的なフィルター ルール:
 
-- `rules = ['*.*']`
-    - Replicate all tables (not including system tables)
-- `rules = ['test1.*']`
-    - Replicate all tables in the `test1` database
-- `rules = ['*.*', '!scm1.tbl2']`
-    - Replicate all tables except for the `scm1.tbl2` table
-- `rules = ['scm1.tbl2', 'scm1.tbl3']`
-    - Only replicate tables `scm1.tbl2` and `scm1.tbl3`
-- `rules = ['scm1.tidb_*']`
-    - Replicate all tables in the `scm1` database whose names start with `tidb_`
+-   `rules = ['*.*']`
+    -   すべてのテーブルをレプリケートします (システム テーブルは含まれません)。
+-   `rules = ['test1.*']`
+    -   `test1`データベース内のすべてのテーブルをレプリケートする
+-   `rules = ['*.*', '!scm1.tbl2']`
+    -   `scm1.tbl2`のテーブルを除くすべてのテーブルをレプリケートする
+-   `rules = ['scm1.tbl2', 'scm1.tbl3']`
+    -   テーブル`scm1.tbl2`と`scm1.tbl3`のみを複製する
+-   `rules = ['scm1.tidb_*']`
+    -   `scm1`データベース内の名前が`tidb_`で始まるすべてのテーブルをレプリケートします。
 
-For more information, see [Table filter syntax](/table-filter.md#syntax).
+詳細については、 [テーブルフィルターの構文](/table-filter.md#syntax)を参照してください。
 
-## Event filter rules
+## イベントフィルタールール {#event-filter-rules}
 
-Starting in v6.2.0, TiCDC supports event filter. You can configure event filter rules to filter out the DML and DDL events that meet the specified conditions.
+v6.2.0 以降、TiCDC はイベント フィルターをサポートします。イベント フィルター ルールを構成して、指定した条件を満たす DML イベントおよび DDL イベントをフィルターで除外できます。
 
-The following is an example of event filter rules:
+以下はイベント フィルター ルールの例です。
 
 ```toml
 [filter]
@@ -52,38 +52,38 @@ ignore-update-old-value-expr = "age < 18 or name = 'lili'" # Ignore update DMLs 
 ignore-update-new-value-expr = "gender = 'male' and age > 18" # Ignore update DMLs whose new value contains "gender = 'male'" and "age > 18".
 ```
 
-Description of configuration parameters:
+設定パラメータの説明:
 
-- `matcher`: the database and table that this event filter rule applies to. The syntax is the same as [table filter](/table-filter.md).
-- `ignore-event`: the event type to be ignored. This parameter accepts an array of strings. You can configure multiple event types. Currently, the following event types are supported:
+-   `matcher` : このイベント フィルター ルールが適用されるデータベースとテーブル。構文は[テーブルフィルター](/table-filter.md)と同じです。
+-   `ignore-event` : 無視するイベントの種類。このパラメータは文字列の配列を受け入れます。複数のイベント タイプを設定できます。現在、次のイベント タイプがサポートされています。
 
-| Event           | Type | Alias | Description         |
-| --------------- | ---- | -|--------------------------|
-| all dml         |      | |Matches all DML events       |
-| all ddl         |      | |Matches all DDL events         |
-| insert          | DML  | |Matches `insert` DML event      |
-| update          | DML  | |Matches `update` DML event      |
-| delete          | DML  | |Matches `delete` DML event      |
-| create schema   | DDL  | create database |Matches `create database` event |
-| drop schema     | DDL  | drop database  |Matches `drop database` event |
-| create table    | DDL  | |Matches `create table` event    |
-| drop table      | DDL  | |Matches `drop table` event      |
-| rename table    | DDL  | |Matches `rename table` event    |
-| truncate table  | DDL  | |Matches `truncate table` event  |
-| alter table     | DDL  | |Matches `alter table` event, including all clauses of `alter table`, `create index` and `drop index`   |
-| add table partition    | DDL  | |Matches `add table partition` event     |
-| drop table partition    | DDL  | |Matches `drop table partition` event     |
-| truncate table partition    | DDL  | |Matches `truncate table partition` event     |
-| create view     | DDL  | |Matches `create view`event     |
-| drop view     | DDL  | |Matches `drop view` event     |
+| イベント              | タイプ | エイリアス       | 説明                                                                            |
+| ----------------- | --- | ----------- | ----------------------------------------------------------------------------- |
+| すべてのDML           |     |             | すべての DML イベントに一致します                                                           |
+| すべての ddl          |     |             | すべての DDL イベントに一致します                                                           |
+| 入れる               | DML |             | `insert` DML イベントに一致します                                                       |
+| アップデート            | DML |             | `update` DML イベントに一致します                                                       |
+| 消去                | DML |             | `delete` DML イベントに一致します                                                       |
+| スキーマを作成する         | DDL | データベースを作成する | `create database`件のイベントに一致                                                    |
+| スキーマを削除する         | DDL | データベースを削除する | `drop database`件のイベントに一致                                                      |
+| テーブルを作成する         | DDL |             | `create table`件のイベントに一致                                                       |
+| ドロップテーブル          | DDL |             | `drop table`件のイベントに一致                                                         |
+| テーブルの名前を変更する      | DDL |             | `rename table`件のイベントに一致                                                       |
+| テーブルを切り捨てる        | DDL |             | `truncate table`件のイベントに一致                                                     |
+| 他の机               | DDL |             | `alter table` 、 `create index` 、 `drop index`のすべての句を含む`alter table`イベントに一致します |
+| テーブルパーティションを追加する  | DDL |             | `add table partition`件のイベントに一致                                                |
+| テーブルパーティションを削除する  | DDL |             | `drop table partition`件のイベントに一致                                               |
+| テーブルパーティションを切り詰める | DDL |             | `truncate table partition`件のイベントに一致                                           |
+| ビューの作成            | DDL |             | `create view`件のイベントに一致                                                        |
+| ドロップビュー           | DDL |             | `drop view`件のイベントに一致                                                          |
 
-- `ignore-sql`: the DDL statements to be ignored. This parameter accepts an array of strings, in which you can configure multiple regular expressions. This rule only applies to DDL events.
-- `ignore-delete-value-expr`: this parameter accepts a SQL expression. This rule only applies to delete DML events with the specified value.
-- `ignore-insert-value-expr`: this parameter accepts a SQL expression. This rule only applies to insert DML events with the specified value.
-- `ignore-update-old-value-expr`: this parameter accepts a SQL expression. This rule only applies to update DML events whose old value contains the specified value.
-- `ignore-update-new-value-expr`: this parameter accepts a SQL expression. This rule only applies to update DML events whose new value contains the specified value.
+-   `ignore-sql` : DDL ステートメントは無視されます。このパラメーターは文字列の配列を受け入れ、複数の正規表現を構成できます。このルールは DDL イベントにのみ適用されます。
+-   `ignore-delete-value-expr` : このパラメータは SQL 式を受け入れます。このルールは、指定された値を持つ DML イベントの削除にのみ適用されます。
+-   `ignore-insert-value-expr` : このパラメータは SQL 式を受け入れます。このルールは、指定された値を持つ DML イベントの挿入にのみ適用されます。
+-   `ignore-update-old-value-expr` : このパラメータは SQL 式を受け入れます。このルールは、古い値に指定された値が含まれる更新 DML イベントにのみ適用されます。
+-   `ignore-update-new-value-expr` : このパラメータは SQL 式を受け入れます。このルールは、新しい値に指定された値が含まれる更新 DML イベントにのみ適用されます。
 
-> **Note:**
+> **注記：**
 >
-> - When TiDB updates a value in the column of the clustered index, TiDB splits an `UPDATE` event into a `DELETE` event and an `INSERT` event. TiCDC does not identify such events as an `UPDATE` event and thus cannot correctly filter out such events.
-> - When you configure a SQL expression, make sure all tables that matches `matcher` contain all the columns specified in the SQL expression. Otherwise, the replication task cannot be created. In addition, if the table schema changes during the replication, which results in a table no longer containing a required column, the replication task fails and cannot be resumed automatically. In such a situation, you must manually modify the configuration and resume the task.
+> -   TiDB がクラスター化インデックスの列の値を更新するとき、TiDB は`UPDATE`イベントを`DELETE`イベントと`INSERT`イベントに分割します。 TiCDC はそのようなイベントを`UPDATE`イベントとして識別しないため、そのようなイベントを正しく除外できません。
+> -   SQL 式を構成するときは、 `matcher`に一致するすべてのテーブルに、SQL 式で指定されたすべての列が含まれていることを確認してください。そうしないと、レプリケーション タスクを作成できません。さらに、レプリケーション中にテーブル スキーマが変更され、テーブルに必要な列が含まれなくなると、レプリケーション タスクは失敗し、自動的に再開できなくなります。このような状況では、構成を手動で変更し、タスクを再開する必要があります。

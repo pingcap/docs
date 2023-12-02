@@ -3,90 +3,84 @@ title: Troubleshoot Write Conflicts in Optimistic Transactions
 summary: Learn about the reason of and solutions to write conflicts in optimistic transactions.
 ---
 
-# Troubleshoot Write Conflicts in Optimistic Transactions
+# オプティミスティック トランザクションでの書き込み競合のトラブルシューティング {#troubleshoot-write-conflicts-in-optimistic-transactions}
 
-This document introduces the reason of and solutions to write conflicts in optimistic transactions.
+このドキュメントでは、楽観的トランザクションでの書き込み競合の原因と解決策を紹介します。
 
-Before TiDB v3.0.8, TiDB uses the optimistic transaction model by default. In this model, TiDB does not check conflicts during transaction execution. Instead, while the transaction is finally committed, the two-phase commit (2PC) is triggered and TiDB checks write conflicts. If a write conflict exists and the auto-retry mechanism is enabled, then TiDB retries the transaction within limited times. If the retry succeeds or has reached the upper limit on retry times, TiDB returns the result of transaction execution to the client. Therefore, if a lot of write conflicts exist in the TiDB cluster, the duration can be longer.
+TiDB v3.0.8 より前では、TiDB はデフォルトで楽観的トランザクション モデルを使用します。このモデルでは、TiDB はトランザクションの実行中に競合をチェックしません。代わりに、トランザクションが最終的にコミットされる間に、2 フェーズ コミット (2PC) がトリガーされ、TiDB が書き込み競合をチェックします。書き込み競合が存在し、自動再試行メカニズムが有効になっている場合、TiDB は制限時間内にトランザクションを再試行します。リトライが成功した場合、またはリトライ回数の上限に達した場合、TiDB はトランザクションの実行結果をクライアントに返します。したがって、TiDB クラスター内に多くの書き込み競合が存在する場合、時間が長くなる可能性があります。
 
-## The reason of write conflicts
+## 書き込み競合の理由 {#the-reason-of-write-conflicts}
 
-TiDB implements its transactions by using the [Percolator](https://www.usenix.org/legacy/event/osdi10/tech/full_papers/Peng.pdf) transaction model. `percolator` is generally an implementation of 2PC. For the detailed 2PC process, see [TiDB Optimistic Transaction Model](/optimistic-transaction.md).
+TiDB は、 [パーコレーター](https://www.usenix.org/legacy/event/osdi10/tech/full_papers/Peng.pdf)トランザクション モデルを使用してトランザクションを実装します。 `percolator`は一般に 2PC の実装です。 2PC プロセスの詳細については、 [TiDB 楽観的トランザクションモデル](/optimistic-transaction.md)を参照してください。
 
-After the client sends a `COMMIT` request to TiDB, TiDB starts the 2PC process:
+クライアントが`COMMIT`リクエストを TiDB に送信した後、TiDB は 2PC プロセスを開始します。
 
-1. TiDB chooses one key from all keys in the transaction as the primary key of the transaction.
-2. TiDB sends the `prewrite` request to all the TiKV Regions involved in this commit. TiKV judges whether all keys can preview successfully.
-3. TiDB receives the result that all `prewrite` requests are successful.
-4. TiDB gets the `commit_ts` from PD.
-5. TiDB sends the `commit` request to the TiKV Region that contains the primary key of the transaction. After TiKV receives the `commit` request, it checks the validity of the data and clears the locks left in the `prewrite` stage.
-6. After the `commit` request returns successfully, TiDB returns success to the client.
+1.  TiDB は、トランザクション内のすべてのキーから 1 つのキーをトランザクションの主キーとして選択します。
+2.  TiDB は、このコミットに関係するすべての TiKV リージョンに`prewrite`リクエストを送信します。 TiKV は、すべてのキーが正常にプレビューできるかどうかを判断します。
+3.  TiDB は、すべての`prewrite`リクエストが成功したという結果を受け取ります。
+4.  TiDB は PD から`commit_ts`を取得します。
+5.  TiDB は、トランザクションの主キーを含む`commit`リクエストを TiKVリージョンに送信します。 TiKV は`commit`リクエストを受信すると、データの有効性をチェックし、 `prewrite`段階で残ったロックをクリアします。
+6.  `commit`リクエストが正常に返された後、TiDB はクライアントに成功を返します。
 
-The write conflict occurs in the `prewrite` stage. When the transaction finds that another transaction is writing the current key (`data.commit_ts` > `txn.start_ts`), a write conflict occurs.
+書き込み競合は`prewrite`ステージで発生します。別のトランザクションが現在のキー ( `data.commit_ts` &gt; `txn.start_ts` ) を書き込んでいることをトランザクションが検出すると、書き込み競合が発生します。
 
-## Detect write conflicts
+## 書き込み競合の検出 {#detect-write-conflicts}
 
-In the TiDB Grafana panel, check the following monitoring metrics under **KV Errors**:
+TiDB Grafana パネルの**KV エラー**で次の監視メトリクスを確認します。
 
-* **KV Backoff OPS** indicates the count of error messages per second returned by TiKV.
+-   **KV バックオフ OPS は、** TiKV によって返される 1 秒あたりのエラー メッセージの数を示します。
 
     ![kv-backoff-ops](/media/troubleshooting-write-conflict-kv-backoff-ops.png)
 
-    The `txnlock` metric indicates the write-write conflict. The `txnLockFast` metric indicates the read-write conflict.
+    `txnlock`メトリックは、書き込みと書き込みの競合を示します。 `txnLockFast`メトリックは、読み取り/書き込みの競合を示します。
 
-* **Lock Resolve OPS** indicates the count of items related to transaction conflicts per second:
+-   **Lock Resolve OPS は、** 1 秒あたりのトランザクション競合に関連するアイテムの数を示します。
 
     ![lock-resolve-ops](/media/troubleshooting-write-conflict-lock-resolve-ops.png)
 
-    - `not_expired` indicates the TTL of the lock was not expired. The conflict transaction cannot resolve locks until the TTL is expired.
-    - `wait_expired` indicates that the transaction needs to wait the lock to expire.
-    - `expired` indicates the TTL of the lock was expired. Then the conflict transaction can resolve this lock.
+    -   `not_expired`ロックの TTL が期限切れになっていないことを示します。競合トランザクションは、TTL が期限切れになるまでロックを解決できません。
+    -   `wait_expired` 、トランザクションがロックの有効期限が切れるまで待つ必要があることを示します。
+    -   `expired`ロックの TTL が期限切れであることを示します。その後、競合トランザクションはこのロックを解決できます。
 
-* **KV Retry Duration** indicates the duration of re-sends the KV request:
+-   **KV 再試行期間は、** KV リクエストを再送信する期間を示します。
 
-     ![kv-retry-duration](/media/troubleshooting-write-conflict-kv-retry-duration.png)
+    ![kv-retry-duration](/media/troubleshooting-write-conflict-kv-retry-duration.png)
 
-You can also use `[kv:9007]Write conflict` as the keywords to search in the TiDB log. The keywords also indicate the write conflict exists in the cluster.
+TiDB ログ内を検索するキーワードとして`[kv:9007]Write conflict`を使用することもできます。キーワードは、クラスター内に書き込み競合が存在することも示します。
 
-## Resolve write conflicts
+## 書き込み競合を解決する {#resolve-write-conflicts}
 
-If many write conflicts exist in the cluster, it is recommended to find out the write conflict key and the reason, and then try to change the application logic to avoid write conflicts. When the write conflict exists in the cluster, you can see the log similar to the following one in the TiDB log file:
+クラスター内に多数の書き込み競合が存在する場合は、書き込み競合キーとその理由を特定し、書き込み競合を回避するためにアプリケーション ロジックを変更してみることをお勧めします。クラスター内に書き込み競合が存在する場合、TiDB ログ ファイルに次のようなログが表示されます。
 
 ```log
 [2020/05/12 15:17:01.568 +08:00] [WARN] [session.go:446] ["commit failed"] [conn=3] ["finished txn"="Txn{state=invalid}"] [error="[kv:9007]Write conflict, txnStartTS=416617006551793665, conflictStartTS=416617018650001409, conflictCommitTS=416617023093080065, key={tableID=47, indexID=1, indexValues={string, }} primary={tableID=47, indexID=1, indexValues={string, }} [try again later]"]
 ```
 
-The explanation of the log above is as follows:
+上記のログの説明は次のとおりです。
 
-* `[kv:9007]Write conflict`: indicates the write-write conflict.
-* `txnStartTS=416617006551793665`: indicates the `start_ts` of the current transaction. You can use the `pd-ctl` tool to convert `start_ts` to physical time.
-* `conflictStartTS=416617018650001409`: indicates the `start_ts` of the write conflict transaction.
-* `conflictCommitTS=416617023093080065`: indicates the `commit_ts` of the write conflict transaction.
-* `key={tableID=47, indexID=1, indexValues={string, }}`: indicates the write conflict key. `tableID` indicates the ID of the write conflict table. `indexID` indicates the ID of write conflict index. If the write conflict key is a record key, the log prints `handle=x`, indicating which record(row) has a conflict. `indexValues` indicates the value of the index that has a conflict.
-* `primary={tableID=47, indexID=1, indexValues={string, }}`: indicates the primary key information of the current transaction.
+-   `[kv:9007]Write conflict` : 書き込みと書き込みの競合を示します。
+-   `txnStartTS=416617006551793665` : 現在のトランザクションの`start_ts`を示します。 `pd-ctl`ツールを使用すると、 `start_ts`物理時間に変換できます。
+-   `conflictStartTS=416617018650001409` : 書き込み競合トランザクションの`start_ts`を示します。
+-   `conflictCommitTS=416617023093080065` : 書き込み競合トランザクションの`commit_ts`を示します。
+-   `key={tableID=47, indexID=1, indexValues={string, }}` : 書き込み競合キーを示します。 `tableID`書き込み競合テーブルの ID を示します。 `indexID`書き込み競合インデックスの ID を示します。書き込み競合キーがレコード キーの場合、ログには`handle=x`出力、どのレコード (行) に競合があるかを示します。 `indexValues`競合があるインデックスの値を示します。
+-   `primary={tableID=47, indexID=1, indexValues={string, }}` : 現在のトランザクションの主キー情報を示します。
 
-You can use the `pd-ctl` tool to convert the timestamp to readable time:
-
-{{< copyable "" >}}
+`pd-ctl`ツールを使用して、タイムスタンプを読み取り可能な時刻に変換できます。
 
 ```shell
 tiup ctl:v<CLUSTER_VERSION> pd -u https://127.0.0.1:2379 tso {TIMESTAMP}
 ```
 
-You can use `tableID` to find the name of the related table:
-
-{{< copyable "" >}}
+`tableID`を使用すると、関連テーブルの名前を見つけることができます。
 
 ```shell
 curl http://{TiDBIP}:10080/db-table/{tableID}
 ```
 
-You can use `indexID` and the table name to find the name of the related index:
-
-{{< copyable "sql" >}}
+`indexID`とテーブル名を使用して、関連インデックスの名前を見つけることができます。
 
 ```sql
 SELECT * FROM INFORMATION_SCHEMA.TIDB_INDEXES WHERE TABLE_SCHEMA='{db_name}' AND TABLE_NAME='{table_name}' AND INDEX_ID={indexID};
 ```
 
-In addition, in TiDB v3.0.8 and later versions, the pessimistic transaction becomes the default mode. The pessimistic transaction mode can avoid write conflicts during the transaction prewrite stage, so you do not need to modify the application any more. In the pessimistic transaction mode, each DML statement writes a pessimistic lock to the related keys during execution. This pessimistic lock can prevent other transactions from modifying the same keys, thus ensuring no write conflicts exist in the `prewrite` stage of the transaction 2PC.
+さらに、TiDB v3.0.8 以降のバージョンでは、悲観的トランザクションがデフォルト モードになります。悲観的トランザクション モードでは、トランザクションの事前書き込み段階での書き込み競合を回避できるため、アプリケーションを変更する必要がなくなりました。悲観的トランザクション モードでは、各 DML ステートメントは実行中に関連するキーに悲観的ロックを書き込みます。この悲観的ロックにより、他のトランザクションが同じキーを変更するのを防ぐことができるため、トランザクション 2PC の`prewrite`ステージで書き込み競合が存在しないことが保証されます。

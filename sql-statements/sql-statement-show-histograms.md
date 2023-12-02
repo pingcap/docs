@@ -3,13 +3,13 @@ title: SHOW STATS_HISTOGRAMS
 summary: An overview of the usage of SHOW HISTOGRAMS for TiDB database.
 ---
 
-# SHOW STATS_HISTOGRAMS
+# 統計_ヒストグラムを表示 {#show-stats-histograms}
 
-This statement shows the histogram information collected by the `ANALYZE` statement.
+このステートメントは、 `ANALYZE`ステートメントによって収集されたヒストグラム情報を示します。
 
-## Synopsis
+## あらすじ {#synopsis}
 
-**ShowStmt**
+**ショースタンド**
 
 ![ShowStmt](/media/sqlgram/ShowStmt.png)
 
@@ -21,9 +21,7 @@ This statement shows the histogram information collected by the `ANALYZE` statem
 
 ![ShowLikeOrWhereOpt](/media/sqlgram/ShowLikeOrWhereOpt.png)
 
-## Examples
-
-{{< copyable "sql" >}}
+## 例 {#examples}
 
 ```sql
 show stats_histograms;
@@ -40,8 +38,6 @@ show stats_histograms;
 3 rows in set (0.00 sec)
 ```
 
-{{< copyable "sql" >}}
-
 ```sql
 show stats_histograms where table_name = 't2';
 ```
@@ -56,11 +52,11 @@ show stats_histograms where table_name = 't2';
 2 rows in set (0.00 sec)
 ```
 
-## MySQL compatibility
+## MySQLの互換性 {#mysql-compatibility}
 
-This statement is a TiDB extension to MySQL syntax.
+このステートメントは、MySQL 構文に対する TiDB 拡張機能です。
 
-## See also
+## こちらも参照 {#see-also}
 
-* [ANALYZE](/sql-statements/sql-statement-analyze-table.md)
-* [Introduction to Statistics](/statistics.md)
+-   [分析する](/sql-statements/sql-statement-analyze-table.md)
+-   [統計入門](/statistics.md)

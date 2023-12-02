@@ -3,102 +3,102 @@ title: TiDB Control User Guide
 summary: Use TiDB Control to obtain TiDB status information for debugging.
 ---
 
-# TiDB Control User Guide
+# TiDB コントロール ユーザー ガイド {#tidb-control-user-guide}
 
-TiDB Control is a command-line tool of TiDB, usually used to obtain the status information of TiDB for debugging. This document introduces the features of TiDB Control and how to use these features.
+TiDB Control は TiDB のコマンドライン ツールで、通常はデバッグのために TiDB のステータス情報を取得するために使用されます。このドキュメントでは、TiDB Control の機能とその使用方法を紹介します。
 
-> **Note:**
+> **注記：**
 >
-> TiDB Control is specifically designed for debugging purposes and might not be fully compatible with future capabilities introduced in TiDB. It's not recommended to include this tool in applications or utilities development to get information.
+> TiDB コントロールはデバッグ目的に特化して設計されており、TiDB に導入される将来の機能と完全な互換性がない可能性があります。情報を取得するために、アプリケーションまたはユーティリティの開発にこのツールを含めることはお勧めできません。
 
-## Get TiDB Control
+## TiDB コントロールを取得する {#get-tidb-control}
 
-You can get TiDB Control by installing it using TiUP or by compiling it from source code.
+TiDB Control を入手するには、 TiUPを使用してインストールするか、ソース コードからコンパイルします。
 
-> **Note:**
+> **注記：**
 >
-> It is recommended that the version of the Control tool you use is consistent with the version of the cluster.
+> 使用する制御ツールのバージョンがクラスターのバージョンと一致していることをお勧めします。
 
-### Install TiDB Control using TiUP
+### TiUPを使用して TiDB コントロールをインストールする {#install-tidb-control-using-tiup}
 
-After installing TiUP, you can use `tiup ctl:v<CLUSTER_VERSION> tidb` command to get and execute TiDB Control.
+TiUPをインストールした後、 `tiup ctl:v<CLUSTER_VERSION> tidb`コマンドを使用して TiDB コントロールを取得して実行できます。
 
-### Compile from source code
+### ソースコードからコンパイルする {#compile-from-source-code}
 
-- Compilation environment requirement: [Go](https://golang.org/) 1.21 or later
-- Compilation procedures: Go to the root directory of the [TiDB Control project](https://github.com/pingcap/tidb-ctl), use the `make` command to compile, and generate `tidb-ctl`.
-- Compilation documentation: you can find the help files in the `doc` directory; if the help files are lost or you want to update them, use the `make doc` command to generate the help files.
+-   コンパイル環境要件： [行く](https://golang.org/) 1.21以降
+-   コンパイル手順: [TiDB コントロール プロジェクト](https://github.com/pingcap/tidb-ctl)のルート ディレクトリに移動し、 `make`コマンドを使用してコンパイルし、 `tidb-ctl`を生成します。
+-   コンパイル ドキュメント: ヘルプ ファイルは`doc`ディレクトリにあります。ヘルプ ファイルが失われた場合、またはヘルプ ファイルを更新したい場合は、 `make doc`コマンドを使用してヘルプ ファイルを生成します。
 
-## Usage introduction
+## 使い方の紹介 {#usage-introduction}
 
-This section describes how to use commands, subcommands, options, and flags in `tidb-ctl`.
+このセクションでは、 `tidb-ctl`のコマンド、サブコマンド、オプション、およびフラグの使用方法について説明します。
 
-- command: characters without `-` or `--`
-- subcommand: characters without `-` or `--` that follow a command
-- option: characters with `-` or `--`
-- flag: characters exactly following a command/subcommand or option, passing value to the command/subcommand or option
+-   コマンド: `-`または`--`のない文字
+-   サブコマンド: コマンドに続く`-`または`--`のない文字
+-   オプション: `-`または`--`の文字
+-   flag: コマンド/サブコマンドまたはオプションの直後にある文字で、コマンド/サブコマンドまたはオプションに値を渡します。
 
-Usage example: `tidb-ctl schema in mysql -n db`
+使用例： `tidb-ctl schema in mysql -n db`
 
-- `schema`: the command
-- `in`: the subcommand of `schema`
-- `mysql`: the flag of `in`
-- `-n`: the option
-- `db`: the flag of `-n`
+-   `schema` : コマンド
+-   `in` : `schema`のサブコマンド
+-   `mysql` : `in`のフラグ
+-   `-n` : オプション
+-   `db` : `-n`のフラグ
 
-Currently, TiDB Control has the following subcommands:
+現在、TiDB Control には次のサブコマンドがあります。
 
-- `tidb-ctl base64decode`: used for `BASE64` decoding
-- `tidb-ctl decoder`: used for `KEY` decoding
-- `tidb-ctl etcd`: used for operating etcd
-- `tidb-ctl log`: used to format the log file to expand the single-line stack information
-- `tidb-ctl mvcc`: used to get the MVCC information
-- `tidb-ctl region`: used to get the Region information
-- `tidb-ctl schema`: used to get the schema information
-- `tidb-ctl table`: used to get the table information
+-   `tidb-ctl base64decode` : `BASE64`デコードに使用
+-   `tidb-ctl decoder` : `KEY`のデコードに使用
+-   `tidb-ctl etcd` : etcdの操作に使用されます。
+-   `tidb-ctl log` : 単一行のスタック情報を展開するためにログ ファイルをフォーマットするために使用されます。
+-   `tidb-ctl mvcc` : MVCC 情報の取得に使用されます。
+-   `tidb-ctl region` :リージョン情報の取得に使用されます。
+-   `tidb-ctl schema` : スキーマ情報の取得に使用されます
+-   `tidb-ctl table` : テーブル情報の取得に使用されます。
 
-### Get help
+### 助けを得ます {#get-help}
 
-Use `tidb-ctl -h/--help` to get usage information.
+使用状況情報を取得するには`tidb-ctl -h/--help`使用します。
 
-TiDB Control consists of multiple layers of commands. You can use `-h/--help` after each command/subcommand to get its respective usage information.
+TiDB Control は複数のコマンド層で構成されています。各コマンド/サブコマンドの後に`-h/--help`を使用すると、それぞれの使用法情報を取得できます。
 
-The following example shows how to obtain the schema information:
+次の例は、スキーマ情報を取得する方法を示しています。
 
-Use `tidb-ctl schema -h` to get usage details. The `schema` command itself has two subcommands: `in` and `tid`.
+使用量の詳細を取得するには、 `tidb-ctl schema -h`を使用します。 `schema`コマンド自体には`in`と`tid`という 2 つのサブコマンドがあります。
 
-- `in` is used to obtain the table schema of all tables in the database through the database name.
-- `tid` is used to obtain the table schema by using the unique `table_id` in the whole database.
+-   `in`は、データベース名を通じてデータベース内のすべてのテーブルのテーブル スキーマを取得するために使用されます。
+-   `tid`は、データベース全体で一意の`table_id`を使用してテーブル スキーマを取得するために使用されます。
 
-### Global options
+### グローバルオプション {#global-options}
 
-`tidb-ctl` has the following connection-related global options:
+`tidb-ctl`には、次の接続関連のグローバル オプションがあります。
 
-- `--host`: TiDB Service address (default 127.0.0.1)
-- `--port`: TiDB status port (default 10080)
-- `--pdhost`: PD Service address (default 127.0.0.1)
-- `--pdport`: PD Service port (default 2379)
-- `--ca`: The CA file path used for the TLS connection
-- `--ssl-key`: The key file path used for the TLS connection
-- `--ssl-cert`: The certificate file path used for the TLS connection
+-   `--host` : TiDB サービスアドレス (デフォルトは 127.0.0.1)
+-   `--port` : TiDB ステータスポート (デフォルトは 10080)
+-   `--pdhost` : PD サービスアドレス (デフォルトは 127.0.0.1)
+-   `--pdport` : PD サービスポート (デフォルトは 2379)
+-   `--ca` : TLS 接続に使用される CA ファイル パス
+-   `--ssl-key` : TLS 接続に使用されるキーファイルのパス
+-   `--ssl-cert` : TLS 接続に使用される証明書ファイルのパス
 
-`--pdhost` and `--pdport` are mainly used in the `etcd` subcommand. For example, `tidb-ctl etcd ddlinfo`. If you do not specify the address and the port, the following default value is used:
+`--pdhost`と`--pdport`は主に`etcd`サブコマンドで使用されます。たとえば、 `tidb-ctl etcd ddlinfo` 。アドレスとポートを指定しない場合は、次のデフォルト値が使用されます。
 
-- The default service address of TiDB and PD: `127.0.0.1`. The service address must be an IP address.
-- The default service port of TiDB: `10080`.
-- The default service port of PD: `2379`.
+-   TiDB および PD のデフォルトのサービス アドレス: `127.0.0.1` 。サービス アドレスは IP アドレスである必要があります。
+-   TiDB のデフォルトのサービス ポート: `10080` 。
+-   PD のデフォルトのサービス ポート: `2379` 。
 
-### The `schema` command
+### <code>schema</code>コマンド {#the-code-schema-code-command}
 
-#### The `in` subcommand
+#### <code>in</code>サブコマンド {#the-code-in-code-subcommand}
 
-`in` is used to obtain the table schema of all tables in the database through the database name.
+`in`は、データベース名を通じてデータベース内のすべてのテーブルのテーブル スキーマを取得するために使用されます。
 
 ```bash
 tidb-ctl schema in <database name>
 ```
 
-For example, running `tidb-ctl schema in mysql` returns the following result:
+たとえば、 `tidb-ctl schema in mysql`を実行すると、次の結果が返されます。
 
 ```json
 [
@@ -116,11 +116,11 @@ For example, running `tidb-ctl schema in mysql` returns the following result:
 ]
 ```
 
-The result is displayed in the JSON format. (The above output is truncated.)
+結果はJSON形式で表示されます。 (上記の出力は切り詰められています。)
 
-- If you want to specify the table name, use `tidb-ctl schema in <database> -n <table name>` to filter.
+-   テーブル名を指定する場合は、 `tidb-ctl schema in <database> -n <table name>`を使用してフィルターします。
 
-    For example, `tidb-ctl schema in mysql -n db` returns the table schema of the `db` table in the `mysql` database:
+    たとえば、 `tidb-ctl schema in mysql -n db`データベース`mysql`のテーブル`db`のテーブル スキーマを返します。
 
     ```json
     {
@@ -134,15 +134,15 @@ The result is displayed in the JSON format. (The above output is truncated.)
     }
     ```
 
-    (The above output is also truncated.)
+    (上記の出力も切り詰められています。)
 
-    If you do not want to use the default TiDB service address and port, use the `--host` and `--port` options to configure. For example, `tidb-ctl --host 172.16.55.88 --port 8898 schema in mysql -n db`.
+    デフォルトの TiDB サービスのアドレスとポートを使用したくない場合は、 `--host`および`--port`オプションを使用して設定します。たとえば、 `tidb-ctl --host 172.16.55.88 --port 8898 schema in mysql -n db` 。
 
-#### The `tid` subcommand
+#### <code>tid</code>サブコマンド {#the-code-tid-code-subcommand}
 
-`tid` is used to obtain the table schema by using the unique `table_id` in the whole database. You can use the `in` subcommand to get all table IDs of certain schema and use the `tid` subcommand to get the detailed table information.
+`tid`は、データベース全体で一意の`table_id`を使用してテーブル スキーマを取得するために使用されます。 `in`サブコマンドを使用して特定のスキーマのすべてのテーブル ID を取得し、 `tid`サブコマンドを使用して詳細なテーブル情報を取得できます。
 
-For example, the table ID of `mysql.stat_meta` is `21`. You can use `tidb-ctl schema tid -i 21` to obtain the detail of `mysql.stat_meta`.
+たとえば、 `mysql.stat_meta`のテーブル ID は`21`です。 `tidb-ctl schema tid -i 21`使用すると、 `mysql.stat_meta`の詳細を取得できます。
 
 ```json
 {
@@ -157,11 +157,11 @@ For example, the table ID of `mysql.stat_meta` is `21`. You can use `tidb-ctl sc
 }
 ```
 
-Like the `in` subcommand, if you do not want to use the default TiDB service address and status port, use the `--host` and `--port` options to specify the host and port.
+`in`サブコマンドと同様に、デフォルトの TiDB サービス アドレスとステータス ポートを使用したくない場合は、 `--host`および`--port`オプションを使用してホストとポートを指定します。
 
-#### The `base64decode` command
+#### <code>base64decode</code>コマンド {#the-code-base64decode-code-command}
 
-`base64decode` is used to decode `base64` data.
+`base64decode`は`base64`データをデコードするために使用されます。
 
 ```shell
 tidb-ctl base64decode [base64_data]
@@ -169,7 +169,7 @@ tidb-ctl base64decode [db_name.table_name] [base64_data]
 tidb-ctl base64decode [table_id] [base64_data]
 ```
 
-1. Execute the following SQL statement to prepare the environment:
+1.  次の SQL ステートメントを実行して環境を準備します。
 
     ```sql
     use test;
@@ -178,7 +178,7 @@ tidb-ctl base64decode [table_id] [base64_data]
     alter table t add column e varchar(20);
     ```
 
-2. Obtian MVCC data using the HTTP API interface:
+2.  HTTP API インターフェイスを使用した Obtian MVCC データ:
 
     ```shell
     $ curl "http://$IP:10080/mvcc/index/test/t/a/1?a=1"
@@ -208,7 +208,7 @@ tidb-ctl base64decode [table_id] [base64_data]
     }%
     ```
 
-3. Decode ```handle id (uint64) using `base64decode` ```.
+3.  デコード``handle id (uint64) using `base64decode` `` 。
 
     ```shell
     $ tidb-ctl base64decode AAAAAAAAAAE=
@@ -216,7 +216,7 @@ tidb-ctl base64decode [table_id] [base64_data]
     uint64: 1
     ```
 
-4. Decode row data using `base64decode`.
+4.  `base64decode`を使用して行データをデコードします。
 
     ```shell
     $ ./tidb-ctl base64decode test.t CAIIAggEAhjlk4jlk4ggaGVsbG8IBgAICAmAgIDwjYuu0Rk=
@@ -235,9 +235,9 @@ tidb-ctl base64decode [table_id] [base64_data]
     e not found in data
     ```
 
-### The `decoder` command
+### <code>decoder</code>コマンド {#the-code-decoder-code-command}
 
-- The following example shows how to decode the row key, similar to decoding the index key.
+-   次の例は、インデックス キーのデコードと同様に、行キーをデコードする方法を示しています。
 
     ```shell
     $ ./tidb-ctl decoder "t\x00\x00\x00\x00\x00\x00\x00\x1c_r\x00\x00\x00\x00\x00\x00\x00\xfa"
@@ -246,7 +246,7 @@ tidb-ctl base64decode [table_id] [base64_data]
     row_id: -9223372036854775558        row_id: -9223372036854775558
     ```
 
-- The following example shows how to decode `value`.
+-   次の例は、 `value`をデコードする方法を示しています。
 
     ```shell
     $ ./tidb-ctl decoder AhZoZWxsbyB3b3JsZAiAEA==
@@ -255,77 +255,66 @@ tidb-ctl base64decode [table_id] [base64_data]
     index_value[1]: {type: bigint, value: 1024}
     ```
 
-### The `etcd` command
+### <code>etcd</code>コマンド {#the-code-etcd-code-command}
 
-- `tidb-ctl etcd ddlinfo` is used to obtain DDL information.
-- `tidb-ctl etcd putkey KEY VALUE` is used to add KEY VALUE to etcd (All the KEYs are added to the `/tidb/ddl/all_schema_versions/` directory).
+-   `tidb-ctl etcd ddlinfo`はDDL情報を取得するために使用されます。
+
+-   `tidb-ctl etcd putkey KEY VALUE`は、etcd に KEY VALUE を追加するために使用されます (すべての KEY が`/tidb/ddl/all_schema_versions/`ディレクトリに追加されます)。
 
     ```shell
     tidb-ctl etcd putkey "foo" "bar"
     ```
 
-    In fact, a key-value pair is added to the etcd whose KEY is `/tidb/ddl/all_schema_versions/foo` and VALUE is `bar`.
+    実際、キーと値のペアは、 KEY が`/tidb/ddl/all_schema_versions/foo` 、 VALUE が`bar`である etcd に追加されます。
 
-- `tidb-ctl etcd delkey` deletes the KEY in etcd. Only those KEYs with the `/tidb/ddl/fg/owner/` or `/tidb/ddl/all_schema_versions/` prefix can be deleted.
+-   `tidb-ctl etcd delkey` etcd 内の KEY を削除します。 `/tidb/ddl/fg/owner/`または`/tidb/ddl/all_schema_versions/`プレフィックスを持つ KEY のみを削除できます。
 
     ```shell
     tidb-ctl etcd delkey "/tidb/ddl/fg/owner/foo"
     tidb-ctl etcd delkey "/tidb/ddl/all_schema_versions/bar"
     ```
 
-### The `log` command
+### <code>log</code>コマンド {#the-code-log-code-command}
 
-The stack information for the TiDB error log is in one line format. You could use `tidb-ctl log` to change its format to multiple lines.
+TiDB エラー ログのスタック情報は 1 行形式です。 `tidb-ctl log`使用すると、形式を複数行に変更できます。
 
-### The `keyrange` command
+### <code>keyrange</code>コマンド {#the-code-keyrange-code-command}
 
-The `keyrange` subcommand is used to query the global or table-related key range information, which is output in the hexadecimal form.
+`keyrange`サブコマンドは、グローバルまたはテーブル関連のキー範囲情報をクエリするために使用され、16 進形式で出力されます。
 
-* Execute the `tidb-ctl keyrange` command to check the global key range information:
-
-    {{< copyable "shell-regular" >}}
+-   `tidb-ctl keyrange`コマンドを実行して、グローバル キー範囲情報を確認します。
 
     ```shell
     tidb-ctl keyrange
     ```
 
-    ```
-    global ranges:
-      meta: (6d, 6e)
-      table: (74, 75)
-    ```
+        global ranges:
+          meta: (6d, 6e)
+          table: (74, 75)
 
-* Add the `--encode` option to display encoded keys (in the same format as in TiKV and PD):
-
-    {{< copyable "shell-regular" >}}
+-   エンコードされたキーを表示する`--encode`オプションを追加します (TiKV および PD と同じ形式)。
 
     ```shell
     tidb-ctl keyrange --encode
     ```
 
-    ```
-    global ranges:
-      meta: (6d00000000000000f8, 6e00000000000000f8)
-      table: (7400000000000000f8, 7500000000000000f8)
-    ```
+        global ranges:
+          meta: (6d00000000000000f8, 6e00000000000000f8)
+          table: (7400000000000000f8, 7500000000000000f8)
 
-* Execute the `tidb-ctl keyrange --database={db} --table={tbl}` command to check the global and table-related key range information:
-
-    {{< copyable "shell-regular" >}}
+-   `tidb-ctl keyrange --database={db} --table={tbl}`コマンドを実行して、グローバルおよびテーブル関連のキー範囲情報を確認します。
 
     ```shell
     tidb-ctl keyrange --database test --table ttt
     ```
 
-    ```
-    global ranges:
-      meta: (6d, 6e)
-      table: (74, 75)
-    table ttt ranges: (NOTE: key range might be changed after DDL)
-      table: (74800000000000002f, 748000000000000030)
-      table indexes: (74800000000000002f5f69, 74800000000000002f5f72)
-        index c2: (74800000000000002f5f698000000000000001, 74800000000000002f5f698000000000000002)
-        index c3: (74800000000000002f5f698000000000000002, 74800000000000002f5f698000000000000003)
-        index c4: (74800000000000002f5f698000000000000003, 74800000000000002f5f698000000000000004)
-      table rows: (74800000000000002f5f72, 748000000000000030)
-    ```
+        global ranges:
+          meta: (6d, 6e)
+          table: (74, 75)
+        table ttt ranges: (NOTE: key range might be changed after DDL)
+          table: (74800000000000002f, 748000000000000030)
+          table indexes: (74800000000000002f5f69, 74800000000000002f5f72)
+            index c2: (74800000000000002f5f698000000000000001, 74800000000000002f5f698000000000000002)
+            index c3: (74800000000000002f5f698000000000000002, 74800000000000002f5f698000000000000003)
+            index c4: (74800000000000002f5f698000000000000003, 74800000000000002f5f698000000000000004)
+          table rows: (74800000000000002f5f72, 748000000000000030)

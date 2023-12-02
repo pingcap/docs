@@ -3,25 +3,23 @@ title: Generated Columns
 summary: Learn how to use generated columns.
 ---
 
-# Generated Columns
+# 生成された列 {#generated-columns}
 
-This document introduces the concept and usage of generated columns.
+このドキュメントでは、生成された列の概念と使用法を紹介します。
 
-## Basic concepts
+## 基本概念 {#basic-concepts}
 
-Unlike general columns, the value of the generated column is calculated by the expression in the column definition. When inserting or updating a generated column, you cannot assign a value, but only use `DEFAULT`.
+一般的な列とは異なり、生成される列の値は列定義内の式によって計算されます。生成された列を挿入または更新する場合、値を割り当てることはできません。使用できるのは`DEFAULT`のみです。
 
-There are two kinds of generated columns: virtual and stored. A virtual generated column occupies no storage and is computed when it is read. A stored generated column is computed when it is written (inserted or updated) and occupies storage. Compared with the virtual generated columns, the stored generated columns have better read performance, but take up more disk space.
+生成される列には、仮想列と格納列の 2 種類があります。仮想生成列はstorageを占有せず、読み取り時に計算されます。格納された生成列は、書き込み (挿入または更新) 時に計算され、storageを占有します。仮想生成列と比較して、保存された生成列は読み取りパフォーマンスが優れていますが、より多くのディスク領域を消費します。
 
-You can create an index on a generated column whether it is virtual or stored.
+生成された列が仮想列であるか、格納されている列であるかに関係なく、その列にインデックスを作成できます。
 
-## Usage
+## 使用法 {#usage}
 
-One of the main usage of generated columns is to extract data from the JSON data type and indexing the data.
+生成された列の主な用途の 1 つは、JSON データ型からデータを抽出し、データにインデックスを付けることです。
 
-In both MySQL 5.7 and TiDB, columns of type JSON cannot be indexed directly. That is, the following table schema is **not supported**:
-
-{{< copyable "sql" >}}
+MySQL 5.7と TiDB の両方で、JSON 型の列に直接インデックスを付けることはできません。つまり、次のテーブル スキーマは**サポートされていません**。
 
 ```sql
 CREATE TABLE person (
@@ -32,11 +30,9 @@ CREATE TABLE person (
 );
 ```
 
-To index a JSON column, you must extract it as a generated column first.
+JSON 列にインデックスを付けるには、まず生成された列として抽出する必要があります。
 
-Using the `city` field in `address_info` as an example, you can create a virtual generated column and add an index for it:
-
-{{< copyable "sql" >}}
+例として`address_info`の`city`フィールドを使用すると、仮想生成列を作成し、その列にインデックスを追加できます。
 
 ```sql
 CREATE TABLE person (
@@ -50,15 +46,11 @@ CREATE TABLE person (
 );
 ```
 
-In this table, the `city` column is a **virtual generated column** and has an index. The following query can use the index to speed up the execution:
-
-{{< copyable "sql" >}}
+このテーブルの`city`列は**仮想生成列**であり、インデックスがあります。次のクエリでは、インデックスを使用して実行を高速化できます。
 
 ```sql
 SELECT name, id FROM person WHERE city = 'Beijing';
 ```
-
-{{< copyable "sql" >}}
 
 ```sql
 EXPLAIN SELECT name, id FROM person WHERE city = 'Beijing';
@@ -75,11 +67,9 @@ EXPLAIN SELECT name, id FROM person WHERE city = 'Beijing';
 +---------------------------------+---------+-----------+--------------------------------+-------------------------------------------------------------+
 ```
 
-From the query execution plan, it can be seen that the `city` index is used to read the `HANDLE` of the row that meets the condition `city ='Beijing'`, and then it uses this `HANDLE` to read the data of the row.
+クエリ実行プランから、条件`city ='Beijing'`を満たす行の`HANDLE`読み取るために`city`インデックスが使用され、その後、この`HANDLE`を使用して行のデータが読み取られることがわかります。
 
-If no data exists at path `$.city`, `JSON_EXTRACT` returns `NULL`. If you want to enforce a constraint that `city` must be `NOT NULL`, you can define the virtual generated column as follows:
-
-{{< copyable "sql" >}}
+パス`$.city`にデータが存在しない場合、 `JSON_EXTRACT` `NULL`を返します。 `city`が`NOT NULL`でなければならないという制約を強制する場合は、次のように仮想生成列を定義できます。
 
 ```sql
 CREATE TABLE person (
@@ -91,22 +81,20 @@ CREATE TABLE person (
 );
 ```
 
-## Validation of generated columns
+## 生成された列の検証 {#validation-of-generated-columns}
 
-Both `INSERT` and `UPDATE` statements check virtual column definitions. Rows that do not pass validation return errors:
-
-{{< copyable "sql" >}}
+`INSERT`と`UPDATE`ステートメントは両方とも仮想列定義をチェックします。検証に合格しない行はエラーを返します。
 
 ```sql
 mysql> INSERT INTO person (name, address_info) VALUES ('Morgan', JSON_OBJECT('Country', 'Canada'));
 ERROR 1048 (23000): Column 'city' cannot be null
 ```
 
-## Generated columns index replacement rule
+## 生成された列のインデックス置換ルール {#generated-columns-index-replacement-rule}
 
-When an expression in a query is strictly equivalent to a generated column with an index, TiDB replaces the expression with the corresponding generated column, so that the optimizer can take that index into account during execution plan construction.
+クエリ内の式がインデックス付きの生成列と厳密に同等である場合、TiDB はその式を対応する生成列に置き換えます。これにより、オプティマイザーは実行プランの構築中にそのインデックスを考慮できるようになります。
 
-The following example creates a generated column for the expression `a+1` and adds an index. The column type of `a` is int and the column type of `a+1` is bigint. If the type of the generated column is set to int, the replacement will not occur. For type conversion rules, see [Type Conversion of Expression Evaluation](/functions-and-operators/type-conversion-in-expression-evaluation.md).
+次の例では、式`a+1`に対して生成された列を作成し、インデックスを追加します。 `a`の列の型は int で、 `a+1`の列の型は bigint です。生成された列の型が int に設定されている場合、置換は行われません。型変換規則については、 [式評価の型変換](/functions-and-operators/type-conversion-in-expression-evaluation.md)を参照してください。
 
 ```sql
 create table t(a int);
@@ -141,16 +129,16 @@ desc select a+1 from t where a+1=3;
 2 rows in set (0.01 sec)
 ```
 
-> **Note:**
+> **注記：**
 >
-> If the expression to be replaced and the generated column are both the string type but with different lengths, you can still replace the expression by setting the system variable [`tidb_enable_unsafe_substitute`](/system-variables.md#tidb_enable_unsafe_substitute-new-in-v630) to `ON`. When configuring this system variable, ensure that the value calculated by the generated column strictly satisfies the definition of the generated column. Otherwise, the data might be truncated due to the difference in length, resulting in an incorrect result. See GitHub issue [#35490](https://github.com/pingcap/tidb/issues/35490#issuecomment-1211658886).
+> 置換される式と生成される列が両方とも文字列型であるが長さが異なる場合でも、システム変数[`tidb_enable_unsafe_substitute`](/system-variables.md#tidb_enable_unsafe_substitute-new-in-v630)から`ON`を設定することで式を置換できます。このシステム変数を構成するときは、生成された列によって計算された値が生成された列の定義を厳密に満たしていることを確認してください。そうしないと、長さの違いによりデータが切り捨てられ、不正確な結果が生じる可能性があります。 GitHub の問題[#35490](https://github.com/pingcap/tidb/issues/35490#issuecomment-1211658886)を参照してください。
 
-## Limitations
+## 制限事項 {#limitations}
 
-The current limitations of JSON and generated columns are as follows:
+JSON と生成された列の現在の制限は次のとおりです。
 
-- You cannot add a stored generated column through `ALTER TABLE`.
-- You can neither convert a stored generated column to a normal column through the `ALTER TABLE` statement nor convert a normal column to a stored generated column.
-- You cannot modify the expression of a stored generated column through the `ALTER TABLE` statement.
-- Not all [JSON functions](/functions-and-operators/json-functions.md) are supported;
-- Currently, the generated column index replacement rule is valid only when the generated column is a virtual generated column. It is not valid on the stored generated column, but the index can still be used by directly using the generated column itself.
+-   `ALTER TABLE`を介して格納された生成列を追加することはできません。
+-   `ALTER TABLE`ステートメントを使用して格納された生成列を通常の列に変換したり、通常の列を格納された生成列に変換したりすることはできません。
+-   `ALTER TABLE`ステートメントを使用して、保存された生成列の式を変更することはできません。
+-   すべての[JSON関数](/functions-and-operators/json-functions.md)サポートされているわけではありません。
+-   現在、生成列インデックス置換ルールは、生成列が仮想生成列である場合にのみ有効です。格納された生成列では無効ですが、生成列自体を直接使用することでインデックスを引き続き使用できます。

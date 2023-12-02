@@ -3,174 +3,174 @@ title: Connect to TiDB with DBeaver
 summary: Learn how to connect to TiDB using DBeaver Community.
 ---
 
-# Connect to TiDB with DBeaver
+# DBeaver を使用して TiDB に接続する {#connect-to-tidb-with-dbeaver}
 
-TiDB is a MySQL-compatible database, and [DBeaver Community](https://dbeaver.io/download/) is a free cross-platform database tool for developers, database administrators, analysts, and everyone working with data.
+TiDB は MySQL と互換性のあるデータベースであり、開発者、データベース管理者、アナリスト、およびデータを扱うすべての人のための無料のクロスプラットフォーム データベース[Dビーバーコミュニティ](https://dbeaver.io/download/)です。
 
-In this tutorial, you can learn how to connect to your TiDB cluster using DBeaver Community.
+このチュートリアルでは、DBeaver Community を使用して TiDB クラスターに接続する方法を学習できます。
 
-> **Note:**
+> **注記：**
 >
-> This tutorial is compatible with TiDB Serverless, TiDB Dedicated, and TiDB Self-Hosted.
+> このチュートリアルは、TiDB サーバーレス、TiDB 専用、および TiDB セルフホストと互換性があります。
 
-## Prerequisites
+## 前提条件 {#prerequisites}
 
-To complete this tutorial, you need:
+このチュートリアルを完了するには、次のものが必要です。
 
-- [DBeaver Community **23.0.3** or higher](https://dbeaver.io/download/).
-- A TiDB cluster.
+-   [DBeaver コミュニティ**23.0.3**以降](https://dbeaver.io/download/) 。
+-   TiDB クラスター。
 
 <CustomContent platform="tidb">
 
-**If you don't have a TiDB cluster, you can create one as follows:**
+**TiDB クラスターがない場合は、次のように作成できます。**
 
-- (Recommended) Follow [Creating a TiDB Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
-- Follow [Deploy a local test TiDB cluster](/quick-start-with-tidb.md#deploy-a-local-test-cluster) or [Deploy a production TiDB cluster](/production-deployment-using-tiup.md) to create a local cluster.
+-   (推奨) [TiDB サーバーレスクラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って、独自のTiDB Cloudクラスターを作成します。
+-   [ローカル テスト TiDB クラスターをデプロイ](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番TiDB クラスターをデプロイ](/production-deployment-using-tiup.md)に従ってローカル クラスターを作成します。
 
 </CustomContent>
 <CustomContent platform="tidb-cloud">
 
-**If you don't have a TiDB cluster, you can create one as follows:**
+**TiDB クラスターがない場合は、次のように作成できます。**
 
-- (Recommended) Follow [Creating a TiDB Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster.
-- Follow [Deploy a local test TiDB cluster](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb#deploy-a-local-test-cluster) or [Deploy a production TiDB cluster](https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup) to create a local cluster.
+-   (推奨) [TiDB サーバーレスクラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md)に従って、独自のTiDB Cloudクラスターを作成します。
+-   [ローカル テスト TiDB クラスターをデプロイ](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb#deploy-a-local-test-cluster)または[本番TiDB クラスターをデプロイ](https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup)に従ってローカル クラスターを作成します。
 
 </CustomContent>
 
-## Connect to TiDB
+## TiDB に接続する {#connect-to-tidb}
 
-Connect to your TiDB cluster depending on the TiDB deployment option you've selected.
+選択した TiDB デプロイメント オプションに応じて、TiDB クラスターに接続します。
 
 <SimpleTab>
 <div label="TiDB Serverless">
 
-1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
+1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット クラスターの名前をクリックして、その概要ページに移動します。
 
-2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
+2.  右上隅にある**「接続」**をクリックします。接続ダイアログが表示されます。
 
-3. Ensure the configurations in the connection dialog match your operating environment.
+3.  接続ダイアログの設定が動作環境と一致していることを確認してください。
 
-    - **Endpoint Type** is set to `Public`
-    - **Connect With** is set to `JDBC`
-    - **Operating System** matches your environment.
+    -   **エンドポイント タイプは**`Public`に設定されます
+    -   **[接続先] は**`JDBC`に設定されています
+    -   **オペレーティング システムが**環境に一致します。
 
-4. Click **Create password** to create a random password.
+4.  **「パスワードの作成」**をクリックしてランダムなパスワードを作成します。
 
-    > **Tip:**
+    > **ヒント：**
     >
-    > If you have created a password before, you can either use the original password or click **Reset password** to generate a new one.
+    > 以前にパスワードを作成したことがある場合は、元のパスワードを使用するか、 **「パスワードのリセット」**をクリックして新しいパスワードを生成できます。
 
-5. Launch DBeaver and click **New Database Connection** in the upper-left corner. In the **Connect to a database** dialog, select **TiDB** from the list, and then click **Next**.
+5.  DBeaver を起動し、左上隅にある**[新しいデータベース接続]**をクリックします。 **[データベースに接続]**ダイアログで、リストから**[TiDB]**を選択し、 **[次へ]**をクリックします。
 
     ![Select TiDB as the database in DBeaver](/media/develop/dbeaver-select-database.jpg)
 
-6. Copy the JDBC string from the TiDB Cloud connection dialog. In DBeaver, select **URL** for **Connect by** and paste the JDBC string into the **URL** field. You don't need to replace the `<your_password>` placeholder in the string with your actual password, because DBeaver reads username and password from the **Authentication (Database Native)** section.
+6.  TiDB Cloud接続ダイアログから JDBC 文字列をコピーします。 DBeaver で、 **[接続方法]**に**URL**を選択し、JDBC 文字列を**URL**フィールドに貼り付けます。 DBeaver は**認証 (データベース ネイティブ)**セクションからユーザー名とパスワードを読み取るため、文字列内の`<your_password>`プレースホルダーを実際のパスワードに置き換える必要はありません。
 
-7. In the **Authentication (Database Native)** section, enter your **Username** and **Password**. An example is as follows:
+7.  **「認証 (データベースネイティブ)」**セクションで、 **「ユーザー名**」と**「パスワード」**を入力します。例は次のとおりです。
 
     ![Configure connection settings for TiDB Serverless](/media/develop/dbeaver-connection-settings-serverless.jpg)
 
-8. Click **Test Connection** to validate the connection to the TiDB Serverless cluster.
+8.  **「接続のテスト」**をクリックして、TiDB サーバーレスクラスターへの接続を検証します。
 
-    If the **Download driver files** dialog is displayed, click **Download** to get the driver files.
+    **[ドライバー ファイルのダウンロード]**ダイアログが表示された場合は、 **[ダウンロード] を**クリックしてドライバー ファイルを取得します。
 
     ![Download driver files](/media/develop/dbeaver-download-driver.jpg)
 
-    If the connection test is successful, the **Connection test** dialog is displayed as follows. Click **OK** to close it.
+    接続テストが成功すると、次のように**接続テスト**ダイアログが表示されます。 **「OK」**をクリックして閉じます。
 
     ![Connection test result](/media/develop/dbeaver-connection-test.jpg)
 
-9. Click **Finish** to save the connection configuration.
+9.  **「完了」**をクリックして接続構成を保存します。
 
 </div>
 <div label="TiDB Dedicated">
 
-1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
+1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット クラスターの名前をクリックして、その概要ページに移動します。
 
-2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
+2.  右上隅にある**「接続」**をクリックします。接続ダイアログが表示されます。
 
-3. Click **Allow Access from Anywhere**, and then click **Download TiDB cluster CA** to download the CA certificate.
+3.  **[どこからでもアクセスを許可]**をクリックし、 **[TiDB クラスター CA のダウンロード]**をクリックして CA 証明書をダウンロードします。
 
-    For more details about how to obtain the connection string, refer to [TiDB Dedicated standard connection](https://docs.pingcap.com/tidbcloud/connect-via-standard-connection).
+    接続文字列の取得方法の詳細については、 [TiDB専用標準接続](https://docs.pingcap.com/tidbcloud/connect-via-standard-connection)を参照してください。
 
-4. Launch DBeaver and click **New Database Connection** in the upper-left corner. In the **Connect to a database** dialog, select **TiDB** from the list, and then click **Next**.
+4.  DBeaver を起動し、左上隅にある**[新しいデータベース接続]**をクリックします。 **[データベースに接続]**ダイアログで、リストから**[TiDB]**を選択し、 **[次へ]**をクリックします。
 
     ![Select TiDB as the database in DBeaver](/media/develop/dbeaver-select-database.jpg)
 
-5. Copy and paste the appropriate connection string into the DBeaver connection panel. The mappings between DBeaver fields and TiDB Dedicated connection string are as follows:
+5.  適切な接続文字列をコピーして、DBeaver 接続パネルに貼り付けます。 DBeaver フィールドと TiDB 専用接続文字列間のマッピングは次のとおりです。
 
-    | DBeaver field | TiDB Dedicated connection string |
-    |---------------| ------------------------------- |
-    | Server Host   | `{host}`                        |
-    | Port          | `{port}`                        |
-    | Username      | `{user}`                        |
-    | Password      | `{password}`                    |
+    | Dビーバーフィールド | TiDB 専用接続文字列 |
+    | ---------- | ------------ |
+    | サーバーホスト    | `{host}`     |
+    | ポート        | `{port}`     |
+    | ユーザー名      | `{user}`     |
+    | パスワード      | `{password}` |
 
-    An example is as follows:
+    例は次のとおりです。
 
     ![Configure connection settings for TiDB Dedicated](/media/develop/dbeaver-connection-settings-dedicated.jpg)
 
-6. Click **Test Connection** to validate the connection to the TiDB Dedicated cluster.
+6.  **「接続のテスト」**をクリックして、TiDB 専用クラスターへの接続を検証します。
 
-    If the **Download driver files** dialog is displayed, click **Download** to get the driver files.
+    **[ドライバー ファイルのダウンロード]**ダイアログが表示された場合は、 **[ダウンロード] を**クリックしてドライバー ファイルを取得します。
 
     ![Download driver files](/media/develop/dbeaver-download-driver.jpg)
 
-    If the connection test is successful, the **Connection test** dialog is displayed as follows. Click **OK** to close it.
+    接続テストが成功すると、次のように**接続テスト**ダイアログが表示されます。 **「OK」**をクリックして閉じます。
 
     ![Connection test result](/media/develop/dbeaver-connection-test.jpg)
 
-7. Click **Finish** to save the connection configuration.
+7.  **「完了」**をクリックして接続構成を保存します。
 
 </div>
 <div label="TiDB Self-Hosted">
 
-1. Launch DBeaver and click **New Database Connection** in the upper-left corner. In the **Connect to a database** dialog, select **TiDB** from the list, and then click **Next**.
+1.  DBeaver を起動し、左上隅にある**[新しいデータベース接続]**をクリックします。 **[データベースに接続]**ダイアログで、リストから**[TiDB]**を選択し、 **[次へ]**をクリックします。
 
     ![Select TiDB as the database in DBeaver](/media/develop/dbeaver-select-database.jpg)
 
-2. Configure the following connection parameters:
+2.  次の接続パラメータを構成します。
 
-    - **Server Host**: The IP address or domain name of your TiDB Self-Hosted cluster.
-    - **Port**: The port number of your TiDB Self-Hosted cluster.
-    - **Username**: The username to use to connect to your TiDB Self-Hosted cluster.
-    - **Password**: The password of the username.
+    -   **サーバーホスト**: TiDB セルフホストクラスターの IP アドレスまたはドメイン名。
+    -   **Port** : TiDB セルフホスト クラスターのポート番号。
+    -   **ユーザー名**: TiDB セルフホスト クラスターへの接続に使用するユーザー名。
+    -   **パスワード**: ユーザー名のパスワード。
 
-    An example is as follows:
+    例は次のとおりです。
 
     ![Configure connection settings for TiDB Self-Hosted](/media/develop/dbeaver-connection-settings-self-hosted.jpg)
 
-3. Click **Test Connection** to validate the connection to the TiDB Self-Hosted cluster.
+3.  **[接続のテスト]**をクリックして、TiDB セルフホスト クラスターへの接続を検証します。
 
-    If the **Download driver files** dialog is displayed, click **Download** to get the driver files.
+    **[ドライバー ファイルのダウンロード]**ダイアログが表示された場合は、 **[ダウンロード] を**クリックしてドライバー ファイルを取得します。
 
     ![Download driver files](/media/develop/dbeaver-download-driver.jpg)
 
-    If the connection test is successful, the **Connection test** dialog is displayed as follows. Click **OK** to close it.
+    接続テストが成功すると、次のように**接続テスト**ダイアログが表示されます。 **「OK」**をクリックして閉じます。
 
     ![Connection test result](/media/develop/dbeaver-connection-test.jpg)
 
-4. Click **Finish** to save the connection configuration.
+4.  **「完了」**をクリックして接続構成を保存します。
 
 </div>
 </SimpleTab>
 
-## Next steps
+## 次のステップ {#next-steps}
 
-- Learn more usage of DBeaver from [the documentation of DBeaver](https://github.com/dbeaver/dbeaver/wiki).
-- Learn the best practices for TiDB application development with the chapters in the [Developer guide](/develop/dev-guide-overview.md), such as [Insert data](/develop/dev-guide-insert-data.md), [Update data](/develop/dev-guide-update-data.md), [Delete data](/develop/dev-guide-delete-data.md), [Single table reading](/develop/dev-guide-get-data-from-single-table.md), [Transactions](/develop/dev-guide-transaction-overview.md), and [SQL performance optimization](/develop/dev-guide-optimize-sql-overview.md).
-- Learn through the professional [TiDB developer courses](https://www.pingcap.com/education/) and earn [TiDB certifications](https://www.pingcap.com/education/certification/) after passing the exam.
+-   DBeaver の詳しい使い方を[DBeaver のドキュメント](https://github.com/dbeaver/dbeaver/wiki)から学びましょう。
+-   TiDB アプリケーション開発[単一テーブルの読み取り](/develop/dev-guide-get-data-from-single-table.md)ベスト プラクティスについて[取引](/develop/dev-guide-transaction-overview.md) 、 [開発者ガイド](/develop/dev-guide-overview.md)の章 ( [データの挿入](/develop/dev-guide-insert-data.md)など) [データを更新する](/develop/dev-guide-update-data.md)参照[データの削除](/develop/dev-guide-delete-data.md) [SQLパフォーマンスの最適化](/develop/dev-guide-optimize-sql-overview.md)ください。
+-   プロフェッショナルとして[TiDB 開発者コース](https://www.pingcap.com/education/)を学び、試験合格後に[TiDB 認定](https://www.pingcap.com/education/certification/)獲得します。
 
-## Need help?
+## 助けが必要？ {#need-help}
 
 <CustomContent platform="tidb">
 
-Ask questions on the [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc), or [create a support ticket](/support.md).
+[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[サポートチケットを作成する](/support.md)について質問してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-Ask questions on the [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc), or [create a support ticket](https://support.pingcap.com/).
+[不和](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[サポートチケットを作成する](https://support.pingcap.com/)について質問してください。
 
 </CustomContent>

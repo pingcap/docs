@@ -3,70 +3,70 @@ title: DR Solution Based on Primary and Secondary Clusters
 summary: Learn how to implement primary-secondary disaster recovery based on TiCDC.
 ---
 
-# DR Solution Based on Primary and Secondary Clusters
+# プライマリ クラスタとセカンダリ クラスタに基づく DR ソリューション {#dr-solution-based-on-primary-and-secondary-clusters}
 
-Disaster recovery (DR) based on primary and secondary databases is a common solution. In this solution, the DR system has a primary cluster and a secondary cluster. The primary cluster handles user requests, while the secondary cluster backs up data from the primary cluster. When the primary cluster fails, the secondary cluster takes over services and continues to provide services using the backup data. This ensures that the business system continues to run normally without any interruptions caused by a failure.
+プライマリ データベースとセカンダリ データベースに基づく災害復旧 (DR) は、一般的なソリューションです。このソリューションでは、DR システムにはプライマリ クラスターとセカンダリ クラスターがあります。プライマリ クラスタはユーザーのリクエストを処理し、セカンダリ クラスタはプライマリ クラスタからのデータをバックアップします。プライマリ クラスタに障害が発生した場合、セカンダリ クラスタがサービスを引き継ぎ、バックアップ データを使用してサービスを提供し続けます。これにより、ビジネス システムは障害による中断なしに正常に動作し続けることが保証されます。
 
-The primary-secondary DR solution has the following benefits:
+プライマリ-セカンダリ DR ソリューションには次の利点があります。
 
-- High availability: The primary-secondary architecture enhances system availability, ensuring fast recovery from any failure.
-- Fast switchover: When the primary cluster fails, the system can quickly switch to the secondary cluster and continue to provide services.
-- Data consistency: The secondary cluster backs up the data from the primary cluster in almost real time. In this way, the data is basically up-to-date when the system switches to the secondary cluster due to a failure.
+-   高可用性: プライマリ-セカンダリアーキテクチャによりシステムの可用性が向上し、障害からの迅速な回復が保証されます。
+-   高速スイッチオーバー: プライマリ クラスタに障害が発生した場合、システムはすぐにセカンダリ クラスタに切り替えてサービスを提供し続けることができます。
+-   データの一貫性: セカンダリ クラスタは、プライマリ クラスタからほぼリアルタイムでデータをバックアップします。このようにして、障害によりシステムがセカンダリ クラスターに切り替わっても、データは基本的に最新の状態になります。
 
-This document includes the following contents:
+この文書には次の内容が含まれています。
 
-- Set up a primary cluster and a secondary cluster.
-- Replicate data from the primary cluster to the secondary cluster.
-- Monitor the clusters.
-- Perform a DR switchover.
+-   プライマリ クラスタとセカンダリ クラスタをセットアップします。
+-   プライマリ クラスタからセカンダリ クラスタにデータをレプリケートします。
+-   クラスターを監視します。
+-   DRスイッチオーバーを実行します。
 
-Meanwhile, this document also describes how to query business data on the secondary cluster and how to perform bidirectional replication between the primary and secondary clusters.
+一方、このドキュメントでは、セカンダリ クラスタでビジネス データをクエリする方法と、プライマリ クラスタとセカンダリ クラスタの間で双方向レプリケーションを実行する方法についても説明します。
 
-## Set up primary and secondary clusters based on TiCDC
+## TiCDC に基づいてプライマリ クラスタとセカンダリ クラスタをセットアップする {#set-up-primary-and-secondary-clusters-based-on-ticdc}
 
-### Architecture
+### アーキテクチャ {#architecture}
 
 ![TiCDC secondary cluster architecture](/media/dr/dr-ticdc-secondary-cluster.png)
 
-The preceding architecture includes two TiDB clusters: a primary cluster and a secondary cluster.
+前述のアーキテクチャには、プライマリ クラスタとセカンダリ クラスタの 2 つの TiDB クラスタが含まれています。
 
-- Primary cluster: The active cluster that runs in region 1 and has three replicas. This cluster handles read and write requests.
-- Secondary cluster: The standby cluster that runs in region 2 and replicates data from the primary cluster through TiCDC.
+-   プライマリ クラスター: リージョン 1 で実行され、3 つのレプリカを持つアクティブなクラスター。このクラスターは読み取りおよび書き込みリクエストを処理します。
+-   セカンダリ クラスター: リージョン 2 で実行され、TiCDC を介してプライマリ クラスターからデータをレプリケートするスタンバイ クラスター。
 
-This DR architecture is simple and easy to use. Being capable of tolerating regional failures, the DR system guarantees that the write performance of the primary cluster does not deteriorate, and the secondary cluster can handle some read-only business that is not latency-sensitive. The Recovery Point Objective (RPO) of this solution is in seconds, and the Recovery Time Objective (RTO) can be minutes or even lower. This is a solution recommended by many database vendors for important production systems.
+この DRアーキテクチャはシンプルで使いやすいです。 DR システムは地域的な障害に耐えることができるため、プライマリ クラスタの書き込みパフォーマンスが低下しないことが保証され、セカンダリ クラスタは遅延の影響を受けない一部の読み取り専用ビジネスを処理できます。このソリューションの目標復旧時点 (RPO) は秒単位であり、目標復旧時間 (RTO) は分またはそれより短い場合もあります。これは、多くのデータベース ベンダーが重要な本番システムに対して推奨しているソリューションです。
 
-> **Note:**
+> **注記：**
 >
-> - ["Region" in TiKV](/glossary.md#regionpeerraft-group) means a range of data while the term "region" means a physical location. The two terms are not interchangeable.
-> - Do not run multiple changefeeds to replicate data to the secondary cluster, or run another secondary cluster with the presence of a secondary cluster already. Otherwise, the integrity of data transactions of the secondary cluster cannot be guaranteed.
+> -   [TiKVの「リージョン」](/glossary.md#regionpeerraft-group)データの範囲を意味し、「領域」という用語は物理的な位置を意味します。この 2 つの用語は互換性がありません。
+> -   セカンダリ クラスターにデータをレプリケートするために複数の変更フィードを実行したり、セカンダリ クラスターがすでに存在する状態で別のセカンダリ クラスターを実行したりしないでください。そうしないと、セカンダリ クラスターのデータ トランザクションの整合性が保証されません。
 
-### Set up primary and secondary clusters
+### プライマリ クラスタとセカンダリ クラスタをセットアップする {#set-up-primary-and-secondary-clusters}
 
-In this document, the TiDB primary and secondary clusters are deployed in two different regions (region 1 and region 2). TiCDC is deployed together with the secondary cluster, because there is a certain network latency between the primary and secondary clusters. Deploying TiCDC with the secondary cluster can avoid the impact of network latency, which helps achieve optimal replication performance. The deployment topology of the example provided in this document is as follows (one component node is deployed on one server):
+このドキュメントでは、TiDB プライマリ クラスターとセカンダリ クラスターが 2 つの異なるリージョン (リージョン 1 とリージョン 2) にデプロイされています。プライマリ クラスタとセカンダリ クラスタの間には一定のネットワークレイテンシーが存在するため、TiCDC はセカンダリ クラスタと一緒にデプロイされます。 TiCDC をセカンダリ クラスターとともに展開すると、ネットワークレイテンシーの影響を回避でき、最適なレプリケーション パフォーマンスの実現に役立ちます。このドキュメントで提供される例のデプロイメント トポロジは次のとおりです (1 つのコンポーネントノードが 1 つのサーバーにデプロイされます)。
 
-|Region | Host | Cluster | Component |
-| --- | --- | --- | --- |
-| Region 1 | 10.0.1.9 | Primary | Monitor, Grafana, or AlterManager |
-| Region 2 | 10.0.1.11 | Secondary | Monitor, Grafana, or AlterManager |
-| Region 1 | 10.0.1.1/10.0.1.2/10.0.1.3 | Primary | PD |
-| Region 2 | 10.1.1.1/10.1.1.2/10.1.1.3 | Secondary | PD |
-| Region 2 | 10.1.1.9/10.1.1.10 | Primary | TiCDC |
-| Region 1 | 10.0.1.4/10.0.1.5 | Primary| TiDB |
-| Region 2 | 10.1.1.4/10.1.1.5 | Secondary | TiDB |
-| Region 1 | 10.0.1.6/10.0.1.7/10.0.1.8 | Primary | TiKV |
-| Region 2 | 10.1.1.6/10.1.1.7/10.1.1.8 | Secondary | TiKV |
+| リージョン  | ホスト                        | クラスタ | 成分                               |
+| ------ | -------------------------- | ---- | -------------------------------- |
+| リージョン1 | 10.0.1.9                   | 主要な  | Monitor、Grafana、または AlterManager |
+| リージョン2 | 10.0.1.11                  | 二次   | Monitor、Grafana、または AlterManager |
+| リージョン1 | 10.0.1.1/10.0.1.2/10.0.1.3 | 主要な  | PD                               |
+| リージョン2 | 10.1.1.1/10.1.1.2/10.1.1.3 | 二次   | PD                               |
+| リージョン2 | 10.1.1.9/10.1.1.10         | 主要な  | TiCDC                            |
+| リージョン1 | 10.0.1.4/10.0.1.5          | 主要な  | TiDB                             |
+| リージョン2 | 10.1.1.4/10.1.1.5          | 二次   | TiDB                             |
+| リージョン1 | 10.0.1.6/10.0.1.7/10.0.1.8 | 主要な  | TiKV                             |
+| リージョン2 | 10.1.1.6/10.1.1.7/10.1.1.8 | 二次   | TiKV                             |
 
-For server configurations, see the following documents:
+サーバー構成については、次のドキュメントを参照してください。
 
-- [Software and hardware recommendations for TiDB](/hardware-and-software-requirements.md)
-- [Software and hardware recommendations for TiCDC](/ticdc/deploy-ticdc.md#software-and-hardware-recommendations)
+-   [TiDB のソフトウェアとハ​​ードウェアの推奨事項](/hardware-and-software-requirements.md)
+-   [TiCDC のソフトウェアおよびハードウェアの推奨事項](/ticdc/deploy-ticdc.md#software-and-hardware-recommendations)
 
-For details about how to deploy TiDB primary and secondary clusters, see [Deploy a TiDB cluster](/production-deployment-using-tiup.md).
+TiDB プライマリ クラスターとセカンダリ クラスターを展開する方法の詳細については、 [TiDB クラスターをデプロイ](/production-deployment-using-tiup.md)を参照してください。
 
-When deploying TiCDC, note that the secondary cluster and TiCDC must be deployed and managed together, and the network between them must be connected.
+TiCDC を展開するときは、セカンダリ クラスターと TiCDC を一緒に展開して管理し、それらの間のネットワークを接続する必要があることに注意してください。
 
-- To deploy TiCDC on an existing primary cluster, see [Deploy TiCDC](/ticdc/deploy-ticdc.md#add-or-scale-out-ticdc-to-an-existing-tidb-cluster-using-tiup).
-- To deploy a new primary cluster and TiCDC, use the following deployment template and modify the configuration parameters as needed:
+-   TiCDC を既存のプライマリ クラスターにデプロイするには、 [TiCDCのデプロイ](/ticdc/deploy-ticdc.md#add-or-scale-out-ticdc-to-an-existing-tidb-cluster-using-tiup)を参照してください。
+-   新しいプライマリ クラスターと TiCDC をデプロイするには、次のデプロイ テンプレートを使用し、必要に応じて構成パラメータを変更します。
 
     ```yaml
     global:
@@ -103,18 +103,18 @@ When deploying TiCDC, note that the secondary cluster and TiCDC must be deployed
         ticdc_cluster_id: "DR_TiCDC"
     ```
 
-### Replicate data from the primary cluster to the secondary cluster
+### プライマリ クラスタからセカンダリ クラスタにデータをレプリケートする {#replicate-data-from-the-primary-cluster-to-the-secondary-cluster}
 
-After setting up the TiDB primary and secondary clusters, first migrate the data from the primary cluster to the secondary cluster, and then create a replication task to replicate real-time change data from the primary cluster to the secondary cluster.
+TiDB プライマリ クラスターとセカンダリ クラスターをセットアップした後、まずプライマリ クラスターからセカンダリ クラスターにデータを移行し、次にレプリケーション タスクを作成して、リアルタイムの変更データをプライマリ クラスターからセカンダリ クラスターにレプリケートします。
 
-#### Select an external storage
+#### 外部storageを選択する {#select-an-external-storage}
 
-An external storage is used when migrating data and replicating real-time change data. Amazon S3 is a recommended choice. If the TiDB cluster is deployed in a self-built data center, the following methods are recommended:
+外部storageは、データの移行やリアルタイムの変更データのレプリケーション時に使用されます。 Amazon S3 をお勧めします。 TiDB クラスターが自社構築のデータセンターにデプロイされている場合は、次の方法をお勧めします。
 
-* Build [MinIO](https://docs.min.io/docs/minio-quickstart-guide.html) as the backup storage system, and use the S3 protocol to back up data to MinIO.
-* Mount Network File System (NFS, such as NAS) disks to br command-line tool, TiKV, and TiCDC instances, and use the POSIX file system interface to write backup data to the corresponding NFS directory.
+-   バックアップstorageシステムとして[MinIO](https://docs.min.io/docs/minio-quickstart-guide.html)を構築し、S3 プロトコルを使用してデータを MinIO にバックアップします。
+-   ネットワーク ファイル システム (NAS など) ディスクを br コマンド ライン ツール、TiKV、および TiCDC インスタンスにマウントし、POSIX ファイル システム インターフェイスを使用してバックアップ データを対応する NFS ディレクトリに書き込みます。
 
-The following example uses MinIO as the storage system and is for reference only. Note that you need to prepare a separate server to deploy MinIO in region 1 or region 2.
+次の例では、storageシステムとして MinIO を使用していますが、これは参照のみを目的としています。 MinIO をリージョン 1 またはリージョン 2 にデプロイするには、別のサーバーを準備する必要があることに注意してください。
 
 ```shell
 wget https://dl.min.io/server/minio/release/linux-amd64/minio
@@ -130,91 +130,83 @@ mkdir -p data/backup
 nohup ./minio server ./data --address :6060 &
 ```
 
-The preceding command starts a MinIO server on one node to simulate Amazon S3 services. Parameters in the command are configured as follows:
+前述のコマンドは、1 つのノードで MinIOサーバーを起動し、Amazon S3 サービスをシミュレートします。コマンドのパラメータは次のように構成されます。
 
-* `endpoint`: `http://10.0.1.10:6060/`
-* `access-key`: `minio`
-* `secret-access-key`: `miniostorage`
-* `bucket`: `redo`/`backup`
+-   `endpoint` ： `http://10.0.1.10:6060/`
+-   `access-key` ： `minio`
+-   `secret-access-key` ： `miniostorage`
+-   `bucket` `backup` `redo`
 
-The link is as follows:
+リンクは次のとおりです。
 
-```
-s3://backup?access-key=minio&secret-access-key=miniostorage&endpoint=http://10.0.1.10:6060&force-path-style=true
-```
+    s3://backup?access-key=minio&secret-access-key=miniostorage&endpoint=http://10.0.1.10:6060&force-path-style=true
 
-#### Migrate data
+#### データの移行 {#migrate-data}
 
-Use the [backup and restore feature](/br/backup-and-restore-overview.md) to migrate data from the primary cluster to the secondary cluster.
+プライマリ クラスタからセカンダリ クラスタにデータを移行するには、 [バックアップと復元機能](/br/backup-and-restore-overview.md)を使用します。
 
-1. Disable GC. To ensure that newly written data is not deleted during incremental migration, you should disable GC for the upstream cluster before backup. In this way, history data is not deleted.
+1.  GC を無効にします。新しく書き込まれたデータが増分移行中に削除されないようにするには、バックアップ前にアップストリーム クラスターの GC を無効にする必要があります。これにより、履歴データは削除されません。
 
-    Execute the following statement to disable GC:
+    次のステートメントを実行して GC を無効にします。
 
     ```sql
     SET GLOBAL tidb_gc_enable=FALSE;
     ```
 
-    To verify that the change takes effect, query the value of `tidb_gc_enable`:
+    変更が有効であることを確認するには、値`tidb_gc_enable`をクエリします。
 
     ```sql
     SELECT @@global.tidb_gc_enable;
     ```
 
-    If the value is `0`, it means that GC is disabled:
+    値が`0`の場合、GC が無効になっていることを意味します。
 
-    ```
-    +-------------------------+
-    | @@global.tidb_gc_enable |
-    +-------------------------+
-    |                       0 |
-    +-------------------------+
-    1 row in set (0.00 sec)
-    ```
+        +-------------------------+
+        | @@global.tidb_gc_enable |
+        +-------------------------+
+        |                       0 |
+        +-------------------------+
+        1 row in set (0.00 sec)
 
-    > **Note:**
+    > **注記：**
     >
-    > In production clusters, performing a backup with GC disabled might affect cluster performance. It is recommended that you back up data during off-peak hours, and set `RATE_LIMIT` to a proper value to avoid performance degradation.
+    > 本番クラスターでは、GC を無効にしてバックアップを実行すると、クラスターのパフォーマンスに影響を与える可能性があります。パフォーマンスの低下を避けるために、オフピーク時間にデータをバックアップし、 `RATE_LIMIT`を適切な値に設定することをお勧めします。
 
-2. Back up data. Execute the `BACKUP` statement in the upstream cluster to back up data:
+2.  バックアップデータ。アップストリーム クラスターで`BACKUP`ステートメントを実行して、データをバックアップします。
 
     ```sql
     BACKUP DATABASE * TO '`s3://backup?access-key=minio&secret-access-key=miniostorage&endpoint=http://10.0.1.10:6060&force-path-style=true`';
     ```
 
-    ```
-    +----------------------+----------+--------------------+---------------------+---------------------+
-    | Destination          | Size     | BackupTS           | Queue Time          | Execution Time      |
-    +----------------------+----------+--------------------+---------------------+---------------------+
-    | s3://backup          | 10315858 | 431434047157698561 | 2022-02-25 19:57:59 | 2022-02-25 19:57:59 |
-    +----------------------+----------+--------------------+---------------------+---------------------+
-    1 row in set (2.11 sec)
-    ```
+        +----------------------+----------+--------------------+---------------------+---------------------+
+        | Destination          | Size     | BackupTS           | Queue Time          | Execution Time      |
+        +----------------------+----------+--------------------+---------------------+---------------------+
+        | s3://backup          | 10315858 | 431434047157698561 | 2022-02-25 19:57:59 | 2022-02-25 19:57:59 |
+        +----------------------+----------+--------------------+---------------------+---------------------+
+        1 row in set (2.11 sec)
 
-    After the `BACKUP` statement is executed, TiDB returns metadata about the backup data. Pay attention to `BackupTS`, because data generated before it is backed up. In this document, `BackupTS` is used as **the start of incremental migration**.
+    `BACKUP`ステートメントが実行されると、TiDB はバックアップ データに関するメタデータを返します。 `BackupTS`バックアップ前にデータが生成されるため注意してください。このドキュメントでは、**増分移行の開始**として`BackupTS`が使用されます。
 
-3. Restore data. Execute the `RESTORE` statement in the secondary cluster to restore data:
+3.  データを復元します。セカンダリ クラスターで`RESTORE`ステートメントを実行してデータを復元します。
 
     ```sql
     RESTORE DATABASE * FROM '`s3://backup?access-key=minio&secret-access-key=miniostorage&endpoint=http://10.0.1.10:6060&force-path-style=true`';
     ```
 
-    ```
-    +----------------------+----------+----------+---------------------+---------------------+
-    | Destination          | Size     | BackupTS | Queue Time          | Execution Time      |
-    +----------------------+----------+----------+---------------------+---------------------+
-    | s3://backup          | 10315858 | 0        | 2022-02-25 20:03:59 | 2022-02-25 20:03:59 |
-    +----------------------+----------+----------+---------------------+---------------------+
-    1 row in set (41.85 sec)
-    ```
+        +----------------------+----------+----------+---------------------+---------------------+
+        | Destination          | Size     | BackupTS | Queue Time          | Execution Time      |
+        +----------------------+----------+----------+---------------------+---------------------+
+        | s3://backup          | 10315858 | 0        | 2022-02-25 20:03:59 | 2022-02-25 20:03:59 |
+        +----------------------+----------+----------+---------------------+---------------------+
+        1 row in set (41.85 sec)
 
-#### Replicate incremental data
+#### 増分データをレプリケートする {#replicate-incremental-data}
 
-After migrating data as described in the preceding section, you can replicate incremental data from the primary cluster to the secondary cluster starting from the **BackupTS**.
+前のセクションで説明したようにデータを移行した後、 **BackupTS**から開始して、プライマリ クラスターからセカンダリ クラスターに増分データをレプリケートできます。
 
-1. Create a changefeed.
+1.  チェンジフィードを作成します。
 
-    Create a changefeed configuration file `changefeed.toml`.
+    チェンジフィード構成ファイルを作成します`changefeed.toml` 。
 
     ```toml
     [consistent]
@@ -228,7 +220,7 @@ After migrating data as described in the preceding section, you can replicate in
     storage = "s3://redo?access-key=minio&secret-access-key=miniostorage&endpoint=http://10.0.1.10:6060&force-path-style=true"
     ```
 
-    In the primary cluster, run the following command to create a changefeed from the primary to the secondary cluster:
+    プライマリ クラスターで次のコマンドを実行して、プライマリ クラスターからセカンダリ クラスターへの変更フィードを作成します。
 
     ```shell
     tiup cdc cli changefeed create --server=http://10.1.1.9:8300 \
@@ -236,9 +228,9 @@ After migrating data as described in the preceding section, you can replicate in
     --changefeed-id="dr-primary-to-secondary" --start-ts="431434047157698561"
     ```
 
-    For more information about the changefeed configurations, see [TiCDC Changefeed Configurations](/ticdc/ticdc-changefeed-config.md).
+    変更フィード構成の詳細については、 [TiCDC Changefeed構成](/ticdc/ticdc-changefeed-config.md)を参照してください。
 
-2. To check whether a changefeed task runs properly, run the `changefeed query` command. The query result includes the task information and the task state. You can specify the `--simple` or `-s` argument to display only the basic replication state and the checkpoint information. If you do not specify this argument, the output includes detailed task configuration, replication state, and replication table information.
+2.  チェンジフィードタスクが適切に実行されるかどうかを確認するには、 `changefeed query`コマンドを実行します。クエリ結果には、タスク情報とタスクの状態が含まれます。 `--simple`または`-s`引数を指定すると、基本的なレプリケーション状態とチェックポイント情報のみを表示できます。この引数を指定しない場合、出力には詳細なタスク構成、レプリケーション状態、およびレプリケーション テーブル情報が含まれます。
 
     ```shell
     tiup cdc cli changefeed query -s --server=http://10.1.1.9:8300 --changefeed-id="dr-primary-to-secondary"
@@ -253,50 +245,49 @@ After migrating data as described in the preceding section, you can replicate in
     }
     ```
 
-3. Enable GC.
+3.  GCを有効にします。
 
-    TiCDC ensures that history data is not garbage collected before it is replicated. Therefore, after creating a changefeed from the primary cluster to the secondary cluster, you can execute the following statement to enable GC again.
+    TiCDC は、履歴データがレプリケートされる前にガベージ コレクションが行われないことを保証します。したがって、プライマリ クラスターからセカンダリ クラスターへの変更フィードを作成した後、次のステートメントを実行して GC を再度有効にすることができます。
 
-   Execute the following statement to enable GC:
+    次のステートメントを実行して GC を有効にします。
 
     ```sql
     SET GLOBAL tidb_gc_enable=TRUE;
     ```
 
-    To verify that the change takes effect, query the value of `tidb_gc_enable`:
+    変更が有効であることを確認するには、値`tidb_gc_enable`をクエリします。
 
     ```sql
     SELECT @@global.tidb_gc_enable;
     ```
 
-    If the value is `1`, it means that GC is enabled:
+    値が`1`の場合、GC が有効であることを意味します。
 
-    ```
-    +-------------------------+
-    | @@global.tidb_gc_enable |
-    +-------------------------+
-    |                       1 |
-    +-------------------------+
-    1 row in set (0.00 sec)
-    ```
+        +-------------------------+
+        | @@global.tidb_gc_enable |
+        +-------------------------+
+        |                       1 |
+        +-------------------------+
+        1 row in set (0.00 sec)
 
-### Monitor the primary and secondary clusters
+### プライマリクラスタとセカンダリクラスタを監視する {#monitor-the-primary-and-secondary-clusters}
 
-Currently, no DR dashboard is available in TiDB. You can check the status of TiDB primary and secondary clusters using the following dashboards and decide whether to perform a DR switchover:
+現在、TiDB では DR ダッシュボードを利用できません。次のダッシュボードを使用して TiDB プライマリ クラスターとセカンダリ クラスターのステータスを確認し、DR スイッチオーバーを実行するかどうかを決定できます。
 
-- [TiDB Key Metrics](/grafana-overview-dashboard.md)
-- [Changefeed Metrics](/ticdc/monitor-ticdc.md#changefeed)
+-   [TiDB の主要な指標](/grafana-overview-dashboard.md)
+-   [チェンジフィードメトリクス](/ticdc/monitor-ticdc.md#changefeed)
 
-### Perform DR switchover
+### DRスイッチオーバーを実行する {#perform-dr-switchover}
 
-This section describes how to perform a planned DR switchover, a DR switchover upon disasters, and the steps to rebuild a secondary cluster.
+このセクションでは、計画的な DR スイッチオーバー、災害時の DR スイッチオーバーを実行する方法、およびセカンダリ クラスターを再構築する手順について説明します。
 
-#### Planned primary and secondary switchover
+#### 計画されたプライマリおよびセカンダリのスイッチオーバー {#planned-primary-and-secondary-switchover}
 
-It is important to conduct regular DR drills for critical business systems to test their reliability. The following are the recommended steps for DR drills. Note that simulated business writes and usage of proxy services to access databases are not considered, and therefore the steps might differ from actual application scenarios. You can modify the configurations as required.
+重要なビジネス システムに対して定期的に DR 訓練を実施し、その信頼性をテストすることが重要です。 DR ドリルの推奨手順は次のとおりです。シミュレートされたビジネス書き込みとデータベースにアクセスするためのプロキシ サービスの使用は考慮されていないため、手順は実際のアプリケーション シナリオと異なる場合があることに注意してください。必要に応じて構成を変更できます。
 
-1. Stop business writes on the primary cluster.
-2. After there are no more writes, query the latest TSO (`Position`) of the TiDB cluster:
+1.  プライマリクラスターでのビジネス書き込みを停止します。
+
+2.  書き込みがなくなったら、TiDB クラスターの最新の TSO ( `Position` ) をクエリします。
 
     ```sql
     mysql> show master status;
@@ -308,7 +299,7 @@ It is important to conduct regular DR drills for critical business systems to te
     1 row in set (0.33 sec)
     ```
 
-3. Poll the changefeed `dr-primary-to-secondary` until it meets the condition `TSO >= Position`.
+3.  条件`TSO >= Position`を満たすまで変更フィード`dr-primary-to-secondary`をポーリングします。
 
     ```shell
     tiup cdc cli changefeed query -s --server=http://10.1.1.9:8300 --changefeed-id="dr-primary-to-secondary"
@@ -321,58 +312,61 @@ It is important to conduct regular DR drills for critical business systems to te
     }
     ```
 
-4. Stop the changefeed `dr-primary-to-secondary`. You can pause the changefeed by removing it:
+4.  チェンジフィードを停止します`dr-primary-to-secondary` 。変更フィードを削除すると、変更フィードを一時停止できます。
 
     ```shell
     tiup cdc cli changefeed remove --server=http://10.1.1.9:8300 --changefeed-id="dr-primary-to-secondary"
     ```
 
-5. Create a changefeed `dr-secondary-to-primary` without specifying the `start-ts` parameter. The changefeed starts replicating data from the current time.
-6. Modify the database access configurations of business applications. Restart the business applications so that they can access the secondary cluster.
-7. Check whether the business applications are running normally.
+5.  `start-ts`パラメータを指定せずに、チェンジフィード`dr-secondary-to-primary`を作成します。チェンジフィードは現在時刻からデータのレプリケーションを開始します。
 
-You can restore the previous primary and secondary cluster configurations by repeating the preceding steps.
+6.  ビジネスアプリケーションのデータベースアクセス構成を変更します。ビジネス アプリケーションを再起動して、セカンダリ クラスターにアクセスできるようにします。
 
-#### Primary and secondary switchover upon disasters
+7.  業務アプリケーションが正常に動作しているか確認してください。
 
-When a disaster occurs, for example, power outage in the region where the primary cluster locates, the replication between the primary and secondary clusters might be interrupted suddenly. As a result, the data in the secondary cluster is inconsistent with the primary cluster.
+前述の手順を繰り返すことで、以前のプライマリ クラスタ構成とセカンダリ クラスタ構成を復元できます。
 
-1. Restore the secondary cluster to a transaction-consistent state. Specifically, run the following command on any TiCDC node in region 2 to apply the redo log to the secondary cluster:
+#### 災害時の1次系と2次系の切り替え {#primary-and-secondary-switchover-upon-disasters}
+
+プライマリ クラスタが配置されているリージョンで停電などの災害が発生すると、プライマリ クラスタとセカンダリ クラスタ間のレプリケーションが突然中断される可能性があります。その結果、セカンダリ クラスタのデータはプライマリ クラスタと不整合になります。
+
+1.  セカンダリ クラスタをトランザクション整合性のある状態に復元します。具体的には、リージョン 2 の任意の TiCDC ノードで次のコマンドを実行して、REDO ログをセカンダリ クラスターに適用します。
 
     ```shell
     tiup cdc redo apply --storage "s3://redo?access-key=minio&secret-access-key=miniostorage&endpoint=http://10.0.1.10:6060&force-path-style=true" --tmp-dir /tmp/redo --sink-uri "mysql://{username}:{password}@10.1.1.4:4000"
     ```
 
-    The descriptions of parameters in this command are as follows:
+    このコマンドのパラメータの説明は次のとおりです。
 
-    - `--storage`: The path where redo logs are stored in Amazon S3
-    - `--tmp-dir`: The cache directory for downloading redo logs from Amazon S3
-    - `--sink-uri`: The address of the secondary cluster
+    -   `--storage` : Amazon S3 内の REDO ログが保存されるパス
+    -   `--tmp-dir` : Amazon S3 から REDO ログをダウンロードするためのキャッシュ ディレクトリ
+    -   `--sink-uri` : セカンダリクラスタのアドレス
 
-2. Modify the database access configurations of business applications. Restart the business applications so that they can access the secondary cluster.
-3. Check whether the business applications are running normally.
+2.  ビジネスアプリケーションのデータベースアクセス構成を変更します。ビジネス アプリケーションを再起動して、セカンダリ クラスターにアクセスできるようにします。
 
-#### Rebuild the primary and secondary clusters
+3.  業務アプリケーションが正常に動作しているか確認してください。
 
-After the disaster encountered by the primary cluster is resolved or the primary cluster cannot be recovered temporarily, the TiDB cluster is fragile because only the secondary cluster is in service as the primary cluster. To maintain the reliability of the system, you need to rebuild the DR cluster.
+#### プライマリ クラスタとセカンダリ クラスタを再構築する {#rebuild-the-primary-and-secondary-clusters}
 
-To rebuild the TiDB primary and secondary clusters, you can deploy a new cluster to form a new DR system. For details, see the following documents:
+プライマリ クラスターで発生した災害が解決されるか、プライマリ クラスターが一時的に回復できない後は、セカンダリ クラスターのみがプライマリ クラスターとして機能するため、TiDB クラスターは脆弱になります。システムの信頼性を維持するには、DR クラスターを再構築する必要があります。
 
-- [Set up primary and secondary clusters](#set-up-primary-and-secondary-clusters-based-on-ticdc)
-- [Replicate data from the primary cluster to the secondary cluster](#replicate-data-from-the-primary-cluster-to-the-secondary-cluster)
-- After the preceding steps are completed, to make the new primary cluster, see [Primary and secondary switchover](#planned-primary-and-secondary-switchover).
+TiDB プライマリ クラスタとセカンダリ クラスタを再構築するには、新しいクラスタをデプロイして新しい DR システムを形成します。詳細については、次のドキュメントを参照してください。
 
-> **Note:**
+-   [プライマリ クラスタとセカンダリ クラスタをセットアップする](#set-up-primary-and-secondary-clusters-based-on-ticdc)
+-   [プライマリ クラスタからセカンダリ クラスタにデータをレプリケートする](#replicate-data-from-the-primary-cluster-to-the-secondary-cluster)
+-   前述の手順が完了したら、新しいプライマリ クラスターを作成するには、 [プライマリとセカンダリの切り替え](#planned-primary-and-secondary-switchover)を参照してください。
+
+> **注記：**
 >
-> If data inconsistency between the primary and secondary clusters can be resolved, you can use the repaired cluster to rebuild the DR system instead of deploying a new cluster.
+> プライマリ クラスタとセカンダリ クラスタ間のデータの不整合を解決できる場合は、新しいクラスタを展開する代わりに、修復したクラスタを使用して DR システムを再構築できます。
 
-### Query business data on the secondary cluster
+### セカンダリ クラスター上のビジネス データをクエリする {#query-business-data-on-the-secondary-cluster}
 
-In a primary-secondary DR scenario, it is common that the secondary cluster is used as a read-only cluster to run some latency-insensitive queries. TiDB also provides this feature by its primary-secondary DR solution.
+プライマリ - セカンダリ DR シナリオでは、待機時間を気にしないクエリを実行するために、セカンダリ クラスターが読み取り専用クラスターとして使用されるのが一般的です。 TiDB は、プライマリ - セカンダリ DR ソリューションによってこの機能も提供します。
 
-When creating the changefeed, enable the Syncpoint feature in the configuration file. Then the changefeed periodically (at `sync-point-interval`) sets the consistent snapshot point that has been replicated to the secondary cluster by executing `SET GLOBAL tidb_external_ts = @@tidb_current_ts` on the secondary cluster.
+変更フィードを作成するときは、構成ファイルで同期ポイント機能を有効にします。次に、変更フィードは、セカンダリ クラスターで`SET GLOBAL tidb_external_ts = @@tidb_current_ts`実行することによって、セカンダリ クラスターにレプリケートされた一貫性のあるスナップショット ポイントを定期的に ( `sync-point-interval`で) 設定します。
 
-To query data from the secondary cluster, configure `SET GLOBAL|SESSION tidb_enable_external_ts_read = ON;` in the business application. Then you can get the data that is transactionally consistent with the primary cluster.
+セカンダリ クラスターからデータをクエリするには、ビジネス アプリケーションで`SET GLOBAL|SESSION tidb_enable_external_ts_read = ON;`を構成します。これにより、プライマリ クラスターとトランザクション的に一貫性のあるデータを取得できます。
 
 ```toml
 # Starting from v6.4.0, only the changefeed with the SYSTEM_VARIABLES_ADMIN or SUPER privilege can use the TiCDC Syncpoint feature.
@@ -397,20 +391,20 @@ flush-interval = 2000
 storage = "s3://redo?access-key=minio&secret-access-key=miniostorage&endpoint=http://10.0.1.10:6060&force-path-style=true"
 ```
 
-> **Note:**
+> **注記：**
 >
-> In a primary-secondary DR architecture, a secondary cluster can only replicate data from one changefeed. Otherwise, the data transaction integrity of the secondary cluster cannot be guaranteed.
+> プライマリ - セカンダリ DRアーキテクチャでは、セカンダリ クラスタは 1 つの変更フィードからのデータのみをレプリケートできます。そうしないと、セカンダリ クラスターのデータ トランザクションの整合性が保証されません。
 
-### Perform bidirectional replication between the primary and secondary clusters
+### プライマリクラスタとセカンダリクラスタの間で双方向レプリケーションを実行します。 {#perform-bidirectional-replication-between-the-primary-and-secondary-clusters}
 
-In this DR scenario, the TiDB clusters in two regions can act as each other's disaster recovery clusters: the business traffic is written to the corresponding TiDB cluster based on the region configuration, and the two TiDB clusters back up each other's data.
+この DR シナリオでは、2 つのリージョンの TiDB クラスターが互いの災害復旧クラスターとして機能できます。ビジネス トラフィックはリージョン構成に基づいて対応する TiDB クラスターに書き込まれ、2 つの TiDB クラスターは互いのデータをバックアップします。
 
 ![TiCDC bidirectional replication](/media/dr/bdr-ticdc.png)
 
-With the bidirectional replication feature, the TiDB clusters in two regions can replicate each other's data. This DR solution guarantees data security and reliability, and also ensures the write performance of the database. In a planned DR switchover, you do not need to stop the running changefeeds before starting a new changefeed, which simplifies the operation and maintenance.
+双方向レプリケーション機能を使用すると、2 つのリージョンにある TiDB クラスターが相互にデータをレプリケートできます。この DR ソリューションは、データのセキュリティと信頼性を保証し、データベースの書き込みパフォーマンスも保証します。計画的な DR スイッチオーバーでは、新しい変更フィードを開始する前に実行中の変更フィードを停止する必要がないため、運用とメンテナンスが簡素化されます。
 
-To build a bidirectional DR cluster, see [TiCDC bidirectional replication](/ticdc/ticdc-bidirectional-replication.md).
+双方向 DR クラスターを構築するには、 [TiCDC 双方向レプリケーション](/ticdc/ticdc-bidirectional-replication.md)を参照してください。
 
-## Troubleshooting
+## トラブルシューティング {#troubleshooting}
 
-If you encounter any problem in the preceding steps, you can first find the solution to the problem in [TiDB FAQs](/faq/faq-overview.md). If the problem is not resolved, you can [report a bug](/support.md).
+前の手順で問題が発生した場合は、まず[TiDB よくある質問](/faq/faq-overview.md)で問題の解決策を見つけることができます。問題が解決しない場合は、 [バグを報告](/support.md)を実行できます。

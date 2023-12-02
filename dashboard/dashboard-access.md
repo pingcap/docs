@@ -3,65 +3,65 @@ title: Access TiDB Dashboard
 summary: Learn how to access TiDB Dashboard.
 ---
 
-# Access TiDB Dashboard
+# TiDB ダッシュボードにアクセスする {#access-tidb-dashboard}
 
-To access TiDB Dashboard, visit <http://127.0.0.1:2379/dashboard> via your browser. Replace `127.0.0.1:2379` with the actual PD instance address and port.
+TiDB ダッシュボードにアクセスするには、ブラウザから[http://127.0.0.1:2379/ダッシュボード](http://127.0.0.1:2379/dashboard)にアクセスしてください。 `127.0.0.1:2379`を実際の PD インスタンスのアドレスとポートに置き換えます。
 
-> **Note:**
+> **注記：**
 >
-> TiDB v6.5.0 (and later) and TiDB Operator v1.4.0 (and later) support deploying TiDB Dashboard as an independent Pod on Kubernetes. Using TiDB Operator, you can access the IP address of this Pod to start TiDB Dashboard. For details, see [Deploy TiDB Dashboard independently in TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/dev/get-started#deploy-tidb-dashboard-independently).
+> TiDB v6.5.0 (以降) およびTiDB Operator v1.4.0 (以降) は、TiDB ダッシュボードを Kubernetes 上の独立したポッドとしてデプロイすることをサポートしています。 TiDB Operatorを使用すると、このポッドの IP アドレスにアクセスして TiDB ダッシュボードを起動できます。詳細は[TiDB Operatorで TiDB ダッシュボードを独立してデプロイ](https://docs.pingcap.com/tidb-in-kubernetes/dev/get-started#deploy-tidb-dashboard-independently)を参照してください。
 
-## Access TiDB Dashboard when multiple PD instances are deployed
+## 複数の PD インスタンスがデプロイされている場合に TiDB ダッシュボードにアクセスする {#access-tidb-dashboard-when-multiple-pd-instances-are-deployed}
 
-When multiple multiple PD instances are deployed in your cluster and you can directly access **every** PD instance and port, you can simply replace `127.0.0.1:2379` in the <http://127.0.0.1:2379/dashboard/> address with **any** PD instance address and port.
+クラスターに複数の PD インスタンスがデプロイされており、**すべての**PD インスタンスとポートに直接アクセスできる場合は、 [http://127.0.0.1:2379/ダッシュボード/](http://127.0.0.1:2379/dashboard/)アドレスの`127.0.0.1:2379`任意**の**PD インスタンスのアドレスとポートに置き換えるだけで済みます。
 
-> **Note:**
+> **注記：**
 >
-> If a firewall or reverse proxy is configured and you cannot directly access every PD instance, you might not be able to access TiDB Dashboard. Usually, this is because the firewall or reverse proxy is not correctly configured. See [Use TiDB Dashboard behind Reverse Proxy](/dashboard/dashboard-ops-reverse-proxy.md) and [Secure TiDB Dashboard](/dashboard/dashboard-ops-security.md) to learn how to correctly configure the firewall or reverse proxy when multiple PD instances are deployed.
+> ファイアウォールまたはリバース プロキシが構成されており、すべての PD インスタンスに直接アクセスできない場合は、TiDB ダッシュボードにアクセスできない可能性があります。通常、これはファイアウォールまたはリバース プロキシが正しく構成されていないことが原因です。複数の PD インスタンスがデプロイされている場合にファイアウォールまたはリバース プロキシを正しく構成する方法については、 [リバース プロキシの背後で TiDB ダッシュボードを使用する](/dashboard/dashboard-ops-reverse-proxy.md)と[セキュリティTiDB ダッシュボード](/dashboard/dashboard-ops-security.md)を参照してください。
 
-## Browser compatibility
+## ブラウザの互換性 {#browser-compatibility}
 
-You can use TiDB Dashboard in the following common desktop browsers of a relatively newer version:
+TiDB ダッシュボードは、次の比較的新しいバージョンの一般的なデスクトップ ブラウザーで使用できます。
 
-- Chrome >= 77
-- Firefox >= 68
-- Edge >= 17
+-   クロム &gt;= 77
+-   Firefox &gt;= 68
+-   エッジ &gt;= 17
 
-> **Note:**
+> **注記：**
 >
-> If you use the browsers above of earlier versions or other browsers to access TiDB Dashboard, some functions might not work properly.
+> 上記の以前のバージョンのブラウザまたは他のブラウザを使用して TiDB ダッシュボードにアクセスすると、一部の関数が正しく動作しない可能性があります。
 
-## Sign in
+## サインイン {#sign-in}
 
-After accessing TiDB Dashboard, you will be directed to the user login interface, as shown in the image below.
+TiDB ダッシュボードにアクセスすると、以下の図に示すように、ユーザー ログイン インターフェイスが表示されます。
 
-- You can sign in to TiDB Dashboard using the TiDB `root` account.
-- If you have created a [User-defined SQL User](/dashboard/dashboard-user.md), you can sign in using this account and the corresponding password.
+-   TiDB `root`アカウントを使用して TiDB ダッシュボードにサインインできます。
+-   [ユーザー定義の SQL ユーザー](/dashboard/dashboard-user.md)を作成した場合は、このアカウントと対応するパスワードを使用してサインインできます。
 
 ![Login interface](/media/dashboard/dashboard-access-login.png)
 
-If one of the following situations exists, the login might fail:
+次のいずれかの状況が存在する場合、ログインが失敗する可能性があります。
 
-- TiDB `root` user does not exist.
-- PD is not started or cannot be accessed.
-- TiDB is not started or cannot be accessed.
-- Wrong `root` password.
+-   TiDB `root`ユーザーは存在しません。
+-   PD が開始されていないか、アクセスできません。
+-   TiDB が起動していないか、アクセスできません。
+-   パスワードが`root`間違っています。
 
-Once you have signed in, the session remains valid within the next 24 hours. To learn how to sign out, refer to the [Logout](#logout) section.
+サインインすると、セッションは 24 時間以内は有効です。サインアウトする方法については、 [ログアウト](#logout)セクションを参照してください。
 
-## Switch language
+## 言語を切り替える {#switch-language}
 
-The following languages are supported in TiDB Dashboard:
+TiDB ダッシュボードでは次の言語がサポートされています。
 
-- English
-- Chinese (simplified)
+-   英語
+-   中国語（簡体字）
 
-In the **SQL User Sign In** page, you can click the **Switch Language** drop-down list to switch the interface language.
+**[SQL ユーザー サインイン]**ページで、 **[言語の**切り替え] ドロップダウン リストをクリックしてインターフェイス言語を切り替えることができます。
 
 ![Switch language](/media/dashboard/dashboard-access-switch-language.png)
 
-## Logout
+## ログアウト {#logout}
 
-Once you have logged in, click the login user name in the left navigation bar to switch to the user page. Click the **Logout** button on the user page to log out the current user. After logging out, you need to re-enter your username and password.
+ログインしたら、左側のナビゲーション バーでログイン ユーザー名をクリックしてユーザー ページに切り替えます。ユーザーページの**「ログアウト」**ボタンをクリックして、現在のユーザーをログアウトします。ログアウトした後、ユーザー名とパスワードを再入力する必要があります。
 
 ![Logout](/media/dashboard/dashboard-access-logout.png)

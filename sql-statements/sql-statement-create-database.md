@@ -3,11 +3,11 @@ title: CREATE DATABASE | TiDB SQL Statement Reference
 summary: An overview of the usage of CREATE DATABASE for the TiDB database.
 ---
 
-# CREATE DATABASE
+# データベースの作成 {#create-database}
 
-This statement creates a new database in TiDB. The MySQL terminology for 'database' most closely maps to a schema in the SQL standard.
+このステートメントは、TiDB に新しいデータベースを作成します。 MySQL の「データベース」という用語は、SQL 標準のスキーマに最もよく対応しています。
 
-## Synopsis
+## あらすじ {#synopsis}
 
 ```ebnf+diagram
 CreateDatabaseStmt ::=
@@ -34,9 +34,9 @@ PlacementPolicyOption ::=
 |   "PLACEMENT" "POLICY" (EqOpt | "SET") "DEFAULT"
 ```
 
-## Syntax
+## 構文 {#syntax}
 
-The `CREATE DATABASE` statement is used to create a database, and to specify the default properties of the database, such as the default character set and collation. `CREATE SCHEMA` is a synonym for `CREATE DATABASE`.
+`CREATE DATABASE`ステートメントは、データベースを作成し、デフォルトの文字セットや照合順序などのデータベースのデフォルトのプロパティを指定するために使用されます。 `CREATE SCHEMA`は`CREATE DATABASE`の同義語です。
 
 ```sql
 CREATE {DATABASE | SCHEMA} [IF NOT EXISTS] db_name
@@ -47,11 +47,11 @@ create_specification:
   | [DEFAULT] COLLATE [=] collation_name
 ```
 
-If you create an existing database and does not specify `IF NOT EXISTS`, an error is displayed.
+既存のデータベースを作成し、 `IF NOT EXISTS`を指定しない場合、エラーが表示されます。
 
-The `create_specification` option is used to specify the specific `CHARACTER SET` and `COLLATE` in the database. Currently, TiDB only supports some of the character sets and collations. For details, see [Character Set and Collation Support](/character-set-and-collation.md).
+`create_specification`オプションは、データベース内の特定の`CHARACTER SET`と`COLLATE`を指定するために使用されます。現在、TiDB は一部の文字セットと照合順序のみをサポートしています。詳細は[文字セットと照合順序のサポート](/character-set-and-collation.md)を参照してください。
 
-## Examples
+## 例 {#examples}
 
 ```sql
 mysql> CREATE DATABASE mynewdatabase;
@@ -71,13 +71,13 @@ mysql> SHOW TABLES;
 1 row in set (0.00 sec)
 ```
 
-## MySQL compatibility
+## MySQLの互換性 {#mysql-compatibility}
 
-The `CREATE DATABASE` statement in TiDB is fully compatible with MySQL. If you find any compatibility differences, [report a bug](https://docs.pingcap.com/tidb/stable/support).
+TiDB の`CREATE DATABASE`ステートメントは MySQL と完全な互換性があります。互換性の違いが見つかった場合は、 [バグを報告](https://docs.pingcap.com/tidb/stable/support) .
 
-## See also
+## こちらも参照 {#see-also}
 
-* [USE](/sql-statements/sql-statement-use.md)
-* [ALTER DATABASE](/sql-statements/sql-statement-alter-database.md)
-* [DROP DATABASE](/sql-statements/sql-statement-drop-database.md)
-* [SHOW DATABASES](/sql-statements/sql-statement-show-databases.md)
+-   [使用](/sql-statements/sql-statement-use.md)
+-   [データベースの変更](/sql-statements/sql-statement-alter-database.md)
+-   [データベースを削除](/sql-statements/sql-statement-drop-database.md)
+-   [データベースを表示する](/sql-statements/sql-statement-show-databases.md)

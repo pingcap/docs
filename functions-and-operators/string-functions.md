@@ -3,116 +3,117 @@ title: String Functions
 summary: Learn about the string functions in TiDB.
 ---
 
-# String Functions
+# 文字列関数 {#string-functions}
 
-TiDB supports most of the [string functions](https://dev.mysql.com/doc/refman/5.7/en/string-functions.html) available in MySQL 5.7, some of the [string functions](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html) available in MySQL 8.0, and some of the [functions](https://docs.oracle.com/en/database/oracle/oracle-database/21/sqlqr/SQL-Functions.html#GUID-93EC62F8-415D-4A7E-B050-5D5B2C127009) available in Oracle 21.
+TiDB は、 MySQL 5.7で使用可能な[文字列関数](https://dev.mysql.com/doc/refman/5.7/en/string-functions.html)のほとんど、MySQL 8.0 で使用可能な[文字列関数](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html)の一部、Oracle 21 で使用可能な[関数](https://docs.oracle.com/en/database/oracle/oracle-database/21/sqlqr/SQL-Functions.html#GUID-93EC62F8-415D-4A7E-B050-5D5B2C127009)の一部をサポートします。
 
 <CustomContent platform="tidb">
 
-For comparisons between functions and syntax of Oracle and TiDB, see [Comparisons between Functions and Syntax of Oracle and TiDB](/oracle-functions-to-tidb.md).
+Oracle と TiDB の関数と構文の比較については、 [OracleとTiDBの機能と構文の比較](/oracle-functions-to-tidb.md)を参照してください。
 
 </CustomContent>
 
-## Supported functions
+## サポートされている関数 {#supported-functions}
 
-| Name                                                                                                                                          | Description                                                                                                                               |
-|:----------------------------------------------------------------------------------------------------------------------------------------------|:------------------------------------------------------------------------------------------------------------------------------------------|
-| [`ASCII()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_ascii)                                                     | Return numeric value of left-most character                                                                                               |
-| [`BIN()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_bin)                                                         | Return a string containing binary representation of a number                                                                              |
-| [`BIT_LENGTH()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_bit-length)                                           | Return length of argument in bits                                                                                                         |
-| [`CHAR()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_char)                                                       | Return the character for each integer passed                                                                                              |
-| [`CHAR_LENGTH()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_char-length)                                         | Return number of characters in argument                                                                                                   |
-| [`CHARACTER_LENGTH()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_character-length)                               | Synonym for `CHAR_LENGTH()`                                                                                                               |
-| [`CONCAT()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_concat)                                                   | Return concatenated string                                                                                                                |
-| [`CONCAT_WS()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_concat-ws)                                             | Return concatenate with separator                                                                                                         |
-| [`ELT()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_elt)                                                         | Return string at index number                                                                                                             |
-| [`EXPORT_SET()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_export-set)                                           | Return a string such that for every bit set in the value bits, you get an on string and for every unset bit, you get an off string        |
-| [`FIELD()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_field)                                                     | Return the index (position) of the first argument in the subsequent arguments                                                             |
-| [`FIND_IN_SET()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_find-in-set)                                         | Return the index position of the first argument within the second argument                                                                |
-| [`FORMAT()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_format)                                                   | Return a number formatted to specified number of decimal places                                                                           |
-| [`FROM_BASE64()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_from-base64)                                         | Decode to a base-64 string and return result                                                                                              |
-| [`HEX()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_hex)                                                         | Return a hexadecimal representation of a decimal or string value                                                                          |
-| [`INSERT()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_insert)                                                   | Insert a substring at the specified position up to the specified number of characters                                                     |
-| [`INSTR()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_instr)                                                     | Return the index of the first occurrence of substring                                                                                     |
-| [`LCASE()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_lcase)                                                     | Synonym for `LOWER()`                                                                                                                     |
-| [`LEFT()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_left)                                                       | Return the leftmost number of characters as specified                                                                                     |
-| [`LENGTH()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_length)                                                   | Return the length of a string in bytes                                                                                                    |
-| [`LIKE`](https://dev.mysql.com/doc/refman/8.0/en/string-comparison-functions.html#operator_like)                                              | Simple pattern matching                                                                                                                   |
-| [`LOCATE()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_locate)                                                   | Return the position of the first occurrence of substring                                                                                  |
-| [`LOWER()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_lower)                                                     | Return the argument in lowercase                                                                                                          |
-| [`LPAD()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_lpad)                                                       | Return the string argument, left-padded with the specified string                                                                         |
-| [`LTRIM()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_ltrim)                                                     | Remove leading spaces                                                                                                                     |
-| [`MAKE_SET()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_make-set)                                               | Return a set of comma-separated strings that have the corresponding bit in bits set                                                       |
-| [`MID()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_mid)                                                         | Return a substring starting from the specified position                                                                                   |
-| [`NOT LIKE`](https://dev.mysql.com/doc/refman/8.0/en/string-comparison-functions.html#operator_not-like)                                      | Negation of simple pattern matching                                                                                                       |
-| [`NOT REGEXP`](https://dev.mysql.com/doc/refman/8.0/en/regexp.html#operator_not-regexp)                                                       | Negation of `REGEXP`                                                                                                                      |
-| [`OCT()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_oct)                                                         | Return a string containing octal representation of a number                                                                               |
-| [`OCTET_LENGTH()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_octet-length)                                       | Synonym for `LENGTH()`                                                                                                                    |
-| [`ORD()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_ord)                                                         | Return character code for leftmost character of the argument                                                                              |
-| [`POSITION()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_position)                                               | Synonym for `LOCATE()`                                                                                                                    |
-| [`QUOTE()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_quote)                                                     | Escape the argument for use in an SQL statement                                                                                           |
-| [`REGEXP`](https://dev.mysql.com/doc/refman/8.0/en/regexp.html#operator_regexp)                                                               | Pattern matching using regular expressions                                                                                                |
-| [`REGEXP_INSTR()`](https://dev.mysql.com/doc/refman/8.0/en/regexp.html#function_regexp-instr) | Return the starting index of the substring that matches the regular expression (Partly compatible with MySQL. For more details, see [Regular expression compatibility with MySQL](#regular-expression-compatibility-with-mysql)) |
-| [`REGEXP_LIKE()`](https://dev.mysql.com/doc/refman/8.0/en/regexp.html#function_regexp-like) | Whether the string matches the regular expression (Partly compatible with MySQL. For more details, see [Regular expression compatibility with MySQL](#regular-expression-compatibility-with-mysql)) |
-| [`REGEXP_REPLACE()`](https://dev.mysql.com/doc/refman/8.0/en/regexp.html#function_regexp-replace) | Replace substrings that match the regular expression (Partly compatible with MySQL. For more details, see [Regular expression compatibility with MySQL](#regular-expression-compatibility-with-mysql)) |
-| [`REGEXP_SUBSTR()`](https://dev.mysql.com/doc/refman/8.0/en/regexp.html#function_regexp-substr) | Return the substring that matches the regular expression (Partly compatible with MySQL. For more details, see [Regular expression compatibility with MySQL](#regular-expression-compatibility-with-mysql)) |
-| [`REPEAT()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_repeat)                                                   | Repeat a string the specified number of times                                                                                             |
-| [`REPLACE()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_replace)                                                 | Replace occurrences of a specified string                                                                                                 |
-| [`REVERSE()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_reverse)                                                 | Reverse the characters in a string                                                                                                        |
-| [`RIGHT()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_right)                                                     | Return the specified rightmost number of characters                                                                                       |
-| [`RLIKE`](https://dev.mysql.com/doc/refman/8.0/en/regexp.html#operator_regexp)                                                                | Synonym for `REGEXP`                                                                                                                      |
-| [`RPAD()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_rpad)                                                       | Append string the specified number of times                                                                                               |
-| [`RTRIM()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_rtrim)                                                     | Remove trailing spaces                                                                                                                    |
-| [`SPACE()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_space)                                                     | Return a string of the specified number of spaces                                                                                         |
-| [`STRCMP()`](https://dev.mysql.com/doc/refman/8.0/en/string-comparison-functions.html#function_strcmp)                                        | Compare two strings                                                                                                                       |
-| [`SUBSTR()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_substr)                                                   | Return the substring as specified                                                                                                         |
-| [`SUBSTRING()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_substring)                                             | Return the substring as specified                                                                                                         |
-| [`SUBSTRING_INDEX()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_substring-index)                                 | Return a substring from a string before the specified number of occurrences of the delimiter                                              |
-| [`TO_BASE64()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_to-base64)                                             | Return the argument converted to a base-64 string                                                                                         |
-| [`TRANSLATE()`](https://docs.oracle.com/en/database/oracle/oracle-database/21/sqlrf/TRANSLATE.html#GUID-80F85ACB-092C-4CC7-91F6-B3A585E3A690) | Replace all occurrences of characters by other characters in a string. It does not treat empty strings as `NULL` as Oracle does.              |
-| [`TRIM()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_trim)                                                       | Remove leading and trailing spaces                                                                                                        |
-| [`UCASE()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_ucase)                                                     | Synonym for `UPPER()`                                                                                                                     |
-| [`UNHEX()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_unhex)                                                     | Return a string containing hex representation of a number                                                                                 |
-| [`UPPER()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_upper)                                                     | Convert to uppercase                                                                                                                      |
-| [`WEIGHT_STRING()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_weight-string) | Return the weight string for the input string |
+| 名前                                                                                                                                            | 説明                                                                                                                                     |
+| :-------------------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------- |
+| [`ASCII()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_ascii)                                                     | 左端の文字の数値を返す                                                                                                                            |
+| [`BIN()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_bin)                                                         | 数値のバイナリ表現を含む文字列を返します。                                                                                                                  |
+| [`BIT_LENGTH()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_bit-length)                                           | 引数の長さをビット単位で返します                                                                                                                       |
+| [`CHAR()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_char)                                                       | 渡された各整数の文字を返します                                                                                                                        |
+| [`CHAR_LENGTH()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_char-length)                                         | 引数の文字数を返す                                                                                                                              |
+| [`CHARACTER_LENGTH()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_character-length)                               | `CHAR_LENGTH()`の同義語                                                                                                                    |
+| [`CONCAT()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_concat)                                                   | 連結された文字列を返す                                                                                                                            |
+| [`CONCAT_WS()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_concat-ws)                                             | セパレータを使用して連結して返す                                                                                                                       |
+| [`ELT()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_elt)                                                         | インデックス番号の文字列を返す                                                                                                                        |
+| [`EXPORT_SET()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_export-set)                                           | 値ビットに設定されているすべてのビットに対して on 文字列を取得し、未設定のすべてのビットに対して off 文字列を取得するような文字列を返します。                                                            |
+| [`FIELD()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_field)                                                     | 後続の引数の最初の引数のインデックス (位置) を返します。                                                                                                         |
+| [`FIND_IN_SET()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_find-in-set)                                         | 2 番目の引数内の最初の引数のインデックス位置を返します。                                                                                                          |
+| [`FORMAT()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_format)                                                   | 指定された小数点以下の桁数にフォーマットされた数値を返します                                                                                                         |
+| [`FROM_BASE64()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_from-base64)                                         | Base-64 文字列にデコードして結果を返す                                                                                                                |
+| [`HEX()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_hex)                                                         | 10 進数または文字列値の 16 進数表現を返します。                                                                                                            |
+| [`INSERT()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_insert)                                                   | 指定された位置に指定された文字数までの部分文字列を挿入します                                                                                                         |
+| [`INSTR()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_instr)                                                     | 最初に出現した部分文字列のインデックスを返します。                                                                                                              |
+| [`LCASE()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_lcase)                                                     | `LOWER()`の同義語                                                                                                                          |
+| [`LEFT()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_left)                                                       | 指定されたとおりに左端の文字数を返します                                                                                                                   |
+| [`LENGTH()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_length)                                                   | 文字列の長さをバイト単位で返します                                                                                                                      |
+| [`LIKE`](https://dev.mysql.com/doc/refman/8.0/en/string-comparison-functions.html#operator_like)                                              | 簡単なパターンマッチング                                                                                                                           |
+| [`LOCATE()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_locate)                                                   | 部分文字列が最初に出現する位置を返します。                                                                                                                  |
+| [`LOWER()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_lower)                                                     | 引数を小文字で返します                                                                                                                            |
+| [`LPAD()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_lpad)                                                       | 指定された文字列で左詰めされた文字列引数を返します。                                                                                                             |
+| [`LTRIM()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_ltrim)                                                     | 先頭のスペースを削除する                                                                                                                           |
+| [`MAKE_SET()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_make-set)                                               | ビットセット内の対応するビットを持つコンマ区切りの文字列のセットを返します。                                                                                                 |
+| [`MID()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_mid)                                                         | 指定された位置から始まる部分文字列を返します                                                                                                                 |
+| [`NOT LIKE`](https://dev.mysql.com/doc/refman/8.0/en/string-comparison-functions.html#operator_not-like)                                      | 単純なパターンマッチングの否定                                                                                                                        |
+| [`NOT REGEXP`](https://dev.mysql.com/doc/refman/8.0/en/regexp.html#operator_not-regexp)                                                       | `REGEXP`の否定                                                                                                                            |
+| [`OCT()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_oct)                                                         | 数値の 8 進表現を含む文字列を返します。                                                                                                                  |
+| [`OCTET_LENGTH()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_octet-length)                                       | `LENGTH()`の同義語                                                                                                                         |
+| [`ORD()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_ord)                                                         | 引数の左端の文字の文字コードを返す                                                                                                                      |
+| [`POSITION()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_position)                                               | `LOCATE()`の同義語                                                                                                                         |
+| [`QUOTE()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_quote)                                                     | SQL ステートメントで使用する引数をエスケープする                                                                                                             |
+| [`REGEXP`](https://dev.mysql.com/doc/refman/8.0/en/regexp.html#operator_regexp)                                                               | 正規表現を使用したパターン マッチング                                                                                                                    |
+| [`REGEXP_INSTR()`](https://dev.mysql.com/doc/refman/8.0/en/regexp.html#function_regexp-instr)                                                 | 正規表現に一致する部分文字列の開始インデックスを返します (MySQL と部分的に互換性があります。詳細については、 [MySQL との正規表現の互換性](#regular-expression-compatibility-with-mysql)を参照してください)。 |
+| [`REGEXP_LIKE()`](https://dev.mysql.com/doc/refman/8.0/en/regexp.html#function_regexp-like)                                                   | 文字列が正規表現と一致するかどうか (MySQL と部分的に互換性があります。詳細については[MySQL との正規表現の互換性](#regular-expression-compatibility-with-mysql)を参照してください)               |
+| [`REGEXP_REPLACE()`](https://dev.mysql.com/doc/refman/8.0/en/regexp.html#function_regexp-replace)                                             | 正規表現に一致する部分文字列を置換します (MySQL と部分的に互換性があります。詳細については、 [MySQL との正規表現の互換性](#regular-expression-compatibility-with-mysql)を参照してください)。         |
+| [`REGEXP_SUBSTR()`](https://dev.mysql.com/doc/refman/8.0/en/regexp.html#function_regexp-substr)                                               | 正規表現に一致する部分文字列を返します (MySQL と部分的に互換性があります。詳細については、 [MySQL との正規表現の互換性](#regular-expression-compatibility-with-mysql)を参照してください)。          |
+| [`REPEAT()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_repeat)                                                   | 指定された回数だけ文字列を繰り返します                                                                                                                    |
+| [`REPLACE()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_replace)                                                 | 指定された文字列の出現箇所を置換します                                                                                                                    |
+| [`REVERSE()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_reverse)                                                 | 文字列内の文字を反転する                                                                                                                           |
+| [`RIGHT()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_right)                                                     | 指定された右端の文字数を返します                                                                                                                       |
+| [`RLIKE`](https://dev.mysql.com/doc/refman/8.0/en/regexp.html#operator_regexp)                                                                | `REGEXP`の同義語                                                                                                                           |
+| [`RPAD()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_rpad)                                                       | 指定された回数だけ文字列を追加します                                                                                                                     |
+| [`RTRIM()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_rtrim)                                                     | 末尾のスペースを削除する                                                                                                                           |
+| [`SPACE()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_space)                                                     | 指定された数のスペースを含む文字列を返します。                                                                                                                |
+| [`STRCMP()`](https://dev.mysql.com/doc/refman/8.0/en/string-comparison-functions.html#function_strcmp)                                        | 2 つの文字列を比較する                                                                                                                           |
+| [`SUBSTR()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_substr)                                                   | 指定された部分文字列を返します                                                                                                                        |
+| [`SUBSTRING()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_substring)                                             | 指定された部分文字列を返します                                                                                                                        |
+| [`SUBSTRING_INDEX()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_substring-index)                                 | 区切り文字が指定された回数出現する前の文字列から部分文字列を返します。                                                                                                    |
+| [`TO_BASE64()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_to-base64)                                             | Base-64 文字列に変換された引数を返します                                                                                                               |
+| [`TRANSLATE()`](https://docs.oracle.com/en/database/oracle/oracle-database/21/sqlrf/TRANSLATE.html#GUID-80F85ACB-092C-4CC7-91F6-B3A585E3A690) | 文字列内のすべての文字を他の文字に置き換えます。 Oracle のように空の文字列を`NULL`として扱いません。                                                                              |
+| [`TRIM()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_trim)                                                       | 先頭と末尾のスペースを削除する                                                                                                                        |
+| [`UCASE()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_ucase)                                                     | `UPPER()`の同義語                                                                                                                          |
+| [`UNHEX()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_unhex)                                                     | 数値の 16 進表現を含む文字列を返します。                                                                                                                 |
+| [`UPPER()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_upper)                                                     | 大文字に変換する                                                                                                                               |
+| [`WEIGHT_STRING()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_weight-string)                                     | 入力文字列の重み文字列を返します。                                                                                                                      |
 
-## Unsupported functions
+## サポートされていない関数 {#unsupported-functions}
 
-* `LOAD_FILE()`
-* `MATCH()`
-* `SOUNDEX()`
+-   `LOAD_FILE()`
+-   `MATCH()`
+-   `SOUNDEX()`
 
-## Regular expression compatibility with MySQL
+## MySQL との正規表現の互換性 {#regular-expression-compatibility-with-mysql}
 
-The following sections describe the regular expression compatibility with MySQL.
+次のセクションでは、MySQL との正規表現の互換性について説明します。
 
-### Syntax compatibility
+### 構文の互換性 {#syntax-compatibility}
 
-MySQL implements regular expression using International Components for Unicode (ICU), and TiDB uses RE2. To learn the syntax differences between the two libraries, you can refer to the [ICU documentation](https://unicode-org.github.io/icu/userguide/) and [RE2 Syntax](https://github.com/google/re2/wiki/Syntax).
+MySQL は International Components for Unicode (ICU) を使用して正規表現を実装し、TiDB は RE2 を使用します。 2 つのライブラリの構文の違いについては、 [ICUの文書](https://unicode-org.github.io/icu/userguide/)と[RE2 の構文](https://github.com/google/re2/wiki/Syntax)を参照してください。
 
-### `match_type` compatibility
+### <code>match_type</code>互換性 {#code-match-type-code-compatibility}
 
-The value options of `match_type` between TiDB and MySQL are:
+TiDB と MySQL の間の`match_type`の値オプションは次のとおりです。
 
-- Value options in TiDB are `"c"`, `"i"`, `"m"`, and `"s"`, and value options in MySQL are `"c"`, `"i"`, `"m"`, `"n"`, and `"u"`.
-- The `"s"` in TiDB corresponds to `"n"` in MySQL. When `"s"` is set in TiDB, the `.` character also matches line terminators (`\n`).
+-   TiDB の値のオプションは`"c"` 、 `"i"` 、 `"m"` 、および`"s"`であり、MySQL の値のオプションは`"c"` 、 `"i"` 、 `"m"` 、 `"n"` 、および`"u"`です。
 
-    For example, the `SELECT REGEXP_LIKE(a, b, "n") FROM t1` in MySQL is the same as the `SELECT REGEXP_LIKE(a, b, "s") FROM t1` in TiDB.
+-   TiDB の`"s"` MySQL の`"n"`に対応します。 TiDB で`"s"`が設定されている場合、 `.`文字は行終了文字 ( `\n` ) にも一致します。
 
-- TiDB does not support `"u"`, which means Unix-only line endings in MySQL.
+    たとえば、MySQL の`SELECT REGEXP_LIKE(a, b, "n") FROM t1` TiDB の`SELECT REGEXP_LIKE(a, b, "s") FROM t1`と同じです。
 
-### Data type compatibility
+-   TiDB は、MySQL での Unix 専用の行末を意味する`"u"`サポートしていません。
 
-The difference between TiDB and MySQL support for the binary string type:
+### データ型の互換性 {#data-type-compatibility}
 
-- MySQL does not support binary strings in regular expression functions since 8.0.22. For more details, refer to [MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/regexp.html). But in practice, regular functions can work in MySQL when all parameters or return types are binary strings. Otherwise, an error will be reported.
-- Currently, TiDB prohibits using binary strings and an error will be reported under any circumstances.
+TiDB と MySQL のバイナリ文字列タイプのサポートの違いは次のとおりです。
 
-### Other compatibility
+-   MySQL は 8.0.22 以降、正規表現関数でバイナリ文字列をサポートしません。詳細については、 [MySQL ドキュメント](https://dev.mysql.com/doc/refman/8.0/en/regexp.html)を参照してください。ただし、実際には、すべてのパラメータまたは戻り値の型がバイナリ文字列の場合、通常の関数はMySQL で動作します。それ以外の場合は、エラーが報告されます。
+-   現在、TiDB ではバイナリ文字列の使用が禁止されており、いかなる状況でもエラーが報告されます。
 
-The difference between TiDB and MySQL support in replacing empty strings:
+### その他の互換性 {#other-compatibility}
 
-The following takes `REGEXP_REPLACE("", "^$", "123")` as an example:
+空の文字列の置換における TiDB サポートと MySQL サポートの違い:
 
-- MySQL does not replace the empty string and returns `""` as the result.
-- TiDB replaces the empty string and returns `"123"` as the result.
+以下では`REGEXP_REPLACE("", "^$", "123")`を例にします。
+
+-   MySQL は空の文字列を置き換えず、結果として`""`を返します。
+-   TiDB は空の文字列を置き換え、結果として`"123"`を返します。

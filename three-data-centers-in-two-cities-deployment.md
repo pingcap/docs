@@ -3,65 +3,65 @@ title: Three Availability Zones in Two Regions Deployment
 summary: Learn the deployment solution to three availability zones in two regions.
 ---
 
-# Three Availability Zones in Two Regions Deployment
+# 2 つのリージョンに 3 つのアベイラビリティーゾーンを展開 {#three-availability-zones-in-two-regions-deployment}
 
-This document introduces the architecture and configuration of the three availability zones (AZs) in two regions deployment.
+このドキュメントでは、2 つのリージョン展開における 3 つのアベイラビリティ ゾーン (AZ) のアーキテクチャと構成を紹介します。
 
-The term "region" in this document refers to a geographic area, while the capitalized "Region" refers to a basic unit of data storage in TiKV. "AZ" refers to an isolated location within a region, and each region has multiple AZs. The solution described in this document also applies to the scenario where multiple data centers are located in a single city.
+このドキュメントの「リージョン」という用語は地理的エリアを指しますが、大文字の「リージョン」は TiKV のデータstorageの基本単位を指します。 「AZ」はリージョン内の孤立した場所を指し、各リージョンには複数の AZ があります。このドキュメントで説明されているソリューションは、複数のデータ センターが 1 つの都市にあるシナリオにも当てはまります。
 
-## Overview
+## 概要 {#overview}
 
-The architecture of three AZs in two regions is a highly available and disaster tolerant deployment solution that provides a production data AZ, a disaster recovery AZ in the same region, and a disaster recovery AZ in another region. In this mode, the three AZs in two regions are interconnected. If one AZ fails or suffers from a disaster, other AZs can still operate well and take over the key applications or all applications. Compared with the multi-AZ in one region deployment, this solution has the advantage of cross-region high availability and can survive region-level natural disasters.
+2 つのリージョンにある 3 つの AZ のアーキテクチャは、本番データ AZ、同じリージョンにディザスタ リカバリ AZ、および別のリージョンにディザスタ リカバリ AZ を提供する、可用性が高く、災害に強い展開ソリューションです。このモードでは、2 つのリージョンの 3 つの AZ が相互接続されます。 1 つの AZ に障害が発生したり災害が発生したりしても、他の AZ は引き続き正常に動作し、主要なアプリケーションまたはすべてのアプリケーションを引き継ぐことができます。 1 つのリージョンでのマルチ AZ 展開と比較して、このソリューションにはリージョン間の高可用性という利点があり、リージョン レベルの自然災害にも耐えることができます。
 
-The distributed database TiDB natively supports the three-AZ-in-two-region architecture by using the Raft algorithm, and guarantees the consistency and high availability of data within a database cluster. Because the network latency across AZs in the same region is relatively low, the application traffic can be dispatched to two AZs in the same region, and the traffic load can be shared by these two AZs by controlling the distribution of TiKV Region leaders and PD leaders.
+分散データベース TiDB は、 Raftアルゴリズムを使用して 2 リージョン内 3 AZアーキテクチャをネイティブにサポートし、データベース クラスター内のデータの一貫性と高可用性を保証します。同じリージョン内の AZ 間のネットワークレイテンシーは比較的低いため、アプリケーション トラフィックを同じリージョン内の 2 つの AZ にディスパッチでき、TiKVリージョンリーダーと PD リーダーの分散を制御することでこれら 2 つの AZ でトラフィック負荷を共有できます。 。
 
-## Deployment architecture
+## 導入アーキテクチャ {#deployment-architecture}
 
-This section takes the example of Seattle and San Francisco to explain the deployment mode of three AZs in two regions for the distributed database of TiDB.
+このセクションでは、シアトルとサンフランシスコを例に、TiDB の分散データベースの 2 つのリージョンに 3 つの AZ を配置するモードについて説明します。
 
-In this example, two AZs (AZ1 and AZ2) are located in Seattle and another AZ (AZ3) is located in San Francisco. The network latency between AZ1 and AZ2 is lower than 3 milliseconds. The network latency between AZ3 and AZ1/AZ2 in Seattle is about 20 milliseconds (ISP dedicated network is used).
+この例では、2 つの AZ (AZ1 および AZ2) がシアトルにあり、もう 1 つの AZ (AZ3) がサンフランシスコにあります。 AZ1 と AZ2 の間のネットワークレイテンシーは3 ミリ秒未満です。シアトルの AZ3 と AZ1/AZ2 間のネットワークレイテンシーは約 20 ミリ秒です (ISP 専用ネットワークを使用)。
 
-The architecture of the cluster deployment is as follows:
+クラスター展開のアーキテクチャは次のとおりです。
 
-- The TiDB cluster is deployed to three AZs in two regions: AZ1 in Seattle, AZ2 in Seattle, and AZ3 in San Francisco.
-- The cluster has five replicas, two in AZ1, two in AZ2, and one in AZ3. For the TiKV component, each rack has a label, which means that each rack has a replica.
-- The Raft protocol is adopted to ensure consistency and high availability of data, which is transparent to users.
+-   TiDB クラスターは、シアトルの AZ1、シアトルの AZ2、サンフランシスコの AZ3 の 2 つのリージョンの 3 つの AZ にデプロイされています。
+-   クラスターには 5 つのレプリカがあり、AZ1 に 2 つ、AZ2 に 2 つ、AZ3 に 1 つあります。 TiKVコンポーネントの場合、各ラックにはラベルが付いています。これは、各ラックにレプリカがあることを意味します。
+-   Raftプロトコルは、ユーザーにとって透過的なデータの一貫性と高可用性を確保するために採用されています。
 
 ![3-AZ-in-2-region architecture](/media/three-data-centers-in-two-cities-deployment-01.png)
 
-This architecture is highly available. The distribution of Region leaders is restricted to the two AZs (AZ1 and AZ2) that are in the same region (Seattle). Compared with the three-AZ solution in which the distribution of Region leaders is not restricted, this architecture has the following advantages and disadvantages:
+このアーキテクチャは可用性が高くなります。リージョンリーダーの分布は、同じリージョン (シアトル) 内の 2 つの AZ (AZ1 および AZ2) に制限されます。リージョンリーダーの分布が制限されない 3 AZ ソリューションと比較して、このアーキテクチャには次のような利点と欠点があります。
 
-- **Advantages**
+-   **利点**
 
-    - Region leaders are in AZs of the same region with low latency, so the write is faster.
-    - The two AZs can provide services at the same time, so the resource usage rate is higher.
-    - If one AZ fails, services are still available and data safety is ensured.
+    -   リージョンリーダーは同じリージョンの AZ にあり、レイテンシーが低いため、書き込みが高速になります。
+    -   2 つの AZ は同時にサービスを提供できるため、リソース使用率が高くなります。
+    -   1 つの AZ に障害が発生した場合でも、サービスは引き続き利用可能であり、データの安全性が確保されます。
 
-- **Disadvantages**
+-   **短所**
 
-    - Because the data consistency is achieved by the Raft algorithm, when two AZs in the same region fail at the same time, only one surviving replica remains in the disaster recovery AZ in another region (San Francisco). This cannot meet the requirement of the Raft algorithm that most replicas survive. As a result, the cluster can be temporarily unavailable. Maintenance staff needs to recover the cluster from the one surviving replica and a small amount of hot data that has not been replicated will be lost. But this case is a rare occurrence.
-    - Because the ISP dedicated network is used, the network infrastructure of this architecture has a high cost.
-    - Five replicas are configured in three AZs in two regions, data redundancy increases, which brings a higher storage cost.
+    -   データの整合性はRaftアルゴリズムによって実現されるため、同じリージョン内の 2 つの AZ に同時に障害が発生した場合、別のリージョン (サンフランシスコ) のディザスター リカバリー AZ には 1 つのレプリカのみが残ります。これでは、ほとんどのレプリカが存続するというRaftアルゴリズムの要件を満たすことができません。その結果、クラスターが一時的に使用できなくなる可能性があります。メンテナンス スタッフは、残っている 1 つのレプリカからクラスターを回復する必要がありますが、レプリケートされていない少量のホット データが失われます。しかし、このケースはまれな出来事です。
+    -   このアーキテクチャのネットワーク インフラストラクチャは、ISP の専用ネットワークを使用するため、コストが高くなります。
+    -   2 つのリージョンの 3 つの AZ に 5 つのレプリカが構成されているため、データの冗長性が向上し、storageコストが増加します。
 
-### Deployment details
+### 導入の詳細 {#deployment-details}
 
-The configuration of the three AZs in two regions (Seattle and San Francisco) deployment plan is illustrated as follows:
+2 つのリージョン (シアトルとサンフランシスコ) の展開計画における 3 つの AZ の構成を以下に示します。
 
 ![3-AZ-2-region](/media/three-data-centers-in-two-cities-deployment-02.png)
 
-From the preceding illustration, you can see that Seattle has two AZs: AZ1 and AZ2. AZ1 has three sets of racks: rac1, rac2, and rac3. AZ2 has two racks: rac4 and rac5. The AZ3 in San Francisco has the rac6 rack.
+上の図から、シアトルには AZ1 と AZ2 の 2 つの AZ があることがわかります。 AZ1 には、rac1、rac2、rac3 の 3 セットのラックがあります。 AZ2 には rac4 と rac5 の 2 つのラックがあります。サンフランシスコの AZ3 には rac6 ラックが搭載されています。
 
-In the rac1 of AZ1, one server is deployed with TiDB and PD services, and the other two servers are deployed with TiKV services. Each TiKV server is deployed with two TiKV instances (tikv-server). This is similar to rac2, rac4, rac5, and rac6.
+AZ1 の rac1 では、1 つのサーバーがTiDB および PD サービスを使用してデプロイされ、他の 2 つのサーバーが TiKV サービスを使用してデプロイされます。各 TiKVサーバーは2 つの TiKV インスタンス (tikv-server) でデプロイされます。これは、rac2、rac4、rac5、および rac6 と同様です。
 
-The TiDB server, the control machine, and the monitoring server are on rac3. The TiDB server is deployed for regular maintenance and backup. Prometheus, Grafana, and the restore tools are deployed on the control machine and monitoring machine.
+TiDBサーバー、制御マシン、および監視サーバーはrac3 上にあります。 TiDBサーバーは、定期的なメンテナンスとバックアップのために導入されます。 Prometheus、Grafana、および復元ツールは、制御マシンと監視マシンにデプロイされます。
 
-Another backup server can be added to deploy Drainer. Drainer saves binlog data to a specified location by outputting files, to achieve incremental backup.
+別のバックアップサーバーを追加して、 Drainerを展開できます。 Drainer は、増分バックアップを実現するために、ファイルを出力することによってbinlogデータを指定された場所に保存します。
 
-## Configuration
+## コンフィグレーション {#configuration}
 
-### Example
+### 例 {#example}
 
-See the following `tiup topology.yaml` yaml file for example:
+例として、次の`tiup topology.yaml` yaml ファイルを参照してください。
 
 ```yaml
 # # Global variables are applied to all deployments and used as the default value of
@@ -126,13 +126,13 @@ alertmanager_servers:
   - host: 10.63.10.60
 ```
 
-### Labels design
+### ラベルデザイン {#labels-design}
 
-In the deployment of three AZs in two regions, the label design requires taking availability and disaster recovery into account. It is recommended that you define the four levels (`az`, `replication zone`, `rack`, and `host`) based on the physical structure of the deployment.
+2 つのリージョンに 3 つの AZ を展開する場合、ラベルの設計では可用性と災害復旧を考慮する必要があります。デプロイメントの物理構造に基づいて 4 つのレベル ( `az` 、 `replication zone` 、 `rack` 、および`host` ) を定義することをお勧めします。
 
 ![Label logical definition](/media/three-data-centers-in-two-cities-deployment-03.png)
 
-In the PD configuration, add level information of TiKV labels:
+PD 構成で、TiKV ラベルのレベル情報を追加します。
 
 ```yaml
 server_configs:
@@ -140,7 +140,7 @@ server_configs:
     replication.location-labels: ["az","replication zone","rack","host"]
 ```
 
-The configuration of `tikv_servers` is based on the label information of the real physical deployment location of TiKV, which makes it easier for PD to perform global management and scheduling.
+`tikv_servers`の構成は、TiKV の実際の物理展開場所のラベル情報に基づいており、PD によるグローバルな管理とスケジューリングの実行が容易になります。
 
 ```yaml
 tikv_servers:
@@ -161,40 +161,40 @@ tikv_servers:
       server.labels: { az: "3", replication zone: "5", rack: "5", host: "34" }
 ```
 
-### Optimize parameter configuration
+### パラメータ設定の最適化 {#optimize-parameter-configuration}
 
-In the deployment of three AZs in two regions, to optimize performance, you need to not only configure regular parameters, but also adjust component parameters.
+2 つのリージョンに 3 つの AZ を展開する場合、パフォーマンスを最適化するには、通常のパラメーターを構成するだけでなく、コンポーネントパラメーターも調整する必要があります。
 
-- Enable gRPC message compression in TiKV. Because data of the cluster is transmitted in the network, you can enable the gRPC message compression to lower the network traffic.
+-   TiKV で gRPC メッセージ圧縮を有効にします。クラスターのデータはネットワーク内で送信されるため、gRPC メッセージ圧縮を有効にしてネットワーク トラフィックを軽減できます。
 
     ```yaml
     server.grpc-compression-type: gzip
     ```
 
-- Optimize the network configuration of the TiKV node in another region (San Francisco). Modify the following TiKV parameters for AZ3 in San Francisco and try to prevent the replica in this TiKV node from participating in the Raft election.
+-   別のリージョン (サンフランシスコ) の TiKV ノードのネットワーク構成を最適化します。サンフランシスコの AZ3 の次の TiKV パラメーターを変更し、この TiKV ノードのレプリカがRaft選挙に参加しないようにします。
 
     ```yaml
     raftstore.raft-min-election-timeout-ticks: 1000
     raftstore.raft-max-election-timeout-ticks: 1200
     ```
 
-- Configure scheduling. After the cluster is enabled, use the `tiup ctl:v<CLUSTER_VERSION> pd` tool to modify the scheduling policy. Modify the number of TiKV Raft replicas. Configure this number as planned. In this example, the number of replicas is five.
+-   スケジュールを設定します。クラスターが有効になったら、 `tiup ctl:v<CLUSTER_VERSION> pd`ツールを使用してスケジューリング ポリシーを変更します。 TiKV Raftレプリカの数を変更します。この番号を計画どおりに構成します。この例では、レプリカの数は 5 です。
 
     ```bash
     config set max-replicas 5
     ```
 
-- Forbid scheduling the Raft leader to AZ3. Scheduling the Raft leader to another region (AZ3) causes unnecessary network overhead between AZ1/AZ2 in Seattle and AZ3 in San Francisco. The network bandwidth and latency also affect the performance of the TiDB cluster.
+-   Raftリーダーを AZ3 にスケジュールすることを禁止します。 Raftリーダーを別のリージョン (AZ3) にスケジュールすると、シアトルの AZ1/AZ2 とサンフランシスコの AZ3 の間で不要なネットワーク オーバーヘッドが発生します。ネットワーク帯域幅とレイテンシーも、TiDB クラスターのパフォーマンスに影響します。
 
     ```bash
     config set label-property reject-leader dc 3
     ```
 
-   > **Note:**
-   >
-   > Starting from TiDB v5.2, the `label-property` configuration is not supported by default. To set the replica policy, use the [placement rules](/configure-placement-rules.md).
+    > **注記：**
+    >
+    > TiDB v5.2 以降、 `label-property`構成はデフォルトではサポートされません。レプリカ ポリシーを設定するには、 [配置ルール](/configure-placement-rules.md)を使用します。
 
-- Configure the priority of PD. To avoid the situation where the PD leader is in another region (AZ3), you can increase the priority of local PD (in Seattle) and decrease the priority of PD in another region (San Francisco). The larger the number, the higher the priority.
+-   PDの優先度を設定します。 PD リーダーが別のリージョン (AZ3) にある状況を回避するには、ローカル PD (シアトル) の優先順位を上げ、別のリージョン (サンフランシスコ) の PD の優先順位を下げることができます。数値が大きいほど優先度が高くなります。
 
     ```bash
     member leader_priority PD-10 5

@@ -3,68 +3,58 @@ title: Pause a Data Migration Task
 summary: Learn how to pause a data migration task in TiDB Data Migration.
 ---
 
-# Pause a Data Migration Task
+# データ移行タスクを一時停止する {#pause-a-data-migration-task}
 
-You can use the `pause-task` command to pause a data migration task.
+`pause-task`コマンドを使用すると、データ移行タスクを一時停止できます。
 
-`pause-task` differs from `stop-task` in that:
+`pause-task`次の点で`stop-task`と異なります。
 
-- `pause-task` only pauses a migration task. You can query the status information (retained in the memory) of the task using `query-status`. `stop-task` terminates a migration task and removes all information related to this task from the memory. This means you cannot use `query-status` to query the status information. `dm_meta` like "checkpoint" and data that have been migrated to the downstream are not removed.
-- If `pause-task` is executed to pause the migration task, you cannot start a new task with the same name, neither can you get the relay log of the paused task removed, since this task does exist. If `stop-task` is executed to stop a task, you can start a new task with the same name, and you can get the relay log of the stopped task removed, since this task no longer exists.
-- `pause-task` is usually used to pause a task for troubleshooting, while `stop-task` is to permanently remove a migration task, or to co-work with `start-task` to update the configuration information.
-
-{{< copyable "" >}}
+-   `pause-task`移行タスクのみを一時停止します。 `query-status`を使用して、タスクのステータス情報 (メモリに保持されている) を照会できます。 `stop-task`移行タスクを終了し、このタスクに関連するすべての情報をメモリから削除します。これは、ステータス情報のクエリに`query-status`を使用できないことを意味します。 `dm_meta` 「チェックポイント」など、ダウンストリームに移行されたデータは削除されません。
+-   `pause-task`を実行して移行タスクを一時停止した場合、このタスクは存在するため、同じ名前で新しいタスクを開始することはできません。また、一時停止したタスクのリレー ログを削除することもできません。 `stop-task`を実行してタスクを停止すると、同じ名前で新しいタスクを開始でき、停止したタスクのリレー ログは削除されます。このタスクは存在しなくなったためです。
+-   通常`pause-task`トラブルシューティングのためにタスクを一時停止するために使用され、 `stop-task`は移行タスクを永久に削除するか、 `start-task`と連携して構成情報を更新するために使用されます。
 
 ```bash
 help pause-task
 ```
 
-```
-pause a specified running task
+    pause a specified running task
 
-Usage:
- dmctl pause-task [-s source ...] <task-name | task-file> [flags]
+    Usage:
+     dmctl pause-task [-s source ...] <task-name | task-file> [flags]
 
-Flags:
- -h, --help   help for pause-task
+    Flags:
+     -h, --help   help for pause-task
 
-Global Flags:
- -s, --source strings   MySQL Source ID
-```
+    Global Flags:
+     -s, --source strings   MySQL Source ID
 
-## Usage example
-
-{{< copyable "" >}}
+## 使用例 {#usage-example}
 
 ```bash
 pause-task [-s "mysql-replica-01"] task-name
 ```
 
-## Flags description
+## フラグの説明 {#flags-description}
 
-- `-s`: (Optional) Specifies the MySQL source where you want to pause the subtasks of the migration task. If it is set, this command pauses only the subtasks on the specified MySQL source.
-- `task-name| task-file`: (Required) Specifies the task name or task file path.
+-   `-s` : (オプション) 移行タスクのサブタスクを一時停止する MySQL ソースを指定します。設定されている場合、このコマンドは、指定された MySQL ソースのサブタスクのみを一時停止します。
+-   `task-name| task-file` : (必須) タスク名またはタスク ファイルのパスを指定します。
 
-## Returned results
-
-{{< copyable "" >}}
+## 返された結果 {#returned-results}
 
 ```bash
 pause-task test
 ```
 
-```
-{
-    "op": "Pause",
-    "result": true,
-    "msg": "",
-    "sources": [
-        {
-            "result": true,
-            "msg": "",
-            "source": "mysql-replica-01",
-            "worker": "worker1"
-        }
-    ]
-}
-```
+    {
+        "op": "Pause",
+        "result": true,
+        "msg": "",
+        "sources": [
+            {
+                "result": true,
+                "msg": "",
+                "source": "mysql-replica-01",
+                "worker": "worker1"
+            }
+        ]
+    }

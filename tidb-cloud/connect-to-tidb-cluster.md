@@ -3,44 +3,44 @@ title: Connect to Your TiDB Dedicated Cluster
 summary: Learn how to connect to your TiDB Dedicated cluster via different methods.
 ---
 
-# Connect to Your TiDB Dedicated Cluster
+# TiDB 専用クラスタに接続する {#connect-to-your-tidb-dedicated-cluster}
 
-This document introduces the methods to connect to your TiDB Dedicated cluster.
+このドキュメントでは、TiDB 専用クラスターに接続する方法を紹介します。
 
-> **Tip:**
+> **ヒント：**
 >
-> To learn how to connect to a TiDB Serverless cluster, see [Connect to Your TiDB Serverless Cluster](/tidb-cloud/connect-to-tidb-cluster-serverless.md).
+> TiDB サーバーレス クラスターに接続する方法については、 [TiDB サーバーレスクラスタに接続する](/tidb-cloud/connect-to-tidb-cluster-serverless.md)を参照してください。
 
-After your TiDB Dedicated cluster is created on TiDB Cloud, you can connect to it via one of the following methods:
+TiDB 専用クラスターがTiDB Cloud上に作成されたら、次のいずれかの方法でそれに接続できます。
 
-- [Connect via standard connection](/tidb-cloud/connect-via-standard-connection.md)
+-   [標準接続で接続する](/tidb-cloud/connect-via-standard-connection.md)
 
-    The standard connection exposes a public endpoint with traffic filters, so you can connect to your TiDB cluster via a SQL client from your laptop. You can connect to your TiDB clusters using TLS, which ensures the security of data transmission from your applications to TiDB clusters.
+    標準接続では、トラフィック フィルターを備えたパブリック エンドポイントが公開されるため、ラップトップから SQL クライアント経由で TiDB クラスターに接続できます。 TLS を使用して TiDB クラスターに接続できます。これにより、アプリケーションから TiDB クラスターへのデータ送信のセキュリティが確保されます。
 
-- [Connect via private endpoint with AWS](/tidb-cloud/set-up-private-endpoint-connections.md) (recommended)
+-   [プライベートエンドポイント経由でAWSに接続する](/tidb-cloud/set-up-private-endpoint-connections.md) (推奨)
 
-    For TiDB Dedicated clusters hosted on AWS, private endpoint connection provides a private endpoint to allow SQL clients in your VPC to securely access services over AWS PrivateLink, which provides highly secure and one-way access to database services with simplified network management.
+    AWS でホストされている TiDB 専用クラスターの場合、プライベート エンドポイント接続は、VPC 内の SQL クライアントが AWS PrivateLink 経由でサービスに安全にアクセスできるようにするプライベート エンドポイントを提供します。これにより、簡素化されたネットワーク管理でデータベース サービスへの安全性の高い一方向のアクセスが提供されます。
 
-- [Connect via private endpoint with Google Cloud](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md) (recommended)
+-   [プライベート エンドポイント経由で Google Cloud に接続する](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md) (推奨)
 
-    For TiDB Dedicated clusters hosted on Google Cloud, private endpoint connection provides a private endpoint to allow SQL clients in your VPC to securely access services over Google Cloud Private Service Connect, which provides highly secure and one-way access to database services with simplified network management.
+    Google Cloud でホストされている TiDB 専用クラスターの場合、プライベート エンドポイント接続は、VPC 内の SQL クライアントが Google Cloud Private Service Connect 経由でサービスに安全にアクセスできるようにするプライベート エンドポイントを提供します。これにより、簡素化されたネットワーク管理でデータベース サービスへの安全性の高い一方向のアクセスが実現します。 。
 
-- [Connect via VPC peering](/tidb-cloud/set-up-vpc-peering-connections.md)
+-   [VPC ピアリング経由で接続する](/tidb-cloud/set-up-vpc-peering-connections.md)
 
-    If you want lower latency and more security, set up VPC peering and connect via a private endpoint using a VM instance on the corresponding cloud provider in your cloud account.
+    レイテンシーを短縮し、セキュリティを強化したい場合は、VPC ピアリングを設定し、クラウド アカウント内の対応するクラウド プロバイダー上の VM インスタンスを使用してプライベート エンドポイント経由で接続します。
 
-- [Connect via Chat2Query (beta)](/tidb-cloud/explore-data-with-chat2query.md)
+-   [Chat2Query 経由で接続する (ベータ版)](/tidb-cloud/explore-data-with-chat2query.md)
 
-    > **Note:**
+    > **注記：**
     >
-    > To use Chat2Query on [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) clusters, contact [TiDB Cloud support](/tidb-cloud/tidb-cloud-support.md).
+    > [TiDB専用](/tidb-cloud/select-cluster-tier.md#tidb-dedicated)クラスターで Chat2Query を使用するには、 [TiDB Cloudのサポート](/tidb-cloud/tidb-cloud-support.md)にお問い合わせください。
 
-    TiDB Cloud is powered by artificial intelligence (AI). If your cluster is hosted on AWS and the TiDB version of the cluster is v6.5.0 or later, you can use Chat2Query (beta), an AI-powered SQL editor in the [TiDB Cloud console](https://tidbcloud.com/), to maximize your data value.
+    TiDB Cloudは人工知能 (AI) を活用しています。クラスターが AWS でホストされており、クラスターの TiDB バージョンが v6.5.0 以降の場合は、AI を活用した SQL エディターである Chat2Query ( [TiDB Cloudコンソール](https://tidbcloud.com/)版) を使用して、データの価値を最大化できます。
 
-    In Chat2Query, you can either simply type `--` followed by your instructions to let AI generate SQL queries automatically or write SQL queries manually, and then run SQL queries against databases without a terminal. You can find the query results in tables intuitively and check the query logs easily.
+    Chat2Query では、 `--`入力してから AI に SQL クエリを自動的に生成させる指示を入力するか、SQL クエリを手動で作成して、ターミナルを使用せずにデータベースに対して SQL クエリを実行することができます。クエリ結果をテーブルで直感的に見つけたり、クエリログを簡単に確認したりできます。
 
-- [Connect via SQL Shell](/tidb-cloud/connect-via-sql-shell.md): to try TiDB SQL and test out TiDB's compatibility with MySQL quickly, or administer user privileges.
+-   [SQL シェル経由で接続する](/tidb-cloud/connect-via-sql-shell.md) : TiDB SQLを試して、TiDB と MySQL の互換性をすぐにテストするか、ユーザー権限を管理します。
 
-## What's next
+## 次は何ですか {#what-s-next}
 
-After you have successfully connected to your TiDB cluster, you can [explore SQL statements with TiDB](/basic-sql-operations.md).
+TiDB クラスターに正常に接続したら、 [TiDB で SQL ステートメントを探索する](/basic-sql-operations.md)を行うことができます。

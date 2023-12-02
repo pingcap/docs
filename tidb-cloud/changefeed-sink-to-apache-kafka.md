@@ -3,148 +3,153 @@ title: Sink to Apache Kafka (Beta)
 Summary: Learn how to create a changefeed to stream data from TiDB Cloud to Apache Kafka.
 ---
 
-# Sink to Apache Kafka (Beta)
+# Apache Kafka にシンク (ベータ) {#sink-to-apache-kafka-beta}
 
-This document describes how to create a changefeed to stream data from TiDB Cloud to Apache Kafka.
+このドキュメントでは、 TiDB Cloudから Apache Kafka にデータをストリーミングするためのチェンジフィードを作成する方法について説明します。
 
-> **Note:**
+> **注記：**
 >
-> - Currently, Kafka sink is in **beta**. To use the changefeed feature, make sure that your TiDB Dedicated cluster version is v6.4.0 or later.
-> - For [TiDB Serverless clusters](/tidb-cloud/select-cluster-tier.md#tidb-serverless), the changefeed feature is unavailable.
+> -   現在、Kafka シンクは**ベータ版**です。チェンジフィード機能を使用するには、TiDB 専用クラスターのバージョンが v6.4.0 以降であることを確認してください。
+> -   [TiDB サーバーレスクラスター](/tidb-cloud/select-cluster-tier.md#tidb-serverless)の場合、チェンジフィード機能は使用できません。
 
-## Restrictions
+## 制限 {#restrictions}
 
-- For each TiDB Cloud cluster, you can create up to 5 changefeeds.
-- Currently, TiDB Cloud does not support uploading self-signed TLS certificates to connect to Kafka brokers.
-- Because TiDB Cloud uses TiCDC to establish changefeeds, it has the same [restrictions as TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview#unsupported-scenarios).
-- If the table to be replicated does not have a primary key or a non-null unique index, the absence of a unique constraint during replication could result in duplicated data being inserted downstream in some retry scenarios.
+-   TiDB Cloudクラスターごとに、最大 5 つの変更フィードを作成できます。
+-   現在、 TiDB Cloud は、Kafka ブローカーに接続するための自己署名 TLS 証明書のアップロードをサポートしていません。
+-   TiDB Cloud はTiCDC を使用して変更フィードを確立するため、同じ[TiCDC としての制限](https://docs.pingcap.com/tidb/stable/ticdc-overview#unsupported-scenarios)を持ちます。
+-   レプリケートされるテーブルに主キーまたは NULL 以外の一意のインデックスがない場合、レプリケーション中に一意制約がないため、一部の再試行シナリオでは重複したデータがダウンストリームに挿入される可能性があります。
 
-## Prerequisites
+## 前提条件 {#prerequisites}
 
-Before creating a changefeed to stream data to Apache Kafka, you need to complete the following prerequisites:
+データを Apache Kafka にストリーミングするための変更フィードを作成する前に、次の前提条件を満たしている必要があります。
 
-- Set up your network connection
-- Add permissions for Kafka ACL authorization
+-   ネットワーク接続をセットアップする
+-   Kafka ACL 認可のためのアクセス許可を追加する
 
-### Network
+### 通信網 {#network}
 
-Make sure that your TiDB cluster can connect to the Apache Kafka service.
+TiDB クラスターが Apache Kafka サービスに接続できることを確認してください。
 
-If your Apache Kafka service is in an AWS VPC that has no internet access, take the following steps:
+Apache Kafka サービスがインターネットにアクセスできない AWS VPC にある場合は、次の手順を実行します。
 
-1. [Set up a VPC peering connection](/tidb-cloud/set-up-vpc-peering-connections.md) between the VPC of the Apache Kafka service and your TiDB cluster.
-2. Modify the inbound rules of the security group that the Apache Kafka service is associated with.
+1.  Apache Kafka サービスの VPC と TiDB クラスターの間の[VPC ピアリング接続をセットアップする](/tidb-cloud/set-up-vpc-peering-connections.md) 。
 
-    You must add the CIDR of the region where your TiDB Cloud cluster is located to the inbound rules. The CIDR can be found on the **VPC Peering** page. Doing so allows the traffic to flow from your TiDB cluster to the Kafka brokers.
+2.  Apache Kafka サービスが関連付けられているセキュリティ グループの受信ルールを変更します。
 
-3. If the Apache Kafka URL contains hostnames, you need to allow TiDB Cloud to be able to resolve the DNS hostnames of the Apache Kafka brokers.
+    TiDB Cloudクラスターが配置されているリージョンの CIDR を受信ルールに追加する必要があります。 CIDR は、 **「VPC ピアリング」**ページにあります。これにより、TiDB クラスターから Kafka ブローカーにトラフィックが流れるようになります。
 
-    1. Follow the steps in [Enable DNS resolution for a VPC peering connection](https://docs.aws.amazon.com/vpc/latest/peering/modify-peering-connections.html#vpc-peering-dns).
-    2. Enable the **Accepter DNS resolution** option.
+3.  Apache Kafka URL にホスト名が含まれている場合は、 TiDB Cloud がApache Kafka ブローカーの DNS ホスト名を解決できるようにする必要があります。
 
-If your Apache Kafka service is in a Google Cloud VPC that has no internet access, take the following steps:
+    1.  [VPC ピアリング接続の DNS 解決を有効にする](https://docs.aws.amazon.com/vpc/latest/peering/modify-peering-connections.html#vpc-peering-dns)の手順に従います。
+    2.  **アクセプター DNS 解決**オプションを有効にします。
 
-1. [Set up a VPC peering connection](/tidb-cloud/set-up-vpc-peering-connections.md) between the VPC of the Apache Kafka service and your TiDB cluster.
-2. Modify the ingress firewall rules of the VPC where Apache Kafka is located.
+Apache Kafka サービスがインターネットにアクセスできない Google Cloud VPC にある場合は、次の手順を実行します。
 
-    You must add the CIDR of the region where your TiDB Cloud cluster is located to the ingress firewall rules. The CIDR can be found on the **VPC Peering** page. Doing so allows the traffic to flow from your TiDB cluster to the Kafka brokers.
+1.  Apache Kafka サービスの VPC と TiDB クラスターの間の[VPC ピアリング接続をセットアップする](/tidb-cloud/set-up-vpc-peering-connections.md) 。
+2.  Apache Kafka が配置されている VPC のイングレス ファイアウォール ルールを変更します。
 
-### Kafka ACL authorization
+    TiDB Cloudクラスターが配置されているリージョンの CIDR をイングレス ファイアウォール ルールに追加する必要があります。 CIDR は、 **「VPC ピアリング」**ページにあります。これにより、TiDB クラスターから Kafka ブローカーにトラフィックが流れるようになります。
 
-To allow TiDB Cloud changefeeds to stream data to Apache Kafka and create Kafka topics automatically, ensure that the following permissions are added in Kafka:
+### Kafka ACL 認可 {#kafka-acl-authorization}
 
-- The `Create` and `Write` permissions are added for the topic resource type in Kafka.
-- The `DescribeConfigs` permission is added for the cluster resource type in Kafka.
+TiDB Cloud変更フィードがデータを Apache Kafka にストリーミングし、Kafka トピックを自動的に作成できるようにするには、次の権限が Kafka に追加されていることを確認します。
 
-For example, if your Kafka cluster is in Confluent Cloud, you can see [Resources](https://docs.confluent.io/platform/current/kafka/authorization.html#resources) and [Adding ACLs](https://docs.confluent.io/platform/current/kafka/authorization.html#adding-acls) in Confluent documentation for more information.
+-   Kafka のトピック リソース タイプに`Create`および`Write`権限が追加されます。
+-   Kafka のクラスター リソース タイプに`DescribeConfigs`権限が追加されます。
 
-## Step 1. Open the changefeed page for Apache Kafka
+たとえば、Kafka クラスターが Confluent Cloud にある場合、詳細については Confluent ドキュメントの[リソース](https://docs.confluent.io/platform/current/kafka/authorization.html#resources)と[ACLの追加](https://docs.confluent.io/platform/current/kafka/authorization.html#adding-acls)を参照してください。
 
-1. In the [TiDB Cloud console](https://tidbcloud.com), navigate to the cluster overview page of the target TiDB cluster, and then click **Changefeed** in the left navigation pane.
-2. Click **Create Changefeed**, and select **Kafka** as **Target Type**.
+## ステップ 1. Apache Kafka のチェンジフィード ページを開く {#step-1-open-the-changefeed-page-for-apache-kafka}
 
-## Step 2. Configure the changefeed target
+1.  [TiDB Cloudコンソール](https://tidbcloud.com)では、ターゲット TiDB クラスターのクラスター概要ページに移動し、左側のナビゲーション ペインで**[Changefeed]**をクリックします。
+2.  **[変更フィードの作成]**をクリックし、**ターゲット タイプ**として**Kafka**を選択します。
 
-1. Under **Brokers Configuration**, fill in your Kafka brokers endpoints. You can use commas `,` to separate multiple endpoints.
-2. Select your Kafka version. If you do not know that, use Kafka V2.
-3. Select a desired compression type for the data in this changefeed.
-4. Enable the **TLS Encryption** option if your Kafka has enabled TLS encryption and you want to use TLS encryption for the Kafka connection.
-5. Select the **Authentication** option according to your Kafka authentication configuration.
+## ステップ 2. チェンジフィードターゲットを構成する {#step-2-configure-the-changefeed-target}
 
-    - If your Kafka does not require authentication, keep the default option **DISABLE**.
-    - If your Kafka requires authentication, select the corresponding authentication type, and then fill in the user name and password of your Kafka account for authentication.
+1.  **[ブローカーのコンフィグレーション]**で、Kafka ブローカー エンドポイントを入力します。カンマ`,`使用して複数のエンドポイントを区切ることができます。
 
-6. Click **Next** to check the configurations you set and go to the next page.
+2.  Kafka のバージョンを選択します。それがわからない場合は、Kafka V2 を使用してください。
 
-## Step 3. Set the changefeed
+3.  この変更フィード内のデータに必要な圧縮タイプを選択します。
 
-1. Customize **Table Filter** to filter the tables that you want to replicate. For the rule syntax, refer to [table filter rules](/table-filter.md).
+4.  Kafka で**TLS 暗号化が**有効になっており、Kafka 接続に TLS 暗号化を使用する場合は、TLS 暗号化オプションを有効にします。
 
-    - **Add filter rules**: you can set filter rules in this column. By default, there is a rule `*.*`, which stands for replicating all tables. When you add a new rule, TiDB Cloud queries all the tables in TiDB and displays only the tables that match the rules in the **Tables to be replicated** column.
-    - **Tables to be replicated**: this column shows the tables to be replicated. But it does not show the new tables to be replicated in the future or the schemas to be fully replicated.
-    - **Tables without valid keys**: this column shows tables without unique and primary keys. For these tables, because no unique identifier can be used by the downstream system to handle duplicate events, their data might be inconsistent during replication. To avoid such issues, it is recommended that you add unique keys or primary keys to these tables before the replication, or set filter rules to filter out these tables. For example, you can filter out the table `test.tbl1` using "!test.tbl1".
+5.  Kafka 認証構成に従って**認証**オプションを選択します。
 
-2. In the **Data Format** area, select your desired format of Kafka messages.
+    -   Kafka が認証を必要としない場合は、デフォルトのオプション**DISABLE の**ままにしてください。
+    -   Kafka で認証が必要な場合は、対応する認証タイプを選択し、認証用の Kafka アカウントのユーザー名とパスワードを入力します。
 
-   - Avro is a compact, fast, and binary data format with rich data structures, which is widely used in various flow systems. For more information, see [Avro data format](https://docs.pingcap.com/tidb/stable/ticdc-avro-protocol).
-   - Canal-JSON is a plain JSON text format, which is easy to parse. For more information, see [Canal-JSON data format](https://docs.pingcap.com/tidb/stable/ticdc-canal-json).
+6.  **「次へ」**をクリックして設定した構成を確認し、次のページに進みます。
 
-3. Enable the **TiDB Extension** option if you want to add TiDB-extension fields to the Kafka message body.
+## ステップ 3. チェンジフィードを設定する {#step-3-set-the-changefeed}
 
-    For more information about TiDB-extension fields, see [TiDB extension fields in Avro data format](https://docs.pingcap.com/tidb/stable/ticdc-avro-protocol#tidb-extension-fields) and [TiDB extension fields in Canal-JSON data format](https://docs.pingcap.com/tidb/stable/ticdc-canal-json#tidb-extension-field).
+1.  **テーブル フィルターを**カスタマイズして、複製するテーブルをフィルターします。ルールの構文については、 [テーブルフィルタールール](/table-filter.md)を参照してください。
 
-4. If you select **Avro** as your data format, you will see some Avro-specific configurations on the page. You can fill in these configurations as follows:
+    -   **フィルター ルールの追加**: この列でフィルター ルールを設定できます。デフォルトでは、すべてのテーブルを複製することを表すルール`*.*`があります。新しいルールを追加すると、 TiDB CloudはTiDB 内のすべてのテーブルをクエリし、ルールに一致するテーブルのみを**[複製する**テーブル] 列に表示します。
+    -   **複製されるテーブル**: この列には、複製されるテーブルが表示されます。ただし、今後複製​​される新しいテーブルや完全に複製されるスキーマは表示されません。
+    -   **有効なキーのないテーブル**: この列には、一意キーと主キーのないテーブルが表示されます。これらのテーブルでは、ダウンストリーム システムが重複イベントを処理するために一意の識別子を使用できないため、レプリケーション中にデータが不整合になる可能性があります。このような問題を回避するには、レプリケーションの前にこれらのテーブルに一意キーまたは主キーを追加するか、これらのテーブルをフィルターで除外するフィルター ルールを設定することをお勧めします。たとえば、「!test.tbl1」を使用してテーブル`test.tbl1`を除外できます。
 
-    - In the **Decimal** and **Unsigned BigInt** configurations, specify how TiDB Cloud handles the decimal and unsigned bigint data types in Kafka messages.
-    - In the **Schema Registry** area, fill in your schema registry endpoint. If you enable **HTTP Authentication**, the fields for user name and password are displayed and automatically filled in with your TiDB cluster endpoint and password.
+2.  **「データ形式」**領域で、Kafka メッセージの希望の形式を選択します。
 
-5. In the **Topic Distribution** area, select a distribution mode, and then fill in the topic name configurations according to the mode.
+    -   Avro は、豊富なデータ構造を備えたコンパクトで高速なバイナリ データ形式で、さまざまなフロー システムで広く使用されています。詳細については、 [Avro データ形式](https://docs.pingcap.com/tidb/stable/ticdc-avro-protocol)を参照してください。
+    -   Canal-JSON はプレーンな JSON テキスト形式であり、解析が簡単です。詳細については、 [Canal-JSON データ形式](https://docs.pingcap.com/tidb/stable/ticdc-canal-json)を参照してください。
 
-    If you select **Avro** as your data format, you can only choose the **Distribute changelogs by table to Kafka Topics** mode in the **Distribution Mode** drop-down list.
+3.  **TiDB 拡張フィールドを Kafka メッセージ本文に追加する場合は、TiDB 拡張**オプションを有効にします。
 
-    The distribution mode controls how the changefeed creates Kafka topics, by table, by database, or creating one topic for all changelogs.
+    TiDB 拡張フィールドの詳細については、 [Avro データ形式の TiDB 拡張フィールド](https://docs.pingcap.com/tidb/stable/ticdc-avro-protocol#tidb-extension-fields)および[Canal-JSON データ形式の TiDB 拡張フィールド](https://docs.pingcap.com/tidb/stable/ticdc-canal-json#tidb-extension-field)を参照してください。
 
-   - **Distribute changelogs by table to Kafka Topics**
+4.  データ形式として**Avro**を選択すると、ページに Avro 固有の構成がいくつか表示されます。これらの構成は次のように入力できます。
 
-        If you want the changefeed to create a dedicated Kafka topic for each table, choose this mode. Then, all Kafka messages of a table are sent to a dedicated Kafka topic. You can customize topic names for tables by setting a topic prefix, a separator between a database name and table name, and a suffix. For example, if you set the separator as `_`, the topic names are in the format of `<Prefix><DatabaseName>_<TableName><Suffix>`.
+    -   **Decimal**および**Unsigned BigInt**構成では、 TiDB Cloud がKafka メッセージ内の 10 進数および符号なし bigint データ型を処理する方法を指定します。
+    -   **[スキーマ レジストリ]**領域で、スキーマ レジストリ エンドポイントを入力します。 **HTTP 認証 を**有効にすると、ユーザー名とパスワードのフィールドが表示され、TiDB クラスターのエンドポイントとパスワードが自動的に入力されます。
 
-        For changelogs of non-row events, such as Create Schema Event, you can specify a topic name in the **Default Topic Name** field. The changefeed will create a topic accordingly to collect such changelogs.
+5.  **[トピックの配布]**領域で、配布モードを選択し、モードに従ってトピック名の設定を入力します。
 
-   - **Distribute changelogs by database to Kafka Topics**
+    データ形式として**Avro**を選択した場合は、[**配布モード]**ドロップダウン リストで**[変更ログをテーブルごとに Kafka トピックに配布]**モードのみを選択できます。
 
-        If you want the changefeed to create a dedicated Kafka topic for each database, choose this mode. Then, all Kafka messages of a database are sent to a dedicated Kafka topic. You can customize topic names of databases by setting a topic prefix and a suffix.
+    分散モードは、テーブルごと、データベースごと、またはすべての変更ログに対して 1 つのトピックを作成するなど、変更フィードが Kafka トピックを作成する方法を制御します。
 
-        For changelogs of non-row events, such as Resolved Ts Event, you can specify a topic name in the **Default Topic Name** field. The changefeed will create a topic accordingly to collect such changelogs.
+    -   **変更ログをテーブルごとに Kafka トピックに配布する**
 
-   - **Send all changelogs to one specified Kafka Topic**
+        チェンジフィードでテーブルごとに専用の Kafka トピックを作成する場合は、このモードを選択します。次に、テーブルのすべての Kafka メッセージが専用の Kafka トピックに送信されます。テーブルのトピック名をカスタマイズするには、トピックのプレフィックス、データベース名とテーブル名の間の区切り文字、およびサフィックスを設定します。たとえば、区切り文字を`_`に設定すると、トピック名の形式は`<Prefix><DatabaseName>_<TableName><Suffix>`になります。
 
-        If you want the changefeed to create one Kafka topic for all changelogs, choose this mode. Then, all Kafka messages in the changefeed will be sent to one Kafka topic. You can define the topic name in the **Topic Name** field.
+        「スキーマ作成イベント」などの行以外のイベントの変更ログの場合、 **「デフォルトのトピック名」**フィールドにトピック名を指定できます。変更フィードは、そのような変更ログを収集するために、それに応じてトピックを作成します。
 
-6. In the **Partition Distribution** area, you can decide which partition a Kafka message will be sent to:
+    -   **データベースごとに変更ログを Kafka に配布する**
 
-   - **Distribute changelogs by index value to Kafka partition**
+        チェンジフィードでデータベースごとに専用の Kafka トピックを作成する場合は、このモードを選択します。次に、データベースのすべての Kafka メッセージが専用の Kafka トピックに送信されます。トピックのプレフィックスとサフィックスを設定することで、データベースのトピック名をカスタマイズできます。
 
-        If you want the changefeed to send Kafka messages of a table to different partitions, choose this distribution method. The index value of a row changelog will determine which partition the changelog is sent to. This distribution method provides a better partition balance and ensures row-level orderliness.
+        解決された Ts イベントなどの非行イベントの変更ログの場合、 **「デフォルトのトピック名」**フィールドにトピック名を指定できます。変更フィードは、そのような変更ログを収集するために、それに応じてトピックを作成します。
 
-   - **Distribute changelogs by table to Kafka partition**
+    -   **すべての変更ログを指定された 1 つの Kafka トピックに送信します**
 
-        If you want the changefeed to send Kafka messages of a table to one Kafka partition, choose this distribution method. The table name of a row changelog will determine which partition the changelog is sent to. This distribution method ensures table orderliness but might cause unbalanced partitions.
+        変更フィードですべての変更ログに対して 1 つの Kafka トピックを作成する場合は、このモードを選択します。その後、変更フィード内のすべての Kafka メッセージが 1 つの Kafka トピックに送信されます。 **「トピック名」**フィールドでトピック名を定義できます。
 
-7. In the **Topic Configuration** area, configure the following numbers. The changefeed will automatically create the Kafka topics according to the numbers.
+6.  **[パーティション配布]**領域では、Kafka メッセージがどのパーティションに送信されるかを決定できます。
 
-   - **Replication Factor**: controls how many Kafka servers each Kafka message is replicated to.
-   - **Partition Number**: controls how many partitions exist in a topic.
+    -   **インデックス値ごとに変更ログを Kafka パーティションに配布する**
 
-8. Click **Next**.
+        変更フィードでテーブルの Kafka メッセージを別のパーティションに送信する場合は、この分散方法を選択します。行変更ログのインデックス値によって、変更ログがどのパーティションに送信されるかが決まります。この分散方法により、パーティションのバランスが改善され、行レベルの順序性が確保されます。
 
-## Step 4. Configure your changefeed specification
+    -   **変更ログをテーブルごとに Kafka パーティションに分散する**
 
-1. In the **Changefeed Specification** area, specify the number of Replication Capacity Units (RCUs) to be used by the changefeed.
-2. In the **Changefeed Name** area, specify a name for the changefeed.
-3. Click **Next** to check the configurations you set and go to the next page.
+        チェンジフィードでテーブルの Kafka メッセージを 1 つの Kafka パーティションに送信する場合は、この分散方法を選択します。行変更ログのテーブル名によって、変更ログがどのパーティションに送信されるかが決まります。この分散方法ではテーブルの順序性が保証されますが、パーティションの不均衡が発生する可能性があります。
 
-## Step 5. Review the configurations
+7.  **[トピックコンフィグレーション]**エリアで、次の数値を設定します。チェンジフィードは、数値に従って Kafka トピックを自動的に作成します。
 
-On this page, you can review all the changefeed configurations that you set.
+    -   **レプリケーション係数**: 各 Kafka メッセージがレプリケートされる Kafka サーバーの数を制御します。
+    -   **パーティション番号**: トピック内に存在するパーティションの数を制御します。
 
-If you find any error, you can go back to fix the error. If there is no error, you can click the check box at the bottom, and then click **Create** to create the changefeed.
+8.  **「次へ」**をクリックします。
+
+## ステップ 4. 変更フィード仕様を構成する {#step-4-configure-your-changefeed-specification}
+
+1.  **「変更フィードの仕様」**領域で、変更フィードで使用するレプリケーション キャパシティ ユニット (RCU) の数を指定します。
+2.  **「変更フィード名」**領域で、変更フィードの名前を指定します。
+3.  **「次へ」**をクリックして設定した構成を確認し、次のページに進みます。
+
+## ステップ 5. 構成を確認する {#step-5-review-the-configurations}
+
+このページでは、設定したすべての変更フィード構成を確認できます。
+
+エラーが見つかった場合は、戻ってエラーを修正できます。エラーがない場合は、下部のチェックボックスをクリックし、 **[作成]**をクリックして変更フィードを作成します。

@@ -3,33 +3,33 @@ title: ALTER INSTANCE
 summary: Learn the overview of the `ALTER INSTANCE` usage in TiDB.
 ---
 
-# ALTER INSTANCE
+# インスタンスの変更 {#alter-instance}
 
-The `ALTER INSTANCE` statement is used to make changes to a single TiDB instance. Currently, TiDB only supports the `RELOAD TLS` clause.
+`ALTER INSTANCE`ステートメントは、単一の TiDB インスタンスに変更を加えるために使用されます。現在、TiDB は`RELOAD TLS`句のみをサポートしています。
 
-> **Note:**
+> **注記：**
 >
-> [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless) can automatically refresh the TLS certificate, so this feature is not applicable to [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless) clusters.
+> [TiDB サーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless)では TLS 証明書を自動的に更新できるため、この機能は[TiDB サーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless)クラスターには適用されません。
 
-## RELOAD TLS
+## TLSをリロードする {#reload-tls}
 
 <CustomContent platform="tidb">
 
-You can execute the `ALTER INSTANCE RELOAD TLS` statement to reload the certificate ([`ssl-cert`](/tidb-configuration-file.md#ssl-cert)), the key ([`ssl-key`](/tidb-configuration-file.md#ssl-key)), and the CA ([`ssl-ca`](/tidb-configuration-file.md#ssl-ca)) from the original configuration path.
+`ALTER INSTANCE RELOAD TLS`ステートメントを実行すると、元の構成パスから証明書 ( [`ssl-cert`](/tidb-configuration-file.md#ssl-cert) )、キー ( [`ssl-key`](/tidb-configuration-file.md#ssl-key) )、および CA ( [`ssl-ca`](/tidb-configuration-file.md#ssl-ca) ) を再ロードできます。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-You can execute the `ALTER INSTANCE RELOAD TLS` statement to reload the certificate ([`ssl-cert`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#ssl-cert)), the key ([`ssl-key`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#ssl-key)), and the CA ([`ssl-ca`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#ssl-ca)) from the original configuration path.
+`ALTER INSTANCE RELOAD TLS`ステートメントを実行すると、元の構成パスから証明書 ( [`ssl-cert`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#ssl-cert) )、キー ( [`ssl-key`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#ssl-key) )、および CA ( [`ssl-ca`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#ssl-ca) ) を再ロードできます。
 
 </CustomContent>
 
-The newly loaded certificate, key, and CA take effect on the connection that is established after the statement is successfully executed. The connection established before this statement execution is not affected.
+新しくロードされた証明書、キー、および CA は、ステートメントが正常に実行された後に確立された接続で有効になります。このステートメントの実行前に確立された接続は影響を受けません。
 
-When an error occurs during reloading, by default, this error message is returned and the previous key and certificate continue to be used. However, if you have added the optional `NO ROLLBACK ON ERROR`, when an error occurs during reloading, the error is not returned, and the subsequent requests are handled with the TLS security connection disabled.
+リロード中にエラーが発生すると、デフォルトでこのエラー メッセージが返され、以前のキーと証明書が引き続き使用されます。ただし、オプションの`NO ROLLBACK ON ERROR`追加した場合、リロード中にエラーが発生した場合、エラーは返されず、後続のリクエストは TLS セキュリティ接続を無効にして処理されます。
 
-## Syntax diagram
+## 構文図 {#syntax-diagram}
 
 **AlterInstanceStmt:**
 
@@ -41,28 +41,26 @@ InstanceOption ::=
     'RELOAD' 'TLS' ('NO' 'ROLLBACK' 'ON' 'ERROR')?
 ```
 
-## Example
-
-{{< copyable "sql" >}}
+## 例 {#example}
 
 ```sql
 ALTER INSTANCE RELOAD TLS;
 ```
 
-## MySQL compatibility
+## MySQLの互換性 {#mysql-compatibility}
 
-The `ALTER INSTANCE RELOAD TLS` statement only supports reloading from the original configuration path. It does not support dynamically modifying the loading path or dynamically enabling the TLS encrypted connection feature when TiDB is started. This feature is disabled by default when you restart TiDB.
+`ALTER INSTANCE RELOAD TLS`ステートメントは、元の構成パスからの再ロードのみをサポートします。 TiDB の開始時にロード パスを動的に変更したり、TLS 暗号化接続機能を動的に有効にしたりすることはサポートされていません。 TiDB を再起動すると、この機能はデフォルトで無効になります。
 
-## See also
+## こちらも参照 {#see-also}
 
 <CustomContent platform="tidb">
 
-[Enable TLS Between TiDB Clients and Servers](/enable-tls-between-clients-and-servers.md).
+[TiDB クライアントとサーバー間で TLS を有効にする](/enable-tls-between-clients-and-servers.md) 。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-[Enable TLS Between TiDB Clients and Servers](https://docs.pingcap.com/tidb/stable/enable-tls-between-clients-and-servers).
+[TiDB クライアントとサーバー間で TLS を有効にする](https://docs.pingcap.com/tidb/stable/enable-tls-between-clients-and-servers) 。
 
 </CustomContent>

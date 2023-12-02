@@ -3,13 +3,13 @@ title: DROP [GLOBAL|SESSION] BINDING
 summary: Use of DROP BINDING in TiDB database.
 ---
 
-# DROP [GLOBAL|SESSION] BINDING
+# [グローバル|セッション] バインディングを削除します {#drop-global-session-binding}
 
-This statement removes a binding from a specific SQL statement. Bindings can be used to inject a hint into a statement without requiring changes to the underlying query.
+このステートメントは、特定の SQL ステートメントからバインディングを削除します。バインディングを使用すると、基になるクエリを変更することなく、ステートメントにヒントを挿入できます。
 
-A `BINDING` can be on either a `GLOBAL` or `SESSION` basis. The default is `SESSION`.
+`BINDING`は`GLOBAL`または`SESSION`いずれかに基づいて指定できます。デフォルトは`SESSION`です。
 
-## Synopsis
+## あらすじ {#synopsis}
 
 ```ebnf+diagram
 DropBindingStmt ::=
@@ -23,13 +23,11 @@ BindableStmt ::=
     ( SelectStmt | UpdateStmt | InsertIntoStmt | ReplaceIntoStmt | DeleteStmt )
 ```
 
-## Examples
+## 例 {#examples}
 
-You can remove a binding according to a SQL statement or `sql_digest`.
+SQL ステートメントまたは`sql_digest`に従ってバインディングを削除できます。
 
-The following example shows how to remove a binding according to a SQL statement.
-
-{{< copyable "sql" >}}
+次の例は、SQL ステートメントに従ってバインディングを削除する方法を示しています。
 
 ```sql
 mysql> CREATE TABLE t1 (
@@ -134,7 +132,7 @@ mysql> SHOW SESSION BINDINGS\G
 Empty set (0.00 sec)
 ```
 
-The following example shows how to remove a binding according to `sql_digest`.
+次の例は、 `sql_digest`に従ってバインディングを削除する方法を示しています。
 
 ```sql
 mysql> CREATE TABLE t(id INT PRIMARY KEY , a INT, KEY(a));
@@ -193,14 +191,14 @@ ERROR:
 No query specified
 ```
 
-## MySQL compatibility
+## MySQLの互換性 {#mysql-compatibility}
 
-This statement is a TiDB extension to MySQL syntax.
+このステートメントは、MySQL 構文に対する TiDB 拡張機能です。
 
-## See also
+## こちらも参照 {#see-also}
 
-* [CREATE [GLOBAL|SESSION] BINDING](/sql-statements/sql-statement-create-binding.md)
-* [SHOW [GLOBAL|SESSION] BINDINGS](/sql-statements/sql-statement-show-bindings.md)
-* [ANALYZE TABLE](/sql-statements/sql-statement-analyze-table.md)
-* [Optimizer Hints](/optimizer-hints.md)
-* [SQL Plan Management](/sql-plan-management.md)
+-   [[グローバル|セッション] バインディングの作成](/sql-statements/sql-statement-create-binding.md)
+-   [[グローバル|セッション] バインディングを表示](/sql-statements/sql-statement-show-bindings.md)
+-   [分析テーブル](/sql-statements/sql-statement-analyze-table.md)
+-   [オプティマイザーのヒント](/optimizer-hints.md)
+-   [SQL計画管理](/sql-plan-management.md)

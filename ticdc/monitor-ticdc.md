@@ -3,121 +3,118 @@ title: TiCDC Monitoring Metrics Details
 summary: Learn some key metrics displayed on the Grafana TiCDC dashboard.
 ---
 
-# TiCDC Monitoring Metrics Details
+# TiCDC モニタリングメトリクスの詳細 {#ticdc-monitoring-metrics-details}
 
-If you use TiUP to deploy the TiDB cluster, you can see a sub-dashboard for TiCDC in the monitoring system which is deployed at the same time. You can get an overview of TiCDC's current status from the TiCDC dashboard, where the key metrics are displayed. This document provides a detailed description of these key metrics.
+TiUPを使用して TiDB クラスターをデプロイすると、同時にデプロイされたモニタリング システムに TiCDC のサブダッシュボードが表示されます。 TiCDC の現在のステータスの概要は、主要な指標が表示される TiCDC ダッシュボードから取得できます。このドキュメントでは、これらの主要な指標について詳しく説明します。
 
-The metric description in this document is based on the following replication task example, which replicates data to MySQL using the default configuration.
+このドキュメントのメトリクスの説明は、デフォルト構成を使用してデータを MySQL にレプリケートする次のレプリケーション タスクの例に基づいています。
 
 ```shell
 cdc cli changefeed create --server=http://10.0.10.25:8300 --sink-uri="mysql://root:123456@127.0.0.1:3306/" --changefeed-id="simple-replication-task"
 ```
 
-The TiCDC dashboard contains four monitoring panels. See the following screenshot:
+TiCDC ダッシュボードには 4 つの監視パネルが含まれています。次のスクリーンショットを参照してください。
 
 ![TiCDC Dashboard - Overview](/media/ticdc/ticdc-dashboard-overview.png)
 
-The description of each panel is as follows:
+各パネルの説明は次のとおりです。
 
-- [**Server**](#server): The summary information of TiKV nodes and TiCDC nodes in the TiDB cluster
-- [**Changefeed**](#changefeed): The detailed information of TiCDC replication tasks
-- [**Events**](#events): The detail information about the data flow within the TiCDC cluster
-- [**TiKV**](#tikv): TiKV information related to TiCDC
+-   [**サーバ**](#server) : TiDB クラスター内の TiKV ノードと TiCDC ノードの概要情報
+-   [**チェンジフィード**](#changefeed) : TiCDC レプリケーション タスクの詳細情報
+-   [**イベント**](#events) : TiCDC クラスター内のデータ フローに関する詳細情報
+-   [**TiKV**](#tikv) : TiCDC に関連する TiKV 情報
 
-## Server
+## サーバ {#server}
 
-The following is an example of the **Server** panel:
+以下は**「サーバー」**パネルの例です。
 
 ![TiCDC Dashboard - Server metrics](/media/ticdc/ticdc-dashboard-server.png)
 
-The description of each metric in the **Server** panel is as follows:
+**「サーバー」**パネルの各メトリックの説明は次のとおりです。
 
-- Uptime: The time for which TiKV nodes and TiCDC nodes have been running
-- Goroutine count: The number of goroutines of a TiCDC node
-- Open FD count: The number of file handles opened by TiCDC nodes
-- Ownership: The current status of nodes in the TiCDC cluster
-- Ownership history: The ownership history of the TiCDC cluster
-- CPU usage: The CPU usage of TiCDC nodes
-- Memory usage: The memory usage of TiCDC nodes
+-   稼働時間: TiKV ノードと TiCDC ノードが実行されている時間
+-   ゴルーチン数: TiCDC ノードのゴルーチンの数
+-   Open FD count: TiCDC ノードによってオープンされたファイル ハンドルの数
+-   所有権: TiCDC クラスター内のノードの現在のステータス
+-   所有権履歴: TiCDC クラスターの所有権履歴
+-   CPU 使用率: TiCDC ノードの CPU 使用率
+-   メモリ使用量: TiCDC ノードのメモリ使用量
 
-## Changefeed
+## チェンジフィード {#changefeed}
 
-The following is an example of the **Changefeed** panel:
+以下は、 **Changefeed**パネルの例です。
 
 ![TiCDC Dashboard - Changefeed metrics 1](/media/ticdc/ticdc-dashboard-changefeed-1.png)
 
-- Changefeed table count: The number of tables that each TiCDC node needs to replicate in the replication task
-- Processor resolved ts: The timestamps that have been resolved in the TiCDC cluster
-- Table resolved ts: The replication progress of each table in the replication task
-- Changefeed checkpoint: The progress of replicating data to the downstream. Normally, the green bars are connected to the yellow line
-- PD etcd requests/s: The number of requests that a TiCDC node sends to PD per second
-- Exit error count/m: The number of errors that interrupt the replication task per minute
-- Changefeed checkpoint lag: The progress lag of data replication (the unit is second) between the upstream and the downstream
-- Processor resolved ts lag: The progress lag of data replication (the unit is second) between the upstream and TiCDC nodes
+-   Changefeed テーブル数: レプリケーション タスクで各 TiCDC ノードがレプリケートする必要があるテーブルの数
+-   プロセッサー解決済み ts: TiCDC クラスター内で解決されたタイムスタンプ
+-   テーブル解決済み ts: レプリケーション タスク内の各テーブルのレプリケーションの進行状況
+-   変更フィード チェックポイント: ダウンストリームへのデータの複製の進行状況。通常、緑色のバーは黄色の線に接続されます。
+-   PD etcd リクエスト/秒: TiCDC ノードが 1 秒あたりに PD に送信するリクエストの数
+-   終了エラー数/分: レプリケーション タスクを中断した 1 分あたりのエラー数
+-   チェンジフィード チェックポイント ラグ: 上流と下流間のデータ レプリケーションの進行ラグ (単位は秒)
+-   プロセッサー解決 ts ラグ: 上流ノードと TiCDC ノード間のデータ複製の進行ラグ (単位は秒)
 
 ![TiCDC Dashboard - Changefeed metrics 2](/media/ticdc/ticdc-dashboard-changefeed-2.png)
 
-- Sink write duration: The histogram of the time spent by TiCDC writing a transaction change to the downstream
-- Sink write duration percentile: The time (P95, P99, and P999) spent by TiCDC writing a transaction change to the downstream within one second
-- Flush sink duration: The histogram of the time spent by TiCDC asynchronously flushing data to the downstream
-- Flush sink duration percentile: The time (P95, P99, and P999) spent by TiCDC asynchronously flushing data to the downstream within one second
+-   シンク書き込み期間: TiCDC がトランザクション変更をダウンストリームに書き込むのに費やした時間のヒストグラム
+-   シンク書き込み期間パーセンタイル: TiCDC が 1 秒以内にトランザクション変更をダウンストリームに書き込むのに費やした時間 (P95、P99、および P999)
+-   フラッシュ シンク期間: TiCDC がデータをダウンストリームに非同期的にフラッシュするのに費やした時間のヒストグラム
+-   フラッシュ シンク期間パーセンタイル: TiCDC が 1 秒以内にデータをダウンストリームに非同期的にフラッシュするのに費やした時間 (P95、P99、および P999)
 
 ![TiCDC Dashboard - Changefeed metrics 3](/media/ticdc/ticdc-dashboard-changefeed-3.png)
 
-- MySQL sink conflict detect duration: The histogram of the time spent on detecting MySQL sink conflicts
-- MySQL sink conflict detect duration percentile: The time (P95, P99, and P999) spent on detecting MySQL sink conflicts within one second
-- MySQL sink worker load: The workload of MySQL sink workers of TiCDC nodes
+-   MySQL シンク競合検出期間: MySQL シンク競合の検出に費やされた時間のヒストグラム
+-   MySQL シンク競合検出期間パーセンタイル: 1 秒以内に MySQL シンク競合を検出するのに費やした時間 (P95、P99、および P999)
+-   MySQL シンク ワーカーの負荷: TiCDC ノードの MySQL シンク ワーカーのワークロード
 
 ![TiCDC Dashboard - Changefeed metrics 4](/media/ticdc/ticdc-dashboard-changefeed-4.png)
 
-- Changefeed catch-up ETA: The estimated time needed for the replication task to catch up with the upstream cluster data. When the upstream write speed is faster than the TiCDC replication speed, the metric might be extremely large. Because TiCDC replication speed is subject to many factors, this metric is for reference only and might not be the actual replication time.
+-   Changefeed catch-up ETA: レプリケーション タスクが上流のクラスター データに追いつくのに必要な推定時間。アップストリームの書き込み速度が TiCDC レプリケーション速度よりも速い場合、メトリックは非常に大きくなる可能性があります。 TiCDC レプリケーション速度は多くの要因の影響を受けるため、このメトリクスは参照のみを目的としており、実際のレプリケーション時間ではない可能性があります。
 
-## Events
+## イベント {#events}
 
-The following is an example of the **Events** panel:
+以下は、 **「イベント」**パネルの例です。
 
-![TiCDC Dashboard - Events metrics 2](/media/ticdc/ticdc-dashboard-events-1.png)
-![TiCDC Dashboard - Events metrics 2](/media/ticdc/ticdc-dashboard-events-2.png)
-![TiCDC Dashboard - Events metrics 2](/media/ticdc/ticdc-dashboard-events-3.png)
+![TiCDC Dashboard - Events metrics 2](/media/ticdc/ticdc-dashboard-events-1.png) ![TiCDC Dashboard - Events metrics 2](/media/ticdc/ticdc-dashboard-events-2.png) ![TiCDC Dashboard - Events metrics 2](/media/ticdc/ticdc-dashboard-events-3.png)
 
-The description of each metric in the **Events** panel is as follows:
+**[イベント]**パネルの各メトリックの説明は次のとおりです。
 
-- Eventfeed count: The number of Eventfeed RPC requests of TiCDC nodes
-- Event size percentile: The event size (P95, P99, and P999) which TiCDC receives from TiKV within one second
-- Eventfeed error/m: The number of errors reported by Eventfeed RPC requests of TiCDC nodes per minute
-- KV client receive events/s: The number of events that the KV client module of TiCDC nodes receives from TiKV per second
-- Puller receive events/s: The number of events that the Puller module of TiCDC nodes receives from the KV client per second
-- Puller output events/s: The number of events that the Puller module of TiCDC nodes sends to the Sorter module per second
-- Sink flush rows/s: The number of events that TiCDC nodes write to the downstream per second
-- Puller buffer size: The number of events that TiCDC nodes cache in the Puller module
-- Entry sorter buffer size: The number of events that TiCDC nodes cache in the Sorter module
-- Processor/Mounter buffer size: The number of events that TiCDC nodes cache in the Processor module and the Mounter module
-- Sink row buffer size: The number of events that TiCDC nodes cache in the Sink module
-- Entry sorter sort duration: The histogram of the time spent by TiCDC nodes sorting events
-- Entry sorter sort duration percentile: The time (P95, P99, and P999) spent by TiCDC sorting events within one second
-- Entry sorter merge duration: The histogram of the time spent by TiCDC nodes merging sorted events
-- Entry sorter merge duration percentile: The time (P95, P99, and P999) spent by TiCDC merging sorted events within one second
-- Mounter unmarshal duration: The histogram of the time spent by TiCDC nodes unmarshaling events
-- Mounter unmarshal duration percentile: The time (P95, P99, and P999) spent by TiCDC unmarshaling events within one second
-- KV client dispatch events/s: The number of events that the KV client module dispatches among the TiCDC nodes
-- KV client batch resolved size: The batch size of resolved timestamp messages that TiKV sends to TiCDC
+-   イベントフィード数: TiCDC ノードのイベントフィード RPC リクエストの数
+-   イベント サイズ パーセンタイル: TiCDC が 1 秒以内に TiKV から受信したイベント サイズ (P95、P99、および P999)
+-   Eventfeed error/m: TiCDC ノードの Eventfeed RPC リクエストによって報告された 1 分あたりのエラー数
+-   KV クライアント受信イベント/秒: TiCDC ノードの KV クライアント モジュールが TiKV から受信する 1 秒あたりのイベント数
+-   プーラー受信イベント/秒: TiCDC ノードのプーラー モジュールが KV クライアントから 1 秒あたりに受信するイベントの数
+-   Puller 出力イベント/秒: TiCDC ノードの Puller モジュールが Sorter モジュールに送信する 1 秒あたりのイベント数
+-   シンクフラッシュ行/秒: TiCDC ノードが 1 秒あたりにダウンストリームに書き込むイベントの数
+-   Puller バッファー サイズ: TiCDC ノードが Puller モジュールにキャッシュするイベントの数
+-   エントリ ソーター バッファ サイズ: TiCDC ノードがソーター モジュールにキャッシュするイベントの数
+-   プロセッサ/マウンタ バッファ サイズ: TiCDC ノードがプロセッサ モジュールおよびマウンタ モジュールにキャッシュするイベントの数
+-   シンク行バッファー サイズ: TiCDC ノードがシンク モジュールにキャッシュするイベントの数
+-   エントリー・ソーターのソート期間: TiCDC ノードがイベントのソートに費やした時間のヒストグラム
+-   エントリー・ソーターのソート期間パーセンタイル: 1 秒以内に TiCDC ソート・イベントに費やされた時間 (P95、P99、および P999)
+-   エントリソーターのマージ期間: TiCDC ノードがソートされたイベントをマージするのに費やした時間のヒストグラム
+-   エントリ ソーターのマージ期間パーセンタイル: TiCDC が 1 秒以内にソートされたイベントをマージするのに費やした時間 (P95、P99、および P999)
+-   マウンタのアンマーシャリング期間: TiCDC ノードのアンマーシャリング イベントに費やされた時間のヒストグラム
+-   マウンタのアンマーシャリング期間パーセンタイル: 1 秒以内に TiCDC アンマーシャリング イベントに費やされた時間 (P95、P99、および P999)
+-   KV クライアント ディスパッチ イベント/秒: KV クライアント モジュールが TiCDC ノード間でディスパッチするイベントの数
+-   KV クライアントのバッチ解決サイズ: TiKV が TiCDC に送信する解決されたタイムスタンプ メッセージのバッチ サイズ
 
-## TiKV
+## TiKV {#tikv}
 
-The following is an example of the **TiKV** panel:
+以下は**TiKV**パネルの例です。
 
-![TiCDC Dashboard - TiKV metrics 1](/media/ticdc/ticdc-dashboard-tikv-1.png)
-![TiCDC Dashboard - TiKV metrics 2](/media/ticdc/ticdc-dashboard-tikv-2.png)
+![TiCDC Dashboard - TiKV metrics 1](/media/ticdc/ticdc-dashboard-tikv-1.png) ![TiCDC Dashboard - TiKV metrics 2](/media/ticdc/ticdc-dashboard-tikv-2.png)
 
-The description of each metric in the **TiKV** panel is as follows:
+**TiKV**パネルの各メトリックの説明は次のとおりです。
 
-- CDC endpoint CPU: The CPU usage of the CDC endpoint threads on TiKV nodes
-- CDC worker CPU: The CPU usage of the CDC worker threads on TiKV nodes
-- Min resolved ts: The minimum resolved timestamp on TiKV nodes
-- Min resolved region: The Region ID of the minimum resolved timestamp on TiKV nodes
-- Resolved ts lag duration percentile: The lag between the minimum resolved timestamp on TiKV nodes and the current time
-- Initial scan duration: The histogram of the time spent on incremental scan when TiKV nodes connect to TiCDC nodes
-- Initial scan duration percentile: The time (P95, P99, and P999) spent on the incremental scan of TiKV nodes within one second
-- Memory without block cache: The memory usage of TiKV nodes excluding the RocksDB block cache
-- CDC pending bytes in memory: The memory usage of CDC module on TiKV nodes
-- Captured region count: The number of event-capturing Regions on TiKV nodes
+-   CDC エンドポイント CPU: TiKV ノード上の CDC エンドポイント スレッドの CPU 使用率
+-   CDC ワーカー CPU: TiKV ノード上の CDC ワーカー スレッドの CPU 使用率
+-   最小解決 ts: TiKV ノード上の最小解決タイムスタンプ
+-   最小解決リージョン: TiKV ノード上の最小解決タイムスタンプのリージョンID
+-   解決された ts ラグ期間のパーセンタイル: TiKV ノード上の最小解決タイムスタンプと現在時刻との間のラグ。
+-   初期スキャン期間: TiKV ノードが TiCDC ノードに接続するときに増分スキャンに費やされた時間のヒストグラム
+-   初期スキャン期間パーセンタイル: 1 秒以内の TiKV ノードの増分スキャンに費やされた時間 (P95、P99、および P999)
+-   ブロックキャッシュなしのメモリ : RocksDBブロックキャッシュを除いた TiKV ノードのメモリ使用量
+-   メモリ内の CDC 保留バイト数 : TiKV ノード上の CDC モジュールのメモリ使用量
+-   キャプチャされたリージョン数: TiKV ノード上のイベントをキャプチャしたリージョンの数

@@ -3,53 +3,49 @@ title: Deploy a DM Cluster Using TiUP
 summary: Learn how to deploy TiDB Data Migration using TiUP DM.
 ---
 
-# Deploy a DM Cluster Using TiUP
+# TiUPを使用した DMクラスタのデプロイ {#deploy-a-dm-cluster-using-tiup}
 
-[TiUP](https://github.com/pingcap/tiup) is a cluster operation and maintenance tool introduced in TiDB 4.0. TiUP provides [TiUP DM](/dm/maintain-dm-using-tiup.md), a cluster management component written in Golang. By using TiUP DM, you can easily perform daily TiDB Data Migration (DM) operations, including deploying, starting, stopping, destroying, scaling, and upgrading a DM cluster, and manage DM cluster parameters.
+[TiUP](https://github.com/pingcap/tiup)は、TiDB 4.0 で導入されたクラスターの運用および保守ツールです。 TiUP は、 Golangで書かれたクラスター管理コンポーネント[TiUP DM](/dm/maintain-dm-using-tiup.md)を提供します。 TiUP DMを使用すると、DM クラスターのデプロイ、開始、停止、破棄、スケーリング、アップグレードなどの毎日の TiDB データ移行 (DM) 操作を簡単に実行し、DM クラスターのパラメーターを管理できます。
 
-TiUP supports deploying DM v2.0 or later DM versions. This document introduces how to deploy DM clusters of different topologies.
+TiUP は、 DM v2.0 以降の DM バージョンの導入をサポートしています。このドキュメントでは、さまざまなトポロジの DM クラスターを展開する方法を紹介します。
 
-> **Note:**
+> **注記：**
 >
-> If your target machine's operating system supports SELinux, make sure that SELinux is **disabled**.
+> ターゲット マシンのオペレーティング システムが SELinux をサポートしている場合は、SELinux が**無効になっている**ことを確認してください。
 
-## Prerequisites
+## 前提条件 {#prerequisites}
 
-When DM performs a full data replication task, the DM-worker is bound with only one upstream database. The DM-worker first exports the full amount of data locally, and then imports the data into the downstream database. Therefore, the worker's host space must be large enough to store all upstream tables to be exported. The storage path is specified later when you create the task.
+DM が完全なデータ レプリケーション タスクを実行する場合、DM ワーカーは 1 つのアップストリーム データベースのみにバインドされます。 DM ワーカーは、まず全量のデータをローカルにエクスポートし、次にそのデータをダウンストリーム データベースにインポートします。したがって、ワーカーのホスト領域には、エクスポートするすべての上流テーブルを格納できる十分な大きさが必要です。storageパスは、後でタスクを作成するときに指定します。
 
-In addition, you need to meet the [hardware and software requirements](/dm/dm-hardware-and-software-requirements.md) when deploying a DM cluster.
+さらに、DM クラスターをデプロイする場合は[ハードウェアとソフトウェアの要件](/dm/dm-hardware-and-software-requirements.md)を満たす必要があります。
 
-## Step 1: Install TiUP on the control machine
+## ステップ 1: TiUP を制御マシンにインストールする {#step-1-install-tiup-on-the-control-machine}
 
-Log in to the control machine using a regular user account (take the `tidb` user as an example). All the following TiUP installation and cluster management operations can be performed by the `tidb` user.
+通常のユーザー アカウントを使用して制御マシンにログインします (例として`tidb`ユーザーを取り上げます)。次のすべてのTiUPインストールおよびクラスター管理操作は、 `tidb`ユーザーによって実行できます。
 
-1. Install TiUP by executing the following command:
-
-    {{< copyable "shell-regular" >}}
+1.  次のコマンドを実行してTiUPをインストールします。
 
     ```shell
     curl --proto '=https' --tlsv1.2 -sSf https://tiup-mirrors.pingcap.com/install.sh | sh
     ```
 
-    After the installing, `~/.bashrc` has been modified to add TiUP to PATH, so you need to open a new terminal or redeclare the global environment variables `source ~/.bashrc` to use it.
+    インストール後、 `~/.bashrc` TiUP をPATH に追加するように変更されているため、これを使用するには、新しいターミナルを開くか、グローバル環境変数`source ~/.bashrc`を再宣言する必要があります。
 
-2. Install the TiUP DM component:
-
-    {{< copyable "shell-regular" >}}
+2.  TiUP DMコンポーネントをインストールします。
 
     ```shell
     tiup install dm dmctl
     ```
 
-## Step 2: Edit the initialization configuration file
+## ステップ 2: 初期化構成ファイルを編集する {#step-2-edit-the-initialization-configuration-file}
 
-According to the intended cluster topology, you need to manually create and edit the cluster initialization configuration file.
+目的のクラスター トポロジに応じて、クラスター初期化構成ファイルを手動で作成および編集する必要があります。
 
-You need to create a YAML configuration file (named `topology.yaml` for example) according to the [configuration file template](https://github.com/pingcap/tiup/blob/master/embed/examples/dm/topology.example.yaml). For other scenarios, edit the configuration accordingly.
+[設定ファイルのテンプレート](https://github.com/pingcap/tiup/blob/master/embed/examples/dm/topology.example.yaml)に従って、YAML 構成ファイル (たとえば`topology.yaml`という名前) を作成する必要があります。他のシナリオの場合は、それに応じて構成を編集します。
 
-You can use the command `tiup dm template > topology.yaml` to generate a configuration file template quickly.
+コマンド`tiup dm template > topology.yaml`を使用すると、構成ファイルのテンプレートをすばやく生成できます。
 
-The configuration of deploying three DM-masters, three DM-workers, and one monitoring component instance is as follows:
+3 つの DM マスター、3 つの DM ワーカー、および 1 つの監視コンポーネントインスタンスをデプロイする構成は次のとおりです。
 
 ```yaml
 # The global variables apply to all other components in the configuration. If one specific value is missing in the component instance, the corresponding global variable serves as the default value.
@@ -132,57 +128,53 @@ alertmanager_servers:
 
 ```
 
-> **Note:**
-> 
-> - It is not recommended to run too many DM-workers on one host. Each DM-worker should be allocated at least 2 core CPU and 4 GiB memory.
+> **注記：**
 >
-> - Make sure that the ports among the following components are interconnected:
->     - The `peer_port` (`8291` by default) among the DM-master nodes are interconnected.
->     - Each DM-master node can connect to the `port` of all DM-worker nodes (`8262` by default).
->     - Each DM-worker node can connect to the `port` of all DM-master nodes (`8261` by default).
->     - The TiUP nodes can connect to the `port` of all DM-master nodes (`8261` by default).
->     - The TiUP nodes can connect to the `port` of all DM-worker nodes (`8262` by default).
-
-For more `master_servers.host.config` parameter description, refer to [master parameter](https://github.com/pingcap/dm/blob/master/dm/master/dm-master.toml). For more `worker_servers.host.config` parameter description, refer to [worker parameter](https://github.com/pingcap/dm/blob/master/dm/worker/dm-worker.toml).
-
-## Step 3: Execute the deployment command
-
-> **Note:**
+> -   1 つのホスト上であまりにも多くの DM ワーカーを実行することはお勧めできません。各 DM ワーカーには、少なくとも 2 コアの CPU と 4 GiB のメモリを割り当てる必要があります。
 >
-> You can use secret keys or interactive passwords for security authentication when you deploy TiDB using TiUP:
->
-> - If you use secret keys, you can specify the path of the keys through `-i` or `--identity_file`;
-> - If you use passwords, add the `-p` flag to enter the password interaction window;
-> - If password-free login to the target machine has been configured, no authentication is required.
+> -   次のコンポーネント間のポートが相互接続されていることを確認してください。
+>     -   DM マスター ノードのうちの`peer_port` (デフォルトでは`8291` ) は相互接続されています。
+>     -   各 DM マスター ノードは、すべての DM ワーカー ノードのうち`port` (デフォルトでは`8262` ) に接続できます。
+>     -   各 DM ワーカー ノードは、すべての DM マスター ノードのうち`port` (デフォルトでは`8261` ) に接続できます。
+>     -   TiUPノードは、すべての DM マスター ノードのうちの`port`に接続できます (デフォルトでは`8261` )。
+>     -   TiUPノードは、すべての DM ワーカー ノードのうちの`port`に接続できます (デフォルトでは`8262` )。
 
-{{< copyable "shell-regular" >}}
+`master_servers.host.config`パラメータの詳細については、 [マスターパラメータ](https://github.com/pingcap/dm/blob/master/dm/master/dm-master.toml)を参照してください。 `worker_servers.host.config`パラメータの詳細については、 [ワーカーパラメータ](https://github.com/pingcap/dm/blob/master/dm/worker/dm-worker.toml)を参照してください。
+
+## ステップ 3: デプロイメント コマンドを実行する {#step-3-execute-the-deployment-command}
+
+> **注記：**
+>
+> TiUPを使用して TiDB をデプロイする場合、セキュリティ認証に秘密キーまたは対話型パスワードを使用できます。
+>
+> -   秘密キーを使用する場合は、 `-i`または`--identity_file`でキーのパスを指定できます。
+> -   パスワードを使用する場合は、 `-p`フラグを追加してパスワード対話ウィンドウに入ります。
+> -   ターゲット マシンへのパスワードなしのログインが設定されている場合、認証は必要ありません。
 
 ```shell
 tiup dm deploy ${name} ${version} ./topology.yaml -u ${ssh_user} [-p] [-i /home/root/.ssh/gcp_rsa]
 ```
 
-The parameters used in this step are as follows.
+このステップで使用されるパラメータは次のとおりです。
 
-|Parameter|Description|
-|-|-|
-|`${name}` | The name of the DM cluster, eg: dm-test|
-|`${version}` | The version of the DM cluster. You can see other supported versions by running `tiup list dm-master`. |
-|`./topology.yaml`| The path of the topology configuration file.|
-|`-u` or `--user`| Log in to the target machine as the root user or other user account with ssh and sudo privileges to complete the cluster deployment.|
-|`-p` or `--password`| The password of target hosts. If specified, password authentication is used.|
-|`-i` or `--identity_file`| The path of the SSH identity file. If specified, public key authentication is used (default "/root/.ssh/id_rsa").|
+| パラメータ                    | 説明                                                                           |
+| ------------------------ | ---------------------------------------------------------------------------- |
+| `${name}`                | DM クラスターの名前 (例: dm-test)                                                     |
+| `${version}`             | DM クラスターのバージョン。 `tiup list dm-master`を実行すると、サポートされている他のバージョンを確認できます。         |
+| `./topology.yaml`        | トポロジ構成ファイルのパス。                                                               |
+| `-u`または`--user`          | root ユーザーまたは ssh および sudo権限を持つ他のユーザー アカウントとしてターゲット マシンにログインし、クラスターの展開を完了します。 |
+| `-p`または`--password`      | ターゲットホストのパスワード。指定した場合、パスワード認証が使用されます。                                        |
+| `-i`または`--identity_file` | SSH ID ファイルのパス。指定した場合、公開キー認証が使用されます (デフォルトは「/root/.ssh/id_rsa」)。             |
 
-At the end of the output log, you will see ```Deployed cluster `dm-test` successfully```. This indicates that the deployment is successful.
+出力ログの最後には``Deployed cluster `dm-test` successfully``が表示されます。これは、展開が成功したことを示します。
 
-## Step 4: Check the clusters managed by TiUP
-
-{{< copyable "shell-regular" >}}
+## ステップ 4: TiUPによって管理されているクラスターを確認する {#step-4-check-the-clusters-managed-by-tiup}
 
 ```shell
 tiup dm list
 ```
 
-TiUP supports managing multiple DM clusters. The command above outputs information of all the clusters currently managed by TiUP, including the name, deployment user, version, and secret key information:
+TiUP は、複数の DM クラスターの管理をサポートします。上記のコマンドは、名前、デプロイメント ユーザー、バージョン、秘密キー情報など、現在TiUPによって管理されているすべてのクラスターの情報を出力します。
 
 ```log
 Name  User  Version  Path                                  PrivateKey
@@ -190,42 +182,36 @@ Name  User  Version  Path                                  PrivateKey
 dm-test  tidb  ${version}  /root/.tiup/storage/dm/clusters/dm-test  /root/.tiup/storage/dm/clusters/dm-test/ssh/id_rsa
 ```
 
-## Step 5: Check the status of the deployed DM cluster
+## ステップ 5: デプロイされた DM クラスターのステータスを確認する {#step-5-check-the-status-of-the-deployed-dm-cluster}
 
-To check the status of the `dm-test` cluster, execute the following command:
-
-{{< copyable "shell-regular" >}}
+`dm-test`クラスターのステータスを確認するには、次のコマンドを実行します。
 
 ```shell
 tiup dm display dm-test
 ```
 
-Expected output includes the instance ID, role, host, listening port, and status (because the cluster is not started yet, so the status is `Down`/`inactive`), and directory information.
+予期される出力には、インスタンス ID、ロール、ホスト、リスニング ポート、ステータス (クラスターがまだ起動していないため、ステータスは`Down` / `inactive`です)、およびディレクトリ情報が含まれます。
 
-## Step 6: Start the DM cluster
-
-{{< copyable "shell-regular" >}}
+## ステップ 6: DM クラスターを開始する {#step-6-start-the-dm-cluster}
 
 ```shell
 tiup dm start dm-test
 ```
 
-If the output log includes ```Started cluster `dm-test` successfully```, the start is successful.
+出力ログに``Started cluster `dm-test` successfully``が含まれていれば、起動は成功です。
 
-## Step 7: Verify the running status of the DM cluster
+## ステップ 7: DM クラスターの実行ステータスを確認する {#step-7-verify-the-running-status-of-the-dm-cluster}
 
-Check the DM cluster status using TiUP:
-
-{{< copyable "shell-regular" >}}
+TiUPを使用して DM クラスターのステータスを確認します。
 
 ```shell
 tiup dm display dm-test
 ```
 
-If the `Status` is `Up` in the output, the cluster status is normal.
+出力の`Status`が`Up`の場合、クラスターのステータスは正常です。
 
-## Step 8: Managing migration tasks using dmctl
+## ステップ 8: dmctl を使用した移行タスクの管理 {#step-8-managing-migration-tasks-using-dmctl}
 
-dmctl is a command-line tool used to control DM clusters. You are recommended to [use dmctl via TiUP](/dm/maintain-dm-using-tiup.md#dmctl).
+dmctl は、DM クラスターの制御に使用されるコマンドライン ツールです。 [TiUP経由で dmctl を使用する](/dm/maintain-dm-using-tiup.md#dmctl)をお勧めします。
 
-dmctl supports both the command mode and the interactive mode. For details, see [Maintain DM Clusters Using dmctl](/dm/dmctl-introduction.md#maintain-dm-clusters-using-dmctl).
+dmctl は、コマンド モードと対話モードの両方をサポートします。詳細は[dmctl を使用した DM クラスターの管理](/dm/dmctl-introduction.md#maintain-dm-clusters-using-dmctl)を参照してください。

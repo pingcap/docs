@@ -3,85 +3,81 @@ title: Backup Auto-Tune
 summary: Learn about the auto-tune feature of TiDB backup and restore, which automatically limits the resources used by backups to reduce the impact on the cluster in case of high cluster resource usage.
 ---
 
-# Backup Auto-Tune <span class="version-mark">New in v5.4.0</span>
+# バックアップ自動調整<span class="version-mark">v5.4.0 の新機能</span> {#backup-auto-tune-span-class-version-mark-new-in-v5-4-0-span}
 
-Before TiDB v5.4.0, when you back up data using Backup & Restore (BR), the number of threads used for backup makes up 75% of the logical CPU cores. Without a speed limit, the backup process can consume a lot of cluster resources, which has a considerable impact on the performance of the online cluster. Although you can reduce the impact of backup by adjusting the size of the thread pool, it is a tedious task to observe the CPU load and manually adjust the thread pool size.
+TiDB v5.4.0 より前では、バックアップと復元 (BR) を使用してデータをバックアップする場合、バックアップに使用されるスレッドの数は論理 CPU コアの 75% を占めていました。速度制限がないと、バックアップ プロセスで大量のクラスター リソースが消費される可能性があり、オンライン クラスターのパフォーマンスに大きな影響を与えます。スレッド プールのサイズを調整することでバックアップの影響を軽減できますが、CPU 負荷を観察してスレッド プール サイズを手動で調整するのは面倒な作業です。
 
-To reduce the impact of backup tasks on the cluster, TiDB v5.4.0 introduces the auto-tune feature, which is enabled by default. When the cluster resource utilization is high, BR automatically limits the resources used by backup tasks and thereby reduces their impact on the cluster. The auto-tune feature is enabled by default.
+クラスターに対するバックアップ タスクの影響を軽減するために、TiDB v5.4.0 では自動調整機能が導入されており、これはデフォルトで有効になっています。クラスターのリソース使用率が高い場合、 BR はバックアップ タスクで使用されるリソースを自動的に制限し、クラスターへの影響を軽減します。自動調整機能はデフォルトで有効になっています。
 
-## Usage scenario
+## 利用シーン {#usage-scenario}
 
-If you want to reduce the impact of backup tasks on the cluster, you can enable the auto-tune feature. With this feature enabled, TiDB performs backup tasks as fast as possible without excessively affecting the cluster.
+クラスターに対するバックアップ タスクの影響を軽減したい場合は、自動調整機能を有効にすることができます。この機能を有効にすると、TiDB はクラスターに過度の影響を与えることなく、可能な限り高速にバックアップ タスクを実行します。
 
-Alternatively, you can limit the backup speed by using the TiKV configuration item [`backup.num-threads`](/tikv-configuration-file.md#num-threads-1) or using the parameter `--ratelimit`.
+あるいは、TiKV 構成項目[`backup.num-threads`](/tikv-configuration-file.md#num-threads-1)またはパラメーター`--ratelimit`を使用して、バックアップ速度を制限することもできます。
 
-## Use auto-tune
+## 自動調整を使用する {#use-auto-tune}
 
-The auto-tune feature is enabled by default, without additional configuration.
+自動調整機能は、追加の構成を行わなくても、デフォルトで有効になっています。
 
-> **Note:**
+> **注記：**
 >
-> For clusters that upgrade from v5.3.x to v5.4.0 or later versions, the auto-tune feature is disabled by default. You need to manually enable it.
+> v5.3.x から v5.4.0 以降のバージョンにアップグレードするクラスターの場合、自動調整機能はデフォルトで無効になっています。手動で有効にする必要があります。
 
-To manually enable the auto-tune feature, you need to set the TiKV configuration item [`backup.enable-auto-tune`](/tikv-configuration-file.md#enable-auto-tune-new-in-v540) to `true`.
+自動調整機能を手動で有効にするには、TiKV 構成項目[`backup.enable-auto-tune`](/tikv-configuration-file.md#enable-auto-tune-new-in-v540) ～ `true`を設定する必要があります。
 
-TiKV supports dynamically configuring the auto-tune feature. You can enable or disable the feature without restarting your cluster. To dynamically enable or disable the auto-tune feature, run the following command:
-
-{{< copyable "shell-regular" >}}
+TiKV は、自動調整機能の動的構成をサポートしています。クラスターを再起動せずに、この機能を有効または無効にすることができます。自動調整機能を動的に有効または無効にするには、次のコマンドを実行します。
 
 ```shell
 tikv-ctl modify-tikv-config -n backup.enable-auto-tune -v <true|false>
 ```
 
-When you perform backup tasks on an offline cluster, to speed up the backup, you can modify the value of `backup.num-threads` to a larger number using `tikv-ctl`.
+オフライン クラスターでバックアップ タスクを実行する場合、バックアップを高速化するために、 `tikv-ctl`を使用して`backup.num-threads`の値をより大きな数値に変更できます。
 
-## Limitations
+## 制限事項 {#limitations}
 
-Auto-tune is a coarse-grained solution for limiting backup speed. It reduces the need for manual tuning. However, because of the lack of fine-grained control, auto-tune might not be able to completely remove the impact of backup on the cluster.
+自動調整は、バックアップ速度を制限するための粗粒度のソリューションです。これにより、手動調整の必要性が軽減されます。ただし、きめ細かい制御ができないため、自動調整ではクラスターに対するバックアップの影響を完全に除去できない可能性があります。
 
-The auto-tune feature has the following issues and corresponding solutions:
+自動調整機能には次の問題とそれに対応する解決策があります。
 
-- Issue 1: For **write-heavy clusters**, auto-tune might put the workload and backup tasks into a "positive feedback loop": the backup tasks take up too many resources, which causes the cluster to use fewer resources; at this point, auto-tune might mistakenly assume that the cluster is not under heavy workload and thus allowing backup to run faster. In such cases, auto-tune is ineffective.
+-   問題 1:**書き込み負荷の高いクラスター**の場合、自動チューニングによってワークロードとバックアップ タスクが「正のフィードバック ループ」に陥る可能性があります。バックアップ タスクが多くのリソースを消費するため、クラスターで使用されるリソースが少なくなります。この時点で、自動調整はクラスターに大きなワークロードがかかっていないと誤って判断する可能性があり、そのためバックアップがより高速に実行される可能性があります。このような場合、オートチューニングは効果がありません。
 
-    - Solution: Manually adjust `backup.num-threads` to a smaller number to limit the number of threads used by backup tasks. The working principle is as follows:
+    -   解決策: バックアップ タスクで使用されるスレッドの数を制限するには、 `backup.num-threads`をより小さい数値に手動で調整します。動作原理は次のとおりです。
 
-        The backup process includes lots of SST decoding, encoding, compression, and decompression, which consume CPU resources. In addition, previous test cases have shown that during the backup process, the CPU utilization of the thread pool used for backup is close to 100%. This means that the backup tasks take up a lot of CPU resources. By adjusting the number of threads used by the backup tasks, TiKV can limit the CPU cores used by backup tasks, thus reducing the impact of backup tasks on the cluster performance.
+        バックアップ プロセスには多くの SST デコード、エンコード、圧縮、解凍が含まれており、CPU リソースを消費します。さらに、以前のテスト ケースでは、バックアップ プロセス中に、バックアップに使用されるスレッド プールの CPU 使用率が 100% に近いことが示されています。これは、バックアップ タスクが大量の CPU リソースを消費することを意味します。バックアップ タスクで使用されるスレッドの数を調整することで、TiKV はバックアップ タスクで使用される CPU コアを制限し、クラスターのパフォーマンスに対するバックアップ タスクの影響を軽減できます。
 
-- Issue 2: For **clusters with hotspots**, backup tasks on the TiKV node that has hotspots might be excessively limited, which slows down the overall backup process.
+-   問題 2:**ホットスポットのあるクラスター**の場合、ホットスポットのある TiKV ノード上のバックアップ タスクが過度に制限される可能性があり、これによりバックアップ プロセス全体が遅くなります。
 
-    - Solution: Eliminate the hotspot node, or disable auto-tune on the hotspot node (this might reduce the cluster performance).
+    -   解決策: ホットスポット ノードを削除するか、ホットスポット ノードの自動調整を無効にします (クラスターのパフォーマンスが低下する可能性があります)。
 
-- Issue 3: For scenarios with **high traffic jitter**, because auto-tune adjusts the speed limit on a fixed interval (1 minute by default), it might not be able to handle high traffic jitter. For details, see [`auto-tune-refresh-interval`](#implementation).
+-   問題 3:**トラフィック ジッターが高い**シナリオの場合、自動調整は一定の間隔 (デフォルトでは 1 分) で速度制限を調整するため、トラフィック ジッターが大きい場合は処理できない可能性があります。詳細は[`auto-tune-refresh-interval`](#implementation)を参照してください。
 
-    - Solution: Disable auto-tune.
+    -   解決策: 自動調整を無効にします。
 
-## Implementation
+## 実装 {#implementation}
 
-Auto-tune adjusts the size of the thread pool used by backup tasks to ensure that the overall CPU utilization of the cluster does not exceed a specific threshold.
+自動調整は、クラスターの全体的な CPU 使用率が特定のしきい値を超えないように、バックアップ タスクで使用されるスレッド プールのサイズを調整します。
 
-This feature has two related configuration items not listed in the TiKV configuration file. These two configuration items are only for internal tuning. You do **not** need to configure these two configuration items when you perform backup tasks.
+この機能には、TiKV 構成ファイルにリストされていない 2 つの関連構成項目があります。これら 2 つの設定項目は内部チューニング専用です。バックアップ タスクを実行する場合、これら 2 つの構成項目を構成する必要はありませ**ん**。
 
-- `backup.auto-tune-remain-threads`:
+-   `backup.auto-tune-remain-threads` :
 
-    - Auto-tune controls the resources used by the backup tasks and ensures that at least `backup.auto-tune-remain-threads` cores are available for other tasks on the same node.
-    - Default value: `round(0.2 * vCPU)`
+    -   自動調整は、バックアップ タスクで使用されるリソースを制御し、同じノード上の他のタスクで少なくとも`backup.auto-tune-remain-threads`コアが使用できるようにします。
+    -   デフォルト値: `round(0.2 * vCPU)`
 
-- `backup.auto-tune-refresh-interval`:
+-   `backup.auto-tune-refresh-interval` :
 
-    - Every `backup.auto-tune-refresh-interval` minute(s), auto-tune refreshes the statistics and recalculates the maximum number of CPU cores that backup tasks can use.
-    - Default value: `1m`
+    -   自動調整は`backup.auto-tune-refresh-interval`分ごとに統計を更新し、バックアップ タスクが使用できる CPU コアの最大数を再計算します。
+    -   デフォルト値: `1m`
 
-The following is an example of how auto-tune works. `*` denotes a CPU core used by backup tasks. `^` denotes a CPU core used by other tasks. `-` denotes an idle CPU core.
+以下は、自動調整がどのように機能するかの例です。 `*`バックアップタスクで使用される CPU コアを示します。 `^`他のタスクが使用するＣＰＵコアである。 `-`アイドル状態のＣＰＵコアを示す。
 
-```
-|--------| The server has 8 logical CPU cores.
-|****----| By default, `backup.num-threads` is `4`. Note that auto-tune makes sure that the thread pool size is never larger than `backup.num-threads`.
-|^^****--| By default, `auto-tune-remain-threads` = round(8 * 0.2) = 2. Auto-tune adjusts the size of the thread pool to `4`.
-|^^^^**--| Because the cluster workload gets higher, auto-tune adjusts the size of the thread pool to `2`. After that, the cluster still has 2 idle CPU cores.
-```
+    |--------| The server has 8 logical CPU cores.
+    |****----| By default, `backup.num-threads` is `4`. Note that auto-tune makes sure that the thread pool size is never larger than `backup.num-threads`.
+    |^^****--| By default, `auto-tune-remain-threads` = round(8 * 0.2) = 2. Auto-tune adjusts the size of the thread pool to `4`.
+    |^^^^**--| Because the cluster workload gets higher, auto-tune adjusts the size of the thread pool to `2`. After that, the cluster still has 2 idle CPU cores.
 
-In the **Backup CPU Utilization** panel, you can see the size of the thread pool adjusted by auto-tune:
+**[バックアップ CPU 使用率]**パネルで、自動調整によって調整されたスレッド プールのサイズを確認できます。
 
 ![Grafana dashboard example of backup auto-tune metrics](/media/br/br-auto-throttle.png)
 
-In the image above, the yellow semi-transparent area represents the threads available for backup tasks. You can see the CPU utilization of backup tasks does not go beyond the yellow area.
+上の画像では、黄色の半透明の領域はバックアップ タスクに使用できるスレッドを表しています。バックアップ タスクの CPU 使用率が黄色の領域を超えていないことがわかります。

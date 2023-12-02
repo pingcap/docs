@@ -3,137 +3,140 @@ title: Integrate TiDB with Amazon AppFlow
 summary: Introduce how to integrate TiDB with Amazon AppFlow step by step.
 ---
 
-# Integrate TiDB with Amazon AppFlow
+# TiDB と Amazon AppFlow を統合する {#integrate-tidb-with-amazon-appflow}
 
-[Amazon AppFlow](https://aws.amazon.com/appflow/) is a fully managed API integration service that you use to connect your software as a service (SaaS) applications to AWS services, and securely transfer data. With Amazon AppFlow, you can import and export data from and to TiDB into many types of data providers, such as Salesforce, Amazon S3, LinkedIn, and GitHub. For more information, see [Supported source and destination applications](https://docs.aws.amazon.com/appflow/latest/userguide/app-specific.html) in AWS documentation.
+[Amazon アプリフロー](https://aws.amazon.com/appflow/)は、Software as a Service (SaaS) アプリケーションを AWS サービスに接続し、データを安全に転送するために使用するフルマネージド API 統合サービスです。 Amazon AppFlow を使用すると、TiDB との間で、Salesforce、Amazon S3、LinkedIn、GitHub などのさまざまなタイプのデータプロバイダーにデータをインポートおよびエクスポートできます。詳細については、AWS ドキュメントの[サポートされているソースおよび宛先アプリケーション](https://docs.aws.amazon.com/appflow/latest/userguide/app-specific.html)参照してください。
 
-This document describes how to integrate TiDB with Amazon AppFlow and takes integrating a TiDB Serverless cluster as an example.
+このドキュメントでは、TiDB を Amazon AppFlow と統合する方法について説明し、例として TiDB サーバーレスクラスターの統合を取り上げます。
 
-If you do not have a TiDB cluster, you can create a [TiDB Serverless](https://tidbcloud.com/console/clusters) cluster, which is free and can be created in approximately 30 seconds.
+TiDB クラスターがない場合は、 [TiDB サーバーレス](https://tidbcloud.com/console/clusters)クラスターを作成できます。これは無料で、約 30 秒で作成できます。
 
-## Prerequisites
+## 前提条件 {#prerequisites}
 
-- [Git](https://git-scm.com/)
-- [JDK](https://openjdk.org/install/) 11 or above
-- [Maven](https://maven.apache.org/install.html) 3.8 or above
-- [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html) version 2
-- [AWS Serverless Application Model Command Line Interface (AWS SAM CLI)](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/install-sam-cli.html) 1.58.0 or above
-- An AWS [Identity and Access Management (IAM) user](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users.html) with the following requirements:
+-   [ギット](https://git-scm.com/)
 
-    - The user can access AWS using an [access key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html).
-    - The user has the following permissions:
+-   [JDK](https://openjdk.org/install/) 11以上
 
-        - `AWSCertificateManagerFullAccess`: used for reading and writing the [AWS Secrets Manager](https://aws.amazon.com/secrets-manager/).
-        - `AWSCloudFormationFullAccess`: SAM CLI uses [AWS CloudFormation](https://aws.amazon.com/cloudformation/) to proclaim the AWS resources.
-        - `AmazonS3FullAccess`: AWS CloudFormation uses [Amazon S3](https://aws.amazon.com/s3/?nc2=h_ql_prod_fs_s3) to publish.
-        - `AWSLambda_FullAccess`: currently, [AWS Lambda](https://aws.amazon.com/lambda/?nc2=h_ql_prod_fs_lbd) is the only way to implement a new connector for Amazon AppFlow.
-        - `IAMFullAccess`: SAM CLI needs to create a `ConnectorFunctionRole` for the connector.
+-   [メイビン](https://maven.apache.org/install.html) 3.8以上
 
-- A [SalesForce](https://developer.salesforce.com) account.
+-   [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)バージョン 2
 
-## Step 1. Register a TiDB connector
+-   [AWS サーバーレス アプリケーション モデル コマンドライン インターフェイス (AWS SAM CLI)](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/install-sam-cli.html) 1.58.0以上
 
-### Clone the code
+-   次の要件を持つ AWS [Identity and Access Management (IAM) ユーザー](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users.html) :
 
-Clone the [integration example code repository](https://github.com/pingcap-inc/tidb-appflow-integration) for TiDB and Amazon AppFlow:
+    -   ユーザーは[アクセスキー](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html)を使用して AWS にアクセスできます。
+    -   ユーザーには次の権限があります。
+
+        -   `AWSCertificateManagerFullAccess` : [AWS シークレットマネージャー](https://aws.amazon.com/secrets-manager/)読み取りおよび書き込みに使用されます。
+        -   `AWSCloudFormationFullAccess` : SAM CLI は[AWSクラウドフォーメーション](https://aws.amazon.com/cloudformation/)を使用して AWS リソースを宣言します。
+        -   `AmazonS3FullAccess` : AWS CloudFormation は公開に[アマゾンS3](https://aws.amazon.com/s3/?nc2=h_ql_prod_fs_s3)を使用します。
+        -   `AWSLambda_FullAccess` : 現在、Amazon AppFlow の新しいコネクタを実装する唯一の方法は[AWSラムダ](https://aws.amazon.com/lambda/?nc2=h_ql_prod_fs_lbd)です。
+        -   `IAMFullAccess` : SAM CLI はコネクタに`ConnectorFunctionRole`を作成する必要があります。
+
+-   [セールスフォース](https://developer.salesforce.com)アカウント。
+
+## ステップ 1. TiDB コネクタを登録する {#step-1-register-a-tidb-connector}
+
+### コードのクローンを作成する {#clone-the-code}
+
+TiDB と Amazon AppFlow 用に[統合サンプルコードリポジトリ](https://github.com/pingcap-inc/tidb-appflow-integration)クローンを作成します。
 
 ```bash
 git clone https://github.com/pingcap-inc/tidb-appflow-integration
 ```
 
-### Build and upload a Lambda
+### Lambdaを構築してアップロードする {#build-and-upload-a-lambda}
 
-1. Build the package:
+1.  パッケージをビルドします。
 
     ```bash
     cd tidb-appflow-integration
     mvn clean package
     ```
 
-2. (Optional) Configure your AWS access key ID and secret access key if you have not.
+2.  (オプション) まだ設定していない場合は、AWS アクセス キー ID とシークレット アクセス キーを設定します。
 
     ```bash
     aws configure
     ```
 
-3. Upload your JAR package as a Lambda:
+3.  JAR パッケージを Lambda としてアップロードします。
 
     ```bash
     sam deploy --guided
     ```
 
-    > **Note:**
+    > **注記：**
     >
-    > - The `--guided` option uses prompts to guide you through the deployment. Your input will be stored in a configuration file, which is `samconfig.toml` by default.
-    > - `stack_name` specifies the name of AWS Lambda that you are deploying.
-    > - This prompted guide uses AWS as the cloud provider of TiDB Serverless. To use Amazon S3 as the source or destination, you need to set the `region` of AWS Lambda as the same as that of Amazon S3.
-    > - If you have already run `sam deploy --guided` before, you can just run `sam deploy` instead, and SAM CLI will use the configuration file `samconfig.toml` to simplify the interaction.
+    > -   `--guided`オプションでは、プロンプトを使用して展開をガイドします。入力は構成ファイルに保存されます。デフォルトでは`samconfig.toml`です。
+    > -   `stack_name`デプロイする AWS Lambda の名前を指定します。
+    > -   このプロンプト ガイドでは、TiDB サーバーレスのクラウド プロバイダーとして AWS を使用します。 Amazon S3 を送信元または宛先として使用するには、AWS Lambda の`region`を Amazon S3 の 1 と同じに設定する必要があります。
+    > -   すでに`sam deploy --guided`を実行している場合は、代わりに`sam deploy`実行するだけで済みます。SAM CLI は構成ファイル`samconfig.toml`を使用して対話を簡素化します。
 
-    If you see a similar output as follows, this Lambda is successfully deployed.
+    次のような出力が表示された場合、この Lambda は正常にデプロイされています。
 
-    ```
-    Successfully created/updated stack - <stack_name> in <region>
-    ```
+        Successfully created/updated stack - <stack_name> in <region>
 
-4. Go to the [AWS Lambda console](https://console.aws.amazon.com/lambda/home), and you can see the Lambda that you just uploaded. Note that you need to select the correct region in the upper-right corner of the window.
+4.  [AWS Lambda コンソール](https://console.aws.amazon.com/lambda/home)に移動すると、アップロードしたばかりの Lambda が表示されます。ウィンドウの右上隅で正しい領域を選択する必要があることに注意してください。
 
     ![lambda dashboard](/media/develop/aws-appflow-step-lambda-dashboard.png)
 
-### Use Lambda to register a connector
+### Lambda を使用してコネクタを登録する {#use-lambda-to-register-a-connector}
 
-1. In the [AWS Management Console](https://console.aws.amazon.com), navigate to [Amazon AppFlow > Connectors](https://console.aws.amazon.com/appflow/home#/gallery) and click **Register new connector**.
+1.  [AWS マネジメントコンソール](https://console.aws.amazon.com)で、 [Amazon AppFlow &gt; コネクタ](https://console.aws.amazon.com/appflow/home#/gallery)に移動し、 **[新しいコネクタの登録]**をクリックします。
 
     ![register connector](/media/develop/aws-appflow-step-register-connector.png)
 
-2. In the **Register a new connector** dialog, choose the Lambda function you uploaded and specify the connector label using the connector name.
+2.  **[新しいコネクタの登録] ダイアログ**で、アップロードした Lambda 関数を選択し、コネクタ名を使用してコネクタ ラベルを指定します。
 
     ![register connector dialog](/media/develop/aws-appflow-step-register-connector-dialog.png)
 
-3. Click **Register**. Then, a TiDB connector is registered successfully.
+3.  **「登録」**をクリックします。その後、TiDB コネクタが正常に登録されます。
 
-## Step 2. Create a flow
+## ステップ 2. フローを作成する {#step-2-create-a-flow}
 
-Navigate to [Amazon AppFlow > Flows](https://console.aws.amazon.com/appflow/home#/list) and click **Create flow**.
+[Amazon AppFlow &gt; フロー](https://console.aws.amazon.com/appflow/home#/list)に移動し、 **[フローの作成]**をクリックします。
 
 ![create flow](/media/develop/aws-appflow-step-create-flow.png)
 
-### Set the flow name
+### フロー名を設定します {#set-the-flow-name}
 
-Enter the flow name, and then click **Next**.
+フロー名を入力し、 **[次へ]**をクリックします。
 
 ![name flow](/media/develop/aws-appflow-step-name-flow.png)
 
-### Set the source and destination tables
+### ソーステーブルと宛先テーブルを設定する {#set-the-source-and-destination-tables}
 
-Choose the **Source details** and **Destination details**. TiDB connector can be used in both of them.
+**ソースの詳細**と**宛先の詳細を**選択します。 TiDB コネクタは両方で使用できます。
 
-1. Choose the source name. This document uses **Salesforce** as an example source.
+1.  ソース名を選択します。このドキュメントでは、サンプル ソースとして**Salesforce**を使用します。
 
     ![salesforce source](/media/develop/aws-appflow-step-salesforce-source.png)
 
-    After you register to Salesforce, Salesforce will add some example data to your platform. The following steps will use the **Account** object as an example source object.
+    Salesforce に登録すると、Salesforce によってサンプル データがプラットフォームに追加されます。次の手順では、ソース オブジェクトの例として**Account**オブジェクトを使用します。
 
     ![salesforce data](/media/develop/aws-appflow-step-salesforce-data.png)
 
-2. Click **Connect**.
+2.  **「接続」**をクリックします。
 
-    1. In the **Connect to Salesforce** dialog, specify the name of this connection, and then click **Continue**.
+    1.  **[Salesforce に接続]**ダイアログで、この接続の名前を指定し、 **[続行]**をクリックします。
 
         ![connect to salesforce](/media/develop/aws-appflow-step-connect-to-salesforce.png)
 
-    2. Click **Allow** to confirm that AWS can read your Salesforce data.
+    2.  **[許可]**をクリックして、AWS が Salesforce データを読み取ることができることを確認します。
 
         ![allow salesforce](/media/develop/aws-appflow-step-allow-salesforce.png)
 
-    > **Note:**
+    > **注記：**
     >
-    > If your company has already used the Professional Edition of Salesforce, the REST API is not enabled by default. You might need to register a new Developer Edition to use the REST API. For more information, refer to [Salesforce Forum Topic](https://developer.salesforce.com/forums/?id=906F0000000D9Y2IAK).
+    > 会社がすでに Salesforce の Professional Edition を使用している場合、REST API はデフォルトでは有効になっていません。 REST API を使用するには、新しい Developer Edition の登録が必要になる場合があります。詳細については、 [Salesforce フォーラムのトピック](https://developer.salesforce.com/forums/?id=906F0000000D9Y2IAK)を参照してください。
 
-3. In the **Destination details** area, choose **TiDB-Connector** as the destination. The **Connect** button is displayed.
+3.  **[宛先の詳細]**領域で、宛先として**TiDB-Connector**を選択します。 **「接続」**ボタンが表示されます。
 
     ![tidb dest](/media/develop/aws-appflow-step-tidb-dest.png)
 
-4. Before clicking **Connect**, you need to create a `sf_account` table in TiDB for the Salesforce **Account** object. Note that this table schema is different from the sample data in [Tutorial of Amazon AppFlow](https://docs.aws.amazon.com/appflow/latest/userguide/flow-tutorial-set-up-source.html).
+4.  **[接続]**をクリックする前に、TiDB に Salesforce **Account**オブジェクト用の`sf_account`を作成する必要があります。このテーブル スキーマは[Amazon AppFlowのチュートリアル](https://docs.aws.amazon.com/appflow/latest/userguide/flow-tutorial-set-up-source.html)のサンプル データとは異なることに注意してください。
 
     ```sql
     CREATE TABLE `sf_account` (
@@ -147,28 +150,29 @@ Choose the **Source details** and **Destination details**. TiDB connector can be
     );
     ```
 
-5. After the `sf_account` table is created, click **Connect**. A connection dialog is displayed.
-6. In the **Connect to TiDB-Connector** dialog, enter the connection properties of the TiDB cluster. If you use a TiDB Serverless cluster, you need to set the **TLS** option to `Yes`, which lets the TiDB connector use the TLS connection. Then, click **Connect**.
+5.  `sf_account`テーブルが作成されたら、 **「接続」**をクリックします。接続ダイアログが表示されます。
+
+6.  **[TiDB コネクタに接続]**ダイアログで、TiDB クラスターの接続プロパティを入力します。 TiDB サーバーレス クラスターを使用する場合は、 **TLS**オプションを`Yes`に設定する必要があります。これにより、TiDB コネクタが TLS 接続を使用できるようになります。次に、 **「接続」を**クリックします。
 
     ![tidb connection message](/media/develop/aws-appflow-step-tidb-connection-message.png)
 
-7. Now you can get all tables in the database that you specified for connection. Choose the **sf_account** table from the drop-down list.
+7.  これで、接続に指定したデータベース内のすべてのテーブルを取得できるようになりました。ドロップダウン リストから**sf_account**テーブルを選択します。
 
     ![database](/media/develop/aws-appflow-step-database.png)
 
-    The following screenshot shows the configurations to transfer data from the Salesforce **Account** object to the `sf_account` table in TiDB:
+    次のスクリーンショットは、Salesforce **Account**オブジェクトから TiDB の`sf_account`テーブルにデータを転送するための設定を示しています。
 
     ![complete flow](/media/develop/aws-appflow-step-complete-flow.png)
 
-8. In the **Error handling** area, choose **Stop the current flow run**. In the **Flow trigger** area, choose the **Run on demand** trigger type, which means you need to run the flow manually. Then, click **Next**.
+8.  **[エラー処理]**領域で、 **[現在のフローの実行を停止する]**を選択します。 **[フロー トリガー]**領域で、 **[オンデマンドで実行**] トリガー タイプを選択します。これは、フローを手動で実行する必要があることを意味します。次に、 **「次へ」**をクリックします。
 
     ![complete step1](/media/develop/aws-appflow-step-complete-step1.png)
 
-### Set mapping rules
+### マッピングルールを設定する {#set-mapping-rules}
 
-Map the fields of the **Account** object in Salesforce to the `sf_account` table in TiDB, and then click **Next**.
+Salesforce の**Account**オブジェクトのフィールドを TiDB の`sf_account`テーブルにマップし、 **[次へ]**をクリックします。
 
-- The `sf_account` table is newly created in TiDB and it is empty.
+-   `sf_account`テーブルは TiDB に新規作成され、空です。
 
     ```sql
     test> SELECT * FROM sf_account;
@@ -178,46 +182,46 @@ Map the fields of the **Account** object in Salesforce to the `sf_account` table
     +----+------+------+---------------+--------+----------+
     ```
 
-- To set a mapping rule, you can select a source field name on the left, and select a destination field name on the right. Then, click **Map fields**, and a rule is set.
+-   マッピング ルールを設定するには、左側でソース フィールド名を選択し、右側で宛先フィールド名を選択します。次に、 **[フィールドのマップ]**をクリックすると、ルールが設定されます。
 
     ![add mapping rule](/media/develop/aws-appflow-step-add-mapping-rule.png)
 
-- The following mapping rules (Source field name -> Destination field name) are needed in this document:
+-   このドキュメントでは、次のマッピング ルール (ソース フィールド名 -&gt; 宛先フィールド名) が必要です。
 
-    - Account ID -> id
-    - Account Name -> name
-    - Account Type -> type
-    - Billing State/Province -> billing_state
-    - Account Rating -> rating
-    - Industry -> industry
+    -   アカウントID -&gt; ID
+    -   アカウント名 -&gt; 名前
+    -   アカウントの種類 -&gt; 種類
+    -   請求先の州/都道府県 -&gt; billing_state
+    -   アカウントの評価 -&gt; 評価
+    -   業界 -&gt; 業界
 
     ![mapping a rule](/media/develop/aws-appflow-step-mapping-a-rule.png)
 
     ![show all mapping rules](/media/develop/aws-appflow-step-show-all-mapping-rules.png)
 
-### (Optional) Set filters
+### (オプション) フィルタを設定する {#optional-set-filters}
 
-If you want to add some filters to your data fields, you can set them here. Otherwise, skip this step and click **Next**.
+データ フィールドにフィルターを追加したい場合は、ここで設定できます。それ以外の場合は、この手順をスキップして、 **「次へ」**をクリックします。
 
 ![filters](/media/develop/aws-appflow-step-filters.png)
 
-### Confirm and create the flow
+### フローの確認と作成 {#confirm-and-create-the-flow}
 
-Confirm the information of the flow to be created. If everything looks fine, click **Create flow**.
+作成するフローの情報を確認します。問題がなければ、 **[フローの作成]**をクリックします。
 
 ![review](/media/develop/aws-appflow-step-review.png)
 
-## Step 3. Run the flow
+## ステップ 3. フローを実行する {#step-3-run-the-flow}
 
-On the page of the newly created flow, click **Run flow** in the upper-right corner.
+新しく作成したフローのページで、右上隅にある**[フローの実行]**をクリックします。
 
 ![run flow](/media/develop/aws-appflow-step-run-flow.png)
 
-The following screenshot shows an example that the flow runs successfully:
+次のスクリーンショットは、フローが正常に実行される例を示しています。
 
 ![run success](/media/develop/aws-appflow-step-run-success.png)
 
-Query the `sf_account` table, and you can see that the records from the Salesforce **Account** object have been written to it:
+`sf_account`テーブルをクエリすると、Salesforce **Account**オブジェクトのレコードがテーブルに書き込まれていることがわかります。
 
 ```sql
 test> SELECT * FROM sf_account;
@@ -240,9 +244,9 @@ test> SELECT * FROM sf_account;
 +--------------------+-------------------------------------+--------------------+---------------+--------+----------------+
 ```
 
-## Noteworthy things
+## 注目すべきもの {#noteworthy-things}
 
-- If anything goes wrong, you can navigate to the [CloudWatch](https://console.aws.amazon.com/cloudwatch/home) page on the AWS Management Console to get logs.
-- The steps in this document are based on [Building custom connectors using the Amazon AppFlow Custom Connector SDK](https://aws.amazon.com/blogs/compute/building-custom-connectors-using-the-amazon-appflow-custom-connector-sdk/).
-- [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless) is **NOT** a production environment.
-- To prevent excessive length, the examples in this document only show the `Insert` strategy, but `Update` and `Upsert` strategies are also tested and can be used.
+-   何か問題が発生した場合は、AWS マネジメント コンソールの[クラウドウォッチ](https://console.aws.amazon.com/cloudwatch/home)ページに移動してログを取得できます。
+-   このドキュメントの手順は[Amazon AppFlow カスタムコネクタ SDK を使用したカスタムコネクタの構築](https://aws.amazon.com/blogs/compute/building-custom-connectors-using-the-amazon-appflow-custom-connector-sdk/)に基づいています。
+-   [TiDB サーバーレス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless)本番環境**ではありません**。
+-   長すぎるのを防ぐために、このドキュメントの例では`Insert`戦略のみを示していますが、 `Update`と`Upsert`戦略もテストされており、使用できます。
