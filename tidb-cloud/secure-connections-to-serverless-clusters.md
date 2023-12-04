@@ -85,7 +85,7 @@ In different operating systems, the default storage paths of the root certificat
 
 Windows does not offer a specific path to the CA root. Instead, it uses the [registry](https://learn.microsoft.com/en-us/windows-hardware/drivers/install/local-machine-and-current-user-certificate-stores) to store certificates. For this reason, to specify the CA root path on Windows, take the following steps:
 
-1. Download the [ISRG Root X1](https://letsencrypt.org/certs/isrgrootx1.pem.txt) certificate. and save it in a path you prefer, such as `<path_to_ca>`.
+1. Download the [ISRG Root X1 certificate](https://letsencrypt.org/certs/isrgrootx1.pem.txt) and then save it in a path you prefer, such as `<path_to_ca>`.
 2. Use the path (`<path_to_ca>`) as your CA root path when you connect to a TiDB Serverless cluster.
 
 ## FAQs
