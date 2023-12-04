@@ -82,7 +82,7 @@ For a TiDB Dedicated cluster, you can get the connection string only from the Ti
 
     The output is as follows, where you can find the connection string for Prisma in the `url` value.
 
-    ```
+    ```shell
     datasource db {
     provider = "mysql"
     url      = "mysql://<User>:<Password>@<Endpoint>:<Port>/<Database>?sslaccept=strict"
@@ -108,7 +108,7 @@ For a TiDB Dedicated cluster, you can get the connection string only from the Ti
 
 2. Fill the connection parameters in the following connection string:
 
-    ```
+    ```shell
     mysql://<User>:<Password>@<Host>:<Port>/<Database>?sslaccept=strict
     ```
 
