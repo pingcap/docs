@@ -73,7 +73,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 
     ![Select a data source in DataGrip](/media/develop/datagrip-data-source-select.jpg)
 
-7. Copy the connection string from the TiDB Cloud connection dialog and replace `<your_password>` with your actual password. Then, paste it into the **URL** field, and the remaining parameters will be auto-populated. An example result is as follows:
+7. Copy the connection string from the TiDB Cloud connection dialog. Then, paste it into the **URL** field, and the remaining parameters will be auto-populated. An example result is as follows:
 
     ![Configure the URL field for TiDB Serverless](/media/develop/datagrip-url-paste.jpg)
 
