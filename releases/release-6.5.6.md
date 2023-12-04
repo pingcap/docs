@@ -47,6 +47,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.5/quick-start-with-
         - 增加控制参数，可以设置 redo 文件的压缩算法 [#10176](https://github.com/pingcap/tiflow/issues/10176)
         - 增加控制参数，可以设置与标准的 canal-json 协议完全兼容的模式 [#10106](https://github.com/pingcap/tiflow/issues/10106) @[3AceShowHand](https://github.com/3AceShowHand)
         - (dup): release-7.4.0.md > Improvements> Tools> TiCDC - Optimize the execution logic of replicating the `ADD INDEX` DDL operations to avoid blocking subsequent DML statements [#9644](https://github.com/pingcap/tiflow/issues/9644) @[sdojjy](https://github.com/sdojjy)
+        - Optimize impact of TiCDC on upstream TiKV when performing incremental scanning [#11390](https://github.com/tikv/tikv/issues/11390) @[hicqu](https://github.com/hicqu)
 
     + TiDB Data Migration (DM)
 
@@ -175,7 +176,6 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.5/quick-start-with-
         - Fix the issue that replication lag becomes longer when the TiKV node crashes [#9741](https://github.com/pingcap/tiflow/issues/9741) @[sdojjy](https://github.com/sdojjy)
         - Fix the issue that the `WHERE` statement does not use the primary key as the condition when replicating data to TiDB or MySQL [#9988](https://github.com/pingcap/tiflow/issues/9988) @[asddongmen](https://github.com/asddongmen)
         - Fix the issue that the workload of a replication task is not distributed evenly across TiCDC nodes [#9839](https://github.com/pingcap/tiflow/issues/9839) @[3AceShowHand](https://github.com/3AceShowHand)
-        - Fix the issue that redo log can cause the TiCDC server to get stuck when NFS goes wrong [#9986](https://github.com/pingcap/tiflow/issues/9986) @[3AceShowHand](https://github.com/3AceShowHand)
         - Fix the issue that the interval between replicating DDL statements is too long when redo log is enabled [#9960](https://github.com/pingcap/tiflow/issues/9960) @[CharlesCheung96](https://github.com/CharlesCheung96)
         - Fix the issue that the changefeed cannot replicate DML events in bidirectional replication mode if the target table is dropped and then recreated in upstream [#10079](https://github.com/pingcap/tiflow/issues/10079) @[asddongmen](https://github.com/asddongmen)
         - Fix the issue that the replication lag becomes longer due to too many NFS files when replicating data to an object storage service [#10041](https://github.com/pingcap/tiflow/issues/10041) @[CharlesCheung96](https://github.com/CharlesCheung96)
