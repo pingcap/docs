@@ -13,9 +13,14 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.5/quick-start-with-
 
 ## Compatibility changes  **tw@qiancai --2 条**
 
-- 经进一步的测试后，TiCDC 配置项 [`case-sensitive`](/ticdc/ticdc-changefeed-config.md) 默认值由 `true` 改为 `false`，即默认情况下 TiCDC 配置文件中涉及的表名、库名大小写不敏感 [#10047](https://github.com/pingcap/tiflow/issues/10047) @[sdojjy](https://github.com/sdojjy)
-- 在 SEM 模式下禁止设置 `require_secure_transport` 为 `ON` [#47665](https://github.com/pingcap/tidb/issues/47665) @[tiancaiamao](https://github.com/tiancaiamao)
+- Prohibiting setting [`require_secure_transport`](/system-variables.md#require_secure_transport-new-in-v610) to `ON` in Security Enhanced Mode (SEM) to prevent potential connectivity issues for users [#47665](https://github.com/pingcap/tidb/issues/47665) @[tiancaiamao](https://github.com/tiancaiamao)
 - (dup): release-7.1.2.md > Compatibility changes - Introduce the [`tidb_opt_enable_hash_join`](https://docs.pingcap.com/tidb/v6.5/system-variables#tidb_opt_enable_hash_join-new-in-v656) system variable to control whether the optimizer selects hash joins for tables [#46695](https://github.com/pingcap/tidb/issues/46695) @[coderplay](https://github.com/coderplay)
+- After further testing, the default value of the TiCDC Changefeed configuration item [`case-sensitive`](/ticdc/ticdc-changefeed-config.md) is changed from `true` to `false`. This means that by default, table and database names in the TiCDC configuration file are case-insensitive. [#10047](https://github.com/pingcap/tiflow/issues/10047) @[sdojjy](https://github.com/sdojjy)
+- TiCDC Changefeed introduces the following new configuration items:
+    - [`encoding-worker-num`](/ticdc/ticdc-changefeed-config.md) and [`flush-worker-num`](/ticdc/ticdc-changefeed-config.md): enable you to set different concurrency parameters for the redo module based on specifications of different machines [#10048](https://github.com/pingcap/tiflow/issues/10048) @[CharlesCheung96](https://github.com/CharlesCheung96)
+    - [`compression`](/ticdc/ticdc-changefeed-config.md): enables you to configure the compression behavior of redo log files [#10176](https://github.com/pingcap/tiflow/issues/10176) @[sdojjy](https://github.com/sdojjy)
+    - [`sink.cloud-storage-config`](/ticdc/ticdc-changefeed-config.md): enables you to set the automatic cleanup of historical data when replicating data to object storage [#10109](https://github.com/pingcap/tiflow/issues/10109) @[CharlesCheung96](https://github.com/CharlesCheung96)
+
 
 ## Improvements
 
@@ -28,24 +33,21 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.5/quick-start-with-
 
 + PD **tw@qiancai --1 条**
 
-    - 为 DR Auto-Sync 添加 Status 和 Sync Progress 面板 [#6975](https://github.com/tikv/pd/issues/6975) @[disksing](https://github.com/disksing)
+    - Add monitoring metrics such as `Status` and `Sync Progress` for `DR Auto-Sync` on the Grafana dashboard [#6975](https://github.com/tikv/pd/issues/6975) @[disksing](https://github.com/disksing)
 
 + Tools
 
     + Backup & Restore (BR) **tw@qiancai --4 条**
 
         - (dup): release-7.5.0.md > Improvements> Tools> Backup & Restore (BR) - During restoring a snapshot backup, BR retries when it encounters certain network errors [#48528](https://github.com/pingcap/tidb/issues/48528) @[Leavrth](https://github.com/Leavrth)
-        - 增加 pitr 对 delete range 场景的集成测试 [#47738](https://github.com/pingcap/tidb/issues/47738) @[Leavrth](https://github.com/Leavrth)
-        - 提供了 flashback cluster to tso 语法支持 [#48372](https://github.com/pingcap/tidb/issues/48372) @[BornChanger](https://github.com/BornChanger)
-        - 快照恢复增加对 region 打散超时失败或者被取消情况下的重试 [#47236](https://github.com/pingcap/tidb/issues/47236) @[Leavrth](https://github.com/Leavrth)
-        - 使用 merge-schedule-limit 配置项来暂停 pd merge [#7148](https://github.com/tikv/pd/issues/7148) @[BornChanger](https://github.com/3pointer)
+        - Introduce new integration tests for Point-In-Time Recovery (PITR) in the `delete range` scenario, enhancing PITR stability  [#47738](https://github.com/pingcap/tidb/issues/47738) @[Leavrth](https://github.com/Leavrth)
+        - Support the `FLASHBACK CLUSTER TO TSO` syntax [#48372](https://github.com/pingcap/tidb/issues/48372) @[BornChanger](https://github.com/BornChanger)
+        - Enable automatic retry of Region scatter during snapshot recovery when encountering timeout failures or cancellations of Region scatter [#47236](https://github.com/pingcap/tidb/issues/47236) @[Leavrth](https://github.com/Leavrth)
+        - BR can pause Region merging by setting the `merge-schedule-limit` configuration to 0  [#7148](https://github.com/tikv/pd/issues/7148) @[BornChanger](https://github.com/3pointer)
 
     + TiCDC **tw@qiancai  --5 条**
 
-        - 增加 redo 模块的调优配置，用户可以根据不同的机器规格，设置不同的并发参数 [#10048](https://github.com/pingcap/tiflow/issues/10048) @[CharlesCheung96](https://github.com/CharlesCheung96)
-        - 增加同步到对象存储时，用户可以设置自动清理历史数据的功能 [#10109](https://github.com/pingcap/tiflow/issues/10109) @[CharlesCheung96](https://github.com/CharlesCheung96)
-        - 增加控制参数，可以设置 redo 文件的压缩算法 [#10176](https://github.com/pingcap/tiflow/issues/10176)
-        - 增加控制参数，可以设置与标准的 canal-json 协议完全兼容的模式 [#10106](https://github.com/pingcap/tiflow/issues/10106) @[3AceShowHand](https://github.com/3AceShowHand)
+        - Support making TiCDC Canal-JSON content format [compatible with the content format of the official Canal output](/ticdc/ticdc-canal-json.md#compatible-with-official-canal-implementation) by setting `content-compatible=true` in the `sink-uri` configuration  [#10106](https://github.com/pingcap/tiflow/issues/10106) @[3AceShowHand](https://github.com/3AceShowHand)
         - (dup): release-7.4.0.md > Improvements> Tools> TiCDC - Optimize the execution logic of replicating the `ADD INDEX` DDL operations to avoid blocking subsequent DML statements [#9644](https://github.com/pingcap/tiflow/issues/9644) @[sdojjy](https://github.com/sdojjy)
         - Optimize impact of TiCDC on upstream TiKV when performing incremental scanning [#11390](https://github.com/tikv/tikv/issues/11390) @[hicqu](https://github.com/hicqu)
 
