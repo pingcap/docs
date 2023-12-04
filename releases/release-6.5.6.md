@@ -11,7 +11,7 @@ TiDB version: 6.5.6
 
 Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.5/quick-start-with-tidb) | [Production deployment](https://docs.pingcap.com/tidb/v6.5/production-deployment-using-tiup) | [Installation packages](https://www.pingcap.com/download/?version=v6.5.6#version-list)
 
-## Compatibility changes  **tw@qiancai --2 条**
+## Compatibility changes  **tw@qiancai --3 条**
 
 - Prohibiting setting [`require_secure_transport`](/system-variables.md#require_secure_transport-new-in-v610) to `ON` in Security Enhanced Mode (SEM) to prevent potential connectivity issues for users [#47665](https://github.com/pingcap/tidb/issues/47665) @[tiancaiamao](https://github.com/tiancaiamao)
 - (dup): release-7.1.2.md > Compatibility changes - Introduce the [`tidb_opt_enable_hash_join`](https://docs.pingcap.com/tidb/v6.5/system-variables#tidb_opt_enable_hash_join-new-in-v656) system variable to control whether the optimizer selects hash joins for tables [#46695](https://github.com/pingcap/tidb/issues/46695) @[coderplay](https://github.com/coderplay)
@@ -20,7 +20,6 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.5/quick-start-with-
     - [`encoding-worker-num`](/ticdc/ticdc-changefeed-config.md) and [`flush-worker-num`](/ticdc/ticdc-changefeed-config.md): enable you to set different concurrency parameters for the redo module based on specifications of different machines [#10048](https://github.com/pingcap/tiflow/issues/10048) @[CharlesCheung96](https://github.com/CharlesCheung96)
     - [`compression`](/ticdc/ticdc-changefeed-config.md): enables you to configure the compression behavior of redo log files [#10176](https://github.com/pingcap/tiflow/issues/10176) @[sdojjy](https://github.com/sdojjy)
     - [`sink.cloud-storage-config`](/ticdc/ticdc-changefeed-config.md): enables you to set the automatic cleanup of historical data when replicating data to object storage [#10109](https://github.com/pingcap/tiflow/issues/10109) @[CharlesCheung96](https://github.com/CharlesCheung96)
-
 
 ## Improvements
 
@@ -40,16 +39,16 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.5/quick-start-with-
     + Backup & Restore (BR) **tw@qiancai --4 条**
 
         - (dup): release-7.5.0.md > Improvements> Tools> Backup & Restore (BR) - During restoring a snapshot backup, BR retries when it encounters certain network errors [#48528](https://github.com/pingcap/tidb/issues/48528) @[Leavrth](https://github.com/Leavrth)
-        - Introduce new integration tests for Point-In-Time Recovery (PITR) in the `delete range` scenario, enhancing PITR stability  [#47738](https://github.com/pingcap/tidb/issues/47738) @[Leavrth](https://github.com/Leavrth)
+        - Introduce a new integration test for Point-In-Time Recovery (PITR) in the `delete range` scenario, enhancing PITR stability  [#47738](https://github.com/pingcap/tidb/issues/47738) @[Leavrth](https://github.com/Leavrth)
         - Support the `FLASHBACK CLUSTER TO TSO` syntax [#48372](https://github.com/pingcap/tidb/issues/48372) @[BornChanger](https://github.com/BornChanger)
         - Enable automatic retry of Region scatter during snapshot recovery when encountering timeout failures or cancellations of Region scatter [#47236](https://github.com/pingcap/tidb/issues/47236) @[Leavrth](https://github.com/Leavrth)
         - BR can pause Region merging by setting the `merge-schedule-limit` configuration to 0  [#7148](https://github.com/tikv/pd/issues/7148) @[BornChanger](https://github.com/3pointer)
 
-    + TiCDC **tw@qiancai  --5 条**
+    + TiCDC **tw@qiancai  --2 条**
 
         - Support making TiCDC Canal-JSON content format [compatible with the content format of the official Canal output](/ticdc/ticdc-canal-json.md#compatible-with-official-canal-implementation) by setting `content-compatible=true` in the `sink-uri` configuration  [#10106](https://github.com/pingcap/tiflow/issues/10106) @[3AceShowHand](https://github.com/3AceShowHand)
         - (dup): release-7.4.0.md > Improvements> Tools> TiCDC - Optimize the execution logic of replicating the `ADD INDEX` DDL operations to avoid blocking subsequent DML statements [#9644](https://github.com/pingcap/tiflow/issues/9644) @[sdojjy](https://github.com/sdojjy)
-        - Optimize impact of TiCDC on upstream TiKV when performing incremental scanning [#11390](https://github.com/tikv/tikv/issues/11390) @[hicqu](https://github.com/hicqu)
+        - Reduce the impact of TiCDC incremental scanning on upstream TiKV [#11390](https://github.com/tikv/tikv/issues/11390) @[hicqu](https://github.com/hicqu)
 
 ## Bug fixes
 
@@ -169,7 +168,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.5/quick-start-with-
         - (dup): release-7.4.0.md > Bug fixes> Tools> TiDB Data Migration (DM) - Fix the issue that replication lag returned by DM keeps growing when a failed DDL is skipped and no subsequent DDLs are executed [#9605](https://github.com/pingcap/tiflow/issues/9605) @[D3Hunter](https://github.com/D3Hunter)
         - (dup): release-7.4.0.md > Bug fixes> Tools> TiDB Data Migration (DM) - Fix the issue that DM skips all DMLs when resuming a task in optimistic mode [#9588](https://github.com/pingcap/tiflow/issues/9588) @[GMHDBJD](https://github.com/GMHDBJD)
 
-    + TiDB Lightning
+    + TiDB Lightning **tw@qiancai --4 条**
 
         - Fix the issue that data import fails when encountering the `write to tikv with no leader returned` error [#45673](https://github.com/pingcap/tidb/issues/45673) @[lance6716](https://github.com/lance6716)
         - Fix the issue that data import fails because HTTP retry requests do not use the current request content [#47930](https://github.com/pingcap/tidb/issues/47930) @[lance6716](https://github.com/lance6716)
