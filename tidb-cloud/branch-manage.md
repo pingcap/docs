@@ -49,6 +49,14 @@ To connect to a branch, perform the following steps:
 5. Click **Generate Password** or **Reset Password** to create or reset the root password.
 6. Connect to the branch using the connection information.
 
+Or you can get the connection string from cluster overview page:
+
+1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project, and then click the name of your target TiDB Serverless cluster to go to its overview page.
+2. Click **Connect** in the upper-right corner.
+3. Select the branch you want to connect in the `Branch` drop-down list.
+4. Click **Generate Password** or **Reset Password** to create or reset the root password.
+5. Connect to the branch using the connection information.
+
 ## Delete a branch
 
 To delete a branch, perform the following steps:
