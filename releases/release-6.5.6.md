@@ -152,8 +152,8 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.5/quick-start-with-
 
 + TiFlash **tw@hfxsd --2 条**
 
-    - 修复 Grafana 的 Read snapshot 面板上无法正确显示当前运行的最长查询时长的问题 [#7713](https://github.com/pingcap/tiflash/issues/7713) @[JaySon-Huang](https://github.com/JaySon-Huang)
-    - 修复执行 `ALTER TABLE ... EXCHANGE PARTITION ...` 语句后 panic 的问题 [#8372](https://github.com/pingcap/tiflash/issues/8372) @[JaySon-Huang](https://github.com/JaySon-Huang)
+    - (dup) Fix the issue that the `max_snapshot_lifetime` metric is displayed incorrectly on Grafana [#7713](https://github.com/pingcap/tiflash/issues/7713) @[JaySon-Huang](https://github.com/JaySon-Huang)
+    - Fix the issue that executing the `ALTER TABLE ... EXCHANGE PARTITION ... ` statement causes panic [#8372](https://github.com/pingcap/tiflash/issues/8372) @[JaySon-Huang](https://github.com/JaySon-Huang)
     - (dup): release-7.1.2.md > Bug fixes> TiFlash - Fix the issue that the memory usage reported by MemoryTracker is inaccurate [#8128](https://github.com/pingcap/tiflash/issues/8128) @[JinheLin](https://github.com/JinheLin)
 
 + Tools
@@ -161,26 +161,25 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.5/quick-start-with-
     + Backup & Restore (BR) **tw@hfxsd --5 条**
 
         - (dup): release-7.5.0.md > Bug fixes> Tools> Backup & Restore (BR) - Fix the issue that the log backup might get stuck in some scenarios when backing up large wide tables [#15714](https://github.com/tikv/tikv/issues/15714) @[YuJuncen](https://github.com/YuJuncen)
-        - 修复频繁 flush 导致 log backup 卡死的问题 [#15602](https://github.com/tikv/tikv/issues/15602) @[3pointer](https://github.com/3pointer)
-        - 修复在 aws 云上, 连接 ec2metadata 连接被重置后, 重试导致备份恢复性能下降的问题 [#46750](https://github.com/pingcap/tidb/issues/47650) @[Leavrth](https://github.com/Leavrth)
+        - Fix the issue that frequent flushes cause log backup to get stuck [#15602](https://github.com/tikv/tikv/issues/15602) @[3pointer](https://github.com/3pointer)
+        - Fix the issue that retries cause backup recovery performance to degrade after an EC2 metadata connection has been reset [#46750](https://github.com/pingcap/tidb/issues/47650) @[Leavrth](https://github.com/Leavrth)
         - (dup): release-7.1.2.md > Bug fixes> Tools> Backup & Restore (BR) - Fix the issue that running PITR multiple times within 1 minute might cause data loss [#15483](https://github.com/tikv/tikv/issues/15483) @[YuJuncen](https://github.com/YuJuncen)
-        - 让 BR SQL 命令使用和 CLP 同样的默认参数 [#48000](https://github.com/pingcap/tidb/issues/48000) @[YuJuncen](https://github.com/YuJuncen)
-        - 修复 pd owner 发生转移情况下, log backup 可能 panic 的问题 [#47533](https://github.com/pingcap/tidb/issues/47533) @[YuJuncen](https://github.com/YuJuncen)
-        - 修复一个是用本地存储文件目录命名的问题 [#48452](https://github.com/pingcap/tidb/issues/48452) @[3AceShowHand](https://github.com/3AceShowHand)
+        - Fix the issue that the default values for BR SQL commands and CLP are different, which might cause OOM issues [#48000](https://github.com/pingcap/tidb/issues/48000) @[YuJuncen](https://github.com/YuJuncen)
+        - Fix the issue that log backup might panic when the PD owner is transferred [#47533](https://github.com/pingcap/tidb/issues/47533) @[YuJuncen](https://github.com/YuJuncen)
+        - Fix the issue of generating incorrect URIs for external storage files [#48452](https://github.com/pingcap/tidb/issues/48452) @[3AceShowHand](https://github.com/3AceShowHand)
 
     + TiCDC **tw@hfxsd --12 条**
 
-        - 修复上游在执行有损 DDL 场景下，CDC server 可能发生 panic 的问题 [#9739](https://github.com/pingcap/tiflow/issues/9739) @[hicqu](https://github.com/hicqu)
-        - 修复在开启 Redo log 功能， 执行 resume 命令场景下同步任务出现报错的问题 [#9769](https://github.com/pingcap/tiflow/issues/9769) @[hicqu](https://github.com/hicqu)
-        - 修复 tikv 节点 crash 时，同步延迟上升的问题 [#9741](https://github.com/pingcap/tiflow/issues/9741)
-        - 修复同步到 TiDB/mysql 某些场景下，SQL 语句 where 没有采用 PK 作为条件的问题 [#9988](https://github.com/pingcap/tiflow/issues/9988)
-        - 修复某些特殊场景下同步任务在 CDC 节点分配不均衡的问题 [#9839](https://github.com/pingcap/tiflow/issues/9839) @[3AceShowHand](https://github.com/3AceShowHand)
-        - 修复 Redo log 在 NFS 出现问题可能导致 CDC server 卡住的问题 [#9986](https://github.com/pingcap/tiflow/issues/9986)
-        - 优化 CDC 在做增量扫对上游 tikv 的影响问题 [#11390](https://github.com/tikv/tikv/issues/11390)
-        - 修复 Redo log 开启的场景下，DDL 同步时间间隔过长的问题 [#9960](https://github.com/pingcap/tiflow/issues/9960)
-        - 修复开启 BDR 时，drop/create 同一张表 DML 事件不能正确同步的问题 [#10079](https://github.com/pingcap/tiflow/issues/10079)
-        - 修复同步到对象存储时，NFS 文件过多时同步延迟上升的问题 [#10041](https://github.com/pingcap/tiflow/issues/10041) @[CharlesCheung96](https://github.com/CharlesCheung96)
-        - 增加同步到对象存储时，某些特殊场景下导致 server Panic 的问题 [#10137](https://github.com/pingcap/tiflow/issues/10137) @[sdojjy](https://github.com/sdojjy)
+        - Fix the issue that TiCDC server might panic when executing lossy DDL statements in upstream [#9739](https://github.com/pingcap/tiflow/issues/9739) @[hicqu](https://github.com/hicqu)
+        - Fix the issue that the replication task reports an error when executing `RESUME` with the redo log feature enabled [#9769](https://github.com/pingcap/tiflow/issues/9769) @[hicqu](https://github.com/hicqu)
+        - Fix the issue that replication lag becomes longer when the TiKV node crashes [#9741](https://github.com/pingcap/tiflow/issues/9741)
+        - Fix the issue that the `WHERE` statement does not use the primary key as the condition when replicating data to TiDB or MySQL [#9988](https://github.com/pingcap/tiflow/issues/9988)
+        - Fix the issue that the workload of a replication task is not distributed evenly across TiCDC nodes [#9839](https://github.com/pingcap/tiflow/issues/9839) @[3AceShowHand](https://github.com/3AceShowHand)
+        - Fix the issue that redo log can cause the TiCDC server to get stuck when NFS goes wrong [#9986](https://github.com/pingcap/tiflow/issues/9986) @[3AceShowHand](https://github.com/3AceShowHand)
+        - Fix the issue that the interval between replicating DDL statements is too long when redo log is enabled [#9960](https://github.com/pingcap/tiflow/issues/9960) @[CharlesCheung96](https://github.com/CharlesCheung96)
+        - Fix the issue that the changefeed cannot replicate DML events in BDR mode if the target table is dropped and then recreated in upstream [#10079](https://github.com/pingcap/tiflow/issues/10079)
+        - Fix the issue that the replication delay becomes longer due to too many NFS files when replicating data to an object storage service [#10041](https://github.com/pingcap/tiflow/issues/10041) @[CharlesCheung96](https://github.com/CharlesCheung96)
+        - Fix the issue that the TiCDC server might panic when replicating data to an object storage service [#10137](https://github.com/pingcap/tiflow/issues/10137) @[sdojjy](https://github.com/sdojjy)
         - (dup): release-7.4.0.md > Bug fixes> Tools> TiCDC - Fix the issue that TiCDC accesses the invalid old address during PD scaling up and down [#9584](https://github.com/pingcap/tiflow/issues/9584) @[fubinzh](https://github.com/fubinzh) @[asddongmen](https://github.com/asddongmen)
         - (dup): release-7.1.2.md > Bug fixes> Tools> TiCDC - Fix the issue that fetching wrong memory information might cause OOM issues in some operating systems [#9762](https://github.com/pingcap/tiflow/issues/9762) @[sdojjy](https://github.com/sdojjy)
 
