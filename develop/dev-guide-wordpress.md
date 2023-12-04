@@ -100,4 +100,4 @@ Configure the Wordpress database connection to TiDB Serverless.
 
 ## Need help?
 
-Ask questions on the [Discord](https://discord.gg/vYU9h56kAX), or [create a support ticket](https://support.pingcap.com/).
+Ask questions on the [Discord](https://discord.gg/vYU9h56kAX), or [create a support ticket](/support.md).
