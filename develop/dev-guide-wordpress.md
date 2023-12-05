@@ -3,7 +3,7 @@ title: Connect to TiDB Serverless with WordPress
 summary: Learn how to use TiDB Serverless to run Wordpress. This tutorial gives step-by-step guidance to run Wordpress + TiDB Serverless in a few minutes.
 ---
 
-# Connect to TiDB Serverless with Wordpress
+# Connect to TiDB Serverless with WordPress
 
 TiDB is a MySQL-compatible database, TiDB Serverless is a fully managed TiDB offering, and [WordPress](https://github.com/WordPress) is a free, open-source content management system (CMS) that lets users create and manage websites. WordPress is written in PHP and uses a MySQL database.
 
@@ -35,7 +35,7 @@ cd wordpress-tidb-docker
 
 ### Step 2: Install dependencies
 
-1. The sample repository requires [Docker](https://www.docker.com/) and [Docker Compose](https://docs.docker.com/compose/) to start Wordpress. If you have them installed. You can skip this step. It is highly recommended to run your WordPress in a Linux environment (such as Ubuntu). Run the following command to install them:
+1. The sample repository requires [Docker](https://www.docker.com/) and [Docker Compose](https://docs.docker.com/compose/) to start WordPress. If you have them installed. You can skip this step. It is highly recommended to run your WordPress in a Linux environment (such as Ubuntu). Run the following command to install them:
 
     ```shell
     sudo sh install.sh
@@ -49,7 +49,7 @@ cd wordpress-tidb-docker
 
 ### Step 3: Configure connection information
 
-Configure the Wordpress database connection to TiDB Serverless. 
+Configure the WordPress database connection to TiDB Serverless. 
 
 1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
 
@@ -100,4 +100,4 @@ Configure the Wordpress database connection to TiDB Serverless.
 
 ## Need help?
 
-Ask questions on the [Discord](https://discord.gg/vYU9h56kAX), or [create a support ticket](/support.md).
+Ask questions on the [Discord](https://discord.gg/vYU9h56kAX), or [create a support ticket](/tidb-cloud/tidb-cloud-support.md).
