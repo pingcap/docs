@@ -65,7 +65,7 @@ Configure the Wordpress database connection to TiDB Serverless.
 
     > **Tip:**
     > 
-    > If you have created a password before, you can either use the original password or click **Reset password** to generate a new one.
+    > If you have created a password before, you can either use the original password or click **Reset Password** to generate a new one.
 
 5. Run the following command to copy `.env.example` and rename it to `.env`:
 
