@@ -20,7 +20,7 @@ To complete this tutorial, you need:
 - A TiDB Serverless cluster. Follow [Creating a TiDB Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster if you don't have one.
 
 
-## Run Wordpress with TiDB Serverless
+## Run WordPress with TiDB Serverless
 
 This section demonstrates how to run Wordpress with TiDB Serverless.
 
