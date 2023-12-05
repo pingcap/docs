@@ -177,7 +177,7 @@ The description of each field is as follows:
 | `params.enum` | String | (Optional) Specifies the value options of the parameter. This field is only valid when `params.type` is set to `string`, `number`, or `integer`. To specify multiple values, you can separate them with a comma (`,`). |
 | `params.default` | String | The default value of the parameter. Make sure that the value matches the type of parameter you specified. Otherwise, the endpoint returns an error. The default value of an `ARRAY` type parameter is a string and you can use a comma (`,`) to separate multiple values. |
 | `params.description` | String | The description of the parameter. |
-| `settings.timeout`     | Integer | The timeout for the endpoint in milliseconds, which is `30000` by default. You can set it to an integer from `1` to `30000`.  |
+| `settings.timeout`     | Integer | The timeout for the endpoint in milliseconds, which is `30000` by default. You can set it to an integer from `1` to `60000`.  |
 | `settings.row_limit`   | Integer  | The maximum number of rows that the endpoint can operate or return, which is `1000` by default. When `batch_operation` is set to `0`, you can set it to an integer from `1` to `2000`. When `batch_operation` is set to `1`, you can set it to an integer from `1` to `100`.  |
 | `settings.enable_pagination`   | Integer  | Controls whether to enable the pagination for the results returned by the request. Supported values are `0` (disabled) and `1` (enabled). The default value is `0`. |
 | `settings.cache_enabled`   | Integer  | Controls whether to cache the response returned by your `GET` requests within a specified time-to-live (TTL) period. Supported values are `0` (disabled) and `1` (enabled). The default value is `0`. |
