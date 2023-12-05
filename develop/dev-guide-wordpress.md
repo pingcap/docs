@@ -22,7 +22,7 @@ To complete this tutorial, you need:
 
 ## Run WordPress with TiDB Serverless
 
-This section demonstrates how to run Wordpress with TiDB Serverless.
+This section demonstrates how to run WordPress with TiDB Serverless.
 
 ### Step 1: Clone the Wordpress sample reposiroty
 
