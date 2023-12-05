@@ -86,7 +86,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.5/quick-start-with-
     - Fix the issue of goroutine leak when using `AUTO_ID_CACHE=1` [#46324](https://github.com/pingcap/tidb/issues/46324) @[tiancaiamao](https://github.com/tiancaiamao)
     - Fix the issue that TiDB might panic when shutting down [#32110](https://github.com/pingcap/tidb/issues/32110) @[july2993](https://github.com/july2993)
     - Fix the issue of not handling locks in the MVCC interface when reading schema diff commit versions from the TiDB schema cache [#48281](https://github.com/pingcap/tidb/issues/48281) @[cfzjywxk](https://github.com/cfzjywxk)
-    - 修复表改名重复错误 Fix the issue of duplicate rows in `information_schema.columns` caused by renaming a table [#47141](https://github.com/pingcap/tidb/pull/47141)@[jiyfhust](https://github.com/jiyfhust)
+    - Fix the issue of duplicate rows in `information_schema.columns` caused by renaming a table [#47064](https://github.com/pingcap/tidb/issues/47064) @[jiyfhust](https://github.com/jiyfhust)
     - Fix the bugs in the `LOAD DATA REPLACE INTO` statement [#47995](https://github.com/pingcap/tidb/issues/47995)) @[lance6716](https://github.com/lance6716)
     - Fix the issue of `IMPORT INTO` task failure caused by PD leader malfunction for 1 minute [#48307](https://github.com/pingcap/tidb/issues/48307) @[D3Hunter](https://github.com/D3Hunter)
     - Fix the issue of `ADMIN CHECK` failure caused by creating a date type field index [#47426]([https://github.com/pingcap/tidb/issues/47426]) @[tangenta](https://github.com/tangenta)
