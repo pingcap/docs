@@ -217,7 +217,7 @@ curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request POST 'https://<regio
  --header 'content-type: application/json'\
  --data-raw '{
   "cluster_id": "10939961583884005252",
-  "database": "sp500insight"
+  "database": "sp500insight",
   "raw_question": "<Your question to generate data>"
 }'
 ```
