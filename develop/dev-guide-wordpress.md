@@ -5,7 +5,7 @@ summary: Learn how to use TiDB Serverless to run Wordpress. This tutorial gives 
 
 # Connect to TiDB Serverless with Wordpress
 
-TiDB is a MySQL-compatible database, and [WordPress](https://github.com/WordPress) is a free, open-source content management system (CMS) that lets users create and manage websites. It's written in PHP and uses a MySQL database.
+TiDB is a MySQL-compatible database, TiDB Serverless is a fully managed TiDB offering, and [WordPress](https://github.com/WordPress) is a free, open-source content management system (CMS) that lets users create and manage websites. WordPress is written in PHP and uses a MySQL database.
 
 In this tutorial, you can learn how to use TiDB Serverless run Wordpress for free.
 
