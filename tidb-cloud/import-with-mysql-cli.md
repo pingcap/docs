@@ -31,11 +31,11 @@ Connect to your TiDB cluster depending on the TiDB deployment option you have se
     - **Connect With** is set to `MySQL CLI`.
     - **Operating System** matches your environment.
 
-4. Click **Create password** to create a random password.
+4. Click **Generate Password** to create a random password.
 
     > **Tip:**
     >
-    > If you have created a password before, either use the original password or click **Reset password** to generate a new one.
+    > If you have created a password before, either use the original password or click **Reset Password** to generate a new one.
 
 </div>
 <div label="TiDB Dedicated">
