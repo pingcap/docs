@@ -83,7 +83,7 @@ Configure the Wordpress database connection to TiDB Serverless.
     TIDB_DB_NAME='test'
     ```
 
-    Be sure to replace the placeholders `{}` with the connection parameters obtained from the connection dialog. By default, your TiDB Serverless comes with a `test` DB. You can change the value `TIDB_DB_NAME` to the DB you've created in your TiDB Serverless.
+    Be sure to replace the placeholders `{}` with the connection parameters obtained from the connection dialog. By default, your TiDB Serverless comes with a `test` database. If you have already created another database in your TiDB Serverless cluster, you can replace `test` with your database name.
 
 7. Save the `.env` file.
 
