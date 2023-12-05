@@ -96,7 +96,7 @@ Configure the Wordpress database connection to TiDB Serverless.
     docker compose up -d
     ```
 
-2. Setup your Wordpress site by visiting [localhost](http://localhost/) if you start the container on your local machine or **http://<your_instance_ip>** if the Wordpress is running on the remote machine.
+2. Set up your WordPress site by visiting [localhost](http://localhost/) if you start the container on your local machine or `http://<your_instance_ip>` if the WordPress is running on a remote machine.
 
 ## Need help?
 
