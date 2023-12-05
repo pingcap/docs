@@ -1,6 +1,6 @@
 ---
 title: Connect to TiDB Serverless with WordPress
-summary: Learn how to use TiDB Serverless to run Wordpress. This tutorial gives step-by-step guidance to run Wordpress + TiDB Serverless in a few minutes.
+summary: Learn how to use TiDB Serverless to run WordPress. This tutorial gives step-by-step guidance to run WordPress + TiDB Serverless in a few minutes.
 ---
 
 # Connect to TiDB Serverless with WordPress
