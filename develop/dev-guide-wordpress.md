@@ -24,7 +24,7 @@ To complete this tutorial, you need:
 
 This section demonstrates how to run WordPress with TiDB Serverless.
 
-### Step 1: Clone the Wordpress sample reposiroty
+### Step 1: Clone the WordPress sample repository
 
 Run the following commands in your terminal window to clone the sample code repository:
 
