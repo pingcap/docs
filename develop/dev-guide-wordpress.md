@@ -61,7 +61,7 @@ Configure the Wordpress database connection to TiDB Serverless.
     - **Connect With** is set to `General`
     - **Operating System** is set to `Debian/Ubuntu/Arch`.
 
-4. Click **Create password** to create a random password.
+4. Click **Generate Password** to create a random password.
 
     > **Tip:**
     > 
