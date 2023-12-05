@@ -11,7 +11,7 @@ In this tutorial, you can learn how to use TiDB Serverless run Wordpress for fre
 
 > **Note:**
 >
-> This tutorial works with TiDB Serverless, TiDB Dedicated, and TiDB Self-Hosted clusters. However, it is highly recommended to run Wordpress with TiDB Serverless for cost-efficiency.
+> In addition to TiDB Serverless, this tutorial works with TiDB Dedicated and TiDB Self-Hosted clusters as well. However, it is highly recommended to run WordPress with TiDB Serverless for cost efficiency.
 
 ## Prerequisites
 
