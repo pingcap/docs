@@ -90,7 +90,7 @@ Configure the Wordpress database connection to TiDB Serverless.
 
 ### Step 4: Start Wordpress with TiDB Serverless
 
-1. Execute the following command to run Wordpress as a Docker container:
+1. Execute the following command to run WordPress as a Docker container:
 
     ```shell
     docker compose up -d
