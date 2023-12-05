@@ -19,7 +19,6 @@ To complete this tutorial, you need:
 
 - A TiDB Serverless cluster. Follow [Creating a TiDB Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster if you don't have one.
 
-
 ## Run WordPress with TiDB Serverless
 
 This section demonstrates how to run WordPress with TiDB Serverless.
@@ -86,7 +85,6 @@ Configure the WordPress database connection to TiDB Serverless.
     Be sure to replace the placeholders `{}` with the connection parameters obtained from the connection dialog. By default, your TiDB Serverless comes with a `test` database. If you have already created another database in your TiDB Serverless cluster, you can replace `test` with your database name.
 
 7. Save the `.env` file.
-
 
 ### Step 4: Start WordPress with TiDB Serverless
 
