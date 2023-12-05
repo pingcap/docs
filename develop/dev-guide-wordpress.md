@@ -35,7 +35,7 @@ cd wordpress-tidb-docker
 
 ### Step 2: Install dependencies
 
-1. The sample repository requires [Docker](https://www.docker.com/) and [Docker Compose](https://docs.docker.com/compose/) to start Wordpress. If you have them installed. You can skip this step. It is highly recommended to run your Wordpress in Linux enviroment (e.g., Ubuntu). Run the following command to install them:
+1. The sample repository requires [Docker](https://www.docker.com/) and [Docker Compose](https://docs.docker.com/compose/) to start Wordpress. If you have them installed. You can skip this step. It is highly recommended to run your WordPress in a Linux environment (such as Ubuntu). Run the following command to install them:
 
     ```shell
     sudo sh install.sh
