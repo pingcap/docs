@@ -4722,7 +4722,7 @@ SHOW WARNINGS;
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: String
 - Default value: `""`
-- Possible values: `"ddl"`、`"stats"`、`"br"`、`"lightning"`、`"background"`
+- Possible values: `"ddl"`, `"stats"`, `"br"`, `"lightning"`, `"background"`
 - Explicitly specify the task type for the current session, which is identified and controlled by [Resource Control](/tidb-resource-control.md). For example: `SET @@tidb_request_source_type = "background"`.
 
 ### tidb_retry_limit
