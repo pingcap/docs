@@ -19,7 +19,7 @@ To reduce the performance overhead of many Regions, you can also enable [Hiberna
 
 > **Note:**
 >
-> The recommended range for the Region size is [48MiB, 258MiB]. Commonly used sizes include 96 MiB, 128 MiB, and 256 MiB. It is NOT recommended to set the Region size beyond 1 GiB. Avoid setting the size to more than 10 GiB. Setting to an excessively large Region size might lead to the following impacts:
+> The recommended range for the Region size is [48MiB, 258MiB]. Commonly used sizes include 96 MiB, 128 MiB, and 256 MiB. It is NOT recommended to set the Region size beyond 1 GiB. Avoid setting the size to more than 10 GiB. An excessively large Region size might lead to the following impacts:
 >
 > + Performance jitter
 > + Decreased query performance, especially for queries that deal with a large range of data
