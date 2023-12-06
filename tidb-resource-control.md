@@ -476,7 +476,7 @@ By default, the task types that are marked as background tasks are `""`, and the
     +---------+------------+----------+-----------+-------------+---------------------+
     ```
 
-5. To explicitly mark tasks in the current session as background type, you can use `tidb_request_source_type` to explicitly specify the task type. The following is an example:
+5. To explicitly mark tasks in the current session as the background type, you can use `tidb_request_source_type` to explicitly specify the task type. The following is an example:
 
     ``` sql
     SET @@tidb_request_source_type="background";
