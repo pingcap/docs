@@ -106,7 +106,7 @@ Adjust the following system variables related to Fast Online DDL:
 
     </CustomContent>
 
-2. Usually use the default values for the following system variables that might affect the distributed execution of DDL tasks:
+2. It is recommended that you use the default values for the following system variables that might affect the distributed execution of DDL tasks:
 
     * [`tidb_ddl_reorg_worker_cnt`](/system-variables.md#tidb_ddl_reorg_worker_cnt): use the default value `4`. The recommended maximum value is `16`.
     * [`tidb_ddl_reorg_priority`](/system-variables.md#tidb_ddl_reorg_priority)
