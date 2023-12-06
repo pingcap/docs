@@ -4723,7 +4723,7 @@ SHOW WARNINGS;
 - Type: String
 - Default value: `""`
 - Possible values: `"ddl"`、`"stats"`、`"br"`、`"lightning"`、`"background"`
-- Explicitly specify the task type of the current session for [Resource Control](/tidb-resource-control.md) to control. like 如 `SET @@tidb_request_source_type = "background"`.
+- Explicitly specify the task type for the current session, which is identified and controlled by [Resource Control](/tidb-resource-control.md). For example: `SET @@tidb_request_source_type = "background"`.
 
 ### tidb_retry_limit
 
