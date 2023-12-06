@@ -27,6 +27,29 @@ mysql> SHOW PROCESSLIST;
 +------+------+-----------+------+---------+------+-------+------------------+
 2 rows in set (0.00 sec)
 
+You can get the TiDB Server details of a killed session by querying the `INSTANCE` column of `INFORMATION_SCHEMA.CLUSTER_PROCESSLIST`:
+
+```sql
+SELECT ID, USER, INSTANCE, INFO FROM INFORMATION_SCHEMA.CLUSTER_PROCESSLIST;
+```
+
+```sql
++---------------------+------+-----------------+-----------------------------------------------------------------------------+
+| ID | USER | INSTANCE | INFO |
++---------------------+------+-----------------+-----------------------------------------------------------------------------+
+| 1 | root | 127.0.0.1:10082 | SELECT ID, USER, INSTANCE, INFO FROM INFORMATION_SCHEMA.CLUSTER_PROCESSLIST |
+| 2 | root | 127.0.0.1:10080 |  |
++---------------------+------+-----------------+-------------------------------------------------------------
+2 rows in set (0.00 sec)
+```
+
+To execute the `KILL TIDB` statement, connect to the same TiDB node as the killed session:
+
+```shell
+mysql -h 127.0.0.1 -P 10080 -u root -p
+```
+
+```sql
 KILL TIDB 2;
 Query OK, 0 rows affected (0.00 sec)
 ```
