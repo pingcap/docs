@@ -1,9 +1,9 @@
 ---
-title: TiDB Backend Task Distributed Execution Framework (DXF)
-summary: Learn the use cases, limitations, usage, and implementation principles of the TiDB backend task distributed execution  (DXF).
+title: TiDB Backend Task Distributed eXecution Framework (DXF)
+summary: Learn the use cases, limitations, usage, and implementation principles of the TiDB backend task distributed execution framework (DXF).
 ---
 
-# TiDB Backend Task Distributed Execution Framework (DXF)
+# TiDB Backend Task Distributed eXecution Framework (DXF)
 
 <CustomContent platform="tidb-cloud">
 
@@ -17,7 +17,7 @@ TiDB adopts a computing-storage separation architecture with excellent scalabili
 
 This document describes the use cases, limitations, usage, and implementation principles of the DXF.
 
-## Use cases and limitations
+## Use cases
 
 <CustomContent platform="tidb">
 
@@ -41,7 +41,7 @@ Enabling the DXF can solve the above problems and has the following three advant
 - The framework supports distributed execution of backend tasks, which can flexibly schedule the available computing resources of the entire TiDB cluster, thereby better utilizing the computing resources in a TiDB cluster.
 - The framework provides unified resource usage and management capabilities for both overall and individual backend tasks.
 
-Currently, for TiDB Self-Hosted, the DXF supports the distributed execution of the `ADD INDEX` and `IMPORT INTO` statements. For TiDB Cloud, the `IMPORT INTO` statement is not applicable.
+Currently, for TiDB Self-Hosted, the DXF supports the distributed execution of the `ADD INDEX` and `IMPORT INTO` statements. For TiDB Cloud, the `IMPORT INTO` statement is not applicable until v7.2.
 
 - `ADD INDEX` is a DDL statement used to create indexes. For example:
 
@@ -54,7 +54,7 @@ Currently, for TiDB Self-Hosted, the DXF supports the distributed execution of t
 
 ## Limitation
 
-The DXF can only schedule one `ADD INDEX` task at a time. If a second `ADD INDEX` task is submitted before the first `ADD INDEX` task is completed, the second `ADD INDEX` task is executed through a transaction.
+The DXF can only schedule one `ADD INDEX` task at a time. If a second `ADD INDEX` task is submitted before the first `ADD INDEX` task is completed, the second `ADD INDEX` task is executed through a transaction instead of the DXF.
 
 ## Prerequisites
 
