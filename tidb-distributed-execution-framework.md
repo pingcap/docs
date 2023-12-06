@@ -1,6 +1,6 @@
 ---
 title: TiDB Backend Task Distributed eXecution Framework (DXF)
-summary: Learn the use cases, limitations, usage, and implementation principles of the TiDB backend task distributed execution framework (DXF).
+summary: Learn the use cases, limitations, usage, and implementation principles of the TiDB backend task Distributed eXecution Framework (DXF).
 ---
 
 # TiDB Backend Task Distributed eXecution Framework (DXF)
