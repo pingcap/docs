@@ -13,7 +13,7 @@ summary: Learn the use cases, limitations, usage, and implementation principles 
 
 </CustomContent>
 
-TiDB adopts a computing-storage separation architecture with excellent scalability and elasticity. Starting from v7.1.0, TiDB introduces a backend task distributed execution framework to further leverage the resource advantages of the distributed architecture. The goal of this framework is to implement unified scheduling and distributed execution of all backend tasks, and to provide unified resource management capabilities for both overall and individual backend tasks, which better meets users' expectations for resource usage.
+TiDB adopts a computing-storage separation architecture with excellent scalability and elasticity. Starting from v7.1.0, TiDB introduces a backend task DXF (Distributed eXecution Framework) to further leverage the resource advantages of the distributed architecture. The goal of this framework is to implement unified scheduling and distributed execution of all backend tasks, and to provide unified resource management capabilities for both overall and individual backend tasks, which better meets users' expectations for resource usage.
 
 This document describes the use cases, limitations, usage, and implementation principles of the TiDB backend task distributed execution framework.
 
