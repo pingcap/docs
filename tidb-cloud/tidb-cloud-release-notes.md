@@ -8,6 +8,22 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2023.
 
+## December 5, 2023
+
+**General changes**
+
+- [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) enables you to resume a failed changefeed, which saves your effort to recreate a new one.
+
+    For more information, see [Changefeed states](/tidb-cloud/changefeed-overview.md#changefeed-states).
+
+**Console changes**
+
+- Enhance the connection experience for [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless).
+
+    Refine the **Connect** dialog interface to offer TiDB Serverless users a smoother and more efficient connection experience. In addition, TiDB Serverless introduces more client types and allows you to select the desired branch for connection.
+
+    For more information, see [Connect to TiDB Serverless](/tidb-cloud/connect-via-standard-connection-serverless.md).
+
 ## November 28, 2023
 
 **General changes**
