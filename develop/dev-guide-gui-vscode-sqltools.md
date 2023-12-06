@@ -56,7 +56,9 @@ TiDB は MySQL と互換性のあるデータベースであり、 [Visual Studi
 
     -   **エンドポイント タイプは**`Public`に設定されます。
 
-    -   **[接続先] は**`General`に設定されます。
+    -   **ブランチは**`main`に設定されます。
+
+    -   **[接続先] は**`VS Code`に設定されます。
 
     -   **オペレーティング システムが**環境に一致します。
 
@@ -64,7 +66,7 @@ TiDB は MySQL と互換性のあるデータベースであり、 [Visual Studi
     >
     > VS Code がリモート開発環境で実行されている場合は、リストからリモート オペレーティング システムを選択します。たとえば、Windows Subsystem for Linux (WSL) を使用している場合は、対応する Linux ディストリビューションに切り替えます。 GitHub コードスペースを使用している場合、これは必要ありません。
 
-4.  **「パスワードの作成」**をクリックしてランダムなパスワードを作成します。
+4.  **「パスワードの生成」**をクリックして、ランダムなパスワードを作成します。
 
     > **ヒント：**
     >
@@ -79,19 +81,19 @@ TiDB は MySQL と互換性のあるデータベースであり、 [Visual Studi
     -   **接続名**: この接続に意味のある名前を付けます。
     -   **接続グループ**: (オプション) この接続グループに意味のある名前を付けます。同じグループ名の接続はグループ化されます。
     -   **次の方法で接続します**。**サーバーとポート**を選択します。
-    -   **サーバーアドレス**: TiDB Cloud接続ダイアログから`host`パラメータを入力します。
-    -   **ポート**: TiDB Cloud接続ダイアログから`port`パラメータを入力します。
+    -   **サーバーアドレス**: TiDB Cloud接続ダイアログから`HOST`パラメータを入力します。
+    -   **ポート**: TiDB Cloud接続ダイアログから`PORT`パラメータを入力します。
     -   **データベース**: 接続するデータベースを入力します。
-    -   **ユーザー名**: TiDB Cloud接続ダイアログから`user`パラメータを入力します。
+    -   **ユーザー名**: TiDB Cloud接続ダイアログから`USERNAME`パラメータを入力します。
     -   **パスワード モード**: **[SQLTools Driver Credentials]**を選択します。
     -   **MySQL ドライバー固有のオプション**領域で、次のパラメーターを構成します。
 
         -   **認証プロトコル**:**デフォルト**を選択します。
-        -   **SSL** : **「有効」**を選択します。 TiDB サーバーレスには安全な接続が必要です。 **「SSL オプション (node.TLSSocket)」**領域で、 **「認証局 (CA) 証明書ファイル」**フィールドをTiDB Cloud接続ダイアログの`ssl_ca`パラメーターとして構成します。
+        -   **SSL** : **「有効」**を選択します。 TiDB サーバーレスには安全な接続が必要です。 **「SSL オプション (node.TLSSocket)」**領域で、 **「認証局 (CA) 証明書ファイル」**フィールドをTiDB Cloud接続ダイアログの`CA`パラメーターとして構成します。
 
             > **注記：**
             >
-            > Windows または GitHub コードスペースで実行している場合は、 **SSL を**空白のままにすることができます。デフォルトでは、SQLTools は Mozilla が厳選した有名な CA を信頼します。詳細については、 [TiDB サーバーレスのルート証明書管理](https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-clusters#root-certificate-management)を参照してください。
+            > Windows または GitHub コードスペースで実行している場合は、 **SSL を**空白のままにすることができます。デフォルトでは、SQLTools は Let&#39;s Encrypt によって厳選された有名な CA を信頼します。詳細については、 [TiDB サーバーレスのルート証明書管理](https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-clusters#root-certificate-management)を参照してください。
 
     ![VS Code SQLTools: configure connection settings for TiDB Serverless](/media/develop/vsc-sqltools-connection-config-serverless.jpg)
 
@@ -194,8 +196,8 @@ TiDB は MySQL と互換性のあるデータベースであり、 [Visual Studi
 ## 次のステップ {#next-steps}
 
 -   Visual Studio Code の詳しい使い方を[Visual Studio Code のドキュメント](https://code.visualstudio.com/docs)から学びましょう。
--   VS Code SQLTools 拡張機能の使用法については、SQLTools の[文書](https://marketplace.visualstudio.com/items?itemName=mtxr.sqltools)と[GitHubリポジトリ](https://github.com/mtxr/vscode-sqltools)から学びましょう。
--   TiDB アプリケーション[データの削除](/develop/dev-guide-delete-data.md) [単一テーブルの読み取り](/develop/dev-guide-get-data-from-single-table.md)ベスト プラクティス[SQLパフォーマンスの最適化](/develop/dev-guide-optimize-sql-overview.md)は、 [開発者ガイド](/develop/dev-guide-overview.md)の章 ( [データの挿入](/develop/dev-guide-insert-data.md)など) [データを更新する](/develop/dev-guide-update-data.md)参照[トランザクション](/develop/dev-guide-transaction-overview.md)てください。
+-   VS Code SQLTools 拡張機能の使用法については、SQLTools の[文書](https://marketplace.visualstudio.com/items?itemName=mtxr.sqltools)と[GitHub リポジトリ](https://github.com/mtxr/vscode-sqltools)から学びましょう。
+-   TiDB アプリケーション開発[単一テーブルの読み取り](/develop/dev-guide-get-data-from-single-table.md)ベスト プラクティスについて[取引](/develop/dev-guide-transaction-overview.md) 、 [開発者ガイド](/develop/dev-guide-overview.md)の章 ( [データの挿入](/develop/dev-guide-insert-data.md)など) [データを更新する](/develop/dev-guide-update-data.md)参照[データの削除](/develop/dev-guide-delete-data.md) [SQLパフォーマンスの最適化](/develop/dev-guide-optimize-sql-overview.md)ください。
 -   プロフェッショナルとして[TiDB 開発者コース](https://www.pingcap.com/education/)を学び、試験合格後に[TiDB 認定](https://www.pingcap.com/education/certification/)獲得します。
 
 ## 助けが必要？ {#need-help}

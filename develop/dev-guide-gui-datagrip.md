@@ -56,10 +56,11 @@ DataGrip は 2 つの方法で使用できます。
 3.  接続ダイアログの設定が動作環境と一致していることを確認してください。
 
     -   **エンドポイント タイプは**`Public`に設定されます
-    -   **[接続先] は**`JDBC`に設定されています
+    -   **ブランチは**`main`に設定されています
+    -   **[接続先] は**`DataGrip`に設定されています
     -   **オペレーティング システムが**環境に一致します。
 
-4.  **「パスワードの作成」**をクリックしてランダムなパスワードを作成します。
+4.  **「パスワードの生成」**をクリックして、ランダムなパスワードを作成します。
 
     > **ヒント：**
     >
@@ -73,7 +74,7 @@ DataGrip は 2 つの方法で使用できます。
 
     ![Select a data source in DataGrip](/media/develop/datagrip-data-source-select.jpg)
 
-7.  TiDB Cloud接続ダイアログから JDBC 文字列をコピーし、 `<your_password>`実際のパスワードに置き換えます。次に、それを**URL**フィールドに貼り付けると、残りのパラメータが自動入力されます。結果の例は次のとおりです。
+7.  TiDB Cloud接続ダイアログから接続文字列をコピーします。次に、それを**URL**フィールドに貼り付けると、残りのパラメータが自動入力されます。結果の例は次のとおりです。
 
     ![Configure the URL field for TiDB Serverless](/media/develop/datagrip-url-paste.jpg)
 
@@ -169,8 +170,8 @@ DataGrip は 2 つの方法で使用できます。
 ## 次のステップ {#next-steps}
 
 -   DataGrip の詳しい使い方を[DataGrip のドキュメント](https://www.jetbrains.com/help/datagrip/getting-started.html)から学びましょう。
--   TiDB アプリケーション[データの削除](/develop/dev-guide-delete-data.md) [単一テーブルの読み取り](/develop/dev-guide-get-data-from-single-table.md)ベスト プラクティス[SQLパフォーマンスの最適化](/develop/dev-guide-optimize-sql-overview.md)は、 [開発者ガイド](/develop/dev-guide-overview.md)の章 ( [データの挿入](/develop/dev-guide-insert-data.md)など) [データを更新する](/develop/dev-guide-update-data.md)参照[トランザクション](/develop/dev-guide-transaction-overview.md)てください。
--   プロフェッショナルとして[TiDB 開発者コース](https://www.pingcap.com/education/)を学び、試験合格後に[TiDB 認定](https://www.pingcap.com/education/certification/)獲得します。
+-   TiDB アプリケーション開発[単一テーブルの読み取り](/develop/dev-guide-get-data-from-single-table.md)ベスト プラクティスについて[取引](/develop/dev-guide-transaction-overview.md) 、 [開発者ガイド](/develop/dev-guide-overview.md)の章 ( [データの挿入](/develop/dev-guide-insert-data.md)など) [データを更新する](/develop/dev-guide-update-data.md)参照[データの削除](/develop/dev-guide-delete-data.md) [SQLパフォーマンスの最適化](/develop/dev-guide-optimize-sql-overview.md)ください。
+-   プロフェッショナルを通じて[TiDB 開発者コース](https://www.pingcap.com/education/)を学び、試験合格後に[TiDB 認定](https://www.pingcap.com/education/certification/)獲得します。
 
 ## 助けが必要？ {#need-help}
 

@@ -66,7 +66,7 @@ TiKV は自動調整[動的構成](/tikv-control.md#modify-the-tikv-configuratio
 
 データのインポート後にスナップショット バックアップを実行し、このスナップショット バックアップに基づいて PITR を実行することをお勧めします。
 
-## <code>br restore point</code>コマンドを使用してダウンストリーム クラスターを復元した後、 TiFlashからデータにアクセスできなくなります。私は何をすべきか？ {#after-restoring-a-downstream-cluster-using-the-code-br-restore-point-code-command-data-cannot-be-accessed-from-tiflash-what-should-i-do}
+## <code>br restore point</code>コマンドを使用してダウンストリーム クラスターを復元した後、 TiFlashからデータにアクセスできなくなります。どうすればいいですか？ {#after-restoring-a-downstream-cluster-using-the-code-br-restore-point-code-command-data-cannot-be-accessed-from-tiflash-what-should-i-do}
 
 現在、PITR は復元フェーズ中にTiFlashにデータを直接書き込むことをサポートしていません。代わりに、br コマンドライン ツールは`ALTER TABLE table_name SET TIFLASH REPLICA ***` DDL を実行してデータを複製します。したがって、 TiFlashレプリカは、PITR がデータの復元を完了した直後には使用できません。代わりに、TiKV ノードからデータがレプリケートされるまで一定期間待機する必要があります。レプリケーションの進行状況を確認するには、 `INFORMATION_SCHEMA.tiflash_replica`表の`progress`情報を確認します。
 
@@ -111,7 +111,7 @@ br log resume --task-name=task1 --pd x.x.x.x:2379
 checkpoint[global]: 2022-07-25 14:46:50.118 +0000; gap=6m28s
 ```
 
-> **ノート：**
+> **注記：**
 >
 > この機能は、複数のバージョンのデータをバックアップします。長時間バックアップ タスクが失敗し、ステータスが`ERROR`になると、このタスクのチェックポイント データは`safe point`に設定され、 `safe point`のデータは 24 時間以内にガベージ コレクションされません。したがって、バックアップ タスクは、エラーが再開された後、最後のチェックポイントから続行されます。タスクが 24 時間以上失敗し、最後のチェックポイント データがガベージ コレクションされている場合、タスクを再開するとエラーが報告されます。この場合、 `br log stop`コマンドを実行して最初にタスクを停止し、次に新しいバックアップ タスクを開始することしかできません。
 
@@ -135,9 +135,9 @@ Error: failed to check gc safePoint, checkpoint ts 433177834291200000: GC safepo
 
 [`filter.rules`](https://github.com/pingcap/tiflow/blob/7c3c2336f98153326912f3cf6ea2fbb7bcc4a20c/cmd/changefeed.toml#L16)を使用して TiCDC のブロック リストを構成し、 [`syncer.ignore-table`](/tidb-binlog/tidb-binlog-configuration-file.md#ignore-table)を使用してDrainerのブロック リストを構成できます。
 
-### リストア中に<code>new_collations_enabled_on_first_bootstrap</code>の不一致が報告されるのはなぜですか? {#why-is-code-new-collations-enabled-on-first-bootstrap-code-mismatch-reported-during-restore}
+### 復元中に<code>new_collation_enabled</code>不一致が報告されるのはなぜですか? {#why-is-code-new-collation-enabled-code-mismatch-reported-during-restore}
 
-TiDB v6.0.0 以降、デフォルト値[`new_collations_enabled_on_first_bootstrap`](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap)が`false`から`true`に変更されました。 BR は、上流クラスタの`new_collations_enabled_on_first_bootstrap`設定をバックアップし、この設定の値が上流クラスタと下流クラスタ間で一貫しているかどうかを確認します。値が一貫している場合、 BR は上流クラスターにバックアップされたデータを下流クラスターに安全に復元します。値が矛盾している場合、 BR はデータの復元を実行せず、エラーを報告します。
+TiDB v6.0.0 以降、デフォルト値[`new_collations_enabled_on_first_bootstrap`](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap)が`false`から`true`に変更されました。 BR は、上流クラスタの`mysql.tidb`テーブル内の`new_collation_enabled`設定をバックアップし、この設定の値が上流クラスタと下流クラスタ間で一貫しているかどうかを確認します。値が一貫している場合、 BR は上流クラスターにバックアップされたデータを下流クラスターに安全に復元します。値が矛盾している場合、 BR はデータの復元を実行せず、エラーを報告します。
 
 以前のバージョンの v6.0.0 の TiDB クラスターにデータをバックアップしており、このデータを v6.0.0 以降のバージョンの TiDB クラスターに復元するとします。この状況では、値`new_collations_enabled_on_first_bootstrap`がアップストリーム クラスターとダウンストリーム クラスター間で一致しているかどうかを手動で確認する必要があります。
 
@@ -168,11 +168,11 @@ v6.0.0 より前では、 BR は[配置ルール](/placement-rules-in-sql.md)を
 
 `--ddl-batch-size` ～ `128` 、またはそれより小さい値を設定すると、バッチで作成されるテーブルの数を減らすことができます。
 
-BRを使用して`1`より大きい[`--ddl-batch-size`](/br/br-batch-create-table.md#use-batch-create-table)の値を持つバックアップ データを復元すると、TiDB はテーブル作成の DDL ジョブを TiKV によって維持される DDL ジョブ キューに書き込みます。現時点では、ジョブ メッセージの最大値はデフォルトで`6 MB`であるため、TiDB によって一度に送信されるすべてのテーブル スキーマの合計サイズは 6 MB を超えてはなりません (この値を変更することは**お勧めできません**。詳細については、9 と[`txn-entry-size-limit`](/tidb-configuration-file.md#txn-entry-size-limit-new-in-v50)を参照してください)。 [`raft-entry-max-size`](/tikv-configuration-file.md#raft-entry-max-size) ）。したがって、 `--ddl-batch-size`過度に大きな値に設定すると、TiDB によって一度にバッチで送信されるテーブルのスキーマ サイズが指定値を超え、 BRで`entry too large, the max entry size is 6291456, the size of data is 7690800`エラーが報告されます。
+BRを使用して`1`より大きい[`--ddl-batch-size`](/br/br-batch-create-table.md#use-batch-create-table)の値を持つバックアップ データを復元すると、TiDB はテーブル作成の DDL ジョブを TiKV によって維持される DDL ジョブ キューに書き込みます。現時点では、ジョブ メッセージの最大値はデフォルトで`6 MB`であるため、TiDB によって一度に送信されるすべてのテーブル スキーマの合計サイズは 6 MB を超えてはなりません (この値を変更することは**お勧めできません**。詳細については、 [`txn-entry-size-limit`](/tidb-configuration-file.md#txn-entry-size-limit-new-in-v50)と を参照してください)。 [`raft-entry-max-size`](/tikv-configuration-file.md#raft-entry-max-size) ）。したがって、 `--ddl-batch-size`過度に大きな値に設定すると、TiDB によって一度にバッチで送信されるテーブルのスキーマ サイズが指定値を超え、 BRで`entry too large, the max entry size is 6291456, the size of data is 7690800`エラーが報告されます。
 
 ### <code>local</code>storageを使用する場合、バックアップ ファイルはどこに保存されますか? {#where-are-the-backed-up-files-stored-when-i-use-code-local-code-storage}
 
-> **ノート：**
+> **注記：**
 >
 > BRまたは TiKV ノードにネットワーク ファイル システム (NFS) がマウントされていない場合、または Amazon S3、GCS、または Azure Blob Storage プロトコルをサポートする外部storageを使用している場合、 BRによってバックアップされたデータは各 TiKV ノードで生成されます。バックアップ データは各ノードのローカル ファイル システムに分散しているため、**これはBRを展開する推奨方法ではないことに注意してください**。バックアップデータを採取すると、データの冗長化や運用保守上の問題が発生する可能性があります。一方、バックアップ データを収集する前にデータを直接復元すると、 `SST file not found`エラーが発生します。
 
@@ -190,15 +190,13 @@ TiKV がバックアップ ディレクトリにアクセスできるかどう�
 
 バックアップ ファイル (SST ファイル) は TiKV によって保存されるため、 `root`ユーザーとして`br`を実行すると、ディスク権限が原因で失敗する可能性があります。
 
-> **ノート：**
+> **注記：**
 >
 > データの復元中に同じ問題が発生する可能性があります。 SST ファイルを初めて読み取るときに、読み取り権限が検証されます。 DDL の実行時間は、アクセス許可の確認と`br`の実行の間に長い間隔がある可能性があることを示唆しています。長時間待機すると、エラー メッセージ`Permission denied`表示される場合があります。
 
 したがって、データを復元する前に、次の手順に従って権限を確認することをお勧めします。
 
 1.  プロセス クエリの Linux コマンドを実行します。
-
-    {{< copyable "" >}}
 
     ```bash
     ps aux | grep tikv-server
@@ -213,8 +211,6 @@ TiKV がバックアップ ディレクトリにアクセスできるかどう�
 
     または、次のコマンドを実行することもできます。
 
-    {{< copyable "" >}}
-
     ```bash
     ps aux | grep tikv-server | awk '{print $1}'
     ```
@@ -227,8 +223,6 @@ TiKV がバックアップ ディレクトリにアクセスできるかどう�
     ```
 
 2.  `tiup`コマンドを使用して、クラスターの起動情報を照会します。
-
-    {{< copyable "" >}}
 
     ```bash
     tiup cluster list
@@ -245,8 +239,6 @@ TiKV がバックアップ ディレクトリにアクセスできるかどう�
     ```
 
 3.  バックアップディレクトリの権限を確認してください。たとえば、 `backup`はバックアップ データstorageの場合です。
-
-    {{< copyable "" >}}
 
     ```bash
     ls -al backup
@@ -269,8 +261,6 @@ BR v5.1.0 以降、完全バックアップを実行すると、 BR は**`mysql`
 
 ユーザーが`mysql`スキーマ (システム テーブルではない) で作成したテーブルを復元するには、 [テーブルフィルター](/table-filter.md#syntax)使用してテーブルを明示的に含めます。次の例は、 BR が通常の復元を実行するときに`mysql.usertable`テーブルを復元する方法を示しています。
 
-{{< copyable "" >}}
-
 ```shell
 br restore full -f '*.*' -f '!mysql.*' -f 'mysql.usertable' -s $external_storage_url --with-sys-table
 ```
@@ -282,8 +272,6 @@ br restore full -f '*.*' -f '!mysql.*' -f 'mysql.usertable' -s $external_storage
 -   `-f 'mysql.usertable'` `mysql.usertable`を復元する必要があることを示します。
 
 `mysql.usertable`のみを復元する必要がある場合は、次のコマンドを実行します。
-
-{{< copyable "" >}}
 
 ```shell
 br restore full -f 'mysql.usertable' -s $external_storage_url --with-sys-table
@@ -297,7 +285,7 @@ br restore full -f 'mysql.usertable' -s $external_storage_url --with-sys-table
 
 ## バックアップと復元についてその他知っておきたいこと {#other-things-you-may-want-to-know-about-backup-and-restore}
 
-### バックアップデータのサイズはどのくらいですか?バックアップのレプリカはありますか? {#what-is-the-size-of-the-backup-data-are-there-replicas-of-the-backup}
+### バックアップデータのサイズはどれくらいですか?バックアップのレプリカはありますか? {#what-is-the-size-of-the-backup-data-are-there-replicas-of-the-backup}
 
 データのバックアップ中に、各リージョンのLeaderノード上にバックアップ ファイルが生成されます。バックアップのサイズはデータ サイズと等しく、冗長レプリカはありません。したがって、合計データ サイズは、TiKV データの合計数をレプリカの数で割ったものとほぼなります。
 

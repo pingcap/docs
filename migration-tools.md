@@ -73,7 +73,7 @@ TiDB は、完全なデータ移行、増分データ移行、バックアップ
     -   災害復旧のために外部storageへのデータのバックアップをサポート
 -   **制限事項**:
     -   BR がTiCDC またはDrainerの上流クラスターにデータを復元する場合、復元されたデータは TiCDC またはDrainerによって下流に複製できません。
-    -   BR は、同じ値`new_collations_enabled_on_first_bootstrap`を持つクラスター間の操作のみをサポートします。
+    -   BR は、 `mysql.tidb`テーブルで同じ`new_collation_enabled`値を持つクラスター間の操作のみをサポートします。
 
 ## <a href="/sync-diff-inspector/sync-diff-inspector-overview.md">同期差分インスペクター</a> {#a-href-sync-diff-inspector-sync-diff-inspector-overview-md-sync-diff-inspector-a}
 
@@ -131,7 +131,7 @@ tidb-lightning  pingcap  TiDB Lightning is a tool used for fast full import of l
 tiup            pingcap  TiUP is a command-line component management tool that can help to download and install TiDB platform components to the local system
 ```
 
-インストールするコンポーネントを選択します。
+インストールするコンポーネントを選択します:
 
 ```shell
 tiup install dumpling tidb-lightning

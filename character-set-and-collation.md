@@ -11,7 +11,7 @@ summary: Learn about the supported character sets and collations in TiDB.
 
 文字セットは、記号とエンコーディングのセットです。 TiDB のデフォルトの文字セットは utf8mb4 で、MySQL 8.0 以降のデフォルトと一致します。
 
-照合順序は、文字セット内の文字と文字の並べ替え順序を比較するための一連の規則です。たとえば、バイナリ照合順序では、 `A`と`a`は同等として比較されません。
+照合順序は、文字セット内の文字と文字の並べ替え順序を比較するための一連のルールです。たとえば、バイナリ照合順序では、 `A`と`a`は同等として比較されません。
 
 ```sql
 SET NAMES utf8mb4 COLLATE utf8mb4_bin;
@@ -107,7 +107,7 @@ SHOW COLLATION;
 >
 > TiDB は、latin1 を utf8 のサブセットとして誤って扱います。これにより、latin1 エンコーディングと utf8 エンコーディングの間で異なる文字を保存すると、予期しない動作が発生する可能性があります。 utf8mb4 文字セットを強く推奨します。詳細については[TiDB #18955](https://github.com/pingcap/tidb/issues/18955)参照してください。
 >
-> 述語に`LIKE 'prefix%'`などの文字列接頭辞の`LIKE`含まれており、ターゲット列が非バイナリ照合順序(接尾辞が`_bin`で終わらない) に設定されている場合、オプティマイザは現在、この述語を範囲スキャンに変換できません。代わりに、フルスキャンが実行されます。その結果、このような SQL クエリは予期しないリソースの消費につながる可能性があります。
+> 述語に`LIKE 'prefix%'`などの文字列接頭辞の`LIKE`が含まれており、ターゲット列が非バイナリ照合順序(接尾辞が`_bin`で終わらない) に設定されている場合、オプティマイザは現在、この述語を範囲スキャンに変換できません。代わりに、フルスキャンが実行されます。その結果、このような SQL クエリは予期しないリソースの消費につながる可能性があります。
 
 > **注記：**
 >
@@ -413,7 +413,7 @@ SELECT _utf8mb4'string' COLLATE utf8mb4_general_ci;
 
 </CustomContent>
 
-v4.0 より前では、TiDB は[照合順序の古いフレームワーク](#old-framework-for-collations)のみを提供します。このフレームワークでは、TiDB はほとんどの MySQL 照合順序の構文解析をサポートしていますが、意味的にはすべての照合順序をバイナリ照合順序として受け取ります。
+v4.0 より前では、TiDB は[照合順序の古いフレームワーク](#old-framework-for-collations)のみを提供していました。このフレームワークでは、TiDB はほとんどの MySQL 照合順序の構文解析をサポートしていますが、意味的にはすべての照合順序をバイナリ照合順序として受け取ります。
 
 v4.0 以降、TiDB は[照合順序の新しいフレームワーク](#new-framework-for-collations)をサポートします。このフレームワークでは、TiDB はさまざまな照合順序を意味的に解析し、文字列を比較するときに照合順序に厳密に従います。
 
@@ -463,7 +463,13 @@ TiDB v4.0 以降、照合順序のための完全なフレームワークが導�
 
 <CustomContent platform="tidb">
 
-この新しいフレームワークは、セマンティック解析照合をサポートし、クラスターの最初の初期化時に新しいフレームワークを有効にするかどうかを決定する`new_collations_enabled_on_first_bootstrap`構成項目を導入します。新しいフレームワークを有効にするには、 `new_collations_enabled_on_first_bootstrap` ～ `true`を設定します。詳細は[`new_collations_enabled_on_first_bootstrap`](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap)を参照してください。構成項目が有効になった後にクラスターを初期化すると、 `mysql`の`new_collation_enabled`変数を通じて新しい照合順序が有効になっているかどうかを確認できます。 `tidb`テーブル:
+この新しいフレームワークは、セマンティック解析照合をサポートし、クラスターの最初の初期化時に新しいフレームワークを有効にするかどうかを決定する`new_collations_enabled_on_first_bootstrap`構成項目を導入します。新しいフレームワークを有効にするには、 `new_collations_enabled_on_first_bootstrap` ～ `true`を設定します。詳細は[`new_collations_enabled_on_first_bootstrap`](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap)を参照してください。
+
+すでに初期化されている TiDB クラスターの場合、表`mysql.tidb`の`new_collation_enabled`変数を使用して、新しい照合順序が有効になっているかどうかを確認できます。
+
+> **注記：**
+>
+> `mysql.tidb`テーブルのクエリ結果が`new_collations_enabled_on_first_bootstrap`の値と異なる場合、 `mysql.tidb`テーブルの結果が実際の値になります。
 
 ```sql
 SELECT VARIABLE_VALUE FROM mysql.tidb WHERE VARIABLE_NAME='new_collation_enabled';

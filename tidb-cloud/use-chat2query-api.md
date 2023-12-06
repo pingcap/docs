@@ -17,11 +17,11 @@ Chat2Query API には HTTPS 経由でのみアクセスできるため、ネッ�
 
 プロジェクトのデータ アプリを作成するには、次の手順を実行します。
 
-1.  プロジェクトの[**データサービス**](https://tidbcloud.com/console/data-service)ページで、<mdsvgicon name="icon-create-data-app">左側のペインで**DataApp を作成します**。データアプリ作成ダイアログが表示されます。</mdsvgicon>
+1.  プロジェクトの[**データサービス**](https://tidbcloud.com/console/data-service)ページで、 をクリックします。<mdsvgicon name="icon-create-data-app">左側のペインで**DataApp を作成します**。データアプリ作成ダイアログが表示されます。</mdsvgicon>
 
     > **ヒント：**
     >
-    > クラスターの**Chat2Query**ページにいる場合は、右上隅の**[...]**をクリックし、 **[API 経由で Chat2Query にアクセス]**を選択し、 **[新しい Chat2Query データ アプリ]**をクリックして、データ アプリ作成ダイアログを開くこともできます。
+    > クラスターの**Chat2Query**ページにいる場合は、右上隅の**[...]**をクリックし、 **[API 経由で Chat2Query にアクセス**] を選択し、 **[新しい Chat2Query データ アプリ]**をクリックして、データ アプリ作成ダイアログを開くこともできます。
 
 2.  ダイアログで、データ アプリの名前を定義し、データ ソースとして目的のクラスターを選択し、**データ アプリ**の種類として**Chat2Query データ アプリ**を選択します。必要に応じて、アプリの説明を書くこともできます。
 
@@ -80,7 +80,7 @@ TiDB Cloudには、 Chat2Query エンドポイントをすばやく呼び出す�
 
 1.  [**データサービス**](https://tidbcloud.com/console/data-service)ページの左側のペインで、Chat2Query エンドポイントの名前をクリックします。
 
-    右側には、エンドポイントの URL、コード例、リクエスト メソッドなど、このエンドポイントを呼び出すための情報が表示されます。
+    右側には、エンドポイント URL、コード例、リクエストメソッドなど、このエンドポイントを呼び出すための情報が表示されます。
 
 2.  **[コード例を表示]**をクリックします。
 
@@ -163,13 +163,13 @@ curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request GET 'https://<region
 }
 ```
 
-`"status"`が`"done"`の場合、完全なデータの概要が準備できているため、 `/v2/chat2data`を呼び出すことで、このデータベースの SQL ステートメントを生成して実行できるようになります。それ以外の場合は、分析が完了するまで待って、後で分析ステータスを確認する必要があります。
+`"status"`が`"done"`の場合、完全なデータの概要が準備できており、 `/v2/chat2data`呼び出すことでこのデータベースの SQL ステートメントを生成して実行できるようになります。それ以外の場合は、分析が完了するまで待って、後で分析ステータスを確認する必要があります。
 
 応答では、 `DataSummaryObject`指定されたデータベースの AI 探索情報を表します。 `DataSummaryObject`の構造は以下の通りです。
 
 ```json
 {
-    "cluster_id": 10939961583884005000, // Your cluster id
+    "cluster_id": 10939961583884005252, // Your cluster id
     "db_name": "sp500insight", // Database name
     "db_schema": { // Database schema information
         "users": { // A table named "users"
@@ -212,20 +212,24 @@ curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request GET 'https://<region
 
 #### 3. <code>/v2/chat2data</code>を呼び出して SQL ステートメントを生成および実行します。 {#3-generate-and-execute-sql-statements-by-calling-code-v2-chat2data-code}
 
-データベースのデータ概要の準備ができたら、次のようにデータ概要 ID と質問を指定して`/v2/chat2data`を呼び出し、SQL ステートメントを生成して実行できます。
+データベースのデータ概要の準備ができたら、クラスター ID、データベース名、質問を指定して`/v2/chat2data`を呼び出し、SQL ステートメントを生成して実行できます。
+
+例えば：
 
 ```bash
 curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request POST 'https://<region>.data.dev.tidbcloud.com/api/v1beta/app/chat2query-<ID>/endpoint/v2/chat2data'\
  --header 'content-type: application/json'\
  --data-raw '{
-  "data_summary_id": <Your data summary id>,
+  "cluster_id": "10939961583884005252",
+  "database": "sp500insight",
   "raw_question": "<Your question to generate data>"
 }'
 ```
 
 前述のコードでは、リクエスト本文は次のプロパティを持つ JSON オブジェクトです。
 
--   `data_summary_id` :*文字列*。データ概要の一意の識別子。 `/v2/dataSummaries`を呼び出すことで生成されます。
+-   `cluster_id` :*文字列*。 TiDB クラスターの一意の識別子。
+-   `database` :*文字列*。データベースの名前。
 -   `raw_question` :*文字列*。必要なクエリを記述する自然言語。
 
 応答の例は次のとおりです。
@@ -237,6 +241,16 @@ curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request POST 'https://<regio
   "result": {
     "job_id": "3966d5bd95324a6283445e3a02ccd97c"
   }
+}
+```
+
+次のようなステータス コード`400`の応答を受け取った場合は、データの概要が準備できるまでしばらく待つ必要があることを意味します。
+
+```json
+{
+    "code": 400,
+    "msg": "Data summary is not ready, please wait for a while and retry",
+    "result": {}
 }
 ```
 

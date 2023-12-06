@@ -83,6 +83,8 @@ npm install
 
     -   **エンドポイント タイプは**`Public`に設定されます
 
+    -   **ブランチは**`main`に設定されています
+
     -   **[接続先] は**`General`に設定されています
 
     -   **オペレーティング システムが**環境に一致します。
@@ -91,7 +93,7 @@ npm install
     >
     > Node.js アプリケーションでは、TLS (SSL) 接続を確立するときにデフォルトで組み込みの[Mozilla CA 証明書](https://wiki.mozilla.org/CA/Included_Certificates)を使用するため、SSL CA 証明書を提供する必要はありません。
 
-4.  **「パスワードの作成」**をクリックしてランダムなパスワードを作成します。
+4.  **「パスワードの生成」**をクリックして、ランダムなパスワードを作成します。
 
     > **ヒント**
     >
@@ -279,7 +281,7 @@ console.log(rsh.affectedRows);
 
 -   ORM と Next.js を使用して複雑なアプリケーションを構築する方法の詳細については、 [私たちの書店デモ](https://github.com/pingcap/tidb-prisma-vercel-demo)を参照してください。
 -   node-mysql2 ドライバーの使用法については[node-mysql2 のドキュメント](https://github.com/sidorares/node-mysql2/tree/master/documentation/en)から学びましょう。
--   TiDB アプリケーション[データの削除](/develop/dev-guide-delete-data.md) [単一テーブルの読み取り](/develop/dev-guide-get-data-from-single-table.md)ベスト プラクティス[SQLパフォーマンスの最適化](/develop/dev-guide-optimize-sql-overview.md)は、 [開発者ガイド](/develop/dev-guide-overview.md)の章 ( [データの挿入](/develop/dev-guide-insert-data.md)など) [データを更新する](/develop/dev-guide-update-data.md)参照[トランザクション](/develop/dev-guide-transaction-overview.md)てください。
+-   TiDB アプリケーション開発[単一テーブルの読み取り](/develop/dev-guide-get-data-from-single-table.md)ベスト プラクティスについて[取引](/develop/dev-guide-transaction-overview.md) 、 [開発者ガイド](/develop/dev-guide-overview.md)の章 ( [データの挿入](/develop/dev-guide-insert-data.md)など) [データを更新する](/develop/dev-guide-update-data.md)参照[データの削除](/develop/dev-guide-delete-data.md) [SQLパフォーマンスの最適化](/develop/dev-guide-optimize-sql-overview.md)ください。
 -   プロフェッショナルとして[TiDB 開発者コース](https://www.pingcap.com/education/)を学び、試験合格後に[TiDB 認定](https://www.pingcap.com/education/certification/)獲得します。
 
 ## 助けが必要？ {#need-help}

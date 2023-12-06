@@ -54,6 +54,8 @@
             -   [JetBrains データグリップ](/develop/dev-guide-gui-datagrip.md)
             -   [Dビーバー](/develop/dev-guide-gui-dbeaver.md)
             -   [VSコード](/develop/dev-guide-gui-vscode-sqltools.md)
+            -   [MySQL ワークベンチ](/develop/dev-guide-gui-mysql-workbench.md)
+            -   [ナビキャット](/develop/dev-guide-gui-navicat.md)
         -   [Driverまたは ORM を選択してください](/develop/dev-guide-choose-driver-or-orm.md)
         -   [TiDB に接続する](/develop/dev-guide-connect-to-tidb.md)
         -   [接続プールと接続パラメータ](/develop/dev-guide-connection-parameters.md)
@@ -115,7 +117,7 @@
     -   クラスタトポロジの計画
         -   [最小限のトポロジ](/minimal-deployment-topology.md)
         -   [TiFlashトポロジ](/tiflash-deployment-topology.md)
-        -   [TiCDC トポロジー](/ticdc-deployment-topology.md)
+        -   [TiCDC トポロジ](/ticdc-deployment-topology.md)
         -   [TiDBBinlogトポロジ](/tidb-binlog-deployment-topology.md)
         -   [TiSpark トポロジ](/tispark-deployment-topology.md)
         -   [クロス DC トポロジ](/geo-distributed-deployment-topology.md)
@@ -870,7 +872,7 @@
         -   [生成された列](/generated-columns.md)
         -   [SQLモード](/sql-mode.md)
         -   [テーブルの属性](/table-attributes.md)
-        -   トランザクション
+        -   取引
             -   [概要](/transaction-overview.md)
             -   [分離レベル](/transaction-isolation-levels.md)
             -   [楽観的なトランザクション](/optimistic-transaction.md)

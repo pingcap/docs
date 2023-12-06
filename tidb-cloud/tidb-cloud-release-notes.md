@@ -8,6 +8,22 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 このページには 2023 年[TiDB Cloud](https://www.pingcap.com/tidb-cloud/)のリリースノートが記載されています。
 
+## 2023 年 12 月 5 日 {#december-5-2023}
+
+**一般的な変更点**
+
+-   [TiDB専用](/tidb-cloud/select-cluster-tier.md#tidb-dedicated)を指定すると、失敗した変更フィードを再開できるため、新しい変更フィードを再作成する手間が省けます。
+
+    詳細については、 [フィード状態の変更](/tidb-cloud/changefeed-overview.md#changefeed-states)を参照してください。
+
+**コンソールの変更**
+
+-   [TiDB サーバーレス](/tidb-cloud/select-cluster-tier.md#tidb-serverless)の接続エクスペリエンスを強化します。
+
+    [接続**] ダイアログ**インターフェイスを改良して、TiDB サーバーレス ユーザーに、よりスムーズで効率的な接続エクスペリエンスを提供します。さらに、TiDB サーバーレスでは、より多くのクライアント タイプが導入され、接続に必要なブランチを選択できるようになります。
+
+    詳細については、 [TiDB サーバーレスに接続する](/tidb-cloud/connect-via-standard-connection-serverless.md)を参照してください。
+
 ## 2023年11月28日 {#november-28-2023}
 
 **一般的な変更点**
@@ -26,7 +42,7 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
     SQL ステートメント RU の詳細を確認するには、 [TiDB サーバーレス クラスター](https://tidbcloud.com/console/clusters)の**[診断]**ページに移動し、 **[SQL ステートメント]**タブをクリックします。
 
-## 2023年11月21日 {#november-21-2023}
+## 2023 年 11 月 21 日 {#november-21-2023}
 
 **一般的な変更点**
 
@@ -40,7 +56,7 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 **一般的な変更点**
 
--   TiDB 専用クラスターからデータを復元する場合、デフォルトの動作が、ユーザー アカウントなしの復元から、 `cloud_admin@'%'`アカウントを含むすべてのユーザー アカウントを使用した復元に変更されました。
+-   TiDB 専用クラスターからデータを復元する場合、デフォルトの動作が、ユーザー アカウントなしでの復元から、 `cloud_admin@'%'`アカウントを含むすべてのユーザー アカウントを使用した復元に変更されました。
 
     詳細については、 [TiDB 専用データのバックアップと復元](/tidb-cloud/backup-and-restore.md)を参照してください。
 
@@ -117,7 +133,7 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 -   TiDB Cloud Billing API エンドポイントを導入して、特定の組織の特定の月の請求書を取得します。
 
-    この Billing API エンドポイントは、TiDB TiDB Cloudの最新 API バージョンである TiDB TiDB Cloud API v1beta1 でリリースされています。詳細については、 [API ドキュメント (v1beta1)](https://docs.pingcap.com/tidbcloud/api/v1beta1#tag/Billing)を参照してください。
+    この Billing API エンドポイントは、 TiDB Cloudの最新 API バージョンである TiDB TiDB Cloud API v1beta1 でリリースされています。詳細については、 [API ドキュメント (v1beta1)](https://docs.pingcap.com/tidbcloud/api/v1beta1#tag/Billing)を参照してください。
 
 ## 2023 年 9 月 19 日 {#september-19-2023}
 
@@ -351,7 +367,7 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
     [TiDB Cloudコンソール](/tidb-cloud/branch-manage.md)または[TiDB CloudCLI](/tidb-cloud/ticloud-branch-create.md)のいずれかを使用して、2023 年 7 月 5 日以降に作成された TiDB サーバーレス クラスターのブランチを作成できます。
 
-    アプリケーション開発に GitHub を使用する場合、TiDB サーバーレス ブランチを GitHub CI/CD パイプラインに統合できます。これにより、本番データベースに影響を与えることなく、ブランチを使用してプル リクエストを自動的にテストできます。詳細については、 [TiDB サーバーレス ブランチング (ベータ版) を GitHub と統合する](/tidb-cloud/branch-github-integration.md)を参照してください。
+    アプリケーション開発に GitHub を使用する場合は、TiDB サーバーレス ブランチを GitHub CI/CD パイプラインに統合できます。これにより、本番データベースに影響を与えることなく、ブランチを使用してプル リクエストを自動的にテストできます。詳細については、 [TiDB サーバーレス ブランチング (ベータ版) を GitHub と統合する](/tidb-cloud/branch-github-integration.md)を参照してください。
 
 -   [TiDB専用](/tidb-cloud/select-cluster-tier.md#tidb-dedicated)クラスターの毎週のバックアップをサポートします。詳細については、 [TiDB 専用データのバックアップと復元](/tidb-cloud/backup-and-restore.md#turn-on-auto-backup)を参照してください。
 
@@ -736,7 +752,7 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 **一般的な変更点**
 
--   [データサービス（ベータ版）](https://tidbcloud.com/console/data-service)クラスターを導入すると、カスタム API エンドポイントを使用して HTTPS リクエスト経由でデータ[Serverless Tier](/tidb-cloud/select-cluster-tier.md#tidb-serverless)アクセスできるようになります。
+-   [データサービス（ベータ版）](https://tidbcloud.com/console/data-service)クラスター[Serverless Tier](/tidb-cloud/select-cluster-tier.md#tidb-serverless)導入すると、カスタム API エンドポイントを使用して HTTPS リクエスト経由でデータにアクセスできるようになります。
 
     Data Service を使用すると、 TiDB Cloud をHTTPS と互換性のあるアプリケーションまたはサービスとシームレスに統合できます。以下に、一般的なシナリオをいくつか示します。
 

@@ -78,6 +78,8 @@ pip install -r requirements.txt
 
     -   **エンドポイント タイプは**`Public`に設定されます
 
+    -   **ブランチは**`main`に設定されています
+
     -   **[接続先] は**`General`に設定されています
 
     -   **オペレーティング システムが**環境に一致します。
@@ -86,7 +88,7 @@ pip install -r requirements.txt
     >
     > プログラムが Windows Subsystem for Linux (WSL) で実行されている場合は、対応する Linux ディストリビューションに切り替えます。
 
-4.  **「パスワードの作成」**をクリックしてランダムなパスワードを作成します。
+4.  **「パスワードの生成」**をクリックして、ランダムなパスワードを作成します。
 
     > **ヒント：**
     >
@@ -273,7 +275,7 @@ Python ドライバーはデータベースへの低レベルのアクセスを�
 -   データベーストランザクションを手動で管理します。
 -   データ行 ( `pymysql`ではタプルまたは辞書として表されます) をデータ オブジェクトに手動でマップします。
 
-複雑な SQL ステートメントを作成する必要がない限り、開発には[SQLアルケミー](/develop/dev-guide-sample-application-python-sqlalchemy.md) 、 [ピーウィー](/develop/dev-guide-sample-application-python-peewee.md) 、Django ORM などの[ORM](https://en.wikipedia.org/w/index.php?title=Object-relational_mapping)フレームワークを使用することをお勧めします。それはあなたに役立ちます:
+複雑な SQL ステートメントを記述する必要がない限り、開発には[SQLアルケミー](/develop/dev-guide-sample-application-python-sqlalchemy.md) 、 [ピーウィー](/develop/dev-guide-sample-application-python-peewee.md) 、Django ORM などの[ORM](https://en.wikipedia.org/w/index.php?title=Object-relational_mapping)フレームワークを使用することをお勧めします。それはあなたに役立ちます:
 
 -   接続とトランザクションの管理のために[定型コード](https://en.wikipedia.org/wiki/Boilerplate_code)を減らします。
 -   多数の SQL ステートメントの代わりにデータ オブジェクトを使用してデータを操作します。
@@ -281,8 +283,8 @@ Python ドライバーはデータベースへの低レベルのアクセスを�
 ## 次のステップ {#next-steps}
 
 -   PyMySQL の詳しい使い方を[PyMySQL のドキュメント](https://pymysql.readthedocs.io)から学びましょう。
--   TiDB アプリケーション[データの削除](/develop/dev-guide-delete-data.md) [単一テーブルの読み取り](/develop/dev-guide-get-data-from-single-table.md)ベスト プラクティス[SQLパフォーマンスの最適化](/develop/dev-guide-optimize-sql-overview.md)は、 [開発者ガイド](/develop/dev-guide-overview.md)の章 ( [データの挿入](/develop/dev-guide-insert-data.md)など) [データを更新する](/develop/dev-guide-update-data.md)参照[トランザクション](/develop/dev-guide-transaction-overview.md)てください。
--   プロフェッショナルとして[TiDB 開発者コース](https://www.pingcap.com/education/)を学び、試験合格後に[TiDB 認定](https://www.pingcap.com/education/certification/)獲得します。
+-   TiDB アプリケーション開発[単一テーブルの読み取り](/develop/dev-guide-get-data-from-single-table.md)ベスト プラクティスについて[取引](/develop/dev-guide-transaction-overview.md) 、 [開発者ガイド](/develop/dev-guide-overview.md)の章 ( [データの挿入](/develop/dev-guide-insert-data.md)など) [データを更新する](/develop/dev-guide-update-data.md)参照[データの削除](/develop/dev-guide-delete-data.md) [SQLパフォーマンスの最適化](/develop/dev-guide-optimize-sql-overview.md)ください。
+-   プロフェッショナルを通じて[TiDB 開発者コース](https://www.pingcap.com/education/)を学び、試験合格後に[TiDB 認定](https://www.pingcap.com/education/certification/)獲得します。
 
 ## 助けが必要？ {#need-help}
 

@@ -24,6 +24,8 @@
             -   [JetBrains データグリップ](/develop/dev-guide-gui-datagrip.md)
             -   [Dビーバー](/develop/dev-guide-gui-dbeaver.md)
             -   [VSコード](/develop/dev-guide-gui-vscode-sqltools.md)
+            -   [MySQL ワークベンチ](/develop/dev-guide-gui-mysql-workbench.md)
+            -   [ナビキャット](/develop/dev-guide-gui-navicat.md)
         -   [Driverまたは ORM を選択してください](/develop/dev-guide-choose-driver-or-orm.md)
         -   Java
             -   [JDBC](/develop/dev-guide-sample-application-java-jdbc.md)
@@ -315,8 +317,12 @@
     -   [TiDB Cloud上の制限された SQL 機能](/tidb-cloud/limited-sql-features.md)
     -   [TiDB の制限事項](/tidb-limitations.md)
     -   ベンチマーク
-        -   [TPC-C パフォーマンス テスト レポート](/tidb-cloud/v7.1.0-performance-benchmarking-with-tpcc.md)
-        -   [Sysbench パフォーマンス テスト レポート](/tidb-cloud/v7.1.0-performance-benchmarking-with-sysbench.md)
+        -   TiDB v7.5
+            -   [TPC-C パフォーマンス テスト レポート](/tidb-cloud/v7.5.0-performance-benchmarking-with-tpcc.md)
+            -   [Sysbench パフォーマンス テスト レポート](/tidb-cloud/v7.5.0-performance-benchmarking-with-sysbench.md)
+        -   TiDB v7.1
+            -   [TPC-C パフォーマンス テスト レポート](/tidb-cloud/v7.1.0-performance-benchmarking-with-tpcc.md)
+            -   [Sysbench パフォーマンス テスト レポート](/tidb-cloud/v7.1.0-performance-benchmarking-with-sysbench.md)
     -   SQL
         -   [TiDB で SQL を探索する](/basic-sql-operations.md)
         -   SQL 言語の構造と構文
@@ -500,7 +506,7 @@
         -   [生成された列](/generated-columns.md)
         -   [SQLモード](/sql-mode.md)
         -   [テーブルの属性](/table-attributes.md)
-        -   トランザクション
+        -   取引
             -   [概要](/transaction-overview.md)
             -   [分離レベル](/transaction-isolation-levels.md)
             -   [楽観的なトランザクション](/optimistic-transaction.md)

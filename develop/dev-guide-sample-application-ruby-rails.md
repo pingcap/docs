@@ -85,7 +85,7 @@ bundle add mysql2 dotenv
 
 3.  接続ダイアログで、 **[接続先]**ドロップダウン リストから`Rails`を選択し、**エンドポイント タイプ**のデフォルト設定を`Public`のままにします。
 
-4.  パスワードをまだ設定していない場合は、 **「パスワードの作成」**をクリックしてランダムなパスワードを生成します。
+4.  パスワードをまだ設定していない場合は、 **「パスワードの生成」を**クリックしてランダムなパスワードを生成します。
 
 5.  次のコマンドを実行して`.env.example`をコピーし、名前を`.env`に変更します。
 
@@ -220,7 +220,7 @@ production:
 
 > **注記**
 >
-> TiDB サーバーレスの場合、パブリック エンドポイントを使用するときに`ssl_mode`クエリ パラメーターを`verify_identity` in `DATABASE_URL`に設定することで TLS 接続を有効にする必要**があります**が、mysql2 gem は既存の CA 証明書を検索するため、 `DATABASE_URL`を介して SSL CA 証明書を指定する必要**はありません。**ファイルが検出されるまでの特定の順序。
+> TiDB サーバーレスの場合、パブリック エンドポイントを使用するときに`ssl_mode`クエリ パラメーターを`verify_identity` in `DATABASE_URL`に設定することで TLS 接続を有効にする必要**が**ありますが、mysql2 gem は既存の CA 証明書を検索するため、 `DATABASE_URL`介して SSL CA 証明書を指定する必要は**ありません。**ファイルが検出されるまでの特定の順序。
 
 ### データの挿入 {#insert-data}
 
@@ -277,7 +277,7 @@ CA 証明書のパスを手動で指定することは可能ですが、異な�
 
 -   ActiveRecord ORM の詳しい使い方を[ActiveRecord のドキュメント](https://guides.rubyonrails.org/active_record_basics.html)から学びましょう。
 -   TiDB アプリケーション開発のベスト プラクティスについては、 [開発者ガイド](/develop/dev-guide-overview.md)の章 ( [データの挿入](/develop/dev-guide-insert-data.md) 、 [データを更新する](/develop/dev-guide-update-data.md) 、 [データの削除](/develop/dev-guide-delete-data.md) 、 [クエリデータ](/develop/dev-guide-get-data-from-single-table.md) 、 [取引](/develop/dev-guide-transaction-overview.md) 、 [SQLパフォーマンスの最適化](/develop/dev-guide-optimize-sql-overview.md)など) で学習してください。
--   プロフェッショナルを通じて[TiDB 開発者コース](https://www.pingcap.com/education/)を学び、試験合格後に[TiDB 認定](https://www.pingcap.com/education/certification/)獲得します。
+-   プロフェッショナルとして[TiDB 開発者コース](https://www.pingcap.com/education/)を学び、試験合格後に[TiDB 認定](https://www.pingcap.com/education/certification/)獲得します。
 
 ## 助けが必要？ {#need-help}
 

@@ -80,10 +80,12 @@ TiDB 専用クラスターの場合、接続文字列はTiDB Cloudコンソー�
 
     出力は次のとおりです。値`url`に Prisma の接続文字列が含まれています。
 
-        datasource db {
-        provider = "mysql"
-        url      = "mysql://<User>:<Password>@<Endpoint>:<Port>/<Database>?sslaccept=strict"
-        }
+    ```shell
+    datasource db {
+    provider = "mysql"
+    url      = "mysql://<User>:<Password>@<Endpoint>:<Port>/<Database>?sslaccept=strict"
+    }
+    ```
 
     > **注記：**
     >
@@ -104,7 +106,9 @@ TiDB 専用クラスターの場合、接続文字列はTiDB Cloudコンソー�
 
 2.  次の接続文字列に接続パラメータを入力します。
 
-        mysql://<User>:<Password>@<Host>:<Port>/<Database>?sslaccept=strict
+    ```shell
+    mysql://<User>:<Password>@<Host>:<Port>/<Database>?sslaccept=strict
+    ```
 
     > **注記：**
     >

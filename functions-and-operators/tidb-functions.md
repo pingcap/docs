@@ -51,8 +51,6 @@ summary: Learn about the usage of TiDB specific functions.
 
 次の例では、テーブル`t1`に TiDB によって生成された非表示の`rowid`があります。ステートメントでは`TIDB_DECODE_KEY`が使用されています。結果から、隠れた`rowid`がデコードされて出力されていることがわかります。これは、非クラスター化主キーの典型的な結果です。
 
-{{< copyable "" >}}
-
 ```sql
 SELECT START_KEY, TIDB_DECODE_KEY(START_KEY) FROM information_schema.tikv_region_status WHERE table_name='t1' AND REGION_ID=2\G
 ```
@@ -66,10 +64,8 @@ TIDB_DECODE_KEY(START_KEY): {"_tidb_rowid":1958897,"table_id":"59"}
 
 次の例では、テーブル`t2`に複合クラスター化主キーがあります。 JSON 出力から、主キーの一部である両方の列の名前と値を含む`handle`が確認できます。
 
-{{< copyable "" >}}
-
 ```sql
-show create table t2\G
+SHOW CREATE TABLE t2\G
 ```
 
 ```sql
@@ -84,10 +80,8 @@ Create Table: CREATE TABLE `t2` (
 1 row in set (0.001 sec)
 ```
 
-{{< copyable "" >}}
-
 ```sql
-select * from information_schema.tikv_region_status where table_name='t2' limit 1\G
+SELECT * FROM information_schema.tikv_region_status WHERE table_name='t2' LIMIT 1\G
 ```
 
 ```sql
@@ -112,10 +106,8 @@ REPLICATIONSTATUS_STATEID: NULL
 1 row in set (0.005 sec)
 ```
 
-{{< copyable "" >}}
-
 ```sql
-select tidb_decode_key('7480000000000000FF3E5F720400000000FF0000000601633430FF3338646232FF2D64FF3531632D3131FF65FF622D386337352DFFFF3830653635303138FFFF61396265000000FF00FB000000000000F9');
+SELECT tidb_decode_key('7480000000000000FF3E5F720400000000FF0000000601633430FF3338646232FF2D64FF3531632D3131FF65FF622D386337352DFFFF3830653635303138FFFF61396265000000FF00FB000000000000F9');
 ```
 
 ```sql
@@ -126,6 +118,36 @@ select tidb_decode_key('7480000000000000FF3E5F720400000000FF0000000601633430FF33
 +---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 1 row in set (0.001 sec)
 ```
+
+テーブルの最初のリージョンは、テーブルの`table_id`のみを持つキーで始まります。テーブルの最後のリージョンは`table_id + 1`で終わります。間にあるリージョンには、 `_tidb_rowid`または`handle`を含む長いキーがあります。
+
+```sql
+SELECT
+  TABLE_NAME,
+  TIDB_DECODE_KEY(START_KEY),
+  TIDB_DECODE_KEY(END_KEY)
+FROM
+  information_schema.TIKV_REGION_STATUS
+WHERE
+  TABLE_NAME='stock'
+  AND IS_INDEX=0
+ORDER BY
+  START_KEY;
+```
+
+```sql
++------------+-----------------------------------------------------------+-----------------------------------------------------------+
+| TABLE_NAME | TIDB_DECODE_KEY(START_KEY)                                | TIDB_DECODE_KEY(END_KEY)                                  |
++------------+-----------------------------------------------------------+-----------------------------------------------------------+
+| stock      | {"table_id":143}                                          | {"handle":{"s_i_id":"32485","s_w_id":"3"},"table_id":143} |
+| stock      | {"handle":{"s_i_id":"32485","s_w_id":"3"},"table_id":143} | {"handle":{"s_i_id":"64964","s_w_id":"5"},"table_id":143} |
+| stock      | {"handle":{"s_i_id":"64964","s_w_id":"5"},"table_id":143} | {"handle":{"s_i_id":"97451","s_w_id":"7"},"table_id":143} |
+| stock      | {"handle":{"s_i_id":"97451","s_w_id":"7"},"table_id":143} | {"table_id":145}                                          |
++------------+-----------------------------------------------------------+-----------------------------------------------------------+
+4 rows in set (0.031 sec)
+```
+
+`TIDB_DECODE_KEY`は、成功すると有効な JSON を返し、デコードに失敗した場合は引数の値を返します。
 
 ### TIDB_DECODE_PLAN {#tidb-decode-plan}
 
@@ -209,8 +231,6 @@ Check Table Before Drop: false
 > -   この関数にはオーバーヘッドが高くなります。多数の行を含むクエリ (たとえば、大規模でビジーなクラスター上の`information_schema.cluster_tidb_trx`の完全なテーブルをクエリする場合) では、この関数を使用するとクエリの実行時間が長すぎる可能性があります。慎重に使用してください。
 >     -   この関数は呼び出されるたびに`STATEMENTS_SUMMARY` 、 `STATEMENTS_SUMMARY_HISTORY` 、 `CLUSTER_STATEMENTS_SUMMARY` 、および`CLUSTER_STATEMENTS_SUMMARY_HISTORY`テーブルを内部的にクエリし、クエリには`UNION`操作が含まれるため、オーバーヘッドが高くなります。この関数は現在、ベクトル化をサポートしていません。つまり、複数行のデータに対してこの関数を呼び出す場合、上記のクエリは行ごとに個別に実行されます。
 
-{{< copyable "" >}}
-
 ```sql
 set @digests = '["e6f07d43b5c21db0fbb9a31feac2dc599787763393dd5acbfad80e247eb02ad5","38b03afa5debbdf0326a014dbe5012a62c51957f1982b3093e748460f8b00821","e5796985ccafe2f71126ed6c0ac939ffa015a8c0744a24b7aee6d587103fd2f7"]';
 
@@ -241,7 +261,7 @@ select tidb_decode_sql_digests(@digests, 10);
 1 row in set (0.01 sec)
 ```
 
-上記の呼び出しでは、2 番目のパラメーター (つまり、切り捨ての長さ) を 10 として指定し、クエリ結果の 3 番目のステートメントの長さが 10 を超えています。したがって、最初の 10 文字のみが保持され、最後に`"..."`が追加されます。 end は切り捨てを示します。
+上記の呼び出しでは、2 番目のパラメーター (切り捨ての長さ) を 10 として指定し、クエリ結果の 3 番目のステートメントの長さが 10 を超えています。したがって、最初の 10 文字のみが保持され、最後に`"..."`が追加されます。 end は切り捨てを示します。
 
 以下も参照してください。
 
@@ -280,8 +300,6 @@ select tidb_decode_sql_digests(@digests, 10);
 
     次のステートメントは、 `TIDB_SHARD`関数を使用して SHARD 値`12373743746`を計算する方法を示しています。
 
-    {{< copyable "" >}}
-
     ```sql
     SELECT TIDB_SHARD(12373743746);
     ```
@@ -298,8 +316,6 @@ select tidb_decode_sql_digests(@digests, 10);
     ```
 
 -   `TIDB_SHARD`関数を使用してシャード インデックスを作成します。
-
-    {{< copyable "" >}}
 
     ```sql
     CREATE TABLE test(id INT PRIMARY KEY CLUSTERED, a INT, b INT, UNIQUE KEY uk((tidb_shard(a)), a));
@@ -363,14 +379,12 @@ ALTER USER 'user1' RESOURCE GROUP `rg1`;
 SELECT CURRENT_RESOURCE_GROUP();
 ```
 
-```
-+--------------------------+
-| CURRENT_RESOURCE_GROUP() |
-+--------------------------+
-| rg1                      |
-+--------------------------+
-1 row in set (0.00 sec)
-```
+    +--------------------------+
+    | CURRENT_RESOURCE_GROUP() |
+    +--------------------------+
+    | rg1                      |
+    +--------------------------+
+    1 row in set (0.00 sec)
 
 `SET RESOURCE GROUP`を実行して現在のセッションのリソース グループを`rg2`に設定し、現在のユーザーにバインドされているリソース グループを表示します。
 
@@ -379,11 +393,9 @@ SET RESOURCE GROUP `rg2`;
 SELECT CURRENT_RESOURCE_GROUP();
 ```
 
-```
-+--------------------------+
-| CURRENT_RESOURCE_GROUP() |
-+--------------------------+
-| rg2                      |
-+--------------------------+
-1 row in set (0.00 sec)
-```
+    +--------------------------+
+    | CURRENT_RESOURCE_GROUP() |
+    +--------------------------+
+    | rg2                      |
+    +--------------------------+
+    1 row in set (0.00 sec)

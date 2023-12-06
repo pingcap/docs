@@ -89,6 +89,8 @@ npm install
 
     -   **エンドポイント タイプは**`Public`に設定されます
 
+    -   **ブランチは**`main`に設定されています
+
     -   **[接続先] は**`General`に設定されています
 
     -   **オペレーティング システムが**環境に一致します。
@@ -97,7 +99,7 @@ npm install
     >
     > Node.js アプリケーションでは、TLS (SSL) 接続を確立するときにデフォルトで組み込みの[Mozilla CA 証明書](https://wiki.mozilla.org/CA/Included_Certificates)を使用するため、SSL CA 証明書を提供する必要はありません。
 
-4.  **「パスワードの作成」**をクリックしてランダムなパスワードを作成します。
+4.  **「パスワードの生成」**をクリックして、ランダムなパスワードを作成します。
 
     > **ヒント**
     >
@@ -258,7 +260,7 @@ npm install
     3.  データベース アクセス資格情報を追加するには、次の手順を実行します。
         -   **[環境変数の追加]**を選択し、 **[キー]**に`TIDB_HOST`を入力し、[**値]**にホスト名を入力します。
         -   **[環境変数の追加]**を選択し、 **[キー]**に`TIDB_PORT`を入力し、 **[値]**にポートを入力します (デフォルトは 4000)。
-        -   **[環境変数の追加]**を選択し、 **[キー]**に`TIDB_USER`を入力し、[**値]**にユーザー名を入力します。
+        -   **[環境変数の追加]**を選択し、 **[キー]**に`TIDB_USER`を入力し、 **[値]**にユーザー名を入力します。
         -   **[環境変数の追加]**を選択し、 **[キー]**に`TIDB_PASSWORD`を入力し、[**値]**にデータベースの作成時に選択したパスワードを入力します。
         -   **[保存]**を選択します。
 
@@ -363,8 +365,8 @@ console.log(rsh.affectedRows);
 -   AWS Lambda 関数で TiDB を使用する方法の詳細については、 [TiDB-Lambda-integration/aws-lambda-bookstore デモ](https://github.com/pingcap/TiDB-Lambda-integration/blob/main/aws-lambda-bookstore/README.md)を参照してください。 AWS API Gateway を使用して、アプリケーション用の RESTful API を構築することもできます。
 -   `mysql2`から[`mysql2`のドキュメント](https://github.com/sidorares/node-mysql2/tree/master/documentation/en)の使用法をさらに学習します。
 -   AWS Lambdaの使い方を[`Lambda`の AWS 開発者ガイド](https://docs.aws.amazon.com/lambda/latest/dg/welcome.html)から詳しく学びましょう。
--   TiDB アプリケーション[データの削除](/develop/dev-guide-delete-data.md) [単一テーブルの読み取り](/develop/dev-guide-get-data-from-single-table.md)ベスト プラクティス[SQLパフォーマンスの最適化](/develop/dev-guide-optimize-sql-overview.md)は、 [開発者ガイド](/develop/dev-guide-overview.md)の章 ( [データの挿入](/develop/dev-guide-insert-data.md)など) [データを更新する](/develop/dev-guide-update-data.md)参照[トランザクション](/develop/dev-guide-transaction-overview.md)てください。
--   プロフェッショナルとして[TiDB 開発者コース](https://www.pingcap.com/education/)を学び、試験合格後に[TiDB 認定](https://www.pingcap.com/education/certification/)獲得します。
+-   TiDB アプリケーション開発[単一テーブルの読み取り](/develop/dev-guide-get-data-from-single-table.md)ベスト プラクティスについて[取引](/develop/dev-guide-transaction-overview.md) 、 [開発者ガイド](/develop/dev-guide-overview.md)の章 ( [データの挿入](/develop/dev-guide-insert-data.md)など) [データを更新する](/develop/dev-guide-update-data.md)参照[データの削除](/develop/dev-guide-delete-data.md) [SQLパフォーマンスの最適化](/develop/dev-guide-optimize-sql-overview.md)ください。
+-   プロフェッショナルを通じて[TiDB 開発者コース](https://www.pingcap.com/education/)を学び、試験合格後に[TiDB 認定](https://www.pingcap.com/education/certification/)獲得します。
 
 ## 助けが必要？ {#need-help}
 

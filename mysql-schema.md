@@ -21,6 +21,15 @@ summary: Learn about the TiDB system tables.
 -   `global_priv` : 証明書に基づく認証情報
 -   `role_edges` : 役割間の関係
 
+## クラスタステータスシステムテーブル {#cluster-status-system-tables}
+
+-   `tidb`表には、TiDB に関するいくつかのグローバル情報が含まれています。
+
+    -   `bootstrapped` : TiDB クラスターが初期化されているかどうか。この値は読み取り専用であり、変更できないことに注意してください。
+    -   `tidb_server_version` : TiDB 初期化時のバージョン情報。この値は読み取り専用であり、変更できないことに注意してください。
+    -   `system_tz` : TiDB のシステム タイム ゾーン。
+    -   `new_collation_enabled` : TiDB が[照合順序の新しいフレームワーク](/character-set-and-collation.md#new-framework-for-collations)有効にしているかどうか。この値は読み取り専用であり、変更できないことに注意してください。
+
 ## サーバー側のヘルプ システム テーブル {#server-side-help-system-tables}
 
 現在、 `help_topic`は NULL です。
@@ -76,10 +85,9 @@ summary: Learn about the TiDB system tables.
 
 > **注記：**
 >
-> `tidb` 、 `expr_pushdown_blacklist` 、 `opt_rule_blacklist` 、および`table_cache_meta`システム テーブルは、TiDB Self-Hosted にのみ適用され、 [TiDB Cloud](https://docs.pingcap.com/tidbcloud/)では使用できません。
+> `tidb` 、 `expr_pushdown_blacklist` 、 `opt_rule_blacklist` 、および`table_cache_meta`システム テーブルは、TiDB セルフホストにのみ適用され、 [TiDB Cloud](https://docs.pingcap.com/tidbcloud/)では使用できません。
 
 -   `GLOBAL_VARIABLES` : グローバル システム変数テーブル
--   `tidb` : TiDB 実行時のバージョン情報を記録します`bootstrap`
 -   `expr_pushdown_blacklist` : 式プッシュダウンのブロックリスト
 -   `opt_rule_blacklist` : 論理最適化ルールのブロックリスト
 -   `table_cache_meta` : キャッシュされたテーブルのメタデータ
