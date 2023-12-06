@@ -32,9 +32,9 @@ FLASHBACK CLUSTER TO TSO 445494839813079041;
 ### Synopsis
 
 ```ebnf+diagram
-FlashbackToTimestampStmt ::=
-    'FLASHBACK' 'CLUSTER' 'TO' 'TIMESTAMP' stringLit
-|   'FLASHBACK' 'CLUSTER' 'TO' 'TSO' LengthNum
+FlashbackToTimestampStmt
+         ::= 'FLASHBACK' 'CLUSTER' 'TO' 'TIMESTAMP' stringLit
+           | 'FLASHBACK' 'CLUSTER' 'TO' 'TSO' LengthNum
 ```
 
 ## Notes
