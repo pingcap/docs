@@ -442,28 +442,32 @@ By default, the task types that are marked as background tasks are `""`, and the
 
 #### Examples
 
-1. Modify the `default` resource group and mark `br` and `ddl` as background tasks..
+1. Modify the `default` resource group and mark `br` and `ddl` as background tasks.
 
     ```sql
     ALTER RESOURCE GROUP `default` BACKGROUND=(TASK_TYPES='br,ddl');
     ```
 
-2. Restore the background tasks of `rg1` resource group to the default value. In this case, the background task types follow the configuration of the `default` resource group.
+2. Change the `default` resource group to revert the background task type to its default value.
 
     ```sql
     ALTER RESOURCE GROUP `default` BACKGROUND=NULL;
     ```
 
-3. Change the `rg1` resource group to set the background task types to empty. In this case, all tasks of this resource group are not treated as background tasks.
+3. Change the `default` resource group to set the background task type to empty. In this case, all tasks of this resource group are not treated as background tasks.
 
     ```sql
     ALTER RESOURCE GROUP `default` BACKGROUND=(TASK_TYPES="");
     ```
+
 4. View the background task type of the `default` resource group.
+
     ```sql
     SELECT * FROM information_schema.resource_groups WHERE NAME="default";
     ```
-    result：
+
+    The output is as follows:
+
     ```
     +---------+------------+----------+-----------+-------------+---------------------+
     | NAME    | RU_PER_SEC | PRIORITY | BURSTABLE | QUERY_LIMIT | BACKGROUND          |
@@ -471,10 +475,12 @@ By default, the task types that are marked as background tasks are `""`, and the
     | default | UNLIMITED  | MEDIUM   | YES       | NULL        | TASK_TYPES='br,ddl' |
     +---------+------------+----------+-----------+-------------+---------------------+
     ```
-5. If you want to explicitly mark the tasks in the current session as background type, you can use `tidb_request_source_type` to explicitly specify the task type, such as:：
+
+5. To explicitly mark tasks in the current session as background type, you can use `tidb_request_source_type` to explicitly specify the task type. The following is an example:
+
     ``` sql
     SET @@tidb_request_source_type="background";
-    /* Set background task type */
+    /* Add background task type */
     ALTER RESOURCE GROUP `default` BACKGROUND=(TASK_TYPES="background");
     /* Execute LOAD DATA in the current session */
     LOAD DATA INFILE "s3://resource-control/Lightning/test.customer.aaaa.csv"
