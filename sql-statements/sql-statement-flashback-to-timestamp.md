@@ -87,7 +87,7 @@ mysql> SELECT * FROM t;
 Empty set (0.00 sec)
 ```
 
-The following example shows how to flashback a cluster to a specific TSO to accurately restore mistakenly deleted data::
+The following example shows how to flashback a cluster to a specific TSO to accurately restore mistakenly deleted data:
 
 ```sql
 mysql> INSERT INTO t VALUES (1);
