@@ -26,10 +26,9 @@ SELECT @ts;
 
 Note that this is done in a transaction with `BEGIN; ...; ROLLBACK` because TSO timestamps are assigned per transaction.
 
-The TSO timestamp you get from the preceding example is a decimal number. You can use the following SQL functions to parse the timestamp:
+The TSO timestamp you get from the preceding example is a decimal number. You can use the following SQL function to parse the timestamp:
 
 - [`TIDB_PARSE_TSO()`](/functions-and-operators/tidb-functions.md#tidb_parse_tso)
-- [`TIDB_PARSE_TSO_LOGICAL()`](/functions-and-operators/tidb-functions.md)
 
 ```sql
 SELECT TIDB_PARSE_TSO(443852055297916932);
@@ -38,16 +37,6 @@ SELECT TIDB_PARSE_TSO(443852055297916932);
 +------------------------------------+
 | 2023-08-27 20:33:41.687000         |
 +------------------------------------+
-1 row in set (0.00 sec)
-```
-
-```sql
-SELECT TIDB_PARSE_TSO_LOGICAL(443852055297916932);
-+--------------------------------------------+
-| TIDB_PARSE_TSO_LOGICAL(443852055297916932) |
-+--------------------------------------------+
-|                                          4 |
-+--------------------------------------------+
 1 row in set (0.00 sec)
 ```
 
