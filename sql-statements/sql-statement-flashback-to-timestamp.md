@@ -6,9 +6,9 @@ aliases: ['/tidb/v6.5/sql-statement-flashback-to-timestamp']
 
 # FLASHBACK CLUSTER
 
-TiDB v6.4.0 introduces the `FLASHBACK CLUSTER TO TIMESTAMP` syntax. You can use it to restore a cluster to a specific point in time. When specifying the timestamp, you can set a datetime value or use a time function. The format of datetime is like "2016-10-08 16:45:26.999", with millisecond as the minimum time unit, but in most cases, the time unit of second is enough for specifying a datetime, such as "2016-10-08 16:45:26".
+TiDB v6.4.0 introduces the `FLASHBACK CLUSTER TO TIMESTAMP` syntax. You can use it to restore a cluster to a specific point in time. When specifying the timestamp, you can either set a datetime value or use a time function. The format of datetime is like "2016-10-08 16:45:26.999", with millisecond as the minimum time unit, but in most cases, specifying the timestamp with second as the time unit is sufficient, such as "2016-10-08 16:45:26".
 
-Starting from v6.5.6, TiDB introduces the `FLASHBACK CLUSTER TO TSO` syntax. With this syntax, you can use [TSO](/tso.md) to specify a more accurate recovery point in time, which brings more flexibility in data recovery.
+Starting from v6.5.6, TiDB introduces the `FLASHBACK CLUSTER TO TSO` syntax. This syntax enables you to use [TSO](/tso.md) to specify a more precise recovery point in time, thereby enhancing flexibility in data recovery.
 
 <CustomContent platform="tidb-cloud">
 
@@ -87,7 +87,7 @@ mysql> SELECT * FROM t;
 Empty set (0.00 sec)
 ```
 
-The following example shows how to flashback a cluster to a specific TSO to accurately restore mistakenly deleted data:
+The following example shows how to flashback a cluster to a specific TSO to precisely restore mistakenly deleted data:
 
 ```sql
 mysql> INSERT INTO t VALUES (1);
