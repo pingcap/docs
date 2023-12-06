@@ -1,9 +1,9 @@
 ---
-title: TiDB Backend Task Distributed Execution Framework
-summary: Learn the use cases, limitations, usage, and implementation principles of the TiDB backend task distributed execution framework.
+title: TiDB Backend Task Distributed Execution Framework (DXF)
+summary: Learn the use cases, limitations, usage, and implementation principles of the TiDB backend task distributed execution  (DXF).
 ---
 
-# TiDB Backend Task Distributed Execution Framework
+# TiDB Backend Task Distributed Execution Framework (DXF)
 
 <CustomContent platform="tidb-cloud">
 
@@ -15,7 +15,7 @@ summary: Learn the use cases, limitations, usage, and implementation principles 
 
 TiDB adopts a computing-storage separation architecture with excellent scalability and elasticity. Starting from v7.1.0, TiDB introduces a backend task DXF (Distributed eXecution Framework) to further leverage the resource advantages of the distributed architecture. The goal of this framework is to implement unified scheduling and distributed execution of all backend tasks, and to provide unified resource management capabilities for both overall and individual backend tasks, which better meets users' expectations for resource usage.
 
-This document describes the use cases, limitations, usage, and implementation principles of the TiDB backend task distributed execution framework.
+This document describes the use cases, limitations, usage, and implementation principles of the DXF.
 
 ## Use cases and limitations
 
@@ -35,13 +35,13 @@ In a database management system, in addition to the core transactional processin
 - Might need to be executed periodically, but at a low frequency.
 - If the resources are not properly controlled, they are prone to affect TP and AP tasks, lowering the database service quality.
 
-Enabling the TiDB backend task distributed execution framework can solve the above problems and has the following three advantages:
+Enabling the DXF can solve the above problems and has the following three advantages:
 
 - The framework provides unified capabilities for high scalability, high availability, and high performance.
 - The framework supports distributed execution of backend tasks, which can flexibly schedule the available computing resources of the entire TiDB cluster, thereby better utilizing the computing resources in a TiDB cluster.
 - The framework provides unified resource usage and management capabilities for both overall and individual backend tasks.
 
-Currently, for TiDB Self-Hosted, the TiDB backend task distributed execution framework supports the distributed execution of the `ADD INDEX` and `IMPORT INTO` statements. For TiDB Cloud, the `IMPORT INTO` statement is not applicable.
+Currently, for TiDB Self-Hosted, the DXF supports the distributed execution of the `ADD INDEX` and `IMPORT INTO` statements. For TiDB Cloud, the `IMPORT INTO` statement is not applicable.
 
 - `ADD INDEX` is a DDL statement used to create indexes. For example:
 
@@ -54,11 +54,11 @@ Currently, for TiDB Self-Hosted, the TiDB backend task distributed execution fra
 
 ## Limitation
 
-The distributed execution framework can only schedule one `ADD INDEX` task at a time. If a second `ADD INDEX` task is submitted before the first `ADD INDEX` task is completed, the second `ADD INDEX` task is executed through a transaction.
+The DXF can only schedule one `ADD INDEX` task at a time. If a second `ADD INDEX` task is submitted before the first `ADD INDEX` task is completed, the second `ADD INDEX` task is executed through a transaction.
 
 ## Prerequisites
 
-Before using the distributed execution framework to execute `ADD INDEX` tasks, you need to enable the [Fast Online DDL](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) mode.
+Before using the DXF to execute `ADD INDEX` tasks, you need to enable the [Fast Online DDL](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) mode.
 
 <CustomContent platform="tidb">
 
@@ -113,7 +113,7 @@ Adjust the following system variables related to Fast Online DDL:
     * [`tidb_ddl_error_count_limit`](/system-variables.md#tidb_ddl_error_count_limit)
     * [`tidb_ddl_reorg_batch_size`](/system-variables.md#tidb_ddl_reorg_batch_size): use the default value. The recommended maximum value is `1024`.
 
-3. Starting from v7.4.0, you can adjust the number of TiDB nodes that perform background tasks according to actual needs. After deploying a TiDB cluster, you can set the instance-level system variable [`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740) for each TiDB node in the cluster. When `tidb_service_scope` of a TiDB node is set to `background`, the TiDB node can execute background tasks. When `tidb_service_scope` of a TiDB node is set to the default value "", the TiDB node cannot execute background tasks. If `tidb_service_scope` is not set for any TiDB node in a cluster, the TiDB distributed execution framework schedules all TiDB nodes to execute background tasks by default.
+3. Starting from v7.4.0, you can adjust the number of TiDB nodes that perform background tasks according to actual needs. After deploying a TiDB cluster, you can set the instance-level system variable [`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740) for each TiDB node in the cluster. When `tidb_service_scope` of a TiDB node is set to `background`, the TiDB node can execute background tasks. When `tidb_service_scope` of a TiDB node is set to the default value "", the TiDB node cannot execute background tasks. If `tidb_service_scope` is not set for any TiDB node in a cluster, the DXF schedules all TiDB nodes to execute background tasks by default.
 
     > **Note:**
     >
@@ -122,9 +122,9 @@ Adjust the following system variables related to Fast Online DDL:
 
 ## Implementation principles
 
-The architecture of the TiDB backend task distributed execution framework is as follows:
+The architecture of the DXF is as follows:
 
-![Architecture of the TiDB backend task distributed execution framework](/media/dist-task/dist-task-architect.jpg)
+![Architecture of the DXF](/media/dist-task/dist-task-architect.jpg)
 
 As shown in the preceding diagram, the execution of backend tasks in the distributed framework is mainly handled by the following modules:
 
