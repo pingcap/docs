@@ -434,7 +434,11 @@ TiDB supports the following types of background tasks:
 
 </CustomContent>
 
-By default, the task types that are marked as background tasks are empty, and the management of background tasks is disabled.. To enable background task management, you must manually modify the background task type of the `default` resource group. Once identified, resource management will control the background tasks automatically. This means that when system resources are insufficient, the background task runs with lower priority to ensure foreground tasks are executed first.
+By default, the task types that are marked as background tasks are `""`, and the management of background tasks is disabled. To enable background task management, you need to manually modify the background task type of the `default` resource group. After a background task is identified and matched, Resource Control is automatically performed. This means that when system resources are insufficient, the background tasks are automatically reduced to the lowest priority to ensure the execution of foreground tasks.
+
+> **Note:**
+>
+> Currently, background tasks for all resource groups are bound to the `default` resource group. You can manage background task types globally through `default`. Binding background tasks to other resource groups is currently not supported.
 
 #### Examples
 
