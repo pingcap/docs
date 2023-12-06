@@ -476,8 +476,6 @@ By default, the task types that are marked as background tasks are empty, and th
     LOAD DATA INFILE "s3://resource-control/Lightning/test.customer.aaaa.csv"
     ```
 
-
-
 ## Disable resource control
 
 <CustomContent platform="tidb">
