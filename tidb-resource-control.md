@@ -420,7 +420,7 @@ TiDB supports the following types of background tasks:
 - `br`: perform backup and restore tasks using [BR](/br/backup-and-restore-overview.md). PITR is not supported.
 - `ddl`: control the resource usage during the batch data write back phase of Reorg DDLs.
 - `stats`: the [collect statistics](/statistics.md#collect-statistics) tasks that are manually executed or automatically triggered by TiDB.
-- `background`: For reserved task types, you can use the [`tidb_request_source_type`](/system-variables.md#tidb_request_source_type-new-in-v740) system variable to specify the task type of the current session as `background`.
+- `background`: a reserved task type. You can use the [`tidb_request_source_type`](/system-variables.md#tidb_request_source_type-new-in-v740) system variable to specify the task type of the current session as `background`.
 
 </CustomContent>
 
