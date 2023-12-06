@@ -105,7 +105,7 @@ mysql> SELECT * FROM t;
 mysql> begin;
 Query OK, 0 rows affected (0.00 sec)
 
-mysql> select @@tidb_current_ts;   -- Get the current TSO
+mysql> select @@tidb_current_ts;  -- Get the current TSO
 +--------------------+
 | @@tidb_current_ts  |
 +--------------------+
