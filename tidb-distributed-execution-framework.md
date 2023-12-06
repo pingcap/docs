@@ -17,10 +17,6 @@ TiDB adopts a computing-storage separation architecture with excellent scalabili
 
 This document describes the use cases, limitations, usage, and implementation principles of the TiDB backend task distributed execution framework.
 
-> **Note:**
->
-> This framework does not support the distributed execution of SQL queries.
-
 ## Use cases and limitations
 
 <CustomContent platform="tidb">
@@ -56,9 +52,13 @@ Currently, for TiDB Self-Hosted, the TiDB backend task distributed execution fra
 
 - `IMPORT INTO` is used to import data in formats such as `CSV`, `SQL`, and `PARQUET` into an empty table. For more information, see [`IMPORT INTO`](https://docs.pingcap.com/tidb/v7.2/sql-statement-import-into).
 
+## Limitation
+
+The distributed execution framework can only schedule one `ADD INDEX` task at a time. If a second `ADD INDEX` task is submitted before the first `ADD INDEX` task is completed, the second `ADD INDEX` task is executed through a transaction.
+
 ## Prerequisites
 
-Before using the distributed framework, you need to enable the [Fast Online DDL](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) mode.
+Before using the distributed execution framework to execute `ADD INDEX` tasks, you need to enable the [Fast Online DDL](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) mode.
 
 <CustomContent platform="tidb">
 
@@ -73,7 +73,7 @@ Before using the distributed framework, you need to enable the [Fast Online DDL]
 
 > **Note:**
 >
-> Before you upgrade TiDB to v6.5.0 or later, it is recommended that you check whether the [`temp-dir`](/tidb-configuration-file.md#temp-dir-new-in-v630) path of TiDB is correctly mounted to an SSD disk. Make sure that the operating system user that runs TiDB has the read and write permissions for this directory. Otherwise, The DDL operations might experience unpredictable issues. This path is a TiDB configuration item, which takes effect after TiDB is restarted. Therefore, setting this configuration item in advance before upgrading can avoid another restart.
+> It is recommended that the TiDB `temp-dir` directory have at least 100 GiB of free space.
 
 </CustomContent>
 
@@ -106,7 +106,7 @@ Adjust the following system variables related to Fast Online DDL:
 
     </CustomContent>
 
-2. Adjust the following system variables that might affect the distributed execution of DDL tasks according to your needs:
+2. Usually use the default values for the following system variables that might affect the distributed execution of DDL tasks:
 
     * [`tidb_ddl_reorg_worker_cnt`](/system-variables.md#tidb_ddl_reorg_worker_cnt): use the default value `4`. The recommended maximum value is `16`.
     * [`tidb_ddl_reorg_priority`](/system-variables.md#tidb_ddl_reorg_priority)
@@ -114,14 +114,11 @@ Adjust the following system variables related to Fast Online DDL:
     * [`tidb_ddl_reorg_batch_size`](/system-variables.md#tidb_ddl_reorg_batch_size): use the default value. The recommended maximum value is `1024`.
 
 3. Starting from v7.4.0, you can adjust the number of TiDB nodes that perform background tasks according to actual needs. After deploying a TiDB cluster, you can set the instance-level system variable [`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740) for each TiDB node in the cluster. When `tidb_service_scope` of a TiDB node is set to `background`, the TiDB node can execute background tasks. When `tidb_service_scope` of a TiDB node is set to the default value "", the TiDB node cannot execute background tasks. If `tidb_service_scope` is not set for any TiDB node in a cluster, the TiDB distributed execution framework schedules all TiDB nodes to execute background tasks by default.
+
     > **Note:**
     >
     > - During the execution of a distributed task, if some TiDB nodes are offline, the distributed task randomly assigns subtasks to available TiDB nodes instead of dynamically assigning subtasks according to `tidb_service_scope`.
     > - During the execution of a distributed task, changes to the `tidb_service_scope` configuration will not take effect for the current task, but will take effect from the next task.
-
-> **Tip:**
->
-> For distributed execution of `ADD INDEX` statements, you only need to set `tidb_ddl_reorg_worker_cnt`.
 
 ## Implementation principles
 
