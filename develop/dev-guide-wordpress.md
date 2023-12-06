@@ -17,7 +17,7 @@ In this tutorial, you can learn how to use TiDB Serverless to run WordPress for 
 
 To complete this tutorial, you need:
 
-- A TiDB Serverless cluster. Follow [Creating a TiDB Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster if you don't have one.
+- A TiDB Serverless cluster. Follow [creating a TiDB Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md) to create your own TiDB Cloud cluster if you don't have one.
 
 ## Run WordPress with TiDB Serverless
 
@@ -34,7 +34,7 @@ cd wordpress-tidb-docker
 
 ### Step 2: Install dependencies
 
-1. The sample repository requires [Docker](https://www.docker.com/) and [Docker Compose](https://docs.docker.com/compose/) to start WordPress. If you have them installed. You can skip this step. It is highly recommended to run your WordPress in a Linux environment (such as Ubuntu). Run the following command to install them:
+1. The sample repository requires [Docker](https://www.docker.com/) and [Docker Compose](https://docs.docker.com/compose/) to start WordPress. If you have them installed, you can skip this step. It is highly recommended to run your WordPress in a Linux environment (such as Ubuntu). Run the following command to install them:
 
     ```shell
     sudo sh install.sh
