@@ -291,7 +291,6 @@ The `consistent` parameters are described as follows:
 | `encoding_worker_num` | `INT` type. The number of encoding and decoding workers in the redo module. (Optional)             |
 | `flush_worker_num`    | `INT` type. The number of flushing workers in the redo module. (Optional)             |
 
-
 The `filter` parameters are described as follows:
 
 | Parameter name | Description |
