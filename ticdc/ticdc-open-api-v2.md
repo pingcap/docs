@@ -281,15 +281,17 @@ The descriptions of the `replica_config` parameters are as follows.
 
 The `consistent` parameters are described as follows:
 
-| Parameter name | Description |
-|:-----------------|:---------------------------------------|
-| `flush_interval` | `UINT64` type. The interval to flush redo log files. (Optional) |
-| `level`          | `STRING` type. The consistency level of the replicated data. (Optional)    |
-| `max_log_size`   | `UINT64` type. The maximum value of redo log. (Optional)      |
-| `storage`        | `STRING` type. The destination address of the storage. (Optional)            |
-| `use_file_backend` | `BOOL` type. Specifies whether to store the redo log in a local file. (Optional) |
-| `encoding_worker_num` | `INT` type. The number of encoding and decoding workers in the redo module. (Optional)             |
-| `flush_worker_num`    | `INT` type. The number of flushing workers in the redo module. (Optional)             |
+| Parameter name        | Description                                                                                             |
+|:----------------------|:--------------------------------------------------------------------------------------------------------|
+| `flush_interval`      | `UINT64` type. The interval to flush redo log files. (Optional)                                         |
+| `level`               | `STRING` type. The consistency level of the replicated data. (Optional)                                 |
+| `max_log_size`        | `UINT64` type. The maximum value of redo log. (Optional)                                                |
+| `storage`             | `STRING` type. The destination address of the storage. (Optional)                                       |
+| `use_file_backend`    | `BOOL` type. Specifies whether to store the redo log in a local file. (Optional)                        |
+| `encoding_worker_num` | `INT` type. The number of encoding and decoding workers in the redo module. (Optional)                  |
+| `flush_worker_num`    | `INT` type. The number of flushing workers in the redo module. (Optional)                               |
+| `compression`         | `STRING` type. The behavior to compress redo log files, available options are "" and "lz4".. (Optional) |
+| `flush_concurrency`   | `INT` type. The concurrency for uploading a single file. (Optional)                                     |
 
 The `filter` parameters are described as follows:
 
