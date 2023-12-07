@@ -301,10 +301,17 @@ For example, the following 16 bytes `[5 7 10 15 36 50 43 99 120 60 38 255 254 45
 
 The way that TiCDC implements the Canal-JSON data format, including the `Update` Event and the `mysqlType` field, differs from the official Canal. The following table shows the main differences.
 
-| Item            | TiCDC Canal-JSON                  | Canal                                |
-|:----------------|:-------------------------|:-------------------------------------|
-| Event of `Update` Type  | The `old` field contains all the column data | The `old` field contains only the modified column data    |
-| `mysqlType` field  | For types with parameters, it does not contain the information of the type parameter      | For types with parameters, it contains the full information of the type parameter    |
+| Item            | TiCDC Canal-JSON                                                                                                                             | Canal                                |
+|:----------------|:---------------------------------------------------------------------------------------------------------------------------------------------|:-------------------------------------|
+| Event of `Update` Type  | By default, the `old` field contains all the column data. When `only_output_updated_columns` is `true`, the `old` field contains only the modified column data.  | The `old` field contains only the modified column data    |
+| `mysqlType` field  | For types with parameters, it does not contain the information of the type parameter                                                         | For types with parameters, it contains the full information of the type parameter    |
+
+### Compatibility with the official Canal
+
+Starting from v6.5.6, TiCDC Canal-JSON supports compatibility with the data format of the official Canal. When creating a changefeed, you can set `content-compatible=true` in `sink-uri` to enable this feature. In this mode, TiCDC outputs Canal-JSON format data that is compatible with the official Canal. The specific changes are as follows:
+
+* The `mysqlType` field contains the full information of the type parameter for each type.
+* An Event of `Update` Type only outputs the modified column data.
 
 ### Event of `Update` Type
 

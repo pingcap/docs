@@ -8,14 +8,18 @@ summary: Learn about the commands of TiDB snapshot backup and restore.
 This document describes the commands of TiDB snapshot backup and restore according to the application scenarios, including:
 
 - [Back up cluster snapshots](#back-up-cluster-snapshots)
-- [Back up a database](#back-up-a-database)
-- [Back up a table](#back-up-a-table)
-- [Back up multiple tables with table filter](#back-up-multiple-tables-with-table-filter)
+- [Back up a database or a table](#back-up-a-database-or-a-table)
+    - [Back up a database](#back-up-a-database)
+    - [Back up a table](#back-up-a-table)
+    - [Back up multiple tables with table filter](#back-up-multiple-tables-with-table-filter)
+- [Back up statistics](#back-up-statistics)
 - [Encrypt the backup data](#encrypt-the-backup-data)
 - [Restore cluster snapshots](#restore-cluster-snapshots)
-- [Restore a database](#restore-a-database)
-- [Restore a table](#restore-a-table)
-- [Restore multiple tables with table filter](#restore-multiple-tables-with-table-filter)
+- [Restore a database or a table](#restore-a-database-or-a-table)
+    - [Restore a database](#restore-a-database)
+    - [Restore a table](#restore-a-table)
+    - [Restore multiple tables with table filter](#restore-multiple-tables-with-table-filter)
+    - [Restore execution plan bindings from the `mysql` schema](#restore-execution-plan-bindings-from-the-mysql-schema)
 - [Restore encrypted snapshots](#restore-encrypted-snapshots)
 
 For more information about snapshot backup and restore, refer to:
@@ -106,6 +110,29 @@ br backup full \
     --log-file backupfull.log
 ```
 
+## Back up statistics
+
+Starting from TiDB v7.5.0, the `br` command-line tool introduces the `--ignore-stats` parameter. When you set this parameter to `false`, the `br` command-line tool supports backing up and restoring statistics of columns, indexes, and tables. In this case, you do not need to manually run the statistics collection task for the TiDB database restored from the backup, or wait for the completion of the automatic collection task. This feature simplifies the database maintenance work and improves the query performance.
+
+If you do not set this parameter to `false`, the `br` command-line tool uses the default setting `--ignore-stats=true`, which means statistics are not backed up during data backup.
+
+The following is an example of backing up cluster snapshot data and backing up table statistics with `--ignore-stats=false`:
+
+```shell
+br backup full \
+--storage local:///br_data/ --pd "${PD_IP}:2379" --log-file restore.log \
+--ignore-stats=false
+```
+
+After backing up data with the preceding configuration, when you restore data, the `br` command-line tool automatically restores table statistics if table statistics are included in the backup:
+
+```shell
+br restore full \
+--storage local:///br_data/ --pd "${PD_IP}:2379" --log-file restore.log
+```
+
+When the backup and restore feature backs up data, it stores statistics in JSON format within the `backupmeta` file. When restoring data, it loads statistics in JSON format into the cluster. For more information, see [LOAD STATS](/sql-statements/sql-statement-load-stats.md).
+
 ## Encrypt the backup data
 
 > **Warning:**
@@ -142,6 +169,7 @@ You can restore a TiDB cluster snapshot by running the `br restore full` command
 ```shell
 br restore full \
     --pd "${PD_IP}:2379" \
+    --with-sys-table \
     --storage "s3://${backup_collection_addr}/snapshot-${date}?access-key=${access-key}&secret-access-key=${secret-access-key}" \
     --ratelimit 128 \
     --log-file restorefull.log
@@ -149,6 +177,7 @@ br restore full \
 
 In the preceding command:
 
+- `--with-sys-table`: BR restores **data in some system tables**, including account permission data and SQL bindings, and statistics (see [Back up statistics](/br/br-snapshot-manual.md#back-up-statistics)). However, it does not restore statistics tables (`mysql.stat_*`) and system variable tables (`mysql.tidb` and `mysql.global_variables`). For more information, see [Restore tables in the `mysql` schema](/br/br-snapshot-guide.md#restore-tables-in-the-mysql-schema).
 - `--ratelimit`: The maximum speed **per TiKV** performing backup tasks. The unit is in MiB/s.
 - `--log-file`: The target file where the `br` log is written.
 
@@ -213,6 +242,39 @@ br restore full \
     --filter 'db*.tbl*' \
     --storage "s3://${backup_collection_addr}/snapshot-${date}?access-key=${access-key}&secret-access-key=${secret-access-key}" \
     --log-file restorefull.log
+```
+
+### Restore execution plan bindings from the `mysql` schema
+
+To restore execution plan bindings of a cluster, you can run the `br restore full` command, including the `--with-sys-table` option and also the `--filter` or `-f` option to specify the `mysql` schema to be restored.
+
+The following is an example of restoring the `mysql.bind_info` table:
+
+```shell
+br restore full \
+    --pd "${PD_IP}:2379" \
+    --filter 'mysql.bind_info' \
+    --with-sys-table \
+    --ratelimit 128 \
+    --storage "s3://${backup_collection_addr}/snapshot-${date}?access-key=${access-key}&secret-access-key=${secret-access-key}" \
+    --log-file restore_system_table.log
+```
+
+After the restore is completed, you can confirm the execution plan binding information with [`SHOW GLOBAL BINDINGS`](/sql-statements/sql-statement-show-bindings.md):
+
+```sql
+SHOW GLOBAL BINDINGS;
+```
+
+The dynamic loading of execution plan bindings after the restore is still undergoing optimization (related issues are [#46527](https://github.com/pingcap/tidb/issues/46527) and [#46528](https://github.com/pingcap/tidb/issues/46528)). You need to manually reload the execution plan bindings after the restore.
+
+```sql
+-- Ensure that the mysql.bind_info table has only one record for builtin_pseudo_sql_for_bind_lock. If there are more records, you need to manually delete them.
+SELECT count(*) FROM mysql.bind_info WHERE original_sql = 'builtin_pseudo_sql_for_bind_lock';
+DELETE FROM bind_info WHERE original_sql = 'builtin_pseudo_sql_for_bind_lock' LIMIT 1;
+
+-- Force to reload the binding information.
+ADMIN RELOAD BINDINGS;
 ```
 
 ## Restore encrypted snapshots

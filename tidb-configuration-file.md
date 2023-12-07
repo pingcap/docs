@@ -9,7 +9,7 @@ aliases: ['/docs/dev/tidb-configuration-file/','/docs/dev/reference/configuratio
 
 # TiDB Configuration File
 
-The TiDB configuration file supports more options than command-line parameters. You can download the default configuration file [`config.toml.example`](https://github.com/pingcap/tidb/blob/master/config/config.toml.example) and rename it to `config.toml`. This document describes only the options that are not involved in [command line options](/command-line-flags-for-tidb-configuration.md).
+The TiDB configuration file supports more options than command-line parameters. You can download the default configuration file [`config.toml.example`](https://github.com/pingcap/tidb/blob/master/pkg/config/config.toml.example) and rename it to `config.toml`. This document describes only the options that are not involved in [command line options](/command-line-flags-for-tidb-configuration.md).
 
 > **Tip:**
 >
@@ -50,6 +50,10 @@ The TiDB configuration file supports more options than command-line parameters. 
 + When creating an index, if [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) is enabled, data that needs to be backfilled for a newly created index will be at first stored in the TiDB local temporary directory, and then imported into TiKV in batches, thus accelerating the index creation.
 + When [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md) is used to import data, the sorted data is first stored in the TiDB local temporary directory, and then imported into TiKV in batches.
 + Default value: `"/tmp/tidb"`
+
+> **Note:**
+>
+> If the directory does not exist, TiDB will automatically create it upon startup. If the directory creation fails or TiDB does not have the read and write permissions on that directory, [`Fast Online DDL`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) might experience unpredictable issues.
 
 ### `oom-use-tmp-storage`
 
@@ -120,6 +124,10 @@ The TiDB configuration file supports more options than command-line parameters. 
 + Default value: ""
 + By default, the format of the TiDB version string is `5.7.${mysql_latest_minor_version}-TiDB-${tidb_version}`.
 
+> **Note:**
+>
+> TiDB nodes use the value of `server-version` to verify the current TiDB version. Therefore, to avoid unexpected behaviors, before upgrading the TiDB cluster, you need to set the value of `server-version` to empty or the real version of the current TiDB cluster.
+
 ### `repair-mode`
 
 - Determines whether to enable the untrusted repair mode. When the `repair-mode` is set to `true`, bad tables in the `repair-table-list` cannot be loaded.
@@ -171,6 +179,11 @@ The TiDB configuration file supports more options than command-line parameters. 
 - When this configuration is set to `true` on a TiDB instance, the telemetry collection in this TiDB instance is enabled and the [`tidb_enable_telemetry`](/system-variables.md#tidb_enable_telemetry-new-in-v402) system variable takes effect.
 - When this configuration is set to `false` on all TiDB instances, the telemetry collection in TiDB is disabled and the [`tidb_enable_telemetry`](/system-variables.md#tidb_enable_telemetry-new-in-v402) system variable does not take effect. See [Telemetry](/telemetry.md) for details.
 
+### `deprecate-integer-display-length`
+
+- Deprecates the display width for integer types when this configuration item is set to `true`.
+- Default value: `false`
+
 ### `enable-tcp4-only` <span class="version-mark">New in v5.0</span>
 
 - Enables or disables listening on TCP4 only.
@@ -193,7 +206,18 @@ The TiDB configuration file supports more options than command-line parameters. 
 
 + Controls whether to enable the Global Kill (terminating queries or connections across instances) feature.
 + Default value: `true`
-+ When the value is `true`, both `KILL` and `KILL TIDB` statements can terminate queries or connections across instances so you do not need to worry about erroneously terminating queries or connections. When you use a client to connect to any TiDB instance and execute the `KILL` or `KILL TIDB` statement, the statement will be forwarded to the target TiDB instance. If there is a proxy between the client and the TiDB cluster, the `KILL` and `KILL TIDB` statements will also be forwarded to the target TiDB instance for execution. Currently, using the MySQL command line <kbd>ctrl</kbd>+<kbd>c</kbd> to terminate a query or connection in TiDB is not supported when `enable-global-kill` is `true`. For more information on the `KILL` statement, see [KILL](/sql-statements/sql-statement-kill.md).
++ When the value is `true`, both `KILL` and `KILL TIDB` statements can terminate queries or connections across instances so you do not need to worry about erroneously terminating queries or connections. When you use a client to connect to any TiDB instance and execute the `KILL` or `KILL TIDB` statement, the statement will be forwarded to the target TiDB instance. If there is a proxy between the client and the TiDB cluster, the `KILL` and `KILL TIDB` statements will also be forwarded to the target TiDB instance for execution.
++ Starting from v7.3.0, you can terminate a query or connection using the MySQL command line <kbd>Control+C</kbd> when both `enable-global-kill` and [`enable-32bits-connection-id`](#enable-32bits-connection-id-new-in-v730) are set to `true`. For more information, see [`KILL`](/sql-statements/sql-statement-kill.md).
+
+### `enable-32bits-connection-id` <span class="version-mark">New in v7.3.0</span>
+
++ Controls whether to enable the 32-bit connection ID feature.
++ Default value: `true`
++ When both this configuration item and [`enable-global-kill`](#enable-global-kill-new-in-v610) are set to `true`, TiDB generates 32-bit connection IDs. This enables you to terminate queries or connections by the MySQL command-line <kbd>Control+C</kbd>.
+
+> **Warning:**
+>
+> When the number of TiDB instances in the cluster exceeds 2048 or the concurrent connection count of a single TiDB instance exceeds 1048576, the 32-bit connection ID space becomes insufficient and is automatically upgraded to 64-bit connection IDs. During the upgrade process, existing business and established connections are unaffected. However, subsequent new connections cannot be terminated using <kbd>Control+C</kbd> in the MySQL command-line.
 
 ### `initialize-sql-file` <span class="version-mark">New in v6.6.0</span>
 
@@ -541,12 +565,8 @@ Configuration items related to performance.
 
 ### `enable-stats-cache-mem-quota` <span class="version-mark">New in v6.1.0</span>
 
-> **Warning:**
->
-> This variable is an experimental feature. It is not recommended to use it in production environments.
-
 + Controls whether to enable the memory quota for the statistics cache.
-+ Default value: `false`
++ Default value: `true`
 
 ### `stats-load-concurrency` <span class="version-mark">New in v5.4.0</span>
 
@@ -834,6 +854,16 @@ Configuration items related to read isolation.
 - Range: `[-1, 9223372036854775807]`
 - Unit: Milliseconds
 - Before v6.1.0, this configuration is set by `slow-threshold`.
+
+### `in-mem-slow-query-topn-num` <span class="version-mark">New in v7.3.0</span>
+
++ The configuration controls the number of slowest queries that are cached in memory.
++ Default value: 30
+
+### `in-mem-slow-query-recent-num` <span class="version-mark">New in v7.3.0</span>
+
++ The configuration controls the number of recently used slow queries that are cached in memory.
++ Default value: 500
 
 ### `tidb_expensive_query_time_threshold`
 

@@ -29,11 +29,11 @@ To obtain `pd-ctl` of the latest version, download the TiDB server installation 
 
 > **Note:**
 >
-> `{version}` in the link indicates the version number of TiDB. For example, the download link for `v7.2.0` in the `amd64` architecture is `https://download.pingcap.org/tidb-community-server-v7.2.0-linux-amd64.tar.gz`.
+> `{version}` in the link indicates the version number of TiDB. For example, the download link for `v7.5.0` in the `amd64` architecture is `https://download.pingcap.org/tidb-community-server-v7.5.0-linux-amd64.tar.gz`.
 
 ### Compile from source code
 
-1. [Go](https://golang.org/) 1.20 or later is required because the Go modules are used.
+1. [Go](https://golang.org/) 1.21 or later is required because the Go modules are used.
 2. In the root directory of the [PD project](https://github.com/pingcap/pd), use the `make` or `make pd-ctl` command to compile and generate `bin/pd-ctl`.
 
 ## Usage

@@ -6,7 +6,7 @@ aliases: ['/docs/dev/best-practices/massive-regions-best-practices/','/docs/dev/
 
 # Best Practices for TiKV Performance Tuning with Massive Regions
 
-In TiDB, data is split into Regions, each storing data for a specific key range. These Regions are distributed among multiple TiKV instances. As data is written into a cluster, millions of or even tens of millions of Regions are created. Too many Regions on a single TiKV instance can bring a heavy burden to the cluster and affect its performance.
+In TiDB, data is split into Regions, each storing data for a specific key range. These Regions are distributed among multiple TiKV instances. As data is written into a cluster, millions of Regions might be created. Too many Regions on a single TiKV instance can bring a heavy burden to the cluster and affect its performance.
 
 This document introduces the workflow of Raftstore (a core module of TiKV), explains why a massive amount of Regions affect the performance, and offers methods for tuning TiKV performance.
 
@@ -66,7 +66,7 @@ By default, `raftstore.store-pool-size` is configured to `2` in TiKV. If a bottl
 
 ### Method 2: Enable Hibernate Region
 
-In the actual situation, read and write requests are not evenly distributed on every Region. Instead, they are concentrated on a few Regions. Then you can minimize the number of messages between the Raft leader and the followers for the temporarily idle Regions, which is the feature of Hibernate Region. In this feature, Raftstore does sent tick messages to the Raft state machines of idle Regions if not necessary. Then these Raft state machines will not be triggered to generate heartbeat messages, which can greatly reduce the workload of Raftstore.
+In the actual situation, read and write requests are not evenly distributed on every Region. Instead, they are concentrated on a few Regions. Then you can minimize the number of messages between the Raft leader and the followers for the temporarily idle Regions, which is the feature of Hibernate Region. In this feature, Raftstore doesn't send tick messages to the Raft state machines of idle Regions if not necessary. Then these Raft state machines will not be triggered to generate heartbeat messages, which can greatly reduce the workload of Raftstore.
 
 Hibernate Region is enabled by default in [TiKV master](https://github.com/tikv/tikv/tree/master). You can configure this feature according to your needs. For details, refer to [Configure Hibernate Region](/tikv-configuration-file.md).
 

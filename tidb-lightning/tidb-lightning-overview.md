@@ -17,8 +17,9 @@ TiDB Lightning supports the following file formats:
 TiDB Lightning can read data from the following sources:
 
 - Local
-- [Amazon S3](/br/backup-and-restore-storages.md#uri-format)
-- [Google Cloud Storage](/br/backup-and-restore-storages.md#uri-format)
+- [Amazon S3](/external-storage-uri.md#amazon-s3-uri-format)
+- [Google Cloud Storage](/external-storage-uri.md#gcs-uri-format)
+- [Azure Blob Storage](/external-storage-uri.md#azure-blob-storage-uri-format)
 
 ## TiDB Lightning architecture
 
@@ -42,5 +43,7 @@ TiDB Lightning supports two import modes, configured by `backend`. The import mo
 | Whether the TiDB cluster can provide service during import | [Limited service](/tidb-lightning/tidb-lightning-physical-import-mode.md#limitations) | Yes |
 
 <Note>
+
 The preceding performance data is used to compare the import performance difference between the two modes. The actual import speed is affected by various factors such as hardware configuration, table schema, and the number of indexes.
+
 </Note>

@@ -34,7 +34,7 @@ tiup br backup full --pd "${PD_IP}:2379" \
 In the preceding command:
 
 - `--backupts`: The time point of the snapshot. The format can be [TSO](/glossary.md#tso) or timestamp, such as `400036290571534337` or `2018-05-11 01:42:23`. If the data of this snapshot is garbage collected, the `br backup` command returns an error and `br` exits. If you leave this parameter unspecified, `br` picks the snapshot corresponding to the backup start time.
-- `--storage`: The storage address of the backup data. Snapshot backup supports Amazon S3, Google Cloud Storage, and Azure Blob Storage as backup storage. The preceding command uses Amazon S3 as an example. For more details, see [URI format of backup storages](/br/backup-and-restore-storages.md#uri-format).
+- `--storage`: The storage address of the backup data. Snapshot backup supports Amazon S3, Google Cloud Storage, and Azure Blob Storage as backup storage. The preceding command uses Amazon S3 as an example. For more details, see [URI Formats of External Storage Services](/external-storage-uri.md).
 - `--ratelimit`: The maximum speed **per TiKV** performing backup tasks. The unit is in MiB/s.
 
 During backup, a progress bar is displayed in the terminal as shown below. When the progress bar advances to 100%, the backup task is completed and statistics such as total backup time, average backup speed, and backup data size are displayed.
@@ -135,14 +135,37 @@ Starting from BR v5.1.0, when you back up snapshots, BR backs up the **system ta
 | mysql.role_edges                 |
 | mysql.tables_priv                |
 | mysql.user                       |
+| mysql.bind_info                  |
 +----------------------------------+
 ```
 
 **BR does not restore the following system tables:**
 
-- Statistics tables (`mysql.stats_*`)
+- Statistics tables (`mysql.stat_*`). But statistics can be restored. See [Back up statistics](/br/br-snapshot-manual.md#back-up-statistics).
 - System variable tables (`mysql.tidb` and `mysql.global_variables`)
 - [Other system tables](https://github.com/pingcap/tidb/blob/master/br/pkg/restore/systable_restore.go#L31)
+
+```
++-----------------------------------------------------+
+| capture_plan_baselines_blacklist                    |
+| column_stats_usage                                  |
+| gc_delete_range                                     |
+| gc_delete_range_done                                |
+| global_variables                                    |
+| schema_index_usage                                  |
+| stats_buckets                                       |
+| stats_extended                                      |
+| stats_feedback                                      |
+| stats_fm_sketch                                     |
+| stats_histograms                                    |
+| stats_history                                       |
+| stats_meta                                          |
+| stats_meta_history                                  |
+| stats_table_locked                                  |
+| stats_top_n                                         |
+| tidb                                                |
++-----------------------------------------------------+
+```
 
 When you restore data related to system privilege, note the following:
 

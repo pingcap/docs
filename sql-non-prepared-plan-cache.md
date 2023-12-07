@@ -5,11 +5,9 @@ summary: Learn about the principle, usage, and examples of the SQL non-prepared 
 
 # SQL Non-Prepared Execution Plan Cache
 
-> **Warning:**
->
-> The non-prepared execution plan cache is an experimental feature. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
-
 TiDB supports execution plan caching for some non-`PREPARE` statements, similar to the [`Prepare`/`Execute` statements](/sql-prepared-plan-cache.md). This feature allows these statements to skip the optimization phase and improve performance.
+
+Enabling the non-prepared plan cache might incur additional memory and CPU overhead and might not be suitable for all situations. To determine whether to enable this feature in your scenario, refer to the [Performance benefits](#performance-benefits) and [Memory monitoring](#monitoring) sections.
 
 ## Principle
 
@@ -88,7 +86,7 @@ Due to the preceding risks and the fact that the execution plan cache only provi
 - Queries that contain numbers or expressions directly after `ORDER BY` or `GROUP BY` are not supported, such as `ORDER BY 1` and `GROUP BY a+1`. Only `ORDER BY column_name` and `GROUP BY column_name` are supported.
 - Queries that filter on columns of `JSON`, `ENUM`, `SET`, or `BIT` type are not supported, such as `SELECT * FROM t WHERE json_col = '{}'`.
 - Queries that filter on `NULL` values are not supported, such as `SELECT * FROM t WHERE a is NULL`.
-- Queries with more than 200 parameters after parameterization are not supported, such as `SELECT * FROM t WHERE a in (1, 2, 3, ... 201)`.
+- Queries with more than 200 parameters after parameterization are not supported by default, such as `SELECT * FROM t WHERE a in (1, 2, 3, ... 201)`. Starting from v7.3.0, you can modify this limit by setting the [`44823`](/optimizer-fix-controls.md#44823-new-in-v730) fix in the [`tidb_opt_fix_control`](/system-variables.md#tidb_opt_fix_control-new-in-v710) system variable.
 - Queries that access partitioned tables, virtual columns, temporary tables, views, or memory tables are not supported, such as `SELECT * FROM INFORMATION_SCHEMA.COLUMNS`, where `COLUMNS` is a TiDB memory table.
 - Queries with hints or bindings are not supported.
 - DML statements or `SELECT` statements with the `FOR UPDATE` clause are not supported by default. To remove this restriction, you can execute `SET tidb_enable_non_prepared_plan_cache_for_dml = ON`.
@@ -97,7 +95,9 @@ After you enable this feature, the optimizer quickly evaluates the query. If it 
 
 ## Performance benefits
 
-In internal tests, enabling the non-prepared plan cache feature can achieve significant performance benefits in most TP scenarios. However, it also introduces some additional performance overhead, including determining whether the query is supported and parameterizing the query. If this feature cannot support the majority of queries in your workload, enabling it might actually adversely affect performance.
+In internal tests, enabling the non-prepared plan cache feature can achieve significant performance benefits in most TP scenarios. For example, a performance improvement of about 4% in TPC-C tests, over 10% in some banking workloads, and 15% in Sysbench RangeScan.
+
+However, this feature also introduces some additional memory and CPU overhead, including determining whether the query is supported, parameterizing the query, and searching for a plan in the cache. If the cache cannot hit the majority of queries in your workload, enabling it might actually adversely affect performance.
 
 In this case, you need to observe the `non-prepared` metric in the **Queries Using Plan Cache OPS** panel and the `non-prepared-unsupported` metric in the **Plan Cache Miss OPS** panel on Grafana. If most queries are not supported and only a few can hit the plan cache, you can disable this feature.
 

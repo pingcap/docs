@@ -282,6 +282,63 @@ commit_txn: {prewrite:48.564544ms, wait_prewrite_binlog:47.821579, get_commit_ts
 - `write_keys`: The total `keys` written in the transaction.
 - `write_byte`: The total bytes of `key-value` written in the transaction, and the unit is byte.
 
+### RU (Request Unit) consumption
+
+[Request Unit (RU)](/tidb-resource-control.md#what-is-request-unit-ru) is a unified abstraction unit of system resources, which is defined in TiDB resource control. The `execution info` of the top-level operator shows the overall RU consumption of this particular SQL statement.
+
+```
+RU:273.842670
+```
+
+> **Note:**
+>
+> This value shows the actual RUs consumed by this execution. The same SQL statement might consume different amounts of RUs each time it is executed due to the effects of caching (for example, [coprocessor cache](/coprocessor-cache.md)).
+
+You can calculate the RU from the other values in `EXPLAIN ANALYZE`, specifically the `execution info` column. For example:
+
+```json
+'executeInfo':
+   time:2.55ms, 
+   loops:2, 
+   RU:0.329460, 
+   Get:{
+       num_rpc:1,
+       total_time:2.13ms
+   }, 
+   total_process_time: 231.5µs,
+   total_wait_time: 732.9µs, 
+   tikv_wall_time: 995.8µs,
+   scan_detail: {
+      total_process_keys: 1, 
+      total_process_keys_size: 150, 
+      total_keys: 1, 
+      get_snapshot_time: 691.7µs,
+      rocksdb: {
+          block: {
+              cache_hit_count: 2,
+              read_count: 1,
+              read_byte: 8.19 KB,
+              read_time: 10.3µs
+          }
+      }
+  },
+```
+
+The base costs are defined in the [`tikv/pd` source code](https://github.com/tikv/pd/blob/aeb259335644d65a97285d7e62b38e7e43c6ddca/client/resource_group/controller/config.go#L58C19-L67) and the calculations are performed in the [`model.go`](https://github.com/tikv/pd/blob/54219d649fb4c8834cd94362a63988f3c074d33e/client/resource_group/controller/model.go#L107) file.
+
+If you are using TiDB v7.1, the calculation is the sum of `BeforeKVRequest()` and `AfterKVRequest()` in `pd/pd-client/model.go`, that is:
+
+```
+before key/value request is processed:
+      consumption.RRU += float64(kc.ReadBaseCost) -> kv.ReadBaseCost * rpc_nums
+
+after key/value request is processed:
+      consumption.RRU += float64(kc.ReadBytesCost) * readBytes -> kc.ReadBytesCost * total_process_keys_size
+      consumption.RRU += float64(kc.CPUMsCost) * kvCPUMs -> kc.CPUMsCost * total_process_time
+```
+
+For writes and batch gets, the calculation is similar with different base costs.
+
 ### Other common execution information
 
 The Coprocessor operators usually contain two parts of execution time information: `cop_task` and `tikv_task`. `cop_task` is the time recorded by TiDB, and it is from the moment that the request is sent to the server to the moment that the response is received. `tikv_task` is the time recorded by TiKV Coprocessor itself. If there is much difference between the two, it might indicate that the time spent waiting for the response is too long, or the time spent on gRPC or network is too long.

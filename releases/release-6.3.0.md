@@ -152,7 +152,7 @@ In v6.3.0-DMR, the key new features and improvements are as follows:
 
 * Address the conflict between SQL-based data Placement Rules and TiFlash replicas [#37171](https://github.com/pingcap/tidb/issues/37171) @[lcwangchao](https://github.com/lcwangchao)
 
-    TiDB v6.0.0 provides SQL-based data Placement Rules. But this feature conflicts with TiFlash replicas due to implementation issues. TiDB v6.3.0 optimizes the implementation mechanisms, and [resolves the conflict between SQL-based data Placement Rules and TiFlash](/placement-rules-in-sql.md#known-limitations).
+    TiDB v6.0.0 provides [SQL-based data Placement Rules](/placement-rules-in-sql.md). But this feature conflicts with TiFlash replicas due to implementation issues. TiDB v6.3.0 optimizes the implementation mechanisms, and resolves the conflict between SQL-based data Placement Rules and TiFlash.
 
 ### MySQL compatibility
 
@@ -198,7 +198,7 @@ In v6.3.0-DMR, the key new features and improvements are as follows:
 
 * TiCDC supports keeping the snapshots consistent between the upstream and the downstream (sync point) [#6977](https://github.com/pingcap/tiflow/issues/6977) @[asddongmen](https://github.com/asddongmen)
 
-    In the scenarios of data replication for disaster recovery, TiCDC supports [periodically maintaining a downstream data snapshot](/sync-diff-inspector/upstream-downstream-diff.md#data-check-for-tidb-upstream-and-downstream-clusters) so that the downstream snapshot is consistent with the upstream snapshot. With this feature, TiCDC can better support the scenarios where reads and writes are separate, and help you lower the cost.
+    In the scenarios of data replication for disaster recovery, TiCDC supports [periodically maintaining a downstream data snapshot](/ticdc/ticdc-upstream-downstream-check.md) so that the downstream snapshot is consistent with the upstream snapshot. With this feature, TiCDC can better support the scenarios where reads and writes are separate, and help you lower the cost.
 
 * TiCDC supports graceful upgrade [#4757](https://github.com/pingcap/tiflow/issues/4757) @[overvenus](https://github.com/overvenus) @[3AceShowHand](https://github.com/3AceShowHand)
 

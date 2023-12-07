@@ -50,11 +50,11 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
   </tr>
   <tr>
     <td rowspan="2">SQL functionalities<br /></td>
-    <td><a href="https://docs.pingcap.com/tidb/v6.6/foreign-key" target="_blank">Foreign key</a></td>
+    <td><a href="https://docs.pingcap.com/tidb/v6.6/foreign-key" target="_blank">Foreign key</a> (experimental)</td>
     <td>Support MySQL-compatible foreign key constraints to maintain data consistency and improve data quality.</td>
   </tr>
   <tr>
-    <td><a href="https://docs.pingcap.com/tidb/v6.6/sql-statement-create-index/#multi-valued-index" target="_blank">Multi-valued index</a> (experimental)</td>
+    <td><a href="https://docs.pingcap.com/tidb/v6.6/sql-statement-create-index#multi-valued-indexes" target="_blank">Multi-valued indexes</a> (experimental)</td>
     <td>Introduce MySQL-compatible multi-valued indexes and enhance the JSON type to improve TiDB's compatibility with MySQL 8.0.</td>
   </tr>
   <tr>
@@ -166,7 +166,7 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
     - For TiDB clusters deployed across cloud regions, when a cloud region fails, the specified databases or tables can survive in another cloud region.
     - For TiDB clusters deployed in a single cloud region, when an availability zone fails, the specified databases or tables can survive in another availability zone.
 
-  For more information, see [documentation](/placement-rules-in-sql.md#survival-preferences).
+  For more information, see [documentation](/placement-rules-in-sql.md#specify-survival-preferences).
 
 * Support rolling back DDL operations via the `FLASHBACK CLUSTER TO TIMESTAMP` statement [#14088](https://github.com/tikv/tikv/pull/14088) @[Defined2014](https://github.com/Defined2014) @[JmPotato](https://github.com/JmPotato)
 
@@ -176,19 +176,19 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
 
 ### SQL
 
-* Support MySQL-compatible foreign key constraints [#18209](https://github.com/pingcap/tidb/issues/18209) @[crazycs520](https://github.com/crazycs520)
+* Support MySQL-compatible foreign key constraints (experimental) [#18209](https://github.com/pingcap/tidb/issues/18209) @[crazycs520](https://github.com/crazycs520)
 
     TiDB v6.6.0 introduces the foreign key constraints feature, which is compatible with MySQL. This feature supports referencing within a table or between tables, constraints validation, and cascade operations. This feature helps to migrate applications to TiDB, maintain data consistency, improve data quality, and facilitate data modeling.
 
     For more information, see [documentation](/foreign-key.md).
 
-* Support the MySQL-compatible multi-valued index (experimental) [#39592](https://github.com/pingcap/tidb/issues/39592) @[xiongjiwei](https://github.com/xiongjiwei) @[qw4990](https://github.com/qw4990)
+* Support MySQL-compatible multi-valued indexes (experimental) [#39592](https://github.com/pingcap/tidb/issues/39592) @[xiongjiwei](https://github.com/xiongjiwei) @[qw4990](https://github.com/qw4990)
 
-    TiDB introduces the MySQL-compatible multi-valued index in v6.6.0. Filtering the values of an array in a JSON column is a common operation, but normal indexes cannot help speed up such an operation. Creating a multi-valued index on an array can greatly improve filtering performance. If an array in the JSON column has a multi-valued index, you can use the multi-value index to filter the retrieval conditions with `MEMBER OF()`, `JSON_CONTAINS()`, `JSON_OVERLAPS()` functions, thereby reducing much I/O consumption and improving operation speed.
+    TiDB introduces MySQL-compatible multi-valued indexes in v6.6.0. Filtering the values of an array in a JSON column is a common operation, but normal indexes cannot help speed up such an operation. Creating a multi-valued index on an array can greatly improve filtering performance. If an array in the JSON column has a multi-valued index, you can use the multi-valued index to filter the retrieval conditions with `MEMBER OF()`, `JSON_CONTAINS()`, `JSON_OVERLAPS()` functions, thereby reducing much I/O consumption and improving operation speed.
 
     Introducing multi-valued indexes further enhances TiDB's support for the JSON data type and also improves TiDB's compatibility with MySQL 8.0.
 
-    For more information, see [documentation](/sql-statements/sql-statement-create-index.md#multi-valued-index).
+    For more information, see [documentation](/sql-statements/sql-statement-create-index.md#multi-valued-indexes).
 
 ### DB operations
 
@@ -224,7 +224,7 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
 
     For more information, see [documentation](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task).
 
-* TiDB Lightning supports enabling compressed transfers when sending key-value pairs to TiKV [#41163](https://github.com/pingcap/tidb/issues/41163) @[gozssky](https://github.com/gozssky)
+* TiDB Lightning supports enabling compressed transfers when sending key-value pairs to TiKV [#41163](https://github.com/pingcap/tidb/issues/41163) @[sleepymole](https://github.com/sleepymole)
 
     Starting from v6.6.0, TiDB Lightning supports compressing locally encoded and sorted key-value pairs for network transfer when sending them to TiKV, thus reducing the amount of data transferred over the network and lowering the network bandwidth overhead. In the earlier TiDB versions before this feature is supported, TiDB Lightning requires relatively high network bandwidth and incurs high traffic charges in case of large data volumes.
 
@@ -337,13 +337,13 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
 
 ### MySQL compatibility
 
-* Support MySQL-compatible foreign key constraints [#18209](https://github.com/pingcap/tidb/issues/18209) @[crazycs520](https://github.com/crazycs520)
+* Support MySQL-compatible foreign key constraints (experimental) [#18209](https://github.com/pingcap/tidb/issues/18209) @[crazycs520](https://github.com/crazycs520)
 
     For more information, see the [SQL](#sql) section in this document and [documentation](/foreign-key.md).
 
-* Support the MySQL-compatible multi-valued index (experimental) [#39592](https://github.com/pingcap/tidb/issues/39592) @[xiongjiwei](https://github.com/xiongjiwei) @[qw4990](https://github.com/qw4990)
+* Support the MySQL-compatible multi-valued indexes (experimental) [#39592](https://github.com/pingcap/tidb/issues/39592) @[xiongjiwei](https://github.com/xiongjiwei) @[qw4990](https://github.com/qw4990)
 
-    For more information, see the [SQL](#sql) section in this document and [documentation](/sql-statements/sql-statement-create-index.md#multi-valued-index).
+    For more information, see the [SQL](#sql) section in this document and [documentation](/sql-statements/sql-statement-create-index.md#multi-valued-indexes).
 
 ### System variables
 
@@ -490,7 +490,7 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
         - Support setting the maximum number of conflicts by `lightning.max-error` [#40743](https://github.com/pingcap/tidb/issues/40743) @[dsdashun](https://github.com/dsdashun)
         - Support importing CSV data files with BOM headers [#40744](https://github.com/pingcap/tidb/issues/40744) @[dsdashun](https://github.com/dsdashun)
         - Optimize the processing logic when encountering TiKV flow-limiting errors and try other available regions instead [#40205](https://github.com/pingcap/tidb/issues/40205) @[lance6716](https://github.com/lance6716)
-        - Disable checking the table foreign keys during import [#40027](https://github.com/pingcap/tidb/issues/40027) @[gozssky](https://github.com/gozssky)
+        - Disable checking the table foreign keys during import [#40027](https://github.com/pingcap/tidb/issues/40027) @[sleepymole](https://github.com/sleepymole)
 
     + Dumpling
 
@@ -603,7 +603,7 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
         - Fix the issue that TiDB Lightning might incorrectly skip conflict resolution when all but the last TiDB Lightning instance encounters a local duplicate record during a parallel import [#40923](https://github.com/pingcap/tidb/issues/40923) @[lichunzhu](https://github.com/lichunzhu)
         - Fix the issue that precheck cannot accurately detect the presence of a running TiCDC in the target cluster [#41040](https://github.com/pingcap/tidb/issues/41040) @[lance6716](https://github.com/lance6716)
         - Fix the issue that TiDB Lightning panics in the split-region phase [#40934](https://github.com/pingcap/tidb/issues/40934) @[lance6716](https://github.com/lance6716)
-        - Fix the issue that the conflict resolution logic (`duplicate-resolution`) might lead to inconsistent checksums [#40657](https://github.com/pingcap/tidb/issues/40657) @[gozssky](https://github.com/gozssky)
+        - Fix the issue that the conflict resolution logic (`duplicate-resolution`) might lead to inconsistent checksums [#40657](https://github.com/pingcap/tidb/issues/40657) @[sleepymole](https://github.com/sleepymole)
         - Fix a possible OOM problem when there is an unclosed delimiter in the data file [#40400](https://github.com/pingcap/tidb/issues/40400) @[buchuitoudegou](https://github.com/buchuitoudegou)
         - Fix the issue that the file offset in the error report exceeds the file size [#40034](https://github.com/pingcap/tidb/issues/40034) @[buchuitoudegou](https://github.com/buchuitoudegou)
         - Fix an issue with the new version of PDClient that might cause parallel import to fail [#40493](https://github.com/pingcap/tidb/issues/40493) @[AmoebaProtozoa](https://github.com/AmoebaProtozoa)

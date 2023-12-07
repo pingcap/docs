@@ -116,23 +116,65 @@ SELECT * FROM test . t WHERE a > ?
 
 > **Note:**
 >
-> Multiple constants joined by commas `,` are normalized as `...` instead of `?`.
+> In the normalization process, `?` in the `IN` predicate is normalized as `...`.
 >
 > For example:
 >
 > ```sql
-> SELECT * FROM t limit 10
-> SELECT * FROM t limit 10, 20
 > SELECT * FROM t WHERE a IN (1)
 > SELECT * FROM t WHERE a IN (1,2,3)
 > -- After normalization, the above statements are as follows:
-> SELECT * FROM test . t limit ?
-> SELECT * FROM test . t limit ...
-> SELECT * FROM test . t WHERE a IN ( ? )
+> SELECT * FROM test . t WHERE a IN ( ... )
 > SELECT * FROM test . t WHERE a IN ( ... )
 > ```
 >
-> When bindings are created, TiDB treats SQL statements that contain a single constant and SQL statements that contain multiple constants joined by commas differently. Therefore, you need to create bindings for the two SQL types separately.
+> After normalization, `IN` predicates of different lengths are recognized as the same statement, so you only need to create one binding that applies to all these predicates.
+>
+> For example:
+>
+> ```sql
+> CREATE TABLE t (a INT, KEY(a));
+> CREATE BINDING FOR SELECT * FROM t WHERE a IN (?) USING SELECT /*+ use_index(t, a) */ * FROM t WHERE a in (?);
+> 
+> SELECT * FROM t WHERE a IN (1);
+> SELECT @@LAST_PLAN_FROM_BINDING;
+> +--------------------------+
+> | @@LAST_PLAN_FROM_BINDING |
+> +--------------------------+
+> |                        1 |
+> +--------------------------+
+>
+> SELECT * FROM t WHERE a IN (1, 2, 3);
+> SELECT @@LAST_PLAN_FROM_BINDING;
+> +--------------------------+
+> | @@LAST_PLAN_FROM_BINDING |
+> +--------------------------+
+> |                        1 |
+> +--------------------------+
+> ```
+>
+> Bindings created in TiDB clusters earlier than v7.4.0 might contain `IN (?)`. After the upgrade to v7.4.0 or a later version, these bindings will be modified to `IN (...)`.
+>
+> For example:
+>
+> ```sql
+> -- Create a binding on v7.3.0
+> mysql> CREATE GLOBAL BINDING FOR SELECT * FROM t WHERE a IN (1) USING SELECT /*+ use_index(t, a) */ * FROM t WHERE a IN (1);
+> mysql> SHOW GLOBAL BINDINGS;
+> +-----------------------------------------------+--------------------------------------------------------------------+------------+---------+-------------------------+-------------------------+---------+-----------------+--------+------------------------------------------------------------------+-------------+
+> | Original_sql                                  | Bind_sql                                                           | Default_db | Status  | Create_time             | Update_time             | Charset | Collation       | Source | Sql_digest                                                       | Plan_digest |
+> +-----------------------------------------------+--------------------------------------------------------------------+------------+---------+-------------------------+-------------------------+---------+-----------------+--------+------------------------------------------------------------------+-------------+
+> | select * from `test` . `t` where `a` in ( ? ) | SELECT /*+ use_index(`t` `a`)*/ * FROM `test`.`t` WHERE `a` IN (1) | test       | enabled | 2023-10-20 14:28:10.093 | 2023-10-20 14:28:10.093 | utf8    | utf8_general_ci | manual | 8b9c4e6ab8fad5ba29b034311dcbfc8a8ce57dde2e2d5d5b65313b90ebcdebf7 |             |
+> +-----------------------------------------------+--------------------------------------------------------------------+------------+---------+-------------------------+-------------------------+---------+-----------------+--------+------------------------------------------------------------------+-------------+
+>
+> -- After the upgrade to v7.4.0 or a later version
+> mysql> SHOW GLOBAL BINDINGS;
+> +-------------------------------------------------+--------------------------------------------------------------------+------------+---------+-------------------------+-------------------------+---------+-----------------+--------+------------------------------------------------------------------+-------------+
+> | Original_sql                                    | Bind_sql                                                           | Default_db | Status  | Create_time             | Update_time             | Charset | Collation       | Source | Sql_digest                                                       | Plan_digest |
+> +-------------------------------------------------+--------------------------------------------------------------------+------------+---------+-------------------------+-------------------------+---------+-----------------+--------+------------------------------------------------------------------+-------------+
+> | select * from `test` . `t` where `a` in ( ... ) | SELECT /*+ use_index(`t` `a`)*/ * FROM `test`.`t` WHERE `a` IN (1) | test       | enabled | 2023-10-20 14:28:10.093 | 2023-10-20 14:28:10.093 | utf8    | utf8_general_ci | manual | 8b9c4e6ab8fad5ba29b034311dcbfc8a8ce57dde2e2d5d5b65313b90ebcdebf7 |             |
+> +-------------------------------------------------+--------------------------------------------------------------------+------------+---------+-------------------------+-------------------------+---------+-----------------+--------+------------------------------------------------------------------+-------------+
+> ```
 
 When a SQL statement has bound execution plans in both GLOBAL and SESSION scopes, because the optimizer ignores the bound execution plan in the GLOBAL scope when it encounters the SESSION binding, the bound execution plan of this statement in the SESSION scope shields the execution plan in the GLOBAL scope.
 
@@ -168,15 +210,15 @@ The original SQL statement and the bound statement must have the same text after
 
 - This binding can be created successfully because the texts before and after parameterization and hint removal are the same: `SELECT * FROM test . t WHERE a > ?`
 
-     ```sql
-     CREATE BINDING FOR SELECT * FROM t WHERE a > 1 USING SELECT * FROM t use index  (idx) WHERE a > 2
-     ```
+    ```sql
+    CREATE BINDING FOR SELECT * FROM t WHERE a > 1 USING SELECT * FROM t use index  (idx) WHERE a > 2
+    ```
 
 - This binding will fail because the original SQL statement is processed as `SELECT * FROM test . t WHERE a > ?`, while the bound SQL statement is processed differently as `SELECT * FROM test . t WHERE b > ?`.
 
-     ```sql
-     CREATE BINDING FOR SELECT * FROM t WHERE a > 1 USING SELECT * FROM t use index(idx) WHERE b > 2
-     ```
+    ```sql
+    CREATE BINDING FOR SELECT * FROM t WHERE a > 1 USING SELECT * FROM t use index(idx) WHERE b > 2
+    ```
 
 > **Note:**
 >

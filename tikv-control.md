@@ -300,7 +300,8 @@ Use the `compact` command to manually compact data of each TiKV.
 
 - Use the `--from` and `--to` options to specify the compaction range in the form of escaped raw key. If not set, the whole range will be compacted.
 - Use the `--region` option to compact the range of a specific region. If set, `--from` and `--to` will be ignored.
-- Use the `--db` option to specify the RocksDB that performs compaction. The optional values are `kv` and `raft`.
+- Use the `-c` option to specify the column family name. The default value is `default`. The optional values are `default`, `lock`, and `write`.
+- Use the `-d` option to specify the RocksDB that performs compaction. The default value is `kv`. The optional values are `kv` and `raft`.
 - Use the `--threads` option allows you to specify the concurrency for the TiKV compaction and its default value is `8`. Generally, a higher concurrency comes with a faster compaction speed, which might yet affect the service. You need to choose an appropriate concurrency count based on your scenario.
 - Use the `--bottommost` option to include or exclude the bottommost files when TiKV performs compaction. The value options are `default`, `skip`, and `force`. The default value is `default`.
     - `default` means that the bottommost files are included only when the Compaction Filter feature is enabled.
@@ -310,18 +311,21 @@ Use the `compact` command to manually compact data of each TiKV.
 - To compact data in the local mode, use the following command:
 
     ```shell
-    tikv-ctl --data-dir /path/to/tikv compact --db kv
+    tikv-ctl --data-dir /path/to/tikv compact -d kv
     ```
 
 - To compact data in the remote mode, use the following command:
 
     ```shell
-    tikv-ctl --host ip:port compact --db kv
+    tikv-ctl --host ip:port compact -d kv
     ```
 
 ### Compact data of the whole TiKV cluster manually
 
-Use the `compact-cluster` command to manually compact data of the whole TiKV cluster. The flags of this command have the same meanings and usage as those of the `compact` command.
+Use the `compact-cluster` command to manually compact data of the whole TiKV cluster. The flags of this command have the same meanings and usage as those of the `compact` command. The only difference is as follows:
+
+- For the `compact-cluster` command, use `--pd` to specify the address of the PD, so that `tikv-ctl` can locate all TiKV nodes in the cluster as the compact target.
+- For the `compact` command, use `--data-dir` or `--host` to specify a single TiKV as the compact target.
 
 ### Set a Region to tombstone
 
@@ -649,3 +653,40 @@ From the output above, you can see that the information of the damaged SST file 
 + In the `sst meta` part, `14` means the SST file number; `552997` means the file size, followed by the smallest and largest sequence numbers and other meta-information.
 + The `overlap region` part shows the information of the Region involved. This information is obtained through the PD server.
 + The `suggested operations` part provides you suggestion to clean up the damaged SST file. You can take the suggestion to clean up files and restart the TiKV instance.
+
+### Get the state of a Region's `RegionReadProgress`
+
+Starting from v6.5.4 and v7.3.0, TiKV introduces the `get-region-read-progress` subcommand to get up-to-date details of the resolver and `RegionReadProgress`. You need to specify a Region ID and a TiKV, which can be obtained from Grafana (`Min Resolved TS Region` and `Min Safe TS Region`) or `DataIsNotReady` logs.
+
+- `--log` (optional): If specified, TiKV logs the smallest `start_ts` of locks in the Region's resolver in this TiKV at `INFO` level. This option helps you identify locks that might block resolved-ts in advance.
+
+- `--min-start-ts` (optional): If specified, TiKV filters out locks with smaller `start_ts` than this value in logs. You can use this to specify a transaction of interest for logging. It defaults to `0`, which means no filter.
+
+The following is an example:
+
+```
+./tikv-ctl --host 127.0.0.1:20160 get-region-read-progress -r 14 --log --min-start-ts 0
+```
+
+The output is as follows:
+
+```
+Region read progress:
+    exist: true,
+    safe_ts: 0,
+    applied_index: 92,
+    pending front item (oldest) ts: 0,
+    pending front item (oldest) applied index: 0,
+    pending back item (latest) ts: 0,
+    pending back item (latest) applied index: 0,
+    paused: false,
+Resolver:
+    exist: true,
+    resolved_ts: 0,
+    tracked index: 92,
+    number of locks: 0,
+    number of transactions: 0,
+    stopped: false,
+```
+
+The subcommand is useful in diagnosing issues related to Stale Read and safe-ts. For details, see [Understanding Stale Read and safe-ts in TiKV](/troubleshoot-stale-read.md).

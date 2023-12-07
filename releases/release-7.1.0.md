@@ -57,7 +57,7 @@ Compared with the previous LTS 6.5.0, 7.1.0 not only includes new features, impr
   </tr>
   <tr>
     <td rowspan="3">SQL</td>
-    <td><a href="https://docs.pingcap.com/tidb/v7.1/sql-statement-create-index#multi-valued-index" target="_blank">Multi-valued index</a> (GA)</td>
+    <td><a href="https://docs.pingcap.com/tidb/v7.1/sql-statement-create-index#multi-valued-indexes" target="_blank">Multi-valued indexes</a> (GA)</td>
     <td>Support MySQL-compatible multi-valued indexes and enhance the JSON type to improve compatibility with MySQL 8.0. This feature improves the efficiency of membership checks on multi-valued columns.</td>
   </tr>
   <tr>
@@ -74,7 +74,7 @@ Compared with the previous LTS 6.5.0, 7.1.0 not only includes new features, impr
     <td>TiDB supports LDAP authentication, which is compatible with <a href="https://dev.mysql.com/doc/refman/8.0/en/ldap-pluggable-authentication.html" target="_blank">MySQL 8.0</a>.</td>
   </tr>
   <tr>
-    <td> Audit log enhancement (<a href="https://www.pingcap.com/tidb-enterprise" target="_blank">Enterprise Edition</a> only)</td>
+    <td><a href="https://static.pingcap.com/files/2023/09/18204824/TiDB-Database-Auditing-User-Guide1.pdf" target="_blank">Audit log enhancement</a> (<a href="https://www.pingcap.com/tidb-enterprise" target="_blank">Enterprise Edition</a> only)</td>
     <td>TiDB Enterprise Edition enhances the database auditing feature. It significantly improves the system auditing capacity by providing more fine-grained event filtering controls, more user-friendly filter settings, a new file output format in JSON, and lifecycle management of audit logs.</td>
   </tr>
 </tbody>
@@ -88,7 +88,7 @@ Compared with the previous LTS 6.5.0, 7.1.0 not only includes new features, impr
 
     TiDB v6.6.0 introduces the Partitioned Raft KV storage engine as an experimental feature, which uses multiple RocksDB instances to store TiKV Region data, and the data of each Region is independently stored in a separate RocksDB instance. The new storage engine can better control the number and level of files in the RocksDB instance, achieve physical isolation of data operations between Regions, and support stably managing more data. Compared with the original TiKV storage engine, using the Partitioned Raft KV storage engine can achieve about twice the write throughput and reduce the elastic scaling time by about 4/5 under the same hardware conditions and mixed read and write scenarios.
 
-    In TiDB v7.1.0, the Partitioned Raft KV storage engine is compatible with TiFlash and supports tools such as TiDB Lightning, BR, and TiCDC.
+    In TiDB v7.1.0, the Partitioned Raft KV storage engine supports tools such as TiDB Lightning, BR, and TiCDC.
 
     Currently, this feature is experimental and not recommended for use in production environments. You can only use this engine in a newly created cluster and you cannot directly upgrade from the original TiKV storage engine.
 
@@ -213,9 +213,9 @@ Compared with the previous LTS 6.5.0, 7.1.0 not only includes new features, impr
 
     Filtering the values of an array in a JSON column is a common operation, but normal indexes cannot help speed up such an operation. Creating a multi-valued index on an array can greatly improve filtering performance. If an array in the JSON column has a multi-valued index, you can use the multi-valued index to filter retrieval conditions in `MEMBER OF()`, `JSON_CONTAINS()`, and `JSON_OVERLAPS()` functions, thereby reducing I/O consumption and improving operation speed.
 
-    In v7.1.0, the multi-valued index feature becomes generally available (GA). It supports more complete data types and is compatible with TiDB tools. You can use multi-valued indexes to speed up the search operations on JSON arrays in production environments.
+    In v7.1.0, the multi-valued indexes feature becomes generally available (GA). It supports more complete data types and is compatible with TiDB tools. You can use multi-valued indexes to speed up the search operations on JSON arrays in production environments.
 
-    For more information, see [documentation](/sql-statements/sql-statement-create-index.md#multi-valued-index).
+    For more information, see [documentation](/sql-statements/sql-statement-create-index.md#multi-valued-indexes).
 
 * Improve the partition management for Hash and Key partitioned tables [#42728](https://github.com/pingcap/tidb/issues/42728) @[mjonss](https://github.com/mjonss)
 
@@ -283,7 +283,7 @@ Compared with the previous LTS 6.5.0, 7.1.0 not only includes new features, impr
 
   Database auditing is an important feature in TiDB Enterprise Edition. This feature provides a powerful monitoring and auditing tool for enterprises to ensure data security and compliance. It can help enterprise managers in tracking the source and impact of database operations to prevent illegal data theft or tampering. Furthermore, database auditing can also help enterprises meet various regulatory and compliance requirements, ensuring legal and ethical compliance. This feature has important application value for enterprise information security.
 
-    This feature is included in TiDB Enterprise Edition. To use this feature and its documentation, navigate to the [TiDB Enterprise](https://www.pingcap.com/tidb-enterprise) page.
+    For more information, see [user guide](https://static.pingcap.com/files/2023/09/18204824/TiDB-Database-Auditing-User-Guide1.pdf). This feature is included in TiDB Enterprise Edition. To use this feature, navigate to the [TiDB Enterprise](https://www.pingcap.com/tidb-enterprise) page to get TiDB Enterprise Edition.
 
 ## Compatibility changes
 
@@ -446,7 +446,6 @@ Compared with the previous LTS 6.5.0, 7.1.0 not only includes new features, impr
     - Fix the wrong value returned when querying a partitioned table using `Limit` [#24636](https://github.com/pingcap/tidb/issues/24636)
     - Fix the issue of displaying the incorrect TiDB address in IPv6 environment [#43260](https://github.com/pingcap/tidb/issues/43260) @[nexustar](https://github.com/nexustar)
     - Fix the issue of displaying incorrect values for system variables `tidb_enable_tiflash_read_for_write_stmt` and `tidb_enable_exchange_partition` [#43281](https://github.com/pingcap/tidb/issues/43281) @[gengliqi](https://github.com/gengliqi)
-    - Fix the issue that the proxy protocol reports the `Header read timeout` error when processing certain erroneous data [#43205](https://github.com/pingcap/tidb/issues/43205) @[blacktear23](https://github.com/blacktear23)
     - Fix the issue that when `tidb_scatter_region` is enabled, Region does not automatically split after a partition is truncated [#43174](https://github.com/pingcap/tidb/issues/43174) [#43028](https://github.com/pingcap/tidb/issues/43028) @[jiyfhust](https://github.com/jiyfhust)
     - Add checks on the tables with generated columns and report errors for unsupported DDL operations on these columns [#38988](https://github.com/pingcap/tidb/issues/38988) [#24321](https://github.com/pingcap/tidb/issues/24321) @[tiancaiamao](https://github.com/tiancaiamao)
     - Fix the issue that the error message is incorrect in certain type conversion errors [#41730](https://github.com/pingcap/tidb/issues/41730) @[hawkingrei](https://github.com/hawkingrei)

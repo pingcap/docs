@@ -83,6 +83,38 @@ This hint specifies the outer `SELECT` query block's name to `QB1`, which makes 
 >
 > In the above example, if the hint specifies the `QB_NAME` to `sel_2` and does not specify a new `QB_NAME` for the original second `SELECT` query block, then `sel_2` becomes an invalid name for the second `SELECT` query block.
 
+### SET_VAR(VAR_NAME=VAR_VALUE)
+
+You can temporarily modify the value of system variables during statement execution by using the `SET_VAR(VAR_NAME=VAR_VALUE)` hint. After the statement is executed, the value of the system variable in the current session is automatically restored to the original value. This hint can be used to modify some system variables related to the optimizer and executor. For a list of system variables that can be modified using this hint, refer to [System variables](/system-variables.md).
+
+> **Warning:**
+>
+> It is strongly recommended not to modify variables that are not explicitly supported, as this might cause unpredictable behavior.
+
+The following is an example:
+
+```sql
+SELECT /*+ SET_VAR(MAX_EXECUTION_TIME=1234) */ @@MAX_EXECUTION_TIME;
+SELECT @@MAX_EXECUTION_TIME;
+```
+
+After executing the preceding SQL statements, the first query returns the value `1234` set in the hint, instead of the default value of `MAX_EXECUTION_TIME`. The second query returns the default value of the variable.
+
+```sql
++----------------------+
+| @@MAX_EXECUTION_TIME |
++----------------------+
+|                 1234 |
++----------------------+
+1 row in set (0.00 sec)
++----------------------+
+| @@MAX_EXECUTION_TIME |
++----------------------+
+|                    0 |
++----------------------+
+1 row in set (0.00 sec)
+```
+
 ### MERGE_JOIN(t1_name [, tl_name ...])
 
 The `MERGE_JOIN(t1_name [, tl_name ...])` hint tells the optimizer to use the sort-merge join algorithm for the given table(s). Generally, this algorithm consumes less memory but takes longer processing time. If there is a very large data volume or insufficient system memory, it is recommended to use this hint. For example:
@@ -96,6 +128,14 @@ select /*+ MERGE_JOIN(t1, t2) */ * from t1, t2 where t1.id = t2.id;
 > **Note:**
 >
 > `TIDB_SMJ` is the alias for `MERGE_JOIN` in TiDB 3.0.x and earlier versions. If you are using any of these versions, you must apply the `TIDB_SMJ(t1_name [, tl_name ...])` syntax for the hint. For the later versions of TiDB, `TIDB_SMJ` and `MERGE_JOIN` are both valid names for the hint, but `MERGE_JOIN` is recommended.
+
+### NO_MERGE_JOIN(t1_name [, tl_name ...])
+
+The `NO_MERGE_JOIN(t1_name [, tl_name ...])` hint tells the optimizer not to use the sort-merge join algorithm for the given table(s). For example:
+
+```sql
+SELECT /*+ NO_MERGE_JOIN(t1, t2) */ * FROM t1, t2 WHERE t1.id = t2.id;
+```
 
 ### INL_JOIN(t1_name [, tl_name ...])
 
@@ -113,9 +153,29 @@ The parameter(s) given in `INL_JOIN()` is the candidate table for the inner tabl
 >
 > `TIDB_INLJ` is the alias for `INL_JOIN` in TiDB 3.0.x and earlier versions. If you are using any of these versions, you must apply the `TIDB_INLJ(t1_name [, tl_name ...])` syntax for the hint. For the later versions of TiDB, `TIDB_INLJ` and `INL_JOIN` are both valid names for the hint, but `INL_JOIN` is recommended.
 
+### NO_INDEX_JOIN(t1_name [, tl_name ...])
+
+The `NO_INDEX_JOIN(t1_name [, tl_name ...])` hint tells the optimizer not to use the index nested loop join algorithm for the given table(s). For example:
+
+```sql
+SELECT /*+ NO_INDEX_JOIN(t1, t2) */ * FROM t1, t2 WHERE t1.id = t2.id;
+```
+
 ### INL_HASH_JOIN
 
 The `INL_HASH_JOIN(t1_name [, tl_name])` hint tells the optimizer to use the index nested loop hash join algorithm. The conditions for using this algorithm are the same with the conditions for using the index nested loop join algorithm. The difference between the two algorithms is that `INL_JOIN` creates a hash table on the joined inner table, but `INL_HASH_JOIN` creates a hash table on the joined outer table. `INL_HASH_JOIN` has a fixed limit on memory usage, while the memory used by `INL_JOIN` depends on the number of rows matched in the inner table.
+
+### NO_INDEX_HASH_JOIN(t1_name [, tl_name ...])
+
+The `NO_INDEX_HASH_JOIN(t1_name [, tl_name ...])` hint tells the optimizer not to use the index nested loop hash join algorithm for the given table(s).
+
+### INL_MERGE_JOIN
+
+The `INL_MERGE_JOIN(t1_name [, tl_name])` hint tells the optimizer to use the index nested loop merge join algorithm. The conditions for using this algorithm are the same with the conditions for using the index nested loop join algorithm.
+
+### NO_INDEX_MERGE_JOIN(t1_name [, tl_name ...])
+
+The `NO_INDEX_MERGE_JOIN(t1_name [, tl_name ...])` hint tells the optimizer not to use the index nested loop merge join algorithm for the given table(s).
 
 ### HASH_JOIN(t1_name [, tl_name ...])
 
@@ -130,6 +190,14 @@ select /*+ HASH_JOIN(t1, t2) */ * from t1, t2 where t1.id = t2.id;
 > **Note:**
 >
 > `TIDB_HJ` is the alias for `HASH_JOIN` in TiDB 3.0.x and earlier versions. If you are using any of these versions, you must apply the `TIDB_HJ(t1_name [, tl_name ...])` syntax for the hint. For the later versions of TiDB, `TIDB_HJ` and `HASH_JOIN` are both valid names for the hint, but `HASH_JOIN` is recommended.
+
+### NO_HASH_JOIN(t1_name [, tl_name ...])
+
+The `NO_HASH_JOIN(t1_name [, tl_name ...])` hint tells the optimizer not to use the hash join algorithm for the given table(s). For example:
+
+```sql
+SELECT /*+ NO_HASH_JOIN(t1, t2) */ * FROM t1, t2 WHERE t1.id = t2.id;
+```
 
 ### HASH_JOIN_BUILD(t1_name [, tl_name ...])
 
@@ -938,4 +1006,28 @@ EXPLAIN SELECT /*+ leading(t1, t3), inl_join(t3) */ * FROM t1, t2, t3 WHERE t1.i
 |       └─TableRangeScan_24       | 10000.00 | cop[tikv] | table:t3      | range: decided by [test.t1.id], keep order:false, stats:pseudo                                                      |
 +---------------------------------+----------+-----------+---------------+---------------------------------------------------------------------------------------------------------------------+
 9 rows in set (0.01 sec)
+```
+
+### Using hints causes the `Can't find a proper physical plan for this query` error
+
+The `Can't find a proper physical plan for this query` error might occur in the following scenarios:
+
+- A query itself does not require reading indexes in order. That is, for this query, the optimizer does not generate a plan to read indexes in order in any case without using hints. In this case, if the `ORDER_INDEX` hint is specified, this error occurs. To resolve this issue, remove the corresponding `ORDER_INDEX` hint.
+- A query excludes all possible join methods by using the `NO_JOIN` related hints.
+
+```sql
+CREATE TABLE t1 (a INT);
+CREATE TABLE t2 (a INT);
+EXPLAIN SELECT /*+ NO_HASH_JOIN(t1), NO_MERGE_JOIN(t1) */ * FROM t1, t2 WHERE t1.a=t2.a;
+ERROR 1815 (HY000): Internal : Can't find a proper physical plan for this query
+```
+
+- The system variable [`tidb_opt_enable_hash_join`](/system-variables.md#tidb_opt_enable_hash_join-new-in-v740) is set to `OFF`, and all other join types are also excluded.
+
+```sql
+CREATE TABLE t1 (a INT);
+CREATE TABLE t2 (a INT);
+set tidb_opt_enable_hash_join=off;
+EXPLAIN SELECT /*+ NO_MERGE_JOIN(t1) */ * FROM t1, t2 WHERE t1.a=t2.a;
+ERROR 1815 (HY000): Internal : Can't find a proper physical plan for this query
 ```

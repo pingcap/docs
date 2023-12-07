@@ -136,9 +136,9 @@ To address this problem, delete the current task using `br log stop`, and then c
 
 You can use [`filter.rules`](https://github.com/pingcap/tiflow/blob/7c3c2336f98153326912f3cf6ea2fbb7bcc4a20c/cmd/changefeed.toml#L16) to configure the block list for TiCDC and use [`syncer.ignore-table`](/tidb-binlog/tidb-binlog-configuration-file.md#ignore-table) to configure the block list for Drainer.
 
-### Why is `new_collations_enabled_on_first_bootstrap` mismatch reported during restore?
+### Why is `new_collation_enabled` mismatch reported during restore?
 
-Since TiDB v6.0.0, the default value of [`new_collations_enabled_on_first_bootstrap`](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap) has changed from `false` to `true`. BR backs up the `new_collations_enabled_on_first_bootstrap` configuration of the upstream cluster and then checks whether the value of this configuration is consistent between the upstream and downstream clusters. If the value is consistent, BR safely restores the data backed up in the upstream cluster to the downstream cluster. If the value is inconsistent, BR does not perform the data restore and reports an error.
+Since TiDB v6.0.0, the default value of [`new_collations_enabled_on_first_bootstrap`](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap) has changed from `false` to `true`. BR backs up the `new_collation_enabled` configuration in the `mysql.tidb` table of the upstream cluster and then checks whether the value of this configuration is consistent between the upstream and downstream clusters. If the value is consistent, BR safely restores the data backed up in the upstream cluster to the downstream cluster. If the value is inconsistent, BR does not perform the data restore and reports an error.
 
 Suppose that you have backed up the data in a TiDB cluster of an earlier version of v6.0.0, and you want to restore this data to a TiDB cluster of v6.0.0 or later versions. In this situation, you need to manually check whether the value of `new_collations_enabled_on_first_bootstrap` is consistent between the upstream and downstream clusters:
 
@@ -292,7 +292,7 @@ br restore full -f 'mysql.usertable' -s $external_storage_url --with-sys-table
 
 Note that even if you configures [table filter](/table-filter.md#syntax), **BR does not restore the following system tables**:
 
-- Statistics tables (`mysql.stat_*`)
+- Statistics tables (`mysql.stat_*`). But statistics can be restored. See [Back up statistics](/br/br-snapshot-manual.md#back-up-statistics).
 - System variable tables (`mysql.tidb`, `mysql.global_variables`)
 - [Other system tables](https://github.com/pingcap/tidb/blob/master/br/pkg/restore/systable_restore.go#L31)
 

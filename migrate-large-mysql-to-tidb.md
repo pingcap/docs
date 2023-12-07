@@ -1,9 +1,9 @@
 ---
-title: Migrate MySQL of Large Datasets to TiDB
-summary: Learn how to migrate MySQL of large datasets to TiDB.
+title: Migrate Large Datasets from MySQL to TiDB
+summary: Learn how to migrate large datasets from MySQL to TiDB.
 ---
 
-# Migrate MySQL of Large Datasets to TiDB
+# Migrate Large Datasets from MySQL to TiDB
 
 When the data volume to be migrated is small, you can easily [use DM to migrate data](/migrate-small-mysql-to-tidb.md), both for full migration and incremental replication. However, because DM imports data at a slow speed (30~50 GiB/h), when the data volume is large, the migration might take a long time. "Large datasets" in this document usually mean data around one TiB or more.
 
@@ -29,16 +29,35 @@ This document describes how to perform the full migration using Dumpling and TiD
 - During the import, TiDB Lightning needs temporary space to store the sorted key-value pairs. The disk space should be enough to hold the largest single table from the data source.
 - If the full data volume is large, you can increase the binlog storage time in the upstream. This is to ensure that the binlogs are not lost during the incremental replication.
 
-**Note**: It is difficult to calculate the exact data volume exported by Dumpling from MySQL, but you can estimate the data volume by using the following SQL statement to summarize the `data-length` field in the `information_schema.tables` table:
-
-{{< copyable "" >}}
+**Note**: It is difficult to calculate the exact data volume exported by Dumpling from MySQL, but you can estimate the data volume by using the following SQL statement to summarize the `DATA_LENGTH` field in the `information_schema.tables` table:
 
 ```sql
-/* Calculate the size of all schemas, in MiB. Replace ${schema_name} with your schema name. */
-SELECT table_schema,SUM(data_length)/1024/1024 AS data_length,SUM(index_length)/1024/1024 AS index_length,SUM(data_length+index_length)/1024/1024 AS SUM FROM information_schema.tables WHERE table_schema = "${schema_name}" GROUP BY table_schema;
+-- Calculate the size of all schemas
+SELECT
+  TABLE_SCHEMA,
+  FORMAT_BYTES(SUM(DATA_LENGTH)) AS 'Data Size',
+  FORMAT_BYTES(SUM(INDEX_LENGTH)) 'Index Size'
+FROM
+  information_schema.tables
+GROUP BY
+  TABLE_SCHEMA;
 
-/* Calculate the size of the largest table, in MiB. Replace ${schema_name} with your schema name. */
-SELECT table_name,table_schema,SUM(data_length)/1024/1024 AS data_length,SUM(index_length)/1024/1024 AS index_length,SUM(data_length+index_length)/1024/1024 AS SUM from information_schema.tables WHERE table_schema = "${schema_name}" GROUP BY table_name,table_schema ORDER BY SUM DESC LIMIT 5;
+-- Calculate the 5 largest tables
+SELECT 
+  TABLE_NAME,
+  TABLE_SCHEMA,
+  FORMAT_BYTES(SUM(data_length)) AS 'Data Size',
+  FORMAT_BYTES(SUM(index_length)) AS 'Index Size',
+  FORMAT_BYTES(SUM(data_length+index_length)) AS 'Total Size'
+FROM
+  information_schema.tables
+GROUP BY
+  TABLE_NAME,
+  TABLE_SCHEMA
+ORDER BY
+  SUM(DATA_LENGTH+INDEX_LENGTH) DESC
+LIMIT
+  5;
 ```
 
 ### Disk space for the target TiKV cluster
@@ -69,7 +88,7 @@ The target TiKV cluster must have enough disk space to store the imported data. 
     |`-P` or `--port`       |MySQL port|
     |`-h` or `--host`       |MySQL IP address|
     |`-t` or `--thread`     |The number of threads used for export|
-    |`-o` or `--output`     |The directory that stores the exported file. Supports a local path or an [external storage URI](/br/backup-and-restore-storages.md#uri-format)|
+    |`-o` or `--output`     |The directory that stores the exported file. Supports a local path or an [external storage URI](/external-storage-uri.md)|
     |`-r` or `--row`        |The maximum number of rows in a single file|
     |`-F`                   |The maximum size of a single file, in MiB. Recommended value: 256 MiB.|
     |-`B` or `--database`   |Specifies a database to be exported|

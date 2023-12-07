@@ -129,14 +129,11 @@ Leader/Follower/Learner each corresponds to a role in a Raft group of [peers](#r
 The Lock View feature is used to provide more information about lock conflicts and lock waits in pessimistic locking, making it convenient for DBAs to observe transaction locking situations and troubleshoot deadlock issues.
 
 For details, see system table documentation: [`TIDB_TRX`](/information-schema/information-schema-tidb-trx.md), [`DATA_LOCK_WAITS`](/information-schema/information-schema-data-lock-waits.md), and [`DEADLOCKS`](/information-schema/information-schema-deadlocks.md).
-
 ## M
 
 ### MPP
 
-MPP is the computing architecture introduced in TiDB v5.0, which involves cross-node data exchange (data shuffle process) during computation. It enables large table join queries to be completed jointly by different TiFlash nodes, thereby accelerating the computation process and improving query performance.
-
-For details, see [Use TiFlash MPP Mode](/tiflash/use-tiflash-mpp-mode.md).
+Starting from v5.0, TiDB introduces Massively Parallel Processing (MPP) architecture through TiFlash nodes, which shares the execution workloads of large join queries among TiFlash nodes. When the MPP mode is enabled, TiDB, based on cost, determines whether to use the MPP framework to perform the calculation. In the MPP mode, the join keys are redistributed through the Exchange operation while being calculated, which distributes the calculation pressure to each TiFlash node and speeds up the calculation. For more information, see [Use TiFlash MPP Mode](/tiflash/use-tiflash-mpp-mode.md).
 
 ### Multi-version concurrency control (MVCC)
 

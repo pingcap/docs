@@ -516,7 +516,11 @@ Configuration items related to the sharing of block cache among multiple RocksDB
 ### `capacity`
 
 + The size of the shared block cache.
-+ Default value: 45% of the size of total system memory
++ Default value:
+
+    + When `storage.engine="raft-kv"`, the default value is 45% of the size of total system memory.
+    + When `storage.engine="partitioned-raft-kv"`, the default value is 30% of the size of total system memory.
+
 + Unit: KB|MB|GB
 
 ## storage.flow-control
@@ -781,13 +785,13 @@ Configuration items related to Raftstore.
 
 ### `region-compact-min-redundant-rows` <span class="version-mark">New in v7.1.0</span>
 
-+ The number of redundant MVCC rows required to trigger RocksDB compaction. This configuration only takes effect for Partitioned Raft KV (`storage.engine="partitioned-raft-kv"`).
++ The number of redundant MVCC rows required to trigger RocksDB compaction.
 + Default value: `50000`
 + Minimum value: `0`
 
 ### `region-compact-redundant-rows-percent` <span class="version-mark">New in v7.1.0</span>
 
-+ The percentage of redundant MVCC rows required to trigger RocksDB compaction. This configuration only takes effect for Partitioned Raft KV (`storage.engine="partitioned-raft-kv"`).
++ The percentage of redundant MVCC rows required to trigger RocksDB compaction.
 + Default value: `20`
 + Minimum value: `1`
 + Maximum value: `100`
@@ -1020,6 +1024,13 @@ Configuration items related to Raftstore.
 + Minimum value: `0`
 + Unit: second
 
+### `evict-cache-on-memory-ratio` <span class="version-mark">New in v7.5.0</span>
+
++ When the memory usage of TiKV exceeds 90% of the system available memory, and the memory occupied by Raft entry cache exceeds the used memory * `evict-cache-on-memory-ratio`, TiKV evicts the Raft entry cache.
++ If this value is set to `0`, it means that this feature is disabled.
++ Default value: `0.1`
++ Minimum value: `0`
+
 ## coprocessor
 
 Configuration items related to Coprocessor.
@@ -1085,7 +1096,7 @@ Configuration items related to Coprocessor.
 ### `region-bucket-size` <span class="version-mark">New in v6.1.0</span>
 
 + The size of a bucket when `enable-region-bucket` is true.
-+ Default value: `96MiB`
++ Default value: Starting from v7.3.0, the default value is changed from `96MiB` to `50MiB`.
 
 > **Warning:**
 >
@@ -1169,12 +1180,18 @@ Configuration items related to RocksDB
 ### `max-total-wal-size`
 
 + The maximum RocksDB WAL size in total, which is the size of `*.log` files in the `data-dir`.
-+ Default value: `"4GB"`
++ Default value:
+
+    + When `storage.engine="raft-kv"`, the default value is `"4GB"`.
+    + When `storage.engine="partitioned-raft-kv"`, the default value is `1`.
 
 ### `stats-dump-period`
 
 + The interval at which statistics are output to the log.
-+ Default value: `10m`
++ Default value:
+
+    + When `storage.engine="raft-kv"`, the default value is `"10m"`.
+    + When `storage.engine="partitioned-raft-kv"`, the default value is `"0"`.
 
 ### `compaction-readahead-size`
 
@@ -1284,8 +1301,12 @@ Configuration items related to RocksDB
 >
 > This feature is experimental. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
 
-+ Specifies the total memory limit of `memtable` for all RocksDB instances in a single TiKV. The default value is 25% of the memory of the machine. It is recommended to configure a memory of at least 5 GiB. This configuration only takes effect for Partitioned Raft KV (`storage.engine`=`"partitioned-raft-kv"`).
-+ Default value: 25%
++ Specifies the total memory limit of `memtable` for all RocksDB instances in a single TiKV. `0` means no limit.
++ Default value:
+
+    + When `storage.engine="raft-kv"`, the default value is `0`, which means no limit.
+    + When `storage.engine="partitioned-raft-kv"`, the default value is 20% of the size of total system memory.
+
 + Unit: KiB|MiB|GiB
 
 ## rocksdb.titan
@@ -1418,7 +1439,9 @@ Configuration items related to `rocksdb.defaultcf`, `rocksdb.writecf`, and `rock
 
 + Memtable size
 + Default value for `defaultcf` and `writecf`: `"128MB"`
-+ Default value for `lockcf`: `"32MB"`
++ Default value for `lockcf`:
+    + When `storage.engine="raft-kv"`, the default value is `"32MB"`.
+    + When `storage.engine="partitioned-raft-kv"`, the default value is `"4MB"`.
 + Minimum value: `0`
 + Unit: KB|MB|GB
 
@@ -1534,7 +1557,7 @@ Configuration items related to `rocksdb.defaultcf`, `rocksdb.writecf`, and `rock
 ### `compaction-guard-min-output-file-size`
 
 + The minimum SST file size when the compaction guard is enabled. This configuration prevents SST files from being too small when the compaction guard is enabled.
-+ Default value: Starting from v7.2.0, the default value is changed from `"8MB"` to `"1MB"`
++ Default value: `"8MB"`
 + Unit: KB|MB|GB
 
 ### `compaction-guard-max-output-file-size`
@@ -1553,18 +1576,21 @@ Configuration items related to `rocksdb.defaultcf`, `rocksdb.writecf`, and `rock
     - `3`: Can be read by TiKV v2.1 and later versions. Changes the encoding of the keys in index blocks.
     - `4`: Can be read by TiKV v3.0 and later versions. Changes the encoding of the values in index blocks.
     - `5`: Can be read by TiKV v6.1 and later versions. Full and partitioned filters use a faster and more accurate Bloom filter implementation with a different schema.
-+ Default value: `2`
++ Default value:
+
+    + When `storage.engine="raft-kv"`, the default value is `2`.
+    + When `storage.engine="partitioned-raft-kv"`, the default value is `5`.
 
 ### `ttl` <span class="version-mark">New in v7.2.0</span>
 
 + SST files with updates older than the TTL will be automatically selected for compaction. These SST files will go through the compaction in a cascading way so that they can be compacted to the bottommost level or file.
-+ Default value: `"30d"`
++ Default value: `"0s"`, meaning that no SST file is selected by default.
 + Unit: s(second)|h(hour)|d(day)
 
 ### `periodic-compaction-seconds` <span class="version-mark">New in v7.2.0</span>
 
 + The time interval for periodic compaction. SST files with updates older than this value will be selected for compaction and rewritten to the same level where these SST files originally reside.
-+ Default value: `"30d"`
++ Default value: `"0s"`, meaning that periodic compaction is disabled by default.
 + Unit: s(second)|h(hour)|d(day)
 
 ## rocksdb.defaultcf.titan
@@ -1583,6 +1609,10 @@ Configuration items related to `rocksdb.defaultcf.titan`.
 + The compression algorithm used in a Blob file
 + Optional values: `"no"`, `"snappy"`, `"zlib"`, `"bzip2"`, `"lz4"`, `"lz4hc"`, `"zstd"`
 + Default value: `"lz4"`
+
+> **Note:**
+>
+> The Snappy compressed file must be in the [official Snappy format](https://github.com/google/snappy). Other variants of Snappy compression are not supported.
 
 ### `blob-cache-size`
 
@@ -1704,6 +1734,8 @@ Configuration items related to `raftdb`
 
 + The maximum RocksDB WAL size in total
 + Default value: `"4GB"`
+    + When `storage.engine="raft-kv"`, the default value is `"4GB"`.
+    + When `storage.engine="partitioned-raft-kv"`, the default value is `1`.
 
 ### `compaction-readahead-size`
 
@@ -1858,7 +1890,9 @@ Configuration items related to Raft Engine.
 + Value Options:
     + `1`: Default log file version for TiKV earlier than v6.3.0. Can be read by TiKV >= v6.1.0.
     + `2`: Supports log recycling. Can be read by TiKV >= v6.3.0.
-+ Default value: `2`
++ Default value:
+    + When `storage.engine="raft-kv"`, the default value is `2`.
+    + When `storage.engine="partitioned-raft-kv"`, the default value is `5`.
 
 ### `enable-log-recycle` <span class="version-mark">New in v6.3.0</span>
 
@@ -2306,3 +2340,15 @@ Configuration items related to [Load Base Split](/configure-load-base-split.md).
 
     + `0.25` when [`region-split-size`](#region-split-size) is less than 4 GB.
     + `0.75` when  [`region-split-size`](#region-split-size) is greater than or equal to 4 GB.
+
+## memory <span class="version-mark">New in v7.5.0</span>
+
+### `enable-heap-profiling` <span class="version-mark">New in v7.5.0</span>
+
++ Controls whether to enable Heap Profiling to track the memory usage of TiKV.
++ Default value: `true`
+
+### `profiling-sample-per-bytes` <span class="version-mark">New in v7.5.0</span>
+
++ Specifies the amount of data sampled by Heap Profiling each time, rounding up to the nearest power of 2.
++ Default value: `512KB`

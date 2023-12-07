@@ -5,11 +5,17 @@ summary: Learn about the physical import mode in TiDB Lightning.
 
 # Physical Import Mode
 
-Physical import mode is an efficient and fast import mode that inserts data directly into TiKV nodes as key-value pairs without going through the SQL interface. When using the physical import mode, a single instance of Lightning can import up to 10 TiB of data. The supported amount of imported data theoretically increases as the number of Lightning instances increases. It is verified by users that [parallel importing](/tidb-lightning/tidb-lightning-distributed-import.md) based on Lightning can effectively handle up to 20 TiB of data.
+Physical import mode is an efficient and fast import mode that inserts data directly into TiKV nodes as key-value pairs without going through the SQL interface. When using the physical import mode, a single instance of Lightning can import up to 10 TiB of data. The supported amount of imported data theoretically increases as the number of Lightning instances increases. It is verified by users that [parallel importing](/tidb-lightning/tidb-lightning-distributed-import.md) based on Lightning can effectively handle up to 50 TiB of data.
 
 Before you use the physical import mode, make sure to read [Requirements and restrictions](#requirements-and-restrictions).
 
-The backend for the physical import mode is `local`.
+The backend for the physical import mode is `local`. You can modify it in `tidb-lightning.toml`:
+
+ ```toml
+ [tikv-importer]
+ # Set the import mode to "local" to use the physical import mode.
+ backend = "local"
+ ```
 
 ## Implementation
 
@@ -63,11 +69,11 @@ It is recommended that you allocate CPU more than 32 cores and memory greater th
 
 - TiDB Lightning >= v4.0.3.
 - TiDB >= v4.0.0.
-- If the target TiDB cluster is v3.x or earlier, you need to use Importer-backend to complete the data import. In this mode, `tidb-lightning` needs to send the parsed key-value pairs to `tikv-importer` via gRPC, and `tikv-importer` will complete the data import.
 
 ### Limitations
 
 - Do not use the physical import mode to directly import data to TiDB clusters in production. It has severe performance implications. If you need to do so, refer to [Pause scheduling on the table level](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#scope-of-pausing-scheduling-during-import).
+- If your TiDB cluster has a latency-sensitive application and a low concurrency, it is strongly recommended that you **do not** use the physical import mode to import data into the cluster. This mode might have significant impact on the online application.
 - Do not use multiple TiDB Lightning instances to import data to the same TiDB cluster by default. Use [Parallel Import](/tidb-lightning/tidb-lightning-distributed-import.md) instead.
 - When you use multiple TiDB Lightning to import data to the same target cluster, do not mix the import modes. That is, do not use the physical import mode and the logical import mode at the same time.
 - During the process of importing data, do not perform DDL and DML operations in the target table. Otherwise the import will fail or the data will be inconsistent. At the same time, it is not recommended to perform read operations, because the data you read might be inconsistent. You can perform read and write operations after the import operation is completed.

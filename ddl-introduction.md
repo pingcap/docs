@@ -101,7 +101,7 @@ Before TiDB v6.2.0, the DDL execution framework had the following limitations:
 - The DDL Owner always processes DDL jobs in a first-in-first-out way.
 - The DDL Owner can only execute one DDL task of the same type (either logical or physical) at a time, which is relatively strict, and affects the user experience.
 
-These limitations might lead to some "unintended" DDL blocking behavior. For more details, see [SQL FAQ - DDL Execution](/faq/sql-faq.md#ddl-execution).
+These limitations might lead to some "unintended" DDL blocking behavior. For more details, see [SQL FAQ - DDL Execution](https://docs.pingcap.com/tidb/stable/sql-faq#ddl-execution).
 
 </div>
 <div label="Parallel DDL framework starting from v6.2.0">
@@ -178,14 +178,14 @@ When TiDB is adding an index, the phase of backfilling data will cause read and 
 
     If a completed DDL task is canceled, you can see the `DDL Job:90 not found` error in the `RESULT` column, which means that the task has been removed from the DDL waiting queue.
 
-- `ADMIN PAUSE DDL JOBS job_id [, job_id]`: Used to pause the DDL jobs that are being executed. After the command is executed, the SQL statement that executes the DDL job is displayed as being executed, while the background job has been paused. For details, refer to [`ADMIN PAUSE DDL JOBS`](/sql-statements/sql-statement-admin-pause-ddl.md). (Experimental feature)
+- `ADMIN PAUSE DDL JOBS job_id [, job_id]`: Used to pause the DDL jobs that are being executed. After the command is executed, the SQL statement that executes the DDL job is displayed as being executed, while the background job has been paused. For details, refer to [`ADMIN PAUSE DDL JOBS`](/sql-statements/sql-statement-admin-pause-ddl.md).
 
     You can only pause DDL tasks that are in progress or still in the queue. Otherwise, the `Job 3 can't be paused now` error is shown in the `RESULT` column.
 
-- `ADMIN RESUME DDL JOBS job_id [, job_id]`: Used to resume the DDL tasks that have been paused. After the command is executed, the SQL statement that executes the DDL task is displayed as being executed, and the background task is resumed. For details, refer to [`ADMIN RESUME DDL JOBS`](/sql-statements/sql-statement-admin-resume-ddl.md). (Experimental feature)
+- `ADMIN RESUME DDL JOBS job_id [, job_id]`: Used to resume the DDL tasks that have been paused. After the command is executed, the SQL statement that executes the DDL task is displayed as being executed, and the background task is resumed. For details, refer to [`ADMIN RESUME DDL JOBS`](/sql-statements/sql-statement-admin-resume-ddl.md).
 
     You can only resume a paused DDL task. Otherwise, the `Job 3 can't be resumed` error is shown in the `RESULT` column.
 
 ## Common questions
 
-For common questions about DDL execution, see [SQL FAQ - DDL execution](/faq/sql-faq.md#ddl-execution).
+For common questions about DDL execution, see [SQL FAQ - DDL execution](https://docs.pingcap.com/tidb/stable/sql-faq).

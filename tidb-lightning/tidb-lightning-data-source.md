@@ -24,9 +24,79 @@ When TiDB Lightning is running, it looks for all files that match the pattern of
 | Schema file | Contains the `CREATE DATABASE` DDL statement| `${db_name}-schema-create.sql` |
 | Data file | If the data file contains data for a whole table, the file is imported into a table named `${db_name}.${table_name}` | <code>\${db_name}.\${table_name}.\${csv\|sql\|parquet}</code> |
 | Data file | If the data for a table is split into multiple data files, each data file must be suffixed with a number in its filename | <code>\${db_name}.\${table_name}.001.\${csv\|sql\|parquet}</code> |
-| Compressed file | If the file contains a compression suffix, such as `gzip`, `snappy`, or `zstd`, TiDB Lightning will decompress the file before importing it. | <code>\${db_name}.\${table_name}.\${csv\|sql\|parquet}.{compress}</code> |
+| Compressed file | If the file contains a compression suffix, such as `gzip`, `snappy`, or `zstd`, TiDB Lightning will decompress the file before importing it. Note that the Snappy compressed file must be in the [official Snappy format](https://github.com/google/snappy). Other variants of Snappy compression are not supported. | <code>\${db_name}.\${table_name}.\${csv\|sql\|parquet}.{compress}</code> |
 
 TiDB Lightning processes data in parallel as much as possible. Because files must be read in sequence, the data processing concurrency is at the file level (controlled by `region-concurrency`). Therefore, when the imported file is large, the import performance is poor. It is recommended to limit the size of the imported file to no greater than 256 MiB to achieve the best performance.
+
+## Rename databases and tables
+
+TiDB Lightning follows filename patterns to import data to the corresponding database and table. If the database or table names change, you can either rename the files and then import them, or use regular expressions to replace the names online.
+
+### Rename files in batch
+
+If you are using Red Hat Linux or a distribution based on Red Hat Linux, you can use the `rename` command to batch rename files in the `data-source-dir` directory. 
+
+For example:
+
+```shell
+rename srcdb. tgtdb. *.sql
+```
+
+After you modify the database name, it is recommended that you delete the `${db_name}-schema-create.sql` file that contains the `CREATE DATABASE` DDL statement from the `data-source-dir` directory. If you want to modify the table name as well, you also need to modify the table name in the `${db_name}.${table_name}-schema.sql` file that contains the `CREATE TABLE` DDL statement.
+
+### Use regular expressions to replace names online
+
+To use regular expressions to replace names online, you can use the `pattern` configuration within `[[mydumper.files]]` to match filenames, and replace `schema` and `table` with your desired names. For more information, see [Match customized files](#match-customized-files).
+
+The following is an example of using regular expressions to replace names online. In this example:
+
+- The match rule for the data file `pattern` is `^({schema_regrex})\.({table_regrex})\.({file_serial_regrex})\.(csv|parquet|sql)`.
+- Specify `schema` as `'$1'`, which means that the value of the first regular expression `schema_regrex` remains unchanged. Or specify `schema` as a string, such as `'tgtdb'`, which means a fixed target database name.
+- Specify `table` as `'$2'`, which means that the value of the second regular expression `table_regrex` remains unchanged. Or specify `table` as a string, such as `'t1'`, which means a fixed target table name.
+- Specify `type` as `'$3'`, which means the data file type. You can specify `type` as either `"table-schema"` (representing the `schema.sql` file) or `"schema-schema"` (representing the `schema-create.sql` file).
+
+```toml
+[mydumper]
+data-source-dir = "/some-subdir/some-database/"
+[[mydumper.files]]
+pattern = '^(srcdb)\.(.*?)-schema-create\.sql'
+schema = 'tgtdb'
+type = "schema-schema"
+[[mydumper.files]]
+pattern = '^(srcdb)\.(.*?)-schema\.sql'
+schema = 'tgtdb'
+table = '$2'
+type = "table-schema"
+[[mydumper.files]]
+pattern = '^(srcdb)\.(.*?)\.(?:[0-9]+)\.(csv|parquet|sql)'
+schema = 'tgtdb'
+table = '$2'
+type = '$3'
+```
+
+If you are using `gzip` to back up data files, you need to configure the compression format accordingly. The matching rule of the data file `pattern` is `'^({schema_regrex})\.({table_regrex})\.({file_serial_regrex})\.(csv|parquet|sql)\.(gz)'`. You can specify `compression` as `'$4'` to represent the compressed file format. For example:
+
+```toml
+[mydumper]
+data-source-dir = "/some-subdir/some-database/"
+[[mydumper.files]]
+pattern = '^(srcdb)\.(.*?)-schema-create\.(sql)\.(gz)'
+schema = 'tgtdb'
+type = "schema-schema"
+compression = '$4'
+[[mydumper.files]]
+pattern = '^(srcdb)\.(.*?)-schema\.(sql)\.(gz)'
+schema = 'tgtdb'
+table = '$2'
+type = "table-schema"
+compression = '$4'
+[[mydumper.files]]
+pattern = '^(srcdb)\.(.*?)\.(?:[0-9]+)\.(sql)\.(gz)'
+schema = 'tgtdb'
+table = '$2'
+type = '$3'
+compression = '$4'
+```
 
 ## CSV
 
@@ -277,7 +347,7 @@ TiDB Lightning currently only supports Parquet files generated by Amazon Aurora 
 ```
 [[mydumper.files]]
 # The expression needed for parsing Amazon Aurora parquet files
-pattern = '(?i)^(?:[^/]*/)*([a-z0-9_]+)\.([a-z0-9_]+)/(?:[^/]*/)*(?:[a-z0-9\-_.]+\.(parquet))$'
+pattern = '(?i)^(?:[^/]*/)*([a-z0-9\-_]+).([a-z0-9\-_]+)/(?:[^/]*/)*(?:[a-z0-9\-_.]+\.(parquet))$'
 schema = '$1'
 table = '$2'
 type = '$3'
@@ -296,7 +366,8 @@ TiDB Lightning currently supports compressed files exported by Dumpling or compr
 > - Because TiDB Lightning cannot concurrently decompress a single large compressed file, the size of the compressed file affects the import speed. It is recommended that a source file is no greater than 256 MiB after decompression.
 > - TiDB Lightning only imports individually compressed data files and does not support importing a single compressed file with multiple data files included.
 > - TiDB Lightning does not support `parquet` files compressed through another compression tool, such as `db.table.parquet.snappy`. If you want to compress `parquet` files, you can configure the compression format for the `parquet` file writer.
-> - TiDB Lightning v6.4.0 and later versions only support `.bak` files and the following compressed data files: `gzip`, `snappy`, and `zstd`. Other types of files cause errors. For those unsupported files, you need to modify the file names in advance, or move those files out of the import data directory to avoid such errors.
+> - TiDB Lightning v6.4.0 and later versions only support the following compressed data files: `gzip`, `snappy`, and `zstd`. Other types of files cause errors. If an unsupported compressed file exists in the directory where the source data file is stored, this will cause the task to report an error. You can move those unsupported files out of the import data directory to avoid such errors.
+> - The Snappy compressed file must be in the [official Snappy format](https://github.com/google/snappy). Other variants of Snappy compression are not supported.
 
 ## Match customized files
 
@@ -308,14 +379,14 @@ Take the Aurora snapshot exported to S3 as an example. The complete path of the 
 
 Usually, `data-source-dir` is set to `S3://some-bucket/some-subdir/some-database/` to import the `some-database` database.
 
-Based on the preceding Parquet file path, you can write a regular expression like `(?i)^(?:[^/]*/)*([a-z0-9_]+)\.([a-z0-9_]+)/(?:[^/]*/)*(?:[a-z0-9\-_.]+\.(parquet))$` to match the files. In the match group, `index=1` is `some-database`, `index=2` is `some-table`, and `index=3` is `parquet`.
+Based on the preceding Parquet file path, you can write a regular expression like `(?i)^(?:[^/]*/)*([a-z0-9\-_]+).([a-z0-9\-_]+)/(?:[^/]*/)*(?:[a-z0-9\-_.]+\.(parquet))$` to match the files. In the match group, `index=1` is `some-database`, `index=2` is `some-table`, and `index=3` is `parquet`.
 
 You can write the configuration file according to the regular expression and the corresponding index so that TiDB Lightning can recognize the data files that do not follow the default naming convention. For example:
 
 ```toml
 [[mydumper.files]]
 # The expression needed for parsing the Amazon Aurora parquet file
-pattern = '(?i)^(?:[^/]*/)*([a-z0-9_]+)\.([a-z0-9_]+)/(?:[^/]*/)*(?:[a-z0-9\-_.]+\.(parquet))$'
+pattern = '(?i)^(?:[^/]*/)*([a-z0-9\-_]+).([a-z0-9\-_]+)/(?:[^/]*/)*(?:[a-z0-9\-_.]+\.(parquet))$'
 schema = '$1'
 table = '$2'
 type = '$3'
@@ -334,7 +405,7 @@ type = '$3'
 
 ## Import data from Amazon S3
 
-The following examples show how to import data from Amazon S3 using TiDB Lightning. For more parameter configurations, see [external storage URI](/br/backup-and-restore-storages.md#uri-format).
+The following examples show how to import data from Amazon S3 using TiDB Lightning. For more parameter configurations, see [URI Formats of External Storage Services](/external-storage-uri.md).
 
 + Use the locally configured permissions to access S3 data:
 

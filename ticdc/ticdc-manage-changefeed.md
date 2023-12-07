@@ -19,7 +19,7 @@ cdc cli changefeed create --server=http://10.0.10.25:8300 --sink-uri="mysql://ro
 ```shell
 Create changefeed successfully!
 ID: simple-replication-task
-Info: {"upstream_id":7178706266519722477,"namespace":"default","id":"simple-replication-task","sink_uri":"mysql://root:xxxxx@127.0.0.1:4000/?time-zone=","create_time":"2022-12-19T15:05:46.679218+08:00","start_ts":438156275634929669,"engine":"unified","config":{"case_sensitive":true,"enable_old_value":true,"force_replicate":false,"ignore_ineligible_table":false,"check_gc_safe_point":true,"enable_sync_point":true,"bdr_mode":false,"sync_point_interval":30000000000,"sync_point_retention":3600000000000,"filter":{"rules":["test.*"],"event_filters":null},"mounter":{"worker_num":16},"sink":{"protocol":"","schema_registry":"","csv":{"delimiter":",","quote":"\"","null":"\\N","include_commit_ts":false},"column_selectors":null,"transaction_atomicity":"none","encoder_concurrency":16,"terminator":"\r\n","date_separator":"none","enable_partition_separator":false},"consistent":{"level":"none","max_log_size":64,"flush_interval":2000,"storage":""}},"state":"normal","creator_version":"v6.5.0"}
+Info: {"upstream_id":7178706266519722477,"namespace":"default","id":"simple-replication-task","sink_uri":"mysql://root:xxxxx@127.0.0.1:4000/?time-zone=","create_time":"2023-11-28T15:05:46.679218+08:00","start_ts":438156275634929669,"engine":"unified","config":{"case_sensitive":false,"enable_old_value":true,"force_replicate":false,"ignore_ineligible_table":false,"check_gc_safe_point":true,"enable_sync_point":true,"bdr_mode":false,"sync_point_interval":30000000000,"sync_point_retention":3600000000000,"filter":{"rules":["test.*"],"event_filters":null},"mounter":{"worker_num":16},"sink":{"protocol":"","schema_registry":"","csv":{"delimiter":",","quote":"\"","null":"\\N","include_commit_ts":false},"column_selectors":null,"transaction_atomicity":"none","encoder_concurrency":16,"terminator":"\r\n","date_separator":"none","enable_partition_separator":false},"consistent":{"level":"none","max_log_size":64,"flush_interval":2000,"storage":""}},"state":"normal","creator_version":"v7.5.0"}
 ```
 
 ## Query the replication task list
@@ -90,8 +90,7 @@ cdc cli changefeed query --server=http://10.0.10.25:8300 --changefeed-id=simple-
     "sort-engine": "unified",
     "sort-dir": ".",
     "config": {
-      "case-sensitive": true,
-      "enable-old-value": false,
+      "case-sensitive": false,
       "filter": {
         "rules": [
           "*.*"
@@ -193,7 +192,7 @@ In the preceding command:
 
 ## Update task configuration
 
-Starting from v4.0.4, TiCDC supports modifying the configuration of the replication task (not dynamically). To modify the changefeed configuration, pause the task, modify the configuration, and then resume the task.
+TiCDC supports modifying the configuration of the replication task (not dynamically). To modify the changefeed configuration, pause the task, modify the configuration, and then resume the task.
 
 ```shell
 cdc cli changefeed pause -c test-cf --server=http://10.0.10.25:8300
@@ -205,7 +204,6 @@ Currently, you can modify the following configuration items:
 
 - `sink-uri` of the changefeed.
 - The changefeed configuration file and all configuration items in the file.
-- Whether to use the file sorting feature and the sorting directory.
 - The `target-ts` of the changefeed.
 
 ## Manage processing units of replication sub-tasks (`processor`)
@@ -257,18 +255,6 @@ Currently, you can modify the following configuration items:
     - `resolved-ts`: The largest TSO among the sorted data in the current processor.
     - `checkpoint-ts`: The largest TSO that has been successfully written to the downstream in the current processor.
 
-## Output the historical value of a Row Changed Event
-
-In the default configuration, the Row Changed Event of TiCDC Open Protocol output in a replication task only contains the changed value, not the value before the change. Therefore, the output value cannot be used by the consumer ends of TiCDC Open Protocol as the historical value of a Row Changed Event.
-
-Starting from v4.0.5, TiCDC supports outputting the historical value of a Row Changed Event. To enable this feature, specify the following configuration in the changefeed configuration file at the root level:
-
-```toml
-enable-old-value = true
-```
-
-This feature is enabled by default since v5.0. To learn the output format of the TiCDC Open Protocol after this feature is enabled, see [TiCDC Open Protocol - Row Changed Event](/ticdc/ticdc-open-protocol.md#row-changed-event).
-
 ## Replicate tables with the new framework for collations enabled
 
 Starting from v4.0.15, v5.0.4, v5.1.1 and v5.2.0, TiCDC supports tables that have enabled [new framework for collations](/character-set-and-collation.md#new-framework-for-collations).
@@ -278,13 +264,12 @@ Starting from v4.0.15, v5.0.4, v5.1.1 and v5.2.0, TiCDC supports tables that hav
 Since v4.0.8, TiCDC supports replicating tables that have no valid index by modifying the task configuration. To enable this feature, configure in the changefeed configuration file as follows:
 
 ```toml
-enable-old-value = true
 force-replicate = true
 ```
 
 > **Warning:**
 >
-> For tables without a valid index, operations such as `INSERT` and `REPLACE` are not reentrant, so there is a risk of data redundancy. TiCDC guarantees that data is distributed only at least once during the replication process. Therefore, enabling this feature to replicate tables without a valid index will definitely cause data redundancy. If you do not accept data redundancy, it is recommended to add an effective index, such as adding a primary key column with the `AUTO RANDOM` attribute.
+> When `force-replicate` is set to `true`, data consistency is not guaranteed. For tables without a valid index, operations such as `INSERT` and `REPLACE` are not reentrant, so there is a risk of data redundancy. TiCDC guarantees that data is distributed only at least once during the replication process. Therefore, enabling this feature to replicate tables without a valid index will definitely cause data redundancy. If you do not accept data redundancy, it is recommended to add an effective index, such as adding a primary key column with the `AUTO RANDOM` attribute.
 
 ## Unified Sorter
 

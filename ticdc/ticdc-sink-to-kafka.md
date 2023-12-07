@@ -21,7 +21,7 @@ cdc cli changefeed create \
 ```shell
 Create changefeed successfully!
 ID: simple-replication-task
-Info: {"sink-uri":"kafka://127.0.0.1:9092/topic-name?protocol=canal-json&kafka-version=2.4.0&partition-num=6&max-message-bytes=67108864&replication-factor=1","opts":{},"create-time":"2020-03-12T22:04:08.103600025+08:00","start-ts":415241823337054209,"target-ts":0,"admin-job-type":0,"sort-engine":"unified","sort-dir":".","config":{"case-sensitive":true,"filter":{"rules":["*.*"],"ignore-txn-start-ts":null,"ddl-allow-list":null},"mounter":{"worker-num":16},"sink":{"dispatchers":null},"scheduler":{"type":"table-number","polling-time":-1}},"state":"normal","history":null,"error":null}
+Info: {"sink-uri":"kafka://127.0.0.1:9092/topic-name?protocol=canal-json&kafka-version=2.4.0&partition-num=6&max-message-bytes=67108864&replication-factor=1","opts":{},"create-time":"2023-11-28T22:04:08.103600025+08:00","start-ts":415241823337054209,"target-ts":0,"admin-job-type":0,"sort-engine":"unified","sort-dir":".","config":{"case-sensitive":false,"filter":{"rules":["*.*"],"ignore-txn-start-ts":null,"ddl-allow-list":null},"mounter":{"worker-num":16},"sink":{"dispatchers":null},"scheduler":{"type":"table-number","polling-time":-1}},"state":"normal","history":null,"error":null}
 ```
 
 - `--server`: The address of any TiCDC server in the TiCDC cluster.
@@ -56,9 +56,9 @@ The following are descriptions of sink URI parameters and values that can be con
 | `kafka-client-id`    | Specifies the Kafka client ID of the replication task (optional. `TiCDC_sarama_producer_replication ID` by default). |
 | `partition-num`      | The number of the downstream Kafka partitions (optional. The value must be **no greater than** the actual number of partitions; otherwise, the replication task cannot be created successfully. `3` by default). |
 | `max-message-bytes`  | The maximum size of data that is sent to Kafka broker each time (optional, `10MB` by default). From v5.0.6 and v4.0.6, the default value has changed from `64MB` and `256MB` to `10MB`. |
-| `replication-factor` | The number of Kafka message replicas that can be saved (optional, `1` by default).                       |
+| `replication-factor` | The number of Kafka message replicas that can be saved (optional, `1` by default). This value must be greater than or equal to the value of [`min.insync.replicas`](https://kafka.apache.org/33/documentation.html#brokerconfigs_min.insync.replicas) in Kafka. |
 | `required-acks` | A parameter used in the `Produce` request, which notifies the broker of the number of replica acknowledgements it needs to receive before responding. Value options are `0` (`NoResponse`: no response, only `TCP ACK` is provided), `1` (`WaitForLocal`: responds only after local commits are submitted successfully), and `-1` (`WaitForAll`: responds after all replicated replicas are committed successfully. You can configure the minimum number of replicated replicas using the [`min.insync.replicas`](https://kafka.apache.org/33/documentation.html#brokerconfigs_min.insync.replicas) configuration item of the broker). (Optional, the default value is `-1`).    |
-| `compression` | The compression algorithm used when sending messages (value options are `none`, `lz4`, `gzip`, `snappy`, and `zstd`; `none` by default). |
+| `compression` | The compression algorithm used when sending messages (value options are `none`, `lz4`, `gzip`, `snappy`, and `zstd`; `none` by default). Note that the Snappy compressed file must be in the [official Snappy format](https://github.com/google/snappy). Other variants of Snappy compression are not supported.|
 | `protocol` | The protocol with which messages are output to Kafka. The value options are `canal-json`, `open-protocol`, `canal`, `avro` and `maxwell`.   |
 | `auto-create-topic` | Determines whether TiCDC creates the topic automatically when the `topic-name` passed in does not exist in the Kafka cluster (optional, `true` by default). |
 | `enable-tidb-extension` | Optional. `false` by default. When the output protocol is `canal-json`, if the value is `true`, TiCDC sends [WATERMARK events](/ticdc/ticdc-canal-json.md#watermark-event) and adds the [TiDB extension field](/ticdc/ticdc-canal-json.md#tidb-extension-field) to Kafka messages. From v6.1.0, this parameter is also applicable to the `avro` protocol. If the value is `true`, TiCDC adds [three TiDB extension fields](/ticdc/ticdc-avro-protocol.md#tidb-extension-fields) to the Kafka message. |
@@ -182,10 +182,10 @@ dispatchers = [
 
 You can use topic = "xxx" to specify a Topic dispatcher and use topic expressions to implement flexible topic dispatching policies. It is recommended that the total number of topics be less than 1000.
 
-The format of the Topic expression is `[prefix]{schema}[middle][{table}][suffix]`.
+The format of the Topic expression is `[prefix][{schema}][middle][{table}][suffix]`.
 
 - `prefix`: optional. Indicates the prefix of the Topic Name.
-- `{schema}`: required. Used to match the schema name.
+- `[{schema}]`: optional. Used to match the schema name.
 - `middle`: optional. Indicates the delimiter between schema name and table name.
 - `{table}`: optional. Used to match the table name.
 - `suffix`: optional. Indicates the suffix of the Topic Name.
@@ -200,6 +200,8 @@ Some examples:
 - `matcher = ['test3.*', 'test4.*'], topic = "hello_{schema}_world"`
     - The data change events corresponding to all tables in `test3` are sent to the topic named `hello_test3_world`.
     - The data change events corresponding to all tables in `test4` are sent to the topic named `hello_test4_world`.
+- `matcher = ['test5.*, 'test6.*'], topic = "hard_code_topic_name"`
+    - The data change events corresponding to all tables in `test5` and `test6` are sent to the topic named `hard_code_topic_name`. You can specify the topic name directly.
 - `matcher = ['*.*'], topic = "{schema}_{table}"`
     - All tables listened by TiCDC are dispatched to separate topics according to the "schema_table" rule. For example, for the `test.account` table, TiCDC dispatches its data change log to a Topic named `test_account`.
 
@@ -220,31 +222,77 @@ For example, for a dispatcher like `matcher = ['test.*'], topic = {schema}_{tabl
 
 ### Partition dispatchers
 
-You can use `partition = "xxx"` to specify a partition dispatcher. It supports four dispatchers: default, ts, index-value, and table. The dispatcher rules are as follows:
+You can use `partition = "xxx"` to specify a partition dispatcher. It supports five dispatchers: `default`, `index-value`, `columns`, `table`, and `ts`. The dispatcher rules are as follows:
 
-- default: When multiple unique indexes (including the primary key) exist or the Old Value feature is enabled, events are dispatched in the table mode. When only one unique index (or the primary key) exists, events are dispatched in the index-value mode.
-- ts: Use the commitTs of the row change to hash and dispatch events.
-- index-value: Use the value of the primary key or the unique index of the table to hash and dispatch events.
-- table: Use the schema name of the table and the table name to hash and dispatch events.
+- `default`: uses the `table` dispatcher rule by default. It calculates the partition number using the schema name and table name, ensuring data from a table is sent to the same partition. As a result, the data from a single table only exists in one partition and is guaranteed to be ordered. However, this dispatcher rule limits the send throughput, and the consumption speed cannot be improved by adding consumers.
+- `index-value`: calculates the partition number using either the primary key, a unique index, or an explicitly specified index, distributing table data across multiple partitions. The data from a single table is sent to multiple partitions, and the data in each partition is ordered. You can improve the consumption speed by adding consumers.
+- `columns`: calculates the partition number using the values of explicitly specified columns, distributing table data across multiple partitions. The data from a single table is sent to multiple partitions, and the data in each partition is ordered. You can improve the consumption speed by adding consumers.
+- `table`: calculates the partition number using the schema name and table name.
+- `ts`: calculates the partition number using the commitTs of the row change, distributing table data across multiple partitions. The data from a single table is sent to multiple partitions, and the data in each partition is ordered. You can improve the consumption speed by adding consumers. However, multiple changes of a data item might be sent to different partitions and the consumer progress of different consumers might be different, which might cause data inconsistency. Therefore, the consumer needs to sort the data from multiple partitions by commitTs before consuming.
+
+Take the following configuration of `dispatchers` as an example:
+
+```toml
+[sink]
+dispatchers = [
+    {matcher = ['test.*'], partition = "index-value"},
+    {matcher = ['test1.*'], partition = "index-value", index-name = "index1"},
+    {matcher = ['test2.*'], partition = "columns", columns = ["id", "a"]},
+    {matcher = ['test3.*'], partition = "table"},
+]
+```
+
+- Tables in the `test` database use the `index-value` dispatcher, which calculates the partition number using the value of the primary key or unique index. If a primary key exists, the primary key is used; otherwise, the shortest unique index is used.
+- Tables in the `test1` table use the `index-value` dispatcher and calculate the partition number using values of all columns in the index named `index1`. If the specified index does not exist, an error is reported. Note that the index specified by `index-name` must be a unique index.
+- Tables in the `test2` database use the `columns` dispatcher and calculate the partition number using the values of columns `id` and `a`. If any of the columns does not exist, an error is reported.
+- Tables in the `test3` database use the `table` dispatcher.
+- Tables in the `test4` database use the `default` dispatcher, that is the `table` dispatcher, as they do not match any of the preceding rules.
+
+If a table matches multiple dispatcher rules, the first matching rule takes precedence.
 
 > **Note:**
->
 >
 > Since v6.1.0, to clarify the meaning of the configuration, the configuration used to specify the partition dispatcher has been changed from `dispatcher` to `partition`, with `partition` being an alias for `dispatcher`. For example, the following two rules are exactly equivalent.
 >
 > ```
 > [sink]
 > dispatchers = [
->    {matcher = ['*.*'], dispatcher = "ts"},
->    {matcher = ['*.*'], partition = "ts"},
+>    {matcher = ['*.*'], dispatcher = "index-value"},
+>    {matcher = ['*.*'], partition = "index-value"},
 > ]
 > ```
 >
 > However, `dispatcher` and `partition` cannot appear in the same rule. For example, the following rule is invalid.
 >
 > ```
-> {matcher = ['*.*'], dispatcher = "ts", partition = "table"},
+> {matcher = ['*.*'], dispatcher = "index-value", partition = "table"},
 > ```
+
+## Column selectors
+
+The column selector feature supports selecting columns from events and sending only the data changes related to those columns to the downstream.
+
+Take the following configuration of `column-selectors` as an example:
+
+```toml
+[sink]
+column-selectors = [
+    {matcher = ['test.t1'], columns = ['a', 'b']},
+    {matcher = ['test.*'], columns = ["*", "!b"]},
+    {matcher = ['test1.t1'], columns = ['column*', '!column1']},
+    {matcher = ['test3.t'], columns = ["column?", "!column1"]},
+]
+```
+
+- For table `test.t1`, only columns `a` and `b` are sent.
+- For tables in the `test` database (excluding the `t1` table), all columns except `b` are sent.
+- For table `test1.t1`, any column starting with `column` is sent, except for `column1`.
+- For table `test3.t`, any 7-character column starting with `column` is sent, except for `column1`.
+- For tables that do not match any rule, all columns are sent.
+
+> **Note:**
+>
+> After being filtered by the `column-selectors` rules, the data in the table must have a primary key or unique key to be replicated. Otherwise, the changefeed reports an error when it is created or running.
 
 ## Scale out the load of a single large table to multiple TiCDC nodes
 
@@ -280,3 +328,160 @@ You can query the number of Regions a table contains by the following SQL statem
 ```sql
 SELECT COUNT(*) FROM INFORMATION_SCHEMA.TIKV_REGION_STATUS WHERE DB_NAME="database1" AND TABLE_NAME="table1" AND IS_INDEX=0;
 ```
+
+## Handle messages that exceed the Kafka topic limit
+
+Kafka topic sets a limit on the size of messages it can receive. This limit is controlled by the [`max.message.bytes`](https://kafka.apache.org/documentation/#topicconfigs_max.message.bytes) parameter. If TiCDC Kafka sink sends data that exceeds this limit, the changefeed reports an error and cannot proceed to replicate data. To solve this problem, TiCDC adds a new configuration `large-message-handle-option` and provides the following solution.
+
+Currently, this feature supports two encoding protocols: Canal-JSON and Open Protocol. When using the Canal-JSON protocol, you must specify `enable-tidb-extension=true` in `sink-uri`.
+
+### TiCDC data compression
+
+Starting from v7.4.0, TiCDC Kafka sink supports compressing data immediately after encoding and comparing the compressed data size with the message size limit. This feature can effectively reduce the occurrence of messages exceeding the size limit.
+
+An example configuration is as follows:
+
+```toml
+[sink.kafka-config.large-message-handle]
+# This configuration is introduced in v7.4.0.
+# "none" by default, which means that the compression feature is disabled.
+# Possible values are "none", "lz4", and "snappy". The default value is "none".
+large-message-handle-compression = "none"
+```
+
+This feature is different from the compression feature of the Kafka producer:
+
+* The compression algorithm specified in `large-message-handle-compression` compresses a single Kafka message. The compression is performed before comparing with the message size limit.
+* You can configure the compression algorithm in `sink-uri`. The compression is applied to the entire data sending request, which contains multiple Kafka messages. The compression is performed after comparing with the message size limit.
+
+When `large-message-handle-compression` is enabled, the message received by the consumer is encoded using a specific compression protocol, and the consumer application needs to use the specified compression protocol to decode the data.
+
+### Send handle keys only
+
+Starting from v7.3.0, TiCDC Kafka sink supports sending only the handle keys when the message size exceeds the limit. This can significantly reduce the message size and avoid changefeed errors and task failures caused by the message size exceeding the Kafka topic limit. Handle Key refers to the following:
+
+* If the table to be replicated has primary key, the primary key is the handle key.
+* If the table does not have primary key but has NOT NULL Unique Key, the NOT NULL Unique Key is the handle key.
+
+The sample configuration is as follows:
+
+```toml
+[sink.kafka-config.large-message-handle]
+# large-message-handle-option is introduced in v7.3.0.
+# Defaults to "none". When the message size exceeds the limit, the changefeed fails.
+# When set to "handle-key-only", if the message size exceeds the limit, only the handle key is sent in the data field. If the message size still exceeds the limit, the changefeed fails.
+large-message-handle-option = "claim-check"
+```
+
+### Consume messages with handle keys only
+
+The message format with handle keys only is as follows:
+
+```json
+{
+    "id": 0,
+    "database": "test",
+    "table": "tp_int",
+    "pkNames": [
+        "id"
+    ],
+    "isDdl": false,
+    "type": "INSERT",
+    "es": 1639633141221,
+    "ts": 1639633142960,
+    "sql": "",
+    "sqlType": {
+        "id": 4
+    },
+    "mysqlType": {
+        "id": "int"
+    },
+    "data": [
+        {
+          "id": "2"
+        }
+    ],
+    "old": null,
+    "_tidb": {     // TiDB extension fields
+        "commitTs": 163963314122145239,
+        "onlyHandleKey": true
+    }
+}
+```
+
+When a Kafka consumer receives a message, it first checks the `onlyHandleKey` field. If this field exists and is `true`, it means that the message only contains the handle key of the complete data. In this case, to get the complete data, you need to query the upstream TiDB and use [`tidb_snapshot` to read historical data](/read-historical-data.md).
+
+> **Warning:**
+>
+> When the Kafka consumer processes data and queries TiDB, the data might have been deleted by GC. You need to [modify the GC Lifetime of the TiDB cluster](/system-variables.md#tidb_gc_life_time-new-in-v50) to a larger value to avoid this situation.
+
+### Send large messages to external storage
+
+Starting from v7.4.0, TiCDC Kafka sink supports sending large messages to external storage when the message size exceeds the limit. Meanwhile, TiCDC sends a message to Kafka that contains the address of the large message in the external storage. This can avoid changefeed failures caused by the message size exceeding the Kafka topic limit.
+
+An example configuration is as follows:
+
+```toml
+[sink.kafka-config.large-message-handle]
+# large-message-handle-option is introduced in v7.3.0.
+# Defaults to "none". When the message size exceeds the limit, the changefeed fails.
+# When set to "handle-key-only", if the message size exceeds the limit, only the handle key is sent in the data field. If the message size still exceeds the limit, the changefeed fails.
+# When set to "claim-check", if the message size exceeds the limit, the message is sent to external storage.
+large-message-handle-option = "claim-check"
+claim-check-storage-uri = "s3://claim-check-bucket"
+```
+
+When `large-message-handle-option` is set to `"claim-check"`, `claim-check-storage-uri` must be set to a valid external storage address. Otherwise, creating the changefeed will fail.
+
+> **Tip**
+>
+> For more information about the URI parameters of Amazon S3, GCS, and Azure Blob Storage in TiCDC, see [URI Formats of External Storage Services](/external-storage-uri.md).
+
+TiCDC does not clean up messages on external storage services. Data consumers need to manage external storage services on their own.
+
+### Consume large messages from external storage
+
+The Kafka consumer receives a message that contains the address of the large message in the external storage. The message format is as follows:
+
+```json
+{
+    "id": 0,
+    "database": "test",
+    "table": "tp_int",
+    "pkNames": [
+        "id"
+    ],
+    "isDdl": false,
+    "type": "INSERT",
+    "es": 1639633141221,
+    "ts": 1639633142960,
+    "sql": "",
+    "sqlType": {
+        "id": 4
+    },
+    "mysqlType": {
+        "id": "int"
+    },
+    "data": [
+        {
+          "id": "2"
+        }
+    ],
+    "old": null,
+    "_tidb": {     // TiDB extension fields
+        "commitTs": 163963314122145239,
+        "claimCheckLocation": "s3:/claim-check-bucket/${uuid}.json"
+    }
+}
+```
+
+If the message contains the `claimCheckLocation` field, the Kafka consumer reads the large message data stored in JSON format according to the address provided by the field. The message format is as follows:
+
+```json
+{
+  key: "xxx",
+  value: "xxx",
+}
+```
+
+The `key` and `value` fields contain the encoded large message, which should have been sent to the corresponding field in the Kafka message. Consumers can parse the data in these two parts to restore the content of the large message.

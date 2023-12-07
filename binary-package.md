@@ -40,7 +40,6 @@ The `TiDB-community-toolkit` package contains the following contents.
 
 | Content | Change history |
 |---|---|
-| tikv-importer-{version}-linux-{arch}.tar.gz |  |
 | pd-recover-{version}-linux-{arch}.tar.gz |  |
 | etcdctl | New in v6.0.0 |
 | tiup-linux-{arch}.tar.gz |  |
@@ -54,8 +53,6 @@ The `TiDB-community-toolkit` package contains the following contents.
 | dm-master-{version}-linux-{arch}.tar.gz |  |
 | dmctl-{version}-linux-{arch}.tar.gz |  |
 | br-{version}-linux-{arch}.tar.gz |  |
-| spark-{version}-any-any.tar.gz |  |
-| tispark-{version}-any-any.tar.gz |  |
 | package-{version}-linux-{arch}.tar.gz |  |
 | bench-{version}-linux-{arch}.tar.gz |  |
 | errdoc-{version}-linux-{arch}.tar.gz |  |
@@ -67,7 +64,6 @@ The `TiDB-community-toolkit` package contains the following contents.
 | sync_diff_inspector |  |
 | reparo |  |
 | arbiter |  |
-| mydumper | New in v6.0.0 |
 | server-{version}-linux-{arch}.tar.gz | New in v6.2.0 |
 | grafana-{version}-linux-{arch}.tar.gz | New in v6.2.0 |
 | alertmanager-{version}-linux-{arch}.tar.gz | New in v6.2.0 |

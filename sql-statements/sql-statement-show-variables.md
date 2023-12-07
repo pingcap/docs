@@ -57,7 +57,6 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'tidb%';
 | tidb_enable_cascades_planner        | 0                   |
 | tidb_enable_chunk_rpc               | 1                   |
 | tidb_enable_collect_execution_info  | 1                   |
-| tidb_enable_fast_analyze            | 0                   |
 | tidb_enable_index_merge             | 0                   |
 | tidb_enable_noop_functions          | 0                   |
 | tidb_enable_radix_join              | 0                   |
@@ -151,7 +150,7 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'time_zone%';
 
 ## MySQL compatibility
 
-The `SHOW [GLOBAL|SESSION] VARIABLES` statement in TiDB is fully compatible with MySQL. If you find any compatibility differences, report them via [an issue on GitHub](https://github.com/pingcap/tidb/issues/new/choose).
+The `SHOW [GLOBAL|SESSION] VARIABLES` statement in TiDB is fully compatible with MySQL. If you find any compatibility differences, [report a bug](https://docs.pingcap.com/tidb/stable/support).
 
 ## See also
 

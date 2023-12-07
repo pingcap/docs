@@ -34,6 +34,11 @@ file = "tidb-lightning.log"
 max-size = 128 # MB
 max-days = 28
 max-backups = 14
+
+# Controls whether to enable the diagnostic logs. The default value is false, that is, only the logs related to the import are output, and the logs of other dependent components are not output.
+# When you set it to true, logs from both the import process and other dependent components are output, and GRPC debugging is enabled, which can be used for diagnosis.
+# This parameter is introduced in v7.3.0.
+enable-diagnose-logs = false
 ```
 
 ### TiDB Lightning (Task)
@@ -48,10 +53,7 @@ max-backups = 14
 # The maximum number of engines to be opened concurrently.
 # Each table is split into one "index engine" to store indices, and multiple
 # "data engines" to store row data. These settings control the maximum
-# concurrent number for each type of engines.
-# These values affect the memory and disk usage of tikv-importer.
-# The sum of these two values must not exceed the max-open-engines setting
-# for tikv-importer.
+# concurrent number for each type of engines. Generally, you can use the following two default values.
 index-concurrency = 2
 table-concurrency = 6
 
@@ -122,6 +124,19 @@ driver = "file"
 # will leak metadata about the data source.
 # keep-after-success = false
 
+[conflict]
+# Starting from v7.3.0, a new version of strategy is introduced to handle conflicting data. The default value is "".
+# - "": TiDB Lightning does not detect or handle conflicting data. If the source file contains conflicting primary or unique key records, the subsequent step reports an error.
+# - "error": when detecting conflicting primary or unique key records in the imported data, TiDB Lightning terminates the import and reports an error.
+# - "replace": when encountering conflicting primary or unique key records, TiDB Lightning retains the new data and overwrites the old data.
+# - "ignore": when encountering conflicting primary or unique key records, TiDB Lightning retains the old data and ignores the new data.
+# The new version strategy cannot be used together with tikv-importer.duplicate-resolution (the old version of conflict detection).
+strategy = ""
+# Controls the upper limit of the conflicting data that can be handled when strategy is "replace" or "ignore". You can set it only when strategy is "replace" or "ignore". The default value is 9223372036854775807, which means that almost all errors are tolerant.
+# threshold = 9223372036854775807
+# Controls the maximum number of records in the conflict_records table. The default value is 100. If the strategy is "ignore", the conflict records that are ignored are recorded; if the strategy is "replace", the conflict records that are overwritten are recorded. However, the "replace" strategy cannot record the conflict records in the logical import mode.
+# max-record-rows = 100
+
 [tikv-importer]
 # "local": Physical import mode, used by default. It applies to large dataset import,
 # for example, greater than 1 TiB. However, during the import, downstream TiDB is not available to provide services.
@@ -132,26 +147,17 @@ driver = "file"
 # The default value is `false`.
 # When you use parallel import mode, you must set the parameter to `true`,
 # but the premise is that no data exists in the target table, that is, all data can only be imported by TiDB Lightning.
-# Note that this parameter **is not for incremental data import** and is only used in scenarios where the target table is empty.
-# incremental-import = false
-
-# The listening address of tikv-importer when backend is "importer". Change it to the actual address.
-addr = "172.16.31.10:8287"
-# Action to do when trying to insert a conflicting record in the logical import mode.
-# For more information on the conflict detection, see the document: https://docs.pingcap.com/tidb/dev/tidb-lightning-logical-import-mode-usage#conflict-detection
-#  - replace: use new entry to replace the existing entry
-#  - ignore: keep the existing entry, and ignore the new entry
-#  - error: report error and quit the program
-# on-duplicate = "replace"
+# Note that this parameter is only used in scenarios where the target table is empty.
+# parallel-import = false
 
 # Whether to detect and resolve duplicate records (unique key conflict) in the physical import mode.
 # The following resolution algorithms are supported:
 #  - none: does not detect duplicate records, which has the best performance of the two algorithms.
 #          But if there are duplicate records in the data source, it might lead to inconsistent data in the target TiDB.
-#  - remove: if there are primary key or unique key conflicts between the inserting data A and B, 
+#  - remove: if there are primary key or unique key conflicts between the inserting data A and B,
 #            A and B will be removed from the target table and recorded
-#            in the `lightning_task_info.conflict_error_v1` table in the target TiDB. 
-#            You can manually insert the correct records into the target table based on your business requirements. 
+#            in the `lightning_task_info.conflict_error_v1` table in the target TiDB.
+#            You can manually insert the correct records into the target table based on your business requirements.
 #            Note that the target TiKV must be v5.2.0 or later versions; otherwise it falls back to 'none'.
 # The default value is 'none'.
 # duplicate-resolution = 'none'
@@ -391,11 +397,11 @@ max-allowed-packet = 67_108_864
 # Private key of this service. Default to copy of `security.key-path`
 # key-path = "/path/to/lightning.key"
 
-# In the physical import mode, when data importing is complete, tidb-lightning can
+# In the physical import mode, when data importing is complete, TiDB Lightning can
 # automatically perform the Checksum and Analyze operations. It is recommended
 # to leave these as true in the production environment.
 # The execution order: Checksum -> Analyze.
-# In the logical import mode, Checksum and Analyze is not needed, and they are always
+# Note that in the logical import mode, Checksum and Analyze is not needed, and they are always
 # skipped in the actual operation.
 [post-restore]
 # Specifies whether to perform `ADMIN CHECKSUM TABLE <table>` for each table to verify data integrity after importing.
@@ -404,7 +410,9 @@ max-allowed-packet = 67_108_864
 # - "optional": Perform admin checksum. If checksum fails, TiDB Lightning will report a WARN log but ignore any error.
 # - "off": Do not perform checksum.
 # Note that since v4.0.8, the default value has changed from "true" to "required".
-# For backward compatibility, bool values "true" and "false" are also allowed for this field.
+# Note:
+# 1. Checksum failure usually means import exception (data loss or inconsistency). It is recommended to always enable checksum.
+# 2. For backward compatibility, bool values "true" and "false" are also allowed for this field.
 # "true" is equivalent to "required" and "false" is equivalent to "off".
 checksum = "required"
 # Specifies whether the ADMIN CHECKSUM TABLE <table> operation is executed via TiDB.
@@ -415,16 +423,6 @@ checksum-via-sql = "false"
 # Specifies whether to perform `ANALYZE TABLE <table>` for each table after checksum is done.
 # Options available for this field are the same as `checksum`. However, the default value for this field is "optional".
 analyze = "optional"
-
-# If the value is set to `true`, a level-1 compaction is performed
-# every time a table is imported.
-# The default value is `false`.
-level-1-compact = false
-
-# If the value is set to `true`, a full compaction on the whole
-# TiKV cluster is performed at the end of the import.
-# The default value is `false`.
-compact = false
 
 # Configures the background periodic actions.
 # Supported units: h (hour), m (minute), s (second).
@@ -447,13 +445,12 @@ log-progress = "5m"
 |:----|:----|:----|
 | --config *file* | Reads global configuration from *file*. If not specified, the default configuration would be used. | |
 | -V | Prints program version | |
-| -d *directory* | Directory or [external storage URI](/br/backup-and-restore-storages.md#uri-format) of the data dump to read from | `mydumper.data-source-dir` |
+| -d *directory* | Directory or [external storage URI](/external-storage-uri.md) of the data dump to read from | `mydumper.data-source-dir` |
 | -L *level* | Log level: debug, info, warn, error, fatal (default = info) | `lightning.log-level` |
 | -f *rule* | [Table filter rules](/table-filter.md) (can be specified multiple times) | `mydumper.filter` |
 | --backend *[backend](/tidb-lightning/tidb-lightning-overview.md)* | Select an import mode. `local` refers to the physical import mode; `tidb` refers to the logical import mode. | `local` |
 | --log-file *file* | Log file path. By default, it is `/tmp/lightning.log.{timestamp}`. If set to '-', it means that the log files will be output to stdout. | `lightning.log-file` |
 | --status-addr *ip:port* | Listening address of the TiDB Lightning server | `lightning.status-port` |
-| --importer *host:port* | Address of TiKV Importer | `tikv-importer.addr` |
 | --pd-urls *host:port* | PD endpoint address | `tidb.pd-addr` |
 | --tidb-host *host* | TiDB server host | `tidb.host` |
 | --tidb-port *port* | TiDB server port (default = 4000) | `tidb.port` |

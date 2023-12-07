@@ -49,10 +49,7 @@ The expected output is as follows:
 ```
 
 * `checkpoint`: TiCDC has replicated all data before this timestamp to downstream.
-* `state`: The state of this replication task:
-    * `normal`: The task runs normally.
-    * `stopped`: The task is stopped manually or encounters an error.
-    * `removed`: The task is removed.
+* `state`: The state of this replication task. For more information about each state and its meaning, see [Changefeed states](/ticdc/ticdc-changefeed-overview.md#changefeed-state-transfer).
 
 > **Note:**
 >
@@ -103,7 +100,6 @@ The Time-To-Live (TTL) that TiCDC sets for a service GC safepoint is 24 hours, w
 If you use the `cdc cli changefeed create` command without specifying the `-config` parameter, TiCDC creates the replication task in the following default behaviors:
 
 - Replicates all tables except system tables
-- Enables the Old Value feature
 - Only replicates tables that contain [valid indexes](/ticdc/ticdc-overview.md#best-practices)
 
 ## Does TiCDC support outputting data changes in the Canal format?
@@ -176,8 +172,6 @@ In TiCDC Open Protocol, the type code `6` represents `null`.
 For more information, refer to [TiCDC Open Protocol column type code](/ticdc/ticdc-open-protocol.md#column-type-code).
 
 ## How can I tell if a Row Changed Event of TiCDC Open Protocol is an `INSERT` event or an `UPDATE` event?
-
-If the Old Value feature is not enabled, you cannot tell whether a Row Changed Event of TiCDC Open Protocol is an `INSERT` event or an `UPDATE` event. If the feature is enabled, you can determine the event type by the fields it contains:
 
 * `UPDATE` event contains both `"p"` and `"u"` fields
 * `INSERT` event only contains the `"u"` field
@@ -280,11 +274,15 @@ When a changefeed is resumed, TiCDC needs to scan the historical versions of dat
 
 ## How should I deploy TiCDC to replicate data between two TiDB cluster located in different regions?
 
-It is recommended that you deploy TiCDC in the downstream TiDB cluster. If the network latency between the upstream and downstream is high, for example, more than 100 ms, the latency produced when TiCDC executes SQL statements to the downstream might increase dramatically due to the MySQL transmission protocol issues. This results in a decrease in system throughput. However, deploying TiCDC in the downstream can greatly ease this problem.
+For TiCDC versions earlier than v6.5.2, it is recommended that you deploy TiCDC in the downstream TiDB cluster. If the network latency between the upstream and downstream is high, for example, more than 100 ms, the latency produced when TiCDC executes SQL statements to the downstream might increase dramatically due to the MySQL transmission protocol issues. This results in a decrease in system throughput. However, deploying TiCDC in the downstream can greatly ease this problem. After optimization, starting from TiCDC v6.5.2, it is recommended that you deploy TiCDC in the upstream TiDB cluster.
 
 ## What is the order of executing DML and DDL statements?
 
-The execution order is: DML -> DDL -> DML. To ensure that the table schema is correct when DML events are executed downstream during data replication, it is necessary to coordinate the execution order of DDL and DML statements. Currently, TiCDC adopts a simple approach: it replicates all DML statements before the DDL ts to downstream first, and then replicates DDL statements.
+Currently, TiCDC adopts the following order:
+
+1. TiCDC blocks the replication progress of the tables affected by DDL statements until the DDL `CommiTs`. This ensures that DML statements executed before DDL `CommiTs` can be successfully replicated to the downstream first.
+2. TiCDC continues with the replication of DDL statements. If there are multiple DDL statements, TiCDC replicates them in a serial manner.
+3. After the DDL statements are executed in the downstream, TiCDC will continue with the replication of DML statements executed after DDL `CommiTs`.
 
 ## How should I check whether the upstream and downstream data is consistent?
 
@@ -292,7 +290,12 @@ If the downstream is a TiDB cluster or MySQL instance, it is recommended that yo
 
 ## Replication of a single table can only be run on a single TiCDC node. Will it be possible to use multiple TiCDC nodes to replicate data of multiple tables?
 
-This feature is currently not supported, which might be supported in a future release. By then, TiCDC might replicate data change logs by TiKV Region, which means scalable processing capability.
+Starting from v7.1.0, TiCDC supports the MQ sink to replicate data change logs at the granularity of TiKV Regions, which achieves scalable processing capability and allows TiCDC to replicate a single table with a large number of Regions. To enable this feature, you can configure the following parameter in the [TiCDC configuration file](/ticdc/ticdc-changefeed-config.md):
+
+```toml
+[scheduler]
+enable-table-across-nodes = true
+```
 
 ## Does TiCDC replication get stuck if the upstream has long-running uncommitted transactions?
 

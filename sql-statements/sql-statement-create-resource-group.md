@@ -5,15 +5,11 @@ summary: Learn the usage of CREATE RESOURCE GROUP in TiDB.
 
 # CREATE RESOURCE GROUP
 
-<CustomContent platform="tidb-cloud">
+You can use the `CREATE RESOURCE GROUP` statement to create a resource group.
 
 > **Note:**
 >
-> This feature is not available on [TiDB Serverless clusters](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless).
-
-</CustomContent>
-
-You can use the `CREATE RESOURCE GROUP` statement to create a resource group.
+> This feature is not available on [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless) clusters.
 
 ## Synopsis
 
@@ -25,7 +21,8 @@ IfNotExists ::=
     ('IF' 'NOT' 'EXISTS')?
 
 ResourceGroupName ::=
-   Identifier
+    Identifier
+|   "DEFAULT"
 
 ResourceGroupOptionList ::=
     DirectResourceGroupOption
@@ -40,6 +37,9 @@ DirectResourceGroupOption ::=
 |   "QUERY_LIMIT" EqOpt '(' ResourceGroupRunawayOptionList ')'
 |   "QUERY_LIMIT" EqOpt '(' ')'
 |   "QUERY_LIMIT" EqOpt "NULL"
+|   "BACKGROUND" EqOpt '(' BackgroundOptionList ')'
+|   "BACKGROUND" EqOpt '(' ')'
+|   "BACKGROUND" EqOpt "NULL"
 
 ResourceGroupPriorityOption ::=
     LOW
@@ -54,11 +54,15 @@ ResourceGroupRunawayOptionList ::=
 DirectResourceGroupRunawayOption ::=
     "EXEC_ELAPSED" EqOpt stringLit
 |   "ACTION" EqOpt ResourceGroupRunawayActionOption
-|   "WATCH" EqOpt ResourceGroupRunawayWatchOption "DURATION" EqOpt stringLit
+|   "WATCH" EqOpt ResourceGroupRunawayWatchOption WatchDurationOption
+
+WatchDurationOption ::=
+    ("DURATION" EqOpt stringLit | "DURATION" EqOpt "UNLIMITED")?
 
 ResourceGroupRunawayWatchOption ::=
     EXACT
 |   SIMILAR
+|   PLAN
 
 ResourceGroupRunawayActionOption ::=
     DRYRUN
@@ -81,6 +85,7 @@ TiDB supports the following `DirectResourceGroupOption`, where [Request Unit (RU
 >
 > - The `CREATE RESOURCE GROUP` statement can only be executed when the global variable [`tidb_enable_resource_control`](/system-variables.md#tidb_enable_resource_control-new-in-v660) is set to `ON`.
 > TiDB automatically creates a `default` resource group during cluster initialization. For this resource group, the default value of `RU_PER_SEC` is `UNLIMITED` (equivalent to the maximum value of the `INT` type, that is, `2147483647`) and it is in `BURSTABLE` mode. All requests that are not bound to any resource group are automatically bound to this `default` resource group. When you create a new configuration for another resource group, it is recommended to modify the `default` resource group configuration as needed.
+> - Currently, only the `default` resource group supports modifying the `BACKGROUND` configuration.
 
 ## Examples
 
