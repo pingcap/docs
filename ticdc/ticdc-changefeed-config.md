@@ -211,7 +211,7 @@ storage = ""
 # Specifies whether to store the redo log in a local file.
 # The default value is false.
 use-file-backend = false
-# The number of encoding workers in the redo module.
+# The number of encoding and decoding workers in the redo module.
 # The default value is 16.
 encoding-worker-num = 16
 # The number of flushing workers in the redo module.
