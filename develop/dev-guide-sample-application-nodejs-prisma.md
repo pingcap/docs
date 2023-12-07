@@ -98,7 +98,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
     cp .env.example .env
     ```
 
-6. Edit the `.env` file, set up the environment variable `DATABASE_URL` as follows,  and replace the corresponding placeholders `{}` with the connection string in the connection dialog:
+6. Edit the `.env` file, set up the environment variable `DATABASE_URL` as follows, and replace the corresponding placeholders `{}` with the connection string in the connection dialog:
 
     ```dotenv
     DATABASE_URL={connection_string}
