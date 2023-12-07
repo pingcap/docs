@@ -48,15 +48,65 @@ With the cached table feature, TiDB loads the data of an entire table into the m
 
 Coalesce Partition is a way of decreasing the number of partitions in a Hash or Key partitioned table. For more information, see [Manage Hash and Key partitions](/partitioned-table.md#manage-hash-and-key-partitions).
 
+### Common table expression (CTE)
+
+A Common Table Expression (CTE) is a temporary result set that can be referred to multiple times within a SQL statement to improve the statement readability and execution efficiency. You can apply the `WITH` statement to use CTE.
+
+Common Table Expressions can be classified into two types: non-recursive CTE and recursive CTE.
+
+For details, see [Common table expression (CTE)](/develop/dev-guide-use-common-table-expression.md).
+
+### Cluster
+
+The collection of TiDB database and its components deployed on multiple node servers. Each node runs an instance to provide services to clients.
+
+### Coprocessor
+
+A coprocessing mechanism that shares the computation workload with TiDB. It is located in the storage layer (TiKV or TiFlash) and collaboratively processes computations pushed down from TiDB on a per-region basis.
+
 ### Continuous Profiling
 
 Introduced in TiDB 5.3.0, Continuous Profiling is a way to observe resource overhead at the system call level. With the support of Continuous Profiling, TiDB provides performance insight as clear as directly looking into the database source code, and helps R&D and operation and maintenance personnel to locate the root cause of performance problems using a flame graph. For details, see [TiDB Dashboard Instance Profiling - Continuous Profiling](/dashboard/continuous-profiling.md).
 
 ## D
 
+### Dumpling
+
+Dumpling is a data export tool for exporting data stored in TiDB/MySQL as SQL or CSV data files and can be used to make a logical full backup or export. Dumpling also supports exporting data to Amazon S3.
+
+For details, see [Use Dumpling to Export Data](/dumpling-overview.md).
+
 ### Dynamic Pruning
 
 Dynamic pruning mode is one of the modes that TiDB accesses partitioned tables. In dynamic pruning mode, each operator supports direct access to multiple partitions. Therefore, TiDB no longer uses Union. Omitting the Union operation can improve the execution efficiency and avoid the problem of Union concurrent execution.
+
+## E
+
+### Expression index
+
+The expression index is a type of special index that can be created on an expression. Once an expression index is created, TiDB can use the index for the expression-based query, which significantly improves the query performance.
+
+For details, see [CREATE INDEX - Expression index](/sql-statements/sql-statement-create-index.md#expression-index).
+
+## G
+
+### GC (Garbage Collection)
+
+Garbage collection (GC) is the memory resource management mechanism in TiDB. When old data in dynamic memory is no longer needed, it is cleaned up to free up memory.
+
+For details, see [GC Overview](/garbage-collection-overview.md).
+
+## H
+
+### Hotspot
+
+Hotspot refers to the phenomenon where the read and write workload of TiKV is concentrated on one or several regions or nodes, which might cause performance bottlenecks and prevent optimal performance. To solve hotspot issues, refer to [Troubleshoot Hotspot Issues](/troubleshoot-hot-spot-issues.md).
+
+### HTAP
+
+HTAP stands for "Hybrid Transactional and Analytical Processing". TiDB HTAP can meet the growing demand for managing massive data, reduce operational risk costs, seamlessly integrate with existing big data tech stacks, and realize real-time monetization of data assets. In TiDB, TiKV, the row storage engine for online transaction processing coexists with TiFlash, the column storage engine for real-time analysis scenarios. Data is automatically replicated between the two storage engines to maintain strong consistency.
+
+For details, refer to [Quick Start Guide for TiDB HTAP](/quick-start-with-htap.md) and [Explore HTAP](/explore-htap.md).
 
 ## I
 
@@ -74,11 +124,33 @@ The in-memory pessimistic lock is a new feature introduced in TiDB v6.0.0. When 
 
 Leader/Follower/Learner each corresponds to a role in a Raft group of [peers](#regionpeerraft-group). The leader services all client requests and replicates data to the followers. If the group leader fails, one of the followers will be elected as the new leader. Learners are non-voting followers that only serves in the process of replica addition.
 
+### Lock View
+
+The Lock View feature is used to provide more information about lock conflicts and lock waits in pessimistic locking, making it convenient for DBAs to observe transaction locking situations and troubleshoot deadlock issues.
+
+For details, see system table documentation: [`TIDB_TRX`](/information-schema/information-schema-tidb-trx.md), [`DATA_LOCK_WAITS`](/information-schema/information-schema-data-lock-waits.md), and [`DEADLOCKS`](/information-schema/information-schema-deadlocks.md).
+
+## M
+
+### MPP
+
+MPP is the computing architecture introduced in TiDB v5.0, which involves cross-node data exchange (data shuffle process) during computation. It enables large table join queries to be completed jointly by different TiFlash nodes, thereby accelerating the computation process and improving query performance.
+
+For details, see [Use TiFlash MPP Mode](/tiflash/use-tiflash-mpp-mode.md).
+
+### Multi-version concurrency control (MVCC)
+
+MVCC is a concurrency control mechanism in TiDB. It processes the memory read by transactions to achieve concurrent access to TiDB, thereby avoiding blocking caused by conflicts between concurrent reads and writes.
+
 ## O
 
 ### Old value
 
 The "original value" in the incremental change log output by TiCDC. You can specify whether the incremental change log output by TiCDC contains the "original value".
+
+### Online transactional processing (OLTP)
+
+Online transactional processing (OLTP) refers to the use of computer systems to process transactional data.
 
 ### Operator
 
@@ -99,11 +171,21 @@ Currently, available steps generated by PD include:
 - `PromoteLearner`: Promotes a specified learner to a voting member
 - `SplitRegion`: Splits a specified Region into two
 
+### Optimistic transaction
+
+Optimistic transactions are transactions that use optimistic concurrency control and generally do not cause conflicts in concurrent environments. After enabling optimistic transactions, TiDB only checks for conflicts when the transaction is finally committed. The optimistic transaction mode is suitable for concurrent scenarios with more reads and fewer writes, which can improve the performance of TiDB.
+
+Starting from v3.0.8, TiDB clusters default to pessimistic transaction mode. However, if a cluster created before v3.0.7 is upgraded to v3.0.8 or later, the default transaction mode will not be changed; only newly created clusters will default to pessimistic transaction mode. For details, refer to [TiDB Optimistic Transaction Model](/optimistic-transaction.md).
+
 ## P
 
 ### Partitioning
 
-[Partitioning](/partitioned-table.md) refers to physically dividing a table into smaller table partitions, which can be done by partition methods such as RANGE, LIST, HASH, and KEY partitioning.
+[Partitioning](/partitioned-table.md) refers to physically dividing a table into smaller table partitions, which can be done by partition methods such as RANGE, LIST, HASH, and KEY partitioning. These smaller partitions are called partitioned table.
+
+### PD Control (pd-ctl)
+
+PD Control (pd-ctl) is a command-line tool for PD, used to obtain cluster status information and modify the cluster. For details, see [PD Control User Guide](/pd-control.md).
 
 ### pending/down
 
