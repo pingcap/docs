@@ -73,7 +73,7 @@ Before using the DXF to execute `ADD INDEX` tasks, you need to enable the [Fast 
 
 > **Note:**
 >
-> It is recommended that the TiDB `temp-dir` directory have at least 100 GiB of free space.
+> It is recommended that you prepare at least 100 GiB of free space for the TiDB `temp-dir` directory.
 
 </CustomContent>
 
