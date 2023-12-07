@@ -192,6 +192,9 @@ flush-worker-num = 8
 # The behavior to compress redo log files.
 # Available options are "" and "lz4". The default value is "", which means no compression.
 compression = ""
+# The concurrency for uploading a single redo file.
+# The default value is 1, which means concurrency is disabled.
+flush-concurrency = 1
 
 # The following configuration items only take effect when the downstream is Kafka. Supported starting from v6.5.3.
 [sink.kafka-config]
