@@ -6,7 +6,7 @@ aliases: ['/tidb/v6.5/sql-statement-flashback-to-timestamp']
 
 # FLASHBACK CLUSTER
 
-TiDB v6.4.0 introduces the `FLASHBACK CLUSTER TO TIMESTAMP` syntax. You can use it to restore a cluster to a specific point in time. When specifying the timestamp, you can either set a datetime value or use a time function. The format of datetime is like "2016-10-08 16:45:26.999", with millisecond as the minimum time unit, but in most cases, specifying the timestamp with second as the time unit is sufficient, such as "2016-10-08 16:45:26".
+TiDB v6.4.0 introduces the `FLASHBACK CLUSTER TO TIMESTAMP` syntax. You can use it to restore a cluster to a specific point in time. When specifying the timestamp, you can either set a datetime value or use a time function. The format of datetime is like "2016-10-08 16:45:26.999", with millisecond as the minimum time unit. But in most cases, specifying the timestamp with second as the time unit is sufficient, for example, "2016-10-08 16:45:26".
 
 Starting from v6.5.6, TiDB introduces the `FLASHBACK CLUSTER TO TSO` syntax. This syntax enables you to use [TSO](/tso.md) to specify a more precise recovery point in time, thereby enhancing flexibility in data recovery.
 
@@ -102,10 +102,10 @@ mysql> SELECT * FROM t;
 1 row in set (0.01 sec)
 
 
-mysql> begin;
+mysql> BEGIN;
 Query OK, 0 rows affected (0.00 sec)
 
-mysql> select @@tidb_current_ts;  -- Get the current TSO
+mysql> SELECT @@tidb_current_ts;  -- Get the current TSO
 +--------------------+
 | @@tidb_current_ts  |
 +--------------------+
@@ -113,7 +113,7 @@ mysql> select @@tidb_current_ts;  -- Get the current TSO
 +--------------------+
 1 row in set (0.00 sec)
 
-mysql> rollback;
+mysql> ROLLBACK;
 Query OK, 0 rows affected (0.00 sec)
 
 
