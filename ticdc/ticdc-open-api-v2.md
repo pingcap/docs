@@ -289,6 +289,9 @@ The `consistent` parameters are described as follows:
 | `level`          | `STRING` type. The consistency level of the replicated data. (Optional)    |
 | `max_log_size`   | `UINT64` type. The maximum value of redo log. (Optional)      |
 | `storage`        | `STRING` type. The destination address of the storage. (Optional)            |
+| `use_file_backend` | `BOOL` type. Specifies whether to store the redo log in a local file. (Optional) |
+| `encoding_worker_num` | `INT` type. The number of encoding and decoding workers in the redo module. (Optional)             |
+| `flush_worker_num`    | `INT` type. The number of flushing workers in the redo module. (Optional)             |
 
 The `filter` parameters are described as follows:
 
@@ -322,6 +325,7 @@ The `mounter` parameter is described as follows:
 
 The `sink` parameters are described as follows:
 
+<<<<<<< HEAD
 | Parameter name | Description |
 |:-----------------|:---------------------------------------|
 | `column_selectors`      | The column selector configuration. (Optional)                                              |
@@ -333,6 +337,21 @@ The `sink` parameters are described as follows:
 | `schema_registry`       | `STRING` type. The schema registry address. (Optional)                                                  |
 | `terminator`            | `STRING` type. The terminator is used to separate two data change events. The default value is null, which means `"\r\n"` is used as the terminator. (Optional)                |
 | `transaction_atomicity` | `STRING` type. The atomicity level of the transaction. (Optional)  |
+=======
+| Parameter name | Description                                                                                                                                                                                                    |
+|:-----------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `column_selectors`      | The column selector configuration. (Optional)                                                                                                                                                                  |
+| `csv`                   | The CSV configuration. (Optional)                                                                                                                                                                              |
+| `date_separator`        | `STRING` type. Indicates the date separator type of the file directory. Value options are `none`, `year`, `month`, and `day`. `none` is the default value and means that the date is not separated. (Optional) |
+| `dispatchers`           | An configuration array for event dispatching. (Optional)                                                                                                                                                       |
+| `encoder_concurrency`   | `INT` type. The number of encoder threads in the MQ sink. The default value is `16`. (Optional)                                                                                                                |
+| `protocol`              | `STRING` type. For MQ sinks, you can specify the protocol format of the message. The following protocols are currently supported: `canal-json`, `open-protocol`, `canal`, `avro`, and `maxwell`.               |
+| `schema_registry`       | `STRING` type. The schema registry address. (Optional)                                                                                                                                                         |
+| `terminator`            | `STRING` type. The terminator is used to separate two data change events. The default value is null, which means `"\r\n"` is used as the terminator. (Optional)                                                |
+| `transaction_atomicity` | `STRING` type. The atomicity level of the transaction. (Optional)                                                                                                                                              |
+| `only_output_updated_columns` | `BOOLEAN` type. For MQ sinks using the `canal-json` or `open-protocol` protocol, you can specify whether only output the modified columns. The default value is `false`. (Optional) |
+| `cloud_storage_config` | The storage sink configuration. (Optional) |
+>>>>>>> 7e1adf52f7 (ticdc: add binary_encoding_method to openapi v2 (#14596))
 
 `sink.column_selectors` is an array. The parameters are described as follows:
 
@@ -345,10 +364,11 @@ The `sink.csv` parameters are described as follows:
 
 | Parameter name | Description |
 |:-----------------|:---------------------------------------|
-| `delimiter`         | `STRING` type. The character used to separate fields in the CSV file. The value must be an ASCII character and defaults to `,`.     |
-| `include_commit_ts` | `BOOLEAN` type. Whether to include commit-ts in CSV rows. The default value is `false`. |
-| `null`              | `STRING` type. The character that is displayed when a CSV column is null. The default value is `\N`. |
-| `quote`             | `STRING` type. The quotation character used to surround fields in the CSV file. If the value is empty, no quotation is used. The default value is `"`. |
+| `delimiter`              | `STRING` type. The character used to separate fields in the CSV file. The value must be an ASCII character and defaults to `,`.     |
+| `include_commit_ts`      | `BOOLEAN` type. Whether to include commit-ts in CSV rows. The default value is `false`. |
+| `null`                   | `STRING` type. The character that is displayed when a CSV column is null. The default value is `\N`. |
+| `quote`                  | `STRING` type. The quotation character used to surround fields in the CSV file. If the value is empty, no quotation is used. The default value is `"`. |
+| `binary_encoding_method` | `STRING` type. The encoding method of binary data, which can be `"base64"` or `"hex"`. The default value is `"base64"`. |
 
 `sink.dispatchers`: for the sink of MQ type, you can use this parameter to configure the event dispatcher. The following dispatchers are supported: `default`, `ts`, `rowid`, and `table`. The dispatcher rules are as follows:
 
@@ -364,6 +384,17 @@ The `sink.csv` parameters are described as follows:
 | `matcher`   | `STRING ARRAY` type. It has the same matching syntax as the filter rule does. |
 | `partition` | `STRING` type. The target partition for dispatching events.    |
 | `topic`     | `STRING` type. The target topic for dispatching events.        |
+
+`sink.cloud_storage_config`  parameters are described as follows:
+
+| Parameter name | Description |
+|:-----------------|:---------------------------------------|
+| `worker_count`   | `INT` type. The concurrency for saving data changes to the downstream cloud storage.  |
+| `flush_interval`   | `STRING` type. The interval for saving data changes to the downstream cloud storage. |
+| `file_size`   | `INT` type. A data change file is saved to the cloud storage when the number of bytes in this file exceeds the value of this parameter. |
+| `file_expiration_days`   | `INT` type. The duration to retain files, which takes effect only when `date-separator` is configured as `day`. |
+| `file_cleanup_cron_spec`   | `STRING` type. The running cycle of the scheduled cleanup task, compatible with the crontab configuration, with a format of `<Second> <Minute> <Hour> <Day of the month> <Month> <Day of the week (Optional)>`. |
+| `flush_concurrency`   | `INT` type. The concurrency for uploading a single file. |
 
 ### Example
 
