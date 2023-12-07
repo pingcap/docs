@@ -325,17 +325,17 @@ The `mounter` parameter is described as follows:
 
 The `sink` parameters are described as follows:
 
-| Parameter name | Description                                                                                                                                                                                                    |
-|:-----------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `column_selectors`      | The column selector configuration. (Optional)                                                                                                                                                                  |
-| `csv`                   | The CSV configuration. (Optional)                                                                                                                                                                              |
-| `date_separator`        | `STRING` type. Indicates the date separator type of the file directory. Value options are `none`, `year`, `month`, and `day`. `none` is the default value and means that the date is not separated. (Optional) |
-| `dispatchers`           | An configuration array for event dispatching. (Optional)                                                                                                                                                       |
-| `encoder_concurrency`   | `INT` type. The number of encoder threads in the MQ sink. The default value is `16`. (Optional)                                                                                                                |
-| `protocol`              | `STRING` type. For MQ sinks, you can specify the protocol format of the message. The following protocols are currently supported: `canal-json`, `open-protocol`, `canal`, `avro`, and `maxwell`.               |
-| `schema_registry`       | `STRING` type. The schema registry address. (Optional)                                                                                                                                                         |
-| `terminator`            | `STRING` type. The terminator is used to separate two data change events. The default value is null, which means `"\r\n"` is used as the terminator. (Optional)                                                |
-| `transaction_atomicity` | `STRING` type. The atomicity level of the transaction. (Optional)                                                                                                                                              |
+| Parameter name | Description |
+|:-----------------|:---------------------------------------|
+| `column_selectors`      | The column selector configuration. (Optional)                                              |
+| `csv`                   | The CSV configuration. (Optional)                                         |
+| `date_separator`        | `STRING` type. Indicates the date separator type of the file directory. Value options are `none`, `year`, `month`, and `day`. `none` is the default value and means that the date is not separated. (Optional)      |
+| `dispatchers`           | An configuration array for event dispatching. (Optional)                                                     |
+| `encoder_concurrency`   | `INT` type. The number of encoder threads in the MQ sink. The default value is `16`. (Optional)               |
+| `protocol`              | `STRING` type. For MQ sinks, you can specify the protocol format of the message. The following protocols are currently supported: `canal-json`, `open-protocol`, `canal`, `avro`, and `maxwell`. |
+| `schema_registry`       | `STRING` type. The schema registry address. (Optional)                                                  |
+| `terminator`            | `STRING` type. The terminator is used to separate two data change events. The default value is null, which means `"\r\n"` is used as the terminator. (Optional)                |
+| `transaction_atomicity` | `STRING` type. The atomicity level of the transaction. (Optional)  |
 | `only_output_updated_columns` | `BOOLEAN` type. For MQ sinks using the `canal-json` or `open-protocol` protocol, you can specify whether only output the modified columns. The default value is `false`. (Optional) |
 | `cloud_storage_config` | The storage sink configuration. (Optional) |
 
@@ -350,10 +350,10 @@ The `sink.csv` parameters are described as follows:
 
 | Parameter name | Description |
 |:-----------------|:---------------------------------------|
-| `delimiter`              | `STRING` type. The character used to separate fields in the CSV file. The value must be an ASCII character and defaults to `,`.     |
-| `include_commit_ts`      | `BOOLEAN` type. Whether to include commit-ts in CSV rows. The default value is `false`. |
-| `null`                   | `STRING` type. The character that is displayed when a CSV column is null. The default value is `\N`. |
-| `quote`                  | `STRING` type. The quotation character used to surround fields in the CSV file. If the value is empty, no quotation is used. The default value is `"`. |
+| `delimiter`         | `STRING` type. The character used to separate fields in the CSV file. The value must be an ASCII character and defaults to `,`.     |
+| `include_commit_ts` | `BOOLEAN` type. Whether to include commit-ts in CSV rows. The default value is `false`. |
+| `null`              | `STRING` type. The character that is displayed when a CSV column is null. The default value is `\N`. |
+| `quote`             | `STRING` type. The quotation character used to surround fields in the CSV file. If the value is empty, no quotation is used. The default value is `"`. |
 | `binary_encoding_method` | `STRING` type. The encoding method of binary data, which can be `"base64"` or `"hex"`. The default value is `"base64"`. |
 
 `sink.dispatchers`: for the sink of MQ type, you can use this parameter to configure the event dispatcher. The following dispatchers are supported: `default`, `ts`, `rowid`, and `table`. The dispatcher rules are as follows:
