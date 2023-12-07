@@ -528,7 +528,7 @@ success!
 
 ### Flashback
 
-TiDB v6.4.0 introduces the [`FLASHBACK CLUSTER TO TIMESTAMP`](/sql-statements/sql-statement-flashback-to-timestamp.md) syntax. You can use it to restore a cluster to a specific point in time. To facilitate usage without TiDB, starting from v6.5.3, tikv-ctl provides the `flashback` command. This command supports flashback operations at the TiKV level.
+TiDB v6.4.0 introduces the [`FLASHBACK CLUSTER`](/sql-statements/sql-statement-flashback-cluster.md) syntax. You can use it to restore a cluster to a specific point in time. To facilitate usage without TiDB, starting from v6.5.3, tikv-ctl provides the `flashback` command. This command supports flashback operations at the TiKV level.
 
 > **Note:**
 >

@@ -1,35 +1,40 @@
 ---
-title: FLASHBACK CLUSTER TO TIMESTAMP
-summary: Learn the usage of FLASHBACK CLUSTER TO TIMESTAMP in TiDB databases.
+title: FLASHBACK CLUSTER
+summary: Learn the usage of FLASHBACK CLUSTER in TiDB databases.
+aliases: ['/tidb/v6.5/sql-statement-flashback-to-timestamp']
 ---
 
-# FLASHBACK CLUSTER TO TIMESTAMP
+# FLASHBACK CLUSTER
 
-TiDB v6.4.0 introduces the `FLASHBACK CLUSTER TO TIMESTAMP` syntax. You can use it to restore a cluster to a specific point in time.
+TiDB v6.4.0 introduces the `FLASHBACK CLUSTER TO TIMESTAMP` syntax. You can use it to restore a cluster to a specific point in time. When specifying the timestamp, you can either set a datetime value or use a time function. The format of datetime is like '2016-10-08 16:45:26.999', with millisecond as the minimum time unit. But in most cases, specifying the timestamp with second as the time unit is sufficient, for example, '2016-10-08 16:45:26'.
+
+Starting from v6.5.6, TiDB introduces the `FLASHBACK CLUSTER TO TSO` syntax. This syntax enables you to use [TSO](/tso.md) to specify a more precise recovery point in time, thereby enhancing flexibility in data recovery.
 
 <CustomContent platform="tidb-cloud">
 
 > **Warning:**
 >
-> The `FLASHBACK CLUSTER TO TIMESTAMP` syntax is not applicable to [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) clusters. Do not execute this statement on TiDB Serverless clusters to avoid unexpected results.
+> The `FLASHBACK CLUSTER TO [TIMESTAMP|TSO]` syntax is not applicable to [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) clusters. Do not execute this statement on TiDB Serverless clusters to avoid unexpected results.
 
 </CustomContent>
 
 > **Note:**
 >
-> The working principle of `FLASHBACK CLUSTER TO TIMESTAMP` is to write the old data of a specific point in time with the latest timestamp, and will not delete the current data. So before using this feature, you need to ensure that there is enough storage space for the old data and the current data.
+> The working principle of `FLASHBACK CLUSTER TO [TIMESTAMP|TSO]` is to write the old data of a specific point in time with the latest timestamp, and will not delete the current data. So before using this feature, you need to ensure that there is enough storage space for the old data and the current data.
 
 ## Syntax
 
 ```sql
 FLASHBACK CLUSTER TO TIMESTAMP '2022-09-21 16:02:50';
+FLASHBACK CLUSTER TO TSO 445494839813079041;
 ```
 
 ### Synopsis
 
 ```ebnf+diagram
-FlashbackToTimestampStmt ::=
-    "FLASHBACK" "CLUSTER" "TO" "TIMESTAMP" stringLit
+FlashbackToTimestampStmt
+         ::= 'FLASHBACK' 'CLUSTER' 'TO' 'TIMESTAMP' stringLit
+           | 'FLASHBACK' 'CLUSTER' 'TO' 'TSO' LengthNum
 ```
 
 ## Notes
@@ -42,12 +47,12 @@ FlashbackToTimestampStmt ::=
 
 * Only a user with the `SUPER` privilege can execute the `FLASHBACK CLUSTER` SQL statement.
 * From the time specified in the `FLASHBACK` statement to the time when the `FLASHBACK` is executed, there cannot be a DDL statement that changes the related table structure. If such a DDL exists, TiDB will reject it.
-* Before executing `FLASHBACK CLUSTER TO TIMESTAMP`, TiDB disconnects all related connections and prohibits read and write operations on these tables until the `FLASHBACK` statement is completed.
-* The `FLASHBACK CLUSTER TO TIMESTAMP` statement cannot be canceled after being executed. TiDB will keep retrying until it succeeds.
+* Before executing `FLASHBACK CLUSTER`, TiDB disconnects all related connections and prohibits read and write operations on these tables until the `FLASHBACK` statement is completed.
+* The `FLASHBACK CLUSTER` statement cannot be canceled after being executed. TiDB will keep retrying until it succeeds.
 
 ## Example
 
-The following example shows how to restore the newly inserted data:
+The following example shows how to flashback a cluster to a specific timestamp to restore newly inserted data:
 
 ```sql
 mysql> CREATE TABLE t(a INT);
@@ -80,6 +85,52 @@ Query OK, 0 rows affected (0.20 sec)
 
 mysql> SELECT * FROM t;
 Empty set (0.00 sec)
+```
+
+The following example shows how to flashback a cluster to a specific TSO to precisely restore mistakenly deleted data:
+
+```sql
+mysql> INSERT INTO t VALUES (1);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> SELECT * FROM t;
++------+
+| a    |
++------+
+|    1 |
++------+
+1 row in set (0.01 sec)
+
+
+mysql> BEGIN;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> SELECT @@tidb_current_ts;  -- Get the current TSO
++--------------------+
+| @@tidb_current_ts  |
++--------------------+
+| 446113975683252225 |
++--------------------+
+1 row in set (0.00 sec)
+
+mysql> ROLLBACK;
+Query OK, 0 rows affected (0.00 sec)
+
+
+mysql> DELETE FROM t;
+Query OK, 1 rows affected (0.00 sec)
+
+
+mysql> FLASHBACK CLUSTER TO TSO 446113975683252225;
+Query OK, 0 rows affected (0.20 sec)
+
+mysql> SELECT * FROM t;
++------+
+| a    |
++------+
+|    1 |
++------+
+1 row in set (0.01 sec)
 ```
 
 If there is a DDL statement that changes the table structure from the time specified in the `FLASHBACK` statement to the time when the `FLASHBACK` is executed, the `FLASHBACK` statement fails:
