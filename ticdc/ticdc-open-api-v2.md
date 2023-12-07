@@ -290,7 +290,7 @@ The `consistent` parameters are described as follows:
 | `use_file_backend` | `BOOL` type. Specifies whether to store the redo log in a local file. (Optional) |
 | `encoding_worker_num` | `INT` type. The number of encoding and decoding workers in the redo module. (Optional)             |
 | `flush_worker_num`    | `INT` type. The number of flushing workers in the redo module. (Optional)             |
-| `compression`         | `STRING` type. The behavior to compress redo log files, available options are "" and "lz4".. (Optional) |
+| `compression`         | `STRING` type. The behavior to compress redo log files. Available options are `""` and `"lz4"`. The default value is `""`, which means no compression. (Optional) |
 | `flush_concurrency`   | `INT` type. The concurrency for uploading a single file. (Optional)                                     |
 
 The `filter` parameters are described as follows:
