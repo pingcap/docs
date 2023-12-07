@@ -546,6 +546,7 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 
 - Setting this variable to `ON` requires you to connect to TiDB from a session that has TLS enabled. This helps prevent lock-out scenarios when TLS is not configured correctly.
 - This setting was previously a `tidb.toml` option (`security.require-secure-transport`), but changed to a system variable starting from TiDB v6.1.0.
+- For v6.5.6 or later 6.5 versions, when Security Enhanced Mode (SEM) is enabled, setting this variable to `ON` is prohibited to avoid potential connectivity issues for users.
 
 ### skip_name_resolve <span class="version-mark">New in v5.2.0</span>
 
@@ -2957,6 +2958,15 @@ mysql> desc select count(distinct a) from test.t;
 - Type: Boolean
 - Default value: `ON`
 - This variable is used to control whether the optimizer estimates the number of rows based on column order correlation
+
+### tidb_opt_enable_hash_join <span class="version-mark">New in v6.5.6</span>
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Type: Boolean
+- Default value: `ON`
+- This variable is used to control whether the optimizer selects hash joins for tables. The value is `ON` by default. If it is set to `OFF`, the optimizer avoids selecting hash joins when generating execution plans, unless no other join algorithm is available.
+- If both the system variable `tidb_opt_enable_hash_join` and the `HASH_JOIN` hint are configured, the `HASH_JOIN` hint takes precedence. Even if `tidb_opt_enable_hash_join` is set to `OFF`, when you specify a `HASH_JOIN` hint in a query, the TiDB optimizer still enforces a hash join plan.
 
 ### tidb_opt_force_inline_cte <span class="version-mark">New in v6.3.0</span>
 
