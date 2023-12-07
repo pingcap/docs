@@ -527,6 +527,57 @@ success!
 > - The argument of the `-p` option specifies the PD endpoints without the `http` prefix. Specifying the PD endpoints is to query whether the specified `region_id` is validated or not.
 > - You need to run this command for all stores where specified Regions' peers are located.
 
+<<<<<<< HEAD
+=======
+### Flashback
+
+TiDB v6.4.0 introduces the [`FLASHBACK CLUSTER`](/sql-statements/sql-statement-flashback-cluster.md) syntax. You can use it to restore a cluster to a specific point in time. To facilitate usage without TiDB, starting from v6.5.3, tikv-ctl provides the `flashback` command. This command supports flashback operations at the TiKV level.
+
+> **Note:**
+>
+> - The `flashback` command writes the old data of a specific point in time with the latest timestamp, and will not delete the current data. So before using this feature, you need to ensure that there is enough storage space for both the old data and the current data.
+> - This command only supports local mode.
+
+#### Prerequisites
+
+Before running the `flashback` command, you need to [stop PD scheduling](/pd-control.md#config-show--set-option-value--placement-rules) using the `pd-ctl config set halt-scheduling true` command.
+
+#### Usage
+
+```shell
+tikv-ctl --pd <pd_address:port> flashback -v <target_timestamp>
+```
+
+Use the `--pd` option to specify the access address of the PD. Use the `-v` option to specify the target timestamp for the flashback.
+
+By default, this command will flashback the entire cluster. If you need to flashback specified Regions or a key range, you can use the following options:
+
+- Use the `-r` option to specify the Regions. Multiple Regions are separated by commas (`,`).
+- Use `--start` and `--end` to specify all Regions within a key range (default: no range limit, in Hex format).
+
+When the command runs successfully, it will print `flashback all stores success!`. You can also view the execution progress via the [Raft admin > Peer in Flashback State](/grafana-tikv-dashboard.md#raft-admin) metrics.
+
+#### Examples
+
+- To flashback the entire cluster data to the timestamp `430315739761082369`:
+
+    ```shell
+    tikv-ctl --pd 127.0.0.1:2379 flashback -v 430315739761082369
+    ```
+
+- To flashback the data of Regions with IDs `100` and `102` to the timestamp `430315739761082369`, use the following command:
+
+    ```shell
+    tikv-ctl --pd 127.0.0.1:2379 flashback -v 430315739761082369 -r 100,102
+    ```
+
+- To flashback the data within a key range to the timestamp `430315739761082369`, use the following command:
+
+    ```shell
+    tikv-ctl --pd 127.0.0.1:2379 flashback -v 430315739761082369 --start 7480000000000000FF0800000000000000F8 --end 7480000000000000FF0C000000000000000000F8
+    ```
+
+>>>>>>> d000f96bff (flashback: flashback cluster support tso (#15608))
 ### Ldb Command
 
 The `ldb` command line tool offers multiple data access and database administration commands. Some examples are listed below. For more information, refer to the help message displayed when running `tikv-ctl ldb` or check the documents from RocksDB.

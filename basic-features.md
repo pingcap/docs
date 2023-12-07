@@ -113,6 +113,7 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 
 ## Data definition language (DDL)
 
+<<<<<<< HEAD
 | Data definition language (DDL) | 7.5 | 7.1 | 6.5 | 6.1 | 5.4 | 5.3 | 5.2 | 5.1 | 5.0 | 4.0 |
 |---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | Basic `CREATE`, `DROP`, `ALTER`, `RENAME`, `TRUNCATE` | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
@@ -131,6 +132,25 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 | [Metadata lock](/metadata-lock.md) | Y | Y | Y | N | N | N | N | N | N | N |
 | [`FLASHBACK CLUSTER TO TIMESTAMP`](/sql-statements/sql-statement-flashback-to-timestamp.md) | Y | Y | Y | N | N | N | N | N | N | N |
 | [Pause](/sql-statements/sql-statement-admin-pause-ddl.md)/[Resume](/sql-statements/sql-statement-admin-resume-ddl.md) DDL | Y | N | N | N | N | N | N | N | N | N |
+=======
+| Data definition language (DDL)                           | 6.5 | 6.1 | 5.4          |   5.3    |   5.2    |   5.1    |   5.0    |   4.0    |
+| ------------------------------------------------------------ | :--: | :--: | ------------ | :----------: | :----------: | :----------: | :----------: | :----------: |
+| Basic `CREATE`, `DROP`, `ALTER`, `RENAME`, `TRUNCATE`        | Y | Y | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
+| [Generated columns](/generated-columns.md)                  | E | E | E | E | E | E | E | E |
+| [Views](/views.md)                                          | Y  | Y | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
+| [Sequences](/sql-statements/sql-statement-create-sequence.md) | Y | Y | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
+| [Auto increment](/auto-increment.md)                         | Y | Y | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
+| [Auto random](/auto-random.md)                               | Y | Y | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
+| [TTL (Time to Live)](/time-to-live.md) | E | N | N | N | N | N | N | N |
+| [DDL algorithm assertions](/sql-statements/sql-statement-alter-table.md) | Y | Y | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
+| Multi-schema change: add columns                           | Y | E | E | E | E | E | E | E |
+| [Change column type](/sql-statements/sql-statement-modify-column.md) | Y | Y | Y            |      Y       |      Y       |      Y       |      N       |      N       |
+| [Temporary tables](/temporary-tables.md)                    | Y | Y | Y            |      Y       |      N       |      N       |      N       |      N       |
+| Concurrent DDL statements | Y | N | N | N | N | N | N | N |
+| [Acceleration of `ADD INDEX` and `CREATE INDEX`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) | Y | N | N | N | N | N | N | N |
+| [Metadata lock](/metadata-lock.md) | Y | N | N | N | N | N | N | N |
+| [`FLASHBACK CLUSTER`](/sql-statements/sql-statement-flashback-cluster.md) | Y | N | N | N | N | N | N | N |
+>>>>>>> d000f96bff (flashback: flashback cluster support tso (#15608))
 
 ## Transactions
 
