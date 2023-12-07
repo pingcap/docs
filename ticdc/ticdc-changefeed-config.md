@@ -185,9 +185,18 @@ flush-interval = 2000
 # The storage URI of the redo log.
 # The default value is empty.
 storage = ""
-# Specifies whether to store the redo log in a file.
+# Specifies whether to store the redo log in a local file.
 # The default value is false.
 use-file-backend = false
+# The number of encoding and decoding workers in the redo module.
+# The default value is 16.
+encoding-worker-num = 16
+# The number of flushing workers in the redo module.
+# The default value is 8.
+flush-worker-num = 8
+# The behavior to compress redo log files.
+# Available options are "" and "lz4". The default value is "", which means no compression.
+compression = ""
 
 [integrity]
 # Whether to enable the checksum validation for single-row data. The default value is "none", which means to disable the feature. Value options are "none" and "correctness".
@@ -211,4 +220,68 @@ sasl-oauth-scopes = ["producer.kafka", "consumer.kafka"]
 sasl-oauth-grant-type = "client_credentials"
 # The audience in the Kafka SASL OAUTHBEARER authentication. The default value is empty. This parameter is optional when the OAUTHBEARER authentication is used.
 sasl-oauth-audience = "kafka"
+<<<<<<< HEAD
+=======
+
+# The following parameters take effect only when the downstream is Pulsar.
+[sink.pulsar-config]
+# Authentication on the Pulsar server is done using a token. Specify the value of the token.
+authentication-token = "xxxxxxxxxxxxx"
+# When you use a token for Pulsar server authentication, specify the path to the file where the token is located.
+token-from-file="/data/pulsar/token-file.txt"
+# Pulsar uses the basic account and password to authenticate the identity. Specify the account.
+basic-user-name="root"
+# Pulsar uses the basic account and password to authenticate the identity. Specify the password.
+basic-password="password"
+# The certificate path for Pulsar TLS encrypted authentication.
+auth-tls-certificate-path="/data/pulsar/certificate"
+# The private key path for Pulsar TLS encrypted authentication.
+auth-tls-private-key-path="/data/pulsar/certificate.key"
+# Path to trusted certificate file of the Pulsar TLS encrypted authentication.
+tls-trust-certs-file-path="/data/pulsar/tls-trust-certs-file"
+# Pulsar oauth2 issuer-url. For more information, see the Pulsar website: https://pulsar.apache.org/docs/2.10.x/client-libraries-go/#tls-encryption-and-authentication
+oauth2.oauth2-issuer-url="https://xxxx.auth0.com"
+# Pulsar oauth2 audience
+oauth2.oauth2-audience="https://xxxx.auth0.com/api/v2/"
+# Pulsar oauth2 private-key
+oauth2.oauth2-private-key="/data/pulsar/privateKey"
+# Pulsar oauth2 client-id
+oauth2.oauth2-client-id="0Xx...Yyxeny"
+# Pulsar oauth2 oauth2-scope
+oauth2.oauth2-scope="xxxx"
+# The number of cached Pulsar producers in TiCDC. The value is 10240 by default. Each Pulsar producer corresponds to one topic. If the number of topics you need to replicate is larger than the default value, you need to increase the number.
+pulsar-producer-cache-size=10240
+# Pulsar data compression method. No compression is used by default. Optional values are "lz4", "zlib", and "zstd".
+compression-type=""
+# The timeout for the Pulsar client to establish a TCP connection with the server. The value is 5 seconds by default.
+connection-timeout=5
+# The timeout for Pulsar clients to initiate operations such as creating and subscribing to a topic. The value is 30 seconds by default.
+operation-timeout=30
+# The maximum number of messages in a single batch for a Pulsar producer to send. The value is 1000 by default.
+batching-max-messages=1000
+# The interval at which Pulsar producer messages are saved for batching. The value is 10 milliseconds by default.
+batching-max-publish-delay=10
+# The timeout for a Pulsar producer to send a message. The value is 30 seconds by default.
+send-timeout=30
+
+[sink.cloud-storage-config]
+# The concurrency for saving data changes to the downstream cloud storage. 
+# The default value is 16.
+worker-count = 16
+# The interval for saving data changes to the downstream cloud storage.
+# The default value is "2s".
+flush-interval = "2s"
+# A data change file is saved to the cloud storage when the number of bytes in this file exceeds `file-size`.
+# The default value is 67108864 (this is, 64 MiB).
+file-size = 67108864
+# The duration to retain files, which takes effect only when `date-separator` is configured as `day`. Assume that `file-expiration-days = 1` and `file-cleanup-cron-spec = "0 0 0 * * *"`, then TiCDC performs daily cleanup at 00:00:00 for files saved beyond 24 hours. For example, at 00:00:00 on 2023/12/02, TiCDC cleans up files generated before 2023/12/01, while files generated on 2023/12/01 remain unaffected.
+# The default value is 0, which means file cleanup is disabled. 
+file-expiration-days = 0
+# The running cycle of the scheduled cleanup task, compatible with the crontab configuration, with a format of `<Second> <Minute> <Hour> <Day of the month> <Month> <Day of the week (Optional)>`
+# The default value is "0 0 2 * * *", which means that the cleanup task is executed every day at 2 AM.
+file-cleanup-cron-spec = "0 0 2 * * *"
+# The concurrency for uploading a single file.
+# The default value is 1, which means concurrency is disabled.
+flush-concurrency = 1
+>>>>>>> 7e1adf52f7 (ticdc: add binary_encoding_method to openapi v2 (#14596))
 ```
