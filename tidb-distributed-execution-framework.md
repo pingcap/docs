@@ -54,7 +54,7 @@ Currently, for TiDB Self-Hosted, the DXF supports the distributed execution of t
 
 ## Limitation
 
-The DXF can only schedule one `ADD INDEX` task at a time. If a second `ADD INDEX` task is submitted before the first `ADD INDEX` task is completed, the second `ADD INDEX` task is executed through a transaction instead of the DXF.
+The DXF can only schedule the distributed execution of one `ADD INDEX` task at a time. If a new `ADD INDEX` task is submitted before the current `ADD INDEX` distributed task has finished, the new task is executed through a transaction.
 
 ## Prerequisites
 
@@ -106,7 +106,7 @@ Adjust the following system variables related to Fast Online DDL:
 
     </CustomContent>
 
-2. It is recommended that you use the default values for the following system variables that might affect the distributed execution of DDL tasks:
+2. It is recommended that you use their default values for the following system variables that might affect the distributed execution of DDL tasks:
 
     * [`tidb_ddl_reorg_worker_cnt`](/system-variables.md#tidb_ddl_reorg_worker_cnt): use the default value `4`. The recommended maximum value is `16`.
     * [`tidb_ddl_reorg_priority`](/system-variables.md#tidb_ddl_reorg_priority)
