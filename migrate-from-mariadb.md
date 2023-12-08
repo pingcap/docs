@@ -27,7 +27,7 @@ Note that only the first two strategies are discussed here.
 
 TiDB is made to be [compatible with MySQL](/mysql-compatibility.md) and MySQL and MariaDB have a lot of functionality in common. However there might be MariaDB specific features that might not be compatible with TiDB that you should be aware of before migrating. 
 
-Here we will go a set of known incompatibilities. Besides checking the items in this section we suggest that you also check the [Compatibility & Differences](https://mariadb.com/kb/en/compatibility-differences/) in the MariaDB documentation.
+Besides checking the items in this section we suggest that you also check the [Compatibility & Differences](https://mariadb.com/kb/en/compatibility-differences/) in the MariaDB documentation.
 
 ### Authentication
 
@@ -251,7 +251,7 @@ See also [Character Set and Collation](/character-set-and-collation.md)
 
 This method would assume you would take your application offline, then migrate the data and then re-configure your application to use the migrated data.
 
-It is strongly recommended to first to this on a test or development instance of your application before doing it in production. This is both to check for possible compatibility issues as to get insight into how much time this would take.
+It is strongly recommended to first do this on a test or development instance of your application before doing it in production. This is both to check for possible compatibility issues as to get insight into how much time this would take.
 
 ### D1. Stop your application
 
