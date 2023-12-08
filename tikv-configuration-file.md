@@ -267,6 +267,18 @@ This document only describes the parameters that are not included in command-lin
 + Sets the size of the connection pool for service and forwarding requests to the server. Setting it to too small a value affects the request latency and load balancing.
 + Default value: `4`
 
+## raftstore
+
+#### `periodic-full-compact-start-times` <span class="version-mark">New in 7.6.0"
+
++ Set the times at which periodic full compaction may start. E.g., ``periodic-full-compact-start-times = ["03:00", "23:00"]`` will mean full compaction runs at 03:00 and 23:00 (3am and 11pm) in the tikv node's local timezone.
++ Default: `[]` (periodic full compaction is disabled by default).
+
+### `periodic-full-compact-start-max-cpu` <span class="version-mark">New in 7.6.0</span>
+
++ Sets the maximum CPU utilization at which periodic compaction may be run
++ Default value: 0.1 (10%)
+
 ## readpool.unified
 
 Configuration items related to the single thread pool serving read requests. This thread pool supersedes the original storage thread pool and coprocessor thread pool since the 4.0 version.
