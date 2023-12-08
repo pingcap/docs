@@ -1031,7 +1031,7 @@ Configuration items related to Raftstore.
 + Default value: `0.1`
 + Minimum value: `0`
 
-### `periodic-full-compact-start-times` <span class="version-mark">New in 7.6.0"
+### `periodic-full-compact-start-times` <span class="version-mark">New in 7.6.0</span>
 
 + Set the times at which periodic full compaction may start. E.g., ``periodic-full-compact-start-times = ["03:00", "23:00"]`` will mean full compaction runs at 03:00 and 23:00 (3am and 11pm) in the tikv node's local timezone.
 + Default: `[]` (periodic full compaction is disabled by default).
