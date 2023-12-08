@@ -48,7 +48,7 @@ cd wordpress-tidb-docker
 
 ### Step 3: Configure connection information
 
-Configure the WordPress database connection to TiDB Serverless. 
+Configure the WordPress database connection to TiDB Serverless.
 
 1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
 
@@ -63,7 +63,7 @@ Configure the WordPress database connection to TiDB Serverless.
 4. Click **Generate Password** to create a random password.
 
     > **Tip:**
-    > 
+    >
     > If you have created a password before, you can either use the original password or click **Reset Password** to generate a new one.
 
 5. Run the following command to copy `.env.example` and rename it to `.env`:
