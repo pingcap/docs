@@ -58,7 +58,7 @@ target-schema = "test_2"       # The name of the schema in the target database
 target-table = "t_2"           # The name of the target table
 ```
 
-## The initialization of table routers and examples
+## The initialization of table routers and some examples
 
 Suppose that you have a rule pattern in the configuration as follows:
 
@@ -74,13 +74,13 @@ The preceding rule matches `schema2.table_3` to `schema.table`.
 
 ### The initialization of table routers
 
-* Suppose a `target-schema/target-table` table named `schema.table` exists in the rules,
+Suppose a `target-schema/target-table` table named `schema.table` exists in the rules,
 
-    a. If there is a rule that matches `schema.table` to `schema.table`, do nothing.
+- If there is a rule that matches `schema.table` to `schema.table`, do nothing.
 
-    b. If there are rules that match `schema.table` to `schema.table`, it indicates that the configuration masks this match. Add a new rule `schema.table -> _no__exists__db_._no__exists__table_` to the table router. After that, sync-diff-inspector will treat the table `schema.table` as the table `_no__exists__db_._no__exists__table_`.
+- `schema.table -> _no__exists__db_._no__exists__table_` to the table router. After that, sync-diff-inspector will treat the table `schema.table` as the table `_no__exists__db_._no__exists__table_`.
 
-* Suppose a `target-schema` exists only in the rules as follows,
+Suppose a `target-schema` exists only in the rules as follows,
 
 ```toml
 [routes.rule1]
@@ -88,11 +88,11 @@ schema-pattern = "schema_*"  # the schema to match. Support wildcard characters 
 target-schema = "schema"     # the target schema
 ```
 
-a. If there is a rule that matches `schema` to `schema`, do nothing.
+- If there is a rule that matches `schema` to `schema`, do nothing.
 
-b. If there is are rules that match `schema` to `schema`, it indicates that the configuration masks this match. Add a new rule to match `schema` to `_no__exists__db_` to the table router. After that, sync-diff-inspector will treat the table `schema` as the table `_no__exists__db_`.
+- If there is are rules that match `schema` to `schema`, it indicates that the configuration masks this match. Add a new rule to match `schema` to `_no__exists__db_` to the table router. After that, sync-diff-inspector will treat the table `schema` as the table `_no__exists__db_`.
 
-* If `target-schema.target-table` does not exist in the rules, add a rule to match`target-schema.target-table` to `target-schema.target-table` to make it case-insensitive, because the table router is case-insensitive.
+If `target-schema.target-table` does not exist in the rules, add a rule to match`target-schema.target-table` to `target-schema.target-table` to make it case-insensitive, because the table router is case-insensitive.
 
 ### Examples
 
@@ -106,7 +106,7 @@ Suppose there are seven tables:
 - `inspector_mysql_1.Tb_emp1`
 - `Inspector_mysql_1.Tb_emp1`
 
-In the configuration, the upstream has `Source.rule1`, and the target table is `inspector_mysql_1.tb_emp1`.
+In the configuration, the upstream has a rule `Source.rule1`, and the target table is `inspector_mysql_1.tb_emp1`.
 
 #### Example 1
 
