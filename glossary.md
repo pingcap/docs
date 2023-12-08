@@ -188,6 +188,12 @@ PD Control (pd-ctl) is a command-line tool for PD, used to obtain cluster status
 
 "Pending" and "down" are two special states of a peer. Pending indicates that the Raft log of followers or learners is vastly different from that of leader. Followers in pending cannot be elected as leader. "Down" refers to a state that a peer ceases to respond to leader for a long time, which usually means the corresponding node is down or isolated from the network.
 
+### Placement Rules
+
+Placement rules are used to configure the placement of data in a TiKV cluster through the SQL interface. With this feature, you can specify the deployment of tables and partitions to different regions, data centers, cabinets, and hosts. Use cases include optimizing data availability strategies at low cost, ensuring that local data replicas are available for local stale reads, and complying with local data compliance requirements.
+
+For details, see [Placement Rules in SQL](/placement-rules-in-sql.md).
+
 ### Point Get
 
 Point get means reading a single row of data by a unique index or primary index, the returned resultset is up to one row.
@@ -222,6 +228,10 @@ The mechanism of Region split is to use one initial Region to cover the entire k
 
 Restore is the reverse of the backup operation. It is the process of bringing back the system to an earlier state by retrieving data from a prepared backup.
 
+### RocksDB
+
+RocksDB is an LSM-tree structured engine that provides key-value storage and read-write functionality. It was developed by Facebook based on LevelDB. RocksDB is the core storage engine of TiKV, used for storing Raft logs and user data.
+
 ## S
 
 ### scheduler
@@ -233,11 +243,53 @@ Schedulers are components in PD that generate scheduling tasks. Each scheduler i
 - `hot-region-scheduler`: Balances the distribution of hot Regions
 - `evict-leader-{store-id}`: Evicts all leaders of a node (often used for rolling upgrades)
 
+### Security Enhanced Mode (SEM)
+
+The Security Enhanced Mode (SEM) is used for finer-grained permission control of TiDB administrators. SEM is inspired by the design of systems such as [Security-Enhanced Linux](https://en.wikipedia.org/wiki/Security-Enhanced_Linux). It reduces the abilities of users with the MySQL `SUPER` privilege and instead requires `RESTRICTED` fine-grained privileges to be granted as a replacement.
+
+For details, see [System Variables documentation - `tidb_enable_enhanced_security`](/system-variables.md#tidb_enable_enhanced_security).
+
+### Stale Read
+
+Stale Read is a mechanism that TiDB applies to read historical versions of data stored in TiDB. Using this mechanism, you can read the corresponding historical data of a specific point in time or within a specified time range, and thus save the latency brought by data replication between storage nodes. When you are using Stale Read, TiDB will randomly select a replica for data reading, which means that all replicas are available for data reading.
+
+For details, see [Stale Read](/stale-read.md).
+
 ### Store
 
 A store refers to the storage node in the TiKV cluster (an instance of `tikv-server`). Each store has a corresponding TiKV instance.
 
 ## T
+
+### Temporary table
+
+Temporary tables solve the issue of temporarily storing the intermediate results of an application, which frees you from frequently creating and dropping tables. You can store the intermediate calculation data in temporary tables. When the intermediate data is no longer needed, TiDB automatically cleans up and recycles the temporary tables. This avoids user applications being too complicated, reduces table management overhead, and improves performance.
+
+For details, see [Temporary Tables](/temporary-tables.md).
+
+### TiCDC
+
+[TiCDC](/ticdc/ticdc-overview.md) is a tool for incrementally replicating data in TiDB. It pulls the data change logs from the upstream TiKV and parses them into ordered row-level change data, which it then outputs to the downstream. For more information about the concepts and terms of TiCDC, see [TiCDC Glossary](/ticdc/ticdc-glossary.md).
+
+### TiDB Data Migration (DM)
+
+[TiDB Data Migration](https://github.com/pingcap/tiflow/tree/master/dm) (DM) is a convenient data migration tool that supports full data migration and incremental data replication from databases compatible with the MySQL protocol (MySQL, MariaDB, Aurora MySQL) to TiDB. Using DM helps simplify the data migration process and reduce operational costs.
+
+For more information about the concepts and terms of DM, see [TiDB Data Migration Glossary](/dm/dm-glossary.md).
+
+### TiDB Lightning
+
+[TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md) is a tool for importing TB-level data from static files into TiDB clusters. It is commonly used for the initial data import into TiDB clusters.
+
+For more information on the concepts and terminology of TiDB Lightning, see [TiDB Lightning Glossary](/tidb-lightning/tidb-lightning-glossary.md).
+
+### TiFlash
+
+[TiFlash](/tiflash/tiflash-overview.md) is a key component of TiDB's HTAP architecture. It is a columnar extension of TiKV that provides both strong consistency and good isolation. Columnar replicas are asynchronously replicated through the Raft Learner protocol. When reading, the replicas use the Raft consensus index along with MVCC to achieve Snapshot Isolation consistency level. This architecture effectively solves the isolation and synchronization issues in HTAP scenarios.
+
+### TiUP
+
+[TiUP](/tiup/tiup-overview.md) is a package management tool introduced in TiDB v4.0. It is used for deploying, upgrading, and managing TiDB clusters, as well as managing various components within the TiDB ecosystem including TiDB, PD, and TiKV. With TiUP, you can easily run any component within TiDB by executing just one command, greatly simplifying the management process.
 
 ### Top SQL
 
