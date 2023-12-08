@@ -44,6 +44,10 @@ A [Region](#regionpeerraft-group) is logically divided into several small ranges
 
 With the cached table feature, TiDB loads the data of an entire table into the memory of the TiDB server, and TiDB directly gets the table data from the memory without accessing TiKV, which improves the read performance.
 
+### Cluster
+
+The collection of TiDB database and its components deployed on multiple node servers. Each node runs an instance to provide services to clients.
+
 ### Coalesce Partition
 
 Coalesce Partition is a way of decreasing the number of partitions in a Hash or Key partitioned table. For more information, see [Manage Hash and Key partitions](/partitioned-table.md#manage-hash-and-key-partitions).
@@ -56,17 +60,13 @@ Common Table Expressions can be classified into two types: non-recursive CTE and
 
 For details, see [Common table expression (CTE)](/develop/dev-guide-use-common-table-expression.md).
 
-### Cluster
+### Continuous Profiling
 
-The collection of TiDB database and its components deployed on multiple node servers. Each node runs an instance to provide services to clients.
+Introduced in TiDB 5.3.0, Continuous Profiling is a way to observe resource overhead at the system call level. With the support of Continuous Profiling, TiDB provides performance insight as clear as directly looking into the database source code, and helps R&D and operation and maintenance personnel to locate the root cause of performance problems using a flame graph. For details, see [TiDB Dashboard Instance Profiling - Continuous Profiling](/dashboard/continuous-profiling.md).
 
 ### Coprocessor
 
 A coprocessing mechanism that shares the computation workload with TiDB. It is located in the storage layer (TiKV or TiFlash) and collaboratively processes computations pushed down from TiDB on a per-region basis.
-
-### Continuous Profiling
-
-Introduced in TiDB 5.3.0, Continuous Profiling is a way to observe resource overhead at the system call level. With the support of Continuous Profiling, TiDB provides performance insight as clear as directly looking into the database source code, and helps R&D and operation and maintenance personnel to locate the root cause of performance problems using a flame graph. For details, see [TiDB Dashboard Instance Profiling - Continuous Profiling](/dashboard/continuous-profiling.md).
 
 ## D
 
