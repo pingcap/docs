@@ -182,6 +182,7 @@ WHERE
 TiDB doesn't support the `latin1_swedish_ci` collation that is often used in MariaDB.
 
 To see what collations TiDB supports you can run this statement on TiDB:
+
 ```sql
 SHOW COLLATION;
 ```
