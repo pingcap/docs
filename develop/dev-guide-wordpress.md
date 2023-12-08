@@ -28,7 +28,7 @@ This section demonstrates how to run WordPress with TiDB Serverless.
 Run the following commands in your terminal window to clone the sample code repository:
 
 ```shell
-git clone https://github.com/pingcap/wordpress-tidb-docker.git
+git clone https://github.com/Icemap/wordpress-tidb-docker.git
 cd wordpress-tidb-docker
 ```
 
