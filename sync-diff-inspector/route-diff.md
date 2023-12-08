@@ -52,55 +52,65 @@ To check a large number of tables with different schema names or table names, yo
     password = ""
 ########################### Routes ###########################
 [routes.rule1]
-schema-pattern = "test_1"      # Matches the schema name of the data source. Supports the wildcards "*" and "?"
-table-pattern = "*"            # Matches the table name of the data source. Supports the wildcards "*" and "?"
+schema-pattern = "test_1"      # Matches the schema name of the data source. Supports the wildcards "*" and "?".
+table-pattern = "*"            # Matches the table name of the data source. Supports the wildcards "*" and "?".
 target-schema = "test_2"       # The name of the schema in the target database
 target-table = "t_2"           # The name of the target table
 ```
 
-## Note
+## The initialization of table routers and examples
 
-Say that we have rule pattern in the config like this:
-
-```toml
-[routes.rule1]
-schema-pattern = "schema*"  # schema to match. Support wildcard characters * and ?.
-table-pattern = "table_*"   # table to match. Support wildcard characters * and ?.
-target-schema = "schema"    # target schema
-target-table = "table"      # target table
-```
-
-For the above rule, we can say that the rule matches `schema2.table_3 -> schema.table`.
-
-**The initialization of table router works in the following ways:**
-
-* Given a `target-schema/target-table` table named `schema.table` in the rules,
-
-    a. If there is a rule matches `schema.table -> schema.table`, do nothing.
-   
-    b. If there is not rule matches `schema.table -> schema.table`, we think the config wants to mask this match, so we add a new rule `schema.table -> _no__exists__db_._no__exists__table_` to the table router. After that, sync-diff-inspector will regard table `schema.table` as table `_no__exists__db_._no__exists__table_` instead of itself.
-
-* Given a `target-schema` only in the rules, such like,
+Suppose that you have a rule pattern in the configuration as follows:
 
 ```toml
 [routes.rule1]
-schema-pattern = "schema_*"  # schema to match. Support wildcard characters * and ?.
-target-schema = "schema"     # target schema
+schema-pattern = "schema*"  # the schema to match. Support the wildcard characters "*" and "?".
+table-pattern = "table_*"   # the table to match. Support the wildcard characters "*" and "?".
+target-schema = "schema"    # the target schema
+target-table = "table"      # the target table
 ```
 
-a. If there is a rule matches `schema -> schema`, do nothing.
+The preceding rule matches `schema2.table_3` to `schema.table`.
 
-b. If there is not rule matches `schema -> schema`, we think the config wants to mask this match, so we add a new rule `schema -> _no__exists__db_` to the table router. After that, sync-diff-inspector will regard table `schema` as table `_no__exists__db_` instead of itself.
+### The initialization of table routers
 
-* Given `target-schema.target-table` does not exist in the rules, we add the rule `target-schema.target-table -> target-schema.target-table` to make it case-insensitive (that's because the table router is case-insensitive).
+* Suppose a `target-schema/target-table` table named `schema.table` exists in the rules,
 
-**Here are some examples:**
+    a. If there is a rule that matches `schema.table` to `schema.table`, do nothing.
 
-Suppose there are seven tables, which are `inspector_mysql_0.tb_emp1`, `Inspector_mysql_0.tb_emp1`, `inspector_mysql_0.Tb_emp1`, `inspector_mysql_1.tb_emp1`, `Inspector_mysql_1.tb_emp1`, `inspector_mysql_1.Tb_emp1` and `Inspector_mysql_1.Tb_emp1`.
+    b. If there are rules that match `schema.table` to `schema.table`, it indicates that the configuration masks this match. Add a new rule `schema.table -> _no__exists__db_._no__exists__table_` to the table router. After that, sync-diff-inspector will treat the table `schema.table` as the table `_no__exists__db_._no__exists__table_`.
 
-In config, upstream has `Source.rule1`, and target table is `inspector_mysql_1.tb_emp1`.
+* Suppose a `target-schema` exists only in the rules as follows,
 
-* If we have the following config:
+```toml
+[routes.rule1]
+schema-pattern = "schema_*"  # the schema to match. Support wildcard characters * and ?.
+target-schema = "schema"     # the target schema
+```
+
+a. If there is a rule that matches `schema` to `schema`, do nothing.
+
+b. If there is are rules that match `schema` to `schema`, it indicates that the configuration masks this match. Add a new rule to match `schema` to `_no__exists__db_` to the table router. After that, sync-diff-inspector will treat the table `schema` as the table `_no__exists__db_`.
+
+* If `target-schema.target-table` does not exist in the rules, add a rule to match`target-schema.target-table` to `target-schema.target-table` to make it case-insensitive, because the table router is case-insensitive.
+
+### Examples
+
+Suppose there are seven tables:
+
+- `inspector_mysql_0.tb_emp1`
+- `Inspector_mysql_0.tb_emp1`
+- `inspector_mysql_0.Tb_emp1`
+- `inspector_mysql_1.tb_emp1`
+- `Inspector_mysql_1.tb_emp1`
+- `inspector_mysql_1.Tb_emp1`
+- `Inspector_mysql_1.Tb_emp1`
+
+In the configuration, the upstream has `Source.rule1`, and the target table is `inspector_mysql_1.tb_emp1`.
+
+#### Example 1
+
+Suppose that the configuration is as follows:
 
 ```toml
 [Source.rule1]
@@ -110,21 +120,19 @@ target-schema = "inspector_mysql_1"
 target-table = "tb_emp1"
 ```
 
-`inspector_mysql_0.tb_emp1` is routed to `inspector_mysql_1.tb_emp1`,
+The following are the routing results:
 
-`Inspector_mysql_0.tb_emp1` is routed to `inspector_mysql_1.tb_emp1`,
+- `inspector_mysql_0.tb_emp1` is routed to `inspector_mysql_1.tb_emp1`
+- `Inspector_mysql_0.tb_emp1` is routed to `inspector_mysql_1.tb_emp1`
+- `inspector_mysql_0.Tb_emp1` is routed to `inspector_mysql_1.tb_emp1`
+- `inspector_mysql_1.tb_emp1` is routed to `_no__exists__db_._no__exists__table_`
+- `Inspector_mysql_1.tb_emp1` is routed to `_no__exists__db_._no__exists__table_`
+- `inspector_mysql_1.Tb_emp1` is routed to `_no__exists__db_._no__exists__table_`
+- `Inspector_mysql_1.Tb_emp1` is routed to `_no__exists__db_._no__exists__table_`
 
-`inspector_mysql_0.Tb_emp1` is routed to `inspector_mysql_1.tb_emp1`,
+#### Example 2
 
-`inspector_mysql_1.tb_emp1` is routed to `_no__exists__db_._no__exists__table_`,
-
-`Inspector_mysql_1.tb_emp1` is routed to `_no__exists__db_._no__exists__table_`,
-
-`inspector_mysql_1.Tb_emp1` is routed to `_no__exists__db_._no__exists__table_`,
-
-`Inspector_mysql_1.Tb_emp1` is routed to `_no__exists__db_._no__exists__table_`.
-
-* If we have the following config:
+Suppose that the configuration is as follows:
 
 ```toml
 [Source.rule1]
@@ -132,21 +140,19 @@ schema-pattern = "inspector_mysql_0"
 target-schema = "inspector_mysql_1"
 ```
 
-`inspector_mysql_0.tb_emp1` is routed to `inspector_mysql_1.tb_emp1`,
+The following are the routing results:
 
-`Inspector_mysql_0.tb_emp1` is routed to `inspector_mysql_1.tb_emp1`,
+- `inspector_mysql_0.tb_emp1` is routed to `inspector_mysql_1.tb_emp1`
+- `Inspector_mysql_0.tb_emp1` is routed to `inspector_mysql_1.tb_emp1`
+- `inspector_mysql_0.Tb_emp1` is routed to `inspector_mysql_1.Tb_emp1`
+- `inspector_mysql_1.tb_emp1` is routed to `_no__exists__db_._no__exists__table_`
+- `Inspector_mysql_1.tb_emp1` is routed to `_no__exists__db_._no__exists__table_`
+- `inspector_mysql_1.Tb_emp1` is routed to `_no__exists__db_._no__exists__table_`
+- `Inspector_mysql_1.Tb_emp1` is routed to `_no__exists__db_._no__exists__table_`
 
-`inspector_mysql_0.Tb_emp1` is routed to `inspector_mysql_1.Tb_emp1`,
+#### Example 3
 
-`inspector_mysql_1.tb_emp1` is routed to `_no__exists__db_._no__exists__table_`,
-
-`Inspector_mysql_1.tb_emp1` is routed to `_no__exists__db_._no__exists__table_`,
-
-`inspector_mysql_1.Tb_emp1` is routed to `_no__exists__db_._no__exists__table_`,
-
-`Inspector_mysql_1.Tb_emp1` is routed to `_no__exists__db_._no__exists__table_`.
-
-* If we have the following config:
+Suppose that the configuration is as follows:
 
 ```toml
 [Source.rule1]
@@ -154,21 +160,19 @@ schema-pattern = "other_schema"
 target-schema = "other_schema"
 ```
 
-`inspector_mysql_0.tb_emp1` is routed to `inspector_mysql_0.tb_emp1`,
+The following are the routing results:
 
-`Inspector_mysql_0.tb_emp1` is routed to `Inspector_mysql_0.tb_emp1`,
+- `inspector_mysql_0.tb_emp1` is routed to `inspector_mysql_0.tb_emp1`
+- `Inspector_mysql_0.tb_emp1` is routed to `Inspector_mysql_0.tb_emp1`
+- `inspector_mysql_0.Tb_emp1` is routed to `inspector_mysql_0.Tb_emp1`
+- `inspector_mysql_1.tb_emp1` is routed to `inspector_mysql_1.tb_emp1`
+- `Inspector_mysql_1.tb_emp1` is routed to `inspector_mysql_1.tb_emp1`
+- `inspector_mysql_1.Tb_emp1` is routed to `inspector_mysql_1.tb_emp1`
+- `Inspector_mysql_1.Tb_emp1` is routed to `inspector_mysql_1.tb_emp1`
 
-`inspector_mysql_0.Tb_emp1` is routed to `inspector_mysql_0.Tb_emp1`,
+#### Example 4
 
-`inspector_mysql_1.tb_emp1` is routed to `inspector_mysql_1.tb_emp1`,
-
-`Inspector_mysql_1.tb_emp1` is routed to `inspector_mysql_1.tb_emp1`,
-
-`inspector_mysql_1.Tb_emp1` is routed to `inspector_mysql_1.tb_emp1`,
-
-`Inspector_mysql_1.Tb_emp1` is routed to `inspector_mysql_1.tb_emp1`.
-
-* If we have the following config:
+Suppose that the configuration is as follows:
 
 ```toml
 [Source.rule1]
@@ -178,32 +182,22 @@ target-schema = "inspector_mysql_1"
 target-table = "tb_emp1"
 ```
 
-`inspector_mysql_0.tb_emp1` is routed to `inspector_mysql_1.tb_emp1`,
+The following are the routing results:
 
-`Inspector_mysql_0.tb_emp1` is routed to `inspector_mysql_1.tb_emp1`,
+- `inspector_mysql_0.tb_emp1` is routed to `inspector_mysql_1.tb_emp1`
+- `Inspector_mysql_0.tb_emp1` is routed to `inspector_mysql_1.tb_emp1`
+- `inspector_mysql_0.Tb_emp1` is routed to `inspector_mysql_1.tb_emp1`
+- `inspector_mysql_1.tb_emp1` is routed to `inspector_mysql_1.tb_emp1`
+- `Inspector_mysql_1.tb_emp1` is routed to `inspector_mysql_1.tb_emp1`
+- `inspector_mysql_1.Tb_emp1` is routed to `inspector_mysql_1.tb_emp1`
+- `Inspector_mysql_1.Tb_emp1` is routed to `inspector_mysql_1.tb_emp1`
 
-`inspector_mysql_0.Tb_emp1` is routed to `inspector_mysql_1.tb_emp1`,
+If you do not set rules, the following are the routing results:
 
-`inspector_mysql_1.tb_emp1` is routed to `inspector_mysql_1.tb_emp1`,
-
-`Inspector_mysql_1.tb_emp1` is routed to `inspector_mysql_1.tb_emp1`,
-
-`inspector_mysql_1.Tb_emp1` is routed to `inspector_mysql_1.tb_emp1`,
-
-`Inspector_mysql_1.Tb_emp1` is routed to `inspector_mysql_1.tb_emp1`.
-
-* If we do not have rules:
-
-`inspector_mysql_0.tb_emp1` is routed to `inspector_mysql_0.tb_emp1`,
-
-`Inspector_mysql_0.tb_emp1` is routed to `Inspector_mysql_0.tb_emp1`,
-
-`inspector_mysql_0.Tb_emp1` is routed to `inspector_mysql_0.Tb_emp1`,
-
-`inspector_mysql_1.tb_emp1` is routed to `inspector_mysql_1.tb_emp1`,
-
-`Inspector_mysql_1.tb_emp1` is routed to `inspector_mysql_1.tb_emp1`,
-
-`inspector_mysql_1.Tb_emp1` is routed to `inspector_mysql_1.tb_emp1`,
-
-`Inspector_mysql_1.Tb_emp1` is routed to `inspector_mysql_1.tb_emp1`.
+- `inspector_mysql_0.tb_emp1` is routed to `inspector_mysql_0.tb_emp1`
+- `Inspector_mysql_0.tb_emp1` is routed to `Inspector_mysql_0.tb_emp1`
+- `inspector_mysql_0.Tb_emp1` is routed to `inspector_mysql_0.Tb_emp1`
+- `inspector_mysql_1.tb_emp1` is routed to `inspector_mysql_1.tb_emp1`
+- `Inspector_mysql_1.tb_emp1` is routed to `inspector_mysql_1.tb_emp1`
+- `inspector_mysql_1.Tb_emp1` is routed to `inspector_mysql_1.tb_emp1`
+- `Inspector_mysql_1.Tb_emp1` is routed to `inspector_mysql_1.tb_emp1`
