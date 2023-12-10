@@ -116,6 +116,7 @@
   - Plan Cluster Topology
     - [Minimal Topology](/minimal-deployment-topology.md)
     - [TiFlash Topology](/tiflash-deployment-topology.md)
+    - [TiProxy Topology](/tiproxy/tiproxy-deployment-topology.md)
     - [TiCDC Topology](/ticdc-deployment-topology.md)
     - [TiDB Binlog Topology](/tidb-binlog-deployment-topology.md)
     - [TiSpark Topology](/tispark-deployment-topology.md)
@@ -623,6 +624,7 @@
     - [Computing](/tidb-computing.md)
     - [Scheduling](/tidb-scheduling.md)
     - [TSO](/tso.md)
+    - [LoadBalance](/tiproxy/tiproxy-overview.md)
   - Storage Engine - TiKV
     - [TiKV Overview](/tikv-overview.md)
     - [RocksDB Overview](/storage-engine/rocksdb-overview.md)
@@ -650,6 +652,7 @@
     - [tidb-server](/tidb-configuration-file.md)
     - [tikv-server](/tikv-configuration-file.md)
     - [tiflash-server](/tiflash/tiflash-configuration.md)
+    - [tiproxy-server](/tiproxy/tiproxy-configuration.md)
     - [pd-server](/pd-configuration-file.md)
   - CLI
     - [tikv-ctl](/tikv-control.md)
@@ -660,6 +663,7 @@
     - [tidb-server](/command-line-flags-for-tidb-configuration.md)
     - [tikv-server](/command-line-flags-for-tikv-configuration.md)
     - [tiflash-server](/tiflash/tiflash-command-line-flags.md)
+    - [tiproxy-server](/tiproxy/tiproxy-command-line-flags.md)
     - [pd-server](/command-line-flags-for-pd-configuration.md)
   - Key Monitoring Metrics
     - [Overview](/grafana-overview-dashboard.md)
@@ -668,6 +672,7 @@
     - [PD](/grafana-pd-dashboard.md)
     - [TiKV](/grafana-tikv-dashboard.md)
     - [TiFlash](/tiflash/monitor-tiflash.md)
+    - [TiProxy](/tiproxy/tiproxy-grafana.md)
     - [TiCDC](/ticdc/monitor-ticdc.md)
     - [Resource Control](/grafana-resource-control-dashboard.md)
   - Security
