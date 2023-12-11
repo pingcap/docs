@@ -73,25 +73,27 @@ The preceding rule matches `schema2.table_3` to `schema.table`.
 
 ### The initialization of table routers
 
-Suppose a `target-schema/target-table` table named `schema.table` exists in the rules,
+If a `target-schema/target-table` table named `schema.table` exists in the rules,
 
-- If there is a rule that matches `schema.table` to `schema.table`, do nothing.
+- If there is a rule that matches `schema.table` to `schema.table`, it is OK.
 
-- `schema.table -> _no__exists__db_._no__exists__table_` to the table router. After that, sync-diff-inspector will treat the table `schema.table` as the table `_no__exists__db_._no__exists__table_`.
+-  If there is no rule that matches `schema.table` to `schema.table`, sync-diff-inspector will add a new rule `schema.table -> _no__exists__db_._no__exists__table_` to the table router. After that, sync-diff-inspector will treat the table `schema.table` as the table `_no__exists__db_._no__exists__table_`.
 
-Suppose a `target-schema` exists only in the rules as follows,
+If `target-schema` exists only in the rules as follows,
 
 ```toml
 [routes.rule1]
-schema-pattern = "schema_*"  # the schema to match. Support wildcard characters * and ?.
+schema-pattern = "schema_2"  # the schema to match. Support wildcard characters * and ?.
 target-schema = "schema"     # the target schema
 ```
 
-- If there is a rule that matches `schema` to `schema`, do nothing.
+- If there is no table `schema` in the upstream, it is OK.
 
-- If there is are rules that match `schema` to `schema`, it indicates that the configuration masks this match. Add a new rule to match `schema` to `_no__exists__db_` to the table router. After that, sync-diff-inspector will treat the table `schema` as the table `_no__exists__db_`.
+- If there is a table `schema` in the upstream, and a rule matches the table, it is OK.
 
-If `target-schema.target-table` does not exist in the rules, add a rule to match`target-schema.target-table` to `target-schema.target-table` to make it case-insensitive, because the table router is case-insensitive.
+- If there is a table `schema` in the upstream, but no rule matches the table, sync-diff-inspector will add a new rule `schema -> _no__exists__db_` to the table router. After that, sync-diff-inspector will treat the table `schema` as the table `_no__exists__db_`.
+
+If `target-schema.target-table` does not exist in the rules, sync-diff-inspector will add a rule to match`target-schema.target-table` to `target-schema.target-table` to make it case-insensitive, because the table router is case-insensitive.
 
 ### Examples
 
