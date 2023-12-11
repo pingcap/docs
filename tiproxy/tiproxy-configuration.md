@@ -35,8 +35,8 @@ This section introduces the configuration parameters of TiProxy.
 
 # graceful-wait-before-shutdown is recommanded to be set to 0 when there's no other proxy(e.g. NLB) between the client and TiProxy.
 # possible values:
-# 	0 => begin to drain clients immediately.
-# 	30 => HTTP status returns unhealthy and the SQL port accepts new connections for the last 30 seconds. After that, refuse new connections and drain clients.
+#   0 => begin to drain clients immediately.
+#   30 => HTTP status returns unhealthy and the SQL port accepts new connections for the last 30 seconds. After that, refuse new connections and drain clients.
 # graceful-wait-before-shutdown = 0
 
 # graceful-close-conn-timeout is recommanded to be set longer than the lifecycle of a transaction.
@@ -46,18 +46,18 @@ This section introduces the configuration parameters of TiProxy.
 # graceful-close-conn-timeout = 15
 
 # possible values:
-#		"pd-addr:pd-port" => automatically tidb discovery.
+#    "pd-addr:pd-port" => automatically tidb discovery.
 # pd-addrs = "127.0.0.1:2379"
 
 # possible values:
-#		0 => no limitation.
-#		100 => accept as many as 100 connections.
+#    0 => no limitation.
+#    100 => accept as many as 100 connections.
 # max-connections = 0
 
 # It's a tradeoff between memory and performance.
 # possible values:
 #       0 => default value
-#		1K to 16M
+#    1K to 16M
 # conn-buffer-size = 0
 
 [api]
@@ -77,9 +77,9 @@ This section introduces the configuration parameters of TiProxy.
 # level = "info"
 
 # possible values:
-# 	"tidb" => formats used by tidb, check https://github.com/tikv/rfcs/blob/master/text/0018-unified-log-format.md.
-# 	"json" => structured json formats.
-# 	"console" => log format for human.
+#   "tidb" => formats used by tidb, check https://github.com/tikv/rfcs/blob/master/text/0018-unified-log-format.md.
+#   "json" => structured json formats.
+#   "console" => log format for human.
 # encoder = "tidb"
 
 [log.log-file]
@@ -94,25 +94,25 @@ This section introduces the configuration parameters of TiProxy.
 # See the section below for details.
 [security]
 
-	# client object
-	[security.cluster-tls]
-	# access to other components like TiDB or PD, will use this
-	# skip-ca = true
+  # client object
+  [security.cluster-tls]
+  # access to other components like TiDB or PD, will use this
+  # skip-ca = true
 
-	# client object
-	[security.sql-tls]
-	# access to TiDB SQL(4000) port will use this
-	skip-ca = true
+  # client object
+  [security.sql-tls]
+  # access to TiDB SQL(4000) port will use this
+  skip-ca = true
 
-	# server object
-	[security.server-tls]
-	# proxy SQL port will use this
-	# auto-certs = true
+  # server object
+  [security.server-tls]
+  # proxy SQL port will use this
+  # auto-certs = true
 
-	# server object
-	[security.server-http-tls]
-	# proxy HTTP port will use this
-	# auto-certs = true
+  # server object
+  [security.server-http-tls]
+  # proxy HTTP port will use this
+  # auto-certs = true
 ```
 
 ### Security Object
@@ -131,11 +131,13 @@ There are 4 tls objects in `[security]` section. They share same configuration f
    autocert-expire-duration = "72h" # default expire duration for auto certs.
 ```
 
-+ Client Object:
-  - Requires to set `ca` or `skip-ca` (skip verify server certs).
-  - Optionally, `cert`/`key` will be used if server asks, i.e. server-side client verification.
-  - Useless fields: auto-certs.
+#### Client Object:
 
-+ Server Object:
-  + Requires to set `cert`/`key` or `auto-certs` (generate a temporary cert, mostly for testing).
-  + Optionally, non-empty `ca` will enable server-side client verification. Client must provide their certs. Or if `skip-ca` is true with a non-empty `ca`, server will only verify client certs if it actively provide one.
+- Requires to set `ca` or `skip-ca` (skip verify server certs).
+- Optionally, `cert`/`key` will be used if server asks, i.e. server-side client verification.
+- Useless fields: auto-certs.
+
+#### Server Object:
+
++ Requires to set `cert`/`key` or `auto-certs` (generate a temporary cert, mostly for testing).
++ Optionally, non-empty `ca` will enable server-side client verification. Client must provide their certs. Or if `skip-ca` is true with a non-empty `ca`, server will only verify client certs if it actively provide one.
