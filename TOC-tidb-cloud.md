@@ -253,7 +253,8 @@
 - Security
   - Identity Access Control
     - [Password Authentication](/tidb-cloud/tidb-cloud-password-authentication.md)
-    - [SSO Authentication](/tidb-cloud/tidb-cloud-sso-authentication.md)
+    - [Basic SSO Authentication](/tidb-cloud/tidb-cloud-sso-authentication.md)
+    - [Organization SSO Authentication](/tidb-cloud/tidb-cloud-org-sso-authentication.md)
     - [Identity Access Management](/tidb-cloud/manage-user-access.md)
   - Network Access Control
     - TiDB Serverless
