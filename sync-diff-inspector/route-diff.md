@@ -59,18 +59,6 @@ target-table = "t_2"           # The name of the target table
 
 ## The initialization of table routers and some examples
 
-Suppose that you have a rule pattern in the configuration as follows:
-
-```toml
-[routes.rule1]
-schema-pattern = "schema*"  # the schema to match. Support the wildcard characters "*" and "?".
-table-pattern = "table_*"   # the table to match. Support the wildcard characters "*" and "?".
-target-schema = "schema"    # the target schema
-target-table = "table"      # the target table
-```
-
-The preceding rule matches `schema2.table_3` to `schema.table`.
-
 ### The initialization of table routers
 
 If a `target-schema/target-table` table named `schema.table` exists in the rules,
