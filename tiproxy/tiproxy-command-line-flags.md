@@ -37,17 +37,17 @@ This is the client program `tiproxyctl`.
 
 + Specifies the log format of ctl
 + Default: "tidb"
-+ Refer previous description.
++ It defaults to the same log format of TiDB. However, you can also specify `console` - a more human-readable format, and `json` - a structured log format.
 
 ### `--log_level string`
 
 + Specifies the log level of ctl
 + Default: "warn"
-+ Refer previous description.
++ You can specify `debug`, `info`, `warn`, `error`, `panic`.
 
 ### `--curls urls`
 
-+ Specifies the server addresses.
++ Specifies the server addresses. You can add multiple listenning addresses.
 + Default: "[localhost:3080]"
 + Server API gateway addresses.
 
