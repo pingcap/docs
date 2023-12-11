@@ -387,38 +387,12 @@ This variable is an alias for `last_insert_id`.
 - Scope: NONE
 - Default value: ""
 - The location of the certificate authority file (if there is one). The value of this variable is defined by the TiDB configuration item [`ssl-ca`](/tidb-configuration-file.md#ssl-ca).
-<<<<<<< HEAD
-=======
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-- Scope: NONE
-- Default value: ""
-- The location of the certificate authority file (if there is one). The value of this variable is defined by the TiDB configuration item [`ssl-ca`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#ssl-ca).
-
-</CustomContent>
->>>>>>> f3adeb39c3 (fix typo (#15647))
 
 ### ssl_cert
 
 - Scope: NONE
 - Default value: ""
 - The location of the certificate file (if there is a file) that is used for SSL/TLS connections. The value of this variable is defined by the TiDB configuration item [`ssl-cert`](/tidb-configuration-file.md#ssl-cert).
-<<<<<<< HEAD
-=======
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-- Scope: NONE
-- Default value: ""
-- The location of the certificate file (if there is a file) that is used for SSL/TLS connections. The value of this variable is defined by the TiDB configuration item [`ssl-cert`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#ssl-cert).
-
-</CustomContent>
->>>>>>> f3adeb39c3 (fix typo (#15647))
 
 ### ssl_key
 
@@ -1202,43 +1176,6 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 ### tidb_log_file_max_days <span class="version-mark">New in v5.3</span>
 
 - Scope: SESSION
-<<<<<<< HEAD
-=======
-- Persists to cluster: No
-- Default value: ""
-- Type: String
-- This is a read-only variable. It is internally used in TiDB to get the information of the last DDL operation within the current session.
-    - "query": The last DDL query string.
-    - "seq_num": The sequence number for each DDL operation. It is used to identify the order of DDL operations.
-
-### tidb_last_query_info <span class="version-mark">New in v4.0.14</span>
-
-- Scope: SESSION
-- Persists to cluster: No
-- Default value: ""
-- This is a read-only variable. It is internally used in TiDB to query the transaction information of the last DML statement. The information includes:
-    - `txn_scope`: The scope of the transaction, which can be `global` or `local`.
-    - `start_ts`: The start timestamp of the transaction.
-    - `for_update_ts`: The `for_update_ts` of the previously executed DML statement. This is an internal term of TiDB used for tests. Usually, you can ignore this information.
-    - `error`: The error message, if any.
-
-### tidb_last_txn_info <span class="version-mark">New in v4.0.9</span>
-
-- Scope: SESSION
-- Persists to cluster: No
-- Type: String
-- This variable is used to get the last transaction information within the current session. It is a read-only variable. The transaction information includes:
-    - The transaction scope.
-    - The start and commit TS.
-    - The transaction commit mode, which might be a two-phase, one-phase, or async commit.
-    - The information of transaction fallback from async commit or one-phase commit to two-phase commit.
-    - The error encountered.
-
-### tidb_log_file_max_days <span class="version-mark">New in v5.3.0</span>
-
-- Scope: SESSION
-- Type: Integer
->>>>>>> f3adeb39c3 (fix typo (#15647))
 - Default value: `0`
 - This variable is used to adjust the maximum days of logger on the current TiDB instance. Its value defaults to the value of the [`max-days`](/tidb-configuration-file.md#max-days) configuration in the configuration file. Changing the variable value only affects the current TiDB instance. After TiDB is restarted, the variable value is reset and the configuration value is not affected.
 
@@ -1337,38 +1274,6 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - This variable is used to set whether the optimizer executes the optimization operation of pushing down the aggregate function to the position before Join, Projection, and UnionAll.
 - When the aggregate operation is slow in query, you can set the variable value to ON.
 
-<<<<<<< HEAD
-=======
-### tidb_opt_broadcast_cartesian_join
-
-- Scope: SESSION | GLOBAL
-- Persists to cluster: YES
-- Type: Integer
-- Default value: `1`
-- Range: `[0, 2]`
-- Indicates whether to allow the Broadcast Cartesian Join.
-- `0` means that the Broadcast Cartesian Join is not allowed. `1` means that it is allowed based on [`tidb_broadcast_join_threshold_count`](#tidb_broadcast_join_threshold_count-new-in-v50). `2` means that it is always allowed even if the table size exceeds the threshold.
-- This variable is internally used in TiDB, and it is **NOT** recommended to modify its value.
-
-### tidb_opt_concurrency_factor
-
-- Scope: SESSION | GLOBAL
-- Persists to cluster: YES
-- Type: Float
-- Range: `[0, 2147483647]`
-- Default value: `3.0`
-- Indicates the CPU cost of starting a Golang goroutine in TiDB. This variable is internally used in the [Cost Model](/cost-model.md), and it is **NOT** recommended to modify its value.
-
-### tidb_opt_copcpu_factor
-
-- Scope: SESSION | GLOBAL
-- Persists to cluster: YES
-- Type: Float
-- Range: `[0, 2147483647]`
-- Default value: `3.0`
-- Indicates the CPU cost for TiKV Coprocessor to process one row. This variable is internally used in the [Cost Model](/cost-model.md), and it is **NOT** recommended to modify its value.
-
->>>>>>> f3adeb39c3 (fix typo (#15647))
 ### tidb_opt_correlation_exp_factor
 
 - Scope: SESSION | GLOBAL
