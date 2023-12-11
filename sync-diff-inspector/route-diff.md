@@ -94,11 +94,11 @@ target-schema = "schema"     # the target schema
 
 - If there is a table `schema` in the upstream, but no rule matches the table, sync-diff-inspector will add a new rule `schema -> _no__exists__db_` to the table router. After that, sync-diff-inspector will treat the table `schema` as the table `_no__exists__db_`.
 
-If `target-schema.target-table` does not exist in the rules, sync-diff-inspector will add a rule to match`target-schema.target-table` to `target-schema.target-table` to make it case-insensitive, because the table router is case-insensitive.
+If `target-schema.target-table` does not exist in the rules, sync-diff-inspector will add a rule to match `target-schema.target-table` to `target-schema.target-table` to make it case-insensitive, because the table router is case-insensitive.
 
 ### Examples
 
-Suppose there are seven tables:
+Suppose there are seven tables in the upstream:
 
 - `inspector_mysql_0.tb_emp1`
 - `Inspector_mysql_0.tb_emp1`
