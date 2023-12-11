@@ -54,7 +54,7 @@ CREATE INDEX idx1 ON table t1(c1);
 
 <CustomContent platform="tidb">
 
-Currently, for TiDB Self-Hosted, the DXF supports the distributed execution of the `ADD INDEX` and `IMPORT INTO` statements. For TiDB Cloud, the `IMPORT INTO` statement is not applicable until v7.2.
+Currently, for TiDB Self-Hosted, the DXF supports the distributed execution of the `ADD INDEX` and `IMPORT INTO` statements.
 
 - `ADD INDEX` is a DDL statement used to create indexes. For example:
 
