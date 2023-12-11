@@ -114,7 +114,7 @@ WHERE
 
 ### Storage engines
 
-MariaDB offers storage engines for local data like `InnoDB`, `MyISAM` and `Aria`. While the data format isn't directly supported by TiDB migrating these works fine. However there are also engines that place data outside of the server like the `CONNECT` storage engine and `Spider`. These can't be migrated to TiDB.
+MariaDB offers storage engines for local data like `InnoDB`, `MyISAM` and `Aria`. While the data format isn't directly supported by TiDB migrating these works fine. However there are also engines that place data outside of the server like the `CONNECT` storage engine and `Spider`. While you can migrate the data of these kinds of tables to TiDB, TiDB doesn't provide the functionality to store data external to the TiDB cluster.
 
 To see what storage engines you're using you can run the following statement:
 
@@ -314,6 +314,8 @@ Once your data is replicated you can run read-only queries on it to validate it.
 ### R5. Switchover
 
 First stop your application. Then monitor the replication delay, which should go to 0 seconds. Then you can change the configuration of your application so that it connects to TiDB and start it again.
+
+To check for replication delay run [`query-status <taskname>`](/dm/dm-query-status.md#detailed-query-result) via `dmctl` and check for `"synced: true"` in the `subTaskStatus`.
 
 ### R6. Cleanup
 
