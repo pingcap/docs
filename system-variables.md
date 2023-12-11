@@ -718,9 +718,9 @@ Constraint checking is always performed in place for pessimistic transactions (d
 - Type: Boolean
 - Default value: `OFF`
 - This variable is used to control whether multiple columns or indexes can be altered in one `ALTER TABLE` statement. When the value of this variable is `ON`, only the following multi-schema changes are supported:
-    - Add multiple columns. For example, `ATLER TABLE t ADD COLUMN c1 INT, ADD COLUMN c2 INT;`.
-    - Drop multiple columns. For example, `ATLER TABLE t DROP COLUMN c1, DROP COLUMN c2;`.
-    - Drop multiple indexes. For example, `ATLER TABLE t DROP INDEX i1, DROP INDEX i2;`.
+    - Add multiple columns. For example, `ALTER TABLE t ADD COLUMN c1 INT, ADD COLUMN c2 INT;`.
+    - Drop multiple columns. For example, `ALTER TABLE t DROP COLUMN c1, DROP COLUMN c2;`.
+    - Drop multiple indexes. For example, `ALTER TABLE t DROP INDEX i1, DROP INDEX i2;`.
     - Drop a column covered by a single-column index. For example, `ALTER TABLE t DROP COLUMN c1`, in which the schema contains `INDEX idx(c1)`.
 
 ### tidb_enable_cascades_planner
