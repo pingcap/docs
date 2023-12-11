@@ -1,7 +1,6 @@
 ---
 title: TiProxy Command-line Flags
 summary: Learn the command-line startup flags of TiProxy.
-aliases: ['/docs/dev/tiproxy/tiproxy-command-line-flags/']
 ---
 
 # TiProxy Command-Line Flags
@@ -30,7 +29,7 @@ This is the server program `tiproxy`.
 + Default: ""
 + Fallback to *info* when empty.
 
-## TiProxy Ctl
+## TiProxy control
 
 This is the client program `tiproxyctl`.
 
@@ -54,18 +53,16 @@ This is the client program `tiproxyctl`.
 
 ### `-k, --insecure`
 
-+ Whether skip TLS CA verification when dial to the server
++ Specifies whether to skip TLS CA verification when dialing to the server
 + Default: "false"
 + Useful for testing.
 
 ### `--ca string`
 
-+ Specifies the ca when dial to the server.
++ Specifies the CA when dialing to the server.
 + Default: ""
-+ For security.
 
 ### `--cert string`
 
-+ Specifies the cert when dial to the server.
++ Specifies the certificate when dialing to the server.
 + Default: ""
-+ For security.

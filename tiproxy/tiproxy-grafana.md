@@ -4,7 +4,7 @@ summary: Learn the monitoring items of TiProxy.
 aliases: ['/docs/dev/tiproxy/monitor-tiproxy/','/docs/dev/reference/tiproxy/monitor/']
 ---
 
-# Monitor the TiProxy Cluster
+# TiProxy Monitoring Metrics
 
 This document describes the monitoring items of TiProxy.
 

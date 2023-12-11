@@ -1,7 +1,6 @@
 ---
 title: Configure TiProxy
 summary: Learn how to configure TiProxy.
-aliases: ['/docs/dev/tiproxy/tiproxy-configuration/','/docs/dev/reference/tiproxy/configuration/']
 ---
 
 # Configure TiProxy
@@ -32,7 +31,7 @@ This section introduces the configuration parameters of TiProxy.
 #   "v2" => accept proxy protocol if any, require backends to support proxy protocol.
 # proxy-protocol = ""
 
-# graceful-wait-before-shutdown is recommanded to be set to 0 when there's no other proxy(e.g. NLB) between the client and TiProxy.
+# graceful-wait-before-shutdown is recommended to be set to 0 when there's no other proxy (e.g. NLB) between the client and TiProxy.
 # possible values:
 #   0 => begin to drain clients immediately.
 #   30 => HTTP status returns unhealthy and the SQL port accepts new connections for the last 30 seconds. After that, refuse new connections and drain clients.

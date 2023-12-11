@@ -8,7 +8,7 @@ aliases: ['/docs/dev/tiproxy-deployment-topology/']
 
 This document describes the deployment topology of [TiProxy](/tiproxy/tiproxy-overview.md) based on the minimal TiDB topology.
 
-TiProxy is a L7 proxy server for TiDB, that can balance connections and migrate sessions when possible.
+TiProxy is a L7 proxy server for TiDB, which can balance connections and migrate sessions when possible.
 
 ## Topology information
 
