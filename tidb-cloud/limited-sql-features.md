@@ -225,8 +225,6 @@ TiDB Cloud works with almost all workloads that TiDB supports, but there are som
 | `wait_timeout` | No limitation | Read-only [^11] |
 | `tidb_replica_read` | No limitation | Read-only [^14] |
 
-
-
 ## Optimizer Hint
 
 | Hint | TiDB Dedicated | TiDB Serverless |
@@ -236,10 +234,6 @@ TiDB Cloud works with almost all workloads that TiDB supports, but there are som
 | `MEMORY_QUOTA()` | No limitation | Not supported |
 | `MAX_EXECUTION_TIME()` | No limitation | Not supported |
 | `READ_CONSISTENT_REPLICA()` | No limitation | Not supported [^14] |
-
-
-
-
 
 [^1]: Configuring data placement is not supported on TiDB Serverless.
 [^2]: Configuring resource groups is not supported on TiDB Serverless.
