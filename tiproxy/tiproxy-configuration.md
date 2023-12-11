@@ -16,7 +16,6 @@ This section introduces the configuration parameters of TiProxy.
 >
 > If you need to adjust the value of a configuration item, refer to [Modify the configuration](/maintain-tidb-using-tiup.md#modify-the-configuration).
 
-
 ```toml
 [proxy]
 # SQL service address
@@ -131,13 +130,13 @@ There are 4 tls objects in `[security]` section. They share same configuration f
    autocert-expire-duration = "72h" # default expire duration for auto certs.
 ```
 
-#### Client Object:
+#### Client Object
 
 - Requires to set `ca` or `skip-ca` (skip verify server certs).
 - Optionally, `cert`/`key` will be used if server asks, i.e. server-side client verification.
 - Useless fields: auto-certs.
 
-#### Server Object:
+#### Server Object
 
 + Requires to set `cert`/`key` or `auto-certs` (generate a temporary cert, mostly for testing).
 + Optionally, non-empty `ca` will enable server-side client verification. Client must provide their certs. Or if `skip-ca` is true with a non-empty `ca`, server will only verify client certs if it actively provide one.
