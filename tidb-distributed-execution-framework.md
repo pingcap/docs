@@ -38,12 +38,12 @@ In a database management system, in addition to the core transactional processin
 Enabling the DXF can solve the above problems and has the following three advantages:
 
 - The framework provides unified capabilities for high scalability, high availability, and high performance.
-- The framework supports distributed execution of tasks, which can flexibly schedule the available computing resources of the entire TiDB cluster, thereby better utilizing the computing resources in a TiDB cluster.
-- The framework provides unified resource usage and management capabilities for both overall and individual tasks.
+- The DXF supports distributed execution of tasks, which can flexibly schedule the available computing resources of the entire TiDB cluster, thereby better utilizing the computing resources in a TiDB cluster.
+- The DXF provides unified resource usage and management capabilities for both overall and individual tasks.
 
 <CustomContent platform="tidb-cloud">
 
-Currently, for TiDB Self-Hosted, the DXF supports the distributed execution of the `ADD INDEX`. `ADD INDEX` is a DDL statement used to create indexes. For example:
+Currently, the DXF supports the distributed execution of the `ADD INDEX`. `ADD INDEX` is a DDL statement used to create indexes. For example:
 
 ```sql
 ALTER TABLE t1 ADD INDEX idx1(c1);
@@ -121,14 +121,14 @@ Adjust the following system variables related to Fast Online DDL:
 
     </CustomContent>
 
-2. For the following system variables that might affect the distributed execution of DDL tasks, it is recommended that you use their default values:
+2. In general, for the following system variables that might affect the distributed execution of DDL tasks, it is recommended that you use their default values:
 
     * [`tidb_ddl_reorg_worker_cnt`](/system-variables.md#tidb_ddl_reorg_worker_cnt): use the default value `4`. The recommended maximum value is `16`.
     * [`tidb_ddl_reorg_priority`](/system-variables.md#tidb_ddl_reorg_priority)
     * [`tidb_ddl_error_count_limit`](/system-variables.md#tidb_ddl_error_count_limit)
     * [`tidb_ddl_reorg_batch_size`](/system-variables.md#tidb_ddl_reorg_batch_size): use the default value. The recommended maximum value is `1024`.
 
-3. Starting from v7.4.0, you can adjust the number of TiDB nodes that perform background tasks according to actual needs. After deploying a TiDB cluster, you can set the instance-level system variable [`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740) for each TiDB node in the cluster. When `tidb_service_scope` of a TiDB node is set to `background`, the TiDB node can execute background tasks. When `tidb_service_scope` of a TiDB node is set to the default value "", the TiDB node cannot execute background tasks. If `tidb_service_scope` is not set for any TiDB node in a cluster, the DXF schedules all TiDB nodes to execute background tasks by default.
+3. Starting from v7.4.0, you can adjust the number of TiDB nodes that perform the DXF tasks according to actual needs. After deploying a TiDB cluster, you can set the instance-level system variable [`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740) for each TiDB node in the cluster. When `tidb_service_scope` of a TiDB node is set to `background`, the TiDB node can execute the DXF tasks. When `tidb_service_scope` of a TiDB node is set to the default value "", the TiDB node cannot execute the DXF tasks. If `tidb_service_scope` is not set for any TiDB node in a cluster, the DXF schedules all TiDB nodes to execute tasks by default.
 
     > **Note:**
     >
