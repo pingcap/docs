@@ -1,9 +1,9 @@
 ---
-title: TiDB Backend Task Distributed eXecution Framework (DXF)
-summary: Learn the use cases, limitations, usage, and implementation principles of the TiDB backend task Distributed eXecution Framework (DXF).
+title: TiDB Distributed eXecution Framework (DXF)
+summary: Learn the use cases, limitations, usage, and implementation principles of the TiDB Distributed eXecution Framework (DXF).
 ---
 
-# TiDB Backend Task Distributed eXecution Framework (DXF)
+# TiDB Distributed eXecution Framework (DXF)
 
 <CustomContent platform="tidb-cloud">
 
@@ -13,7 +13,7 @@ summary: Learn the use cases, limitations, usage, and implementation principles 
 
 </CustomContent>
 
-TiDB adopts a computing-storage separation architecture with excellent scalability and elasticity. Starting from v7.1.0, TiDB introduces a backend task DXF (Distributed eXecution Framework) to further leverage the resource advantages of the distributed architecture. The goal of this framework is to implement unified scheduling and distributed execution of all backend tasks, and to provide unified resource management capabilities for both overall and individual backend tasks, which better meets users' expectations for resource usage.
+TiDB adopts a computing-storage separation architecture with excellent scalability and elasticity. Starting from v7.1.0, TiDB introduces a DXF (Distributed eXecution Framework) to further leverage the resource advantages of the distributed architecture. The goal of this framework is to implement unified scheduling and distributed execution of tasks, and to provide unified resource management capabilities for both overall and individual tasks, which better meets users' expectations for resource usage.
 
 This document describes the use cases, limitations, usage, and implementation principles of the DXF.
 
@@ -21,13 +21,13 @@ This document describes the use cases, limitations, usage, and implementation pr
 
 <CustomContent platform="tidb">
 
-In a database management system, in addition to the core transactional processing (TP) and analytical processing (AP) workloads, there are other important tasks, such as DDL operations, IMPORT INTO, TTL, Analyze, and Backup/Restore, which are called **backend tasks**. These backend tasks need to process a large amount of data in database objects (tables), so they typically have the following characteristics:
+In a database management system, in addition to the core transactional processing (TP) and analytical processing (AP) workloads, there are other important tasks, such as DDL operations, IMPORT INTO, TTL, Analyze, and Backup/Restore. These tasks need to process a large amount of data in database objects (tables), so they typically have the following characteristics:
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-In a database management system, in addition to the core transactional processing (TP) and analytical processing (AP) workloads, there are other important tasks, such as DDL operations, TTL, Analyze, and Backup/Restore, which are called **backend tasks**. These backend tasks need to process a large amount of data in database objects (tables), so they typically have the following characteristics:
+In a database management system, in addition to the core transactional processing (TP) and analytical processing (AP) workloads, there are other important tasks, such as DDL operations, TTL, Analyze, and Backup/Restore. These tasks need to process a large amount of data in database objects (tables), so they typically have the following characteristics:
 
 </CustomContent>
 
@@ -41,6 +41,19 @@ Enabling the DXF can solve the above problems and has the following three advant
 - The framework supports distributed execution of tasks, which can flexibly schedule the available computing resources of the entire TiDB cluster, thereby better utilizing the computing resources in a TiDB cluster.
 - The framework provides unified resource usage and management capabilities for both overall and individual tasks.
 
+<CustomContent platform="tidb-cloud">
+
+Currently, for TiDB Self-Hosted, the DXF supports the distributed execution of the `ADD INDEX`. `ADD INDEX` is a DDL statement used to create indexes. For example:
+
+```sql
+ALTER TABLE t1 ADD INDEX idx1(c1);
+CREATE INDEX idx1 ON table t1(c1);
+```
+
+</CustomContent>
+
+<CustomContent platform="tidb">
+
 Currently, for TiDB Self-Hosted, the DXF supports the distributed execution of the `ADD INDEX` and `IMPORT INTO` statements. For TiDB Cloud, the `IMPORT INTO` statement is not applicable until v7.2.
 
 - `ADD INDEX` is a DDL statement used to create indexes. For example:
@@ -51,6 +64,8 @@ Currently, for TiDB Self-Hosted, the DXF supports the distributed execution of t
     ```
 
 - `IMPORT INTO` is used to import data in formats such as `CSV`, `SQL`, and `PARQUET` into an empty table. For more information, see [`IMPORT INTO`](https://docs.pingcap.com/tidb/v7.2/sql-statement-import-into).
+
+</CustomContent>
 
 ## Limitation
 
@@ -88,7 +103,7 @@ Adjust the following system variables related to Fast Online DDL:
 
 ## Usage
 
-1. To enable the distributed framework, set the value of [`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710) to `ON`:
+1. To enable the DXF, set the value of [`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710) to `ON`:
 
     ```sql
     SET GLOBAL tidb_enable_dist_task = ON;
@@ -126,10 +141,10 @@ The architecture of the DXF is as follows:
 
 ![Architecture of the DXF](/media/dist-task/dist-task-architect.jpg)
 
-As shown in the preceding diagram, the execution of backend tasks in the distributed framework is mainly handled by the following modules:
+As shown in the preceding diagram, the execution of tasks in the DXF is mainly handled by the following modules:
 
 - Dispatcher: generates the distributed execution plan for each task, manages the execution process, converts the task status, and collects and feeds back the runtime task information.
-- Scheduler: replicates the execution of distributed tasks among TiDB nodes to improve the efficiency of backend task execution.
+- Scheduler: replicates the execution of distributed tasks among TiDB nodes to improve the efficiency of task execution.
 - Subtask Executor: the actual executor of distributed subtasks. In addition, the Subtask Executor returns the execution status of subtasks to the Scheduler, and the Scheduler updates the execution status of subtasks in a unified manner.
 - Resource pool: provides the basis for quantifying resource usage and management by pooling computing resources of the above modules.
 

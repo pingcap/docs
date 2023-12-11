@@ -620,7 +620,7 @@
     - [update](/tidb-cloud/ticloud-update.md)
   - [Table Filter](/table-filter.md)
   - [Resource Control](/tidb-resource-control.md)
-  - [TiDB Backend Task Distributed Execution Framework](/tidb-distributed-execution-framework.md)
+  - [TiDB Distributed Execution Framework](/tidb-distributed-execution-framework.md)
   - [TiDB Global Sort](/tidb-global-sort.md)
   - [DDL Execution Principles and Best Practices](/ddl-introduction.md)
   - [Troubleshoot Inconsistency Between Data and Indexes](/troubleshoot-data-inconsistency-errors.md)
