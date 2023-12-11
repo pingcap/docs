@@ -223,12 +223,13 @@ TiDB Cloud works with almost all workloads that TiDB supports, but there are som
 | `validate_password.policy` | No limitation | Can only be `MEDIUM` or `STRONG` [^10] |
 | `validate_password.special_char_count` | No limitation | At least `1` [^10] |
 | `wait_timeout` | No limitation | Read-only [^11] |
+| `tidb_replica_read` | No limitation | Read-only [^14] |
 
 [^1]: Configuring data placement is not supported on TiDB Serverless.
 
 [^2]: Configuring resource groups is not supported on TiDB Serverless.
 
-[^3]: To perform [Back up and Restore](/tidb-cloud/backup-and-restore-serverless.md) operations on TiDB Serverless, you can use the TiDB Cloud console instead. 
+[^3]: To perform [Back up and Restore](/tidb-cloud/backup-and-restore-serverless.md) operations on TiDB Serverless, you can use the TiDB Cloud console instead.
 
 [^4]: The feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security).
 
@@ -249,3 +250,5 @@ TiDB Cloud works with almost all workloads that TiDB supports, but there are som
 [^12]: Customizing cache size using [`AUTO_ID_CACHE`](/auto-increment.md#cache-size-control) is temporarily unavailable on TiDB Serverless.
 
 [^13]: Not supported. Enabling `require_secure_transport` for TiDB Dedicated clusters will result in SQL client connection failures.
+
+[^14]: `tidb_replica_read` only supports `leader` on TiDB Serverless.
