@@ -219,6 +219,63 @@ mysql> SELECT * FROM t1;
 - Range: `[0, 18446744073709551615]`
 - The maximum number of rows returned by the `SELECT` statements.
 
+<<<<<<< HEAD
+=======
+### ssl_ca
+
+<CustomContent platform="tidb">
+
+- Scope: NONE
+- Default value: ""
+- The location of the certificate authority file (if there is one). The value of this variable is defined by the TiDB configuration item [`ssl-ca`](/tidb-configuration-file.md#ssl-ca).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+- Scope: NONE
+- Default value: ""
+- The location of the certificate authority file (if there is one). The value of this variable is defined by the TiDB configuration item [`ssl-ca`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#ssl-ca).
+
+</CustomContent>
+
+### ssl_cert
+
+<CustomContent platform="tidb">
+
+- Scope: NONE
+- Default value: ""
+- The location of the certificate file (if there is a file) that is used for SSL/TLS connections. The value of this variable is defined by the TiDB configuration item [`ssl-cert`](/tidb-configuration-file.md#ssl-cert).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+- Scope: NONE
+- Default value: ""
+- The location of the certificate file (if there is a file) that is used for SSL/TLS connections. The value of this variable is defined by the TiDB configuration item [`ssl-cert`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#ssl-cert).
+
+</CustomContent>
+
+### ssl_key
+
+<CustomContent platform="tidb">
+
+- Scope: NONE
+- Default value: ""
+- The location of the private key file (if there is one) that is used for SSL/TLS connections. The value of this variable is defined by TiDB configuration item [`ssl-key`](/tidb-configuration-file.md#ssl-cert).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+- Scope: NONE
+- Default value: ""
+- The location of the private key file (if there is one) that is used for SSL/TLS connections. The value of this variable is defined by TiDB configuration item [`ssl-key`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#ssl-key).
+
+</CustomContent>
+
+>>>>>>> f3adeb39c3 (fix typo (#15647))
 ### system_time_zone
 
 - Scope: NONE
@@ -489,9 +546,9 @@ Constraint checking is always performed in place for pessimistic transactions (d
 - Type: Boolean
 - Default value: `OFF`
 - This variable is used to control whether multiple columns or indexes can be altered in one `ALTER TABLE` statement. When the value of this variable is `ON`, only the following multi-schema changes are supported:
-    - Add multiple columns. For example, `ATLER TABLE t ADD COLUMN c1 INT, ADD COLUMN c2 INT;`.
-    - Drop multiple columns. For example, `ATLER TABLE t DROP COLUMN c1, DROP COLUMN c2;`.
-    - Drop multiple indexes. For example, `ATLER TABLE t DROP INDEX i1, DROP INDEX i2;`.
+    - Add multiple columns. For example, `ALTER TABLE t ADD COLUMN c1 INT, ADD COLUMN c2 INT;`.
+    - Drop multiple columns. For example, `ALTER TABLE t DROP COLUMN c1, DROP COLUMN c2;`.
+    - Drop multiple indexes. For example, `ALTER TABLE t DROP INDEX i1, DROP INDEX i2;`.
     - Drop a column covered by a single-column index. For example, `ALTER TABLE t DROP COLUMN c1`, in which the schema contains `INDEX idx(c1)`.
     
 ### tidb_enable_cascades_planner
@@ -882,6 +939,61 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Default value: `tikv,tiflash,tidb`
 - This variable is used to set the storage engine list that TiDB can use when reading data.
 
+<<<<<<< HEAD
+=======
+### tidb_last_ddl_info <span class="version-mark">New in v6.0.0</span>
+
+- Scope: SESSION
+- Persists to cluster: No
+- Default value: ""
+- Type: String
+- This is a read-only variable. It is internally used in TiDB to get the information of the last DDL operation within the current session.
+    - "query": The last DDL query string.
+    - "seq_num": The sequence number for each DDL operation. It is used to identify the order of DDL operations.
+
+### tidb_last_query_info <span class="version-mark">New in v4.0.14</span>
+
+- Scope: SESSION
+- Persists to cluster: No
+- Default value: ""
+- This is a read-only variable. It is internally used in TiDB to query the transaction information of the last DML statement. The information includes:
+    - `txn_scope`: The scope of the transaction, which can be `global` or `local`.
+    - `start_ts`: The start timestamp of the transaction.
+    - `for_update_ts`: The `for_update_ts` of the previously executed DML statement. This is an internal term of TiDB used for tests. Usually, you can ignore this information.
+    - `error`: The error message, if any.
+
+### tidb_last_txn_info <span class="version-mark">New in v4.0.9</span>
+
+- Scope: SESSION
+- Persists to cluster: No
+- Type: String
+- This variable is used to get the last transaction information within the current session. It is a read-only variable. The transaction information includes:
+    - The transaction scope.
+    - The start and commit TS.
+    - The transaction commit mode, which might be a two-phase, one-phase, or async commit.
+    - The information of transaction fallback from async commit or one-phase commit to two-phase commit.
+    - The error encountered.
+
+### tidb_log_file_max_days <span class="version-mark">New in v5.3.0</span>
+
+- Scope: SESSION
+- Type: Integer
+- Default value: `0`
+- Range: `[0, 2147483647]`
+
+<CustomContent platform="tidb">
+
+- This variable is used to set the maximum days that the log is retained on the current TiDB instance. Its value defaults to the value of the [`max-days`](/tidb-configuration-file.md#max-days) configuration in the configuration file. Changing the variable value only affects the current TiDB instance. After TiDB is restarted, the variable value is reset and the configuration value is not affected.
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+- This variable is used to set the maximum days that the log is retained on the current TiDB instance.
+
+</CustomContent>
+
+>>>>>>> f3adeb39c3 (fix typo (#15647))
 ### tidb_low_resolution_tso
 
 - Scope: SESSION
@@ -974,6 +1086,38 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - This variable is used to set whether the optimizer executes the optimization operation of pushing down the aggregate function to the position before Join, Projection, and UnionAll.
 - When the aggregate operation is slow in query, you can set the variable value to ON.
 
+<<<<<<< HEAD
+=======
+### tidb_opt_broadcast_cartesian_join
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: YES
+- Type: Integer
+- Default value: `1`
+- Range: `[0, 2]`
+- Indicates whether to allow the Broadcast Cartesian Join.
+- `0` means that the Broadcast Cartesian Join is not allowed. `1` means that it is allowed based on [`tidb_broadcast_join_threshold_count`](#tidb_broadcast_join_threshold_count-new-in-v50). `2` means that it is always allowed even if the table size exceeds the threshold.
+- This variable is internally used in TiDB, and it is **NOT** recommended to modify its value.
+
+### tidb_opt_concurrency_factor
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: YES
+- Type: Float
+- Range: `[0, 2147483647]`
+- Default value: `3.0`
+- Indicates the CPU cost of starting a Golang goroutine in TiDB. This variable is internally used in the [Cost Model](/cost-model.md), and it is **NOT** recommended to modify its value.
+
+### tidb_opt_copcpu_factor
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: YES
+- Type: Float
+- Range: `[0, 2147483647]`
+- Default value: `3.0`
+- Indicates the CPU cost for TiKV Coprocessor to process one row. This variable is internally used in the [Cost Model](/cost-model.md), and it is **NOT** recommended to modify its value.
+
+>>>>>>> f3adeb39c3 (fix typo (#15647))
 ### tidb_opt_correlation_exp_factor
 
 - Scope: SESSION | GLOBAL
