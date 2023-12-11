@@ -300,16 +300,18 @@ For more configuration description, see the following configuration examples:
 
 > **Note:**
 >
-> You can use secret keys or interactive passwords for security authentication when you deploy TiDB using TiUP:
+> When deploying a cluster through TiUP, the user specified for initialization (via the --user parameter) can authenticate securely using either a key or interactive password when you deploy TiDB using TiUP:
 >
 > - If you use secret keys, specify the path of the keys through `-i` or `--identity_file`.
 > - If you use passwords, add the `-p` flag to enter the password interaction window.
 > - If password-free login to the target machine has been configured, no authentication is required.
 >
-> In general, TiUP creates the user and group specified in the `topology.yaml` file on the target machine, with the following exceptions:
+> The user and group used by TiUP for executing related processes (specified via `topology.yaml`, defaults to tidb) are generally automatically created on the target machine, with the following exceptions:
 >
 > - The user name configured in `topology.yaml` already exists on the target machine.
 > - You have used the `--skip-create-user` option in the command line to explicitly skip the step of creating the user.
+>
+> Regardless of whether the user and group specified in topology.yaml are automatically created or not, TiUP will generate a pair of SSH keys and set up passwordless login for that user on each machine. This user and SSH key will be used to manage the machine in subsequent operations, and the user and password used for initialization will no longer be used after deployment is complete.
 
 Before you run the `deploy` command, use the `check` and `check --apply` commands to detect and automatically repair potential risks in the cluster:
 
