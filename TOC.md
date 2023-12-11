@@ -644,7 +644,7 @@
     - [Data Validation](/tiflash/tiflash-data-validation.md)
     - [Compatibility](/tiflash/tiflash-compatibility.md)
     - [Pipeline Execution Model](/tiflash/tiflash-pipeline-model.md)
-  - TiDB Distributed Execution Framework
+  - TiDB Distributed eXecution Framework (DXF)
     - [Introduction](/tidb-distributed-execution-framework.md)
     - [TiDB Global Sort](/tidb-global-sort.md)
   - [System Variables](/system-variables.md)

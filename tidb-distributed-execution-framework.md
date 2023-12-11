@@ -111,13 +111,13 @@ Adjust the following system variables related to Fast Online DDL:
 
     <CustomContent platform="tidb">
 
-    When background tasks are running, the statements supported by the framework (such as [`ADD INDEX`](/sql-statements/sql-statement-add-index.md) and [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md)) are executed in a distributed manner. All TiDB nodes run background tasks by default.
+    When the DXF tasks are running, the statements supported by the framework (such as [`ADD INDEX`](/sql-statements/sql-statement-add-index.md) and [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md)) are executed in a distributed manner. All TiDB nodes run background tasks by default.
 
     </CustomContent>
 
     <CustomContent platform="tidb-cloud">
 
-    When background tasks are running, the statements supported by the framework (such as [`ADD INDEX`](/sql-statements/sql-statement-add-index.md)) are executed in a distributed manner. All TiDB nodes run background tasks by default.
+    When the DXF tasks are running, the statements supported by the framework (such as [`ADD INDEX`](/sql-statements/sql-statement-add-index.md)) are executed in a distributed manner. All TiDB nodes run background tasks by default.
 
     </CustomContent>
 
