@@ -319,7 +319,7 @@ To check for replication delay run [`query-status <taskname>`](/dm/dm-query-stat
 
 ### R6. Cleanup
 
-Once you have verified that the migration is succesful you can make a final backup of the data in MariaDB and stop the server. This also means you can stop and remove the DM cluster.
+Once you have verified that the migration is successful you can make a final backup of the data in MariaDB and stop the server. This also means you can stop and remove the DM cluster.
 
 ## Users and grants
 
