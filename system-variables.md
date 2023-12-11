@@ -4150,6 +4150,10 @@ SHOW WARNINGS;
 
 ### tidb_replica_read <span class="version-mark">New in v4.0</span>
 
+>**Note:**
+>
+>This variable is not supported on [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless).
+
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
 - Type: Enumeration
