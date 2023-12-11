@@ -236,6 +236,7 @@ TiDB Cloud works with almost all workloads that TiDB supports, but there are som
 | `READ_CONSISTENT_REPLICA()` | No limitation | Not supported [^14] |
 
 [^1]: Configuring data placement is not supported on TiDB Serverless.
+
 [^2]: Configuring resource groups is not supported on TiDB Serverless.
 
 [^3]: To perform [Back up and Restore](/tidb-cloud/backup-and-restore-serverless.md) operations on TiDB Serverless, you can use the TiDB Cloud console instead.
