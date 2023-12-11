@@ -38,8 +38,8 @@ In a database management system, in addition to the core transactional processin
 Enabling the DXF can solve the above problems and has the following three advantages:
 
 - The framework provides unified capabilities for high scalability, high availability, and high performance.
-- The framework supports distributed execution of backend tasks, which can flexibly schedule the available computing resources of the entire TiDB cluster, thereby better utilizing the computing resources in a TiDB cluster.
-- The framework provides unified resource usage and management capabilities for both overall and individual backend tasks.
+- The framework supports distributed execution of tasks, which can flexibly schedule the available computing resources of the entire TiDB cluster, thereby better utilizing the computing resources in a TiDB cluster.
+- The framework provides unified resource usage and management capabilities for both overall and individual tasks.
 
 Currently, for TiDB Self-Hosted, the DXF supports the distributed execution of the `ADD INDEX` and `IMPORT INTO` statements. For TiDB Cloud, the `IMPORT INTO` statement is not applicable until v7.2.
 
@@ -106,7 +106,7 @@ Adjust the following system variables related to Fast Online DDL:
 
     </CustomContent>
 
-2. It is recommended that you use their default values for the following system variables that might affect the distributed execution of DDL tasks:
+2. For the following system variables that might affect the distributed execution of DDL tasks, it is recommended that you use their default values:
 
     * [`tidb_ddl_reorg_worker_cnt`](/system-variables.md#tidb_ddl_reorg_worker_cnt): use the default value `4`. The recommended maximum value is `16`.
     * [`tidb_ddl_reorg_priority`](/system-variables.md#tidb_ddl_reorg_priority)
