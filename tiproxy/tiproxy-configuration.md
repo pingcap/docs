@@ -13,7 +13,7 @@ This section introduces the configuration parameters of TiProxy.
 
 > **Tip:**
 >
-> If you need to adjust the value of a configuration item, refer to [Modify the configuration](/maintain-tidb-using-tiup.md#modify-the-configuration).
+> If you need to adjust the value of a configuration item, refer to [Modify the configuration](/maintain-tidb-using-tiup.md#modify-the-configuration). Since TiProxy will do config hot-reloading, you can also skip restart by `tiup cluster reload --skip-restart`.
 
 ### proxy
 
@@ -27,21 +27,25 @@ Configuration for SQL port.
 #### `graceful-wait-before-shutdown`
 
 + Default Value: `0`
++ Hot-reload supported.
 + HTTP status returns unhealthy and the SQL port accepts new connections for the last `graceful-wait-before-shutdown` seconds. After that, refuse new connections and drain clients. It is recommanded to be set to 0 when there's no other proxy(e.g. NLB) between the client and TiProxy.
 
 #### `graceful-close-conn-timeout`
 
 + Default Value: `15`
++ Hot-reload supported.
 + Close connections when they have finished current transactions (AKA drain clients) after `graceful-close-conn-timeout` seconds. It is recommanded to be set longer than the lifecycle of a transaction.
 
 #### `max-connections`
 
 + Default Value: `0`
++ Hot-reload supported.
 + Accept as many as `max-connections` connections. Zero means no limitation.
 
 #### `conn-buffer-size`
 
 + Default Value: `0`
++ Hot-reload supported.
 + Tradeoff between memory and performance. Larger buffer may yield better performance result.
 
 #### `pd-addrs`
@@ -52,7 +56,14 @@ Configuration for SQL port.
 #### `proxy-protocol`
 
 + Default Value: ``
++ Hot-reload supported.
 + Enable proxy protocol handling on the port. You could specify `v2` to handle proxy protocol version 2.
+
+#### `require-backend-tls`
+
++ Default Value: `true`
++ Hot-reload supported.
++ Require TLS on backend instances.
 
 ### api
 
@@ -73,6 +84,7 @@ Configurations for HTTP gateway.
 #### `level`
 
 + Default Value: `info`
++ Hot-reload supported.
 + You can specify:
 
     + `tidb`: formats used by tidb, check https://github.com/tikv/rfcs/blob/master/text/0018-unified-log-format.md
@@ -84,26 +96,32 @@ Configurations for HTTP gateway.
 #### `filename`
 
 + Default Value: ``
++ Hot-reload supported.
 + Log file path. Non empty value will enable logging to file.
 
 #### `max-size`
 
 + Default Value: `300`
++ Hot-reload supported.
 + Log file maximum size, in megabytes. Log will be rotated.
 
 #### `max-days`
 
 + Default Value: `3`
++ Hot-reload supported.
 + Maximum days to retain old log files. It is deleted once it is too old.
 
 #### `max-backups`
 
 + Default Value: `3`
++ Hot-reload supported.
 + Maximum number of log files. Extra log files will be deleted once there are too many.
 
 ### security
 
 There are 4 tls objects in `[security]` section. They share same configuration formats and fields. But they are interpreted differently according to their usage.
+
+All TLS options are hot-reloaded.
 
 #### TLS object
 
