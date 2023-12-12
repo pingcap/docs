@@ -1019,7 +1019,6 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
     - `0` or `OFF`, which means that the optimizer will not use tiflash Cop/BatchCop.
     - `1` or `ON`, which means that the optimizer determines whether to use the Cop/BatchCop and MPP protocol based on the cost estimation.
 
-
 ### tidb_allow_batch_cop <span class="version-mark">New in v4.0</span>
 
 - Scope: SESSION | GLOBAL
