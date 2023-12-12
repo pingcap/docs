@@ -719,6 +719,7 @@ Configuration items related to opentracing.reporter.
 - Default value: `200`
 
 ### `copr-req-timeout` <span class="version-mark">New in v7.5.0</span>
+
 > **Warning:**
 >
 > this may be deprecated in the future, **DO NOT** change the value of this configuration.
