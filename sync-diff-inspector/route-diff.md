@@ -75,8 +75,6 @@ target-table = "t_2"           # The name of the target table
     target-schema = "schema"     # the target schema
     ```
 
-    The behavior of sync-diff-inspector is as follows:
-
     - If there is no schema `schema` in the upstream, sync-diff-inspector does nothing.
     - If there is a schema `schema` in the upstream, and a rule matches the schema, sync-diff-inspector does nothing.
     - If there is a schema `schema` in the upstream, but no rule matches the schema, sync-diff-inspector will add a new rule `schema -> _no__exists__db_` to the table router. After that, sync-diff-inspector will treat the table `schema` as the table `_no__exists__db_`.
