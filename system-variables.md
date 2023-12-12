@@ -1404,11 +1404,42 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Scope: GLOBAL
 - Persists to cluster: Yes
 - Default value: `OFF`
-- This variable is used to control whether to enable the [TiDB backend task distributed execution framework](/tidb-distributed-execution-framework.md). After the framework is enabled, backend tasks such as DDL and import will be distributedly executed and completed by multiple TiDB nodes in the cluster.
-- Starting from TiDB v7.1.0, the framework supports distributedly executing the [`ADD INDEX`](/sql-statements/sql-statement-add-index.md) statement for partitioned tables.
-- Starting from TiDB v7.2.0, the framework supports distributedly executing the [`IMPORT INTO`](https://docs.pingcap.com/tidb/v7.2/sql-statement-import-into) statement for import jobs of TiDB Self-Hosted. For TiDB Cloud, the `IMPORT INTO` statement is not applicable.
+- This variable is used to control whether to enable the [TiDB Distributed eXecution Framework (DXF)](/tidb-distributed-execution-framework.md). After the framework is enabled, the DXF tasks such as DDL and import will be distributedly executed and completed by multiple TiDB nodes in the cluster.
+- Starting from TiDB v7.1.0, the DXF supports distributedly executing the [`ADD INDEX`](/sql-statements/sql-statement-add-index.md) statement for partitioned tables.
+- Starting from TiDB v7.2.0, the DXF supports distributedly executing the [`IMPORT INTO`](https://docs.pingcap.com/tidb/v7.2/sql-statement-import-into) statement for import jobs of TiDB Self-Hosted. For TiDB Cloud, the `IMPORT INTO` statement is not applicable.
 - This variable is renamed from `tidb_ddl_distribute_reorg`.
 
+<<<<<<< HEAD
+=======
+### tidb_cloud_storage_uri <span class="version-mark">New in v7.4.0</span>
+
+> **Warning:**
+>
+> This feature is experimental. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Default value: `""`
+
+<CustomContent platform="tidb">
+
+- This variable is used to specify the Amazon S3 cloud storage URI to enable [Global Sort](/tidb-global-sort.md). After enabling the [TiDB Distributed eXecution Framework (DXF)](/tidb-distributed-execution-framework.md), you can use the Global Sort feature by configuring the URI and pointing it to an appropriate cloud storage path with the necessary permissions to access the storage. For more details, see [Amazon S3 URI format](/external-storage-uri.md#amazon-s3-uri-format).
+- The following statements can use the Global Sort feature.
+    - The [`ADD INDEX`](/sql-statements/sql-statement-add-index.md) statement.
+    - The [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md) statement for import jobs of TiDB Self-Hosted. For TiDB Cloud, the `IMPORT INTO` statement is not applicable.
+
+</CustomContent>
+<CustomContent platform="tidb-cloud">
+
+- This variable is used to specify the cloud storage URI to enable [Global Sort](/tidb-global-sort.md). After enabling the [TiDB Distributed eXecution Framework (DXF)](/tidb-distributed-execution-framework.md), you can use the Global Sort feature by configuring the URI and pointing it to an appropriate cloud storage path with the necessary permissions to access the storage. For more details, see [URI Formats of External Storage Services](https://docs.pingcap.com/tidb/stable/external-storage-uri).
+- The following statements can use the Global Sort feature.
+    - The [`ADD INDEX`](/sql-statements/sql-statement-add-index.md) statement.
+    - The [`IMPORT INTO`](https://docs.pingcap.com/tidb/v7.2/sql-statement-import-into) statement for import jobs of TiDB Self-Hosted. For TiDB Cloud, the `IMPORT INTO` statement is not applicable.
+
+</CustomContent>
+
+>>>>>>> 8286f4bafb (Update tidb-distributed-execution-framework.md (#15606))
 ### tidb_ddl_error_count_limit
 
 - Scope: GLOBAL
@@ -4374,7 +4405,55 @@ SHOW WARNINGS;
 - Range: `[128, 9223372036854775807]`, in bytes. The memory format with the units "KB|MB|GB|TB" is also supported.
 - After you enable the memory limit, TiDB will terminate the SQL statement with the highest memory usage on the current instance. This variable specifies the minimum memory usage of the SQL statement to be terminated. If the memory usage of a TiDB instance that exceeds the limit is caused by too many sessions with low memory usage, you can properly lower the value of this variable to allow more sessions to be canceled.
 
+<<<<<<< HEAD
 ### `tidb_session_plan_cache_size` <span class="version-mark">New in v7.1.0</span>
+=======
+### tidb_service_scope <span class="version-mark">New in v7.4.0</span>
+
+<CustomContent platform="tidb">
+
+- Scope: GLOBAL
+- Persists to cluster: No
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: String
+- Default value: ""
+- Optional Value: "", `background`
+- This variable is an instance-level system variable. You can use it to control the service scope of TiDB nodes under the [TiDB Distributed eXecution Framework (DXF)](/tidb-distributed-execution-framework.md). When you set `tidb_service_scope` of a TiDB node to `background`, the DXF schedules that TiDB node to execute background tasks, such as [`ADD INDEX`](/sql-statements/sql-statement-add-index.md) and [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md).
+
+> **Note:**
+>
+> - If `tidb_service_scope` is not set for any TiDB node in a cluster, the DXF schedules all TiDB nodes to execute background tasks. If you are concerned about performance impact on current business, you can set `tidb_service_scope` to `background` for a few of the TiDB nodes. Only those nodes will execute background tasks.
+> - For newly scaled nodes, the DXF tasks are not executed by default to avoid consuming the resources of the scaled node. If you want this scaled node to execute background tasks, you need to manually set `tidb_service_scop` of this node to `background`.
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+- Scope: GLOBAL
+- Persists to cluster: No
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: String
+- Default value: ""
+- Optional Value: "", `background`
+- This variable is an instance-level system variable. You can use it to control the service scope of TiDB nodes under the [TiDB Distributed eXecution Framework (DXF)](/tidb-distributed-execution-framework.md). When you set `tidb_service_scope` of a TiDB node to `background`, the DXF schedules that TiDB node to execute background tasks, such as [`ADD INDEX`](/sql-statements/sql-statement-add-index.md).
+
+> **Note:**
+>
+> - If `tidb_service_scope` is not set for any TiDB node in a cluster, the DXF schedules all TiDB nodes to execute background tasks. If you are concerned about performance impact on current business, you can set `tidb_service_scope` to `background` for a few of the TiDB nodes. Only those nodes will execute background tasks.
+> - For newly scaled nodes, the DXF tasks are not executed by default to avoid consuming the resources of the scaled node. If you want this scaled node to execute background tasks, you need to manually set `tidb_service_scop` of this node to `background`.
+
+</CustomContent>
+
+### tidb_session_alias <span class="version-mark">New in v7.4.0</span>
+
+- Scope: SESSION
+- Persists to cluster: No
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
+- Default value: ""
+- You can use this variable to customize the value of the `session_alias` column in the logs related to the current session, which helps identify the session in troubleshooting. This setting affects the logs of multiple nodes involved in the statement execution (including TiKV). The maximum length of this variable is limited to 64 characters, and any characters exceeding the length will be truncated automatically. Spaces at the end of the value will also be removed automatically.
+
+### tidb_session_plan_cache_size <span class="version-mark">New in v7.1.0</span>
+>>>>>>> 8286f4bafb (Update tidb-distributed-execution-framework.md (#15606))
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes

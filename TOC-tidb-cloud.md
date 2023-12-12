@@ -264,6 +264,15 @@
     - [TSO](/tso.md)
   - [TiDB Cloud Cluster Limits and Quotas](/tidb-cloud/limitations-and-quotas.md)
   - [TiDB Limitations](/tidb-limitations.md)
+<<<<<<< HEAD
+=======
+  - TiDB Distributed eXecution Framework (DXF)
+    - [Introduction](/tidb-distributed-execution-framework.md)
+    - [TiDB Global Sort](/tidb-global-sort.md)
+  - Benchmarks
+    - [TPC-C Performance Test Report](/tidb-cloud/v7.1.0-performance-benchmarking-with-tpcc.md)
+    - [Sysbench Performance Test Report](/tidb-cloud/v7.1.0-performance-benchmarking-with-sysbench.md)
+>>>>>>> 8286f4bafb (Update tidb-distributed-execution-framework.md (#15606))
   - SQL
     - [Explore SQL with TiDB](/basic-sql-operations.md)
     - SQL Language Structure and Syntax
@@ -528,7 +537,10 @@
   - [Table Filter](/table-filter.md)
   - [Serverless Tier Limitations](/tidb-cloud/serverless-tier-limitations.md)
   - [Resource Control](/tidb-resource-control.md)
+<<<<<<< HEAD
   - [TiDB Backend Task Distributed Execution Framework](/tidb-distributed-execution-framework.md)
+=======
+>>>>>>> 8286f4bafb (Update tidb-distributed-execution-framework.md (#15606))
   - [DDL Execution Principles and Best Practices](/ddl-introduction.md)
   - [Troubleshoot Inconsistency Between Data and Indexes](/troubleshoot-data-inconsistency-errors.md)
   - [Support](/tidb-cloud/tidb-cloud-support.md)
