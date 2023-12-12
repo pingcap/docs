@@ -2040,6 +2040,16 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Default value: `OFF`
 - This variable controls whether to enable GC-Aware memory track.
 
+### tidb_enable_global_index
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Boolean
+- Default value: `OFF`
+- Possible values: `OFF`，`ON`
+- This variable controls whether to support creating `Global index` for partitioned tables. `Global index` is currently in the development stage. **It is not recommended to modify the value of this system variable**.
+
 ### tidb_enable_non_prepared_plan_cache
 
 - Scope: SESSION | GLOBAL
