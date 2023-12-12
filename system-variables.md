@@ -2040,7 +2040,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Default value: `OFF`
 - This variable controls whether to enable GC-Aware memory track.
 
-### tidb_enable_global_index
+### tidb_enable_global_index <span class="version-mark">New in v7.6.0</span>
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
