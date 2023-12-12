@@ -259,7 +259,7 @@ Some fields in the returned result are described as follows:
             - `finishedRows`: The number of rows that have been dumped.
             - `estimateTotalRows`: The estimated number of rows to be dumped.
             - `progress`: The progress of the dumping process.
-            - `bps`: The dumping speed.
+            - `bps`: The dumping speed in bytes/second.
 
 For operation details of "unresolvedDDLLockID" of "subTaskStatus" of "sources", see [Handle Sharding DDL Locks Manually](/dm/manually-handling-sharding-ddl-locks.md).
 
