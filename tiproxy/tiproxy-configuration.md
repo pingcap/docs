@@ -119,7 +119,7 @@ Configurations for HTTP gateway.
 
 ### security
 
-There are four TLS objects in the `[security]` section having different names. They share same configuration formats and fields, but they are interpreted differently for different usages.
+There are four TLS objects in the `[security]` section having different names. They share same configuration formats and fields, but they are interpreted differently depending on their names.
 
 ```
 [security]
@@ -142,9 +142,11 @@ TLS object fields:
 + `rsa-key-size`: sets the RSA key size when `auto-certs` is enabled.
 + `autocert-expire-duration`: sets the default expiration duration for auto-generated certificates.
 
+Objects are classified into client or server objects by their names.
+
 For client TLS object:
 
-- You need to set either `ca` or `skip-ca` (to skip verifying server certificates).
+- You must set either `ca` or `skip-ca` (to skip verifying server certificates).
 - Optionally, you could set `cert`/`key` to pass server-side client verification.
 - Useless fields: auto-certs.
 
