@@ -46,7 +46,7 @@ Configuration for SQL port.
 
 + Default Value: `0`
 + Support hot-reload: yes
-+ This configuration item lets you decide the tradeoff between memory and performance. A larger buffer may yield better performance results.
++ This configuration item lets you decide the tradeoff between memory and performance. By default, when it is zero, TiProxy will manage the buffer size automatically. However, a larger buffer may yield better performance results. 
 
 #### `pd-addrs`
 
@@ -56,13 +56,13 @@ Configuration for SQL port.
 #### `proxy-protocol`
 
 + Default Value: ``
-+ Hot-reload supported.
-+ Enable proxy protocol handling on the port. You could specify `v2` to handle proxy protocol version 2.
++ Support hot-reload: yes
++ Enable proxy protocol handling on the port. You could specify `v2` to handle proxy protocol version 2. `v1` is unsupported.
 
 #### `require-backend-tls`
 
 + Default Value: `true`
-+ Hot-reload supported.
++ Support hot-reload: yes
 + Require TLS on backend instances.
 
 ### api
@@ -77,14 +77,14 @@ Configurations for HTTP gateway.
 #### `proxy-protocol`
 
 + Default Value: ``
-+ Enable proxy protocol handling on the port. You could specify `v2` to handle proxy protocol version 2.
++ Enable proxy protocol handling on the port. You could specify `v2` to handle proxy protocol version 2. `v1` is unsupported.
 
 ### log
 
 #### `level`
 
 + Default Value: `info`
-+ Hot-reload supported.
++ Support hot-reload: yes
 + You can specify:
 
     + `tidb`: formats used by TiDB. For details, refer to [Unified Log Format](https://github.com/tikv/rfcs/blob/master/text/0018-unified-log-format.md).
@@ -96,34 +96,34 @@ Configurations for HTTP gateway.
 #### `filename`
 
 + Default Value: ``
-+ Hot-reload supported.
++ Support hot-reload: yes
 + Log file path. Non empty value will enable logging to file.
 
 #### `max-size`
 
 + Default Value: `300`
-+ Hot-reload supported.
++ Support hot-reload: yes
 + Specifies the maximum size, in megabytes, for log files. Logs will be rotated.
 
 #### `max-days`
 
 + Default Value: `3`
-+ Hot-reload supported.
++ Support hot-reload: yes
 + Specifies the maximum number of days to keep old log files. Outdated log files are deleted after surpassing this period.
 
 #### `max-backups`
 
 + Default Value: `3`
-+ Hot-reload supported.
++ Support hot-reload: yes
 + Specifies the maximum number of log files to retain. Excess log files will be deleted when there are too many.
 
 ### security
 
-There are four TLS objects in the `[security]` section. They have the same configuration formats and fields, but they are interpreted differently according to their usage.
+There are four TLS objects in the `[security]` section having different names. They share same configuration formats and fields, but they are interpreted differently for different usages.
 
 All TLS options are hot-reloaded.
 
-#### TLS object
+TLS object fields:
 
 + `ca`: specifies the CA
 + `cert`: specifies the certificate
@@ -134,13 +134,13 @@ All TLS options are hot-reloaded.
 + `rsa-key-size`: sets the RSA key size when `auto-certs` is enabled.
 + `autocert-expire-duration`: sets the default expiration duration for auto-generated certificates.
 
-Client TLS Object:
+For client TLS object:
 
-- Requires to set `ca` or `skip-ca` (skip verify server certs).
-- Optionally, `cert`/`key` will be used if server asks, i.e. server-side client verification.
+- You need to set either `ca` or `skip-ca` (to skip verifying server certificates).
+- Optionally, you could set `cert`/`key` to pass server-side client verification.
 - Useless fields: auto-certs.
 
-Server TLS Object:
+For server TLS object:
 
 + You must set either `cert`/`key` or `auto-certs`(to generate a temporary certificate, mainly for testing purposes).
 + Optionally, if `ca` is not empty, it enables server-side client verification. The client must provide their certificates. Alternatively, if both `skip-ca` is true and `ca` is not empty, the server will only verify client certificates if they actively provide one.
