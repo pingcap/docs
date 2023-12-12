@@ -12,9 +12,12 @@ If you use TiUP to deploy the TiDB cluster, the monitoring system (Prometheus & 
 
 The Grafana dashboard is divided into a series of sub dashboards which include Overview, PD, TiDB, TiKV, TiProxy, and Node\_exporter. A lot of metrics are there to help you diagnose. Each dashboard contains panel groups and their panels.
 
-TiProxy has four panel group: **TiProxy-Server**, **TiProxy-Query-Summary**, **TiProxy-Balance**, **TiProxy-Backend**. The metrics on these panels indicate the current status of TiProxy.
+TiProxy has four panel groups. The metrics on these panels indicate the current status of TiProxy.
 
-The **TiProxy-Server** shows instance information. **TiProxy-Query-Summary** shows SQL query metrics like CPS. **TiProxy-Backend** shows information of TiDB nodes that TiProxy may connect to. **TiProxy-Balance** shows loadbalance mertrics.
+- **TiProxy-Server**:instance information.
+- **TiProxy-Query-Summary**: SQL query metrics like CPS. 
+- **TiProxy-Backend**: information on TiDB nodes that TiProxy might connect to.
+- **TiProxy-Balance**: loadbalance mertrics.
 
 ## Server
 

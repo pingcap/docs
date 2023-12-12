@@ -421,27 +421,27 @@ tiflash_servers:
 
 ### `tiproxy_servers`
 
-`tiproxy_servers` specifies the machines to which the TiProxy services are deployed. It also specifies the service configuration on each machine. `tiproxy_servers` is an array, and each element of the array contains the following fields:
+`tiproxy_servers` specifies the machines to which the TiProxy services are deployed and the service configuration on each machine. `tiproxy_servers` is an array, and each element of the array contains the following fields:
 
-- `host`: Specifies the machine to which the TiProxy services are deployed. The field value is an IP address and is mandatory.
+- `host`: Specifies the machine's IP address to which the TiProxy services are deployed. This field is mandatory.
 
 - `ssh_port`: Specifies the SSH port to connect to the target machine for operations. If it is not specified, the `ssh_port` of the `global` section is used.
 
 - `port`: The listening port of the TiProxy SQL services. The default value is `6000`.
 
-- `deploy_dir`: Specifies the deployment directory. If it is not specified or specified as a relative directory, the directory is generated according to the `deploy_dir` directory configured in `global`.
+- `deploy_dir`: Specifies the deployment directory. If it is not specified or specified as a relative directory, the directory is generated based on the `deploy_dir` directory configured in `global`.
 
-- `data_dir`: Specifies the data directory. If it is not specified or specified as a relative directory, the directory is generated according to the `data_dir` directory configured in `global`.
+- `data_dir`: Specifies the data directory. If it is not specified or specified as a relative directory, the directory is generated based on the `data_dir` directory configured in `global`.
 
-- `numa_node`: Allocates the NUMA policy to the instance. Before specifying this field, you need to make sure that the target machine has [numactl](https://linux.die.net/man/8/numactl) installed. If this field is specified, cpubind and membind policies are allocated using [numactl](https://linux.die.net/man/8/numactl). This field is the string type. The field value is the ID of the NUMA node, such as "0,1".
+- `numa_node`: Allocates the NUMA policy to the instance. Before specifying this field, you need to make sure that the target machine has [numactl](https://linux.die.net/man/8/numactl) installed. If this field is specified, cpubind and membind policies are allocated using [numactl](https://linux.die.net/man/8/numactl). This field is of string type. The value is the ID of the NUMA node, such as `"0,1"`.
 
-- `config`: The configuration rule of this field is the same as the `tiproxy` configuration rule in `server_configs`. If this field is configured, the field content is merged with the `tiproxy` content in `server_configs` (if the two fields overlap, the content of this field takes effect). Then, a configuration file is generated and sent to the machine specified in `host`.
+- `config`: The configuration rule of this field is the same as the `tiproxy` configuration rule in `server_configs`. If this field is configured, the field content is merged with the `tiproxy` content in `server_configs` (if the two fields overlap, the content of this field takes effect). Subsequently, a configuration file is generated and sent to the machine specified in `host`.
 
 - `os`: The operating system of the machine specified in `host`. If this field is not specified, the default value is the `os` value in `global`.
 
 - `arch`: The architecture of the machine specified in `host`. If this field is not specified, the default value is the `arch` value in `global`.
 
-For the above fields, you cannot modify these configured fields after the deployment:
+Among the above fields, you cannot modify the following configured fields after the deployment:
 
 - `host`
 - `port`

@@ -13,7 +13,7 @@ This section introduces the configuration parameters of TiProxy.
 
 > **Tip:**
 >
-> If you need to adjust the value of a configuration item, refer to [Modify the configuration](/maintain-tidb-using-tiup.md#modify-the-configuration). Since TiProxy will do config hot-reloading, you can also skip restart by `tiup cluster reload --skip-restart`.
+> If you need to adjust the value of a configuration item, refer to [Modify the configuration](/maintain-tidb-using-tiup.md#modify-the-configuration). Normally the modification leads to a restart. Because TiProxy will do configuration hot-reloading, you can skip restart by executing `tiup cluster reload --skip-restart`.
 
 ### proxy
 
@@ -22,36 +22,36 @@ Configuration for SQL port.
 #### `addr`
 
 + Default Value: `0.0.0.0:6000`
-+ SQL gateway address. You should specify `ip:port`.
++ SQL gateway address. The format is `<ip>:<port>`.
 
 #### `graceful-wait-before-shutdown`
 
 + Default Value: `0`
-+ Hot-reload supported.
-+ HTTP status returns unhealthy and the SQL port accepts new connections for the last `graceful-wait-before-shutdown` seconds. After that, refuse new connections and drain clients. It is recommanded to be set to 0 when there's no other proxy(e.g. NLB) between the client and TiProxy.
++ Support hot-reload: yes
++ When the HTTP status returns unhealthy, the SQL port accepts new connections for the last `graceful-wait-before-shutdown` seconds. After that, it rejects new connections and drains clients. It is recommended to be set to `0` when there are no other proxies (e.g. NLB) between the client and TiProxy.
 
 #### `graceful-close-conn-timeout`
 
 + Default Value: `15`
-+ Hot-reload supported.
-+ Close connections when they have finished current transactions (AKA drain clients) after `graceful-close-conn-timeout` seconds. It is recommanded to be set longer than the lifecycle of a transaction.
++ Support hot-reload: yes
++ Close connections when they have completed their current transactions (also known as draining clients) within `graceful-close-conn-timeout` seconds. It is recommended to set this timeout longer than the lifecycle of a transaction.
 
 #### `max-connections`
 
 + Default Value: `0`
-+ Hot-reload supported.
-+ Accept as many as `max-connections` connections. Zero means no limitation.
++ Support hot-reload: yes
++ TiProxy can accept `max-connections` connections at most. `0` means no limitation.
 
 #### `conn-buffer-size`
 
 + Default Value: `0`
-+ Hot-reload supported.
-+ Tradeoff between memory and performance. Larger buffer may yield better performance result.
++ Support hot-reload: yes
++ This configuration item lets you decide the tradeoff between memory and performance. A larger buffer may yield better performance results.
 
 #### `pd-addrs`
 
 + Default Value: `127.0.0.1:2379`
-+ Automatically discovery TiDB instances and set them as backend.
++ Automatically discover TiDB instances and set them as backend.
 
 #### `proxy-protocol`
 
@@ -87,8 +87,8 @@ Configurations for HTTP gateway.
 + Hot-reload supported.
 + You can specify:
 
-    + `tidb`: formats used by tidb, check https://github.com/tikv/rfcs/blob/master/text/0018-unified-log-format.md
-    + `json`: structured json formats
+    + `tidb`: formats used by TiDB. For details, refer to [Unified Log Format](https://github.com/tikv/rfcs/blob/master/text/0018-unified-log-format.md).
+    + `json`: structured JSON formats.
     + `console`: log format for human.
 
 ### log.log-file
@@ -103,36 +103,36 @@ Configurations for HTTP gateway.
 
 + Default Value: `300`
 + Hot-reload supported.
-+ Log file maximum size, in megabytes. Log will be rotated.
++ Specifies the maximum size, in megabytes, for log files. Logs will be rotated.
 
 #### `max-days`
 
 + Default Value: `3`
 + Hot-reload supported.
-+ Maximum days to retain old log files. It is deleted once it is too old.
++ Specifies the maximum number of days to keep old log files. Outdated log files are deleted after surpassing this period.
 
 #### `max-backups`
 
 + Default Value: `3`
 + Hot-reload supported.
-+ Maximum number of log files. Extra log files will be deleted once there are too many.
++ Specifies the maximum number of log files to retain. Excess log files will be deleted when there are too many.
 
 ### security
 
-There are 4 tls objects in `[security]` section. They share same configuration formats and fields. But they are interpreted differently according to their usage.
+There are four TLS objects in the `[security]` section. They have the same configuration formats and fields, but they are interpreted differently according to their usage.
 
 All TLS options are hot-reloaded.
 
 #### TLS object
 
-+ `ca`: specify CA
-+ `cert`: specify cert
-+ `key`: specify private key
-+ `auto-certs`: mostly used by tests. It will generate certs if no cert/key is specified
-+ `skip-ca`: skip verifying certs using CA on client object, or skip server-side verification on server object
-+ `min-tls-version`: minimum TLS version
-+ `rsa-key-size`: generated RSA keysize if `auto-certs` is enabled
-+ `autocert-expire-duration`: default expire duration for auto certs.
++ `ca`: specifies the CA
++ `cert`: specifies the certificate
++ `key`: specifies the private key
++ `auto-certs`: mostly used for tests. It generates certificates if no certificate/key is specified.
++ `skip-ca`: skips verifying certificates using CA on client object or skips server-side verification on server object.
++ `min-tls-version`: sets the minimum TLS version.
++ `rsa-key-size`: sets the RSA key size when `auto-certs` is enabled.
++ `autocert-expire-duration`: sets the default expiration duration for auto-generated certificates.
 
 Client TLS Object:
 
@@ -142,8 +142,8 @@ Client TLS Object:
 
 Server TLS Object:
 
-+ Requires to set `cert`/`key` or `auto-certs` (generate a temporary cert, mostly for testing).
-+ Optionally, non-empty `ca` will enable server-side client verification. Client must provide their certs. Or if `skip-ca` is true with a non-empty `ca`, server will only verify client certs if it actively provide one.
++ You must set either `cert`/`key` or `auto-certs`(to generate a temporary certificate, mainly for testing purposes).
++ Optionally, if `ca` is not empty, it enables server-side client verification. The client must provide their certificates. Alternatively, if both `skip-ca` is true and `ca` is not empty, the server will only verify client certificates if they actively provide one.
 
 #### `cluster-tls`
 
