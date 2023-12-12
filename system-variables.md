@@ -1016,7 +1016,7 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `OFF`
-- Controls whether allow to use Cop/BatchCop for computation pushed to tiflash. Cop/BatchCop is the protocol initially supported by TiFlash. Compared to the MPP protocol, there is no performance difference, it is more recommended to use the MPP protocol, because Cop/BatchCop may be deprecated someday.
+- Controls whether allow to use Cop/BatchCop for computation pushed to tiflash. Cop/BatchCop is the protocol initially supported by TiFlash. Compared to the MPP protocol, there is no performance difference, but it is more recommended to use the MPP protocol, because Cop/BatchCop may be deprecated someday.
     - `0` or `OFF`, which means that the optimizer will not use tiflash Cop/BatchCop.
     - `1` or `ON`, which means that the optimizer determines whether to use the Cop/BatchCop and MPP protocol based on the cost estimation.
 
