@@ -1,0 +1,89 @@
+version: 0.0.1
+achievements:
+    - achievement:
+          name: Docs Dash PR Submitted
+          icon: <icon_url>
+          description: Submit a PR with the label 2024-tidb-docs-dash between January 9th - 12th 2024!
+          triggers:
+              - trigger:
+                    actor: author
+                    action: pull_request
+                    condition: "created_at >= 01-09-2024 08:00:00 & created_at <= 01-12-2024 07:59:00
+                        & labels in {'2024-tidb-docs-dash','contribution'}"
+    - achievement:
+          name: Docs Dash PR Merged
+          icon: <icon_url>
+          description: Have a PR merged by January 19th 2024 with the label 2024-tidb-docs-dash!
+          triggers:
+              - trigger:
+                    actor: author
+                    action: pull_request
+                    condition: "created_at >= 01-09-2024 08:00:00 & created_at <= 01-12-2024 07:59:00
+                        & merged = true & merged_at <= 2024-01-19 20:00:00
+                        & labels in {'2024-tidb-docs-dash','contribution'}"
+    - achievement:
+          name: Docs Dash Issue Contribution
+          icon: <icon_url>
+          description: Commented on an issue created during the docs dash event with the labl 2024-tidb-docs-dash and get moderator reaction!
+          triggers:
+              - trigger:
+                    actor: author
+                    action: issue_comment
+                    condition: "created_at >= 01-09-2024 08:00:00 & created_at <= 01-12-2024 07:59:00
+                        & labels in {'2024-tidb-docs-dash'}
+                        & emojis in ['THUMBS_UP']
+                        & reactors in ['rpaik', 'lilin90', 'qiancai', 'hfxsd', 'ran-huang', 'Oreoxmt','Yan-yyCL','dveeden']"
+    - achievement:
+          name: PR Submitted
+          icon: <icon_url>
+          description: Submit any PR during the docs dash event between January 9th - 12th 2024!
+          triggers:
+              - trigger:
+                    actor: author
+                    action: pull_request
+                    condition: "created_at >= 01-09-2024 08:00:00 & created_at <= 01-11-2024
+                         & labels in !['2024-tidb-docs-dash']
+                         & labels in ['contribution']"
+    - achievement:
+          name: PR Merged
+          icon: <icon_url>
+          description: Have any PR merged during the docs dash event
+          triggers:
+              - trigger:
+                    actor: author
+                    action: pull_request
+                    condition: "created_at >= 01-09-2024 08:00:00 & created_at <= 01-12-2024 07:59:00
+                        & merged = true & merged_at <= 2024-01-19 20:00:00
+                        & labels in !['2024-tidb-docs-dash']
+                        & labels in ['contribution']"
+    - achievement:
+          name: Issue Contribution
+          icon: <icon_url>
+          description: Commented on any issue and get moderator reaction!
+          triggers:
+              - trigger:
+                    actor: author
+                    action: issue_comment
+                    condition: "created_at >= 01-09-2024 08:00:00 & created_at <= 01-12-2024 07:59:00
+                        & emojis in ['THUMBS_UP']
+                        & reactors in ['rpaik', 'lilin90', 'qiancai', 'hfxsd', 'ran-huang', 'Oreoxmt','Yan-yyCL','dveeden']
+                        & labels in !['2024-tidb-docs-dash']"
+    - achievement:
+          name: Docs Dash Bonus Points
+          icon: <icon_url>
+          description: Bbonus points for substantial creative contributions!
+          triggers:
+              - trigger:
+                    actor: author
+                    action: issue_comment
+                    condition: "created_at >= 01-09-2024 08:00:00 & created_at <= 01-12-2024 07:59:00
+                        & emojis in ['THUMBS_UP']
+                        & reactors in ['rpaik', 'lilin90', 'qiancai', 'hfxsd', 'ran-huang', 'Oreoxmt','Yan-yyCL','dveeden']
+                        & labels in ['tidb-docs-dash-bonus']"
+                    operator: "|"      
+              - trigger:
+                    actor: author
+                    action: pull_request
+                    condition: "created_at >= 01-09-2024 08:00:00 & created_at <= 01-12-2024 07:59:00
+                        & merged = true & merged_at <= 2024-01-19 20:00:00
+                        & labels in ['contribution','tidb-docs-dash-bonus']"
