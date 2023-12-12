@@ -121,6 +121,14 @@ Configurations for HTTP gateway.
 
 There are four TLS objects in the `[security]` section having different names. They share same configuration formats and fields, but they are interpreted differently for different usages.
 
+```
+[security]
+    [sql-tls]
+    skip-ca = true
+    [server-tls]
+    auto-certs = true
+```
+
 All TLS options are hot-reloaded.
 
 TLS object fields:
