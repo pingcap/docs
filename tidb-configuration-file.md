@@ -719,7 +719,7 @@ Configuration items related to opentracing.reporter.
 - The threshold of the TiKV load. If the TiKV load exceeds this threshold, more `batch` packets are collected to relieve the pressure of TiKV. It is valid only when the value of `tikv-client.max-batch-size` is greater than `0`. It is recommended not to modify this value.
 - Default value: `200`
 
-### `copr-req-timeout`
+### `copr-req-timeout` <span class="version-mark">New in v7.5.0</span>
 > **Warning:**
 >
 > this may be deprecated in the future, **DO NOT** change the value of this configuration.
