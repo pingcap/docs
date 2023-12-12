@@ -71,7 +71,7 @@ achievements:
     - achievement:
           name: Docs Dash Bonus Points
           icon: <icon_url>
-          description: Bbonus points for substantial creative contributions!
+          description: Bonus points for substantial creative contributions!
           triggers:
               - trigger:
                     actor: author
