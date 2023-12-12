@@ -75,6 +75,8 @@ schema-pattern = "schema_2"  # the schema to match. Support wildcard characters 
 target-schema = "schema"     # the target schema
 ```
 
+The behavior of sync-diff-inspector is as follows:
+
 - If there is no table `schema` in the upstream, sync-diff-inspector does nothing.
 
 - If there is a table `schema` in the upstream, and a rule matches the table, sync-diff-inspector does nothing.
