@@ -724,8 +724,8 @@ Configuration items related to opentracing.reporter.
 >
 > this may be deprecated in the future, **DO NOT** change the value of this configuration.
 
-+ timeout of a single coprocessor request
-+ Default value：`60s`
++ The timeout of a single Coprocessor request.
++ Default value: `60`
 + Unit: second
 
 ## tikv-client.copr-cache <span class="version-mark">New in v4.0.0</span>
