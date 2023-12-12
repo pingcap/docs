@@ -59,7 +59,7 @@ achievements:
     - achievement:
           name: Issue Contribution
           icon: <icon_url>
-          description: Commented on any issue and get moderator reaction!
+          description: Comment on any issue and get moderator reaction!
           triggers:
               - trigger:
                     actor: author
