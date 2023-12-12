@@ -13,7 +13,7 @@ summary: Learn the use cases, limitations, usage, and implementation principles 
 
 </CustomContent>
 
-TiDB adopts a computing-storage separation architecture with excellent scalability and elasticity. Starting from v7.1.0, TiDB introduces a Distributed eXecution Framework (DXF) to further leverage the resource advantages of the distributed architecture. The goal of this framework is to implement unified scheduling and distributed execution of tasks, and to provide unified resource management capabilities for both overall and individual tasks, which better meets users' expectations for resource usage.
+TiDB adopts a computing-storage separation architecture with excellent scalability and elasticity. Starting from v7.1.0, TiDB introduces a Distributed eXecution Framework (DXF) to further leverage the resource advantages of the distributed architecture. The goal of the DXF is to implement unified scheduling and distributed execution of tasks, and to provide unified resource management capabilities for both overall and individual tasks, which better meets users' expectations for resource usage.
 
 This document describes the use cases, limitations, usage, and implementation principles of the DXF.
 
@@ -111,13 +111,13 @@ Adjust the following system variables related to Fast Online DDL:
 
     <CustomContent platform="tidb">
 
-    When the DXF tasks are running, the statements supported by the framework (such as [`ADD INDEX`](/sql-statements/sql-statement-add-index.md) and [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md)) are executed in a distributed manner. All TiDB nodes run background tasks by default.
+    When the DXF tasks are running, the statements supported by the framework (such as [`ADD INDEX`](/sql-statements/sql-statement-add-index.md) and [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md)) are executed in a distributed manner. All TiDB nodes run DXF tasks by default.
 
     </CustomContent>
 
     <CustomContent platform="tidb-cloud">
 
-    When the DXF tasks are running, the statements supported by the framework (such as [`ADD INDEX`](/sql-statements/sql-statement-add-index.md)) are executed in a distributed manner. All TiDB nodes run background tasks by default.
+    When the DXF tasks are running, the statements supported by the framework (such as [`ADD INDEX`](/sql-statements/sql-statement-add-index.md)) are executed in a distributed manner. All TiDB nodes run DXF tasks by default.
 
     </CustomContent>
 
