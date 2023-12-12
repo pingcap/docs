@@ -24,7 +24,7 @@ achievements:
     - achievement:
           name: Docs Dash Issue Contribution
           icon: <icon_url>
-          description: Commented on an issue created during the docs dash event with the labl 2024-tidb-docs-dash and get moderator reaction!
+          description: Comment on an issue created during the docs dash event with the label 2024-tidb-docs-dash and get moderator reaction!
           triggers:
               - trigger:
                     actor: author
