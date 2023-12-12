@@ -46,7 +46,7 @@ Configuration for SQL port.
 
 + Default Value: `0`
 + Support hot-reload: yes
-+ This configuration item lets you decide the tradeoff between memory and performance. By default, when it is zero, TiProxy will manage the buffer size automatically. However, a larger buffer may yield better performance results. 
++ This configuration item lets you decide the connection buffer size in bytes, e.g. `1024` means 1K buffer. Minimum size is 1K, and maximum size is 16M. It is a tradeoff between memory and performance. By default, when it is zero, TiProxy will manage the buffer size automatically. However, a larger buffer may yield better performance results. 
 
 #### `pd-addrs`
 
