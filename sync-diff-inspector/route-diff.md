@@ -8,7 +8,7 @@ aliases: ['/docs/dev/sync-diff-inspector/route-diff/','/docs/dev/reference/tools
 
 When using replication tools such as [TiDB Data Migration](/dm/dm-overview.md), you can set `route-rules` to replicate data to a specified table in the downstream. sync-diff-inspector enables you to verify tables with different schema names or table names by setting `rules`.
 
-The following is a simple configuration example. To learn the complete configuration, refer to [Sync-diff-inspector User Guide](/sync-diff-inspector/sync-diff-inspector-overview.md).
+The following is a simple configuration example. To learn the complete configuration, refer to [sync-diff-inspector User Guide](/sync-diff-inspector/sync-diff-inspector-overview.md).
 
 ```toml
 ######################### Datasource config #########################
@@ -62,31 +62,31 @@ target-table = "t_2"           # The name of the target table
 
 ### The initialization of table routers
 
-If a `target-schema/target-table` table named `schema.table` exists in the rules,
+If a `target-schema/target-table` table named `schema.table` exists in the rules, the behavior of sync-diff-inspector is as follows:
 
-- If there is a rule that matches `schema.table` to `schema.table`, it is OK.
+- If there is a rule that matches `schema.table` to `schema.table`, sync-diff-inspector does nothing.
 
--  If there is no rule that matches `schema.table` to `schema.table`, sync-diff-inspector will add a new rule `schema.table -> _no__exists__db_._no__exists__table_` to the table router. After that, sync-diff-inspector will treat the table `schema.table` as the table `_no__exists__db_._no__exists__table_`.
+- If there is no rule that matches `schema.table` to `schema.table`, sync-diff-inspector will add a new rule `schema.table -> _no__exists__db_._no__exists__table_` to the table router. After that, sync-diff-inspector will treat the table `schema.table` as the table `_no__exists__db_._no__exists__table_`.
 
-If `target-schema` exists only in the rules as follows,
+If `target-schema` exists only in the rules as follows:
 
 ```toml
 [routes.rule1]
-schema-pattern = "schema_2"  # the schema to match. Support wildcard characters * and ?.
+schema-pattern = "schema_2"  # the schema to match. Support wildcard characters * and ?
 target-schema = "schema"     # the target schema
 ```
 
-- If there is no table `schema` in the upstream, it is OK.
+- If there is no table `schema` in the upstream, sync-diff-inspector does nothing.
 
-- If there is a table `schema` in the upstream, and a rule matches the table, it is OK.
+- If there is a table `schema` in the upstream, and a rule matches the table, sync-diff-inspector does nothing.
 
 - If there is a table `schema` in the upstream, but no rule matches the table, sync-diff-inspector will add a new rule `schema -> _no__exists__db_` to the table router. After that, sync-diff-inspector will treat the table `schema` as the table `_no__exists__db_`.
 
-If `target-schema.target-table` does not exist in the rules, sync-diff-inspector will add a rule to match `target-schema.target-table` to `target-schema.target-table` to make it case-insensitive, because the table router is case-insensitive.
+- If `target-schema.target-table` does not exist in the rules, sync-diff-inspector will add a rule to match `target-schema.target-table` to `target-schema.target-table` to make it case-insensitive, because the table router is case-insensitive.
 
 ### Examples
 
-Suppose there are seven tables in the upstream:
+Suppose there are seven tables in the upstream cluster:
 
 - `inspector_mysql_0.tb_emp1`
 - `Inspector_mysql_0.tb_emp1`
@@ -96,7 +96,7 @@ Suppose there are seven tables in the upstream:
 - `inspector_mysql_1.Tb_emp1`
 - `Inspector_mysql_1.Tb_emp1`
 
-In the configuration, the upstream has a rule `Source.rule1`, and the target table is `inspector_mysql_1.tb_emp1`.
+In the configuration example, the upstream cluster has a rule `Source.rule1`, and the target table is `inspector_mysql_1.tb_emp1`.
 
 #### Example 1
 
@@ -182,7 +182,9 @@ The following are the routing results:
 - `inspector_mysql_1.Tb_emp1` is routed to `inspector_mysql_1.tb_emp1`
 - `Inspector_mysql_1.Tb_emp1` is routed to `inspector_mysql_1.tb_emp1`
 
-If you do not set rules, the following are the routing results:
+#### Example 5
+
+If you do not set any rules, the following are the routing results:
 
 - `inspector_mysql_0.tb_emp1` is routed to `inspector_mysql_0.tb_emp1`
 - `Inspector_mysql_0.tb_emp1` is routed to `Inspector_mysql_0.tb_emp1`
