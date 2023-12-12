@@ -38,6 +38,15 @@ The following is an example of an Amazon S3 URI for TiDB Lightning and BR. In th
 s3://external/testfolder?access-key=${access-key}&secret-access-key=${secret-access-key}
 ```
 
+<<<<<<< HEAD
+=======
+The following is an example of an Amazon S3 URI for [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md). In this example, you need to specify a specific filename `test.csv`.
+
+```shell
+s3://external/test.csv?access-key=${access-key}&secret-access-key=${secret-access-key}
+```
+
+>>>>>>> 8286f4bafb (Update tidb-distributed-execution-framework.md (#15606))
 ## GCS URI format
 
 - `scheme`: `gcs` or `gs`

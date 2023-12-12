@@ -641,6 +641,13 @@
     - [Spill to Disk](/tiflash/tiflash-spill-disk.md)
     - [Data Validation](/tiflash/tiflash-data-validation.md)
     - [Compatibility](/tiflash/tiflash-compatibility.md)
+<<<<<<< HEAD
+=======
+    - [Pipeline Execution Model](/tiflash/tiflash-pipeline-model.md)
+  - TiDB Distributed eXecution Framework (DXF)
+    - [Introduction](/tidb-distributed-execution-framework.md)
+    - [TiDB Global Sort](/tidb-global-sort.md)
+>>>>>>> 8286f4bafb (Update tidb-distributed-execution-framework.md (#15606))
   - [System Variables](/system-variables.md)
   - Configuration File Parameters
     - [tidb-server](/tidb-configuration-file.md)
@@ -983,8 +990,11 @@
   - [Table Filter](/table-filter.md)
   - [Schedule Replicas by Topology Labels](/schedule-replicas-by-topology-labels.md)
   - [URI Formats of External Storage Services](/external-storage-uri.md)
+<<<<<<< HEAD
   - Internal Components
     - [TiDB Backend Task Distributed Execution Framework](/tidb-distributed-execution-framework.md)
+=======
+>>>>>>> 8286f4bafb (Update tidb-distributed-execution-framework.md (#15606))
 - FAQs
   - [FAQ Summary](/faq/faq-overview.md)
   - [TiDB FAQs](/faq/tidb-faq.md)

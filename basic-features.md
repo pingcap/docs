@@ -207,6 +207,7 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 
 ## Management, observability, and tools
 
+<<<<<<< HEAD
 | Management, observability, and tools | 7.1 | 6.5 | 6.1 | 5.4 | 5.3 | 5.2 | 5.1 | 5.0 | 4.0 |
 |---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | [TiDB Dashboard UI](/dashboard/dashboard-intro.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y |
@@ -237,6 +238,41 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 | [Green GC](/system-variables.md#tidb_gc_scan_lock_mode-new-in-v50) | E | E | E | E | E | E | E | E | N |
 | [Resource control](/tidb-resource-control.md) | Y | N | N | N | N | N | N | N | N |
 | [TiFlash Disaggregated Storage and Compute Architecture and S3 Support](/tiflash/tiflash-disaggregated-and-s3.md) | E | N | N | N | N | N | N | N | N |
+=======
+| Management, observability, and tools | 7.5 | 7.1 | 6.5 | 6.1 | 5.4 | 5.3 | 5.2 | 5.1 | 5.0 | 4.0 |
+|---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| [TiDB Dashboard UI](/dashboard/dashboard-intro.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
+| [TiDB Dashboard Continuous Profiling](/dashboard/continuous-profiling.md) | Y | Y | Y | Y | E | E | N | N | N | N |
+| [TiDB Dashboard Top SQL](/dashboard/top-sql.md) | Y | Y | Y | Y | E | N | N | N | N | N |
+| [TiDB Dashboard SQL Diagnostics](/information-schema/information-schema-sql-diagnostics.md) | Y | Y | Y | E | E | E | E | E | E | E |
+| [TiDB Dashboard Cluster Diagnostics](/dashboard/dashboard-diagnostics-access.md) | Y | Y | Y | E | E | E | E | E | E | E |
+| [TiKV-FastTune dashboard](/grafana-tikv-dashboard.md#tikv-fasttune-dashboard) | E | E | E | E | E | E | E | E | E | E |
+| [Information schema](/information-schema/information-schema.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
+| [Metrics schema](/metrics-schema.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
+| [Statements summary tables](/statement-summary-tables.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
+| [Statements summary tables - summary persistence](/statement-summary-tables.md#persist-statements-summary) | E | E | N | N | N | N | N | N | N | N |
+| [Slow query log](/identify-slow-queries.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
+| [TiUP deployment](/tiup/tiup-overview.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
+| [Kubernetes operator](https://docs.pingcap.com/tidb-in-kubernetes/) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
+| [Built-in physical backup](/br/backup-and-restore-use-cases.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
+| [Global Kill](/sql-statements/sql-statement-kill.md) | Y | Y | Y | Y | E | E | E | E | E | E |
+| [Lock View](/information-schema/information-schema-data-lock-waits.md) | Y | Y | Y | Y | Y | Y | Y | E | E | E |
+| [`SHOW CONFIG`](/sql-statements/sql-statement-show-config.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
+| [`SET CONFIG`](/dynamic-config.md) | Y | Y | Y | Y | E | E | E | E | E | E |
+| [DM WebUI](/dm/dm-webui-guide.md) | E | E | E | E | N | N | N | N | N | N |
+| [Foreground Quota Limiter](/tikv-configuration-file.md#foreground-quota-limiter) | Y | Y | Y | E | N | N | N | N | N | N |
+| [Background Quota Limiter](/tikv-configuration-file.md#background-quota-limiter) | E | E | E | N | N | N | N | N | N | N |
+| [EBS volume snapshot backup and restore](https://docs.pingcap.com/tidb-in-kubernetes/v1.4/backup-to-aws-s3-by-snapshot) | Y | Y | Y | N | N | N | N | N | N | N |
+| [PITR](/br/backup-and-restore-overview.md) | Y | Y | Y | N | N | N | N | N | N | N |
+| [Global memory control](/configure-memory-usage.md#configure-the-memory-usage-threshold-of-a-tidb-server-instance) | Y | Y | Y | N | N | N | N | N | N | N |
+| [Cross-cluster RawKV replication](/tikv-configuration-file.md#api-version-new-in-v610) | E | E | E | N | N | N | N | N | N | N |
+| [Green GC](/system-variables.md#tidb_gc_scan_lock_mode-new-in-v50) | E | E | E | E | E | E | E | E | E | N |
+| [Resource control](/tidb-resource-control.md) | Y | Y | N | N | N | N | N | N | N | N |
+| [Runaway Queries management](/tidb-resource-control.md#manage-queries-that-consume-more-resources-than-expected-runaway-queries) | E | N | N | N | N | N | N | N | N | N |
+| [Background tasks management](/tidb-resource-control.md#manage-background-tasks) | E | N | N | N | N | N | N | N | N | N |
+| [TiFlash Disaggregated Storage and Compute Architecture and S3 Support](/tiflash/tiflash-disaggregated-and-s3.md) | Y | E | N | N | N | N | N | N | N | N |
+| [Selecting TiDB nodes for the Distributed eXecution Framework (DXF) tasks](/system-variables.md#tidb_service_scope-new-in-v740) | Y | N | N | N | N | N | N | N | N | N |
+>>>>>>> 8286f4bafb (Update tidb-distributed-execution-framework.md (#15606))
 
 [^1]: TiDB incorrectly treats latin1 as a subset of utf8. See [TiDB #18955](https://github.com/pingcap/tidb/issues/18955) for more details.
 
