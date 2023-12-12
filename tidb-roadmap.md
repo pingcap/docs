@@ -29,7 +29,7 @@ In the course of development, this roadmap is subject to change based on user ne
         <ul>
           <li>
             <b>Distributed eXecution Framework (DXF)</b><br /><i>
-            In v7.2.0, TiDB introduced the DXF for tasks (such as DDL and analyze). This is the foundation for parallelizing these tasks across compute nodes. v7.4.0 introduces global sorting in distributed re-organization tasks (such as DDL and import), which greatly mitigates extra resource consumption in storage. Optionally, external shared storage can be leveraged for simplicity and cost savings.</i>
+            In v7.1.0, TiDB introduced the DXF for tasks (such as DDL and analyze). This is the foundation for parallelizing these tasks across compute nodes. v7.4.0 introduces global sorting in distributed re-organization tasks (such as DDL and import), which greatly mitigates extra resource consumption in storage. Optionally, external shared storage can be leveraged for simplicity and cost savings.</i>
           </li>
           <br />
           <br />
