@@ -65,7 +65,6 @@ target-table = "t_2"           # The name of the target table
 If a `target-schema/target-table` table named `schema.table` exists in the rules, the behavior of sync-diff-inspector is as follows:
 
 - If there is a rule that matches `schema.table` to `schema.table`, sync-diff-inspector does nothing.
-
 - If there is no rule that matches `schema.table` to `schema.table`, sync-diff-inspector will add a new rule `schema.table -> _no__exists__db_._no__exists__table_` to the table router. After that, sync-diff-inspector will treat the table `schema.table` as the table `_no__exists__db_._no__exists__table_`.
 
 If `target-schema` exists only in the rules as follows:
@@ -78,13 +77,11 @@ target-schema = "schema"     # the target schema
 
 The behavior of sync-diff-inspector is as follows:
 
-- If there is no table `schema` in the upstream, sync-diff-inspector does nothing.
+- If there is no schema `schema` in the upstream, sync-diff-inspector does nothing.
+- If there is a schema `schema` in the upstream, and a rule matches the schema, sync-diff-inspector does nothing.
+- If there is a schema `schema` in the upstream, but no rule matches the schema, sync-diff-inspector will add a new rule `schema -> _no__exists__db_` to the table router. After that, sync-diff-inspector will treat the table `schema` as the table `_no__exists__db_`.
 
-- If there is a table `schema` in the upstream, and a rule matches the table, sync-diff-inspector does nothing.
-
-- If there is a table `schema` in the upstream, but no rule matches the table, sync-diff-inspector will add a new rule `schema -> _no__exists__db_` to the table router. After that, sync-diff-inspector will treat the table `schema` as the table `_no__exists__db_`.
-
-- If `target-schema.target-table` does not exist in the rules, sync-diff-inspector will add a rule to match `target-schema.target-table` to `target-schema.target-table` to make it case-insensitive, because the table router is case-insensitive.
+If `target-schema.target-table` does not exist in the rules, sync-diff-inspector will add a rule to match `target-schema.target-table` to `target-schema.target-table` to make it case-insensitive, because the table router is case-insensitive.
 
 ### Examples
 
