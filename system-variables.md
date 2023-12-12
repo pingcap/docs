@@ -882,9 +882,9 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `OFF`
-- Controls whether allow to use Cop/BatchCop for computation pushed to tiflash. Cop/BatchCop is the protocol initially supported by TiFlash. Compared to the MPP protocol, there is no performance difference, but it is more recommended to use the MPP protocol, because Cop/BatchCop may be deprecated someday.
-    - `0` or `OFF`, which means that the optimizer will not use tiflash Cop/BatchCop.
-    - `1` or `ON`, which means that the optimizer determines whether to use the Cop/BatchCop and MPP protocol based on the cost estimation.
+- When TiDB dispatchs computation tasks to TiFlash, there are three methods(or protocols): Cop, BatchCop and MPP. Compared to Cop/BatchCop, the MPP protocol is more mature and offers better task/resource management. Therefore, using the MPP protocol is more recommended.
+    - `0` or `OFF`, which means the optimizer will only generate plans that using tiflash MPP protocol.
+    - `1` or `ON`, which means the optimizer determines whether to use the Cop, BatchCop and MPP protocol based on the cost estimation.
 
 ### tidb_allow_batch_cop <span class="version-mark">New in v4.0</span>
 
