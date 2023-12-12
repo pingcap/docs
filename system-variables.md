@@ -1008,6 +1008,18 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 - Unit: Bytes
 - This variable is used to control the threshold at which the TiDB server prefers to send read requests to a replica in the same availability zone as the TiDB server when [`tidb_replica_read`](#tidb_replica_read-new-in-v40) is set to `closest-adaptive`. If the estimated result is higher than or equal to this threshold, TiDB prefers to send read requests to a replica in the same availability zone. Otherwise, TiDB sends read requests to the leader replica.
 
+### tidb_allow_tiflash_cop <span class="version-mark">New in v7.3.0</span>
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Boolean
+- Default value: `OFF`
+- Controls whether allow to use Cop/BatchCop for computation pushed to tiflash. Cop/BatchCop is the protocol initially supported by TiFlash. Compared to the MPP protocol, there is no performance difference, it is more recommended to use the MPP protocol, because Cop/BatchCop may be deprecated someday.
+    - `0` or `OFF`, which means that the optimizer will not use tiflash Cop/BatchCop.
+    - `1` or `ON`, which means that the optimizer determines whether to use the Cop/BatchCop and MPP protocol based on the cost estimation.
+
+
 ### tidb_allow_batch_cop <span class="version-mark">New in v4.0</span>
 
 - Scope: SESSION | GLOBAL
