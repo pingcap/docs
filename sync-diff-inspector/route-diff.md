@@ -99,7 +99,7 @@ In the configuration example, the upstream cluster has a rule `Source.rule1`, an
 
 #### Example 1
 
-Suppose that the configuration is as follows:
+If the configuration is as follows:
 
 ```toml
 [Source.rule1]
@@ -109,7 +109,7 @@ target-schema = "inspector_mysql_1"
 target-table = "tb_emp1"
 ```
 
-The following are the routing results:
+The routing results will be as follows:
 
 - `inspector_mysql_0.tb_emp1` is routed to `inspector_mysql_1.tb_emp1`
 - `Inspector_mysql_0.tb_emp1` is routed to `inspector_mysql_1.tb_emp1`
@@ -121,7 +121,7 @@ The following are the routing results:
 
 #### Example 2
 
-Suppose that the configuration is as follows:
+If the configuration is as follows:
 
 ```toml
 [Source.rule1]
@@ -129,7 +129,7 @@ schema-pattern = "inspector_mysql_0"
 target-schema = "inspector_mysql_1"
 ```
 
-The following are the routing results:
+The routing results will be as follows:
 
 - `inspector_mysql_0.tb_emp1` is routed to `inspector_mysql_1.tb_emp1`
 - `Inspector_mysql_0.tb_emp1` is routed to `inspector_mysql_1.tb_emp1`
@@ -141,7 +141,7 @@ The following are the routing results:
 
 #### Example 3
 
-Suppose that the configuration is as follows:
+If the configuration is as follows:
 
 ```toml
 [Source.rule1]
@@ -149,7 +149,7 @@ schema-pattern = "other_schema"
 target-schema = "other_schema"
 ```
 
-The following are the routing results:
+The routing results will be as follows:
 
 - `inspector_mysql_0.tb_emp1` is routed to `inspector_mysql_0.tb_emp1`
 - `Inspector_mysql_0.tb_emp1` is routed to `Inspector_mysql_0.tb_emp1`
@@ -161,7 +161,7 @@ The following are the routing results:
 
 #### Example 4
 
-Suppose that the configuration is as follows:
+If the configuration is as follows:
 
 ```toml
 [Source.rule1]
@@ -171,7 +171,7 @@ target-schema = "inspector_mysql_1"
 target-table = "tb_emp1"
 ```
 
-The following are the routing results:
+The routing results will be as follows:
 
 - `inspector_mysql_0.tb_emp1` is routed to `inspector_mysql_1.tb_emp1`
 - `Inspector_mysql_0.tb_emp1` is routed to `inspector_mysql_1.tb_emp1`
@@ -183,7 +183,7 @@ The following are the routing results:
 
 #### Example 5
 
-If you do not set any rules, the following are the routing results:
+If you do not set any rules, the routing results will be as follows:
 
 - `inspector_mysql_0.tb_emp1` is routed to `inspector_mysql_0.tb_emp1`
 - `Inspector_mysql_0.tb_emp1` is routed to `Inspector_mysql_0.tb_emp1`
