@@ -107,8 +107,8 @@ INSERT INTO detail_data(ts,customer_id,detail_fee) VALUES
 ('2023-1-7 12:2:3', 'cus004', 120.56),
 ('2023-1-8 12:2:3', 'cus005', 320.16);
 
--- Repeat executing the following SQL statement 13 times, which inserts a total of 65,536 rows to the table.
-INSERT INTO detail_data select * from detail_data;
+-- Execute the following SQL statement 13 times to insert a cumulative total of 65,536 rows into the table.
+INSERT INTO detail_data SELECT * FROM detail_data;
 ```
 
 Save daily analysis results:
