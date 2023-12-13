@@ -69,9 +69,9 @@ achievements:
                         & reactors in ['rpaik', 'lilin90', 'qiancai', 'hfxsd', 'ran-huang', 'Oreoxmt','Yan-yyCL','dveeden']
                         & labels in !['2024-tidb-docs-dash']"
     - achievement:
-          name: Docs Dash Bonus Points
+          name: Docs Dash Bonus Points Issues
           icon: <icon_url>
-          description: Bonus points for substantial creative contributions!
+          description: Bonus points for substantial creative issue contributions!
           triggers:
               - trigger:
                     actor: author
@@ -80,7 +80,11 @@ achievements:
                         & emojis in ['THUMBS_UP']
                         & reactors in ['rpaik', 'lilin90', 'qiancai', 'hfxsd', 'ran-huang', 'Oreoxmt','Yan-yyCL','dveeden']
                         & labels in ['tidb-docs-dash-bonus']"
-                    operator: "|"      
+    - achievement:
+          name: Docs Dash Bonus Points PRs
+          icon: <icon_url>
+          description: Bonus points for substantial creative PR contributions!
+          triggers:
               - trigger:
                     actor: author
                     action: pull_request
