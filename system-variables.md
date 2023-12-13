@@ -879,7 +879,6 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
-- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Type: Boolean
 - Default value: `OFF`
 - When TiDB pushes computation tasks down to TiFlash, there are three methods (or protocols) to choose from: Cop, BatchCop, and MPP. Compared to Cop and BatchCop, the MPP protocol is more mature and offers better task and resource management. Therefore, it is recommended to use the MPP protocol.
