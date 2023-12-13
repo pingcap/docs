@@ -54,6 +54,7 @@
         -   ルビー
             -   [mysql2](/develop/dev-guide-sample-application-ruby-mysql2.md)
             -   [レール](/develop/dev-guide-sample-application-ruby-rails.md)
+        -   [ワードプレス](/tidb-cloud/dev-guide-wordpress.md)
         -   サーバーレスDriver(ベータ版)
             -   [TiDB CloudサーバーレスDriver](/tidb-cloud/serverless-driver.md)
             -   [Node.js の例](/tidb-cloud/serverless-driver-node-example.md)

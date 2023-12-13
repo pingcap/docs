@@ -13,7 +13,7 @@ br コマンドライン ツール (以下`br`とします) を使用してデ�
 
 ### ログのバックアップを開始する {#start-log-backup}
 
-> **ノート：**
+> **注記：**
 >
 > -   次の例では、Amazon S3 アクセス キーと秘密キーがアクセス許可の承認に使用されることを前提としています。 IAMロールを使用して権限を承認する場合は、 `--send-credentials-to-tikv` ～ `false`を設定する必要があります。
 > -   他のstorageシステムまたは認証方法を使用して権限を認証する場合は、 [バックアップストレージ](/br/backup-and-restore-storages.md)に従ってパラメータ設定を調整します。
@@ -22,7 +22,7 @@ br コマンドライン ツール (以下`br`とします) を使用してデ�
 
 ```shell
 tiup br log start --task-name=pitr --pd "${PD_IP}:2379" \
---storage 's3://backup-101/logbackup?access-key=${access-key}&secret-access-key=${secret-access-key}"'
+--storage 's3://backup-101/logbackup?access-key=${access-key}&secret-access-key=${secret-access-key}'
 ```
 
 ログ バックアップ タスクが開始されると、手動で停止するまで TiDB クラスターのバックグラウンドで実行されます。このプロセス中、TiDB 変更ログは、指定されたstorageに小さなバッチで定期的にバックアップされます。ログ バックアップ タスクのステータスをクエリするには、次のコマンドを実行します。
@@ -33,17 +33,15 @@ tiup br log status --task-name=pitr --pd "${PD_IP}:2379"
 
 期待される出力:
 
-```
-● Total 1 Tasks.
-> #1 <
-    name: pitr
-    status: ● NORMAL
-    start: 2022-05-13 11:09:40.7 +0800
-      end: 2035-01-01 00:00:00 +0800
-    storage: s3://backup-101/log-backup
-    speed(est.): 0.00 ops/s
-checkpoint[global]: 2022-05-13 11:31:47.2 +0800; gap=4m53s
-```
+    ● Total 1 Tasks.
+    > #1 <
+        name: pitr
+        status: ● NORMAL
+        start: 2022-05-13 11:09:40.7 +0800
+          end: 2035-01-01 00:00:00 +0800
+        storage: s3://backup-101/log-backup
+        speed(est.): 0.00 ops/s
+    checkpoint[global]: 2022-05-13 11:31:47.2 +0800; gap=4m53s
 
 ### 完全バックアップを定期的に実行する {#run-full-backup-regularly}
 
@@ -51,7 +49,7 @@ checkpoint[global]: 2022-05-13 11:31:47.2 +0800; gap=4m53s
 
 ```shell
 tiup br backup full --pd "${PD_IP}:2379" \
---storage 's3://backup-101/snapshot-${date}?access-key=${access-key}&secret-access-key=${secret-access-key}"'
+--storage 's3://backup-101/snapshot-${date}?access-key=${access-key}&secret-access-key=${secret-access-key}'
 ```
 
 ## PITRを実行する {#run-pitr}
@@ -60,8 +58,8 @@ tiup br backup full --pd "${PD_IP}:2379" \
 
 ```shell
 br restore point --pd "${PD_IP}:2379" \
---storage='s3://backup-101/logbackup?access-key=${access-key}&secret-access-key=${secret-access-key}"' \
---full-backup-storage='s3://backup-101/snapshot-${date}?access-key=${access-key}&secret-access-key=${secret-access-key}"' \
+--storage='s3://backup-101/logbackup?access-key=${access-key}&secret-access-key=${secret-access-key}' \
+--full-backup-storage='s3://backup-101/snapshot-${date}?access-key=${access-key}&secret-access-key=${secret-access-key}' \
 --restored-ts '2022-05-15 18:00:00+0800'
 ```
 
@@ -94,7 +92,7 @@ PITR を実行するには、復元ポイントの前に完全バックアップ
 3.  スナップショット バックアップよりも前のログ バックアップ データを削除します`FULL_BACKUP_TS` :
 
     ```shell
-    tiup br log truncate --until=${FULL_BACKUP_TS} --storage='s3://backup-101/logbackup?access-key=${access-key}&secret-access-key=${secret-access-key}"'
+    tiup br log truncate --until=${FULL_BACKUP_TS} --storage='s3://backup-101/logbackup?access-key=${access-key}&secret-access-key=${secret-access-key}'
     ```
 
 4.  スナップショット バックアップより前のスナップショット データを削除します`FULL_BACKUP_TS` :
@@ -110,7 +108,7 @@ PITR を実行するには、復元ポイントの前に完全バックアップ
 -   各 TiKV ノードでは、PITR は 280 GB/h の速度でスナップショット データを復元し、30 GB/h のログ データを復元できます。
 -   BR は、古いログ バックアップ データを 600 GB/h の速度で削除します。
 
-> **ノート：**
+> **注記：**
 >
 > 上記の仕様は、次の 2 つのテスト シナリオのテスト結果に基づいています。実際のデータは異なる場合があります。
 >

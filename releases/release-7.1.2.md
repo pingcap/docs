@@ -56,7 +56,7 @@ TiDB バージョン: 7.1.2
     -   TiCDC
 
         -   いくつかの TiCDC モニタリング メトリックとアラーム ルール[#9047](https://github.com/pingcap/tiflow/issues/9047) @ [東門](https://github.com/asddongmen)を最適化します。
-        -   Kafka シンクは、メッセージが大きすぎる場合に[ハンドルキーデータのみを送信する](/ticdc/ticdc-sink-to-kafka.md#handle-messages-that-exceed-the-kafka-topic-limit)をサポートし、過剰なメッセージ サイズによるチェンジフィードの失敗を回避します[#9680](https://github.com/pingcap/tiflow/issues/9680) @ [3エースショーハンド](https://github.com/3AceShowHand)
+        -   Kafka シンクは、メッセージが大きすぎる場合に[ハンドルキーデータのみを送信する](/ticdc/ticdc-sink-to-kafka.md#handle-messages-that-exceed-the-kafka-topic-limit)をサポートし、過度のメッセージ サイズ[#9680](https://github.com/pingcap/tiflow/issues/9680) @ [3エースショーハンド](https://github.com/3AceShowHand)によって引き起こされるチェンジフィードの失敗を回避します。
         -   `ADD INDEX` DDL 操作を複製する実行ロジックを最適化して、後続の DML ステートメントのブロックを回避します[#9644](https://github.com/pingcap/tiflow/issues/9644) @ [スドジ](https://github.com/sdojjy)
         -   TiCDC が失敗後に再試行するときのステータス メッセージを調整します[#9483](https://github.com/pingcap/tiflow/issues/9483) @ [東門](https://github.com/asddongmen)
 
@@ -107,7 +107,7 @@ TiDB バージョン: 7.1.2
     -   TiDB の再起動後に DDL 操作が停止する可能性がある問題を修正[#46751](https://github.com/pingcap/tidb/issues/46751) @ [wjhuang2016](https://github.com/wjhuang2016)
     -   非整数クラスター化インデックス[#47350](https://github.com/pingcap/tidb/issues/47350) @ [タンジェンタ](https://github.com/tangenta)での分割テーブル操作の禁止
     -   不適切な MDL 処理[#46920](https://github.com/pingcap/tidb/issues/46920) @ [wjhuang2016](https://github.com/wjhuang2016)が原因で DDL 操作が永続的にブロックされる可能性がある問題を修正します。
-    -   `RENAME TABLE`操作[#47064](https://github.com/pingcap/tidb/issues/47064) @ [ジフフスト](https://github.com/jiyfhust)によって引き起こされるテーブル内の重複列の問題を修正
+    -   テーブル[#47064](https://github.com/pingcap/tidb/issues/47064) @ [ジフフスト](https://github.com/jiyfhust)の名前変更によって発生する`information_schema.columns`の重複行の問題を修正します。
     -   `batch-client` `client-go` @ [クレイジークス520](https://github.com/crazycs520) [#47691](https://github.com/pingcap/tidb/issues/47691)panicの問題を修正
     -   メモリ使用量がメモリ制限[#45706](https://github.com/pingcap/tidb/issues/45706) @ [ホーキングレイ](https://github.com/hawkingrei)を超えた場合、パーティション テーブルの統計収集が時間内に強制終了されない問題を修正します。
     -   クエリに`UNHEX`条件[#45378](https://github.com/pingcap/tidb/issues/45378) @ [qw4990](https://github.com/qw4990)が含まれる場合、クエリ結果が不正確になる問題を修正します。
@@ -122,7 +122,7 @@ TiDB バージョン: 7.1.2
     -   Online Unsafe Recovery がマージ中止[#15580](https://github.com/tikv/tikv/issues/15580) @ [v01dstar](https://github.com/v01dstar)を処理できない問題を修正
     -   PD と TiKV の間のネットワークの中断により PITR がスタックする可能性がある問題を修正します[#15279](https://github.com/tikv/tikv/issues/15279) @ [ユジュンセン](https://github.com/YuJuncen)
     -   `FLASHBACK` [#15258](https://github.com/tikv/tikv/issues/15258) @ [オーバーヴィーナス](https://github.com/overvenus)を実行した後、 リージョン Merge がブロックされる場合がある問題を修正
-    -   ストアハートビートビートの再試行数を[#15184](https://github.com/tikv/tikv/issues/15184) @ [ノールーシュ](https://github.com/nolouch)に減らすことで、ハートビートビート ストームの問題を修正します。
+    -   ストア ハートビートの再試行数を[#15184](https://github.com/tikv/tikv/issues/15184) @ [ノールーシュ](https://github.com/nolouch)に減らすことで、ハートビートハートビートストームの問題を修正します。
     -   オンライン安全でないリカバリがタイムアウト[#15346](https://github.com/tikv/tikv/issues/15346) @ [コナー1996](https://github.com/Connor1996)で中止されない問題を修正
     -   暗号化により部分書き込み[#15080](https://github.com/tikv/tikv/issues/15080) @ [タボキー](https://github.com/tabokie)中にデータ破損が発生する可能性がある問題を修正
     -   リージョン[#13311](https://github.com/tikv/tikv/issues/13311) @ [cfzjywxk](https://github.com/cfzjywxk)の不正なメタデータによって引き起こされる TiKVpanic問題を修正

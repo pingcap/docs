@@ -116,8 +116,8 @@
     -   [環境コンフィグレーションチェックリスト](/check-before-deployment.md)
     -   クラスタトポロジの計画
         -   [最小限のトポロジ](/minimal-deployment-topology.md)
-        -   [TiFlashトポロジ](/tiflash-deployment-topology.md)
-        -   [TiCDC トポロジ](/ticdc-deployment-topology.md)
+        -   [TiFlashトポロジー](/tiflash-deployment-topology.md)
+        -   [TiCDC トポロジー](/ticdc-deployment-topology.md)
         -   [TiDBBinlogトポロジ](/tidb-binlog-deployment-topology.md)
         -   [TiSpark トポロジ](/tispark-deployment-topology.md)
         -   [クロス DC トポロジ](/geo-distributed-deployment-topology.md)
@@ -378,7 +378,7 @@
                 -   [tiup cluster import](/tiup/tiup-component-cluster-import.md)
                 -   [tiup cluster list](/tiup/tiup-component-cluster-list.md)
                 -   [tiup クラスターのメタバックアップ](/tiup/tiup-component-cluster-meta-backup.md)
-                -   [tiup クラスター メタ リストア](/tiup/tiup-component-cluster-meta-restore.md)
+                -   [tiup クラスターのメタ復元](/tiup/tiup-component-cluster-meta-restore.md)
                 -   [tiup cluster patch](/tiup/tiup-component-cluster-patch.md)
                 -   [tiup cluster prune](/tiup/tiup-component-cluster-prune.md)
                 -   [tiup cluster reload](/tiup/tiup-component-cluster-reload.md)
@@ -1012,6 +1012,7 @@
     -   v6.6
         -   [6.6.0-DMR](/releases/release-6.6.0.md)
     -   v6.5
+        -   [6.5.6](/releases/release-6.5.6.md)
         -   [6.5.5](/releases/release-6.5.5.md)
         -   [6.5.4](/releases/release-6.5.4.md)
         -   [6.5.3](/releases/release-6.5.3.md)
@@ -1169,7 +1170,7 @@
         -   [2.0](/releases/release-2.0-ga.md)
         -   [2.0 RC5](/releases/release-2.0-rc.5.md)
         -   [2.0 RC4](/releases/release-2.0-rc.4.md)
-        -   [2.0RC3](/releases/release-2.0-rc.3.md)
+        -   [2.0 RC3](/releases/release-2.0-rc.3.md)
         -   [2.0 RC1](/releases/release-2.0-rc.1.md)
         -   [1.1 ベータ版](/releases/release-1.1-beta.md)
         -   [1.1 アルファ](/releases/release-1.1-alpha.md)

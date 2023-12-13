@@ -9,11 +9,11 @@ summary: Learn how to save the query results of TiFlash in a transaction.
 
 v6.5.0 以降、TiDB は、 TiFlashクエリ結果のテーブルへの保存、つまりTiFlashクエリ結果の具体化をサポートします。 `INSERT INTO SELECT`ステートメントの実行中に、TiDB が`SELECT`サブクエリをTiFlashにプッシュダウンすると、 TiFlashクエリ結果を`INSERT INTO`句で指定された TiDB テーブルに保存できます。 v6.5.0 より前の TiDB バージョンの場合、 TiFlashクエリ結果は読み取り専用であるため、 TiFlashクエリ結果を保存する場合は、アプリケーション レベルから結果を取得し、別のトランザクションまたはプロセスに保存する必要があります。
 
-> **ノート：**
+> **注記：**
 >
 > デフォルト ( [`tidb_allow_mpp = ON`](/system-variables.md#tidb_allow_mpp-new-in-v50) ) では、オプティマイザは[SQLモード](/sql-mode.md)とTiFlashレプリカのコスト見積もりに基づいて、クエリをTiFlashにプッシュするかどうかをインテリジェントに決定します。
 >
-> -   現在のセッションの[SQLモード](/sql-mode.md)厳密でない場合 (つまり、 `sql_mode`値に`STRICT_TRANS_TABLES` &#39; と`STRICT_ALL_TABLES`が含まれていない場合)、オプティマイザは、 TiFlashレプリカのコスト推定に基づいて、 `INSERT INTO SELECT` `SELECT`サブクエリをTiFlashにプッシュするかどうかをインテリジェントに決定します。このモードでは、オプティマイザのコスト見積もりを無視してクエリをTiFlashにプッシュダウンするようにしたい場合は、 [`tidb_enforce_mpp`](/system-variables.md#tidb_enforce_mpp-new-in-v51)システム変数を`ON`に設定できます。
+> -   現在のセッションの[SQLモード](/sql-mode.md)厳密でない場合 (つまり、 `sql_mode`値に`STRICT_TRANS_TABLES` &#39; と`STRICT_ALL_TABLES`が含まれていない場合)、オプティマイザは、 TiFlashレプリカのコスト推定に基づいて、 `INSERT INTO SELECT`の`SELECT`サブクエリをTiFlashにプッシュするかどうかをインテリジェントに決定します。このモードでは、オプティマイザのコスト見積もりを無視してクエリをTiFlashにプッシュダウンするようにしたい場合は、 [`tidb_enforce_mpp`](/system-variables.md#tidb_enforce_mpp-new-in-v51)システム変数を`ON`に設定できます。
 > -   現在のセッションの[SQLモード](/sql-mode.md)厳密である場合 (つまり、 `sql_mode`値に`STRICT_TRANS_TABLES`または`STRICT_ALL_TABLES`含まれる)、 `INSERT INTO SELECT`の`SELECT`サブクエリをTiFlashにプッシュダウンすることはできません。
 
 `INSERT INTO SELECT`の構文は次のとおりです。
@@ -103,16 +103,21 @@ INSERT INTO detail_data(ts,customer_id,detail_fee) VALUES
 ('2023-1-3 12:2:3', 'cus002', 2200.86),
 ('2023-1-4 12:2:3', 'cus003', 2020.86),
 ('2023-1-5 12:2:3', 'cus003', 1200.86),
-('2023-1-6 12:2:3', 'cus002', 20.86);
+('2023-1-6 12:2:3', 'cus002', 20.86),
+('2023-1-7 12:2:3', 'cus004', 120.56),
+('2023-1-8 12:2:3', 'cus005', 320.16);
+
+-- Execute the following SQL statement 13 times to insert a cumulative total of 65,536 rows into the table.
+INSERT INTO detail_data SELECT * FROM detail_data;
 ```
 
 毎日の分析結果を保存します。
 
 ```sql
-SET @@tidb_enable_tiflash_read_for_write_stmt=ON;
+SET @@sql_mode='NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO';
 
 INSERT INTO daily_data (rec_date, customer_id, daily_fee)
-SELECT DATE(ts), customer_id, sum(detail_fee) FROM detail_data WHERE DATE(ts) = CURRENT_DATE() GROUP BY DATE(ts), customer_id;
+SELECT DATE(ts), customer_id, sum(detail_fee) FROM detail_data WHERE DATE(ts) > DATE('2023-1-1 12:2:3') GROUP BY DATE(ts), customer_id;
 ```
 
 日次分析データに基づいて月次データを分析します。
@@ -121,4 +126,4 @@ SELECT DATE(ts), customer_id, sum(detail_fee) FROM detail_data WHERE DATE(ts) = 
 SELECT MONTH(rec_date), customer_id, sum(daily_fee) FROM daily_data GROUP BY MONTH(rec_date), customer_id;
 ```
 
-上記の例では、日次の分析結果を具体化して日次結果テーブルに保存し、それを基に月次のデータ分析を高速化し、データ分析の効率を向上させています。
+上記の例では、日次の分析結果を具体化して日次結果テーブルに保存し、それを基に月次のデータ分析を高速化し、データ分析の効率を向上させます。

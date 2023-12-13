@@ -248,7 +248,7 @@ SELECT /*+ BROADCAST_JOIN(t1, t2) */ * FROM t1, t2 WHERE t1.id = t2.id;
 
 このヒントがクエリ ブロックで使用される場合、オプティマイザはサブクエリとその外側のクエリ ブロックの間の相関列の非相関化を実行しようとせず、常に適用演算子を使用してクエリを実行します。
 
-デフォルトでは、TiDB はより高い実行効率を達成するために、相関サブクエリに対して[無相関化を実行する](/correlated-subquery-optimization.md)を試行します。ただし、 [いくつかのシナリオ](/correlated-subquery-optimization.md#restrictions)では、非相関化により実際に実行効率が低下する可能性があります。この場合、このヒントを使用して、非相関化を実行しないようにオプティマイザーに手動で指示できます。例えば：
+デフォルトでは、TiDB はより高い実行効率を達成するために、相関サブクエリに対して[無相関化を実行する](/correlated-subquery-optimization.md)を試行します。ただし、 [いくつかのシナリオ](/correlated-subquery-optimization.md#restrictions)では、非相関化により実際に実行効率が低下する可能性があります。この場合、このヒントを使用して、非相関化を実行しないようにオプティマイザに手動で指示できます。例えば：
 
 ```sql
 create table t1(a int, b int);
@@ -407,7 +407,7 @@ EXPLAIN SELECT /*+ ORDER_INDEX(t, a) */ a FROM t ORDER BY a LIMIT 10;
 
 > **注記：**
 >
-> -   クエリ自体がインデックスを順番に読み取る必要がない場合 (つまり、ヒントがなければ、オプティマイザはどのような状況でもインデックスを順番に読み取るプランを生成しません)、ヒント`ORDER_INDEX`を使用すると、エラー`Can't find a proper physical plan for this query`発生します。 。この場合、対応する`ORDER_INDEX`ヒントを削除する必要があります。
+> -   クエリ自体がインデックスを順番に読み取る必要がない場合 (つまり、ヒントがなければ、オプティマイザはどのような状況でもインデックスを順番に読み取るプランを生成しません)、ヒント`ORDER_INDEX`を使用すると、エラー`Can't find a proper physical plan for this query`が発生します。 。この場合、対応する`ORDER_INDEX`ヒントを削除する必要があります。
 > -   パーティションテーブルのインデックスは順番に読み取ることができないため、パーティションテーブルとその関連インデックスに対して`ORDER_INDEX`ヒントを使用しないでください。
 
 ### NO_ORDER_INDEX(t1_name, idx1_name [, idx2_name ...]) {#no-order-index-t1-name-idx1-name-idx2-name}
@@ -661,7 +661,7 @@ select /*+ NO_INDEX_MERGE() */ * from t where t.a > 0 or t.b > 0;
 > **注記：**
 >
 > -   `NO_INDEX_MERGE` `USE_INDEX_MERGE`よりも高い優先順位を持ちます。両方のヒントを使用した場合、 `USE_INDEX_MERGE`有効になりません。
-> -   サブクエリの場合、 `NO_INDEX_MERGE`サブクエリの最外部レベルに配置された場合にのみ有効になります。
+> -   サブクエリの場合、 `NO_INDEX_MERGE`サブクエリの最も外側のレベルに配置された場合にのみ有効になります。
 
 ### USE_TOJA(ブール値) {#use-toja-boolean-value}
 
@@ -734,7 +734,7 @@ SELECT /*+ STRAIGHT_JOIN() */ * FROM t t1, t t2 WHERE t1.a = t2.a;
 
 ### NTH_PLAN(N) {#nth-plan-n}
 
-`NTH_PLAN(N)`ヒントは、物理最適化中に見つかった`N`番目の物理プランを選択するようにオプティマイザーに思い出させます。 `N`正の整数でなければなりません。
+`NTH_PLAN(N)`のヒントは、物理最適化中に見つかった`N`番目の物理プランを選択するようにオプティマイザーに思い出させます。 `N`正の整数でなければなりません。
 
 指定された`N`が物理最適化の検索範囲を超えている場合、TiDB は警告を返し、このヒントを無視する戦略に基づいて最適な物理プランを選択します。
 
@@ -893,7 +893,7 @@ EXPLAIN SELECT /*+ inl_join(t1, t3) */ * FROM t1, t2, t3 WHERE t1.id = t2.id AND
 +---------------------------------+----------+-----------+---------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 ```
 
-前の例では、 `t1`と`t3`は`IndexJoin`によって直接結合されていません。
+前の例では、 `t1`と`t3` `IndexJoin`によって直接結合されていません。
 
 `t1`と`t3`の間で直接`IndexJoin`実行するには、まず[`LEADING(t1, t3)`ヒント](#leadingt1_name--tl_name-)を使用して`t1`と`t3`の結合順序を指定し、次に`INL_JOIN`ヒントを使用して結合アルゴリズムを指定します。例えば：
 
@@ -929,7 +929,7 @@ EXPLAIN SELECT /*+ NO_HASH_JOIN(t1), NO_MERGE_JOIN(t1) */ * FROM t1, t2 WHERE t1
 ERROR 1815 (HY000): Internal : Can't find a proper physical plan for this query
 ```
 
--   システム変数[`tidb_opt_enable_hash_join`](/system-variables.md#tidb_opt_enable_hash_join-new-in-v712) `OFF`に設定され、他のすべての結合タイプも除外されます。
+-   システム変数[`tidb_opt_enable_hash_join`](/system-variables.md#tidb_opt_enable_hash_join-new-in-v656-and-v712) `OFF`に設定され、他のすべての結合タイプも除外されます。
 
 ```sql
 CREATE TABLE t1 (a INT);
