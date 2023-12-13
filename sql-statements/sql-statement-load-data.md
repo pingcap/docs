@@ -159,9 +159,9 @@ The syntax of the `LOAD DATA` statement is compatible with that of MySQL, except
 > - For versions earlier than TiDB v7.6.0, no matter how many rows are committed in a transaction, `LOAD DATA` is not rolled back by the [`ROLLBACK`](/sql-statements/sql-statement-rollback.md) statement in an explicit transaction.
 > - For versions earlier than TiDB v7.6.0, the `LOAD DATA` statement is always executed in optimistic transaction mode, regardless of the TiDB transaction mode configuration.
 > - Starting from v7.6.0, TiDB processes `LOAD DATA` in transactions in the same way as other DML statements:
->   - The `LOAD DATA` statement does not commit the current transaction or start a new transaction.
->   - The `LOAD DATA` statement is affected by the TiDB transaction mode setting (optimistic or pessimistic transaction).
->   - The `LOAD DATA` statement in a transaction can be rolled back by the [`ROLLBACK`](/sql-statements/sql-statement-rollback.md) statement in the transaction.
+>     - The `LOAD DATA` statement does not commit the current transaction or start a new transaction.
+>     - The `LOAD DATA` statement is affected by the TiDB transaction mode setting (optimistic or pessimistic transaction).
+>     - The `LOAD DATA` statement in a transaction can be rolled back by the [`ROLLBACK`](/sql-statements/sql-statement-rollback.md) statement in the transaction.
 
 </CustomContent>
 
@@ -176,9 +176,9 @@ The syntax of the `LOAD DATA` statement is compatible with that of MySQL, except
 > - For versions earlier than TiDB v7.6.0, no matter how many rows are committed in a transaction, `LOAD DATA` is not rolled back by the [`ROLLBACK`](/sql-statements/sql-statement-rollback.md) statement in an explicit transaction.
 > - For versions earlier than TiDB v7.6.0, the `LOAD DATA` statement is always executed in optimistic transaction mode, regardless of the TiDB transaction mode configuration.
 > - Starting from v7.6.0, TiDB processes `LOAD DATA` in transactions in the same way as other DML statements:
->   - The `LOAD DATA` statement does not commit the current transaction or start a new transaction.
->   - The `LOAD DATA` statement is affected by the TiDB transaction mode setting (optimistic or pessimistic transaction).
->   - The `LOAD DATA` statement in a transaction can be rolled back by the [`ROLLBACK`](/sql-statements/sql-statement-rollback.md) statement in the transaction.
+>     - The `LOAD DATA` statement does not commit the current transaction or start a new transaction.
+>     - The `LOAD DATA` statement is affected by the TiDB transaction mode setting (optimistic or pessimistic transaction).
+>     - The `LOAD DATA` statement in a transaction can be rolled back by the [`ROLLBACK`](/sql-statements/sql-statement-rollback.md) statement in the transaction.
 
 </CustomContent>
 
