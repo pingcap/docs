@@ -4590,6 +4590,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - Range: `[0, 2147483647]`
 
 <CustomContent platform="tidb">
+
 - This variable is used to control the length of the SQL string in [statement summary tables](/statement-summary-tables.md), the [SLOW_QUERY](/information-schema/information-schema-slow-query.md) table and on the [TiDB Dashboard](/dashboard/dashboard-intro.md).
 
 </CustomContent>
