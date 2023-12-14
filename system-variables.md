@@ -5632,7 +5632,18 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - Default value: `0`
 - Range: `[0, 125829120]`
 - Unit: Bytes
+
+<CustomContent platform="tidb">
+
 - This variable is used to dynamically modify the TiDB configuration item [`performance.txn-entry-size-limit`](/tidb-configuration-file.md#txn-entry-size-limit-new-in-v50). It controls the size limit of a single row of data in TiDB, which is equivalent to the configuration item. The default value of this variable is `0`, which means that TiDB uses the value of the configuration item `txn-entry-size-limit` by default. When it is set to a non-zero value, the value is used as the value of `txn-entry-size-limit`.
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+- This variable is used to dynamically modify the TiDB configuration item [`performance.txn-entry-size-limit`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#txn-entry-size-limit-new-in-v50). It controls the size limit of a single row of data in TiDB, which is equivalent to the configuration item. The default value of this variable is `0`, which means that TiDB uses the value of the configuration item `txn-entry-size-limit` by default. When it is set to a non-zero value, the value is used as the value of `txn-entry-size-limit`.
+
+</CustomContent>
 
 > **Note:**
 >
