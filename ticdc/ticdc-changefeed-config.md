@@ -77,6 +77,7 @@ enable-old-value = true
 
 # Filter rules.
 # Filter syntax: <https://docs.pingcap.com/tidb/stable/table-filter#syntax>.
+# The following rule replicates data from all databases except the `test` database.
 rules = ['*.*', '!test.*']
 
 # Event filter rules.
@@ -96,20 +97,6 @@ rules = ['*.*', '!test.*']
 # ignore-event = ["drop table", "delete"] # Ignore the `drop table` DDL events and the `delete` DML events.
 # ignore-sql = ["^drop table", "alter table"] # Ignore DDL statements that start with `drop table` or contain `alter table`.
 # ignore-insert-value-expr = "price > 1000 and origin = 'no where'" # Ignore insert DMLs that contain the conditions "price > 1000" and "origin = 'no where'".
-
-[scheduler]
-# Allocate tables to multiple TiCDC nodes for replication on a per-Region basis.
-# Note: This configuration item only takes effect on Kafka changefeeds and is not supported on MySQL changefeeds.
-# The value is "false" by default. Set it to "true" to enable this feature.
-enable-table-across-nodes = false
-# When `enable-table-across-nodes` is enabled, there are two allocation modes:
-# 1. Allocate tables based on the number of Regions, so that each TiCDC node handles roughly the same number of Regions. If the number of Regions for a table exceeds the value of `region-threshold`, the table will be allocated to multiple nodes for replication. The default value of `region-threshold` is 10000.
-# region-threshold = 10000
-# 2. Allocate tables based on the write traffic, so that each TiCDC node handles roughly the same number of modified rows. Only when the number of modified rows per minute in a table exceeds the value of `write-key-threshold`, will this allocation take effect.
-# write-key-threshold = 30000
-# Note:
-# * The default value of `write-key-threshold` is 0, which means that the traffic allocation mode is not used by default.
-# * You only need to configure one of the two modes. If both `region-threshold` and `write-key-threshold` are configured, TiCDC prioritizes the traffic allocation mode, namely `write-key-threshold`.
 
 [sink]
 # For the sink of MQ type, you can use dispatchers to configure the event dispatcher.
