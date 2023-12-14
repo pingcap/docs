@@ -188,7 +188,7 @@ This section provides a detailed description of these key metrics on the **TiKV-
 
 - Scheduler flow: The scheduler traffic on each TiKV instance in real time.
 - Scheduler discard ratio: The rejection ratio of scheduler requests on each TiKV instance. If this ratio is not 0, it indicates that flow control exists. When `Compaction pending bytes` exceed its threshold, TiKV linearly increases the `Scheduler Discard Ratio` based on the exceeded portion. The client will retry rejected requests automatically.
-- Throttle duration: The duration that the execution of the scheduler requests is blocked when flow control is triggered due to too many L0 files. If this metric has values, it indicates that flow control exists.
+- Throttle duration: The block duration for the execution of the scheduler requests when flow control is triggered due to too many L0 files. If this metric has values, it indicates that flow control exists.
 - Scheduler throttled CF: The CF that triggers RocksDB throttling when the flow control threshold is reached
 - Flow controller actions: The actions that trigger RocksDB throttling when the flow control threshold is reached
 - Flush/L0 flow: The traffic of flush and L0 compaction for different CFs of RocksDB on each TiKV instance
