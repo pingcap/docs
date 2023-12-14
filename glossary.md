@@ -102,7 +102,7 @@ For details, see [GC Overview](/garbage-collection-overview.md).
 
 ### Hotspot
 
-Hotspot refers to the phenomenon where the read and write workload of TiKV is concentrated on one or several regions or nodes, which might cause performance bottlenecks and prevent optimal performance. To solve hotspot issues, refer to [Troubleshoot Hotspot Issues](/troubleshoot-hot-spot-issues.md).
+Hotspot refers to the phenomenon where the read and/or write workload of TiKV is concentrated on one or several regions or nodes, which might cause performance bottlenecks and prevent optimal performance. To solve hotspot issues, refer to [Troubleshoot Hotspot Issues](/troubleshoot-hot-spot-issues.md).
 
 ### HTAP
 
