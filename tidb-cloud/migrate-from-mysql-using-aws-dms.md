@@ -29,7 +29,7 @@ Before you start the migration, make sure you have read the following:
 ## Limitation
 
 - AWS DMS does not support replicating `DROP TABLE`.
-- Make sure that you know what information and tables in the source database need to be migrated to TiDB Cloud. AWS DMS supports basic schema migration, including the creation of tables and primary keys. However, AWS DMS does not automatically create secondary indexes, foreign keys, or user accounts in TiDB Cloud. You need to set up supplemental logging or modify other settings for TiDB Cloud. For more information, see [Migration planning for AWS Database Migration Service](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_BestPractices.html#CHAP_SettingUp.MigrationPlanning).
+- AWS DMS supports basic schema migration, including the creation of tables and primary keys. However, AWS DMS does not automatically create secondary indexes, foreign keys, or user accounts in TiDB Cloud. You must manually create these objects in TiDB, including tables with secondary indexes, if needed. For more information, see [Migration planning for AWS Database Migration Service](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_BestPractices.html#CHAP_SettingUp.MigrationPlanning).
 
 ## Step 1. Create an AWS DMS replication instance
 
