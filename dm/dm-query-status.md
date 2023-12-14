@@ -49,7 +49,7 @@ A successful query result is as follows:
 Some fields in the query result are described as follows:
 
 - `result`: Whether the query is successful.
-- `msg`: Describes the reason for the unsuccessful query.
+- `msg`: The error message returned when the query fails.
 - `tasks`: The list of migration tasks. Each task contains the following fields:
     - `taskName`: The name of the task.
     - `taskStatus`: The status of the task. For detailed descriptions of `taskStatus`, refer to [Task status](#task-status).
@@ -222,7 +222,7 @@ Some fields in the returned result are described as follows:
 
 - `result`: Whether the query is successful.
 - `msg`: The error message returned when the query fails.
-- `sources`: The list of upstream MySQL instances. Each task contains the following fields:
+- `sources`: The list of upstream MySQL instances. Each source contains the following fields:
     - `result`
     - `msg`
     - `sourceStatus`: The information of the upstream MySQL databases.
@@ -231,7 +231,7 @@ Some fields in the returned result are described as follows:
         - `stage`: The status of the subtask. For the status description and status switch relationship of "stage" of "subTaskStatus" of "sources", see the [subtask status](#subtask-status).
         - `unit`: The processing unit of DM, including "Check", "Dump", "Load", and "Sync".
         - `result`: Displays the error information if a subtask fails.
-        - `unresolvedDDLLockID`: The sharding DDL lock ID, used for manually handling the sharding DDL lock in the abnormal condition.
+        - `unresolvedDDLLockID`: The sharding DDL lock ID, used for manually handling the sharding DDL lock in the abnormal condition. For operation details of "unresolvedDDLLockID" of "subTaskStatus" of "sources", see [Handle Sharding DDL Locks Manually](/dm/manually-handling-sharding-ddl-locks.md).
         - `sync`: The replication information of the `Sync` processing unit. This information is about the same component with the current processing unit.
             - `masterBinlog`: The binlog position in the upstream database.
             - `masterBinlogGtid`: The GTID information in the upstream database.
@@ -240,6 +240,7 @@ Some fields in the returned result are described as follows:
             - `blockingDDLs`: The DDL list that is blocked currently. It is not empty only when all the upstream tables of this DM-worker are in the "synced" status. In this case, it indicates the sharding DDL statements to be executed or that are skipped.
             - `unresolvedGroups`: The sharding group that is not resolved. Each group contains the following fields:
                 - `target`: The downstream database table to be replicated.
+                - `DDLs`: A list of DDL statements.
                 - `firstPos`: The starting position of the sharding DDL statement.
                 - `synced`: The upstream sharded table whose executed sharding DDL statement has been read by the `Sync` unit.
                 - `unsynced`: The upstream table that has not executed this sharding DDL statement. If any upstream tables have not finished replication, `blockingDDLs` is empty.
@@ -260,8 +261,6 @@ Some fields in the returned result are described as follows:
             - `estimateTotalRows`: The estimated number of rows to be dumped.
             - `progress`: The progress of the dumping process.
             - `bps`: The dumping speed in bytes/second.
-
-For operation details of "unresolvedDDLLockID" of "subTaskStatus" of "sources", see [Handle Sharding DDL Locks Manually](/dm/manually-handling-sharding-ddl-locks.md).
 
 ## Subtask status
 
