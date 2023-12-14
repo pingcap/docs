@@ -89,11 +89,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 
     > **Tip:**
     > 
-<<<<<<< HEAD
-    > If you have created a password before, you can either use the original password or click **Reset password** to generate a new one.
-=======
     > If you have created a password before, you can either use the original password or click **Reset Password** to generate a new one.
->>>>>>> be9e59ff6a (update serverless connect steps (#15592))
 
 5. Run the following command to copy `.env.example` and rename it to `.env`:
 
