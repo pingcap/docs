@@ -1039,7 +1039,7 @@ Configuration items related to Raftstore.
 ### `periodic-full-compact-start-max-cpu` <span class="version-mark">New in v7.6.0</span>
 
 + Controls the CPU usage threshold at which TiKV performs periodic full compaction.
-+ Default value: 0.1, which means that the maximum CPU usage for periodic compaction processes is 10%.
++ Default value: `0.1`, which means that the maximum CPU usage for periodic compaction processes is 10%.
 
 ## coprocessor
 
