@@ -1033,7 +1033,7 @@ Configuration items related to Raftstore.
 
 ### `periodic-full-compact-start-times` <span class="version-mark">New in v7.6.0</span>
 
-+ Set the times at which periodic full compaction may start. E.g., ``periodic-full-compact-start-times = ["03:00", "23:00"]`` will mean full compaction runs at 03:00 and 23:00 (3am and 11pm) in the tikv node's local timezone.
++ Sets the specific times for initiating periodic full compaction. You can specify multiple time schedules in an array. For example, `periodic-full-compact-start-times = ["03:00", "23:00"]` indicates that TiKV performs full compaction at 03:00 AM and 23:00 PM, based on the local time zone of the TiKV node.
 + Default: `[]` (periodic full compaction is disabled by default).
 
 ### `periodic-full-compact-start-max-cpu` <span class="version-mark">New in v7.6.0</span>
