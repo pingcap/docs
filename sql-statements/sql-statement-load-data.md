@@ -155,7 +155,7 @@ The syntax of the `LOAD DATA` statement is compatible with that of MySQL, except
 >
 > - For versions earlier than TiDB v4.0.0, `LOAD DATA` commits every 20000 rows, which cannot be configured.
 > - For versions from TiDB v4.0.0 to v6.6.0, TiDB commits all rows in one transaction by default. But if you need the `LOAD DATA` statement to commit every fixed number of rows, you can set [`tidb_dml_batch_size`](/system-variables.md#tidb_dml_batch_size) to the desired number of rows.
-> - Starting from v7.0.0, `tidb_dml_batch_size` no longer takes effect on `LOAD DATA`, and TiDB commits all rows in one transaction.
+> - Starting from TiDB v7.0.0, `tidb_dml_batch_size` no longer takes effect on `LOAD DATA`, and TiDB commits all rows in one transaction.
 > - After upgrading from TiDB v4.0.0 or earlier versions, `ERROR 8004 (HY000) at line 1: Transaction is too large, size: 100000058` might occur. The recommended way to resolve this error is to increase the [`txn-total-size-limit`](/tidb-configuration-file.md#txn-total-size-limit) value in your `tidb.toml` file.
 > - No matter how many rows are committed in a transaction, `LOAD DATA` is not rolled back by the [`ROLLBACK`](/sql-statements/sql-statement-rollback.md) statement in an explicit transaction.
 > - The `LOAD DATA` statement is always executed in optimistic transaction mode, regardless of the TiDB transaction mode configuration.
