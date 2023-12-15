@@ -23,6 +23,8 @@
       - [JetBrains DataGrip](/develop/dev-guide-gui-datagrip.md)
       - [DBeaver](/develop/dev-guide-gui-dbeaver.md)
       - [VS Code](/develop/dev-guide-gui-vscode-sqltools.md)
+      - [MySQL Workbench](/develop/dev-guide-gui-mysql-workbench.md)
+      - [Navicat](/develop/dev-guide-gui-navicat.md)
     - [Choose Driver or ORM](/develop/dev-guide-choose-driver-or-orm.md)
     - Java
       - [JDBC](/develop/dev-guide-sample-application-java-jdbc.md)
@@ -51,6 +53,7 @@
     - Ruby
       - [mysql2](/develop/dev-guide-sample-application-ruby-mysql2.md)
       - [Rails](/develop/dev-guide-sample-application-ruby-rails.md)
+    - [WordPress](/tidb-cloud/dev-guide-wordpress.md)
   - Third-Party Support
     - [Third-Party Tools Supported by TiDB](/develop/dev-guide-third-party-support.md)
     - [Known Incompatibility Issues with Third-Party Tools](/develop/dev-guide-third-party-tools-compatibility.md)
@@ -306,6 +309,9 @@
   - [TiDB Serverless Limitations](/tidb-cloud/serverless-limitations.md)
   - [Limited SQL Features on TiDB Cloud](/tidb-cloud/limited-sql-features.md)
   - [TiDB Limitations](/tidb-limitations.md)
+  - TiDB Distributed eXecution Framework (DXF)
+    - [Introduction](/tidb-distributed-execution-framework.md)
+    - [TiDB Global Sort](/tidb-global-sort.md)
   - Benchmarks
     - [TPC-C Performance Test Report](/tidb-cloud/v7.1.0-performance-benchmarking-with-tpcc.md)
     - [Sysbench Performance Test Report](/tidb-cloud/v7.1.0-performance-benchmarking-with-sysbench.md)
@@ -574,6 +580,7 @@
     - [Metadata Lock](/metadata-lock.md)
     - [Use UUIDs](/best-practices/uuid.md)
   - [System Variables](/system-variables.md)
+  - [Server Status Variables](/status-variables.md)
   - Storage Engines
     - TiKV
         - [TiKV Overview](/tikv-overview.md)
@@ -617,8 +624,6 @@
     - [update](/tidb-cloud/ticloud-update.md)
   - [Table Filter](/table-filter.md)
   - [Resource Control](/tidb-resource-control.md)
-  - [TiDB Backend Task Distributed Execution Framework](/tidb-distributed-execution-framework.md)
-  - [TiDB Global Sort](/tidb-global-sort.md)
   - [DDL Execution Principles and Best Practices](/ddl-introduction.md)
   - [Troubleshoot Inconsistency Between Data and Indexes](/troubleshoot-data-inconsistency-errors.md)
   - [Support](/tidb-cloud/tidb-cloud-support.md)

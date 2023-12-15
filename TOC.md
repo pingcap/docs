@@ -4,7 +4,7 @@
 - [Docs Home](https://docs.pingcap.com/)
 - About TiDB
   - [TiDB Introduction](/overview.md)
-  - [TiDB 7.4 Release Notes](/releases/release-7.4.0.md)
+  - [TiDB 7.5 Release Notes](/releases/release-7.5.0.md)
   - [Features](/basic-features.md)
   - [MySQL Compatibility](/mysql-compatibility.md)
   - [TiDB Limitations](/tidb-limitations.md)
@@ -53,6 +53,8 @@
       - [JetBrains DataGrip](/develop/dev-guide-gui-datagrip.md)
       - [DBeaver](/develop/dev-guide-gui-dbeaver.md)
       - [VS Code](/develop/dev-guide-gui-vscode-sqltools.md)
+      - [MySQL Workbench](/develop/dev-guide-gui-mysql-workbench.md)
+      - [Navicat](/develop/dev-guide-gui-navicat.md)
     - [Choose Driver or ORM](/develop/dev-guide-choose-driver-or-orm.md)
     - [Connect to TiDB](/develop/dev-guide-connect-to-tidb.md)
     - [Connection Pools and Connection Parameters](/develop/dev-guide-connection-parameters.md)
@@ -133,8 +135,8 @@
   - [Import Best Practices](/tidb-lightning/data-import-best-practices.md)
   - Migration Scenarios
     - [Migrate from Aurora](/migrate-aurora-to-tidb.md)
-    - [Migrate MySQL of Small Datasets](/migrate-small-mysql-to-tidb.md)
-    - [Migrate MySQL of Large Datasets](/migrate-large-mysql-to-tidb.md)
+    - [Migrate Small Datasets from MySQL](/migrate-small-mysql-to-tidb.md)
+    - [Migrate Large Datasets from MySQL](/migrate-large-mysql-to-tidb.md)
     - [Migrate and Merge MySQL Shards of Small Datasets](/migrate-small-mysql-shards-to-tidb.md)
     - [Migrate and Merge MySQL Shards of Large Datasets](/migrate-large-mysql-shards-to-tidb.md)
     - [Migrate from CSV Files](/migrate-from-csv-files-to-tidb.md)
@@ -642,7 +644,11 @@
     - [Data Validation](/tiflash/tiflash-data-validation.md)
     - [Compatibility](/tiflash/tiflash-compatibility.md)
     - [Pipeline Execution Model](/tiflash/tiflash-pipeline-model.md)
+  - TiDB Distributed eXecution Framework (DXF)
+    - [Introduction](/tidb-distributed-execution-framework.md)
+    - [TiDB Global Sort](/tidb-global-sort.md)
   - [System Variables](/system-variables.md)
+  - [Server Status Variables](/status-variables.md)
   - Configuration File Parameters
     - [tidb-server](/tidb-configuration-file.md)
     - [tikv-server](/tikv-configuration-file.md)
@@ -997,9 +1003,6 @@
   - [Table Filter](/table-filter.md)
   - [Schedule Replicas by Topology Labels](/schedule-replicas-by-topology-labels.md)
   - [URI Formats of External Storage Services](/external-storage-uri.md)
-  - Internal Components
-    - [TiDB Backend Task Distributed Execution Framework](/tidb-distributed-execution-framework.md)
-    - [TiDB Global Sort](/tidb-global-sort.md)
 - FAQs
   - [FAQ Summary](/faq/faq-overview.md)
   - [TiDB FAQs](/faq/tidb-faq.md)
@@ -1017,6 +1020,8 @@
   - [Release Timeline](/releases/release-timeline.md)
   - [TiDB Versioning](/releases/versioning.md)
   - [TiDB Installation Packages](/binary-package.md)
+  - v7.5
+    - [7.5.0](/releases/release-7.5.0.md)
   - v7.4
     - [7.4.0-DMR](/releases/release-7.4.0.md)
   - v7.3
@@ -1032,6 +1037,7 @@
   - v6.6
     - [6.6.0-DMR](/releases/release-6.6.0.md)
   - v6.5
+    - [6.5.6](/releases/release-6.5.6.md)
     - [6.5.5](/releases/release-6.5.5.md)
     - [6.5.4](/releases/release-6.5.4.md)
     - [6.5.3](/releases/release-6.5.3.md)

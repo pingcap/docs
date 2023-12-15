@@ -86,7 +86,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 
 3. In the connection dialog, select `Rails` from the **Connect With** drop-down list and keep the default setting of the **Endpoint Type** as `Public`.
 
-4. If you have not set a password yet, click **Create password** to generate a random password.
+4. If you have not set a password yet, click **Generate Password** to generate a random password.
 
 5. Run the following command to copy `.env.example` and rename it to `.env`:
 
@@ -183,7 +183,7 @@ Connect to your TiDB cluster depending on the TiDB deployment option you've sele
 If the connection is successful, the console will output the version of the TiDB cluster as follows:
 
 ```
-🔌 Connected to TiDB cluster! (TiDB version: 8.0.11-TiDB-v7.4.0)
+🔌 Connected to TiDB cluster! (TiDB version: 8.0.11-TiDB-v7.5.0)
 ⏳ Loading sample game data...
 ✅ Loaded sample game data.
 
