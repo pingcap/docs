@@ -15,12 +15,11 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.1/quick-start-with-
 
 <!-- **tw:@qiancai** 1 -->
 
-- (dup): release-6.5.6.md > Compatibility changes - Prohibit setting [`require_secure_transport`](https://docs.pingcap.com/tidb/v6.5/system-variables#require_secure_transport-new-in-v610) to `ON` in Security Enhanced Mode (SEM) to prevent potential connectivity issues for users [#47665](https://github.com/pingcap/tidb/issues/47665) @[tiancaiamao](https://github.com/tiancaiamao)
 - (dup): release-6.5.6.md > Compatibility changes - After further testing, the default value of the TiCDC Changefeed configuration item [`case-sensitive`](/ticdc/ticdc-changefeed-config.md) is changed from `true` to `false`. This means that by default, table and database names in the TiCDC configuration file are case-insensitive [#10047](https://github.com/pingcap/tiflow/issues/10047) @[sdojjy](https://github.com/sdojjy)
-- (dup): release-6.5.6.md > Compatibility changes> TiCDC Changefeed introduces the following new configuration items: - [`compression`](/ticdc/ticdc-changefeed-config.md): enables you to configure the compression behavior of redo log files [#10176](https://github.com/pingcap/tiflow/issues/10176) @[sdojjy](https://github.com/sdojjy)
-- (dup): release-6.5.6.md > Compatibility changes> TiCDC Changefeed introduces the following new configuration items: - [`encoding-worker-num`](/ticdc/ticdc-changefeed-config.md) and [`flush-worker-num`](/ticdc/ticdc-changefeed-config.md): enable you to set different concurrency parameters for the redo module based on specifications of different machines [#10048](https://github.com/pingcap/tiflow/issues/10048) @[CharlesCheung96](https://github.com/CharlesCheung96)
-- (dup): release-6.5.6.md > Compatibility changes> TiCDC Changefeed introduces the following new configuration items: - [`sink.cloud-storage-config`](/ticdc/ticdc-changefeed-config.md): enables you to set the automatic cleanup of historical data when replicating data to object storage [#10109](https://github.com/pingcap/tiflow/issues/10109) @[CharlesCheung96](https://github.com/CharlesCheung96)
-- 将自动支持平滑升级功能修改成通过 `/upgrade/start` 和 `upgrade/finish` HTTP 接口支持此功能 @[zimulala](https://github.com/zimulala)
+- (dup): release-6.5.6.md > Compatibility changes> - TiCDC Changefeed introduces the following new configuration items:
+    - [`encoding-worker-num`](/ticdc/ticdc-changefeed-config.md) and [`flush-worker-num`](/ticdc/ticdc-changefeed-config.md): enable you to set different concurrency parameters for the redo module based on specifications of different machines [#10048](https://github.com/pingcap/tiflow/issues/10048) @[CharlesCheung96](https://github.com/CharlesCheung96)
+    - [`compression`](/ticdc/ticdc-changefeed-config.md): enables you to configure the compression behavior of redo log files [#10176](https://github.com/pingcap/tiflow/issues/10176) @[sdojjy](https://github.com/sdojjy)
+    - [`sink.cloud-storage-config`](/ticdc/ticdc-changefeed-config.md): enables you to set the automatic cleanup of historical data when replicating data to object storage [#10109](https://github.com/pingcap/tiflow/issues/10109) @[CharlesCheung96](https://github.com/CharlesCheung96)
 
 ## Improvements
 
@@ -91,17 +90,17 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.1/quick-start-with-
     - Fix the issue that `UPDATE` statements might be incorrectly converted to PointGet [#47445](https://github.com/pingcap/tidb/issues/47445) @[hi-rustin](https://github.com/hi-rustin)
     - Fix the OOM issue that might occur when TiDB performs garbage collection on the `stats_history` table [#48431](https://github.com/pingcap/tidb/issues/48431) @[hawkingrei](https://github.com/hawkingrei)
     <!-- **tw:@qiancai** 12 -->
-    - 修复某些情况下相同的查询计划拥有不同的 digest 的问题 [#47634](https://github.com/pingcap/tidb/issues/47634) @[King-Dylan](https://github.com/King-Dylan)
-    - 修复内存大量使用时无法 kill GenJSONTableFromStats 的问题 [#47779](https://github.com/pingcap/tidb/issues/47779) @[hawkingrei](https://github.com/hawkingrei)
-    - 修复可能将过滤条件错误地下推到 CTE 的问题 [#47881](https://github.com/pingcap/tidb/issues/47881) @[winoros](https://github.com/winoros)
-    - 修复 AUTO_ID_CACHE=1 时可能导致 Duplicate entry 的问题 [#46444](https://github.com/pingcap/tidb/issues/46444) @[tiancaiamao](https://github.com/tiancaiamao)
-    - 修复 TiDB server 在使用企业插件审计日志时可能导致高资源使用的问题 [#49273](https://github.com/pingcap/tidb/issues/49273) @[lcwangchao](https://github.com/lcwangchao)
-    - 修复 TiDB server 在优雅关闭（graceful shutdown）时可能 panic 的问题 [#36793](https://github.com/pingcap/tidb/issues/36793) @[bb7133](https://github.com/bb7133)
-    - 修复在有大量表时，AUTO_ID_CACHE=1 表可能造成 gRPC 客户端泄漏的问题 [#48869](https://github.com/pingcap/tidb/issues/48869) @[tiancaiamao](https://github.com/tiancaiamao)
-    - 修复使用 ErrLoadDataInvalidURI （使用无效的 S3 URL 的错误）的错误信息内容 [#48164](https://github.com/pingcap/tidb/issues/48164) @[lance6716](https://github.com/lance6716)
-    - 修复了当分区列类型为 datetime 时，执行 "alter table ... last partition " 会失败的问题 [#48814](https://github.com/pingcap/tidb/issues/48814) @[crazycs520](https://github.com/crazycs520)
-    - 修复了 "import into" 时，真实错误信息可能被其它错误覆盖的问题 [#47992](https://github.com/pingcap/tidb/issues/47992)，[#47781](https://github.com/pingcap/tidb/issues/47781) @[D3Hunter](https://github.com/D3Hunter)
-    - 修复无法检测到 TiDB 部署在 cgroup v2 容器的问题 [#48342](https://github.com/pingcap/tidb/issues/48342) @[D3Hunter](https://github.com/D3Hunter)
+    - Fix the issue that the same query plan has different `PLAN_DIGEST` values in some cases [#47634](https://github.com/pingcap/tidb/issues/47634) @[King-Dylan](https://github.com/King-Dylan)
+    - Fix the issue that `GenJSONTableFromStats` cannot be killed when it consumes a large amount of memory [#47779](https://github.com/pingcap/tidb/issues/47779) @[hawkingrei](https://github.com/hawkingrei)
+    - (dup): release-6.5.6.md > Bug fixes> TiDB - Fix the issue that the result might be incorrect when predicates are pushed down to common table expressions [#47881](https://github.com/pingcap/tidb/issues/47881) @[winoros](https://github.com/winoros)
+    - (dup): release-6.5.6.md > Bug fixes> TiDB - Fix the issue that `Duplicate entry` might occur when `AUTO_ID_CACHE=1` is set [#46444](https://github.com/pingcap/tidb/issues/46444) @[tiancaiamao](https://github.com/tiancaiamao)
+    - Fix the issue that TiDB server might consume a significant amount of resources when enterprise plugins for audit logging are used [#49273](https://github.com/pingcap/tidb/issues/49273) @[lcwangchao](https://github.com/lcwangchao)
+    - Fix the problem that TiDB server might panic during graceful shutdown [#36793](https://github.com/pingcap/tidb/issues/36793) @[bb7133](https://github.com/bb7133)
+    - Fix the issue that gRPC client might leak when DM imports a large number of tables with `AUTO_ID_CACHE=1` [#48869](https://github.com/pingcap/tidb/issues/48869) @[tiancaiamao](https://github.com/tiancaiamao)
+    - Fix the incorrect error message for `ErrLoadDataInvalidURI` (invalid S3 URI error) [#48164](https://github.com/pingcap/tidb/issues/48164) @[lance6716](https://github.com/lance6716)
+    - Fix the issue that executing `ALTER TABLE ... LAST PARTITION` fails when the partition column type is `DATETIME` [#48814](https://github.com/pingcap/tidb/issues/48814) @[crazycs520](https://github.com/crazycs520)
+    - Fix the issue that the actual error message during `IMPORT INTO` execution might be overridden by other error messages [#47992](https://github.com/pingcap/tidb/issues/47992)，[#47781](https://github.com/pingcap/tidb/issues/47781) @[D3Hunter](https://github.com/D3Hunter)
+    - Fix the issue that TiDB deployed in the cgroup v2 container cannot be detected [#48342](https://github.com/pingcap/tidb/issues/48342) @[D3Hunter](https://github.com/D3Hunter)
     - (dup): release-6.5.6.md > Bug fixes> TiDB - Fix the issue that executing `UNION ALL` with the DUAL table as the first subnode might cause an error [#48755](https://github.com/pingcap/tidb/issues/48755) @[winoros](https://github.com/winoros)
     - (dup): release-6.5.6.md > Bug fixes> TiDB - Fix the TiDB node panic issue that occurs when DDL `jobID` is restored to 0 [#46296](https://github.com/pingcap/tidb/issues/46296) @[jiyfhust](https://github.com/jiyfhust)
     - (dup): release-6.5.6.md > Bug fixes> TiDB - Fix the issue of unsorted row data returned by `TABLESAMPLE` [#48253](https://github.com/pingcap/tidb/issues/48253) @[tangenta](https://github.com/tangenta)
