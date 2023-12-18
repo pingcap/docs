@@ -188,8 +188,6 @@ storage = ""
 # Specifies whether to store the redo log in a file.
 # The default value is false.
 use-file-backend = false
-<<<<<<< HEAD
-=======
 # The number of encoding and decoding workers in the redo module.
 # The default value is 16.
 encoding-worker-num = 16
@@ -202,7 +200,6 @@ compression = ""
 # The concurrency for uploading a single redo file.
 # The default value is 1, which means concurrency is disabled.
 flush-concurrency = 1
->>>>>>> 12e084fe18 (Add cdc redo configuration (#15619))
 
 [integrity]
 # Whether to enable the checksum validation for single-row data. The default value is "none", which means to disable the feature. Value options are "none" and "correctness".
