@@ -14,7 +14,7 @@ The Grafana dashboard is divided into a series of sub dashboards which include O
 
 TiProxy has four panel groups. The metrics on these panels indicate the current status of TiProxy.
 
-- **TiProxy-Server**:instance information.
+- **TiProxy-Server**: instance information.
 - **TiProxy-Query-Summary**: SQL query metrics like CPS. 
 - **TiProxy-Backend**: information on TiDB nodes that TiProxy might connect to.
 - **TiProxy-Balance**: loadbalance mertrics.
