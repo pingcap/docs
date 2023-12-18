@@ -63,9 +63,9 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.1/quick-start-with-
 
         - (none)
 
-    + TiDB Lightning
+    + TiDB Lightning <!-- **tw:@hfxsd** 1 -->
 
-- (none)
+        - Add a retry mechanism for `GetTS` failure caused by PD leader change [#45301](https://github.com/pingcap/tidb/issues/45301) @[lance6716](https://github.com/lance6716)
 
     + Dumpling
 
@@ -121,12 +121,12 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.1/quick-start-with-
 
 + TiKV <!-- **tw:@hfxsd** 4 -->
 
-    - Fix an issue that TiKV may panic after merge if it runs extremely slow. [#16111](https://github.com/tikv/tikv/issues/16111) @[overvenus](https://github.com/overvenus)
-    - Fix an issue that resolved ts may be blocked for 2 hours. [#15520](https://github.com/tikv/tikv/issues/15520) @[overvenus](https://github.com/overvenus)
-    - setting default value of raftstore.evict-cache-on-memory-ratio to 0.1 [#15800](https://github.com/tikv/tikv/issues/15800) @[tonyxuqqi](https://github.com/tonyxuqqi)
-    - Fixed a bug that may cause snapshot restore stuck when BR crashes. [#15684](https://github.com/tikv/tikv/issues/15684) @[YuJuncen](https://github.com/YuJuncen)
-    - Fix an OOM issue that is caused by stale read tracking large transactions. [#14864](https://github.com/tikv/tikv/issues/14864) @[overvenus](https://github.com/overvenus)
-    - Verify checksum right after SST files are generated to avoid corrupted SST being transferred to other TiKVs [#15986](https://github.com/tikv/tikv/issues/15986) @[Connor1996](https://github.com/Connor1996)
+    - Fix the issue that if TiKV runs extremely slow, it might panic after Region merge [#16111](https://github.com/tikv/tikv/issues/16111) @[overvenus](https://github.com/overvenus)
+    - Fix the issue that Resolved TS might be blocked for two hours [#15520](https://github.com/tikv/tikv/issues/15520) @[overvenus](https://github.com/overvenus)
+    - Fix the issue that TiKV reports the `ServerIsBusy` error because it can not append the raft log [#15800](https://github.com/tikv/tikv/issues/15800) @[tonyxuqqi](https://github.com/tonyxuqqi)
+    - Fix the issue that snapshot restore might get stuck when BR crashes [#15684](https://github.com/tikv/tikv/issues/15684) @[YuJuncen](https://github.com/YuJuncen)
+    - Fix the issue that Resolved TS in stale read might cause TiKV OOM issues when tracking large transactions [#14864](https://github.com/tikv/tikv/issues/14864) @[overvenus](https://github.com/overvenus)
+    - Fix the issue that TiKV might panic when a cluster blocks CRC mismatches [#15986](https://github.com/tikv/tikv/issues/15986) @[Connor1996](https://github.com/Connor1996)
     - (dup): release-6.5.6.md > Bug fixes> TiKV - Fix the issue that resolved-ts might be blocked for 2 hours [#39130](https://github.com/pingcap/tidb/issues/39130) @[overvenus](https://github.com/overvenus)
     - (dup): release-6.5.6.md > Bug fixes> TiKV - Fix the issue that the joint state of DR Auto-Sync might time out when scaling out [#15817](https://github.com/tikv/tikv/issues/15817) @[Connor1996](https://github.com/Connor1996)
     - (dup): release-6.5.6.md > Bug fixes> TiKV - Fix the issue that the scheduler command variables are incorrect in Grafana on the cloud environment [#15832](https://github.com/tikv/tikv/issues/15832) @[Connor1996](https://github.com/Connor1996)
@@ -140,10 +140,10 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.1/quick-start-with-
 
 + PD <!-- **tw:@hfxsd** 4 -->
 
-    - 修复 resource_manager_resource_unit metric 为空的问题 [#45166](https://github.com/pingcap/tidb/issues/45166) @[CabinfeverB](https://github.com/CabinfeverB)
-    - 修复 Calibrate by Workload 页面记录筛选报错的问题 [#48162](https://github.com/pingcap/tidb/issues/48162) @[CabinfeverB](https://github.com/CabinfeverB)
-    - 修复 Resource Control 下删除 Resource Group 场景下可能存在破坏 DDL 原子性的问题 [#45050](https://github.com/pingcap/tidb/issues/45050) @[glorv](https://github.com/glorv)
-    - 修复 PD Leader 切换且新 Leader 与调用方之间存在网络隔离时，调用方不能正常更新 Leader 信息的问题 [#7416](https://github.com/tikv/pd/issues/7416) @[CabinfeverB](https://github.com/CabinfeverB)
+    - Fix the issue that the `resource_manager_resource_unit` metric is empty in TiDB Dashboard when executing `CALIBRATE RESOURCE` [#45166](https://github.com/pingcap/tidb/issues/45166) @[CabinfeverB](https://github.com/CabinfeverB)
+    - Fix the issue that the Calibrate by Workload page reports an error [#48162](https://github.com/pingcap/tidb/issues/48162) @[CabinfeverB](https://github.com/CabinfeverB)
+    - Fix the issue that deleting a resource group can damage DDL atomicity [#45050](https://github.com/pingcap/tidb/issues/45050) @[glorv](https://github.com/glorv)
+    - Fix the issue that when PD leader is transferred and there is a network partition between the new leader and the PD client, the PD client fails to update the information of the leader [#7416](https://github.com/tikv/pd/issues/7416) @[CabinfeverB](https://github.com/CabinfeverB)
     - (dup): release-7.5.0.md > Bug fixes> PD - Fix the issue that adding multiple TiKV nodes to a large cluster might cause TiKV heartbeat reporting to become slow or stuck [#7248](https://github.com/tikv/pd/issues/7248) @[rleungx](https://github.com/rleungx)
     - (dup): release-7.5.0.md > Bug fixes> PD - Fix the issue that TiDB Dashboard cannot read PD `trace` data correctly [#7253](https://github.com/tikv/pd/issues/7253) @[nolouch](https://github.com/nolouch)
     - (dup): release-6.5.6.md > Bug fixes> PD - Upgrade the version of Gin Web Framework from v1.8.1 to v1.9.1 to fix some security issues [#7438](https://github.com/tikv/pd/issues/7438) @[niubell](https://github.com/niubell)
@@ -167,7 +167,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.1/quick-start-with-
         - (dup): release-7.5.0.md > Bug fixes> Tools> Backup & Restore (BR) - Fix the issue that the log backup might get stuck in some scenarios when backing up large wide tables [#15714](https://github.com/tikv/tikv/issues/15714) @[YuJuncen](https://github.com/YuJuncen)
         - (dup): release-6.5.6.md > Bug fixes> Tools> Backup & Restore (BR) - Fix the issue that BR generates incorrect URIs for external storage files [#48452](https://github.com/pingcap/tidb/issues/48452) @[3AceShowHand](https://github.com/3AceShowHand)
         - (dup): release-6.5.6.md > Bug fixes> Tools> Backup & Restore (BR) - Fix the issue that the retry after an EC2 metadata connection reset cause degraded backup and restore performance [#46750](https://github.com/pingcap/tidb/issues/47650) @[Leavrth](https://github.com/Leavrth)
-        - Fixed a bug that may cause log backup started but not work properly if there are connective issue to PD during initializing the task. [#16056](https://github.com/tikv/tikv/issues/16056) @[YuJuncen](https://github.com/YuJuncen)
+        - Fix the issue that the log backup task can start but does not work properly if failing to connect to PD during task initialization [#16056](https://github.com/tikv/tikv/issues/16056) @[YuJuncen](https://github.com/YuJuncen)
 
     + TiCDC <!-- **tw:@ran-huang** 6 -->
 
@@ -187,12 +187,11 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.1/quick-start-with-
 
     + TiDB Data Migration (DM) <!-- **tw:@hfxsd** 1 -->
 
-        - 修复了上游 gtid set 长度过长时，DM 的性能问题 [#9676](https://github.com/pingcap/tiflow/issues/9676) @[GMHDBJD](https://github.com/GMHDBJD)
+        - Fix the issue that DM performance is degraded due to an inappropriate algorithm used for `CompareGTID` [#9676](https://github.com/pingcap/tiflow/issues/9676) @[GMHDBJD](https://github.com/GMHDBJD)
 
     + TiDB Lightning <!-- **tw:@hfxsd** 2 -->
 
-        - 添加了由于 PD leader change 导致 `GetTS` 失败的重试 [#45301](https://github.com/pingcap/tidb/issues/45301) @[lance6716](https://github.com/lance6716)
-        - 修复了由于 PD leader 被 KILL 或者 PD 请求处理慢导致导入失败的问题 [#46950](https://github.com/pingcap/tidb/issues/46950) ，[#48075](https://github.com/pingcap/tidb/issues/48075) @[D3Hunter](https://github.com/D3Hunter)
+        - Fix the issue that data import fails due to the PD leader being killed or slow processing of PD requests [#46950](https://github.com/pingcap/tidb/issues/46950) [#48075](https://github.com/pingcap/tidb/issues/48075) @[D3Hunter](https://github.com/D3Hunter)
         - (dup): release-6.5.6.md > Bug fixes> Tools> TiDB Lightning - Fix the issue that TiDB Lightning gets stuck during `writeToTiKV` [#46321](https://github.com/pingcap/tidb/issues/46321) [#48352](https://github.com/pingcap/tidb/issues/48352) @[lance6716](https://github.com/lance6716)
         - (dup): release-6.5.6.md > Bug fixes> Tools> TiDB Lightning - Fix the issue that data import fails because HTTP retry requests do not use the current request content [#47930](https://github.com/pingcap/tidb/issues/47930) @[lance6716](https://github.com/lance6716)
         - (dup): release-6.5.6.md > Bug fixes> Tools> TiDB Lightning - Remove unnecessary `get_regions` calls in physical import mode [#45507](https://github.com/pingcap/tidb/issues/45507) @[mittalrishabh](https://github.com/mittalrishabh)
