@@ -89,12 +89,8 @@ cdc cli changefeed query --server=http://10.0.10.25:8300 --changefeed-id=simple-
     "sort-engine": "unified",
     "sort-dir": ".",
     "config": {
-<<<<<<< HEAD
-      "case-sensitive": true,
-      "enable-old-value": false,
-=======
       "case-sensitive": false,
->>>>>>> 883ffcba7b (Update ticdc changefeed filter case_sensitive default value (#15360))
+      "enable-old-value": false,
       "filter": {
         "rules": [
           "*.*"
