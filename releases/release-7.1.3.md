@@ -26,8 +26,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.1/quick-start-with-
 
 + TiDB <!-- **tw:@oreoxmt** 2 -->
 
-    - 当 collation 被 enable 且过滤条件有 `like` 时，优化器可以产生 IndexRangeScan 从而提高执行效率 [#48181](https://github.com/pingcap/tidb/issues/48181) @[time-and-fate](https://github.com/time-and-fate)
-    - 在启用安全增强模式 (SEM) 时，禁止更改 @@global.require_secure_transport 变量为 'on' [#47665](https://github.com/pingcap/tidb/issues/47665) @[tiancaiamao](https://github.com/tiancaiamao)
+    - When a collation is enabled and the query condition includes `LIKE`, the optimizer generates an IndexRangeScan to improve the execution efficiency [#48181](https://github.com/pingcap/tidb/issues/48181) @[time-and-fate](https://github.com/time-and-fate)
 
 + TiKV
 
@@ -84,13 +83,13 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.1/quick-start-with-
 + TiDB
 
     <!-- **tw:@Oreoxmt** 12-->
-    - 修复包含 CTE 的查询，在由于内存超限被 kill 时，查询非预期 hang 住的问题 [#49096](https://github.com/pingcap/tidb/issues/49096) @[AilinKid](https://github.com/AilinKid})
-    - 修复 tidb_server_memory_limit 导致在内存压力长期处于高位时，tidb CPU 利用率过高的问题 [#48741](https://github.com/pingcap/tidb/issues/48741) @[XuHuaiyu](https://github.com/XuHuaiyu)
-    - 修复 tidb_max_chunk_size 设置值调小时，包含 CTE 的查询报错 `runtime error: index out of range [32] with length 32` 的问题 [#48808](https://github.com/pingcap/tidb/issues/48808) @[guo-shaoge](https://github.com/guo-shaoge)
-    - 修复 enum 类型列作为 join 键时，查询结果出错的问题 [#48991](https://github.com/pingcap/tidb/issues/48991) @[winoros](https://github.com/winoros)
-    - 修复 Recursive CTE 中包含 Agg 或者 Window 导致的解析错误[#47711](https://github.com/pingcap/tidb/issues/47711) @[elsa0520](https://github.com/elsa0520)
-    - 修复可能错误地将 update 转换成 PointGet 的问题 [#47445](https://github.com/pingcap/tidb/issues/47445) @[hi-rustin](https://github.com/hi-rustin)
-    - 修复对 stats_history 表进行垃圾回收时可能导致 OOM 的问题[#48431](https://github.com/pingcap/tidb/issues/48431) @[hawkingrei](https://github.com/hawkingrei)
+    - Fix the issue that the query containing common table expressions (CTEs) unexpectedly gets stuck when the query is killed due to over-limit [#49096](https://github.com/pingcap/tidb/issues/49096) @[AilinKid](https://github.com/AilinKid})
+    - Fix the issue that high CPU usage of TiDB occurs due to long-term memory pressure caused by `tidb_server_memory_limit` [#48741](https://github.com/pingcap/tidb/issues/48741) @[XuHuaiyu](https://github.com/XuHuaiyu)
+    - Fix the issue that queries containing CTEs report a `runtime error: index out of range [32] with length 32` error when `tidb_max_chunk_size` is set to a small value [#48808](https://github.com/pingcap/tidb/issues/48808) @[guo-shaoge](https://github.com/guo-shaoge)
+    - Fix the issue that the query result is incorrect when an `ENUM` type column is used as the join key [#48991](https://github.com/pingcap/tidb/issues/48991) @[winoros](https://github.com/winoros)
+    - Fix the parsing error caused by aggregate or window functions in recursive CTEs [#47711](https://github.com/pingcap/tidb/issues/47711) @[elsa0520](https://github.com/elsa0520)
+    - Fix the issue that `UPDATE` statements might be incorrectly converted to PointGet [#47445](https://github.com/pingcap/tidb/issues/47445) @[hi-rustin](https://github.com/hi-rustin)
+    - Fix the OOM issue that might occur when TiDB performs garbage collection on the `stats_history` table [#48431](https://github.com/pingcap/tidb/issues/48431) @[hawkingrei](https://github.com/hawkingrei)
     <!-- **tw:@qiancai** 12 -->
     - 修复某些情况下相同的查询计划拥有不同的 digest 的问题 [#47634](https://github.com/pingcap/tidb/issues/47634) @[King-Dylan](https://github.com/King-Dylan)
     - 修复内存大量使用时无法 kill GenJSONTableFromStats 的问题 [#47779](https://github.com/pingcap/tidb/issues/47779) @[hawkingrei](https://github.com/hawkingrei)
