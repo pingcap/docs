@@ -1,7 +1,7 @@
 ---
 title: FLASHBACK CLUSTER
 summary: Learn the usage of FLASHBACK CLUSTER in TiDB databases.
-aliases: ['/tidb/v6.5/sql-statement-flashback-to-timestamp']
+aliases: ['/tidb/v7.1/sql-statement-flashback-to-timestamp']
 ---
 
 # FLASHBACK CLUSTER
@@ -12,19 +12,15 @@ Starting from v6.5.6, TiDB introduces the `FLASHBACK CLUSTER TO TSO` syntax. Thi
 
 > **Warning:**
 >
-> The `FLASHBACK CLUSTER TO TIMESTAMP` syntax is not applicable to [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless) clusters. To avoid unexpected results, do not execute this statement on TiDB Serverless clusters.
+> The `FLASHBACK CLUSTER TO [TIMESTAMP|TSO]` syntax is not applicable to [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless) clusters. To avoid unexpected results, do not execute this statement on TiDB Serverless clusters.
 
 <CustomContent platform="tidb">
 
 > **Warning:**
 >
-<<<<<<< HEAD:sql-statements/sql-statement-flashback-to-timestamp.md
 > When you use this feature in TiDB v7.1.0, some Regions might remain in the FLASHBACK process even after the completion of the FLASHBACK operation. It is recommended to avoid using this feature in v7.1.0. For more information, see issue [#44292](https://github.com/pingcap/tidb/issues/44292).
 >
 > If you have encountered this issue, you can use the [TiDB snapshot backup and restore](/br/br-snapshot-guide.md) feature to restore data.
-=======
-> The `FLASHBACK CLUSTER TO [TIMESTAMP|TSO]` syntax is not applicable to [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless) clusters. Do not execute this statement on TiDB Serverless clusters to avoid unexpected results.
->>>>>>> d000f96bff (flashback: flashback cluster support tso (#15608)):sql-statements/sql-statement-flashback-cluster.md
 
 </CustomContent>
 
@@ -58,11 +54,10 @@ FlashbackToTimestampStmt
 <CustomContent platform='tidb'>
 
 * Only a user with the `SUPER` privilege can execute the `FLASHBACK CLUSTER` SQL statement.
-<<<<<<< HEAD:sql-statements/sql-statement-flashback-to-timestamp.md
 * `FLASHBACK CLUSTER` does not support rolling back DDL statements that modify PD-related information, such as `ALTER TABLE ATTRIBUTE`, `ALTER TABLE REPLICA`, and `CREATE PLACEMENT POLICY`.
 * At the time specified in the `FLASHBACK` statement, there cannot be a DDL statement that is not completely executed. If such a DDL exists, TiDB will reject it.
-* Before executing `FLASHBACK CLUSTER TO TIMESTAMP`, TiDB disconnects all related connections and prohibits read and write operations on these tables until the `FLASHBACK CLUSTER` statement is completed.
-* The `FLASHBACK CLUSTER TO TIMESTAMP` statement cannot be canceled after being executed. TiDB will keep retrying until it succeeds.
+* Before executing `FLASHBACK CLUSTER`, TiDB disconnects all related connections and prohibits read and write operations on these tables until the `FLASHBACK CLUSTER` statement is completed.
+* The `FLASHBACK CLUSTER` statement cannot be canceled after being executed. TiDB will keep retrying until it succeeds.
 * During the execution of `FLASHBACK CLUSTER`, if you need to back up data, you can only use [Backup & Restore](/br/br-snapshot-guide.md) and specify a `BackupTS` that is earlier than the start time of `FLASHBACK CLUSTER`. In addition, during the execution of `FLASHBACK CLUSTER`, enabling [log backup](/br/br-pitr-guide.md) will fail. Therefore, try to enable log backup after `FLASHBACK CLUSTER` is completed.
 * If the `FLASHBACK CLUSTER` statement causes the rollback of metadata (table structure, database structure), the related modifications will **not** be replicated by TiCDC. Therefore, you need to pause the task manually, wait for the completion of `FLASHBACK CLUSTER`, and manually replicate the schema definitions of the upstream and downstream to make sure that they are consistent. After that, you need to recreate the TiCDC changefeed.
 
@@ -73,16 +68,11 @@ FlashbackToTimestampStmt
 * Only a user with the `SUPER` privilege can execute the `FLASHBACK CLUSTER` SQL statement.
 * `FLASHBACK CLUSTER` does not support rolling back DDL statements that modify PD-related information, such as `ALTER TABLE ATTRIBUTE`, `ALTER TABLE REPLICA`, and `CREATE PLACEMENT POLICY`.
 * At the time specified in the `FLASHBACK` statement, there cannot be a DDL statement that is not completely executed. If such a DDL exists, TiDB will reject it.
-* Before executing `FLASHBACK CLUSTER TO TIMESTAMP`, TiDB disconnects all related connections and prohibits read and write operations on these tables until the `FLASHBACK CLUSTER` statement is completed.
-* The `FLASHBACK CLUSTER TO TIMESTAMP` statement cannot be canceled after being executed. TiDB will keep retrying until it succeeds.
+* Before executing `FLASHBACK CLUSTER`, TiDB disconnects all related connections and prohibits read and write operations on these tables until the `FLASHBACK CLUSTER` statement is completed.
+* The `FLASHBACK CLUSTER` statement cannot be canceled after being executed. TiDB will keep retrying until it succeeds.
 * If the `FLASHBACK CLUSTER` statement causes the rollback of metadata (table structure, database structure), the related modifications will **not** be replicated by TiCDC. Therefore, you need to pause the task manually, wait for the completion of `FLASHBACK CLUSTER`, and manually replicate the schema definitions of the upstream and downstream to make sure that they are consistent. After that, you need to recreate the TiCDC changefeed.
 
 </CustomContent>
-=======
-* From the time specified in the `FLASHBACK` statement to the time when the `FLASHBACK` is executed, there cannot be a DDL statement that changes the related table structure. If such a DDL exists, TiDB will reject it.
-* Before executing `FLASHBACK CLUSTER`, TiDB disconnects all related connections and prohibits read and write operations on these tables until the `FLASHBACK` statement is completed.
-* The `FLASHBACK CLUSTER` statement cannot be canceled after being executed. TiDB will keep retrying until it succeeds.
->>>>>>> d000f96bff (flashback: flashback cluster support tso (#15608)):sql-statements/sql-statement-flashback-cluster.md
 
 ## Example
 
@@ -121,9 +111,6 @@ mysql> SELECT * FROM t;
 Empty set (0.00 sec)
 ```
 
-<<<<<<< HEAD:sql-statements/sql-statement-flashback-to-timestamp.md
-If there is a DDL statement that is not completely executed at the time specified in the `FLASHBACK` statement, the `FLASHBACK` statement fails:
-=======
 The following example shows how to flashback a cluster to a specific TSO to precisely restore mistakenly deleted data:
 
 ```sql
@@ -170,8 +157,7 @@ mysql> SELECT * FROM t;
 1 row in set (0.01 sec)
 ```
 
-If there is a DDL statement that changes the table structure from the time specified in the `FLASHBACK` statement to the time when the `FLASHBACK` is executed, the `FLASHBACK` statement fails:
->>>>>>> d000f96bff (flashback: flashback cluster support tso (#15608)):sql-statements/sql-statement-flashback-cluster.md
+If there is a DDL statement that is not completely executed at the time specified in the `FLASHBACK` statement, the `FLASHBACK` statement fails:
 
 ```sql
 mysql> ALTER TABLE t ADD INDEX k(a);
