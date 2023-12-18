@@ -51,10 +51,10 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.1/quick-start-with-
 
     + TiCDC <!-- **tw:@ran-huang** 5 -->
 
-        - 优化同步到 tidb 场景下 CDC 节点的内存消耗 [#9935](https://github.com/pingcap/tiflow/issues/9935)
-        - 优化部分报警规则 [#9266](https://github.com/pingcap/tiflow/issues/9266)
-        - 优化了 Redo log 的相关性能，如并行写 S3 和采用压缩的模式。[#10176](https://github.com/pingcap/tiflow/issues/10176)[#10226](https://github.com/pingcap/tiflow/issues/10226)
-        - 通过增加并行的方式优化了 CDC 同步到对象存储的性能[#10098](https://github.com/pingcap/tiflow/issues/10098)
+        - Optimize the memory consumption when TiCDC nodes replicate data to TiDB [#9935](https://github.com/pingcap/tiflow/issues/9935) @[3AceShowHand](https://github.com/3AceShowHand)
+        - Optimize some alarm rules [#9266](https://github.com/pingcap/tiflow/issues/9266) @[asddongmen](https://github.com/asddongmen)
+        - Optimize the performance of redo log, including parallel writing data to S3 and adopting compression algorithm [#10176](https://github.com/pingcap/tiflow/issues/10176)[#10226](https://github.com/pingcap/tiflow/issues/10226) @[sdojjy](https://github.com/sdojjy)
+        - Improve the performance of TiCDC replicating data to object storage by increasing parallelism [#10098](https://github.com/pingcap/tiflow/issues/10098) @[CharlesCheung96](https://github.com/CharlesCheung96)
         - (dup): release-6.5.6.md > Improvements> Tools> TiCDC - Reduce the impact of TiCDC incremental scanning on upstream TiKV [#11390](https://github.com/tikv/tikv/issues/11390) @[hicqu](https://github.com/hicqu)
         - (dup): release-6.5.6.md > Improvements> Tools> TiCDC - Support making TiCDC Canal-JSON content format [compatible with the content format of the official Canal output](https://docs.pingcap.com/tidb/v6.5/ticdc-canal-json#compatibility-with-the-official-canal) by setting `content-compatible=true` in the `sink-uri` configuration [#10106](https://github.com/pingcap/tiflow/issues/10106) @[3AceShowHand](https://github.com/3AceShowHand)
 
@@ -153,10 +153,10 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.1/quick-start-with-
 + TiFlash <!-- **tw:@ran-huang** 4 -->
 
     - (dup): release-6.5.6.md > Bug fixes> TiFlash - Fix the issue that executing the `ALTER TABLE ... EXCHANGE PARTITION ...` statement causes panic [#8372](https://github.com/pingcap/tiflash/issues/8372) @[JaySon-Huang](https://github.com/JaySon-Huang)
-    - 修复当查询遇到 memory limit 限制后发生内存泄漏的问题 [#8447](https://github.com/pingcap/tiflash/issues/8447) @[JinheLin](https://github.com/JinheLin)
-    - 修复在执行 `FLASHBACK DATABASE` 后 TiFlash 副本的数据仍会被 GC 回收的问题 [#8450](https://github.com/pingcap/tiflash/issues/8450) @[JaySon-Huang](https://github.com/JaySon-Huang)
-    - 修复 Grafana 中部分面板的最大分位数耗时显示不正确的问题 [#8076](https://github.com/pingcap/tiflash/issues/8076) @[JaySon-Huang](https://github.com/JaySon-Huang)
-    - 修复查询非预期报错 `Block schema mismatch in FineGrainedShuffleWriter-V1` 的问题 [#8111](https://github.com/pingcap/tiflash/issues/8111}) @[SeaRise](https://github.com/SeaRise)
+    - Fix the issue of memory leak when TiFlash encounters memory limitation during query [#8447](https://github.com/pingcap/tiflash/issues/8447) @[JinheLin](https://github.com/JinheLin)
+    - Fix the issue that data of TiFlash replicas would still be garbage collected after executing `FLASHBACK DATABASE` [#8450](https://github.com/pingcap/tiflash/issues/8450) @[JaySon-Huang](https://github.com/JaySon-Huang)
+    - Fix incorrect display of maximum percentile time for some panels in Grafana [#8076](https://github.com/pingcap/tiflash/issues/8076) @[JaySon-Huang](https://github.com/JaySon-Huang)
+    - Fix the issue that a query returns the unexpected error message "Block schema mismatch in FineGrainedShuffleWriter-V1" [#8111](https://github.com/pingcap/tiflash/issues/8111}) @[SeaRise](https://github.com/SeaRise)
 
 + Tools
 
@@ -170,12 +170,12 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.1/quick-start-with-
 
     + TiCDC <!-- **tw:@ran-huang** 6 -->
 
-        - 修复了在同步 delete 语句时某些场景下 where 条件没有采用主键作为条件的问题 [#9812](https://github.com/pingcap/tiflow/issues/9812)
-        - 修复 Redo log 功能开启时，同步 DDL 语句间隔时间较长的问题 [#9960](https://github.com/pingcap/tiflow/issues/9960)
-        - 修复在 BDR 模式时，delete & create 同名的 table 后，DML 不能正确同步的问题  [#10079](https://github.com/pingcap/tiflow/issues/10079)
-        - 修复同步到对象存储时，某些特殊场景到值同步任务卡住的问题 [#10041](https://github.com/pingcap/tiflow/issues/10041)[#10044](https://github.com/pingcap/tiflow/issues/10044)
-        - 修复在开启 sync-point & redo log 时在某些特殊场景下 ，同步任务卡住的问题 [#10091](https://github.com/pingcap/tiflow/issues/10091)
-        - 修复了在某些特殊场景下，CDC 关闭与 tikv 的断开链接处理方式。[#10239](https://github.com/pingcap/tiflow/issues/10239)
+        - Fix the issue that the `WHERE` clause does not use the primary key as a condition when replicating `DELETE` statements in certain scenarios [#9812](https://github.com/pingcap/tiflow/issues/9812) @[asddongmen](https://github.com/asddongmen)
+        - Fixed the issue of the long interval between replicating DDL statements after enabling the redo log feature [#9960](https://github.com/pingcap/tiflow/issues/9960) @[CharlesCheung96](https://github.com/CharlesCheung96)
+        - Fix the issue that DML cannot be correctly replicated after deleting or creating tables with the same name in BDR mode [#10079](https://github.com/pingcap/tiflow/issues/10079) @[asddongmen](https://github.com/asddongmen)
+        - Fix the issue that replication tasks get stuck in certain special scenarios when replicating data to object storage [#10041](https://github.com/pingcap/tiflow/issues/10041)[#10044](https://github.com/pingcap/tiflow/issues/10044) @[CharlesCheung96](https://github.com/CharlesCheung96)
+        - Fix the issue that replication tasks get stuck in certain special scenarios after enabling sync-point and redo log [#10091](https://github.com/pingcap/tiflow/issues/10091) @[CharlesCheung96](https://github.com/CharlesCheung96)
+        - Fix the issue that TiCDC mistakenly close the connection with TiKV in certain special scenarios  [#10239](https://github.com/pingcap/tiflow/issues/10239) @[hicqu](https://github.com/hicqu)
         - (dup): release-6.5.6.md > Bug fixes> Tools> TiCDC - Fix the issue that the changefeed cannot replicate DML events in bidirectional replication mode if the target table is dropped and then recreated in upstream [#10079](https://github.com/pingcap/tiflow/issues/10079) @[asddongmen](https://github.com/asddongmen)
         - (dup): release-7.5.0.md > Bug fixes> Tools> TiCDC - Fix the performance issue caused by accessing NFS directories when replicating data to an object store sink [#10041](https://github.com/pingcap/tiflow/issues/10041) @[CharlesCheung96](https://github.com/CharlesCheung96)
         - (dup): release-6.5.6.md > Bug fixes> Tools> TiCDC - Fix the issue that the TiCDC server might panic when replicating data to an object storage service [#10137](https://github.com/pingcap/tiflow/issues/10137) @[sdojjy](https://github.com/sdojjy)
