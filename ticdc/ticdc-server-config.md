@@ -40,7 +40,7 @@ data-dir = ""
 gc-ttl = 86400 # 24 h
 tz = "System"
 cluster-id = "default"
-# This parameter specifies the maximum memory threshold (in bytes) for tuning GOGC: Setting a smaller threshold increases the GC frequency. Setting a larger threshold reduces GC frequency and consumes more memory resources for the TiCDC process. Once the memory usage exceeds this threshold, GOGC Tuner stops working. The default value is 0, indicating that GOGC Tuner is disabled.
+# This parameter specifies the maximum memory threshold (in bytes) for tuning GOGC. Setting a smaller threshold increases the GC frequency. Setting a larger threshold reduces GC frequency and consumes more memory resources for the TiCDC process. Once the memory usage exceeds this threshold, GOGC Tuner stops working. The default value is 0, indicating that GOGC Tuner is disabled.
 gc-tuner-memory-threshold = 0
 
 [security]
