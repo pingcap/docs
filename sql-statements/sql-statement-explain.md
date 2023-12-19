@@ -196,7 +196,7 @@ To specify the format of the `EXPLAIN` output, you can use the `FORMAT = xxx` sy
 | `row`          | The `EXPLAIN` statement outputs results in a tabular format. See [Understand the Query Execution Plan](/explain-overview.md) for more information. |
 | `tidb_json`    | The `EXPLAIN` statement outputs execution plans in JSON and stores the operator information in a JSON array. |
 | `verbose`      | The `EXPLAIN` statement outputs results in the `row` format, with an additional `estCost` column for the estimated cost of the query in the results. See [SQL Plan Management](/sql-plan-management.md) for how this format can be used. |
-| `plan_cache`   | The `EXPLAIN` statement outputs in the `row` format, but adds [Plan Cache](/sql-non-prepared-plan-cache.md) information as a warning. |
+| `plan_cache`   | The `EXPLAIN` statement outputs results in the `row` format, with the [Plan Cache](/sql-non-prepared-plan-cache.md#diagnostics) information as a warning. |
 
 <SimpleTab>
 
