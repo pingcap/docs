@@ -60,6 +60,16 @@ Currently, for TiDB Self-Hosted, the TiDB backend task distributed execution fra
 
 - `IMPORT INTO` is used to import data in formats such as `CSV`, `SQL`, and `PARQUET` into an empty table. For more information, see [`IMPORT INTO`](https://docs.pingcap.com/tidb/v7.2/sql-statement-import-into).
 
+<<<<<<< HEAD
+=======
+</CustomContent>
+
+## Limitation
+
+- The DXF can only schedule the distributed execution of one `ADD INDEX` task at a time. If a new `ADD INDEX` task is submitted before the current `ADD INDEX` distributed task has finished, the new task is executed through a transaction.
+- Adding indexes on columns with the `TIMESTAMP` data type through the DXF is not supported, because it might lead to inconsistency between the index and the data.
+
+>>>>>>> c56885347e (DXF: add a limitation that adding indexes to columns of `TIMESTAMP` data type via the DXF is not supported (#15787))
 ## Prerequisites
 
 Before using the distributed framework, you need to enable the [Fast Online DDL](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) mode.
