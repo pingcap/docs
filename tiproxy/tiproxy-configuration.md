@@ -7,6 +7,27 @@ summary: Learn how to configure TiProxy.
 
 This document introduces the configuration parameters related to the deployment and use of TiProxy. The following is an example configuration:
 
+```
+[proxy]
+addr = "0.0.0.0:6000"
+max-connections = 100
+
+[api]
+addr = "0.0.0.0:3080"
+
+[log]
+level = "info"
+
+[security]
+	[security.cluster-tls]
+	skip-ca = true
+
+	[security.sql-tls]
+	skip-ca = true
+```
+
+# ignore-wrong-namespace = true
+
 ## Configure the `tiproxy.toml` file
 
 This section introduces the configuration parameters of TiProxy.
