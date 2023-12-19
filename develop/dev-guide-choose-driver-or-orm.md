@@ -33,6 +33,10 @@ You can follow the [MySQL documentation](https://dev.mysql.com/doc/connector-j/e
 >
 > There is a [bug](https://bugs.mysql.com/bug.php?id=106252) in the Connector/J 8.0 versions before 8.0.32, which might cause threads to hang when using TiDB versions earlier than v6.3.0. To avoid this issue, it is recommended that you use either MySQL Connector/J 8.0.32 or a later version, or the TiDB JDBC (see the *TiDB-JDBC* tab).
 
+> **Note:**
+>
+> When using MySQL Connector/J 8.0 with TiDB v7.5.0 it is recommended to set [`server-version`](/tidb-configuration-file.md#server-version) in the configuration file for TiDB to "5.7.25-TiDB-v7.5.0" as MySQL Connector/J tries to use the `information_schema.KEYWORDS` table if the server announces a MySQL version that is 8.0.11 or newer and this table isn't present in TiDB v7.5.0. This is not needed with TiDB v7.6.0 and newer as that version comes with an `information_schema.KEYWORDS` table. This is also not needed with TiDB v7.4.0 and earlier as those versions identify themselves as MySQL 5.7.
+
 For an example of how to build a complete application, see [Build a simple CRUD app with TiDB and JDBC](/develop/dev-guide-sample-application-java-jdbc.md).
 
 </div>
