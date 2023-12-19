@@ -1934,6 +1934,19 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - Default value: `OFF`
 - This variable controls whether to enable TiDB to collect `PREDICATE COLUMNS`. After enabling the collection, if you disable it, the information of previously collected `PREDICATE COLUMNS` is cleared. For details, see [Collect statistics on some columns](/statistics.md#collect-statistics-on-some-columns).
 
+### `tidb_enable_concurrent_hashagg_spill` <span class="version-mark">New in v7.6.0 </span>
+
+> **Warning:**
+>
+> Currently, it is an experimental feature. It is not recommended that you use it in production environments. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
+- Type: Boolean
+- Default value: `ON`
+- This variable controls whether spill could be triggered in parallel HashAgg. When it's `true`, parallel HashAgg will support the disk spill. This variable will be aborted when this feature is official released.
+
 ### tidb_enable_enhanced_security
 
 - Scope: NONE
