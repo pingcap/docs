@@ -46,6 +46,31 @@ ALTER TABLE t1 ADD INDEX idx1(c1);
 CREATE INDEX idx1 ON table t1(c1);
 ```
 
+<<<<<<< HEAD
+=======
+</CustomContent>
+
+<CustomContent platform="tidb">
+
+Currently, for TiDB Self-Hosted, the DXF supports the distributed execution of the `ADD INDEX` and `IMPORT INTO` statements.
+
+- `ADD INDEX` is a DDL statement used to create indexes. For example:
+
+    ```sql
+    ALTER TABLE t1 ADD INDEX idx1(c1);
+    CREATE INDEX idx1 ON table t1(c1);
+    ```
+
+- `IMPORT INTO` is used to import data in formats such as `CSV`, `SQL`, and `PARQUET` into an empty table. For more information, see [`IMPORT INTO`](https://docs.pingcap.com/tidb/v7.2/sql-statement-import-into).
+
+</CustomContent>
+
+## Limitation
+
+- The DXF can only schedule the distributed execution of one `ADD INDEX` task at a time. If a new `ADD INDEX` task is submitted before the current `ADD INDEX` distributed task has finished, the new task is executed through a transaction.
+- Adding indexes on columns with the `TIMESTAMP` data type through the DXF is not supported, because it might lead to inconsistency between the index and the data.
+
+>>>>>>> c56885347e (DXF: add a limitation that adding indexes to columns of `TIMESTAMP` data type via the DXF is not supported (#15787))
 ## Prerequisites
 
 Before using the distributed framework, you need to enable the [Fast Online DDL](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) mode.
