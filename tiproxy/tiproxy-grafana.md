@@ -1,5 +1,5 @@
 ---
-title: Monitor the TiProxy Cluster
+title: TiProxy Monitoring Metrics
 summary: Learn the monitoring items of TiProxy.
 aliases: ['/docs/dev/tiproxy/monitor-tiproxy/','/docs/dev/reference/tiproxy/monitor/']
 ---
@@ -43,5 +43,5 @@ TiProxy has four panel groups. The metrics on these panels indicate the current 
 ## Backend
 
 - Get Backend Count: how many times did TiProxy instances try to connect the backend.
-- Get Backend Duration: average, p95, p99 duration of connecting backend, useful for debugging why TiProxy cant establish healthy connections.
+- Get Backend Duration: average, p95, p99 duration of connecting backend, useful for debugging why TiProxy can not establish healthy connections.
 - Ping Backend Duration: latencies between each TiDB instance and each TiProxy instance.

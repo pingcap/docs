@@ -423,7 +423,7 @@ tiflash_servers:
 
 `tiproxy_servers` specifies the machines to which the TiProxy services are deployed and the service configuration on each machine. `tiproxy_servers` is an array, and each element of the array contains the following fields:
 
-- `host`: Specifies the machine's IP address to which the TiProxy services are deployed. This field is mandatory.
+- `host`: Specifies the IP address of the machine to which the TiProxy services are deployed. This field is mandatory.
 
 - `ssh_port`: Specifies the SSH port to connect to the target machine for operations. If it is not specified, the `ssh_port` of the `global` section is used.
 
@@ -435,7 +435,7 @@ tiflash_servers:
 
 - `numa_node`: Allocates the NUMA policy to the instance. Before specifying this field, you need to make sure that the target machine has [numactl](https://linux.die.net/man/8/numactl) installed. If this field is specified, cpubind and membind policies are allocated using [numactl](https://linux.die.net/man/8/numactl). This field is of string type. The value is the ID of the NUMA node, such as `"0,1"`.
 
-- `config`: The configuration rule of this field is the same as the `tiproxy` configuration rule in `server_configs`. If this field is configured, the field content is merged with the `tiproxy` content in `server_configs` (if the two fields overlap, the content of this field takes effect). Subsequently, a configuration file is generated and sent to the machine specified in `host`.
+- `config`: The configuration rule of this field is the same as the `tiproxy` configuration rule in `server_configs`. If this field is configured, the field content is merged with the `tiproxy` content in `server_configs`. If these two fields overlap, the content of this field takes effect. Subsequently, a configuration file is generated and sent to the machine specified in `host`.
 
 - `os`: The operating system of the machine specified in `host`. If this field is not specified, the default value is the `os` value in `global`.
 

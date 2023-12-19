@@ -1,5 +1,5 @@
 ---
-title: TiProxy Command-line Flags
+title: TiProxy Command-Line Flags
 summary: Learn the command-line startup flags of TiProxy.
 ---
 
@@ -13,19 +13,19 @@ This is the server program `tiproxy`.
 
 ### `--config string`
 
-+ Specifies the path of the TiProxy configuration file
++ Specifies the path of the TiProxy configuration file.
 + Default: ""
-+ You must specify the configuration file. For detailed configuration items, refer to [TiProxy configuration parameters](/tiproxy/tiproxy-configuration.md).
++ You must specify the configuration file. For detailed configuration items, refer to [Configure TiProxy](/tiproxy/tiproxy-configuration.md).
 
 ### `--log_encoder string`
 
-+ Specifies the log format of TiProxy
++ Specifies the log format of TiProxy.
 + Default: ""
 + Fallback to the same format as TiDB when empty.
 
 ### `--log_level string`
 
-+ Specifies the log level of TiProxy
++ Specifies the log level of TiProxy.
 + Default: ""
 + Fallback to *info* when empty.
 
@@ -35,25 +35,28 @@ This is the client program `tiproxyctl`.
 
 ### `--log_encoder string`
 
-+ Specifies the log format of ctl
++ Specifies the log format of ctl.
 + Default: "tidb"
-+ It defaults to the same log format of TiDB. However, you can also specify `console` - a more human-readable format, and `json` - a structured log format.
++ It defaults to the same log format of TiDB. However, you can also specify it as one of the following:
+
+    - `console`: a more human-readable format
+    - `json`: a structured log format
 
 ### `--log_level string`
 
-+ Specifies the log level of ctl
++ Specifies the log level of ctl.
 + Default: "warn"
 + You can specify `debug`, `info`, `warn`, `error`, `panic`.
 
 ### `--curls urls`
 
-+ Specifies the server addresses. You can add multiple listenning addresses.
++ Specifies the server addresses. You can add multiple listening addresses.
 + Default: "[localhost:3080]"
 + Server API gateway addresses.
 
 ### `-k, --insecure`
 
-+ Specifies whether to skip TLS CA verification when dialing to the server
++ Specifies whether to skip TLS CA verification when dialing to the server.
 + Default: "false"
 + Useful for testing.
 

@@ -28,7 +28,7 @@ Configuration for SQL port.
 
 + Default Value: `0`
 + Support hot-reload: yes
-+ When the HTTP status returns unhealthy, the SQL port accepts new connections for the last `graceful-wait-before-shutdown` seconds. After that, it rejects new connections and drains clients. It is recommended to be set to `0` when there are no other proxies (e.g. NLB) between the client and TiProxy.
++ When the HTTP status is unhealthy, the SQL port accepts new connections for the last `graceful-wait-before-shutdown` seconds. After that, it rejects new connections and drains clients. It is recommended to set it to `0` when there are no other proxies (e.g. NLB) between the client and TiProxy.
 
 #### `graceful-close-conn-timeout`
 
@@ -46,7 +46,7 @@ Configuration for SQL port.
 
 + Default Value: `0`
 + Support hot-reload: yes
-+ This configuration item lets you decide the connection buffer size in bytes, e.g. `1024` means 1K buffer. Minimum size is 1K, and maximum size is 16M. It is a tradeoff between memory and performance. By default, when it is zero, TiProxy will manage the buffer size automatically. However, a larger buffer may yield better performance results. 
++ This configuration item lets you decide the connection buffer size in bytes, e.g. `1024` means 1K buffer. The minimum size is `1K`, and the maximum size is `16M`. It is a tradeoff between memory and performance. By default, when it is `0`, TiProxy will manage the buffer size automatically. However, a larger buffer might yield better performance results. 
 
 #### `pd-addrs`
 
@@ -57,7 +57,7 @@ Configuration for SQL port.
 
 + Default Value: ``
 + Support hot-reload: yes
-+ Enable proxy protocol handling on the port. You could specify `v2` to handle proxy protocol version 2. `v1` is unsupported.
++ Enable proxy protocol handling on the port. You can specify `v2` to handle proxy protocol version 2. `v1` is not supported.
 
 #### `require-backend-tls`
 
@@ -72,12 +72,12 @@ Configurations for HTTP gateway.
 #### `addr`
 
 + Default Value: `0.0.0.0:3090`
-+ API gateway address. You should specify `ip:port`.
++ API gateway address. You can specify `ip:port`.
 
 #### `proxy-protocol`
 
 + Default Value: ``
-+ Enable proxy protocol handling on the port. You could specify `v2` to handle proxy protocol version 2. `v1` is unsupported.
++ Enable proxy protocol handling on the port. You can specify `v2` to handle proxy protocol version 2. `v1` is not supported.
 
 ### log
 
@@ -87,9 +87,9 @@ Configurations for HTTP gateway.
 + Support hot-reload: yes
 + You can specify:
 
-    + `tidb`: formats used by TiDB. For details, refer to [Unified Log Format](https://github.com/tikv/rfcs/blob/master/text/0018-unified-log-format.md).
-    + `json`: structured JSON formats.
-    + `console`: log format for human.
+    + `tidb`: format used by TiDB. For details, refer to [Unified Log Format](https://github.com/tikv/rfcs/blob/master/text/0018-unified-log-format.md).
+    + `json`: structured JSON format.
+    + `console`: human-readable log format.
 
 ### log.log-file
 
@@ -115,11 +115,11 @@ Configurations for HTTP gateway.
 
 + Default Value: `3`
 + Support hot-reload: yes
-+ Specifies the maximum number of log files to retain. Excess log files will be deleted when there are too many.
++ Specifies the maximum number of log files to be retained. Surplus log files will be automatically deleted when an excessive number is reached.
 
 ### security
 
-There are four TLS objects in the `[security]` section having different names. They share same configuration formats and fields, but they are interpreted differently depending on their names.
+There are four TLS objects in the `[security]` section with different names. They share the same configuration format and fields, but they are interpreted differently depending on their names.
 
 ```
 [security]
@@ -146,14 +146,14 @@ Objects are classified into client or server objects by their names.
 
 For client TLS object:
 
-- You must set either `ca` or `skip-ca` (to skip verifying server certificates).
-- Optionally, you could set `cert`/`key` to pass server-side client verification.
+- You must set either `ca` or `skip-ca` to skip verifying server certificates.
+- Optionally, you can set `cert`/`key` to pass server-side client verification.
 - Useless fields: auto-certs.
 
 For server TLS object:
 
-+ You must set either `cert`/`key` or `auto-certs`(to generate a temporary certificate, mainly for testing purposes).
-+ Optionally, if `ca` is not empty, it enables server-side client verification. The client must provide their certificates. Alternatively, if both `skip-ca` is true and `ca` is not empty, the server will only verify client certificates if they actively provide one.
++ You must set either `cert`/`key` or `auto-certs` to generate a temporary certificate, mainly for testing purposes.
++ Optionally, if `ca` is not empty, it enables server-side client verification. The client must provide their certificates. Alternatively, if both `skip-ca` is true and `ca` is not empty, the server will only verify client certificates if they provide one.
 
 #### `cluster-tls`
 

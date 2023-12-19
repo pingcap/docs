@@ -22,9 +22,9 @@ TiProxy is a L7 proxy server for TiDB, which can balance connections and migrate
 
 ### Topology templates
 
-- [The simple template for the TiProxy topology](https://github.com/pingcap/docs/blob/master/config-templates/simple-tiproxy.yaml)
+For more information about the template for TiProxy, see [The simple template for the TiProxy topology](https://github.com/pingcap/docs/blob/master/config-templates/simple-tiproxy.yaml).
 
-For detailed descriptions of the configuration items in the above TiDB cluster topology file, see [Topology Configuration File for Deploying TiDB Using TiUP](/tiup/tiup-cluster-topology-reference.md).
+For detailed descriptions of the configuration items in the preceding TiDB cluster topology file, see [Topology Configuration File for Deploying TiDB Using TiUP](/tiup/tiup-cluster-topology-reference.md).
 
 ### Key parameters
 
