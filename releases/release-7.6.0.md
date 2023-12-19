@@ -65,11 +65,17 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.6/quick-start-with-
 
 ### Data migration
 
-* Feature summary [#issue-number](issue-link) @[pr-auorthor-id](author-link)
+* TiCDC supports replicating DDL statements in bi-directional replication mode [#10301](https://github.com/pingcap/tiflow/issues/10301) @[asddongmen](https://github.com/asddongmen)
 
-    Feature descriptions (including what the feature is, why it is valuable for users, and how to use this feature generally)
+    Starting from v7.6.0 TiCDC supports replication of DDL statements with bi-directional replication configured. Previously, replicating DDL statements was not supported by TiCDC, so users of TiCDC's bi-directional replication had to apply DDL statements to both TiDB clusters separately. With this feature, TiCDC allows for a cluster to be assigned the primary BDR role, and for DDL statements at that cluster to be replicated to the downstream cluster.
 
-    For more information, see [documentation](doc-link).
+    For more information, see [documentation](/ticdc/ticdc-bidirectional-replication.md).
+
+* TiCDC supports querying the downstream synchronization status of a changefeed [#10289](https://github.com/pingcap/tiflow/issues/10289) @[hongyunyan](https://github.com/hongyunyan)
+
+    Starting from v7.6.0 TiCDC introduces a new API to support querying the downstream synchronization status of a changefeed. With this API, users can query a TiCDC changefeed about its synchronization status. This allows users to determine whether the upstream information received by TiCDC has been synchronized to the downstream system successfully.
+
+    For more information, see [documentation](/ticdc/ticdc-open-api-v2.md).
 
 ## Compatibility changes
 
