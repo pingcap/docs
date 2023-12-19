@@ -5239,7 +5239,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 
 <CustomContent platform="tidb-cloud">
 
-- This variable is used to control the length of the SQL string in [statement summary tables](/statement-summary-tables.md) and the [SLOW_QUERY](/information-schema/information-schema-slow-query.md) table.
+- This variable is used to control the length of the SQL string in [statement summary tables](/statement-summary-tables.md) and the [`SLOW_QUERY`](/information-schema/information-schema-slow-query.md) table.
 
 </CustomContent>
 
