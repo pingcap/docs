@@ -92,3 +92,9 @@ It is recommended that you allocate CPU more than 32 cores and memory greater th
 - When you use TiDB Lightning with TiCDC, note the following:
 
     - TiCDC cannot capture the data inserted in the physical import mode.
+
+- When you use TiDB Lightning with BR, note the following:
+
+    - Snapshot backups by BR of tables being imported by Lightning may result in inconsistent backup data for those tables.
+    - BR performing backups based on AWS EBS volume snapshots may lead to data import failures via Lightning.
+    - Point-in-Time Recovery (PiTR) is incapable of backing up data imported by Lightning.
