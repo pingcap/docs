@@ -283,6 +283,10 @@ Once you have verified that the migration is successful you can make a final bac
 
 ## Replicate data
 
+This method assumes you would setup replication, then stop yor application and wait for the replication to catch-up and then re-configure your application to use TiDB.
+
+It is strongly recommended to first test your application before doing this migration in production. 
+
 To use Data Migration (DM) we need to deploy a set of DM services either with  [TiUP Cluster](/dm/deploy-a-dm-cluster-using-tiup.md) or with [TiDB Operator](/tidb-operator-overview.md). After this we will use `dmctl` to configure the DM services.
 
 ### R1. Prepare
