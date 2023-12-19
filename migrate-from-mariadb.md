@@ -283,7 +283,7 @@ Once you have verified that the migration is successful you can make a final bac
 
 ## Replicate data
 
-This method assumes you would setup replication, then stop yor application and wait for the replication to catch-up and then re-configure your application to use TiDB.
+This method assumes you would setup replication, then stop your application and wait for the replication to catch-up and then re-configure your application to use TiDB.
 
 It is strongly recommended to first test your application before doing this migration in production. 
 
