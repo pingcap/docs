@@ -70,7 +70,7 @@ Currently, for TiDB Self-Hosted, the DXF supports the distributed execution of t
 ## Limitation
 
 - The DXF can only schedule the distributed execution of one `ADD INDEX` task at a time. If a new `ADD INDEX` task is submitted before the current `ADD INDEX` distributed task has finished, the new task is executed through a transaction.
-- Known issue: Adding indexes to columns of data type timestamp via DXF is not supported, as it may lead to inconsistencies between the index and the data.
+- Adding indexes to columns of `TIMESTAMP` data type via the DXF is not supported, because it might lead to inconsistency between the index and the data.
 
 ## Prerequisites
 
