@@ -97,4 +97,4 @@ It is recommended that you allocate CPU more than 32 cores and memory greater th
 
     - When BR backs up snapshots of tables that are being imported by TiDB Lightning, it might result in inconsistent backup data for those tables.
     - When BR backs up data based on the AWS EBS volume snapshots, TiDB Lightning might fail to import data.
-    - Point-in-Time Recovery (PiTR) can not back up data imported by TiDB Lightning.
+    - Point-In-Time Recovery (PITR) can not back up data imported by TiDB Lightning.
