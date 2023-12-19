@@ -46,6 +46,20 @@ ALTER TABLE t1 ADD INDEX idx1(c1);
 CREATE INDEX idx1 ON table t1(c1);
 ```
 
+Currently, for TiDB Self-Hosted, the DXF supports the distributed execution of the `ADD INDEX` statement.
+
+- `ADD INDEX` is a DDL statement used to create indexes. For example:
+
+    ```sql
+    ALTER TABLE t1 ADD INDEX idx1(c1);
+    CREATE INDEX idx1 ON table t1(c1);
+    ```
+
+## Limitation
+
+- The DXF can only schedule the distributed execution of one `ADD INDEX` task at a time. If a new `ADD INDEX` task is submitted before the current `ADD INDEX` distributed task has finished, the new task is executed through a transaction.
+- Adding indexes on columns with the `TIMESTAMP` data type through the DXF is not supported, because it might lead to inconsistency between the index and the data.
+
 ## Prerequisites
 
 Before using the distributed framework, you need to enable the [Fast Online DDL](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) mode.
