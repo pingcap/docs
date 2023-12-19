@@ -19,11 +19,11 @@ addr = "0.0.0.0:3080"
 level = "info"
 
 [security]
-	[security.cluster-tls]
-	skip-ca = true
+[security.cluster-tls]
+skip-ca = true
 
-	[security.sql-tls]
-	skip-ca = true
+[security.sql-tls]
+skip-ca = true
 ```
 
 # ignore-wrong-namespace = true
