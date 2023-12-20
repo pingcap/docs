@@ -77,6 +77,12 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.6/quick-start-with-
 
     For more information, see [documentation](/ticdc/ticdc-open-api-v2.md).
 
+* TiCDC adds support for two character delimmeters with CSV output protocol [#9969](https://github.com/pingcap/tiflow/issues/9969) @[zhangjinpeng1987](https://github.com/zhangjinpeng1987)
+
+    Starting from v7.6.0 TiCDC allows the CSV output protocol delimiters to specified as 1 or 2 characters long. With this change, users can configure TiCDC to generate file output using 2 character delimeters (such as `||` or `$^`) to separate fields in the output.
+
+    For more information, see [documentation](/ticdc/ticdc-csv.md).
+
 ## Compatibility changes
 
 > **Note:**
