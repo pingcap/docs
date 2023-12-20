@@ -9,6 +9,7 @@ This document shows all the released TiDB versions in reverse chronological orde
 
 | Version | Release Date |
 | :--- | :--- |
+| [7.1.3](/releases/release-7.1.3.md) | 2023-12-21 |
 | [6.5.6](/releases/release-6.5.6.md) | 2023-12-07 |
 | [7.1.2](/releases/release-7.1.2.md) | 2023-10-25 |
 | [7.4.0-DMR](/releases/release-7.4.0.md) | 2023-10-12 |
