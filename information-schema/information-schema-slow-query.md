@@ -106,6 +106,8 @@ DESC SLOW_QUERY;
 74 rows in set (0.001 sec)
 ```
 
+`Query`列の最大ステートメント長は、 [`tidb_stmt_summary_max_sql_length`](/system-variables.md#tidb_stmt_summary_max_sql_length-new-in-v40)システム変数によって制限されます。
+
 ## CLUSTER_SLOW_QUERY テーブル {#cluster-slow-query-table}
 
 `CLUSTER_SLOW_QUERY`テーブルは、クラスター内のすべてのノードのスロー クエリ情報を提供します。これは、TiDB スロー ログ ファイルの解析結果です。 `CLUSTER_SLOW_QUERY`テーブルは`SLOW_QUERY`と同じように使用できます。 `CLUSTER_SLOW_QUERY`テーブルのテーブル スキーマは、 `INSTANCE`列が`CLUSTER_SLOW_QUERY`に追加されるという点で`SLOW_QUERY`テーブルのテーブル スキーマと異なります。 `INSTANCE`列は、スロー クエリの行情報の TiDB ノード アドレスを表します。
@@ -222,9 +224,9 @@ DESC SELECT COUNT(*) FROM CLUSTER_SLOW_QUERY WHERE user = 'u1';
 | id                         | estRows  | task      | access object            | operator info                                        |
 +----------------------------+----------+-----------+--------------------------+------------------------------------------------------+
 | StreamAgg_7                | 1.00     | root      |                          | funcs:count(1)->Column#75                            |
-| └─TableReader_13       | 10.00    | root      |                          | data:Selection_12                                    |
-|   └─Selection_12       | 10.00    | cop[tidb] |                          | eq(INFORMATION_SCHEMA.cluster_slow_query.user, "u1") |
-|     └─TableFullScan_11 | 10000.00 | cop[tidb] | table:CLUSTER_SLOW_QUERY | keep order:false, stats:pseudo                       |
+| └─TableReader_13           | 10.00    | root      |                          | data:Selection_12                                    |
+|   └─Selection_12           | 10.00    | cop[tidb] |                          | eq(INFORMATION_SCHEMA.cluster_slow_query.user, "u1") |
+|     └─TableFullScan_11     | 10000.00 | cop[tidb] | table:CLUSTER_SLOW_QUERY | keep order:false, stats:pseudo                       |
 +----------------------------+----------+-----------+--------------------------+------------------------------------------------------+
 4 rows in set (0.00 sec)
 ```

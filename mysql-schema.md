@@ -85,9 +85,9 @@ summary: Learn about the TiDB system tables.
 
 > **注記：**
 >
-> `tidb` 、 `expr_pushdown_blacklist` 、 `opt_rule_blacklist` 、および`table_cache_meta`システム テーブルは、TiDB セルフホストにのみ適用され、 [TiDB Cloud](https://docs.pingcap.com/tidbcloud/)では使用できません。
+> `tidb` 、 `expr_pushdown_blacklist` 、 `opt_rule_blacklist` 、および`table_cache_meta`システム テーブルは、TiDB Self-Hosted にのみ適用され、 [TiDB Cloud](https://docs.pingcap.com/tidbcloud/)では使用できません。
 
 -   `GLOBAL_VARIABLES` : グローバル システム変数テーブル
 -   `expr_pushdown_blacklist` : 式プッシュダウンのブロックリスト
 -   `opt_rule_blacklist` : 論理最適化ルールのブロックリスト
--   `table_cache_meta` : キャッシュされたテーブルのメタデータ
+-   `tidb_timers` : 内部タイマーのメタデータ

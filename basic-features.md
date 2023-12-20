@@ -71,7 +71,7 @@ summary: Learn about the feature overview of TiDB.
 | `INSERT ON DUPLICATE KEY UPDATE`                                                                  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
 | `LOAD DATA INFILE`                                                                                |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
 | `SELECT INTO OUTFILE`                                                                             |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
-| `INNER JOIN` , 左|右 [外側] 結合                                                                        |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
+| `INNER JOIN` , `LEFT|RIGHT [OUTER] JOIN`                                                          |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
 | `UNION` `UNION ALL`                                                                               |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
 | [`EXCEPT`演算子と`INTERSECT`演算子](/functions-and-operators/set-operators.md)                           |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  N  |
 | `GROUP BY` `ORDER BY`                                                                             |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
@@ -128,7 +128,7 @@ summary: Learn about the feature overview of TiDB.
 
 ## トランザクション {#transactions}
 
-| トランザクション                                                              | 7.1 | 6.5 | 6.1 | 5.4 | 5.3 | 5.2 | 5.1 | 5.0 | 4.0 |
+| 取引                                                                    | 7.1 | 6.5 | 6.1 | 5.4 | 5.3 | 5.2 | 5.1 | 5.0 | 4.0 |
 | --------------------------------------------------------------------- | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
 | [非同期コミット](/system-variables.md#tidb_enable_async_commit-new-in-v50)   |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  N  |
 | [1個](/system-variables.md#tidb_enable_1pc-new-in-v50)                 |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  N  |
@@ -242,7 +242,7 @@ summary: Learn about the feature overview of TiDB.
 
 [^2]: v6.5.0 以降、 [`tidb_allow_function_for_expression_index`](/system-variables.md#tidb_allow_function_for_expression_index-new-in-v520)システム変数によってリストされた関数に対して作成された式インデックスはテストされており、本番環境で使用できるようになりました。将来のリリースでは、さらに多くの関数がサポートされる予定です。この変数にリストされていない関数については、対応する式インデックスを本番環境で使用することは推奨されません。詳細は[式インデックス](/sql-statements/sql-statement-create-index.md#expression-index)参照してください。
 
-[^3]: サポートされている SQL ステートメントの完全なリストについては、 [ステートメントのリファレンス](/sql-statements/sql-statement-select.md)を参照してください。
+[^3]: サポートされている SQL ステートメントの完全なリストについては、 [ステートメントのリファレンス](/sql-statements/sql-statement-select.md)参照してください。
 
 [^4]: TiDB は[v6.4.0](/releases/release-6.4.0.md)から始まり[高性能でグローバルに単調な`AUTO_INCREMENT`カラム](/auto-increment.md#mysql-compatibility-mode)をサポートします
 

@@ -7,7 +7,7 @@ summary: Learn some key metrics displayed on the Grafana TiKV dashboard.
 
 TiUPを使用して TiDB クラスターをデプロイすると、監視システム (Prometheus/Grafana) も同時にデプロイされます。詳細については、 [監視フレームワークの概要](/tidb-monitoring-framework.md)を参照してください。
 
-Grafana ダッシュボードは、Overview、PD、TiDB、TiKV、Node_exporter、および Performance_overview を含む一連のサブ ダッシュボードに分割されています。診断に役立つ指標が多数あります。
+Grafana ダッシュボードは、Overview、PD、TiDB、TiKV、Node_exporter、Performance_overview を含む一連のサブ ダッシュボードに分割されています。診断に役立つ指標が多数あります。
 
 ## TiKV-詳細ダッシュボード {#tikv-details-dashboard}
 
@@ -184,7 +184,22 @@ Grafana ダッシュボードは、Overview、PD、TiDB、TiKV、Node_exporter�
 
 ![TiKV Dashboard - Storage metrics](/media/tikv-dashboard-storage.png)
 
-### スケジューラ {#scheduler}
+### フロー制御 {#flow-control}
+
+-   スケジューラー フロー: 各 TiKV インスタンス上のリアルタイムのスケジューラー トラフィック。
+-   スケジューラー破棄率: 各 TiKV インスタンスでのスケジューラー要求の拒否率。この比率が 0 より大きい場合、フロー制御が存在することを示します。 `Compaction pending bytes`がそのしきい値を超えると、TiKV は超えた部分に基づいて`Scheduler discard ratio`を直線的に増加させます。クライアントは拒否されたリクエストを自動的に再試行します。
+-   スロットル期間: L0 ファイルが多すぎるためにフロー制御がトリガーされた場合に、スケジューラ リクエストの実行がブロックされる期間。このメトリックに値がある場合は、フロー制御が存在することを示します。
+-   スケジューラのスロットル CF: フロー制御のしきい値に達したときに RocksDB のスロットルをトリガーする CF。
+-   フロー コントローラー アクション: フロー制御のしきい値に達したときに RocksDB のスロットルをトリガーするアクション。
+-   フラッシュ/L0 フロー: 各 TiKV インスタンス上の RocksDB の異なる CF のフラッシュおよび L0 コンパクションのトラフィック。
+-   フロー制御要因: RocksDB スロットルのトリガーに関連する要因。
+-   圧縮保留バイト: 各 TiKV インスタンス上でリアルタイムで圧縮を待機している RocksDB データのサイズ。
+-   Txn コマンドのスロットル期間: スロットルによるトランザクションに関連するコマンドのブロック期間。通常の状況では、このメトリックは 0 です。
+-   非 txn コマンドのスロットル期間: スロットリングにより他のコマンドがブロックされた期間。通常の状況では、このメトリックは 0 です。
+
+![TiKV Dashboard - Flow Control metrics](/media/tikv-dashboard-flow-control.png)
+
+### スケジューラー {#scheduler}
 
 -   スケジューラ ステージの合計: 1 秒あたりの各ステージのコマンド数。短時間に多くのエラーが発生してはなりません。
 -   スケジューラ書き込みバイト: 各 TiKV インスタンスで処理されたコマンドによって書き込まれた合計バイト数

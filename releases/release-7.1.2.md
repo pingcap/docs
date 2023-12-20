@@ -13,6 +13,8 @@ TiDB バージョン: 7.1.2
 
 ## 互換性の変更 {#compatibility-changes}
 
+-   ユーザー[#47665](https://github.com/pingcap/tidb/issues/47665) @ [ティエンチャイアマオ](https://github.com/tiancaiamao)の潜在的な接続問題を防ぐために、Security強化モード (SEM) で[`require_secure_transport`](https://docs.pingcap.com/tidb/v7.1/system-variables#require_secure_transport-new-in-v610) ～ `ON`の設定を禁止します。
+-   デフォルトでは[スムーズなアップグレード](/smooth-upgrade-tidb.md)機能を無効にします。 `/upgrade/start`と`upgrade/finish` HTTP リクエスト[#47172](https://github.com/pingcap/tidb/issues/47172) @ [ジムララ](https://github.com/zimulala)を送信することで有効にできます。
 -   [`tidb_opt_enable_hash_join`](https://docs.pingcap.com/tidb/v7.1/system-variables#tidb_opt_enable_hash_join-new-in-v712)システム変数を導入して、オプティマイザがテーブル[#46695](https://github.com/pingcap/tidb/issues/46695) @ [コードプレイ](https://github.com/coderplay)のハッシュ結合を選択するかどうかを制御します。
 -   RocksDB の定期的な圧縮をデフォルトで無効にすることで、TiKV RocksDB のデフォルトの動作が v6.5.0 より前のバージョンの動作と一致するようになりました。この変更により、アップグレード後の大量の圧縮によって引き起こされる潜在的なパフォーマンスへの影響が防止されます。さらに、TiKV では 2 つの新しい構成項目[`rocksdb.[defaultcf|writecf|lockcf].periodic-compaction-seconds`](https://docs.pingcap.com/tidb/v7.1/tikv-configuration-file#periodic-compaction-seconds-new-in-v712)および[`rocksdb.[defaultcf|writecf|lockcf].ttl`](https://docs.pingcap.com/tidb/v7.1/tikv-configuration-file#ttl-new-in-v712)が導入され、RocksDB [#15355](https://github.com/tikv/tikv/issues/15355) @ [リククスサシネーター](https://github.com/LykxSassinator)の定期的な圧縮を手動で構成できるようになります。
 -   TiCDC では、CSV プロトコルにおけるバイナリ データのエンコード方法を制御する[`sink.csv.binary-encoding-method`](/ticdc/ticdc-changefeed-config.md#changefeed-configuration-parameters)設定項目を導入しています。デフォルト値は`'base64'` [#9373](https://github.com/pingcap/tiflow/issues/9373) @ [CharlesCheung96](https://github.com/CharlesCheung96)です。
@@ -175,7 +177,7 @@ TiDB バージョン: 7.1.2
         -   オブジェクトstorageにデータをレプリケートするとデータの不整合が発生する可能性がある問題を修正します[#9592](https://github.com/pingcap/tiflow/issues/9592) @ [CharlesCheung96](https://github.com/CharlesCheung96)
         -   `redo-resolved-ts`を有効にすると変更フィードが失敗する可能性がある問題を修正します[#9769](https://github.com/pingcap/tiflow/issues/9769) @ [CharlesCheung96](https://github.com/CharlesCheung96)
         -   一部のオペレーティング システム[#9762](https://github.com/pingcap/tiflow/issues/9762) @ [スドジ](https://github.com/sdojjy)で、間違ったメモリ情報を取得すると OOM の問題が発生する可能性がある問題を修正します。
-        -   `scale-out`が有効になっている場合、 [#9665](https://github.com/pingcap/tiflow/issues/9665) @ [スドジ](https://github.com/sdojjy)の場合にノード間で書き込みキーが不均等に分散される問題を修正します。
+        -   `scale-out`が有効になっている場合、 [#9665](https://github.com/pingcap/tiflow/issues/9665) @ [スドジ](https://github.com/sdojjy)の場合にノード間で書き込みキーが不均一に分散される問題を修正します。
         -   機密ユーザー情報がログ[#9690](https://github.com/pingcap/tiflow/issues/9690) @ [スドジ](https://github.com/sdojjy)に記録される問題を修正
         -   TiCDC が名前変更 DDL 操作を誤って同期する可能性がある問題を修正します[#9488](https://github.com/pingcap/tiflow/issues/9488) [#9378](https://github.com/pingcap/tiflow/issues/9378) [#9531](https://github.com/pingcap/tiflow/issues/9531) @ [東門](https://github.com/asddongmen)
         -   すべての変更フィードが削除された後、上流の TiDB GC がブロックされる問題を修正[#9633](https://github.com/pingcap/tiflow/issues/9633) @ [スドジ](https://github.com/sdojjy)

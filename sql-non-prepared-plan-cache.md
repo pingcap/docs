@@ -13,7 +13,7 @@ TiDB は、 [ステートメントの`Prepare` / `Execute`](/sql-prepared-plan-c
 
 ## 原理 {#principle}
 
-準備されていないプラン キャッシュは、キャッシュを[準備されたプランのキャッシュ](/sql-prepared-plan-cache.md)と共有するセッション レベルの機能です。準備されていないプラン キャッシュの基本原理は次のとおりです。
+準備されていないプラン キャッシュは、 [準備されたプランのキャッシュ](/sql-prepared-plan-cache.md)とキャッシュを共有するセッション レベルの機能です。準備されていないプラン キャッシュの基本原理は次のとおりです。
 
 1.  未準備プラン キャッシュを有効にすると、TiDB はまず抽象構文ツリー (AST) に基づいてクエリをパラメータ化します。たとえば、 `SELECT * FROM t WHERE b < 10 AND a = 1`は`SELECT * FROM t WHERE b < ? and a = ?`としてパラメータ化されます。
 2.  次に、TiDB はパラメーター化されたクエリを使用してプラン キャッシュを検索します。
@@ -26,7 +26,7 @@ TiDB は、 [ステートメントの`Prepare` / `Execute`](/sql-prepared-plan-c
 
 v7.1.0 以降、システム変数[`tidb_plan_cache_max_plan_size`](/system-variables.md#tidb_plan_cache_max_plan_size-new-in-v710)を使用してキャッシュできるプランの最大サイズを制御できます。デフォルト値は 2 MB です。プランのサイズがこの値を超える場合、プランはキャッシュされません。
 
-> **ノート：**
+> **注記：**
 >
 > `tidb_session_plan_cache_size`で指定されたメモリは、準備済みプラン キャッシュと準備されていないプラン キャッシュ間で共有されます。現在のクラスターで準備済みプラン キャッシュを有効にしている場合、準備されていないプラン キャッシュを有効にすると、元の準備済みプラン キャッシュのヒット率が低下する可能性があります。
 
@@ -72,7 +72,7 @@ v7.1.0 以降、システム変数[`tidb_plan_cache_max_plan_size`](/system-vari
 
 ## 制限 {#restrictions}
 
-### 次善の計画をキャッシュする {#cache-suboptimal-plans}
+### 次善のプランをキャッシュする {#cache-suboptimal-plans}
 
 TiDB は、パラメーター化されたクエリに対して 1 つのプランのみをキャッシュします。たとえば、クエリ`SELECT * FROM t WHERE a < 1`と`SELECT * FROM t WHERE a < 100000`は同じパラメータ化された形式`SELECT * FROM t WHERE a < ?`を共有するため、同じプランを共有します。
 
@@ -112,7 +112,7 @@ TiDB は、パラメーター化されたクエリに対して 1 つのプラン
 クエリがキャッシュにヒットするかどうかを確認するには、次の`EXPLAIN FORMAT='plan_cache'`ステートメントを実行します。
 
 ```sql
-EXPLAIN FORMAT='plan_cache' SELECT * FROM (SELECT a+1 FROM t1) t;
+EXPLAIN FORMAT='plan_cache' SELECT * FROM (SELECT a+1 FROM t) t;
 ```
 
 出力は次のとおりです。
@@ -140,7 +140,7 @@ SHOW warnings;
 
 前の例では、準備されていないプラン キャッシュが`+`操作をサポートしていないため、クエリはキャッシュにヒットできません。
 
-## モニタリング {#monitoring}
+## 監視 {#monitoring}
 
 未準備プラン キャッシュを有効にすると、次のペインでメモリ使用量、キャッシュ内のプラン数、キャッシュ ヒット率を監視できます。
 

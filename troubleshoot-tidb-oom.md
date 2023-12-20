@@ -19,7 +19,7 @@ summary: Learn how to diagnose and resolve TiDB OOM (Out of Memory) issues.
     -   **[TiDB-Runtime]** &gt; **[メモリ使用量]**では、 `estimate-inuse`メトリクスが上昇し続けていることがわかります。
 
 -   `tidb.log`を確認すると、次のログ エントリが見つかります。
-    -   OOM に関するアラーム: `[WARN] [memory_usage_alarm.go:139] ["tidb-server has the risk of OOM. Running SQLs and heap profile will be recorded in record path"]` 。詳細については、 [`memory-usage-alarm-ratio`](/system-variables.md#tidb_memory_usage_alarm_ratio)を参照してください。
+    -   OOM に関するアラーム: `[WARN] [memory_usage_alarm.go:139] ["tidb-server has the risk of OOM because of memory usage exceeds alarm ratio. Running SQLs and heap profile will be recorded in record path"]` 。詳細については、 [`memory-usage-alarm-ratio`](/system-variables.md#tidb_memory_usage_alarm_ratio)を参照してください。
     -   再起動に関するログ エントリ: `[INFO] [printer.go:33] ["Welcome to TiDB."]` 。
 
 ## 全体的なトラブルシューティングのプロセス {#overall-troubleshooting-process}
@@ -79,7 +79,7 @@ OOM の問題は通常、次のことが原因で発生します。
 
 このセクションでは、データベースの問題による OOM の原因と解決策について説明します。
 
-> **ノート：**
+> **注記：**
 >
 > [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)を設定した場合、次のエラーが発生します。 `ERROR 1105 (HY000): Out Of Memory Quota![conn_id=54]` 。これは、データベースのメモリ使用量制御動作が原因で発生します。それは正常な動作です。
 
@@ -189,7 +189,7 @@ OOM 問題の根本原因を特定するには、次の情報を収集する必�
 -   `grep "tidb-server has the risk of OOM" tidb.log`を実行して、TiDB サーバーによって収集されたアラート ファイルのパスを確認します。以下は出力例です。
 
     ```shell
-    ["tidb-server has the risk of OOM. Running SQLs and heap profile will be recorded in record path"] ["is tidb_server_memory_limit set"=false] ["system memory total"=14388137984] ["system memory usage"=11897434112] ["tidb-server memory usage"=11223572312] [memory-usage-alarm-ratio=0.8] ["record path"="/tmp/0_tidb/MC4wLjAuMDo0MDAwLzAuMC4wLjA6MTAwODA=/tmp-storage/record"]
+    ["tidb-server has the risk of OOM because of memory usage exceeds alarm ratio. Running SQLs and heap profile will be recorded in record path"] ["is tidb_server_memory_limit set"=false] ["system memory total"=14388137984] ["system memory usage"=11897434112] ["tidb-server memory usage"=11223572312] [memory-usage-alarm-ratio=0.8] ["record path"="/tmp/0_tidb/MC4wLjAuMDo0MDAwLzAuMC4wLjA6MTAwODA=/tmp-storage/record"]
     ```
 
 ## こちらも参照 {#see-also}
