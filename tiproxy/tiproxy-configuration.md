@@ -7,7 +7,7 @@ summary: Learn how to configure TiProxy.
 
 This document introduces the configuration parameters related to the deployment and use of TiProxy. The following is an example configuration:
 
-```
+```toml
 [proxy]
 addr = "0.0.0.0:6000"
 max-connections = 100
@@ -142,7 +142,7 @@ Configurations for HTTP gateway.
 
 There are four TLS objects in the `[security]` section with different names. They share the same configuration format and fields, but they are interpreted differently depending on their names.
 
-```
+```toml
 [security]
     [sql-tls]
     skip-ca = true
