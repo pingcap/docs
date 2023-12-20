@@ -27,8 +27,7 @@ The output is as follows:
 The following statement queries the information about `ADD` and `USER` keywords:
 
 ```sql
-SELECT * FROM keywords
-WHERE WORD IN ('ADD','USER')
+SELECT * FROM keywords WHERE WORD IN ('ADD','USER');
 ```
 
 From the output, you can see that `ADD` is a reserved keyword and `USER` is a non-reserved keyword.
