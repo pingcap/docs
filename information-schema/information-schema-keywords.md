@@ -25,6 +25,7 @@ The output is as follows:
 ```
 
 An example:
+
 ```sql
 SELECT * FROM keywords
 WHERE WORD IN ('ADD','USER')
