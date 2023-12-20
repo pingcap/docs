@@ -98,7 +98,7 @@ To edit the password or roles of a SQL user, take the following steps:
 
     > **Note:**
     >
-    > The roles of the default `<prefix>.root` user does not support modification.
+    > The roles of the default `<prefix>.root` user do not support modification. You can only change the password.
 
 ## Delete a SQL user
 
