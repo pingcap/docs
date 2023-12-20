@@ -241,7 +241,6 @@
   - Data Access Control
       - [Encryption at Rest Using Customer-Managed Encryption Keys](/tidb-cloud/tidb-cloud-encrypt-cmek.md)
   - Database Access Control
-    - [Manage Database Users and Roles](/tidb-cloud/configure-sql-users.md)
     - [Configure Cluster Security Settings](/tidb-cloud/configure-security-settings.md)
   - Audit Management
     - [Database Audit Logging](/tidb-cloud/tidb-cloud-auditing.md)
