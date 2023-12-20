@@ -31,6 +31,8 @@ SELECT * FROM keywords
 WHERE WORD IN ('ADD','USER')
 ```
 
+From the output, you can see that `ADD` is a reserved keyword and `USER` is a non-reserved keyword.
+
 ```
 +------+----------+
 | WORD | RESERVED |
