@@ -56,7 +56,7 @@ CREATE TABLE test.select (BEGIN int, END int);
 Query OK, 0 rows affected (0.08 sec)
 ```
 
-TiDB provides a list of keywords in the [`information_schema.KEYWORDS`](/information-schema/information-schema-keywords.md) table.
+TiDB provides a list of keywords in the [`INFORMATION_SCHEMA.KEYWORDS`](/information-schema/information-schema-keywords.md) table.
 
 ## Keyword list
 
