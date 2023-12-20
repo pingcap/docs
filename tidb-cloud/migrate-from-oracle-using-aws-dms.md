@@ -81,6 +81,8 @@ After you finish executing the SQL script, check the data in Oracle. The followi
 
 5. Click **Generate Password** to generate a password and copy the generated password.
 
+6. Select your preferred connection method and operating system, and then connect to your cluster using the displayed connection string.
+
 ## Step 5. Create an AWS DMS replication instance
 
 1. Go to the [Replication instances](https://console.aws.amazon.com/dms/v2/home#replicationInstances) page in the AWS DMS console, and switch to the corresponding region.
@@ -89,36 +91,19 @@ After you finish executing the SQL script, check the data in Oracle. The followi
 
     ![Create AWS DMS Instance](/media/tidb-cloud/aws-dms-from-oracle-to-tidb-8.png)
 
-
-### Connectivity to TiDB Serverless cluster
-
-You need to make sure the replication instance could connect to the TiDB Serverless cluster, otherwise there is an error like
-
-```shell
-Test Endpoint failed: Application-Status: 1020912, Application-Message: Cannot connect to ODBC provider ODBC general error., Application-Detailed-Message: RetCode: SQL_ERROR SqlState: HY000 NativeError: 2003 Message: [MySQL][ODBC 8.0(w) Driver]Can't connect to MySQL server on 'gateway01.eu-central-1.prod.aws.tidbcloud.com' (110)
-```
-
-If you are not familiar with AWS network configuration, please consult AWS support. We'll give several typical network settings.
-
-1. To connect to TiDB Serverless public endpoint, you can deploy the replication instance to public subnets and enable `Public accessible` when creation. `Public accessible` is not available for serverless replication.
-
-2. To connect to TiDB Serverless public endpoint, you can deploy the replication instance to private subnets and route the traffic to a public subnet. In this case, you need at least three subnets, two private subnets and one public subnet. The two private subnets forms a subnet group where the replication instance lives in. Then you need to create a NAT gateway in the public subnet and route traffic of the two private subnets to the NAT gateway.
-
-3. To connect to TiDB Serverless private endpoint, [setup a private endpoint](/tidb-cloud/set-up-private-endpoint-connections-serverless.md) first and deploy the replication instance to private subnets.
-
 ## Step 6. Create DMS endpoints
 
 1. In the [AWS DMS console](https://console.aws.amazon.com/dms/v2/home), click the `Endpoints` menu item on the left pane.
 
-2. Create the Oracle source endpoint. The following screenshot shows the configurations of the source endpoint.
+2. Create the Oracle source endpoint and the TiDB target endpoint.
+
+    The following screenshot shows the configurations of the source endpoint.
 
     ![Create AWS DMS Source endpoint](/media/tidb-cloud/aws-dms-from-oracle-to-tidb-9.png)
 
-3. Create the TiDB target endpoint. The following screenshot shows the configurations of the target endpoint(using TiDB Serverless public endpoint).
+    The following screenshot shows the configurations of the target endpoint.
 
-    ![Create AWS DMS Target endpoint](/media/tidb-cloud/aws-dms-from-oracle-to-tidb-15.png)
-
-    If you are going to use public endpoint for the migration, we recommend setting `SSL mode` to `verify-full` to ensure security. The `CA certificate` is [ISRG Root X1 certificate](https://letsencrypt.org/certs/isrgrootx1.pem). You can learn more in [TLS Connections to TiDB Serverless](/tidb-cloud/secure-connections-to-serverless-clusters.md).
+    ![Create AWS DMS Target endpoint](/media/tidb-cloud/aws-dms-from-oracle-to-tidb-10.png)
 
 ## Step 7. Migrate the schema
 
