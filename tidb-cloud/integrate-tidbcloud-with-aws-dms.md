@@ -59,7 +59,7 @@ To connect via VPC peering, [set up a VPC peering connection](/tidb-cloud/set-up
 
 1. Go to the [Replication instances](https://console.aws.amazon.com/dms/v2/home#replicationInstances) page in the AWS DMS console, and switch to the corresponding region. It is recommended to use the same region for AWS DMS as TiDB Cloud.
    
-   ![Create replication instance](/media/tidb-cloud/integration-dws-dms-1.png)
+   ![Create replication instance](/media/tidb-cloud/integration-aws-dms-1.png)
 
 2. Click **Create replication instance**.
 
@@ -78,7 +78,7 @@ To connect via VPC peering, [set up a VPC peering connection](/tidb-cloud/set-up
     - **Replication subnet group**: choose a subnet group for your replication instance.
     - **Public accessible**: set it based on your network configuration.
   
-    ![Connectivity and security](/media/tidb-cloud/integration-dws-dms-2.png)
+    ![Connectivity and security](/media/tidb-cloud/integration-aws-dms-2.png)
 
 7. Configure the **Advanced settings**, **Maintenance**, and **Tags** if needed. Click **Create replication instance** to finish the instance creation.
 
@@ -95,7 +95,7 @@ For connectivity, there is not much difference between using TiDB Cloud clusters
 
 1. Go to the [Endpoints](https://console.aws.amazon.com/dms/v2/home#endpointList) page in the AWS DMS console, and switch to the corresponding region.
 
-    ![Create endpoint](/media/tidb-cloud/integration-dws-dms-3.png)
+    ![Create endpoint](/media/tidb-cloud/integration-aws-dms-3.png)
 
 2. Click **Create endpoint** to create the target database endpoint.
 
@@ -111,7 +111,7 @@ For connectivity, there is not much difference between using TiDB Cloud clusters
    - **Secure Socket Layer (SSL) mode**: If you are connecting via public endpoint, we highly recommend setting it to **verify-full** to ensure transport security. If you are connecting via private endpoint, you can set it to **none**.
    - **CA certificate**: [ISRG Root X1 certificate](https://letsencrypt.org/certs/isrgrootx1.pem). You can learn more in [TLS Connections to TiDB Serverless](/tidb-cloud/secure-connections-to-serverless-clusters.md).
   
-    ![Provide access information manually](/media/tidb-cloud/integration-dws-dms-4.png)
+    ![Provide access information manually](/media/tidb-cloud/integration-aws-dms-4.png)
 
 6. If it's **Target endpoint**, set **Extra connection attributes** to `Initstmt=SET FOREIGN_KEY_CHECKS=0;`.
 
@@ -122,7 +122,7 @@ For connectivity, there is not much difference between using TiDB Cloud clusters
 
 1. Go to the [Endpoints](https://console.aws.amazon.com/dms/v2/home#endpointList) page in the AWS DMS console, and switch to the corresponding region.
    
-    ![Create endpoint](/media/tidb-cloud/integration-dws-dms-3.png)
+    ![Create endpoint](/media/tidb-cloud/integration-aws-dms-3.png)
 
 2. Click **Create endpoint** to create the target database endpoint.
 
@@ -138,7 +138,7 @@ For connectivity, there is not much difference between using TiDB Cloud clusters
    - **Secure Socket Layer (SSL) mode**: If you are connecting via public endpoint, we highly recommend setting it to **verify-full** to ensure transport security. If you are connecting via private endpoint, you can set it to **none**.
    - **CA certificate**: Get the CA certificate according to [TLS Connections to TiDB Dedicated](/tidb-cloud/tidb-cloud-tls-connect-to-dedicated.md).
 
-    ![Provide access information manually](/media/tidb-cloud/integration-dws-dms-4.png)
+    ![Provide access information manually](/media/tidb-cloud/integration-aws-dms-4.png)
 
 6. If it's **Target endpoint**, set **Extra connection attributes** to `Initstmt=SET FOREIGN_KEY_CHECKS=0;`.
 
