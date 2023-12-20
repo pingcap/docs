@@ -24,7 +24,7 @@ The output is as follows:
 2 rows in set (0.00 sec)
 ```
 
-An example:
+The following statement queries the information about `ADD` and `USER` keywords:
 
 ```sql
 SELECT * FROM keywords
