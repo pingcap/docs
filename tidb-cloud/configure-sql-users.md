@@ -58,7 +58,7 @@ To create a SQL user, take the following steps:
 
         - **Built-in Role**: you need to select a built-in role for the SQL user in the **Built-in Role** drop-down list.
 
-        - **Custom Role**: if your cluster has custom roles that are created using the [`CREATE ROLE`](/sql-statements/sql-statement-create-role.md) statement), you can grant custom roles to the SQL user by selecting the roles from the **Custom Role** drop-down list. Otherwise, the **Custom Roles** drop-down list is invisible here.
+        - **Custom Role**: if your cluster has custom roles that are created using the [`CREATE ROLE`](/sql-statements/sql-statement-create-role.md) statement, you can grant custom roles to the SQL user by selecting the roles from the **Custom Role** drop-down list. Otherwise, the **Custom Roles** drop-down list is invisible here.
 
       For each SQL user, you can grant a built-in role and multiple custom roles (if any).
 
