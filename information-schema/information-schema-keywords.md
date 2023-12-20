@@ -5,7 +5,7 @@ summary: Learn the `KEYWORDS` INFORMATION_SCHEMA table.
 
 # KEYWORDS
 
-The `KEYWORDS` table provides information about [keywords](/keywords.md).
+Starting from v7.6.0, TiDB provides the `KEYWORDS` table. You can use this table to get information about [keywords](/keywords.md).
 
 ```sql
 USE INFORMATION_SCHEMA;
