@@ -2870,7 +2870,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 - Persists to cluster: Yes
 - Default value: `-1`
 - Range: `[-1, 256]`
-- This variable is used to set the maximum concurrency for TiFlash to execute a request. The default value is `-1`, indicating that this system variable is invalid. When the value is `0`, the maximum number of threads is automatically configured by TiFlash.
+- This variable is used to set the maximum concurrency for TiFlash to execute a request. The default value is `-1`, indicating that this system variable is invalid and the maximum concurrency depends on the setting of the TiFlash configuration `profiles.default.max_threads`. When the value is `0`, the maximum number of threads is automatically configured by TiFlash.
 
 ### tidb_mpp_store_fail_ttl
 
